@@ -40,8 +40,8 @@ ApiStatus N(GiveRefund)(Evt* script, s32 isInitialCall) {
         posZ = player->currentPos.z;
 
         get_screen_coords(gCurrentCameraID, posX, posY, posZ, &iconX, &iconY, &iconZ);
-        itemIcon = create_hud_element(HudScript_Refund);
-        set_hud_element_render_pos(itemIcon, iconX + 36, iconY - 63);
+        itemIcon = hud_element_create(HudScript_Refund);
+        hud_element_set_render_pos(itemIcon, iconX + 36, iconY - 63);
     }
 
     script->varTable[0] = sleepTime;
@@ -54,7 +54,7 @@ ApiStatus N(GiveRefundCleanup)(Evt* script, s32 isInitialCall) {
     s32 sellValue = gItemTable[battleStatus->selectedItemID].sellValue;
 
     if (player_team_is_ability_active(battleStatus->playerActor, ABILITY_REFUND) && sellValue > 0) {
-        free_hud_element(itemIcon);
+        hud_element_free(itemIcon);
     }
 
     return ApiStatus_DONE2;

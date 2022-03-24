@@ -302,60 +302,60 @@ void btl_state_update_celebration(void) {
                     set_background_color_blend(0, 0, 0, ((10 - D_8029FB4C) * 0x10) & 0xF0);
                 }
             } else {
-                id = create_hud_element(&D_802A9F0C);
+                id = hud_element_create(&D_802A9F0C);
                 D_8029FA80[0] = id;
-                set_hud_element_render_pos(id, 310, 140);
-                set_hud_element_flags(id, HUD_ELEMENT_FLAGS_80);
+                hud_element_set_render_pos(id, 310, 140);
+                hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80);
 
-                id = create_hud_element(&D_802A9F5C);
+                id = hud_element_create(&D_802A9F5C);
                 D_8029FA80[1] = id;
-                set_hud_element_render_pos(id, 158, 340);
-                set_hud_element_flags(id, HUD_ELEMENT_FLAGS_80);
+                hud_element_set_render_pos(id, 158, 340);
+                hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80);
 
-                id = create_hud_element(&D_802A9F84);
+                id = hud_element_create(&D_802A9F84);
                 D_8029FA80[3] = id;
-                set_hud_element_render_pos(id, 158, 340);
-                set_hud_element_flags(id, HUD_ELEMENT_FLAGS_80);
+                hud_element_set_render_pos(id, 158, 340);
+                hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80);
 
-                id = create_hud_element(&D_802A9FAC);
+                id = hud_element_create(&D_802A9FAC);
                 D_8029FA80[2] = id;
-                set_hud_element_render_pos(id, 6, 140);
-                set_hud_element_flags(id, HUD_ELEMENT_FLAGS_80);
+                hud_element_set_render_pos(id, 6, 140);
+                hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80);
 
-                id = create_hud_element(D_802841B4);
+                id = hud_element_create(D_802841B4);
                 D_8029FA90[0][0] = id;
-                set_hud_element_render_pos(id, 160, 317);
-                set_hud_element_flags(id, HUD_ELEMENT_FLAGS_80);
+                hud_element_set_render_pos(id, 160, 317);
+                hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80);
 
                 for (i = 1; i < ARRAY_COUNT(D_8029FA90[0]); i++) {
-                    id = create_hud_element(D_802841C0[0][0]);
+                    id = hud_element_create(D_802841C0[0][0]);
                     D_8029FA90[0][i] = id;
-                    set_hud_element_render_pos(id, 160, 317);
-                    set_hud_element_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+                    hud_element_set_render_pos(id, 160, 317);
+                    hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
                 }
 
-                id = create_hud_element(D_802841B8);
+                id = hud_element_create(D_802841B8);
                 D_8029FA90[0][7] = id;
-                set_hud_element_render_pos(id, 312, 117);
-                set_hud_element_flags(id, HUD_ELEMENT_FLAGS_80);
+                hud_element_set_render_pos(id, 312, 117);
+                hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80);
 
                 for (i = 1; i < ARRAY_COUNT(D_8029FA90[0]); i++) {
-                    id = create_hud_element(D_802841C0[1][0]);
+                    id = hud_element_create(D_802841C0[1][0]);
                     D_8029FA90[1][i] = id;
-                    set_hud_element_render_pos(id, 312, 117);
-                    set_hud_element_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+                    hud_element_set_render_pos(id, 312, 117);
+                    hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
                 }
 
-                id = create_hud_element(D_802841BC);
+                id = hud_element_create(D_802841BC);
                 D_8029FA90[2][0] = id;
-                set_hud_element_render_pos(id, 8, 117);
-                set_hud_element_flags(id, HUD_ELEMENT_FLAGS_80);
+                hud_element_set_render_pos(id, 8, 117);
+                hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80);
 
                 for (i = 1; i < ARRAY_COUNT(D_8029FA90[20]); i++) {
-                    id = create_hud_element(D_802841C0[2][0]);
+                    id = hud_element_create(D_802841C0[2][0]);
                     D_8029FA90[2][i] = id;
-                    set_hud_element_render_pos(id, 8, 117);
-                    set_hud_element_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+                    hud_element_set_render_pos(id, 8, 117);
+                    hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
                 }
 
                 D_8029FB60[0] = 0;
@@ -366,67 +366,67 @@ void btl_state_update_celebration(void) {
                     fpTens = playerData->curMaxFP / 10;
                     fpOnes = playerData->curMaxFP % 10;
                     id = D_8029FA90[0][1];
-                    set_hud_element_anim(id, D_80284238[0][fpTens]);
+                    hud_element_set_script(id, D_80284238[0][fpTens]);
                     if (fpTens != 0) {
-                        clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
+                        hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     }
-                    get_hud_element_render_pos(id, &x, &y);
-                    set_hud_element_render_pos(id, x - 14, y + 46);
+                    hud_element_get_render_pos(id, &x, &y);
+                    hud_element_set_render_pos(id, x - 14, y + 46);
 
                     id = D_8029FA90[0][2];
-                    set_hud_element_anim(id, D_80284238[0][fpOnes]);
-                    clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
-                    get_hud_element_render_pos(id, &x, &y);
-                    set_hud_element_render_pos(id, x - 8, y + 46);
+                    hud_element_set_script(id, D_80284238[0][fpOnes]);
+                    hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
+                    hud_element_get_render_pos(id, &x, &y);
+                    hud_element_set_render_pos(id, x - 8, y + 46);
 
                     id = D_8029FA90[0][3];
-                    set_hud_element_anim(id, &D_802AA320);
-                    clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
-                    get_hud_element_render_pos(id, &x, &y);
-                    set_hud_element_render_pos(id, x - 3, y + 46);
+                    hud_element_set_script(id, &D_802AA320);
+                    hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
+                    hud_element_get_render_pos(id, &x, &y);
+                    hud_element_set_render_pos(id, x - 3, y + 46);
 
 
                     fpTens = (playerData->curMaxFP + 5) / 10;
                     fpOnes = (playerData->curMaxFP + 5) % 10;
                     id = D_8029FA90[0][4];
-                    set_hud_element_anim(id, D_802841C0[0][fpTens]);
+                    hud_element_set_script(id, D_802841C0[0][fpTens]);
                     if (fpTens != 0) {
-                        clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
+                        hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     }
-                    get_hud_element_render_pos(id, &x, &y);
-                    set_hud_element_render_pos(id, x + 3, y + 46);
+                    hud_element_get_render_pos(id, &x, &y);
+                    hud_element_set_render_pos(id, x + 3, y + 46);
 
                     id = D_8029FA90[0][5];
-                    set_hud_element_anim(id, D_802841C0[0][fpOnes]);
-                    clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
-                    get_hud_element_render_pos(id, &x, &y);
-                    set_hud_element_render_pos(id, x + 10, y + 46);
+                    hud_element_set_script(id, D_802841C0[0][fpOnes]);
+                    hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
+                    hud_element_get_render_pos(id, &x, &y);
+                    hud_element_set_render_pos(id, x + 10, y + 46);
                 } else {
                     id = D_8029FA90[0][4];
                     fpTens = playerData->curMaxFP / 10;
                     fpOnes = playerData->curMaxFP % 10;
-                    set_hud_element_anim(id, D_802841C0[0][fpTens]);
+                    hud_element_set_script(id, D_802841C0[0][fpTens]);
                     if (fpTens != 0) {
-                        clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
+                        hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     }
-                    get_hud_element_render_pos(id, &x, &y);
-                    set_hud_element_render_pos(id, x - 6, y + 46);
+                    hud_element_get_render_pos(id, &x, &y);
+                    hud_element_set_render_pos(id, x - 6, y + 46);
 
                     id = D_8029FA90[0][5];
-                    set_hud_element_anim(id, D_802841C0[0][fpOnes]);
-                    clear_hud_element_flags(id, 2);
-                    get_hud_element_render_pos(id, &x, &y);
-                    set_hud_element_render_pos(id, x + 2, y + 46);
+                    hud_element_set_script(id, D_802841C0[0][fpOnes]);
+                    hud_element_clear_flags(id, 2);
+                    hud_element_get_render_pos(id, &x, &y);
+                    hud_element_set_render_pos(id, x + 2, y + 46);
                     D_8029FB60[1] = 1;
                 }
 
-                if (is_ability_active(0xC)) {
+                if (is_ability_active(ABILITY_FP_PLUS)) {
                     id = D_8029FAA8;
-                    set_hud_element_anim(id, gItemHudScripts[gItemTable[248].iconID].enabled);
-                    clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
-                    set_hud_element_scale(id, 0.5f);
-                    get_hud_element_render_pos(id, &x, &y);
-                    set_hud_element_render_pos(id, x + 17, y + 46);
+                    hud_element_set_script(id, gItemHudScripts[gItemTable[248].iconID].enabled);
+                    hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
+                    hud_element_set_scale(id, 0.5f);
+                    hud_element_get_render_pos(id, &x, &y);
+                    hud_element_set_render_pos(id, x + 17, y + 46);
                 }
 
                 if (playerData->hardMaxHP != 50) {
@@ -434,68 +434,68 @@ void btl_state_update_celebration(void) {
                     fpOnes = playerData->curMaxHP % 10;
 
                     id = D_8029FA90[1][1];
-                    set_hud_element_anim(id, D_80284238[1][fpTens]);
+                    hud_element_set_script(id, D_80284238[1][fpTens]);
                     if (fpTens != 0) {
-                        clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
+                        hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     }
-                    get_hud_element_render_pos(id, &x, &y);
-                    set_hud_element_render_pos(id, x - 14, y + 46);
+                    hud_element_get_render_pos(id, &x, &y);
+                    hud_element_set_render_pos(id, x - 14, y + 46);
 
                     id = D_8029FA90[1][2];
-                    set_hud_element_anim(id, D_80284238[1][fpOnes]);
-                    clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
-                    get_hud_element_render_pos(id, &x, &y);
-                    set_hud_element_render_pos(id, x - 8, y + 46);
+                    hud_element_set_script(id, D_80284238[1][fpOnes]);
+                    hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
+                    hud_element_get_render_pos(id, &x, &y);
+                    hud_element_set_render_pos(id, x - 8, y + 46);
 
                     id = D_8029FA90[1][3];
-                    set_hud_element_anim(id, &D_802AA694);
-                    clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
-                    get_hud_element_render_pos(id, &x, &y);
-                    set_hud_element_render_pos(id, x - 3, y + 46);
+                    hud_element_set_script(id, &D_802AA694);
+                    hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
+                    hud_element_get_render_pos(id, &x, &y);
+                    hud_element_set_render_pos(id, x - 3, y + 46);
 
                     fpTens = (playerData->curMaxHP + 5) / 10;
                     fpOnes = (playerData->curMaxHP + 5) % 10;
 
                     id = D_8029FA90[1][4];
-                    set_hud_element_anim(id, D_802841C0[1][fpTens]);
+                    hud_element_set_script(id, D_802841C0[1][fpTens]);
                     if (fpTens != 0) {
-                        clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
+                        hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     }
-                    get_hud_element_render_pos(id, &x, &y);
-                    set_hud_element_render_pos(id, x + 3, y + 46);
+                    hud_element_get_render_pos(id, &x, &y);
+                    hud_element_set_render_pos(id, x + 3, y + 46);
 
                     id = D_8029FA90[1][5];
-                    set_hud_element_anim(id, D_802841C0[1][fpOnes]);
-                    clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
-                    get_hud_element_render_pos(id, &x, &y);
-                    set_hud_element_render_pos(id, x + 10, y + 46);
+                    hud_element_set_script(id, D_802841C0[1][fpOnes]);
+                    hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
+                    hud_element_get_render_pos(id, &x, &y);
+                    hud_element_set_render_pos(id, x + 10, y + 46);
                 } else {
                     fpTens = playerData->curMaxHP / 10;
                     fpOnes = playerData->curMaxHP % 10;
 
                     id = D_8029FA90[1][4];
-                    set_hud_element_anim(id, D_802841C0[1][fpTens]);
+                    hud_element_set_script(id, D_802841C0[1][fpTens]);
                     if (fpTens != 0) {
-                        clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
+                        hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     }
-                    get_hud_element_render_pos(id, &x, &y);
-                    set_hud_element_render_pos(id, x - 6, y + 46);
+                    hud_element_get_render_pos(id, &x, &y);
+                    hud_element_set_render_pos(id, x - 6, y + 46);
 
                     id = D_8029FA90[1][5];
-                    set_hud_element_anim(id, D_802841C0[1][fpOnes]);
-                    clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
-                    get_hud_element_render_pos(id, &x, &y);
-                    set_hud_element_render_pos(id, x + 2, y + 46);
+                    hud_element_set_script(id, D_802841C0[1][fpOnes]);
+                    hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
+                    hud_element_get_render_pos(id, &x, &y);
+                    hud_element_set_render_pos(id, x + 2, y + 46);
                     D_8029FB60[0] = 1;
                 }
 
-                if (is_ability_active(4)) {
+                if (is_ability_active(ABILITY_HP_PLUS)) {
                     id = D_8029FAC4;
-                    set_hud_element_anim(id, gItemHudScripts[gItemTable[231].iconID].enabled);
-                    clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
-                    set_hud_element_scale(id, 0.5f);
-                    get_hud_element_render_pos(id, &x, &y);
-                    set_hud_element_render_pos(id, x + 17, y + 46);
+                    hud_element_set_script(id, gItemHudScripts[gItemTable[231].iconID].enabled);
+                    hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
+                    hud_element_set_scale(id, 0.5f);
+                    hud_element_get_render_pos(id, &x, &y);
+                    hud_element_set_render_pos(id, x + 17, y + 46);
                 }
 
                 if (playerData->maxBP != 30) {
@@ -503,69 +503,69 @@ void btl_state_update_celebration(void) {
                     fpOnes = playerData->maxBP % 10;
 
                     id = D_8029FA90[2][1];
-                    set_hud_element_anim(id, D_80284238[2][fpTens]);
+                    hud_element_set_script(id, D_80284238[2][fpTens]);
                     if (fpTens != 0) {
-                        clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
+                        hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     }
-                    get_hud_element_render_pos(id, &x, &y);
-                    set_hud_element_render_pos(id, x - 14, y + 46);
+                    hud_element_get_render_pos(id, &x, &y);
+                    hud_element_set_render_pos(id, x - 14, y + 46);
 
                     id = D_8029FA90[2][2];
-                    set_hud_element_anim(id, D_80284238[2][fpOnes]);
-                    clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
-                    get_hud_element_render_pos(id, &x, &y);
-                    set_hud_element_render_pos(id, x - 8, y + 46);
+                    hud_element_set_script(id, D_80284238[2][fpOnes]);
+                    hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
+                    hud_element_get_render_pos(id, &x, &y);
+                    hud_element_set_render_pos(id, x - 8, y + 46);
 
                     id = D_8029FA90[2][3];
-                    set_hud_element_anim(id, &D_802AAA08);
-                    clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
-                    get_hud_element_render_pos(id, &x, &y);
-                    set_hud_element_render_pos(id, x - 3, y + 46);
+                    hud_element_set_script(id, &D_802AAA08);
+                    hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
+                    hud_element_get_render_pos(id, &x, &y);
+                    hud_element_set_render_pos(id, x - 3, y + 46);
 
                     fpTens = (playerData->maxBP + 3) / 10;
                     fpOnes = (playerData->maxBP + 3) % 10;
 
                     id = D_8029FA90[2][4];
-                    set_hud_element_anim(id, D_802841C0[2][fpTens]);
+                    hud_element_set_script(id, D_802841C0[2][fpTens]);
                     if (fpTens != 0) {
-                        clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
+                        hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     }
-                    get_hud_element_render_pos(id, &x, &y);
-                    set_hud_element_render_pos(id, x + 3, y + 46);
+                    hud_element_get_render_pos(id, &x, &y);
+                    hud_element_set_render_pos(id, x + 3, y + 46);
 
                     id = D_8029FA90[2][5];
-                    set_hud_element_anim(id, D_802841C0[2][fpOnes]);
-                    clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
-                    get_hud_element_render_pos(id, &x, &y);
-                    set_hud_element_render_pos(id, x + 10, y + 46);
+                    hud_element_set_script(id, D_802841C0[2][fpOnes]);
+                    hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
+                    hud_element_get_render_pos(id, &x, &y);
+                    hud_element_set_render_pos(id, x + 10, y + 46);
                 } else {
                     id = D_8029FA90[2][4];
-                    set_hud_element_anim(id, D_802841C0[2][3]);
-                    clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
-                    get_hud_element_render_pos(id, &x, &y);
-                    set_hud_element_render_pos(id, x - 6, y + 46);
+                    hud_element_set_script(id, D_802841C0[2][3]);
+                    hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
+                    hud_element_get_render_pos(id, &x, &y);
+                    hud_element_set_render_pos(id, x - 6, y + 46);
 
                     id = D_8029FA90[2][5];
-                    set_hud_element_anim(id, D_802841C0[2][0]);
-                    clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
-                    get_hud_element_render_pos(id, &x, &y);
-                    set_hud_element_render_pos(id, x + 2, y + 46);
+                    hud_element_set_script(id, D_802841C0[2][0]);
+                    hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
+                    hud_element_get_render_pos(id, &x, &y);
+                    hud_element_set_render_pos(id, x + 2, y + 46);
                     D_8029FB60[2] = 1;
                 }
 
-                D_8029FAE8 = id = create_hud_element(&HudScript_ProjectorBeam);
-                create_hud_element_transform_B(id);
-                set_hud_element_render_pos(id, 156, 13);
-                set_hud_element_tint(id, 255, 255, 255);
-                set_hud_element_transform_rotation_pivot(id, 0, -35);
-                set_hud_element_transform_rotation(id, 0.0f, 0.0f, 180.0f);
-                set_hud_element_transform_scale(id, 1.0f, 1.5f, 1.0f);
-                set_hud_element_alpha(id, 200);
-                set_hud_element_flags(id, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
+                D_8029FAE8 = id = hud_element_create(&HudScript_ProjectorBeam);
+                hud_element_create_transform_B(id);
+                hud_element_set_render_pos(id, 156, 13);
+                hud_element_set_tint(id, 255, 255, 255);
+                hud_element_set_transform_rotation_pivot(id, 0, -35);
+                hud_element_set_transform_rotation(id, 0.0f, 0.0f, 180.0f);
+                hud_element_set_transform_scale(id, 1.0f, 1.5f, 1.0f);
+                hud_element_set_alpha(id, 200);
+                hud_element_set_flags(id, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
 
-                D_8029FB48 = id = create_hud_element(&D_802AAA30);
-                set_hud_element_render_pos(id, 0, 0);
-                set_hud_element_flags(id, HUD_ELEMENT_FLAGS_80);
+                D_8029FB48 = id = hud_element_create(&D_802AAA30);
+                hud_element_set_render_pos(id, 0, 0);
+                hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80);
                 battleStatus->currentSubmenu = 1;
                 D_8029FB4C = 10;
                 gBattleState2 = BATTLE_STATE2_UNK_7;
@@ -573,49 +573,49 @@ void btl_state_update_celebration(void) {
             break;
         case BATTLE_STATE2_UNK_7:
             id = D_8029FA80[0];
-            get_hud_element_render_pos(id, &x, &y);
+            hud_element_get_render_pos(id, &x, &y);
             x -= 20;
-            set_hud_element_render_pos(id, x, y);
+            hud_element_set_render_pos(id, x, y);
 
             for (i = 0; i < ARRAY_COUNT(D_8029FA90[1]); i++) {
                 id = D_8029FA90[1][i];
-                get_hud_element_render_pos(id, &x, &y);
+                hud_element_get_render_pos(id, &x, &y);
                 x -= 20;
-                set_hud_element_render_pos(id, x, y);
+                hud_element_set_render_pos(id, x, y);
             }
 
             id = D_8029FA80[1];
-            get_hud_element_render_pos(id, &x, &y);
+            hud_element_get_render_pos(id, &x, &y);
             y -= 20;
-            set_hud_element_render_pos(id, x, y);
+            hud_element_set_render_pos(id, x, y);
 
             id = D_8029FA80[3];
-            get_hud_element_render_pos(id, &x, &y);
+            hud_element_get_render_pos(id, &x, &y);
             y -= 20;
-            set_hud_element_render_pos(id, x, y);
+            hud_element_set_render_pos(id, x, y);
 
             for (i = 0; i < ARRAY_COUNT(D_8029FA90[0]); i++) {
                 id = D_8029FA90[0][i];
-                get_hud_element_render_pos(id, &x, &y);
+                hud_element_get_render_pos(id, &x, &y);
                 y -= 20;
-                set_hud_element_render_pos(id, x, y);
+                hud_element_set_render_pos(id, x, y);
             }
 
             id = D_8029FA88;
-            get_hud_element_render_pos(id, &x, &y);
+            hud_element_get_render_pos(id, &x, &y);
             x += 20;
-            set_hud_element_render_pos(id, x, y);
+            hud_element_set_render_pos(id, x, y);
 
             for (i = 0; i < ARRAY_COUNT(D_8029FA90[2]); i++) {
                 id = D_8029FA90[2][i];
-                get_hud_element_render_pos(id, &x, &y);
+                hud_element_get_render_pos(id, &x, &y);
                 x += 20;
-                set_hud_element_render_pos(id, x, y);
+                hud_element_set_render_pos(id, x, y);
             }
 
             D_8029FB4C--;
             if (D_8029FB4C == 0) {
-                set_hud_element_tint(id, 128, 128, 128);
+                hud_element_set_tint(id, 128, 128, 128);
                 x = 20;
                 y = 186;
                 set_window_properties(8, 20, 186, 280, 32, 20, func_80260948, NULL, -1);
@@ -661,7 +661,7 @@ void btl_state_update_celebration(void) {
             }
             break;
         case BATTLE_STATE2_UNK_9:
-            free_hud_element(D_8029FAE8);
+            hud_element_free(D_8029FAE8);
             set_window_update(8, WINDOW_UPDATE_HIDE);
 
             switch (battleStatus->currentSubmenu) {
@@ -715,27 +715,27 @@ void btl_state_update_celebration(void) {
             if ((gGameStatusPtr->frameCounter % 2) != 0) {
                 switch (battleStatus->currentSubmenu) {
                     case 0:
-                        set_hud_element_flags(D_8029FA80[0], HUD_ELEMENT_FLAGS_DISABLED);
+                        hud_element_set_flags(D_8029FA80[0], HUD_ELEMENT_FLAGS_DISABLED);
                         break;
                     case 1:
-                        set_hud_element_flags(D_8029FA80[1], HUD_ELEMENT_FLAGS_DISABLED);
-                        set_hud_element_flags(D_8029FA80[3], HUD_ELEMENT_FLAGS_DISABLED);
+                        hud_element_set_flags(D_8029FA80[1], HUD_ELEMENT_FLAGS_DISABLED);
+                        hud_element_set_flags(D_8029FA80[3], HUD_ELEMENT_FLAGS_DISABLED);
                         break;
                     case 2:
-                        set_hud_element_flags(D_8029FA88, HUD_ELEMENT_FLAGS_DISABLED);
+                        hud_element_set_flags(D_8029FA88, HUD_ELEMENT_FLAGS_DISABLED);
                         break;
                 }
             } else {
                 switch (battleStatus->currentSubmenu) {
                     case 0:
-                        clear_hud_element_flags(D_8029FA80[0], HUD_ELEMENT_FLAGS_DISABLED);
+                        hud_element_clear_flags(D_8029FA80[0], HUD_ELEMENT_FLAGS_DISABLED);
                         break;
                     case 1:
-                        clear_hud_element_flags(D_8029FA80[1], HUD_ELEMENT_FLAGS_DISABLED);
-                        clear_hud_element_flags(D_8029FA80[3], HUD_ELEMENT_FLAGS_DISABLED);
+                        hud_element_clear_flags(D_8029FA80[1], HUD_ELEMENT_FLAGS_DISABLED);
+                        hud_element_clear_flags(D_8029FA80[3], HUD_ELEMENT_FLAGS_DISABLED);
                         break;
                     case 2:
-                        clear_hud_element_flags(D_8029FA88, HUD_ELEMENT_FLAGS_DISABLED);
+                        hud_element_clear_flags(D_8029FA88, HUD_ELEMENT_FLAGS_DISABLED);
                         break;
                 }
             }
@@ -749,18 +749,18 @@ void btl_state_update_celebration(void) {
             }
             break;
         case BATTLE_STATE2_UNK_B:
-            free_hud_element(D_8029FA80[0]);
-            free_hud_element(D_8029FA80[1]);
-            free_hud_element(D_8029FA80[3]);
-            free_hud_element(D_8029FA80[2]);
+            hud_element_free(D_8029FA80[0]);
+            hud_element_free(D_8029FA80[1]);
+            hud_element_free(D_8029FA80[3]);
+            hud_element_free(D_8029FA80[2]);
 
             for (i = 0; i < ARRAY_COUNT(D_8029FA90); i++) {
                 for (j = 0; j < ARRAY_COUNT(D_8029FA90[0]); j++) {
-                    free_hud_element(D_8029FA90[i][j]);
+                    hud_element_free(D_8029FA90[i][j]);
                 }
             }
 
-            free_hud_element(D_8029FB48);
+            hud_element_free(D_8029FB48);
             set_background_color_blend(0, 0, 0, 0);
             btl_set_state(0x20);
             gBattleState2 = BATTLE_STATE2_UNK_2;
@@ -880,13 +880,13 @@ void btl_draw_upgrade_windows(s32 arg0) {
             break;
     }
 
-    get_hud_element_render_pos(D_8029FA80[0], &x, &y);
+    hud_element_get_render_pos(D_8029FA80[0], &x, &y);
     draw_box(0, 0xF, x - 22, y - 22, 0, 44, 44, 255, d1, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f, NULL, NULL, NULL,
              SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
-    get_hud_element_render_pos(D_8029FA80[3], &x, &y);
+    hud_element_get_render_pos(D_8029FA80[3], &x, &y);
     draw_box(0, 0xF, x - 22, y - 22, 0, 44, 44, 255, d2, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f, NULL, NULL, NULL,
              SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
-    get_hud_element_render_pos(D_8029FA80[2], &x, &y);
+    hud_element_get_render_pos(D_8029FA80[2], &x, &y);
     draw_box(0, 0xF, x - 22, y - 22, 0, 44, 44, 255, d3, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f, NULL, NULL, NULL,
              SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
 }
@@ -905,24 +905,24 @@ void btl_state_draw_celebration(void) {
         case BATTLE_STATE2_UNK_7:
             btl_draw_upgrade_windows(0);
             id = D_8029FA80[0];
-            set_hud_element_tint(id, 128, 128, 128);
-            draw_hud_element_clipped(id);
+            hud_element_set_tint(id, 128, 128, 128);
+            hud_element_draw_clipped(id);
             id = D_8029FA80[3];
-            set_hud_element_tint(id, 128, 128, 128);
-            draw_hud_element_clipped(id);
+            hud_element_set_tint(id, 128, 128, 128);
+            hud_element_draw_clipped(id);
             id = D_8029FA80[1];
-            set_hud_element_tint(id, 128, 128, 128);
-            draw_hud_element_clipped(id);
+            hud_element_set_tint(id, 128, 128, 128);
+            hud_element_draw_clipped(id);
             id = D_8029FA80[2];
-            set_hud_element_tint(id, 128, 128, 128);
-            draw_hud_element_clipped(id);
+            hud_element_set_tint(id, 128, 128, 128);
+            hud_element_draw_clipped(id);
 
             for (j = 0; j < ARRAY_COUNT(D_8029FA90); j++) {
                 for (i = 0; i < ARRAY_COUNT(D_8029FA90[0]); i++) {
                     id = D_8029FA90[j][i];
 
-                    set_hud_element_tint(id, 128, 128, 128);
-                    draw_hud_element_clipped(id);
+                    hud_element_set_tint(id, 128, 128, 128);
+                    hud_element_draw_clipped(id);
                 }
             }
             break;
@@ -932,127 +932,127 @@ void btl_state_draw_celebration(void) {
             switch (battleStatus->currentSubmenu) {
                 case 0:
                     rotZ = 152;
-                    set_hud_element_tint(D_8029FA80[0], 255, 255, 255);
-                    set_hud_element_tint(D_8029FA80[3], 128, 128, 128);
-                    set_hud_element_tint(D_8029FA80[1], 128, 128, 128);
-                    set_hud_element_tint(D_8029FA80[2], 128, 128, 128);
+                    hud_element_set_tint(D_8029FA80[0], 255, 255, 255);
+                    hud_element_set_tint(D_8029FA80[3], 128, 128, 128);
+                    hud_element_set_tint(D_8029FA80[1], 128, 128, 128);
+                    hud_element_set_tint(D_8029FA80[2], 128, 128, 128);
 
                     for (i = 0; i < ARRAY_COUNT(D_8029FA90[0]); i++) {
                         id = D_8029FA90[0][i];
 
-                        set_hud_element_tint(id, 128, 128, 128);
+                        hud_element_set_tint(id, 128, 128, 128);
                     }
 
                     for (i = 0; i < ARRAY_COUNT(D_8029FA90[1]); i++) {
                         id = D_8029FA90[1][i];
 
-                        set_hud_element_tint(id, 255, 255, 255);
+                        hud_element_set_tint(id, 255, 255, 255);
                     }
 
                     for (i = 0; i < ARRAY_COUNT(D_8029FA90[2]); i++) {
                         id = D_8029FA90[2][i];
 
-                        set_hud_element_tint(id, 128, 128, 128);
+                        hud_element_set_tint(id, 128, 128, 128);
                     }
 
                     id = D_8029FA80[0];
-                    if (get_hud_element_anim(id) != &D_802A9F34) {
-                        set_hud_element_anim(id, &D_802A9F34);
+                    if (hud_element_get_script(id) != &D_802A9F34) {
+                        hud_element_set_script(id, &D_802A9F34);
                     }
                     id = D_8029FA80[3];
-                    if (get_hud_element_anim(id) != &D_802A9F84) {
-                        set_hud_element_anim(id, &D_802A9F84);
+                    if (hud_element_get_script(id) != &D_802A9F84) {
+                        hud_element_set_script(id, &D_802A9F84);
                     }
                     id = D_8029FA80[1];
-                    if (get_hud_element_anim(id) != &D_802A9F5C) {
-                        set_hud_element_anim(id, &D_802A9F5C);
+                    if (hud_element_get_script(id) != &D_802A9F5C) {
+                        hud_element_set_script(id, &D_802A9F5C);
                     }
                     id = D_8029FA80[2];
-                    if (get_hud_element_anim(id) != &D_802A9FAC) {
-                        set_hud_element_anim(id, &D_802A9FAC);
+                    if (hud_element_get_script(id) != &D_802A9FAC) {
+                        hud_element_set_script(id, &D_802A9FAC);
                     }
                     break;
                 case 1:
                     rotZ = 180;
-                    set_hud_element_tint(D_8029FA80[0], 128, 128, 128);
-                    set_hud_element_tint(D_8029FA80[3], 255, 255, 255);
-                    set_hud_element_tint(D_8029FA80[1], 255, 255, 255);
-                    set_hud_element_tint(D_8029FA80[2], 128, 128, 128);
+                    hud_element_set_tint(D_8029FA80[0], 128, 128, 128);
+                    hud_element_set_tint(D_8029FA80[3], 255, 255, 255);
+                    hud_element_set_tint(D_8029FA80[1], 255, 255, 255);
+                    hud_element_set_tint(D_8029FA80[2], 128, 128, 128);
 
                     for (i = 0; i < ARRAY_COUNT(D_8029FA90[0]); i++) {
                         id = D_8029FA90[0][i];
 
-                        set_hud_element_tint(id, 255, 255, 255);
+                        hud_element_set_tint(id, 255, 255, 255);
                     }
 
                     for (i = 0; i < ARRAY_COUNT(D_8029FA90[1]); i++) {
                         id = D_8029FA90[1][i];
 
-                        set_hud_element_tint(id, 128, 128, 128);
+                        hud_element_set_tint(id, 128, 128, 128);
                     }
 
                     for (i = 0; i < ARRAY_COUNT(D_8029FA90[2]); i++) {
                         id = D_8029FA90[2][i];
 
-                        set_hud_element_tint(id, 128, 128, 128);
+                        hud_element_set_tint(id, 128, 128, 128);
                     }
                     break;
                 case 2:
                 default:
                     rotZ = 208;
-                    set_hud_element_tint(D_8029FA80[0], 128, 128, 128);
-                    set_hud_element_tint(D_8029FA80[3], 128, 128, 128);
-                    set_hud_element_tint(D_8029FA80[1], 128, 128, 128);
-                    set_hud_element_tint(D_8029FA80[2], 255, 255, 255);
+                    hud_element_set_tint(D_8029FA80[0], 128, 128, 128);
+                    hud_element_set_tint(D_8029FA80[3], 128, 128, 128);
+                    hud_element_set_tint(D_8029FA80[1], 128, 128, 128);
+                    hud_element_set_tint(D_8029FA80[2], 255, 255, 255);
 
                     for (i = 0; i < ARRAY_COUNT(D_8029FA90[0]); i++) {
                         id = D_8029FA90[0][i];
 
-                        set_hud_element_tint(id, 128, 128, 128);
+                        hud_element_set_tint(id, 128, 128, 128);
                     }
 
                     for (i = 0; i < ARRAY_COUNT(D_8029FA90[1]); i++) {
                         id = D_8029FA90[1][i];
 
-                        set_hud_element_tint(id, 128, 128, 128);
+                        hud_element_set_tint(id, 128, 128, 128);
                     }
 
                     for (i = 0; i < ARRAY_COUNT(D_8029FA90[2]); i++) {
                         id = D_8029FA90[2][i];
 
-                        set_hud_element_tint(id, 255, 255, 255);
+                        hud_element_set_tint(id, 255, 255, 255);
                     }
                     break;
             }
 
             btl_draw_upgrade_windows(1);
-            draw_hud_element_clipped(D_8029FA80[0]);
-            draw_hud_element_clipped(D_8029FA80[3]);
-            draw_hud_element_clipped(D_8029FA80[1]);
-            draw_hud_element_clipped(D_8029FA80[2]);
+            hud_element_draw_clipped(D_8029FA80[0]);
+            hud_element_draw_clipped(D_8029FA80[3]);
+            hud_element_draw_clipped(D_8029FA80[1]);
+            hud_element_draw_clipped(D_8029FA80[2]);
 
             for (j = 0; j < ARRAY_COUNT(D_8029FA90); j++) {
                 for (i = 0; i < ARRAY_COUNT(D_8029FA90[0]); i++) {
-                    draw_hud_element_clipped(D_8029FA90[j][i]);
+                    hud_element_draw_clipped(D_8029FA90[j][i]);
                 }
             }
 
             func_80144218(-1);
             id = D_8029FAE8;
-            set_hud_element_transform_rotation(id, 0.0f, 0.0f, rotZ);
+            hud_element_set_transform_rotation(id, 0.0f, 0.0f, rotZ);
             func_80144238(id);
             break;
         case BATTLE_STATE2_UNK_9:
         case BATTLE_STATE2_PLAYER_DEFEATED:
             btl_draw_upgrade_windows(1);
-            draw_hud_element_clipped(D_8029FA80[0]);
-            draw_hud_element_clipped(D_8029FA80[3]);
-            draw_hud_element_clipped(D_8029FA80[1]);
-            draw_hud_element_clipped(D_8029FA80[2]);
+            hud_element_draw_clipped(D_8029FA80[0]);
+            hud_element_draw_clipped(D_8029FA80[3]);
+            hud_element_draw_clipped(D_8029FA80[1]);
+            hud_element_draw_clipped(D_8029FA80[2]);
 
             for (j = 0; j < ARRAY_COUNT(D_8029FA90); j++) {
                 for (i = 0; i < ARRAY_COUNT(D_8029FA90[0]); i++) {
-                    draw_hud_element_clipped(D_8029FA90[j][i]);
+                    hud_element_draw_clipped(D_8029FA90[j][i]);
                 }
             }
 
@@ -1079,8 +1079,8 @@ void btl_state_draw_celebration(void) {
                 D_8029FB8C = -D_8029FB8C / 3;
             }
             id = D_8029FB48;
-            set_hud_element_render_pos(id, D_8029FB88 - 43, 176);
-            draw_hud_element_clipped(id);
+            hud_element_set_render_pos(id, D_8029FB88 - 43, 176);
+            hud_element_draw_clipped(id);
             break;
         case BATTLE_STATE2_PLAYER_DEFEATED:
             D_8029FB8C += 4;
@@ -1089,8 +1089,8 @@ void btl_state_draw_celebration(void) {
                 D_8029FB88 = 500;
             }
             id = D_8029FB48;
-            set_hud_element_render_pos(id, D_8029FB88 - 43, 176);
-            draw_hud_element_clipped(id);
+            hud_element_set_render_pos(id, D_8029FB88 - 43, 176);
+            hud_element_draw_clipped(id);
             break;
     }
 }

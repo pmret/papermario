@@ -282,18 +282,18 @@ void func_802A10B8(void) {
         s32* icons1 = D_802AD010;
         s32* icons2 = D_802AD028;
 
-        free_hud_element(icons1[i]);
-        free_hud_element(icons2[i]);
+        hud_element_free(icons1[i]);
+        hud_element_free(icons2[i]);
     }
 
-    free_hud_element(D_802AD040);
-    free_hud_element(D_802AD044);
-    free_hud_element(D_802AD048);
-    free_hud_element(D_802AD04C);
-    free_hud_element(D_802AD05C);
-    free_hud_element(D_802AD050);
-    free_hud_element(D_802AD054);
-    free_hud_element(D_802AD058);
+    hud_element_free(D_802AD040);
+    hud_element_free(D_802AD044);
+    hud_element_free(D_802AD048);
+    hud_element_free(D_802AD04C);
+    hud_element_free(D_802AD05C);
+    hud_element_free(D_802AD050);
+    hud_element_free(D_802AD054);
+    hud_element_free(D_802AD058);
 }
 
 INCLUDE_ASM(s32, "415D90", func_802A11B0);
@@ -362,16 +362,16 @@ void func_802A27E4(void) {
     set_window_update(8, WINDOW_UPDATE_HIDE);
 
     for (i = 0; i < battle_menu_moveOptionCount; i++) {
-        free_hud_element(battle_menu_moveOptionIconIDs[i]);
+        hud_element_free(battle_menu_moveOptionIconIDs[i]);
     }
 
-    free_hud_element(battle_menu_moveCursorIcon);
-    free_hud_element(battle_menu_moveUpArrowIcon);
-    free_hud_element(battle_menu_moveDownArrowIcon);
-    free_hud_element(battle_menu_moveTitleIcon);
+    hud_element_free(battle_menu_moveCursorIcon);
+    hud_element_free(battle_menu_moveUpArrowIcon);
+    hud_element_free(battle_menu_moveDownArrowIcon);
+    hud_element_free(battle_menu_moveTitleIcon);
 
     for (i = 0; i < battle_menu_moveOptionCount; i++) {
-        free_hud_element(battle_menu_moveOptionCostUnitIconIDs[i]);
+        hud_element_free(battle_menu_moveOptionCostUnitIconIDs[i]);
     }
 }
 
@@ -383,21 +383,21 @@ void func_802A2910(void) {
     moveOptionIconIDs = battle_menu_moveOptionIconIDs;
 
     for (i = 0; i < battle_menu_moveOptionCount; i++) {
-        set_hud_element_tint(moveOptionIconIDs[i], 255, 255, 255);
+        hud_element_set_tint(moveOptionIconIDs[i], 255, 255, 255);
     }
 
-    set_hud_element_tint(battle_menu_moveCursorIcon, 255, 255, 255);
-    set_hud_element_tint(battle_menu_moveUpArrowIcon, 255, 255, 255);
-    set_hud_element_tint(battle_menu_moveDownArrowIcon, 255, 255, 255);
-    set_hud_element_tint(battle_menu_moveTitleIcon, 255, 255, 255);
+    hud_element_set_tint(battle_menu_moveCursorIcon, 255, 255, 255);
+    hud_element_set_tint(battle_menu_moveUpArrowIcon, 255, 255, 255);
+    hud_element_set_tint(battle_menu_moveDownArrowIcon, 255, 255, 255);
+    hud_element_set_tint(battle_menu_moveTitleIcon, 255, 255, 255);
 
     moveOptionCostUnitIconIDs = battle_menu_moveOptionCostUnitIconIDs;
 
     for (i = 0; i < battle_menu_moveOptionCount; i++) {
-        set_hud_element_tint(moveOptionCostUnitIconIDs[i], 255, 255, 255);
+        hud_element_set_tint(moveOptionCostUnitIconIDs[i], 255, 255, 255);
     }
 
-    set_hud_element_anim(battle_menu_moveCursorIcon, HudScript_AnimatedHandPointer);
+    hud_element_set_script(battle_menu_moveCursorIcon, HudScript_AnimatedHandPointer);
     set_window_update(1, WINDOW_UPDATE_TRANSPARENT);
 
     if (!battle_menu_hasSpiritsMenu) {
@@ -434,21 +434,21 @@ void func_802A2AB8(void) {
     moveOptionIconIDs = battle_menu_moveOptionIconIDs;
 
     for (i = 0; i < battle_menu_moveOptionCount; i++) {
-        set_hud_element_tint(moveOptionIconIDs[i], 255, 255, 255);
+        hud_element_set_tint(moveOptionIconIDs[i], 255, 255, 255);
     }
 
-    set_hud_element_tint(battle_menu_moveCursorIcon, 255, 255, 255);
-    set_hud_element_tint(battle_menu_moveUpArrowIcon, 255, 255, 255);
-    set_hud_element_tint(battle_menu_moveDownArrowIcon, 255, 255, 255);
-    set_hud_element_tint(battle_menu_moveTitleIcon, 255, 255, 255);
+    hud_element_set_tint(battle_menu_moveCursorIcon, 255, 255, 255);
+    hud_element_set_tint(battle_menu_moveUpArrowIcon, 255, 255, 255);
+    hud_element_set_tint(battle_menu_moveDownArrowIcon, 255, 255, 255);
+    hud_element_set_tint(battle_menu_moveTitleIcon, 255, 255, 255);
 
     moveOptionCostUnitIconIDs = battle_menu_moveOptionCostUnitIconIDs;
 
     for (i = 0; i < battle_menu_moveOptionCount; i++) {
-        set_hud_element_tint(moveOptionCostUnitIconIDs[i], 255, 255, 255);
+        hud_element_set_tint(moveOptionCostUnitIconIDs[i], 255, 255, 255);
     }
 
-    set_hud_element_anim(battle_menu_moveCursorIcon, HudScript_AnimatedHandPointer);
+    hud_element_set_script(battle_menu_moveCursorIcon, HudScript_AnimatedHandPointer);
     battle_menu_moveTextColor = 10;
     D_802AD10F = 1;
     battle_menu_moveState = 20;
@@ -489,9 +489,9 @@ void func_802A43DC(s32 arg0, s32 x, s32 y) {
 void func_802A4448(s32 arg0, s32 x, s32 y) {
     s32 icon = battle_menu_moveTitleIcon;
 
-    set_hud_element_render_pos(icon, x + 16, y + 15);
-    set_hud_element_alpha(icon, battle_menu_moveTextOpacity);
-    draw_hud_element_clipped(icon);
+    hud_element_set_render_pos(icon, x + 16, y + 15);
+    hud_element_set_alpha(icon, battle_menu_moveTextOpacity);
+    hud_element_draw_clipped(icon);
 }
 
 void func_802A4494(s32 arg0, s32 x, s32 y) {
@@ -581,25 +581,25 @@ void func_802A472C(void) {
     set_window_update(8, WINDOW_UPDATE_HIDE);
 
     for (i = 0; i < D_802AD66C; i++) {
-        free_hud_element(D_802AD628[i]);
+        hud_element_free(D_802AD628[i]);
     }
 
-    free_hud_element(D_802AD618);
-    free_hud_element(D_802AD61C);
-    free_hud_element(D_802AD620);
+    hud_element_free(D_802AD618);
+    hud_element_free(D_802AD61C);
+    hud_element_free(D_802AD620);
 }
 
 void func_802A47E0(void) {
     s32 i;
 
     for (i = 0; i < D_802AD66C; i++) {
-        set_hud_element_tint(D_802AD628[i], 0xFF, 0xFF, 0xFF);
+        hud_element_set_tint(D_802AD628[i], 0xFF, 0xFF, 0xFF);
     }
 
-    set_hud_element_tint(D_802AD618, 0xFF, 0xFF, 0xFF);
-    set_hud_element_tint(D_802AD61C, 0xFF, 0xFF, 0xFF);
-    set_hud_element_tint(D_802AD620, 0xFF, 0xFF, 0xFF);
-    set_hud_element_anim(D_802AD618, HudScript_AnimatedHandPointer);
+    hud_element_set_tint(D_802AD618, 0xFF, 0xFF, 0xFF);
+    hud_element_set_tint(D_802AD61C, 0xFF, 0xFF, 0xFF);
+    hud_element_set_tint(D_802AD620, 0xFF, 0xFF, 0xFF);
+    hud_element_set_script(D_802AD618, HudScript_AnimatedHandPointer);
     set_window_update(6, WINDOW_UPDATE_TRANSPARENT);
     set_window_update(7, WINDOW_UPDATE_TRANSPARENT);
     set_window_update(8, WINDOW_UPDATE_SHOW);
@@ -617,13 +617,13 @@ void func_802A48FC(void) {
     set_window_update(8, WINDOW_UPDATE_SHOW);
 
     for (i = 0; i < D_802AD66C; i++) {
-        set_hud_element_tint(D_802AD628[i], 0xFF, 0xFF, 0xFF);
+        hud_element_set_tint(D_802AD628[i], 0xFF, 0xFF, 0xFF);
     }
 
-    set_hud_element_tint(D_802AD618, 0xFF, 0xFF, 0xFF);
-    set_hud_element_tint(D_802AD61C, 0xFF, 0xFF, 0xFF);
-    set_hud_element_tint(D_802AD620, 0xFF, 0xFF, 0xFF);
-    set_hud_element_anim(D_802AD618, HudScript_AnimatedHandPointer);
+    hud_element_set_tint(D_802AD618, 0xFF, 0xFF, 0xFF);
+    hud_element_set_tint(D_802AD61C, 0xFF, 0xFF, 0xFF);
+    hud_element_set_tint(D_802AD620, 0xFF, 0xFF, 0xFF);
+    hud_element_set_script(D_802AD618, HudScript_AnimatedHandPointer);
     D_802AD614 = 10;
     D_802AD60B = 1;
     D_802AD604 = 20;
@@ -698,9 +698,9 @@ void func_802A5290(s32 arg0, s32 x, s32 y) {
             for (i = 0; i < D_802AD66C; i++, phi_s1_2 += 0xD) {
                 iconIndex = D_802AD628[i];
 
-                set_hud_element_render_pos(iconIndex, xTemp, phi_s1_2);
-                set_hud_element_alpha(iconIndex, D_802AD624);
-                draw_hud_element_without_clipping(iconIndex);
+                hud_element_set_render_pos(iconIndex, xTemp, phi_s1_2);
+                hud_element_set_alpha(iconIndex, D_802AD624);
+                hud_element_draw_without_clipping(iconIndex);
             }
 
             temp_s1_3 = (D_802AD605 - D_802AD608) * 13;
@@ -712,22 +712,22 @@ void func_802A5290(s32 arg0, s32 x, s32 y) {
             }
 
             iconIndex = D_802AD618;
-            set_hud_element_render_pos(iconIndex, x + 10, y + (D_802AD60E + 26));
-            set_hud_element_alpha(iconIndex, D_802AD624);
-            draw_hud_element_clipped(iconIndex);
+            hud_element_set_render_pos(iconIndex, x + 10, y + (D_802AD60E + 26));
+            hud_element_set_alpha(iconIndex, D_802AD624);
+            hud_element_draw_clipped(iconIndex);
 
             if (D_802AD608 > 0) {
                 iconIndex = D_802AD61C;
-                set_hud_element_render_pos(iconIndex, x + 67, y + 16);
-                set_hud_element_alpha(iconIndex, D_802AD624);
-                draw_hud_element_clipped(iconIndex);
+                hud_element_set_render_pos(iconIndex, x + 67, y + 16);
+                hud_element_set_alpha(iconIndex, D_802AD624);
+                hud_element_draw_clipped(iconIndex);
             }
 
             if (D_802AD609 < D_802AD66C) {
                 iconIndex = D_802AD620;
-                set_hud_element_render_pos(iconIndex, x + 67, y + 100);
-                set_hud_element_alpha(iconIndex, D_802AD624);
-                draw_hud_element_clipped(iconIndex);
+                hud_element_set_render_pos(iconIndex, x + 67, y + 100);
+                hud_element_set_alpha(iconIndex, D_802AD624);
+                hud_element_draw_clipped(iconIndex);
             }
 
             break;

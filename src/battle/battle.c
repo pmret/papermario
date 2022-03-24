@@ -407,7 +407,7 @@ void load_demo_battle(u32 index) {
     clear_animator_list();
     clear_entity_models();
     clear_npcs();
-    clear_hud_element_cache();
+    hud_element_clear_cache();
     clear_trigger_data();
     clear_model_data();
     clear_sprite_shading_data();

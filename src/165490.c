@@ -60,11 +60,11 @@ void filemenu_draw_contents_stereo(
     s32 opacity, s32 darkening
 ) {
     if (gGameStatusPtr->soundOutputMode == SOUND_OUT_STEREO) {
-        set_hud_element_render_pos(filemenu_hudElemIDs[18], baseX + 34, baseY + 10);
-        draw_hud_element_without_clipping(filemenu_hudElemIDs[18]);
+        hud_element_set_render_pos(filemenu_hudElemIDs[18], baseX + 34, baseY + 10);
+        hud_element_draw_without_clipping(filemenu_hudElemIDs[18]);
     } else {
-        set_hud_element_render_pos(filemenu_hudElemIDs[19], baseX + 34, baseY + 10);
-        draw_hud_element_without_clipping(filemenu_hudElemIDs[19]);
+        hud_element_set_render_pos(filemenu_hudElemIDs[19], baseX + 34, baseY + 10);
+        hud_element_draw_without_clipping(filemenu_hudElemIDs[19]);
     }
 }
 
@@ -75,11 +75,11 @@ void filemenu_draw_contents_mono(
     s32 opacity, s32 darkening
 ) {
     if (gGameStatusPtr->soundOutputMode == SOUND_OUT_MONO) {
-        set_hud_element_render_pos(filemenu_hudElemIDs[16], baseX + 34, baseY + 10);
-        draw_hud_element_without_clipping(filemenu_hudElemIDs[16]);
+        hud_element_set_render_pos(filemenu_hudElemIDs[16], baseX + 34, baseY + 10);
+        hud_element_draw_without_clipping(filemenu_hudElemIDs[16]);
     } else {
-        set_hud_element_render_pos(filemenu_hudElemIDs[17], baseX + 34, baseY + 10);
-        draw_hud_element_without_clipping(filemenu_hudElemIDs[17]);
+        hud_element_set_render_pos(filemenu_hudElemIDs[17], baseX + 34, baseY + 10);
+        hud_element_draw_without_clipping(filemenu_hudElemIDs[17]);
     }
 }
 
@@ -201,11 +201,11 @@ void filemenu_draw_contents_file_info(s32 fileIdx,
         } else {
             id = filemenu_hudElemIDs[i + 7];
         }
-        set_hud_element_render_pos(id, baseX + 17 + (i * 16), baseY + 44);
+        hud_element_set_render_pos(id, baseX + 17 + (i * 16), baseY + 44);
         if (i == 0) {
-            draw_hud_element_without_clipping(id);
+            hud_element_draw_without_clipping(id);
         } else {
-            draw_next_hud_element(id);
+            hud_element_draw_next(id);
         }
     }
 }
@@ -311,8 +311,8 @@ void filemenu_main_init(MenuPanel* menu) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(filemenu_hudElemIDs); i++) {
-        filemenu_hudElemIDs[i] = create_hud_element(filemenu_hudElemScripts[i]);
-        set_hud_element_flags(filemenu_hudElemIDs[i], HUD_ELEMENT_FLAGS_80);
+        filemenu_hudElemIDs[i] = hud_element_create(filemenu_hudElemScripts[i]);
+        hud_element_set_flags(filemenu_hudElemIDs[i], HUD_ELEMENT_FLAGS_80);
     }
 
     for (i = 0; i < ARRAY_COUNT(filemenu_windowBPs); i++) {
@@ -788,6 +788,6 @@ void filemenu_main_cleanup(void) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(filemenu_hudElemIDs); i++) {
-        free_hud_element(filemenu_hudElemIDs[i]);
+        hud_element_free(filemenu_hudElemIDs[i]);
     }
 }

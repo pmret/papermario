@@ -146,7 +146,7 @@ void state_init_title_screen(void) {
     clear_animator_list();
     clear_entity_models();
     clear_npcs();
-    clear_hud_element_cache();
+    hud_element_clear_cache();
     reset_background_settings();
     clear_entity_data(1);
     clear_effect_data();
@@ -265,7 +265,7 @@ void state_step_title_screen(void) {
             clear_entity_models();
             clear_animator_list();
             clear_npcs();
-            clear_hud_element_cache();
+            hud_element_clear_cache();
             spr_init_sprites(0);
             clear_entity_data(1);
             clear_windows();

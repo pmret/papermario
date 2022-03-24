@@ -158,16 +158,16 @@ glabel btl_state_update_select_target
 .L802AA8BC:
 /* 41F64C 802AA8BC 3C048008 */  lui       $a0, %hi(HudScript_HandPointDownLoop)
 /* 41F650 802AA8C0 2484FF20 */  addiu     $a0, $a0, %lo(HudScript_HandPointDownLoop)
-/* 41F654 802AA8C4 0C050529 */  jal       create_hud_element
+/* 41F654 802AA8C4 0C050529 */  jal       hud_element_create
 /* 41F658 802AA8C8 26100001 */   addiu    $s0, $s0, 1
 /* 41F65C 802AA8CC 0040882D */  daddu     $s1, $v0, $zero
 /* 41F660 802AA8D0 AE510000 */  sw        $s1, ($s2)
 /* 41F664 802AA8D4 0220202D */  daddu     $a0, $s1, $zero
-/* 41F668 802AA8D8 0C051277 */  jal       set_hud_element_render_depth
+/* 41F668 802AA8D8 0C051277 */  jal       hud_element_set_render_depth
 /* 41F66C 802AA8DC 0000282D */   daddu    $a1, $zero, $zero
 /* 41F670 802AA8E0 0220202D */  daddu     $a0, $s1, $zero
 /* 41F674 802AA8E4 0000282D */  daddu     $a1, $zero, $zero
-/* 41F678 802AA8E8 0C051261 */  jal       set_hud_element_render_pos
+/* 41F678 802AA8E8 0C051261 */  jal       hud_element_set_render_pos
 /* 41F67C 802AA8EC 2406FF9C */   addiu    $a2, $zero, -0x64
 /* 41F680 802AA8F0 0213102A */  slt       $v0, $s0, $s3
 /* 41F684 802AA8F4 1440FFF1 */  bnez      $v0, .L802AA8BC
@@ -274,7 +274,7 @@ glabel btl_state_update_select_target
 /* 41F7EC 802AAA5C 3C058008 */  lui       $a1, %hi(HudScript_HandPointDownLoop)
 /* 41F7F0 802AAA60 24A5FF20 */  addiu     $a1, $a1, %lo(HudScript_HandPointDownLoop)
 .L802AAA64:
-/* 41F7F4 802AAA64 0C0511FF */  jal       set_hud_element_anim
+/* 41F7F4 802AAA64 0C0511FF */  jal       hud_element_set_script
 /* 41F7F8 802AAA68 00000000 */   nop
 /* 41F7FC 802AAA6C 0C05272D */  jal       sfx_play_sound
 /* 41F800 802AAA70 240400C7 */   addiu    $a0, $zero, 0xc7
@@ -307,7 +307,7 @@ glabel btl_state_update_select_target
 .L802AAAD4:
 /* 41F864 802AAAD4 8E240000 */  lw        $a0, ($s1)
 /* 41F868 802AAAD8 26310004 */  addiu     $s1, $s1, 4
-/* 41F86C 802AAADC 0C05123D */  jal       free_hud_element
+/* 41F86C 802AAADC 0C05123D */  jal       hud_element_free
 /* 41F870 802AAAE0 26100001 */   addiu    $s0, $s0, 1
 /* 41F874 802AAAE4 0213102A */  slt       $v0, $s0, $s3
 /* 41F878 802AAAE8 1440FFFA */  bnez      $v0, .L802AAAD4
@@ -368,7 +368,7 @@ glabel btl_state_update_select_target
 .L802AABA4:
 /* 41F934 802AABA4 8E240000 */  lw        $a0, ($s1)
 /* 41F938 802AABA8 26310004 */  addiu     $s1, $s1, 4
-/* 41F93C 802AABAC 0C05123D */  jal       free_hud_element
+/* 41F93C 802AABAC 0C05123D */  jal       hud_element_free
 /* 41F940 802AABB0 26100001 */   addiu    $s0, $s0, 1
 /* 41F944 802AABB4 0213102A */  slt       $v0, $s0, $s3
 /* 41F948 802AABB8 1440FFFA */  bnez      $v0, .L802AABA4

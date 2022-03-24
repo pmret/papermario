@@ -198,25 +198,25 @@ void initialize_battle(void) {
     func_8024EDC0();
     func_80268E88();
     set_windows_visible(WINDOW_GROUP_1);
-    D_8029EFBC = create_hud_element(HudScript_HPBar);
-    set_hud_element_flags(D_8029EFBC, HUD_ELEMENT_FLAGS_80);
+    D_8029EFBC = hud_element_create(HudScript_HPBar);
+    hud_element_set_flags(D_8029EFBC, HUD_ELEMENT_FLAGS_80);
 
     for (i = 0; i < ARRAY_COUNT(D_8029EFC0); i++) {
-        hudElemID = D_8029EFC0[i] = create_hud_element(HudScript_Item_StarPoint);
-        set_hud_element_flags(hudElemID, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
-        set_hud_element_render_depth(hudElemID, 20);
+        hudElemID = D_8029EFC0[i] = hud_element_create(HudScript_Item_StarPoint);
+        hud_element_set_flags(hudElemID, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+        hud_element_set_render_depth(hudElemID, 20);
     }
 
     for (i = 0; i < ARRAY_COUNT(D_8029EFE8); i++) {
-        hudElemID = D_8029EFE8[i] = create_hud_element(HudScript_StatusSPShine);
-        set_hud_element_flags(hudElemID, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
-        set_hud_element_render_depth(hudElemID, 20);
+        hudElemID = D_8029EFE8[i] = hud_element_create(HudScript_StatusSPShine);
+        hud_element_set_flags(hudElemID, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+        hud_element_set_render_depth(hudElemID, 20);
     }
 
     for (i = 0; i < ARRAY_COUNT(D_8029F010); i++) {
-        hudElemID = D_8029F010[i] = create_hud_element(HudScript_Item_SmallStarPoint);
-        set_hud_element_flags(hudElemID, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
-        set_hud_element_render_depth(hudElemID, 20);
+        hudElemID = D_8029F010[i] = hud_element_create(HudScript_Item_SmallStarPoint);
+        hud_element_set_flags(hudElemID, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+        hud_element_set_render_depth(hudElemID, 20);
     }
 
     tattleCam->fpDoPreRender = func_8023F088;
@@ -770,10 +770,10 @@ void btl_draw_enemy_health_bars(void) {
                             get_screen_coords(1, x, y, z, &screenX, &screenY, &screenZ);
                             screenY += 16;
                             id = D_8029EFBC;
-                            set_hud_element_render_depth(id, 10);
-                            set_hud_element_anim(id, &HudScript_HPBar);
-                            set_hud_element_render_pos(id, screenX, screenY);
-                            draw_hud_element_clipped(id);
+                            hud_element_set_render_depth(id, 10);
+                            hud_element_set_script(id, &HudScript_HPBar);
+                            hud_element_set_render_pos(id, screenX, screenY);
+                            hud_element_draw_clipped(id);
 
                             temp = currentHP / 10;
                             ones = currentHP % 10;
@@ -781,20 +781,20 @@ void btl_draw_enemy_health_bars(void) {
                             // tens digit
                             if (temp > 0) {
                                 id = D_8029EFBC;
-                                set_hud_element_render_depth(id, 10);
-                                set_hud_element_anim(id, bHPDigitHudScripts[temp]);
+                                hud_element_set_render_depth(id, 10);
+                                hud_element_set_script(id, bHPDigitHudScripts[temp]);
                                 btl_draw_prim_quad(0, 0, 0, 0, screenX, screenY + 2, 8, 8);
-                                set_hud_element_render_pos(id, screenX + 4, screenY + 6);
-                                draw_next_hud_element(id);
+                                hud_element_set_render_pos(id, screenX + 4, screenY + 6);
+                                hud_element_draw_next(id);
                             }
 
                             // ones digit
                             id = D_8029EFBC;
-                            set_hud_element_render_depth(id, 10);
-                            set_hud_element_anim(id, bHPDigitHudScripts[ones]);
+                            hud_element_set_render_depth(id, 10);
+                            hud_element_set_script(id, bHPDigitHudScripts[ones]);
                             btl_draw_prim_quad(0, 0, 0, 0, screenX + 6, screenY + 2, 8, 8);
-                            set_hud_element_render_pos(id, screenX + 10, screenY + 6);
-                            draw_next_hud_element(id);
+                            hud_element_set_render_pos(id, screenX + 10, screenY + 6);
+                            hud_element_draw_next(id);
 
                             temp = enemy->hpFraction;
                             temp = 25 - temp;
@@ -883,26 +883,26 @@ void btl_update_starpoints_display(void) {
 
             for (i = 0; i < tens; i++) {
                 id = D_8029EFC0[i];
-                if (get_hud_element_anim(id) != HudScript_Item_StarPoint) {
-                    set_hud_element_anim(id, HudScript_Item_StarPoint);
+                if (hud_element_get_script(id) != HudScript_Item_StarPoint) {
+                    hud_element_set_script(id, HudScript_Item_StarPoint);
                 }
-                clear_hud_element_flags(id, 2);
-                set_hud_element_render_pos(id, posX, posY);
-                draw_hud_element_clipped(id);
+                hud_element_clear_flags(id, 2);
+                hud_element_set_render_pos(id, posX, posY);
+                hud_element_draw_clipped(id);
 
                 id = D_8029EFE8[i];
-                if (get_hud_element_anim(id) != HudScript_StatusSPShine) {
-                    set_hud_element_anim(id, HudScript_StatusSPShine);
+                if (hud_element_get_script(id) != HudScript_StatusSPShine) {
+                    hud_element_set_script(id, HudScript_StatusSPShine);
                 }
-                clear_hud_element_flags(id, 2);
-                set_hud_element_render_pos(id, posX, posY - 5);
-                draw_hud_element_clipped(id);
+                hud_element_clear_flags(id, 2);
+                hud_element_set_render_pos(id, posX, posY - 5);
+                hud_element_draw_clipped(id);
                 posX -= (one * 20.0f);
             }
 
            for (; i < ARRAY_COUNT(D_8029EFC0); i++) {
-                set_hud_element_flags(D_8029EFC0[i], 2);
-                set_hud_element_flags(D_8029EFE8[i], 2);
+                hud_element_set_flags(D_8029EFC0[i], 2);
+                hud_element_set_flags(D_8029EFE8[i], 2);
             }
 
             posX = D_8029DA40;
@@ -916,17 +916,17 @@ void btl_update_starpoints_display(void) {
 
             for (i = 0; i < ones; i++) {
                 id = D_8029F010[i];
-                if (get_hud_element_anim(id) != HudScript_Item_SmallStarPoint) {
-                    set_hud_element_anim(id, HudScript_Item_SmallStarPoint);
+                if (hud_element_get_script(id) != HudScript_Item_SmallStarPoint) {
+                    hud_element_set_script(id, HudScript_Item_SmallStarPoint);
                 }
-                clear_hud_element_flags(id, 2);
-                set_hud_element_render_pos(id, posX, posY);
-                draw_hud_element_clipped(id);
+                hud_element_clear_flags(id, 2);
+                hud_element_set_render_pos(id, posX, posY);
+                hud_element_draw_clipped(id);
                 posX -= one * 10.0f;
             }
 
             for (; i < ARRAY_COUNT(D_8029F010); i++) {
-                set_hud_element_flags(D_8029F010[i], 2);
+                hud_element_set_flags(D_8029F010[i], 2);
             }
         }
     }

@@ -28,14 +28,14 @@ void N(func_802A123C_72C7EC)(void) {
                 var2 = *ptr;
                 var = (D_802A25EC / 100) - 0x68;
                 ptr++;
-                set_hud_element_render_pos(var2, 0x7C, (i * 0x1A) - var);
-                draw_hud_element_without_clipping(var2);
+                hud_element_set_render_pos(var2, 0x7C, (i * 0x1A) - var);
+                hud_element_draw_without_clipping(var2);
             }
 
             var2 = D_802A25C8;
             var = (D_802A25EC / 100) - 0x68;
-            set_hud_element_render_pos(var2, 0x7C, (i * 0x1A) - var);
-            draw_hud_element_without_clipping(var2);
+            hud_element_set_render_pos(var2, 0x7C, (i * 0x1A) - var);
+            hud_element_draw_without_clipping(var2);
         }
     }
 }
@@ -92,9 +92,9 @@ ApiStatus N(func_802A13E4_72C994)(Evt* script, s32 isInitialCall) {
             itemTable = gItemTable;
             iconPtr = &D_802A25C8;
             for (; i < 7; i++, iconPtr++) {
-                icon = create_hud_element(ic[itemTable[D_802A25FC[i]].iconID].iconId);
+                icon = hud_element_create(ic[itemTable[D_802A25FC[i]].iconID].iconId);
                 *iconPtr = icon;
-                set_hud_element_flags(icon, HUD_ELEMENT_FLAGS_80);
+                hud_element_set_flags(icon, HUD_ELEMENT_FLAGS_80);
             }
             D_802A25E4 = 1;
         }
@@ -199,7 +199,7 @@ ApiStatus N(func_802A13E4_72C994)(Evt* script, s32 isInitialCall) {
             script->varTable[0] = g;
             free_generic_entity(D_802A25F8);
             for (i = 0; i < 7; i++) {
-                free_hud_element(*iconPtr++);
+                hud_element_free(*iconPtr++);
             }
         }
         return ApiStatus_DONE2;

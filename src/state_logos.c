@@ -69,7 +69,7 @@ void state_init_logos(void) {
     clear_animator_list();
     clear_entity_models();
     clear_npcs();
-    clear_hud_element_cache();
+    hud_element_clear_cache();
     reset_background_settings();
     clear_entity_data(1);
     clear_effect_data();

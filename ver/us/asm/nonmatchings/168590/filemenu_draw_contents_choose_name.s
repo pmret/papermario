@@ -215,11 +215,11 @@ glabel filemenu_draw_contents_choose_name
 /* 168E94 80248634 AFA9004C */  sw        $t1, 0x4c($sp)
 /* 168E98 80248638 AFAA0050 */  sw        $t2, 0x50($sp)
 /* 168E9C 8024863C 01723021 */  addu      $a2, $t3, $s2
-/* 168EA0 80248640 0C051261 */  jal       set_hud_element_render_pos
+/* 168EA0 80248640 0C051261 */  jal       hud_element_set_render_pos
 /* 168EA4 80248644 24C60008 */   addiu    $a2, $a2, 8
 /* 168EA8 80248648 3C048025 */  lui       $a0, %hi(D_8024C108)
 /* 168EAC 8024864C 8C84C108 */  lw        $a0, %lo(D_8024C108)($a0)
-/* 168EB0 80248650 0C0511F8 */  jal       draw_hud_element_without_clipping
+/* 168EB0 80248650 0C0511F8 */  jal       hud_element_draw_without_clipping
 /* 168EB4 80248654 00000000 */   nop
 /* 168EB8 80248658 0000182D */  daddu     $v1, $zero, $zero
 /* 168EBC 8024865C 8FAA0050 */  lw        $t2, 0x50($sp)
@@ -407,11 +407,11 @@ glabel filemenu_draw_contents_choose_name
 /* 169158 802488F8 24A50016 */  addiu     $a1, $a1, 0x16
 /* 16915C 802488FC AFA9004C */  sw        $t1, 0x4c($sp)
 /* 169160 80248900 01723021 */  addu      $a2, $t3, $s2
-/* 169164 80248904 0C051261 */  jal       set_hud_element_render_pos
+/* 169164 80248904 0C051261 */  jal       hud_element_set_render_pos
 /* 169168 80248908 24C60008 */   addiu    $a2, $a2, 8
 /* 16916C 8024890C 3C048025 */  lui       $a0, %hi(D_8024C108)
 /* 169170 80248910 8C84C108 */  lw        $a0, %lo(D_8024C108)($a0)
-/* 169174 80248914 0C0511F8 */  jal       draw_hud_element_without_clipping
+/* 169174 80248914 0C0511F8 */  jal       hud_element_draw_without_clipping
 /* 169178 80248918 00000000 */   nop
 /* 16917C 8024891C 0000182D */  daddu     $v1, $zero, $zero
 /* 169180 80248920 8FA9004C */  lw        $t1, 0x4c($sp)

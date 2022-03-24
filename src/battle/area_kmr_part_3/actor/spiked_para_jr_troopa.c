@@ -545,11 +545,11 @@ ApiStatus func_802189DC_447E1C(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     f32 posX = evt_get_float_variable(script, *args++);
     f32 posY = evt_get_float_variable(script, *args++);
-    s32 icon = create_hud_element(HudScript_AnimatedHandPointer);
+    s32 icon = hud_element_create(HudScript_AnimatedHandPointer);
 
-    set_hud_element_render_pos(icon, posX, posY);
-    set_hud_element_scale(icon, 1.5f);
-    clear_hud_element_flags(icon, HUD_ELEMENT_FLAGS_200000 | HUD_ELEMENT_FLAGS_DISABLED);
+    hud_element_set_render_pos(icon, posX, posY);
+    hud_element_set_scale(icon, 1.5f);
+    hud_element_clear_flags(icon, HUD_ELEMENT_FLAGS_200000 | HUD_ELEMENT_FLAGS_DISABLED);
     evt_set_variable(script, *args++, icon);
     load_tattle_flags(0x8B);
     return ApiStatus_DONE2;

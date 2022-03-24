@@ -191,13 +191,13 @@ glabel func_80240BB0_E16930
 /* E16BE0 80240E60 8EA4000C */  lw        $a0, 0xc($s5)
 /* E16BE4 80240E64 3C058011 */  lui       $a1, %hi(HudScript_AButton)
 /* E16BE8 80240E68 24A58B28 */  addiu     $a1, $a1, %lo(HudScript_AButton)
-/* E16BEC 80240E6C 0C0511FF */  jal       set_hud_element_anim
+/* E16BEC 80240E6C 0C0511FF */  jal       hud_element_set_script
 /* E16BF0 80240E70 00000000 */   nop
 /* E16BF4 80240E74 8EA4000C */  lw        $a0, 0xc($s5)
-/* E16BF8 80240E78 0C0513AC */  jal       set_hud_element_alpha
+/* E16BF8 80240E78 0C0513AC */  jal       hud_element_set_alpha
 /* E16BFC 80240E7C 240500A0 */   addiu    $a1, $zero, 0xa0
 /* E16C00 80240E80 8EA40010 */  lw        $a0, 0x10($s5)
-/* E16C04 80240E84 0C0513AC */  jal       set_hud_element_alpha
+/* E16C04 80240E84 0C0513AC */  jal       hud_element_set_alpha
 /* E16C08 80240E88 240500A0 */   addiu    $a1, $zero, 0xa0
 /* E16C0C 80240E8C 8EA20028 */  lw        $v0, 0x28($s5)
 /* E16C10 80240E90 0260202D */  daddu     $a0, $s3, $zero
@@ -404,13 +404,13 @@ glabel func_80240BB0_E16930
 /* E16F30 802411B0 8EA4000C */  lw        $a0, 0xc($s5)
 /* E16F34 802411B4 3C058011 */  lui       $a1, %hi(HudScript_MashAButton)
 /* E16F38 802411B8 24A58B80 */  addiu     $a1, $a1, %lo(HudScript_MashAButton)
-/* E16F3C 802411BC 0C0511FF */  jal       set_hud_element_anim
+/* E16F3C 802411BC 0C0511FF */  jal       hud_element_set_script
 /* E16F40 802411C0 00000000 */   nop
 /* E16F44 802411C4 8EA4000C */  lw        $a0, 0xc($s5)
-/* E16F48 802411C8 0C0513AC */  jal       set_hud_element_alpha
+/* E16F48 802411C8 0C0513AC */  jal       hud_element_set_alpha
 /* E16F4C 802411CC 240500FF */   addiu    $a1, $zero, 0xff
 /* E16F50 802411D0 8EA40010 */  lw        $a0, 0x10($s5)
-/* E16F54 802411D4 0C0513AC */  jal       set_hud_element_alpha
+/* E16F54 802411D4 0C0513AC */  jal       hud_element_set_alpha
 /* E16F58 802411D8 240500FF */   addiu    $a1, $zero, 0xff
 /* E16F5C 802411DC 2402000F */  addiu     $v0, $zero, 0xf
 /* E16F60 802411E0 080906CE */  j         .L80241B38_E178B8
@@ -452,13 +452,13 @@ glabel func_80240BB0_E16930
 /* E16FE8 80241268 8EA4000C */  lw        $a0, 0xc($s5)
 /* E16FEC 8024126C 3C058011 */  lui       $a1, %hi(HudScript_AButton)
 /* E16FF0 80241270 24A58B28 */  addiu     $a1, $a1, %lo(HudScript_AButton)
-/* E16FF4 80241274 0C0511FF */  jal       set_hud_element_anim
+/* E16FF4 80241274 0C0511FF */  jal       hud_element_set_script
 /* E16FF8 80241278 2694001C */   addiu    $s4, $s4, 0x1c
 /* E16FFC 8024127C 8EA4000C */  lw        $a0, 0xc($s5)
-/* E17000 80241280 0C0513AC */  jal       set_hud_element_alpha
+/* E17000 80241280 0C0513AC */  jal       hud_element_set_alpha
 /* E17004 80241284 240500A0 */   addiu    $a1, $zero, 0xa0
 /* E17008 80241288 8EA40010 */  lw        $a0, 0x10($s5)
-/* E1700C 8024128C 0C0513AC */  jal       set_hud_element_alpha
+/* E1700C 8024128C 0C0513AC */  jal       hud_element_set_alpha
 /* E17010 80241290 240500A0 */   addiu    $a1, $zero, 0xa0
 /* E17014 80241294 3C02002B */  lui       $v0, 0x2b
 /* E17018 80241298 C660003C */  lwc1      $f0, 0x3c($s3)

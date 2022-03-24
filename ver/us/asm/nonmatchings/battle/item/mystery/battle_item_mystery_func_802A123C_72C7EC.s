@@ -71,9 +71,9 @@ glabel battle_item_mystery_func_802A123C_72C7EC
 /* 72C8F0 802A1340 00083143 */  sra       $a2, $t0, 5
 /* 72C8F4 802A1344 00C23023 */  subu      $a2, $a2, $v0
 /* 72C8F8 802A1348 24C6FF98 */  addiu     $a2, $a2, -0x68
-/* 72C8FC 802A134C 0C051261 */  jal       set_hud_element_render_pos
+/* 72C8FC 802A134C 0C051261 */  jal       hud_element_set_render_pos
 /* 72C900 802A1350 02663023 */   subu     $a2, $s3, $a2
-/* 72C904 802A1354 0C0511F8 */  jal       draw_hud_element_without_clipping
+/* 72C904 802A1354 0C0511F8 */  jal       hud_element_draw_without_clipping
 /* 72C908 802A1358 0200202D */   daddu    $a0, $s0, $zero
 /* 72C90C 802A135C 2A220007 */  slti      $v0, $s1, 7
 /* 72C910 802A1360 1440FFED */  bnez      $v0, .L802A1318
@@ -97,9 +97,9 @@ glabel battle_item_mystery_func_802A123C_72C7EC
 /* 72C958 802A13A8 00081143 */  sra       $v0, $t0, 5
 /* 72C95C 802A13AC 00431023 */  subu      $v0, $v0, $v1
 /* 72C960 802A13B0 2442FF98 */  addiu     $v0, $v0, -0x68
-/* 72C964 802A13B4 0C051261 */  jal       set_hud_element_render_pos
+/* 72C964 802A13B4 0C051261 */  jal       hud_element_set_render_pos
 /* 72C968 802A13B8 00C23023 */   subu     $a2, $a2, $v0
-/* 72C96C 802A13BC 0C0511F8 */  jal       draw_hud_element_without_clipping
+/* 72C96C 802A13BC 0C0511F8 */  jal       hud_element_draw_without_clipping
 /* 72C970 802A13C0 0200202D */   daddu    $a0, $s0, $zero
 .L802A13C4:
 /* 72C974 802A13C4 8FBF0064 */  lw        $ra, 0x64($sp)
