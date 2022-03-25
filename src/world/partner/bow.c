@@ -4,7 +4,7 @@
 
 BSS s32 D_802BE0C0;
 BSS s32 D_802BE0C4;
-BSS unkPartnerStruct D_802BE0C8;
+BSS TweesterPhysics BowTweesterPhysics;
 BSS s32 D_802BE0E4;
 BSS s32 D_802BE0E8;
 BSS s32 D_802BE0EC;
@@ -20,7 +20,7 @@ void world_bow_init(Npc* bow) {
     D_802BE0C0 = FALSE;
 }
 
-ApiStatus func_802BD130_323A80(Evt* script, s32 isInitialCall) {
+ApiStatus BowTakeOut(Evt* script, s32 isInitialCall) {
     Npc* bow = script->owner2.npc;
 
     if (isInitialCall) {
@@ -31,27 +31,27 @@ ApiStatus func_802BD130_323A80(Evt* script, s32 isInitialCall) {
 }
 
 EvtScript world_bow_take_out = {
-    EVT_CALL(func_802BD130_323A80)
+    EVT_CALL(BowTakeOut)
     EVT_RETURN
     EVT_END
 };
 
-unkPartnerStruct* D_802BDFFC_32494C = &D_802BE0C8;
+TweesterPhysics* BowTweesterPhysicsPtr = &BowTweesterPhysics;
 
-ApiStatus func_802BD168_323AB8(Evt* script, s32 isInitialCall) {
+ApiStatus BowUpdate(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
     Npc* bow = script->owner2.npc;
+    f32 sinAngle, cosAngle, liftoffVelocity;
     Entity* entity;
-    f32 sp10, sp14, tempY;
 
     if (isInitialCall) {
         partner_flying_enable(bow, 1);
-        mem_clear(D_802BDFFC_32494C, sizeof(*D_802BDFFC_32494C));
-        D_8010C954 = NULL;
+        mem_clear(BowTweesterPhysicsPtr, sizeof(TweesterPhysics));
+        TweesterTouchingPartner = NULL;
     }
 
-    entity = D_8010C954;
-    playerData->partnerUsedTime[9]++;
+    entity = TweesterTouchingPartner;
+    playerData->partnerUsedTime[PARTNER_BOW]++;
 
     if (entity == NULL) {
         partner_flying_update_player_tracking(bow);
@@ -59,58 +59,58 @@ ApiStatus func_802BD168_323AB8(Evt* script, s32 isInitialCall) {
         return 0;
     }
 
-    switch (D_802BDFFC_32494C->unk_04){
+    switch (BowTweesterPhysicsPtr->state){
         case 0:
-            D_802BDFFC_32494C->unk_04 = 1;
-            D_802BDFFC_32494C->flags = bow->flags;
-            D_802BDFFC_32494C->unk_0C = fabsf(dist2D(bow->pos.x, bow->pos.z, entity->position.x, entity->position.z));
-            D_802BDFFC_32494C->unk_10 = atan2(entity->position.x, entity->position.z, bow->pos.x, bow->pos.z);
-            D_802BDFFC_32494C->unk_14 = 6.0f;
-            D_802BDFFC_32494C->unk_18 = 50.0f;
-            D_802BDFFC_32494C->unk_00 = 120;
+            BowTweesterPhysicsPtr->state = 1;
+            BowTweesterPhysicsPtr->prevFlags = bow->flags;
+            BowTweesterPhysicsPtr->radius = fabsf(dist2D(bow->pos.x, bow->pos.z, entity->position.x, entity->position.z));
+            BowTweesterPhysicsPtr->angle = atan2(entity->position.x, entity->position.z, bow->pos.x, bow->pos.z);
+            BowTweesterPhysicsPtr->angularVelocity = 6.0f;
+            BowTweesterPhysicsPtr->liftoffVelocityPhase = 50.0f;
+            BowTweesterPhysicsPtr->countdown = 120;
             bow->flags |= NPC_FLAG_40000 | NPC_FLAG_100 | NPC_FLAG_40 | NPC_FLAG_ENABLE_HIT_SCRIPT;
             bow->flags &= ~NPC_FLAG_GRAVITY;
         case 1:
-            sin_cos_rad((D_802BDFFC_32494C->unk_10 * TAU) / 360.0f, &sp10, &sp14);
-            bow->pos.x = entity->position.x + (sp10 * D_802BDFFC_32494C->unk_0C);
-            bow->pos.z = entity->position.z - (sp14 * D_802BDFFC_32494C->unk_0C);
-            D_802BDFFC_32494C->unk_10 = clamp_angle(D_802BDFFC_32494C->unk_10 - D_802BDFFC_32494C->unk_14);
-            if (D_802BDFFC_32494C->unk_0C > 20.0f) {
-                D_802BDFFC_32494C->unk_0C -= 1.0f;
-            } else if (D_802BDFFC_32494C->unk_0C < 19.0f) {
-                D_802BDFFC_32494C->unk_0C++;
+            sin_cos_rad((BowTweesterPhysicsPtr->angle * TAU) / 360.0f, &sinAngle, &cosAngle);
+            bow->pos.x = entity->position.x + (sinAngle * BowTweesterPhysicsPtr->radius);
+            bow->pos.z = entity->position.z - (cosAngle * BowTweesterPhysicsPtr->radius);
+            BowTweesterPhysicsPtr->angle = clamp_angle(BowTweesterPhysicsPtr->angle - BowTweesterPhysicsPtr->angularVelocity);
+            if (BowTweesterPhysicsPtr->radius > 20.0f) {
+                BowTweesterPhysicsPtr->radius -= 1.0f;
+            } else if (BowTweesterPhysicsPtr->radius < 19.0f) {
+                BowTweesterPhysicsPtr->radius++;
             }
 
-            tempY = sin_rad((D_802BDFFC_32494C->unk_18 * TAU) / 360.0f) * 3.0f;
-            D_802BDFFC_32494C->unk_18 += 3.0f;
+            liftoffVelocity = sin_rad((BowTweesterPhysicsPtr->liftoffVelocityPhase * TAU) / 360.0f) * 3.0f;
+            BowTweesterPhysicsPtr->liftoffVelocityPhase += 3.0f;
 
-            if (D_802BDFFC_32494C->unk_18 > 150.0f) {
-                D_802BDFFC_32494C->unk_18 = 150.0f;
+            if (BowTweesterPhysicsPtr->liftoffVelocityPhase > 150.0f) {
+                BowTweesterPhysicsPtr->liftoffVelocityPhase = 150.0f;
             }
 
-            bow->pos.y += tempY;
-            bow->renderYaw = clamp_angle(360.0f - D_802BDFFC_32494C->unk_10);
-            D_802BDFFC_32494C->unk_14 += 0.8;
+            bow->pos.y += liftoffVelocity;
+            bow->renderYaw = clamp_angle(360.0f - BowTweesterPhysicsPtr->angle);
+            BowTweesterPhysicsPtr->angularVelocity += 0.8;
 
-            if (D_802BDFFC_32494C->unk_14 > 40.0f) {
-                D_802BDFFC_32494C->unk_14 = 40.0f;
+            if (BowTweesterPhysicsPtr->angularVelocity > 40.0f) {
+                BowTweesterPhysicsPtr->angularVelocity = 40.0f;
             }
-            if (--D_802BDFFC_32494C->unk_00 == 0) {
-                D_802BDFFC_32494C->unk_04++;
+            if (--BowTweesterPhysicsPtr->countdown == 0) {
+                BowTweesterPhysicsPtr->state++;
             }
             break;
         case 2:
-            bow->flags = D_802BDFFC_32494C->flags;
-            D_802BDFFC_32494C->unk_00 = 30;
-            D_802BDFFC_32494C->unk_04++;
+            bow->flags = BowTweesterPhysicsPtr->prevFlags;
+            BowTweesterPhysicsPtr->countdown = 30;
+            BowTweesterPhysicsPtr->state++;
             break;
         case 3:
             partner_flying_update_player_tracking(bow);
             partner_flying_update_motion(bow);
 
-            if (--D_802BDFFC_32494C->unk_00 == 0) {
-                D_802BDFFC_32494C->unk_04 = 0;
-                D_8010C954 = 0;
+            if (--BowTweesterPhysicsPtr->countdown == 0) {
+                BowTweesterPhysicsPtr->state = 0;
+                TweesterTouchingPartner = NULL;
             }
             break;
     }
@@ -118,16 +118,16 @@ ApiStatus func_802BD168_323AB8(Evt* script, s32 isInitialCall) {
 }
 
 EvtScript world_bow_update = {
-    EVT_CALL(func_802BD168_323AB8)
+    EVT_CALL(BowUpdate)
     EVT_RETURN
     EVT_END
 };
 
 void func_802BD4FC_323E4C(Npc* bow) {
-    if (D_8010C954 != NULL) {
-        D_8010C954 = NULL;
-        bow->flags = D_802BDFFC_32494C->flags;
-        D_802BDFFC_32494C->unk_04 = 0;
+    if (TweesterTouchingPartner != NULL) {
+        TweesterTouchingPartner = NULL;
+        bow->flags = BowTweesterPhysicsPtr->prevFlags;
+        BowTweesterPhysicsPtr->state = 0;
         partner_clear_player_tracking(bow);
     }
 }
@@ -160,7 +160,7 @@ s32 func_802BD540_323E90(void) {
 INCLUDE_ASM(s32, "world/partner/bow", func_802BD540_323E90);
 #endif
 
-ApiStatus func_802BD694_323FE4(Evt* script, s32 isInitialCall) {
+ApiStatus BowUseAbility(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
     CollisionStatus* collisionStatus = &gCollisionStatus;
@@ -344,7 +344,7 @@ ApiStatus func_802BD694_323FE4(Evt* script, s32 isInitialCall) {
 }
 
 EvtScript world_bow_use_ability = {
-    EVT_CALL(func_802BD694_323FE4)
+    EVT_CALL(BowUseAbility)
     EVT_RETURN
     EVT_END
 };

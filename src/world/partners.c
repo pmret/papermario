@@ -482,7 +482,7 @@ void partner_create_npc(void) {
         npc->scale.z = 0.0f;
     }
 
-    D_8010C954 = 0;
+    TweesterTouchingPartner = NULL;
 }
 
 void partner_free_npc(void) {

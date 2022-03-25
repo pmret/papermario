@@ -45,7 +45,7 @@ void reset_player_status(void) {
     f32* floatsTemp;
 
     D_8010C96C = -1;
-    D_8010C954 = 0;
+    TweesterTouchingPartner = NULL;
     D_8010C920 = 0;
     D_8010C940 = 0;
     D_8010C958 = 0;
@@ -157,26 +157,26 @@ void player_input_to_move_vector(f32* angle, f32* magnitude) {
     *magnitude = mag;
 }
 
-void game_input_to_move_vector(f32* arg0, f32* arg1) {
+void game_input_to_move_vector(f32* outAngle, f32* outMagnitude) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 stickX = gGameStatusPtr->stickX;
     f32 stickY = -gGameStatusPtr->stickY;
-    f32 tempMax = 70.0f;
-    f32 temp1;
-    f32 temp2;
+    f32 maxRadius = 70.0f;
+    f32 magnitude;
+    f32 angle;
 
-    temp1 = dist2D(0.0f, 0.0f, stickX, stickY);
-    if (temp1 >= tempMax) {
-        temp1 = tempMax;
+    magnitude = dist2D(0.0f, 0.0f, stickX, stickY);
+    if (magnitude >= maxRadius) {
+        magnitude = maxRadius;
     }
 
-    temp2 = clamp_angle(atan2(0.0f, 0.0f, stickX, stickY) + gCameras[CAM_DEFAULT].currentYaw);
-    if (temp1 == 0.0f) {
-        temp2 = playerStatus->targetYaw;
+    angle = clamp_angle(atan2(0.0f, 0.0f, stickX, stickY) + gCameras[CAM_DEFAULT].currentYaw);
+    if (magnitude == 0.0f) {
+        angle = playerStatus->targetYaw;
     }
 
-    *arg0 = temp2;
-    *arg1 = temp1;
+    *outAngle = angle;
+    *outMagnitude = magnitude;
 }
 
 void func_800E24F8(void) {

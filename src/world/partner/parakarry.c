@@ -7,7 +7,7 @@ BSS s32 D_802BEBB8;
 BSS s32 D_802BEBBC;
 BSS s32 D_802BEBC0_31CBE0;
 BSS s32 D_802BEBC4;
-BSS unkPartnerStruct D_802BEBC8;
+BSS TweesterPhysics ParakarryTweesterPhysics;
 
 void world_parakarry_init(Npc* parakarry) {
     parakarry->collisionHeight = 37;
@@ -20,7 +20,7 @@ void world_parakarry_init(Npc* parakarry) {
     D_802BEBC4 = 0;
 }
 
-ApiStatus func_802BD148_3196B8(Evt* script, s32 isInitialCall) {
+ApiStatus ParakarryTakeOut(Evt* script, s32 isInitialCall) {
     Npc* parakarry = script->owner2.npc;
 
     if (isInitialCall) {
@@ -31,27 +31,27 @@ ApiStatus func_802BD148_3196B8(Evt* script, s32 isInitialCall) {
 }
 
 EvtScript world_parakarry_take_out = {
-    EVT_CALL(func_802BD148_3196B8)
+    EVT_CALL(ParakarryTakeOut)
     EVT_RETURN
     EVT_END
 };
 
-unkPartnerStruct* D_802BEAAC_31B01C = &D_802BEBC8;
+TweesterPhysics* ParakarryTweesterPhysicsPtr = &ParakarryTweesterPhysics;
 
-ApiStatus func_802BD180_3196F0(Evt* script, s32 isInitialCall) {
+ApiStatus ParakarryUpdate(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
-    Entity* entity;
     Npc* parakarry = script->owner2.npc;
-    f32 sp10, sp14, tempY;
+    f32 sinAngle, cosAngle, liftoffVelocity;
+    Entity* entity;
 
     if (isInitialCall) {
         partner_flying_enable(parakarry, 1);
-        mem_clear(D_802BEAAC_31B01C, sizeof(*D_802BEAAC_31B01C));
-        D_8010C954 = 0;
+        mem_clear(ParakarryTweesterPhysicsPtr, sizeof(TweesterPhysics));
+        TweesterTouchingPartner = NULL;
     }
 
-    playerData->partnerUsedTime[4]++;
-    entity = D_8010C954;
+    playerData->partnerUsedTime[PARTNER_PARAKARRY]++;
+    entity = TweesterTouchingPartner;
 
     if (entity == NULL) {
         partner_flying_update_player_tracking(parakarry);
@@ -59,62 +59,62 @@ ApiStatus func_802BD180_3196F0(Evt* script, s32 isInitialCall) {
         return ApiStatus_BLOCK;
     }
 
-    switch (D_802BEAAC_31B01C->unk_04) {
+    switch (ParakarryTweesterPhysicsPtr->state) {
         case 0:
-            D_802BEAAC_31B01C->unk_04 = 1;
-            D_802BEAAC_31B01C->flags = parakarry->flags;
-            D_802BEAAC_31B01C->unk_0C = fabsf(dist2D(parakarry->pos.x, parakarry->pos.z,
+            ParakarryTweesterPhysicsPtr->state = 1;
+            ParakarryTweesterPhysicsPtr->prevFlags = parakarry->flags;
+            ParakarryTweesterPhysicsPtr->radius = fabsf(dist2D(parakarry->pos.x, parakarry->pos.z,
                                                      entity->position.x, entity->position.z));
-            D_802BEAAC_31B01C->unk_10 = atan2(entity->position.x, entity->position.z,
+            ParakarryTweesterPhysicsPtr->angle = atan2(entity->position.x, entity->position.z,
                                               parakarry->pos.x, parakarry->pos.z);
-            D_802BEAAC_31B01C->unk_14 = 6.0f;
-            D_802BEAAC_31B01C->unk_18 = 50.0f;
-            D_802BEAAC_31B01C->unk_00 = 120;
+            ParakarryTweesterPhysicsPtr->angularVelocity = 6.0f;
+            ParakarryTweesterPhysicsPtr->liftoffVelocityPhase = 50.0f;
+            ParakarryTweesterPhysicsPtr->countdown = 120;
             parakarry->flags |= NPC_FLAG_40000 | NPC_FLAG_100 | NPC_FLAG_40 | NPC_FLAG_ENABLE_HIT_SCRIPT;
             parakarry->flags &= ~NPC_FLAG_GRAVITY;
         case 1:
-            sin_cos_rad((D_802BEAAC_31B01C->unk_10 * TAU) / 360.0f, &sp10, &sp14);
-            parakarry->pos.x = entity->position.x + (sp10 * D_802BEAAC_31B01C->unk_0C);
-            parakarry->pos.z = entity->position.z - (sp14 * D_802BEAAC_31B01C->unk_0C);
-            D_802BEAAC_31B01C->unk_10 = clamp_angle(D_802BEAAC_31B01C->unk_10 - D_802BEAAC_31B01C->unk_14);
+            sin_cos_rad((ParakarryTweesterPhysicsPtr->angle * TAU) / 360.0f, &sinAngle, &cosAngle);
+            parakarry->pos.x = entity->position.x + (sinAngle * ParakarryTweesterPhysicsPtr->radius);
+            parakarry->pos.z = entity->position.z - (cosAngle * ParakarryTweesterPhysicsPtr->radius);
+            ParakarryTweesterPhysicsPtr->angle = clamp_angle(ParakarryTweesterPhysicsPtr->angle - ParakarryTweesterPhysicsPtr->angularVelocity);
 
-            if (D_802BEAAC_31B01C->unk_0C > 20.0f) {
-                D_802BEAAC_31B01C->unk_0C--;
-            } else if (D_802BEAAC_31B01C->unk_0C < 19.0f) {
-                D_802BEAAC_31B01C->unk_0C++;
+            if (ParakarryTweesterPhysicsPtr->radius > 20.0f) {
+                ParakarryTweesterPhysicsPtr->radius--;
+            } else if (ParakarryTweesterPhysicsPtr->radius < 19.0f) {
+                ParakarryTweesterPhysicsPtr->radius++;
             }
 
-            tempY = sin_rad((D_802BEAAC_31B01C->unk_18 * TAU) / 360.0f) * 3.0f;
-            D_802BEAAC_31B01C->unk_18 += 3.0f;
+            liftoffVelocity = sin_rad((ParakarryTweesterPhysicsPtr->liftoffVelocityPhase * TAU) / 360.0f) * 3.0f;
+            ParakarryTweesterPhysicsPtr->liftoffVelocityPhase += 3.0f;
 
-            if (D_802BEAAC_31B01C->unk_18 > 150.0f) {
-                D_802BEAAC_31B01C->unk_18 = 150.0f;
+            if (ParakarryTweesterPhysicsPtr->liftoffVelocityPhase > 150.0f) {
+                ParakarryTweesterPhysicsPtr->liftoffVelocityPhase = 150.0f;
             }
 
-            parakarry->pos.y += tempY;
-            parakarry->renderYaw = clamp_angle(360.0f - D_802BEAAC_31B01C->unk_10);
-            D_802BEAAC_31B01C->unk_14 += 0.8;
+            parakarry->pos.y += liftoffVelocity;
+            parakarry->renderYaw = clamp_angle(360.0f - ParakarryTweesterPhysicsPtr->angle);
+            ParakarryTweesterPhysicsPtr->angularVelocity += 0.8;
 
-            if (D_802BEAAC_31B01C->unk_14 > 40.0f) {
-                D_802BEAAC_31B01C->unk_14 = 40.0f;
+            if (ParakarryTweesterPhysicsPtr->angularVelocity > 40.0f) {
+                ParakarryTweesterPhysicsPtr->angularVelocity = 40.0f;
             }
 
-            if (--D_802BEAAC_31B01C->unk_00 == 0) {
-                D_802BEAAC_31B01C->unk_04++;
+            if (--ParakarryTweesterPhysicsPtr->countdown == 0) {
+                ParakarryTweesterPhysicsPtr->state++;
             }
             break;
         case 2:
-            parakarry->flags = D_802BEAAC_31B01C->flags;
-            D_802BEAAC_31B01C->unk_00 = 30;
-            D_802BEAAC_31B01C->unk_04++;
+            parakarry->flags = ParakarryTweesterPhysicsPtr->prevFlags;
+            ParakarryTweesterPhysicsPtr->countdown = 30;
+            ParakarryTweesterPhysicsPtr->state++;
             break;
         case 3:
             partner_flying_update_player_tracking(parakarry);
             partner_flying_update_motion(parakarry);
 
-            if (--D_802BEAAC_31B01C->unk_00 == 0) {
-                D_802BEAAC_31B01C->unk_04 = 0;
-                D_8010C954 = 0;
+            if (--ParakarryTweesterPhysicsPtr->countdown == 0) {
+                ParakarryTweesterPhysicsPtr->state = 0;
+                TweesterTouchingPartner = NULL;
             }
             break;
     }
@@ -122,16 +122,16 @@ ApiStatus func_802BD180_3196F0(Evt* script, s32 isInitialCall) {
 }
 
 EvtScript world_parakarry_update = {
-    EVT_CALL(func_802BD180_3196F0)
+    EVT_CALL(ParakarryUpdate)
     EVT_RETURN
     EVT_END
 };
 
 void func_802BD514_319A84(Npc* parakarry) {
-    if (D_8010C954) {
-        D_8010C954 = 0;
-        parakarry->flags = D_802BEAAC_31B01C->flags;
-        D_802BEAAC_31B01C->unk_04 = 0;
+    if (TweesterTouchingPartner) {
+        TweesterTouchingPartner = NULL;
+        parakarry->flags = ParakarryTweesterPhysicsPtr->prevFlags;
+        ParakarryTweesterPhysicsPtr->state = 0;
         partner_clear_player_tracking (parakarry);
     }
 }
@@ -167,7 +167,7 @@ EvtScript world_parakarry_use_ability = {
     EVT_END
 };
 
-ApiStatus func_802BE8D4_31AE44(Evt* script, s32 isInitialCall) {
+ApiStatus ParakarryPutAway(Evt* script, s32 isInitialCall) {
     Npc* parakarry = script->owner2.npc;
 
     if (isInitialCall) {
@@ -178,7 +178,7 @@ ApiStatus func_802BE8D4_31AE44(Evt* script, s32 isInitialCall) {
 }
 
 EvtScript world_parakarry_put_away = {
-    EVT_CALL(func_802BE8D4_31AE44)
+    EVT_CALL(ParakarryPutAway)
     EVT_RETURN
     EVT_END
 };

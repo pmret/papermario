@@ -193,8 +193,8 @@ glabel func_802BBA60_E303B0
 /* E30650 802BBD00 00431024 */  and       $v0, $v0, $v1
 /* E30654 802BBD04 10400003 */  beqz      $v0, .L802BBD14
 /* E30658 802BBD08 00000000 */   nop
-/* E3065C 802BBD0C 3C018011 */  lui       $at, %hi(D_8010C954)
-/* E30660 802BBD10 AC31C954 */  sw        $s1, %lo(D_8010C954)($at)
+/* E3065C 802BBD0C 3C018011 */  lui       $at, %hi(TweesterTouchingPartner)
+/* E30660 802BBD10 AC31C954 */  sw        $s1, %lo(TweesterTouchingPartner)($at)
 .L802BBD14:
 /* E30664 802BBD14 0C04D07A */  jal       is_picking_up_item
 /* E30668 802BBD18 00000000 */   nop

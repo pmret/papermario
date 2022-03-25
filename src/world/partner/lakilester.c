@@ -16,7 +16,7 @@ BSS s32 D_802BFF20;
 BSS s32 D_802BFF24;
 BSS f32 D_802BFF28;
 BSS s32 D_802BFF2C;
-BSS unkPartnerStruct D_802BFF30;
+BSS TweesterPhysics LakilesterTweesterPhysics;
 
 f32 get_player_normal_pitch(void);
 void partner_kill_ability_script(void);
@@ -81,25 +81,23 @@ EvtScript world_lakilester_take_out = {
     EVT_END
 };
 
-unkPartnerStruct* D_802BFE7C_3239CC = &D_802BFF30;
+TweesterPhysics* LakilesterTweesterPhysicsPtr = &LakilesterTweesterPhysics;
 
 ApiStatus func_802BD2D4_320E24(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
     Npc* lakilester = script->owner2.npc;
+    f32 sinAngle, cosAngle, liftoffVelocity;
     Entity* entity;
-    f32 sp10;
-    f32 sp14;
-    f32 tempY;
 
     if (isInitialCall) {
         partner_flying_enable(lakilester, 1);
-        mem_clear(D_802BFE7C_3239CC, sizeof(*D_802BFE7C_3239CC));
-        D_8010C954 = NULL;
+        mem_clear(LakilesterTweesterPhysicsPtr, sizeof(TweesterPhysics));
+        TweesterTouchingPartner = NULL;
     }
 
-    playerData->partnerUsedTime[8]++;
+    playerData->partnerUsedTime[PARTNER_LAKILESTER]++;
     lakilester->flags |= NPC_FLAG_DIRTY_SHADOW;
-    entity = D_8010C954;
+    entity = TweesterTouchingPartner;
 
     if (entity == NULL) {
         partner_flying_update_player_tracking(lakilester);
@@ -107,60 +105,60 @@ ApiStatus func_802BD2D4_320E24(Evt* script, s32 isInitialCall) {
         return ApiStatus_BLOCK;
     }
 
-    switch (D_802BFE7C_3239CC->unk_04) {
+    switch (LakilesterTweesterPhysicsPtr->state) {
         case 0:
-            D_802BFE7C_3239CC->unk_04 = 1;
-            D_802BFE7C_3239CC->flags = lakilester->flags;
-            D_802BFE7C_3239CC->unk_0C = fabsf(dist2D(lakilester->pos.x, lakilester->pos.z, entity->position.x, entity->position.z));
-            D_802BFE7C_3239CC->unk_10 = atan2(entity->position.x, entity->position.z, lakilester->pos.x, lakilester->pos.z);
-            D_802BFE7C_3239CC->unk_14 = 6.0f;
-            D_802BFE7C_3239CC->unk_18 = 50.0f;
-            D_802BFE7C_3239CC->unk_00 = 120;
+            LakilesterTweesterPhysicsPtr->state = 1;
+            LakilesterTweesterPhysicsPtr->prevFlags = lakilester->flags;
+            LakilesterTweesterPhysicsPtr->radius = fabsf(dist2D(lakilester->pos.x, lakilester->pos.z, entity->position.x, entity->position.z));
+            LakilesterTweesterPhysicsPtr->angle = atan2(entity->position.x, entity->position.z, lakilester->pos.x, lakilester->pos.z);
+            LakilesterTweesterPhysicsPtr->angularVelocity = 6.0f;
+            LakilesterTweesterPhysicsPtr->liftoffVelocityPhase = 50.0f;
+            LakilesterTweesterPhysicsPtr->countdown = 120;
             lakilester->flags |= NPC_FLAG_40000 | NPC_FLAG_100 | NPC_FLAG_40 | NPC_FLAG_ENABLE_HIT_SCRIPT;
             lakilester->flags &= ~NPC_FLAG_GRAVITY;
         case 1:
-            sin_cos_rad((D_802BFE7C_3239CC->unk_10 * TAU) / 360.0f, &sp10, &sp14);
-            lakilester->pos.x = entity->position.x + (sp10 * D_802BFE7C_3239CC->unk_0C);
-            lakilester->pos.z = entity->position.z - (sp14 * D_802BFE7C_3239CC->unk_0C);
-            D_802BFE7C_3239CC->unk_10 = clamp_angle(D_802BFE7C_3239CC->unk_10 - D_802BFE7C_3239CC->unk_14);
+            sin_cos_rad((LakilesterTweesterPhysicsPtr->angle * TAU) / 360.0f, &sinAngle, &cosAngle);
+            lakilester->pos.x = entity->position.x + (sinAngle * LakilesterTweesterPhysicsPtr->radius);
+            lakilester->pos.z = entity->position.z - (cosAngle * LakilesterTweesterPhysicsPtr->radius);
+            LakilesterTweesterPhysicsPtr->angle = clamp_angle(LakilesterTweesterPhysicsPtr->angle - LakilesterTweesterPhysicsPtr->angularVelocity);
 
-            if (D_802BFE7C_3239CC->unk_0C > 20.0f) {
-                D_802BFE7C_3239CC->unk_0C--;
-            } else if (D_802BFE7C_3239CC->unk_0C < 19.0f) {
-                D_802BFE7C_3239CC->unk_0C++;
+            if (LakilesterTweesterPhysicsPtr->radius > 20.0f) {
+                LakilesterTweesterPhysicsPtr->radius--;
+            } else if (LakilesterTweesterPhysicsPtr->radius < 19.0f) {
+                LakilesterTweesterPhysicsPtr->radius++;
             }
 
-            tempY = sin_rad((D_802BFE7C_3239CC->unk_18 * TAU) / 360.0f) * 3.0f;
-            D_802BFE7C_3239CC->unk_18 += 3.0f;
+            liftoffVelocity = sin_rad((LakilesterTweesterPhysicsPtr->liftoffVelocityPhase * TAU) / 360.0f) * 3.0f;
+            LakilesterTweesterPhysicsPtr->liftoffVelocityPhase += 3.0f;
 
-            if (D_802BFE7C_3239CC->unk_18 > 150.0f) {
-                D_802BFE7C_3239CC->unk_18 = 150.0f;
+            if (LakilesterTweesterPhysicsPtr->liftoffVelocityPhase > 150.0f) {
+                LakilesterTweesterPhysicsPtr->liftoffVelocityPhase = 150.0f;
             }
 
-            lakilester->pos.y += tempY;
-            lakilester->renderYaw = clamp_angle(360.0f - D_802BFE7C_3239CC->unk_10);
-            D_802BFE7C_3239CC->unk_14 += 0.8;
+            lakilester->pos.y += liftoffVelocity;
+            lakilester->renderYaw = clamp_angle(360.0f - LakilesterTweesterPhysicsPtr->angle);
+            LakilesterTweesterPhysicsPtr->angularVelocity += 0.8;
 
-            if (D_802BFE7C_3239CC->unk_14 > 40.0f) {
-                D_802BFE7C_3239CC->unk_14 = 40.0f;
+            if (LakilesterTweesterPhysicsPtr->angularVelocity > 40.0f) {
+                LakilesterTweesterPhysicsPtr->angularVelocity = 40.0f;
             }
 
-            if (--D_802BFE7C_3239CC->unk_00 == 0) {
-                D_802BFE7C_3239CC->unk_04++;
+            if (--LakilesterTweesterPhysicsPtr->countdown == 0) {
+                LakilesterTweesterPhysicsPtr->state++;
             }
             break;
         case 2:
-            lakilester->flags = D_802BFE7C_3239CC->flags;
-            D_802BFE7C_3239CC->unk_00 = 30;
-            D_802BFE7C_3239CC->unk_04++;
+            lakilester->flags = LakilesterTweesterPhysicsPtr->prevFlags;
+            LakilesterTweesterPhysicsPtr->countdown = 30;
+            LakilesterTweesterPhysicsPtr->state++;
             break;
         case 3:
             partner_flying_update_player_tracking(lakilester);
             partner_flying_update_motion(lakilester);
 
-            if (--D_802BFE7C_3239CC->unk_00 == 0) {
-                D_802BFE7C_3239CC->unk_04 = 0;
-                D_8010C954 = NULL;
+            if (--LakilesterTweesterPhysicsPtr->countdown == 0) {
+                LakilesterTweesterPhysicsPtr->state = 0;
+                TweesterTouchingPartner = NULL;
             }
             break;
     }
@@ -174,32 +172,30 @@ EvtScript world_lakilester_update = {
 };
 
 void func_802BD678_3211C8(Npc* npc) {
-    if (D_8010C954 != NULL) {
-        D_8010C954 = NULL;
-        npc->flags = D_802BFE7C_3239CC->flags;
-        D_802BFE7C_3239CC->unk_04 = 0;
+    if (TweesterTouchingPartner != NULL) {
+        TweesterTouchingPartner = NULL;
+        npc->flags = LakilesterTweesterPhysicsPtr->prevFlags;
+        LakilesterTweesterPhysicsPtr->state = 0;
         partner_clear_player_tracking(npc);
     }
 }
 
-void func_802BD6BC_32120C(f32* arg0, f32* arg1) {
+void func_802BD6BC_32120C(f32* outAngle, f32* outMagnitude) {
     PartnerActionStatus* lakilesterActionStatus = &gPartnerActionStatus;
-    f32 temp_f24 = lakilesterActionStatus->stickX;
-    f32 temp_f26 = lakilesterActionStatus->stickY;
-    f32 temp_f22 = -temp_f26;
-    f32 atan = atan2(0.0f, 0.0f, temp_f24, temp_f22);
-    f32 temp = clamp_angle(atan + gCameras->currentYaw);
-    f32 phi_f20 = 0.0f;
+    f32 stickX = lakilesterActionStatus->stickX;
+    f32 stickY = lakilesterActionStatus->stickY;
+    f32 angle = clamp_angle(atan2(0.0f, 0.0f, stickX, -stickY) + gCameras->currentYaw);
+    f32 magnitude = 0.0f;
 
-    if (dist2D(0.0f, 0.0f, temp_f24, temp_f22) >= 1.0) {
-        phi_f20 = 3.0f;
-        if (SQ(temp_f24) + SQ(temp_f26) > 3025.0f) {
-            phi_f20 = 6.0f;
+    if (dist2D(0.0f, 0.0f, stickX, -stickY) >= 1.0) {
+        magnitude = 3.0f;
+        if (SQ(stickX) + SQ(stickY) > 3025.0f) {
+            magnitude = 6.0f;
         }
     }
 
-    *arg0 = temp;
-    *arg1 = phi_f20;
+    *outAngle = angle;
+    *outMagnitude = magnitude;
 }
 
 s32 func_802BD7DC(void) {

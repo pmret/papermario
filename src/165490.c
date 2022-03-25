@@ -162,7 +162,7 @@ void filemenu_draw_contents_file_info(s32 fileIdx,
     s32 i;
     const int MAX_DISPLAYED_TIME = 100*60*60*60 - 1; // 100 hours minus one frame at 60 fps
 
-    if (gSaveSlotHasData[fileIdx] == 0) {
+    if (!gSaveSlotHasData[fileIdx]) {
         filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_NEW), baseX + 50, baseY + 20, 0xFF, 0xA, 0);
         return;
     }
@@ -223,7 +223,7 @@ void filemenu_draw_contents_file_title(
 
     filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_FILE_26), baseX + 5, baseY + 1, 255, 0, 1);
 
-    if (gSaveSlotHasData[fileIdx] == 0) {
+    if (!gSaveSlotHasData[fileIdx]) {
         draw_number(fileIdx + 1, baseX + 33, baseY + 1, 1, 0, 255, 2);
     } else {
         draw_number(fileIdx + 1, baseX + 33, baseY + 1, 1, 0, 255, 2);
@@ -486,7 +486,7 @@ void filemenu_main_handle_input(MenuPanel* menu) {
 
         switch (menu->page) {
             case 0:
-                if (menu->selected < 4 && gSaveSlotHasData[menu->selected] == 0) {
+                if (menu->selected < 4 && !gSaveSlotHasData[menu->selected] == 0) {
                     cond = TRUE;
                 }
 

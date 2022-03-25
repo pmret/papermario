@@ -2,24 +2,13 @@
 #include "../partners.h"
 #include "npc.h"
 
-typedef struct TweesterPhysicsState {
-    /* 0x000 */ s32 countdown;
-    /* 0x004 */ char unk_04[8];
-    /* 0x00C */ f32 radius;
-    /* 0x010 */ f32 angle;
-    /* 0x014 */ f32 angularVelocity;
-    /* 0x018 */ f32 liftoffVelocityPhase;
-} TweesterPhysicsState;
-
 extern Entity* TweesterTouchingPlayer;
-extern struct TweesterPhysicsState* TweesterPhysics;
+extern struct TweesterPhysics* PlayerTweesterPhysics;
 
 void func_802B6000_E2A340(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
+    f32 sinAngle, cosAngle, liftoffVelocity;
     Entity* entity;
-    f32 sinAngle;
-    f32 cosAngle;
-    f32 velY;
 
     entity = TweesterTouchingPlayer;
     if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
@@ -29,43 +18,43 @@ void func_802B6000_E2A340(void) {
         playerStatus->flags |= (PLAYER_STATUS_FLAGS_100000 | PLAYER_STATUS_FLAGS_FLYING);
         suggest_player_anim_clearUnkFlag(0x8001F);
         playerStatus->fallState = 0;
-        mem_clear(TweesterPhysics, sizeof(*TweesterPhysics));
-        TweesterPhysics->radius = fabsf(dist2D(playerStatus->position.x, playerStatus->position.z, entity->position.x, entity->position.z));
-        TweesterPhysics->angle = atan2(entity->position.x, entity->position.z, playerStatus->position.x, playerStatus->position.z);
-        TweesterPhysics->angularVelocity = 6.0f;
-        TweesterPhysics->liftoffVelocityPhase = 50.0f;
-        TweesterPhysics->countdown = 0x78;
+        mem_clear(PlayerTweesterPhysics, sizeof(TweesterPhysics));
+        PlayerTweesterPhysics->radius = fabsf(dist2D(playerStatus->position.x, playerStatus->position.z, entity->position.x, entity->position.z));
+        PlayerTweesterPhysics->angle = atan2(entity->position.x, entity->position.z, playerStatus->position.x, playerStatus->position.z);
+        PlayerTweesterPhysics->angularVelocity = 6.0f;
+        PlayerTweesterPhysics->liftoffVelocityPhase = 50.0f;
+        PlayerTweesterPhysics->countdown = 0x78;
         sfx_play_sound_at_player(SOUND_2F6, 0);
     }
 
     switch (playerStatus->fallState) {
         case 0:
-            sin_cos_rad((TweesterPhysics->angle * TAU) / 360.0f, &sinAngle, &cosAngle);
+            sin_cos_rad((PlayerTweesterPhysics->angle * TAU) / 360.0f, &sinAngle, &cosAngle);
 
-            playerStatus->position.x = entity->position.x + (sinAngle * TweesterPhysics->radius);
-            playerStatus->position.z = entity->position.z - (cosAngle * TweesterPhysics->radius);
+            playerStatus->position.x = entity->position.x + (sinAngle * PlayerTweesterPhysics->radius);
+            playerStatus->position.z = entity->position.z - (cosAngle * PlayerTweesterPhysics->radius);
 
-            TweesterPhysics->angle = clamp_angle(TweesterPhysics->angle - TweesterPhysics->angularVelocity);
+            PlayerTweesterPhysics->angle = clamp_angle(PlayerTweesterPhysics->angle - PlayerTweesterPhysics->angularVelocity);
 
-            if (TweesterPhysics->radius > 20.0f) {
-                TweesterPhysics->radius--;
-            } else if (TweesterPhysics->radius < 19.0f) {
-                TweesterPhysics->radius++;
+            if (PlayerTweesterPhysics->radius > 20.0f) {
+                PlayerTweesterPhysics->radius--;
+            } else if (PlayerTweesterPhysics->radius < 19.0f) {
+                PlayerTweesterPhysics->radius++;
             }
 
-            velY = sin_rad((TweesterPhysics->liftoffVelocityPhase * TAU) / 360.0f)  * 3.0f;
-            TweesterPhysics->liftoffVelocityPhase += 3.0f;
-            if (TweesterPhysics->liftoffVelocityPhase > 150.0f) {
-                TweesterPhysics->liftoffVelocityPhase = 150.0f;
+            liftoffVelocity = sin_rad((PlayerTweesterPhysics->liftoffVelocityPhase * TAU) / 360.0f)  * 3.0f;
+            PlayerTweesterPhysics->liftoffVelocityPhase += 3.0f;
+            if (PlayerTweesterPhysics->liftoffVelocityPhase > 150.0f) {
+                PlayerTweesterPhysics->liftoffVelocityPhase = 150.0f;
             }
 
-            playerStatus->position.y += velY;
-            playerStatus->spriteFacingAngle = clamp_angle(360.0f - TweesterPhysics->angle);
-            TweesterPhysics->angularVelocity += 0.6;
-            if (TweesterPhysics->angularVelocity > 40.0f) {
-                TweesterPhysics->angularVelocity = 40.0f;
+            playerStatus->position.y += liftoffVelocity;
+            playerStatus->spriteFacingAngle = clamp_angle(360.0f - PlayerTweesterPhysics->angle);
+            PlayerTweesterPhysics->angularVelocity += 0.6;
+            if (PlayerTweesterPhysics->angularVelocity > 40.0f) {
+                PlayerTweesterPhysics->angularVelocity = 40.0f;
             }
-            if (--TweesterPhysics->countdown == 0) {
+            if (--PlayerTweesterPhysics->countdown == 0) {
                 playerStatus->fallState++;
                 entity_start_script(entity);
             }

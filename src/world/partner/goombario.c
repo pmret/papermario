@@ -7,7 +7,7 @@ BSS s32 D_802BDF30;
 BSS s32 D_802BDF34;
 BSS s32 D_802BDF38;
 BSS s32 D_802BDF3C;
-BSS unkPartnerStruct D_802BDF40;
+BSS TweesterPhysics GoombarioTweesterPhysics;
 BSS s32 D_802BDF5C;
 BSS s32 GoombarioGetTattleID;
 BSS s32 D_802BDF64;
@@ -60,22 +60,22 @@ EvtScript world_goombario_take_out = {
     EVT_END
 };
 
-unkPartnerStruct* D_802BDD88_317CA8 = &D_802BDF40;
+TweesterPhysics* GoombarioTweesterPhysicsPtr = &GoombarioTweesterPhysics;
 
 s32 func_802BD1D0_3170F0(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
     Npc* npc = script->owner2.npc;
+    f32 sinAngle, cosAngle, liftoffVelocity;
     Entity* entity;
-    f32 sp10, sp14, tempY;
 
     if (isInitialCall) {
         partner_walking_enable(npc, 1);
-        mem_clear(D_802BDD88_317CA8, sizeof(*D_802BDD88_317CA8));
-        D_8010C954 = 0;
+        mem_clear(GoombarioTweesterPhysicsPtr, sizeof(TweesterPhysics));
+        TweesterTouchingPartner = NULL;
     }
 
-    playerData->partnerUsedTime[1]++;
-    entity = D_8010C954;
+    playerData->partnerUsedTime[PARTNER_GOOMBARIO]++;
+    entity = TweesterTouchingPartner;
 
     if (entity == NULL) {
         partner_walking_update_player_tracking(npc);
@@ -83,62 +83,62 @@ s32 func_802BD1D0_3170F0(Evt* script, s32 isInitialCall) {
         return 0;
     }
 
-    switch (D_802BDD88_317CA8->unk_04) {
+    switch (GoombarioTweesterPhysicsPtr->state) {
         case 0:
-            D_802BDD88_317CA8->unk_04 = 1;
-            D_802BDD88_317CA8->flags = npc->flags;
-            D_802BDD88_317CA8->unk_0C = fabsf(dist2D(npc->pos.x, npc->pos.z, entity->position.x, entity->position.z));
-            D_802BDD88_317CA8->unk_10 = atan2(entity->position.x, entity->position.z, npc->pos.x, npc->pos.z);
-            D_802BDD88_317CA8->unk_14 = 6.0f;
-            D_802BDD88_317CA8->unk_18 = 50.0f;
-            D_802BDD88_317CA8->unk_00 = 120;
+            GoombarioTweesterPhysicsPtr->state = 1;
+            GoombarioTweesterPhysicsPtr->prevFlags = npc->flags;
+            GoombarioTweesterPhysicsPtr->radius = fabsf(dist2D(npc->pos.x, npc->pos.z, entity->position.x, entity->position.z));
+            GoombarioTweesterPhysicsPtr->angle = atan2(entity->position.x, entity->position.z, npc->pos.x, npc->pos.z);
+            GoombarioTweesterPhysicsPtr->angularVelocity = 6.0f;
+            GoombarioTweesterPhysicsPtr->liftoffVelocityPhase = 50.0f;
+            GoombarioTweesterPhysicsPtr->countdown = 120;
             npc->flags |= NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_100 | NPC_FLAG_40000;
             npc->flags &= ~NPC_FLAG_GRAVITY;
         case 1:
-            sin_cos_rad((D_802BDD88_317CA8->unk_10 * TAU) / 360.0f, &sp10, &sp14);
+            sin_cos_rad((GoombarioTweesterPhysicsPtr->angle * TAU) / 360.0f, &sinAngle, &cosAngle);
 
-            npc->pos.x = entity->position.x + (sp10 * D_802BDD88_317CA8->unk_0C);
-            npc->pos.z = entity->position.z - (sp14 * D_802BDD88_317CA8->unk_0C);
-            D_802BDD88_317CA8->unk_10 = clamp_angle(D_802BDD88_317CA8->unk_10 - D_802BDD88_317CA8->unk_14);
+            npc->pos.x = entity->position.x + (sinAngle * GoombarioTweesterPhysicsPtr->radius);
+            npc->pos.z = entity->position.z - (cosAngle * GoombarioTweesterPhysicsPtr->radius);
+            GoombarioTweesterPhysicsPtr->angle = clamp_angle(GoombarioTweesterPhysicsPtr->angle - GoombarioTweesterPhysicsPtr->angularVelocity);
 
-            if (D_802BDD88_317CA8->unk_0C > 20.0f) {
-                D_802BDD88_317CA8->unk_0C--;
-            } else if (D_802BDD88_317CA8->unk_0C < 19.0f) {
-                D_802BDD88_317CA8->unk_0C++;
+            if (GoombarioTweesterPhysicsPtr->radius > 20.0f) {
+                GoombarioTweesterPhysicsPtr->radius--;
+            } else if (GoombarioTweesterPhysicsPtr->radius < 19.0f) {
+                GoombarioTweesterPhysicsPtr->radius++;
             }
 
-            tempY = sin_rad((D_802BDD88_317CA8->unk_18 * TAU) / 360.0f) * 3.0f;
-            D_802BDD88_317CA8->unk_18 += 3.0f;
+            liftoffVelocity = sin_rad((GoombarioTweesterPhysicsPtr->liftoffVelocityPhase * TAU) / 360.0f) * 3.0f;
+            GoombarioTweesterPhysicsPtr->liftoffVelocityPhase += 3.0f;
 
-            if (D_802BDD88_317CA8->unk_18 > 150.0f) {
-                D_802BDD88_317CA8->unk_18 = 150.0f;
+            if (GoombarioTweesterPhysicsPtr->liftoffVelocityPhase > 150.0f) {
+                GoombarioTweesterPhysicsPtr->liftoffVelocityPhase = 150.0f;
             }
 
-            npc->pos.y += tempY;
+            npc->pos.y += liftoffVelocity;
 
-            npc->renderYaw = clamp_angle(360.0f - D_802BDD88_317CA8->unk_10);
-            D_802BDD88_317CA8->unk_14 += 0.8;
+            npc->renderYaw = clamp_angle(360.0f - GoombarioTweesterPhysicsPtr->angle);
+            GoombarioTweesterPhysicsPtr->angularVelocity += 0.8;
 
-            if (D_802BDD88_317CA8->unk_14 > 40.0f) {
-                D_802BDD88_317CA8->unk_14 = 40.0f;
+            if (GoombarioTweesterPhysicsPtr->angularVelocity > 40.0f) {
+                GoombarioTweesterPhysicsPtr->angularVelocity = 40.0f;
             }
 
-            if (--D_802BDD88_317CA8->unk_00 == 0) {
-                D_802BDD88_317CA8->unk_04++;
+            if (--GoombarioTweesterPhysicsPtr->countdown == 0) {
+                GoombarioTweesterPhysicsPtr->state++;
             }
             break;
         case 2:
-            npc->flags = D_802BDD88_317CA8->flags;
-            D_802BDD88_317CA8->unk_00 = 30;
-            D_802BDD88_317CA8->unk_04++;
+            npc->flags = GoombarioTweesterPhysicsPtr->prevFlags;
+            GoombarioTweesterPhysicsPtr->countdown = 30;
+            GoombarioTweesterPhysicsPtr->state++;
             break;
         case 3:
             partner_walking_update_player_tracking(npc);
             partner_walking_update_motion(npc);
 
-            if (--D_802BDD88_317CA8->unk_00 == 0) {
-                D_802BDD88_317CA8->unk_04 = 0;
-                D_8010C954 = 0;
+            if (--GoombarioTweesterPhysicsPtr->countdown == 0) {
+                GoombarioTweesterPhysicsPtr->state = 0;
+                TweesterTouchingPartner = NULL;
             }
             break;
     }
@@ -152,10 +152,10 @@ EvtScript world_goombario_update = {
 };
 
 void func_802BD564_317484(Npc* goombario) {
-    if (D_8010C954) {
-        D_8010C954 = 0;
-        goombario->flags = D_802BDD88_317CA8->flags;
-        D_802BDD88_317CA8->unk_04 = 0;
+    if (TweesterTouchingPartner) {
+        TweesterTouchingPartner = NULL;
+        goombario->flags = GoombarioTweesterPhysicsPtr->prevFlags;
+        GoombarioTweesterPhysicsPtr->state = 0;
         partner_clear_player_tracking (goombario);
     }
 }

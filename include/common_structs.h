@@ -2293,6 +2293,16 @@ typedef struct PlayerSpinState {
     /* 0x30 */ s32 spinSoundID;
 } PlayerSpinState; // size = 0x34
 
+typedef struct TweesterPhysics {
+    /* 0x00 */ s32 countdown;
+    /* 0x04 */ s32 state;
+    /* 0x08 */ s32 prevFlags; ///< Partner npc flags before contact with Tweester
+    /* 0x0C */ f32 radius;
+    /* 0x10 */ f32 angle;
+    /* 0x14 */ f32 angularVelocity;
+    /* 0x18 */ f32 liftoffVelocityPhase;
+} TweesterPhysics; // size = 0x1C
+
 typedef struct PartnerActionStatus {
     /* 0x000 */ union {
         /*       */     s32 i;
@@ -2414,16 +2424,6 @@ typedef struct PopupMessage {
     /* 0x17 */ s8 unk_17;
     /* 0x18 */ Message* message;
 } PopupMessage; // size = 0x1C
-
-typedef struct unkPartnerStruct {
-    /* 0x000 */ s32 unk_00;
-    /* 0x004 */ s32 unk_04;
-    /* 0x008 */ s32 flags;
-    /* 0x00c */ f32 unk_0C;
-    /* 0x010 */ f32 unk_10;
-    /* 0x014 */ f32 unk_14;
-    /* 0x018 */ f32 unk_18;
-} unkPartnerStruct; // size = 0x1C
 
 typedef struct struct8015A578 {
     /* 0x00 */ u8 unk_00;

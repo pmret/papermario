@@ -32,7 +32,7 @@ BSS s32 D_802BE308;
 BSS s32 D_802BE30C;
 BSS unk_802BE310* D_802BE310;
 BSS s32 D_802BE314;
-BSS unkPartnerStruct D_802BE318;
+BSS TweesterPhysics WattTweesterPhysics;
 
 s32 D_802BE250_31DDC0 = 0x18;
 
@@ -87,28 +87,25 @@ EvtScript world_watt_take_out = {
     EVT_END
 };
 
-unkPartnerStruct* D_802BE274_31DDE4 = &D_802BE318;
+TweesterPhysics* WattTweesterPhysicsPtr = &WattTweesterPhysics;
 
 s32 D_802BE278_31DDE8 = 0;
 
-ApiStatus func_802BD2B4_31CE24(Evt* script, s32 isInitialCall) {
+ApiStatus WattUpdate(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
-    Entity* entity;
     Npc* watt = script->owner2.npc;
-    f32 sp10, sp14;
-    f32 new_var;
-    f32 temp_f0;
-    
+    f32 sinAngle, cosAngle, liftoffVelocity;
+    Entity* entity;    
     
     if (gPartnerActionStatus.actionState.b[1] == 0) {
         if (isInitialCall) {
             partner_flying_enable(watt, 1);
-            mem_clear(D_802BE274_31DDE4, sizeof(*D_802BE274_31DDE4));
-            D_8010C954 = NULL;
+            mem_clear(WattTweesterPhysicsPtr, sizeof(TweesterPhysics));
+            TweesterTouchingPartner = NULL;
         }
 
-        entity = D_8010C954;
-        playerData->partnerUsedTime[6]++;
+        entity = TweesterTouchingPartner;
+        playerData->partnerUsedTime[PARTNER_WATT]++;
 
         if (entity == NULL) {
             func_802BD100_31CC70(watt);
@@ -135,61 +132,60 @@ ApiStatus func_802BD2B4_31CE24(Evt* script, s32 isInitialCall) {
             return 0;
         }
         
-        switch (D_802BE274_31DDE4->unk_04) {
+        switch (WattTweesterPhysicsPtr->state) {
             case 0:
-                D_802BE274_31DDE4->unk_04 = 1;
-                D_802BE274_31DDE4->flags = watt->flags;
-                D_802BE274_31DDE4->unk_0C = fabsf(dist2D(watt->pos.x, watt->pos.z,
+                WattTweesterPhysicsPtr->state = 1;
+                WattTweesterPhysicsPtr->prevFlags = watt->flags;
+                WattTweesterPhysicsPtr->radius = fabsf(dist2D(watt->pos.x, watt->pos.z,
                                                          entity->position.x, entity->position.z));
-                D_802BE274_31DDE4->unk_10 = atan2(entity->position.x, entity->position.z, watt->pos.x, watt->pos.z);
-                D_802BE274_31DDE4->unk_14 = 6.0f;
-                D_802BE274_31DDE4->unk_18 = 50.0f;
-                D_802BE274_31DDE4->unk_00 = 120;
+                WattTweesterPhysicsPtr->angle = atan2(entity->position.x, entity->position.z, watt->pos.x, watt->pos.z);
+                WattTweesterPhysicsPtr->angularVelocity = 6.0f;
+                WattTweesterPhysicsPtr->liftoffVelocityPhase = 50.0f;
+                WattTweesterPhysicsPtr->countdown = 120;
                 watt->flags |= NPC_FLAG_40000 | NPC_FLAG_100 | NPC_FLAG_40 | NPC_FLAG_ENABLE_HIT_SCRIPT;
                 watt->flags &= ~NPC_FLAG_GRAVITY;
             case 1:
-                sin_cos_rad((D_802BE274_31DDE4->unk_10 * TAU) / 360.0f, &sp10, &sp14);
-                watt->pos.x = (entity->position.x + (sp10 * D_802BE274_31DDE4->unk_0C));
-                watt->pos.z = (entity->position.z - (sp14 * D_802BE274_31DDE4->unk_0C));
-                D_802BE274_31DDE4->unk_10 = clamp_angle(D_802BE274_31DDE4->unk_10 - D_802BE274_31DDE4->unk_14);
+                sin_cos_rad((WattTweesterPhysicsPtr->angle * TAU) / 360.0f, &sinAngle, &cosAngle);
+                watt->pos.x = (entity->position.x + (sinAngle * WattTweesterPhysicsPtr->radius));
+                watt->pos.z = (entity->position.z - (cosAngle * WattTweesterPhysicsPtr->radius));
+                WattTweesterPhysicsPtr->angle = clamp_angle(WattTweesterPhysicsPtr->angle - WattTweesterPhysicsPtr->angularVelocity);
 
-                if (D_802BE274_31DDE4->unk_0C > 20.0f) {
-                    D_802BE274_31DDE4->unk_0C--;
-                } else if (D_802BE274_31DDE4->unk_0C < 19.0f) {
-                    D_802BE274_31DDE4->unk_0C++;
+                if (WattTweesterPhysicsPtr->radius > 20.0f) {
+                    WattTweesterPhysicsPtr->radius--;
+                } else if (WattTweesterPhysicsPtr->radius < 19.0f) {
+                    WattTweesterPhysicsPtr->radius++;
                 }
 
-                temp_f0 = sin_rad(D_802BE274_31DDE4->unk_18 * TAU / 360.0f);
-                D_802BE274_31DDE4->unk_18 += 3.0f;
-                new_var = temp_f0 * 3.0f;
+                liftoffVelocity = sin_rad(WattTweesterPhysicsPtr->liftoffVelocityPhase * TAU / 360.0f) * 3.0f;
+                WattTweesterPhysicsPtr->liftoffVelocityPhase += 3.0f;
 
-                if (D_802BE274_31DDE4->unk_18 > 150.0f) {
-                    D_802BE274_31DDE4->unk_18 = 150.0f;
+                if (WattTweesterPhysicsPtr->liftoffVelocityPhase > 150.0f) {
+                    WattTweesterPhysicsPtr->liftoffVelocityPhase = 150.0f;
                 }
                 
-                watt->pos.y += new_var;
-                watt->renderYaw = clamp_angle(360.0f - D_802BE274_31DDE4->unk_10);
-                D_802BE274_31DDE4->unk_14 += 0.8;
+                watt->pos.y += liftoffVelocity;
+                watt->renderYaw = clamp_angle(360.0f - WattTweesterPhysicsPtr->angle);
+                WattTweesterPhysicsPtr->angularVelocity += 0.8;
 
-                if (D_802BE274_31DDE4->unk_14 > 40.0f) {
-                    D_802BE274_31DDE4->unk_14 = 40.0f;
+                if (WattTweesterPhysicsPtr->angularVelocity > 40.0f) {
+                    WattTweesterPhysicsPtr->angularVelocity = 40.0f;
                 }
 
-                if (--D_802BE274_31DDE4->unk_00 == 0) {
-                    D_802BE274_31DDE4->unk_04++;
+                if (--WattTweesterPhysicsPtr->countdown == 0) {
+                    WattTweesterPhysicsPtr->state++;
                 }
                 break;
             case 2:
-                watt->flags = D_802BE274_31DDE4->flags;
-                D_802BE274_31DDE4->unk_00 = 30;
-                D_802BE274_31DDE4->unk_04++;
+                watt->flags = WattTweesterPhysicsPtr->prevFlags;
+                WattTweesterPhysicsPtr->countdown = 30;
+                WattTweesterPhysicsPtr->state++;
                 break;
             case 3:
                 partner_flying_update_player_tracking(watt);
                 partner_flying_update_motion(watt);
-                if (--D_802BE274_31DDE4->unk_00 == 0) {
-                    D_802BE274_31DDE4->unk_04 = 0;
-                    D_8010C954 = NULL;
+                if (--WattTweesterPhysicsPtr->countdown == 0) {
+                    WattTweesterPhysicsPtr->state = 0;
+                    TweesterTouchingPartner = NULL;
                 }
                 break;
         }
@@ -204,16 +200,16 @@ ApiStatus func_802BD2B4_31CE24(Evt* script, s32 isInitialCall) {
 }
 
 EvtScript world_watt_update = {
-    EVT_CALL(func_802BD2B4_31CE24)
+    EVT_CALL(WattUpdate)
     EVT_RETURN
     EVT_END
 };
 
 void func_802BD710_31D280(Npc* watt) {
-    if (D_8010C954 != NULL) {
-        D_8010C954 = NULL;
-        watt->flags = D_802BE274_31DDE4->flags;
-        D_802BE274_31DDE4->unk_04 = 0;
+    if (TweesterTouchingPartner != NULL) {
+        TweesterTouchingPartner = NULL;
+        watt->flags = WattTweesterPhysicsPtr->prevFlags;
+        WattTweesterPhysicsPtr->state = 0;
         partner_clear_player_tracking(watt);
     }
 }
@@ -227,7 +223,7 @@ EvtScript world_watt_use_ability = {
     EVT_END
 };
 
-s32 func_802BDD0C_31D87C(Evt* script, s32 isInitialCall) {
+s32 WattPutAway(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PartnerActionStatus* wattActionStatus = &gPartnerActionStatus;
     Npc* watt = script->owner2.npc;
@@ -250,7 +246,7 @@ s32 func_802BDD0C_31D87C(Evt* script, s32 isInitialCall) {
 }
 
 EvtScript world_watt_put_away = {
-    EVT_CALL(func_802BDD0C_31D87C)
+    EVT_CALL(WattPutAway)
     EVT_RETURN
     EVT_END
 };
@@ -345,7 +341,7 @@ void func_802BE070_31DBE0(void) {
     Npc* new_var2;
     Camera* camera = gCameras;
     PlayerStatus* playerStatus;
-    f32 temp, temp_f20;
+    f32 temp, angle;
     f32 spriteFacingAngle;
     s32 phi_v1;
     
@@ -369,16 +365,16 @@ void func_802BE070_31DBE0(void) {
             }
         }
 
-        temp_f20 = (camera->currentYaw + 270.0f - gPlayerStatusPtr->spriteFacingAngle + phi_v1) * TAU / 360.0f;
+        angle = (camera->currentYaw + 270.0f - gPlayerStatusPtr->spriteFacingAngle + phi_v1) * TAU / 360.0f;
 
         playerStatus = gPlayerStatusPtr;
         partnerNPC = wPartnerNpc;
-        partnerNPC->pos.x = playerStatus->position.x + (sin_rad(temp_f20) * gPlayerStatusPtr->colliderDiameter * temp);
+        partnerNPC->pos.x = playerStatus->position.x + (sin_rad(angle) * gPlayerStatusPtr->colliderDiameter * temp);
 
         new_var2 = wPartnerNpc;
         playerStatus = gPlayerStatusPtr;
         partnerNPC = new_var2;
-        partnerNPC->pos.z = playerStatus->position.z - (cos_rad(temp_f20) * gPlayerStatusPtr->colliderDiameter * temp);
+        partnerNPC->pos.z = playerStatus->position.z - (cos_rad(angle) * gPlayerStatusPtr->colliderDiameter * temp);
         
         wPartnerNpc->yaw = gPlayerStatusPtr->targetYaw;
         wPartnerNpc->pos.y = gPlayerStatusPtr->position.y + 5.0f;

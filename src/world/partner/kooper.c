@@ -64,7 +64,7 @@ void world_kooper_init(Npc* kooper) {
     D_802BEC54 = 0;
 }
 
-ApiStatus func_802BD228_31B248(Evt* script, s32 isInitialCall) {
+ApiStatus KooperTakeOut(Evt* script, s32 isInitialCall) {
     Npc* kooper = script->owner2.npc;
 
     if (isInitialCall) {
@@ -75,29 +75,29 @@ ApiStatus func_802BD228_31B248(Evt* script, s32 isInitialCall) {
 }
 
 EvtScript world_kooper_take_out = {
-    EVT_CALL(func_802BD228_31B248)
+    EVT_CALL(KooperTakeOut)
     EVT_RETURN
     EVT_END
 };
 
-BSS unkPartnerStruct D_802BEC80;
+BSS TweesterPhysics KooperTweesterPhysics;
 
-unkPartnerStruct* D_802BEB60_31CB80 = &D_802BEC80;
+TweesterPhysics* KooperTweesterPhysicsPtr = &KooperTweesterPhysics;
 
-ApiStatus func_802BD260_31B280(Evt* script, s32 isInitialCall) {
+ApiStatus KooperUpdate(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
-    Entity* entity;
     Npc* kooper = script->owner2.npc;
-    f32 sp10, sp14, tempY;
+    f32 sinAngle, cosAngle, liftoffVelocity;
+    Entity* entity;
 
     if (isInitialCall) {
         partner_walking_enable(kooper, 1);
-        mem_clear(D_802BEB60_31CB80, sizeof(*D_802BEB60_31CB80));
-        D_8010C954 = 0;
+        mem_clear(KooperTweesterPhysicsPtr, sizeof(TweesterPhysics));
+        TweesterTouchingPartner = NULL;
     }
 
-    playerData->partnerUsedTime[2]++;
-    entity = D_8010C954;
+    playerData->partnerUsedTime[PARTNER_KOOPER]++;
+    entity = TweesterTouchingPartner;
 
     if (entity == NULL) {
         partner_walking_update_player_tracking(kooper);
@@ -105,62 +105,62 @@ ApiStatus func_802BD260_31B280(Evt* script, s32 isInitialCall) {
         return ApiStatus_BLOCK;
     }
 
-    switch (D_802BEB60_31CB80->unk_04) {
+    switch (KooperTweesterPhysicsPtr->state) {
         case 0:
-            D_802BEB60_31CB80->unk_04 = 1;
-            D_802BEB60_31CB80->flags = kooper->flags;
-            D_802BEB60_31CB80->unk_0C = fabsf(dist2D(kooper->pos.x, kooper->pos.z,
+            KooperTweesterPhysicsPtr->state = 1;
+            KooperTweesterPhysicsPtr->prevFlags = kooper->flags;
+            KooperTweesterPhysicsPtr->radius = fabsf(dist2D(kooper->pos.x, kooper->pos.z,
                                                      entity->position.x, entity->position.z));
-            D_802BEB60_31CB80->unk_10 = atan2(entity->position.x, entity->position.z, kooper->pos.x, kooper->pos.z);
-            D_802BEB60_31CB80->unk_14 = 6.0f;
-            D_802BEB60_31CB80->unk_18 = 50.0f;
-            D_802BEB60_31CB80->unk_00 = 120;
+            KooperTweesterPhysicsPtr->angle = atan2(entity->position.x, entity->position.z, kooper->pos.x, kooper->pos.z);
+            KooperTweesterPhysicsPtr->angularVelocity = 6.0f;
+            KooperTweesterPhysicsPtr->liftoffVelocityPhase = 50.0f;
+            KooperTweesterPhysicsPtr->countdown = 120;
             kooper->flags |= NPC_FLAG_40000 | NPC_FLAG_100 | NPC_FLAG_40 | NPC_FLAG_ENABLE_HIT_SCRIPT;
             kooper->flags &= ~NPC_FLAG_GRAVITY;
         case 1:
-            sin_cos_rad((D_802BEB60_31CB80->unk_10 * TAU) / 360.0f, &sp10, &sp14);
+            sin_cos_rad((KooperTweesterPhysicsPtr->angle * TAU) / 360.0f, &sinAngle, &cosAngle);
 
-            kooper->pos.x = entity->position.x + (sp10 * D_802BEB60_31CB80->unk_0C);
-            kooper->pos.z = entity->position.z - (sp14 * D_802BEB60_31CB80->unk_0C);
+            kooper->pos.x = entity->position.x + (sinAngle * KooperTweesterPhysicsPtr->radius);
+            kooper->pos.z = entity->position.z - (cosAngle * KooperTweesterPhysicsPtr->radius);
 
-            D_802BEB60_31CB80->unk_10 = clamp_angle(D_802BEB60_31CB80->unk_10 - D_802BEB60_31CB80->unk_14);
-            if (D_802BEB60_31CB80->unk_0C > 20.0f) {
-                D_802BEB60_31CB80->unk_0C--;
-            } else if (D_802BEB60_31CB80->unk_0C < 19.0f) {
-                D_802BEB60_31CB80->unk_0C++;
+            KooperTweesterPhysicsPtr->angle = clamp_angle(KooperTweesterPhysicsPtr->angle - KooperTweesterPhysicsPtr->angularVelocity);
+            if (KooperTweesterPhysicsPtr->radius > 20.0f) {
+                KooperTweesterPhysicsPtr->radius--;
+            } else if (KooperTweesterPhysicsPtr->radius < 19.0f) {
+                KooperTweesterPhysicsPtr->radius++;
             }
 
-            tempY = sin_rad((D_802BEB60_31CB80->unk_18 * TAU) / 360.0f) * 3.0f;
+            liftoffVelocity = sin_rad((KooperTweesterPhysicsPtr->liftoffVelocityPhase * TAU) / 360.0f) * 3.0f;
 
-            D_802BEB60_31CB80->unk_18 += 3.0f;
+            KooperTweesterPhysicsPtr->liftoffVelocityPhase += 3.0f;
 
-            if (D_802BEB60_31CB80->unk_18 > 150.0f) {
-                D_802BEB60_31CB80->unk_18 = 150.0f;
+            if (KooperTweesterPhysicsPtr->liftoffVelocityPhase > 150.0f) {
+                KooperTweesterPhysicsPtr->liftoffVelocityPhase = 150.0f;
             }
-            kooper->pos.y += tempY;
+            kooper->pos.y += liftoffVelocity;
 
-            kooper->renderYaw = clamp_angle(360.0f - D_802BEB60_31CB80->unk_10);
-            D_802BEB60_31CB80->unk_14 += 0.8;
-            if (D_802BEB60_31CB80->unk_14 > 40.0f) {
-                D_802BEB60_31CB80->unk_14 = 40.0f;
+            kooper->renderYaw = clamp_angle(360.0f - KooperTweesterPhysicsPtr->angle);
+            KooperTweesterPhysicsPtr->angularVelocity += 0.8;
+            if (KooperTweesterPhysicsPtr->angularVelocity > 40.0f) {
+                KooperTweesterPhysicsPtr->angularVelocity = 40.0f;
             }
 
-            if (--D_802BEB60_31CB80->unk_00 == 0) {
-                D_802BEB60_31CB80->unk_04++;
+            if (--KooperTweesterPhysicsPtr->countdown == 0) {
+                KooperTweesterPhysicsPtr->state++;
             }
             break;
         case 2:
-            kooper->flags = D_802BEB60_31CB80->flags;
-            D_802BEB60_31CB80->unk_00 = 30;
-            D_802BEB60_31CB80->unk_04++;
+            kooper->flags = KooperTweesterPhysicsPtr->prevFlags;
+            KooperTweesterPhysicsPtr->countdown = 30;
+            KooperTweesterPhysicsPtr->state++;
             break;
         case 3:
             partner_walking_update_player_tracking(kooper);
             partner_walking_update_motion(kooper);
 
-            if (--D_802BEB60_31CB80->unk_00 == 0) {
-                D_802BEB60_31CB80->unk_04 = 0;
-                D_8010C954 = 0;
+            if (--KooperTweesterPhysicsPtr->countdown == 0) {
+                KooperTweesterPhysicsPtr->state = 0;
+                TweesterTouchingPartner = NULL;
             }
             break;
     }
@@ -168,16 +168,16 @@ ApiStatus func_802BD260_31B280(Evt* script, s32 isInitialCall) {
 }
 
 EvtScript world_kooper_update = {
-    EVT_CALL(func_802BD260_31B280)
+    EVT_CALL(KooperUpdate)
     EVT_RETURN
     EVT_END
 };
 
 void func_802BD5F4_31B614(Npc* kooper) {
-    if (D_8010C954 != NULL) {
-        D_8010C954 = NULL;
-        kooper->flags = D_802BEB60_31CB80->flags;
-        D_802BEB60_31CB80->unk_04 = 0;
+    if (TweesterTouchingPartner != NULL) {
+        TweesterTouchingPartner = NULL;
+        kooper->flags = KooperTweesterPhysicsPtr->prevFlags;
+        KooperTweesterPhysicsPtr->state = 0;
         partner_clear_player_tracking(kooper);
     }
 }
@@ -620,7 +620,7 @@ EvtScript world_kooper_use_ability = {
     EVT_END
 };
 
-ApiStatus func_802BE7E0_31C800(Evt* script, s32 isInitialCall) {
+ApiStatus KooperPutAway(Evt* script, s32 isInitialCall) {
     Npc* kooper = script->owner2.npc;
 
     if (isInitialCall) {
@@ -631,7 +631,7 @@ ApiStatus func_802BE7E0_31C800(Evt* script, s32 isInitialCall) {
 }
 
 EvtScript world_kooper_put_away = {
-    EVT_CALL(func_802BE7E0_31C800)
+    EVT_CALL(KooperPutAway)
     EVT_RETURN
     EVT_END
 };
