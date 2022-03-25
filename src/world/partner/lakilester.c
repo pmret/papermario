@@ -1,7 +1,6 @@
 #include "common.h"
 #include "../partners.h"
 #include "effects.h"
-#include "functions.h"
 
 extern s16 D_8010C97A;
 

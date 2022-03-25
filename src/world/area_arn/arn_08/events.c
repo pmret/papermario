@@ -4,7 +4,6 @@
 
 extern Npc* wPartnerNpc;
 void partner_set_goal_pos(s32, s32);
-void func_800EF3D4(s32);
 
 enum {
     NPC_TUBBAS_HEART,
