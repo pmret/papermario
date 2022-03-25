@@ -13,7 +13,7 @@ void func_800F0C9C(void);
 
 extern UNK_FUN_PTR(D_8010C93C);
 
-extern s32 D_802BDF60;
+extern s32 GoombarioGetTattleID;
 extern s8 D_8015A57A;
 extern s32 D_800F7B4C;
 
@@ -705,13 +705,13 @@ void check_input_use_partner(void) {
     u32 actionState = playerStatus->actionState;
 
     if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_8BIT_MARIO)) {
-        if (playerStatus->animFlags & 8 || playerStatus->statusMenuCounterinputEnabledCounter == 0) {
+        if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_8 || playerStatus->statusMenuCounterinputEnabledCounter == 0) {
             if (playerStatus->pressedButtons & BUTTON_C_DOWN && !(playerStatus->flags & PLAYER_STATUS_FLAGS_80) &&
                 !(playerStatus->pressedButtons & BUTTON_B) && !(playerStatus->animFlags & PLAYER_STATUS_FLAGS_1000) &&
                 actionState <= ACTION_STATE_RUN) {
 
                 if (playerData->currentPartner == PARTNER_GOOMBARIO) {
-                    D_802BDF60 = playerStatus->interactingWithID;
+                    GoombarioGetTattleID = playerStatus->interactingWithID;
                 }
                 partner_use_ability();
             }
@@ -863,31 +863,31 @@ s32 get_overriding_player_anim(s32 anim) {
     return anim;
 }
 
-void suggest_player_anim_clearUnkFlag(s32 arg0) {
+void suggest_player_anim_clearUnkFlag(s32 anim) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    s32 temp_v0 = get_overriding_player_anim(arg0);
+    s32 newAnim = get_overriding_player_anim(anim);
 
-    if (temp_v0 != -1) {
-        playerStatus->anim = temp_v0;
+    if (newAnim != -1) {
+        playerStatus->anim = newAnim;
         playerStatus->unk_BC = 0;
         playerStatus->flags &= ~PLAYER_STATUS_FLAGS_10000000;
     }
 }
 
-void force_player_anim(s32 arg0) {
+void force_player_anim(s32 anim) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    playerStatus->anim = arg0;
+    playerStatus->anim = anim;
     playerStatus->unk_BC = 0;
     playerStatus->flags &= ~PLAYER_STATUS_FLAGS_10000000;
 }
 
-void suggest_player_anim_setUnkFlag(s32 arg0) {
+void suggest_player_anim_setUnkFlag(s32 anim) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    s32 temp_v0 = get_overriding_player_anim(arg0);
+    s32 newAnim = get_overriding_player_anim(anim);
 
-    if (temp_v0 != -1) {
-        playerStatus->anim = temp_v0;
+    if (newAnim != -1) {
+        playerStatus->anim = newAnim;
         playerStatus->unk_BC = 0;
         playerStatus->flags |= PLAYER_STATUS_FLAGS_10000000;
     }
@@ -903,8 +903,8 @@ void update_player_blink(void) {
         phi_a2 = gPartnerActionStatus.actionState.b[0] != 0;
     }
 
-    if (playerStatus->unk_10 > 0) {
-        playerStatus->unk_10--;
+    if (playerStatus->blinkTimer > 0) {
+        playerStatus->blinkTimer--;
         alpha = &playerStatus->alpha1;
         if (!(gGameStatusPtr->frameCounter & 1)) {
             if (phi_a2) {
@@ -917,7 +917,7 @@ void update_player_blink(void) {
         }
         *alpha = phi_v1;
 
-        if (!playerStatus->unk_10) {
+        if (!playerStatus->blinkTimer) {
             if (phi_a2) {
                 playerStatus->alpha1 = 0x80;
                 playerStatus->flags |= PLAYER_STATUS_FLAGS_8000;

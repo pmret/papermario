@@ -82,8 +82,8 @@ void func_802B61E4_E23444(void) {
     f32 angle;
     f32 magnitude;
 
-    if (playerStatus->flags & 0x80000000) {
-        playerStatus->flags &= ~0x80000000;
+    if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
+        playerStatus->flags &= ~PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
         playerStatus->fallState = 0;
         playerStatus->currentStateTime = 0;
         playerStatus->decorationList = 0;
@@ -102,7 +102,7 @@ void func_802B61E4_E23444(void) {
         }
     }
 
-    if (!(playerStatus->animFlags & 0x2000)) {
+    if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_IN_DISGUISE)) {
         switch (playerStatus->fallState) {
             case 0:
                 if (((playerStatus->flags & 0x3000) == 0) && (playerStatus->unk_C4 == 0)) {

@@ -2012,7 +2012,7 @@ typedef struct PlayerStatus {
     /* 0x00D */ s8 unk_0D;
     /* 0x00E */ u8 alpha1;
     /* 0x00F */ u8 alpha2;
-    /* 0x010 */ s16 unk_10;
+    /* 0x010 */ s16 blinkTimer;
     /* 0x012 */ s16 moveFrames;
     /* 0x014 */ s8 enableCollisionOverlapsCheck;
     /* 0x015 */ s8 statusMenuCounterinputEnabledCounter; /* whether the C-up menu can appear */

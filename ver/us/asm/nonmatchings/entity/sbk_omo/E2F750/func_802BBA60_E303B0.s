@@ -225,8 +225,8 @@ glabel func_802BBA60_E303B0
 /* E306CC 802BBD7C 45000007 */  bc1f      .L802BBD9C
 /* E306D0 802BBD80 2404001F */   addiu    $a0, $zero, 0x1f
 /* E306D4 802BBD84 8E420004 */  lw        $v0, 4($s2)
-/* E306D8 802BBD88 3C018011 */  lui       $at, %hi(D_8010C934)
-/* E306DC 802BBD8C AC31C934 */  sw        $s1, %lo(D_8010C934)($at)
+/* E306D8 802BBD88 3C018011 */  lui       $at, %hi(TweesterTouchingPlayer)
+/* E306DC 802BBD8C AC31C934 */  sw        $s1, %lo(TweesterTouchingPlayer)($at)
 /* E306E0 802BBD90 34420004 */  ori       $v0, $v0, 4
 /* E306E4 802BBD94 0C039769 */  jal       set_action_state
 /* E306E8 802BBD98 AE420004 */   sw       $v0, 4($s2)

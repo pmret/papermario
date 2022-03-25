@@ -410,7 +410,7 @@ void btl_state_update_victory(void) {
         if (gBattleStatus.flags1 & BS_FLAGS1_1000000) {
             gBattleStatus.flags1 &= ~BS_FLAGS1_40000;
         }
-        if ((u16) playerData->battlesWon < 0x270F) {
+        if ((u16) playerData->battlesWon < 9999) {
             playerData->battlesWon++;
         }
         if (gBattleStatus.flags1 & BS_FLAGS1_40000) {

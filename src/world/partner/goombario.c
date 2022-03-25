@@ -9,7 +9,7 @@ BSS s32 D_802BDF38;
 BSS s32 D_802BDF3C;
 BSS unkPartnerStruct D_802BDF40;
 BSS s32 D_802BDF5C;
-BSS s32 D_802BDF60;
+BSS s32 GoombarioGetTattleID;
 BSS s32 D_802BDF64;
 
 s32 D_802BDC40_317B60[] = {
@@ -45,7 +45,7 @@ void world_goombario_init(Npc* goombario) {
 
 ApiStatus func_802BD188_3170A8(Evt* script, s32 isInitialCall) {
     Npc* goombario = script->owner2.npc;
-    D_802BDF60 = -1;
+    GoombarioGetTattleID = -1;
 
     if (isInitialCall) {
         partner_init_get_out(goombario);
