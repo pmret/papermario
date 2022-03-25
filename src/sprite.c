@@ -355,33 +355,31 @@ s32 func_802DE894(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s3
 
 INCLUDE_ASM(s32, "sprite", func_802DE8DC);
 
-typedef struct unkStructSprite {
+typedef struct UnkSpriteStruct {
     /* 0x00 */ s32* unk_00;
     /* 0x04 */ u8 width;
     /* 0x05 */ u8 height;
     /* 0x06 */ s8 unk_06;
     /* 0x07 */ u8 unk_07;
-} unkStructSprite;
+} UnkSpriteStruct;
 
 s32 spr_get_npc_raster_info(SpriteRasterInfo* out, s32 npcSpriteID, s32 rasterIndex) {
-    SpriteAnimData* sprite;
-    unkStructSprite* temp_v1;
+    SpriteAnimData* sprite = spr_npcSprites[npcSpriteID];
+    UnkSpriteStruct* temp_v1;
     s32** paletteOffsetCopy;
     s32 newVar;
-
-    sprite = spr_npcSprites[npcSpriteID];
     
     if (sprite != NULL) {
         paletteOffsetCopy = sprite->palettesOffset;
-        temp_v1 = (unkStructSprite*)sprite->rastersOffset[rasterIndex];
+        temp_v1 = (UnkSpriteStruct*)sprite->rastersOffset[rasterIndex];
         out->raster = temp_v1->unk_00;
         out->width = temp_v1->width;
         newVar = npcSpriteID;
         out->height = temp_v1->height;
         out->defaultPal = paletteOffsetCopy[temp_v1->unk_06];
-        return 1;
+        return TRUE;
     }
-    return 0;
+    return FALSE;
 }
 
 s32** spr_get_npc_palettes(s32 npcSpriteID) {

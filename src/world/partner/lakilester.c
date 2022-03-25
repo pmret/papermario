@@ -1,6 +1,7 @@
 #include "common.h"
 #include "../partners.h"
 #include "effects.h"
+#include "functions.h"
 
 extern s16 D_8010C97A;
 
@@ -17,12 +18,6 @@ BSS s32 D_802BFF24;
 BSS f32 D_802BFF28;
 BSS s32 D_802BFF2C;
 BSS unkPartnerStruct D_802BFF30;
-
-void func_800EF3D4(s16);                               /* extern */
-s32 player_raycast_up_corners(PlayerStatus*, f32*, f32*, f32*, f32*, f32); /* extern */
-void func_802BFB44_323694(f32 arg0);
-f32 get_player_normal_pitch(void);
-void partner_kill_ability_script(void);
 
 void func_802BD100_320C50(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -546,7 +541,7 @@ s32 func_802BE6A0_3221F0(f32* arg0) {
 ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
-    Camera* cameras = &gCameras[CAM_DEFAULT];
+    Camera* camera = &gCameras[CAM_DEFAULT];
     Npc* npc = script->owner2.npc;
     s32 colliderHeightTemp;
     f32 x, y, z, sp2C;
@@ -723,9 +718,9 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
             /* fallthrough */
         case 103:
             if (!(playerStatus->flags & PLAYER_STATUS_ANIM_FLAGS_800)) {
-                npc->pos.x += ((npc->moveToPos.x - npc->pos.x) / npc->duration);
-                npc->pos.z += ((npc->moveToPos.z - npc->pos.z) / npc->duration);
-                npc->pos.y += ((npc->moveToPos.y - npc->pos.y) / npc->duration);
+                npc->pos.x += (npc->moveToPos.x - npc->pos.x) / npc->duration;
+                npc->pos.z += (npc->moveToPos.z - npc->pos.z) / npc->duration;
+                npc->pos.y += (npc->moveToPos.y - npc->pos.y) / npc->duration;
                 playerStatus->position.y += npc->jumpVelocity;
                 colliderHeightTemp = playerStatus->colliderHeight;
                 func_802BD99C_3214EC(npc, colliderHeightTemp, (colliderHeightTemp * 2));
@@ -817,7 +812,7 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
             npc->flags &= ~NPC_FLAG_40;
             playerStatus->flags |= NPC_FLAG_100;
             func_802BD7DC();
-            camYaw = cameras[0].currentYaw;
+            camYaw = camera->currentYaw;
             if (playerStatus->spriteFacingAngle >= 90.0f && playerStatus->spriteFacingAngle < 270.0f) {
                 yaw = (180.0f + camYaw) - 90.0f;
             } else {
