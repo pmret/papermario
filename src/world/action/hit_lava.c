@@ -25,7 +25,7 @@ void func_802B6000_E27F40(void) {
         playerStatus->flags |= 0x800;
         if (playerStatus->unk_BF == 1) {
             playerStatus->fallState = 0x14;
-            playerStatus->framesOnGround = 2;
+            playerStatus->currentStateTime = 2;
         } else {
             playerStatus->fallState = 0;
         }
@@ -43,12 +43,12 @@ void func_802B6000_E27F40(void) {
 
     switch (playerStatus->fallState) {
         case 21:
-            if (--playerStatus->framesOnGround == -1) {
+            if (--playerStatus->currentStateTime == -1) {
                 playerStatus->fallState = 0;
             }
             break;
         case 20:
-            if (--playerStatus->framesOnGround == -1) {
+            if (--playerStatus->currentStateTime == -1) {
                 playerStatus->fallState = 0;
             }
             playerStatus->position.y -= 4.0f;
@@ -62,17 +62,17 @@ void func_802B6000_E27F40(void) {
             playerStatus->decorationList = 0;
             playerStatus->unk_C2 = 0;
             playerStatus->fallState = 2;
-            playerStatus->framesOnGround = 1;
+            playerStatus->currentStateTime = 1;
             playerStatus->gravityIntegrator[0] = 20.0f;
             playerStatus->gravityIntegrator[2] = 250.0f;
             playerStatus->gravityIntegrator[3] = D_802B68BC;
-            playerStatus->unk_3C = playerStatus->position.x;
-            playerStatus->unk_40 = playerStatus->position.z;
-            playerStatus->unk_4C = playerStatus->position.y;
+            playerStatus->jumpFromPos.x = playerStatus->position.x;
+            playerStatus->jumpFromPos.z = playerStatus->position.z;
+            playerStatus->jumpFromHeight = playerStatus->position.y;
             playerStatus->flags |= 0x2;
             break;
         case 1:
-            if (--playerStatus->framesOnGround << 16 <= 0) {
+            if (--playerStatus->currentStateTime << 16 <= 0) {
                 playerStatus->fallState++;
             }
             break;
@@ -180,12 +180,12 @@ void func_802B6000_E27F40(void) {
             playerStatus->gravityIntegrator[0] = tempGravityIntegrator;
             playerStatus->position.y = player_check_collision_below(tempGravityIntegrator, &sp2C);
             if (sp2C >= 0) {
-                playerStatus->framesOnGround = 0xA;
+                playerStatus->currentStateTime = 0xA;
                 playerStatus->fallState++;
             }
             break;
         case 8:
-            if (--playerStatus->framesOnGround << 16 <= 0) {
+            if (--playerStatus->currentStateTime << 16 <= 0) {
                 set_action_state(ACTION_STATE_LAND);
                 playerStatus->flags &= ~0x800000;
                 gOverrideFlags &= ~GLOBAL_OVERRIDES_40;

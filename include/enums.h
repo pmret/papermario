@@ -1479,7 +1479,7 @@ enum ActionStates {
     ACTION_STATE_USE_SNEAKY_PARASOL             = 0x00000019,
     ACTION_STATE_SPIN                           = 0x0000001A,
     ACTION_STATE_ENEMY_FIRST_STRIKE             = 0x0000001B,
-    ACTION_STATE_GET_STAR_SPIRIT                = 0x0000001C,
+    ACTION_STATE_RAISE_ARMS                = 0x0000001C,
     ACTION_STATE_USE_SPINNING_FLOWER            = 0x0000001D,
     ACTION_STATE_USE_MUNCHLESIA                 = 0x0000001E,  ///< Set by the jan_09 squishy flower entity; throws the player in the air.
     ACTION_STATE_USE_TWEESTER                   = 0x0000001F,
@@ -1602,14 +1602,15 @@ enum EntityFlags {
 };
 
 enum EntityCollisionFlags {
-    ENTITY_COLLISION_FLAGS_1                                = 0x00000001,
+    ENTITY_COLLISION_PLAYER_TOUCH_FLOOR                     = 0x00000001,
     ENTITY_COLLISION_FLAGS_2                                = 0x00000002,
-    ENTITY_COLLISION_FLAGS_4                                = 0x00000004,
-    ENTITY_COLLISION_FLAGS_8                                = 0x00000008,
-    ENTITY_COLLISION_FLAGS_10                               = 0x00000010,
+    ENTITY_COLLISION_PLAYER_TOUCH_CEILING                   = 0x00000004,
+    ENTITY_COLLISION_PLAYER_TOUCH_WALL                      = 0x00000008,
+    ENTITY_COLLISION_PLAYER_PUSHING_AGAINST                 = 0x00000010,
     ENTITY_COLLISION_FLAGS_20                               = 0x00000020,
-    ENTITY_COLLISION_FLAGS_40                               = 0x00000040,
-    ENTITY_COLLISION_FLAGS_80                               = 0x00000080
+    ENTITY_COLLISION_PLAYER_HAMMER                          = 0x00000040,
+    ENTITY_COLLISION_BLOCK_HIT                              = 0x00000080,
+    ENTITY_COLLISION_PLAYER_LAST_FLOOR                      = 0x00000100
 };
 
 enum TriggerFlags {
@@ -1865,7 +1866,7 @@ enum PlayerStatusAnimFlags {
     PLAYER_STATUS_ANIM_FLAGS_40                                    = 0x00000040,
     PLAYER_STATUS_ANIM_FLAGS_USING_PULSE_STONE                     = 0x00000080,
     PLAYER_STATUS_ANIM_FLAGS_100                                   = 0x00000100,
-    PLAYER_STATUS_ANIM_FLAGS_GET_STAR_SPIRIT                       = 0x00000200, ///< Sets action state to ACTION_STATE_GET_STAR_SPIRIT on idle
+    PLAYER_STATUS_ANIM_FLAGS_RAISED_ARMS                           = 0x00000200, ///< Sets action state to ACTION_STATE_RAISE_ARMS on idle
     PLAYER_STATUS_ANIM_FLAGS_SHIVERING                             = 0x00000400,
     PLAYER_STATUS_ANIM_FLAGS_800                                   = 0x00000800,
     PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS                   = 0x00001000,
@@ -2614,10 +2615,10 @@ enum MusicSettingsFlags {
 };
 
 enum ColliderFlags {
-    COLLIDER_FLAGS_1                 = 0x00000001,
-    COLLIDER_FLAGS_2                 = 0x00000002,
-    COLLIDER_FLAGS_4                 = 0x00000004,
-    COLLIDER_FLAGS_8                 = 0x00000008,
+    COLLIDER_FLAGS_WATER_FLOOR       = 0x00000001,
+    COLLIDER_FLAGS_LAVA_FLOOR        = 0x00000002,
+    COLLIDER_FLAGS_SUSHIE_DOCK_WALL  = 0x00000004,
+    COLLIDER_FLAGS_SNOW_FLOOR        = 0x00000008,
     COLLIDER_FLAGS_10                = 0x00000010,
     COLLIDER_FLAGS_20                = 0x00000020,
     COLLIDER_FLAGS_40                = 0x00000040,
@@ -2629,8 +2630,8 @@ enum ColliderFlags {
     COLLIDER_FLAGS_1000              = 0x00001000,
     COLLIDER_FLAGS_2000              = 0x00002000,
     COLLIDER_FLAGS_4000              = 0x00004000,
-    COLLIDER_FLAGS_8000              = 0x00008000,
-    COLLIDER_FLAGS_10000             = 0x00010000,
+    COLLIDER_FLAGS_IGNORE_SHELL      = 0x00008000,
+    COLLIDER_FLAGS_IGNORE_PLAYER     = 0x00010000,
     COLLIDER_FLAGS_20000             = 0x00020000,
     COLLIDER_FLAGS_40000             = 0x00040000,
     COLLIDER_FLAGS_80000             = 0x00080000,

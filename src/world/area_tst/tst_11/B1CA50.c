@@ -45,7 +45,7 @@ void func_80240100_B1CB50(void* data) {
     Matrix4f scale;
 
     guRotateF(rotation, yaw, 0.0f, -1.0f, 0.0f);
-    guRotateF(main, clamp_angle(playerStatus->unk_8C), 0.0f, 0.0f, 1.0f);
+    guRotateF(main, clamp_angle(playerStatus->pitch), 0.0f, 0.0f, 1.0f);
     guMtxCatF(rotation, main, main);
     guRotateF(rotation, yaw, 0.0f, 1.0f, 0.0f);
     guMtxCatF(main, rotation, main);
@@ -98,7 +98,7 @@ void func_802403B8_B1CE08(void* data) {
     Matrix4f spE0;
 
     guRotateF(spA0, yaw, 0.0f, -1.0f, 0.0f);
-    guRotateF(sp20, clamp_angle(playerStatus->unk_8C), 0.0f, 0.0f, 1.0f);
+    guRotateF(sp20, clamp_angle(playerStatus->pitch), 0.0f, 0.0f, 1.0f);
     guMtxCatF(spA0, sp20, sp20);
     guRotateF(spA0, yaw, 0.0f, 1.0f, 0.0f);
     guMtxCatF(sp20, spA0, sp20);
@@ -110,7 +110,7 @@ void func_802403B8_B1CE08(void* data) {
     guMtxCatF(sp20, sp60, sp20);
     spr_draw_player_sprite(1, 0, 0, 0, sp20);
     guRotateF(spA0, yaw, 0.0f, -1.0f, 0.0f);
-    guRotateF(sp20, clamp_angle(playerStatus->unk_8C), 0.0f, 0.0f, 1.0f);
+    guRotateF(sp20, clamp_angle(playerStatus->pitch), 0.0f, 0.0f, 1.0f);
     guMtxCatF(spA0, sp20, sp20);
     guRotateF(spA0, yaw, 0.0f, 1.0f, 0.0f);
     guMtxCatF(sp20, spA0, sp20);

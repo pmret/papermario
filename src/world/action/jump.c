@@ -16,9 +16,9 @@ void func_802B6000_E24040(void) {
     playerStatus->unk_C2 = 0;
     playerStatus->flags &= ~0x80000008;
     playerStatus->flags |= 2;
-    playerStatus->unk_3C = playerStatus->position.x;
-    playerStatus->unk_40 = playerStatus->position.z;
-    playerStatus->unk_4C = playerStatus->position.y;
+    playerStatus->jumpFromPos.x = playerStatus->position.x;
+    playerStatus->jumpFromPos.z = playerStatus->position.z;
+    playerStatus->jumpFromHeight = playerStatus->position.y;
 
     phys_init_integrator_for_current_state();
 

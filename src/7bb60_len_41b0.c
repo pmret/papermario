@@ -268,25 +268,25 @@ s32 func_800E4404(s32 arg0, s32 arg1, f32 arg2, f32* outX, f32* outY, f32* outZ)
 
 void collision_check_player_overlaps(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    f32 temp_64 = playerStatus->unk_64;
+    f32 overlapPush = playerStatus->overlapPushAmount;
 
-    if (temp_64 != 0.0f) {
+    if (overlapPush != 0.0f) {
         f32 x = playerStatus->position.x;
         f32 y = playerStatus->position.y;
         f32 z = playerStatus->position.z;
 
-        player_test_lateral_overlap(0, &gPlayerStatus, &x, &y, &z, temp_64, playerStatus->unk_88);
+        player_test_lateral_overlap(0, &gPlayerStatus, &x, &y, &z, overlapPush, playerStatus->overlapPushYaw);
 
-        temp_64 -= playerStatus->runSpeed / 10.0f;
+        overlapPush -= playerStatus->runSpeed / 10.0f;
         playerStatus->position.x = x;
         playerStatus->position.y = y;
         playerStatus->position.z = z;
 
-        if (temp_64 < 0.0f) {
-            temp_64 = 0.0f;
+        if (overlapPush < 0.0f) {
+            overlapPush = 0.0f;
         }
 
-        playerStatus->unk_64 = temp_64;
+        playerStatus->overlapPushAmount = overlapPush;
     }
 }
 

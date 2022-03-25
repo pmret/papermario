@@ -69,6 +69,11 @@ typedef struct Vec2f {
     /* 0x04 */ f32 y;
 } Vec2f; // size = 0x08
 
+typedef struct Vec2XZf {
+    /* 0x00 */ f32 x;
+    /* 0x04 */ f32 z;
+} Vec2XZf; // size = 0x08
+
 typedef struct Vec3f {
     /* 0x00 */ f32 x;
     /* 0x04 */ f32 y;
@@ -400,16 +405,18 @@ typedef struct struct802E2BA4 {
 } struct802E2BA4;
 
 // from 102c80, size unknown.
-typedef struct struct802E1400 {
-    /* 0x000 */ Vec3f unk_00;
+typedef struct SwitchData {
+    /* 0x000 */ f32 fallVelocity;
+    /* 0x004 */ f32 deltaScaleX;
+    /* 0x008 */ f32 deltaScaleY;
     /* 0x00C */ char unk_0C[4];
-    /* 0x010 */ s8 unk_10;
-    /* 0x011 */ s8 unk_11;
-    /* 0x014 */ Vec3f unk_14;
-    /* 0x020 */ u16 unk_20;
-    /* 0x022 */ s16 unk_22;
-    /* 0x024 */ s16 unk_24;
-    /* 0x028 */ struct Entity* attachedEntity;
+    /* 0x010 */ s8 animStateScaleX;
+    /* 0x011 */ s8 animStateScaleY;
+    /* 0x014 */ Vec3f baseScale;
+    /* 0x020 */ u16 areaFlagIndex;
+    /* 0x022 */ s16 greenMotionTimer;
+    /* 0x024 */ s16 scaleAnimTimer;
+    /* 0x028 */ struct Entity* linkedSwitch; /* a hidden switch can be linked to a visible one and automatically trigger it on hit */
     /* 0x02C */ char unk_2C[8];
     /* 0x034 */ struct802E2BA4* unk_34;
     /* 0x038 */ f32 unk_38;
@@ -418,16 +425,16 @@ typedef struct struct802E1400 {
         /*       */     s8 b[2];
     } unk_3C;
     /* 0x03E */ char unk_3E[0x4D];
-    /* 0x08B */ u8 unk_8B[24];
+    /* 0x08B */ u8 fragmentRotX[24]; // scaled to map [0,255] -> [0,360]
     /* 0x0A3 */ char unk_A3; // padding?
-    /* 0x0A4 */ u8 unk_A4[24];
+    /* 0x0A4 */ u8 fragmentRotY[24]; // scaled to map [0,255] -> [0,360]
     /* 0x0BC */ char unk_BC[4];
-    /* 0x0C0 */ f32 unk_C0[24];
+    /* 0x0C0 */ f32 fragmentPosX[24];
     /* 0x120 */ char unk_120[4];
-    /* 0x124 */ f32 unk_124[24];
+    /* 0x124 */ f32 fragmentPosY[24];
     /* 0x184 */ char unk_184[4];
-    /* 0x188 */ f32 unk_188[24];
-} struct802E1400;
+    /* 0x188 */ f32 fragmentPosZ[24];
+} SwitchData;
 
 // from 104940_len_dc0, size unknown
 // appears to belong to the hammer blocks(?)
@@ -494,6 +501,54 @@ typedef struct SuperBlockContentData {
 } SuperBlockContentData;
 
 // size unknown
+typedef struct HeartBlockContentData {
+    /* 0x000 */ u8 parentEntityIndex; // for block entities spawned by other block entities
+    /* 0x001 */ u8 state;
+    /* 0x002 */ s8 sparkleTimer;
+    /* 0x003 */ s8 sparkleTrailTimer;
+    /* 0x004 */ f32 sparkleTrailPosY;
+    /* 0x008 */ char heartbeatTimer;
+    /* 0x009 */ u8 unk_09;
+    /* 0x00A */ u8 sparkleEffectType;
+    /* 0x00B */ char unk_0B; // padding?
+    /* 0x00C */ s32 unk_0C;
+    /* 0x010 */ s32 unk_10;
+    /* 0x014 */ f32 riseVelocity;
+    /* 0x018 */ f32 sparkleTrailAngle;
+    /* 0x01C */ f32 sparkleTrailRadius;
+    /* 0x020 */ f32 bouncePhase;
+    /* 0x024 */ u16 yawBufferPos;
+    /* 0x024 */ s16 unk_26;
+    /* 0x028 */ f32 yawBuffer[10];
+    /* 0x050 */ f32 unk_50;
+    /* 0x054 */ f32 rotationRate;
+    /* 0x058 */ char unk_58[0x78];
+    /* 0x0D0 */ u16 yawBufferPosX;
+    /* 0x0D4 */ f32 yawBufferX[20];
+    /* 0x124 */ s32 unk_124;
+    /* 0x128 */ s32* unk_128;
+    /* 0x12C */ s32* unk_12C;
+} HeartBlockContentData;
+
+typedef struct WoodenCrateData {
+    /* 0x000 */ s32 itemID;
+    /* 0x004 */ u16 globalFlagIndex;
+    /* 0x006 */ u8  unk_06[2];
+    /* 0x008 */ u8* fragmentsGfx; //TODO type when more WoodenCrate.c is done
+    /* 0x00C */ f32 basePosY;
+    /* 0x010 */ u8 fragmentScale[36];
+    /* 0x034 */ s8 fragmentMoveAngle[36]; // X,Z plane -- scaled to map [0,255] -> [0,360]
+    /* 0x058 */ u8 fragmentRotX[36]; // scaled to map [0,255] -> [0,360]
+    /* 0x07C */ u8 fragmentRotY[36]; // scaled to map [0,255] -> [0,360]
+    /* 0x0A0 */ u8 fragmentLateralSpeed[36];
+    /* 0x0C4 */ f32 fragmentFallSpeed[36];
+    /* 0x154 */ f32 fragmentPosX[36];
+    /* 0x1E4 */ f32 fragmentPosY[36];
+    /* 0x274 */ f32 fragmentPosZ[36];
+    /* 0x304 */ f32 unk_304[36];
+} WoodenCrateData;
+
+// size unknown
 typedef struct ChestData {
     /* 0x00 */ u16 gameFlagIndex;
     /* 0x02 */ s16 giveItemTimer;
@@ -523,6 +578,10 @@ typedef struct BlueWarpPipeData {
     /* 0x14 */ s32 flagIndex;
     /* 0x18 */ f32 finalPosY;
 } BlueWarpPipeData;
+
+typedef struct SimpleSpringData {
+    /* 0x00 */ s32 launchVelocity;
+} SimpleSpringData;
 
 // END ENTITY-SPECIFIC STRUCTS
 
@@ -567,12 +626,16 @@ typedef struct Entity {
     /* 0x3C */ UNK_PTR renderSetupFunc; // pointer to draw func(?)
     /* 0x40 */ union {
         s32* any;
+        SwitchData* swtch;
         BlockData* block;
         ItemBlockData* itemBlock;
         SaveBlockData* saveBlock;
+        WoodenCrateData* crate;
         ChestData* chest;
         BlueWarpPipeData* bluePipe;
+        HeartBlockContentData* heartBlockContent;
         SuperBlockContentData* superBlockContent;
+        SimpleSpringData* simpleSpring;
         s32* unk;
     } dataBuf;
     /* 0x44 */ Mtx* vertexData;
@@ -1942,7 +2005,7 @@ typedef struct FontData {
 typedef struct PlayerStatus {
     /* 0x000 */ s32 flags; // PlayerStatusFlags
     /* 0x004 */ u32 animFlags;
-    /* 0x008 */ s16 framesOnGround; /* Number of frames since last jump landed */
+    /* 0x008 */ s16 currentStateTime;
     /* 0x00A */ s8 unk_0A;
     /* 0x00B */ char unk_0B;
     /* 0x00C */ s8 peachDisguise;
@@ -1956,24 +2019,23 @@ typedef struct PlayerStatus {
     /* 0x016 */ Vec3s lastGoodPosition;
     /* 0x01C */ Vec3f extraVelocity;
     /* 0x028 */ Vec3f position;
-    /* 0x034 */ char unk_34[8];
-    /* 0x03C */ f32 unk_3C;
-    /* 0x040 */ f32 unk_40;
-    /* 0x044 */ f32 decorationPos[2];
-    /* 0x04C */ f32 unk_4C;
+    /* 0x034 */ Vec2f groundAnglesXZ; /* angles along X/Z axes of ground beneath player */
+    /* 0x03C */ Vec2XZf jumpFromPos;
+    /* 0x044 */ Vec2XZf landPos;
+    /* 0x04C */ f32 jumpFromHeight;
     /* 0x050 */ f32 jumpApexHeight;
     /* 0x054 */ f32 currentSpeed;
     /* 0x058 */ f32 walkSpeed;
     /* 0x05C */ f32 runSpeed;
     /* 0x060 */ s32 unk_60;
-    /* 0x064 */ f32 unk_64;
-    /* 0x068 */ f32 normalPitch;
-    /* 0x06C */ f32 unk_6C;
+    /* 0x064 */ f32 overlapPushAmount;
+    /* 0x068 */ f32 groundNormalPitch;
+    /* 0x06C */ f32 maxJumpSpeed;
     /* 0x070 */ f32 gravityIntegrator[4];
     /* 0x080 */ f32 targetYaw;
     /* 0x084 */ f32 currentYaw;
-    /* 0x088 */ f32 unk_88;
-    /* 0x08C */ f32 unk_8C;
+    /* 0x088 */ f32 overlapPushYaw;
+    /* 0x08C */ f32 pitch;
     /* 0x090 */ f32 unk_90;
     /* 0x094 */ s32 unk_94;
     /* 0x098 */ s32 unk_98;
@@ -1996,11 +2058,11 @@ typedef struct PlayerStatus {
     /* 0x0C2 */ s16 unk_C2;
     /* 0x0C4 */ char unk_C4;
     /* 0x0C5 */ s8 unk_C5;
-    /* 0x0C6 */ s16 unk_C6;
-    /* 0x0C8 */ Npc* unk_C8;
+    /* 0x0C6 */ s16 interactingWithID;
+    /* 0x0C8 */ Npc* encounteredNPC;
     /* 0x0CC */ s32 shadowID;
     /* 0x0D0 */ f32* unk_D0;
-    /* 0x0D4 */ f32 unk_D4;
+    /* 0x0D4 */ f32 spinRate;
     /* 0x0D8 */ UNK_PTR** unk_D8;
     /* 0x0DC */ s32 currentButtons;
     /* 0x0E0 */ s32 pressedButtons;

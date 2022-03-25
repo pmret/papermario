@@ -30,8 +30,8 @@ void func_802B6000_E24920(void) {
         playerStatus->fallState = 0;
         playerStatus->decorationList = 0;
         playerStatus->unk_C2 = 0;
-        playerStatus->decorationPos[0] = playerStatus->position.x;
-        playerStatus->decorationPos[1] = playerStatus->position.z;
+        playerStatus->landPos.x = playerStatus->position.x;
+        playerStatus->landPos.z = playerStatus->position.z;
 
         if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_8BIT_MARIO) {
             phi_a0 = 0x90000;
@@ -98,8 +98,8 @@ void func_802B61C0_E24AE0(void) {
         playerStatus->fallState = 0;
         playerStatus->decorationList = 0;
         playerStatus->unk_C2 = 0;
-        playerStatus->decorationPos[0] = playerStatus->position.x;
-        playerStatus->decorationPos[1] = playerStatus->position.z;
+        playerStatus->landPos.x = playerStatus->position.x;
+        playerStatus->landPos.z = playerStatus->position.z;
 
         if (!(currentCollisionStatus->currentFloor & 0x4000)) {
             phys_adjust_cam_on_landing();
@@ -135,8 +135,8 @@ void func_802B62CC_E24BEC(void) {
         playerStatus->decorationList = 0;
         playerStatus->unk_C2 = 0;
         playerStatus->flags &= ~(PLAYER_STATUS_FLAGS_KNOCKBACK | PLAYER_STATUS_FLAGS_FALLING | PLAYER_STATUS_FLAGS_JUMPING);
-        playerStatus->decorationPos[0] = playerStatus->position.x;
-        playerStatus->decorationPos[1] = playerStatus->position.z;
+        playerStatus->landPos.x = playerStatus->position.x;
+        playerStatus->landPos.z = playerStatus->position.z;
 
         sfx_play_sound_at_player(0x148, 0);
 
@@ -185,8 +185,8 @@ void func_802B644C_E24D6C(void) {
         playerStatus->decorationList = 0;
         playerStatus->unk_C2 = 0;
         playerStatus->flags &= ~(PLAYER_STATUS_FLAGS_KNOCKBACK | PLAYER_STATUS_FLAGS_FALLING | PLAYER_STATUS_FLAGS_JUMPING);
-        playerStatus->decorationPos[0] = playerStatus->position.x;
-        playerStatus->decorationPos[1] = playerStatus->position.z;
+        playerStatus->landPos.x = playerStatus->position.x;
+        playerStatus->landPos.z = playerStatus->position.z;
 
         if (!(currentCollisionStatus->currentFloor & 0x4000)) {
             phys_adjust_cam_on_landing();

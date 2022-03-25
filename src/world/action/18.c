@@ -76,12 +76,12 @@ void func_802B6230_E24800(void) {
     if (playerStatus->flags < 0) {
         playerStatus->flags &= ~0x80000000;
         suggest_player_anim_clearUnkFlag(0xA0005);
-        playerStatus->framesOnGround = 8;
+        playerStatus->currentStateTime = 8;
     }
 
-    if (playerStatus->framesOnGround != 0) {
-        playerStatus->framesOnGround--;
-        if (playerStatus->framesOnGround == 4) {
+    if (playerStatus->currentStateTime != 0) {
+        playerStatus->currentStateTime--;
+        if (playerStatus->currentStateTime == 4) {
             try_player_footstep_sounds(1);
         }
     } else {

@@ -22,19 +22,19 @@ void world_action_idle_update(void) {
         return;
     }
 
-    playerStatus->framesOnGround++;
+    playerStatus->currentStateTime++;
 
-    if (playerStatus->flags & 0x80000000) {
+    if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
         s32 anim;
 
         playerStatus->flags &= ~0x8008000E;
         wasMoving = TRUE;
         playerStatus->fallState = 0;
-        playerStatus->framesOnGround = 0;
+        playerStatus->currentStateTime = 0;
         playerStatus->decorationList = 0;
         playerStatus->unk_C2 = 0;
         playerStatus->currentSpeed = 0.0f;
-        playerStatus->unk_8C = 0.0f;
+        playerStatus->pitch = 0.0f;
 
         if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_8BIT_MARIO) {
             anim = 0x90002;
@@ -48,8 +48,8 @@ void world_action_idle_update(void) {
         suggest_player_anim_clearUnkFlag(anim);
     }
 
-    if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_GET_STAR_SPIRIT) {
-        set_action_state(ACTION_STATE_GET_STAR_SPIRIT);
+    if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_RAISED_ARMS) {
+        set_action_state(ACTION_STATE_RAISE_ARMS);
     } else {
         f32 angle;
         f32 magnitude;
@@ -65,7 +65,7 @@ void world_action_idle_update(void) {
             if (magnitude == 0.0f) {
                 playerData->idleFrameCounter++;
             } else {
-                playerStatus->framesOnGround = 0;
+                playerStatus->currentStateTime = 0;
                 set_action_state(ACTION_STATE_WALK);
                 if (magnitude != 0.0f) {
                     playerStatus->targetYaw = angle;
@@ -85,7 +85,7 @@ void func_802B61E4_E23444(void) {
     if (playerStatus->flags & 0x80000000) {
         playerStatus->flags &= ~0x80000000;
         playerStatus->fallState = 0;
-        playerStatus->framesOnGround = 0;
+        playerStatus->currentStateTime = 0;
         playerStatus->decorationList = 0;
         playerStatus->unk_C2 = 0;
         playerStatus->currentSpeed = 0.0f;
@@ -106,24 +106,24 @@ void func_802B61E4_E23444(void) {
         switch (playerStatus->fallState) {
             case 0:
                 if (((playerStatus->flags & 0x3000) == 0) && (playerStatus->unk_C4 == 0)) {
-                    if (playerStatus->framesOnGround > 1800) {
+                    if (playerStatus->currentStateTime > 1800) {
                         playerStatus->fallState++;
                         suggest_player_anim_clearUnkFlag(0xC0003);
                         return;
                     }
-                    playerStatus->framesOnGround++;
+                    playerStatus->currentStateTime++;
                 }
                 break;
             case 1:
                 if (playerStatus->unk_BC != 0) {
                     playerStatus->fallState++;
-                    playerStatus->framesOnGround = 0;
+                    playerStatus->currentStateTime = 0;
                     suggest_player_anim_clearUnkFlag(0xA0001);
                 }
                 break;
             case 2: {
-                playerStatus->framesOnGround++;
-                if (playerStatus->framesOnGround > 200) {
+                playerStatus->currentStateTime++;
+                if (playerStatus->currentStateTime > 200) {
                     playerStatus->fallState++;
                     suggest_player_anim_clearUnkFlag(0xC0003);
                 }
@@ -144,7 +144,7 @@ void func_802B61E4_E23444(void) {
     phys_update_interact_collider();
 
     if (magnitude != 0.0f) {
-        playerStatus->framesOnGround = 0;
+        playerStatus->currentStateTime = 0;
         playerStatus->targetYaw = angle;
         set_action_state(ACTION_STATE_WALK);
     }

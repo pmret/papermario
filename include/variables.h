@@ -100,13 +100,13 @@ extern MessagePrintState* D_802DB268;
 extern ShadowBlueprint CircularShadowA;
 extern ShadowBlueprint CircularShadowB;
 extern ShadowBlueprint SquareShadow;
-extern s32 SaveBlockTutorialMessagePrinterClosed;
-extern s32 SaveBlockResultMessagePrinterClosed;
-extern MessagePrintState* SaveBlockTutorialMessagePrinter;
-extern MessagePrintState* SaveBlockResultMessagePrinter;
+extern s32 SaveBlockTutorialPrinterClosed;
+extern s32 SaveBlockResultPrinterClosed;
+extern MessagePrintState* SaveBlockTutorialPrinter;
+extern MessagePrintState* SaveBlockResultPrinter;
 extern s32 D_802E99DC;
 
-extern Entity* D_802EB3A0;
+extern Entity* SwitchToLink;
 extern s32 CreateEntityVarArgBuffer[3]; // not size 3
 
 extern f32 D_800F7B70[4];

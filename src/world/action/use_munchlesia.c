@@ -61,13 +61,13 @@ void func_802B6000_E291A0(void) {
             if (playerStatus->unk_BC != 0) {
                 suggest_player_anim_setUnkFlag(0x10030);
                 playerStatus->fallState = 5;
-                playerStatus->framesOnGround = 15;
+                playerStatus->currentStateTime = 15;
                 break;
             }
             break;
         case 5:
-            if (playerStatus->framesOnGround != 0) {
-                playerStatus->framesOnGround--;
+            if (playerStatus->currentStateTime != 0) {
+                playerStatus->currentStateTime--;
                 break;
             }
             enable_player_static_collisions();
