@@ -1015,7 +1015,6 @@ extern RenderTask* mdl_renderTaskLists[3];
 extern s32 mdl_renderTaskMode;
 extern s32 mdl_renderTaskCount; // num render task entries?
 
-extern s8 D_8015A578;
 extern TextureHandle mdl_textureHandles[128];
 extern RenderTask mdl_clearRenderTasks[3][0x100];
 
@@ -1156,7 +1155,7 @@ void update_entities(void) {
     }
 
     update_shadows();
-    D_8015A578 = 0;
+    D_8015A578.unk_00 = 0;
 }
 
 void update_shadows(void) {

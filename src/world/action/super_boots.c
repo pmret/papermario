@@ -1,7 +1,6 @@
 #include "common.h"
 
 extern f32 D_802B6730;
-extern struct struct8015A578 D_8015A578;
 
 s32 func_802B6648_E27428(void);
 
@@ -9,7 +8,7 @@ void func_802B6000_E26DE0(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     CollisionStatus* collisionStatus = &gCollisionStatus;
     Entity* entity;
-    struct8015A578* tempStruct;
+    Struct8015A578* tempStruct;
     s32 sp10;
     s32 tempCondition;
     f32 temp_f20;

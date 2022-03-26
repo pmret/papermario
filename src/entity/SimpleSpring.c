@@ -1,7 +1,5 @@
 #include "common.h"
 
-extern void* D_8015A578;
-
 INCLUDE_ASM(s32, "entity/SimpleSpring", entity_ScriptSpring_idle);
 
 #ifdef NON_EQUIVALENT
@@ -104,7 +102,7 @@ void entity_HiddenPanel_init(Entity* ent) {
     s32 phi_v0;
 
     data = ent->dataBuf.unk;
-    mem_clear(&D_8015A578, 0x10);
+    mem_clear(&D_8015A578, sizeof(D_8015A578));
     ent->unk3C = &entity_HiddenPanel_setupGfx;
     data->unk6 = 0xFFFF;
     data->unk24 = (?32) ent->unk4C;
@@ -127,7 +125,7 @@ void entity_HiddenPanel_init(Entity* ent) {
     guMtxCatF(&sp58, &sp18, &sp18);
     guScaleF(&sp58, ent->scale.x, ent->scale.y, ent->scale.z);
     guMtxCatF(&sp58, &sp18, temp_s1);
-    if ((D_8015A578.unk1 & 1) != 0) {
+    if (D_8015A578.unk_01 & 1) {
         entity_set_render_script(ent, &D_802EAAE0);
         phi_v0 = 0xA0001B0 & 0xFFFF;
     } else {
@@ -136,7 +134,7 @@ void entity_HiddenPanel_init(Entity* ent) {
     temp_a1 = ent->vertexData + phi_v0;
     data->unk78 = temp_a1;
     mdl_project_tex_coords(data->unk74, temp_a1, temp_s2 + 0x34, ent->unk44);
-    D_8015A578.unk1 = (u8) (D_8015A578.unk1 + 1);
+    D_8015A578.unk_01++;
 }
 
 #else
