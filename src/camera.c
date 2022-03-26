@@ -8,7 +8,7 @@ CameraControlSettings* test_ray_zone(f32 posX, f32 posY, f32 posZ, Collider** zo
     s32 zoneID;
 
     hitDepth = 32767.0f;
-    zoneID = test_ray_zones(posX, posY, posZ, 0, -1, 0, &hitX, &hitY, &hitZ, &hitDepth, &nX, &nY, &nZ);
+    zoneID = test_ray_zones(posX, posY, posZ, 0, -1.0f, 0, &hitX, &hitY, &hitZ, &hitDepth, &nX, &nY, &nZ);
     if (zoneID >= 0) {
         if (zone) {
             *zone = &gZoneCollisionData.colliderList[zoneID];
@@ -32,7 +32,7 @@ s32 func_800328A4(CameraControlSettings* camSettings, f32 x, f32 z) {
     if (!camSettings) {
         return 0;
     }
-    if (camSettings->type != 6) {
+    if (camSettings->type != CAMERA_SETTINGS_TYPE_6) {
         return 0;
     }
     delta = x - camSettings->posA.x;
@@ -235,7 +235,7 @@ void func_80032C64(Camera* camera) {
         if (settings->type == CAMERA_SETTINGS_TYPE_2 || settings->type == CAMERA_SETTINGS_TYPE_5 || func_800328A4(camera->aabbForZoneBelow, newPosX, newPosZ) != 0) {
             cond = TRUE;
             dist = 1000000.0f;
-            if (camera->aabbForZoneBelow && camera->aabbForZoneBelow->type == 6) {
+            if (camera->aabbForZoneBelow && camera->aabbForZoneBelow->type == CAMERA_SETTINGS_TYPE_6) {
                 settings2 = camera->aabbForZoneBelow;
                 cond = FALSE;
 
