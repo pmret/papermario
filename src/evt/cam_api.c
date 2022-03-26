@@ -560,7 +560,7 @@ ApiStatus SetCamProperties(Evt* script, s32 isInitialCall) {
 
     if (isInitialCall) {
         hitDepth = 32767.0f;
-        zoneID = test_ray_zones(posX, posY + 10, posZ, 0, -1.0f, 0, &hitX, &hitY, &hitZ, &hitDepth, &nX, &nY, &nZ);
+        zoneID = test_ray_zones(posX, posY + 10.0f, posZ, 0.0f, -1.0f, 0.0f, &hitX, &hitY, &hitZ, &hitDepth, &nX, &nY, &nZ);
         if (zoneID >= 0) {
             camera->controlSettings = *gZoneCollisionData.colliderList[zoneID].camSettings;
         }
@@ -574,11 +574,11 @@ ApiStatus SetCamProperties(Evt* script, s32 isInitialCall) {
         camera->moveSpeed = moveSpeed;
         camera->unk_506 = 1;
         camera->followPlayer = TRUE;
-        camera->panPhase = 0;
+        camera->panPhase = 0.0f;
         return ApiStatus_BLOCK;
     }
 
-    if (camera->interpAlpha >= 1) {
+    if (camera->interpAlpha >= 1.0f) {
         return ApiStatus_DONE2;
     } else {
         return ApiStatus_BLOCK;
@@ -603,7 +603,7 @@ ApiStatus AdjustCam(Evt* script, s32 isInitialCall) {
         posX = playerStatus->position.x;
         posY = playerStatus->position.y;
         posZ = playerStatus->position.z;
-        zoneID = test_ray_zones(posX, posY + 10.0f, posZ, 0, -1.0f, 0, &hitX, &hitY, &hitZ, &hitDepth, &nX, &nY, &nZ);
+        zoneID = test_ray_zones(posX, posY + 10.0f, posZ, 0.0f, -1.0f, 0.0f, &hitX, &hitY, &hitZ, &hitDepth, &nX, &nY, &nZ);
         if (zoneID >= 0) {
             camera->controlSettings = *gZoneCollisionData.colliderList[zoneID].camSettings;
         }
@@ -617,11 +617,11 @@ ApiStatus AdjustCam(Evt* script, s32 isInitialCall) {
         camera->moveSpeed = moveSpeed;
         camera->unk_506 = 1;
         camera->followPlayer = TRUE;
-        camera->panPhase = 0;
+        camera->panPhase = 0.0f;
         return ApiStatus_BLOCK;
     }
 
-    if (camera->interpAlpha >= 1) {
+    if (camera->interpAlpha >= 1.0f) {
         return ApiStatus_DONE2;
     } else {
         return ApiStatus_BLOCK;

@@ -8,9 +8,9 @@ CameraControlSettings* test_ray_zone(f32 posX, f32 posY, f32 posZ, Collider** zo
     s32 zoneID;
 
     hitDepth = 32767.0f;
-    zoneID = test_ray_zones(posX, posY, posZ, 0, -1.0f, 0, &hitX, &hitY, &hitZ, &hitDepth, &nX, &nY, &nZ);
+    zoneID = test_ray_zones(posX, posY, posZ, 0.0f, -1.0f, 0.0f, &hitX, &hitY, &hitZ, &hitDepth, &nX, &nY, &nZ);
     if (zoneID >= 0) {
-        if (zone) {
+        if (zone != NULL) {
             *zone = &gZoneCollisionData.colliderList[zoneID];
         }
         return gZoneCollisionData.colliderList[zoneID].camSettings;
@@ -29,7 +29,7 @@ s32 func_800328A4(CameraControlSettings* camSettings, f32 x, f32 z) {
     f32 product1, product2;
     f32 delta, p1, p2, p3, p4;
 
-    if (!camSettings) {
+    if (camSettings == NULL) {
         return 0;
     }
     if (camSettings->type != CAMERA_SETTINGS_TYPE_6) {
@@ -66,75 +66,75 @@ void func_80032970(Camera* camera, f32 arg1) {
     s32 flags = camera->flags & CAM_FLAG_1000;
     s32 a2 = flags != 0;
 
-    if (camera->currentController && camera->currentController->type == CAMERA_SETTINGS_TYPE_4) {
+    if (camera->currentController != NULL && camera->currentController->type == CAMERA_SETTINGS_TYPE_4) {
         a2 = TRUE;
     }
 
     if (a2) {
-        stickX = 0;
-        camera->unk_51C = 1;
-        camera->unk_514 = 1;
-        camera->unk_510 = 0;
+        stickX = 0.0f;
+        camera->unk_51C = TRUE;
+        camera->unk_514 = 1.0f;
+        camera->unk_510 = 0.0f;
     } else {
         if (gPlayerStatusPtr->animFlags & PLAYER_STATUS_ANIM_FLAGS_400000) {
             stickX = gPartnerActionStatus.stickX;
         } else {
             stickX = gPlayerStatusPtr->stickAxis[0];
         }
-        if (stickX > 0) {
-            stickX = 50;
+        if (stickX > 0.0f) {
+            stickX = 50.0f;
         }
-        if (stickX < 0) {
-            stickX = -50;
+        if (stickX < 0.0f) {
+            stickX = -50.0f;
         }
     }
 
-    if (stickX != 0) {
-        if (stickX < 0) {
-            if (camera->unk_518 > 0) {
+    if (stickX != 0.0f) {
+        if (stickX < 0.0f) {
+            if (camera->unk_518 > 0.0f) {
                 camera->unk_518 = stickX;
             } else {
                 camera->unk_518 += stickX;
             }
-            if (camera->unk_518 <= -300) {
-                camera->unk_51C = 1;
-                if (camera->unk_510 > 0) {
-                    camera->unk_514 = 0;
+            if (camera->unk_518 <= -300.0f) {
+                camera->unk_51C = TRUE;
+                if (camera->unk_510 > 0.0f) {
+                    camera->unk_514 = 0.0f;
                 }
                 camera->unk_510 = -arg1;
-                camera->unk_518 = -300;
+                camera->unk_518 = -300.0f;
             }
         } else {
-            if (camera->unk_518 < 0) {
+            if (camera->unk_518 < 0.0f) {
                 camera->unk_518 = stickX;
             } else {
                 camera->unk_518 += stickX;
             }
-            if (camera->unk_518 >= 300) {
-                camera->unk_51C = 1;
-                if (camera->unk_510 < 0) {
-                    camera->unk_514 = 0;
+            if (camera->unk_518 >= 300.0f) {
+                camera->unk_51C = TRUE;
+                if (camera->unk_510 < 0.0f) {
+                    camera->unk_514 = 0.0f;
                 }
                 camera->unk_510 = arg1;
-                camera->unk_518 = 300;
+                camera->unk_518 = 300.0f;
             }
         }
     }
 
-    if (camera->unk_51C != 0) {
+    if (camera->unk_51C) {
         camera->unk_514 += 0.01f;
-        if (camera->unk_514 > 1) {
-            camera->unk_514 = 1;
+        if (camera->unk_514 > 1.0f) {
+            camera->unk_514 = 1.0f;
         }
     }
 
-    if (camera->unk_510 - camera->leadAmount == 0) {
-        camera->unk_514 = 0;
-        camera->unk_51C = 0;
+    if (camera->unk_510 - camera->leadAmount == 0.0f) {
+        camera->unk_514 = 0.0f;
+        camera->unk_51C = FALSE;
     }
 
     deltaLeadAmount = (camera->unk_510 - camera->leadAmount) * camera->unk_514;
-    if (camera->unk_510 - camera->leadAmount > 0) {
+    if (camera->unk_510 - camera->leadAmount > 0.0f) {
         if (camera->unk_510 - camera->leadAmount < 0.1) {
             deltaLeadAmount = camera->unk_510 - camera->leadAmount;
         }
@@ -150,10 +150,10 @@ void func_80032970(Camera* camera, f32 arg1) {
         }
     }
 
-    if (stickX != 0 || a2) {
+    if (stickX != 0.0f || a2) {
         camera->leadAmount += deltaLeadAmount;
     } else {
-        camera->unk_514 = 0;
+        camera->unk_514 = 0.0f;
     }
 }
 
@@ -175,14 +175,14 @@ void func_80032C64(Camera* camera) {
     f32 deltaPosX, deltaPosZ;
     f32 f24, f22, cosYaw, sinYaw;
 
-    rotationRad = camera->trueRotation.x / 180 * PI;
+    rotationRad = camera->trueRotation.x / 180.0f * PI;
     leadAmount = camera->leadAmount;
     s2 = 0;
     cos_rad(rotationRad);
     sin_rad(rotationRad);
     settings3 = settings = test_ray_zone(camera->targetPos.x, camera->targetPos.y + 10.0f, camera->targetPos.z, NULL);
 
-    if (settings) {
+    if (settings != NULL) {
         if (settings->type == CAMERA_SETTINGS_TYPE_2 || settings->type == CAMERA_SETTINGS_TYPE_5 || (s2 = func_800328A4(settings, camera->targetPos.x, camera->targetPos.z))) {
             if (camera->unk_530) {
                 guPerspectiveF(camera->perspectiveMatrix, &camera->perspNorm, camera->vfov,
@@ -193,29 +193,30 @@ void func_80032C64(Camera* camera) {
                 if (S == 0.0f) {
                     S = 1.0f;
                 }
-                S = 1 / S;
+                S = 1.0f / S;
                 X *= S;
-                camera->unk_52C = (X > 0) ? 1 : (X < 0) ? -1 : 0;
+                camera->unk_52C = (X > 0.0f) ? 1 : (X < 0.0f) ? -1 : 0;
                 camera->unk_530 = 0;
             } else {
                 CameraControlSettings* aabbForZoneBelow = camera->aabbForZoneBelow;
 
-                if (aabbForZoneBelow && (aabbForZoneBelow->type == CAMERA_SETTINGS_TYPE_2 || aabbForZoneBelow->type == CAMERA_SETTINGS_TYPE_5 || func_800328A4(settings, camera->unk_524, camera->unk_528) != 0)) {
-                } else if (aabbForZoneBelow && s2) {
-                    camera->unk_52C = s2;
-                } else {
-                    f24 = cosYaw = camera->targetPos.x - camera->unk_524;
-                    f22 = camera->targetPos.z - camera->unk_528;
-                    cosYaw = -cos_deg(camera->currentYaw);
-                    sinYaw = -sin_deg(camera->currentYaw);
-                    product = f24 * cosYaw + f22 * sinYaw;
-                    camera->unk_52C = (product > 0) ? -1 : (product < 0) ? 1 : 0;
+                if (!(aabbForZoneBelow != NULL && (aabbForZoneBelow->type == CAMERA_SETTINGS_TYPE_2 || aabbForZoneBelow->type == CAMERA_SETTINGS_TYPE_5 || func_800328A4(settings, camera->unk_524, camera->unk_528) != 0))) {
+                    if (aabbForZoneBelow != NULL && s2 != 0) {
+                        camera->unk_52C = s2;
+                    } else {
+                        f24 = cosYaw = camera->targetPos.x - camera->unk_524;
+                        f22 = camera->targetPos.z - camera->unk_528;
+                        cosYaw = -cos_deg(camera->currentYaw);
+                        sinYaw = -sin_deg(camera->currentYaw);
+                        product = f24 * cosYaw + f22 * sinYaw;
+                        camera->unk_52C = (product > 0) ? -1 : (product < 0) ? 1 : 0;
+                    }
                 }
             }
 
-            if (leadAmount > 0 && camera->unk_52C > 0 || leadAmount < 0 && camera->unk_52C < 0) {
-                camera->unk_514 = 0;
-                camera->leadAmount = 0;
+            if (leadAmount > 0.0f && camera->unk_52C > 0 || leadAmount < 0.0f && camera->unk_52C < 0) {
+                camera->unk_514 = 0.0f;
+                camera->leadAmount = 0.0f;
             }
             camera->aabbForZoneBelow = settings3;
             camera->unk_524 = camera->targetPos.x;
@@ -231,11 +232,11 @@ void func_80032C64(Camera* camera) {
     newPosX = camera->targetPos.x + leadAmount * cos_rad(rotationRad);
     newPosZ = camera->targetPos.z + leadAmount * sin_rad(rotationRad);
     settings = test_ray_zone(newPosX, camera->targetPos.y + 10.0f, newPosZ, &zone);
-    if (settings) {
+    if (settings != NULL) {
         if (settings->type == CAMERA_SETTINGS_TYPE_2 || settings->type == CAMERA_SETTINGS_TYPE_5 || func_800328A4(camera->aabbForZoneBelow, newPosX, newPosZ) != 0) {
             cond = TRUE;
             dist = 1000000.0f;
-            if (camera->aabbForZoneBelow && camera->aabbForZoneBelow->type == CAMERA_SETTINGS_TYPE_6) {
+            if (camera->aabbForZoneBelow != NULL && camera->aabbForZoneBelow->type == CAMERA_SETTINGS_TYPE_6) {
                 settings2 = camera->aabbForZoneBelow;
                 cond = FALSE;
 
@@ -274,12 +275,11 @@ void func_80032C64(Camera* camera) {
             }
 
             if (dist == 1000000.0f || dist == 0) {
-                camera->leadAmount = 0;
+                camera->leadAmount = 0.0f;
             } else {
-                camera->leadAmount = (camera->leadAmount > 0) ? sqrtf(dist) : -sqrtf(dist);
+                camera->leadAmount = (camera->leadAmount > 0.0f) ? sqrtf(dist) : -sqrtf(dist);
             }
-            camera->unk_514 = 0;
-            return;
+            camera->unk_514 = 0.0f;
         }
     }
 }
