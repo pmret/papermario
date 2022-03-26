@@ -1584,45 +1584,45 @@ void _delete_shadow(s32 shadowIndex) {
 
 s32 entity_get_collision_flags(Entity* entity) {
     u32 listIndex = entity->listIndex;
-    s32 ret = 0;
+    s32 entityFlags = 0;
     u32 flag;
 
     if (entity->flags & ENTITY_FLAGS_BLOCK_BEING_HIT) {
-        ret = 0x80;
+        entityFlags = ENTITY_COLLISION_BLOCK_HIT;
         entity->flags &= ~ENTITY_FLAGS_BLOCK_BEING_HIT;
     }
 
     flag = gCollisionStatus.currentFloor;
-    if (flag != -1 && (flag & 0x4000) && listIndex == (u8)flag) {
-        ret |= 1;
+    if (flag != -1 && (flag & COLLISION_WITH_ENTITY_BIT) && listIndex == (u8)flag) {
+        entityFlags |= ENTITY_COLLISION_PLAYER_TOUCH_FLOOR;
     }
 
     flag = gCollisionStatus.lastTouchedFloor;
-    if (flag != -1 && (flag & 0x4000) && listIndex == (u8)flag) {
-        ret |= 0x100;
+    if (flag != -1 && (flag & COLLISION_WITH_ENTITY_BIT) && listIndex == (u8)flag) {
+        entityFlags |= ENTITY_COLLISION_PLAYER_LAST_FLOOR;
     }
 
     flag = gCollisionStatus.currentCeiling;
-    if (flag != -1 && (flag & 0x4000) && listIndex == (u8)flag) {
-        ret |= 0x4;
+    if (flag != -1 && (flag & COLLISION_WITH_ENTITY_BIT) && listIndex == (u8)flag) {
+        entityFlags |= ENTITY_COLLISION_PLAYER_TOUCH_CEILING;
     }
 
     flag = gCollisionStatus.pushingAgainstWall;
-    if (flag != -1 && (flag & 0x4000) && listIndex == (u8)flag) {
-        ret |= 0x10;
+    if (flag != -1 && (flag & COLLISION_WITH_ENTITY_BIT) && listIndex == (u8)flag) {
+        entityFlags |= ENTITY_COLLISION_PLAYER_PUSHING_AGAINST;
     }
 
     flag = gCollisionStatus.lastWallHammered;
-    if (flag != -1 && (flag & 0x4000) && listIndex == (u8)flag) {
-        ret |= 0x40;
+    if (flag != -1 && (flag & COLLISION_WITH_ENTITY_BIT) && listIndex == (u8)flag) {
+        entityFlags |= ENTITY_COLLISION_PLAYER_HAMMER;
     }
 
     flag = gCollisionStatus.currentWall;
-    if (flag != -1 && (flag & 0x4000) && listIndex == (u8)flag && gPlayerStatusPtr->pressedButtons & 0x8000) {
-        ret |= 8;
+    if (flag != -1 && (flag & COLLISION_WITH_ENTITY_BIT) && listIndex == (u8)flag && gPlayerStatusPtr->pressedButtons & 0x8000) {
+        entityFlags |= ENTITY_COLLISION_PLAYER_TOUCH_WALL;
     }
 
-    return ret;
+    return entityFlags;
 }
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", entity_interacts_with_current_partner);
@@ -2130,7 +2130,7 @@ s32 entity_raycast_down(f32* x, f32* y, f32* z, f32* hitYaw, f32* hitPitch, f32*
     ret = FALSE;
 
     if ((entityID >= 0) && ((get_entity_type(entityID) != 0xC) || (hitNx == 0.0f && hitNz == 0.0f && hitNy == 1.0))) {
-        hitID = entityID | 0x4000;
+        hitID = entityID | COLLISION_WITH_ENTITY_BIT;
     }
 
     colliderID = test_ray_colliders(0x10000, *x, *y, *z, 0.0f, -1.0f, 0.0f, &hitX, &hitY, &hitZ, &hitDepth, &hitNx,

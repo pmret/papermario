@@ -146,9 +146,15 @@ void spr_set_anim_timescale(f32 timeScale);
 
 void spr_load_player_sprite(s32 spriteIndex);
 
+SpriteAnimData* spr_load_sprite(s32, s32, s32);
+
+void fold_init(void);
+
 void spr_init_sprites(s32 playerSpriteSet);
 
 void spr_render_init(void);
+
+void spr_update_player_raster_cache(void);
 
 s32 func_802DDA84(void);
 
@@ -180,13 +186,13 @@ s32 spr_free_sprite(s32 spriteInstanceID);
 
 //s32 func_802DE748(); // TODO
 
-//s32 func_802DE780(); // TODO
+s32 func_802DE780(s32, s32, s32, s32, s32, s32, s32, s32);
 
 s32 func_802DE894(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
 
 //s32 func_802DE8DC(); // TODO
 
-s32 spr_get_npc_raster_info(SpriteRasterInfo* out, int npcSpriteID, int rasterIndex);
+s32 spr_get_npc_raster_info(SpriteRasterInfo* out, s32 npcSpriteID, s32 rasterIndex);
 
 s32** spr_get_npc_palettes(s32 npcSpriteID);
 

@@ -263,23 +263,23 @@ ApiStatus ShakeCam(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-void exec_ShakeCam1(s32 arg0, s32 arg1, s32 arg2) {
+void exec_ShakeCam1(s32 camID, s32 mode, s32 duration) {
     Evt* script;
 
     script = start_script_in_group(&ShakeCam1, 1, 0, 4);
-    script->varTable[0] = arg0;
-    script->varTable[1] = arg1;
-    script->varTable[2] = arg2;
+    script->varTable[0] = camID;
+    script->varTable[1] = mode;
+    script->varTable[2] = duration;
 }
 
-void exec_ShakeCamX(s32 arg0, s32 arg1, s32 arg2, f32 arg3) {
+void exec_ShakeCamX(s32 camID, s32 mode, s32 duration, f32 magnitude) {
     Evt* script;
 
     script = start_script_in_group(&ShakeCamX, 1, 0, 4);
-    evt_set_variable(script, EVT_VAR(0), arg0);
-    evt_set_variable(script, EVT_VAR(1), arg1);
-    evt_set_variable(script, EVT_VAR(2), arg2);
-    evt_set_float_variable(script, EVT_VAR(3), arg3);
+    evt_set_variable(script, EVT_VAR(0), camID);
+    evt_set_variable(script, EVT_VAR(1), mode);
+    evt_set_variable(script, EVT_VAR(2), duration);
+    evt_set_float_variable(script, EVT_VAR(3), magnitude);
 }
 
 ApiStatus SetCamLeadPlayer(Evt* script, s32 isInitialCall) {

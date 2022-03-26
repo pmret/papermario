@@ -3,6 +3,8 @@
 
 #include "common.h"
 
+#define HUD_ELEMENT_BATTLE_ID_MASK 0x800
+
 typedef enum {
     HUD_ELEMENT_OP_End,
     HUD_ELEMENT_OP_SetRGBA,
@@ -78,7 +80,7 @@ enum HudElementFlags {
     HUD_ELEMENT_FLAGS_FLIPX              = 0x00001000,
     HUD_ELEMENT_FLAGS_FLIPY              = 0x00002000,
     HUD_ELEMENT_FLAGS_FMT_CI4            = 0x00004000,
-    HUD_ELEMENT_FLAGS_8000               = 0x00008000,
+    HUD_ELEMENT_FLAGS_FILTER_TEX         = 0x00008000,
     HUD_ELEMENT_FLAGS_TRANSFORM          = 0x00010000,
     HUD_ELEMENT_FLAGS_NO_FOLD            = 0x00020000,
     HUD_ELEMENT_FLAGS_DELETE             = 0x00040000,
@@ -92,9 +94,15 @@ enum HudElementFlags {
     HUD_ELEMENT_FLAGS_4000000            = 0x04000000,
     HUD_ELEMENT_FLAGS_8000000            = 0x08000000,
     HUD_ELEMENT_FLAGS_10000000           = 0x10000000,
-    HUD_ELEMENT_FLAGS_SHADOW             = 0x20000000,
+    HUD_ELEMENT_FLAGS_DROP_SHADOW        = 0x20000000,
     HUD_ELEMENT_FLAGS_40000000           = 0x40000000,
     HUD_ELEMENT_FLAGS_80000000           = 0x80000000,
+};
+
+enum {
+    HUD_ELEMENT_DRAW_FIRST_WITH_CLIPPING    = 0,
+    HUD_ELEMENT_DRAW_NEXT                   = 1,
+    HUD_ELEMENT_DRAW_FIRST_WITHOUT_CLIPPING = 2,
 };
 
 typedef struct HudScriptPair {
@@ -183,18 +191,18 @@ extern HudScript HudScript_MenuTimes[];
 #define he_PlaySound(arg0) HUD_ELEMENT_OP_PlaySound, arg0
 #define he_SetPivot(arg0, arg1) HUD_ELEMENT_OP_SetPivot, arg0, arg1
 
-void load_hud_element(HudElement* hudElement, const HudScript* anim);
+void hud_element_load_script(HudElement* hudElement, const HudScript* anim);
 
 /// @param clamp        0 = repeat; 1 = clamp
 /// @param dropShadow   Whether to render a drop shadow or not
-void draw_rect_hud_element(HudElement* hudElement, s16 texSizeX, s16 texSizeY, s16 drawSizeX, s16 drawSizeY, s16 offsetX, s16 offsetY, s32 clamp, s32 dropShadow);
+void hud_element_draw_rect(HudElement* hudElement, s16 texSizeX, s16 texSizeY, s16 drawSizeX, s16 drawSizeY, s16 offsetX, s16 offsetY, s32 clamp, s32 dropShadow);
 
-void clear_hud_element_cache(void);
+void hud_element_clear_cache(void);
 
 void init_hud_element_list(void);
 
 /// Creates a new HUD element and returns its ID.
-s32 create_hud_element(const HudScript* anim);
+s32 hud_element_create(const HudScript* anim);
 
 void update_hud_elements(void);
 
@@ -215,65 +223,65 @@ void func_80144238(s32 arg0);
 void func_80144258(s32 arg0);
 void func_80144278(s32 arg0);
 
-void draw_hud_element(s32 id, s32 clipMode);
-void draw_hud_element_clipped(s32 id);
-void draw_hud_element_2(s32 id);
-void draw_hud_element_3(s32 id);
+void draw_hud_element_internal(s32 id, s32 clipMode);
+void hud_element_draw_clipped(s32 id);
+void hud_element_draw_next(s32 id);
+void hud_element_draw_without_clipping(s32 id);
 
-void set_hud_element_anim(s32 id, const HudScript* anim);
+void hud_element_set_script(s32 id, const HudScript* anim);
 
-HudScript* get_hud_element_anim(s32 id);
+HudScript* hud_element_get_script(s32 id);
 
 HudElement* get_hud_element(s32 id);
 
-void free_hud_element(s32 id);
+void hud_element_free(s32 id);
 
-void set_hud_element_render_pos(s32 id, s32 x, s32 y);
+void hud_element_set_render_pos(s32 id, s32 x, s32 y);
 
-void get_hud_element_render_pos(s32 id, s32* x, s32* y);
+void hud_element_get_render_pos(s32 id, s32* x, s32* y);
 
-void set_hud_element_render_depth(s32 id, s32 z);
+void hud_element_set_render_depth(s32 id, s32 z);
 
 /// Turns on the given flags.
-void set_hud_element_flags(s32 id, s32 flags);
+void hud_element_set_flags(s32 id, s32 flags);
 
 /// Turns off the given flags.
-void clear_hud_element_flags(s32 id, s32 flags);
+void hud_element_clear_flags(s32 id, s32 flags);
 
-/// @see clear_hud_element_cache
+/// @see hud_element_clear_cache
 void ALT_clear_hud_element_cache(void);
 
-void set_hud_element_scale(s32 index, f32 scale);
+void hud_element_set_scale(s32 index, f32 scale);
 
-void set_hud_element_size_preset(s32 id, s8 size);
+void hud_element_use_preset_size(s32 id, s8 size);
 
 s32 func_80144E4C(s32 id);
 
 void func_80144E74(s32 id, s32 arg1);
 
 /// @param opacity 0 = invisible; 255 = opaque
-void set_hud_element_alpha(s32 id, s32 opacity);
+void hud_element_set_alpha(s32 id, s32 opacity);
 
-void set_hud_element_tint(s32 id, s32 r, s32 g, s32 b);
+void hud_element_set_tint(s32 id, s32 r, s32 g, s32 b);
 
-void create_hud_element_transform_A(s32 id);
+void hud_element_create_transform_A(s32 id);
 
-void create_hud_element_transform_B(s32 id);
+void hud_element_create_transform_B(s32 id);
 
-void create_hud_element_transform_C(s32 id);
+void hud_element_create_transform_C(s32 id);
 
-void free_hud_element_transform(s32 id);
+void hud_element_free_transform(s32 id);
 
-void set_hud_element_transform_pos(s32 id, f32 x, f32 y, f32 z);
+void hud_element_set_transform_pos(s32 id, f32 x, f32 y, f32 z);
 
-void set_hud_element_transform_scale(s32 id, f32 x, f32 y, f32 z);
+void hud_element_set_transform_scale(s32 id, f32 x, f32 y, f32 z);
 
-void set_hud_element_transform_rotation(s32 id, f32 x, f32 y, f32 z);
+void hud_element_set_transform_rotation(s32 id, f32 x, f32 y, f32 z);
 
-void set_hud_element_transform_rotation_pivot(s32 id, s32 dx, s32 dy);
+void hud_element_set_transform_rotation_pivot(s32 id, s32 dx, s32 dy);
 
 void copy_world_hud_element_ref_to_battle(s32 worldID, s32 battleID);
 
-void set_hud_element_nonworld_cache(void* base, s32 size);
+void hud_element_set_aux_cache(void* base, s32 size);
 
 #endif

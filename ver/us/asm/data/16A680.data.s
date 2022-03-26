@@ -2,13 +2,13 @@
 
 .section .data
 
-dlabel D_80249E20
+dlabel filemenu_hudElemScripts
 .word 0x802423DC, func_80242434_9D9454, 0x8024248C, 0x802424E4, D_8024253C_AB46AC, 0x80242594, dgb_16_npcGroup_802425EC, 0x80242408, flo_14_updateTexturePan_80242460, 0x802424B8, 0x80242510, D_80242568_A4EF88, 0x802425C0, D_80242618_9800E8, 0x802422D4, 0x80242300, mac_02_SetCamVfov, omo_09_UnkFunc61, func_80242384_833B84, D_802423B0
 
 dlabel D_80249E70
 .word 0x00000102, 0x02030405, 0x06000001, 0x02020306, 0x06060000, 0x01020203, 0x06060600, 0x00010202, 0x03060606, 0x00000102, 0x02030606, 0x06000000
 
-dlabel D_80249EA0
+dlabel filemenu_windowBPs
 .word 0x2D000000, 0x00000000, 0x00000000, filemenu_draw_contents_title, 0x00000000, 0x2C000000, filemenu_update_show_title, 0x00000000, D_8024BB08, 0x3300FFFE, 0x00060044, 0x00140000, filemenu_draw_contents_stereo, 0x00000000, 0x2C000000, filemenu_update_show_options_left, 0x00000000, D_8024BAD0, 0x340000DD, 0x00060044, 0x00140000, filemenu_draw_contents_mono, 0x00000000, 0x2C000000, filemenu_update_show_options_right, 0x00000000, D_8024BAD0, 0x35000005, 0x00AB0058, 0x00100000, filemenu_draw_contents_option_left, 0x00000000, 0x2C000000, filemenu_update_show_options_bottom, 0x00000000, D_8024BB40, 0x36000000, 0x00AB0058, 0x00100000, filemenu_draw_contents_option_center, 0x00000000, 0x2C000000, filemenu_update_show_options_bottom, 0x00000000, D_8024BB78, 0x370000C3, 0x00AB0058, 0x00100000, filemenu_draw_contents_option_right, 0x00000000, 0x2C000000, filemenu_update_show_options_bottom, 0x00000000, D_8024BBB0, 0x3A000009, 0x006E0082, 0x00360000, filemenu_draw_contents_file_2_info, 0x00000000, 0x2C000000, filemenu_update_show_options_left, 0x00000000, D_8024BC58, 0x3E000003, 0xFFF8007C, 0x000F0000, filemenu_draw_contents_file_2_title, 0x00000000, 0x3A000000, 0x00000001, 0x00000000, D_8024BD38, 0x3B000095, 0x006E0082, 0x00360000, filemenu_draw_contents_file_3_info, 0x00000000, 0x2C000000, filemenu_update_show_options_right, 0x00000000, D_8024BC90, 0x3F000003, 0xFFF8007C, 0x000F0000, filemenu_draw_contents_file_3_title, 0x00000000, 0x3B000000, 0x00000001, 0x00000000, D_8024BD70, 0x38000009, 0x00290082, 0x00360000, filemenu_draw_contents_file_0_info, 0x00000000, 0x2C000000, filemenu_update_show_options_left, 0x00000000, D_8024BBE8, 0x3C000003, 0xFFF8007C, 0x000F0000, filemenu_draw_contents_file_0_title, 0x00000000, 0x38000000, 0x00000001, 0x00000000, D_8024BCC8, 0x39000095, 0x00290082, 0x00360000, filemenu_draw_contents_file_1_info, 0x00000000, 0x2C000000, filemenu_update_show_options_right, 0x00000000, D_8024BC20, 0x3D000003, 0xFFF8007C, 0x000F0000, filemenu_draw_contents_file_1_title, 0x00000000, 0x39000000, 0x00000001, 0x00000000, D_8024BD00
 
 dlabel D_8024A098

@@ -85,7 +85,7 @@ glabel func_802406C4_AF8014
 /* AF812C 802407DC AC600000 */  sw        $zero, ($v1)
 /* AF8130 802407E0 AE220000 */  sw        $v0, ($s1)
 /* AF8134 802407E4 24020040 */  addiu     $v0, $zero, 0x40
-/* AF8138 802407E8 0C050529 */  jal       create_hud_element
+/* AF8138 802407E8 0C050529 */  jal       hud_element_create
 /* AF813C 802407EC AE020000 */   sw       $v0, ($s0)
 /* AF8140 802407F0 0040982D */  daddu     $s3, $v0, $zero
 /* AF8144 802407F4 0260202D */  daddu     $a0, $s3, $zero
@@ -93,44 +93,44 @@ glabel func_802406C4_AF8014
 /* AF814C 802407FC 8E060000 */  lw        $a2, ($s0)
 /* AF8150 80240800 3C128024 */  lui       $s2, %hi(D_80246568_C8C018)
 /* AF8154 80240804 26526568 */  addiu     $s2, $s2, %lo(D_80246568_C8C018)
-/* AF8158 80240808 0C051261 */  jal       set_hud_element_render_pos
+/* AF8158 80240808 0C051261 */  jal       hud_element_set_render_pos
 /* AF815C 8024080C AE530000 */   sw       $s3, ($s2)
 /* AF8160 80240810 0260202D */  daddu     $a0, $s3, $zero
-/* AF8164 80240814 0C051277 */  jal       set_hud_element_render_depth
+/* AF8164 80240814 0C051277 */  jal       hud_element_set_render_depth
 /* AF8168 80240818 0000282D */   daddu    $a1, $zero, $zero
 /* AF816C 8024081C 0260202D */  daddu     $a0, $s3, $zero
-/* AF8170 80240820 0C051280 */  jal       set_hud_element_flags
+/* AF8170 80240820 0C051280 */  jal       hud_element_set_flags
 /* AF8174 80240824 24050082 */   addiu    $a1, $zero, 0x82
 /* AF8178 80240828 3C048011 */  lui       $a0, %hi(HudScript_BlueMeter)
 /* AF817C 8024082C 24848AFC */  addiu     $a0, $a0, %lo(HudScript_BlueMeter)
-/* AF8180 80240830 0C050529 */  jal       create_hud_element
+/* AF8180 80240830 0C050529 */  jal       hud_element_create
 /* AF8184 80240834 00000000 */   nop
 /* AF8188 80240838 0040982D */  daddu     $s3, $v0, $zero
 /* AF818C 8024083C 8E250000 */  lw        $a1, ($s1)
 /* AF8190 80240840 8E060000 */  lw        $a2, ($s0)
 /* AF8194 80240844 0260202D */  daddu     $a0, $s3, $zero
 /* AF8198 80240848 AE530004 */  sw        $s3, 4($s2)
-/* AF819C 8024084C 0C051261 */  jal       set_hud_element_render_pos
+/* AF819C 8024084C 0C051261 */  jal       hud_element_set_render_pos
 /* AF81A0 80240850 24C6001C */   addiu    $a2, $a2, 0x1c
 /* AF81A4 80240854 0260202D */  daddu     $a0, $s3, $zero
-/* AF81A8 80240858 0C051277 */  jal       set_hud_element_render_depth
+/* AF81A8 80240858 0C051277 */  jal       hud_element_set_render_depth
 /* AF81AC 8024085C 0000282D */   daddu    $a1, $zero, $zero
 /* AF81B0 80240860 0260202D */  daddu     $a0, $s3, $zero
-/* AF81B4 80240864 0C051280 */  jal       set_hud_element_flags
+/* AF81B4 80240864 0C051280 */  jal       hud_element_set_flags
 /* AF81B8 80240868 24050082 */   addiu    $a1, $zero, 0x82
 /* AF81BC 8024086C 8E530000 */  lw        $s3, ($s2)
 /* AF81C0 80240870 240500FF */  addiu     $a1, $zero, 0xff
-/* AF81C4 80240874 0C0513AC */  jal       set_hud_element_alpha
+/* AF81C4 80240874 0C0513AC */  jal       hud_element_set_alpha
 /* AF81C8 80240878 0260202D */   daddu    $a0, $s3, $zero
 /* AF81CC 8024087C 0260202D */  daddu     $a0, $s3, $zero
-/* AF81D0 80240880 0C05128B */  jal       clear_hud_element_flags
+/* AF81D0 80240880 0C05128B */  jal       hud_element_clear_flags
 /* AF81D4 80240884 24050002 */   addiu    $a1, $zero, 2
 /* AF81D8 80240888 8E530004 */  lw        $s3, 4($s2)
 /* AF81DC 8024088C 240500FF */  addiu     $a1, $zero, 0xff
-/* AF81E0 80240890 0C0513AC */  jal       set_hud_element_alpha
+/* AF81E0 80240890 0C0513AC */  jal       hud_element_set_alpha
 /* AF81E4 80240894 0260202D */   daddu    $a0, $s3, $zero
 /* AF81E8 80240898 0260202D */  daddu     $a0, $s3, $zero
-/* AF81EC 8024089C 0C05128B */  jal       clear_hud_element_flags
+/* AF81EC 8024089C 0C05128B */  jal       hud_element_clear_flags
 /* AF81F0 802408A0 24050002 */   addiu    $a1, $zero, 2
 /* AF81F4 802408A4 24020001 */  addiu     $v0, $zero, 1
 /* AF81F8 802408A8 3C018024 */  lui       $at, %hi(D_80246558_kkj_19)
@@ -154,12 +154,12 @@ glabel func_802406C4_AF8014
 /* AF8238 802408E8 26106560 */  addiu     $s0, $s0, %lo(D_80246560_C8C010)
 /* AF823C 802408EC 8E240000 */  lw        $a0, ($s1)
 /* AF8240 802408F0 8E450000 */  lw        $a1, ($s2)
-/* AF8244 802408F4 0C051261 */  jal       set_hud_element_render_pos
+/* AF8244 802408F4 0C051261 */  jal       hud_element_set_render_pos
 /* AF8248 802408F8 8E060000 */   lw       $a2, ($s0)
 /* AF824C 802408FC 8E240004 */  lw        $a0, 4($s1)
 /* AF8250 80240900 8E060000 */  lw        $a2, ($s0)
 /* AF8254 80240904 8E450000 */  lw        $a1, ($s2)
-/* AF8258 80240908 0C051261 */  jal       set_hud_element_render_pos
+/* AF8258 80240908 0C051261 */  jal       hud_element_set_render_pos
 /* AF825C 8024090C 24C6001C */   addiu    $a2, $a2, 0x1c
 /* AF8260 80240910 8EA20070 */  lw        $v0, 0x70($s5)
 /* AF8264 80240914 10400003 */  beqz      $v0, .L80240924
@@ -177,7 +177,7 @@ glabel func_802406C4_AF8014
 /* AF828C 8024093C 8C846568 */  lw        $a0, %lo(D_80246568_C8C018)($a0)
 /* AF8290 80240940 3C058011 */  lui       $a1, %hi(HudScript_MashAButton)
 /* AF8294 80240944 24A58B80 */  addiu     $a1, $a1, %lo(HudScript_MashAButton)
-/* AF8298 80240948 0C0511FF */  jal       set_hud_element_anim
+/* AF8298 80240948 0C0511FF */  jal       hud_element_set_script
 /* AF829C 8024094C 00000000 */   nop
 /* AF82A0 80240950 2402000B */  addiu     $v0, $zero, 0xb
 /* AF82A4 80240954 3C018024 */  lui       $at, %hi(dgb_08_npcGroup_80246528)
@@ -272,9 +272,9 @@ glabel func_802406C4_AF8014
 /* AF83E4 80240A94 3C108024 */  lui       $s0, %hi(D_80246568_C8C018)
 /* AF83E8 80240A98 26106568 */  addiu     $s0, $s0, %lo(D_80246568_C8C018)
 /* AF83EC 80240A9C AEA20084 */  sw        $v0, 0x84($s5)
-/* AF83F0 80240AA0 0C05123D */  jal       free_hud_element
+/* AF83F0 80240AA0 0C05123D */  jal       hud_element_free
 /* AF83F4 80240AA4 8E040000 */   lw       $a0, ($s0)
-/* AF83F8 80240AA8 0C05123D */  jal       free_hud_element
+/* AF83F8 80240AA8 0C05123D */  jal       hud_element_free
 /* AF83FC 80240AAC 8E040004 */   lw       $a0, 4($s0)
 /* AF8400 80240AB0 3C048024 */  lui       $a0, %hi(D_80246554)
 /* AF8404 80240AB4 8C846554 */  lw        $a0, %lo(D_80246554)($a0)

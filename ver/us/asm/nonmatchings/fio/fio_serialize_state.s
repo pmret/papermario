@@ -103,16 +103,16 @@ glabel fio_serialize_state
 /* 6BAC 8002B7AC 00431021 */  addu      $v0, $v0, $v1
 /* 6BB0 8002B7B0 8E2302BC */  lw        $v1, 0x2bc($s1)
 /* 6BB4 8002B7B4 000210C0 */  sll       $v0, $v0, 3
-/* 6BB8 8002B7B8 3C018007 */  lui       $at, %hi(D_800779C4)
+/* 6BB8 8002B7B8 3C018007 */  lui       $at, %hi(gSaveSlotMetadata)
 /* 6BBC 8002B7BC 00220821 */  addu      $at, $at, $v0
-/* 6BC0 8002B7C0 AC2379C4 */  sw        $v1, %lo(D_800779C4)($at)
+/* 6BC0 8002B7C0 AC2379C4 */  sw        $v1, %lo(gSaveSlotMetadata)($at)
 /* 6BC4 8002B7C4 90830166 */  lbu       $v1, 0x166($a0)
 /* 6BC8 8002B7C8 00031040 */  sll       $v0, $v1, 1
 /* 6BCC 8002B7CC 00431021 */  addu      $v0, $v0, $v1
 /* 6BD0 8002B7D0 000210C0 */  sll       $v0, $v0, 3
-/* 6BD4 8002B7D4 3C088007 */  lui       $t0, %hi(D_800779C4)
+/* 6BD4 8002B7D4 3C088007 */  lui       $t0, %hi(gSaveSlotMetadata)
 /* 6BD8 8002B7D8 01024021 */  addu      $t0, $t0, $v0
-/* 6BDC 8002B7DC 8D0879C4 */  lw        $t0, %lo(D_800779C4)($t0)
+/* 6BDC 8002B7DC 8D0879C4 */  lw        $t0, %lo(gSaveSlotMetadata)($t0)
 /* 6BE0 8002B7E0 3C098007 */  lui       $t1, %hi(D_800779C8)
 /* 6BE4 8002B7E4 01224821 */  addu      $t1, $t1, $v0
 /* 6BE8 8002B7E8 8D2979C8 */  lw        $t1, %lo(D_800779C8)($t1)

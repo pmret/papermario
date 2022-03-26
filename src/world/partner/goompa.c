@@ -25,24 +25,24 @@ EvtScript world_goompa_take_out = {
     EVT_END
 };
 
-BSS unkPartnerStruct D_802BD600;
+BSS TweesterPhysics GoompaTweesterPhysics;
 
-unkPartnerStruct* D_802BD58C_324E9C = &D_802BD600;
+TweesterPhysics* GoompaTweesterPhysicsPtr = &GoompaTweesterPhysics;
 
 ApiStatus func_802BD14C_324A5C(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
     Npc* goompa = script->owner2.npc;
-    f32 sp10, sp14, tempY;
+    f32 sinAngle, cosAngle, liftoffVelocity;
     Entity* entity;
 
     if (isInitialCall) {
         partner_walking_enable(goompa, 1);
-        mem_clear(D_802BD58C_324E9C, sizeof(*D_802BD58C_324E9C));
-        D_8010C954 = 0;
+        mem_clear(GoompaTweesterPhysicsPtr, sizeof(TweesterPhysics));
+        TweesterTouchingPartner = NULL;
     }
 
-    playerData->unk_2F4[5]++;
-    entity = D_8010C954;
+    playerData->partnerUsedTime[PARTNER_GOOMPA]++;
+    entity = TweesterTouchingPartner;
 
     if (entity == NULL) {
         partner_walking_update_player_tracking(goompa);
@@ -50,61 +50,61 @@ ApiStatus func_802BD14C_324A5C(Evt* script, s32 isInitialCall) {
         return ApiStatus_BLOCK;
     }
 
-    switch (D_802BD58C_324E9C->unk_04) {
+    switch (GoompaTweesterPhysicsPtr->state) {
         case 0:
-            D_802BD58C_324E9C->unk_04 = 1;
-            D_802BD58C_324E9C->flags = goompa->flags;
-            D_802BD58C_324E9C->unk_0C = fabsf(dist2D(goompa->pos.x, goompa->pos.z,
+            GoompaTweesterPhysicsPtr->state = 1;
+            GoompaTweesterPhysicsPtr->prevFlags = goompa->flags;
+            GoompaTweesterPhysicsPtr->radius = fabsf(dist2D(goompa->pos.x, goompa->pos.z,
                                                     entity->position.x, entity->position.z));
-            D_802BD58C_324E9C->unk_10 = atan2(entity->position.x, entity->position.z, goompa->pos.x, goompa->pos.z);
-            D_802BD58C_324E9C->unk_14 = 6.0f;
-            D_802BD58C_324E9C->unk_18 = 50.0f;
-            D_802BD58C_324E9C->unk_00 = 120;
+            GoompaTweesterPhysicsPtr->angle = atan2(entity->position.x, entity->position.z, goompa->pos.x, goompa->pos.z);
+            GoompaTweesterPhysicsPtr->angularVelocity = 6.0f;
+            GoompaTweesterPhysicsPtr->liftoffVelocityPhase = 50.0f;
+            GoompaTweesterPhysicsPtr->countdown = 120;
             goompa->flags |= NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_100 | NPC_FLAG_40000;
             goompa->flags &= ~NPC_FLAG_GRAVITY;
         case 1:
-            sin_cos_rad((D_802BD58C_324E9C->unk_10 * TAU) / 360.0f, &sp10, &sp14);
-            goompa->pos.x = entity->position.x + (sp10 * D_802BD58C_324E9C->unk_0C);
-            goompa->pos.z = entity->position.z - (sp14 * D_802BD58C_324E9C->unk_0C);
-            D_802BD58C_324E9C->unk_10 = clamp_angle(D_802BD58C_324E9C->unk_10 - D_802BD58C_324E9C->unk_14);
+            sin_cos_rad((GoompaTweesterPhysicsPtr->angle * TAU) / 360.0f, &sinAngle, &cosAngle);
+            goompa->pos.x = entity->position.x + (sinAngle * GoompaTweesterPhysicsPtr->radius);
+            goompa->pos.z = entity->position.z - (cosAngle * GoompaTweesterPhysicsPtr->radius);
+            GoompaTweesterPhysicsPtr->angle = clamp_angle(GoompaTweesterPhysicsPtr->angle - GoompaTweesterPhysicsPtr->angularVelocity);
 
-            if (D_802BD58C_324E9C->unk_0C > 20.0f) {
-                D_802BD58C_324E9C->unk_0C--;
-            } else if (D_802BD58C_324E9C->unk_0C < 19.0f) {
-                D_802BD58C_324E9C->unk_0C++;
+            if (GoompaTweesterPhysicsPtr->radius > 20.0f) {
+                GoompaTweesterPhysicsPtr->radius--;
+            } else if (GoompaTweesterPhysicsPtr->radius < 19.0f) {
+                GoompaTweesterPhysicsPtr->radius++;
             }
 
-            tempY = sin_rad((D_802BD58C_324E9C->unk_18 * TAU) / 360.0f) * 3.0f;
-            D_802BD58C_324E9C->unk_18 += 3.0f;
+            liftoffVelocity = sin_rad((GoompaTweesterPhysicsPtr->liftoffVelocityPhase * TAU) / 360.0f) * 3.0f;
+            GoompaTweesterPhysicsPtr->liftoffVelocityPhase += 3.0f;
 
-            if (D_802BD58C_324E9C->unk_18 > 150.0f) {
-                D_802BD58C_324E9C->unk_18 = 150.0f;
+            if (GoompaTweesterPhysicsPtr->liftoffVelocityPhase > 150.0f) {
+                GoompaTweesterPhysicsPtr->liftoffVelocityPhase = 150.0f;
             }
 
-            goompa->pos.y += tempY;
-            goompa->renderYaw = clamp_angle(360.0f - D_802BD58C_324E9C->unk_10);
-            D_802BD58C_324E9C->unk_14 += 0.8;
+            goompa->pos.y += liftoffVelocity;
+            goompa->renderYaw = clamp_angle(360.0f - GoompaTweesterPhysicsPtr->angle);
+            GoompaTweesterPhysicsPtr->angularVelocity += 0.8;
 
-            if (D_802BD58C_324E9C->unk_14 > 40.0f) {
-                D_802BD58C_324E9C->unk_14 = 40.0f;
+            if (GoompaTweesterPhysicsPtr->angularVelocity > 40.0f) {
+                GoompaTweesterPhysicsPtr->angularVelocity = 40.0f;
             }
 
-            if (--D_802BD58C_324E9C->unk_00 == 0) {
-                D_802BD58C_324E9C->unk_04++;
+            if (--GoompaTweesterPhysicsPtr->countdown == 0) {
+                GoompaTweesterPhysicsPtr->state++;
             }
             break;
         case 2:
-            goompa->flags = D_802BD58C_324E9C->flags;
-            D_802BD58C_324E9C->unk_00 = 30;
-            D_802BD58C_324E9C->unk_04++;
+            goompa->flags = GoompaTweesterPhysicsPtr->prevFlags;
+            GoompaTweesterPhysicsPtr->countdown = 30;
+            GoompaTweesterPhysicsPtr->state++;
             break;
         case 3:
             partner_walking_update_player_tracking(goompa);
             partner_walking_update_motion(goompa);
 
-            if (--D_802BD58C_324E9C->unk_00 == 0) {
-                D_802BD58C_324E9C->unk_04 = 0;
-                D_8010C954 = 0;
+            if (--GoompaTweesterPhysicsPtr->countdown == 0) {
+                GoompaTweesterPhysicsPtr->state = 0;
+                TweesterTouchingPartner = NULL;
             }
             break;
     }
@@ -118,10 +118,10 @@ EvtScript world_goompa_update = {
 };
 
 void func_802BD4E0_324DF0(Npc* goompa) {
-    if (D_8010C954 != NULL) {
-        D_8010C954 = NULL;
-        goompa->flags = D_802BD58C_324E9C->flags;
-        D_802BD58C_324E9C->unk_04 = 0;
+    if (TweesterTouchingPartner != NULL) {
+        TweesterTouchingPartner = NULL;
+        goompa->flags = GoompaTweesterPhysicsPtr->prevFlags;
+        GoompaTweesterPhysicsPtr->state = 0;
         partner_clear_player_tracking(goompa);
     }
 }

@@ -98,10 +98,10 @@ void pause_stats_init(MenuPanel* panel) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(gPauseStatsIconIDs); i++) {
-        s32 iconID = create_hud_element(gStatsMenuElements[i]);
+        s32 iconID = hud_element_create(gStatsMenuElements[i]);
 
         gPauseStatsIconIDs[i] = iconID;
-        set_hud_element_flags(iconID, HUD_ELEMENT_FLAGS_80);
+        hud_element_set_flags(iconID, HUD_ELEMENT_FLAGS_80);
     }
 
     for (i = 0; i < ARRAY_COUNT(gStatsMenuWindowBPs); i++) {
@@ -220,6 +220,6 @@ void pause_stats_cleanup(MenuPanel* panel) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(gPauseStatsIconIDs); i++) {
-        free_hud_element(gPauseStatsIconIDs[i]);
+        hud_element_free(gPauseStatsIconIDs[i]);
     }
 }

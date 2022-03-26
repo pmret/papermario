@@ -126,7 +126,7 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
     clear_animator_list();
     clear_entity_models();
     clear_npcs();
-    clear_hud_element_cache();
+    hud_element_clear_cache();
     clear_trigger_data();
     clear_model_data();
     clear_sprite_shading_data();

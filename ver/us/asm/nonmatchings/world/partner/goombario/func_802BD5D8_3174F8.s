@@ -148,8 +148,8 @@ glabel func_802BD5D8_3174F8
 .L802BD7C8:
 /* 3176E8 802BD7C8 AE330070 */  sw        $s3, 0x70($s1)
 .L802BD7CC:
-/* 3176EC 802BD7CC 3C04802C */  lui       $a0, %hi(D_802BDF60)
-/* 3176F0 802BD7D0 8C84DF60 */  lw        $a0, %lo(D_802BDF60)($a0)
+/* 3176EC 802BD7CC 3C04802C */  lui       $a0, %hi(GoombarioGetTattleID)
+/* 3176F0 802BD7D0 8C84DF60 */  lw        $a0, %lo(GoombarioGetTattleID)($a0)
 /* 3176F4 802BD7D4 0480008A */  bltz      $a0, .L802BDA00
 /* 3176F8 802BD7D8 30824000 */   andi     $v0, $a0, 0x4000
 /* 3176FC 802BD7DC 10400070 */  beqz      $v0, .L802BD9A0
@@ -247,8 +247,8 @@ glabel func_802BD5D8_3174F8
 /* 317860 802BD940 3C10001B */  lui       $s0, 0x1b
 /* 317864 802BD944 080AF65D */  j         .L802BD974
 /* 317868 802BD948 3610001E */   ori      $s0, $s0, 0x1e
-/* 31786C 802BD94C 3C04802C */  lui       $a0, %hi(D_802BDF60)
-/* 317870 802BD950 8C84DF60 */  lw        $a0, %lo(D_802BDF60)($a0)
+/* 31786C 802BD94C 3C04802C */  lui       $a0, %hi(GoombarioGetTattleID)
+/* 317870 802BD950 8C84DF60 */  lw        $a0, %lo(GoombarioGetTattleID)($a0)
 /* 317874 802BD954 0C04417A */  jal       get_entity_by_index
 /* 317878 802BD958 30843FFF */   andi     $a0, $a0, 0x3fff
 /* 31787C 802BD95C 8C420040 */  lw        $v0, 0x40($v0)
@@ -269,8 +269,8 @@ glabel func_802BD5D8_3174F8
 /* 3178B0 802BD990 1453FFA9 */  bne       $v0, $s3, .L802BD838
 /* 3178B4 802BD994 26520008 */   addiu    $s2, $s2, 8
 .L802BD998:
-/* 3178B8 802BD998 3C04802C */  lui       $a0, %hi(D_802BDF60)
-/* 3178BC 802BD99C 8C84DF60 */  lw        $a0, %lo(D_802BDF60)($a0)
+/* 3178B8 802BD998 3C04802C */  lui       $a0, %hi(GoombarioGetTattleID)
+/* 3178BC 802BD99C 8C84DF60 */  lw        $a0, %lo(GoombarioGetTattleID)($a0)
 .L802BD9A0:
 /* 3178C0 802BD9A0 04800017 */  bltz      $a0, .L802BDA00
 /* 3178C4 802BD9A4 30822000 */   andi     $v0, $a0, 0x2000
@@ -305,8 +305,8 @@ glabel func_802BD5D8_3174F8
 /* 317930 802BDA10 080AF6BF */  j         .L802BDAFC
 /* 317934 802BDA14 34630025 */   ori      $v1, $v1, 0x25
 .L802BDA18:
-/* 317938 802BDA18 3C04802C */  lui       $a0, %hi(D_802BDF60)
-/* 31793C 802BDA1C 8C84DF60 */  lw        $a0, %lo(D_802BDF60)($a0)
+/* 317938 802BDA18 3C04802C */  lui       $a0, %hi(GoombarioGetTattleID)
+/* 31793C 802BDA1C 8C84DF60 */  lw        $a0, %lo(GoombarioGetTattleID)($a0)
 /* 317940 802BDA20 04800004 */  bltz      $a0, .L802BDA34
 /* 317944 802BDA24 0000282D */   daddu    $a1, $zero, $zero
 /* 317948 802BDA28 0C0AF440 */  jal       func_802BD100_317020

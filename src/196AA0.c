@@ -318,8 +318,8 @@ void func_80269118(void) {
     ActionCommandStatus *actionCommandStatus = &gActionCommandStatus;
 
     if (!actionCommandStatus->autoSucceed) {
-        if (playerData->otherHitsTaken < 9999) {
-            playerData->otherHitsTaken++;
+        if (playerData->actionCommandAttempts < 9999) {
+            playerData->actionCommandAttempts++;
             actionCommandStatus->hitsTakenIsMax = FALSE;
         } else {
             actionCommandStatus->hitsTakenIsMax = TRUE;
@@ -331,7 +331,7 @@ void func_80269160(void) {
     PlayerData* playerData = &gPlayerData;
 
     if (!gActionCommandStatus.autoSucceed && gActionCommandStatus.hitsTakenIsMax) {
-        playerData->unk_296++;
+        playerData->actionCommandSuccesses++;
     }
 }
 

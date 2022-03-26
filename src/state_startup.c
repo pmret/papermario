@@ -42,8 +42,8 @@ void state_step_startup(void) {
     clear_model_data();
     clear_sprite_shading_data();
     reset_background_settings();
-    set_hud_element_nonworld_cache(0, 0);
-    clear_hud_element_cache();
+    hud_element_set_aux_cache(0, 0);
+    hud_element_clear_cache();
     clear_trigger_data();
     clear_printers();
     clear_entity_data(0);

@@ -8,10 +8,10 @@ void func_802B6000_E27C90(void) {
     f32 cosTheta;
     f32 speed;
 
-    if (playerStatus->flags < 0) {
-        playerStatus->flags &= ~0x80000000;
-        playerStatus->animFlags |= 4;
-        playerStatus->flags |= (0x800 | 0x8);
+    if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
+        playerStatus->flags &= ~PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
+        playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_4;
+        playerStatus->flags |= (PLAYER_STATUS_FLAGS_800 | PLAYER_STATUS_FLAGS_FLYING);
         suggest_player_anim_setUnkFlag(0x10019);
         playerStatus->fallState = 0;
         playerStatus->gravityIntegrator[0] = 18.3473f;
@@ -50,7 +50,7 @@ void func_802B6000_E27C90(void) {
         if (collider >= 0) {
             collider = get_collider_type_by_id(collider);
             set_action_state(ACTION_STATE_LAND);
-            playerStatus->unk_10 = 60;
+            playerStatus->blinkTimer = 60;
             playerStatus->unk_BF = 0;
             playerStatus->flags &= ~0x800;
             gOverrideFlags &= ~GLOBAL_OVERRIDES_40;

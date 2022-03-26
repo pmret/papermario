@@ -76,7 +76,7 @@ extern s32 gCurrentCameraID;
 extern CollisionData gCollisionData;
 
 extern s8 D_800A0900;
-extern f32 D_800F7B60[];
+extern f32 GravityParamsStartFall[];
 extern s16 D_800F7B80;
 extern EncounterStatus gCurrentEncounter;
 extern u8* D_801512F0;
@@ -101,16 +101,16 @@ extern MessagePrintState* D_802DB268;
 extern ShadowBlueprint CircularShadowA;
 extern ShadowBlueprint CircularShadowB;
 extern ShadowBlueprint SquareShadow;
-extern s32 SaveBlockTutorialMessagePrinterClosed;
-extern s32 SaveBlockResultMessagePrinterClosed;
-extern MessagePrintState* SaveBlockTutorialMessagePrinter;
-extern MessagePrintState* SaveBlockResultMessagePrinter;
+extern s32 SaveBlockTutorialPrinterClosed;
+extern s32 SaveBlockResultPrinterClosed;
+extern MessagePrintState* SaveBlockTutorialPrinter;
+extern MessagePrintState* SaveBlockResultPrinter;
 extern s32 D_802E99DC;
 
-extern Entity* D_802EB3A0;
+extern Entity* SwitchToLink;
 extern s32 CreateEntityVarArgBuffer[3]; // not size 3
 
-extern f32 D_800F7B70[4];
+extern f32 DefaultMoveSpeeds[4];
 
 extern TempSetZoneEnabled* D_800D91D4;
 
@@ -202,7 +202,7 @@ extern s8 D_8014C248[];
 
 extern UNK_FUN_PTR(D_8010C920);
 extern UNK_FUN_PTR(D_8010C940);
-extern Entity* D_8010C954;
+extern Entity* TweesterTouchingPartner;
 extern UNK_FUN_PTR(D_8010C958);
 extern s32 D_8010C95C;
 extern s32 D_8010C96C;
@@ -295,8 +295,8 @@ extern s32 D_80292110[];
 
 extern s32 D_8029FBD0;
 
-extern s32 D_800F7BE8[];
-extern s32 D_800F7BBC[];
+extern s32 KoopatrolDisguiseExtraAnims[];
+extern s32 HammerBroDisguiseExtraAnims[];
 
 //various
 extern s32 D_802C05CC;

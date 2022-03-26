@@ -1491,7 +1491,7 @@ enum ActionStates {
     ACTION_STATE_USE_SNEAKY_PARASOL             = 0x00000019,
     ACTION_STATE_SPIN                           = 0x0000001A,
     ACTION_STATE_ENEMY_FIRST_STRIKE             = 0x0000001B,
-    ACTION_STATE_GET_STAR_SPIRIT                = 0x0000001C,
+    ACTION_STATE_RAISE_ARMS                     = 0x0000001C,
     ACTION_STATE_USE_SPINNING_FLOWER            = 0x0000001D,
     ACTION_STATE_USE_MUNCHLESIA                 = 0x0000001E,  ///< Set by the jan_09 squishy flower entity; throws the player in the air.
     ACTION_STATE_USE_TWEESTER                   = 0x0000001F,
@@ -1502,6 +1502,36 @@ enum ActionStates {
     ACTION_STATE_24                             = 0x00000024,
     ACTION_STATE_25                             = 0x00000025,
     ACTION_STATE_USE_SPRING                     = 0x00000026,
+};
+
+/* (1 = isPeach, 2 = isTransformed, 4 = hasUmbrella) */
+enum PeachStatusFlags {
+    PEACH_STATUS_FLAG_IS_PEACH          = 0x01,
+    PEACH_STATUS_FLAG_DISGUISED         = 0x02,
+    PEACH_STATUS_FLAG_HAS_PARASOL       = 0x04,
+    PEACH_STATUS_FLAG_HAS_INGREDIENT    = 0x10
+};
+
+enum CookingIngredients {
+    PEACH_COOKING_NONE              = 0x00,
+    PEACH_COOKING_CREAM             = 0x01,
+    PEACH_COOKING_STRAWBERRY        = 0x02,
+    PEACH_COOKING_BUTTER            = 0x03,
+    PEACH_COOKING_CLEANSER          = 0x04,
+    PEACH_COOKING_WATER             = 0x05,
+    PEACH_COOKING_MILK              = 0x06,
+    PEACH_COOKING_FLOUR             = 0x07,
+    PEACH_COOKING_EGG               = 0x08,
+    PEACH_COOKING_COMPLETE_CAKE     = 0x09,
+    PEACH_COOKING_CAKE_BOWL         = 0x0A,
+    PEACH_COOKING_CAKE_MIXED        = 0x0B,
+    PEACH_COOKING_CAKE_PAN          = 0x0C,
+    PEACH_COOKING_CAKE_BATTER       = 0x0D,
+    PEACH_COOKING_CAKE_BARE         = 0x0E,
+    PEACH_COOKING_SALT              = 0x0F,
+    PEACH_COOKING_SUGAR             = 0x10,
+    PEACH_COOKING_CAKE_WITH_ICING   = 0x11,
+    PEACH_COOKING_CAKE_WITH_BERRIES = 0x12,
 };
 
 // Requires decimals
@@ -1614,14 +1644,15 @@ enum EntityFlags {
 };
 
 enum EntityCollisionFlags {
-    ENTITY_COLLISION_FLAGS_1                                = 0x00000001,
+    ENTITY_COLLISION_PLAYER_TOUCH_FLOOR                     = 0x00000001,
     ENTITY_COLLISION_FLAGS_2                                = 0x00000002,
-    ENTITY_COLLISION_FLAGS_4                                = 0x00000004,
-    ENTITY_COLLISION_FLAGS_8                                = 0x00000008,
-    ENTITY_COLLISION_FLAGS_10                               = 0x00000010,
+    ENTITY_COLLISION_PLAYER_TOUCH_CEILING                   = 0x00000004,
+    ENTITY_COLLISION_PLAYER_TOUCH_WALL                      = 0x00000008,
+    ENTITY_COLLISION_PLAYER_PUSHING_AGAINST                 = 0x00000010,
     ENTITY_COLLISION_FLAGS_20                               = 0x00000020,
-    ENTITY_COLLISION_FLAGS_40                               = 0x00000040,
-    ENTITY_COLLISION_FLAGS_80                               = 0x00000080
+    ENTITY_COLLISION_PLAYER_HAMMER                          = 0x00000040,
+    ENTITY_COLLISION_BLOCK_HIT                              = 0x00000080,
+    ENTITY_COLLISION_PLAYER_LAST_FLOOR                      = 0x00000100
 };
 
 enum TriggerFlags {
@@ -1644,6 +1675,10 @@ enum TriggerFlags {
     TRIGGER_FLOOR_ABOVE         = 0x00080000,
     TRIGGER_POINT_BOMB          = 0x00100000,
     TRIGGER_SCRIPT_BOUND        = 0x01000000
+};
+
+enum ItemEntityFlags {
+    ITEM_ENTITY_FLAGS_TINY      = 0x00004000,
 };
 
 enum Buttons {
@@ -1838,7 +1873,7 @@ enum NpcFlags {
 enum PlayerStatusFlags {
     PLAYER_STATUS_FLAGS_JUMPING                          = 0x00000002,
     PLAYER_STATUS_FLAGS_FALLING                          = 0x00000004,
-    PLAYER_STATUS_FLAGS_8                                = 0x00000008,
+    PLAYER_STATUS_FLAGS_FLYING                           = 0x00000008,
     PLAYER_STATUS_FLAGS_10                               = 0x00000010,
     PLAYER_STATUS_FLAGS_20                               = 0x00000020,
     PLAYER_STATUS_FLAGS_80                               = 0x00000080,
@@ -1853,14 +1888,15 @@ enum PlayerStatusFlags {
     PLAYER_STATUS_FLAGS_20000                            = 0x00020000,
     PLAYER_STATUS_FLAGS_40000                            = 0x00040000,
     PLAYER_STATUS_FLAGS_80000                            = 0x00080000,
-    PLAYER_STATUS_FLAGS_200000                           = 0x00200000,
+    PLAYER_STATUS_FLAGS_100000                           = 0x00100000,
+    PLAYER_STATUS_FLAGS_200000                           = 0x00200000, // using hammer?
     PLAYER_STATUS_FLAGS_800000                           = 0x00800000,
     PLAYER_STATUS_FLAGS_1000000                          = 0x01000000,
     PLAYER_STATUS_FLAGS_HAS_CONVERSATION_NPC             = 0x02000000,
     PLAYER_STATUS_FLAGS_CAMERA_DOESNT_FOLLOW             = 0x04000000,
     PLAYER_STATUS_FLAGS_8000000                          = 0x08000000,
     PLAYER_STATUS_FLAGS_10000000                         = 0x10000000,
-    PLAYER_STATUS_FLAGS_20000000                         = 0x20000000,
+    PLAYER_STATUS_FLAGS_20000000                         = 0x20000000, // done hammer?
     PLAYER_STATUS_FLAGS_40000000                         = 0x40000000,
     PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED             = 0x80000000,
 };
@@ -1870,13 +1906,13 @@ enum PlayerStatusAnimFlags {
     PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT                          = 0x00000001,
     PLAYER_STATUS_ANIM_FLAGS_2                                     = 0x00000002,
     PLAYER_STATUS_ANIM_FLAGS_4                                     = 0x00000004,
-    PLAYER_STATUS_ANIM_FLAGS_8                                     = 0x00000008,
+    PLAYER_STATUS_ANIM_FLAGS_8                                     = 0x00000008, ///< triggers partner use when set
     PLAYER_STATUS_ANIM_FLAGS_INTERACT_PROMPT_AVAILABLE             = 0x00000010, ///< ! prompt
     PLAYER_STATUS_ANIM_FLAGS_SPEECH_PROMPT_AVAILABLE               = 0x00000020, ///< (...) prompt
     PLAYER_STATUS_ANIM_FLAGS_40                                    = 0x00000040,
     PLAYER_STATUS_ANIM_FLAGS_USING_PULSE_STONE                     = 0x00000080,
     PLAYER_STATUS_ANIM_FLAGS_100                                   = 0x00000100,
-    PLAYER_STATUS_ANIM_FLAGS_GET_STAR_SPIRIT                       = 0x00000200, ///< Sets action state to ACTION_STATE_GET_STAR_SPIRIT on idle
+    PLAYER_STATUS_ANIM_FLAGS_RAISED_ARMS                           = 0x00000200, ///< Sets action state to ACTION_STATE_RAISE_ARMS on idle
     PLAYER_STATUS_ANIM_FLAGS_SHIVERING                             = 0x00000400,
     PLAYER_STATUS_ANIM_FLAGS_800                                   = 0x00000800,
     PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS                   = 0x00001000,
@@ -2625,10 +2661,10 @@ enum MusicSettingsFlags {
 };
 
 enum ColliderFlags {
-    COLLIDER_FLAGS_1                 = 0x00000001,
-    COLLIDER_FLAGS_2                 = 0x00000002,
-    COLLIDER_FLAGS_4                 = 0x00000004,
-    COLLIDER_FLAGS_8                 = 0x00000008,
+    COLLIDER_FLAGS_WATER_FLOOR       = 0x00000001,
+    COLLIDER_FLAGS_LAVA_FLOOR        = 0x00000002,
+    COLLIDER_FLAGS_SUSHIE_DOCK_WALL  = 0x00000004,
+    COLLIDER_FLAGS_SNOW_FLOOR        = 0x00000008,
     COLLIDER_FLAGS_10                = 0x00000010,
     COLLIDER_FLAGS_20                = 0x00000020,
     COLLIDER_FLAGS_40                = 0x00000040,
@@ -2640,8 +2676,8 @@ enum ColliderFlags {
     COLLIDER_FLAGS_1000              = 0x00001000,
     COLLIDER_FLAGS_2000              = 0x00002000,
     COLLIDER_FLAGS_4000              = 0x00004000,
-    COLLIDER_FLAGS_8000              = 0x00008000,
-    COLLIDER_FLAGS_10000             = 0x00010000,
+    COLLIDER_FLAGS_IGNORE_SHELL      = 0x00008000,
+    COLLIDER_FLAGS_IGNORE_PLAYER     = 0x00010000,
     COLLIDER_FLAGS_20000             = 0x00020000,
     COLLIDER_FLAGS_40000             = 0x00040000,
     COLLIDER_FLAGS_80000             = 0x00080000,
@@ -3391,6 +3427,44 @@ enum RushFlags {
     RUSH_FLAG_NONE  = 0,
     RUSH_FLAG_MEGA  = 1,
     RUSH_FLAG_POWER = 2,
+};
+
+enum FileMenuMessages {
+    FILE_MESSAGE_NONE                       = 0,
+    FILE_MESSAGE_SELECT_FILE_TO_START       = 1, // Select file to start:[End]
+    FILE_MESSAGE_SELECT_FILE_TO_DELETE      = 2, // Select file to delete:[End]
+    FILE_MESSAGE_SELECT_FILE_TO_SAVE        = 3, // Select file to save[End]
+    FILE_MESSAGE_COPY_WHICH_FILE            = 4, // Copy which file?[End]
+    FILE_MESSAGE_COPY_TO_WHICH_FILE         = 5, // Copy to which file?[End]
+    FILE_MESSAGE_NEW                        = 6, // NEW[End]
+    FILE_MESSAGE_LEVEL                      = 7, // Level[End]
+    FILE_MESSAGE_PLAY_TIME                  = 8, // Play Time[End]
+    FILE_MESSAGE_DELETE_FILE                = 9, // Delete File[End]
+    FILE_MESSAGE_CANCEL                     = 10, // Cancel[End]
+    FILE_MESSAGE_COPY_FILE                  = 11, // Copy File[End]
+    FILE_MESSAGE_FIRST_PLAY                 = 12, // First Play[End]
+    FILE_MESSAGE_PERIOD_13                  = 13, // .[End]
+    FILE_MESSAGE_YES                        = 14, // Yes[End]
+    FILE_MESSAGE_NO                         = 15, // No[End]
+    FILE_MESSAGE_DELETE                     = 16, // Delete[End]
+    FILE_MESSAGE_OVERRIDE_TO_NEW_DATA       = 17, // Override to New Data[End]
+    FILE_MESSAGE_SAVE_OK                    = 18, // Save OK?[End]
+    FILE_MESSAGE_FILE_NAME_IS               = 19, // File name is :[End]
+    FILE_MESSAGE_PERIOD_20                  = 20, // .[End]
+    FILE_MESSAGE_OK                         = 21, // OK?[End]
+    FILE_MESSAGE_FILE_22                    = 22, // File[End]
+    FILE_MESSAGE_WILL_BE_DELETED            = 23, // will be deleted.[End]
+    FILE_MESSAGE_OK_TO_COPY_TO_THIS_FILE    = 24, // OK to copy to this file?[End]
+    FILE_MESSAGE_START_GAME_WITH            = 25, // Start game with[End]
+    FILE_MESSAGE_FILE_26                    = 26, // File[End]
+    FILE_MESSAGE_HAS_BEEN_DELETED           = 27, // has been deleted.[End]
+    FILE_MESSAGE_28                         = 28, // [End]
+    FILE_MESSAGE_COPY_FROM                  = 29, // Copy from[End]
+    FILE_MESSAGE_TO                         = 30, // to[End]
+    FILE_MESSAGE_HAS_BEEN_CREATED           = 31, // has been created.[End]
+    FILE_MESSAGE_ENTER_A_FILE_NAME          = 32, // Enter a file name![End]
+    FILE_MESSAGE_QUESTION                   = 33, // ?[End]
+    FILE_MESSAGE_PERIOD_34                  = 34, // .[End]
 };
 
 #endif

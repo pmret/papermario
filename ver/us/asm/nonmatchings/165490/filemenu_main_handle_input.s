@@ -269,9 +269,9 @@ glabel filemenu_main_handle_input
 /* 166638 80245DD8 10400007 */  beqz      $v0, .L80245DF8
 /* 16663C 80245DDC 00000000 */   nop
 /* 166640 80245DE0 92620003 */  lbu       $v0, 3($s3)
-/* 166644 80245DE4 3C018007 */  lui       $at, %hi(D_80077A24)
+/* 166644 80245DE4 3C018007 */  lui       $at, %hi(gSaveSlotHasData)
 /* 166648 80245DE8 00220821 */  addu      $at, $at, $v0
-/* 16664C 80245DEC 90227A24 */  lbu       $v0, %lo(D_80077A24)($at)
+/* 16664C 80245DEC 90227A24 */  lbu       $v0, %lo(gSaveSlotHasData)($at)
 /* 166650 80245DF0 50400001 */  beql      $v0, $zero, .L80245DF8
 /* 166654 80245DF4 24040001 */   addiu    $a0, $zero, 1
 .L80245DF8:
@@ -569,9 +569,9 @@ glabel filemenu_main_handle_input
 /* 166AB4 80246254 104001A4 */  beqz      $v0, .L802468E8
 /* 166AB8 80246258 00000000 */   nop
 /* 166ABC 8024625C 92620003 */  lbu       $v0, 3($s3)
-/* 166AC0 80246260 3C018007 */  lui       $at, %hi(D_80077A24)
+/* 166AC0 80246260 3C018007 */  lui       $at, %hi(gSaveSlotHasData)
 /* 166AC4 80246264 00220821 */  addu      $at, $at, $v0
-/* 166AC8 80246268 90227A24 */  lbu       $v0, %lo(D_80077A24)($at)
+/* 166AC8 80246268 90227A24 */  lbu       $v0, %lo(gSaveSlotHasData)($at)
 /* 166ACC 8024626C 1040007F */  beqz      $v0, .L8024646C
 /* 166AD0 80246270 00000000 */   nop
 /* 166AD4 80246274 0C05272D */  jal       sfx_play_sound
@@ -673,9 +673,9 @@ glabel filemenu_main_handle_input
 /* 166C3C 802463DC 10400142 */  beqz      $v0, .L802468E8
 /* 166C40 802463E0 00000000 */   nop
 /* 166C44 802463E4 92620003 */  lbu       $v0, 3($s3)
-/* 166C48 802463E8 3C018007 */  lui       $at, %hi(D_80077A24)
+/* 166C48 802463E8 3C018007 */  lui       $at, %hi(gSaveSlotHasData)
 /* 166C4C 802463EC 00220821 */  addu      $at, $at, $v0
-/* 166C50 802463F0 90227A24 */  lbu       $v0, %lo(D_80077A24)($at)
+/* 166C50 802463F0 90227A24 */  lbu       $v0, %lo(gSaveSlotHasData)($at)
 /* 166C54 802463F4 1040001D */  beqz      $v0, .L8024646C
 /* 166C58 802463F8 00000000 */   nop
 /* 166C5C 802463FC 0C05272D */  jal       sfx_play_sound
@@ -717,9 +717,9 @@ glabel filemenu_main_handle_input
 /* 166CDC 8024647C 3C018025 */  lui       $at, %hi(filemenu_iterFileIdx)
 /* 166CE0 80246480 AC23C080 */  sw        $v1, %lo(filemenu_iterFileIdx)($at)
 /* 166CE4 80246484 92620003 */  lbu       $v0, 3($s3)
-/* 166CE8 80246488 3C018007 */  lui       $at, %hi(D_80077A24)
+/* 166CE8 80246488 3C018007 */  lui       $at, %hi(gSaveSlotHasData)
 /* 166CEC 8024648C 00220821 */  addu      $at, $at, $v0
-/* 166CF0 80246490 90227A24 */  lbu       $v0, %lo(D_80077A24)($at)
+/* 166CF0 80246490 90227A24 */  lbu       $v0, %lo(gSaveSlotHasData)($at)
 /* 166CF4 80246494 14400066 */  bnez      $v0, .L80246630
 /* 166CF8 80246498 00000000 */   nop
 /* 166CFC 8024649C 0C05272D */  jal       sfx_play_sound
@@ -794,8 +794,8 @@ glabel filemenu_main_handle_input
 /* 166E00 802465A0 8E240000 */   lw       $a0, ($s1)
 /* 166E04 802465A4 3C108025 */  lui       $s0, %hi(filemenu_iterFileIdx)
 /* 166E08 802465A8 2610C080 */  addiu     $s0, $s0, %lo(filemenu_iterFileIdx)
-/* 166E0C 802465AC 3C068007 */  lui       $a2, %hi(D_800779C4)
-/* 166E10 802465B0 24C679C4 */  addiu     $a2, $a2, %lo(D_800779C4)
+/* 166E0C 802465AC 3C068007 */  lui       $a2, %hi(gSaveSlotMetadata)
+/* 166E10 802465B0 24C679C4 */  addiu     $a2, $a2, %lo(gSaveSlotMetadata)
 /* 166E14 802465B4 8E040000 */  lw        $a0, ($s0)
 /* 166E18 802465B8 8E250000 */  lw        $a1, ($s1)
 /* 166E1C 802465BC 0080102D */  daddu     $v0, $a0, $zero
@@ -822,9 +822,9 @@ glabel filemenu_main_handle_input
 /* 166E70 80246610 AC690014 */   sw       $t1, 0x14($v1)
 /* 166E74 80246614 8E030000 */  lw        $v1, ($s0)
 /* 166E78 80246618 24020001 */  addiu     $v0, $zero, 1
-/* 166E7C 8024661C 3C018007 */  lui       $at, %hi(D_80077A24)
+/* 166E7C 8024661C 3C018007 */  lui       $at, %hi(gSaveSlotHasData)
 /* 166E80 80246620 00230821 */  addu      $at, $at, $v1
-/* 166E84 80246624 A0227A24 */  sb        $v0, %lo(D_80077A24)($at)
+/* 166E84 80246624 A0227A24 */  sb        $v0, %lo(gSaveSlotHasData)($at)
 /* 166E88 80246628 08091A3A */  j         .L802468E8
 /* 166E8C 8024662C 00000000 */   nop
 .L80246630:
@@ -910,11 +910,11 @@ glabel filemenu_main_handle_input
 /* 166FB4 80246754 10400064 */  beqz      $v0, .L802468E8
 /* 166FB8 80246758 00000000 */   nop
 /* 166FBC 8024675C 92620003 */  lbu       $v0, 3($s3)
-/* 166FC0 80246760 3C018007 */  lui       $at, %hi(D_80077A24)
+/* 166FC0 80246760 3C018007 */  lui       $at, %hi(gSaveSlotHasData)
 /* 166FC4 80246764 00220821 */  addu      $at, $at, $v0
-/* 166FC8 80246768 90227A24 */  lbu       $v0, %lo(D_80077A24)($at)
-/* 166FCC 8024676C 3C118007 */  lui       $s1, %hi(D_80077A24)
-/* 166FD0 80246770 26317A24 */  addiu     $s1, $s1, %lo(D_80077A24)
+/* 166FC8 80246768 90227A24 */  lbu       $v0, %lo(gSaveSlotHasData)($at)
+/* 166FCC 8024676C 3C118007 */  lui       $s1, %hi(gSaveSlotHasData)
+/* 166FD0 80246770 26317A24 */  addiu     $s1, $s1, %lo(gSaveSlotHasData)
 /* 166FD4 80246774 1440001B */  bnez      $v0, .L802467E4
 /* 166FD8 80246778 00000000 */   nop
 /* 166FDC 8024677C 0C05272D */  jal       sfx_play_sound

@@ -13,7 +13,7 @@
 #define TITLE_POS_TOP 15 // Top edge of the texture on screen (with no offset)
 
 s16 D_800779C0[2] = {0, 0};
-s32 D_800779C4 = 0;
+s32 gSaveSlotMetadata = 0;
 s8 D_800779C8[2] = {0, 0};
 s8 D_800779CA = 0;
 s8 D_800779CB = 0x45;
@@ -24,7 +24,7 @@ s32 D_800779D8[] = { 0x00000000, 0x00000000, 0x00000045, 0x52524F52, 0xF7F7F700,
                      0x00000045, 0x52524F52, 0xF7F7F700, 0x00000000, 0x00000000, 0x00000000, 0x00000045, 0x52524F52,
                      0xF7F7F700, 0x00000000, 0x00000000,
                    };
-s32 D_80077A24 = 0x01010101;
+s32 gSaveSlotHasData = 0x01010101;
 s32 D_80077A28 = 0;
 s32 D_80077A2C = 0;
 s32 D_80077A30 = 0;
@@ -146,7 +146,7 @@ void state_init_title_screen(void) {
     clear_animator_list();
     clear_entity_models();
     clear_npcs();
-    clear_hud_element_cache();
+    hud_element_clear_cache();
     reset_background_settings();
     clear_entity_data(1);
     clear_effect_data();
@@ -265,7 +265,7 @@ void state_step_title_screen(void) {
             clear_entity_models();
             clear_animator_list();
             clear_npcs();
-            clear_hud_element_cache();
+            hud_element_clear_cache();
             spr_init_sprites(0);
             clear_entity_data(1);
             clear_windows();

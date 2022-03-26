@@ -1,17 +1,36 @@
 #include "common.h"
 #include "world/actions.h"
 
-// TODO figure out these peach player animation IDs
-s32 D_802B6910_E23FF0[] = {0x000A0002, 0x000A002B, 0x000A002D, 0x000A002F, 0x000A0031, 0x000A0033, 0x000A0035, 0x000A0037, 0x000A0039, 0x000A003B, 0x000A003D, 0x000A003F,
-                           0x000A0041, 0x000A0043, 0x000A0045, 0x000A0047, 0x000A0049, 0x000A004B, 0x000A004D, 0x00000000 };
+s32 WalkPeachAnims[] = { 
+    0x000A0002,	// none
+    0x000A002B,	// cream
+    0x000A002D,	// strawberry
+    0x000A002F,	// butter
+    0x000A0031,	// cleanser
+    0x000A0033,	// water
+    0x000A0035,	// milk
+    0x000A0037,	// flour
+    0x000A0039,	// egg
+    0x000A003B,	// complete cake
+    0x000A003D,	// cake bowl
+    0x000A003F,	// cake mixed
+    0x000A0041,	// cake pan
+    0x000A0043,	// cake batter
+    0x000A0045,	// cake bare
+    0x000A0047,	// salt
+    0x000A0049,	// sugar
+    0x000A004B,	// cake with icing
+    0x000A004D,	// cake with berries
+    0x00000000
+};
 
-void func_802B6738_E23E18(void);
+void action_run_update_peach(void);
 
 // walk
 INCLUDE_ASM(void, "world/action/walk", func_802B6000_E236E0, void);
 
 // run
-void func_802B6288_E23968(void) {
+void action_run_update(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PlayerData* playerData = &gPlayerData;
     f32 moveX;
@@ -23,7 +42,7 @@ void func_802B6288_E23968(void) {
 
     phi_s3 = 0;
     if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS) {
-        func_802B6738_E23E18();
+        action_run_update_peach();
         return;
     }
 
@@ -33,7 +52,7 @@ void func_802B6288_E23968(void) {
         playerStatus->unk_60 = 0;
         phi_s3 = 1;
 
-        if (!(playerStatus->flags & 0x00004000)) {
+        if (!(playerStatus->flags & PLAYER_STATUS_FLAGS_4000)) {
             playerStatus->currentSpeed = playerStatus->runSpeed;
         }
         if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_8BIT_MARIO) {
@@ -103,20 +122,20 @@ void func_802B6288_E23968(void) {
             return;
         }
         try_player_footstep_sounds(4);
-        playerData->unk_2B0++;
+        playerData->runningStepsTaken++;
     }
 }
 
 void func_802B6550_E23C30(void) {
     if (!(gPlayerStatus.animFlags & PLAYER_STATUS_ANIM_FLAGS_IN_DISGUISE)) {
         if (!(gGameStatusPtr->peachFlags & 0x10)) {
-            suggest_player_anim_clearUnkFlag(D_802B6910_E23FF0[gGameStatusPtr->peachAnimIdx]);
+            suggest_player_anim_clearUnkFlag(WalkPeachAnims[gGameStatusPtr->peachCookingIngredient]);
             return;
         }
         suggest_player_anim_clearUnkFlag(0xD000D);
         return;
     }
-    peach_set_disguise_anim(world_actions_peachDisguises[gPlayerStatus.peachDisguise].unk_04);
+    peach_set_disguise_anim(BasicPeachDisguiseAnims[gPlayerStatus.peachDisguise].walk);
 }
 
 void func_802B65E8_E23CC8(void) {
@@ -124,16 +143,16 @@ void func_802B65E8_E23CC8(void) {
     f32 magnitude;
     f32 angle;
 
-    if (playerStatus->flags & 0x80000000) {
-        playerStatus->flags &= ~0x80000000;
+    if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
+        playerStatus->flags &= ~PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
         playerStatus->unk_60 = 0;
-        if (!(playerStatus->flags & 0x4000)) {
+        if (!(playerStatus->flags & PLAYER_STATUS_FLAGS_4000)) {
             playerStatus->currentSpeed = playerStatus->walkSpeed;
         }
         func_802B6550_E23C30();
     }
 
-    if (playerStatus->flags & 0x4000) {
+    if (playerStatus->flags & PLAYER_STATUS_FLAGS_4000) {
         playerStatus->targetYaw = playerStatus->heading;
         try_player_footstep_sounds(8);
         return;
@@ -147,7 +166,7 @@ void func_802B65E8_E23CC8(void) {
     }
 
     playerStatus->targetYaw = angle;
-    if (gGameStatusPtr->peachAnimIdx == 0 && sqrtf(SQ(playerStatus->stickAxis[0]) + SQ(playerStatus->stickAxis[1])) > 55.0f) {
+    if (gGameStatusPtr->peachCookingIngredient == 0 && sqrtf(SQ(playerStatus->stickAxis[0]) + SQ(playerStatus->stickAxis[1])) > 55.0f) {
         set_action_state(ACTION_STATE_RUN);
         return;
     }
@@ -155,36 +174,36 @@ void func_802B65E8_E23CC8(void) {
     try_player_footstep_sounds(8);
 }
 
-void func_802B6738_E23E18(void) {
+void action_run_update_peach(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     GameStatus* gameStatus;
     f32 moveX;
     f32 moveY;
 
-    if (playerStatus->flags < 0) {
-        playerStatus->flags &= ~0x80000000;
+    if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
+        playerStatus->flags &= ~PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
         playerStatus->unk_60 = 0;
-        if (!(playerStatus->flags & 0x00004000)) {
+        if (!(playerStatus->flags & PLAYER_STATUS_FLAGS_4000)) {
             playerStatus->currentSpeed = playerStatus->runSpeed;
         }
 
         if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_IN_DISGUISE)) {
             gameStatus = gGameStatusPtr;
-            if (!(gameStatus->peachFlags & 0x10)) {
-                if (!gameStatus->peachAnimIdx) {
+            if (!(gameStatus->peachFlags & PEACH_STATUS_FLAG_HAS_INGREDIENT)) {
+                if (!gameStatus->peachCookingIngredient) {
                     suggest_player_anim_clearUnkFlag(0xA0003);
                 } else {
-                    suggest_player_anim_clearUnkFlag(D_802B6910_E23FF0[gameStatus->peachAnimIdx]);
+                    suggest_player_anim_clearUnkFlag(WalkPeachAnims[gameStatus->peachCookingIngredient]);
                 }
             } else {
                 suggest_player_anim_clearUnkFlag(0xD000D);
             }
         } else {
-            peach_set_disguise_anim(world_actions_peachDisguises[playerStatus->peachDisguise].unk_08);
+            peach_set_disguise_anim(BasicPeachDisguiseAnims[playerStatus->peachDisguise].run);
         }
     }
 
-    if (playerStatus->flags & 0x00004000) {
+    if (playerStatus->flags & PLAYER_STATUS_FLAGS_4000) {
         playerStatus->targetYaw = playerStatus->heading;
         try_player_footstep_sounds(4);
         return;

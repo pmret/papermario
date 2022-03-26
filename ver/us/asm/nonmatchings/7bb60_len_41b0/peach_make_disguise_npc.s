@@ -29,16 +29,16 @@ glabel peach_make_disguise_npc
 /* 7FA88 800E65D8 00031040 */  sll       $v0, $v1, 1
 /* 7FA8C 800E65DC 00431021 */  addu      $v0, $v0, $v1
 /* 7FA90 800E65E0 000210C0 */  sll       $v0, $v0, 3
-/* 7FA94 800E65E4 3C01800F */  lui       $at, %hi(world_actions_peachDisguises)
+/* 7FA94 800E65E4 3C01800F */  lui       $at, %hi(BasicPeachDisguiseAnims)
 /* 7FA98 800E65E8 00220821 */  addu      $at, $at, $v0
-/* 7FA9C 800E65EC 8C227C1C */  lw        $v0, %lo(world_actions_peachDisguises)($at)
+/* 7FA9C 800E65EC 8C227C1C */  lw        $v0, %lo(BasicPeachDisguiseAnims)($at)
 /* 7FAA0 800E65F0 00031880 */  sll       $v1, $v1, 2
 /* 7FAA4 800E65F4 AFA00018 */  sw        $zero, 0x18($sp)
 /* 7FAA8 800E65F8 AFA0001C */  sw        $zero, 0x1c($sp)
 /* 7FAAC 800E65FC AFA20014 */  sw        $v0, 0x14($sp)
-/* 7FAB0 800E6600 3C05800F */  lui       $a1, %hi(D_800F7C7C)
+/* 7FAB0 800E6600 3C05800F */  lui       $a1, %hi(PeachDisguiseExtraAnims)
 /* 7FAB4 800E6604 00A32821 */  addu      $a1, $a1, $v1
-/* 7FAB8 800E6608 8CA57C7C */  lw        $a1, %lo(D_800F7C7C)($a1)
+/* 7FAB8 800E6608 8CA57C7C */  lw        $a1, %lo(PeachDisguiseExtraAnims)($a1)
 /* 7FABC 800E660C 0C00E219 */  jal       _create_npc_standard
 /* 7FAC0 800E6610 00C0202D */   daddu    $a0, $a2, $zero
 /* 7FAC4 800E6614 0040202D */  daddu     $a0, $v0, $zero

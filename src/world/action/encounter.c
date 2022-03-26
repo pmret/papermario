@@ -141,20 +141,20 @@ void func_802B6350_E28D80(void) {
     if (playerStatus->flags < 0) {
         playerStatus->flags &= ~(0x80000000 | 0x80000 | 0x8 | 0x4 | 0x2);
         playerStatus->fallState = 0;
-        playerStatus->framesOnGround = 0;
+        playerStatus->currentStateTime = 0;
         playerStatus->decorationList = 0;
         playerStatus->unk_C2 = 0;
         playerStatus->currentSpeed = 0.0f;
-        playerStatus->unk_8C = 0.0f;
+        playerStatus->pitch = 0.0f;
 
         if (playerStatus->animFlags & 0x1000) {
             return;
         }
-        playerStatus->framesOnGround = 5;
+        playerStatus->currentStateTime = 5;
     }
 
-    playerStatus->framesOnGround--;
-    if (playerStatus->framesOnGround == 0) {
+    playerStatus->currentStateTime--;
+    if (playerStatus->currentStateTime == 0) {
         set_action_state(ACTION_STATE_IDLE);
     }
 }
@@ -168,13 +168,13 @@ void func_802B63D4_E28E04(void) {
         playerStatus->decorationList = 0;
         playerStatus->unk_C2 = 0;
         playerStatus->currentSpeed = 0.0f;
-        playerStatus->unk_8C = 0.0f;
+        playerStatus->pitch = 0.0f;
         suggest_player_anim_setUnkFlag(0x10017);
-        playerStatus->framesOnGround = 30;
+        playerStatus->currentStateTime = 30;
     }
 
-    if (playerStatus->framesOnGround != 0) {
-        playerStatus->framesOnGround--;
+    if (playerStatus->currentStateTime != 0) {
+        playerStatus->currentStateTime--;
     } else if (!gGameStatusPtr->isBattle) {
         set_action_state(ACTION_STATE_IDLE);
     }
@@ -186,10 +186,10 @@ void func_802B6478_E28EA8(void) {
     if (playerStatus->flags < 0) {
         playerStatus->flags &= ~0x80000000;
         playerStatus->flags |= 0x80000;
-        playerStatus->framesOnGround = 0;
+        playerStatus->currentStateTime = 0;
         playerStatus->fallState = 0;
         playerStatus->currentSpeed = 0.0f;
-        playerStatus->unk_8C = 0.0f;
+        playerStatus->pitch = 0.0f;
         suggest_player_anim_setUnkFlag(0x1001F);
     }
 
@@ -209,7 +209,7 @@ void func_802B6508_E28F38(void) {
         playerStatus->flags &= ~0x80000000;
         playerStatus->currentSpeed = 0.0f;
         playerStatus->unk_60 = 0;
-        playerStatus->framesOnGround = 5;
+        playerStatus->currentStateTime = 5;
         player_input_to_move_vector(&angle, &magnitude);
 
         if (((angle >= 45.0f) && (angle <= 135.0f)) || ((angle >= 225.0f) && (angle <= 315.0f))) {
@@ -222,9 +222,9 @@ void func_802B6508_E28F38(void) {
     check_input_jump();
 
     if (playerStatus->animFlags & 0x800000) {
-        if (playerStatus->framesOnGround != 0) {
-            playerStatus->framesOnGround--;
-            if (playerStatus->framesOnGround == 0) {
+        if (playerStatus->currentStateTime != 0) {
+            playerStatus->currentStateTime--;
+            if (playerStatus->currentStateTime == 0) {
                 set_action_state(ACTION_STATE_IDLE);
             }
         }
@@ -245,20 +245,20 @@ void func_802B6638_E29068(void) {
             if (!(playerStatus->animFlags & 0x2000)) {
                 suggest_player_anim_setUnkFlag(0xC0000);
             } else {
-                peach_set_disguise_anim(world_actions_peachDisguises[playerStatus->peachDisguise].unk_0C);
+                peach_set_disguise_anim(BasicPeachDisguiseAnims[playerStatus->peachDisguise].talk);
             }
         }
-        playerStatus->framesOnGround = 30;
+        playerStatus->currentStateTime = 30;
     }
 
     if (playerStatus->animFlags & 0x1000) {
-        if (playerStatus->framesOnGround != 0) {
-            playerStatus->framesOnGround--;
+        if (playerStatus->currentStateTime != 0) {
+            playerStatus->currentStateTime--;
         } else if (playerStatus->unk_C4 == 0) {
             if (!(playerStatus->animFlags & 0x2000)) {
                 suggest_player_anim_setUnkFlag(0xA0001);
             } else {
-                peach_set_disguise_anim(world_actions_peachDisguises[playerStatus->peachDisguise].idle);
+                peach_set_disguise_anim(BasicPeachDisguiseAnims[playerStatus->peachDisguise].idle);
             }
         }
     }

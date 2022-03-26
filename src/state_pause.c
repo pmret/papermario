@@ -69,8 +69,8 @@ void state_step_pause(void) {
                     clear_entity_models();
                     clear_animator_list();
                     clear_generic_entity_list();
-                    set_hud_element_nonworld_cache(_3169F0_VRAM, 0x38000);
-                    clear_hud_element_cache();
+                    hud_element_set_aux_cache(_3169F0_VRAM, 0x38000);
+                    hud_element_clear_cache();
                     reset_status_menu();
                     clear_item_entity_data();
                     clear_script_list();
@@ -151,7 +151,7 @@ void state_step_unpause(void) {
                         init_entity_models();
                         reset_animator_list();
                         init_generic_entity_list();
-                        set_hud_element_nonworld_cache(0, 0);
+                        hud_element_set_aux_cache(0, 0);
                         init_hud_element_list();
                         init_item_entity_list();
                         init_script_list();

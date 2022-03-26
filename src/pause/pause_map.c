@@ -299,8 +299,8 @@ void pause_map_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s
 
     mapULX = baseX + 26 + cameraX;
     mapULY = baseY + 22 + cameraY;
-    set_hud_element_render_pos(gPauseMapIconIDs[0], mapULX + gPauseMapMarioX, mapULY + gPauseMapMarioY - 7);
-    draw_hud_element_3(gPauseMapIconIDs[0]);
+    hud_element_set_render_pos(gPauseMapIconIDs[0], mapULX + gPauseMapMarioX, mapULY + gPauseMapMarioY - 7);
+    hud_element_draw_without_clipping(gPauseMapIconIDs[0]);
 
     currentTab = gPauseMenuCurrentTab;
     if (currentTab == 6) {
@@ -385,8 +385,8 @@ void pause_map_init(MenuPanel* tab) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(gPauseMapIconScripts); i++) {
-        gPauseMapIconIDs[i] = create_hud_element(gPauseMapIconScripts[i]);
-        set_hud_element_flags(gPauseMapIconIDs[i], HUD_ELEMENT_FLAGS_80);
+        gPauseMapIconIDs[i] = hud_element_create(gPauseMapIconScripts[i]);
+        hud_element_set_flags(gPauseMapIconIDs[i], HUD_ELEMENT_FLAGS_80);
     }
 
     for (i = 0; i < ARRAY_COUNT(gPauseMapWindowBPs); i++) {
@@ -563,6 +563,6 @@ void pause_map_cleanup(MenuPanel* tab) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(gPauseMapIconIDs); i++) {
-        free_hud_element(gPauseMapIconIDs[i]);
+        hud_element_free(gPauseMapIconIDs[i]);
     }
 }

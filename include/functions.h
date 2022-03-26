@@ -907,4 +907,8 @@ void clear_entity_data(s32);
 void clear_effect_data(void);
 void clear_area_flags(void);
 
+void func_802BFB44_323694(f32 arg0);
+f32 get_player_normal_pitch(void);
+void partner_kill_ability_script(void);
+void func_800EF3D4(s32);
 #endif

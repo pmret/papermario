@@ -179,10 +179,10 @@ glabel func_8013673C
 /* CD094 80136994 3C108015 */  lui       $s0, %hi(D_801568E0)
 /* CD098 80136998 261068E0 */  addiu     $s0, $s0, %lo(D_801568E0)
 /* CD09C 8013699C 8E040000 */  lw        $a0, ($s0)
-/* CD0A0 801369A0 0C051261 */  jal       set_hud_element_render_pos
+/* CD0A0 801369A0 0C051261 */  jal       hud_element_set_render_pos
 /* CD0A4 801369A4 26660014 */   addiu    $a2, $s3, 0x14
 /* CD0A8 801369A8 8E040000 */  lw        $a0, ($s0)
-/* CD0AC 801369AC 0C0511F1 */  jal       draw_hud_element_2
+/* CD0AC 801369AC 0C0511F1 */  jal       hud_element_draw_next
 /* CD0B0 801369B0 00000000 */   nop
 .L801369B4_CD0B4:
 /* CD0B4 801369B4 8FBF0028 */  lw        $ra, 0x28($sp)
