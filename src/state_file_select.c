@@ -37,8 +37,8 @@ void state_init_file_select(void) {
     disable_player_input();
     set_time_freeze_mode(TIME_FREEZE_FULL);
     general_heap_create();
-    set_hud_element_nonworld_cache(0, 0);
-    clear_hud_element_cache();
+    hud_element_set_aux_cache(0, 0);
+    hud_element_clear_cache();
     load_model_textures(0, 0, 0);
     gCameras[CAM_DEFAULT].updateMode = 6;
     gCameras[CAM_DEFAULT].unk_06 = 1;
@@ -127,8 +127,8 @@ void state_step_language_select(void) {
                     clear_entity_models();
                     clear_animator_list();
                     clear_generic_entity_list();
-                    set_hud_element_nonworld_cache(&D_80200000, 0x20000);
-                    clear_hud_element_cache();
+                    hud_element_set_aux_cache(&D_80200000, 0x20000);
+                    hud_element_clear_cache();
                     reset_status_menu();
                     clear_item_entity_data();
                     clear_script_list();
@@ -279,7 +279,7 @@ void state_step_exit_language_select(void) {
                     init_entity_models();
                     reset_animator_list();
                     init_generic_entity_list();
-                    set_hud_element_nonworld_cache(0, 0);
+                    hud_element_set_aux_cache(0, 0);
                     init_hud_element_list();
                     init_item_entity_list();
                     init_script_list();

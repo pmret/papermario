@@ -17,11 +17,11 @@ glabel filemenu_choose_name_init
 .L80248AB0:
 /* 169310 80248AB0 8E240000 */  lw        $a0, ($s1)
 /* 169314 80248AB4 26310004 */  addiu     $s1, $s1, 4
-/* 169318 80248AB8 0C050529 */  jal       create_hud_element
+/* 169318 80248AB8 0C050529 */  jal       hud_element_create
 /* 16931C 80248ABC 26100001 */   addiu    $s0, $s0, 1
 /* 169320 80248AC0 0040202D */  daddu     $a0, $v0, $zero
 /* 169324 80248AC4 24050080 */  addiu     $a1, $zero, 0x80
-/* 169328 80248AC8 0C051280 */  jal       set_hud_element_flags
+/* 169328 80248AC8 0C051280 */  jal       hud_element_set_flags
 /* 16932C 80248ACC AE440000 */   sw       $a0, ($s2)
 /* 169330 80248AD0 2A020003 */  slti      $v0, $s0, 3
 /* 169334 80248AD4 1440FFF6 */  bnez      $v0, .L80248AB0

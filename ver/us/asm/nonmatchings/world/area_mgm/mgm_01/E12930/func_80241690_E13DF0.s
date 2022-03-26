@@ -10,7 +10,7 @@ glabel func_80241690_E13DF0
 /* E13E04 802416A4 8C500080 */  lw        $s0, 0x80($v0)
 /* E13E08 802416A8 0C048D70 */  jal       free_generic_entity
 /* E13E0C 802416AC 8E040000 */   lw       $a0, ($s0)
-/* E13E10 802416B0 0C05123D */  jal       free_hud_element
+/* E13E10 802416B0 0C05123D */  jal       hud_element_free
 /* E13E14 802416B4 8E040004 */   lw       $a0, 4($s0)
 /* E13E18 802416B8 8FBF0014 */  lw        $ra, 0x14($sp)
 /* E13E1C 802416BC 8FB00010 */  lw        $s0, 0x10($sp)

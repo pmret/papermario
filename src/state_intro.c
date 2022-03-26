@@ -153,7 +153,7 @@ void state_step_intro(void) {
                 clear_model_data();
                 clear_sprite_shading_data();
                 reset_background_settings();
-                clear_hud_element_cache();
+                hud_element_clear_cache();
                 clear_trigger_data();
                 clear_printers();
                 clear_entity_data(0);

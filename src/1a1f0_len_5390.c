@@ -697,7 +697,7 @@ s32 check_conversation_trigger(void) {
     f32 xTemp, yTemp, zTemp;
     s32 i, j;
 
-    playerStatus->unk_C8 = NULL;
+    playerStatus->encounteredNPC = NULL;
     playerStatus->flags &= ~PLAYER_STATUS_FLAGS_HAS_CONVERSATION_NPC;
     playerColliderHeight = playerStatus->colliderHeight;
     playerColliderRadius = playerStatus->colliderDiameter / 2;
@@ -796,7 +796,7 @@ s32 check_conversation_trigger(void) {
     }
 
     if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_8BIT_MARIO) && npc != NULL && !is_picking_up_item()) {
-        playerStatus->unk_C8 = npc;
+        playerStatus->encounteredNPC = npc;
         playerStatus->flags |= PLAYER_STATUS_FLAGS_HAS_CONVERSATION_NPC;
         if (playerStatus->pressedButtons & BUTTON_A) {
             close_status_menu();

@@ -46,8 +46,8 @@ void entity_SaveBlock_save_data(void) {
 
 void entity_SaveBlock_show_tutorial_message(Entity* entity) {
     if (!get_global_flag(EVT_SAVE_FLAG(95))) {
-        SaveBlockTutorialMessagePrinterClosed = FALSE;
-        msg_get_printer_for_msg(0x1D0000, &SaveBlockTutorialMessagePrinterClosed);
+        SaveBlockTutorialPrinterClosed = FALSE;
+        msg_get_printer_for_msg(0x1D0000, &SaveBlockTutorialPrinterClosed);
         set_global_flag(EVT_SAVE_FLAG(95));
         return;
     }
@@ -57,37 +57,37 @@ void entity_SaveBlock_show_tutorial_message(Entity* entity) {
 }
 
 void entity_SaveBlock_wait_for_close_tutorial(Entity* entity) {
-    if (SaveBlockTutorialMessagePrinterClosed) {
+    if (SaveBlockTutorialPrinterClosed) {
         exec_entity_commandlist(entity);
     }
 }
 
 void entity_SaveBlock_show_choice_message(void) {
-    SaveBlockTutorialMessagePrinterClosed = FALSE;
-    SaveBlockResultMessagePrinterClosed = FALSE;
-    SaveBlockResultMessagePrinter = msg_get_printer_for_msg(0x1D0004, &SaveBlockResultMessagePrinterClosed);
-    SaveBlockTutorialMessagePrinter = msg_get_printer_for_msg(0x1E000A, &SaveBlockTutorialMessagePrinterClosed);
+    SaveBlockTutorialPrinterClosed = FALSE;
+    SaveBlockResultPrinterClosed = FALSE;
+    SaveBlockResultPrinter = msg_get_printer_for_msg(0x1D0004, &SaveBlockResultPrinterClosed);
+    SaveBlockTutorialPrinter = msg_get_printer_for_msg(0x1E000A, &SaveBlockTutorialPrinterClosed);
 }
 
 void entity_SaveBlock_show_result_message(void) {
-    msg_printer_load_msg(0x1D0005, SaveBlockResultMessagePrinter);
+    msg_printer_load_msg(0x1D0005, SaveBlockResultPrinter);
     sfx_play_sound(0x10);
 }
 
 void entity_SaveBlock_wait_for_close_result(Entity* entity) {
-    if (SaveBlockResultMessagePrinterClosed) {
+    if (SaveBlockResultPrinterClosed) {
         exec_entity_commandlist(entity);
     }
 }
 
 void entity_SaveBlock_wait_for_close_choice(Entity* entity) {
-    if (SaveBlockTutorialMessagePrinterClosed) {
-        if (SaveBlockTutorialMessagePrinter->currentOption == 1) {
+    if (SaveBlockTutorialPrinterClosed) {
+        if (SaveBlockTutorialPrinter->currentOption == 1) {
             set_entity_commandlist(entity, &D_802E99DC);
         } else {
             exec_entity_commandlist(entity);
         }
-        close_message(SaveBlockResultMessagePrinter);
+        close_message(SaveBlockResultPrinter);
     }
 }
 

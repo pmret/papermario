@@ -21,7 +21,7 @@ glabel __osMotorAccess
 /* 43240 80067E40 08019FCA */  j         .L80067F28
 /* 43244 80067E44 24020005 */   addiu    $v0, $zero, 5
 .L80067E48:
-/* 43248 80067E48 0C019771 */  jal       osSiGetAccess
+/* 43248 80067E48 0C019771 */  jal       __osSiGetAccess
 /* 4324C 80067E4C 00000000 */   nop
 /* 43250 80067E50 8E220008 */  lw        $v0, 8($s1)
 /* 43254 80067E54 24030001 */  addiu     $v1, $zero, 1
@@ -43,8 +43,8 @@ glabel __osMotorAccess
 /* 43290 80067E90 240200FE */  addiu     $v0, $zero, 0xfe
 /* 43294 80067E94 3C10800B */  lui       $s0, %hi(D_800B0B30)
 /* 43298 80067E98 26100B30 */  addiu     $s0, $s0, %lo(D_800B0B30)
-/* 4329C 80067E9C 3C01800A */  lui       $at, %hi(D_8009A61C)
-/* 432A0 80067EA0 A022A61C */  sb        $v0, %lo(D_8009A61C)($at)
+/* 4329C 80067E9C 3C01800A */  lui       $at, %hi(__osContLastCmd)
+/* 432A0 80067EA0 A022A61C */  sb        $v0, %lo(__osContLastCmd)($at)
 /* 432A4 80067EA4 00052980 */  sll       $a1, $a1, 6
 /* 432A8 80067EA8 0C019730 */  jal       __osSiRawStartDma
 /* 432AC 80067EAC 00B02821 */   addu     $a1, $a1, $s0
@@ -77,7 +77,7 @@ glabel __osMotorAccess
 /* 43314 80067F14 54620001 */  bnel      $v1, $v0, .L80067F1C
 /* 43318 80067F18 24100004 */   addiu    $s0, $zero, 4
 .L80067F1C:
-/* 4331C 80067F1C 0C01978C */  jal       osSiRelAccess
+/* 4331C 80067F1C 0C01978C */  jal       __osSiRelAccess
 /* 43320 80067F20 00000000 */   nop
 /* 43324 80067F24 02001021 */  addu      $v0, $s0, $zero
 .L80067F28:

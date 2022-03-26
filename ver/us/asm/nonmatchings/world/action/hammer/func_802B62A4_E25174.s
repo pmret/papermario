@@ -24,7 +24,7 @@ glabel func_802B62A4_E25174
 /* E251A4 802B62D4 3C128011 */  lui       $s2, %hi(gPlayerStatus)
 /* E251A8 802B62D8 2652EFC8 */  addiu     $s2, $s2, %lo(gPlayerStatus)
 /* E251AC 802B62DC 8E4400A4 */  lw        $a0, 0xa4($s2)
-/* E251B0 802B62E0 0C0AD800 */  jal       func_802B6000_E24ED0
+/* E251B0 802B62E0 0C0AD800 */  jal       action_hammer_is_swinging_away
 /* E251B4 802B62E4 46000586 */   mov.s    $f22, $f0
 /* E251B8 802B62E8 10400030 */  beqz      $v0, .L802B63AC
 /* E251BC 802B62EC 27A50020 */   addiu    $a1, $sp, 0x20
@@ -62,8 +62,8 @@ glabel func_802B62A4_E25174
 /* E2523C 802B636C 080AD8EA */  j         .L802B63A8
 /* E25240 802B6370 4600B580 */   add.s    $f22, $f22, $f0
 .L802B6374:
-/* E25244 802B6374 3C02802B */  lui       $v0, %hi(D_802B6DB0_E25C80)
-/* E25248 802B6378 8C426DB0 */  lw        $v0, %lo(D_802B6DB0_E25C80)($v0)
+/* E25244 802B6374 3C02802B */  lui       $v0, %hi(HammerHit)
+/* E25248 802B6378 8C426DB0 */  lw        $v0, %lo(HammerHit)($v0)
 /* E2524C 802B637C C7A00028 */  lwc1      $f0, 0x28($sp)
 /* E25250 802B6380 C7A2002C */  lwc1      $f2, 0x2c($sp)
 /* E25254 802B6384 C7A40030 */  lwc1      $f4, 0x30($sp)
@@ -133,7 +133,7 @@ glabel func_802B62A4_E25174
 /* E25340 802B6470 0C0394D2 */  jal       func_800E5348
 /* E25344 802B6474 00000000 */   nop
 /* E25348 802B6478 8E4400A4 */  lw        $a0, 0xa4($s2)
-/* E2534C 802B647C 0C0AD800 */  jal       func_802B6000_E24ED0
+/* E2534C 802B647C 0C0AD800 */  jal       action_hammer_is_swinging_away
 /* E25350 802B6480 46000586 */   mov.s    $f22, $f0
 /* E25354 802B6484 14400030 */  bnez      $v0, .L802B6548
 /* E25358 802B6488 27A50020 */   addiu    $a1, $sp, 0x20
@@ -171,8 +171,8 @@ glabel func_802B62A4_E25174
 /* E253D8 802B6508 080AD951 */  j         .L802B6544
 /* E253DC 802B650C 4600B580 */   add.s    $f22, $f22, $f0
 .L802B6510:
-/* E253E0 802B6510 3C02802B */  lui       $v0, %hi(D_802B6DB0_E25C80)
-/* E253E4 802B6514 8C426DB0 */  lw        $v0, %lo(D_802B6DB0_E25C80)($v0)
+/* E253E0 802B6510 3C02802B */  lui       $v0, %hi(HammerHit)
+/* E253E4 802B6514 8C426DB0 */  lw        $v0, %lo(HammerHit)($v0)
 /* E253E8 802B6518 C7A00028 */  lwc1      $f0, 0x28($sp)
 /* E253EC 802B651C C7A2002C */  lwc1      $f2, 0x2c($sp)
 /* E253F0 802B6520 C7A40030 */  lwc1      $f4, 0x30($sp)

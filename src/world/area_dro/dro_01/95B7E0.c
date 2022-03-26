@@ -3329,7 +3329,7 @@ ApiStatus N(func_80243058_95E258)(Evt* script, s32 isInitialCall) {
 ApiStatus N(func_80243084_95E284)(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
 
-    playerData->unk_328 = playerData->frameCounter;
+    playerData->droTreeOrbitTime = playerData->frameCounter;
     return ApiStatus_DONE2;
 }
 
@@ -3359,7 +3359,7 @@ void N(func_802430C8_95E2C8)(Unk_Struct_1* ptr, s32 arg1) {
 
 ApiStatus N(func_802431B4_95E3B4)(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
-    s32 val = (playerData->frameCounter - playerData->unk_328) / 3600;
+    s32 val = (playerData->frameCounter - playerData->droTreeOrbitTime) / 3600;
 
     if (val < 30) {
         script->varTable[0] = 1;

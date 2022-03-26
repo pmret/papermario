@@ -172,6 +172,7 @@ s32 dispatch_damage_event_actor_0(Actor* actor, s32 damageAmount, s32 event);
 
 // Text
 MessagePrintState* msg_get_printer_for_msg(s32 msgID, s32* a1);
+void msg_printer_set_origin_pos(MessagePrintState* msgPrintState, s32 x, s32 y);
 
 void get_screen_coords(s32 camID, f32 x, f32 y, f32 z, s32* screenX, s32* screenY, s32* screenZ);
 
@@ -207,7 +208,7 @@ void get_dpad_input_radial(f32* angle, f32* magnitude);
 void transform_point(Matrix4f mtx, f32 inX, f32 inY, f32 inZ, f32 inS, f32* outX, f32* outY, f32* outZ, f32* outS);
 void try_player_footstep_sounds(s32 arg0);
 void phys_update_interact_collider(void);
-void phys_adjust_cam_on_landing(void);
+s32 phys_adjust_cam_on_landing(void);
 void phys_init_integrator_for_current_state(void);
 void phys_player_land(void);
 void phys_main_collision_below(void);
@@ -354,6 +355,7 @@ void btl_draw_upgrade_windows(s32);
 void btl_state_draw_celebration(void);
 
 void func_8024F7C8(void);
+void func_80263E08(Actor*, ActorPart*, s32);
 void func_80266978(void);
 void func_80266B14(void);
 s32 func_8024E584(void);
@@ -381,6 +383,7 @@ PlayerData* get_player_data(void);
 
 s32 npc_raycast_down_around(s32, f32*, f32*, f32*, f32*, f32, f32);
 s32 npc_raycast_down_sides(s32, f32*, f32*, f32*, f32*);
+s32 player_raycast_up_corners(PlayerStatus*, f32*, f32*, f32*, f32*, f32);
 s32 player_raycast_below_cam_relative(PlayerStatus*, f32*, f32*, f32*, f32*, f32*, f32*, f32*, f32*);
 s32 npc_test_move_taller_with_slipping(s32, f32*, f32*, f32*, f32, f32, f32, f32);
 s32 npc_test_move_simple_with_slipping(s32, f32*, f32*, f32*, f32, f32, f32, f32);
@@ -507,6 +510,7 @@ Evt* get_script_by_index(s32 index);
 
 s32 get_lava_reset_pos(f32* x, f32* y, f32* z);
 void start_rumble(s32, s32);
+void start_rumble_type(u32);
 void start_falling(void);
 
 void set_action_state(s32 actionState);
@@ -715,7 +719,7 @@ void func_800EF300(void);
 void enable_player_shadow(void);
 s32 get_msg_lines(s32 messageID);
 void set_window_properties(s32 panelID, s32 posX, s32 posY, s32 width, s32 height, u8, void* drawContents, void* drawContentsArg, s8 parent);
-void set_window_update(s32 panelID, WindowUpdateFunc);
+void set_window_update(s32 panelID, s32);
 void set_windows_visible(s32 groupIdx);
 void snd_stop_sound(s32 soundID);
 void snd_start_sound_with_shift(s32 soundID, u8 volume, u8 pan, s16 pitchShift);
@@ -738,6 +742,7 @@ void draw_entity_model_E(s32, Mtx*);
 void draw_entity_model_A(s32, Mtx*);
 void free_entity_model_by_index(s32 idx);
 void func_8024E40C(s32);
+void func_8024E484(s16, s16, s16, s16, s32, s32, s32, s32);
 void btl_cam_set_zoffset(s16);
 void btl_cam_target_actor(s32);
 void btl_cam_set_zoom(s16);
@@ -780,6 +785,7 @@ void func_800E96C8(void);
 void hide_popup_menu(void);
 void destroy_popup_menu(void);
 void func_800E98C4(void);
+void func_800F0D5C(void);
 s32 get_item_count(void);
 s32 get_stored_empty_count(void);
 s32 get_stored_count(void);
@@ -899,4 +905,10 @@ void clear_entity_data(s32);
 void clear_effect_data(void);
 void clear_area_flags(void);
 
+void update_locomotion_state(void);
+
+void func_802BFB44_323694(f32 arg0);
+f32 get_player_normal_pitch(void);
+void partner_kill_ability_script(void);
+void func_800EF3D4(s32);
 #endif

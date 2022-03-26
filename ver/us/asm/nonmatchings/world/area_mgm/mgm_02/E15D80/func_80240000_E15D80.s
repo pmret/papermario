@@ -28,16 +28,16 @@ glabel func_80240000_E15D80
 /* E15DC0 80240040 2405005A */   addiu    $a1, $zero, 0x5a
 /* E15DC4 80240044 8E50000C */  lw        $s0, 0xc($s2)
 /* E15DC8 80240048 00A0302D */  daddu     $a2, $a1, $zero
-/* E15DCC 8024004C 0C051261 */  jal       set_hud_element_render_pos
+/* E15DCC 8024004C 0C051261 */  jal       hud_element_set_render_pos
 /* E15DD0 80240050 0200202D */   daddu    $a0, $s0, $zero
-/* E15DD4 80240054 0C0511EA */  jal       draw_hud_element_clipped
+/* E15DD4 80240054 0C0511EA */  jal       hud_element_draw_clipped
 /* E15DD8 80240058 0200202D */   daddu    $a0, $s0, $zero
 /* E15DDC 8024005C 2405005A */  addiu     $a1, $zero, 0x5a
 /* E15DE0 80240060 8E500010 */  lw        $s0, 0x10($s2)
 /* E15DE4 80240064 24060078 */  addiu     $a2, $zero, 0x78
-/* E15DE8 80240068 0C051261 */  jal       set_hud_element_render_pos
+/* E15DE8 80240068 0C051261 */  jal       hud_element_set_render_pos
 /* E15DEC 8024006C 0200202D */   daddu    $a0, $s0, $zero
-/* E15DF0 80240070 0C0511EA */  jal       draw_hud_element_clipped
+/* E15DF0 80240070 0C0511EA */  jal       hud_element_draw_clipped
 /* E15DF4 80240074 0200202D */   daddu    $a0, $s0, $zero
 /* E15DF8 80240078 2404003E */  addiu     $a0, $zero, 0x3e
 /* E15DFC 8024007C 24050074 */  addiu     $a1, $zero, 0x74

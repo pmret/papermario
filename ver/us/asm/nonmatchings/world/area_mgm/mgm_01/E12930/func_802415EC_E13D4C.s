@@ -19,16 +19,16 @@ glabel func_802415EC_E13D4C
 /* E13D84 80241624 AE300080 */   sw       $s0, 0x80($s1)
 /* E13D88 80241628 3C048011 */  lui       $a0, %hi(HudScript_StatusCoin)
 /* E13D8C 8024162C 24848558 */  addiu     $a0, $a0, %lo(HudScript_StatusCoin)
-/* E13D90 80241630 0C050529 */  jal       create_hud_element
+/* E13D90 80241630 0C050529 */  jal       hud_element_create
 /* E13D94 80241634 AE020000 */   sw       $v0, ($s0)
 /* E13D98 80241638 0040202D */  daddu     $a0, $v0, $zero
 /* E13D9C 8024163C 24050080 */  addiu     $a1, $zero, 0x80
-/* E13DA0 80241640 0C051280 */  jal       set_hud_element_flags
+/* E13DA0 80241640 0C051280 */  jal       hud_element_set_flags
 /* E13DA4 80241644 AE040004 */   sw       $a0, 4($s0)
 /* E13DA8 80241648 240500FF */  addiu     $a1, $zero, 0xff
 /* E13DAC 8024164C 00A0302D */  daddu     $a2, $a1, $zero
 /* E13DB0 80241650 8E040004 */  lw        $a0, 4($s0)
-/* E13DB4 80241654 0C0513BF */  jal       set_hud_element_tint
+/* E13DB4 80241654 0C0513BF */  jal       hud_element_set_tint
 /* E13DB8 80241658 00A0382D */   daddu    $a3, $a1, $zero
 /* E13DBC 8024165C 24020141 */  addiu     $v0, $zero, 0x141
 /* E13DC0 80241660 AE020014 */  sw        $v0, 0x14($s0)

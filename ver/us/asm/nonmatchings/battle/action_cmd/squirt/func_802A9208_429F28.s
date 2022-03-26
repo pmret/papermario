@@ -28,20 +28,20 @@ dlabel L802A9254_429F74
 /* 429F80 802A9260 8E300004 */  lw        $s0, 4($s1)
 /* 429F84 802A9264 10400004 */  beqz      $v0, .L802A9278
 /* 429F88 802A9268 0200202D */   daddu    $a0, $s0, $zero
-/* 429F8C 802A926C 0C05128B */  jal       clear_hud_element_flags
+/* 429F8C 802A926C 0C05128B */  jal       hud_element_clear_flags
 /* 429F90 802A9270 24050002 */   addiu    $a1, $zero, 2
 /* 429F94 802A9274 0200202D */  daddu     $a0, $s0, $zero
 .L802A9278:
-/* 429F98 802A9278 0C0513AC */  jal       set_hud_element_alpha
+/* 429F98 802A9278 0C0513AC */  jal       hud_element_set_alpha
 /* 429F9C 802A927C 240500FF */   addiu    $a1, $zero, 0xff
 /* 429FA0 802A9280 8E300008 */  lw        $s0, 8($s1)
 /* 429FA4 802A9284 240500FF */  addiu     $a1, $zero, 0xff
-/* 429FA8 802A9288 0C0513AC */  jal       set_hud_element_alpha
+/* 429FA8 802A9288 0C0513AC */  jal       hud_element_set_alpha
 /* 429FAC 802A928C 0200202D */   daddu    $a0, $s0, $zero
 /* 429FB0 802A9290 82220061 */  lb        $v0, 0x61($s1)
 /* 429FB4 802A9294 10400003 */  beqz      $v0, .L802A92A4
 /* 429FB8 802A9298 0200202D */   daddu    $a0, $s0, $zero
-/* 429FBC 802A929C 0C05128B */  jal       clear_hud_element_flags
+/* 429FBC 802A929C 0C05128B */  jal       hud_element_clear_flags
 /* 429FC0 802A92A0 24050002 */   addiu    $a1, $zero, 2
 .L802A92A4:
 /* 429FC4 802A92A4 24020001 */  addiu     $v0, $zero, 1
@@ -62,12 +62,12 @@ dlabel L802A92B0_429FD0
 .L802A92DC:
 /* 429FFC 802A92DC 8E240004 */  lw        $a0, 4($s1)
 /* 42A000 802A92E0 86250056 */  lh        $a1, 0x56($s1)
-/* 42A004 802A92E4 0C051261 */  jal       set_hud_element_render_pos
+/* 42A004 802A92E4 0C051261 */  jal       hud_element_set_render_pos
 /* 42A008 802A92E8 86260058 */   lh       $a2, 0x58($s1)
 /* 42A00C 802A92EC 8E240008 */  lw        $a0, 8($s1)
 /* 42A010 802A92F0 86260058 */  lh        $a2, 0x58($s1)
 /* 42A014 802A92F4 86250056 */  lh        $a1, 0x56($s1)
-/* 42A018 802A92F8 0C051261 */  jal       set_hud_element_render_pos
+/* 42A018 802A92F8 0C051261 */  jal       hud_element_set_render_pos
 /* 42A01C 802A92FC 24C6001C */   addiu    $a2, $a2, 0x1c
 /* 42A020 802A9300 080AA586 */  j         L802A9618_42A338
 /* 42A024 802A9304 00000000 */   nop
@@ -84,7 +84,7 @@ dlabel L802A9308_42A028
 /* 42A048 802A9328 8E240004 */  lw        $a0, 4($s1)
 /* 42A04C 802A932C 3C058011 */  lui       $a1, %hi(HudScript_AButtonDown)
 /* 42A050 802A9330 24A58B54 */  addiu     $a1, $a1, %lo(HudScript_AButtonDown)
-/* 42A054 802A9334 0C0511FF */  jal       set_hud_element_anim
+/* 42A054 802A9334 0C0511FF */  jal       hud_element_set_script
 /* 42A058 802A9338 00000000 */   nop
 /* 42A05C 802A933C 3C048000 */  lui       $a0, 0x8000
 /* 42A060 802A9340 34840041 */  ori       $a0, $a0, 0x41
@@ -213,21 +213,21 @@ dlabel L802A936C_42A08C
 /* 42A230 802A9510 2A420050 */  slti      $v0, $s2, 0x50
 /* 42A234 802A9514 10400007 */  beqz      $v0, .L802A9534
 /* 42A238 802A9518 8E300004 */   lw       $s0, 4($s1)
-/* 42A23C 802A951C 0C05122C */  jal       get_hud_element_anim
+/* 42A23C 802A951C 0C05122C */  jal       hud_element_get_script
 /* 42A240 802A9520 0200202D */   daddu    $a0, $s0, $zero
 /* 42A244 802A9524 3C058011 */  lui       $a1, %hi(HudScript_AButtonDown)
 /* 42A248 802A9528 24A58B54 */  addiu     $a1, $a1, %lo(HudScript_AButtonDown)
 /* 42A24C 802A952C 080AA551 */  j         .L802A9544
 /* 42A250 802A9530 00000000 */   nop
 .L802A9534:
-/* 42A254 802A9534 0C05122C */  jal       get_hud_element_anim
+/* 42A254 802A9534 0C05122C */  jal       hud_element_get_script
 /* 42A258 802A9538 0200202D */   daddu    $a0, $s0, $zero
 /* 42A25C 802A953C 3C058011 */  lui       $a1, %hi(HudScript_PressAButton)
 /* 42A260 802A9540 24A58BBC */  addiu     $a1, $a1, %lo(HudScript_PressAButton)
 .L802A9544:
 /* 42A264 802A9544 10450003 */  beq       $v0, $a1, .L802A9554
 /* 42A268 802A9548 00000000 */   nop
-/* 42A26C 802A954C 0C0511FF */  jal       set_hud_element_anim
+/* 42A26C 802A954C 0C0511FF */  jal       hud_element_set_script
 /* 42A270 802A9550 0200202D */   daddu    $a0, $s0, $zero
 .L802A9554:
 /* 42A274 802A9554 86220054 */  lh        $v0, 0x54($s1)

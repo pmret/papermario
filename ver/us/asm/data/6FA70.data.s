@@ -44,13 +44,13 @@ dlabel _osViModeMPalLan1
 dlabel D_800958C0
 .float 0.017453292, 0.0, 0.0, 0.0
 
-dlabel D_800958D0
+dlabel __osPfsInodeCacheChannel
 .word 0xFFFFFFFF
 
-dlabel D_800958D4
+dlabel __osPfsInodeCacheBank
 .byte 0xFA, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 
-dlabel D_800958E0
+dlabel __osPfsLastChannel
 .word 0xFFFFFFFF, 0x00000000, 0x00000000, 0x00000000
 
 dlabel D_800958F0
@@ -59,7 +59,7 @@ dlabel D_800958F0
 dlabel D_800958F4
 .word 0x03B9ACA0
 
-dlabel D_800958F8
+dlabel osViClock
 .word 0x02E6D354
 
 dlabel __osShutdown

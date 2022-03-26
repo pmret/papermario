@@ -143,17 +143,17 @@ glabel update_item_entity_temp
 /* CBFC0 801358C0 3C048009 */  lui       $a0, %hi(gItemHudScripts)
 /* CBFC4 801358C4 00822021 */  addu      $a0, $a0, $v0
 /* CBFC8 801358C8 8C84A680 */  lw        $a0, %lo(gItemHudScripts)($a0)
-/* CBFCC 801358CC 0C050529 */  jal       create_hud_element
+/* CBFCC 801358CC 0C050529 */  jal       hud_element_create
 /* CBFD0 801358D0 00000000 */   nop
 /* CBFD4 801358D4 0040202D */  daddu     $a0, $v0, $zero
 /* CBFD8 801358D8 24050080 */  addiu     $a1, $zero, 0x80
 /* CBFDC 801358DC 3C108015 */  lui       $s0, %hi(D_801568E0)
 /* CBFE0 801358E0 261068E0 */  addiu     $s0, $s0, %lo(D_801568E0)
-/* CBFE4 801358E4 0C051280 */  jal       set_hud_element_flags
+/* CBFE4 801358E4 0C051280 */  jal       hud_element_set_flags
 /* CBFE8 801358E8 AE040000 */   sw       $a0, ($s0)
 /* CBFEC 801358EC 2405FF9C */  addiu     $a1, $zero, -0x64
 /* CBFF0 801358F0 8E040000 */  lw        $a0, ($s0)
-/* CBFF4 801358F4 0C051261 */  jal       set_hud_element_render_pos
+/* CBFF4 801358F4 0C051261 */  jal       hud_element_set_render_pos
 /* CBFF8 801358F8 00A0302D */   daddu    $a2, $a1, $zero
 /* CBFFC 801358FC 24020002 */  addiu     $v0, $zero, 2
 /* CC000 80135900 3C108008 */  lui       $s0, %hi(gItemTable)
@@ -774,7 +774,7 @@ glabel update_item_entity_temp
 /* CC8D4 801361D4 8C420108 */  lw        $v0, 0x108($v0)
 /* CC8D8 801361D8 3C108015 */  lui       $s0, %hi(D_801568EC)
 /* CC8DC 801361DC 261068EC */  addiu     $s0, $s0, %lo(D_801568EC)
-/* CC8E0 801361E0 0C0511FF */  jal       set_hud_element_anim
+/* CC8E0 801361E0 0C0511FF */  jal       hud_element_set_script
 /* CC8E4 801361E4 AE020000 */   sw       $v0, ($s0)
 /* CC8E8 801361E8 8E040000 */  lw        $a0, ($s0)
 /* CC8EC 801361EC 8E650028 */  lw        $a1, 0x28($s3)
@@ -872,7 +872,7 @@ glabel update_item_entity_temp
 /* CCA4C 8013634C 00651824 */  and       $v1, $v1, $a1
 /* CCA50 80136350 AC430000 */  sw        $v1, ($v0)
 .L80136354:
-/* CCA54 80136354 0C05123D */  jal       free_hud_element
+/* CCA54 80136354 0C05123D */  jal       hud_element_free
 /* CCA58 80136358 00000000 */   nop
 /* CCA5C 8013635C 0C04CE4C */  jal       remove_item_entity_by_reference
 /* CCA60 80136360 0220202D */   daddu    $a0, $s1, $zero

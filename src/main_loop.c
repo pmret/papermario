@@ -282,7 +282,7 @@ void load_engine_data(void) {
     clear_printers();
     clear_game_modes();
     clear_npcs();
-    clear_hud_element_cache();
+    hud_element_clear_cache();
     clear_trigger_data();
     clear_entity_data(0);
     clear_player_data();

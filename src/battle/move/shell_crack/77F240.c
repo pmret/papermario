@@ -1,4 +1,5 @@
 #include "common.h"
+#include "effects.h"
 
 #include "effects.h"
 

@@ -31,28 +31,28 @@ ApiStatus func_802A9000_425B50(Evt* script, s32 isInitialCall) {
     D_802A9620 = 0;
     actionCommandStatus->hudElementY = 80;
 
-    hudElement = create_hud_element(HudScript_AButton);
+    hudElement = hud_element_create(HudScript_AButton);
     actionCommandStatus->hudElements[0] = hudElement;
-    set_hud_element_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
-    set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX,
+    hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+    hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX,
         actionCommandStatus->hudElementY);
-    set_hud_element_render_depth(hudElement, 0);
+    hud_element_set_render_depth(hudElement, 0);
 
     // Weird use of an extra temp settles regalloc here.
-    hudElementTemp = create_hud_element(HudScript_BlueMeter);
+    hudElementTemp = hud_element_create(HudScript_BlueMeter);
     hudElement = hudElementTemp;
     actionCommandStatus->hudElements[1] = hudElement;
-    set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX,
+    hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX,
         actionCommandStatus->hudElementY + 28);
-    set_hud_element_render_depth(hudElement, 0);
-    set_hud_element_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+    hud_element_set_render_depth(hudElement, 0);
+    hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
-    hudElement = create_hud_element(HudScript_RunAwayOK);
+    hudElement = hud_element_create(HudScript_RunAwayOK);
     actionCommandStatus->hudElements[2] = hudElement;
-    set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX,
+    hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX,
         actionCommandStatus->hudElementY + 28);
-    set_hud_element_render_depth(hudElement, 0);
-    set_hud_element_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+    hud_element_set_render_depth(hudElement, 0);
+    hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
     battleStatus->flags1 &= ~0x8000;
 
@@ -90,10 +90,10 @@ void func_802A94D8_426028(void) {
     s32 hudY;
     s32 hudElement1;
 
-    draw_hud_element_clipped(actionCommandStatus->hudElements[0]);
+    hud_element_draw_clipped(actionCommandStatus->hudElements[0]);
     hudElement1 = actionCommandStatus->hudElements[1];
-    draw_hud_element_clipped(hudElement1);
-    get_hud_element_render_pos(hudElement1, &hudX, &hudY);
+    hud_element_draw_clipped(hudElement1);
+    hud_element_get_render_pos(hudElement1, &hudX, &hudY);
 
     if (D_802A9620 == 0) {
         func_80268798(hudX, hudY, actionCommandStatus->barFillLevel / 100, 1);
@@ -101,7 +101,7 @@ void func_802A94D8_426028(void) {
         func_80268798(hudX, hudY, actionCommandStatus->barFillLevel / 100, 2);
     }
 
-    draw_hud_element_clipped(actionCommandStatus->hudElements[2]);
+    hud_element_draw_clipped(actionCommandStatus->hudElements[2]);
 }
 
 #include "common/free_hud_elements.inc.c"

@@ -18,7 +18,7 @@ void func_800E5520(void) {
     D_8010C9B0 = 0;
 }
 
-INCLUDE_ASM(void, "7bb60_len_41b0", phys_adjust_cam_on_landing, void);
+INCLUDE_ASM(s32, "7bb60_len_41b0", phys_adjust_cam_on_landing, void);
 
 void phys_clear_spin_history(void) {
     s32 i;
@@ -78,22 +78,22 @@ void phys_peach_update(void) {
         }
 
         if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
-            action = &D_800F7C8C[playerStatus->actionState];
+            action = &PlayerActionsTable[playerStatus->actionState];
             if (action->flag) {
                 if (action->dmaStart != NULL && action->dmaStart != D_8010C924) {
                     D_8010C924 = action->dmaStart;
 
                     // TODO: This needs to be a defined linker define for full shiftability
-                    dma_copy(D_8010C924, D_800F7C8C[playerStatus->actionState].dmaEnd, (void* )0x802B6000);
+                    dma_copy(D_8010C924, PlayerActionsTable[playerStatus->actionState].dmaEnd, (void* )0x802B6000);
                 }
 
-                if (D_800F7C8C[playerStatus->actionState].flag) {
-                    D_800F7C8C[playerStatus->actionState].update();
+                if (PlayerActionsTable[playerStatus->actionState].flag) {
+                    PlayerActionsTable[playerStatus->actionState].update();
                 }
             }
         } else {
-            if (D_800F7C8C[playerStatus->actionState].flag) {
-                D_800F7C8C[playerStatus->actionState].update();
+            if (PlayerActionsTable[playerStatus->actionState].flag) {
+                PlayerActionsTable[playerStatus->actionState].update();
             }
         }
     } while (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED);
@@ -367,10 +367,10 @@ Npc* peach_make_disguise_npc(s32 peachDisguise) {
     playerStatus->peachDisguise = gGameStatusPtr->peachDisguise = peachDisguise;
 
     blueprint.flags = NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_100 | NPC_FLAG_40000;
-    blueprint.initialAnim = world_actions_peachDisguises[playerStatus->peachDisguise].idle;
+    blueprint.initialAnim = BasicPeachDisguiseAnims[playerStatus->peachDisguise].idle;
     blueprint.onRender = NULL;
     blueprint.onUpdate = NULL;
-    D_8010C96C = _create_npc_standard(&blueprint, &D_800F7C7C[playerStatus->peachDisguise]);
+    D_8010C96C = _create_npc_standard(&blueprint, &PeachDisguiseExtraAnims[playerStatus->peachDisguise]);
     npc = get_npc_by_index(D_8010C96C);
 
     disable_npc_shadow(npc);

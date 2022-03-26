@@ -89,11 +89,11 @@ glabel battle_item_mystery_func_802A13E4_72C994
 /* 72CAB4 802A1504 000210C0 */  sll       $v0, $v0, 3
 /* 72CAB8 802A1508 00531021 */  addu      $v0, $v0, $s3
 /* 72CABC 802A150C 8C440000 */  lw        $a0, ($v0)
-/* 72CAC0 802A1510 0C050529 */  jal       create_hud_element
+/* 72CAC0 802A1510 0C050529 */  jal       hud_element_create
 /* 72CAC4 802A1514 26100001 */   addiu    $s0, $s0, 1
 /* 72CAC8 802A1518 0040202D */  daddu     $a0, $v0, $zero
 /* 72CACC 802A151C 24050080 */  addiu     $a1, $zero, 0x80
-/* 72CAD0 802A1520 0C051280 */  jal       set_hud_element_flags
+/* 72CAD0 802A1520 0C051280 */  jal       hud_element_set_flags
 /* 72CAD4 802A1524 AE240000 */   sw       $a0, ($s1)
 /* 72CAD8 802A1528 2A020007 */  slti      $v0, $s0, 7
 /* 72CADC 802A152C 1440FFED */  bnez      $v0, .L802A14E4
@@ -315,7 +315,7 @@ glabel battle_item_mystery_func_802A13E4_72C994
 .L802A1848:
 /* 72CDF8 802A1848 8E240000 */  lw        $a0, ($s1)
 /* 72CDFC 802A184C 26310004 */  addiu     $s1, $s1, 4
-/* 72CE00 802A1850 0C05123D */  jal       free_hud_element
+/* 72CE00 802A1850 0C05123D */  jal       hud_element_free
 /* 72CE04 802A1854 26100001 */   addiu    $s0, $s0, 1
 /* 72CE08 802A1858 2A020007 */  slti      $v0, $s0, 7
 /* 72CE0C 802A185C 1440FFFA */  bnez      $v0, .L802A1848

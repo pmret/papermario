@@ -49,29 +49,29 @@ ApiStatus func_802A9000_42DA10(Evt* script, s32 isInitialCall) {
     actionCommandStatus->hudElementX = -0x30;
     actionCommandStatus->hudElementY = 0x50;
 
-    elementID = create_hud_element(HudScript_AButton);
+    elementID = hud_element_create(HudScript_AButton);
     actionCommandStatus->hudElements[0] = elementID;
-    set_hud_element_flags(elementID, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
-    set_hud_element_render_pos(elementID, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
-    set_hud_element_render_depth(elementID, 0);
+    hud_element_set_flags(elementID, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+    hud_element_set_render_pos(elementID, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
+    hud_element_set_render_depth(elementID, 0);
 
-    elementID = create_hud_element(HudScript_BButton);
+    elementID = hud_element_create(HudScript_BButton);
     actionCommandStatus->hudElements[2] = elementID;
-    set_hud_element_flags(elementID, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
-    set_hud_element_render_pos(elementID, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
-    set_hud_element_render_depth(elementID, 0);
+    hud_element_set_flags(elementID, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+    hud_element_set_render_pos(elementID, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
+    hud_element_set_render_depth(elementID, 0);
 
-    elementID = create_hud_element(HudScript_BlueMeter);
+    elementID = hud_element_create(HudScript_BlueMeter);
     actionCommandStatus->hudElements[1] = elementID;
-    set_hud_element_render_pos(elementID, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 0x1C);
-    set_hud_element_render_depth(elementID, 0);
-    set_hud_element_flags(elementID, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+    hud_element_set_render_pos(elementID, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 0x1C);
+    hud_element_set_render_depth(elementID, 0);
+    hud_element_set_flags(elementID, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
-    elementID = create_hud_element(HudScript_100pct);
+    elementID = hud_element_create(HudScript_100pct);
     actionCommandStatus->hudElements[4] = elementID;
-    set_hud_element_render_pos(elementID, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 0x1C);
-    set_hud_element_render_depth(elementID, 0);
-    set_hud_element_flags(elementID, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+    hud_element_set_render_pos(elementID, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 0x1C);
+    hud_element_set_render_depth(elementID, 0);
+    hud_element_set_flags(elementID, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
     return ApiStatus_DONE2;
 }
@@ -132,20 +132,20 @@ void func_802A92A0_42DCB0(void) {
 
             hudElement = actionCommandStatus->hudElements[0];
             if (actionCommandStatus->unk_61 != 0) {
-                clear_hud_element_flags(hudElement, HUD_ELEMENT_FLAGS_DISABLED);
+                hud_element_clear_flags(hudElement, HUD_ELEMENT_FLAGS_DISABLED);
             }
-            set_hud_element_alpha(hudElement, 255);
+            hud_element_set_alpha(hudElement, 255);
 
             hudElement = actionCommandStatus->hudElements[2];
             if (actionCommandStatus->unk_61 != 0) {
-                clear_hud_element_flags(hudElement, HUD_ELEMENT_FLAGS_DISABLED);
+                hud_element_clear_flags(hudElement, HUD_ELEMENT_FLAGS_DISABLED);
             }
-            set_hud_element_alpha(hudElement, 255);
+            hud_element_set_alpha(hudElement, 255);
 
             hudElement = actionCommandStatus->hudElements[1];
-            set_hud_element_alpha(hudElement, 255);
+            hud_element_set_alpha(hudElement, 255);
             if (actionCommandStatus->unk_61 != 0) {
-                clear_hud_element_flags(hudElement, HUD_ELEMENT_FLAGS_DISABLED);
+                hud_element_clear_flags(hudElement, HUD_ELEMENT_FLAGS_DISABLED);
             }
 
             actionCommandStatus->state = 1;
@@ -162,11 +162,11 @@ void func_802A92A0_42DCB0(void) {
                 actionCommandStatus->hudElementX = 50;
             }
 
-            set_hud_element_render_pos(actionCommandStatus->hudElements[0], actionCommandStatus->hudElementX - 17,
+            hud_element_set_render_pos(actionCommandStatus->hudElements[0], actionCommandStatus->hudElementX - 17,
                 actionCommandStatus->hudElementY);
-            set_hud_element_render_pos(actionCommandStatus->hudElements[2], actionCommandStatus->hudElementX + 23,
+            hud_element_set_render_pos(actionCommandStatus->hudElements[2], actionCommandStatus->hudElementX + 23,
                 actionCommandStatus->hudElementY);
-            set_hud_element_render_pos(actionCommandStatus->hudElements[1], actionCommandStatus->hudElementX,
+            hud_element_set_render_pos(actionCommandStatus->hudElements[1], actionCommandStatus->hudElementX,
                 actionCommandStatus->hudElementY + 28);
             break;
         case 10:
@@ -175,8 +175,8 @@ void func_802A92A0_42DCB0(void) {
                 actionCommandStatus->unk_4E--;
                 break;
             }
-            set_hud_element_anim(actionCommandStatus->hudElements[0], &HudScript_MashAButton);
-            set_hud_element_anim(actionCommandStatus->hudElements[2], &HudScript_MashBButton1);
+            hud_element_set_script(actionCommandStatus->hudElements[0], &HudScript_MashAButton);
+            hud_element_set_script(actionCommandStatus->hudElements[2], &HudScript_MashBButton1);
             actionCommandStatus->barFillLevel = 0;
             actionCommandStatus->unk_5C = 0;
             actionCommandStatus->unk_54 = actionCommandStatus->unk_52;
@@ -267,9 +267,9 @@ void func_802A92A0_42DCB0(void) {
                 hudElement = actionCommandStatus->hudElements[4];
                 actionCommandStatus->barFillLevel = 10000;
                 actionCommandStatus->unk_68 = 1;
-                set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX + 50,
+                hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX + 50,
                     actionCommandStatus->hudElementY + 28);
-                clear_hud_element_flags(hudElement, HUD_ELEMENT_FLAGS_DISABLED);
+                hud_element_clear_flags(hudElement, HUD_ELEMENT_FLAGS_DISABLED);
             }
 
             adjustedFillLevel = actionCommandStatus->barFillLevel / 100;
@@ -340,12 +340,12 @@ void func_802A97F8_42E208(void) {
     s32 hudElementX;
     s32 hudElementY;
 
-    draw_hud_element_clipped(actionCommandStatus->hudElements[0]);
-    draw_hud_element_clipped(actionCommandStatus->hudElements[2]);
+    hud_element_draw_clipped(actionCommandStatus->hudElements[0]);
+    hud_element_draw_clipped(actionCommandStatus->hudElements[2]);
 
     hudElement = actionCommandStatus->hudElements[1];
-    draw_hud_element_clipped(hudElement);
-    get_hud_element_render_pos(hudElement, &hudElementX, &hudElementY);
+    hud_element_draw_clipped(hudElement);
+    hud_element_get_render_pos(hudElement, &hudElementX, &hudElementY);
 
     if (actionCommandStatus->unk_68 == 0) {
         func_80268770(hudElementX, hudElementY, actionCommandStatus->barFillLevel / 100);
@@ -353,12 +353,12 @@ void func_802A97F8_42E208(void) {
         func_8026880C(hudElementX, hudElementY, actionCommandStatus->barFillLevel / 100);
     }
 
-    draw_hud_element_clipped(actionCommandStatus->hudElements[4]);
+    hud_element_draw_clipped(actionCommandStatus->hudElements[4]);
 }
 
 void func_802A98E0_42E2F0(void) {
-    free_hud_element(gActionCommandStatus.hudElements[0]);
-    free_hud_element(gActionCommandStatus.hudElements[1]);
-    free_hud_element(gActionCommandStatus.hudElements[2]);
-    free_hud_element(gActionCommandStatus.hudElements[4]);
+    hud_element_free(gActionCommandStatus.hudElements[0]);
+    hud_element_free(gActionCommandStatus.hudElements[1]);
+    hud_element_free(gActionCommandStatus.hudElements[2]);
+    hud_element_free(gActionCommandStatus.hudElements[4]);
 }

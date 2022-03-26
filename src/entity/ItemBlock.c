@@ -82,7 +82,7 @@ void entity_ItemBlock_replace_with_inactive(Entity* entity) {
     s32 childEntityIndex;
     s32 isBlockOnGround;
     s32 parentEntityType;
-    ItemBlockData* temp;
+    ItemBlockData* childData;
     Entity* childEntity;
     Shadow* shadow;
 
@@ -130,8 +130,8 @@ void entity_ItemBlock_replace_with_inactive(Entity* entity) {
         childEntity->flags |= ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE2;
     }
 
-    temp = childEntity->dataBuf.unk;
-    temp->childEntityIndex = childEntityIndex;
+    childData = childEntity->dataBuf.itemBlock;
+    childData->childEntityIndex = childEntityIndex;
 
     if (entity->flags & ENTITY_FLAGS_HAS_DYNAMIC_SHADOW) {
         childEntity->flags |= ENTITY_FLAGS_HAS_DYNAMIC_SHADOW;

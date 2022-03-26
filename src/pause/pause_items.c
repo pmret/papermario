@@ -226,26 +226,26 @@ void pause_items_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
 
                 if (i == 1) {
                     itemIcon = iconIDs[totalItemIndex];
-                    clear_hud_element_flags(itemIcon, HUD_ELEMENT_FLAGS_SHADOW);
-                    set_hud_element_flags(itemIcon, HUD_ELEMENT_FLAGS_8000);
+                    hud_element_clear_flags(itemIcon, HUD_ELEMENT_FLAGS_DROP_SHADOW);
+                    hud_element_set_flags(itemIcon, HUD_ELEMENT_FLAGS_FILTER_TEX);
                     if (isNone) {
                         itemIcon = gPauseItemsIconIDs[19];
                     } else {
                         if (isSelected) {
-                            set_hud_element_flags(itemIcon, HUD_ELEMENT_FLAGS_SHADOW);
+                            hud_element_set_flags(itemIcon, HUD_ELEMENT_FLAGS_DROP_SHADOW);
                             gPauseCurrentDescIconScript = gItemHudScripts[gItemTable[itemID].iconID].enabled;
                         }
 
-                        set_hud_element_anim(itemIcon, gItemHudScripts[gItemTable[itemID].iconID].enabled);
-                        set_hud_element_scale(itemIcon, 0.670816f);
+                        hud_element_set_script(itemIcon, gItemHudScripts[gItemTable[itemID].iconID].enabled);
+                        hud_element_set_scale(itemIcon, 0.670816f);
                     }
 
-                    set_hud_element_render_pos(itemIcon, baseX + 105 + pause_items_scroll_offset_x(posX) + itemOffsetX,
+                    hud_element_set_render_pos(itemIcon, baseX + 105 + pause_items_scroll_offset_x(posX) + itemOffsetX,
                                                 baseY + 23 + pause_items_scroll_offset_y(posY) + itemOffsetY);
                     if (totalItemIndex == 0) {
-                        draw_hud_element_3(itemIcon);
+                        hud_element_draw_without_clipping(itemIcon);
                     } else {
-                        draw_hud_element_2(itemIcon);
+                        hud_element_draw_next(itemIcon);
                     }
 
                     totalItemIndex++;
@@ -282,13 +282,13 @@ void pause_items_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
 
     if (gPauseMenuCurrentTab == 3 && gPauseItemsLevel == 1) {
         if (gPauseItemsCurrentPage > 0) {
-            set_hud_element_render_pos(gPauseItemsIconIDs[16], baseX + 278, baseY + 14);
-            draw_hud_element_3(gPauseItemsIconIDs[16]);
+            hud_element_set_render_pos(gPauseItemsIconIDs[16], baseX + 278, baseY + 14);
+            hud_element_draw_without_clipping(gPauseItemsIconIDs[16]);
         }
 
         if (gPauseItemsPages [gPauseItemsCurrentPage + 1].enabled) {
-            set_hud_element_render_pos(gPauseItemsIconIDs[17], baseX + 278, baseY + 146);
-            draw_hud_element_3(gPauseItemsIconIDs[17]);
+            hud_element_set_render_pos(gPauseItemsIconIDs[17], baseX + 278, baseY + 146);
+            hud_element_draw_without_clipping(gPauseItemsIconIDs[17]);
         }
     }
 
@@ -430,8 +430,8 @@ void pause_items_init(MenuPanel* panel) {
     pause_items_load_items(FALSE);
 
     for (i = 0; i < ARRAY_COUNT(gPauseItemsIconIDs); i++) {
-        gPauseItemsIconIDs[i] = create_hud_element(gPauseItemsElements[i]);
-        set_hud_element_flags(gPauseItemsIconIDs[i], HUD_ELEMENT_FLAGS_80);
+        gPauseItemsIconIDs[i] = hud_element_create(gPauseItemsElements[i]);
+        hud_element_set_flags(gPauseItemsIconIDs[i], HUD_ELEMENT_FLAGS_80);
     }
 
     for (i = 0; i < ARRAY_COUNT(gPauseItemsWindowBPs); i++) {
@@ -587,6 +587,6 @@ void pause_items_cleanup(MenuPanel* panel) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(gPauseItemsIconIDs); i++) {
-        free_hud_element(gPauseItemsIconIDs[i]);
+        hud_element_free(gPauseItemsIconIDs[i]);
     }
 }
