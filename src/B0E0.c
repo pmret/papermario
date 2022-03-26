@@ -201,7 +201,7 @@ void update_camera_from_controller(Camera*, CamPosSettings*, CameraControlSettin
 INCLUDE_ASM(s32, "B0E0", update_camera_from_controller);
 
 void update_camera_zone_interp(Camera* camera) {
-    CameraControlSettings* cont;
+    CameraControlSettings* currentController;
     CameraControlSettings* cs;
     CameraControlSettings* cs2;
     f32 targetX;
@@ -215,9 +215,7 @@ void update_camera_zone_interp(Camera* camera) {
     f32 deltaSqSum;
     f32 panPhase;
     f32 temp_f20_2;
-    f32 temp_f22;
-    f32 temp_f22_3;
-    f32 temp_f22_4;
+    f32 panRad;
     f32 cosViewPitch;
     f32 sinViewPitch;
     f32 temp_f24;
@@ -239,7 +237,6 @@ void update_camera_zone_interp(Camera* camera) {
     f32 dist;
     f32 temp;
     f32 temp2;
-    f32 test;
 
     targetX = camera->targetPos.x;
     targetY = camera->targetPos.y;
@@ -308,18 +305,18 @@ void update_camera_zone_interp(Camera* camera) {
 
         cond2 = FALSE;
         cs2 = cs;
-        cont = camera->currentController;
-        if (cs != NULL && cont != NULL && cs->type == cont->type &&
-            cs->flag == cont->flag && cs->boomLength == cont->boomLength &&
-            cs->boomPitch == cont->boomPitch &&
-            cs->viewPitch == cont->viewPitch) {
+        currentController = camera->currentController;
+        if (cs != NULL && currentController != NULL && cs->type == currentController->type &&
+            cs->flag == currentController->flag && cs->boomLength == currentController->boomLength &&
+            cs->boomPitch == currentController->boomPitch &&
+            cs->viewPitch == currentController->viewPitch) {
 
             switch (cs->type) {
                 case 0:
-                    if (cs->posA.x == cont->posA.x &&
-                        cs->posA.z == cont->posA.z &&
-                        cs->posB.x == cont->posB.x &&
-                        cs->posB.z == cont->posB.z) {
+                    if (cs->posA.x == currentController->posA.x &&
+                        cs->posA.z == currentController->posA.z &&
+                        cs->posB.x == currentController->posB.x &&
+                        cs->posB.z == currentController->posB.z) {
 
                         cond2 = TRUE;
                     }
@@ -327,28 +324,28 @@ void update_camera_zone_interp(Camera* camera) {
                 case 1:
                     switch (cs->flag){
                         case 0:
-                            if (cs->posA.x == cont->posA.x &&
-                                cs->posA.z == cont->posA.z) {
+                            if (cs->posA.x == currentController->posA.x &&
+                                cs->posA.z == currentController->posA.z) {
                                 cond2 = TRUE;
                             }
                             break;
                         case 1:
-                            if (cs->posA.x == cont->posA.x &&
-                                cs->posA.z == cont->posA.z &&
-                                cs->posB.x == cont->posB.x &&
-                                cs->posB.z == cont->posB.z) {
+                            if (cs->posA.x == currentController->posA.x &&
+                                cs->posA.z == currentController->posA.z &&
+                                cs->posB.x == currentController->posB.x &&
+                                cs->posB.z == currentController->posB.z) {
                                 cond2 = TRUE;
                             }
                             break;
                     }
                     break;
                 default:
-                    if (cs2->posA.x == cont->posA.x &&
-                        cs2->posA.z == cont->posA.z &&
-                        cs2->posA.y == cont->posA.y &&
-                        cs2->posB.y == cont->posB.y &&
-                        cs2->posB.x == cont->posB.x &&
-                        cs2->posB.z == cont->posB.z) {
+                    if (cs2->posA.x == currentController->posA.x &&
+                        cs2->posA.z == currentController->posA.z &&
+                        cs2->posA.y == currentController->posA.y &&
+                        cs2->posB.y == currentController->posB.y &&
+                        cs2->posB.x == currentController->posB.x &&
+                        cs2->posB.z == currentController->posB.z) {
 
                         cond2 = TRUE;
                     }
@@ -356,7 +353,7 @@ void update_camera_zone_interp(Camera* camera) {
             }
         }
 
-        if (camera->unk_506 != 0 || (!cond2 && cs2 != cont)) {
+        if (camera->unk_506 != 0 || (!cond2 && cs2 != currentController)) {
             if (camera->interpAlpha == 1.0f) {
                 camera->prevController = camera->currentController;
             } else {
@@ -471,7 +468,8 @@ void update_camera_zone_interp(Camera* camera) {
 
     if (boomYawDiff < settingDiff) {
         boomYawDiff = settingDiff;
-        settingDiff++; settingDiff--;
+        settingDiff++;
+        settingDiff--;
     }
     if (boomYawDiff > 90.0f) {
         boomYawDiff = 90.0f;
@@ -488,12 +486,11 @@ void update_camera_zone_interp(Camera* camera) {
     }
 
     if (camera->interpAlpha < 1.0) {
-        f32 q, w;
         panPhase = camera->panPhase;
-        temp_f22 = panPhase * PI_D;
-        temp_f24 = 2.0f / (cos_rad(temp_f22) + 1.0f);
-        temp_f22_2 = cos_rad((camera->linearInterp * PI_D * (1.0f - panPhase)) + temp_f22);
-        cosViewPitch = (temp_f22_2 + (1.0 - cos_rad(temp_f22)) * 0.5) * temp_f24;
+        panRad = panPhase * PI_D;
+        temp_f24 = 2.0f / (cos_rad(panRad) + 1.0f);
+        temp_f22_2 = cos_rad((camera->linearInterp * PI_D * (1.0f - panPhase)) + panRad);
+        cosViewPitch = (temp_f22_2 + (1.0 - cos_rad(panRad)) * 0.5) * temp_f24;
         cosViewPitch = (2.0f - (cosViewPitch + 1.0f)) * 0.5001;
         camera->interpAlpha = cosViewPitch;
     }

@@ -559,8 +559,8 @@ ApiStatus SetCamProperties(Evt* script, s32 isInitialCall) {
     f32 viewPitch = evt_get_float_variable(script, *args++);
 
     if (isInitialCall) {
-        hitDepth = 32767;
-        zoneID = test_ray_zones(posX, posY + 10, posZ, 0, -1, 0, &hitX, &hitY, &hitZ, &hitDepth, &nX, &nY, &nZ);
+        hitDepth = 32767.0f;
+        zoneID = test_ray_zones(posX, posY + 10, posZ, 0, -1.0f, 0, &hitX, &hitY, &hitZ, &hitDepth, &nX, &nY, &nZ);
         if (zoneID >= 0) {
             camera->controlSettings = *gZoneCollisionData.colliderList[zoneID].camSettings;
         }
@@ -599,11 +599,11 @@ ApiStatus AdjustCam(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (isInitialCall) {
-        hitDepth = 32767;
+        hitDepth = 32767.0f;
         posX = playerStatus->position.x;
         posY = playerStatus->position.y;
         posZ = playerStatus->position.z;
-        zoneID = test_ray_zones(posX, posY + 10, posZ, 0, -1, 0, &hitX, &hitY, &hitZ, &hitDepth, &nX, &nY, &nZ);
+        zoneID = test_ray_zones(posX, posY + 10.0f, posZ, 0, -1.0f, 0, &hitX, &hitY, &hitZ, &hitDepth, &nX, &nY, &nZ);
         if (zoneID >= 0) {
             camera->controlSettings = *gZoneCollisionData.colliderList[zoneID].camSettings;
         }
