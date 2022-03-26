@@ -8,11 +8,11 @@ void N(UnkActionCommandFunc1)(void) {
     s32 hudElement;
     s32 barFillLevel;
 
-    draw_hud_element_clipped(actionCommandStatus->hudElements[0]);
+    hud_element_draw_clipped(actionCommandStatus->hudElements[0]);
 
     hudElement = actionCommandStatus->hudElements[1];
-    draw_hud_element_clipped(hudElement);
-    get_hud_element_render_pos(hudElement, &hudX, &hudY);
+    hud_element_draw_clipped(hudElement);
+    hud_element_get_render_pos(hudElement, &hudX, &hudY);
 
     if (actionCommandStatus->unk_68 == 0) {
         func_80268770(hudX, hudY, actionCommandStatus->barFillLevel / 100);
@@ -20,5 +20,5 @@ void N(UnkActionCommandFunc1)(void) {
         func_8026880C(hudX, hudY, actionCommandStatus->barFillLevel / 100);
     }
 
-    draw_hud_element_clipped(actionCommandStatus->hudElements[2]);
+    hud_element_draw_clipped(actionCommandStatus->hudElements[2]);
 }

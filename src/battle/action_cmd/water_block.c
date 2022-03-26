@@ -42,37 +42,37 @@ void func_802AA014_42B504(void) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
 
-    draw_hud_element_clipped(actionCommandStatus->hudElements[0]);
-    draw_hud_element_clipped(actionCommandStatus->hudElements[1]);
-    draw_hud_element_clipped(actionCommandStatus->hudElements[2]);
-    draw_hud_element_clipped(actionCommandStatus->hudElements[3]);
-    draw_hud_element_clipped(actionCommandStatus->hudElements[4]);
-    draw_hud_element_clipped(actionCommandStatus->hudElements[6]);
-    draw_hud_element_clipped(actionCommandStatus->hudElements[7]);
-    draw_hud_element_clipped(actionCommandStatus->hudElements[8]);
-    draw_hud_element_clipped(actionCommandStatus->hudElements[13]);
+    hud_element_draw_clipped(actionCommandStatus->hudElements[0]);
+    hud_element_draw_clipped(actionCommandStatus->hudElements[1]);
+    hud_element_draw_clipped(actionCommandStatus->hudElements[2]);
+    hud_element_draw_clipped(actionCommandStatus->hudElements[3]);
+    hud_element_draw_clipped(actionCommandStatus->hudElements[4]);
+    hud_element_draw_clipped(actionCommandStatus->hudElements[6]);
+    hud_element_draw_clipped(actionCommandStatus->hudElements[7]);
+    hud_element_draw_clipped(actionCommandStatus->hudElements[8]);
+    hud_element_draw_clipped(actionCommandStatus->hudElements[13]);
 
     hudElement = actionCommandStatus->hudElements[10];
-    if (get_hud_element_anim(hudElement) != D_802AB180_42C670[battleStatus->unk_84]) {
-        set_hud_element_anim(hudElement, D_802AB180_42C670[battleStatus->unk_84]);
+    if (hud_element_get_script(hudElement) != D_802AB180_42C670[battleStatus->unk_84]) {
+        hud_element_set_script(hudElement, D_802AB180_42C670[battleStatus->unk_84]);
     }
 
-    draw_hud_element_clipped(hudElement);
-    draw_hud_element_clipped(actionCommandStatus->hudElements[11]);
-    draw_hud_element_clipped(actionCommandStatus->hudElements[12]);
+    hud_element_draw_clipped(hudElement);
+    hud_element_draw_clipped(actionCommandStatus->hudElements[11]);
+    hud_element_draw_clipped(actionCommandStatus->hudElements[12]);
 }
 
 void func_802AA0D8_42B5C8(void) {
-    free_hud_element(gActionCommandStatus.hudElements[0]);
-    free_hud_element(gActionCommandStatus.hudElements[1]);
-    free_hud_element(gActionCommandStatus.hudElements[2]);
-    free_hud_element(gActionCommandStatus.hudElements[3]);
-    free_hud_element(gActionCommandStatus.hudElements[4]);
-    free_hud_element(gActionCommandStatus.hudElements[6]);
-    free_hud_element(gActionCommandStatus.hudElements[7]);
-    free_hud_element(gActionCommandStatus.hudElements[8]);
-    free_hud_element(gActionCommandStatus.hudElements[10]);
-    free_hud_element(gActionCommandStatus.hudElements[11]);
-    free_hud_element(gActionCommandStatus.hudElements[12]);
-    free_hud_element(gActionCommandStatus.hudElements[13]);
+    hud_element_free(gActionCommandStatus.hudElements[0]);
+    hud_element_free(gActionCommandStatus.hudElements[1]);
+    hud_element_free(gActionCommandStatus.hudElements[2]);
+    hud_element_free(gActionCommandStatus.hudElements[3]);
+    hud_element_free(gActionCommandStatus.hudElements[4]);
+    hud_element_free(gActionCommandStatus.hudElements[6]);
+    hud_element_free(gActionCommandStatus.hudElements[7]);
+    hud_element_free(gActionCommandStatus.hudElements[8]);
+    hud_element_free(gActionCommandStatus.hudElements[10]);
+    hud_element_free(gActionCommandStatus.hudElements[11]);
+    hud_element_free(gActionCommandStatus.hudElements[12]);
+    hud_element_free(gActionCommandStatus.hudElements[13]);
 }

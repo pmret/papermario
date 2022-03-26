@@ -16,7 +16,7 @@ BSS s32 D_802BFF20;
 BSS s32 D_802BFF24;
 BSS f32 D_802BFF28;
 BSS s32 D_802BFF2C;
-BSS unkPartnerStruct D_802BFF30;
+BSS TweesterPhysics LakilesterTweesterPhysics;
 
 void func_802BD100_320C50(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -78,25 +78,23 @@ EvtScript world_lakilester_take_out = {
     EVT_END
 };
 
-unkPartnerStruct* D_802BFE7C_3239CC = &D_802BFF30;
+TweesterPhysics* LakilesterTweesterPhysicsPtr = &LakilesterTweesterPhysics;
 
 ApiStatus func_802BD2D4_320E24(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
     Npc* lakilester = script->owner2.npc;
+    f32 sinAngle, cosAngle, liftoffVelocity;
     Entity* entity;
-    f32 sp10;
-    f32 sp14;
-    f32 tempY;
 
     if (isInitialCall) {
         partner_flying_enable(lakilester, 1);
-        mem_clear(D_802BFE7C_3239CC, sizeof(*D_802BFE7C_3239CC));
-        D_8010C954 = NULL;
+        mem_clear(LakilesterTweesterPhysicsPtr, sizeof(TweesterPhysics));
+        TweesterTouchingPartner = NULL;
     }
 
-    playerData->unk_2F4[8]++;
+    playerData->partnerUsedTime[PARTNER_LAKILESTER]++;
     lakilester->flags |= NPC_FLAG_DIRTY_SHADOW;
-    entity = D_8010C954;
+    entity = TweesterTouchingPartner;
 
     if (entity == NULL) {
         partner_flying_update_player_tracking(lakilester);
@@ -104,60 +102,60 @@ ApiStatus func_802BD2D4_320E24(Evt* script, s32 isInitialCall) {
         return ApiStatus_BLOCK;
     }
 
-    switch (D_802BFE7C_3239CC->unk_04) {
+    switch (LakilesterTweesterPhysicsPtr->state) {
         case 0:
-            D_802BFE7C_3239CC->unk_04 = 1;
-            D_802BFE7C_3239CC->flags = lakilester->flags;
-            D_802BFE7C_3239CC->unk_0C = fabsf(dist2D(lakilester->pos.x, lakilester->pos.z, entity->position.x, entity->position.z));
-            D_802BFE7C_3239CC->unk_10 = atan2(entity->position.x, entity->position.z, lakilester->pos.x, lakilester->pos.z);
-            D_802BFE7C_3239CC->unk_14 = 6.0f;
-            D_802BFE7C_3239CC->unk_18 = 50.0f;
-            D_802BFE7C_3239CC->unk_00 = 120;
+            LakilesterTweesterPhysicsPtr->state = 1;
+            LakilesterTweesterPhysicsPtr->prevFlags = lakilester->flags;
+            LakilesterTweesterPhysicsPtr->radius = fabsf(dist2D(lakilester->pos.x, lakilester->pos.z, entity->position.x, entity->position.z));
+            LakilesterTweesterPhysicsPtr->angle = atan2(entity->position.x, entity->position.z, lakilester->pos.x, lakilester->pos.z);
+            LakilesterTweesterPhysicsPtr->angularVelocity = 6.0f;
+            LakilesterTweesterPhysicsPtr->liftoffVelocityPhase = 50.0f;
+            LakilesterTweesterPhysicsPtr->countdown = 120;
             lakilester->flags |= NPC_FLAG_40000 | NPC_FLAG_100 | NPC_FLAG_40 | NPC_FLAG_ENABLE_HIT_SCRIPT;
             lakilester->flags &= ~NPC_FLAG_GRAVITY;
         case 1:
-            sin_cos_rad((D_802BFE7C_3239CC->unk_10 * TAU) / 360.0f, &sp10, &sp14);
-            lakilester->pos.x = entity->position.x + (sp10 * D_802BFE7C_3239CC->unk_0C);
-            lakilester->pos.z = entity->position.z - (sp14 * D_802BFE7C_3239CC->unk_0C);
-            D_802BFE7C_3239CC->unk_10 = clamp_angle(D_802BFE7C_3239CC->unk_10 - D_802BFE7C_3239CC->unk_14);
+            sin_cos_rad((LakilesterTweesterPhysicsPtr->angle * TAU) / 360.0f, &sinAngle, &cosAngle);
+            lakilester->pos.x = entity->position.x + (sinAngle * LakilesterTweesterPhysicsPtr->radius);
+            lakilester->pos.z = entity->position.z - (cosAngle * LakilesterTweesterPhysicsPtr->radius);
+            LakilesterTweesterPhysicsPtr->angle = clamp_angle(LakilesterTweesterPhysicsPtr->angle - LakilesterTweesterPhysicsPtr->angularVelocity);
 
-            if (D_802BFE7C_3239CC->unk_0C > 20.0f) {
-                D_802BFE7C_3239CC->unk_0C--;
-            } else if (D_802BFE7C_3239CC->unk_0C < 19.0f) {
-                D_802BFE7C_3239CC->unk_0C++;
+            if (LakilesterTweesterPhysicsPtr->radius > 20.0f) {
+                LakilesterTweesterPhysicsPtr->radius--;
+            } else if (LakilesterTweesterPhysicsPtr->radius < 19.0f) {
+                LakilesterTweesterPhysicsPtr->radius++;
             }
 
-            tempY = sin_rad((D_802BFE7C_3239CC->unk_18 * TAU) / 360.0f) * 3.0f;
-            D_802BFE7C_3239CC->unk_18 += 3.0f;
+            liftoffVelocity = sin_rad((LakilesterTweesterPhysicsPtr->liftoffVelocityPhase * TAU) / 360.0f) * 3.0f;
+            LakilesterTweesterPhysicsPtr->liftoffVelocityPhase += 3.0f;
 
-            if (D_802BFE7C_3239CC->unk_18 > 150.0f) {
-                D_802BFE7C_3239CC->unk_18 = 150.0f;
+            if (LakilesterTweesterPhysicsPtr->liftoffVelocityPhase > 150.0f) {
+                LakilesterTweesterPhysicsPtr->liftoffVelocityPhase = 150.0f;
             }
 
-            lakilester->pos.y += tempY;
-            lakilester->renderYaw = clamp_angle(360.0f - D_802BFE7C_3239CC->unk_10);
-            D_802BFE7C_3239CC->unk_14 += 0.8;
+            lakilester->pos.y += liftoffVelocity;
+            lakilester->renderYaw = clamp_angle(360.0f - LakilesterTweesterPhysicsPtr->angle);
+            LakilesterTweesterPhysicsPtr->angularVelocity += 0.8;
 
-            if (D_802BFE7C_3239CC->unk_14 > 40.0f) {
-                D_802BFE7C_3239CC->unk_14 = 40.0f;
+            if (LakilesterTweesterPhysicsPtr->angularVelocity > 40.0f) {
+                LakilesterTweesterPhysicsPtr->angularVelocity = 40.0f;
             }
 
-            if (--D_802BFE7C_3239CC->unk_00 == 0) {
-                D_802BFE7C_3239CC->unk_04++;
+            if (--LakilesterTweesterPhysicsPtr->countdown == 0) {
+                LakilesterTweesterPhysicsPtr->state++;
             }
             break;
         case 2:
-            lakilester->flags = D_802BFE7C_3239CC->flags;
-            D_802BFE7C_3239CC->unk_00 = 30;
-            D_802BFE7C_3239CC->unk_04++;
+            lakilester->flags = LakilesterTweesterPhysicsPtr->prevFlags;
+            LakilesterTweesterPhysicsPtr->countdown = 30;
+            LakilesterTweesterPhysicsPtr->state++;
             break;
         case 3:
             partner_flying_update_player_tracking(lakilester);
             partner_flying_update_motion(lakilester);
 
-            if (--D_802BFE7C_3239CC->unk_00 == 0) {
-                D_802BFE7C_3239CC->unk_04 = 0;
-                D_8010C954 = NULL;
+            if (--LakilesterTweesterPhysicsPtr->countdown == 0) {
+                LakilesterTweesterPhysicsPtr->state = 0;
+                TweesterTouchingPartner = NULL;
             }
             break;
     }
@@ -171,32 +169,30 @@ EvtScript world_lakilester_update = {
 };
 
 void func_802BD678_3211C8(Npc* npc) {
-    if (D_8010C954 != NULL) {
-        D_8010C954 = NULL;
-        npc->flags = D_802BFE7C_3239CC->flags;
-        D_802BFE7C_3239CC->unk_04 = 0;
+    if (TweesterTouchingPartner != NULL) {
+        TweesterTouchingPartner = NULL;
+        npc->flags = LakilesterTweesterPhysicsPtr->prevFlags;
+        LakilesterTweesterPhysicsPtr->state = 0;
         partner_clear_player_tracking(npc);
     }
 }
 
-void func_802BD6BC_32120C(f32* arg0, f32* arg1) {
+void func_802BD6BC_32120C(f32* outAngle, f32* outMagnitude) {
     PartnerActionStatus* lakilesterActionStatus = &gPartnerActionStatus;
-    f32 temp_f24 = lakilesterActionStatus->stickX;
-    f32 temp_f26 = lakilesterActionStatus->stickY;
-    f32 temp_f22 = -temp_f26;
-    f32 atan = atan2(0.0f, 0.0f, temp_f24, temp_f22);
-    f32 temp = clamp_angle(atan + gCameras->currentYaw);
-    f32 phi_f20 = 0.0f;
+    f32 stickX = lakilesterActionStatus->stickX;
+    f32 stickY = lakilesterActionStatus->stickY;
+    f32 angle = clamp_angle(atan2(0.0f, 0.0f, stickX, -stickY) + gCameras->currentYaw);
+    f32 magnitude = 0.0f;
 
-    if (dist2D(0.0f, 0.0f, temp_f24, temp_f22) >= 1.0) {
-        phi_f20 = 3.0f;
-        if (SQ(temp_f24) + SQ(temp_f26) > 3025.0f) {
-            phi_f20 = 6.0f;
+    if (dist2D(0.0f, 0.0f, stickX, -stickY) >= 1.0) {
+        magnitude = 3.0f;
+        if (SQ(stickX) + SQ(stickY) > 3025.0f) {
+            magnitude = 6.0f;
         }
     }
 
-    *arg0 = temp;
-    *arg1 = phi_f20;
+    *outAngle = angle;
+    *outMagnitude = magnitude;
 }
 
 s32 func_802BD7DC(void) {
@@ -215,7 +211,7 @@ s32 func_802BD7DC(void) {
         return TRUE;
     }
 
-    ret = 0;
+    ret = FALSE;
     outLength = 16.0f;
     outY = npc->moveToPos.y + 7.0f;
     outX = playerStatus->position.x;
@@ -624,12 +620,12 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
     switch (D_802BFF14) {
         case 40:
             if (playerStatus->flags & PLAYER_STATUS_FLAGS_800 ||
-                playerStatus->statusMenuCounterinputEnabledCounter) {
+                playerStatus->inputEnabledCounter) {
 
                 playerStatus->flags &= ~NPC_FLAG_100;
                 return ApiStatus_DONE2;
             }
-            
+
             script->functionTemp[1] = 3;
             script->functionTemp[2] = disable_player_input();
             D_802BFF04 = 1;
@@ -646,7 +642,7 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
             }
 
             if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_100000) {
-                if (script->functionTemp[2] < playerStatus->statusMenuCounterinputEnabledCounter) {
+                if (script->functionTemp[2] < playerStatus->inputEnabledCounter) {
                     enable_player_input();
                     D_802BFF04 = 0;
                 }
@@ -655,7 +651,7 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
             }
 
             if (script->functionTemp[1] == 0) {
-                if (script->functionTemp[2] < playerStatus->statusMenuCounterinputEnabledCounter) {
+                if (script->functionTemp[2] < playerStatus->inputEnabledCounter) {
                     enable_player_input();
                     D_802BFF04 = 0;
                     playerStatus->flags &= ~PLAYER_STATUS_FLAGS_100;
@@ -764,50 +760,50 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
         case 104:
             if (playerStatus->flags & PLAYER_STATUS_ANIM_FLAGS_800) {
                 D_802BFF14 = 10;
+                break;
             } else {
                 npc->duration--;
                 if (npc->duration != 0) {
-                    if (partnerActionStatus->pressedButtons & (B_BUTTON | D_CBUTTONS) &&
-                        func_802BD7DC() != 0) {
-                            
+                    if (partnerActionStatus->pressedButtons & (B_BUTTON | D_CBUTTONS) && func_802BD7DC()) {
                         D_802BFF14 = 3;
                     }
+                    break;
                 } else {
                     D_802BFF14 = 1;
                     npc->flags |= NPC_FLAG_40;
-                case 1:
-                    func_802BDDD8_321928(npc);
-                    playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_400000;
-                    D_802BFF18++;
-                    npc->pos.y = npc->moveToPos.y + 2.0f;
-
-                    if (D_802BFF18 >= 10) {
-                        D_802BFF18 = D_802BFF18 - 18;
-                    }
-
-                    if (partnerActionStatus->inputDisabled == FALSE) {
-                        playerStatus->targetYaw = npc->yaw;
-                    }
-
-                    if (!(playerStatus->flags & PLAYER_STATUS_FLAGS_800)) {
-                        if (partnerActionStatus->pressedButtons & (B_BUTTON | D_CBUTTONS)) {
-                            if (func_802BD7DC() != 0) {
-                                D_802BFF14 = 3;
-                            } else {
-                                if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_40000000)) {
-                                    sfx_play_sound_at_npc(SOUND_MENU_ERROR, 0, NPC_PARTNER);
-                                }
-                                playerStatus->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_40000000;
-                            }
-                        }
-                    } else {
-                        D_802BFF14 = 10;
-                        break;
-                    }
                 }
             }
+        case 1:
+            func_802BDDD8_321928(npc);
+            playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_400000;
+            D_802BFF18++;
+            npc->pos.y = npc->moveToPos.y + 2.0f;
+
+            if (D_802BFF18 >= 10) {
+                D_802BFF18 = D_802BFF18 - 18;
+            }
+
+            if (partnerActionStatus->inputDisabled == FALSE) {
+                playerStatus->targetYaw = npc->yaw;
+            }
+
+            if (!(playerStatus->flags & PLAYER_STATUS_FLAGS_800)) {
+                if (partnerActionStatus->pressedButtons & (B_BUTTON | D_CBUTTONS)) {
+                    if (func_802BD7DC()) {
+                        D_802BFF14 = 3;
+                    } else {
+                        if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_40000000)) {
+                            sfx_play_sound_at_npc(SOUND_MENU_ERROR, 0, NPC_PARTNER);
+                        }
+                        playerStatus->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_40000000;
+                    }
+                }
+            } else {
+                D_802BFF14 = 10;
+                break;
+            }
             break;
-        case 3: 
+        case 3:
             npc->flags &= ~NPC_FLAG_40;
             playerStatus->flags |= NPC_FLAG_100;
             func_802BD7DC();
@@ -817,7 +813,7 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
             } else {
                 yaw = (0.0f + camYaw) - 90.0f;
             }
-            
+
             npc->yaw = yaw;
             sp2C = dist2D(playerStatus->position.x, playerStatus->position.z,
                             npc->moveToPos.x, npc->moveToPos.z);
@@ -836,7 +832,7 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
             suggest_player_anim_clearUnkFlag(0x10006);
             D_802BFF14 += 1;
             break;
-        case 4: 
+        case 4:
             suggest_player_anim_clearUnkFlag(0x10007);
             D_802BFF14++;
             /* fallthrough */
@@ -909,7 +905,7 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
             partnerActionStatus->actionState.b[3] = 0;
             partnerActionStatus->actionState.b[0] = 0;
             playerStatus->flags &= ~PLAYER_STATUS_FLAGS_100;
-            
+
             if (D_802BFF04 != 0) {
                 D_802BFF04 = 0;
                 enable_player_input();

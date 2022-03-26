@@ -10,9 +10,9 @@ glabel func_802422D0_E18050
 /* E18064 802422E4 8C50006C */  lw        $s0, 0x6c($v0)
 /* E18068 802422E8 0C048D70 */  jal       free_generic_entity
 /* E1806C 802422EC 8E040000 */   lw       $a0, ($s0)
-/* E18070 802422F0 0C05123D */  jal       free_hud_element
+/* E18070 802422F0 0C05123D */  jal       hud_element_free
 /* E18074 802422F4 8E04000C */   lw       $a0, 0xc($s0)
-/* E18078 802422F8 0C05123D */  jal       free_hud_element
+/* E18078 802422F8 0C05123D */  jal       hud_element_free
 /* E1807C 802422FC 8E040010 */   lw       $a0, 0x10($s0)
 /* E18080 80242300 8FBF0014 */  lw        $ra, 0x14($sp)
 /* E18084 80242304 8FB00010 */  lw        $s0, 0x10($sp)

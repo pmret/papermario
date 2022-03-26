@@ -111,7 +111,7 @@ void func_80240360_B1B8D0(void* data) {
     Matrix4f scale;
 
     guRotateF(rotation, yaw, 0.0f, -1.0f, 0.0f);
-    guRotateF(main, clamp_angle(playerStatus->unk_8C), 0.0f, 0.0f, 1.0f);
+    guRotateF(main, clamp_angle(playerStatus->pitch), 0.0f, 0.0f, 1.0f);
     guMtxCatF(rotation, main, main);
     guRotateF(rotation, yaw, 0.0f, 1.0f, 0.0f);
     guMtxCatF(main, rotation, main);

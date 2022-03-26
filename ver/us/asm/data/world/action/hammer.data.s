@@ -2,5 +2,5 @@
 
 .section .data
 
-dlabel D_802B6DB0_E25C80
+dlabel HammerHit
 .word D_802B6E90_E2A300, 0x00000000, 0x00000000, 0x00000000

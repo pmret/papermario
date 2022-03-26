@@ -1,62 +1,59 @@
 #include "common.h"
 #include "effects.h"
 
-typedef struct HammerUnk {
-    /* 0x00 */ Vec3f unk_00;
+typedef struct HammerHitData {
+    /* 0x00 */ Vec3f hitPos;
     /* 0x0C */ s32 unk_0C;
-    /* 0x10 */ s32 unk_10;
+    /* 0x10 */ s32 hitID;
     /* 0x14 */ s32 unk_14;
-    /* 0x18 */ s32 unk_18;
+    /* 0x18 */ s32 timer;
     /* 0x1C */ s32 unk_1C;
-} HammerUnk;
+} HammerHitData;
 
-extern HammerUnk* D_802B6DB0_E25C80;
+extern HammerHitData* HammerHit;
 
-s32 func_802B6000_E24ED0(s32 arg0) {
-    if (arg0 & 0x1000000) {
+s32 action_hammer_is_swinging_away(s32 animID) {
+    if (animID & 0x1000000) {
         return TRUE;
     }
 
-    switch (arg0 + ~0x6000F) {
-        case 1:
-        case 3:
-        case 5:
-        case 7:
-        case 9:
-        case 11:
+    // away-facing swing anims
+    switch (animID) {
+        case 0x60011:
+        case 0x60013:
+        case 0x60015:
+        case 0x60017:
+        case 0x60019:
+        case 0x6001B:
             return TRUE;
     }
     return FALSE;
 }
 
-void func_802B6048_E24F18(s32 arg0) {
+void action_hammer_play_hit_fx(s32 hitID) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    f32 phi_f24;
-    s32 s2temp;
-    s32 phi_s1;
+    f32 shakeAmt;
+    s32 time;
+    s32 radius;
     s32 soundID;
-    f32 theta;
-    f32 sinTheta;
-    f32 cosTheta;
-    s32 phi_s3;
-    f32 xTemp;
-    f32 yTemp;
-    f32 zTemp;
+    f32 theta, sinTheta, cosTheta;
+    s32 numParticles;
+    f32 x, y, z;
 
     if (gPlayerData.hammerLevel == 2) {
-        phi_f24 = 1.2f;
-        s2temp = 1;
-        phi_s1 = 28;
+        shakeAmt = 1.2f;
+        time = 1;
+        radius = 28;
         soundID = 0x211A;
     } else if (gPlayerData.hammerLevel == 1) {
-        phi_f24 = 0.8f;
-        s2temp = 1;
-        phi_s1 = 16;
+        shakeAmt = 0.8f;
+        time = 1;
+        radius = 16;
         soundID = 0x2119;
     } else {
-        phi_f24 = 0.4f;
-        s2temp = 1;
-        phi_s1 = 4;
+        shakeAmt = 0.4f;
+        time = 1;
+        radius = 4;
         soundID = 0x2118;
     }
 
@@ -64,21 +61,21 @@ void func_802B6048_E24F18(s32 arg0) {
     sinTheta = sin_rad(theta) * 25.0f;
     cosTheta = cos_rad(theta) * -25.0f;
 
-    if (arg0 < 0) {
-        phi_s3 = 6;
-        xTemp = playerStatus->position.x + sinTheta;
-        yTemp = playerStatus->position.y;
-        zTemp = playerStatus->position.z + cosTheta;
+    if (hitID < 0) {
+        numParticles = 6;
+        x = playerStatus->position.x + sinTheta;
+        y = playerStatus->position.y;
+        z = playerStatus->position.z + cosTheta;
     } else {
-        phi_s3 = 3;
-        xTemp = D_802B6DB0_E25C80->unk_00.x + sinTheta;
-        yTemp = D_802B6DB0_E25C80->unk_00.y + playerStatus->colliderHeight - 5.0f;
-        zTemp = D_802B6DB0_E25C80->unk_00.z + cosTheta;
-        phi_s1 = 1;
+        numParticles = 3;
+        x = HammerHit->hitPos.x + sinTheta;
+        y = HammerHit->hitPos.y + playerStatus->colliderHeight - 5.0f;
+        z = HammerHit->hitPos.z + cosTheta;
+        radius = 1;
     }
 
-    exec_ShakeCamX(0, 2, s2temp, phi_f24);
-    fx_smoke_impact(0, xTemp, yTemp, zTemp, phi_s1, phi_s3, 0, (s2temp + 3) * 3);
+    exec_ShakeCamX(0, 2, time, shakeAmt);
+    fx_smoke_impact(0, x, y, z, radius, numParticles, 0, (time + 3) * 3);
 
     switch (is_ability_active(ABILITY_ATTACK_FX)) {
         case 1:
@@ -107,41 +104,41 @@ void func_802B6048_E24F18(s32 arg0) {
 
 INCLUDE_ASM(s32, "world/action/hammer", func_802B62A4_E25174);
 
-void func_802B66A8_E25578(void) {
+void action_hammer_update(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    D_802B6DB0_E25C80->unk_1C = 0;
+    HammerHit->unk_1C = 0;
 
-    if (playerStatus->flags < 0) {
+    if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
         s32 animID;
         s32 soundID;
 
-        playerStatus->flags &= ~0x80000000;
-        playerStatus->flags |= 0x200000;
-        D_802B6DB0_E25C80->unk_18 = 0;
+        playerStatus->flags &= ~PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
+        playerStatus->flags |= PLAYER_STATUS_FLAGS_200000;
+        HammerHit->timer = 0;
         playerStatus->fallState = 0;
         playerStatus->currentSpeed = 0.0f;
         playerStatus->unk_BC = 0;
-        D_802B6DB0_E25C80->unk_10 = func_802B62A4_E25174(D_802B6DB0_E25C80);
+        HammerHit->hitID = func_802B62A4_E25174(HammerHit);
 
         if (gPlayerData.hammerLevel == 2) {
             soundID = 0x2117;
             animID = 0x6001A;
-            if (D_802B6DB0_E25C80->unk_10 < 0) {
-                animID = 0x60018;
+            if (HammerHit->hitID < 0) {
                 soundID = 0x2117;
+                animID = 0x60018;
             }
         } else if (gPlayerData.hammerLevel == 1) {
             soundID = 0x2116;
             animID = 0x60016;
-            if (D_802B6DB0_E25C80->unk_10 < 0) {
+            if (HammerHit->hitID < 0) {
                 soundID = 0x2116;
                 animID = 0x60014;
             }
         } else {
             soundID = 0x2115;
             animID = 0x60012;
-            if (D_802B6DB0_E25C80->unk_10 < 0) {
+            if (HammerHit->hitID < 0) {
                 soundID = 0x2115;
                 animID = 0x60010;
             }
@@ -149,17 +146,17 @@ void func_802B66A8_E25578(void) {
 
         suggest_player_anim_clearUnkFlag(animID);
         sfx_play_sound_at_player(soundID, 0);
-        D_802B6DB0_E25C80->unk_0C = 0;
-        D_802B6DB0_E25C80->unk_14 = 0;
+        HammerHit->unk_0C = 0;
+        HammerHit->unk_14 = 0;
     }
 
-    playerStatus->flags &= ~0x1000000;
-    if (D_802B6DB0_E25C80->unk_18 < 3 && (playerStatus->flags & 0x40000)) {
-        playerStatus->flags |= 0x20000000;
-    } else if (D_802B6DB0_E25C80->unk_18 < 2) {
-        D_802B6DB0_E25C80->unk_18++;
+    playerStatus->flags &= ~PLAYER_STATUS_FLAGS_1000000;
+    if (HammerHit->timer < 3 && (playerStatus->flags & PLAYER_STATUS_FLAGS_40000)) {
+        playerStatus->flags |= PLAYER_STATUS_FLAGS_20000000;
+    } else if (HammerHit->timer < 2) {
+        HammerHit->timer++;
     } else {
-        func_802B6820_E256F0(D_802B6DB0_E25C80);
+        func_802B6820_E256F0(HammerHit);
     }
 }
 

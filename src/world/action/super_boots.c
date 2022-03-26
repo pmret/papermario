@@ -34,9 +34,9 @@ void func_802B6000_E26DE0(void) {
     switch (playerStatus->fallState) {
         case 0:
             D_802B6730 = 40.0f;
-            playerStatus->unk_8C += 40.0f;
-            if (playerStatus->unk_8C >= 360.0f) {
-                playerStatus->unk_8C = 360.0f;
+            playerStatus->pitch += 40.0f;
+            if (playerStatus->pitch >= 360.0f) {
+                playerStatus->pitch = 360.0f;
             }
             if (playerStatus->gravityIntegrator[0] >= 0.0f) {
                 playerStatus->gravityIntegrator[0] -= 0.54;
@@ -49,9 +49,9 @@ void func_802B6000_E26DE0(void) {
                     }
                 }
             }
-            if (playerStatus->unk_8C == 360.0f) {
+            if (playerStatus->pitch == 360.0f) {
                 if (playerStatus->gravityIntegrator[0] <= 0.0f) {
-                    playerStatus->framesOnGround = 5;
+                    playerStatus->currentStateTime = 5;
                     playerStatus->fallState = 2;
                     playerStatus->gravityIntegrator[0] = 2.0f;
                 }
@@ -65,16 +65,16 @@ void func_802B6000_E26DE0(void) {
                     playerStatus->position.y += playerStatus->gravityIntegrator[0];
                 }
             }
-            if (--playerStatus->framesOnGround <= 0) {
+            if (--playerStatus->currentStateTime <= 0) {
                 playerStatus->fallState++;
             }
             break;
         case 3:
             playerStatus->position.y = player_check_collision_below(0.0f, &sp10);
             D_802B6730 = 45.0f;
-            playerStatus->unk_8C += 45.0f;
-            if (playerStatus->unk_8C >= 360.0) {
-                playerStatus->unk_8C = 0.0f;
+            playerStatus->pitch += 45.0f;
+            if (playerStatus->pitch >= 360.0) {
+                playerStatus->pitch = 0.0f;
                 playerStatus->fallState++;
                 playerStatus->gravityIntegrator[1] = -3.4744f;
                 playerStatus->gravityIntegrator[2] = 0.4704f;
@@ -120,7 +120,7 @@ void func_802B6000_E26DE0(void) {
                         playerStatus->actionState = ACTION_STATE_GROUND_POUND;
                         playerStatus->decorationList = 0;
                         playerStatus->unk_280 = 0xC;
-                        playerStatus->unk_8C = 0.0f;
+                        playerStatus->pitch = 0.0f;
                         playerStatus->fallState++;
                         exec_ShakeCam1(0, 0, 4);
                         sfx_play_sound_at_player(0x149, 0);

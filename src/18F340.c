@@ -135,8 +135,8 @@ ApiStatus N(GiveRefund)(Evt* script, s32 isInitialCall) {
         posY = player->currentPos.y;
         posZ = player->currentPos.z;
         get_screen_coords(gCurrentCameraID, posX, posY, posZ, &iconPosX, &iconPosY, &iconPosZ);
-        D_8029FBA0 = create_hud_element(HudScript_Refund);
-        set_hud_element_render_pos(D_8029FBA0, iconPosX + 36, iconPosY - 63);
+        D_8029FBA0 = hud_element_create(HudScript_Refund);
+        hud_element_set_render_pos(D_8029FBA0, iconPosX + 36, iconPosY - 63);
     }
 
     script->varTable[0] = sleepTime;
@@ -148,7 +148,7 @@ ApiStatus N(GiveRefundCleanup)(Evt* script, s32 isInitialCall) {
     s32 sellValue = gItemTable[gBattleStatus.selectedItemID].sellValue;
 
     if (player_team_is_ability_active(gBattleStatus.playerActor, ABILITY_REFUND) && sellValue > 0) {
-        free_hud_element(D_8029FBA0);
+        hud_element_free(D_8029FBA0);
     }
 
     return ApiStatus_DONE2;
@@ -407,24 +407,24 @@ ApiStatus func_802619E8(Evt* script, s32 isInitialCall) {
     screenY -= 19;
 
     if (script->varTable[10] > 0) {
-        D_8029FBAC = create_hud_element(HudScript_HPDrain);
-        set_hud_element_render_pos(D_8029FBAC, screenX, screenY);
+        D_8029FBAC = hud_element_create(HudScript_HPDrain);
+        hud_element_set_render_pos(D_8029FBAC, screenX, screenY);
         screenY += 9;
     }
 
     if (script->varTable[11] > 0 || script->varTable[12] > 0) {
-        D_8029FBA8 = create_hud_element(HudScript_Happy);
-        set_hud_element_render_pos(D_8029FBA8, screenX, screenY);
+        D_8029FBA8 = hud_element_create(HudScript_Happy);
+        hud_element_set_render_pos(D_8029FBA8, screenX, screenY);
     }
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_80261B40(Evt* script, s32 isInitialCall) {
     if (script->varTable[10] > 0) {
-        free_hud_element(D_8029FBAC);
+        hud_element_free(D_8029FBAC);
     }
     if (script->varTable[11] > 0 || script->varTable[12] > 0) {
-        free_hud_element(D_8029FBA8);
+        hud_element_free(D_8029FBA8);
     }
     return ApiStatus_DONE2;
 }

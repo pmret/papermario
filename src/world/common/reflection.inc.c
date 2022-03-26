@@ -126,7 +126,7 @@ void N(reflection_render_wall)(PlayerStatus* playerStatus) {
     Matrix4f scale;
 
     guRotateF(rotation, yaw, 0.0f, -1.0f, 0.0f);
-    guRotateF(main, clamp_angle(playerStatus->unk_8C), 0.0f, 0.0f, 1.0f);
+    guRotateF(main, clamp_angle(playerStatus->pitch), 0.0f, 0.0f, 1.0f);
     guMtxCatF(rotation, main, main);
     guRotateF(rotation, yaw, 0.0f, 1.0f, 0.0f);
     guMtxCatF(main, rotation, main);
@@ -208,7 +208,7 @@ void N(reflection_render_floor)(PlayerStatus* playerStatus) {
     s32 flags;
 
     guRotateF(rotation, yaw, 0.0f, -1.0f, 0.0f);
-    guRotateF(main, clamp_angle(playerStatus->unk_8C), 0.0f, 0.0f, 1.0f);
+    guRotateF(main, clamp_angle(playerStatus->pitch), 0.0f, 0.0f, 1.0f);
     guMtxCatF(rotation, main, main);
     guRotateF(rotation, yaw, 0.0f, 1.0f, 0.0f);
     guMtxCatF(main, rotation, main);
@@ -270,7 +270,7 @@ void N(reflection_render_floor_fancy)(PlayerStatus* playerStatus) {
             func_802DDEE4(1, -1, 6, tint, tint, tint, 255, 0);
 
             guRotateF(rotation, yaw, 0.0f, -1.0f, 0.0f);
-            guRotateF(mtx, clamp_angle(playerStatus->unk_8C), 0.0f, 0.0f, 1.0f);
+            guRotateF(mtx, clamp_angle(playerStatus->pitch), 0.0f, 0.0f, 1.0f);
             guMtxCatF(rotation, mtx, mtx);
             px = playerStatus->position.x;
             py = playerStatus->position.y;

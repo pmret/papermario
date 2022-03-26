@@ -13,8 +13,8 @@ glabel reset_player_status
 /* 7B52C 800E207C AC22C96C */  sw        $v0, %lo(D_8010C96C)($at)
 /* 7B530 800E2080 24020001 */  addiu     $v0, $zero, 1
 /* 7B534 800E2084 AFBF0014 */  sw        $ra, 0x14($sp)
-/* 7B538 800E2088 3C018011 */  lui       $at, %hi(D_8010C954)
-/* 7B53C 800E208C AC20C954 */  sw        $zero, %lo(D_8010C954)($at)
+/* 7B538 800E2088 3C018011 */  lui       $at, %hi(TweesterTouchingPartner)
+/* 7B53C 800E208C AC20C954 */  sw        $zero, %lo(TweesterTouchingPartner)($at)
 /* 7B540 800E2090 3C018011 */  lui       $at, %hi(D_8010C920)
 /* 7B544 800E2094 AC20C920 */  sw        $zero, %lo(D_8010C920)($at)
 /* 7B548 800E2098 3C018011 */  lui       $at, %hi(D_8010C940)
@@ -78,8 +78,8 @@ glabel reset_player_status
 /* 7B62C 800E217C A60200B2 */  sh        $v0, 0xb2($s0)
 /* 7B630 800E2180 A0800080 */  sb        $zero, 0x80($a0)
 .L800E2184:
-/* 7B634 800E2184 3C02800F */  lui       $v0, %hi(D_800F7B70)
-/* 7B638 800E2188 24427B70 */  addiu     $v0, $v0, %lo(D_800F7B70)
+/* 7B634 800E2184 3C02800F */  lui       $v0, %hi(DefaultMoveSpeeds)
+/* 7B638 800E2188 24427B70 */  addiu     $v0, $v0, %lo(DefaultMoveSpeeds)
 /* 7B63C 800E218C C4400000 */  lwc1      $f0, ($v0)
 /* 7B640 800E2190 46020002 */  mul.s     $f0, $f0, $f2
 /* 7B644 800E2194 00000000 */  nop

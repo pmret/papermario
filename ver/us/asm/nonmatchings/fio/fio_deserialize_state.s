@@ -77,9 +77,9 @@ glabel fio_deserialize_state
 /* 69A4 8002B5A4 8CEA12F0 */  lw        $t2, 0x12f0($a3)
 /* 69A8 8002B5A8 8CEB12F4 */  lw        $t3, 0x12f4($a3)
 /* 69AC 8002B5AC 8CEC12F8 */  lw        $t4, 0x12f8($a3)
-/* 69B0 8002B5B0 3C018007 */  lui       $at, %hi(D_800779C4)
+/* 69B0 8002B5B0 3C018007 */  lui       $at, %hi(gSaveSlotMetadata)
 /* 69B4 8002B5B4 00220821 */  addu      $at, $at, $v0
-/* 69B8 8002B5B8 AC2979C4 */  sw        $t1, %lo(D_800779C4)($at)
+/* 69B8 8002B5B8 AC2979C4 */  sw        $t1, %lo(gSaveSlotMetadata)($at)
 /* 69BC 8002B5BC 3C018007 */  lui       $at, %hi(D_800779C8)
 /* 69C0 8002B5C0 00220821 */  addu      $at, $at, $v0
 /* 69C4 8002B5C4 AC2A79C8 */  sw        $t2, %lo(D_800779C8)($at)

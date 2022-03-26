@@ -9,42 +9,42 @@ BSS s32 D_802BE930;
 BSS s32 D_802BE934;
 BSS s32 D_802BE938;
 BSS s32 D_802BE93C;
-BSS unkPartnerStruct D_802BE940;
+BSS TweesterPhysics BombetteTweesterPhysics;
 
 void entity_interacts_with_current_partner(s32 arg0);
 
 void func_802BD100_317E50(Npc* npc) {
-    f32 sp20, sp24, sp28;
-    f32 phi_f20 = 0.0f;
+    f32 x, y, z;
+    f32 angle = 0.0f;
     
-    while (phi_f20 < 360.0f) {
-        sp20 = npc->pos.x;
-        sp24 = npc->pos.y;
-        sp28 = npc->pos.z;
-        if (npc_test_move_taller_with_slipping(0x100000, &sp20, &sp24, &sp28, 30.0f, clamp_angle(npc->yaw + phi_f20),
+    while (angle < 360.0f) {
+        x = npc->pos.x;
+        y = npc->pos.y;
+        z = npc->pos.z;
+        if (npc_test_move_taller_with_slipping(0x100000, &x, &y, &z, 30.0f, clamp_angle(npc->yaw + angle),
                                                npc->collisionHeight, npc->collisionRadius) != 0) {
             break;
         } else {
-            phi_f20 += 45.0f;
+            angle += 45.0f;
         }
     }
 
-    if (phi_f20 >= 360.0f) {
-        phi_f20 = 0.0f;
+    if (angle >= 360.0f) {
+        angle = 0.0f;
 
-        while (phi_f20 < 360.0f) {
-            sp20 = npc->pos.x;
-            sp24 = npc->pos.y;
-            sp28 = npc->pos.z;
-            if (npc_test_move_taller_with_slipping(0x40000, &sp20, &sp24, &sp28, 30.0f, clamp_angle(npc->yaw + phi_f20),
+        while (angle < 360.0f) {
+            x = npc->pos.x;
+            y = npc->pos.y;
+            z = npc->pos.z;
+            if (npc_test_move_taller_with_slipping(0x40000, &x, &y, &z, 30.0f, clamp_angle(npc->yaw + angle),
                                                    npc->collisionHeight, npc->collisionRadius) != 0) {
                 break;
             } else {
-                phi_f20 += 45.0f;
+                angle += 45.0f;
             }
         }
         
-        if (!(phi_f20 >= 360.0f)) {
+        if (!(angle >= 360.0f)) {
             if (D_8010C978 >= 0 && (D_8010C978 & 0x4000) != 0) {
                 entity_interacts_with_current_partner(D_8010C978 & ~0x4000);
             }
@@ -79,23 +79,23 @@ EvtScript world_bombette_take_out = {
     EVT_END
 };
 
-unkPartnerStruct* D_802BE89C_3195EC = &D_802BE940;
+TweesterPhysics* BombetteTweesterPhysicsPtr = &BombetteTweesterPhysics;
 
 ApiStatus func_802BD338_318088(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
     Npc* bombette = script->owner2.npc;
-    f32 sp10, sp14, tempY;
+    f32 sinAngle, cosAngle, liftoffVelocity;
     Entity* entity;
 
     if (isInitialCall) {
         partner_walking_enable(bombette, 1);
-        mem_clear(D_802BE89C_3195EC, sizeof(*D_802BE89C_3195EC));
-        D_8010C954 = 0;
+        mem_clear(BombetteTweesterPhysicsPtr, sizeof(TweesterPhysics));
+        TweesterTouchingPartner = NULL;
     }
 
-    playerData->unk_2F4[3]++;
+    playerData->partnerUsedTime[PARTNER_BOMBETTE]++;
     bombette->flags |= NPC_FLAG_DIRTY_SHADOW;
-    entity = D_8010C954;
+    entity = TweesterTouchingPartner;
 
     if (entity == NULL) {
         partner_walking_update_player_tracking(bombette);
@@ -103,62 +103,62 @@ ApiStatus func_802BD338_318088(Evt* script, s32 isInitialCall) {
         return ApiStatus_BLOCK;
     }
 
-    switch (D_802BE89C_3195EC->unk_04) {
+    switch (BombetteTweesterPhysicsPtr->state) {
         case 0:
-            D_802BE89C_3195EC->unk_04 = 1;
-            D_802BE89C_3195EC->flags = bombette->flags;
-            D_802BE89C_3195EC->unk_0C = fabsf(dist2D(bombette->pos.x, bombette->pos.z,
+            BombetteTweesterPhysicsPtr->state = 1;
+            BombetteTweesterPhysicsPtr->prevFlags = bombette->flags;
+            BombetteTweesterPhysicsPtr->radius = fabsf(dist2D(bombette->pos.x, bombette->pos.z,
                                                      entity->position.x, entity->position.z));
-            D_802BE89C_3195EC->unk_10 = atan2(entity->position.x, entity->position.z,
+            BombetteTweesterPhysicsPtr->angle = atan2(entity->position.x, entity->position.z,
                                               bombette->pos.x, bombette->pos.z);
-            D_802BE89C_3195EC->unk_14 = 6.0f;
-            D_802BE89C_3195EC->unk_18 = 50.0f;
-            D_802BE89C_3195EC->unk_00 = 120;
+            BombetteTweesterPhysicsPtr->angularVelocity = 6.0f;
+            BombetteTweesterPhysicsPtr->liftoffVelocityPhase = 50.0f;
+            BombetteTweesterPhysicsPtr->countdown = 120;
             bombette->flags |= NPC_FLAG_40000 | NPC_FLAG_100 | NPC_FLAG_40 | NPC_FLAG_ENABLE_HIT_SCRIPT;
             bombette->flags &= ~NPC_FLAG_GRAVITY;
         case 1:
-            sin_cos_rad((D_802BE89C_3195EC->unk_10 * TAU) / 360.0f, &sp10, &sp14);
-            bombette->pos.x = entity->position.x + (sp10 * D_802BE89C_3195EC->unk_0C);
-            bombette->pos.z = entity->position.z - (sp14 * D_802BE89C_3195EC->unk_0C);
-            D_802BE89C_3195EC->unk_10 = clamp_angle(D_802BE89C_3195EC->unk_10 - D_802BE89C_3195EC->unk_14);
+            sin_cos_rad((BombetteTweesterPhysicsPtr->angle * TAU) / 360.0f, &sinAngle, &cosAngle);
+            bombette->pos.x = entity->position.x + (sinAngle * BombetteTweesterPhysicsPtr->radius);
+            bombette->pos.z = entity->position.z - (cosAngle * BombetteTweesterPhysicsPtr->radius);
+            BombetteTweesterPhysicsPtr->angle = clamp_angle(BombetteTweesterPhysicsPtr->angle - BombetteTweesterPhysicsPtr->angularVelocity);
 
-            if (D_802BE89C_3195EC->unk_0C > 20.0f) {
-                D_802BE89C_3195EC->unk_0C--;
-            } else if (D_802BE89C_3195EC->unk_0C < 19.0f) {
-                D_802BE89C_3195EC->unk_0C++;
+            if (BombetteTweesterPhysicsPtr->radius > 20.0f) {
+                BombetteTweesterPhysicsPtr->radius--;
+            } else if (BombetteTweesterPhysicsPtr->radius < 19.0f) {
+                BombetteTweesterPhysicsPtr->radius++;
             }
 
-            tempY = sin_rad((D_802BE89C_3195EC->unk_18 * TAU) / 360.0f) * 3.0f;
-            D_802BE89C_3195EC->unk_18 += 3.0f;
+            liftoffVelocity = sin_rad((BombetteTweesterPhysicsPtr->liftoffVelocityPhase * TAU) / 360.0f) * 3.0f;
+            BombetteTweesterPhysicsPtr->liftoffVelocityPhase += 3.0f;
 
-            if (D_802BE89C_3195EC->unk_18 > 150.0f) {
-                D_802BE89C_3195EC->unk_18 = 150.0f;
+            if (BombetteTweesterPhysicsPtr->liftoffVelocityPhase > 150.0f) {
+                BombetteTweesterPhysicsPtr->liftoffVelocityPhase = 150.0f;
             }
 
-            bombette->pos.y += tempY;
-            bombette->renderYaw = clamp_angle(360.0f - D_802BE89C_3195EC->unk_10);
-            D_802BE89C_3195EC->unk_14 += 0.8;
+            bombette->pos.y += liftoffVelocity;
+            bombette->renderYaw = clamp_angle(360.0f - BombetteTweesterPhysicsPtr->angle);
+            BombetteTweesterPhysicsPtr->angularVelocity += 0.8;
 
-            if (D_802BE89C_3195EC->unk_14 > 40.0f) {
-                D_802BE89C_3195EC->unk_14 = 40.0f;
+            if (BombetteTweesterPhysicsPtr->angularVelocity > 40.0f) {
+                BombetteTweesterPhysicsPtr->angularVelocity = 40.0f;
             }
 
-            if (--D_802BE89C_3195EC->unk_00 == 0) {
-                D_802BE89C_3195EC->unk_04++;
+            if (--BombetteTweesterPhysicsPtr->countdown == 0) {
+                BombetteTweesterPhysicsPtr->state++;
             }
             break;
         case 2:
-            bombette->flags = D_802BE89C_3195EC->flags;
-            D_802BE89C_3195EC->unk_00 = 0x1E;
-            D_802BE89C_3195EC->unk_04++;
+            bombette->flags = BombetteTweesterPhysicsPtr->prevFlags;
+            BombetteTweesterPhysicsPtr->countdown = 0x1E;
+            BombetteTweesterPhysicsPtr->state++;
             break;
         case 3:
             partner_walking_update_player_tracking(bombette);
             partner_walking_update_motion(bombette);
 
-            if (--D_802BE89C_3195EC->unk_00 == 0) {
-                D_802BE89C_3195EC->unk_04 = 0;
-                D_8010C954 = 0;
+            if (--BombetteTweesterPhysicsPtr->countdown == 0) {
+                BombetteTweesterPhysicsPtr->state = 0;
+                TweesterTouchingPartner = NULL;
             }
             break;
     }
@@ -172,10 +172,10 @@ EvtScript world_bombette_update = {
 };
 
 void func_802BD6DC_31842C(Npc* npc) {
-    if (D_8010C954 != NULL) {
-        D_8010C954 = NULL;
-        npc->flags = D_802BE89C_3195EC->flags;
-        D_802BE89C_3195EC->unk_04 = 0;
+    if (TweesterTouchingPartner != NULL) {
+        TweesterTouchingPartner = NULL;
+        npc->flags = BombetteTweesterPhysicsPtr->prevFlags;
+        BombetteTweesterPhysicsPtr->state = 0;
         partner_clear_player_tracking(npc);
     }
 }

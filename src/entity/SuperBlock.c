@@ -5,13 +5,13 @@ extern EntityBlueprint Entity_SuperBlockContent;
 
 void entity_SuperBlockContent_setupGfx();
 
-f32 entity_SuperBlockContent_get_previous_yaw(SuperBlockContentData* data, s32 arg1) {
-    s32 idx = data->yawBufferPos - arg1;
+f32 entity_SuperBlockContent_get_previous_yaw(SuperBlockContentData* data, s32 lagTime) {
+    s32 bufIdx = data->yawBufferPos - lagTime;
 
-    if (idx < 0) {
-        idx += 20;
+    if (bufIdx < 0) {
+        bufIdx += ARRAY_COUNT(data->yawBuffer);
     }
-    return data->yawBuffer[idx];
+    return data->yawBuffer[bufIdx];
 }
 
 void entity_upgrade_block_hide_content(s32 entityIndex) {

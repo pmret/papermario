@@ -19,7 +19,7 @@ BSS s32 bss_802BFF00;
 BSS s32 bss_802BFF04;
 BSS s32 bss_802BFF08;
 BSS s32 bss_802BFF0C;
-BSS unkPartnerStruct D_802BFF10_320C80;
+BSS TweesterPhysics SushieTweesterPhysics;
 
 
 f32 D_802BFDB0_320B20 = 0.0f;
@@ -93,20 +93,20 @@ void func_802BD368_31E0D8(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 
 
 INCLUDE_ASM(s32, "world/partner/sushie", func_802BD414_31E184);
 
-s32 func_802BE280_31EFF0(s32 arg0, f32* arg1, f32* arg2, f32* arg3, f32 arg4, f32 arg5, f32* arg6) {
-    f32 sp38, sp3C, sp40, sp44, sp48, sp4C, sp50, sp54, sp58;
-    s32 colliderRayResult;
+s32 func_802BE280_31EFF0(s32 arg0, f32* x, f32* y, f32* z, f32 length, f32 radius, f32* yaw) {
+    f32 sinAngle, cosAngle, hitX, hitY, hitZ, totalLength, hitNx, hitNy, hitNz;
+    s32 hitResult;
 
-    sin_cos_rad((*arg6 * TAU) / 360.0f, &sp38, &sp3C);
-    sp3C = -sp3C;
-    sp4C = arg5 + arg4;
-    colliderRayResult = test_ray_colliders(0x10000, *arg1, *arg2, *arg3, sp38, 0.0f, sp3C, &sp40, &sp44, &sp48, &sp4C, &sp50, &sp54, &sp58);
+    sin_cos_rad((*yaw * TAU) / 360.0f, &sinAngle, &cosAngle);
+    cosAngle = -cosAngle;
+    totalLength = radius + length;
+    hitResult = test_ray_colliders(0x10000, *x, *y, *z, sinAngle, 0.0f, cosAngle, &hitX, &hitY, &hitZ, &totalLength, &hitNx, &hitNy, &hitNz);
 
-    if (colliderRayResult >= 0) {
-        *arg6 = atan2(0.0f, 0.0f, sp50, sp58);
+    if (hitResult >= 0) {
+        *yaw = atan2(0.0f, 0.0f, hitNx, hitNz);
     }
 
-    return colliderRayResult;
+    return hitResult;
 }
 
 void func_802BE3A4_31F114(Npc*);
@@ -129,7 +129,7 @@ void world_sushie_init(Npc* sushie) {
     bss_802BFEF4 = 0;
 }
 
-s32 func_802BF568_3202D8(Evt* script, s32 isInitialCall) {
+s32 SushieTakeOut(Evt* script, s32 isInitialCall) {
     Npc* sushie = script->owner2.npc;
 
     if (isInitialCall) {
@@ -140,25 +140,25 @@ s32 func_802BF568_3202D8(Evt* script, s32 isInitialCall) {
 }
 
 EvtScript world_sushie_take_out = {
-    EVT_CALL(func_802BF568_3202D8)
+    EVT_CALL(SushieTakeOut)
     EVT_RETURN
     EVT_END
 };
 
-unkPartnerStruct* D_802BFDF8_320B68 = &D_802BFF10_320C80;
+TweesterPhysics* SushieTweesterPhysicsPtr = &SushieTweesterPhysics;
 
-ApiStatus func_802BF5A0_320310(Evt* script, s32 isInitialCall) {
+ApiStatus SushieUpdate(Evt* script, s32 isInitialCall) {
     Npc* sushie = script->owner2.npc;
+    f32 sinAngle, cosAngle, liftoffVelocity;
     Entity* entity;
-    f32 sp10, sp14, tempY;
 
     if (isInitialCall) {
         partner_walking_enable(sushie, 1);
-        mem_clear(D_802BFDF8_320B68, sizeof(*D_802BFDF8_320B68));
-        D_8010C954 = 0;
+        mem_clear(SushieTweesterPhysicsPtr, sizeof(TweesterPhysics));
+        TweesterTouchingPartner = NULL;
     }
 
-    entity = D_8010C954;
+    entity = TweesterTouchingPartner;
 
     if (entity == NULL) {
         partner_walking_update_player_tracking(sushie);
@@ -166,61 +166,61 @@ ApiStatus func_802BF5A0_320310(Evt* script, s32 isInitialCall) {
         return ApiStatus_BLOCK;
     }
 
-    switch (D_802BFDF8_320B68->unk_04) {
+    switch (SushieTweesterPhysicsPtr->state) {
         case 0:
-            D_802BFDF8_320B68->unk_04 = 1;
-            D_802BFDF8_320B68->flags = sushie->flags;
-            D_802BFDF8_320B68->unk_0C = fabsf(dist2D(sushie->pos.x, sushie->pos.z,
+            SushieTweesterPhysicsPtr->state = 1;
+            SushieTweesterPhysicsPtr->prevFlags = sushie->flags;
+            SushieTweesterPhysicsPtr->radius = fabsf(dist2D(sushie->pos.x, sushie->pos.z,
                                                      entity->position.x, entity->position.z));
-            D_802BFDF8_320B68->unk_10 = atan2(entity->position.x, entity->position.z, sushie->pos.x, sushie->pos.z);
-            D_802BFDF8_320B68->unk_14 = 6.0f;
-            D_802BFDF8_320B68->unk_18 = 50.0f;
-            D_802BFDF8_320B68->unk_00 = 120;
+            SushieTweesterPhysicsPtr->angle = atan2(entity->position.x, entity->position.z, sushie->pos.x, sushie->pos.z);
+            SushieTweesterPhysicsPtr->angularVelocity = 6.0f;
+            SushieTweesterPhysicsPtr->liftoffVelocityPhase = 50.0f;
+            SushieTweesterPhysicsPtr->countdown = 120;
             sushie->flags |= NPC_FLAG_40000 | NPC_FLAG_100 | NPC_FLAG_40 | NPC_FLAG_ENABLE_HIT_SCRIPT;
             sushie->flags &= ~NPC_FLAG_GRAVITY;
         case 1:
-            sin_cos_rad((D_802BFDF8_320B68->unk_10 * TAU) / 360.0f, &sp10, &sp14);
-            sushie->pos.x = entity->position.x + (sp10 * D_802BFDF8_320B68->unk_0C);
-            sushie->pos.z = entity->position.z - (sp14 * D_802BFDF8_320B68->unk_0C);
-            D_802BFDF8_320B68->unk_10 = clamp_angle(D_802BFDF8_320B68->unk_10 - D_802BFDF8_320B68->unk_14);
+            sin_cos_rad((SushieTweesterPhysicsPtr->angle * TAU) / 360.0f, &sinAngle, &cosAngle);
+            sushie->pos.x = entity->position.x + (sinAngle * SushieTweesterPhysicsPtr->radius);
+            sushie->pos.z = entity->position.z - (cosAngle * SushieTweesterPhysicsPtr->radius);
+            SushieTweesterPhysicsPtr->angle = clamp_angle(SushieTweesterPhysicsPtr->angle - SushieTweesterPhysicsPtr->angularVelocity);
 
-            if (D_802BFDF8_320B68->unk_0C > 20.0f) {
-                D_802BFDF8_320B68->unk_0C--;
-            } else if (D_802BFDF8_320B68->unk_0C < 19.0f) {
-                D_802BFDF8_320B68->unk_0C++;
+            if (SushieTweesterPhysicsPtr->radius > 20.0f) {
+                SushieTweesterPhysicsPtr->radius--;
+            } else if (SushieTweesterPhysicsPtr->radius < 19.0f) {
+                SushieTweesterPhysicsPtr->radius++;
             }
 
-            tempY = sin_rad((D_802BFDF8_320B68->unk_18 * TAU) / 360.0f) * 3.0f;
-            D_802BFDF8_320B68->unk_18 += 3.0f;
+            liftoffVelocity = sin_rad((SushieTweesterPhysicsPtr->liftoffVelocityPhase * TAU) / 360.0f) * 3.0f;
+            SushieTweesterPhysicsPtr->liftoffVelocityPhase += 3.0f;
 
-            if (D_802BFDF8_320B68->unk_18 > 150.0f) {
-                D_802BFDF8_320B68->unk_18 = 150.0f;
+            if (SushieTweesterPhysicsPtr->liftoffVelocityPhase > 150.0f) {
+                SushieTweesterPhysicsPtr->liftoffVelocityPhase = 150.0f;
             }
 
-            sushie->pos.y += tempY;
-            sushie->renderYaw = clamp_angle(360.0f - D_802BFDF8_320B68->unk_10);
-            D_802BFDF8_320B68->unk_14 += 0.8;
+            sushie->pos.y += liftoffVelocity;
+            sushie->renderYaw = clamp_angle(360.0f - SushieTweesterPhysicsPtr->angle);
+            SushieTweesterPhysicsPtr->angularVelocity += 0.8;
 
-            if (D_802BFDF8_320B68->unk_14 > 40.0f) {
-                D_802BFDF8_320B68->unk_14 = 40.0f;
+            if (SushieTweesterPhysicsPtr->angularVelocity > 40.0f) {
+                SushieTweesterPhysicsPtr->angularVelocity = 40.0f;
             }
 
-            if (--D_802BFDF8_320B68->unk_00 == 0) {
-                D_802BFDF8_320B68->unk_04++;
+            if (--SushieTweesterPhysicsPtr->countdown == 0) {
+                SushieTweesterPhysicsPtr->state++;
             }
             break;
         case 2:
-            sushie->flags = D_802BFDF8_320B68->flags;
-            D_802BFDF8_320B68->unk_00 = 30;
-            D_802BFDF8_320B68->unk_04++;
+            sushie->flags = SushieTweesterPhysicsPtr->prevFlags;
+            SushieTweesterPhysicsPtr->countdown = 30;
+            SushieTweesterPhysicsPtr->state++;
             break;
         case 3:
             partner_walking_update_player_tracking(sushie);
             partner_walking_update_motion(sushie);
 
-            if (--D_802BFDF8_320B68->unk_00 == 0) {
-                D_802BFDF8_320B68->unk_04 = 0;
-                D_8010C954 = 0;
+            if (--SushieTweesterPhysicsPtr->countdown == 0) {
+                SushieTweesterPhysicsPtr->state = 0;
+                TweesterTouchingPartner = NULL;
             }
             break;
     }
@@ -229,21 +229,21 @@ ApiStatus func_802BF5A0_320310(Evt* script, s32 isInitialCall) {
 }
 
 EvtScript world_sushie_update = {
-    EVT_CALL(func_802BF5A0_320310)
+    EVT_CALL(SushieUpdate)
     EVT_RETURN
     EVT_END
 };
 
 void func_802BF920_320690(Npc* sushie) {
-    if (D_8010C954 != NULL) {
-        D_8010C954 = NULL;
-        sushie->flags = D_802BFDF8_320B68->flags;
-        D_802BFDF8_320B68->unk_04 = 0;
+    if (TweesterTouchingPartner != NULL) {
+        TweesterTouchingPartner = NULL;
+        sushie->flags = SushieTweesterPhysicsPtr->prevFlags;
+        SushieTweesterPhysicsPtr->state = 0;
         partner_clear_player_tracking(sushie);
     }
 }
 
-s32 func_802BF964_3206D4(Evt* script, s32 isInitialCall) {
+s32 SushiePutAway(Evt* script, s32 isInitialCall) {
     Npc* sushie = script->owner2.npc;
 
     if (isInitialCall) {
@@ -255,7 +255,7 @@ s32 func_802BF964_3206D4(Evt* script, s32 isInitialCall) {
 }
 
 EvtScript world_sushie_put_away = {
-    EVT_CALL(func_802BF964_3206D4)
+    EVT_CALL(SushiePutAway)
     EVT_RETURN
     EVT_END
 };

@@ -26,12 +26,12 @@ glabel filemenu_init
 .L80244934:
 /* 165194 80244934 8E240000 */  lw        $a0, ($s1)
 /* 165198 80244938 26310004 */  addiu     $s1, $s1, 4
-/* 16519C 8024493C 0C050529 */  jal       create_hud_element
+/* 16519C 8024493C 0C050529 */  jal       hud_element_create
 /* 1651A0 80244940 26100001 */   addiu    $s0, $s0, 1
 /* 1651A4 80244944 0040202D */  daddu     $a0, $v0, $zero
 /* 1651A8 80244948 3C052000 */  lui       $a1, 0x2000
 /* 1651AC 8024494C 34A50080 */  ori       $a1, $a1, 0x80
-/* 1651B0 80244950 0C051280 */  jal       set_hud_element_flags
+/* 1651B0 80244950 0C051280 */  jal       hud_element_set_flags
 /* 1651B4 80244954 AE440000 */   sw       $a0, ($s2)
 /* 1651B8 80244958 1A00FFF6 */  blez      $s0, .L80244934
 /* 1651BC 8024495C 26520004 */   addiu    $s2, $s2, 4
@@ -67,10 +67,10 @@ glabel filemenu_init
 /* 165228 802449C8 3C15800E */  lui       $s5, %hi(gCurrentSaveFile)
 /* 16522C 802449CC 26B5ACC0 */  addiu     $s5, $s5, %lo(gCurrentSaveFile)
 /* 165230 802449D0 24140001 */  addiu     $s4, $zero, 1
-/* 165234 802449D4 3C118007 */  lui       $s1, %hi(D_80077A24)
-/* 165238 802449D8 26317A24 */  addiu     $s1, $s1, %lo(D_80077A24)
-/* 16523C 802449DC 3C128007 */  lui       $s2, %hi(D_800779C4)
-/* 165240 802449E0 265279C4 */  addiu     $s2, $s2, %lo(D_800779C4)
+/* 165234 802449D4 3C118007 */  lui       $s1, %hi(gSaveSlotHasData)
+/* 165238 802449D8 26317A24 */  addiu     $s1, $s1, %lo(gSaveSlotHasData)
+/* 16523C 802449DC 3C128007 */  lui       $s2, %hi(gSaveSlotMetadata)
+/* 165240 802449E0 265279C4 */  addiu     $s2, $s2, %lo(gSaveSlotMetadata)
 .L802449E4:
 /* 165244 802449E4 0C00ACB4 */  jal       fio_load_game
 /* 165248 802449E8 0200202D */   daddu    $a0, $s0, $zero

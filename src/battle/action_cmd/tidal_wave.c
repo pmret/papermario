@@ -33,18 +33,18 @@ ApiStatus N(CreateHudElements)(Evt* script, s32 isInitialCall) {
         actionCommandStatus->hudElementX = -48;
         actionCommandStatus->hudElementY = 80;
 
-        hudElement = create_hud_element(HudScript_BlueMeter);
+        hudElement = hud_element_create(HudScript_BlueMeter);
         actionCommandStatus->hudElements[0] = hudElement;
-        set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
-        set_hud_element_render_depth(hudElement, 0);
-        set_hud_element_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+        hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
+        hud_element_set_render_depth(hudElement, 0);
+        hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
         for (i = 1; i < ARRAY_COUNT(actionCommandStatus->hudElements); i++) {
-            hudElement = create_hud_element(HudScript_AButton);
+            hudElement = hud_element_create(HudScript_AButton);
             actionCommandStatus->hudElements[i] = hudElement;
-            set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
-            set_hud_element_render_depth(hudElement, 0);
-            set_hud_element_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+            hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
+            hud_element_set_render_depth(hudElement, 0);
+            hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
         }
 
         return ApiStatus_DONE2;
@@ -95,9 +95,9 @@ void N(update)(void) {
             btl_set_popup_duration(99);
             hudElement = actionCommandStatus->hudElements[0];
             if (actionCommandStatus->unk_61 != 0) {
-                clear_hud_element_flags(hudElement, HUD_ELEMENT_FLAGS_DISABLED);
+                hud_element_clear_flags(hudElement, HUD_ELEMENT_FLAGS_DISABLED);
             }
-            set_hud_element_alpha(hudElement, 0xFF);
+            hud_element_set_alpha(hudElement, 0xFF);
             actionCommandStatus->state = 1;
             break;
         case 1:
@@ -106,7 +106,7 @@ void N(update)(void) {
             if (actionCommandStatus->hudElementX > 50) {
                 actionCommandStatus->hudElementX = 50;
             }
-            set_hud_element_render_pos(
+            hud_element_set_render_pos(
                 actionCommandStatus->hudElements[0],
                 actionCommandStatus->hudElementX + 21,
                 actionCommandStatus->hudElementY + 28);
@@ -134,13 +134,13 @@ void N(update)(void) {
             } while (oldButton == newButton);
 
             hudElement = actionCommandStatus->hudElements[actionCommandStatus->unk_5D];
-            set_hud_element_anim(
+            hud_element_set_script(
                 hudElement, D_802A97C0_42CEB0[newButton]);
-            set_hud_element_render_pos(
+            hud_element_set_render_pos(
                 hudElement,
                 actionCommandStatus->hudElementX + ((actionCommandStatus->unk_5D - 1) * 20) + 16,
                 actionCommandStatus->hudElementY);
-            clear_hud_element_flags(hudElement, HUD_ELEMENT_FLAGS_DISABLED);
+            hud_element_clear_flags(hudElement, HUD_ELEMENT_FLAGS_DISABLED);
             sfx_play_sound(0x233);
             actionCommandStatus->unk_70 = 1;
             actionCommandStatus->state = 12;
@@ -251,9 +251,9 @@ void N(update)(void) {
                     if (success) {
                         // Correct; shrink button, set up next button press, etc.
                         hudElement = actionCommandStatus->hudElements[actionCommandStatus->unk_5D];
-                        set_hud_element_anim(hudElement, D_802A97CC_42CEBC[actionCommandStatus->unk_5C]);
-                        set_hud_element_scale(hudElement, 0.5f);
-                        set_hud_element_render_pos(
+                        hud_element_set_script(hudElement, D_802A97CC_42CEBC[actionCommandStatus->unk_5C]);
+                        hud_element_set_scale(hudElement, 0.5f);
+                        hud_element_set_render_pos(
                             hudElement,
                             actionCommandStatus->hudElementX + ((actionCommandStatus->unk_5D - 1) * 20),
                             actionCommandStatus->hudElementY + 7);
@@ -301,16 +301,16 @@ void N(draw_hud_elements)(void) {
     s32 i;
 
     for (i = 1; i < 15; i++) {
-        draw_hud_element_clipped(gActionCommandStatus.hudElements[i]);
+        hud_element_draw_clipped(gActionCommandStatus.hudElements[i]);
     }
 }
 
 void N(free_hud_elements)(void) {
     s32 i;
 
-    free_hud_element(gActionCommandStatus.hudElements[0]);
+    hud_element_free(gActionCommandStatus.hudElements[0]);
 
     for (i = 1; i < 15; i++) {
-        free_hud_element(gActionCommandStatus.hudElements[i]);
+        hud_element_free(gActionCommandStatus.hudElements[i]);
     }
 }

@@ -53,7 +53,7 @@ void entity_BlueWarpPipe_wait_for_player_to_get_off(Entity* entity) {
 void entity_BlueWarpPipe_idle(Entity* entity) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    if ((entity->collisionFlags & ENTITY_COLLISION_FLAGS_1) != 0) {
+    if ((entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_FLOOR) != 0) {
         gOverrideFlags |= GLOBAL_OVERRIDES_40;
 
         if (!(playerStatus->flags & (PLAYER_STATUS_FLAGS_1000 | PLAYER_STATUS_FLAGS_INPUT_DISABLED))) {

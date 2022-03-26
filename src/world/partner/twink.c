@@ -27,7 +27,7 @@ ApiStatus TwinkUpdate(Evt* script, s32 isInitialCall) {
 
     partner_flying_update_player_tracking(twink);
     partner_flying_update_motion(twink);
-    playerData->unk_2F4[PARTNER_TWINK]++;
+    playerData->partnerUsedTime[PARTNER_TWINK]++;
 
     return ApiStatus_BLOCK;
 }

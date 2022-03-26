@@ -676,9 +676,9 @@ void filemenu_draw_cursor(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 
         if (temp_a1 > 255) {
             temp_a1 = 255;
         }
-        set_hud_element_alpha(filemenu_cursorHudElemID[0], temp_a1);
-        set_hud_element_render_pos(filemenu_cursorHudElemID[0], baseX + D_80249B94, baseY + D_80249B98);
-        draw_hud_element_3(filemenu_cursorHudElemID[0]);
+        hud_element_set_alpha(filemenu_cursorHudElemID[0], temp_a1);
+        hud_element_set_render_pos(filemenu_cursorHudElemID[0], baseX + D_80249B94, baseY + D_80249B98);
+        hud_element_draw_without_clipping(filemenu_cursorHudElemID[0]);
     }
 }
 
@@ -692,7 +692,7 @@ void filemenu_cleanup(void) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(filemenu_cursorHudElemID); i++) {
-        free_hud_element(filemenu_cursorHudElemID[i]);
+        hud_element_free(filemenu_cursorHudElemID[i]);
     }
 
     panelIt = filemenu_menus;

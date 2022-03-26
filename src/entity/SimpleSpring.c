@@ -34,12 +34,12 @@ INCLUDE_ASM(s32, "entity/SimpleSpring", entity_SimpleSpring_idle);
 #endif
 
 void entity_SimpleSpring_set_jump_params(Entity* ent) {
-    s32* data = ent->dataBuf.unk;
+    SimpleSpringData* data = ent->dataBuf.simpleSpring;
 
     set_action_state(ACTION_STATE_LAUNCH);
     gPlayerStatus.gravityIntegrator[1] = 0;
     gPlayerStatus.gravityIntegrator[0] = 15.0f;
-    gPlayerStatus.gravityIntegrator[2] = (f32)*data;
+    gPlayerStatus.gravityIntegrator[2] = (f32)data->launchVelocity;
     gPlayerStatus.gravityIntegrator[3] = ent->position.y;
 }
 
@@ -51,7 +51,7 @@ void entity_ScriptSpring_init(void) {
 }
 
 void entity_SimpleSpring_init(Entity* ent) {
-    ent->dataBuf.unk[0] = *CreateEntityVarArgBuffer;
+    ent->dataBuf.simpleSpring->launchVelocity = *CreateEntityVarArgBuffer;
 }
 
 INCLUDE_ASM(s32, "entity/SimpleSpring", entity_HiddenPanel_setupGfx);
