@@ -928,7 +928,7 @@ void partner_set_goal_pos(s32 x, s32 z) {
     wPartnerMoveGoalZ = z;
 }
 
-void func_800EF3D4(s16 arg0) {
+void func_800EF3D4(s32 arg0) {
     D_8010CFCA = arg0;
 }
 

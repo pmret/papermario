@@ -59,7 +59,7 @@ void func_800E5520(void);
 void func_802B7000_E225B0(void);
 void func_802B71D4(void);
 void func_802B71C8(void);
-void func_800EF3D4(s16);
+void func_800EF3D4(s32);
 void spr_draw_player_sprite(s32, s32, s32, s32, Matrix4f);
 void func_802DDEE4(s32, s32, s32, s32, s32, s32, s32, s32);
 void func_802DDFF8(u32, s32, s32, s32, s32, s32, s32);
@@ -1341,7 +1341,6 @@ void render_player_model(void) {
         if (!(playerStatus->flags & PLAYER_STATUS_FLAGS_20000)) {
             if (playerStatus->alpha1 != playerStatus->alpha2) {
                 if (playerStatus->alpha1 < 254) {
-
                     if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_1000000)) {
                         renderModeTemp = RENDER_MODE_SURFACE_XLU_LAYER1;
                     } else {
@@ -1350,7 +1349,7 @@ void render_player_model(void) {
 
                     playerStatus->renderMode = renderModeTemp;
                     func_802DDEE4(0, -1, 7, 0, 0, 0, playerStatus->alpha1, 0);
-
+                
                 } else {
                     playerStatus->renderMode = RENDER_MODE_ALPHATEST;
                     func_802DDEE4(0, -1, 0, 0, 0, 0, 0, 0);
@@ -1368,7 +1367,7 @@ void render_player_model(void) {
             rtPtr->appendGfxArg = playerStatus;
             rtPtr->distance = -z;
             rtPtr->renderMode = playerStatus->renderMode;
-
+            
 
             if (!(playerStatus->flags & PLAYER_STATUS_ANIM_FLAGS_20000)) {
                 appendGfx = appendGfx_player;

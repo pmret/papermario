@@ -1,5 +1,4 @@
 #include "common.h"
-#include "functions.h"
 
 void func_802B62CC_E24BEC(void);
 void func_802B644C_E24D6C(void);
