@@ -211,7 +211,7 @@ s32 func_802BD7DC(void) {
         return TRUE;
     }
 
-    ret = 0;
+    ret = FALSE;
     outLength = 16.0f;
     outY = npc->moveToPos.y + 7.0f;
     outX = playerStatus->position.x;
@@ -760,47 +760,47 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
         case 104:
             if (playerStatus->flags & PLAYER_STATUS_ANIM_FLAGS_800) {
                 D_802BFF14 = 10;
+                break;
             } else {
                 npc->duration--;
                 if (npc->duration != 0) {
-                    if (partnerActionStatus->pressedButtons & (B_BUTTON | D_CBUTTONS) &&
-                        func_802BD7DC() != 0) {
-
+                    if (partnerActionStatus->pressedButtons & (B_BUTTON | D_CBUTTONS) && func_802BD7DC()) {
                         D_802BFF14 = 3;
                     }
+                    break;
                 } else {
                     D_802BFF14 = 1;
                     npc->flags |= NPC_FLAG_40;
-                case 1:
-                    func_802BDDD8_321928(npc);
-                    playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_400000;
-                    D_802BFF18++;
-                    npc->pos.y = npc->moveToPos.y + 2.0f;
+                }
+            }
+        case 1:
+            func_802BDDD8_321928(npc);
+            playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_400000;
+            D_802BFF18++;
+            npc->pos.y = npc->moveToPos.y + 2.0f;
 
-                    if (D_802BFF18 >= 10) {
-                        D_802BFF18 = D_802BFF18 - 18;
-                    }
+            if (D_802BFF18 >= 10) {
+                D_802BFF18 = D_802BFF18 - 18;
+            }
 
-                    if (partnerActionStatus->inputDisabled == FALSE) {
-                        playerStatus->targetYaw = npc->yaw;
-                    }
+            if (partnerActionStatus->inputDisabled == FALSE) {
+                playerStatus->targetYaw = npc->yaw;
+            }
 
-                    if (!(playerStatus->flags & PLAYER_STATUS_FLAGS_800)) {
-                        if (partnerActionStatus->pressedButtons & (B_BUTTON | D_CBUTTONS)) {
-                            if (func_802BD7DC() != 0) {
-                                D_802BFF14 = 3;
-                            } else {
-                                if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_40000000)) {
-                                    sfx_play_sound_at_npc(SOUND_MENU_ERROR, 0, NPC_PARTNER);
-                                }
-                                playerStatus->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_40000000;
-                            }
-                        }
+            if (!(playerStatus->flags & PLAYER_STATUS_FLAGS_800)) {
+                if (partnerActionStatus->pressedButtons & (B_BUTTON | D_CBUTTONS)) {
+                    if (func_802BD7DC()) {
+                        D_802BFF14 = 3;
                     } else {
-                        D_802BFF14 = 10;
-                        break;
+                        if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_40000000)) {
+                            sfx_play_sound_at_npc(SOUND_MENU_ERROR, 0, NPC_PARTNER);
+                        }
+                        playerStatus->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_40000000;
                     }
                 }
+            } else {
+                D_802BFF14 = 10;
+                break;
             }
             break;
         case 3:
