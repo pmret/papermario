@@ -111,7 +111,7 @@ extern s32 CreateEntityVarArgBuffer[3]; // not size 3
 
 extern f32 D_800F7B70[4];
 
-extern TempSetZoneEnabled* D_800D91D4;
+extern CollisionData gZoneCollisionData;
 
 // Animation related
 extern AnimatedMeshList* gCurrentAnimMeshListPtr;

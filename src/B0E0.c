@@ -5,7 +5,7 @@ extern f32 D_800A08DC;
 extern f32 D_800A08E0;
 
 void func_80030210(Camera* camera, f32 arg1, f32 arg2, s32 arg3);
-
+void func_8003034C(Camera* camera);
 
 void update_camera_mode_unused(Camera* camera);
 // Issues with zero float temp?
@@ -194,17 +194,16 @@ CameraControlSettings* test_ray_zone_aabb(f32 x, f32 y, f32 z) {
         return NULL;
     }
 
-    return D_800D91D4[zoneID].unk_10;
+    return gZoneCollisionData.colliderList[zoneID].camSettings;
 }
 
 void update_camera_from_controller(Camera*, CamPosSettings*, CameraControlSettings**, CamPosSettings*, CameraControlSettings**, f32, f32, f32, f32, f32, f32, s32, f32*, s32); // extern
 INCLUDE_ASM(s32, "B0E0", update_camera_from_controller);
 
-void update_camera_zone_interp(Camera* camera);
-// Mostly issues with the switch
-#ifdef NON_EQUIVALENT
 void update_camera_zone_interp(Camera* camera) {
+    CameraControlSettings* cont;
     CameraControlSettings* cs;
+    CameraControlSettings* cs2;
     f32 targetX;
     f32 targetY;
     f32 targetZ;
@@ -219,8 +218,8 @@ void update_camera_zone_interp(Camera* camera) {
     f32 temp_f22;
     f32 temp_f22_3;
     f32 temp_f22_4;
-    f32 cosNegViewPitch;
-    f32 sinNegViewPitch;
+    f32 cosViewPitch;
+    f32 sinViewPitch;
     f32 temp_f24;
     f32 temp_f24_2;
     f32 temp_f26;
@@ -238,6 +237,9 @@ void update_camera_zone_interp(Camera* camera) {
     f32 tZ;
     s32 changingZone;
     f32 dist;
+    f32 temp;
+    f32 temp2;
+    f32 test;
 
     targetX = camera->targetPos.x;
     targetY = camera->targetPos.y;
@@ -264,7 +266,7 @@ void update_camera_zone_interp(Camera* camera) {
         camera->unk_498 = 1.0f;
         camera->linearInterpScale = 1.0f;
     }
-
+    temp = targetX;
     if (camera->moveFlags & 1) {
         camera->unk_498 = 0.0f;
     } else if (camera->unk_494 != targetY) {
@@ -294,6 +296,7 @@ void update_camera_zone_interp(Camera* camera) {
         camera->savedTargetY += (camera->unk_494 - camera->savedTargetY) * camera->unk_498;
     }
 
+    temp2 = targetZ;
     if (camera->unk_506 != 0 || camera->unk_4A4 != targetX || camera->unk_4A8 != targetY ||
         camera->unk_4AC != targetZ || camera->changingMap) {
 
@@ -304,46 +307,48 @@ void update_camera_zone_interp(Camera* camera) {
         }
 
         cond2 = FALSE;
-
-        if (cs != NULL && camera->currentController != NULL && cs->type == camera->currentController->type &&
-            cs->flag == camera->currentController->flag && cs->boomLength == camera->currentController->boomLength &&
-            cs->boomPitch == camera->currentController->boomPitch &&
-            cs->viewPitch == camera->currentController->viewPitch) {
+        cs2 = cs;
+        cont = camera->currentController;
+        if (cs != NULL && cont != NULL && cs->type == cont->type &&
+            cs->flag == cont->flag && cs->boomLength == cont->boomLength &&
+            cs->boomPitch == cont->boomPitch &&
+            cs->viewPitch == cont->viewPitch) {
 
             switch (cs->type) {
                 case 0:
-                    if (cs->posA.x == camera->currentController->posA.x &&
-                        cs->posA.z == camera->currentController->posA.z &&
-                        cs->posB.x == camera->currentController->posB.x &&
-                        cs->posB.z == camera->currentController->posB.z) {
+                    if (cs->posA.x == cont->posA.x &&
+                        cs->posA.z == cont->posA.z &&
+                        cs->posB.x == cont->posB.x &&
+                        cs->posB.z == cont->posB.z) {
 
                         cond2 = TRUE;
                     }
                     break;
                 case 1:
-                    if (!cs->flag) {
-                        if (cs->posA.x == camera->currentController->posA.x &&
-                            cs->posA.z == camera->currentController->posA.z) {
-
-                            cond2 = TRUE;
-                        }
-                    } else {
-                        if (cs->posA.x == camera->currentController->posA.x &&
-                            cs->posA.z == camera->currentController->posA.z &&
-                            cs->posB.x == camera->currentController->posB.x &&
-                            cs->posB.z == camera->currentController->posB.z) {
-
-                            cond2 = TRUE;
-                        }
+                    switch (cs->flag){
+                        case 0:
+                            if (cs->posA.x == cont->posA.x &&
+                                cs->posA.z == cont->posA.z) {
+                                cond2 = TRUE;
+                            }
+                            break;
+                        case 1:
+                            if (cs->posA.x == cont->posA.x &&
+                                cs->posA.z == cont->posA.z &&
+                                cs->posB.x == cont->posB.x &&
+                                cs->posB.z == cont->posB.z) {
+                                cond2 = TRUE;
+                            }
+                            break;
                     }
                     break;
                 default:
-                    if (cs->posA.x == camera->currentController->posA.x &&
-                        cs->posA.z == camera->currentController->posA.z &&
-                        cs->posA.y == camera->currentController->posA.y &&
-                        cs->posB.y == camera->currentController->posB.y &&
-                        cs->posB.x == camera->currentController->posB.x &&
-                        cs->posB.z == camera->currentController->posB.z) {
+                    if (cs2->posA.x == cont->posA.x &&
+                        cs2->posA.z == cont->posA.z &&
+                        cs2->posA.y == cont->posA.y &&
+                        cs2->posB.y == cont->posB.y &&
+                        cs2->posB.x == cont->posB.x &&
+                        cs2->posB.z == cont->posB.z) {
 
                         cond2 = TRUE;
                     }
@@ -351,7 +356,7 @@ void update_camera_zone_interp(Camera* camera) {
             }
         }
 
-        if (camera->unk_506 != 0 || (!cond2 && cs != camera->currentController)) {
+        if (camera->unk_506 != 0 || (!cond2 && cs2 != cont)) {
             if (camera->interpAlpha == 1.0f) {
                 camera->prevController = camera->currentController;
             } else {
@@ -376,17 +381,17 @@ void update_camera_zone_interp(Camera* camera) {
         }
     }
 
-    posX = targetX;
+    posX = temp;
     if (camera->prevPrevFollowFlags) {
         posX = camera->prevPrevMovePos.x;
         posY = camera->prevPrevMovePos.y;
         posZ = camera->prevPrevMovePos.z;
     } else {
         posY = camera->savedTargetY;
-        posZ = targetZ;
+        posZ = temp2;
     }
 
-    tX = targetX;
+    tX = temp;
     if (camera->prevFollowFlags) {
         camera->savedTargetY = camera->prevMovePos.y;
         tX = camera->prevMovePos.x;
@@ -394,7 +399,7 @@ void update_camera_zone_interp(Camera* camera) {
         tZ = camera->prevMovePos.z;
     } else {
         tY = camera->savedTargetY;
-        tZ = targetZ;
+        tZ = temp2;
     }
 
     update_camera_from_controller(camera, &camera->oldCameraSettings, &camera->prevController,
@@ -414,14 +419,15 @@ void update_camera_zone_interp(Camera* camera) {
         camera->oldCameraSettings.boomYaw += 360.0f;
     }
 
-    boomYawDiff = camera->oldCameraSettings.boomYaw - camera->newCameraSettings.boomYaw;
-    if (boomYawDiff < 0.0f) {
-        boomYawDiff = -boomYawDiff;
+    settingDiff = camera->oldCameraSettings.boomYaw - camera->newCameraSettings.boomYaw;
+    if (settingDiff < 0.0f) {
+        settingDiff = -settingDiff;
     }
-    if (boomYawDiff > 180.0f) {
-        boomYawDiff = 360.0f - boomYawDiff;
+    if (settingDiff > 180.0f) {
+        settingDiff = 360.0f - settingDiff;
     }
 
+    boomYawDiff = settingDiff;
     settingDiff = camera->oldCameraSettings.boomPitch - camera->newCameraSettings.boomPitch;
     if (settingDiff < 0.0f) {
         settingDiff = -settingDiff;
@@ -455,14 +461,17 @@ void update_camera_zone_interp(Camera* camera) {
     deltaX = camera->oldCameraSettings.position.x - camera->newCameraSettings.position.x;
     deltaY = camera->oldCameraSettings.position.y - camera->newCameraSettings.position.y;
     deltaZ = camera->oldCameraSettings.position.z - camera->newCameraSettings.position.z;
-    deltaSqSum = SQ(deltaX) + SQ(deltaY) + SQ(deltaZ);
+    settingDiff = SQ(deltaX);
+    settingDiff += SQ(deltaY);
+    settingDiff += SQ(deltaZ);
 
-    if (deltaSqSum != 0.0f) {
-        deltaSqSum = sqrtf(deltaSqSum) * 0.2;
+    if (settingDiff != 0.0f) {
+        settingDiff = sqrtf(settingDiff) * 0.2;
     }
 
-    if (boomYawDiff < deltaSqSum) {
-        boomYawDiff = deltaSqSum;
+    if (boomYawDiff < settingDiff) {
+        boomYawDiff = settingDiff;
+        settingDiff++; settingDiff--;
     }
     if (boomYawDiff > 90.0f) {
         boomYawDiff = 90.0f;
@@ -479,11 +488,14 @@ void update_camera_zone_interp(Camera* camera) {
     }
 
     if (camera->interpAlpha < 1.0) {
+        f32 q, w;
         panPhase = camera->panPhase;
         temp_f22 = panPhase * PI_D;
         temp_f24 = 2.0f / (cos_rad(temp_f22) + 1.0f);
         temp_f22_2 = cos_rad((camera->linearInterp * PI_D * (1.0f - panPhase)) + temp_f22);
-        camera->interpAlpha = (2.0f - ((f32) ((temp_f22_2 + ((1.0 - cos_rad(temp_f22)) * 0.5)) * temp_f24) + 1.0f)) * 0.5001;
+        cosViewPitch = (temp_f22_2 + (1.0 - cos_rad(temp_f22)) * 0.5) * temp_f24;
+        cosViewPitch = (2.0f - (cosViewPitch + 1.0f)) * 0.5001;
+        camera->interpAlpha = cosViewPitch;
     }
 
     if (camera->interpAlpha >= 1.0f) {
@@ -510,17 +522,17 @@ void update_camera_zone_interp(Camera* camera) {
     temp_f20_2 = blendedCamSettings.boomYaw + D_800A08E0;
     temp_f26 = sin_deg(temp_f20_2);
     temp_f24_2 = -cos_deg(temp_f20_2);
-    temp_f22_3 = cos_deg(blendedCamSettings.boomPitch + D_800A08DC);
-    temp_f22_4 = sin_deg(blendedCamSettings.boomPitch + D_800A08DC);
+    cosViewPitch = cos_deg(blendedCamSettings.boomPitch + D_800A08DC);
+    sinViewPitch = sin_deg(blendedCamSettings.boomPitch + D_800A08DC);
 
     if (!(camera->moveFlags & 2)) {
-        camera->lookAt_eye.y = blendedCamSettings.position.y + (blendedCamSettings.boomLength * temp_f22_4);
+        camera->lookAt_eye.y = blendedCamSettings.position.y + (blendedCamSettings.boomLength * sinViewPitch);
     }
 
-    camera->lookAt_eye.x = blendedCamSettings.position.x - (temp_f26 * blendedCamSettings.boomLength * temp_f22_3);
-    camera->lookAt_eye.z = blendedCamSettings.position.z - (temp_f24_2 * blendedCamSettings.boomLength * temp_f22_3);
-    cosNegViewPitch = cos_deg(-blendedCamSettings.viewPitch);
-    sinNegViewPitch = sin_deg(-blendedCamSettings.viewPitch);
+    camera->lookAt_eye.x = blendedCamSettings.position.x - (temp_f26 * blendedCamSettings.boomLength * cosViewPitch);
+    camera->lookAt_eye.z = blendedCamSettings.position.z - (temp_f24_2 * blendedCamSettings.boomLength * cosViewPitch);
+    cosViewPitch = cos_deg(-blendedCamSettings.viewPitch);
+    sinViewPitch = sin_deg(-blendedCamSettings.viewPitch);
 
     if (camera->lookAt_eye.x == blendedCamSettings.position.x && camera->lookAt_eye.z == blendedCamSettings.position.z) {
         dist = 0.0f;
@@ -530,9 +542,9 @@ void update_camera_zone_interp(Camera* camera) {
 
     temp_f8_2 = blendedCamSettings.position.y - camera->lookAt_eye.y;
     if (!(camera->moveFlags & 2)) {
-        camera->lookAt_obj.y = camera->lookAt_eye.y + ((dist * sinNegViewPitch) + (temp_f8_2 * cosNegViewPitch));
+        camera->lookAt_obj.y = camera->lookAt_eye.y + ((dist * sinViewPitch) + (temp_f8_2 * cosViewPitch));
     }
-    temp_f4_4 = (dist * cosNegViewPitch) - (temp_f8_2 * sinNegViewPitch);
+    temp_f4_4 = (dist * cosViewPitch) - (temp_f8_2 * sinViewPitch);
     camera->lookAt_obj.x = camera->lookAt_eye.x + (temp_f26 * temp_f4_4);
     camera->lookAt_obj.z = camera->lookAt_eye.z + (temp_f24_2 * temp_f4_4);
     camera->currentYaw = blendedCamSettings.boomYaw + D_800A08E0;
@@ -545,6 +557,3 @@ void update_camera_zone_interp(Camera* camera) {
     camera->unk_5C = camera->lookAt_obj.z;
     camera->currentYOffset = 0.0f;
 }
-#else
-INCLUDE_ASM(s32, "B0E0", update_camera_zone_interp);
-#endif

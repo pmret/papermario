@@ -339,7 +339,7 @@ ApiStatus UseSettingsFrom(Evt* script, s32 isInitialCall) {
                                &nx, &ny, &nz);
 
     if (hitID >= 0) {
-        camera->controlSettings = *D_800D91D4[hitID].unk_10;
+        camera->controlSettings = *gZoneCollisionData.colliderList[hitID].camSettings;
     }
     return ApiStatus_DONE2;
 }
@@ -562,7 +562,7 @@ ApiStatus SetCamProperties(Evt* script, s32 isInitialCall) {
         hitDepth = 32767;
         zoneID = test_ray_zones(posX, posY + 10, posZ, 0, -1, 0, &hitX, &hitY, &hitZ, &hitDepth, &nX, &nY, &nZ);
         if (zoneID >= 0) {
-            camera->controlSettings = *D_800D91D4[zoneID].unk_10;
+            camera->controlSettings = *gZoneCollisionData.colliderList[zoneID].camSettings;
         }
 
         camera->movePos.x = posX;
@@ -605,7 +605,7 @@ ApiStatus AdjustCam(Evt* script, s32 isInitialCall) {
         posZ = playerStatus->position.z;
         zoneID = test_ray_zones(posX, posY + 10, posZ, 0, -1, 0, &hitX, &hitY, &hitZ, &hitDepth, &nX, &nY, &nZ);
         if (zoneID >= 0) {
-            camera->controlSettings = *D_800D91D4[zoneID].unk_10;
+            camera->controlSettings = *gZoneCollisionData.colliderList[zoneID].camSettings;
         }
 
         camera->movePos.x = posX + deltaPosX;
@@ -648,7 +648,7 @@ ApiStatus ResetCam(Evt* script, s32 isInitialCall) {
                                &nx, &ny, &nz);
 
         if (hitID >= 0) {
-            camera->controlSettings = *D_800D91D4[hitID].unk_10;
+            camera->controlSettings = *gZoneCollisionData.colliderList[hitID].camSettings;
         }
 
         camera->movePos.x = x;
