@@ -705,7 +705,7 @@ void check_input_use_partner(void) {
     u32 actionState = playerStatus->actionState;
 
     if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_8BIT_MARIO)) {
-        if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_8 || playerStatus->statusMenuCounterinputEnabledCounter == 0) {
+        if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_8 || playerStatus->inputEnabledCounter == 0) {
             if (playerStatus->pressedButtons & BUTTON_C_DOWN && !(playerStatus->flags & PLAYER_STATUS_FLAGS_80) &&
                 !(playerStatus->pressedButtons & BUTTON_B) && !(playerStatus->animFlags & PLAYER_STATUS_FLAGS_1000) &&
                 actionState <= ACTION_STATE_RUN) {
@@ -847,7 +847,7 @@ s32 get_overriding_player_anim(s32 anim) {
         } else if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_IN_DISGUISE)) {
             anim = ANIM_C0010;
         } else {
-            peach_set_disguise_anim(world_actions_peachDisguises[playerStatus->peachDisguise].unk_14);
+            peach_set_disguise_anim(BasicPeachDisguiseAnims[playerStatus->peachDisguise].hold);
             return -1;
         }
     } else if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS) {
@@ -968,18 +968,18 @@ s32 disable_player_input(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     playerStatus->flags |= PLAYER_STATUS_FLAGS_INPUT_DISABLED;
-    playerStatus->statusMenuCounterinputEnabledCounter++;
-    return playerStatus->statusMenuCounterinputEnabledCounter;
+    playerStatus->inputEnabledCounter++;
+    return playerStatus->inputEnabledCounter;
 }
 
 s32 enable_player_input(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    playerStatus->statusMenuCounterinputEnabledCounter--;
-    if (playerStatus->statusMenuCounterinputEnabledCounter == 0) {
+    playerStatus->inputEnabledCounter--;
+    if (playerStatus->inputEnabledCounter == 0) {
         playerStatus->flags &= ~PLAYER_STATUS_FLAGS_INPUT_DISABLED;
     }
-    return playerStatus->statusMenuCounterinputEnabledCounter;
+    return playerStatus->inputEnabledCounter;
 }
 
 void func_800E01DC(void) {
@@ -1059,7 +1059,7 @@ void check_for_pulse_stone(void) {
             return;
         }
 
-        if (gPlayerStatus.flags & PLAYER_STATUS_FLAGS_20 || gPlayerStatus.statusMenuCounterinputEnabledCounter) {
+        if (gPlayerStatus.flags & PLAYER_STATUS_FLAGS_20 || gPlayerStatus.inputEnabledCounter) {
             return;
         }
 
@@ -1087,11 +1087,11 @@ void func_800E0514(void) {
 
 s32 has_valid_conversation_npc(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    Npc* unk_C8 = playerStatus->encounteredNPC;
-    s32 ret = 0;
+    Npc* npc = playerStatus->encounteredNPC;
+    s32 ret = FALSE;
     s32 cond;
 
-    if (unk_C8 != NULL && !(unk_C8->flags & 0x10000000)) {
+    if (npc != NULL && !(npc->flags & 0x10000000)) {
         cond = (playerStatus->flags & (PLAYER_STATUS_FLAGS_HAS_CONVERSATION_NPC | PLAYER_STATUS_FLAGS_INPUT_DISABLED))
         == PLAYER_STATUS_FLAGS_HAS_CONVERSATION_NPC;
         ret = cond;
@@ -1105,7 +1105,7 @@ void check_for_conversation_prompt(void) {
     }
 
     if (D_8010C940 == NULL) {
-        if (gPlayerStatus.statusMenuCounterinputEnabledCounter || gPlayerStatus.flags & PLAYER_STATUS_FLAGS_20) {
+        if (gPlayerStatus.inputEnabledCounter || gPlayerStatus.flags & PLAYER_STATUS_FLAGS_20) {
             return;
         }
 
@@ -1145,7 +1145,7 @@ s32 func_800E06D8(void) {
     s32 temp = playerStatus->interactingWithID;
     s32 wall;
 
-    if (playerStatus->decorationList || playerStatus->statusMenuCounterinputEnabledCounter) {
+    if (playerStatus->decorationList || playerStatus->inputEnabledCounter) {
             return FALSE;
     }
     if (gCollisionStatus.currentWall == -1) {
@@ -1195,7 +1195,7 @@ void check_for_interactables(void) {
     if (D_8010C958 == NULL) {
         s32 curInteraction = gCollisionStatus.currentWall;
 
-        if (playerStatus->statusMenuCounterinputEnabledCounter != 0) {
+        if (playerStatus->inputEnabledCounter != 0) {
             if (gPlayerStatus.interactingWithID != curInteraction) {
                 gPlayerStatus.interactingWithID = curInteraction;
             }

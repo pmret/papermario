@@ -39,8 +39,8 @@ glabel phys_init_integrator_for_current_state
 /* 7C478 800E2FC8 03E00008 */  jr        $ra
 /* 7C47C 800E2FCC E4A6007C */   swc1     $f6, 0x7c($a1)
 .L800E2FD0_7C480:
-/* 7C480 800E2FD0 3C04800F */  lui       $a0, %hi(D_800F7B50)
-/* 7C484 800E2FD4 24847B50 */  addiu     $a0, $a0, %lo(D_800F7B50)
+/* 7C480 800E2FD0 3C04800F */  lui       $a0, %hi(GravityParamsStartJump)
+/* 7C484 800E2FD4 24847B50 */  addiu     $a0, $a0, %lo(GravityParamsStartJump)
 /* 7C488 800E2FD8 8CA20000 */  lw        $v0, ($a1)
 /* 7C48C 800E2FDC 3C030004 */  lui       $v1, 4
 /* 7C490 800E2FE0 00431024 */  and       $v0, $v0, $v1

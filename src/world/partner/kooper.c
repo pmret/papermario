@@ -234,11 +234,11 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
 
         switch (script->functionTemp[0]) {
             case 20:
-                if (playerStatus->statusMenuCounterinputEnabledCounter == 0) {
+                if (playerStatus->inputEnabledCounter == 0) {
                     if (playerStatus->decorationList == 0) {
                         if (kooper->flags & 0x1000) {
                             disable_player_input();
-                            script->functionTemp[2] = playerStatus->statusMenuCounterinputEnabledCounter;
+                            script->functionTemp[2] = playerStatus->inputEnabledCounter;
                             D_802BEC64 = 1;
                             D_802BEB40_31CB60 = 0;
                             D_802BEC6C = 0;
@@ -289,7 +289,7 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
                         break;
                     }
                     disable_npc_blur(kooper);
-                    if (script->functionTemp[2] < playerStatus->statusMenuCounterinputEnabledCounter) {
+                    if (script->functionTemp[2] < playerStatus->inputEnabledCounter) {
                         if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_100000)) {
                             suggest_player_anim_clearUnkFlag(0x10002);
                         } else {

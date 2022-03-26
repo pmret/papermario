@@ -1492,6 +1492,36 @@ enum ActionStates {
     ACTION_STATE_USE_SPRING                     = 0x00000026,
 };
 
+/* (1 = isPeach, 2 = isTransformed, 4 = hasUmbrella) */
+enum PeachStatusFlags {
+    PEACH_STATUS_FLAG_IS_PEACH          = 0x01,
+    PEACH_STATUS_FLAG_DISGUISED         = 0x02,
+    PEACH_STATUS_FLAG_HAS_PARASOL       = 0x04,
+    PEACH_STATUS_FLAG_HAS_INGREDIENT    = 0x10
+};
+
+enum CookingIngredients {
+    PEACH_COOKING_NONE              = 0x00,
+    PEACH_COOKING_CREAM             = 0x01,
+    PEACH_COOKING_STRAWBERRY        = 0x02,
+    PEACH_COOKING_BUTTER            = 0x03,
+    PEACH_COOKING_CLEANSER          = 0x04,
+    PEACH_COOKING_WATER             = 0x05,
+    PEACH_COOKING_MILK              = 0x06,
+    PEACH_COOKING_FLOUR             = 0x07,
+    PEACH_COOKING_EGG               = 0x08,
+    PEACH_COOKING_COMPLETE_CAKE     = 0x09,
+    PEACH_COOKING_CAKE_BOWL         = 0x0A,
+    PEACH_COOKING_CAKE_MIXED        = 0x0B,
+    PEACH_COOKING_CAKE_PAN          = 0x0C,
+    PEACH_COOKING_CAKE_BATTER       = 0x0D,
+    PEACH_COOKING_CAKE_BARE         = 0x0E,
+    PEACH_COOKING_SALT              = 0x0F,
+    PEACH_COOKING_SUGAR             = 0x10,
+    PEACH_COOKING_CAKE_WITH_ICING   = 0x11,
+    PEACH_COOKING_CAKE_WITH_BERRIES = 0x12,
+};
+
 // Requires decimals
 enum NpcIDs {
     NPC_SELF         = -1,
@@ -1847,11 +1877,14 @@ enum PlayerStatusFlags {
     PLAYER_STATUS_FLAGS_40000                            = 0x00040000,
     PLAYER_STATUS_FLAGS_80000                            = 0x00080000,
     PLAYER_STATUS_FLAGS_100000                           = 0x00100000,
+    PLAYER_STATUS_FLAGS_200000                           = 0x00200000, // using hammer?
     PLAYER_STATUS_FLAGS_800000                           = 0x00800000,
+    PLAYER_STATUS_FLAGS_1000000                          = 0x01000000,
     PLAYER_STATUS_FLAGS_HAS_CONVERSATION_NPC             = 0x02000000,
     PLAYER_STATUS_FLAGS_CAMERA_DOESNT_FOLLOW             = 0x04000000,
     PLAYER_STATUS_FLAGS_8000000                          = 0x08000000,
     PLAYER_STATUS_FLAGS_10000000                         = 0x10000000,
+    PLAYER_STATUS_FLAGS_20000000                         = 0x20000000, // done hammer?
     PLAYER_STATUS_FLAGS_40000000                         = 0x40000000,
     PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED             = 0x80000000,
 };

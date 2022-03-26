@@ -62,7 +62,7 @@ INCLUDE_ASM(s32, "7bb60_len_41b0", phys_update_jump);
 
 #ifdef NON_EQUIVALENT
 // Rodata issue.
-extern s32 D_800F7B50;
+extern s32 GravityParamsStartJump;
 
 void phys_init_integrator_for_current_state(void) {
     f32* temp_a0;
@@ -84,7 +84,7 @@ void phys_init_integrator_for_current_state(void) {
     case 13:
     case 18:
     case 20:
-            temp_a0 = &D_800F7B50 ;
+            temp_a0 = &GravityParamsStartJump ;
         if ((playerStatus->flags & 0x40000) == 0) {
             playerStatus->gravityIntegrator[0] = *temp_a0++;
             playerStatus->gravityIntegrator[1] = *temp_a0++;
@@ -107,7 +107,7 @@ INCLUDE_ASM(void, "7bb60_len_41b0", phys_init_integrator_for_current_state, void
 
 // This function is wack. This weird stuff is needed to match
 void gravity_use_fall_parms(void) {
-    f32* floats = D_800F7B60;
+    f32* floats = GravityParamsStartFall;
     PlayerStatus* playerStatus;
     do {} while (0);
     playerStatus = &gPlayerStatus;

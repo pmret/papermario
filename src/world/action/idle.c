@@ -1,24 +1,38 @@
 #include "common.h"
 #include "../actions.h"
 
-s32 world_action_idle_peachAnims[] = {
-    0x000A0001, // Idle
-
-    // Cooking:
-    0x000A0007, 0x000A0009, 0x000A000B, 0x000A000D, 0x000A000F, 0x000A0011, 0x000A0013,
-    0x000A0015, 0x000A0017, 0x000A0019, 0x000A001B, 0x000A001D, 0x000A001F, 0x000A0021, 0x000A0023,
-    0x000A0025, 0x000A0027, 0x000A0029, 0x00000000,
+s32 IdlePeachAnims[] = {
+    0x000A0001, // none
+    0x000A0007, // cream
+    0x000A0009, // strawberry
+    0x000A000B, // butter
+    0x000A000D, // cleanser
+    0x000A000F, // water
+    0x000A0011, // milk
+    0x000A0013, // flour
+    0x000A0015, // egg
+    0x000A0017, // complete cake
+    0x000A0019, // cake bowl
+    0x000A001B, // cake mixed
+    0x000A001D, // cake pan
+    0x000A001F, // cake batter
+    0x000A0021, // cake bare
+    0x000A0023, // salt
+    0x000A0025, // sugar
+    0x000A0027, // cake with icing
+    0x000A0029, // cake with berries
+    0x00000000,
 };
 
-void func_802B61E4_E23444(void);
+void action_idle_update_peach(void);
 
-void world_action_idle_update(void) {
+void action_idle_update(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PlayerData* playerData = &gPlayerData;
     s32 wasMoving = FALSE;
 
     if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS) {
-        func_802B61E4_E23444();
+        action_idle_update_peach();
         return;
     }
 
@@ -27,7 +41,12 @@ void world_action_idle_update(void) {
     if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
         s32 anim;
 
-        playerStatus->flags &= ~0x8008000E;
+        playerStatus->flags &= 
+            ~(PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED
+            | PLAYER_STATUS_FLAGS_80000
+            | PLAYER_STATUS_FLAGS_JUMPING
+            | PLAYER_STATUS_FLAGS_FALLING
+            | PLAYER_STATUS_FLAGS_FLYING);
         wasMoving = TRUE;
         playerStatus->fallState = 0;
         playerStatus->currentStateTime = 0;
@@ -69,14 +88,14 @@ void world_action_idle_update(void) {
                 set_action_state(ACTION_STATE_WALK);
                 if (magnitude != 0.0f) {
                     playerStatus->targetYaw = angle;
-                    playerStatus->animFlags &= ~0x80000000;
+                    playerStatus->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_80000000;
                 }
             }
         }
     }
 }
 
-void func_802B61E4_E23444(void) {
+void action_idle_update_peach(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PlayerData* playerData = &gPlayerData;
     f32 angle;
@@ -89,23 +108,26 @@ void func_802B61E4_E23444(void) {
         playerStatus->decorationList = 0;
         playerStatus->unk_C2 = 0;
         playerStatus->currentSpeed = 0.0f;
-        playerStatus->flags &= ~0xE;
+        playerStatus->flags &= 
+            ~(PLAYER_STATUS_FLAGS_JUMPING
+            | PLAYER_STATUS_FLAGS_FALLING
+            | PLAYER_STATUS_FLAGS_FLYING);
 
         if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_IN_DISGUISE)) {
-            if (!(gGameStatusPtr->peachFlags & 0x10)) {
-                suggest_player_anim_clearUnkFlag(world_action_idle_peachAnims[gGameStatusPtr->peachAnimIdx]);
+            if (!(gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_HAS_INGREDIENT)) {
+                suggest_player_anim_clearUnkFlag(IdlePeachAnims[gGameStatusPtr->peachCookingIngredient]);
             } else {
                 suggest_player_anim_clearUnkFlag(0xC000E);
             }
         } else {
-            peach_set_disguise_anim(world_actions_peachDisguises[gPlayerStatus.peachDisguise].idle);
+            peach_set_disguise_anim(BasicPeachDisguiseAnims[gPlayerStatus.peachDisguise].idle);
         }
     }
 
     if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_IN_DISGUISE)) {
         switch (playerStatus->fallState) {
             case 0:
-                if (((playerStatus->flags & 0x3000) == 0) && (playerStatus->unk_C4 == 0)) {
+                if (!(playerStatus->flags & (PLAYER_STATUS_FLAGS_1000 | PLAYER_STATUS_FLAGS_INPUT_DISABLED)) && (playerStatus->unk_C4 == 0)) {
                     if (playerStatus->currentStateTime > 1800) {
                         playerStatus->fallState++;
                         suggest_player_anim_clearUnkFlag(0xC0003);
@@ -130,7 +152,7 @@ void func_802B61E4_E23444(void) {
                 break;
             }
             case 3:
-                if ((playerStatus->flags & 0x3000) != 0) {
+                if (playerStatus->flags & (PLAYER_STATUS_FLAGS_1000 | PLAYER_STATUS_FLAGS_INPUT_DISABLED)) {
                     suggest_player_anim_clearUnkFlag(0xA0001);
                     playerStatus->fallState = 0;
                 } else if (playerStatus->unk_BC != 0) {

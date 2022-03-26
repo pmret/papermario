@@ -82,7 +82,7 @@ void reset_player_status(void) {
     }
 
     // This grossness is needed for matching
-    floatsTemp = &D_800F7B70[0];
+    floatsTemp = &DefaultMoveSpeeds[0];
     playerStatus->walkSpeed = *(floatsTemp++) * one;
     playerStatus->runSpeed = *(floatsTemp++) * one;
     playerStatus->unk_6C = *(floatsTemp++) * one;

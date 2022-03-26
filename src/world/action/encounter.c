@@ -238,7 +238,7 @@ void func_802B6638_E29068(void) {
             if (!(playerStatus->animFlags & 0x2000)) {
                 suggest_player_anim_setUnkFlag(0xC0000);
             } else {
-                peach_set_disguise_anim(world_actions_peachDisguises[playerStatus->peachDisguise].unk_0C);
+                peach_set_disguise_anim(BasicPeachDisguiseAnims[playerStatus->peachDisguise].talk);
             }
         }
         playerStatus->currentStateTime = 30;
@@ -251,7 +251,7 @@ void func_802B6638_E29068(void) {
             if (!(playerStatus->animFlags & 0x2000)) {
                 suggest_player_anim_setUnkFlag(0xA0001);
             } else {
-                peach_set_disguise_anim(world_actions_peachDisguises[playerStatus->peachDisguise].idle);
+                peach_set_disguise_anim(BasicPeachDisguiseAnims[playerStatus->peachDisguise].idle);
             }
         }
     }

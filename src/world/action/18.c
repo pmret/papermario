@@ -1,10 +1,27 @@
 #include "common.h"
 #include "world/actions.h"
 
-s32 D_802B6300_E248D0[] = {
-    0x000A0002, 0x000A002B, 0x000A002D, 0x000A002F, 0x000A0031, 0x000A0033, 0x000A0035, 0x000A0037, 0x000A0039,
-    0x000A003B, 0x000A003D, 0x000A003F, 0x000A0041, 0x000A0043, 0x000A0045, 0x000A0047, 0x000A0049, 0x000A004B,
-    0x000A004D
+s32 State18PeachAnims[] = {
+    0x000A0002,	// none
+    0x000A002B,	// cream
+    0x000A002D,	// strawberry
+    0x000A002F,	// butter
+    0x000A0031,	// cleanser
+    0x000A0033,	// water
+    0x000A0035,	// milk
+    0x000A0037,	// flour
+    0x000A0039,	// egg
+    0x000A003B,	// complete cake
+    0x000A003D,	// cake bowl
+    0x000A003F,	// cake mixed
+    0x000A0041,	// cake pan
+    0x000A0043,	// cake batter
+    0x000A0045,	// cake bare
+    0x000A0047,	// salt
+    0x000A0049,	// sugar
+    0x000A004B,	// cake with icing
+    0x000A004D,	// cake with berries
+    0x00000000
 };
 
 void func_802B6000_E245D0(void) {
@@ -61,12 +78,12 @@ void func_802B6000_E245D0(void) {
 void func_802B6198_E24768(void) {
     if (!(gPlayerStatus.animFlags & 0x2000)) {
         if (!(gGameStatusPtr->peachFlags & 0x10)) {
-            suggest_player_anim_clearUnkFlag((D_802B6300_E248D0)[gGameStatusPtr->peachAnimIdx]);
+            suggest_player_anim_clearUnkFlag((State18PeachAnims)[gGameStatusPtr->peachCookingIngredient]);
         } else {
             suggest_player_anim_clearUnkFlag(0xD000D); // doood
         }
     } else {
-        peach_set_disguise_anim(world_actions_peachDisguises[gPlayerStatus.peachDisguise].unk_04);
+        peach_set_disguise_anim(BasicPeachDisguiseAnims[gPlayerStatus.peachDisguise].walk);
     }
 }
 

@@ -189,7 +189,7 @@ ApiStatus BowUseAbility(Evt* script, s32 isInitialCall) {
 
     switch (script->functionTemp[0]) {
         case 40:
-            if (playerStatus->statusMenuCounterinputEnabledCounter) {
+            if (playerStatus->inputEnabledCounter) {
                 return ApiStatus_DONE2;
             }
 
@@ -201,7 +201,7 @@ ApiStatus BowUseAbility(Evt* script, s32 isInitialCall) {
             break;
         case 41:
             if ((func_800EA52C(9) == 0 || is_starting_conversation()) &&
-                 script->functionTemp[2] < playerStatus->statusMenuCounterinputEnabledCounter
+                 script->functionTemp[2] < playerStatus->inputEnabledCounter
                  && D_802BE0C4) {
 
                 enable_player_input();
@@ -211,7 +211,7 @@ ApiStatus BowUseAbility(Evt* script, s32 isInitialCall) {
             }
             script->functionTemp[1]--;
             if (script->functionTemp[1] == 0) {
-                if (script->functionTemp[2] < playerStatus->statusMenuCounterinputEnabledCounter) {
+                if (script->functionTemp[2] < playerStatus->inputEnabledCounter) {
                     if (D_802BE0C4) {
                         enable_player_input();
                         D_802BE0C4 = FALSE;
@@ -321,13 +321,13 @@ ApiStatus BowUseAbility(Evt* script, s32 isInitialCall) {
                 if (func_802BD540_323E90() < 0) {
                     script->functionTemp[0]++;
                     script->functionTemp[1] = 3;
-                    script->functionTemp[2] = playerStatus->statusMenuCounterinputEnabledCounter;
+                    script->functionTemp[2] = playerStatus->inputEnabledCounter;
                 }
             }
             break;
         case 3:
             if (script->functionTemp[1] == 0) {
-                if (script->functionTemp[2] < playerStatus->statusMenuCounterinputEnabledCounter) {
+                if (script->functionTemp[2] < playerStatus->inputEnabledCounter) {
                     script->functionTemp[0] = 2;
                     break;
                 }
