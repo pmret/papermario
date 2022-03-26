@@ -383,6 +383,7 @@ PlayerData* get_player_data(void);
 
 s32 npc_raycast_down_around(s32, f32*, f32*, f32*, f32*, f32, f32);
 s32 npc_raycast_down_sides(s32, f32*, f32*, f32*, f32*);
+s32 player_raycast_up_corners(PlayerStatus*, f32*, f32*, f32*, f32*, f32);
 s32 player_raycast_below_cam_relative(PlayerStatus*, f32*, f32*, f32*, f32*, f32*, f32*, f32*, f32*);
 s32 npc_test_move_taller_with_slipping(s32, f32*, f32*, f32*, f32, f32, f32, f32);
 s32 npc_test_move_simple_with_slipping(s32, f32*, f32*, f32*, f32, f32, f32, f32);
@@ -906,4 +907,8 @@ void clear_area_flags(void);
 
 void update_locomotion_state(void);
 
+void func_802BFB44_323694(f32 arg0);
+f32 get_player_normal_pitch(void);
+void partner_kill_ability_script(void);
+void func_800EF3D4(s32);
 #endif
