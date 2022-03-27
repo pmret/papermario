@@ -1,8 +1,8 @@
 #include "common.h"
 #include "effects.h"
 
-#define REFLECTED_SWITCH_LINKED 2
 #define REFLECTED_SWITCH_HIDDEN 1
+#define REFLECTED_SWITCH_LINKED 2
 
 void entity_shattering_init_pieces(Entity* entity, void* arg1, void* arg2);
 
@@ -23,7 +23,7 @@ void entity_GreenStompSwitch_retract(Entity* entity) {
     SwitchData* data = entity->dataBuf.swtch;
     u16 curTime = data->greenMotionTimer--;
 
-    if (curTime) {
+    if (curTime != 0) {
         entity->position.y -= 1.8625;
         return;
     }
@@ -36,15 +36,13 @@ void entity_GreenStompSwitch_extend(Entity* entity) {
     SwitchData* data = entity->dataBuf.swtch;
     u16 curTime = data->greenMotionTimer--;
 
-    if (curTime) {
+    if (curTime != 0) {
         entity->position.y += 1.8625;
         return;
     }
     exec_entity_commandlist(entity);
     data->greenMotionTimer = 8;
 }
-
-void entity_raycast_down(f32*, f32*, f32*, f32*, f32*, f32*);
 
 void entity_switch_fall_down(Entity* entity) {
     SwitchData* data = entity->dataBuf.swtch;
@@ -57,11 +55,12 @@ void entity_switch_fall_down(Entity* entity) {
 
     entity_raycast_down(&x, &y, &z, &hitYaw, &hitPitch, &hitDepth);
 
-    if ((entity->position.y != y) && (entity->position.y > y)) {
-        f32 var = data->fallVelocity;
-        var += 0.5;
-        data->fallVelocity = var;
-        entity->position.y -= var;
+    if (entity->position.y != y && entity->position.y > y) {
+        f32 fallVelocity = data->fallVelocity;
+
+        fallVelocity += 0.5;
+        data->fallVelocity = fallVelocity;
+        entity->position.y -= fallVelocity;
         if (entity->position.y < y) {
             entity->position.y = y;
         }
@@ -151,7 +150,7 @@ s32 entity_RedSwitch_animate_scale(Entity* entity) {
     s32 phi_s2 = 0;
 
     switch (data->animStateScaleX) {
-        case 0: // switch 1
+        case 0:
             temp_f6 = data->baseScale.z * 0.3;
             temp_f4 = ((data->baseScale.x + temp_f6) - entity->scale.x) / 4.0;
             phi_f4 = temp_f4;
@@ -165,7 +164,7 @@ s32 entity_RedSwitch_animate_scale(Entity* entity) {
                 data->animStateScaleX++;
             }
             break;
-        case 1: // switch 1
+        case 1:
             temp_f6 = data->baseScale.z * -0.2;
             temp_f4 = ((data->baseScale.x + temp_f6) - entity->scale.x) / 6.0;
             phi_f4 = temp_f4;
@@ -179,7 +178,7 @@ s32 entity_RedSwitch_animate_scale(Entity* entity) {
                 data->animStateScaleX++;
             }
             break;
-        case 2: // switch 1
+        case 2:
             temp_f6 = data->baseScale.z * 0.15;
             temp_f4 = ((data->baseScale.x + temp_f6) - entity->scale.x) / 4.0;
             phi_f4 = temp_f4;
@@ -193,7 +192,7 @@ s32 entity_RedSwitch_animate_scale(Entity* entity) {
                 data->animStateScaleX++;
             }
             break;
-        case 3: // switch 1
+        case 3:
             temp_f6 = data->baseScale.z * -0.1;
             temp_f4 = ((data->baseScale.x + temp_f6) - entity->scale.x) / 6.0;
             phi_f4 = temp_f4;
@@ -207,7 +206,7 @@ s32 entity_RedSwitch_animate_scale(Entity* entity) {
                 data->animStateScaleX++;
             }
             break;
-        case 4: // switch 1
+        case 4:
             temp_f4 = (data->baseScale.x - entity->scale.x) / 4.0;
             phi_f4 = temp_f4;
             if (temp_f4 < 0.01) {
@@ -221,7 +220,7 @@ s32 entity_RedSwitch_animate_scale(Entity* entity) {
                 data->animStateScaleX++;
             }
             break;
-        case 5: // switch 1
+        case 5:
             phi_s2++;
             break;
     }
@@ -229,8 +228,7 @@ s32 entity_RedSwitch_animate_scale(Entity* entity) {
     entity->scale.z = entity->scale.x;
 
     switch (data->animStateScaleY) {
-
-        case 0: // switch 2
+        case 0:
             temp_f6 = data->baseScale.z * -0.5;
             temp_f4 = ((data->baseScale.y + temp_f6) - entity->scale.y) / 5.0;
             phi_f4 = temp_f4;
@@ -244,7 +242,7 @@ s32 entity_RedSwitch_animate_scale(Entity* entity) {
                 data->animStateScaleY++;
             }
             break;
-        case 1: // switch 2
+        case 1:
             temp_f6 = data->baseScale.z * 0.1;
             temp_f4 = ((data->baseScale.y + temp_f6) - entity->scale.y) / 10.0;
             phi_f4 = temp_f4;
@@ -258,7 +256,7 @@ s32 entity_RedSwitch_animate_scale(Entity* entity) {
                 data->animStateScaleY++;
             }
             break;
-        case 2: // switch 2
+        case 2:
             temp_f6 = data->baseScale.z * -0.3;
             temp_f4 = ((data->baseScale.y + temp_f6) - entity->scale.y) / 5.0;
             phi_f4 = temp_f4;
@@ -272,7 +270,7 @@ s32 entity_RedSwitch_animate_scale(Entity* entity) {
                 data->animStateScaleY++;
             }
             break;
-        case 3: // switch 2
+        case 3:
             temp_f6 = data->baseScale.z * 0.0;
             temp_f4 = ((data->baseScale.y + temp_f6) - entity->scale.y) / 10.0;
             phi_f4 = temp_f4;
@@ -286,7 +284,7 @@ s32 entity_RedSwitch_animate_scale(Entity* entity) {
                 data->animStateScaleY++;
             }
             break;
-        case 4: // switch 2
+        case 4:
             temp_f4 = (data->baseScale.y - entity->scale.y) / 5.0;
             phi_f4 = temp_f4;
             if (temp_f4 > -0.01) {
@@ -300,7 +298,7 @@ s32 entity_RedSwitch_animate_scale(Entity* entity) {
                 data->animStateScaleY++;
             }
             break;
-        case 5: // switch 2
+        case 5:
             phi_s2++;
             break;
     }
@@ -506,7 +504,64 @@ void entity_BrickBlock_idle(Entity* entity) {
     entity_base_block_idle(entity);
 }
 
+void entity_shattering_setupGfx(s32 entityIndex);
 INCLUDE_ASM(void, "entity/Switch", entity_shattering_init_pieces, Entity* entity, void* arg1, void* arg2);
+// void entity_shattering_init_pieces(Entity* entity, void* arg1, void* arg2) {
+//     Matrix4f sp10, sp50;
+//     SwitchData* data = entity->dataBuf.swtch;
+//     s32 i;
+
+//     s32 phi_s7;
+//     u16* phi_s3;
+//     s32 phi_s0;
+//     f32 phi_f20;
+
+
+//     data->unk_34 = entity->vertexData[(s32)arg1].m;
+//     entity->renderSetupFunc = entity_shattering_setupGfx;
+//     entity->alpha = 255;
+//     entity->position.y = data->unk_38;
+//     guTranslateF(sp50, entity->position.x, entity->position.y, entity->position.z);
+
+//     if (!is_block_on_ground(entity)) {
+//         phi_s7 = 1;
+//     } else {
+//         phi_s7 = 2;
+//     }
+
+//     data->unk_3E = 0;
+//     data->unk_3C.s = 0xFF;
+//     phi_s3 = data; // ???
+
+//     for (i = 0; i < ARRAY_COUNT(data->fragmentRotX); i++) {
+//         guMtxL2F(sp10, &entity->vertexData[(s32)arg2 & 0xFFFF]);
+//         guMtxCatF(sp50, sp10, sp10);
+//         data->fragmentPosX[i] = sp10[3][0];
+//         data->fragmentPosY[i] = sp10[3][1];
+//         data->fragmentPosZ[i] = sp10[3][2];
+//         data->unk_72[i] = -rand_int(255);
+
+//         if (phi_s7 == 1) {
+//             phi_s3[i] |= 1;
+//             phi_s0 = 20;
+//             phi_f20 = 6.4f;
+//         } else {
+//             phi_s3[i] |= 2;
+//             phi_s0 = 40;
+//             phi_f20 = 8.6f;
+//         }
+
+//         data->unk_59[i] = phi_s0 + rand_int(10);
+//         if ((i % 2) == 0) {
+//             data->unk_59[i] = -data->unk_59[i];
+//         }
+
+//         data->unk_1EC[i] = phi_f20 + (f32)(rand_float() * 2.7);
+//         data->unk_40[i] = 0;
+//         data->fragmentRotX[i] = 0;
+//         data->fragmentRotY[i] = 0;
+//     }
+// }
 
 INCLUDE_ASM(void, "entity/Switch", entity_shattering_idle, Entity* entity);
 

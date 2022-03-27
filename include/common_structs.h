@@ -424,7 +424,13 @@ typedef struct SwitchData {
         /*       */     s16 s;
         /*       */     s8 b[2];
     } unk_3C;
-    /* 0x03E */ char unk_3E[0x4D];
+    /* 0x03E */ s16 unk_3E;
+    /* 0x040 */ u8 unk_40[24];
+    /* 0x058 */ char unk_58; // padding?
+    /* 0x059 */ u8 unk_59[24];
+    /* 0x071 */ char unk_71; // padding?
+    /* 0x072 */ u8 unk_72[24];
+    /* 0x08A */ char unk_8A; // padding?
     /* 0x08B */ u8 fragmentRotX[24]; // scaled to map [0,255] -> [0,360]
     /* 0x0A3 */ char unk_A3; // padding?
     /* 0x0A4 */ u8 fragmentRotY[24]; // scaled to map [0,255] -> [0,360]
@@ -434,6 +440,8 @@ typedef struct SwitchData {
     /* 0x124 */ f32 fragmentPosY[24];
     /* 0x184 */ char unk_184[4];
     /* 0x188 */ f32 fragmentPosZ[24];
+    /* 0x1E8 */ char unk_1E8[4];
+    /* 0x1EC */ f32 unk_1EC[24];
 } SwitchData;
 
 // from 104940_len_dc0, size unknown

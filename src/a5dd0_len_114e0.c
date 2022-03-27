@@ -2227,7 +2227,7 @@ s32 is_block_on_ground(Entity* block) {
 
     ret = hitLength;
     if (ret == 32767) {
-        ret = 0;
+        ret = FALSE;
     }
 
     return ret;
