@@ -279,12 +279,12 @@ typedef struct PlayerData {
     /* 0x324 */ s32 tradeEventStartTime;
     /* 0x328 */ s32 droTreeOrbitTime;
     /* 0x32C */ s16 starPiecesCollected;
-    /* 0x32E */ s16 jumpGamePlays;
-    /* 0x330 */ s32 jumpGameTotal; /* all-time winnings, max = 99999 */
-    /* 0x334 */ s16 jumpGameRecord;
-    /* 0x336 */ s16 smashGamePlays;
-    /* 0x338 */ s32 smashGameTotal; /* all-time winnings, max = 99999 */
-    /* 0x33C */ s16 smashGameRecord;
+    /* 0x32E */ u16 jumpGamePlays;
+    /* 0x330 */ u32 jumpGameTotal; /* all-time winnings, max = 99999 */
+    /* 0x334 */ u16 jumpGameRecord;
+    /* 0x336 */ u16 smashGamePlays;
+    /* 0x338 */ u32 smashGameTotal; /* all-time winnings, max = 99999 */
+    /* 0x33C */ u16 smashGameRecord;
     /* 0x33E */ char unk_33E[2];
 } PlayerData; // size = 0x340
 
@@ -2493,5 +2493,44 @@ typedef struct FoldImageRecPart {
     /* 0x10 */ u8 unk_10;
     /* 0x11 */ char unk_11[0x7];
 } FoldImageRecPart; // size = 0x18
+
+
+typedef struct JumpGameInnerData {
+/* 0x00 */ s32 unk_00;
+/* 0x04 */ s32 unk_04;
+/* 0x08 */ s32 unk_08;
+/* 0x0C */ s32 unk_0C;
+/* 0x10 */ s32 unk_10;
+/* 0x14 */ s32 entityIndex;
+/* 0x18 */ s32 lerpElapsed;
+/* 0x1C */ s32 lerpDuration;
+/* 0x20 */ f32 unk_20;
+/* 0x24 */ f32 unk_24;
+/* 0x28 */ f32 unk_28;
+/* 0x2C */ f32 unk_2C;
+/* 0x30 */ f32 unk_30;
+/* 0x34 */ f32 unk_34;
+/* 0x38 */ f32 unk_38;
+/* 0x3C */ f32 unk_3C;
+/* 0x40 */ f32 unk_40;
+/* 0x44 */ f32 unk_44;
+/* 0x48 */ f32 unk_48;
+/* 0x4C */ f32 unk_4C;
+/* 0x50 */ f32 unk_50;
+/* 0x50 */ f32 unk_54;
+/* 0x50 */ f32 unk_58;
+} JumpGameInnerData; /* size = 5C */
+
+typedef struct JumpGameData {
+/* 0x000 */ s32 workerID;
+/* 0x004 */ s32 hudElemID;
+/* 0x008 */ s32 unk_08;
+/* 0x00C */ s32 currentScore; // displayedScore
+/* 0x010 */ s32 targetScore; // targetScore
+/* 0x014 */ s32 scoreWindowPosX;
+/* 0x018 */ s32 unk_18;
+/* 0x01C */ s8  unk_1C[0x58];
+/* 0x074 */ JumpGameInnerData arr[11];
+} JumpGameData; /* size = 0x468 */
 
 #endif

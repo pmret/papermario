@@ -546,6 +546,7 @@ enum SoundIDs {
     SOUND_METAL_GATE_CLOSE          = 0x000001CA,
     SOUND_1CB                       = 0x000001CB,
     SOUND_1CC                       = 0x000001CC,
+    SOUND_211                       = 0x00000211,
     SOUND_215                       = 0x00000215,
     SOUND_MENU_ERROR                = 0x0000021D,
     SOUND_231                       = 0x00000231,
