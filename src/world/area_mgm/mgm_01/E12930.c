@@ -15,6 +15,18 @@ extern s8 D_80241AE0_E14240[12];
 extern f32 D_80241AEC_E1424C[11];
 extern f32 D_80241B18_E14278[11];
 
+extern EvtScript D_80242310;
+extern EvtScript D_80242330;
+extern EvtScript D_80242350;
+extern EvtScript D_80242370;
+extern EvtScript D_80242390;
+extern EvtScript D_802423B0;
+extern EvtScript D_802423D0;
+extern EvtScript D_802423F0;
+extern EvtScript D_80242410;
+extern EvtScript D_80242430;
+extern EvtScript D_80242450;
+
 extern s32 D_80243560_E15CC0; /* TODO: assign proper type for this data */
 
 extern s32 D_80241B9C_E142FC[4][11];
@@ -179,7 +191,7 @@ ApiStatus func_802406C4_E12E24(Evt* script, s32 isInitialCall) {
     } else {
         evt_set_variable(script, LW(3), FALSE);
     }
-   
+
     return ApiStatus_DONE2;
 }
 
@@ -242,7 +254,7 @@ ApiStatus func_802408EC_E1304C(Evt* script, s32 isInitialCall) {
     } else {
         data->arr[index].lerpDuration = (dist / 5.0) + 0.5;
     }
-    
+
     return ApiStatus_DONE2;
 }
 
@@ -256,7 +268,7 @@ ApiStatus func_80240AAC_E1320C(Evt* script, s32 isInitialCall) {
     data->arr[index].unk_28 = update_lerp(0, data->arr[index].unk_34, data->arr[index].unk_40, data->arr[index].lerpElapsed, data->arr[index].lerpDuration);
     data->arr[index].unk_44 = update_lerp(0, data->arr[index].unk_48, data->arr[index].unk_4C, data->arr[index].lerpElapsed, data->arr[index].lerpDuration);
     data->arr[index].unk_50 = update_lerp(0, data->arr[index].unk_54, data->arr[index].unk_58, data->arr[index].lerpElapsed, data->arr[index].lerpDuration);
-    
+
     if (data->arr[index].lerpElapsed >= data->arr[index].lerpDuration) {
         evt_set_variable(script, -0x01C9C37D, TRUE);
     } else {
@@ -307,7 +319,7 @@ ApiStatus func_80240CD0_E13430(Evt* script, s32 isInitialCall) {
         increment = 10;
     } else if (coinsLeft > 20) {
         increment = 5;
-    } else if (coinsLeft > 10) {    
+    } else if (coinsLeft > 10) {
         increment = 2;
     } else {
         increment = 1;
@@ -360,14 +372,14 @@ ApiStatus func_80240ECC_E1362C(Evt* script, s32 isInitialCall) {
     evt_set_float_variable(script, LW(7), data->arr[index].unk_28);
     evt_set_float_variable(script, LW(8), data->arr[index].unk_44);
     evt_set_float_variable(script, LW(9), data->arr[index].unk_50);
-    
+
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_80240F90_E136F0(Evt* script, s32 isInitialCall) {
     JumpGameData* data = (JumpGameData*)get_enemy(SCOREKEEPER_ENEMY_IDX)->varTable[JUMP_DATA_VAR_IDX];
-    s32 i; 
-    
+    s32 i;
+
     for(i = 0; i < ARRAY_COUNT(data->arr); i++)
     {
         if (data->arr[i].entityIndex >= 0) {
@@ -385,15 +397,16 @@ INCLUDE_ASM(s32, "world/area_mgm/mgm_01/E12930", func_80241090_E137F0);
 
 ApiStatus func_80241234_E13994(Evt* script, s32 isInitialCall) {
     JumpGameData* data = get_enemy(SCOREKEEPER_ENEMY_IDX)->varTable[JUMP_DATA_VAR_IDX];
-    EvtScript* scriptArray[11];
+    const EvtScript* scriptArray[11] = {
+        &D_80242310, &D_80242330, &D_80242350, &D_80242370, &D_80242390, &D_802423B0, &D_802423D0, &D_802423F0,
+        &D_80242410, &D_80242430, &D_80242450
+    };
     s32 entityIndex;
     s32 configuration;
     s32 indexA, indexB;
     s32 curBlockIdx;
     s32 temp;
     s32 i;
-    
-    memcpy(scriptArray, D_802435E8_E15D48, sizeof(D_802435E8_E15D48));
 
     if (isInitialCall) {
 
@@ -419,16 +432,16 @@ ApiStatus func_80241234_E13994(Evt* script, s32 isInitialCall) {
 
     if (--script->functionTemp[0] <= 0) {
         curBlockIdx = script->functionTemp[1];
-        entityIndex = create_entity(&D_802EA0C4, 
-            D_80241AC8_E14228[curBlockIdx], 
-            D_80241AD4_E14234[curBlockIdx], 
+        entityIndex = create_entity(&D_802EA0C4,
+            D_80241AC8_E14228[curBlockIdx],
+            D_80241AD4_E14234[curBlockIdx],
             D_80241AE0_E14240[curBlockIdx],
             0, 0, 0, 0, 0x80000000);
         data->arr[curBlockIdx].entityIndex = entityIndex;
         get_entity_by_index(entityIndex)->boundScriptBytecode = scriptArray[curBlockIdx];
-        fx_sparkles(3, 
-            D_80241AC8_E14228[curBlockIdx], 
-            D_80241AD4_E14234[curBlockIdx] + 13, 
+        fx_sparkles(3,
+            D_80241AC8_E14228[curBlockIdx],
+            D_80241AD4_E14234[curBlockIdx] + 13,
             D_80241AE0_E14240[curBlockIdx] + 5,
             23.0f);
         sfx_play_sound(0x213);
@@ -438,6 +451,8 @@ ApiStatus func_80241234_E13994(Evt* script, s32 isInitialCall) {
 
     return (script->functionTemp[1] < 11) ? ApiStatus_BLOCK : ApiStatus_DONE2;
 }
+
+const char* mgm_01_str = "mgm_00";
 
 /* N(TakeCoinCost) */
 ApiStatus func_80241510_E13C70(Evt* script, s32 isInitialCall) {
@@ -513,7 +528,7 @@ ApiStatus func_802416F8_E13E58(Evt* script, s32 isInitialCall) {
 
     set_message_value(remaining, 0);
     set_message_msg((remaining == 1) ? &MessageSingular : &MessagePlural, 1);
-    
+
     return ApiStatus_DONE2;
 }
 
