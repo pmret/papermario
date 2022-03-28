@@ -2753,6 +2753,16 @@ enum CameraFlags {
     CAMERA_FLAGS_80000000          = 0x80000000,
 };
 
+enum CameraSettingsType {
+    CAMERA_SETTINGS_TYPE_0  = 0,
+    CAMERA_SETTINGS_TYPE_1  = 1,
+    CAMERA_SETTINGS_TYPE_2  = 2,
+    CAMERA_SETTINGS_TYPE_3  = 3,
+    CAMERA_SETTINGS_TYPE_4  = 4,
+    CAMERA_SETTINGS_TYPE_5  = 5,
+    CAMERA_SETTINGS_TYPE_6  = 6,
+};
+
 enum BtlCameraPreset {
     BTL_CAM_PRESET_A  = 0,
     BTL_CAM_PRESET_B,
