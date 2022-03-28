@@ -1,5 +1,8 @@
 #include "audio.h"
 
+// data
+extern u16 D_80078530[];
+
 void func_80052E30(u8 index) {
     UnkAl48* temp = &D_8009A5C0->unk_1320[index];
 
@@ -394,11 +397,11 @@ void func_80053A98(u8 arg0, u16 arg1, s32 arg2) {
     func_80056D78(arg0, (u32)(arg1 * arg2) >> 15);
 }
 
-void func_80053AC8(UnkAl1* arg0) {
-    if (arg0->unk_0A == 0) {
-        arg0->unk_0A = 1;
-        arg0->unk_04 = 0;
-        arg0->unk_08 = arg0->unk_00.u16;
+void func_80053AC8(Fade* fade) {
+    if (fade->fadeTime == 0) {
+        fade->fadeTime = 1;
+        fade->fadeStep = 0;
+        fade->endVolume = fade->currentVolume.u16;
     }
 }
 
@@ -505,7 +508,6 @@ BGMPlayer* func_80054248(u8 arg0) {
     }
 }
 
-//INCLUDE_ASM(void, "2e230_len_2190", snd_load_INIT, UnkAl19E0* arg0, s32 arg1, ALHeap* arg2);
 void snd_load_INIT(UnkAl19E0* arg0, s32 romAddr, ALHeap* heap) {
     SBNHeader sbnHeader;
     INITHeader initHeader;
@@ -531,9 +533,8 @@ void snd_load_INIT(UnkAl19E0* arg0, s32 romAddr, ALHeap* heap) {
             break;
         }
 
-        data = &entry->fmt;
-        size = *data;
-        *data = (size + 0xF) & ~0xF;
+        size = entry->data;
+        entry->data = (size + 0xF) & ~0xF;
         entry++;
     }
 
@@ -559,7 +560,31 @@ void snd_load_INIT(UnkAl19E0* arg0, s32 romAddr, ALHeap* heap) {
     }
 }
 
-INCLUDE_ASM(s32, "2e230_len_2190", snd_fetch_SBN_file, u16 arg0, s32 arg1, s32* arg2);
+//INCLUDE_ASM(s32, "2e230_len_2190", snd_fetch_SBN_file, u16 arg0, s32 arg1, s32* arg2);
+s32 snd_fetch_SBN_file(u32 arg0, s32 format, SBNFileEntry* arg2) {
+    SBNFileEntry fileEntry;
+    UnkAl19E0* temp = D_8009A5C0;
+    u32 data;
+    s32 ret = 0;
+
+    if (arg0 < temp->fileListLength) {
+        SBNFileEntry* entry = &temp->sbnFileList[arg0];
+        s32 offset = (entry->offset & 0xFFFFFF) + temp->baseRomOffset;
+
+        fileEntry.offset = offset;
+        data = entry->data;
+        fileEntry.data = data;
+        if ((data >> 0x18) == format) {
+            arg2->offset = offset;
+            arg2->data = fileEntry.data;
+        } else {
+            ret = 102;
+        }
+    } else {
+        ret = 101;
+    }
+    return ret;
+}
 
 INCLUDE_ASM(void, "2e230_len_2190", snd_load_PER, UnkAl19E0* arg0, s32* arg1);
 
@@ -650,9 +675,35 @@ s32 snd_load_BK(s32 arg0, s32 arg1) {
     return 0;
 }
 
-INCLUDE_ASM(s32, "2e230_len_2190", func_80054C84);
+void func_80054C84(s32 bankIndex, s32 bankGroup) {
+    u32 i;
+    Instrument* instrument = D_8009A5C0->defaultInstrument;
+    InstrumentGroup* group =  snd_get_BK_instruments(bankGroup, bankIndex);
+    Instrument** ptr = group;
+    if (group != NULL) {
+        for (i = 0; i < ARRAY_COUNT(*group); i++) {
+            *ptr++ = instrument;
+        }
+    }
+}
 
-INCLUDE_ASM(void, "2e230_len_2190", func_80054CE0, s32 arg0, s32 arg1);
+void func_80054CE0(s32 arg0, s32 arg1) {
+    s32 temp_s0;
+
+    if (arg1 < 9U) {
+        temp_s0 = D_80078530[arg1];
+        if (arg0 & 1) {
+            D_8009A664->unk_48 = temp_s0;
+            func_80053AC8(&D_8009A664->fadeInfo);
+            D_8009A5FC->unk_48 = temp_s0;
+            func_80053AC8(&D_8009A5FC->fadeInfo);
+        }
+        if (arg0 & 0x10) {
+            D_8009A640->unk_5C = temp_s0;
+            func_80053AC8(&D_8009A640->unk_40);
+        }
+    }
+}
 
 s32 func_80054D74(s32 arg0, s32 arg1) {
     if (arg0 & 0x10) {
@@ -661,7 +712,18 @@ s32 func_80054D74(s32 arg0, s32 arg1) {
     return 0;
 }
 
-INCLUDE_ASM(s32, "2e230_len_2190", func_80054DA8);
+void func_80054DA8(u32 arg0) {
+    if (arg0 % 2 == 1) {
+        if (D_8009A5C0->unk_130C == 0) {
+            D_8009A5C0->unk_130C = 2;
+        }
+    } else {
+        if (D_8009A5C0->unk_130C != 0) {
+            D_8009A5C0->unk_50 = 1;
+            D_8009A5C0->unk_130C = 0;
+        }
+    }
+}
 
 void snd_read_rom(s32 rom_addr, u8* buf_ptr, u32 size) {
     s32 nchunks = size / 0x2000;

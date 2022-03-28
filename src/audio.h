@@ -344,9 +344,7 @@ typedef struct INITHeader {
 
 typedef struct SBNFileEntry {
     /* 0x0 */ s32 offset;
-    /* 0x4 */ s8 fmt;
-    /* 0x5 */ char unk_05;
-    /* 0x6 */ s16 length;
+    /* 0x4 */ u32 data;
 } SBNFileEntry; // size = 0x8
 
 typedef struct InitSongEntry {
@@ -764,7 +762,7 @@ void func_80057EB0(void);
 void func_80057ED0(s16);
 
 void snd_load_INIT(UnkAl19E0*, s32, ALHeap*);
-s32 snd_fetch_SBN_file(u16, s32, s32*);
+s32 snd_fetch_SBN_file(u32, s32, SBNFileEntry*);
 void snd_load_PER(UnkAl19E0*, s32*);
 void snd_load_PRG(UnkAl19E0*, s32*);
 void snd_read_rom(s32, u8*, u32);
