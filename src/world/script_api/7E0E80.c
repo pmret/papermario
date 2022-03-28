@@ -350,7 +350,7 @@ ApiStatus ShowShopPurchaseDialog(Evt* script, s32 isInitialCall) {
             shopOwnerScript = D_8028652C;
             if (shopOwnerScript == NULL || !does_script_exist(shopOwnerScript->id)) {
                 decrement_status_menu_disabled();
-                func_800E96C8();
+                hide_coin_counter_immediately();
                 return ApiStatus_DONE1;
             }
             break;
@@ -604,9 +604,9 @@ ApiStatus ShowShopOwnerDialog(Evt* script, s32 isInitialCall) {
                 if (D_80286538->currentOption == 0) {
                     script->functionTemp[1] = shop_owner_end_speech();
                     script->functionTemp[0] = 201;
-                    func_800E96C8();
+                    hide_coin_counter_immediately();
                 } else {
-                    func_800E96C8();
+                    hide_coin_counter_immediately();
                     script->functionTemp[1] = shop_owner_reset_speech(22);
                     script->functionTemp[0] = 9;
                 }

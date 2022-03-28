@@ -1822,36 +1822,36 @@ s32 MakeEntity(Evt* script, s32 isInitialCall) {
     EntityBlueprint* entityData;
     s32 x, y, z;
     s32 flags;
-    s32 temp_v0;
+    s32 nextArg;
     s32 entityIndex;
-    s32 t80000000;
-    s32* temp;
+    s32 endOfArgs;
+    s32* varArgBufPos;
 
     if (isInitialCall != TRUE) {
         return ApiStatus_DONE2;
     }
 
     entityData = (EntityBlueprint*)evt_get_variable(script, *args++);
-    temp = &CreateEntityVarArgBuffer[2];
-    t80000000 = 0x80000000;
+    varArgBufPos = &CreateEntityVarArgBuffer[2];
+    endOfArgs = MAKE_ENTITY_END;
     x = evt_get_variable(script, *args++);
     y = evt_get_variable(script, *args++);
     z = evt_get_variable(script, *args++);
     flags = evt_get_variable(script, *args++);
 
-    *temp-- = 0;
-    *temp-- = 0;
-    *temp = 0;
+    *varArgBufPos-- = 0;
+    *varArgBufPos-- = 0;
+    *varArgBufPos = 0;
 
     do {
-        temp_v0 = evt_get_variable(script, *args++);
+        nextArg = evt_get_variable(script, *args++);
 
-        if (temp_v0 != t80000000) {
-            *temp++ = temp_v0;
+        if (nextArg != endOfArgs) {
+            *varArgBufPos++ = nextArg;
         }
-    } while (temp_v0 != t80000000);
+    } while (nextArg != endOfArgs);
 
-    entityIndex = create_entity(entityData, x, y, z, flags, CreateEntityVarArgBuffer[0], CreateEntityVarArgBuffer[1], CreateEntityVarArgBuffer[2], t80000000);
+    entityIndex = create_entity(entityData, x, y, z, flags, CreateEntityVarArgBuffer[0], CreateEntityVarArgBuffer[1], CreateEntityVarArgBuffer[2], endOfArgs);
     gLastCreatedEntityIndex = entityIndex;
     script->varTable[0] = entityIndex;
     return ApiStatus_DONE2;

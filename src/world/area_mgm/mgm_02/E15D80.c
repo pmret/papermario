@@ -58,6 +58,6 @@ ApiStatus func_80242340_E180C0(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus func_802423A4_E18124(Evt* script, s32 isInitialCall) {
-    func_800E96C8();
+    hide_coin_counter_immediately();
     return ApiStatus_DONE2;
 }

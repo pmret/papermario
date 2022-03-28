@@ -781,7 +781,7 @@ void func_800E9900(void);
 void show_coin_counter(void);
 s32 add_item(s32 itemID);
 s32 add_badge(s32 itemID);
-void func_800E96C8(void);
+void hide_coin_counter_immediately(void);
 void hide_popup_menu(void);
 void destroy_popup_menu(void);
 void func_800E98C4(void);

@@ -254,7 +254,7 @@ void entity_shattering_block_init(Entity* entity) {
             a2 = &D_0A001218;
             break;
         case ENTITY_TYPE_BRICK_BLOCK:
-            sfx_play_sound_at_position(0x158, 0, entity->position.x, entity->position.y, entity->position.z);
+            sfx_play_sound_at_position(ITEM_HEART_PIECE, 0, entity->position.x, entity->position.y, entity->position.z);
             a1 = &D_0A003F70;
             a2 = &D_0A002318;
             break;
@@ -276,31 +276,31 @@ void entity_shattering_block_init(Entity* entity) {
 
 void entity_breakable_block_create_shattering_entity(Entity* entity) {
     u32 type;
-    EntityBlueprint* addr = NULL;
+    EntityBlueprint* bp = NULL;
 
     type = get_entity_type(entity->listIndex);
 
     switch (type) {
         case ENTITY_TYPE_HAMMER1_BLOCK:
-            addr = &Entity_ShatteringHammer1Block;
+            bp = &Entity_ShatteringHammer1Block;
             break;
         case ENTITY_TYPE_HAMMER1_BLOCK_TINY:
-            addr = &Entity_ShatteringHammer1BlockTiny;
+            bp = &Entity_ShatteringHammer1BlockTiny;
             break;
         case ENTITY_TYPE_HAMMER2_BLOCK:
-            addr = &Entity_ShatteringHammer2Block;
+            bp = &Entity_ShatteringHammer2Block;
             break;
         case ENTITY_TYPE_HAMMER2_BLOCK_TINY:
-            addr = &Entity_ShatteringHammer2BlockTiny;
+            bp = &Entity_ShatteringHammer2BlockTiny;
             break;
         case ENTITY_TYPE_HAMMER3_BLOCK:
-            addr = &Entity_ShatteringHammer3Block;
+            bp = &Entity_ShatteringHammer3Block;
             break;
         case ENTITY_TYPE_HAMMER3_BLOCK_TINY:
-            addr = &Entity_ShatteringHammer3BlockTiny;
+            bp = &Entity_ShatteringHammer3BlockTiny;
             break;
         case ENTITY_TYPE_BRICK_BLOCK:
-            addr = &Entity_ShatteringBrickBlock;
+            bp = &Entity_ShatteringBrickBlock;
             break;
         case ENTITY_TYPE_MULTI_COIN_BRICK:
         case ENTITY_TYPE_YELLOW_BLOCK:
@@ -311,9 +311,9 @@ void entity_breakable_block_create_shattering_entity(Entity* entity) {
             break;
     }
 
-    if (addr == NULL) {
+    if (bp == NULL) {
         return;
     }
 
-    create_entity(addr, entity->position.x, entity->position.y, entity->position.z, 0, 0x80000000);
+    create_entity(bp, entity->position.x, entity->position.y, entity->position.z, 0, MAKE_ENTITY_END);
 }

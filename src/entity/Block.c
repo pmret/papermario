@@ -150,9 +150,8 @@ void entity_MulticoinBlock_spawn_coin(Entity* entity) {
 
     if ((data->coinsLeft == 0) || (data->timeLeft == 0)) {
         data->empty = TRUE;
-        set_entity_commandlist(get_entity_by_index(create_entity(&Entity_InertYellowBlock, entity->position.x, entity->position.y,
-                               entity->position.z,
-                               entity->rotation.y, 0x80000000)), &D_802E9E54);
+        set_entity_commandlist(get_entity_by_index(create_entity(&Entity_InertYellowBlock,
+            entity->position.x, entity->position.y, entity->position.z, entity->rotation.y, MAKE_ENTITY_END)), &D_802E9E54);
         entity->flags |= (ENTITY_FLAGS_SKIP_UPDATE_INVERSE_ROTATION_MATRIX | ENTITY_FLAGS_PENDING_INSTANCE_DELETE);
     }
 }
@@ -181,7 +180,7 @@ void entity_MulticoinBlock_idle(Entity* entity) {
     entity_MulticoinBlock_update_timer(entity);
     entity_base_block_idle(entity);
     if (data->empty) {
-        create_entity(&Entity_InertYellowBlock, entity->position.x, entity->position.y, entity->position.z, entity->rotation.y, 0x80000000);
+        create_entity(&Entity_InertYellowBlock, entity->position.x, entity->position.y, entity->position.z, entity->rotation.y, MAKE_ENTITY_END);
         entity->flags |= (ENTITY_FLAGS_SKIP_UPDATE_INVERSE_ROTATION_MATRIX | ENTITY_FLAGS_PENDING_INSTANCE_DELETE);
     }
 }
@@ -191,7 +190,7 @@ void entity_MulticoinBlock_check_if_inactive(Entity* entity) {
 
     if (data->gameFlagIndex != 0xFFFF) {
         if (get_global_flag(data->gameFlagIndex) != 0) {
-            create_entity(&Entity_InertYellowBlock, entity->position.x, entity->position.y, entity->position.z, entity->rotation.y, 0x80000000);
+            create_entity(&Entity_InertYellowBlock, entity->position.x, entity->position.y, entity->position.z, entity->rotation.y, MAKE_ENTITY_END);
             entity->flags |= (ENTITY_FLAGS_SKIP_UPDATE_INVERSE_ROTATION_MATRIX | ENTITY_FLAGS_PENDING_INSTANCE_DELETE);
         }
     }
