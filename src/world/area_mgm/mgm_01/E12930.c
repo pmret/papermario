@@ -383,6 +383,9 @@ ApiStatus func_80240F90_E136F0(Evt* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_mgm/mgm_01/E12930", func_80241090_E137F0);
 
+INCLUDE_ASM(s32, "world/area_mgm/mgm_01/E12930", func_80241234_E13994);
+
+/*
 ApiStatus func_80241234_E13994(Evt* script, s32 isInitialCall) {
     JumpGameData* data = get_enemy(SCOREKEEPER_ENEMY_IDX)->varTable[JUMP_DATA_VAR_IDX];
     EvtScript* scriptArray[11];
@@ -396,12 +399,13 @@ ApiStatus func_80241234_E13994(Evt* script, s32 isInitialCall) {
     memcpy(scriptArray, D_802435E8_E15D48, sizeof(D_802435E8_E15D48));
 
     if (isInitialCall) {
-
+        // choose one of four initial configurations at random
         configuration = rand_int(1000) % 4;
         for(i = 0; i < 11; i++) {
             data->unk_1C[i] = D_80241B9C_E142FC[configuration][i];
         }
 
+        // randomly swap 1000 pairs
         for(i = 0; i < 1000; i++) {
             indexA = rand_int(10000) % 11;
             indexB = rand_int(10000) % 11;
@@ -438,6 +442,7 @@ ApiStatus func_80241234_E13994(Evt* script, s32 isInitialCall) {
 
     return (script->functionTemp[1] < 11) ? ApiStatus_BLOCK : ApiStatus_DONE2;
 }
+*/
 
 /* N(TakeCoinCost) */
 ApiStatus func_80241510_E13C70(Evt* script, s32 isInitialCall) {
