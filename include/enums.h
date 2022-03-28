@@ -529,6 +529,7 @@ enum SoundIDs {
     SOUND_LAND                      = 0x0000014B,
     SOUND_HIT_BLOCK                 = 0x0000014E,
     SOUND_SEARCH_BUSH               = 0x00000153,
+    SOUND_158                       = 0x00000158,
     SOUND_162                       = 0x00000162,
     SOUND_ENTER_PIPE                = 0x00000163,
     SOUND_SMASH_GOOMNUT_TREE        = 0x00000165,
