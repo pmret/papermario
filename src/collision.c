@@ -55,8 +55,6 @@ extern f32 gCollisionNormalY;
 extern f32 gCollisionNormalZ;
 extern ColliderBackupEntry* gCollisionDataBackup;
 extern ColliderBackupEntry* gCollisionDataZoneBackup;
-extern CollisionData gZoneCollisionData;
-extern s16 D_800D91DC;
 
 s32 collision_heap_create(void);
 void* collision_heap_malloc(s32 size);
@@ -88,7 +86,7 @@ void backup_map_collision_data(void) {
         backupEntry->parentModelIndex = collider->parentModelIndex;
     }
 
-    D_800D91DC = 0;
+    gZoneCollisionData.numColliders = 0;
 }
 
 void func_8005AF84(void) {
@@ -99,7 +97,7 @@ void func_8005AF8C(void) {
 
 void initialize_collision(void) {
     gCollisionData.numColliders = 0;
-    D_800D91DC = 0;
+    gZoneCollisionData.numColliders = 0;
     collision_heap_create();
 }
 

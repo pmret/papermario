@@ -597,41 +597,41 @@ ApiStatus UpdateColliderTransform(Evt* script, s32 isInitialCall) {
 }
 
 void set_zone_enabled(s32 zoneID, s32 enabled) {
-    TempSetZoneEnabled* unkStruct = &D_800D91D4[zoneID];
+    Collider* zone = &gZoneCollisionData.colliderList[zoneID];
 
-    if (unkStruct->id1 >= 0) {
-        set_zone_enabled(unkStruct->id1, enabled);
+    if (zone->nextSibling >= 0) {
+        set_zone_enabled(zone->nextSibling, enabled);
     }
-    if (unkStruct->id2 >= 0) {
-        set_zone_enabled(unkStruct->id2, enabled);
+    if (zone->firstChild >= 0) {
+        set_zone_enabled(zone->firstChild, enabled);
     }
 
     switch (enabled) {
         case 0:
-            unkStruct->flags |= TEMP_SET_ZONE_ENABLED_FLAGS_10000;
+            zone->flags |= TEMP_SET_ZONE_ENABLED_FLAGS_10000;
             break;
         case 1:
-            unkStruct->flags &= ~TEMP_SET_ZONE_ENABLED_FLAGS_10000;
+            zone->flags &= ~TEMP_SET_ZONE_ENABLED_FLAGS_10000;
             break;
     }
 }
 
 ApiStatus SetZoneEnabled(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 idx = evt_get_variable(script, *args++);
+    s32 zoneID = evt_get_variable(script, *args++);
     s32 enabled = evt_get_variable(script, *args++);
-    TempSetZoneEnabled* unkStruct = &D_800D91D4[idx];
+    Collider* zone = &gZoneCollisionData.colliderList[zoneID];
 
-    if (unkStruct->id2 >= 0) {
-        set_zone_enabled(unkStruct->id2, enabled);
+    if (zone->firstChild >= 0) {
+        set_zone_enabled(zone->firstChild, enabled);
     }
 
     switch (enabled) {
         case FALSE:
-            unkStruct->flags |= TEMP_SET_ZONE_ENABLED_FLAGS_10000;
+            zone->flags |= TEMP_SET_ZONE_ENABLED_FLAGS_10000;
             break;
         case TRUE:
-            unkStruct->flags &= ~TEMP_SET_ZONE_ENABLED_FLAGS_10000;
+            zone->flags &= ~TEMP_SET_ZONE_ENABLED_FLAGS_10000;
             break;
     }
 
