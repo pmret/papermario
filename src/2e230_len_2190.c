@@ -16,7 +16,7 @@ void snd_load_audio_data(s32 frequency) {
     u8 temp6[4];
     UnkAl48* temp5;
 
-    alHeap = D_80078E54->unk_18;
+    alHeap = D_80078E54->heap;
     D_8009A5C0 = alHeapAlloc(alHeap, 1, 0x19E0);
 
     D_8009A664 = alHeapAlloc(alHeap, 1, sizeof(BGMPlayer));
@@ -505,7 +505,59 @@ BGMPlayer* func_80054248(u8 arg0) {
     }
 }
 
-INCLUDE_ASM(void, "2e230_len_2190", snd_load_INIT, UnkAl19E0* arg0, s32 arg1, ALHeap* arg2);
+//INCLUDE_ASM(void, "2e230_len_2190", snd_load_INIT, UnkAl19E0* arg0, s32 arg1, ALHeap* arg2);
+void snd_load_INIT(UnkAl19E0* arg0, s32 romAddr, ALHeap* heap) {
+    SBNHeader sbnHeader;
+    INITHeader initHeader;
+    SBNFileEntry* entry;
+    s32 tableSize, initBase, size;
+    s32 tblAddr, shortsAddr;
+    s32* data;
+    s32 numEntries;
+    s32 tblOffset, shortsOffset;
+    s32* romPtr = &arg0->baseRomOffset;
+
+    snd_read_rom(romAddr, &sbnHeader, sizeof(SBNHeader));
+    numEntries = sbnHeader.numEntries;
+    arg0->baseRomOffset = romAddr;
+    tableSize = numEntries * sizeof(SBNFileEntry);
+    arg0->fileListLength = sbnHeader.numEntries;
+    arg0->sbnFileList = alHeapAlloc(heap, 1, tableSize);
+    snd_read_rom(arg0->baseRomOffset + sbnHeader.tableOffset, arg0->sbnFileList, tableSize);
+
+    entry = arg0->sbnFileList;
+    while (sbnHeader.numEntries--) {
+        if ((entry->offset & 0xFFFFFF) == 0) {
+            break;
+        }
+
+        data = &entry->fmt;
+        size = *data;
+        *data = (size + 0xF) & ~0xF;
+        entry++;
+    }
+
+    if (sbnHeader.INIToffset != 0) {
+        initBase = *romPtr + sbnHeader.INIToffset;
+        snd_read_rom(initBase, &initHeader, sizeof(INITHeader));
+
+        tblOffset = initHeader.tblOffset;
+        size = (initHeader.tblSize + 0xF) & 0xFFF0;
+        tblAddr = initBase + tblOffset;
+        arg0->songList = alHeapAlloc(heap, 1, size);
+        snd_read_rom(tblAddr, arg0->songList, size);
+
+        shortsOffset = initHeader.shortsOffset;
+        size = (initHeader.shortsSize + 0xF) & 0xFFF0;
+        shortsAddr = initBase + shortsOffset;
+        arg0->mseqFileList = alHeapAlloc(heap, 1, size);
+        snd_read_rom(shortsAddr, arg0->mseqFileList, size);
+
+        arg0->bkFileListOffset = initBase + initHeader.entriesOffset;
+        arg0->bkListLength = (initHeader.entriesSize + 0xF) & 0xFFF0;
+        arg0->songListLength = initHeader.tblSize / sizeof(InitSongEntry) - 1;
+    }
+}
 
 INCLUDE_ASM(s32, "2e230_len_2190", snd_fetch_SBN_file, u16 arg0, s32 arg1, s32* arg2);
 
@@ -611,7 +663,22 @@ s32 func_80054D74(s32 arg0, s32 arg1) {
 
 INCLUDE_ASM(s32, "2e230_len_2190", func_80054DA8);
 
-INCLUDE_ASM(void, "2e230_len_2190", snd_read_rom, s32 arg0, s32* arg1, s32 arg2);
+void snd_read_rom(s32 rom_addr, u8* buf_ptr, u32 size) {
+    s32 nchunks = size / 0x2000;
+    s32 offset = 0;
+
+    if (nchunks != 0) {
+        while (nchunks--) {
+            nuPiReadRom(rom_addr + offset, buf_ptr + offset, 0x2000);
+            offset += 0x2000;
+        }
+    }
+
+    size %= 0x2000;
+    if (size != 0) {
+        nuPiReadRom(rom_addr + offset, buf_ptr + offset, size);
+    }
+}
 
 INCLUDE_ASM(s32, "2e230_len_2190", snd_memset);
 

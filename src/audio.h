@@ -1,6 +1,7 @@
 #ifndef _AUDIO_H_
 #define _AUDIO_H_
-
+#include "nu/nusys.h"
+#include "nu/nualsgi.h"
 #include "common.h"
 
 struct BGMPlayer;
@@ -57,46 +58,68 @@ typedef struct UnkLen18 {
     /* 0x02 */ char unk_02[0x2];
     /* 0x04 */ s32* unk_04;
     /* 0x08 */ s32* unk_08;
-    /* 0x0C */ s8 unk_0C;
+    /* 0x0C */ u8 unk_0C;
     /* 0x0D */ char unk_0D[0x3];
     /* 0x10 */ s32* unk_10;
     /* 0x14 */ s32* unk_14;
 } UnkLen18;
 
 typedef struct UnkAl7C {
-    /* 0x00 */ char unk_00[0x4];
+    /* 0x00 */ s32 unk_00;
     /* 0x04 */ s32* unk_04;
     /* 0x08 */ s32* unk_08;
     /* 0x0C */ char unk_0C[0x8];
     /* 0x14 */ s32* unk_14;
     /* 0x18 */ s32* unk_18;
-    /* 0x1C */ char unk_1C[0xC];
+    /* 0x1C */ s32 unk_1C;
+    /* 0x20 */ ALDMAproc dmaProc;
+    /* 0x24 */ NUDMAState* dmaState;
     /* 0x28 */ s32 unk_28;
     /* 0x2C */ s32 unk_2C;
     /* 0x30 */ s32 unk_30;
     /* 0x34 */ s32 unk_34;
-    /* 0x38 */ char unk_38[0x4];
+    /* 0x38 */ s32* unk_38;
     /* 0x3C */ f32 unk_3C;
     /* 0x40 */ s32 unk_40;
     /* 0x44 */ s32 unk_44;
-    /* 0x48 */ char unk_48[0x5];
-    /* 0x4D */ u8 unk_4D;
+    /* 0x48 */ s32* unk_48;
+    /* 0x4C */ union {
+                    s16 unk_4C;
+                    struct {
+                        u8 unk_4C;
+                        u8 unk_4D;
+                    } unk_4C_s;
+               };
     /* 0x4E */ s16 unk_4E;
-    /* 0x50 */ char unk_50[0x4];
+    /* 0x50 */ s16 unk_50;
+    /* 0x52 */ s16 unk_52;
     /* 0x54 */ s16 unk_54;
     /* 0x56 */ s16 unk_56;
-    /* 0x58 */ char unk_58[0x14];
+    /* 0x58 */ s16 unk_58;
+    /* 0x5A */ s16 unk_5A;
+    /* 0x5C */ s16 unk_5C;
+    /* 0x5E */ s16 unk_5E;
+    /* 0x60 */ s16 unk_60;
+    /* 0x62 */ s16 unk_62;
+    /* 0x64 */ s32 unk_64;
+    /* 0x68 */ s32 unk_68;
     /* 0x6C */ s32 unk_6C;
     /* 0x70 */ s32 unk_70;
-    /* 0x74 */ char unk_74[0x4];
+    /* 0x74 */ s16 unk_74;
+    /* 0x76 */ s16 unk_76;
     /* 0x78 */ u8 unk_78;
-    /* 0x79 */ char unk_79[0x3];
+    /* 0x79 */ u8 unk_79;
+    /* 0x7A */ u8 unk_7A[2];
 } UnkAl7C;
 
 typedef struct UnkAl0 {
-    /* 0x00 */ char unk_00[0x14];
-    /* 0x14 */ s32* unk_14; // pointer to nuAuDmaNew
-    /* 0x18 */ ALHeap* unk_18;
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ s32 unk_04;
+    /* 0x08 */ s32 frequency;
+    /* 0x0C */ s32 unk_0C;
+    /* 0x10 */ s32 unk_10;
+    /* 0x14 */ void* dmaNew; // pointer to nuAuDmaNew
+    /* 0x18 */ ALHeap* heap;
     /* 0x1C */ UnkAl7C* unk_1C; // pointer to list of UnkAl7C
     /* 0x20 */ UnkLen18* unk_20; // amt unknown
     /* 0x24 */ s32* unk_24;
@@ -287,6 +310,37 @@ typedef struct UnkAl48 { // Track?
     /* 0x45 */ u8 unk_45;
     /* 0x46 */ char unk_46[2];
 } UnkAl48; // size = 0x48
+
+typedef struct SBNHeader {
+    /* 0x00 */ s32 signature; // 'SBN '
+    /* 0x04 */ s32 totalSize;
+    /* 0x08 */ s32 unk_08;
+    /* 0x0C */ s32 unk_0C;
+    /* 0x10 */ s32 tableOffset; // = 0x40
+    /* 0x14 */ s32 numEntries;
+    /* 0x18 */ s32 unk_18;
+    /* 0x1C */ s32 unk_1C;
+    /* 0x20 */ s32 unk_20;
+    /* 0x24 */ s32 INIToffset;
+    /* 0x28 */ s32 unk_28;
+    /* 0x2C */ s32 unk_2C;
+    /* 0x30 */ s32 unk_30;
+    /* 0x34 */ s32 unk_34;
+    /* 0x38 */ s32 unk_38;
+    /* 0x3C */ s32 unk_3C;
+} SBNHeader; // size = 0x40
+
+typedef struct INITHeader {
+    /* 0x00 */ s32 signature; // 'INIT'
+    /* 0x04 */ s32 unk_04;
+    /* 0x08 */ u16 entriesOffset;
+    /* 0x0A */ u16 entriesSize;
+    /* 0x0C */ u16 tblOffset;
+    /* 0x0E */ u16 tblSize;
+    /* 0x10 */ u16 shortsOffset;
+    /* 0x12 */ u16 shortsSize;
+    /* 0x14 */ char unk_14[0xC];
+} INITHeader; // size = 0x20
 
 typedef struct SBNFileEntry {
     /* 0x0 */ s32 offset;
@@ -538,6 +592,24 @@ typedef struct UnkAl834 {
     /* 0x7B4 */ UnkAl8 unk_7B4[16];
 } UnkAl834;
 
+typedef struct ALConfig {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ s32 unk_04;
+    /* 0x08 */ s32 frequency;
+    /* 0x0C */ u8 unk_0C;
+    /* 0x10 */ void* dmaNew;
+    /* 0x14 */ ALHeap* heap;
+} ALConfig; // size = 0x18;
+
+typedef struct UnkAlGlobal {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ s32 unk_04;
+    /* 0x08 */ s32 unk_08;
+    /* 0x0C */ s32 unk_0C;
+    /* 0x10 */ s32 unk_10;
+    /* 0x14 */ s32 unk_14;
+} UnkAlGlobal;
+
 extern u8 D_80078181;
 extern s32 D_80078190;
 extern s32 D_800781D0;
@@ -567,8 +639,8 @@ extern BGMPlayer* D_8009A664;
 
 extern u16 D_800A0F50;
 
-extern s32* D_800A3FE0;
-extern s32* D_800A3FE4;
+extern s16* D_800A3FE0;
+extern s16* D_800A3FE4;
 extern s32 D_800A3FE8;
 extern s8 D_800A3FEC;
 extern s16 D_800A3FEE;
@@ -695,7 +767,7 @@ void snd_load_INIT(UnkAl19E0*, s32, ALHeap*);
 s32 snd_fetch_SBN_file(u16, s32, s32*);
 void snd_load_PER(UnkAl19E0*, s32*);
 void snd_load_PRG(UnkAl19E0*, s32*);
-void snd_read_rom(s32, s32*, s32);
+void snd_read_rom(s32, u8*, u32);
 
 #undef alHeapAlloc
 void* alHeapAlloc(ALHeap *heap, s32 arg1, s32 size);
