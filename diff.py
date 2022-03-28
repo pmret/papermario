@@ -2614,8 +2614,6 @@ def align_diffs(
         )
         old_chunks = chunk_diff_lines(old_diff.lines)
         new_chunks = chunk_diff_lines(new_diff.lines)
-        print("old_chunks:" + str(len(old_chunks)))
-        print("new_chunks:" + str(len(new_chunks)))
         diff_lines = []
         empty = OutputLine(Text(), Text(), None, True, False, None, None)
         #assert len(old_chunks) == len(new_chunks), "same target"

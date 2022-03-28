@@ -1216,7 +1216,8 @@ typedef struct ItemEntity {
     /* 0x2E */ u8 unkCounter;
     /* 0x2F */ s8 unk_2F;
     /* 0x30 */ f32 scale;
-    /* 0x34 */ char unk_34[8];
+    /* 0x34 */ Vec3s unk_34;
+    /* 0x3A */ char unk_3A[2];
     /* 0x3C */ s32 framesLeft;
     /* 0x40 */ s32* currentState;
     /* 0x44 */ s32 unk_44;
