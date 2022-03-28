@@ -3,8 +3,7 @@
 ApiStatus func_80240000_E12760(Evt* script, s32 isInitialCall) {
     SpriteShadingProfile* shading;
     f32 posX, posZ;
-    f32 shearX;
-    f32 shearZ;
+    f32 shearX, shearZ;
 
     posX = gPlayerStatusPtr->position.x;
     if (posX < -95.0) {

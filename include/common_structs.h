@@ -2504,21 +2504,21 @@ typedef struct JumpGameInnerData {
 /* 0x14 */ s32 entityIndex;
 /* 0x18 */ s32 lerpElapsed;
 /* 0x1C */ s32 lerpDuration;
-/* 0x20 */ f32 unk_20;
+/* 0x20 */ f32 unk_20; /* probably vec3 -- current pos */
 /* 0x24 */ f32 unk_24;
 /* 0x28 */ f32 unk_28;
-/* 0x2C */ f32 unk_2C;
+/* 0x2C */ f32 unk_2C; /* probably vec3 -- start pos */
 /* 0x30 */ f32 unk_30;
 /* 0x34 */ f32 unk_34;
-/* 0x38 */ f32 unk_38;
+/* 0x38 */ f32 unk_38; /* probably vec3 -- end pos */
 /* 0x3C */ f32 unk_3C;
 /* 0x40 */ f32 unk_40;
-/* 0x44 */ f32 unk_44;
-/* 0x48 */ f32 unk_48;
-/* 0x4C */ f32 unk_4C;
-/* 0x50 */ f32 unk_50;
-/* 0x50 */ f32 unk_54;
-/* 0x50 */ f32 unk_58;
+/* 0x44 */ f32 unk_44; /* ??? */
+/* 0x48 */ f32 unk_48; /* ??? */
+/* 0x4C */ f32 unk_4C; /* ??? degrees? */
+/* 0x50 */ f32 unk_50; /* current angle? */
+/* 0x50 */ f32 unk_54; /* start angle? */
+/* 0x50 */ f32 unk_58; /* end angle? */
 } JumpGameInnerData; /* size = 5C */
 
 typedef struct JumpGameData {
@@ -2529,7 +2529,8 @@ typedef struct JumpGameData {
 /* 0x010 */ s32 targetScore; // targetScore
 /* 0x014 */ s32 scoreWindowPosX;
 /* 0x018 */ s32 unk_18;
-/* 0x01C */ s8  unk_1C[0x58];
+/* 0x01C */ s32 unk_1C[11];
+/* 0x048 */ s32 unk_48[11];
 /* 0x074 */ JumpGameInnerData arr[11];
 } JumpGameData; /* size = 0x468 */
 
