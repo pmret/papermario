@@ -909,6 +909,8 @@ void clear_trigger_data(void);
 void clear_script_list(void);
 void clear_entity_data(s32);
 void clear_effect_data(void);
+
+void clear_saved_variables(void);
 void clear_area_flags(void);
 
 void func_802BFB44_323694(f32 arg0);

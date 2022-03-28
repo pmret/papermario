@@ -2459,7 +2459,7 @@ typedef struct SaveMetadata {
     /* 0x04 */ u8 spiritsRescued;
     /* 0x05 */ char unk_05[0x1];
     /* 0x06 */ s8 level;
-    /* 0x07 */ char filename[8];
+    /* 0x07 */ unsigned char filename[8];
     /* 0x0F */ char unk_0F[0x1];
     /* 0x10 */ s32 unk_10;
     /* 0x14 */ s32 unk_14;
