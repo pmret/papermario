@@ -409,12 +409,13 @@ ApiStatus func_80241234_E13994(Evt* script, s32 isInitialCall) {
     s32 i;
 
     if (isInitialCall) {
-
+        // choose one of four initial configurations at random
         configuration = rand_int(1000) % 4;
         for(i = 0; i < 11; i++) {
             data->unk_1C[i] = D_80241B9C_E142FC[configuration][i];
         }
 
+        // randomly swap 1000 pairs
         for(i = 0; i < 1000; i++) {
             indexA = rand_int(10000) % 11;
             indexB = rand_int(10000) % 11;

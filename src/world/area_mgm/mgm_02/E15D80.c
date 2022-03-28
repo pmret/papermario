@@ -1,5 +1,10 @@
 #include "mgm_02.h"
 
+#define SCOREKEEPER_ENEMY_IDX 0
+#define SMASH_DATA_VAR_IDX 5
+
+#define PLAY_COST 10
+
 INCLUDE_ASM(s32, "world/area_mgm/mgm_02/E15D80", func_80240000_E15D80);
 
 INCLUDE_ASM(s32, "world/area_mgm/mgm_02/E15D80", func_80240430_E161B0);
@@ -32,8 +37,27 @@ INCLUDE_ASM(s32, "world/area_mgm/mgm_02/E15D80", func_80242274_E17FF4);
 
 INCLUDE_ASM(s32, "world/area_mgm/mgm_02/E15D80", func_802422D0_E18050);
 
-INCLUDE_ASM(s32, "world/area_mgm/mgm_02/E15D80", func_80242314_E18094);
+/* N(GetCoinCount) */
+ApiStatus func_80242314_E18094(Evt* script, s32 isInitialCall) {
+    evt_set_variable(script, LW(0xA), gPlayerData.coins);
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "world/area_mgm/mgm_02/E15D80", func_80242340_E180C0);
+/* N(TakeCoinCost) */
+ApiStatus func_80242340_E180C0(Evt* script, s32 isInitialCall) {
+    PlayerData* playerData = &gPlayerData;
 
-INCLUDE_ASM(s32, "world/area_mgm/mgm_02/E15D80", func_802423A4_E18124);
+    if (isInitialCall) {
+        playerData->smashGamePlays++;
+        script->functionTemp[0] = 0;
+    }
+    add_coins(-1);
+    sfx_play_sound(SOUND_211);
+
+    return (++script->functionTemp[0] == PLAY_COST) ? ApiStatus_DONE2 : ApiStatus_BLOCK;
+}
+
+ApiStatus func_802423A4_E18124(Evt* script, s32 isInitialCall) {
+    func_800E96C8();
+    return ApiStatus_DONE2;
+}
