@@ -65,10 +65,10 @@
 #define SCREEN_HEIGHT 240
 
 // Alternative to libultra's M_PI: non-float version; more digits cause issues
-#define PI          3.141592f
-#define PI_D        3.141592
-#define TAU         6.28318f
-#define PI_S        3.14159f // Shorter PI
+#define PI      3.141592f
+#define PI_D    3.141592
+#define TAU     6.28318f
+#define PI_S    3.14159f // Shorter PI
 
 #define SPRITE_WORLD_SCALE 0.71428573f
 

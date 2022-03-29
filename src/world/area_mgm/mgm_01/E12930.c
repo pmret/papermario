@@ -67,7 +67,7 @@ typedef struct JumpGameData {
 extern EntityBlueprint D_802EA0C4;
 
 extern s32 MessagePlural;
-extern s16 MessageSingular;
+extern s32 MessageSingular;
 extern s32 D_80243560_E15CC0; /* TODO: assign proper type for this data */
 
 extern s8 D_80241AC8_E14228[NUM_BLOCKS]; /* blockPos.x */

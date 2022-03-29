@@ -549,6 +549,7 @@ enum SoundIDs {
     SOUND_211                       = 0x00000211,
     SOUND_213                       = 0x00000213,
     SOUND_215                       = 0x00000215,
+    SOUND_21C                       = 0x0000021C,
     SOUND_MENU_ERROR                = 0x0000021D,
     SOUND_231                       = 0x00000231,
     SOUND_246                       = 0x00000246,
