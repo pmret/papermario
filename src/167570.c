@@ -168,8 +168,8 @@ void filemenu_yesno_handle_input(MenuPanel* menu) {
                                              69;
                         gWindows[47].pos.y = ((gWindows[47].parent != -1) ?
                                              (gWindows[gWindows[47].parent].height / 2) : 120) - gWindows[47].height / 2;
-                        set_window_update(0x2F, 1);
-                        set_window_update(0x32, (s32)filemenu_update_hidden_name_confirm);
+                        set_window_update(WINDOW_ID_47, WINDOW_UPDATE_SHOW);
+                        set_window_update(WINDOW_ID_50, (s32)filemenu_update_hidden_name_confirm);
 
                         slot = filemenu_menus[0]->selected;
                         for (i = 0; i < ARRAY_COUNT(gSaveSlotMetadata->filename); i++) {
@@ -191,8 +191,8 @@ void filemenu_yesno_handle_input(MenuPanel* menu) {
                                              83;
                         gWindows[47].pos.y = ((gWindows[47].parent != -1) ?
                                              (gWindows[gWindows[47].parent].height / 2) : 120) - gWindows[47].height / 2;
-                        set_window_update(0x2F, 1);
-                        set_window_update(0x32, (s32)filemenu_update_hidden_name_confirm);
+                        set_window_update(WINDOW_ID_47, WINDOW_UPDATE_SHOW);
+                        set_window_update(WINDOW_ID_50, (s32)filemenu_update_hidden_name_confirm);
                         fio_load_game(filemenu_loadedFileIdx);
                         gSaveSlotMetadata[filemenu_iterFileIdx] = gSaveSlotMetadata[filemenu_loadedFileIdx];
                         fio_save_game(filemenu_iterFileIdx);
@@ -208,8 +208,8 @@ void filemenu_yesno_handle_input(MenuPanel* menu) {
                                              84;
                         gWindows[47].pos.y = ((gWindows[47].parent != -1) ?
                                              (gWindows[gWindows[47].parent].height / 2) : 120) - gWindows[47].height / 2;
-                        set_window_update(0x2F, 1);
-                        set_window_update(0x32, (s32)filemenu_update_hidden_name_confirm);
+                        set_window_update(WINDOW_ID_47, WINDOW_UPDATE_SHOW);
+                        set_window_update(WINDOW_ID_50, (s32)filemenu_update_hidden_name_confirm);
                         gSaveSlotMetadata[filemenu_menus[0]->selected] = gSaveSlotMetadata[gGameStatusPtr->saveSlot];
                         fio_save_game(filemenu_menus[0]->selected);
                         gSaveSlotHasData[filemenu_menus[0]->selected] = TRUE;
@@ -228,20 +228,20 @@ void filemenu_yesno_handle_input(MenuPanel* menu) {
                         }
                         fio_save_game(slot2);
                         gSaveSlotHasData[slot2] = TRUE;
-                        set_window_update(0x30, (s32)filemenu_update_hidden_name_input);
-                        set_window_update(0x31, (s32)filemenu_update_hidden_name_input);
-                        set_window_update(0x2D, (s32)filemenu_update_show_with_rotation);
-                        set_window_update(0x33, (s32)filemenu_update_show_with_rotation);
-                        set_window_update(0x34, (s32)filemenu_update_show_with_rotation);
-                        set_window_update(0x35, (s32)filemenu_update_show_with_rotation);
-                        set_window_update(0x36, (s32)filemenu_update_show_with_rotation);
-                        set_window_update(0x37, (s32)filemenu_update_show_with_rotation);
-                        set_window_update(0x35, (s32)filemenu_update_show_with_rotation);
-                        set_window_update(0x38, (s32)filemenu_update_show_with_rotation);
-                        set_window_update(0x39, (s32)filemenu_update_show_with_rotation);
-                        set_window_update(0x3A, (s32)filemenu_update_show_with_rotation);
-                        set_window_update(0x3B, (s32)filemenu_update_show_with_rotation);
-                        set_window_update(0x32, (s32)filemenu_update_hidden_name_confirm);
+                        set_window_update(WINDOW_ID_48, (s32)filemenu_update_hidden_name_input);
+                        set_window_update(WINDOW_ID_49, (s32)filemenu_update_hidden_name_input);
+                        set_window_update(WINDOW_ID_45, (s32)filemenu_update_show_with_rotation);
+                        set_window_update(WINDOW_ID_51, (s32)filemenu_update_show_with_rotation);
+                        set_window_update(WINDOW_ID_52, (s32)filemenu_update_show_with_rotation);
+                        set_window_update(WINDOW_ID_53, (s32)filemenu_update_show_with_rotation);
+                        set_window_update(WINDOW_ID_54, (s32)filemenu_update_show_with_rotation);
+                        set_window_update(WINDOW_ID_55, (s32)filemenu_update_show_with_rotation);
+                        set_window_update(WINDOW_ID_53, (s32)filemenu_update_show_with_rotation);
+                        set_window_update(WINDOW_ID_56, (s32)filemenu_update_show_with_rotation);
+                        set_window_update(WINDOW_ID_57, (s32)filemenu_update_show_with_rotation);
+                        set_window_update(WINDOW_ID_58, (s32)filemenu_update_show_with_rotation);
+                        set_window_update(WINDOW_ID_59, (s32)filemenu_update_show_with_rotation);
+                        set_window_update(WINDOW_ID_50, (s32)filemenu_update_hidden_name_confirm);
                         filemenu_8024C098 = 2;
                         filemenu_menus[2]->page = 3;
                         gWindows[47].width = 184;
@@ -251,7 +251,7 @@ void filemenu_yesno_handle_input(MenuPanel* menu) {
                                              68;
                         gWindows[47].pos.y = ((gWindows[47].parent != -1) ?
                                              (gWindows[gWindows[47].parent].height / 2) : 120) - gWindows[47].height / 2;
-                        set_window_update(0x2F, 1);
+                        set_window_update(WINDOW_ID_47, WINDOW_UPDATE_SHOW);
                         break;
                     case 4:
                         slot3 = filemenu_menus[0]->selected;
@@ -273,28 +273,28 @@ void filemenu_yesno_handle_input(MenuPanel* menu) {
                     case 1:
                     case 3:
                         filemenu_8024C098 = 0;
-                        set_window_update(0x32, (s32)filemenu_update_hidden_name_confirm);
+                        set_window_update(WINDOW_ID_50, (s32)filemenu_update_hidden_name_confirm);
                         break;
                     case 2:
                         filemenu_8024C098 = 3;
-                        set_window_update(0x32, (s32)filemenu_update_hidden_name_confirm);
+                        set_window_update(WINDOW_ID_50, (s32)filemenu_update_hidden_name_confirm);
                         break;
                     case 4:
                         filemenu_8024C098 = 0;
                         slot4 = filemenu_menus[0]->selected;
-                        set_window_update(0x2D, (s32)filemenu_update_show_with_rotation);
-                        set_window_update(0x33, (s32)filemenu_update_show_with_rotation);
-                        set_window_update(0x34, (s32)filemenu_update_show_with_rotation);
-                        set_window_update(0x35, (s32)filemenu_update_show_with_rotation);
-                        set_window_update(0x36, (s32)filemenu_update_show_with_rotation);
-                        set_window_update(0x37, (s32)filemenu_update_show_with_rotation);
-                        set_window_update(0x35, (s32)filemenu_update_show_with_rotation);
-                        set_window_update(0x38, (s32)filemenu_update_show_with_rotation);
-                        set_window_update(0x39, (s32)filemenu_update_show_with_rotation);
-                        set_window_update(0x3A, (s32)filemenu_update_show_with_rotation);
-                        set_window_update(0x3B, (s32)filemenu_update_show_with_rotation);
+                        set_window_update(WINDOW_ID_45, (s32)filemenu_update_show_with_rotation);
+                        set_window_update(WINDOW_ID_51, (s32)filemenu_update_show_with_rotation);
+                        set_window_update(WINDOW_ID_52, (s32)filemenu_update_show_with_rotation);
+                        set_window_update(WINDOW_ID_53, (s32)filemenu_update_show_with_rotation);
+                        set_window_update(WINDOW_ID_54, (s32)filemenu_update_show_with_rotation);
+                        set_window_update(WINDOW_ID_55, (s32)filemenu_update_show_with_rotation);
+                        set_window_update(WINDOW_ID_53, (s32)filemenu_update_show_with_rotation);
+                        set_window_update(WINDOW_ID_56, (s32)filemenu_update_show_with_rotation);
+                        set_window_update(WINDOW_ID_57, (s32)filemenu_update_show_with_rotation);
+                        set_window_update(WINDOW_ID_58, (s32)filemenu_update_show_with_rotation);
+                        set_window_update(WINDOW_ID_59, (s32)filemenu_update_show_with_rotation);
                         set_window_update(slot4 + 0x38, (s32)filemenu_update_deselect_file);
-                        set_window_update(0x32, 2);
+                        set_window_update(WINDOW_ID_50, WINDOW_UPDATE_HIDE);
                         break;
                 }
                 break;
@@ -312,28 +312,28 @@ void filemenu_yesno_handle_input(MenuPanel* menu) {
             case 1:
             case 3:
                 filemenu_8024C098 = 0;
-                set_window_update(0x32, (s32)filemenu_update_hidden_name_confirm);
+                set_window_update(WINDOW_ID_50, (s32)filemenu_update_hidden_name_confirm);
                 break;
             case 2:
                 filemenu_8024C098 = 3;
-                set_window_update(0x32, (s32)filemenu_update_hidden_name_confirm);
+                set_window_update(WINDOW_ID_50, (s32)filemenu_update_hidden_name_confirm);
                 break;
             case 4:
                 filemenu_8024C098 = 0;
                 slot = filemenu_menus[0]->selected;
-                set_window_update(0x2D, (s32)filemenu_update_show_with_rotation);
-                set_window_update(0x33, (s32)filemenu_update_show_with_rotation);
-                set_window_update(0x34, (s32)filemenu_update_show_with_rotation);
-                set_window_update(0x35, (s32)filemenu_update_show_with_rotation);
-                set_window_update(0x36, (s32)filemenu_update_show_with_rotation);
-                set_window_update(0x37, (s32)filemenu_update_show_with_rotation);
-                set_window_update(0x35, (s32)filemenu_update_show_with_rotation);
-                set_window_update(0x38, (s32)filemenu_update_show_with_rotation);
-                set_window_update(0x39, (s32)filemenu_update_show_with_rotation);
-                set_window_update(0x3A, (s32)filemenu_update_show_with_rotation);
-                set_window_update(0x3B, (s32)filemenu_update_show_with_rotation);
-                set_window_update(slot + 0x38, (s32)filemenu_update_deselect_file);
-                set_window_update(0x32, 2);
+                set_window_update(WINDOW_ID_45, (s32)filemenu_update_show_with_rotation);
+                set_window_update(WINDOW_ID_51, (s32)filemenu_update_show_with_rotation);
+                set_window_update(WINDOW_ID_52, (s32)filemenu_update_show_with_rotation);
+                set_window_update(WINDOW_ID_53, (s32)filemenu_update_show_with_rotation);
+                set_window_update(WINDOW_ID_54, (s32)filemenu_update_show_with_rotation);
+                set_window_update(WINDOW_ID_55, (s32)filemenu_update_show_with_rotation);
+                set_window_update(WINDOW_ID_53, (s32)filemenu_update_show_with_rotation);
+                set_window_update(WINDOW_ID_56, (s32)filemenu_update_show_with_rotation);
+                set_window_update(WINDOW_ID_57, (s32)filemenu_update_show_with_rotation);
+                set_window_update(WINDOW_ID_58, (s32)filemenu_update_show_with_rotation);
+                set_window_update(WINDOW_ID_59, (s32)filemenu_update_show_with_rotation);
+                set_window_update(slot + WINDOW_ID_56, (s32)filemenu_update_deselect_file);
+                set_window_update(WINDOW_ID_50, WINDOW_UPDATE_HIDE);
                 break;
         }
     }

@@ -704,8 +704,8 @@ void filemenu_cleanup(void) {
         set_window_update(i, WINDOW_UPDATE_HIDE);
     }
 
-    set_window_update(0x18, WINDOW_UPDATE_HIDE);
-    set_window_update(0x17, WINDOW_UPDATE_HIDE);
+    set_window_update(WINDOW_ID_PAUSE_TUTORIAL, WINDOW_UPDATE_HIDE);
+    set_window_update(WINDOW_ID_PAUSE_DECRIPTION, WINDOW_UPDATE_HIDE);
     func_80244BC4();
 }
 
