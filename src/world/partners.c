@@ -766,7 +766,7 @@ void partner_walking_update_player_tracking(Npc* partner) {
         isPlayerJumping = FALSE;
     }
     currentSnapshot = &gPlayerMoveHistory[gPlayerMoveHistoryIndex];
-    if (((currentSnapshot->isJumping == 0) || (isPlayerJumping == 0)) &&
+    if ((!currentSnapshot->isJumping || !isPlayerJumping) &&
         ((currentSnapshot->pos.x != playerStatus->position.x) || (currentSnapshot->pos.y != playerStatus->position.y)
         || (currentSnapshot->pos.z != playerStatus->position.z))) {
         if (D_8010CFBC != gPlayerMoveHistoryIndex + 1) {

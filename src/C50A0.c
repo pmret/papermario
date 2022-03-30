@@ -17,6 +17,8 @@ extern s16 D_80155D8C;
 extern s16 D_80155D8E;
 extern s16 D_80155D90;
 
+extern s32* SparkleScript_Coin;
+
 void item_entity_load(ItemEntity*);
 void item_entity_update(ItemEntity*);
 void appendGfx_item_entity(void*);
@@ -186,9 +188,6 @@ INCLUDE_ASM(s32, "C50A0", make_item_entity_at_player);
 
 INCLUDE_ASM(s32, "C50A0", item_entity_update);
 
-extern s32* SparkleScript_Coin;
-
-//INCLUDE_ASM(s32, "C50A0", update_item_entities);
 void update_item_entities(void) {
     ItemEntity* entity;
     ItemEntity* entity2;

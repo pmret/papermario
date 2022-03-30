@@ -7,62 +7,6 @@ void entity_BrickBlock_idle(Entity* entity) {
 }
 
 INCLUDE_ASM(void, "entity/103CD0", entity_shattering_init_pieces, Entity* entity, void* arg1, void* arg2);
-/*void entity_shattering_init_pieces(Entity* entity, void* arg1, void* arg2) {
-    Matrix4f sp10, sp50;
-    SwitchData* data = entity->dataBuf.swtch;
-    s32 i;
-
-    s32 phi_s7;
-    u16* phi_s3;
-    s32 phi_s0;
-    f32 phi_f20;
-
-
-    data->unk_34 = entity->vertexData[(s32)arg1].m;
-    entity->renderSetupFunc = entity_shattering_setupGfx;
-    entity->alpha = 255;
-    entity->position.y = data->unk_38;
-    guTranslateF(sp50, entity->position.x, entity->position.y, entity->position.z);
-
-    if (!is_block_on_ground(entity)) {
-        phi_s7 = 1;
-    } else {
-        phi_s7 = 2;
-    }
-
-    data->unk_3E = 0;
-    data->unk_3C.s = 0xFF;
-    phi_s3 = data; // ???
-
-    for (i = 0; i < ARRAY_COUNT(data->fragmentRotX); i++) {
-        guMtxL2F(sp10, &entity->vertexData[(s32)arg2 & 0xFFFF]);
-        guMtxCatF(sp50, sp10, sp10);
-        data->fragmentPosX[i] = sp10[3][0];
-        data->fragmentPosY[i] = sp10[3][1];
-        data->fragmentPosZ[i] = sp10[3][2];
-        data->unk_72[i] = -rand_int(255);
-
-        if (phi_s7 == 1) {
-            phi_s3[i] |= 1;
-            phi_s0 = 20;
-            phi_f20 = 6.4f;
-        } else {
-            phi_s3[i] |= 2;
-            phi_s0 = 40;
-            phi_f20 = 8.6f;
-        }
-
-        data->unk_59[i] = phi_s0 + rand_int(10);
-        if ((i % 2) == 0) {
-            data->unk_59[i] = -data->unk_59[i];
-        }
-
-        data->unk_1EC[i] = phi_f20 + (f32)(rand_float() * 2.7);
-        data->unk_40[i] = 0;
-        data->fragmentRotX[i] = 0;
-        data->fragmentRotY[i] = 0;
-    }
-}*/
 
 INCLUDE_ASM(void, "entity/103CD0", entity_shattering_idle, Entity* entity);
 
