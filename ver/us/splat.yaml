@@ -770,7 +770,8 @@ segments:
     subsegments:
     - [0x102610, c, entity/SaveBlock]
     - [0x102C80, c, entity/Switch]
-    - [0x104730, c, 104730]
+    - [0x103CD0, c, entity/103CD0]
+    - [0x104730, c, entity/104730]
     - [0x104940, c, entity/Block]
     - [0x105700, c, entity/ItemBlock]
     - [0x105F90, c, entity/HeartBlock]
@@ -786,7 +787,7 @@ segments:
     - [0x10AAF0, data]
     #- [0x10AB70, i4,      shadow/10AB70, 32, 32]
     #- [0x10AD70, i4,      shadow/10AD70, 32, 32]
-    - [0x10AF70, .data, 104730]
+    - [0x10AF70, .data, entity/104730]
     - [0x10B610, data]
     - [0x10C880]
   - type: code

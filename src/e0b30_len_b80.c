@@ -239,7 +239,7 @@ s32 bgm_set_song(s32 playerIndex, s32 songID, s32 variation, s32 fadeOutTime, s1
 
 s32 func_8014A964(s32 playerIndex, s32 songID, s32 variation, s32 fadeInTime, s16 arg4, s16 arg5) {
     if (gGameStatusPtr->demoState != 0) {
-        return 1;
+        return TRUE;
     } else {
         MusicSettings* musicSetting = &gMusicSettings[playerIndex];
 
@@ -247,7 +247,7 @@ s32 func_8014A964(s32 playerIndex, s32 songID, s32 variation, s32 fadeInTime, s1
             func_800559C4(musicSetting->songName);
             musicSetting->flags &= ~MUSIC_SETTINGS_FLAGS_1;
 
-            return 1;
+            return TRUE;
         } else {
             s32 defaultVariation = bgm_get_map_default_variation(songID);
             if (defaultVariation >= 0) {
@@ -263,7 +263,7 @@ s32 func_8014A964(s32 playerIndex, s32 songID, s32 variation, s32 fadeInTime, s1
             musicSetting->unk_02 = 1;
             musicSetting->flags &= ~MUSIC_SETTINGS_FLAGS_2;
 
-            return 1;
+            return TRUE;
         }
     }
 }
@@ -272,11 +272,11 @@ s32 func_8014AA54(s32 playerIndex, s32 arg1, s16 arg2) {
     MusicSettings* musicSetting = &gMusicSettings[playerIndex];
 
     if (!(musicSetting->flags & MUSIC_SETTINGS_FLAGS_1)) {
-        return 0;
+        return FALSE;
     }
 
     if (!(musicSetting->flags & MUSIC_SETTINGS_FLAGS_2)) {
-        return 0;
+        return FALSE;
     }
 
     switch (arg2) {
@@ -290,8 +290,7 @@ s32 func_8014AA54(s32 playerIndex, s32 arg1, s16 arg2) {
             func_80056068(musicSetting->songName, arg1);
             break;
     }
-
-    return 1;
+    return TRUE;
 }
 
 s32 func_8014AB0C(s32 playerIndex, s16 arg1) {
@@ -367,25 +366,21 @@ void bgm_update_volume(void) {
     }
 }
 
-// can't figure out the loop
-#ifdef NON_EQUIVALENT
 s32 func_8014AD40(void) {
+    MusicSettings* settings = &gMusicSettings[0];
     s32 i;
 
-    for (i = 0; i < 2; i++) {
-        if (!(gMusicSettings[i].flags & MUSIC_SETTINGS_FLAGS_1)) {
+    for (i = 0; i < 2; i++, settings++) {
+        if (!(settings->flags & MUSIC_SETTINGS_FLAGS_1)) {
             continue;
         }
 
-        if (func_800559FC(gMusicSettings[i].songName) != 0) {
-            return 1;
+        if (func_800559FC(settings->songName)) {
+            return TRUE;
         }
     }
-    return 0;
+    return FALSE;
 }
-#else
-INCLUDE_ASM(s32, "e0b30_len_b80", func_8014AD40);
-#endif
 
 void bgm_pop_song(void) {
     MusicSettings* musicSetting = &gMusicSettings[0];

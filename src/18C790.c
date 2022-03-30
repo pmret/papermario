@@ -619,7 +619,7 @@ void btl_state_update_celebration(void) {
                 x = 20;
                 y = 186;
                 set_window_properties(8, 20, 186, 280, 32, 20, func_80260948, NULL, -1);
-                set_window_update(8, WINDOW_UPDATE_SHOW);
+                set_window_update(WINDOW_ID_8, WINDOW_UPDATE_SHOW);
                 gBattleState2 = BATTLE_STATE2_UNK_8;
             }
             break;
@@ -662,7 +662,7 @@ void btl_state_update_celebration(void) {
             break;
         case BATTLE_STATE2_UNK_9:
             hud_element_free(D_8029FAE8);
-            set_window_update(8, WINDOW_UPDATE_HIDE);
+            set_window_update(WINDOW_ID_8, WINDOW_UPDATE_HIDE);
 
             switch (battleStatus->currentSubmenu) {
                 case 0:
@@ -770,7 +770,7 @@ void btl_state_update_celebration(void) {
             x = 160 - (width / 2);
             y = 80;
             set_window_properties(9, x, y, width, 28, 10, func_80260A20, NULL, -1);
-            set_window_update(9, WINDOW_UPDATE_SHOW);
+            set_window_update(WINDOW_ID_9, WINDOW_UPDATE_SHOW);
             D_8029FB4C = 60;
             gBattleState2 = BATTLE_STATE2_UNK_10;
             break;
@@ -782,7 +782,7 @@ void btl_state_update_celebration(void) {
                 D_8029FB4C--;
                 break;
             }
-            set_window_update(9, WINDOW_UPDATE_HIDE);
+            set_window_update(WINDOW_ID_9, WINDOW_UPDATE_HIDE);
             gBattleState2 = BATTLE_STATE2_UNK_8;
             break;
         case BATTLE_STATE2_UNK_14:

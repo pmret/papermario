@@ -353,10 +353,10 @@ void filemenu_main_init(MenuPanel* menu) {
     *posXPtr = x;
 
     if (menu->page != 0) {
-        set_window_update(0x35, WINDOW_UPDATE_HIDE);
-        set_window_update(0x37, WINDOW_UPDATE_HIDE);
-        set_window_update(0x33, WINDOW_UPDATE_HIDE);
-        set_window_update(0x34, WINDOW_UPDATE_HIDE);
+        set_window_update(WINDOW_ID_53, WINDOW_UPDATE_HIDE);
+        set_window_update(WINDOW_ID_55, WINDOW_UPDATE_HIDE);
+        set_window_update(WINDOW_ID_51, WINDOW_UPDATE_HIDE);
+        set_window_update(WINDOW_ID_52, WINDOW_UPDATE_HIDE);
     }
     menu->initialized = 1;
 }
@@ -495,19 +495,19 @@ void filemenu_main_handle_input(MenuPanel* menu) {
                         filemenu_8024C110[i] = 0xF7;
                     }
                     D_8024C090 = 0;
-                    set_window_update(0x30, filemenu_update_show_name_input);
-                    set_window_update(0x31, filemenu_update_show_name_input);
-                    set_window_update(0x2D, filemenu_update_hidden_with_rotation);
-                    set_window_update(0x33, filemenu_update_hidden_with_rotation);
-                    set_window_update(0x34, filemenu_update_hidden_with_rotation);
-                    set_window_update(0x35, filemenu_update_hidden_with_rotation);
-                    set_window_update(0x36, filemenu_update_hidden_with_rotation);
-                    set_window_update(0x37, filemenu_update_hidden_with_rotation);
-                    set_window_update(0x35, filemenu_update_hidden_with_rotation);
-                    set_window_update(0x38, filemenu_update_hidden_with_rotation);
-                    set_window_update(0x39, filemenu_update_hidden_with_rotation);
-                    set_window_update(0x3A, filemenu_update_hidden_with_rotation);
-                    set_window_update(0x3B, filemenu_update_hidden_with_rotation);
+                    set_window_update(WINDOW_ID_48, filemenu_update_show_name_input);
+                    set_window_update(WINDOW_ID_49, filemenu_update_show_name_input);
+                    set_window_update(WINDOW_ID_45, filemenu_update_hidden_with_rotation);
+                    set_window_update(WINDOW_ID_51, filemenu_update_hidden_with_rotation);
+                    set_window_update(WINDOW_ID_52, filemenu_update_hidden_with_rotation);
+                    set_window_update(WINDOW_ID_53, filemenu_update_hidden_with_rotation);
+                    set_window_update(WINDOW_ID_54, filemenu_update_hidden_with_rotation);
+                    set_window_update(WINDOW_ID_55, filemenu_update_hidden_with_rotation);
+                    set_window_update(WINDOW_ID_53, filemenu_update_hidden_with_rotation);
+                    set_window_update(WINDOW_ID_56, filemenu_update_hidden_with_rotation);
+                    set_window_update(WINDOW_ID_57, filemenu_update_hidden_with_rotation);
+                    set_window_update(WINDOW_ID_58, filemenu_update_hidden_with_rotation);
+                    set_window_update(WINDOW_ID_59, filemenu_update_hidden_with_rotation);
                     sfx_play_sound(SOUND_MENU_NEXT);
                     filemenu_8024C098 = 3;
                     temp_a0 = filemenu_menus[filemenu_8024C098];
@@ -517,50 +517,50 @@ void filemenu_main_handle_input(MenuPanel* menu) {
                 }
 
                 if (menu->selected == 6) {
-                    set_window_update(0x33, filemenu_update_hidden_options_left);
-                    set_window_update(0x34, filemenu_update_hidden_options_right);
-                    set_window_update(0x35, filemenu_update_hidden_options_bottom);
-                    set_window_update(0x36, filemenu_update_hidden_options_bottom);
-                    set_window_update(0x37, filemenu_update_hidden_options_bottom);
-                    set_window_update(0x38, filemenu_update_hidden_options_left);
-                    set_window_update(0x39, filemenu_update_hidden_options_right);
-                    set_window_update(0x3A, filemenu_update_hidden_options_left);
-                    set_window_update(0x3B, filemenu_update_hidden_options_right);
-                    set_window_update(0x2D, filemenu_update_hidden_title);
+                    set_window_update(WINDOW_ID_51, filemenu_update_hidden_options_left);
+                    set_window_update(WINDOW_ID_52, filemenu_update_hidden_options_right);
+                    set_window_update(WINDOW_ID_53, filemenu_update_hidden_options_bottom);
+                    set_window_update(WINDOW_ID_54, filemenu_update_hidden_options_bottom);
+                    set_window_update(WINDOW_ID_55, filemenu_update_hidden_options_bottom);
+                    set_window_update(WINDOW_ID_56, filemenu_update_hidden_options_left);
+                    set_window_update(WINDOW_ID_57, filemenu_update_hidden_options_right);
+                    set_window_update(WINDOW_ID_58, filemenu_update_hidden_options_left);
+                    set_window_update(WINDOW_ID_59, filemenu_update_hidden_options_right);
+                    set_window_update(WINDOW_ID_45, filemenu_update_hidden_title);
                     sfx_play_sound(SOUND_D6);
                     set_game_mode(0xF);
                 } else if (menu->selected == 4) {
                     sfx_play_sound(SOUND_MENU_NEXT);
                     menu->page = 1;
                     filemenu_set_selected(menu, 1, 2);
-                    set_window_update(0x33, filemenu_update_hidden_options_left);
-                    set_window_update(0x34, filemenu_update_hidden_options_right);
-                    set_window_update(0x35, filemenu_update_hidden_options_bottom);
-                    set_window_update(0x37, filemenu_update_hidden_options_bottom);
+                    set_window_update(WINDOW_ID_51, filemenu_update_hidden_options_left);
+                    set_window_update(WINDOW_ID_52, filemenu_update_hidden_options_right);
+                    set_window_update(WINDOW_ID_53, filemenu_update_hidden_options_bottom);
+                    set_window_update(WINDOW_ID_55, filemenu_update_hidden_options_bottom);
                 } else if (menu->selected == 5) {
                     sfx_play_sound(SOUND_MENU_NEXT);
                     menu->page = 3;
                     filemenu_set_selected(menu, 1, 2);
-                    set_window_update(0x33, filemenu_update_hidden_options_left);
-                    set_window_update(0x34, filemenu_update_hidden_options_right);
-                    set_window_update(0x35, filemenu_update_hidden_options_bottom);
-                    set_window_update(0x37, filemenu_update_hidden_options_bottom);
+                    set_window_update(WINDOW_ID_51, filemenu_update_hidden_options_left);
+                    set_window_update(WINDOW_ID_52, filemenu_update_hidden_options_right);
+                    set_window_update(WINDOW_ID_53, filemenu_update_hidden_options_bottom);
+                    set_window_update(WINDOW_ID_55, filemenu_update_hidden_options_bottom);
                 } else if (menu->selected < 4) {
                     sfx_play_sound(SOUND_MENU_NEXT);
-                    set_window_update(0x2D, filemenu_update_hidden_with_rotation);
-                    set_window_update(0x33, filemenu_update_hidden_with_rotation);
-                    set_window_update(0x34, filemenu_update_hidden_with_rotation);
-                    set_window_update(0x35, filemenu_update_hidden_with_rotation);
-                    set_window_update(0x36, filemenu_update_hidden_with_rotation);
-                    set_window_update(0x37, filemenu_update_hidden_with_rotation);
-                    set_window_update(0x35, filemenu_update_hidden_with_rotation);
-                    set_window_update(0x38, filemenu_update_hidden_with_rotation);
-                    set_window_update(0x39, filemenu_update_hidden_with_rotation);
-                    set_window_update(0x3A, filemenu_update_hidden_with_rotation);
-                    set_window_update(0x3B, filemenu_update_hidden_with_rotation);
-                    set_window_update(menu->selected + 56, filemenu_update_select_file);
+                    set_window_update(WINDOW_ID_45, filemenu_update_hidden_with_rotation);
+                    set_window_update(WINDOW_ID_51, filemenu_update_hidden_with_rotation);
+                    set_window_update(WINDOW_ID_52, filemenu_update_hidden_with_rotation);
+                    set_window_update(WINDOW_ID_53, filemenu_update_hidden_with_rotation);
+                    set_window_update(WINDOW_ID_54, filemenu_update_hidden_with_rotation);
+                    set_window_update(WINDOW_ID_55, filemenu_update_hidden_with_rotation);
+                    set_window_update(WINDOW_ID_53, filemenu_update_hidden_with_rotation);
+                    set_window_update(WINDOW_ID_56, filemenu_update_hidden_with_rotation);
+                    set_window_update(WINDOW_ID_57, filemenu_update_hidden_with_rotation);
+                    set_window_update(WINDOW_ID_58, filemenu_update_hidden_with_rotation);
+                    set_window_update(WINDOW_ID_59, filemenu_update_hidden_with_rotation);
+                    set_window_update(menu->selected + WINDOW_ID_56, filemenu_update_select_file);
                     sfx_play_sound(SOUND_MENU_NEXT);
-                    set_window_update(0x32, 1);
+                    set_window_update(WINDOW_ID_50, WINDOW_UPDATE_SHOW);
                     gWindows[50].pos.y = 143;
                     gWindows[50].width = 69;
                     gWindows[50].height = 44;
@@ -581,15 +581,15 @@ void filemenu_main_handle_input(MenuPanel* menu) {
                 if (menu->selected == 6) {
                     sfx_play_sound(SOUND_MENU_NEXT);
                     menu->page = 0;
-                    set_window_update(0x33, filemenu_update_show_options_left);
-                    set_window_update(0x34, filemenu_update_show_options_right);
-                    set_window_update(0x35, filemenu_update_show_options_bottom);
-                    set_window_update(0x37, filemenu_update_show_options_bottom);
+                    set_window_update(WINDOW_ID_51, filemenu_update_show_options_left);
+                    set_window_update(WINDOW_ID_52, filemenu_update_show_options_right);
+                    set_window_update(WINDOW_ID_53, filemenu_update_show_options_bottom);
+                    set_window_update(WINDOW_ID_55, filemenu_update_show_options_bottom);
                     filemenu_set_selected(menu, 0, 2);
                 } else if (menu->selected < 4) {
                     if (gSaveSlotHasData[menu->selected] != 0) {
                         sfx_play_sound(SOUND_MENU_NEXT);
-                        set_window_update(0x32, filemenu_update_show_name_confirm);
+                        set_window_update(WINDOW_ID_50, filemenu_update_show_name_confirm);
                         gWindows[50].pos.y = 121;
                         gWindows[50].width = 69;
                         gWindows[50].height = 44;
@@ -613,10 +613,10 @@ void filemenu_main_handle_input(MenuPanel* menu) {
                 if (menu->selected == 6) {
                     sfx_play_sound(SOUND_MENU_NEXT);
                     menu->page = 0;
-                    set_window_update(0x33, filemenu_update_show_options_left);
-                    set_window_update(0x34, filemenu_update_show_options_right);
-                    set_window_update(0x35, filemenu_update_show_options_bottom);
-                    set_window_update(0x37, filemenu_update_show_options_bottom);
+                    set_window_update(WINDOW_ID_51, filemenu_update_show_options_left);
+                    set_window_update(WINDOW_ID_52, filemenu_update_show_options_right);
+                    set_window_update(WINDOW_ID_53, filemenu_update_show_options_bottom);
+                    set_window_update(WINDOW_ID_55, filemenu_update_show_options_bottom);
                     filemenu_set_selected(menu, 0, 1);
                 } else if (menu->selected < 4) {
                     if (gSaveSlotHasData[menu->selected] != 0) {
@@ -649,15 +649,15 @@ void filemenu_main_handle_input(MenuPanel* menu) {
                             gWindows[47].pos.y = ((gWindows[47].parent != -1) ? (gWindows[gWindows[47].parent].height / 2) : 240 / 2) - gWindows[47].height / 2;
 
 
-                            set_window_update(0x2F, 1);
-                            set_window_update(0x32, 2);
+                            set_window_update(WINDOW_ID_47, WINDOW_UPDATE_SHOW);
+                            set_window_update(WINDOW_ID_50, WINDOW_UPDATE_HIDE);
                             fio_load_game(filemenu_loadedFileIdx);
                             gSaveSlotMetadata[filemenu_iterFileIdx] = gSaveSlotMetadata[filemenu_loadedFileIdx];
                             fio_save_game(filemenu_iterFileIdx);
                             gSaveSlotHasData[filemenu_iterFileIdx] = 1;
                         } else {
                             sfx_play_sound(SOUND_MENU_NEXT);
-                            set_window_update(0x32, filemenu_update_show_name_confirm);
+                            set_window_update(WINDOW_ID_50, filemenu_update_show_name_confirm);
 
                             gWindows[50].pos.y = 121;
                             gWindows[50].width = 69;
@@ -686,14 +686,14 @@ void filemenu_main_handle_input(MenuPanel* menu) {
                         sfx_play_sound(SOUND_MENU_NEXT);
                         filemenu_8024C098 = 2;
                         filemenu_menus[filemenu_8024C098]->page = 1;
-                        set_window_update(0x2C, main_menu_window_update);
-                        set_window_update(0x2F, 1);
-                        set_window_update(0x32, 2);
+                        set_window_update(WINDOW_ID_PAUSE_CURSOR, main_menu_window_update);
+                        set_window_update(WINDOW_ID_47, WINDOW_UPDATE_SHOW);
+                        set_window_update(WINDOW_ID_50, WINDOW_UPDATE_HIDE);
                         fio_save_game(menu->selected);
                         gSaveSlotHasData[menu->selected] = 1;
                     } else {
                         sfx_play_sound(SOUND_MENU_NEXT);
-                        set_window_update(0x32, filemenu_update_show_name_confirm);
+                        set_window_update(WINDOW_ID_50, filemenu_update_show_name_confirm);
                         gWindows[50].pos.y = 127;
                         gWindows[50].width = 69;
                         gWindows[50].height = 44;
@@ -735,35 +735,35 @@ void filemenu_main_handle_input(MenuPanel* menu) {
 
         switch (menu->page) {
             case 0:
-                set_window_update(0x33, filemenu_update_hidden_options_left);
-                set_window_update(0x34, filemenu_update_hidden_options_right);
-                set_window_update(0x35, filemenu_update_hidden_options_bottom);
-                set_window_update(0x36, filemenu_update_hidden_options_bottom);
-                set_window_update(0x37, filemenu_update_hidden_options_bottom);
-                set_window_update(0x38, filemenu_update_hidden_options_left);
-                set_window_update(0x39, filemenu_update_hidden_options_right);
-                set_window_update(0x3A, filemenu_update_hidden_options_left);
-                set_window_update(0x3B, filemenu_update_hidden_options_right);
-                set_window_update(0x2D, filemenu_update_hidden_title);
+                set_window_update(WINDOW_ID_51, filemenu_update_hidden_options_left);
+                set_window_update(WINDOW_ID_52, filemenu_update_hidden_options_right);
+                set_window_update(WINDOW_ID_53, filemenu_update_hidden_options_bottom);
+                set_window_update(WINDOW_ID_54, filemenu_update_hidden_options_bottom);
+                set_window_update(WINDOW_ID_55, filemenu_update_hidden_options_bottom);
+                set_window_update(WINDOW_ID_56, filemenu_update_hidden_options_left);
+                set_window_update(WINDOW_ID_57, filemenu_update_hidden_options_right);
+                set_window_update(WINDOW_ID_58, filemenu_update_hidden_options_left);
+                set_window_update(WINDOW_ID_59, filemenu_update_hidden_options_right);
+                set_window_update(WINDOW_ID_45, filemenu_update_hidden_title);
                 sfx_play_sound(SOUND_D6);
                 set_game_mode(0xF);
                 break;
             case 1:
                 menu->page = 0;
                 filemenu_set_selected(menu, 0, 2);
-                set_window_update(0x33, filemenu_update_show_options_left);
-                set_window_update(0x34, filemenu_update_show_options_right);
-                set_window_update(0x35, filemenu_update_show_options_bottom);
-                set_window_update(0x37, filemenu_update_show_options_bottom);
+                set_window_update(WINDOW_ID_51, filemenu_update_show_options_left);
+                set_window_update(WINDOW_ID_52, filemenu_update_show_options_right);
+                set_window_update(WINDOW_ID_53, filemenu_update_show_options_bottom);
+                set_window_update(WINDOW_ID_55, filemenu_update_show_options_bottom);
                 sfx_play_sound(SOUND_MENU_BACK);
                 break;
             case 3:
                 menu->page = 0;
                 filemenu_set_selected(menu, 1, 2);
-                set_window_update(0x33, filemenu_update_show_options_left);
-                set_window_update(0x34, filemenu_update_show_options_right);
-                set_window_update(0x35, filemenu_update_show_options_bottom);
-                set_window_update(0x37, filemenu_update_show_options_bottom);
+                set_window_update(WINDOW_ID_51, filemenu_update_show_options_left);
+                set_window_update(WINDOW_ID_52, filemenu_update_show_options_right);
+                set_window_update(WINDOW_ID_53, filemenu_update_show_options_bottom);
+                set_window_update(WINDOW_ID_55, filemenu_update_show_options_bottom);
                 sfx_play_sound(SOUND_MENU_BACK);
                 break;
             case 4:
