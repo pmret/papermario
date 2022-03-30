@@ -1,8 +1,13 @@
 #include "mgm_02.h"
 #include "hud_element.h"
+#include "effects.h"
+#include "model.h"
+
+void startup_draw_prim_rect_COPY(s16 left, s16 top, s16 right, s16 bottom, u16 r, u16 g, u16 b, u16 a);
 
 extern HudScript HudScript_BlueMeter[];
 extern HudScript HudScript_AButton[];
+extern HudScript HudScript_MashAButton[];
 
 extern s32 D_8024273C_E184BC[3][35]; /* configurations */
 extern s32 D_802428E0_E18660[35]; /* model IDs */
@@ -22,12 +27,20 @@ extern s32 D_80242A3C_E187BC[];
 #define PLAY_COST 10
 #define PLAY_TIME 900
 
-typedef enum SmashGameContentType {
+typedef enum SmashGameBoxCotent {
     BOX_CONTENT_FUZZY   = 0,
     BOX_CONTENT_BOMB    = 1,
     BOX_CONTENT_PEACH   = 2,
-    BOX_CONTENT_EMPTY   = 3 // luigi???
-} JumpGamePanelType;
+    BOX_CONTENT_EMPTY   = 3
+} SmashGameBoxCotent;
+
+// TODO: sort these out... something wrong
+typedef enum SmashGameBoxState {
+    BOX_STATE_FUZZY_INIT    = 0xD,
+    BOX_STATE_BOMB_INIT     = 0x21,
+    BOX_STATE_EMPTY_INIT    = 0x34,
+    BOX_STATE_PEACH_INIT    = 0x49,
+} SmashGameBoxState;
 
 typedef struct SmashGameBoxData {
 /* 0x00 */ s32 state;
@@ -55,10 +68,9 @@ typedef struct SmashGameData {
 } SmashGameData; /* size = 0x400 */
 
 //TODO: matches on decomp.me, but not OK here
-INCLUDE_ASM(s32, "world/area_mgm/mgm_02/E15D80", func_80240000_E15D80);
-extern void func_80240000_E15D80(void);
+//INCLUDE_ASM(s32, "world/area_mgm/mgm_02/E15D80", func_80240000_E15D80);
+//extern void func_80240000_E15D80(void);
 /* N(draw_score_display) */
-/*
 void func_80240000_E15D80(void) {
     Enemy* scorekeeper = get_enemy(0);
     SmashGameData* data = (SmashGameData*)scorekeeper->varTable[0];
@@ -96,10 +108,10 @@ void func_80240000_E15D80(void) {
     }
 
     if (scorekeeper->varTable[3] == 0) {
-        if (data->windowB_posX < 320) {
+        if (data->windowB_posX < SCREEN_WIDTH) {
             data->windowB_posX += 10;
-            if (data->windowB_posX > 320) {
-                data->windowB_posX = 320;
+            if (data->windowB_posX > SCREEN_WIDTH) {
+                data->windowB_posX = SCREEN_WIDTH;
             }
         }
     } else {
@@ -111,7 +123,7 @@ void func_80240000_E15D80(void) {
         }
     }
 
-    draw_box(0, 9, data->windowA_posX, 23, 0, 80, 38, 180, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, NULL, NULL, NULL, 320, 240, NULL);
+    draw_box(0, 9, data->windowA_posX, 23, 0, 80, 38, 180, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, NULL, NULL, NULL, SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
     draw_msg(0x80047, data->windowA_posX + 42, 28, 255, 0, 0);
     draw_number(10 - data->found, data->windowA_posX + 65, 43, 1, 0, 255, 3);
     draw_ci_image_with_clipping(&D_802482A0_E1E020, 32, 32, G_IM_FMT_CI, G_IM_SIZ_4b, &D_802484A0_E1E220,
@@ -121,7 +133,7 @@ void func_80240000_E15D80(void) {
     deciseconds = ((f32)(timeLeft % 30) * 10.0) / 30;
     seconds = timeLeft / 30;
 
-    draw_box(0, 0xB, data->windowB_posX, 27, 0, 60, 20, 180, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, NULL, NULL, NULL, 320, 240, NULL);
+    draw_box(0, 0xB, data->windowB_posX, 27, 0, 60, 20, 180, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, NULL, NULL, NULL, SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
     // draw whole seconds
     draw_number(seconds, data->windowB_posX + 29, 31, 1, 0, 255, 3);
     // draw tenths of seconds
@@ -129,7 +141,6 @@ void func_80240000_E15D80(void) {
     // draw dot
     draw_msg(0x80024, data->windowB_posX + 30, 29, 255, 0, 0);
 }
-*/
 
 /* N(work_draw_score) */
 void func_80240430_E161B0(void) {
@@ -201,6 +212,7 @@ ApiStatus func_802405D0_E16350(void) {
     return ApiStatus_DONE2;
 }
 
+/* N(OnHitBox) */
 ApiStatus func_80240644_E163C4(Evt* script, s32 isInitialCall0) {
     SmashGameData* data = (SmashGameData*)get_enemy(0)->varTable[0];
     s32 hitModelID;
@@ -220,19 +232,19 @@ ApiStatus func_80240644_E163C4(Evt* script, s32 isInitialCall0) {
     switch (data->arr[i].content) {                     
     case BOX_CONTENT_FUZZY:
         evt_set_variable(script, LW(0xD), data->arr[i].npcID);
-        data->arr[i].state = 0xD;
+        data->arr[i].state = BOX_STATE_FUZZY_INIT;
         break;
     case BOX_CONTENT_BOMB:
         evt_set_variable(script, LW(0xD), data->arr[i].npcID);
-        data->arr[i].state = 0x21;
+        data->arr[i].state = BOX_STATE_BOMB_INIT;
         break;
-    case 3:
+    case BOX_CONTENT_EMPTY:
         evt_set_variable(script, LW(0xD), data->arr[i].npcID);
-        data->arr[i].state = 0x34;
+        data->arr[i].state = BOX_STATE_EMPTY_INIT;
         break;
     case BOX_CONTENT_PEACH:
         data->found++;
-        data->arr[i].state = 0x49;
+        data->arr[i].state = BOX_STATE_PEACH_INIT;
         break;
     }
   
@@ -365,9 +377,449 @@ ApiStatus func_80240790_E16510(Evt* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_mgm/mgm_02/E15D80", func_80240BB0_E16930);
 
+//TODO
+/*
+ApiStatus func_80240BB0_E16930(Evt* script, s32 isInitialCall) {
+    SmashGameData* data;
+    Enemy* enemy;
+    Npc* npc;
+
+    Model* model;
+    Matrix4f mtx;
+    f32 centerX, centerY, centerZ;
+    f32 sizeX, sizeY, sizeZ;
+    f32 newY;
+    s32 i;
+
+    s32 gameFinished = 0;
+    s32 hittingPeachBlock = 0;
+    s32 writeback;
+
+    data = (SmashGameData*)get_enemy(0)->varTable[0];
+
+    for(i = 0; i < 35; i++)
+    {
+        if (data->arr[i].npcID != -1) {
+            enemy = get_enemy(data->arr[i].npcID);
+            npc = get_npc_unsafe(enemy->npcID);
+            switch (data->arr[i].state) {
+            case 0xA:
+                data->arr[i].state = 0xB;
+                data->arr[i].stateTimer = rand_int(210);
+                npc->pos.y = -1000.0f;
+                npc->flags &= -3;
+                disable_npc_shadow(npc);
+                // fallthrough
+            case 0xB:
+                if(--data->arr[i].stateTimer <= 0) {
+                    npc->currentAnim.w = 0x2B0002;
+                    data->arr[i].state = 0xC;
+                    sfx_play_sound_at_position(enemy->varTable[8], 0x100000, npc->pos.x, npc->pos.y, npc->pos.z);
+                    get_model_center_and_size(data->arr[i].modelID, &centerX, &centerY, &centerZ, &sizeX, &sizeY, &sizeZ);
+                    npc->jumpVelocity = 10.5f;
+                    npc->pos.x = centerX;
+                    npc->jumpScale = 1.5f;
+                    newY = centerY - 12.5;
+                    npc->pos.y = newY;
+                    npc->moveToPos.y = newY;
+                    npc->pos.z = centerZ + 2.0;
+                    data->arr[i].stateTimer = 0;
+                }
+                break;
+            case 0xC:
+                data->arr[i].stateTimer++;
+                npc->pos.y += npc->jumpVelocity;
+                npc->jumpVelocity -= npc->jumpScale;
+                if ((npc->moveToPos.y + 20.0f) < npc->pos.y) {
+                    enable_npc_shadow(npc);
+                } else {
+                    disable_npc_shadow(npc);
+                }
+                if ((npc->jumpVelocity < 0.0) && (npc->pos.y <= npc->moveToPos.y)) {
+                    data->arr[i].state = 0xB;
+                    data->arr[i].stateTimer = rand_int(330) + 90;
+                    npc->pos.y = -1000.0f;
+                    if (rand_int(100) < 50) {
+                        npc->yaw = 270.0f;
+                    } else {
+                        npc->yaw = 90.0f;
+                    }
+                    disable_npc_shadow(npc);
+                }
+                break;
+             case 0xD:
+                hud_element_set_script(data->hudElemID_AButton, &HudScript_AButton);
+                hud_element_set_alpha(data->hudElemID_AButton, 0xA0);
+                hud_element_set_alpha(data->hudElemID_Meter, 0xA0);
+                data->mashProgress = 0;
+                data->mashFlags |= 4;
+                enable_npc_shadow(npc);
+                data->mashFlags |= 3;
+                npc->duration = 8;
+                sfx_play_sound(enemy->varTable[8]);
+                data->arr[i].state = 0xE;;
+                gPlayerStatusPtr->anim = 0x10001;
+                npc->currentAnim.w = 0x2B0003;
+                get_model_center_and_size(data->arr[i].modelID, &centerX, &centerY, &centerZ, &sizeX, &sizeY, &sizeZ);
+                npc->pos.x = centerX;
+                npc->pos.y = centerY;
+                npc->pos.z = centerZ + 2.0;
+                npc->moveToPos.y = gPlayerStatusPtr->position.y + 35.0f;
+                npc->jumpVelocity = 10.5f;
+                npc->jumpScale = 1.5f;
+       
+                data->arr[i].stateTimer = 0;
+                fx_emote(0, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, 0.0f, 0xA, &writeback);
+                enemy->varTable[1] = npc->pos.x * 10.0f;
+                enemy->varTable[2] = npc->pos.y * 10.0f;
+                enemy->varTable[3] = npc->pos.z * 10.0f;
+                enemy->varTable[4] = gPlayerStatusPtr->position.x * 10.0f;
+                enemy->varTable[5] = (gPlayerStatusPtr->position.y + 28.0f) * 10.0f;
+                enemy->varTable[6] = (gPlayerStatusPtr->position.z + 2.0f) * 10.0f;
+                enemy->varTable[7] = 0;
+                break;
+            case 0xE:
+                enemy->varTable[7]++;
+                npc->pos.x = update_lerp(0, (f32)enemy->varTable[1] / 10.0, (f32) enemy->varTable[4] / 10.0, enemy->varTable[7], 8);
+                npc->pos.y = update_lerp(0, (f32)enemy->varTable[2] / 10.0, (f32) enemy->varTable[5] / 10.0, enemy->varTable[7], 8);
+                npc->pos.z = update_lerp(0, (f32)enemy->varTable[3] / 10.0, (f32) enemy->varTable[6] / 10.0, enemy->varTable[7], 8);
+                gPlayerStatusPtr->anim = 0x10001;
+                npc->duration--;
+                if ((npc->duration << 0x10) <= 0) { //TODO what??
+                    npc->currentAnim.w = 0x2B000F;
+                    gPlayerStatusPtr->anim = 0x1001B;
+                    data->mashProgress = 0;
+                    npc->pos.x = gPlayerStatusPtr->position.x;
+                    npc->pos.y = gPlayerStatusPtr->position.y + 28.0;
+                    npc->pos.z = gPlayerStatusPtr->position.z + 2.0;
+                    hud_element_set_script(data->hudElemID_AButton, &HudScript_MashAButton);
+                    hud_element_set_alpha(data->hudElemID_AButton, 0xFF);
+                    hud_element_set_alpha(data->hudElemID_Meter, 0xFF);
+                    data->arr[i].state = 0xF;
+                }
+                break;
+            case 0xF:
+                gPlayerStatusPtr->anim = 0x1001B;
+                if (gGameStatusPtr->pressedButtons & 0x8000) {
+                    data->mashProgress++;
+                }
+                if (data->mashProgress >= 0xC) {
+                    gPlayerStatusPtr->anim = 0x10002;
+                    data->mashFlags = ((data->mashFlags & ~1) | 2);
+                    data->arr[i].state = 0x10;
+                    npc->duration = 0xA;
+                    hud_element_set_script(data->hudElemID_AButton, &HudScript_AButton);
+                    hud_element_set_alpha(data->hudElemID_AButton, 0xA0);
+                    hud_element_set_alpha(data->hudElemID_Meter, 0xA0);
+                    npc->currentAnim.w = 0x2B0008;
+                    npc->pos.y += 3.0;
+                } 
+                break;
+            case 0x10:
+                npc->duration--;
+                if (npc->duration == 8) {
+                    data->mashFlags &= ~4;
+                }
+                if (npc->duration <= 0) {
+                    data->arr[i].state = 0x11;
+                    disable_npc_shadow(npc);
+                    npc->flags |= 2;
+                    fx_walking_dust(1, npc->pos.x, npc->pos.y + 10.0f, npc->pos.z + 1.0f, 0, 0);
+                }
+                break;
+
+            case 0x1E:
+                data->arr[i].state = 0x1F;
+                data->arr[i].stateTimer = rand_int(0xD2);
+                npc->pos.y = -1000.0f;
+                disable_npc_shadow(npc);
+                npc->flags &= -3;
+                // fallthrough
+            case 0x1F:
+                data->arr[i].stateTimer--;
+                if (data->arr[i].stateTimer <= 0) {
+                    data->arr[i].state = 0x20;
+                    sfx_play_sound_at_position(enemy->varTable[8], 0x100000, npc->pos.x, npc->pos.y, npc->pos.z);
+                    get_model_center_and_size(data->arr[i].modelID, &centerX, &centerY, &centerZ, &sizeX, &sizeY, &sizeZ);
+                    npc->jumpVelocity = 10.5f;
+                    npc->pos.x = centerX;
+                    npc->jumpScale = 1.5f;
+                    newY = centerY - 12.5;
+                    npc->pos.y = newY;
+                    npc->moveToPos.y = newY;
+                    npc->pos.z = centerZ + 2.0;
+                }
+                break;
+            case 0x20:
+                data->arr[i].stateTimer++;
+                npc->pos.y += npc->jumpVelocity;
+                npc->jumpVelocity -= npc->jumpScale;
+                if ((npc->moveToPos.y + 20.0f) < npc->pos.y) {
+                    enable_npc_shadow(npc);
+                } else {
+                    disable_npc_shadow(npc);
+                }
+                if ((npc->jumpVelocity < 0.0) && (npc->pos.y <= npc->moveToPos.y)) {
+                    data->arr[i].state = 0x1F;
+                    data->arr[i].stateTimer = rand_int(330) + 90;
+                    npc->pos.y = -1000.0f;
+                    if (rand_int(100) < 50) {
+                        npc->yaw = 270.0f;
+                    } else {
+                        npc->yaw = 90.0f;
+                    }
+                    disable_npc_shadow(npc);
+                }
+                break;
+            case 0x21:
+                enable_npc_shadow(npc);
+                npc->duration = 0xF;
+                npc->currentAnim.w = 0x2C0005;
+                data->mashFlags |= 3;
+                data->arr[i].state = 0x22;
+                get_model_center_and_size(data->arr[i].modelID, &centerX, &centerY, &centerZ, &sizeX, &sizeY, &sizeZ);
+                npc->pos.x = centerX;
+                npc->pos.y = centerY - 10.0f;
+                npc->pos.z = centerZ + 8.0;
+                fx_emote(0, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, 0.0f, 0xA, &writeback);
+                if (npc->pos.x > gPlayerStatusPtr->position.x) {
+                    npc->yaw = 270.0f;
+                    gPlayerStatusPtr->targetYaw = 95.0f;
+                } else {
+                    npc->yaw = 90.0f;
+                    gPlayerStatusPtr->targetYaw = 265.0f;
+                }
+                // fallthrough
+            case 0x22:
+                gPlayerStatusPtr->anim = 0x10001;
+                npc->duration--;
+                if ((npc->duration << 0x10) <= 0) { //TODO what??
+                    fx_explosion(0, npc->pos.x, npc->pos.y, npc->pos.z + 1.0f);
+                    npc->duration = 0x1E;
+                    npc->pos.y = -1000.0f;
+                    data->arr[i].state = 0x23;
+                    sfx_play_sound(0x2076);
+                }
+                break;
+            case 0x23:
+                npc->duration--;
+                if (npc->duration == 0x19) {
+                    gPlayerStatusPtr->anim = 0x1002F;
+                }
+                if (npc->duration <= 0) {
+                    gPlayerStatusPtr->anim = 0x10002;
+                    data->mashFlags = ((data->mashFlags & ~1) | 2);
+                    data->arr[i].state = 0x24;
+                    disable_npc_shadow(npc);
+                    npc->flags |= 2;
+                }
+                break;
+
+            case 0x46:
+                get_model_center_and_size(data->arr[i].modelID, &centerX, &centerY, &centerZ, &sizeX, &sizeY, &sizeZ);
+                data->arr[i].state = 0x47;
+                data->arr[i].stateTimer = rand_int(0xD2);
+                npc->pos.x = centerX;
+                npc->pos.y = centerY;
+                npc->moveToPos.y = centerY;
+                npc->pos.z = centerZ + 2.0;
+                disable_npc_shadow(npc);
+                // fallthrough
+            case 0x47:
+                data->arr[i].stateTimer--;
+                if (data->arr[i].stateTimer <= 0) {
+                    get_model_center_and_size(data->arr[i].modelID, &centerX, &centerY, &centerZ, &sizeX, &sizeY, &sizeZ);
+                    data->arr[i].state = 0x48;
+                    sfx_play_sound_at_position(0x214, 0x200000, npc->pos.x, npc->pos.y, npc->pos.z);
+                    get_model_center_and_size(data->arr[i].modelID, &centerX, &centerY, &centerZ, &sizeX, &sizeY, &sizeZ);
+                    npc->jumpVelocity = 10.0f;
+                    npc->pos.y = npc->moveToPos.y;
+                    npc->jumpScale = 1.1f;
+                    data->arr[i].stateTimer = 0;
+                    model = get_model_from_list_index(get_model_list_index_from_tree_index(data->arr[i].unk_18));
+                    model->flags &= -3;
+                    if (!(model->flags & 0x400)) {
+                        guTranslateF(model->transformMatrix, npc->pos.x, npc->pos.y, npc->pos.z);
+                        model->flags |= 0x1400;
+                    }
+                    else {
+                        guTranslateF(mtx, npc->pos.x, npc->pos.y, npc->pos.z);
+                        guMtxCatF(mtx, model->transformMatrix, model->transformMatrix);
+                    }
+                }
+                break;
+            case 0x48:
+                data->arr[i].stateTimer++;
+                npc->pos.y += npc->jumpVelocity;
+                npc->jumpVelocity -= npc->jumpScale;
+                model = get_model_from_list_index(get_model_list_index_from_tree_index(data->arr[i].unk_18));
+                if (!(model->flags & 0x400)) {
+                    guTranslateF(model->transformMatrix, npc->pos.x, npc->pos.y, npc->pos.z);
+                    model->flags |= 0x1400;
+                } else {
+                    guTranslateF(mtx, npc->pos.x, npc->pos.y, npc->pos.z);
+                    guMtxCatF(mtx, model->transformMatrix, model->transformMatrix);
+                }
+                if ((npc->moveToPos.y + 20.0f) < npc->pos.y) {
+                    enable_npc_shadow(npc);
+                } else {
+                    disable_npc_shadow(npc);
+                }
+                if ((npc->jumpVelocity < 0.0) && (npc->pos.y <= npc->moveToPos.y)) {
+                    data->arr[i].state = 0x47;
+                    data->arr[i].stateTimer = rand_int(330) + 90;
+                    disable_npc_shadow(npc);
+                    model->flags |= 2;
+                }
+                break;
+            case 0x49:
+                sfx_play_sound(0x21C);
+                model = get_model_from_list_index(get_model_list_index_from_tree_index(data->arr[i].unk_18));
+                enable_npc_shadow(npc);
+                npc->duration = 0;
+                data->arr[i].state = 0x4A;
+                model->flags &= -3;
+                // fallthrough
+            case 0x4A:
+                hittingPeachBlock = TRUE;
+                model = get_model_from_list_index(get_model_list_index_from_tree_index(data->arr[i].unk_18));
+                centerY = update_lerp(4, npc->moveToPos.y, npc->moveToPos.y + 30.0, npc->duration, 0x1E);
+                if (!(model->flags & 0x400)) {
+                    guTranslateF(model->transformMatrix, npc->pos.x, centerY, npc->pos.z);
+                    model->flags |= 0x1400;
+                } else {
+                    guTranslateF(mtx, npc->pos.x, centerY, npc->pos.z);
+                    guMtxCatF(mtx, model->transformMatrix, model->transformMatrix);
+                }
+                npc->duration++;
+                if (npc->duration >= 0x1E) {
+                    data->arr[i].state = 0x4B;
+                    disable_npc_shadow(npc);
+                    model->flags |= 2;
+                }
+                break;
+            case 0x4B:
+                break;
+            }
+        } else {
+            if (data->arr[i].state == 0x32) {
+                data->arr[i].state = 0x33;
+                data->arr[i].stateTimer = 0;
+            }
+        }
+    }
+
+    if (data->timeLeft > 0) {
+        if (data->found < 10) {
+            data->timeLeft--;
+            if(data->timeLeft == 750) {
+                sfx_play_sound(0x1A5);
+            } else if(data->timeLeft == 600) {
+                sfx_play_sound(0x1A5);
+            } else if(data->timeLeft == 450) {
+                sfx_play_sound(0x1A5);
+            } else if(data->timeLeft == 300) {
+                sfx_play_sound(0x1A6);
+            } else if(data->timeLeft == 270) {
+                sfx_play_sound(0x1A6);
+            } else if(data->timeLeft == 240) {
+                sfx_play_sound(0x1A6);
+            } else if(data->timeLeft == 210) {
+                sfx_play_sound(0x1A6);
+            } else if(data->timeLeft == 180) {
+                sfx_play_sound(0x1A6);
+            } else if(data->timeLeft == 150) {
+                sfx_play_sound(0x1A7);
+            } else if(data->timeLeft == 120) {
+                sfx_play_sound(0x1A7);
+            } else if(data->timeLeft == 90) {
+                sfx_play_sound(0x1A7);
+            } else if(data->timeLeft == 60) {
+                sfx_play_sound(0x1A7);
+            } else if(data->timeLeft == 30) {
+                sfx_play_sound(0x1A7);
+            }
+        }
+        if ((data->timeLeft > 0) && (data->found == 10)) {
+            if (!(data->mashFlags & 1)) {
+                data->mashFlags |= 3;
+            }
+        }
+    }
+    if ((data->timeLeft == 0) && hittingPeachBlock) {
+        if (!(data->mashFlags & 1)) {
+            data->mashFlags |= 3;
+        }
+    }
+    if (data->mashFlags & 2) {
+        data->mashFlags &= ~2;
+        if (data->mashFlags & 1) {
+            disable_player_input();
+            partner_disable_input();
+        } else {
+            enable_player_input();
+            partner_enable_input();
+        }
+    }
+    if (!hittingPeachBlock && ((data->found == 10) || ((data->timeLeft == 0) && (gPlayerStatusPtr->actionState != 0x12)))) { // ACTION_STATE_HAMMER
+        gameFinished = TRUE;
+    }
+    if (gameFinished) {
+
+        if (data->mashFlags & 1) {
+            enable_player_input();
+            partner_enable_input();
+        }
+        data->mashFlags = 0;
+
+        gPlayerStatusPtr->targetYaw = 180.0;
+        
+        // required to match
+        do {
+            sfx_play_sound((data->timeLeft == 0) ? (0x21D) : (0xD4));
+            gPlayerStatusPtr->anim = 0x10002;
+        } while (0);
+
+        return ApiStatus_DONE2;
+    }
+    return ApiStatus_BLOCK;
+}
+*/
+
 static char* N(exit_str_0) = "mgm_00";
 
-INCLUDE_ASM(s32, "world/area_mgm/mgm_02/E15D80", func_80241DCC_E17B4C);
+/* N(UpdateRecords) */
+ApiStatus func_80241DCC_E17B4C(Evt* script, s32 isInitialCall) {
+    PlayerData* playerData = &gPlayerData;
+    SmashGameData* data = (SmashGameData*)get_enemy(0)->varTable[0];
+    s32 seconds, deciseconds;
+    s32 outScore;
+
+    seconds = data->timeLeft  / 30;
+    deciseconds = ((f32)(data->timeLeft % 30) * 10.0) / 30;
+    
+    data->currentScore = (seconds * 10) + deciseconds;
+    playerData->smashGameTotal += data->currentScore;
+
+    if (playerData->smashGameTotal > 99999) {
+        playerData->smashGameTotal = 99999;
+    }
+    if (playerData->smashGameRecord < data->currentScore) {
+        playerData->smashGameRecord = data->currentScore;
+    }
+
+    set_message_value(seconds, 0);
+    set_message_value(deciseconds, 1);
+    set_message_value(data->currentScore, 2);
+
+    outScore = data->currentScore;
+    if (data->currentScore == 0 && data->found == 10) {
+        outScore = -1;
+    }
+    evt_set_variable(script, LW(0), outScore);
+
+    return ApiStatus_DONE2;
+}
 
 /* N(GiveCoinReward) */
 ApiStatus func_80241F38_E17CB8(Evt* script, s32 isInitialCall) {
@@ -398,7 +850,69 @@ ApiStatus func_80241F38_E17CB8(Evt* script, s32 isInitialCall) {
     return (data->currentScore > 0) ? ApiStatus_BLOCK : ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "world/area_mgm/mgm_02/E15D80", func_80241FE4_E17D64);
+ApiStatus func_80241FE4_E17D64(Evt* script, s32 isInitialCall) {
+    Enemy* enemy = get_enemy(0);
+    SmashGameData* data = (SmashGameData*)enemy->varTable[0];
+    Npc* npc;
+    u32 screenX, screenY,screenZ;
+    s32 writeback;
+    s32 i;
+    
+    if (enemy->varTable[3] == 4) {
+        for(i = 0; i < 35; i++) {
+            if (data->arr[i].npcID == -1) {
+                continue;
+            }
+            enemy = get_enemy(data->arr[i].npcID);
+            npc = get_npc_unsafe(enemy->npcID);
+            if ((npc->flags & NPC_FLAG_2)) {
+                continue;
+            }
+
+            get_screen_coords(0, npc->pos.x, npc->pos.y, npc->pos.z, &screenX, &screenY, &screenZ);
+            if (screenX - 1 < SCREEN_WIDTH - 1) {
+                fx_walking_dust(1, npc->pos.x, npc->pos.y, npc->pos.z, 0, 0);
+                sfx_play_sound(SOUND_283);
+            }
+            npc->flags = npc->flags | NPC_FLAG_2;
+            disable_npc_shadow(npc);
+            enemy->varTable[0] = 0;
+        }
+        return ApiStatus_DONE2;
+    } else {
+        for(i = 0; i < 35; i++) {
+            if (data->arr[i].npcID == -1) {
+                continue;
+            }
+            enemy = get_enemy(data->arr[i].npcID);
+            npc = get_npc_unsafe(enemy->npcID);
+            if ((npc->flags & NPC_FLAG_2)) {
+                continue;
+            }
+
+            switch(data->arr[i].content) {
+                case 0:
+                    if (data->arr[i].state != 0x12) {
+                        data->arr[i].state = 0x12;
+                        fx_emote(2, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, 0.0f, 30, &writeback);
+                        npc->currentAnim.w = 0x2B000E;
+                        enable_npc_shadow(npc);
+                    }
+                    break;
+
+                case 1:
+                    if (data->arr[i].state != 0x25) {
+                        data->arr[i].state = 0x25;
+                        fx_emote(2, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, 0.0f, 30, &writeback);
+                        npc->currentAnim.w = 0x2C001C;
+                        enable_npc_shadow(npc);
+                    }
+                    break;
+            }
+        }
+        return ApiStatus_BLOCK;
+    }
+}
 
 /* N(CreateScoreDisplay) */
 ApiStatus func_80242274_E17FF4(Evt* script, s32 isInitialCall) {
@@ -407,7 +921,7 @@ ApiStatus func_80242274_E17FF4(Evt* script, s32 isInitialCall) {
     scorekeeper->varTable[SMASH_DATA_VAR_IDX] = data;
 
     data->windowA_posX = -80;
-    data->windowB_posX = 320;
+    data->windowB_posX = SCREEN_WIDTH;
     data->timeLeft = PLAY_TIME;
 
     func_800E9894();

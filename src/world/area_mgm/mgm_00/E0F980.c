@@ -1,6 +1,7 @@
 #include "mgm_00.h"
 
-extern Gfx D_80243C50_E123F0[];
+
+extern Gfx* D_80243C50_E123F0;
 
 #define FADE_IN_TIME  5
 #define FADE_OUT_TIME 5
@@ -25,7 +26,10 @@ typedef struct RecordDisplayData {
 
 //TODO: matches on decomp.me, but not OK here
 INCLUDE_ASM(s32, "world/area_mgm/mgm_00/E0F980", func_802411E0_E0F980);
+
 /*
+void msg_draw_frame(s32 posX, s32 posY, s32 sizeX, s32 sizeY, s32 style, s32 palette, s32 fading, u8 bgAlpha, u8 frameAlpha);
+
 void func_802411E0_E0F980(RecordDisplayData* data, s32 alpha) {
     if (alpha > 0) {
         gSPDisplayList(gMasterGfxPos++, D_80243C50_E123F0);
