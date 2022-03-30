@@ -67,9 +67,6 @@ typedef struct SmashGameData {
 /* 0x02C */ SmashGameBoxData arr[35];
 } SmashGameData; /* size = 0x400 */
 
-//TODO: matches on decomp.me, but not OK here
-//INCLUDE_ASM(s32, "world/area_mgm/mgm_02/E15D80", func_80240000_E15D80);
-//extern void func_80240000_E15D80(void);
 /* N(draw_score_display) */
 void func_80240000_E15D80(void) {
     Enemy* scorekeeper = get_enemy(0);
@@ -128,7 +125,7 @@ void func_80240000_E15D80(void) {
     draw_number(10 - data->found, data->windowA_posX + 65, 43, 1, 0, 255, 3);
     draw_ci_image_with_clipping(&D_802482A0_E1E020, 32, 32, G_IM_FMT_CI, G_IM_SIZ_4b, &D_802484A0_E1E220,
         data->windowA_posX + 5, 26, 10, 20, 300, 200, 255);
-    
+
     timeLeft = MIN(data->timeLeft, 900);
     deciseconds = ((f32)(timeLeft % 30) * 10.0) / 30;
     seconds = timeLeft / 30;
@@ -168,7 +165,7 @@ ApiStatus func_80240468_E161E8(Evt* script, s32 isInitialCall) {
         hud_element_set_flags(hudElemA, HUD_ELEMENT_FLAGS_80);
         hud_element_set_tint(hudElemA, 255, 255, 255);
         hud_element_set_script(hudElemA, &HudScript_AButton);
-        
+
         hudElemMeter = hud_element_create(&HudScript_BlueMeter);
         data->hudElemID_Meter = hudElemMeter;
         hud_element_set_render_depth(hudElemMeter, 0);
@@ -229,7 +226,7 @@ ApiStatus func_80240644_E163C4(Evt* script, s32 isInitialCall0) {
 
     evt_set_variable(script, LW(0xC), data->arr[i].content);
 
-    switch (data->arr[i].content) {                     
+    switch (data->arr[i].content) {
     case BOX_CONTENT_FUZZY:
         evt_set_variable(script, LW(0xD), data->arr[i].npcID);
         data->arr[i].state = BOX_STATE_FUZZY_INIT;
@@ -247,13 +244,13 @@ ApiStatus func_80240644_E163C4(Evt* script, s32 isInitialCall0) {
         data->arr[i].state = BOX_STATE_PEACH_INIT;
         break;
     }
-  
+
     return ApiStatus_DONE2;
 }
 
 //TODO: problem with loop at D_80248600, perhaps start at D_80248624 and go backward?
-INCLUDE_ASM(s32, "world/area_mgm/mgm_02/E15D80", func_80240790_E16510);
-/*
+//INCLUDE_ASM(s32, "world/area_mgm/mgm_02/E15D80", func_80240790_E16510);
+
 ApiStatus func_80240790_E16510(Evt* script, s32 isInitialCall) {
     s32 initialConfiguration;
     s32 configuration[35];
@@ -299,15 +296,18 @@ ApiStatus func_80240790_E16510(Evt* script, s32 isInitialCall) {
     }
 
     for(i = 0xA; i < 0xF; i++) {
-        get_enemy(i)->varTable[0] = 0;
+        enemy = get_enemy(i);
+        enemy->varTable[0] = 0;
     }
 
     for(i = 0x1E; i < 0x23; i++) {
-        get_enemy(i)->varTable[0] = 0;
+        enemy = get_enemy(i);
+        enemy->varTable[0] = 0;
     }
 
     for(i = 0x64; i < 0x6E; i++) {
-        get_enemy(i)->varTable[0] = 0;
+        enemy = get_enemy(i);
+        enemy->varTable[0] = 0;
     }
 
     for(i = 0; i < ARRAY_COUNT(D_80248600); i++) {
@@ -373,11 +373,9 @@ ApiStatus func_80240790_E16510(Evt* script, s32 isInitialCall) {
     }
     return ApiStatus_DONE2;
 }
-*/
 
 INCLUDE_ASM(s32, "world/area_mgm/mgm_02/E15D80", func_80240BB0_E16930);
 
-//TODO
 /*
 ApiStatus func_80240BB0_E16930(Evt* script, s32 isInitialCall) {
     SmashGameData* data;
@@ -388,7 +386,6 @@ ApiStatus func_80240BB0_E16930(Evt* script, s32 isInitialCall) {
     Matrix4f mtx;
     f32 centerX, centerY, centerZ;
     f32 sizeX, sizeY, sizeZ;
-    f32 newY;
     s32 i;
 
     s32 gameFinished = 0;
@@ -419,9 +416,8 @@ ApiStatus func_80240BB0_E16930(Evt* script, s32 isInitialCall) {
                     npc->jumpVelocity = 10.5f;
                     npc->pos.x = centerX;
                     npc->jumpScale = 1.5f;
-                    newY = centerY - 12.5;
-                    npc->pos.y = newY;
-                    npc->moveToPos.y = newY;
+                    npc->pos.y = centerY - 12.5;
+                    npc->moveToPos.y = npc->pos.y;
                     npc->pos.z = centerZ + 2.0;
                     data->arr[i].stateTimer = 0;
                 }
@@ -467,7 +463,7 @@ ApiStatus func_80240BB0_E16930(Evt* script, s32 isInitialCall) {
                 npc->moveToPos.y = gPlayerStatusPtr->position.y + 35.0f;
                 npc->jumpVelocity = 10.5f;
                 npc->jumpScale = 1.5f;
-       
+
                 data->arr[i].stateTimer = 0;
                 fx_emote(0, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, 0.0f, 0xA, &writeback);
                 enemy->varTable[1] = npc->pos.x * 10.0f;
@@ -485,7 +481,7 @@ ApiStatus func_80240BB0_E16930(Evt* script, s32 isInitialCall) {
                 npc->pos.z = update_lerp(0, (f32)enemy->varTable[3] / 10.0, (f32) enemy->varTable[6] / 10.0, enemy->varTable[7], 8);
                 gPlayerStatusPtr->anim = 0x10001;
                 npc->duration--;
-                if ((npc->duration << 0x10) <= 0) { //TODO what??
+                if (npc->duration <= 0) {
                     npc->currentAnim.w = 0x2B000F;
                     gPlayerStatusPtr->anim = 0x1001B;
                     data->mashProgress = 0;
@@ -513,7 +509,7 @@ ApiStatus func_80240BB0_E16930(Evt* script, s32 isInitialCall) {
                     hud_element_set_alpha(data->hudElemID_Meter, 0xA0);
                     npc->currentAnim.w = 0x2B0008;
                     npc->pos.y += 3.0;
-                } 
+                }
                 break;
             case 0x10:
                 npc->duration--;
@@ -544,10 +540,10 @@ ApiStatus func_80240BB0_E16930(Evt* script, s32 isInitialCall) {
                     npc->jumpVelocity = 10.5f;
                     npc->pos.x = centerX;
                     npc->jumpScale = 1.5f;
-                    newY = centerY - 12.5;
-                    npc->pos.y = newY;
-                    npc->moveToPos.y = newY;
+                    npc->pos.y = centerY - 12.5;
+                    npc->moveToPos.y = npc->pos.y;
                     npc->pos.z = centerZ + 2.0;
+                    data->arr[i].stateTimer = 0;
                 }
                 break;
             case 0x20:
@@ -593,7 +589,7 @@ ApiStatus func_80240BB0_E16930(Evt* script, s32 isInitialCall) {
             case 0x22:
                 gPlayerStatusPtr->anim = 0x10001;
                 npc->duration--;
-                if ((npc->duration << 0x10) <= 0) { //TODO what??
+                if (npc->duration<= 0) {
                     fx_explosion(0, npc->pos.x, npc->pos.y, npc->pos.z + 1.0f);
                     npc->duration = 0x1E;
                     npc->pos.y = -1000.0f;
@@ -765,7 +761,6 @@ ApiStatus func_80240BB0_E16930(Evt* script, s32 isInitialCall) {
         gameFinished = TRUE;
     }
     if (gameFinished) {
-
         if (data->mashFlags & 1) {
             enable_player_input();
             partner_enable_input();
@@ -773,15 +768,18 @@ ApiStatus func_80240BB0_E16930(Evt* script, s32 isInitialCall) {
         data->mashFlags = 0;
 
         gPlayerStatusPtr->targetYaw = 180.0;
-        
-        // required to match
-        do {
-            sfx_play_sound((data->timeLeft == 0) ? (0x21D) : (0xD4));
+
+        if (data->timeLeft == 0) {
+            sfx_play_sound(0x21D);
             gPlayerStatusPtr->anim = 0x10002;
-        } while (0);
+        } else {
+            sfx_play_sound(0xD4);
+            gPlayerStatusPtr->anim = 0x10002;
+        }
 
         return ApiStatus_DONE2;
     }
+
     return ApiStatus_BLOCK;
 }
 */
@@ -797,7 +795,7 @@ ApiStatus func_80241DCC_E17B4C(Evt* script, s32 isInitialCall) {
 
     seconds = data->timeLeft  / 30;
     deciseconds = ((f32)(data->timeLeft % 30) * 10.0) / 30;
-    
+
     data->currentScore = (seconds * 10) + deciseconds;
     playerData->smashGameTotal += data->currentScore;
 
@@ -857,7 +855,7 @@ ApiStatus func_80241FE4_E17D64(Evt* script, s32 isInitialCall) {
     u32 screenX, screenY,screenZ;
     s32 writeback;
     s32 i;
-    
+
     if (enemy->varTable[3] == 4) {
         for(i = 0; i < 35; i++) {
             if (data->arr[i].npcID == -1) {

@@ -1,7 +1,6 @@
 #include "mgm_00.h"
 
-
-extern Gfx* D_80243C50_E123F0;
+extern Gfx D_80243C50_E123F0[];
 
 #define FADE_IN_TIME  5
 #define FADE_OUT_TIME 5
@@ -24,11 +23,8 @@ typedef struct RecordDisplayData {
 /* 0x14 */ s32 workerID;
 } RecordDisplayData; /* size = 0x18 */
 
-//TODO: matches on decomp.me, but not OK here
-INCLUDE_ASM(s32, "world/area_mgm/mgm_00/E0F980", func_802411E0_E0F980);
-
-/*
-void msg_draw_frame(s32 posX, s32 posY, s32 sizeX, s32 sizeY, s32 style, s32 palette, s32 fading, u8 bgAlpha, u8 frameAlpha);
+// TODO this signature may be wrong
+void msg_draw_frame(s32 posX, s32 posY, s32 sizeX, s32 sizeY, s32 style, s32 palette, s32 fading, s32 bgAlpha, s32 frameAlpha);
 
 void func_802411E0_E0F980(RecordDisplayData* data, s32 alpha) {
     if (alpha > 0) {
@@ -37,7 +33,7 @@ void func_802411E0_E0F980(RecordDisplayData* data, s32 alpha) {
         gDPSetPrimColor(gMasterGfxPos++, 0, 0, 16, 120, 24, alpha * 0.65);
         gDPFillRectangle(gMasterGfxPos++, 48, 53, 272, 129);
         gDPPipeSync(gMasterGfxPos++);
-        msg_draw_frame(0x2D, 0x32, 0xE6, 0x52, 6, 0, 1, alpha * 0.55, alpha);
+        msg_draw_frame(0x2D, 0x32, 0xE6, 0x52, 6, 0, 1, (s32)(alpha * 0.55), alpha); // cast needed if signature isn't present
         if (data->gameType == 1) {
             draw_msg(0x8001C, 0x42, 0x39, alpha, 1, 0);
             draw_number(gPlayerData.jumpGamePlays, 0xDB, 0x4E, 1, 0, alpha, 3);
@@ -49,7 +45,7 @@ void func_802411E0_E0F980(RecordDisplayData* data, s32 alpha) {
             draw_number(gPlayerData.smashGameTotal, 0xDB, 0x5D, 1, 0, alpha, 3);
             draw_number(gPlayerData.smashGameRecord, 0xDB, 0x6C, 1, 0, alpha, 3);
         }
-        
+
         draw_msg(0x8001E, 0x3A, 0x4E, alpha, 0, 1);
         draw_msg(0x80023, 0xDF, 0x4E, alpha, 0, 1);
         draw_msg(0x8001F, 0x3A, 0x5D, alpha, 0, 1);
@@ -58,7 +54,6 @@ void func_802411E0_E0F980(RecordDisplayData* data, s32 alpha) {
         draw_msg(0x80021, 0xDF, 0x6C, alpha, 0, 1);
     }
 }
-*/
 
 void func_80241540_E0FCE0(void) {
     RecordDisplayData* data = (RecordDisplayData*)evt_get_variable(NULL, GW(0xA));
