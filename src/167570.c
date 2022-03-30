@@ -163,11 +163,12 @@ void filemenu_yesno_handle_input(MenuPanel* menu) {
                         filemenu_menus[filemenu_8024C098]->page = 0;
                         gWindows[47].width = 182;
                         gWindows[47].height = 25;
-                        gWindows[47].pos.x = (gWindows[47].parent != -1) ?
-                                             (gWindows[gWindows[47].parent].width / 2) - 91 :
-                                             69;
-                        gWindows[47].pos.y = ((gWindows[47].parent != -1) ?
-                                             (gWindows[gWindows[47].parent].height / 2) : 120) - gWindows[47].height / 2;
+                        gWindows[47].pos.x = ((gWindows[47].parent != -1)
+                                            ? (gWindows[gWindows[47].parent].width / 2)
+                                            : SCREEN_WIDTH / 2) - gWindows[47].width / 2;
+                        gWindows[47].pos.y = ((gWindows[47].parent != -1)
+                                            ? (gWindows[gWindows[47].parent].height / 2)
+                                            : SCREEN_HEIGHT / 2) - gWindows[47].height / 2;
                         set_window_update(WINDOW_ID_47, WINDOW_UPDATE_SHOW);
                         set_window_update(WINDOW_ID_50, (s32)filemenu_update_hidden_name_confirm);
 
@@ -186,11 +187,12 @@ void filemenu_yesno_handle_input(MenuPanel* menu) {
                         filemenu_menus[filemenu_8024C098]->page = 2;
                         gWindows[47].width = 154;
                         gWindows[47].height = 39;
-                        gWindows[47].pos.x = (gWindows[47].parent != -1) ?
-                                             (gWindows[gWindows[47].parent].width / 2) - 77 :
-                                             83;
-                        gWindows[47].pos.y = ((gWindows[47].parent != -1) ?
-                                             (gWindows[gWindows[47].parent].height / 2) : 120) - gWindows[47].height / 2;
+                        gWindows[47].pos.x = ((gWindows[47].parent != -1)
+                                             ? (gWindows[gWindows[47].parent].width / 2)
+                                             : SCREEN_WIDTH / 2) - gWindows[47].width / 2;
+                        gWindows[47].pos.y = ((gWindows[47].parent != -1)
+                                             ? (gWindows[gWindows[47].parent].height / 2)
+                                             : SCREEN_HEIGHT / 2) - gWindows[47].height / 2;
                         set_window_update(WINDOW_ID_47, WINDOW_UPDATE_SHOW);
                         set_window_update(WINDOW_ID_50, (s32)filemenu_update_hidden_name_confirm);
                         fio_load_game(filemenu_loadedFileIdx);
@@ -203,11 +205,12 @@ void filemenu_yesno_handle_input(MenuPanel* menu) {
                         filemenu_menus[filemenu_8024C098]->page = 1;
                         gWindows[47].width = 153;
                         gWindows[47].height = 25;
-                        gWindows[47].pos.x = (gWindows[47].parent != -1) ?
-                                             (gWindows[gWindows[47].parent].width / 2) - 76 :
-                                             84;
-                        gWindows[47].pos.y = ((gWindows[47].parent != -1) ?
-                                             (gWindows[gWindows[47].parent].height / 2) : 120) - gWindows[47].height / 2;
+                        gWindows[47].pos.x = ((gWindows[47].parent != -1)
+                                             ? (gWindows[gWindows[47].parent].width / 2)
+                                             : SCREEN_WIDTH / 2) - gWindows[47].width / 2;
+                        gWindows[47].pos.y = ((gWindows[47].parent != -1)
+                                             ? (gWindows[gWindows[47].parent].height / 2)
+                                             : SCREEN_HEIGHT / 2) - gWindows[47].height / 2;
                         set_window_update(WINDOW_ID_47, WINDOW_UPDATE_SHOW);
                         set_window_update(WINDOW_ID_50, (s32)filemenu_update_hidden_name_confirm);
                         gSaveSlotMetadata[filemenu_menus[0]->selected] = gSaveSlotMetadata[gGameStatusPtr->saveSlot];
@@ -246,11 +249,12 @@ void filemenu_yesno_handle_input(MenuPanel* menu) {
                         filemenu_menus[2]->page = 3;
                         gWindows[47].width = 184;
                         gWindows[47].height = 25;
-                        gWindows[47].pos.x = (gWindows[47].parent != -1) ?
-                                             (gWindows[gWindows[47].parent].width / 2) - 92 :
-                                             68;
-                        gWindows[47].pos.y = ((gWindows[47].parent != -1) ?
-                                             (gWindows[gWindows[47].parent].height / 2) : 120) - gWindows[47].height / 2;
+                        gWindows[47].pos.x = ((gWindows[47].parent != -1)
+                                             ? (gWindows[gWindows[47].parent].width / 2)
+                                             : SCREEN_WIDTH / 2) - gWindows[47].width / 2;
+                        gWindows[47].pos.y = ((gWindows[47].parent != -1)
+                                             ? (gWindows[gWindows[47].parent].height / 2)
+                                             : SCREEN_HEIGHT / 2) - gWindows[47].height / 2;
                         set_window_update(WINDOW_ID_47, WINDOW_UPDATE_SHOW);
                         break;
                     case 4:

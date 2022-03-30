@@ -305,7 +305,7 @@ void func_802B6820_E256F0(void) {
     playerY = playerStatus->position.y;
     playerZ = playerStatus->position.z;
 
-    for (i = 1; i < 0x10; i++) {
+    for (i = 1; i < 16; i++) {
         x = playerX + (outSinTheta * i);
         y = playerY;
         z = playerZ - (outCosTheta * i);
@@ -324,7 +324,7 @@ void func_802B6820_E256F0(void) {
         }
     }
 
-    if (i >= 0x10) {
+    if (i >= 16) {
         yaw = func_800E5348();
         if (action_hammer_is_swinging_away(playerStatus->trueAnimation) == 0) {
             angle = clamp_angle(yaw + 90.0f - gCameras[gCurrentCameraID].currentYaw);
@@ -336,7 +336,7 @@ void func_802B6820_E256F0(void) {
         }
         sin_cos_rad(yaw * TAU / 360.0f, &outSinTheta, &outCosTheta);
 
-        for (i = 1; i < 0x10; i++) {
+        for (i = 1; i < 16; i++) {
             x = playerX + (outSinTheta * i);
             y = playerY;
             z = playerZ - (outCosTheta * i);
