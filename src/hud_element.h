@@ -155,10 +155,10 @@ typedef struct HudElement {
 
 typedef HudElement* HudElementList[320];
 
-extern HudScript HudScript_AnimatedHandPointer[];
-extern HudScript HudScript_StatusCoin[];
-extern HudScript HudScript_Refund[];
-extern HudScript HudScript_MenuTimes[];
+extern HudScript HudScript_AnimatedHandPointer;
+extern HudScript HudScript_StatusCoin;
+extern HudScript HudScript_Refund;
+extern HudScript HudScript_MenuTimes;
 
 #define he_End HUD_ELEMENT_OP_End
 #define he_SetRGBA(arg0, image) HUD_ELEMENT_OP_SetRGBA, arg0, (s32)image

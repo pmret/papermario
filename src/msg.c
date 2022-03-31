@@ -10,16 +10,7 @@ typedef struct UnkMsgStruct8 {
     /* 0x02 */ char unk_02[0xE];
 } UnkMsgStruct8; // size = 0x16
 
-typedef struct UnkImage14 {
-    /* 0x00 */ s32* raster;
-    /* 0x04 */ s32* palette;
-    /* 0x08 */ u16 width;
-    /* 0x0A */ u16 height;
-    /* 0x0C */ s32 format;
-    /* 0x10 */ s32 bitDepth;
-} UnkImage14; // size = 0x14
-
-typedef UnkImage14* UnkImage14List[1];
+typedef MessageImageData* MessageImageDataList[1];
 
 extern s32 D_802EF0D0;
 
@@ -123,7 +114,7 @@ extern s32 D_8015C7E0;
 // BSS
 extern s32 gMsgBGScrollAmtX;
 extern u16 gMsgGlobalWaveCounter;
-extern UnkImage14List gMsgVarImages;
+extern MessageImageDataList gMsgVarImages;
 extern s32 gMsgBGScrollAmtY;
 extern Gfx* D_80151338;
 extern char gMessageBuffers[][1024];
@@ -501,7 +492,7 @@ s32 cancel_message(MessagePrintState* msgPrintState) {
     return 1;
 }
 
-void set_message_images(UnkImage14List images) {
+void set_message_images(MessageImageDataList images) {
     *gMsgVarImages = images;
 }
 
@@ -813,8 +804,8 @@ void appendGfx_message(MessagePrintState* printer, s16 posX, s16 posY, u16 addit
     s32 animIdx;
     u8 temp_v0_27;
     u8 temp_v0_28;
-    UnkImage14* msgVarImage;
-    UnkImage14* temp_t4;
+    MessageImageData* msgVarImage;
+    MessageImageData* temp_t4;
     s32 phi_a0;
     s32 straightWidth;
     s32 curveWidth;

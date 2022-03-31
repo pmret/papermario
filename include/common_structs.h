@@ -1381,6 +1381,15 @@ typedef struct MesasgeFontGlyphData {
     /* 0xB */ s8 charHeight;
 } MesasgeFontGlyphData; // size = 0xC
 
+typedef struct MessageImageData {
+    /* 0x00 */ s32* raster;
+    /* 0x04 */ s32* palette;
+    /* 0x08 */ u16 width;
+    /* 0x0A */ u16 height;
+    /* 0x0C */ s32 format;
+    /* 0x10 */ s32 bitDepth;
+} MessageImageData; // size = 0x14
+
 typedef struct MessageNumber {
     /* 0x00 */ s32* rasters;
     /* 0x04 */ s8 texSize;

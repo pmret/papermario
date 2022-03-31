@@ -2,6 +2,9 @@
 #include "hud_element.h"
 #include "effects.h"
 
+void delete_entity(s32 entityIndex);
+void set_message_images(MessageImageData* images);
+
 #define SCOREKEEPER_ENEMY_IDX 0
 #define BROKEN_BLOCKS_VAR_IDX 2
 #define TOTAL_BLOCKS_VAR_IDX 4
@@ -68,7 +71,7 @@ extern EntityBlueprint D_802EA0C4;
 
 extern s32 MessagePlural;
 extern s32 MessageSingular;
-extern s32 N(MsgImgs_Panels); // TODO: assign proper type for this data
+extern MessageImageData N(MsgImgs_Panels);
 
 extern s8 N(BlockPosX)[NUM_BLOCKS];
 extern s8 N(BlockPosY)[NUM_BLOCKS];
@@ -95,7 +98,7 @@ extern EvtScript D_80242410;
 extern EvtScript D_80242430;
 extern EvtScript D_80242450;
 
-void N(draw_score_display) (void) {
+void N(draw_score_display) (void* renderData) {
     Enemy* scorekeeper = get_enemy(SCOREKEEPER_ENEMY_IDX);
     JumpGameData* data = (JumpGameData*)scorekeeper->varTable[JUMP_DATA_VAR_IDX];
     s32 hudElemID;
@@ -116,7 +119,7 @@ void N(draw_score_display) (void) {
             }
         }
     }
-
+    
     if (data->scoreWindowPosX < SCREEN_WIDTH + 1) {
         draw_box(0, 9, data->scoreWindowPosX, 28, 0, 72, 20, 255, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, NULL, NULL, NULL, SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
         hudElemID = data->hudElemID;
@@ -518,7 +521,7 @@ ApiStatus N(OnBreakBlock)(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus N(CreateBlockEntities)(Evt* script, s32 isInitialCall) {
-    JumpGameData* data = get_enemy(SCOREKEEPER_ENEMY_IDX)->varTable[JUMP_DATA_VAR_IDX];
+    JumpGameData* data = get_enemy(SCOREKEEPER_ENEMY_IDX)->varTablePtr[JUMP_DATA_VAR_IDX];
     s32 entityIndex;
     s32 initialConfiguration;
     s32 indexA, indexB;
@@ -526,7 +529,7 @@ ApiStatus N(CreateBlockEntities)(Evt* script, s32 isInitialCall) {
     s32 temp;
     s32 i;
 
-    const EvtScript* scriptArray[] = {
+    EvtScript* scriptArray[] = {
         &D_80242310, &D_80242330, &D_80242350, &D_80242370, &D_80242390, &D_802423B0, &D_802423D0, &D_802423F0,
         &D_80242410, &D_80242430, &D_80242450
     };
@@ -592,7 +595,7 @@ ApiStatus N(TakeCoinCost)(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus N(InitializePanels)(Evt* script, s32 isInitialCall) {
-    JumpGameData* data = get_enemy(SCOREKEEPER_ENEMY_IDX)->varTable[JUMP_DATA_VAR_IDX];
+    JumpGameData* data = get_enemy(SCOREKEEPER_ENEMY_IDX)->varTablePtr[JUMP_DATA_VAR_IDX];
     s32 i;
 
     data->currentScore = 0;
@@ -613,7 +616,7 @@ ApiStatus N(CreateMinigame)(Evt* script, s32 isInitialCall) {
     JumpGameData* data = general_heap_malloc(sizeof(JumpGameData));
     s32 hudElemID;
 
-    scorekeeper->varTable[JUMP_DATA_VAR_IDX] = data;
+    scorekeeper->varTablePtr[JUMP_DATA_VAR_IDX] = data;
     data->workerID = create_generic_entity_world(NULL, &mgm_01_work_draw_score);
 
     hudElemID = hud_element_create(&HudScript_StatusCoin);
@@ -630,7 +633,7 @@ ApiStatus N(CreateMinigame)(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus N(DestroyMinigame) (Evt* script, s32 isInitialCall) {
-    JumpGameData* data = get_enemy(SCOREKEEPER_ENEMY_IDX)->varTable[JUMP_DATA_VAR_IDX];
+    JumpGameData* data = get_enemy(SCOREKEEPER_ENEMY_IDX)->varTablePtr[JUMP_DATA_VAR_IDX];
 
     free_generic_entity(data->workerID);
     hud_element_free(data->hudElemID);
@@ -648,7 +651,7 @@ ApiStatus N(SetMsgVars_BlocksRemaining)(Evt* script, s32 isInitialCall) {
     s32 remaining = (scorekeeper->varTable[TOTAL_BLOCKS_VAR_IDX] - scorekeeper->varTable[BROKEN_BLOCKS_VAR_IDX]) + 1;
 
     set_message_value(remaining, 0);
-    set_message_msg((remaining == 1) ? &MessageSingular : &MessagePlural, 1);
+    set_message_msg((remaining == 1) ? (s32)&MessageSingular : (s32)&MessagePlural, 1);
 
     return ApiStatus_DONE2;
 }

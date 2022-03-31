@@ -1,6 +1,11 @@
 #include "common.h"
 #include "effects.h"
 
+extern s32 D_802E9E54;
+
+void entity_MulticoinBlock_update_timer(Entity* entity);
+void entity_base_block_update_slow_sinking(Entity* entity);
+
 #define MULTICOIN_BLOCK_MAX_COINS 10
 
 void entity_base_block_setupGfx(s32 entityIndex) {
@@ -127,9 +132,6 @@ void entity_MulticoinBlock_init(Entity* entity) {
     data->timeLeft = 123;
     data->gameFlagIndex = 0xFFFF;
 }
-
-extern s32 D_802E9E54;
-extern EntityBlueprint Entity_InertYellowBlock;
 
 void entity_MulticoinBlock_spawn_coin(Entity* entity) {
     BlockData* data = entity->dataBuf.block;

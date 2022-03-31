@@ -1,6 +1,8 @@
 #include "mgm_02.h"
 
-extern s32 N(MsgImg_PeachPanel); // TODO: assign proper type for this data
+void set_message_images(MessageImageData* images);
+
+extern MessageImageData N(MsgImg_PeachPanel);
 
 ApiStatus N(SetMsgImgs_Panel)(Evt* script, s32 isInitialCall) {
     set_message_images(&N(MsgImg_PeachPanel));
