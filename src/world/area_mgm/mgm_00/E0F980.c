@@ -1,5 +1,8 @@
 #include "mgm_00.h"
 
+void snd_start_sound(s32 soundID, u8 volume, u8 pan);
+void msg_draw_frame(s32 posX, s32 posY, s32 sizeX, s32 sizeY, s32 style, s32 palette, s32 fading, s32 bgAlpha, s32 frameAlpha);
+
 extern Gfx D_80243C50_E123F0[];
 
 #define RECORD_DISPLAY_MAP_VAR  0xA
@@ -118,15 +121,15 @@ ApiStatus N(UpdateRecordDisplay)(Evt* script, s32 isInitialCall) {
 
     gameType = evt_get_variable(script, *script->ptrReadPos);
     if (isInitialCall) {
-        data = (RecordDisplayData*)heap_malloc(sizeof(RecordDisplayData));
-        script->functionTemp[0] = data;
+        data = heap_malloc(sizeof(RecordDisplayData));
+        script->functionTempPtr[0] = data;
         data->state = RECORD_START_SHOW;
         data->alpha = 255;
         data->workerID = create_generic_entity_world(NULL, &N(work_draw_record));
         data->gameType = gameType;
-        evt_set_variable(script, GW(RECORD_DISPLAY_MAP_VAR), data);
+        evt_set_variable(script, GW(RECORD_DISPLAY_MAP_VAR), (s32)data);
     }
-    data = (RecordDisplayData*)script->functionTemp[0];
+    data = script->functionTempPtr[0];
     if (data->state == RECORD_STATE_DONE) {
         free_generic_entity(data->workerID);
         heap_free(data);

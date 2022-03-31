@@ -4,6 +4,8 @@
 #include "model.h"
 
 void startup_draw_prim_rect_COPY(s16 left, s16 top, s16 right, s16 bottom, u16 r, u16 g, u16 b, u16 a);
+void delete_entity(s32);
+void partner_enable_input(void);
 
 #define SCOREKEEPER_ENEMY_IDX 0
 #define SMASH_DATA_VAR_IDX 0
@@ -20,9 +22,9 @@ void startup_draw_prim_rect_COPY(s16 left, s16 top, s16 right, s16 bottom, u16 r
 #define BOBOMB_NPC_ID_BASE 0x1E
 #define LUIGI_NPC_ID_BASE  0x64
 
-extern HudScript HudScript_BlueMeter[];
-extern HudScript HudScript_AButton[];
-extern HudScript HudScript_MashAButton[];
+extern HudScript HudScript_BlueMeter;
+extern HudScript HudScript_AButton;
+extern HudScript HudScript_MashAButton;
 
 extern s32 mgm_02_InitialConfigurations[3][NUM_BOXES];
 extern s32 mgm_02_BoxModelIDs[NUM_BOXES];
@@ -33,8 +35,8 @@ extern s32 D_80248600[NUM_PANELS]; //TODO set name: mgm_02_PanelModelsAssigned
 extern s32 mgm_02_PeachPanelImg;
 extern s32 mgm_02_PeachPanelPal;
 
-extern s32 D_802EAFDC; // SIGNPOST
-extern s32 D_80242A3C_E187BC[]; // EVT_ReadSign
+extern EntityBlueprint D_802EAFDC; // SIGNPOST
+extern EvtScript D_80242A3C_E187BC; // EVT_ReadSign
 
 typedef enum SmashGameBoxCotent {
     BOX_CONTENT_FUZZY       = 0,
@@ -106,9 +108,9 @@ typedef struct SmashGameData {
 /* 0x02C */ SmashGameBoxData box[NUM_BOXES];
 } SmashGameData; /* size = 0x400 */
 
-void N(draw_score_display)(void) {
+void N(draw_score_display)(void* renderData) {
     Enemy* scorekeeper = get_enemy(SCOREKEEPER_ENEMY_IDX);
-    SmashGameData* data = (SmashGameData*)scorekeeper->varTable[SMASH_DATA_VAR_IDX];
+    SmashGameData* data = scorekeeper->varTablePtr[SMASH_DATA_VAR_IDX];
     s32 hudElemA;
     s32 hudElemMeter;
     s32 timeLeft;
@@ -189,7 +191,7 @@ void N(work_draw_score)(void) {
 }
 
 ApiStatus N(CreateScoreDisplay)(Evt* script, s32 isInitialCall) {
-    SmashGameData* data = get_enemy(SCOREKEEPER_ENEMY_IDX)->varTable[SMASH_DATA_VAR_IDX];
+    SmashGameData* data = get_enemy(SCOREKEEPER_ENEMY_IDX)->varTablePtr[SMASH_DATA_VAR_IDX];
     s32 hudElemA, hudElemMeter;
 
     if (isInitialCall) {
@@ -224,17 +226,14 @@ ApiStatus N(EnableMenus)(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus N(DestroySignpost)(Evt* script, s32 isInitialCall) {
-    SmashGameData* data = get_enemy(SCOREKEEPER_ENEMY_IDX)->varTable[SMASH_DATA_VAR_IDX];
+    SmashGameData* data = get_enemy(SCOREKEEPER_ENEMY_IDX)->varTablePtr[SMASH_DATA_VAR_IDX];
     delete_entity(data->signpostEntity);
     return ApiStatus_DONE2;
 }
 
 ApiStatus N(CreateSignpost)(void) {
-    SmashGameData* data;
-    s32 entityIndex;
-
-    data = (SmashGameData*)get_enemy(SCOREKEEPER_ENEMY_IDX)->varTable[SMASH_DATA_VAR_IDX];
-    entityIndex = create_entity(&D_802EAFDC, 355, 20, -180, 0, 0, 0, 0, MAKE_ENTITY_END);
+    SmashGameData* data = get_enemy(SCOREKEEPER_ENEMY_IDX)->varTablePtr[SMASH_DATA_VAR_IDX];
+    s32 entityIndex = create_entity(&D_802EAFDC, 355, 20, -180, 0, 0, 0, 0, MAKE_ENTITY_END);
     data->signpostEntity = entityIndex;
     get_entity_by_index(entityIndex)->boundScriptBytecode = &D_80242A3C_E187BC;
 
@@ -242,7 +241,7 @@ ApiStatus N(CreateSignpost)(void) {
 }
 
 ApiStatus N(OnHitBox)(Evt* script, s32 isInitialCall0) {
-    SmashGameData* data = (SmashGameData*)get_enemy(SCOREKEEPER_ENEMY_IDX)->varTable[SMASH_DATA_VAR_IDX];
+    SmashGameData* data = get_enemy(SCOREKEEPER_ENEMY_IDX)->varTablePtr[SMASH_DATA_VAR_IDX];
     s32 hitModelID;
     s32 hitColliderID;
     s32 i;
@@ -288,7 +287,7 @@ ApiStatus N(SetBoxContents)(Evt* script, s32 isInitialCall) {
     Enemy* enemy;
     Npc* npc;
 
-    SmashGameData* data = (SmashGameData*)get_enemy(SCOREKEEPER_ENEMY_IDX)->varTable[SMASH_DATA_VAR_IDX];
+    SmashGameData* data = get_enemy(SCOREKEEPER_ENEMY_IDX)->varTablePtr[SMASH_DATA_VAR_IDX];
     data->found = 0;
     data->timeLeft = PLAY_TIME + 10;
     data->currentScore = 0;
@@ -403,24 +402,24 @@ ApiStatus N(SetBoxContents)(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus N(RunMinigame)(Evt* script, s32 isInitialCall) {
-    Enemy* enemy;
     SmashGameData* data;
+    Enemy* enemy;
+
     Npc* npc;
+    s32 writeback;
 
     Model* model;
     Matrix4f mtx;
     f32 centerX, centerY, centerZ;
     f32 sizeX, sizeY, sizeZ;
     s32 i;
-
-    s32 writeback;
+   
     s32 gameFinished;
     s32 hittingPeachBlock;
 
     gameFinished = FALSE;
     hittingPeachBlock = FALSE;
-
-    data =  (SmashGameData*)get_enemy(0)->varTable[0];
+    data = get_enemy(0)->varTablePtr[0];
 
     for(i = 0; i < NUM_BOXES; i++)
     {
@@ -833,7 +832,7 @@ static char* N(exit_str_0) = "mgm_00";
 
 ApiStatus N(UpdateRecords)(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
-    SmashGameData* data = (SmashGameData*)get_enemy(SCOREKEEPER_ENEMY_IDX)->varTable[SMASH_DATA_VAR_IDX];
+    SmashGameData* data = get_enemy(SCOREKEEPER_ENEMY_IDX)->varTablePtr[SMASH_DATA_VAR_IDX];
     s32 seconds, deciseconds;
     s32 outScore;
 
@@ -864,7 +863,7 @@ ApiStatus N(UpdateRecords)(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus N(GiveCoinReward)(Evt* script, s32 isInitialCall) {
-    SmashGameData* data = (SmashGameData*)get_enemy(SCOREKEEPER_ENEMY_IDX)->varTable[SMASH_DATA_VAR_IDX];
+    SmashGameData* data = get_enemy(SCOREKEEPER_ENEMY_IDX)->varTablePtr[SMASH_DATA_VAR_IDX];
     s32 coinsLeft = data->currentScore;
     s32 increment;
 
@@ -893,7 +892,7 @@ ApiStatus N(GiveCoinReward)(Evt* script, s32 isInitialCall) {
 
 ApiStatus N(CleanupGame)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = get_enemy(SCOREKEEPER_ENEMY_IDX);
-    SmashGameData* data = (SmashGameData*)enemy->varTable[SMASH_DATA_VAR_IDX];
+    SmashGameData* data = enemy->varTablePtr[SMASH_DATA_VAR_IDX];
     Npc* npc;
     u32 screenX, screenY,screenZ;
     s32 writeback;
@@ -958,7 +957,7 @@ ApiStatus N(CleanupGame)(Evt* script, s32 isInitialCall) {
 ApiStatus N(CreateMinigame)(Evt* script, s32 isInitialCall) {
     Enemy* scorekeeper = get_enemy(SCOREKEEPER_ENEMY_IDX);
     SmashGameData* data = heap_malloc(sizeof(SmashGameData));
-    scorekeeper->varTable[SMASH_DATA_VAR_IDX] = data;
+    scorekeeper->varTablePtr[SMASH_DATA_VAR_IDX] = data;
 
     data->windowA_posX = -80;
     data->windowB_posX = SCREEN_WIDTH;
@@ -971,7 +970,7 @@ ApiStatus N(CreateMinigame)(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus N(DestroyMinigame)(Evt* script, s32 isInitialCall) {
-    SmashGameData* data = get_enemy(SCOREKEEPER_ENEMY_IDX)->varTable[SMASH_DATA_VAR_IDX];
+    SmashGameData* data = get_enemy(SCOREKEEPER_ENEMY_IDX)->varTablePtr[SMASH_DATA_VAR_IDX];
 
     free_generic_entity(data->workerID);
     hud_element_free(data->hudElemID_AButton);
