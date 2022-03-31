@@ -146,7 +146,6 @@ extern MessageCharset* gMsgCharsets[5];
 extern s32 D_802F39D0;
 extern UnkMsgStruct8 D_802F4560[];
 
-void load_font(s32 font);
 s32 _update_message(MessagePrintState*);
 void initialize_printer(MessagePrintState* printer, s32 arg1, s32 arg2);
 MessagePrintState* _msg_get_printer_for_msg(s32 msgID, s32* donePrintingWriteback, s32 arg2);
@@ -156,8 +155,6 @@ void msg_draw_choice_pointer(MessagePrintState* printer);
 void draw_message_window(MessagePrintState* printer);
 void appendGfx_message(MessagePrintState*, s16, s16, u16, u16, u16, u8);
 void appendGfx_msg_prim_rect(u8 r, u8 g, u8 b, u8 a, u16 ulX, u16 ulY, u16 lrX, u16 lrY);
-void get_msg_properties(s32 msgID, s32* height, s32* width, s32* maxLineChars, s32* numLines,
-                        s32* maxLinesPerPage, s32* arg6, s32 charset);
 void msg_reset_gfx_state(void);
 void msg_draw_char(MessagePrintState* printer, MessageDrawState* drawState, s32 charIndex, s32 palette, s32 posX,
                    s32 posY);
@@ -492,7 +489,7 @@ s32 cancel_message(MessagePrintState* msgPrintState) {
     return 1;
 }
 
-void set_message_images(MessageImageDataList images) {
+void set_message_images(MessageImageData* images) {
     *gMsgVarImages = images;
 }
 

@@ -2,7 +2,7 @@
 #include "npc.h"
 #include "sprite.h"
 
-void entity_BlueWarpPipe_setupGfx();
+void entity_BlueWarpPipe_setupGfx(void* renderData);
 
 void entity_BlueWarpPipe_check_if_active(Entity* entity) {
     BlueWarpPipeData* pipeData;
@@ -131,7 +131,7 @@ void entity_BlueWarpPipe_enter_pipe_update(Entity* entity) {
 }
 
 void entity_BlueWarpPipe_start_bound_script(Entity* entity) {
-    Bytecode* triggerScriptStart = entity->dataBuf.bluePipe->onEnterPipeEvt;
+    EvtScript* triggerScriptStart = entity->dataBuf.bluePipe->onEnterPipeEvt;
 
     gOverrideFlags &= ~GLOBAL_OVERRIDES_40;
     entity->boundScriptBytecode = triggerScriptStart;
@@ -142,22 +142,18 @@ INCLUDE_ASM(s32, "entity/BlueWarpPipe", entity_BlueWarpPipe_setupGfx);
 
 f32 entity_init_BlueWarpPipe(Entity* entity) {
     BlueWarpPipeData* data;
-    s32* args = &CreateEntityVarArgBuffer;
-    s32 entryID;
-    s32 enterPipeEvt;
-    s32 flagIndex;
-    f32* outPosY;
+    s32 entryID = CreateEntityVarArgBuffer[0];
+    EvtScript* enterPipeEvt = (EvtScript*)CreateEntityVarArgBuffer[1];
+    s32 flagIndex = CreateEntityVarArgBuffer[2];;
 
-    entryID = args[0];
-    enterPipeEvt = args[1];
-    flagIndex = args[2];
     entity->renderSetupFunc = &entity_BlueWarpPipe_setupGfx;
+
     data = entity->dataBuf.bluePipe;
-    outPosY = &entity->position.y; // required... wtf
     data->entryID = entryID;
     data->onEnterPipeEvt = enterPipeEvt;
     data->flagIndex = flagIndex;
     data->finalPosY = entity->position.y;
     data->isRaised = get_global_flag(data->flagIndex);
-    *outPosY = entity->position.y - (data->isRaised ? 15.0 : 52.0);
+
+    entity->position.y -= (data->isRaised ? 15.0 : 52.0);
 }
