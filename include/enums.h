@@ -534,6 +534,9 @@ enum SoundIDs {
     SOUND_172                       = 0x00000172,
     SOUND_17B                       = 0x0000017B,
     SOUND_194                       = 0x00000194,
+    SOUND_1A5                       = 0x000001A5,
+    SOUND_1A6                       = 0x000001A6,
+    SOUND_1A7                       = 0x000001A7,
     SOUND_BASIC_DOOR_OPEN           = 0x000001C1,
     SOUND_BASIC_DOOR_CLOSE          = 0x000001C2,
     SOUND_METAL_DOOR_OPEN           = 0x000001C3,
@@ -548,6 +551,7 @@ enum SoundIDs {
     SOUND_1CC                       = 0x000001CC,
     SOUND_211                       = 0x00000211,
     SOUND_213                       = 0x00000213,
+    SOUND_214                       = 0x00000214,
     SOUND_215                       = 0x00000215,
     SOUND_21C                       = 0x0000021C,
     SOUND_MENU_ERROR                = 0x0000021D,
@@ -3457,6 +3461,27 @@ enum FileMenuMessages {
     FILE_MESSAGE_ENTER_A_FILE_NAME          = 32, // Enter a file name![End]
     FILE_MESSAGE_QUESTION                   = 33, // ?[End]
     FILE_MESSAGE_PERIOD_34                  = 34, // .[End]
+};
+
+enum DrawMsgStyleFlags {
+    DRAW_MSG_STYLE_MENU             = 1, // slightly higher baseline with smaller fullspace witdhs
+    DRAW_MSG_STYLE_WAVY             = 2,
+    DRAW_MSG_STYLE_RAINBOW          = 4,
+    DRAW_MSG_STYLE_DROP_SHADOW      = 8
+};
+
+enum MsgPalettes {
+    MSG_PAL_00                      = 0x00,
+    MSG_PAL_01                      = 0x01,
+    MSG_PAL_02                      = 0x02,
+    MSG_PAL_03                      = 0x03,
+    MSG_PAL_04                      = 0x04,
+    MSG_PAL_05                      = 0x05,
+    MSG_PAL_06                      = 0x06,
+    MSG_PAL_07                      = 0x07,
+    MSG_PAL_08                      = 0x08,
+    // ... up to ...
+    MSG_PAL_50                      = 0x50
 };
 
 #endif

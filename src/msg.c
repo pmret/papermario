@@ -668,21 +668,21 @@ void draw_msg(s32 msgID, s32 posX, s32 posY, s32 opacity, s32 palette, u8 style)
             printer->printBufferPos += 3;
         }
 
-        if (style & 2) {
+        if (style & 2) { // DRAW_MSG_STYLE_WAVY
             printer->printBuffer[bufferPos++] = 0xFF;
             printer->printBuffer[bufferPos++] = 0x1C;
             printer->printBuffer[bufferPos++] = 8;
             printer->printBufferPos += 3;
         }
 
-        if (style & 4) {
+        if (style & 4) { // DRAW_MSG_STYLE_RAINBOW
             printer->printBuffer[bufferPos++] = 0xFF;
             printer->printBuffer[bufferPos++] = 0x1C;
             printer->printBuffer[bufferPos++] = 9;
             printer->printBufferPos += 3;
         }
 
-        if (style & 8) {
+        if (style & 8) { // DRAW_MSG_STYLE_DROP_SHADOW
             printer->printBuffer[bufferPos++] = 0xFF;
             printer->printBuffer[bufferPos++] = 0x1C;
             printer->printBuffer[bufferPos++] = 0xE;

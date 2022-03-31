@@ -2,6 +2,10 @@
 
 extern Gfx D_80243C50_E123F0[];
 
+#define RECORD_DISPLAY_MAP_VAR  0xA
+#define MINIGAME_TYPE_SMASH     0
+#define MINIGAME_TYPE_JUMP      1
+
 #define FADE_IN_TIME  5
 #define FADE_OUT_TIME 5
 
@@ -23,47 +27,44 @@ typedef struct RecordDisplayData {
 /* 0x14 */ s32 workerID;
 } RecordDisplayData; /* size = 0x18 */
 
-// TODO this signature may be wrong
-void msg_draw_frame(s32 posX, s32 posY, s32 sizeX, s32 sizeY, s32 style, s32 palette, s32 fading, s32 bgAlpha, s32 frameAlpha);
-
-void func_802411E0_E0F980(RecordDisplayData* data, s32 alpha) {
+void N(draw_record_display)(RecordDisplayData* data, s32 alpha) {
     if (alpha > 0) {
         gSPDisplayList(gMasterGfxPos++, D_80243C50_E123F0);
         gDPPipeSync(gMasterGfxPos++);
         gDPSetPrimColor(gMasterGfxPos++, 0, 0, 16, 120, 24, alpha * 0.65);
         gDPFillRectangle(gMasterGfxPos++, 48, 53, 272, 129);
         gDPPipeSync(gMasterGfxPos++);
-        msg_draw_frame(0x2D, 0x32, 0xE6, 0x52, 6, 0, 1, (s32)(alpha * 0.55), alpha); // cast needed if signature isn't present
-        if (data->gameType == 1) {
-            draw_msg(0x8001C, 0x42, 0x39, alpha, 1, 0);
-            draw_number(gPlayerData.jumpGamePlays, 0xDB, 0x4E, 1, 0, alpha, 3);
-            draw_number(gPlayerData.jumpGameTotal, 0xDB, 0x5D, 1, 0, alpha, 3);
-            draw_number(gPlayerData.jumpGameRecord, 0xDB, 0x6C, 1, 0, alpha, 3);
+        msg_draw_frame(45, 50, 230, 82, 6, 0, 1, (s32)(alpha * 0.55), alpha); // cast needed if signature isn't present
+        if (data->gameType == MINIGAME_TYPE_JUMP) {
+            draw_msg(MESSAGE_ID(0x8,0x1C), 66, 57, alpha, MSG_PAL_01, 0);
+            draw_number(gPlayerData.jumpGamePlays,   219, 78,  TRUE, MSG_PAL_00, alpha, 3);
+            draw_number(gPlayerData.jumpGameTotal,   219, 93,  TRUE, MSG_PAL_00, alpha, 3);
+            draw_number(gPlayerData.jumpGameRecord,  219, 108, TRUE, MSG_PAL_00, alpha, 3);
         } else {
-            draw_msg(0x8001D, 0x40, 0x39, alpha, 1, 0);
-            draw_number(gPlayerData.smashGamePlays, 0xDB, 0x4E, 1, 0, alpha, 3);
-            draw_number(gPlayerData.smashGameTotal, 0xDB, 0x5D, 1, 0, alpha, 3);
-            draw_number(gPlayerData.smashGameRecord, 0xDB, 0x6C, 1, 0, alpha, 3);
+            draw_msg(MESSAGE_ID(0x8,0x1D), 64, 57, alpha, MSG_PAL_01, 0);
+            draw_number(gPlayerData.smashGamePlays,  219, 78,  TRUE, MSG_PAL_00, alpha, 3);
+            draw_number(gPlayerData.smashGameTotal,  219, 93,  TRUE, MSG_PAL_00, alpha, 3);
+            draw_number(gPlayerData.smashGameRecord, 219, 108, TRUE, MSG_PAL_00, alpha, 3);
         }
 
-        draw_msg(0x8001E, 0x3A, 0x4E, alpha, 0, 1);
-        draw_msg(0x80023, 0xDF, 0x4E, alpha, 0, 1);
-        draw_msg(0x8001F, 0x3A, 0x5D, alpha, 0, 1);
-        draw_msg(0x80021, 0xDF, 0x5D, alpha, 0, 1);
-        draw_msg(0x80020, 0x3A, 0x6C, alpha, 0, 1);
-        draw_msg(0x80021, 0xDF, 0x6C, alpha, 0, 1);
+        draw_msg(MESSAGE_ID(0x8,0x1E), 58,  78,  alpha, MSG_PAL_00, DRAW_MSG_STYLE_MENU);
+        draw_msg(MESSAGE_ID(0x8,0x23), 223, 78,  alpha, MSG_PAL_00, DRAW_MSG_STYLE_MENU);
+        draw_msg(MESSAGE_ID(0x8,0x1F), 58,  93,  alpha, MSG_PAL_00, DRAW_MSG_STYLE_MENU);
+        draw_msg(MESSAGE_ID(0x8,0x21), 223, 93,  alpha, MSG_PAL_00, DRAW_MSG_STYLE_MENU);
+        draw_msg(MESSAGE_ID(0x8,0x20), 58,  108, alpha, MSG_PAL_00, DRAW_MSG_STYLE_MENU);
+        draw_msg(MESSAGE_ID(0x8,0x21), 223, 108, alpha, MSG_PAL_00, DRAW_MSG_STYLE_MENU);
     }
 }
 
-void func_80241540_E0FCE0(void) {
-    RecordDisplayData* data = (RecordDisplayData*)evt_get_variable(NULL, GW(0xA));
+void N(animate_and_draw_record)(void* renderData) {
+    RecordDisplayData* data = (RecordDisplayData*)evt_get_variable(NULL, GW(RECORD_DISPLAY_MAP_VAR));
 
     switch (data->state) {
     case RECORD_START_SHOW:
         data->stateTimer = 0;
         data->state = RECORD_STATE_FADE_IN;
         snd_start_sound(SOUND_21C, 0, 0);
-        /* fallthrough */
+        // fallthrough
     case RECORD_STATE_FADE_IN:
         data->stateTimer++;
         data->alpha = update_lerp(EASING_LINEAR, 32.0f, 255.0f, data->stateTimer, FADE_IN_TIME);
@@ -83,12 +84,12 @@ void func_80241540_E0FCE0(void) {
         if (data->state != RECORD_START_HIDE) {
             break;
         }
-        /* fallthrough */
+        // fallthrough
     case RECORD_START_HIDE:
         data->stateTimer = 0;
         data->state = RECORD_STATE_FADE_OUT;
         snd_start_sound(SOUND_MENU_BACK, 0, 0);
-        /* fallthrough */
+        // fallthrough
     case RECORD_STATE_FADE_OUT:
         data->stateTimer++;
         data->alpha = update_lerp(EASING_LINEAR, data->curAlpha, 0.0f, data->stateTimer, FADE_OUT_TIME);
@@ -97,23 +98,21 @@ void func_80241540_E0FCE0(void) {
         }
         break;
     }
-    func_802411E0_E0F980(data, data->alpha);
+    N(draw_record_display)(data, data->alpha);
 }
 
-/* N(work_draw_record) */
-void func_802416C0_E0FE60(void) {
+void N(work_draw_record)(void) {
     RenderTask task;
 
     task.renderMode = RENDER_MODE_2D;
     task.appendGfxArg = 0;
-    task.appendGfx = &func_80241540_E0FCE0;
+    task.appendGfx = &N(animate_and_draw_record);
     task.distance = 0;
 
     queue_render_task(&task);
 }
 
-/* N(UpdateRecordDisplay) */
-ApiStatus func_802416F8_E0FE98(Evt* script, s32 isInitialCall) {
+ApiStatus N(UpdateRecordDisplay)(Evt* script, s32 isInitialCall) {
     RecordDisplayData* data;
     s32 gameType;
 
@@ -123,11 +122,11 @@ ApiStatus func_802416F8_E0FE98(Evt* script, s32 isInitialCall) {
         script->functionTemp[0] = data;
         data->state = RECORD_START_SHOW;
         data->alpha = 255;
-        data->workerID = create_generic_entity_world(0, &func_802416C0_E0FE60);
+        data->workerID = create_generic_entity_world(NULL, &N(work_draw_record));
         data->gameType = gameType;
-        evt_set_variable(script, GW(0xA), data);
+        evt_set_variable(script, GW(RECORD_DISPLAY_MAP_VAR), data);
     }
-    data = script->functionTemp[0];
+    data = (RecordDisplayData*)script->functionTemp[0];
     if (data->state == RECORD_STATE_DONE) {
         free_generic_entity(data->workerID);
         heap_free(data);

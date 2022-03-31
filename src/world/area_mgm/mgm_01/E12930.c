@@ -30,7 +30,7 @@ typedef enum JumpGamePanelState {
     PANEL_STATE_DONE            = 9
 } JumpGamePanelState;
 
-/* the panels found by breaking brick blocks */
+// the panels found by breaking brick blocks
 typedef struct JumpGamePanel {
 /* 0x00 */ JumpGamePanelState state;
 /* 0x04 */ s32 modelID;
@@ -68,19 +68,19 @@ extern EntityBlueprint D_802EA0C4;
 
 extern s32 MessagePlural;
 extern s32 MessageSingular;
-extern s32 D_80243560_E15CC0; /* TODO: assign proper type for this data */
+extern s32 N(MsgImgs_Panels); // TODO: assign proper type for this data
 
-extern s8 D_80241AC8_E14228[NUM_BLOCKS]; /* blockPos.x */
-extern s8 D_80241AD4_E14234[NUM_BLOCKS]; /* blockPos.y */
-extern s8 D_80241AE0_E14240[NUM_BLOCKS]; /* blockPos.z */
+extern s8 N(BlockPosX)[NUM_BLOCKS];
+extern s8 N(BlockPosY)[NUM_BLOCKS];
+extern s8 N(BlockPosZ)[NUM_BLOCKS];
 
-extern f32 D_80241AEC_E1424C[NUM_BLOCKS]; /* tallyPos.x */
-extern f32 D_80241B18_E14278[NUM_BLOCKS]; /* tallyPos.y */
+extern f32 N(TallyPosX)[NUM_BLOCKS];
+extern f32 N(TallyPosY)[NUM_BLOCKS];
 
-extern s32 D_80241B44_E142A4[NUM_BLOCKS]; /* panel modelIDs */
-extern JumpGamePanelType D_80241B70_E142D0[NUM_BLOCKS]; /* panel types */
+extern s32 N(PanelModelIDs)[NUM_BLOCKS];
+extern JumpGamePanelType N(PanelTypes)[NUM_BLOCKS];
 
-extern JumpGamePanelType D_80241B9C_E142FC[4][NUM_BLOCKS]; /* initial configurations */
+extern JumpGamePanelType N(InitialConfigurations)[4][NUM_BLOCKS];
 extern EvtScript* D_802435E8_E15D48[NUM_BLOCKS];
 
 extern EvtScript D_80242310;
@@ -95,18 +95,17 @@ extern EvtScript D_80242410;
 extern EvtScript D_80242430;
 extern EvtScript D_80242450;
 
-/* N(draw_score_display) */
-void func_802401D0_E12930(void) {
+void N(draw_score_display) (void) {
     Enemy* scorekeeper = get_enemy(SCOREKEEPER_ENEMY_IDX);
     JumpGameData* data = (JumpGameData*)scorekeeper->varTable[JUMP_DATA_VAR_IDX];
     s32 hudElemID;
     s32 diff;
 
     if (scorekeeper->varTable[BROKEN_BLOCKS_VAR_IDX] == -1) {
-        if (data->scoreWindowPosX < 321) {
+        if (data->scoreWindowPosX < SCREEN_WIDTH + 1) {
             data->scoreWindowPosX += 10;
-            if (data->scoreWindowPosX > 321) {
-                data->scoreWindowPosX = 321;
+            if (data->scoreWindowPosX > SCREEN_WIDTH + 1) {
+                data->scoreWindowPosX = SCREEN_WIDTH + 1;
             }
         }
     } else {
@@ -118,8 +117,8 @@ void func_802401D0_E12930(void) {
         }
     }
 
-    if (data->scoreWindowPosX < 321) {
-        draw_box(0, 9, data->scoreWindowPosX, 28, 0, 72, 20, 255, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, NULL, NULL, NULL, 320, 240, NULL);
+    if (data->scoreWindowPosX < SCREEN_WIDTH + 1) {
+        draw_box(0, 9, data->scoreWindowPosX, 28, 0, 72, 20, 255, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, NULL, NULL, NULL, SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
         hudElemID = data->hudElemID;
         hud_element_set_render_pos(hudElemID, data->scoreWindowPosX + 15, 39);
         hud_element_draw_clipped(hudElemID);
@@ -151,34 +150,31 @@ void func_802401D0_E12930(void) {
     }
 }
 
-/* N(work_draw_score) */
-void func_802403C4_E12B24(void) {
+void N(work_draw_score)(void) {
     RenderTask task;
 
     task.renderMode = RENDER_MODE_2D;
     task.appendGfxArg = 0;
-    task.appendGfx = &func_802401D0_E12930;
+    task.appendGfx = &mgm_01_draw_score_display;
     task.distance = 0;
 
     queue_render_task(&task);
 }
 
-/* N(DisableMenus) */
-ApiStatus func_802403FC_E12B5C(Evt* script, s32 isInitialCall) {
+ApiStatus N(DisableMenus)(Evt* script, s32 isInitialCall) {
     gOverrideFlags |= GLOBAL_OVERRIDES_DISABLE_MENUS;
     func_800E9894();
     close_status_menu();
     return ApiStatus_DONE2;
 }
 
-/* N(EnableMenus) */
-ApiStatus func_80240438_E12B98(Evt* script, s32 isInitialCall) {
+ApiStatus N(EnableMenus)(Evt* script, s32 isInitialCall) {
     gOverrideFlags &= ~GLOBAL_OVERRIDES_DISABLE_MENUS;
     return ApiStatus_DONE2;
 }
 
-/* N(GetPanelInfo) -- arg0: index */
-ApiStatus func_8024045C_E12BBC(Evt* script, s32 isInitialCall) {
+// arg0: index
+ApiStatus N(GetPanelInfo)(Evt* script, s32 isInitialCall) {
     JumpGameData* data = (JumpGameData*)get_enemy(SCOREKEEPER_ENEMY_IDX)->varTable[JUMP_DATA_VAR_IDX];
     s32 index = evt_get_variable(script, *script->ptrReadPos);
 
@@ -190,8 +186,8 @@ ApiStatus func_8024045C_E12BBC(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-/* N(SetPanelState) -- arg0: index, arg1: newState */
-ApiStatus func_8024050C_E12C6C(Evt* script, s32 isInitialCall) {
+// arg0: index, arg1: newState
+ApiStatus N(SetPanelState)(Evt* script, s32 isInitialCall) {
     JumpGameData* data = (JumpGameData*)get_enemy(SCOREKEEPER_ENEMY_IDX)->varTable[JUMP_DATA_VAR_IDX];
     s32* args = script->ptrReadPos;
     s32 index = evt_get_variable(script, *args++);
@@ -202,8 +198,8 @@ ApiStatus func_8024050C_E12C6C(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-/* N(InitPanelEmergeFromBlock) -- arg0: index, arg1: newState */
-ApiStatus func_8024058C_E12CEC(Evt* script, s32 isInitialCall) {
+// arg0: index, arg1: newState
+ApiStatus N(InitPanelEmergeFromBlock)(Evt* script, s32 isInitialCall) {
     JumpGameData* data = (JumpGameData*)get_enemy(SCOREKEEPER_ENEMY_IDX)->varTable[JUMP_DATA_VAR_IDX];
     s32 index = evt_get_variable(script, *script->ptrReadPos);
     s32 blockPosIndex;
@@ -213,9 +209,9 @@ ApiStatus func_8024058C_E12CEC(Evt* script, s32 isInitialCall) {
 
     blockPosIndex = data->panels[index].blockPosIndex;
 
-    data->panels[index].curPos.x = D_80241AC8_E14228[blockPosIndex];
-    data->panels[index].curPos.y = D_80241AD4_E14234[blockPosIndex] + 15.0;
-    data->panels[index].curPos.z = D_80241AE0_E14240[blockPosIndex] + 12;
+    data->panels[index].curPos.x = N(BlockPosX)[blockPosIndex];
+    data->panels[index].curPos.y = N(BlockPosY)[blockPosIndex] + 15.0;
+    data->panels[index].curPos.z = N(BlockPosZ)[blockPosIndex] + 12;
 
     data->panels[index].startPos.x = data->panels[index].curPos.x;
     data->panels[index].startPos.y = data->panels[index].curPos.y;
@@ -226,6 +222,7 @@ ApiStatus func_8024058C_E12CEC(Evt* script, s32 isInitialCall) {
     data->panels[index].endPos.z = data->panels[index].curPos.z;
 
     data->panels[index].curAngle = 0;
+    
     data->panels[index].endScale = 2.0;
     data->panels[index].curScale = 1.0;
     data->panels[index].startScale = 1.0;
@@ -233,8 +230,8 @@ ApiStatus func_8024058C_E12CEC(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-/* N(UpdatePanelEmergeFromBlock) -- arg0: index */
-ApiStatus func_802406C4_E12E24(Evt* script, s32 isInitialCall) {
+// arg0: index
+ApiStatus N(UpdatePanelEmergeFromBlock)(Evt* script, s32 isInitialCall) {
     JumpGameData* data = (JumpGameData*)get_enemy(SCOREKEEPER_ENEMY_IDX)->varTable[JUMP_DATA_VAR_IDX];
     s32 index = evt_get_variable(script, *script->ptrReadPos);
 
@@ -265,8 +262,8 @@ ApiStatus func_802406C4_E12E24(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-/* N(InitPanelHoldAboveBlock) -- arg0: index */
-ApiStatus func_802407E4_E12F44(Evt* script, s32 isInitialCall) {
+// arg0: index
+ApiStatus N(InitPanelHoldAboveBlock)(Evt* script, s32 isInitialCall) {
     JumpGameData* data = (JumpGameData*)get_enemy(SCOREKEEPER_ENEMY_IDX)->varTable[JUMP_DATA_VAR_IDX];
     s32 index = evt_get_variable(script, *script->ptrReadPos);
 
@@ -276,8 +273,8 @@ ApiStatus func_802407E4_E12F44(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-/* N(UpdatetPanelHoldAboveBlock) -- arg0: index */
-ApiStatus func_8024084C_E12FAC(Evt* script, s32 isInitialCall) {
+// arg0: index
+ApiStatus N(UpdatetPanelHoldAboveBlock)(Evt* script, s32 isInitialCall) {
     JumpGameData* data = (JumpGameData*)get_enemy(SCOREKEEPER_ENEMY_IDX)->varTable[JUMP_DATA_VAR_IDX];
     s32 index = evt_get_variable(script, *script->ptrReadPos);
 
@@ -291,8 +288,8 @@ ApiStatus func_8024084C_E12FAC(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-/* N(InitPanelMoveToTally) -- arg0: index, arg1: newState */
-ApiStatus func_802408EC_E1304C(Evt* script, s32 isInitialCall) {
+// arg0: index, arg1: newState
+ApiStatus N(InitPanelMoveToTally)(Evt* script, s32 isInitialCall) {
     JumpGameData* data = (JumpGameData*)get_enemy(SCOREKEEPER_ENEMY_IDX)->varTable[JUMP_DATA_VAR_IDX];
     s32 index = evt_get_variable(script, *script->ptrReadPos);
     f32 dist;
@@ -306,8 +303,8 @@ ApiStatus func_802408EC_E1304C(Evt* script, s32 isInitialCall) {
     data->panels[index].startScale = data->panels[index].curScale;
 
     if (data->panels[index].type != PANEL_BOWSER) {
-        data->panels[index].endPos.x = D_80241AEC_E1424C[data->panels[index].tallyPosIndex];
-        data->panels[index].endPos.y = D_80241B18_E14278[data->panels[index].tallyPosIndex];
+        data->panels[index].endPos.x = N(TallyPosX)[data->panels[index].tallyPosIndex];
+        data->panels[index].endPos.y = N(TallyPosY)[data->panels[index].tallyPosIndex];
         data->panels[index].endPos.z = 110.0f;
         data->panels[index].endAngle = 360.0f;
         data->panels[index].endScale = 1.0f;
@@ -322,7 +319,7 @@ ApiStatus func_802408EC_E1304C(Evt* script, s32 isInitialCall) {
     dist = dist3D(
         data->panels[index].startPos.x, data->panels[index].startPos.y, data->panels[index].startPos.z,
         data->panels[index].endPos.x, data->panels[index].endPos.y, data->panels[index].endPos.z);
-    if (data->panels[index].type != 3) {
+    if (data->panels[index].type != PANEL_BOWSER) {
         data->panels[index].lerpDuration = (dist * 0.125) + 0.5;
     } else {
         data->panels[index].lerpDuration = (dist / 5.0) + 0.5;
@@ -331,8 +328,8 @@ ApiStatus func_802408EC_E1304C(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-/* N(UpdatePanelMoveToTally) -- arg0: index */
-ApiStatus func_80240AAC_E1320C(Evt* script, s32 isInitialCall) {
+// arg0: index
+ApiStatus N(UpdatePanelMoveToTally)(Evt* script, s32 isInitialCall) {
     JumpGameData* data = (JumpGameData*)get_enemy(SCOREKEEPER_ENEMY_IDX)->varTable[JUMP_DATA_VAR_IDX];
     s32 index = evt_get_variable(script, *script->ptrReadPos);
 
@@ -367,8 +364,8 @@ ApiStatus func_80240AAC_E1320C(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-/* N(EndPanelAnimation) -- arg0: index */
-ApiStatus func_80240BF4_E13354(Evt* script, s32 isInitialCall) {
+// arg0: index
+ApiStatus N(EndPanelAnimation)(Evt* script, s32 isInitialCall) {
     JumpGameData* data = (JumpGameData*)get_enemy(SCOREKEEPER_ENEMY_IDX)->varTable[JUMP_DATA_VAR_IDX];
     s32 index = evt_get_variable(script, *script->ptrReadPos);
 
@@ -377,8 +374,7 @@ ApiStatus func_80240BF4_E13354(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-/* N(UpdateRecords) */
-ApiStatus func_80240C54_E133B4(Evt* script, s32 isInitialCall) {
+ApiStatus N(UpdateRecords)(Evt* script, s32 isInitialCall) {
     JumpGameData* data = (JumpGameData*)get_enemy(SCOREKEEPER_ENEMY_IDX)->varTable[JUMP_DATA_VAR_IDX];
     PlayerData* player = &gPlayerData;
 
@@ -394,8 +390,7 @@ ApiStatus func_80240C54_E133B4(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-/* N(GiveCoinReward) */
-ApiStatus func_80240CD0_E13430(Evt* script, s32 isInitialCall) {
+ApiStatus N(GiveCoinReward)(Evt* script, s32 isInitialCall) {
     JumpGameData* data = (JumpGameData*)get_enemy(SCOREKEEPER_ENEMY_IDX)->varTable[JUMP_DATA_VAR_IDX];
     s32 coinsLeft = data->currentScore;
     s32 increment;
@@ -424,8 +419,7 @@ ApiStatus func_80240CD0_E13430(Evt* script, s32 isInitialCall) {
     return (data->currentScore > 0) ? ApiStatus_BLOCK : ApiStatus_DONE2;
 }
 
-/* N(DoubleScore) */
-ApiStatus func_80240D84_E134E4(Evt* script, s32 isInitialCall) {
+ApiStatus N(DoubleScore)(Evt* script, s32 isInitialCall) {
     JumpGameData* data = (JumpGameData*)get_enemy(SCOREKEEPER_ENEMY_IDX)->varTable[JUMP_DATA_VAR_IDX];
     s32 score = 2 * data->currentScore;
     data->currentScore = score;
@@ -434,8 +428,7 @@ ApiStatus func_80240D84_E134E4(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-/* N(EndBowserPanelAnimation) */
-ApiStatus func_80240DB8_E13518(Evt* script, s32 isInitialCall) {
+ApiStatus N(EndBowserPanelAnimation)(Evt* script, s32 isInitialCall) {
     JumpGameData* data = (JumpGameData*)get_enemy(SCOREKEEPER_ENEMY_IDX)->varTable[JUMP_DATA_VAR_IDX];
     s32 i;
 
@@ -444,8 +437,8 @@ ApiStatus func_80240DB8_E13518(Evt* script, s32 isInitialCall) {
             break;
     }
 
-    data->panels[i].curPos.x = D_80241AEC_E1424C[data->panels[i].tallyPosIndex];
-    data->panels[i].curPos.y = D_80241B18_E14278[data->panels[i].tallyPosIndex];
+    data->panels[i].curPos.x = N(TallyPosX)[data->panels[i].tallyPosIndex];
+    data->panels[i].curPos.y = N(TallyPosY)[data->panels[i].tallyPosIndex];
     data->panels[i].curPos.z = 110.0f;
 
     evt_set_variable(script, LW(1), data->panels[i].modelID);
@@ -456,8 +449,8 @@ ApiStatus func_80240DB8_E13518(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-/* N(GetPanelPos) -- arg0: index */
-ApiStatus func_80240ECC_E1362C(Evt* script, s32 isInitialCall) {
+// arg0: index
+ApiStatus N(GetPanelPos)(Evt* script, s32 isInitialCall) {
     JumpGameData* data = (JumpGameData*)get_enemy(SCOREKEEPER_ENEMY_IDX)->varTable[JUMP_DATA_VAR_IDX];
     s32 index = evt_get_variable(script, *script->ptrReadPos);
 
@@ -470,15 +463,14 @@ ApiStatus func_80240ECC_E1362C(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-/* N(DestroyBlockEntities) */
-ApiStatus func_80240F90_E136F0(Evt* script, s32 isInitialCall) {
+ApiStatus N(DestroyBlockEntities) (Evt* script, s32 isInitialCall) {
     JumpGameData* data = (JumpGameData*)get_enemy(SCOREKEEPER_ENEMY_IDX)->varTable[JUMP_DATA_VAR_IDX];
     s32 i;
 
     for(i = 0; i < ARRAY_COUNT(data->panels); i++)
     {
         if (data->panels[i].entityIndex >= 0) {
-            fx_walking_dust(1, D_80241AC8_E14228[i], D_80241AD4_E14234[i] + 13, D_80241AE0_E14240[i] + 5, 0, 0);
+            fx_walking_dust(1, N(BlockPosX)[i], N(BlockPosY)[i] + 13, N(BlockPosZ)[i] + 5, 0, 0);
             delete_entity(data->panels[i].entityIndex);
         }
     }
@@ -488,8 +480,7 @@ ApiStatus func_80240F90_E136F0(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-/* N(OnBreakBlock) */
-ApiStatus func_80241090_E137F0(Evt* script, s32 isInitialCall) {
+ApiStatus N(OnBreakBlock)(Evt* script, s32 isInitialCall) {
     Enemy* scorekeeper = get_enemy(SCOREKEEPER_ENEMY_IDX);
     JumpGameData* data = (JumpGameData*)scorekeeper->varTable[JUMP_DATA_VAR_IDX];
     s32 index = evt_get_variable(script, *script->ptrReadPos);
@@ -526,11 +517,10 @@ ApiStatus func_80241090_E137F0(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-/* N(CreateBlockEntities) */
-ApiStatus func_80241234_E13994(Evt* script, s32 isInitialCall) {
+ApiStatus N(CreateBlockEntities)(Evt* script, s32 isInitialCall) {
     JumpGameData* data = get_enemy(SCOREKEEPER_ENEMY_IDX)->varTable[JUMP_DATA_VAR_IDX];
     s32 entityIndex;
-    s32 configuration;
+    s32 initialConfiguration;
     s32 indexA, indexB;
     s32 curBlockIdx;
     s32 temp;
@@ -543,9 +533,9 @@ ApiStatus func_80241234_E13994(Evt* script, s32 isInitialCall) {
 
     if (isInitialCall) {
         // choose one of four initial configurations at random
-        configuration = rand_int(1000) % 4;
+        initialConfiguration = rand_int(1000) % ARRAY_COUNT(N(InitialConfigurations));
         for(i = 0; i < NUM_BLOCKS; i++) {
-            data->type[i] = D_80241B9C_E142FC[configuration][i];
+            data->type[i] = N(InitialConfigurations)[initialConfiguration][i];
         }
 
         // randomly swap 1000 pairs
@@ -559,7 +549,7 @@ ApiStatus func_80241234_E13994(Evt* script, s32 isInitialCall) {
                 data->type[indexA] = temp;
             }
         }
-
+        
         script->functionTemp[0] = 0;
         script->functionTemp[1] = 0;
     }
@@ -567,16 +557,16 @@ ApiStatus func_80241234_E13994(Evt* script, s32 isInitialCall) {
     if (--script->functionTemp[0] <= 0) {
         curBlockIdx = script->functionTemp[1];
         entityIndex = create_entity(&D_802EA0C4,
-            D_80241AC8_E14228[curBlockIdx],
-            D_80241AD4_E14234[curBlockIdx],
-            D_80241AE0_E14240[curBlockIdx],
+            N(BlockPosX)[curBlockIdx],
+            N(BlockPosY)[curBlockIdx],
+            N(BlockPosZ)[curBlockIdx],
             0, 0, 0, 0, MAKE_ENTITY_END);
         data->panels[curBlockIdx].entityIndex = entityIndex;
         get_entity_by_index(entityIndex)->boundScriptBytecode = scriptArray[curBlockIdx];
         fx_sparkles(3,
-            D_80241AC8_E14228[curBlockIdx],
-            D_80241AD4_E14234[curBlockIdx] + 13,
-            D_80241AE0_E14240[curBlockIdx] + 5,
+            N(BlockPosX)[curBlockIdx],
+            N(BlockPosY)[curBlockIdx] + 13,
+            N(BlockPosZ)[curBlockIdx] + 5,
             23.0f);
         sfx_play_sound(SOUND_213);
         script->functionTemp[0] = 3;
@@ -588,8 +578,7 @@ ApiStatus func_80241234_E13994(Evt* script, s32 isInitialCall) {
 
 const char* mgm_01_str = "mgm_00";
 
-/* N(TakeCoinCost) */
-ApiStatus func_80241510_E13C70(Evt* script, s32 isInitialCall) {
+ApiStatus N(TakeCoinCost)(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
 
     if (isInitialCall) {
@@ -602,8 +591,7 @@ ApiStatus func_80241510_E13C70(Evt* script, s32 isInitialCall) {
     return (++script->functionTemp[0] == PLAY_COST) ? ApiStatus_DONE2 : ApiStatus_BLOCK;
 }
 
-/* N(InitializePanels) */
-ApiStatus func_80241574_E13CD4(Evt* script, s32 isInitialCall) {
+ApiStatus N(InitializePanels)(Evt* script, s32 isInitialCall) {
     JumpGameData* data = get_enemy(SCOREKEEPER_ENEMY_IDX)->varTable[JUMP_DATA_VAR_IDX];
     s32 i;
 
@@ -612,29 +600,28 @@ ApiStatus func_80241574_E13CD4(Evt* script, s32 isInitialCall) {
 
     for(i = 0; i < ARRAY_COUNT(data->panels); i++) {
         data->panels[i].state = PANEL_STATE_INIT;
-        data->panels[i].modelID = D_80241B44_E142A4[i];
-        data->panels[i].type = D_80241B70_E142D0[i];
+        data->panels[i].modelID = N(PanelModelIDs)[i];
+        data->panels[i].type = N(PanelTypes)[i];
         data->panels[i].tallyPosIndex = -1;
     }
 
     return ApiStatus_DONE2;
 }
 
-/* N(CreateScoreDisplay) */
-ApiStatus func_802415EC_E13D4C(Evt* script, s32 isInitialCall) {
+ApiStatus N(CreateMinigame)(Evt* script, s32 isInitialCall) {
     Enemy* scorekeeper = get_enemy(SCOREKEEPER_ENEMY_IDX);
     JumpGameData* data = general_heap_malloc(sizeof(JumpGameData));
     s32 hudElemID;
 
     scorekeeper->varTable[JUMP_DATA_VAR_IDX] = data;
-    data->workerID = create_generic_entity_world(NULL, &func_802403C4_E12B24);
+    data->workerID = create_generic_entity_world(NULL, &mgm_01_work_draw_score);
 
     hudElemID = hud_element_create(&HudScript_StatusCoin);
     data->hudElemID = hudElemID;
     hud_element_set_flags(data->hudElemID, HUD_ELEMENT_FLAGS_80);
     hud_element_set_tint(data->hudElemID, 255, 255, 255);
 
-    data->scoreWindowPosX = 321;
+    data->scoreWindowPosX = SCREEN_WIDTH + 1;
     data->scoreWindowPosY = 28;
     func_800E9894();
     close_status_menu();
@@ -642,8 +629,7 @@ ApiStatus func_802415EC_E13D4C(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-/* N(DestroyScoreDisplay) */
-ApiStatus func_80241690_E13DF0(Evt* script, s32 isInitialCall) {
+ApiStatus N(DestroyMinigame) (Evt* script, s32 isInitialCall) {
     JumpGameData* data = get_enemy(SCOREKEEPER_ENEMY_IDX)->varTable[JUMP_DATA_VAR_IDX];
 
     free_generic_entity(data->workerID);
@@ -652,14 +638,12 @@ ApiStatus func_80241690_E13DF0(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-/* N(GetCoinCount) */
-ApiStatus func_802416CC_E13E2C(Evt* script, s32 isInitialCall) {
+ApiStatus N(GetCoinCount)(Evt* script, s32 isInitialCall) {
     evt_set_variable(script, LW(0xA), gPlayerData.coins);
     return ApiStatus_DONE2;
 }
 
-/* N(SetStringVars_BlocksRemaining) */
-ApiStatus func_802416F8_E13E58(Evt* script, s32 isInitialCall) {
+ApiStatus N(SetMsgVars_BlocksRemaining)(Evt* script, s32 isInitialCall) {
     Enemy* scorekeeper = get_enemy(SCOREKEEPER_ENEMY_IDX);
     s32 remaining = (scorekeeper->varTable[TOTAL_BLOCKS_VAR_IDX] - scorekeeper->varTable[BROKEN_BLOCKS_VAR_IDX]) + 1;
 
@@ -669,14 +653,12 @@ ApiStatus func_802416F8_E13E58(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-/* N(HideCoinCounter) */
-ApiStatus func_80241760_E13EC0(Evt* script, s32 isInitialCall) {
+ApiStatus N(HideCoinCounter)(Evt* script, s32 isInitialCall) {
     hide_coin_counter_immediately();
     return ApiStatus_DONE2;
 }
 
-/* N(SetStringImgs_Panels) */
-ApiStatus func_80241780_E13EE0(Evt* script, s32 isInitialCall) {
-    set_message_images(&D_80243560_E15CC0);
+ApiStatus N(SetMsgImgs_Panels)(Evt* script, s32 isInitialCall) {
+    set_message_images(&N(MsgImgs_Panels));
     return ApiStatus_DONE2;
 }
