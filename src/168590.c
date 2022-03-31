@@ -3,15 +3,15 @@
 #include "hud_element.h"
 
 extern MenuWindowBP D_8024A134[1];
-
+extern HudScript* D_8024A180[3];
+extern MenuWindowBP D_8024A190[2];
+extern s32 D_8024A1B4;
 extern s8 D_8024C090;
 extern s32 D_8024C100_C09980[3];
 extern u8 D_8024C117;
 
 void filemenu_info_draw_message_contents(MenuPanel* menu, s32 baseX, s32 baseY) {
-    s8 page = menu->page;
-
-    switch (page) {
+    switch (menu->page) {
         case 0:
             filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_FILE_26), baseX + 10, baseY + 4, 255, 0, 0);
             draw_number(filemenu_menus[0]->selected + 1, baseX + 48, baseY + 6, 0, 0, 255, 3);
@@ -31,7 +31,7 @@ void filemenu_info_draw_message_contents(MenuPanel* menu, s32 baseX, s32 baseY) 
             break;
         case 3:
             filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_FILE_26), baseX + 10, baseY + 4, 255, 0, 0);
-            draw_number(filemenu_menus[0]->selected + 1, baseX + 48, baseY + 6, 0, 0, 255, page);
+            draw_number(filemenu_menus[0]->selected + 1, baseX + 48, baseY + 6, 0, 0, 255, 3);
             filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_HAS_BEEN_CREATED), baseX + 49, baseY + 4, 255, 0, 0);
             break;
     }
@@ -52,12 +52,10 @@ void filemenu_info_init(MenuPanel* tab) {
 void filemenu_info_handle_input(void) {
     if (filemenu_pressedButtons & (BUTTON_A | BUTTON_B)) {
         MenuPanel* menu = filemenu_menus[0];
-        s32 page;
 
         filemenu_8024C098 = 0;
-        page = menu->page;
 
-        switch(page) {
+        switch(menu->page) {
             case 1:
                 menu->page = 0;
                 set_window_update(WINDOW_ID_51, (s32)filemenu_update_show_options_left);
@@ -75,7 +73,7 @@ void filemenu_info_handle_input(void) {
                 filemenu_set_selected(menu, 1, 2);
                 break;
             case 2:
-                menu->page = page;
+                menu->page = 2;
                 filemenu_set_selected(menu, 1, 2);
                 break;
         }
@@ -131,7 +129,30 @@ void filemenu_draw_contents_file_create_header(MenuPanel* menu, s32 baseX, s32 b
 
 INCLUDE_ASM(s32, "168590", filemenu_draw_contents_choose_name);
 
-INCLUDE_ASM(s32, "168590", filemenu_choose_name_init);
+void filemenu_choose_name_init(MenuPanel* menu) {
+    s32 i;
+
+    for (i = 0; i < ARRAY_COUNT(D_8024A180); i++) {
+        D_8024C100_C09980[i] = hud_element_create(D_8024A180[i]);
+        hud_element_set_flags(D_8024C100_C09980[i], HUD_ELEMENT_FLAGS_80);
+    }
+
+    for (i = 0; i < ARRAY_COUNT(D_8024A190); i++) {
+        D_8024A190[i].tab = menu;
+    }
+
+    setup_pause_menu_tab(D_8024A190, 2);
+
+    gWindows[48].pos.x = ((gWindows[48].parent != -1)
+                        ? (gWindows[gWindows[48].parent].width / 2)
+                        : SCREEN_WIDTH / 2) - gWindows[48].width / 2;
+
+    gWindows[49].pos.x = ((gWindows[49].parent != -1)
+                        ? (gWindows[gWindows[49].parent].width / 2)
+                        : SCREEN_WIDTH / 2) - gWindows[49].width / 2;
+
+    menu->initialized = TRUE;
+}
 
 void filemenu_choose_name_handle_input(MenuPanel* menu) {
     s32 oldSelected = menu->selected;
