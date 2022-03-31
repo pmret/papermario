@@ -769,11 +769,11 @@ void draw_shop_items(void) {
     ShopItemEntity* shopItemEntities;
 
     if (shop->flags & SHOP_FLAGS_1) {
-        set_window_update(10, basic_window_update);
-        set_window_update(11, basic_window_update);
+        set_window_update(WINDOW_ID_10, basic_window_update);
+        set_window_update(WINDOW_ID_11, basic_window_update);
     } else {
-        set_window_update(10, basic_hidden_window_update);
-        set_window_update(11, basic_hidden_window_update);
+        set_window_update(WINDOW_ID_10, basic_hidden_window_update);
+        set_window_update(WINDOW_ID_11, basic_hidden_window_update);
     }
 
     if (shop->flags & SHOP_FLAGS_1) {

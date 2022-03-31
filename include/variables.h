@@ -90,6 +90,7 @@ extern s16 D_8010CD10;
 extern s16 D_8010CD12;
 extern s32 D_8010CD20;
 extern s32 D_801595A0;
+extern Struct8015A578 D_8015A578;
 
 extern BackgroundHeader gBackgroundImage;
 
@@ -111,7 +112,7 @@ extern s32 CreateEntityVarArgBuffer[3]; // not size 3
 
 extern f32 DefaultMoveSpeeds[4];
 
-extern TempSetZoneEnabled* D_800D91D4;
+extern CollisionData gZoneCollisionData;
 
 // Animation related
 extern AnimatedMeshList* gCurrentAnimMeshListPtr;

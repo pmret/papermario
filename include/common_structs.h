@@ -759,19 +759,6 @@ typedef struct UiStatus {
     /* 0x6C */ s8 unk_6C[4];
 } UiStatus; // size = 0x70
 
-typedef struct Collider {
-    /* 0x00 */ s32 flags;
-    /* 0x04 */ s16 nextSibling;
-    /* 0x06 */ s16 firstChild;
-    /* 0x08 */ s16 parentModelIndex;
-    /* 0x0A */ s16 numTriangles;
-    /* 0x0C */ struct ColliderTriangle* triangleTable;
-    /* 0x10 */ struct ColliderBoundingBox* aabb;
-    /* 0x14 */ s16 numVertices;
-    /* 0x16 */ char unk_16[2];
-    /* 0x18 */ Vec3f* vertexTable; // contains local and global coordinates
-} Collider; // size = 0x1C
-
 typedef struct CameraInitData {
     /* 0x00 */ s16 flags;
     /* 0x02 */ s8 type;
@@ -900,7 +887,7 @@ typedef struct Camera {
     /* 0x528 */ f32 unk_528;
     /* 0x52C */ s32 unk_52C;
     /* 0x530 */ s32 unk_530;
-    /* 0x534 */ struct ColliderBoundingBox* aabbForZoneBelow;
+    /* 0x534 */ CameraControlSettings* aabbForZoneBelow;
     /* 0x538 */ char unk_538[0x18];
     /* 0x550 */ f32 unk_550;
     /* 0x554 */ s16 unk_554;
@@ -1080,10 +1067,29 @@ typedef struct MoveData {
     /* 0x13 */ u8 actionCommandID;
 } MoveData; // size = 0x14
 
+typedef struct Collider {
+    /* 0x00 */ s32 flags;
+    /* 0x04 */ s16 nextSibling;
+    /* 0x06 */ s16 firstChild;
+    /* 0x08 */ s16 parentModelIndex;
+    /* 0x0A */ s16 numTriangles;
+    /* 0x0C */ struct ColliderTriangle* triangleTable;
+    /* 0x10 */ union {
+                   struct ColliderBoundingBox* aabb;
+                   struct CameraControlSettings* camSettings;
+               };
+    /* 0x14 */ s16 numVertices;
+    /* 0x16 */ char unk_16[2];
+    /* 0x18 */ Vec3f* vertexTable; // contains local and global coordinates
+} Collider; // size = 0x1C
+
 typedef struct CollisionData {
     /* 0x00 */ Vec3f* vertices;
     /* 0x04 */ Collider* colliderList;
-    /* 0x08 */ struct ColliderBoundingBox* aabbs;
+    /* 0x08 */ union {
+                   struct ColliderBoundingBox* aabbs;
+                   CameraControlSettings* camSettings;
+               };
     /* 0x0C */ s16 numColliders;
     /* 0x0E */ char unk_0E[2];
 } CollisionData; // size = 0x10
@@ -1208,7 +1214,8 @@ typedef struct ItemEntity {
     /* 0x2E */ u8 unkCounter;
     /* 0x2F */ s8 unk_2F;
     /* 0x30 */ f32 scale;
-    /* 0x34 */ char unk_34[8];
+    /* 0x34 */ Vec3s unk_34;
+    /* 0x3A */ char unk_3A[2];
     /* 0x3C */ s32 framesLeft;
     /* 0x40 */ s32* currentState;
     /* 0x44 */ s32 unk_44;
@@ -1799,7 +1806,8 @@ typedef struct Encounter {
 } Encounter; // size = 0x5C
 
 typedef struct PlayerPathElement {
-    /* 0x00 */ char unk_00[4];
+    /* 0x00 */ s8 isJumping;
+    /* 0x03 */ char unk_01[3];
     /* 0x04 */ Vec3f pos;
 } PlayerPathElement; // size = 0x10
 
@@ -2355,15 +2363,6 @@ typedef struct VirtualEntity {
 
 typedef VirtualEntity* VirtualEntityList[0x40];
 
-typedef struct TempSetZoneEnabled {
-    /* 0x00 */ s32 flags;
-    /* 0x04 */ s16 id1;
-    /* 0x06 */ s16 id2;
-    /* 0x08 */ char unk_08[0x8];
-    /* 0x10 */ CameraControlSettings* unk_10;
-    /* 0x14 */ char unk_14[0x8];
-} TempSetZoneEnabled; // size = 0x1C
-
 typedef struct ActionCommandStatus {
     /* 0x00 */ s32 unk_00;
     /* 0x04 */ s32 hudElements[15];
@@ -2425,20 +2424,21 @@ typedef struct PopupMessage {
     /* 0x18 */ Message* message;
 } PopupMessage; // size = 0x1C
 
-typedef struct struct8015A578 {
+typedef struct Struct8015A578 {
     /* 0x00 */ u8 unk_00;
     /* 0x01 */ u8 unk_01;
     /* 0x02 */ u8 unk_02;
     /* 0x03 */ u8 unk_03[5];
     /* 0x08 */ f32 unk_08;
-} struct8015A578; // size = 0x0C
+    /* 0x0C */ char unk_0C[0x4];
+} Struct8015A578; // size = 0x10
 
 typedef struct SaveMetadata {
     /* 0x00 */ s32 timePlayed;
     /* 0x04 */ u8 spiritsRescued;
     /* 0x05 */ char unk_05[0x1];
     /* 0x06 */ s8 level;
-    /* 0x07 */ char filename[8];
+    /* 0x07 */ unsigned char filename[8];
     /* 0x0F */ char unk_0F[0x1];
     /* 0x10 */ s32 unk_10;
     /* 0x14 */ s32 unk_14;

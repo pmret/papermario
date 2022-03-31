@@ -339,7 +339,7 @@ ApiStatus UseSettingsFrom(Evt* script, s32 isInitialCall) {
                                &nx, &ny, &nz);
 
     if (hitID >= 0) {
-        camera->controlSettings = *D_800D91D4[hitID].unk_10;
+        camera->controlSettings = *gZoneCollisionData.colliderList[hitID].camSettings;
     }
     return ApiStatus_DONE2;
 }
@@ -545,9 +545,88 @@ ApiStatus WaitForCam(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "evt/cam_api", SetCamProperties, Evt* script, s32 isInitialCall);
+ApiStatus SetCamProperties(Evt* script, s32 isInitialCall) {
+    f32 hitX, hitY, hitZ, hitDepth, nX, nY, nZ;
+    s32 zoneID;
+    Bytecode* args = script->ptrReadPos;
+    Camera* camera = &gCameras[evt_get_variable(script, *args++)];
+    f32 moveSpeed = evt_get_float_variable(script, *args++);
+    f32 posX = evt_get_float_variable(script, *args++);
+    f32 posY = evt_get_float_variable(script, *args++);
+    f32 posZ = evt_get_float_variable(script, *args++);
+    f32 boomLength = evt_get_float_variable(script, *args++);
+    f32 boomPitch = evt_get_float_variable(script, *args++);
+    f32 viewPitch = evt_get_float_variable(script, *args++);
 
-INCLUDE_ASM(s32, "evt/cam_api", AdjustCam, Evt* script, s32 isInitialCall);
+    if (isInitialCall) {
+        hitDepth = 32767.0f;
+        zoneID = test_ray_zones(posX, posY + 10.0f, posZ, 0.0f, -1.0f, 0.0f, &hitX, &hitY, &hitZ, &hitDepth, &nX, &nY, &nZ);
+        if (zoneID >= 0) {
+            camera->controlSettings = *gZoneCollisionData.colliderList[zoneID].camSettings;
+        }
+
+        camera->movePos.x = posX;
+        camera->movePos.y = posY;
+        camera->movePos.z = posZ;
+        camera->controlSettings.boomLength = boomLength;
+        camera->controlSettings.boomPitch = boomPitch;
+        camera->controlSettings.viewPitch = viewPitch;
+        camera->moveSpeed = moveSpeed;
+        camera->unk_506 = 1;
+        camera->followPlayer = TRUE;
+        camera->panPhase = 0.0f;
+        return ApiStatus_BLOCK;
+    }
+
+    if (camera->interpAlpha >= 1.0f) {
+        return ApiStatus_DONE2;
+    } else {
+        return ApiStatus_BLOCK;
+    }
+}
+
+ApiStatus AdjustCam(Evt* script, s32 isInitialCall) {
+    f32 hitX, hitY, hitZ, hitDepth, nX, nY, nZ;
+    f32 posX, posY, posZ;
+    s32 zoneID;
+    Bytecode* args = script->ptrReadPos;
+    Camera* camera = &gCameras[evt_get_variable(script, *args++)];
+    f32 moveSpeed = evt_get_float_variable(script, *args++);
+    f32 deltaPosX = evt_get_float_variable(script, *args++);
+    f32 boomLength = evt_get_float_variable(script, *args++);
+    f32 boomPitch = evt_get_float_variable(script, *args++);
+    f32 viewPitch = evt_get_float_variable(script, *args++);
+    PlayerStatus* playerStatus = &gPlayerStatus;
+
+    if (isInitialCall) {
+        hitDepth = 32767.0f;
+        posX = playerStatus->position.x;
+        posY = playerStatus->position.y;
+        posZ = playerStatus->position.z;
+        zoneID = test_ray_zones(posX, posY + 10.0f, posZ, 0.0f, -1.0f, 0.0f, &hitX, &hitY, &hitZ, &hitDepth, &nX, &nY, &nZ);
+        if (zoneID >= 0) {
+            camera->controlSettings = *gZoneCollisionData.colliderList[zoneID].camSettings;
+        }
+
+        camera->movePos.x = posX + deltaPosX;
+        camera->movePos.y = posY;
+        camera->movePos.z = posZ;
+        camera->controlSettings.boomLength = boomLength;
+        camera->controlSettings.boomPitch = boomPitch;
+        camera->controlSettings.viewPitch = viewPitch;
+        camera->moveSpeed = moveSpeed;
+        camera->unk_506 = 1;
+        camera->followPlayer = TRUE;
+        camera->panPhase = 0.0f;
+        return ApiStatus_BLOCK;
+    }
+
+    if (camera->interpAlpha >= 1.0f) {
+        return ApiStatus_DONE2;
+    } else {
+        return ApiStatus_BLOCK;
+    }
+}
 
 ApiStatus ResetCam(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -569,7 +648,7 @@ ApiStatus ResetCam(Evt* script, s32 isInitialCall) {
                                &nx, &ny, &nz);
 
         if (hitID >= 0) {
-            camera->controlSettings = *D_800D91D4[hitID].unk_10;
+            camera->controlSettings = *gZoneCollisionData.colliderList[hitID].camSettings;
         }
 
         camera->movePos.x = x;

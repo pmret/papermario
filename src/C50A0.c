@@ -1,5 +1,6 @@
 #include "common.h"
 #include "effects.h"
+#include "hud_element.h"
 
 #define MAX_ITEM_ENTITIES 256
 
@@ -11,16 +12,26 @@ extern ItemEntity* D_801561A0[MAX_ITEM_ENTITIES];
 extern ItemEntity** D_801565A0; // item entity list
 extern s16 D_801565A4;
 extern s16 D_801565A8;
+extern s32 D_80155D80;
 extern s16 D_80155D8C;
 extern s16 D_80155D8E;
 extern s16 D_80155D90;
 
-void item_entity_load(ItemEntity* itemEntity);
+extern s32* SparkleScript_Coin;
+
+void item_entity_load(ItemEntity*);
+void item_entity_update(ItemEntity*);
+void appendGfx_item_entity(void*);
 void draw_item_entities(void);
 void func_80132D94(void);
-void func_8013559C(ItemEntity* itemEntity);
+s32 test_item_player_collision(ItemEntity*);
+void update_item_entity_collectable(ItemEntity*);
+void func_8013559C(ItemEntity*);
+void update_item_entity_static(ItemEntity*);
 void func_801356C4(void);
+void func_801356CC(ItemEntity*);
 void func_801356D4(void);
+void update_item_entity_temp(ItemEntity*);
 
 INCLUDE_ASM(s32, "C50A0", draw_ci_image_with_clipping);
 
@@ -59,16 +70,13 @@ s32 sparkle_script_step(ItemEntity* itemEntity) {
             itemEntity->unk_44 = *currentState++;
             itemEntity->currentState = currentState;
             break;
-
         case 2:
             itemEntity->currentState = itemEntity->sequenceStart;
-            return 1;
-
+            return TRUE;
         case 3:
             itemEntity->sequenceStart = currentState;
             itemEntity->currentState = currentState;
-            return 1;
-
+            return TRUE;
         case 7:
             itemEntity->framesLeft = *currentState++;
             itemEntity->unk_4C = *currentState++;
@@ -77,16 +85,13 @@ s32 sparkle_script_step(ItemEntity* itemEntity) {
             itemEntity->unk_58 = *currentState++;
             itemEntity->currentState = currentState;
             break;
-
         case 4:
             itemEntity->currentState = currentState++;
             itemEntity->currentState = currentState++;
-
         case 0:
-            return 1;
+            return TRUE;
     }
-
-    return 0;
+    return FALSE;
 }
 
 void sparkle_script_update(ItemEntity* itemEntity) {
@@ -183,10 +188,95 @@ INCLUDE_ASM(s32, "C50A0", make_item_entity_at_player);
 
 INCLUDE_ASM(s32, "C50A0", item_entity_update);
 
-INCLUDE_ASM(s32, "C50A0", update_item_entities);
+void update_item_entities(void) {
+    ItemEntity* entity;
+    ItemEntity* entity2;
+    f32 x, y, z, hitDepth;
+    s32 coin;
+    s32 i;
+
+    if (!(gOverrideFlags & 0xC00)) {
+        for (i = 0; i < 0x100; i++) {
+            entity = D_801565A0[i];
+
+            if (entity != NULL && entity->flags != 0) {
+                if (entity->itemID == ITEM_COIN) {
+                    if (rand_int(100) > 90) {
+                        sparkle_script_init(entity, &SparkleScript_Coin);
+                        D_80155D8C = rand_int(16) - 8;
+                        D_80155D8E = rand_int(16) - 8;
+                        D_80155D90 = 5;
+                    }
+                    sparkle_script_update(entity);
+                }
+
+                item_entity_update(entity);
+
+                switch (entity->type) {
+                    case 0:
+                        update_item_entity_static(entity);
+                        break;
+                    case 1:
+                    case 2:
+                        func_801356CC(entity);
+                        break;
+                    case 3:
+                    case 12:
+                    case 16:
+                    case 20:
+                    case 23:
+                        update_item_entity_collectable(entity);
+                        break;
+                    case 28:
+                        update_item_entity_temp(entity);
+                        break;
+                }
+
+
+                entity = D_801565A0[i];
+                if (entity != NULL) {
+                    s32 xs, ys, zs;
+
+                    switch (entity->type) {
+                        case 0:
+                        case 3:
+                        case 12:
+                        case 16:
+                        case 28:
+                            xs = entity->position.x;
+                            ys = entity->position.y;
+                            zs = entity->position.z;
+
+                            if (xs != entity->unk_34.x || ys != entity->unk_34.y || zs != entity->unk_34.z) {
+                                Shadow* shadow = get_shadow_by_index(entity->shadowIndex);
+
+                                x = entity->position.x;
+                                y = entity->position.y + 12.0f;
+                                z = entity->position.z;
+                                hitDepth = 1000.0f;
+                                npc_raycast_down_sides(0x20000, &x, &y, &z, &hitDepth);
+
+                                shadow->position.x = x;
+                                shadow->position.y = y;
+                                shadow->position.z = z;
+                                shadow->rotation.x = gGameStatusPtr->playerGroundTraceAngles.x;
+                                shadow->rotation.y = 0.0f;
+                                shadow->rotation.z = gGameStatusPtr->playerGroundTraceAngles.z;
+                                set_standard_shadow_scale(shadow, hitDepth * 0.5f);
+                            }
+                            break;
+                    }
+                    entity->unk_34.x = entity->position.x;
+                    entity->unk_34.y = entity->position.y;
+                    entity->unk_34.z = entity->position.z;
+                }
+            }
+            do {} while (0); // required to match
+        }
+    }
+}
 
 INCLUDE_ASM(s32, "C50A0", appendGfx_item_entity);
-void appendGfx_item_entity(void* itemEntity);
 
 void draw_item_entities(void) {
     RenderTask rt;
@@ -318,7 +408,6 @@ void func_80133A94(s32 idx, s32 itemID) {
     item_entity_load(item);
 }
 
-s32 test_item_player_collision(ItemEntity* itemEntity);
 INCLUDE_ASM(s32, "C50A0", test_item_player_collision);
 
 s32 test_item_entity_position(f32 x, f32 y, f32 z, f32 dist) {
@@ -443,7 +532,7 @@ void func_8013559C(ItemEntity* itemEntity) {
 }
 
 void update_item_entity_static(ItemEntity* itemEntity) {
-    if ((s8)itemEntity->state == 0 && test_item_player_collision(itemEntity)) {
+    if (itemEntity->state == 0 && test_item_player_collision(itemEntity)) {
         D_801565A4 = 1;
         itemEntity->type = 28;
         itemEntity->state = 0;
@@ -455,7 +544,7 @@ void update_item_entity_static(ItemEntity* itemEntity) {
 void func_801356C4(void) {
 }
 
-void func_801356CC(void) {
+void func_801356CC(ItemEntity* itemEntity) {
 }
 
 void func_801356D4(void) {
@@ -471,7 +560,7 @@ void func_801369D0(s32 arg1, s32 x, s32 y) {
     draw_msg(0x1D0060, x + 12, y + 4, 255, 52, 0);
 }
 
-void func_80136A08(ItemEntity* itemEntity, s32 posX, s32 arg2) {
+void func_80136A08(ItemEntity* itemEntity, s32 posX, s32 posY) {
     ItemData* itemData = &gItemTable[itemEntity->itemID];
     s32 itemMsg;
 
@@ -481,7 +570,7 @@ void func_80136A08(ItemEntity* itemEntity, s32 posX, s32 arg2) {
         case 10:
         case 11:
             itemMsg = itemData->itemMsg;
-            draw_msg(itemMsg, posX + 8, arg2, 255, 0xA, 0);
+            draw_msg(itemMsg, posX + 8, posY, 255, 0xA, 0);
             break;
     }
 }

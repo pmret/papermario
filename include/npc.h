@@ -452,19 +452,19 @@ void func_8003D3BC(Npc* npc);
 
 void func_8003D624(Npc* npc, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
 
-void func_8003D660(Npc* npc, s32 arg1);
+void func_8003D660(Npc* npc, s32);
 
-void func_8003D788(Npc* npc, s32 arg1);
+void func_8003D788(Npc* npc, s32);
 
-void func_8003DA38(Npc* npc, s32 arg1);
+void func_8003DA38(Npc* npc, s32);
 
-s32 func_8003DC38(void);
+s32 func_8003DC38(Npc*, s32);
 
-void func_8003DFA0(Npc* npc);
+void func_8003DFA0(Npc* npc, s32);
 
-void func_8003E0D4(Npc* npc);
+void func_8003E0D4(Npc* npc, s32);
 
-void func_8003E1D0(Npc* npc);
+void func_8003E1D0(Npc* npc, s32);
 
 /// Duplicate of set_defeated().
 void COPY_set_defeated(s32 mapID, s32 encounterID);

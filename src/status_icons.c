@@ -242,7 +242,7 @@ void update_merlee_message(PopupMessage* popup) {
     }
 
     if (closeMessage) {
-        set_window_update(9, WINDOW_UPDATE_HIDE);
+        set_window_update(WINDOW_ID_9, WINDOW_UPDATE_HIDE);
         D_800A0F40 = 0;
         dispose_merlee_message(popup);
     }
@@ -270,7 +270,7 @@ void draw_merlee_message(PopupMessage* popup) {
         width = get_msg_width(messageID, 0) + 30;
         xPos = 160 - (width / 2);
         set_window_properties(9, xPos, 80, width, D_80078160[get_msg_lines(messageID) - 1], 0, draw_merlee_message_string, popup, -1);
-        set_window_update(9, WINDOW_UPDATE_SHOW);
+        set_window_update(WINDOW_ID_9, WINDOW_UPDATE_SHOW);
     }
 }
 

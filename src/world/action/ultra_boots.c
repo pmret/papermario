@@ -3,15 +3,12 @@
 extern s32 gSpinHistoryBufferPos;
 extern s32 gSpinHistoryPosY[5];
 extern s16 gSpinHistoryPosAngle[5];
-extern struct struct8015A578 D_8015A578;
 
 s32 func_802B65F8_E26D08(void);
 
 void func_802B6000_E26710(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     CollisionStatus* collisionStatus = &gCollisionStatus;
-    struct8015A578* tempStruct;
-    struct8015A578* tempStruct2;
     f32 temp_f0;
     f32 temp_f20;
     u8 colliderType;
@@ -116,9 +113,8 @@ void func_802B6000_E26710(void) {
                         sfx_play_sound_at_player(0x14A, 0);
                         start_rumble(0x100, 0x32);
 
-                        tempStruct = &D_8015A578;
-                        tempStruct->unk_00 = 1;
-                        tempStruct->unk_08 = playerStatus->position.y;
+                        D_8015A578.unk_00 = 1;
+                        D_8015A578.unk_08 = playerStatus->position.y;
                         playerStatus->flags |= 0x400;
                         return;
                     }
@@ -144,9 +140,8 @@ void func_802B6000_E26710(void) {
                 sfx_play_sound_at_player(0x14A, 0);
                 start_rumble(0x100, 0x32);
 
-                tempStruct2 = &D_8015A578;
-                tempStruct2->unk_00 = 1;
-                tempStruct2->unk_08 = playerStatus->position.y;
+                D_8015A578.unk_00 = 1;
+                D_8015A578.unk_08 = playerStatus->position.y;
                 playerStatus->flags |= 0x400;
             }
             break;

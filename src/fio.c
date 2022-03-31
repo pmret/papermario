@@ -27,7 +27,7 @@ s32 get_spirits_rescued(void) {
 
 s32 fio_calc_header_checksum(void) {
     u32 sum = 0;
-    s32* it = D_800D95E8;
+    s32* it = &D_800D95E8;
     u32 i;
 
     for (i = 0; i < 0x20; i++, it++) {
@@ -66,16 +66,16 @@ s32 fio_has_valid_backup(void) {
 s32 fio_flush_backups(void) {
     s32 checksum;
 
-    strcpy(D_800D95E8, &magicSaveString);
-    D_800D95E8[12] = 0;
-    D_800D95E8[13] = -1;
+    strcpy(D_800D95E8.magicString, &magicSaveString);
+    D_800D95E8.crc1 = 0;
+    D_800D95E8.crc2 = -1;
     checksum = fio_calc_header_checksum();
-    D_800D95E8[12] = checksum;
-    D_800D95E8[13] = ~checksum;
+    D_800D95E8.crc1 = checksum;
+    D_800D95E8.crc2 = ~checksum;
     fio_erase_flash(6);
-    fio_write_flash(6, D_800D95E8, 128);
+    fio_write_flash(6, &D_800D95E8, 0x80);
     fio_erase_flash(7);
-    fio_write_flash(7, D_800D95E8, 128);
+    fio_write_flash(7, &D_800D95E8, 0x80);
     return 1;
 }
 
@@ -84,7 +84,7 @@ s32 fio_calc_file_checksum(SaveData* saveData) {
     s32* it = saveData;
     u32 i;
 
-    for (i = 0; i < 0x4E0; i++, it++) {
+    for (i = 0; i < sizeof(*saveData) / sizeof(*it); i++, it++) {
         sum += *it;
     }
     return sum;

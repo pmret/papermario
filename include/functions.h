@@ -30,6 +30,7 @@ u32 _heap_free(HeapNode* heapNodeList, void* addrToFree);
 void* _heap_realloc(HeapNode* heapNodeList, void* addr, u32 newSize);
 HeapNode* _heap_create(HeapNode* addr, u32 size);
 s32 dma_copy(Addr romStart, Addr romEnd, void* vramDest);
+f32 rand_float(void);
 void copy_matrix(Matrix4f src, Matrix4f dest);
 
 s32 _Printf(PrintCallback pfn, char* arg, const char* fmt, va_list ap);
@@ -57,6 +58,8 @@ Entity* get_entity_by_index(s32 index);
 s32 create_entity(EntityBlueprint*, s32, s32, s32, s32, ...);
 void entity_shattering_idle(Entity* entity);
 void func_802666E4(Actor* actor, f32 x, f32 y, f32 z, s32 damage);
+
+s32 entity_raycast_down(f32*, f32*, f32*, f32*, f32*, f32*);
 
 void step_game_loop(void);
 s32 resume_all_group(s32 groupFlags);
@@ -383,6 +386,7 @@ PlayerData* get_player_data(void);
 
 s32 npc_raycast_down_around(s32, f32*, f32*, f32*, f32*, f32, f32);
 s32 npc_raycast_down_sides(s32, f32*, f32*, f32*, f32*);
+s32 npc_raycast_up(s32, f32*, f32*, f32*, f32*);
 s32 player_raycast_up_corners(PlayerStatus*, f32*, f32*, f32*, f32*, f32);
 s32 player_raycast_below_cam_relative(PlayerStatus*, f32*, f32*, f32*, f32*, f32*, f32*, f32*, f32*);
 s32 npc_test_move_taller_with_slipping(s32, f32*, f32*, f32*, f32, f32, f32, f32);
@@ -410,6 +414,7 @@ Evt* start_script_in_group(EvtScript* source, u8 priority, u8 initialState, u8 g
 f32 get_player_normal_yaw(void);
 void set_standard_shadow_scale(Shadow* shadow, f32 scale);
 void set_peach_shadow_scale(Shadow* shadow, f32 scale);
+s32 is_block_on_ground(Entity* block);
 void set_animation(s32 actorID, s32, s32 animationIndex);
 void set_animation_rate(s32 actorID, s32 partIndex, f32 rate);
 void func_8011B7C0(u16, s32, s32);
@@ -510,6 +515,7 @@ Evt* get_script_by_index(s32 index);
 
 s32 get_lava_reset_pos(f32* x, f32* y, f32* z);
 void start_rumble(s32, s32);
+void update_locomotion_state(void);
 void start_rumble_type(u32);
 void start_falling(void);
 
@@ -903,9 +909,9 @@ void clear_trigger_data(void);
 void clear_script_list(void);
 void clear_entity_data(s32);
 void clear_effect_data(void);
-void clear_area_flags(void);
 
-void update_locomotion_state(void);
+void clear_saved_variables(void);
+void clear_area_flags(void);
 
 void func_802BFB44_323694(f32 arg0);
 f32 get_player_normal_pitch(void);

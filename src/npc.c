@@ -22,7 +22,7 @@ void STUB_npc_callback(Npc* npc) {
 }
 
 void mtx_ident_mirror_y(Matrix4f mtx) {
-    guMtxIdentF(*mtx);
+    guMtxIdentF(mtx);
     mtx[0][0] = 1.0f;
     mtx[1][1] = -1.0f;
     mtx[2][2] = 1.0f;
@@ -575,7 +575,7 @@ void render_npcs(void) {
         Npc* npc = (*gCurrentNpcListPtr)[i];
         if (npc != NULL) {
             if (npc->flags && !(npc->flags & (NPC_FLAG_80000000 | NPC_FLAG_1000000 | NPC_FLAG_4 | NPC_FLAG_2))) {
-                transform_point(&cam->perspectiveMatrix, npc->pos.x, npc->pos.y, npc->pos.z, 1.0f, &x, &y, &z, &s);
+                transform_point(cam->perspectiveMatrix, npc->pos.x, npc->pos.y, npc->pos.z, 1.0f, &x, &y, &z, &s);
                 if (!(s < 0.01) || !(s > -0.01)) {
                     phi_f20 = ((z * 5000.0f) / s) + 5000.0f;
                     if (phi_f20 < 0.0f) {
@@ -685,7 +685,6 @@ void set_npc_sprite(Npc* npc, s32 anim, s32** extraAnimList) {
         npc->spriteInstanceID = spr_load_npc_sprite(anim, extraAnimList);
         ASSERT(npc->spriteInstanceID >= 0);
     }
-
 
     npc->currentAnim.w = anim;
 
@@ -1195,27 +1194,33 @@ Npc* npc_find_closest_simple(f32 x, f32 y, f32 z, f32 radius) {
 // Needs work
 #ifdef NON_EQUIVALENT
 s32 npc_find_standing_on_entity(s32 arg0) {
-    s32 entityIndex = (arg0 | 0x4000);
-    s32 yTemp = get_entity_by_index(entityIndex)->position.y - 10.0f;
+    s32 entityIndex = arg0 | 0x4000;
+    Entity* entity = get_entity_by_index(entityIndex);
+    s32 y = entity->position.y - 10.0f;
+    s32 floorID;
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(*gCurrentNpcListPtr); i++) {
         Npc* npc = (*gCurrentNpcListPtr)[i];
 
-        if (npc != NULL && npc->flags != 0) {
-            if (!(npc->flags & (0x80000000 | 0x4))) {
-                if (!(npc->pos.y < yTemp)) {
-                    s32 temp_v0;
+        if (npc != NULL) {
+            if (npc->flags != 0) {
+                if (!(npc->flags & 0x80000004)) {
+                    if (!(npc->pos.y < y)) {
+                        if (npc->flags & 0x8008) {
+                            floorID = npc_get_collider_below(npc);
+                            if (floorID == 0) {
+                                continue;
+                            }
+                        } else {
+                            floorID = npc->currentFloor;
 
-                    if (npc->flags & 0x8008) {
-                        temp_v0 = npc_get_collider_below(npc);
-                        if (temp_v0 != 0) {
-                            if (entityIndex == temp_v0) {
-                                return i;
+                            if (!(floorID & 0x4000)) {
+                                continue;
                             }
                         }
-                    } else if (npc->unk_84 & 0x4000) {
-                        if (entityIndex == npc->unk_84) {
+
+                        if (entityIndex == floorID) {
                             return i;
                         }
                     }
@@ -1337,14 +1342,12 @@ void func_8003D624(Npc* npc, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s
     func_8003D3BC(npc);
 }
 
-#ifdef NON_EQUIVALENT
-// Rodata padding issue. Most likely belongs to a separate TU than the function above with the switch.
 void func_8003D660(Npc* npc, s32 arg1) {
     PartnerActionStatus* temp = &gPartnerActionStatus;
 
     if ((npc->flags & (NPC_FLAG_400000 | NPC_FLAG_2)) == NPC_FLAG_400000) {
         if (npc->moveSpeed != 0.0f) {
-            switch (get_collider_type_by_id((u16)npc->unk_84) & 0xFF) {
+            switch (get_collider_type_by_id((u16)npc->currentFloor) & 0xFF) {
                 case 6:
                     func_8003DA38(npc, arg1);
                     return;
@@ -1352,7 +1355,7 @@ void func_8003D660(Npc* npc, s32 arg1) {
                     func_8003DC38(npc, arg1);
                     return;
                 case 8:
-                    if ((temp->unk_00 == 0) || (temp->unk_03 != 8)) {
+                    if ((temp->actionState.b[0] == 0) || (temp->actionState.b[3] != 8)) {
                         func_8003DFA0(npc, arg1);
                         return;
                     }
@@ -1374,14 +1377,13 @@ void func_8003D660(Npc* npc, s32 arg1) {
         }
     }
 }
-#else
-INCLUDE_ASM(void, "npc", func_8003D660, Npc* npc, s32 arg1);
-#endif
+
+static const f32 padding[2] = { 0.0f, 0.0f }; // todo remove when below funcs are decompiled
 
 void func_8003D788(Npc* npc, s32 arg1) {
     s32 phi_a2;
-    f32 subroutine_argA;
-    f32 subroutine_argB;
+    f32 sinTheta;
+    f32 cosTheta;
 
     phi_a2 = 0;
     if (gGameStatusPtr->areaID == 5) {
@@ -1402,23 +1404,59 @@ void func_8003D788(Npc* npc, s32 arg1) {
         if (D_80077C14++ >= 4) {
             D_80077C14 = 0;
             if (phi_a2 == 0) {
-                sin_cos_rad((clamp_angle(-npc->yaw) * TAU) / 360.0f, &subroutine_argA, &subroutine_argB);
-                fx_walking_dust(0, npc->pos.x + (npc->collisionRadius * subroutine_argA * 0.2f), npc->pos.y + 1.5f,
-                               npc->pos.z + (npc->collisionRadius * subroutine_argB * 0.2f), subroutine_argA, subroutine_argB);
+                sin_cos_rad((clamp_angle(-npc->yaw) * TAU) / 360.0f, &sinTheta, &cosTheta);
+                fx_walking_dust(0, npc->pos.x + (npc->collisionRadius * sinTheta * 0.2f), npc->pos.y + 1.5f,
+                               npc->pos.z + (npc->collisionRadius * cosTheta * 0.2f), sinTheta, cosTheta);
             } else {
-                sin_cos_rad((clamp_angle(npc->yaw) * TAU) / 360.0f, &subroutine_argA, &subroutine_argB);
-                fx_misc_particles(3, npc->pos.x + (npc->collisionRadius * subroutine_argA), npc->pos.y + 1.5f,
-                              npc->pos.z + (npc->collisionRadius * subroutine_argB), 5.0f, 10.0f, 1.0f, 5, 30);
+                sin_cos_rad((clamp_angle(npc->yaw) * TAU) / 360.0f, &sinTheta, &cosTheta);
+                fx_misc_particles(3, npc->pos.x + (npc->collisionRadius * sinTheta), npc->pos.y + 1.5f,
+                              npc->pos.z + (npc->collisionRadius * cosTheta), 5.0f, 10.0f, 1.0f, 5, 30);
             }
         }
     }
 }
 
+// floats suck
+#ifdef NON_MATCHING
+void func_8003DA38(Npc* npc, s32 arg1) {
+    f32 theta;
+    f32 sinTheta;
+    f32 cosTheta;
+    f32 x, y, z;
+
+    if (arg1 == 2 && D_80077C1E == 5) {
+        fx_flower_splash(npc->pos.x, npc->pos.y + 14.0f, npc->pos.z, D_80077C18);
+        D_80077C18 = clamp_angle(D_80077C18 + 35.0f);
+        D_80077C1E = 0;
+        return;
+    }
+
+    D_80077C1E++;
+    if (D_80077C1E > 5) {
+        D_80077C1E = 5;
+    }
+
+    if (D_80077C1C++ > 0) {
+        D_80077C1C = 0;
+        theta = clamp_angle(-npc->yaw) * TAU / 360.0f;
+        sinTheta = sin_rad(theta);
+        cosTheta = cos_rad(theta);
+
+        x = npc->pos.x + (npc->collisionRadius * sinTheta * -0.4f);
+        z = npc->pos.z + (npc->collisionRadius * cosTheta * -0.4f);
+        y = npc->pos.y + 15.5f;
+
+        fx_flower_trail(1, x, y, z, -npc->yaw + rand_int(10) - 5.0f, D_80077C20);
+        D_80077C20 = D_80077C20 == 0;
+    }
+}
+#else
 INCLUDE_ASM(void, "npc", func_8003DA38, Npc* npc, s32 arg1);
+#endif
 
 INCLUDE_ASM(s32, "npc", func_8003DC38);
 
-void func_8003DFA0(Npc* npc) {
+void func_8003DFA0(Npc* npc, s32 arg1) {
     if (D_80077C30++ >= 4) {
         f32 temp_f20;
         f32 x;
@@ -1434,7 +1472,7 @@ void func_8003DFA0(Npc* npc) {
     }
 }
 
-void func_8003E0D4(Npc* npc) {
+void func_8003E0D4(Npc* npc, s32 arg1) {
     if (D_80077C38++ >= 4) {
         f32 theta;
         f32 sinTheta;
@@ -1449,7 +1487,7 @@ void func_8003E0D4(Npc* npc) {
     }
 }
 
-void func_8003E1D0(Npc* npc) {
+void func_8003E1D0(Npc* npc, s32 arg1) {
     if (D_80077C3A++ >= 4) {
         f32 temp_f20;
         f32 x;
@@ -1666,8 +1704,6 @@ s32 kill_encounter(Enemy* enemy) {
     }
 }
 
-#ifdef NON_EQUIVALENT
-// regalloc. s2/s3 switched
 void kill_enemy(Enemy* enemy) {
     EncounterStatus* encounterStatus = &gCurrentEncounter;
     Encounter* encounter = encounterStatus->encounterList[enemy->encounterIndex];
@@ -1718,20 +1754,20 @@ void kill_enemy(Enemy* enemy) {
         }
     }
 
-    if (!(enemy->flags & ENEMY_FLAGS_4)) {
-        if (!(enemy->flags & ENEMY_FLAGS_8) || (enemy == encounterStatus->currentEnemy)) {
-            if (!(enemy->flags & ENEMY_FLAGS_1)) {
-                if (!(enemy->flags & ENEMY_FLAGS_10)) {
-                    COPY_set_defeated((s8)encounterStatus->mapID, encounter->encounterID + i);
+    do {
+        if (!(enemy->flags & ENEMY_FLAGS_4)) {
+            if (!(enemy->flags & ENEMY_FLAGS_8) || (enemy == encounterStatus->currentEnemy)) {
+                if (!(enemy->flags & ENEMY_FLAGS_1)) {
+                    if (!(enemy->flags & ENEMY_FLAGS_10)) {
+                        COPY_set_defeated(encounterStatus->mapID, encounter->encounterID + i);
+                    }
                 }
             }
         }
-    }
+    } while (0); // required to match
+
     heap_free(enemy);
 }
-#else
-INCLUDE_ASM(void, "npc", kill_enemy);
-#endif
 
 s32 bind_enemy_ai(Enemy* enemy, EvtScript* aiScriptBytecode) {
     Evt* aiScript;
