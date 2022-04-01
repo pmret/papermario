@@ -4,6 +4,8 @@
 #include "nu/nualsgi.h"
 #include "common.h"
 
+#define ALIGN16_(val) (((val) + 0xF) & 0xFFF0)
+
 struct BGMPlayer;
 struct UnkAl19E0;
 struct UnkAl48;
@@ -342,20 +344,46 @@ typedef struct INITHeader {
     /* 0x14 */ char unk_14[0xC];
 } INITHeader; // size = 0x20
 
+typedef struct PERHeader {
+    /* 0x00 */ s32 signature; // 'PER ' or 'PRG '
+    /* 0x04 */ s32 totalSize; // including this header
+    /* 0x08 */ char unk_08[8];
+} PERHeader; // size = 0x10
+
+typedef struct PEREntry {
+    /* 0x00 */ char unk_00[0x90];
+} PEREntry; // size = 0x90;
+
 typedef struct SBNFileEntry {
     /* 0x0 */ s32 offset;
     /* 0x4 */ u32 data;
 } SBNFileEntry; // size = 0x8
 
+typedef struct BKHeader {
+    /* 0x00 */ u16 unk_00;
+    /* 0x02 */ char unk_02[2];
+    /* 0x04 */ s32 unk_04;
+    /* 0x08 */ char unk_08[4];
+    /* 0x0C */ u16 unk_0C;
+    /* 0x0E */ char unk_0E[2];
+    /* 0x10 */ char unk_10[2];
+    /* 0x12 */ u16 unk_12[0x10];
+    /* 0x32 */ u16 unk_32;
+    /* 0x34 */ u16 unk_34;
+    /* 0x36 */ u16 unk_36;
+    /* 0x38 */ u16 unk_38;
+    /* 0x3A */ u16 unk_3A;
+    /* 0x3C */ u16 unk_3C;
+    /* 0x3E */ u16 unk_3E;
+} BKHeader; // size = 0x40
+
 typedef struct InitSongEntry {
-    /* 0x0 */ s16 bgmFileIndex; // required BGM file
-    /* 0x2 */ s16 bkFileIndex[3]; // optional BK files for this track
+    /* 0x0 */ u16 bgmFileIndex; // required BGM file
+    /* 0x2 */ u16 bkFileIndex[3]; // optional BK files for this track
 } InitSongEntry; // size = 0x8
 
 typedef struct UnkAl19E0Sub {
     /* 0x0 */ u16 unk_0;
-    /* 0x2 */ u16 unk_2;
-    /* 0x4 */ u16 unk_4;
 } UnkAl19E0Sub;
 
 typedef struct UnkAl19E0Sub2 {
@@ -395,8 +423,8 @@ typedef struct UnkAl19E0 {
     /* 0x0051 */ u8 unk_51;
     /* 0x0052 */ u8 unk_52;
     /* 0x0053 */ u8 unk_53;
-    /* 0x0054 */ s32* dataPER;
-    /* 0x0058 */ s32* dataPRG;
+    /* 0x0054 */ PEREntry* dataPER;
+    /* 0x0058 */ InstrumentCFG* dataPRG;
     /* 0x005C */ s32* currentTrackData[4];
     /* 0x006C */ UnkAl19E0Sub3 unk_6C[1];
     /* 0x0074 */ char unk_74[0x8];
@@ -568,7 +596,8 @@ typedef struct UnkAl8 {
 typedef struct UnkAl1E4 {
     /* 0x00 */ char unk_00[0x8];
     /* 0x08 */ s32 unk_08;
-    /* 0x0C */ char unk_0C[0x18];
+    /* 0x0C */ char unk_0C[0x14];
+    /* 0x20 */ s32 unk_20;
     /* 0x24 */ u8 unk_24;
     /* 0x25 */ u8 unk_25;
     /* 0x26 */ char unk_26[0x2];
@@ -581,7 +610,7 @@ typedef struct UnkAl834 {
     /* 0x004 */ s32 unk_04;
     /* 0x008 */ s32 unk_08;
     /* 0x00C */ s32 unk_0C;
-    /* 0x010 */ char unk_10[0x10];
+    /* 0x010 */ u8* unk_10[4];
     /* 0x020 */ u8 unk_20;
     /* 0x021 */ u8 unk_21;
     /* 0x022 */ u8 unk_22;
@@ -598,15 +627,6 @@ typedef struct ALConfig {
     /* 0x10 */ void* dmaNew;
     /* 0x14 */ ALHeap* heap;
 } ALConfig; // size = 0x18;
-
-typedef struct UnkAlGlobal {
-    /* 0x00 */ s32 unk_00;
-    /* 0x04 */ s32 unk_04;
-    /* 0x08 */ s32 unk_08;
-    /* 0x0C */ s32 unk_0C;
-    /* 0x10 */ s32 unk_10;
-    /* 0x14 */ s32 unk_14;
-} UnkAlGlobal;
 
 extern u8 D_80078181;
 extern s32 D_80078190;
@@ -761,11 +781,13 @@ void func_80057E5C(u8);
 void func_80057EB0(void);
 void func_80057ED0(s16);
 
+SoundBank* snd_load_BK_to_bank(s32 bkFileOffset, SoundBank* bank, s32 bankIndex, s32 bankGroup);
 void snd_load_INIT(UnkAl19E0*, s32, ALHeap*);
 s32 snd_fetch_SBN_file(u32, s32, SBNFileEntry*);
-void snd_load_PER(UnkAl19E0*, s32*);
-void snd_load_PRG(UnkAl19E0*, s32*);
+void snd_load_PER(UnkAl19E0*, s32);
+void snd_load_PRG(UnkAl19E0*, s32);
 void snd_read_rom(s32, u8*, u32);
+void snd_copy_words(s32*, s32*, s32);
 
 #undef alHeapAlloc
 void* alHeapAlloc(ALHeap *heap, s32 arg1, s32 size);
