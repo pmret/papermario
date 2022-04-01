@@ -32,7 +32,9 @@ WINDOW_UPDATE_FUNC(filemenu_update_show_name_input);
 WINDOW_UPDATE_FUNC(filemenu_update_show_options_left);
 WINDOW_UPDATE_FUNC(filemenu_update_show_options_right);
 WINDOW_UPDATE_FUNC(filemenu_update_show_options_bottom);
+WINDOW_UPDATE_FUNC(filemenu_update_show_with_rotation);
 
+WINDOW_UPDATE_FUNC(filemenu_update_hidden_name_input);
 WINDOW_UPDATE_FUNC(filemenu_update_hidden_options_left);
 WINDOW_UPDATE_FUNC(filemenu_update_hidden_options_right);
 WINDOW_UPDATE_FUNC(filemenu_update_hidden_title);
@@ -40,8 +42,10 @@ WINDOW_UPDATE_FUNC(filemenu_update_hidden_options_bottom);
 WINDOW_UPDATE_FUNC(filemenu_update_hidden_with_rotation);
 
 WINDOW_UPDATE_FUNC(filemenu_update_select_file);
+WINDOW_UPDATE_FUNC(filemenu_update_deselect_file);
 
 WINDOW_UPDATE_FUNC(filemenu_update_show_name_confirm);
+WINDOW_UPDATE_FUNC(filemenu_update_hidden_name_confirm);
 
 WINDOW_UPDATE_FUNC(main_menu_window_update);
 

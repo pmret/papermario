@@ -90,6 +90,7 @@ extern s16 D_8010CD10;
 extern s16 D_8010CD12;
 extern s32 D_8010CD20;
 extern s32 D_801595A0;
+extern Struct8015A578 D_8015A578;
 
 extern BackgroundHeader gBackgroundImage;
 

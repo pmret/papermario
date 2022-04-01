@@ -610,7 +610,7 @@ void pause_init(void) {
     posX = 225;
     for (i = 6; i > 0; i--) {
         if (!gPausePanels[i]->initialized) {
-            set_window_update(24 + i, WINDOW_UPDATE_HIDE);
+            set_window_update(WINDOW_ID_PAUSE_TUTORIAL + i, WINDOW_UPDATE_HIDE);
         } else {
             gWindows[WINDOW_ID_PAUSE_TUTORIAL + i].pos.x = posX + 14;
             posX -= 45;

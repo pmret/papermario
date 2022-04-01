@@ -59,18 +59,18 @@ void filemenu_info_handle_input(void) {
         switch(page) {
             case 1:
                 menu->page = 0;
-                set_window_update(0x33, (s32)filemenu_update_show_options_left);
-                set_window_update(0x34, (s32)filemenu_update_show_options_right);
-                set_window_update(0x35, (s32)filemenu_update_show_options_bottom);
-                set_window_update(0x37, (s32)filemenu_update_show_options_bottom);
+                set_window_update(WINDOW_ID_51, (s32)filemenu_update_show_options_left);
+                set_window_update(WINDOW_ID_52, (s32)filemenu_update_show_options_right);
+                set_window_update(WINDOW_ID_53, (s32)filemenu_update_show_options_bottom);
+                set_window_update(WINDOW_ID_55, (s32)filemenu_update_show_options_bottom);
                 filemenu_set_selected(menu, 0, 2);
                 break;
             case 4:
                 menu->page = 0;
-                set_window_update(0x33, (s32)filemenu_update_show_options_left);
-                set_window_update(0x34, (s32)filemenu_update_show_options_right);
-                set_window_update(0x35, (s32)filemenu_update_show_options_bottom);
-                set_window_update(0x37, (s32)filemenu_update_show_options_bottom);
+                set_window_update(WINDOW_ID_51, (s32)filemenu_update_show_options_left);
+                set_window_update(WINDOW_ID_52, (s32)filemenu_update_show_options_right);
+                set_window_update(WINDOW_ID_53, (s32)filemenu_update_show_options_bottom);
+                set_window_update(WINDOW_ID_55, (s32)filemenu_update_show_options_bottom);
                 filemenu_set_selected(menu, 1, 2);
                 break;
             case 2:
@@ -78,7 +78,7 @@ void filemenu_info_handle_input(void) {
                 filemenu_set_selected(menu, 1, 2);
                 break;
         }
-        set_window_update(0x2F, WINDOW_UPDATE_HIDE);
+        set_window_update(WINDOW_ID_47, WINDOW_UPDATE_HIDE);
     }
 }
 
