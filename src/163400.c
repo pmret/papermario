@@ -46,14 +46,22 @@ s16 D_80249D14[16] = { 0, 2, 9, 21, 34, 48, 62, 77, 91, 105, 120, 134, 148, 161,
 s16 D_80249D34[10] = { 185, 160, 135, 110, 85, 60, 37, 17, 5, 0 };
 s16 D_80249D48[10] = { 0, 5, 17, 37, 60, 85, 110, 135, 160, 185};
 s32 D_80249D4C = 0; // padding?
-s32 D_80249D60[] = { 0x028001E0, 0x01FF0000, 0x028001E0, 0x01FF0000, };
-s32 D_80249D70[] = { 0x40E00000, 0x41480000, 0x41500000, 0x41680000, 0x41600000, 0x41500000, 0x41380000, 0x41180000,
-                     0x40F00000, 0x40B00000, 0x40600000, 0x40000000, 0x3F800000, 0x3F000000, 0x00000000, };
+Vp D_80249D60 = {
+    .vp = {
+        .vscale = { 640, 480, 511, 0},
+        .vtrans = { 640, 480, 511, 0},
+    }
+};
+f32 D_80249D70[15] = { 7.0f, 12.5f, 13.0f, 14.5f, 14.0f, 13.0f, 11.5f, 9.5f, 7.5f, 5.5f, 3.5f, 2.0f, 1.0f, 0.5f, 0.0f };
 s32 D_80249DAC[] = { 0x2C000010, 0x00180120, 0x00C00000, 0x00000000, 0x00000000, 0xFF000000, 0x00000001, 0x40000000, };
 s32 D_80249DCC[] = { &D_8024BA60, 0x18000000, 0x00000120, 0x00C00000, filemenu_draw_contents_copy_arrow, 0x00000000,
                      0x2C000000, 0x00000001, 0x00000000, &D_8024BA98, 0x17000000, 0x00000140, 0x00F00000,
                      filemenu_draw_cursor, 0x00000000, 0xFF000000, 0x00000001, 0x00000000, &D_8024BA98, 0x00000000,
                      0x00000000, };
+
+extern Gfx D_8024B600[];
+extern Gfx D_8024B6F0[];
+extern Gfx D_8024B708[];
 
 BSS s32 filemenu_iterFileIdx;
 BSS s32 filemenu_pressedButtons;
@@ -678,7 +686,119 @@ void filemenu_draw_cursor(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 
     }
 }
 
-INCLUDE_ASM(s32, "163400", filemenu_draw_contents_copy_arrow);
+
+void filemenu_draw_contents_copy_arrow(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity,
+                                       s32 darkening)
+{
+    Matrix4f sp20, sp60;
+    MenuPanel* menu0 = filemenu_menus[0];
+    f32 startX, startZ;
+    f32 endX, endZ;
+    f32 temp_f28;
+
+    if (menu0->page == 4 && menu0->selected < 4) {
+        if (menu0->selected != filemenu_loadedFileIdx && filemenu_8024C098 != 2) {
+            switch (filemenu_loadedFileIdx) {
+                case 0:
+                    startX = 130.0f;
+                    startZ = 90.0f;
+                    break;
+                case 1:
+                    startX = 190.0f;
+                    startZ = 90.0f;
+                    break;
+                case 2:
+                    startX = 130.0f;
+                    startZ = 150.0f;
+                    break;
+                default:
+                    startX = 190.0f;
+                    startZ = 150.0f;
+                    break;
+            }
+
+            switch (filemenu_menus[0]->selected) {
+                case 0:
+                    endX = 130.0f;
+                    endZ = 90.0f;
+                    break;
+                case 1:
+                    endX = 190.0f;
+                    endZ = 90.0f;
+                    break;
+                case 2:
+                    endX = 130.0f;
+                    endZ = 150.0f;
+                    break;
+                default:
+                    endX = 190.0f;
+                    endZ = 150.0f;
+                    break;
+            }
+
+            temp_f28 = -atan2(startX, startZ, endX, endZ) - 90.0f;
+
+            gSPViewport(gMasterGfxPos++, &D_80249D60);
+
+            guOrthoF(sp20, 0.0f, SCREEN_WIDTH, SCREEN_HEIGHT, 0.0f, -100.0f, 100.0f, 1.0f);
+            guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+            gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
+                      G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
+            gSPDisplayList(gMasterGfxPos++, D_8024B600);
+            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, 128);
+            gDPSetEnvColor(gMasterGfxPos++, 0, 0, 0, 0);
+
+            guTranslateF(sp20, startX + 4.0f, startZ + 4.0f, 0.0f);
+            guScaleF(sp60, -1.0f, 1.0f, 1.0f);
+            guMtxCatF(sp60, sp20, sp20);
+            guRotateF(sp60, temp_f28, 0.0f, 0.0f, 1.0f);
+            guMtxCatF(sp60, sp20, sp20);
+            guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+            gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
+                      G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+            gSPDisplayList(gMasterGfxPos++, D_8024B6F0);
+            gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+
+            guTranslateF(sp60, D_80249D70[gGameStatusPtr->frameCounter % ARRAY_COUNT(D_80249D70)], 0.0f, 0.0f);
+            guMtxCatF(sp60, sp20, sp20);
+            guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+            gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
+                      G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+            gDPSetTileSize(gMasterGfxPos++, 1, (gGameStatusPtr->frameCounter * 8) % 512, 0,
+                                               ((gGameStatusPtr->frameCounter * 8) % 512) + 60, 0);
+            gSPDisplayList(gMasterGfxPos++, D_8024B708);
+            gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 230, 230, 230, 255);
+            gDPSetEnvColor(gMasterGfxPos++, 232, 40, 160, 0);
+
+            guTranslateF(sp20, startX, startZ, 0.0f);
+            guScaleF(sp60, -1.0f, 1.0f, 1.0f);
+            guMtxCatF(sp60, sp20, sp20);
+            guRotateF(sp60, temp_f28, 0.0f, 0.0f, 1.0f);
+            guMtxCatF(sp60, sp20, sp20);
+            guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+            gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
+                      G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+            gSPDisplayList(gMasterGfxPos++, D_8024B6F0);
+            gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+
+            guTranslateF(sp60, D_80249D70[(gGameStatusPtr->frameCounter % ARRAY_COUNT(D_80249D70))], 0.0f, 0.0f);
+            guMtxCatF(sp60, sp20, sp20);
+            guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+            gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
+                      G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+            gDPSetTileSize(gMasterGfxPos++, 1, (gGameStatusPtr->frameCounter * 8) % 512, 0,
+                                               ((gGameStatusPtr->frameCounter * 8) % 512) + 60, 0);
+            gSPDisplayList(gMasterGfxPos++, D_8024B708);
+            gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+        }
+    }
+}
 
 INCLUDE_ASM(void, "163400", filemenu_init);
 
