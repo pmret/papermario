@@ -2,6 +2,8 @@
 #include "hud_element.h"
 #include "effects.h"
 #include "model.h"
+#include "sprite/npc/bob_omb.h"
+#include "sprite/npc/fuzzy.h"
 
 void startup_draw_prim_rect_COPY(s16 left, s16 top, s16 right, s16 bottom, u16 r, u16 g, u16 b, u16 a);
 void delete_entity(s32);
@@ -46,9 +48,9 @@ typedef enum SmashGameBoxCotent {
 } SmashGameBoxCotent;
 
 typedef enum SmashGameStunFlags {
-    STUN_FLAGS_STUNNED            = 1,
+    STUN_FLAGS_STUNNED      = 1,
     STUN_FLAGS_CHANGED      = 2,
-    STUN_FLAGS_GRABBED      = 4,
+    STUN_FLAGS_GRABBED      = 4
 } SmashGameStunFlags;
 
 typedef enum SmashGameBoxState {
@@ -80,32 +82,32 @@ typedef enum SmashGameBoxState {
     BOX_STATE_PEACH_POPUP   = 72,
     BOX_STATE_PEACH_HIT     = 73,
     BOX_STATE_PEACH_EMERGE  = 74,
-    BOX_STATE_PEACH_DONE    = 75,
+    BOX_STATE_PEACH_DONE    = 75
 } SmashGameBoxState;
 
 typedef struct SmashGameBoxData {
-/* 0x00 */ SmashGameBoxState state;
-/* 0x04 */ s32 stateTimer;
-/* 0x08 */ s32 content;
-/* 0x0C */ s32 modelID;
-/* 0x10 */ s32 colliderID;
-/* 0x14 */ s32 npcID;
-/* 0x18 */ s32 peachPanelModelID;
+    /* 0x00 */ SmashGameBoxState state;
+    /* 0x04 */ s32 stateTimer;
+    /* 0x08 */ s32 content;
+    /* 0x0C */ s32 modelID;
+    /* 0x10 */ s32 colliderID;
+    /* 0x14 */ s32 npcID;
+    /* 0x18 */ s32 peachPanelModelID;
 } SmashGameBoxData; /* size = 0x1C */
 
 typedef struct SmashGameData {
-/* 0x000 */ s32 workerID;
-/* 0x004 */ s32 found;
-/* 0x008 */ s32 timeLeft; // num frames at 30fps
-/* 0x00C */ s32 hudElemID_AButton;
-/* 0x010 */ s32 hudElemID_Meter;
-/* 0x014 */ s32 windowA_posX;
-/* 0x018 */ s32 windowB_posX;
-/* 0x01C */ s32 signpostEntity;
-/* 0x020 */ s32 currentScore;
-/* 0x024 */ s32 mashProgress;
-/* 0x028 */ SmashGameStunFlags stunFlags;
-/* 0x02C */ SmashGameBoxData box[NUM_BOXES];
+    /* 0x000 */ s32 workerID;
+    /* 0x004 */ s32 found;
+    /* 0x008 */ s32 timeLeft; // num frames at 30fps
+    /* 0x00C */ s32 hudElemID_AButton;
+    /* 0x010 */ s32 hudElemID_Meter;
+    /* 0x014 */ s32 windowA_posX;
+    /* 0x018 */ s32 windowB_posX;
+    /* 0x01C */ s32 signpostEntity;
+    /* 0x020 */ s32 currentScore;
+    /* 0x024 */ s32 mashProgress;
+    /* 0x028 */ SmashGameStunFlags stunFlags;
+    /* 0x02C */ SmashGameBoxData box[NUM_BOXES];
 } SmashGameData; /* size = 0x400 */
 
 void N(draw_score_display)(void* renderData) {
@@ -242,37 +244,35 @@ ApiStatus N(CreateSignpost)(void) {
 
 ApiStatus N(OnHitBox)(Evt* script, s32 isInitialCall0) {
     SmashGameData* data = get_enemy(SCOREKEEPER_ENEMY_IDX)->varTablePtr[SMASH_DATA_VAR_IDX];
-    s32 hitModelID;
-    s32 hitColliderID;
+    s32 hitModelID = evt_get_variable(script, LW(0xA));
+    s32 hitColliderID = evt_get_variable(script, LW(0xB)); // unused
     s32 i;
 
-    hitModelID = evt_get_variable(script, LW(0xA));
-    hitColliderID = evt_get_variable(script, LW(0xB)); // unused
-
-    for(i = 0; i < NUM_BOXES; i++) {
-        if(hitModelID == data->box[i].modelID)
+    for (i = 0; i < NUM_BOXES; i++) {
+        if (hitModelID == data->box[i].modelID) {
             break;
+        }
     }
 
     evt_set_variable(script, LW(0xC), data->box[i].content);
 
     switch (data->box[i].content) {
-    case BOX_CONTENT_FUZZY:
-        evt_set_variable(script, LW(0xD), data->box[i].npcID);
-        data->box[i].state = BOX_STATE_FUZZY_HIT;
-        break;
-    case BOX_CONTENT_BOMB:
-        evt_set_variable(script, LW(0xD), data->box[i].npcID);
-        data->box[i].state = BOX_STATE_BOMB_HIT;
-        break;
-    case BOX_CONTENT_EMPTY:
-        evt_set_variable(script, LW(0xD), data->box[i].npcID);
-        data->box[i].state = BOX_STATE_EMPTY_HIT;
-        break;
-    case BOX_CONTENT_PEACH:
-        data->found++;
-        data->box[i].state = BOX_STATE_PEACH_HIT;
-        break;
+        case BOX_CONTENT_FUZZY:
+            evt_set_variable(script, LW(0xD), data->box[i].npcID);
+            data->box[i].state = BOX_STATE_FUZZY_HIT;
+            break;
+        case BOX_CONTENT_BOMB:
+            evt_set_variable(script, LW(0xD), data->box[i].npcID);
+            data->box[i].state = BOX_STATE_BOMB_HIT;
+            break;
+        case BOX_CONTENT_EMPTY:
+            evt_set_variable(script, LW(0xD), data->box[i].npcID);
+            data->box[i].state = BOX_STATE_EMPTY_HIT;
+            break;
+        case BOX_CONTENT_PEACH:
+            data->found++;
+            data->box[i].state = BOX_STATE_PEACH_HIT;
+            break;
     }
 
     return ApiStatus_DONE2;
@@ -296,12 +296,12 @@ ApiStatus N(SetBoxContents)(Evt* script, s32 isInitialCall) {
 
      // choose one of three initial configurations at random
     initialConfiguration = rand_int(1000) % ARRAY_COUNT(mgm_02_InitialConfigurations);
-    for(i = 0; i < NUM_BOXES; i++) {
+    for (i = 0; i < NUM_BOXES; i++) {
         configuration[i] = mgm_02_InitialConfigurations[initialConfiguration][i];
     }
 
     // randomly swap 10000 pairs
-    for(i = 0; i < 10000; i++) {
+    for (i = 0; i < 10000; i++) {
         indexA = rand_int(1000) % NUM_BOXES;
         indexB = rand_int(1000) % NUM_BOXES;
 
@@ -312,7 +312,7 @@ ApiStatus N(SetBoxContents)(Evt* script, s32 isInitialCall) {
         }
     }
 
-    for(i = 0; i < NUM_BOXES; i++) {
+    for (i = 0; i < NUM_BOXES; i++) {
         data->box[i].state = -1;
         data->box[i].stateTimer = 0;
         data->box[i].content = configuration[i];
@@ -322,32 +322,32 @@ ApiStatus N(SetBoxContents)(Evt* script, s32 isInitialCall) {
         data->box[i].peachPanelModelID = -1;
     }
 
-    for(i = FUZZY_NPC_ID_BASE; i < FUZZY_NPC_ID_BASE + 5; i++) {
+    for (i = FUZZY_NPC_ID_BASE; i < FUZZY_NPC_ID_BASE + 5; i++) {
         enemy = get_enemy(i);
         enemy->varTable[0] = 0;
     }
 
-    for(i = BOBOMB_NPC_ID_BASE; i < BOBOMB_NPC_ID_BASE + 5; i++) {
+    for (i = BOBOMB_NPC_ID_BASE; i < BOBOMB_NPC_ID_BASE + 5; i++) {
         enemy = get_enemy(i);
         enemy->varTable[0] = 0;
     }
 
-    for(i = LUIGI_NPC_ID_BASE; i < LUIGI_NPC_ID_BASE + 10; i++) {
+    for (i = LUIGI_NPC_ID_BASE; i < LUIGI_NPC_ID_BASE + 10; i++) {
         enemy = get_enemy(i);
         enemy->varTable[0] = 0;
     }
 
-    for(i = 0; i < ARRAY_COUNT(D_80248600); i++) {
+    for (i = 0; i < ARRAY_COUNT(D_80248600); i++) {
         D_80248600[i] = FALSE;
     }
 
-    for(i = 0; i < NUM_BOXES; i++) {
-        switch(data->box[i].content) {
+    for (i = 0; i < NUM_BOXES; i++) {
+        switch (data->box[i].content) {
             case BOX_CONTENT_FUZZY:
                 data->box[i].state = BOX_STATE_FUZZY_INIT;
-                for(j = FUZZY_NPC_ID_BASE; j < FUZZY_NPC_ID_BASE + 5; j++) {
+                for (j = FUZZY_NPC_ID_BASE; j < FUZZY_NPC_ID_BASE + 5; j++) {
                     enemy = get_enemy(j);
-                    if(enemy->varTable[0] == 0) {
+                    if (enemy->varTable[0] == 0) {
                         npc = get_npc_unsafe(enemy->npcID);
                         enemy->varTable[0] = 1;
                         data->box[i].npcID = j;
@@ -359,9 +359,9 @@ ApiStatus N(SetBoxContents)(Evt* script, s32 isInitialCall) {
                 break;
             case BOX_CONTENT_BOMB:
                 data->box[i].state = BOX_STATE_BOMB_INIT;
-                for(j = BOBOMB_NPC_ID_BASE; j < BOBOMB_NPC_ID_BASE + 5; j++) {
+                for (j = BOBOMB_NPC_ID_BASE; j < BOBOMB_NPC_ID_BASE + 5; j++) {
                     enemy = get_enemy(j);
-                    if(enemy->varTable[0] == 0) {
+                    if (enemy->varTable[0] == 0) {
                         npc = get_npc_unsafe(enemy->npcID);
                         enemy->varTable[0] = 1;
                         data->box[i].npcID = j;
@@ -373,9 +373,9 @@ ApiStatus N(SetBoxContents)(Evt* script, s32 isInitialCall) {
                 break;
             case BOX_CONTENT_PEACH:
                 data->box[i].state = BOX_STATE_PEACH_INIT;
-                for(j = LUIGI_NPC_ID_BASE; j < LUIGI_NPC_ID_BASE + 10; j++) {
+                for (j = LUIGI_NPC_ID_BASE; j < LUIGI_NPC_ID_BASE + 10; j++) {
                     enemy = get_enemy(j);
-                    if(enemy->varTable[0] == 0) {
+                    if (enemy->varTable[0] == 0) {
                         npc = get_npc_unsafe(enemy->npcID);
                         enemy->varTable[0] = 1;
                         data->box[i].npcID = j;
@@ -385,8 +385,8 @@ ApiStatus N(SetBoxContents)(Evt* script, s32 isInitialCall) {
                     }
                 }
                 // ARRAY BOUNDS ERROR IN ORIGINAL CODE!
-                for(j = 0; j <= ARRAY_COUNT(D_80248600); j++) {
-                    if(!D_80248600[j]) {
+                for (j = 0; j <= ARRAY_COUNT(D_80248600); j++) {
+                    if (!D_80248600[j]) {
                         D_80248600[j] = TRUE;
                         data->box[i].peachPanelModelID = mgm_02_PanelModelIDs[j];
                         break;
@@ -421,325 +421,324 @@ ApiStatus N(RunMinigame)(Evt* script, s32 isInitialCall) {
     hittingPeachBlock = FALSE;
     data = get_enemy(0)->varTablePtr[0];
 
-    for(i = 0; i < NUM_BOXES; i++)
-    {
+    for (i = 0; i < NUM_BOXES; i++) {
         if (data->box[i].npcID != -1) {
             enemy = get_enemy(data->box[i].npcID);
             npc = get_npc_unsafe(enemy->npcID);
             switch (data->box[i].state) {
-            case BOX_STATE_FUZZY_INIT:
-                data->box[i].state = BOX_STATE_FUZZY_IDLE;
-                data->box[i].stateTimer = rand_int(210);
-                npc->pos.y = -1000.0f;
-                npc->flags &= -(NPC_FLAG_PASSIVE | NPC_FLAG_2);
-                disable_npc_shadow(npc);
-                // fallthrough
-            case BOX_STATE_FUZZY_IDLE:
-                data->box[i].stateTimer--;
-                if(data->box[i].stateTimer <= 0) {
-                    npc->currentAnim.w = 0x2B0002;
-                    data->box[i].state = BOX_STATE_FUZZY_POPUP;
-                    sfx_play_sound_at_position(enemy->varTable[8], 0x100000, npc->pos.x, npc->pos.y, npc->pos.z);
-                    get_model_center_and_size(data->box[i].modelID, &centerX, &centerY, &centerZ, &sizeX, &sizeY, &sizeZ);
-                    npc->jumpVelocity = 10.5f;
-                    npc->pos.x = centerX;
-                    npc->jumpScale = 1.5f;
-                    npc->pos.y = centerY - 12.5;
-                    npc->moveToPos.y = npc->pos.y;
-                    npc->pos.z = centerZ + 2.0;
-                    data->box[i].stateTimer = 0;
-                }
-                break;
-            case BOX_STATE_FUZZY_POPUP:
-                data->box[i].stateTimer++;
-                npc->pos.y += npc->jumpVelocity;
-                npc->jumpVelocity -= npc->jumpScale;
-                if ((npc->moveToPos.y + 20.0f) < npc->pos.y) {
-                    enable_npc_shadow(npc);
-                } else {
-                    disable_npc_shadow(npc);
-                }
-                if ((npc->jumpVelocity < 0.0) && (npc->pos.y <= npc->moveToPos.y)) {
+                case BOX_STATE_FUZZY_INIT:
                     data->box[i].state = BOX_STATE_FUZZY_IDLE;
-                    data->box[i].stateTimer = rand_int(330) + 90;
+                    data->box[i].stateTimer = rand_int(210);
                     npc->pos.y = -1000.0f;
-                    if (rand_int(100) < 50) {
-                        npc->yaw = 270.0f;
-                    } else {
-                        npc->yaw = 90.0f;
-                    }
+                    npc->flags &= -(NPC_FLAG_PASSIVE | NPC_FLAG_2);
                     disable_npc_shadow(npc);
-                }
-                break;
-             case BOX_STATE_FUZZY_HIT:
-                hud_element_set_script(data->hudElemID_AButton, HudScript_AButton);
-                hud_element_set_alpha(data->hudElemID_AButton, 160);
-                hud_element_set_alpha(data->hudElemID_Meter, 160);
-                data->mashProgress = 0;
-                data->stunFlags |= STUN_FLAGS_GRABBED;
-                enable_npc_shadow(npc);
-                data->stunFlags |= (STUN_FLAGS_STUNNED | STUN_FLAGS_CHANGED);
-                npc->duration = 8;
-                sfx_play_sound(enemy->varTable[8]);
-                data->box[i].state = BOX_STATE_FUZZY_ATTACH;
-                gPlayerStatusPtr->anim = 0x10001;
-                npc->currentAnim.w = 0x2B0003;
-                get_model_center_and_size(data->box[i].modelID, &centerX, &centerY, &centerZ, &sizeX, &sizeY, &sizeZ);
-                npc->pos.x = centerX;
-                npc->pos.y = centerY;
-                npc->pos.z = centerZ + 2.0;
-                npc->moveToPos.y = gPlayerStatusPtr->position.y + 35.0f;
-                npc->jumpVelocity = 10.5f;
-                npc->jumpScale = 1.5f;
-
-                data->box[i].stateTimer = 0;
-                fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, 0.0f, 10, &writeback);
-                enemy->varTable[1] = npc->pos.x * 10.0f;
-                enemy->varTable[2] = npc->pos.y * 10.0f;
-                enemy->varTable[3] = npc->pos.z * 10.0f;
-                enemy->varTable[4] = gPlayerStatusPtr->position.x * 10.0f;
-                enemy->varTable[5] = (gPlayerStatusPtr->position.y + 28.0f) * 10.0f;
-                enemy->varTable[6] = (gPlayerStatusPtr->position.z + 2.0f) * 10.0f;
-                enemy->varTable[7] = 0;
-                break;
-            case BOX_STATE_FUZZY_ATTACH:
-                enemy->varTable[7]++;
-                npc->pos.x = update_lerp(EASING_LINEAR, (f32)enemy->varTable[1] / 10.0, (f32)enemy->varTable[4] / 10.0, enemy->varTable[7], 8);
-                npc->pos.y = update_lerp(EASING_LINEAR, (f32)enemy->varTable[2] / 10.0, (f32)enemy->varTable[5] / 10.0, enemy->varTable[7], 8);
-                npc->pos.z = update_lerp(EASING_LINEAR, (f32)enemy->varTable[3] / 10.0, (f32)enemy->varTable[6] / 10.0, enemy->varTable[7], 8);
-                gPlayerStatusPtr->anim = 0x10001;
-                npc->duration--;
-                if (npc->duration <= 0) {
-                    npc->currentAnim.w = 0x2B000F;
-                    gPlayerStatusPtr->anim = 0x1001B;
-                    data->mashProgress = 0;
-                    npc->pos.x = gPlayerStatusPtr->position.x;
-                    npc->pos.y = gPlayerStatusPtr->position.y + 28.0;
-                    npc->pos.z = gPlayerStatusPtr->position.z + 2.0;
-                    hud_element_set_script(data->hudElemID_AButton, HudScript_MashAButton);
-                    hud_element_set_alpha(data->hudElemID_AButton, 255);
-                    hud_element_set_alpha(data->hudElemID_Meter, 255);
-                    data->box[i].state = BOX_STATE_FUZZY_GRAB;
-                }
-                break;
-            case BOX_STATE_FUZZY_GRAB:
-                gPlayerStatusPtr->anim = 0x1001B;
-                if (gGameStatusPtr->pressedButtons & BUTTON_A) {
-                    data->mashProgress++;
-                }
-                if (data->mashProgress >= 12) {
-                    gPlayerStatusPtr->anim = 0x10002;
-                    data->stunFlags &= ~STUN_FLAGS_STUNNED;
-                    data->stunFlags |= STUN_FLAGS_CHANGED;
-                    data->box[i].state = BOX_STATE_FUZZY_DETACH;
-                    npc->duration = 10;
+                    // fallthrough
+                case BOX_STATE_FUZZY_IDLE:
+                    data->box[i].stateTimer--;
+                    if (data->box[i].stateTimer <= 0) {
+                        npc->currentAnim.w = NPC_ANIM_fuzzy_Palette_00_Anim_2;
+                        data->box[i].state = BOX_STATE_FUZZY_POPUP;
+                        sfx_play_sound_at_position(enemy->varTable[8], 0x100000, npc->pos.x, npc->pos.y, npc->pos.z);
+                        get_model_center_and_size(data->box[i].modelID, &centerX, &centerY, &centerZ, &sizeX, &sizeY, &sizeZ);
+                        npc->jumpVelocity = 10.5f;
+                        npc->pos.x = centerX;
+                        npc->jumpScale = 1.5f;
+                        npc->pos.y = centerY - 12.5;
+                        npc->moveToPos.y = npc->pos.y;
+                        npc->pos.z = centerZ + 2.0;
+                        data->box[i].stateTimer = 0;
+                    }
+                    break;
+                case BOX_STATE_FUZZY_POPUP:
+                    data->box[i].stateTimer++;
+                    npc->pos.y += npc->jumpVelocity;
+                    npc->jumpVelocity -= npc->jumpScale;
+                    if ((npc->moveToPos.y + 20.0f) < npc->pos.y) {
+                        enable_npc_shadow(npc);
+                    } else {
+                        disable_npc_shadow(npc);
+                    }
+                    if ((npc->jumpVelocity < 0.0) && (npc->pos.y <= npc->moveToPos.y)) {
+                        data->box[i].state = BOX_STATE_FUZZY_IDLE;
+                        data->box[i].stateTimer = rand_int(330) + 90;
+                        npc->pos.y = -1000.0f;
+                        if (rand_int(100) < 50) {
+                            npc->yaw = 270.0f;
+                        } else {
+                            npc->yaw = 90.0f;
+                        }
+                        disable_npc_shadow(npc);
+                    }
+                    break;
+                case BOX_STATE_FUZZY_HIT:
                     hud_element_set_script(data->hudElemID_AButton, HudScript_AButton);
                     hud_element_set_alpha(data->hudElemID_AButton, 160);
                     hud_element_set_alpha(data->hudElemID_Meter, 160);
-                    npc->currentAnim.w = 0x2B0008;
-                    npc->pos.y += 3.0;
-                }
-                break;
-            case BOX_STATE_FUZZY_DETACH:
-                npc->duration--;
-                if (npc->duration == 8) {
-                    data->stunFlags &= ~STUN_FLAGS_GRABBED;
-                }
-                if (npc->duration <= 0) {
-                    data->box[i].state = BOX_STATE_FUZZY_DONE;
-                    disable_npc_shadow(npc);
-                    npc->flags |= NPC_FLAG_2;
-                    fx_walking_dust(1, npc->pos.x, npc->pos.y + 10.0f, npc->pos.z + 1.0f, 0, 0);
-                }
-                break;
-            case BOX_STATE_FUZZY_DONE:
-                break;
-
-            case BOX_STATE_BOMB_INIT:
-                data->box[i].state = BOX_STATE_BOMB_IDLE;
-                data->box[i].stateTimer = rand_int(210);
-                npc->pos.y = -1000.0f;
-                disable_npc_shadow(npc);
-                npc->flags &= -(NPC_FLAG_PASSIVE | NPC_FLAG_2);
-                // fallthrough
-            case BOX_STATE_BOMB_IDLE:
-                data->box[i].stateTimer--;
-                if (data->box[i].stateTimer <= 0) {
-                    data->box[i].state = BOX_STATE_BOMB_POPUP;
-                    sfx_play_sound_at_position(enemy->varTable[8], 0x100000, npc->pos.x, npc->pos.y, npc->pos.z);
-                    get_model_center_and_size(data->box[i].modelID, &centerX, &centerY, &centerZ, &sizeX, &sizeY, &sizeZ);
-                    npc->jumpVelocity = 10.5f;
-                    npc->pos.x = centerX;
-                    npc->jumpScale = 1.5f;
-                    npc->pos.y = centerY - 12.5;
-                    npc->moveToPos.y = npc->pos.y;
-                    npc->pos.z = centerZ + 2.0;
-                    data->box[i].stateTimer = 0;
-                }
-                break;
-            case BOX_STATE_BOMB_POPUP:
-                data->box[i].stateTimer++;
-                npc->pos.y += npc->jumpVelocity;
-                npc->jumpVelocity -= npc->jumpScale;
-                if ((npc->moveToPos.y + 20.0f) < npc->pos.y) {
+                    data->mashProgress = 0;
+                    data->stunFlags |= STUN_FLAGS_GRABBED;
                     enable_npc_shadow(npc);
-                } else {
-                    disable_npc_shadow(npc);
-                }
-                if ((npc->jumpVelocity < 0.0) && (npc->pos.y <= npc->moveToPos.y)) {
+                    data->stunFlags |= (STUN_FLAGS_STUNNED | STUN_FLAGS_CHANGED);
+                    npc->duration = 8;
+                    sfx_play_sound(enemy->varTable[8]);
+                    data->box[i].state = BOX_STATE_FUZZY_ATTACH;
+                    gPlayerStatusPtr->anim = ANIM_CROUCH_STILL;
+                    npc->currentAnim.w = NPC_ANIM_fuzzy_Palette_00_Anim_3;
+                    get_model_center_and_size(data->box[i].modelID, &centerX, &centerY, &centerZ, &sizeX, &sizeY, &sizeZ);
+                    npc->pos.x = centerX;
+                    npc->pos.y = centerY;
+                    npc->pos.z = centerZ + 2.0;
+                    npc->moveToPos.y = gPlayerStatusPtr->position.y + 35.0f;
+                    npc->jumpVelocity = 10.5f;
+                    npc->jumpScale = 1.5f;
+
+                    data->box[i].stateTimer = 0;
+                    fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, 0.0f, 10, &writeback);
+                    enemy->varTable[1] = npc->pos.x * 10.0f;
+                    enemy->varTable[2] = npc->pos.y * 10.0f;
+                    enemy->varTable[3] = npc->pos.z * 10.0f;
+                    enemy->varTable[4] = gPlayerStatusPtr->position.x * 10.0f;
+                    enemy->varTable[5] = (gPlayerStatusPtr->position.y + 28.0f) * 10.0f;
+                    enemy->varTable[6] = (gPlayerStatusPtr->position.z + 2.0f) * 10.0f;
+                    enemy->varTable[7] = 0;
+                    break;
+                case BOX_STATE_FUZZY_ATTACH:
+                    enemy->varTable[7]++;
+                    npc->pos.x = update_lerp(EASING_LINEAR, (f32)enemy->varTable[1] / 10.0, (f32)enemy->varTable[4] / 10.0, enemy->varTable[7], 8);
+                    npc->pos.y = update_lerp(EASING_LINEAR, (f32)enemy->varTable[2] / 10.0, (f32)enemy->varTable[5] / 10.0, enemy->varTable[7], 8);
+                    npc->pos.z = update_lerp(EASING_LINEAR, (f32)enemy->varTable[3] / 10.0, (f32)enemy->varTable[6] / 10.0, enemy->varTable[7], 8);
+                    gPlayerStatusPtr->anim = ANIM_CROUCH_STILL;
+                    npc->duration--;
+                    if (npc->duration <= 0) {
+                        npc->currentAnim.w = NPC_ANIM_fuzzy_Palette_00_Anim_F;
+                        gPlayerStatusPtr->anim = ANIM_RUN_PANIC;
+                        data->mashProgress = 0;
+                        npc->pos.x = gPlayerStatusPtr->position.x;
+                        npc->pos.y = gPlayerStatusPtr->position.y + 28.0;
+                        npc->pos.z = gPlayerStatusPtr->position.z + 2.0;
+                        hud_element_set_script(data->hudElemID_AButton, HudScript_MashAButton);
+                        hud_element_set_alpha(data->hudElemID_AButton, 255);
+                        hud_element_set_alpha(data->hudElemID_Meter, 255);
+                        data->box[i].state = BOX_STATE_FUZZY_GRAB;
+                    }
+                    break;
+                case BOX_STATE_FUZZY_GRAB:
+                    gPlayerStatusPtr->anim = ANIM_RUN_PANIC;
+                    if (gGameStatusPtr->pressedButtons & BUTTON_A) {
+                        data->mashProgress++;
+                    }
+                    if (data->mashProgress >= 12) {
+                        gPlayerStatusPtr->anim = ANIM_10002;
+                        data->stunFlags &= ~STUN_FLAGS_STUNNED;
+                        data->stunFlags |= STUN_FLAGS_CHANGED;
+                        data->box[i].state = BOX_STATE_FUZZY_DETACH;
+                        npc->duration = 10;
+                        hud_element_set_script(data->hudElemID_AButton, HudScript_AButton);
+                        hud_element_set_alpha(data->hudElemID_AButton, 160);
+                        hud_element_set_alpha(data->hudElemID_Meter, 160);
+                        npc->currentAnim.w = NPC_ANIM_fuzzy_Palette_00_Anim_8;
+                        npc->pos.y += 3.0;
+                    }
+                    break;
+                case BOX_STATE_FUZZY_DETACH:
+                    npc->duration--;
+                    if (npc->duration == 8) {
+                        data->stunFlags &= ~STUN_FLAGS_GRABBED;
+                    }
+                    if (npc->duration <= 0) {
+                        data->box[i].state = BOX_STATE_FUZZY_DONE;
+                        disable_npc_shadow(npc);
+                        npc->flags |= NPC_FLAG_2;
+                        fx_walking_dust(1, npc->pos.x, npc->pos.y + 10.0f, npc->pos.z + 1.0f, 0, 0);
+                    }
+                    break;
+                case BOX_STATE_FUZZY_DONE:
+                    break;
+
+                case BOX_STATE_BOMB_INIT:
                     data->box[i].state = BOX_STATE_BOMB_IDLE;
-                    data->box[i].stateTimer = rand_int(330) + 90;
+                    data->box[i].stateTimer = rand_int(210);
                     npc->pos.y = -1000.0f;
-                    if (rand_int(100) < 50) {
+                    disable_npc_shadow(npc);
+                    npc->flags &= -(NPC_FLAG_PASSIVE | NPC_FLAG_2);
+                    // fallthrough
+                case BOX_STATE_BOMB_IDLE:
+                    data->box[i].stateTimer--;
+                    if (data->box[i].stateTimer <= 0) {
+                        data->box[i].state = BOX_STATE_BOMB_POPUP;
+                        sfx_play_sound_at_position(enemy->varTable[8], 0x100000, npc->pos.x, npc->pos.y, npc->pos.z);
+                        get_model_center_and_size(data->box[i].modelID, &centerX, &centerY, &centerZ, &sizeX, &sizeY, &sizeZ);
+                        npc->jumpVelocity = 10.5f;
+                        npc->pos.x = centerX;
+                        npc->jumpScale = 1.5f;
+                        npc->pos.y = centerY - 12.5;
+                        npc->moveToPos.y = npc->pos.y;
+                        npc->pos.z = centerZ + 2.0;
+                        data->box[i].stateTimer = 0;
+                    }
+                    break;
+                case BOX_STATE_BOMB_POPUP:
+                    data->box[i].stateTimer++;
+                    npc->pos.y += npc->jumpVelocity;
+                    npc->jumpVelocity -= npc->jumpScale;
+                    if ((npc->moveToPos.y + 20.0f) < npc->pos.y) {
+                        enable_npc_shadow(npc);
+                    } else {
+                        disable_npc_shadow(npc);
+                    }
+                    if ((npc->jumpVelocity < 0.0) && (npc->pos.y <= npc->moveToPos.y)) {
+                        data->box[i].state = BOX_STATE_BOMB_IDLE;
+                        data->box[i].stateTimer = rand_int(330) + 90;
+                        npc->pos.y = -1000.0f;
+                        if (rand_int(100) < 50) {
+                            npc->yaw = 270.0f;
+                        } else {
+                            npc->yaw = 90.0f;
+                        }
+                        disable_npc_shadow(npc);
+                    }
+                    break;
+                case BOX_STATE_BOMB_HIT:
+                    enable_npc_shadow(npc);
+                    npc->duration = 15;
+                    npc->currentAnim.w = NPC_ANIM_bob_omb_Palette_00_Anim_5;
+                    data->stunFlags |= (STUN_FLAGS_STUNNED | STUN_FLAGS_CHANGED);
+                    data->box[i].state = BOX_STATE_BOMB_ATTACK;
+                    get_model_center_and_size(data->box[i].modelID, &centerX, &centerY, &centerZ, &sizeX, &sizeY, &sizeZ);
+                    npc->pos.x = centerX;
+                    npc->pos.y = centerY - 10.0f;
+                    npc->pos.z = centerZ + 8.0;
+                    fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, 0.0f, 10, &writeback);
+                    if (npc->pos.x > gPlayerStatusPtr->position.x) {
                         npc->yaw = 270.0f;
+                        gPlayerStatusPtr->targetYaw = 95.0f;
                     } else {
                         npc->yaw = 90.0f;
+                        gPlayerStatusPtr->targetYaw = 265.0f;
                     }
-                    disable_npc_shadow(npc);
-                }
-                break;
-            case BOX_STATE_BOMB_HIT:
-                enable_npc_shadow(npc);
-                npc->duration = 15;
-                npc->currentAnim.w = 0x2C0005;
-                data->stunFlags |= (STUN_FLAGS_STUNNED | STUN_FLAGS_CHANGED);
-                data->box[i].state = BOX_STATE_BOMB_ATTACK;
-                get_model_center_and_size(data->box[i].modelID, &centerX, &centerY, &centerZ, &sizeX, &sizeY, &sizeZ);
-                npc->pos.x = centerX;
-                npc->pos.y = centerY - 10.0f;
-                npc->pos.z = centerZ + 8.0;
-                fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, 0.0f, 10, &writeback);
-                if (npc->pos.x > gPlayerStatusPtr->position.x) {
-                    npc->yaw = 270.0f;
-                    gPlayerStatusPtr->targetYaw = 95.0f;
-                } else {
-                    npc->yaw = 90.0f;
-                    gPlayerStatusPtr->targetYaw = 265.0f;
-                }
-                // rest of case could simply use fallthough, but wouldnt match
-                gPlayerStatusPtr->anim = 0x10001;
-                npc->duration--;
-                if (npc->duration <= 0) {
-                    fx_explosion(0, npc->pos.x, npc->pos.y, npc->pos.z + 1.0f);
-                    npc->duration = 30;
-                    npc->pos.y = -1000.0f;
-                    data->box[i].state = BOX_STATE_BOMB_STUN;
-                    sfx_play_sound(SOUND_BOMB_BLAST);
-                }
-                break;
-            case BOX_STATE_BOMB_ATTACK:
-                gPlayerStatusPtr->anim = 0x10001;
-                npc->duration--;
-                if (npc->duration <= 0) {
-                    fx_explosion(0, npc->pos.x, npc->pos.y, npc->pos.z + 1.0f);
-                    npc->duration = 30;
-                    npc->pos.y = -1000.0f;
-                    data->box[i].state = BOX_STATE_BOMB_STUN;
-                    sfx_play_sound(SOUND_BOMB_BLAST);
-                }
-                break;
-            case BOX_STATE_BOMB_STUN:
-                npc->duration--;
-                if (npc->duration == 25) {
-                    gPlayerStatusPtr->anim = 0x1002F;
-                }
-                if (npc->duration <= 0) {
-                    gPlayerStatusPtr->anim = 0x10002;
-                    data->stunFlags &= ~STUN_FLAGS_STUNNED;
-                    data->stunFlags |= STUN_FLAGS_CHANGED;
-                    data->box[i].state = BOX_STATE_BOMB_DONE;
-                    disable_npc_shadow(npc);
-                    npc->flags |= NPC_FLAG_2;
-                }
-                break;
-            case BOX_STATE_BOMB_DONE:
-                break;
+                    // rest of case could simply use fallthough, but wouldnt match
+                    gPlayerStatusPtr->anim = ANIM_CROUCH_STILL;
+                    npc->duration--;
+                    if (npc->duration <= 0) {
+                        fx_explosion(0, npc->pos.x, npc->pos.y, npc->pos.z + 1.0f);
+                        npc->duration = 30;
+                        npc->pos.y = -1000.0f;
+                        data->box[i].state = BOX_STATE_BOMB_STUN;
+                        sfx_play_sound(SOUND_BOMB_BLAST);
+                    }
+                    break;
+                case BOX_STATE_BOMB_ATTACK:
+                    gPlayerStatusPtr->anim = ANIM_CROUCH_STILL;
+                    npc->duration--;
+                    if (npc->duration <= 0) {
+                        fx_explosion(0, npc->pos.x, npc->pos.y, npc->pos.z + 1.0f);
+                        npc->duration = 30;
+                        npc->pos.y = -1000.0f;
+                        data->box[i].state = BOX_STATE_BOMB_STUN;
+                        sfx_play_sound(SOUND_BOMB_BLAST);
+                    }
+                    break;
+                case BOX_STATE_BOMB_STUN:
+                    npc->duration--;
+                    if (npc->duration == 25) {
+                        gPlayerStatusPtr->anim = ANIM_CHARRED;
+                    }
+                    if (npc->duration <= 0) {
+                        gPlayerStatusPtr->anim = ANIM_10002;
+                        data->stunFlags &= ~STUN_FLAGS_STUNNED;
+                        data->stunFlags |= STUN_FLAGS_CHANGED;
+                        data->box[i].state = BOX_STATE_BOMB_DONE;
+                        disable_npc_shadow(npc);
+                        npc->flags |= NPC_FLAG_2;
+                    }
+                    break;
+                case BOX_STATE_BOMB_DONE:
+                    break;
 
-            case BOX_STATE_PEACH_INIT:
-                get_model_center_and_size(data->box[i].modelID, &centerX, &centerY, &centerZ, &sizeX, &sizeY, &sizeZ);
-                data->box[i].state = BOX_STATE_PEACH_IDLE;
-                data->box[i].stateTimer = rand_int(210);
-                npc->pos.x = centerX;
-                npc->pos.y = centerY;
-                npc->moveToPos.y = npc->pos.y;
-                npc->pos.z = centerZ + 2.0;
-                disable_npc_shadow(npc);
-                // fallthrough
-            case BOX_STATE_PEACH_IDLE:
-                data->box[i].stateTimer--;
-                if (data->box[i].stateTimer <= 0) {
+                case BOX_STATE_PEACH_INIT:
                     get_model_center_and_size(data->box[i].modelID, &centerX, &centerY, &centerZ, &sizeX, &sizeY, &sizeZ);
-                    data->box[i].state = BOX_STATE_PEACH_POPUP;
-                    sfx_play_sound_at_position(SOUND_214, 0x200000, npc->pos.x, npc->pos.y, npc->pos.z);
-                    get_model_center_and_size(data->box[i].modelID, &centerX, &centerY, &centerZ, &sizeX, &sizeY, &sizeZ);
-                    npc->jumpVelocity = 10.0f;
-                    npc->pos.y = npc->moveToPos.y;
-                    npc->jumpScale = 1.1f;
-                    data->box[i].stateTimer = 0;
+                    data->box[i].state = BOX_STATE_PEACH_IDLE;
+                    data->box[i].stateTimer = rand_int(210);
+                    npc->pos.x = centerX;
+                    npc->pos.y = centerY;
+                    npc->moveToPos.y = npc->pos.y;
+                    npc->pos.z = centerZ + 2.0;
+                    disable_npc_shadow(npc);
+                    // fallthrough
+                case BOX_STATE_PEACH_IDLE:
+                    data->box[i].stateTimer--;
+                    if (data->box[i].stateTimer <= 0) {
+                        get_model_center_and_size(data->box[i].modelID, &centerX, &centerY, &centerZ, &sizeX, &sizeY, &sizeZ);
+                        data->box[i].state = BOX_STATE_PEACH_POPUP;
+                        sfx_play_sound_at_position(SOUND_214, 0x200000, npc->pos.x, npc->pos.y, npc->pos.z);
+                        get_model_center_and_size(data->box[i].modelID, &centerX, &centerY, &centerZ, &sizeX, &sizeY, &sizeZ);
+                        npc->jumpVelocity = 10.0f;
+                        npc->pos.y = npc->moveToPos.y;
+                        npc->jumpScale = 1.1f;
+                        data->box[i].stateTimer = 0;
+                        model = get_model_from_list_index(get_model_list_index_from_tree_index(data->box[i].peachPanelModelID));
+                        model->flags &= -(MODEL_FLAGS_FLAG_1 | MODEL_FLAGS_ENABLED);
+                        if (!(model->flags & MODEL_FLAGS_HAS_TRANSFORM_APPLIED)) {
+                            guTranslateF(model->transformMatrix, npc->pos.x, npc->pos.y, npc->pos.z);
+                            model->flags |= (MODEL_FLAGS_USES_TRANSFORM_MATRIX | MODEL_FLAGS_HAS_TRANSFORM_APPLIED);
+                        }
+                        else {
+                            guTranslateF(mtx, npc->pos.x, npc->pos.y, npc->pos.z);
+                            guMtxCatF(mtx, model->transformMatrix, model->transformMatrix);
+                        }
+                    }
+                    break;
+                case BOX_STATE_PEACH_POPUP:
+                    data->box[i].stateTimer++;
+                    npc->pos.y += npc->jumpVelocity;
+                    npc->jumpVelocity -= npc->jumpScale;
                     model = get_model_from_list_index(get_model_list_index_from_tree_index(data->box[i].peachPanelModelID));
-                    model->flags &= -(MODEL_FLAGS_FLAG_1 | MODEL_FLAGS_ENABLED);
                     if (!(model->flags & MODEL_FLAGS_HAS_TRANSFORM_APPLIED)) {
                         guTranslateF(model->transformMatrix, npc->pos.x, npc->pos.y, npc->pos.z);
                         model->flags |= (MODEL_FLAGS_USES_TRANSFORM_MATRIX | MODEL_FLAGS_HAS_TRANSFORM_APPLIED);
-                    }
-                    else {
+                    } else {
                         guTranslateF(mtx, npc->pos.x, npc->pos.y, npc->pos.z);
                         guMtxCatF(mtx, model->transformMatrix, model->transformMatrix);
                     }
-                }
-                break;
-            case BOX_STATE_PEACH_POPUP:
-                data->box[i].stateTimer++;
-                npc->pos.y += npc->jumpVelocity;
-                npc->jumpVelocity -= npc->jumpScale;
-                model = get_model_from_list_index(get_model_list_index_from_tree_index(data->box[i].peachPanelModelID));
-                if (!(model->flags & MODEL_FLAGS_HAS_TRANSFORM_APPLIED)) {
-                    guTranslateF(model->transformMatrix, npc->pos.x, npc->pos.y, npc->pos.z);
-                    model->flags |= (MODEL_FLAGS_USES_TRANSFORM_MATRIX | MODEL_FLAGS_HAS_TRANSFORM_APPLIED);
-                } else {
-                    guTranslateF(mtx, npc->pos.x, npc->pos.y, npc->pos.z);
-                    guMtxCatF(mtx, model->transformMatrix, model->transformMatrix);
-                }
-                if ((npc->moveToPos.y + 20.0f) < npc->pos.y) {
+                    if ((npc->moveToPos.y + 20.0f) < npc->pos.y) {
+                        enable_npc_shadow(npc);
+                    } else {
+                        disable_npc_shadow(npc);
+                    }
+                    if ((npc->jumpVelocity < 0.0) && (npc->pos.y <= npc->moveToPos.y)) {
+                        data->box[i].state = BOX_STATE_PEACH_IDLE;
+                        data->box[i].stateTimer = rand_int(330) + 90;
+                        disable_npc_shadow(npc);
+                        model->flags |= MODEL_FLAGS_ENABLED;
+                    }
+                    break;
+                case BOX_STATE_PEACH_HIT:
+                    sfx_play_sound(SOUND_21C);
+                    model = get_model_from_list_index(get_model_list_index_from_tree_index(data->box[i].peachPanelModelID));
                     enable_npc_shadow(npc);
-                } else {
-                    disable_npc_shadow(npc);
-                }
-                if ((npc->jumpVelocity < 0.0) && (npc->pos.y <= npc->moveToPos.y)) {
-                    data->box[i].state = BOX_STATE_PEACH_IDLE;
-                    data->box[i].stateTimer = rand_int(330) + 90;
-                    disable_npc_shadow(npc);
-                    model->flags |= MODEL_FLAGS_ENABLED;
-                }
-                break;
-            case BOX_STATE_PEACH_HIT:
-                sfx_play_sound(SOUND_21C);
-                model = get_model_from_list_index(get_model_list_index_from_tree_index(data->box[i].peachPanelModelID));
-                enable_npc_shadow(npc);
-                npc->duration = 0;
-                data->box[i].state = BOX_STATE_PEACH_EMERGE;
-                model->flags &= -(MODEL_FLAGS_FLAG_1 | MODEL_FLAGS_ENABLED);
-                // fallthrough
-            case BOX_STATE_PEACH_EMERGE:
-                hittingPeachBlock = TRUE;
-                model = get_model_from_list_index(get_model_list_index_from_tree_index(data->box[i].peachPanelModelID));
-                centerY = update_lerp(EASING_QUADRATIC_OUT, npc->moveToPos.y, npc->moveToPos.y + 30.0, npc->duration, 30);
-                if (!(model->flags & MODEL_FLAGS_HAS_TRANSFORM_APPLIED)) {
-                    guTranslateF(model->transformMatrix, npc->pos.x, centerY, npc->pos.z);
-                    model->flags |= (MODEL_FLAGS_USES_TRANSFORM_MATRIX | MODEL_FLAGS_HAS_TRANSFORM_APPLIED);
-                } else {
-                    guTranslateF(mtx, npc->pos.x, centerY, npc->pos.z);
-                    guMtxCatF(mtx, model->transformMatrix, model->transformMatrix);
-                }
-                npc->duration++;
-                if (npc->duration >= 30) {
-                    data->box[i].state = BOX_STATE_PEACH_DONE;
-                    disable_npc_shadow(npc);
-                    model->flags |= MODEL_FLAGS_ENABLED;
-                }
-                break;
-            case BOX_STATE_PEACH_DONE:
-                break;
+                    npc->duration = 0;
+                    data->box[i].state = BOX_STATE_PEACH_EMERGE;
+                    model->flags &= -(MODEL_FLAGS_FLAG_1 | MODEL_FLAGS_ENABLED);
+                    // fallthrough
+                case BOX_STATE_PEACH_EMERGE:
+                    hittingPeachBlock = TRUE;
+                    model = get_model_from_list_index(get_model_list_index_from_tree_index(data->box[i].peachPanelModelID));
+                    centerY = update_lerp(EASING_QUADRATIC_OUT, npc->moveToPos.y, npc->moveToPos.y + 30.0, npc->duration, 30);
+                    if (!(model->flags & MODEL_FLAGS_HAS_TRANSFORM_APPLIED)) {
+                        guTranslateF(model->transformMatrix, npc->pos.x, centerY, npc->pos.z);
+                        model->flags |= (MODEL_FLAGS_USES_TRANSFORM_MATRIX | MODEL_FLAGS_HAS_TRANSFORM_APPLIED);
+                    } else {
+                        guTranslateF(mtx, npc->pos.x, centerY, npc->pos.z);
+                        guMtxCatF(mtx, model->transformMatrix, model->transformMatrix);
+                    }
+                    npc->duration++;
+                    if (npc->duration >= 30) {
+                        data->box[i].state = BOX_STATE_PEACH_DONE;
+                        disable_npc_shadow(npc);
+                        model->flags |= MODEL_FLAGS_ENABLED;
+                    }
+                    break;
+                case BOX_STATE_PEACH_DONE:
+                    break;
             }
         } else {
             if (data->box[i].state == BOX_STATE_EMPTY_INIT) {
@@ -752,31 +751,31 @@ ApiStatus N(RunMinigame)(Evt* script, s32 isInitialCall) {
     if (data->timeLeft > 0) {
         if (data->found < NUM_PANELS) {
             data->timeLeft--;
-            if(data->timeLeft == 750) {
+            if (data->timeLeft == 750) {
                 sfx_play_sound(SOUND_1A5);
-            } else if(data->timeLeft == 600) {
+            } else if (data->timeLeft == 600) {
                 sfx_play_sound(SOUND_1A5);
-            } else if(data->timeLeft == 450) {
+            } else if (data->timeLeft == 450) {
                 sfx_play_sound(SOUND_1A5);
-            } else if(data->timeLeft == 300) {
+            } else if (data->timeLeft == 300) {
                 sfx_play_sound(SOUND_1A6);
-            } else if(data->timeLeft == 270) {
+            } else if (data->timeLeft == 270) {
                 sfx_play_sound(SOUND_1A6);
-            } else if(data->timeLeft == 240) {
+            } else if (data->timeLeft == 240) {
                 sfx_play_sound(SOUND_1A6);
-            } else if(data->timeLeft == 210) {
+            } else if (data->timeLeft == 210) {
                 sfx_play_sound(SOUND_1A6);
-            } else if(data->timeLeft == 180) {
+            } else if (data->timeLeft == 180) {
                 sfx_play_sound(SOUND_1A6);
-            } else if(data->timeLeft == 150) {
+            } else if (data->timeLeft == 150) {
                 sfx_play_sound(SOUND_1A7);
-            } else if(data->timeLeft == 120) {
+            } else if (data->timeLeft == 120) {
                 sfx_play_sound(SOUND_1A7);
-            } else if(data->timeLeft == 90) {
+            } else if (data->timeLeft == 90) {
                 sfx_play_sound(SOUND_1A7);
-            } else if(data->timeLeft == 60) {
+            } else if (data->timeLeft == 60) {
                 sfx_play_sound(SOUND_1A7);
-            } else if(data->timeLeft == 30) {
+            } else if (data->timeLeft == 30) {
                 sfx_play_sound(SOUND_1A7);
             }
         }
@@ -815,10 +814,10 @@ ApiStatus N(RunMinigame)(Evt* script, s32 isInitialCall) {
         gPlayerStatusPtr->targetYaw = 180.0;
         if (data->timeLeft == 0) {
             sfx_play_sound(SOUND_MENU_ERROR);
-            gPlayerStatusPtr->anim = 0x10002;
+            gPlayerStatusPtr->anim = ANIM_10002;
         } else {
             sfx_play_sound(SOUND_D4);
-            gPlayerStatusPtr->anim = 0x10002;
+            gPlayerStatusPtr->anim = ANIM_10002;
         }
 
         return ApiStatus_DONE2;
@@ -899,7 +898,7 @@ ApiStatus N(CleanupGame)(Evt* script, s32 isInitialCall) {
     s32 i;
 
     if (enemy->varTable[3] == 4) {
-        for(i = 0; i < NUM_BOXES; i++) {
+        for (i = 0; i < NUM_BOXES; i++) {
             if (data->box[i].npcID == -1) {
                 continue;
             }
@@ -920,7 +919,7 @@ ApiStatus N(CleanupGame)(Evt* script, s32 isInitialCall) {
         }
         return ApiStatus_DONE2;
     } else {
-        for(i = 0; i < NUM_BOXES; i++) {
+        for (i = 0; i < NUM_BOXES; i++) {
             if (data->box[i].npcID == -1) {
                 continue;
             }
@@ -930,12 +929,12 @@ ApiStatus N(CleanupGame)(Evt* script, s32 isInitialCall) {
                 continue;
             }
 
-            switch(data->box[i].content) {
+            switch (data->box[i].content) {
                 case BOX_CONTENT_FUZZY:
                     if (data->box[i].state != BOX_STATE_FUZZY_END) {
                         data->box[i].state = BOX_STATE_FUZZY_END;
                         fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, 0.0f, 30, &writeback);
-                        npc->currentAnim.w = 0x2B000E;
+                        npc->currentAnim.w = NPC_ANIM_fuzzy_Palette_00_Anim_E;
                         enable_npc_shadow(npc);
                     }
                     break;
@@ -944,7 +943,7 @@ ApiStatus N(CleanupGame)(Evt* script, s32 isInitialCall) {
                     if (data->box[i].state != BOX_STATE_BOMB_END) {
                         data->box[i].state = BOX_STATE_BOMB_END;
                         fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, 0.0f, 30, &writeback);
-                        npc->currentAnim.w = 0x2C001C;
+                        npc->currentAnim.w = NPC_ANIM_bob_omb_Palette_00_Anim_1C;
                         enable_npc_shadow(npc);
                     }
                     break;
@@ -994,7 +993,8 @@ ApiStatus N(TakeCoinCost)(Evt* script, s32 isInitialCall) {
     add_coins(-1);
     sfx_play_sound(SOUND_211);
 
-    return (++script->functionTemp[0] == PLAY_COST) ? ApiStatus_DONE2 : ApiStatus_BLOCK;
+    script->functionTemp[0]++;
+    return (script->functionTemp[0] == PLAY_COST) ? ApiStatus_DONE2 : ApiStatus_BLOCK;
 }
 
 ApiStatus N(HideCoinCounter)(Evt* script, s32 isInitialCall) {

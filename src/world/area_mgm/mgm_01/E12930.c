@@ -35,36 +35,36 @@ typedef enum JumpGamePanelState {
 
 // the panels found by breaking brick blocks
 typedef struct JumpGamePanel {
-/* 0x00 */ JumpGamePanelState state;
-/* 0x04 */ s32 modelID;
-/* 0x08 */ JumpGamePanelType type;
-/* 0x0C */ s32 blockPosIndex;
-/* 0x10 */ s32 tallyPosIndex;
-/* 0x14 */ s32 entityIndex;
-/* 0x18 */ s32 lerpElapsed;
-/* 0x1C */ s32 lerpDuration;
-/* 0x20 */ Vec3f curPos;
-/* 0x2C */ Vec3f startPos;
-/* 0x38 */ Vec3f endPos;
-/* 0x44 */ f32 curAngle;
-/* 0x48 */ f32 startAngle;
-/* 0x4C */ f32 endAngle;
-/* 0x50 */ f32 curScale;
-/* 0x50 */ f32 startScale;
-/* 0x50 */ f32 endScale;
+    /* 0x00 */ JumpGamePanelState state;
+    /* 0x04 */ s32 modelID;
+    /* 0x08 */ JumpGamePanelType type;
+    /* 0x0C */ s32 blockPosIndex;
+    /* 0x10 */ s32 tallyPosIndex;
+    /* 0x14 */ s32 entityIndex;
+    /* 0x18 */ s32 lerpElapsed;
+    /* 0x1C */ s32 lerpDuration;
+    /* 0x20 */ Vec3f curPos;
+    /* 0x2C */ Vec3f startPos;
+    /* 0x38 */ Vec3f endPos;
+    /* 0x44 */ f32 curAngle;
+    /* 0x48 */ f32 startAngle;
+    /* 0x4C */ f32 endAngle;
+    /* 0x50 */ f32 curScale;
+    /* 0x50 */ f32 startScale;
+    /* 0x50 */ f32 endScale;
 } JumpGamePanel; /* size = 5C */
 
 typedef struct JumpGameData {
-/* 0x000 */ s32 workerID;
-/* 0x004 */ s32 hudElemID;
-/* 0x008 */ s32 unk_08; // unused -- likely hudElemID for an unused/removed hud element
-/* 0x00C */ s32 currentScore;
-/* 0x010 */ s32 targetScore;
-/* 0x014 */ s32 scoreWindowPosX;
-/* 0x018 */ s32 scoreWindowPosY; // unused -- posY is hard-coded while drawing the box
-/* 0x01C */ s32 type[NUM_BLOCKS];
-/* 0x048 */ s32 breakHistory[NUM_BLOCKS];
-/* 0x074 */ JumpGamePanel panels[NUM_BLOCKS];
+    /* 0x000 */ s32 workerID;
+    /* 0x004 */ s32 hudElemID;
+    /* 0x008 */ s32 unk_08; // unused -- likely hudElemID for an unused/removed hud element
+    /* 0x00C */ s32 currentScore;
+    /* 0x010 */ s32 targetScore;
+    /* 0x014 */ s32 scoreWindowPosX;
+    /* 0x018 */ s32 scoreWindowPosY; // unused -- posY is hard-coded while drawing the box
+    /* 0x01C */ s32 type[NUM_BLOCKS];
+    /* 0x048 */ s32 breakHistory[NUM_BLOCKS];
+    /* 0x074 */ JumpGamePanel panels[NUM_BLOCKS];
 } JumpGameData; /* size = 0x468 */
 
 extern EntityBlueprint D_802EA0C4;
@@ -179,7 +179,8 @@ ApiStatus N(EnableMenus)(Evt* script, s32 isInitialCall) {
 // arg0: index
 ApiStatus N(GetPanelInfo)(Evt* script, s32 isInitialCall) {
     JumpGameData* data = (JumpGameData*)get_enemy(SCOREKEEPER_ENEMY_IDX)->varTable[JUMP_DATA_VAR_IDX];
-    s32 index = evt_get_variable(script, *script->ptrReadPos);
+    Bytecode* args = script->ptrReadPos;
+    s32 index = evt_get_variable(script, *args++);
 
     evt_set_variable(script, LW(0), data->panels[index].state);
     evt_set_variable(script, LW(1), data->panels[index].modelID);
@@ -192,7 +193,7 @@ ApiStatus N(GetPanelInfo)(Evt* script, s32 isInitialCall) {
 // arg0: index, arg1: newState
 ApiStatus N(SetPanelState)(Evt* script, s32 isInitialCall) {
     JumpGameData* data = (JumpGameData*)get_enemy(SCOREKEEPER_ENEMY_IDX)->varTable[JUMP_DATA_VAR_IDX];
-    s32* args = script->ptrReadPos;
+    Bytecode* args = script->ptrReadPos;
     s32 index = evt_get_variable(script, *args++);
     s32 value = evt_get_variable(script, *args++);
 
@@ -204,7 +205,8 @@ ApiStatus N(SetPanelState)(Evt* script, s32 isInitialCall) {
 // arg0: index, arg1: newState
 ApiStatus N(InitPanelEmergeFromBlock)(Evt* script, s32 isInitialCall) {
     JumpGameData* data = (JumpGameData*)get_enemy(SCOREKEEPER_ENEMY_IDX)->varTable[JUMP_DATA_VAR_IDX];
-    s32 index = evt_get_variable(script, *script->ptrReadPos);
+    Bytecode* args = script->ptrReadPos;
+    s32 index = evt_get_variable(script, *args++);
     s32 blockPosIndex;
 
     data->panels[index].lerpElapsed = 0;
@@ -236,7 +238,8 @@ ApiStatus N(InitPanelEmergeFromBlock)(Evt* script, s32 isInitialCall) {
 // arg0: index
 ApiStatus N(UpdatePanelEmergeFromBlock)(Evt* script, s32 isInitialCall) {
     JumpGameData* data = (JumpGameData*)get_enemy(SCOREKEEPER_ENEMY_IDX)->varTable[JUMP_DATA_VAR_IDX];
-    s32 index = evt_get_variable(script, *script->ptrReadPos);
+    Bytecode* args = script->ptrReadPos;
+    s32 index = evt_get_variable(script, *args++);
 
     data->panels[index].curPos.x = update_lerp(EASING_QUADRATIC_OUT,
         data->panels[index].startPos.x, data->panels[index].endPos.x,
@@ -268,7 +271,8 @@ ApiStatus N(UpdatePanelEmergeFromBlock)(Evt* script, s32 isInitialCall) {
 // arg0: index
 ApiStatus N(InitPanelHoldAboveBlock)(Evt* script, s32 isInitialCall) {
     JumpGameData* data = (JumpGameData*)get_enemy(SCOREKEEPER_ENEMY_IDX)->varTable[JUMP_DATA_VAR_IDX];
-    s32 index = evt_get_variable(script, *script->ptrReadPos);
+    Bytecode* args = script->ptrReadPos;
+    s32 index = evt_get_variable(script, *args++);
 
     data->panels[index].lerpElapsed = 0;
     data->panels[index].lerpDuration = 10;
@@ -279,7 +283,8 @@ ApiStatus N(InitPanelHoldAboveBlock)(Evt* script, s32 isInitialCall) {
 // arg0: index
 ApiStatus N(UpdatetPanelHoldAboveBlock)(Evt* script, s32 isInitialCall) {
     JumpGameData* data = (JumpGameData*)get_enemy(SCOREKEEPER_ENEMY_IDX)->varTable[JUMP_DATA_VAR_IDX];
-    s32 index = evt_get_variable(script, *script->ptrReadPos);
+    Bytecode* args = script->ptrReadPos;
+    s32 index = evt_get_variable(script, *args++);
 
     data->panels[index].lerpElapsed++;
     if ( data->panels[index].lerpElapsed >= data->panels[index].lerpDuration) {
@@ -294,7 +299,8 @@ ApiStatus N(UpdatetPanelHoldAboveBlock)(Evt* script, s32 isInitialCall) {
 // arg0: index, arg1: newState
 ApiStatus N(InitPanelMoveToTally)(Evt* script, s32 isInitialCall) {
     JumpGameData* data = (JumpGameData*)get_enemy(SCOREKEEPER_ENEMY_IDX)->varTable[JUMP_DATA_VAR_IDX];
-    s32 index = evt_get_variable(script, *script->ptrReadPos);
+    Bytecode* args = script->ptrReadPos;
+    s32 index = evt_get_variable(script, *args++);
     f32 dist;
 
     data->panels[index].lerpElapsed = 0;
@@ -334,7 +340,8 @@ ApiStatus N(InitPanelMoveToTally)(Evt* script, s32 isInitialCall) {
 // arg0: index
 ApiStatus N(UpdatePanelMoveToTally)(Evt* script, s32 isInitialCall) {
     JumpGameData* data = (JumpGameData*)get_enemy(SCOREKEEPER_ENEMY_IDX)->varTable[JUMP_DATA_VAR_IDX];
-    s32 index = evt_get_variable(script, *script->ptrReadPos);
+    Bytecode* args = script->ptrReadPos;
+    s32 index = evt_get_variable(script, *args++);
 
     data->panels[index].lerpElapsed++;
 
@@ -370,7 +377,8 @@ ApiStatus N(UpdatePanelMoveToTally)(Evt* script, s32 isInitialCall) {
 // arg0: index
 ApiStatus N(EndPanelAnimation)(Evt* script, s32 isInitialCall) {
     JumpGameData* data = (JumpGameData*)get_enemy(SCOREKEEPER_ENEMY_IDX)->varTable[JUMP_DATA_VAR_IDX];
-    s32 index = evt_get_variable(script, *script->ptrReadPos);
+    Bytecode* args = script->ptrReadPos;
+    s32 index = evt_get_variable(script, *args++);
 
     data->panels[index].curAngle = 0;
 
@@ -435,8 +443,8 @@ ApiStatus N(EndBowserPanelAnimation)(Evt* script, s32 isInitialCall) {
     JumpGameData* data = (JumpGameData*)get_enemy(SCOREKEEPER_ENEMY_IDX)->varTable[JUMP_DATA_VAR_IDX];
     s32 i;
 
-    for(i = 0; i < ARRAY_COUNT(data->panels); i++) {
-        if(data->panels[i].type == PANEL_BOWSER && data->panels[i].state == PANEL_STATE_DONE)
+    for (i = 0; i < ARRAY_COUNT(data->panels); i++) {
+        if (data->panels[i].type == PANEL_BOWSER && data->panels[i].state == PANEL_STATE_DONE)
             break;
     }
 
@@ -455,7 +463,8 @@ ApiStatus N(EndBowserPanelAnimation)(Evt* script, s32 isInitialCall) {
 // arg0: index
 ApiStatus N(GetPanelPos)(Evt* script, s32 isInitialCall) {
     JumpGameData* data = (JumpGameData*)get_enemy(SCOREKEEPER_ENEMY_IDX)->varTable[JUMP_DATA_VAR_IDX];
-    s32 index = evt_get_variable(script, *script->ptrReadPos);
+    Bytecode* args = script->ptrReadPos;
+    s32 index = evt_get_variable(script, *args++);
 
     evt_set_float_variable(script, LW(5), data->panels[index].curPos.x);
     evt_set_float_variable(script, LW(6), data->panels[index].curPos.y);
@@ -470,8 +479,7 @@ ApiStatus N(DestroyBlockEntities) (Evt* script, s32 isInitialCall) {
     JumpGameData* data = (JumpGameData*)get_enemy(SCOREKEEPER_ENEMY_IDX)->varTable[JUMP_DATA_VAR_IDX];
     s32 i;
 
-    for(i = 0; i < ARRAY_COUNT(data->panels); i++)
-    {
+    for (i = 0; i < ARRAY_COUNT(data->panels); i++) {
         if (data->panels[i].entityIndex >= 0) {
             fx_walking_dust(1, N(BlockPosX)[i], N(BlockPosY)[i] + 13, N(BlockPosZ)[i] + 5, 0, 0);
             delete_entity(data->panels[i].entityIndex);
@@ -486,7 +494,8 @@ ApiStatus N(DestroyBlockEntities) (Evt* script, s32 isInitialCall) {
 ApiStatus N(OnBreakBlock)(Evt* script, s32 isInitialCall) {
     Enemy* scorekeeper = get_enemy(SCOREKEEPER_ENEMY_IDX);
     JumpGameData* data = (JumpGameData*)scorekeeper->varTable[JUMP_DATA_VAR_IDX];
-    s32 index = evt_get_variable(script, *script->ptrReadPos);
+    Bytecode* args = script->ptrReadPos;
+    s32 index = evt_get_variable(script, *args++);
     s32 blockType = data->type[index];
     s32 historyPos = scorekeeper->varTable[BROKEN_BLOCKS_VAR_IDX];
     s32 coins = 0;
@@ -495,9 +504,8 @@ ApiStatus N(OnBreakBlock)(Evt* script, s32 isInitialCall) {
     data->breakHistory[historyPos] = blockType;
     data->panels[index].entityIndex = -1;
 
-    for(i = 0; i < historyPos + 1; i++) {
-        switch(data->breakHistory[i])
-        {
+    for (i = 0; i < historyPos + 1; i++) {
+        switch (data->breakHistory[i]) {
             case PANEL_1_COIN:  coins += 1; break;
             case PANEL_5_COINS: coins += 5; break;
             case PANEL_TIMES_5: coins *= 5; break;
@@ -507,7 +515,7 @@ ApiStatus N(OnBreakBlock)(Evt* script, s32 isInitialCall) {
 
     data->targetScore = coins;
 
-    for(i = 0; i < ARRAY_COUNT(data->panels); i++) {
+    for (i = 0; i < ARRAY_COUNT(data->panels); i++) {
         if (blockType == data->panels[i].type && data->panels[i].state == PANEL_STATE_START_ANIM) {
                 data->panels[i].state = PANEL_STATE_EMERGE_INIT;
                 data->panels[i].blockPosIndex = index;
@@ -537,12 +545,12 @@ ApiStatus N(CreateBlockEntities)(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         // choose one of four initial configurations at random
         initialConfiguration = rand_int(1000) % ARRAY_COUNT(N(InitialConfigurations));
-        for(i = 0; i < NUM_BLOCKS; i++) {
+        for (i = 0; i < NUM_BLOCKS; i++) {
             data->type[i] = N(InitialConfigurations)[initialConfiguration][i];
         }
 
         // randomly swap 1000 pairs
-        for(i = 0; i < 1000; i++) {
+        for (i = 0; i < 1000; i++) {
             indexA = rand_int(10000) % NUM_BLOCKS;
             indexB = rand_int(10000) % NUM_BLOCKS;
 
@@ -557,7 +565,8 @@ ApiStatus N(CreateBlockEntities)(Evt* script, s32 isInitialCall) {
         script->functionTemp[1] = 0;
     }
 
-    if (--script->functionTemp[0] <= 0) {
+    script->functionTemp[0]--;
+    if (script->functionTemp[0] <= 0) {
         curBlockIdx = script->functionTemp[1];
         entityIndex = create_entity(&D_802EA0C4,
             N(BlockPosX)[curBlockIdx],
@@ -601,7 +610,7 @@ ApiStatus N(InitializePanels)(Evt* script, s32 isInitialCall) {
     data->currentScore = 0;
     data->targetScore = 0;
 
-    for(i = 0; i < ARRAY_COUNT(data->panels); i++) {
+    for (i = 0; i < ARRAY_COUNT(data->panels); i++) {
         data->panels[i].state = PANEL_STATE_INIT;
         data->panels[i].modelID = N(PanelModelIDs)[i];
         data->panels[i].type = N(PanelTypes)[i];
