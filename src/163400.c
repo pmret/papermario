@@ -20,11 +20,11 @@ extern s32 D_8024BA98;
 
 s32* D_80249B80[] = { &D_80241ECC };
 MenuPanel* filemenu_menus[4] = { &D_8024A098, &D_8024A114, &D_8024A158, &D_8024A1D8 };
-s32 D_80249B94 = 160;
-s32 D_80249B98 = -120;
+s32 D_80249B94 = SCREEN_WIDTH / 2;
+s32 D_80249B98 = -SCREEN_HEIGHT / 2;
 s32 D_80249B9C = 0;
-s32 D_80249BA0 = 160;
-s32 D_80249BA4 = -120;
+s32 D_80249BA0 = SCREEN_WIDTH / 2;
+s32 D_80249BA4 = -SCREEN_HEIGHT / 2;
 s32 filemenu_cursorGoalAlpha = 0;
 s32 filemenu_cursorGoalAlpha2 = 0;
 s32 D_80249BB0[] = { TRUE, FALSE };
@@ -172,7 +172,7 @@ void filemenu_update_cursor(void) {
     }
 
     if (i >= ARRAY_COUNT(gWindows)) {
-        if (filemenu_cursorGoalAlpha2 == 0xFF) {
+        if (filemenu_cursorGoalAlpha2 == 255) {
             if (D_80249BB8 != 0) {
                 D_80249BB8--;
                 if (D_80249BB8 == 0) {
@@ -188,7 +188,7 @@ void filemenu_update_cursor(void) {
         D_80249BB8 = 1;
     }
 
-    filemenu_cursorGoalAlpha2 = 0xFF;
+    filemenu_cursorGoalAlpha2 = 255;
 }
 
 void filemenu_update(void) {
