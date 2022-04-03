@@ -621,6 +621,8 @@ enum SoundIDs {
     SOUND_BOW_VANISH                = 0x0000200E,
     SOUND_BOW_APPEAR                = 0x0000200F,
     SOUND_2010                      = 0x00002010,
+    SOUND_WATT_REPEL_DARKNESS       = 0x00002011,
+    SOUND_WATT_RESUME_DARKNESS      = 0x00002012,
     SOUND_CANNON1                   = 0x00002016,
     SOUND_CANNON2                   = 0x00002017,
     SOUND_CANNON3                   = 0x00002018,
