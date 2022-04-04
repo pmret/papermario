@@ -361,8 +361,6 @@ void filemenu_main_init(MenuPanel* menu) {
     menu->initialized = 1;
 }
 
-//static const f32 padding[] = { 0.0f }; // TODO remove when the following func is matched
-
 void filemenu_main_handle_input(MenuPanel* menu) {
     s32 originalSelected = menu->selected;
     s32 i;
