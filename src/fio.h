@@ -55,4 +55,7 @@ extern SaveData D_800D95E8;
 
 extern s32 D_8009A6B0[];
 
+extern SaveMetadata gSaveSlotMetadata[4];
+extern u8 gSaveSlotHasData[4];
+
 #endif

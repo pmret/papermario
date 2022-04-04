@@ -219,7 +219,6 @@ extern PartnerActionStatus gPartnerActionStatus; // something with partners
 extern PlayerSpinState gPlayerSpinState; // sfx_play_sound state struct?
 
 extern SaveData gCurrentSaveFile;
-extern SaveMetadata gSaveSlotMetadata[4];
 
 extern u32* gMapFlags;
 extern s32* gMapVars;
