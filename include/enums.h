@@ -676,6 +676,24 @@ enum Cams {
     CAM_CAM3         = 3,
 };
 
+enum CamShakeModes {
+    CAM_SHAKE_CONSTANT_VERTICAL     = 0,
+    CAM_SHAKE_ANGULAR_HORIZONTAL    = 1,
+    CAM_SHAKE_DECAYING_VERTICAL     = 2
+};
+
+// for use with func_8024E748
+enum AuxCameraParams {
+    AUX_CAM_PARAM_1             = 1,
+    AUX_CAM_BOOM_LENGTH         = 2,
+    AUX_CAM_PARAM_3             = 3,
+    AUX_CAM_BOOM_PITCH          = 4,
+    AUX_CAM_BOOM_YAW            = 5,
+    AUX_CAM_BOOM_ZOFFSET        = 6,
+    AUX_CAM_PARAM_7             = 7,
+    AUX_CAM_ZOOM_PERCENT        = 8
+};
+
 #define LOOKUP_ITEM(itemID) gItemTable[itemID & ~0xF0000]
 enum ItemIDs {
     ITEM_NONE                         = 0x00000000,

@@ -567,7 +567,7 @@ EvtScript N(8021D04C) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_15)
     EVT_CALL(SetBattleCamZoom, 320)
     EVT_CALL(SetBattleCamOffsetZ, 0)
-    EVT_CALL(func_8024EB84, ACTOR_SELF, LW(9))
+    EVT_CALL(BattleCamTargetActorPart, ACTOR_SELF, LW(9))
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_tutankoopa_Palette_00_Anim_2)
     EVT_CALL(GetPartOffset, ACTOR_SELF, LW(9), LW(0), LW(1), LW(2))
     EVT_ADD(LW(0), 20)
