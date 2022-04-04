@@ -9,7 +9,7 @@ void fio_serialize_state(void);
 
 void fio_erase_flash(s32 pageNum);
 
-void fio_write_flash(s32 pageNum, s32* readBuffer, s32 numBytes);
+s32 fio_write_flash(s32 pageNum, s8* readBuffer, u32 numBytes);
 
 s32 get_spirits_rescued(void);
 

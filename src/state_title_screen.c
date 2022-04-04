@@ -13,18 +13,15 @@
 #define TITLE_POS_TOP 15 // Top edge of the texture on screen (with no offset)
 
 s16 D_800779C0[2] = {0, 0};
-s32 gSaveSlotMetadata = 0;
-s8 D_800779C8[2] = {0, 0};
-s8 D_800779CA = 0;
-s8 D_800779CB = 0x45;
-s32 D_800779CC = 0x52524F52;
-s32 D_800779D0 = 0xF7F7F700;
-s32 D_800779D4 = 0;
-s32 D_800779D8[] = { 0x00000000, 0x00000000, 0x00000045, 0x52524F52, 0xF7F7F700, 0x00000000, 0x00000000, 0x00000000,
-                     0x00000045, 0x52524F52, 0xF7F7F700, 0x00000000, 0x00000000, 0x00000000, 0x00000045, 0x52524F52,
-                     0xF7F7F700, 0x00000000, 0x00000000,
-                   };
-s32 gSaveSlotHasData = 0x01010101;
+
+SaveMetadata gSaveSlotMetadata[4] = {
+    { .filename = {"ERROR\xf7\xf7\xf7"}, },
+    { .filename = {"ERROR\xf7\xf7\xf7"}, },
+    { .filename = {"ERROR\xf7\xf7\xf7"}, },
+    { .filename = {"ERROR\xf7\xf7\xf7"}, },
+};
+
+u8 gSaveSlotHasData[4] = {TRUE, TRUE, TRUE, TRUE};
 s32 D_80077A28 = 0;
 s32 D_80077A2C = 0;
 s32 D_80077A30 = 0;

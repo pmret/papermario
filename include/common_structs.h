@@ -286,7 +286,10 @@ typedef struct PlayerData {
     /* 0x338 */ s32 smashGameTotal; /* all-time winnings, max = 99999 */
     /* 0x33C */ s16 smashGameRecord;
     /* 0x33E */ char unk_33E[2];
-} PlayerData; // size = 0x340
+    /* 0x340 */ char unk_340[0xE0];
+    /* 0x420 */ s32 starPoints2;
+    /* 0x424 */ char unk_464[4];
+} PlayerData; // size = 0x428
 
 typedef union {
     struct {
@@ -2130,6 +2133,17 @@ typedef struct EncounterStatus {
     /* 0xFB4 */ char unk_FB4[4];
 } EncounterStatus; // size = 0xFB8
 
+typedef struct SaveMetadata {
+    /* 0x00 */ s32 timePlayed;
+    /* 0x04 */ u8 spiritsRescued;
+    /* 0x05 */ char unk_05[0x1];
+    /* 0x06 */ s8 level;
+    /* 0x07 */ unsigned char filename[8];
+    /* 0x0F */ char unk_0F[0x1];
+    /* 0x10 */ s32 unk_10;
+    /* 0x14 */ s32 unk_14;
+} SaveMetadata; // size = 0x18
+
 typedef struct SaveData {
     /* 0x0000 */ char magicString[16]; /* "Mario Story 006" string */
     /* 0x0010 */ s8 pad[32]; /* always zero */
@@ -2138,24 +2152,22 @@ typedef struct SaveData {
     /* 0x0038 */ s32 saveSlot;
     /* 0x003C */ u32 saveCount;
     /* 0x0040 */ PlayerData player;
-    /* 0x0380 */ char unk_380[0xE0];
-    /* 0x0460 */ s32 starPoints;
-    /* 0x0464 */ char unk_464[4];
     /* 0x0468 */ s16 areaID;
     /* 0x046A */ s16 mapID;
     /* 0x046C */ s16 entryID;
     /* 0x046E */ char unk_46E[2];
-    /* 0x0470 */ s32 enemyDefeatFlags[720];
+    /* 0x0470 */ s32 enemyDefeatFlags[60][12];
     /* 0x0FB0 */ s32 globalFlags[64];
     /* 0x10B0 */ s8 globalBytes[512];
     /* 0x12B0 */ s32 areaFlags[8];
     /* 0x12D0 */ s8 areaBytes[16];
-    /* 0x12E0 */ char unk_12E0[6];
+    /* 0x12E0 */ s8 debugEnemyContact;
+    /* 0x12E0 */ s8 unk_12E1;
+    /* 0x12E0 */ s8 unk_12E2;
+    /* 0x12E0 */ s8 musicEnabled;
+    /* 0x12E4 */ char unk_12E4[0x2];
     /* 0x12E6 */ Vec3s savePos;
-    /* 0x12EC */ s32 unk_12EC;
-    /* 0x12F0 */ s8 unk_12F0[12]; /* player name starts at 4th char */
-    /* 0x12FC */ s32 unk_12FC;
-    /* 0x1300 */ s32 unk_1300;
+    /* 0x12EC */ SaveMetadata unk_12EC;
     /* 0x1304 */ char unk_1304[0x7C];
 } SaveData; // size = 0x1380
 
@@ -2432,17 +2444,6 @@ typedef struct Struct8015A578 {
     /* 0x08 */ f32 unk_08;
     /* 0x0C */ char unk_0C[0x4];
 } Struct8015A578; // size = 0x10
-
-typedef struct SaveMetadata {
-    /* 0x00 */ s32 timePlayed;
-    /* 0x04 */ u8 spiritsRescued;
-    /* 0x05 */ char unk_05[0x1];
-    /* 0x06 */ s8 level;
-    /* 0x07 */ unsigned char filename[8];
-    /* 0x0F */ char unk_0F[0x1];
-    /* 0x10 */ s32 unk_10;
-    /* 0x14 */ s32 unk_14;
-} SaveMetadata; // size = 0x18
 
 typedef struct SpriteShadingLightSource {
     /* 0x00 */ s8 flags;

@@ -162,10 +162,10 @@ extern s32 D_802A3838;
 extern s32 gGameState;
 extern s16 gNpcCount;
 extern s32 gOverrideFlags;
-extern u16 D_8009A6A0;
-extern u16 D_8009A6A2;
-extern u16 D_8009A6A4;
-extern u16 D_8009A6A6;
+extern s16 D_8009A6A0;
+extern s16 D_8009A6A2;
+extern s16 D_8009A6A4;
+extern s16 D_8009A6A6;
 
 extern s32* D_800A0914;
 extern s32* D_800A0918;
@@ -219,6 +219,7 @@ extern PartnerActionStatus gPartnerActionStatus; // something with partners
 extern PlayerSpinState gPlayerSpinState; // sfx_play_sound state struct?
 
 extern SaveData gCurrentSaveFile;
+extern SaveMetadata gSaveSlotMetadata[4];
 
 extern u32* gMapFlags;
 extern s32* gMapVars;

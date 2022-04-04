@@ -1,6 +1,10 @@
 #include "fio.h"
+#include "PR/os_flash.h"
 
 char magicSaveString[] = "Mario Story 006";
+
+void fio_deserialize_state(void);
+s32 fio_read_flash(s32 pageNum, s8* readBuffer, u32 numBytes);
 
 s32 get_spirits_rescued(void) {
     s32 storyProgress = evt_get_variable(NULL, EVT_STORY_PROGRESS);
@@ -27,7 +31,7 @@ s32 get_spirits_rescued(void) {
 
 s32 fio_calc_header_checksum(void) {
     u32 sum = 0;
-    s32* it = &D_800D95E8;
+    s32* it = (s32*)&D_800D95E8;
     u32 i;
 
     for (i = 0; i < 0x20; i++, it++) {
@@ -36,26 +40,25 @@ s32 fio_calc_header_checksum(void) {
     return sum;
 }
 
-#ifdef NON_EQUIVALENT
 s32 fio_validate_header_checksums(void) {
-    SaveData* saveData = D_800D95E8;
+    SaveData* saveData = &D_800D95E8;
 
-    if (!strcmp(saveData->magicString, magicSaveString) && saveData->crc1 == ~saveData->crc2) {
-        return fio_calc_header_checksum() == saveData->crc1;
+    if (strcmp(saveData->magicString, magicSaveString)) {
+        return FALSE;
     }
-    return FALSE;
+    if (saveData->crc1 != ~saveData->crc2) {
+        return FALSE;
+    }
+    return fio_calc_header_checksum() == saveData->crc1;
 }
-#else
-INCLUDE_ASM(s32, "fio", fio_validate_header_checksums);
-#endif
 
 s32 fio_has_valid_backup(void) {
-    fio_read_flash(6, &D_800D95E8, 0x80);
+    fio_read_flash(6, (s8*)&D_800D95E8, 0x80);
 
-    if (fio_validate_header_checksums() == FALSE) {
-        fio_read_flash(7, &D_800D95E8, 0x80);
+    if (!fio_validate_header_checksums()) {
+        fio_read_flash(7, (s8*)&D_800D95E8, 0x80);
 
-        if (fio_validate_header_checksums() == FALSE) {
+        if (!fio_validate_header_checksums()) {
             bzero(&D_800D95E8, 0x80);
             return FALSE;
         }
@@ -66,22 +69,22 @@ s32 fio_has_valid_backup(void) {
 s32 fio_flush_backups(void) {
     s32 checksum;
 
-    strcpy(D_800D95E8.magicString, &magicSaveString);
+    strcpy(D_800D95E8.magicString, magicSaveString);
     D_800D95E8.crc1 = 0;
     D_800D95E8.crc2 = -1;
     checksum = fio_calc_header_checksum();
     D_800D95E8.crc1 = checksum;
     D_800D95E8.crc2 = ~checksum;
     fio_erase_flash(6);
-    fio_write_flash(6, &D_800D95E8, 0x80);
+    fio_write_flash(6, (s8*)&D_800D95E8, 0x80);
     fio_erase_flash(7);
-    fio_write_flash(7, &D_800D95E8, 0x80);
+    fio_write_flash(7, (s8*)&D_800D95E8, 0x80);
     return 1;
 }
 
 s32 fio_calc_file_checksum(SaveData* saveData) {
     u32 sum = 0;
-    s32* it = saveData;
+    s32* it = (s32*)saveData;
     u32 i;
 
     for (i = 0; i < sizeof(*saveData) / sizeof(*it); i++, it++) {
@@ -142,7 +145,7 @@ s32 fio_load_game(s32 saveSlot) {
     gGameStatusPtr->saveSlot = saveSlot;
 
     fio_fetch_saved_file_info();
-    fio_read_flash(logicalSaveInfo[saveSlot][0], &gCurrentSaveFile, sizeof(SaveData));
+    fio_read_flash(logicalSaveInfo[saveSlot][0], (s8*)&gCurrentSaveFile, sizeof(SaveData));
 
     if (strcmp(gCurrentSaveFile.magicString, magicSaveString) == 0) {
         if (gGameStatusPtr->saveCount < gCurrentSaveFile.saveCount) {
@@ -173,7 +176,7 @@ void fio_save_game(s32 saveSlot) {
     gCurrentSaveFile.crc2 = ~gCurrentSaveFile.crc1;
 
     fio_erase_flash(nextAvailableSavePage);
-    fio_write_flash(nextAvailableSavePage, &gCurrentSaveFile, sizeof(SaveData));
+    fio_write_flash(nextAvailableSavePage, (s8*)&gCurrentSaveFile, sizeof(SaveData));
 }
 
 void fio_erase_game(s32 saveSlot) {
@@ -188,23 +191,130 @@ void fio_erase_game(s32 saveSlot) {
     }
 }
 
-INCLUDE_ASM(s32, "fio", fio_deserialize_state);
+void fio_deserialize_state(void) {
+    SaveData* saveData = &gCurrentSaveFile;
+    s32 i, j;
+
+    gPlayerData = saveData->player;
+
+    gGameStatusPtr->areaID = saveData->areaID;
+    gGameStatusPtr->mapID = saveData->mapID;
+    gGameStatusPtr->entryID = saveData->entryID;
+    gGameStatusPtr->savedPos.x = saveData->savePos.x;
+    gGameStatusPtr->savedPos.y = saveData->savePos.y;
+    gGameStatusPtr->savedPos.z = saveData->savePos.z;
+
+    for (i = 0; i < ARRAY_COUNT(gCurrentEncounter.defeatFlags[0]); i++) {
+        for (j = 0; j < ARRAY_COUNT(gCurrentEncounter.defeatFlags); j++) {
+            gCurrentEncounter.defeatFlags[j][i] = saveData->enemyDefeatFlags[j][i];
+        }
+    }
+
+
+    gGameStatusPtr->debugEnemyContact = 0;
+    gGameStatusPtr->unk_76 = 0;
+    gGameStatusPtr->unk_77 = 0;
+    gGameStatusPtr->musicEnabled = TRUE;
+
+    gSaveSlotMetadata[gGameStatusPtr->saveSlot] = saveData->unk_12EC;
+}
 
 void func_8002B608(void) {
     gGameStatusPtr->entryID = 10;
     fio_serialize_state();
 }
 
-INCLUDE_ASM(void, "fio", fio_serialize_state);
+void fio_serialize_state(void) {
+    SaveData* saveData = &gCurrentSaveFile;
+    s32 i, j;
+
+    saveData->player = gPlayerData;
+
+    saveData->areaID = gGameStatusPtr->areaID;
+    saveData->mapID = gGameStatusPtr->mapID;
+    saveData->entryID = gGameStatusPtr->entryID;
+    saveData->savePos.x = gGameStatusPtr->savedPos.x;
+    saveData->savePos.y = gGameStatusPtr->savedPos.y;
+    saveData->savePos.z = gGameStatusPtr->savedPos.z;
+
+    for (i = 0; i < ARRAY_COUNT(gCurrentEncounter.defeatFlags[0]); i++) {
+        for (j = 0; j < ARRAY_COUNT(gCurrentEncounter.defeatFlags); j++) {
+            saveData->enemyDefeatFlags[j][i] = gCurrentEncounter.defeatFlags[j][i];
+        }
+    }
+
+    saveData->debugEnemyContact = gGameStatusPtr->debugEnemyContact;
+    saveData->unk_12E1 = gGameStatusPtr->unk_76;
+    saveData->unk_12E2 = gGameStatusPtr->unk_77;
+    saveData->musicEnabled = gGameStatusPtr->musicEnabled;
+
+    gSaveSlotMetadata[gGameStatusPtr->saveSlot].level = gPlayerData.level;
+    gSaveSlotMetadata[gGameStatusPtr->saveSlot].spiritsRescued = get_spirits_rescued();
+    gSaveSlotMetadata[gGameStatusPtr->saveSlot].timePlayed = gPlayerData.frameCounter;
+
+    saveData->unk_12EC = gSaveSlotMetadata[gGameStatusPtr->saveSlot];
+}
 
 void fio_init_flash(void) {
     osFlashInit();
 }
 
-INCLUDE_ASM(s32, "fio", fio_read_flash, s32 pageNum, s32* readBuffer, s32 numBytes);
+s32 fio_read_flash(s32 pageNum, s8* readBuffer, u32 numBytes) {
+    OSIoMesg mb;
+    OSMesgQueue mesgQueue;
+    OSMesg mesg;
+    s8* buf = readBuffer;
+    s32 amt;
+    u16 i;
 
-INCLUDE_ASM(s32, "fio", fio_write_flash);
+    osInvalDCache(buf, numBytes);
+    osCreateMesgQueue(&mesgQueue, &mesg, 1);
+
+    i = 0;
+    while (numBytes != 0) {
+        if (numBytes > 0x80) {
+            amt = 0x80;
+        } else {
+            amt = numBytes;
+        }
+
+        osFlashReadArray(&mb, 0, pageNum * 0x80 + i, buf, 1, &mesgQueue);
+        osRecvMesg(&mesgQueue, NULL, 1);
+        i++;
+        numBytes -= amt;
+        buf += amt;
+    }
+    return 1;
+}
+
+s32 fio_write_flash(s32 pageNum, s8* readBuffer, u32 numBytes) {
+    OSIoMesg mb;
+    OSMesgQueue mesgQueue;
+    OSMesg mesg;
+    s32 amt;
+    u16 i;
+
+    osWritebackDCache(readBuffer, numBytes);
+    osCreateMesgQueue(&mesgQueue, &mesg, 1);
+
+    i = 0;
+    while (numBytes != 0) {
+        if (numBytes > 0x80) {
+            amt = 0x80;
+        } else {
+            amt = numBytes;
+        }
+
+        osFlashWriteBuffer(&mb, 0, readBuffer, &mesgQueue);
+        osFlashWriteArray((pageNum * 0x80) + i);
+        osRecvMesg(&mesgQueue, NULL, 1);
+        i++;
+        numBytes -= amt;
+        readBuffer += amt;
+    }
+    return 1;
+}
 
 void fio_erase_flash(s32 pageNum) {
-    osFlashSectorErase(pageNum * 128);
+    osFlashSectorErase(pageNum * 0x80);
 }
