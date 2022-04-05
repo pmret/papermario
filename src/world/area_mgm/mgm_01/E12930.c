@@ -287,7 +287,7 @@ ApiStatus N(UpdatetPanelHoldAboveBlock)(Evt* script, s32 isInitialCall) {
     s32 index = evt_get_variable(script, *args++);
 
     data->panels[index].lerpElapsed++;
-    if ( data->panels[index].lerpElapsed >= data->panels[index].lerpDuration) {
+    if (data->panels[index].lerpElapsed >= data->panels[index].lerpDuration) {
         evt_set_variable(script, LW(3), TRUE);
     } else {
         evt_set_variable(script, LW(3), FALSE);
@@ -427,7 +427,11 @@ ApiStatus N(GiveCoinReward)(Evt* script, s32 isInitialCall) {
     data->targetScore = data->currentScore;
     sfx_play_sound(SOUND_211);
 
-    return (data->currentScore > 0) ? ApiStatus_BLOCK : ApiStatus_DONE2;
+    if (data->currentScore > 0) {
+        return ApiStatus_BLOCK;
+    } else {
+        return ApiStatus_DONE2;
+    }
 }
 
 ApiStatus N(DoubleScore)(Evt* script, s32 isInitialCall) {
@@ -525,6 +529,7 @@ ApiStatus N(OnBreakBlock)(Evt* script, s32 isInitialCall) {
     }
 
     scorekeeper->varTable[BROKEN_BLOCKS_VAR_IDX]++;
+
     return ApiStatus_DONE2;
 }
 
@@ -585,7 +590,11 @@ ApiStatus N(CreateBlockEntities)(Evt* script, s32 isInitialCall) {
         script->functionTemp[1]++;
     }
 
-    return (script->functionTemp[1] < NUM_BLOCKS) ? ApiStatus_BLOCK : ApiStatus_DONE2;
+    if (script->functionTemp[1] < NUM_BLOCKS) {
+        return ApiStatus_BLOCK;
+    } else {
+        return ApiStatus_DONE2;
+    }
 }
 
 const char* mgm_01_str = "mgm_00";
@@ -600,7 +609,13 @@ ApiStatus N(TakeCoinCost)(Evt* script, s32 isInitialCall) {
     add_coins(-1);
     sfx_play_sound(SOUND_211);
 
-    return (++script->functionTemp[0] == PLAY_COST) ? ApiStatus_DONE2 : ApiStatus_BLOCK;
+    script->functionTemp[0]++;
+
+    if (script->functionTemp[0] == PLAY_COST) {
+        return ApiStatus_DONE2;
+    } else {
+        return ApiStatus_BLOCK;
+    }
 }
 
 ApiStatus N(InitializePanels)(Evt* script, s32 isInitialCall) {

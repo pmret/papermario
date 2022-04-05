@@ -212,7 +212,7 @@ void load_hit_data(s32 idx, HitFile* hit) {
             break;
     }
 
-    assetBoundingBox = (u32*)((void*)hit + assetCollisionData->boundingBoxesOffset);;
+    assetBoundingBox = (u32*)((void*)hit + assetCollisionData->boundingBoxesOffset);
     collisionData->aabbs = collision_heap_malloc(assetCollisionData->boundingBoxesDataSize * 4);
     for (i = 0, boundingBox = (u32*)(collisionData->aabbs); i < assetCollisionData->boundingBoxesDataSize;
         assetBoundingBox++, boundingBox++, i++) {

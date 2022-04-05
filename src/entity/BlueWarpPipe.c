@@ -144,7 +144,7 @@ f32 entity_init_BlueWarpPipe(Entity* entity) {
     BlueWarpPipeData* data;
     s32 entryID = CreateEntityVarArgBuffer[0];
     EvtScript* enterPipeEvt = (EvtScript*)CreateEntityVarArgBuffer[1];
-    s32 flagIndex = CreateEntityVarArgBuffer[2];;
+    s32 flagIndex = CreateEntityVarArgBuffer[2];
 
     entity->renderSetupFunc = &entity_BlueWarpPipe_setupGfx;
 

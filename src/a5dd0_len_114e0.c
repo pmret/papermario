@@ -1898,9 +1898,9 @@ ApiStatus AssignScript(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     if (isInitialCall == TRUE) {
-        Bytecode* toBind = (Bytecode*)evt_get_variable(script, *args++);
+        EvtScript* toBind = (EvtScript*)evt_get_variable(script, *args++);
 
-        get_entity_by_index(gLastCreatedEntityIndex)->boundScriptBytecode = (EvtScript*)toBind;
+        get_entity_by_index(gLastCreatedEntityIndex)->boundScriptBytecode = toBind;
         return ApiStatus_DONE2;
     }
 

@@ -8,7 +8,7 @@ Gfx* mdl_get_copied_gfx(s32 copyIndex);
 extern u16 N(TongueWiggleTime); // tongue wiggle rate
 
 void N(add_tongue_deformation)(Vtx* src, Vtx* dest, s32 numVertices, s32 time) {
-    PlayerStatus *player = &gPlayerStatus;
+    PlayerStatus* player = &gPlayerStatus;
     Vtx_t* vs;
     Vtx_t* vd;
     s32 dx;
@@ -57,7 +57,7 @@ void N(add_tongue_deformation)(Vtx* src, Vtx* dest, s32 numVertices, s32 time) {
 }
 
 // conforms to ModelCustomGfxBuilderFunc
-void N(make_tongue_gfx)(int index) {
+void N(make_tongue_gfx)(s32 index) {
     Vtx* vtxSrc;
     Vtx* vtxCopy;
     s32 numCopied;
