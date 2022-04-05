@@ -2133,6 +2133,16 @@ typedef struct EncounterStatus {
     /* 0xFB4 */ char unk_FB4[4];
 } EncounterStatus; // size = 0xFB8
 
+typedef struct SaveDataHeader {
+    /* 0x0000 */ char magicString[16]; /* "Mario Story 006" string */
+    /* 0x0010 */ s8 pad[0x20]; /* always zero */
+    /* 0x0030 */ s32 crc1;
+    /* 0x0034 */ s32 crc2;
+    /* 0x0038 */ s32 saveSlot;
+    /* 0x003C */ s32 saveCount;
+    /* 0x0040 */ s8 ignored[0x40];
+} SaveDataHeader;
+
 typedef struct SaveMetadata {
     /* 0x00 */ s32 timePlayed;
     /* 0x04 */ u8 spiritsRescued;
@@ -2150,7 +2160,7 @@ typedef struct SaveData {
     /* 0x0030 */ s32 crc1;
     /* 0x0034 */ s32 crc2;
     /* 0x0038 */ s32 saveSlot;
-    /* 0x003C */ u32 saveCount;
+    /* 0x003C */ s32 saveCount;
     /* 0x0040 */ PlayerData player;
     /* 0x0468 */ s16 areaID;
     /* 0x046A */ s16 mapID;
