@@ -376,7 +376,7 @@ void npc_draw_palswap_mode_0(Npc* npc, s32 arg1, Matrix4f mtx);
 
 s32 npc_draw_palswap_mode_1(Npc*, s32, Matrix4f mtx);
 
-//s32 npc_blend_palette_colors(s32, s32, s32, s32);
+u16 npc_blend_palette_colors(u16 colorA, u16 colorB, s32 lerpAlpha);
 
 s32 npc_draw_palswap_mode_2(Npc*, s32, s32, Matrix4f mtx);
 
