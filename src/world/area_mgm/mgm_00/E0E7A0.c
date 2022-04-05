@@ -41,4 +41,16 @@ static char* N(exit_str_3) = "";
 
 #include "world/common/UnkNpcAIMainFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mgm/mgm_00/E0E7A0", func_80241170_E0F910);
+/* N(GetAvailableGamesCount) */
+ApiStatus func_80241170_E0F910(Evt* script, s32 isInitialCall) {
+    s32 numGames = 0;
+
+    if (find_item(ITEM_GOLD_CREDIT) >= 0) {
+        numGames = 2;
+    } else if (find_item(ITEM_SILVER_CREDIT) >= 0) {
+        numGames = 1;
+    }
+
+    evt_set_variable(script, LW(5), numGames);
+    return ApiStatus_DONE2;
+}

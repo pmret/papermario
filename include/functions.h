@@ -70,7 +70,7 @@ void exec_ShakeCamX(s32 arg0, s32 arg1, s32 arg2, f32 arg3);
 void exec_ShakeCam1(s32 arg0, s32 arg1, s32 arg2);
 f32 func_800E5348(void);
 
-void draw_number(s32 value, s32 x, s32 y, s32 arg3, s32 palette, s32 opacity, s32 style);
+void draw_number(s32 value, s32 x, s32 y, s32 variableWidthChars, s32 palette, s32 opacity, s32 style);
 
 void set_entity_model_render_command_list(s32 idx, u32* commandList);
 void set_entity_model_flags(s32 idx, s32 newFlags);
@@ -203,8 +203,6 @@ s32 disable_player_static_collisions(void);
 s32 disable_player_input(void);
 void func_80027088(s32);
 void set_time_freeze_mode(s32);
-
-
 
 s32 get_map_IDs_by_name(const char* mapName, s16* areaID, s16* mapID);
 
@@ -789,7 +787,7 @@ void func_800E9900(void);
 void show_coin_counter(void);
 s32 add_item(s32 itemID);
 s32 add_badge(s32 itemID);
-void func_800E96C8(void);
+void hide_coin_counter_immediately(void);
 void hide_popup_menu(void);
 void destroy_popup_menu(void);
 void func_800E98C4(void);

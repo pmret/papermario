@@ -21,12 +21,12 @@ ApiStatus N(Bandit_DropCoin)(Evt* script, s32 isInitialCall) {
             npc = (Npc*)npcID;
         }
 
-        script->functionTempNpc[0] = npc;
+        script->functionTempPtr[0] = npc;
         script->functionTemp[1] = itemEntityIndex;
         script->functionTemp[2] = areaFlag;
     }
 
-    npc = script->functionTempNpc[0];
+    npc = script->functionTempPtr[0];
     itemEntityIndex = script->functionTemp[1];
     areaFlag = script->functionTemp[2];
 

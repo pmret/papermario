@@ -279,12 +279,12 @@ typedef struct PlayerData {
     /* 0x324 */ s32 tradeEventStartTime;
     /* 0x328 */ s32 droTreeOrbitTime;
     /* 0x32C */ s16 starPiecesCollected;
-    /* 0x32E */ s16 jumpGamePlays;
-    /* 0x330 */ s32 jumpGameTotal; /* all-time winnings, max = 99999 */
-    /* 0x334 */ s16 jumpGameRecord;
-    /* 0x336 */ s16 smashGamePlays;
-    /* 0x338 */ s32 smashGameTotal; /* all-time winnings, max = 99999 */
-    /* 0x33C */ s16 smashGameRecord;
+    /* 0x32E */ u16 jumpGamePlays;
+    /* 0x330 */ u32 jumpGameTotal; /* all-time winnings, max = 99999 */
+    /* 0x334 */ u16 jumpGameRecord;
+    /* 0x336 */ u16 smashGamePlays;
+    /* 0x338 */ u32 smashGameTotal; /* all-time winnings, max = 99999 */
+    /* 0x33C */ u16 smashGameRecord;
     /* 0x33E */ char unk_33E[2];
     /* 0x340 */ char unk_340[0xE0];
     /* 0x420 */ s32 starPoints2;
@@ -310,7 +310,11 @@ typedef struct Trigger {
     /* 0x10 */ EvtScript* onTriggerEvt;
     /* 0x14 */ struct Evt* runningScript;
     /* 0x18 */ s32 priority;
-    /* 0x1C */ s32 scriptVars[3];
+    /* 0x1C */ union {
+    /*      */     s32 varTable[3];
+    /*      */     f32 varTableF[3];
+    /*      */     void* varTablePtr[3];
+    /*      */ };
     /* 0x28 */ s32 itemList;
     /* 0x2C */ s32 unk_tr_2C; // related to Goombario somehow, custom tattle perhaps?
     /* 0x30 */ u8 hasPlayerInteractPrompt;
@@ -357,15 +361,13 @@ typedef struct Evt {
     /* 0x070 */ union {
     /*       */     s32 functionTemp[4];
     /*       */     f32 functionTempF[4];
-    /*       */     struct Npc* functionTempNpc[4];
-    /*       */     struct Actor* functionTempActor[4];
-    /*       */     struct ActorPart* functionTempActorPart[4];
+    /*       */     void* functionTempPtr[4];
     /*       */ };
     /* 0x080 */ ApiFunc callFunction;
     /* 0x084 */ union {
     /*       */     s32 varTable[16];
-    /*       */     struct Actor* varTableActor[4];
-    /*       */     struct Enemy* varTableEnemy[4];
+    /*       */     f32 varTableF[16];
+    /*       */     void* varTablePtr[16];
     /*       */ };
     /* 0x0C4 */ s32 varFlags[3];
     /* 0x0D0 */ s32 loopStartTable[8];
@@ -622,7 +624,7 @@ typedef struct Entity {
     /* 0x1C */ EntityCallback updateScriptCallback;
     /* 0x20 */ EntityCallback updateMatrixOverride;
     /* 0x24 */ Evt* boundScript;
-    /* 0x28 */ Bytecode* boundScriptBytecode;
+    /* 0x28 */ EvtScript* boundScriptBytecode;
     /* 0x2C */ s32* savedReadPos;
     /* 0x30 */ char unk_30[0x8];
     /* 0x38 */ EntityBlueprint* blueprint;
@@ -810,11 +812,11 @@ typedef struct Camera {
     /* 0x016 */ char unk_16[2];
     /* 0x018 */ f32 vfov;
     /* 0x01C */ s16 unk_1C;
-    /* 0x01E */ s16 unk_1E;
+    /* 0x01E */ s16 auxBoomLength;
     /* 0x020 */ s16 unk_20;
-    /* 0x022 */ s16 unk_22;
-    /* 0x024 */ s16 unk_24;
-    /* 0x026 */ s16 unk_26;
+    /* 0x022 */ s16 auxBoomPitch;
+    /* 0x024 */ s16 auxBoomYaw;
+    /* 0x026 */ s16 auxBoomZOffset;
     /* 0x028 */ s16 unk_28;
     /* 0x02A */ s16 zoomPercent;
     /* 0x02C */ s16 bgColor[3];
@@ -823,9 +825,7 @@ typedef struct Camera {
     /* 0x03A */ char unk_3A[2];
     /* 0x03C */ Vec3f lookAt_eye;
     /* 0x048 */ Vec3f lookAt_obj;
-    /* 0x054 */ f32 unk_54; // x-related
-    /* 0x058 */ f32 unk_58; // y-related
-    /* 0x05C */ f32 unk_5C; // z-related
+    /* 0x054 */ Vec3f auxPos;
     /* 0x060 */ Vec3f targetPos;
     /* 0x06C */ f32 currentYaw;
     /* 0x070 */ f32 unk_70;
@@ -919,7 +919,11 @@ typedef struct FGModelData {
 typedef struct BattleStatus {
     /* 0x000 */ s32 flags1;
     /* 0x004 */ s32 flags2;
-    /* 0x008 */ s32 varTable[16];
+    /* 0x008 */ union {
+    /*       */     s32 varTable[16];
+    /*       */     f32 varTableF[16];
+    /*       */     void* varTablePtr[16];
+    /*       */ };
     /* 0x048 */ s8 currentSubmenu;
     /* 0x049 */ char unk_49[3];
     /* 0x04C */ s8 unk_4C[16];
@@ -1378,6 +1382,15 @@ typedef struct MesasgeFontGlyphData {
     /* 0xB */ s8 charHeight;
 } MesasgeFontGlyphData; // size = 0xC
 
+typedef struct MessageImageData {
+    /* 0x00 */ s32* raster;
+    /* 0x04 */ s32* palette;
+    /* 0x08 */ u16 width;
+    /* 0x0A */ u16 height;
+    /* 0x0C */ s32 format;
+    /* 0x10 */ s32 bitDepth;
+} MessageImageData; // size = 0x14
+
 typedef struct MessageNumber {
     /* 0x00 */ s32* rasters;
     /* 0x04 */ s8 texSize;
@@ -1581,7 +1594,12 @@ typedef struct ActorPartMovement {
     /* 0x3A */ s16 unk_3A;
     /* 0x3C */ s32 unk_3C;
     /* 0x40 */ char unk_40[0xC];
-    /* 0x4C */ s32 varTable[16];
+    /* 0x4C */ union {
+    /*      */     s32 varTable[16];
+    /*      */     f32 varTableF[16];
+    /*      */     void* varTablePtr[16];
+    /*      */ };
+
 } ActorPartMovement; // size = 0x8C
 
 typedef struct ActorPartBlueprint {
@@ -1886,7 +1904,11 @@ typedef struct ActorState { // TODO: Make the first field of this an ActorMoveme
     /* 0x6B */ u8 jumpPartIndex;
     /* 0x6C */ ChompChainAnimationState* unk_6C;
     /* 0x70 */ char unk_70[12];
-    /* 0x7C */ s32 varTable[16];
+    /* 0x7C */ union {
+    /*      */     s32 varTable[16];
+    /*      */     f32 varTableF[16];
+    /*      */     void* varTablePtr[16];
+    /*      */ };
 } ActorState; // size = 0xBC;
 
 typedef struct Actor {

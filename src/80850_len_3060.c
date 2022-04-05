@@ -555,7 +555,7 @@ void hide_coin_counter(void) {
     }
 }
 
-void func_800E96C8(void) {
+void hide_coin_counter_immediately(void) {
     UiStatus* uiStatus = &gUIStatus;
 
     if ((D_8010CD10 != 0) && (uiStatus->unk_6C[0] == 0)) {

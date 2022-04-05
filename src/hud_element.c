@@ -694,15 +694,15 @@ void func_801413F8(void) {
     gCameras[CAM_CAM3].unk_20 = 0x3CBF;
     gCameras[CAM_CAM3].nearClip = 0x10;
     gCameras[CAM_CAM3].unk_1C = 0;
-    gCameras[CAM_CAM3].unk_1E = 0;
-    gCameras[CAM_CAM3].unk_22 = 0;
-    gCameras[CAM_CAM3].unk_5C = 0;
+    gCameras[CAM_CAM3].auxBoomLength = 0;
+    gCameras[CAM_CAM3].auxBoomPitch = 0;
+    gCameras[CAM_CAM3].auxPos.z = 0;
     gCameras[CAM_CAM3].farClip = 0x4000;
     gCameras[CAM_CAM3].bgColor[0] = 0;
     gCameras[CAM_CAM3].bgColor[1] = 0;
     gCameras[CAM_CAM3].bgColor[2] = 0;
-    gCameras[CAM_CAM3].unk_54 = 160.0f;
-    gCameras[CAM_CAM3].unk_58 = -120.0f;
+    gCameras[CAM_CAM3].auxPos.x = 160.0f;
+    gCameras[CAM_CAM3].auxPos.y = -120.0f;
     gCameras[CAM_CAM3].vfov = 1.0f;
     gCameras[CAM_CAM3].flags &= ~0x6;
 }
