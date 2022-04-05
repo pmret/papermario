@@ -40,6 +40,7 @@ extern HudScript HudScript_StatusStar4[];
 extern HudScript HudScript_StatusStar5[];
 extern HudScript HudScript_StatusStar6[];
 extern HudScript HudScript_StatusStar7[];
+extern HudScript HudScript_StatusStarEmpty[];
 extern HudScript HudScript_StatTimes[];
 extern HudScript HudScript_ListPrevPage[];
 extern HudScript HudScript_ListNextPage[];
@@ -59,6 +60,7 @@ extern HudScript HudScript_StatusSPIncrement4[];
 extern HudScript HudScript_StatusSPIncrement5[];
 extern HudScript HudScript_StatusSPIncrement6[];
 extern HudScript HudScript_StatusSPIncrement7[];
+extern HudScript HudScript_StatusSPEmptyIncrement[];
 extern HudScriptPair gItemHudScripts[];
 
 extern WindowStyleCustom gPauseWS_0;

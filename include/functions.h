@@ -100,6 +100,7 @@ void pause_handle_input(s32 buttonsPressed, s32 buttonsHeld);
 void pause_cleanup(void);
 
 // file menu stuff
+void func_80248170(s32 idx);
 void filemenu_set_selected(MenuPanel* menu, s32 col, s32 row);
 void filemenu_set_cursor_alpha(s32 arg0);
 void filemenu_set_cursor_goal_pos(s32 windowIndex, s32 posX, s32 posY);
@@ -411,6 +412,7 @@ Evt* start_script(EvtScript* source, s32 priority, s32 initialState);
 Evt* start_script_in_group(EvtScript* source, u8 priority, u8 initialState, u8 groupFlags);
 f32 get_player_normal_yaw(void);
 void set_standard_shadow_scale(Shadow* shadow, f32 scale);
+void set_npc_shadow_scale(Shadow* shadow, f32 height, f32 npcRadius);
 void set_peach_shadow_scale(Shadow* shadow, f32 scale);
 s32 is_block_on_ground(Entity* block);
 void set_animation(s32 actorID, s32, s32 animationIndex);
