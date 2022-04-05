@@ -6,8 +6,8 @@
 
 #define NAMESPACE flo_21
 
-ApiStatus N(UnkTexturePanFunc)(Evt* script, s32 isInitialCall);
-ApiStatus N(UnkTexturePanFunc2)(Evt* script, s32 isInitialCall);
+ApiStatus N(UpdateTexturePanSmooth)(Evt* script, s32 isInitialCall);
+ApiStatus N(UpdateTexturePanStepped)(Evt* script, s32 isInitialCall);
 ApiStatus N(UnkFloatFunc)(Evt* script, s32 isInitialCall);
 ApiStatus N(flo_21_StarSpiritEffectFunc1)(Evt* script, s32 isInitialCall);
 ApiStatus N(flo_21_StarSpiritEffectFunc2)(Evt* script, s32 isInitialCall);

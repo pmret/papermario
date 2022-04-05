@@ -48,13 +48,13 @@ EvtScript N(updateTexturePan_802408C0) = {
         EVT_IF_EQ(EVT_VAR(6), 1)
             EVT_IF_EQ(EVT_VAR(7), 1)
                 EVT_IF_EQ(EVT_VAR(8), 1)
-                    EVT_CALL(N(UnkTexturePanFunc))
+                    EVT_CALL(N(UpdateTexturePanSmooth))
                     EVT_RETURN
                 EVT_END_IF
             EVT_END_IF
         EVT_END_IF
     EVT_END_IF
-    EVT_CALL(N(UnkTexturePanFunc2))
+    EVT_CALL(N(UpdateTexturePanStepped))
     EVT_RETURN
     EVT_END
 };
@@ -1732,9 +1732,7 @@ static s32 N(pad_66B4)[] = {
     0x00000000, 0x00000000, 0x00000000,
 };
 
-#include "world/common/UnkTexturePanFunc.inc.c"
-
-#include "world/common/UnkTexturePanFunc2.inc.c"
+#include "world/common/UpdateTexturePan.inc.c"
 
 // It seems like fx_sun was not properly defined for this file. Having a proper
 // declaration makes it not match.

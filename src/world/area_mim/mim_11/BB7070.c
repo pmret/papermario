@@ -19,9 +19,7 @@ static char* N(exit_str_5) = "";
 
 #include "world/common/SomeXYZFunc2.inc.c"
 
-#include "world/common/UnkTexturePanFunc.inc.c"
-
-#include "world/common/UnkTexturePanFunc2.inc.c"
+#include "world/common/UpdateTexturePan.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mim/mim_11/BB7070", func_802405EC_BB765C);
 
