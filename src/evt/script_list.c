@@ -671,8 +671,8 @@ Trigger* bind_trigger(EvtScript* script, s32 flags, s32 triggerFlagIndex, s32 tr
     trigger->onTriggerEvt = script;
     trigger->runningScript = NULL;
     trigger->priority = priority;
-    trigger->scriptVars[0] = triggerVar0;
-    trigger->scriptVars[1] = triggerVar1;
+    trigger->varTable[0] = triggerVar0;
+    trigger->varTable[1] = triggerVar1;
     return trigger;
 }
 

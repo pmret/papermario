@@ -3,7 +3,7 @@
 static char* N(exit_str_0) = "jan_09";
 static char* N(exit_str_1) = "";
 
-INCLUDE_ASM(s32, "world/area_jan/jan_11/B70860", func_80240000_B70860);
+#include "world/common/DarkRoom.inc.c"
 
 #include "world/common/SetPlayerStatusAnimFlags100000.inc.c"
 

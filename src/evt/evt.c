@@ -977,9 +977,9 @@ s32 evt_trigger_on_activate_exec_script(Trigger* trigger) {
         script = start_script((EvtScript*)scriptStart, trigger->priority, 0x20);
         trigger->runningScript = script;
         trigger->runningScriptID = script->id;
-        script->varTable[0] = trigger->scriptVars[0];
-        script->varTable[1] = trigger->scriptVars[1];
-        script->varTable[2] = trigger->scriptVars[2];
+        script->varTable[0] = trigger->varTable[0];
+        script->varTable[1] = trigger->varTable[1];
+        script->varTable[2] = trigger->varTable[2];
         script->owner2.trigger = trigger;
     }
 
@@ -1012,9 +1012,9 @@ ApiStatus evt_handle_bind(Evt* script) {
     trigger->onTriggerEvt = (EvtScript*)triggerScript;
     trigger->runningScript = NULL;
     trigger->priority = script->priority;
-    trigger->scriptVars[0] = evt_get_variable(script, script->varTable[0]);
-    trigger->scriptVars[1] = evt_get_variable(script, script->varTable[1]);
-    trigger->scriptVars[2] = evt_get_variable(script, script->varTable[2]);
+    trigger->varTable[0] = evt_get_variable(script, script->varTable[0]);
+    trigger->varTable[1] = evt_get_variable(script, script->varTable[1]);
+    trigger->varTable[2] = evt_get_variable(script, script->varTable[2]);
 
     if (triggerOut != 0) {
         evt_set_variable(script, triggerOut, (s32)trigger);
@@ -1097,9 +1097,9 @@ s32 evt_trigger_on_activate_lock(Trigger* trigger) {
         Evt* newScript = start_script(trigger->onTriggerEvt, trigger->priority, 0x20);
         trigger->runningScript = newScript;
         trigger->runningScriptID = newScript->id;
-        newScript->varTable[0] = trigger->scriptVars[0];
-        newScript->varTable[1] = trigger->scriptVars[1];
-        newScript->varTable[2] = trigger->scriptVars[2];
+        newScript->varTable[0] = trigger->varTable[0];
+        newScript->varTable[1] = trigger->varTable[1];
+        newScript->varTable[2] = trigger->varTable[2];
         newScript->owner2.trigger = trigger;
     }
 
@@ -1132,9 +1132,9 @@ ApiStatus evt_handle_bind_lock(Evt* script) {
     trigger->onTriggerEvt = (EvtScript*)triggerScript;
     trigger->runningScript = NULL;
     trigger->priority = script->priority;
-    trigger->scriptVars[0] = evt_get_variable(script, script->varTable[0]);
-    trigger->scriptVars[1] = evt_get_variable(script, script->varTable[1]);
-    trigger->scriptVars[2] = evt_get_variable(script, script->varTable[2]);
+    trigger->varTable[0] = evt_get_variable(script, script->varTable[0]);
+    trigger->varTable[1] = evt_get_variable(script, script->varTable[1]);
+    trigger->varTable[2] = evt_get_variable(script, script->varTable[2]);
 
     return ApiStatus_DONE2;
 }

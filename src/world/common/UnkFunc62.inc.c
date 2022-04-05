@@ -110,7 +110,7 @@ ApiStatus N(UnkFunc62)(Evt* script, s32 isInitialCall) {
 
     switch (script->functionTemp[0]) {
         case 1:
-            if (state->velocity > 1.570795f) {
+            if (state->velocity > PI_S / 2) {
                 set_animation(ACTOR_SELF, 1, state->animJumpFall);
             }
             oldActorX = actor->currentPos.x;

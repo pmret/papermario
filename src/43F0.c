@@ -728,8 +728,8 @@ f32 cos_deg(f32 angle) {
 }
 
 f32 update_lerp(s32 easing, f32 start, f32 end, s32 elapsed, s32 duration) {
-    s32 val1s;
-    f32 temp_f4;
+    s32 timeLeft;
+    f32 absMag;
 
     if (duration == 0) {
         return end;
@@ -751,27 +751,27 @@ f32 update_lerp(s32 easing, f32 start, f32 end, s32 elapsed, s32 duration) {
             return end - (((end - start) * cos_rad((((f32)SQ(elapsed) / duration) * PI_D * 4.0) / 15.0) * (duration - elapsed) *
                            (duration - elapsed)) / SQ((f32)duration));
         case EASING_QUADRATIC_OUT:
-            val1s = duration - elapsed;
-            return (start + (end - start)) - ((SQ(val1s) * (end - start))) / SQ(duration);
+            timeLeft = duration - elapsed;
+            return (start + (end - start)) - ((SQ(timeLeft) * (end - start))) / SQ(duration);
         case EASING_CUBIC_OUT:
-            val1s = duration - elapsed;
-            return (start + (end - start)) - ((CUBE(val1s) * (end - start))) / CUBE(duration);
+            timeLeft = duration - elapsed;
+            return (start + (end - start)) - ((CUBE(timeLeft) * (end - start))) / CUBE(duration);
         case EASING_QUARTIC_OUT:
-            val1s = duration - elapsed;
-            return (start + (end - start)) - ((QUART(val1s) * (end - start))) / QUART(duration);
+            timeLeft = duration - elapsed;
+            return (start + (end - start)) - ((QUART(timeLeft) * (end - start))) / QUART(duration);
         case EASING_COS_BOUNCE:
-            temp_f4 = cos_rad((((f32)SQ(elapsed) / duration) * PI_D * 4.0) / 40.0) * (duration - elapsed) *
+            absMag = cos_rad((((f32)SQ(elapsed) / duration) * PI_D * 4.0) / 40.0) * (duration - elapsed) *
                       (duration - elapsed) / SQ((f32)duration);
-            if (temp_f4 < 0.0f) {
-                temp_f4 = -temp_f4;
+            if (absMag < 0.0f) {
+                absMag = -absMag;
             }
-            return end - ((end - start) * temp_f4);
+            return end - ((end - start) * absMag);
         case EASING_COS_IN_OUT:
             return start + ((end - start) * (1.0 - cos_rad(((f32)elapsed * PI_D) / (f32)duration)) * 0.5);
         case EASING_SIN_OUT:
-            return start + ((end - start) * sin_rad(((f32)elapsed * 1.570796) / (f32)duration));
+            return start + ((end - start) * sin_rad(((f32)elapsed * (PI_D / 2)) / (f32)duration));
         case EASING_COS_IN:
-            return start + ((end - start) * (1.0 - cos_rad(((f32)elapsed * 1.570796) / (f32)duration)));
+            return start + ((end - start) * (1.0 - cos_rad(((f32)elapsed * (PI_D / 2)) / (f32)duration)));
     }
 
     return 0.0f;

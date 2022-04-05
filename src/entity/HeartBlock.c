@@ -285,8 +285,7 @@ s8 entity_HeartBlock_create_child_entity(Entity* entity, EntityBlueprint* bp) {
     HeartBlockContentData* data;
 
     entity_base_block_init(entity);
-    childEntity = get_entity_by_index(create_entity(bp, entity->position.x, entity->position.y, entity->position.z, 0.0f,
-                                     0x80000000));
+    childEntity = get_entity_by_index(create_entity(bp, entity->position.x, entity->position.y, entity->position.z, 0.0f, MAKE_ENTITY_END));
     data = childEntity->dataBuf.heartBlockContent;
     data->parentEntityIndex = entity->listIndex;
 
