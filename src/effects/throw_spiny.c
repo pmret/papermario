@@ -8,14 +8,17 @@ void throw_spiny_init(void);
 void throw_spiny_update(EffectInstance* effect);
 void throw_spiny_render(EffectInstance* effect);
 
-extern u8 D_E00C8718[4];
-extern u8 D_E00C8720[4];
-extern f64 D_E00C8738;
+extern Gfx D_09000800[];
+extern Gfx D_090008D8[];
+extern Gfx D_090009F0[];
 
-extern f64 D_E00C8730;
+Gfx* D_E00C8710[2] = { D_09000800, D_090008D8 };
 
-typedef struct unk_spinyThrow {
-    EffectBlueprint* unk_00;
+u8 D_E00C8718[8] = { 110, 150, 130, 110, 100, 95, 100, 0 };
+u8 D_E00C8720[8] = { 80, 60, 80, 100, 120, 110, 100, 0 };
+
+typedef struct ThrowSpinyFXData {
+    s32 unk_00;
     f32 x;
     f32 y;
     f32 z;
@@ -42,12 +45,12 @@ typedef struct unk_spinyThrow {
     s32 state;
     s32 unk_64;
     s32 timeUntilFall; //how quickly should spiny fall to ground ?
-} unk_spinyThrow; //sizeof 0x68
+} ThrowSpinyFXData; //sizeof 0x68
 
 //during spiny surge
-EffectInstance* throw_spiny_main(EffectBlueprint *arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, s32 time) {
+EffectInstance* throw_spiny_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, s32 time) {
     EffectInstance* effectInstance;
-    unk_spinyThrow* spinyObject;
+    ThrowSpinyFXData* spinyObject;
     EffectBlueprint effectBluePrint;
     int new_var;
     f32 temp_f4, temp_f8, new_var2;
@@ -61,7 +64,7 @@ EffectInstance* throw_spiny_main(EffectBlueprint *arg0, f32 arg1, f32 arg2, f32 
     effectBluePrint.effectID = EFFECT_THROW_SPINY;
     effectInstance = (EffectInstance *)shim_create_effect_instance(&effectBluePrint);
     effectInstance->numParts = new_var;
-    spinyObject = effectInstance->data = (unk_spinyThrow*)shim_general_heap_malloc(sizeof(unk_spinyThrow));
+    spinyObject = effectInstance->data = (ThrowSpinyFXData*)shim_general_heap_malloc(sizeof(ThrowSpinyFXData));
     ASSERT(spinyObject);
     spinyObject->unk_00 = arg0;
     spinyObject->lifeDuration = 0;
@@ -74,7 +77,7 @@ EffectInstance* throw_spiny_main(EffectBlueprint *arg0, f32 arg1, f32 arg2, f32 
 
     temp_f8 = arg5 - arg2;
     temp_f4 = time;
-    new_var2 = (temp_f8 / temp_f4) - (time * D_E00C8730);
+    new_var2 = (temp_f8 / temp_f4) - (time * -0.10000000149011612);
     spinyObject->timeUntilFall = time;
     spinyObject->unk_3C = 255;
     spinyObject->unk_10 = arg1;
@@ -112,7 +115,7 @@ void throw_spiny_init(void) {
 }
 
 void throw_spiny_update(EffectInstance* effectInstance) {
-    unk_spinyThrow* spinyObject = effectInstance->data;
+    ThrowSpinyFXData* spinyObject = effectInstance->data;
     u32 state;
     f32 gravity;
     s32 tempVar;
@@ -132,7 +135,7 @@ void throw_spiny_update(EffectInstance* effectInstance) {
         shim_remove_effect((EffectInstance*)effectInstance);
         return;
     }
-    
+
     tempVar = spinyObject->lifeDuration;
     state = spinyObject->state;
 
@@ -159,7 +162,7 @@ void throw_spiny_update(EffectInstance* effectInstance) {
 
     gravity = spinyObject->gravity;
 
-    if ((gravity < 0.0f) && (spinyObject->y < D_E00C8738)) {
+    if ((gravity < 0.0f) && (spinyObject->y < 14.285714285714286)) {
         spinyObject->y = 14.285714f;
         spinyObject->rotationSpeed = -20.0f;
         spinyObject->gravity = gravity - gravity;
@@ -182,4 +185,29 @@ void throw_spiny_render(EffectInstance* effect) {
 void func_E00C844C(void) {
 }
 
-INCLUDE_ASM(s32, "effects/throw_spiny", throw_spiny_appendGfx);
+void throw_spiny_appendGfx(void* effect) {
+    Matrix4f sp18;
+    Matrix4f sp58;
+    Camera* camera = &gCameras[gCurrentCameraID];
+    ThrowSpinyFXData* data = ((EffectInstance*)effect)->data;
+    s32 temp_s5 = data->unk_3C;
+    s32 temp_s6 = data->unk_00;
+    f32 scale = data->unk_40 * SPRITE_PIXEL_SCALE;
+
+    gDPPipeSync(gMasterGfxPos++);
+    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+
+    shim_guTranslateF(sp18, data->x, data->y, data->z);
+    shim_guScaleF(sp58, scale * data->xScale, scale * data->yScale, scale);
+    shim_guMtxCatF(sp58, sp18, sp18);
+    shim_guRotateF(sp58, data->yaw, 0.0f, 0.0f, 1.0f);
+    shim_guMtxCatF(sp58, sp18, sp18);
+    shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(gMasterGfxPos++, camera->unkMatrix, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gDPSetPrimColor(gMasterGfxPos++, 0, 0, data->unk_30, data->unk_34, data->unk_38, temp_s5);
+    gSPDisplayList(gMasterGfxPos++, D_E00C8710[temp_s6]);
+    gSPDisplayList(gMasterGfxPos++, D_090009F0);
+    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+}

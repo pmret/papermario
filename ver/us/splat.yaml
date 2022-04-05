@@ -3068,7 +3068,7 @@ segments:
     vram: 0xE00C8000
     subsegments:
     - [0x3CF3A0, c, throw_spiny]
-    - [0x3CFAB0, data]
+    - [0x3CFAB0]
   - [0x3CFAF0, bin] # throw_spiny gfx
   - name: effect_effect_65
     dir: effects
