@@ -1234,25 +1234,25 @@ typedef struct ItemEntity {
 } ItemEntity; // size = 0x5C
 
 typedef struct MessagePrintState {
-    /* 0x000 */ s8* srcBuffer;
+    /* 0x000 */ u8* srcBuffer;
     /* 0x004 */ s16 printBufferPos;
     /* 0x006 */ char unk_06[2];
     /* 0x008 */ s32 msgID;
-    /* 0x00C */ s16 srcBufferPos;
-    /* 0x00E */ s16 currentPrintDelay;
+    /* 0x00C */ u16 srcBufferPos;
+    /* 0x00E */ u16 currentPrintDelay;
     /* 0x010 */ u8 printBuffer[1088]; // slightly larger than source buffer
     /* 0x450 */ s16 printBufferSize;
     /* 0x452 */ u16 effectFrameCounter;
     /* 0x454 */ u8 font;
-    /* 0x455 */ s8 fontVariant;
+    /* 0x455 */ u8 fontVariant;
     /* 0x456 */ Vec2s windowOffsetPos; // offset from baseWindowPos. used to animated window pos?
     /* 0x45A */ Vec2s windowBasePos; // ex: set by the parameters for choice style
     /* 0x45E */ s8 printDelayTime; // delay to print each chunk
-    /* 0x45F */ s8 charsPerChunk; // how many chars to print at once
+    /* 0x45F */ u8 charsPerChunk; // how many chars to print at once
     /* 0x460 */ s32 curLinePos; // position along current line
-    /* 0x464 */ s8 unk_464;
+    /* 0x464 */ u8 unk_464;
     /* 0x465 */ char unk_465;
-    /* 0x466 */ s16 nextLinePos; // ?
+    /* 0x466 */ u16 nextLinePos; // ?
     /* 0x468 */ s8 lineCount;
     /* 0x469 */ char unk_469[0x3];
     /* 0x46C */ s32 unk_46C;
@@ -1263,14 +1263,14 @@ typedef struct MessagePrintState {
     /* 0x47E */ s16 rewindArrowBlinkCounter;
     /* 0x480 */ s16 unk_480;
     /* 0x482 */ Vec2s rewindArrowPos;
-    /* 0x486 */ s8 currentLine;
+    /* 0x486 */ u8 currentLine;
     /* 0x487 */ u8 unkArraySize;
     /* 0x488 */ u16 lineEndPos[4];
     /* 0x490 */ char unk_490[0x38];
     /* 0x4C8 */ u16 unk_4C8;
     /* 0x4CA */ s16 unk_4CA;
     /* 0x4CC */ u16 unk_4CC;
-    /* 0x4CE */ s8 maxOption;
+    /* 0x4CE */ u8 maxOption;
     /* 0x4CF */ char unk_4CF[0x1];
     /* 0x4D0 */ s16 cursorPosX[6];
     /* 0x4DC */ s16 cursorPosY[6];
@@ -1279,7 +1279,7 @@ typedef struct MessagePrintState {
     /* 0x4EA */ u8 cancelOption;
     /* 0x4EB */ char unk_4EB[0x1];
     /* 0x4EC */ s8 targetOption;
-    /* 0x4ED */ s8 unkCounter;
+    /* 0x4ED */ u8 unkCounter;
     /* 0x4EE */ s8 selectedOption;
     /* 0x4EF */ char unk_4EF[0x9];
     /* 0x4F8 */ u8 windowState;
@@ -1297,7 +1297,7 @@ typedef struct MessagePrintState {
     /* 0x514 */ Vec2su windowSize;
     /* 0x518 */ s8 speechSoundType;
     /* 0x519 */ u8 volume;
-    /* 0x51A */ s8 speechPan; // just pan?
+    /* 0x51A */ u8 speechPan; // just pan?
     /* 0x51B */ char unk_51B[0x1];
     /* 0x51C */ u16 speechVolumePitch;
     /* 0x51E */ char unk_51E[0x2];
