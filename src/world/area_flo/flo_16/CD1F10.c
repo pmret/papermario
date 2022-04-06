@@ -241,16 +241,16 @@ static s32 N(pad_36FC) = {
     0x00000000,
 };
 
-s32 N(D_80243700_CD5530)[] = {
+s32 N(SuperBlockDataA)[] = {
     0x001D00F0, 0x001D00F1,
 };
 
-s16 N(D_80243708_CD5538)[] = {
+s16 N(SuperBlockDataB)[] = {
     0x0001, 0x0002, 0x0003, 0x0004,
     0x0009, 0x0006, 0x0007, 0x0008
 };
 
-s32 N(D_80243718_CD5548)[8][2] = {
+s32 N(SuperBlockDataC)[8][2] = {
     { 0x001D00E0, 0x001D00E1 }, { 0x001D00E2, 0x001D00E3 },
     { 0x001D00E4, 0x001D00E5 }, { 0x001D00E6, 0x001D00E7 },
     { 0x001D00E8, 0x001D00E9 }, { 0x001D00EA, 0x001D00EB },
@@ -472,7 +472,7 @@ ApiStatus N(func_802402AC_CD20DC)(Evt* script, s32 isInitialCall) {
         var = script->varTable[12] >= 0;
 
         for (i = 0; i < 8; i++) {
-            idx = N(D_80243708_CD5538)[i];
+            idx = N(SuperBlockDataB)[i];
 
             if (playerData->partners[idx].enabled) {
                 ptr->unk_108[i] = idx;
@@ -481,11 +481,11 @@ ApiStatus N(func_802402AC_CD20DC)(Evt* script, s32 isInitialCall) {
                 if (partnerLevel >= 0) {
                     ptr->unk_00[i] = wPartnerHudScripts[idx];
                     ptr->unk_18C[i] = 1;
-                    ptr->unk_294[i] = N(D_80243718_CD5548)[i][partnerLevel];
+                    ptr->unk_294[i] = N(SuperBlockDataC)[i][partnerLevel];
                 } else {
                     ptr->unk_00[i] = wDisabledPartnerHudScripts[idx];
                     ptr->unk_18C[i] = 0;
-                    ptr->unk_294[i] = N(D_80243700_CD5530)[var];
+                    ptr->unk_294[i] = N(SuperBlockDataA)[var];
                 }
                 ptr->unk_210[i] = playerData->partners[idx].level;
                 partnerActiveCount++;

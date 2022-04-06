@@ -47,6 +47,7 @@ EvtScript N(80241F40) = {
     EVT_END
 };
 
+
 s32 N(SuperBlockDataA)[] = {
     0x001D00F0, 0x001D00F1,
 };
