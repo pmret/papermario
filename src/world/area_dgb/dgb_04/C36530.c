@@ -612,8 +612,4 @@ ApiStatus N(func_80242154_C38684)(Evt* script, s32 isInitialCall) {
 
 #include "world/common/atomic/SuperBlock.inc.c"
 
-#include "world/common/TempSuperBlockBeta.inc.c"
-
-#include "world/common/atomic/SuperBlockB.inc.c"
-
 const char N(dgb_00_name_hack)[] = "dgb_00";

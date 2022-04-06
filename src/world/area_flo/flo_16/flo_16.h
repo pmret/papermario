@@ -22,7 +22,7 @@ ApiStatus N(UnkPartnerPosFunc)(Evt* script, s32 isInitialCall);
 ApiStatus N(UnkPartnerPosFunc2)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_80240000_CD1E30)(Evt* script, s32 isInitialCall);
 ApiStatus N(TempSuperBlockAlpha)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_802402AC_CD20DC)(Evt* script, s32 isInitialCall);
+ApiStatus N(TempSuperBlockBeta)(Evt* script, s32 isInitialCall);
 ApiStatus N(SwitchToPartner)(Evt* script, s32 isInitialCall);
 ApiStatus N(UnkFunc60)(Evt* script, s32 isInitialCall);
 ApiStatus N(UnkFunc44)(Evt* script, s32 isInitialCall);

@@ -136,7 +136,7 @@ EvtScript N(80242178) = {
     EVT_ELSE
         EVT_CALL(ShowMessageAtScreenPos, MESSAGE_ID(0x1D, 0x00DB), 160, 40)
     EVT_END_IF
-    EVT_CALL(N(func_802401CC_CAEF0C))
+    EVT_CALL(N(TempSuperBlockBeta))
     EVT_IF_EQ(EVT_VAR(0), -1)
         EVT_CALL(N(UnkFunc39), EVT_VAR(9))
         EVT_CALL(DisablePlayerInput, FALSE)

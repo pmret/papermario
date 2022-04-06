@@ -3,6 +3,14 @@
 
 extern s32 gPartnerPopupProperties[11][4];
 
+extern s32 N(SuperBlockDataA)[2];
+extern s16 N(SuperBlockDataB)[8];
+extern s32 N(SuperBlockDataC)[8][2];
+extern f32 N(SuperBlockDataD)[3];
+
+extern s32 wPartnerHudScripts[];
+extern s32 wDisabledPartnerHudScripts[];
+
 ApiStatus N(TempSuperBlockBeta)(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
     PopupMenu* popupMenu;
