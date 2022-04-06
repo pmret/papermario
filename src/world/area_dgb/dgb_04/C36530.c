@@ -755,102 +755,79 @@ ApiStatus N(func_8024240C_C3893C)(Evt* script, s32 isInitialCall) {
 
 #include "world/common/UnkFunc18.inc.c"
 
-#ifdef NON_EQUIVALENT
-typedef struct {
-    s32 unk_00[8];
-    char unk_20[0x64];
-    s32 unk_84[8];
-    char unk_A4[0x64];
-    s32 unk_108[8];
-    char unk_128[0x64];
-    s32 unk_18C[8];
-    char unk_1AC[0x64];
-    s32 unk_210[8];
-    char unk_230[0x64];
-    s32 unk_294[8];
-    char unk_2B4[0x64];
-    s32 unk_318;
-    char unk_31C[8];
-    s32 unk_324;
-    s32 unk_328;
-    s16 unk_32C;
-} N(UnkStruct);
+extern s32 gPartnerPopupProperties[11][4];
 
-ApiStatus N(func_8024259C_C38ACC)(Evt* script, s32 isInitialCall) {
+s32 dgb_04_func_8024259C_C38ACC(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
-    N(UnkStruct)* ptr;
+    PopupMenu* popupMenu;
+    s32 partnerID;
+    s32 canUpgradePartner;
+    s32 hasUltraStone;
+    s32 entryIndex;
     s32 i;
-    s32 partnerLevel;
-    s32 var, partnerActiveCount;
-    s32 idx;
 
+    // create the 'partner upgrade' popup menu
     if (isInitialCall) {
-        script->functionTemp[2] = heap_malloc(0x330);
-        ptr = script->functionTemp[2];
+        popupMenu = heap_malloc(0x330);
+        script->functionTempPtr[2] = popupMenu;
+        hasUltraStone = script->varTable[0xC] >= 0;
 
-        partnerActiveCount = 0;
-        var = script->varTable[12] >= 0;
-
-        for (i = 0; i < 8; i++) {
-            idx = N(D_80243D38_C3A268)[i];
-
-            if (playerData->partners[idx].enabled) {
-                ptr->unk_108[i] = idx;
-                ptr->unk_84[i] = *gPartnerPopupProperties[idx];
-                partnerLevel = N(UnkFunc37)(idx, var);
-                if (partnerLevel >= 0) {
-                    ptr->unk_00[i] = wPartnerHudScripts[idx];
-                    ptr->unk_18C[i] = 1;
-                    ptr->unk_294[i] = N(D_80243D48_C3A278)[i][partnerLevel];
+        // build the popup menu entries from unlocked partners
+        entryIndex = 0;
+        for (i = 0; i < 8; i++) { // sizeof dgb_04_D_80243D38_C3A268
+            partnerID = dgb_04_D_80243D38_C3A268[i]; // upgradeable partner IDs
+            if (playerData->partners[partnerID].enabled) {
+                popupMenu->userIndex[entryIndex] = partnerID;
+                popupMenu->nameMsg[entryIndex] = gPartnerPopupProperties[partnerID][0];
+                canUpgradePartner = dgb_04_UnkFunc37(partnerID, hasUltraStone);
+                if (canUpgradePartner >= 0) {
+                    popupMenu->ptrIcon[entryIndex] = (struct HudScript*)wPartnerHudScripts[partnerID];
+                    popupMenu->enabled[entryIndex] = TRUE;
+                    popupMenu->descMsg[entryIndex] = dgb_04_D_80243D48_C3A278[i][canUpgradePartner];
                 } else {
-                    ptr->unk_00[i] = wDisabledPartnerHudScripts[idx];
-                    ptr->unk_18C[i] = 0;
-                    ptr->unk_294[i] = N(D_80243D30_C3A260)[var];
+                    popupMenu->ptrIcon[entryIndex] = (struct HudScript*)wDisabledPartnerHudScripts[partnerID];
+                    popupMenu->enabled[entryIndex] = FALSE;
+                    popupMenu->descMsg[entryIndex] = dgb_04_D_80243D30_C3A260[hasUltraStone];
                 }
-                ptr->unk_210[i] = playerData->partners[idx].level;
-                partnerActiveCount++;
+                popupMenu->value[entryIndex] = playerData->partners[partnerID].level;
+                entryIndex++;
             }
         }
 
-        ptr->unk_318 = 4;
-        ptr->unk_324 = partnerActiveCount;
-        ptr->unk_328 = 0;
-        create_popup_menu(ptr);
+        popupMenu->popupType = 4;
+        popupMenu->numEntries = entryIndex;
+        popupMenu->initialPos = 0;
+        create_popup_menu(popupMenu);
         script->functionTemp[0] = 0;
     }
 
-    ptr = script->functionTemp[2];
+    // wait for player to close popup
+    popupMenu = script->functionTempPtr[2];
     if (script->functionTemp[0] == 0) {
-        script->functionTemp[1] = ptr->unk_32C;
-        if (script->functionTemp[1] != 0) {
-            hide_popup_menu();
-        } else {
+        script->functionTemp[1] = popupMenu->result;
+        if (script->functionTemp[1] == 0) {
             return ApiStatus_BLOCK;
         }
+        hide_popup_menu();
     }
-
+    
+    // wait for popup to hide
     script->functionTemp[0]++;
-
-    if (script->functionTemp[0] < 15) {
+    if (script->functionTemp[0] < 0xF) {
         return ApiStatus_BLOCK;
     }
-
     destroy_popup_menu();
+    
     if (script->functionTemp[1] != 0xFF) {
-        script->varTable[0] = gPartnerPopupProperties[ptr->unk_108[script->functionTemp[1] - 1]][0];
-        script->varTable[1] = ptr->unk_108[script->functionTemp[1] - 1];
+        script->varTable[0] = gPartnerPopupProperties[popupMenu->userIndex[script->functionTemp[1] - 1]][0];
+        script->varTable[1] = popupMenu->userIndex[script->functionTemp[1] - 1];
     } else {
         script->varTable[0] = -1;
     }
-
-    heap_free(script->functionTemp[2]);
-
+        
+    heap_free(script->functionTempPtr[2]);
     return ApiStatus_DONE2;
 }
-#else
-INCLUDE_ASM(ApiStatus, "world/area_dgb/dgb_04/C36530", dgb_04_func_8024259C_C38ACC, Evt* script,
-            s32 isInitialCall)
-#endif
 
 #include "world/common/SwitchToPartner.inc.c"
 
