@@ -4,16 +4,7 @@ extern s32 wPartnerHudScripts[];
 extern s32 wDisabledPartnerHudScripts[];
 extern s32 gPartnerPopupProperties[11][4];
 
-#include "world/common/SetOverrideFlags_40.inc.c"
-
-#include "world/common/UnkFunc17.inc.c"
-
-ApiStatus N(func_8024003C_CAED7C)(Evt* script, s32 isInitialCall) {
-    entity_upgrade_block_hide_content(evt_get_variable(script, *script->ptrReadPos));
-    return ApiStatus_DONE2;
-}
-
-#include "world/common/UnkFunc18.inc.c"
+#include "world/common/atomic/SuperBlock.inc.c"
 
 #ifdef NON_EQUIVALENT
 typedef struct {
@@ -52,7 +43,7 @@ ApiStatus N(func_802401CC_CAEF0C)(Evt* script, s32 isInitialCall) {
         var = script->varTable[12] >= 0;
 
         for (i = 0; i < 8; i++) {
-            idx = N(D_80241FB8_CB0CF8)[i];
+            idx = N(SuperBlockDataB)[i];
 
             if (playerData->partners[idx].enabled) {
                 ptr->unk_108[i] = idx;
@@ -61,11 +52,11 @@ ApiStatus N(func_802401CC_CAEF0C)(Evt* script, s32 isInitialCall) {
                 if (partnerLevel >= 0) {
                     ptr->unk_00[i] = wPartnerHudScripts[idx];
                     ptr->unk_18C[i] = 1;
-                    ptr->unk_294[i] = N(D_80241FC8_CB0D08)[i][partnerLevel];
+                    ptr->unk_294[i] = N(SuperBlockDataC)[i][partnerLevel];
                 } else {
                     ptr->unk_00[i] = wDisabledPartnerHudScripts[idx];
                     ptr->unk_18C[i] = 0;
-                    ptr->unk_294[i] = N(D_80241FB0_CB0CF0)[var];
+                    ptr->unk_294[i] = N(SuperBlockDataA)[var];
                 }
                 ptr->unk_210[i] = playerData->partners[idx].level;
                 partnerActiveCount++;
@@ -112,22 +103,4 @@ INCLUDE_ASM(ApiStatus, "world/area_flo/flo_08/CAED40", flo_08_func_802401CC_CAEF
             s32 isInitialCall);
 #endif
 
-#include "world/common/SwitchToPartner.inc.c"
-
-#include "world/common/UnkFunc19.inc.c"
-
-#include "world/common/UnkFunc20.inc.c"
-
-#include "world/common/UnkFunc39.inc.c"
-
-#include "world/common/UnkFunc21.inc.c"
-
-#include "world/common/UnkFunc22.inc.c"
-
-#include "world/common/UnkFunc60.inc.c"
-
-#include "world/common/UnkFunc23.inc.c"
-
-#include "world/common/UnkPartnerPosFuncs.inc.c"
-
-#include "world/common/UnkFunc40.inc.c"
+#include "world/common/atomic/SuperBlockB.inc.c"

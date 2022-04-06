@@ -1,11 +1,3 @@
-#include "iwa_10.h"
-
-#include "common/UnkFloatFunc.inc.c"
-
-#include "world/common/atomic/SuperBlock.inc.c"
-
-INCLUDE_ASM(s32, "world/area_iwa/iwa_10/91E6D0", func_802404BC_91EA2C);
-
 #include "world/common/SwitchToPartner.inc.c"
 
 #include "world/common/UnkFunc19.inc.c"

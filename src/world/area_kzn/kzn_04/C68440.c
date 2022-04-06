@@ -1,12 +1,6 @@
 #include "kzn_04.h"
 
-#include "world/common/SetOverrideFlags_40.inc.c"
-
-#include "world/common/UnkFunc17.inc.c"
-
-INCLUDE_ASM(s32, "world/area_kzn/kzn_04/C68440", func_8024034C_C6847C);
-
-#include "world/common/UnkFunc18.inc.c"
+#include "world/common/atomic/SuperBlock.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_04/C68440", func_802404DC_C6860C);
 

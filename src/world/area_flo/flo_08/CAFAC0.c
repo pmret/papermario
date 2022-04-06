@@ -47,23 +47,23 @@ EvtScript N(80241F40) = {
     EVT_END
 };
 
-s32 N(D_80241FB0_CB0CF0)[] = {
+s32 N(SuperBlockDataA)[] = {
     0x001D00F0, 0x001D00F1,
 };
 
-s16 N(D_80241FB8_CB0CF8)[] = {
+s16 N(SuperBlockDataB)[] = {
     0x0001, 0x0002, 0x0003, 0x0004,
     0x0009, 0x0006, 0x0007, 0x0008
 };
 
-s32 N(D_80241FC8_CB0D08)[8][2] = {
+s32 N(SuperBlockDataC)[8][2] = {
     { 0x001D00E0, 0x001D00E1 }, { 0x001D00E2, 0x001D00E3 },
     { 0x001D00E4, 0x001D00E5 }, { 0x001D00E6, 0x001D00E7 },
     { 0x001D00E8, 0x001D00E9 }, { 0x001D00EA, 0x001D00EB },
     { 0x001D00EC, 0x001D00ED }, { 0x001D00EE, 0x001D00EF }
 };
 
-f32 N(bigFuncFloats)[3] = {
+f32 N(SuperBlockDataD)[3] = {
     140.0f, 180.0f, 220.0f
 };
 
@@ -81,7 +81,7 @@ EvtScript N(80242014) = {
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT_FRAMES(3)
-        EVT_CALL(N(func_8024003C_CAED7C), EVT_MAP_VAR(0))
+        EVT_CALL(N(TempSuperBlockAlpha), EVT_MAP_VAR(0))
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT_FRAMES(47)

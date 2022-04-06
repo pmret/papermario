@@ -257,7 +257,7 @@ s32 N(D_80243718_CD5548)[8][2] = {
     { 0x001D00EC, 0x001D00ED }, { 0x001D00EE, 0x001D00EF }
 };
 
-f32 N(bigFuncFloats)[] = {
+f32 N(SuperBlockDataD)[] = {
     140.0f, 180.0f, 220.0f,
 };
 
@@ -275,7 +275,7 @@ EvtScript N(80243764) = {
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT_FRAMES(3)
-        EVT_CALL(N(func_8024011C_CD1F4C), EVT_MAP_VAR(0))
+        EVT_CALL(N(TempSuperBlockAlpha), EVT_MAP_VAR(0))
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT_FRAMES(47)
@@ -301,7 +301,7 @@ EvtScript N(802438C8) = {
     EVT_IF_EQ(EVT_VAR(0), 1)
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(N(UnkFunc24))
+    EVT_CALL(N(UnkFunc40))
     EVT_IF_EQ(EVT_VAR(0), 1)
         EVT_RETURN
     EVT_END_IF
@@ -433,16 +433,7 @@ EvtScript N(makeEntities) = {
     EVT_END
 };
 
-#include "world/common/SetOverrideFlags_40.inc.c"
-
-#include "world/common/UnkFunc17.inc.c"
-
-ApiStatus N(func_8024011C_CD1F4C)(Evt* script, s32 isInitialCall) {
-    entity_upgrade_block_hide_content(evt_get_variable(script, *script->ptrReadPos));
-    return ApiStatus_DONE2;
-}
-
-#include "world/common/UnkFunc18.inc.c"
+#include "world/common/atomic/SuperBlock.inc.c"
 
 #ifdef NON_EQUIVALENT
 typedef struct {
@@ -559,6 +550,6 @@ INCLUDE_ASM(ApiStatus, "world/area_flo/flo_16/CD1F10", flo_16_func_802402AC_CD20
 
 #include "world/common/UnkPartnerPosFuncs.inc.c"
 
-#include "world/common/UnkFunc24.inc.c"
+#include "world/common/UnkFunc40.inc.c"
 
 #include "world/common/UnkFunc44.inc.c"

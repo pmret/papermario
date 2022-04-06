@@ -2,13 +2,7 @@
 
 #include "world/common/UnkPosFunc2.inc.c"
 
-#include "world/common/SetOverrideFlags_40.inc.c"
-
-#include "world/common/UnkFunc17.inc.c"
-
-INCLUDE_ASM(s32, "world/area_tik/tik_10/8866D0", func_802406BC_886A7C);
-
-#include "world/common/UnkFunc18.inc.c"
+#include "world/common/atomic/SuperBlock.inc.c"
 
 INCLUDE_ASM(s32, "world/area_tik/tik_10/8866D0", func_8024084C_886C0C);
 

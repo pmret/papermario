@@ -11,13 +11,7 @@ INCLUDE_ASM(s32, "world/area_sbk/sbk_56/953FC0", func_80240038_953FF8);
 
 INCLUDE_ASM(s32, "world/area_sbk/sbk_56/953FC0", func_8024005C_95401C);
 
-#include "world/common/SetOverrideFlags_40.inc.c"
-
-#include "world/common/UnkFunc17.inc.c"
-
-INCLUDE_ASM(s32, "world/area_sbk/sbk_56/953FC0", func_802400BC_95407C);
-
-#include "world/common/UnkFunc18.inc.c"
+#include "world/common/atomic/SuperBlock.inc.c"
 
 INCLUDE_ASM(s32, "world/area_sbk/sbk_56/953FC0", func_8024024C_95420C);
 
