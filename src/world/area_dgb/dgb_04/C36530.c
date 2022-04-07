@@ -4,9 +4,6 @@
 #include "sprite/npc/sentinel.h"
 #include "message_ids.h"
 
-extern s32 wPartnerHudScripts[];
-extern s32 wDisabledPartnerHudScripts[];
-
 enum {
     NPC_SENTINEL,
 };
