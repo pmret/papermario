@@ -43,7 +43,7 @@ s32 N(SuperBlock_UpgradeDescMessages)[8][2] = {
     { MESSAGE_ID(0x1D,0xEE), MESSAGE_ID(0x1D,0xEF) }
 };
 
-f32 N(SuperBlock_UpgradeOrbAngles)[3] = {
+f32 N(SuperBlock_UpgradeOrbAngles)[SUPER_BLOCK_NUM_ORBS] = {
     140.0f, 180.0f, 220.0f
 };
 
@@ -129,7 +129,7 @@ EvtScript N(SuperBlock_OnHit) = {
     EVT_CALL(EnablePartnerAI)
     EVT_CALL(GetCurrentPartnerID, EVT_VAR(0))
     EVT_IF_NE(EVT_VAR(0), EVT_VAR(11))
-        EVT_CALL(N(SwitchToPartner), EVT_VAR(11))
+        EVT_CALL(N(SuperBlock_SwitchToPartner), EVT_VAR(11))
     EVT_ELSE
         EVT_CALL(func_802CF56C, 2)
     EVT_END_IF

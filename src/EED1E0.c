@@ -20,7 +20,7 @@ ApiStatus func_8024011C_EED21C(Evt* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "EED1E0", func_802402AC_EED3AC);
 
-#include "world/common/SwitchToPartner.inc.c"
+#include "world/common/SuperBlock_SwitchToPartner.inc.c"
 
 #include "world/common/SuperBlock_LoadCurrentPartnerName.inc.c"
 

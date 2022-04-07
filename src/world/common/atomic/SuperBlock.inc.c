@@ -1,13 +1,14 @@
 #include "common.h"
 #include "npc.h"
 #include "effects.h"
+#include "SuperBlock.inc.h"
 
 extern s32 gPartnerPopupProperties[11][4];
 
 extern s32 N(SuperBlock_CantUpgradeMessages)[2];
 extern s16 N(SuperBlock_PartnerIDs)[8];
 extern s32 N(SuperBlock_UpgradeDescMessages)[8][2];
-extern f32 N(SuperBlock_UpgradeOrbAngles)[3];
+extern f32 N(SuperBlock_UpgradeOrbAngles)[SUPER_BLOCK_NUM_ORBS];
 
 extern s32 wPartnerHudScripts[];
 extern s32 wDisabledPartnerHudScripts[];
@@ -140,7 +141,7 @@ ApiStatus N(SuperBlock_ShowSelectPartnerMenu)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(SwitchToPartner)(Evt* script, s32 isInitialCall) {
+ApiStatus N(SuperBlock_SwitchToPartner)(Evt* script, s32 isInitialCall) {
     switch_to_partner(evt_get_variable(script, *script->ptrReadPos));
     return ApiStatus_DONE2;
 }
@@ -182,25 +183,33 @@ ApiStatus N(SuperBlock_RadiateFaintEnergyFX)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-typedef struct {
+typedef struct BlurFlameEffectData {
     s32 unk_00;
     s32 unk_04;
-    EffectGraphics* unk_08[3]; // TODO this is wrong
-    f32 unk_14[3];
-    f32 unk_20[3];
-    f32 unk_2C[3];
-    f32 unk_38[3];
-    f32 unk_44[3];
-    f32 unk_50[3];
-    Entity* unk_5C;
-    s32 unk_60;
-    s32 unk_64;
-} N(UserData);
+    s32 unk_08;
+    s32 unk_0C;
+    Vec3f position;
+} BlurFlameEffectData;
+
+typedef struct EnergyOrbSet {
+    s32 scatterState;
+    s32 gatherState;
+    EffectInstance* orbEffects[SUPER_BLOCK_NUM_ORBS];
+    f32 posX[SUPER_BLOCK_NUM_ORBS];
+    f32 posY[SUPER_BLOCK_NUM_ORBS];
+    f32 posZ[SUPER_BLOCK_NUM_ORBS];
+    f32 partnerPosX[SUPER_BLOCK_NUM_ORBS];
+    f32 partnerPosY[SUPER_BLOCK_NUM_ORBS];
+    f32 partnerPosZ[SUPER_BLOCK_NUM_ORBS];
+    Entity* superBlock;
+    s32 scatterStateTime;
+    s32 gatherStateTime;
+} EnergyOrbSet;
 
 ApiStatus N(SuperBlock_AnimateEnergyOrbs)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Npc* partner = get_npc_safe(NPC_PARTNER);
-    N(UserData)* userData;
+    EnergyOrbSet* userData;
     f32 sinTheta, cosTheta;
     f32 x;
     f32 t1;
@@ -209,111 +218,111 @@ ApiStatus N(SuperBlock_AnimateEnergyOrbs)(Evt* script, s32 isInitialCall) {
     sin_cos_deg(gCameras[gCurrentCameraID].currentYaw, &sinTheta, &cosTheta);
 
     if (isInitialCall) {
-        script->userData = (N(UserData)*)general_heap_malloc(0x68);
-        userData = (N(UserData)*)script->userData;
+        script->userData = (EnergyOrbSet*)general_heap_malloc(sizeof(EnergyOrbSet));
+        userData = (EnergyOrbSet*)script->userData;
 
-        userData->unk_5C = get_entity_by_index(evt_get_variable(script, *args++));
+        userData->superBlock = get_entity_by_index(evt_get_variable(script, *args++));
 
-        for (i = 0; i < ARRAY_COUNT(userData->unk_08); i++) {
-            userData->unk_08[i] = (EffectGraphics*) fx_motion_blur_flame(0, userData->unk_5C->position.x,
-                                                          userData->unk_5C->position.y + 12.5f,
-                                                          userData->unk_5C->position.z, 1.0f, -1);
+        for (i = 0; i < SUPER_BLOCK_NUM_ORBS; i++) {
+            userData->orbEffects[i] = (EffectInstance*)fx_motion_blur_flame(0, userData->superBlock->position.x,
+                                                          userData->superBlock->position.y + 12.5f,
+                                                          userData->superBlock->position.z, 1.0f, -1);
             t1 = 0.0f;
-            userData->unk_2C[i] = t1;
-            userData->unk_20[i] = t1;
-            userData->unk_14[i] = t1;
-            userData->unk_50[i] = t1;
-            userData->unk_44[i] = t1;
-            userData->unk_38[i] = t1;
+            userData->posZ[i] = t1;
+            userData->posY[i] = t1;
+            userData->posX[i] = t1;
+            userData->partnerPosZ[i] = t1;
+            userData->partnerPosY[i] = t1;
+            userData->partnerPosX[i] = t1;
         }
 
-        userData->unk_00 = 0;
-        userData->unk_04 = 0;
-        userData->unk_60 = 0;
-        userData->unk_64 = 0;
+        userData->scatterState = 0;
+        userData->gatherState = 0;
+        userData->scatterStateTime = 0;
+        userData->gatherStateTime = 0;
 
         t1 = 50.0f;
-        for (i = 0; i < ARRAY_COUNT(userData->unk_38); i++) {
+        for (i = 0; i < SUPER_BLOCK_NUM_ORBS; i++) {
             x = 0.0f;
-            add_vec2D_polar(&x, &userData->unk_44[i], t1, N(SuperBlock_UpgradeOrbAngles)[i]);
-            userData->unk_38[i] = cosTheta * x;
-            userData->unk_50[i] = sinTheta * x;
-            userData->unk_38[i] = partner->pos.x - (userData->unk_5C->position.x + userData->unk_38[i]);
-            userData->unk_44[i] = partner->pos.y - (userData->unk_5C->position.y + userData->unk_44[i]);
-            userData->unk_50[i] = partner->pos.z - (userData->unk_5C->position.z + userData->unk_50[i]);
+            add_vec2D_polar(&x, &userData->partnerPosY[i], t1, N(SuperBlock_UpgradeOrbAngles)[i]);
+            userData->partnerPosX[i] = cosTheta * x;
+            userData->partnerPosZ[i] = sinTheta * x;
+            userData->partnerPosX[i] = partner->pos.x - (userData->superBlock->position.x + userData->partnerPosX[i]);
+            userData->partnerPosY[i] = partner->pos.y - (userData->superBlock->position.y + userData->partnerPosY[i]);
+            userData->partnerPosZ[i] = partner->pos.z - (userData->superBlock->position.z + userData->partnerPosZ[i]);
         }
     }
 
-    userData = (N(UserData)*)script->userData;
-    switch (userData->unk_00) {
+    userData = (EnergyOrbSet*)script->userData;
+    switch (userData->scatterState) {
         case 0:
-            t1 = update_lerp(5, 0.0f, 50.0f, userData->unk_60, 20);
-            for (i = 0; i < ARRAY_COUNT(userData->unk_20); i++) {
-                x = userData->unk_20[i] = 0.0f;
-                add_vec2D_polar(&x, &userData->unk_20[i], t1, N(SuperBlock_UpgradeOrbAngles)[i]);
-                userData->unk_14[i] = cosTheta * x;
-                userData->unk_2C[i] = sinTheta * x;
+            t1 = update_lerp(EASING_CUBIC_OUT, 0.0f, 50.0f, userData->scatterStateTime, 20);
+            for (i = 0; i < SUPER_BLOCK_NUM_ORBS; i++) {
+                x = userData->posY[i] = 0.0f;
+                add_vec2D_polar(&x, &userData->posY[i], t1, N(SuperBlock_UpgradeOrbAngles)[i]);
+                userData->posX[i] = cosTheta * x;
+                userData->posZ[i] = sinTheta * x;
             }
 
-            userData->unk_60++;
-            if (userData->unk_60 >= 21) {
-                userData->unk_00 = 1;
-                userData->unk_60 = 0;
+            userData->scatterStateTime++;
+            if (userData->scatterStateTime >= 21) {
+                userData->scatterState = 1;
+                userData->scatterStateTime = 0;
             }
             break;
         case 1:
             t1 = 50.0f;
-            for (i = 0; i < ARRAY_COUNT(userData->unk_20); i++) {
-                x = userData->unk_20[i] = 0.0f;
-                add_vec2D_polar(&x, &userData->unk_20[i], t1, N(SuperBlock_UpgradeOrbAngles)[i]);
-                userData->unk_14[i] = cosTheta * x;
-                userData->unk_2C[i] = sinTheta * x;
+            for (i = 0; i < SUPER_BLOCK_NUM_ORBS; i++) {
+                x = userData->posY[i] = 0.0f;
+                add_vec2D_polar(&x, &userData->posY[i], t1, N(SuperBlock_UpgradeOrbAngles)[i]);
+                userData->posX[i] = cosTheta * x;
+                userData->posZ[i] = sinTheta * x;
             }
 
-            userData->unk_60++;
-            if (userData->unk_60 > 15) {
-                userData->unk_60 = 15;
-                userData->unk_00 = 2;
+            userData->scatterStateTime++;
+            if (userData->scatterStateTime > 15) {
+                userData->scatterStateTime = 15;
+                userData->scatterState = 2;
             }
             break;
         case 2:
-            userData->unk_60++;
-            if (userData->unk_60 > 30) {
-                for (i = 0; i < ARRAY_COUNT(userData->unk_08); i++) {
-                    userData->unk_08[i]->flags |= 0x10;
+            userData->scatterStateTime++;
+            if (userData->scatterStateTime > 30) {
+                for (i = 0; i < SUPER_BLOCK_NUM_ORBS; i++) {
+                    userData->orbEffects[i]->flags |= EFFECT_INSTANCE_FLAGS_10;
                 }
                 return ApiStatus_DONE2;
             }
             break;
     }
 
-    switch (userData->unk_04) {
+    switch (userData->gatherState) {
         case 0:
-            userData->unk_64++;
-            if (userData->unk_64 > 15) {
-                userData->unk_04 = 1;
-                userData->unk_64 = 0;
+            userData->gatherStateTime++;
+            if (userData->gatherStateTime > 15) {
+                userData->gatherState = 1;
+                userData->gatherStateTime = 0;
             }
             break;
         case 1:
-            for (i = 0; i < ARRAY_COUNT(userData->unk_14); i++) {
-                userData->unk_14[i] += update_lerp(1, 0.0f, userData->unk_38[i], userData->unk_64, 20);
-                userData->unk_20[i] += update_lerp(1, 0.0f, userData->unk_44[i], userData->unk_64, 20);
-                userData->unk_2C[i] += update_lerp(1, 0.0f, userData->unk_50[i], userData->unk_64, 20);
+            for (i = 0; i < SUPER_BLOCK_NUM_ORBS; i++) {
+                userData->posX[i] += update_lerp(EASING_QUADRATIC_IN, 0.0f, userData->partnerPosX[i], userData->gatherStateTime, 20);
+                userData->posY[i] += update_lerp(EASING_QUADRATIC_IN, 0.0f, userData->partnerPosY[i], userData->gatherStateTime, 20);
+                userData->posZ[i] += update_lerp(EASING_QUADRATIC_IN, 0.0f, userData->partnerPosZ[i], userData->gatherStateTime, 20);
             }
 
-            userData->unk_64++;
-            if (userData->unk_64 > 20) {
-                userData->unk_04 = 2;
-                userData->unk_64 = 0;
+            userData->gatherStateTime++;
+            if (userData->gatherStateTime > 20) {
+                userData->gatherState = 2;
+                userData->gatherStateTime = 0;
             }
             break;
     }
 
-    for (i = 0; i < ARRAY_COUNT(userData->unk_08); i++) {
-        ((EffectInstanceData*)userData->unk_08[i]->freeDelay)->rotation.x = userData->unk_14[i];
-        ((EffectInstanceData*)userData->unk_08[i]->freeDelay)->rotation.y = userData->unk_20[i];
-        ((EffectInstanceData*)userData->unk_08[i]->freeDelay)->rotation.z = userData->unk_2C[i];
+    for (i = 0; i < SUPER_BLOCK_NUM_ORBS; i++) {
+        ((BlurFlameEffectData*)userData->orbEffects[i]->data)->position.x = userData->posX[i];
+        ((BlurFlameEffectData*)userData->orbEffects[i]->data)->position.y = userData->posY[i];
+        ((BlurFlameEffectData*)userData->orbEffects[i]->data)->position.z = userData->posZ[i];
     }
 
     return ApiStatus_BLOCK;

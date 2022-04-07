@@ -195,7 +195,7 @@ void update_item_entities(void) {
     s32 coin;
     s32 i;
 
-    if (!(gOverrideFlags & 0xC00)) {
+    if (!(gOverrideFlags & (GLOBAL_OVERRIDES_400 | GLOBAL_OVERRIDES_800))) {
         for (i = 0; i < 0x100; i++) {
             entity = D_801565A0[i];
 
@@ -287,11 +287,11 @@ void draw_item_entities(void) {
     for (i = 0; i < MAX_ITEM_ENTITIES; i++) {
         ItemEntity* itemEntity = D_801565A0[i];
 
-        if (itemEntity != NULL && itemEntity->flags != 0 && !(itemEntity->flags & 0x40) &&
-            (itemEntity->flags & (1 << gCurrentCamID)) && !(itemEntity->flags & 0x100000) &&
+        if (itemEntity != NULL && itemEntity->flags != 0 && !(itemEntity->flags & ITEM_ENTITY_FLAGS_40) &&
+            (itemEntity->flags & (1 << gCurrentCamID)) && !(itemEntity->flags & ITEM_ENTITY_FLAGS_100000) &&
             !(itemEntity->unk_1D != -1 && D_80155D88 != itemEntity->unk_1D))
         {
-            if (!(itemEntity->flags & 0x80000)) {
+            if (!(itemEntity->flags & ITEM_ENTITY_FLAGS_TRANSPARENT)) {
                 rtPtr->renderMode = RENDER_MODE_ALPHATEST;
             } else {
                 rtPtr->renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;

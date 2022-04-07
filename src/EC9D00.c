@@ -20,7 +20,7 @@ ApiStatus func_8024003C_EC9D3C(Evt* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "EC9D00", func_802401CC_EC9ECC);
 
-#include "world/common/SwitchToPartner.inc.c"
+#include "world/common/SuperBlock_SwitchToPartner.inc.c"
 
 #include "world/common/SuperBlock_LoadCurrentPartnerName.inc.c"
 
