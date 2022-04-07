@@ -1,6 +1,8 @@
 #include "common.h"
 #include "world/partners.h"
 
+void func_800E315C(s32 colliderID);
+
 void record_jump_apex(void) {
     gPlayerStatus.jumpApexHeight = gPlayerStatus.position.y;
 }
@@ -127,7 +129,7 @@ void gravity_use_fall_parms(void) {
 
 void phys_update_falling(void) {
     if (gPlayerStatus.actionState != ACTION_STATE_LANDING_ON_SWITCH && gPlayerStatus.actionState != ACTION_STATE_BOUNCE) {
-        s32* colliderID;
+        s32 colliderID;
 
         gPlayerStatus.position.y = player_check_collision_below(func_800E34D8(), &colliderID);
 
@@ -135,8 +137,6 @@ void phys_update_falling(void) {
     }
 }
 
-// Matches but we need to decomp collision_main_lateral since there's a rodata padding issue
-#ifdef NON_MATCHING
 void func_800E315C(s32 colliderID) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
@@ -152,26 +152,26 @@ void func_800E315C(s32 colliderID) {
                 break;
             case 3:
                 if ((partnerActionStatus->actionState.i & 0xFF0000FF) != 0x01000009) {
-                    if (playerStatus->unk_10 == 0) {
+                    if (playerStatus->blinkTimer == 0) {
                         if (playerStatus->actionState != ACTION_STATE_HIT_LAVA) {
                             playerStatus->unk_BF = 1;
                             set_action_state(ACTION_STATE_HIT_LAVA);
                         }
                     } else {
-                        set_action_state(ACTION_STATE_UNKNOWN_16);
+                        set_action_state(ACTION_STATE_KNOCKBACK);
                     }
                 }
                 break;
             case 2:
                 if ((partnerActionStatus->actionState.i & 0xFF0000FF) != 0x01000009) {
-                    if (playerStatus->unk_10 == 0) {
+                    if (playerStatus->blinkTimer == 0) {
                         if (playerStatus->actionState != ACTION_STATE_HIT_FIRE) {
                             playerStatus->unk_BF = 2;
                             set_action_state(ACTION_STATE_HIT_LAVA);
                         }
                         break;
                     }
-                    set_action_state(ACTION_STATE_UNKNOWN_16);
+                    set_action_state(ACTION_STATE_KNOCKBACK);
                 }
                 break;
             default:
@@ -180,9 +180,8 @@ void func_800E315C(s32 colliderID) {
         }
     }
 }
-#else
-INCLUDE_ASM(s32, "7bb60_len_41b0", func_800E315C);
-#endif
+
+static const f32 padding = 0.0f; // remove when the rest of the functions match
 
 INCLUDE_ASM(void, "7bb60_len_41b0", phys_player_land, void);
 
