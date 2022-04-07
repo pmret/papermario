@@ -5,9 +5,7 @@ static char* N(exit_str_1) = "kgr_01";
 
 #define UNK_ALPHA_FUNC_NPC 6
 
-#include "world/common/UnkTexturePanFunc.inc.c"
-
-#include "world/common/UnkTexturePanFunc2.inc.c"
+#include "world/common/UpdateTexturePan.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_8024030C_85247C);
 

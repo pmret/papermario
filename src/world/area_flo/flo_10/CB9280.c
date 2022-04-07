@@ -182,13 +182,13 @@ EvtScript N(updateTexturePan_80241D14) = SCRIPT({
         if (EVT_VAR(6) == 1) {
             if (EVT_VAR(7) == 1) {
                 if (EVT_VAR(8) == 1) {
-                    N(UnkTexturePanFunc)();
+                    N(UpdateTexturePanSmooth)();
                     return;
                 }
             }
         }
     }
-    N(UnkTexturePanFunc2)();
+    N(UpdateTexturePanStepped)();
 });
 
 EvtScript N(80241DB0) = SCRIPT({
@@ -825,6 +825,5 @@ ApiStatus N(func_80240080_CB9280)(Evt* script, s32 isInitialCall) {
 
 #include "world/common/GetItemName.inc.c"
 
-#include "world/common/UnkTexturePanFunc.inc.c"
+#include "world/common/UpdateTexturePan.inc.c"
 
-#include "world/common/UnkTexturePanFunc2.inc.c"

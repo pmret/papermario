@@ -14,9 +14,7 @@
 
 #include "world/common/SomeXYZFunc2.inc.c"
 
-#include "world/common/UnkTexturePanFunc.inc.c"
-
-#include "world/common/UnkTexturePanFunc2.inc.c"
+#include "world/common/UpdateTexturePan.inc.c"
 
 ApiStatus func_802405EC_E1EA4C(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {

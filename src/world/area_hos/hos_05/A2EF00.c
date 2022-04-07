@@ -9,9 +9,8 @@ extern u8 D_802D9D73;
 
 #include "world/common/UnkFunc26.inc.c"
 
-#include "world/common/UnkTexturePanFunc.inc.c"
+#include "world/common/UpdateTexturePan.inc.c"
 
-#include "world/common/UnkTexturePanFunc2.inc.c"
 #define NAMESPACE hos_05
 
 INCLUDE_ASM(s32, "world/area_hos/hos_05/A2EF00", func_802452C4_A2F504);

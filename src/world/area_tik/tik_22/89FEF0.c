@@ -1,8 +1,6 @@
 #include "tik_22.h"
 
-#include "world/common/UnkTexturePanFunc.inc.c"
-
-#include "world/common/UnkTexturePanFunc2.inc.c"
+#include "world/common/UpdateTexturePan.inc.c"
 
 #include "world/common/SetPlayerStatusAnimFlags100000.inc.c"
 

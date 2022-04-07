@@ -7,9 +7,7 @@ static char* N(exit_str_3) = "nok_02";
 static char* N(exit_str_4) = "dro_01";
 static char* N(exit_str_5) = "";
 
-#include "world/common/UnkTexturePanFunc.inc.c"
-
-#include "world/common/UnkTexturePanFunc2.inc.c"
+#include "world/common/UpdateTexturePan.inc.c"
 
 #include "world/common/SetPlayerStatusAnimFlags100000.inc.c"
 
