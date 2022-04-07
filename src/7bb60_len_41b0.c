@@ -1,6 +1,9 @@
 #include "common.h"
 #include "world/partners.h"
 
+extern f32 D_8010C928;
+extern f32 D_8010C984;
+
 void func_800E315C(s32 colliderID);
 s32 collision_check_player_intersecting_world(s32 mode, s32 arg1, f32 arg2);
 s8 get_current_partner_id(void);
@@ -569,7 +572,112 @@ s32 phys_is_on_sloped_ground(void) {
     return ret;
 }
 
-INCLUDE_ASM(s32, "7bb60_len_41b0", phys_main_collision_below);
+void phys_main_collision_below(void) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
+    CollisionStatus* collisionStatus = &gCollisionStatus;
+    f32 collHeightHalf = playerStatus->colliderHeight * 0.5f;
+    f32 playerX = playerStatus->position.x;
+    f32 playerY = playerStatus->position.y + collHeightHalf;
+    f32 playerZ = playerStatus->position.z;
+    f32 outLength = playerStatus->colliderHeight;
+    f32 temp_f24 = (2.0f * playerStatus->colliderHeight) / 7.0f;
+    f32 hitRx, hitRz;
+    f32 hitDirX, hitDirZ;
+    s32 result;
+    s32 cond;
+
+    result = player_raycast_below_cam_relative(playerStatus, &playerX, &playerY, &playerZ, &outLength, &hitRx, &hitRz,
+                                               &hitDirX, &hitDirZ);
+    playerStatus->groundNormalPitch = get_player_normal_pitch();
+
+    if (collHeightHalf + (temp_f24 * 0.5f) < outLength) {
+        result = -1;
+    }
+    if (playerStatus->decorationList == 0) {
+        collisionStatus->currentFloor = result;
+    }
+    if (result >= 0) {
+        playerStatus->groundAnglesXZ.x = hitDirX;
+        playerStatus->groundAnglesXZ.y = hitDirZ;
+    }
+
+    if (func_800E0208()) {
+        return;
+    }
+
+    if (playerStatus->flags & (PLAYER_STATUS_FLAGS_FLYING | PLAYER_STATUS_FLAGS_FALLING | PLAYER_STATUS_FLAGS_JUMPING)) {
+        return;
+    }
+
+    if (playerStatus->actionState == ACTION_STATE_SLIDING) {
+        return;
+    }
+
+    if ((!(playerStatus->flags & PLAYER_STATUS_FLAGS_10) ||
+        (phys_adjust_cam_on_landing(), !phys_should_player_be_sliding()) ||
+        (set_action_state(ACTION_STATE_SLIDING), (playerStatus->actionState != ACTION_STATE_SLIDING))))
+    {
+        if (result >= 0) {
+            switch (get_collider_type_by_id(result) & 0xFF) {
+                case 2:
+                    if (partnerActionStatus->actionState.b[0] == 0 || partnerActionStatus->actionState.b[3] != 9) {
+                        if (playerStatus->blinkTimer == 0) {
+                            if (playerStatus->actionState != ACTION_STATE_HIT_LAVA) {
+                                playerStatus->unk_BF = 2;
+                                set_action_state(ACTION_STATE_HIT_LAVA);
+                            }
+                        } else {
+                            set_action_state(ACTION_STATE_KNOCKBACK);
+                        }
+                    }
+                    break;
+                case 3:
+                    if (partnerActionStatus->actionState.b[0] == 0 || partnerActionStatus->actionState.b[3] != 9) {
+                        if (playerStatus->blinkTimer == 0) {
+                            if (playerStatus->actionState != ACTION_STATE_HIT_LAVA) {
+                                playerStatus->unk_BF = 1;
+                                set_action_state(ACTION_STATE_HIT_LAVA);
+                            }
+                        } else {
+                            set_action_state(ACTION_STATE_KNOCKBACK);
+                        }
+                    }
+                    break;
+                default:
+                    cond = FALSE;
+                    if (collisionStatus->currentFloor & 0x4000) {
+                        cond = get_entity_type(collisionStatus->currentFloor) == ENTITY_TYPE_HIDDEN_PANEL;
+                    }
+
+                    if (playerStatus->actionState != ACTION_STATE_STEP_UP && !cond) {
+                        if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS)) {
+                            if (playerY - playerStatus->position.y < 6.0f) {
+                                playerStatus->position.y = playerY;
+                            } else {
+                                set_action_state(ACTION_STATE_STEP_UP);
+                                D_8010C928 = playerY;
+                                D_8010C984 = playerStatus->targetYaw;
+                            }
+                        } else {
+                            playerStatus->position.y = playerY;
+                        }
+                        phys_save_ground_pos();
+                    }
+                    break;
+            }
+        } else if (!(playerStatus->flags & PLAYER_STATUS_FLAGS_FLYING) &&
+                    playerStatus->actionState != ACTION_STATE_USE_SPINNING_FLOWER)
+        {
+            if (outLength <= collHeightHalf + temp_f24 && hitDirX == 0.0f && hitDirZ == 0.0f) {
+                set_action_state(ACTION_STATE_STEP_DOWN);
+            } else {
+                set_action_state(ACTION_STATE_FALLING);
+            }
+            gravity_use_fall_parms();
+        }
+    }
+}
 
 void func_800E4AD8(s32 mode) {
     Camera* currentCamera = &gCameras[gCurrentCameraID];
