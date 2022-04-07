@@ -90,7 +90,7 @@ EvtScript N(802406FC) = {
         EVT_CALL(SetNpcPos, NPC_PARTNER, 0, -1000, 0)
     EVT_END_IF
     EVT_CALL(GetEntryID, EVT_VAR(0))
-    EVT_CALL(N(GetEntryPos))
+    EVT_CALL(N(Pipe_GetEntryPos))
     EVT_SUB(EVT_VAR(2), 40)
     EVT_CALL(SetPlayerPos, EVT_VAR(1), EVT_VAR(2), EVT_VAR(3))
     EVT_CALL(InterpPlayerYaw, EVT_VAR(4), 0)
@@ -124,7 +124,7 @@ EvtScript N(802406FC) = {
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_CALL(HidePlayerShadow, FALSE)
     EVT_LABEL(0)
-    EVT_CALL(N(GetCurrentFloor))
+    EVT_CALL(N(Pipe_GetCurrentFloor))
     EVT_WAIT_FRAMES(1)
     EVT_IF_NE(EVT_VAR(0), -1)
         EVT_GOTO(0)
@@ -140,7 +140,7 @@ EvtScript N(80240A50) = {
     EVT_CALL(HidePlayerShadow, TRUE)
     EVT_CALL(ModifyColliderFlags, 0, EVT_VAR(11), 0x7FFFFE00)
     EVT_CALL(GetEntryID, EVT_VAR(0))
-    EVT_CALL(N(GetEntryPos))
+    EVT_CALL(N(Pipe_GetEntryPos))
     EVT_SET(EVT_VAR(5), EVT_VAR(1))
     EVT_SET(EVT_VAR(6), EVT_VAR(2))
     EVT_SET(EVT_VAR(7), EVT_VAR(3))
@@ -172,7 +172,7 @@ EvtScript N(80240A50) = {
     EVT_CALL(func_802D286C, 2304)
     EVT_CALL(func_802D2520, ANIM_10002, 5, 3, 1, 1, 0)
     EVT_LOOP(40)
-        EVT_CALL(N(SomeXYZFunc2), EVT_FIXED(1.0))
+        EVT_CALL(N(Pipe_GetPointAheadOfPlayer), EVT_FIXED(1.0))
         EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
         EVT_WAIT_FRAMES(1)
     EVT_END_LOOP
@@ -198,7 +198,7 @@ EvtScript N(80240A50) = {
 };
 
 EvtScript N(80240E40) = {
-    EVT_CALL(N(UnkFunc25))
+    EVT_CALL(N(Pipe_AwaitDownInput))
     EVT_IF_EQ(EVT_VAR(0), 0)
         EVT_RETURN
     EVT_END_IF
@@ -220,18 +220,18 @@ EvtScript N(80240E40) = {
 };
 
 EvtScript N(80240F1C) = {
-    EVT_CALL(N(SetPlayerStatusAnimFlags100000))
+    EVT_CALL(N(Pipe_SetAnimFlag))
     EVT_SET_GROUP(27)
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(HidePlayerShadow, TRUE)
     EVT_SET(EVT_VAR(0), EVT_VAR(10))
-    EVT_CALL(N(GetEntryPos))
+    EVT_CALL(N(Pipe_GetEntryPos))
     EVT_CALL(PlayerMoveTo, EVT_VAR(1), EVT_VAR(3), 3)
     EVT_SET(EVT_VAR(0), EVT_VAR(10))
-    EVT_CALL(N(GetEntryPos))
+    EVT_CALL(N(Pipe_GetEntryPos))
     EVT_CALL(SetPlayerPos, EVT_VAR(1), EVT_VAR(2), EVT_VAR(3))
     EVT_CALL(SetPlayerFlagBits, 2097152, 1)
-    EVT_CALL(N(GetCurrentCameraYawClamped180))
+    EVT_CALL(N(Pipe_GetCameraYaw))
     EVT_CALL(InterpPlayerYaw, EVT_VAR(0), 0)
     EVT_WAIT_FRAMES(2)
     EVT_CALL(SetPlayerFlagBits, 2097152, 0)
@@ -275,11 +275,11 @@ EvtScript N(802410F8) = {
         EVT_CALL(DisablePlayerInput, TRUE)
     EVT_END_IF
     EVT_SET_GROUP(27)
-    EVT_CALL(N(SetPlayerStatusAnimFlags100000))
+    EVT_CALL(N(Pipe_SetAnimFlag))
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(ModifyColliderFlags, 0, EVT_VAR(11), 0x7FFFFE00)
     EVT_SET(EVT_VAR(0), EVT_VAR(10))
-    EVT_CALL(N(GetEntryPos))
+    EVT_CALL(N(Pipe_GetEntryPos))
     EVT_SET(EVT_VAR(5), EVT_VAR(1))
     EVT_SET(EVT_VAR(6), EVT_VAR(2))
     EVT_ADD(EVT_VAR(6), 2)
@@ -304,7 +304,7 @@ EvtScript N(802410F8) = {
     EVT_THREAD
         EVT_WAIT_FRAMES(3)
         EVT_LOOP(40)
-            EVT_CALL(N(SomeXYZFunc2), EVT_FIXED(1.0))
+            EVT_CALL(N(Pipe_GetPointAheadOfPlayer), EVT_FIXED(1.0))
             EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
             EVT_WAIT_FRAMES(1)
         EVT_END_LOOP
@@ -885,17 +885,7 @@ EvtScript N(makeEntities) = {
     EVT_END
 };
 
-#include "world/common/SetPlayerStatusAnimFlags100000.inc.c"
-
-#include "world/common/GetCurrentFloor.inc.c"
-
-#include "world/common/UnkFunc25.inc.c"
-
-#include "world/common/GetEntryPos.inc.c"
-
-#include "world/common/GetCurrentCameraYawClamped180.inc.c"
-
-#include "world/common/SomeXYZFunc2.inc.c"
+#include "world/common/atomic/Pipe.inc.c"
 
 void fx_sun();
 

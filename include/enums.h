@@ -1961,7 +1961,7 @@ enum PlayerStatusAnimFlags {
     PLAYER_STATUS_ANIM_FLAGS_20000                                 = 0x00020000,
     PLAYER_STATUS_ANIM_FLAGS_40000                                 = 0x00040000,
     PLAYER_STATUS_ANIM_FLAGS_80000                                 = 0x00080000,
-    PLAYER_STATUS_ANIM_FLAGS_100000                                = 0x00100000,
+    PLAYER_STATUS_ANIM_FLAGS_100000                                = 0x00100000, ///< set when using pipes
     PLAYER_STATUS_ANIM_FLAGS_200000                                = 0x00200000,
     PLAYER_STATUS_ANIM_FLAGS_400000                                = 0x00400000,
     PLAYER_STATUS_ANIM_FLAGS_800000                                = 0x00800000,

@@ -1,27 +1,7 @@
 #include "kmr_20.h"
 
 #define NAMESPACE dup_kmr_20
-#include "world/common/SetPlayerStatusAnimFlags100000.inc.c"
-#define NAMESPACE kmr_20
-
-#define NAMESPACE dup_kmr_20
-#include "world/common/GetCurrentFloor.inc.c"
-#define NAMESPACE kmr_20
-
-#define NAMESPACE dup_kmr_20
-#include "world/common/UnkFunc25.inc.c"
-#define NAMESPACE kmr_20
-
-#define NAMESPACE dup_kmr_20
-#include "world/common/GetEntryPos.inc.c"
-#define NAMESPACE kmr_20
-
-#define NAMESPACE dup_kmr_20
-#include "world/common/GetCurrentCameraYawClamped180.inc.c"
-#define NAMESPACE kmr_20
-
-#define NAMESPACE dup_kmr_20
-#include "world/common/SomeXYZFunc2.inc.c"
+#include "world/common/atomic/Pipe.inc.c"
 #define NAMESPACE kmr_20
 
 #define NAMESPACE dup3_kmr_20
