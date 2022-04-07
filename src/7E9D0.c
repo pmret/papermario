@@ -18,7 +18,146 @@ void func_800E5520(void) {
     D_8010C9B0 = 0;
 }
 
-INCLUDE_ASM(s32, "7bb60_len_41b0", phys_adjust_cam_on_landing, void);
+s32 phys_adjust_cam_on_landing(void) {
+    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
+    GameStatus* gameStatus = gGameStatusPtr;
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    s32 ret = 1;
+
+    switch (gameStatus->areaID) {
+        case AREA_OBK:
+            ret = gameStatus->mapID != 4;
+            break;
+        case AREA_ISK:
+            switch (gameStatus->mapID) {
+                case 0:
+                    ret = 2;
+                    break;
+                case 1:
+                    if (D_8010C9B0 == 0) {
+                        if (playerStatus->position.y <= 0.0f) {
+                            D_8010C9B0 = 1;
+                        }
+                        ret = 2;
+                    } else if (playerStatus->position.y > 0.0f) {
+                        ret = 0;
+                    }
+                    break;
+                case 3:
+                    if (playerStatus->position.y > 25.0f) {
+                        ret = 0;
+                    }
+                    break;
+                case 4:
+                    if (playerStatus->position.y > 50.0f) {
+                        ret = 0;
+                    }
+                    break;
+                case 7:
+                    if (playerStatus->position.y > -390.0f) {
+                        ret = 0;
+                    } else if (playerStatus->position.y < -495.0f) {
+                        ret = 0;
+                    }
+                    break;
+                case 8:
+                    if (playerStatus->position.y > -90.0f) {
+                        ret = 0;
+                    } else if (playerStatus->position.y < -370.0f) {
+                        ret = 0;
+                    }
+                    break;
+                case 2:
+                    if (gGameStatusPtr->entryID == 0) {
+                        if (D_8010C9B0 == 0) {
+                            if (!(playerStatus->position.y > 0.0f)) {
+                                D_8010C9B0 = 1;
+                            } else {
+                                ret = 2;
+                                break;
+                            }
+                        }
+
+                        if (playerStatus->position.y > 0.0f) {
+                            ret = 0;
+                        }
+                    } else {
+                        ret = 2;
+                    }
+                    break;
+                case 5:
+                    if (gGameStatusPtr->entryID == 0) {
+                        if (D_8010C9B0 == 0) {
+                            if (!(playerStatus->position.y > -130.0f)) {
+                                D_8010C9B0 = 1;
+                            } else {
+                                ret = 2;
+                                break;
+                            }
+
+                        }
+
+                        if (playerStatus->position.y > -130.0f) {
+                            ret = 0;
+                        }
+                    } else {
+                        ret = 2;
+                    }
+                    break;
+                case 10:
+                    if (D_8010C9B0 == 0) {
+                        if (!(playerStatus->position.y > -520.0f)) {
+                            D_8010C9B0 = 1;
+                        } else {
+                            ret = 2;
+                            break;
+                        }
+                    }
+
+                    if (playerStatus->position.y > -520.0f) {
+                        ret = 0;
+                    }
+                    break;
+                case 11:
+                    if (gGameStatusPtr->entryID == 0) {
+                        if (D_8010C9B0 == 0) {
+                            if (!(playerStatus->position.y > -520.0f)) {
+                                D_8010C9B0 = 1;
+                            } else {
+                                ret = 2;
+                                break;
+                            }
+
+                        }
+
+                        if (playerStatus->position.y > -520.0f) {
+                            ret = 0;
+                        }
+                    }
+
+                    if (evt_get_variable(NULL, EVT_STORY_PROGRESS) >= STORY_CH2_DRAINED_THIRD_SAND_ROOM) {
+                        ret = 2;
+                    }
+                    break;
+            }
+            break;
+    }
+
+    if (ret == 1) {
+        if ((get_collider_type_by_id(gCollisionStatus.currentFloor) & 0xFF) == 3) {
+            ret = 0;
+            gCameras[0].moveFlags |= 0x1;
+        } else {
+            gCameras[0].moveFlags &= ~0x1;
+        }
+    } else if (partnerActionStatus->actionState.b[0] != 0 && partnerActionStatus->actionState.b[3] == 4) {
+        gCameras[0].moveFlags |= 0x2;
+    } else {
+        gCameras[0].moveFlags &= ~0x2;
+    }
+
+    return ret;
+}
 
 void phys_clear_spin_history(void) {
     s32 i;
@@ -68,7 +207,6 @@ INCLUDE_ASM(s32, "7bb60_len_41b0", phys_update_action_state);
 
 void phys_peach_update(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    Action* action;
 
     func_800E24F8();
 
@@ -78,7 +216,8 @@ void phys_peach_update(void) {
         }
 
         if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
-            action = &PlayerActionsTable[playerStatus->actionState];
+            Action* action = &PlayerActionsTable[playerStatus->actionState];
+
             if (action->flag) {
                 if (action->dmaStart != NULL && action->dmaStart != D_8010C924) {
                     D_8010C924 = action->dmaStart;
@@ -109,12 +248,12 @@ void set_action_state(s32 actionState) {
     PlayerData* playerData = &gPlayerData;
     PlayerSpinState* spinState = &gPlayerSpinState;
 
-    if (playerStatus->flags & 0x200) {
-        playerStatus->flags &= ~0x200;
+    if (playerStatus->flags & PLAYER_STATUS_FLAGS_200) {
+        playerStatus->flags &= ~PLAYER_STATUS_FLAGS_200;
         enable_player_input();
     }
 
-    if (playerStatus->animFlags & 0x4000) {
+    if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_8BIT_MARIO) {
         // TODO figure this out
 #ifdef NON_EQUIVALENT
         if (
@@ -131,7 +270,7 @@ void set_action_state(s32 actionState) {
 #endif
             playerStatus->prevActionState = playerStatus->actionState;
             playerStatus->actionState = actionState;
-            playerStatus->flags |= 0x80000000;
+            playerStatus->flags |= PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
         }
         return;
     }
@@ -149,16 +288,16 @@ void set_action_state(s32 actionState) {
         if (partner == PARTNER_SUSHIE || partner == PARTNER_LAKILESTER || partner == PARTNER_PARAKARRY) {
             if (gPartnerActionStatus.actionState.b[0] != 0) {
                 playerStatus->animFlags |= 0x4;
-                playerStatus->flags |= 0x800;
+                playerStatus->flags |= PLAYER_STATUS_FLAGS_800;
                 return;
             }
         }
     }
 
     if (actionState == ACTION_STATE_SLIDING) {
-        playerStatus->flags |= 0x10;
+        playerStatus->flags |= PLAYER_STATUS_FLAGS_10;
         playerStatus->moveFrames = 0;
-        playerStatus->flags &= ~0x4000;
+        playerStatus->flags &= ~PLAYER_STATUS_FLAGS_4000;
     }
 
     playerStatus->prevActionState = playerStatus->actionState;
@@ -170,14 +309,14 @@ void set_action_state(s32 actionState) {
         playerStatus->animFlags |= 4;
     }
     playerStatus->actionState = actionState;
-    playerStatus->flags |= 0x80000000;
+    playerStatus->flags |= PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
 
     if (playerStatus->actionState == ACTION_STATE_SPIN) {
         return;
     }
 
-    playerStatus->flags &= ~0x20000;
-    playerStatus->animFlags &= ~0x10000;
+    playerStatus->flags &= ~PLAYER_STATUS_FLAGS_20000;
+    playerStatus->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_SPINNING;
 
     if (spinState->spinSoundID != 0) {
         sfx_stop_sound(spinState->spinSoundID);
@@ -191,10 +330,14 @@ void set_action_state(s32 actionState) {
 
 void update_locomotion_state(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    do { } while (0); // required to match
 
-    set_action_state((!is_ability_active(ABILITY_SLOW_GO)
-                      && (SQ(playerStatus->stickAxis[0]) + SQ(playerStatus->stickAxis[1]) >= 0xBD2)) ? ACTION_STATE_RUN : ACTION_STATE_WALK);
+    if (!is_ability_active(ABILITY_SLOW_GO) &&
+        SQ(playerStatus->stickAxis[0]) + SQ(playerStatus->stickAxis[1]) >= 0xBD2)
+    {
+        set_action_state(ACTION_STATE_RUN);
+    } else {
+        set_action_state(ACTION_STATE_WALK);
+    }
 }
 
 void start_falling(void) {
@@ -228,21 +371,26 @@ void start_bounce_b(void) {
     playerStatus->flags |= 0x800000;
 }
 
-// TODO playerData isn't used
 s32 check_input_hammer(void) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
     PlayerData* playerData = &gPlayerData;
 
-    if (gPlayerStatus.pressedButtons & BUTTON_B) {
-        if (!(gPlayerStatus.flags & 4)) {
-            if (gPartnerActionStatus.actionState.b[0] != 1 || gPlayerData.currentPartner != PARTNER_WATT) {
-                if (gPlayerData.hammerLevel != -1) {
-                    set_action_state(ACTION_STATE_HAMMER);
-                    return TRUE;
-                }
-            }
+    if (playerStatus->pressedButtons & BUTTON_B) {
+        if (playerStatus->flags & PLAYER_STATUS_FLAGS_FALLING) {
+            return FALSE;
         }
-    }
 
+        if (gPartnerActionStatus.actionState.b[0] == 1 && playerData->currentPartner == PARTNER_WATT) {
+            return FALSE;
+        }
+
+        if (playerData->hammerLevel == -1) {
+            return FALSE;
+        }
+
+        set_action_state(ACTION_STATE_HAMMER);
+        return TRUE;
+    }
     return FALSE;
 }
 
@@ -265,7 +413,7 @@ void check_input_spin(void) {
         if (actionState != ACTION_STATE_RIDE) {
             if (actionState < ACTION_STATE_STEP_UP) {
                 if (actionState < ACTION_STATE_JUMP) {
-                    if (actionState >= 0 && !(playerStatus->animFlags & 0x10000)) {
+                    if (actionState >= 0 && !(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_SPINNING)) {
                         if (btnPressed || spinState->hasBufferedSpin) {
                             set_action_state(ACTION_STATE_SPIN);
                             if (spinState->hasBufferedSpin != FALSE) {
