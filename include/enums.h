@@ -507,6 +507,9 @@ enum SoundIDs {
     SOUND_MENU_CHANGE_TAB           = 0x000000C8,
     SOUND_MENU_NEXT                 = 0x000000C9,
     SOUND_MENU_BACK                 = 0x000000CA,
+    SOUND_CC                        = 0x000000CC,
+    SOUND_CD                        = 0x000000CD,
+    SOUND_CE                        = 0x000000CE,
     SOUND_D4                        = 0x000000D4,
     SOUND_D5                        = 0x000000D5,
     SOUND_D6                        = 0x000000D6,
@@ -3950,12 +3953,19 @@ enum MsgPrintModeFlags {
 enum MsgStateFlags {
     MSG_STATE_FLAG_1                = 0x000001,
     MSG_STATE_FLAG_2                = 0x000002,
+    MSG_STATE_FLAG_4                = 0x000004,
+    MSG_STATE_FLAG_10               = 0x000010,
+    MSG_STATE_FLAG_20               = 0x000020,
     MSG_STATE_FLAG_40               = 0x000040,
+    MSG_STATE_FLAG_80               = 0x000080,
+    MSG_STATE_FLAG_100              = 0x000100,
     MSG_STATE_FLAG_4000             = 0x004000,
     MSG_STATE_FLAG_8000             = 0x008000,
     MSG_STATE_FLAG_10000            = 0x010000,
     MSG_STATE_FLAG_20000            = 0x020000,
-    MSG_STATE_FLAG_800000           = 0x800000
+    MSG_STATE_FLAG_40000            = 0x040000,
+    MSG_STATE_FLAG_80000            = 0x080000,
+    MSG_STATE_FLAG_800000           = 0x800000,
 };
 
 enum MsgDelayFlags {
