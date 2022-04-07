@@ -2,6 +2,7 @@
 #include "ld_addrs.h"
 #include "world/actions.h"
 
+// TODO linker stuff
 #define E20110_VRAM_DEF (void*)0x802B7000
 #define E20EB0_VRAM_DEF (void*)0x802B7000
 #define E21870_VRAM_DEF (void*)0x802B7000
@@ -59,11 +60,9 @@ void func_800E5520(void);
 void func_802B7000_E225B0(void);
 void func_802B71D4(void);
 void func_802B71C8(void);
-void func_800EF3D4(s32);
 void spr_draw_player_sprite(s32, s32, s32, s32, Matrix4f);
 void func_802DDEE4(s32, s32, s32, s32, s32, s32, s32, s32);
 void func_802DDFF8(u32, s32, s32, s32, s32, s32, s32);
-f32 get_player_normal_pitch(void);
 
 s32 player_raycast_up_corner(f32* x, f32* y, f32* z, f32* length);
 void player_get_slip_vector(f32* outX, f32* outY, f32 x, f32 y, f32 nX, f32 nY);
@@ -652,7 +651,7 @@ void update_player(void) {
 
     if (playerStatus->flags & PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS) {
         phys_update_action_state();
-        if (func_800E0208() == 0) {
+        if (!func_800E0208()) {
             collision_main_lateral();
         }
     } else if (playerStatus->actionState != ACTION_STATE_HIT_LAVA) {
@@ -991,13 +990,15 @@ void func_800E01DC(void) {
 }
 
 s32 func_800E0208(void) {
-    s32 ret = 0;
+    s32 ret = FALSE;
 
-    if (gGameStatusPtr->disableScripts && (gGameStatusPtr->currentButtons & PLAYER_STATUS_FLAGS_10)) {
+    if (gGameStatusPtr->disableScripts &&
+        (gGameStatusPtr->currentButtons & PLAYER_STATUS_FLAGS_10))
+    {
         if (gPartnerActionStatus.actionState.b[0] == 0) {
             set_action_state(ACTION_STATE_IDLE);
         }
-        ret = 1;
+        ret = TRUE;
     }
     return ret;
 }
@@ -1349,7 +1350,7 @@ void render_player_model(void) {
 
                     playerStatus->renderMode = renderModeTemp;
                     func_802DDEE4(0, -1, 7, 0, 0, 0, playerStatus->alpha1, 0);
-                
+
                 } else {
                     playerStatus->renderMode = RENDER_MODE_ALPHATEST;
                     func_802DDEE4(0, -1, 0, 0, 0, 0, 0, 0);
@@ -1367,7 +1368,7 @@ void render_player_model(void) {
             rtPtr->appendGfxArg = playerStatus;
             rtPtr->distance = -z;
             rtPtr->renderMode = playerStatus->renderMode;
-            
+
 
             if (!(playerStatus->flags & PLAYER_STATUS_ANIM_FLAGS_20000)) {
                 appendGfx = appendGfx_player;
