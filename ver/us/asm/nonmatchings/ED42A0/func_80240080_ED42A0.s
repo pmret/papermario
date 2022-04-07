@@ -41,7 +41,7 @@ glabel func_80240080_ED42A0
 /* ED4324 80240104 24840004 */   addiu    $a0, $a0, 4
 /* ED4328 80240108 3C108024 */  lui       $s0, %hi(D_80241DA0_ED5FC0)
 /* ED432C 8024010C 26101DA0 */  addiu     $s0, $s0, %lo(D_80241DA0_ED5FC0)
-/* ED4330 80240110 0C00B007 */  jal       func_8002C01C
+/* ED4330 80240110 0C00B007 */  jal       dead_heap_free
 /* ED4334 80240114 8E040000 */   lw       $a0, ($s0)
 /* ED4338 80240118 AE000000 */  sw        $zero, ($s0)
 .L8024011C:

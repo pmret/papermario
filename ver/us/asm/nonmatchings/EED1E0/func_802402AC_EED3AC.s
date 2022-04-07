@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_802402AC_EED3AC
+glabel EED1E0_SuperBlock_ShowSelectPartnerMenu
 /* EED3AC 802402AC 27BDFFC0 */  addiu     $sp, $sp, -0x40
 /* EED3B0 802402B0 AFB5002C */  sw        $s5, 0x2c($sp)
 /* EED3B4 802402B4 0080A82D */  daddu     $s5, $a0, $zero
@@ -96,7 +96,7 @@ glabel func_802402AC_EED3AC
 /* EED508 80240408 24020004 */  addiu     $v0, $zero, 4
 /* EED50C 8024040C AC820318 */  sw        $v0, 0x318($a0)
 /* EED510 80240410 AC960324 */  sw        $s6, 0x324($a0)
-/* EED514 80240414 0C03F343 */  jal       func_800FCD0C
+/* EED514 80240414 0C03F343 */  jal       dead_create_popup_menu
 /* EED518 80240418 AC800328 */   sw       $zero, 0x328($a0)
 /* EED51C 8024041C AEA00070 */  sw        $zero, 0x70($s5)
 .L80240420:
@@ -107,7 +107,7 @@ glabel func_802402AC_EED3AC
 /* EED530 80240430 8662032C */  lh        $v0, 0x32c($s3)
 /* EED534 80240434 10400009 */  beqz      $v0, .L8024045C
 /* EED538 80240438 AEA20074 */   sw       $v0, 0x74($s5)
-/* EED53C 8024043C 0C03E498 */  jal       func_800F9260
+/* EED53C 8024043C 0C03E498 */  jal       dead_hide_popup_menu
 /* EED540 80240440 00000000 */   nop
 /* EED544 80240444 8EA20070 */  lw        $v0, 0x70($s5)
 /* EED548 80240448 24420001 */  addiu     $v0, $v0, 1
@@ -120,7 +120,7 @@ glabel func_802402AC_EED3AC
 /* EED55C 8024045C 08090133 */  j         .L802404CC
 /* EED560 80240460 0000102D */   daddu    $v0, $zero, $zero
 .L80240464:
-/* EED564 80240464 0C03E4FA */  jal       func_800F93E8
+/* EED564 80240464 0C03E4FA */  jal       dead_destroy_popup_menu
 /* EED568 80240468 00000000 */   nop
 /* EED56C 8024046C 8EA30074 */  lw        $v1, 0x74($s5)
 /* EED570 80240470 240200FF */  addiu     $v0, $zero, 0xff
@@ -145,7 +145,7 @@ glabel func_802402AC_EED3AC
 /* EED5B8 802404B8 2402FFFF */  addiu     $v0, $zero, -1
 /* EED5BC 802404BC AEA20084 */  sw        $v0, 0x84($s5)
 .L802404C0:
-/* EED5C0 802404C0 0C00B007 */  jal       func_8002C01C
+/* EED5C0 802404C0 0C00B007 */  jal       dead_heap_free
 /* EED5C4 802404C4 8EA40078 */   lw       $a0, 0x78($s5)
 /* EED5C8 802404C8 24020002 */  addiu     $v0, $zero, 2
 .L802404CC:

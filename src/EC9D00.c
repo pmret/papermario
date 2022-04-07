@@ -8,33 +8,11 @@
 #define gPartnerActionStatus dead_gPartnerActionStatus2
 #define entity_upgrade_block_hide_content dead_entity_upgrade_block_hide_content
 
-#include "world/common/SuperBlock_SetOverride40.inc.c"
+#define create_popup_menu dead_create_popup_menu
+#define hide_popup_menu dead_hide_popup_menu
+#define destroy_popup_menu dead_destroy_popup_menu
+#define heap_free dead_heap_free
+#define wPartnerHudScripts D_80100060
+#define wDisabledPartnerHudScripts D_801000A0
 
-#include "world/common/SuperBlock_ClearOverride40.inc.c"
-
-#include "world/common/SuperBlock_HideBlockContent.inc.c"
-
-#include "world/common/SuperBlock_GetPartnerRank.inc.c"
-
-// SuperBlock_ShowSelectPartnerMenu
-INCLUDE_ASM(s32, "EC9D00", func_802401CC_EC9ECC);
-
-#include "world/common/SuperBlock_SwitchToPartner.inc.c"
-
-#include "world/common/SuperBlock_LoadCurrentPartnerName.inc.c"
-
-#include "world/common/SuperBlock_StartGlowEffect.inc.c"
-
-#include "world/common/SuperBlock_EndGlowEffect.inc.c"
-
-#include "world/common/SuperBlock_GatherEnergyFX.inc.c"
-
-#include "world/common/SuperBlock_RadiateFaintEnergyFX.inc.c"
-
-#include "world/common/SuperBlock_AnimateEnergyOrbs.inc.c"
-
-#include "world/common/SuperBlock_WhiteScreenFlash.inc.c"
-
-#include "world/common/UnkPartnerPosFuncs.inc.c"
-
-#include "world/common/SuperBlock_WaitForPlayerToLand.inc.c"
+#include "world/common/atomic/SuperBlock.inc.c"

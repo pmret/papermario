@@ -41,7 +41,7 @@ glabel func_80240040_EC2240
 /* EC22C4 802400C4 24840004 */   addiu    $a0, $a0, 4
 /* EC22C8 802400C8 3C108024 */  lui       $s0, %hi(D_80240F28_EC3128)
 /* EC22CC 802400CC 26100F28 */  addiu     $s0, $s0, %lo(D_80240F28_EC3128)
-/* EC22D0 802400D0 0C00B007 */  jal       func_8002C01C
+/* EC22D0 802400D0 0C00B007 */  jal       dead_heap_free
 /* EC22D4 802400D4 8E040000 */   lw       $a0, ($s0)
 /* EC22D8 802400D8 AE000000 */  sw        $zero, ($s0)
 .L802400DC:

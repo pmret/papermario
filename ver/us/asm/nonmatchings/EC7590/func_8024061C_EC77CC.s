@@ -41,7 +41,7 @@ glabel func_8024061C_EC77CC
 /* EC7850 802406A0 24840004 */   addiu    $a0, $a0, 4
 /* EC7854 802406A4 3C108024 */  lui       $s0, %hi(D_80241BB0_EC8D60)
 /* EC7858 802406A8 26101BB0 */  addiu     $s0, $s0, %lo(D_80241BB0_EC8D60)
-/* EC785C 802406AC 0C00B007 */  jal       func_8002C01C
+/* EC785C 802406AC 0C00B007 */  jal       dead_heap_free
 /* EC7860 802406B0 8E040000 */   lw       $a0, ($s0)
 /* EC7864 802406B4 AE000000 */  sw        $zero, ($s0)
 .L802406B8:
