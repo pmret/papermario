@@ -18,53 +18,51 @@ u8 D_E00C8718[8] = { 110, 150, 130, 110, 100, 95, 100, 0 };
 u8 D_E00C8720[8] = { 80, 60, 80, 100, 120, 110, 100, 0 };
 
 typedef struct ThrowSpinyFXData {
-    s32 unk_00;
-    f32 x;
-    f32 y;
-    f32 z;
-    f32 unk_10;
-    f32 unk_14;
-    f32 unk_18;
-    f32 unk_1C;
-    f32 unk_20;
-    f32 unk_24;
-    s32 life;
-    s32 lifeDuration;
-    s32 unk_30;
-    s32 unk_34;
-    s32 unk_38;
-    s32 unk_3C;
-    f32 unk_40;
-    f32 unk_44;
-    f32 gravity;
-    f32 unk_4C;
-    f32 yaw;
-    f32 rotationSpeed;
-    f32 xScale;
-    f32 yScale;
-    s32 state;
-    s32 unk_64;
-    s32 timeUntilFall; //how quickly should spiny fall to ground ?
-} ThrowSpinyFXData; //sizeof 0x68
+/* 0x00 */ s32 unk_00;
+/* 0x04 */ Vec3f pos;
+/* 0x10 */ f32 unk_10;
+/* 0x14 */ f32 unk_14;
+/* 0x18 */ f32 unk_18;
+/* 0x1C */ f32 unk_1C;
+/* 0x20 */ f32 unk_20;
+/* 0x24 */ f32 unk_24;
+/* 0x28 */ s32 life;
+/* 0x2C */ s32 lifeDuration;
+/* 0x30 */ s32 unk_30;
+/* 0x34 */ s32 unk_34;
+/* 0x38 */ s32 unk_38;
+/* 0x3C */ s32 rgba;
+/* 0x40 */ f32 unk_40;
+/* 0x44 */ f32 unk_44;
+/* 0x48 */ f32 gravity;
+/* 0x4C */ f32 unk_4C;
+/* 0x50 */ f32 yaw;
+/* 0x54 */ f32 rotationSpeed;
+/* 0x58 */ f32 xScale;
+/* 0x5C */ f32 yScale;
+/* 0x60 */ u32 state;
+/* 0x64 */ s32 unk_64;
+/* 0x68 */ s32 timeUntilFall; //how quickly should spiny fall to ground ?
+} ThrowSpinyFXData; //sizeof 0x6C
 
 //during spiny surge
 EffectInstance* throw_spiny_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, s32 time) {
-    EffectInstance* effectInstance;
+    EffectInstance* effect;
     ThrowSpinyFXData* spinyObject;
-    EffectBlueprint effectBluePrint;
+    EffectBlueprint bp;
     int new_var;
-    f32 temp_f4, temp_f8, new_var2;
+    f32 temp_f4, temp_f8, gravity;
 
-    effectBluePrint.unk_00 = 0;
-    effectBluePrint.init = (void*)(&throw_spiny_init);
-    effectBluePrint.update = (void*)(&throw_spiny_update);
-    effectBluePrint.renderWorld = (void*)(&throw_spiny_render);
-    (&effectBluePrint)->unk_14 = NULL;
+    bp.unk_00 = 0;
+    bp.init = (void*)(&throw_spiny_init);
+    bp.update = (void*)(&throw_spiny_update);
+    bp.renderWorld = (void*)(&throw_spiny_render);
+    (&bp)->unk_14 = NULL;
     new_var = 1;
-    effectBluePrint.effectID = EFFECT_THROW_SPINY;
-    effectInstance = (EffectInstance *)shim_create_effect_instance(&effectBluePrint);
-    effectInstance->numParts = new_var;
-    spinyObject = effectInstance->data = (ThrowSpinyFXData*)shim_general_heap_malloc(sizeof(ThrowSpinyFXData));
+    bp.effectID = EFFECT_THROW_SPINY;
+    effect = (EffectInstance *)shim_create_effect_instance(&bp);
+    effect->numParts = new_var;
+    spinyObject = effect->data = (ThrowSpinyFXData*)shim_general_heap_malloc(sizeof(ThrowSpinyFXData));
     ASSERT(spinyObject);
     spinyObject->unk_00 = arg0;
     spinyObject->lifeDuration = 0;
@@ -77,21 +75,21 @@ EffectInstance* throw_spiny_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg
 
     temp_f8 = arg5 - arg2;
     temp_f4 = time;
-    new_var2 = (temp_f8 / temp_f4) - (time * -0.10000000149011612);
+    gravity = (temp_f8 / temp_f4) - (time * -0.10000000149011612); //TODO: fix this weird number
     spinyObject->timeUntilFall = time;
-    spinyObject->unk_3C = 255;
+    spinyObject->rgba = 255;
     spinyObject->unk_10 = arg1;
     spinyObject->unk_14 = arg2;
     spinyObject->unk_18 = arg3;
     spinyObject->unk_1C = arg4;
     spinyObject->unk_20 = arg5;
     spinyObject->unk_24 = arg6;
-    spinyObject->x = arg1;
     spinyObject->unk_44 = (arg4 - arg1) / temp_f4;
     spinyObject->unk_4C = (arg6 - arg3) / temp_f4;
-    spinyObject->y = arg2;
-    spinyObject->z = arg3;
-    spinyObject->gravity = new_var2;
+    spinyObject->pos.x = arg1;
+    spinyObject->pos.y = arg2;
+    spinyObject->pos.z = arg3;
+    spinyObject->gravity = gravity;
 
     if (temp_f8 < 0.0f) {
         spinyObject->unk_64 = 1;
@@ -108,7 +106,7 @@ EffectInstance* throw_spiny_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg
     spinyObject->state = -1;
     spinyObject->xScale = 1.0f;
     spinyObject->yScale = 1.0f;
-    return effectInstance;
+    return effect;
 }
 
 void throw_spiny_init(void) {
@@ -120,8 +118,8 @@ void throw_spiny_update(EffectInstance* effectInstance) {
     f32 gravity;
     s32 tempVar;
 
-    if (effectInstance->flags & 0x10) {
-        effectInstance->flags &= ~0x10;
+    if (effectInstance->flags & EFFECT_INSTANCE_FLAGS_10) {
+        effectInstance->flags &= ~EFFECT_INSTANCE_FLAGS_10;
         spinyObject->life = 16;
     }
 
@@ -146,9 +144,9 @@ void throw_spiny_update(EffectInstance* effectInstance) {
         spinyObject->yaw -= 40.0f;
     } else {
         spinyObject->gravity += -0.2f;
-        spinyObject->x += spinyObject->unk_44;
-        spinyObject->y += spinyObject->gravity;
-        spinyObject->z += spinyObject->unk_4C;
+        spinyObject->pos.x += spinyObject->unk_44;
+        spinyObject->pos.y += spinyObject->gravity;
+        spinyObject->pos.z += spinyObject->unk_4C;
         spinyObject->yaw += spinyObject->rotationSpeed;
     }
 
@@ -162,8 +160,8 @@ void throw_spiny_update(EffectInstance* effectInstance) {
 
     gravity = spinyObject->gravity;
 
-    if ((gravity < 0.0f) && (spinyObject->y < 14.285714285714286)) {
-        spinyObject->y = 14.285714f;
+    if ((gravity < 0.0f) && (spinyObject->pos.y < 100.0 / 7.0)) {
+        spinyObject->pos.y = 100.0f / 7.0f;
         spinyObject->rotationSpeed = -20.0f;
         spinyObject->gravity = gravity - gravity;
     }
@@ -190,14 +188,14 @@ void throw_spiny_appendGfx(void* effect) {
     Matrix4f sp58;
     Camera* camera = &gCameras[gCurrentCameraID];
     ThrowSpinyFXData* data = ((EffectInstance*)effect)->data;
-    s32 temp_s5 = data->unk_3C;
+    s32 temp_s5 = data->rgba;
     s32 temp_s6 = data->unk_00;
     f32 scale = data->unk_40 * SPRITE_PIXEL_SCALE;
 
     gDPPipeSync(gMasterGfxPos++);
     gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
-    shim_guTranslateF(sp18, data->x, data->y, data->z);
+    shim_guTranslateF(sp18, data->pos.x, data->pos.y, data->pos.z);
     shim_guScaleF(sp58, scale * data->xScale, scale * data->yScale, scale);
     shim_guMtxCatF(sp58, sp18, sp18);
     shim_guRotateF(sp58, data->yaw, 0.0f, 0.0f, 1.0f);
