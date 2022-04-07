@@ -1,10 +1,6 @@
 #include "flo_16.h"
 #include "message_ids.h"
 
-extern s32 wPartnerHudScripts[];
-extern s32 wDisabledPartnerHudScripts[];
-extern s32 gPartnerPopupProperties[11][4];
-
 EntryList N(entryList) = {
     { -720.0f,   0.0f, 0.0f,  90.0f },
     {  710.0f, 100.0f, 0.0f, 270.0f },

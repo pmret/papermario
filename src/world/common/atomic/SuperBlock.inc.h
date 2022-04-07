@@ -1,6 +1,7 @@
+#ifndef SUPER_BLOCK_INC_H
+#define SUPER_BLOCK_INC_H
 
 #include "common.h"
-#ifndef SUPER_BLOCK_INC_H
 
 #define SUPER_BLOCK_NUM_ORBS 3
 
@@ -23,5 +24,4 @@ ApiStatus N(SuperBlock_PartnerSparkles2)(Evt* script, s32 isInitialCall);
 ApiStatus N(SuperBlock_PartnerSparkles4)(Evt* script, s32 isInitialCall);
 ApiStatus N(SuperBlock_WaitForPlayerToLand)(Evt* script, s32 isInitialCall);
 
-#define SUPER_BLOCK_INC_H
 #endif

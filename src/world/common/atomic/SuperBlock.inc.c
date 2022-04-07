@@ -2,16 +2,18 @@
 #include "npc.h"
 #include "effects.h"
 #include "SuperBlock.inc.h"
+#include "hud_element.h"
 
 extern s32 gPartnerPopupProperties[11][4];
 
+//TDOD how to reorganize these to avoid warnings?
 extern s32 N(SuperBlock_CantUpgradeMessages)[2];
 extern s16 N(SuperBlock_PartnerIDs)[8];
 extern s32 N(SuperBlock_UpgradeDescMessages)[8][2];
 extern f32 N(SuperBlock_UpgradeOrbAngles)[SUPER_BLOCK_NUM_ORBS];
 
-extern s32 wPartnerHudScripts[];
-extern s32 wDisabledPartnerHudScripts[];
+extern HudScript* wPartnerHudScripts[];
+extern HudScript* wDisabledPartnerHudScripts[];
 
 ApiStatus N(SuperBlock_SetOverride40)(Evt* script, s32 isInitialCall) {
     gOverrideFlags |= GLOBAL_OVERRIDES_40;

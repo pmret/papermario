@@ -1071,7 +1071,7 @@ ApiStatus N(func_802419C4_CB0704)(Evt* script, s32 isInitialCall) {
 
 ApiStatus N(func_802419FC_CB073C)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32* ptr = evt_get_variable(script, *args);
+    s32* ptr = (s32*)evt_get_variable(script, *args);
     s32 i;
 
     if (ptr != NULL) {
