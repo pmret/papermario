@@ -49,7 +49,7 @@ glabel func_802401CC_EC9ECC
 /* EC9F78 80240278 AE300108 */  sw        $s0, 0x108($s1)
 /* EC9F7C 8024027C 8C420000 */  lw        $v0, ($v0)
 /* EC9F80 80240280 02E0282D */  daddu     $a1, $s7, $zero
-/* EC9F84 80240284 0C090035 */  jal       EC9D00_UnkFunc37
+/* EC9F84 80240284 0C090035 */  jal       EC9D00_SuperBlock_get_partner_rank
 /* EC9F88 80240288 AE220084 */   sw       $v0, 0x84($s1)
 /* EC9F8C 8024028C 0040202D */  daddu     $a0, $v0, $zero
 /* EC9F90 80240290 04800011 */  bltz      $a0, .L802402D8

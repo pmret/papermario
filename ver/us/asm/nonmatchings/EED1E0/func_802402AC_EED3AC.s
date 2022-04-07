@@ -49,7 +49,7 @@ glabel func_802402AC_EED3AC
 /* EED458 80240358 AE300108 */  sw        $s0, 0x108($s1)
 /* EED45C 8024035C 8C420000 */  lw        $v0, ($v0)
 /* EED460 80240360 02E0282D */  daddu     $a1, $s7, $zero
-/* EED464 80240364 0C09006D */  jal       EED1E0_UnkFunc37
+/* EED464 80240364 0C09006D */  jal       EED1E0_SuperBlock_get_partner_rank
 /* EED468 80240368 AE220084 */   sw       $v0, 0x84($s1)
 /* EED46C 8024036C 0040202D */  daddu     $a0, $v0, $zero
 /* EED470 80240370 04800011 */  bltz      $a0, .L802403B8

@@ -2,7 +2,7 @@
 #include "npc.h"
 #include "effects.h"
 
-ApiStatus N(UnkFunc20)(Evt* script, s32 isInitialCall) {
+ApiStatus N(SuperBlock_StartGlowEffect)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 entityIdx = evt_get_variable(script, *args++);
     Entity* entity = get_entity_by_index(entityIdx);

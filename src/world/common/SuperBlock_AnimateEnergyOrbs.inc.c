@@ -17,9 +17,9 @@ typedef struct {
     s32 unk_64;
 } N(UserData);
 
-extern f32 N(SuperBlockDataD)[];
+extern f32 N(SuperBlock_UpgradeOrbAngles)[];
 
-ApiStatus N(UnkFunc60)(Evt* script, s32 isInitialCall) {
+ApiStatus N(SuperBlock_AnimateEnergyOrbs)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Npc* partner = get_npc_safe(NPC_PARTNER);
     N(UserData)* userData;
@@ -57,7 +57,7 @@ ApiStatus N(UnkFunc60)(Evt* script, s32 isInitialCall) {
         t1 = 50.0f;
         for (i = 0; i < ARRAY_COUNT(userData->unk_38); i++) {
             x = 0.0f;
-            add_vec2D_polar(&x, &userData->unk_44[i], t1, N(SuperBlockDataD)[i]);
+            add_vec2D_polar(&x, &userData->unk_44[i], t1, N(SuperBlock_UpgradeOrbAngles)[i]);
             userData->unk_38[i] = cosTheta * x;
             userData->unk_50[i] = sinTheta * x;
             userData->unk_38[i] = partner->pos.x - (userData->unk_5C->position.x + userData->unk_38[i]);
@@ -72,7 +72,7 @@ ApiStatus N(UnkFunc60)(Evt* script, s32 isInitialCall) {
             t1 = update_lerp(5, 0.0f, 50.0f, userData->unk_60, 20);
             for (i = 0; i < ARRAY_COUNT(userData->unk_20); i++) {
                 x = userData->unk_20[i] = 0.0f;
-                add_vec2D_polar(&x, &userData->unk_20[i], t1, N(SuperBlockDataD)[i]);
+                add_vec2D_polar(&x, &userData->unk_20[i], t1, N(SuperBlock_UpgradeOrbAngles)[i]);
                 userData->unk_14[i] = cosTheta * x;
                 userData->unk_2C[i] = sinTheta * x;
             }
@@ -87,7 +87,7 @@ ApiStatus N(UnkFunc60)(Evt* script, s32 isInitialCall) {
             t1 = 50.0f;
             for (i = 0; i < ARRAY_COUNT(userData->unk_20); i++) {
                 x = userData->unk_20[i] = 0.0f;
-                add_vec2D_polar(&x, &userData->unk_20[i], t1, N(SuperBlockDataD)[i]);
+                add_vec2D_polar(&x, &userData->unk_20[i], t1, N(SuperBlock_UpgradeOrbAngles)[i]);
                 userData->unk_14[i] = cosTheta * x;
                 userData->unk_2C[i] = sinTheta * x;
             }

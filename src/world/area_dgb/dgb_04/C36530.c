@@ -272,13 +272,13 @@ NpcGroupList N(npcGroupList_80243D18) = {
     {},
 };
 
-#include "world/common/atomic/SuperBlockData.inc.c""
+#define SUPER_BLOCK_MAPVAR EVT_MAP_VAR(0)
+#define SUPER_BLOCK_GAMEFLAG EVT_SAVE_FLAG(1046)
+#include "world/common/atomic/SuperBlockData.inc.c"
 
 EvtScript N(makeEntities) = {
     EVT_CALL(MakeEntity, 0x802EA910, 500, -360, 110, 0, MAKE_ENTITY_END)
-    EVT_SET(EVT_MAP_VAR(0), EVT_VAR(0))
-    EVT_CALL(AssignBlockFlag, EVT_SAVE_FLAG(1046))
-    EVT_CALL(AssignScript, EVT_PTR(N(HitSuperBlock)))
+    EVT_SETUP_SUPER_BLOCK(SUPER_BLOCK_MAPVAR, SUPER_BLOCK_GAMEFLAG)
     EVT_RETURN
     EVT_END
 };

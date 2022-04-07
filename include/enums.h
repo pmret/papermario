@@ -671,6 +671,8 @@ enum SoundIDs {
     SOUND_2118                      = 0x00002118,
     SOUND_2119                      = 0x00002119,
     SOUND_211A                      = 0x0000211A,
+    SOUND_212D                      = 0x0000212D,
+    SOUND_212E                      = 0x0000212E,
 };
 
 enum Cams {
@@ -1970,6 +1972,22 @@ enum PlayerStatusAnimFlags {
     PLAYER_STATUS_ANIM_FLAGS_80000000                              = 0x80000000,
 };
 
+enum PopupType {
+    POPUP_MENU_USE_ITEM             = 0x0,
+    POPUP_MENU_SWITCH_PARTNER       = 0x1,
+    POPUP_MENU_THROW_AWAY_ITEM      = 0x2,
+    POPUP_MENU_TRADE_FOR_BADGE      = 0x3,
+    POPUP_MENU_UPGRADE_PARTNER      = 0x4,
+    POPUP_MENU_SELL_ITEM            = 0x5,
+    POPUP_MENU_CHECK_ITEM           = 0x6,
+    POPUP_MENU_CLAIM_ITEM           = 0x7,
+    POPUP_MENU_READ_LETTER          = 0x8,
+    POPUP_MENU_TAKE_FROM_CHEST      = 0x9,
+    POPUP_MENU_READ_DIARY_PAGE      = 0xA,
+    POPUP_MENU_READ_POSTCARD        = 0xB,
+    POPUP_MENU_USEKEY               = 0xC
+};
+
 /// not really
 enum RenderMode {
     RENDER_MODE_SURF_SOLID_AA_ZB_LAYER0          = 0x00000000,
@@ -3191,7 +3209,7 @@ enum EffectInstanceFlags {
     EFFECT_INSTANCE_FLAGS_2                 = 0x00000002,
     EFFECT_INSTANCE_FLAGS_4                 = 0x00000004,
     EFFECT_INSTANCE_FLAGS_8                 = 0x00000008,
-    EFFECT_INSTANCE_FLAGS_10                = 0x00000010,
+    EFFECT_INSTANCE_FLAGS_10                = 0x00000010,   // notify delete?
     EFFECT_INSTANCE_FLAGS_20                = 0x00000020,
     EFFECT_INSTANCE_FLAGS_40                = 0x00000040,
     EFFECT_INSTANCE_FLAGS_80                = 0x00000080,

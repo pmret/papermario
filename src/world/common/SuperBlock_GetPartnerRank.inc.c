@@ -1,7 +1,7 @@
 #include "common.h"
 #include "npc.h"
 
-ApiStatus N(UnkFunc18)(Evt* script, s32 isInitialCall) {
+ApiStatus N(SuperBlock_GetPartnerRank)(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
     Bytecode* args = script->ptrReadPos;
     s32 partnerIdx = evt_get_variable(script, *args++);
@@ -13,7 +13,7 @@ ApiStatus N(UnkFunc18)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-s32 N(UnkFunc37)(s32 idx, s16 arg1) {
+s32 N(SuperBlock_get_partner_rank)(s32 idx, s16 arg1) {
     if (!gPlayerData.partners[idx].enabled) {
         return -1;
     }
@@ -25,7 +25,7 @@ s32 N(UnkFunc37)(s32 idx, s16 arg1) {
     return -1;
 }
 
-ApiStatus N(UnkFunc38)(Evt* script, s32 isInitialCall) {
+ApiStatus N(SuperBlock_CountEligiblePartners)(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
     s32 i;
     s16 var = script->varTable[12] >= 0;
@@ -33,7 +33,7 @@ ApiStatus N(UnkFunc38)(Evt* script, s32 isInitialCall) {
     script->varTable[0] = -1;
 
     for (i = 1; i < ARRAY_COUNT(playerData->partners); i++) {
-        if (playerData->partners[i].enabled && N(UnkFunc37)(i, var) != -1) {
+        if (playerData->partners[i].enabled && N(SuperBlock_get_partner_rank)(i, var) != -1) {
             script->varTable[0] = 1;
             break;
         }

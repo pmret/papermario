@@ -3,15 +3,15 @@
 
 extern s32 gPartnerPopupProperties[11][4];
 
-extern s32 N(SuperBlockDataA)[2];
-extern s16 N(SuperBlockDataB)[8];
-extern s32 N(SuperBlockDataC)[8][2];
-extern f32 N(SuperBlockDataD)[3];
+extern s32 N(SuperBlock_CantUpgradeMessages)[2];
+extern s16 N(SuperBlock_PartnerIDs)[8];
+extern s32 N(SuperBlock_UpgradeDescMessages)[8][2];
+extern f32 N(SuperBlock_UpgradeOrbAngles)[3];
 
 extern s32 wPartnerHudScripts[];
 extern s32 wDisabledPartnerHudScripts[];
 
-ApiStatus N(TempSuperBlockBeta)(Evt* script, s32 isInitialCall) {
+ApiStatus N(SuperBlock_ShowSelectPartnerMenu)(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
     PopupMenu* popupMenu;
     s32 partnerID;
@@ -28,20 +28,20 @@ ApiStatus N(TempSuperBlockBeta)(Evt* script, s32 isInitialCall) {
 
         // build the popup menu entries from unlocked partners
         entryIndex = 0;
-        for (i = 0; i < 8; i++) { // ARRAY_COUNT(N(SuperBlockDataB))
-            partnerID = N(SuperBlockDataB)[i]; // upgradeable partner IDs
+        for (i = 0; i < 8; i++) { // ARRAY_COUNT(N(SuperBlock_PartnerIDs))
+            partnerID = N(SuperBlock_PartnerIDs)[i]; // upgradeable partner IDs
             if (playerData->partners[partnerID].enabled) {
                 popupMenu->userIndex[entryIndex] = partnerID;
                 popupMenu->nameMsg[entryIndex] = gPartnerPopupProperties[partnerID][0];
-                canUpgradePartner = N(UnkFunc37)(partnerID, hasUltraStone);
+                canUpgradePartner = N(SuperBlock_get_partner_rank)(partnerID, hasUltraStone);
                 if (canUpgradePartner >= 0) {
                     popupMenu->ptrIcon[entryIndex] = wPartnerHudScripts[partnerID];
                     popupMenu->enabled[entryIndex] = TRUE;
-                    popupMenu->descMsg[entryIndex] = N(SuperBlockDataC)[i][canUpgradePartner];
+                    popupMenu->descMsg[entryIndex] = N(SuperBlock_UpgradeDescMessages)[i][canUpgradePartner];
                 } else {
                     popupMenu->ptrIcon[entryIndex] = wDisabledPartnerHudScripts[partnerID];
                     popupMenu->enabled[entryIndex] = FALSE;
-                    popupMenu->descMsg[entryIndex] = N(SuperBlockDataA)[hasUltraStone];
+                    popupMenu->descMsg[entryIndex] = N(SuperBlock_CantUpgradeMessages)[hasUltraStone];
                 }
                 popupMenu->value[entryIndex] = playerData->partners[partnerID].level;
                 entryIndex++;
