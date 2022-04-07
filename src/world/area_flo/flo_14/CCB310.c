@@ -26,7 +26,7 @@ EvtScript N(802423F0) = {
 };
 
 EvtScript N(updateTexturePan_80242460) = {
-    EVT_SET_GROUP(0)
+    EVT_SET_GROUP(EVT_GROUP_0)
     EVT_IF_EQ(EVT_VAR(5), 1)
         EVT_IF_EQ(EVT_VAR(6), 1)
             EVT_IF_EQ(EVT_VAR(7), 1)
@@ -150,7 +150,7 @@ static s32 N(pad_2BF4)[] = {
 };
 
 EvtScript N(80242C00) = {
-    EVT_SET_GROUP(11)
+    EVT_SET_GROUP(EVT_GROUP_B)
     EVT_SET(EVT_VAR(10), EVT_VAR(0))
     EVT_SET(EVT_VAR(11), EVT_VAR(1))
     EVT_SET(EVT_VAR(12), EVT_VAR(2))
@@ -417,7 +417,7 @@ s32 N(D_80243B18_CCEE28) = {
 };
 
 EvtScript N(80243B1C) = {
-    EVT_SET_GROUP(0)
+    EVT_SET_GROUP(EVT_GROUP_0)
     EVT_SET(EVT_VAR(15), EVT_VAR(0))
     EVT_LABEL(0)
     EVT_IF_EQ(EVT_AREA_FLAG(35), 1)

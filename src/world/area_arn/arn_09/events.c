@@ -4,7 +4,7 @@
 extern s32 D_000001E4;
 
 EvtScript N(80240140) = {
-    EVT_SET_GROUP(27)
+    EVT_SET_GROUP(EVT_GROUP_1B)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_SET(EVT_VAR(0), 0)
     EVT_SET(EVT_VAR(1), 5)

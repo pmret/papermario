@@ -19,18 +19,13 @@ typedef struct {
 } N(shopPrice);
 
 ApiStatus N(GetCamVfov)(Evt* script, s32 isInitialCall);
-ApiStatus N(Pipe_GetCameraYaw)(Evt* script, s32 isInitialCall);
-ApiStatus N(Pipe_GetCurrentFloor)(Evt* script, s32 isInitialCall);
-ApiStatus N(Pipe_GetEntryPos)(Evt* script, s32 isInitialCall);
 ApiStatus N(GetGameStatus75)(Evt* script, s32 isInitialCall);
 ApiStatus N(GetNpcUnsafeOwner2)(Evt* script, s32 isInitialCall);
 ApiStatus N(Set80151310_0)(Evt* script, s32 isInitialCall);
 ApiStatus N(Set80151310_1)(Evt* script, s32 isInitialCall);
 ApiStatus N(SetCamVfov)(Evt* script, s32 isInitialCall);
 ApiStatus N(SetManyVars)(Evt* script, s32 isInitialCall);
-ApiStatus N(Pipe_SetAnimFlag)(Evt* script, s32 isInitialCall);
 ApiStatus N(TransformFoliage)(Evt* script, s32 isInitialCall);
-ApiStatus N(Pipe_GetPointAheadOfPlayer)(Evt* script, s32 isInitialCall);
 ApiStatus N(AddPlayerHandsOffset)(Evt* script, s32 isInitialCall);
 ApiStatus N(UnkAlphaFunc)(Evt* script, s32 isInitialCall);
 ApiStatus N(UnkCameraFunc)(Evt* script, s32 isInitialCall);
@@ -38,7 +33,6 @@ ApiStatus N(UnkMovePartner)(Evt* script, s32 isInitialCall);
 ApiStatus N(UnkRotatePartner)(Evt* script, s32 isInitialCall);
 ApiStatus N(UnkRotatePlayer)(Evt* script, s32 isInitialCall);
 ApiStatus N(UnkYawFunc)(Evt* script, s32 isInitialCall);
-ApiStatus N(Pipe_AwaitDownInput)(Evt* script, s32 isInitialCall);
 ApiStatus N(UnkFunc27)(Evt* script, s32 isInitialCall);
 ApiStatus N(UnkFunc26)(Evt* script, s32 isInitialCall);
 ApiStatus N(UnkNpcAIMainFunc)(Evt* script, s32 isInitialCall);

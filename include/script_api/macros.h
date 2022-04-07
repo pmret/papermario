@@ -520,7 +520,7 @@
 
 #define EXIT_WALK_SCRIPT(walkDistance, exitIdx, map, entryIdx) \
     { \
-        EVT_SET_GROUP(0x1B) \
+        EVT_SET_GROUP(EVT_GROUP_1B) \
         EVT_CALL(UseExitHeading, walkDistance, exitIdx) \
         EVT_EXEC(ExitWalk) \
         EVT_CALL(GotoMap, EVT_PTR(map), entryIdx) \

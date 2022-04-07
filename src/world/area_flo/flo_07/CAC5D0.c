@@ -55,7 +55,7 @@ static s32 N(pad_8CC) = {
 };
 
 EvtScript N(updateTexturePan_802408D0) = {
-    EVT_SET_GROUP(0)
+    EVT_SET_GROUP(EVT_GROUP_0)
     EVT_IF_EQ(EVT_VAR(5), 1)
         EVT_IF_EQ(EVT_VAR(6), 1)
             EVT_IF_EQ(EVT_VAR(7), 1)
@@ -72,7 +72,7 @@ EvtScript N(updateTexturePan_802408D0) = {
 };
 
 EvtScript N(8024096C) = {
-    EVT_SET_GROUP(11)
+    EVT_SET_GROUP(EVT_GROUP_B)
     EVT_SET(EVT_VAR(10), EVT_VAR(0))
     EVT_SET(EVT_VAR(11), EVT_VAR(1))
     EVT_SET(EVT_VAR(12), EVT_VAR(2))

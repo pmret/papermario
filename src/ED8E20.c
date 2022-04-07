@@ -5,7 +5,7 @@
 
 #define NAMESPACE ED8E20
 
-ApiStatus N(Pipe_SetAnimFlag)(Evt* script, s32 isInitialCall) {
+ApiStatus N(DeadPipe_SetAnimFlag)(Evt* script, s32 isInitialCall) {
     gPlayerStatusPtr->animFlags |= PLAYER_STATUS_ANIM_FLAGS_100000;
     return ApiStatus_DONE2;
 }
@@ -52,12 +52,12 @@ ApiStatus N(DeadPipe_GetEntryPos)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(Pipe_GetCameraYaw)(Evt* script, s32 isInitialCall) {
+ApiStatus N(DeadPipe_GetCameraYaw)(Evt* script, s32 isInitialCall) {
     script->varTable[0] = clamp_angle(gCameras[gCurrentCameraID].currentYaw + 180.0f);
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(Pipe_GetPointAheadOfPlayer)(Evt* script, s32 isInitialStatus) {
+ApiStatus N(DeadPipe_GetPointAheadOfPlayer)(Evt* script, s32 isInitialStatus) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 r = evt_get_float_variable(script, *script->ptrReadPos);
     f32 x = playerStatus->position.x;

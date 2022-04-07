@@ -216,7 +216,7 @@ EvtScript N(80240DDC) = {
 };
 
 EvtScript N(80240F50) = {
-    EVT_SET_GROUP(239)
+    EVT_SET_GROUP(EVT_GROUP_EF)
     EVT_LOOP(0)
         EVT_CALL(RandInt, 50, EVT_VAR(0))
         EVT_ADD(EVT_VAR(0), 80)
