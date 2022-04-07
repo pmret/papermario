@@ -162,6 +162,7 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
     Npc* parakarry = evt->owner2.npc;
+    s32 buttonTemp = BUTTON_A;
     f32 x, y, z, sp30, sp2C;
     f32 diffZPlayer, diffXPlayer, diffZParakarry, diffXParakarry;
     f32 tempX, tempZ;
@@ -172,9 +173,7 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
     f32 tempYaw;
     f32 halfCollisionHeight;
     u16 tempFrameCounter, tempFrameCounterTwo;
-    s32 buttonTemp;
 
-    buttonTemp = BUTTON_A;
     if (gCurrentEncounter.unk_08 == 0) {
         if (isInitialCall) {
             func_802BD514_319A84(parakarry);
