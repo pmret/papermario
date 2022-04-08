@@ -1,6 +1,6 @@
 #include "tik_22.h"
 
-#include "world/common/UpdateTexturePan.inc.c"
+#include "world/common/atomic/TexturePan.inc.c"
 
 #include "world/common/atomic/Pipe.inc.c"
 

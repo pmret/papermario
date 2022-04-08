@@ -5,11 +5,9 @@ extern u8 D_8024DCD3_A37F13;
 extern u8 D_802D9D73;
 
 #define NAMESPACE dup_hos_05
-#include "world/common/UnkFunc27.inc.c"
+#include "world/common/atomic/UnkFunc27.inc.c"
 
-#include "world/common/UnkFunc26.inc.c"
-
-#include "world/common/UpdateTexturePan.inc.c"
+#include "world/common/atomic/TexturePan.inc.c"
 
 #define NAMESPACE hos_05
 

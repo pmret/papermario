@@ -5,7 +5,7 @@
 
 #define NAMESPACE EE65B0
 
-#include "world/common/UpdateTexturePan.inc.c"
+#include "world/common/atomic/TexturePan.inc.c"
 
 ApiStatus func_8024030C_EE68BC(Evt *script, s32 isInitialCall) {
     dead_fx_sun(0, 0, 0, 0, 0, 0);

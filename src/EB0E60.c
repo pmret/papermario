@@ -3,5 +3,5 @@
 
 #define NAMESPACE EB0E60
 
-#include "world/common/UpdateTexturePan.inc.c"
+#include "world/common/atomic/TexturePan.inc.c"
 

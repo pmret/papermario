@@ -572,7 +572,7 @@ EvtScript N(80243E78) = {
     EVT_END
 };
 
-#include "world/common/UpdateTexturePan.inc.c"
+#include "world/common/atomic/TexturePan.inc.c"
 
 void fx_sun();
 

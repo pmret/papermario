@@ -103,27 +103,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80243680_803F00);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80243740_803FC0);
 
-#include "world/common/Call800E9894.inc.c"
-
-#include "world/common/Call800E98C4SyncStatusMenu.inc.c"
-
-#include "world/common/UnkFunc32.inc.c"
-
-#include "world/common/CamSetFOV.inc.c"
-
-#include "world/common/AwaitScriptComplete.inc.c"
-
-#include "world/common/PartnerToggleAbilityScript.inc.c"
-
-#include "world/common/DoesPlayerNeedSleep.inc.c"
-
-#include "world/common/UnkFunc35.inc.c"
-
-#include "world/common/GetPartnerCall800EB168.inc.c"
-
-ApiStatus func_80243AA0_804320(Evt* script, s32 isInitialCall) {
-    return ApiStatus_DONE2;
-}
+#include "world/common/atomic/ToadHouse.inc.c"
 
 #include "world/common/GetNpcCollisionHeight.inc.c"
 

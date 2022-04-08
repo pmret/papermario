@@ -3,7 +3,7 @@
 extern u8 D_80241C2F_A124AF;
 extern u8 D_80241C33_A124B3;
 
-#include "world/common/UpdateTexturePan.inc.c"
+#include "world/common/atomic/TexturePan.inc.c"
 
 INCLUDE_ASM(s32, "world/area_hos/hos_01/A11020", func_80240AAC_A1132C);
 

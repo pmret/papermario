@@ -5,5 +5,5 @@ static char* N(exit_str_1) = "trd_01";
 static char* N(exit_str_2) = "trd_05";
 static char* N(exit_str_3) = "";
 
-#include "world/common/UpdateTexturePan.inc.c"
+#include "world/common/atomic/TexturePan.inc.c"
 
