@@ -373,9 +373,9 @@ Camera* initialize_next_camera(CameraInitData* initData) {
     camera->bgColor[1] = 0;
     camera->bgColor[2] = 0;
     camera->unk_C0 = 0;
-    camera->unk_54 = 0;
-    camera->unk_58 = 0;
-    camera->unk_5C = 0;
+    camera->auxPos.x = 0;
+    camera->auxPos.y = 0;
+    camera->auxPos.z = 0;
     camera->targetPos.x = 0;
     camera->targetPos.y = 0;
     camera->targetPos.z = 0;

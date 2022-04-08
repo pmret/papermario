@@ -60,14 +60,14 @@ void entity_ItemBlock_check_if_inactive(Entity* entity) {
     ItemBlockData* data = entity->dataBuf.itemBlock;
 
     if ((data->gameFlagIndex != 0xFFFF) && get_global_flag(data->gameFlagIndex)) {
-        UNK_PTR phi_a0;
+        UNK_PTR bp;
 
         if (get_entity_type(entity->listIndex) != ENTITY_TYPE_RED_BLOCK) {
-            phi_a0 = &Entity_InertYellowBlock;
+            bp = &Entity_InertYellowBlock;
         } else {
-            phi_a0 = &Entity_InertRedBlock;
+            bp = &Entity_InertRedBlock;
         }
-        create_entity(phi_a0, entity->position.x, entity->position.y, entity->position.z, entity->rotation.y, 0x80000000);
+        create_entity(bp, entity->position.x, entity->position.y, entity->position.z, entity->rotation.y, MAKE_ENTITY_END);
         set_entity_commandlist(entity, &D_802EA310);
     } else {
         exec_entity_commandlist(entity);
@@ -78,23 +78,23 @@ void entity_ItemBlock_check_if_inactive(Entity* entity) {
 // followed by an inert version of the block.
 void entity_ItemBlock_replace_with_inactive(Entity* entity) {
     s32 entityType = get_entity_type(entity->listIndex);
-    EntityBlueprint* entityBlueprint = &Entity_InertYellowBlock;
+    EntityBlueprint* bp = &Entity_InertYellowBlock;
     s32 childEntityIndex;
     s32 isBlockOnGround;
     s32 parentEntityType;
-    ItemBlockData* temp;
+    ItemBlockData* childData;
     Entity* childEntity;
     Shadow* shadow;
 
     if (entityType < ENTITY_TYPE_HAMMER1_BLOCK) {
-        entityBlueprint = &Entity_InertYellowBlock;
+        bp = &Entity_InertYellowBlock;
         if (entityType >= ENTITY_TYPE_HIDDEN_RED_BLOCK) {
-            entityBlueprint = &Entity_InertRedBlock;
+            bp = &Entity_InertRedBlock;
         }
     }
 
     // this child entity is the inert block
-    childEntityIndex = create_entity(entityBlueprint, entity->position.x, entity->position.y, entity->position.z, entity->rotation.y, 0x80000000);
+    childEntityIndex = create_entity(bp, entity->position.x, entity->position.y, entity->position.z, entity->rotation.y, MAKE_ENTITY_END);
     childEntity = get_entity_by_index(childEntityIndex);
     childEntity->flags |= ENTITY_FLAGS_HIDDEN;
 
@@ -112,15 +112,15 @@ void entity_ItemBlock_replace_with_inactive(Entity* entity) {
 
     parentEntityType = get_entity_type(entity->listIndex);
     if (parentEntityType == ENTITY_TYPE_HIDDEN_RED_BLOCK || parentEntityType == ENTITY_TYPE_RED_BLOCK) {
-        entityBlueprint = &Entity_HitRedBlock;
+        bp = &Entity_HitRedBlock;
     } else if (isBlockOnGround != 0) {
-        entityBlueprint = &Entity_HitGroundedYellowBlock;
+        bp = &Entity_HitGroundedYellowBlock;
     } else {
-        entityBlueprint = &Entity_HitFloatingYellowBlock;
+        bp = &Entity_HitFloatingYellowBlock;
     }
 
     // child entity is now the animated block which appears before it turns inert
-    childEntity = get_entity_by_index(create_entity(entityBlueprint, entity->position.x, entity->position.y, entity->position.z, entity->rotation.y, 0x80000000));
+    childEntity = get_entity_by_index(create_entity(bp, entity->position.x, entity->position.y, entity->position.z, entity->rotation.y, MAKE_ENTITY_END));
     childEntity->alpha = entity->alpha;
     if ((entity->flags & ENTITY_FLAGS_HIDDEN) || (entity->alpha < 0xFF)) {
         childEntity->alpha = 0x20;
@@ -130,8 +130,8 @@ void entity_ItemBlock_replace_with_inactive(Entity* entity) {
         childEntity->flags |= ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE2;
     }
 
-    temp = childEntity->dataBuf.unk;
-    temp->childEntityIndex = childEntityIndex;
+    childData = childEntity->dataBuf.itemBlock;
+    childData->childEntityIndex = childEntityIndex;
 
     if (entity->flags & ENTITY_FLAGS_HAS_DYNAMIC_SHADOW) {
         childEntity->flags |= ENTITY_FLAGS_HAS_DYNAMIC_SHADOW;

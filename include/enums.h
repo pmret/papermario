@@ -507,9 +507,13 @@ enum SoundIDs {
     SOUND_MENU_CHANGE_TAB           = 0x000000C8,
     SOUND_MENU_NEXT                 = 0x000000C9,
     SOUND_MENU_BACK                 = 0x000000CA,
+    SOUND_CC                        = 0x000000CC,
+    SOUND_CD                        = 0x000000CD,
+    SOUND_CE                        = 0x000000CE,
     SOUND_D4                        = 0x000000D4,
     SOUND_D5                        = 0x000000D5,
     SOUND_D6                        = 0x000000D6,
+    SOUND_DC                        = 0x000000DC,
     SOUND_HIT_PLAYER_NORMAL         = 0x000000E1,
     SOUND_HIT_PLAYER_FIRE           = 0x000000E2,
     SOUND_HIT_PLAYER_ICE            = 0x000000E3,
@@ -517,6 +521,7 @@ enum SoundIDs {
     SOUND_HIT_NORMAL                = 0x000000E9,
     SOUND_HIT_FIRE                  = 0x000000EA,
     SOUND_HIT_ICE                   = 0x000000EB,
+    SOUND_F1                        = 0x000000F1,
     SOUND_108                       = 0x00000108,
     SOUND_IMMUNE                    = 0x0000010C,
     SOUND_HIT_BONES                 = 0x0000010D,
@@ -527,6 +532,7 @@ enum SoundIDs {
     SOUND_LAND                      = 0x0000014B,
     SOUND_HIT_BLOCK                 = 0x0000014E,
     SOUND_SEARCH_BUSH               = 0x00000153,
+    SOUND_158                       = 0x00000158,
     SOUND_162                       = 0x00000162,
     SOUND_ENTER_PIPE                = 0x00000163,
     SOUND_SMASH_GOOMNUT_TREE        = 0x00000165,
@@ -534,6 +540,9 @@ enum SoundIDs {
     SOUND_172                       = 0x00000172,
     SOUND_17B                       = 0x0000017B,
     SOUND_194                       = 0x00000194,
+    SOUND_1A5                       = 0x000001A5,
+    SOUND_1A6                       = 0x000001A6,
+    SOUND_1A7                       = 0x000001A7,
     SOUND_BASIC_DOOR_OPEN           = 0x000001C1,
     SOUND_BASIC_DOOR_CLOSE          = 0x000001C2,
     SOUND_METAL_DOOR_OPEN           = 0x000001C3,
@@ -546,7 +555,11 @@ enum SoundIDs {
     SOUND_METAL_GATE_CLOSE          = 0x000001CA,
     SOUND_1CB                       = 0x000001CB,
     SOUND_1CC                       = 0x000001CC,
+    SOUND_211                       = 0x00000211,
+    SOUND_213                       = 0x00000213,
+    SOUND_214                       = 0x00000214,
     SOUND_215                       = 0x00000215,
+    SOUND_21C                       = 0x0000021C,
     SOUND_MENU_ERROR                = 0x0000021D,
     SOUND_231                       = 0x00000231,
     SOUND_246                       = 0x00000246,
@@ -556,6 +569,7 @@ enum SoundIDs {
     SOUND_25D                       = 0x0000025D,
     SOUND_262                       = 0x00000262,
     SOUND_282                       = 0x00000282,
+    SOUND_283                       = 0x00000283,
     SOUND_BOW_SPOOK                 = 0x00000291,
     SOUND_295                       = 0x00000295,
     SOUND_299                       = 0x00000299,
@@ -587,6 +601,7 @@ enum SoundIDs {
     SOUND_367                       = 0x00000367,
     SOUND_368                       = 0x00000368,
     SOUND_369                       = 0x00000369,
+    SOUND_372                       = 0x00000372,
     SOUND_375                       = 0x00000375,
     SOUND_376                       = 0x00000376,
     SOUND_377                       = 0x00000377,
@@ -609,6 +624,8 @@ enum SoundIDs {
     SOUND_BOW_VANISH                = 0x0000200E,
     SOUND_BOW_APPEAR                = 0x0000200F,
     SOUND_2010                      = 0x00002010,
+    SOUND_WATT_REPEL_DARKNESS       = 0x00002011,
+    SOUND_WATT_RESUME_DARKNESS      = 0x00002012,
     SOUND_CANNON1                   = 0x00002016,
     SOUND_CANNON2                   = 0x00002017,
     SOUND_CANNON3                   = 0x00002018,
@@ -621,6 +638,9 @@ enum SoundIDs {
     SOUND_INFLICT_STATUS            = 0x00002032, //< Stop, poison, paralyze
     SOUND_2038                      = 0x00002038,
     SOUND_2039                      = 0x00002039,
+    SOUND_205B                      = 0x0000205B,
+    SOUND_2072                      = 0x00002072,
+    SOUND_2073                      = 0x00002073,
     SOUND_BOMB_BLAST                = 0x00002076,
     SOUND_JUMP_2081                 = 0x00002081,
     SOUND_JUMP_8BIT_MARIO           = 0x00002082,
@@ -638,12 +658,22 @@ enum SoundIDs {
     SOUND_SPELL_CAST5               = 0x000020D8,
     SOUND_20F6                      = 0x000020F6,
     SOUND_2101                      = 0x00002101,
+    SOUND_2102                      = 0x00002102,
+    SOUND_2103                      = 0x00002103,
+    SOUND_2104                      = 0x00002104,
+    SOUND_2105                      = 0x00002105,
     SOUND_2106                      = 0x00002106,
     SOUND_2107                      = 0x00002107,
     SOUND_2111                      = 0x00002111,
     SOUND_2112                      = 0x00002112,
     SOUND_2113                      = 0x00002113,
     SOUND_2114                      = 0x00002114,
+    SOUND_2115                      = 0x00002115,
+    SOUND_2116                      = 0x00002116,
+    SOUND_2117                      = 0x00002117,
+    SOUND_2118                      = 0x00002118,
+    SOUND_2119                      = 0x00002119,
+    SOUND_211A                      = 0x0000211A,
 };
 
 enum Cams {
@@ -651,6 +681,24 @@ enum Cams {
     CAM_BATTLE       = 1,
     CAM_TATTLE       = 2,
     CAM_CAM3         = 3,
+};
+
+enum CamShakeModes {
+    CAM_SHAKE_CONSTANT_VERTICAL     = 0,
+    CAM_SHAKE_ANGULAR_HORIZONTAL    = 1,
+    CAM_SHAKE_DECAYING_VERTICAL     = 2
+};
+
+// for use with func_8024E748
+enum AuxCameraParams {
+    AUX_CAM_PARAM_1             = 1,
+    AUX_CAM_BOOM_LENGTH         = 2,
+    AUX_CAM_PARAM_3             = 3,
+    AUX_CAM_BOOM_PITCH          = 4,
+    AUX_CAM_BOOM_YAW            = 5,
+    AUX_CAM_BOOM_ZOFFSET        = 6,
+    AUX_CAM_PARAM_7             = 7,
+    AUX_CAM_ZOOM_PERCENT        = 8
 };
 
 #define LOOKUP_ITEM(itemID) gItemTable[itemID & ~0xF0000]
@@ -1479,7 +1527,7 @@ enum ActionStates {
     ACTION_STATE_USE_SNEAKY_PARASOL             = 0x00000019,
     ACTION_STATE_SPIN                           = 0x0000001A,
     ACTION_STATE_ENEMY_FIRST_STRIKE             = 0x0000001B,
-    ACTION_STATE_GET_STAR_SPIRIT                = 0x0000001C,
+    ACTION_STATE_RAISE_ARMS                     = 0x0000001C,
     ACTION_STATE_USE_SPINNING_FLOWER            = 0x0000001D,
     ACTION_STATE_USE_MUNCHLESIA                 = 0x0000001E,  ///< Set by the jan_09 squishy flower entity; throws the player in the air.
     ACTION_STATE_USE_TWEESTER                   = 0x0000001F,
@@ -1490,6 +1538,36 @@ enum ActionStates {
     ACTION_STATE_24                             = 0x00000024,
     ACTION_STATE_25                             = 0x00000025,
     ACTION_STATE_USE_SPRING                     = 0x00000026,
+};
+
+/* (1 = isPeach, 2 = isTransformed, 4 = hasUmbrella) */
+enum PeachStatusFlags {
+    PEACH_STATUS_FLAG_IS_PEACH          = 0x01,
+    PEACH_STATUS_FLAG_DISGUISED         = 0x02,
+    PEACH_STATUS_FLAG_HAS_PARASOL       = 0x04,
+    PEACH_STATUS_FLAG_HAS_INGREDIENT    = 0x10
+};
+
+enum CookingIngredients {
+    PEACH_COOKING_NONE              = 0x00,
+    PEACH_COOKING_CREAM             = 0x01,
+    PEACH_COOKING_STRAWBERRY        = 0x02,
+    PEACH_COOKING_BUTTER            = 0x03,
+    PEACH_COOKING_CLEANSER          = 0x04,
+    PEACH_COOKING_WATER             = 0x05,
+    PEACH_COOKING_MILK              = 0x06,
+    PEACH_COOKING_FLOUR             = 0x07,
+    PEACH_COOKING_EGG               = 0x08,
+    PEACH_COOKING_COMPLETE_CAKE     = 0x09,
+    PEACH_COOKING_CAKE_BOWL         = 0x0A,
+    PEACH_COOKING_CAKE_MIXED        = 0x0B,
+    PEACH_COOKING_CAKE_PAN          = 0x0C,
+    PEACH_COOKING_CAKE_BATTER       = 0x0D,
+    PEACH_COOKING_CAKE_BARE         = 0x0E,
+    PEACH_COOKING_SALT              = 0x0F,
+    PEACH_COOKING_SUGAR             = 0x10,
+    PEACH_COOKING_CAKE_WITH_ICING   = 0x11,
+    PEACH_COOKING_CAKE_WITH_BERRIES = 0x12,
 };
 
 // Requires decimals
@@ -1602,14 +1680,15 @@ enum EntityFlags {
 };
 
 enum EntityCollisionFlags {
-    ENTITY_COLLISION_FLAGS_1                                = 0x00000001,
+    ENTITY_COLLISION_PLAYER_TOUCH_FLOOR                     = 0x00000001,
     ENTITY_COLLISION_FLAGS_2                                = 0x00000002,
-    ENTITY_COLLISION_FLAGS_4                                = 0x00000004,
-    ENTITY_COLLISION_FLAGS_8                                = 0x00000008,
-    ENTITY_COLLISION_FLAGS_10                               = 0x00000010,
+    ENTITY_COLLISION_PLAYER_TOUCH_CEILING                   = 0x00000004,
+    ENTITY_COLLISION_PLAYER_TOUCH_WALL                      = 0x00000008,
+    ENTITY_COLLISION_PLAYER_PUSHING_AGAINST                 = 0x00000010,
     ENTITY_COLLISION_FLAGS_20                               = 0x00000020,
-    ENTITY_COLLISION_FLAGS_40                               = 0x00000040,
-    ENTITY_COLLISION_FLAGS_80                               = 0x00000080
+    ENTITY_COLLISION_PLAYER_HAMMER                          = 0x00000040,
+    ENTITY_COLLISION_BLOCK_HIT                              = 0x00000080,
+    ENTITY_COLLISION_PLAYER_LAST_FLOOR                      = 0x00000100
 };
 
 enum TriggerFlags {
@@ -1632,6 +1711,10 @@ enum TriggerFlags {
     TRIGGER_FLOOR_ABOVE         = 0x00080000,
     TRIGGER_POINT_BOMB          = 0x00100000,
     TRIGGER_SCRIPT_BOUND        = 0x01000000
+};
+
+enum ItemEntityFlags {
+    ITEM_ENTITY_FLAGS_TINY      = 0x00004000,
 };
 
 enum Buttons {
@@ -1826,7 +1909,7 @@ enum NpcFlags {
 enum PlayerStatusFlags {
     PLAYER_STATUS_FLAGS_JUMPING                          = 0x00000002,
     PLAYER_STATUS_FLAGS_FALLING                          = 0x00000004,
-    PLAYER_STATUS_FLAGS_8                                = 0x00000008,
+    PLAYER_STATUS_FLAGS_FLYING                           = 0x00000008,
     PLAYER_STATUS_FLAGS_10                               = 0x00000010,
     PLAYER_STATUS_FLAGS_20                               = 0x00000020,
     PLAYER_STATUS_FLAGS_80                               = 0x00000080,
@@ -1841,11 +1924,15 @@ enum PlayerStatusFlags {
     PLAYER_STATUS_FLAGS_20000                            = 0x00020000,
     PLAYER_STATUS_FLAGS_40000                            = 0x00040000,
     PLAYER_STATUS_FLAGS_80000                            = 0x00080000,
+    PLAYER_STATUS_FLAGS_100000                           = 0x00100000,
+    PLAYER_STATUS_FLAGS_200000                           = 0x00200000, // using hammer?
     PLAYER_STATUS_FLAGS_800000                           = 0x00800000,
+    PLAYER_STATUS_FLAGS_1000000                          = 0x01000000,
     PLAYER_STATUS_FLAGS_HAS_CONVERSATION_NPC             = 0x02000000,
     PLAYER_STATUS_FLAGS_CAMERA_DOESNT_FOLLOW             = 0x04000000,
     PLAYER_STATUS_FLAGS_8000000                          = 0x08000000,
     PLAYER_STATUS_FLAGS_10000000                         = 0x10000000,
+    PLAYER_STATUS_FLAGS_20000000                         = 0x20000000, // done hammer?
     PLAYER_STATUS_FLAGS_40000000                         = 0x40000000,
     PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED             = 0x80000000,
 };
@@ -1855,13 +1942,13 @@ enum PlayerStatusAnimFlags {
     PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT                          = 0x00000001,
     PLAYER_STATUS_ANIM_FLAGS_2                                     = 0x00000002,
     PLAYER_STATUS_ANIM_FLAGS_4                                     = 0x00000004,
-    PLAYER_STATUS_ANIM_FLAGS_8                                     = 0x00000008,
+    PLAYER_STATUS_ANIM_FLAGS_8                                     = 0x00000008, ///< triggers partner use when set
     PLAYER_STATUS_ANIM_FLAGS_INTERACT_PROMPT_AVAILABLE             = 0x00000010, ///< ! prompt
     PLAYER_STATUS_ANIM_FLAGS_SPEECH_PROMPT_AVAILABLE               = 0x00000020, ///< (...) prompt
     PLAYER_STATUS_ANIM_FLAGS_40                                    = 0x00000040,
     PLAYER_STATUS_ANIM_FLAGS_USING_PULSE_STONE                     = 0x00000080,
     PLAYER_STATUS_ANIM_FLAGS_100                                   = 0x00000100,
-    PLAYER_STATUS_ANIM_FLAGS_GET_STAR_SPIRIT                       = 0x00000200, ///< Sets action state to ACTION_STATE_GET_STAR_SPIRIT on idle
+    PLAYER_STATUS_ANIM_FLAGS_RAISED_ARMS                           = 0x00000200, ///< Sets action state to ACTION_STATE_RAISE_ARMS on idle
     PLAYER_STATUS_ANIM_FLAGS_SHIVERING                             = 0x00000400,
     PLAYER_STATUS_ANIM_FLAGS_800                                   = 0x00000800,
     PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS                   = 0x00001000,
@@ -2610,10 +2697,10 @@ enum MusicSettingsFlags {
 };
 
 enum ColliderFlags {
-    COLLIDER_FLAGS_1                 = 0x00000001,
-    COLLIDER_FLAGS_2                 = 0x00000002,
-    COLLIDER_FLAGS_4                 = 0x00000004,
-    COLLIDER_FLAGS_8                 = 0x00000008,
+    COLLIDER_FLAGS_WATER_FLOOR       = 0x00000001,
+    COLLIDER_FLAGS_LAVA_FLOOR        = 0x00000002,
+    COLLIDER_FLAGS_SUSHIE_DOCK_WALL  = 0x00000004,
+    COLLIDER_FLAGS_SNOW_FLOOR        = 0x00000008,
     COLLIDER_FLAGS_10                = 0x00000010,
     COLLIDER_FLAGS_20                = 0x00000020,
     COLLIDER_FLAGS_40                = 0x00000040,
@@ -2625,8 +2712,8 @@ enum ColliderFlags {
     COLLIDER_FLAGS_1000              = 0x00001000,
     COLLIDER_FLAGS_2000              = 0x00002000,
     COLLIDER_FLAGS_4000              = 0x00004000,
-    COLLIDER_FLAGS_8000              = 0x00008000,
-    COLLIDER_FLAGS_10000             = 0x00010000,
+    COLLIDER_FLAGS_IGNORE_SHELL      = 0x00008000,
+    COLLIDER_FLAGS_IGNORE_PLAYER     = 0x00010000,
     COLLIDER_FLAGS_20000             = 0x00020000,
     COLLIDER_FLAGS_40000             = 0x00040000,
     COLLIDER_FLAGS_80000             = 0x00080000,
@@ -2712,6 +2799,16 @@ enum CameraFlags {
     CAMERA_FLAGS_20000000          = 0x20000000,
     CAMERA_FLAGS_40000000          = 0x40000000,
     CAMERA_FLAGS_80000000          = 0x80000000,
+};
+
+enum CameraSettingsType {
+    CAMERA_SETTINGS_TYPE_0  = 0,
+    CAMERA_SETTINGS_TYPE_1  = 1,
+    CAMERA_SETTINGS_TYPE_2  = 2,
+    CAMERA_SETTINGS_TYPE_3  = 3,
+    CAMERA_SETTINGS_TYPE_4  = 4,
+    CAMERA_SETTINGS_TYPE_5  = 5,
+    CAMERA_SETTINGS_TYPE_6  = 6,
 };
 
 enum BtlCameraPreset {
@@ -3228,24 +3325,6 @@ enum ItemTypeFlags {
     ITEM_TYPE_FLAGS_8000              = 0x8000,
 };
 
-enum MsgWindowStates {
-    MSG_WINDOW_STATE_DONE               = 0x0,
-    MSG_WINDOW_STATE_INIT               = 0x1,
-    MSG_WINDOW_STATE_OPENING            = 0x2,
-    MSG_WINDOW_STATE_CLOSING            = 0x3,
-    MSG_WINDOW_STATE_PRINTING           = 0x4,
-    MSG_WINDOW_STATE_WAITING            = 0x5,
-    MSG_WINDOW_STATE_SCROLLING          = 0x6,
-    MSG_WINDOW_STATE_WAITING_FOR_CHOICE = 0x7,
-    MSG_WINDOW_STATE_SCROLLING_BACK     = 0x8,
-    MSG_WINDOW_STATE_VIEWING_PREV       = 0x9,
-    MSG_WINDOW_STATE_A                  = 0xA,
-    MSG_WINDOW_STATE_B                  = 0xB,
-    MSG_WINDOW_STATE_C                  = 0xC,
-    MSG_WINDOW_STATE_D                  = 0xD,
-    MSG_WINDOW_STATE_E                  = 0xE,
-};
-
 enum FoldStateFlags {
     FOLD_STATE_FLAG_ENABLED           = 0x00000001,
     FOLD_STATE_FLAG_G_CULL_BACK       = 0x00000002,
@@ -3376,6 +3455,541 @@ enum RushFlags {
     RUSH_FLAG_NONE  = 0,
     RUSH_FLAG_MEGA  = 1,
     RUSH_FLAG_POWER = 2,
+};
+
+enum FileMenuMessages {
+    FILE_MESSAGE_NONE                       = 0,
+    FILE_MESSAGE_SELECT_FILE_TO_START       = 1, // Select file to start:[End]
+    FILE_MESSAGE_SELECT_FILE_TO_DELETE      = 2, // Select file to delete:[End]
+    FILE_MESSAGE_SELECT_FILE_TO_SAVE        = 3, // Select file to save[End]
+    FILE_MESSAGE_COPY_WHICH_FILE            = 4, // Copy which file?[End]
+    FILE_MESSAGE_COPY_TO_WHICH_FILE         = 5, // Copy to which file?[End]
+    FILE_MESSAGE_NEW                        = 6, // NEW[End]
+    FILE_MESSAGE_LEVEL                      = 7, // Level[End]
+    FILE_MESSAGE_PLAY_TIME                  = 8, // Play Time[End]
+    FILE_MESSAGE_DELETE_FILE                = 9, // Delete File[End]
+    FILE_MESSAGE_CANCEL                     = 10, // Cancel[End]
+    FILE_MESSAGE_COPY_FILE                  = 11, // Copy File[End]
+    FILE_MESSAGE_FIRST_PLAY                 = 12, // First Play[End]
+    FILE_MESSAGE_PERIOD_13                  = 13, // .[End]
+    FILE_MESSAGE_YES                        = 14, // Yes[End]
+    FILE_MESSAGE_NO                         = 15, // No[End]
+    FILE_MESSAGE_DELETE                     = 16, // Delete[End]
+    FILE_MESSAGE_OVERRIDE_TO_NEW_DATA       = 17, // Override to New Data[End]
+    FILE_MESSAGE_SAVE_OK                    = 18, // Save OK?[End]
+    FILE_MESSAGE_FILE_NAME_IS               = 19, // File name is :[End]
+    FILE_MESSAGE_PERIOD_20                  = 20, // .[End]
+    FILE_MESSAGE_OK                         = 21, // OK?[End]
+    FILE_MESSAGE_FILE_22                    = 22, // File[End]
+    FILE_MESSAGE_WILL_BE_DELETED            = 23, // will be deleted.[End]
+    FILE_MESSAGE_OK_TO_COPY_TO_THIS_FILE    = 24, // OK to copy to this file?[End]
+    FILE_MESSAGE_START_GAME_WITH            = 25, // Start game with[End]
+    FILE_MESSAGE_FILE_26                    = 26, // File[End]
+    FILE_MESSAGE_HAS_BEEN_DELETED           = 27, // has been deleted.[End]
+    FILE_MESSAGE_28                         = 28, // [End]
+    FILE_MESSAGE_COPY_FROM                  = 29, // Copy from[End]
+    FILE_MESSAGE_TO                         = 30, // to[End]
+    FILE_MESSAGE_HAS_BEEN_CREATED           = 31, // has been created.[End]
+    FILE_MESSAGE_ENTER_A_FILE_NAME          = 32, // Enter a file name![End]
+    FILE_MESSAGE_QUESTION                   = 33, // ?[End]
+    FILE_MESSAGE_PERIOD_34                  = 34, // .[End]
+};
+
+// specifically used with draw_msg, not to be confused with MsgStyles
+enum DrawMsgStyleFlags {
+    DRAW_MSG_STYLE_MENU             = 1, // slightly higher baseline with smaller fullspace widths
+    DRAW_MSG_STYLE_WAVY             = 2,
+    DRAW_MSG_STYLE_RAINBOW          = 4,
+    DRAW_MSG_STYLE_DROP_SHADOW      = 8
+};
+
+enum MsgPalettes {
+    MSG_PAL_WHITE                   = 0x00,
+    MSG_PAL_TEAL                    = 0x01,
+    MSG_PAL_BLUE                    = 0x02,
+    MSG_PAL_GREEN                   = 0x03,
+    MSG_PAL_LIME                    = 0x04,
+    MSG_PAL_YELLOW                  = 0x05,
+    MSG_PAL_ORANGE                  = 0x06,
+    MSG_PAL_RED                     = 0x07,
+    MSG_PAL_PURPLE                  = 0x08,
+    MSG_PAL_PINK                    = 0x09,
+    MSG_PAL_STANDARD                = 0x0A,
+    MSG_PAL_0B                      = 0x0B,
+    MSG_PAL_0C                      = 0x0C,
+    MSG_PAL_0D                      = 0x0D,
+    MSG_PAL_0E                      = 0x0E,
+    MSG_PAL_0F                      = 0x0F,
+    MSG_PAL_10                      = 0x10,
+    MSG_PAL_11                      = 0x11,
+    MSG_PAL_12                      = 0x12,
+    MSG_PAL_13                      = 0x13,
+    MSG_PAL_14                      = 0x14,
+    MSG_PAL_15                      = 0x15,
+    MSG_PAL_16                      = 0x16,
+    MSG_PAL_17                      = 0x17,
+    MSG_PAL_18                      = 0x18,
+    MSG_PAL_19                      = 0x19,
+    MSG_PAL_1A                      = 0x1A,
+    MSG_PAL_1B                      = 0x1B,
+    MSG_PAL_1C                      = 0x1C,
+    MSG_PAL_1D                      = 0x1D,
+    MSG_PAL_1E                      = 0x1E,
+    MSG_PAL_1F                      = 0x1F,
+    MSG_PAL_20                      = 0x20,
+    MSG_PAL_21                      = 0x21,
+    MSG_PAL_22                      = 0x22,
+    MSG_PAL_23                      = 0x23,
+    MSG_PAL_24                      = 0x24,
+    MSG_PAL_25                      = 0x25,
+    MSG_PAL_26                      = 0x26,
+    MSG_PAL_27                      = 0x27,
+    MSG_PAL_28                      = 0x28,
+    MSG_PAL_29                      = 0x29,
+    MSG_PAL_2A                      = 0x2A,
+    MSG_PAL_2B                      = 0x2B,
+    MSG_PAL_2C                      = 0x2C,
+    MSG_PAL_2D                      = 0x2D,
+    MSG_PAL_2E                      = 0x2E,
+    MSG_PAL_2F                      = 0x2F,
+    MSG_PAL_30                      = 0x30,
+    MSG_PAL_31                      = 0x31,
+    MSG_PAL_32                      = 0x32,
+    MSG_PAL_33                      = 0x33,
+    MSG_PAL_34                      = 0x34,
+    MSG_PAL_35                      = 0x35,
+    MSG_PAL_36                      = 0x36,
+    MSG_PAL_37                      = 0x37,
+    MSG_PAL_38                      = 0x38,
+    MSG_PAL_39                      = 0x39,
+    MSG_PAL_3A                      = 0x3A,
+    MSG_PAL_3B                      = 0x3B,
+    MSG_PAL_3C                      = 0x3C,
+    MSG_PAL_3D                      = 0x3D,
+    MSG_PAL_3E                      = 0x3E,
+    MSG_PAL_3F                      = 0x3F,
+    MSG_PAL_40                      = 0x40,
+    MSG_PAL_41                      = 0x41,
+    MSG_PAL_42                      = 0x42,
+    MSG_PAL_43                      = 0x43,
+    MSG_PAL_44                      = 0x44,
+    MSG_PAL_45                      = 0x45,
+    MSG_PAL_46                      = 0x46,
+    MSG_PAL_47                      = 0x47,
+    MSG_PAL_48                      = 0x48,
+    MSG_PAL_49                      = 0x49,
+    MSG_PAL_4A                      = 0x4A,
+    MSG_PAL_4B                      = 0x4B,
+    MSG_PAL_4C                      = 0x4C,
+    MSG_PAL_4D                      = 0x4D,
+    MSG_PAL_4E                      = 0x4E,
+    MSG_PAL_4F                      = 0x4F,
+    MSG_PAL_50                      = 0x50
+};
+
+enum MsgChars {
+    MSG_CHAR_NOTE                   = 0x00,
+    MSG_CHAR_EXCLAMTION             = 0x01,
+    MSG_CHAR_BACKSLASH              = 0x02,
+    MSG_CHAR_HASH                   = 0x03,
+    MSG_CHAR_DOLLAR                 = 0x04,
+    MSG_CHAR_PERCENT                = 0x05,
+    MSG_CHAR_AND                    = 0x06,
+    MSG_CHAR_APOSTROPHE             = 0x07,
+    MSG_CHAR_LPAREN                 = 0x08,
+    MSG_CHAR_RPAREN                 = 0x09,
+    MSG_CHAR_TIMES                  = 0x0A,
+    MSG_CHAR_PLUS                   = 0x0B,
+    MSG_CHAR_COMMA                  = 0x0C,
+    MSG_CHAR_MINUS                  = 0x0D,
+    MSG_CHAR_PERIOD                 = 0x0E,
+    MSG_CHAR_FORWARDSLASH           = 0x0F,
+    MSG_CHAR_DIGIT_0                = 0x10,
+    MSG_CHAR_DIGIT_1                = 0x11,
+    MSG_CHAR_DIGIT_2                = 0x12,
+    MSG_CHAR_DIGIT_3                = 0x13,
+    MSG_CHAR_DIGIT_4                = 0x14,
+    MSG_CHAR_DIGIT_5                = 0x15,
+    MSG_CHAR_DIGIT_6                = 0x16,
+    MSG_CHAR_DIGIT_7                = 0x17,
+    MSG_CHAR_DIGIT_8                = 0x18,
+    MSG_CHAR_DIGIT_9                = 0x19,
+    MSG_CHAR_COLON                  = 0x1A,
+    MSG_CHAR_SEMICOLON              = 0x1B,
+    MSG_CHAR_LESS_THAN              = 0x1C,
+    MSG_CHAR_EQUAL                  = 0x1D,
+    MSG_CHAR_GREATER_THAN           = 0x1E,
+    MSG_CHAR_QUESTION               = 0x1F,
+    MSG_CHAR_AT                     = 0x20,
+    MSG_CHAR_UPPER_A                = 0x21,
+    MSG_CHAR_UPPER_B                = 0x22,
+    MSG_CHAR_UPPER_C                = 0x23,
+    MSG_CHAR_UPPER_D                = 0x24,
+    MSG_CHAR_UPPER_E                = 0x25,
+    MSG_CHAR_UPPER_F                = 0x26,
+    MSG_CHAR_UPPER_G                = 0x27,
+    MSG_CHAR_UPPER_H                = 0x28,
+    MSG_CHAR_UPPER_I                = 0x29,
+    MSG_CHAR_UPPER_J                = 0x2A,
+    MSG_CHAR_UPPER_K                = 0x2B,
+    MSG_CHAR_UPPER_L                = 0x2C,
+    MSG_CHAR_UPPER_M                = 0x2D,
+    MSG_CHAR_UPPER_N                = 0x2E,
+    MSG_CHAR_UPPER_O                = 0x2F,
+    MSG_CHAR_UPPER_P                = 0x30,
+    MSG_CHAR_UPPER_Q                = 0x31,
+    MSG_CHAR_UPPER_R                = 0x32,
+    MSG_CHAR_UPPER_S                = 0x33,
+    MSG_CHAR_UPPER_T                = 0x34,
+    MSG_CHAR_UPPER_U                = 0x35,
+    MSG_CHAR_UPPER_V                = 0x36,
+    MSG_CHAR_UPPER_W                = 0x37,
+    MSG_CHAR_UPPER_X                = 0x38,
+    MSG_CHAR_UPPER_Y                = 0x39,
+    MSG_CHAR_UPPER_Z                = 0x3A,
+    MSG_CHAR_LBRACKET               = 0x3B,
+    MSG_CHAR_YEN                    = 0x3C,
+    MSG_CHAR_RBRACKET               = 0x3D,
+    MSG_CHAR_CARET                  = 0x3E,
+    MSG_CHAR_UNDERSCORE             = 0x3F,
+    MSG_CHAR_BACKTICK               = 0x40,
+    MSG_CHAR_LOWER_A                = 0x41,
+    MSG_CHAR_LOWER_B                = 0x42,
+    MSG_CHAR_LOWER_C                = 0x43,
+    MSG_CHAR_LOWER_D                = 0x44,
+    MSG_CHAR_LOWER_E                = 0x45,
+    MSG_CHAR_LOWER_F                = 0x46,
+    MSG_CHAR_LOWER_G                = 0x47,
+    MSG_CHAR_LOWER_H                = 0x48,
+    MSG_CHAR_LOWER_I                = 0x49,
+    MSG_CHAR_LOWER_J                = 0x4A,
+    MSG_CHAR_LOWER_K                = 0x4B,
+    MSG_CHAR_LOWER_L                = 0x4C,
+    MSG_CHAR_LOWER_M                = 0x4D,
+    MSG_CHAR_LOWER_N                = 0x4E,
+    MSG_CHAR_LOWER_O                = 0x4F,
+    MSG_CHAR_LOWER_P                = 0x50,
+    MSG_CHAR_LOWER_Q                = 0x51,
+    MSG_CHAR_LOWER_R                = 0x52,
+    MSG_CHAR_LOWER_S                = 0x53,
+    MSG_CHAR_LOWER_T                = 0x54,
+    MSG_CHAR_LOWER_U                = 0x55,
+    MSG_CHAR_LOWER_V                = 0x56,
+    MSG_CHAR_LOWER_W                = 0x57,
+    MSG_CHAR_LOWER_X                = 0x58,
+    MSG_CHAR_LOWER_Y                = 0x59,
+    MSG_CHAR_LOWER_Z                = 0x5A,
+    MSG_CHAR_LCURLY                 = 0x5B,
+    MSG_CHAR_PIPE                   = 0x5C,
+    MSG_CHAR_RCURLY                 = 0x5D,
+    MSG_CHAR_TILDA                  = 0x5E,
+    MSG_CHAR_DEGREE                 = 0x5F,
+    MSG_CHAR_UPPER_A_GRAVE          = 0x60,
+    MSG_CHAR_UPPER_A_ACUTE          = 0x61,
+    MSG_CHAR_UPPER_A_CIRCUMFLEX     = 0x62,
+    MSG_CHAR_UPPER_A_UMLAUT         = 0x63,
+    MSG_CHAR_UPPER_C_CEDILLA        = 0x64,
+    MSG_CHAR_UPPER_E_GRAVE          = 0x65,
+    MSG_CHAR_UPPER_E_ACUTE          = 0x66,
+    MSG_CHAR_UPPER_E_CIRCUMFLEX     = 0x67,
+    MSG_CHAR_UPPER_E_UMLAUT         = 0x68,
+    MSG_CHAR_UPPER_I_GRAVE          = 0x69,
+    MSG_CHAR_UPPER_I_ACUTE          = 0x6A,
+    MSG_CHAR_UPPER_I_CIRCUMFLEX     = 0x6B,
+    MSG_CHAR_UPPER_I_UMLAUT         = 0x6C,
+    MSG_CHAR_UPPER_N_TILDE          = 0x6D,
+    MSG_CHAR_UPPER_O_GRAVE          = 0x6E,
+    MSG_CHAR_UPPER_O_ACUTE          = 0x6F,
+    MSG_CHAR_UPPER_O_CIRCUMFLEX     = 0x70,
+    MSG_CHAR_UPPER_O_UMLAUT         = 0x71,
+    MSG_CHAR_UPPER_U_GRAVE          = 0x72,
+    MSG_CHAR_UPPER_U_ACUTE          = 0x73,
+    MSG_CHAR_UPPER_U_CIRCUMFLEX     = 0x74,
+    MSG_CHAR_UPPER_U_UMLAUT         = 0x75,
+    MSG_CHAR_SHARP_S                = 0x76,
+    MSG_CHAR_LOWER_A_GRAVE          = 0x77,
+    MSG_CHAR_LOWER_A_ACUTE          = 0x78,
+    MSG_CHAR_LOWER_A_CIRCUMFLEX     = 0x79,
+    MSG_CHAR_LOWER_A_UMLAUT         = 0x7A,
+    MSG_CHAR_LOWER_C_CEDILLA        = 0x7B,
+    MSG_CHAR_LOWER_E_GRAVE          = 0x7C,
+    MSG_CHAR_LOWER_E_ACUTE          = 0x7D,
+    MSG_CHAR_LOWER_E_CIRCUMFLEX     = 0x7E,
+    MSG_CHAR_LOWER_E_UMLAUT         = 0x7F,
+    MSG_CHAR_LOWER_I_GRAVE          = 0x80,
+    MSG_CHAR_LOWER_I_ACUTE          = 0x81,
+    MSG_CHAR_LOWER_I_CIRCUMFLEX     = 0x82,
+    MSG_CHAR_LOWER_I_UMLAUT         = 0x83,
+    MSG_CHAR_LOWER_N_TILDE          = 0x84,
+    MSG_CHAR_LOWER_O_GRAVE          = 0x85,
+    MSG_CHAR_LOWER_O_ACUTE          = 0x86,
+    MSG_CHAR_LOWER_O_CIRCUMFLEX     = 0x87,
+    MSG_CHAR_LOWER_O_UMLAUT         = 0x88,
+    MSG_CHAR_LOWER_U_GRAVE          = 0x89,
+    MSG_CHAR_LOWER_U_ACUTE          = 0x8A,
+    MSG_CHAR_LOWER_U_CIRCUMFLEX     = 0x8B,
+    MSG_CHAR_LOWER_U_UMLAUT         = 0x8C,
+    MSG_CHAR_INVERTED_EXCLAMTION    = 0x8D,
+    MSG_CHAR_INVERTED_QUESTION      = 0x8E,
+    MSG_CHAR_FEM_ORDINAL            = 0x8F,
+    MSG_CHAR_HEART                  = 0x90,
+    MSG_CHAR_STAR                   = 0x91,
+    MSG_CHAR_UP                     = 0x92,
+    MSG_CHAR_DOWN                   = 0x93,
+    MSG_CHAR_LEFT                   = 0x94,
+    MSG_CHAR_RIGHT                  = 0x95,
+    MSG_CHAR_CIRCLE                 = 0x96,
+    MSG_CHAR_CROSS                  = 0x97,
+    MSG_CHAR_BUTTON_A               = 0x98,
+    MSG_CHAR_BUTTON_B               = 0x99,
+    MSG_CHAR_BUTTON_L               = 0x9A,
+    MSG_CHAR_BUTTON_R               = 0x9B,
+    MSG_CHAR_BUTTON_Z               = 0x9C,
+    MSG_CHAR_BUTTON_C_UP            = 0x9D,
+    MSG_CHAR_BUTTON_C_DOWN          = 0x9E,
+    MSG_CHAR_BUTTON_C_LEFT          = 0x9F,
+    MSG_CHAR_BUTTON_C_RIGHT         = 0xA0,
+    MSG_CHAR_BUTTON_START           = 0xA1,
+    MSG_CHAR_DOUBLE_QUOTE_OPEN      = 0xA2,
+    MSG_CHAR_DOUBLE_QUOTE_CLOSE     = 0xA3,
+    MSG_CHAR_SINGLE_QUOTE_OPEN      = 0xA4,
+    MSG_CHAR_SINGLE_QUOTE_CLOSE     = 0xA5,
+    // 0xA6 to 0xEF are unused
+
+    // special character codes used when reading from the source buffer
+    MSG_CHAR_READ_ENDL              = 0xF0,
+    MSG_CHAR_READ_WAIT              = 0xF1,
+    MSG_CHAR_READ_PAUSE             = 0xF2,
+    MSG_CHAR_READ_VARIANT0          = 0xF3,
+    MSG_CHAR_READ_VARIANT1          = 0xF4,
+    MSG_CHAR_READ_VARIANT2          = 0xF5,
+    MSG_CHAR_READ_VARIANT3          = 0xF6,
+    MSG_CHAR_READ_SPACE             = 0xF7,
+    MSG_CHAR_READ_FULL_SPACE        = 0xF8,
+    MSG_CHAR_READ_HALF_SPACE        = 0xF9,
+    MSG_CHAR_READ_UNK_CHAR_FA       = 0xFA,
+    MSG_CHAR_READ_NEXT              = 0xFB,
+    MSG_CHAR_READ_STYLE             = 0xFC,
+    MSG_CHAR_READ_END               = 0xFD,
+    // 0xFE unused
+    MSG_CHAR_READ_FUNCTION          = 0xFF,
+
+    // special character codes used when writing to the print buffer
+    MSG_CONTROL_CHAR                = 0xF0,
+    MSG_CHAR_PRINT_ENDL             = 0xF0,
+    MSG_CHAR_PRINT_VARIANT0         = 0xF1,
+    MSG_CHAR_PRINT_VARIANT1         = 0xF2,
+    MSG_CHAR_PRINT_VARIANT2         = 0xF3,
+    MSG_CHAR_PRINT_VARIANT3         = 0xF4,
+    MSG_CHAR_PRINT_SPACE            = 0xF5,
+    MSG_CHAR_PRINT_FULL_SPACE       = 0xF6,
+    MSG_CHAR_PRINT_HALF_SPACE       = 0xF7,
+    MSG_CHAR_PRINT_STYLE            = 0xF8,
+    MSG_CHAR_PRINT_UNK_CHAR_FA      = 0xF9,
+    MSG_CHAR_PRINT_NEXT             = 0xFA,
+    MSG_CHAR_PRINT_END              = 0xFB,
+    // FC unused
+    // FD unused
+    // FE unused
+    MSG_CHAR_PRINT_FUNCTION         = 0xFF
+};
+
+enum MsgFunctionCodes {
+    // function codes used when reading from the source buffer
+    MSG_READ_FUNC_FONT                   = 0x00,
+    MSG_READ_FUNC_VARIANT                = 0x01,
+    MSG_READ_FUNC_SET_FRAME_PALETTE      = 0x02,
+    MSG_READ_FUNC_RESET_GFX              = 0x03,
+    MSG_READ_FUNC_YIELD                  = 0x04,
+    MSG_READ_FUNC_COLOR                  = 0x05,
+    MSG_READ_FUNC_NO_SKIP                = 0x06,
+    MSG_READ_FUNC_INPUT_OFF              = 0x07,
+    MSG_READ_FUNC_INPUT_ON               = 0x08,
+    MSG_READ_FUNC_DELAY_OFF              = 0x09,
+    MSG_READ_FUNC_DELAY_ON               = 0x0A,
+    MSG_READ_FUNC_SPACING                = 0x0B,
+    MSG_READ_FUNC_SCROLL                 = 0x0C,
+    MSG_READ_FUNC_SIZE                   = 0x0D,
+    MSG_READ_FUNC_SIZE_RESET             = 0x0E,
+    MSG_READ_FUNC_SPEED                  = 0x0F,
+    MSG_READ_FUNC_SET_X                  = 0x10,
+    MSG_READ_FUNC_SET_Y                  = 0x11,
+    MSG_READ_FUNC_RIGHT                  = 0x12,
+    MSG_READ_FUNC_DOWN                   = 0x13,
+    MSG_READ_FUNC_UP                     = 0x14,
+    MSG_READ_FUNC_INLINE_IMAGE           = 0x15,
+    MSG_READ_FUNC_ANIM_SPRITE            = 0x16,
+    MSG_READ_FUNC_ITEM_ICON              = 0x17,
+    MSG_READ_FUNC_IMAGE                  = 0x18,
+    MSG_READ_FUNC_HIDE_IMAGE             = 0x19,
+    MSG_READ_FUNC_ANIM_DELAY             = 0x1A,
+    MSG_READ_FUNC_ANIM_LOOP              = 0x1B,
+    MSG_READ_FUNC_ANIM_DONE              = 0x1C,
+    MSG_READ_FUNC_SET_CURSOR             = 0x1D,
+    MSG_READ_FUNC_CURSOR                 = 0x1E,
+    MSG_READ_FUNC_END_CHOICE             = 0x1F,
+    MSG_READ_FUNC_SET_CANCEL             = 0x20,
+    MSG_READ_FUNC_OPTION                 = 0x21,
+    MSG_READ_FUNC_SAVE_POS               = 0x22,
+    MSG_READ_FUNC_RESTORE_POS            = 0x23,
+    MSG_READ_FUNC_SAVE_COLOR             = 0x24,
+    MSG_READ_FUNC_RESTORE_COLOR          = 0x25,
+    MSG_READ_FUNC_START_FX               = 0x26,
+    MSG_READ_FUNC_END_FX                 = 0x27,
+    MSG_READ_FUNC_VAR                    = 0x28,
+    MSG_READ_FUNC_CENTER_X               = 0x29,
+    MSG_READ_FUNC_SET_REWIND             = 0x2A,
+    MSG_READ_FUNC_ENABLE_CDOWN_NEXT      = 0x2B,
+    MSG_READ_FUNC_CUSTOM_VOICE           = 0x2C,
+    MSG_READ_FUNC_VOLUME                 = 0x2E,
+    MSG_READ_FUNC_VOICE                  = 0x2F,
+    // function codes used when writing to the print buffer
+    MSG_PRINT_FUNC_FONT                  = 0x00,
+    MSG_PRINT_FUNC_VARIANT               = 0x01,
+    MSG_PRINT_FUNC_SET_FRAME_PALETTE     = 0x16,
+    MSG_PRINT_RESET_GFX                  = 0x17,
+    MSG_PRINT_FUNC_COLOR                 = 0x04,
+    MSG_PRINT_FUNC_SPACING               = 0x05,
+    MSG_PRINT_FUNC_SCROLL                = 0xFA,
+    MSG_PRINT_FUNC_SIZE                  = 0x06,
+    MSG_PRINT_FUNC_SIZE_RESET            = 0x07,
+    MSG_PRINT_FUNC_SET_X                 = 0x08,
+    MSG_PRINT_FUNC_SET_Y                 = 0x09,
+    MSG_PRINT_FUNC_RIGHT                 = 0x0A,
+    MSG_PRINT_FUNC_DOWN                  = 0x0B,
+    MSG_PRINT_FUNC_UP                    = 0x0C,
+    MSG_PRINT_FUNC_INLINE_IMAGE          = 0x0E,
+    MSG_PRINT_FUNC_ANIM_SPRITE           = 0x0F,
+    MSG_PRINT_FUNC_ITEM_ICON             = 0x10,
+    MSG_PRINT_FUNC_ANIM_DELAY            = 0x11,
+    MSG_PRINT_FUNC_ANIM_LOOP             = 0x12,
+    MSG_PRINT_FUNC_ANIM_DONE             = 0x13,
+    MSG_PRINT_FUNC_CURSOR                = 0x14,
+    MSG_PRINT_FUNC_OPTION                = 0x15,
+    MSG_PRINT_FUNC_SAVE_POS              = 0x18,
+    MSG_PRINT_FUNC_RESTORE_POS           = 0x19,
+    MSG_PRINT_FUNC_SAVE_COLOR            = 0x1A,
+    MSG_PRINT_FUNC_RESTORE_COLOR         = 0x1B,
+    MSG_PRINT_FUNC_START_FX              = 0x1C,
+    MSG_PRINT_FUNC_END_FX                = 0x1D,
+    MSG_PRINT_FUNC_CENTER_X              = 0x1E
+};
+
+enum MsgEffectCodes {
+    MSG_FX_SHAKE                    = 0x00,
+    MSG_FX_WAVE                     = 0x01,
+    MSG_FX_NOISE_OUTLINE            = 0x02,
+    MSG_FX_STATIC                   = 0x03,
+    MSG_FX_BLUR                     = 0x05,
+    MSG_FX_RAINBOW                  = 0x06,
+    MSG_FX_DITHER_FADE              = 0x07,
+    MSG_FX_GLOBAL_WAVE              = 0x08,
+    MSG_FX_GLOBAL_RAINBOW           = 0x09,
+    MSG_FX_RISE_PRINT               = 0x0A,
+    MSG_FX_GROW_PRINT               = 0x0B,
+    MSG_FX_SIZE_JITTER              = 0x0C,
+    MSG_FX_SIZE_WAVE                = 0x0D,
+    MSG_FX_DROP_SHADOW              = 0x0E
+};
+
+enum MsgEffectFlags {
+    MSG_FX_FLAG_SHAKE               = 0x00001,
+    MSG_FX_FLAG_WAVE                = 0x00002,
+    MSG_FX_FLAG_NOISE_OUTLINE       = 0x00004,
+    MSG_FX_FLAG_BLUR                = 0x00020,
+    MSG_FX_FLAG_RAINBOW             = 0x00040,
+    MSG_FX_FLAG_DITHER_FADE         = 0x00080,
+    MSG_FX_FLAG_GLOBAL_WAVE         = 0x00200,
+    MSG_FX_FLAG_GLOBAL_RAINBOW      = 0x00400,
+    MSG_FX_FLAG_RISE_PRINT          = 0x00800,
+    MSG_FX_FLAG_GROW_PRINT          = 0x01000,
+    MSG_FX_FLAG_SIZE_JITTER         = 0x02000,
+    MSG_FX_FLAG_SIZE_WAVE           = 0x04000,
+    MSG_FX_FLAG_DROP_SHADOW         = 0x08000,
+    MSG_FX_FLAG_STATIC              = 0x10000
+};
+
+enum MsgStyles {
+    MSG_STYLE_RIGHT                 = 0x01,
+    MSG_STYLE_LEFT                  = 0x02,
+    MSG_STYLE_CENTER                = 0x03,
+    MSG_STYLE_TATTLE                = 0x04,
+    MSG_STYLE_CHOICE                = 0x05,
+    MSG_STYLE_INSPECT               = 0x06,
+    MSG_STYLE_SIGN                  = 0x07,
+    MSG_STYLE_LAMPPOST              = 0x08,
+    MSG_STYLE_POSTCARD              = 0x09,
+    MSG_STYLE_POPUP                 = 0x0A,
+    MSG_STYLE_B                     = 0x0B,
+    MSG_STYLE_UPGRADE               = 0x0C,
+    MSG_STYLE_NARRATE               = 0x0D,
+    MSG_STYLE_EPILOGUE              = 0x0E,
+    MSG_STYLE_F                     = 0x0F
+};
+
+enum MsgFonts {
+    MSG_FONT_NORMAL                 = 0,
+    MSG_FONT_MENU                   = 1,
+    MSG_FONT_TITLE                  = 3,
+    MSG_FONT_SUBTITLE               = 4
+};
+
+enum MsgVoices {
+    MSG_VOICE_NORMAL                = 0,
+    MSG_VOICE_BOWSER                = 1,
+    MSG_VOICE_STAR                  = 2
+};
+
+enum MsgPrintModeFlags {
+    MSG_PRINT_FLAG_1                = 0x001,
+    MSG_PRINT_FLAG_2                = 0x002,
+    MSG_PRINT_FLAG_10               = 0x010,
+    MSG_PRINT_FLAG_20               = 0x020,
+    MSG_PRINT_FLAG_40               = 0x040,
+    MSG_PRINT_FLAG_80               = 0x080,
+    MSG_PRINT_FLAG_100              = 0x100,
+};
+
+enum MsgStateFlags {
+    MSG_STATE_FLAG_1                = 0x000001,
+    MSG_STATE_FLAG_2                = 0x000002,
+    MSG_STATE_FLAG_4                = 0x000004,
+    MSG_STATE_FLAG_10               = 0x000010,
+    MSG_STATE_FLAG_20               = 0x000020,
+    MSG_STATE_FLAG_40               = 0x000040,
+    MSG_STATE_FLAG_80               = 0x000080,
+    MSG_STATE_FLAG_100              = 0x000100,
+    MSG_STATE_FLAG_4000             = 0x004000,
+    MSG_STATE_FLAG_8000             = 0x008000,
+    MSG_STATE_FLAG_10000            = 0x010000,
+    MSG_STATE_FLAG_20000            = 0x020000,
+    MSG_STATE_FLAG_40000            = 0x040000,
+    MSG_STATE_FLAG_80000            = 0x080000,
+    MSG_STATE_FLAG_800000           = 0x800000,
+};
+
+enum MsgDelayFlags {
+    MSG_DELAY_FLAG_1                = 0x000001,
+    MSG_DELAY_FLAG_2                = 0x000002,
+    MSG_DELAY_FLAG_4                = 0x000004,
+};
+
+enum MsgWindowStates {
+    MSG_WINDOW_STATE_DONE               = 0x0,
+    MSG_WINDOW_STATE_INIT               = 0x1,
+    MSG_WINDOW_STATE_OPENING            = 0x2,
+    MSG_WINDOW_STATE_CLOSING            = 0x3,
+    MSG_WINDOW_STATE_PRINTING           = 0x4,
+    MSG_WINDOW_STATE_WAITING            = 0x5,
+    MSG_WINDOW_STATE_SCROLLING          = 0x6,
+    MSG_WINDOW_STATE_WAITING_FOR_CHOICE = 0x7,
+    MSG_WINDOW_STATE_SCROLLING_BACK     = 0x8,
+    MSG_WINDOW_STATE_VIEWING_PREV       = 0x9,
+    MSG_WINDOW_STATE_A                  = 0xA,
+    MSG_WINDOW_STATE_B                  = 0xB,
+    MSG_WINDOW_STATE_C                  = 0xC,
+    MSG_WINDOW_STATE_D                  = 0xD,
+    MSG_WINDOW_STATE_E                  = 0xE,
 };
 
 #endif

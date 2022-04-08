@@ -33,45 +33,37 @@ ApiStatus func_80240000_B1B570(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-// float shenanigans
-#ifdef NON_EQUIVALENT
-ApiStatus func_802400FC_B1B66C(Evt* script, s32 isInitialCall) {
-    Npc* npc = get_npc_safe(NPC_PARTNER);
-    f32 angle;
+ApiStatus func_802400FC_B1B66C(Evt *script, s32 isInitialCall)
+{
+    Npc *npc = get_npc_safe(NPC_PARTNER);
+    f32 angle, sinAngle, cosAngle;
     f32 dist;
-    f32 product1;
-    f32 product2;
-    f32 cos1;
-    f32 sin1;
-    f32 sin2;
-    f32 cos2;
-    f32 var1;
-
+    f32 x0, x1;
+    f32 z0, z1;
+    
     if (npc == NULL) {
         return ApiStatus_DONE2;
     }
-
+    
     dist = dist2D(npc->pos.x, npc->pos.z, -250.0f, -100.0f);
-
-    var1 = evt_get_variable(script, 0 - 30000000) - 1;
-    angle = var1 * TAU / 360.0f;
-    sin1 = sin_rad(angle);
-    cos1 = cos_rad(angle);
-    product1 = dist * cos1;
-    product2 = dist * -sin1;
-
-    var1 = evt_get_variable(script, EVT_VAR(0));
-    angle = (var1 * TAU) / 360.0f;
-    sin2 = sin_rad(angle);
-    cos2 = cos_rad(angle);
-    npc->pos.x += (dist * cos2) - product1;
-    npc->pos.z += (dist * -sin2) - product2;
-
+    
+    angle = evt_get_variable(script, LW(0)) - 1;
+    sinAngle = sin_rad((angle * TAU) / 360.0f);
+    cosAngle = cos_rad((angle * TAU) / 360.0f);
+    x0 = dist * cosAngle;
+    z0 = dist * -sinAngle;
+    
+    angle = evt_get_variable(script, LW(0));
+    sinAngle = sin_rad((angle * TAU) / 360.0f);
+    cosAngle = cos_rad((angle * TAU) / 360.0f);
+    x1 = dist * cosAngle;
+    z1 = dist * -sinAngle;
+    
+    npc->pos.x += x1 - x0;
+    npc->pos.z += z1 - z0;
+    
     return ApiStatus_DONE2;
 }
-#else
-INCLUDE_ASM(s32, "world/area_tst/tst_04/B1B570", func_802400FC_B1B66C);
-#endif
 
 ApiStatus func_80240260_B1B7D0(Evt* script, s32 isInitialCall) {
     script->array[0] = (s32) create_generic_entity_frontUI(NULL, func_8024029C_B1B80C);
@@ -111,7 +103,7 @@ void func_80240360_B1B8D0(void* data) {
     Matrix4f scale;
 
     guRotateF(rotation, yaw, 0.0f, -1.0f, 0.0f);
-    guRotateF(main, clamp_angle(playerStatus->unk_8C), 0.0f, 0.0f, 1.0f);
+    guRotateF(main, clamp_angle(playerStatus->pitch), 0.0f, 0.0f, 1.0f);
     guMtxCatF(rotation, main, main);
     guRotateF(rotation, yaw, 0.0f, 1.0f, 0.0f);
     guMtxCatF(main, rotation, main);

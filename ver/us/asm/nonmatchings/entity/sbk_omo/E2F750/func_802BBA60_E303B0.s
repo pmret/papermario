@@ -193,8 +193,8 @@ glabel func_802BBA60_E303B0
 /* E30650 802BBD00 00431024 */  and       $v0, $v0, $v1
 /* E30654 802BBD04 10400003 */  beqz      $v0, .L802BBD14
 /* E30658 802BBD08 00000000 */   nop
-/* E3065C 802BBD0C 3C018011 */  lui       $at, %hi(D_8010C954)
-/* E30660 802BBD10 AC31C954 */  sw        $s1, %lo(D_8010C954)($at)
+/* E3065C 802BBD0C 3C018011 */  lui       $at, %hi(TweesterTouchingPartner)
+/* E30660 802BBD10 AC31C954 */  sw        $s1, %lo(TweesterTouchingPartner)($at)
 .L802BBD14:
 /* E30664 802BBD14 0C04D07A */  jal       is_picking_up_item
 /* E30668 802BBD18 00000000 */   nop
@@ -225,8 +225,8 @@ glabel func_802BBA60_E303B0
 /* E306CC 802BBD7C 45000007 */  bc1f      .L802BBD9C
 /* E306D0 802BBD80 2404001F */   addiu    $a0, $zero, 0x1f
 /* E306D4 802BBD84 8E420004 */  lw        $v0, 4($s2)
-/* E306D8 802BBD88 3C018011 */  lui       $at, %hi(D_8010C934)
-/* E306DC 802BBD8C AC31C934 */  sw        $s1, %lo(D_8010C934)($at)
+/* E306D8 802BBD88 3C018011 */  lui       $at, %hi(TweesterTouchingPlayer)
+/* E306DC 802BBD8C AC31C934 */  sw        $s1, %lo(TweesterTouchingPlayer)($at)
 /* E306E0 802BBD90 34420004 */  ori       $v0, $v0, 4
 /* E306E4 802BBD94 0C039769 */  jal       set_action_state
 /* E306E8 802BBD98 AE420004 */   sw       $v0, 4($s2)

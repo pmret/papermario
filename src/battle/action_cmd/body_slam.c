@@ -34,29 +34,29 @@ ApiStatus N(CreateHudElements)(Evt* script, s32 isInitialCall) {
     actionCommandStatus->hudElementX = -48;
     actionCommandStatus->hudElementY = 80;
 
-    hudElement = create_hud_element(HudScript_AButton);
+    hudElement = hud_element_create(HudScript_AButton);
     actionCommandStatus->hudElements[0] = hudElement;
-    set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
-    set_hud_element_render_depth(hudElement, 0);
-    set_hud_element_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+    hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
+    hud_element_set_render_depth(hudElement, 0);
+    hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
-    hudElement = create_hud_element(HudScript_BlueMeter);
+    hudElement = hud_element_create(HudScript_BlueMeter);
     actionCommandStatus->hudElements[1] = hudElement;
-    set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
-    set_hud_element_render_depth(hudElement, 0);
-    set_hud_element_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+    hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
+    hud_element_set_render_depth(hudElement, 0);
+    hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
-    hudElement = create_hud_element(HudScript_FillGaugeResult);
+    hudElement = hud_element_create(HudScript_FillGaugeResult);
     actionCommandStatus->hudElements[3] = hudElement;
-    set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
-    set_hud_element_render_depth(hudElement, 0);
-    set_hud_element_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+    hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
+    hud_element_set_render_depth(hudElement, 0);
+    hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
-    hudElement = create_hud_element(HudScript_TimingWait);
+    hudElement = hud_element_create(HudScript_TimingWait);
     actionCommandStatus->hudElements[2] = hudElement;
-    set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX + 41, actionCommandStatus->hudElementY + 22);
-    set_hud_element_render_depth(hudElement, 0);
-    set_hud_element_flags(hudElement, HUD_ELEMENT_FLAGS_80);
+    hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX + 41, actionCommandStatus->hudElementY + 22);
+    hud_element_set_render_depth(hudElement, 0);
+    hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80);
     return ApiStatus_DONE2;
 }
 
@@ -68,18 +68,18 @@ void N(draw_hud_elements)(void) {
     s32 x, y;
     s32 hudElement;
 
-    draw_hud_element_clipped(gActionCommandStatus.hudElements[0]);
+    hud_element_draw_clipped(gActionCommandStatus.hudElements[0]);
     hudElement = gActionCommandStatus.hudElements[1];
-    draw_hud_element_clipped(hudElement);
-    get_hud_element_render_pos(hudElement, &x, &y);
-    draw_hud_element_clipped(gActionCommandStatus.hudElements[3]);
+    hud_element_draw_clipped(hudElement);
+    hud_element_get_render_pos(hudElement, &x, &y);
+    hud_element_draw_clipped(gActionCommandStatus.hudElements[3]);
     func_80268770(x, y, gActionCommandStatus.barFillLevel / 100);
-    draw_hud_element_clipped(gActionCommandStatus.hudElements[2]);
+    hud_element_draw_clipped(gActionCommandStatus.hudElements[2]);
 }
 
 void N(free_hud_elements)(void) {
-	free_hud_element(gActionCommandStatus.hudElements[0]);
-	free_hud_element(gActionCommandStatus.hudElements[1]);
-	free_hud_element(gActionCommandStatus.hudElements[2]);
-	free_hud_element(gActionCommandStatus.hudElements[3]);
+	hud_element_free(gActionCommandStatus.hudElements[0]);
+	hud_element_free(gActionCommandStatus.hudElements[1]);
+	hud_element_free(gActionCommandStatus.hudElements[2]);
+	hud_element_free(gActionCommandStatus.hudElements[3]);
 }

@@ -261,7 +261,11 @@ typedef struct Enemy {
     /* 0x60 */ s32 defeatScriptID;
     /* 0x64 */ UNK_PTR unk_64;
     /* 0x68 */ char unk_68[4];
-    /* 0x6C */ s32 varTable[16];
+    /* 0x6C */ union {
+    /*      */      s32 varTable[16];
+    /*      */      f32 varTableF[16];
+    /*      */      void* varTablePtr[16];
+    /*      */ };
     /* 0xAC */ u8 unk_AC;
     /* 0xAD */ char unk_AD[3];
     /* 0xB0 */ s32 unk_B0;
@@ -324,7 +328,7 @@ s32 func_800397E8(Npc* npc, f32 arg1);
 /// Updates all NPCs.
 void update_npcs(void);
 
-f32 npc_get_render_yaw(void);
+f32 npc_get_render_yaw(Npc* npc);
 
 void appendGfx_npc(Npc* npc);
 
@@ -366,17 +370,17 @@ void npc_set_palswap_1(Npc* npc, s32 palIndexA, s32 palIndexB, s32 timeHoldA, s3
 
 void npc_set_palswap_2(Npc* npc, s32 timeHoldB, s32 timeBA, s32 palIndexC, s32 palIndexD);
 
-void npc_draw_with_palswap(Npc* npc, s32 arg1, s32 arg2);
+void npc_draw_with_palswap(Npc* npc, s32 arg1, Matrix4f mtx);
 
-void npc_draw_palswap_mode_0(Npc* npc, s32 arg1, s32 arg2);
+void npc_draw_palswap_mode_0(Npc* npc, s32 arg1, Matrix4f mtx);
 
-s32 npc_draw_palswap_mode_1(Npc*, s32, s32);
+s32 npc_draw_palswap_mode_1(Npc*, s32, Matrix4f mtx);
 
-s32 npc_blend_palette_colors(void);
+u16 npc_blend_palette_colors(u16 colorA, u16 colorB, s32 lerpAlpha);
 
-s32 npc_draw_palswap_mode_2(Npc*, s32, s32, s32);
+s32 npc_draw_palswap_mode_2(Npc*, s32, s32, Matrix4f mtx);
 
-s32 npc_draw_palswap_mode_4(Npc*, s32, s32);
+s32 npc_draw_palswap_mode_4(Npc*, s32, Matrix4f mtx);
 
 void npc_set_decoration(Npc* npc, s32 idx, s32 decorationType);
 
@@ -452,19 +456,19 @@ void func_8003D3BC(Npc* npc);
 
 void func_8003D624(Npc* npc, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
 
-void func_8003D660(Npc* npc, s32 arg1);
+void func_8003D660(Npc* npc, s32);
 
-void func_8003D788(Npc* npc, s32 arg1);
+void func_8003D788(Npc* npc, s32);
 
-void func_8003DA38(Npc* npc, s32 arg1);
+void func_8003DA38(Npc* npc, s32);
 
-s32 func_8003DC38(void);
+s32 func_8003DC38(Npc*, s32);
 
-void func_8003DFA0(Npc* npc);
+void func_8003DFA0(Npc* npc, s32);
 
-void func_8003E0D4(Npc* npc);
+void func_8003E0D4(Npc* npc, s32);
 
-void func_8003E1D0(Npc* npc);
+void func_8003E1D0(Npc* npc, s32);
 
 /// Duplicate of set_defeated().
 void COPY_set_defeated(s32 mapID, s32 encounterID);

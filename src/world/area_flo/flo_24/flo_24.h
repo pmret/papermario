@@ -7,8 +7,8 @@
 #define NAMESPACE flo_24
 
 ApiStatus N(TransformFoliage)(Evt* script, s32 isInitialCall);
-ApiStatus N(UnkTexturePanFunc)(Evt* script, s32 isInitialCall);
-ApiStatus N(UnkTexturePanFunc2)(Evt* script, s32 isInitialCall);
+ApiStatus N(UpdateTexturePanSmooth)(Evt* script, s32 isInitialCall);
+ApiStatus N(UpdateTexturePanStepped)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_80240000_CF0940)(Evt* script, s32 isInitialCall);
 
 extern EvtScript N(80241728);

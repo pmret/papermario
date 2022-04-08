@@ -1,8 +1,6 @@
 #include "kzn_19.h"
 
-#include "world/common/UnkTexturePanFunc.inc.c"
-
-#include "world/common/UnkTexturePanFunc2.inc.c"
+#include "world/common/UpdateTexturePan.inc.c"
 
 #include "world/common/StarSpiritEffectFunc.inc.c"
 

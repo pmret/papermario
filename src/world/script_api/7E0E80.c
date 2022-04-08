@@ -350,7 +350,7 @@ ApiStatus ShowShopPurchaseDialog(Evt* script, s32 isInitialCall) {
             shopOwnerScript = D_8028652C;
             if (shopOwnerScript == NULL || !does_script_exist(shopOwnerScript->id)) {
                 decrement_status_menu_disabled();
-                func_800E96C8();
+                hide_coin_counter_immediately();
                 return ApiStatus_DONE1;
             }
             break;
@@ -604,9 +604,9 @@ ApiStatus ShowShopOwnerDialog(Evt* script, s32 isInitialCall) {
                 if (D_80286538->currentOption == 0) {
                     script->functionTemp[1] = shop_owner_end_speech();
                     script->functionTemp[0] = 201;
-                    func_800E96C8();
+                    hide_coin_counter_immediately();
                 } else {
-                    func_800E96C8();
+                    hide_coin_counter_immediately();
                     script->functionTemp[1] = shop_owner_reset_speech(22);
                     script->functionTemp[0] = 9;
                 }
@@ -769,11 +769,11 @@ void draw_shop_items(void) {
     ShopItemEntity* shopItemEntities;
 
     if (shop->flags & SHOP_FLAGS_1) {
-        set_window_update(10, basic_window_update);
-        set_window_update(11, basic_window_update);
+        set_window_update(WINDOW_ID_10, basic_window_update);
+        set_window_update(WINDOW_ID_11, basic_window_update);
     } else {
-        set_window_update(10, basic_hidden_window_update);
-        set_window_update(11, basic_hidden_window_update);
+        set_window_update(WINDOW_ID_10, basic_hidden_window_update);
+        set_window_update(WINDOW_ID_11, basic_hidden_window_update);
     }
 
     if (shop->flags & SHOP_FLAGS_1) {
@@ -809,9 +809,9 @@ void draw_shop_items(void) {
                 }
 
                 if (i == shop->currentItemSlot) {
-                    set_hud_element_render_pos(shop->costIconID, (xTemp + xOffset) - 6, yTemp + 5);
-                    set_hud_element_scale(shop->costIconID, 0.7f);
-                    draw_hud_element_clipped(shop->costIconID);
+                    hud_element_set_render_pos(shop->costIconID, (xTemp + xOffset) - 6, yTemp + 5);
+                    hud_element_set_scale(shop->costIconID, 0.7f);
+                    hud_element_draw_clipped(shop->costIconID);
                 }
             }
         }
@@ -898,9 +898,9 @@ s32 MakeShop(Evt* script, s32 isInitialCall) {
         numShopItems++;
     }
 
-    shop->costIconID = create_hud_element(&HudScript_Item_Coin);
-    set_hud_element_flags(shop->costIconID, HUD_ELEMENT_FLAGS_80);
-    clear_hud_element_flags(shop->costIconID, HUD_ELEMENT_FLAGS_8000);
+    shop->costIconID = hud_element_create(&HudScript_Item_Coin);
+    hud_element_set_flags(shop->costIconID, HUD_ELEMENT_FLAGS_80);
+    hud_element_clear_flags(shop->costIconID, HUD_ELEMENT_FLAGS_FILTER_TEX);
     get_generic_entity(create_generic_entity_frontUI(NULL, draw_shop_items));
     set_window_properties(0xA, 100, 66, 120, 28, 0, shop_draw_item_name, NULL, -1);
     set_window_properties(0xB, 32, 184, 256, 32, 1, shop_draw_item_desc, NULL, -1);

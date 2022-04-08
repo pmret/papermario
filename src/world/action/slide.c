@@ -118,7 +118,7 @@ void func_802B6060_E27570(void) {
                     sfx_play_sound_at_player(SOUND_172, 0);
                     suggest_player_anim_setUnkFlag(0x10031);
                     playerStatus->fallState = 6;
-                    playerStatus->framesOnGround = 15;
+                    playerStatus->currentStateTime = 15;
                     playerStatus->currentSpeed = 0.0f;
                     playerStatus->position.y = sp2C;
                 }
@@ -170,7 +170,7 @@ void func_802B6060_E27570(void) {
             if (playerStatus->unk_BC != 0) {
                 suggest_player_anim_setUnkFlag(0x10031);
                 sfx_play_sound_at_player(SOUND_172, 0);
-                playerStatus->framesOnGround = 15;
+                playerStatus->currentStateTime = 15;
                 playerStatus->fallState++;
             }
             break;
@@ -179,7 +179,7 @@ void func_802B6060_E27570(void) {
             if (playerStatus->currentSpeed <= 0.0f) {
                 playerStatus->currentSpeed = 0.0f;
             }
-            if (--playerStatus->framesOnGround == 0) {
+            if (--playerStatus->currentStateTime == 0) {
                 playerStatus->fallState++;
             }
             break;

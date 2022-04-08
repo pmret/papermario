@@ -5,13 +5,13 @@ extern EntityBlueprint Entity_SuperBlockContent;
 
 void entity_SuperBlockContent_setupGfx();
 
-f32 entity_SuperBlockContent_get_previous_yaw(SuperBlockContentData* data, s32 arg1) {
-    s32 idx = data->yawBufferPos - arg1;
+f32 entity_SuperBlockContent_get_previous_yaw(SuperBlockContentData* data, s32 lagTime) {
+    s32 bufIdx = data->yawBufferPos - lagTime;
 
-    if (idx < 0) {
-        idx += 20;
+    if (bufIdx < 0) {
+        bufIdx += ARRAY_COUNT(data->yawBuffer);
     }
-    return data->yawBuffer[idx];
+    return data->yawBuffer[bufIdx];
 }
 
 void entity_upgrade_block_hide_content(s32 entityIndex) {
@@ -36,8 +36,7 @@ void entity_upgrade_block_check_if_inactive(Entity* entity) {
         Entity* childEntity;
         SuperBlockContentData* childData;
 
-        parentData->childEntityIndex = create_entity(&Entity_SuperBlockContent, entity->position.x, entity->position.y, entity->position.z, 0.0f,
-                                        0x80000000);
+        parentData->childEntityIndex = create_entity(&Entity_SuperBlockContent, entity->position.x, entity->position.y, entity->position.z, 0.0f, MAKE_ENTITY_END);
         childEntity = get_entity_by_index(parentData->childEntityIndex);
         childData = childEntity->dataBuf.superBlockContent;
         childData->parentEntityIndex = entity->listIndex;

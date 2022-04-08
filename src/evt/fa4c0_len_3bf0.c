@@ -394,7 +394,7 @@ ApiStatus DropItemEntity(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus DropItemEntityB(Evt* script, s32 isInitialCall) {
+ApiStatus DropTinyItemEntity(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 itemID = evt_get_variable(script, *args++);
     s32 x = evt_get_variable(script, *args++);
@@ -404,7 +404,7 @@ ApiStatus DropItemEntityB(Evt* script, s32 isInitialCall) {
     s32 pickupVar = evt_get_variable_index(script, *args++);
 
     script->varTable[0] = make_item_entity_nodelay(itemID, x, y, z, itemSpawnMode, pickupVar);
-    set_item_entity_flags(script->varTable[0], 0x4000);
+    set_item_entity_flags(script->varTable[0], ITEM_ENTITY_FLAGS_TINY);
     return ApiStatus_DONE2;
 }
 

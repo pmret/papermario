@@ -14,9 +14,7 @@
 
 #include "world/common/SomeXYZFunc2.inc.c"
 
-#include "world/common/UnkTexturePanFunc.inc.c"
-
-#include "world/common/UnkTexturePanFunc2.inc.c"
+#include "world/common/UpdateTexturePan.inc.c"
 
 ApiStatus func_802405EC_E1EA4C(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
@@ -53,7 +51,7 @@ ApiStatus func_80240688_E1EAE8(Evt* script, s32 isInitialCall) {
     clear_model_data();
     clear_sprite_shading_data();
     reset_background_settings();
-    clear_hud_element_cache();
+    hud_element_clear_cache();
     clear_trigger_data();
     clear_printers();
     clear_entity_data(0);

@@ -76,7 +76,7 @@ extern s32 gCurrentCameraID;
 extern CollisionData gCollisionData;
 
 extern s8 D_800A0900;
-extern f32 D_800F7B60[];
+extern f32 GravityParamsStartFall[];
 extern s16 D_800F7B80;
 extern EncounterStatus gCurrentEncounter;
 extern u8* D_801512F0;
@@ -90,6 +90,7 @@ extern s16 D_8010CD10;
 extern s16 D_8010CD12;
 extern s32 D_8010CD20;
 extern s32 D_801595A0;
+extern Struct8015A578 D_8015A578;
 
 extern BackgroundHeader gBackgroundImage;
 
@@ -100,18 +101,18 @@ extern MessagePrintState* D_802DB268;
 extern ShadowBlueprint CircularShadowA;
 extern ShadowBlueprint CircularShadowB;
 extern ShadowBlueprint SquareShadow;
-extern s32 SaveBlockTutorialMessagePrinterClosed;
-extern s32 SaveBlockResultMessagePrinterClosed;
-extern MessagePrintState* SaveBlockTutorialMessagePrinter;
-extern MessagePrintState* SaveBlockResultMessagePrinter;
+extern s32 SaveBlockTutorialPrinterClosed;
+extern s32 SaveBlockResultPrinterClosed;
+extern MessagePrintState* SaveBlockTutorialPrinter;
+extern MessagePrintState* SaveBlockResultPrinter;
 extern s32 D_802E99DC;
 
-extern Entity* D_802EB3A0;
+extern Entity* SwitchToLink;
 extern s32 CreateEntityVarArgBuffer[3]; // not size 3
 
-extern f32 D_800F7B70[4];
+extern f32 DefaultMoveSpeeds[4];
 
-extern TempSetZoneEnabled* D_800D91D4;
+extern CollisionData gZoneCollisionData;
 
 // Animation related
 extern AnimatedMeshList* gCurrentAnimMeshListPtr;
@@ -161,10 +162,10 @@ extern s32 D_802A3838;
 extern s32 gGameState;
 extern s16 gNpcCount;
 extern s32 gOverrideFlags;
-extern u16 D_8009A6A0;
-extern u16 D_8009A6A2;
-extern u16 D_8009A6A4;
-extern u16 D_8009A6A6;
+extern s16 D_8009A6A0;
+extern s16 D_8009A6A2;
+extern s16 D_8009A6A4;
+extern s16 D_8009A6A6;
 
 extern s32* D_800A0914;
 extern s32* D_800A0918;
@@ -201,7 +202,7 @@ extern s8 D_8014C248[];
 
 extern UNK_FUN_PTR(D_8010C920);
 extern UNK_FUN_PTR(D_8010C940);
-extern Entity* D_8010C954;
+extern Entity* TweesterTouchingPartner;
 extern UNK_FUN_PTR(D_8010C958);
 extern s32 D_8010C95C;
 extern s32 D_8010C96C;
@@ -294,8 +295,8 @@ extern s32 D_80292110[];
 
 extern s32 D_8029FBD0;
 
-extern s32 D_800F7BE8[];
-extern s32 D_800F7BBC[];
+extern s32 KoopatrolDisguiseExtraAnims[];
+extern s32 HammerBroDisguiseExtraAnims[];
 
 //various
 extern s32 D_802C05CC;

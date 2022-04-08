@@ -12,6 +12,6 @@ void entity_Signpost_idle(Entity* entity) {
         }
     } else {
         entity->flags &= ~ENTITY_FLAGS_SHOWS_INSPECT_PROMPT;
-        playerStatus->unk_C6 = -1;
+        playerStatus->interactingWithID = -1;
     }
 }

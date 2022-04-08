@@ -7,7 +7,7 @@ ApiStatus N(UnkFunc11)(Evt* script, s32 isInitialCall) {
     CollisionStatus* collisionStatus = &gCollisionStatus;
 
     if (((collisionStatus->pushingAgainstWall != var) && (playerStatus->actionState == 20)) ||
-        playerStatus->enableCollisionOverlapsCheck || playerStatus->statusMenuCounterinputEnabledCounter) {
+        playerStatus->enableCollisionOverlapsCheck || playerStatus->inputEnabledCounter) {
         set_action_state(0);
         script->varTable[0] = 0;
         return ApiStatus_DONE2;

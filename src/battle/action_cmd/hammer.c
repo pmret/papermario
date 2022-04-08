@@ -36,48 +36,48 @@ ApiStatus N(CreateHudElements)(Evt* script, s32 isInitialCall) {
     actionCommandStatus->unk_60 = 0;
     actionCommandStatus->hudElementY = 96;
 
-    hudElement = create_hud_element(HudScript_TimingBar1Chance);
+    hudElement = hud_element_create(HudScript_TimingBar1Chance);
     actionCommandStatus->hudElements[0] = hudElement;
-    set_hud_element_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
-    set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
-    set_hud_element_render_depth(hudElement, 10);
+    hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+    hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
+    hud_element_set_render_depth(hudElement, 10);
 
-    hudElement = create_hud_element(HudScript_TimingWait);
+    hudElement = hud_element_create(HudScript_TimingWait);
     actionCommandStatus->hudElements[1] = hudElement;
-    set_hud_element_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
-    set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
-    set_hud_element_render_depth(hudElement, 0);
+    hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+    hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
+    hud_element_set_render_depth(hudElement, 0);
 
-    hudElement = create_hud_element(HudScript_TimingCharge4a);
+    hudElement = hud_element_create(HudScript_TimingCharge4a);
     actionCommandStatus->hudElements[2] = hudElement;
-    set_hud_element_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
-    set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
-    set_hud_element_render_depth(hudElement, 0);
+    hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+    hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
+    hud_element_set_render_depth(hudElement, 0);
 
-    hudElement = create_hud_element(HudScript_TimingCharge4b);
+    hudElement = hud_element_create(HudScript_TimingCharge4b);
     actionCommandStatus->hudElements[3] = hudElement;
-    set_hud_element_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
-    set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
-    set_hud_element_render_depth(hudElement, 0);
+    hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+    hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
+    hud_element_set_render_depth(hudElement, 0);
 
-    hudElement = create_hud_element(HudScript_TimingCharge4c);
+    hudElement = hud_element_create(HudScript_TimingCharge4c);
     actionCommandStatus->hudElements[4] = hudElement;
-    set_hud_element_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
-    set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
-    set_hud_element_render_depth(hudElement, 0);
+    hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+    hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
+    hud_element_set_render_depth(hudElement, 0);
 
-    hudElement = create_hud_element(HudScript_StickHoldLeft);
+    hudElement = hud_element_create(HudScript_StickHoldLeft);
     actionCommandStatus->hudElements[5] = hudElement;
-    set_hud_element_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
-    set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
-    set_hud_element_render_depth(hudElement, 0);
+    hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+    hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
+    hud_element_set_render_depth(hudElement, 0);
 
-    hudElement = create_hud_element(HudScript_RightOn);
+    hudElement = hud_element_create(HudScript_RightOn);
     actionCommandStatus->hudElements[6] = hudElement;
-    set_hud_element_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
-    set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
-    set_hud_element_render_depth(hudElement, 0);
-    set_hud_element_alpha(hudElement, 0xFF);
+    hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+    hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
+    hud_element_set_render_depth(hudElement, 0);
+    hud_element_set_alpha(hudElement, 0xFF);
 
     return ApiStatus_DONE2;
 }
@@ -118,21 +118,21 @@ ApiStatus func_802A9258_422258(Evt* script, s32 isInitialCall) {
 INCLUDE_ASM(s32, "battle/action_cmd/hammer", func_802A936C_42236C);
 
 void N(draw_hud_elements)(void) {
-    draw_hud_element_clipped(gActionCommandStatus.hudElements[0]);
-    draw_hud_element_clipped(gActionCommandStatus.hudElements[1]);
-    draw_hud_element_clipped(gActionCommandStatus.hudElements[2]);
-    draw_hud_element_clipped(gActionCommandStatus.hudElements[3]);
-    draw_hud_element_clipped(gActionCommandStatus.hudElements[4]);
-    draw_hud_element_clipped(gActionCommandStatus.hudElements[5]);
-    draw_hud_element_clipped(gActionCommandStatus.hudElements[6]);
+    hud_element_draw_clipped(gActionCommandStatus.hudElements[0]);
+    hud_element_draw_clipped(gActionCommandStatus.hudElements[1]);
+    hud_element_draw_clipped(gActionCommandStatus.hudElements[2]);
+    hud_element_draw_clipped(gActionCommandStatus.hudElements[3]);
+    hud_element_draw_clipped(gActionCommandStatus.hudElements[4]);
+    hud_element_draw_clipped(gActionCommandStatus.hudElements[5]);
+    hud_element_draw_clipped(gActionCommandStatus.hudElements[6]);
 }
 
 void N(free_hud_elements)(void) {
-    free_hud_element(gActionCommandStatus.hudElements[0]);
-    free_hud_element(gActionCommandStatus.hudElements[1]);
-    free_hud_element(gActionCommandStatus.hudElements[2]);
-    free_hud_element(gActionCommandStatus.hudElements[3]);
-    free_hud_element(gActionCommandStatus.hudElements[4]);
-    free_hud_element(gActionCommandStatus.hudElements[5]);
-    free_hud_element(gActionCommandStatus.hudElements[6]);
+    hud_element_free(gActionCommandStatus.hudElements[0]);
+    hud_element_free(gActionCommandStatus.hudElements[1]);
+    hud_element_free(gActionCommandStatus.hudElements[2]);
+    hud_element_free(gActionCommandStatus.hudElements[3]);
+    hud_element_free(gActionCommandStatus.hudElements[4]);
+    hud_element_free(gActionCommandStatus.hudElements[5]);
+    hud_element_free(gActionCommandStatus.hudElements[6]);
 }

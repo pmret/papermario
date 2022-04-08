@@ -2,6 +2,8 @@
 
 extern Message* gFileMenuMessages[35];
 
+extern s32 D_8024B74C[];
+
 INCLUDE_ASM(s32, "169BE0", filemenu_draw_char);
 
 INCLUDE_ASM(s32, "169BE0", filemenu_draw_message);

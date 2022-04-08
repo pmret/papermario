@@ -13,8 +13,8 @@ glabel func_8024AFE4
 /* 1798C8 8024AFE8 AFB00020 */  sw        $s0, 0x20($sp)
 /* 1798CC 8024AFEC 3C10800B */  lui       $s0, %hi(gCameras+0x558)
 /* 1798D0 8024AFF0 261022D8 */  addiu     $s0, $s0, %lo(gCameras+0x558)
-/* 1798D4 8024AFF4 3C02802A */  lui       $v0, %hi(D_8029F27C)
-/* 1798D8 8024AFF8 9442F27C */  lhu       $v0, %lo(D_8029F27C)($v0)
+/* 1798D4 8024AFF4 3C02802A */  lui       $v0, %hi(BattleCam_TargetActor)
+/* 1798D8 8024AFF8 9442F27C */  lhu       $v0, %lo(BattleCam_TargetActor)($v0)
 /* 1798DC 8024AFFC 3C04800E */  lui       $a0, %hi(gBattleStatus)
 /* 1798E0 8024B000 2484C070 */  addiu     $a0, $a0, %lo(gBattleStatus)
 /* 1798E4 8024B004 AFBF0024 */  sw        $ra, 0x24($sp)
@@ -144,8 +144,8 @@ glabel func_8024AFE4
 /* 179AB4 8024B1D4 8042F2A6 */  lb        $v0, %lo(D_8029F2A6)($v0)
 /* 179AB8 8024B1D8 10400029 */  beqz      $v0, .L8024B280
 /* 179ABC 8024B1DC 00000000 */   nop
-/* 179AC0 8024B1E0 3C01802A */  lui       $at, %hi(D_8029F28C)
-/* 179AC4 8024B1E4 C422F28C */  lwc1      $f2, %lo(D_8029F28C)($at)
+/* 179AC0 8024B1E0 3C01802A */  lui       $at, %hi(BattleCam_TargetBoomLength)
+/* 179AC4 8024B1E4 C422F28C */  lwc1      $f2, %lo(BattleCam_TargetBoomLength)($at)
 /* 179AC8 8024B1E8 3C0143FA */  lui       $at, 0x43fa
 /* 179ACC 8024B1EC 44810000 */  mtc1      $at, $f0
 /* 179AD0 8024B1F0 00000000 */  nop
@@ -195,18 +195,18 @@ glabel func_8024AFE4
 /* 179B78 8024B298 00000000 */  nop
 /* 179B7C 8024B29C 46800020 */  cvt.s.w   $f0, $f0
 /* 179B80 8024B2A0 86020022 */  lh        $v0, 0x22($s0)
-/* 179B84 8024B2A4 3C01802A */  lui       $at, %hi(D_8029F28C)
-/* 179B88 8024B2A8 E420F28C */  swc1      $f0, %lo(D_8029F28C)($at)
+/* 179B84 8024B2A4 3C01802A */  lui       $at, %hi(BattleCam_TargetBoomLength)
+/* 179B88 8024B2A8 E420F28C */  swc1      $f0, %lo(BattleCam_TargetBoomLength)($at)
 /* 179B8C 8024B2AC 44820000 */  mtc1      $v0, $f0
 /* 179B90 8024B2B0 00000000 */  nop
 /* 179B94 8024B2B4 46800020 */  cvt.s.w   $f0, $f0
-/* 179B98 8024B2B8 3C01802A */  lui       $at, %hi(D_8029F294)
-/* 179B9C 8024B2BC E420F294 */  swc1      $f0, %lo(D_8029F294)($at)
+/* 179B98 8024B2B8 3C01802A */  lui       $at, %hi(BattleCam_TargetBoomPitch)
+/* 179B9C 8024B2BC E420F294 */  swc1      $f0, %lo(BattleCam_TargetBoomPitch)($at)
 /* 179BA0 8024B2C0 44830000 */  mtc1      $v1, $f0
 /* 179BA4 8024B2C4 00000000 */  nop
 /* 179BA8 8024B2C8 46800020 */  cvt.s.w   $f0, $f0
-/* 179BAC 8024B2CC 3C01802A */  lui       $at, %hi(D_8029F290)
-/* 179BB0 8024B2D0 E420F290 */  swc1      $f0, %lo(D_8029F290)($at)
+/* 179BAC 8024B2CC 3C01802A */  lui       $at, %hi(BattleCam_TargetBoomYaw)
+/* 179BB0 8024B2D0 E420F290 */  swc1      $f0, %lo(BattleCam_TargetBoomYaw)($at)
 /* 179BB4 8024B2D4 04820001 */  bltzl     $a0, .L8024B2DC
 /* 179BB8 8024B2D8 248400FF */   addiu    $a0, $a0, 0xff
 .L8024B2DC:
@@ -214,30 +214,30 @@ glabel func_8024AFE4
 /* 179BC0 8024B2E0 C6020054 */  lwc1      $f2, 0x54($s0)
 /* 179BC4 8024B2E4 C6040058 */  lwc1      $f4, 0x58($s0)
 /* 179BC8 8024B2E8 C606005C */  lwc1      $f6, 0x5c($s0)
-/* 179BCC 8024B2EC 3C03802A */  lui       $v1, %hi(D_8029F29E)
-/* 179BD0 8024B2F0 9463F29E */  lhu       $v1, %lo(D_8029F29E)($v1)
+/* 179BCC 8024B2EC 3C03802A */  lui       $v1, %hi(BattleCam_MoveTimeLeft)
+/* 179BD0 8024B2F0 9463F29E */  lhu       $v1, %lo(BattleCam_MoveTimeLeft)($v1)
 /* 179BD4 8024B2F4 44820000 */  mtc1      $v0, $f0
 /* 179BD8 8024B2F8 00000000 */  nop
 /* 179BDC 8024B2FC 46800020 */  cvt.s.w   $f0, $f0
-/* 179BE0 8024B300 3C01802A */  lui       $at, %hi(D_8029F298)
-/* 179BE4 8024B304 E420F298 */  swc1      $f0, %lo(D_8029F298)($at)
-/* 179BE8 8024B308 3C01802A */  lui       $at, %hi(D_8029F2A8)
-/* 179BEC 8024B30C E422F2A8 */  swc1      $f2, %lo(D_8029F2A8)($at)
-/* 179BF0 8024B310 3C01802A */  lui       $at, %hi(D_8029F2AC)
-/* 179BF4 8024B314 E424F2AC */  swc1      $f4, %lo(D_8029F2AC)($at)
-/* 179BF8 8024B318 3C01802A */  lui       $at, %hi(D_8029F2B0)
-/* 179BFC 8024B31C E426F2B0 */  swc1      $f6, %lo(D_8029F2B0)($at)
-/* 179C00 8024B320 3C01802A */  lui       $at, %hi(D_8029F2A0)
-/* 179C04 8024B324 A423F2A0 */  sh        $v1, %lo(D_8029F2A0)($at)
+/* 179BE0 8024B300 3C01802A */  lui       $at, %hi(BattleCam_TargetBoomZOffset)
+/* 179BE4 8024B304 E420F298 */  swc1      $f0, %lo(BattleCam_TargetBoomZOffset)($at)
+/* 179BE8 8024B308 3C01802A */  lui       $at, %hi(BattleCam_TargetPosX)
+/* 179BEC 8024B30C E422F2A8 */  swc1      $f2, %lo(BattleCam_TargetPosX)($at)
+/* 179BF0 8024B310 3C01802A */  lui       $at, %hi(BattleCam_TargetPosY)
+/* 179BF4 8024B314 E424F2AC */  swc1      $f4, %lo(BattleCam_TargetPosY)($at)
+/* 179BF8 8024B318 3C01802A */  lui       $at, %hi(BattleCam_TargetPosZ)
+/* 179BFC 8024B31C E426F2B0 */  swc1      $f6, %lo(BattleCam_TargetPosZ)($at)
+/* 179C00 8024B320 3C01802A */  lui       $at, %hi(BattleCam_MoveTimeTotal)
+/* 179C04 8024B324 A423F2A0 */  sh        $v1, %lo(BattleCam_MoveTimeTotal)($at)
 .L8024B328:
-/* 179C08 8024B328 3C02802A */  lui       $v0, %hi(D_8029F2A5)
-/* 179C0C 8024B32C 8042F2A5 */  lb        $v0, %lo(D_8029F2A5)($v0)
+/* 179C08 8024B328 3C02802A */  lui       $v0, %hi(BattleCam_UseLinearInterp)
+/* 179C0C 8024B32C 8042F2A5 */  lb        $v0, %lo(BattleCam_UseLinearInterp)($v0)
 /* 179C10 8024B330 14400027 */  bnez      $v0, .L8024B3D0
 /* 179C14 8024B334 00000000 */   nop
-/* 179C18 8024B338 3C02802A */  lui       $v0, %hi(D_8029F29E)
-/* 179C1C 8024B33C 8442F29E */  lh        $v0, %lo(D_8029F29E)($v0)
-/* 179C20 8024B340 3C03802A */  lui       $v1, %hi(D_8029F2A0)
-/* 179C24 8024B344 8463F2A0 */  lh        $v1, %lo(D_8029F2A0)($v1)
+/* 179C18 8024B338 3C02802A */  lui       $v0, %hi(BattleCam_MoveTimeLeft)
+/* 179C1C 8024B33C 8442F29E */  lh        $v0, %lo(BattleCam_MoveTimeLeft)($v0)
+/* 179C20 8024B340 3C03802A */  lui       $v1, %hi(BattleCam_MoveTimeTotal)
+/* 179C24 8024B344 8463F2A0 */  lh        $v1, %lo(BattleCam_MoveTimeTotal)($v1)
 /* 179C28 8024B348 3C013F80 */  lui       $at, 0x3f80
 /* 179C2C 8024B34C 4481C000 */  mtc1      $at, $f24
 /* 179C30 8024B350 4482E000 */  mtc1      $v0, $f28
@@ -273,10 +273,10 @@ glabel func_8024AFE4
 /* 179CA8 8024B3C8 08092CFF */  j         .L8024B3FC
 /* 179CAC 8024B3CC 4600C701 */   sub.s    $f28, $f24, $f0
 .L8024B3D0:
-/* 179CB0 8024B3D0 3C02802A */  lui       $v0, %hi(D_8029F29E)
-/* 179CB4 8024B3D4 8442F29E */  lh        $v0, %lo(D_8029F29E)($v0)
-/* 179CB8 8024B3D8 3C03802A */  lui       $v1, %hi(D_8029F2A0)
-/* 179CBC 8024B3DC 8463F2A0 */  lh        $v1, %lo(D_8029F2A0)($v1)
+/* 179CB0 8024B3D0 3C02802A */  lui       $v0, %hi(BattleCam_MoveTimeLeft)
+/* 179CB4 8024B3D4 8442F29E */  lh        $v0, %lo(BattleCam_MoveTimeLeft)($v0)
+/* 179CB8 8024B3D8 3C03802A */  lui       $v1, %hi(BattleCam_MoveTimeTotal)
+/* 179CBC 8024B3DC 8463F2A0 */  lh        $v1, %lo(BattleCam_MoveTimeTotal)($v1)
 /* 179CC0 8024B3E0 4482E000 */  mtc1      $v0, $f28
 /* 179CC4 8024B3E4 00000000 */  nop
 /* 179CC8 8024B3E8 4680E720 */  cvt.s.w   $f28, $f28
@@ -285,32 +285,32 @@ glabel func_8024AFE4
 /* 179CD4 8024B3F4 46800020 */  cvt.s.w   $f0, $f0
 /* 179CD8 8024B3F8 4600E703 */  div.s     $f28, $f28, $f0
 .L8024B3FC:
-/* 179CDC 8024B3FC 3C01802A */  lui       $at, %hi(D_8029F2A8)
-/* 179CE0 8024B400 C434F2A8 */  lwc1      $f20, %lo(D_8029F2A8)($at)
+/* 179CDC 8024B3FC 3C01802A */  lui       $at, %hi(BattleCam_TargetPosX)
+/* 179CE0 8024B400 C434F2A8 */  lwc1      $f20, %lo(BattleCam_TargetPosX)($at)
 /* 179CE4 8024B404 461CA502 */  mul.s     $f20, $f20, $f28
 /* 179CE8 8024B408 00000000 */  nop
-/* 179CEC 8024B40C 3C01802A */  lui       $at, %hi(D_8029F2AC)
-/* 179CF0 8024B410 C432F2AC */  lwc1      $f18, %lo(D_8029F2AC)($at)
+/* 179CEC 8024B40C 3C01802A */  lui       $at, %hi(BattleCam_TargetPosY)
+/* 179CF0 8024B410 C432F2AC */  lwc1      $f18, %lo(BattleCam_TargetPosY)($at)
 /* 179CF4 8024B414 461C9482 */  mul.s     $f18, $f18, $f28
 /* 179CF8 8024B418 00000000 */  nop
-/* 179CFC 8024B41C 3C01802A */  lui       $at, %hi(D_8029F2B0)
-/* 179D00 8024B420 C430F2B0 */  lwc1      $f16, %lo(D_8029F2B0)($at)
+/* 179CFC 8024B41C 3C01802A */  lui       $at, %hi(BattleCam_TargetPosZ)
+/* 179D00 8024B420 C430F2B0 */  lwc1      $f16, %lo(BattleCam_TargetPosZ)($at)
 /* 179D04 8024B424 461C8402 */  mul.s     $f16, $f16, $f28
 /* 179D08 8024B428 00000000 */  nop
-/* 179D0C 8024B42C 3C01802A */  lui       $at, %hi(D_8029F298)
-/* 179D10 8024B430 C42AF298 */  lwc1      $f10, %lo(D_8029F298)($at)
+/* 179D0C 8024B42C 3C01802A */  lui       $at, %hi(BattleCam_TargetBoomZOffset)
+/* 179D10 8024B430 C42AF298 */  lwc1      $f10, %lo(BattleCam_TargetBoomZOffset)($at)
 /* 179D14 8024B434 461C5282 */  mul.s     $f10, $f10, $f28
 /* 179D18 8024B438 00000000 */  nop
-/* 179D1C 8024B43C 3C01802A */  lui       $at, %hi(D_8029F28C)
-/* 179D20 8024B440 C42EF28C */  lwc1      $f14, %lo(D_8029F28C)($at)
+/* 179D1C 8024B43C 3C01802A */  lui       $at, %hi(BattleCam_TargetBoomLength)
+/* 179D20 8024B440 C42EF28C */  lwc1      $f14, %lo(BattleCam_TargetBoomLength)($at)
 /* 179D24 8024B444 461C7382 */  mul.s     $f14, $f14, $f28
 /* 179D28 8024B448 00000000 */  nop
-/* 179D2C 8024B44C 3C01802A */  lui       $at, %hi(D_8029F290)
-/* 179D30 8024B450 C428F290 */  lwc1      $f8, %lo(D_8029F290)($at)
+/* 179D2C 8024B44C 3C01802A */  lui       $at, %hi(BattleCam_TargetBoomYaw)
+/* 179D30 8024B450 C428F290 */  lwc1      $f8, %lo(BattleCam_TargetBoomYaw)($at)
 /* 179D34 8024B454 461C4202 */  mul.s     $f8, $f8, $f28
 /* 179D38 8024B458 00000000 */  nop
-/* 179D3C 8024B45C 3C01802A */  lui       $at, %hi(D_8029F294)
-/* 179D40 8024B460 C424F294 */  lwc1      $f4, %lo(D_8029F294)($at)
+/* 179D3C 8024B45C 3C01802A */  lui       $at, %hi(BattleCam_TargetBoomPitch)
+/* 179D40 8024B460 C424F294 */  lwc1      $f4, %lo(BattleCam_TargetBoomPitch)($at)
 /* 179D44 8024B464 461C2102 */  mul.s     $f4, $f4, $f28
 /* 179D48 8024B468 00000000 */  nop
 /* 179D4C 8024B46C 3C013F80 */  lui       $at, 0x3f80
@@ -322,20 +322,20 @@ glabel func_8024AFE4
 /* 179D64 8024B484 C7BE0018 */  lwc1      $f30, 0x18($sp)
 /* 179D68 8024B488 4602F602 */  mul.s     $f24, $f30, $f2
 /* 179D6C 8024B48C 00000000 */  nop
-/* 179D70 8024B490 3C02802A */  lui       $v0, %hi(D_8029F286)
-/* 179D74 8024B494 8442F286 */  lh        $v0, %lo(D_8029F286)($v0)
+/* 179D70 8024B490 3C02802A */  lui       $v0, %hi(BattleCam_BoomZOffset)
+/* 179D74 8024B494 8442F286 */  lh        $v0, %lo(BattleCam_BoomZOffset)($v0)
 /* 179D78 8024B498 44820000 */  mtc1      $v0, $f0
 /* 179D7C 8024B49C 00000000 */  nop
 /* 179D80 8024B4A0 46800020 */  cvt.s.w   $f0, $f0
-/* 179D84 8024B4A4 3C02802A */  lui       $v0, %hi(D_8029F280)
-/* 179D88 8024B4A8 8442F280 */  lh        $v0, %lo(D_8029F280)($v0)
+/* 179D84 8024B4A4 3C02802A */  lui       $v0, %hi(BattleCam_BoomLength)
+/* 179D88 8024B4A8 8442F280 */  lh        $v0, %lo(BattleCam_BoomLength)($v0)
 /* 179D8C 8024B4AC 46020002 */  mul.s     $f0, $f0, $f2
 /* 179D90 8024B4B0 00000000 */  nop
 /* 179D94 8024B4B4 44826000 */  mtc1      $v0, $f12
 /* 179D98 8024B4B8 00000000 */  nop
 /* 179D9C 8024B4BC 46806320 */  cvt.s.w   $f12, $f12
-/* 179DA0 8024B4C0 3C02802A */  lui       $v0, %hi(D_8029F282)
-/* 179DA4 8024B4C4 8442F282 */  lh        $v0, %lo(D_8029F282)($v0)
+/* 179DA0 8024B4C0 3C02802A */  lui       $v0, %hi(BattleCam_BoomYaw)
+/* 179DA4 8024B4C4 8442F282 */  lh        $v0, %lo(BattleCam_BoomYaw)($v0)
 /* 179DA8 8024B4C8 44823000 */  mtc1      $v0, $f6
 /* 179DAC 8024B4CC 00000000 */  nop
 /* 179DB0 8024B4D0 468031A0 */  cvt.s.w   $f6, $f6
@@ -355,8 +355,8 @@ glabel func_8024AFE4
 /* 179DE8 8024B508 44810000 */  mtc1      $at, $f0
 /* 179DEC 8024B50C 00000000 */  nop
 /* 179DF0 8024B510 4600F001 */  sub.s     $f0, $f30, $f0
-/* 179DF4 8024B514 3C02802A */  lui       $v0, %hi(D_8029F284)
-/* 179DF8 8024B518 8442F284 */  lh        $v0, %lo(D_8029F284)($v0)
+/* 179DF4 8024B514 3C02802A */  lui       $v0, %hi(BattleCam_BoomPitch)
+/* 179DF8 8024B518 8442F284 */  lh        $v0, %lo(BattleCam_BoomPitch)($v0)
 /* 179DFC 8024B51C 46006300 */  add.s     $f12, $f12, $f0
 /* 179E00 8024B520 44820000 */  mtc1      $v0, $f0
 /* 179E04 8024B524 00000000 */  nop
@@ -368,8 +368,8 @@ glabel func_8024AFE4
 /* 179E1C 8024B53C 461AA500 */  add.s     $f20, $f20, $f26
 /* 179E20 8024B540 46189480 */  add.s     $f18, $f18, $f24
 /* 179E24 8024B544 46064200 */  add.s     $f8, $f8, $f6
-/* 179E28 8024B548 3C04802A */  lui       $a0, %hi(D_8029F29E)
-/* 179E2C 8024B54C 2484F29E */  addiu     $a0, $a0, %lo(D_8029F29E)
+/* 179E28 8024B548 3C04802A */  lui       $a0, %hi(BattleCam_MoveTimeLeft)
+/* 179E2C 8024B54C 2484F29E */  addiu     $a0, $a0, %lo(BattleCam_MoveTimeLeft)
 /* 179E30 8024B550 46168400 */  add.s     $f16, $f16, $f22
 /* 179E34 8024B554 E6140054 */  swc1      $f20, 0x54($s0)
 /* 179E38 8024B558 E6120058 */  swc1      $f18, 0x58($s0)
@@ -397,8 +397,8 @@ glabel func_8024AFE4
 /* 179E90 8024B5B0 14400006 */  bnez      $v0, .L8024B5CC
 /* 179E94 8024B5B4 2462FFFF */   addiu    $v0, $v1, -1
 /* 179E98 8024B5B8 24020001 */  addiu     $v0, $zero, 1
-/* 179E9C 8024B5BC 3C01802A */  lui       $at, %hi(D_8029F29C)
-/* 179EA0 8024B5C0 A022F29C */  sb        $v0, %lo(D_8029F29C)($at)
+/* 179E9C 8024B5BC 3C01802A */  lui       $at, %hi(BattleCam_DoneMoving)
+/* 179EA0 8024B5C0 A022F29C */  sb        $v0, %lo(BattleCam_DoneMoving)($at)
 /* 179EA4 8024B5C4 08092D75 */  j         .L8024B5D4
 /* 179EA8 8024B5C8 0000102D */   daddu    $v0, $zero, $zero
 .L8024B5CC:

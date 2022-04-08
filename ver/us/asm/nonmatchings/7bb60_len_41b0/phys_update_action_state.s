@@ -91,8 +91,8 @@ glabel phys_update_action_state
 .L800E5B6C:
 /* 7F01C 800E5B6C 3C138000 */  lui       $s3, 0x8000
 .L800E5B70:
-/* 7F020 800E5B70 3C11800F */  lui       $s1, %hi(D_800F7C8C)
-/* 7F024 800E5B74 26317C8C */  addiu     $s1, $s1, %lo(D_800F7C8C)
+/* 7F020 800E5B70 3C11800F */  lui       $s1, %hi(PlayerActionsTable)
+/* 7F024 800E5B74 26317C8C */  addiu     $s1, $s1, %lo(PlayerActionsTable)
 /* 7F028 800E5B78 3C128011 */  lui       $s2, %hi(D_8010C924)
 /* 7F02C 800E5B7C 2652C924 */  addiu     $s2, $s2, %lo(D_8010C924)
 .L800E5B80:

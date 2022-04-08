@@ -9,9 +9,7 @@
 extern s32 D_80248388[];
 extern s32 D_80248380;
 
-#include "world/common/UnkTexturePanFunc.inc.c"
-
-#include "world/common/UnkTexturePanFunc2.inc.c"
+#include "world/common/UpdateTexturePan.inc.c"
 
 #include "world/common/StarSpiritEffectFunc.inc.c"
 

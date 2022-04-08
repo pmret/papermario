@@ -37,8 +37,8 @@ void state_init_file_select(void) {
     disable_player_input();
     set_time_freeze_mode(TIME_FREEZE_FULL);
     general_heap_create();
-    set_hud_element_nonworld_cache(0, 0);
-    clear_hud_element_cache();
+    hud_element_set_aux_cache(0, 0);
+    hud_element_clear_cache();
     load_model_textures(0, 0, 0);
     gCameras[CAM_DEFAULT].updateMode = 6;
     gCameras[CAM_DEFAULT].unk_06 = 1;
@@ -51,19 +51,19 @@ void state_init_file_select(void) {
     gCameras[CAM_CAM3].flags |= CAM_FLAG_ENABLED;
     gCameras[CAM_DEFAULT].vfov = 25.0f;
     set_cam_viewport(0, 12, 28, 296, 184);
-    gCameras[CAM_DEFAULT].unk_1E = 40;
+    gCameras[CAM_DEFAULT].auxBoomLength = 40;
     gCameras[CAM_DEFAULT].lookAt_eye.x = 500.0f;
     gCameras[CAM_DEFAULT].lookAt_eye.y = 1000.0f;
     gCameras[CAM_DEFAULT].lookAt_eye.z = 1500.0f;
-    gCameras[CAM_DEFAULT].unk_5C = 150.0f;
+    gCameras[CAM_DEFAULT].auxPos.z = 150.0f;
     gCameras[CAM_DEFAULT].bgColor[0] = 0;
     gCameras[CAM_DEFAULT].bgColor[1] = 0;
     gCameras[CAM_DEFAULT].bgColor[2] = 0;
-    gCameras[CAM_DEFAULT].unk_54 = 25.0f;
-    gCameras[CAM_DEFAULT].unk_58 = 25.0f;
+    gCameras[CAM_DEFAULT].auxPos.x = 25.0f;
+    gCameras[CAM_DEFAULT].auxPos.y = 25.0f;
     gCameras[CAM_DEFAULT].unk_1C = 0;
     gCameras[CAM_DEFAULT].unk_20 = 100;
-    gCameras[CAM_DEFAULT].unk_22 = 0;
+    gCameras[CAM_DEFAULT].auxBoomPitch = 0;
     gOverrideFlags |= GLOBAL_OVERRIDES_WINDOWS_IN_FRONT_OF_CURTAINS;
 }
 
@@ -127,8 +127,8 @@ void state_step_language_select(void) {
                     clear_entity_models();
                     clear_animator_list();
                     clear_generic_entity_list();
-                    set_hud_element_nonworld_cache(&D_80200000, 0x20000);
-                    clear_hud_element_cache();
+                    hud_element_set_aux_cache(&D_80200000, 0x20000);
+                    hud_element_clear_cache();
                     reset_status_menu();
                     clear_item_entity_data();
                     clear_script_list();
@@ -279,7 +279,7 @@ void state_step_exit_language_select(void) {
                     init_entity_models();
                     reset_animator_list();
                     init_generic_entity_list();
-                    set_hud_element_nonworld_cache(0, 0);
+                    hud_element_set_aux_cache(0, 0);
                     init_hud_element_list();
                     init_item_entity_list();
                     init_script_list();

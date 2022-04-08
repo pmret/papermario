@@ -7,9 +7,7 @@ static char* N(exit_str_1) = "";
 
 #include "world/common/UnkFunc26.inc.c"
 
-#include "world/common/UnkTexturePanFunc.inc.c"
-
-#include "world/common/UnkTexturePanFunc2.inc.c"
+#include "world/common/UpdateTexturePan.inc.c"
 
 #include "world/common/AwaitScriptComplete.inc.c"
 

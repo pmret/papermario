@@ -813,7 +813,7 @@ EffectInstance* fx_windy_leaves(s32, f32, f32, f32);
 EffectInstance* fx_falling_leaves(s32, f32, f32, f32);
 void fx_stars_spread(s32, f32, f32, f32, s32, s32);
 void fx_steam_burst(s32, f32, f32, f32, f32, s32);
-void fx_stars_orbiting(s32, f32, f32, f32, f32, s32, s32*);
+void fx_stars_orbiting(s32, f32, f32, f32, f32, s32, EffectInstance**);
 void fx_big_snowflakes(s32, f32, f32, f32);
 EffectInstance* fx_debuff(s32, f32, f32, f32);
 void fx_green_impact(s32, f32, f32, f32, f32);
@@ -825,7 +825,7 @@ EffectInstance* fx_fire_breath(s32, f32, f32, f32, f32, f32, f32, s32, s32, s32)
 EffectInstance* fx_shimmer_burst(s32, f32, f32, f32, f32, s32);
 EffectInstance* fx_energy_shockwave(s32, f32, f32, f32, f32, s32);
 EffectInstance* fx_shimmer_wave(s32, f32, f32, f32, f32, f32, s32, s32);
-void fx_aura(s32, f32, f32, f32, f32, s32*);
+void fx_aura(s32, f32, f32, f32, f32, EffectInstance**);
 EffectInstance* fx_3C(s32, f32, f32, f32, f32, s32*);
 void fx_3D(s32, f32, f32, f32, f32, f32, f32, s32, s32*);
 EffectInstance* fx_blast(s32, f32, f32, f32, f32, s32);

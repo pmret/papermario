@@ -58,10 +58,10 @@ void entity_Chest_idle(Entity* entity) {
     rotation = clamp_angle(180.0f - entity->rotation.y);
     angle = fabsf(rotation - clamp_angle(atan2(entity->position.x, entity->position.z, playerStatus->position.x, playerStatus->position.z)));
     if ((!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT)) &&
-        (!(entity->collisionFlags & ENTITY_COLLISION_FLAGS_1)) &&
+        (!(entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_FLOOR)) &&
         ((angle <= 40.0f) || (angle >= 320.0f))) {
         entity->flags |= ENTITY_FLAGS_SHOWS_INSPECT_PROMPT;
-        if ((playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_INTERACT_PROMPT_AVAILABLE) && (entity->collisionFlags & ENTITY_COLLISION_FLAGS_8)) {
+        if ((playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_INTERACT_PROMPT_AVAILABLE) && (entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_WALL)) {
             exec_entity_commandlist(entity);
             data = entity->dataBuf.chest;
             data->state = 0;
@@ -230,22 +230,22 @@ void entity_GiantChest_give_equipment(Entity* entity) {
     s32 flag;
 
     switch (data->itemID) {
-    	case 1:
+    	case ITEM_JUMP:
     	    gPlayerData.bootsLevel = 0;
     	    break;
-    	case 2:
+    	case ITEM_SPIN_JUMP:
     	    gPlayerData.bootsLevel = 1;
     	    break;
-    	case 3:
+    	case ITEM_TORNADO_JUMP:
     	    gPlayerData.bootsLevel = 2;
     	    break;
-    	case 4:
+    	case ITEM_HAMMER:
     	    gPlayerData.hammerLevel = 0;
     	    break;
-    	case 5:
+    	case ITEM_SUPER_HAMMER:
     	    gPlayerData.hammerLevel = 1;
     	    break;
-    	case 6:
+    	case ITEM_ULTRA_HAMMER:
     	    gPlayerData.hammerLevel = 2;
     	    break;
     }

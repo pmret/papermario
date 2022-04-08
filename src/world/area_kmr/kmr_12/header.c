@@ -21,6 +21,6 @@ EvtScript N(PlayMusic) = {
 };
 
 ApiStatus GetGoomba(Evt* script, s32 isInitialCall) {
-    script->varTableEnemy[0] = get_enemy_safe(NPC_GOOMBA);
+    script->varTablePtr[0] = get_enemy_safe(NPC_GOOMBA);
     return ApiStatus_DONE2;
 }

@@ -62,7 +62,7 @@ INCLUDE_ASM(s32, "7bb60_len_41b0", phys_update_jump);
 
 #ifdef NON_EQUIVALENT
 // Rodata issue.
-extern s32 D_800F7B50;
+extern s32 GravityParamsStartJump;
 
 void phys_init_integrator_for_current_state(void) {
     f32* temp_a0;
@@ -84,7 +84,7 @@ void phys_init_integrator_for_current_state(void) {
     case 13:
     case 18:
     case 20:
-            temp_a0 = &D_800F7B50 ;
+            temp_a0 = &GravityParamsStartJump ;
         if ((playerStatus->flags & 0x40000) == 0) {
             playerStatus->gravityIntegrator[0] = *temp_a0++;
             playerStatus->gravityIntegrator[1] = *temp_a0++;
@@ -107,7 +107,7 @@ INCLUDE_ASM(void, "7bb60_len_41b0", phys_init_integrator_for_current_state, void
 
 // This function is wack. This weird stuff is needed to match
 void gravity_use_fall_parms(void) {
-    f32* floats = D_800F7B60;
+    f32* floats = GravityParamsStartFall;
     PlayerStatus* playerStatus;
     do {} while (0);
     playerStatus = &gPlayerStatus;
@@ -268,25 +268,25 @@ s32 func_800E4404(s32 arg0, s32 arg1, f32 arg2, f32* outX, f32* outY, f32* outZ)
 
 void collision_check_player_overlaps(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    f32 temp_64 = playerStatus->unk_64;
+    f32 overlapPush = playerStatus->overlapPushAmount;
 
-    if (temp_64 != 0.0f) {
+    if (overlapPush != 0.0f) {
         f32 x = playerStatus->position.x;
         f32 y = playerStatus->position.y;
         f32 z = playerStatus->position.z;
 
-        player_test_lateral_overlap(0, &gPlayerStatus, &x, &y, &z, temp_64, playerStatus->unk_88);
+        player_test_lateral_overlap(0, &gPlayerStatus, &x, &y, &z, overlapPush, playerStatus->overlapPushYaw);
 
-        temp_64 -= playerStatus->runSpeed / 10.0f;
+        overlapPush -= playerStatus->runSpeed / 10.0f;
         playerStatus->position.x = x;
         playerStatus->position.y = y;
         playerStatus->position.z = z;
 
-        if (temp_64 < 0.0f) {
-            temp_64 = 0.0f;
+        if (overlapPush < 0.0f) {
+            overlapPush = 0.0f;
         }
 
-        playerStatus->unk_64 = temp_64;
+        playerStatus->overlapPushAmount = overlapPush;
     }
 }
 

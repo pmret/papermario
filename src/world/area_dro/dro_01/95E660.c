@@ -23,6 +23,6 @@ ApiStatus N(func_80243460_95E660)(Evt* script, s32 isInitialCall) {
 #define NAMESPACE dro_01
 
 ApiStatus N(func_80243578_95E778)(Evt* script, s32 isInitialCall) {
-    func_800E96C8();
+    hide_coin_counter_immediately();
     return ApiStatus_DONE2;
 }

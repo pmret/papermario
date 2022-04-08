@@ -3,15 +3,12 @@
 extern s32 gSpinHistoryBufferPos;
 extern s32 gSpinHistoryPosY[5];
 extern s16 gSpinHistoryPosAngle[5];
-extern struct struct8015A578 D_8015A578;
 
 s32 func_802B65F8_E26D08(void);
 
 void func_802B6000_E26710(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     CollisionStatus* collisionStatus = &gCollisionStatus;
-    struct8015A578* tempStruct;
-    struct8015A578* tempStruct2;
     f32 temp_f0;
     f32 temp_f20;
     u8 colliderType;
@@ -38,16 +35,16 @@ void func_802B6000_E26710(void) {
         if (temp_f0 <= 180.0f) {
             phi_f4 = 60.0f;
         }
-        playerStatus->unk_D4 = phi_f4;
+        playerStatus->spinRate = phi_f4;
     }
     if (playerStatus->fallState < 4) {
-        if (playerStatus->unk_D4 >= 0.0f) {
-            playerStatus->spriteFacingAngle += playerStatus->unk_D4;
+        if (playerStatus->spinRate >= 0.0f) {
+            playerStatus->spriteFacingAngle += playerStatus->spinRate;
             if (playerStatus->spriteFacingAngle >= 360.0f) {
                 playerStatus->spriteFacingAngle -= 360.0f;
             }
         } else {
-            playerStatus->spriteFacingAngle += playerStatus->unk_D4;
+            playerStatus->spriteFacingAngle += playerStatus->spinRate;
             if (playerStatus->spriteFacingAngle < 0.0f) {
                 playerStatus->spriteFacingAngle += 360.0f;
             }
@@ -78,7 +75,7 @@ void func_802B6000_E26710(void) {
             }
             if (temp_f20 <= 0.0f) {
                 record_jump_apex();
-                playerStatus->framesOnGround = 3;
+                playerStatus->currentStateTime = 3;
                 playerStatus->flags |= 4;
                 playerStatus->fallState++;
                 sfx_play_sound_at_player(0x147, 0);
@@ -89,7 +86,7 @@ void func_802B6000_E26710(void) {
             }
             break;
         case 1:
-            if (--playerStatus->framesOnGround <= 0) {
+            if (--playerStatus->currentStateTime <= 0) {
                 playerStatus->fallState++;
             }
             break;
@@ -116,9 +113,8 @@ void func_802B6000_E26710(void) {
                         sfx_play_sound_at_player(0x14A, 0);
                         start_rumble(0x100, 0x32);
 
-                        tempStruct = &D_8015A578;
-                        tempStruct->unk_00 = 1;
-                        tempStruct->unk_08 = playerStatus->position.y;
+                        D_8015A578.unk_00 = 1;
+                        D_8015A578.unk_08 = playerStatus->position.y;
                         playerStatus->flags |= 0x400;
                         return;
                     }
@@ -136,7 +132,7 @@ void func_802B6000_E26710(void) {
                     playerStatus->flags &= ~0x00020008;
                     return;
                 }
-                playerStatus->framesOnGround = 8;
+                playerStatus->currentStateTime = 8;
                 playerStatus->decorationList = 0;
                 playerStatus->actionState = 0x10;
                 playerStatus->fallState++;
@@ -144,14 +140,13 @@ void func_802B6000_E26710(void) {
                 sfx_play_sound_at_player(0x14A, 0);
                 start_rumble(0x100, 0x32);
 
-                tempStruct2 = &D_8015A578;
-                tempStruct2->unk_00 = 1;
-                tempStruct2->unk_08 = playerStatus->position.y;
+                D_8015A578.unk_00 = 1;
+                D_8015A578.unk_08 = playerStatus->position.y;
                 playerStatus->flags |= 0x400;
             }
             break;
         case 3:
-            if (--playerStatus->framesOnGround == 0) {
+            if (--playerStatus->currentStateTime == 0) {
                 playerStatus->fallState++;
                 playerStatus->flags &= ~0x00020008;
                 set_action_state(ACTION_STATE_LAND);
