@@ -550,7 +550,7 @@ NpcSettings N(npcSettings_8024518C) = {
     .level = 99,
 };
 
-s32** N(D_802451B8_9603B8) = NULL;
+s32** N(varTable) = NULL;
 
 EvtScript N(802451BC) = {
     EVT_CALL(ShowGotItem, EVT_VAR(0), 1, 0)
@@ -2966,23 +2966,7 @@ EvtScript N(makeEntities) = {
 
 #include "world/common/UnkNpcAIMainFunc.inc.c"
 
-ApiStatus N(func_80241470_95C670)(Evt* script, s32 isInitialCall) {
-    s32 i;
-
-    if (N(D_802451B8_9603B8) == NULL) {
-        N(D_802451B8_9603B8) = heap_malloc(16 * sizeof(s32));
-        for (i = 0; i < 16; i++) {
-            N(D_802451B8_9603B8)[i] = (s32*) script->varTable[i];
-        }
-    } else {
-        for (i = 0; i < 16; i++) {
-            script->varTable[i] = (s32) N(D_802451B8_9603B8)[i];
-        }
-        heap_free(N(D_802451B8_9603B8));
-        N(D_802451B8_9603B8) = NULL;
-    }
-    return ApiStatus_DONE2;
-}
+#include "world/common/StashVars.inc.c"
 
 #include "world/common/GetItemName.inc.c"
 

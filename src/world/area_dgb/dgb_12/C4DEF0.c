@@ -130,6 +130,7 @@ static s32 N(pad_868)[] = {
     0x00000000, 0x00000000,
 };
 
+static s32** N(varTable) = NULL;
 #include "world/common/StashVars.inc.c"
 
 EvtScript N(80240874) = {

@@ -219,6 +219,7 @@ ApiStatus N(func_8024113C_BDFECC)(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
+static s32** N(varTable) = NULL;
 #include "world/common/StashVars.inc.c"
 
 EvtScript N(80241C6C) = {
