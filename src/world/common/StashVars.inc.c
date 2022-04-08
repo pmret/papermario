@@ -1,7 +1,7 @@
 #include "common.h"
 #include "npc.h"
 
-// remove this when all data from all maps that use this are migrated to C
+// remove this and uncomment other when all data from all maps that use this are migrated to C
 extern s32** N(varTable);
 
 ApiStatus N(StashVars)(Evt* script, s32 isInitialCall) {

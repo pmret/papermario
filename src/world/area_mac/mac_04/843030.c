@@ -2,7 +2,7 @@
 
 #define UNK_ALPHA_FUNC_NPC 20
 
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80240460_843030);
+#include "world/common/StashVars.inc.c"
 
 #include "world/common/GetItemName.inc.c"
 

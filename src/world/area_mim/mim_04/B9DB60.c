@@ -16,6 +16,6 @@
 
 #include "world/common/UnkNpcAIMainFunc2.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mim/mim_04/B9DB60", func_80241014_B9E974);
+#include "world/common/StashVars.inc.c"
 
 #include "world/common/GetItemName.inc.c"

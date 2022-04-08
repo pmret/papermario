@@ -7,7 +7,7 @@ enum {
     NPC_ROSIE1,
 };
 
-static N(D_802429E0)[112];
+static s32 N(D_802429E0)[112];
 
 EntryList N(entryList) = {
     { 280.0f, 0.0f, 0.0f, 270.0f },
@@ -508,7 +508,7 @@ ApiStatus N(func_80240614_CC1444)(Evt* script, s32 isInitialCall) {
 
 ApiStatus N(func_8024064C_CC147C)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32* ptr = evt_get_variable(script, *args);
+    s32* ptr = (s32*)evt_get_variable(script, *args);
     s32 i;
 
     if (ptr != NULL) {

@@ -2,7 +2,7 @@
 
 static char* N(exit_str_2) = "omo_07";
 
-INCLUDE_ASM(s32, "world/area_omo/omo_07/DC01D0", func_80242F20_DC01D0);
+#include "world/common/StashVars.inc.c"
 
 #include "world/common/GetItemName.inc.c"
 

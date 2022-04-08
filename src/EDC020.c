@@ -6,7 +6,7 @@
 #define NAMESPACE EDC020
 
 extern s32 D_802429E0[];
-//extern s32** D_802417EC_EDD7CC = NULL;
+//extern s32** EDC020_varTable = NULL;
 
 /*
 extern s32 D_80241850_EDD830 = {
@@ -24,22 +24,22 @@ extern s32 D_80241850_EDD834 = {
 ApiStatus func_8024027C_EDC25C(Evt* script, s32 isInitialCall) {
     s32 i;
 
-    if (D_802417EC_EDD7CC == NULL) {
-        D_802417EC_EDD7CC = heap_malloc(16 * sizeof(s32));
+    if (EDC020_varTable == NULL) {
+        EDC020_varTable = heap_malloc(16 * sizeof(s32));
         for (i = 0; i < 16; i++) {
-            D_802417EC_EDD7CC[i] = script->varTable[i];
+            EDC020_varTable[i] = script->varTable[i];
         }
     } else {
         for (i = 0; i < 16; i++) {
-            script->varTable[i] = D_802417EC_EDD7CC[i];
+            script->varTable[i] = EDC020_varTable[i];
         }
-        heap_free(D_802417EC_EDD7CC);
-        D_802417EC_EDD7CC = NULL;
+        heap_free(EDC020_varTable);
+        EDC020_varTable = NULL;
     }
     return ApiStatus_DONE2;
 }
 #else
-INCLUDE_ASM(s32, "EDC020", func_8024027C_EDC25C);
+#include "world/common/StashVars.inc.c"
 #endif
 
 #include "world/common/GetItemName.inc.c"
