@@ -13,7 +13,7 @@ s32 N(func_80240000_CB9200)(void);
 ApiStatus N(func_80240040_CB9240)(Evt* script, s32 isInitialCall);
 
 extern s32 N(D_80244070_CBD270);
-extern s32** N(D_80241CB0_CBAEB0);
+extern s32** N(varTable);
 extern NpcGroupList N(npcGroupList_80244054);
 extern EvtScript N(802427EC);
 extern EvtScript N(80242AE8);

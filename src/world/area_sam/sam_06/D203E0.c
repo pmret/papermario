@@ -22,7 +22,7 @@
 
 #include "world/common/UnkNpcAIMainFunc9.inc.c"
 
-INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_80241A48_D218D8);
+#include "world/common/StashVars.inc.c"
 
 #include "world/common/GetItemName.inc.c"
 

@@ -47,7 +47,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80241C14_802494);
 static char* N(exit_str_0) = "flo_00";
 static char* N(exit_str_1) = "kmr_22";
 
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80241F10_802790);
+#include "world/common/StashVars.inc.c"
 
 #include "world/common/GetItemName.inc.c"
 

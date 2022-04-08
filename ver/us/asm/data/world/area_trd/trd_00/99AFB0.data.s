@@ -2,7 +2,7 @@
 
 .section .data
 
-dlabel D_80241340_99AFB0
+dlabel trd_00_varTable
 .word 0x00000000
 
 dlabel D_80241344_99AFB4

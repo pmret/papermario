@@ -59,25 +59,14 @@ typedef struct {
 
 void N(func_802430C8_95E2C8)(Unk_Struct_1* ptr, s32 arg1);
 
-typedef struct {
-    /* 0x00 */ s32 flags;
-    /* 0x04 */ s32 effectIndex;
-    /* 0x08 */ s32 instanceCounter;
-    /* 0x0C */ EffectInstanceDataThing* unk_0C;
-    /* 0x10 */ void (*update)(EffectInstance* effectInst);
-    /* 0x14 */ void (*renderWorld)(EffectInstance* effectInst);
-    /* 0x18 */ void (*unk_18)(EffectInstance* effectInst);
-    /* 0x1C */ void* unk_1C;
-} N(temp);
-
 static s32 N(D_8024DFC0);
 static s8 N(pad_D_8024DFC4)[0x4];
 static s32 N(pad_D_8024DFC8)[4];
 static s32 N(D_8024DFD8);
 static s8 N(pad_D_8024DFDC)[0x4];
-static N(temp)* N(D_8024DFE0);
-static N(temp)* N(D_8024DFE4);
-static N(temp)* N(D_8024DFE8);
+static EffectInstance* N(D_8024DFE0);
+static EffectInstance* N(D_8024DFE4);
+static EffectInstance* N(D_8024DFE8);
 static s8 N(pad_D_8024DFEC)[0x4];
 static s32 N(D_8024DFF0)[112];
 static s8 N(pad_D_8024E1B0)[0x4]; // Probably part of the above
@@ -550,7 +539,8 @@ NpcSettings N(npcSettings_8024518C) = {
     .level = 99,
 };
 
-s32** N(D_802451B8_9603B8) = NULL;
+
+s32** N(varTable) = NULL;
 
 EvtScript N(802451BC) = {
     EVT_CALL(ShowGotItem, EVT_VAR(0), 1, 0)
@@ -2339,7 +2329,9 @@ N(shopPrice) N(shopPriceList_8024B550)[] = {
     {},
 };
 
-s32** N(D_8024B5B0_9667B0) = NULL;
+#define NAMESPACE dro_01_dup
+s32** N(varTable) = NULL;
+#define NAMESPACE dro_01
 
 EvtScript N(8024B5B4) = {
     EVT_CALL(ShowGotItem, EVT_VAR(0), 1, 0)
@@ -2966,23 +2958,7 @@ EvtScript N(makeEntities) = {
 
 #include "world/common/UnkNpcAIMainFunc.inc.c"
 
-ApiStatus N(func_80241470_95C670)(Evt* script, s32 isInitialCall) {
-    s32 i;
-
-    if (N(D_802451B8_9603B8) == NULL) {
-        N(D_802451B8_9603B8) = heap_malloc(16 * sizeof(s32));
-        for (i = 0; i < 16; i++) {
-            N(D_802451B8_9603B8)[i] = (s32*) script->varTable[i];
-        }
-    } else {
-        for (i = 0; i < 16; i++) {
-            script->varTable[i] = (s32) N(D_802451B8_9603B8)[i];
-        }
-        heap_free(N(D_802451B8_9603B8));
-        N(D_802451B8_9603B8) = NULL;
-    }
-    return ApiStatus_DONE2;
-}
+#include "world/common/StashVars.inc.c"
 
 #include "world/common/GetItemName.inc.c"
 
@@ -3020,7 +2996,7 @@ ApiStatus N(func_80241BE0_95CDE0)(Evt* script, s32 isInitialCall) {
         N(D_8024DFE8) = fx_quizmo_assistant(0, evt_get_variable(script, EVT_ARRAY(1)), evt_get_variable(script, EVT_ARRAY(2)),
                                       evt_get_variable(script, EVT_ARRAY(3)), 1.0f, 0);
 
-        effectPtr = N(D_8024DFE0)->unk_0C;
+        effectPtr = N(D_8024DFE0)->data;
         effectPtr->unk_18 = 0;
         effectPtr->unk_20 = 0;
         effectPtr->unk_24.s = 0;
@@ -3028,7 +3004,7 @@ ApiStatus N(func_80241BE0_95CDE0)(Evt* script, s32 isInitialCall) {
         effectPtr->unk_1C = 0;
     }
 
-    effectPtr = N(D_8024DFE0)->unk_0C;
+    effectPtr = N(D_8024DFE0)->data;
 
     effectPtr->unk_20 += 10;
     effectPtr->unk_28 += 10;
@@ -3051,7 +3027,7 @@ ApiStatus N(func_80241DF8_95CFF8)(Evt* script, s32 isInitialCall) {
         N(D_8024DFE8)->flags |= 0x10;
     }
 
-    effectPtr = N(D_8024DFE0)->unk_0C;
+    effectPtr = N(D_8024DFE0)->data;
     effectPtr->unk_18 -= 10;
     effectPtr->unk_20 -= 10;
     effectPtr->unk_24.s -= 10;
@@ -3069,13 +3045,13 @@ ApiStatus N(func_80241DF8_95CFF8)(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus N(func_80241EAC_95D0AC)(Evt* script, s32 isInitialCall) {
-    N(D_8024DFE0)->unk_0C->unk_34 = evt_get_variable(script, *script->ptrReadPos);
+    ((EffectInstanceDataThing*)N(D_8024DFE0)->data)->unk_34 = evt_get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
 ApiStatus N(func_80241EE0_95D0E0)(Evt* script, s32 isInitialCall) {
     s32 var = evt_get_variable(script, *script->ptrReadPos);
-    EffectInstanceDataThing* effectPtr = N(D_8024DFE0)->unk_0C;
+    EffectInstanceDataThing* effectPtr = N(D_8024DFE0)->data;
 
     switch (var) {
         case 0:
@@ -3096,17 +3072,17 @@ ApiStatus N(func_80241EE0_95D0E0)(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus N(func_80241F60_95D160)(Evt* script, s32 isInitialCall) {
-    N(D_8024DFE8)->unk_0C->unk_1C = 0;
+    ((EffectInstanceDataThing*)N(D_8024DFE8)->data)->unk_1C = 0;
     return ApiStatus_DONE2;
 }
 
 ApiStatus N(func_80241F78_95D178)(Evt* script, s32 isInitialCall) {
-    N(D_8024DFE8)->unk_0C->unk_1C = 1;
+    ((EffectInstanceDataThing*)N(D_8024DFE8)->data)->unk_1C = 1;
     return ApiStatus_DONE2;
 }
 
 ApiStatus N(func_80241F94_95D194)(Evt* script, s32 isInitialCall) {
-    N(D_8024DFE8)->unk_0C->unk_1C = 2;
+    ((EffectInstanceDataThing*)N(D_8024DFE8)->data)->unk_1C = 2;
     return ApiStatus_DONE2;
 }
 

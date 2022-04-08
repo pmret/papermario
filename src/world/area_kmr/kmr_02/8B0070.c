@@ -23,7 +23,7 @@ INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_802402E0_8B0350);
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80240370_8B03E0);
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80240390_8B0400);
+#include "world/common/StashVars.inc.c"
 
 #include "world/common/GetItemName.inc.c"
 

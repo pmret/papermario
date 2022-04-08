@@ -29,7 +29,9 @@
 static char* N(exit_str_0) = "nok_02";
 static char* N(exit_str_1) = "obk_09";
 
-INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7AA0", func_80241910_9D8930);
+#define NAMESPACE dup_nok_02
+#include "world/common/StashVars.inc.c"
+#define NAMESPACE nok_02
 
 #include "world/common/GetItemName.inc.c"
 

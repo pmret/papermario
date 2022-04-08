@@ -49,6 +49,7 @@
 #define sfx_adjust_env_sound_pos dead_sfx_adjust_env_sound_pos
 #define fx_star_spirits_energy dead_fx_star_spirits_energy
 #define heap_malloc dead_heap_malloc
+#define heap_free dead_heap_free
 #define general_heap_malloc dead_general_heap_malloc
 #define update_lerp dead_update_lerp
 #define create_shadow_type dead_create_shadow_type

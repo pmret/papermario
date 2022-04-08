@@ -7,7 +7,7 @@ enum {
     NPC_ROSIE1,
 };
 
-static N(D_802429E0)[112];
+static s32 N(D_802429E0)[112];
 
 EntryList N(entryList) = {
     { 280.0f, 0.0f, 0.0f, 270.0f },
@@ -167,7 +167,7 @@ NpcSettings N(npcSettings_80240E5C) = {
 
 #include "common/foliage.inc.c"
 
-s32** N(D_802417EC_CC261C) = NULL;
+s32** N(varTable) = NULL;
 
 EvtScript N(802417F0) = {
     EVT_CALL(ShowGotItem, EVT_VAR(0), 1, 0)
@@ -474,23 +474,7 @@ NpcGroupList N(npcGroupList_802429B8) = {
     {},
 };
 
-ApiStatus N(func_8024027C_CC10AC)(Evt* script, s32 isInitialCall) {
-    s32 i;
-
-    if (N(D_802417EC_CC261C) == NULL) {
-        N(D_802417EC_CC261C) = heap_malloc(16 * sizeof(s32));
-        for (i = 0; i < 16; i++) {
-            N(D_802417EC_CC261C)[i] = script->varTable[i];
-        }
-    } else {
-        for (i = 0; i < 16; i++) {
-            script->varTable[i] = N(D_802417EC_CC261C)[i];
-        }
-        heap_free(N(D_802417EC_CC261C));
-        N(D_802417EC_CC261C) = NULL;
-    }
-    return ApiStatus_DONE2;
-}
+#include "world/common/StashVars.inc.c"
 
 #include "world/common/GetItemName.inc.c"
 
@@ -524,7 +508,7 @@ ApiStatus N(func_80240614_CC1444)(Evt* script, s32 isInitialCall) {
 
 ApiStatus N(func_8024064C_CC147C)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32* ptr = evt_get_variable(script, *args);
+    s32* ptr = (s32*)evt_get_variable(script, *args);
     s32 i;
 
     if (ptr != NULL) {

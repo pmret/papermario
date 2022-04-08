@@ -3,7 +3,7 @@
 static char* N(exit_str_0) = "omo_03";
 static char* N(exit_str_1) = "";
 
-INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_80240000_DAD400);
+#include "world/common/StashVars.inc.c"
 
 #include "world/common/GetItemName.inc.c"
 

@@ -12,7 +12,7 @@ extern s32 D_802442D0[];
 extern u32 D_80244494;
 extern s32 D_800B8DEC;
 
-INCLUDE_ASM(s32, "EB1170", func_80240310_EB1170);
+#include "world/common/StashVars.inc.c"
 
 #include "world/common/GetItemName.inc.c"
 

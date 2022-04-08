@@ -73,7 +73,7 @@ ApiStatus N(dup_GetEntryPos)(Evt* script, s32 isInitialCall);
 ApiStatus N(dup_SetPlayerStatusAnimFlags100000)(Evt* script, s32 isInitialCall);
 ApiStatus N(dup_SomeXYZFunc2)(Evt* script, s32 isInitialCall);
 
-extern s32** N(D_8024B5B0_9667B0);
+extern s32** N(varTable);
 extern N(shopInventory) N(shopInventory_8024B4FC)[];
 extern N(shopPrice) N(shopPriceList_8024B550)[];
 

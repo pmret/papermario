@@ -651,7 +651,7 @@ static s32 N(pad_36D8)[] = {
     0x00000000, 0x00000000,
 };
 
-s32** N(D_802436E0_C59620) = NULL; // StashVars.inc.c data
+s32** N(varTable) = NULL; // StashVars.inc.c data
 
 EvtScript N(802436E4) = {
     EVT_SET_GROUP(0)

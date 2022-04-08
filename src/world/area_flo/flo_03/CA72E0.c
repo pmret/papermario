@@ -183,7 +183,7 @@ NpcSettings N(npcSettings_80240EDC) = {
     .level = 99,
 };
 
-s32** N(D_80240F08_CA81A8) = NULL;
+s32** N(varTable) = NULL;
 
 EvtScript N(80240F0C) = {
     EVT_CALL(ShowGotItem, EVT_VAR(0), 1, 0)
@@ -1091,23 +1091,7 @@ NpcGroupList N(npcGroupList_8024442C) = {
     {},
 };
 
-ApiStatus N(func_80240040_CA72E0)(Evt* script, s32 isInitialCall) {
-    s32 i;
-
-    if (N(D_80240F08_CA81A8) == NULL) {
-        N(D_80240F08_CA81A8) = heap_malloc(16 * sizeof(s32));
-        for (i = 0; i < 16; i++) {
-            N(D_80240F08_CA81A8)[i] = script->varTable[i];
-        }
-    } else {
-        for (i = 0; i < 16; i++) {
-            script->varTable[i] = N(D_80240F08_CA81A8)[i];
-        }
-        heap_free(N(D_80240F08_CA81A8));
-        N(D_80240F08_CA81A8) = NULL;
-    }
-    return ApiStatus_DONE2;
-}
+#include "world/common/StashVars.inc.c"
 
 #include "world/common/GetItemName.inc.c"
 

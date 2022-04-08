@@ -2,7 +2,7 @@
 
 .section .data
 
-dlabel D_802455D0_8B5640
+dlabel kmr_02_varTable
 .word 0x00000000
 
 dlabel D_802455D4_8B5644
