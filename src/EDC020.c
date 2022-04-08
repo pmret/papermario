@@ -20,27 +20,7 @@ extern s32 D_80241850_EDD834 = {
 
 #include "common/foliage.inc.c"
 
-#ifdef NON_MATCHING // TODO(data)
-ApiStatus func_8024027C_EDC25C(Evt* script, s32 isInitialCall) {
-    s32 i;
-
-    if (EDC020_varTable == NULL) {
-        EDC020_varTable = heap_malloc(16 * sizeof(s32));
-        for (i = 0; i < 16; i++) {
-            EDC020_varTable[i] = script->varTable[i];
-        }
-    } else {
-        for (i = 0; i < 16; i++) {
-            script->varTable[i] = EDC020_varTable[i];
-        }
-        heap_free(EDC020_varTable);
-        EDC020_varTable = NULL;
-    }
-    return ApiStatus_DONE2;
-}
-#else
 #include "world/common/StashVars.inc.c"
-#endif
 
 #include "world/common/GetItemName.inc.c"
 
