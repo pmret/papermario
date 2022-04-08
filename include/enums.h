@@ -620,6 +620,7 @@ enum SoundIDs {
     SOUND_749                       = 0x00000749,
     SOUND_759                       = 0x00000759,
     SOUND_2003                      = 0x00002003,
+    SOUND_2009                      = 0x00002009,
     SOUND_200D                      = 0x0000200D,
     SOUND_BOW_VANISH                = 0x0000200E,
     SOUND_BOW_APPEAR                = 0x0000200F,
