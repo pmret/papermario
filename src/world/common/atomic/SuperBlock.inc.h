@@ -24,4 +24,9 @@ ApiStatus N(SuperBlock_PartnerSparkles2)(Evt* script, s32 isInitialCall);
 ApiStatus N(SuperBlock_PartnerSparkles4)(Evt* script, s32 isInitialCall);
 ApiStatus N(SuperBlock_WaitForPlayerToLand)(Evt* script, s32 isInitialCall);
 
+extern s32 N(SuperBlock_CantUpgradeMessages)[2];
+extern s16 N(SuperBlock_PartnerIDs)[8];
+extern s32 N(SuperBlock_UpgradeDescMessages)[8][2];
+extern f32 N(SuperBlock_UpgradeOrbAngles)[SUPER_BLOCK_NUM_ORBS];
+
 #endif

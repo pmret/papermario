@@ -1,12 +1,6 @@
 #include "common.h"
 #include "Pipe.inc.h"
 
-EvtScript N(Pipe_EnterVertical);
-EvtScript N(Pipe_EnterHorizontal);
-EvtScript N(Pipe_ExitVertical);
-EvtScript N(Pipe_ScriptD);
-EvtScript N(Pipe_ExitHorizontal);
-
 EvtScript N(Pipe_EnterVertical) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(DisablePlayerPhysics, TRUE)

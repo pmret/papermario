@@ -6,12 +6,6 @@
 
 extern s32 gPartnerPopupProperties[11][4];
 
-//TDOD how to reorganize these to avoid warnings?
-extern s32 N(SuperBlock_CantUpgradeMessages)[2];
-extern s16 N(SuperBlock_PartnerIDs)[8];
-extern s32 N(SuperBlock_UpgradeDescMessages)[8][2];
-extern f32 N(SuperBlock_UpgradeOrbAngles)[SUPER_BLOCK_NUM_ORBS];
-
 extern HudScript* wPartnerHudScripts[];
 extern HudScript* wDisabledPartnerHudScripts[];
 
@@ -124,21 +118,21 @@ ApiStatus N(SuperBlock_ShowSelectPartnerMenu)(Evt* script, s32 isInitialCall) {
         }
         hide_popup_menu();
     }
-    
+
     // wait for popup to hide
     script->functionTemp[0]++;
     if (script->functionTemp[0] < 15) {
         return ApiStatus_BLOCK;
     }
     destroy_popup_menu();
-    
+
     if (script->functionTemp[1] != 255) {
         script->varTable[0] = gPartnerPopupProperties[popupMenu->userIndex[script->functionTemp[1] - 1]][0];
         script->varTable[1] = popupMenu->userIndex[script->functionTemp[1] - 1];
     } else {
         script->varTable[0] = -1;
     }
-        
+
     heap_free(script->functionTempPtr[2]);
     return ApiStatus_DONE2;
 }

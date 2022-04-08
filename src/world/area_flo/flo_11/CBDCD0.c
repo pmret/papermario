@@ -1,7 +1,6 @@
 #include "flo_11.h"
 #include "message_ids.h"
 #include "sprite/npc/lakitu.h"
-#include "world/common/atomic/Pipe.inc.h"
 
 enum {
     NPC_LAKITU0,

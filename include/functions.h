@@ -215,7 +215,6 @@ void phys_init_integrator_for_current_state(void);
 void phys_player_land(void);
 void phys_main_collision_below(void);
 
-void create_popup_menu(PopupMenu*);
 s32 npc_test_move_simple_without_slipping(s32, f32*, f32*, f32*, f32, f32, f32, f32);
 
 void update_collider_transform(s16 colliderID);
