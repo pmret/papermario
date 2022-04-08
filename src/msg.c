@@ -703,51 +703,51 @@ MessagePrintState* msg_get_printer_for_msg(s32 msgID, s32* donePrintingWriteback
     return _msg_get_printer_for_msg(msgID, donePrintingWriteback, 0);
 }
 
-#ifdef NON_EQUIVALENT
 MessagePrintState* _msg_get_printer_for_msg(s32 msgID, s32* donePrintingWriteback, s32 arg2) {
-    if (msgID != 0) {
-        s8* srcBuffer = (s8*) msgID;
-        s32 i;
+    MessagePrintState* printer;
+    s8* srcBuffer;
+    s32 height;
+    s32 width;
+    s32 maxLineChars;
+    s32 numLines;
+    s32 maxLinesPerPage;
+    s32 i;
 
-        if (msgID >= 0) {
-            srcBuffer = load_message_to_buffer(srcBuffer);
-        }
+    if (msgID == 0) {
+        return NULL;
+    }
+    
+    srcBuffer = (s8*) msgID;
+    if (msgID >= 0) {
+        srcBuffer = load_message_to_buffer((s32)srcBuffer);
+    }
 
-        for (i = 0; i < ARRAY_COUNT(gMessagePrinters); i++) {
-            MessagePrintState* printer = &gMessagePrinters[i];
+    for (i = 0; i < ARRAY_COUNT(gMessagePrinters); i++) {
+        printer = &gMessagePrinters[i];
 
-            if (!(printer->stateFlags & 2)) {
-                s32 height;
-                s32 width;
-                s32 maxLineChars;
-                s32 numLines;
-                s32 maxLinesPerPage;
+        if (!(printer->stateFlags & MSG_STATE_FLAG_2)) {
+            initialize_printer(printer, 1, arg2);
+            printer->windowState = MSG_WINDOW_STATE_INIT;
+            printer->srcBuffer = srcBuffer;
+            printer->msgID = msgID;
+            printer->stateFlags |= MSG_STATE_FLAG_2;
+            get_msg_properties(msgID, &height, &width, &maxLineChars, &numLines, &maxLinesPerPage, NULL, 0);
+            printer->msgHeight = height;
+            printer->msgWidth = width;
+            printer->maxLineChars = maxLineChars;
+            printer->numLines = numLines;
+            printer->maxLinesPerPage = maxLinesPerPage;
+            printer->closedWritebackBool = donePrintingWriteback;
 
-                initialize_printer(printer, 1, arg2);
-                printer->windowState = MSG_WINDOW_STATE_INIT;
-                printer->srcBuffer = srcBuffer;
-                printer->msgID = msgID;
-                printer->stateFlags |= 2;
-                get_msg_properties(msgID, &height, &width, &maxLineChars, &numLines, &maxLinesPerPage, NULL, 0);
-                printer->msgHeight = height;
-                printer->msgWidth = width;
-                printer->maxLineChars = maxLineChars;
-                printer->numLines = numLines;
-                printer->maxLinesPerPage = maxLinesPerPage;
-                printer->closedWritebackBool = donePrintingWriteback;
-
-                if (donePrintingWriteback != NULL) {
-                    *donePrintingWriteback = FALSE;
-                }
-                return printer;
+            if (donePrintingWriteback != NULL) {
+                *donePrintingWriteback = FALSE;
             }
+            return printer;
         }
     }
+    
     return NULL;
 }
-#else
-INCLUDE_ASM(MessagePrintState*, "msg", _msg_get_printer_for_msg, s32 msgID, s32* donePrintingWriteback, s32 arg2);
-#endif
 
 s32 msg_printer_load_msg(s32 msgID, MessagePrintState* printer) {
     s8* buffer;
@@ -1042,7 +1042,25 @@ void msg_draw_rewind_arrow(s32 printerIndex) {
 
 INCLUDE_ASM(s32, "msg", msg_draw_choice_pointer);
 
-INCLUDE_ASM(s32, "msg", draw_digit);
+void draw_digit(u32 img, s32 charset, s32 posX, s32 posY) {
+    MessageNumber* num = &gMsgNumbers[charset];
+
+    gDPLoadTextureTile_4b(gMasterGfxPos++,
+        img, G_IM_FMT_CI,
+        num->texWidth , num->texHeight,
+        0, 0,
+        num->texWidth - 1, num->texHeight - 1,
+        0,
+        G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP,
+        G_TX_NOMASK, G_TX_NOMASK,
+        G_TX_NOLOD, G_TX_NOLOD);
+    gSPTextureRectangle(gMasterGfxPos++,
+        4 * posX, 4 * posY,
+        4 * (posX + num->texWidth), 4 * (posY + num->texHeight),
+        G_TX_RENDERTILE,
+        0, 0,
+        1 << 10, 1 << 10);
+}
 
 INCLUDE_ASM(void, "msg", draw_number, s32 value, s32 x, s32 y, s32 arg3, s32 palette, s32 opacity, s32 style);
 

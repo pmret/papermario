@@ -4,9 +4,6 @@
 #include "sprite/npc/sentinel.h"
 #include "message_ids.h"
 
-extern s32 wPartnerHudScripts[];
-extern s32 wDisabledPartnerHudScripts[];
-
 enum {
     NPC_SENTINEL,
 };
@@ -41,7 +38,7 @@ static s32 N(pad_3208)[] = {
 };
 
 EvtScript N(exitSingleDoor_80243210) = {
-    EVT_SET_GROUP(27)
+    EVT_SET_GROUP(EVT_GROUP_1B)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(UseDoorSounds, 0)
     EVT_SET(EVT_VAR(0), 0)
@@ -57,7 +54,7 @@ EvtScript N(exitSingleDoor_80243210) = {
 };
 
 EvtScript N(exitDoubleDoor_802432C4) = {
-    EVT_SET_GROUP(27)
+    EVT_SET_GROUP(EVT_GROUP_1B)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(UseDoorSounds, 3)
     EVT_SET(EVT_VAR(0), 1)
@@ -160,7 +157,7 @@ EvtScript N(npcAI_802435E4) = {
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(func_802D2B6C)
     EVT_CALL(DisablePartnerAI, 0)
-    EVT_SET_GROUP(0)
+    EVT_SET_GROUP(EVT_GROUP_0)
     EVT_CALL(SetTimeFreezeMode, 1)
     EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_ADD(EVT_VAR(1), 20)
@@ -272,147 +269,13 @@ NpcGroupList N(npcGroupList_80243D18) = {
     {},
 };
 
-s32 N(D_80243D30_C3A260)[] = {
-    0x001D00F0, 0x001D00F1,
-};
-
-s16 N(D_80243D38_C3A268)[] = {
-    0x0001, 0x0002, 0x0003, 0x0004,
-    0x0009, 0x0006, 0x0007, 0x0008
-};
-
-s32 N(D_80243D48_C3A278)[8][2] = {
-    { 0x001D00E0, 0x001D00E1 }, { 0x001D00E2, 0x001D00E3 },
-    { 0x001D00E4, 0x001D00E5 }, { 0x001D00E6, 0x001D00E7 },
-    { 0x001D00E8, 0x001D00E9 }, { 0x001D00EA, 0x001D00EB },
-    { 0x001D00EC, 0x001D00ED }, { 0x001D00EE, 0x001D00EF }
-};
-
-f32 N(bigFuncFloats)[] = {
-    140.0f, 180.0f, 220.0f
-};
-
-EvtScript N(80243D94) = {
-    EVT_WAIT_FRAMES(10)
-    EVT_CALL(PlaySound, 0x212D)
-    EVT_CALL(N(UnkFunc21), EVT_MAP_VAR(0))
-    EVT_WAIT_FRAMES(85)
-    EVT_THREAD
-        EVT_CALL(PlaySound, 0x212E)
-        EVT_CALL(N(func_80242F08_C39438), 70, 70)
-        EVT_WAIT_FRAMES(27)
-        EVT_CALL(PlaySound, SOUND_208E)
-        EVT_CALL(N(func_80242F08_C39438), 50, 50)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_WAIT_FRAMES(3)
-        EVT_CALL(N(func_8024240C_C3893C), EVT_MAP_VAR(0))
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_WAIT_FRAMES(47)
-        EVT_CALL(N(UnkFunc22))
-        EVT_CALL(N(UnkPartnerPosFunc))
-        EVT_WAIT_FRAMES(5)
-        EVT_CALL(N(UnkPartnerPosFunc2))
-        EVT_WAIT_FRAMES(5)
-        EVT_CALL(N(UnkPartnerPosFunc))
-    EVT_END_THREAD
-    EVT_WAIT_FRAMES(3)
-    EVT_CALL(N(UnkFunc60), EVT_MAP_VAR(0))
-    EVT_WAIT_FRAMES(30)
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(80243EF8) = {
-    EVT_IF_EQ(EVT_SAVE_FLAG(1046), 1)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(IsStartingConversation, EVT_VAR(0))
-    EVT_IF_EQ(EVT_VAR(0), 1)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(N(UnkFunc24))
-    EVT_IF_EQ(EVT_VAR(0), 1)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(ModifyGlobalOverrideFlags, 1, 2097152)
-    EVT_CALL(N(SetOverrideFlags_40))
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(DisablePartnerAI, 0)
-    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, ((NPC_FLAG_100)), TRUE)
-    EVT_CALL(N(UnkFunc20), EVT_MAP_VAR(0), EVT_VAR(9))
-    EVT_CALL(FindKeyItem, ITEM_ULTRA_STONE, EVT_VAR(12))
-    EVT_CALL(N(UnkFunc38))
-    EVT_IF_EQ(EVT_VAR(0), -1)
-        EVT_CALL(ShowMessageAtScreenPos, MESSAGE_ID(0x1D, 0x00DC), 160, 40)
-        EVT_WAIT_FRAMES(10)
-        EVT_CALL(N(UnkFunc39), EVT_VAR(9))
-        EVT_CALL(DisablePlayerInput, FALSE)
-        EVT_CALL(EnablePartnerAI)
-        EVT_CALL(ModifyGlobalOverrideFlags, 0, 2097152)
-        EVT_CALL(N(UnkFunc17))
-        EVT_RETURN
-    EVT_END_IF
-    EVT_IF_EQ(EVT_SAVE_FLAG(438), 0)
-        EVT_SET(EVT_SAVE_FLAG(438), 1)
-        EVT_CALL(ShowMessageAtScreenPos, MESSAGE_ID(0x1D, 0x00DA), 160, 40)
-    EVT_ELSE
-        EVT_CALL(ShowMessageAtScreenPos, MESSAGE_ID(0x1D, 0x00DB), 160, 40)
-    EVT_END_IF
-    EVT_CALL(N(func_8024259C_C38ACC))
-    EVT_IF_EQ(EVT_VAR(0), -1)
-        EVT_CALL(N(UnkFunc39), EVT_VAR(9))
-        EVT_CALL(DisablePlayerInput, FALSE)
-        EVT_CALL(EnablePartnerAI)
-        EVT_CALL(ModifyGlobalOverrideFlags, 0, 2097152)
-        EVT_CALL(N(UnkFunc17))
-        EVT_RETURN
-    EVT_END_IF
-    EVT_SET(EVT_VAR(10), EVT_VAR(0))
-    EVT_SET(EVT_VAR(11), EVT_VAR(1))
-    EVT_CALL(EnablePartnerAI)
-    EVT_CALL(GetCurrentPartnerID, EVT_VAR(0))
-    EVT_IF_NE(EVT_VAR(0), EVT_VAR(11))
-        EVT_CALL(N(SwitchToPartner), EVT_VAR(11))
-    EVT_ELSE
-        EVT_CALL(func_802CF56C, 2)
-    EVT_END_IF
-    EVT_WAIT_FRAMES(10)
-    EVT_CALL(ShowMessageAtScreenPos, MESSAGE_ID(0x1D, 0x00DF), 160, 40)
-    EVT_CALL(ShowChoice, MESSAGE_ID(0x1E, 0x000D))
-    EVT_CALL(CloseMessage)
-    EVT_IF_NE(EVT_VAR(0), 0)
-        EVT_CALL(N(UnkFunc39), EVT_VAR(9))
-        EVT_CALL(DisablePlayerInput, FALSE)
-        EVT_CALL(EnablePartnerAI)
-        EVT_CALL(ModifyGlobalOverrideFlags, 0, 2097152)
-        EVT_CALL(N(UnkFunc17))
-        EVT_RETURN
-    EVT_END_IF
-    EVT_EXEC_WAIT(N(80243D94))
-    EVT_CALL(N(UnkFunc18), EVT_VAR(11), EVT_VAR(13))
-    EVT_SET(EVT_SAVE_FLAG(1046), 1)
-    EVT_CALL(N(UnkFunc39), EVT_VAR(9))
-    EVT_CALL(N(UnkFunc19))
-    EVT_IF_EQ(EVT_VAR(13), 1)
-        EVT_CALL(ShowMessageAtScreenPos, MESSAGE_ID(0x1D, 0x00DD), 160, 40)
-    EVT_ELSE
-        EVT_CALL(ShowMessageAtScreenPos, MESSAGE_ID(0x1D, 0x00DE), 160, 40)
-    EVT_END_IF
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_CALL(EnablePartnerAI)
-    EVT_CALL(ModifyGlobalOverrideFlags, 0, 2097152)
-    EVT_CALL(N(UnkFunc17))
-    EVT_RETURN
-    EVT_END
-};
+#define SUPER_BLOCK_MAPVAR EVT_MAP_VAR(0)
+#define SUPER_BLOCK_GAMEFLAG EVT_SAVE_FLAG(1046)
+#include "world/common/atomic/SuperBlockData.inc.c"
 
 EvtScript N(makeEntities) = {
     EVT_CALL(MakeEntity, 0x802EA910, 500, -360, 110, 0, MAKE_ENTITY_END)
-    EVT_SET(EVT_MAP_VAR(0), EVT_VAR(0))
-    EVT_CALL(AssignBlockFlag, EVT_SAVE_FLAG(1046))
-    EVT_CALL(AssignScript, EVT_PTR(N(80243EF8)))
+    EVT_SETUP_SUPER_BLOCK(SUPER_BLOCK_MAPVAR, SUPER_BLOCK_GAMEFLAG)
     EVT_RETURN
     EVT_END
 };
@@ -744,177 +607,6 @@ ApiStatus N(func_80242154_C38684)(Evt* script, s32 isInitialCall) {
     return (script->functionTemp[0] == 100) * ApiStatus_DONE2;
 }
 
-#include "world/common/SetOverrideFlags_40.inc.c"
-
-#include "world/common/UnkFunc17.inc.c"
-
-ApiStatus N(func_8024240C_C3893C)(Evt* script, s32 isInitialCall) {
-    entity_upgrade_block_hide_content(evt_get_variable(script, *script->ptrReadPos));
-    return ApiStatus_DONE2;
-}
-
-#include "world/common/UnkFunc18.inc.c"
-
-#ifdef NON_EQUIVALENT
-typedef struct {
-    s32 unk_00[8];
-    char unk_20[0x64];
-    s32 unk_84[8];
-    char unk_A4[0x64];
-    s32 unk_108[8];
-    char unk_128[0x64];
-    s32 unk_18C[8];
-    char unk_1AC[0x64];
-    s32 unk_210[8];
-    char unk_230[0x64];
-    s32 unk_294[8];
-    char unk_2B4[0x64];
-    s32 unk_318;
-    char unk_31C[8];
-    s32 unk_324;
-    s32 unk_328;
-    s16 unk_32C;
-} N(UnkStruct);
-
-ApiStatus N(func_8024259C_C38ACC)(Evt* script, s32 isInitialCall) {
-    PlayerData* playerData = &gPlayerData;
-    N(UnkStruct)* ptr;
-    s32 i;
-    s32 partnerLevel;
-    s32 var, partnerActiveCount;
-    s32 idx;
-
-    if (isInitialCall) {
-        script->functionTemp[2] = heap_malloc(0x330);
-        ptr = script->functionTemp[2];
-
-        partnerActiveCount = 0;
-        var = script->varTable[12] >= 0;
-
-        for (i = 0; i < 8; i++) {
-            idx = N(D_80243D38_C3A268)[i];
-
-            if (playerData->partners[idx].enabled) {
-                ptr->unk_108[i] = idx;
-                ptr->unk_84[i] = *gPartnerPopupProperties[idx];
-                partnerLevel = N(UnkFunc37)(idx, var);
-                if (partnerLevel >= 0) {
-                    ptr->unk_00[i] = wPartnerHudScripts[idx];
-                    ptr->unk_18C[i] = 1;
-                    ptr->unk_294[i] = N(D_80243D48_C3A278)[i][partnerLevel];
-                } else {
-                    ptr->unk_00[i] = wDisabledPartnerHudScripts[idx];
-                    ptr->unk_18C[i] = 0;
-                    ptr->unk_294[i] = N(D_80243D30_C3A260)[var];
-                }
-                ptr->unk_210[i] = playerData->partners[idx].level;
-                partnerActiveCount++;
-            }
-        }
-
-        ptr->unk_318 = 4;
-        ptr->unk_324 = partnerActiveCount;
-        ptr->unk_328 = 0;
-        create_popup_menu(ptr);
-        script->functionTemp[0] = 0;
-    }
-
-    ptr = script->functionTemp[2];
-    if (script->functionTemp[0] == 0) {
-        script->functionTemp[1] = ptr->unk_32C;
-        if (script->functionTemp[1] != 0) {
-            hide_popup_menu();
-        } else {
-            return ApiStatus_BLOCK;
-        }
-    }
-
-    script->functionTemp[0]++;
-
-    if (script->functionTemp[0] < 15) {
-        return ApiStatus_BLOCK;
-    }
-
-    destroy_popup_menu();
-    if (script->functionTemp[1] != 0xFF) {
-        script->varTable[0] = gPartnerPopupProperties[ptr->unk_108[script->functionTemp[1] - 1]][0];
-        script->varTable[1] = ptr->unk_108[script->functionTemp[1] - 1];
-    } else {
-        script->varTable[0] = -1;
-    }
-
-    heap_free(script->functionTemp[2]);
-
-    return ApiStatus_DONE2;
-}
-#else
-INCLUDE_ASM(ApiStatus, "world/area_dgb/dgb_04/C36530", dgb_04_func_8024259C_C38ACC, Evt* script,
-            s32 isInitialCall)
-#endif
-
-#include "world/common/SwitchToPartner.inc.c"
-
-#include "world/common/UnkFunc19.inc.c"
-
-#include "world/common/UnkFunc20.inc.c"
-
-#include "world/common/UnkFunc39.inc.c"
-
-#include "world/common/UnkFunc21.inc.c"
-
-#include "world/common/UnkFunc22.inc.c"
-
-#include "world/common/UnkFunc60.inc.c"
-
-s32 N(func_80242F08_C39438)(Evt* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-    s32 ret = 0;
-
-    if (isInitialCall) {
-        script->varTable[0] = evt_get_variable(script, *args++);
-        script->varTable[1] = evt_get_variable(script, *args++);
-        script->functionTemp[0] = 0;
-        script->functionTemp[1] = 0;
-        set_screen_overlay_color(0, 0xD0, 0xD0, 0xD0);
-    }
-
-    switch (script->functionTemp[0]) {
-        case 0:
-            if (script->functionTemp[1] == 0xFF) {
-                script->functionTemp[0] = 1;
-                script->functionTemp[2] = 0;
-            }
-            script->functionTemp[1] += script->varTable[0];
-            if (script->functionTemp[1] >= 0x100) {
-                script->functionTemp[1] = 0xFF;
-            }
-            break;
-
-        case 1:
-            script->functionTemp[2]++;
-            if (script->functionTemp[2] >= 2) {
-                script->functionTemp[0] = 2;
-            }
-            break;
-
-        case 2:
-            if (script->functionTemp[1] == 0) {
-                ret = 1;
-            }
-            script->functionTemp[1] -= script->varTable[1];
-            if (script->functionTemp[1] < 0) {
-                script->functionTemp[1] = 0;
-            }
-            break;
-    }
-
-    set_screen_overlay_params_front(1, script->functionTemp[1]);
-
-    return ret;
-}
-
-#include "world/common/UnkPartnerPosFuncs.inc.c"
-
-#include "world/common/UnkFunc24.inc.c"
+#include "world/common/atomic/SuperBlock.inc.c"
 
 const char N(dgb_00_name_hack)[] = "dgb_00";

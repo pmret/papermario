@@ -139,4 +139,11 @@ typedef s32 ApiStatus;
 #define ApiStatus_REPEAT 3   /* Call again immediately */
 #define ApiStatus_FINISH 255 /* Corresponds to EVT_FINISH */
 
+typedef enum EventGroup {
+    EVT_GROUP_0     = 0x00,
+    EVT_GROUP_B     = 0x0B,
+    EVT_GROUP_1B    = 0x1B,
+    EVT_GROUP_EF    = 0xEF
+} EventGroup;
+
 #endif

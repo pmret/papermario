@@ -103,5 +103,12 @@
 #define func_8004A3E8 func_8004E808
 #define gCurrentEncounter dead_gCurrentEncounter
 #define fx_motion_blur_flame dead_fx_motion_blur_flame
+#define wPartnerHudScripts dead_wPartnerHudScripts
+#define wDisabledPartnerHudScripts dead_wDisabledPartnerHudScripts
+#define create_popup_menu dead_create_popup_menu
+#define hide_popup_menu dead_hide_popup_menu
+#define destroy_popup_menu dead_destroy_popup_menu
+#define heap_free dead_heap_free
+#define entity_upgrade_block_hide_content dead_entity_upgrade_block_hide_content
 
 #endif

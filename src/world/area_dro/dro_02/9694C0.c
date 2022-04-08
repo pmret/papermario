@@ -367,7 +367,7 @@ EvtScript N(toggleVis_8024468C) = {
 };
 
 EvtScript N(8024486C) = {
-    EVT_SET_GROUP(0)
+    EVT_SET_GROUP(EVT_GROUP_0)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(func_802D2C14, 1)
     EVT_CALL(PlayerMoveTo, 230, 10, 20)
@@ -401,7 +401,7 @@ EvtScript N(8024486C) = {
 };
 
 EvtScript N(80244A68) = {
-    EVT_SET_GROUP(0)
+    EVT_SET_GROUP(EVT_GROUP_0)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(func_802D2C14, 1)
     EVT_CALL(PlayerMoveTo, 230, -70, 20)

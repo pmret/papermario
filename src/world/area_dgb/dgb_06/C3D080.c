@@ -36,7 +36,7 @@ static s32 N(pad_3B8)[] = {
 };
 
 EvtScript N(exitSingleDoor_802403C0) = {
-    EVT_SET_GROUP(27)
+    EVT_SET_GROUP(EVT_GROUP_1B)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(UseDoorSounds, 0)
     EVT_SET(EVT_VAR(0), 0)
@@ -89,7 +89,7 @@ static s32** N(varTable) = NULL;
 #include "world/common/StashVars.inc.c"
 
 EvtScript N(80240624) = {
-    EVT_SET_GROUP(0)
+    EVT_SET_GROUP(EVT_GROUP_0)
     EVT_CALL(SetTimeFreezeMode, 2)
     EVT_WAIT_FRAMES(40)
     EVT_CALL(ShowGotItem, EVT_VAR(0), 0, 0)

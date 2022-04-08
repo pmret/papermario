@@ -42,7 +42,7 @@ static s32 N(pad_1B8)[] = {
 EvtScript N(exitWalk_802401C0) = EXIT_WALK_SCRIPT(60,  0, "arn_04",  1);
 
 EvtScript N(exitDoubleDoor_8024021C) = {
-    EVT_SET_GROUP(27)
+    EVT_SET_GROUP(EVT_GROUP_1B)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(UseDoorSounds, 3)
     EVT_SET(EVT_VAR(0), 1)

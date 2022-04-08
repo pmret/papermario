@@ -43,7 +43,7 @@ static s32 N(pad_8B8)[] = {
 };
 
 EvtScript N(updateTexturePan_802408C0) = {
-    EVT_SET_GROUP(0)
+    EVT_SET_GROUP(EVT_GROUP_0)
     EVT_IF_EQ(EVT_VAR(5), 1)
         EVT_IF_EQ(EVT_VAR(6), 1)
             EVT_IF_EQ(EVT_VAR(7), 1)
@@ -152,7 +152,7 @@ static s32 N(pad_E88)[] = {
 };
 
 EvtScript N(80240E90) = {
-    EVT_SET_GROUP(11)
+    EVT_SET_GROUP(EVT_GROUP_B)
     EVT_LOOP(0)
         EVT_CALL(PlayEffect, 0x5E, 0, EVT_FIXED(-16.0), EVT_FIXED(102.0), EVT_FIXED(-4.1), EVT_FIXED(80.9), EVT_FIXED(102.0), EVT_FIXED(-4.1), EVT_FIXED(0.5), 6, 0, 0, 0, 0)
         EVT_CALL(N(func_80240340_CDC9E0))

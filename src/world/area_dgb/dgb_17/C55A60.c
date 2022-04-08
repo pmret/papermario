@@ -31,7 +31,7 @@ static s32 N(pad_F8)[] = {
 };
 
 EvtScript N(exitDoubleDoor_80240100) = {
-    EVT_SET_GROUP(27)
+    EVT_SET_GROUP(EVT_GROUP_1B)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(UseDoorSounds, 3)
     EVT_SET(EVT_VAR(0), 0)
@@ -47,7 +47,7 @@ EvtScript N(exitDoubleDoor_80240100) = {
 };
 
 EvtScript N(exitDoubleDoor_802401B4) = {
-    EVT_SET_GROUP(27)
+    EVT_SET_GROUP(EVT_GROUP_1B)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(UseDoorSounds, 3)
     EVT_SET(EVT_VAR(0), 1)
