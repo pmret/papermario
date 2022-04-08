@@ -550,6 +550,7 @@ NpcSettings N(npcSettings_8024518C) = {
     .level = 99,
 };
 
+
 s32** N(varTable) = NULL;
 
 EvtScript N(802451BC) = {
@@ -2339,7 +2340,9 @@ N(shopPrice) N(shopPriceList_8024B550)[] = {
     {},
 };
 
-s32** N(D_8024B5B0_9667B0) = NULL;
+#define NAMESPACE dro_01_dup
+s32** N(varTable) = NULL;
+#define NAMESPACE dro_01
 
 EvtScript N(8024B5B4) = {
     EVT_CALL(ShowGotItem, EVT_VAR(0), 1, 0)
