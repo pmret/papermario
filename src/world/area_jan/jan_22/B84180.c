@@ -29,7 +29,7 @@ static char* N(exit_str_3) = "";
 
 #include "world/common/UnkNpcAIMainFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_22/B84180", func_80240E90_B85010);
+#include "world/common/StashVars.inc.c"
 
 #include "world/common/GetItemName.inc.c"
 

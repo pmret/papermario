@@ -2,7 +2,7 @@
 
 .section .data
 
-dlabel D_802410C0_86D800
+dlabel tik_02_varTable
 .word 0x00000000
 
 dlabel D_802410C4_86D804

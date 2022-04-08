@@ -341,8 +341,7 @@ ApiStatus func_80241AE0_EA23E0(Evt* script, s32 isInitialCall) {
 
 #include "world/common/AwaitPlayerNearNpc.inc.c"
 
-// StashVars.inc.c
-INCLUDE_ASM(s32, "EA0C10", func_8024267C_EA2F7C);
+#include "world/common/StashVars.inc.c"
 
 #include "world/common/GetItemName.inc.c"
 

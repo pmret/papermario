@@ -1,6 +1,8 @@
 #include "hos_06.h"
 
-INCLUDE_ASM(s32, "world/area_hos/hos_06/A3B4B0", func_80241FD0_A3B4B0);
+#define NAMESPACE dup2_hos_06
+#include "world/common/StashVars.inc.c"
+#define NAMESPACE hos_06
 
 #define NAMESPACE dup_hos_06
 #include "world/common/GetItemName.inc.c"

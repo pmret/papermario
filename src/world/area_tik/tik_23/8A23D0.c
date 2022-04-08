@@ -5,8 +5,6 @@ static char* N(exit_str_1) = "tik_20";
 
 #include "world/common/atomic/Pipe.inc.c"
 
-#include "world/common/UnkTexturePanFunc.inc.c"
-
-#include "world/common/UnkTexturePanFunc2.inc.c"
+#include "world/common/UpdateTexturePan.inc.c"
 
 #include "world/common/UnkPosFunc2.inc.c"

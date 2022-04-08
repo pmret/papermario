@@ -54,13 +54,13 @@ EvtScript N(80240DA0) = {
         EVT_IF_EQ(EVT_VAR(6), 1)
             EVT_IF_EQ(EVT_VAR(7), 1)
                 EVT_IF_EQ(EVT_VAR(8), 1)
-                    EVT_CALL(N(UnkTexturePanFunc))
+                    EVT_CALL(N(UpdateTexturePanSmooth))
                     EVT_RETURN
                 EVT_END_IF
             EVT_END_IF
         EVT_END_IF
     EVT_END_IF
-    EVT_CALL(N(UnkTexturePanFunc2))
+    EVT_CALL(N(UpdateTexturePanStepped))
     EVT_RETURN
     EVT_END
 };
@@ -1383,9 +1383,7 @@ NpcGroupList N(npcGroupList_80245AEC) = {
     {},
 };
 
-#include "world/common/UnkTexturePanFunc.inc.c"
-
-#include "world/common/UnkTexturePanFunc2.inc.c"
+#include "world/common/UpdateTexturePan.inc.c"
 
 EffectInstance* fx_sun();
 

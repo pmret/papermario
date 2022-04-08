@@ -45,7 +45,7 @@ static char* N(exit_str_1) = "nok_02";
 
 #include "world/common/UnkFunc36.inc.c"
 
-INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_80240D68_9C6148);
+#include "world/common/StashVars.inc.c"
 
 #include "world/common/GetItemName.inc.c"
 

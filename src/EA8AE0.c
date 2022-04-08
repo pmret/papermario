@@ -9,9 +9,7 @@
 extern s32 D_80248388[];
 extern s32 D_80248380;
 
-#include "world/common/UnkTexturePanFunc.inc.c"
-
-#include "world/common/UnkTexturePanFunc2.inc.c"
+#include "world/common/UpdateTexturePan.inc.c"
 
 #include "world/common/StarSpiritEffectFunc.inc.c"
 
@@ -38,7 +36,7 @@ ApiStatus func_802413FC_EA9EDC(Evt* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "EA8AE0", func_8024140C_EA9EEC);
 
-INCLUDE_ASM(s32, "EA8AE0", func_80241468_EA9F48);
+#include "world/common/StashVars.inc.c"
 
 #include "world/common/GetItemName.inc.c"
 

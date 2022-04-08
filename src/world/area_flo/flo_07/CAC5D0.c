@@ -60,13 +60,13 @@ EvtScript N(updateTexturePan_802408D0) = {
         EVT_IF_EQ(EVT_VAR(6), 1)
             EVT_IF_EQ(EVT_VAR(7), 1)
                 EVT_IF_EQ(EVT_VAR(8), 1)
-                    EVT_CALL(N(UnkTexturePanFunc))
+                    EVT_CALL(N(UpdateTexturePanSmooth))
                     EVT_RETURN
                 EVT_END_IF
             EVT_END_IF
         EVT_END_IF
     EVT_END_IF
-    EVT_CALL(N(UnkTexturePanFunc2))
+    EVT_CALL(N(UpdateTexturePanStepped))
     EVT_RETURN
     EVT_END
 };
@@ -226,7 +226,7 @@ NpcSettings N(npcSettings_80241220) = {
 
 #include "common/foliage.inc.c"
 
-s32** N(D_80241BB0_CADDA0) = NULL;
+s32** N(varTable) = NULL;
 
 EvtScript N(80241BB4) = {
     EVT_CALL(ShowGotItem, EVT_VAR(0), 1, 0)
@@ -512,23 +512,7 @@ NpcGroupList N(npcGroupList_80242B0C) = {
     {},
 };
 
-ApiStatus N(func_8024061C_CAC80C)(Evt* script, s32 isInitialCall) {
-    s32 i;
-
-    if (N(D_80241BB0_CADDA0) == NULL) {
-        N(D_80241BB0_CADDA0) = heap_malloc(16 * sizeof(s32));
-        for (i = 0; i < 16; i++) {
-            N(D_80241BB0_CADDA0)[i] = (s32*) script->varTable[i];
-        }
-    } else {
-        for (i = 0; i < 16; i++) {
-            script->varTable[i] = (s32) N(D_80241BB0_CADDA0)[i];
-        }
-        heap_free(N(D_80241BB0_CADDA0));
-        N(D_80241BB0_CADDA0) = NULL;
-    }
-    return ApiStatus_DONE2;
-}
+#include "world/common/StashVars.inc.c"
 
 #include "world/common/GetItemName.inc.c"
 

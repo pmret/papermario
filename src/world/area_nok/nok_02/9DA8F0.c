@@ -18,7 +18,9 @@ INCLUDE_ASM(s32, "world/area_nok/nok_02/9DA8F0", func_80243C78_9DAC98);
 
 INCLUDE_ASM(s32, "world/area_nok/nok_02/9DA8F0", func_80243D14_9DAD34);
 
-INCLUDE_ASM(s32, "world/area_nok/nok_02/9DA8F0", func_80243DB0_9DADD0);
+#define NAMESPACE dup2_nok_02
+#include "world/common/StashVars.inc.c"
+#define NAMESPACE nok_02
 
 #define NAMESPACE dup2_nok_02
 #include "world/common/GetItemName.inc.c"

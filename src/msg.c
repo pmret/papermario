@@ -146,7 +146,8 @@ extern MessageCharset* gMsgCharsets[5];
 extern s32 D_802F39D0;
 extern UnkMsgStruct8 D_802F4560[];
 
-s32 _update_message(MessagePrintState*);
+s32 _update_message(MessagePrintState* printer);
+void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2);
 void initialize_printer(MessagePrintState* printer, s32 arg1, s32 arg2);
 MessagePrintState* _msg_get_printer_for_msg(s32 msgID, s32* donePrintingWriteback, s32 arg2);
 void msg_update_rewind_arrow(s32);
@@ -231,7 +232,302 @@ void update_messages(void) {
     }
 }
 
-INCLUDE_ASM(s32, "msg", _update_message, MessagePrintState* msgPrintState);
+s32 _update_message(MessagePrintState* printer) {
+    f32 speechPan;
+    u8 cond;
+    s32 buttons;
+    s16 endPosDist;
+    s16 lineIncAmt;
+    s32 phi_a1_3;
+    s32 i;
+
+    printer->effectFrameCounter++;
+    if (printer->effectFrameCounter >= 3600) {
+        printer->effectFrameCounter = 0;
+    }
+
+    speechPan = (((f32)printer->initOpenPos.x - (SCREEN_WIDTH / 2.0)) / 3.8) + 64.0;
+    if (speechPan < 5.0) {
+        speechPan = 5.0f;
+    } else if (speechPan > 122.0) {
+        speechPan = 122.0f;
+    }
+    printer->speechPan = speechPan;
+
+    cond = FALSE;
+    if (!(printer->stateFlags & MSG_STATE_FLAG_40)) {
+        if (!(printer->stateFlags & (MSG_STATE_FLAG_20 | MSG_STATE_FLAG_10))) {
+            s32 buttons = BUTTON_A;
+
+            switch (printer->windowState) {
+                case MSG_WINDOW_STATE_WAITING:
+                    if (printer->stateFlags & MSG_STATE_FLAG_80000) {
+                        buttons = BUTTON_A | BUTTON_C_DOWN;
+                    }
+                    if ((buttons & gGameStatusPtr->pressedButtons) || (gGameStatusPtr->currentButtons & BUTTON_B)) {
+                        printer->windowState = MSG_WINDOW_STATE_PRINTING;
+                        printer->currentPrintDelay = 0;
+                        printer->stateFlags |= 4;
+                        if (gGameStatusPtr->pressedButtons & (BUTTON_A | BUTTON_C_DOWN)) {
+                            cond = TRUE;
+                            sfx_play_sound_with_params(SOUND_MENU_NEXT, 0, 0, 0);
+                        } else if (printer->srcBuffer[printer->srcBufferPos] != 0xFD) {
+                            printer->stateFlags |= MSG_STATE_FLAG_100 | MSG_STATE_FLAG_4;
+                            if (printer->fontVariant != 0 || printer->srcBuffer[printer->srcBufferPos] != 0xC3) {
+                                printer->stateFlags |= MSG_STATE_FLAG_100 | MSG_STATE_FLAG_80 | MSG_STATE_FLAG_4;
+                            }
+                            sfx_play_sound_with_params(SOUND_CC, 0, 0, 0);
+                        } else if (printer->style == MSG_STYLE_RIGHT ||
+                                   printer->style == MSG_STYLE_LEFT ||
+                                   printer->style == MSG_STYLE_CENTER ||
+                                   printer->style == MSG_STYLE_TATTLE)
+                        {
+                            sfx_play_sound_with_params(SOUND_MENU_NEXT, 0, 0, 0);
+                        }
+                    } else if ((gGameStatusPtr->pressedButtons & BUTTON_Z) &&
+                               !(printer->stateFlags & MSG_STATE_FLAG_40000) &&
+                               (printer->currentLine != 0))
+                    {
+                        printer->windowState = MSG_WINDOW_STATE_B;
+                        printer->unk_4CC = 0;
+                        printer->unkArraySize = printer->currentLine - 1;
+                        printer->unk_4C8 = abs(printer->curLinePos - printer->lineEndPos[printer->unkArraySize]);
+                        sfx_play_sound_with_params(SOUND_CD, 0, 0, 0);
+                    }
+                    break;
+                case MSG_WINDOW_STATE_C:
+                    if (gGameStatusPtr->pressedButtons & BUTTON_B) {
+                        printer->windowState = MSG_WINDOW_STATE_B;
+                        printer->unk_4CC = 0;
+                        printer->unkArraySize = printer->currentLine;
+                        printer->unk_4C8 = abs(printer->curLinePos - printer->lineEndPos[printer->unkArraySize]);
+                        sfx_play_sound_with_params(SOUND_CC, 0, 0, 0);
+                    } else if (gGameStatusPtr->pressedButtons & BUTTON_Z) {
+                        if (printer->unkArraySize > 0) {
+                            printer->windowState = MSG_WINDOW_STATE_B;
+                            printer->unk_4CC = 0;
+                            printer->unkArraySize--;
+                            printer->unk_4C8 = abs(printer->curLinePos - printer->lineEndPos[printer->unkArraySize]);
+                            sfx_play_sound_with_params(SOUND_CD, 0, 0, 0);
+                        }
+                    } else {
+                        if (gGameStatusPtr->pressedButtons & BUTTON_A) {
+                            printer->windowState = MSG_WINDOW_STATE_B;
+                            printer->unk_4CC = 0;
+                            printer->unkArraySize++;
+                            printer->unk_4C8 = abs(printer->curLinePos - printer->lineEndPos[printer->unkArraySize]);
+                            sfx_play_sound_with_params(SOUND_CE, 0, 0, 0);
+                        }
+                    }
+                    break;
+                case MSG_WINDOW_STATE_WAITING_FOR_CHOICE:
+                    if (gGameStatusPtr->pressedButtons & BUTTON_A) {
+                        printer->madeChoice = 1;
+                        printer->windowState = MSG_WINDOW_STATE_PRINTING;
+                        printer->unkCounter = 0;
+                        printer->stateFlags |= MSG_STATE_FLAG_20000;
+                        sfx_play_sound_with_params(SOUND_MENU_NEXT, 0, 0, 0);
+                    } else if (printer->cancelOption != 0xFF && (gGameStatusPtr->pressedButtons & BUTTON_B)) {
+                        if (printer->cancelOption >= printer->maxOption) {
+                            printer->selectedOption = printer->currentOption;
+                        } else {
+                            printer->selectedOption = printer->cancelOption;
+                        }
+                        printer->madeChoice = 1;
+                        printer->windowState = MSG_WINDOW_STATE_PRINTING;
+                        printer->unkCounter = 0;
+                        printer->currentOption = printer->cancelOption;
+                        printer->stateFlags |= MSG_STATE_FLAG_20000;
+                        sfx_play_sound_with_params(SOUND_MENU_BACK, 0, 0, 0);
+                    } else if (gGameStatusPtr->heldButtons & BUTTON_STICK_DOWN) {
+                        if (printer->currentOption != printer->maxOption - 1) {
+                            printer->targetOption = printer->currentOption + 1;
+                            printer->windowState = MSG_WINDOW_STATE_SCROLLING_BACK;
+                            printer->unkCounter = 1;
+                            sfx_play_sound_with_params(SOUND_MENU_CHANGE_SELECTION, 0, 0, 0);
+                        }
+                    } else if (gGameStatusPtr->heldButtons & BUTTON_STICK_UP) {
+                        if (printer->currentOption != 0) {
+                            printer->targetOption = printer->currentOption - 1;
+                            printer->windowState = MSG_WINDOW_STATE_SCROLLING_BACK;
+                            printer->unkCounter = 1;
+                            sfx_play_sound_with_params(SOUND_MENU_CHANGE_SELECTION, 0, 0, 0);
+                        }
+                    }
+
+                    if (printer->windowState != MSG_WINDOW_STATE_SCROLLING_BACK) {
+                        break;
+                    }
+                case MSG_WINDOW_STATE_SCROLLING_BACK:
+                    printer->unkCounter++;
+                    if (printer->unkCounter >= 5) {
+                        printer->windowState = 7;
+                        printer->currentOption = printer->targetOption;
+                        printer->selectedOption = printer->currentOption;
+                    }
+                    break;
+            }
+        } else if (!(printer->stateFlags & MSG_STATE_FLAG_20) &&
+                    printer->windowState == 5 &&
+                    (gGameStatusPtr->pressedButtons & BUTTON_A))
+        {
+            printer->windowState = MSG_WINDOW_STATE_PRINTING;
+            printer->currentPrintDelay = 0;
+            printer->stateFlags |= MSG_STATE_FLAG_4;
+        }
+
+        if (printer->stateFlags & MSG_STATE_FLAG_4 && !(gGameStatusPtr->currentButtons & BUTTON_A)) {
+            printer->stateFlags &= ~MSG_STATE_FLAG_4;
+        }
+
+        for (i = 0; i < ARRAY_COUNT(printer->animTimers); i++) {
+            if (printer->animTimers[i] > 0) {
+                printer->animTimers[i]--;
+            }
+        }
+
+        switch (printer->windowState) {
+            case MSG_WINDOW_STATE_PRINTING:
+                if ((gGameStatusPtr->pressedButtons & BUTTON_A) | (gGameStatusPtr->currentButtons & BUTTON_B)) {
+                    if (!(printer->stateFlags & (MSG_STATE_FLAG_20 | MSG_STATE_FLAG_10)) && !cond) {
+                        printer->stateFlags |= MSG_STATE_FLAG_100;
+
+                    }
+                }
+            // fallthrough
+            case MSG_WINDOW_STATE_INIT:
+                phi_a1_3 = printer->charsPerChunk;
+                if (printer->windowState == MSG_WINDOW_STATE_INIT) {
+                    printer->windowState = MSG_WINDOW_STATE_PRINTING;
+                    printer->currentPrintDelay = 0;
+                } else if (printer->stateFlags & MSG_STATE_FLAG_100) {
+                    phi_a1_3 = 12;
+                    printer->currentPrintDelay = 0;
+                } else if (!(printer->stateFlags & MSG_STATE_FLAG_4)) {
+                    if (!(printer->stateFlags & (MSG_STATE_FLAG_20 | MSG_STATE_FLAG_10)) &&
+                        (gGameStatusPtr->currentButtons & BUTTON_A))
+                    {
+                        phi_a1_3 = 6;
+                        printer->currentPrintDelay = 0;
+                    }
+                }
+                if ((printer->currentPrintDelay == 0) || --printer->currentPrintDelay == 0) {
+                    msg_copy_to_print_buffer(printer, phi_a1_3, 0);
+                }
+                break;
+            case MSG_WINDOW_STATE_SCROLLING:
+                if (gGameStatusPtr->pressedButtons & (BUTTON_A | BUTTON_B)) {
+                    if (!(printer->stateFlags & (MSG_STATE_FLAG_20 | MSG_STATE_FLAG_10))) {
+                        printer->stateFlags |= MSG_STATE_FLAG_100;
+                    }
+                }
+                printer->curLinePos += printer->unk_464;
+                if ((printer->stateFlags & MSG_STATE_FLAG_100) ||
+                    (!(printer->stateFlags & (MSG_STATE_FLAG_10 | MSG_STATE_FLAG_4)) &&
+                    (gGameStatusPtr->currentButtons & BUTTON_A)))
+                {
+                    printer->curLinePos += 6;
+                }
+
+                if (printer->curLinePos >= printer->nextLinePos) {
+                    printer->windowState = MSG_WINDOW_STATE_PRINTING;
+                    printer->curLinePos = printer->nextLinePos;
+                    printer->stateFlags |= MSG_STATE_FLAG_4;
+
+                    if (printer->style == MSG_STYLE_SIGN ||
+                        printer->style == MSG_STYLE_LAMPPOST ||
+                        printer->srcBuffer[printer->srcBufferPos] == 0xF1)
+                    {
+                        printer->currentPrintDelay = 0;
+                    } else {
+                        printer->currentPrintDelay = 5;
+                    }
+                    printer->lineEndPos[printer->currentLine] = printer->curLinePos;
+                }
+                break;
+            case MSG_WINDOW_STATE_B:
+                printer->unk_4CC += 1;
+                endPosDist = abs(printer->curLinePos - printer->lineEndPos[printer->unkArraySize]);
+                lineIncAmt = 2;
+
+                if (printer->unk_4C8 <= 16) {
+                    if (endPosDist >= 15) {
+                        lineIncAmt = 4;
+                    } else if (endPosDist >= 9) {
+                        lineIncAmt = 3;
+                    }
+                } else if (endPosDist > 96) {
+                    lineIncAmt = 10;
+                } else if (endPosDist > 48) {
+                    lineIncAmt = 9;
+                } else if (endPosDist >= 24) {
+                    lineIncAmt = 7;
+                } else if (endPosDist >= 16) {
+                    lineIncAmt = 5;
+                } else if (endPosDist >= 8) {
+                    lineIncAmt = 4;
+                } else if (endPosDist > 4) {
+                    lineIncAmt = 3;
+                }
+
+                printer->unk_4CA = lineIncAmt;
+
+                if (printer->lineEndPos[printer->unkArraySize] < printer->curLinePos) {
+                    printer->curLinePos -= printer->unk_4CA;
+                    if (printer->lineEndPos[printer->unkArraySize] >= printer->curLinePos) {
+                        printer->curLinePos = printer->lineEndPos[printer->unkArraySize];
+                        printer->windowState = MSG_WINDOW_STATE_C;
+                    }
+                } else {
+                    printer->curLinePos += printer->unk_4CA;
+                    if (printer->curLinePos >= printer->lineEndPos[printer->unkArraySize]) {
+                        printer->curLinePos = printer->lineEndPos[printer->unkArraySize];
+                        printer->windowState = MSG_WINDOW_STATE_C;
+                        if (printer->unkArraySize == printer->currentLine) {
+                            printer->windowState = MSG_WINDOW_STATE_WAITING;
+                            printer->rewindArrowAnimState = 0;
+                            printer->rewindArrowBlinkCounter = 0;
+                        }
+                    }
+                }
+                break;
+            case MSG_WINDOW_STATE_OPENING:
+            case MSG_WINDOW_STATE_CLOSING:
+            case MSG_WINDOW_STATE_WAITING:
+            case MSG_WINDOW_STATE_WAITING_FOR_CHOICE:
+            case MSG_WINDOW_STATE_SCROLLING_BACK:
+            case MSG_WINDOW_STATE_VIEWING_PREV:
+            case MSG_WINDOW_STATE_A:
+            case MSG_WINDOW_STATE_C:
+            case MSG_WINDOW_STATE_D:
+            case MSG_WINDOW_STATE_E:
+                break;
+        }
+    }
+
+    if (printer->stateFlags & MSG_STATE_FLAG_1) {
+        printer->windowState = MSG_WINDOW_STATE_DONE;
+        printer->stateFlags = 0;
+        if (printer->letterBackgroundImg != NULL) {
+            general_heap_free(printer->letterBackgroundImg);
+        }
+        if (printer->letterBackgroundPal != NULL) {
+            general_heap_free(printer->letterBackgroundPal);
+        }
+        if (printer->letterContentImg != NULL) {
+            general_heap_free(printer->letterContentImg);
+        }
+        if (printer->letterContentPal != NULL) {
+            general_heap_free(printer->letterContentPal);
+        }
+        if (printer->closedWritebackBool != NULL) {
+            *printer->closedWritebackBool = TRUE;
+            printer->closedWritebackBool = NULL;
+        }
+    }
+
+    return printer->windowState;
+}
 
 void render_messages(void) {
     Mtx* matrix = &gMessageWindowProjMatrix[gCurrentDisplayContextIndex];
@@ -256,13 +552,18 @@ void render_messages(void) {
             draw_message_window(&gMessagePrinters[i]);
 
             if (gMessagePrinters[i].windowState == MSG_WINDOW_STATE_WAITING) {
-                if (!(gMessagePrinters[i].stateFlags & MSG_STATE_FLAG_8000) && !(gMessagePrinters[i].stateFlags & MSG_STATE_FLAG_40)) {
+                if (!(gMessagePrinters[i].stateFlags & MSG_STATE_FLAG_8000) &&
+                    !(gMessagePrinters[i].stateFlags & MSG_STATE_FLAG_40))
+                {
                     msg_update_rewind_arrow(i);
                 }
             } else if (gMessagePrinters[i].windowState == MSG_WINDOW_STATE_C) {
                 msg_draw_rewind_arrow(i);
-            } else if (gMessagePrinters[i].windowState == MSG_WINDOW_STATE_WAITING_FOR_CHOICE || gMessagePrinters[i].windowState == MSG_WINDOW_STATE_SCROLLING_BACK ||
-                       gMessagePrinters[i].stateFlags & MSG_STATE_FLAG_10000 || gMessagePrinters[i].stateFlags & MSG_STATE_FLAG_20000) {
+            } else if (gMessagePrinters[i].windowState == MSG_WINDOW_STATE_WAITING_FOR_CHOICE ||
+                       gMessagePrinters[i].windowState == MSG_WINDOW_STATE_SCROLLING_BACK ||
+                       gMessagePrinters[i].stateFlags & MSG_STATE_FLAG_10000 ||
+                       gMessagePrinters[i].stateFlags & MSG_STATE_FLAG_20000)
+            {
                 msg_draw_choice_pointer(&gMessagePrinters[i]);
             }
         }
@@ -292,6 +593,7 @@ void msg_play_speech_sound(MessagePrintState* printer, u8 character) {
         }
     }
 }
+
 
 INCLUDE_ASM(s32, "msg", msg_copy_to_print_buffer);
 
@@ -547,19 +849,19 @@ void close_message(MessagePrintState* msgPrintState) {
 
 s32 msg_get_print_char_width(s32 character, s32 charset, s32 variation, f32 msgScale, s32 overrideCharWidth, u8 flags) {
     f32 charWidth;
-    
-    if (character >= MSG_CONTROL_CHAR 
+
+    if (character >= MSG_CONTROL_CHAR
             && (character != MSG_CHAR_READ_SPACE
             && character != MSG_CHAR_READ_FULL_SPACE
             && character != MSG_CHAR_READ_HALF_SPACE)) {
         return 0;
     }
-    
+
     if (overrideCharWidth != 0) {
         charWidth = overrideCharWidth;
     } else if (flags != 0) {
         u8* charWidthTable = gMsgCharsets[charset]->rasters[variation].charWidthTable;
-        
+
         if (charWidthTable != NULL
                 && character != MSG_CHAR_READ_SPACE
                 && character != MSG_CHAR_READ_FULL_SPACE
@@ -590,19 +892,19 @@ s32 msg_get_print_char_width(s32 character, s32 charset, s32 variation, f32 msgS
 
 s32 msg_get_draw_char_width(s32 character, s32 charset, s32 variation, f32 msgScale, s32 overrideCharWidth, u16 flags) {
     f32 baseWidth;
-    
-    if (character >= MSG_CONTROL_CHAR 
+
+    if (character >= MSG_CONTROL_CHAR
             && (character != MSG_CHAR_PRINT_SPACE
             && character != MSG_CHAR_PRINT_FULL_SPACE
             && character != MSG_CHAR_PRINT_HALF_SPACE)) {
         return 0;
     }
-    
+
     if (overrideCharWidth != 0) {
         baseWidth = overrideCharWidth;
     } else if (flags & MSG_PRINT_FLAG_100) {
         u8* charWidthTable = gMsgCharsets[charset]->rasters[variation].charWidthTable;
-        
+
         if (charWidthTable != NULL
                 && character != MSG_CHAR_PRINT_SPACE
                 && character != MSG_CHAR_PRINT_FULL_SPACE
@@ -656,7 +958,7 @@ void draw_msg(s32 msgID, s32 posX, s32 posY, s32 opacity, s32 palette, u8 style)
     s32 charset;
     u16 flags;
     s32 width;
-    
+
     flags = 0;
     bufferPos = 0;
     mallocSpace = NULL;
@@ -1983,7 +2285,11 @@ void appendGfx_message(MessagePrintState* printer, s16 posX, s16 posY, u16 addit
                         }
 
                         if ((printer->windowState == MSG_WINDOW_STATE_B || printer->windowState == MSG_WINDOW_STATE_C) &&
-                            (printer->style == 1 || printer->style == 2 || printer->style == 3 || printer->style == 4)) {
+                            (printer->style == MSG_STYLE_RIGHT ||
+                             printer->style == MSG_STYLE_LEFT ||
+                             printer->style == MSG_STYLE_CENTER ||
+                             printer->style == MSG_STYLE_TATTLE))
+                        {
                             switch (palette) {
                                 case MSG_PAL_WHITE:
                                 case MSG_PAL_RED:

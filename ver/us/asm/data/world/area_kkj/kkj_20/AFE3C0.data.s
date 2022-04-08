@@ -2,7 +2,7 @@
 
 .section .data
 
-dlabel D_80240880_AFE3C0
+dlabel kkj_20_varTable
 .word 0x00000000
 
 dlabel D_80240884_AFE3C4

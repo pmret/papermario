@@ -267,6 +267,7 @@ func_8004D8E0 = 0x8004D8E0;
 dead_rand_int = 0x8002ACEC;
 dead_get_npc_safe = 0x8003E534;
 dead_heap_malloc = 0x8002BFD4;
+dead_heap_free = 0x8002C01C;
 dead_general_heap_malloc = 0x8002BF18;
 dead_heap_free = 0x8002C01C;
 dead_sin_deg = 0x8002B5DC;

@@ -517,6 +517,7 @@ void start_rumble(s32, s32);
 void update_locomotion_state(void);
 void start_rumble_type(u32);
 void start_falling(void);
+void start_bounce_b(void);
 
 void set_action_state(s32 actionState);
 s32 get_collider_type_by_id(s32 colliderID);
