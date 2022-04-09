@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_8024129C_D069CC
+glabel sam_02_Quizmo_UnkB
 /* D069CC 8024129C 27BDFFC8 */  addiu     $sp, $sp, -0x38
 /* D069D0 802412A0 AFB1001C */  sw        $s1, 0x1c($sp)
 /* D069D4 802412A4 AFBF0020 */  sw        $ra, 0x20($sp)
@@ -38,8 +38,8 @@ glabel func_8024129C_D069CC
 /* D06A50 80241320 0220202D */  daddu     $a0, $s1, $zero
 /* D06A54 80241324 3C05F4AC */  lui       $a1, 0xf4ac
 /* D06A58 80241328 34A5D481 */  ori       $a1, $a1, 0xd481
-/* D06A5C 8024132C 3C108025 */  lui       $s0, %hi(sam_02_8024B9B0)
-/* D06A60 80241330 2610B9B0 */  addiu     $s0, $s0, %lo(sam_02_8024B9B0)
+/* D06A5C 8024132C 3C108025 */  lui       $s0, %hi(sam_02_Quizmo_StageEffect)
+/* D06A60 80241330 2610B9B0 */  addiu     $s0, $s0, %lo(sam_02_Quizmo_StageEffect)
 /* D06A64 80241334 0C0B1EAF */  jal       evt_get_variable
 /* D06A68 80241338 AE020000 */   sw       $v0, ($s0)
 /* D06A6C 8024133C 0220202D */  daddu     $a0, $s1, $zero
@@ -66,8 +66,8 @@ glabel func_8024129C_D069CC
 /* D06AC0 80241390 0000202D */   daddu    $a0, $zero, $zero
 /* D06AC4 80241394 0220202D */  daddu     $a0, $s1, $zero
 /* D06AC8 80241398 3C05F4AC */  lui       $a1, 0xf4ac
-/* D06ACC 8024139C 3C018025 */  lui       $at, %hi(D_8024B9B4)
-/* D06AD0 802413A0 AC22B9B4 */  sw        $v0, %lo(D_8024B9B4)($at)
+/* D06ACC 8024139C 3C018025 */  lui       $at, %hi(sam_02_Quizmo_AudienceEffect)
+/* D06AD0 802413A0 AC22B9B4 */  sw        $v0, %lo(sam_02_Quizmo_AudienceEffect)($at)
 /* D06AD4 802413A4 0C0B1EAF */  jal       evt_get_variable
 /* D06AD8 802413A8 34A5D481 */   ori      $a1, $a1, 0xd481
 /* D06ADC 802413AC 0220202D */  daddu     $a0, $s1, $zero
@@ -98,16 +98,16 @@ glabel func_8024129C_D069CC
 /* D06B40 80241410 E7A00010 */   swc1     $f0, 0x10($sp)
 /* D06B44 80241414 8E030000 */  lw        $v1, ($s0)
 /* D06B48 80241418 8C64000C */  lw        $a0, 0xc($v1)
-/* D06B4C 8024141C 3C018025 */  lui       $at, %hi(D_8024B9B8)
-/* D06B50 80241420 AC22B9B8 */  sw        $v0, %lo(D_8024B9B8)($at)
+/* D06B4C 8024141C 3C018025 */  lui       $at, %hi(sam_02_Quizmo_VannaTEffect)
+/* D06B50 80241420 AC22B9B8 */  sw        $v0, %lo(sam_02_Quizmo_VannaTEffect)($at)
 /* D06B54 80241424 AC800018 */  sw        $zero, 0x18($a0)
 /* D06B58 80241428 AC800020 */  sw        $zero, 0x20($a0)
 /* D06B5C 8024142C AC800024 */  sw        $zero, 0x24($a0)
 /* D06B60 80241430 AC800028 */  sw        $zero, 0x28($a0)
 /* D06B64 80241434 AC80001C */  sw        $zero, 0x1c($a0)
 .L80241438:
-/* D06B68 80241438 3C028025 */  lui       $v0, %hi(sam_02_8024B9B0)
-/* D06B6C 8024143C 8C42B9B0 */  lw        $v0, %lo(sam_02_8024B9B0)($v0)
+/* D06B68 80241438 3C028025 */  lui       $v0, %hi(sam_02_Quizmo_StageEffect)
+/* D06B6C 8024143C 8C42B9B0 */  lw        $v0, %lo(sam_02_Quizmo_StageEffect)($v0)
 /* D06B70 80241440 8C44000C */  lw        $a0, 0xc($v0)
 /* D06B74 80241444 8C820020 */  lw        $v0, 0x20($a0)
 /* D06B78 80241448 8C830028 */  lw        $v1, 0x28($a0)

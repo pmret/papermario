@@ -1,23 +1,23 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_802414B4_D06BE4
+glabel sam_02_Quizmo_UnkC
 /* D06BE4 802414B4 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* D06BE8 802414B8 10A0000B */  beqz      $a1, .L802414E8
 /* D06BEC 802414BC AFBF0010 */   sw       $ra, 0x10($sp)
-/* D06BF0 802414C0 3C038025 */  lui       $v1, %hi(D_8024B9B4)
-/* D06BF4 802414C4 8C63B9B4 */  lw        $v1, %lo(D_8024B9B4)($v1)
+/* D06BF0 802414C0 3C038025 */  lui       $v1, %hi(sam_02_Quizmo_AudienceEffect)
+/* D06BF4 802414C4 8C63B9B4 */  lw        $v1, %lo(sam_02_Quizmo_AudienceEffect)($v1)
 /* D06BF8 802414C8 8C620000 */  lw        $v0, ($v1)
-/* D06BFC 802414CC 3C048025 */  lui       $a0, %hi(D_8024B9B8)
-/* D06C00 802414D0 8C84B9B8 */  lw        $a0, %lo(D_8024B9B8)($a0)
+/* D06BFC 802414CC 3C048025 */  lui       $a0, %hi(sam_02_Quizmo_VannaTEffect)
+/* D06C00 802414D0 8C84B9B8 */  lw        $a0, %lo(sam_02_Quizmo_VannaTEffect)($a0)
 /* D06C04 802414D4 34420010 */  ori       $v0, $v0, 0x10
 /* D06C08 802414D8 AC620000 */  sw        $v0, ($v1)
 /* D06C0C 802414DC 8C820000 */  lw        $v0, ($a0)
 /* D06C10 802414E0 34420010 */  ori       $v0, $v0, 0x10
 /* D06C14 802414E4 AC820000 */  sw        $v0, ($a0)
 .L802414E8:
-/* D06C18 802414E8 3C048025 */  lui       $a0, %hi(sam_02_8024B9B0)
-/* D06C1C 802414EC 8C84B9B0 */  lw        $a0, %lo(sam_02_8024B9B0)($a0)
+/* D06C18 802414E8 3C048025 */  lui       $a0, %hi(sam_02_Quizmo_StageEffect)
+/* D06C1C 802414EC 8C84B9B0 */  lw        $a0, %lo(sam_02_Quizmo_StageEffect)($a0)
 /* D06C20 802414F0 8C85000C */  lw        $a1, 0xc($a0)
 /* D06C24 802414F4 8CA20018 */  lw        $v0, 0x18($a1)
 /* D06C28 802414F8 8CA30020 */  lw        $v1, 0x20($a1)
@@ -41,8 +41,8 @@ glabel func_802414B4_D06BE4
 .L80241540:
 /* D06C70 80241540 0C016914 */  jal       remove_effect
 /* D06C74 80241544 ACA00018 */   sw       $zero, 0x18($a1)
-/* D06C78 80241548 3C048025 */  lui       $a0, %hi(D_8024B990)
-/* D06C7C 8024154C 8C84B990 */  lw        $a0, %lo(D_8024B990)($a0)
+/* D06C78 80241548 3C048025 */  lui       $a0, %hi(sam_02_Quizmo_Worker)
+/* D06C7C 8024154C 8C84B990 */  lw        $a0, %lo(sam_02_Quizmo_Worker)($a0)
 /* D06C80 80241550 0C048D70 */  jal       free_generic_entity
 /* D06C84 80241554 00000000 */   nop
 /* D06C88 80241558 24020002 */  addiu     $v0, $zero, 2

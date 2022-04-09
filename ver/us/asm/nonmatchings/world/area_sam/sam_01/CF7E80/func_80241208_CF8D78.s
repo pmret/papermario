@@ -1,9 +1,9 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_80241208_CF8D78
-/* CF8D78 80241208 3C028025 */  lui       $v0, %hi(D_8024DF20)
-/* CF8D7C 8024120C 8C42DF20 */  lw        $v0, %lo(D_8024DF20)($v0)
+glabel sam_01_Quizmo_UnkG
+/* CF8D78 80241208 3C028025 */  lui       $v0, %hi(sam_01_Quizmo_VannaTEffect)
+/* CF8D7C 8024120C 8C42DF20 */  lw        $v0, %lo(sam_01_Quizmo_VannaTEffect)($v0)
 /* CF8D80 80241210 8C43000C */  lw        $v1, 0xc($v0)
 /* CF8D84 80241214 24020001 */  addiu     $v0, $zero, 1
 /* CF8D88 80241218 AC62001C */  sw        $v0, 0x1c($v1)

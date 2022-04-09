@@ -3070,22 +3070,6 @@ NpcGroupList N(npcGroupList_8024EEF4) = {
 #include "world/common/GetItemName.inc.c"
 
 #include "world/common/atomic/Quizmo.inc.c"
-#include "world/common/atomic/Quizmo_UnkA.inc.c"
-#include "world/common/atomic/Quizmo_UnkB.inc.c"
-#include "world/common/atomic/Quizmo_UnkC.inc.c"
-#include "world/common/atomic/Quizmo_UnkD.inc.c"
-#include "world/common/atomic/Quizmo_UnkE.inc.c"
-#include "world/common/atomic/Quizmo_UnkF.inc.c"
-#include "world/common/atomic/Quizmo_UnkG.inc.c"
-#include "world/common/atomic/Quizmo_UnkH.inc.c"
-#include "world/common/GetGameStatus75.inc.c"
-#include "world/common/SetCamVfov.inc.c"
-#include "world/common/GetCamVfov.inc.c"
-#include "world/common/UnkCameraFunc.inc.c"
-#include "world/common/UnkRotatePlayer.inc.c"
-#include "world/common/UnkPartnerFuncs.inc.c"
-#include "world/common/atomic/Quizmo_UnkI.inc.c"
-#include "world/common/atomic/Quizmo_UnkJ.inc.c"
 
 ApiStatus N(func_80241394_96A554)(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
