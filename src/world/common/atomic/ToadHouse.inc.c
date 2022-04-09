@@ -75,11 +75,11 @@ ApiStatus N(ToadHouse_DoesPlayerNeedSleep)(Evt* script, s32 isInitialCall) {
 
 ApiStatus N(ToadHouse_InitScreenOverlay)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 R = evt_get_variable(script, *args++);
-    s32 G = evt_get_variable(script, *args++);
-    s32 B = evt_get_variable(script, *args++);
+    s32 r = evt_get_variable(script, *args++);
+    s32 g = evt_get_variable(script, *args++);
+    s32 b = evt_get_variable(script, *args++);
 
-    set_screen_overlay_color(0, R, G, B);
+    set_screen_overlay_color(0, r, g, b);
     return ApiStatus_DONE2;
 }
 

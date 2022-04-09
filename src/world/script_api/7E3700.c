@@ -42,7 +42,7 @@ ApiStatus func_80283240(Evt* script) {
     s32 retVal = FALSE;
     s32 i;
 
-    for(i = 0; i < MAX_SCRIPTS; i++)
+    for (i = 0; i < MAX_SCRIPTS; i++)
     {
         Evt* iterScript = get_script_by_index(i);
         if (iterScript != 0) {
