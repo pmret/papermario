@@ -30,13 +30,9 @@
 
 #include "world/common/GetItemName.inc.c"
 
-#include "world/common/Set80151310.inc.c"
+#include "world/common/atomic/Quizmo.inc.c"
 
-#include "world/common/UnkQuizFunc.inc.c"
-
-#include "world/common/UnkFunc31.inc.c"
-
-INCLUDE_ASM(s32, "world/area_hos/hos_03/A1BDB0", func_80242B90_A1DC90);
+#include "world/common/atomic/Quizmo_UnkA.inc.c"
 
 INCLUDE_ASM(s32, "world/area_hos/hos_03/A1BDB0", func_80242C14_A1DD14);
 

@@ -59,14 +59,14 @@ typedef struct {
 
 void N(func_802430C8_95E2C8)(Unk_Struct_1* ptr, s32 arg1);
 
-static s32 N(D_8024DFC0);
+static s32 N(Quizmo_Worker);
 static s8 N(pad_D_8024DFC4)[0x4];
 static s32 N(pad_D_8024DFC8)[4];
 static s32 N(D_8024DFD8);
 static s8 N(pad_D_8024DFDC)[0x4];
-static EffectInstance* N(D_8024DFE0);
-static EffectInstance* N(D_8024DFE4);
-static EffectInstance* N(D_8024DFE8);
+static EffectInstance* N(Quizmo_StageEffect);
+static EffectInstance* N(Quizmo_Audienceffect);
+static EffectInstance* N(Quizmo_VannaTEffect);
 static s8 N(pad_D_8024DFEC)[0x4];
 static s32 N(D_8024DFF0)[112];
 static s8 N(pad_D_8024E1B0)[0x4]; // Probably part of the above
@@ -321,24 +321,7 @@ EvtScript N(802451EC) = {
     EVT_END
 };
 
-u8 N(quizAnswers)[] = {
-    0x02, 0x01, 0x01, 0x02, 0x02, 0x00, 0x02, 0x00,
-    0x02, 0x01, 0x00, 0x02, 0x01, 0x01, 0x00, 0x02,
-    0x00, 0x02, 0x01, 0x00, 0x00, 0x02, 0x01, 0x00,
-    0x02, 0x01, 0x01, 0x02, 0x02, 0x01, 0x01, 0x01,
-    0x00, 0x02, 0x02, 0x02, 0x02, 0x00, 0x01, 0x01,
-    0x02, 0x01, 0x02, 0x01, 0x02, 0x00, 0x00, 0x01,
-    0x01, 0x00, 0x01, 0x02, 0x01, 0x00, 0x02, 0x02,
-    0x01, 0x02, 0x00, 0x02, 0x02, 0x01, 0x01, 0x01,
-};
-
-QuizRequirements N(quizRequirements)[] = {
-    { -108, 0 }, { -76, 10 },
-    { -54, 20 }, { -14, 30 },
-    {   6, 37 }, {  39, 44 },
-    {  58, 52 }, {  88, 60 },
-    {  96, 64 }, {   0, 64 },
-};
+#include "world/common/atomic/QuizmoData.inc.c"
 
 EvtScript N(802452AC) = {
     EVT_CALL(N(GetGameStatus75))
@@ -782,7 +765,7 @@ EvtScript N(802468F8) = {
         EVT_END_IF
         EVT_WAIT_FRAMES(1)
     EVT_END_LOOP
-    EVT_CALL(N(func_80241BE0_95CDE0))
+    EVT_CALL(N(Quizmo_UnkB))
     EVT_LOOP(5)
         EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
         EVT_ADD(EVT_VAR(1), 1)
@@ -802,11 +785,11 @@ EvtScript N(802468F8) = {
     EVT_EXEC(N(80245AF8))
     EVT_WAIT_FRAMES(15)
     EVT_CALL(PlaySound, 141)
-    EVT_CALL(N(func_80241EE0_95D0E0), EVT_VAR(0))
+    EVT_CALL(N(Quizmo_UnkE), EVT_VAR(0))
     EVT_SET(EVT_ARRAY(4), 0)
     EVT_CALL(N(func_802424D4_95D6D4))
     EVT_WAIT_FRAMES(40)
-    EVT_CALL(N(func_80241B5C_95CD5C))
+    EVT_CALL(N(Quizmo_UnkA))
     EVT_THREAD
         EVT_WAIT_FRAMES(110)
         EVT_CALL(CloseChoice)
@@ -816,11 +799,11 @@ EvtScript N(802468F8) = {
         EVT_CALL(SetNpcAnimation, 10, NPC_ANIM_chuck_quizmo_Palette_00_Anim_7)
         EVT_SET(EVT_ARRAY(4), 1)
         EVT_THREAD
-            EVT_CALL(N(func_80241EAC_95D0AC), 1)
+            EVT_CALL(N(Quizmo_UnkD), 1)
             EVT_WAIT_FRAMES(6)
             EVT_WAIT_FRAMES(6)
             EVT_WAIT_FRAMES(6)
-            EVT_CALL(N(func_80241EAC_95D0AC), 2)
+            EVT_CALL(N(Quizmo_UnkD), 2)
         EVT_END_THREAD
         EVT_THREAD
             EVT_CALL(PlaySound, 540)
@@ -832,7 +815,7 @@ EvtScript N(802468F8) = {
             EVT_CALL(PlaySound, 540)
         EVT_END_THREAD
         EVT_CALL(PlaySound, 138)
-        EVT_CALL(N(func_80241F78_95D178))
+        EVT_CALL(N(Quizmo_UnkG))
         EVT_THREAD
             EVT_WAIT_FRAMES(15)
             EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
@@ -870,8 +853,8 @@ EvtScript N(802468F8) = {
             EVT_SET(EVT_VAR(1), 3)
             EVT_EXEC_WAIT(N(802451BC))
             EVT_CALL(AddStarPieces, 1)
-            EVT_CALL(N(func_80241EAC_95D0AC), 15)
-            EVT_CALL(N(func_80241F60_95D160))
+            EVT_CALL(N(Quizmo_UnkD), 15)
+            EVT_CALL(N(Quizmo_UnkF))
             EVT_CALL(SetMessageValue, EVT_SAVE_VAR(352), 0)
             EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_chuck_quizmo_Palette_00_Anim_4, NPC_ANIM_chuck_quizmo_Palette_00_Anim_1, 0, MESSAGE_ID(0x08, 0x0011))
         EVT_ELSE
@@ -889,8 +872,8 @@ EvtScript N(802468F8) = {
             EVT_SET(EVT_VAR(1), 1)
             EVT_EXEC_WAIT(N(802451BC))
             EVT_CALL(AddStarPieces, 1)
-            EVT_CALL(N(func_80241EAC_95D0AC), 15)
-            EVT_CALL(N(func_80241F60_95D160))
+            EVT_CALL(N(Quizmo_UnkD), 15)
+            EVT_CALL(N(Quizmo_UnkF))
             EVT_CALL(SetMessageValue, EVT_SAVE_VAR(352), 0)
             EVT_IF_EQ(EVT_SAVE_VAR(352), 1)
                 EVT_CALL(SetMessageMsg, EVT_PTR(MessageSingular), 1)
@@ -919,7 +902,7 @@ EvtScript N(802468F8) = {
         EVT_END_LOOP
         EVT_SET(EVT_VAR(0), 0)
     EVT_END_IF
-    EVT_CALL(N(func_80241EE0_95D0E0), -1)
+    EVT_CALL(N(Quizmo_UnkE), -1)
     EVT_CALL(EnablePartnerAI)
     EVT_THREAD
         EVT_WAIT_FRAMES(30)
@@ -929,8 +912,8 @@ EvtScript N(802468F8) = {
         EVT_WAIT_FRAMES(45)
         EVT_CALL(StopSound, 137)
     EVT_END_THREAD
-    EVT_CALL(N(func_80241F94_95D194))
-    EVT_CALL(N(func_80241DF8_95CFF8))
+    EVT_CALL(N(Quizmo_UnkH))
+    EVT_CALL(N(Quizmo_UnkC))
     EVT_EXEC_WAIT(N(802452AC))
     EVT_EXEC(N(802455F4))
     EVT_CALL(N(UnkFunc29))
@@ -2727,129 +2710,23 @@ EvtScript N(makeEntities) = {
 
 #include "world/common/GetItemName.inc.c"
 
-#include "world/common/Set80151310.inc.c"
+#include "world/common/atomic/Quizmo.inc.c"
 
-#include "world/common/UnkQuizFunc.inc.c"
+#include "world/common/atomic/Quizmo_UnkA.inc.c"
 
-#include "world/common/UnkFunc31.inc.c"
+#include "world/common/atomic/Quizmo_UnkB.inc.c"
 
-ApiStatus N(func_80241B5C_95CD5C)(Evt* script, s32 isInitialCall) {
-    u16 quizzesAnswered = gPlayerData.quizzesAnswered;
+#include "world/common/atomic/Quizmo_UnkC.inc.c"
 
-    if (quizzesAnswered < 999) {
-        gPlayerData.quizzesAnswered++;
-    }
+#include "world/common/atomic/Quizmo_UnkD.inc.c"
 
-    if (script->varTable[0] == N(quizAnswers)[evt_get_variable(NULL, EVT_SAVE_VAR(352))]) {
-        script->varTable[0] = 1;
-        gPlayerData.quizzesCorrect++;
-    } else {
-        script->varTable[0] = 0;
-    }
+#include "world/common/atomic/Quizmo_UnkE.inc.c"
 
-    return ApiStatus_DONE2;
-}
+#include "world/common/atomic/Quizmo_UnkF.inc.c"
 
-ApiStatus N(func_80241BE0_95CDE0)(Evt* script, s32 isInitialCall) {
-    EffectInstanceDataThing* effectPtr;
+#include "world/common/atomic/Quizmo_UnkG.inc.c"
 
-    if (isInitialCall) {
-        N(D_8024DFE0) = fx_quizmo_stage(0, evt_get_variable(script, EVT_ARRAY(1)), evt_get_variable(script, EVT_ARRAY(2)),
-                                      evt_get_variable(script, EVT_ARRAY(3)));
-        N(D_8024DFE4) = fx_quizmo_audience(0, evt_get_variable(script, EVT_ARRAY(1)), evt_get_variable(script, EVT_ARRAY(2)),
-                                      evt_get_variable(script, EVT_ARRAY(3)));
-        N(D_8024DFE8) = fx_quizmo_assistant(0, evt_get_variable(script, EVT_ARRAY(1)), evt_get_variable(script, EVT_ARRAY(2)),
-                                      evt_get_variable(script, EVT_ARRAY(3)), 1.0f, 0);
-
-        effectPtr = N(D_8024DFE0)->data;
-        effectPtr->unk_18 = 0;
-        effectPtr->unk_20 = 0;
-        effectPtr->unk_24.s = 0;
-        effectPtr->unk_28 = 0;
-        effectPtr->unk_1C = 0;
-    }
-
-    effectPtr = N(D_8024DFE0)->data;
-
-    effectPtr->unk_20 += 10;
-    effectPtr->unk_28 += 10;
-    effectPtr->unk_24.s += 10;
-    effectPtr->unk_18 += 10;
-    effectPtr->unk_1C += 10;
-    if (effectPtr->unk_18 >= 255) {
-        effectPtr->unk_18 = 255;
-        return ApiStatus_DONE2;
-    }
-
-    return ApiStatus_BLOCK;
-}
-
-ApiStatus N(func_80241DF8_95CFF8)(Evt* script, s32 isInitialCall) {
-    EffectInstanceDataThing* effectPtr;
-
-    if (isInitialCall) {
-        N(D_8024DFE4)->flags |= 0x10;
-        N(D_8024DFE8)->flags |= 0x10;
-    }
-
-    effectPtr = N(D_8024DFE0)->data;
-    effectPtr->unk_18 -= 10;
-    effectPtr->unk_20 -= 10;
-    effectPtr->unk_24.s -= 10;
-    effectPtr->unk_28 -= 10;
-    effectPtr->unk_1C -= 10;
-
-    if (effectPtr->unk_18 <= 0) {
-        effectPtr->unk_18 = 0;
-        remove_effect(N(D_8024DFE0));
-        free_generic_entity(N(D_8024DFC0));
-        return ApiStatus_DONE2;
-    }
-
-    return ApiStatus_BLOCK;
-}
-
-ApiStatus N(func_80241EAC_95D0AC)(Evt* script, s32 isInitialCall) {
-    ((EffectInstanceDataThing*)N(D_8024DFE0)->data)->unk_34 = evt_get_variable(script, *script->ptrReadPos);
-    return ApiStatus_DONE2;
-}
-
-ApiStatus N(func_80241EE0_95D0E0)(Evt* script, s32 isInitialCall) {
-    s32 var = evt_get_variable(script, *script->ptrReadPos);
-    EffectInstanceDataThing* effectPtr = N(D_8024DFE0)->data;
-
-    switch (var) {
-        case 0:
-            effectPtr->unk_38 = 0xC0;
-            break;
-        case 1:
-            effectPtr->unk_38 = 0x80;
-            break;
-        case 2:
-            effectPtr->unk_38 = 0x40;
-            break;
-        default:
-            effectPtr->unk_38 = 0;
-            break;
-    }
-
-    return ApiStatus_DONE2;
-}
-
-ApiStatus N(func_80241F60_95D160)(Evt* script, s32 isInitialCall) {
-    ((EffectInstanceDataThing*)N(D_8024DFE8)->data)->unk_1C = 0;
-    return ApiStatus_DONE2;
-}
-
-ApiStatus N(func_80241F78_95D178)(Evt* script, s32 isInitialCall) {
-    ((EffectInstanceDataThing*)N(D_8024DFE8)->data)->unk_1C = 1;
-    return ApiStatus_DONE2;
-}
-
-ApiStatus N(func_80241F94_95D194)(Evt* script, s32 isInitialCall) {
-    ((EffectInstanceDataThing*)N(D_8024DFE8)->data)->unk_1C = 2;
-    return ApiStatus_DONE2;
-}
+#include "world/common/atomic/Quizmo_UnkH.inc.c"
 
 #include "world/common/GetGameStatus75.inc.c"
 
@@ -2874,7 +2751,7 @@ void N(func_80242468_95D668)(void) {
 }
 
 ApiStatus N(func_802424D4_95D6D4)(Evt* script, s32 isInitialCall) {
-    N(D_8024DFC0) = create_generic_entity_frontUI(NULL, N(func_80242468_95D668));
+    N(Quizmo_Worker) = create_generic_entity_frontUI(NULL, N(func_80242468_95D668));
     return ApiStatus_DONE2;
 }
 

@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel begin_battle_D06948
+glabel sam_02_Quizmo_UnkA
 /* D06948 80241218 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* D0694C 8024121C AFB00010 */  sw        $s0, 0x10($sp)
 /* D06950 80241220 3C108011 */  lui       $s0, %hi(gPlayerData)
@@ -19,9 +19,9 @@ glabel begin_battle_D06948
 /* D0697C 8024124C 34A502E0 */  ori       $a1, $a1, 0x2e0
 /* D06980 80241250 0C0B1EAF */  jal       evt_get_variable
 /* D06984 80241254 0000202D */   daddu    $a0, $zero, $zero
-/* D06988 80241258 3C038024 */  lui       $v1, %hi(D_80246BC4_D0C2F4)
+/* D06988 80241258 3C038024 */  lui       $v1, %hi(sam_02_Quizmo_Answers)
 /* D0698C 8024125C 00621821 */  addu      $v1, $v1, $v0
-/* D06990 80241260 90636BC4 */  lbu       $v1, %lo(D_80246BC4_D0C2F4)($v1)
+/* D06990 80241260 90636BC4 */  lbu       $v1, %lo(sam_02_Quizmo_Answers)($v1)
 /* D06994 80241264 8E220084 */  lw        $v0, 0x84($s1)
 /* D06998 80241268 54430006 */  bnel      $v0, $v1, .L80241284
 /* D0699C 8024126C AE200084 */   sw       $zero, 0x84($s1)

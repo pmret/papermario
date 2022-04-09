@@ -31,13 +31,9 @@ static char* N(exit_str_1) = "nok_02";
 
 #include "world/common/GetItemName.inc.c"
 
-#include "world/common/Set80151310.inc.c"
+#include "world/common/atomic/Quizmo.inc.c"
 
-#include "world/common/UnkQuizFunc.inc.c"
-
-#include "world/common/UnkFunc31.inc.c"
-
-INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_80241454_9C6834);
+#include "world/common/atomic/Quizmo_UnkA.inc.c"
 
 INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_802414D8_9C68B8);
 

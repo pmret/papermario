@@ -57,13 +57,9 @@ INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80241B00_B366D0);
 
 #include "world/common/GetItemName.inc.c"
 
-#include "world/common/Set80151310.inc.c"
+#include "world/common/atomic/Quizmo.inc.c"
 
-#include "world/common/UnkQuizFunc.inc.c"
-
-#include "world/common/UnkFunc31.inc.c"
-
-INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80242288_B36E58);
+#include "world/common/atomic/Quizmo_UnkA.inc.c"
 
 INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_8024230C_B36EDC);
 

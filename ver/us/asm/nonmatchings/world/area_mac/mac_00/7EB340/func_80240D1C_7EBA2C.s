@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_80240D1C_7EBA2C
+glabel mac_00_Quizmo_UnkA
 /* 7EBA2C 80240D1C 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 7EBA30 80240D20 AFB00010 */  sw        $s0, 0x10($sp)
 /* 7EBA34 80240D24 3C108011 */  lui       $s0, %hi(gPlayerData)
@@ -19,9 +19,9 @@ glabel func_80240D1C_7EBA2C
 /* 7EBA60 80240D50 34A502E0 */  ori       $a1, $a1, 0x2e0
 /* 7EBA64 80240D54 0C0B1EAF */  jal       evt_get_variable
 /* 7EBA68 80240D58 0000202D */   daddu    $a0, $zero, $zero
-/* 7EBA6C 80240D5C 3C038024 */  lui       $v1, %hi(D_80245E24_7F0B34)
+/* 7EBA6C 80240D5C 3C038024 */  lui       $v1, %hi(mac_00_Quizmo_Answers)
 /* 7EBA70 80240D60 00621821 */  addu      $v1, $v1, $v0
-/* 7EBA74 80240D64 90635E24 */  lbu       $v1, %lo(D_80245E24_7F0B34)($v1)
+/* 7EBA74 80240D64 90635E24 */  lbu       $v1, %lo(mac_00_Quizmo_Answers)($v1)
 /* 7EBA78 80240D68 8E220084 */  lw        $v0, 0x84($s1)
 /* 7EBA7C 80240D6C 54430006 */  bnel      $v0, $v1, .L80240D88
 /* 7EBA80 80240D70 AE200084 */   sw       $zero, 0x84($s1)

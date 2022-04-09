@@ -1,6 +1,6 @@
 #include "common.h"
 
-extern PushBlockGrid* D_802DBC88[]; //TODO determind length
+extern PushBlockGrid* D_802DBC88[]; //TODO determine length
 extern EvtScript D_80285674_7E64F4;
 extern EntityBlueprint D_802EA2BC;
 

@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_80241D00_B2E170
+glabel jan_02_Quizmo_UnkA
 /* B2E170 80241D00 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* B2E174 80241D04 AFB00010 */  sw        $s0, 0x10($sp)
 /* B2E178 80241D08 3C108011 */  lui       $s0, %hi(gPlayerData)
@@ -19,9 +19,9 @@ glabel func_80241D00_B2E170
 /* B2E1A4 80241D34 34A502E0 */  ori       $a1, $a1, 0x2e0
 /* B2E1A8 80241D38 0C0B1EAF */  jal       evt_get_variable
 /* B2E1AC 80241D3C 0000202D */   daddu    $a0, $zero, $zero
-/* B2E1B0 80241D40 3C038024 */  lui       $v1, %hi(D_80243248_B2F6B8)
+/* B2E1B0 80241D40 3C038024 */  lui       $v1, %hi(jan_02_Quizmo_Answers)
 /* B2E1B4 80241D44 00621821 */  addu      $v1, $v1, $v0
-/* B2E1B8 80241D48 90633248 */  lbu       $v1, %lo(D_80243248_B2F6B8)($v1)
+/* B2E1B8 80241D48 90633248 */  lbu       $v1, %lo(jan_02_Quizmo_Answers)($v1)
 /* B2E1BC 80241D4C 8E220084 */  lw        $v0, 0x84($s1)
 /* B2E1C0 80241D50 54430006 */  bnel      $v0, $v1, .L80241D6C
 /* B2E1C4 80241D54 AE200084 */   sw       $zero, 0x84($s1)

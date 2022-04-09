@@ -6,15 +6,9 @@
 
 #include "world/common/GetItemName.inc.c"
 
-#define NAMESPACE dup_sam_11
-#include "world/common/Set80151310.inc.c"
-#define NAMESPACE sam_11
+#include "world/common/atomic/Quizmo.inc.c"
 
-#include "world/common/UnkQuizFunc.inc.c"
-
-#include "world/common/UnkFunc31.inc.c"
-
-INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_80240EBC_D3B48C);
+#include "world/common/atomic/Quizmo_UnkA.inc.c"
 
 INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_80240F40_D3B510);
 

@@ -483,7 +483,7 @@ EvtScript N(80244E14) = {
     EVT_END
 };
 
-u8 N(quizAnswers)[] = {
+u8 N(Quizmo_Answers)[] = {
     0x02, 0x01, 0x01, 0x02, 0x02, 0x00, 0x02, 0x00,
     0x02, 0x01, 0x00, 0x02, 0x01, 0x01, 0x00, 0x02,
     0x00, 0x02, 0x01, 0x00, 0x00, 0x02, 0x01, 0x00,
@@ -494,7 +494,7 @@ u8 N(quizAnswers)[] = {
     0x01, 0x02, 0x00, 0x02, 0x02, 0x01, 0x01, 0x01,
 };
 
-QuizRequirements N(quizRequirements)[] = {
+Quizmo_Requirements N(Quizmo_Requirements)[] = {
     { -108, 0 }, { -76, 10 },
     { -54, 20 }, { -14, 30 },
     {   6, 37 }, {  39, 44 },
@@ -968,7 +968,7 @@ EvtScript N(80246520) = {
     EVT_SET(EVT_ARRAY(4), 0)
     EVT_CALL(N(func_80241364_96A524))
     EVT_WAIT_FRAMES(40)
-    EVT_CALL(N(func_802409EC_969BAC))
+    EVT_CALL(N(Quizmo_UnkA))
     EVT_THREAD
         EVT_WAIT_FRAMES(110)
         EVT_CALL(CloseChoice)
@@ -3069,28 +3069,9 @@ NpcGroupList N(npcGroupList_8024EEF4) = {
 
 #include "world/common/GetItemName.inc.c"
 
-#include "world/common/Set80151310.inc.c"
+#include "world/common/atomic/Quizmo.inc.c"
 
-#include "world/common/UnkQuizFunc.inc.c"
-
-#include "world/common/UnkFunc31.inc.c"
-
-ApiStatus N(func_802409EC_969BAC)(Evt* script, s32 isInitialCall) {
-    u16 quizzesAnswered = gPlayerData.quizzesAnswered;
-
-    if (quizzesAnswered < 999) {
-        gPlayerData.quizzesAnswered++;
-    }
-
-    if (script->varTable[0] == N(quizAnswers)[evt_get_variable(NULL, EVT_SAVE_VAR(352))]) {
-        script->varTable[0] = 1;
-        gPlayerData.quizzesCorrect++;
-    } else {
-        script->varTable[0] = 0;
-    }
-
-    return ApiStatus_DONE2;
-}
+#include "world/common/atomic/Quizmo_UnkA.inc.c"
 
 ApiStatus N(func_80240A70_969C30)(Evt* script, s32 isInitialCall) {
     EffectInstanceDataThing* effectPtr;
