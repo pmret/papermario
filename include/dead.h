@@ -49,6 +49,7 @@
 #define sfx_adjust_env_sound_pos dead_sfx_adjust_env_sound_pos
 #define fx_star_spirits_energy dead_fx_star_spirits_energy
 #define heap_malloc dead_heap_malloc
+#define heap_free dead_heap_free
 #define general_heap_malloc dead_general_heap_malloc
 #define update_lerp dead_update_lerp
 #define create_shadow_type dead_create_shadow_type
@@ -102,5 +103,12 @@
 #define func_8004A3E8 func_8004E808
 #define gCurrentEncounter dead_gCurrentEncounter
 #define fx_motion_blur_flame dead_fx_motion_blur_flame
+#define wPartnerHudScripts dead_wPartnerHudScripts
+#define wDisabledPartnerHudScripts dead_wDisabledPartnerHudScripts
+#define create_popup_menu dead_create_popup_menu
+#define hide_popup_menu dead_hide_popup_menu
+#define destroy_popup_menu dead_destroy_popup_menu
+#define heap_free dead_heap_free
+#define entity_upgrade_block_hide_content dead_entity_upgrade_block_hide_content
 
 #endif

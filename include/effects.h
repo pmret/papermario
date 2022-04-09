@@ -657,7 +657,7 @@ typedef struct EffectInstanceDataThing {
     char unk_4C[0x24];
     s32 unk_70;
     s32 unk_74;
-} EffectInstanceDataThing;
+} EffectInstanceDataThing; // TODO remove / convert to appropriate effect data struct
 
 typedef struct EffectInstanceData {
     /* 0x00 */ EffectInstanceDataThing* unk_00;

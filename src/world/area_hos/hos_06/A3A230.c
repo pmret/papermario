@@ -10,7 +10,9 @@ INCLUDE_ASM(s32, "world/area_hos/hos_06/A3A230", func_80240FD0_A3A4B0);
 
 INCLUDE_ASM(s32, "world/area_hos/hos_06/A3A230", func_80241008_A3A4E8);
 
-INCLUDE_ASM(s32, "world/area_hos/hos_06/A3A230", func_802410A4_A3A584);
+#define NAMESPACE dup_hos_06
+#include "world/common/StashVars.inc.c"
+#define NAMESPACE hos_06
 
 #include "world/common/GetItemName.inc.c"
 

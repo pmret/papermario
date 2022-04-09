@@ -4,7 +4,7 @@
 
 #include "common/UnkFloatFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_03/831B20", func_802404B0_831CB0);
+#include "world/common/StashVars.inc.c"
 
 #include "world/common/GetItemName.inc.c"
 

@@ -26,7 +26,9 @@
 
 static char* N(exit_str_0) = "mac_01";
 
-INCLUDE_ASM(s32, "world/area_mac/mac_00/7ED280", func_80243400_7EE110);
+#define NAMESPACE dup_mac_00
+#include "world/common/StashVars.inc.c"
+#define NAMESPACE mac_00
 
 #define NAMESPACE dup_mac_00
 #include "world/common/GetItemName.inc.c"

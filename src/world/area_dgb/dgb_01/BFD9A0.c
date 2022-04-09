@@ -41,7 +41,7 @@ static s32 N(pad_3548)[] = {
 };
 
 EvtScript N(exitDoubleDoor_80243550) = {
-    EVT_SET_GROUP(27)
+    EVT_SET_GROUP(EVT_GROUP_1B)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(UseDoorSounds, 3)
     EVT_SET(EVT_VAR(0), 0)
@@ -57,7 +57,7 @@ EvtScript N(exitDoubleDoor_80243550) = {
 };
 
 EvtScript N(exitDoubleDoor_80243604) = {
-    EVT_SET_GROUP(27)
+    EVT_SET_GROUP(EVT_GROUP_1B)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(UseDoorSounds, 3)
     EVT_SET(EVT_VAR(0), 1)
@@ -73,7 +73,7 @@ EvtScript N(exitDoubleDoor_80243604) = {
 };
 
 EvtScript N(exitDoubleDoor_802436B8) = {
-    EVT_SET_GROUP(27)
+    EVT_SET_GROUP(EVT_GROUP_1B)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(UseDoorSounds, 3)
     EVT_SET(EVT_VAR(0), 2)
@@ -89,7 +89,7 @@ EvtScript N(exitDoubleDoor_802436B8) = {
 };
 
 EvtScript N(exitDoubleDoor_8024376C) = {
-    EVT_SET_GROUP(27)
+    EVT_SET_GROUP(EVT_GROUP_1B)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(UseDoorSounds, 3)
     EVT_SET(EVT_VAR(0), 3)
@@ -105,7 +105,7 @@ EvtScript N(exitDoubleDoor_8024376C) = {
 };
 
 EvtScript N(exitDoubleDoor_80243820) = {
-    EVT_SET_GROUP(27)
+    EVT_SET_GROUP(EVT_GROUP_1B)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(UseDoorSounds, 3)
     EVT_SET(EVT_VAR(0), 4)
@@ -121,7 +121,7 @@ EvtScript N(exitDoubleDoor_80243820) = {
 };
 
 EvtScript N(exitDoubleDoor_802438D4) = {
-    EVT_SET_GROUP(27)
+    EVT_SET_GROUP(EVT_GROUP_1B)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(UseDoorSounds, 3)
     EVT_SET(EVT_VAR(0), 5)
@@ -137,7 +137,7 @@ EvtScript N(exitDoubleDoor_802438D4) = {
 };
 
 EvtScript N(exitDoubleDoor_80243988) = {
-    EVT_SET_GROUP(27)
+    EVT_SET_GROUP(EVT_GROUP_1B)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(UseDoorSounds, 3)
     EVT_SET(EVT_VAR(0), 6)
@@ -434,7 +434,7 @@ EvtScript N(802449C4) = {
 };
 
 EvtScript N(80244AD0) = {
-    EVT_SET_GROUP(0)
+    EVT_SET_GROUP(EVT_GROUP_0)
     EVT_SUSPEND_GROUP(1)
     EVT_CALL(ShowKeyChoicePopup)
     EVT_IF_EQ(EVT_VAR(0), 0)
@@ -861,7 +861,7 @@ EvtScript N(npcAI_80244D54) = {
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(func_802D2B6C)
     EVT_CALL(DisablePartnerAI, 0)
-    EVT_SET_GROUP(0)
+    EVT_SET_GROUP(EVT_GROUP_0)
     EVT_CALL(SetTimeFreezeMode, 1)
     EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_ADD(EVT_VAR(1), 20)

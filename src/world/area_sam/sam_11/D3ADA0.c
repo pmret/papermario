@@ -2,7 +2,7 @@
 
 #define UNK_ALPHA_FUNC_NPC 17
 
-INCLUDE_ASM(s32, "world/area_sam/sam_11/D3ADA0", func_802407D0_D3ADA0);
+#include "world/common/StashVars.inc.c"
 
 #include "world/common/GetItemName.inc.c"
 

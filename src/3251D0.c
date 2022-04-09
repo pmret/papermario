@@ -107,7 +107,7 @@ ApiStatus func_802C03E8(Evt* script, s32 isInitialCall) {
 }
 
 EvtScript D_802C0410 = {
-    EVT_SET_GROUP(0)
+    EVT_SET_GROUP(EVT_GROUP_0)
     EVT_CALL(SetPlayerAnimation, ANIM_GOT_ITEM)
     EVT_CALL(GetPlayerPos, LW(0), LW(1), LW(2))
     EVT_ADD(LW(1), 45)
@@ -149,7 +149,7 @@ EvtScript D_802C0560 = {
 };
 
 EvtScript D_802C05CC_32579C = {
-    EVT_SET_GROUP(0)
+    EVT_SET_GROUP(EVT_GROUP_0)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(GetCurrentPartner, LW(0))
     EVT_IF_NE(LW(0), 0)

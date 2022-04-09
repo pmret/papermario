@@ -61,7 +61,7 @@ NpcSettings N(goombaNpcSettings) = {
 
 /// @bug Never returns
 EvtScript N(ReadWestSign) = {
-    EVT_SET_GROUP(0)
+    EVT_SET_GROUP(EVT_GROUP_0)
 
     // "Eat a Mushroom to regain your energy!"
     EVT_SUSPEND_GROUP(1)
@@ -208,7 +208,7 @@ EvtScript N(ReadEastSign) = {
     EVT_IF_EQ(LW(0), 1)
         EVT_RETURN
     EVT_END_IF
-    EVT_SET_GROUP(0)
+    EVT_SET_GROUP(EVT_GROUP_0)
     EVT_CALL(SetTimeFreezeMode, 1)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(ShowMessageAtScreenPos, MSG_kmr_12_sign_to_fortress, 160, 40)

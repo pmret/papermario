@@ -31,7 +31,7 @@ static s32 N(pad_3A8)[] = {
 };
 
 EvtScript N(exitSingleDoor_802403B0) = {
-    EVT_SET_GROUP(27)
+    EVT_SET_GROUP(EVT_GROUP_1B)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(UseDoorSounds, 0)
     EVT_SET(EVT_VAR(0), 0)
@@ -80,7 +80,7 @@ s32 N(lavaResetList_802405C0)[] = {
 };
 
 EvtScript N(802405E0) = {
-    EVT_SET_GROUP(239)
+    EVT_SET_GROUP(EVT_GROUP_EF)
     EVT_CALL(ModifyColliderFlags, 3, 12, 0x00000002)
     EVT_CALL(ModifyColliderFlags, 3, 0, 0x00000002)
     EVT_CALL(ModifyColliderFlags, 3, 14, 0x00000002)
@@ -130,10 +130,11 @@ static s32 N(pad_868)[] = {
     0x00000000, 0x00000000,
 };
 
+static s32** N(varTable) = NULL;
 #include "world/common/StashVars.inc.c"
 
 EvtScript N(80240874) = {
-    EVT_SET_GROUP(0)
+    EVT_SET_GROUP(EVT_GROUP_0)
     EVT_CALL(SetTimeFreezeMode, 2)
     EVT_WAIT_FRAMES(40)
     EVT_CALL(ShowGotItem, EVT_VAR(0), 0, 0)

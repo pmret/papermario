@@ -7,7 +7,6 @@ s32 entity_interacts_with_current_partner(s32);
 s32 test_item_entity_position(f32, f32, f32, f32);
 s32 npc_raycast_up_corner(s32 ignoreFlags, f32* x, f32* y, f32* z, f32* length);
 s32 npc_raycast_up(s32 ignoreFlags, f32* x, f32* y, f32* z, f32* length);
-void start_bounce_b(void);
 void fx_damage_stars(s32, f32, f32, f32, f32, f32, f32, s32);
 void func_801341B0(Npc* npc);
 

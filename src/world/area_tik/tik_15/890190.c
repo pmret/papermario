@@ -2,7 +2,7 @@
 
 #include "world/common/UnkPosFunc2.inc.c"
 
-INCLUDE_ASM(s32, "world/area_tik/tik_15/890190", func_80240960_890500);
+#include "world/common/StashVars.inc.c"
 
 #include "world/common/GetItemName.inc.c"
 

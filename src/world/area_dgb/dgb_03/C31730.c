@@ -47,7 +47,7 @@ static s32 N(pad_2908)[] = {
 };
 
 EvtScript N(exitDoubleDoor_80242910) = {
-    EVT_SET_GROUP(27)
+    EVT_SET_GROUP(EVT_GROUP_1B)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(UseDoorSounds, 3)
     EVT_SET(EVT_VAR(0), 1)
@@ -63,7 +63,7 @@ EvtScript N(exitDoubleDoor_80242910) = {
 };
 
 EvtScript N(exitDoubleDoor_802429C4) = {
-    EVT_SET_GROUP(27)
+    EVT_SET_GROUP(EVT_GROUP_1B)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(UseDoorSounds, 3)
     EVT_SET(EVT_VAR(0), 4)
@@ -79,7 +79,7 @@ EvtScript N(exitDoubleDoor_802429C4) = {
 };
 
 EvtScript N(exitDoubleDoor_80242A78) = {
-    EVT_SET_GROUP(27)
+    EVT_SET_GROUP(EVT_GROUP_1B)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(UseDoorSounds, 3)
     EVT_SET(EVT_VAR(0), 0)
@@ -97,7 +97,7 @@ EvtScript N(exitDoubleDoor_80242A78) = {
 EvtScript N(exitWalk_80242B2C) = EXIT_WALK_SCRIPT(26,  2, "dgb_13",  0);
 
 EvtScript N(exitSingleDoor_80242B88) = {
-    EVT_SET_GROUP(27)
+    EVT_SET_GROUP(EVT_GROUP_1B)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(UseDoorSounds, 0)
     EVT_SET(EVT_VAR(0), 2)
@@ -113,7 +113,7 @@ EvtScript N(exitSingleDoor_80242B88) = {
 };
 
 EvtScript N(exitDoubleDoor_80242C3C) = {
-    EVT_SET_GROUP(27)
+    EVT_SET_GROUP(EVT_GROUP_1B)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(UseDoorSounds, 3)
     EVT_SET(EVT_VAR(0), 3)
@@ -212,7 +212,7 @@ static s32 N(pad_30D8)[] = {
 };
 
 EvtScript N(802430E0) = {
-    EVT_SET_GROUP(0)
+    EVT_SET_GROUP(EVT_GROUP_0)
     EVT_LOOP(20)
         EVT_CALL(GetCurrentPartner, EVT_VAR(10))
         EVT_IF_NE(EVT_VAR(10), 0)
@@ -345,7 +345,7 @@ static s32 N(pad_3738)[] = {
 };
 
 EvtScript N(80243740) = {
-    EVT_SET_GROUP(0)
+    EVT_SET_GROUP(EVT_GROUP_0)
     EVT_SUSPEND_GROUP(1)
     EVT_CALL(ShowKeyChoicePopup)
     EVT_IF_EQ(EVT_VAR(0), 0)

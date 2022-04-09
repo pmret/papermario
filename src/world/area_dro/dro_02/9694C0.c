@@ -367,7 +367,7 @@ EvtScript N(toggleVis_8024468C) = {
 };
 
 EvtScript N(8024486C) = {
-    EVT_SET_GROUP(0)
+    EVT_SET_GROUP(EVT_GROUP_0)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(func_802D2C14, 1)
     EVT_CALL(PlayerMoveTo, 230, 10, 20)
@@ -401,7 +401,7 @@ EvtScript N(8024486C) = {
 };
 
 EvtScript N(80244A68) = {
-    EVT_SET_GROUP(0)
+    EVT_SET_GROUP(EVT_GROUP_0)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(func_802D2C14, 1)
     EVT_CALL(PlayerMoveTo, 230, -70, 20)
@@ -467,7 +467,7 @@ static s32 N(pad_4DD4)[] = {
     0x00000000, 0x00000000, 0x00000000,
 };
 
-s32** N(D_80244DE0_96DFA0) = NULL;
+s32** N(varTable) = NULL;
 
 EvtScript N(80244DE4) = {
     EVT_CALL(ShowGotItem, EVT_VAR(0), 1, 0)
@@ -3065,23 +3065,7 @@ NpcGroupList N(npcGroupList_8024EEF4) = {
     {},
 };
 
-ApiStatus N(func_80240300_9694C0)(Evt* script, s32 isInitialCall) {
-    s32 i;
-
-    if (N(D_80244DE0_96DFA0) == NULL) {
-        N(D_80244DE0_96DFA0) = heap_malloc(16 * sizeof(s32));
-        for (i = 0; i < 16; i++) {
-            N(D_80244DE0_96DFA0)[i] = (s32*) script->varTable[i];
-        }
-    } else {
-        for (i = 0; i < 16; i++) {
-            script->varTable[i] = (s32) N(D_80244DE0_96DFA0)[i];
-        }
-        heap_free(N(D_80244DE0_96DFA0));
-        N(D_80244DE0_96DFA0) = NULL;
-    }
-    return ApiStatus_DONE2;
-}
+#include "world/common/StashVars.inc.c"
 
 #include "world/common/GetItemName.inc.c"
 

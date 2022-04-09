@@ -3,7 +3,7 @@
 #include "sprite/npc/tubbas_heart.h"
 
 EvtScript N(exitSingleDoor_80240100) = {
-    EVT_SET_GROUP(27)
+    EVT_SET_GROUP(EVT_GROUP_1B)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_SET(EVT_VAR(0), 0)
     EVT_SET(EVT_VAR(1), 2)
@@ -18,7 +18,7 @@ EvtScript N(exitSingleDoor_80240100) = {
 };
 
 EvtScript N(exitSingleDoor_802401A4) = {
-    EVT_SET_GROUP(27)
+    EVT_SET_GROUP(EVT_GROUP_1B)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_SET(EVT_VAR(0), 1)
     EVT_SET(EVT_VAR(1), 7)

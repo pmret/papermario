@@ -11,7 +11,7 @@ enum {
 };
 
 EvtScript N(802403B0) = {
-    EVT_SET_GROUP(27)
+    EVT_SET_GROUP(EVT_GROUP_1B)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(ClearDefeatedEnemies)
     EVT_SET(EVT_VAR(0), 0)

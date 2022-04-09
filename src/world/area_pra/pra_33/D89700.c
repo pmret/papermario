@@ -1,6 +1,6 @@
 #include "pra_33.h"
 
-#include "world/common/reflection.inc.c"
+#include "world/common/atomic/Reflection.inc.c"
 
 INCLUDE_ASM(s32, "world/area_pra/pra_33/D89700", func_80240F20_D8A600);
 
