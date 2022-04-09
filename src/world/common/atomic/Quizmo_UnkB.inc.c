@@ -8,7 +8,7 @@ ApiStatus N(Quizmo_UnkB)(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         N(Quizmo_StageEffect) = fx_quizmo_stage(0, evt_get_variable(script, EVT_ARRAY(1)), evt_get_variable(script, EVT_ARRAY(2)),
                                       evt_get_variable(script, EVT_ARRAY(3)));
-        N(Quizmo_Audienceffect) = fx_quizmo_audience(0, evt_get_variable(script, EVT_ARRAY(1)), evt_get_variable(script, EVT_ARRAY(2)),
+        N(Quizmo_AudienceEffect) = fx_quizmo_audience(0, evt_get_variable(script, EVT_ARRAY(1)), evt_get_variable(script, EVT_ARRAY(2)),
                                       evt_get_variable(script, EVT_ARRAY(3)));
         N(Quizmo_VannaTEffect) = fx_quizmo_assistant(0, evt_get_variable(script, EVT_ARRAY(1)), evt_get_variable(script, EVT_ARRAY(2)),
                                       evt_get_variable(script, EVT_ARRAY(3)), 1.0f, 0);

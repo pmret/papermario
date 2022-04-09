@@ -6,7 +6,7 @@ ApiStatus N(Quizmo_UnkC)(Evt* script, s32 isInitialCall) {
     EffectInstanceDataThing* effectPtr;
 
     if (isInitialCall) {
-        N(Quizmo_Audienceffect)->flags |= 0x10;
+        N(Quizmo_AudienceEffect)->flags |= 0x10;
         N(Quizmo_VannaTEffect)->flags |= 0x10;
     }
 

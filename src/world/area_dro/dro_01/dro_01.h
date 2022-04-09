@@ -47,7 +47,7 @@ ApiStatus N(Quizmo_UnkE)(Evt* script, s32 isInitialCall);
 ApiStatus N(Quizmo_UnkF)(Evt* script, s32 isInitialCall);
 ApiStatus N(Quizmo_UnkG)(Evt* script, s32 isInitialCall);
 ApiStatus N(Quizmo_UnkH)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_802424D4_95D6D4)(Evt* script, s32 isInitialCall);
+ApiStatus N(Quizmo_UnkJ)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_80242730_95D930)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_80242784_95D984)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_802427BC_95D9BC)(Evt* script, s32 isInitialCall);

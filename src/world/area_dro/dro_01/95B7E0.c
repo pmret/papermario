@@ -62,10 +62,10 @@ void N(func_802430C8_95E2C8)(Unk_Struct_1* ptr, s32 arg1);
 static s32 N(Quizmo_Worker);
 static s8 N(pad_D_8024DFC4)[0x4];
 static s32 N(pad_D_8024DFC8)[4];
-static s32 N(D_8024DFD8);
+static s32 N(Quizmo_WasCorrect);
 static s8 N(pad_D_8024DFDC)[0x4];
 static EffectInstance* N(Quizmo_StageEffect);
-static EffectInstance* N(Quizmo_Audienceffect);
+static EffectInstance* N(Quizmo_AudienceEffect);
 static EffectInstance* N(Quizmo_VannaTEffect);
 static s8 N(pad_D_8024DFEC)[0x4];
 static s32 N(D_8024DFF0)[112];
@@ -787,7 +787,7 @@ EvtScript N(802468F8) = {
     EVT_CALL(PlaySound, 141)
     EVT_CALL(N(Quizmo_UnkE), EVT_VAR(0))
     EVT_SET(EVT_ARRAY(4), 0)
-    EVT_CALL(N(func_802424D4_95D6D4))
+    EVT_CALL(N(Quizmo_UnkJ))
     EVT_WAIT_FRAMES(40)
     EVT_CALL(N(Quizmo_UnkA))
     EVT_THREAD
@@ -2711,49 +2711,22 @@ EvtScript N(makeEntities) = {
 #include "world/common/GetItemName.inc.c"
 
 #include "world/common/atomic/Quizmo.inc.c"
-
 #include "world/common/atomic/Quizmo_UnkA.inc.c"
-
 #include "world/common/atomic/Quizmo_UnkB.inc.c"
-
 #include "world/common/atomic/Quizmo_UnkC.inc.c"
-
 #include "world/common/atomic/Quizmo_UnkD.inc.c"
-
 #include "world/common/atomic/Quizmo_UnkE.inc.c"
-
 #include "world/common/atomic/Quizmo_UnkF.inc.c"
-
 #include "world/common/atomic/Quizmo_UnkG.inc.c"
-
 #include "world/common/atomic/Quizmo_UnkH.inc.c"
-
 #include "world/common/GetGameStatus75.inc.c"
-
 #include "world/common/SetCamVfov.inc.c"
-
 #include "world/common/GetCamVfov.inc.c"
-
 #include "world/common/UnkCameraFunc.inc.c"
-
 #include "world/common/UnkRotatePlayer.inc.c"
-
 #include "world/common/UnkPartnerFuncs.inc.c"
-
-void N(func_80242468_95D668)(void) {
-    s32 var = evt_get_variable(NULL, N(D_8024DFD8));
-
-    if (var == 1) {
-        fx_quizmo_answer(0, 0, 0, 0);
-    } else if (var == 2) {
-        fx_quizmo_answer(1, 0, 0, 0);
-    }
-}
-
-ApiStatus N(func_802424D4_95D6D4)(Evt* script, s32 isInitialCall) {
-    N(Quizmo_Worker) = create_generic_entity_frontUI(NULL, N(func_80242468_95D668));
-    return ApiStatus_DONE2;
-}
+#include "world/common/atomic/Quizmo_UnkI.inc.c"
+#include "world/common/atomic/Quizmo_UnkJ.inc.c"
 
 #include "world/common/GetNpcCollisionHeight.inc.c"
 
