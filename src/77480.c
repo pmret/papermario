@@ -1,6 +1,7 @@
 #include "common.h"
 #include "ld_addrs.h"
 #include "world/actions.h"
+#include "sprite.h"
 
 // TODO linker stuff
 #define E20110_VRAM_DEF (void*)0x802B7000
@@ -8,65 +9,37 @@
 #define E21870_VRAM_DEF (void*)0x802B7000
 #define E225B0_VRAM_DEF (void*)0x802B7000
 
-void appendGfx_player(void* data);
-void appendGfx_player_spin(void* data);
-void func_800F0C9C(void);
-
-extern UNK_FUN_PTR(D_8010C93C);
-
-extern s32 GoombarioGetTattleID;
-extern s8 D_8015A57A;
+extern f32 D_800F7B48;
 extern s32 D_800F7B4C;
+extern UNK_FUN_PTR(D_8010C93C);
+extern s8 D_8015A57A;
+extern s32 GoombarioGetTattleID;
 
-s32 func_802B7140(void);
-void func_802B72C0_E22870(void);
-void func_802B70B4_E201C4(void);
-
+s32 player_raycast_down(f32*, f32*, f32*, f32*);
+s32 player_raycast_up_corner(f32* x, f32* y, f32* z, f32* length);
+s32 player_raycast_general(s32, f32, f32, f32, f32, f32, f32, f32*, f32*, f32*, f32*, f32*, f32*, f32*);
+void player_get_slip_vector(f32* outX, f32* outY, f32 x, f32 y, f32 nX, f32 nY);
+void phys_update_standard(void);
+void phys_update_lava_reset(void);
+void update_player_blink(void);
+void check_for_ispy(void);
 void func_800E0330(void);
+void check_for_pulse_stone(void);
 void func_800E0374(void);
 void func_800E04D0(void);
 void func_800E0514(void);
+void check_for_conversation_prompt(void);
 void func_800E0658(void);
 void func_800E069C(void);
+void check_for_interactables(void);
 void func_800E0AD0(void);
 void func_800E0B14(void);
 void update_partner_timers(void);
-void update_player_shadow(void);
-void check_for_interactables(void);
-s32 player_raycast_down(f32*, f32*, f32*, f32*);
-void update_player_input(void);
-void update_player_blink(void);
-void phys_update_action_state(void);
-void collision_main_lateral(void);
-void phys_update_standard(void);
-void phys_update_lava_reset(void);
-void func_800EFD08(void);
 void func_800E0B90(void);
-void check_input_open_menus(void);
-void check_input_status_menu(void);
-void check_for_conversation_prompt(void);
-void check_for_pulse_stone(void);
-void check_for_ispy(void);
-s32 partner_use_ability(void);
-void phys_update_jump(void);
-void phys_update_falling(void);
-void check_input_midair_jump(void);
-void collision_check_player_overlaps(void);
-void func_800E4F10(void);
-void func_802BE070_31DBE0(void);
-void reset_player_status(void);
-void func_800E6B68(void);
-void func_800E5520(void);
-void func_802B7000_E225B0(void);
-void func_802B71D4(void);
-void func_802B71C8(void);
-void spr_draw_player_sprite(s32, s32, s32, s32, Matrix4f);
-void func_802DDEE4(s32, s32, s32, s32, s32, s32, s32, s32);
-void func_802DDFF8(u32, s32, s32, s32, s32, s32, s32);
-
-s32 player_raycast_up_corner(f32* x, f32* y, f32* z, f32* length);
-void player_get_slip_vector(f32* outX, f32* outY, f32 x, f32 y, f32 nX, f32 nY);
-s32 player_raycast_general(s32, f32, f32, f32, f32, f32, f32, f32*, f32*, f32*, f32*, f32*, f32*, f32*);
+s32 get_player_back_anim(s32 arg0);
+void appendGfx_player(void* data);
+void appendGfx_player_spin(void* data);
+void update_player_shadow(void);
 
 s32 player_raycast_below(f32 yaw, f32 diameter, f32* outX, f32* outY, f32* outZ, f32* outLength, f32* hitRx, f32* hitRz,
                          f32* hitDirX, f32* hitDirZ) {
@@ -1066,7 +1039,7 @@ void check_for_pulse_stone(void) {
 
         if (!(gPlayerStatus.animFlags & (PLAYER_STATUS_ANIM_FLAGS_SPEECH_PROMPT_AVAILABLE | PLAYER_STATUS_ANIM_FLAGS_INTERACT_PROMPT_AVAILABLE))) {
             dma_copy(E21870_ROM_START, E21870_ROM_END, E21870_VRAM_DEF);
-            D_8010C920 = (void*)&func_802B7140;
+            D_8010C920 = func_802B7140;
         }
     }
 
@@ -1182,7 +1155,7 @@ s32 func_800E06D8(void) {
     return TRUE;
 }
 
-static const f32 pad[1] = { 0.0f};
+static const f32 padding = 0.0f;
 
 void check_for_interactables(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -1281,7 +1254,7 @@ void check_for_interactables(void) {
 
     if (D_8010C958 == NULL) {
         dma_copy(E20110_ROM_START, E20110_ROM_END, E20110_VRAM_DEF);
-        D_8010C958 = &func_802B70B4_E201C4;
+        D_8010C958 = func_802B70B4_E201C4;
 
     }
 
@@ -1317,9 +1290,162 @@ void update_partner_timers(void) {
     }
 }
 
-INCLUDE_ASM(s32, "77480", func_800E0B90);
+void func_800E0B90(void) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    f32 cameraYaw = gCameras[gCurrentCameraID].currentYaw;
+    f32 temp_f20 = get_clamped_angle_diff(cameraYaw, playerStatus->currentYaw);
+    s32 trueAnim;
+    s32 animByte;
+    f32 unk_90;
+    s32 phi_v1;
+    f32 phi_f0;
 
-INCLUDE_ASM(s32, "77480", get_player_back_anim);
+    D_800F7B48 = 0.0f;
+    if (temp_f20 < -5.0f && temp_f20 > -175.0f) {
+        temp_f20 = 0.0f;
+        phi_v1 = 0;
+    } else if (temp_f20 > 5.0f && temp_f20 < 175.0f) {
+        temp_f20 = 180.0f;
+        phi_v1 = 1;
+    } else {
+        temp_f20 = D_800F7B40;
+        phi_v1 = 2;
+    }
+    if (D_8010C95C != phi_v1 && phi_v1 != 2) {
+        D_8010C95C = phi_v1;
+        playerStatus->unk_90[gCurrentCameraID] = (phi_v1 != 0) ? 180.0f : -180.0f;
+
+        if (fabsf(get_clamped_angle_diff(cameraYaw, playerStatus->currentYaw)) >= 90.0f) {
+            playerStatus->unk_90[gCurrentCameraID] = -playerStatus->unk_90[gCurrentCameraID];
+        }
+    }
+
+    unk_90 = playerStatus->unk_90[gCurrentCameraID];
+    if (unk_90 != 0.0f) {
+        if (unk_90 < 0.0f) {
+            unk_90 += 28.0f;
+            if (unk_90 > 0.0f) {
+                unk_90 = 0.0f;
+            }
+        }
+
+        if (unk_90 > 0.0f) {
+            unk_90 -= 28.0f;
+            if (unk_90 < 0.0f) {
+                unk_90 = 0.0f;
+            }
+        }
+    }
+
+    if (playerStatus->flags & 0x200000) {
+        unk_90 = 0.0f;
+    }
+
+    playerStatus->unk_90[gCurrentCameraID] = unk_90;
+
+    D_800F7B40 = unk_90 = clamp_angle(temp_f20);
+    unk_90 = clamp_angle(playerStatus->unk_90[gCurrentCameraID] + unk_90);
+    if (playerStatus->currentSpeed == 0.0f) {
+        D_800F7B48 = 0.0f;
+    }
+
+    trueAnim = playerStatus->anim;
+    if (playerStatus->flags & 0x20000) {
+        playerStatus->trueAnimation = trueAnim;
+    } else {
+        animByte = (trueAnim >> 0x10) & 0xFF;
+
+        if (playerStatus->actionState != 0xF && !(playerStatus->flags & 0x100000)) {
+            playerStatus->spriteFacingAngle = unk_90 + D_800F7B48;
+            trueAnim = playerStatus->anim;
+            if (!(playerStatus->flags & 0x10000000) &&
+                (animByte == 1 || animByte == 6 || animByte == 10) &&
+                fabsf(get_clamped_angle_diff(cameraYaw, playerStatus->currentYaw)) < 60.0f)
+            {
+                trueAnim = get_player_back_anim(trueAnim);
+            }
+            playerStatus->trueAnimation = trueAnim;
+            playerStatus->currentYaw = playerStatus->targetYaw;
+        } else {
+            trueAnim = playerStatus->anim;
+            if (!(playerStatus->flags & 0x10000000) &&
+                (animByte == 1 || animByte == 6 || animByte == 10) &&
+                playerStatus->spriteFacingAngle < 350.0f &&
+                playerStatus->spriteFacingAngle > 190.0f)
+            {
+                trueAnim = get_player_back_anim(trueAnim);
+            }
+            playerStatus->trueAnimation = trueAnim;
+        }
+    }
+
+    phi_f0 = 1.0f;
+    if (playerStatus->flags & 0x40000) {
+        phi_f0 = 0.5f;
+    }
+    if (playerStatus->flags & 0x20000000) {
+        phi_f0 = 0.0f;
+    }
+    playerStatus->unk_BC = spr_update_player_sprite(0, playerStatus->trueAnimation, phi_f0);
+    playerStatus->flags |= 0x40000000;
+}
+
+s32 get_player_back_anim(s32 arg0) {
+    s32 animByte = (arg0 >> 16) & 0xff;
+    s32 ret = 0;
+
+    if (animByte != 1) {
+        if (animByte != 6 && animByte != 10) {
+            return arg0;
+        }
+
+        if (animByte == 1) {
+            if (arg0 > 0x1000C) {
+                return arg0;
+            }
+        } else if (animByte == 6) {
+            if (arg0 == 0x6000C) {
+                ret = 0x6000D;
+            }
+            else if (arg0 == 0x6000E) {
+                ret = 0x6000F;
+            }
+            else if (arg0 == 0x60010) {
+                ret = 0x60011;
+            }
+            else if (arg0 == 0x60012) {
+                ret = 0x60013;
+            }
+            else if (arg0 == 0x60014) {
+                ret = 0x60015;
+            }
+            else if (arg0 == 0x60016) {
+                ret = 0x60017;
+            }
+            else if (arg0 == 0x60018) {
+                ret = 0x60019;
+            }
+            else if (arg0 == 0x6001A) {
+                ret = 0x6001B;
+            }
+        } else if (animByte == 10) {
+            if (arg0 > 0xA0006) {
+                ret = arg0 + 1;
+            }
+        }
+    } else {
+        if (arg0 > 0x1000C) {
+            return arg0;
+        }
+    }
+
+    if (ret != 0) {
+        return ret;
+    } else {
+        return arg0 | 0x1000000;
+    }
+
+}
 
 void render_player(void) {
     if (!gGameStatusPtr->disableScripts) {

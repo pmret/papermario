@@ -2030,10 +2030,7 @@ typedef struct PlayerStatus {
     /* 0x084 */ f32 currentYaw;
     /* 0x088 */ f32 overlapPushYaw;
     /* 0x08C */ f32 pitch;
-    /* 0x090 */ f32 unk_90;
-    /* 0x094 */ s32 unk_94;
-    /* 0x098 */ s32 unk_98;
-    /* 0x09C */ s32 unk_9C;
+    /* 0x090 */ f32 unk_90[4];
     /* 0x0A0 */ f32 heading;
     /* 0x0A4 */ s32 trueAnimation; ///< Encoding back-facing sprite
     /* 0x0A8 */ f32 spriteFacingAngle; /* angle of sprite, relative to camera, from 0 to 180 */
