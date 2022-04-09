@@ -19,8 +19,8 @@ glabel func_80240350_BDAB00
 /* BDAB1C 8024036C AFB00018 */   sw       $s0, 0x18($sp)
 /* BDAB20 80240370 0040802D */  daddu     $s0, $v0, $zero
 /* BDAB24 80240374 0200202D */  daddu     $a0, $s0, $zero
-/* BDAB28 80240378 3C118024 */  lui       $s1, %hi(func_80242A00_803280)
-/* BDAB2C 8024037C 26312A00 */  addiu     $s1, $s1, %lo(func_80242A00_803280)
+/* BDAB28 80240378 3C118024 */  lui       $s1, %hi(mac_01_Quizmo_UnkF)
+/* BDAB2C 8024037C 26312A00 */  addiu     $s1, $s1, %lo(mac_01_Quizmo_UnkF)
 /* BDAB30 80240380 0C01BB7C */  jal       decode_yay0
 /* BDAB34 80240384 0220282D */   daddu    $a1, $s1, $zero
 /* BDAB38 80240388 0C00AB1E */  jal       general_heap_free

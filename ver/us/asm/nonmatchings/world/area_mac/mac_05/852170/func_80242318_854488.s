@@ -1,10 +1,10 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_80242318_854488
+glabel mac_05_Quizmo_UnkI
 /* 854488 80242318 27BDFFE8 */  addiu     $sp, $sp, -0x18
-/* 85448C 8024231C 3C058025 */  lui       $a1, %hi(D_802529E8)
-/* 854490 80242320 8CA529E8 */  lw        $a1, %lo(D_802529E8)($a1)
+/* 85448C 8024231C 3C058025 */  lui       $a1, %hi(mac_05_Quizmo_WasCorrect)
+/* 854490 80242320 8CA529E8 */  lw        $a1, %lo(mac_05_Quizmo_WasCorrect)($a1)
 /* 854494 80242324 AFBF0010 */  sw        $ra, 0x10($sp)
 /* 854498 80242328 0C0B1EAF */  jal       evt_get_variable
 /* 85449C 8024232C 0000202D */   daddu    $a0, $zero, $zero

@@ -31,38 +31,46 @@ static char* N(exit_str_1) = "nok_02";
 
 #include "world/common/GetItemName.inc.c"
 
-#include "world/common/atomic/Quizmo.inc.c"
+extern s32 N(Quizmo_Worker);
+extern s32 N(Quizmo_WasCorrect);
+extern EffectInstance* N(Quizmo_StageEffect);
+extern EffectInstance* N(Quizmo_AudienceEffect);
+extern EffectInstance* N(Quizmo_VannaTEffect);
 
+#include "world/common/atomic/Quizmo.inc.c"
 #include "world/common/atomic/Quizmo_UnkA.inc.c"
 
+/*
+#include "world/common/atomic/Quizmo_UnkB.inc.c"
+#include "world/common/atomic/Quizmo_UnkC.inc.c"
+#include "world/common/atomic/Quizmo_UnkD.inc.c"
+#include "world/common/atomic/Quizmo_UnkE.inc.c"
+#include "world/common/atomic/Quizmo_UnkF.inc.c"
+#include "world/common/atomic/Quizmo_UnkG.inc.c"
+#include "world/common/atomic/Quizmo_UnkH.inc.c"
+*/
+
 INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_802414D8_9C68B8);
-
 INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_802416F0_9C6AD0);
-
 INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_802417A4_9C6B84);
-
 INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_802417D8_9C6BB8);
-
 INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_80241858_9C6C38);
-
 INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_80241870_9C6C50);
-
 INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_8024188C_9C6C6C);
 
 #include "world/common/GetGameStatus75.inc.c"
-
 #include "world/common/SetCamVfov.inc.c"
-
 #include "world/common/GetCamVfov.inc.c"
-
 #include "world/common/UnkCameraFunc.inc.c"
-
 #include "world/common/UnkRotatePlayer.inc.c"
-
 #include "world/common/UnkPartnerFuncs.inc.c"
 
-INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_80241D60_9C7140);
+/*
+#include "world/common/atomic/Quizmo_UnkI.inc.c"
+#include "world/common/atomic/Quizmo_UnkJ.inc.c"
+*/
 
+INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_80241D60_9C7140);
 INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_80241DCC_9C71AC);
 
 #include "world/common/GetNpcCollisionHeight.inc.c"

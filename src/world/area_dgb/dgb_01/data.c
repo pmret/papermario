@@ -2104,7 +2104,7 @@ Gfx D_8024F558_C0CDD8[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F5B8_C0CE38[] = {
+Gfx mac_04_Quizmo_WasCorrect[] = {
     gsSPSetLights1(dgb_01_D_80253140_C109C0),
     gsSPMatrix(&N(D_80253420_C10CA0), G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
     gsSPDisplayList(D_8024F558_C0CDD8),
@@ -2312,7 +2312,7 @@ Gfx D_8024FB48_C0D3C8[] = {
     gsSPDisplayList(D_8024F780_C0D000),
     gsSPDisplayList(D_8024F6E8_C0CF68),
     gsSPDisplayList(D_8024F650_C0CED0),
-    gsSPDisplayList(D_8024F5B8_C0CE38),
+    gsSPDisplayList(mac_04_Quizmo_WasCorrect),
     gsSPDisplayList(D_8024F520_C0CDA0),
     gsSPEndDisplayList(),
 };

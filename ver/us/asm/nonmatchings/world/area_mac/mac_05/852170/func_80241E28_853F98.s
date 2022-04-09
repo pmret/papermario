@@ -1,9 +1,9 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_80241E28_853F98
-/* 853F98 80241E28 3C028025 */  lui       $v0, %hi(dgb_01_D_802529F8_C10278)
-/* 853F9C 80241E2C 8C4229F8 */  lw        $v0, %lo(dgb_01_D_802529F8_C10278)($v0)
+glabel mac_05_Quizmo_UnkG
+/* 853F98 80241E28 3C028025 */  lui       $v0, %hi(mac_05_Quizmo_VannaTEffect)
+/* 853F9C 80241E2C 8C4229F8 */  lw        $v0, %lo(mac_05_Quizmo_VannaTEffect)($v0)
 /* 853FA0 80241E30 8C43000C */  lw        $v1, 0xc($v0)
 /* 853FA4 80241E34 24020001 */  addiu     $v0, $zero, 1
 /* 853FA8 80241E38 AC62001C */  sw        $v0, 0x1c($v1)

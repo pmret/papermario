@@ -51,39 +51,29 @@ static char* N(exit_str_1) = "kmr_22";
 
 #include "world/common/GetItemName.inc.c"
 
+extern s32 N(Quizmo_Worker);
+extern s32 N(Quizmo_WasCorrect);
+extern EffectInstance* N(Quizmo_StageEffect);
+extern EffectInstance* N(Quizmo_AudienceEffect);
+extern EffectInstance* N(Quizmo_VannaTEffect);
+
 #include "world/common/atomic/Quizmo.inc.c"
-
 #include "world/common/atomic/Quizmo_UnkA.inc.c"
-
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242680_802F00);
-
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242898_803118);
-
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_8024294C_8031CC);
-
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242980_803200);
-
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242A00_803280);
-
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242A18_803298);
-
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242A34_8032B4);
-
+#include "world/common/atomic/Quizmo_UnkB.inc.c"
+#include "world/common/atomic/Quizmo_UnkC.inc.c"
+#include "world/common/atomic/Quizmo_UnkD.inc.c"
+#include "world/common/atomic/Quizmo_UnkE.inc.c"
+#include "world/common/atomic/Quizmo_UnkF.inc.c"
+#include "world/common/atomic/Quizmo_UnkG.inc.c"
+#include "world/common/atomic/Quizmo_UnkH.inc.c"
 #include "world/common/GetGameStatus75.inc.c"
-
 #include "world/common/SetCamVfov.inc.c"
-
 #include "world/common/GetCamVfov.inc.c"
-
 #include "world/common/UnkCameraFunc.inc.c"
-
 #include "world/common/UnkRotatePlayer.inc.c"
-
 #include "world/common/UnkPartnerFuncs.inc.c"
-
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242F08_803788);
-
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242F74_8037F4);
+#include "world/common/atomic/Quizmo_UnkI.inc.c"
+#include "world/common/atomic/Quizmo_UnkJ.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242FA4_803824);
 

@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_80240C20_832420
+glabel mac_03_Quizmo_UnkB
 /* 832420 80240C20 27BDFFC8 */  addiu     $sp, $sp, -0x38
 /* 832424 80240C24 AFB1001C */  sw        $s1, 0x1c($sp)
 /* 832428 80240C28 AFBF0020 */  sw        $ra, 0x20($sp)
@@ -38,8 +38,8 @@ glabel func_80240C20_832420
 /* 8324A4 80240CA4 0220202D */  daddu     $a0, $s1, $zero
 /* 8324A8 80240CA8 3C05F4AC */  lui       $a1, 0xf4ac
 /* 8324AC 80240CAC 34A5D481 */  ori       $a1, $a1, 0xd481
-/* 8324B0 80240CB0 3C108025 */  lui       $s0, %hi(ForceCloseMessageBox)
-/* 8324B4 80240CB4 261013F0 */  addiu     $s0, $s0, %lo(ForceCloseMessageBox)
+/* 8324B0 80240CB0 3C108025 */  lui       $s0, %hi(mac_03_Quizmo_StageEffect)
+/* 8324B4 80240CB4 261013F0 */  addiu     $s0, $s0, %lo(mac_03_Quizmo_StageEffect)
 /* 8324B8 80240CB8 0C0B1EAF */  jal       evt_get_variable
 /* 8324BC 80240CBC AE020000 */   sw       $v0, ($s0)
 /* 8324C0 80240CC0 0220202D */  daddu     $a0, $s1, $zero
@@ -66,8 +66,8 @@ glabel func_80240C20_832420
 /* 832514 80240D14 0000202D */   daddu    $a0, $zero, $zero
 /* 832518 80240D18 0220202D */  daddu     $a0, $s1, $zero
 /* 83251C 80240D1C 3C05F4AC */  lui       $a1, 0xf4ac
-/* 832520 80240D20 3C018025 */  lui       $at, %hi(D_802513F4)
-/* 832524 80240D24 AC2213F4 */  sw        $v0, %lo(D_802513F4)($at)
+/* 832520 80240D20 3C018025 */  lui       $at, %hi(mac_03_Quizmo_AudienceEffect)
+/* 832524 80240D24 AC2213F4 */  sw        $v0, %lo(mac_03_Quizmo_AudienceEffect)($at)
 /* 832528 80240D28 0C0B1EAF */  jal       evt_get_variable
 /* 83252C 80240D2C 34A5D481 */   ori      $a1, $a1, 0xd481
 /* 832530 80240D30 0220202D */  daddu     $a0, $s1, $zero
@@ -98,16 +98,16 @@ glabel func_80240C20_832420
 /* 832594 80240D94 E7A00010 */   swc1     $f0, 0x10($sp)
 /* 832598 80240D98 8E030000 */  lw        $v1, ($s0)
 /* 83259C 80240D9C 8C64000C */  lw        $a0, 0xc($v1)
-/* 8325A0 80240DA0 3C018025 */  lui       $at, %hi(D_802513F8)
-/* 8325A4 80240DA4 AC2213F8 */  sw        $v0, %lo(D_802513F8)($at)
+/* 8325A0 80240DA0 3C018025 */  lui       $at, %hi(mac_03_Quizmo_VannaTEffect)
+/* 8325A4 80240DA4 AC2213F8 */  sw        $v0, %lo(mac_03_Quizmo_VannaTEffect)($at)
 /* 8325A8 80240DA8 AC800018 */  sw        $zero, 0x18($a0)
 /* 8325AC 80240DAC AC800020 */  sw        $zero, 0x20($a0)
 /* 8325B0 80240DB0 AC800024 */  sw        $zero, 0x24($a0)
 /* 8325B4 80240DB4 AC800028 */  sw        $zero, 0x28($a0)
 /* 8325B8 80240DB8 AC80001C */  sw        $zero, 0x1c($a0)
 .L80240DBC:
-/* 8325BC 80240DBC 3C028025 */  lui       $v0, %hi(ForceCloseMessageBox)
-/* 8325C0 80240DC0 8C4213F0 */  lw        $v0, %lo(ForceCloseMessageBox)($v0)
+/* 8325BC 80240DBC 3C028025 */  lui       $v0, %hi(mac_03_Quizmo_StageEffect)
+/* 8325C0 80240DC0 8C4213F0 */  lw        $v0, %lo(mac_03_Quizmo_StageEffect)($v0)
 /* 8325C4 80240DC4 8C44000C */  lw        $a0, 0xc($v0)
 /* 8325C8 80240DC8 8C820020 */  lw        $v0, 0x20($a0)
 /* 8325CC 80240DCC 8C830028 */  lw        $v1, 0x28($a0)

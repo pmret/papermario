@@ -1,23 +1,23 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_80240E38_832638
+glabel mac_03_Quizmo_UnkC
 /* 832638 80240E38 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 83263C 80240E3C 10A0000B */  beqz      $a1, .L80240E6C
 /* 832640 80240E40 AFBF0010 */   sw       $ra, 0x10($sp)
-/* 832644 80240E44 3C038025 */  lui       $v1, %hi(D_802513F4)
-/* 832648 80240E48 8C6313F4 */  lw        $v1, %lo(D_802513F4)($v1)
+/* 832644 80240E44 3C038025 */  lui       $v1, %hi(mac_03_Quizmo_AudienceEffect)
+/* 832648 80240E48 8C6313F4 */  lw        $v1, %lo(mac_03_Quizmo_AudienceEffect)($v1)
 /* 83264C 80240E4C 8C620000 */  lw        $v0, ($v1)
-/* 832650 80240E50 3C048025 */  lui       $a0, %hi(D_802513F8)
-/* 832654 80240E54 8C8413F8 */  lw        $a0, %lo(D_802513F8)($a0)
+/* 832650 80240E50 3C048025 */  lui       $a0, %hi(mac_03_Quizmo_VannaTEffect)
+/* 832654 80240E54 8C8413F8 */  lw        $a0, %lo(mac_03_Quizmo_VannaTEffect)($a0)
 /* 832658 80240E58 34420010 */  ori       $v0, $v0, 0x10
 /* 83265C 80240E5C AC620000 */  sw        $v0, ($v1)
 /* 832660 80240E60 8C820000 */  lw        $v0, ($a0)
 /* 832664 80240E64 34420010 */  ori       $v0, $v0, 0x10
 /* 832668 80240E68 AC820000 */  sw        $v0, ($a0)
 .L80240E6C:
-/* 83266C 80240E6C 3C048025 */  lui       $a0, %hi(ForceCloseMessageBox)
-/* 832670 80240E70 8C8413F0 */  lw        $a0, %lo(ForceCloseMessageBox)($a0)
+/* 83266C 80240E6C 3C048025 */  lui       $a0, %hi(mac_03_Quizmo_StageEffect)
+/* 832670 80240E70 8C8413F0 */  lw        $a0, %lo(mac_03_Quizmo_StageEffect)($a0)
 /* 832674 80240E74 8C85000C */  lw        $a1, 0xc($a0)
 /* 832678 80240E78 8CA20018 */  lw        $v0, 0x18($a1)
 /* 83267C 80240E7C 8CA30020 */  lw        $v1, 0x20($a1)
@@ -41,8 +41,8 @@ glabel func_80240E38_832638
 .L80240EC4:
 /* 8326C4 80240EC4 0C016914 */  jal       remove_effect
 /* 8326C8 80240EC8 ACA00018 */   sw       $zero, 0x18($a1)
-/* 8326CC 80240ECC 3C048025 */  lui       $a0, %hi(D_802513D0)
-/* 8326D0 80240ED0 8C8413D0 */  lw        $a0, %lo(D_802513D0)($a0)
+/* 8326CC 80240ECC 3C048025 */  lui       $a0, %hi(mac_03_Quizmo_Worker)
+/* 8326D0 80240ED0 8C8413D0 */  lw        $a0, %lo(mac_03_Quizmo_Worker)($a0)
 /* 8326D4 80240ED4 0C048D70 */  jal       free_generic_entity
 /* 8326D8 80240ED8 00000000 */   nop
 /* 8326DC 80240EDC 24020002 */  addiu     $v0, $zero, 2

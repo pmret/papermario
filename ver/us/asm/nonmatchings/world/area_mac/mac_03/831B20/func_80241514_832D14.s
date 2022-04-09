@@ -1,16 +1,16 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_80241514_832D14
+glabel mac_03_Quizmo_UnkJ
 /* 832D14 80241514 27BDFFE8 */  addiu     $sp, $sp, -0x18
-/* 832D18 80241518 3C058024 */  lui       $a1, %hi(func_802414A8_832CA8)
-/* 832D1C 8024151C 24A514A8 */  addiu     $a1, $a1, %lo(func_802414A8_832CA8)
+/* 832D18 80241518 3C058024 */  lui       $a1, %hi(mac_03_Quizmo_UnkI)
+/* 832D1C 8024151C 24A514A8 */  addiu     $a1, $a1, %lo(mac_03_Quizmo_UnkI)
 /* 832D20 80241520 AFBF0010 */  sw        $ra, 0x10($sp)
 /* 832D24 80241524 0C048C8F */  jal       create_generic_entity_frontUI
 /* 832D28 80241528 0000202D */   daddu    $a0, $zero, $zero
 /* 832D2C 8024152C 8FBF0010 */  lw        $ra, 0x10($sp)
-/* 832D30 80241530 3C018025 */  lui       $at, %hi(D_802513D0)
-/* 832D34 80241534 AC2213D0 */  sw        $v0, %lo(D_802513D0)($at)
+/* 832D30 80241530 3C018025 */  lui       $at, %hi(mac_03_Quizmo_Worker)
+/* 832D34 80241534 AC2213D0 */  sw        $v0, %lo(mac_03_Quizmo_Worker)($at)
 /* 832D38 80241538 24020002 */  addiu     $v0, $zero, 2
 /* 832D3C 8024153C 03E00008 */  jr        $ra
 /* 832D40 80241540 27BD0018 */   addiu    $sp, $sp, 0x18
