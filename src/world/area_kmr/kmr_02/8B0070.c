@@ -1,4 +1,5 @@
 #include "kmr_02.h"
+#include "effects.h"
 
 static char* N(exit_str_0) = "kmr_05";
 static char* N(exit_str_1) = "kmr_00";
@@ -17,39 +18,29 @@ INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80240370_8B03E0);
 
 #include "world/common/GetItemName.inc.c"
 
+extern s32 N(Quizmo_Worker);
+extern s32 N(Quizmo_WasCorrect);
+extern EffectInstance* N(Quizmo_StageEffect);
+extern EffectInstance* N(Quizmo_AudienceEffect);
+extern EffectInstance* N(Quizmo_VannaTEffect);
+
 #include "world/common/atomic/Quizmo.inc.c"
-
 #include "world/common/atomic/Quizmo_UnkA.inc.c"
-
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80240B00_8B0B70);
-
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80240D18_8B0D88);
-
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80240DCC_8B0E3C);
-
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80240E00_8B0E70);
-
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80240E80_8B0EF0);
-
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80240E98_8B0F08);
-
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80240EB4_8B0F24);
-
+#include "world/common/atomic/Quizmo_UnkB.inc.c"
+#include "world/common/atomic/Quizmo_UnkC.inc.c"
+#include "world/common/atomic/Quizmo_UnkD.inc.c"
+#include "world/common/atomic/Quizmo_UnkE.inc.c"
+#include "world/common/atomic/Quizmo_UnkF.inc.c"
+#include "world/common/atomic/Quizmo_UnkG.inc.c"
+#include "world/common/atomic/Quizmo_UnkH.inc.c"
 #include "world/common/GetGameStatus75.inc.c"
-
 #include "world/common/SetCamVfov.inc.c"
-
 #include "world/common/GetCamVfov.inc.c"
-
 #include "world/common/UnkCameraFunc.inc.c"
-
 #include "world/common/UnkRotatePlayer.inc.c"
-
 #include "world/common/UnkPartnerFuncs.inc.c"
-
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80241388_8B13F8);
-
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_802413F4_8B1464);
+#include "world/common/atomic/Quizmo_UnkI.inc.c"
+#include "world/common/atomic/Quizmo_UnkJ.inc.c"
 
 #include "world/common/UnkNpcAIFunc43.inc.c"
 

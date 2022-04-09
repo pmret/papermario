@@ -1,15 +1,15 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_80240E00_8B0E70
+glabel kmr_02_Quizmo_UnkE
 /* 8B0E70 80240E00 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 8B0E74 80240E04 AFBF0010 */  sw        $ra, 0x10($sp)
 /* 8B0E78 80240E08 8C82000C */  lw        $v0, 0xc($a0)
 /* 8B0E7C 80240E0C 0C0B1EAF */  jal       evt_get_variable
 /* 8B0E80 80240E10 8C450000 */   lw       $a1, ($v0)
 /* 8B0E84 80240E14 0040202D */  daddu     $a0, $v0, $zero
-/* 8B0E88 80240E18 3C028025 */  lui       $v0, %hi(D_80257F48)
-/* 8B0E8C 80240E1C 8C427F48 */  lw        $v0, %lo(D_80257F48)($v0)
+/* 8B0E88 80240E18 3C028025 */  lui       $v0, %hi(kmr_02_Quizmo_StageEffect)
+/* 8B0E8C 80240E1C 8C427F48 */  lw        $v0, %lo(kmr_02_Quizmo_StageEffect)($v0)
 /* 8B0E90 80240E20 24030001 */  addiu     $v1, $zero, 1
 /* 8B0E94 80240E24 8C45000C */  lw        $a1, 0xc($v0)
 /* 8B0E98 80240E28 1083000D */  beq       $a0, $v1, .L80240E60
