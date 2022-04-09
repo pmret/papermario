@@ -103,7 +103,8 @@
 
 /// An entity index. Entities are assigned indices in the order they are created with EVT_CALL(MakeEntity, ...).
 /// Supported in EVT_BIND_TRIGGER and EVT_BIND_PADLOCK only.
-#define EVT_ENTITY_INDEX(entityIndex) (((((entityIndex)) + 0x4000)))
+#define EVT_ENTITY_ID_BIT 0x4000
+#define EVT_ENTITY_INDEX(entityIndex) (((((entityIndex)) + EVT_ENTITY_ID_BIT)))
 
 
 /****** INSTRUCTIONS **************************************************************************************************/
