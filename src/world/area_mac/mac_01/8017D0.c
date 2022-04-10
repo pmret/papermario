@@ -6,43 +6,29 @@ extern u8 D_80258407_818C87;
 
 #include "world/common/UnkMusicFunc.inc.c"
 
-#define NAMESPACE dup_mac_01
 #include "world/common/UnkNpcAIFunc24.inc.c"
-#define NAMESPACE mac_01
 
 #include "world/common/UnkFunc13.inc.c"
 
-#define NAMESPACE dup_mac_01
 #include "world/common/UnkNpcAIFunc1.inc.c"
-#define NAMESPACE mac_01
 
 #include "world/common/UnkFunc14.inc.c"
 
-#define NAMESPACE dup_mac_01
 #include "world/common/UnkNpcAIFunc25.inc.c"
-#define NAMESPACE mac_01
 
-#define NAMESPACE dup_mac_01
 #include "world/common/NpcJumpFunc2.inc.c"
-#define NAMESPACE mac_01
 
-#define NAMESPACE dup_mac_01
 #include "world/common/NpcJumpFunc.inc.c"
-#define NAMESPACE mac_01
 
-#define NAMESPACE dup_mac_01
 #include "world/common/UnkNpcAIFunc13.inc.c"
-#define NAMESPACE mac_01
 
 #include "world/common/UnkFunc15.inc.c"
 
-#define NAMESPACE dup_mac_01
 #include "world/common/UnkNpcDurationFlagFunc.inc.c"
-#define NAMESPACE mac_01
 
 #include "world/common/UnkFunc16.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80241C14_802494);
+#include "world/common/UnkNpcAIMainFunc.inc.c"
 
 static char* N(exit_str_0) = "flo_00";
 static char* N(exit_str_1) = "kmr_22";
