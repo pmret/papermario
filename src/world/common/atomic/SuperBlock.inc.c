@@ -4,11 +4,6 @@
 #include "SuperBlock.inc.h"
 #include "hud_element.h"
 
-extern s32 gPartnerPopupProperties[11][4];
-
-extern HudScript* wPartnerHudScripts[];
-extern HudScript* wDisabledPartnerHudScripts[];
-
 ApiStatus N(SuperBlock_SetOverride40)(Evt* script, s32 isInitialCall) {
     gOverrideFlags |= GLOBAL_OVERRIDES_40;
     return ApiStatus_DONE2;
