@@ -74,24 +74,24 @@ ApiStatus N(Quizmo_UnkQuizFunc)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-void N(UnkFunc28)(Npc* npc);
+void N(Quizmo_UnkFunc28)(Npc* npc);
 
-ApiStatus N(UnkFunc31)(Evt* script, s32 isInitialCall) {
+ApiStatus N(Quizmo_UnkFunc31)(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(script->owner2.npcID);
 
-    npc->onRender = N(UnkFunc28);
+    npc->onRender = N(Quizmo_UnkFunc28);
     npc->blurBuf = heap_malloc(8);
     *((s32*)npc->blurBuf) = 0;
 
     return ApiStatus_DONE1;
 }
 
-ApiStatus N(GetNpcUnsafeOwner2)(Evt* script, s32 isInitialCall) {
+ApiStatus N(Quizmo_GetNpcUnsafeOwner2)(Evt* script, s32 isInitialCall) {
     get_npc_unsafe(script->owner2.npcID);
     return ApiStatus_BLOCK;
 }
 
-void N(UnkFunc28)(Npc* npc) {
+void N(Quizmo_UnkFunc28)(Npc* npc) {
     Camera* camera = &gCameras[gCurrentCamID];
 
     if (*((s32*)npc->blurBuf) & 1) {
@@ -99,7 +99,7 @@ void N(UnkFunc28)(Npc* npc) {
     }
 }
 
-ApiStatus N(UnkAlphaFunc)(Evt* script, s32 isInitialCall) {
+ApiStatus N(Quizmo_UnkAlphaFunc)(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         s32 i;
 
@@ -135,7 +135,7 @@ ApiStatus N(UnkAlphaFunc)(Evt* script, s32 isInitialCall) {
     return (script->functionTemp[0] == 255) * ApiStatus_DONE2;
 }
 
-ApiStatus N(UnkFunc29)(Evt* script, s32 isInitialCall) {
+ApiStatus N(Quizmo_UnkFunc29)(Evt* script, s32 isInitialCall) {
     s32 i;
 
     if (isInitialCall) {
@@ -199,12 +199,19 @@ ApiStatus N(Quizmo_UnkB)(Evt* script, s32 isInitialCall) {
     EffectInstanceDataThing* effectPtr;
 
     if (isInitialCall) {
-        N(Quizmo_StageEffect) = fx_quizmo_stage(0, evt_get_variable(script, EVT_ARRAY(1)), evt_get_variable(script, EVT_ARRAY(2)),
-                                      evt_get_variable(script, EVT_ARRAY(3)));
-        N(Quizmo_AudienceEffect) = fx_quizmo_audience(0, evt_get_variable(script, EVT_ARRAY(1)), evt_get_variable(script, EVT_ARRAY(2)),
-                                      evt_get_variable(script, EVT_ARRAY(3)));
-        N(Quizmo_VannaTEffect) = fx_quizmo_assistant(0, evt_get_variable(script, EVT_ARRAY(1)), evt_get_variable(script, EVT_ARRAY(2)),
-                                      evt_get_variable(script, EVT_ARRAY(3)), 1.0f, 0);
+        N(Quizmo_StageEffect) = fx_quizmo_stage(0,
+            evt_get_variable(script, EVT_ARRAY(1)),
+            evt_get_variable(script, EVT_ARRAY(2)),
+            evt_get_variable(script, EVT_ARRAY(3)));
+        N(Quizmo_AudienceEffect) = fx_quizmo_audience(0,
+            evt_get_variable(script, EVT_ARRAY(1)),
+            evt_get_variable(script, EVT_ARRAY(2)),
+            evt_get_variable(script, EVT_ARRAY(3)));
+        N(Quizmo_VannaTEffect) = fx_quizmo_assistant(0,
+            evt_get_variable(script, EVT_ARRAY(1)),
+            evt_get_variable(script, EVT_ARRAY(2)),
+            evt_get_variable(script, EVT_ARRAY(3)),
+            1.0f, 0);
 
         effectPtr = N(Quizmo_StageEffect)->data;
         effectPtr->unk_18 = 0;
@@ -296,7 +303,7 @@ ApiStatus N(Quizmo_UnkH)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(GetGameStatus75)(Evt* script, s32 isInitialCall) {
+ApiStatus N(Quizmo_GetGameStatus75)(Evt* script, s32 isInitialCall) {
     evt_set_variable(script, EVT_VAR(0), gGameStatusPtr->debugQuizmo);
     return ApiStatus_DONE2;
 }
@@ -309,7 +316,7 @@ ApiStatus N(SetCamVfov)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(GetCamVfov)(Evt* script, s32 isInitialCall) {
+ApiStatus N(Quizmo_GetCamVfov)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 cameraID = evt_get_variable(script, *args++);
 
@@ -317,7 +324,7 @@ ApiStatus N(GetCamVfov)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(UnkCameraFunc)(Evt* script, s32 isInitialCall) {
+ApiStatus N(Quizmo_UnkCameraFunc)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 var0 = evt_get_variable(script, *args++);
     s32 var1 = evt_get_variable(script, *args++);
@@ -337,7 +344,7 @@ ApiStatus N(UnkCameraFunc)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(UnkRotatePlayer)(Evt* script, s32 isInitialCall) {
+ApiStatus N(Quizmo_UnkRotatePlayer)(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (isInitialCall) {
@@ -354,7 +361,7 @@ ApiStatus N(UnkRotatePlayer)(Evt* script, s32 isInitialCall) {
     return (script->functionTemp[0] >> 0x1F) & ApiStatus_DONE2;
 }
 
-ApiStatus N(UnkRotatePartner)(Evt* script, s32 isInitialCall) {
+ApiStatus N(Quizmo_UnkRotatePartner)(Evt* script, s32 isInitialCall) {
     Npc* partner = get_npc_unsafe(NPC_PARTNER);
 
     if (isInitialCall) {
@@ -371,7 +378,7 @@ ApiStatus N(UnkRotatePartner)(Evt* script, s32 isInitialCall) {
     return (script->functionTemp[0] >> 0x1F) & ApiStatus_DONE2;
 }
 
-ApiStatus N(UnkMovePartner)(Evt* script, s32 isInitialCall) {
+ApiStatus N(Quizmo_UnkMovePartner)(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(NPC_PARTNER);
     f32* x = (f32*) &script->functionTemp[1];
     f32* y = (f32*) &script->functionTemp[2];
