@@ -4,7 +4,7 @@
 
 #include "world/common/atomic/Pipe.inc.c"
 
-#include "world/common/UpdateTexturePan.inc.c"
+#include "world/common/atomic/TexturePan.inc.c"
 
 ApiStatus func_802405EC_E1EA4C(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
