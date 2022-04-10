@@ -1,12 +1,17 @@
 #include "common.h"
 #include "world/partners.h"
 
+extern f32 GravityParamsStartJump[];
 extern f32 D_8010C928;
+extern f32 D_8010C960;
+extern f32 D_8010C97C;
 extern f32 D_8010C984;
 
 void func_800E315C(s32 colliderID);
 s32 collision_check_player_intersecting_world(s32 mode, s32 arg1, f32 arg2);
 s8 get_current_partner_id(void);
+s32 phys_check_interactable_collision(void);
+void phys_save_ground_pos(void);
 
 void record_jump_apex(void) {
     gPlayerStatus.jumpApexHeight = gPlayerStatus.position.y;
@@ -58,59 +63,245 @@ void move_player(s32 duration, f32 heading, f32 speed) {
     }
 }
 
-INCLUDE_ASM(s32, "7bb60_len_41b0", collision_main_above);
-
-INCLUDE_ASM(s32, "7bb60_len_41b0", func_800E29C8);
-
-INCLUDE_ASM(s32, "7bb60_len_41b0", func_800E2BB0);
-
-INCLUDE_ASM(s32, "7bb60_len_41b0", phys_update_jump);
-
-
-#ifdef NON_EQUIVALENT
-// Rodata issue.
-extern s32 GravityParamsStartJump;
-
-void phys_init_integrator_for_current_state(void) {
-    f32* temp_a0;
-    s8 temp_v0;
+s32 collision_main_above(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
+    CollisionStatus* collisionStatus = &gCollisionStatus;
+    f32 x, y, z;
+    f32 new_var;
+    f32 moveAngle;
+    f32 moveMagnitude;
+    f32 sp2C;
+    s32 hitResult;
+    f32 phi_f2;
 
-    temp_v0 = playerStatus->actionState - 3;
-    switch (temp_v0) {
-    case 4:
-        playerStatus->gravityIntegrator[0] = 10.0f;
-        playerStatus->gravityIntegrator[1] = -5.0f;
-        playerStatus->gravityIntegrator[2] = 1.5f;
-        playerStatus->gravityIntegrator[3] = -0.3f;
-        return;
-    case 0:
-    case 10:
-    case 11:
-    case 12:
-    case 13:
-    case 18:
-    case 20:
-            temp_a0 = &GravityParamsStartJump ;
-        if ((playerStatus->flags & 0x40000) == 0) {
-            playerStatus->gravityIntegrator[0] = *temp_a0++;
-            playerStatus->gravityIntegrator[1] = *temp_a0++;
-            playerStatus->gravityIntegrator[2] = *temp_a0++;
-            playerStatus->gravityIntegrator[3] = *temp_a0++;
-            return;
+    new_var = sp2C = playerStatus->colliderHeight * 0.5f;
+    x = playerStatus->position.x;
+    y = playerStatus->position.y + new_var;
+    z = playerStatus->position.z;
+
+    player_input_to_move_vector(&moveAngle, &moveMagnitude);
+
+    if (moveMagnitude != 0.0f) {
+        phi_f2 = playerStatus->targetYaw;
+    } else {
+        phi_f2 = playerStatus->spriteFacingAngle - 90.0f + gCameras[gCurrentCameraID].currentYaw;
+    }
+
+    moveAngle = phi_f2;
+    hitResult = player_raycast_up_corners(playerStatus, &x, &y, &z, &sp2C, moveAngle);
+    collisionStatus->currentCeiling = hitResult;
+
+    if (hitResult >= 0) {
+        if (playerStatus->actionState != 8 && playerStatus->actionState != 9 && collisionStatus->currentFloor < 0) {
+            if (sp2C <= fabsf(new_var + playerStatus->gravityIntegrator[0])) {
+                do {
+                    if ((hitResult & 0x4000) && get_entity_type(hitResult) == 0xD) {
+                        return hitResult;
+                    }
+                } while (0);
+
+                playerStatus->position.y = y - ((playerStatus->colliderHeight / 5.0f) * 3.0f);
+                if (playerStatus->actionState != 0xF && playerStatus->actionState != 0xD) {
+                    playerStatus->gravityIntegrator[0] = 0.0f;
+                    playerStatus->gravityIntegrator[1] = 0.0f;
+                    playerStatus->gravityIntegrator[2] = 0.0f;
+                    playerStatus->gravityIntegrator[3] = 0.0f;
+                }
+            }
         }
+    }
 
-        playerStatus->gravityIntegrator[0] = *temp_a0++ * 0.5f;
-        playerStatus->gravityIntegrator[1] = *temp_a0++ * 0.5f;
-        playerStatus->gravityIntegrator[2] = *temp_a0++ * 0.5f;
-        playerStatus->gravityIntegrator[3] = *temp_a0++ * 0.5f;
-    default:
-        return;
+    return hitResult;
+}
+
+//INCLUDE_ASM(s32, "7bb60_len_41b0", func_800E29C8);
+void func_800E29C8(void) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    s32 colliderID;
+    f32 temp_f20;
+    s32 phi_a0;
+
+    if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
+        playerStatus->flags &= ~PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
+        playerStatus->fallState = 0;
+    }
+
+    if (playerStatus->fallState == 0) {
+        if (dist2D(D_8010C960, D_8010C97C, playerStatus->position.x, playerStatus->position.z) <= 22.0f) {
+            add_vec2D_polar(&playerStatus->position.x, &playerStatus->position.z, 5.0f, playerStatus->targetYaw);
+        }
+        integrate_gravity();
+        if (playerStatus->gravityIntegrator[0] <= 0.0f) {
+            record_jump_apex();
+            gravity_use_fall_parms();
+            integrate_gravity();
+            playerStatus->fallState = 1;
+        }
+        if (playerStatus->gravityIntegrator[0] > playerStatus->maxJumpSpeed) {
+            playerStatus->gravityIntegrator[0] = playerStatus->maxJumpSpeed;
+        }
+        playerStatus->position.y += playerStatus->gravityIntegrator[0];
+    } else if (playerStatus->fallState == 2) {
+        if (dist2D(D_8010C960, D_8010C97C, playerStatus->position.x, playerStatus->position.z) <= 22.0f) {
+            add_vec2D_polar(&playerStatus->position.x, &playerStatus->position.z, 5.0f, playerStatus->targetYaw);
+        }
+        temp_f20 = player_check_collision_below(func_800E34D8(), &colliderID);
+        func_800E315C(colliderID);
+        playerStatus->position.y = temp_f20;
+        if (colliderID >= 0) {
+            if (!(playerStatus->animFlags & 1)) {
+                phi_a0 = 0x10009;
+            } else {
+                phi_a0 = 0x6000B;
+            }
+            suggest_player_anim_clearUnkFlag(phi_a0);
+            enable_player_input();
+            phys_player_land();
+        }
     }
 }
-#else
-INCLUDE_ASM(void, "7bb60_len_41b0", phys_init_integrator_for_current_state, void);
-#endif // NON_EQUIVALENT
+
+void func_800E2BB0(void) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    s32 cond = FALSE;
+
+    if (playerStatus->position.y < playerStatus->gravityIntegrator[3] + playerStatus->gravityIntegrator[2]) {
+        f32 phi_f6 = (playerStatus->gravityIntegrator[3] - playerStatus->position.y) / 777.0f;
+
+        if (phi_f6 < -0.47) {
+            phi_f6 = -0.47f;
+        }
+        if (phi_f6 > 0.001) {
+            phi_f6 = 0.001f;
+        }
+        playerStatus->gravityIntegrator[0] += phi_f6;
+        playerStatus->position.y += playerStatus->gravityIntegrator[0];
+        if (playerStatus->gravityIntegrator[0] <= 0.0f) {
+            cond = TRUE;
+        }
+    } else {
+        playerStatus->gravityIntegrator[0] += -1.2;
+        if (playerStatus->gravityIntegrator[0] <= 0.0f) {
+            cond = TRUE;
+        }
+        playerStatus->position.y += playerStatus->gravityIntegrator[0];
+    }
+
+    if (cond) {
+        record_jump_apex();
+        playerStatus->gravityIntegrator[0] = 0.1143f;
+        playerStatus->gravityIntegrator[1] = -0.2871f;
+        playerStatus->gravityIntegrator[2] = -0.1823f;
+        playerStatus->gravityIntegrator[3] = 0.01152f;
+        set_action_state(ACTION_STATE_FALLING);
+    }
+}
+
+void phys_update_jump(void) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+
+    if (playerStatus->decorationList != 0) {
+        switch (playerStatus->actionState) {
+            case ACTION_STATE_LAUNCH:
+                func_800E2BB0();
+                return;
+            case ACTION_STATE_LANDING_ON_SWITCH:
+                func_800E29C8();
+                return;
+            case ACTION_STATE_BOUNCE:
+                integrate_gravity();
+                playerStatus->position.y += playerStatus->gravityIntegrator[0];
+                if (playerStatus->gravityIntegrator[0] <= 0.0f) {
+                    record_jump_apex();
+                    if (is_starting_conversation()) {
+                        playerStatus->gravityIntegrator[0] = 0.154343f;
+                        playerStatus->gravityIntegrator[1] = -0.35008f;
+                        playerStatus->gravityIntegrator[2] = 0.0f;
+                        playerStatus->gravityIntegrator[3] = 0.0f;
+                    } else {
+                        gravity_use_fall_parms();
+                    }
+                    integrate_gravity();
+                    set_action_state(ACTION_STATE_FALLING);
+                }
+                return;
+            case ACTION_STATE_HOP:
+                playerStatus->gravityIntegrator[0] -= 4.5;
+                playerStatus->position.y += playerStatus->gravityIntegrator[0];
+                if (playerStatus->gravityIntegrator[0] <= 0.0f) {
+                    record_jump_apex();
+                    gravity_use_fall_parms();
+                    integrate_gravity();
+                    set_action_state(ACTION_STATE_FALLING);
+                }
+                return;
+            case ACTION_STATE_HIT_FIRE:
+            case ACTION_STATE_HIT_LAVA:
+                return;
+            default:
+                if (!(playerStatus->currentButtons & BUTTON_A)) {
+                    record_jump_apex();
+                    set_action_state(ACTION_STATE_HOP);
+                    integrate_gravity();
+                    if (playerStatus->flags & PLAYER_STATUS_FLAGS_40000) {
+                        playerStatus->gravityIntegrator[1] *= 0.5f;
+                        playerStatus->gravityIntegrator[2] *= 0.5f;
+                        playerStatus->gravityIntegrator[3] *= 0.5f;
+                    }
+                }
+                break;
+        }
+    }
+
+    integrate_gravity();
+    if (playerStatus->gravityIntegrator[0] <= 0.0f) {
+        record_jump_apex();
+        gravity_use_fall_parms();
+        integrate_gravity();
+        set_action_state(ACTION_STATE_FALLING);
+    }
+
+    if (playerStatus->gravityIntegrator[0] > playerStatus->maxJumpSpeed) {
+        playerStatus->gravityIntegrator[0] = playerStatus->maxJumpSpeed;
+    }
+    playerStatus->position.y += playerStatus->gravityIntegrator[0];
+}
+
+void phys_init_integrator_for_current_state(void) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    f32* temp_a0;
+
+    switch (playerStatus->actionState) {
+        case 7:
+            playerStatus->gravityIntegrator[0] = 10.0f;
+            playerStatus->gravityIntegrator[1] = -5.0f;
+            playerStatus->gravityIntegrator[2] = 1.5f;
+            playerStatus->gravityIntegrator[3] = -0.3f;
+            break;
+        case 3:
+        case 13:
+        case 14:
+        case 15:
+        case 16:
+        case 21:
+        case 23:
+            temp_a0 = GravityParamsStartJump;
+            if (!(playerStatus->flags & PLAYER_STATUS_FLAGS_40000)) {
+                playerStatus->gravityIntegrator[0] = *temp_a0++;
+                playerStatus->gravityIntegrator[1] = *temp_a0++;
+                playerStatus->gravityIntegrator[2] = *temp_a0++;
+                playerStatus->gravityIntegrator[3] = *temp_a0++;
+            } else {
+                playerStatus->gravityIntegrator[0] = *temp_a0++ * 0.5f;
+                playerStatus->gravityIntegrator[1] = *temp_a0++ * 0.5f;
+                playerStatus->gravityIntegrator[2] = *temp_a0++ * 0.5f;
+                playerStatus->gravityIntegrator[3] = *temp_a0++ * 0.5f;
+            }
+            break;
+    }
+}
+
+static const f32 padding = 0.0f;
 
 // This function is wack. This weird stuff is needed to match
 void gravity_use_fall_parms(void) {
@@ -188,9 +379,72 @@ void func_800E315C(s32 colliderID) {
     }
 }
 
-static const f32 padding = 0.0f; // remove when the rest of the functions match
+void phys_player_land(void) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    CollisionStatus* collisionStatus = &gCollisionStatus;
+    f32 moveAngle;
+    f32 moveMagnitude;
 
-INCLUDE_ASM(void, "7bb60_len_41b0", phys_player_land, void);
+    playerStatus->decorationList = 0;
+    playerStatus->unk_C2 = 0;
+    playerStatus->flags &= ~PLAYER_STATUS_FLAGS_800000;
+    playerStatus->landPos.x = playerStatus->position.x;
+    playerStatus->landPos.z = playerStatus->position.z;
+    playerStatus->flags &= ~(PLAYER_STATUS_FLAGS_FLYING | PLAYER_STATUS_FLAGS_FALLING | PLAYER_STATUS_FLAGS_JUMPING);
+    sfx_play_sound_at_player(SOUND_SOFT_LAND, 0);
+    if (!(collisionStatus->currentFloor & 0x4000)) {
+        phys_adjust_cam_on_landing();
+    }
+
+    collisionStatus->lastTouchedFloor = -1;
+    if (collisionStatus->currentFloor & 0x4000) {
+        s32 entityType = get_entity_type(collisionStatus->currentFloor);
+
+        if (entityType <= ACTION_STATE_FALLING) {
+            if (entityType >= ACTION_STATE_LANDING_ON_SWITCH) {
+                Entity* entity = get_entity_by_index(collisionStatus->currentFloor);
+
+                entity->collisionFlags |= ENTITY_COLLISION_PLAYER_TOUCH_FLOOR;
+                if (playerStatus->actionState != ACTION_STATE_ULTRA_JUMP &&
+                    playerStatus->actionState != ACTION_STATE_ULTRA_POUND &&
+                    playerStatus->actionState != ACTION_STATE_SPIN_JUMP &&
+                    playerStatus->actionState != ACTION_STATE_GROUND_POUND)
+                {
+                    set_action_state(ACTION_STATE_LANDING_ON_SWITCH);
+                } else {
+                    disable_player_input();
+                    playerStatus->fallState = 0xB;
+                }
+                return;
+            }
+        }
+    }
+
+    if (playerStatus->flags & 0x4000) {
+        set_action_state(ACTION_STATE_RUN);
+        return;
+    }
+
+    if (playerStatus->actionState == ACTION_STATE_LANDING_ON_SWITCH) {
+        set_action_state(ACTION_STATE_BOUNCE_OFF_SWITCH);
+        return;
+    }
+
+    player_input_to_move_vector(&moveAngle, &moveMagnitude);
+    if (moveMagnitude == 0.0f) {
+        if (playerStatus->actionState != ACTION_STATE_STEP_DOWN) {
+            set_action_state(ACTION_STATE_LAND);
+        } else {
+            set_action_state(ACTION_STATE_STEP_DOWN_LAND);
+        }
+        return;
+    }
+
+    if (moveMagnitude != 0.0f) {
+        playerStatus->targetYaw = moveAngle;
+    }
+    update_locomotion_state();
+}
 
 f32 integrate_gravity(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -216,7 +470,29 @@ f32 func_800E34D8(void) {
     return ret;
 }
 
-INCLUDE_ASM(f32, "7bb60_len_41b0", player_check_collision_below, f32 arg0, s32* colliderID);
+f32 player_check_collision_below(f32 arg0, s32* colliderID) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    CollisionStatus* collisionStatus = &gCollisionStatus;
+    f32 temp_f4 = playerStatus->colliderHeight * 0.5f;
+    f32 outLength = fabsf(arg0) + temp_f4;
+    f32 x = playerStatus->position.x;
+    f32 y = playerStatus->position.y + temp_f4;
+    f32 z = playerStatus->position.z;
+    f32 sp38, sp3C, sp40, sp44;
+    s32 hit = *colliderID = player_raycast_below_cam_relative(&gPlayerStatus, &x, &y, &z, &outLength,
+                                                              &sp38, &sp3C, &sp40, &sp44);
+
+    if (hit < 0) {
+        if (arg0 >= 0.0f && collisionStatus->currentCeiling >= 0) {
+            return playerStatus->position.y;
+        }
+        y = playerStatus->position.y + arg0;
+    } else {
+        collisionStatus->currentFloor = hit;
+        collisionStatus->lastTouchedFloor = -1;
+    }
+    return y;
+}
 
 void collision_main_lateral(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -691,7 +967,72 @@ void func_800E4B40(s32 mode, f32* arg1, f32* arg2, f32* arg3) {
     func_800E4404(mode, 0, gPlayerStatus.spriteFacingAngle - 90.0f + currentCamera->currentYaw, arg1, arg2, arg3);
 }
 
-INCLUDE_ASM(s32, "7bb60_len_41b0", collision_lava_reset_check_additional_overlaps);
+void collision_lava_reset_check_additional_overlaps(void) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    f32 x, y, z;
+    f32 temp_f0;
+
+    if (playerStatus->animFlags & 0x1000) {
+        func_800E4F10();
+        return;
+    }
+
+    temp_f0 = clamp_angle(playerStatus->targetYaw - 30.0);
+    y = playerStatus->position.y + (playerStatus->colliderHeight * 0.75f);
+    x = playerStatus->position.x;
+    z = playerStatus->position.z;
+    player_test_lateral_overlap(0, &gPlayerStatus, &x, &y, &z, 0.0f, temp_f0);
+    playerStatus->position.x = x;
+    playerStatus->position.z = z;
+
+    temp_f0 = clamp_angle(playerStatus->targetYaw + 30.0);
+    y = playerStatus->position.y + (playerStatus->colliderHeight * 0.75f);
+    x = playerStatus->position.x;
+    z = playerStatus->position.z;
+    player_test_lateral_overlap(0, &gPlayerStatus, &x, &y, &z, 0.0f, temp_f0);
+    playerStatus->position.x = x;
+    playerStatus->position.z = z;
+
+    temp_f0 = clamp_angle(playerStatus->targetYaw - 30.0);
+    x = playerStatus->position.x;
+    y = playerStatus->position.y;
+    z = playerStatus->position.z;
+    player_test_lateral_overlap(0, &gPlayerStatus, &x, &y, &z, 0.0f, temp_f0);
+    playerStatus->position.x = x;
+    playerStatus->position.z = z;
+
+    temp_f0 = clamp_angle(playerStatus->targetYaw + 30.0);
+    x = playerStatus->position.x;
+    y = playerStatus->position.y;
+    z = playerStatus->position.z;
+    player_test_lateral_overlap(0, &gPlayerStatus, &x, &y, &z, 0.0f, temp_f0);
+    playerStatus->position.x = x;
+    playerStatus->position.z = z;
+
+    temp_f0 = clamp_angle(playerStatus->targetYaw + 90.0);
+    x = playerStatus->position.x;
+    y = playerStatus->position.y;
+    z = playerStatus->position.z;
+    player_test_lateral_overlap(0, &gPlayerStatus, &x, &y, &z, 0.0f, temp_f0);
+    playerStatus->position.x = x;
+    playerStatus->position.z = z;
+    temp_f0 = clamp_angle(playerStatus->targetYaw - 90.0);
+
+    x = playerStatus->position.x;
+    y = playerStatus->position.y;
+    z = playerStatus->position.z;
+    player_test_lateral_overlap(0, &gPlayerStatus, &x, &y, &z, 0.0f, temp_f0);
+    playerStatus->position.x = x;
+    playerStatus->position.z = z;
+
+    temp_f0 = clamp_angle(playerStatus->targetYaw + 180.0);
+    x = playerStatus->position.x;
+    y = playerStatus->position.y;
+    z = playerStatus->position.z;
+    player_test_lateral_overlap(0, &gPlayerStatus, &x, &y, &z, 0.0f, temp_f0);
+    playerStatus->position.x = x;
+    playerStatus->position.z = z;
+}
 
 void func_800E4F10(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -767,7 +1108,33 @@ void phys_update_interact_collider(void) {
     gCollisionStatus.unk_0A = phys_check_interactable_collision();
 }
 
-INCLUDE_ASM(s32, "7bb60_len_41b0", phys_check_interactable_collision);
+s32 phys_check_interactable_collision(void) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    f32 x, y, z, yaw;
+    s32 ret = -1;
+
+    if (playerStatus->flags & PLAYER_STATUS_FLAGS_INPUT_DISABLED) {
+        return ret;
+    }
+
+    if (playerStatus->pressedButtons & BUTTON_A) {
+        yaw = playerStatus->targetYaw;
+        x = playerStatus->position.x;
+        y = playerStatus->position.y;
+        z = playerStatus->position.z;
+        ret = player_test_move_with_slipping(playerStatus, &x, &y, &z, playerStatus->colliderDiameter * 0.5f, yaw);
+
+        if (ret < 0 && playerStatus->currentSpeed == 0.0f) {
+            yaw = playerStatus->spriteFacingAngle - 90.0f + gCameras[gCurrentCameraID].currentYaw;
+            x = playerStatus->position.x;
+            y = playerStatus->position.y;
+            z = playerStatus->position.z;
+            ret = player_test_move_with_slipping(playerStatus, &x, &y, &z, playerStatus->colliderDiameter * 0.5f, yaw);
+        }
+    }
+
+    return ret;
+}
 
 s32 phys_can_player_interact(void) {
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
@@ -790,7 +1157,18 @@ s32 phys_can_player_interact(void) {
     return ret;
 }
 
-INCLUDE_ASM(f32, "7bb60_len_41b0", func_800E5348, void);
+f32 func_800E5348(void) {
+    f32 temp_f0 = get_clamped_angle_diff(gCameras[gCurrentCameraID].currentYaw, gPlayerStatus.currentYaw);
+
+    if (temp_f0 < -5.0f && temp_f0 > -175.0f) {
+        temp_f0 = 0.0f;
+    } else if (temp_f0 > 5.0f && temp_f0 < 175.0f) {
+        temp_f0 = 180.0f;
+    } else {
+        temp_f0 = D_800F7B40;
+    }
+    return clamp_angle(temp_f0 - 90.0f + gCameras[gCurrentCameraID].currentYaw);
+}
 
 void player_get_camera_facing_angle(void) {
     f32 angle = 0.0f;

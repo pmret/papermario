@@ -203,7 +203,75 @@ void phys_reset_spin_history(void) {
     D_8010C924 = NULL;
 }
 
-INCLUDE_ASM(s32, "7bb60_len_41b0", phys_update_action_state);
+void phys_update_action_state(void) {
+    Camera* cameras = gCameras;
+    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    PlayerSpinState* playerSpinState = &gPlayerSpinState;
+
+    if (!(playerStatus->flags & PLAYER_STATUS_ANIM_FLAGS_40000)) {
+        playerStatus->flags &= ~PLAYER_STATUS_ANIM_FLAGS_20000000;
+    }
+
+    if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS) {
+        phys_peach_update();
+        return;
+    }
+
+    if (playerStatus->unk_C5 != 0) {
+        playerStatus->unk_C5--;
+        if (playerStatus->unk_C5 == 0) {
+            gCameras[CAM_DEFAULT].moveFlags |= 4;
+        }
+    }
+
+    if (playerStatus->decorationList != 0) {
+        if (playerStatus->gravityIntegrator[0] <= 0.0f && D_800F7B90 > 0.0f) {
+            playerStatus->unk_C2 = playerStatus->decorationList;
+        }
+        D_800F7B90 = playerStatus->gravityIntegrator[0];
+    }
+
+    func_800E24F8();
+    if (playerSpinState->stopSoundTimer != 0) {
+        playerSpinState->stopSoundTimer--;
+        if (playerSpinState->stopSoundTimer == 0) {
+            playerStatus->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_SPINNING;
+            if (playerSpinState->spinSoundID != 0) {
+                sfx_stop_sound(playerSpinState->spinSoundID);
+            }
+        }
+    }
+
+    do {
+        s32 actionState = playerStatus->actionState;
+
+        if (actionState == ACTION_STATE_IDLE || actionState == ACTION_STATE_WALK || actionState == ACTION_STATE_RUN) {
+            s32 cond;
+
+            if (!(playerStatus->flags & PLAYER_STATUS_FLAGS_INPUT_DISABLED)) {
+                cond = check_conversation_trigger();
+            } else {
+                cond = FALSE;
+            }
+
+            if ((partnerActionStatus->actionState.b[0] == 0) && !(playerStatus->flags & 0x20) && cond) {
+                set_action_state(0xC);
+            }
+            check_input_spin();
+        }
+
+        if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
+            void* dmaStart = PlayerActionsTable[playerStatus->actionState].dmaStart;
+
+            if (dmaStart != NULL && dmaStart != D_8010C924) {
+                D_8010C924 = dmaStart;
+                dma_copy(dmaStart, PlayerActionsTable[playerStatus->actionState].dmaEnd, (void* )0x802B6000); // TODO fix
+            }
+        }
+        PlayerActionsTable[playerStatus->actionState].update();
+    } while (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED);
+}
 
 void phys_peach_update(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -394,7 +462,45 @@ s32 check_input_hammer(void) {
     return FALSE;
 }
 
-INCLUDE_ASM(s32, "7bb60_len_41b0", check_input_jump, void);
+s32 check_input_jump(void) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    CollisionStatus* collisionStatus = &gCollisionStatus;
+
+    if (!(playerStatus->pressedButtons & BUTTON_A)) {
+        return FALSE;
+    }
+
+    if ((get_collider_type_by_id((u16)collisionStatus->currentFloor) == 5) && phys_should_player_be_sliding()) {
+        return FALSE;
+    }
+
+    if (collisionStatus->touchingWallTrigger != 0 ||
+        (playerStatus->animFlags & (PLAYER_STATUS_ANIM_FLAGS_SPEECH_PROMPT_AVAILABLE |
+                                    PLAYER_STATUS_ANIM_FLAGS_INTERACT_PROMPT_AVAILABLE)))
+    {
+        return FALSE;
+    }
+
+    if ((collisionStatus->unk_0A != -1) && (collisionStatus->unk_0A & 0x4000)) {
+        Entity* entity = get_entity_by_index(collisionStatus->unk_0A);
+
+        if (entity->flags & ENTITY_FLAGS_SHOWS_INSPECT_PROMPT) {
+            if ((entity->boundScriptBytecode == 0) || (entity->flags & ENTITY_FLAGS_4000)) {
+                if (entity->type == ENTITY_TYPE_PINK_FLOWER ||
+                    entity->type == ENTITY_TYPE_BELLBELL_PLANT ||
+                    entity->type == ENTITY_TYPE_TRUMPET_PLANT)
+                {
+                    return FALSE;
+                }
+            } else {
+                return FALSE;
+            }
+        }
+    }
+
+    set_action_state(ACTION_STATE_JUMP);
+    return TRUE;
+}
 
 void check_input_spin(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -498,11 +604,10 @@ void peach_sync_disguise_npc(void) {
     }
 }
 
-
-#ifdef NON_EQUIVALENT
 Npc* peach_make_disguise_npc(s32 peachDisguise) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    NpcBlueprint blueprint;
+    NpcBlueprint bp;
+    NpcBlueprint* bpPtr = &bp;
     Npc* npc;
     f32 yaw;
 
@@ -512,18 +617,20 @@ Npc* peach_make_disguise_npc(s32 peachDisguise) {
 
     playerStatus->colliderHeight = 37;
     playerStatus->colliderDiameter = 38;
-    playerStatus->peachDisguise = gGameStatusPtr->peachDisguise = peachDisguise;
+    playerStatus->peachDisguise = peachDisguise;
+    gGameStatusPtr->peachDisguise = peachDisguise;
 
-    blueprint.flags = NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_100 | NPC_FLAG_40000;
-    blueprint.initialAnim = BasicPeachDisguiseAnims[playerStatus->peachDisguise].idle;
-    blueprint.onRender = NULL;
-    blueprint.onUpdate = NULL;
-    D_8010C96C = _create_npc_standard(&blueprint, &PeachDisguiseExtraAnims[playerStatus->peachDisguise]);
+    bpPtr->flags = NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_100 | NPC_FLAG_40000;
+    bpPtr->initialAnim = BasicPeachDisguiseAnims[playerStatus->peachDisguise].idle;
+    bpPtr->onUpdate = NULL;
+    bpPtr->onRender = NULL;
+
+    D_8010C96C = _create_npc_standard(bpPtr, PeachDisguiseExtraAnims[playerStatus->peachDisguise]);
     npc = get_npc_by_index(D_8010C96C);
 
     disable_npc_shadow(npc);
 
-    if (playerStatus->spriteFacingAngle >= 90.0f && playerStatus->spriteFacingAngle < 270.0f) {
+    if (!(playerStatus->spriteFacingAngle >= 90.0f) || !(playerStatus->spriteFacingAngle < 270.0f)) {
         yaw = 180.0f;
     } else {
         yaw = 0.0f;
@@ -537,9 +644,29 @@ Npc* peach_make_disguise_npc(s32 peachDisguise) {
 
     return npc;
 }
-#else
-INCLUDE_ASM(Npc*, "7bb60_len_41b0", peach_make_disguise_npc, s32 peachDisguise);
-#endif
 
-INCLUDE_ASM(s32, "7bb60_len_41b0", peach_disguise_check_overlaps);
+void peach_disguise_check_overlaps(void) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    Camera* camera = &gCameras[gCurrentCameraID];
+    f32 yaw;
+    f32 sinTheta;
+    f32 cosTheta;
+    s32 phi_s1;
+    s32 i;
 
+    if (playerStatus->spriteFacingAngle >= 90.0f && playerStatus->spriteFacingAngle < 270.0f) {
+        yaw = camera->currentYaw - 270.0f;
+    } else {
+        yaw = camera->currentYaw - 90.0f;
+    }
+    sin_cos_rad(clamp_angle(yaw) * TAU / 360.0f, &sinTheta, &cosTheta);
+
+    for (phi_s1 = 2, i = 2; i > 0; i--, phi_s1 += 18) {
+        f32 x = playerStatus->position.x + (sinTheta * phi_s1);
+        f32 y = playerStatus->position.y + 4.0f;
+        f32 z = playerStatus->position.z - (cosTheta * phi_s1);
+        if (player_test_lateral_overlap(3, playerStatus, &x, &y, &z, 4.0f, yaw) >= 0) {
+            break;
+        }
+    }
+}

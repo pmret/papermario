@@ -188,7 +188,7 @@ s32 get_transform_group_index(s32);
 void get_model_center_and_size(u16 modelID, f32* centerX, f32* centerY, f32* centerZ, f32* sizeX, f32* sizeY,
                                f32* sizeZ);
 s32 collision_main_above(void);
-s32 collision_lava_reset_check_additional_overlaps(void);
+void collision_lava_reset_check_additional_overlaps(void);
 s32 player_test_lateral_overlap(s32, PlayerStatus*, f32*, f32*, f32*, f32, f32);
 Npc* peach_make_disguise_npc(s32 peachDisguise);
 void peach_set_disguise_anim(s32);
@@ -211,9 +211,12 @@ void transform_point(Matrix4f mtx, f32 inX, f32 inY, f32 inZ, f32 inS, f32* outX
 void try_player_footstep_sounds(s32 arg0);
 void phys_update_interact_collider(void);
 s32 phys_adjust_cam_on_landing(void);
+s32 phys_should_player_be_sliding(void);
 void phys_init_integrator_for_current_state(void);
 void phys_player_land(void);
 void phys_main_collision_below(void);
+void phys_peach_update(void);
+void check_input_spin(void);
 
 s32 npc_test_move_simple_without_slipping(s32, f32*, f32*, f32*, f32, f32, f32, f32);
 
