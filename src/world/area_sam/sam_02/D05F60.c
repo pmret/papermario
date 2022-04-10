@@ -6,14 +6,9 @@
 #include "world/common/atomic/ToadHouse.inc.c"
 
 extern s32 N(Quizmo_Worker);
-extern s32 N(Quizmo_WasCorrect);
+extern s32 N(Quizmo_AnswerResult);
 extern EffectInstance* N(Quizmo_StageEffect);
 extern EffectInstance* N(Quizmo_AudienceEffect);
 extern EffectInstance* N(Quizmo_VannaTEffect);
-
-#define NAMESPACE sam_02_Quizmo
-#include "world/common/StashVars.inc.c"
-#include "world/common/GetItemName.inc.c"
-#define NAMESPACE sam_02
 
 #include "world/common/atomic/Quizmo.inc.c"

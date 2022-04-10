@@ -61,7 +61,7 @@ static N(temp)* N(D_8024EF90)[4]; // possibly bigger?
 static s32 N(Quizmo_Worker);
 static s32 N(pad_D_8024EFA4);
 static s32 N(Quizmo_ScriptArray)[4];
-static s32 N(Quizmo_WasCorrect);
+static s32 N(Quizmo_AnswerResult);
 static s8 N(pad_D_8024EFBC)[0x4];
 static EffectInstance* N(Quizmo_StageEffect);
 static EffectInstance* N(Quizmo_AudienceEffect);
@@ -465,10 +465,6 @@ EvtScript N(80244C78) = {
 static s32 N(pad_4DD4)[] = {
     0x00000000, 0x00000000, 0x00000000,
 };
-
-#define NAMESPACE dro_02_Quizmo
-s32** N(VarStash) = NULL;
-#define NAMESPACE dro_02
 
 #include "world/common/atomic/QuizmoData.inc.c"
 
@@ -2366,11 +2362,6 @@ NpcGroupList N(npcGroupList_8024EEF4) = {
     NPC_GROUP(N(npcGroup_8024D7B4), BATTLE_ID(0, 0, 0, 0)),
     {},
 };
-
-#define NAMESPACE dro_02_Quizmo
-#include "world/common/StashVars.inc.c"
-#include "world/common/GetItemName.inc.c"
-#define NAMESPACE dro_02
 
 #include "world/common/atomic/Quizmo.inc.c"
 

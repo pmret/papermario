@@ -34,7 +34,7 @@ BSS s32 D_80151304;
 BSS s32 D_80151308;
 BSS s16 gMsgBGScrollAmtY;
 BSS s16 D_8015130E;
-BSS s32 D_80151310;
+BSS s32 gEntityHideMode;
 BSS s32 gHudElementCacheBuffer;
 BSS s32 gEntityModelCount;
 BSS s32 D_8015131C;

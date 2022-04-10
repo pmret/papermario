@@ -36,15 +36,10 @@ INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_8024047C_8525EC);
 #include "world/common/UnkNpcAIMainFunc.inc.c"
 
 extern s32 N(Quizmo_Worker);
-extern s32 N(Quizmo_WasCorrect);
+extern s32 N(Quizmo_AnswerResult);
 extern EffectInstance* N(Quizmo_StageEffect);
 extern EffectInstance* N(Quizmo_AudienceEffect);
 extern EffectInstance* N(Quizmo_VannaTEffect);
-
-#define NAMESPACE mac_05_Quizmo
-#include "world/common/StashVars.inc.c"
-#include "world/common/GetItemName.inc.c"
-#define NAMESPACE mac_05
 
 #include "world/common/atomic/Quizmo.inc.c"
 

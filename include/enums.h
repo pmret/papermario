@@ -1945,6 +1945,7 @@ enum PlayerStatusFlags {
     PLAYER_STATUS_FLAGS_80000                            = 0x00080000,
     PLAYER_STATUS_FLAGS_100000                           = 0x00100000,
     PLAYER_STATUS_FLAGS_200000                           = 0x00200000, // using hammer?
+    PLAYER_STATUS_FLAGS_400000                           = 0x00400000, // taking quiz?
     PLAYER_STATUS_FLAGS_800000                           = 0x00800000,
     PLAYER_STATUS_FLAGS_1000000                          = 0x01000000,
     PLAYER_STATUS_FLAGS_HAS_CONVERSATION_NPC             = 0x02000000,
@@ -2146,16 +2147,27 @@ enum ActorEventFlags {
 };
 
 // TODO alex struct
-enum PartnerAnims {
-    PARTNER_ANIM_STILL,
-    PARTNER_ANIM_WALK,
-    PARTNER_ANIM_JUMP,
-    PARTNER_ANIM_FALL,
-    PARTNER_ANIM_FLY,
-    PARTNER_ANIM_IDLE,
-    PARTNER_ANIM_RUN,
-    PARTNER_ANIM_TALK,
-    PARTNER_ANIM_HURT,
+enum PartnerAnimIndices {
+    PARTNER_ANIM_INDEX_STILL      = 0x0,
+    PARTNER_ANIM_INDEX_WALK       = 0x1,
+    PARTNER_ANIM_INDEX_JUMP       = 0x2,
+    PARTNER_ANIM_INDEX_FALL       = 0x3,
+    PARTNER_ANIM_INDEX_FLY        = 0x4,
+    PARTNER_ANIM_INDEX_IDLE       = 0x5,
+    PARTNER_ANIM_INDEX_RUN        = 0x6,
+    PARTNER_ANIM_INDEX_TALK       = 0x7,
+    PARTNER_ANIM_INDEX_HURT       = 0x8,
+};
+
+enum AnyPartnerAnims {
+    PARTNER_ANIM_WALK       = 0x101,
+    PARTNER_ANIM_JUMP       = 0x102,
+    PARTNER_ANIM_FALL       = 0x103,
+    PARTNER_ANIM_FLY        = 0x104,
+    PARTNER_ANIM_IDLE       = 0x105,
+    PARTNER_ANIM_RUN        = 0x106,
+    PARTNER_ANIM_TALK       = 0x107,
+    PARTNER_ANIM_HURT       = 0x108,
 };
 
 enum FirstStrikes {

@@ -86,18 +86,18 @@ INCLUDE_ASM(s32, "world/script_api/7E2AA0", func_80282594);
 #endif
 
 ApiStatus SetEntityHideMode1(Evt* script, s32 isInitialCall) {
-    D_80151310 = 1;
+    gEntityHideMode = 1;
     return ApiStatus_DONE2;
 }
 
 ApiStatus SetEntityHideMode2(Evt* script, s32 isInitialCall) {
-    D_80151310 = 2;
+    gEntityHideMode = 2;
     return ApiStatus_DONE2;
 }
 
 // common probably
 ApiStatus SetEntityHideMode0(Evt* script, s32 isInitialCall) {
-    D_80151310 = 0;
+    gEntityHideMode = 0;
     return ApiStatus_DONE2;
 }
 

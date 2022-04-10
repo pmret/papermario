@@ -4,20 +4,52 @@
 
 // TODO, can we remove this once all data disasm'ed?
 extern QuizRequirement N(Quizmo_Requirements)[];
-
 extern u8 N(Quizmo_Answers)[64];
+extern s32** N(Quizmo_VarStash);
+
+void N(Quizmo_NPC_OnRender)(Npc* npc);
+
+ApiStatus N(Quizmo_StashVars)(Evt* script, s32 isInitialCall) {
+    //static s32** varTable = NULL;
+    s32 i;
+
+    if (N(Quizmo_VarStash) == NULL) {
+        N(Quizmo_VarStash) = heap_malloc(sizeof(script->varTable));
+
+        for (i = 0; i < ARRAY_COUNT(script->varTable); i++) {
+            N(Quizmo_VarStash)[i] = (s32*) script->varTable[i];
+        }
+    } else {
+        for (i = 0; i < ARRAY_COUNT(script->varTable); i++) {
+            script->varTable[i] = (s32) N(Quizmo_VarStash)[i];
+        }
+
+        heap_free(N(Quizmo_VarStash));
+        N(Quizmo_VarStash) = NULL;
+    }
+
+    return ApiStatus_DONE2;
+}
+
+ApiStatus N(Quizmo_GetItemName)(Evt* script, s32 isInitialCall) {
+    Bytecode args = *script->ptrReadPos;
+    s32 itemID = evt_get_variable(script, args);
+
+    evt_set_variable(script, args, LOOKUP_ITEM(itemID).nameMsg);
+    return ApiStatus_DONE2;
+}
 
 ApiStatus N(Quizmo_HideEntities)(Evt* script, s32 isInitialCall) {
-    D_80151310 = 1;
+    gEntityHideMode = 1;
     return ApiStatus_DONE2;
 }
 
 ApiStatus N(Quizmo_ShowEntities)(Evt* script, s32 isInitialCall) {
-    D_80151310 = 0;
+    gEntityHideMode = 0;
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(Quizmo_UnkQuizFunc)(Evt* script, s32 isInitialCall) {
+ApiStatus N(Quizmo_ShouldAppear)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     u16 phi_s0 = evt_get_variable(script, EVT_SAVE_FLAG(1768));
     u16 phi_s7 = evt_get_variable(script, EVT_SAVE_FLAG(1769));
@@ -74,24 +106,23 @@ ApiStatus N(Quizmo_UnkQuizFunc)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-void N(Quizmo_UnkFunc28)(Npc* npc);
-
-ApiStatus N(Quizmo_UnkFunc31)(Evt* script, s32 isInitialCall) {
+ApiStatus N(Quizmo_RenderInit)(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(script->owner2.npcID);
 
-    npc->onRender = N(Quizmo_UnkFunc28);
+    npc->onRender = N(Quizmo_NPC_OnRender);
     npc->blurBuf = heap_malloc(8);
     *((s32*)npc->blurBuf) = 0;
 
     return ApiStatus_DONE1;
 }
 
-ApiStatus N(Quizmo_GetNpcUnsafeOwner2)(Evt* script, s32 isInitialCall) {
+ApiStatus N(Quizmo_NPC_Aux_Impl)(Evt* script, s32 isInitialCall) {
+    // does nothing, probably a default/template function for NPCs
     get_npc_unsafe(script->owner2.npcID);
     return ApiStatus_BLOCK;
 }
 
-void N(Quizmo_UnkFunc28)(Npc* npc) {
+void N(Quizmo_NPC_OnRender)(Npc* npc) {
     Camera* camera = &gCameras[gCurrentCamID];
 
     if (*((s32*)npc->blurBuf) & 1) {
@@ -271,7 +302,7 @@ ApiStatus N(Quizmo_SetStageLightsMode)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(Quizmo_UnkE)(Evt* script, s32 isInitialCall) {
+ApiStatus N(Quizmo_UnkStageEffectMode)(Evt* script, s32 isInitialCall) {
     s32 var = evt_get_variable(script, *script->ptrReadPos);
     EffectInstanceDataThing* effectPtr = N(Quizmo_StageEffect)->data;
 
@@ -293,12 +324,12 @@ ApiStatus N(Quizmo_UnkE)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(Quizmo_UnkF)(Evt* script, s32 isInitialCall) {
+ApiStatus N(Quizmo_SetVannaAnim_Idle)(Evt* script, s32 isInitialCall) {
     ((EffectInstanceDataThing*)N(Quizmo_VannaTEffect)->data)->unk_1C = 0;
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(Quizmo_UnkG)(Evt* script, s32 isInitialCall) {
+ApiStatus N(Quizmo_SetVannaAnim_Clap)(Evt* script, s32 isInitialCall) {
     ((EffectInstanceDataThing*)N(Quizmo_VannaTEffect)->data)->unk_1C = 1;
     return ApiStatus_DONE2;
 }
@@ -308,7 +339,7 @@ ApiStatus N(Quizmo_SetVannaAnim_Wave)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(Quizmo_GetGameStatus75)(Evt* script, s32 isInitialCall) {
+ApiStatus N(Quizmo_ShouldQuizmoLeave)(Evt* script, s32 isInitialCall) {
     evt_set_variable(script, EVT_VAR(0), gGameStatusPtr->debugQuizmo);
     return ApiStatus_DONE2;
 }
@@ -363,7 +394,11 @@ ApiStatus N(Quizmo_SpinPlayer)(Evt* script, s32 isInitialCall) {
 
     script->functionTemp[0]--;
 
-    return (script->functionTemp[0] >> 0x1F) & ApiStatus_DONE2;
+    if(script->functionTemp[0] < 0) {
+        return ApiStatus_DONE2;
+    } else {
+        return ApiStatus_BLOCK;
+    }
 }
 
 ApiStatus N(Quizmo_SpinPartner)(Evt* script, s32 isInitialCall) {
@@ -380,7 +415,11 @@ ApiStatus N(Quizmo_SpinPartner)(Evt* script, s32 isInitialCall) {
 
     script->functionTemp[0]--;
 
-    return (script->functionTemp[0] >> 0x1F) & ApiStatus_DONE2;
+    if(script->functionTemp[0] < 0) {
+        return ApiStatus_DONE2;
+    } else {
+        return ApiStatus_BLOCK;
+    }
 }
 
 ApiStatus N(Quizmo_UpdatePartnerPosition)(Evt* script, s32 isInitialCall) {
@@ -401,20 +440,24 @@ ApiStatus N(Quizmo_UpdatePartnerPosition)(Evt* script, s32 isInitialCall) {
     npc->pos.z += *z;
     script->functionTemp[0]--;
 
-    return (script->functionTemp[0] == 0) * ApiStatus_DONE2;
+    if(script->functionTemp[0] == 0) {
+        return ApiStatus_DONE2;
+    } else {
+        return ApiStatus_BLOCK;
+    }
 }
 
-void N(Quizmo_UnkI)(void) {
-    s32 var = evt_get_variable(NULL, N(Quizmo_WasCorrect));
+void N(Quizmo_CreateReactionEffect)(void) {
+    s32 result = evt_get_variable(NULL, N(Quizmo_AnswerResult));
 
-    if (var == 1) {
+    if (result == 1) {
         fx_quizmo_answer(0, 0, 0, 0);
-    } else if (var == 2) {
+    } else if (result == 2) {
         fx_quizmo_answer(1, 0, 0, 0);
     }
 }
 
-ApiStatus N(Quizmo_UnkJ)(Evt* script, s32 isInitialCall) {
-    N(Quizmo_Worker) = create_generic_entity_frontUI(NULL, N(Quizmo_UnkI));
+ApiStatus N(Quizmo_CreateWorker)(Evt* script, s32 isInitialCall) {
+    N(Quizmo_Worker) = create_generic_entity_frontUI(NULL, N(Quizmo_CreateReactionEffect));
     return ApiStatus_DONE2;
 }

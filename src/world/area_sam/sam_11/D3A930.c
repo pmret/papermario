@@ -6,12 +6,12 @@ INCLUDE_ASM(s32, "world/area_sam/sam_11/D3A930", func_8024052C_D3AAFC);
 
 #define NAMESPACE dup_sam_11
 ApiStatus N(Set80151310_2)(Evt* script, s32 isInitialCall) {
-    D_80151310 = 2;
+    gEntityHideMode = 2;
     return ApiStatus_DONE2;
 }
 
 ApiStatus N(Set80151310_0)(Evt* script, s32 isInitialCall) {
-    D_80151310 = 0;
+    gEntityHideMode = 0;
     return ApiStatus_DONE2;
 }
 #define NAMESPACE sam_11

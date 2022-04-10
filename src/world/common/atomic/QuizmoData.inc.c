@@ -2,6 +2,8 @@
 
 // #define CHUCK_QUIZMO_NPC_ID 10
 
+s32** N(Quizmo_VarStash) = NULL;
+
 EvtScript N(EVS_Quizmo_GiveItem_0) = {
     EVT_CALL(ShowGotItem, EVT_VAR(0), 1, 0)
     EVT_RETURN
@@ -41,7 +43,7 @@ QuizRequirement N(Quizmo_Requirements)[] = {
 };
 
 EvtScript N(EVS_Quizmo_Exit) = {
-    EVT_CALL(N(Quizmo_GetGameStatus75))
+    EVT_CALL(N(Quizmo_ShouldQuizmoLeave))
     EVT_IF_LE(EVT_VAR(0), 1)
         EVT_CALL(GetNpcPos, NPC_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
         EVT_ADD(EVT_VAR(1), 300)
@@ -152,7 +154,7 @@ EvtScript N(EVS_Quizmo_MovePartnerToPodium) = {
     EVT_END_THREAD
     EVT_CALL(N(Quizmo_SpinPartner))
     EVT_CALL(NpcFacePlayer, NPC_PARTNER, 0)
-    EVT_CALL(SetNpcAnimation, NPC_PARTNER, 0x106)
+    EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_RUN)
     EVT_RETURN
     EVT_END
 };
@@ -397,9 +399,9 @@ EvtScript N(EVS_Quizmo_ReturnPlayerToOriginalPos) = {
         EVT_ADDF(EVT_VAR(2), EVT_VAR(0))
         EVT_SETF(EVT_VAR(3), EVT_ARRAY(3))
         EVT_ADDF(EVT_VAR(3), EVT_VAR(1))
-        EVT_CALL(SetNpcAnimation, NPC_PARTNER, 0x102)
+        EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_JUMP)
         EVT_CALL(NpcMoveTo, NPC_PARTNER, EVT_VAR(2), EVT_VAR(3), 40)
-        EVT_CALL(SetNpcAnimation, NPC_PARTNER, 0x106)
+        EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_RUN)
     EVT_END_THREAD
     EVT_CALL(PlayerMoveTo, EVT_ARRAY(1), EVT_ARRAY(3), 40)
     EVT_RETURN
@@ -471,7 +473,7 @@ EvtScript N(EVS_Quizmo_QuizMain) = {
     EVT_CALL(SetNpcFlagBits, CHUCK_QUIZMO_NPC_ID, NPC_FLAG_GRAVITY, FALSE)
     EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_100, TRUE)
     EVT_CALL(SetNpcFlagBits, CHUCK_QUIZMO_NPC_ID, NPC_FLAG_100, TRUE)
-    EVT_CALL(SetNpcAnimation, NPC_PARTNER, 0x106)
+    EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_RUN)
     EVT_EXEC_GET_TID(N(EVS_Quizmo_SetCharacterPositons), EVT_VAR(1))
     EVT_CALL(ContinueSpeech, -1, NPC_ANIM_chuck_quizmo_Palette_00_Anim_4, NPC_ANIM_chuck_quizmo_Palette_00_Anim_1, 0, MESSAGE_ID(0x08, 0x000B))
     EVT_CALL(PlaySound, 137)
@@ -489,11 +491,11 @@ EvtScript N(EVS_Quizmo_QuizMain) = {
         EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
         EVT_WAIT_FRAMES(2)
     EVT_END_LOOP
-    EVT_SET(EVT_VAR(0), 2883584)
+    EVT_SET(EVT_VAR(0), MESSAGE_ID(0x2C, 0x00))
     EVT_ADD(EVT_VAR(0), EVT_SAVE_VAR(352))
     EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_chuck_quizmo_Palette_00_Anim_5, NPC_ANIM_chuck_quizmo_Palette_00_Anim_6, 0, EVT_VAR(0))
     EVT_CALL(SetPlayerAnimation, ANIM_QUESTION)
-    EVT_SET(EVT_VAR(0), 2949120)
+    EVT_SET(EVT_VAR(0), MESSAGE_ID(0x2D, 0x00))
     EVT_ADD(EVT_VAR(0), EVT_SAVE_VAR(352))
     EVT_CALL(PlaySound, 142)
     EVT_CALL(ShowChoice, EVT_VAR(0))
@@ -502,9 +504,9 @@ EvtScript N(EVS_Quizmo_QuizMain) = {
     EVT_EXEC(N(EVS_Quizmo_PlayerHitBuzzer))
     EVT_WAIT_FRAMES(15)
     EVT_CALL(PlaySound, 141)
-    EVT_CALL(N(Quizmo_UnkE), EVT_VAR(0))
+    EVT_CALL(N(Quizmo_UnkStageEffectMode), EVT_VAR(0))
     EVT_SET(EVT_ARRAY(4), 0)
-    EVT_CALL(N(Quizmo_UnkJ))
+    EVT_CALL(N(Quizmo_CreateWorker))
     EVT_WAIT_FRAMES(40)
     EVT_CALL(N(Quizmo_UpdateRecords))
     EVT_THREAD
@@ -532,7 +534,7 @@ EvtScript N(EVS_Quizmo_QuizMain) = {
             EVT_CALL(PlaySound, SOUND_21C)
         EVT_END_THREAD
         EVT_CALL(PlaySound, SOUND_8A)
-        EVT_CALL(N(Quizmo_UnkG))
+        EVT_CALL(N(Quizmo_SetVannaAnim_Clap))
         EVT_THREAD
             EVT_WAIT_FRAMES(15)
             EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
@@ -571,7 +573,7 @@ EvtScript N(EVS_Quizmo_QuizMain) = {
             EVT_EXEC_WAIT(N(EVS_Quizmo_GiveItem_0))
             EVT_CALL(AddStarPieces, 1)
             EVT_CALL(N(Quizmo_SetStageLightsMode), 15)
-            EVT_CALL(N(Quizmo_UnkF))
+            EVT_CALL(N(Quizmo_SetVannaAnim_Idle))
             EVT_CALL(SetMessageValue, EVT_SAVE_VAR(352), 0)
             EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_chuck_quizmo_Palette_00_Anim_4, NPC_ANIM_chuck_quizmo_Palette_00_Anim_1, 0, MESSAGE_ID(0x08, 0x0011))
         EVT_ELSE
@@ -590,7 +592,7 @@ EvtScript N(EVS_Quizmo_QuizMain) = {
             EVT_EXEC_WAIT(N(EVS_Quizmo_GiveItem_0))
             EVT_CALL(AddStarPieces, 1)
             EVT_CALL(N(Quizmo_SetStageLightsMode), 15)
-            EVT_CALL(N(Quizmo_UnkF))
+            EVT_CALL(N(Quizmo_SetVannaAnim_Idle))
             EVT_CALL(SetMessageValue, EVT_SAVE_VAR(352), 0)
             EVT_IF_EQ(EVT_SAVE_VAR(352), 1)
                 EVT_CALL(SetMessageMsg, EVT_PTR(MessageSingular), 1)
@@ -619,7 +621,7 @@ EvtScript N(EVS_Quizmo_QuizMain) = {
         EVT_END_LOOP
         EVT_SET(EVT_VAR(0), 0)
     EVT_END_IF
-    EVT_CALL(N(Quizmo_UnkE), -1)
+    EVT_CALL(N(Quizmo_UnkStageEffectMode), -1)
     EVT_CALL(EnablePartnerAI)
     EVT_THREAD
         EVT_WAIT_FRAMES(30)
@@ -641,31 +643,31 @@ EvtScript N(EVS_Quizmo_QuizMain) = {
 };
 
 EvtScript N(EVS_Quizmo_NPC_OtherAI) = {
-    EVT_CALL(N(Quizmo_UnkQuizFunc))
+    EVT_CALL(N(Quizmo_ShouldAppear))
     EVT_IF_EQ(EVT_VAR(0), 0)
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_1000000, FALSE)
     EVT_CALL(SetNpcSprite, -1, 0x00AF0001)
-    EVT_CALL(N(Quizmo_UnkFunc31))
+    EVT_CALL(N(Quizmo_RenderInit))
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(EVS_Quizmo_NPC_Interact) = {
     EVT_USE_ARRAY(EVT_PTR(N(Quizmo_ScriptArray)))
-    EVT_SET(EVT_SAVE_FLAG(1769), 1)
+    EVT_SET(EVT_SAVE_FLAG(1769), TRUE)
     EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(SetPlayerFlagBits, 0x400000, 1)
+    EVT_CALL(SetPlayerFlagBits, PLAYER_STATUS_FLAGS_400000, 1)
     EVT_EXEC_WAIT(N(EVS_Quizmo_QuizMain))
     EVT_CALL(DisablePlayerPhysics, FALSE)
-    EVT_CALL(SetPlayerFlagBits, 0x400000, 0)
+    EVT_CALL(SetPlayerFlagBits, PLAYER_STATUS_FLAGS_400000, 0)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(EVS_Quizmo_NPC_Aux) = {
-    EVT_CALL(N(Quizmo_GetNpcUnsafeOwner2))
+    EVT_CALL(N(Quizmo_NPC_Aux_Impl))
     EVT_RETURN
     EVT_END
 };

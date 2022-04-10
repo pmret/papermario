@@ -4,15 +4,10 @@
 #define CHUCK_QUIZMO_NPC_ID 6
 
 extern s32 N(Quizmo_Worker);
-extern s32 N(Quizmo_WasCorrect);
+extern s32 N(Quizmo_AnswerResult);
 extern EffectInstance* N(Quizmo_StageEffect);
 extern EffectInstance* N(Quizmo_AudienceEffect);
 extern EffectInstance* N(Quizmo_VannaTEffect);
-
-#define NAMESPACE mac_00_Quizmo
-#include "world/common/StashVars.inc.c"
-#include "world/common/GetItemName.inc.c"
-#define NAMESPACE mac_00
 
 #include "world/common/atomic/Quizmo.inc.c"
 

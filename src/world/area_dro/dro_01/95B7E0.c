@@ -62,7 +62,7 @@ void N(func_802430C8_95E2C8)(Unk_Struct_1* ptr, s32 arg1);
 static s32 N(Quizmo_Worker);
 static s8 N(pad_D_8024DFC4)[0x4];
 static s32 N(Quizmo_ScriptArray)[4];
-static s32 N(Quizmo_WasCorrect);
+static s32 N(Quizmo_AnswerResult);
 static s8 N(pad_D_8024DFDC)[0x4];
 static EffectInstance* N(Quizmo_StageEffect);
 static EffectInstance* N(Quizmo_AudienceEffect);
@@ -303,10 +303,6 @@ NpcSettings N(npcSettings_8024518C) = {
     .radius = 19,
     .level = 99,
 };
-
-#define NAMESPACE dro_01_Quizmo
-s32** N(VarStash) = NULL;
-#define NAMESPACE dro_01
 
 #include "world/common/atomic/QuizmoData.inc.c"
 
@@ -2024,11 +2020,6 @@ EvtScript N(makeEntities) = {
 #include "world/common/UnkFunc16.inc.c"
 
 #include "world/common/UnkNpcAIMainFunc.inc.c"
-
-#define NAMESPACE dro_01_Quizmo
-#include "world/common/StashVars.inc.c"
-#include "world/common/GetItemName.inc.c"
-#define NAMESPACE dro_01
 
 #include "world/common/atomic/Quizmo.inc.c"
 
