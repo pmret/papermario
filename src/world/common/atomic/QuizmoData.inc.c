@@ -2,6 +2,20 @@
 
 // #define CHUCK_QUIZMO_NPC_ID 10
 
+EvtScript N(EVS_Quizmo_GiveItem_0) = {
+    EVT_CALL(ShowGotItem, EVT_VAR(0), 1, 0)
+    EVT_RETURN
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript N(EVS_Quizmo_GiveItem_16) = {
+    EVT_CALL(ShowGotItem, EVT_VAR(0), 1, 16)
+    EVT_RETURN
+    EVT_RETURN
+    EVT_END
+};
+
 u8 N(Quizmo_Answers)[64] = {
     0x02, 0x01, 0x01, 0x02, 0x02, 0x00, 0x02, 0x00,
     0x02, 0x01, 0x00, 0x02, 0x01, 0x01, 0x00, 0x02,
@@ -23,7 +37,7 @@ Quizmo_Requirements N(Quizmo_Requirements)[] = {
     { STORY_CH6_BEGAN_PEACH_MISSION, 52 },
     { STORY_CH7_BEGAN_PEACH_MISSION, 60 },
     { STORY_EPILOGUE, 64 },
-    { 0, 64 },
+    { 0, 64 }, // end of list
 };
 
 EvtScript N(EVS_Quizmo_Exit) = {
@@ -157,14 +171,14 @@ EvtScript N(EVS_Quizmo_MoveQuizmoToMicrophone) = {
             EVT_DIVF(EVT_VAR(4), 60)
             EVT_ADDF(EVT_VAR(3), EVT_VAR(10))
             EVT_ADDF(EVT_VAR(4), EVT_VAR(12))
-            EVT_CALL(SetNpcPos, 10, EVT_VAR(3), EVT_ARRAY(2), EVT_VAR(4))
+            EVT_CALL(SetNpcPos, CHUCK_QUIZMO_NPC_ID, EVT_VAR(3), EVT_ARRAY(2), EVT_VAR(4))
             EVT_ADDF(EVT_VAR(2), 1)
             EVT_WAIT_FRAMES(1)
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_WAIT_FRAMES(60)
-    EVT_CALL(NpcFacePlayer, 10, 0)
-    EVT_CALL(SetNpcAnimation, 10, NPC_ANIM_chuck_quizmo_Palette_00_Anim_1)
+    EVT_CALL(NpcFacePlayer, CHUCK_QUIZMO_NPC_ID, 0)
+    EVT_CALL(SetNpcAnimation, CHUCK_QUIZMO_NPC_ID, NPC_ANIM_chuck_quizmo_Palette_00_Anim_1)
     EVT_RETURN
     EVT_END
 };
@@ -422,4 +436,276 @@ EvtScript N(EVS_Quizmo_WrongAnswer) = {
     EVT_EXEC_WAIT(N(EVS_Quizmo_ReturnPlayerToOriginalPos))
     EVT_RETURN
     EVT_END
+};
+
+EvtScript N(EVS_Quizmo_QuizMain) = {
+    EVT_IF_GT(EVT_SAVE_VAR(352), 63)
+        EVT_SET(EVT_VAR(0), 0)
+        EVT_RETURN
+    EVT_END_IF
+    EVT_CALL(GetPlayerPos, EVT_ARRAY(1), EVT_ARRAY(2), EVT_ARRAY(3))
+    EVT_CALL(NpcFacePlayer, NPC_SELF, 16)
+    EVT_IF_EQ(EVT_SAVE_VAR(352), 63)
+        EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_chuck_quizmo_Palette_00_Anim_4, NPC_ANIM_chuck_quizmo_Palette_00_Anim_1, 0, MESSAGE_ID(0x08, 0x000A))
+    EVT_ELSE
+        EVT_IF_EQ(EVT_SAVE_FLAG(1767), 1)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_chuck_quizmo_Palette_00_Anim_4, NPC_ANIM_chuck_quizmo_Palette_00_Anim_1, 0, MESSAGE_ID(0x08, 0x0009))
+        EVT_ELSE
+            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_chuck_quizmo_Palette_00_Anim_4, NPC_ANIM_chuck_quizmo_Palette_00_Anim_1, 0, MESSAGE_ID(0x08, 0x0008))
+            EVT_SET(EVT_SAVE_FLAG(1767), 1)
+        EVT_END_IF
+    EVT_END_IF
+    EVT_CALL(ShowChoice, MESSAGE_ID(0x1E, 0x000D))
+    EVT_IF_EQ(EVT_VAR(0), 1)
+        EVT_CALL(ContinueSpeech, -1, NPC_ANIM_chuck_quizmo_Palette_00_Anim_4, NPC_ANIM_chuck_quizmo_Palette_00_Anim_1, 0, MESSAGE_ID(0x08, 0x000C))
+        EVT_EXEC_WAIT(N(EVS_Quizmo_Exit))
+        EVT_SET(EVT_VAR(0), 0)
+        EVT_RETURN
+    EVT_END_IF
+    EVT_SET(EVT_SAVE_FLAG(1793), 1)
+    EVT_CALL(N(Quizmo_HideEntities))
+    EVT_CALL(N(Quizmo_HideWorld))
+    EVT_EXEC(N(EVS_Quizmo_SetQuizCamera))
+    EVT_CALL(DisablePartnerAI, 0)
+    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
+    EVT_CALL(SetNpcFlagBits, CHUCK_QUIZMO_NPC_ID, NPC_FLAG_GRAVITY, FALSE)
+    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcFlagBits, CHUCK_QUIZMO_NPC_ID, NPC_FLAG_100, TRUE)
+    EVT_CALL(SetNpcAnimation, NPC_PARTNER, 0x106)
+    EVT_EXEC_GET_TID(N(EVS_Quizmo_SetCharacterPositons), EVT_VAR(1))
+    EVT_CALL(ContinueSpeech, -1, NPC_ANIM_chuck_quizmo_Palette_00_Anim_4, NPC_ANIM_chuck_quizmo_Palette_00_Anim_1, 0, MESSAGE_ID(0x08, 0x000B))
+    EVT_CALL(PlaySound, 137)
+    EVT_LOOP(0)
+        EVT_IS_THREAD_RUNNING(EVT_VAR(1), EVT_VAR(0))
+        EVT_IF_EQ(EVT_VAR(0), 0)
+            EVT_BREAK_LOOP
+        EVT_END_IF
+        EVT_WAIT_FRAMES(1)
+    EVT_END_LOOP
+    EVT_CALL(N(Quizmo_CreateStage))
+    EVT_LOOP(5)
+        EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+        EVT_ADD(EVT_VAR(1), 1)
+        EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+        EVT_WAIT_FRAMES(2)
+    EVT_END_LOOP
+    EVT_SET(EVT_VAR(0), 2883584)
+    EVT_ADD(EVT_VAR(0), EVT_SAVE_VAR(352))
+    EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_chuck_quizmo_Palette_00_Anim_5, NPC_ANIM_chuck_quizmo_Palette_00_Anim_6, 0, EVT_VAR(0))
+    EVT_CALL(SetPlayerAnimation, ANIM_QUESTION)
+    EVT_SET(EVT_VAR(0), 2949120)
+    EVT_ADD(EVT_VAR(0), EVT_SAVE_VAR(352))
+    EVT_CALL(PlaySound, 142)
+    EVT_CALL(ShowChoice, EVT_VAR(0))
+    EVT_KILL_THREAD(EVT_VAR(1))
+    EVT_CALL(StopSound, 142)
+    EVT_EXEC(N(EVS_Quizmo_PlayerHitBuzzer))
+    EVT_WAIT_FRAMES(15)
+    EVT_CALL(PlaySound, 141)
+    EVT_CALL(N(Quizmo_UnkE), EVT_VAR(0))
+    EVT_SET(EVT_ARRAY(4), 0)
+    EVT_CALL(N(Quizmo_UnkJ))
+    EVT_WAIT_FRAMES(40)
+    EVT_CALL(N(Quizmo_UpdateRecords))
+    EVT_THREAD
+        EVT_WAIT_FRAMES(110)
+        EVT_CALL(CloseChoice)
+        EVT_SET(EVT_ARRAY(4), 0)
+    EVT_END_THREAD
+    EVT_IF_EQ(EVT_VAR(0), 1)
+        EVT_CALL(SetNpcAnimation, CHUCK_QUIZMO_NPC_ID, NPC_ANIM_chuck_quizmo_Palette_00_Anim_7)
+        EVT_SET(EVT_ARRAY(4), 1)
+        EVT_THREAD
+            EVT_CALL(N(Quizmo_SetStageLightsMode), 1)
+            EVT_WAIT_FRAMES(6)
+            EVT_WAIT_FRAMES(6)
+            EVT_WAIT_FRAMES(6)
+            EVT_CALL(N(Quizmo_SetStageLightsMode), 2)
+        EVT_END_THREAD
+        EVT_THREAD
+            EVT_CALL(PlaySound, SOUND_21C)
+            EVT_WAIT_FRAMES(6)
+            EVT_CALL(PlaySound, SOUND_21C)
+            EVT_WAIT_FRAMES(6)
+            EVT_CALL(PlaySound, SOUND_21C)
+            EVT_WAIT_FRAMES(6)
+            EVT_CALL(PlaySound, SOUND_21C)
+        EVT_END_THREAD
+        EVT_CALL(PlaySound, SOUND_8A)
+        EVT_CALL(N(Quizmo_UnkG))
+        EVT_THREAD
+            EVT_WAIT_FRAMES(15)
+            EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+            EVT_ADD(EVT_VAR(1), 50)
+            EVT_CALL(N(Quizmo_AddViewRelativeOffset), 0, 0, 83, EVT_VAR(0), EVT_VAR(2))
+            EVT_CALL(PlayEffect, 0x7, 2, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, 0x44, 4, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 1, 60, 0, 0, 0, 0, 0, 0, 0)
+            EVT_WAIT_FRAMES(15)
+            EVT_ADD(EVT_VAR(1), -3)
+            EVT_CALL(N(Quizmo_AddViewRelativeOffset), 0, 0, 58, EVT_VAR(0), EVT_VAR(2))
+            EVT_CALL(PlayEffect, 0x7, 2, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, 0x44, 4, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 1, 60, 0, 0, 0, 0, 0, 0, 0)
+            EVT_WAIT_FRAMES(15)
+            EVT_ADD(EVT_VAR(1), 30)
+            EVT_CALL(N(Quizmo_AddViewRelativeOffset), 0, 0, 93, EVT_VAR(0), EVT_VAR(2))
+            EVT_CALL(PlayEffect, 0x7, 2, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, 0x44, 4, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 1, 60, 0, 0, 0, 0, 0, 0, 0)
+            EVT_WAIT_FRAMES(15)
+        EVT_END_THREAD
+        EVT_WAIT_FRAMES(20)
+        EVT_EXEC_GET_TID(N(EVS_Quizmo_RightAnswer), EVT_VAR(1))
+        EVT_ADD(EVT_SAVE_VAR(352), 1)
+        EVT_IF_GT(EVT_SAVE_VAR(352), 63)
+            EVT_CALL(ContinueSpeech, -1, -1, -1, 0, MESSAGE_ID(0x08, 0x0010))
+            EVT_CALL(SetNpcAnimation, CHUCK_QUIZMO_NPC_ID, NPC_ANIM_chuck_quizmo_Palette_00_Anim_6)
+            EVT_LOOP(0)
+                EVT_IS_THREAD_RUNNING(EVT_VAR(1), EVT_VAR(0))
+                EVT_IF_EQ(EVT_VAR(0), 0)
+                    EVT_BREAK_LOOP
+                EVT_END_IF
+                EVT_WAIT_FRAMES(1)
+            EVT_END_LOOP
+            EVT_CALL(SetNpcAnimation, CHUCK_QUIZMO_NPC_ID, NPC_ANIM_chuck_quizmo_Palette_00_Anim_5)
+            EVT_SET(EVT_VAR(0), ITEM_STAR_PIECE)
+            EVT_SET(EVT_VAR(1), 3)
+            EVT_EXEC_WAIT(N(EVS_Quizmo_GiveItem_0))
+            EVT_CALL(AddStarPieces, 1)
+            EVT_CALL(N(Quizmo_SetStageLightsMode), 15)
+            EVT_CALL(N(Quizmo_UnkF))
+            EVT_CALL(SetMessageValue, EVT_SAVE_VAR(352), 0)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_chuck_quizmo_Palette_00_Anim_4, NPC_ANIM_chuck_quizmo_Palette_00_Anim_1, 0, MESSAGE_ID(0x08, 0x0011))
+        EVT_ELSE
+            EVT_CALL(ContinueSpeech, -1, -1, -1, 0, MESSAGE_ID(0x08, 0x000E))
+            EVT_CALL(SetNpcAnimation, CHUCK_QUIZMO_NPC_ID, NPC_ANIM_chuck_quizmo_Palette_00_Anim_6)
+            EVT_LOOP(0)
+                EVT_IS_THREAD_RUNNING(EVT_VAR(1), EVT_VAR(0))
+                EVT_IF_EQ(EVT_VAR(0), 0)
+                    EVT_BREAK_LOOP
+                EVT_END_IF
+                EVT_WAIT_FRAMES(1)
+            EVT_END_LOOP
+            EVT_CALL(SetNpcAnimation, CHUCK_QUIZMO_NPC_ID, NPC_ANIM_chuck_quizmo_Palette_00_Anim_5)
+            EVT_SET(EVT_VAR(0), ITEM_STAR_PIECE)
+            EVT_SET(EVT_VAR(1), 1)
+            EVT_EXEC_WAIT(N(EVS_Quizmo_GiveItem_0))
+            EVT_CALL(AddStarPieces, 1)
+            EVT_CALL(N(Quizmo_SetStageLightsMode), 15)
+            EVT_CALL(N(Quizmo_UnkF))
+            EVT_CALL(SetMessageValue, EVT_SAVE_VAR(352), 0)
+            EVT_IF_EQ(EVT_SAVE_VAR(352), 1)
+                EVT_CALL(SetMessageMsg, EVT_PTR(MessageSingular), 1)
+            EVT_ELSE
+                EVT_CALL(SetMessageMsg, EVT_PTR(MessagePlural), 1)
+            EVT_END_IF
+            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_chuck_quizmo_Palette_00_Anim_4, NPC_ANIM_chuck_quizmo_Palette_00_Anim_1, 0, MESSAGE_ID(0x08, 0x000F))
+        EVT_END_IF
+        EVT_SET(EVT_VAR(0), 1)
+    EVT_ELSE
+        EVT_CALL(SetNpcAnimation, CHUCK_QUIZMO_NPC_ID, NPC_ANIM_chuck_quizmo_Palette_00_Anim_9)
+        EVT_SET(EVT_ARRAY(4), 2)
+        EVT_CALL(PlaySound, SOUND_MENU_ERROR)
+        EVT_CALL(PlaySound, SOUND_8B)
+        EVT_EXEC_GET_TID(N(EVS_Quizmo_WrongAnswer), EVT_VAR(1))
+        EVT_CALL(GetPlayerPos, EVT_VAR(2), EVT_VAR(3), EVT_VAR(4))
+        EVT_CALL(PlayEffect, 0x2B, 0, EVT_VAR(2), EVT_VAR(3), EVT_VAR(4), 0, 0, 0, 0, 0, 0, 0, 0, 0)
+        EVT_CALL(ContinueSpeech, -1, -1, -1, 0, MESSAGE_ID(0x08, 0x000D))
+        EVT_CALL(SetNpcAnimation, CHUCK_QUIZMO_NPC_ID, NPC_ANIM_chuck_quizmo_Palette_00_Anim_A)
+        EVT_LOOP(0)
+            EVT_IS_THREAD_RUNNING(EVT_VAR(1), EVT_VAR(0))
+            EVT_IF_EQ(EVT_VAR(0), 0)
+                EVT_BREAK_LOOP
+            EVT_END_IF
+            EVT_WAIT_FRAMES(1)
+        EVT_END_LOOP
+        EVT_SET(EVT_VAR(0), 0)
+    EVT_END_IF
+    EVT_CALL(N(Quizmo_UnkE), -1)
+    EVT_CALL(EnablePartnerAI)
+    EVT_THREAD
+        EVT_WAIT_FRAMES(30)
+        EVT_CALL(PlaySound, SOUND_8F)
+    EVT_END_THREAD
+    EVT_THREAD
+        EVT_WAIT_FRAMES(45)
+        EVT_CALL(StopSound, SOUND_89)
+    EVT_END_THREAD
+    EVT_CALL(N(Quizmo_SetVannaAnim_Wave))
+    EVT_CALL(N(Quizmo_DestroyEffects))
+    EVT_EXEC_WAIT(N(EVS_Quizmo_Exit))
+    EVT_EXEC(N(EVS_Quizmo_ResetCamera))
+    EVT_CALL(N(Quizmo_FadeInWorld))
+    EVT_CALL(N(Quizmo_ShowEntities))
+    EVT_SET(EVT_SAVE_FLAG(1793), 0)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript N(EVS_Quizmo_NPC_OtherAI) = {
+    EVT_CALL(N(Quizmo_UnkQuizFunc))
+    EVT_IF_EQ(EVT_VAR(0), 0)
+        EVT_RETURN
+    EVT_END_IF
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_1000000, FALSE)
+    EVT_CALL(SetNpcSprite, -1, 0x00AF0001)
+    EVT_CALL(N(Quizmo_UnkFunc31))
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript N(EVS_Quizmo_NPC_Interact) = {
+    EVT_USE_ARRAY(EVT_PTR(N(Quizmo_ScriptArray)))
+    EVT_SET(EVT_SAVE_FLAG(1769), 1)
+    EVT_CALL(DisablePlayerPhysics, TRUE)
+    EVT_CALL(SetPlayerFlagBits, 0x400000, 1)
+    EVT_EXEC_WAIT(N(EVS_Quizmo_QuizMain))
+    EVT_CALL(DisablePlayerPhysics, FALSE)
+    EVT_CALL(SetPlayerFlagBits, 0x400000, 0)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript N(EVS_Quizmo_NPC_Aux) = {
+    EVT_CALL(N(Quizmo_GetNpcUnsafeOwner2))
+    EVT_RETURN
+    EVT_END
+};
+
+NpcAISettings N(Quizmo_NpcAISettings) = {
+    .moveSpeed = 0.7f,
+    .moveTime = 30,
+    .waitTime = 20,
+    .unk_14 = -1,
+    .unk_2C = 1,
+};
+
+EvtScript N(EVS_Quizmo_Npc_AI) = {
+    EVT_CALL(DoBasicAI, EVT_PTR(N(Quizmo_NpcAISettings)))
+    EVT_RETURN
+    EVT_END
+};
+
+// primary quizmo NpcSettings
+NpcSettings N(Quizmo_NpcSettings) = {
+    .unk_00 = { 0x00, 0xAF, 0x00, 0x01 },
+    .height = 35,
+    .radius = 28,
+    .otherAI = &N(EVS_Quizmo_NPC_OtherAI),
+    .onInteract = &N(EVS_Quizmo_NPC_Interact),
+    .aux = &N(EVS_Quizmo_NPC_Aux),
+    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
+    .level = 99,
+};
+
+// alternate (unused?) variant of quizmo with AI and NPC_FLAG_100 unset
+NpcSettings N(Quizmo_AltNpcSettings) = {
+    .unk_00 = { 0x00, 0xAF, 0x00, 0x01 },
+    .height = 35,
+    .radius = 28,
+    .otherAI = &N(EVS_Quizmo_NPC_OtherAI),
+    .onInteract = &N(EVS_Quizmo_NPC_Interact),
+    .ai = &N(EVS_Quizmo_Npc_AI),
+    .aux = &N(EVS_Quizmo_NPC_Aux),
+    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
+    .level = 99,
+    .unk_2A = 16,
 };
