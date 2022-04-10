@@ -116,7 +116,7 @@ dlabel D_80244F20_D3F4F0
 dlabel D_80244F4C_D3F51C
 .word 0x00000000, 0x00230018, 0x00000000, 0x00000000, 0x00000000, EnemyNpcHit, 0x00000000, EnemyNpcDefeat, 0x00000000, 0x00000000, 0x00060000
 
-dlabel sam_11_varTable
+dlabel sam_11_Quizmo_varTable
 .word 0x00000000
 
 dlabel D_80244F7C_D3F54C

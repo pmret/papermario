@@ -467,7 +467,7 @@ static s32 N(pad_4DD4)[] = {
 };
 
 // Quizmo_VarStash
-s32** N(varTable) = NULL;
+s32** N(Quizmo_varTable) = NULL;
 
 #include "world/common/atomic/QuizmoData.inc.c"
 
@@ -2366,9 +2366,10 @@ NpcGroupList N(npcGroupList_8024EEF4) = {
     {},
 };
 
+#define NAMESPACE dro_02_Quizmo
 #include "world/common/StashVars.inc.c"
-
 #include "world/common/GetItemName.inc.c"
+#define NAMESPACE dro_02
 
 #include "world/common/atomic/Quizmo.inc.c"
 

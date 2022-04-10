@@ -2,7 +2,7 @@
 
 .section .data
 
-dlabel kmr_02_varTable
+dlabel kmr_02_Quizmo_varTable
 .word 0x00000000
 
 dlabel D_802455D4_8B5644

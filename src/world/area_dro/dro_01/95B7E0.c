@@ -305,7 +305,7 @@ NpcSettings N(npcSettings_8024518C) = {
 };
 
 // Quizmo_VarStash
-s32** N(varTable) = NULL;
+s32** N(Quizmo_varTable) = NULL;
 
 #include "world/common/atomic/QuizmoData.inc.c"
 
@@ -2024,9 +2024,10 @@ EvtScript N(makeEntities) = {
 
 #include "world/common/UnkNpcAIMainFunc.inc.c"
 
+#define NAMESPACE dro_01_Quizmo
 #include "world/common/StashVars.inc.c"
-
 #include "world/common/GetItemName.inc.c"
+#define NAMESPACE dro_01
 
 #include "world/common/atomic/Quizmo.inc.c"
 

@@ -31,8 +31,8 @@ ApiStatus N(Quizmo_UnkQuizFunc)(Evt* script, s32 isInitialCall) {
     u16 sp_10 = (enemy->varTable[0] & 0xFF0000) >> 16;
     u16 temp_s2 = (enemy->varTable[0] & 0xFF00) >> 8;
     u16 sp_1e = (enemy->varTable[0] & 0xFF) >> 0;
-    s32 temp_v0;
-    s32 temp_s0_2;
+    s32 progress;
+    s32 numAnswered;
 
     if (temp_s3 != temp_s6) {
         phi_s7 = 0;
@@ -51,17 +51,17 @@ ApiStatus N(Quizmo_UnkQuizFunc)(Evt* script, s32 isInitialCall) {
 
     evt_set_variable(script, EVT_SAVE_FLAG(1768), phi_s0);
     evt_set_variable(script, EVT_SAVE_FLAG(1769), phi_s7);
-    temp_s0_2 = evt_get_variable(NULL, EVT_SAVE_VAR(352));
-    temp_v0 = evt_get_variable(NULL, EVT_STORY_PROGRESS);
+    numAnswered = evt_get_variable(NULL, EVT_SAVE_VAR(352));
+    progress = evt_get_variable(NULL, EVT_STORY_PROGRESS);
 
     for (i = 0; i < 8; i++) {
-        if (temp_v0 < N(Quizmo_Requirements)[i].requiredStoryProgress) {
+        if (progress < N(Quizmo_Requirements)[i].requiredStoryProgress) {
             break;
         }
     }
 
-    temp_v0 = temp_s0_2 < N(Quizmo_Requirements)[i].numQuestionsUnlocked;
-    test2 = var = temp_v0;
+    progress = numAnswered < N(Quizmo_Requirements)[i].numQuestionsUnlocked;
+    test2 = var = progress;
 
     if ((((sp_10 == temp_s6) && (sp_1e == phi_s5) && (phi_s7 == 0) && test2)) ||
         (gGameStatusPtr->debugQuizmo && var)) {

@@ -53,15 +53,16 @@ INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80241A64_B36634);
 
 INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80241B00_B366D0);
 
-#include "world/common/StashVars.inc.c"
-
-#include "world/common/GetItemName.inc.c"
-
 extern s32 N(Quizmo_Worker);
 extern s32 N(Quizmo_WasCorrect);
 extern EffectInstance* N(Quizmo_StageEffect);
 extern EffectInstance* N(Quizmo_AudienceEffect);
 extern EffectInstance* N(Quizmo_VannaTEffect);
+
+#define NAMESPACE jan_03_Quizmo
+#include "world/common/StashVars.inc.c"
+#include "world/common/GetItemName.inc.c"
+#define NAMESPACE jan_03
 
 #include "world/common/atomic/Quizmo.inc.c"
 

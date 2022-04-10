@@ -47,15 +47,16 @@ INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80241C14_802494);
 static char* N(exit_str_0) = "flo_00";
 static char* N(exit_str_1) = "kmr_22";
 
-#include "world/common/StashVars.inc.c"
-
-#include "world/common/GetItemName.inc.c"
-
 extern s32 N(Quizmo_Worker);
 extern s32 N(Quizmo_WasCorrect);
 extern EffectInstance* N(Quizmo_StageEffect);
 extern EffectInstance* N(Quizmo_AudienceEffect);
 extern EffectInstance* N(Quizmo_VannaTEffect);
+
+#define NAMESPACE mac_01_Quizmo
+#include "world/common/StashVars.inc.c"
+#include "world/common/GetItemName.inc.c"
+#define NAMESPACE mac_01
 
 #include "world/common/atomic/Quizmo.inc.c"
 
