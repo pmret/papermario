@@ -3,7 +3,7 @@
 static char* N(exit_str_0) = "nok_13";
 static char* N(exit_str_1) = "nok_02";
 
-#define UNK_ALPHA_FUNC_NPC 15
+#define CHUCK_QUIZMO_NPC_ID 15
 
 #include "world/common/UnkNpcAIFunc43.inc.c"
 

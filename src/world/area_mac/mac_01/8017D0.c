@@ -1,6 +1,6 @@
 #include "mac_01.h"
 
-#define UNK_ALPHA_FUNC_NPC 5
+#define CHUCK_QUIZMO_NPC_ID 5
 
 extern u8 D_80258407_818C87;
 

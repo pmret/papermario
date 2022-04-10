@@ -7,12 +7,12 @@ extern Quizmo_Requirements N(Quizmo_Requirements)[];
 
 extern u8 N(Quizmo_Answers)[64];
 
-ApiStatus N(Quizmo_Set80151310_1)(Evt* script, s32 isInitialCall) {
+ApiStatus N(Quizmo_HideEntities)(Evt* script, s32 isInitialCall) {
     D_80151310 = 1;
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(Quizmo_Set80151310_0)(Evt* script, s32 isInitialCall) {
+ApiStatus N(Quizmo_ShowEntities)(Evt* script, s32 isInitialCall) {
     D_80151310 = 0;
     return ApiStatus_DONE2;
 }
@@ -64,7 +64,7 @@ ApiStatus N(Quizmo_UnkQuizFunc)(Evt* script, s32 isInitialCall) {
     test2 = var = temp_v0;
 
     if ((((sp_10 == temp_s6) && (sp_1e == phi_s5) && (phi_s7 == 0) && test2)) ||
-        ((gGameStatusPtr->debugQuizmo != 0) && var)) {
+        (gGameStatusPtr->debugQuizmo && var)) {
         script->varTable[0] = 1;
     } else {
         kill_enemy(enemy);
@@ -99,7 +99,7 @@ void N(Quizmo_UnkFunc28)(Npc* npc) {
     }
 }
 
-ApiStatus N(Quizmo_UnkAlphaFunc)(Evt* script, s32 isInitialCall) {
+ApiStatus N(Quizmo_HideWorld)(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         s32 i;
 
@@ -110,7 +110,7 @@ ApiStatus N(Quizmo_UnkAlphaFunc)(Evt* script, s32 isInitialCall) {
         for (i = 0; i < MAX_NPCS; i++) {
             Npc* npc = get_npc_by_index(i);
 
-            if (npc != NULL && npc->flags != 0 && npc->npcID != NPC_PARTNER && npc->npcID != UNK_ALPHA_FUNC_NPC) {
+            if (npc != NULL && npc->flags != 0 && npc->npcID != NPC_PARTNER && npc->npcID != CHUCK_QUIZMO_NPC_ID) {
                 npc->flags |= 0x800000;
             }
         }
@@ -132,10 +132,15 @@ ApiStatus N(Quizmo_UnkAlphaFunc)(Evt* script, s32 isInitialCall) {
     }
 
     set_background_color_blend(0, 0, 0, script->functionTemp[0]);
-    return (script->functionTemp[0] == 255) * ApiStatus_DONE2;
+
+    if (script->functionTemp[0] == 255) {
+        return ApiStatus_DONE2;
+    } else {
+        return ApiStatus_BLOCK;
+    }
 }
 
-ApiStatus N(Quizmo_UnkFunc29)(Evt* script, s32 isInitialCall) {
+ApiStatus N(Quizmo_FadeInWorld)(Evt* script, s32 isInitialCall) {
     s32 i;
 
     if (isInitialCall) {
@@ -159,16 +164,16 @@ ApiStatus N(Quizmo_UnkFunc29)(Evt* script, s32 isInitialCall) {
         for (i = 0; i < MAX_NPCS; i++) {
             Npc* npc = get_npc_by_index(i);
             if (npc != NULL && npc->flags != 0) {
-                if (npc->npcID != NPC_PARTNER && npc->npcID != UNK_ALPHA_FUNC_NPC) {
-                    npc->flags &= ~0x00800000;
+                if (npc->npcID != NPC_PARTNER && npc->npcID != CHUCK_QUIZMO_NPC_ID) {
+                    npc->flags &= ~NPC_FLAG_NO_DROPS;
                 }
             }
         }
 
         for (i = 0; i < MAX_ITEM_ENTITIES; i++) {
             ItemEntity* entity = get_item_entity(i);
-            if (entity != NULL && entity->flags & 0x10) {
-                entity->flags &= ~0x8000000;
+            if (entity != NULL && entity->flags & ITEM_ENTITY_FLAGS_10) {
+                entity->flags &= ~ITEM_ENTITY_FLAGS_8000000;
             }
         }
 
@@ -178,7 +183,7 @@ ApiStatus N(Quizmo_UnkFunc29)(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus N(Quizmo_UnkA)(Evt* script, s32 isInitialCall) {
+ApiStatus N(Quizmo_UpdateRecords)(Evt* script, s32 isInitialCall) {
     u16 quizzesAnswered = gPlayerData.quizzesAnswered;
 
     if (quizzesAnswered < 999) {
@@ -195,7 +200,7 @@ ApiStatus N(Quizmo_UnkA)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(Quizmo_UnkB)(Evt* script, s32 isInitialCall) {
+ApiStatus N(Quizmo_CreateStage)(Evt* script, s32 isInitialCall) {
     EffectInstanceDataThing* effectPtr;
 
     if (isInitialCall) {
@@ -236,7 +241,7 @@ ApiStatus N(Quizmo_UnkB)(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus N(Quizmo_UnkC)(Evt* script, s32 isInitialCall) {
+ApiStatus N(Quizmo_DestroyEffects)(Evt* script, s32 isInitialCall) {
     EffectInstanceDataThing* effectPtr;
 
     if (isInitialCall) {
@@ -261,7 +266,7 @@ ApiStatus N(Quizmo_UnkC)(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus N(Quizmo_UnkD)(Evt* script, s32 isInitialCall) {
+ApiStatus N(Quizmo_SetStageLightsMode)(Evt* script, s32 isInitialCall) {
     ((EffectInstanceDataThing*)N(Quizmo_StageEffect)->data)->unk_34 = evt_get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
@@ -298,7 +303,7 @@ ApiStatus N(Quizmo_UnkG)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(Quizmo_UnkH)(Evt* script, s32 isInitialCall) {
+ApiStatus N(Quizmo_SetVannaAnim_Wave)(Evt* script, s32 isInitialCall) {
     ((EffectInstanceDataThing*)N(Quizmo_VannaTEffect)->data)->unk_1C = 2;
     return ApiStatus_DONE2;
 }
@@ -324,7 +329,7 @@ ApiStatus N(Quizmo_GetCamVfov)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(Quizmo_UnkCameraFunc)(Evt* script, s32 isInitialCall) {
+ApiStatus N(Quizmo_AddViewRelativeOffset)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 var0 = evt_get_variable(script, *args++);
     s32 var1 = evt_get_variable(script, *args++);

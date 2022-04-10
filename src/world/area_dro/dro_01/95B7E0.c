@@ -9,7 +9,7 @@
 #include "sprite/npc/three_sisters.h"
 #include "sprite/npc/world_parakarry.h"
 
-#define UNK_ALPHA_FUNC_NPC 10
+#define CHUCK_QUIZMO_NPC_ID 10
 
 extern s16 MessagePlural;
 extern s16 MessageSingular;
@@ -323,20 +323,6 @@ EvtScript N(802451EC) = {
 
 #include "world/common/atomic/QuizmoData.inc.c"
 
-EvtScript N(802452AC) = {
-    EVT_CALL(N(Quizmo_GetGameStatus75))
-    EVT_IF_LE(EVT_VAR(0), 1)
-        EVT_CALL(GetNpcPos, NPC_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_ADD(EVT_VAR(1), 300)
-        EVT_CALL(SetNpcJumpscale, NPC_SELF, 1)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_chuck_quizmo_Palette_00_Anim_C)
-        EVT_WAIT_FRAMES(40)
-        EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
-};
-
 EvtScript N(8024535C) = {
     EVT_CALL(N(Quizmo_GetCamVfov), 0, EVT_ARRAY(0))
     EVT_CALL(N(SetCamVfov), 0, 25)
@@ -389,7 +375,7 @@ EvtScript N(802455F4) = {
 
 EvtScript N(80245630) = {
     EVT_WAIT_FRAMES(20)
-    EVT_CALL(N(Quizmo_UnkCameraFunc), EVT_ARRAY(1), EVT_ARRAY(3), 83, EVT_VAR(0), EVT_VAR(1))
+    EVT_CALL(N(Quizmo_AddViewRelativeOffset), EVT_ARRAY(1), EVT_ARRAY(3), 83, EVT_VAR(0), EVT_VAR(1))
     EVT_THREAD
         EVT_SETF(EVT_VAR(2), 0)
         EVT_LOOP(60)
@@ -420,7 +406,7 @@ EvtScript N(80245630) = {
 
 EvtScript N(802457E0) = {
     EVT_CALL(GetNpcPos, NPC_PARTNER, EVT_VAR(10), EVT_VAR(11), EVT_VAR(12))
-    EVT_CALL(N(Quizmo_UnkCameraFunc), EVT_VAR(10), EVT_VAR(12), 108, EVT_VAR(0), EVT_VAR(1))
+    EVT_CALL(N(Quizmo_AddViewRelativeOffset), EVT_VAR(10), EVT_VAR(12), 108, EVT_VAR(0), EVT_VAR(1))
     EVT_SETF(EVT_VAR(5), EVT_ARRAY(2))
     EVT_SUBF(EVT_VAR(5), EVT_VAR(11))
     EVT_THREAD
@@ -442,7 +428,7 @@ EvtScript N(802457E0) = {
 
 EvtScript N(80245918) = {
     EVT_CALL(GetNpcPos, 10, EVT_VAR(10), EVT_VAR(11), EVT_VAR(12))
-    EVT_CALL(N(Quizmo_UnkCameraFunc), EVT_VAR(10), EVT_VAR(12), -70, EVT_VAR(0), EVT_VAR(1))
+    EVT_CALL(N(Quizmo_AddViewRelativeOffset), EVT_VAR(10), EVT_VAR(12), -70, EVT_VAR(0), EVT_VAR(1))
     EVT_THREAD
         EVT_SETF(EVT_VAR(2), 0)
         EVT_LOOP(60)
@@ -675,7 +661,7 @@ EvtScript N(8024667C) = {
 
 EvtScript N(802466BC) = {
     EVT_THREAD
-        EVT_CALL(N(Quizmo_UnkCameraFunc), EVT_ARRAY(1), EVT_ARRAY(3), 25, EVT_VAR(0), EVT_VAR(1))
+        EVT_CALL(N(Quizmo_AddViewRelativeOffset), EVT_ARRAY(1), EVT_ARRAY(3), 25, EVT_VAR(0), EVT_VAR(1))
         EVT_SETF(EVT_VAR(2), EVT_ARRAY(1))
         EVT_ADDF(EVT_VAR(2), EVT_VAR(0))
         EVT_SETF(EVT_VAR(3), EVT_ARRAY(3))
@@ -741,13 +727,13 @@ EvtScript N(802468F8) = {
     EVT_CALL(ShowChoice, MESSAGE_ID(0x1E, 0x000D))
     EVT_IF_EQ(EVT_VAR(0), 1)
         EVT_CALL(ContinueSpeech, -1, NPC_ANIM_chuck_quizmo_Palette_00_Anim_4, NPC_ANIM_chuck_quizmo_Palette_00_Anim_1, 0, MESSAGE_ID(0x08, 0x000C))
-        EVT_EXEC_WAIT(N(802452AC))
+        EVT_EXEC_WAIT(N(EVS_Quizmo_Exit))
         EVT_SET(EVT_VAR(0), 0)
         EVT_RETURN
     EVT_END_IF
     EVT_SET(EVT_SAVE_FLAG(1793), 1)
-    EVT_CALL(N(Quizmo_Set80151310_1))
-    EVT_CALL(N(Quizmo_UnkAlphaFunc))
+    EVT_CALL(N(Quizmo_HideEntities))
+    EVT_CALL(N(Quizmo_HideWorld))
     EVT_EXEC(N(8024535C))
     EVT_CALL(DisablePartnerAI, 0)
     EVT_CALL(SetNpcFlagBits, NPC_PARTNER, ((NPC_FLAG_GRAVITY)), FALSE)
@@ -765,7 +751,7 @@ EvtScript N(802468F8) = {
         EVT_END_IF
         EVT_WAIT_FRAMES(1)
     EVT_END_LOOP
-    EVT_CALL(N(Quizmo_UnkB))
+    EVT_CALL(N(Quizmo_CreateStage))
     EVT_LOOP(5)
         EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
         EVT_ADD(EVT_VAR(1), 1)
@@ -789,7 +775,7 @@ EvtScript N(802468F8) = {
     EVT_SET(EVT_ARRAY(4), 0)
     EVT_CALL(N(Quizmo_UnkJ))
     EVT_WAIT_FRAMES(40)
-    EVT_CALL(N(Quizmo_UnkA))
+    EVT_CALL(N(Quizmo_UpdateRecords))
     EVT_THREAD
         EVT_WAIT_FRAMES(110)
         EVT_CALL(CloseChoice)
@@ -799,38 +785,38 @@ EvtScript N(802468F8) = {
         EVT_CALL(SetNpcAnimation, 10, NPC_ANIM_chuck_quizmo_Palette_00_Anim_7)
         EVT_SET(EVT_ARRAY(4), 1)
         EVT_THREAD
-            EVT_CALL(N(Quizmo_UnkD), 1)
+            EVT_CALL(N(Quizmo_SetStageLightsMode), 1)
             EVT_WAIT_FRAMES(6)
             EVT_WAIT_FRAMES(6)
             EVT_WAIT_FRAMES(6)
-            EVT_CALL(N(Quizmo_UnkD), 2)
+            EVT_CALL(N(Quizmo_SetStageLightsMode), 2)
         EVT_END_THREAD
         EVT_THREAD
-            EVT_CALL(PlaySound, 540)
+            EVT_CALL(PlaySound, SOUND_21C)
             EVT_WAIT_FRAMES(6)
-            EVT_CALL(PlaySound, 540)
+            EVT_CALL(PlaySound, SOUND_21C)
             EVT_WAIT_FRAMES(6)
-            EVT_CALL(PlaySound, 540)
+            EVT_CALL(PlaySound, SOUND_21C)
             EVT_WAIT_FRAMES(6)
-            EVT_CALL(PlaySound, 540)
+            EVT_CALL(PlaySound, SOUND_21C)
         EVT_END_THREAD
-        EVT_CALL(PlaySound, 138)
+        EVT_CALL(PlaySound, SOUND_8A)
         EVT_CALL(N(Quizmo_UnkG))
         EVT_THREAD
             EVT_WAIT_FRAMES(15)
             EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
             EVT_ADD(EVT_VAR(1), 50)
-            EVT_CALL(N(Quizmo_UnkCameraFunc), 0, 0, 83, EVT_VAR(0), EVT_VAR(2))
+            EVT_CALL(N(Quizmo_AddViewRelativeOffset), 0, 0, 83, EVT_VAR(0), EVT_VAR(2))
             EVT_CALL(PlayEffect, 0x7, 2, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
             EVT_CALL(PlayEffect, 0x44, 4, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 1, 60, 0, 0, 0, 0, 0, 0, 0)
             EVT_WAIT_FRAMES(15)
             EVT_ADD(EVT_VAR(1), -3)
-            EVT_CALL(N(Quizmo_UnkCameraFunc), 0, 0, 58, EVT_VAR(0), EVT_VAR(2))
+            EVT_CALL(N(Quizmo_AddViewRelativeOffset), 0, 0, 58, EVT_VAR(0), EVT_VAR(2))
             EVT_CALL(PlayEffect, 0x7, 2, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
             EVT_CALL(PlayEffect, 0x44, 4, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 1, 60, 0, 0, 0, 0, 0, 0, 0)
             EVT_WAIT_FRAMES(15)
             EVT_ADD(EVT_VAR(1), 30)
-            EVT_CALL(N(Quizmo_UnkCameraFunc), 0, 0, 93, EVT_VAR(0), EVT_VAR(2))
+            EVT_CALL(N(Quizmo_AddViewRelativeOffset), 0, 0, 93, EVT_VAR(0), EVT_VAR(2))
             EVT_CALL(PlayEffect, 0x7, 2, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
             EVT_CALL(PlayEffect, 0x44, 4, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 1, 60, 0, 0, 0, 0, 0, 0, 0)
             EVT_WAIT_FRAMES(15)
@@ -853,7 +839,7 @@ EvtScript N(802468F8) = {
             EVT_SET(EVT_VAR(1), 3)
             EVT_EXEC_WAIT(N(802451BC))
             EVT_CALL(AddStarPieces, 1)
-            EVT_CALL(N(Quizmo_UnkD), 15)
+            EVT_CALL(N(Quizmo_SetStageLightsMode), 15)
             EVT_CALL(N(Quizmo_UnkF))
             EVT_CALL(SetMessageValue, EVT_SAVE_VAR(352), 0)
             EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_chuck_quizmo_Palette_00_Anim_4, NPC_ANIM_chuck_quizmo_Palette_00_Anim_1, 0, MESSAGE_ID(0x08, 0x0011))
@@ -868,11 +854,11 @@ EvtScript N(802468F8) = {
                 EVT_WAIT_FRAMES(1)
             EVT_END_LOOP
             EVT_CALL(SetNpcAnimation, 10, NPC_ANIM_chuck_quizmo_Palette_00_Anim_5)
-            EVT_SET(EVT_VAR(0), 348)
+            EVT_SET(EVT_VAR(0), ITEM_STAR_PIECE)
             EVT_SET(EVT_VAR(1), 1)
             EVT_EXEC_WAIT(N(802451BC))
             EVT_CALL(AddStarPieces, 1)
-            EVT_CALL(N(Quizmo_UnkD), 15)
+            EVT_CALL(N(Quizmo_SetStageLightsMode), 15)
             EVT_CALL(N(Quizmo_UnkF))
             EVT_CALL(SetMessageValue, EVT_SAVE_VAR(352), 0)
             EVT_IF_EQ(EVT_SAVE_VAR(352), 1)
@@ -887,7 +873,7 @@ EvtScript N(802468F8) = {
         EVT_CALL(SetNpcAnimation, 10, NPC_ANIM_chuck_quizmo_Palette_00_Anim_9)
         EVT_SET(EVT_ARRAY(4), 2)
         EVT_CALL(PlaySound, SOUND_MENU_ERROR)
-        EVT_CALL(PlaySound, 139)
+        EVT_CALL(PlaySound, SOUND_8B)
         EVT_EXEC_GET_TID(N(80246848), EVT_VAR(1))
         EVT_CALL(GetPlayerPos, EVT_VAR(2), EVT_VAR(3), EVT_VAR(4))
         EVT_CALL(PlayEffect, 0x2B, 0, EVT_VAR(2), EVT_VAR(3), EVT_VAR(4), 0, 0, 0, 0, 0, 0, 0, 0, 0)
@@ -906,18 +892,18 @@ EvtScript N(802468F8) = {
     EVT_CALL(EnablePartnerAI)
     EVT_THREAD
         EVT_WAIT_FRAMES(30)
-        EVT_CALL(PlaySound, 143)
+        EVT_CALL(PlaySound, SOUND_8F)
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT_FRAMES(45)
-        EVT_CALL(StopSound, 137)
+        EVT_CALL(StopSound, SOUND_89)
     EVT_END_THREAD
-    EVT_CALL(N(Quizmo_UnkH))
-    EVT_CALL(N(Quizmo_UnkC))
-    EVT_EXEC_WAIT(N(802452AC))
+    EVT_CALL(N(Quizmo_SetVannaAnim_Wave))
+    EVT_CALL(N(Quizmo_DestroyEffects))
+    EVT_EXEC_WAIT(N(EVS_Quizmo_Exit))
     EVT_EXEC(N(802455F4))
-    EVT_CALL(N(Quizmo_UnkFunc29))
-    EVT_CALL(N(Quizmo_Set80151310_0))
+    EVT_CALL(N(Quizmo_FadeInWorld))
+    EVT_CALL(N(Quizmo_ShowEntities))
     EVT_SET(EVT_SAVE_FLAG(1793), 0)
     EVT_RETURN
     EVT_END
@@ -928,7 +914,7 @@ EvtScript N(80247628) = {
     EVT_IF_EQ(EVT_VAR(0), 0)
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, ((NPC_FLAG_1000000)), FALSE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_1000000, FALSE)
     EVT_CALL(SetNpcSprite, -1, 0x00AF0001)
     EVT_CALL(N(Quizmo_UnkFunc31))
     EVT_RETURN
@@ -939,10 +925,10 @@ EvtScript N(8024769C) = {
     EVT_USE_ARRAY(EVT_PTR(N(pad_D_8024DFC8)))
     EVT_SET(EVT_SAVE_FLAG(1769), 1)
     EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(SetPlayerFlagBits, 4194304, 1)
+    EVT_CALL(SetPlayerFlagBits, 0x400000, 1)
     EVT_EXEC_WAIT(N(802468F8))
     EVT_CALL(DisablePlayerPhysics, FALSE)
-    EVT_CALL(SetPlayerFlagBits, 4194304, 0)
+    EVT_CALL(SetPlayerFlagBits, 0x400000, 0)
     EVT_RETURN
     EVT_END
 };

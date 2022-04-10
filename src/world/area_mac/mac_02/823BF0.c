@@ -1,6 +1,6 @@
 #include "mac_02.h"
 
-#define UNK_ALPHA_FUNC_NPC 12
+#define CHUCK_QUIZMO_NPC_ID 12
 
 #include "world/common/UnkNpcAIFunc24.inc.c"
 

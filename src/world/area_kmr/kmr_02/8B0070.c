@@ -6,7 +6,7 @@ static char* N(exit_str_1) = "kmr_00";
 static char* N(exit_str_2) = "kmr_09";
 static char* N(exit_str_3) = "";
 
-#define UNK_ALPHA_FUNC_NPC 8
+#define CHUCK_QUIZMO_NPC_ID 8
 
 #include "world/common/atomic/Pipe.inc.c"
 

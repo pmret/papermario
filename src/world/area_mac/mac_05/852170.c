@@ -3,7 +3,7 @@
 static char* N(exit_str_0) = "mac_04";
 static char* N(exit_str_1) = "kgr_01";
 
-#define UNK_ALPHA_FUNC_NPC 6
+#define CHUCK_QUIZMO_NPC_ID 6
 
 #include "world/common/atomic/TexturePan.inc.c"
 

@@ -497,6 +497,10 @@ enum SoundIDs {
     SOUND_JR_TROOPA_SWIM            = 0x00000046,
     SOUND_BOO_SPOOK                 = 0x00000047,
     SOUND_52                        = 0x00000052,
+    SOUND_89                        = 0x00000089,
+    SOUND_8A                        = 0x0000008A,
+    SOUND_8B                        = 0x0000008B,
+    SOUND_8F                        = 0x0000008F,
     SOUND_A2                        = 0x000000A2,
     SOUND_B4                        = 0x000000B4,
     SOUND_BOO_VANISH                = 0x000000C1,
@@ -1724,10 +1728,12 @@ enum TriggerFlags {
 };
 
 enum ItemEntityFlags {
+    ITEM_ENTITY_FLAGS_10            = 0x00000010,
     ITEM_ENTITY_FLAGS_40            = 0x00000040,
     ITEM_ENTITY_FLAGS_TINY          = 0x00004000,
     ITEM_ENTITY_FLAGS_TRANSPARENT   = 0x00080000,
     ITEM_ENTITY_FLAGS_100000        = 0x00100000,
+    ITEM_ENTITY_FLAGS_8000000       = 0x08000000,
 };
 
 enum Buttons {

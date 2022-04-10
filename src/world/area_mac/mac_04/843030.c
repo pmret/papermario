@@ -1,7 +1,7 @@
 #include "mac_04.h"
 #include "effects.h"
 
-#define UNK_ALPHA_FUNC_NPC 20
+#define CHUCK_QUIZMO_NPC_ID 20
 
 #include "world/common/StashVars.inc.c"
 

@@ -1,7 +1,7 @@
 #include "sam_11.h"
 #include "effects.h"
 
-#define UNK_ALPHA_FUNC_NPC 17
+#define CHUCK_QUIZMO_NPC_ID 17
 
 #include "world/common/StashVars.inc.c"
 

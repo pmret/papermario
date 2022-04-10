@@ -1,7 +1,7 @@
 #include "sam_01.h"
 #include "effects.h"
 
-#define UNK_ALPHA_FUNC_NPC 14
+#define CHUCK_QUIZMO_NPC_ID 14
 
 #include "world/common/GetNpcCollisionHeight.inc.c"
 

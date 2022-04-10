@@ -1,6 +1,6 @@
 #include "nok_02.h"
 
-#define UNK_ALPHA_FUNC_NPC 19
+#define CHUCK_QUIZMO_NPC_ID 19
 
 #include "world/common/UnkNpcAIFunc24.inc.c"
 

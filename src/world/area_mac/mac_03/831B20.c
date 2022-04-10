@@ -1,7 +1,7 @@
 #include "mac_03.h"
 #include "effects.h"
 
-#define UNK_ALPHA_FUNC_NPC 23
+#define CHUCK_QUIZMO_NPC_ID 23
 
 #include "common/UnkFloatFunc.inc.c"
 

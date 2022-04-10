@@ -1,7 +1,7 @@
 #include "sam_02.h"
 #include "effects.h"
 
-#define UNK_ALPHA_FUNC_NPC 8
+#define CHUCK_QUIZMO_NPC_ID 8
 
 #include "world/common/atomic/ToadHouse.inc.c"
 
