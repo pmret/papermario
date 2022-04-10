@@ -27,7 +27,7 @@ u8 N(Quizmo_Answers)[64] = {
     0x01, 0x02, 0x00, 0x02, 0x02, 0x01, 0x01, 0x01,
 };
 
-Quizmo_Requirements N(Quizmo_Requirements)[] = {
+QuizRequirement N(Quizmo_Requirements)[] = {
     { STORY_CH0_KAMMY_RETURNED_TO_BOWSER, 0 },
     { STORY_CH1_BEGAN_PEACH_MISSION, 10 },
     { STORY_CH2_BEGAN_PEACH_MISSION, 20 },

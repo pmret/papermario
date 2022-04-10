@@ -3,7 +3,7 @@
 #include "effects.h"
 
 // TODO, can we remove this once all data disasm'ed?
-extern Quizmo_Requirements N(Quizmo_Requirements)[];
+extern QuizRequirement N(Quizmo_Requirements)[];
 
 extern u8 N(Quizmo_Answers)[64];
 
@@ -55,12 +55,12 @@ ApiStatus N(Quizmo_UnkQuizFunc)(Evt* script, s32 isInitialCall) {
     temp_v0 = evt_get_variable(NULL, EVT_STORY_PROGRESS);
 
     for (i = 0; i < 8; i++) {
-        if (temp_v0 < N(Quizmo_Requirements)[i].unk_00) {
+        if (temp_v0 < N(Quizmo_Requirements)[i].requiredStoryProgress) {
             break;
         }
     }
 
-    temp_v0 = temp_s0_2 < N(Quizmo_Requirements)[i].unk_04;
+    temp_v0 = temp_s0_2 < N(Quizmo_Requirements)[i].numQuestionsUnlocked;
     test2 = var = temp_v0;
 
     if ((((sp_10 == temp_s6) && (sp_1e == phi_s5) && (phi_s7 == 0) && test2)) ||

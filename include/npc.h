@@ -58,10 +58,10 @@
 #define OVERRIDE_MOVEMENT_SPEED(speed) (speed * 32767)
 #define NO_OVERRIDE_MOVEMENT_SPEED OVERRIDE_MOVEMENT_SPEED(-1)
 
-typedef struct Quizmo_Requirements {
-    s32 unk_00;
-    s32 unk_04;
-} Quizmo_Requirements; // size = 0x8
+typedef struct QuizRequirement {
+    s32 requiredStoryProgress;
+    s32 numQuestionsUnlocked;
+} QuizRequirement; // size = 0x8
 
 typedef struct NpcBlueprint {
     /* 0x00 */ s32 flags;
