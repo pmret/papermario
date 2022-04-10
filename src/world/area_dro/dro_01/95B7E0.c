@@ -746,7 +746,7 @@ EvtScript N(802468F8) = {
         EVT_RETURN
     EVT_END_IF
     EVT_SET(EVT_SAVE_FLAG(1793), 1)
-    EVT_CALL(N(Set80151310_1))
+    EVT_CALL(N(Quizmo_Set80151310_1))
     EVT_CALL(N(UnkAlphaFunc))
     EVT_EXEC(N(8024535C))
     EVT_CALL(DisablePartnerAI, 0)
@@ -917,14 +917,14 @@ EvtScript N(802468F8) = {
     EVT_EXEC_WAIT(N(802452AC))
     EVT_EXEC(N(802455F4))
     EVT_CALL(N(UnkFunc29))
-    EVT_CALL(N(Set80151310_0))
+    EVT_CALL(N(Quizmo_Set80151310_0))
     EVT_SET(EVT_SAVE_FLAG(1793), 0)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(80247628) = {
-    EVT_CALL(N(UnkQuizFunc))
+    EVT_CALL(N(Quizmo_UnkQuizFunc))
     EVT_IF_EQ(EVT_VAR(0), 0)
         EVT_RETURN
     EVT_END_IF

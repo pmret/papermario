@@ -12,9 +12,14 @@ u8 N(Quizmo_Answers)[64] = {
 };
 
 Quizmo_Requirements N(Quizmo_Requirements)[] = {
-    { -108, 0 }, { -76, 10 },
-    { -54, 20 }, { -14, 30 },
-    {   6, 37 }, {  39, 44 },
-    {  58, 52 }, {  88, 60 },
-    {  96, 64 }, {   0, 64 },
+    { STORY_CH0_KAMMY_RETURNED_TO_BOWSER, 0 },
+    { STORY_CH1_BEGAN_PEACH_MISSION, 10 },
+    { STORY_CH2_BEGAN_PEACH_MISSION, 20 },
+    { STORY_CH3_BEGAN_PEACH_MISSION, 30 },
+    { STORY_CH4_BEGAN_PEACH_MISSION, 37 },
+    { STORY_CH5_STAR_SPRIT_DEPARTED, 44 },
+    { STORY_CH6_BEGAN_PEACH_MISSION, 52 },
+    { STORY_CH7_BEGAN_PEACH_MISSION, 60 },
+    { STORY_EPILOGUE, 64 },
+    { 0, 64 },
 };

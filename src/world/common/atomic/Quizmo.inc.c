@@ -7,18 +7,17 @@ extern Quizmo_Requirements N(Quizmo_Requirements)[];
 
 extern u8 N(Quizmo_Answers)[64];
 
-ApiStatus N(Set80151310_1)(Evt* script, s32 isInitialCall) {
+ApiStatus N(Quizmo_Set80151310_1)(Evt* script, s32 isInitialCall) {
     D_80151310 = 1;
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(Set80151310_0)(Evt* script, s32 isInitialCall) {
+ApiStatus N(Quizmo_Set80151310_0)(Evt* script, s32 isInitialCall) {
     D_80151310 = 0;
     return ApiStatus_DONE2;
 }
 
-
-ApiStatus N(UnkQuizFunc)(Evt* script, s32 isInitialCall) {
+ApiStatus N(Quizmo_UnkQuizFunc)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     u16 phi_s0 = evt_get_variable(script, EVT_SAVE_FLAG(1768));
     u16 phi_s7 = evt_get_variable(script, EVT_SAVE_FLAG(1769));
@@ -56,12 +55,12 @@ ApiStatus N(UnkQuizFunc)(Evt* script, s32 isInitialCall) {
     temp_v0 = evt_get_variable(NULL, EVT_STORY_PROGRESS);
 
     for (i = 0; i < 8; i++) {
-        if (temp_v0 < (*(N(Quizmo_Requirements) + i)).unk_00) {
+        if (temp_v0 < N(Quizmo_Requirements)[i].unk_00) {
             break;
         }
     }
 
-    temp_v0 = temp_s0_2 < (*(N(Quizmo_Requirements) + i)).unk_04;
+    temp_v0 = temp_s0_2 < N(Quizmo_Requirements)[i].unk_04;
     test2 = var = temp_v0;
 
     if ((((sp_10 == temp_s6) && (sp_1e == phi_s5) && (phi_s7 == 0) && test2)) ||
