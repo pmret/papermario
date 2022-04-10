@@ -2,7 +2,7 @@
 
 .section .data
 
-dlabel obk_07_varTable
+dlabel obk_07_VarStash
 .word 0x00000000
 
 dlabel D_80241FB4_BD0BA4

@@ -85,7 +85,7 @@ EvtScript N(main) = {
     EVT_END
 };
 
-static s32** N(varTable) = NULL;
+static s32** N(VarStash) = NULL;
 #include "world/common/StashVars.inc.c"
 
 EvtScript N(80240624) = {

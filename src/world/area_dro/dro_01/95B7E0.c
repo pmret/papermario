@@ -304,8 +304,9 @@ NpcSettings N(npcSettings_8024518C) = {
     .level = 99,
 };
 
-// Quizmo_VarStash
-s32** N(Quizmo_varTable) = NULL;
+#define NAMESPACE dro_01_Quizmo
+s32** N(VarStash) = NULL;
+#define NAMESPACE dro_01
 
 #include "world/common/atomic/QuizmoData.inc.c"
 
@@ -1396,7 +1397,7 @@ N(shopPrice) N(shopPriceList_8024B550)[] = {
 };
 
 #define NAMESPACE dro_01_dup
-s32** N(varTable) = NULL;
+s32** N(VarStash) = NULL;
 #define NAMESPACE dro_01
 
 EvtScript N(8024B5B4) = {

@@ -2,7 +2,7 @@
 
 .section .data
 
-dlabel kmr_10_varTable
+dlabel kmr_10_VarStash
 .word 0x00000000
 
 dlabel D_80240C24_8D90F4

@@ -2,7 +2,7 @@
 
 .section .data
 
-dlabel trd_00_varTable
+dlabel trd_00_VarStash
 .word 0x00000000
 
 dlabel D_80241344_99AFB4

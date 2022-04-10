@@ -466,8 +466,9 @@ static s32 N(pad_4DD4)[] = {
     0x00000000, 0x00000000, 0x00000000,
 };
 
-// Quizmo_VarStash
-s32** N(Quizmo_varTable) = NULL;
+#define NAMESPACE dro_02_Quizmo
+s32** N(VarStash) = NULL;
+#define NAMESPACE dro_02
 
 #include "world/common/atomic/QuizmoData.inc.c"
 

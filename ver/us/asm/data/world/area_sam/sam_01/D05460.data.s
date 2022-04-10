@@ -2,7 +2,7 @@
 
 .section .data
 
-dlabel dup_sam_01_varTable
+dlabel dup_sam_01_VarStash
 .word 0x00000000
 
 dlabel D_8024D8F4_D05464
