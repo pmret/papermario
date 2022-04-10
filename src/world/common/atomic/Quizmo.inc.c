@@ -349,7 +349,7 @@ ApiStatus N(Quizmo_AddViewRelativeOffset)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(Quizmo_UnkRotatePlayer)(Evt* script, s32 isInitialCall) {
+ApiStatus N(Quizmo_SpinPlayer)(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (isInitialCall) {
@@ -366,7 +366,7 @@ ApiStatus N(Quizmo_UnkRotatePlayer)(Evt* script, s32 isInitialCall) {
     return (script->functionTemp[0] >> 0x1F) & ApiStatus_DONE2;
 }
 
-ApiStatus N(Quizmo_UnkRotatePartner)(Evt* script, s32 isInitialCall) {
+ApiStatus N(Quizmo_SpinPartner)(Evt* script, s32 isInitialCall) {
     Npc* partner = get_npc_unsafe(NPC_PARTNER);
 
     if (isInitialCall) {
@@ -383,7 +383,7 @@ ApiStatus N(Quizmo_UnkRotatePartner)(Evt* script, s32 isInitialCall) {
     return (script->functionTemp[0] >> 0x1F) & ApiStatus_DONE2;
 }
 
-ApiStatus N(Quizmo_UnkMovePartner)(Evt* script, s32 isInitialCall) {
+ApiStatus N(Quizmo_UpdatePartnerPosition)(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(NPC_PARTNER);
     f32* x = (f32*) &script->functionTemp[1];
     f32* y = (f32*) &script->functionTemp[2];

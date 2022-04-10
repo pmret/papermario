@@ -485,390 +485,6 @@ EvtScript N(80244E14) = {
 
 #include "world/common/atomic/QuizmoData.inc.c"
 
-EvtScript N(80244F84) = {
-    EVT_CALL(N(Quizmo_GetCamVfov), 0, EVT_ARRAY(0))
-    EVT_CALL(N(SetCamVfov), 0, 25)
-    EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-    EVT_CALL(SetPanTarget, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-    EVT_CALL(UseSettingsFrom, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-    EVT_CALL(GetCamType, 0, EVT_VAR(1), EVT_VAR(2))
-    EVT_CALL(SetCamType, 0, EVT_VAR(1), 0)
-    EVT_CALL(GetCamDistance, 0, EVT_VAR(0))
-    EVT_IF_GT(EVT_VAR(0), 0)
-        EVT_SETF(EVT_VAR(0), 370)
-    EVT_ELSE
-        EVT_SETF(EVT_VAR(0), -370)
-    EVT_END_IF
-    EVT_CALL(SetCamDistance, 0, EVT_VAR(0))
-    EVT_CALL(GetCamPitch, 0, EVT_VAR(0), EVT_VAR(1))
-    EVT_SETF(EVT_VAR(0), EVT_FIXED(13.0))
-    EVT_SETF(EVT_VAR(1), EVT_FIXED(-10.0))
-    EVT_CALL(SetCamPitch, 0, EVT_VAR(0), EVT_VAR(1))
-    EVT_CALL(PanToTarget, 0, 0, 1)
-    EVT_CALL(SetCamLeadPlayer, 0, 0)
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(80245120) = {
-    EVT_CALL(GetNpcPos, 10, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-    EVT_ADD(EVT_VAR(1), 30)
-    EVT_CALL(SetPanTarget, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-    EVT_CALL(GetCamDistance, 0, EVT_VAR(0))
-    EVT_IF_GT(EVT_VAR(0), 0)
-        EVT_SETF(EVT_VAR(0), 17)
-    EVT_ELSE
-        EVT_SETF(EVT_VAR(0), -17)
-    EVT_END_IF
-    EVT_CALL(SetCamDistance, 0, EVT_VAR(0))
-    EVT_CALL(SetCamSpeed, 0, EVT_FIXED(90.0))
-    EVT_CALL(WaitForCam, 0, EVT_FIXED(1.0))
-    EVT_CALL(SetCamSpeed, 0, 1)
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(8024521C) = {
-    EVT_CALL(N(SetCamVfov), 0, EVT_ARRAY(0))
-    EVT_CALL(PanToTarget, 0, 0, 0)
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(80245258) = {
-    EVT_WAIT_FRAMES(20)
-    EVT_CALL(N(Quizmo_AddViewRelativeOffset), EVT_ARRAY(1), EVT_ARRAY(3), 83, EVT_VAR(0), EVT_VAR(1))
-    EVT_THREAD
-        EVT_SETF(EVT_VAR(2), 0)
-        EVT_LOOP(60)
-            EVT_SETF(EVT_VAR(3), EVT_VAR(0))
-            EVT_SETF(EVT_VAR(4), EVT_VAR(1))
-            EVT_MULF(EVT_VAR(3), EVT_VAR(2))
-            EVT_MULF(EVT_VAR(4), EVT_VAR(2))
-            EVT_DIVF(EVT_VAR(3), 60)
-            EVT_DIVF(EVT_VAR(4), 60)
-            EVT_ADDF(EVT_VAR(3), EVT_ARRAY(1))
-            EVT_ADDF(EVT_VAR(4), EVT_ARRAY(3))
-            EVT_CALL(SetPlayerPos, EVT_VAR(3), EVT_ARRAY(2), EVT_VAR(4))
-            EVT_ADDF(EVT_VAR(2), 1)
-            EVT_WAIT_FRAMES(1)
-        EVT_END_LOOP
-        EVT_SETF(EVT_VAR(3), EVT_VAR(0))
-        EVT_SETF(EVT_VAR(4), EVT_VAR(1))
-        EVT_ADDF(EVT_VAR(3), EVT_ARRAY(1))
-        EVT_ADDF(EVT_VAR(4), EVT_ARRAY(3))
-        EVT_CALL(SetPlayerPos, EVT_VAR(3), EVT_ARRAY(2), EVT_VAR(4))
-    EVT_END_THREAD
-    EVT_CALL(N(Quizmo_UnkRotatePlayer))
-    EVT_CALL(func_802D2884, EVT_ARRAY(1), EVT_ARRAY(3), 0)
-    EVT_CALL(SetPlayerAnimation, ANIM_10002)
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(80245408) = {
-    EVT_CALL(GetNpcPos, NPC_PARTNER, EVT_VAR(10), EVT_VAR(11), EVT_VAR(12))
-    EVT_CALL(N(Quizmo_AddViewRelativeOffset), EVT_VAR(10), EVT_VAR(12), 108, EVT_VAR(0), EVT_VAR(1))
-    EVT_SETF(EVT_VAR(5), EVT_ARRAY(2))
-    EVT_SUBF(EVT_VAR(5), EVT_VAR(11))
-    EVT_THREAD
-        EVT_CALL(N(Quizmo_UnkMovePartner))
-        EVT_SETF(EVT_VAR(3), EVT_VAR(0))
-        EVT_SETF(EVT_VAR(4), EVT_VAR(1))
-        EVT_SETF(EVT_VAR(6), EVT_VAR(5))
-        EVT_ADDF(EVT_VAR(3), EVT_VAR(10))
-        EVT_ADDF(EVT_VAR(4), EVT_VAR(12))
-        EVT_ADDF(EVT_VAR(6), EVT_VAR(11))
-        EVT_CALL(SetNpcPos, NPC_PARTNER, EVT_VAR(3), EVT_VAR(6), EVT_VAR(4))
-    EVT_END_THREAD
-    EVT_CALL(N(Quizmo_UnkRotatePartner))
-    EVT_CALL(NpcFacePlayer, NPC_PARTNER, 0)
-    EVT_CALL(SetNpcAnimation, NPC_PARTNER, 0x106)
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(80245540) = {
-    EVT_CALL(GetNpcPos, 10, EVT_VAR(10), EVT_VAR(11), EVT_VAR(12))
-    EVT_CALL(N(Quizmo_AddViewRelativeOffset), EVT_VAR(10), EVT_VAR(12), -70, EVT_VAR(0), EVT_VAR(1))
-    EVT_THREAD
-        EVT_SETF(EVT_VAR(2), 0)
-        EVT_LOOP(60)
-            EVT_SETF(EVT_VAR(3), EVT_VAR(0))
-            EVT_SETF(EVT_VAR(4), EVT_VAR(1))
-            EVT_MULF(EVT_VAR(3), EVT_VAR(2))
-            EVT_MULF(EVT_VAR(4), EVT_VAR(2))
-            EVT_DIVF(EVT_VAR(3), 60)
-            EVT_DIVF(EVT_VAR(4), 60)
-            EVT_ADDF(EVT_VAR(3), EVT_VAR(10))
-            EVT_ADDF(EVT_VAR(4), EVT_VAR(12))
-            EVT_CALL(SetNpcPos, 10, EVT_VAR(3), EVT_ARRAY(2), EVT_VAR(4))
-            EVT_ADDF(EVT_VAR(2), 1)
-            EVT_WAIT_FRAMES(1)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_WAIT_FRAMES(60)
-    EVT_CALL(NpcFacePlayer, 10, 0)
-    EVT_CALL(SetNpcAnimation, 10, NPC_ANIM_chuck_quizmo_Palette_00_Anim_1)
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(802456AC) = {
-    EVT_EXEC(N(80245258))
-    EVT_EXEC(N(80245408))
-    EVT_EXEC_WAIT(N(80245540))
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(802456E0) = {
-    EVT_LOOP(0)
-        EVT_CALL(SetPlayerAnimation, ANIM_QUESTION)
-        EVT_WAIT_FRAMES(20)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(80245720) = {
-    EVT_CALL(SetPlayerAnimation, ANIM_THROW)
-    EVT_WAIT_FRAMES(15)
-    EVT_CALL(SetPlayerAnimation, ANIM_10002)
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(8024575C) = {
-    EVT_LOOP(0)
-        EVT_CALL(SetPlayerAnimation, ANIM_10002)
-        EVT_WAIT_FRAMES(1)
-        EVT_CALL(SetPlayerAnimation, ANIM_BEFORE_JUMP)
-        EVT_WAIT_FRAMES(2)
-        EVT_CALL(SetPlayerAnimation, ANIM_MIDAIR_STILL)
-        EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_ADD(EVT_VAR(1), 3)
-        EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_WAIT_FRAMES(1)
-        EVT_ADD(EVT_VAR(1), 2)
-        EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_WAIT_FRAMES(1)
-        EVT_ADD(EVT_VAR(1), 1)
-        EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_WAIT_FRAMES(1)
-        EVT_ADD(EVT_VAR(1), 1)
-        EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_WAIT_FRAMES(1)
-        EVT_ADD(EVT_VAR(1), 0)
-        EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_WAIT_FRAMES(1)
-        EVT_ADD(EVT_VAR(1), 0)
-        EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_WAIT_FRAMES(1)
-        EVT_ADD(EVT_VAR(1), 0)
-        EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_WAIT_FRAMES(1)
-        EVT_ADD(EVT_VAR(1), 0)
-        EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_WAIT_FRAMES(1)
-        EVT_CALL(SetPlayerAnimation, ANIM_MIDAIR)
-        EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_ADD(EVT_VAR(1), 0)
-        EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_WAIT_FRAMES(1)
-        EVT_ADD(EVT_VAR(1), 0)
-        EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_WAIT_FRAMES(1)
-        EVT_ADD(EVT_VAR(1), 0)
-        EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_WAIT_FRAMES(1)
-        EVT_ADD(EVT_VAR(1), -1)
-        EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_WAIT_FRAMES(1)
-        EVT_ADD(EVT_VAR(1), -1)
-        EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_WAIT_FRAMES(1)
-        EVT_ADD(EVT_VAR(1), -2)
-        EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_WAIT_FRAMES(1)
-        EVT_ADD(EVT_VAR(1), -3)
-        EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_WAIT_FRAMES(1)
-        EVT_CALL(SetPlayerAnimation, ANIM_10009)
-        EVT_WAIT_FRAMES(2)
-        EVT_WAIT_FRAMES(1)
-        EVT_CALL(SetPlayerAnimation, ANIM_BEFORE_JUMP)
-        EVT_WAIT_FRAMES(2)
-        EVT_CALL(SetPlayerAnimation, ANIM_MIDAIR_STILL)
-        EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_ADD(EVT_VAR(1), 3)
-        EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_WAIT_FRAMES(1)
-        EVT_ADD(EVT_VAR(1), 2)
-        EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_WAIT_FRAMES(1)
-        EVT_ADD(EVT_VAR(1), 1)
-        EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_WAIT_FRAMES(1)
-        EVT_ADD(EVT_VAR(1), 1)
-        EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_WAIT_FRAMES(1)
-        EVT_ADD(EVT_VAR(1), 0)
-        EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_WAIT_FRAMES(1)
-        EVT_ADD(EVT_VAR(1), 0)
-        EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_WAIT_FRAMES(1)
-        EVT_ADD(EVT_VAR(1), 0)
-        EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_WAIT_FRAMES(1)
-        EVT_ADD(EVT_VAR(1), 0)
-        EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_WAIT_FRAMES(1)
-        EVT_CALL(SetPlayerAnimation, ANIM_MIDAIR)
-        EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_ADD(EVT_VAR(1), 0)
-        EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_WAIT_FRAMES(1)
-        EVT_ADD(EVT_VAR(1), 0)
-        EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_WAIT_FRAMES(1)
-        EVT_ADD(EVT_VAR(1), 0)
-        EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_WAIT_FRAMES(1)
-        EVT_ADD(EVT_VAR(1), -1)
-        EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_WAIT_FRAMES(1)
-        EVT_ADD(EVT_VAR(1), -1)
-        EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_WAIT_FRAMES(1)
-        EVT_ADD(EVT_VAR(1), -2)
-        EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_WAIT_FRAMES(1)
-        EVT_ADD(EVT_VAR(1), -3)
-        EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_WAIT_FRAMES(1)
-        EVT_CALL(SetPlayerAnimation, ANIM_10009)
-        EVT_WAIT_FRAMES(2)
-        EVT_WAIT_FRAMES(1)
-        EVT_CALL(SetPlayerAnimation, ANIM_BEFORE_JUMP)
-        EVT_WAIT_FRAMES(2)
-        EVT_CALL(SetPlayerAnimation, ANIM_MIDAIR_STILL)
-        EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_ADD(EVT_VAR(1), 3)
-        EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_WAIT_FRAMES(1)
-        EVT_ADD(EVT_VAR(1), 2)
-        EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_WAIT_FRAMES(1)
-        EVT_ADD(EVT_VAR(1), 1)
-        EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_WAIT_FRAMES(1)
-        EVT_ADD(EVT_VAR(1), 1)
-        EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_WAIT_FRAMES(1)
-        EVT_ADD(EVT_VAR(1), 0)
-        EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_WAIT_FRAMES(1)
-        EVT_ADD(EVT_VAR(1), 0)
-        EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_WAIT_FRAMES(1)
-        EVT_ADD(EVT_VAR(1), 0)
-        EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_WAIT_FRAMES(1)
-        EVT_ADD(EVT_VAR(1), 0)
-        EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_WAIT_FRAMES(1)
-        EVT_CALL(SetPlayerAnimation, ANIM_MIDAIR)
-        EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_ADD(EVT_VAR(1), 0)
-        EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_WAIT_FRAMES(1)
-        EVT_ADD(EVT_VAR(1), 0)
-        EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_WAIT_FRAMES(1)
-        EVT_ADD(EVT_VAR(1), 0)
-        EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_WAIT_FRAMES(1)
-        EVT_ADD(EVT_VAR(1), -1)
-        EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_WAIT_FRAMES(1)
-        EVT_ADD(EVT_VAR(1), -1)
-        EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_WAIT_FRAMES(1)
-        EVT_ADD(EVT_VAR(1), -2)
-        EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_WAIT_FRAMES(1)
-        EVT_ADD(EVT_VAR(1), -3)
-        EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_WAIT_FRAMES(1)
-        EVT_CALL(SetPlayerAnimation, ANIM_10009)
-        EVT_WAIT_FRAMES(2)
-    EVT_END_LOOP
-    EVT_CALL(SetPlayerAnimation, ANIM_10002)
-    EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_ARRAY(2), EVT_VAR(2))
-    EVT_WAIT_FRAMES(1)
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(802462A4) = {
-    EVT_CALL(SetPlayerAnimation, ANIM_SHOCK_STILL)
-    EVT_LOOP(0)
-        EVT_WAIT_FRAMES(1)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(802462E4) = {
-    EVT_THREAD
-        EVT_CALL(N(Quizmo_AddViewRelativeOffset), EVT_ARRAY(1), EVT_ARRAY(3), 25, EVT_VAR(0), EVT_VAR(1))
-        EVT_SETF(EVT_VAR(2), EVT_ARRAY(1))
-        EVT_ADDF(EVT_VAR(2), EVT_VAR(0))
-        EVT_SETF(EVT_VAR(3), EVT_ARRAY(3))
-        EVT_ADDF(EVT_VAR(3), EVT_VAR(1))
-        EVT_CALL(SetNpcAnimation, NPC_PARTNER, 0x102)
-        EVT_CALL(NpcMoveTo, NPC_PARTNER, EVT_VAR(2), EVT_VAR(3), 40)
-        EVT_CALL(SetNpcAnimation, NPC_PARTNER, 0x106)
-    EVT_END_THREAD
-    EVT_CALL(PlayerMoveTo, EVT_ARRAY(1), EVT_ARRAY(3), 40)
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(802463C0) = {
-    EVT_EXEC_GET_TID(N(8024575C), EVT_VAR(1))
-    EVT_WAIT_FRAMES(60)
-    EVT_KILL_THREAD(EVT_VAR(1))
-    EVT_LOOP(5)
-        EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_ADD(EVT_VAR(1), -1)
-        EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_WAIT_FRAMES(2)
-    EVT_END_LOOP
-    EVT_WAIT_FRAMES(20)
-    EVT_EXEC_WAIT(N(802462E4))
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(80246470) = {
-    EVT_EXEC_GET_TID(N(802462A4), EVT_VAR(1))
-    EVT_WAIT_FRAMES(60)
-    EVT_LOOP(5)
-        EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_ADD(EVT_VAR(1), -1)
-        EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_WAIT_FRAMES(2)
-    EVT_END_LOOP
-    EVT_WAIT_FRAMES(20)
-    EVT_KILL_THREAD(EVT_VAR(1))
-    EVT_EXEC_WAIT(N(802462E4))
-    EVT_RETURN
-    EVT_END
-};
-
 EvtScript N(80246520) = {
     EVT_IF_GT(EVT_SAVE_VAR(352), 63)
         EVT_SET(EVT_VAR(0), 0)
@@ -896,14 +512,14 @@ EvtScript N(80246520) = {
     EVT_SET(EVT_SAVE_FLAG(1793), 1)
     EVT_CALL(N(Quizmo_HideEntities))
     EVT_CALL(N(Quizmo_HideWorld))
-    EVT_EXEC(N(80244F84))
+    EVT_EXEC(N(EVS_Quizmo_SetQuizCamera))
     EVT_CALL(DisablePartnerAI, 0)
     EVT_CALL(SetNpcFlagBits, NPC_PARTNER, ((NPC_FLAG_GRAVITY)), FALSE)
     EVT_CALL(SetNpcFlagBits, 10, ((NPC_FLAG_GRAVITY)), FALSE)
     EVT_CALL(SetNpcFlagBits, NPC_PARTNER, ((NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_100)), TRUE)
     EVT_CALL(SetNpcFlagBits, 10, ((NPC_FLAG_100)), TRUE)
     EVT_CALL(SetNpcAnimation, NPC_PARTNER, 0x106)
-    EVT_EXEC_GET_TID(N(802456AC), EVT_VAR(1))
+    EVT_EXEC_GET_TID(N(EVS_Quizmo_SetCharacterPositons), EVT_VAR(1))
     EVT_CALL(ContinueSpeech, -1, NPC_ANIM_chuck_quizmo_Palette_00_Anim_4, NPC_ANIM_chuck_quizmo_Palette_00_Anim_1, 0, MESSAGE_ID(0x08, 0x000B))
     EVT_CALL(PlaySound, 0x89)
     EVT_LOOP(0)
@@ -930,7 +546,7 @@ EvtScript N(80246520) = {
     EVT_CALL(ShowChoice, EVT_VAR(0))
     EVT_KILL_THREAD(EVT_VAR(1))
     EVT_CALL(StopSound, 142)
-    EVT_EXEC(N(80245720))
+    EVT_EXEC(N(EVS_Quizmo_PlayerHitBuzzer))
     EVT_WAIT_FRAMES(15)
     EVT_CALL(PlaySound, 0x8D)
     EVT_CALL(N(Quizmo_UnkE), EVT_VAR(0))
@@ -984,7 +600,7 @@ EvtScript N(80246520) = {
             EVT_WAIT_FRAMES(15)
         EVT_END_THREAD
         EVT_WAIT_FRAMES(20)
-        EVT_EXEC_GET_TID(N(802463C0), EVT_VAR(1))
+        EVT_EXEC_GET_TID(N(EVS_Quizmo_RightAnswer), EVT_VAR(1))
         EVT_ADD(EVT_SAVE_VAR(352), 1)
         EVT_IF_GT(EVT_SAVE_VAR(352), 63)
             EVT_CALL(ContinueSpeech, -1, -1, -1, 0, MESSAGE_ID(0x08, 0x0010))
@@ -1036,7 +652,7 @@ EvtScript N(80246520) = {
         EVT_SET(EVT_ARRAY(4), 2)
         EVT_CALL(PlaySound, SOUND_MENU_ERROR)
         EVT_CALL(PlaySound, 0x8B)
-        EVT_EXEC_GET_TID(N(80246470), EVT_VAR(1))
+        EVT_EXEC_GET_TID(N(EVS_Quizmo_WrongAnswer), EVT_VAR(1))
         EVT_CALL(GetPlayerPos, EVT_VAR(2), EVT_VAR(3), EVT_VAR(4))
         EVT_CALL(PlayEffect, 0x2B, 0, EVT_VAR(2), EVT_VAR(3), EVT_VAR(4), 0, 0, 0, 0, 0, 0, 0, 0, 0)
         EVT_CALL(ContinueSpeech, -1, -1, -1, 0, MESSAGE_ID(0x08, 0x000D))
@@ -1063,7 +679,7 @@ EvtScript N(80246520) = {
     EVT_CALL(N(Quizmo_SetVannaAnim_Wave))
     EVT_CALL(N(Quizmo_DestroyEffects))
     EVT_EXEC_WAIT(N(EVS_Quizmo_Exit))
-    EVT_EXEC(N(8024521C))
+    EVT_EXEC(N(EVS_Quizmo_ResetCamera))
     EVT_CALL(N(Quizmo_FadeInWorld))
     EVT_CALL(N(Quizmo_ShowEntities))
     EVT_SET(EVT_SAVE_FLAG(1793), 0)
