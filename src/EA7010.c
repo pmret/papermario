@@ -3,5 +3,5 @@
 
 #define NAMESPACE EA7010
 
-#include "world/common/UpdateTexturePan.inc.c"
+#include "world/common/atomic/TexturePan.inc.c"
 

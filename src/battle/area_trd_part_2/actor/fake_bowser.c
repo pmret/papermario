@@ -31,9 +31,7 @@ BSS s32 D_80235FC0[31];
 
 #include "common/StartRumbleWithParams.inc.c"
 
-#include "world/common/UnkFunc27.inc.c"
-
-#include "world/common/UnkFunc26.inc.c"
+#include "world/common/atomic/UnkFunc27.inc.c"
 
 s32 N(defenseTable_8021A670)[] = {
     ELEMENT_NORMAL, 1,

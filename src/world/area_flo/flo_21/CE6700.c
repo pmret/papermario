@@ -1383,7 +1383,7 @@ NpcGroupList N(npcGroupList_80245AEC) = {
     {},
 };
 
-#include "world/common/UpdateTexturePan.inc.c"
+#include "world/common/atomic/TexturePan.inc.c"
 
 EffectInstance* fx_sun();
 

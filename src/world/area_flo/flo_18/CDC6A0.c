@@ -1732,7 +1732,7 @@ static s32 N(pad_66B4)[] = {
     0x00000000, 0x00000000, 0x00000000,
 };
 
-#include "world/common/UpdateTexturePan.inc.c"
+#include "world/common/atomic/TexturePan.inc.c"
 
 // It seems like fx_sun was not properly defined for this file. Having a proper
 // declaration makes it not match.

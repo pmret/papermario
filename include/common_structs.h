@@ -1539,13 +1539,14 @@ typedef struct PartnerAnimations {
     /* 0x00 */ s32 anims[9];
 } PartnerAnimations; // size = 0x24
 
+typedef void (*PushBlockFallCallback)(s32 gridSystemID, s32 index);
 typedef struct PushBlockGrid {
-    /* 0x00 */ s8* cells;
+    /* 0x00 */ u8* cells;
     /* 0x04 */ u8 numCellsX;
     /* 0x05 */ u8 numCellsZ;
     /* 0x06 */ char unk_06[2];
     /* 0x08 */ s32 centerPos[3];
-    /* 0x14 */ UNK_FUN_PTR(dropCallback);
+    /* 0x14 */ PushBlockFallCallback(dropCallback);
     /* 0x18 */ char unk_18[4];
 } PushBlockGrid; // size = 0x1C
 

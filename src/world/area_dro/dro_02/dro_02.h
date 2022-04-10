@@ -6,13 +6,13 @@
 
 #define NAMESPACE dro_02
 
-ApiStatus N(Call800E9894)(Evt* script, s32 isInitialCall);
-ApiStatus N(Call800E98C4SyncStatusMenu)(Evt* script, s32 isInitialCall);
-ApiStatus N(Call800EB168)(Evt* script, s32 isInitialCall);
+ApiStatus N(ToadHouse_DisableStatusMenu)(Evt* script, s32 isInitialCall);
+ApiStatus N(ToadHouse_ShowStatusMenu)(Evt* script, s32 isInitialCall);
+ApiStatus N(ToadHouse_GetPartnerBackOut)(Evt* script, s32 isInitialCall);
 ApiStatus N(GetCamVfov)(Evt* script, s32 isInitialCall);
 ApiStatus N(GetGameStatus75)(Evt* script, s32 isInitialCall);
 ApiStatus N(GetNpcUnsafeOwner2)(Evt* script, s32 isInitialCall);
-ApiStatus N(GetPartnerCall800EB168)(Evt* script, s32 isInitialCall);
+ApiStatus N(ToadHouse_PutPartnerAway)(Evt* script, s32 isInitialCall);
 ApiStatus N(Set80151310_0)(Evt* script, s32 isInitialCall);
 ApiStatus N(Set80151310_1)(Evt* script, s32 isInitialCall);
 ApiStatus N(SetCamVfov)(Evt* script, s32 isInitialCall);
@@ -49,10 +49,10 @@ ApiStatus N(func_802432C0_96C480)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_80243314_96C4D4)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_8024334C_96C50C)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_802433E8_96C5A8)(Evt* script, s32 isInitialCall);
-ApiStatus N(UnkFunc32)(Evt* script, s32 isInitialCall);
-ApiStatus N(CamSetFOV)(Evt* script, s32 isInitialCall);
-ApiStatus N(DoesPlayerNeedSleep)(Evt* script, s32 isInitialCall);
-ApiStatus N(UnkFunc35)(Evt* script, s32 isInitialCall);
+ApiStatus N(ToadHouse_UpdateScreenOverlay)(Evt* script, s32 isInitialCall);
+ApiStatus N(ToadHouse_CamSetFOV)(Evt* script, s32 isInitialCall);
+ApiStatus N(ToadHouse_DoesPlayerNeedSleep)(Evt* script, s32 isInitialCall);
+ApiStatus N(ToadHouse_InitScreenOverlay)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_802439FC_96CBBC)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_80243A40_96CC00)(Evt* script, s32 isInitialCall);
 void N(func_8024240C_96B5CC)(Evt *script, s32 isInitialCall);

@@ -1698,6 +1698,13 @@ enum EntityCollisionFlags {
     ENTITY_COLLISION_PLAYER_LAST_FLOOR                      = 0x00000100
 };
 
+typedef enum PushGridOccupant {
+    PUSH_GRID_EMPTY         = 0,
+    PUSH_GRID_BLOCK         = 1,
+    PUSH_GRID_OBSTRUCTION   = 2,
+    PUSH_GRID_OUT_OF_BOUNDS = 3
+} PushGridOccupant;
+
 enum TriggerFlags {
     TRIGGER_ACTIVE              = 0x00000001,
     TRIGGER_ACTIVATED           = 0x00000002,

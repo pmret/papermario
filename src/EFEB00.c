@@ -5,7 +5,7 @@
 
 #define NAMESPACE EFEB00
 
-#include "world/common/UpdateTexturePan.inc.c"
+#include "world/common/atomic/TexturePan.inc.c"
 
 #include "world/common/DeadUnkFunc1.inc.c"
 
