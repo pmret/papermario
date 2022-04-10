@@ -58,7 +58,7 @@ EvtScript N(EVS_Quizmo_Exit) = {
 
 EvtScript N(EVS_Quizmo_SetQuizCamera) = {
     EVT_CALL(N(Quizmo_GetCamVfov), 0, EVT_ARRAY(0))
-    EVT_CALL(N(SetCamVfov), 0, 25) //TODO
+    EVT_CALL(N(Quizmo_SetCamVfov), 0, 25) //TODO
     EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_CALL(SetPanTarget, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_CALL(UseSettingsFrom, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
@@ -100,7 +100,7 @@ EvtScript N(EVS_Quizmo_OtherCamScript) = {
 };
 
 EvtScript N(EVS_Quizmo_ResetCamera) = {
-    EVT_CALL(N(SetCamVfov), 0, EVT_ARRAY(0))
+    EVT_CALL(N(Quizmo_SetCamVfov), 0, EVT_ARRAY(0))
     EVT_CALL(PanToTarget, 0, 0, 0)
     EVT_RETURN
     EVT_END
@@ -518,11 +518,11 @@ EvtScript N(EVS_Quizmo_QuizMain) = {
         EVT_CALL(SetNpcAnimation, CHUCK_QUIZMO_NPC_ID, NPC_ANIM_chuck_quizmo_Palette_00_Anim_7)
         EVT_SET(EVT_ARRAY(4), 1)
         EVT_THREAD
-            EVT_CALL(N(Quizmo_SetStageLightsMode), 1)
+            EVT_CALL(N(Quizmo_SetStageLightsDelay), 1)
             EVT_WAIT_FRAMES(6)
             EVT_WAIT_FRAMES(6)
             EVT_WAIT_FRAMES(6)
-            EVT_CALL(N(Quizmo_SetStageLightsMode), 2)
+            EVT_CALL(N(Quizmo_SetStageLightsDelay), 2)
         EVT_END_THREAD
         EVT_THREAD
             EVT_CALL(PlaySound, SOUND_21C)
@@ -572,7 +572,7 @@ EvtScript N(EVS_Quizmo_QuizMain) = {
             EVT_SET(EVT_VAR(1), 3)
             EVT_EXEC_WAIT(N(EVS_Quizmo_GiveItem_0))
             EVT_CALL(AddStarPieces, 1)
-            EVT_CALL(N(Quizmo_SetStageLightsMode), 15)
+            EVT_CALL(N(Quizmo_SetStageLightsDelay), 15)
             EVT_CALL(N(Quizmo_SetVannaAnim_Idle))
             EVT_CALL(SetMessageValue, EVT_SAVE_VAR(352), 0)
             EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_chuck_quizmo_Palette_00_Anim_4, NPC_ANIM_chuck_quizmo_Palette_00_Anim_1, 0, MESSAGE_ID(0x08, 0x0011))
@@ -591,7 +591,7 @@ EvtScript N(EVS_Quizmo_QuizMain) = {
             EVT_SET(EVT_VAR(1), 1)
             EVT_EXEC_WAIT(N(EVS_Quizmo_GiveItem_0))
             EVT_CALL(AddStarPieces, 1)
-            EVT_CALL(N(Quizmo_SetStageLightsMode), 15)
+            EVT_CALL(N(Quizmo_SetStageLightsDelay), 15)
             EVT_CALL(N(Quizmo_SetVannaAnim_Idle))
             EVT_CALL(SetMessageValue, EVT_SAVE_VAR(352), 0)
             EVT_IF_EQ(EVT_SAVE_VAR(352), 1)
