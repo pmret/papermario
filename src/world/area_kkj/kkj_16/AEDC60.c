@@ -1,6 +1,8 @@
 #include "kkj_16.h"
 
-INCLUDE_ASM(s32, "world/area_kkj/kkj_16/AEDC60", func_80240850_AEDC60);
+#define NAMESPACE dup_kkj_16
+#include "world/common/UnkPhysicsFunc.inc.c"
+#define NAMESPACE kkj_16
 
 INCLUDE_ASM(s32, "world/area_kkj/kkj_16/AEDC60", func_80240A60_AEDE70);
 
