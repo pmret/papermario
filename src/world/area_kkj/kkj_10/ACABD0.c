@@ -2,6 +2,6 @@
 
 #include "world/common/atomic/UnkPhysicsFuncs.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kkj/kkj_10/ACABD0", func_80240728_ACB248);
+#include "world/common/UnkGooberFunc.inc.c"
 
 const char* kkj_10_str = "kkj_14";

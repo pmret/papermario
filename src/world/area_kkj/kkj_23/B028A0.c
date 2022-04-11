@@ -12,6 +12,6 @@ INCLUDE_ASM(s32, "world/area_kkj/kkj_23/B028A0", func_80240758_B02FD8);
 
 INCLUDE_ASM(s32, "world/area_kkj/kkj_23/B028A0", func_80240784_B03004);
 
-INCLUDE_ASM(s32, "world/area_kkj/kkj_23/B028A0", func_802407A0_B03020);
+#include "world/common/UnkGooberFunc50.inc.c"
 
 const char* kkj_23_str = "kkj_14";

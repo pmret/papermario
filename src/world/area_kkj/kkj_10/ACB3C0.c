@@ -8,6 +8,6 @@ INCLUDE_ASM(s32, "world/area_kkj/kkj_10/ACB3C0", func_80240F18_ACBA38);
 
 INCLUDE_ASM(s32, "world/area_kkj/kkj_10/ACB3C0", func_80240F44_ACBA64);
 
-INCLUDE_ASM(s32, "world/area_kkj/kkj_10/ACB3C0", func_80240F60_ACBA80);
+#include "world/common/UnkGooberFunc.inc.c"
 
 const char* kkj_10_str2 = "kkj_14";
