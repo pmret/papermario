@@ -1,10 +1,8 @@
 #include "kkj_11.h"
 
 #define NAMESPACE dup_kkj_11
-#include "world/common/UnkPhysicsFunc.inc.c"
+#include "world/common/atomic/UnkPhysicsFuncs.inc.c"
 #define NAMESPACE kkj_11
-
-INCLUDE_ASM(s32, "world/area_kkj/kkj_11/ACE9E0", func_80240AB0_ACEBF0);
 
 INCLUDE_ASM(s32, "world/area_kkj/kkj_11/ACE9E0", func_80240B5C_ACEC9C);
 

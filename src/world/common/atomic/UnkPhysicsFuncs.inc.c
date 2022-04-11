@@ -1,5 +1,6 @@
 #include "common.h"
 #include "npc.h"
+#include "model.h"
 
 ApiStatus N(UnkPhysicsFunc)(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -52,4 +53,14 @@ ApiStatus N(UnkPhysicsFunc)(Evt* script, s32 isInitialCall) {
     }
     evt_set_variable(script, outVar, outVal);
     return ApiStatus_DONE2;
+}
+
+void N(UnkModelMatrixFunc)(s32 treeIndex, f32 x, f32 y, f32 z, f32 scale) {
+    Matrix4f sp10;
+    Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(treeIndex));
+
+    guTranslateF(model->transformMatrix, x, y, z);
+    guScaleF(sp10, scale, 1.0f, scale);
+    guMtxCatF(sp10, model->transformMatrix, model->transformMatrix);
+    model->flags |= MODEL_FLAGS_USES_TRANSFORM_MATRIX | MODEL_FLAGS_HAS_TRANSFORM_APPLIED;
 }

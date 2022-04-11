@@ -6,9 +6,7 @@ INCLUDE_ASM(s32, "world/area_kkj/kkj_23/B028A0", func_80240048_B028C8);
 
 INCLUDE_ASM(s32, "world/area_kkj/kkj_23/B028A0", func_80240080_B02900);
 
-#include "world/common/UnkPhysicsFunc.inc.c"
-
-INCLUDE_ASM(s32, "world/area_kkj/kkj_23/B028A0", func_802402F0_B02B70);
+#include "world/common/atomic/UnkPhysicsFuncs.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kkj/kkj_23/B028A0", func_8024039C_B02C1C);
 

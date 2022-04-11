@@ -1,8 +1,6 @@
 #include "kkj_12.h"
 
-#include "world/common/UnkPhysicsFunc.inc.c"
-
-INCLUDE_ASM(s32, "world/area_kkj/kkj_12/AD4100", func_80240280_AD4310);
+#include "world/common/atomic/UnkPhysicsFuncs.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kkj/kkj_12/AD4100", func_8024032C_AD43BC);
 
