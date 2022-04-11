@@ -1406,26 +1406,19 @@ s32 get_player_back_anim(s32 arg0) {
         } else if (animByte == 6) {
             if (arg0 == 0x6000C) {
                 ret = 0x6000D;
-            }
-            else if (arg0 == 0x6000E) {
+            } else if (arg0 == 0x6000E) {
                 ret = 0x6000F;
-            }
-            else if (arg0 == 0x60010) {
+            } else if (arg0 == 0x60010) {
                 ret = 0x60011;
-            }
-            else if (arg0 == 0x60012) {
+            } else if (arg0 == 0x60012) {
                 ret = 0x60013;
-            }
-            else if (arg0 == 0x60014) {
+            } else if (arg0 == 0x60014) {
                 ret = 0x60015;
-            }
-            else if (arg0 == 0x60016) {
+            } else if (arg0 == 0x60016) {
                 ret = 0x60017;
-            }
-            else if (arg0 == 0x60018) {
+            } else if (arg0 == 0x60018) {
                 ret = 0x60019;
-            }
-            else if (arg0 == 0x6001A) {
+            } else if (arg0 == 0x6001A) {
                 ret = 0x6001B;
             }
         } else if (animByte == 10) {
@@ -1433,10 +1426,8 @@ s32 get_player_back_anim(s32 arg0) {
                 ret = arg0 + 1;
             }
         }
-    } else {
-        if (arg0 > 0x1000C) {
-            return arg0;
-        }
+    } else if (arg0 > 0x1000C) {
+        return arg0;
     }
 
     if (ret != 0) {

@@ -92,16 +92,21 @@ s32 collision_main_above(void) {
     collisionStatus->currentCeiling = hitResult;
 
     if (hitResult >= 0) {
-        if (playerStatus->actionState != 8 && playerStatus->actionState != 9 && collisionStatus->currentFloor < 0) {
+        if (playerStatus->actionState != ACTION_STATE_FALLING &&
+            playerStatus->actionState != ACTION_STATE_STEP_DOWN &&
+            collisionStatus->currentFloor < 0)
+        {
             if (sp2C <= fabsf(new_var + playerStatus->gravityIntegrator[0])) {
                 do {
-                    if ((hitResult & 0x4000) && get_entity_type(hitResult) == 0xD) {
+                    if ((hitResult & 0x4000) && get_entity_type(hitResult) == ENTITY_TYPE_BRICK_BLOCK) {
                         return hitResult;
                     }
                 } while (0);
 
                 playerStatus->position.y = y - ((playerStatus->colliderHeight / 5.0f) * 3.0f);
-                if (playerStatus->actionState != 0xF && playerStatus->actionState != 0xD) {
+                if (playerStatus->actionState != ACTION_STATE_ULTRA_JUMP &&
+                    playerStatus->actionState != ACTION_STATE_SPIN_JUMP)
+                    {
                     playerStatus->gravityIntegrator[0] = 0.0f;
                     playerStatus->gravityIntegrator[1] = 0.0f;
                     playerStatus->gravityIntegrator[2] = 0.0f;
@@ -114,7 +119,6 @@ s32 collision_main_above(void) {
     return hitResult;
 }
 
-//INCLUDE_ASM(s32, "7bb60_len_41b0", func_800E29C8);
 void func_800E29C8(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 colliderID;
@@ -272,19 +276,19 @@ void phys_init_integrator_for_current_state(void) {
     f32* temp_a0;
 
     switch (playerStatus->actionState) {
-        case 7:
+        case ACTION_STATE_LANDING_ON_SWITCH:
             playerStatus->gravityIntegrator[0] = 10.0f;
             playerStatus->gravityIntegrator[1] = -5.0f;
             playerStatus->gravityIntegrator[2] = 1.5f;
             playerStatus->gravityIntegrator[3] = -0.3f;
             break;
-        case 3:
-        case 13:
-        case 14:
-        case 15:
-        case 16:
-        case 21:
-        case 23:
+        case ACTION_STATE_JUMP:
+        case ACTION_STATE_SPIN_JUMP:
+        case ACTION_STATE_GROUND_POUND:
+        case ACTION_STATE_ULTRA_JUMP:
+        case ACTION_STATE_ULTRA_POUND:
+        case ACTION_STATE_HIT_FIRE:
+        case ACTION_STATE_HIT_LAVA:
             temp_a0 = GravityParamsStartJump;
             if (!(playerStatus->flags & PLAYER_STATUS_FLAGS_40000)) {
                 playerStatus->gravityIntegrator[0] = *temp_a0++;

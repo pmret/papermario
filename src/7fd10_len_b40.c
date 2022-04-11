@@ -3,7 +3,7 @@
 #include "hud_element.h"
 #include "pause/pause_common.h"
 
-extern s32 D_8008EEC0[];
+extern s32 D_8008EEC0[12];
 extern s32 D_8008EEF0[];
 extern s16 D_8010C9C0;
 extern PopupMenu D_8010C9C8;
@@ -118,7 +118,7 @@ s32 setup_partner_popup(PopupMenu* menu) {
     s32 i;
 
     ret = 0;
-    for (i = 1; i < 12; i++) {
+    for (i = 1; i < ARRAY_COUNT(D_8008EEC0); i++) {
         temp_a1 = D_8008EEC0[i];
         if (playerData->partners[temp_a1].enabled && temp_a1 != 5) {
             s32* properties = gPartnerPopupProperties[temp_a1];
@@ -144,7 +144,7 @@ s32 setup_item_popup(PopupMenu* menu) {
     s32 ret = 0;
     s32 i;
 
-    for (i = 0; i < 10; i++) {
+    for (i = 0; i < ARRAY_COUNT(playerData->invItems); i++) {
         s32 itemIdx = playerData->invItems[i];
 
         if (itemIdx != 0) {

@@ -400,7 +400,7 @@ void update_locomotion_state(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (!is_ability_active(ABILITY_SLOW_GO) &&
-        SQ(playerStatus->stickAxis[0]) + SQ(playerStatus->stickAxis[1]) >= 0xBD2)
+        SQ(playerStatus->stickAxis[0]) + SQ(playerStatus->stickAxis[1]) > SQ(55))
     {
         set_action_state(ACTION_STATE_RUN);
     } else {
