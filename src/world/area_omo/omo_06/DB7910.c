@@ -25,5 +25,5 @@ static char* N(exit_str_7) = "";
 
 #include "common/IsAOrBPressed.inc.c"
 
-#include "world/common/UpdateTexturePan.inc.c"
+#include "world/common/atomic/TexturePan.inc.c"
 

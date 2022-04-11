@@ -1,6 +1,6 @@
 #include "pra_35.h"
 
-#include "world/common/reflection.inc.c"
+#include "world/common/atomic/Reflection.inc.c"
 
 #include "world/common/UnkNpcAIFunc24.inc.c"
 

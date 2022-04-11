@@ -5,7 +5,7 @@
 
 #define NAMESPACE EC71B0
 
-#include "world/common/UpdateTexturePan.inc.c"
+#include "world/common/atomic/TexturePan.inc.c"
 
 #include "world/common/SpawnSunEffect.inc.c"
 

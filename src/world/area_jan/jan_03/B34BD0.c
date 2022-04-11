@@ -7,19 +7,9 @@ static char* N(exit_str_3) = "";
 
 #define UNK_ALPHA_FUNC_NPC 17
 
-#include "world/common/SetPlayerStatusAnimFlags100000.inc.c"
+#include "world/common/atomic/Pipe.inc.c"
 
-#include "world/common/GetCurrentFloor.inc.c"
-
-#include "world/common/UnkFunc25.inc.c"
-
-#include "world/common/GetEntryPos.inc.c"
-
-#include "world/common/GetCurrentCameraYawClamped180.inc.c"
-
-#include "world/common/SomeXYZFunc2.inc.c"
-
-#include "world/common/UpdateTexturePan.inc.c"
+#include "world/common/atomic/TexturePan.inc.c"
 
 INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_802405EC_B351BC);
 
@@ -49,25 +39,7 @@ INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_802405EC_B351BC);
 
 static char* N(exit_str_4) = "tik_08";
 
-#include "world/common/Call800E9894.inc.c"
-
-#include "world/common/Call800E98C4SyncStatusMenu.inc.c"
-
-#include "world/common/UnkFunc32.inc.c"
-
-#include "world/common/CamSetFOV.inc.c"
-
-#include "world/common/AwaitScriptComplete.inc.c"
-
-#include "world/common/PartnerToggleAbilityScript.inc.c"
-
-#include "world/common/DoesPlayerNeedSleep.inc.c"
-
-#include "world/common/UnkFunc35.inc.c"
-
-#include "world/common/GetPartnerCall800EB168.inc.c"
-
-#include "world/common/UnkFunc36.inc.c"
+#include "world/common/atomic/ToadHouse.inc.c"
 
 #include "world/common/GetNpcCollisionHeight.inc.c"
 
@@ -81,7 +53,7 @@ INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80241A64_B36634);
 
 INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80241B00_B366D0);
 
-INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80241B9C_B3676C);
+#include "world/common/StashVars.inc.c"
 
 #include "world/common/GetItemName.inc.c"
 

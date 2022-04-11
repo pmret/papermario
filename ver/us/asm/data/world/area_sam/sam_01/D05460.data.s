@@ -2,7 +2,7 @@
 
 .section .data
 
-dlabel D_8024D8F0_D05460
+dlabel dup_sam_01_varTable
 .word 0x00000000
 
 dlabel D_8024D8F4_D05464

@@ -5,7 +5,7 @@ static char* N(exit_str_1) = "kgr_01";
 
 #define UNK_ALPHA_FUNC_NPC 6
 
-#include "world/common/UpdateTexturePan.inc.c"
+#include "world/common/atomic/TexturePan.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_8024030C_85247C);
 
@@ -35,7 +35,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_8024047C_8525EC);
 
 #include "world/common/UnkNpcAIMainFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_80241320_853490);
+#include "world/common/StashVars.inc.c"
 
 #include "world/common/GetItemName.inc.c"
 

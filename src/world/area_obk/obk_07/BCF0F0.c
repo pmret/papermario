@@ -44,7 +44,9 @@ INCLUDE_ASM(s32, "world/area_obk/obk_07/BCF0F0", func_80241674_BD0264);
 
 INCLUDE_ASM(s32, "world/area_obk/obk_07/BCF0F0", func_802416F8_BD02E8);
 
-#include "world/common/UnkFunc36.inc.c"
+ApiStatus N(80241788_BD0378)(Evt* script, s32 isInitialCall) {
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "world/area_obk/obk_07/BCF0F0", func_80241790_BD0380);
 

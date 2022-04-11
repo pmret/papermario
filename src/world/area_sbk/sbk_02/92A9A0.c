@@ -10,7 +10,7 @@ INCLUDE_ASM(s32, "world/area_sbk/sbk_02/92A9A0", func_80240970_92AC20);
 
 INCLUDE_ASM(s32, "world/area_sbk/sbk_02/92A9A0", func_802409A8_92AC58);
 
-INCLUDE_ASM(s32, "world/area_sbk/sbk_02/92A9A0", func_80240A44_92ACF4);
+#include "world/common/StashVars.inc.c"
 
 #include "world/common/GetItemName.inc.c"
 

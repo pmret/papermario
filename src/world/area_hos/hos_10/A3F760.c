@@ -1,6 +1,6 @@
 #include "hos_10.h"
 
-#include "world/common/UpdateTexturePan.inc.c"
+#include "world/common/atomic/TexturePan.inc.c"
 
 INCLUDE_ASM(s32, "world/area_hos/hos_10/A3F760", func_8024032C_A3FA6C);
 

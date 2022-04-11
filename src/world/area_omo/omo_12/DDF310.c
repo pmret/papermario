@@ -2,7 +2,7 @@
 
 #include "world/common/UnkFunc41.inc.c"
 
-#include "world/common/DarkRoom.inc.c"
+#include "world/common/atomic/DarkRoom.inc.c"
 
 #include "world/common/SetCamera0Flag1000.inc.c"
 

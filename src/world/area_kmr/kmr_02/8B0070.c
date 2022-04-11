@@ -7,23 +7,13 @@ static char* N(exit_str_3) = "";
 
 #define UNK_ALPHA_FUNC_NPC 8
 
-#include "world/common/SetPlayerStatusAnimFlags100000.inc.c"
-
-#include "world/common/GetCurrentFloor.inc.c"
-
-#include "world/common/UnkFunc25.inc.c"
-
-#include "world/common/GetEntryPos.inc.c"
-
-#include "world/common/GetCurrentCameraYawClamped180.inc.c"
-
-#include "world/common/SomeXYZFunc2.inc.c"
+#include "world/common/atomic/Pipe.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_802402E0_8B0350);
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80240370_8B03E0);
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80240390_8B0400);
+#include "world/common/StashVars.inc.c"
 
 #include "world/common/GetItemName.inc.c"
 

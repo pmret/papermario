@@ -367,7 +367,7 @@ EvtScript N(toggleVis_8024468C) = {
 };
 
 EvtScript N(8024486C) = {
-    EVT_SET_GROUP(0)
+    EVT_SET_GROUP(EVT_GROUP_0)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(func_802D2C14, 1)
     EVT_CALL(PlayerMoveTo, 230, 10, 20)
@@ -401,7 +401,7 @@ EvtScript N(8024486C) = {
 };
 
 EvtScript N(80244A68) = {
-    EVT_SET_GROUP(0)
+    EVT_SET_GROUP(EVT_GROUP_0)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(func_802D2C14, 1)
     EVT_CALL(PlayerMoveTo, 230, -70, 20)
@@ -467,7 +467,7 @@ static s32 N(pad_4DD4)[] = {
     0x00000000, 0x00000000, 0x00000000,
 };
 
-s32** N(D_80244DE0_96DFA0) = NULL;
+s32** N(varTable) = NULL;
 
 EvtScript N(80244DE4) = {
     EVT_CALL(ShowGotItem, EVT_VAR(0), 1, 0)
@@ -1946,7 +1946,7 @@ EvtScript N(8024AC8C) = {
 };
 
 EvtScript N(interact_8024ADE4) = {
-    EVT_CALL(N(UnkFunc35), 0, 0, 0)
+    EVT_CALL(N(ToadHouse_InitScreenOverlay), 0, 0, 0)
     EVT_EXEC_WAIT(N(8024D434))
     EVT_IF_EQ(EVT_VAR(0), 0)
         EVT_RETURN
@@ -1954,7 +1954,7 @@ EvtScript N(interact_8024ADE4) = {
     EVT_SET(EVT_VAR(9), EVT_VAR(1))
     EVT_SET(EVT_VAR(10), EVT_VAR(2))
     EVT_SET(EVT_VAR(11), EVT_VAR(3))
-    EVT_CALL(N(DoesPlayerNeedSleep))
+    EVT_CALL(N(ToadHouse_DoesPlayerNeedSleep))
     EVT_IF_EQ(EVT_VAR(1), 0)
         EVT_SET(EVT_VAR(8), EVT_VAR(0))
     EVT_END_IF
@@ -1968,19 +1968,19 @@ EvtScript N(interact_8024ADE4) = {
     EVT_CALL(ContinueSpeech, -1, NPC_ANIM_toad_Palette_00_Anim_4, NPC_ANIM_toad_Palette_00_Anim_1, 0, EVT_VAR(10))
     EVT_CALL(SetPlayerJumpscale, 1)
     EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, ((NPC_FLAG_100)), TRUE)
-    EVT_CALL(N(Call800E9894))
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_100, TRUE)
+    EVT_CALL(N(ToadHouse_DisableStatusMenu))
     EVT_IF_NE(EVT_VAR(4), 0)
         EVT_EXEC(N(8024AC8C))
     EVT_END_IF
-    EVT_CALL(N(GetPartnerCall800EB168), EVT_VAR(10))
+    EVT_CALL(N(ToadHouse_PutPartnerAway), EVT_VAR(10))
     EVT_WAIT_FRAMES(20)
     EVT_EXEC_WAIT(N(8024D494))
     EVT_THREAD
         EVT_CALL(MakeLerp, 0, 255, 60, 0)
         EVT_LABEL(0)
         EVT_CALL(UpdateLerp)
-        EVT_CALL(N(UnkFunc32), 3, EVT_VAR(0))
+        EVT_CALL(N(ToadHouse_UpdateScreenOverlay), 3, EVT_VAR(0))
         EVT_WAIT_FRAMES(1)
         EVT_IF_EQ(EVT_VAR(1), 1)
             EVT_GOTO(0)
@@ -1990,12 +1990,12 @@ EvtScript N(interact_8024ADE4) = {
         EVT_IF_NE(EVT_VAR(4), 0)
             EVT_EXEC(N(8024AC14))
         EVT_END_IF
-        EVT_CALL(N(Call800EB168), EVT_VAR(10))
+        EVT_CALL(N(ToadHouse_GetPartnerBackOut), EVT_VAR(10))
         EVT_WAIT_FRAMES(45)
         EVT_CALL(MakeLerp, 255, 0, 30, 0)
         EVT_LABEL(1)
         EVT_CALL(UpdateLerp)
-        EVT_CALL(N(UnkFunc32), 0, EVT_VAR(0))
+        EVT_CALL(N(ToadHouse_UpdateScreenOverlay), 0, EVT_VAR(0))
         EVT_WAIT_FRAMES(1)
         EVT_IF_EQ(EVT_VAR(1), 1)
             EVT_GOTO(1)
@@ -2006,7 +2006,7 @@ EvtScript N(interact_8024ADE4) = {
     EVT_CALL(DisablePlayerPhysics, FALSE)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, ((NPC_FLAG_100)), FALSE)
     EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_toad_Palette_00_Anim_4, NPC_ANIM_toad_Palette_00_Anim_1, 0, EVT_VAR(11))
-    EVT_CALL(N(Call800E98C4SyncStatusMenu))
+    EVT_CALL(N(ToadHouse_ShowStatusMenu))
     EVT_RETURN
     EVT_END
 };
@@ -2646,7 +2646,7 @@ EvtScript N(8024D494) = {
     EVT_CALL(PlayerMoveTo, -179, -198, 0)
     EVT_THREAD
         EVT_WAIT_FRAMES(15)
-        EVT_CALL(N(CamSetFOV), 0, 40)
+        EVT_CALL(N(ToadHouse_CamSetFOV), 0, 40)
         EVT_CALL(SetCamType, 0, 4, 0)
         EVT_CALL(SetCamPitch, 0, 95, -61)
         EVT_CALL(SetCamDistance, 0, 108)
@@ -2669,7 +2669,7 @@ EvtScript N(8024D494) = {
     EVT_WAIT_FRAMES(20)
     EVT_THREAD
         EVT_WAIT_FRAMES(81)
-        EVT_CALL(N(CamSetFOV), 0, 25)
+        EVT_CALL(N(ToadHouse_CamSetFOV), 0, 25)
         EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
         EVT_CALL(UseSettingsFrom, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
         EVT_WAIT_FRAMES(1)
@@ -3065,23 +3065,7 @@ NpcGroupList N(npcGroupList_8024EEF4) = {
     {},
 };
 
-ApiStatus N(func_80240300_9694C0)(Evt* script, s32 isInitialCall) {
-    s32 i;
-
-    if (N(D_80244DE0_96DFA0) == NULL) {
-        N(D_80244DE0_96DFA0) = heap_malloc(16 * sizeof(s32));
-        for (i = 0; i < 16; i++) {
-            N(D_80244DE0_96DFA0)[i] = (s32*) script->varTable[i];
-        }
-    } else {
-        for (i = 0; i < 16; i++) {
-            script->varTable[i] = (s32) N(D_80244DE0_96DFA0)[i];
-        }
-        heap_free(N(D_80244DE0_96DFA0));
-        N(D_80244DE0_96DFA0) = NULL;
-    }
-    return ApiStatus_DONE2;
-}
+#include "world/common/StashVars.inc.c"
 
 #include "world/common/GetItemName.inc.c"
 
@@ -3484,25 +3468,7 @@ ApiStatus N(func_802433E8_96C5A8)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#include "world/common/Call800E9894.inc.c"
-
-#include "world/common/Call800E98C4SyncStatusMenu.inc.c"
-
-#include "world/common/UnkFunc32.inc.c"
-
-#include "world/common/CamSetFOV.inc.c"
-
-#include "world/common/AwaitScriptComplete.inc.c"
-
-#include "world/common/PartnerToggleAbilityScript.inc.c"
-
-#include "world/common/DoesPlayerNeedSleep.inc.c"
-
-#include "world/common/UnkFunc35.inc.c"
-
-#include "world/common/GetPartnerCall800EB168.inc.c"
-
-#include "world/common/UnkFunc36.inc.c"
+#include "world/common/atomic/ToadHouse.inc.c"
 
 #include "world/common/SetManyVars.inc.c"
 

@@ -2,7 +2,7 @@
 
 #define UNK_ALPHA_FUNC_NPC 20
 
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80240460_843030);
+#include "world/common/StashVars.inc.c"
 
 #include "world/common/GetItemName.inc.c"
 
@@ -89,7 +89,10 @@ ApiStatus N(SetNpcShadowScale)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#include "world/common/Call800E9894.inc.c"
+ApiStatus N(80241C20_8447F0)(Evt* script, s32 isInitialCall) {
+    func_800E9894();
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80241C40_844810);
 

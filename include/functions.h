@@ -215,7 +215,6 @@ void phys_init_integrator_for_current_state(void);
 void phys_player_land(void);
 void phys_main_collision_below(void);
 
-void create_popup_menu(PopupMenu*);
 s32 npc_test_move_simple_without_slipping(s32, f32*, f32*, f32*, f32, f32, f32, f32);
 
 void update_collider_transform(s16 colliderID);
@@ -518,6 +517,7 @@ void start_rumble(s32, s32);
 void update_locomotion_state(void);
 void start_rumble_type(u32);
 void start_falling(void);
+void start_bounce_b(void);
 
 void set_action_state(s32 actionState);
 s32 get_collider_type_by_id(s32 colliderID);

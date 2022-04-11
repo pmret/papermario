@@ -237,7 +237,7 @@ void world_goombario_pre_battle(Npc* goombario) {
     if (goombarioActionStatus->actionState.b[0] != 0) {
         set_time_freeze_mode(TIME_FREEZE_NORMAL);
         enable_player_input();
-        CancelMessageAndBlock();
+        cancel_current_message();
         partner_clear_player_tracking(goombario);
         goombarioActionStatus->actionState.b[0] = 0;
         goombarioActionStatus->actionState.b[3] = 0;

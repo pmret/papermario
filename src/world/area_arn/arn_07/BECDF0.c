@@ -148,7 +148,7 @@ EvtScript N(80242498) = {
 };
 
 EvtScript N(exitSingleDoor_802428D4) = {
-    EVT_SET_GROUP(27)
+    EVT_SET_GROUP(EVT_GROUP_1B)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_SET(EVT_VAR(0), 0)
     EVT_SET(EVT_VAR(1), 10)

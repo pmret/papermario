@@ -49,7 +49,7 @@ EvtScript N(80240D40) = {
 #include "world/common/StarSpiritEffectFunc.inc.c"
 
 EvtScript N(80240DA0) = {
-    EVT_SET_GROUP(0)
+    EVT_SET_GROUP(EVT_GROUP_0)
     EVT_IF_EQ(EVT_VAR(5), 1)
         EVT_IF_EQ(EVT_VAR(6), 1)
             EVT_IF_EQ(EVT_VAR(7), 1)
@@ -1383,7 +1383,7 @@ NpcGroupList N(npcGroupList_80245AEC) = {
     {},
 };
 
-#include "world/common/UpdateTexturePan.inc.c"
+#include "world/common/atomic/TexturePan.inc.c"
 
 EffectInstance* fx_sun();
 

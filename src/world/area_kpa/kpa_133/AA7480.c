@@ -3,5 +3,5 @@
 static char* N(exit_str_0) = "kpa_51";
 static char* N(exit_str_1) = "kpa_134";
 
-#include "world/common/UpdateTexturePan.inc.c"
+#include "world/common/atomic/TexturePan.inc.c"
 

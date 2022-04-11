@@ -103,7 +103,8 @@
 
 /// An entity index. Entities are assigned indices in the order they are created with EVT_CALL(MakeEntity, ...).
 /// Supported in EVT_BIND_TRIGGER and EVT_BIND_PADLOCK only.
-#define EVT_ENTITY_INDEX(entityIndex) (((((entityIndex)) + 0x4000)))
+#define EVT_ENTITY_ID_BIT 0x4000
+#define EVT_ENTITY_INDEX(entityIndex) (((((entityIndex)) + EVT_ENTITY_ID_BIT)))
 
 
 /****** INSTRUCTIONS **************************************************************************************************/
@@ -520,7 +521,7 @@
 
 #define EXIT_WALK_SCRIPT(walkDistance, exitIdx, map, entryIdx) \
     { \
-        EVT_SET_GROUP(0x1B) \
+        EVT_SET_GROUP(EVT_GROUP_1B) \
         EVT_CALL(UseExitHeading, walkDistance, exitIdx) \
         EVT_EXEC(ExitWalk) \
         EVT_CALL(GotoMap, EVT_PTR(map), entryIdx) \

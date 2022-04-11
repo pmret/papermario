@@ -7,5 +7,5 @@ INCLUDE_ASM(s32, "world/area_hos/hos_04/A26ED0", func_80240000_A26ED0);
 
 INCLUDE_ASM(s32, "world/area_hos/hos_04/A26ED0", func_80240154_A27024);
 
-#include "world/common/UpdateTexturePan.inc.c"
+#include "world/common/atomic/TexturePan.inc.c"
 

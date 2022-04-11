@@ -620,6 +620,7 @@ enum SoundIDs {
     SOUND_749                       = 0x00000749,
     SOUND_759                       = 0x00000759,
     SOUND_2003                      = 0x00002003,
+    SOUND_2009                      = 0x00002009,
     SOUND_200D                      = 0x0000200D,
     SOUND_BOW_VANISH                = 0x0000200E,
     SOUND_BOW_APPEAR                = 0x0000200F,
@@ -674,6 +675,8 @@ enum SoundIDs {
     SOUND_2118                      = 0x00002118,
     SOUND_2119                      = 0x00002119,
     SOUND_211A                      = 0x0000211A,
+    SOUND_212D                      = 0x0000212D,
+    SOUND_212E                      = 0x0000212E,
 };
 
 enum Cams {
@@ -1691,6 +1694,13 @@ enum EntityCollisionFlags {
     ENTITY_COLLISION_PLAYER_LAST_FLOOR                      = 0x00000100
 };
 
+typedef enum PushGridOccupant {
+    PUSH_GRID_EMPTY         = 0,
+    PUSH_GRID_BLOCK         = 1,
+    PUSH_GRID_OBSTRUCTION   = 2,
+    PUSH_GRID_OUT_OF_BOUNDS = 3
+} PushGridOccupant;
+
 enum TriggerFlags {
     TRIGGER_ACTIVE              = 0x00000001,
     TRIGGER_ACTIVATED           = 0x00000002,
@@ -1714,7 +1724,10 @@ enum TriggerFlags {
 };
 
 enum ItemEntityFlags {
-    ITEM_ENTITY_FLAGS_TINY      = 0x00004000,
+    ITEM_ENTITY_FLAGS_40            = 0x00000040,
+    ITEM_ENTITY_FLAGS_TINY          = 0x00004000,
+    ITEM_ENTITY_FLAGS_TRANSPARENT   = 0x00080000,
+    ITEM_ENTITY_FLAGS_100000        = 0x00100000,
 };
 
 enum Buttons {
@@ -1959,7 +1972,7 @@ enum PlayerStatusAnimFlags {
     PLAYER_STATUS_ANIM_FLAGS_20000                                 = 0x00020000,
     PLAYER_STATUS_ANIM_FLAGS_40000                                 = 0x00040000,
     PLAYER_STATUS_ANIM_FLAGS_80000                                 = 0x00080000,
-    PLAYER_STATUS_ANIM_FLAGS_100000                                = 0x00100000,
+    PLAYER_STATUS_ANIM_FLAGS_100000                                = 0x00100000, ///< set when using pipes
     PLAYER_STATUS_ANIM_FLAGS_200000                                = 0x00200000,
     PLAYER_STATUS_ANIM_FLAGS_400000                                = 0x00400000,
     PLAYER_STATUS_ANIM_FLAGS_800000                                = 0x00800000,
@@ -1971,6 +1984,22 @@ enum PlayerStatusAnimFlags {
     PLAYER_STATUS_ANIM_FLAGS_20000000                              = 0x20000000,
     PLAYER_STATUS_ANIM_FLAGS_40000000                              = 0x40000000,
     PLAYER_STATUS_ANIM_FLAGS_80000000                              = 0x80000000,
+};
+
+enum PopupType {
+    POPUP_MENU_USE_ITEM             = 0x0,
+    POPUP_MENU_SWITCH_PARTNER       = 0x1,
+    POPUP_MENU_THROW_AWAY_ITEM      = 0x2,
+    POPUP_MENU_TRADE_FOR_BADGE      = 0x3,
+    POPUP_MENU_UPGRADE_PARTNER      = 0x4,
+    POPUP_MENU_SELL_ITEM            = 0x5,
+    POPUP_MENU_CHECK_ITEM           = 0x6,
+    POPUP_MENU_CLAIM_ITEM           = 0x7,
+    POPUP_MENU_READ_LETTER          = 0x8,
+    POPUP_MENU_TAKE_FROM_CHEST      = 0x9,
+    POPUP_MENU_READ_DIARY_PAGE      = 0xA,
+    POPUP_MENU_READ_POSTCARD        = 0xB,
+    POPUP_MENU_USEKEY               = 0xC
 };
 
 /// not really

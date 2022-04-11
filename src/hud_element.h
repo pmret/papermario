@@ -105,6 +105,45 @@ enum {
     HUD_ELEMENT_DRAW_FIRST_WITHOUT_CLIPPING = 2,
 };
 
+typedef struct PopupMenu {
+    /* 0x000 */ HudScript* ptrIcon[32];
+    /* 0x080 */ char unk_80[0x4];
+    /* 0x084 */ s32 nameMsg[32];
+    /* 0x104 */ char unk_104[0x4];
+    /* 0x108 */ s32 userIndex[32]; // used to map menu order to a user-ID for each item
+    /* 0x188 */ char unk_188[0x4];
+    /* 0x18C */ s32 enabled[32];
+    /* 0x20C */ char unk_20C[0x4];
+    /* 0x210 */ s32 value[32]; // sale price, etc
+    /* 0x290 */ char unk_290[0x4];
+    /* 0x294 */ s32 descMsg[32];
+    /* 0x314 */ char unk_314[0x4];
+    /* 0x318 */ s32 popupType; // C = keys
+    /* 0x31C */ s32 unk_31C;
+    /* 0x320 */ s32 unk_320;
+    /* 0x324 */ s32 numEntries;
+    /* 0x328 */ s32 initialPos;
+    /* 0x32C */ s16 result;
+    /* 0x32E */ char unk_32E[0x2];
+} PopupMenu; // size = 0x330
+
+typedef struct Shop {
+    /* 0x000 */ s16 flags;
+    /* 0x002 */ s16 numItems;
+    /* 0x004 */ s16 numSpecialPrices;
+    /* 0x006 */ char unk_06[0x2];
+    /* 0x008 */ s32 currentItemSlot;
+    /* 0x00C */ s32 selectedStoreItemSlot;
+    /* 0x010 */ ShopOwner* owner;
+    /* 0x014 */ ShopItemLocation* ItemDataPositions;
+    /* 0x018 */ ShopItemData* staticInventory;
+    /* 0x01C */ ShopSellPriceData* staticPriceList;
+    /* 0x020 */ s32 costIconID;
+    /* 0x024 */ s32 inventoryItemFlags;
+    /* 0x028 */ PopupMenu itemSelectMenu;
+    /* 0x358 */ s32 unk_358;
+} Shop; // size = 0x35C
+
 typedef struct HudScriptPair {
     /* 0x00 */ HudScript* enabled;
     /* 0x04 */ HudScript* disabled;
@@ -283,5 +322,8 @@ void hud_element_set_transform_rotation_pivot(s32 id, s32 dx, s32 dy);
 void copy_world_hud_element_ref_to_battle(s32 worldID, s32 battleID);
 
 void hud_element_set_aux_cache(void* base, s32 size);
+
+
+void create_popup_menu(PopupMenu*);
 
 #endif

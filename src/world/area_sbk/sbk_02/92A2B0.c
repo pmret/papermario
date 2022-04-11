@@ -21,9 +21,7 @@ s32 func_80240000_92A2B0(void) {
     return phi;
 }
 
-#include "world/common/UnkFunc27.inc.c"
-
-#include "world/common/UnkFunc26.inc.c"
+#include "world/common/atomic/UnkFunc27.inc.c"
 
 ApiStatus func_80240338_92A5E8(Evt* script, s32 isInitialCall) {
     EffectInstance* effect = (EffectInstance*)evt_get_variable(script, EVT_MAP_VAR(0));

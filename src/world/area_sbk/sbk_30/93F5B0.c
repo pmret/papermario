@@ -9,9 +9,7 @@ static char* N(exit_str_5) = "";
 
 INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_80240000_93F5B0);
 
-#include "world/common/UnkFunc27.inc.c"
-
-#include "world/common/UnkFunc26.inc.c"
+#include "world/common/atomic/UnkFunc27.inc.c"
 
 #include "world/common/SpawnSunEffect.inc.c"
 
@@ -35,7 +33,7 @@ INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_80240000_93F5B0);
 
 #include "world/common/UnkNpcAIMainFunc4.inc.c"
 
-INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_80240DDC_94038C);
+#include "world/common/StashVars.inc.c"
 
 #include "world/common/GetItemName.inc.c"
 

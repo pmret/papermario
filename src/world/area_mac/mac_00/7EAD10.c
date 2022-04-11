@@ -7,19 +7,9 @@ static char* N(exit_str_3) = "kmr_20";
 static char* N(exit_str_4) = "mac_00";
 static char* N(exit_str_5) = "\0\0\0\0";
 
-#include "world/common/SetPlayerStatusAnimFlags100000.inc.c"
+#include "world/common/atomic/Pipe.inc.c"
 
-#include "world/common/GetCurrentFloor.inc.c"
-
-#include "world/common/UnkFunc25.inc.c"
-
-#include "world/common/GetEntryPos.inc.c"
-
-#include "world/common/GetCurrentCameraYawClamped180.inc.c"
-
-#include "world/common/SomeXYZFunc2.inc.c"
-
-#include "world/common/UpdateTexturePan.inc.c"
+#include "world/common/atomic/TexturePan.inc.c"
 
 ApiStatus func_802405EC_7EB2FC(Evt* script, s32 isInitialCall) {
     f32 x;

@@ -7,17 +7,7 @@ static char* N(exit_str_3) = "mac_03";
 static char* N(exit_str_4) = "tik_06";
 static char* N(exit_str_5) = "tik_15";
 
-#include "world/common/SetPlayerStatusAnimFlags100000.inc.c"
+#include "world/common/atomic/Pipe.inc.c"
 
-#include "world/common/GetCurrentFloor.inc.c"
-
-#include "world/common/UnkFunc25.inc.c"
-
-#include "world/common/GetEntryPos.inc.c"
-
-#include "world/common/GetCurrentCameraYawClamped180.inc.c"
-
-#include "world/common/SomeXYZFunc2.inc.c"
-
-#include "world/common/UpdateTexturePan.inc.c"
+#include "world/common/atomic/TexturePan.inc.c"
 

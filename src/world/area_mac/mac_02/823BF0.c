@@ -26,7 +26,7 @@
 
 #include "world/common/UnkNpcAIMainFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_802417C0_824A80);
+#include "world/common/StashVars.inc.c"
 
 #include "world/common/GetItemName.inc.c"
 
