@@ -47,11 +47,11 @@ void func_802B6000_E25D60(void) {
             phi_s2 = 0;
         }
 
-        if (is_ability_active(ABILITY_DIZZY_ATTACK) != 0) {
+        if (is_ability_active(ABILITY_DIZZY_ATTACK)) {
             phi_s2 = phi_s2 | 2;
         }
         
-        if (is_ability_active(ABILITY_SPEEDY_SPIN) != 0) {
+        if (is_ability_active(ABILITY_SPEEDY_SPIN)) {
             playerSpinState->initialSpinTime = 30;
             playerSpinState->spinRate = 40.0f;
             playerSpinState->fullSpeedSpinTime = 20;
@@ -64,7 +64,7 @@ void func_802B6000_E25D60(void) {
         phi_s4 = -1;
         phi_s3 = 0x10010;
         
-        if (phi_s2 != 0) {
+        if (phi_s2) {
             if (phi_s2 & 4) {
                 phi_s4 = 2;
                 phi_s3 = 0x10012;
@@ -124,7 +124,7 @@ void func_802B6000_E25D60(void) {
         gSpinHistoryBufferPos = 0;
     }
     
-    if ((phi_s5 == 0) && ((check_input_hammer() != 0) || (check_input_jump() != 0))) {
+    if (phi_s5 == 0 && (check_input_hammer() || check_input_jump())) {
         playerStatus->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_SPINNING;
         playerStatus->flags &= ~PLAYER_STATUS_FLAGS_20000;
         sfx_stop_sound(playerSpinState->spinSoundID);
