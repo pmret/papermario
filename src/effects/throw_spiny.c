@@ -4,7 +4,7 @@
 
 void throw_spiny_appendGfx(void* effect);
 
-void throw_spiny_init(void);
+void throw_spiny_init(EffectInstance* effect);
 void throw_spiny_update(EffectInstance* effect);
 void throw_spiny_render(EffectInstance* effect);
 
@@ -42,28 +42,29 @@ typedef struct ThrowSpinyFXData {
 /* 0x5C */ f32 yScale;
 /* 0x60 */ u32 state;
 /* 0x64 */ s32 unk_64;
-/* 0x68 */ s32 timeUntilFall; //how quickly should spiny fall to ground ?
+/* 0x68 */ s32 timeUntilFall; //how long until spiny falls to ground?
 } ThrowSpinyFXData; //sizeof 0x6C
 
 //during spiny surge
 EffectInstance* throw_spiny_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, s32 time) {
+    EffectBlueprint bp;
+    EffectBlueprint* bpPtr = &bp;
     EffectInstance* effect;
     ThrowSpinyFXData* spinyObject;
-    EffectBlueprint bp;
-    int new_var;
+    s32 numParts = 1;
     f32 temp_f4, temp_f8, gravity;
 
+    bp.init = throw_spiny_init;
+    bp.update = throw_spiny_update;
+    bp.renderWorld = throw_spiny_render;
     bp.unk_00 = 0;
-    bp.init = (void*)(&throw_spiny_init);
-    bp.update = (void*)(&throw_spiny_update);
-    bp.renderWorld = (void*)(&throw_spiny_render);
-    (&bp)->unk_14 = NULL;
-    new_var = 1;
+    bp.unk_14 = NULL;
     bp.effectID = EFFECT_THROW_SPINY;
-    effect = (EffectInstance *)shim_create_effect_instance(&bp);
-    effect->numParts = new_var;
-    spinyObject = effect->data = (ThrowSpinyFXData*)shim_general_heap_malloc(sizeof(ThrowSpinyFXData));
-    ASSERT(spinyObject);
+
+    effect = (EffectInstance *)shim_create_effect_instance(bpPtr);
+    effect->numParts = numParts;
+    spinyObject = effect->data = shim_general_heap_malloc(numParts * sizeof(*spinyObject));
+    ASSERT(effect->data != NULL);
     spinyObject->unk_00 = arg0;
     spinyObject->lifeDuration = 0;
 
@@ -109,14 +110,14 @@ EffectInstance* throw_spiny_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg
     return effect;
 }
 
-void throw_spiny_init(void) {
+void throw_spiny_init(EffectInstance* effect) {
 }
 
 void throw_spiny_update(EffectInstance* effectInstance) {
     ThrowSpinyFXData* spinyObject = effectInstance->data;
     u32 state;
     f32 gravity;
-    s32 tempVar;
+    s32 lifeDuration;
 
     if (effectInstance->flags & EFFECT_INSTANCE_FLAGS_10) {
         effectInstance->flags &= ~EFFECT_INSTANCE_FLAGS_10;
@@ -130,11 +131,11 @@ void throw_spiny_update(EffectInstance* effectInstance) {
     spinyObject->lifeDuration++;
 
     if (spinyObject->life < 0) {
-        shim_remove_effect((EffectInstance*)effectInstance);
+        shim_remove_effect(effectInstance);
         return;
     }
 
-    tempVar = spinyObject->lifeDuration;
+    lifeDuration = spinyObject->lifeDuration;
     state = spinyObject->state;
 
     if (state < 7) {
@@ -150,7 +151,7 @@ void throw_spiny_update(EffectInstance* effectInstance) {
         spinyObject->yaw += spinyObject->rotationSpeed;
     }
 
-    if ((tempVar - 1) == spinyObject->timeUntilFall) {
+    if ((lifeDuration - 1) == spinyObject->timeUntilFall) {
         spinyObject->state = 0;
         spinyObject->gravity = -spinyObject->gravity;
         spinyObject->unk_44 = spinyObject->unk_44;
