@@ -4,7 +4,7 @@
 #include "world/common/atomic/UnkPhysicsFuncs.inc.c"
 #define NAMESPACE kkj_11
 
-INCLUDE_ASM(s32, "world/area_kkj/kkj_11/ACE9E0", func_80240F18_ACF058);
+#include "world/common/GetPeachDisguise.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kkj/kkj_11/ACE9E0", func_80240F44_ACF084);
 
