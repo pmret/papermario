@@ -2,7 +2,24 @@
 
 #include "world/common/UnkPosFunc2.inc.c"
 
-INCLUDE_ASM(s32, "world/area_tik/tik_07/87AC00", func_80241390_87AF70);
+extern s32 D_802449B0_87E590[4];
+
+ApiStatus func_80241390_87AF70(Evt* script, s32 isInitialCall) {
+
+    PlayerStatus* player = &gPlayerStatus;
+    u32 i;
+
+    for (i = 0; i < ARRAY_COUNT(D_802449B0_87E590); i++) {
+        if (gCollisionStatus.currentFloor != D_802449B0_87E590[i]) {
+            continue;
+        }
+        if ((player->actionState == 0xE) || (player->actionState == 0x10)) {
+            return ApiStatus_BLOCK;
+        }
+    }
+    return ApiStatus_DONE2;
+}
+
 
 #include "world/common/UnkNpcAIFunc23.inc.c"
 
