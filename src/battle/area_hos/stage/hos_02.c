@@ -1,12 +1,13 @@
 #include "common.h"
 #include "battle/battle.h"
+#include "mapfs/hos_bt02_shape.h"
 
 #define NAMESPACE b_area_hos_hos_02
 
 EvtScript N(beforeBattle_802258E0) = {
     EVT_THREAD
-        EVT_CALL(SetTexPanner, 21, 1)
-        EVT_CALL(SetTexPanner, 22, 1)
+        EVT_CALL(SetTexPanner, MODEL_o372, 1)
+        EVT_CALL(SetTexPanner, MODEL_o375, 1)
         EVT_SET(LW(0), 0)
         EVT_SET(LW(1), 0)
         EVT_SET(LW(2), 0)
@@ -27,8 +28,8 @@ EvtScript N(beforeBattle_802258E0) = {
         EVT_CALL(MakeLerp, -7, 7, 40, 10)
         EVT_LABEL(0)
         EVT_CALL(UpdateLerp)
-        EVT_CALL(TranslateModel, 17, 0, LW(0), 0)
-        EVT_CALL(TranslateModel, 21, 0, LW(0), 0)
+        EVT_CALL(TranslateModel, MODEL_o371, 0, LW(0), 0)
+        EVT_CALL(TranslateModel, MODEL_o372, 0, LW(0), 0)
         EVT_MUL(LW(0), 3)
         EVT_CALL(RotateModel, 17, LW(10), 0, 0, 1)
         EVT_ADD(LW(10), -3)
@@ -40,8 +41,8 @@ EvtScript N(beforeBattle_802258E0) = {
         EVT_CALL(MakeLerp, 7, -7, 40, 10)
         EVT_LABEL(1)
         EVT_CALL(UpdateLerp)
-        EVT_CALL(TranslateModel, 17, 0, LW(0), 0)
-        EVT_CALL(TranslateModel, 21, 0, LW(0), 0)
+        EVT_CALL(TranslateModel, MODEL_o371, 0, LW(0), 0)
+        EVT_CALL(TranslateModel, MODEL_o372, 0, LW(0), 0)
         EVT_MUL(LW(0), 3)
         EVT_CALL(RotateModel, 17, LW(10), 0, 0, 1)
         EVT_ADD(LW(10), -3)
@@ -58,10 +59,10 @@ EvtScript N(beforeBattle_802258E0) = {
         EVT_CALL(MakeLerp, -10, 4, 40, 10)
         EVT_LABEL(0)
         EVT_CALL(UpdateLerp)
-        EVT_CALL(TranslateModel, 19, 0, LW(0), 0)
-        EVT_CALL(TranslateModel, 22, 0, LW(0), 0)
+        EVT_CALL(TranslateModel, MODEL_o376, 0, LW(0), 0)
+        EVT_CALL(TranslateModel, MODEL_o375, 0, LW(0), 0)
         EVT_MUL(LW(0), -3)
-        EVT_CALL(RotateModel, 19, LW(10), 0, 0, 1)
+        EVT_CALL(RotateModel, MODEL_o376, LW(10), 0, 0, 1)
         EVT_ADD(LW(10), -3)
         EVT_CALL(ClampAngleFloat, LW(10))
         EVT_WAIT_FRAMES(1)
@@ -71,10 +72,10 @@ EvtScript N(beforeBattle_802258E0) = {
         EVT_CALL(MakeLerp, 4, -10, 40, 10)
         EVT_LABEL(1)
         EVT_CALL(UpdateLerp)
-        EVT_CALL(TranslateModel, 19, 0, LW(0), 0)
-        EVT_CALL(TranslateModel, 22, 0, LW(0), 0)
+        EVT_CALL(TranslateModel, MODEL_o376, 0, LW(0), 0)
+        EVT_CALL(TranslateModel, MODEL_o375, 0, LW(0), 0)
         EVT_MUL(LW(0), -3)
-        EVT_CALL(RotateModel, 19, LW(10), 0, 0, 1)
+        EVT_CALL(RotateModel, MODEL_o376, LW(10), 0, 0, 1)
         EVT_ADD(LW(10), -3)
         EVT_CALL(ClampAngleFloat, LW(10))
         EVT_WAIT_FRAMES(1)

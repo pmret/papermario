@@ -1,5 +1,6 @@
 #include "common.h"
 #include "battle/battle.h"
+#include "mapfs/dgb_bt04_shape.h"
 
 #define NAMESPACE b_area_dgb_dgb_04
 
@@ -15,7 +16,7 @@ EvtScript N(afterBattle_8021B190) = {
 };
 
 s32 N(foregroundModelList_8021B1A0)[] = {
-    0x00000012, 0x00000000,
+    MODEL_kumo1, 0,
 };
 
 Stage NAMESPACE = {

@@ -1,8 +1,10 @@
 #include "common.h"
 #include "battle/battle.h"
+#include "mapfs/nok_bt02_shape.h"
 
 #define NAMESPACE b_area_hos_hos_00
 
+// Shakes a model (ID input on EVT_VAR(0)) on loop, waiting up to 30 frames between.
 EvtScript N(802255E0) = {
     EVT_SET(LW(10), LW(0))
     EVT_LABEL(0)
@@ -25,34 +27,34 @@ EvtScript N(802255E0) = {
 EvtScript N(beforeBattle_802256E8) = {
     EVT_CALL(SetSpriteShading, -1)
     EVT_THREAD
-        EVT_SET(LW(0), 19)
+        EVT_SET(LW(0), MODEL_h1)
         EVT_EXEC(N(802255E0))
         EVT_WAIT_FRAMES(5)
-        EVT_SET(LW(0), 20)
+        EVT_SET(LW(0), MODEL_h3)
         EVT_EXEC(N(802255E0))
         EVT_WAIT_FRAMES(5)
-        EVT_SET(LW(0), 21)
+        EVT_SET(LW(0), MODEL_h4)
         EVT_EXEC(N(802255E0))
         EVT_WAIT_FRAMES(5)
-        EVT_SET(LW(0), 22)
+        EVT_SET(LW(0), MODEL_h5)
         EVT_EXEC(N(802255E0))
         EVT_WAIT_FRAMES(5)
-        EVT_SET(LW(0), 23)
+        EVT_SET(LW(0), MODEL_h6)
         EVT_EXEC(N(802255E0))
         EVT_WAIT_FRAMES(5)
-        EVT_SET(LW(0), 24)
+        EVT_SET(LW(0), MODEL_h7)
         EVT_EXEC(N(802255E0))
         EVT_WAIT_FRAMES(5)
-        EVT_SET(LW(0), 25)
+        EVT_SET(LW(0), MODEL_h9)
         EVT_EXEC(N(802255E0))
         EVT_WAIT_FRAMES(5)
-        EVT_SET(LW(0), 26)
+        EVT_SET(LW(0), MODEL_h10)
         EVT_EXEC(N(802255E0))
         EVT_WAIT_FRAMES(5)
-        EVT_SET(LW(0), 27)
+        EVT_SET(LW(0), MODEL_h11)
         EVT_EXEC(N(802255E0))
         EVT_WAIT_FRAMES(5)
-        EVT_SET(LW(0), 28)
+        EVT_SET(LW(0), MODEL_h12)
         EVT_EXEC(N(802255E0))
     EVT_END_THREAD
     EVT_RETURN
@@ -65,7 +67,7 @@ EvtScript N(afterBattle_8022589C) = {
 };
 
 s32 N(foregroundModelList_802258AC)[] = {
-    0x00000020, 0x0000001E, 0x00000000,
+    MODEL_hap, MODEL_kusa3, 0,
 };
 
 Stage NAMESPACE = {
