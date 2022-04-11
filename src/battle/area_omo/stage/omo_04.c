@@ -47,8 +47,8 @@ Stage NAMESPACE = {
     .preBattle = N(beforeBattle_8022DD30),
     .postBattle = N(afterBattle_8022DDEC),
     .foregroundModelList = N(foregroundModelList_8022DDFC),
-    .unk_1C = 4,
-    .unk_20 = &N(specialFormation_8022DE64),
+    .specialFormationSize = 4,
+    .specialFormation = &N(specialFormation_8022DE64),
 };
 
 Vec3i N(vector3D_8022DE34) = { 0xFFFFFFCF, 56, 0xFFFFFFBC };
