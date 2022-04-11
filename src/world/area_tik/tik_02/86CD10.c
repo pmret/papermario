@@ -4,7 +4,7 @@
 
 extern s16 D_80241BAE_86E2EE[0][2]; // length unk
 
-ApiStatus func_80240940_86D080(Evt* script) {
+ApiStatus func_80240940_86D080(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Enemy* enemy = script->owner1.enemy;
     s32 index = evt_get_variable(script, *args++);
