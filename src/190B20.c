@@ -1586,26 +1586,26 @@ void btl_init_menu_partner(void) {
     }
 }
 
-s32 count_power_plus(s32 arg0) {
-    s32 pp;
+s32 count_power_plus(s32 damageType) {
+    s32 count;
     s32 i;
 
     if (gGameStatusPtr->peachFlags & 1) {
         return 0;
     }
 
-    pp = 0;
+    count = 0;
     for (i = 0; i < ARRAY_COUNT(gPlayerData.equippedBadges); i++) {
         u8 moveID = gItemTable[gPlayerData.equippedBadges[i]].moveID;
 
         if (gMoveTable[moveID].battleSubmenu == 7 && moveID == MOVE_POWER_PLUS) {
-            if (gBattleStatus.flags1 & BS_FLAGS1_10 || arg0 & 0x80) {
-                pp++;
+            if (gBattleStatus.flags1 & BS_FLAGS1_10 || damageType & DAMAGE_TYPE_JUMP) {
+                count++;
             }
         }
     }
 
-    return pp;
+    return count;
 }
 
 void deduct_current_move_fp(void) {
