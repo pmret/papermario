@@ -89,7 +89,7 @@ void render_frame(s32 flag) {
     }
 
     if (flag) {
-        camID = CAM_CAM3;
+        camID = CAM_3;
     } else {
         camID = CAM_DEFAULT;
     }
@@ -183,7 +183,7 @@ void render_frame(s32 flag) {
             camera->vpAlt.vp.vtrans[1] = camera->vp.vp.vtrans[1] + gGameStatusPtr->unk_83;
 
             if (!(camera->flags & CAM_FLAG_ORTHO)) {
-                if (gCurrentCamID != CAM_CAM3) {
+                if (gCurrentCamID != CAM_3) {
                     if (!(camera->flags & CAM_FLAG_200)) {
                         render_entities();
                     }

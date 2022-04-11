@@ -97,7 +97,7 @@ void func_802B6120_E2A7D0(void) {
 
     switch (playerStatus->fallState) {
         case 0:
-            if (playerStatus->unk_90 == 0) {
+            if (playerStatus->unk_90[CAM_DEFAULT] == 0) {
                 if (peach_disguise_check_overlaps() < 0) {
                     suggest_player_anim_clearUnkFlag(0xC0024);
                     sfx_play_sound_at_player(0x92, 0);

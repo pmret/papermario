@@ -2579,8 +2579,8 @@ glabel btl_state_update_player_menu
 /* 41CBE4 802A7E54 0260502D */  daddu     $t2, $s3, $zero
 /* 41CBE8 802A7E58 3C09802B */  lui       $t1, %hi(battle_menu_DisabledPartnerHudScripts)
 /* 41CBEC 802A7E5C 2529B438 */  addiu     $t1, $t1, %lo(battle_menu_DisabledPartnerHudScripts)
-/* 41CBF0 802A7E60 3C088009 */  lui       $t0, %hi(D_8008EEC4)
-/* 41CBF4 802A7E64 2508EEC4 */  addiu     $t0, $t0, %lo(D_8008EEC4)
+/* 41CBF0 802A7E60 3C088009 */  lui       $t0, %hi(D_8008EEC0 + 4)
+/* 41CBF4 802A7E64 2508EEC4 */  addiu     $t0, $t0, %lo(D_8008EEC0 + 4)
 /* 41CBF8 802A7E68 3C04802B */  lui       $a0, %hi(D_802ACCD0)
 /* 41CBFC 802A7E6C 2484CCD0 */  addiu     $a0, $a0, %lo(D_802ACCD0)
 .L802A7E70:

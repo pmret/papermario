@@ -27,7 +27,7 @@ s32 D_800F7B44 = 0;
 f32 D_800F7B48 = 0.0f;
 s32 D_800F7B4C = 0;
 
-s32 GravityParamsStartJump[] = { 0x417C1B33, 0xC0EC5C14, 0x405C9AAA, 0xBF400000 };
+f32 GravityParamsStartJump[] = { 15.7566404343f, -7.38624f, 3.44693994522f, -0.75f };
 f32 GravityParamsStartFall[] = { 0.154342994094f, -0.350080013275f, -0.182262003422f, 0.0115200001746f };
 f32 DefaultMoveSpeeds[] = { 2.0f, 4.0f, 32.0f, -32.0f }; // walk, run, max jump, ???
 s16 D_800F7B80 = 0;
@@ -40,14 +40,14 @@ s32 HammerBroDisguiseExtraAnims[] = { 0x005A0000, 0x005A0002, 0x005A0003, 0x005A
 
 s32 KoopatrolDisguiseExtraAnims[] = { 0x00580000, 0x00580001, 0x00580002, 0x00580004, 0x00580005, 0x00580006, 0x00580007, 0x00580008, 0x00580009, 0x00580012, 0x00580014, 0x0058001B, ANIM_END };
 
-DisguiseAnims BasicPeachDisguiseAnims[] = {
+DisguiseAnims BasicPeachDisguiseAnims[4] = {
     {0x00580001, 0x00580004, 0x00580006, 0x00580008, 0x00580000, 0x0058001B},
     {0x00580001, 0x00580004, 0x00580006, 0x00580008, 0x00580000, 0x0058001B},
     {0x005A0003, 0x005A0006, 0x005A0009, 0x005A000B, 0x005A0000, 0x005A001A},
     {0x00390002, 0x00390003, 0x00390004, 0x00390005, 0x00390000, 0x00390014},
 };
 
-s32* PeachDisguiseExtraAnims[] = { &KoopatrolDisguiseExtraAnims, &KoopatrolDisguiseExtraAnims, &HammerBroDisguiseExtraAnims, &ClubbaDisguiseExtraAnims };
+s32* PeachDisguiseExtraAnims[4] = { KoopatrolDisguiseExtraAnims, KoopatrolDisguiseExtraAnims, HammerBroDisguiseExtraAnims, ClubbaDisguiseExtraAnims };
 
 Action PlayerActionsTable[] = {
     { action_idle_update, world_action_idle_ROM_START, world_action_idle_ROM_END, TRUE },

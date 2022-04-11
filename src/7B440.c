@@ -36,9 +36,8 @@ void update_player_input(void) {
     }
 }
 
-#ifdef NON_EQUIVALENT
+#ifdef NON_MATCHING
 void reset_player_status(void) {
-    s32* temp8010C92C = &D_8010C92C;
     PlayerStatus* playerStatus = &gPlayerStatus;
     MapConfig* mapConfig;
     f32 one;
@@ -49,7 +48,7 @@ void reset_player_status(void) {
     D_8010C920 = 0;
     D_8010C940 = 0;
     D_8010C958 = 0;
-    *temp8010C92C = 0;
+    D_8010C92C = 0;
     D_8010C95C = 0;
     D_8010C980 = 0;
     D_800F7B40 = 0;
@@ -72,37 +71,37 @@ void reset_player_status(void) {
         playerStatus->animFlags |= 0x1000;
 
         if (gGameStatusPtr->peachFlags & 2) {
-            *temp8010C92C = 2;
+            D_8010C92C = 2;
             playerStatus->peachDisguise = gGameStatusPtr->peachDisguise;
         }
     } else {
         playerStatus->colliderHeight = 37;
         playerStatus->colliderDiameter = 26;
-        gGameStatusPtr->peachAnimIdx = 0;
+        gGameStatusPtr->peachCookingIngredient = 0;
     }
 
     // This grossness is needed for matching
     floatsTemp = &DefaultMoveSpeeds[0];
     playerStatus->walkSpeed = *(floatsTemp++) * one;
     playerStatus->runSpeed = *(floatsTemp++) * one;
-    playerStatus->unk_6C = *(floatsTemp++) * one;
+    playerStatus->maxJumpSpeed = *(floatsTemp++) * one;
 
     set_action_state(ACTION_STATE_IDLE);
 
     playerStatus->currentSpeed = 0.0f;
     playerStatus->targetYaw = 0.0f;
-    playerStatus->unk_64 = 0.0f;
-    playerStatus->unk_88 = 0.0f;
+    playerStatus->overlapPushAmount = 0.0f;
+    playerStatus->overlapPushYaw = 0.0f;
     playerStatus->anim = 0;
     playerStatus->decorationList = 0;
     playerStatus->position.x = 0.0f;
     playerStatus->position.y = 0.0f;
     playerStatus->position.z = 0.0f;
     playerStatus->currentYaw = 0.0f;
-    playerStatus->unk_90 = 0.0f;
-    playerStatus->unk_94 = 0;
-    playerStatus->unk_98 = 0;
-    playerStatus->unk_9C = 0;
+    playerStatus->unk_90[CAM_DEFAULT] = 0.0f;
+    playerStatus->unk_90[CAM_BATTLE] = 0.0f;
+    playerStatus->unk_90[CAM_TATTLE] = 0.0f;
+    playerStatus->unk_90[CAM_3] = 0.0f;
 
     mapConfig = gAreas[gGameStatusPtr->areaID].maps[gGameStatusPtr->mapID].config;
 
@@ -120,7 +119,7 @@ void reset_player_status(void) {
     gCameras->targetPos.z = playerStatus->position.z;
 
     phys_reset_spin_history(mapConfig);
-    mem_clear(&gPlayerSpinState, sizeof(PlayerSpinState));
+    mem_clear(&gPlayerSpinState, sizeof(gPlayerSpinState));
 }
 #else
 INCLUDE_ASM(s32, "7B440", reset_player_status);

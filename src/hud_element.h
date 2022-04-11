@@ -199,6 +199,10 @@ extern HudScript HudScript_StatusCoin[];
 extern HudScript HudScript_Refund[];
 extern HudScript HudScript_MenuTimes[];
 
+extern s32 gPartnerPopupProperties[11][4];
+extern HudScript* wDisabledPartnerHudScripts[];
+extern HudScript* wPartnerHudScripts[];
+
 #define he_End HUD_ELEMENT_OP_End
 #define he_SetRGBA(arg0, image) HUD_ELEMENT_OP_SetRGBA, arg0, (s32)image
 #define he_SetCI(arg0, raster, palette) HUD_ELEMENT_OP_SetCI, arg0, (s32) raster, (s32)palette
