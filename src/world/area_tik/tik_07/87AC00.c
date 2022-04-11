@@ -5,7 +5,6 @@
 extern s32 D_802449B0_87E590[4];
 
 ApiStatus func_80241390_87AF70(Evt* script, s32 isInitialCall) {
-
     PlayerStatus* player = &gPlayerStatus;
     u32 i;
 
