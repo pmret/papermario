@@ -2,4 +2,10 @@
 
 #include "world/common/UnkPosFunc2.inc.c"
 
-INCLUDE_ASM(s32, "world/area_tik/tik_02/86CD10", func_80240940_86D080);
+extern s16 D_80241BAE_86E2EE[0][2]; // length unk
+
+ApiStatus func_80240940_86D080(Evt* script) {
+    Enemy* enemy = (Enemy*)script->owner1.enemyID;
+    gCurrentEncounter.encounterList[enemy->encounterIndex]->battle = D_80241BAE_86E2EE[evt_get_variable(script, *script->ptrReadPos)][0];
+    return ApiStatus_DONE2;
+}
