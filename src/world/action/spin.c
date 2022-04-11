@@ -8,7 +8,6 @@ extern s32 gSpinHistoryPosZ[5];
 extern s16 gSpinHistoryPosAngle[5];
 void phys_clear_spin_history(void);
 
-//INCLUDE_ASM(s32, "world/action/spin", func_802B6000_E25D60);
 void func_802B6000_E25D60(void) {
     PlayerSpinState* playerSpinState = &gPlayerSpinState;
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -17,11 +16,11 @@ void func_802B6000_E25D60(void) {
     s32 temp_v1_2;
     s32 phi_s5 = 0;
     
-    if (playerStatus->flags & 0x80000000) {
-        playerStatus->flags &= ~0x80080000;
+    if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
+        playerStatus->flags &= ~(PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED | PLAYER_STATUS_FLAGS_80000);
         playerStatus->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_40000;
         playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_SPINNING;
-        playerStatus->flags |= 0x20000;
+        playerStatus->flags |= PLAYER_STATUS_FLAGS_20000;
         playerStatus->currentStateTime = 0;
         playerStatus->fallState = 0;
         playerSpinState->stopSoundTimer = 0;
@@ -127,7 +126,7 @@ void func_802B6000_E25D60(void) {
     
     if ((phi_s5 == 0) && ((check_input_hammer() != 0) || (check_input_jump() != 0))) {
         playerStatus->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_SPINNING;
-        playerStatus->flags &= ~0x00020000;
+        playerStatus->flags &= ~PLAYER_STATUS_FLAGS_20000;
         sfx_stop_sound(playerSpinState->spinSoundID);
         player_input_to_move_vector(&sp10, &sp14);
         playerStatus->targetYaw = sp10;
@@ -237,21 +236,21 @@ void func_802B6000_E25D60(void) {
         if (playerSpinState->hasBufferedSpin != 0) {
             playerStatus->currentStateTime = 2;
             playerStatus->fallState = 2;
-            playerStatus->flags &= ~0x00020000;
+            playerStatus->flags &= ~PLAYER_STATUS_FLAGS_20000;
             suggest_player_anim_clearUnkFlag(0x10002);
         } else if (sp10 < playerStatus->spriteFacingAngle) {
             if (playerStatus->spriteFacingAngle >= 180.0f && sp10 < 180.0f) {
                 playerStatus->spriteFacingAngle = 180.0f;
                 playerStatus->currentStateTime = 2;
                 playerStatus->fallState = 2;
-                playerStatus->flags &= ~0x00020000;
+                playerStatus->flags &= ~PLAYER_STATUS_FLAGS_20000;
                 suggest_player_anim_clearUnkFlag(0x10002);
             }
         } else if (playerStatus->spriteFacingAngle <= 0.0f && sp10 < 90.0f) {
             playerStatus->spriteFacingAngle = 0.0f;
             playerStatus->currentStateTime = 2;
             playerStatus->fallState = 2;
-            playerStatus->flags &= ~0x00020000;
+            playerStatus->flags &= ~PLAYER_STATUS_FLAGS_20000;
             suggest_player_anim_clearUnkFlag(0x10002);
         }
         playerStatus->spriteFacingAngle = clamp_angle(playerStatus->spriteFacingAngle);
