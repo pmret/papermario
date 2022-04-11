@@ -2,6 +2,7 @@
 #include "battle/battle.h"
 #include "script_api/battle.h"
 #include "sprite/npc/whacka.h"
+#include "mapfs/iwa_bt02_shape.h"
 
 #define NAMESPACE b_area_iwa_iwa_02
 
@@ -25,7 +26,7 @@ EvtScript N(afterBattle_802215B0) = {
 };
 
 s32 N(foregroundModelList_802215C0)[] = {
-    0x00000011, 0x00000010, 0x00000000,
+    MODEL_o331, MODEL_iwa1, 0,
 };
 
 Stage NAMESPACE = {
