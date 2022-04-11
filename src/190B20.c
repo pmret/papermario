@@ -7,6 +7,8 @@
 #include "model.h"
 #include "sprite.h"
 
+extern void D_80283D98;
+
 typedef struct PartnerDMAData {
     /* 0x00 */ u32 dmaStart;
     /* 0x04 */ u32 dmaEnd;
@@ -1067,10 +1069,8 @@ f32 D_80283690[] = {
     1.0f, 0.8f, 0.8f, 0.8f, 0.9f, 0.9f, 0.9f,
 };
 
-// TODO fix raw ptrs
-s32 D_80283744[] = {
-    0x00000000, 0x80283D98, 0x80283D98, 0x80283D98, 0x80283D98, 0x80283D98, 0x80283D98, 0x80283D98, 0x80283D98,
-    0x80283D98, 0x80283D98,
+UNK_PTR D_80283744[] = {
+    NULL, &D_80283D98, &D_80283D98, &D_80283D98, &D_80283D98, &D_80283D98, &D_80283D98, &D_80283D98, &D_80283D98, &D_80283D98, &D_80283D98,
 };
 
 s32 bMessages[] = {
