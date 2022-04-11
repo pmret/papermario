@@ -9,8 +9,6 @@ INCLUDE_ASM(s32, "world/area_kkj/kkj_16/AED410", func_80240028_AED438);
 
 #include "world/common/atomic/UnkPhysicsFuncs.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kkj/kkj_16/AED410", func_802405F4_AEDA04);
-
 INCLUDE_ASM(s32, "world/area_kkj/kkj_16/AED410", func_802406D8_AEDAE8);
 
 const char* kkj_16_str = "kkj_14";

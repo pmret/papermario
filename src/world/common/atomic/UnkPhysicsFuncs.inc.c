@@ -127,3 +127,15 @@ ApiStatus N(UnkModelMatrixFunc2)(Evt* script, s32 isInitialCall) {
     evt_set_variable(script, outVar, outVal);
     return ApiStatus_DONE2;
 }
+
+ApiStatus N(UnkAtan2Func)(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 outVar = *args++;
+    s32 temp_s3 = evt_get_variable(script, *args++);
+    s32 temp_s2 = evt_get_variable(script, *args++);
+    s32 temp_s0_5 = evt_get_variable(script, *args++);
+    s32 temp = evt_get_variable(script, *args++);
+
+    evt_set_variable(script, outVar, atan2(temp_s3, temp_s2, temp_s0_5, temp));
+    return ApiStatus_DONE2;
+}
