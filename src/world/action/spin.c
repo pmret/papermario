@@ -12,9 +12,7 @@ void phys_clear_spin_history(void);
 void func_802B6000_E25D60(void) {
     PlayerSpinState* playerSpinState = &gPlayerSpinState;
     PlayerStatus* playerStatus = &gPlayerStatus;
-    f32 sp10;
-    f32 sp14;
-    f32 temp_f24;
+    f32 sp10, sp14, temp_f24;
     s32 phi_s2, phi_s3, phi_s4;
     s32 temp_v1_2;
     s32 phi_s5 = 0;
