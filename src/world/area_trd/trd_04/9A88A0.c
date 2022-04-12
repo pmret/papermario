@@ -79,11 +79,11 @@ void func_80243310_9AB700(Evt* script, NpcAISettings* aiSettings, EnemyTerritory
     enemy->unk_10.z = npc->pos.z;
     enemy->unk_07 = 1;
 
-    ai_enemy_play_sound(npc, 0x2C1, 0);
+    ai_enemy_play_sound(npc, SOUND_UNUSED_2C1, 0);
     yawTemp = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
-    npc->duration = 0xC;
+    npc->duration = 12;
     npc->yaw = yawTemp;
-    script->functionTemp[0] = 0xD;
+    script->functionTemp[0] = 13;
 }
 
 void func_80243438_9AB828(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
@@ -101,7 +101,7 @@ void func_80243438_9AB828(Evt* script, NpcAISettings* aiSettings, EnemyTerritory
         npc->jumpVelocity = 0.0f;
         npc->moveSpeed = 3.0f;
         npc->currentAnim.w = enemy->animList[10];
-        script->functionTemp[0] = 0xE;
+        script->functionTemp[0] = 14;
     }
 }
 
