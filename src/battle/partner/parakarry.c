@@ -43,87 +43,72 @@ ApiStatus func_80238000_6FFD80(Evt* evt, s32 isInitialCall) {
     f32 clampedAngleDiff, tempAngle;
     s32 hudID, i;
 
-    if(isInitialCall) {
+    if (isInitialCall) {
         evt->functionTemp[0] = 0;
     }
 
-    switch(evt->functionTemp[0]) {
+    switch (evt->functionTemp[0]) {
         case 0:
-            hudID = hud_element_create(HudScript_AimMarkerF);
-            D_8023BD78[0] = hudID;
-            hud_element_set_render_depth(hudID, 0xA);
-            hud_element_set_render_pos(hudID, -0x64, -0x64);
+            D_8023BD78[0] = hudID = hud_element_create(HudScript_AimMarkerF);
+            hud_element_set_render_depth(hudID, 10);
+            hud_element_set_render_pos(hudID, -100, -100);
 
-            hudID = hud_element_create(HudScript_AimMarkerE);
-            D_8023BD78[1] = hudID;
-            hud_element_set_render_depth(hudID, 0xA);
-            hud_element_set_render_pos(hudID, -0x64, -0x64);
+            D_8023BD78[1] = hudID = hud_element_create(HudScript_AimMarkerE);
+            hud_element_set_render_depth(hudID, 10);
+            hud_element_set_render_pos(hudID, -100, -100);
 
-            hudID = hud_element_create(HudScript_AimMarkerD);
-            D_8023BD78[2] = hudID;
-            hud_element_set_render_depth(hudID, 0xA);
-            hud_element_set_render_pos(hudID, -0x64, -0x64);
+            D_8023BD78[2] = hudID = hud_element_create(HudScript_AimMarkerD);
+            hud_element_set_render_depth(hudID, 10);
+            hud_element_set_render_pos(hudID, -100, -100);
 
-            hudID = hud_element_create(HudScript_AimMarkerC);
-            D_8023BD78[3] = hudID;
-            hud_element_set_render_depth(hudID, 0xA);
-            hud_element_set_render_pos(hudID, -0x64, -0x64);
+            D_8023BD78[3] = hudID = hud_element_create(HudScript_AimMarkerC);
+            hud_element_set_render_depth(hudID, 10);
+            hud_element_set_render_pos(hudID, -100, -100);
 
-            hudID = hud_element_create(HudScript_AimMarkerB);
-            D_8023BD78[4] = hudID;
-            hud_element_set_render_depth(hudID, 0xA);
-            hud_element_set_render_pos(hudID, -0x64, -0x64);
+            D_8023BD78[4] = hudID = hud_element_create(HudScript_AimMarkerB);
+            hud_element_set_render_depth(hudID, 10);
+            hud_element_set_render_pos(hudID, -100, -100);
 
-            hudID = hud_element_create(HudScript_AimMarkerA);
-            D_8023BD78[5] = hudID;
-            hud_element_set_render_depth(hudID, 0xA);
-            hud_element_set_render_pos(hudID, -0x64, -0x64);
+            D_8023BD78[5] = hudID = hud_element_create(HudScript_AimMarkerA);
+            hud_element_set_render_depth(hudID, 10);
+            hud_element_set_render_pos(hudID, -100, -100);
 
-            hudID = hud_element_create(HudScript_AimReticle);
-            D_8023BD78[6] = hudID;
-            hud_element_set_render_depth(hudID, 0xA);
-            hud_element_set_render_pos(hudID, -0x64, -0x64);
+            D_8023BD78[6] = hudID = hud_element_create(HudScript_AimReticle);
+            hud_element_set_render_depth(hudID, 10);
+            hud_element_set_render_pos(hudID, -100, -100);
 
-            hudID = hud_element_create(HudScript_AimShimmerF);
-            D_8023BD98[0] = hudID;
+            D_8023BD98[0] = hudID = hud_element_create(HudScript_AimShimmerF);
             hud_element_set_render_depth(hudID, 9);
-            hud_element_set_render_pos(hudID, -0x64, -0x64);
+            hud_element_set_render_pos(hudID, -100, -100);
 
-            hudID = hud_element_create(HudScript_AimShimmerE);
-            D_8023BD98[1] = hudID;
+            D_8023BD98[1] = hudID = hud_element_create(HudScript_AimShimmerE);
             hud_element_set_render_depth(hudID, 9);
-            hud_element_set_render_pos(hudID, -0x64, -0x64);
+            hud_element_set_render_pos(hudID, -100, -100);
 
-            hudID = hud_element_create(HudScript_AimShimmerD);
-            D_8023BD98[2] = hudID;
+            D_8023BD98[2] = hudID = hud_element_create(HudScript_AimShimmerD);
             hud_element_set_render_depth(hudID, 9);
-            hud_element_set_render_pos(hudID, -0x64, -0x64);
+            hud_element_set_render_pos(hudID, -100, -100);
 
-            hudID = hud_element_create(HudScript_AimShimmerC);
-            D_8023BD98[3] = hudID;
+            D_8023BD98[3] = hudID = hud_element_create(HudScript_AimShimmerC);
             hud_element_set_render_depth(hudID, 9);
-            hud_element_set_render_pos(hudID, -0x64, -0x64);
+            hud_element_set_render_pos(hudID, -100, -100);
 
-            hudID = hud_element_create(HudScript_AimShimmerB);
-            D_8023BD98[4] = hudID;
+            D_8023BD98[4] = hudID = hud_element_create(HudScript_AimShimmerB);
             hud_element_set_render_depth(hudID, 9);
-            hud_element_set_render_pos(hudID, -0x64, -0x64);
+            hud_element_set_render_pos(hudID, -100, -100);
 
-            hudID = hud_element_create(HudScript_AimShimmerA);
-            D_8023BD98[5] = hudID;
+            D_8023BD98[5] = hudID = hud_element_create(HudScript_AimShimmerA);
             hud_element_set_render_depth(hudID, 9);
-            hud_element_set_render_pos(hudID, -0x64, -0x64);
+            hud_element_set_render_pos(hudID, -100, -100);
 
-            hudID = hud_element_create(HudScript_AimTarget);
-            D_8023BDB4 = hudID;
-            hud_element_set_render_depth(hudID, 0xA);
+            D_8023BDB4 = hudID = hud_element_create(HudScript_AimTarget);
+            hud_element_set_render_depth(hudID, 10);
             hud_element_create_transform_A(D_8023BDB4);
-            hud_element_set_render_pos(hudID, -0x64, -0x64);
-            D_8023BDC4 = -0x30;
-            D_8023BDC8 = 0x50;
+            hud_element_set_render_pos(hudID, -100, -100);
+            D_8023BDC4 = -48;
+            D_8023BDC8 = 80;
 
-            hudID = hud_element_create(HudScript_StickHoldLeft);
-            D_8023BDC0 = hudID;
+            D_8023BDC0 = hudID = hud_element_create(HudScript_StickHoldLeft);
             hud_element_set_render_pos(hudID, D_8023BDC4, D_8023BDC8);
             hud_element_set_render_depth(hudID, 0);
 
@@ -171,10 +156,10 @@ ApiStatus func_80238000_6FFD80(Evt* evt, s32 isInitialCall) {
                 i++;
             } while (screenY >= 30 && i < 30);
 
-            state->moveTime = 0x78;
+            state->moveTime = 120;
             state->angle = state->unk_18.x + rand_int(state->unk_18.y - state->unk_18.x - 2.0f);
             D_8023BDB8 = 0;
-            D_8023BDBC = 0x5A;
+            D_8023BDBC = 90;
             state->velocity = 3.0f;
             battleStatus->unk_86 = 0;
             func_80268858();
@@ -182,14 +167,14 @@ ApiStatus func_80238000_6FFD80(Evt* evt, s32 isInitialCall) {
             evt->functionTemp[0] = 1;
             break;
         case 1:
-            if(gActionCommandStatus.autoSucceed || battleStatus->currentButtonsDown & BUTTON_STICK_LEFT) {
+            if (gActionCommandStatus.autoSucceed || battleStatus->currentButtonsDown & BUTTON_STICK_LEFT) {
                 D_8023BDBC = 0;
             }
 
-            if(D_8023BDBC != 0) {
+            if (D_8023BDBC != 0) {
                 D_8023BDBC--;
-                if(D_8023BDBC == 0) {
-                    if(rand_int(100) < 50) {
+                if (D_8023BDBC == 0) {
+                    if (rand_int(100) < 50) {
                         state->angle = state->unk_18.x;
                     } else {
                         state->angle = state->unk_18.y;
@@ -200,21 +185,21 @@ ApiStatus func_80238000_6FFD80(Evt* evt, s32 isInitialCall) {
             }
 
             sfx_play_sound(SOUND_311);
-            D_8023BDBC = 0x3C;
+            D_8023BDBC = 60;
             evt->functionTemp[0] = 2;
             break;
         case 2:
-            if(!(gActionCommandStatus.autoSucceed)) {
-                if(!(battleStatus->currentButtonsDown & BUTTON_STICK_LEFT)) {
+            if (!(gActionCommandStatus.autoSucceed)) {
+                if (!(battleStatus->currentButtonsDown & BUTTON_STICK_LEFT)) {
                     evt->functionTemp[0] = 3;
                     break;
                 }
             } else {
-                if(D_8023BDBC == 0) {
+                if (D_8023BDBC == 0) {
                     targetActor = get_actor(parakarry->targetActorID);
                     tempAngle = fabsf(get_clamped_angle_diff(state->angle, state->bounceDivisor)) / state->unk_24 * targetActor->scalingFactor;
 
-                    if(tempAngle < 3.0f) {
+                    if (tempAngle < 3.0f) {
                         evt->functionTemp[0] = 3;
                         break;
                     }
@@ -225,12 +210,12 @@ ApiStatus func_80238000_6FFD80(Evt* evt, s32 isInitialCall) {
 
             state->angle += state->velocity;
 
-            if(state->angle <= state->unk_18.x) {
+            if (state->angle <= state->unk_18.x) {
                 state->angle = state->unk_18.x;
                 state->velocity = 0.0f - state->velocity;
             }
 
-            if(state->angle >= state->unk_18.y) {
+            if (state->angle >= state->unk_18.y) {
                 state->angle = state->unk_18.y;
                 state->velocity = 0.0f - state->velocity;
             }
@@ -240,32 +225,32 @@ ApiStatus func_80238000_6FFD80(Evt* evt, s32 isInitialCall) {
             clampedAngleDiff = get_clamped_angle_diff(state->angle, state->bounceDivisor);
             tempAngle = fabsf(clampedAngleDiff) / state->unk_24 * targetActor->scalingFactor;
 
-            if(state->velocity >= 0.0f) {
-                if(clampedAngleDiff < 0.0f) {
+            if (state->velocity >= 0.0f) {
+                if (clampedAngleDiff < 0.0f) {
                     battleStatus->unk_86 = 0;
                 } else {
                     battleStatus->unk_86 = -1;
                 }
-            } else if(clampedAngleDiff < 0.0f) {
+            } else if (clampedAngleDiff < 0.0f) {
                 battleStatus->unk_86 = -1;
             } else {
                 battleStatus->unk_86 = 0;
             }
             battleStatus->unk_84 = 0;
 
-            if(tempAngle < 7.0f) {
+            if (tempAngle < 7.0f) {
                 battleStatus->unk_84 = 1;
                 battleStatus->unk_86 = 1;
                 func_80269160();
-            } else if(state->angle < state->bounceDivisor) {
+            } else if (state->angle < state->bounceDivisor) {
                 battleStatus->unk_84 = -1;
             }
 
-            for(i = 0; i < ARRAY_COUNT(D_8023BD78); i++) {
+            for (i = 0; i < ARRAY_COUNT(D_8023BD78); i++) {
                 hud_element_free(D_8023BD78[i]);
             }
 
-            for(i = 0; i < ARRAY_COUNT(D_8023BD98); i++) {
+            for (i = 0; i < ARRAY_COUNT(D_8023BD98); i++) {
                 hud_element_free(D_8023BD98[i]);
             }
 
@@ -275,22 +260,22 @@ ApiStatus func_80238000_6FFD80(Evt* evt, s32 isInitialCall) {
             return ApiStatus_DONE2;
     }
 
-    if(evt->functionTemp[0] < 3) {
-        if(evt->functionTemp[0] > 0) {
+    if (evt->functionTemp[0] < 3) {
+        if (evt->functionTemp[0] > 0) {
             hudID = D_8023BDC0;
             targetActor = get_actor(parakarry->targetActorID);
             clampedAngleDiff = get_clamped_angle_diff(state->angle, state->bounceDivisor);
             tempAngle = fabsf(clampedAngleDiff) / state->unk_24 * targetActor->scalingFactor;
 
-            if(tempAngle < 7.0f) {
+            if (tempAngle < 7.0f) {
                 hud_element_set_script(hudID, HudScript_StickNeutral);
             } else {
                 hud_element_set_script(hudID, HudScript_StickHoldLeft);
             }
 
-            D_8023BDC4 += 0x14;
-            if(D_8023BDC4 >= 0x33) {
-                D_8023BDC4 = 0x32;
+            D_8023BDC4 += 20;
+            if (D_8023BDC4 >= 51) {
+                D_8023BDC4 = 50;
             }
             hud_element_set_render_pos(hudID, D_8023BDC4, D_8023BDC8);
         }
@@ -300,11 +285,11 @@ ApiStatus func_80238000_6FFD80(Evt* evt, s32 isInitialCall) {
     hudID = D_8023BDB4;
     hud_element_set_render_pos(hudID, screenX, screenY);
     hud_element_set_transform_rotation(hudID, 0.0f, 0.0f, D_8023BDB8);
-    D_8023BDB8 -= 0xA;
+    D_8023BDB8 -= 10;
     D_8023BDB8 = clamp_angle(D_8023BDB8);
 
-    if(evt->functionTemp[0] >= 2) {
-        if(evt->functionTemp[0] < 3) {
+    if (evt->functionTemp[0] >= 2) {
+        if (evt->functionTemp[0] < 3) {
             tempAngle = clamp_angle(state->angle);
             tempX = state->currentPos.x;
             tempY = state->currentPos.y;
@@ -314,7 +299,7 @@ ApiStatus func_80238000_6FFD80(Evt* evt, s32 isInitialCall) {
             x = state->currentPos.x;
             y = state->currentPos.y;
 
-            for(i = 0; i < 6; i++) {
+            for (i = 0; i < ARRAY_COUNT(D_8023BD98); i++) {
                 x += (tempX - state->currentPos.x) / 6.0f;
                 y += (tempY - state->currentPos.y) / 6.0f;
                 z += (tempZ - state->currentPos.z) / 6.0f;
@@ -398,7 +383,7 @@ ApiStatus func_80238E24_700BA4(Evt* evt, s32 isInitialCall) {
     f64 y;
     u32 temp_s4;
 
-    if(isInitialCall) {
+    if (isInitialCall) {
         evt->functionTempPtr[1] = get_actor(parakarry->targetActorID);
         evt->functionTemp[0] = 0;
     }
@@ -406,7 +391,7 @@ ApiStatus func_80238E24_700BA4(Evt* evt, s32 isInitialCall) {
     temp_s4 = evt->functionTemp[0];
     targetActor = evt->functionTempPtr[1];
 
-    switch(evt->functionTemp[0]) {
+    switch (evt->functionTemp[0]) {
         case 0:
             parakarry->state.goalPos.x = targetActor->currentPos.x - parakarry->currentPos.x;
             parakarry->state.goalPos.y = targetActor->currentPos.y - parakarry->currentPos.y;
@@ -423,11 +408,11 @@ ApiStatus func_80238E24_700BA4(Evt* evt, s32 isInitialCall) {
             parakarry->state.moveTime += 6;
             parakarry->state.moveTime = clamp_angle(parakarry->state.moveTime);
 
-            if(gGameStatusPtr->frameCounter % 10 == 0) {
+            if (gGameStatusPtr->frameCounter % 10 == 0) {
                 sfx_play_sound_at_position(SOUND_2009, 0, parakarry->state.currentPos.x, parakarry->state.currentPos.y, parakarry->state.currentPos.z);
             }
 
-            if(parakarry->state.currentPos.x > 240.0f) {
+            if (parakarry->state.currentPos.x > 240.0f) {
                 battleStatus->unk_84 = temp_s4;
                 return ApiStatus_DONE2;
             }
