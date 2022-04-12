@@ -40,12 +40,8 @@ ApiStatus func_80238000_6FFD80(Evt* evt, s32 isInitialCall) {
     f32 x, y, z;
     s32 screenX, screenY, screenZ;
     f32 tempX, tempY, tempZ;
-    f32 clampedAngleDiff;
-    f32 randInt;
-    s32 hudID;
-    s32 i;
-    f32 tempAngle;
-    f32 oneSixteen;
+    f32 clampedAngleDiff, tempAngle;
+    s32 hudID, i;
 
     if(isInitialCall) {
         evt->functionTemp[0] = 0;
@@ -131,7 +127,6 @@ ApiStatus func_80238000_6FFD80(Evt* evt, s32 isInitialCall) {
             hud_element_set_render_pos(hudID, D_8023BDC4, D_8023BDC8);
             hud_element_set_render_depth(hudID, 0);
 
-            oneSixteen = 116.0f;
             set_goal_pos_to_part(state, parakarry->targetActorID, parakarry->targetPartIndex);
             targetActor = get_actor(parakarry->targetActorID);
             targetActorPart = get_actor_part(targetActor, parakarry->targetPartIndex);
@@ -146,8 +141,8 @@ ApiStatus func_80238000_6FFD80(Evt* evt, s32 isInitialCall) {
             state->currentPos.z = parakarry->currentPos.z;
             state->angle = atan2(state->currentPos.x, state->currentPos.y, state->goalPos.x, state->goalPos.y);
             state->bounceDivisor = state->angle;
+            state->distance = 116.0f;
             state->unk_18.x = state->angle;
-            state->distance = oneSixteen;
             i = 0;
 
             do {
@@ -177,11 +172,10 @@ ApiStatus func_80238000_6FFD80(Evt* evt, s32 isInitialCall) {
             } while (screenY >= 30 && i < 30);
 
             state->moveTime = 0x78;
-            randInt = rand_int(state->unk_18.y - state->unk_18.x - 2.0f);
+            state->angle = state->unk_18.x + rand_int(state->unk_18.y - state->unk_18.x - 2.0f);
             D_8023BDB8 = 0;
             D_8023BDBC = 0x5A;
             state->velocity = 3.0f;
-            state->angle = state->unk_18.x + randInt;
             battleStatus->unk_86 = 0;
             func_80268858();
             func_80269118();
@@ -443,6 +437,7 @@ ApiStatus func_80238E24_700BA4(Evt* evt, s32 isInitialCall) {
     parakarry->currentPos.x = actorState->currentPos.x;
     parakarry->currentPos.y = actorState->currentPos.y;
     parakarry->currentPos.z = actorState->currentPos.z;
+
     targetActor->currentPos.x = actorState->currentPos.x + actorState->goalPos.x;
     targetActor->currentPos.y = actorState->currentPos.y + actorState->goalPos.y;
     targetActor->currentPos.z = actorState->currentPos.z + actorState->goalPos.z;
