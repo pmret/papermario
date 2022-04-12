@@ -2,4 +2,11 @@
 
 #include "world/common/UnkPosFunc2.inc.c"
 
-INCLUDE_ASM(s32, "world/area_tik/tik_18/8959F0", func_80240680_895D60);
+ApiStatus func_80240680_895D60(Evt* script, s32 isInitialCall) {
+    Enemy* enemy = get_enemy_safe(1);
+
+    if (enemy != 0) {
+        enemy->varTable[0] = 1;
+    }
+    return ApiStatus_DONE2;
+}
