@@ -25389,6 +25389,7 @@ D_F5000007 = 0xF5000007; // type:data
 D_F79DDD0F = 0xF79DDD0F; // type:data
 D_FA000028 = 0xFA000028; // type:data
 D_FD100008 = 0xFD100008; // type:data
+D_80283D98 = 0x80283D98; // type:data
 dead_atan2 = 0x8002AF70; // type:func dead:yes
 dead_cos_rad = 0x8002B4C0; // type:func dead:yes
 dead_playFX_11 = 0x80075170; // type:func dead:yes
