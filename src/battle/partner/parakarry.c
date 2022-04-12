@@ -130,7 +130,7 @@ ApiStatus func_80238000_6FFD80(Evt* evt, s32 isInitialCall) {
             state->unk_18.x = state->angle;
             i = 0;
 
-            do {
+            for (i = 0; i < 30; i++){
                 state->unk_18.x -= 1.0f;
                 tempAngle = clamp_angle(state->unk_18.x);
                 x = state->currentPos.x;
@@ -139,13 +139,15 @@ ApiStatus func_80238000_6FFD80(Evt* evt, s32 isInitialCall) {
                 clampedAngleDiff = state->distance;
                 add_vec2D_polar(&x, &y, clampedAngleDiff, tempAngle);
                 get_screen_coords(gCurrentCameraID, x, y, z, &screenX, &screenY, &screenZ);
-                i++;
-            } while (screenY < 181 && i < 30);
+                if (screenY > 180) {
+                    break;
+                }
+            }
 
             state->unk_18.y = state->angle;
             i = 0;
 
-            do {
+            for (i = 0; i < 30; i++){
                 state->unk_18.y += 1.0f;
                 tempAngle = clamp_angle(state->unk_18.y);
                 x = state->currentPos.x;
@@ -153,8 +155,10 @@ ApiStatus func_80238000_6FFD80(Evt* evt, s32 isInitialCall) {
                 z = state->currentPos.z;
                 add_vec2D_polar(&x, &y, state->distance, tempAngle);
                 get_screen_coords(gCurrentCameraID, x, y, z, &screenX, &screenY, &screenZ);
-                i++;
-            } while (screenY >= 30 && i < 30);
+                if (screenY < 30) {
+                    break;
+                }
+            }
 
             state->moveTime = 120;
             state->angle = state->unk_18.x + rand_int(state->unk_18.y - state->unk_18.x - 2.0f);
