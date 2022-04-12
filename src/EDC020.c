@@ -6,7 +6,7 @@
 #define NAMESPACE EDC020
 
 extern s32 D_802429E0[];
-//extern s32** EDC020_VarStash = NULL;
+//extern s32** EDC020_varStash = NULL;
 
 /*
 extern s32 D_80241850_EDD830 = {

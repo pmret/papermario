@@ -1,8 +1,10 @@
 #include "common.h"
 
-// #define CHUCK_QUIZMO_NPC_ID 10
+#ifndef CHUCK_QUIZMO_NPC_ID
+#  error CHUCK_QUIZMO_NPC_ID must be defined for QuizmoData.inc.c
+#endif
 
-s32** N(Quizmo_VarStash) = NULL;
+s32** N(Quizmo_varStash) = NULL;
 
 EvtScript N(EVS_Quizmo_GiveItem_0) = {
     EVT_CALL(ShowGotItem, EVT_VAR(0), 1, 0)

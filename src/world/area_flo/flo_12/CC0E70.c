@@ -167,7 +167,7 @@ NpcSettings N(npcSettings_80240E5C) = {
 
 #include "common/foliage.inc.c"
 
-s32** N(VarStash) = NULL;
+s32** N(varStash) = NULL;
 
 EvtScript N(802417F0) = {
     EVT_CALL(ShowGotItem, EVT_VAR(0), 1, 0)

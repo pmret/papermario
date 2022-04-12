@@ -67,7 +67,7 @@ ApiStatus N(dup_Pipe_GetEntryPos)(Evt* script, s32 isInitialCall);
 ApiStatus N(dup_Pipe_SetAnimFlag)(Evt* script, s32 isInitialCall);
 ApiStatus N(dup_Pipe_GetPointAheadOfPlayer)(Evt* script, s32 isInitialCall);
 
-extern s32** N(VarStash);
+extern s32** N(varStash);
 extern N(shopInventory) N(shopInventory_8024B4FC)[];
 extern N(shopPrice) N(shopPriceList_8024B550)[];
 

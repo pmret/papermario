@@ -71,7 +71,7 @@ ApiStatus CreatePushBlockGrid(Evt* script, s32 isInitialCall) {
     s32 i;
 
     D_802DBC88[blockSystemID] = blockGrid = general_heap_malloc(sizeof(PushBlockGrid));
-    
+
     blockGrid->cells = general_heap_malloc(sizeNx*sizeNz);
 
     if (inputGridData == NULL) {
@@ -84,14 +84,14 @@ ApiStatus CreatePushBlockGrid(Evt* script, s32 isInitialCall) {
             blockGrid->cells[i] = dataToCopy[i];
         }
     }
-    
+
     blockGrid->numCellsX = sizeNx;
     blockGrid->numCellsZ = sizeNz;
     blockGrid->centerPos[0] = centerX;
     blockGrid->centerPos[1] = centerY;
     blockGrid->centerPos[2] = centerZ;
     blockGrid->dropCallback = NULL;
-    
+
     return ApiStatus_DONE2;
 }
 
@@ -105,10 +105,10 @@ ApiStatus SetPushBlock(Evt* script, s32 isInitialCall) {
     PushBlockGrid* blockGrid = D_802DBC88[blockSystemID];
     s32 blockEntityID;
     s32 cellIndex;
-    
+
     cellIndex = gridX + (gridZ * blockGrid->numCellsX);
     blockGrid->cells[cellIndex] = occupant;
-    
+
     if (occupant == PUSH_GRID_BLOCK) {
         s32 posX = blockGrid->centerPos[0] + (gridX * BLOCK_GRID_SIZE) + (BLOCK_GRID_SIZE / 2);
         s32 posY = blockGrid->centerPos[1];
@@ -117,7 +117,7 @@ ApiStatus SetPushBlock(Evt* script, s32 isInitialCall) {
         bind_trigger_1(&D_80285674_7E64F4, TRIGGER_WALL_PUSH, blockEntityID + EVT_ENTITY_ID_BIT, (s32)blockGrid, blockEntityID, 3);
         script->varTable[0] = blockEntityID;
     }
-    
+
     return ApiStatus_DONE2;
 }
 
@@ -130,7 +130,7 @@ ApiStatus GetPushBlock(Evt* script, s32 isInitialCall) {
 
     PushBlockGrid* blockGrid = D_802DBC88[blockSystemID];
     s32 cellIndex;
-    
+
     if (gridX >= blockGrid->numCellsX || gridX < 0 || gridZ >= blockGrid->numCellsZ || gridZ < 0) {
          // vanilla bug: sets error value and then performs lookup anyway -- return statement forgotten here
         evt_set_variable(script, outVar, PUSH_GRID_OUT_OF_BOUNDS);
@@ -153,15 +153,15 @@ ApiStatus GetGridIndexFromPos(Evt* script, s32 isInitialCall) {
     PushBlockGrid* blockGrid = D_802DBC88[blockSystemID];
     s32 gridX;
     s32 gridZ;
-    
+
     posX -= blockGrid->centerPos[0];
     gridX = posX / BLOCK_GRID_SIZE;
     posZ -= blockGrid->centerPos[2];
     gridZ = posZ / BLOCK_GRID_SIZE;
-    
+
     evt_set_variable(script, outVarX, gridX);
     evt_set_variable(script, outVarZ, gridZ);
-    
+
     return ApiStatus_DONE2;
 }
 
@@ -169,8 +169,8 @@ ApiStatus SetPushBlockFallEffect(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 blockSystemID = evt_get_variable(script, *args++);
     PushBlockFallCallback fallCallback = (PushBlockFallCallback)evt_get_variable(script, *args++);
-    
+
     D_802DBC88[blockSystemID]->dropCallback = fallCallback;
-    
+
     return ApiStatus_DONE2;
 }

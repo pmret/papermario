@@ -1393,7 +1393,7 @@ N(shopPrice) N(shopPriceList_8024B550)[] = {
 };
 
 #define NAMESPACE dro_01_dup
-s32** N(VarStash) = NULL;
+s32** N(varStash) = NULL;
 #define NAMESPACE dro_01
 
 EvtScript N(8024B5B4) = {

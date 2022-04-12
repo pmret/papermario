@@ -8,7 +8,7 @@ dlabel D_8024A8B0_8F66D0
 dlabel D_8024A8DC_8F66FC
 .word 0x00000000, 0x00170016, 0x00000000, 0x00000000, 0x00000000, EnemyNpcHit, 0x00000000, EnemyNpcDefeat, 0x00000000, 0x00000000, 0x000E0001
 
-dlabel kmr_20_VarStash
+dlabel kmr_20_varStash
 .word 0x00000000
 
 dlabel D_8024A90C_8F672C

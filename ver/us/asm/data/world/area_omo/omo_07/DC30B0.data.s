@@ -2,7 +2,7 @@
 
 .section .data
 
-dlabel omo_07_VarStash
+dlabel omo_07_varStash
 .word 0x00000000
 
 dlabel D_80245E04_DC30B4

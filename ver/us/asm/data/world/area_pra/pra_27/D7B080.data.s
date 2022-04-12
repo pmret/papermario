@@ -2,7 +2,7 @@
 
 .section .data
 
-dlabel pra_27_VarStash
+dlabel pra_27_varStash
 .word 0x00000000
 
 dlabel D_80241694_D7B084

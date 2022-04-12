@@ -164,7 +164,7 @@ static s32 N(pad_1CA8)[] = {
     0x00000000, 0x00000000,
 };
 
-s32** N(VarStash) = NULL;
+s32** N(varStash) = NULL;
 
 EvtScript N(80241CB4) = SCRIPT({
     ShowGotItem(EVT_VAR(0), 1, 0);

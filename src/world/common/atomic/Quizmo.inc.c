@@ -1,11 +1,10 @@
-
 #include "common.h"
 #include "effects.h"
 
 // TODO, can we remove this once all data disasm'ed?
 extern QuizRequirement N(Quizmo_Requirements)[];
 extern u8 N(Quizmo_Answers)[64];
-extern s32** N(Quizmo_VarStash);
+extern s32** N(Quizmo_varStash);
 
 void N(Quizmo_NPC_OnRender)(Npc* npc);
 
@@ -13,19 +12,19 @@ ApiStatus N(Quizmo_StashVars)(Evt* script, s32 isInitialCall) {
     //static s32** varTable = NULL;
     s32 i;
 
-    if (N(Quizmo_VarStash) == NULL) {
-        N(Quizmo_VarStash) = heap_malloc(sizeof(script->varTable));
+    if (N(Quizmo_varStash) == NULL) {
+        N(Quizmo_varStash) = heap_malloc(sizeof(script->varTable));
 
         for (i = 0; i < ARRAY_COUNT(script->varTable); i++) {
-            N(Quizmo_VarStash)[i] = script->varTablePtr[i];
+            N(Quizmo_varStash)[i] = script->varTablePtr[i];
         }
     } else {
         for (i = 0; i < ARRAY_COUNT(script->varTable); i++) {
-            script->varTablePtr[i] = N(Quizmo_VarStash)[i];
+            script->varTablePtr[i] = N(Quizmo_varStash)[i];
         }
 
-        heap_free(N(Quizmo_VarStash));
-        N(Quizmo_VarStash) = NULL;
+        heap_free(N(Quizmo_varStash));
+        N(Quizmo_varStash) = NULL;
     }
 
     return ApiStatus_DONE2;
@@ -70,7 +69,7 @@ ApiStatus N(Quizmo_ShouldAppear)(Evt* script, s32 isInitialCall) {
         changedLocation = FALSE;
         hasLocation = FALSE;
     }
-    
+
     if (!hasLocation) {
         if (rand_int(100) < 30) {
             locMap = rand_int(numMaps - 1);
@@ -369,7 +368,7 @@ ApiStatus N(Quizmo_AddViewRelativeOffset)(Evt* script, s32 isInitialCall) {
     s32 z = evt_get_variable(script, *args++);
     Bytecode ourVarX = *args++;
     Bytecode outVarZ = *args++;
-    
+
     s32 cameraYaw = gCameras[gCurrentCameraID].currentYaw;
     s32 outX = evt_get_variable(script, EVT_ARRAY(1)) - (z * cos_deg(cameraYaw));
     s32 outZ = evt_get_variable(script, EVT_ARRAY(3)) - (z * sin_deg(cameraYaw));
