@@ -63,13 +63,13 @@ glabel func_802452C4_A2F504
 /* A2F5EC 802453AC 8E050000 */  lw        $a1, ($s0)
 /* A2F5F0 802453B0 0C0B1EAF */  jal       evt_get_variable
 /* A2F5F4 802453B4 0220202D */   daddu    $a0, $s1, $zero
-/* A2F5F8 802453B8 3C018025 */  lui       $at, %hi(D_8024F5A0)
-/* A2F5FC 802453BC AC22F5A0 */  sw        $v0, %lo(D_8024F5A0)($at)
+/* A2F5F8 802453B8 3C018025 */  lui       $at, %hi(mac_04_Quizmo_Worker)
+/* A2F5FC 802453BC AC22F5A0 */  sw        $v0, %lo(mac_04_Quizmo_Worker)($at)
 /* A2F600 802453C0 3C018025 */  lui       $at, %hi(D_8024F5A4)
 /* A2F604 802453C4 AC20F5A4 */  sw        $zero, %lo(D_8024F5A4)($at)
 .L802453C8:
-/* A2F608 802453C8 3C118025 */  lui       $s1, %hi(D_8024F5A0)
-/* A2F60C 802453CC 2631F5A0 */  addiu     $s1, $s1, %lo(D_8024F5A0)
+/* A2F608 802453C8 3C118025 */  lui       $s1, %hi(mac_04_Quizmo_Worker)
+/* A2F60C 802453CC 2631F5A0 */  addiu     $s1, $s1, %lo(mac_04_Quizmo_Worker)
 /* A2F610 802453D0 8E2F0000 */  lw        $t7, ($s1)
 /* A2F614 802453D4 19E00088 */  blez      $t7, .L802455F8
 /* A2F618 802453D8 00000000 */   nop

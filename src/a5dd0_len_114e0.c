@@ -1307,7 +1307,7 @@ void render_entities(void) {
 
         if (entity != NULL) {
             if (!gGameStatusPtr->isBattle) {
-                if (D_80151310 != 0 &&
+                if (gEntityHideMode != 0 &&
                     !(entity->flags & ENTITY_FLAGS_IGNORE_DISTANCE_CULLING) &&
                     dist2D(gPlayerStatusPtr->position.x,
                            gPlayerStatusPtr->position.z,
@@ -1317,11 +1317,11 @@ void render_entities(void) {
                     continue;
                 }
 
-                if (D_80151310 == 1) {
+                if (gEntityHideMode == 1) {
                     if (!(entity->flags & ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE1)) {
                         continue;
                     }
-                } else if (D_80151310 == 2) {
+                } else if (gEntityHideMode == 2) {
                     if (!(entity->flags & ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE2)) {
                         continue;
                     }

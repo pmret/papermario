@@ -81,7 +81,7 @@ extern s16 D_800F7B80;
 extern EncounterStatus gCurrentEncounter;
 extern u8* D_801512F0;
 extern s16 D_80151308;
-extern s32 D_80151310;
+extern s32 gEntityHideMode;
 
 extern s32 D_8010C92C;
 extern s32 D_8010C950;

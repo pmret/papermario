@@ -2,7 +2,7 @@
 
 .section .data
 
-dlabel kpa_15_varTable
+dlabel kpa_15_varStash
 .word 0x00000000
 
 dlabel D_80240AA4_A59E34

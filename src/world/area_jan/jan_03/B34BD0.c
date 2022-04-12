@@ -5,7 +5,7 @@ static char* N(exit_str_1) = "jan_05";
 static char* N(exit_str_2) = "jan_22";
 static char* N(exit_str_3) = "";
 
-#define UNK_ALPHA_FUNC_NPC 17
+#define CHUCK_QUIZMO_NPC_ID 17
 
 #include "world/common/atomic/Pipe.inc.c"
 
@@ -53,47 +53,13 @@ INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80241A64_B36634);
 
 INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80241B00_B366D0);
 
-#include "world/common/StashVars.inc.c"
+extern s32 N(Quizmo_Worker);
+extern s32 N(Quizmo_AnswerResult);
+extern EffectInstance* N(Quizmo_StageEffect);
+extern EffectInstance* N(Quizmo_AudienceEffect);
+extern EffectInstance* N(Quizmo_VannaTEffect);
 
-#include "world/common/GetItemName.inc.c"
-
-#include "world/common/Set80151310.inc.c"
-
-#include "world/common/UnkQuizFunc.inc.c"
-
-#include "world/common/UnkFunc31.inc.c"
-
-INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80242288_B36E58);
-
-INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_8024230C_B36EDC);
-
-INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80242524_B370F4);
-
-INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_802425D8_B371A8);
-
-INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_8024260C_B371DC);
-
-INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_8024268C_B3725C);
-
-INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_802426A4_B37274);
-
-INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_802426C0_B37290);
-
-#include "world/common/GetGameStatus75.inc.c"
-
-#include "world/common/SetCamVfov.inc.c"
-
-#include "world/common/GetCamVfov.inc.c"
-
-#include "world/common/UnkCameraFunc.inc.c"
-
-#include "world/common/UnkRotatePlayer.inc.c"
-
-#include "world/common/UnkPartnerFuncs.inc.c"
-
-INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80242B94_B37764);
-
-INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80242C00_B377D0);
+#include "world/common/atomic/Quizmo.inc.c"
 
 #include "world/common/SetManyVars.inc.c"
 

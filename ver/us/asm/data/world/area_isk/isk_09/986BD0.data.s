@@ -2,7 +2,7 @@
 
 .section .data
 
-dlabel isk_09_varTable
+dlabel isk_09_varStash
 .word 0x00000000
 
 dlabel D_802406F4_986BD4
