@@ -44,7 +44,6 @@ ApiStatus func_80238000_6FFD80(Evt* evt, s32 isInitialCall) {
     f32 randInt;
     s32 hudID;
     s32 i;
-    f32 one;
     f32 tempAngle;
     f32 oneSixteen;
 
@@ -132,7 +131,6 @@ ApiStatus func_80238000_6FFD80(Evt* evt, s32 isInitialCall) {
             hud_element_set_render_pos(hudID, D_8023BDC4, D_8023BDC8);
             hud_element_set_render_depth(hudID, 0);
 
-            one = 1.0f;
             oneSixteen = 116.0f;
             set_goal_pos_to_part(state, parakarry->targetActorID, parakarry->targetPartIndex);
             targetActor = get_actor(parakarry->targetActorID);
@@ -153,7 +151,7 @@ ApiStatus func_80238000_6FFD80(Evt* evt, s32 isInitialCall) {
             i = 0;
 
             do {
-                state->unk_18.x -= one;
+                state->unk_18.x -= 1.0f;
                 tempAngle = clamp_angle(state->unk_18.x);
                 x = state->currentPos.x;
                 y = state->currentPos.y;
@@ -197,7 +195,7 @@ ApiStatus func_80238000_6FFD80(Evt* evt, s32 isInitialCall) {
             if(D_8023BDBC != 0) {
                 D_8023BDBC--;
                 if(D_8023BDBC == 0) {
-                    if(rand_int(0x64) < 0x32) {
+                    if(rand_int(100) < 50) {
                         state->angle = state->unk_18.x;
                     } else {
                         state->angle = state->unk_18.y;
