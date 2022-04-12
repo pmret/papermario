@@ -130,7 +130,7 @@ ApiStatus func_80238000_6FFD80(Evt* evt, s32 isInitialCall) {
             state->unk_18.x = state->angle;
             i = 0;
 
-            for (i = 0; i < 30; i++){
+            for (i = 0; i < 30; i++) {
                 state->unk_18.x -= 1.0f;
                 tempAngle = clamp_angle(state->unk_18.x);
                 x = state->currentPos.x;
@@ -147,7 +147,7 @@ ApiStatus func_80238000_6FFD80(Evt* evt, s32 isInitialCall) {
             state->unk_18.y = state->angle;
             i = 0;
 
-            for (i = 0; i < 30; i++){
+            for (i = 0; i < 30; i++) {
                 state->unk_18.y += 1.0f;
                 tempAngle = clamp_angle(state->unk_18.y);
                 x = state->currentPos.x;
