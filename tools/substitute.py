@@ -61,9 +61,9 @@ for root, dirs, files in os.walk(asm_dir):
                 namespace = Path(f_path).parent.parent.name
 
             # TODO refactor into new func
-            if f_name[:-2] in from_funcs:
-                syms = list(set(re.findall(r"D_[0-9A-F]{8}_[0-9A-F]{6}", f_text)))
-                print(f"{syms[0]} {namespace}_VarStash")
+            # if f_name[:-2] in from_funcs:
+            #     syms = list(set(re.findall(r"D_[0-9A-F]{8}_[0-9A-F]{6}", f_text)))
+            #     print(f"{syms[0]} {namespace}_varTable")
 
             for func in from_funcs:
                 f_text = f_text.replace(func, namespace + "_" + func_name)

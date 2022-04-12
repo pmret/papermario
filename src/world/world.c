@@ -174,7 +174,7 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
     gCameras[CAM_DEFAULT].flags |= CAM_FLAG_ENABLED;
     gCameras[CAM_BATTLE].flags |= CAM_FLAG_ENABLED;
     gCameras[CAM_TATTLE].flags |= CAM_FLAG_ENABLED;
-    gCameras[CAM_CAM3].flags |= CAM_FLAG_ENABLED;
+    gCameras[CAM_3].flags |= CAM_FLAG_ENABLED;
 
     if (gGameStatusPtr->creditsViewportMode == -1) {
         set_cam_viewport(0, 12, 20, 296, 200);

@@ -278,8 +278,8 @@ typedef struct Stage {
     /* 0x10 */ Bytecode* postBattle;
     /* 0x14 */ const char* bg;
     /* 0x18 */ s32* foregroundModelList;
-    /* 0x1C */ s32 unk_1C;
-    /* 0x20 */ Formation* unk_20;
+    /* 0x1C */ s32 specialFormationSize;
+    /* 0x20 */ Formation* specialFormation;
     /* 0x24 */ s32 unk_24;
 } Stage; // size = 0x28
 

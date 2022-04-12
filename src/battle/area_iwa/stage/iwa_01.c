@@ -2,6 +2,7 @@
 #include "battle/battle.h"
 #include "script_api/battle.h"
 #include "sprite/npc/whacka.h"
+#include "mapfs/iwa_bt01_shape.h"
 
 #define NAMESPACE b_area_iwa_iwa_01
 
@@ -16,7 +17,7 @@ extern EvtScript N(80221334);
 
 EvtScript N(beforeBattle_80220860) = {
     EVT_CALL(SetSpriteShading, -1)
-    EVT_CALL(SetGroupEnabled, 21, 0)
+    EVT_CALL(SetGroupEnabled, MODEL_b, FALSE)
     EVT_RETURN
     EVT_END
 };
@@ -27,7 +28,7 @@ EvtScript N(afterBattle_80220894) = {
 };
 
 s32 N(foregroundModelList_802208A4)[] = {
-    0x00000017, 0x00000018, 0x00000000,
+    MODEL_iwa1, MODEL_o331, 0,
 };
 
 Stage NAMESPACE = {
@@ -38,8 +39,8 @@ Stage NAMESPACE = {
     .preBattle = N(beforeBattle_80220860),
     .postBattle = N(afterBattle_80220894),
     .foregroundModelList = N(foregroundModelList_802208A4),
-    .unk_1C = 1,
-    .unk_20 = &N(specialFormation_802208E4),
+    .specialFormationSize = 1,
+    .specialFormation = &N(specialFormation_802208E4),
     .unk_24 = 0x200,
 };
 

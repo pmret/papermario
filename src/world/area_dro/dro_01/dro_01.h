@@ -50,7 +50,7 @@ ApiStatus N(Quizmo_SetVannaAnim_Wave)(Evt* script, s32 isInitialCall);
 ApiStatus N(Quizmo_CreateWorker)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_80242730_95D930)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_80242784_95D984)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_802427BC_95D9BC)(Evt* script, s32 isInitialCall);
+ApiStatus N(BigArrayFunc)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_80242858_95DA58)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_80243014_95E214)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_80243058_95E258)(Evt* script, s32 isInitialCall);

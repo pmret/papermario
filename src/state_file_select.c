@@ -48,7 +48,7 @@ void state_init_file_select(void) {
     gCurrentCameraID = CAM_DEFAULT;
     gCameras[CAM_BATTLE].flags |= CAM_FLAG_ENABLED;
     gCameras[CAM_TATTLE].flags |= CAM_FLAG_ENABLED;
-    gCameras[CAM_CAM3].flags |= CAM_FLAG_ENABLED;
+    gCameras[CAM_3].flags |= CAM_FLAG_ENABLED;
     gCameras[CAM_DEFAULT].vfov = 25.0f;
     set_cam_viewport(0, 12, 28, 296, 184);
     gCameras[CAM_DEFAULT].auxBoomLength = 40;
