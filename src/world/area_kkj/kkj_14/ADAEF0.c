@@ -6,7 +6,7 @@ INCLUDE_ASM(s32, "world/area_kkj/kkj_14/ADAEF0", func_8024035C_ADB1FC);
 
 INCLUDE_ASM(s32, "world/area_kkj/kkj_14/ADAEF0", func_80240384_ADB224);
 
-INCLUDE_ASM(s32, "world/area_kkj/kkj_14/ADAEF0", func_802403A0_ADB240);
+#include "world/common/GetPeachDisguise.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kkj/kkj_14/ADAEF0", func_802403CC_ADB26C);
 

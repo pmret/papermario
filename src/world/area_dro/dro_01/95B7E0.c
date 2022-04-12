@@ -68,7 +68,7 @@ static EffectInstance* N(D_8024DFE0);
 static EffectInstance* N(D_8024DFE4);
 static EffectInstance* N(D_8024DFE8);
 static s8 N(pad_D_8024DFEC)[0x4];
-static s32 N(D_8024DFF0)[112];
+static s32 N(bigArray)[112];
 static s8 N(pad_D_8024E1B0)[0x4]; // Probably part of the above
 static s32 N(D_8024E1B4);
 
@@ -303,7 +303,6 @@ NpcSettings N(npcSettings_8024518C) = {
     .radius = 19,
     .level = 99,
 };
-
 
 s32** N(varTable) = NULL;
 
@@ -1042,8 +1041,8 @@ EvtScript N(802477E8) = {
 };
 
 EvtScript N(8024792C) = {
-    EVT_CALL(N(func_802427BC_95D9BC), EVT_VAR(0))
-    EVT_BIND_PADLOCK(N(802477E8), 0x10, 0, EVT_PTR(N(D_8024DFF0)), 0, 1)
+    EVT_CALL(N(BigArrayFunc), EVT_VAR(0))
+    EVT_BIND_PADLOCK(N(802477E8), 0x10, 0, EVT_PTR(N(bigArray)), 0, 1)
     EVT_CALL(N(func_80242730_95D930), EVT_VAR(0))
     EVT_RETURN
     EVT_END
@@ -1113,8 +1112,8 @@ EvtScript N(802479FC) = {
 EvtScript N(80247D20) = {
     EVT_SET(EVT_VAR(0), EVT_VAR(11))
     EVT_SET(EVT_VAR(1), EVT_VAR(2))
-    EVT_CALL(N(func_802427BC_95D9BC), EVT_VAR(0))
-    EVT_BIND_PADLOCK(N(802479FC), 0x10, 0, EVT_PTR(N(D_8024DFF0)), 0, 1)
+    EVT_CALL(N(BigArrayFunc), EVT_VAR(0))
+    EVT_BIND_PADLOCK(N(802479FC), 0x10, 0, EVT_PTR(N(bigArray)), 0, 1)
     EVT_CALL(N(func_80242730_95D930), EVT_VAR(0))
     EVT_RETURN
     EVT_END
@@ -2895,7 +2894,7 @@ ApiStatus N(func_80242730_95D930)(Evt* script, s32 isInitialCall) {
     if (*ptr != NULL) {
         ptr = &N(D_802477E0_9629E0);
         *ptr = 0;
-        evt_set_variable(script, *args, N(D_802477E4_9629E4));
+        evt_set_variable(script, *args++, N(D_802477E4_9629E4));
         return ApiStatus_DONE2;
     }
 
@@ -2905,29 +2904,12 @@ ApiStatus N(func_80242730_95D930)(Evt* script, s32 isInitialCall) {
 ApiStatus N(func_80242784_95D984)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
-    N(D_802477E4_9629E4) = evt_get_variable(script, *args);
+    N(D_802477E4_9629E4) = evt_get_variable(script, *args++);
     N(D_802477E0_9629E0) = 1;
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802427BC_95D9BC)(Evt* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-    s32* ptr = (s32*) evt_get_variable(script, *args);
-    s32 i;
-
-    if (ptr != NULL) {
-        for (i = 0; ptr[i] != 0; i++) {
-            N(D_8024DFF0)[i] = ptr[i];
-        }
-        N(D_8024DFF0)[i] = 0;
-    } else {
-        for (i = 0; i < 0x70; i++) {
-            N(D_8024DFF0)[i] = i + 16;
-            N(D_8024DFF0)[112] = 0;
-        }
-    }
-    return ApiStatus_DONE2;
-}
+#include "world/common/BigArrayFunc.inc.c"
 
 ApiStatus N(func_80242858_95DA58)(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;

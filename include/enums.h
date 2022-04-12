@@ -525,8 +525,12 @@ enum SoundIDs {
     SOUND_108                       = 0x00000108,
     SOUND_IMMUNE                    = 0x0000010C,
     SOUND_HIT_BONES                 = 0x0000010D,
+    SOUND_133                       = 0x00000133,
+    SOUND_134                       = 0x00000134,
     SOUND_STEP1                     = 0x00000141,
     SOUND_STEP2                     = 0x00000142,
+    SOUND_143                       = 0x00000143,
+    SOUND_144                       = 0x00000144,
     SOUND_TORNADO_JUMP              = 0x00000147,
     SOUND_SOFT_LAND                 = 0x00000148,
     SOUND_LAND                      = 0x0000014B,
@@ -683,7 +687,7 @@ enum Cams {
     CAM_DEFAULT      = 0,
     CAM_BATTLE       = 1,
     CAM_TATTLE       = 2,
-    CAM_CAM3         = 3,
+    CAM_3            = 3,
 };
 
 enum CamShakeModes {

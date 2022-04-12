@@ -635,62 +635,66 @@ EvtScript world_kooper_put_away = {
     EVT_END
 };
 
-#ifdef NON_EQUIVALENT
-s32 world_kooper_test_first_strike(Npc* npcKooper, Npc* npc2) {
-    f32 npcKooperXTemp, npcKooperYTemp, npcKooperZTemp;
-    f32 npcX, npcY, npcZ;
-    f32 npcKooperX, npcKooperY, npcKooperZ;
-    f32 npcCollisionHeight, kooperCollisionHeight;
-    f32 npcCollisionRadius, kooperCollisionRadius;
-    f32 temp_f0, temp_f20;
-    f32 npcDistanceToKooperX;
-    f32 new_var2;
+s32 world_kooper_test_first_strike(Npc* kooper, Npc* enemy) {
+    f32 xTemp, yTemp, zTemp;
+    f32 enemyX, enemyY, enemyZ;
+    f32 kooperX;
+    f32 kooperZ;
+    f32 enemyCollHeight;
+    f32 kooperY;
+    f32 kooperCollHeight;
+    f32 enemyCollRadius;
+    f32 kooperCollRadius;
+    f32 arctan;
+    f32 dist;
 
-    if (D_802BEB40_31CB60) {
-        npcX = npc2->pos.x;
-        npcY = npc2->pos.y;
-        npcZ = npc2->pos.z;
+    if (D_802BEB40_31CB60 != 0) {
+        enemyX = enemy->pos.x;
+        enemyY = enemy->pos.y;
+        enemyZ = enemy->pos.z;
 
-        npcDistanceToKooperX = npcKooper->pos.x;
-        npcKooperX = npcDistanceToKooperX;
-        npcKooperY = npcKooper->pos.y;
-        npcKooperZ = npcKooper->pos.z;
+        kooperX = kooper->pos.x;
+        kooperY = kooper->pos.y;
+        kooperZ = kooper->pos.z;
 
-        npcCollisionHeight = npc2->collisionHeight;
-        npcCollisionRadius = npc2->collisionRadius * 0.8;
-        kooperCollisionHeight = npcKooper->collisionHeight;
-        kooperCollisionRadius = npcKooper->collisionRadius * 0.55;
+        enemyCollHeight = enemy->collisionHeight;
+        enemyCollRadius = enemy->collisionRadius * 0.55;
 
-        temp_f20 = atan2(npcX, npcZ, npcKooperX, npcKooperZ);
-        temp_f0 = dist2D(npcX, npcZ, npcKooperX, npcKooperZ);
+        kooperCollHeight = kooper->collisionHeight;
+        kooperCollRadius = kooper->collisionRadius * 0.8;
 
-        npcKooperX = npcDistanceToKooperX;
-        npcKooperXTemp = npcKooper->pos.x;
-        npcKooperYTemp = npcKooper->pos.y;
-        npcKooperZTemp = npcKooper->pos.z;
+        arctan = atan2(enemyX, enemyZ, kooperX, kooperZ);
+        dist = dist2D(enemyX, enemyZ, kooperX, kooperZ);
 
-        if (npc_test_move_taller_with_slipping(0, &npcKooperXTemp, &npcKooperYTemp, &npcKooperZTemp, temp_f0, temp_f20,
-                                               kooperCollisionHeight, kooperCollisionRadius + npcCollisionRadius) == 0) {
-            if (!((npcKooperY) > npcCollisionHeight + npcY)) {
-                if (!((kooperCollisionHeight + npcCollisionHeight) < npcY)) {
-                    npcDistanceToKooperX = npcX - npcKooperX;
-                    new_var2 = SQ(npcDistanceToKooperX);
-                    npcKooperX = (SQ(kooperCollisionRadius)) + (SQ(npcCollisionRadius));
-                    npcKooperZ = npcZ - npcKooperZ;
-                    if (!(npcKooperX <= (new_var2 + (SQ(npcKooperZ))))) {
-                        D_802BEB40_31CB60 = 2;
-                        return 1;
-                    }
-                }
-            }
+        xTemp = kooper->pos.x;
+        yTemp = kooper->pos.y;
+        zTemp = kooper->pos.z;
+
+        if (npc_test_move_taller_with_slipping(0, &xTemp, &yTemp, &zTemp, dist, arctan, kooperCollHeight,
+                                                 kooperCollRadius + enemyCollRadius))
+        {
+            return FALSE;
+        }
+
+        if (kooperY > enemyY + enemyCollHeight) {
+            return FALSE;
+        }
+
+        if (enemyY > kooperY + kooperCollHeight) {
+            return FALSE;
+        }
+
+        kooperX = enemyX - kooperX;
+        kooperZ = enemyZ - kooperZ;
+        dist = SQ(kooperX) + SQ(kooperZ);
+
+        if (!(SQ(kooperCollRadius) + SQ(enemyCollRadius) <= dist)) {
+            D_802BEB40_31CB60 = 2;
+            return TRUE;
         }
     }
-
-    return 0;
+    return FALSE;
 }
-#else
-INCLUDE_ASM(s32, "world/partner/kooper", world_kooper_test_first_strike);
-#endif
 
 void world_kooper_pre_battle(Npc* kooper) {
     PlayerStatus* playerStatus = &gPlayerStatus;

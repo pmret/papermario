@@ -121,7 +121,7 @@ void state_init_title_screen(void) {
     gCameras[CAM_DEFAULT].flags |= CAMERA_FLAGS_2;
     gCameras[CAM_BATTLE].flags |= CAMERA_FLAGS_2;
     gCameras[CAM_TATTLE].flags |= CAMERA_FLAGS_2;
-    gCameras[CAM_CAM3].flags |= CAMERA_FLAGS_2;
+    gCameras[CAM_3].flags |= CAMERA_FLAGS_2;
     set_cam_viewport(0, 12, 28, 296, 184);
     gCameras[CAM_DEFAULT].auxBoomLength = 40;
     gCameras[CAM_DEFAULT].bgColor[0] = 0;
