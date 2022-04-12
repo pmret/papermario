@@ -7,6 +7,8 @@
 #include "model.h"
 #include "sprite.h"
 
+extern void D_80283D98;
+
 typedef struct PartnerDMAData {
     /* 0x00 */ u32 dmaStart;
     /* 0x04 */ u32 dmaEnd;
@@ -1067,10 +1069,8 @@ f32 D_80283690[] = {
     1.0f, 0.8f, 0.8f, 0.8f, 0.9f, 0.9f, 0.9f,
 };
 
-// TODO fix raw ptrs
-s32 D_80283744[] = {
-    0x00000000, 0x80283D98, 0x80283D98, 0x80283D98, 0x80283D98, 0x80283D98, 0x80283D98, 0x80283D98, 0x80283D98,
-    0x80283D98, 0x80283D98,
+UNK_PTR D_80283744[] = {
+    NULL, &D_80283D98, &D_80283D98, &D_80283D98, &D_80283D98, &D_80283D98, &D_80283D98, &D_80283D98, &D_80283D98, &D_80283D98, &D_80283D98,
 };
 
 s32 bMessages[] = {
@@ -1586,26 +1586,26 @@ void btl_init_menu_partner(void) {
     }
 }
 
-s32 count_power_plus(s32 arg0) {
-    s32 pp;
+s32 count_power_plus(s32 damageType) {
+    s32 count;
     s32 i;
 
     if (gGameStatusPtr->peachFlags & 1) {
         return 0;
     }
 
-    pp = 0;
+    count = 0;
     for (i = 0; i < ARRAY_COUNT(gPlayerData.equippedBadges); i++) {
         u8 moveID = gItemTable[gPlayerData.equippedBadges[i]].moveID;
 
         if (gMoveTable[moveID].battleSubmenu == 7 && moveID == MOVE_POWER_PLUS) {
-            if (gBattleStatus.flags1 & BS_FLAGS1_10 || arg0 & 0x80) {
-                pp++;
+            if (gBattleStatus.flags1 & BS_FLAGS1_10 || damageType & DAMAGE_TYPE_JUMP) {
+                count++;
             }
         }
     }
 
-    return pp;
+    return count;
 }
 
 void deduct_current_move_fp(void) {

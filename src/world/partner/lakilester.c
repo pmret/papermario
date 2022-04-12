@@ -625,7 +625,6 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
                 playerStatus->flags &= ~NPC_FLAG_100;
                 return ApiStatus_DONE2;
             }
-
             script->functionTemp[1] = 3;
             script->functionTemp[2] = disable_player_input();
             D_802BFF04 = 1;
@@ -813,7 +812,6 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
             } else {
                 yaw = (0.0f + camYaw) - 90.0f;
             }
-
             npc->yaw = yaw;
             sp2C = dist2D(playerStatus->position.x, playerStatus->position.z,
                             npc->moveToPos.x, npc->moveToPos.z);
@@ -905,7 +903,6 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
             partnerActionStatus->actionState.b[3] = 0;
             partnerActionStatus->actionState.b[0] = 0;
             playerStatus->flags &= ~PLAYER_STATUS_FLAGS_100;
-
             if (D_802BFF04 != 0) {
                 D_802BFF04 = 0;
                 enable_player_input();

@@ -1,6 +1,6 @@
 #include "mac_01.h"
 
-#define UNK_ALPHA_FUNC_NPC 5
+#define CHUCK_QUIZMO_NPC_ID 5
 
 extern u8 D_80258407_818C87;
 
@@ -33,47 +33,13 @@ extern u8 D_80258407_818C87;
 static char* N(exit_str_0) = "flo_00";
 static char* N(exit_str_1) = "kmr_22";
 
-#include "world/common/StashVars.inc.c"
+extern s32 N(Quizmo_Worker);
+extern s32 N(Quizmo_AnswerResult);
+extern EffectInstance* N(Quizmo_StageEffect);
+extern EffectInstance* N(Quizmo_AudienceEffect);
+extern EffectInstance* N(Quizmo_VannaTEffect);
 
-#include "world/common/GetItemName.inc.c"
-
-#include "world/common/Set80151310.inc.c"
-
-#include "world/common/UnkQuizFunc.inc.c"
-
-#include "world/common/UnkFunc31.inc.c"
-
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_802425FC_802E7C);
-
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242680_802F00);
-
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242898_803118);
-
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_8024294C_8031CC);
-
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242980_803200);
-
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242A00_803280);
-
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242A18_803298);
-
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242A34_8032B4);
-
-#include "world/common/GetGameStatus75.inc.c"
-
-#include "world/common/SetCamVfov.inc.c"
-
-#include "world/common/GetCamVfov.inc.c"
-
-#include "world/common/UnkCameraFunc.inc.c"
-
-#include "world/common/UnkRotatePlayer.inc.c"
-
-#include "world/common/UnkPartnerFuncs.inc.c"
-
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242F08_803788);
-
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242F74_8037F4);
+#include "world/common/atomic/Quizmo.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242FA4_803824);
 

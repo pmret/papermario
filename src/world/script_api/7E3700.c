@@ -1,6 +1,6 @@
 #include "common.h"
 
-extern PushBlockGrid* D_802DBC88[]; //TODO determind length
+extern PushBlockGrid* D_802DBC88[]; //TODO determine length
 extern EvtScript D_80285674_7E64F4;
 extern EntityBlueprint D_802EA2BC;
 
@@ -38,10 +38,12 @@ ApiStatus func_80283240(Evt* script) {
     Bytecode* args = script->ptrReadPos;
     Bytecode outVar = *args++;
     Bytecode* sourceToFind = (Bytecode*)evt_get_variable(script, *args++);
+
     s32 retVal = FALSE;
     s32 i;
 
-    for (i = 0; i < MAX_SCRIPTS; i++) {
+    for (i = 0; i < MAX_SCRIPTS; i++)
+    {
         Evt* iterScript = get_script_by_index(i);
         if (iterScript != 0) {
             if (iterScript->ptrFirstLine == sourceToFind) {

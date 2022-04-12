@@ -86,16 +86,16 @@ void balloon_render(EffectInstance* effect) {
 void balloon_appendGfx(void* effect) {
     Matrix4f sp18;
     Matrix4f sp58;
-    BalloonFXData* part = ((EffectInstance*)effect)->data;
-    s32 idx = part->unk_00;
+    BalloonFXData* data = ((EffectInstance*)effect)->data;
+    s32 idx = data->unk_00;
 
     gDPPipeSync(gMasterGfxPos++);
     gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
-    shim_guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);
+    shim_guTranslateF(sp18, data->unk_04, data->unk_08, data->unk_0C);
     shim_guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
     shim_guMtxCatF(sp58, sp18, sp18);
-    shim_guScaleF(sp58, part->unk_18, part->unk_18, 1.0f);
+    shim_guScaleF(sp58, data->unk_18, data->unk_18, 1.0f);
     shim_guMtxCatF(sp58, sp18, sp18);
     shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 

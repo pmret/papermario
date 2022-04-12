@@ -183,7 +183,7 @@ NpcSettings N(npcSettings_80240EDC) = {
     .level = 99,
 };
 
-s32** N(varTable) = NULL;
+s32** N(varStash) = NULL;
 
 EvtScript N(80240F0C) = {
     EVT_CALL(ShowGotItem, EVT_VAR(0), 1, 0)
