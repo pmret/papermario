@@ -11,7 +11,7 @@ dlabel D_80247B44_EE6504
 
 .section .text
 
-glabel func_802414D0_EDFE90
+glabel EDEA00_DeadUnkNpcAIMainFunc9
 /* EDFE90 802414D0 27BDFFB0 */  addiu     $sp, $sp, -0x50
 /* EDFE94 802414D4 AFB50044 */  sw        $s5, 0x44($sp)
 /* EDFE98 802414D8 0080A82D */  daddu     $s5, $a0, $zero

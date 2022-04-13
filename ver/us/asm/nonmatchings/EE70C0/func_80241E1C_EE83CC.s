@@ -8,7 +8,7 @@ dlabel jtbl_80245398_EEB948
 
 .section .text
 
-glabel func_80241E1C_EE83CC
+glabel EE70C0_DeadUnkNpcAIMainFunc9
 /* EE83CC 80241E1C 27BDFFB0 */  addiu     $sp, $sp, -0x50
 /* EE83D0 80241E20 AFB50044 */  sw        $s5, 0x44($sp)
 /* EE83D4 80241E24 0080A82D */  daddu     $s5, $a0, $zero

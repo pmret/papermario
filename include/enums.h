@@ -1081,12 +1081,26 @@ enum ItemIDs {
     ITEM_ITEMS_ICON                   = 0x0000016C,
 };
 
-#define ITEM_FIRST_KEY_ITEM ITEM_LUCKY_STAR
-#define ITEM_LAST_KEY_ITEM ITEM_PRISON_KEY4
-#define ITEM_FIRST_NORMAL_ITEM ITEM_FIRE_FLOWER
-#define ITEM_LAST_NORMAL_ITEM ITEM_JELLY_SHROOM6
+#define ITEM_FIRST_KEY ITEM_LUCKY_STAR
+#define ITEM_LAST_KEY ITEM_PRISON_KEY4
+#define ITEM_FIRST_CONSUMABLE ITEM_FIRE_FLOWER
+#define ITEM_LAST_VALID_CONSUMABLE ITEM_JELLY_SHROOM1
+#define ITEM_LAST_CONSUMABLE ITEM_JELLY_SHROOM6
 #define ITEM_FIRST_BADGE ITEM_SPIN_SMASH
 #define ITEM_LAST_BADGE ITEM_ATTACK_FX_F5
+
+enum ItemTypeFlags {
+    ITEM_TYPE_FLAG_WORLD_USABLE         = 0x0001,
+    ITEM_TYPE_FLAG_BATTLE_USABLE        = 0x0002,
+    ITEM_TYPE_FLAG_CONSUMABLE           = 0x0004,
+    ITEM_TYPE_FLAG_KEY                  = 0x0008,
+    ITEM_TYPE_FLAG_GEAR                 = 0x0020,
+    ITEM_TYPE_FLAG_BADGE                = 0x0040,
+    ITEM_TYPE_FLAG_FOOD_OR_DRINK        = 0x0080,
+    ITEM_TYPE_FLAG_USE_DRINK_ANIMATION  = 0x0100,
+    ITEM_TYPE_FLAG_ENTITY_COLLECTIBLE   = 0x0200,
+    ITEM_TYPE_FLAG_ENTITY_FULLSIZE      = 0x1000,
+};
 
 // TODO: use NPC_ANIM-like macro for player animations
 enum PlayerAnims {
@@ -3354,26 +3368,6 @@ enum ElementImmunityFlags {
     ELEMENT_IMMUNITY_FLAGS_20000000          = 0x20000000,
     ELEMENT_IMMUNITY_FLAGS_40000000          = 0x40000000,
     ELEMENT_IMMUNITY_FLAGS_80000000          = 0x80000000,
-};
-
-enum ItemTypeFlags {
-    ITEM_TYPE_FLAGS_0                 = 0x0000,
-    ITEM_TYPE_FLAGS_1                 = 0x0001,
-    ITEM_TYPE_FLAGS_2                 = 0x0002,
-    ITEM_TYPE_FLAGS_4                 = 0x0004,
-    ITEM_TYPE_FLAGS_8                 = 0x0008,
-    ITEM_TYPE_FLAGS_10                = 0x0010,
-    ITEM_TYPE_FLAGS_20                = 0x0020,
-    ITEM_TYPE_FLAGS_40                = 0x0040,
-    ITEM_TYPE_FLAGS_80                = 0x0080,
-    ITEM_TYPE_FLAGS_100               = 0x0100,
-    ITEM_TYPE_FLAGS_200               = 0x0200,
-    ITEM_TYPE_FLAGS_400               = 0x0400,
-    ITEM_TYPE_FLAGS_800               = 0x0800,
-    ITEM_TYPE_FLAGS_1000              = 0x1000,
-    ITEM_TYPE_FLAGS_2000              = 0x2000,
-    ITEM_TYPE_FLAGS_4000              = 0x4000,
-    ITEM_TYPE_FLAGS_8000              = 0x8000,
 };
 
 enum FoldStateFlags {

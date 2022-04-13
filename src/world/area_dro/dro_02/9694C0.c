@@ -72,7 +72,7 @@ static D_8024F010_Struct N(D_8024F010)[3];
 static s8 N(pad_D_8024F07C)[0x4];
 static s32 N(D_8024F080)[112];
 static s8 N(pad_D_8024F240)[0x8]; // likely conencted to the above
-static s32 N(D_8024F248)[91];
+static s32 N(ConsumableChoiceList)[91];
 static s8 N(pad_D_8024F3B4)[0x4]; // likely conencted to the above
 static s32 N(D_8024F3B8);
 
@@ -968,7 +968,7 @@ EvtScript N(8024891C) = {
 
 EvtScript N(80248A50) = {
     EVT_CALL(N(func_802433E8_96C5A8), EVT_VAR(0))
-    EVT_BIND_PADLOCK(N(8024891C), 0x10, 0, EVT_PTR(N(D_8024F248)), 0, 1)
+    EVT_BIND_PADLOCK(N(8024891C), 0x10, 0, EVT_PTR(N(ConsumableChoiceList)), 0, 1)
     EVT_CALL(N(func_802432C0_96C480), EVT_VAR(0))
     EVT_RETURN
     EVT_END
@@ -2601,13 +2601,13 @@ ApiStatus N(func_802433E8_96C5A8)(Evt* script, s32 isInitialCall) {
 
     if (ptr != NULL) {
         for (i = 0; ptr[i] != 0; i++) {
-            N(D_8024F248)[i] = ptr[i];
+            N(ConsumableChoiceList)[i] = ptr[i];
         }
-        N(D_8024F248)[i] = 0;
+        N(ConsumableChoiceList)[i] = 0;
     } else {
         for (i = 0; i <= 90; i++) {
-            N(D_8024F248)[i] = i + 128;
-            N(D_8024F248)[91] = 0;
+            N(ConsumableChoiceList)[i] = i + 128;
+            N(ConsumableChoiceList)[91] = 0;
         }
     }
     return ApiStatus_DONE2;

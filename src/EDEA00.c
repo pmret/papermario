@@ -7,27 +7,9 @@
 
 #include "world/common/UnkFunc41.inc.c"
 
-#include "world/common/UnkNpcAIFunc23.inc.c"
+#include "world/common/atomic/enemy/Dead_UnkAI_9.inc.c"
 
-#include "world/common/UnkNpcAIFunc35.inc.c"
-
-#include "world/common/UnkNpcAIFunc1.inc.c"
-
-#include "world/common/UnkFunc4.inc.c"
-
-#include "world/common/UnkNpcAIFunc2.inc.c"
-
-#include "world/common/SixFloatsFunc.inc.c"
-
-#include "world/common/UnkNpcAIFunc14.inc.c"
-
-#include "world/common/UnkNpcAIFunc3.inc.c"
-
-#include "world/common/UnkFunc6.inc.c"
-
-#include "world/common/UnkFunc5.inc.c"
-
-INCLUDE_ASM(s32, "EDEA00", func_802414D0_EDFE90);
+const char D_80247B44_EE6504[] = "JUGEMU MOVE";
 
 s32 func_802416E8_EE00A8(void) {
     s32 i;

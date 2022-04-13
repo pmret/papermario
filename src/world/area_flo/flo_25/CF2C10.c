@@ -586,7 +586,7 @@ ApiStatus N(func_80241F44_CF4B14)(Evt* script, s32 isInitialCall) {
 
     if (itemId == ITEM_YUMMY_MEAL) {
         script->varTable[9] = 2;
-    } else if (item->typeFlags & 0x80) {
+    } else if (item->typeFlags & ITEM_TYPE_FLAG_FOOD_OR_DRINK) {
         script->varTable[9] = 1;
     } else {
         script->varTable[9] = 0;
@@ -598,8 +598,9 @@ ApiStatus N(func_80241F44_CF4B14)(Evt* script, s32 isInitialCall) {
 ApiStatus N(func_80241FB4_CF4B84)(Evt* script, s32 isInitialCall) {
     s32 i;
 
-    for (i = 0; i <= 90; i++) {
-        N(D_80245110)[i] = 128 + i;
+    // iterate over range of valid consumables
+    for (i = 0; i <= (ITEM_LAST_VALID_CONSUMABLE - ITEM_FIRST_CONSUMABLE); i++) {
+        N(D_80245110)[i] = ITEM_FIRST_CONSUMABLE + i;
     }
 
     N(D_8024527C) = 0;

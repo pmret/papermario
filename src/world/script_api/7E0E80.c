@@ -258,7 +258,7 @@ ApiStatus ShowShopPurchaseDialog(Evt* script, s32 isInitialCall) {
         D_80286530 = 0;
         D_80286534 = 0;
         bpCost = -1;
-        if (shopItem->typeFlags & ITEM_TYPE_FLAGS_40) {
+        if (shopItem->typeFlags & ITEM_TYPE_FLAG_BADGE) {
             bpCost = gMoveTable[shopItem->moveID].costBP;
         }
         script->functionTemp[1] = shop_owner_buy_dialog(0, shopItem->nameMsg, shopInventory->price, bpCost);
