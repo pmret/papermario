@@ -1,6 +1,8 @@
 #include "common.h"
 #include "hud_element.h"
 
+extern s32 D_8008FA78;
+
 extern HudScript HudScript_YellowArrow[];
 
 extern HudScript HudScript_MenuFlee[];
@@ -83,7 +85,9 @@ extern HudScript HudScript_MoveBlueOrbDisabled[];
 extern HudScript HudScript_MoveGreenOrbDisabled[];
 extern HudScript HudScript_MoveRedOrbDisabled[];
 
-extern u8 D_802AD000;
+extern s32 D_802ACC60;
+extern s32 D_802ACC6C;
+extern s8 D_802AD000;
 extern u8 D_802AD001;
 extern s16 D_802AD006;
 extern s16 D_802AD008;
@@ -99,6 +103,16 @@ extern s32 D_802AD054;
 extern s32 D_802AD058;
 extern s8 D_802AD068;
 extern s32 main_menu_numOptions;
+extern s32 D_802AD0A8;
+extern s32 D_802AD0B0;
+extern s32 D_802AD0BB[];
+extern s32 D_802AD100;
+extern s32 D_802AD104;
+extern s32 battle_menu_isEnabled;
+extern s32 battle_menu_isMessageDisabled;
+extern s32 battle_menu_messageIDs[];
+extern s32 battle_menu_submenuIDs;
+extern HudScript* main_battle_menu_JumpHudScripts;
 extern s8 D_802AD10A;
 extern s8 D_802AD10D;
 extern s8 D_802AD10E;
@@ -149,7 +163,7 @@ extern s32 D_802AD690[];
 extern s32 D_802AD6C0[];
 extern s32 D_802AD6D4;
 
-s16 D_802AB340[] = { 0x001C, 0x0028 };
+s16 D_802AB340[] = { 28, 40 };
 
 s16 D_802AB344[] = { 0, -2 };
 
@@ -169,22 +183,28 @@ HudScript* battle_menu_ItemHudScripts[] = { HudScript_MenuItem, HudScript_MenuIt
 
 HudScript* battle_menu_StarPowerHudScripts[] = { HudScript_MenuStarPower, HudScript_MenuStarPowerDisabled };
 
-HudScript* battle_menu_StarPowerMovesHudScripts[] = { HudScript_MenuStarPower, HudScript_MenuStarPowerDisabled, HudScript_Eldstar, HudScript_EldstarDisabled,
+HudScript* battle_menu_StarPowerMovesHudScripts[] = {
+    HudScript_MenuStarPower, HudScript_MenuStarPowerDisabled, HudScript_Eldstar, HudScript_EldstarDisabled,
     HudScript_Mamar, HudScript_MamarDisabled, HudScript_Skolar, HudScript_SkolarDisabled,
     HudScript_Muskular, HudScript_MuskularDisabled, HudScript_Misstar, HudScript_MisstarDisabled,
     HudScript_Klevar, HudScript_KlevarDisabled, HudScript_Kalmar, HudScript_KalmarDisabled,
     HudScript_StarBeam, HudScript_StarBeamDisabled, HudScript_PeachBeam, HudScript_PeachBeamDisabled,
-    HudScript_MenuStarPower, HudScript_MenuStarPowerDisabled, HudScript_MenuStarPower, HudScript_MenuStarPowerDisabled };
+    HudScript_MenuStarPower, HudScript_MenuStarPowerDisabled, HudScript_MenuStarPower, HudScript_MenuStarPowerDisabled
+};
 
-HudScript* battle_menu_PartnerHudScripts[] = { HudScript_Partner0, HudScript_Goombario, HudScript_Kooper, HudScript_Bombette,
+HudScript* battle_menu_PartnerHudScripts[] = {
+    HudScript_Partner0, HudScript_Goombario, HudScript_Kooper, HudScript_Bombette,
     HudScript_Parakarry, HudScript_Partner0, HudScript_Watt, HudScript_Sushie,
     HudScript_Lakilester, HudScript_Bow, HudScript_PartnerA, HudScript_PartnerA,
-    HudScript_PartnerA, HudScript_PartnerA, HudScript_PartnerA, HudScript_PartnerA };
+    HudScript_PartnerA, HudScript_PartnerA, HudScript_PartnerA, HudScript_PartnerA
+};
 
-HudScript* battle_menu_DisabledPartnerHudScripts[] = { HudScript_Partner0Disabled, HudScript_GoombarioDisabled, HudScript_KooperDisabled, HudScript_BombetteDisabled,
+HudScript* battle_menu_DisabledPartnerHudScripts[] = {
+    HudScript_Partner0Disabled, HudScript_GoombarioDisabled, HudScript_KooperDisabled, HudScript_BombetteDisabled,
     HudScript_ParakarryDisabled, HudScript_Partner0Disabled, HudScript_WattDisabled, HudScript_SushieDisabled,
     HudScript_LakilesterDisabled, HudScript_BowDisabled, HudScript_PartnerADisabled, HudScript_PartnerADisabled,
-    HudScript_PartnerADisabled, HudScript_PartnerADisabled, HudScript_PartnerADisabled, HudScript_PartnerADisabled };
+    HudScript_PartnerADisabled, HudScript_PartnerADisabled, HudScript_PartnerADisabled, HudScript_PartnerADisabled
+};
 
 HudScript* battle_menu_StrategiesHudScript[] = { HudScript_MenuStrategies };
 
@@ -219,9 +239,15 @@ s32 D_802AB4F0[] = { 0x2, 0x1, 0x4, 0x6, 0x3, 0x5, 0x1A, 0x3, 0x34, 0x39, 0x31, 
 
 // s8 D_802AB513
 
-s32 D_802AB520[] = { 0x00000000, 0x00090012, 0x000A001A, 0x000B001C, 0x000C0017, 0x009D0001, 0x000E000B, 0x000F0012, 0x00100003, 0x000D0000, 0x00000000, 0x00000000, 0x00000000, 0x00000000 };
+s32 D_802AB520[] = {
+    0x00000000, 0x00090012, 0x000A001A, 0x000B001C, 0x000C0017, 0x009D0001, 0x000E000B, 0x000F0012, 0x00100003,
+    0x000D0000, 0x00000000, 0x00000000, 0x00000000, 0x00000000
+};
 
-s32 D_802AB558[] = { 0x00000000, 0x00090002, 0x000A0005, 0x000B0006, 0x000C0002, 0x009D0002, 0x000E0002, 0x000F0002, 0x00100002, 0x000D0002, 0x00000000, 0x00000000, 0x00000000, 0x00000000 };
+s32 D_802AB558[] = {
+    0x00000000, 0x00090002, 0x000A0005, 0x000B0006, 0x000C0002, 0x009D0002, 0x000E0002, 0x000F0002, 0x00100002,
+    0x000D0002, 0x00000000, 0x00000000, 0x00000000, 0x00000000
+};
 
 HudScript* battle_menu_PartnerMoveHudScripts[] = {
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
@@ -245,7 +271,10 @@ HudScript* battle_menu_TwinkStarPowerHudScripts[] = { HudScript_MenuStarPower, H
 // Dash
 s32 D_802AB734[] = { 0x001D0057 };
 
-s32 D_802AB738[] = { 0x00000000, 0x001D0007, 0x001D0008, 0x001D0009, 0x001D000A, 0x001D000B, 0x001D000C, 0x001D000D, 0x001D000E, 0x001D000F, 0x001D0010, 0x001D0011, 0x001D0012, 0x00000000 };
+s32 D_802AB738[] = {
+    0x00000000, 0x001D0007, 0x001D0008, 0x001D0009, 0x001D000A, 0x001D000B, 0x001D000C, 0x001D000D, 0x001D000E,
+    0x001D000F, 0x001D0010, 0x001D0011, 0x001D0012, 0x00000000
+};
 
 void func_802A1000(void) {
     D_802AD006 = 255;
@@ -296,10 +325,212 @@ void func_802A10B8(void) {
     hud_element_free(D_802AD058);
 }
 
+s32 func_802A11B0(void);
 INCLUDE_ASM(s32, "415D90", func_802A11B0);
 
 void btl_draw_menu_wheel(void);
+
+// various issues
+#ifdef NON_MATCHING
+extern s8 D_802AD002;
+extern s8 D_802AD004;
+extern s16 D_802AD00A;
+extern s32 D_802AD060;
+extern s32 D_802AD064;
+extern s8 D_802AD06B;
+extern f32 D_802AD06C;
+extern f32 D_802AD070;
+
+void btl_draw_menu_wheel(void) {
+    s32 id;
+    s32 opacity;
+
+    f32 temp_f24;
+    f32 theta;
+
+    s32 cond;
+    f32 x;
+    f32 y;
+    f32 scale;
+    s32 i;
+
+    s32 new_var;
+
+    switch (D_802AD000) {
+        case 1:
+            func_80144218(-1);
+            id = D_802AD048;
+            hud_element_set_transform_rotation(id, 0.0f, 0.0f, 0.0f);
+            hud_element_set_alpha(id, (D_802AD006 * 254) / 255);
+            hud_element_set_render_pos(id, 3940 - D_802AD00A, D_802AD00A + 212);
+            func_80144238(id);
+            id = D_802AD044;
+            hud_element_set_alpha(id, (D_802AD006 * 254) / 255);
+            hud_element_set_render_pos(id, 40 - D_802AD00A, D_802AD00A + 212);
+            func_80144238(id);
+            break;
+        case -1:
+        case 2:
+        case 10:
+        case 20:
+        case 30:
+            opacity = (D_802AD006 * D_802AD008) / 255;
+            func_80144218(-1);
+            temp_f24 = (D_802AD100 - D_802AD002) * 28;
+
+            cond = FALSE;
+            if (D_802AD06C > temp_f24) {
+                D_802AD06C -= D_802AD070;
+                if (D_802AD06C < temp_f24) {
+                    D_802AD06C = temp_f24;
+                    cond = TRUE;
+                }
+            } else if (D_802AD06C < temp_f24) {
+                D_802AD06C += D_802AD070;
+                if (D_802AD06C > temp_f24) {
+                    D_802AD06C = temp_f24;
+                    cond = TRUE;
+                }
+            } else {
+                cond = TRUE;
+            }
+
+            if (!cond) {
+                D_802AD070 = (D_802AD070 * (D_802AD070 + 1.0) * (D_802AD070 + 1.0));
+            } else {
+                D_802AD004 = 0;
+                D_802AD070 = 0.3f;
+            }
+
+            theta = D_802AD06C;
+            for (i = 0; i < main_menu_numOptions; i++, theta += 28.0f) {
+                x = 0.0f;
+                y = 0.0f;
+                add_vec2D_polar(&x, &y, 87.0f, theta);
+                id = D_802AD028[i];
+                x = D_802AD060 + x;
+                y = D_802AD064 + y;
+                hud_element_set_transform_pos(id, x, -y, 0.0f);
+                hud_element_set_render_pos(id, 0, 0);
+                hud_element_set_alpha(id, (opacity * 150) / 255);
+
+                if (theta == 56.0f && cond == TRUE) {
+                    hud_element_set_scale(id, 1.6f);
+                } else {
+                    hud_element_set_scale(id, 1.0f);
+                }
+
+                func_80144238(id);
+                if (i == D_802AD06B + D_802AD002) {
+                    x = 0.0f;
+                    y = 0.0f;
+                    add_vec2D_polar(&x, &y, 87.0f, 56.0f);
+                    x = D_802AD060 + x;
+                    y = D_802AD064 + y;
+                    id = D_802AD040;
+                    hud_element_set_transform_pos(id, x, -y, 0.0f);
+                    hud_element_set_render_pos(id, 0, 0);
+                    hud_element_set_alpha(id, (opacity * 180) / 255);
+                    hud_element_set_scale(id, 1.2f);
+                    if (!cond) {
+                        hud_element_set_flags(id, 2);
+                    } else {
+                        hud_element_clear_flags(id, 2);
+                    }
+                    func_80144238(id);
+                }
+            }
+
+            scale = (fabsf(fabsf((D_802AD06C - ((D_802AD100 - D_802AD002) * 28)) * (45.0 / 28.0)) - 22.5) / 22.5) + 0.01;
+            if (cond) {
+                scale = 1.0f;
+            }
+
+            id = D_802AD04C;
+            hud_element_set_transform_rotation_pivot(id, 0, 0);
+            hud_element_set_transform_rotation(id, 0.0f, 0.0f, -43.0f);
+            hud_element_set_scale(id, scale);
+            hud_element_set_transform_scale(id, 1.0f, 1.8f, 1.0f);
+            hud_element_set_alpha(id, (opacity * 200) / 255);
+            hud_element_set_render_pos(id, 79, 176);
+            func_80144238(id);
+
+            id = D_802AD048;
+            scale = (D_802AD06C - ((D_802AD100 - D_802AD002) * 28)) * (45.0 / 28.0);
+            hud_element_set_transform_rotation(id, 0.0f, 0.0f, -scale);
+            hud_element_set_transform_rotation_pivot(id, 18, -20);
+            hud_element_set_scale(id, 0.95f);
+            hud_element_set_alpha(id, (opacity * 254) / 255);
+            hud_element_set_render_pos(id, 40 - D_802AD00A, D_802AD00A + 212);
+            func_80144238(id);
+
+            id = D_802AD044;
+            hud_element_set_alpha(id, (opacity * 254) / 255);
+            hud_element_set_render_pos(id, 40 - D_802AD00A, D_802AD00A + 212);
+            hud_element_set_scale(id, 1.0f);
+            func_80144238(id);
+
+            theta = D_802AD06C;
+            for (i = 0; i < main_menu_numOptions; i++, theta += 28.0f) {
+                s32 l;
+                s32 t;
+                s32 new_var;
+
+                x = 0.0f;
+                y = 0.0f;
+                add_vec2D_polar(&x, &y, 87.0f, theta);
+
+                x = D_802AD060 + x;
+                l = x;
+                y = D_802AD064 + y;
+                t = y;
+                btl_draw_prim_quad(0, 0, 0, 0, l - 12, t - 12, 24, 24);
+                id = D_802AD010[i];
+                hud_element_set_render_pos(id, l, t);
+                hud_element_set_alpha(id, (opacity * 180) / 255);
+                if (i == D_802AD06B + D_802AD002) {
+                    hud_element_set_alpha(id, opacity);
+                }
+                hud_element_draw_clipped(id);
+            }
+
+            if (cond) {
+                s32 msgX;
+                s32 msgY;
+
+                msgX = D_802AD060 + 20;
+                msgY = D_802AD064;
+
+                msgY -= 34;
+
+                btl_draw_prim_quad(0, 0, 0, 0, D_802AD060 + 46, msgY, 48, 16);
+                draw_msg(battle_menu_messageIDs[D_802AD002 + D_802AD06B], msgX, msgY, opacity, 0x35, 0);
+            }
+
+            if ((gBattleStatus.flags1 & 0x02000000) || (gBattleStatus.flags2 & 0x40)) {
+                D_802AD104 = 0;
+            }
+
+            if (D_802AD104 != 0) {
+                id = D_802AD05C;
+                hud_element_set_alpha(id, (opacity * 200) / 255);
+                hud_element_draw_clipped(id);
+                id = D_802AD050;
+                hud_element_set_alpha(id, opacity);
+                hud_element_draw_clipped(id);
+                id = D_802AD054;
+                hud_element_set_alpha(id, opacity);
+                hud_element_draw_clipped(id);
+                id = D_802AD058;
+                hud_element_set_alpha(id, opacity);
+                hud_element_draw_clipped(id);
+            }
+            break;
+    }
+}
+#else
 INCLUDE_ASM(s32, "415D90", btl_draw_menu_wheel);
+#endif
 
 // Very similar to func_802A45D8 - maybe can be used to reduce fake matches there
 void func_802A2684(void) {
@@ -857,122 +1088,116 @@ s32 func_802A58D0(void) {
 
 INCLUDE_ASM(s32, "415D90", btl_state_update_player_menu);
 
-//requires above to be decomped
-#ifdef NON_EQUIVALENT
 void btl_state_draw_player_menu(void) {
     switch (gBattleState2) {
-        case 1:
+        case BATTLE_STATE2_UNK_1:
             btl_draw_menu_wheel();
             break;
-        case 2:
-        case 3:
-        case 4:
-        case 5:
-        case 10:
-        case 11:
-        case 12:
-        case 13:
-        case 14:
-        case 20:
-        case 21:
-        case 22:
-        case 23:
-        case 24:
-        case 30:
-        case 31:
-        case 32:
-        case 33:
-        case 34:
-        case 40:
-        case 41:
-        case 42:
-        case 43:
-        case 44:
-        case 51:
-        case 52:
-        case 53:
-        case 54:
-        case 61:
-        case 62:
-        case 63:
-        case 64:
-        case 65:
-        case 200:
-        case 201:
+        case BATTLE_STATE2_UNK_2:
+        case BATTLE_STATE2_UNK_3:
+        case BATTLE_STATE2_UNK_4:
+        case BATTLE_STATE2_UNK_5:
+        case BATTLE_STATE2_PLAYER_DEFEATED:
+        case BATTLE_STATE2_UNK_B:
+        case BATTLE_STATE2_UNK_C:
+        case BATTLE_STATE2_UNK_D:
+        case BATTLE_STATE2_UNK_14:
+        case BATTLE_STATE2_UNK_15:
+        case BATTLE_STATE2_UNK_16:
+        case BATTLE_STATE2_UNK_17:
+        case BATTLE_STATE2_UNK_18:
+        case BATTLE_STATE2_UNK_1E:
+        case BATTLE_STATE2_UNK_1F:
+        case BATTLE_STATE2_UNK_20:
+        case BATTLE_STATE2_UNK_21:
+        case BATTLE_STATE2_UNK_22:
+        case BATTLE_STATE2_UNK_28:
+        case BATTLE_STATE2_UNK_29:
+        case BATTLE_STATE2_UNK_2A:
+        case BATTLE_STATE2_UNK_2B:
+        case BATTLE_STATE2_UNK_2C:
+        case BATTLE_STATE2_UNK_3D:
+        case BATTLE_STATE2_UNK_3E:
+        case BATTLE_STATE2_UNK_3F:
             btl_draw_menu_wheel();
             break;
-        case 202:
+        case BATTLE_STATE2_UNK_40:
+        case BATTLE_STATE2_UNK_41:
+        case BATTLE_STATE2_UNK_C8:
+        case BATTLE_STATE2_UNK_C9:
             btl_draw_menu_wheel();
             break;
-        case 203:
+        case BATTLE_STATE2_UNK_CA:
             btl_draw_menu_wheel();
             break;
-        case 204:
+        case BATTLE_STATE2_UNK_CB:
             btl_draw_menu_wheel();
             break;
-        case 205:
+        case BATTLE_STATE2_UNK_CC:
+            btl_draw_menu_wheel();
+            break;
+        case BATTLE_STATE2_UNK_CD:
             btl_draw_menu_wheel();
             break;
     }
 }
-#else
-INCLUDE_ASM(s32, "415D90", btl_state_draw_player_menu);
-#endif
+
+static const f32 padding = 0.0f;
 
 INCLUDE_ASM(s32, "415D90", btl_state_update_partner_menu);
 
 void btl_state_draw_partner_menu(void) {
     switch (gBattleState2) {
-        case 2:
+        case BATTLE_STATE2_UNK_2:
             btl_draw_menu_wheel();
             break;
-        case 3:
-        case 4:
-        case 5:
-        case 6:
-        case 10:
-        case 11:
-        case 12:
-        case 13:
-        case 14:
-        case 20:
-        case 21:
-        case 22:
-        case 23:
-        case 24:
-        case 30:
-        case 31:
-        case 32:
-        case 33:
-        case 34:
-        case 40:
-        case 41:
-        case 42:
-        case 43:
-        case 44:
-        case 51:
-        case 52:
-        case 53:
-        case 54:
-        case 61:
-        case 62:
-        case 63:
-        case 64:
-        case 65:
-        case 200:
-        case 201:
+        case BATTLE_STATE2_UNK_3:
+        case BATTLE_STATE2_UNK_4:
+        case BATTLE_STATE2_UNK_5:
+        case BATTLE_STATE2_UNK_6:
+        case BATTLE_STATE2_PLAYER_DEFEATED:
+        case BATTLE_STATE2_UNK_B:
+        case BATTLE_STATE2_UNK_C:
+        case BATTLE_STATE2_UNK_D:
+        case BATTLE_STATE2_UNK_E:
+        case BATTLE_STATE2_UNK_14:
+        case BATTLE_STATE2_UNK_15:
+        case BATTLE_STATE2_UNK_16:
+        case BATTLE_STATE2_UNK_17:
+        case BATTLE_STATE2_UNK_18:
+        case BATTLE_STATE2_UNK_1E:
+        case BATTLE_STATE2_UNK_1F:
+        case BATTLE_STATE2_UNK_20:
+        case BATTLE_STATE2_UNK_21:
+        case BATTLE_STATE2_UNK_22:
+        case BATTLE_STATE2_UNK_28:
+        case BATTLE_STATE2_UNK_29:
+        case BATTLE_STATE2_UNK_2A:
+        case BATTLE_STATE2_UNK_2B:
+        case BATTLE_STATE2_UNK_2C:
+        case BATTLE_STATE2_UNK_33:
+        case BATTLE_STATE2_UNK_34:
+        case BATTLE_STATE2_UNK_35:
+        case BATTLE_STATE2_UNK_36:
+        case BATTLE_STATE2_UNK_3D:
+        case BATTLE_STATE2_UNK_3E:
+        case BATTLE_STATE2_UNK_3F:
+        case BATTLE_STATE2_UNK_40:
+        case BATTLE_STATE2_UNK_41:
+        case BATTLE_STATE2_UNK_C8:
+        case BATTLE_STATE2_UNK_C9:
             btl_draw_menu_wheel();
             break;
-        case 202:
+        case BATTLE_STATE2_UNK_CA:
             btl_draw_menu_wheel();
             break;
-        case 203:
+        case BATTLE_STATE2_UNK_CB:
             btl_draw_menu_wheel();
             break;
-        case 204:
+        case BATTLE_STATE2_UNK_CC:
             btl_draw_menu_wheel();
             break;
-        case 205:
+        case BATTLE_STATE2_UNK_CD:
             btl_draw_menu_wheel();
             break;
     }
@@ -982,37 +1207,178 @@ s32 func_802A9B30(void) {
     return (gBattleStatus.flags2 & BS_FLAGS2_4) <= 0;
 }
 
-INCLUDE_ASM(s32, "415D90", btl_state_update_peach_menu);
-
-// Needs the above jtbl to be decompiled and then this will work
+// Ordering shenanigans
 #ifdef NON_MATCHING
-void btl_state_draw_peach_menu(void) {
+void btl_state_update_peach_menu(void) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    Actor* player = battleStatus->playerActor;
+    Actor* partner = battleStatus->partnerActor;
+    s32 temp_s0_2;
+    s32 phi_v0;
+
     switch (gBattleState2) {
+        case 0:
+            func_8024E40C(2);
+            btl_cam_move(0xA);
+            if (!(gBattleStatus.flags1 & 0x100000)) {
+                gBattleState2 = 0xB;
+                break;
+            }
+            player->state.currentPos.x = player->homePos.x;
+            player->state.currentPos.z = player->homePos.z;
+            gBattleState2 = 0xA;
+            player->state.goalPos.x = partner->homePos.x;
+            player->state.goalPos.z = partner->homePos.z;
+            player->state.moveTime = 4;
+            player->state.angle = 0.0f;
+            break;
+        case 10:
+            if (player->state.moveTime != 0) {
+                player->currentPos.x += (player->state.goalPos.x - player->currentPos.x) / player->state.moveTime;
+                player->currentPos.z += (player->state.goalPos.z - player->currentPos.z) / player->state.moveTime;
+                partner->currentPos.x += (player->state.currentPos.x - partner->currentPos.x) / player->state.moveTime;
+                partner->currentPos.z += (player->state.currentPos.z - partner->currentPos.z) / player->state.moveTime;
+            }
+
+            player->currentPos.z -= sin_rad(player->state.angle * TAU / 360.0f) * 16.0f;
+            player->yaw = clamp_angle(-player->state.angle);
+            partner->currentPos.z += sin_rad(player->state.angle * TAU / 360.0f) * 16.0f;
+            partner->yaw = clamp_angle(-player->state.angle);
+            player->state.angle += 90.0f;
+
+            if (player->state.moveTime != 0) {
+                player->state.moveTime--;
+                break;
+            }
+
+            player->currentPos.x = player->state.goalPos.x;
+            player->currentPos.z = player->state.goalPos.z;
+            partner->currentPos.x = player->state.currentPos.x;
+            partner->currentPos.z = player->state.currentPos.z;
+            player->homePos.x = player->currentPos.x;
+            player->homePos.z = player->currentPos.z;
+            partner->homePos.x = partner->currentPos.x;
+            partner->homePos.z = partner->currentPos.z;
+            gBattleStatus.flags1 &= ~0x100000;
+        case 11:
+            gBattleStatus.flags1 |= 2;
+            player->flags &= ~0x4000000;
+            player->flags |= 0x08000000;
+
+            if (partner != NULL) {
+                partner->flags |= 0x4000000;
+                partner->flags |= 0x08000000;
+            }
+
+            battleStatus->selectedMoveID = 0;
+            battle_menu_submenuIDs = 8;
+            battle_menu_isEnabled = TRUE;
+            battle_menu_isMessageDisabled = 0;
+            main_battle_menu_JumpHudScripts = battle_menu_PeachStarPowerHudScripts[0];
+            battle_menu_messageIDs = D_802AB728[0];
+            if (!(battleStatus->menuDisableFlags & 0x100)) {
+                battle_menu_isEnabled = FALSE;
+                battle_menu_isMessageDisabled = 0x48;
+                main_battle_menu_JumpHudScripts = battle_menu_PeachStarPowerHudScripts[1];
+            }
+
+            if (func_802A9B30()) {
+                D_802AD104 = 1;
+                phi_v0 = 2 - 0;
+                main_menu_numOptions = 1;
+            } else {
+                D_802AD104 = 0;
+                phi_v0 = 2 - 0;
+                main_menu_numOptions = 1;
+            }
+
+            D_802AD0A8 = 0;
+            D_802AD0B0 = 0;
+            D_802AD100 = phi_v0;
+            func_802A1000();
+            D_802ACC60 = 8;
+            gBattleState2 = 1;
+            break;
         case 1:
-            btl_draw_menu_wheel();
+            set_animation(0, 0, 0xC0009);
+            temp_s0_2 = func_802A11B0();
+            if (D_802ACC60 != 0) {
+                D_802ACC60--;
+                break;
+            }
+            if (temp_s0_2 != 0) {
+                set_animation(0, 0, 0xA0002);
+                battleStatus->currentSubmenu = D_802AD0BB[temp_s0_2 - 1];
+                func_802A1030();
+                D_802ACC60 = 8;
+                D_802ACC6C = 4;
+                gBattleState2 = 2;
+            }
             break;
         case 2:
-            btl_draw_menu_wheel();
-            break;
-        case 3:
-            btl_draw_menu_wheel();
+            if (func_802A11B0() != 0) {
+                battleStatus->unk_6C = 4;
+                battleStatus->unk_6E = 5;
+                battleStatus->moveCategory = 8;
+                battleStatus->selectedMoveID = 0x81;
+                battleStatus->selectedItemID = 0xA;
+                battleStatus->currentTargetListFlags = D_8008FA78;
+                btl_set_state(0x11);
+            }
             break;
         case 4:
-            btl_draw_menu_wheel();
+            func_802A1050();
+            gBattleState2 = 1;
+            btl_state_update_peach_menu();
+            btl_state_update_peach_menu();
             break;
         case 5:
-            btl_draw_menu_wheel();
+            func_802A10B8();
             break;
-        case 6:
-        case 7:
         case 8:
+            btl_show_variable_battle_message(0x50, 60, 0);
+            D_802AD607 = 1;
+            gBattleState2 = 9;
+            break;
         case 9:
+            if (!btl_is_popup_displayed()) {
+                D_802AD607 = 0;
+                D_802ACC60 = 0;
+                gBattleState2 = 1;
+            }
             break;
     }
 }
 #else
-INCLUDE_ASM(s32, "415D90", btl_state_draw_peach_menu);
+INCLUDE_ASM(s32, "415D90", btl_state_update_peach_menu);
 #endif
+
+void btl_state_draw_peach_menu(void) {
+    switch (gBattleState2) {
+        case BATTLE_STATE2_UNK_1:
+            btl_draw_menu_wheel();
+            break;
+        case BATTLE_STATE2_UNK_2:
+            btl_draw_menu_wheel();
+            break;
+        case BATTLE_STATE2_UNK_3:
+            btl_draw_menu_wheel();
+            break;
+        case BATTLE_STATE2_UNK_4:
+            btl_draw_menu_wheel();
+            break;
+        case BATTLE_STATE2_UNK_5:
+            btl_draw_menu_wheel();
+            break;
+        case BATTLE_STATE2_UNK_6:
+        case BATTLE_STATE2_UNK_7:
+        case BATTLE_STATE2_UNK_8:
+        case BATTLE_STATE2_UNK_9:
+            break;
+    }
+}
+
+static const f32 padding2 = 0.0f;
 
 s32 func_802AA0A4(void) {
     return (gBattleStatus.flags2 & 2) <= 0;
@@ -1022,25 +1388,25 @@ INCLUDE_ASM(s32, "415D90", btl_state_update_twink_menu); // look into m2c bug
 
 void btl_state_draw_twink_menu(void) {
     switch (gBattleState2) {
-        case 1:
+        case BATTLE_STATE2_UNK_1:
             btl_draw_menu_wheel();
             break;
-        case 2:
+        case BATTLE_STATE2_UNK_2:
             btl_draw_menu_wheel();
             break;
-        case 3:
+        case BATTLE_STATE2_UNK_3:
             btl_draw_menu_wheel();
             break;
-        case 4:
+        case BATTLE_STATE2_UNK_4:
             btl_draw_menu_wheel();
             break;
-        case 5:
+        case BATTLE_STATE2_UNK_5:
             btl_draw_menu_wheel();
             break;
-        case 6:
-        case 7:
-        case 8:
-        case 9:
+        case BATTLE_STATE2_UNK_6:
+        case BATTLE_STATE2_UNK_7:
+        case BATTLE_STATE2_UNK_8:
+        case BATTLE_STATE2_UNK_9:
             break;
     }
 }
