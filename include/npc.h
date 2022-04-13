@@ -284,6 +284,60 @@ typedef struct Enemy {
     /* 0xDC */ char unk_DC[20];
 } Enemy; // size = 0xF0
 
+typedef struct Encounter {
+    /* 0x00 */ s32 count;
+    /* 0x04 */ Enemy* enemy[16];
+    /* 0x44 */ s16 battle;
+    /* 0x46 */ s16 stage;
+    /* 0x48 */ s16 encounterID;
+    /* 0x4A */ char unk_4C[0x12];
+} Encounter; // size = 0x5C
+
+typedef struct EncounterStatus {
+    /* 0x000 */ s32 flags;
+    /* 0x004 */ s8 eFirstStrike; /* 0 = none, 1 = player, 2 = enemy */
+    /* 0x005 */ s8 hitType; /* 1 = none/enemy, 2 = jump */
+    /* 0x006 */ s8 hitTier; /* 0 = normal, 1 = super, 2 = ultra */
+    /* 0x007 */ char unk_07;
+    /* 0x008 */ s8 unk_08;
+    /* 0x009 */ s8 battleOutcome; /* 0 = won, 1 = lost */
+    /* 0x00A */ s8 unk_0A;
+    /* 0x00B */ s8 merleeCoinBonus; /* triple coins when != 0 */
+    /* 0x00C */ u8 damageTaken; /* valid after battle */
+    /* 0x00D */ char unk_0D;
+    /* 0x00E */ s16 coinsEarned; /* valid after battle */
+    /* 0x010 */ char unk_10;
+    /* 0x011 */ u8 allowFleeing;
+    /* 0x012 */ s8 unk_12;
+    /* 0x013 */ u8 dropWhackaBump;
+    /* 0x014 */ s32 songID;
+    /* 0x018 */ s32 unk_18;
+    /* 0x01C */ s8 numEncounters; /* number of encounters for current map (in list) */
+    /* 0x01D */ s8 currentAreaIndex;
+    /* 0x01E */ u8 currentMapIndex;
+    /* 0x01F */ u8 currentEntryIndex;
+    /* 0x020 */ s8 mapID;
+    /* 0x021 */ s8 resetMapEncounterFlags;
+    /* 0x021 */ char unk_22[2];
+    /* 0x024 */ s32* npcGroupList;
+    /* 0x028 */ Encounter* encounterList[24];
+    /* 0x088 */ Encounter* currentEncounter;
+    /* 0x08C */ Enemy* currentEnemy;
+    /* 0x090 */ s32 fadeOutAmount;
+    /* 0x094 */ s32 unk_94;
+    /* 0x098 */ s32 fadeOutAccel;
+    /* 0x09C */ s32 battleStartCountdown;
+    /* 0x0A0 */ s8 unk_A0;
+    /* 0x0A1 */ char unk_A1[0x1];
+    /* 0x0A2 */ s16 unk_A2;
+    /* 0x0A4 */ char unk_A4[0xC];
+    /* 0x0B0 */ s32 defeatFlags[60][12];
+    /* 0xFB0 */ s16 recentMaps[2];
+    /* 0xFB4 */ char unk_FB4[4];
+} EncounterStatus; // size = 0xFB8
+
+extern EncounterStatus gCurrentEncounter;
+
 s32 func_800490B4(EnemyTerritoryThing* arg0, Enemy* arg1, f32 arg2, f32 arg3, s8 arg4);
 
 /// The default Npc::onUpdate and Npc::onRender callback.

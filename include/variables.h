@@ -78,7 +78,6 @@ extern CollisionData gCollisionData;
 extern s8 D_800A0900;
 extern f32 GravityParamsStartFall[];
 extern s16 D_800F7B80;
-extern EncounterStatus gCurrentEncounter;
 extern u8* D_801512F0;
 extern s16 D_80151308;
 extern s32 gEntityHideMode;

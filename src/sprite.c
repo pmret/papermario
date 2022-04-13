@@ -368,7 +368,7 @@ s32 spr_get_npc_raster_info(SpriteRasterInfo* out, s32 npcSpriteID, s32 rasterIn
     UnkSpriteStruct* temp_v1;
     s32** paletteOffsetCopy;
     s32 newVar;
-    
+
     if (sprite != NULL) {
         paletteOffsetCopy = sprite->palettesOffset;
         temp_v1 = (UnkSpriteStruct*)sprite->rastersOffset[rasterIndex];
