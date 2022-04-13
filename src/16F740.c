@@ -5,7 +5,10 @@
 #include "hud_element.h"
 #include "battle/battle.h"
 
+extern s32* D_800DC064;
+
 extern s16 D_802809F6;
+extern s16 D_802809F8;
 extern s32 D_80280A30;
 extern s32 D_8029F254;
 extern s32 D_8029F248;
@@ -439,7 +442,16 @@ void btl_state_draw_end_training_battle(void) {
 
 INCLUDE_ASM(s32, "16F740", btl_state_update_end_battle);
 
-INCLUDE_ASM(s32, "16F740", btl_state_draw_end_battle);
+void btl_state_draw_end_battle(void) {
+    Camera* camera = &gCameras[gCurrentCameraID];
+
+    if (gCurrentEncounter.battleOutcome == 1 && !(gBattleStatus.flags1 & BS_FLAGS1_800000)) {
+        camera->auxBoomZOffset += 0x100;
+        set_screen_overlay_params_front(7, D_80280A30);
+    } else {
+        set_screen_overlay_params_front(0, D_80280A30);
+    }
+}
 
 void btl_state_update_defend(void) {
     Actor* player = gBattleStatus.playerActor;
@@ -1039,7 +1051,97 @@ void btl_state_draw_enemy_striking_first(void) {
     }
 }
 
-INCLUDE_ASM(s32, "16F740", btl_state_update_end_demo_battle);
+void btl_state_update_end_demo_battle(void) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    Battle* blah = (*D_800DC4FC);
+    Stage* stage;
+    s32 i;
+
+    switch (gBattleState2) {
+        case 0:
+            D_80280A30 = 0;
+            if (D_802809F6 == -1) {
+                if (D_802809F8 != 0) {
+                    D_802809F8--;
+                    break;
+                }
+            }
+            gBattleState2 = BATTLE_STATE2_UNK_1;
+            break;
+        case 1:
+            switch (D_802809F6) {
+                case 255:
+                    gBattleState2 = BATTLE_STATE2_UNK_2;
+                    return;
+                case -1:
+                    if (D_80280A30 == 0xFF) {
+                        gBattleState2 = BATTLE_STATE2_UNK_2;
+                        return;
+                    }
+                    D_80280A30 += 50;
+                    if (D_80280A30 > 0xFF) {
+                        D_80280A30 = 0xFF;
+                    }
+                    return;
+            }
+            break;
+        case 2:
+            D_80280A30 = 0xFF;
+            gBattleStatus.flags1 &= ~BS_FLAGS1_1;
+            if (D_800DC064 == NULL) {
+                stage = blah->stage;
+            } else {
+                stage = D_800DC064[1];
+            }
+
+            if (stage->postBattle == NULL) {
+                gBattleState2 = BATTLE_STATE2_UNK_4;
+            } else {
+                battleStatus->controlScript = start_script(stage->postBattle, 0xA, 0);
+                gBattleState2 = BATTLE_STATE2_UNK_3;
+                battleStatus->controlScriptID = battleStatus->controlScript->id;
+            }
+            break;
+        case 3:
+            if (does_script_exist(battleStatus->controlScriptID)) {
+                break;
+            }
+            gBattleState2 = BATTLE_STATE2_UNK_4;
+        case 4:
+            kill_all_scripts();
+
+            for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
+                Actor* enemy = battleStatus->enemyActors[i];
+
+                if (enemy != NULL) {
+                    btl_delete_actor(enemy);
+                }
+            }
+
+            if (battleStatus->partnerActor != NULL) {
+                btl_delete_actor(battleStatus->partnerActor);
+            }
+
+            btl_delete_player_actor(battleStatus->playerActor);
+            remove_all_effects();
+            set_windows_visible(WINDOW_GROUP_ALL);
+
+            if (gBattleStatus.flags2 & BS_FLAGS2_40) {
+                decrement_status_menu_disabled();
+            }
+
+            if (D_802809F6 != -1) {
+                gGameStatusPtr->nextDemoScene = 0x12;
+            }
+
+            btl_set_state(BATTLE_STATE_0);
+            D_800DC4D0 = gBattleState;
+            set_game_mode(GAME_MODE_END_BATTLE);
+            break;
+    }
+}
+
+const static f32 padding[] = { 0.0f, 0.0f, 0.0f };
 
 void btl_state_draw_end_demo_battle(void) {
     if (D_802809F6 == -1) {

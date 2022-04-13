@@ -290,7 +290,9 @@ typedef struct Battle {
     /* 0x08 */ Formation* formation;
     /* 0x0C */ Stage* stage;
     /* 0x10 */ s32 unk_10;
-} BattleList[]; // size = 0x14 * n
+} Battle; // size = 0x14 * n
+
+typedef Battle BattleList[];
 
 /// Zero-terminated.
 typedef struct StageListRow {
