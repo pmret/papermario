@@ -73,15 +73,40 @@ Gfx D_8014C368[] = {
     gsSPEndDisplayList(),
 };
 
-s32 D_8014C3C0[] = { 0x00010000, 0x00000000, 0x00000000, 0xFFFFF8FF, 0x00200000, 0x00000000, 0x04000000, 0xFFFFF8FF, 0x0001FFC0, 0x00000000, 0x00000800, 0xBFB8B0FF, 0x0020FFC0, 0x00000000, 0x04000800, 0xBFB8B0FF, };
+Vtx gMsgSpeechBoxLQuad[4] = {
+    { .v = { .ob = {1, 0, 0},           .tc = {0, 0},           .cn = {255, 255, 248, 255} } },
+    { .v = { .ob = {0x20, 0, 0},        .tc = {0x400, 0},       .cn = {255, 255, 248, 255} } },
+    { .v = { .ob = {0x1, 0xFFC0, 0},    .tc = {0, 0x800},       .cn = {191, 184, 176, 255} } },
+    { .v = { .ob = {0x20, 0xFFC0, 0},   .tc = {0x400, 0x800},   .cn = {191, 184, 176, 255} } },
+};
 
-s32 D_8014C400[] = { 0x00200000, 0x00000000, 0x00000000, 0xFFFFF8FF, 0x00E10000, 0x00000000, 0x01000000, 0xFFFFF8FF, 0x0020FFC0, 0x00000000, 0x00000800, 0xBFB8B0FF, 0x00E1FFC0, 0x00000000, 0x01000800, 0xBFB8B0FF, };
+Vtx gMsgSpeechBoxMQuad[] = {
+    { .v = { .ob = {0x20, 0, 0},        .tc = {0, 0},            .cn = {255, 255, 248, 255} } },
+    { .v = { .ob = {0xE1, 0, 0},        .tc = {0x100, 0},        .cn = {255, 255, 248, 255} } },
+    { .v = { .ob = {0x20, 0xFFC0, 0},   .tc = {0, 0x800},        .cn = {191, 184, 176, 255} } },
+    { .v = { .ob = {0xE1, 0xFFC0, 0},   .tc = {0x100, 0x800},    .cn = {191, 184, 176, 255} } },
+};
 
-s32 D_8014C440[] = { 0x00E10000, 0x00000000, 0x00000000, 0xFFFFF8FF, 0x01000000, 0x00000000, 0x04000000, 0xFFFFF8FF, 0x00E1FFC0, 0x00000000, 0x00000800, 0xBFB8B0FF, 0x0100FFC0, 0x00000000, 0x04000800, 0xBFB8B0FF, };
+Vtx gMsgSpeechBoxRQuad[] = {
+    { .v = { .ob = {0xE1, 0, 0},        .tc = {0, 0},             .cn = {255, 255, 248, 255} } },
+    { .v = { .ob = {0x100, 0, 0},       .tc = {0x400, 0},         .cn = {255, 255, 248, 255} } },
+    { .v = { .ob = {0xE1, 0xFFC0, 0},   .tc = {0, 0x800},         .cn = {191, 184, 176, 255} } },
+    { .v = { .ob = {0x100, 0xFFC0, 0},  .tc = {0x400, 0x800},     .cn = {191, 184, 176, 255} } },
+};
 
-s32 D_8014C480[] = { 0xFFF1001E, 0x00000000, 0x00000000, 0xBFB8B0FF, 0x000F001E, 0x00000000, 0x01E00000, 0xBFB8B0FF, 0xFFFF0000, 0x00000000, 0x000001E0, 0xBFB8B0FF, 0x00010000, 0x00000000, 0x01E001E0, 0xBFB8B0FF, };
+Vtx gMsgUnkArrowQuad[] = {
+    { .v = { .ob = {0xFFF1, 0x001E, 0}, .tc = {0, 0},             .cn = {191, 184, 176, 255} } },
+    { .v = { .ob = {0xF, 0x001E, 0},    .tc = {0x1E0, 0},         .cn = {191, 184, 176, 255} } },
+    { .v = { .ob = {0xFFFF, 0, 0},      .tc = {0, 0x1E0},         .cn = {191, 184, 176, 255} } },
+    { .v = { .ob = {1, 0, 0},           .tc = {0x1E0, 0x1E0},     .cn = {191, 184, 176, 255} } },
+};
 
-s32 D_8014C4C0[] = { 0xFFF1001E, 0x00000000, 0x00000000, 0xBFB8B0FF, 0x000F001E, 0x00000000, 0x01E00000, 0xBFB8B0FF, 0xFFFF0000, 0x00000000, 0x000001E0, 0xBFB8B0FF, 0x00010000, 0x00000000, 0x01E001E0, 0xBFB8B0FF, };
+Vtx gMsgUnkQuad[] = {
+    { .v = { .ob = {0xFFF1, 0x001E, 0}, .tc = {0, 0},             .cn = {191, 184, 176, 255} } },
+    { .v = { .ob = {0xF, 0x001E, 0},    .tc = {0x1E0, 0},         .cn = {191, 184, 176, 255} } },
+    { .v = { .ob = {0xFFFF, 0, 0},      .tc = {0, 0x1E0},         .cn = {191, 184, 176, 255} } },
+    { .v = { .ob = {1, 0, 0},           .tc = {0x1E0, 0x1E0},     .cn = {191, 184, 176, 255} } },
+};
 
 Gfx D_8014C500[] = {
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -125,6 +150,10 @@ extern MessageDrawState* msg_drawState;
 
 // another file?
 extern s16 D_802EB644[22];
+extern s32 D_802EB670;
+extern s32 D_802EBA70;
+extern s32 D_802EBB70;
+extern s32 D_802EC3F0;
 extern s32 D_802EC5F0;
 extern s32 D_802EC670;
 extern s32 D_802EC6F0;
@@ -164,7 +193,7 @@ void msg_draw_speech_arrow(MessagePrintState* printer);
 void msg_draw_frame(s32 posX, s32 posY, s32 sizeX, s32 sizeY, s32 style, s32 palette, s32 fading, u8 bgAlpha,
                     u8 frameAlpha);
 void msg_draw_speech_bubble(MessagePrintState* printer, s16 posX, s16 posY, s16 straightWidth, s16 curveWidth,
-                            s32 height, f32 scaleX, f32 scaleY, u8 opacity, s32 arg9);
+                            s16 height, f32 scaleX, f32 scaleY, u8 opacity, s32 arg9);
 
 void clear_character_set(void) {
     D_80155C98 = -1;
@@ -716,7 +745,7 @@ MessagePrintState* _msg_get_printer_for_msg(s32 msgID, s32* donePrintingWritebac
     if (msgID == 0) {
         return NULL;
     }
-    
+
     srcBuffer = (s8*) msgID;
     if (msgID >= 0) {
         srcBuffer = load_message_to_buffer((s32)srcBuffer);
@@ -745,7 +774,7 @@ MessagePrintState* _msg_get_printer_for_msg(s32 msgID, s32* donePrintingWritebac
             return printer;
         }
     }
-    
+
     return NULL;
 }
 
@@ -2470,7 +2499,111 @@ void appendGfx_msg_prim_rect(u8 r, u8 g, u8 b, u8 a, u16 ulX, u16 ulY, u16 lrX, 
     }
 }
 
-INCLUDE_ASM(s32, "msg", msg_draw_speech_bubble);
+void msg_draw_speech_bubble(
+    MessagePrintState* printer,
+    s16 posX, s16 posY, s16 straightWidth, s16 curveWidth, s16 height, f32 scaleX, f32 scaleY, u8 opacity, s32 arg9)
+{
+    Matrix4f sp20, sp60;
+    s16 temp_v0;
+    s16 temp_v0_2;
+    s32 negHeight;
+
+    if (opacity == 255 && scaleX == 1.0 && scaleY == 1.0) {
+        msg_draw_prim_rect(32, 128, 240, 0, posX - 1, posY + 1, curveWidth + (straightWidth + curveWidth) + 2, height - 2);
+    }
+
+    negHeight = -height;
+
+    gMsgSpeechBoxLQuad[0].v.ob[0] = 1;
+    gMsgSpeechBoxLQuad[2].v.ob[0] = 1;
+    gMsgSpeechBoxLQuad[1].v.ob[0] = curveWidth;
+    gMsgSpeechBoxLQuad[3].v.ob[0] = curveWidth;
+    gMsgSpeechBoxLQuad[2].v.ob[1] = negHeight;
+    gMsgSpeechBoxLQuad[3].v.ob[1] = negHeight;
+
+    temp_v0 = curveWidth + straightWidth;
+
+    gMsgSpeechBoxMQuad[0].v.ob[0] = curveWidth;
+    gMsgSpeechBoxMQuad[2].v.ob[0] = curveWidth;
+    gMsgSpeechBoxMQuad[1].v.ob[0] = temp_v0;
+    gMsgSpeechBoxMQuad[3].v.ob[0] = temp_v0;
+    gMsgSpeechBoxMQuad[2].v.ob[1] = negHeight;
+    gMsgSpeechBoxMQuad[3].v.ob[1] = negHeight;
+
+    temp_v0_2 = curveWidth + temp_v0;
+
+    gMsgSpeechBoxRQuad[0].v.ob[0] = temp_v0;
+    gMsgSpeechBoxRQuad[2].v.ob[0] = temp_v0;
+    gMsgSpeechBoxRQuad[1].v.ob[0] = temp_v0_2;
+    gMsgSpeechBoxRQuad[3].v.ob[0] = temp_v0_2;
+    gMsgSpeechBoxRQuad[2].v.ob[1] = negHeight;
+    gMsgSpeechBoxRQuad[3].v.ob[1] = negHeight;
+
+    guTranslateF(sp20, posX, -posY, 0.0f);
+
+    if (scaleX != 1.0 || scaleY != 1.0) {
+        guScaleF(sp60, scaleX, scaleY, 1.0f);
+        guMtxCatF(sp60, sp20, sp20);
+    }
+
+    guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+    gSPMatrix(gMasterGfxPos++, VIRTUAL_TO_PHYSICAL(&gDisplayContext->matrixStack[gMatrixListPos++]),
+              G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+
+    gDPPipeSync(gMasterGfxPos++);
+    gDPSetCycleType(gMasterGfxPos++, G_CYC_1CYCLE);
+    gSPClearGeometryMode(gMasterGfxPos++, G_CULL_BOTH | G_LIGHTING);
+    gSPSetGeometryMode(gMasterGfxPos++, G_SHADE | G_SHADING_SMOOTH);
+    gDPSetColorDither(gMasterGfxPos++, G_CD_DISABLE);
+    gSPTexture(gMasterGfxPos++, -1, -1, 0, G_TX_RENDERTILE, G_ON);
+    gDPSetTexturePersp(gMasterGfxPos++, G_TP_PERSP);
+
+    if (printer->maxLinesPerPage == 3) {
+        gDPSetTextureFilter(gMasterGfxPos++, G_TF_POINT);
+    } else {
+        gDPSetTextureFilter(gMasterGfxPos++, G_TF_BILERP);
+    }
+
+    if (opacity >= 255) {
+        gDPSetRenderMode(gMasterGfxPos++, AA_EN | CVG_DST_FULL | ZMODE_OPA | CVG_X_ALPHA |
+                         GBL_c1(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_A_MEM),
+                         AA_EN | CVG_DST_FULL | ZMODE_OPA | CVG_X_ALPHA |
+                         GBL_c2(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_A_MEM));
+        gDPSetCombineMode(gMasterGfxPos++, G_CC_DECALRGBA, G_CC_DECALRGBA);
+    } else {
+        gDPSetRenderMode(gMasterGfxPos++, IM_RD | CVG_DST_SAVE | ZMODE_XLU | FORCE_BL |
+                         GBL_c1(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_1MA),
+                         IM_RD | CVG_DST_SAVE | ZMODE_XLU | FORCE_BL |
+                         GBL_c2(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_1MA));
+        gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0,
+                          TEXEL0, TEXEL0, 0, PRIMITIVE, 0);
+        gDPSetPrimColor(gMasterGfxPos++, 0, 0, 32, 32, 32, opacity);
+    }
+
+    gDPSetTextureLUT(gMasterGfxPos++, G_TT_RGBA16);
+    gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1,
+                       (msg_drawState->framePalette << 5) + (s8*)&D_802EC3F0); // TODO fix (array?)
+    gDPTileSync(gMasterGfxPos++);
+    gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_4b, 0, 0x0100, G_TX_LOADTILE, 0,
+               G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+    gDPLoadSync(gMasterGfxPos++);
+    gDPLoadTLUTCmd(gMasterGfxPos++, G_TX_LOADTILE, 15);
+    gDPPipeSync(gMasterGfxPos++);
+    gDPLoadTextureTile_4b(gMasterGfxPos++, &D_802EB670, G_IM_FMT_CI, 32, 0, 0, 0, 31, 63, 0,
+                          G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, 5, 6, G_TX_NOLOD, G_TX_NOLOD);
+    gSPVertex(gMasterGfxPos++, gMsgSpeechBoxLQuad, 4, 0);
+    gSP2Triangles(gMasterGfxPos++, 0, 2, 1, 0, 1, 2, 3, 0);
+    gDPLoadTextureTile_4b(gMasterGfxPos++, &D_802EBA70, G_IM_FMT_CI, 8, 0, 0, 0, 7, 63, 0,
+                          G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 3, 6, G_TX_NOLOD, G_TX_NOLOD);
+    gSPVertex(gMasterGfxPos++, gMsgSpeechBoxMQuad, 4, 0);
+    gSP2Triangles(gMasterGfxPos++, 0, 2, 1, 0, 1, 2, 3, 0);
+    gDPLoadTextureTile_4b(gMasterGfxPos++, &D_802EBB70, G_IM_FMT_CI, 32, 0, 0, 0, 31, 63, 0,
+                          G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, 5, 6, G_TX_NOLOD, G_TX_NOLOD);
+    gSPVertex(gMasterGfxPos++, gMsgSpeechBoxRQuad, 4, 0);
+    gSP2Triangles(gMasterGfxPos++, 0, 2, 1, 0, 1, 2, 3, 0);
+    gDPPipeSync(gMasterGfxPos++);
+}
 
 INCLUDE_ASM(s32, "msg", msg_draw_speech_arrow);
 
