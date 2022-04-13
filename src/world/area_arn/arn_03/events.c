@@ -99,29 +99,7 @@ NpcSettings N(npcSettings_80241C3C) = {
     .level = 99,
 };
 
-#include "world/common/UnkNpcAIFunc24.inc.c"
-
-#include "world/common/UnkFunc13.inc.c"
-
-#include "world/common/UnkNpcAIFunc1.inc.c"
-
-#include "world/common/UnkFunc14.inc.c"
-
-#include "world/common/UnkNpcAIFunc25.inc.c"
-
-#include "world/common/NpcJumpFunc2.inc.c"
-
-#include "world/common/NpcJumpFunc.inc.c"
-
-#include "world/common/UnkNpcAIFunc13.inc.c"
-
-#include "world/common/UnkFunc15.inc.c"
-
-#include "world/common/UnkNpcDurationFlagFunc.inc.c"
-
-#include "world/common/UnkFunc16.inc.c"
-
-#include "world/common/UnkNpcAIMainFunc.inc.c"
+#include "world/common/atomic/enemy/UnkAI_1.inc.c"
 
 void N(func_80240E90_BDFC20)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;

@@ -2,29 +2,7 @@
 
 #define CHUCK_QUIZMO_NPC_ID 19
 
-#include "world/common/UnkNpcAIFunc24.inc.c"
-
-#include "world/common/UnkFunc13.inc.c"
-
-#include "world/common/UnkNpcAIFunc1.inc.c"
-
-#include "world/common/UnkFunc14.inc.c"
-
-#include "world/common/UnkNpcAIFunc25.inc.c"
-
-#include "world/common/NpcJumpFunc2.inc.c"
-
-#include "world/common/NpcJumpFunc.inc.c"
-
-#include "world/common/UnkNpcAIFunc13.inc.c"
-
-#include "world/common/UnkFunc15.inc.c"
-
-#include "world/common/UnkNpcDurationFlagFunc.inc.c"
-
-#include "world/common/UnkFunc16.inc.c"
-
-#include "world/common/UnkNpcAIMainFunc.inc.c"
+#include "world/common/atomic/enemy/UnkAI_1.inc.c"
 
 static char* N(exit_str_0) = "nok_02";
 static char* N(exit_str_1) = "obk_09";

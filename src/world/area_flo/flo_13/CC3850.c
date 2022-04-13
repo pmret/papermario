@@ -1500,17 +1500,7 @@ INCLUDE_ASM(ApiStatus, "world/area_flo/flo_13/CC3850", flo_13_func_80241DB8_CC55
             s32 isInitialCall);
 #endif
 
-#include "world/common/set_script_owner_npc_anim.inc.c"
-
-#include "world/common/UnkDistFunc.inc.c"
-
-#include "world/common/UnkNpcAIFunc12.inc.c"
-
-#include "world/common/set_script_owner_npc_col_height.inc.c"
-
-#include "world/common/UnkNpcAIMainFunc5.inc.c"
-
-#include "world/common/UnkNpcAIMainFunc6.inc.c"
+#include "world/common/atomic/enemy/UnkAI_6.inc.c"
 
 #include "world/common/UnkFunc42.inc.c"
 

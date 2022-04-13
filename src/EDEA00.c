@@ -172,13 +172,7 @@ void func_80241B94_EE0554(Evt* script, NpcAISettings* aiSettings, EnemyTerritory
 
 INCLUDE_ASM(s32, "EDEA00", func_80241DE4_EE07A4);
 
-#include "world/common/set_script_owner_npc_anim.inc.c"
-
-#include "world/common/UnkDistFunc.inc.c"
-
-#include "world/common/UnkNpcAIFunc12.inc.c"
-
-#include "world/common/set_script_owner_npc_col_height.inc.c"
+#include "world/common/atomic/enemy/UnkAI_StateHandlers_A.inc.c"
 
 INCLUDE_ASM(s32, "EDEA00", func_80242684_EE1044);
 

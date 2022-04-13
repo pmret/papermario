@@ -22,25 +22,7 @@ extern EffectInstance* N(Quizmo_VannaTEffect);
 
 #include "world/common/atomic/Quizmo.inc.c"
 
-#include "world/common/UnkNpcAIFunc43.inc.c"
-
-#include "world/common/UnkNpcAIFunc44.inc.c"
-
-#include "world/common/NpcJumpFunc3.inc.c"
-
-#include "world/common/NpcJumpFunc.inc.c"
-
-#include "world/common/UnkNpcAIFunc13_2.inc.c"
-
-#include "world/common/UnkNpcAIFunc11.inc.c"
-
-#include "world/common/UnkNpcAIFunc10.inc.c"
-
-#include "world/common/UnkNpcAIFunc42.inc.c"
-
-#include "world/common/UnkNpcAIFunc45.inc.c"
-
-#include "world/common/UnkNpcAIMainFunc4.inc.c"
+#include "world/common/atomic/enemy/UnkAI_4.inc.c"
 
 static char* N(exit_str_4) = "nok_02";
 static char* N(exit_str_5) = "kmr_03";

@@ -63,29 +63,7 @@ NpcSettings N(npcSettings_802436B0) = {
     .level = 12,
 };
 
-#include "world/common/UnkNpcAIFunc24.inc.c"
-
-#include "world/common/UnkFunc13.inc.c"
-
-#include "world/common/UnkNpcAIFunc1.inc.c"
-
-#include "world/common/UnkFunc14.inc.c"
-
-#include "world/common/UnkNpcAIFunc25.inc.c"
-
-#include "world/common/NpcJumpFunc2.inc.c"
-
-#include "world/common/NpcJumpFunc.inc.c"
-
-#include "world/common/UnkNpcAIFunc13.inc.c"
-
-#include "world/common/UnkFunc15.inc.c"
-
-#include "world/common/UnkNpcDurationFlagFunc.inc.c"
-
-#include "world/common/UnkFunc16.inc.c"
-
-#include "world/common/UnkNpcAIMainFunc.inc.c"
+#include "world/common/atomic/enemy/UnkAI_1.inc.c"
 
 f32 N(sixFloats)[] = {
     4.5f, 3.5f, 2.6f, 2.0f,

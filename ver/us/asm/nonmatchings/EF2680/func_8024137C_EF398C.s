@@ -8,7 +8,7 @@ dlabel jtbl_802453C8_EF79D8
 
 .section .text
 
-glabel func_8024137C_EF398C
+glabel EF2680_DeadUnkNpcAIMainFunc9
 /* EF398C 8024137C 27BDFFB0 */  addiu     $sp, $sp, -0x50
 /* EF3990 80241380 AFB50044 */  sw        $s5, 0x44($sp)
 /* EF3994 80241384 0080A82D */  daddu     $s5, $a0, $zero

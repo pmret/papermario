@@ -16,25 +16,7 @@ INCLUDE_ASM(s32, "world/area_omo/omo_02/D9D510", func_80240AB0_D9DF80);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_02/D9D510", func_80240BA8_D9E078);
 
-#include "world/common/UnkNpcAIFunc43.inc.c"
-
-#include "world/common/UnkNpcAIFunc44.inc.c"
-
-#include "world/common/NpcJumpFunc3.inc.c"
-
-#include "world/common/NpcJumpFunc.inc.c"
-
-#include "world/common/UnkNpcAIFunc13_2.inc.c"
-
-#include "world/common/UnkNpcAIFunc11.inc.c"
-
-#include "world/common/UnkNpcAIFunc10.inc.c"
-
-#include "world/common/UnkNpcAIFunc42.inc.c"
-
-#include "world/common/UnkNpcAIFunc45.inc.c"
-
-#include "world/common/UnkNpcAIMainFunc4.inc.c"
+#include "world/common/atomic/enemy/UnkAI_4.inc.c"
 
 #include "world/common/atomic/enemy/ThrowAttackAI.inc.c"
 
