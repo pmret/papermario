@@ -2,7 +2,7 @@
 #include "sprite/npc/boo.h"
 #include "sprite/npc/world_bow.h"
 
-static s32 N(D_80244A20)[112];
+static s32 N(ConsumableChoiceList)[112];
 
 EvtScript N(exitWalk_80241830) = EXIT_WALK_SCRIPT(60,  0, "arn_07",  1);
 
@@ -249,7 +249,7 @@ EvtScript N(80241CD4) = {
 
 EvtScript N(80241E18) = {
     EVT_CALL(N(func_80241680_BE0410), EVT_VAR(0))
-    EVT_BIND_PADLOCK(N(80241CD4), 0x10, 0, EVT_PTR(N(D_80244A20)), 0, 1)
+    EVT_BIND_PADLOCK(N(80241CD4), 0x10, 0, EVT_PTR(N(ConsumableChoiceList)), 0, 1)
     EVT_CALL(N(func_802415F4_BE0384), EVT_VAR(0))
     EVT_RETURN
     EVT_END
@@ -1023,13 +1023,13 @@ ApiStatus N(func_80241680_BE0410)(Evt* script, s32 isInitialCall) {
 
     if (ptr != NULL) {
         for (i = 0; ptr[i] != 0; i++) {
-            N(D_80244A20)[i] = ptr[i];
+            N(ConsumableChoiceList)[i] = ptr[i];
         }
-        N(D_80244A20)[i] = 0;
+        N(ConsumableChoiceList)[i] = 0;
     } else {
         for (i = 0; i < 0x70; i++) {
-            N(D_80244A20)[i] = i + 16;
-            N(D_80244A20)[112] = 0;
+            N(ConsumableChoiceList)[i] = i + 16;
+            N(ConsumableChoiceList)[112] = 0;
         }
     }
     return ApiStatus_DONE2;

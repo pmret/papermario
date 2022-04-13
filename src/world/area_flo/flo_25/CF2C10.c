@@ -10,7 +10,7 @@ enum {
     NPC_BZZAP,
 };
 
-static s32 N(D_80244A20)[91];
+static s32 N(ConsumableChoiceList)[91];
 static s8 N(D_8024510C_pad)[4];
 static s32 N(D_80245110)[91];
 static s32 N(D_8024527C);
@@ -231,7 +231,7 @@ EvtScript N(80242AD4) = {
 
 EvtScript N(80242C08) = {
     EVT_CALL(N(func_80241DE4_CF49B4), EVT_VAR(0))
-    EVT_BIND_PADLOCK(N(80242AD4), 0x10, 0, EVT_PTR(N(D_80244A20)), 0, 1)
+    EVT_BIND_PADLOCK(N(80242AD4), 0x10, 0, EVT_PTR(N(ConsumableChoiceList)), 0, 1)
     EVT_CALL(N(func_80241D58_CF4928), EVT_VAR(0))
     EVT_RETURN
     EVT_END
@@ -553,13 +553,13 @@ ApiStatus N(func_80241DE4_CF49B4)(Evt* script, s32 isInitialCall) {
 
     if (ptr != NULL) {
         for (i = 0; ptr[i] != 0; i++) {
-            N(D_80244A20)[i] = ptr[i];
+            N(ConsumableChoiceList)[i] = ptr[i];
         }
-        N(D_80244A20)[i] = 0;
+        N(ConsumableChoiceList)[i] = 0;
     } else {
         for (i = 0; i <= 90; i++) {
-            N(D_80244A20)[i] = i + 128;
-            N(D_80244A20)[91] = 0;
+            N(ConsumableChoiceList)[i] = i + 128;
+            N(ConsumableChoiceList)[91] = 0;
         }
     }
     return ApiStatus_DONE2;
