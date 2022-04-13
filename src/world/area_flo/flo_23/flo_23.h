@@ -12,7 +12,7 @@ ApiStatus N(AddPlayerHandsOffset)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_80240000_CEE260)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_8024026C_CEE4CC)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_802402C0_CEE520)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_802402F8_CEE558)(Evt* script, s32 isInitialCall);
+ApiStatus N(BuildItemChoiceList)(Evt* script, s32 isInitialCall);
 ApiStatus N(UnkNpcAIMainFunc5)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_80240B68_CEEDC8)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_80240C2C_CEEE8C)(Evt* script, s32 isInitialCall);

@@ -10,7 +10,7 @@ enum {
     NPC_GATE_FLOWER,
 };
 
-static s32 N(D_802426E0)[91];
+static s32 N(ItemChoiceList)[91];
 static s8 N(D_8024284C_pad)[4];
 static s32 N(D_80242850)[91];
 static s32 N(D_802429BC);
@@ -161,8 +161,8 @@ EvtScript N(80241314) = {
 };
 
 EvtScript N(80241448) = {
-    EVT_CALL(N(func_802402F8_CEE558), EVT_VAR(0))
-    EVT_BIND_PADLOCK(N(80241314), 0x10, 0, EVT_PTR(N(D_802426E0)), 0, 1)
+    EVT_CALL(N(BuildItemChoiceList), EVT_VAR(0))
+    EVT_BIND_PADLOCK(N(80241314), 0x10, 0, EVT_PTR(N(ItemChoiceList)), 0, 1)
     EVT_CALL(N(func_8024026C_CEE4CC), EVT_VAR(0))
     EVT_RETURN
     EVT_END
@@ -493,24 +493,7 @@ ApiStatus N(func_802402C0_CEE520)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802402F8_CEE558)(Evt* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-    s32* ptr = (s32*) evt_get_variable(script, *args);
-    s32 i;
-
-    if (ptr != NULL) {
-        for (i = 0; ptr[i] != 0; i++) {
-            N(D_802426E0)[i] = ptr[i];
-        }
-        N(D_802426E0)[i] = 0;
-    } else {
-        for (i = 0; i <= 90; i++) {
-            N(D_802426E0)[i] = i + 128;
-            N(D_802426E0)[91] = 0;
-        }
-    }
-    return ApiStatus_DONE2;
-}
+#include "world/common/atomic/MakeConsumableChoice.inc.c"
 
 #include "world/common/atomic/enemy/UnkAI_5.inc.c"
 

@@ -17,7 +17,7 @@ enum {
 };
 
 // BSS
-static s32 N(D_802462C0_B4AA30)[91];
+static s32 N(ItemChoiceList)[91];
 static s8 N(D_802462C4_pad);
 static s32 N(D_80246428)[91];
 static s32 N(D_8024659C);
@@ -299,8 +299,8 @@ EvtScript N(80243090) = {
 };
 
 EvtScript N(802431C4) = {
-    EVT_CALL(N(func_802419FC_CB073C), EVT_VAR(0))
-    EVT_BIND_PADLOCK(N(80243090), 0x10, 0, EVT_PTR(D_802462C0_B4AA30), 0, 1)
+    EVT_CALL(N(BuildItemChoiceList), EVT_VAR(0))
+    EVT_BIND_PADLOCK(N(80243090), 0x10, 0, EVT_PTR(N(ItemChoiceList)), 0, 1)
     EVT_CALL(N(func_80241970_CB06B0), EVT_VAR(0))
     EVT_RETURN
     EVT_END
@@ -1069,24 +1069,7 @@ ApiStatus N(func_802419C4_CB0704)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802419FC_CB073C)(Evt* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-    s32* ptr = (s32*)evt_get_variable(script, *args);
-    s32 i;
-
-    if (ptr != NULL) {
-        for (i = 0; ptr[i] != 0; i++) {
-            N(D_802462C0_B4AA30)[i] = ptr[i];
-        }
-        N(D_802462C0_B4AA30)[i] = 0;
-    } else {
-        for (i = 0; i <= 90; i++) {
-            N(D_802462C0_B4AA30)[i] = i + 128;
-            N(D_802462C0_B4AA30)[91] = 0;
-        }
-    }
-    return ApiStatus_DONE2;
-}
+#include "world/common/atomic/MakeConsumableChoice.inc.c"
 
 ApiStatus N(func_80241A98_CB07D8)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

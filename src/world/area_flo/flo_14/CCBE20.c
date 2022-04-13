@@ -7,7 +7,7 @@ enum {
     NPC_BZZAP,
 };
 
-BSS s32 N(ConsumableChoiceList)[91];
+BSS s32 N(ItemChoiceList)[91];
 
 f32 N(sixFloats)[] = {
     4.5f, 3.5f, 2.6f, 2.0f,
@@ -80,7 +80,7 @@ EvtScript N(80244604) = {
             EVT_CALL(GetPlayerPos, EVT_VAR(3), EVT_VAR(4), EVT_VAR(5))
             EVT_CALL(N(AddPlayerHandsOffset), EVT_VAR(3), EVT_VAR(4), EVT_VAR(5))
             EVT_CALL(MakeItemEntity, EVT_VAR(0), EVT_VAR(3), EVT_VAR(4), EVT_VAR(5), 1, 0)
-            EVT_CALL(SetPlayerAnimation, 393221)
+            EVT_CALL(SetPlayerAnimation, ANIM_60005)
             EVT_WAIT_FRAMES(30)
             EVT_CALL(SetPlayerAnimation, ANIM_10002)
             EVT_CALL(RemoveItemEntity, EVT_VAR(0))
@@ -93,8 +93,8 @@ EvtScript N(80244604) = {
 };
 
 EvtScript N(80244738) = {
-    EVT_CALL(N(func_802422C0_CCD5D0), EVT_VAR(0))
-    EVT_BIND_PADLOCK(N(80244604), 0x10, 0, EVT_PTR(N(ConsumableChoiceList)), 0, 1)
+    EVT_CALL(N(BuildItemChoiceList), EVT_VAR(0))
+    EVT_BIND_PADLOCK(N(80244604), 0x10, 0, EVT_PTR(N(ItemChoiceList)), 0, 1)
     EVT_CALL(N(func_80242234_CCD544), EVT_VAR(0))
     EVT_RETURN
     EVT_END
@@ -102,7 +102,7 @@ EvtScript N(80244738) = {
 
 
 s32 N(D_80244788_CCFA98)[] = {
-    0x000000A1, 0x00000000,
+    ITEM_BUBBLE_BERRY, ITEM_NONE
 };
 
 EvtScript N(interact_80244790) = {
@@ -353,21 +353,4 @@ ApiStatus N(func_80242288_CCD598)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802422C0_CCD5D0)(Evt* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-    s32* ptr = (s32*) evt_get_variable(script, *args);
-    s32 i;
-
-    if (ptr != NULL) {
-        for (i = 0; ptr[i] != 0; i++) {
-            N(ConsumableChoiceList)[i] = ptr[i];
-        }
-        N(ConsumableChoiceList)[i] = 0;
-    } else {
-        for (i = 0; i <= 90; i++) {
-            N(ConsumableChoiceList)[i] = i + 128;
-            N(ConsumableChoiceList)[91] = 0;
-        }
-    }
-    return ApiStatus_DONE2;
-}
+#include "world/common/atomic/MakeConsumableChoice.inc.c"

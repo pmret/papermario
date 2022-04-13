@@ -1081,13 +1081,14 @@ enum ItemIDs {
     ITEM_ITEMS_ICON                   = 0x0000016C,
 };
 
-#define ITEM_FIRST_KEY ITEM_LUCKY_STAR
-#define ITEM_LAST_KEY ITEM_PRISON_KEY4
-#define ITEM_FIRST_CONSUMABLE ITEM_FIRE_FLOWER
-#define ITEM_LAST_VALID_CONSUMABLE ITEM_JELLY_SHROOM1
-#define ITEM_LAST_CONSUMABLE ITEM_JELLY_SHROOM6
-#define ITEM_FIRST_BADGE ITEM_SPIN_SMASH
-#define ITEM_LAST_BADGE ITEM_ATTACK_FX_F5
+#define ITEM_FIRST_KEY              ITEM_LUCKY_STAR
+#define ITEM_FIRST_VALID_KEY        ITEM_KOOPA_FORTRESS_KEY
+#define ITEM_LAST_KEY               ITEM_PRISON_KEY4
+#define ITEM_FIRST_CONSUMABLE       ITEM_FIRE_FLOWER
+#define ITEM_LAST_VALID_CONSUMABLE  ITEM_JELLY_SHROOM1
+#define ITEM_LAST_CONSUMABLE        ITEM_JELLY_SHROOM6
+#define ITEM_FIRST_BADGE            ITEM_SPIN_SMASH
+#define ITEM_LAST_BADGE             ITEM_ATTACK_FX_F5
 
 enum ItemTypeFlags {
     ITEM_TYPE_FLAG_WORLD_USABLE         = 0x0001,
@@ -1173,6 +1174,7 @@ enum PlayerAnims {
     ANIM_3001E                      = 0x0003001E,
     ANIM_3001F                      = 0x0003001F,
     ANIM_30020                      = 0x00030020,
+    ANIM_60005                      = 0x00060005,
     ANIM_6000C                      = 0x0006000C,
     ANIM_80003                      = 0x00080003,
     ANIM_80007                      = 0x00080007,

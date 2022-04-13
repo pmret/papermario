@@ -2,7 +2,7 @@
 #include "sprite/npc/boo.h"
 #include "sprite/npc/world_bow.h"
 
-static s32 N(ConsumableChoiceList)[112];
+static s32 N(KeyItemChoiceList)[112];
 
 EvtScript N(exitWalk_80241830) = EXIT_WALK_SCRIPT(60,  0, "arn_07",  1);
 
@@ -248,8 +248,8 @@ EvtScript N(80241CD4) = {
 };
 
 EvtScript N(80241E18) = {
-    EVT_CALL(N(func_80241680_BE0410), EVT_VAR(0))
-    EVT_BIND_PADLOCK(N(80241CD4), 0x10, 0, EVT_PTR(N(ConsumableChoiceList)), 0, 1)
+    EVT_CALL(N(BuildKeyItemChoiceList), EVT_VAR(0))
+    EVT_BIND_PADLOCK(N(80241CD4), 0x10, 0, EVT_PTR(N(KeyItemChoiceList)), 0, 1)
     EVT_CALL(N(func_802415F4_BE0384), EVT_VAR(0))
     EVT_RETURN
     EVT_END
@@ -1016,21 +1016,4 @@ ApiStatus N(func_80241648_BE03D8)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_80241680_BE0410)(Evt* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-    s32* ptr = (s32*) evt_get_variable(script, *args);
-    s32 i;
-
-    if (ptr != NULL) {
-        for (i = 0; ptr[i] != 0; i++) {
-            N(ConsumableChoiceList)[i] = ptr[i];
-        }
-        N(ConsumableChoiceList)[i] = 0;
-    } else {
-        for (i = 0; i < 0x70; i++) {
-            N(ConsumableChoiceList)[i] = i + 16;
-            N(ConsumableChoiceList)[112] = 0;
-        }
-    }
-    return ApiStatus_DONE2;
-}
+#include "world/common/atomic/MakeKeyChoice.inc.c"

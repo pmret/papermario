@@ -48,7 +48,7 @@ ApiStatus N(func_80243068_96C228)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_802432C0_96C480)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_80243314_96C4D4)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_8024334C_96C50C)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_802433E8_96C5A8)(Evt* script, s32 isInitialCall);
+ApiStatus N(BuildItemChoiceList)(Evt* script, s32 isInitialCall);
 ApiStatus N(ToadHouse_UpdateScreenOverlay)(Evt* script, s32 isInitialCall);
 ApiStatus N(ToadHouse_CamSetFOV)(Evt* script, s32 isInitialCall);
 ApiStatus N(ToadHouse_DoesPlayerNeedSleep)(Evt* script, s32 isInitialCall);

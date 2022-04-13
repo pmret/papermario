@@ -72,7 +72,7 @@ static D_8024F010_Struct N(D_8024F010)[3];
 static s8 N(pad_D_8024F07C)[0x4];
 static s32 N(D_8024F080)[112];
 static s8 N(pad_D_8024F240)[0x8]; // likely conencted to the above
-static s32 N(ConsumableChoiceList)[91];
+static s32 N(ItemChoiceList)[91];
 static s8 N(pad_D_8024F3B4)[0x4]; // likely conencted to the above
 static s32 N(D_8024F3B8);
 
@@ -967,8 +967,8 @@ EvtScript N(8024891C) = {
 };
 
 EvtScript N(80248A50) = {
-    EVT_CALL(N(func_802433E8_96C5A8), EVT_VAR(0))
-    EVT_BIND_PADLOCK(N(8024891C), 0x10, 0, EVT_PTR(N(ConsumableChoiceList)), 0, 1)
+    EVT_CALL(N(BuildItemChoiceList), EVT_VAR(0))
+    EVT_BIND_PADLOCK(N(8024891C), 0x10, 0, EVT_PTR(N(ItemChoiceList)), 0, 1)
     EVT_CALL(N(func_802432C0_96C480), EVT_VAR(0))
     EVT_RETURN
     EVT_END
@@ -2594,24 +2594,7 @@ ApiStatus N(func_8024334C_96C50C)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802433E8_96C5A8)(Evt* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-    s32* ptr = (s32*) evt_get_variable(script, *args);
-    s32 i;
-
-    if (ptr != NULL) {
-        for (i = 0; ptr[i] != 0; i++) {
-            N(ConsumableChoiceList)[i] = ptr[i];
-        }
-        N(ConsumableChoiceList)[i] = 0;
-    } else {
-        for (i = 0; i <= 90; i++) {
-            N(ConsumableChoiceList)[i] = i + 128;
-            N(ConsumableChoiceList)[91] = 0;
-        }
-    }
-    return ApiStatus_DONE2;
-}
+#include "world/common/atomic/MakeConsumableChoice.inc.c"
 
 #include "world/common/atomic/ToadHouse.inc.c"
 

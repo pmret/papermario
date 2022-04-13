@@ -20,7 +20,7 @@ void N(func_802407D4_CCBAE4)(void);
 ApiStatus N(UnkNpcAIMainFunc9)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_80242234_CCD544)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_80242288_CCD598)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_802422C0_CCD5D0)(Evt* script, s32 isInitialCall);
+ApiStatus N(BuildItemChoiceList)(Evt* script, s32 isInitialCall);
 
 extern NpcGroupList N(npcGroupList_80244F00);
 extern EvtScript N(80243E78);
