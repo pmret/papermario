@@ -594,6 +594,7 @@ enum SoundIDs {
     SOUND_SHY_GUY_SCREAMS3          = 0x0000030E,
     SOUND_TOY_TANK_MOVE1            = 0x0000030F,
     SOUND_TOY_TANK_MOVE2            = 0x00000310,
+    SOUND_311                       = 0x00000311,
     SOUND_315                       = 0x00000315,
     SOUND_MOLE_SURFACE              = 0x00000321,
     SOUND_MOLE_DIG                  = 0x00000322,
