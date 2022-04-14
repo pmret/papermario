@@ -27,5 +27,3 @@ ApiStatus N(ItemChoice_SaveSelected)(Evt* script, s32 isInitialCall) {
     N(ItemChoice_HasSelectedItem) = TRUE;
     return ApiStatus_DONE2;
 }
-
-// #include "world/common/atomic/ItemChoice_PartA.inc.c"
