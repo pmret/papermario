@@ -6,14 +6,14 @@ ApiStatus N(BuildItemChoiceList)(Evt* script, s32 isInitialCall) {
     s32 i;
 
     if (allowedItemList != NULL) {
-        for (i = 0; allowedItemList[i] != 0; i++) {
+        for (i = 0; allowedItemList[i] != ITEM_NONE; i++) {
             N(ItemChoiceList)[i] = allowedItemList[i];
         }
-        N(ItemChoiceList)[i] = 0;
+        N(ItemChoiceList)[i] = ITEM_NONE;
     } else {
         for (i = 0; i <= (ITEM_LAST_VALID_CONSUMABLE - ITEM_FIRST_CONSUMABLE); i++) {
-            N(ItemChoiceList)[i] = i + ITEM_FIRST_CONSUMABLE;
-            N(ItemChoiceList)[(ITEM_LAST_VALID_CONSUMABLE - ITEM_FIRST_CONSUMABLE) + 1] = 0;
+            N(ItemChoiceList)[i] = ITEM_FIRST_CONSUMABLE + i;
+            N(ItemChoiceList)[(ITEM_LAST_VALID_CONSUMABLE - ITEM_FIRST_CONSUMABLE) + 1] = ITEM_NONE;
         }
     }
     return ApiStatus_DONE2;

@@ -198,7 +198,7 @@ ApiStatus N(func_8024113C_BDFECC)(Evt* script, s32 isInitialCall) {
 }
 
 static s32** N(varStash) = NULL;
-#include "world/common/StashVars.inc.c"
+
 
 EvtScript N(80241C6C) = {
     EVT_CALL(ShowGotItem, EVT_VAR(0), 1, 0)
@@ -214,11 +214,11 @@ EvtScript N(80241C9C) = {
     EVT_END
 };
 
-s32 N(D_80241CCC_BE0A5C) = {
+s32 N(ItemChoice_HasSelectedItem) = {
     0x00000000,
 };
 
-s32 N(D_80241CD0_BE0A60) = {
+s32 N(ItemChoice_SelectedItemID) = {
     0x00000000,
 };
 
@@ -240,7 +240,7 @@ EvtScript N(80241CD4) = {
             EVT_CALL(SetPlayerAnimation, ANIM_10002)
             EVT_CALL(RemoveItemEntity, EVT_VAR(0))
     EVT_END_SWITCH
-    EVT_CALL(N(func_80241648_BE03D8), EVT_VAR(10))
+    EVT_CALL(N(ItemChoice_SaveSelected), EVT_VAR(10))
     EVT_CALL(CloseChoicePopup)
     EVT_UNBIND
     EVT_RETURN
@@ -249,8 +249,8 @@ EvtScript N(80241CD4) = {
 
 EvtScript N(80241E18) = {
     EVT_CALL(N(BuildKeyItemChoiceList), EVT_VAR(0))
-    EVT_BIND_PADLOCK(N(80241CD4), 0x10, 0, EVT_PTR(N(KeyItemChoiceList)), 0, 1)
-    EVT_CALL(N(func_802415F4_BE0384), EVT_VAR(0))
+    EVT_BIND_PADLOCK(N(80241CD4), TRIGGER_FORCE_ACTIVATE, 0, EVT_PTR(N(KeyItemChoiceList)), 0, 1)
+    EVT_CALL(N(ItemChoice_WaitForSelection), EVT_VAR(0))
     EVT_RETURN
     EVT_END
 };
@@ -982,38 +982,10 @@ EvtScript N(makeEntities) = {
     EVT_END
 };
 
+#include "world/common/StashVars.inc.c"
+
 #include "world/common/GetItemName.inc.c"
 
-#include "world/common/GetNpcCollisionHeight.inc.c"
-
-#include "world/common/AddPlayerHandsOffset.inc.c"
-
-ApiStatus N(func_802415F4_BE0384)(Evt* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-    s32* ptr;
-
-    if (isInitialCall) {
-        ptr = &N(D_80241CCC_BE0A5C);
-        *ptr = 0;
-    }
-
-    ptr = &N(D_80241CCC_BE0A5C);
-    if (*ptr != NULL) {
-        ptr = &N(D_80241CCC_BE0A5C);
-        *ptr = 0;
-        evt_set_variable(script, *args, N(D_80241CD0_BE0A60));
-        return ApiStatus_DONE2;
-    }
-
-    return ApiStatus_BLOCK;
-}
-
-ApiStatus N(func_80241648_BE03D8)(Evt* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-
-    N(D_80241CD0_BE0A60) = evt_get_variable(script, *args);
-    N(D_80241CCC_BE0A5C) = 1;
-    return ApiStatus_DONE2;
-}
+#include "world/common/atomic/ItemChoice_PartA.inc.c"
 
 #include "world/common/atomic/MakeKeyChoice.inc.c"

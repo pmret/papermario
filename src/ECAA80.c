@@ -6,9 +6,8 @@
 
 #define NAMESPACE ECAA80
 
-extern s32 D_802462F0[];
-extern s32 D_80246460_EC9D00[91];
-extern s32 D_802465CC;
+extern s32 N(ItemChoiceList)[];
+extern s32 N(FlowerGuard_ItemChoiceList)[91];
 
 void func_80241364_ECB064(Evt* script, NpcAISettings* npcAISettings, EnemyTerritoryThing* territory);
 
@@ -216,62 +215,6 @@ INCLUDE_ASM(s32, "ECAA80", func_8024199C_ECB69C);
 
 INCLUDE_ASM(s32, "ECAA80", func_802419F0_ECB6F0);
 
-ApiStatus func_80241A28_ECB728(Evt* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-    s32* ptr = (s32*) evt_get_variable(script, *args);
-    s32 i;
+#include "world/common/atomic/MakeConsumableChoice.inc.c"
 
-    if (ptr != NULL) {
-        for (i = 0; ptr[i] != 0; i++) {
-            D_802462F0[i] = ptr[i];
-        }
-        D_802462F0[i] = 0;
-    } else {
-        for (i = 0; i < 91; i++) {
-            D_802462F0[i] = i + 128;
-            D_802462F0[91] = 0;
-        }
-    }
-    return ApiStatus_DONE2;
-}
-
-ApiStatus func_80241AC4_ECB7C4(Evt* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-    s32 itemIdx = evt_get_variable(script, *args++);
-    s32 var1 = evt_get_variable(script, *args++);
-    s32 var2 = evt_get_variable(script, *args++);
-    s32 var3 = evt_get_variable(script, *args++);
-    ItemEntity* item = get_item_entity(itemIdx);
-
-    item->position.x = var1;
-    item->position.y = var2;
-    item->position.z = var3;
-
-    return ApiStatus_DONE2;
-}
-
-ApiStatus func_80241B88_ECB888(Evt* script, s32 isInitialCall) {
-    s32 itemId = evt_get_variable(script, *script->ptrReadPos);
-    ItemData* item = &gItemTable[itemId];
-
-    if (itemId == ITEM_YUMMY_MEAL) {
-        script->varTable[9] = 2;
-    } else if (item->typeFlags & 0x80) {
-        script->varTable[9] = 1;
-    } else {
-        script->varTable[9] = 0;
-    }
-
-    return ApiStatus_DONE2;
-}
-
-ApiStatus func_80241BF8_ECB8F8(Evt* script, s32 isInitialCall) {
-    s32 i;
-
-    for (i = 0; i <= 90; i++) {
-        D_80246460_EC9D00[i] = 128 + i;
-    }
-
-    D_802465CC = 0;
-    return ApiStatus_DONE2;
-}
+#include "world/common/atomic/ItemChoice_FlowerGuard.inc.c"

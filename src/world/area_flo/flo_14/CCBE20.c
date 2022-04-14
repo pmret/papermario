@@ -60,11 +60,11 @@ NpcSettings N(npcSettings_802445D0) = {
     .level = 99,
 };
 
-s32 N(D_802445FC_CCF90C) = {
+s32 N(ItemChoice_HasSelectedItem) = {
     0x00000000,
 };
 
-s32 N(D_80244600_CCF910) = {
+s32 N(ItemChoice_SelectedItemID) = {
     0x00000000,
 };
 
@@ -85,7 +85,7 @@ EvtScript N(80244604) = {
             EVT_CALL(SetPlayerAnimation, ANIM_10002)
             EVT_CALL(RemoveItemEntity, EVT_VAR(0))
     EVT_END_SWITCH
-    EVT_CALL(N(func_80242288_CCD598), EVT_VAR(10))
+    EVT_CALL(N(ItemChoice_SaveSelected), EVT_VAR(10))
     EVT_CALL(CloseChoicePopup)
     EVT_UNBIND
     EVT_RETURN
@@ -95,7 +95,7 @@ EvtScript N(80244604) = {
 EvtScript N(80244738) = {
     EVT_CALL(N(BuildItemChoiceList), EVT_VAR(0))
     EVT_BIND_PADLOCK(N(80244604), 0x10, 0, EVT_PTR(N(ItemChoiceList)), 0, 1)
-    EVT_CALL(N(func_80242234_CCD544), EVT_VAR(0))
+    EVT_CALL(N(ItemChoice_WaitForSelection), EVT_VAR(0))
     EVT_RETURN
     EVT_END
 };
@@ -325,32 +325,6 @@ EvtScript N(80245224) = {
 
 #include "world/common/atomic/enemy/UnkAI_9.inc.c"
 
-#include "world/common/GetNpcCollisionHeight.inc.c"
-
-#include "world/common/AddPlayerHandsOffset.inc.c"
-
-ApiStatus N(func_80242234_CCD544)(Evt* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-
-    if (isInitialCall) {
-        N(D_802445FC_CCF90C) = FALSE;
-    }
-
-    if (N(D_802445FC_CCF90C)) {
-        N(D_802445FC_CCF90C) = FALSE;
-        evt_set_variable(script, *args, N(D_80244600_CCF910));
-        return ApiStatus_DONE2;
-    }
-
-    return ApiStatus_BLOCK;
-}
-
-ApiStatus N(func_80242288_CCD598)(Evt* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-
-    N(D_80244600_CCF910) = evt_get_variable(script, *args);
-    N(D_802445FC_CCF90C) = TRUE;
-    return ApiStatus_DONE2;
-}
+#include "world/common/atomic/ItemChoice_PartA.inc.c"
 
 #include "world/common/atomic/MakeConsumableChoice.inc.c"
