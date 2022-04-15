@@ -230,6 +230,9 @@ typedef union {
     char PADDING[0xC0];
 } EnemyTerritory; // size = 0xC0
 
+// function signature used for state handlers in AI main functions
+typedef void AIStateHandler(Evt* script, NpcAISettings* settings, EnemyTerritoryThing* territory);
+
 typedef struct Enemy {
     /* 0x00 */ s32 flags;
     /* 0x04 */ s8 encounterIndex;

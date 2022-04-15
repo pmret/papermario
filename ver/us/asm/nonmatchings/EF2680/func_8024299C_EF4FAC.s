@@ -8,7 +8,7 @@ dlabel D_80245468_EF7A78
 
 .section .text
 
-glabel func_8024299C_EF4FAC
+glabel EF2680_DeadUnkNpcAIMainFunc6
 /* EF4FAC 8024299C 27BDFF68 */  addiu     $sp, $sp, -0x98
 /* EF4FB0 802429A0 AFB5007C */  sw        $s5, 0x7c($sp)
 /* EF4FB4 802429A4 0080A82D */  daddu     $s5, $a0, $zero
