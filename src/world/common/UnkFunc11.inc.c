@@ -6,7 +6,7 @@ ApiStatus N(UnkFunc11)(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     CollisionStatus* collisionStatus = &gCollisionStatus;
 
-    if (((collisionStatus->pushingAgainstWall != var) && (playerStatus->actionState == 20)) ||
+    if (((collisionStatus->pushingAgainstWall != var) && (playerStatus->actionState == ACTION_STATE_14)) ||
         playerStatus->enableCollisionOverlapsCheck || playerStatus->inputEnabledCounter) {
         set_action_state(0);
         script->varTable[0] = 0;
@@ -15,7 +15,7 @@ ApiStatus N(UnkFunc11)(Evt* script, s32 isInitialCall) {
 
     if (collisionStatus->pushingAgainstWall != var) {
         script->varTable[0] = 0;
-    } else if ((playerStatus->actionState != 20) && (playerStatus->actionState != 1) &&
+    } else if ((playerStatus->actionState != ACTION_STATE_14) && (playerStatus->actionState != 1) &&
                (playerStatus->actionState != 2)) {
         script->varTable[0] = 0;
     } else if (playerStatus->animFlags & 1) {

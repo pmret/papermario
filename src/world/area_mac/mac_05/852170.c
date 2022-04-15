@@ -11,29 +11,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_8024030C_85247C);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_8024047C_8525EC);
 
-#include "world/common/UnkNpcAIFunc24.inc.c"
-
-#include "world/common/UnkFunc13.inc.c"
-
-#include "world/common/UnkNpcAIFunc1.inc.c"
-
-#include "world/common/UnkFunc14.inc.c"
-
-#include "world/common/UnkNpcAIFunc25.inc.c"
-
-#include "world/common/NpcJumpFunc2.inc.c"
-
-#include "world/common/NpcJumpFunc.inc.c"
-
-#include "world/common/UnkNpcAIFunc13.inc.c"
-
-#include "world/common/UnkFunc15.inc.c"
-
-#include "world/common/UnkNpcDurationFlagFunc.inc.c"
-
-#include "world/common/UnkFunc16.inc.c"
-
-#include "world/common/UnkNpcAIMainFunc.inc.c"
+#include "world/common/atomic/enemy/UnkAI_1.inc.c"
 
 extern s32 N(Quizmo_Worker);
 extern s32 N(Quizmo_AnswerResult);

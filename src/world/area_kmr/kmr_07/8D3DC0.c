@@ -3,25 +3,7 @@
 static char* N(exit_str_0) = "kmr_06";
 static char* N(exit_str_1) = "kmr_12";
 
-#include "world/common/UnkNpcAIFunc43.inc.c"
-
-#include "world/common/UnkNpcAIFunc44.inc.c"
-
-#include "world/common/NpcJumpFunc3.inc.c"
-
-#include "world/common/NpcJumpFunc.inc.c"
-
-#include "world/common/UnkNpcAIFunc13_2.inc.c"
-
-#include "world/common/UnkNpcAIFunc11.inc.c"
-
-#include "world/common/UnkNpcAIFunc10.inc.c"
-
-#include "world/common/UnkNpcAIFunc42.inc.c"
-
-#include "world/common/UnkNpcAIFunc45.inc.c"
-
-#include "world/common/UnkNpcAIMainFunc4.inc.c"
+#include "world/common/atomic/enemy/UnkAI_4.inc.c"
 
 // see func_802402BC_8D878C
 #ifdef NON_MATCHING

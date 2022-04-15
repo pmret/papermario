@@ -2,21 +2,7 @@
 
 INCLUDE_ASM(s32, "world/area_jan/jan_05/B4B260", func_802407F0_B4B260);
 
-#include "world/common/UnkNpcAIFunc36.inc.c"
-
-#include "world/common/UnkNpcAIFunc37.inc.c"
-
-#include "world/common/UnkNpcAIFunc1.inc.c"
-
-#include "world/common/UnkNpcAIFunc38.inc.c"
-
-#include "world/common/UnkNpcAIFunc15.inc.c"
-
-#include "world/common/UnkNpcAIFunc39.inc.c"
-
-#include "world/common/UnkDurationCheck.inc.c"
-
-#include "world/common/UnkNpcAIMainFunc2.inc.c"
+#include "world/common/atomic/enemy/UnkAI_2.inc.c"
 
 #include "world/common/atomic/enemy/SpearGuy.inc.c"
 

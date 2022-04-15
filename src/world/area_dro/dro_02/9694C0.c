@@ -70,10 +70,8 @@ static Evt* N(D_8024EFCC);
 static s32 N(D_8024EFD0)[16];
 static D_8024F010_Struct N(D_8024F010)[3];
 static s8 N(pad_D_8024F07C)[0x4];
-static s32 N(D_8024F080)[112];
-static s8 N(pad_D_8024F240)[0x8]; // likely conencted to the above
-static s32 N(D_8024F248)[91];
-static s8 N(pad_D_8024F3B4)[0x4]; // likely conencted to the above
+static s32 N(KeyItemChoiceList)[(ITEM_LAST_KEY - ITEM_FIRST_VALID_KEY) + 3];
+static s32 N(ItemChoiceList)[(ITEM_LAST_VALID_CONSUMABLE - ITEM_FIRST_CONSUMABLE) + 2]; // extra entry for list terminator
 static s32 N(D_8024F3B8);
 
 // DATA
@@ -901,11 +899,11 @@ NpcSettings N(npcSettings_80248754) = {
     .level = 99,
 };
 
-s32 N(D_80248780_971940) = {
+s32 N(ItemChoice_HasSelectedItem) = {
     0x00000000,
 };
 
-s32 N(D_80248784_971944) = {
+s32 N(ItemChoice_SelectedItemID) = {
     0x00000000,
 };
 
@@ -927,7 +925,7 @@ EvtScript N(80248788) = {
             EVT_CALL(SetPlayerAnimation, ANIM_10002)
             EVT_CALL(RemoveItemEntity, EVT_VAR(0))
     EVT_END_SWITCH
-    EVT_CALL(N(func_80243314_96C4D4), EVT_VAR(10))
+    EVT_CALL(N(ItemChoice_SaveSelected), EVT_VAR(10))
     EVT_CALL(CloseChoicePopup)
     EVT_UNBIND
     EVT_RETURN
@@ -935,9 +933,9 @@ EvtScript N(80248788) = {
 };
 
 EvtScript N(802488CC) = {
-    EVT_CALL(N(func_8024334C_96C50C), EVT_VAR(0))
-    EVT_BIND_PADLOCK(N(80248788), 0x10, 0, EVT_PTR(N(D_8024F080)), 0, 1)
-    EVT_CALL(N(func_802432C0_96C480), EVT_VAR(0))
+    EVT_CALL(N(BuildKeyItemChoiceList), EVT_VAR(0))
+    EVT_BIND_PADLOCK(N(80248788), 0x10, 0, EVT_PTR(N(KeyItemChoiceList)), 0, 1)
+    EVT_CALL(N(ItemChoice_WaitForSelection), EVT_VAR(0))
     EVT_RETURN
     EVT_END
 };
@@ -959,7 +957,7 @@ EvtScript N(8024891C) = {
             EVT_CALL(SetPlayerAnimation, ANIM_10002)
             EVT_CALL(RemoveItemEntity, EVT_VAR(0))
     EVT_END_SWITCH
-    EVT_CALL(N(func_80243314_96C4D4), EVT_VAR(10))
+    EVT_CALL(N(ItemChoice_SaveSelected), EVT_VAR(10))
     EVT_CALL(CloseChoicePopup)
     EVT_UNBIND
     EVT_RETURN
@@ -967,9 +965,9 @@ EvtScript N(8024891C) = {
 };
 
 EvtScript N(80248A50) = {
-    EVT_CALL(N(func_802433E8_96C5A8), EVT_VAR(0))
-    EVT_BIND_PADLOCK(N(8024891C), 0x10, 0, EVT_PTR(N(D_8024F248)), 0, 1)
-    EVT_CALL(N(func_802432C0_96C480), EVT_VAR(0))
+    EVT_CALL(N(BuildItemChoiceList), EVT_VAR(0))
+    EVT_BIND_PADLOCK(N(8024891C), 0x10, 0, EVT_PTR(N(ItemChoiceList)), 0, 1)
+    EVT_CALL(N(ItemChoice_WaitForSelection), EVT_VAR(0))
     EVT_RETURN
     EVT_END
 };
@@ -1363,7 +1361,7 @@ EvtScript N(8024B20C) = {
             EVT_CALL(EnablePartnerAI)
             EVT_WAIT_FRAMES(5)
     EVT_END_SWITCH
-    EVT_CALL(N(func_80243314_96C4D4), EVT_VAR(10))
+    EVT_CALL(N(ItemChoice_SaveSelected), EVT_VAR(10))
     EVT_CALL(CloseChoicePopup)
     EVT_UNBIND
     EVT_RETURN
@@ -1373,9 +1371,9 @@ EvtScript N(8024B20C) = {
 EvtScript N(8024B530) = {
     EVT_SET(EVT_VAR(0), EVT_VAR(11))
     EVT_SET(EVT_VAR(1), EVT_VAR(2))
-    EVT_CALL(N(func_8024334C_96C50C), EVT_VAR(0))
-    EVT_BIND_PADLOCK(N(8024B20C), 0x10, 0, EVT_PTR(N(D_8024F080)), 0, 1)
-    EVT_CALL(N(func_802432C0_96C480), EVT_VAR(0))
+    EVT_CALL(N(BuildKeyItemChoiceList), EVT_VAR(0))
+    EVT_BIND_PADLOCK(N(8024B20C), 0x10, 0, EVT_PTR(N(KeyItemChoiceList)), 0, 1)
+    EVT_CALL(N(ItemChoice_WaitForSelection), EVT_VAR(0))
     EVT_RETURN
     EVT_END
 };
@@ -2547,71 +2545,11 @@ ApiStatus N(func_80243068_96C228)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#include "world/common/GetNpcCollisionHeight.inc.c"
+#include "world/common/atomic/ItemChoice_PartA.inc.c"
 
-#include "world/common/AddPlayerHandsOffset.inc.c"
+#include "world/common/atomic/MakeKeyChoice.inc.c"
 
-ApiStatus N(func_802432C0_96C480)(Evt* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-
-    if (isInitialCall) {
-        N(D_80248780_971940) = 0;
-    }
-
-    if (N(D_80248780_971940) != NULL) {
-        N(D_80248780_971940) = 0;
-        evt_set_variable(script, *args, N(D_80248784_971944));
-        return ApiStatus_DONE2;
-    }
-
-    return ApiStatus_BLOCK;
-}
-
-ApiStatus N(func_80243314_96C4D4)(Evt* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-
-    N(D_80248784_971944) = evt_get_variable(script, *args);
-    N(D_80248780_971940) = 1;
-    return ApiStatus_DONE2;
-}
-
-ApiStatus N(func_8024334C_96C50C)(Evt* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-    s32* ptr = (s32*) evt_get_variable(script, *args);
-    s32 i;
-
-    if (ptr != NULL) {
-        for (i = 0; ptr[i] != 0; i++) {
-            N(D_8024F080)[i] = ptr[i];
-        }
-        N(D_8024F080)[i] = 0;
-    } else {
-        for (i = 0; i < 0x70; i++) {
-            N(D_8024F080)[i] = i + 16;
-            N(D_8024F080)[112] = 0;
-        }
-    }
-    return ApiStatus_DONE2;
-}
-
-ApiStatus N(func_802433E8_96C5A8)(Evt* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-    s32* ptr = (s32*) evt_get_variable(script, *args);
-    s32 i;
-
-    if (ptr != NULL) {
-        for (i = 0; ptr[i] != 0; i++) {
-            N(D_8024F248)[i] = ptr[i];
-        }
-        N(D_8024F248)[i] = 0;
-    } else {
-        for (i = 0; i <= 90; i++) {
-            N(D_8024F248)[i] = i + 128;
-            N(D_8024F248)[91] = 0;
-        }
-    }
-    return ApiStatus_DONE2;
-}
+#include "world/common/atomic/MakeConsumableChoice.inc.c"
 
 #include "world/common/atomic/ToadHouse.inc.c"
 

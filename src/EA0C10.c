@@ -329,13 +329,7 @@ ApiStatus func_80241AE0_EA23E0(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-#include "world/common/set_script_owner_npc_anim.inc.c"
-
-#include "world/common/UnkDistFunc.inc.c"
-
-#include "world/common/UnkNpcAIFunc12.inc.c"
-
-#include "world/common/set_script_owner_npc_col_height.inc.c"
+#include "world/common/atomic/enemy/UnkAI_StateHandlers_A.inc.c"
 
 #include "world/common/DeadUnkNpcAIMainFunc5.inc.c"
 
