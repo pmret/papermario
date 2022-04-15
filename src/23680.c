@@ -121,14 +121,13 @@ s32 is_point_within_region(s32 shape, f32 pointX, f32 pointY, f32 centerX, f32 c
     }
 }
 
-s32 func_800490B4(EnemyTerritoryThing* territory, Enemy* enemy, f32 chaseSpeed, f32 arg3, s8 arg4) {
+s32 func_800490B4(EnemyTerritoryThing* territory, Enemy* enemy, f32 radius, f32 moveSpeed, s8 arg4) {
     Npc* npc = get_npc_unsafe(enemy->npcID);
     PlayerStatus* playerStatus = &gPlayerStatus;
     PartnerActionStatus* partnerActionStatus;
     f32 x, y, z;
     f32 dist;
     s32 phi_v0;
-    f32 phi_a3;
 
     if (enemy->unk_B0 & 2) {
         return FALSE;
@@ -155,7 +154,7 @@ s32 func_800490B4(EnemyTerritoryThing* territory, Enemy* enemy, f32 chaseSpeed, 
         return FALSE;
     }
 
-    if ((playerStatus->actionState == 0x1D)) {
+    if ((playerStatus->actionState == ACTION_STATE_USE_SPINNING_FLOWER)) {
         return FALSE;
     }
 
@@ -177,22 +176,20 @@ s32 func_800490B4(EnemyTerritoryThing* territory, Enemy* enemy, f32 chaseSpeed, 
 
     if (phi_v0 == 0) {
         if (enemy->unk_AC & 2) {
-            if (playerStatus->actionState == 1) {
-                chaseSpeed = chaseSpeed * 1.15;
-            } else if (playerStatus->actionState == 2) {
-                chaseSpeed = chaseSpeed * 1.3;
+            if (playerStatus->actionState == ACTION_STATE_WALK) {
+                radius *= 1.15;
+            } else if (playerStatus->actionState == ACTION_STATE_RUN) {
+                radius *= 1.3;
             }
         }
         x = npc->pos.x;
         z = npc->pos.z;
         if (arg4 & 0xFF) {
-            phi_a3 = npc->yaw;
-            add_vec2D_polar(&x, &z, arg3, phi_a3);
+            add_vec2D_polar(&x, &z, moveSpeed, npc->yaw);
         } else {
-            phi_a3 = 270.0f - npc->renderYaw;
-            add_vec2D_polar(&x, &z, arg3, phi_a3);
+            add_vec2D_polar(&x, &z, moveSpeed, 270.0f - npc->renderYaw);
         }
-        if (dist2D(x, z, playerStatus->position.x, playerStatus->position.z) <= chaseSpeed) {
+        if (dist2D(x, z, playerStatus->position.x, playerStatus->position.z) <= radius) {
             return TRUE;
         }
     }
