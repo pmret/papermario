@@ -16,45 +16,9 @@ INCLUDE_ASM(s32, "world/area_omo/omo_17/DEF400", func_80240B1C_DEF9BC);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_17/DEF400", func_80240CE0_DEFB80);
 
-#include "world/common/UnkNpcAIFunc23.inc.c"
+#include "world/common/atomic/enemy/UnkAI_9.inc.c"
 
-#include "world/common/UnkNpcAIFunc35.inc.c"
-
-#include "world/common/UnkNpcAIFunc1_copy.inc.c"
-
-#include "world/common/UnkFunc4.inc.c"
-
-#include "world/common/UnkNpcAIFunc2.inc.c"
-
-#include "world/common/SixFloatsFunc.inc.c"
-
-#include "world/common/UnkNpcAIFunc14.inc.c"
-
-#include "world/common/UnkNpcAIFunc3.inc.c"
-
-#include "world/common/UnkFunc6.inc.c"
-
-#include "world/common/UnkFunc5.inc.c"
-
-#include "world/common/UnkNpcAIMainFunc9.inc.c"
-
-#include "world/common/UnkFunc61.inc.c"
-
-#include "world/common/UnkNpcAIFunc48.inc.c"
-
-#include "world/common/UnkNpcAIFunc49.inc.c"
-
-#include "world/common/UnkSetDurationFunc.inc.c"
-
-#include "world/common/UnkNpcAIFunc9.inc.c"
-
-#include "world/common/UnkDurationCheckNoArgs.inc.c"
-
-#include "world/common/UnkFunc54.inc.c"
-
-#include "world/common/UnkFunc55.inc.c"
-
-#include "world/common/UnkNpcAIMainFunc7.inc.c"
+#include "world/common/atomic/enemy/ThrowAttackAI.inc.c"
 
 #include "world/common/SetNpcB5_3.inc.c"
 

@@ -5,27 +5,7 @@
 
 #define NAMESPACE EF2680
 
-#include "world/common/UnkNpcAIFunc23.inc.c"
-
-#include "world/common/UnkNpcAIFunc35.inc.c"
-
-#include "world/common/UnkNpcAIFunc1.inc.c"
-
-#include "world/common/UnkFunc4.inc.c"
-
-#include "world/common/UnkNpcAIFunc2.inc.c"
-
-#include "world/common/SixFloatsFunc.inc.c"
-
-#include "world/common/UnkNpcAIFunc14.inc.c"
-
-#include "world/common/UnkNpcAIFunc3.inc.c"
-
-#include "world/common/UnkFunc6.inc.c"
-
-#include "world/common/UnkFunc5.inc.c"
-
-INCLUDE_ASM(s32, "EF2680", func_8024137C_EF398C);
+#include "world/common/atomic/enemy/Dead_UnkAI_9.inc.c"
 
 s32 func_80241594_EF3BA4(void) {
     s32 i;
@@ -170,13 +150,7 @@ void func_80241A40_EF4050(Evt* script, NpcAISettings* aiSettings, EnemyTerritory
 
 INCLUDE_ASM(s32, "EF2680", func_80241C90_EF42A0);
 
-#include "world/common/set_script_owner_npc_anim.inc.c"
-
-#include "world/common/UnkDistFunc.inc.c"
-
-#include "world/common/UnkNpcAIFunc12.inc.c"
-
-#include "world/common/set_script_owner_npc_col_height.inc.c"
+ #include "world/common/atomic/enemy/UnkAI_StateHandlers_A.inc.c"
 
 #include "world/common/DeadUnkNpcAIMainFunc5.inc.c"
 

@@ -9,9 +9,9 @@
 #define NAMESPACE arn_03
 
 ApiStatus N(AddPlayerHandsOffset)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_80241648_BE03D8)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_80241680_BE0410)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_802415F4_BE0384)(Evt* script, s32 isInitialCall);
+ApiStatus N(ItemChoice_SaveSelected)(Evt* script, s32 isInitialCall);
+ApiStatus N(BuildKeyItemChoiceList)(Evt* script, s32 isInitialCall);
+ApiStatus N(ItemChoice_WaitForSelection)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_8024113C_BDFECC)(Evt* script, s32 isInitialCall);
 
 extern EvtScript N(main);

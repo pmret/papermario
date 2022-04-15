@@ -7,7 +7,7 @@ enum {
     NPC_BZZAP,
 };
 
-BSS s32 N(D_802453B0_EF79C0)[91];
+BSS s32 N(ItemChoiceList)[91];
 
 f32 N(sixFloats)[] = {
     4.5f, 3.5f, 2.6f, 2.0f,
@@ -60,11 +60,11 @@ NpcSettings N(npcSettings_802445D0) = {
     .level = 99,
 };
 
-s32 N(D_802445FC_CCF90C) = {
+s32 N(ItemChoice_HasSelectedItem) = {
     0x00000000,
 };
 
-s32 N(D_80244600_CCF910) = {
+s32 N(ItemChoice_SelectedItemID) = {
     0x00000000,
 };
 
@@ -80,12 +80,12 @@ EvtScript N(80244604) = {
             EVT_CALL(GetPlayerPos, EVT_VAR(3), EVT_VAR(4), EVT_VAR(5))
             EVT_CALL(N(AddPlayerHandsOffset), EVT_VAR(3), EVT_VAR(4), EVT_VAR(5))
             EVT_CALL(MakeItemEntity, EVT_VAR(0), EVT_VAR(3), EVT_VAR(4), EVT_VAR(5), 1, 0)
-            EVT_CALL(SetPlayerAnimation, 393221)
+            EVT_CALL(SetPlayerAnimation, ANIM_60005)
             EVT_WAIT_FRAMES(30)
             EVT_CALL(SetPlayerAnimation, ANIM_10002)
             EVT_CALL(RemoveItemEntity, EVT_VAR(0))
     EVT_END_SWITCH
-    EVT_CALL(N(func_80242288_CCD598), EVT_VAR(10))
+    EVT_CALL(N(ItemChoice_SaveSelected), EVT_VAR(10))
     EVT_CALL(CloseChoicePopup)
     EVT_UNBIND
     EVT_RETURN
@@ -93,16 +93,16 @@ EvtScript N(80244604) = {
 };
 
 EvtScript N(80244738) = {
-    EVT_CALL(N(func_802422C0_CCD5D0), EVT_VAR(0))
-    EVT_BIND_PADLOCK(N(80244604), 0x10, 0, EVT_PTR(N(D_802453B0_EF79C0)), 0, 1)
-    EVT_CALL(N(func_80242234_CCD544), EVT_VAR(0))
+    EVT_CALL(N(BuildItemChoiceList), EVT_VAR(0))
+    EVT_BIND_PADLOCK(N(80244604), 0x10, 0, EVT_PTR(N(ItemChoiceList)), 0, 1)
+    EVT_CALL(N(ItemChoice_WaitForSelection), EVT_VAR(0))
     EVT_RETURN
     EVT_END
 };
 
 
 s32 N(D_80244788_CCFA98)[] = {
-    0x000000A1, 0x00000000,
+    ITEM_BUBBLE_BERRY, ITEM_NONE
 };
 
 EvtScript N(interact_80244790) = {
@@ -323,71 +323,8 @@ EvtScript N(80245224) = {
     EVT_END
 };
 
-#include "world/common/UnkNpcAIFunc23.inc.c"
+#include "world/common/atomic/enemy/UnkAI_9.inc.c"
 
-#include "world/common/UnkNpcAIFunc35.inc.c"
+#include "world/common/atomic/ItemChoice_PartA.inc.c"
 
-#include "world/common/UnkNpcAIFunc1_copy.inc.c"
-
-#include "world/common/UnkFunc4.inc.c"
-
-#include "world/common/UnkNpcAIFunc2.inc.c"
-
-#include "world/common/SixFloatsFunc.inc.c"
-
-#include "world/common/UnkNpcAIFunc14.inc.c"
-
-#include "world/common/UnkNpcAIFunc3.inc.c"
-
-#include "world/common/UnkFunc6.inc.c"
-
-#include "world/common/UnkFunc5.inc.c"
-
-#include "world/common/UnkNpcAIMainFunc9.inc.c"
-
-#include "world/common/GetNpcCollisionHeight.inc.c"
-
-#include "world/common/AddPlayerHandsOffset.inc.c"
-
-ApiStatus N(func_80242234_CCD544)(Evt* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-
-    if (isInitialCall) {
-        N(D_802445FC_CCF90C) = FALSE;
-    }
-
-    if (N(D_802445FC_CCF90C)) {
-        N(D_802445FC_CCF90C) = FALSE;
-        evt_set_variable(script, *args, N(D_80244600_CCF910));
-        return ApiStatus_DONE2;
-    }
-
-    return ApiStatus_BLOCK;
-}
-
-ApiStatus N(func_80242288_CCD598)(Evt* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-
-    N(D_80244600_CCF910) = evt_get_variable(script, *args);
-    N(D_802445FC_CCF90C) = TRUE;
-    return ApiStatus_DONE2;
-}
-
-ApiStatus N(func_802422C0_CCD5D0)(Evt* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-    s32* ptr = (s32*) evt_get_variable(script, *args);
-    s32 i;
-
-    if (ptr != NULL) {
-        for (i = 0; ptr[i] != 0; i++) {
-            N(D_802453B0_EF79C0)[i] = ptr[i];
-        }
-        N(D_802453B0_EF79C0)[i] = 0;
-    } else {
-        for (i = 0; i <= 90; i++) {
-            N(D_802453B0_EF79C0)[i] = i + 128;
-            N(D_802453B0_EF79C0)[91] = 0;
-        }
-    }
-    return ApiStatus_DONE2;
-}
+#include "world/common/atomic/MakeConsumableChoice.inc.c"

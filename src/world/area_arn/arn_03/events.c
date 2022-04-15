@@ -2,7 +2,7 @@
 #include "sprite/npc/boo.h"
 #include "sprite/npc/world_bow.h"
 
-static s32 N(D_80244A20)[112];
+static s32 N(KeyItemChoiceList)[112];
 
 EvtScript N(exitWalk_80241830) = EXIT_WALK_SCRIPT(60,  0, "arn_07",  1);
 
@@ -99,29 +99,7 @@ NpcSettings N(npcSettings_80241C3C) = {
     .level = 99,
 };
 
-#include "world/common/UnkNpcAIFunc24.inc.c"
-
-#include "world/common/UnkFunc13.inc.c"
-
-#include "world/common/UnkNpcAIFunc1.inc.c"
-
-#include "world/common/UnkFunc14.inc.c"
-
-#include "world/common/UnkNpcAIFunc25.inc.c"
-
-#include "world/common/NpcJumpFunc2.inc.c"
-
-#include "world/common/NpcJumpFunc.inc.c"
-
-#include "world/common/UnkNpcAIFunc13.inc.c"
-
-#include "world/common/UnkFunc15.inc.c"
-
-#include "world/common/UnkNpcDurationFlagFunc.inc.c"
-
-#include "world/common/UnkFunc16.inc.c"
-
-#include "world/common/UnkNpcAIMainFunc.inc.c"
+#include "world/common/atomic/enemy/UnkAI_1.inc.c"
 
 void N(func_80240E90_BDFC20)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
@@ -220,7 +198,7 @@ ApiStatus N(func_8024113C_BDFECC)(Evt* script, s32 isInitialCall) {
 }
 
 static s32** N(varStash) = NULL;
-#include "world/common/StashVars.inc.c"
+
 
 EvtScript N(80241C6C) = {
     EVT_CALL(ShowGotItem, EVT_VAR(0), 1, 0)
@@ -236,11 +214,11 @@ EvtScript N(80241C9C) = {
     EVT_END
 };
 
-s32 N(D_80241CCC_BE0A5C) = {
+s32 N(ItemChoice_HasSelectedItem) = {
     0x00000000,
 };
 
-s32 N(D_80241CD0_BE0A60) = {
+s32 N(ItemChoice_SelectedItemID) = {
     0x00000000,
 };
 
@@ -262,7 +240,7 @@ EvtScript N(80241CD4) = {
             EVT_CALL(SetPlayerAnimation, ANIM_10002)
             EVT_CALL(RemoveItemEntity, EVT_VAR(0))
     EVT_END_SWITCH
-    EVT_CALL(N(func_80241648_BE03D8), EVT_VAR(10))
+    EVT_CALL(N(ItemChoice_SaveSelected), EVT_VAR(10))
     EVT_CALL(CloseChoicePopup)
     EVT_UNBIND
     EVT_RETURN
@@ -270,9 +248,9 @@ EvtScript N(80241CD4) = {
 };
 
 EvtScript N(80241E18) = {
-    EVT_CALL(N(func_80241680_BE0410), EVT_VAR(0))
-    EVT_BIND_PADLOCK(N(80241CD4), 0x10, 0, EVT_PTR(N(D_80244A20)), 0, 1)
-    EVT_CALL(N(func_802415F4_BE0384), EVT_VAR(0))
+    EVT_CALL(N(BuildKeyItemChoiceList), EVT_VAR(0))
+    EVT_BIND_PADLOCK(N(80241CD4), TRIGGER_FORCE_ACTIVATE, 0, EVT_PTR(N(KeyItemChoiceList)), 0, 1)
+    EVT_CALL(N(ItemChoice_WaitForSelection), EVT_VAR(0))
     EVT_RETURN
     EVT_END
 };
@@ -1004,55 +982,10 @@ EvtScript N(makeEntities) = {
     EVT_END
 };
 
+#include "world/common/StashVars.inc.c"
+
 #include "world/common/GetItemName.inc.c"
 
-#include "world/common/GetNpcCollisionHeight.inc.c"
+#include "world/common/atomic/ItemChoice_PartA.inc.c"
 
-#include "world/common/AddPlayerHandsOffset.inc.c"
-
-ApiStatus N(func_802415F4_BE0384)(Evt* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-    s32* ptr;
-
-    if (isInitialCall) {
-        ptr = &N(D_80241CCC_BE0A5C);
-        *ptr = 0;
-    }
-
-    ptr = &N(D_80241CCC_BE0A5C);
-    if (*ptr != NULL) {
-        ptr = &N(D_80241CCC_BE0A5C);
-        *ptr = 0;
-        evt_set_variable(script, *args, N(D_80241CD0_BE0A60));
-        return ApiStatus_DONE2;
-    }
-
-    return ApiStatus_BLOCK;
-}
-
-ApiStatus N(func_80241648_BE03D8)(Evt* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-
-    N(D_80241CD0_BE0A60) = evt_get_variable(script, *args);
-    N(D_80241CCC_BE0A5C) = 1;
-    return ApiStatus_DONE2;
-}
-
-ApiStatus N(func_80241680_BE0410)(Evt* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-    s32* ptr = (s32*) evt_get_variable(script, *args);
-    s32 i;
-
-    if (ptr != NULL) {
-        for (i = 0; ptr[i] != 0; i++) {
-            N(D_80244A20)[i] = ptr[i];
-        }
-        N(D_80244A20)[i] = 0;
-    } else {
-        for (i = 0; i < 0x70; i++) {
-            N(D_80244A20)[i] = i + 16;
-            N(D_80244A20)[112] = 0;
-        }
-    }
-    return ApiStatus_DONE2;
-}
+#include "world/common/atomic/MakeKeyChoice.inc.c"
