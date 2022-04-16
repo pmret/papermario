@@ -1869,7 +1869,7 @@ enum PartnerIDs {
     PARTNER_TWINK               = 0x0000000B,
 };
 
-typedef enum AttackEventFlags {
+enum AttackEventFlags {
     ATTACK_EVENT_FLAG_1       = 0x1,
     ATTACK_EVENT_FLAG_2       = 0x2,
     ATTACK_EVENT_FLAG_4       = 0x4,
