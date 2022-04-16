@@ -188,7 +188,7 @@ void snd_update_bgm_fade(BGMPlayer* player) {
 }
 
 void func_8004E444(BGMPlayer* arg0) {
-    u16 mult = (arg0->fadeInfo.currentVolume.u16 * arg0->unk_3C) >> 15;
+    u16 mult = (arg0->fadeInfo.currentVolume.u16 * arg0->fadeInfo.unk_10.u16) >> 15;
     s32 i;
 
     for (i = 0; i < 4; i++) {
@@ -426,7 +426,7 @@ INCLUDE_ASM(void, "28910_len_5090", snd_BGMCmd_FD, BGMPlayer* player, BGMPlayerT
 #endif
 
 void snd_BGMCmd_FE(BGMPlayer* player, BGMPlayerTrack* track) {
-    s32 temp = player->unk_D4.u16 + player->unk_64;
+    s32 temp = player->unk_D4.u16 + (s32)player->unk_64;
 
     track->unk_3E = player->unk_D6.u8[0];
     track->unk_04 = track->bgmReadPos;
