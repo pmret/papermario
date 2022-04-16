@@ -265,20 +265,20 @@ void world_sushie_pre_battle(Npc* sushie) {
 
     if (D_802BFEEC) {
         sushieActionStatus->npc = *sushie;
-        sushieActionStatus->actionState.b[1] = 1;
+        sushieActionStatus->partnerAction_unk_1 = 1;
         enable_player_static_collisions();
         enable_player_input();
         set_action_state(ACTION_STATE_IDLE);
         partner_clear_player_tracking(sushie);
     }
 
-    sushieActionStatus->actionState.b[3] = PARTNER_SUSHIE;
+    sushieActionStatus->actingPartner = PARTNER_SUSHIE;
 }
 
 void world_sushie_post_battle(Npc* sushie) {
     PartnerActionStatus* sushieActionStatus = &gPartnerActionStatus;
 
-    if (sushieActionStatus->actionState.b[1] != 0) {
+    if (sushieActionStatus->partnerAction_unk_1 != 0) {
         *sushie = sushieActionStatus->npc;
         partner_use_ability();
     }

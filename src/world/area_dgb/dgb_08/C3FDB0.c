@@ -1195,7 +1195,7 @@ void N(func_80242F94_C42D44)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
         } else {
             npc->rotation.y = 0.0f;
             npc->flags &= ~0x00200000;
-            if (gPartnerActionStatus.actionState.b[3]  != 9) {
+            if (gPartnerActionStatus.actingPartner  != 9) {
                 disable_player_input();
                 partner_disable_input();
                 npc->duration = 0;
@@ -1261,7 +1261,7 @@ void N(func_802434B0_C43260)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
 
     npc->duration++;
     if (npc->duration >= 3) {
-        if (gPartnerActionStatus.actionState.b[3]  != 9) {
+        if (gPartnerActionStatus.actingPartner  != 9) {
             npc->duration = 0;
             script->functionTemp[0] = 100;
         } else {

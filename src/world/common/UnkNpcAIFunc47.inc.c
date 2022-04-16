@@ -27,7 +27,7 @@ s32 N(UnkNpcAIFunc47)(Evt* script, f32 arg1, f32 arg2, EnemyTerritoryThing* terr
             return -1;
         }
 
-        if (gPartnerActionStatus.actionState.b[3] == PARTNER_BOW || gPartnerActionStatus.actionState.b[3] == PARTNER_SUSHIE) {
+        if (gPartnerActionStatus.actingPartner == PARTNER_BOW || gPartnerActionStatus.actingPartner == PARTNER_SUSHIE) {
             return -1;
         }
 

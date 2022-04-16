@@ -24,10 +24,10 @@ s32 N(UnkFunc61)(Evt* script) {
         if (fabsf(t1) > 75.0 || (2.0 * npc->collisionHeight <= fabsf(npc->pos.y - gPlayerStatusPtr->position.y))) {
            return -1;
         }
-        if (gPartnerActionStatus.actionState.b[3] == PARTNER_BOW) {
+        if (gPartnerActionStatus.actingPartner == PARTNER_BOW) {
             return -1;
         }
-        if (gPartnerActionStatus.actionState.b[3] == PARTNER_SUSHIE) {
+        if (gPartnerActionStatus.actingPartner == PARTNER_SUSHIE) {
             return -1;
         }
 

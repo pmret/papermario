@@ -235,7 +235,7 @@ s32 N(func_80240000_BDD1B0)(Evt* script, NpcAISettings* aiSettings, EnemyTerrito
     if (fabsf(npc->pos.y - gPlayerStatusPtr->position.y) >= 40.0f) {
         ret = FALSE;
     }
-    if (gPartnerActionStatus.actionState.b[3] == PARTNER_BOW) {
+    if (gPartnerActionStatus.actingPartner == PARTNER_BOW) {
         ret = FALSE;
     }
     return ret;

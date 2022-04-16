@@ -181,7 +181,7 @@ void func_802BD6DC_31842C(Npc* npc) {
 }
 
 s32 world_bombette_can_use_ability(void) {
-    if (gPartnerActionStatus.actionState.b[0] != 0) {
+    if (gPartnerActionStatus.partnerActionState != 0) {
         D_802BE934 = 1;
         return FALSE;
     }
@@ -189,7 +189,7 @@ s32 world_bombette_can_use_ability(void) {
 }
 
 s32 world_bombette_can_player_pause(void) {
-    return gPartnerActionStatus.actionState.b[0] == PARTNER_ACTION_NONE;
+    return gPartnerActionStatus.partnerActionState == PARTNER_ACTION_NONE;
 }
 
 ApiStatus func_802BD758_3184A8(Evt* evt, s32 isInitialCall);
@@ -270,7 +270,7 @@ void world_bombette_pre_battle(Npc* bombette) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PartnerActionStatus* bombetteActionStatus = &gPartnerActionStatus;
 
-    if (bombetteActionStatus->actionState.b[0] != 0) {
+    if (bombetteActionStatus->partnerActionState != 0) {
         if (D_802BE92C) {
             enable_player_input();
         }
@@ -283,8 +283,8 @@ void world_bombette_pre_battle(Npc* bombette) {
         set_action_state(ACTION_STATE_IDLE);
         partner_clear_player_tracking(bombette);
 
-        bombetteActionStatus->actionState.b[0] = 0;
-        bombetteActionStatus->actionState.b[3] = 0;
+        bombetteActionStatus->partnerActionState = 0;
+        bombetteActionStatus->actingPartner = 0;
 
         bombette->pos.x = playerStatus->position.x;
         bombette->pos.y = playerStatus->position.y;

@@ -162,7 +162,7 @@ void func_802BB9E0_E2E310(Entity* entity) {
         case 0:
             if (entity->collisionFlags & 1) {
                 data->unk_01 = 0;
-                if (partnerActionStatus->actionState.b[3] != 0) {
+                if (partnerActionStatus->actingPartner != 0) {
                     playerStatus->animFlags |= 4;
                 }
                 func_800EF300(partnerActionStatus);
@@ -222,7 +222,7 @@ void func_802BB9E0_E2E310(Entity* entity) {
             }
             break;
         case 6:
-            if (!(entity->collisionFlags & 1) && (partnerActionStatus->actionState.b[0] == PARTNER_ACTION_NONE)) {
+            if (!(entity->collisionFlags & 1) && (partnerActionStatus->partnerActionState == PARTNER_ACTION_NONE)) {
                 data->unk_00 = 0;
                 enable_partner_ai();
                 phys_adjust_cam_on_landing();

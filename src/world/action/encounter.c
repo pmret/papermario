@@ -23,7 +23,7 @@ void func_802B6000_E28A30(void) {
     }
 
     if (playerStatus->animFlags & 0x400000) {
-        switch (gPartnerActionStatus.actionState.b[3]) {
+        switch (gPartnerActionStatus.actingPartner) {
             case 8:
                 func_802BD100_317020(oldFlags);
                 break;

@@ -150,7 +150,7 @@ s32 phys_adjust_cam_on_landing(void) {
         } else {
             gCameras[0].moveFlags &= ~0x1;
         }
-    } else if (partnerActionStatus->actionState.b[0] != 0 && partnerActionStatus->actionState.b[3] == PARTNER_PARAKARRY) {
+    } else if (partnerActionStatus->partnerActionState != 0 && partnerActionStatus->actingPartner == PARTNER_PARAKARRY) {
         gCameras[0].moveFlags |= 0x2;
     } else {
         gCameras[0].moveFlags &= ~0x2;
@@ -255,7 +255,7 @@ void phys_update_action_state(void) {
                 cond = FALSE;
             }
 
-            if ((partnerActionStatus->actionState.b[0] == PARTNER_ACTION_NONE) && !(playerStatus->flags & PLAYER_STATUS_FLAGS_20) && cond) {
+            if ((partnerActionStatus->partnerActionState == PARTNER_ACTION_NONE) && !(playerStatus->flags & PLAYER_STATUS_FLAGS_20) && cond) {
                 set_action_state(ACTION_STATE_TALK);
             }
             check_input_spin();
@@ -354,7 +354,7 @@ void set_action_state(s32 actionState) {
         partner = playerData->currentPartner;
 
         if (partner == PARTNER_SUSHIE || partner == PARTNER_LAKILESTER || partner == PARTNER_PARAKARRY) {
-            if (gPartnerActionStatus.actionState.b[0] != 0) {
+            if (gPartnerActionStatus.partnerActionState != 0) {
                 playerStatus->animFlags |= 0x4;
                 playerStatus->flags |= PLAYER_STATUS_FLAGS_800;
                 return;
@@ -448,7 +448,7 @@ s32 check_input_hammer(void) {
             return FALSE;
         }
 
-        if (gPartnerActionStatus.actionState.b[0] == PARTNER_ACTION_USE && playerData->currentPartner == PARTNER_WATT) {
+        if (gPartnerActionStatus.partnerActionState == PARTNER_ACTION_USE && playerData->currentPartner == PARTNER_WATT) {
             return FALSE;
         }
 

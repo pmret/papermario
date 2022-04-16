@@ -211,9 +211,9 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
                 } else {
                     return ApiStatus_DONE2;
                 }
-            } else if (partnerActionStatus->actionState.b[0] == PARTNER_ACTION_NONE) {
-                partnerActionStatus->actionState.b[0] = PARTNER_ACTION_KOOPER_1;
-                partnerActionStatus->actionState.b[3] = PARTNER_KOOPER;
+            } else if (partnerActionStatus->partnerActionState == PARTNER_ACTION_NONE) {
+                partnerActionStatus->partnerActionState = PARTNER_ACTION_KOOPER_1;
+                partnerActionStatus->actingPartner = PARTNER_KOOPER;
                 script->functionTemp[0] = 5;
                 kooper->currentAnim.w = 0x20009;
                 D_802BEC50 = 30;
@@ -232,8 +232,8 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
                             D_802BEC6C = 0;
                             kooper->flags &= ~0xA08;
                             kooper->flags |= 0x140;
-                            partnerActionStatus->actionState.b[3] = PARTNER_KOOPER;
-                            partnerActionStatus->actionState.b[0] = PARTNER_ACTION_KOOPER_1;
+                            partnerActionStatus->actingPartner = PARTNER_KOOPER;
+                            partnerActionStatus->partnerActionState = PARTNER_ACTION_KOOPER_1;
                             D_802BEC58 = func_800EF4E0();
                             enable_npc_blur(kooper);
                             kooper->duration = 4;
@@ -334,8 +334,8 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
                     if (!(kooper->jumpVelocity > 0.0f) && (playerStatus->position.y < kooper->moveToPos.z)) {
                         D_802BEC5C = 0;
                         kooper->flags &= ~ACTOR_FLAG_100;
-                        partnerActionStatus->actionState.b[3] = PARTNER_KOOPER;
-                        partnerActionStatus->actionState.b[0] = PARTNER_ACTION_KOOPER_2;
+                        partnerActionStatus->actingPartner = PARTNER_KOOPER;
+                        partnerActionStatus->partnerActionState = PARTNER_ACTION_KOOPER_2;
                         kooper->rotation.z = 0.0f;
                         kooper->planarFlyDist = 0.0f;
                         kooper->moveSpeed = 8.0f;
@@ -573,8 +573,8 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
             D_802BEB40_31CB60 = 0;
             kooper->flags |= NPC_FLAG_100;
             kooper->flags &= ~(NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_40);
-            partnerActionStatus->actionState.b[3] = PARTNER_NONE;
-            partnerActionStatus->actionState.b[0] = PARTNER_ACTION_NONE;
+            partnerActionStatus->actingPartner = PARTNER_NONE;
+            partnerActionStatus->partnerActionState = PARTNER_ACTION_NONE;
             kooper->jumpVelocity = 0.0f;
             kooper->collisionHeight = 24;
             kooper->currentAnim.w = 0x20000 | 4;
@@ -682,8 +682,8 @@ void world_kooper_pre_battle(Npc* kooper) {
     PartnerActionStatus* kooperActionStatus = &gPartnerActionStatus;
     D_802BEC54 = 0;
 
-    if (kooperActionStatus->actionState.b[0] != PARTNER_ACTION_NONE) {
-        if (kooperActionStatus->actionState.b[0] == PARTNER_ACTION_KOOPER_2) {
+    if (kooperActionStatus->partnerActionState != PARTNER_ACTION_NONE) {
+        if (kooperActionStatus->partnerActionState == PARTNER_ACTION_KOOPER_2) {
             D_802BEC54 = 1;
         }
 
@@ -704,8 +704,8 @@ void world_kooper_pre_battle(Npc* kooper) {
         partner_clear_player_tracking(kooper);
         disable_npc_blur(kooper);
 
-        kooperActionStatus->actionState.b[3] = PARTNER_NONE;
-        kooperActionStatus->actionState.b[0] = PARTNER_ACTION_NONE;
+        kooperActionStatus->actingPartner = PARTNER_NONE;
+        kooperActionStatus->partnerActionState = PARTNER_ACTION_NONE;
     }
 }
 

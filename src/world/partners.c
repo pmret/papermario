@@ -394,7 +394,7 @@ s32 func_800EA4B0(s32 collisionID) {
 }
 
 s32 partner_is_idle(Npc* partner) {
-    return gPartnerActionStatus.actionState.b[0] == PARTNER_ACTION_NONE;
+    return gPartnerActionStatus.partnerActionState == PARTNER_ACTION_NONE;
 }
 
 s32 world_partner_can_player_pause_default(Npc* partner) {
@@ -512,8 +512,8 @@ void partner_init_after_battle(s32 arg0) {
     if (D_8010CFD8 != arg0) {
         D_8010CFE0 = 1;
         D_8010CFE4 = arg0;
-        actionStatus->actionState.b[0] = 0;
-        actionStatus->actionState.b[1] = 0;
+        actionStatus->partnerActionState = 0;
+        actionStatus->partnerAction_unk_1 = 0;
 
         if (D_8010CFD8 != 0 && arg0 != 0) {
             D_8010CFE8 = 2;
@@ -587,7 +587,7 @@ void partner_reset_data(void) {
     D_8010CFD8 = currentPartner;
 
     if (gGameStatusPtr->keepUsingPartnerOnMapChange != 0) {
-        gPartnerActionStatus.actionState.b[0] = 1;
+        gPartnerActionStatus.partnerActionState = 1;
         gGameStatusPtr->keepUsingPartnerOnMapChange = 0;
     }
 
@@ -614,12 +614,12 @@ void partner_initialize_data(void) {
     D_8010CFE0 = 0;
     D_8010CFE8 = 0;
     D_8010CFC4 = 0;
-    actionStatus->actionState.b[3] = 0;
+    actionStatus->actingPartner = 0;
     actionStatus->inputDisabled = 0;
-    actionStatus->actionState.b[1] = 0;
-    actionStatus->actionState.b[0] = 0;
+    actionStatus->partnerAction_unk_1 = 0;
+    actionStatus->partnerActionState = 0;
     actionStatus->unk_358 = 0;
-    actionStatus->actionState.b[2] = 0;
+    actionStatus->partnerAction_unk_2 = 0;
     wPartner = NULL;
     wSavedPartnerPosX = 0;
     wSavedPartnerPosY = 0;
@@ -672,10 +672,10 @@ void partner_handle_after_battle(void) {
 
         D_8010CFE8 = 1;
 
-        if (playerData->currentPartner != PARTNER_WATT && actionStatus->actionState.b[3] == PARTNER_WATT) {
+        if (playerData->currentPartner != PARTNER_WATT && actionStatus->actingPartner == PARTNER_WATT) {
             gPlayerStatusPtr->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT;
             gPlayerStatusPtr->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_2;
-            actionStatus->actionState.b[3] = PARTNER_NONE;
+            actionStatus->actingPartner = PARTNER_NONE;
         }
 
         if (wPartner->postBattle != NULL) {
@@ -787,12 +787,12 @@ void partner_walking_update_motion(Npc* partner) {
     PartnerActionStatus* actionStatus = &gPartnerActionStatus;
 
     if (gGameStatusPtr->unk_81 == 0 || playerStatus->flags & (PLAYER_STATUS_FLAGS_INPUT_DISABLED | PLAYER_STATUS_FLAGS_1000)
-        || actionStatus->inputDisabled != 0 || actionStatus->actionState.b[2] != 0) {
+        || actionStatus->inputDisabled != 0 || actionStatus->partnerAction_unk_2 != 0) {
         if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_800)) {
             partner_walking_follow_player(partner);
         }
         if (actionStatus->pressedButtons & (BUTTON_Z | BUTTON_B | BUTTON_C_LEFT | BUTTON_C_DOWN)) {
-            actionStatus->actionState.b[2] = 0;
+            actionStatus->partnerAction_unk_2 = 0;
         }
     }
 

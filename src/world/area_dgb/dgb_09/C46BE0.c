@@ -754,14 +754,14 @@ void N(func_80240958_C47538)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
         }
 
         if (playerData->currentPartner == PARTNER_KOOPER) {
-            if (gPartnerActionStatus.actionState.b[0] == playerData->currentPartner) {
+            if (gPartnerActionStatus.partnerActionState == playerData->currentPartner) {
                 phi_s2 = TRUE;
             }
         }
     }
 
-    if (((playerData->currentPartner == PARTNER_GOOMBARIO) && (gPartnerActionStatus.actionState.b[0] != PARTNER_ACTION_NONE)) ||
-        ((playerData->currentPartner == PARTNER_BOMBETTE) && (gPartnerActionStatus.actionState.b[0] == PARTNER_ACTION_BOMBETTE_2))) {
+    if (((playerData->currentPartner == PARTNER_GOOMBARIO) && (gPartnerActionStatus.partnerActionState != PARTNER_ACTION_NONE)) ||
+        ((playerData->currentPartner == PARTNER_BOMBETTE) && (gPartnerActionStatus.partnerActionState == PARTNER_ACTION_BOMBETTE_2))) {
         posX = npc->pos.x;
         posZ = npc->pos.z;
         add_vec2D_polar(&posX, &posZ, 0.0f, npc->yaw);
@@ -1101,7 +1101,7 @@ void N(func_80242C1C_C497FC)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
         } else {
             npc->rotation.y = 0.0f;
             npc->flags &= ~0x00200000;
-            if (gPartnerActionStatus.actionState.b[3]  != 9) {
+            if (gPartnerActionStatus.actingPartner  != 9) {
                 disable_player_input();
                 partner_disable_input();
                 npc->duration = 0;
@@ -1167,7 +1167,7 @@ void N(func_80243138_C49D18)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
 
     npc->duration++;
     if (npc->duration >= 3) {
-        if (gPartnerActionStatus.actionState.b[3]  != 9) {
+        if (gPartnerActionStatus.actingPartner  != 9) {
             npc->duration = 0;
             script->functionTemp[0] = 100;
         } else {

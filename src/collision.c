@@ -1026,7 +1026,7 @@ ApiStatus func_8005DB00(Evt* script, s32 isInitialCall) {
         script->functionTemp[0] = 1;
         break;
     case 1:
-        if (partnerStatus->actionState.b[3] != PARTNER_BOW) {
+        if (partnerStatus->actingPartner != PARTNER_BOW) {
             if (npc->duration != 0 && npc->duration != script->functionTemp[0])
                 return ApiStatus_BLOCK;
 

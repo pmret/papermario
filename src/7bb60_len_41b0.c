@@ -33,17 +33,17 @@ s32 can_trigger_loading_zone(void) {
 
     if (actionState == ACTION_STATE_RIDE) {
         if (playerData->currentPartner == PARTNER_LAKILESTER || playerData->currentPartner == PARTNER_BOW) {
-            if (partnerActionStatus->actionState.b[0] != 0) {
+            if (partnerActionStatus->partnerActionState != 0) {
                 return TRUE;
             } else {
                 gPlayerStatusPtr->animFlags |= PLAYER_STATUS_ANIM_FLAGS_4;
                 return FALSE;
             }
         } else {
-            if (partnerActionStatus->actionState.b[3] == PARTNER_WATT || partnerActionStatus->actionState.b[3] == PARTNER_SUSHIE) {
-                return partnerActionStatus->actionState.b[0] != 0;
+            if (partnerActionStatus->actingPartner == PARTNER_WATT || partnerActionStatus->actingPartner == PARTNER_SUSHIE) {
+                return partnerActionStatus->partnerActionState != 0;
             }
-            if (partnerActionStatus->actionState.b[3] == PARTNER_PARAKARRY) {
+            if (partnerActionStatus->actingPartner == PARTNER_PARAKARRY) {
                 gPlayerStatusPtr->animFlags |= PLAYER_STATUS_ANIM_FLAGS_4;
                 return FALSE;
             }
@@ -353,7 +353,7 @@ void func_800E315C(s32 colliderID) {
                 set_action_state(ACTION_STATE_LAND);
                 break;
             case 3:
-                if ((partnerActionStatus->actionState.i & 0xFF0000FF) != 0x01000009) {
+                if ((*(s32*)(&partnerActionStatus->partnerActionState) & 0xFF0000FF) != 0x01000009) {
                     if (playerStatus->blinkTimer == 0) {
                         if (playerStatus->actionState != ACTION_STATE_HIT_LAVA) {
                             playerStatus->unk_BF = 1;
@@ -365,7 +365,7 @@ void func_800E315C(s32 colliderID) {
                 }
                 break;
             case 2:
-                if ((partnerActionStatus->actionState.i & 0xFF0000FF) != 0x01000009) {
+                if ((*(s32*)(&partnerActionStatus->partnerActionState) & 0xFF0000FF) != 0x01000009) {
                     if (playerStatus->blinkTimer == 0) {
                         if (playerStatus->actionState != ACTION_STATE_HIT_FIRE) {
                             playerStatus->unk_BF = 2;
@@ -901,7 +901,7 @@ void phys_main_collision_below(void) {
         if (result >= 0) {
             switch (get_collider_type_by_id(result) & 0xFF) {
                 case 2:
-                    if (partnerActionStatus->actionState.b[0] == PARTNER_ACTION_NONE || partnerActionStatus->actionState.b[3] != PARTNER_BOW) {
+                    if (partnerActionStatus->partnerActionState == PARTNER_ACTION_NONE || partnerActionStatus->actingPartner != PARTNER_BOW) {
                         if (playerStatus->blinkTimer == 0) {
                             if (playerStatus->actionState != ACTION_STATE_HIT_LAVA) {
                                 playerStatus->unk_BF = 2;
@@ -913,7 +913,7 @@ void phys_main_collision_below(void) {
                     }
                     break;
                 case 3:
-                    if (partnerActionStatus->actionState.b[0] == PARTNER_ACTION_NONE || partnerActionStatus->actionState.b[3] != PARTNER_BOW) {
+                    if (partnerActionStatus->partnerActionState == PARTNER_ACTION_NONE || partnerActionStatus->actingPartner != PARTNER_BOW) {
                         if (playerStatus->blinkTimer == 0) {
                             if (playerStatus->actionState != ACTION_STATE_HIT_LAVA) {
                                 playerStatus->unk_BF = 1;
@@ -1145,9 +1145,9 @@ s32 phys_can_player_interact(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 ret = TRUE;
 
-    if (gPartnerActionStatus.actionState.b[0] != 0) {
-        if (gPartnerActionStatus.actionState.b[3] == PARTNER_BOMBETTE) {
-            if (gPartnerActionStatus.actionState.b[0] < 3) {
+    if (gPartnerActionStatus.partnerActionState != 0) {
+        if (gPartnerActionStatus.actingPartner == PARTNER_BOMBETTE) {
+            if (gPartnerActionStatus.partnerActionState < 3) {
                 ret = FALSE;
             }
         } else {

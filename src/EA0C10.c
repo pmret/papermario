@@ -21,7 +21,7 @@ void func_80240DC4_EA16C4(Evt* script, NpcAISettings* aiSettings, EnemyTerritory
 
 #include "world/common/UnkNpcAIFunc5.inc.c"
 
-//Basically UnkNpcAIFunc26.inc.c, but gPartnerActionStatus.actionState.b[0] access 0, instead of 3
+//Basically UnkNpcAIFunc26.inc.c, but gPartnerActionStatus.partnerActionState access 0, instead of 3
 s32 N(UnkNpcAIFunc26)(Evt* script) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
@@ -49,11 +49,11 @@ s32 N(UnkNpcAIFunc26)(Evt* script) {
         ret = FALSE;
     }
 
-    if (gPartnerActionStatus.actionState.b[0] == PARTNER_BOW) {
+    if (gPartnerActionStatus.partnerActionState == PARTNER_BOW) {
         ret = FALSE;
     }
 
-    if (gPartnerActionStatus.actionState.b[0] == PARTNER_SUSHIE) {
+    if (gPartnerActionStatus.partnerActionState == PARTNER_SUSHIE) {
         ret = FALSE;
     }
 

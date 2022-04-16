@@ -2315,10 +2315,10 @@ typedef struct TweesterPhysics {
 } TweesterPhysics; // size = 0x1C
 
 typedef struct PartnerActionStatus {
-    /* 0x000 */ union {
-        /*       */     s32 i;
-        /*       */     s8 b[4];    // b[0] = partner action state, b[1] = ???, b[3] = acting partner ID
-    } actionState;
+    /* 0x000 */ s8 partnerActionState;
+    /* 0x001 */ s8 partnerAction_unk_1;
+    /* 0x002 */ s8 partnerAction_unk_2;
+    /* 0x003 */ s8 actingPartner;
     /* 0x004 */ s16 stickX;
     /* 0x006 */ s16 stickY;
     /* 0x008 */ s32 currentButtons;

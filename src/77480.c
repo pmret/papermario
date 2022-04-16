@@ -776,12 +776,12 @@ void player_reset_data(void) {
 }
 
 s32 func_800DFCF4(void) {
-    if (gPartnerActionStatus.actionState.b[0] == PARTNER_ACTION_USE &&
-        (gPartnerActionStatus.actionState.b[3] == PARTNER_WATT
-        || gPartnerActionStatus.actionState.b[3] == PARTNER_BOW
-        || gPartnerActionStatus.actionState.b[3] == PARTNER_SUSHIE
-        || gPartnerActionStatus.actionState.b[3] == PARTNER_PARAKARRY
-        || gPartnerActionStatus.actionState.b[3] == PARTNER_LAKILESTER)) {
+    if (gPartnerActionStatus.partnerActionState == PARTNER_ACTION_USE &&
+        (gPartnerActionStatus.actingPartner == PARTNER_WATT
+        || gPartnerActionStatus.actingPartner == PARTNER_BOW
+        || gPartnerActionStatus.actingPartner == PARTNER_SUSHIE
+        || gPartnerActionStatus.actingPartner == PARTNER_PARAKARRY
+        || gPartnerActionStatus.actingPartner == PARTNER_LAKILESTER)) {
         return FALSE;
     }
     return TRUE;
@@ -795,19 +795,19 @@ s32 get_overriding_player_anim(s32 anim) {
         return -1;
     }
 
-    if (partnerActionStatus->actionState.b[0] != PARTNER_ACTION_NONE) {
-        if (partnerActionStatus->actionState.b[3] == PARTNER_LAKILESTER && anim == ANIM_10002) {
+    if (partnerActionStatus->partnerActionState != PARTNER_ACTION_NONE) {
+        if (partnerActionStatus->actingPartner == PARTNER_LAKILESTER && anim == ANIM_10002) {
             anim = ANIM_8000E;
         }
 
-        if (partnerActionStatus->actionState.b[0] != PARTNER_ACTION_NONE && partnerActionStatus->actionState.b[3] == PARTNER_BOW) {
+        if (partnerActionStatus->partnerActionState != PARTNER_ACTION_NONE && partnerActionStatus->actingPartner == PARTNER_BOW) {
             if (anim != ANIM_CROUCH && anim != ANIM_10002) {
                     return -1;
             }
         }
     }
 
-    if (anim == ANIM_THUMBS_UP && partnerActionStatus->actionState.b[0] == PARTNER_ACTION_USE) {
+    if (anim == ANIM_THUMBS_UP && partnerActionStatus->partnerActionState == PARTNER_ACTION_USE) {
         return -1;
     }
 
@@ -871,8 +871,8 @@ void update_player_blink(void) {
     u8 phi_v1;
     u8* alpha;
 
-    if (gPartnerActionStatus.actionState.b[3] == PARTNER_BOW) {
-        phi_a2 = gPartnerActionStatus.actionState.b[0] != PARTNER_ACTION_NONE;
+    if (gPartnerActionStatus.actingPartner == PARTNER_BOW) {
+        phi_a2 = gPartnerActionStatus.partnerActionState != PARTNER_ACTION_NONE;
     }
 
     if (playerStatus->blinkTimer > 0) {
@@ -968,7 +968,7 @@ s32 func_800E0208(void) {
     if (gGameStatusPtr->disableScripts &&
         (gGameStatusPtr->currentButtons & PLAYER_STATUS_FLAGS_10))
     {
-        if (gPartnerActionStatus.actionState.b[0] == PARTNER_ACTION_NONE) {
+        if (gPartnerActionStatus.partnerActionState == PARTNER_ACTION_NONE) {
             set_action_state(ACTION_STATE_IDLE);
         }
         ret = TRUE;
