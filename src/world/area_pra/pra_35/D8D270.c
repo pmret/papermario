@@ -35,7 +35,7 @@ ApiStatus func_802423CC_D8F61C(Evt *script, s32 isInitialCall) {
     territory.unk_18 = 65.0f;
     territory.unk_1C = 0;
 
-    if (isInitialCall || (enemy->unk_B0 & 4)) {
+    if (isInitialCall || (enemy->unk_B0 & ENEMY_AI_FLAGS_4)) {
         script->functionTemp[0] = 0;
         npc->duration = 0;
         npc->currentAnim.w = enemy->animList[0];
@@ -47,10 +47,10 @@ ApiStatus func_802423CC_D8F61C(Evt *script, s32 isInitialCall) {
             npc->flags &= ~NPC_FLAG_GRAVITY;
             npc->flags |= NPC_FLAG_ENABLE_HIT_SCRIPT;
         }
-        if (enemy->unk_B0 & 4) {
+        if (enemy->unk_B0 & ENEMY_AI_FLAGS_4) {
             script->functionTemp[0] = 99;
             script->functionTemp[1] = 0;
-            enemy->unk_B0 &= ~4;
+            enemy->unk_B0 &= ~ENEMY_AI_FLAGS_4;
         }
         enemy->varTable[0] = 0;
     }

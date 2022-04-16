@@ -18,7 +18,7 @@ void N(UnkNpcAIFunc33)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThi
         enemy->varTable[0] = 4;
         npc->duration = 8;
         npc->currentAnim.w = enemy->animList[0];
-        fx_emote(3, npc, 0, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 10, &temp);
+        fx_emote(EMOTE_FRUSTRATION, npc, 0, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 10, &temp);
         script->functionTemp[0] = 13;
     }
 }

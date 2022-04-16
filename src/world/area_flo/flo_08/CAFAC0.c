@@ -942,7 +942,7 @@ void N(func_80241364_CB00A4)(Evt* script, NpcAISettings* npcAISettings, EnemyTer
     s32 var;
 
     if (func_800490B4(territory, enemy, npcAISettings->chaseRadius, npcAISettings->unk_28.f, 1) == 0) {
-        fx_emote(2, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &var);
+        fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &var);
         npc->currentAnim.w = enemy->animList[0];
         npc->duration = 25;
         script->functionTemp[0] = 14;
@@ -991,7 +991,7 @@ ApiStatus N(func_8024150C_CB024C)(Evt* script, s32 isInitialCall) {
     territory.unk_18 = 100.0f;
     territory.unk_1C = 0;
 
-    if (isInitialCall || (enemy->unk_B0 & 4)) {
+    if (isInitialCall || (enemy->unk_B0 & ENEMY_AI_FLAGS_4)) {
         script->functionTemp[0] = 0;
         npc->duration = 0;
         npc->currentAnim.w = enemy->animList[0];
@@ -1001,10 +1001,10 @@ ApiStatus N(func_8024150C_CB024C)(Evt* script, s32 isInitialCall) {
         } else {
             npc->flags = (npc->flags & ~0x200) | 0x8;
         }
-        if (enemy->unk_B0 & 4) {
+        if (enemy->unk_B0 & ENEMY_AI_FLAGS_4) {
             script->functionTemp[0] = 99;
             script->functionTemp[1] = 0;
-            enemy->unk_B0 &= ~4;
+            enemy->unk_B0 &= ~ENEMY_AI_FLAGS_4;
         }
     }
 

@@ -74,7 +74,7 @@ ApiStatus func_802406CC_EA0FCC(Evt* script, s32 isInitialCall) {
     enemy->unk_114 = 0.0001f;
     enemy->unk_118 = 0.0001f;
 
-    if (isInitialCall || enemy->unk_B0 & 4) {
+    if (isInitialCall || enemy->unk_B0 & ENEMY_AI_FLAGS_4) {
         script->functionTemp[0] = 0;
         npc->duration = 0;
         npc->flags |= NPC_FLAG_2 | NPC_FLAG_100;
@@ -82,8 +82,8 @@ ApiStatus func_802406CC_EA0FCC(Evt* script, s32 isInitialCall) {
         npc->pos.x = 0.0f;
         npc->pos.y = -1000.0f;
         npc->pos.z = 0.0f;
-        if (enemy->unk_B0 & 4) {
-            enemy->unk_B0 &= ~4;
+        if (enemy->unk_B0 & ENEMY_AI_FLAGS_4) {
+            enemy->unk_B0 &= ~ENEMY_AI_FLAGS_4;
         }
     }
 
@@ -165,7 +165,7 @@ ApiStatus func_8024097C_EA127C(Evt* script, s32 isInitialCall) {
     enemy->unk_114 = 0.0001f;
     enemy->unk_118 = 0.0001f;
 
-    if (isInitialCall || enemy->unk_B0 & 4) {
+    if (isInitialCall || enemy->unk_B0 & ENEMY_AI_FLAGS_4) {
         script->functionTemp[0] = 0;
         npc->duration = 0;
         npc->currentAnim.w = enemy->animList[0];
@@ -175,10 +175,10 @@ ApiStatus func_8024097C_EA127C(Evt* script, s32 isInitialCall) {
         } else {
             npc->flags = (npc->flags & ~NPC_FLAG_GRAVITY) | NPC_FLAG_ENABLE_HIT_SCRIPT;
         }
-        if (enemy->unk_B0 & 4) {
+        if (enemy->unk_B0 & ENEMY_AI_FLAGS_4) {
             script->functionTemp[0] = 99;
             script->functionTemp[1] = 0;
-            enemy->unk_B0 &= ~4;
+            enemy->unk_B0 &= ~ENEMY_AI_FLAGS_4;
         }
         enemy->varTable[0] = 0;
     }
@@ -278,16 +278,16 @@ ApiStatus func_80241AE0_EA23E0(Evt* script, s32 isInitialCall) {
         enemy->unk_118 = 0.7f;
     }
 
-    if (isInitialCall || enemy->unk_B0 & 4) {
+    if (isInitialCall || enemy->unk_B0 & ENEMY_AI_FLAGS_4) {
         script->functionTemp[0] = 0;
         npc->duration = 0;
         npc->currentAnim.w = enemy->animList[0];
         enemy->varTable[0] = 0;
 
-        if (enemy->unk_B0 & 4) {
+        if (enemy->unk_B0 & ENEMY_AI_FLAGS_4) {
             script->functionTemp[0] = 99;
             script->functionTemp[1] = 0;
-            enemy->unk_B0 &= ~4;
+            enemy->unk_B0 &= ~ENEMY_AI_FLAGS_4;
         }
     }
 

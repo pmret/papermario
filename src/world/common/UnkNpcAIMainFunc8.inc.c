@@ -21,10 +21,10 @@ ApiStatus N(UnkNpcAIMainFunc8)(Evt* script, s32 isInitialCall) {
 
     if (isInitialCall) {
         enemy->varTable[6] = npc->collisionHeight;
-        enemy->unk_B0 |= 8;
+        enemy->unk_B0 |= ENEMY_AI_FLAGS_8;
     }
 
-    if (isInitialCall || (enemy->unk_B0 & 4)) {
+    if (isInitialCall || (enemy->unk_B0 & ENEMY_AI_FLAGS_4)) {
         npc->duration = 0;
         script->functionTemp[0] = 0;
         enemy->unk_07 = 0;
@@ -42,13 +42,13 @@ ApiStatus N(UnkNpcAIMainFunc8)(Evt* script, s32 isInitialCall) {
             npc->flags |= NPC_FLAG_ENABLE_HIT_SCRIPT;
         }
 
-        if (enemy->unk_B0 & 4) {
+        if (enemy->unk_B0 & ENEMY_AI_FLAGS_4) {
             s32 emoteTemp;
 
             script->functionTemp[0] = 99;
             script->functionTemp[1] = 0;
-            fx_emote(2, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 40, &emoteTemp);
-            enemy->unk_B0 &= ~4;
+            fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 40, &emoteTemp);
+            enemy->unk_B0 &= ~ENEMY_AI_FLAGS_4;
         } else if (enemy->flags & ENEMY_FLAGS_40000000) {
             script->functionTemp[0] = 12;
             enemy->flags &= ~ENEMY_FLAGS_40000000;

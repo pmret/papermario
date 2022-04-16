@@ -654,7 +654,7 @@ void N(func_80241CA8_BFF528)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
     if (!(npc->pos.y < (posY + temp_f20))) {
         npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z);
         npc->pos.y = posY + temp_f20;
-        fx_emote(2, npc, 0, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 10, &var);
+        fx_emote(EMOTE_QUESTION, npc, 0, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 10, &var);
         npc->duration = 10;
         script->functionTemp[0] = 18;
     }
@@ -723,7 +723,7 @@ void N(func_80241F98_BFF818)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
     if (script->functionTemp[1] <= 0) {
         script->functionTemp[1] = aiSettings->unk_14;
         if (func_800490B4(territory, enemy, aiSettings->alertRadius * 0.5, aiSettings->unk_10.f * 0.5, 0)) {
-            fx_emote(0, npc, 0, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 12, &var);
+            fx_emote(EMOTE_EXCLAMATION, npc, 0, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 12, &var);
             ai_enemy_play_sound(npc, 0x2F4, 0x200000);
             npc->moveToPos.y = npc->pos.y;
             script->functionTemp[0] = 12;

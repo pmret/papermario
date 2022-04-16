@@ -9,7 +9,7 @@ void N(UnkNpcAIFunc48)(Evt* script, f32 arg1, f32 arg2, EnemyTerritoryThing* ter
     if (func_800490B4(territory, enemy, arg1, arg2, 1) == 0) {
         s32 sp28;
 
-        fx_emote(2, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &sp28);
+        fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &sp28);
         npc->currentAnim.w = enemy->animList[0];
         npc->duration = 20;
         script->functionTemp[0] = 33;

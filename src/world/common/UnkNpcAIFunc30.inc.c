@@ -10,7 +10,7 @@ void N(UnkNpcAIFunc30)(Evt *script, NpcAISettings* aiSettings, EnemyTerritoryThi
     npc->duration--;
     if (npc->duration == 0) {
         if (func_800490B4(territory, enemy, aiSettings->alertRadius, aiSettings->unk_10.f, 0) == 0) {
-            fx_emote(2, npc, 0, npc->collisionHeight, 1, 2, -20, 15, &retVal);
+            fx_emote(EMOTE_QUESTION, npc, 0, npc->collisionHeight, 1, 2, -20, 15, &retVal);
         }
         npc->duration = 0;
         script->functionTemp[0] = 0;

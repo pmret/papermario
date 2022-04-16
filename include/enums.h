@@ -586,6 +586,7 @@ enum SoundIDs {
     SOUND_DAYZEE_SONG               = 0x000002D7,
     SOUND_POWER_UP                  = 0x000002D8,
     SOUND_2F1                       = 0x000002F1,
+    SOUND_2F4                       = 0x000002F4,
     SOUND_2F6                       = 0x000002F6,
     SOUND_2F7                       = 0x000002F7,
     SOUND_CLOSE_SHELL               = 0x000002FF,

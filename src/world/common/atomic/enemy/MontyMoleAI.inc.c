@@ -154,7 +154,7 @@ static void N(MontyMoleAI_State14)(Evt* script, NpcAISettings* aiSettings, Enemy
     npc->duration--;
     if ((npc->duration) <= 0) {
         if (!N(MontyMoleAI_CanAttack)(script, territory, aiSettings->alertRadius * 1.1, aiSettings->unk_10.f)) {
-            fx_emote(2, npc, 0.0f, (f32) npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &emoteOut);
+            fx_emote(EMOTE_QUESTION, npc, 0.0f, (f32) npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &emoteOut);
             npc->currentAnim.w = NPC_ANIM_monty_mole_Palette_00_Anim_1;
             npc->duration = 30;
             script->functionTemp[0] =  AI_STATE_MOLE_20;

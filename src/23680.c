@@ -129,7 +129,7 @@ s32 func_800490B4(EnemyTerritoryThing* territory, Enemy* enemy, f32 radius, f32 
     f32 dist;
     s32 phi_v0;
 
-    if (enemy->unk_B0 & 2) {
+    if (enemy->unk_B0 & ENEMY_AI_FLAGS_2) {
         return FALSE;
     }
 
@@ -264,8 +264,8 @@ void func_800495A0(Evt* script, NpcAISettings* npcAISettings, EnemyTerritoryThin
         npc->moveSpeed = enemy->territory->wander.moveSpeedOverride / 32767.0;
     }
 
-    enemy->unk_B0 &= ~0x40;
-    enemy->unk_B0 &= ~0x20;
+    enemy->unk_B0 &= ~ENEMY_AI_FLAGS_40;
+    enemy->unk_B0 &= ~ENEMY_AI_FLAGS_20;
     script->functionTemp[0] = 1;
 }
 
@@ -287,10 +287,10 @@ void func_800496B8(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* 
                 yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
                 if (!npc_test_move_simple_with_slipping(npc->collisionChannel, &x, &y, &z, aiSettings->chaseSpeed, yaw, npc->collisionHeight, npc->collisionRadius)) {
                     npc->yaw = yaw;
-                    ai_enemy_play_sound(npc, 0x2F4, 0x200000);
-                    fx_emote(0, npc, 0, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &sp34);
-                    enemy->unk_B0 &= ~0x40;
-                    enemy->unk_B0 &= ~0x20;
+                    ai_enemy_play_sound(npc, SOUND_2F4, 0x200000);
+                    fx_emote(EMOTE_EXCLAMATION, npc, 0, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &sp34);
+                    enemy->unk_B0 &= ~ENEMY_AI_FLAGS_40;
+                    enemy->unk_B0 &= ~ENEMY_AI_FLAGS_20;
 
                     if (enemy->npcSettings->unk_2A & 1) {
                         script->functionTemp[0] = 10;
@@ -312,13 +312,13 @@ void func_800496B8(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* 
                                enemy->territory->wander.wanderSizeX,
                                enemy->territory->wander.wanderSizeZ)
         && npc->moveSpeed < dist2D(enemy->territory->wander.point.x, enemy->territory->wander.point.z, npc->pos.x, npc->pos.z)) {
-        if (!(enemy->unk_B0 & 0x20)) {
-            enemy->unk_B0 |= 0x60;
+        if (!(enemy->unk_B0 & ENEMY_AI_FLAGS_20)) {
+            enemy->unk_B0 |= (ENEMY_AI_FLAGS_20 | ENEMY_AI_FLAGS_40);
         }
 
-        if (enemy->unk_B0 & 0x40) {
+        if (enemy->unk_B0 & ENEMY_AI_FLAGS_40) {
             npc->yaw = clamp_angle(atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z));
-            enemy->unk_B0 &= ~0x40;
+            enemy->unk_B0 &= ~ENEMY_AI_FLAGS_40;
         }
 
         x = npc->pos.x;
@@ -326,14 +326,14 @@ void func_800496B8(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* 
         z = npc->pos.z;
         if (npc_test_move_simple_with_slipping(npc->collisionChannel, &x, &y, &z, 2.0 * npc->moveSpeed, npc->yaw, npc->collisionHeight, npc->collisionRadius)) {
             yaw = clamp_angle(atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z));
-            enemy->unk_B0 &= ~0x40;
+            enemy->unk_B0 &= ~ENEMY_AI_FLAGS_40;
             func_8004A784(npc, 5.0f, &yaw, NULL, NULL, NULL);
             npc->yaw = yaw;
         }
         phi_s5 = 1;
-    } else if (enemy->unk_B0 & 0x20) {
-        enemy->unk_B0 &= ~0x20;
-        enemy->unk_B0 &= ~0x40;
+    } else if (enemy->unk_B0 & ENEMY_AI_FLAGS_20) {
+        enemy->unk_B0 &= ~ENEMY_AI_FLAGS_20;
+        enemy->unk_B0 &= ~ENEMY_AI_FLAGS_40;
     }
 
     if (enemy->territory->wander.wanderSizeX | enemy->territory->wander.wanderSizeZ | phi_s5) {
@@ -374,7 +374,7 @@ void func_80049C04(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* 
         if (!npc_test_move_simple_with_slipping(npc->collisionChannel, &x, &y, &z, aiSettings->chaseSpeed, yaw, npc->collisionHeight, npc->collisionRadius)) {
             npc->yaw = yaw;
             ai_enemy_play_sound(npc, 0x2F4, 0x200000);
-            fx_emote(0, npc, 0, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &sp34);
+            fx_emote(EMOTE_EXCLAMATION, npc, 0, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &sp34);
             if (enemy->npcSettings->unk_2A & 1) {
                 script->functionTemp[0] = 10;
             } else {
@@ -476,7 +476,7 @@ void func_8004A124(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* 
     f32 x, y, z;
 
     if (!func_800490B4(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 1)) {
-        fx_emote(2, npc, 0, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &sp28);
+        fx_emote(EMOTE_QUESTION, npc, 0, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &sp28);
         npc->currentAnim.w = enemy->animList[0];
         npc->duration = 20;
         script->functionTemp[0] = 14;
@@ -489,7 +489,7 @@ void func_8004A124(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* 
             y = npc->pos.y;
             z = npc->pos.z;
             if (npc_test_move_simple_with_slipping(npc->collisionChannel, &x, &y, &z, 1.0f, npc->yaw, npc->collisionHeight, npc->collisionRadius)) {
-                fx_emote(2, npc, 0, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xC, &sp28);
+                fx_emote(EMOTE_QUESTION, npc, 0, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xC, &sp28);
                 npc->currentAnim.w = enemy->animList[0];
                 npc->duration = 15;
                 script->functionTemp[0] = 14;
@@ -542,7 +542,7 @@ ApiStatus DoBasicAI(Evt* script, s32 isInitialCall) {
     territory.unk_1C = 0;
 
 
-    if (isInitialCall || enemy->unk_B0 & 4) {
+    if (isInitialCall || enemy->unk_B0 & ENEMY_AI_FLAGS_4) {
         script->functionTemp[0] = 0;
         npc->duration = 0;
 
@@ -557,14 +557,14 @@ ApiStatus DoBasicAI(Evt* script, s32 isInitialCall) {
             npc->flags |= NPC_FLAG_ENABLE_HIT_SCRIPT;
         }
 
-        if (enemy->unk_B0 & 4) {
+        if (enemy->unk_B0 & ENEMY_AI_FLAGS_4) {
             script->functionTemp[0] = 99;
             script->functionTemp[1] = 0;
         } else if (enemy->flags & ENEMY_FLAGS_40000000) {
             script->functionTemp[0] = 12;
         }
 
-        enemy->unk_B0 &= ~4;
+        enemy->unk_B0 &= ~ENEMY_AI_FLAGS_4;
         enemy->flags &= ~ENEMY_FLAGS_40000000;
     }
 
