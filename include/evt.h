@@ -141,7 +141,7 @@ typedef s32 ApiStatus;
 
 enum EventGroupFlags {
     EVT_GROUP_00    = 0x00,
-    EVT_GROUP_0B     = 0x0B, // 8 | 4 | 1
+    EVT_GROUP_0B    = 0x0B, // 8 | 4 | 1
     EVT_GROUP_1B    = 0x1B, // 10 | 8 | 4 | 1
     EVT_GROUP_EF    = 0xEF, // ~10
     EVT_GROUP_01    = 0x01,

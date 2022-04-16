@@ -615,7 +615,7 @@ void update_player(void) {
 
     collisionStatus->currentWall = -1;
     collisionStatus->lastWallHammered = -1;
-    collisionStatus->unk_0A = -1;
+    collisionStatus->currentInspect = -1;
     collisionStatus->floorBelow = 1;
 
     update_player_input();

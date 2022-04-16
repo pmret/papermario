@@ -61,7 +61,7 @@ void func_802B60A4_E29514(void) {
 
         TempPointer = &D_802B6ED0;
         if (sp20 >= 0){
-            if(!(sp20 & 0x4000)) {
+            if(!(sp20 & COLLISION_WITH_ENTITY_BIT)) {
                 D_802B6ED0 = -1;
             } else {
                 D_802B6ED0 = sp20 & 0x3FF;
@@ -114,7 +114,7 @@ void func_802B60A4_E29514(void) {
             gCameras->targetPos.y = playerStatus->position.y;
             gCameras->targetPos.z = playerStatus->position.z;
             sp20 = func_802B6000_E29470();
-            if (sp20 < 0 || !(sp20 & 0x4000)) {
+            if (sp20 < 0 || !(sp20 & COLLISION_WITH_ENTITY_BIT)) {
                 playerStatus->currentStateTime = 20;
                 D_802B6EE8 = 0.0f;
                 D_802B6EF4 = playerStatus->position.y;

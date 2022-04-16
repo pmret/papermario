@@ -9,7 +9,7 @@ void func_802B6000_E28A30(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 oldFlags = playerStatus->flags;
 
-    if (playerStatus->flags < 0) {
+    if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
         playerStatus->flags &= ~(
             PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED | PLAYER_STATUS_FLAGS_80000 | PLAYER_STATUS_FLAGS_8 |
             PLAYER_STATUS_FLAGS_FALLING | PLAYER_STATUS_FLAGS_JUMPING
@@ -63,7 +63,7 @@ void func_802B609C_E28ACC(void) {
     f32 zDelta;
     f32 phi_f20;
 
-    if (playerStatus->flags < 0) {
+    if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
         playerStatus->flags &= ~(0x80080000 | 0x80000 | 0x8 | 0x4 | 0x2);
         playerStatus->fallState = 0;
         playerStatus->framesOnGround = 0;
@@ -138,7 +138,7 @@ INCLUDE_ASM(s32, "world/action/encounter", func_802B609C_E28ACC);
 void func_802B6350_E28D80(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    if (playerStatus->flags < 0) {
+    if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
         playerStatus->flags &= ~(0x80000000 | 0x80000 | 0x8 | 0x4 | 0x2);
         playerStatus->fallState = 0;
         playerStatus->currentStateTime = 0;
@@ -162,7 +162,7 @@ void func_802B6350_E28D80(void) {
 void func_802B63D4_E28E04(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    if (playerStatus->flags < 0) {
+    if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
         playerStatus->flags &= ~(0x80000000 | 0x8 | 0x4 | 0x2);
         playerStatus->fallState = 0;
         playerStatus->decorationList = 0;
@@ -183,7 +183,7 @@ void func_802B63D4_E28E04(void) {
 void func_802B6478_E28EA8(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    if (playerStatus->flags < 0) {
+    if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
         playerStatus->flags &= ~0x80000000;
         playerStatus->flags |= 0x80000;
         playerStatus->currentStateTime = 0;
@@ -202,7 +202,7 @@ void func_802B6478_E28EA8(void) {
 void func_802B6508_E28F38(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    if (playerStatus->flags < 0) {
+    if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
         f32 angle;
         f32 magnitude;
 
@@ -234,8 +234,8 @@ void func_802B6508_E28F38(void) {
 void func_802B6638_E29068(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    if (playerStatus->flags < 0) {
-        playerStatus->flags &= ~0x80000000;
+    if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
+        playerStatus->flags &= ~PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
         playerStatus->currentSpeed = 0.0f;
         playerStatus->unk_60 = 0;
 

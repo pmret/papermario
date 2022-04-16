@@ -2893,6 +2893,12 @@ enum CameraFlags {
     CAMERA_FLAGS_80000000          = 0x80000000,
 };
 
+enum CameraMoveFlags {
+    CAMERA_MOVE_FLAGS_1             = 0x00000001,
+    CAMERA_MOVE_FLAGS_2             = 0x00000002,
+    CAMERA_MOVE_FLAGS_4             = 0x00000004
+};
+
 enum CameraSettingsType {
     CAMERA_SETTINGS_TYPE_0  = 0,
     CAMERA_SETTINGS_TYPE_1  = 1,

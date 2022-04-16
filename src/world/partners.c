@@ -365,7 +365,7 @@ s32 func_800EA4B0(s32 collisionID) {
     s32 ret = TRUE;
 
     if (collisionID >= 0) {
-        if (collisionID & 0x4000) {
+        if (collisionID & COLLISION_WITH_ENTITY_BIT) {
             switch (get_entity_type(collisionID)) {
                 case ENTITY_TYPE_BLUE_SWITCH:
                 case ENTITY_TYPE_RED_SWITCH:

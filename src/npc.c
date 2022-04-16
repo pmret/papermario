@@ -1480,7 +1480,7 @@ s32 npc_find_standing_on_entity(s32 arg0) {
                         } else {
                             floorID = npc->currentFloor;
 
-                            if (!(floorID & 0x4000)) {
+                            if (!(floorID & COLLISION_WITH_ENTITY_BIT)) {
                                 continue;
                             }
                         }

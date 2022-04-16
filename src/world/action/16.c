@@ -20,7 +20,7 @@ void func_802B6000_E287F0(void) {
         playerStatus->gravityIntegrator[2] = 0.8059f;
         playerStatus->gravityIntegrator[3] = -0.0987f;
 
-        gCameras[CAM_DEFAULT].moveFlags |= 1;
+        gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_FLAGS_1;
 
         D_802B6240 = atan2(playerStatus->position.x, playerStatus->position.z, playerStatus->lastGoodPosition.x,
                            playerStatus->lastGoodPosition.z);

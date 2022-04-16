@@ -164,7 +164,7 @@ s32 world_goombario_can_pause(Npc* goombario) {
     PartnerActionStatus* goombarioActionStatus = &gPartnerActionStatus;
     s32 new_var;
 
-    if (goombarioActionStatus->partnerActionState != 0) {
+    if (goombarioActionStatus->partnerActionState != PARTNER_ACTION_NONE) {
         return FALSE;
     }
 

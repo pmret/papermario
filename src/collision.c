@@ -461,7 +461,7 @@ void update_collider_transform(s16 colliderID) {
 }
 
 s32 get_collider_type_by_id(s32 colliderID) {
-    if (colliderID & 0x4000) {
+    if (colliderID & COLLISION_WITH_ENTITY_BIT) {
         return 0;
     } else {
         return gCollisionData.colliderList[colliderID].flags;

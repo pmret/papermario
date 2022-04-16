@@ -146,14 +146,14 @@ s32 phys_adjust_cam_on_landing(void) {
     if (ret == 1) {
         if ((get_collider_type_by_id(gCollisionStatus.currentFloor) & 0xFF) == 3) {
             ret = 0;
-            gCameras[0].moveFlags |= 0x1;
+            gCameras[0].moveFlags |= CAMERA_MOVE_FLAGS_1;
         } else {
-            gCameras[0].moveFlags &= ~0x1;
+            gCameras[0].moveFlags &= ~CAMERA_MOVE_FLAGS_1;
         }
-    } else if (partnerActionStatus->partnerActionState != 0 && partnerActionStatus->actingPartner == PARTNER_PARAKARRY) {
-        gCameras[0].moveFlags |= 0x2;
+    } else if (partnerActionStatus->partnerActionState != PARTNER_ACTION_NONE && partnerActionStatus->actingPartner == PARTNER_PARAKARRY) {
+        gCameras[0].moveFlags |= CAMERA_MOVE_FLAGS_2;
     } else {
-        gCameras[0].moveFlags &= ~0x2;
+        gCameras[0].moveFlags &= ~CAMERA_MOVE_FLAGS_2;
     }
 
     return ret;
@@ -354,8 +354,8 @@ void set_action_state(s32 actionState) {
         partner = playerData->currentPartner;
 
         if (partner == PARTNER_SUSHIE || partner == PARTNER_LAKILESTER || partner == PARTNER_PARAKARRY) {
-            if (gPartnerActionStatus.partnerActionState != 0) {
-                playerStatus->animFlags |= 0x4;
+            if (gPartnerActionStatus.partnerActionState != PARTNER_ACTION_NONE) {
+                playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_4;
                 playerStatus->flags |= PLAYER_STATUS_FLAGS_800;
                 return;
             }
@@ -374,7 +374,7 @@ void set_action_state(s32 actionState) {
     }
 
     if (actionState == ACTION_STATE_ENEMY_FIRST_STRIKE) {
-        playerStatus->animFlags |= 4;
+        playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_4;
     }
     playerStatus->actionState = actionState;
     playerStatus->flags |= PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
@@ -481,8 +481,8 @@ s32 check_input_jump(void) {
         return FALSE;
     }
 
-    if ((collisionStatus->unk_0A != -1) && (collisionStatus->unk_0A & 0x4000)) {
-        Entity* entity = get_entity_by_index(collisionStatus->unk_0A);
+    if ((collisionStatus->currentInspect != -1) && (collisionStatus->currentInspect & COLLISION_WITH_ENTITY_BIT)) {
+        Entity* entity = get_entity_by_index(collisionStatus->currentInspect);
 
         if (entity->flags & ENTITY_FLAGS_SHOWS_INSPECT_PROMPT) {
             if ((entity->boundScriptBytecode == 0) || (entity->flags & ENTITY_FLAGS_4000)) {

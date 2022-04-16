@@ -170,7 +170,7 @@ s32 func_802B62A4_E25174(void) {
         }
     }
 
-    if (ret >= 0 && (ret & 0x4000)) {
+    if (ret >= 0 && (ret & COLLISION_WITH_ENTITY_BIT)) {
         s32 hammerLevel = gPlayerData.hammerLevel;
 
         switch (get_entity_type(ret)) {
@@ -313,7 +313,7 @@ void func_802B6820_E256F0(void) {
         if (HammerHit->unk_14 == 0) {
             collisionStatus->lastWallHammered = result;
             if (result >= 0) {
-                if (result & 0x4000) {
+                if (result & COLLISION_WITH_ENTITY_BIT) {
                     get_entity_by_index(result)->unk_07 = 0;
                 }
             }
@@ -344,7 +344,7 @@ void func_802B6820_E256F0(void) {
             if (HammerHit->unk_14 == 0) {
                 collisionStatus->lastWallHammered = result;
                 if (result >= 0) {
-                    if (result & 0x4000) {
+                    if (result & COLLISION_WITH_ENTITY_BIT) {
                         get_entity_by_index(result)->unk_07 = 0;
                     }
                 }
@@ -369,7 +369,7 @@ void func_802B6820_E256F0(void) {
 
         action_hammer_play_hit_fx(HammerHit->hitID);
 
-        if (collisionStatus->lastWallHammered >= 0 && (collisionStatus->lastWallHammered & 0x4000)) {
+        if (collisionStatus->lastWallHammered >= 0 && (collisionStatus->lastWallHammered & COLLISION_WITH_ENTITY_BIT)) {
             get_entity_by_index(collisionStatus->lastWallHammered)->unk_07 = 0;
             playerStatus->flags |= PLAYER_STATUS_FLAGS_1000000;
         } else if (HammerHit->hitID < 0) {

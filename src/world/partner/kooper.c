@@ -30,16 +30,16 @@ s32 func_802BD100_31B120(Npc* npc) {
         return 0;
     }
 
-    if (!(D_8010C978 & 0x4000)) {
+    if (!(D_8010C978 & COLLISION_WITH_ENTITY_BIT)) {
         return 0;
     }
 
-    return entity_interacts_with_current_partner(D_8010C978 & ~0x4000);
+    return entity_interacts_with_current_partner(D_8010C978 & ~COLLISION_WITH_ENTITY_BIT);
 }
 
 void func_802BD144_31B164(Npc* kooper) {
-    if (D_8010C978 >= 0 && D_8010C978 & 0x4000) {
-        entity_interacts_with_current_partner(D_8010C978 & ~0x4000);
+    if (D_8010C978 >= 0 && D_8010C978 & COLLISION_WITH_ENTITY_BIT) {
+        entity_interacts_with_current_partner(D_8010C978 & ~COLLISION_WITH_ENTITY_BIT);
     }
 }
 

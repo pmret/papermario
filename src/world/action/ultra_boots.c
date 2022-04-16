@@ -16,8 +16,8 @@ void func_802B6000_E26710(void) {
     s32 sp10;
     u32 entityType;
 
-    if (playerStatus->flags & (1 << 31)) {
-        playerStatus->flags &= ~0x80000000;
+    if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
+        playerStatus->flags &= ~PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
         playerStatus->flags |= 0x2000A;
         phys_clear_spin_history();
         playerStatus->fallState = 0;
@@ -29,7 +29,7 @@ void func_802B6000_E26710(void) {
         suggest_player_anim_setUnkFlag(0x80000);
         disable_player_input();
         playerStatus->flags |= 0x200;
-        gCameras[CAM_DEFAULT].moveFlags |= 1;
+        gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_FLAGS_1;
         temp_f0 = clamp_angle(playerStatus->targetYaw - gCameras[gCurrentCameraID].currentYaw);
         phi_f4 = -60.0f;
         if (temp_f0 <= 180.0f) {
@@ -64,7 +64,7 @@ void func_802B6000_E26710(void) {
         case 0:
             temp_f20 = integrate_gravity();
             playerStatus->position.y = player_check_collision_below(temp_f20, &sp10);
-            if (sp10 >= 0 && collisionStatus->currentFloor & 0x4000 ) {
+            if (sp10 >= 0 && collisionStatus->currentFloor & COLLISION_WITH_ENTITY_BIT ) {
                 entityType = get_entity_type(collisionStatus->currentFloor);
                 if(entityType == 7 || entityType == 8) {
                     get_entity_by_index(collisionStatus->currentFloor)->collisionFlags |= 1;
@@ -100,13 +100,13 @@ void func_802B6000_E26710(void) {
                 playerStatus->gravityIntegrator[0] = -100.0f;
             }
             if (sp10 >= 0) {
-                if (collisionStatus->currentFloor & 0x4000) {
+                if (collisionStatus->currentFloor & COLLISION_WITH_ENTITY_BIT) {
                     entityType = get_entity_type(collisionStatus->currentFloor);
-                    if (entityType == 0x2E || entityType == 0x2F) {
+                    if (entityType == ENTITY_TYPE_SIMPLE_SPRING || entityType == ENTITY_TYPE_SCRIPT_SPRING) {
                         playerStatus->flags &= ~0x00020008;
                         set_action_state(ACTION_STATE_LAND);
                         return;
-                    } else if (entityType == 7 || entityType == 8) {
+                    } else if (entityType == ENTITY_TYPE_BLUE_SWITCH || entityType == ENTITY_TYPE_RED_SWITCH) {
                         playerStatus->flags &= ~0x00020008;
                         phys_player_land();
                         exec_ShakeCam1(0, 0, 4);

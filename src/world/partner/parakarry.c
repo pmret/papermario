@@ -190,7 +190,7 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
                     set_action_state(ACTION_STATE_RIDE);
                     parakarry->flags &= ~(NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_GRAVITY);
                     D_802BEBB0 = 1;
-                    gCameras[0].moveFlags |= 1;
+                    gCameras[0].moveFlags |= CAMERA_MOVE_FLAGS_1;
                     parakarry->currentAnim.w = 0x40009;
                     partnerActionStatus->actingPartner = PARTNER_PARAKARRY;
                     partnerActionStatus->partnerActionState = PARTNER_ACTION_PARAKARRY_HOVER;
@@ -234,7 +234,7 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
                 D_802BEBB4 = 1;
                 D_802BEBB8 = 1;
                 D_802BEBB0 = 1;
-                gCameras[0].moveFlags |= 1;
+                gCameras[0].moveFlags |= CAMERA_MOVE_FLAGS_1;
                 parakarry->flags &= ~(NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_GRAVITY);
                 parakarry->flags |= NPC_FLAG_40 | NPC_FLAG_ENABLE_HIT_SCRIPT;
                 partnerActionStatus->actingPartner = PARTNER_PARAKARRY;
@@ -489,7 +489,7 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
                                                         func_8003D660(parakarry, 0),
                                                         parakarry->pos.y = y, (!tempConditional))) {
                                                 if (!phys_adjust_cam_on_landing()) {
-                                                    gCameras[0].moveFlags &= ~0x2;
+                                                    gCameras[0].moveFlags &= ~CAMERA_MOVE_FLAGS_2;
                                                 }
                                                 gCameras->targetPos.x = playerStatus->position.x;
                                                 gCameras->targetPos.y = playerStatus->position.y;

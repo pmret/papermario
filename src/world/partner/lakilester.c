@@ -224,7 +224,7 @@ s32 func_802BD7DC(void) {
 
     //TODO find better match
     if (outLength <= 16.0f && colliderTypeID >= 0) {
-        if (!(colliderTypeID & 0x4000) || !(get_entity_type(colliderTypeID) - 0x2E < 2)){
+        if (!(colliderTypeID & COLLISION_WITH_ENTITY_BIT) || !(get_entity_type(colliderTypeID) - 0x2E < 2)){
             colliderTypeID = get_collider_type_by_id(colliderTypeID) & 0xFF;
             if (colliderTypeID - 1 >= 3U) {
                 ret = FALSE;
@@ -389,7 +389,7 @@ void func_802BDDD8_321928(Npc* npc) {
     if (npc_test_move_taller_with_slipping(npc->collisionChannel, &x, &y, &z, npc->collisionRadius, npc->yaw,
         npc->collisionHeight, npc->collisionRadius) != 0) {
 
-        collisionStatus->unk_0A = (partnerActionStatus->pressedButtons & 0x8000) ? D_8010C97A : -1;
+        collisionStatus->currentInspect = (partnerActionStatus->pressedButtons & 0x8000) ? D_8010C97A : -1;
     }
 
     if (moveSpeed != 0.0f) {
@@ -835,7 +835,7 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
             D_802BFF14++;
             /* fallthrough */
         case 5:
-            gCameras[0].moveFlags |= 1;
+            gCameras[0].moveFlags |= CAMERA_MOVE_FLAGS_1;
             playerStatus->position.y += npc->jumpVelocity;
             sp2C = playerStatus->colliderHeight * 0.5f;
 

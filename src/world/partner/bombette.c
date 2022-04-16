@@ -45,13 +45,13 @@ void func_802BD100_317E50(Npc* npc) {
         }
         
         if (!(angle >= 360.0f)) {
-            if (D_8010C978 >= 0 && (D_8010C978 & 0x4000) != 0) {
-                entity_interacts_with_current_partner(D_8010C978 & ~0x4000);
+            if (D_8010C978 >= 0 && (D_8010C978 & COLLISION_WITH_ENTITY_BIT) != 0) {
+                entity_interacts_with_current_partner(D_8010C978 & ~COLLISION_WITH_ENTITY_BIT);
             }
         }
     } else {
-        if (D_8010C978 >= 0 && (D_8010C978 & 0x4000) != 0) {
-            entity_interacts_with_current_partner(D_8010C978 & ~0x4000);
+        if (D_8010C978 >= 0 && (D_8010C978 & COLLISION_WITH_ENTITY_BIT) != 0) {
+            entity_interacts_with_current_partner(D_8010C978 & ~COLLISION_WITH_ENTITY_BIT);
         }
     }
 }
@@ -181,7 +181,7 @@ void func_802BD6DC_31842C(Npc* npc) {
 }
 
 s32 world_bombette_can_use_ability(void) {
-    if (gPartnerActionStatus.partnerActionState != 0) {
+    if (gPartnerActionStatus.partnerActionState != PARTNER_ACTION_NONE) {
         D_802BE934 = 1;
         return FALSE;
     }
@@ -270,7 +270,7 @@ void world_bombette_pre_battle(Npc* bombette) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PartnerActionStatus* bombetteActionStatus = &gPartnerActionStatus;
 
-    if (bombetteActionStatus->partnerActionState != 0) {
+    if (bombetteActionStatus->partnerActionState != PARTNER_ACTION_NONE) {
         if (D_802BE92C) {
             enable_player_input();
         }
