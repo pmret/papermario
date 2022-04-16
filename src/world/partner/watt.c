@@ -232,8 +232,8 @@ s32 WattPutAway(Evt* script, s32 isInitialCall) {
         func_802BD180_31CCF0();
         partner_init_put_away(watt);
         force_player_anim(0x10002);
-        wattActionStatus->actionState.b[3] = 0;
-        wattActionStatus->actionState.b[0] = 0;
+        wattActionStatus->actionState.b[3] = PARTNER_NONE;
+        wattActionStatus->actionState.b[0] = PARTNER_ACTION_NONE;
         playerStatus->animFlags &= ~(PLAYER_STATUS_ANIM_FLAGS_2 | PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT);
         gGameStatusPtr->keepUsingPartnerOnMapChange = 0;
     }
@@ -301,8 +301,8 @@ ApiStatus func_802BDE88_31D9F8(Evt* script, s32 isInitialCall) {
             watt->flags |= NPC_FLAG_100;
             playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_2 | PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT;
             gGameStatusPtr->keepUsingPartnerOnMapChange = 1;
-            wattActionStatus->actionState.b[0] = 1;
-            wattActionStatus->actionState.b[3] = 6;
+            wattActionStatus->actionState.b[0] = PARTNER_ACTION_WATT_SHINE;
+            wattActionStatus->actionState.b[3] = PARTNER_WATT;
             D_802BE308 = 0;
             script->functionTemp[0] += 1;
             break;
@@ -345,7 +345,7 @@ void func_802BE070_31DBE0(void) {
     f32 spriteFacingAngle;
     s32 phi_v1;
     
-    if (gPartnerActionStatus.actionState.b[0] != 0) {
+    if (gPartnerActionStatus.actionState.b[0] != PARTNER_ACTION_NONE) {
         spriteFacingAngle = gPlayerStatusPtr->spriteFacingAngle;
         if ((spriteFacingAngle < 90.0f) || (spriteFacingAngle > 270.0f)) {
             if (!(gPlayerStatusPtr->trueAnimation & NPC_FLAG_1000000)) {

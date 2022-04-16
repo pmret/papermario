@@ -212,7 +212,7 @@ static s32 N(pad_30D8)[] = {
 };
 
 EvtScript N(802430E0) = {
-    EVT_SET_GROUP(EVT_GROUP_0)
+    EVT_SET_GROUP(EVT_GROUP_00)
     EVT_LOOP(20)
         EVT_CALL(GetCurrentPartner, EVT_VAR(10))
         EVT_IF_NE(EVT_VAR(10), 0)
@@ -345,7 +345,7 @@ static s32 N(pad_3738)[] = {
 };
 
 EvtScript N(80243740) = {
-    EVT_SET_GROUP(EVT_GROUP_0)
+    EVT_SET_GROUP(EVT_GROUP_00)
     EVT_SUSPEND_GROUP(1)
     EVT_CALL(ShowKeyChoicePopup)
     EVT_IF_EQ(EVT_VAR(0), 0)
@@ -986,15 +986,15 @@ void N(func_80241D04_C331E4)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
             phi_s2 = TRUE;
         }
 
-        if (playerData->currentPartner == 2) {
+        if (playerData->currentPartner == PARTNER_KOOPER) {
             if (gPartnerActionStatus.actionState.b[0] == playerData->currentPartner) {
                 phi_s2 = TRUE;
             }
         }
     }
 
-    if (((playerData->currentPartner == 1) && (gPartnerActionStatus.actionState.b[0] != 0)) ||
-        ((playerData->currentPartner == 3) && (gPartnerActionStatus.actionState.b[0] == 2))) {
+    if (((playerData->currentPartner == PARTNER_GOOMBARIO) && (gPartnerActionStatus.actionState.b[0] != PARTNER_ACTION_NONE)) ||
+        ((playerData->currentPartner == PARTNER_BOMBETTE) && (gPartnerActionStatus.actionState.b[0] == PARTNER_ACTION_BOMBETTE_2))) {
         posX = npc->pos.x;
         posZ = npc->pos.z;
         add_vec2D_polar(&posX, &posZ, 0.0f, npc->yaw);

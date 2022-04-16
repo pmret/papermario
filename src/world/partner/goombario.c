@@ -191,8 +191,8 @@ ApiStatus func_802BDB30_317A50(Evt* script, s32 isInitialCall) {
         enable_player_input();
     }
 
-    goombarioActionStatus->actionState.b[0] = 0;
-    goombarioActionStatus->actionState.b[3] = 0;
+    goombarioActionStatus->actionState.b[0] = PARTNER_ACTION_NONE;
+    goombarioActionStatus->actionState.b[3] = PARTNER_NONE;
     return ApiStatus_DONE2;
 }
 
@@ -234,15 +234,15 @@ EvtScript world_goombario_put_away = {
 void world_goombario_pre_battle(Npc* goombario) {
     PartnerActionStatus* goombarioActionStatus = &gPartnerActionStatus;
 
-    if (goombarioActionStatus->actionState.b[0] != 0) {
+    if (goombarioActionStatus->actionState.b[0] != PARTNER_ACTION_NONE) {
         set_time_freeze_mode(TIME_FREEZE_NORMAL);
         enable_player_input();
         cancel_current_message();
         partner_clear_player_tracking(goombario);
-        goombarioActionStatus->actionState.b[0] = 0;
-        goombarioActionStatus->actionState.b[3] = 0;
+        goombarioActionStatus->actionState.b[0] = PARTNER_ACTION_NONE;
+        goombarioActionStatus->actionState.b[3] = PARTNER_NONE;
         disable_npc_blur(goombario);
     }
 
-    goombarioActionStatus->actionState.b[3] = 1;
+    goombarioActionStatus->actionState.b[3] = PARTNER_GOOMBARIO;
 }

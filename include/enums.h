@@ -1869,6 +1869,18 @@ enum PartnerIDs {
     PARTNER_TWINK               = 0x0000000B,
 };
 
+enum PartnerActions {
+    PARTNER_ACTION_NONE             = 0, // genetic state
+    PARTNER_ACTION_USE              = 1, // generic state
+    PARTNER_ACTION_KOOPER_1         = 1,
+    PARTNER_ACTION_KOOPER_2         = 2,
+    PARTNER_ACTION_BOMBETTE_1       = 1,
+    PARTNER_ACTION_BOMBETTE_2       = 2,
+    PARTNER_ACTION_PARAKARRY_HOVER  = 1,
+    PARTNER_ACTION_WATT_SHINE       = 1,
+    PARTNER_ACTION_LAKILESTER_1     = 1,
+};
+
 /// @see gAreas
 enum Areas {
     AREA_KMR,

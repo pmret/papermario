@@ -394,7 +394,7 @@ s32 func_800EA4B0(s32 collisionID) {
 }
 
 s32 partner_is_idle(Npc* partner) {
-    return gPartnerActionStatus.actionState.b[0] == 0;
+    return gPartnerActionStatus.actionState.b[0] == PARTNER_ACTION_NONE;
 }
 
 s32 world_partner_can_player_pause_default(Npc* partner) {
@@ -668,14 +668,14 @@ void partner_handle_after_battle(void) {
         wPartnerCurrentScript = start_script(wPartner->update, EVT_PRIORITY_14, EVT_FLAG_20);
         wPartnerCurrentScript->owner2.npc = wPartnerNpc;
         wPartnerCurrentScriptID = wPartnerCurrentScript->id;
-        wPartnerCurrentScript->groupFlags = 0xA;
+        wPartnerCurrentScript->groupFlags = (EVT_GROUP_02 | EVT_GROUP_08);
 
         D_8010CFE8 = 1;
 
-        if (playerData->currentPartner != PARTNER_WATT && actionStatus->actionState.b[3] == 6) {
-            gPlayerStatusPtr->animFlags &= ~1;
-            gPlayerStatusPtr->animFlags &= ~2;
-            actionStatus->actionState.b[3] = 0;
+        if (playerData->currentPartner != PARTNER_WATT && actionStatus->actionState.b[3] == PARTNER_WATT) {
+            gPlayerStatusPtr->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT;
+            gPlayerStatusPtr->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_2;
+            actionStatus->actionState.b[3] = PARTNER_NONE;
         }
 
         if (wPartner->postBattle != NULL) {

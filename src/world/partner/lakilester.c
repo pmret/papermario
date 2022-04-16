@@ -587,8 +587,8 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
                 D_802BFF0C = 1;
                 npc->flags &= ~(NPC_FLAG_40 | NPC_FLAG_ENABLE_HIT_SCRIPT);
                 npc->flags |= (NPC_FLAG_100 | NPC_FLAG_400000);
-                partnerActionStatus->actionState.b[3] = 8;
-                partnerActionStatus->actionState.b[0] = 1;
+                partnerActionStatus->actionState.b[3] = PARTNER_LAKILESTER;
+                partnerActionStatus->actionState.b[0] = PARTNER_ACTION_LAKILESTER_1;
                 gGameStatusPtr->keepUsingPartnerOnMapChange = 0;
                 npc->pos.x = playerStatus->position.x;
                 npc->pos.y = npc->moveToPos.y;
@@ -742,8 +742,8 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
                     set_action_state(ACTION_STATE_RIDE);
                     suggest_player_anim_setUnkFlag(0x8000E);
                     disable_player_shadow();
-                    partnerActionStatus->actionState.b[3] = 8;
-                    partnerActionStatus->actionState.b[0] = 1;
+                    partnerActionStatus->actionState.b[3] = PARTNER_LAKILESTER;
+                    partnerActionStatus->actionState.b[0] = PARTNER_ACTION_LAKILESTER_1;
                     playerStatus->flags &= ~PLAYER_STATUS_FLAGS_100;
                     gGameStatusPtr->keepUsingPartnerOnMapChange = 0;
                     D_802BFF18 = 0;
@@ -878,8 +878,8 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
             gGameStatusPtr->keepUsingPartnerOnMapChange = 0;
 
             if (playerStatus->flags & PLAYER_STATUS_FLAGS_800) {
-                partnerActionStatus->actionState.b[3] = 0;
-                partnerActionStatus->actionState.b[0] = 0;
+                partnerActionStatus->actionState.b[3] = PARTNER_NONE;
+                partnerActionStatus->actionState.b[0] = PARTNER_ACTION_NONE;
 
                 if (D_802BFF04 != 0) {
                     D_802BFF04 = 0;
@@ -900,8 +900,8 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
 
         if (D_802BFF14 == 11) {
             npc->flags &= ~(NPC_FLAG_40 | NPC_FLAG_400000 | NPC_FLAG_ENABLE_HIT_SCRIPT);
-            partnerActionStatus->actionState.b[3] = 0;
-            partnerActionStatus->actionState.b[0] = 0;
+            partnerActionStatus->actionState.b[3] = PARTNER_NONE;
+            partnerActionStatus->actionState.b[0] = PARTNER_ACTION_NONE;
             playerStatus->flags &= ~PLAYER_STATUS_FLAGS_100;
             if (D_802BFF04 != 0) {
                 D_802BFF04 = 0;
@@ -1009,8 +1009,8 @@ ApiStatus func_802BF4F0_323040(Evt* script, s32 isInitialCall) {
             enable_player_shadow();
 
             if (playerStatus->flags & PLAYER_STATUS_FLAGS_800) {
-                partnerActionStatus->actionState.b[3] = 0;
-                partnerActionStatus->actionState.b[0] = 0;
+                partnerActionStatus->actionState.b[3] = PARTNER_NONE;
+                partnerActionStatus->actionState.b[0] = PARTNER_ACTION_NONE;
                 if (D_802BFF04) {
                     D_802BFF04 = FALSE;
                     enable_player_input();
@@ -1033,8 +1033,8 @@ ApiStatus func_802BF4F0_323040(Evt* script, s32 isInitialCall) {
             D_802BFF00++;
             break;
         case 4:
-            partnerActionStatus->actionState.b[3] = 0;
-            partnerActionStatus->actionState.b[0] = 0;
+            partnerActionStatus->actionState.b[3] = PARTNER_NONE;
+            partnerActionStatus->actionState.b[0] = PARTNER_ACTION_NONE;
             playerStatus->flags &= ~PLAYER_STATUS_FLAGS_100;
 
             if (D_802BFF04) {
@@ -1073,7 +1073,7 @@ void world_lakilester_pre_battle(Npc* npc) {
         partner_clear_player_tracking(npc);
     }
 
-    partnerActionStatus->actionState.b[3] = 8;
+    partnerActionStatus->actionState.b[3] = PARTNER_LAKILESTER;
     D_802BFF18 = 0;
 }
 
@@ -1085,8 +1085,8 @@ void world_lakilester_post_battle(Npc* npc) {
             *npc = partnerActionStatus->npc;
             gGameStatusPtr->keepUsingPartnerOnMapChange = 1;
             set_action_state(ACTION_STATE_RIDE);
-            partnerActionStatus->actionState.b[3] = 0;
-            partnerActionStatus->actionState.b[0] = 0;
+            partnerActionStatus->actionState.b[3] = PARTNER_NONE;
+            partnerActionStatus->actionState.b[0] = PARTNER_ACTION_NONE;
             disable_player_input();
             partner_use_ability();
         }
@@ -1175,8 +1175,8 @@ s32 func_802BFBA0_3236F0(Evt* script, s32 isInitialCall) {
                 if (script->varTable[12] != 0) {
                     partnerActionStatus->actionState.b[1] = tempVar;
                     set_action_state(ACTION_STATE_RIDE);
-                    partnerActionStatus->actionState.b[3] = 0;
-                    partnerActionStatus->actionState.b[0] = 0;
+                    partnerActionStatus->actionState.b[3] = PARTNER_NONE;
+                    partnerActionStatus->actionState.b[0] = PARTNER_ACTION_NONE;
                     partner_use_ability();
                     enable_player_static_collisions();
                     enable_player_input();

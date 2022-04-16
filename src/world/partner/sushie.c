@@ -272,7 +272,7 @@ void world_sushie_pre_battle(Npc* sushie) {
         partner_clear_player_tracking(sushie);
     }
 
-    sushieActionStatus->actionState.b[3] = 7;
+    sushieActionStatus->actionState.b[3] = PARTNER_SUSHIE;
 }
 
 void world_sushie_post_battle(Npc* sushie) {

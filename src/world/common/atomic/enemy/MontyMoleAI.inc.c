@@ -4,24 +4,24 @@
 
 // ensure state handlers conform to expected signature
 static AIStateHandler N(MontyMoleAI_Init);
-static AIStateHandler N(MontyMoleAI_Loiter);
+static AIStateHandler N(MontyMoleAI_Wander);
+static AIStateHandler N(MontyMoleAI_PreSurface);
 static AIStateHandler N(MontyMoleAI_Surface);
+static AIStateHandler N(MontyMoleAI_DrawRock);
 static AIStateHandler N(MontyMoleAI_ThrowRock);
-static AIStateHandler N(MontyMoleAI_State14);
-static AIStateHandler N(MontyMoleAI_State15);
-static AIStateHandler N(MontyMoleAI_State20);
-static AIStateHandler N(MontyMoleAI_Dig);
+static AIStateHandler N(MontyMoleAI_PreBurrow);
+static AIStateHandler N(MontyMoleAI_Burrow);
 
 enum AiStateMontyMole {
     AI_STATE_MOLE_INIT          = 0,    // choose random heading and duration for next state
-    AI_STATE_MOLE_LOITER        = 1,    // wander around 'underground'
-    AI_STATE_MOLE_SURFACE       = 12,
-    AI_STATE_MOLE_THROW_ROCK    = 13,
-    AI_STATE_MOLE_14            = 14,
-    AI_STATE_MOLE_15            = 15,
-    AI_STATE_MOLE_16            = 16,
-    AI_STATE_MOLE_20            = 20,
-    AI_STATE_MOLE_DIG           = 21,
+    AI_STATE_MOLE_WANDER        = 1,    // wander around 'underground'
+    AI_STATE_MOLE_PRE_SURFACE   = 12,   // delay before emerging from underground
+    AI_STATE_MOLE_SURFACE       = 13,   // emerge from underground
+    AI_STATE_MOLE_DRAW_ROCK     = 14,   // pull out a rock, can either attack or cancel
+    AI_STATE_MOLE_THROW_ROCK    = 15,   // throw the rock
+    AI_STATE_MOLE_UNUSED        = 16,
+    AI_STATE_MOLE_PRE_BURROW    = 20,   // delay before burrowing back underground
+    AI_STATE_MOLE_BURROW        = 21,   // burrow underground
 };
 
 #define MONTY_MOLE_UNK_NPC_FLAGS 0x1F100000
@@ -53,7 +53,8 @@ static s32 N(MontyMoleAI_CanAttack)(Evt* script, EnemyTerritoryThing* territory,
     if (fabsf(npc->pos.y - gPlayerStatusPtr->position.y) >= 40.0f) {
         retVal = FALSE;
     }
-    if (gPartnerActionStatus.actionState.b[3] == 9) {
+    // check for bow hiding
+    if (gPartnerActionStatus.actionState.b[3] == PARTNER_BOW) {
         retVal = FALSE;
     }
     return retVal;
@@ -73,10 +74,10 @@ static void N(MontyMoleAI_Init)(Evt* script, NpcAISettings* aiSettings, EnemyTer
     enemy->flags |= MONTY_MOLE_UNK_NPC_FLAGS;
     npc->flags |= NPC_FLAG_2;
     script->functionTemp[1] = 0;
-    script->functionTemp[0] = AI_STATE_MOLE_LOITER;
+    script->functionTemp[0] = AI_STATE_MOLE_WANDER;
 }
 
-static void N(MontyMoleAI_Loiter)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+static void N(MontyMoleAI_Wander)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Npc dummyNpc;
@@ -104,7 +105,7 @@ static void N(MontyMoleAI_Loiter)(Evt* script, NpcAISettings* aiSettings, EnemyT
             script->functionTemp[1] = aiSettings->unk_14;
             if (N(MontyMoleAI_CanAttack)(script, territory, aiSettings->alertRadius, aiSettings->unk_10.f)) {
                 npc->duration = 0;
-                script->functionTemp[0] = AI_STATE_MOLE_SURFACE;
+                script->functionTemp[0] = AI_STATE_MOLE_PRE_SURFACE;
                 return;
             }
         }
@@ -120,7 +121,7 @@ static void N(MontyMoleAI_Loiter)(Evt* script, NpcAISettings* aiSettings, EnemyT
     }
 }
 
-static void N(MontyMoleAI_Surface)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+static void N(MontyMoleAI_PreSurface)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Npc* npc = get_npc_unsafe(script->owner1.enemy->npcID);
     
     npc->flags &= -(NPC_FLAG_PASSIVE | NPC_FLAG_2);
@@ -128,10 +129,10 @@ static void N(MontyMoleAI_Surface)(Evt* script, NpcAISettings* aiSettings, Enemy
     npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
     npc->currentAnim.w = NPC_ANIM_monty_mole_Palette_00_Anim_10; // emerge from ground
     npc->duration = 10;
-    script->functionTemp[0] = AI_STATE_MOLE_THROW_ROCK;
+    script->functionTemp[0] = AI_STATE_MOLE_SURFACE;
 }
 
-static void N(MontyMoleAI_ThrowRock)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+static void N(MontyMoleAI_Surface)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     
@@ -142,11 +143,11 @@ static void N(MontyMoleAI_ThrowRock)(Evt* script, NpcAISettings* aiSettings, Ene
     if (npc->duration <= 0) {
         npc->currentAnim.w = NPC_ANIM_monty_mole_Palette_00_Anim_18; // get and throw rock
         npc->duration = 10;
-        script->functionTemp[0] = AI_STATE_MOLE_14;
+        script->functionTemp[0] = AI_STATE_MOLE_DRAW_ROCK;
     }
 }
 
-static void N(MontyMoleAI_State14)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+static void N(MontyMoleAI_DrawRock)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Npc* npc;
     s32 emoteOut;
     
@@ -154,19 +155,19 @@ static void N(MontyMoleAI_State14)(Evt* script, NpcAISettings* aiSettings, Enemy
     npc->duration--;
     if ((npc->duration) <= 0) {
         if (!N(MontyMoleAI_CanAttack)(script, territory, aiSettings->alertRadius * 1.1, aiSettings->unk_10.f)) {
-            fx_emote(EMOTE_QUESTION, npc, 0.0f, (f32) npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &emoteOut);
-            npc->currentAnim.w = NPC_ANIM_monty_mole_Palette_00_Anim_1;
+            fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &emoteOut);
+            npc->currentAnim.w = NPC_ANIM_monty_mole_Palette_00_Anim_1; // cancel attack
             npc->duration = 30;
-            script->functionTemp[0] =  AI_STATE_MOLE_20;
+            script->functionTemp[0] =  AI_STATE_MOLE_PRE_BURROW;
         } else {
             npc->currentAnim.w = NPC_ANIM_monty_mole_Palette_00_Anim_1B; // throw rock
             npc->duration = 15;
-            script->functionTemp[0] =  AI_STATE_MOLE_15;
+            script->functionTemp[0] =  AI_STATE_MOLE_THROW_ROCK;
         }
     }
 }
 
-static void N(MontyMoleAI_State15)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+static void N(MontyMoleAI_ThrowRock)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* moleEnemy;
     Enemy* rockEnemy;
     Npc* moleNpc;
@@ -189,11 +190,11 @@ static void N(MontyMoleAI_State15)(Evt* script, NpcAISettings* aiSettings, Enemy
             moleNpc->currentAnim.w = NPC_ANIM_monty_mole_Palette_00_Anim_1;
         }
         moleNpc->duration = 15;
-        script->functionTemp[0] = AI_STATE_MOLE_20;
+        script->functionTemp[0] = AI_STATE_MOLE_PRE_BURROW;
     }
 }
 
-static void N(MontyMoleAI_State20)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+static void N(MontyMoleAI_PreBurrow)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Npc* npc = get_npc_unsafe(script->owner1.enemy->npcID);
     
     npc->duration--;
@@ -201,11 +202,11 @@ static void N(MontyMoleAI_State20)(Evt* script, NpcAISettings* aiSettings, Enemy
         ai_enemy_play_sound(npc, SOUND_MOLE_DIG, 0);
         npc->duration = 11;
         npc->currentAnim.w = NPC_ANIM_monty_mole_Palette_00_Anim_11; // retreat into ground
-        script->functionTemp[0] = AI_STATE_MOLE_DIG;
+        script->functionTemp[0] = AI_STATE_MOLE_BURROW;
     }
 }
 
-static void N(MontyMoleAI_Dig)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+static void N(MontyMoleAI_Burrow)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     
@@ -255,34 +256,32 @@ ApiStatus N(MontyMoleAI_Main)(Evt* script, s32 isInitialCall) {
     case AI_STATE_MOLE_INIT:
         N(MontyMoleAI_Init)(script, aiSettings, territory);
         // fallthrough
-    case AI_STATE_MOLE_LOITER:
-        N(MontyMoleAI_Loiter)(script, aiSettings, territory);
+    case AI_STATE_MOLE_WANDER:
+        N(MontyMoleAI_Wander)(script, aiSettings, territory);
         return ApiStatus_BLOCK;
-
+    case AI_STATE_MOLE_PRE_SURFACE:
+        N(MontyMoleAI_PreSurface)(script, aiSettings, territory);
+        // fallthrough
     case AI_STATE_MOLE_SURFACE:
         N(MontyMoleAI_Surface)(script, aiSettings, territory);
-        // fallthrough
+        if (script->functionTemp[0] != AI_STATE_MOLE_DRAW_ROCK) {
+            return ApiStatus_BLOCK;
+        } // else fallthrough
+    case AI_STATE_MOLE_DRAW_ROCK:
+        N(MontyMoleAI_DrawRock)(script, aiSettings, territory);
+        if (script->functionTemp[0] != AI_STATE_MOLE_THROW_ROCK) {
+            return ApiStatus_BLOCK;
+        } // else fallthrough
     case AI_STATE_MOLE_THROW_ROCK:
         N(MontyMoleAI_ThrowRock)(script, aiSettings, territory);
-        if (script->functionTemp[0] != AI_STATE_MOLE_14) {
+        if (script->functionTemp[0] != AI_STATE_MOLE_UNUSED) {
             return ApiStatus_BLOCK;
-        }
-    case AI_STATE_MOLE_14:
-        N(MontyMoleAI_State14)(script, aiSettings, territory);
-        if (script->functionTemp[0] != AI_STATE_MOLE_15) {
-            return ApiStatus_BLOCK;
-        }
-    case AI_STATE_MOLE_15:
-        N(MontyMoleAI_State15)(script, aiSettings, territory);
-        if (script->functionTemp[0] != AI_STATE_MOLE_16) {
-            return ApiStatus_BLOCK;
-        }
-    case AI_STATE_MOLE_20:
-        N(MontyMoleAI_State20)(script, aiSettings, territory);
+        } // else fallthrough
+    case AI_STATE_MOLE_PRE_BURROW:
+        N(MontyMoleAI_PreBurrow)(script, aiSettings, territory);
         return ApiStatus_BLOCK;
-
-    case AI_STATE_MOLE_DIG:
-        N(MontyMoleAI_Dig)(script, aiSettings, territory);
+    case AI_STATE_MOLE_BURROW:
+        N(MontyMoleAI_Burrow)(script, aiSettings, territory);
         return ApiStatus_BLOCK;
     }
     return ApiStatus_BLOCK;

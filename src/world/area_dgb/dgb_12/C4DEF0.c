@@ -134,7 +134,7 @@ static s32** N(varStash) = NULL;
 #include "world/common/StashVars.inc.c"
 
 EvtScript N(80240874) = {
-    EVT_SET_GROUP(EVT_GROUP_0)
+    EVT_SET_GROUP(EVT_GROUP_00)
     EVT_CALL(SetTimeFreezeMode, 2)
     EVT_WAIT_FRAMES(40)
     EVT_CALL(ShowGotItem, EVT_VAR(0), 0, 0)

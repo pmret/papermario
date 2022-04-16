@@ -189,7 +189,7 @@ s32 world_bombette_can_use_ability(void) {
 }
 
 s32 world_bombette_can_player_pause(void) {
-    return gPartnerActionStatus.actionState.b[0] == 0;
+    return gPartnerActionStatus.actionState.b[0] == PARTNER_ACTION_NONE;
 }
 
 ApiStatus func_802BD758_3184A8(Evt* evt, s32 isInitialCall);

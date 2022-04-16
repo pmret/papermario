@@ -105,7 +105,7 @@ void entity_small_switch_idle(Entity* entity) {
         return;
     }
 
-    if (partnerActionStatus->actionState.b[3] == 4 && partnerActionStatus->actionState.b[0] != 0) {
+    if (partnerActionStatus->actionState.b[3] == PARTNER_PARAKARRY && partnerActionStatus->actionState.b[0] != PARTNER_ACTION_NONE) {
         return;
     }
 

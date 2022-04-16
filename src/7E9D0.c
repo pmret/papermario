@@ -150,7 +150,7 @@ s32 phys_adjust_cam_on_landing(void) {
         } else {
             gCameras[0].moveFlags &= ~0x1;
         }
-    } else if (partnerActionStatus->actionState.b[0] != 0 && partnerActionStatus->actionState.b[3] == 4) {
+    } else if (partnerActionStatus->actionState.b[0] != 0 && partnerActionStatus->actionState.b[3] == PARTNER_PARAKARRY) {
         gCameras[0].moveFlags |= 0x2;
     } else {
         gCameras[0].moveFlags &= ~0x2;
@@ -255,8 +255,8 @@ void phys_update_action_state(void) {
                 cond = FALSE;
             }
 
-            if ((partnerActionStatus->actionState.b[0] == 0) && !(playerStatus->flags & 0x20) && cond) {
-                set_action_state(0xC);
+            if ((partnerActionStatus->actionState.b[0] == PARTNER_ACTION_NONE) && !(playerStatus->flags & PLAYER_STATUS_FLAGS_20) && cond) {
+                set_action_state(ACTION_STATE_TALK);
             }
             check_input_spin();
         }
@@ -448,7 +448,7 @@ s32 check_input_hammer(void) {
             return FALSE;
         }
 
-        if (gPartnerActionStatus.actionState.b[0] == 1 && playerData->currentPartner == PARTNER_WATT) {
+        if (gPartnerActionStatus.actionState.b[0] == PARTNER_ACTION_USE && playerData->currentPartner == PARTNER_WATT) {
             return FALSE;
         }
 

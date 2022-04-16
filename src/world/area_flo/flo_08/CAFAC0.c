@@ -58,7 +58,7 @@ EvtScript N(makeEntities) = {
 };
 
 EvtScript N(80242680) = {
-    EVT_SET_GROUP(EVT_GROUP_B)
+    EVT_SET_GROUP(EVT_GROUP_0B)
     EVT_SET(EVT_VAR(10), EVT_VAR(0))
     EVT_SET(EVT_VAR(11), EVT_VAR(1))
     EVT_SET(EVT_VAR(12), EVT_VAR(2))
@@ -1098,7 +1098,7 @@ static s32 N(pad_598C) = {
 };
 
 EvtScript N(80245990) = {
-    EVT_SET_GROUP(EVT_GROUP_B)
+    EVT_SET_GROUP(EVT_GROUP_0B)
     EVT_SET(EVT_VAR(10), EVT_VAR(0))
     EVT_SET(EVT_VAR(11), EVT_VAR(1))
     EVT_SET(EVT_VAR(12), EVT_VAR(2))

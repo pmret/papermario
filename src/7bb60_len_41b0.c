@@ -40,10 +40,10 @@ s32 can_trigger_loading_zone(void) {
                 return FALSE;
             }
         } else {
-            if (partnerActionStatus->actionState.b[3] == 6 || partnerActionStatus->actionState.b[3] == 7) {
+            if (partnerActionStatus->actionState.b[3] == PARTNER_WATT || partnerActionStatus->actionState.b[3] == PARTNER_SUSHIE) {
                 return partnerActionStatus->actionState.b[0] != 0;
             }
-            if (partnerActionStatus->actionState.b[3] == 4) {
+            if (partnerActionStatus->actionState.b[3] == PARTNER_PARAKARRY) {
                 gPlayerStatusPtr->animFlags |= PLAYER_STATUS_ANIM_FLAGS_4;
                 return FALSE;
             }
@@ -901,7 +901,7 @@ void phys_main_collision_below(void) {
         if (result >= 0) {
             switch (get_collider_type_by_id(result) & 0xFF) {
                 case 2:
-                    if (partnerActionStatus->actionState.b[0] == 0 || partnerActionStatus->actionState.b[3] != 9) {
+                    if (partnerActionStatus->actionState.b[0] == PARTNER_ACTION_NONE || partnerActionStatus->actionState.b[3] != PARTNER_BOW) {
                         if (playerStatus->blinkTimer == 0) {
                             if (playerStatus->actionState != ACTION_STATE_HIT_LAVA) {
                                 playerStatus->unk_BF = 2;
@@ -913,7 +913,7 @@ void phys_main_collision_below(void) {
                     }
                     break;
                 case 3:
-                    if (partnerActionStatus->actionState.b[0] == 0 || partnerActionStatus->actionState.b[3] != 9) {
+                    if (partnerActionStatus->actionState.b[0] == PARTNER_ACTION_NONE || partnerActionStatus->actionState.b[3] != PARTNER_BOW) {
                         if (playerStatus->blinkTimer == 0) {
                             if (playerStatus->actionState != ACTION_STATE_HIT_LAVA) {
                                 playerStatus->unk_BF = 1;
@@ -1146,7 +1146,7 @@ s32 phys_can_player_interact(void) {
     s32 ret = TRUE;
 
     if (gPartnerActionStatus.actionState.b[0] != 0) {
-        if (gPartnerActionStatus.actionState.b[3] == 3) {
+        if (gPartnerActionStatus.actionState.b[3] == PARTNER_BOMBETTE) {
             if (gPartnerActionStatus.actionState.b[0] < 3) {
                 ret = FALSE;
             }

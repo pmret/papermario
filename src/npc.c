@@ -394,8 +394,8 @@ void npc_do_other_npc_collision(Npc* npc) {
                         if (!(thisBuf + otherBuf <= dist)) {
                             collision = FALSE;
                             if (npc->flags & NPC_FLAG_PARTICLE) {
-                                collision = gPartnerActionStatus.actionState.b[0] == 0;
-                            } else if (!(otherNpc->flags & NPC_FLAG_PARTICLE) || gPartnerActionStatus.actionState.b[0] == 0) {
+                                collision = gPartnerActionStatus.actionState.b[0] == PARTNER_ACTION_NONE;
+                            } else if (!(otherNpc->flags & NPC_FLAG_PARTICLE) || gPartnerActionStatus.actionState.b[0] == PARTNER_ACTION_NONE) {
                                 collision = TRUE;
                             }
 
@@ -1616,7 +1616,7 @@ void func_8003D660(Npc* npc, s32 arg1) {
                     func_8003DC38(npc, arg1);
                     return;
                 case 8:
-                    if ((temp->actionState.b[0] == 0) || (temp->actionState.b[3] != 8)) {
+                    if ((temp->actionState.b[0] == PARTNER_ACTION_NONE) || (temp->actionState.b[3] != PARTNER_LAKILESTER)) {
                         func_8003DFA0(npc, arg1);
                         return;
                     }

@@ -134,11 +134,11 @@ s32 func_800490B4(EnemyTerritoryThing* territory, Enemy* enemy, f32 radius, f32 
     }
 
     partnerActionStatus = &gPartnerActionStatus;
-    if (partnerActionStatus->actionState.b[3] == 9 && partnerActionStatus->actionState.b[0] && !(territory->unk_1C & 1)) {
+    if (partnerActionStatus->actionState.b[3] == PARTNER_BOW && partnerActionStatus->actionState.b[0] && !(territory->unk_1C & 1)) {
         return FALSE;
     }
 
-    if (partnerActionStatus->actionState.b[3] == 7 && partnerActionStatus->actionState.b[0] && !(territory->unk_1C & 1)) {
+    if (partnerActionStatus->actionState.b[3] == PARTNER_SUSHIE && partnerActionStatus->actionState.b[0] && !(territory->unk_1C & 1)) {
         return FALSE;
     }
 

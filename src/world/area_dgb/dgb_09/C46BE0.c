@@ -360,7 +360,7 @@ EvtScript N(npcAI_802443DC) = {
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(func_802D2B6C)
     EVT_CALL(DisablePartnerAI, 0)
-    EVT_SET_GROUP(EVT_GROUP_0)
+    EVT_SET_GROUP(EVT_GROUP_00)
     EVT_CALL(SetTimeFreezeMode, 1)
     EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_ADD(EVT_VAR(1), 20)
@@ -753,15 +753,15 @@ void N(func_80240958_C47538)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
             phi_s2 = TRUE;
         }
 
-        if (playerData->currentPartner == 2) {
+        if (playerData->currentPartner == PARTNER_KOOPER) {
             if (gPartnerActionStatus.actionState.b[0] == playerData->currentPartner) {
                 phi_s2 = TRUE;
             }
         }
     }
 
-    if (((playerData->currentPartner == 1) && (gPartnerActionStatus.actionState.b[0] != 0)) ||
-        ((playerData->currentPartner == 3) && (gPartnerActionStatus.actionState.b[0] == 2))) {
+    if (((playerData->currentPartner == PARTNER_GOOMBARIO) && (gPartnerActionStatus.actionState.b[0] != PARTNER_ACTION_NONE)) ||
+        ((playerData->currentPartner == PARTNER_BOMBETTE) && (gPartnerActionStatus.actionState.b[0] == PARTNER_ACTION_BOMBETTE_2))) {
         posX = npc->pos.x;
         posZ = npc->pos.z;
         add_vec2D_polar(&posX, &posZ, 0.0f, npc->yaw);

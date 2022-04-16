@@ -311,15 +311,15 @@ void N(func_802406A4_C3E294)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
             phi_s2 = TRUE;
         }
 
-        if (playerData->currentPartner == 2) {
+        if (playerData->currentPartner == PARTNER_KOOPER) {
             if (gPartnerActionStatus.actionState.b[0] == playerData->currentPartner) {
                 phi_s2 = TRUE;
             }
         }
     }
 
-    if (((playerData->currentPartner == 1) && (gPartnerActionStatus.actionState.b[0] != 0)) ||
-        ((playerData->currentPartner == 3) && (gPartnerActionStatus.actionState.b[0] == 2))) {
+    if (((playerData->currentPartner == PARTNER_GOOMBARIO) && (gPartnerActionStatus.actionState.b[0] != PARTNER_ACTION_NONE)) ||
+        ((playerData->currentPartner == PARTNER_BOMBETTE) && (gPartnerActionStatus.actionState.b[0] == PARTNER_ACTION_BOMBETTE_2))) {
         posX = npc->pos.x;
         posZ = npc->pos.z;
         add_vec2D_polar(&posX, &posZ, 0.0f, npc->yaw);

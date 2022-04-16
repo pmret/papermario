@@ -813,7 +813,7 @@ void btl_state_update_partner_move(void) {
                                 break;
                             }
                             decrement_status_menu_disabled();
-                            if (playerData->currentPartner == 1 && battleStatus->moveCategory == 5
+                            if (playerData->currentPartner == PARTNER_GOOMBARIO && battleStatus->moveCategory == 5
                                                                 && battleStatus->selectedMoveID != MOVE_CHARGE) {
                                 partner->isGlowing = 0;
                                 gBattleStatus.flags1 &= ~BS_FLAGS1_40000000;
