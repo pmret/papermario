@@ -1009,7 +1009,7 @@ typedef struct BattleStatus {
     /* 0x195 */ s8 statusDuration;
     /* 0x196 */ char unk_196;
     /* 0x197 */ u8 targetHomeIndex; /* some sort of home idnex used for target list construction */
-    /* 0x198 */ u8 powerBounceCounter;
+    /* 0x198 */ s8 powerBounceCounter;
     /* 0x199 */ s8 wasStatusInflicted; /* during last attack */
     /* 0x19A */ u8 unk_19A;
     /* 0x19B */ char unk_19B[5];
