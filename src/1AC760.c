@@ -4,6 +4,7 @@
 #include "effects.h"
 
 s32 calc_partner_damage_enemy(void);
+s32 dispatch_damage_event_partner_1(s32, s32);
 
 void dispatch_event_partner(s32 lastEventType) {
     BattleStatus* battleStatus = &gBattleStatus;
