@@ -81,7 +81,7 @@ EvtScript D_80284054_7E4ED4 = {
 s32 shop_owner_begin_speech(s32 messageIndex) {
     Shop* shop = gGameStatusPtr->mapShop;
     s32 shopMsgID = shop->owner->shopMsgIDs[messageIndex];
-    Evt* script = start_script(&ShopBeginSpeech, 1, 0);
+    Evt* script = start_script(&ShopBeginSpeech, EVT_PRIORITY_1, 0);
 
     script->varTable[0] = shopMsgID;
     script->varTable[1] = shop->owner->npcID;
@@ -111,7 +111,7 @@ s32 shop_owner_buy_dialog(s32 messageIndex, s32 itemName, s32 coinCost, s32 bpCo
         set_message_msg(phi_a0, 2);
     }
 
-    script = start_script(&ShopBeginSpeech, 1, 0);
+    script = start_script(&ShopBeginSpeech, EVT_PRIORITY_1, 0);
     script->varTable[0] = shopMsgID;
     script->varTable[1] = shop->owner->npcID;
     script->varTable[2] = shop->owner->talkAnim;
@@ -123,7 +123,7 @@ s32 shop_owner_buy_dialog(s32 messageIndex, s32 itemName, s32 coinCost, s32 bpCo
 s32 shop_owner_continue_speech(s32 messageIndex) {
     Shop* shop = gGameStatusPtr->mapShop;
     s32 shopMsgID = shop->owner->shopMsgIDs[messageIndex];
-    Evt* script = start_script(&ShopContinueSpeech, 1, 0);
+    Evt* script = start_script(&ShopContinueSpeech, EVT_PRIORITY_1, 0);
 
     script->varTable[0] = shopMsgID;
     script->varTable[1] = shop->owner->npcID;
@@ -149,7 +149,7 @@ s32 shop_owner_continue_speech_with_quantity(s32 messageIndex, s32 amount) {
 
     set_message_msg(phi_a0, 1);
 
-    script = start_script(&ShopContinueSpeech, 1, 0);
+    script = start_script(&ShopContinueSpeech, EVT_PRIORITY_1, 0);
     script->varTable[0] = shopMsgID;
     script->varTable[1] = shop->owner->npcID;
     script->varTable[2] = shop->owner->talkAnim;
@@ -161,7 +161,7 @@ s32 shop_owner_continue_speech_with_quantity(s32 messageIndex, s32 amount) {
 s32 shop_owner_reset_speech(s32 messageIndex) {
     Shop* shop = gGameStatusPtr->mapShop;
     s32 shopMsgID = shop->owner->shopMsgIDs[messageIndex];
-    Evt* script = start_script(&ShopResetSpeech, 1, 0);
+    Evt* script = start_script(&ShopResetSpeech, EVT_PRIORITY_1, 0);
 
     script->varTable[0] = shopMsgID;
     script->varTable[1] = shop->owner->npcID;
@@ -173,7 +173,7 @@ s32 shop_owner_reset_speech(s32 messageIndex) {
 
 s32 shop_owner_end_speech(void) {
     Shop* shop = gGameStatusPtr->mapShop;
-    Evt* script = start_script(&ShopEndSpeech, 1, 0);
+    Evt* script = start_script(&ShopEndSpeech, EVT_PRIORITY_1, 0);
 
     script->varTable[0] = shop->owner->npcID;
     script->varTable[1] = shop->owner->talkAnim;
@@ -220,7 +220,7 @@ ApiStatus func_80280410(Evt* script, s32 isInitialCall) {
             disable_player_input();
             disable_player_static_collisions();
 
-            childScript = start_script(&BadgeShopInteract, 1, 0);
+            childScript = start_script(&BadgeShopInteract, EVT_PRIORITY_1, 0);
             childScript->varTable[0] = currentItemSlot;
             D_80286520 = childScript;
             D_80286524 = childScript->id;
@@ -337,7 +337,7 @@ ApiStatus ShowShopPurchaseDialog(Evt* script, s32 isInitialCall) {
             if (shopOwner != NULL) {
                 shopOwnerScriptSource = shopOwner->onBuyEvt;
                 if (shopOwnerScriptSource != NULL) {
-                    shopOwnerScript = start_script(shopOwnerScriptSource, 1, 0);
+                    shopOwnerScript = start_script(shopOwnerScriptSource, EVT_PRIORITY_1, 0);
                     D_8028652C = shopOwnerScript;
                     shopOwnerScript->varTable[2] = shopItemSlot;
                     shopOwnerScript->varTable[0] = D_80286534;
@@ -729,7 +729,7 @@ ApiStatus ShowShopOwnerDialog(Evt* script, s32 isInitialCall) {
         case 10:
             if (shop->owner != NULL) {
                 if (shop->owner->onTalkEvt != 0) {
-                    start_script(shop->owner->onTalkEvt, 1, 0);
+                    start_script(shop->owner->onTalkEvt, EVT_PRIORITY_1, 0);
                 }
             }
             open_status_menu_short();

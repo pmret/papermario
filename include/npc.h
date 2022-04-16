@@ -271,7 +271,7 @@ typedef struct Enemy {
     /*      */ };
     /* 0xAC */ u8 unk_AC;
     /* 0xAD */ char unk_AD[3];
-    /* 0xB0 */ s32 unk_B0;
+    /* 0xB0 */ u32 unk_B0;
     /* 0xB4 */ s8 unk_B4;
     /* 0xB5 */ s8 unk_B5;
     /* 0xB6 */ char unk_B6[2];

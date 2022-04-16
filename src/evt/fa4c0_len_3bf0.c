@@ -26,7 +26,7 @@ ApiStatus func_802D5C70(Evt* script) {
         D_802DB800[i] = 0;
     }
 
-    start_script(&D_802D9D34, 1, 0);
+    start_script(&D_802D9D34, EVT_PRIORITY_1, 0);
     return ApiStatus_DONE2;
 }
 

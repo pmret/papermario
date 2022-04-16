@@ -351,7 +351,7 @@ s32 use_consumable(s32 invSlot) {
     D_8010CD20 = invSlot;
     invSlot = gPlayerData.invItems[invSlot];
     dma_copy(UseItemDmaArgs[0], UseItemDmaArgs[1], _3251D0_VRAM);
-    script = start_script(UseItemDmaArgs[2], 1, 0);
+    script = start_script(UseItemDmaArgs[2], EVT_PRIORITY_1, 0);
     script->varTable[10] = invSlot;
     return script->id;
 }
@@ -665,7 +665,7 @@ void partner_handle_after_battle(void) {
             kill_script_by_ID(wPartnerCurrentScriptID);
         }
 
-        wPartnerCurrentScript = start_script(wPartner->update, 20, 0x20);
+        wPartnerCurrentScript = start_script(wPartner->update, EVT_PRIORITY_14, EVT_FLAG_20);
         wPartnerCurrentScript->owner2.npc = wPartnerNpc;
         wPartnerCurrentScriptID = wPartnerCurrentScript->id;
         wPartnerCurrentScript->groupFlags = 0xA;

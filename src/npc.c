@@ -2038,7 +2038,7 @@ s32 bind_enemy_ai(Enemy* enemy, EvtScript* aiScriptBytecode) {
         kill_script_by_ID(enemy->aiScript->id);
     }
     enemy->aiBytecode = aiScriptBytecode;
-    aiScript = enemy->aiScript = start_script(aiScriptBytecode, 0xA, 0);
+    aiScript = enemy->aiScript = start_script(aiScriptBytecode, EVT_PRIORITY_A, 0);
     id = enemy->aiScriptID = aiScript->id;
     aiScript->owner1.enemy = enemy;
     return id;
@@ -2052,7 +2052,7 @@ s32 bind_enemy_aux(Enemy* enemy, EvtScript* auxScriptBytecode) {
         kill_script_by_ID(enemy->auxScript->id);
     }
     enemy->auxBytecode = auxScriptBytecode;
-    auxScript = enemy->auxScript = start_script(auxScriptBytecode, 0xA, 0);
+    auxScript = enemy->auxScript = start_script(auxScriptBytecode, EVT_PRIORITY_A, 0);
     id = enemy->auxScriptID = auxScript->id;
     auxScript->owner1.enemy = enemy;
     return id;
@@ -2066,7 +2066,7 @@ s32 bind_enemy_interact(Enemy* enemy, EvtScript* interactScriptBytecode) {
         kill_script_by_ID(enemy->interactScript->id);
     }
     enemy->interactBytecode = interactScriptBytecode;
-    interactScript = enemy->interactScript = start_script(interactScriptBytecode, 0xA, 0);
+    interactScript = enemy->interactScript = start_script(interactScriptBytecode, EVT_PRIORITY_A, 0);
     id = enemy->interactScriptID = interactScript->id;
     interactScript->owner1.enemy = enemy;
     return id;

@@ -14,7 +14,7 @@
 
 #include "world/common/UnkFunc54.inc.c"
 
-#include "world/common/UnkFunc55.inc.c"
+#include "world/common/UnkFunc55.inc.c" // AI for projectile
 
 #include "world/common/atomic/enemy/MontyMoleAI.inc.c"
 

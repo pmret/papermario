@@ -139,11 +139,30 @@ typedef s32 ApiStatus;
 #define ApiStatus_REPEAT 3   /* Call again immediately */
 #define ApiStatus_FINISH 255 /* Corresponds to EVT_FINISH */
 
-typedef enum EventGroup {
+enum EventGroup {
     EVT_GROUP_0     = 0x00,
     EVT_GROUP_B     = 0x0B,
     EVT_GROUP_1B    = 0x1B,
     EVT_GROUP_EF    = 0xEF
-} EventGroup;
+};
+
+enum EventPriority {
+    EVT_PRIORITY_0  = 0x00, // map main script
+    EVT_PRIORITY_1  = 0x01,
+    EVT_PRIORITY_A  = 0x0A,
+    EVT_PRIORITY_14 = 0x14,
+};
+
+enum EventFlags {
+    EVT_FLAG_01     = 0x01,
+    EVT_FLAG_10     = 0x10, // has child?
+    EVT_FLAG_20     = 0x20,
+    EVT_FLAG_40     = 0x40, // thread?
+};
+
+enum EventGroupFlags {
+    EVT_GROUP_04    = 0x04,
+    EVT_GROUP_10    = 0x10,
+};
 
 #endif

@@ -184,7 +184,7 @@ void btl_state_update_celebration(void) {
                 D_8029FB4C--;
             } else if (func_8024E584() != 0) {
                 dma_copy(_7A89A0_ROM_START, _7A89A0_ROM_END, _7A89A0_VRAM);
-                script = start_script(&D_802842B0, 0xA, 0);
+                script = start_script(&D_802842B0, EVT_PRIORITY_A, 0);
                 D_8029FB78 = 0;
                 D_8029FB54 = 20;
                 D_8029FB70 = D_8029FB6C / D_8029FB54;
@@ -230,12 +230,12 @@ void btl_state_update_celebration(void) {
                             partner->flags &= ~(ACTOR_FLAG_4000000 | ACTOR_FLAG_8000000);
                         }
                         battleStatus->battlePhase = 5;
-                        script = start_script(&PlayerScriptDispatcher, 0xA, 0);
+                        script = start_script(&PlayerScriptDispatcher, EVT_PRIORITY_A, 0);
                         player->takeTurnScript = script;
                         player->takeTurnID = script->id;
                         script->owner1.actorID = ACTOR_PLAYER;
                         if (partner != NULL) {
-                            script = start_script(partner->takeTurnScriptSource, 0xA, 0);
+                            script = start_script(partner->takeTurnScriptSource, EVT_PRIORITY_A, 0);
                             partner->takeTurnScript = script;
                             partner->takeTurnID = script->id;
                             script->owner1.actorID = ACTOR_PARTNER;
@@ -273,7 +273,7 @@ void btl_state_update_celebration(void) {
             }
             break;
         case BATTLE_STATE2_UNK_5:
-            D_8029FB7C = start_script(&D_80284880, 0xA, 0);
+            D_8029FB7C = start_script(&D_80284880, EVT_PRIORITY_A, 0);
             D_8029FB4C = 25;
             gBattleState2 = BATTLE_STATE2_UNK_6;
             D_8029FB80 = D_8029FB7C->id;
@@ -700,7 +700,7 @@ void btl_state_update_celebration(void) {
             set_animation(0, 0, 0x30009);
 
             if (partner != NULL) {
-                script = start_script(partner->takeTurnScriptSource, 0xA, 0);
+                script = start_script(partner->takeTurnScriptSource, EVT_PRIORITY_A, 0);
                 partner->takeTurnScript = script;
                 partner->takeTurnID = script->id;
                 script->owner1.actorID = ACTOR_PARTNER;
