@@ -179,9 +179,7 @@ s32 calc_partner_damage_enemy(void) {
 
     targetPart = get_actor_part(target, currentTargetPartID);
 
-    if (targetPart == NULL) {
-        PANIC();
-    }
+    ASSERT(targetPart != NULL);
 
     target->lastDamageTaken = 0;
 
@@ -707,7 +705,7 @@ s32 calc_partner_damage_enemy(void) {
     }
 
     if (battleStatus->currentAttackStatus & STATUS_FLAG_SLEEP && wasStatusInflicted) {
-        evt = start_script((EvtScript*) DoSleepHit, 0xA, 0);
+        evt = start_script((EvtScript*) DoSleepHit, EVT_PRIORITY_A, 0);
         evt->varTable[0] = state->goalPos.x;
         evt->varTable[1] = state->goalPos.y;
         evt->varTable[2] = state->goalPos.z;
@@ -715,7 +713,7 @@ s32 calc_partner_damage_enemy(void) {
     }
 
     if (battleStatus->currentAttackStatus & STATUS_FLAG_DIZZY && wasStatusInflicted) {
-        evt = start_script((EvtScript*) DoDizzyHit, 0xA, 0);
+        evt = start_script((EvtScript*) DoDizzyHit, EVT_PRIORITY_A, 0);
         evt->varTable[0] = state->goalPos.x;
         evt->varTable[1] = state->goalPos.y;
         evt->varTable[2] = state->goalPos.z;
@@ -723,7 +721,7 @@ s32 calc_partner_damage_enemy(void) {
     }
 
     if (battleStatus->currentAttackStatus & STATUS_FLAG_PARALYZE && wasStatusInflicted) {
-        evt = start_script((EvtScript*) DoParalyzeHit, 0xA, 0);
+        evt = start_script((EvtScript*) DoParalyzeHit, EVT_PRIORITY_A, 0);
         evt->varTable[0] = state->goalPos.x;
         evt->varTable[1] = state->goalPos.y;
         evt->varTable[2] = state->goalPos.z;
@@ -731,7 +729,7 @@ s32 calc_partner_damage_enemy(void) {
     }
 
     if (battleStatus->currentAttackStatus & STATUS_FLAG_POISON && wasStatusInflicted) {
-        evt = start_script((EvtScript*) DoPoisonHit, 0xA, 0);
+        evt = start_script((EvtScript*) DoPoisonHit, EVT_PRIORITY_A, 0);
         evt->varTable[0] = state->goalPos.x;
         evt->varTable[1] = state->goalPos.y;
         evt->varTable[2] = state->goalPos.z;
@@ -739,7 +737,7 @@ s32 calc_partner_damage_enemy(void) {
     }
 
     if (battleStatus->currentAttackStatus & STATUS_FLAG_STOP && wasStatusInflicted) {
-        evt = start_script((EvtScript*) DoStopHit, 0xA, 0);
+        evt = start_script((EvtScript*) DoStopHit, EVT_PRIORITY_A, 0);
         evt->varTable[0] = state->goalPos.x;
         evt->varTable[1] = state->goalPos.y;
         evt->varTable[2] = state->goalPos.z;
@@ -747,7 +745,7 @@ s32 calc_partner_damage_enemy(void) {
     }
 
     if (battleStatus->currentAttackStatus & STATUS_FLAG_FROZEN && wasStatusInflicted) {
-        evt = start_script((EvtScript*) DoFreezeHit, 0xA, 0);
+        evt = start_script((EvtScript*) DoFreezeHit, EVT_PRIORITY_A, 0);
         evt->varTable[0] = state->goalPos.x;
         evt->varTable[1] = state->goalPos.y;
         evt->varTable[2] = state->goalPos.z;
@@ -756,7 +754,7 @@ s32 calc_partner_damage_enemy(void) {
     }
 
     if (battleStatus->currentAttackStatus & STATUS_FLAG_SHRINK && wasStatusInflicted) {
-        evt = start_script((EvtScript*) DoShrinkHit, 0xA, 0);
+        evt = start_script((EvtScript*) DoShrinkHit, EVT_PRIORITY_A, 0);
         evt->varTable[0] = state->goalPos.x;
         evt->varTable[1] = state->goalPos.y;
         evt->varTable[2] = state->goalPos.z;
