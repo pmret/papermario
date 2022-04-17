@@ -378,7 +378,7 @@ s32 calc_partner_damage_enemy(void) {
             dispatchEvent = EVENT_HIT_COMBO;
             retVal = 0;
 
-            if (!(targetPart->flags & ACTOR_PART_FLAG_2000) && !(gBattleStatus.flags1 & BS_FLAGS1_2000000) && !sp2C && !(targetPart->targetFlags & 4)) {
+            if (!(targetPart->flags & ACTOR_PART_FLAG_2000) && !(gBattleStatus.flags1 & BS_FLAGS1_2000000) && !sp2C && !(targetPart->targetFlags & ACTOR_PART_FLAG_4)) {
                 target->currentHP -= damageDealt;
 
                 if (target->currentHP <= 0) {
@@ -546,7 +546,7 @@ s32 calc_partner_damage_enemy(void) {
             do {    // TODO remove this do while
                 if (gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE && battleStatus->lastAttackDamage >= 0 && dispatchEvent != EVENT_DEATH &&
                     dispatchEvent != EVENT_SPIN_SMASH_DEATH &&
-                    dispatchEvent != EVENT_EXPLODE_TRIGGER && !(targetPart->targetFlags & 4)) {
+                    dispatchEvent != EVENT_EXPLODE_TRIGGER && !(targetPart->targetFlags & ACTOR_PART_FLAG_4)) {
                     #define INFLICT_STATUS(STATUS_TYPE) \
                         if ((battleStatus->currentAttackStatus & STATUS_FLAG_##STATUS_TYPE) && \
                             try_inflict_status(target, STATUS_##STATUS_TYPE, STATUS_##STATUS_TYPE##_TURN_MOD)) { \
@@ -658,7 +658,7 @@ s32 calc_partner_damage_enemy(void) {
                 func_802664DC(state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage, 0);
             }
 
-            if (!(targetPart->targetFlags & 4)) {
+            if (!(targetPart->targetFlags & ACTOR_PART_FLAG_4)) {
                 func_802666E4(target, state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage);
             }
         }
