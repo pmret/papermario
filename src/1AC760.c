@@ -708,58 +708,58 @@ s32 calc_partner_damage_enemy(void) {
 
     if (battleStatus->currentAttackStatus & STATUS_FLAG_SLEEP && wasStatusInflicted) {
         evt = start_script((EvtScript*) DoSleepHit, 0xA, 0);
-        evt->varTable[0] = (s32) state->goalPos.x;
-        evt->varTable[1] = (s32) state->goalPos.y;
-        evt->varTable[2] = (s32) state->goalPos.z;
+        evt->varTable[0] = state->goalPos.x;
+        evt->varTable[1] = state->goalPos.y;
+        evt->varTable[2] = state->goalPos.z;
         sfx_play_sound_at_position(SOUND_INFLICT_SLEEP, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
 
     if (battleStatus->currentAttackStatus & STATUS_FLAG_DIZZY && wasStatusInflicted) {
         evt = start_script((EvtScript*) DoDizzyHit, 0xA, 0);
-        evt->varTable[0] = (s32) state->goalPos.x;
-        evt->varTable[1] = (s32) state->goalPos.y;
-        evt->varTable[2] = (s32) state->goalPos.z;
+        evt->varTable[0] = state->goalPos.x;
+        evt->varTable[1] = state->goalPos.y;
+        evt->varTable[2] = state->goalPos.z;
         sfx_play_sound_at_position(SOUND_INFLICT_STATUS, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
 
     if (battleStatus->currentAttackStatus & STATUS_FLAG_PARALYZE && wasStatusInflicted) {
         evt = start_script((EvtScript*) DoParalyzeHit, 0xA, 0);
-        evt->varTable[0] = (s32) state->goalPos.x;
-        evt->varTable[1] = (s32) state->goalPos.y;
-        evt->varTable[2] = (s32) state->goalPos.z;
+        evt->varTable[0] = state->goalPos.x;
+        evt->varTable[1] = state->goalPos.y;
+        evt->varTable[2] = state->goalPos.z;
         sfx_play_sound_at_position(SOUND_INFLICT_STATUS, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
 
     if (battleStatus->currentAttackStatus & STATUS_FLAG_POISON && wasStatusInflicted) {
         evt = start_script((EvtScript*) DoPoisonHit, 0xA, 0);
-        evt->varTable[0] = (s32) state->goalPos.x;
-        evt->varTable[1] = (s32) state->goalPos.y;
-        evt->varTable[2] = (s32) state->goalPos.z;
+        evt->varTable[0] = state->goalPos.x;
+        evt->varTable[1] = state->goalPos.y;
+        evt->varTable[2] = state->goalPos.z;
         sfx_play_sound_at_position(SOUND_INFLICT_STATUS, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
 
     if (battleStatus->currentAttackStatus & STATUS_FLAG_STOP && wasStatusInflicted) {
         evt = start_script((EvtScript*) DoStopHit, 0xA, 0);
-        evt->varTable[0] = (s32) state->goalPos.x;
-        evt->varTable[1] = (s32) state->goalPos.y;
-        evt->varTable[2] = (s32) state->goalPos.z;
+        evt->varTable[0] = state->goalPos.x;
+        evt->varTable[1] = state->goalPos.y;
+        evt->varTable[2] = state->goalPos.z;
         sfx_play_sound_at_position(SOUND_INFLICT_STATUS, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
 
     if (battleStatus->currentAttackStatus & STATUS_FLAG_FROZEN && wasStatusInflicted) {
         evt = start_script((EvtScript*) DoFreezeHit, 0xA, 0);
-        evt->varTable[0] = (s32) state->goalPos.x;
-        evt->varTable[1] = (s32) state->goalPos.y;
-        evt->varTable[2] = (s32) state->goalPos.z;
+        evt->varTable[0] = state->goalPos.x;
+        evt->varTable[1] = state->goalPos.y;
+        evt->varTable[2] = state->goalPos.z;
         evt->varTablePtr[3] = target;
         sfx_play_sound_at_position(SOUND_HIT_ICE, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
 
     if (battleStatus->currentAttackStatus & STATUS_FLAG_SHRINK && wasStatusInflicted) {
         evt = start_script((EvtScript*) DoShrinkHit, 0xA, 0);
-        evt->varTable[0] = (s32) state->goalPos.x;
-        evt->varTable[1] = (s32) state->goalPos.y;
-        evt->varTable[2] = (s32) state->goalPos.z;
+        evt->varTable[0] = state->goalPos.x;
+        evt->varTable[1] = state->goalPos.y;
+        evt->varTable[2] = state->goalPos.z;
         evt->varTablePtr[3] = target;
         sfx_play_sound_at_position(SOUND_INFLICT_STATUS, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
