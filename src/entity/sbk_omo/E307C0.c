@@ -25,7 +25,7 @@ void func_802BC2BC_E30C0C(Entity* entity) {
     f32 x,y,z,sp2C;
     s32 result = 0;
 
-    if ((currentFloor & 0x4000) && ((currentFloor & 0xFF) == entity->listIndex) && (actionState == ACTION_STATE_HAMMER)) {
+    if ((currentFloor & COLLISION_WITH_ENTITY_BIT) && ((currentFloor & 0xFF) == entity->listIndex) && (actionState == ACTION_STATE_HAMMER)) {
         x = playerStatus->position.x;
         y = playerStatus->position.y + 5.0f;
         z = playerStatus->position.z;
@@ -33,8 +33,8 @@ void func_802BC2BC_E30C0C(Entity* entity) {
 
         add_vec2D_polar(&x, &z, 10.0f, func_800E5348());
         if (npc_raycast_down_sides(0x10000, &x, &y, &z, &sp2C) != 0) {
-            if (D_8010C978 & 0x4000) {
-                result = get_entity_type(D_8010C978) == 0x31;
+            if (D_8010C978 & COLLISION_WITH_ENTITY_BIT) {
+                result = get_entity_type(D_8010C978) == ENTITY_TYPE_STAR_BOX_LAUCHER;
             }
         }
     } else if ((entity->collisionFlags & 1) && ((actionState == ACTION_STATE_GROUND_POUND) || (actionState == ACTION_STATE_ULTRA_POUND))) {

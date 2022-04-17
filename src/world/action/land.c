@@ -44,13 +44,13 @@ void func_802B6000_E24920(void) {
         sfx_play_sound_at_player(0x8161, 0);
         sfx_play_sound_at_player(0x148, 0);
 
-        if (!(collisionStatus->currentFloor & 0x4000)) {
+        if (!(collisionStatus->currentFloor & COLLISION_WITH_ENTITY_BIT)) {
             phys_adjust_cam_on_landing();
         }
 
         collisionStatus->lastTouchedFloor = -1;
         playerStatus->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_40000;
-        camera->moveFlags &= ~0x4;
+        camera->moveFlags &= ~CAMERA_MOVE_FLAGS_4;
     }
     playerStatus->fallState++;
     playerStatus->currentSpeed *= 0.6f;
@@ -96,7 +96,7 @@ void func_802B61C0_E24AE0(void) {
         playerStatus->landPos.x = playerStatus->position.x;
         playerStatus->landPos.z = playerStatus->position.z;
 
-        if (!(collisionStatus->currentFloor & 0x4000)) {
+        if (!(collisionStatus->currentFloor & COLLISION_WITH_ENTITY_BIT)) {
             phys_adjust_cam_on_landing();
         }
 
@@ -133,7 +133,7 @@ void func_802B62CC_E24BEC(void) {
 
         sfx_play_sound_at_player(SOUND_SOFT_LAND, 0);
 
-        if (!(collisionStatus->currentFloor & 0x4000)) {
+        if (!(collisionStatus->currentFloor & COLLISION_WITH_ENTITY_BIT)) {
             phys_adjust_cam_on_landing();
         }
 
@@ -175,7 +175,7 @@ void func_802B644C_E24D6C(void) {
         playerStatus->landPos.x = playerStatus->position.x;
         playerStatus->landPos.z = playerStatus->position.z;
 
-        if (!(collisionStatus->currentFloor & 0x4000)) {
+        if (!(collisionStatus->currentFloor & COLLISION_WITH_ENTITY_BIT)) {
             phys_adjust_cam_on_landing();
         }
         collisionStatus->lastTouchedFloor = -1;

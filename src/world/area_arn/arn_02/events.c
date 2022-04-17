@@ -235,7 +235,7 @@ s32 N(func_80240000_BDD1B0)(Evt* script, NpcAISettings* aiSettings, EnemyTerrito
     if (fabsf(npc->pos.y - gPlayerStatusPtr->position.y) >= 40.0f) {
         ret = FALSE;
     }
-    if (gPartnerActionStatus.actionState.b[3]  == 9) {
+    if (gPartnerActionStatus.actingPartner == PARTNER_BOW) {
         ret = FALSE;
     }
     return ret;
@@ -252,7 +252,7 @@ void N(func_802401D4_BDD384)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
         script->functionTemp[1] = aiSettings->unk_14;
         if (func_800490B4(territory, enemy, aiSettings->alertRadius * 0.85, aiSettings->unk_10.f, 0)) {
             npc->currentAnim.w = enemy->animList[9];
-            fx_emote(0, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &var);
+            fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &var);
             ai_enemy_play_sound(npc, 0x2F4, 0x200000);
             npc->duration = 12;
             script->functionTemp[0] = 2;
@@ -353,11 +353,11 @@ s32 N(func_80240C90_BDDE40)(Evt* script, s32 isInitialCall) {
         }
     }
 
-    if (enemy->unk_B0 & 4) {
+    if (enemy->unk_B0 & ENEMY_AI_FLAGS_4) {
         if (enemy->unk_B4 != 0) {
             return ApiStatus_BLOCK;
         }
-        enemy->unk_B0 &= ~4;
+        enemy->unk_B0 &= ~ENEMY_AI_FLAGS_4;
     }
 
     if ((u32)script->functionTemp[0] - 12 < 3 && N(func_80240000_BDD1B0)(script, npcAISettings, territoryPtr)) {

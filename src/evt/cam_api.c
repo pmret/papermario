@@ -2,14 +2,14 @@
 #include "camera.h"
 
 EvtScript ShakeCam1 = {
-    EVT_SET_GROUP(EVT_GROUP_0)
+    EVT_SET_GROUP(EVT_GROUP_00)
     EVT_CALL(ShakeCam, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), EVT_FIXED(1.0))
     EVT_RETURN
     EVT_END
 };
 
 EvtScript ShakeCamX = {
-    EVT_SET_GROUP(EVT_GROUP_0)
+    EVT_SET_GROUP(EVT_GROUP_00)
     EVT_CALL(ShakeCam, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), EVT_VAR(3))
     EVT_RETURN
     EVT_END
@@ -265,7 +265,7 @@ ApiStatus ShakeCam(Evt* script, s32 isInitialCall) {
 void exec_ShakeCam1(s32 camID, s32 mode, s32 duration) {
     Evt* script;
 
-    script = start_script_in_group(&ShakeCam1, 1, 0, 4);
+    script = start_script_in_group(&ShakeCam1, EVT_PRIORITY_1, 0, EVT_GROUP_04);
     script->varTable[0] = camID;
     script->varTable[1] = mode;
     script->varTable[2] = duration;
@@ -274,7 +274,7 @@ void exec_ShakeCam1(s32 camID, s32 mode, s32 duration) {
 void exec_ShakeCamX(s32 camID, s32 mode, s32 duration, f32 magnitude) {
     Evt* script;
 
-    script = start_script_in_group(&ShakeCamX, 1, 0, 4);
+    script = start_script_in_group(&ShakeCamX, EVT_PRIORITY_1, 0, EVT_GROUP_04);
     evt_set_variable(script, EVT_VAR(0), camID);
     evt_set_variable(script, EVT_VAR(1), mode);
     evt_set_variable(script, EVT_VAR(2), duration);

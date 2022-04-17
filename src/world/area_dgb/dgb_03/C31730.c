@@ -212,7 +212,7 @@ static s32 N(pad_30D8)[] = {
 };
 
 EvtScript N(802430E0) = {
-    EVT_SET_GROUP(EVT_GROUP_0)
+    EVT_SET_GROUP(EVT_GROUP_00)
     EVT_LOOP(20)
         EVT_CALL(GetCurrentPartner, EVT_VAR(10))
         EVT_IF_NE(EVT_VAR(10), 0)
@@ -345,7 +345,7 @@ static s32 N(pad_3738)[] = {
 };
 
 EvtScript N(80243740) = {
-    EVT_SET_GROUP(EVT_GROUP_0)
+    EVT_SET_GROUP(EVT_GROUP_00)
     EVT_SUSPEND_GROUP(1)
     EVT_CALL(ShowKeyChoicePopup)
     EVT_IF_EQ(EVT_VAR(0), 0)
@@ -794,7 +794,7 @@ ApiStatus N(func_8024086C_C31D4C)(Evt* script, s32 isInitialCall) {
     territory.unk_18 = 65.0f;
     territory.unk_1C = 0;
 
-    if (isInitialCall || (enemy->unk_B0 & 4)) {
+    if (isInitialCall || (enemy->unk_B0 & ENEMY_AI_FLAGS_4)) {
         script->functionTemp[0] = 0;
         npc->duration = 0;
         npc->currentAnim.w = enemy->animList[0];
@@ -804,10 +804,10 @@ ApiStatus N(func_8024086C_C31D4C)(Evt* script, s32 isInitialCall) {
         } else {
             npc->flags = (npc->flags & ~0x200) | 0x8;
         }
-        if (enemy->unk_B0 & 4) {
+        if (enemy->unk_B0 & ENEMY_AI_FLAGS_4) {
             script->functionTemp[0] = 99;
             script->functionTemp[1] = 0;
-            enemy->unk_B0 &= ~4;
+            enemy->unk_B0 &= ~ENEMY_AI_FLAGS_4;
         }
         enemy->varTable[0] = 0;
     }
@@ -881,7 +881,7 @@ ApiStatus N(func_802419B0_C32E90)(Evt* script, s32 isInitialCall) {
     territory.unk_18 = 65.0f;
     territory.unk_1C = 0;
 
-    if (isInitialCall || (enemy->unk_B0 & 4)) {
+    if (isInitialCall || (enemy->unk_B0 & ENEMY_AI_FLAGS_4)) {
         script->functionTemp[0] = 0;
         npc->duration = 0;
         npc->currentAnim.w = enemy->animList[0];
@@ -891,10 +891,10 @@ ApiStatus N(func_802419B0_C32E90)(Evt* script, s32 isInitialCall) {
         } else {
             npc->flags = (npc->flags & ~0x200) | 0x8;
         }
-        if (enemy->unk_B0 & 4) {
+        if (enemy->unk_B0 & ENEMY_AI_FLAGS_4) {
             script->functionTemp[0] = 99;
             script->functionTemp[1] = 0;
-            enemy->unk_B0 &= ~4;
+            enemy->unk_B0 &= ~ENEMY_AI_FLAGS_4;
         }
         enemy->varTable[0] = 0;
     }
@@ -986,15 +986,15 @@ void N(func_80241D04_C331E4)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
             phi_s2 = TRUE;
         }
 
-        if (playerData->currentPartner == 2) {
-            if (gPartnerActionStatus.actionState.b[0] == playerData->currentPartner) {
+        if (playerData->currentPartner == PARTNER_KOOPER) {
+            if (gPartnerActionStatus.partnerActionState == playerData->currentPartner) {
                 phi_s2 = TRUE;
             }
         }
     }
 
-    if (((playerData->currentPartner == 1) && (gPartnerActionStatus.actionState.b[0] != 0)) ||
-        ((playerData->currentPartner == 3) && (gPartnerActionStatus.actionState.b[0] == 2))) {
+    if (((playerData->currentPartner == PARTNER_GOOMBARIO) && (gPartnerActionStatus.partnerActionState != PARTNER_ACTION_NONE)) ||
+        ((playerData->currentPartner == PARTNER_BOMBETTE) && (gPartnerActionStatus.partnerActionState == PARTNER_ACTION_BOMBETTE_2))) {
         posX = npc->pos.x;
         posZ = npc->pos.z;
         add_vec2D_polar(&posX, &posZ, 0.0f, npc->yaw);
@@ -1007,7 +1007,7 @@ void N(func_80241D04_C331E4)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
         ai_enemy_play_sound(npc, 0xB000000E, 0);
         npc->currentAnim.w = enemy->animList[11];
         npc->duration = 10;
-        fx_emote(0, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &var);
+        fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &var);
         ai_enemy_play_sound(npc, 0x2F4, 0x200000);
         script->functionTemp[0] = 2;
     }
@@ -1147,7 +1147,7 @@ ApiStatus N(func_80242480_C33960)(Evt* script, s32 isInitialCall) {
     territory.unk_18 = 40.0f;
     territory.unk_1C = 0;
 
-    if (isInitialCall || (enemy->unk_B0 & 4)) {
+    if (isInitialCall || (enemy->unk_B0 & ENEMY_AI_FLAGS_4)) {
         script->functionTemp[0] = 0;
         npc->duration = 30;
         npc->currentAnim.w = enemy->animList[10];
@@ -1158,12 +1158,12 @@ ApiStatus N(func_80242480_C33960)(Evt* script, s32 isInitialCall) {
         } else {
             npc->flags = (npc->flags & ~0x200) | 0x8;
         }
-        if (enemy->unk_B0 & 4) {
+        if (enemy->unk_B0 & ENEMY_AI_FLAGS_4) {
             script->functionTemp[0] = 99;
             script->functionTemp[1] = 40;
             npc->currentAnim.w = enemy->animList[0];
         }
-        enemy->unk_B0 &= ~4;
+        enemy->unk_B0 &= ~ENEMY_AI_FLAGS_4;
     }
 
     if (((u32)script->functionTemp[0] - 10 < 20) && (enemy->varTable[0] == 0) && N(UnkNpcAIFunc26)(script)) {

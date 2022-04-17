@@ -14,27 +14,9 @@
 
 #include "world/common/UnkFunc54.inc.c"
 
-#include "world/common/UnkFunc55.inc.c"
+#include "world/common/UnkFunc55.inc.c" // AI for projectile
 
-INCLUDE_ASM(s32, "world/area_iwa/iwa_01/90FBD0", func_80241414_910AC4);
-
-INCLUDE_ASM(s32, "world/area_iwa/iwa_01/90FBD0", func_802415E0_910C90);
-
-INCLUDE_ASM(s32, "world/area_iwa/iwa_01/90FBD0", func_802416F0_910DA0);
-
-INCLUDE_ASM(s32, "world/area_iwa/iwa_01/90FBD0", func_8024192C_910FDC);
-
-INCLUDE_ASM(s32, "world/area_iwa/iwa_01/90FBD0", func_802419C0_911070);
-
-INCLUDE_ASM(s32, "world/area_iwa/iwa_01/90FBD0", func_80241A4C_9110FC);
-
-INCLUDE_ASM(s32, "world/area_iwa/iwa_01/90FBD0", func_80241B74_911224);
-
-INCLUDE_ASM(s32, "world/area_iwa/iwa_01/90FBD0", func_80241C78_911328);
-
-INCLUDE_ASM(s32, "world/area_iwa/iwa_01/90FBD0", func_80241CF0_9113A0);
-
-INCLUDE_ASM(s32, "world/area_iwa/iwa_01/90FBD0", func_80241D70_911420);
+#include "world/common/atomic/enemy/MontyMoleAI.inc.c"
 
 #include "world/common/UnkNpcAIMainFunc7.inc.c"
 

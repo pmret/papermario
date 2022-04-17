@@ -1703,7 +1703,7 @@ typedef struct CollisionStatus {
     /* 0x04 */ s16 lastTouchedFloor; /* valid after jump */
     /* 0x06 */ s16 floorBelow;
     /* 0x08 */ s16 currentCeiling; /* valid on touching with head */
-    /* 0x0A */ s16 unk_0A; /* associated with TRIGGER_WALL_PRESS_A */
+    /* 0x0A */ s16 currentInspect; /* associated with TRIGGER_WALL_PRESS_A */
     /* 0x0C */ s16 unk_0C; /* associated with TRIGGER_FLAGS_2000 */
     /* 0x0E */ s16 unk_0E; /* associated with TRIGGER_FLAGS_4000 */
     /* 0x10 */ s16 unk_10; /* associated with TRIGGER_FLAGS_8000 */
@@ -2315,10 +2315,10 @@ typedef struct TweesterPhysics {
 } TweesterPhysics; // size = 0x1C
 
 typedef struct PartnerActionStatus {
-    /* 0x000 */ union {
-        /*       */     s32 i;
-        /*       */     s8 b[4];
-    } actionState;
+    /* 0x000 */ s8 partnerActionState;
+    /* 0x001 */ s8 partnerAction_unk_1;
+    /* 0x002 */ s8 partnerAction_unk_2;
+    /* 0x003 */ s8 actingPartner;
     /* 0x004 */ s16 stickX;
     /* 0x006 */ s16 stickY;
     /* 0x008 */ s32 currentButtons;

@@ -49,7 +49,7 @@ EvtScript N(80240D40) = {
 #include "world/common/StarSpiritEffectFunc.inc.c"
 
 EvtScript N(80240DA0) = {
-    EVT_SET_GROUP(EVT_GROUP_0)
+    EVT_SET_GROUP(EVT_GROUP_00)
     EVT_IF_EQ(EVT_VAR(5), 1)
         EVT_IF_EQ(EVT_VAR(6), 1)
             EVT_IF_EQ(EVT_VAR(7), 1)

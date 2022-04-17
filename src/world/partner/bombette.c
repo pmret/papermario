@@ -45,13 +45,13 @@ void func_802BD100_317E50(Npc* npc) {
         }
         
         if (!(angle >= 360.0f)) {
-            if (D_8010C978 >= 0 && (D_8010C978 & 0x4000) != 0) {
-                entity_interacts_with_current_partner(D_8010C978 & ~0x4000);
+            if (D_8010C978 >= 0 && (D_8010C978 & COLLISION_WITH_ENTITY_BIT) != 0) {
+                entity_interacts_with_current_partner(D_8010C978 & ~COLLISION_WITH_ENTITY_BIT);
             }
         }
     } else {
-        if (D_8010C978 >= 0 && (D_8010C978 & 0x4000) != 0) {
-            entity_interacts_with_current_partner(D_8010C978 & ~0x4000);
+        if (D_8010C978 >= 0 && (D_8010C978 & COLLISION_WITH_ENTITY_BIT) != 0) {
+            entity_interacts_with_current_partner(D_8010C978 & ~COLLISION_WITH_ENTITY_BIT);
         }
     }
 }
@@ -181,7 +181,7 @@ void func_802BD6DC_31842C(Npc* npc) {
 }
 
 s32 world_bombette_can_use_ability(void) {
-    if (gPartnerActionStatus.actionState.b[0] != 0) {
+    if (gPartnerActionStatus.partnerActionState != PARTNER_ACTION_NONE) {
         D_802BE934 = 1;
         return FALSE;
     }
@@ -189,7 +189,7 @@ s32 world_bombette_can_use_ability(void) {
 }
 
 s32 world_bombette_can_player_pause(void) {
-    return gPartnerActionStatus.actionState.b[0] == 0;
+    return gPartnerActionStatus.partnerActionState == PARTNER_ACTION_NONE;
 }
 
 ApiStatus func_802BD758_3184A8(Evt* evt, s32 isInitialCall);
@@ -270,7 +270,7 @@ void world_bombette_pre_battle(Npc* bombette) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PartnerActionStatus* bombetteActionStatus = &gPartnerActionStatus;
 
-    if (bombetteActionStatus->actionState.b[0] != 0) {
+    if (bombetteActionStatus->partnerActionState != PARTNER_ACTION_NONE) {
         if (D_802BE92C) {
             enable_player_input();
         }
@@ -283,8 +283,8 @@ void world_bombette_pre_battle(Npc* bombette) {
         set_action_state(ACTION_STATE_IDLE);
         partner_clear_player_tracking(bombette);
 
-        bombetteActionStatus->actionState.b[0] = 0;
-        bombetteActionStatus->actionState.b[3] = 0;
+        bombetteActionStatus->partnerActionState = 0;
+        bombetteActionStatus->actingPartner = 0;
 
         bombette->pos.x = playerStatus->position.x;
         bombette->pos.y = playerStatus->position.y;

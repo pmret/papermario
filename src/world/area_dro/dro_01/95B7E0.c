@@ -2190,7 +2190,7 @@ void N(func_802430C8_95E2C8)(Unk_Struct_1* ptr, s32 arg1) {
             if (ptr->unk_1C >= 6) {
                 if (fabsf(get_clamped_angle_diff(atan2(125.0f, -42.0f, 152.0f, -61.0f), atan2(125.0f, -42.0f, playerStatus->position.x,
                                                  playerStatus->position.z))) < 30.0f) {
-                    start_script(&N(80248504), 1, 0);
+                    start_script(&N(80248504), EVT_PRIORITY_1, 0);
                     ptr->unk_20 = 4;
                 }
             }

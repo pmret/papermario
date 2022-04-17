@@ -109,7 +109,7 @@ void update_camera_mode_5(Camera* camera) {
         camera->auxPos.y = camera->targetPos.y + camera->currentYOffset;
         camera->auxPos.z = camera->targetPos.z;
         func_8003034C(camera);
-        if (!(camera->moveFlags & 1)) {
+        if (!(camera->moveFlags & CAMERA_MOVE_FLAGS_1)) {
             func_80030210(camera, temp_f20, temp_f22, 0);
         } else {
             lookXDelta = temp_f22; // needed to match
@@ -264,7 +264,7 @@ void update_camera_zone_interp(Camera* camera) {
         camera->linearInterpScale = 1.0f;
     }
     temp = targetX;
-    if (camera->moveFlags & 1) {
+    if (camera->moveFlags & CAMERA_MOVE_FLAGS_1) {
         camera->unk_498 = 0.0f;
     } else if (camera->unk_494 != targetY) {
         camera->unk_494 = targetY;
@@ -282,14 +282,14 @@ void update_camera_zone_interp(Camera* camera) {
         camera->unk_498 = 1.0f;
     }
 
-    if (camera->moveFlags & 4) {
+    if (camera->moveFlags & CAMERA_MOVE_FLAGS_4) {
         camera->unk_498 += 0.3;
         if (camera->unk_498 >= 1.0) {
             camera->unk_498 = 1.0f;
         }
     }
 
-    if (!(camera->moveFlags & 2)) {
+    if (!(camera->moveFlags & CAMERA_MOVE_FLAGS_2)) {
         camera->savedTargetY += (camera->unk_494 - camera->savedTargetY) * camera->unk_498;
     }
 
@@ -522,7 +522,7 @@ void update_camera_zone_interp(Camera* camera) {
     cosViewPitch = cos_deg(blendedCamSettings.boomPitch + D_800A08DC);
     sinViewPitch = sin_deg(blendedCamSettings.boomPitch + D_800A08DC);
 
-    if (!(camera->moveFlags & 2)) {
+    if (!(camera->moveFlags & CAMERA_MOVE_FLAGS_2)) {
         camera->lookAt_eye.y = blendedCamSettings.position.y + (blendedCamSettings.boomLength * sinViewPitch);
     }
 
@@ -538,7 +538,7 @@ void update_camera_zone_interp(Camera* camera) {
     }
 
     temp_f8_2 = blendedCamSettings.position.y - camera->lookAt_eye.y;
-    if (!(camera->moveFlags & 2)) {
+    if (!(camera->moveFlags & CAMERA_MOVE_FLAGS_2)) {
         camera->lookAt_obj.y = camera->lookAt_eye.y + ((dist * sinViewPitch) + (temp_f8_2 * cosViewPitch));
     }
     temp_f4_4 = (dist * cosViewPitch) - (temp_f8_2 * sinViewPitch);

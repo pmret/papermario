@@ -178,7 +178,7 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
         if (isInitialCall) {
             func_802BD514_319A84(parakarry);
             if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_100000)) {
-                if (partnerActionStatus->actionState.b[1] == 0) {
+                if (partnerActionStatus->partnerAction_unk_1 == 0) {
                     if (func_800EA52C(4) == 0) {
                         return ApiStatus_DONE2;
                     }
@@ -186,14 +186,14 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
                     parakarry->flags &= ~NPC_FLAG_4000;
                     parakarry->flags |= NPC_FLAG_NO_PROJECT_SHADOW;
                 } else {
-                    partnerActionStatus->actionState.b[1] = 0;
+                    partnerActionStatus->partnerAction_unk_1 = 0;
                     set_action_state(ACTION_STATE_RIDE);
                     parakarry->flags &= ~(NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_GRAVITY);
                     D_802BEBB0 = 1;
-                    gCameras[0].moveFlags |= 1;
+                    gCameras[0].moveFlags |= CAMERA_MOVE_FLAGS_1;
                     parakarry->currentAnim.w = 0x40009;
-                    partnerActionStatus->actionState.b[3] = 4;
-                    partnerActionStatus->actionState.b[0] = 1;
+                    partnerActionStatus->actingPartner = PARTNER_PARAKARRY;
+                    partnerActionStatus->partnerActionState = PARTNER_ACTION_PARAKARRY_HOVER;
                     parakarry->flags &= ~NPC_FLAG_4000;
                     parakarry->flags |= NPC_FLAG_NO_PROJECT_SHADOW;
                 }
@@ -234,11 +234,11 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
                 D_802BEBB4 = 1;
                 D_802BEBB8 = 1;
                 D_802BEBB0 = 1;
-                gCameras[0].moveFlags |= 1;
+                gCameras[0].moveFlags |= CAMERA_MOVE_FLAGS_1;
                 parakarry->flags &= ~(NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_GRAVITY);
                 parakarry->flags |= NPC_FLAG_40 | NPC_FLAG_ENABLE_HIT_SCRIPT;
-                partnerActionStatus->actionState.b[3] = 4;
-                partnerActionStatus->actionState.b[0] = 1;
+                partnerActionStatus->actingPartner = PARTNER_PARAKARRY;
+                partnerActionStatus->partnerActionState = PARTNER_ACTION_PARAKARRY_HOVER;
                 D_802BEBBC = func_800EF4E0();
                 enable_npc_blur(parakarry);
                 parakarry->yaw = atan2(parakarry->pos.x, parakarry->pos.z, playerStatus->position.x, playerStatus->position.z);
@@ -489,7 +489,7 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
                                                         func_8003D660(parakarry, 0),
                                                         parakarry->pos.y = y, (!tempConditional))) {
                                                 if (!phys_adjust_cam_on_landing()) {
-                                                    gCameras[0].moveFlags &= ~0x2;
+                                                    gCameras[0].moveFlags &= ~CAMERA_MOVE_FLAGS_2;
                                                 }
                                                 gCameras->targetPos.x = playerStatus->position.x;
                                                 gCameras->targetPos.y = playerStatus->position.y;
@@ -539,8 +539,8 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
             parakarry->flags &= ~ACTOR_FLAG_HP_OFFSET_BELOW;
             parakarry->animationSpeed = 1.0f;
             partner_clear_player_tracking(parakarry);
-            partnerActionStatus->actionState.b[3] = 0;
-            partnerActionStatus->actionState.b[0] = 0;
+            partnerActionStatus->actingPartner = PARTNER_NONE;
+            partnerActionStatus->partnerActionState = PARTNER_ACTION_NONE;
             enable_partner_ai();
             sfx_stop_sound(SOUND_2009);
             if (D_802BEBB4 != 0) {
@@ -605,17 +605,17 @@ void world_parakarry_pre_battle(Npc* parakarry) {
 
         set_action_state(ACTION_STATE_IDLE);
         parakarryActionStatus->npc = *parakarry;
-        parakarryActionStatus->actionState.b[1] = 1;
+        parakarryActionStatus->partnerAction_unk_1 = 1;
         partner_clear_player_tracking(parakarry);
     }
 
-    parakarryActionStatus->actionState.b[3] = 4;
+    parakarryActionStatus->actingPartner = PARTNER_PARAKARRY;
 }
 
 void world_parakarry_post_battle(Npc* parakarry) {
     PartnerActionStatus* parakarryActionStatus = &gPartnerActionStatus;
 
-    if (parakarryActionStatus->actionState.b[1] != 0) {
+    if (parakarryActionStatus->partnerAction_unk_1 != 0) {
         if (D_802BEBB8) {
             disable_player_static_collisions();
         }
@@ -625,8 +625,8 @@ void world_parakarry_post_battle(Npc* parakarry) {
 
         set_action_state(ACTION_STATE_RIDE);
         *parakarry = parakarryActionStatus->npc;
-        parakarryActionStatus->actionState.b[3] = 0;
-        parakarryActionStatus->actionState.b[0] = 0;
+        parakarryActionStatus->actingPartner = PARTNER_NONE;
+        parakarryActionStatus->partnerActionState = PARTNER_ACTION_NONE;
         partner_clear_player_tracking(parakarry);
         partner_use_ability();
     }

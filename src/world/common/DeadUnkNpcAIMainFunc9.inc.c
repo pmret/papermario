@@ -31,11 +31,11 @@ ApiStatus N(DeadUnkNpcAIMainFunc9)(Evt* script, s32 isInitialCall) {
 
     npc->unk_AB = -2;
 
-    if (enemy->unk_B0 & 4) {
+    if (enemy->unk_B0 & ENEMY_AI_FLAGS_4) {
         if (enemy->unk_B4 != 0) {
             return ApiStatus_BLOCK;
         }
-        enemy->unk_B0 &= ~4;
+        enemy->unk_B0 &= ~ENEMY_AI_FLAGS_4;
     }
     switch (script->functionTemp[0]) {
     case 0:

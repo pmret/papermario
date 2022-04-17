@@ -420,7 +420,7 @@ static s32 N(pad_2AC8)[] = {
 };
 
 EvtScript N(80242AD0) = {
-    EVT_SET_GROUP(EVT_GROUP_0)
+    EVT_SET_GROUP(EVT_GROUP_00)
     EVT_SUSPEND_GROUP(1)
     EVT_CALL(ShowKeyChoicePopup)
     EVT_IF_EQ(EVT_VAR(0), 0)
@@ -493,7 +493,7 @@ ApiStatus N(func_8024061C_C4FB2C)(Evt* script, s32 isInitialCall) {
     territory.unk_18 = 65.0f;
     territory.unk_1C = 0;
 
-    if (isInitialCall || (enemy->unk_B0 & 4)) {
+    if (isInitialCall || (enemy->unk_B0 & ENEMY_AI_FLAGS_4)) {
         script->functionTemp[0] = 0;
         npc->duration = 0;
         npc->currentAnim.w = enemy->animList[0];
@@ -503,10 +503,10 @@ ApiStatus N(func_8024061C_C4FB2C)(Evt* script, s32 isInitialCall) {
         } else {
             npc->flags = (npc->flags & ~0x200) | 0x8;
         }
-        if (enemy->unk_B0 & 4) {
+        if (enemy->unk_B0 & ENEMY_AI_FLAGS_4) {
             script->functionTemp[0] = 99;
             script->functionTemp[1] = 0;
-            enemy->unk_B0 &= ~4;
+            enemy->unk_B0 &= ~ENEMY_AI_FLAGS_4;
         }
         enemy->varTable[0] = 0;
     }

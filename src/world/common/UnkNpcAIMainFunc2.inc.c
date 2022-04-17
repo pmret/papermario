@@ -28,18 +28,18 @@ ApiStatus N(UnkNpcAIMainFunc2)(Evt* script, s32 isInitialCall) {
         npc->flags &= ~NPC_FLAG_GRAVITY;
         npc->flags |= NPC_FLAG_ENABLE_HIT_SCRIPT;
 
-        enemy->unk_B0 |= 0x18;
+        enemy->unk_B0 |= (ENEMY_AI_FLAGS_8 | ENEMY_AI_FLAGS_10);
         if (enemy->flags & ENEMY_FLAGS_40000000) {
             script->functionTemp[0] = 12;
             enemy->flags &= ~ENEMY_FLAGS_40000000;
         }
     }
 
-    if (enemy->unk_B0 & 4) {
+    if (enemy->unk_B0 & ENEMY_AI_FLAGS_4) {
         if (enemy->unk_B4 != 0) {
             return ApiStatus_BLOCK;
         }
-        enemy->unk_B0 &= ~4;
+        enemy->unk_B0 &= ~ENEMY_AI_FLAGS_4;
     }
 
     switch (script->functionTemp[0]) {
