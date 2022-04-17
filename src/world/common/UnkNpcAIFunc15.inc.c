@@ -4,7 +4,7 @@
 void N(UnkNpcAIFunc15)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Npc* enemy = get_npc_unsafe(script->owner1.enemy->npcID);
 
-    func_80049F7C(script, aiSettings, territory);
+    basic_ai_chase_init(script, aiSettings, territory);
     enemy->flags |= ENEMY_FLAGS_800;
     enemy->jumpVelocity = rand_int(5) + 10.0;
     enemy->jumpScale = 1.5f;

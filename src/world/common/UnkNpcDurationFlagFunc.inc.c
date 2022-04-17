@@ -7,7 +7,7 @@ void N(UnkNpcDurationFlagFunc)(Evt* script, NpcAISettings* aiSettings, EnemyTerr
 
     npc->duration--;
     if (npc->duration == 0) {
-        if (enemy->unk_B0 & ENEMY_AI_FLAGS_80) {
+        if (enemy->aiFlags & ENEMY_AI_FLAGS_80) {
             script->functionTemp[0] = 15;
         } else {
             script->functionTemp[0] = 0;

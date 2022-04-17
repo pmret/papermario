@@ -35,11 +35,11 @@ void N(UnkNpcAIFunc39)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThi
         if (npc_raycast_down_sides(npc->collisionChannel, &posX, &posY, &posZ, &posW) && posW <= fabsf(npc->jumpVelocity) + 13.0) {
             npc->jumpVelocity = 0.0f;
             npc->pos.y = posY;
-            npc->flags &= ~NPC_FLAG_NO_Y_MOVEMENT;
+            npc->flags &= ~NPC_FLAG_JUMPING;
             fx_walking_dust(2, npc->pos.x, npc->pos.y, npc->pos.z, 0.0f, 0.0f);
             script->functionTemp[0] = 12;
 
-            if (func_800490B4(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 1) == 0) {
+            if (basic_ai_try_detect_player(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 1) == 0) {
                 s32 emoteTemp;
 
                 fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &emoteTemp);

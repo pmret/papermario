@@ -150,7 +150,7 @@ glabel func_80241CC4_BA6444
 /* BA665C 80241EDC 080907BB */  j         .L80241EEC
 /* BA6660 80241EE0 00000000 */   nop
 .L80241EE4:
-/* BA6664 80241EE4 0C0129CF */  jal       func_8004A73C
+/* BA6664 80241EE4 0C0129CF */  jal       basic_ai_suspend
 /* BA6668 80241EE8 0240202D */   daddu    $a0, $s2, $zero
 .L80241EEC:
 /* BA666C 80241EEC 8FBF0048 */  lw        $ra, 0x48($sp)

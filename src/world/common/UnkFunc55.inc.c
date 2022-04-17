@@ -96,7 +96,7 @@ ApiStatus N(UnkFunc55)(Evt* script, s32 isInitialCall) {
                 npc->pos.y = -1000.0f;
                 npc->flags |= NPC_FLAG_2;
                 disable_npc_shadow(npc);
-                npc->flags &= ~NPC_FLAG_NO_Y_MOVEMENT;
+                npc->flags &= ~NPC_FLAG_JUMPING;
                 enemy->flags |= ENEMY_FLAGS_10000000 | ENEMY_FLAGS_8000000 | ENEMY_FLAGS_IGNORE_HAMMER |
                                 ENEMY_FLAGS_IGNORE_JUMP | ENEMY_FLAGS_IGNORE_TOUCH;
                 script->functionTemp[0] = 0;

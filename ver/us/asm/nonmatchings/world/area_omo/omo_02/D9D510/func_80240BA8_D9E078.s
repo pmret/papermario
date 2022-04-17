@@ -139,48 +139,48 @@ glabel func_80240BA8_D9E078
 .L80240D8C_D9E25C:
 /* D9E25C 80240D8C 0260202D */  daddu     $a0, $s3, $zero
 /* D9E260 80240D90 0280282D */  daddu     $a1, $s4, $zero
-/* D9E264 80240D94 0C012568 */  jal       func_800495A0
+/* D9E264 80240D94 0C012568 */  jal       basic_ai_wander_init
 /* D9E268 80240D98 02A0302D */   daddu    $a2, $s5, $zero
 .L80240D9C_D9E26C:
 /* D9E26C 80240D9C 0260202D */  daddu     $a0, $s3, $zero
 /* D9E270 80240DA0 0280282D */  daddu     $a1, $s4, $zero
-/* D9E274 80240DA4 0C0125AE */  jal       func_800496B8
+/* D9E274 80240DA4 0C0125AE */  jal       basic_ai_wander
 /* D9E278 80240DA8 02A0302D */   daddu    $a2, $s5, $zero
 /* D9E27C 80240DAC 080903AD */  j         .L80240EB4_D9E384
 /* D9E280 80240DB0 00000000 */   nop
 .L80240DB4_D9E284:
 /* D9E284 80240DB4 0260202D */  daddu     $a0, $s3, $zero
 /* D9E288 80240DB8 0280282D */  daddu     $a1, $s4, $zero
-/* D9E28C 80240DBC 0C0126D1 */  jal       base_UnkNpcAIFunc1
+/* D9E28C 80240DBC 0C0126D1 */  jal       basic_ai_loiter_init
 /* D9E290 80240DC0 02A0302D */   daddu    $a2, $s5, $zero
 .L80240DC4_D9E294:
 /* D9E294 80240DC4 0260202D */  daddu     $a0, $s3, $zero
 /* D9E298 80240DC8 0280282D */  daddu     $a1, $s4, $zero
-/* D9E29C 80240DCC 0C012701 */  jal       func_80049C04
+/* D9E29C 80240DCC 0C012701 */  jal       basic_ai_loiter
 /* D9E2A0 80240DD0 02A0302D */   daddu    $a2, $s5, $zero
 /* D9E2A4 80240DD4 080903AD */  j         .L80240EB4_D9E384
 /* D9E2A8 80240DD8 00000000 */   nop
 .L80240DDC_D9E2AC:
 /* D9E2AC 80240DDC 0260202D */  daddu     $a0, $s3, $zero
 /* D9E2B0 80240DE0 0280282D */  daddu     $a1, $s4, $zero
-/* D9E2B4 80240DE4 0C01278F */  jal       func_80049E3C
+/* D9E2B4 80240DE4 0C01278F */  jal       basic_ai_found_player_jump_init
 /* D9E2B8 80240DE8 02A0302D */   daddu    $a2, $s5, $zero
 .L80240DEC_D9E2BC:
 /* D9E2BC 80240DEC 0260202D */  daddu     $a0, $s3, $zero
 /* D9E2C0 80240DF0 0280282D */  daddu     $a1, $s4, $zero
-/* D9E2C4 80240DF4 0C0127B3 */  jal       func_80049ECC
+/* D9E2C4 80240DF4 0C0127B3 */  jal       basic_ai_found_player_jump
 /* D9E2C8 80240DF8 02A0302D */   daddu    $a2, $s5, $zero
 /* D9E2CC 80240DFC 080903AD */  j         .L80240EB4_D9E384
 /* D9E2D0 80240E00 00000000 */   nop
 .L80240E04_D9E2D4:
 /* D9E2D4 80240E04 0260202D */  daddu     $a0, $s3, $zero
 /* D9E2D8 80240E08 0280282D */  daddu     $a1, $s4, $zero
-/* D9E2DC 80240E0C 0C0127DF */  jal       func_80049F7C
+/* D9E2DC 80240E0C 0C0127DF */  jal       basic_ai_chase_init
 /* D9E2E0 80240E10 02A0302D */   daddu    $a2, $s5, $zero
 .L80240E14_D9E2E4:
 /* D9E2E4 80240E14 0260202D */  daddu     $a0, $s3, $zero
 /* D9E2E8 80240E18 0280282D */  daddu     $a1, $s4, $zero
-/* D9E2EC 80240E1C 0C012849 */  jal       func_8004A124
+/* D9E2EC 80240E1C 0C012849 */  jal       basic_ai_chase
 /* D9E2F0 80240E20 02A0302D */   daddu    $a2, $s5, $zero
 /* D9E2F4 80240E24 8E630070 */  lw        $v1, 0x70($s3)
 /* D9E2F8 80240E28 2402000E */  addiu     $v0, $zero, 0xe
@@ -221,7 +221,7 @@ glabel func_80240BA8_D9E078
 /* D9E374 80240EA4 080903AD */  j         .L80240EB4_D9E384
 /* D9E378 80240EA8 00000000 */   nop
 .L80240EAC_D9E37C:
-/* D9E37C 80240EAC 0C0129CF */  jal       func_8004A73C
+/* D9E37C 80240EAC 0C0129CF */  jal       basic_ai_suspend
 /* D9E380 80240EB0 0260202D */   daddu    $a0, $s3, $zero
 .L80240EB4_D9E384:
 /* D9E384 80240EB4 8FBF0060 */  lw        $ra, 0x60($sp)

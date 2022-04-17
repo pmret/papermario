@@ -18,7 +18,7 @@ glabel func_802409B0_DC4D80
 /* DC4DB4 802409E4 AFA00010 */  sw        $zero, 0x10($sp)
 /* DC4DB8 802409E8 AFA00014 */  sw        $zero, 0x14($sp)
 /* DC4DBC 802409EC 8E050018 */  lw        $a1, 0x18($s0)
-/* DC4DC0 802409F0 0C0129E1 */  jal       func_8004A784
+/* DC4DC0 802409F0 0C0129E1 */  jal       ai_check_fwd_collisions
 /* DC4DC4 802409F4 0000382D */   daddu    $a3, $zero, $zero
 /* DC4DC8 802409F8 14400005 */  bnez      $v0, .L80240A10
 /* DC4DCC 802409FC 00000000 */   nop

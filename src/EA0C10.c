@@ -74,7 +74,7 @@ ApiStatus func_802406CC_EA0FCC(Evt* script, s32 isInitialCall) {
     enemy->unk_114 = 0.0001f;
     enemy->unk_118 = 0.0001f;
 
-    if (isInitialCall || enemy->unk_B0 & ENEMY_AI_FLAGS_4) {
+    if (isInitialCall || enemy->aiFlags & ENEMY_AI_FLAGS_4) {
         script->functionTemp[0] = 0;
         npc->duration = 0;
         npc->flags |= NPC_FLAG_2 | NPC_FLAG_100;
@@ -82,8 +82,8 @@ ApiStatus func_802406CC_EA0FCC(Evt* script, s32 isInitialCall) {
         npc->pos.x = 0.0f;
         npc->pos.y = -1000.0f;
         npc->pos.z = 0.0f;
-        if (enemy->unk_B0 & ENEMY_AI_FLAGS_4) {
-            enemy->unk_B0 &= ~ENEMY_AI_FLAGS_4;
+        if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
+            enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
         }
     }
 
@@ -150,13 +150,13 @@ ApiStatus func_8024097C_EA127C(Evt* script, s32 isInitialCall) {
     EnemyTerritoryThing* territoryPtr = &territory;
     NpcAISettings* npcAISettings = (NpcAISettings*)evt_get_variable(script, *args++);
 
-    territory.unk_00 = 0;
+    territory.skipPlayerDetectChance = 0;
     territory.shape = enemy->territory->wander.detectShape;
     territory.pointX = enemy->territory->wander.detect.x;
     territory.pointZ = enemy->territory->wander.detect.z;
     territory.sizeX = enemy->territory->wander.detectSizeX;
     territory.sizeZ = enemy->territory->wander.detectSizeZ;
-    territory.unk_18 = 65.0f;
+    territory.halfHeight = 65.0f;
     territory.unk_1C = 0;
 
     enemy->unk_108.x = npc->pos.x;
@@ -165,20 +165,20 @@ ApiStatus func_8024097C_EA127C(Evt* script, s32 isInitialCall) {
     enemy->unk_114 = 0.0001f;
     enemy->unk_118 = 0.0001f;
 
-    if (isInitialCall || enemy->unk_B0 & ENEMY_AI_FLAGS_4) {
+    if (isInitialCall || enemy->aiFlags & ENEMY_AI_FLAGS_4) {
         script->functionTemp[0] = 0;
         npc->duration = 0;
         npc->currentAnim.w = enemy->animList[0];
-        npc->flags &= ~NPC_FLAG_NO_Y_MOVEMENT;
+        npc->flags &= ~NPC_FLAG_JUMPING;
         if (!enemy->territory->wander.isFlying) {
             npc->flags = (npc->flags | NPC_FLAG_GRAVITY) & ~NPC_FLAG_ENABLE_HIT_SCRIPT;
         } else {
             npc->flags = (npc->flags & ~NPC_FLAG_GRAVITY) | NPC_FLAG_ENABLE_HIT_SCRIPT;
         }
-        if (enemy->unk_B0 & ENEMY_AI_FLAGS_4) {
+        if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
             script->functionTemp[0] = 99;
             script->functionTemp[1] = 0;
-            enemy->unk_B0 &= ~ENEMY_AI_FLAGS_4;
+            enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
         }
         enemy->varTable[0] = 0;
     }
@@ -189,31 +189,31 @@ ApiStatus func_8024097C_EA127C(Evt* script, s32 isInitialCall) {
 
     switch (script->functionTemp[0]) {
         case 0:
-            func_800495A0(script, npcAISettings, territoryPtr);
+            basic_ai_wander_init(script, npcAISettings, territoryPtr);
             // fallthrough
         case 1:
-            func_800496B8(script, npcAISettings, territoryPtr);
+            basic_ai_wander(script, npcAISettings, territoryPtr);
             break;
         case 2:
-            base_UnkNpcAIFunc1(script, npcAISettings, territoryPtr);
+            basic_ai_loiter_init(script, npcAISettings, territoryPtr);
             // fallthrough
         case 3:
-            func_80049C04(script, npcAISettings, territoryPtr);
+            basic_ai_loiter(script, npcAISettings, territoryPtr);
             break;
         case 10:
-            func_80049E3C(script, npcAISettings, territoryPtr);
+            basic_ai_found_player_jump_init(script, npcAISettings, territoryPtr);
             // fallthrough
         case 11:
-            func_80049ECC(script, npcAISettings, territoryPtr);
+            basic_ai_found_player_jump(script, npcAISettings, territoryPtr);
             break;
         case 12:
-            func_80049F7C(script, npcAISettings, territoryPtr);
+            basic_ai_chase_init(script, npcAISettings, territoryPtr);
             // fallthrough
         case 13:
-            func_8004A124(script, npcAISettings, territoryPtr);
+            basic_ai_chase(script, npcAISettings, territoryPtr);
             break;
         case 14:
-            func_8004A3E8(script, npcAISettings, territoryPtr);
+            basic_ai_lose_player(script, npcAISettings, territoryPtr);
             break;
         case 30:
             N(UnkNpcAIFunc6)(script);
@@ -232,7 +232,7 @@ ApiStatus func_8024097C_EA127C(Evt* script, s32 isInitialCall) {
             N(UnkNpcAIFunc5)(script);
             break;
         case 99:
-            func_8004A73C(script);
+            basic_ai_suspend(script);
             break;
     }
 
@@ -261,13 +261,13 @@ ApiStatus func_80241AE0_EA23E0(Evt* script, s32 isInitialCall) {
     EnemyTerritoryThing territory;
     EnemyTerritoryThing* territoryPtr = &territory;
 
-    territory.unk_00 = 0;
+    territory.skipPlayerDetectChance = 0;
     territory.shape = enemy->territory->wander.detectShape;
     territory.pointX = enemy->territory->wander.detect.x;
     territory.pointZ = enemy->territory->wander.detect.z;
     territory.sizeX = enemy->territory->wander.detectSizeX;
     territory.sizeZ = enemy->territory->wander.detectSizeZ;
-    territory.unk_18 = 200.0f;
+    territory.halfHeight = 200.0f;
     territory.unk_1C = 0;
 
     // Dead Func that doesn't seem to have an alive counterpart, probably because of the
@@ -278,16 +278,16 @@ ApiStatus func_80241AE0_EA23E0(Evt* script, s32 isInitialCall) {
         enemy->unk_118 = 0.7f;
     }
 
-    if (isInitialCall || enemy->unk_B0 & ENEMY_AI_FLAGS_4) {
+    if (isInitialCall || enemy->aiFlags & ENEMY_AI_FLAGS_4) {
         script->functionTemp[0] = 0;
         npc->duration = 0;
         npc->currentAnim.w = enemy->animList[0];
         enemy->varTable[0] = 0;
 
-        if (enemy->unk_B0 & ENEMY_AI_FLAGS_4) {
+        if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
             script->functionTemp[0] = 99;
             script->functionTemp[1] = 0;
-            enemy->unk_B0 &= ~ENEMY_AI_FLAGS_4;
+            enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
         }
     }
 
@@ -322,7 +322,7 @@ ApiStatus func_80241AE0_EA23E0(Evt* script, s32 isInitialCall) {
             N(UnkNpcAIFunc30)(script, settings, territoryPtr);
             break;
         case 99:
-            func_8004A73C(script);
+            basic_ai_suspend(script);
             break;
     }
 

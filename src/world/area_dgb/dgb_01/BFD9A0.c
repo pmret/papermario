@@ -485,7 +485,7 @@ f32 N(sixFloats)[] = {
 
 EvtScript N(80244CE8) = {
     EVT_CALL(SetSelfEnemyFlagBits, ((NPC_FLAG_MOTION_BLUR | NPC_FLAG_1000000 | NPC_FLAG_SIMPLIFIED_PHYSICS | NPC_FLAG_PARTICLE | NPC_FLAG_8000000 | NPC_FLAG_10000000 | NPC_FLAG_20000000)), TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, ((NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT)), TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, ((NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING)), TRUE)
     EVT_RETURN
     EVT_END
 };
@@ -536,7 +536,7 @@ void N(func_80241770_BFEFF0)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
-    if (func_800490B4(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 1)) {
+    if (basic_ai_try_detect_player(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 1)) {
         npc_move_heading(npc, npc->moveSpeed, npc->yaw);
         if (dist2D(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x,
                    gPlayerStatusPtr->position.z) <= (npc->moveSpeed * 2.5)) {
@@ -585,7 +585,7 @@ void N(func_80241954_BFF1D4)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
     s32 temp_f8_2;
 
     sfx_adjust_env_sound_pos(0x80000011, 2, npc->pos.x, npc->pos.y, npc->pos.z);
-    if (!func_800490B4(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 1)) {
+    if (!basic_ai_try_detect_player(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 1)) {
         enemy->varTable[0] &= ~0x100;
         npc->rotation.y = 0.0f;
         npc->flags &= ~0x00200000;
@@ -722,7 +722,7 @@ void N(func_80241F98_BFF818)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
     enemy->varTable[2] = clamp_angle(enemy->varTable[2] + 12);
     if (script->functionTemp[1] <= 0) {
         script->functionTemp[1] = aiSettings->unk_14;
-        if (func_800490B4(territory, enemy, aiSettings->alertRadius * 0.5, aiSettings->unk_10.f * 0.5, 0)) {
+        if (basic_ai_try_detect_player(territory, enemy, aiSettings->alertRadius * 0.5, aiSettings->unk_10.f * 0.5, 0)) {
             fx_emote(EMOTE_EXCLAMATION, npc, 0, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 12, &var);
             ai_enemy_play_sound(npc, 0x2F4, 0x200000);
             npc->moveToPos.y = npc->pos.y;
@@ -751,13 +751,13 @@ ApiStatus N(func_802422B0_BFFB30)(Evt* script, s32 isInitialCall) {
     EnemyTerritoryThing* territoryPtr = &territory;
     NpcAISettings* aiSettings =(NpcAISettings*) evt_get_variable(script, *args);
 
-    territory.unk_00 = 0;
+    territory.skipPlayerDetectChance = 0;
     territory.shape = enemy->territory->wander.detectShape;
     territory.pointX = enemy->territory->wander.detect.x;
     territory.pointZ = enemy->territory->wander.detect.z;
     territory.sizeX = enemy->territory->wander.detectSizeX;
     territory.sizeZ = enemy->territory->wander.detectSizeZ;
-    territory.unk_18 = 125.0f;
+    territory.halfHeight = 125.0f;
     territory.unk_1C = 0;
 
     if (isInitialCall) {
@@ -1203,7 +1203,7 @@ StaticNpc N(npcGroup_80246090) = {
     .id = NPC_SENTINEL0,
     .settings = &N(npcSettings_8024526C),
     .pos = { -180.0f, 100.0f, 230.0f },
-    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
+    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
     .init = &N(init_80245D80),
     .yaw = 90,
     .dropFlags = NPC_DROP_FLAGS_80,
@@ -1234,7 +1234,7 @@ StaticNpc N(npcGroup_80246280) = {
     .id = NPC_SENTINEL1,
     .settings = &N(npcSettings_8024526C),
     .pos = { 180.0f, 100.0f, 230.0f },
-    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
+    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
     .init = &N(init_80245E44),
     .yaw = 270,
     .dropFlags = NPC_DROP_FLAGS_80,
@@ -1265,7 +1265,7 @@ StaticNpc N(npcGroup_80246470) = {
     .id = NPC_SENTINEL2,
     .settings = &N(npcSettings_8024526C),
     .pos = { -180.0f, 100.0f, -230.0f },
-    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
+    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
     .init = &N(init_80245F08),
     .yaw = 90,
     .dropFlags = NPC_DROP_FLAGS_80,
@@ -1296,7 +1296,7 @@ StaticNpc N(npcGroup_80246660) = {
     .id = NPC_SENTINEL3,
     .settings = &N(npcSettings_8024526C),
     .pos = { 180.0f, 100.0f, -230.0f },
-    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
+    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
     .init = &N(init_80245FCC),
     .yaw = 270,
     .dropFlags = NPC_DROP_FLAGS_80,

@@ -243,7 +243,7 @@ StaticNpc N(npcGroup_80241B4C)[] = {
         .id = NPC_WORLD_CLUBBA1,
         .settings = &N(npcSettings_80241B20),
         .pos = { 0.0f, -1000.0f, 0.0f },
-        .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_DROPS,
+        .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_DROPS,
         .yaw = 0,
         .dropFlags = NPC_DROP_FLAGS_80,
         .heartDrops = NO_DROPS,
@@ -311,7 +311,7 @@ StaticNpc N(npcGroup_80241F2C)[] = {
         .id = NPC_WORLD_CLUBBA3,
         .settings = &N(npcSettings_80241B20),
         .pos = { 0.0f, -1000.0f, 0.0f },
-        .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_DROPS,
+        .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_DROPS,
         .yaw = 0,
         .dropFlags = NPC_DROP_FLAGS_80,
         .heartDrops = NO_DROPS,
@@ -395,7 +395,7 @@ void N(func_80240704_C3B114)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
     s32 var;
     f32 posX, posZ;
 
-    if (func_800490B4(territory, enemy, 80.0f, 0.0f, 0)) {
+    if (basic_ai_try_detect_player(territory, enemy, 80.0f, 0.0f, 0)) {
         if ((gPlayerStatusPtr->actionState ==  2) || (gPlayerStatusPtr->actionState == 26) ||
             (gPlayerStatusPtr->actionState ==  3) || (gPlayerStatusPtr->actionState == 14) ||
             (gPlayerStatusPtr->actionState == 16) || (gPlayerStatusPtr->actionState == 11) ||
@@ -470,7 +470,7 @@ void N(func_80240AC8_C3B4D8)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 var;
 
-    if (func_800490B4(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 0)) {
+    if (basic_ai_try_detect_player(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 0)) {
         npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
         script->functionTemp[0] = 12;
         return;
@@ -517,7 +517,7 @@ void N(func_80240CAC_C3B6BC)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 var;
 
-    if (func_800490B4(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 0)) {
+    if (basic_ai_try_detect_player(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 0)) {
         npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
         script->functionTemp[0] = 12;
     } else if (dist2D(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x,
@@ -528,7 +528,7 @@ void N(func_80240CAC_C3B6BC)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
         script->functionTemp[0] = 3;
     } else if (npc->turnAroundYawAdjustment == 0) {
         var = npc->yaw;
-        func_8004A784(npc, 5.0f, &var, 0, 0, 0);
+        ai_check_fwd_collisions(npc, 5.0f, &var, 0, 0, 0);
         npc->yaw = var;
         npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z);
         npc_move_heading(npc, npc->moveSpeed, npc->yaw);
@@ -556,16 +556,16 @@ ApiStatus N(func_80240E80_C3B890)(Evt* script, s32 isInitialCall) {
     EnemyTerritoryThing* territoryPtr = &territory;
     NpcAISettings* npcAISettings = (NpcAISettings*)evt_get_variable(script, *args++);
 
-    territory.unk_00 = 0;
+    territory.skipPlayerDetectChance = 0;
     territory.shape = enemy->territory->wander.detectShape;
     territory.pointX = enemy->territory->wander.detect.x;
     territory.pointZ = enemy->territory->wander.detect.z;
     territory.sizeX = enemy->territory->wander.detectSizeX;
     territory.sizeZ = enemy->territory->wander.detectSizeZ;
-    territory.unk_18 = 40.0f;
+    territory.halfHeight = 40.0f;
     territory.unk_1C = 0;
 
-    if (isInitialCall || (enemy->unk_B0 & ENEMY_AI_FLAGS_4)) {
+    if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAGS_4)) {
         script->functionTemp[0] = 0;
         npc->duration = 30;
         npc->currentAnim.w = enemy->animList[10];
@@ -576,12 +576,12 @@ ApiStatus N(func_80240E80_C3B890)(Evt* script, s32 isInitialCall) {
         } else {
             npc->flags = (npc->flags & ~0x200) | 0x8;
         }
-        if (enemy->unk_B0 & ENEMY_AI_FLAGS_4) {
+        if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
             script->functionTemp[0] = 99;
             script->functionTemp[1] = 40;
             npc->currentAnim.w = enemy->animList[0];
         }
-        enemy->unk_B0 &= ~ENEMY_AI_FLAGS_4;
+        enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
     }
 
     if (((u32)script->functionTemp[0] - 10 < 20) && (enemy->varTable[0] == 0) && N(UnkNpcAIFunc26)(script)) {
@@ -605,15 +605,15 @@ ApiStatus N(func_80240E80_C3B890)(Evt* script, s32 isInitialCall) {
             N(func_80240AC8_C3B4D8)(script, npcAISettings, territoryPtr);
             break;
         case 12:
-            func_80049F7C(script, npcAISettings, territoryPtr);
+            basic_ai_chase_init(script, npcAISettings, territoryPtr);
             if (script->functionTemp[0] != 13) {
                 break;
             }
         case 13:
-            func_8004A124(script, npcAISettings, territoryPtr);
+            basic_ai_chase(script, npcAISettings, territoryPtr);
             break;
         case 14:
-            func_8004A3E8(script, npcAISettings, territoryPtr);
+            basic_ai_lose_player(script, npcAISettings, territoryPtr);
             npc->duration = 0xF;
             enemy->varTable[7] = 40;
             script->functionTemp[0] = 3;
@@ -646,7 +646,7 @@ ApiStatus N(func_80240E80_C3B890)(Evt* script, s32 isInitialCall) {
             N(func_80240E24_C3B834)(script, npcAISettings, territoryPtr);
             break;
         case 99:
-            func_8004A73C(script);
+            basic_ai_suspend(script);
     }
 
     return ApiStatus_BLOCK;
@@ -660,16 +660,16 @@ ApiStatus N(func_802411D0_C3BBE0)(Evt* script, s32 isInitialCall) {
     EnemyTerritoryThing* territoryPtr = &territory;
     NpcAISettings* npcAISettings = (NpcAISettings*)evt_get_variable(script, *args++);
 
-    territory.unk_00 = 0;
+    territory.skipPlayerDetectChance = 0;
     territory.shape = enemy->territory->wander.detectShape;
     territory.pointX = enemy->territory->wander.detect.x;
     territory.pointZ = enemy->territory->wander.detect.z;
     territory.sizeX = enemy->territory->wander.detectSizeX;
     territory.sizeZ = enemy->territory->wander.detectSizeZ;
-    territory.unk_18 = 65.0f;
+    territory.halfHeight = 65.0f;
     territory.unk_1C = 0;
 
-    if (isInitialCall || (enemy->unk_B0 & ENEMY_AI_FLAGS_4)) {
+    if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAGS_4)) {
         script->functionTemp[0] = 0;
         npc->duration = 0;
         npc->currentAnim.w = enemy->animList[0];
@@ -679,10 +679,10 @@ ApiStatus N(func_802411D0_C3BBE0)(Evt* script, s32 isInitialCall) {
         } else {
             npc->flags = (npc->flags & ~0x200) | 0x8;
         }
-        if (enemy->unk_B0 & ENEMY_AI_FLAGS_4) {
+        if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
             script->functionTemp[0] = 99;
             script->functionTemp[1] = 0;
-            enemy->unk_B0 &= ~ENEMY_AI_FLAGS_4;
+            enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
         }
         enemy->varTable[0] = 0;
     }
@@ -693,27 +693,27 @@ ApiStatus N(func_802411D0_C3BBE0)(Evt* script, s32 isInitialCall) {
 
     switch (script->functionTemp[0]) {
         case 0:
-            func_800495A0(script, npcAISettings, territoryPtr);
+            basic_ai_wander_init(script, npcAISettings, territoryPtr);
         case 1:
-            func_800496B8(script, npcAISettings, territoryPtr);
+            basic_ai_wander(script, npcAISettings, territoryPtr);
             break;
         case 2:
-            base_UnkNpcAIFunc1(script, npcAISettings, territoryPtr);
+            basic_ai_loiter_init(script, npcAISettings, territoryPtr);
         case 3:
-            func_80049C04(script, npcAISettings, territoryPtr);
+            basic_ai_loiter(script, npcAISettings, territoryPtr);
             break;
         case 10:
-            func_80049E3C(script, npcAISettings, territoryPtr);
+            basic_ai_found_player_jump_init(script, npcAISettings, territoryPtr);
         case 11:
-            func_80049ECC(script, npcAISettings, territoryPtr);
+            basic_ai_found_player_jump(script, npcAISettings, territoryPtr);
             break;
         case 12:
-            func_80049F7C(script, npcAISettings, territoryPtr);
+            basic_ai_chase_init(script, npcAISettings, territoryPtr);
         case 13:
-            func_8004A124(script, npcAISettings, territoryPtr);
+            basic_ai_chase(script, npcAISettings, territoryPtr);
             break;
         case 14:
-            func_8004A3E8(script, npcAISettings, territoryPtr);
+            basic_ai_lose_player(script, npcAISettings, territoryPtr);
             break;
         case 30:
             N(UnkNpcAIFunc6)(script);
@@ -731,7 +731,7 @@ ApiStatus N(func_802411D0_C3BBE0)(Evt* script, s32 isInitialCall) {
             N(UnkNpcAIFunc5)(script);
             break;
         case 99:
-            func_8004A73C(script);
+            basic_ai_suspend(script);
     }
 
     return ApiStatus_BLOCK;

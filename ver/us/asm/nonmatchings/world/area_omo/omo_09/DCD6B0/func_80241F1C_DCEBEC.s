@@ -18,7 +18,7 @@ glabel func_80241F1C_DCEBEC
 /* DCEC20 80241F50 AFA00010 */  sw        $zero, 0x10($sp)
 /* DCEC24 80241F54 AFA00014 */  sw        $zero, 0x14($sp)
 /* DCEC28 80241F58 8E050018 */  lw        $a1, 0x18($s0)
-/* DCEC2C 80241F5C 0C0129E1 */  jal       func_8004A784
+/* DCEC2C 80241F5C 0C0129E1 */  jal       ai_check_fwd_collisions
 /* DCEC30 80241F60 0000382D */   daddu    $a3, $zero, $zero
 /* DCEC34 80241F64 14400005 */  bnez      $v0, .L80241F7C
 /* DCEC38 80241F68 00000000 */   nop

@@ -458,7 +458,7 @@ StaticNpc N(npcGroup_80243C48) = {
     .id = NPC_GATE_FLOWER,
     .settings = &N(npcSettings_80242FE0),
     .pos = { -695.0f, 0.0f, -30.0f },
-    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_PROJECT_SHADOW | NPC_FLAG_400000,
+    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW | NPC_FLAG_400000,
     .init = &N(init_80243B20),
     .yaw = 270,
     .dropFlags = NPC_DROP_FLAGS_80,
@@ -489,7 +489,7 @@ StaticNpc N(npcGroup_80243E38) = {
     .id = NPC_DAYZEE0,
     .settings = &N(npcSettings_8024305C),
     .pos = { 205.0f, 0.0f, -80.0f },
-    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
+    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
     .yaw = 90,
     .dropFlags = NPC_DROP_FLAGS_80,
     .itemDropChance = 15,
@@ -526,7 +526,7 @@ StaticNpc N(npcGroup_80244028) = {
     .id = NPC_DAYZEE1,
     .settings = &N(npcSettings_8024305C),
     .pos = { 275.0f, 0.0f, -115.0f },
-    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
+    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
     .yaw = 270,
     .dropFlags = NPC_DROP_FLAGS_80,
     .itemDropChance = 15,
@@ -563,7 +563,7 @@ StaticNpc N(npcGroup_80244218) = {
     .id = NPC_DAYZEE2,
     .settings = &N(npcSettings_8024305C),
     .pos = { -230.0f, 60.0f, -110.0f },
-    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_PROJECT_SHADOW,
+    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW,
     .yaw = 90,
     .dropFlags = NPC_DROP_FLAGS_80,
     .itemDropChance = 15,
@@ -600,7 +600,7 @@ StaticNpc N(npcGroup_80244408) = {
     .id = NPC_DAYZEE3,
     .settings = &N(npcSettings_8024305C),
     .pos = { -330.0f, 60.0f, -110.0f },
-    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_PROJECT_SHADOW,
+    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW,
     .yaw = 270,
     .dropFlags = NPC_DROP_FLAGS_80,
     .itemDropChance = 15,
@@ -637,7 +637,7 @@ StaticNpc N(npcGroup_802445F8) = {
     .id = NPC_DAYZEE4,
     .settings = &N(npcSettings_8024305C),
     .pos = { -430.0f, 60.0f, -110.0f },
-    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_PROJECT_SHADOW,
+    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW,
     .yaw = 90,
     .dropFlags = NPC_DROP_FLAGS_80,
     .itemDropChance = 15,
@@ -674,7 +674,7 @@ StaticNpc N(npcGroup_802447E8) = {
     .id = NPC_DAYZEE5,
     .settings = &N(npcSettings_8024305C),
     .pos = { -530.0f, 60.0f, -110.0f },
-    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_PROJECT_SHADOW,
+    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW,
     .yaw = 270,
     .dropFlags = NPC_DROP_FLAGS_80,
     .itemDropChance = 15,
@@ -711,7 +711,7 @@ StaticNpc N(npcGroup_802449D8) = {
     .id = NPC_DAYZEE6,
     .settings = &N(npcSettings_8024305C),
     .pos = { -630.0f, 60.0f, -110.0f },
-    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_PROJECT_SHADOW,
+    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW,
     .yaw = 90,
     .dropFlags = NPC_DROP_FLAGS_80,
     .itemDropChance = 15,
@@ -769,7 +769,7 @@ StaticNpc N(npcGroup_80244CD4) = {
     .id = NPC_DAYZEE7,
     .settings = &N(npcSettings_80242FB4),
     .pos = { 240.0f, 0.0f, -90.0f },
-    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_PROJECT_SHADOW,
+    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW,
     .init = &N(init_80244BC8),
     .yaw = 270,
     .dropFlags = NPC_DROP_FLAGS_80,
@@ -898,7 +898,7 @@ void N(func_80240D80_CAFAC0)(Evt* script, NpcAISettings* npcAISettings, EnemyTer
         dist2D(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
 
         if ((phi_f22 < npc->moveSpeed * 1.5) && (phi_f24 < npc->moveSpeed * 1.5) && (phi_f26 < npc->moveSpeed * 1.5) &&
-            (func_800490B4(territory, enemy, npcAISettings->alertRadius, npcAISettings->unk_10.f, 0) != 0)) {
+            (basic_ai_try_detect_player(territory, enemy, npcAISettings->alertRadius, npcAISettings->unk_10.f, 0) != 0)) {
             phi_s3 = TRUE;
         }
 
@@ -941,7 +941,7 @@ void N(func_80241364_CB00A4)(Evt* script, NpcAISettings* npcAISettings, EnemyTer
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 var;
 
-    if (func_800490B4(territory, enemy, npcAISettings->chaseRadius, npcAISettings->unk_28.f, 1) == 0) {
+    if (basic_ai_try_detect_player(territory, enemy, npcAISettings->chaseRadius, npcAISettings->unk_28.f, 1) == 0) {
         fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &var);
         npc->currentAnim.w = enemy->animList[0];
         npc->duration = 25;
@@ -982,16 +982,16 @@ ApiStatus N(func_8024150C_CB024C)(Evt* script, s32 isInitialCall) {
     EnemyTerritoryThing* territoryPtr = &territory;
     NpcAISettings* npcAISettings = (NpcAISettings*)evt_get_variable(script, *args++);
 
-    territory.unk_00 = 0;
+    territory.skipPlayerDetectChance = 0;
     territory.shape = enemy->territory->wander.detectShape;
     territory.pointX = enemy->territory->wander.detect.x;
     territory.pointZ = enemy->territory->wander.detect.z;
     territory.sizeX = enemy->territory->wander.detectSizeX;
     territory.sizeZ = enemy->territory->wander.detectSizeZ;
-    territory.unk_18 = 100.0f;
+    territory.halfHeight = 100.0f;
     territory.unk_1C = 0;
 
-    if (isInitialCall || (enemy->unk_B0 & ENEMY_AI_FLAGS_4)) {
+    if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAGS_4)) {
         script->functionTemp[0] = 0;
         npc->duration = 0;
         npc->currentAnim.w = enemy->animList[0];
@@ -1001,28 +1001,28 @@ ApiStatus N(func_8024150C_CB024C)(Evt* script, s32 isInitialCall) {
         } else {
             npc->flags = (npc->flags & ~0x200) | 0x8;
         }
-        if (enemy->unk_B0 & ENEMY_AI_FLAGS_4) {
+        if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
             script->functionTemp[0] = 99;
             script->functionTemp[1] = 0;
-            enemy->unk_B0 &= ~ENEMY_AI_FLAGS_4;
+            enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
         }
     }
 
     switch (script->functionTemp[0]) {
         case 0:
-            func_800495A0(script, npcAISettings, territoryPtr);
+            basic_ai_wander_init(script, npcAISettings, territoryPtr);
         case 1:
-            func_800496B8(script, npcAISettings, territoryPtr);
+            basic_ai_wander(script, npcAISettings, territoryPtr);
             break;
         case 2:
-            base_UnkNpcAIFunc1(script, npcAISettings, territoryPtr);
+            basic_ai_loiter_init(script, npcAISettings, territoryPtr);
         case 3:
-            func_80049C04(script, npcAISettings, territoryPtr);
+            basic_ai_loiter(script, npcAISettings, territoryPtr);
             break;
         case 10:
-            func_80049E3C(script, npcAISettings, territoryPtr);
+            basic_ai_found_player_jump_init(script, npcAISettings, territoryPtr);
         case 11:
-            func_80049ECC(script, npcAISettings, territoryPtr);
+            basic_ai_found_player_jump(script, npcAISettings, territoryPtr);
             break;
         case 12:
             N(func_80240D80_CAFAC0)(script, npcAISettings, territoryPtr);
@@ -1033,7 +1033,7 @@ ApiStatus N(func_8024150C_CB024C)(Evt* script, s32 isInitialCall) {
             N(func_802414C8_CB0208)(script, npcAISettings, territoryPtr);
             break;
         case 99:
-            func_8004A73C(script);
+            basic_ai_suspend(script);
     }
 
     return ApiStatus_BLOCK;

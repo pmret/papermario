@@ -27,5 +27,5 @@ void N(UnkFunc5)(Npc* npc, Enemy* enemy, Evt* script, NpcAISettings* aiSettings)
     enemy->varTable[3] = ((posW * 100.0) + 0.5);
     enemy->varTable[7] = ((posY * 100.0) + 0.5);
     script->functionTemp[1] = aiSettings->unk_14;
-    enemy->unk_B0 |= ENEMY_AI_FLAGS_10;
+    enemy->aiFlags |= ENEMY_AI_FLAGS_10;
 }

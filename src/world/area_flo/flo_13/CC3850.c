@@ -839,7 +839,7 @@ StaticNpc N(npcGroup_80246434) = {
     .id = NPC_WORLD_LAKILESTER,
     .settings = &N(npcSettings_80244100),
     .pos = { 0.0f, -1000.0f, 0.0f },
-    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_40000,
+    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_40000,
     .init = &N(init_80246280),
     .yaw = 90,
     .dropFlags = NPC_DROP_FLAGS_80,
@@ -869,7 +869,7 @@ StaticNpc N(npcGroup_80246624) = {
     .id = NPC_LAKILULU0,
     .settings = &N(npcSettings_80244100),
     .pos = { 0.0f, -1000.0f, 0.0f },
-    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
+    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
     .init = &N(init_802462D0),
     .yaw = 90,
     .dropFlags = NPC_DROP_FLAGS_80,
@@ -900,7 +900,7 @@ StaticNpc N(npcGroup_80246814) = {
     .id = NPC_LAKILULU1,
     .settings = &N(npcSettings_80244100),
     .pos = { 0.0f, -1000.0f, 0.0f },
-    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
+    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
     .init = &N(init_80246370),
     .yaw = 90,
     .dropFlags = NPC_DROP_FLAGS_80,
@@ -930,7 +930,7 @@ StaticNpc N(npcGroup_80246A04) = {
     .id = NPC_LAKITU0,
     .settings = &N(npcSettings_802441E4),
     .pos = { 335.0f, 90.0f, 45.0f },
-    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
+    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
     .init = &N(init_802463B0),
     .yaw = 270,
     .dropFlags = NPC_DROP_FLAGS_80,
@@ -970,7 +970,7 @@ StaticNpc N(npcGroup_80246BF4) = {
     .id = NPC_LAKITU1,
     .settings = &N(npcSettings_802441E4),
     .pos = { -320.0f, 90.0f, 0.0f },
-    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
+    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
     .init = &N(init_802463B0),
     .yaw = 90,
     .dropFlags = NPC_DROP_FLAGS_80,
@@ -1267,7 +1267,7 @@ void N(func_80241704_CC4F14)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
     if (aiSettings->unk_14 >= 0) {
         if (script->functionTemp[1] <= 0) {
             script->functionTemp[1] = aiSettings->unk_14;
-            if (func_800490B4(territory, enemy, aiSettings->alertRadius, aiSettings->unk_10.f, 0) != 0) {
+            if (basic_ai_try_detect_player(territory, enemy, aiSettings->alertRadius, aiSettings->unk_10.f, 0) != 0) {
                 fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &var);
                 ai_enemy_play_sound(npc, 0x2F4, 0x200000);
                 x = npc->pos.x;
@@ -1346,7 +1346,7 @@ void N(func_80241B68_CC5378)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
     npc_raycast_down_sides(npc->collisionChannel, &x, &y, &z, &w);
     npc->pos.y = y + temp_f22 + (sin_deg(enemy->varTable[2]) * temp_f20);
     enemy->varTable[2] = clamp_angle(enemy->varTable[2] + 0xC);
-    if (func_800490B4(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 1) != 0) {
+    if (basic_ai_try_detect_player(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 1) != 0) {
         fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &var);
         ai_enemy_play_sound(npc, 0x2F4, 0x200000);
         script->functionTemp[0] = 12;
@@ -1376,13 +1376,13 @@ ApiStatus N(func_80241DB8_CC55C8)(Evt* script, s32 isInitialCall) {
     f32 temp_f4;
     f32 dist;
 
-    territory.unk_00 = 0;
+    territory.skipPlayerDetectChance = 0;
     territory.shape = enemy->territory->wander.detectShape;
     territory.pointX = enemy->territory->wander.detect.x;
     territory.pointZ = enemy->territory->wander.detect.z;
     territory.sizeX = enemy->territory->wander.detectSizeX;
     territory.sizeZ = enemy->territory->wander.detectSizeZ;
-    territory.unk_18 = 120.0f;
+    territory.halfHeight = 120.0f;
     territory.unk_1C = 0;
 
     if (isInitialCall) {
@@ -1391,11 +1391,11 @@ ApiStatus N(func_80241DB8_CC55C8)(Evt* script, s32 isInitialCall) {
     }
     npc->unk_AB = -3;
 
-    if (enemy->unk_B0 & ENEMY_AI_FLAGS_4) {
+    if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
         if (enemy->unk_B4 != 0) {
             return ApiStatus_BLOCK;
         }
-        enemy->unk_B0 &= ~ENEMY_AI_FLAGS_4;
+        enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
     }
 
 

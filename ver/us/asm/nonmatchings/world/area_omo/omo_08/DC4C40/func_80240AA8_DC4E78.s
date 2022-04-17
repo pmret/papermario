@@ -139,48 +139,48 @@ glabel btl_restore_world_cameras_DC4E78
 .L80240C8C_DC505C:
 /* DC505C 80240C8C 0260202D */  daddu     $a0, $s3, $zero
 /* DC5060 80240C90 0280282D */  daddu     $a1, $s4, $zero
-/* DC5064 80240C94 0C012568 */  jal       func_800495A0
+/* DC5064 80240C94 0C012568 */  jal       basic_ai_wander_init
 /* DC5068 80240C98 02A0302D */   daddu    $a2, $s5, $zero
 .L80240C9C_DC506C:
 /* DC506C 80240C9C 0260202D */  daddu     $a0, $s3, $zero
 /* DC5070 80240CA0 0280282D */  daddu     $a1, $s4, $zero
-/* DC5074 80240CA4 0C0125AE */  jal       func_800496B8
+/* DC5074 80240CA4 0C0125AE */  jal       basic_ai_wander
 /* DC5078 80240CA8 02A0302D */   daddu    $a2, $s5, $zero
 /* DC507C 80240CAC 0809036D */  j         .L80240DB4_DC5184
 /* DC5080 80240CB0 00000000 */   nop
 .L80240CB4_DC5084:
 /* DC5084 80240CB4 0260202D */  daddu     $a0, $s3, $zero
 /* DC5088 80240CB8 0280282D */  daddu     $a1, $s4, $zero
-/* DC508C 80240CBC 0C0126D1 */  jal       base_UnkNpcAIFunc1
+/* DC508C 80240CBC 0C0126D1 */  jal       basic_ai_loiter_init
 /* DC5090 80240CC0 02A0302D */   daddu    $a2, $s5, $zero
 .L80240CC4_DC5094:
 /* DC5094 80240CC4 0260202D */  daddu     $a0, $s3, $zero
 /* DC5098 80240CC8 0280282D */  daddu     $a1, $s4, $zero
-/* DC509C 80240CCC 0C012701 */  jal       func_80049C04
+/* DC509C 80240CCC 0C012701 */  jal       basic_ai_loiter
 /* DC50A0 80240CD0 02A0302D */   daddu    $a2, $s5, $zero
 /* DC50A4 80240CD4 0809036D */  j         .L80240DB4_DC5184
 /* DC50A8 80240CD8 00000000 */   nop
 .L80240CDC_DC50AC:
 /* DC50AC 80240CDC 0260202D */  daddu     $a0, $s3, $zero
 /* DC50B0 80240CE0 0280282D */  daddu     $a1, $s4, $zero
-/* DC50B4 80240CE4 0C01278F */  jal       func_80049E3C
+/* DC50B4 80240CE4 0C01278F */  jal       basic_ai_found_player_jump_init
 /* DC50B8 80240CE8 02A0302D */   daddu    $a2, $s5, $zero
 .L80240CEC_DC50BC:
 /* DC50BC 80240CEC 0260202D */  daddu     $a0, $s3, $zero
 /* DC50C0 80240CF0 0280282D */  daddu     $a1, $s4, $zero
-/* DC50C4 80240CF4 0C0127B3 */  jal       func_80049ECC
+/* DC50C4 80240CF4 0C0127B3 */  jal       basic_ai_found_player_jump
 /* DC50C8 80240CF8 02A0302D */   daddu    $a2, $s5, $zero
 /* DC50CC 80240CFC 0809036D */  j         .L80240DB4_DC5184
 /* DC50D0 80240D00 00000000 */   nop
 .L80240D04_DC50D4:
 /* DC50D4 80240D04 0260202D */  daddu     $a0, $s3, $zero
 /* DC50D8 80240D08 0280282D */  daddu     $a1, $s4, $zero
-/* DC50DC 80240D0C 0C0127DF */  jal       func_80049F7C
+/* DC50DC 80240D0C 0C0127DF */  jal       basic_ai_chase_init
 /* DC50E0 80240D10 02A0302D */   daddu    $a2, $s5, $zero
 .L80240D14_DC50E4:
 /* DC50E4 80240D14 0260202D */  daddu     $a0, $s3, $zero
 /* DC50E8 80240D18 0280282D */  daddu     $a1, $s4, $zero
-/* DC50EC 80240D1C 0C012849 */  jal       func_8004A124
+/* DC50EC 80240D1C 0C012849 */  jal       basic_ai_chase
 /* DC50F0 80240D20 02A0302D */   daddu    $a2, $s5, $zero
 /* DC50F4 80240D24 8E630070 */  lw        $v1, 0x70($s3)
 /* DC50F8 80240D28 2402000E */  addiu     $v0, $zero, 0xe
@@ -221,7 +221,7 @@ glabel btl_restore_world_cameras_DC4E78
 /* DC5174 80240DA4 0809036D */  j         .L80240DB4_DC5184
 /* DC5178 80240DA8 00000000 */   nop
 .L80240DAC_DC517C:
-/* DC517C 80240DAC 0C0129CF */  jal       func_8004A73C
+/* DC517C 80240DAC 0C0129CF */  jal       basic_ai_suspend
 /* DC5180 80240DB0 0260202D */   daddu    $a0, $s3, $zero
 .L80240DB4_DC5184:
 /* DC5184 80240DB4 8FBF0060 */  lw        $ra, 0x60($sp)

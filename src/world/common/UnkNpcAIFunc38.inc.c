@@ -6,7 +6,7 @@ void N(UnkNpcAIFunc38)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThi
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
-    if (aiSettings->unk_14 >= 0 && func_800490B4(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 0) != 0) {
+    if (aiSettings->unk_14 >= 0 && basic_ai_try_detect_player(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 0) != 0) {
         s32 emoteTemp;
 
         fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &emoteTemp);

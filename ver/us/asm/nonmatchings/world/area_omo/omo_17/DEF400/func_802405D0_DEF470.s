@@ -26,7 +26,7 @@ glabel func_802405D0_DEF470
 /* DEF4A8 80240608 AFA00010 */  sw        $zero, 0x10($sp)
 /* DEF4AC 8024060C AFA00014 */  sw        $zero, 0x14($sp)
 /* DEF4B0 80240610 8E050018 */  lw        $a1, 0x18($s0)
-/* DEF4B4 80240614 0C0129E1 */  jal       func_8004A784
+/* DEF4B4 80240614 0C0129E1 */  jal       ai_check_fwd_collisions
 /* DEF4B8 80240618 0000382D */   daddu    $a3, $zero, $zero
 /* DEF4BC 8024061C 14400005 */  bnez      $v0, .L80240634
 /* DEF4C0 80240620 00000000 */   nop

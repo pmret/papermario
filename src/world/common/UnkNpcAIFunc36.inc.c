@@ -7,8 +7,8 @@ void N(UnkNpcAIFunc36)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThi
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 x, y, z;
 
-    func_800495A0(script, aiSettings, territory);
-    npc->flags |= NPC_FLAG_NO_Y_MOVEMENT;
+    basic_ai_wander_init(script, aiSettings, territory);
+    npc->flags |= NPC_FLAG_JUMPING;
     npc->jumpVelocity = (rand_int(45) / 10.0) + 8.0;
     npc->jumpScale = 1.5f;
     ai_enemy_play_sound(npc, 0xB0000017, 0);

@@ -35,25 +35,25 @@ ApiStatus func_80241C54_B95094(Evt* script, s32 isInitialCall) {
     EnemyTerritoryThing* territoryPtr = &territory;    
     NpcAISettings* settings = (NpcAISettings*) evt_get_variable(script, *script->ptrReadPos);
 
-    territory.unk_00 = 0;
+    territory.skipPlayerDetectChance = 0;
     territory.shape = enemy->territory->wander.detectShape;
     territory.pointX = enemy->territory->wander.detect.x;
     territory.pointZ = enemy->territory->wander.detect.z;
     territory.sizeX = enemy->territory->wander.detectSizeX;
     territory.sizeZ = enemy->territory->wander.detectSizeZ;
-    territory.unk_18 = 200.0f;
+    territory.halfHeight = 200.0f;
     territory.unk_1C = 0;
 
-    if (isInitialCall || enemy->unk_B0 & ENEMY_AI_FLAGS_4) {
+    if (isInitialCall || enemy->aiFlags & ENEMY_AI_FLAGS_4) {
         script->functionTemp[0] = 0;
         npc->duration = 0;
         npc->currentAnim.w = enemy->animList[0];
         enemy->varTable[0] = 0;
 
-        if (enemy->unk_B0 & ENEMY_AI_FLAGS_4) {
+        if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
             script->functionTemp[0] = 99;
             script->functionTemp[1] = 0;
-            enemy->unk_B0 &= ~ENEMY_AI_FLAGS_4;
+            enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
         }
     }
 
@@ -88,7 +88,7 @@ ApiStatus func_80241C54_B95094(Evt* script, s32 isInitialCall) {
             N(UnkNpcAIFunc30)(script, settings, territoryPtr);
             break;
         case 99:
-            func_8004A73C(script);
+            basic_ai_suspend(script);
             break;
     }
 

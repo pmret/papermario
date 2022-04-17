@@ -139,48 +139,48 @@ glabel func_80240238_DB24F8
 .L8024041C_DB26DC:
 /* DB26DC 8024041C 0260202D */  daddu     $a0, $s3, $zero
 /* DB26E0 80240420 0280282D */  daddu     $a1, $s4, $zero
-/* DB26E4 80240424 0C012568 */  jal       func_800495A0
+/* DB26E4 80240424 0C012568 */  jal       basic_ai_wander_init
 /* DB26E8 80240428 02A0302D */   daddu    $a2, $s5, $zero
 .L8024042C_DB26EC:
 /* DB26EC 8024042C 0260202D */  daddu     $a0, $s3, $zero
 /* DB26F0 80240430 0280282D */  daddu     $a1, $s4, $zero
-/* DB26F4 80240434 0C0125AE */  jal       func_800496B8
+/* DB26F4 80240434 0C0125AE */  jal       basic_ai_wander
 /* DB26F8 80240438 02A0302D */   daddu    $a2, $s5, $zero
 /* DB26FC 8024043C 08090151 */  j         .L80240544_DB2804
 /* DB2700 80240440 00000000 */   nop
 .L80240444_DB2704:
 /* DB2704 80240444 0260202D */  daddu     $a0, $s3, $zero
 /* DB2708 80240448 0280282D */  daddu     $a1, $s4, $zero
-/* DB270C 8024044C 0C0126D1 */  jal       base_UnkNpcAIFunc1
+/* DB270C 8024044C 0C0126D1 */  jal       basic_ai_loiter_init
 /* DB2710 80240450 02A0302D */   daddu    $a2, $s5, $zero
 .L80240454_DB2714:
 /* DB2714 80240454 0260202D */  daddu     $a0, $s3, $zero
 /* DB2718 80240458 0280282D */  daddu     $a1, $s4, $zero
-/* DB271C 8024045C 0C012701 */  jal       func_80049C04
+/* DB271C 8024045C 0C012701 */  jal       basic_ai_loiter
 /* DB2720 80240460 02A0302D */   daddu    $a2, $s5, $zero
 /* DB2724 80240464 08090151 */  j         .L80240544_DB2804
 /* DB2728 80240468 00000000 */   nop
 .L8024046C_DB272C:
 /* DB272C 8024046C 0260202D */  daddu     $a0, $s3, $zero
 /* DB2730 80240470 0280282D */  daddu     $a1, $s4, $zero
-/* DB2734 80240474 0C01278F */  jal       func_80049E3C
+/* DB2734 80240474 0C01278F */  jal       basic_ai_found_player_jump_init
 /* DB2738 80240478 02A0302D */   daddu    $a2, $s5, $zero
 .L8024047C_DB273C:
 /* DB273C 8024047C 0260202D */  daddu     $a0, $s3, $zero
 /* DB2740 80240480 0280282D */  daddu     $a1, $s4, $zero
-/* DB2744 80240484 0C0127B3 */  jal       func_80049ECC
+/* DB2744 80240484 0C0127B3 */  jal       basic_ai_found_player_jump
 /* DB2748 80240488 02A0302D */   daddu    $a2, $s5, $zero
 /* DB274C 8024048C 08090151 */  j         .L80240544_DB2804
 /* DB2750 80240490 00000000 */   nop
 .L80240494_DB2754:
 /* DB2754 80240494 0260202D */  daddu     $a0, $s3, $zero
 /* DB2758 80240498 0280282D */  daddu     $a1, $s4, $zero
-/* DB275C 8024049C 0C0127DF */  jal       func_80049F7C
+/* DB275C 8024049C 0C0127DF */  jal       basic_ai_chase_init
 /* DB2760 802404A0 02A0302D */   daddu    $a2, $s5, $zero
 .L802404A4_DB2764:
 /* DB2764 802404A4 0260202D */  daddu     $a0, $s3, $zero
 /* DB2768 802404A8 0280282D */  daddu     $a1, $s4, $zero
-/* DB276C 802404AC 0C012849 */  jal       func_8004A124
+/* DB276C 802404AC 0C012849 */  jal       basic_ai_chase
 /* DB2770 802404B0 02A0302D */   daddu    $a2, $s5, $zero
 /* DB2774 802404B4 8E630070 */  lw        $v1, 0x70($s3)
 /* DB2778 802404B8 2402000E */  addiu     $v0, $zero, 0xe
@@ -221,7 +221,7 @@ glabel func_80240238_DB24F8
 /* DB27F4 80240534 08090151 */  j         .L80240544_DB2804
 /* DB27F8 80240538 00000000 */   nop
 .L8024053C_DB27FC:
-/* DB27FC 8024053C 0C0129CF */  jal       func_8004A73C
+/* DB27FC 8024053C 0C0129CF */  jal       basic_ai_suspend
 /* DB2800 80240540 0260202D */   daddu    $a0, $s3, $zero
 .L80240544_DB2804:
 /* DB2804 80240544 8FBF0060 */  lw        $ra, 0x60($sp)

@@ -572,7 +572,7 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
 
             D_802BEB40_31CB60 = 0;
             kooper->flags |= NPC_FLAG_100;
-            kooper->flags &= ~(NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_40);
+            kooper->flags &= ~(NPC_FLAG_JUMPING | NPC_FLAG_40);
             partnerActionStatus->actingPartner = PARTNER_NONE;
             partnerActionStatus->partnerActionState = PARTNER_ACTION_NONE;
             kooper->jumpVelocity = 0.0f;
@@ -696,7 +696,7 @@ void world_kooper_pre_battle(Npc* kooper) {
         playerStatus->flags &= ~PLAYER_STATUS_FLAGS_JUMPING;
 
         kooper->jumpVelocity = 0.0f;
-        kooper->flags &= ~NPC_FLAG_NO_Y_MOVEMENT;
+        kooper->flags &= ~NPC_FLAG_JUMPING;
         kooper->flags &= ~NPC_FLAG_40;
 
         sfx_stop_sound(0x284);

@@ -11,7 +11,7 @@ void N(UnkNpcAIFunc37)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThi
         if (script->functionTemp[1] <= 0) {
             do {
                 script->functionTemp[1] = aiSettings->unk_14;
-                if (func_800490B4(territory, enemy, aiSettings->alertRadius, aiSettings->unk_10.f, 0) != 0) {
+                if (basic_ai_try_detect_player(territory, enemy, aiSettings->alertRadius, aiSettings->unk_10.f, 0) != 0) {
                     s32 emoteTemp;
 
                     fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &emoteTemp);
@@ -57,7 +57,7 @@ void N(UnkNpcAIFunc37)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThi
         {
             npc->jumpVelocity = 0.0f;
             npc->pos.y = posY;
-            npc->flags &= ~NPC_FLAG_NO_Y_MOVEMENT;
+            npc->flags &= ~NPC_FLAG_JUMPING;
             script->functionTemp[0] = 2;
             script->functionTemp[1] = (rand_int(1000) % 3) + 2;
 

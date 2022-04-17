@@ -13,13 +13,13 @@ ApiStatus N(DeadUnkNpcAIMainFunc5)(Evt* script, s32 isInitialCall) {
     EnemyTerritoryThing* territoryPtr = &territory;
     NpcAISettings* aiSettings = (NpcAISettings*)evt_get_variable(script, *args++);
 
-    territory.unk_00 = 0;
+    territory.skipPlayerDetectChance = 0;
     territory.shape = enemy->territory->wander.detectShape;
     territory.pointX = enemy->territory->wander.detect.x;
     territory.pointZ = enemy->territory->wander.detect.z;
     territory.sizeX = enemy->territory->wander.detectSizeX;
     territory.sizeZ = enemy->territory->wander.detectSizeZ;
-    territory.unk_18 = 100.0f;
+    territory.halfHeight = 100.0f;
     territory.unk_1C = 0;
 
     enemy->unk_108.x = npc->pos.x;
@@ -32,15 +32,15 @@ ApiStatus N(DeadUnkNpcAIMainFunc5)(Evt* script, s32 isInitialCall) {
         enemy->varTable[6] = npc->collisionHeight;
         enemy->varTable[8] = 0;
         enemy->unk_B5 = 0;
-        enemy->unk_B0 |= ENEMY_AI_FLAGS_8;
+        enemy->aiFlags |= ENEMY_AI_FLAGS_8;
     }
 
-    if (isInitialCall || (enemy->unk_B0 & ENEMY_AI_FLAGS_4)) {
+    if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAGS_4)) {
         script->functionTemp[0] = 0;
         npc->duration = 0;
         enemy->unk_07 = 0;
         npc->currentAnim.w = enemy->animList[0];
-        npc->flags &= ~NPC_FLAG_NO_Y_MOVEMENT;
+        npc->flags &= ~NPC_FLAG_JUMPING;
         npc->collisionHeight = enemy->varTable[6];
         enemy->varTable[9] = 0;
 
@@ -52,13 +52,13 @@ ApiStatus N(DeadUnkNpcAIMainFunc5)(Evt* script, s32 isInitialCall) {
             npc->flags |= NPC_FLAG_ENABLE_HIT_SCRIPT;
         }
 
-        if (enemy->unk_B0 & ENEMY_AI_FLAGS_4) {
+        if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
             s32 emoteTemp;
 
             script->functionTemp[0] = 99;
             script->functionTemp[1] = 0;
             fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0x28, &emoteTemp);
-            enemy->unk_B0 &= ~ENEMY_AI_FLAGS_4;
+            enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
         } else if (enemy->flags & ENEMY_FLAGS_40000000) {
             script->functionTemp[0] = 12;
             enemy->flags &= ~ENEMY_FLAGS_40000000;
@@ -80,13 +80,13 @@ ApiStatus N(DeadUnkNpcAIMainFunc5)(Evt* script, s32 isInitialCall) {
 
     switch (script->functionTemp[0]) {
         case 0:
-            func_800495A0(script, aiSettings, territoryPtr);
+            basic_ai_wander_init(script, aiSettings, territoryPtr);
             npc->collisionHeight = enemy->varTable[6];
         case 1:
-            func_800496B8(script, aiSettings, territoryPtr);
+            basic_ai_wander(script, aiSettings, territoryPtr);
             break;
         case 2:
-            base_UnkNpcAIFunc1(script, aiSettings, territoryPtr);
+            basic_ai_loiter_init(script, aiSettings, territoryPtr);
             if (enemy->varTable[7] == 6) {
                 if (rand_int(100) < 33) {
                     if (enemy->varTable[8] != 0) {
@@ -103,7 +103,7 @@ ApiStatus N(DeadUnkNpcAIMainFunc5)(Evt* script, s32 isInitialCall) {
                 }
             }
         case 3:
-            func_80049C04(script, aiSettings, territoryPtr);
+            basic_ai_loiter(script, aiSettings, territoryPtr);
             break;
         case 12:
             N(set_script_owner_npc_anim)(script, aiSettings, territoryPtr);
@@ -117,7 +117,7 @@ ApiStatus N(DeadUnkNpcAIMainFunc5)(Evt* script, s32 isInitialCall) {
             N(set_script_owner_npc_col_height)(script, aiSettings, territoryPtr);
             break;
         case 99:
-            func_8004A73C(script);
+            basic_ai_suspend(script);
             break;
     }
 

@@ -98,7 +98,7 @@ typedef struct NpcSettings {
     /* 0x20 */ s32 flags;
     /* 0x24 */ char unk_24[4];
     /* 0x28 */ s16 level;
-    /* 0x2A */ s16 unk_2A;
+    /* 0x2A */ s16 unk_2A;  // action flags: 1 = jump on seeing player
 } NpcSettings; // size = 0x2C
 
 typedef struct ItemDrop {
@@ -190,14 +190,14 @@ typedef struct EnemyDrops {
 enum TerritoryShape { SHAPE_CYLINDER, SHAPE_RECT };
 
 typedef struct {
-    /* 0x00 */ s32 unk_00;
+    /* 0x00 */ s32 skipPlayerDetectChance;
     /* 0x04 */ enum TerritoryShape shape;
     /* 0x08 */ s32 pointX;
     /* 0x0C */ s32 pointZ;
     /* 0x10 */ s32 sizeX;
     /* 0x14 */ s32 sizeZ;
-    /* 0x18 */ f32 unk_18;
-    /* 0x1C */ s16 unk_1C;
+    /* 0x18 */ f32 halfHeight;
+    /* 0x1C */ s16 unk_1C;  // 1 = ignore partner hiding (bow/sushie dont work) | 2 = ignore elevation
 } EnemyTerritoryThing; // size = 0x20
 
 typedef struct {
@@ -269,9 +269,9 @@ typedef struct Enemy {
     /*      */      f32 varTableF[16];
     /*      */      void* varTablePtr[16];
     /*      */ };
-    /* 0xAC */ u8 unk_AC;
+    /* 0xAC */ u8 unk_AC; // detect player flags: 1 = require line of sight | 2 = adjust hitbox for moving player
     /* 0xAD */ char unk_AD[3];
-    /* 0xB0 */ u32 unk_B0;
+    /* 0xB0 */ u32 aiFlags;
     /* 0xB4 */ s8 unk_B4;
     /* 0xB5 */ s8 unk_B5;
     /* 0xB6 */ char unk_B6[2];
@@ -287,7 +287,7 @@ typedef struct Enemy {
     /* 0xDC */ char unk_DC[20];
 } Enemy; // size = 0xF0
 
-s32 func_800490B4(EnemyTerritoryThing* arg0, Enemy* arg1, f32 arg2, f32 arg3, s8 arg4);
+s32 basic_ai_try_detect_player(EnemyTerritoryThing* arg0, Enemy* arg1, f32 arg2, f32 arg3, s8 arg4);
 
 /// The default Npc::onUpdate and Npc::onRender callback.
 void STUB_npc_callback(Npc*);

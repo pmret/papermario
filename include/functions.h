@@ -667,15 +667,15 @@ void set_curtain_fade(f32 fade);
 void crash_screen_init(void);
 void crash_screen_set_draw_info(u16* frameBufPtr, s16 width, s16 height);
 
-void func_800495A0(Evt* script, NpcAISettings* npcAISettings, EnemyTerritoryThing* territory);
-void func_800496B8(Evt* script, NpcAISettings* npcAISettings, EnemyTerritoryThing* territory);
-void func_80049C04(Evt* script, NpcAISettings* npcAISettings, EnemyTerritoryThing* territory);
-void func_80049E3C(Evt* script, NpcAISettings* npcAISettings, EnemyTerritoryThing* territory);
-void func_80049ECC(Evt* script, NpcAISettings* npcAISettings, EnemyTerritoryThing* territory);
-void func_80049F7C(Evt* script, NpcAISettings* npcAISettings, EnemyTerritoryThing* territory);
-void func_8004A124(Evt* script, NpcAISettings* npcAISettings, EnemyTerritoryThing* territory);
-void func_8004A3E8(Evt* script, NpcAISettings* npcAISettings, EnemyTerritoryThing* territory);
-void func_8004A73C(Evt* script);
+void basic_ai_wander_init(Evt* script, NpcAISettings* npcAISettings, EnemyTerritoryThing* territory);
+void basic_ai_wander(Evt* script, NpcAISettings* npcAISettings, EnemyTerritoryThing* territory);
+void basic_ai_loiter(Evt* script, NpcAISettings* npcAISettings, EnemyTerritoryThing* territory);
+void basic_ai_found_player_jump_init(Evt* script, NpcAISettings* npcAISettings, EnemyTerritoryThing* territory);
+void basic_ai_found_player_jump(Evt* script, NpcAISettings* npcAISettings, EnemyTerritoryThing* territory);
+void basic_ai_chase_init(Evt* script, NpcAISettings* npcAISettings, EnemyTerritoryThing* territory);
+void basic_ai_chase(Evt* script, NpcAISettings* npcAISettings, EnemyTerritoryThing* territory);
+void basic_ai_lose_player(Evt* script, NpcAISettings* npcAISettings, EnemyTerritoryThing* territory);
+void basic_ai_suspend(Evt* script);
 
 // This legally allows all functions to be pointers without warnings.
 // Perhaps the void arg functions can be changed later to remove this need.
@@ -694,8 +694,8 @@ void free_generic_entity(s32);
 
 void sfx_get_spatialized_sound_params(f32 arg0, f32 arg1, f32 arg2, s16* arg3, s16* arg4, s32 arg5);
 void sfx_play_sound_with_params(s32 arg0, u8 arg1, u8 arg2, s16 arg3);
-s32 func_8004A784(Npc* npc, f32 arg1, f32* arg2, f32* arg3, f32* arg4, f32* arg5);
-void base_UnkNpcAIFunc1(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory);
+s32 ai_check_fwd_collisions(Npc* npc, f32 arg1, f32* arg2, f32* arg3, f32* arg4, f32* arg5);
+void basic_ai_loiter_init(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory);
 void UnkNpcAIFunc1(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory);
 
 s32 func_80263230(Actor*, Actor*);

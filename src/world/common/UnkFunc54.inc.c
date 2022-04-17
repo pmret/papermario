@@ -29,18 +29,18 @@ ApiStatus N(UnkFunc54)(Evt* script, s32 isInitialCall) {
                 npc->unk_AB = npc->collisionHeight / 2;
             }
 
-            if (isInitialCall || (enemy->unk_B0 & ENEMY_AI_FLAGS_4)) {
+            if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAGS_4)) {
                 script->functionTemp[0] = 0;
                 npc->duration = 0;
                 npc->flags |= NPC_FLAG_40000 | NPC_FLAG_100 | NPC_FLAG_2;
                 disable_npc_shadow(npc);
-                npc->flags &= ~NPC_FLAG_NO_Y_MOVEMENT;
+                npc->flags &= ~NPC_FLAG_JUMPING;
                 enemy->varTable[0] = 0;
                 enemy->flags |= ENEMY_FLAGS_10000000 | ENEMY_FLAGS_8000000 | ENEMY_FLAGS_IGNORE_HAMMER |
                                 ENEMY_FLAGS_IGNORE_JUMP | ENEMY_FLAGS_IGNORE_TOUCH | ENEMY_FLAGS_200000 |
                                 ENEMY_FLAGS_100000 | ENEMY_FLAGS_40;
-                if (enemy->unk_B0 & ENEMY_AI_FLAGS_4) {
-                    enemy->unk_B0 &= ~ENEMY_AI_FLAGS_4;
+                if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
+                    enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
                 }
             }
 
@@ -77,7 +77,7 @@ ApiStatus N(UnkFunc54)(Evt* script, s32 isInitialCall) {
                         npc->moveToPos.y = npc2->pos.y;
                         npc->flags &= ~NPC_FLAG_2;
                         enable_npc_shadow(npc);
-                        npc->flags |= NPC_FLAG_NO_Y_MOVEMENT;
+                        npc->flags |= NPC_FLAG_JUMPING;
                         enemy->flags &= ~(ENEMY_FLAGS_10000000 | ENEMY_FLAGS_8000000 | ENEMY_FLAGS_IGNORE_HAMMER |
                                           ENEMY_FLAGS_IGNORE_JUMP | ENEMY_FLAGS_IGNORE_TOUCH);
                         npc->duration = 90;
@@ -136,7 +136,7 @@ ApiStatus N(UnkFunc54)(Evt* script, s32 isInitialCall) {
                 npc->jumpVelocity = 0.0f;
                 npc->flags |= NPC_FLAG_2;
                 disable_npc_shadow(npc);
-                npc->flags &= ~NPC_FLAG_NO_Y_MOVEMENT;
+                npc->flags &= ~NPC_FLAG_JUMPING;
                 enemy->flags |= ENEMY_FLAGS_10000000 | ENEMY_FLAGS_8000000 | ENEMY_FLAGS_IGNORE_HAMMER |
                                 ENEMY_FLAGS_IGNORE_JUMP | ENEMY_FLAGS_IGNORE_TOUCH;
                 script->functionTemp[0] = 0;

@@ -154,7 +154,7 @@ glabel func_80240C90_916A00
 .L80240E9C_916C0C:
 /* 916C0C 80240E9C 0260202D */  daddu     $a0, $s3, $zero
 /* 916C10 80240EA0 0280282D */  daddu     $a1, $s4, $zero
-/* 916C14 80240EA4 0C0127DF */  jal       func_80049F7C
+/* 916C14 80240EA4 0C0127DF */  jal       basic_ai_chase_init
 /* 916C18 80240EA8 0200302D */   daddu    $a2, $s0, $zero
 /* 916C1C 80240EAC 8E630070 */  lw        $v1, 0x70($s3)
 /* 916C20 80240EB0 2402000D */  addiu     $v0, $zero, 0xd
@@ -163,7 +163,7 @@ glabel func_80240C90_916A00
 .L80240EBC_916C2C:
 /* 916C2C 80240EBC 0260202D */  daddu     $a0, $s3, $zero
 /* 916C30 80240EC0 0280282D */  daddu     $a1, $s4, $zero
-/* 916C34 80240EC4 0C012849 */  jal       func_8004A124
+/* 916C34 80240EC4 0C012849 */  jal       basic_ai_chase
 /* 916C38 80240EC8 0200302D */   daddu    $a2, $s0, $zero
 /* 916C3C 80240ECC 8E630070 */  lw        $v1, 0x70($s3)
 /* 916C40 80240ED0 2402000E */  addiu     $v0, $zero, 0xe

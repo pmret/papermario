@@ -1,7 +1,7 @@
 #include "common.h"
 #include "npc.h"
 
-void func_8004A6F0(Evt* script) {
+void ai_suspend_for_time(Evt* script) {
     Npc* npc = get_npc_unsafe(script->owner1.enemy->npcID);
 
     npc->duration--;
@@ -10,7 +10,7 @@ void func_8004A6F0(Evt* script) {
     }
 }
 
-void func_8004A73C(Evt* script) {
+void basic_ai_suspend(Evt* script) {
     Enemy* enemy = script->owner1.enemy;
 
     get_npc_unsafe(enemy->npcID);
@@ -19,49 +19,59 @@ void func_8004A73C(Evt* script) {
     }
 }
 
-s32 func_8004A784(Npc* npc, f32 arg1, f32* outYaw, f32* outDist1, f32* outDist2, f32* outDist3) {
+s32 ai_check_fwd_collisions(Npc* npc, f32 time, f32* outYaw, f32* outDistFwd, f32* outDistCW, f32* outDistCCW) {
     f32 x1, y1, z1;
     f32 x2, y2, z2;
     f32 x3, y3, z3;
-    f32 dist1 = -1.0f;
-    f32 dist2 = -1.0f;
-    f32 dist3 = -1.0f;
+    f32 fwdHitDist = -1.0f;
+    f32 cwHitDist = -1.0f;
+    f32 ccwHitDist = -1.0f;
     f32 yaw;
-    s32 ret;
+    s32 fwdHit;
 
     x1 = npc->pos.x;
     y1 = npc->pos.y;
     z1 = npc->pos.z;
     yaw = *outYaw;
 
-    ret = npc_test_move_simple_with_slipping(npc->collisionChannel, &x1, &y1, &z1, npc->moveSpeed * arg1,
-                                             yaw, npc->collisionHeight, npc->collisionRadius);
-    if (ret != 0) {
-        dist1 = dist2D(npc->pos.x, npc->pos.z, x1, z1);
+    fwdHit = npc_test_move_simple_with_slipping(npc->collisionChannel,
+            &x1, &y1, &z1,
+            npc->moveSpeed * time,
+            yaw,
+            npc->collisionHeight,
+            npc->collisionRadius);
+            
+    if (fwdHit != 0) {
+        fwdHitDist = dist2D(npc->pos.x, npc->pos.z, x1, z1);
 
         x2 = npc->pos.x;
         y2 = npc->pos.y;
         z2 = npc->pos.z;
-        if (npc_test_move_simple_with_slipping(npc->collisionChannel, &x2, &y2, &z2, npc->moveSpeed * arg1,
-                                               clamp_angle(yaw + 35.0f), npc->collisionHeight,
-                                                           npc->collisionRadius) != 0) {
-            dist2 = dist2D(npc->pos.x, npc->pos.z, x2, z2);
+        if (npc_test_move_simple_with_slipping(npc->collisionChannel,
+                &x2, &y2, &z2, npc->moveSpeed * time,
+                clamp_angle(yaw + 35.0f),
+                npc->collisionHeight,
+                npc->collisionRadius) != 0) {
+            cwHitDist = dist2D(npc->pos.x, npc->pos.z, x2, z2);
         }
 
         x3 = npc->pos.x;
         y3 = npc->pos.y;
         z3 = npc->pos.z;
-        if (npc_test_move_simple_with_slipping(npc->collisionChannel, &x3, &y3, &z3, npc->moveSpeed * arg1,
-                                               clamp_angle(yaw - 35.0f), npc->collisionHeight, npc->collisionRadius)
-                                               != 0) {
-            dist3 = dist2D(npc->pos.x, npc->pos.z, x3, z3);
+        if (npc_test_move_simple_with_slipping(npc->collisionChannel,
+                &x3, &y3, &z3,
+                npc->moveSpeed * time,
+                clamp_angle(yaw - 35.0f),
+                npc->collisionHeight,
+                npc->collisionRadius) != 0) {
+            ccwHitDist = dist2D(npc->pos.x, npc->pos.z, x3, z3);
         }
 
-        if ((dist2 < dist1 && dist3 < dist2) || (dist3 < dist1 && dist2 < dist3)) {
+        if ((cwHitDist < fwdHitDist && ccwHitDist < cwHitDist) || (ccwHitDist < fwdHitDist && cwHitDist < ccwHitDist)) {
             yaw = npc->yaw;
-        } else if ((dist1 < dist2 && dist3 < dist1) || (dist3 < dist2 && dist1 < dist3)) {
+        } else if ((fwdHitDist < cwHitDist && ccwHitDist < fwdHitDist) || (ccwHitDist < cwHitDist && fwdHitDist < ccwHitDist)) {
             yaw = npc->yaw + 35.0f;
-        } else if ((dist1 < dist3 && dist2 < dist1) || (dist2 < dist3 && dist1 < dist2)) {
+        } else if ((fwdHitDist < ccwHitDist && cwHitDist < fwdHitDist) || (cwHitDist < ccwHitDist && fwdHitDist < cwHitDist)) {
             yaw = npc->yaw - 35.0f;
         }
     }
@@ -69,14 +79,14 @@ s32 func_8004A784(Npc* npc, f32 arg1, f32* outYaw, f32* outDist1, f32* outDist2,
     if (outYaw != NULL) {
         *outYaw = clamp_angle(yaw);
     }
-    if (outDist1 != NULL) {
-        *outDist1 = dist1;
+    if (outDistFwd != NULL) {
+        *outDistFwd = fwdHitDist;
     }
-    if (outDist2 != NULL) {
-        *outDist2 = dist2;
+    if (outDistCW != NULL) {
+        *outDistCW = cwHitDist;
     }
-    if (outDist3 != NULL) {
-        *outDist3 = dist3;
+    if (outDistCCW != NULL) {
+        *outDistCCW = ccwHitDist;
     }
-    return ret;
+    return fwdHit;
 }

@@ -7,7 +7,7 @@ void N(UnkFunc8)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* te
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 var;
 
-    if (func_800490B4(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 0)) {
+    if (basic_ai_try_detect_player(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 0)) {
         npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
         script->functionTemp[0] = 12;
     } else {

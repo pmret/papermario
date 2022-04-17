@@ -150,7 +150,7 @@ glabel func_80243C90_C75110
 /* C75328 80243EA8 08090FAE */  j         .L80243EB8
 /* C7532C 80243EAC 00000000 */   nop
 .L80243EB0:
-/* C75330 80243EB0 0C0129CF */  jal       func_8004A73C
+/* C75330 80243EB0 0C0129CF */  jal       basic_ai_suspend
 /* C75334 80243EB4 0240202D */   daddu    $a0, $s2, $zero
 .L80243EB8:
 /* C75338 80243EB8 8FBF0048 */  lw        $ra, 0x48($sp)

@@ -150,7 +150,7 @@ glabel func_80241754_D19F34
 /* D1A14C 8024196C 0809065F */  j         .L8024197C
 /* D1A150 80241970 00000000 */   nop
 .L80241974:
-/* D1A154 80241974 0C0129CF */  jal       func_8004A73C
+/* D1A154 80241974 0C0129CF */  jal       basic_ai_suspend
 /* D1A158 80241978 0240202D */   daddu    $a0, $s2, $zero
 .L8024197C:
 /* D1A15C 8024197C 8FBF0048 */  lw        $ra, 0x48($sp)

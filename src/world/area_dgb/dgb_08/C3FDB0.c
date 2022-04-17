@@ -268,7 +268,7 @@ f32 N(sixFloats)[] = {
 
 EvtScript N(80244478) = {
     EVT_CALL(SetSelfEnemyFlagBits, ((NPC_FLAG_MOTION_BLUR | NPC_FLAG_1000000 | NPC_FLAG_SIMPLIFIED_PHYSICS | NPC_FLAG_PARTICLE | NPC_FLAG_8000000 | NPC_FLAG_10000000 | NPC_FLAG_20000000)), TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, ((NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT)), TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, ((NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING)), TRUE)
     EVT_RETURN
     EVT_END
 };
@@ -590,7 +590,7 @@ StaticNpc N(npcGroup_80245290)[] = {
         .id = NPC_WORLD_CLUBBA1,
         .settings = &N(npcSettings_80244434),
         .pos = { 0.0f, -1000.0f, 0.0f },
-        .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_DROPS,
+        .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_DROPS,
         .yaw = 0,
         .dropFlags = NPC_DROP_FLAGS_80,
         .heartDrops = NO_DROPS,
@@ -659,7 +659,7 @@ StaticNpc N(npcGroup_80245670)[] = {
         .id = NPC_WORLD_CLUBBA3,
         .settings = &N(npcSettings_80244434),
         .pos = { 0.0f, -1000.0f, 0.0f },
-        .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_DROPS,
+        .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_DROPS,
         .yaw = 0,
         .dropFlags = NPC_DROP_FLAGS_80,
         .heartDrops = NO_DROPS,
@@ -728,7 +728,7 @@ StaticNpc N(npcGroup_80245A50)[] = {
         .id = NPC_WORLD_CLUBBA5,
         .settings = &N(npcSettings_80244434),
         .pos = { 0.0f, -1000.0f, 0.0f },
-        .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_DROPS,
+        .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_DROPS,
         .yaw = 0,
         .dropFlags = NPC_DROP_FLAGS_80,
         .heartDrops = NO_DROPS,
@@ -879,7 +879,7 @@ StaticNpc N(npcGroup_80246528) = {
     .id = NPC_WORLD_CLUBBA6,
     .settings = &N(npcSettings_80244A28),
     .pos = { 426.0f, 0.0f, 38.0f },
-    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_200000 | NPC_FLAG_400000,
+    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_200000 | NPC_FLAG_400000,
     .init = &N(init_802464C4),
     .yaw = 270,
     .dropFlags = NPC_DROP_FLAGS_80,
@@ -1010,16 +1010,16 @@ ApiStatus N(func_802414AC_C4125C)(Evt* script, s32 isInitialCall) {
     EnemyTerritoryThing* territoryPtr = &territory;
     NpcAISettings* npcAISettings = (NpcAISettings*)evt_get_variable(script, *args++);
 
-    territory.unk_00 = 0;
+    territory.skipPlayerDetectChance = 0;
     territory.shape = enemy->territory->wander.detectShape;
     territory.pointX = enemy->territory->wander.detect.x;
     territory.pointZ = enemy->territory->wander.detect.z;
     territory.sizeX = enemy->territory->wander.detectSizeX;
     territory.sizeZ = enemy->territory->wander.detectSizeZ;
-    territory.unk_18 = 65.0f;
+    territory.halfHeight = 65.0f;
     territory.unk_1C = 0;
 
-    if (isInitialCall || (enemy->unk_B0 & ENEMY_AI_FLAGS_4)) {
+    if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAGS_4)) {
         script->functionTemp[0] = 0;
         npc->duration = 0;
         npc->currentAnim.w = enemy->animList[0];
@@ -1029,10 +1029,10 @@ ApiStatus N(func_802414AC_C4125C)(Evt* script, s32 isInitialCall) {
         } else {
             npc->flags = (npc->flags & ~0x200) | 0x8;
         }
-        if (enemy->unk_B0 & ENEMY_AI_FLAGS_4) {
+        if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
             script->functionTemp[0] = 99;
             script->functionTemp[1] = 0;
-            enemy->unk_B0 &= ~ENEMY_AI_FLAGS_4;
+            enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
         }
         enemy->varTable[0] = 0;
     }
@@ -1043,27 +1043,27 @@ ApiStatus N(func_802414AC_C4125C)(Evt* script, s32 isInitialCall) {
 
     switch (script->functionTemp[0]) {
         case 0:
-            func_800495A0(script, npcAISettings, territoryPtr);
+            basic_ai_wander_init(script, npcAISettings, territoryPtr);
         case 1:
-            func_800496B8(script, npcAISettings, territoryPtr);
+            basic_ai_wander(script, npcAISettings, territoryPtr);
             break;
         case 2:
-            base_UnkNpcAIFunc1(script, npcAISettings, territoryPtr);
+            basic_ai_loiter_init(script, npcAISettings, territoryPtr);
         case 3:
-            func_80049C04(script, npcAISettings, territoryPtr);
+            basic_ai_loiter(script, npcAISettings, territoryPtr);
             break;
         case 10:
-            func_80049E3C(script, npcAISettings, territoryPtr);
+            basic_ai_found_player_jump_init(script, npcAISettings, territoryPtr);
         case 11:
-            func_80049ECC(script, npcAISettings, territoryPtr);
+            basic_ai_found_player_jump(script, npcAISettings, territoryPtr);
             break;
         case 12:
-            func_80049F7C(script, npcAISettings, territoryPtr);
+            basic_ai_chase_init(script, npcAISettings, territoryPtr);
         case 13:
-            func_8004A124(script, npcAISettings, territoryPtr);
+            basic_ai_chase(script, npcAISettings, territoryPtr);
             break;
         case 14:
-            func_8004A3E8(script, npcAISettings, territoryPtr);
+            basic_ai_lose_player(script, npcAISettings, territoryPtr);
             break;
         case 30:
             N(UnkNpcAIFunc6)(script);
@@ -1081,7 +1081,7 @@ ApiStatus N(func_802414AC_C4125C)(Evt* script, s32 isInitialCall) {
             N(UnkNpcAIFunc5)(script);
             break;
         case 99:
-            func_8004A73C(script);
+            basic_ai_suspend(script);
     }
 
     return ApiStatus_BLOCK;
@@ -1120,7 +1120,7 @@ void N(func_80242DB0_C42B60)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
-    if (func_800490B4(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 1)) {
+    if (basic_ai_try_detect_player(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 1)) {
         npc_move_heading(npc, npc->moveSpeed, npc->yaw);
         if (dist2D(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x,
                    gPlayerStatusPtr->position.z) <= (npc->moveSpeed * 2.5)) {
@@ -1168,7 +1168,7 @@ void N(func_80242F94_C42D44)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
     s32 temp_f8_2;
 
     sfx_adjust_env_sound_pos(0x80000011, 2, npc->pos.x, npc->pos.y, npc->pos.z);
-    if (!func_800490B4(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 1)) {
+    if (!basic_ai_try_detect_player(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 1)) {
         enemy->varTable[0] &= ~0x100;
         npc->rotation.y = 0.0f;
         npc->flags &= ~0x00200000;
@@ -1307,7 +1307,7 @@ void N(func_802435D8_C43388)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
     enemy->varTable[2] = clamp_angle(enemy->varTable[2] + 12);
     if (script->functionTemp[1] <= 0) {
         script->functionTemp[1] = aiSettings->unk_14;
-        if (func_800490B4(territory, enemy, aiSettings->alertRadius * 0.5, aiSettings->unk_10.f * 0.5, 0)) {
+        if (basic_ai_try_detect_player(territory, enemy, aiSettings->alertRadius * 0.5, aiSettings->unk_10.f * 0.5, 0)) {
             fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 12, &var);
             ai_enemy_play_sound(npc, 0x2F4, 0x200000);
             npc->moveToPos.y = npc->pos.y;
@@ -1336,13 +1336,13 @@ ApiStatus N(func_802438F0_C436A0)(Evt* script, s32 isInitialCall) {
     EnemyTerritoryThing* territoryPtr = &territory;
     NpcAISettings* npcAISettings = (NpcAISettings*) evt_get_variable(script, *args);
 
-    territory.unk_00 = 0;
+    territory.skipPlayerDetectChance = 0;
     territory.shape = enemy->territory->wander.detectShape;
     territory.pointX = enemy->territory->wander.detect.x;
     territory.pointZ = enemy->territory->wander.detect.z;
     territory.sizeX = enemy->territory->wander.detectSizeX;
     territory.sizeZ = enemy->territory->wander.detectSizeZ;
-    territory.unk_18 = 125.0f;
+    territory.halfHeight = 125.0f;
     territory.unk_1C = 0;
 
     if (isInitialCall) {
@@ -1425,7 +1425,7 @@ ApiStatus N(func_80243B98_C43948)(Evt* script, s32 isInitialCall) {
 ApiStatus N(func_80243C10_C439C0)(Evt* script, s32 isInitialCall) {
     if (get_enemy_safe(9)) {
         Enemy* enemy = get_enemy(9);
-        enemy->unk_B0 |= 0x80;
+        enemy->aiFlags |= 0x80;
         return ApiStatus_DONE2;
     }
 

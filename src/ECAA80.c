@@ -87,7 +87,7 @@ void func_80240D80_ECAA80(Evt* script, NpcAISettings* npcAISettings, EnemyTerrit
         dist2D(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
 
         if ((phi_f22 < npc->moveSpeed * 1.5) && (phi_f24 < npc->moveSpeed * 1.5) && (phi_f26 < npc->moveSpeed * 1.5) &&
-            (func_800490B4(territory, enemy, npcAISettings->alertRadius, npcAISettings->unk_10.f, 0))) {
+            (basic_ai_try_detect_player(territory, enemy, npcAISettings->alertRadius, npcAISettings->unk_10.f, 0))) {
             phi_s3 = TRUE;
         }
 
@@ -144,13 +144,13 @@ ApiStatus func_8024150C_ECB20C(Evt* script, s32 isInitialCall) {
     EnemyTerritoryThing* territoryPtr = &territory;
     NpcAISettings* npcAISettings = (NpcAISettings*)evt_get_variable(script, *args++);
 
-    territory.unk_00 = 0;
+    territory.skipPlayerDetectChance = 0;
     territory.shape = enemy->territory->wander.detectShape;
     territory.pointX = enemy->territory->wander.detect.x;
     territory.pointZ = enemy->territory->wander.detect.z;
     territory.sizeX = enemy->territory->wander.detectSizeX;
     territory.sizeZ = enemy->territory->wander.detectSizeZ;
-    territory.unk_18 = 100.0f;
+    territory.halfHeight = 100.0f;
     territory.unk_1C = 0;
 
     enemy->unk_108.x = npc->pos.x;
@@ -159,38 +159,38 @@ ApiStatus func_8024150C_ECB20C(Evt* script, s32 isInitialCall) {
     enemy->unk_114 = 0.01f;
     enemy->unk_118 = 0.01f;
 
-    if (isInitialCall || (enemy->unk_B0 & ENEMY_AI_FLAGS_4)) {
+    if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAGS_4)) {
         script->functionTemp[0] = 0;
         npc->duration = 0;
         npc->currentAnim.w = enemy->animList[0];
-        npc->flags &= ~NPC_FLAG_NO_Y_MOVEMENT;
+        npc->flags &= ~NPC_FLAG_JUMPING;
         if (!enemy->territory->wander.isFlying) {
             npc->flags = (npc->flags | NPC_FLAG_GRAVITY) & ~NPC_FLAG_ENABLE_HIT_SCRIPT;
         } else {
             npc->flags = (npc->flags & ~NPC_FLAG_GRAVITY) | NPC_FLAG_ENABLE_HIT_SCRIPT;
         }
-        if (enemy->unk_B0 & ENEMY_AI_FLAGS_4) {
+        if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
             script->functionTemp[0] = 99;
             script->functionTemp[1] = 0;
-            enemy->unk_B0 &= ~ENEMY_AI_FLAGS_4;
+            enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
         }
     }
 
     switch (script->functionTemp[0]) {
         case 0:
-            func_800495A0(script, npcAISettings, territoryPtr);
+            basic_ai_wander_init(script, npcAISettings, territoryPtr);
         case 1:
-            func_800496B8(script, npcAISettings, territoryPtr);
+            basic_ai_wander(script, npcAISettings, territoryPtr);
             break;
         case 2:
-            base_UnkNpcAIFunc1(script, npcAISettings, territoryPtr);
+            basic_ai_loiter_init(script, npcAISettings, territoryPtr);
         case 3:
-            func_80049C04(script, npcAISettings, territoryPtr);
+            basic_ai_loiter(script, npcAISettings, territoryPtr);
             break;
         case 10:
-            func_80049E3C(script, npcAISettings, territoryPtr);
+            basic_ai_found_player_jump_init(script, npcAISettings, territoryPtr);
         case 11:
-            func_80049ECC(script, npcAISettings, territoryPtr);
+            basic_ai_found_player_jump(script, npcAISettings, territoryPtr);
             break;
         case 12:
             func_80240D80_ECAA80(script, npcAISettings, territoryPtr);
@@ -201,7 +201,7 @@ ApiStatus func_8024150C_ECB20C(Evt* script, s32 isInitialCall) {
             func_802414C8_ECB1C8(script, npcAISettings, territoryPtr);
             break;
         case 99:
-            func_8004A73C(script);
+            basic_ai_suspend(script);
     }
 
     return ApiStatus_BLOCK;

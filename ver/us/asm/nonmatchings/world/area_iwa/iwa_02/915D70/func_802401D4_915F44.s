@@ -38,7 +38,7 @@ glabel func_802401D4_915F44
 /* 915FAC 8024023C 8E470010 */  lw        $a3, 0x10($s2)
 /* 915FB0 80240240 46200020 */  cvt.s.d   $f0, $f0
 /* 915FB4 80240244 44060000 */  mfc1      $a2, $f0
-/* 915FB8 80240248 0C01242D */  jal       func_800490B4
+/* 915FB8 80240248 0C01242D */  jal       basic_ai_try_detect_player
 /* 915FBC 8024024C 0200282D */   daddu    $a1, $s0, $zero
 /* 915FC0 80240250 10400021 */  beqz      $v0, .L802402D8
 /* 915FC4 80240254 0000202D */   daddu    $a0, $zero, $zero

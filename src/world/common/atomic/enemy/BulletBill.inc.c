@@ -16,18 +16,18 @@ ApiStatus N(BulletBill_Think)(Evt* script, s32 isInitialCall) {
     if (isInitialCall || enemy->varTable[0] == 0x64) {
         script->functionTemp[0] = 0;
         npc->duration = 0;
-        enemy->unk_B0 |= ENEMY_AI_FLAGS_8;
+        enemy->aiFlags |= ENEMY_AI_FLAGS_8;
         enemy->flags |= 0x200000;
         npc->flags |= 0x40000;
         enemy->varTable[0] = 0;
         enemy->varTable[1] = -1;
     }
     
-    if (enemy->unk_B0 & ENEMY_AI_FLAGS_4) {
+    if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
         if (enemy->unk_B4 != 0) {
             return 0;
         }
-        enemy->unk_B0 &= ~ENEMY_AI_FLAGS_4;
+        enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
     }
 
     switch (script->functionTemp[0]) {

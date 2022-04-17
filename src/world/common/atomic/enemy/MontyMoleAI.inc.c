@@ -36,7 +36,7 @@ static s32 N(MontyMoleAI_CanAttack)(Evt* script, EnemyTerritoryThing* territory,
     enemy = script->owner1.enemy;
     npc = get_npc_unsafe(enemy->npcID);
     cam = &gCameras[gCurrentCamID];
-    retVal = func_800490B4(territory, enemy, radius * 1.1, arg3, 0) != 0;
+    retVal = basic_ai_try_detect_player(territory, enemy, radius * 1.1, arg3, 0) != 0;
     // check npc facing angle for sight of player
     angle = 270.0f;
     if (clamp_angle(get_clamped_angle_diff(cam->currentYaw, npc->yaw)) < 180.0) {
@@ -228,25 +228,25 @@ ApiStatus N(MontyMoleAI_Main)(Evt* script, s32 isInitialCall) {
     EnemyTerritoryThing* territory = &tempTerritory;
     NpcAISettings* aiSettings = (NpcAISettings*)evt_get_variable(script, *args++);
     
-    territory->unk_00 = 0;
+    territory->skipPlayerDetectChance = 0;
     territory->shape = enemy->territory->wander.detectShape;
     territory->pointX = enemy->territory->wander.detect.x;
     territory->pointZ = enemy->territory->wander.detect.z;
     territory->sizeX = enemy->territory->wander.detectSizeX;
     territory->sizeZ = enemy->territory->wander.detectSizeZ;
-    territory->unk_18 = 65.0f;
+    territory->halfHeight = 65.0f;
     territory->unk_1C = 0;
 
     if (isInitialCall) {
         script->functionTemp[0] = AI_STATE_MOLE_INIT;
         npc->duration = 0;
-        npc->flags &= -(NPC_FLAG_PASSIVE | NPC_FLAG_NO_Y_MOVEMENT);
-        enemy->unk_B0 |= (ENEMY_AI_FLAGS_8 | ENEMY_AI_FLAGS_10);
+        npc->flags &= -(NPC_FLAG_PASSIVE | NPC_FLAG_JUMPING);
+        enemy->aiFlags |= (ENEMY_AI_FLAGS_8 | ENEMY_AI_FLAGS_10);
     }
     
-    if (enemy->unk_B0 & ENEMY_AI_FLAGS_4) {
+    if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
         if (enemy->unk_B4 == 0) {
-            enemy->unk_B0 &= ~ENEMY_AI_FLAGS_4;
+            enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
         } else {
             return ApiStatus_BLOCK;
         }

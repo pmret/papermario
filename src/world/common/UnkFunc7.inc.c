@@ -9,7 +9,7 @@ ApiStatus N(UnkFunc7)(Evt* script, s32 isInitialCall) {
     f32 posX, posZ;
     s32 func;
 
-    if (isInitialCall || (enemy->unk_B0 & ENEMY_AI_FLAGS_4)) {
+    if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAGS_4)) {
         script->functionTemp[0] = 0;
         npc->duration = 0;
         npc->flags |= 0x102;
@@ -17,8 +17,8 @@ ApiStatus N(UnkFunc7)(Evt* script, s32 isInitialCall) {
         npc->pos.x = 0.0f;
         npc->pos.y = -1000.0f;
         npc->pos.z = 0.0f;
-        if (enemy->unk_B0 & ENEMY_AI_FLAGS_4) {
-            enemy->unk_B0 &= ~ENEMY_AI_FLAGS_4;
+        if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
+            enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
         }
     }
 

@@ -10,16 +10,16 @@ ApiStatus N(UnkNpcAIMainFunc)(Evt* script, s32 isInitialCall) {
     NpcAISettings* npcAISettings = (NpcAISettings*)evt_get_variable(script, *args++);
     f32 posX, posY, posZ, posW;
 
-    territory.unk_00 = 0;
+    territory.skipPlayerDetectChance = 0;
     territory.shape = enemy->territory->patrol.detectShape;
     territory.pointX = enemy->territory->patrol.detect.x;
     territory.pointZ = enemy->territory->patrol.detect.z;
     territory.sizeX = enemy->territory->patrol.detectSizeX;
     territory.sizeZ = enemy->territory->patrol.detectSizeZ;
-    territory.unk_18 = 65.0f;
+    territory.halfHeight = 65.0f;
     territory.unk_1C = 0;
 
-    if (isInitialCall || enemy->unk_B0 & ENEMY_AI_FLAGS_4) {
+    if (isInitialCall || enemy->aiFlags & ENEMY_AI_FLAGS_4) {
         script->functionTemp[0] = 0;
         npc->duration = 0;
         npc->currentAnim.w = enemy->animList[0];
@@ -30,10 +30,10 @@ ApiStatus N(UnkNpcAIMainFunc)(Evt* script, s32 isInitialCall) {
             npc->flags = (npc->flags & ~0x200) | 8;
         }
 
-        if (enemy->unk_B0 & ENEMY_AI_FLAGS_4) {
+        if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
             script->functionTemp[0] = 99;
             script->functionTemp[1] = 0;
-            enemy->unk_B0 &= ~ENEMY_AI_FLAGS_4;
+            enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
         } else if (enemy->flags & ENEMY_FLAGS_40000000) {
             script->functionTemp[0] = 12;
             enemy->flags &= ~ENEMY_FLAGS_40000000;
@@ -80,7 +80,7 @@ ApiStatus N(UnkNpcAIMainFunc)(Evt* script, s32 isInitialCall) {
             N(UnkFunc16)(script, npcAISettings, territoryPtr);
             break;
         case 99:
-            func_8004A73C(script);
+            basic_ai_suspend(script);
     }
     return ApiStatus_BLOCK;
 }

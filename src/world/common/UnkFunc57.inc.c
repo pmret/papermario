@@ -11,7 +11,7 @@ ApiStatus N(UnkFunc57)(Evt* script, s32 isInitialCall) {
     f32 t1;
     f32 t2;
 
-    if (isInitialCall || (enemy->unk_B0 & ENEMY_AI_FLAGS_4)) {
+    if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAGS_4)) {
         script->functionTemp[0] = 0;
         npc1->duration = 0;
         npc1->flags |= NPC_FLAG_200000 | NPC_FLAG_40000 | NPC_FLAG_100 |  NPC_FLAG_2;
@@ -19,8 +19,8 @@ ApiStatus N(UnkFunc57)(Evt* script, s32 isInitialCall) {
                         ENEMY_FLAGS_200000 | ENEMY_FLAGS_40;
         npc1->scale.x = 0.4f;
         npc1->scale.y = 0.4f;
-        if (enemy->unk_B0 & ENEMY_AI_FLAGS_4) {
-            enemy->unk_B0 &= ~ENEMY_AI_FLAGS_4;
+        if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
+            enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
         }
     }
 

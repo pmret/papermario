@@ -9,21 +9,21 @@ ApiStatus N(UnkNpcAIMainFunc4)(Evt* script, s32 isInitialCall) {
     EnemyTerritoryThing* territoryPtr = &territory;
     NpcAISettings* aiSettings = (NpcAISettings*)evt_get_variable(script, *args++);
 
-    territory.unk_00 = 0;
+    territory.skipPlayerDetectChance = 0;
     territory.shape = enemy->territory->wander.detectShape;
     territory.pointX = enemy->territory->wander.detect.x;
     territory.pointZ = enemy->territory->wander.detect.z;
     territory.sizeX = enemy->territory->wander.detectSizeX;
     territory.sizeZ = enemy->territory->wander.detectSizeZ;
-    territory.unk_18 = 65.0f;
+    territory.halfHeight = 65.0f;
     territory.unk_1C = 0;
 
-    if (isInitialCall || (enemy->unk_B0 & ENEMY_AI_FLAGS_4)) {
+    if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAGS_4)) {
         script->functionTemp[0] = 0;
         npc->duration = 0;
         enemy->varTable[0] = npc->yaw;
         npc->currentAnim.w = enemy->animList[0];
-        npc->flags &= ~NPC_FLAG_NO_Y_MOVEMENT;
+        npc->flags &= ~NPC_FLAG_JUMPING;
 
         if (!(enemy->territory->wander.isFlying)) {
             npc->flags |= NPC_FLAG_GRAVITY;
@@ -33,10 +33,10 @@ ApiStatus N(UnkNpcAIMainFunc4)(Evt* script, s32 isInitialCall) {
             npc->flags |= NPC_FLAG_ENABLE_HIT_SCRIPT;
         }
 
-        if (enemy->unk_B0 & ENEMY_AI_FLAGS_4) {
+        if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
             script->functionTemp[0] = 99;
             script->functionTemp[1] = 15;
-            enemy->unk_B0 &= ~ENEMY_AI_FLAGS_4;
+            enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
         } else if (enemy->flags & ENEMY_FLAGS_40000000) {
             script->functionTemp[0] = 12;
             enemy->flags &= ~ENEMY_FLAGS_40000000;
@@ -68,7 +68,7 @@ ApiStatus N(UnkNpcAIMainFunc4)(Evt* script, s32 isInitialCall) {
             N(UnkNpcAIFunc45)(script, aiSettings, territoryPtr);
             break;
         case 99:
-            func_8004A73C(script);
+            basic_ai_suspend(script);
             break;
     }
     return ApiStatus_BLOCK;

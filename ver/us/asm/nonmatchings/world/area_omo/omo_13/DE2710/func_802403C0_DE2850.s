@@ -18,7 +18,7 @@ glabel func_802403C0_DE2850
 /* DE2884 802403F4 AFA00010 */  sw        $zero, 0x10($sp)
 /* DE2888 802403F8 AFA00014 */  sw        $zero, 0x14($sp)
 /* DE288C 802403FC 8E050018 */  lw        $a1, 0x18($s0)
-/* DE2890 80240400 0C0129E1 */  jal       func_8004A784
+/* DE2890 80240400 0C0129E1 */  jal       ai_check_fwd_collisions
 /* DE2894 80240404 0000382D */   daddu    $a3, $zero, $zero
 /* DE2898 80240408 14400005 */  bnez      $v0, .L80240420
 /* DE289C 8024040C 00000000 */   nop

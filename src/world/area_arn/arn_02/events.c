@@ -250,7 +250,7 @@ void N(func_802401D4_BDD384)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
 
     if (script->functionTemp[1] <= 0) {
         script->functionTemp[1] = aiSettings->unk_14;
-        if (func_800490B4(territory, enemy, aiSettings->alertRadius * 0.85, aiSettings->unk_10.f, 0)) {
+        if (basic_ai_try_detect_player(territory, enemy, aiSettings->alertRadius * 0.85, aiSettings->unk_10.f, 0)) {
             npc->currentAnim.w = enemy->animList[9];
             fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &var);
             ai_enemy_play_sound(npc, 0x2F4, 0x200000);
@@ -333,13 +333,13 @@ s32 N(func_80240C90_BDDE40)(Evt* script, s32 isInitialCall) {
 
     enemy->varTable[10] = evt_get_variable(script, *args++);
 
-    territory.unk_00 = 0;
+    territory.skipPlayerDetectChance = 0;
     territory.shape = enemy->territory->wander.detectShape;
     territory.pointX = enemy->territory->wander.detect.x;
     territory.pointZ = enemy->territory->wander.detect.z;
     territory.sizeX = enemy->territory->wander.detectSizeX;
     territory.sizeZ = enemy->territory->wander.detectSizeZ;
-    territory.unk_18 = 40.0f;
+    territory.halfHeight = 40.0f;
     territory.unk_1C = 0;
 
     if (isInitialCall) {
@@ -353,11 +353,11 @@ s32 N(func_80240C90_BDDE40)(Evt* script, s32 isInitialCall) {
         }
     }
 
-    if (enemy->unk_B0 & ENEMY_AI_FLAGS_4) {
+    if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
         if (enemy->unk_B4 != 0) {
             return ApiStatus_BLOCK;
         }
-        enemy->unk_B0 &= ~ENEMY_AI_FLAGS_4;
+        enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
     }
 
     if ((u32)script->functionTemp[0] - 12 < 3 && N(func_80240000_BDD1B0)(script, npcAISettings, territoryPtr)) {
@@ -388,12 +388,12 @@ s32 N(func_80240C90_BDDE40)(Evt* script, s32 isInitialCall) {
             N(UnkFunc8)(script, npcAISettings, territoryPtr);
             return ApiStatus_BLOCK;
         case 12:
-            func_80049F7C(script, npcAISettings, territoryPtr);
+            basic_ai_chase_init(script, npcAISettings, territoryPtr);
             if (script->functionTemp[0] != 13) {
                 return ApiStatus_BLOCK;
             }
         case 13:
-            func_8004A124(script, npcAISettings, territoryPtr);
+            basic_ai_chase(script, npcAISettings, territoryPtr);
             if (script->functionTemp[0] != 14) {
                 return ApiStatus_BLOCK;
             }

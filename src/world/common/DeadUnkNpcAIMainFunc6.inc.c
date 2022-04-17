@@ -16,13 +16,13 @@ ApiStatus N(DeadUnkNpcAIMainFunc6)(Evt* script, s32 isInitialCall) {
     f32 x2, y2, z2, w2;
     Npc* npc2;
 
-    territory.unk_00 = 0;
+    territory.skipPlayerDetectChance = 0;
     territory.shape = enemy->territory->wander.detectShape;
     territory.pointX = enemy->territory->wander.detect.x;
     territory.pointZ = enemy->territory->wander.detect.z;
     territory.sizeX = enemy->territory->wander.detectSizeX;
     territory.sizeZ = enemy->territory->wander.detectSizeZ;
-    territory.unk_18 = 65.0f;
+    territory.halfHeight = 65.0f;
     territory.unk_1C = 0;
 
     enemy->unk_108.x = npc->pos.x;
@@ -33,14 +33,14 @@ ApiStatus N(DeadUnkNpcAIMainFunc6)(Evt* script, s32 isInitialCall) {
 
     if (isInitialCall) {
         enemy->varTable[6] = npc->collisionHeight;
-        enemy->unk_B0 |= ENEMY_AI_FLAGS_8;
+        enemy->aiFlags |= ENEMY_AI_FLAGS_8;
     }
 
     if (isInitialCall || (enemy->varTable[10] == 100)) {
         script->functionTemp[0] = 100;
         npc->duration = 0;
         npc->currentAnim.w = enemy->animList[0];
-        npc->flags &= ~NPC_FLAG_NO_Y_MOVEMENT;
+        npc->flags &= ~NPC_FLAG_JUMPING;
         enemy->flags |= ENEMY_FLAGS_200000;
         npc->flags &= ~NPC_FLAG_GRAVITY;
         npc->flags |= NPC_FLAG_ENABLE_HIT_SCRIPT;
@@ -51,11 +51,11 @@ ApiStatus N(DeadUnkNpcAIMainFunc6)(Evt* script, s32 isInitialCall) {
         npc->pos.z = 0.0f;
     }
 
-    if (enemy->unk_B0 & ENEMY_AI_FLAGS_4) {
+    if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
         npc->duration = 0;
         npc->collisionHeight = enemy->varTable[6];
-        enemy->unk_B0 &= ~ENEMY_AI_FLAGS_4;
-        if (npc->flags & NPC_FLAG_NO_Y_MOVEMENT) {
+        enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
+        if (npc->flags & NPC_FLAG_JUMPING) {
             npc->currentAnim.w = 0x4A0018;
             npc->moveSpeed = 0.0f;
             npc->jumpVelocity = 0.0f;
@@ -77,7 +77,7 @@ ApiStatus N(DeadUnkNpcAIMainFunc6)(Evt* script, s32 isInitialCall) {
 
     switch (script->functionTemp[0]) {
         case 0:
-            func_800495A0(script, aiSettings, territoryPtr);
+            basic_ai_wander_init(script, aiSettings, territoryPtr);
             npc->collisionHeight = enemy->varTable[6];
             if (enemy->varTable[13] != 0) {
                 if (npc->pos.y <= 0.0) {
@@ -88,15 +88,15 @@ ApiStatus N(DeadUnkNpcAIMainFunc6)(Evt* script, s32 isInitialCall) {
                     npc->flags &= ~NPC_FLAG_ENABLE_HIT_SCRIPT;
                 }
             }
-            func_800496B8(script, aiSettings, territoryPtr);
+            basic_ai_wander(script, aiSettings, territoryPtr);
             break;
         case 1:
-            func_800496B8(script, aiSettings, territoryPtr);
+            basic_ai_wander(script, aiSettings, territoryPtr);
             break;
         case 2:
-            base_UnkNpcAIFunc1(script, aiSettings, territoryPtr);
+            basic_ai_loiter_init(script, aiSettings, territoryPtr);
         case 3:
-            func_80049C04(script, aiSettings, territoryPtr);
+            basic_ai_loiter(script, aiSettings, territoryPtr);
             break;
         case 12:
             N(set_script_owner_npc_anim)(script, aiSettings, territoryPtr);
@@ -138,7 +138,7 @@ ApiStatus N(DeadUnkNpcAIMainFunc6)(Evt* script, s32 isInitialCall) {
             npc->moveSpeed = 2.5f;
             npc->jumpVelocity = 8.0f;
             npc->jumpScale = 0.8f;
-            npc->flags |= NPC_FLAG_NO_Y_MOVEMENT;
+            npc->flags |= NPC_FLAG_JUMPING;
             script->functionTemp[0] = 102;
         case 102:
             if (npc->moveSpeed > 0.0) {
@@ -182,7 +182,7 @@ ApiStatus N(DeadUnkNpcAIMainFunc6)(Evt* script, s32 isInitialCall) {
                         npc->flags |= NPC_FLAG_ENABLE_HIT_SCRIPT;
                     }
                     npc->flags |= NPC_FLAG_40000;
-                    npc->flags &= ~NPC_FLAG_NO_Y_MOVEMENT;
+                    npc->flags &= ~NPC_FLAG_JUMPING;
                     npc->jumpVelocity = 0.0f;
                     npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
                     npc->currentAnim.w = 0x4A001A;
@@ -218,7 +218,7 @@ ApiStatus N(DeadUnkNpcAIMainFunc6)(Evt* script, s32 isInitialCall) {
             }
             break;
         case 200:
-            func_8004A73C(script);
+            basic_ai_suspend(script);
             break;
     }
     return ApiStatus_BLOCK;

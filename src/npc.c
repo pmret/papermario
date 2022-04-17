@@ -425,7 +425,7 @@ INCLUDE_ASM(s32, "npc", npc_do_player_collision, Npc* npc);
 
 void npc_do_gravity(Npc* npc) {
     if (npc->flags & NPC_FLAG_GRAVITY) {
-        if (npc->flags & NPC_FLAG_NO_Y_MOVEMENT) {
+        if (npc->flags & NPC_FLAG_JUMPING) {
             npc->flags &= ~NPC_FLAG_1000;
         } else {
             f32 xTemp;
@@ -472,7 +472,7 @@ s32 func_800397E8(Npc* npc, f32 arg1) {
         f32 oldLength;
         s32 phi_v0;
 
-        if (npc->flags & NPC_FLAG_NO_Y_MOVEMENT) {
+        if (npc->flags & NPC_FLAG_JUMPING) {
             npc->flags &= ~NPC_FLAG_1000;
             return 0;
         }
@@ -547,7 +547,7 @@ void update_npcs(void) {
                         npc->jumpVelocity = 0.0f;
                         npc->moveSpeed = 0.0f;
                         npc->jumpScale = 0.0f;
-                        npc->flags &= ~NPC_FLAG_NO_Y_MOVEMENT;
+                        npc->flags &= ~NPC_FLAG_JUMPING;
                     }
 
                     if (!(npc->flags & NPC_FLAG_NO_ANIMS_LOADED)) {

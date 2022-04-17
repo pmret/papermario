@@ -620,6 +620,7 @@ enum SoundIDs {
     SOUND_HIT_SHOCK                 = 0x0000037B,
     SOUND_GENERAL_WHISTLE           = 0x00000395,
     SOUND_OPEN_SHELL                = 0x000003D4,
+    SOUND_3E1                       = 0x000003E1,
     SOUND_JUMP_3E2                  = 0x000003E2,
     SOUND_MISS_JUMP                 = 0x000003E3,
     SOUND_DEATH                     = 0x000003E5,
@@ -640,6 +641,7 @@ enum SoundIDs {
     SOUND_CANNON1                   = 0x00002016,
     SOUND_CANNON2                   = 0x00002017,
     SOUND_CANNON3                   = 0x00002018,
+    SOUND_20C1                      = 0x000020C1,
     SOUND_202C                      = 0x0000202C,
     SOUND_202D                      = 0x0000202D,
     SOUND_202E                      = 0x0000202E,
@@ -1930,9 +1932,9 @@ enum NpcFlags {
     NPC_FLAG_40                      = 0x00000040,
     NPC_FLAG_UPSIDE_DOWN             = 0x00000080, ///< Render NPCs upside-down
     NPC_FLAG_100                     = 0x00000100, // TODO
-    NPC_FLAG_GRAVITY                 = 0x00000200, ///< Enables gravity. Does nothing if NPC_FLAG_NO_Y_MOVEMENT is set.
+    NPC_FLAG_GRAVITY                 = 0x00000200, ///< Enables gravity. Does nothing if NPC_FLAG_JUMPING is set.
     NPC_FLAG_LOCK_ANIMS              = 0x00000400, ///< Do not allow scripts to change animation
-    NPC_FLAG_NO_Y_MOVEMENT           = 0x00000800, ///< Causes NpcMoveTo() to ignore stairs
+    NPC_FLAG_JUMPING                 = 0x00000800, ///< Causes NpcMoveTo() to ignore stairs
     NPC_FLAG_1000                    = 0x00001000,
     NPC_FLAG_NO_PROJECT_SHADOW       = 0x00002000, ///< Draw shadow at base of sprite instead of projecting to ground
     NPC_FLAG_4000                    = 0x00004000,
@@ -1949,7 +1951,7 @@ enum NpcFlags {
     NPC_FLAG_SIMPLIFIED_PHYSICS      = 0x02000000,
     /// Use simpler, faster physics calculations:
     ///  - Perform only one lateral collision test during motion
-    ///  - Allow falling below Y=-2000 (by default, NPC_FLAG_NO_Y_MOVEMENT is set when an NPC falls out-of-bounds)
+    ///  - Allow falling below Y=-2000 (by default, NPC_FLAG_JUMPING is set when an NPC falls out-of-bounds)
     NPC_FLAG_PARTICLE                = 0x04000000,
     NPC_FLAG_8000000                 = 0x08000000,
     NPC_FLAG_10000000                = 0x10000000,
@@ -2737,20 +2739,45 @@ enum EnemyFlags {
     ENEMY_FLAGS_8000000           = 0x08000000,
     ENEMY_FLAGS_10000000          = 0x10000000,
     ENEMY_FLAGS_20000000          = 0x20000000,
-    ENEMY_FLAGS_40000000          = 0x40000000,
+    ENEMY_FLAGS_40000000          = 0x40000000, // spawn in AI_STATE_CHASE_INIT
     ENEMY_FLAGS_80000000          = 0x80000000,
 };
 
-// used with enemy->unk_B0
+// used with enemy->aiFlags
 enum EnemyAIFlags {
     ENEMY_AI_FLAGS_1              = 0x00000001,
-    ENEMY_AI_FLAGS_2              = 0x00000002,
-    ENEMY_AI_FLAGS_4              = 0x00000004,
+    ENEMY_AI_FLAGS_2              = 0x00000002, // do not move
+    ENEMY_AI_FLAGS_4              = 0x00000004, // pause ai
     ENEMY_AI_FLAGS_8              = 0x00000008,
     ENEMY_AI_FLAGS_10             = 0x00000010,
     ENEMY_AI_FLAGS_20             = 0x00000020,
     ENEMY_AI_FLAGS_40             = 0x00000040,
     ENEMY_AI_FLAGS_80             = 0x00000080,
+};
+
+enum GenericAIStates {
+    AI_STATE_WANDER_INIT    = 0,
+    AI_STATE_WANDER         = 1,
+    AI_STATE_LOITER_INIT    = 2,
+    AI_STATE_LOITER         = 3,
+    AI_STATE_JUMP_INIT      = 10,
+    AI_STATE_JUMP           = 11,
+    AI_STATE_CHASE_INIT     = 12,
+    AI_STATE_CHASE          = 13,
+    AI_STATE_LOSE_PLAYER    = 14,
+    AI_STATE_SUSPEND        = 99,
+};
+
+
+enum GenericEnemyAnims {
+    ENEMY_ANIM_IDLE         = 0,
+    ENEMY_ANIM_WALK         = 1,
+    ENEMY_ANIM_CHASE        = 3,
+    ENEMY_ANIM_JUMP         = 4,
+};
+
+enum EnemyActionFlags {
+    AI_ACTION_JUMP_WHEN_SEE_PLAYER  = 1,
 };
 
 enum MusicSettingsFlags {

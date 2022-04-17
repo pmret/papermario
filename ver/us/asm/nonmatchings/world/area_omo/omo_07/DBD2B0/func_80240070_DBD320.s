@@ -26,7 +26,7 @@ glabel func_80240070_DBD320
 /* DBD358 802400A8 AFA00010 */  sw        $zero, 0x10($sp)
 /* DBD35C 802400AC AFA00014 */  sw        $zero, 0x14($sp)
 /* DBD360 802400B0 8E050018 */  lw        $a1, 0x18($s0)
-/* DBD364 802400B4 0C0129E1 */  jal       func_8004A784
+/* DBD364 802400B4 0C0129E1 */  jal       ai_check_fwd_collisions
 /* DBD368 802400B8 0000382D */   daddu    $a3, $zero, $zero
 /* DBD36C 802400BC 14400005 */  bnez      $v0, .L802400D4
 /* DBD370 802400C0 00000000 */   nop
