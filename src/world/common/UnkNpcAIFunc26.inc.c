@@ -28,11 +28,11 @@ s32 N(UnkNpcAIFunc26)(Evt* script) {
         ret = FALSE;
     }
 
-    if (gPartnerActionStatus.actionState.b[3]  == 9) {
+    if (gPartnerActionStatus.actingPartner == PARTNER_BOW) {
         ret = FALSE;
     }
 
-    if (gPartnerActionStatus.actionState.b[3]  == 7) {
+    if (gPartnerActionStatus.actingPartner == PARTNER_SUSHIE) {
         ret = FALSE;
     }
 

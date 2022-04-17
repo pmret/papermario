@@ -706,7 +706,7 @@ s32 check_conversation_trigger(void) {
     playerY = playerStatus->position.y;
     playerZ = playerStatus->position.z;
 
-    if (gPartnerActionStatus.actionState.b[0] != 0) {
+    if (gPartnerActionStatus.partnerActionState != PARTNER_ACTION_NONE) {
         return FALSE;
     }
 

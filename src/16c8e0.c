@@ -419,7 +419,7 @@ void btl_update(void) {
             set_screen_overlay_color(1, 0, 0, 0);
             if (partner == NULL) {
                 set_screen_overlay_params_back(0, 215.0f);
-            } else if (playerData->currentPartner == 6) {
+            } else if (playerData->currentPartner == PARTNER_WATT) {
                 paramAmount -= 10.0f;
                 if (paramAmount < 0.0f) {
                     paramAmount = 0.0f;

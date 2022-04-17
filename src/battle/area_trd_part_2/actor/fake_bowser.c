@@ -403,7 +403,7 @@ EvtScript N(8021B0E4) = {
     EVT_USE_ARRAY(D_80235FC0)
     EVT_CALL(N(StartRumbleWithParams), 256, 30)
     EVT_THREAD
-        EVT_SET_GROUP(EVT_GROUP_0)
+        EVT_SET_GROUP(EVT_GROUP_00)
         EVT_CALL(ShakeCam, 1, 0, 20, EVT_FLOAT(3.0))
     EVT_END_THREAD
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, 5, ACTOR_PART_FLAG_100000, 1)
@@ -429,35 +429,35 @@ EvtScript N(8021B0E4) = {
     EVT_WAIT_FRAMES(30)
     EVT_CALL(PlaySoundAtModel, 15, 482, 0)
     EVT_THREAD
-        EVT_SET_GROUP(EVT_GROUP_0)
+        EVT_SET_GROUP(EVT_GROUP_00)
         EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(1.0))
     EVT_END_THREAD
     EVT_CALL(N(StartRumbleWithParams), 100, 20)
     EVT_WAIT_FRAMES(20)
     EVT_CALL(PlaySoundAtModel, 11, 482, 0)
     EVT_THREAD
-        EVT_SET_GROUP(EVT_GROUP_0)
+        EVT_SET_GROUP(EVT_GROUP_00)
         EVT_CALL(ShakeCam, 1, 0, 10, EVT_FLOAT(1.5))
     EVT_END_THREAD
     EVT_CALL(N(StartRumbleWithParams), 150, 20)
     EVT_WAIT_FRAMES(30)
     EVT_CALL(PlaySoundAtModel, 9, 482, 0)
     EVT_THREAD
-        EVT_SET_GROUP(EVT_GROUP_0)
+        EVT_SET_GROUP(EVT_GROUP_00)
         EVT_CALL(ShakeCam, 1, 0, 10, EVT_FLOAT(1.0))
     EVT_END_THREAD
     EVT_CALL(N(StartRumbleWithParams), 100, 20)
     EVT_WAIT_FRAMES(30)
     EVT_CALL(PlaySoundAtModel, 31, 482, 0)
     EVT_THREAD
-        EVT_SET_GROUP(EVT_GROUP_0)
+        EVT_SET_GROUP(EVT_GROUP_00)
         EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(0.7))
     EVT_END_THREAD
     EVT_CALL(N(StartRumbleWithParams), 70, 20)
     EVT_WAIT_FRAMES(20)
     EVT_CALL(PlaySoundAtModel, 25, 482, 0)
     EVT_THREAD
-        EVT_SET_GROUP(EVT_GROUP_0)
+        EVT_SET_GROUP(EVT_GROUP_00)
         EVT_CALL(ShakeCam, 1, 0, 10, EVT_FLOAT(1.0))
     EVT_END_THREAD
     EVT_CALL(N(StartRumbleWithParams), 100, 20)
@@ -465,12 +465,12 @@ EvtScript N(8021B0E4) = {
     EVT_CALL(PlaySoundAtModel, 43, 482, 0)
     EVT_CALL(N(StartRumbleWithParams), 60, 20)
     EVT_THREAD
-        EVT_SET_GROUP(EVT_GROUP_0)
+        EVT_SET_GROUP(EVT_GROUP_00)
         EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(0.6))
     EVT_END_THREAD
     EVT_WAIT_FRAMES(20)
     EVT_THREAD
-        EVT_SET_GROUP(EVT_GROUP_0)
+        EVT_SET_GROUP(EVT_GROUP_00)
         EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(0.3))
     EVT_END_THREAD
     EVT_CALL(N(StartRumbleWithParams), 30, 20)

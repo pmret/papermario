@@ -46,7 +46,7 @@ void action_run_update(void) {
         return;
     }
 
-    if (playerStatus->flags < 0) {
+    if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
         playerStatus->flags &= ~0x80880000;
         D_8010C980 = 0;
         playerStatus->unk_60 = 0;

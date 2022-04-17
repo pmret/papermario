@@ -386,7 +386,7 @@ EvtScript N(idle_80242494) = {
 };
 
 EvtScript N(npcAI_802426B0) = {
-    EVT_SET_GROUP(EVT_GROUP_B)
+    EVT_SET_GROUP(EVT_GROUP_0B)
     EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_2039, 0)
     EVT_CALL(ShowSleepBubble, 0, 0, 50, 2, 552, 111, 128, 30, EVT_VAR(0))
     EVT_WAIT_FRAMES(360)
@@ -411,7 +411,7 @@ EvtScript N(npcAI_802426B0) = {
 };
 
 EvtScript N(npcAI_80242834) = {
-    EVT_SET_GROUP(EVT_GROUP_B)
+    EVT_SET_GROUP(EVT_GROUP_0B)
     EVT_CALL(SetNpcAnimation, 0, NPC_ANIM_world_tubba_Palette_00_Anim_D)
     EVT_THREAD
         EVT_LOOP(0)
@@ -654,7 +654,7 @@ static s32 N(pad_36D8)[] = {
 s32** N(varStash) = NULL; // StashVars.inc.c data
 
 EvtScript N(802436E4) = {
-    EVT_SET_GROUP(EVT_GROUP_0)
+    EVT_SET_GROUP(EVT_GROUP_00)
     EVT_CALL(SetTimeFreezeMode, 2)
     EVT_WAIT_FRAMES(40)
     EVT_CALL(ShowGotItem, EVT_VAR(0), 0, 0)

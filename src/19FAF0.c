@@ -137,7 +137,7 @@ void dispatch_event_player(s32 eventType) {
     oldOnHitScript = player->onHitScript;
     oldOnHitID = player->onHitID;
 
-    eventScript = start_script(&HandleEvent_Player, 10, 0x20);
+    eventScript = start_script(&HandleEvent_Player, EVT_PRIORITY_A, EVT_FLAG_20);
     player->onHitScript = eventScript;
     player->onHitID = eventScript->id;
     eventScript->owner1.actor = NULL;
@@ -163,7 +163,7 @@ void dispatch_event_player_continue_turn(s32 eventType) {
     oldOnHitScript = player->onHitScript;
     oldOnHitID = player->onHitID;
 
-    eventScript = start_script(&HandleEvent_Player, 10, 0x20);
+    eventScript = start_script(&HandleEvent_Player, EVT_PRIORITY_A, EVT_FLAG_20);
     player->onHitScript = eventScript;
     player->onHitID = eventScript->id;
     eventScript->owner1.actor = NULL;

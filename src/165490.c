@@ -734,7 +734,7 @@ void filemenu_main_handle_input(MenuPanel* menu) {
         }
     }
 
-    if (filemenu_pressedButtons & 0x4000) {
+    if (filemenu_pressedButtons & BUTTON_B) {
         switch (menu->page) {
             case 0:
                 filemenu_set_selected(menu, 2, 2);

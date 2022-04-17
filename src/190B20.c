@@ -2321,7 +2321,7 @@ void load_partner_actor(void) {
         partnerActor->debuffIcon = fx_disable_x(0, -142.0f, 34.0f, 1.0f, 0);
         partnerActor->unk_228 = NULL;
 
-        takeTurnScript = start_script(partnerActor->takeTurnScriptSource, 10, 0);
+        takeTurnScript = start_script(partnerActor->takeTurnScriptSource, EVT_PRIORITY_A, 0);
         partnerActor->takeTurnID = takeTurnScript->id;
         takeTurnScript->owner1.actorID = ACTOR_PARTNER;
     }
@@ -2584,7 +2584,7 @@ Actor* create_actor(Formation formation) {
 
     actor->hpFraction = 25;
     actor->actorID = actor->enemyIndex | 0x200;
-    takeTurnScript = start_script(actor->takeTurnScriptSource, 0xA, 0);
+    takeTurnScript = start_script(actor->takeTurnScriptSource, EVT_PRIORITY_A, 0);
     actor->takeTurnID = takeTurnScript->id;
     takeTurnScript->owner1.enemyID = actor->enemyIndex | 0x200;
     actor->shadow.id = create_shadow_type(0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z);
@@ -3663,29 +3663,29 @@ void start_rumble_type(u32 arg0) {
         case 0:
             break;
         case 1:
-            D_802939C0 = start_script(&D_802939C4, 0xA, 0x20)->id;
+            D_802939C0 = start_script(&D_802939C4, EVT_PRIORITY_A, EVT_FLAG_20)->id;
             break;
         case 2:
-            D_802939C0 = start_script(&D_80293A10, 0xA, 0x20)->id;
+            D_802939C0 = start_script(&D_80293A10, EVT_PRIORITY_A, EVT_FLAG_20)->id;
             break;
         case 3:
-            D_802939C0 = start_script(&D_80293A34, 0xA, 0x20)->id;
+            D_802939C0 = start_script(&D_80293A34, EVT_PRIORITY_A, EVT_FLAG_20)->id;
             break;
         case 4:
-            D_802939C0 = start_script(&D_80293A58, 0xA, 0x20)->id;
+            D_802939C0 = start_script(&D_80293A58, EVT_PRIORITY_A, EVT_FLAG_20)->id;
             break;
         case 5:
-            D_802939C0 = start_script(&D_80293A7C, 0xA, 0x20)->id;
+            D_802939C0 = start_script(&D_80293A7C, EVT_PRIORITY_A, EVT_FLAG_20)->id;
             break;
         case 6:
-            D_802939C0 = start_script(&D_80293AA0, 0xA, 0x20)->id;
+            D_802939C0 = start_script(&D_80293AA0, EVT_PRIORITY_A, EVT_FLAG_20)->id;
             break;
         case 7:
         case 8:
         case 9:
         case 10:
         case 11:
-            D_802939C0 = start_script(&D_80293AC4, 0xA, 0x20)->id;
+            D_802939C0 = start_script(&D_80293AC4, EVT_PRIORITY_A, EVT_FLAG_20)->id;
             break;
     }
 }

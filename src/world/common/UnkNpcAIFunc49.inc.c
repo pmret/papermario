@@ -13,7 +13,7 @@ void N(UnkNpcAIFunc49)(Evt* script) {
         if (npcID < 0) {
             s32 sp28;
 
-            fx_emote(2, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &sp28);
+            fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &sp28);
             npc->currentAnim.w = enemy->animList[0];
         } else {
             Enemy* enemy2;

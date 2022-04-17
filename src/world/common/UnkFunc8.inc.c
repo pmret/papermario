@@ -18,7 +18,7 @@ void N(UnkFunc8)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* te
                 npc->yaw = clamp_angle(npc->yaw + 180.0f);
                 npc->duration = aiSettings->waitTime / 2 + rand_int(aiSettings->waitTime / 2 + 1);
             } else {
-                fx_emote(2, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 12, &var);
+                fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 12, &var);
                 npc->duration = 15;
                 script->functionTemp[0] = 0x28;
             }

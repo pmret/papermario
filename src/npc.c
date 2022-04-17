@@ -394,8 +394,8 @@ void npc_do_other_npc_collision(Npc* npc) {
                         if (!(thisBuf + otherBuf <= dist)) {
                             collision = FALSE;
                             if (npc->flags & NPC_FLAG_PARTICLE) {
-                                collision = gPartnerActionStatus.actionState.b[0] == 0;
-                            } else if (!(otherNpc->flags & NPC_FLAG_PARTICLE) || gPartnerActionStatus.actionState.b[0] == 0) {
+                                collision = gPartnerActionStatus.partnerActionState == PARTNER_ACTION_NONE;
+                            } else if (!(otherNpc->flags & NPC_FLAG_PARTICLE) || gPartnerActionStatus.partnerActionState == PARTNER_ACTION_NONE) {
                                 collision = TRUE;
                             }
 
@@ -1480,7 +1480,7 @@ s32 npc_find_standing_on_entity(s32 arg0) {
                         } else {
                             floorID = npc->currentFloor;
 
-                            if (!(floorID & 0x4000)) {
+                            if (!(floorID & COLLISION_WITH_ENTITY_BIT)) {
                                 continue;
                             }
                         }
@@ -1616,7 +1616,7 @@ void func_8003D660(Npc* npc, s32 arg1) {
                     func_8003DC38(npc, arg1);
                     return;
                 case 8:
-                    if ((temp->actionState.b[0] == 0) || (temp->actionState.b[3] != 8)) {
+                    if ((temp->partnerActionState == PARTNER_ACTION_NONE) || (temp->actingPartner != PARTNER_LAKILESTER)) {
                         func_8003DFA0(npc, arg1);
                         return;
                     }
@@ -2038,7 +2038,7 @@ s32 bind_enemy_ai(Enemy* enemy, EvtScript* aiScriptBytecode) {
         kill_script_by_ID(enemy->aiScript->id);
     }
     enemy->aiBytecode = aiScriptBytecode;
-    aiScript = enemy->aiScript = start_script(aiScriptBytecode, 0xA, 0);
+    aiScript = enemy->aiScript = start_script(aiScriptBytecode, EVT_PRIORITY_A, 0);
     id = enemy->aiScriptID = aiScript->id;
     aiScript->owner1.enemy = enemy;
     return id;
@@ -2052,7 +2052,7 @@ s32 bind_enemy_aux(Enemy* enemy, EvtScript* auxScriptBytecode) {
         kill_script_by_ID(enemy->auxScript->id);
     }
     enemy->auxBytecode = auxScriptBytecode;
-    auxScript = enemy->auxScript = start_script(auxScriptBytecode, 0xA, 0);
+    auxScript = enemy->auxScript = start_script(auxScriptBytecode, EVT_PRIORITY_A, 0);
     id = enemy->auxScriptID = auxScript->id;
     auxScript->owner1.enemy = enemy;
     return id;
@@ -2066,7 +2066,7 @@ s32 bind_enemy_interact(Enemy* enemy, EvtScript* interactScriptBytecode) {
         kill_script_by_ID(enemy->interactScript->id);
     }
     enemy->interactBytecode = interactScriptBytecode;
-    interactScript = enemy->interactScript = start_script(interactScriptBytecode, 0xA, 0);
+    interactScript = enemy->interactScript = start_script(interactScriptBytecode, EVT_PRIORITY_A, 0);
     id = enemy->interactScriptID = interactScript->id;
     interactScript->owner1.enemy = enemy;
     return id;

@@ -110,7 +110,7 @@ void dispatch_event_actor(Actor* actor, s32 event) {
         Evt* newScript;
 
         actor->lastEventType = event;
-        newScript = start_script(actor->onHitScriptSource, 0xA, 0x20);
+        newScript = start_script(actor->onHitScriptSource, EVT_PRIORITY_A, EVT_FLAG_20);
         actor->onHitScript = newScript;
         actor->onHitID = newScript->id;
         newScript->owner1.actorID = actor->actorID;
@@ -719,42 +719,42 @@ s32 calc_enemy_damage_target(Actor* attacker) {
     }
 
     if ((battleStatus->currentAttackStatus & STATUS_FLAG_SLEEP) && statusInflicted) {
-        script = start_script(&DoSleepHit, 10, 0);
+        script = start_script(&DoSleepHit, EVT_PRIORITY_A, 0);
         script->varTable[0] = state->goalPos.x;
         script->varTable[1] = state->goalPos.y;
         script->varTable[2] = state->goalPos.z;
         sfx_play_sound_at_position(SOUND_INFLICT_SLEEP, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
     if ((battleStatus->currentAttackStatus & STATUS_FLAG_DIZZY) && statusInflicted) {
-        script = start_script(&DoDizzyHit, 10, 0);
+        script = start_script(&DoDizzyHit, EVT_PRIORITY_A, 0);
         script->varTable[0] = state->goalPos.x;
         script->varTable[1] = state->goalPos.y;
         script->varTable[2] = state->goalPos.z;
         sfx_play_sound_at_position(SOUND_INFLICT_STATUS, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
     if ((battleStatus->currentAttackStatus & STATUS_FLAG_PARALYZE) && statusInflicted) {
-        script = start_script(&DoParalyzeHit, 10, 0);
+        script = start_script(&DoParalyzeHit, EVT_PRIORITY_A, 0);
         script->varTable[0] = state->goalPos.x;
         script->varTable[1] = state->goalPos.y;
         script->varTable[2] = state->goalPos.z;
         sfx_play_sound_at_position(SOUND_INFLICT_STATUS, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
     if ((battleStatus->currentAttackStatus & STATUS_FLAG_POISON) && statusInflicted) {
-        script = start_script(&DoPoisonHit, 10, 0);
+        script = start_script(&DoPoisonHit, EVT_PRIORITY_A, 0);
         script->varTable[0] = state->goalPos.x;
         script->varTable[1] = state->goalPos.y;
         script->varTable[2] = state->goalPos.z;
         sfx_play_sound_at_position(SOUND_INFLICT_STATUS, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
     if ((battleStatus->currentAttackStatus & STATUS_FLAG_STOP) && statusInflicted) {
-        script = start_script(&DoStopHit, 10, 0);
+        script = start_script(&DoStopHit, EVT_PRIORITY_A, 0);
         script->varTable[0] = state->goalPos.x;
         script->varTable[1] = state->goalPos.y;
         script->varTable[2] = state->goalPos.z;
         sfx_play_sound_at_position(SOUND_INFLICT_STATUS, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
     if ((battleStatus->currentAttackStatus & STATUS_FLAG_FROZEN) && statusInflicted) {
-        script = start_script(&DoFreezeHit, 10, 0);
+        script = start_script(&DoFreezeHit, EVT_PRIORITY_A, 0);
         script->varTable[0] = state->goalPos.x;
         script->varTable[1] = state->goalPos.y;
         script->varTable[2] = state->goalPos.z;
@@ -762,7 +762,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
         sfx_play_sound_at_position(SOUND_HIT_ICE, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
     if ((battleStatus->currentAttackStatus & STATUS_FLAG_SHRINK) && statusInflicted) {
-        script = start_script(&DoShrinkHit, 10, 0);
+        script = start_script(&DoShrinkHit, EVT_PRIORITY_A, 0);
         script->varTable[0] = state->goalPos.x;
         script->varTable[1] = state->goalPos.y;
         script->varTable[2] = state->goalPos.z;
@@ -939,7 +939,7 @@ ApiStatus BindIdle(Evt* script, s32 isInitialCall) {
     }
 
     actor->idleScriptSource = idleCode;
-    newScriptContext = start_script(idleCode, 10, 0);
+    newScriptContext = start_script(idleCode, EVT_PRIORITY_A, 0);
     actor->idleScript = newScriptContext;
     actor->idleScriptID = newScriptContext->id;
     newScriptContext->owner1.actorID = actorID;
