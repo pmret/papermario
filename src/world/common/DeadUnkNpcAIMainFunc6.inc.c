@@ -1,9 +1,12 @@
+#include "dead.h"
 #include "common.h"
 #include "npc.h"
 #include "effects.h"
+#include "dead_structs.h"
+#include "sprite/npc/bony_beetle.h"
 
-ApiStatus N(UnkNpcAIMainFunc6)(Evt* script, s32 isInitialCall) {
-    Enemy* enemy = script->owner1.enemy;
+ApiStatus N(DeadUnkNpcAIMainFunc6)(Evt* script, s32 isInitialCall) {
+    DeadEnemy* enemy = (DeadEnemy*)script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;
     EnemyTerritoryThing territory;
@@ -21,6 +24,12 @@ ApiStatus N(UnkNpcAIMainFunc6)(Evt* script, s32 isInitialCall) {
     territory.sizeZ = enemy->territory->wander.detectSizeZ;
     territory.unk_18 = 65.0f;
     territory.unk_1C = 0;
+
+    enemy->unk_108.x = npc->pos.x;
+    enemy->unk_108.y = npc->pos.y;
+    enemy->unk_108.z = npc->pos.z;
+    enemy->unk_114 = 0.0001f;
+    enemy->unk_118 = 0.0001f;
 
     if (isInitialCall) {
         enemy->varTable[6] = npc->collisionHeight;

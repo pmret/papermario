@@ -5,7 +5,9 @@ s32 func_802B7000_2(void) {
     s8 actionState = gPlayerActionState;
 
     if (actionState != ACTION_STATE_USE_TWEESTER) {
-        if (partnerActionStatus->actionState.b[0] != 1 || (partnerActionStatus->actionState.b[3] != 9 && partnerActionStatus->actionState.b[3] != 4)) {
+        if (partnerActionStatus->partnerActionState != PARTNER_ACTION_USE || 
+                (partnerActionStatus->actingPartner != PARTNER_BOW
+                && partnerActionStatus->actingPartner != PARTNER_PARAKARRY)) {
             return 0;
         }
     }

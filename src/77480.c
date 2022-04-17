@@ -615,7 +615,7 @@ void update_player(void) {
 
     collisionStatus->currentWall = -1;
     collisionStatus->lastWallHammered = -1;
-    collisionStatus->unk_0A = -1;
+    collisionStatus->currentInspect = -1;
     collisionStatus->floorBelow = 1;
 
     update_player_input();
@@ -776,38 +776,38 @@ void player_reset_data(void) {
 }
 
 s32 func_800DFCF4(void) {
-    if (gPartnerActionStatus.actionState.b[0] == 1 &&
-        (gPartnerActionStatus.actionState.b[3]  == 6 || gPartnerActionStatus.actionState.b[3]  == 9 ||
-         gPartnerActionStatus.actionState.b[3]  == 7 || gPartnerActionStatus.actionState.b[3]  == 4 ||
-         gPartnerActionStatus.actionState.b[3]  == 8)) {
-        return 0;
+    if (gPartnerActionStatus.partnerActionState == PARTNER_ACTION_USE &&
+        (gPartnerActionStatus.actingPartner == PARTNER_WATT
+        || gPartnerActionStatus.actingPartner == PARTNER_BOW
+        || gPartnerActionStatus.actingPartner == PARTNER_SUSHIE
+        || gPartnerActionStatus.actingPartner == PARTNER_PARAKARRY
+        || gPartnerActionStatus.actingPartner == PARTNER_LAKILESTER)) {
+        return FALSE;
     }
-    return 1;
+    return TRUE;
 }
 
 s32 get_overriding_player_anim(s32 anim) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    PartnerActionStatus* actionStatus = &gPartnerActionStatus;
+    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
 
     if (playerStatus->actionState == ACTION_STATE_USE_SPINNING_FLOWER && anim != ANIM_1002B && anim != ANIM_MIDAIR_STILL) {
         return -1;
     }
 
-    if (actionStatus->actionState.b[0] != 0) {
-        if (actionStatus->actionState.b[3] == 8 && anim == ANIM_10002) {
+    if (partnerActionStatus->partnerActionState != PARTNER_ACTION_NONE) {
+        if (partnerActionStatus->actingPartner == PARTNER_LAKILESTER && anim == ANIM_10002) {
             anim = ANIM_8000E;
         }
 
-        if (actionStatus->actionState.b[0] != 0) {
-            if (actionStatus->actionState.b[3] == 9) {
-                if (anim != ANIM_CROUCH && anim != ANIM_10002) {
-                        return -1;
-                }
+        if (partnerActionStatus->partnerActionState != PARTNER_ACTION_NONE && partnerActionStatus->actingPartner == PARTNER_BOW) {
+            if (anim != ANIM_CROUCH && anim != ANIM_10002) {
+                    return -1;
             }
         }
     }
 
-    if (anim == ANIM_THUMBS_UP && actionStatus->actionState.b[0] == 1) {
+    if (anim == ANIM_THUMBS_UP && partnerActionStatus->partnerActionState == PARTNER_ACTION_USE) {
         return -1;
     }
 
@@ -871,8 +871,8 @@ void update_player_blink(void) {
     u8 phi_v1;
     u8* alpha;
 
-    if (gPartnerActionStatus.actionState.b[3] == 9) {
-        phi_a2 = gPartnerActionStatus.actionState.b[0] != 0;
+    if (gPartnerActionStatus.actingPartner == PARTNER_BOW) {
+        phi_a2 = gPartnerActionStatus.partnerActionState != PARTNER_ACTION_NONE;
     }
 
     if (playerStatus->blinkTimer > 0) {
@@ -968,7 +968,7 @@ s32 func_800E0208(void) {
     if (gGameStatusPtr->disableScripts &&
         (gGameStatusPtr->currentButtons & PLAYER_STATUS_FLAGS_10))
     {
-        if (gPartnerActionStatus.actionState.b[0] == 0) {
+        if (gPartnerActionStatus.partnerActionState == PARTNER_ACTION_NONE) {
             set_action_state(ACTION_STATE_IDLE);
         }
         ret = TRUE;

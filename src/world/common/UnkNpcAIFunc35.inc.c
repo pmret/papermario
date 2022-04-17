@@ -97,7 +97,7 @@ void N(UnkNpcAIFunc35)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThi
                 {
                     s32 emoteTemp;
 
-                    fx_emote(0, npc, 0, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xC, &emoteTemp);
+                    fx_emote(EMOTE_EXCLAMATION, npc, 0, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xC, &emoteTemp);
                     npc->moveToPos.y = npc->pos.y;
                     ai_enemy_play_sound(npc, 0x2F4, 0x200000);
                     

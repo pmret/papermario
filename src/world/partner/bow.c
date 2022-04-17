@@ -240,8 +240,8 @@ ApiStatus BowUseAbility(Evt* script, s32 isInitialCall) {
 
             D_802BE0C0 = TRUE;
             bow->flags &= ~(NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_GRAVITY);
-            partnerActionStatus->actionState.b[0] = 1;
-            partnerActionStatus->actionState.b[3] = 9;
+            partnerActionStatus->partnerActionState = 1;
+            partnerActionStatus->actingPartner = 9;
             playerStatus->flags |= PLAYER_STATUS_FLAGS_8000;
             func_800EF4E0();
             bow->moveToPos.x = playerStatus->position.x;
@@ -373,8 +373,8 @@ void func_802BDDF0_324740(Npc* bow) {
     }
 
     set_action_state(actionState);
-    partnerActionStatus->actionState.b[0] = 0;
-    partnerActionStatus->actionState.b[3] = 0;
+    partnerActionStatus->partnerActionState = 0;
+    partnerActionStatus->actingPartner = 0;
     playerStatus->flags &= ~PLAYER_STATUS_FLAGS_100;
     partner_clear_player_tracking(bow);
     D_802BE0C0 = FALSE;
@@ -407,8 +407,8 @@ void world_bow_pre_battle(Npc* bow) {
         enable_player_input();
         set_action_state(ACTION_STATE_IDLE);
         partner_clear_player_tracking(bow);
-        partnerActionStatus->actionState.b[0] = 0;
-        partnerActionStatus->actionState.b[3] = 0;
+        partnerActionStatus->partnerActionState = 0;
+        partnerActionStatus->actingPartner = 0;
         D_802BE0C0 = FALSE;
         bow->flags &= ~NPC_FLAG_2;
     }

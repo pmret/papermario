@@ -380,7 +380,7 @@ ApiStatus N(SuperBlock_PartnerSparkles4)(Evt* script, s32 isInitialCall) {
 
 ApiStatus N(SuperBlock_WaitForPlayerToLand)(Evt* script, s32 isInitialCall) {
     script->varTable[0] = FALSE;
-    if ((gPartnerActionStatus.actionState.b[0] != 0) && (gPartnerActionStatus.actionState.b[3]  == 3)) {
+    if ((gPartnerActionStatus.partnerActionState != PARTNER_ACTION_NONE) && (gPartnerActionStatus.actingPartner == PARTNER_BOMBETTE)) {
         script->varTable[0] = TRUE;
     }
     return ApiStatus_DONE2;

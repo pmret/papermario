@@ -252,7 +252,7 @@ void btl_state_update_victory(void) {
                     D_8029F254 = 1;
                 }
                 battleStatus->battlePhase = PHASE_ENEMY_BEGIN;
-                script = start_script(partner->onTurnChanceScriptSource, 0xA, 0);
+                script = start_script(partner->onTurnChanceScriptSource, EVT_PRIORITY_A, 0);
                 partner->onTurnChangeScript = script;
                 partner->onTurnChangeID = script->id;
                 script->owner1.enemyID = 0x100;
@@ -378,7 +378,7 @@ void btl_state_update_victory(void) {
                 playerData->merleeCastsLeft++;
             } else {
                 battleStatus->battlePhase = PHASE_MERLEE_EXP_BONUS;
-                script = start_script(PlayerScriptDispatcher, 0xA, 0);
+                script = start_script(PlayerScriptDispatcher, EVT_PRIORITY_A, 0);
                 player->takeTurnScript = script;
                 player->takeTurnID = script->id;
                 script->owner1.enemyID = 0;
@@ -449,7 +449,7 @@ void btl_state_update_defend(void) {
         case BATTLE_STATE2_UNK_0:
             gBattleStatus.unk_8C = 0;
             gBattleStatus.battlePhase = PHASE_USE_DEFEND;
-            player->takeTurnScript = script = start_script(PlayerScriptDispatcher, 10, 0);
+            player->takeTurnScript = script = start_script(PlayerScriptDispatcher, EVT_PRIORITY_A, 0);
             player->takeTurnID = script->id;
             gBattleState2 = BATTLE_STATE2_UNK_1;
             script->owner1.enemyID = 0;
@@ -503,13 +503,13 @@ void btl_state_update_defeat(void) {
             func_8024E40C(0x19);
             btl_cam_target_actor(0);
             battleStatus->battlePhase = PHASE_RUN_AWAY_RESET;
-            script = start_script(PlayerScriptDispatcher, 0xA, 0);
+            script = start_script(PlayerScriptDispatcher, EVT_PRIORITY_A, 0);
             player->takeTurnScript = script;
             player->takeTurnID = script->id;
             script->owner1.enemyID = 0;
 
             if (partner != NULL) {
-                script = start_script(partner->takeTurnScriptSource, 0xA, 0);
+                script = start_script(partner->takeTurnScriptSource, EVT_PRIORITY_A, 0);
                 partner->takeTurnScript = script;
                 partner->takeTurnID = script->id;
                 script->owner1.enemyID = 0x100;
@@ -520,7 +520,7 @@ void btl_state_update_defeat(void) {
             if (!does_script_exist(player->takeTurnID) && battleStatus->unk_8C == 0) {
                 if (find_item(ITEM_LIFE_SHROOM) >= 0) {
                     battleStatus->battlePhase = PHASE_USE_LIFE_SHROOM;
-                    script = start_script(PlayerScriptDispatcher, 0xA, 0);
+                    script = start_script(PlayerScriptDispatcher, EVT_PRIORITY_A, 0);
                     player->takeTurnScript = script;
                     player->takeTurnID = script->id;
                     script->owner1.enemyID = 0;
@@ -599,7 +599,7 @@ void btl_state_update_change_partner(void) {
                 break;
             }
             deduct_current_move_fp();
-            script = start_script(BtlPutPartnerAway, 0xA, 0);
+            script = start_script(BtlPutPartnerAway, EVT_PRIORITY_A, 0);
             battleStatus->controlScript = script;
             battleStatus->controlScriptID = script->id;
             script->owner1.enemyID = 0x100;
@@ -636,7 +636,7 @@ void btl_state_update_change_partner(void) {
                 }
             }
 
-            script = start_script(BtlBringPartnerOut, 0xA, 0);
+            script = start_script(BtlBringPartnerOut, EVT_PRIORITY_A, 0);
             battleStatus->controlScript = script;
             battleStatus->controlScriptID = script->id;
             script->owner1.enemyID = 0x100;
@@ -648,7 +648,7 @@ void btl_state_update_change_partner(void) {
                 if (partner != NULL) {
                     if (partner->onTurnChanceScriptSource != NULL) {
                         battleStatus->battlePhase = PHASE_PLAYER_BEGIN;
-                        script = start_script(partner->onTurnChanceScriptSource, 0xA, 0);
+                        script = start_script(partner->onTurnChanceScriptSource, EVT_PRIORITY_A, 0);
                         partner->onTurnChangeScript = script;
                         partner->onTurnChangeID = script->id;
                         script->owner1.enemyID = 0x100;
@@ -756,7 +756,7 @@ void btl_state_update_partner_move(void) {
             reset_actor_turn_info();
             reset_all_actor_sounds(partner);
             battleStatus->battlePhase = PHASE_EXECUTE_ACTION;
-            script = start_script(partner->takeTurnScriptSource, 0xA, 0);
+            script = start_script(partner->takeTurnScriptSource, EVT_PRIORITY_A, 0);
             partner->takeTurnScript = script;
             partner->takeTurnID = script->id;
             script->owner1.enemyID = 0x100;
@@ -813,7 +813,7 @@ void btl_state_update_partner_move(void) {
                                 break;
                             }
                             decrement_status_menu_disabled();
-                            if (playerData->currentPartner == 1 && battleStatus->moveCategory == 5
+                            if (playerData->currentPartner == PARTNER_GOOMBARIO && battleStatus->moveCategory == 5
                                                                 && battleStatus->selectedMoveID != MOVE_CHARGE) {
                                 partner->isGlowing = 0;
                                 gBattleStatus.flags1 &= ~BS_FLAGS1_40000000;

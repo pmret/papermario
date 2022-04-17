@@ -434,7 +434,7 @@ EvtScript N(802449C4) = {
 };
 
 EvtScript N(80244AD0) = {
-    EVT_SET_GROUP(EVT_GROUP_0)
+    EVT_SET_GROUP(EVT_GROUP_00)
     EVT_SUSPEND_GROUP(1)
     EVT_CALL(ShowKeyChoicePopup)
     EVT_IF_EQ(EVT_VAR(0), 0)
@@ -610,7 +610,7 @@ void N(func_80241954_BFF1D4)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
         } else {
             npc->rotation.y = 0.0f;
             npc->flags &= ~0x00200000;
-            if (gPartnerActionStatus.actionState.b[3]  != 9) {
+            if (gPartnerActionStatus.actingPartner  != 9) {
                 disable_player_input();
                 partner_disable_input();
                 npc->duration = 0;
@@ -654,7 +654,7 @@ void N(func_80241CA8_BFF528)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
     if (!(npc->pos.y < (posY + temp_f20))) {
         npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z);
         npc->pos.y = posY + temp_f20;
-        fx_emote(2, npc, 0, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 10, &var);
+        fx_emote(EMOTE_QUESTION, npc, 0, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 10, &var);
         npc->duration = 10;
         script->functionTemp[0] = 18;
     }
@@ -676,7 +676,7 @@ void N(func_80241E70_BFF6F0)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
 
     npc->duration++;
     if (npc->duration >= 3) {
-        if (gPartnerActionStatus.actionState.b[3]  != 9) {
+        if (gPartnerActionStatus.actingPartner  != 9) {
             npc->duration = 0;
             script->functionTemp[0] = 100;
         } else {
@@ -723,7 +723,7 @@ void N(func_80241F98_BFF818)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
     if (script->functionTemp[1] <= 0) {
         script->functionTemp[1] = aiSettings->unk_14;
         if (func_800490B4(territory, enemy, aiSettings->alertRadius * 0.5, aiSettings->unk_10.f * 0.5, 0)) {
-            fx_emote(0, npc, 0, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 12, &var);
+            fx_emote(EMOTE_EXCLAMATION, npc, 0, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 12, &var);
             ai_enemy_play_sound(npc, 0x2F4, 0x200000);
             npc->moveToPos.y = npc->pos.y;
             script->functionTemp[0] = 12;
@@ -841,7 +841,7 @@ EvtScript N(npcAI_80244D54) = {
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(func_802D2B6C)
     EVT_CALL(DisablePartnerAI, 0)
-    EVT_SET_GROUP(EVT_GROUP_0)
+    EVT_SET_GROUP(EVT_GROUP_00)
     EVT_CALL(SetTimeFreezeMode, 1)
     EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_ADD(EVT_VAR(1), 20)

@@ -63,8 +63,8 @@ void func_802B6120_E2A7D0(void) {
     f32 phi_f20;
     f32 phi_f22;
 
-    if (playerStatus->flags < 0) {
-        playerStatus->flags &= ~0x80000000;
+    if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
+        playerStatus->flags &= ~PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
         mem_clear(&D_802B6E80, sizeof(D_802B6E80));
         disable_player_static_collisions();
         tempUnk_1C = &parasolStruct->unk_1C;

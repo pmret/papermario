@@ -529,7 +529,7 @@ ApiStatus ResetFromLava(Evt* script, s32 isInitialCall) {
         D_802DADA4 = -1;
     }
 
-    if (!(collisionStatus->currentFloor & 0x4000)) {
+    if (!(collisionStatus->currentFloor & COLLISION_WITH_ENTITY_BIT)) {
         collider = &gCollisionData.colliderList[collisionStatus->currentFloor];
         if (collider->flags & 0x100) {
             D_802DADA4 = collisionStatus->currentFloor;

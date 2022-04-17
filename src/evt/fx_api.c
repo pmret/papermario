@@ -111,7 +111,7 @@ ApiStatus Spawn802D9D50(Evt* script, s32 isInitialCall) {
     s32 var5 = evt_get_variable(script, *args++);
     s32 var6 = evt_get_variable(script, *args++);
 
-    Evt* newScript = start_script(&D_802D9D50, 1, 0);
+    Evt* newScript = start_script(&D_802D9D50, EVT_PRIORITY_1, 0);
     newScript->varTable[0] = var0;
     newScript->varTable[1] = var1;
     newScript->varTable[2] = var2;

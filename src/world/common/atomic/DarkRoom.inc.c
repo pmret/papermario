@@ -11,7 +11,7 @@ ApiStatus N(DarkRoomUpdate)(Evt* script, s32 isInitialCall) {
     
     set_screen_overlay_center_worldpos(1, 1, playerStatus->position.x, playerStatus->position.y + 8.0f, playerStatus->position.z);
     
-    if (gPartnerActionStatus.actionState.b[0] != 0) {
+    if (gPartnerActionStatus.partnerActionState != PARTNER_ACTION_NONE) {
         if (playerData->currentPartner == PARTNER_WATT) {
             if (script->functionTemp[1] == 0) {
                 script->functionTemp[1] = 1;

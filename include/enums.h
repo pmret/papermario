@@ -586,6 +586,7 @@ enum SoundIDs {
     SOUND_DAYZEE_SONG               = 0x000002D7,
     SOUND_POWER_UP                  = 0x000002D8,
     SOUND_2F1                       = 0x000002F1,
+    SOUND_2F4                       = 0x000002F4,
     SOUND_2F6                       = 0x000002F6,
     SOUND_2F7                       = 0x000002F7,
     SOUND_CLOSE_SHELL               = 0x000002FF,
@@ -1868,6 +1869,18 @@ enum PartnerIDs {
     PARTNER_TWINK               = 0x0000000B,
 };
 
+enum PartnerActions {
+    PARTNER_ACTION_NONE             = 0, // genetic state
+    PARTNER_ACTION_USE              = 1, // generic state
+    PARTNER_ACTION_KOOPER_1         = 1,
+    PARTNER_ACTION_KOOPER_2         = 2,
+    PARTNER_ACTION_BOMBETTE_1       = 1,
+    PARTNER_ACTION_BOMBETTE_2       = 2,
+    PARTNER_ACTION_PARAKARRY_HOVER  = 1,
+    PARTNER_ACTION_WATT_SHINE       = 1,
+    PARTNER_ACTION_LAKILESTER_1     = 1,
+};
+
 /// @see gAreas
 enum Areas {
     AREA_KMR,
@@ -1908,7 +1921,6 @@ enum NpcPalSwapState {
 };
 
 enum NpcFlags {
-    NPC_FLAG_0                       = 0x00000000,
     NPC_FLAG_PASSIVE                 = 0x00000001, ///< Collision does not trigger battle
     NPC_FLAG_2                       = 0x00000002,
     NPC_FLAG_4                       = 0x00000004,
@@ -2729,6 +2741,18 @@ enum EnemyFlags {
     ENEMY_FLAGS_80000000          = 0x80000000,
 };
 
+// used with enemy->unk_B0
+enum EnemyAIFlags {
+    ENEMY_AI_FLAGS_1              = 0x00000001,
+    ENEMY_AI_FLAGS_2              = 0x00000002,
+    ENEMY_AI_FLAGS_4              = 0x00000004,
+    ENEMY_AI_FLAGS_8              = 0x00000008,
+    ENEMY_AI_FLAGS_10             = 0x00000010,
+    ENEMY_AI_FLAGS_20             = 0x00000020,
+    ENEMY_AI_FLAGS_40             = 0x00000040,
+    ENEMY_AI_FLAGS_80             = 0x00000080,
+};
+
 enum MusicSettingsFlags {
     MUSIC_SETTINGS_FLAGS_1                 = 0x00000001,
     MUSIC_SETTINGS_FLAGS_2                 = 0x00000002,
@@ -2867,6 +2891,12 @@ enum CameraFlags {
     CAMERA_FLAGS_20000000          = 0x20000000,
     CAMERA_FLAGS_40000000          = 0x40000000,
     CAMERA_FLAGS_80000000          = 0x80000000,
+};
+
+enum CameraMoveFlags {
+    CAMERA_MOVE_FLAGS_1             = 0x00000001,
+    CAMERA_MOVE_FLAGS_2             = 0x00000002,
+    CAMERA_MOVE_FLAGS_4             = 0x00000004
 };
 
 enum CameraSettingsType {

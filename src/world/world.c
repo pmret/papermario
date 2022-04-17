@@ -185,7 +185,7 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
     initialize_status_menu();
     gGameStatusPtr->unk_90 = 1000;
     gGameStatusPtr->unk_92 = 1000;
-    gGameStatusPtr->mainScriptID = start_script_in_group(mapConfig->main, 0, 0, 0)->id;
+    gGameStatusPtr->mainScriptID = start_script_in_group(mapConfig->main, EVT_PRIORITY_0, 0, 0)->id;
 }
 
 s32 get_current_map_config(void) {

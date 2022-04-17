@@ -15,7 +15,7 @@ extern s16 D_8010CCFE;
 void func_800E6860(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    if (gPartnerActionStatus.actionState.b[0] != 0 && gPartnerActionStatus.actionState.b[3]  == 9) {
+    if (gPartnerActionStatus.partnerActionState != 0 && gPartnerActionStatus.actingPartner == PARTNER_BOW) {
         Npc* partner = get_npc_unsafe(NPC_PARTNER);
 
         func_802DDEE4(0, -1, 7, 0, 0, 0, playerStatus->alpha1, 0);
@@ -33,20 +33,20 @@ s32 func_800E6904(void) {
         return FALSE;
     }
 
-    if (partnerActionStatus->actionState.b[0] == 0) {
+    if (partnerActionStatus->partnerActionState == PARTNER_ACTION_NONE) {
         if (!(playerStatus->flags & PLAYER_STATUS_FLAGS_1000) &&
             (actionState == ACTION_STATE_IDLE || actionState == ACTION_STATE_WALK || actionState == ACTION_STATE_RUN))
         {
             return TRUE;
         }
     } else if (partner_player_can_pause()) {
-        if (partnerActionStatus->actionState.b[3] == 6) {
+        if (partnerActionStatus->actingPartner == PARTNER_WATT) {
             return TRUE;
-        } else if (partnerActionStatus->actionState.b[3] == 9) {
+        } else if (partnerActionStatus->actingPartner == PARTNER_BOW) {
             if (actionState == ACTION_STATE_RIDE) {
                 return TRUE;
             }
-        } else if (partnerActionStatus->actionState.b[3] == 8) {
+        } else if (partnerActionStatus->actingPartner == PARTNER_LAKILESTER) {
             if (actionState == ACTION_STATE_RIDE) {
                 return TRUE;
             }
@@ -69,7 +69,7 @@ s32 can_pause(s32 currentButtons, s32 pressedButtons) {
         !is_picking_up_item())
     {
         if (!(gPlayerStatus.animFlags & PLAYER_STATUS_ANIM_FLAGS_8BIT_MARIO)) {
-            if (partnerActionStatus->actionState.b[0] == 0) {
+            if (partnerActionStatus->partnerActionState == PARTNER_ACTION_NONE) {
                 if (!(gPlayerStatus.flags & PLAYER_STATUS_FLAGS_1000)) {
                     if (actionState == ACTION_STATE_IDLE ||
                         actionState == ACTION_STATE_WALK ||
@@ -79,23 +79,23 @@ s32 can_pause(s32 currentButtons, s32 pressedButtons) {
                     }
                 }
             } else if (partner_player_can_pause()) {
-                if (partnerActionStatus->actionState.b[3] == 6) {
+                if (partnerActionStatus->actingPartner == PARTNER_WATT) {
                     return actionState == ACTION_STATE_IDLE ||
                            actionState == ACTION_STATE_WALK ||
                            actionState == ACTION_STATE_RUN;
-                } else if (partnerActionStatus->actionState.b[3] == 9) {
+                } else if (partnerActionStatus->actingPartner == PARTNER_BOW) {
                     if (actionState == ACTION_STATE_RIDE) {
                         gPlayerStatus.alpha2 = 0;
                         return TRUE;
                     }
-                } else if (partnerActionStatus->actionState.b[3] == 8) {
+                } else if (partnerActionStatus->actingPartner == PARTNER_LAKILESTER) {
                     if (actionState == ACTION_STATE_RIDE) {
                         if (func_802BD7DC()) {
                             return TRUE;
                         }
                         sfx_play_sound(SOUND_MENU_ERROR);
                     }
-                } else if (partnerActionStatus->actionState.b[3] == 7) {
+                } else if (partnerActionStatus->actingPartner == PARTNER_SUSHIE) {
                     sfx_play_sound(SOUND_MENU_ERROR);
                 }
             }

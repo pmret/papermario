@@ -33,17 +33,17 @@ s32 can_trigger_loading_zone(void) {
 
     if (actionState == ACTION_STATE_RIDE) {
         if (playerData->currentPartner == PARTNER_LAKILESTER || playerData->currentPartner == PARTNER_BOW) {
-            if (partnerActionStatus->actionState.b[0] != 0) {
+            if (partnerActionStatus->partnerActionState != PARTNER_ACTION_NONE) {
                 return TRUE;
             } else {
                 gPlayerStatusPtr->animFlags |= PLAYER_STATUS_ANIM_FLAGS_4;
                 return FALSE;
             }
         } else {
-            if (partnerActionStatus->actionState.b[3] == 6 || partnerActionStatus->actionState.b[3] == 7) {
-                return partnerActionStatus->actionState.b[0] != 0;
+            if (partnerActionStatus->actingPartner == PARTNER_WATT || partnerActionStatus->actingPartner == PARTNER_SUSHIE) {
+                return partnerActionStatus->partnerActionState != PARTNER_ACTION_NONE;
             }
-            if (partnerActionStatus->actionState.b[3] == 4) {
+            if (partnerActionStatus->actingPartner == PARTNER_PARAKARRY) {
                 gPlayerStatusPtr->animFlags |= PLAYER_STATUS_ANIM_FLAGS_4;
                 return FALSE;
             }
@@ -98,7 +98,7 @@ s32 collision_main_above(void) {
         {
             if (sp2C <= fabsf(new_var + playerStatus->gravityIntegrator[0])) {
                 do {
-                    if ((hitResult & 0x4000) && get_entity_type(hitResult) == ENTITY_TYPE_BRICK_BLOCK) {
+                    if ((hitResult & COLLISION_WITH_ENTITY_BIT) && get_entity_type(hitResult) == ENTITY_TYPE_BRICK_BLOCK) {
                         return hitResult;
                     }
                 } while (0);
@@ -353,7 +353,7 @@ void func_800E315C(s32 colliderID) {
                 set_action_state(ACTION_STATE_LAND);
                 break;
             case 3:
-                if ((partnerActionStatus->actionState.i & 0xFF0000FF) != 0x01000009) {
+                if ((*(s32*)(&partnerActionStatus->partnerActionState) & 0xFF0000FF) != 0x01000009) {
                     if (playerStatus->blinkTimer == 0) {
                         if (playerStatus->actionState != ACTION_STATE_HIT_LAVA) {
                             playerStatus->unk_BF = 1;
@@ -365,7 +365,7 @@ void func_800E315C(s32 colliderID) {
                 }
                 break;
             case 2:
-                if ((partnerActionStatus->actionState.i & 0xFF0000FF) != 0x01000009) {
+                if ((*(s32*)(&partnerActionStatus->partnerActionState) & 0xFF0000FF) != 0x01000009) {
                     if (playerStatus->blinkTimer == 0) {
                         if (playerStatus->actionState != ACTION_STATE_HIT_FIRE) {
                             playerStatus->unk_BF = 2;
@@ -396,12 +396,12 @@ void phys_player_land(void) {
     playerStatus->landPos.z = playerStatus->position.z;
     playerStatus->flags &= ~(PLAYER_STATUS_FLAGS_FLYING | PLAYER_STATUS_FLAGS_FALLING | PLAYER_STATUS_FLAGS_JUMPING);
     sfx_play_sound_at_player(SOUND_SOFT_LAND, 0);
-    if (!(collisionStatus->currentFloor & 0x4000)) {
+    if (!(collisionStatus->currentFloor & COLLISION_WITH_ENTITY_BIT)) {
         phys_adjust_cam_on_landing();
     }
 
     collisionStatus->lastTouchedFloor = -1;
-    if (collisionStatus->currentFloor & 0x4000) {
+    if (collisionStatus->currentFloor & COLLISION_WITH_ENTITY_BIT) {
         s32 entityType = get_entity_type(collisionStatus->currentFloor);
 
         if (entityType <= ACTION_STATE_FALLING) {
@@ -901,7 +901,7 @@ void phys_main_collision_below(void) {
         if (result >= 0) {
             switch (get_collider_type_by_id(result) & 0xFF) {
                 case 2:
-                    if (partnerActionStatus->actionState.b[0] == 0 || partnerActionStatus->actionState.b[3] != 9) {
+                    if (partnerActionStatus->partnerActionState == PARTNER_ACTION_NONE || partnerActionStatus->actingPartner != PARTNER_BOW) {
                         if (playerStatus->blinkTimer == 0) {
                             if (playerStatus->actionState != ACTION_STATE_HIT_LAVA) {
                                 playerStatus->unk_BF = 2;
@@ -913,7 +913,7 @@ void phys_main_collision_below(void) {
                     }
                     break;
                 case 3:
-                    if (partnerActionStatus->actionState.b[0] == 0 || partnerActionStatus->actionState.b[3] != 9) {
+                    if (partnerActionStatus->partnerActionState == PARTNER_ACTION_NONE || partnerActionStatus->actingPartner != PARTNER_BOW) {
                         if (playerStatus->blinkTimer == 0) {
                             if (playerStatus->actionState != ACTION_STATE_HIT_LAVA) {
                                 playerStatus->unk_BF = 1;
@@ -926,7 +926,7 @@ void phys_main_collision_below(void) {
                     break;
                 default:
                     cond = FALSE;
-                    if (collisionStatus->currentFloor & 0x4000) {
+                    if (collisionStatus->currentFloor & COLLISION_WITH_ENTITY_BIT) {
                         cond = get_entity_type(collisionStatus->currentFloor) == ENTITY_TYPE_HIDDEN_PANEL;
                     }
 
@@ -1109,7 +1109,7 @@ void try_player_footstep_sounds(s32 arg0) {
 }
 
 void phys_update_interact_collider(void) {
-    gCollisionStatus.unk_0A = phys_check_interactable_collision();
+    gCollisionStatus.currentInspect = phys_check_interactable_collision();
 }
 
 s32 phys_check_interactable_collision(void) {
@@ -1145,9 +1145,9 @@ s32 phys_can_player_interact(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 ret = TRUE;
 
-    if (gPartnerActionStatus.actionState.b[0] != 0) {
-        if (gPartnerActionStatus.actionState.b[3] == 3) {
-            if (gPartnerActionStatus.actionState.b[0] < 3) {
+    if (gPartnerActionStatus.partnerActionState != PARTNER_ACTION_NONE) {
+        if (gPartnerActionStatus.actingPartner == PARTNER_BOMBETTE) {
+            if (gPartnerActionStatus.partnerActionState <= PARTNER_ACTION_BOMBETTE_2) {
                 ret = FALSE;
             }
         } else {

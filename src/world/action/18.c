@@ -30,8 +30,8 @@ void func_802B6000_E245D0(void) {
     f32 sinTheta;
     s32 colliderID;
 
-    if (playerStatus->flags < 0) {
-        playerStatus->flags &= ~0x80000000;
+    if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
+        playerStatus->flags &= ~PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
         phys_adjust_cam_on_landing();
         if (!(playerStatus->animFlags & 0x1000)) {
             s32 temp;
@@ -90,8 +90,8 @@ void func_802B6198_E24768(void) {
 void func_802B6230_E24800(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    if (playerStatus->flags < 0) {
-        playerStatus->flags &= ~0x80000000;
+    if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
+        playerStatus->flags &= ~PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
         suggest_player_anim_clearUnkFlag(0xA0005);
         playerStatus->currentStateTime = 8;
     }

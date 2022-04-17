@@ -53,7 +53,7 @@ void func_802B6060_E27570(void) {
         D_802B679C = 0;
         suggest_player_anim_clearUnkFlag(0x1000A);
         sfx_play_sound_at_player(SOUND_167, 0);
-        gCameras[CAM_DEFAULT].moveFlags |= 1;
+        gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_FLAGS_1;
     }
     tempCurrentSpeed = playerStatus->currentSpeed;
     sp28 = playerStatus->position.x;
