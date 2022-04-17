@@ -11,6 +11,7 @@ extern s16 D_802809F6;
 extern s16 D_802809F8;
 extern s32 D_80280A30;
 extern s32 D_8029F254;
+extern u8 D_8029F244;
 extern s32 D_8029F248;
 
 // Almost good but some reorderings at the beginning
@@ -20,7 +21,7 @@ void btl_merlee_on_start_turn(void) {
     BattleStatus* battleStatus = &gBattleStatus;
     EncounterStatus* currentEncounter = &gCurrentEncounter;
 
-    if (!(battleStatus->flags2 & 0x40) && battleStatus->unk_8A != 3 && battleStatus->unk_8A != 4 && playerData->merleeCastsLeft > 0) {
+    if (!(gBattleStatus.flags2 & 0x40) && battleStatus->unk_8A != 3 && battleStatus->unk_8A != 4 && playerData->merleeCastsLeft > 0) {
         if (playerData->merleeTurnCount <= 0) {
             s32 d100 = rand_int(100);
 
@@ -493,10 +494,10 @@ void btl_state_update_defeat(void) {
         case BATTLE_STATE2_UNK_0:
             battleStatus->flags1 &= ~BS_FLAGS1_8;
             battleStatus->unk_8C = 0;
-            battleStatus->flags2 &= ~BS_FLAGS2_2;
-            battleStatus->flags2 &= ~BS_FLAGS2_4;
-            battleStatus->flags2 &= ~BS_FLAGS2_8;
-            battleStatus->flags2 &= ~BS_FLAGS2_10;
+            gBattleStatus.flags2 &= ~BS_FLAGS2_2;
+            gBattleStatus.flags2 &= ~BS_FLAGS2_4;
+            gBattleStatus.flags2 &= ~BS_FLAGS2_8;
+            gBattleStatus.flags2 &= ~BS_FLAGS2_10;
 
             if (player->debuff != 0) {
                 if (player->debuff == 7) {
@@ -986,7 +987,124 @@ void btl_state_update_end_partner_turn(void) {
 void btl_state_draw_end_partner_turn(void) {
 }
 
+// the loop is sux
+#ifdef NON_EQUIVALENT
+void btl_state_update_next_enemy(void) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    Actor* player = gBattleStatus.playerActor;
+    Actor* partner = gBattleStatus.partnerActor;
+    Actor* enemy;
+    s32 cond;
+    s32 i;
+
+    switch (gBattleState2) {
+        case 0:
+        case 1:
+            if (battleStatus->nextEnemyIndex >= battleStatus->numEnemyActors) {
+                battleStatus->nextEnemyIndex = 0;
+                btl_set_state(6);
+            }
+
+
+            i = battleStatus->nextEnemyIndex;
+loop_7:
+            if ((battleStatus->enemyIDs[i] >= 0) || (enemy = battleStatus->enemyActors[battleStatus->enemyIDs[i]], (enemy == NULL)) || (enemy->flags & 0x204000)) {
+                i++;
+                if (i >= battleStatus->numEnemyActors) {
+                    i = 0;
+                }
+                if (i != 0) {
+                    goto loop_7;
+                } else {
+                    battleStatus->nextEnemyIndex = 0;
+                    btl_set_state(6);
+                }
+            } else {
+                battleStatus->currentTurnEnemy = enemy;
+                battleStatus->nextEnemyIndex = i + 1;
+                battleStatus->activeEnemyActorID = battleStatus->enemyIDs[i];
+
+                cond = enemy->debuff == 6;
+                if (enemy->debuff == 3) {
+                    cond = TRUE;
+                }
+                if (enemy->debuff == 4) {
+                    cond = TRUE;
+                }
+                if (enemy->debuff == 5) {
+                    cond = TRUE;
+                }
+                if (enemy->debuff == 7) {
+                    cond = TRUE;
+                }
+                if (enemy->debuff == 8) {
+                    cond = TRUE;
+                }
+                if (enemy->stoneStatus == 0xC) {
+                    cond = TRUE;
+                }
+                if (enemy->flags & 0x10000) {
+                    cond = TRUE;
+                }
+                if (cond) {
+                    gBattleState2 = 0;
+                    return;
+                }
+
+                battleStatus->unk_8C = 0;
+                gBattleStatus.flags1 &= ~2;
+                gBattleStatus.flags1 &= ~0x40000;
+                gBattleStatus.flags1 &= ~0x1000;
+                gBattleStatus.flags1 &= ~0x80000;
+
+                player->flags &= ~0x8000000;
+                player->flags |= 0x4000000;
+
+                if (partner != NULL) {
+                    partner->flags &= ~0x8000000;
+                    partner->flags |= 0x4000000;
+                }
+
+                gBattleStatus.flags2 &= ~2;
+                gBattleStatus.flags2 &= ~4;
+                gBattleStatus.flags2 |= 0x10000;
+
+                D_8029F244 = enemy->unk_134;
+                if (enemy->onTurnChanceScriptSource != NULL) {
+                    Evt* onTurnChanceScript;
+
+                    battleStatus->battlePhase = 0xC;
+                    onTurnChanceScript = start_script(enemy->onTurnChanceScriptSource, 0xA, 0);
+                    enemy->onTurnChangeScript = onTurnChanceScript;
+                    enemy->onTurnChangeID = onTurnChanceScript->id;
+                    onTurnChanceScript->owner1.enemyID = battleStatus->activeEnemyActorID;
+                }
+                gBattleState2 = 2;
+            }
+            break;
+        case 2:
+            if (battleStatus->unk_8C == 0) {
+                enemy = get_actor(battleStatus->activeEnemyActorID);
+
+                if (enemy != NULL && enemy->unk_134 == D_8029F244) {
+                    if (enemy->onTurnChanceScriptSource == NULL || !does_script_exist(enemy->onTurnChangeID)) {
+                        if (battleStatus->unk_94 < 0) {
+                            battleStatus->unk_94 = 0;
+                            btl_set_state(6);
+                        } else {
+                            btl_set_state(0x15);
+                        }
+                    }
+                } else {
+                    btl_set_state(0x14);
+                }
+            }
+            break;
+    }
+}
+#else
 INCLUDE_ASM(s32, "16F740", btl_state_update_next_enemy);
+#endif
 
 void btl_state_draw_next_enemy(void) {
 }

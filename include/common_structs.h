@@ -1876,7 +1876,7 @@ typedef struct Actor {
     /* 0x120 */ s16 flyTime;
     /* 0x122 */ s16 flyArcAmplitude;
     /* 0x124 */ char unk_124[16];
-    /* 0x134 */ s8 unk_134;
+    /* 0x134 */ u8 unk_134;
     /* 0x135 */ u8 footStepCounter;
     /* 0x136 */ u8 actorType;
     /* 0x137 */ char unk_137;
