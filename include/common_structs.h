@@ -1219,7 +1219,7 @@ typedef struct ItemEntity {
     /* 0x28 */ u32* savedReadPos;
     /* 0x2C */ char unk_2C[2];
     /* 0x2E */ u8 unkCounter;
-    /* 0x2F */ s8 unk_2F;
+    /* 0x2F */ u8 unk_2F;
     /* 0x30 */ f32 scale;
     /* 0x34 */ Vec3s unk_34;
     /* 0x3A */ char unk_3A[2];
