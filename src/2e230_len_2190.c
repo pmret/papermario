@@ -686,7 +686,7 @@ BGMPlayer* func_80054248(u8 arg0) {
         case 2:
             return D_8009A5FC;
         case 4:
-            return D_8009A640;
+            return D_8009A640; // TODO: why return pointer to SoundManager?
         default:
             return NULL;
     }
@@ -824,22 +824,22 @@ InstrumentGroup* snd_get_BK_instruments(s32 bankGroup, u32 bankIndex) {
 
     switch (bankGroup) {
         case 1:
-            ret = temp->instrumentGroup1[bankIndex / 16];
+            ret = &temp->instrumentGroup1[bankIndex / 16];
             break;
         case 2:
-            ret = temp->instrumentGroup2[bankIndex / 16];
+            ret = &temp->instrumentGroup2[bankIndex / 16];
             break;
         case 4:
-            ret = temp->instrumentGroup4[bankIndex / 16];
+            ret = &temp->instrumentGroup4[bankIndex / 16];
             break;
         case 5:
-            ret = temp->instrumentGroup5[bankIndex / 16];
+            ret = &temp->instrumentGroup5[bankIndex / 16];
             break;
         case 6:
-            ret = temp->instrumentGroup6[bankIndex / 16];
+            ret = &temp->instrumentGroup6[bankIndex / 16];
             break;
         case 3:
-            ret = temp->instrumentGroup3[bankIndex / 16];
+            ret = &temp->instrumentGroup3[bankIndex / 16];
             break;
     }
 

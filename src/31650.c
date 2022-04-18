@@ -238,8 +238,8 @@ void func_80057DC8(s32 arg0) {
 }
 
 void func_80057E08(u8 arg0) {
-    s32* phi_a1 = D_800A3FE0;
-    s32* phi_v1 = D_800A3FE4;
+    s32* phi_a1 = (s32*)D_800A3FE0;
+    s32* phi_v1 = (s32*)D_800A3FE4;
     s32 i;
 
     for (i = 0; i < 0x170; i++) {
@@ -253,8 +253,8 @@ void func_80057E08(u8 arg0) {
 }
 
 void func_80057E5C(u8 arg0) {
-    s32* phi_a1 = D_800A3FE0;
-    s32* phi_v1 = D_800A3FE4;
+    s32* phi_a1 = (s32*)D_800A3FE0;
+    s32* phi_v1 = (s32*)D_800A3FE4;
     s32 i;
 
     for (i = 0; i < 0x170; i++) {
@@ -274,8 +274,8 @@ void func_80057EB0(void) {
 }
 
 void func_80057ED0(s16 arg0) {
-    s32* phi_a1 = D_800A3FE0;
-    s32* phi_v1 = D_800A3FE4;
+    s32* phi_a1 = (s32*)D_800A3FE0;
+    s32* phi_v1 = (s32*)D_800A3FE4;
     s32 i;
 
     for (i = 0; i < 0x170; i++) {
