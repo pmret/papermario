@@ -128,7 +128,7 @@ void nuAuMgr(void* arg) {
     samples = 0;
     cmdListBuf = D_800A3510[0];
     bufferPtr = D_800A3628[0];
-    while (1) {
+    while (TRUE) {
         osRecvMesg(&auMesgQ, (OSMesg*)&mesg_type, OS_MESG_BLOCK);
         switch (*mesg_type) {
             case NU_SC_RETRACE_MSG:
