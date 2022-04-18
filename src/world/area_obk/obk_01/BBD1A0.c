@@ -21,4 +21,10 @@ INCLUDE_ASM(s32, "world/area_obk/obk_01/BBD1A0", func_802406AC_BBD84C);
 
 INCLUDE_ASM(s32, "world/area_obk/obk_01/BBD1A0", func_80240730_BBD8D0);
 
-INCLUDE_ASM(s32, "world/area_obk/obk_01/BBD1A0", func_80240790_BBD930);
+ApiStatus func_80240790_BBD930(Evt* script, s32 isInitialCall) {
+    ItemEntity* item = get_item_entity(script->varTable[0]);
+    
+    set_item_entity_flags(script->varTable[0], 0x80000);
+    item->unk_2F = -1;
+    return ApiStatus_DONE2;
+}
