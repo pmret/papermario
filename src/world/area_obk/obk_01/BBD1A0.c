@@ -21,7 +21,6 @@ INCLUDE_ASM(s32, "world/area_obk/obk_01/BBD1A0", func_802406AC_BBD84C);
 
 INCLUDE_ASM(s32, "world/area_obk/obk_01/BBD1A0", func_80240730_BBD8D0);
 
-// INCLUDE_ASM(s32, "world/area_obk/obk_01/BBD1A0", func_80240790_BBD930);
 ApiStatus func_80240790_BBD930(Evt* script, s32 isInitialCall) {
     ItemEntity* temp_s0;
 
