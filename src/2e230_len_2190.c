@@ -419,11 +419,11 @@ void func_80053AC8(Fade* fade) {
     }
 }
 
-void func_80053AEC(UnkAl1* arg0, s16 arg1) {
-    arg0->unk_10.s32 = arg1 << 16;
-    arg0->unk_18 = arg1;
-    arg0->unk_1A = 0;
-    arg0->unk_14 = 0;
+void func_80053AEC(Fade* fade, s16 arg1) {
+    fade->unk_10.s32 = arg1 << 16;
+    fade->unk_18 = arg1;
+    fade->unk_1A = 0;
+    fade->unk_14 = 0;
 }
 
 void func_80053B04(UnkAl1* arg0, u32 arg1, s16 arg2) {
@@ -774,7 +774,7 @@ void snd_load_PER(UnkAl19E0* arg0, s32 romAddr) {
     u32 size;
     s32 numItemsLeft;
     s32 numItems;
-    u8* end;
+    void* end;
 
     snd_read_rom(romAddr, &header, sizeof(PERHeader));
     size = header.totalSize - sizeof(PERHeader);
@@ -794,7 +794,7 @@ void snd_load_PRG(UnkAl19E0* arg0, s32 romAddr) {
     s32 numItemsLeft;
     s32 numItems;
     s32 dataRomAddr;
-    u8* end;
+    void* end;
 
     snd_read_rom(romAddr, &header, sizeof(PERHeader));
     dataRomAddr = romAddr + sizeof(PERHeader);
@@ -975,7 +975,7 @@ void func_80054C84(s32 bankIndex, s32 bankGroup) {
     u32 i;
     Instrument* instrument = D_8009A5C0->defaultInstrument;
     InstrumentGroup* group =  snd_get_BK_instruments(bankGroup, bankIndex);
-    Instrument** ptr = group;
+    Instrument** ptr = *group;
     if (group != NULL) {
         for (i = 0; i < ARRAY_COUNT(*group); i++) {
             *ptr++ = instrument;
@@ -1090,18 +1090,18 @@ void snd_bcopy(s8* src, s8* dest, s32 size) {
     }
 }
 
-void snd_copy_words(s32* src, s32* dst, s32 num) {
-    num /= 4;
+void snd_copy_words(void* src, void* dst, s32 size) {
+    size /= 4;
 
-    if (num > 0) {
+    if (size > 0) {
         if (!(((s32) src | (s32) dst) & 3)) {
             s32* srcIt = src;
             s32* dstIt = dst;
 
-            num--;
+            size--;
             do {
                 *dstIt++ = *srcIt++;
-            } while (num-- != 0);
+            } while (size-- != 0);
         }
     }
 }

@@ -318,7 +318,7 @@ void snd_BGMCmd_E5_MasterVolumeFade(BGMPlayer* player, BGMPlayerTrack* track) {
 
 void snd_BGMCmd_E8_TrackOverridePatch(BGMPlayer* player, BGMPlayerTrack* track) {
     track->unk_44 = player->unk_D4.u8[1];
-    track->unk_0C = func_80053BE8(player->data, player->unk_D4.u8[0], track->unk_44, &track->unk_10);
+    track->unk_0C = func_80053BE8(player->data, player->unk_D4.u8[0], track->unk_44, track->unk_10);
 }
 
 void snd_BGMCmd_E9_SubTrackVolume(BGMPlayer* arg0, BGMPlayerTrack* track) {

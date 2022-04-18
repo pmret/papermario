@@ -14,7 +14,7 @@ u8 D_80078181 = 1;
 extern u8 D_801AA000[0x56000];
 extern s32 D_800DAAB8;
 extern s32 D_800A3638;
-extern u8* D_800A3510[3];
+extern Acmd* D_800A3510[3];
 extern NUScTask D_800A3520[3];
 extern u64 rspbootUcodeBuffer[];
 extern u64 n_aspMain_text_bin[];
@@ -25,7 +25,7 @@ extern NUDMABuffer nuAuDmaBufList[50];
 extern OSMesgQueue nuAuDmaMesgQ;
 extern OSMesg nuAuDmaMesgBuf[50];
 extern u8 D_800B91A0[];
-extern s32 __nuAuFrameSampleSize;
+extern s32 D_800A3634;
 extern OSMesgQueue D_800DA444;
 extern OSIoMesg nuAuDmaIOMesgBuf[];
 extern NUDMABuffer* D_800A3BD4;
@@ -52,8 +52,8 @@ void create_audio_system(void) {
     config.unk_0C = 0;
     config.heap = &nuAuHeap;
     config.dmaNew = nuAuDmaNew;
-    __nuAuFrameSampleSize = (freq2 / 184 + 1) * 184; // NU_AU_AUDIO_SAMPLES ?
-    D_800A3638 = __nuAuFrameSampleSize - 184;
+    D_800A3634 = (freq2 / 184 + 1) * 184; // NU_AU_AUDIO_SAMPLES ?
+    D_800A3638 = D_800A3634 - 184;
 
     for (i = 0; i < 3; i++) {
         D_800A3510[i] = alHeapAlloc(config.heap, 1, 0x4000);
@@ -77,7 +77,7 @@ void create_audio_system(void) {
     }
 
     for (i = 0; i < 3; i++) {
-        D_800A3628[i] = alHeapAlloc(config.heap, 1, __nuAuFrameSampleSize * 4);
+        D_800A3628[i] = alHeapAlloc(config.heap, 1, D_800A3634 * 4);
     }
 
     nuAuDmaBufList[0].node.next = nuAuDmaBufList[0].node.prev = NULL;
@@ -111,63 +111,60 @@ void nuAuMgr(void* arg) {
     NUScMsg* mesg_type;
     s32 cmdList_len;
     Acmd* cmdListAfter_ptr;
-    s16 temp_v1;
-    s32 s2;
-    s32 s3;
+    s32 cmdListIndex;
+    s32 bufferIndex;
     s32 sampleSize;
     Acmd* cmdListBuf;
-    NUScTask* s1;
-    s32 bufferPtr;
+    u8* bufferPtr;
     s32 samples;
-    s32 phi_v0;
-    s32 s6;
+    s32 cond;
 
     osCreateMesgQueue(&auMesgQ, auMsgBuf, NU_AU_MESG_MAX);
     osCreateMesgQueue(&auRtnMesgQ, &auRtnMesgBuf, 1);
     nuScAddClient(&auClient, &auMesgQ, NU_SC_RETRACE_MSG | NU_SC_PRENMI_MSG);
 
     cmdList_len = 0;
-    s2 = 0;
-    s3 = 0;
+    cmdListIndex = 0;
+    bufferIndex = 0;
     samples = 0;
     cmdListBuf = D_800A3510[0];
     bufferPtr = D_800A3628[0];
     while (1) {
-        osRecvMesg(&auMesgQ, &mesg_type, OS_MESG_BLOCK);
+        osRecvMesg(&auMesgQ, (OSMesg*)&mesg_type, OS_MESG_BLOCK);
         switch (*mesg_type) {
             case NU_SC_RETRACE_MSG:
                 if (cmdList_len != 0 && nuAuTaskStop == NU_AU_TASK_RUN) {
-                    D_800A3520[s2].msgQ = &auRtnMesgQ;
-                    D_800A3520[s2].list.t.data_ptr = cmdListBuf;
-                    D_800A3520[s2].list.t.data_size = (cmdListAfter_ptr - cmdListBuf) * sizeof(Acmd);
-                    osSendMesg(&D_800DA444, &D_800A3520[s2], OS_MESG_BLOCK);
+                    D_800A3520[cmdListIndex].msgQ = &auRtnMesgQ;
+                    D_800A3520[cmdListIndex].list.t.data_ptr = (u64*)cmdListBuf;
+                    D_800A3520[cmdListIndex].list.t.data_size = (cmdListAfter_ptr - cmdListBuf) * sizeof(Acmd);
+                    osSendMesg(&D_800DA444, &D_800A3520[cmdListIndex], OS_MESG_BLOCK);
                     nuAuCleanDMABuffers();
                     osRecvMesg(&auRtnMesgQ, NULL, 1);
-                    if (++s3 == 3) {
-                        s3 = 0;
+                    if (++bufferIndex == 3) {
+                        bufferIndex = 0;
                     }
-                    if (++s2 == 3) {
-                        s2 = 0;
+                    if (++cmdListIndex == 3) {
+                        cmdListIndex = 0;
                     }
                 }
-                if (osAiGetStatus() & 0x80000000) {
-                    s6 = FALSE;
+                if (osAiGetStatus() & AI_STATUS_FIFO_FULL) {
+                    cond = FALSE;
                     continue;
                 }
                 sampleSize = osAiGetLength() >> 2;
                 if (cmdList_len != 0 && nuAuTaskStop == NU_AU_TASK_RUN) {
                     osAiSetNextBuffer(bufferPtr, samples * 4);
-                    cmdListBuf = D_800A3510[s2];
-                    bufferPtr = D_800A3628[s3];
+                    cmdListBuf = D_800A3510[cmdListIndex];
+                    bufferPtr = D_800A3628[bufferIndex];
                 }
-                if (sampleSize < 184 || s6) {
-                    samples = __nuAuFrameSampleSize;
-                    s6 = FALSE;
+                if (sampleSize < 184 || cond) {
+                    samples = D_800A3634;
+                    cond = FALSE;
                 } else {
                     samples = D_800A3638;
-                    s6 = TRUE;
+                    cond = TRUE;
                 }
-                cmdListAfter_ptr = alAudioFrame(cmdListBuf, &cmdList_len, osVirtualToPhysical(bufferPtr), samples);
+                cmdListAfter_ptr = alAudioFrame(cmdListBuf, &cmdList_len, (s16*)osVirtualToPhysical(bufferPtr), samples);
                 if (nuAuPreNMIFunc != 0 && nuAuPreNMI != 0) {
                     nuAuPreNMIFunc(NU_SC_RETRACE_MSG, nuAuPreNMI);
                     nuAuPreNMI++;
@@ -194,7 +191,7 @@ s32 nuAuDmaCallBack(s32 addr, s32 len, void *state, u8 arg3) {
     NUDMABuffer* lastDmaPtr;
 
     if (arg3 == 0) {
-        return osVirtualToPhysical(addr);
+        return osVirtualToPhysical((void*)addr);
     }
 
     lastDmaPtr = NULL;
@@ -206,13 +203,13 @@ s32 nuAuDmaCallBack(s32 addr, s32 len, void *state, u8 arg3) {
         buffEnd = dmaPtr->startAddr + 0x500;
         if (addr >= startAddr && buffEnd >= addrEnd) {
             dmaPtr->frameCnt = nuAuFrameCounter;
-            freeBuffer = dmaPtr->ptr + addr - dmaPtr->startAddr;
+            freeBuffer = (NUDMABuffer*)(dmaPtr->ptr + addr - dmaPtr->startAddr);
             return osVirtualToPhysical(freeBuffer);
         } else if (addr < startAddr) {
             break;
         }
         lastDmaPtr = dmaPtr;
-        dmaPtr = dmaPtr->node.next;
+        dmaPtr = (NUDMABuffer*)dmaPtr->node.next;
     }
 
     dmaPtr = nuAuDmaState.firstFree;
@@ -220,7 +217,7 @@ s32 nuAuDmaCallBack(s32 addr, s32 len, void *state, u8 arg3) {
         return osVirtualToPhysical(nuAuDmaState.firstUsed);
     }
 
-    nuAuDmaState.firstFree = dmaPtr->node.next;
+    nuAuDmaState.firstFree = (NUDMABuffer*)dmaPtr->node.next;
     alUnlink(&dmaPtr->node);
 
     if (lastDmaPtr != NULL) {
@@ -237,7 +234,7 @@ s32 nuAuDmaCallBack(s32 addr, s32 len, void *state, u8 arg3) {
         dmaPtr->node.prev = NULL;
     }
 
-    freeBuffer = dmaPtr->ptr;
+    freeBuffer = (NUDMABuffer*)dmaPtr->ptr;
     delta = addr & 1;
     addr -= delta;
     dmaPtr->startAddr = addr;
@@ -262,7 +259,7 @@ ALDMAproc nuAuDmaNew(NUDMAState** state) {
 
     nuAuDmaNext = 0;
     *state = &nuAuDmaState;
-    return nuAuDmaCallBack;
+    return (ALDMAproc)nuAuDmaCallBack;
 }
 
 void nuAuCleanDMABuffers(void) {
@@ -276,17 +273,17 @@ void nuAuCleanDMABuffers(void) {
         u32* frameCounter;
 
         while (dmaPtr != NULL) {
-            nextPtr = dmaPtr->node.next;
+            nextPtr = (NUDMABuffer*)dmaPtr->node.next;
 
             if (dmaPtr->frameCnt + 1 < nuAuFrameCounter) {
                 if (state->firstUsed == dmaPtr) {
                     state->firstUsed = nextPtr;
                 }
 
-                alUnlink(dmaPtr);
+                alUnlink(&dmaPtr->node);
 
                 if (state->firstFree != 0) {
-                    alLink(dmaPtr, state->firstFree);
+                    alLink(&dmaPtr->node, &state->firstFree->node);
                 } else {
                     state->firstFree = dmaPtr;
                     dmaPtr->node.next = 0;

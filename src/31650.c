@@ -14,7 +14,6 @@ s32 D_80078E60[] = { 0x7FFF7FFC, 0x7FF57FE8, 0x7FD77FC0, 0x7FA57F84, 0x7F5F7F34,
                    };
 
 
-//INCLUDE_ASM(s32, "31650", func_80056250);
 void func_80056250(UnkAl0* globals, ALConfig* config) {
     s32 i;
     ALHeap* heap = config->heap;
