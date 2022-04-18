@@ -246,7 +246,7 @@ s32 calc_player_damage_enemy(void) {
     s32 isIceDamage;
     s32 tempBinary;
     s32 wasStatusInflicted;
-    s32 isAbilityActive;
+    s32 attackFxType;
 
     sp20 = FALSE;
     isFireDamage = FALSE;
@@ -271,7 +271,7 @@ s32 calc_player_damage_enemy(void) {
 
     targetPart = get_actor_part(target, currentTargetPartID);
 
-    ASSERT (targetPart != NULL);
+    ASSERT(targetPart != NULL);
 
     target->lastDamageTaken = 0;
 
@@ -361,12 +361,12 @@ s32 calc_player_damage_enemy(void) {
             isIceDamage = TRUE;
         }
 
-        isAbilityActive = player_team_is_ability_active(player, ABILITY_ATTACK_FX);
+        attackFxType = player_team_is_ability_active(player, ABILITY_ATTACK_FX);
 
-        if (isAbilityActive) {
+        if (attackFxType) {
             fx_breaking_junk(0, state->goalPos.x, state->goalPos.y, state->goalPos.z + 5.0f, 1.0f, 0x1E);
 
-            switch (isAbilityActive) {
+            switch (attackFxType) {
                 case 1:
                     sfx_play_sound_at_position(SOUND_372, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
                     break;
@@ -461,7 +461,7 @@ s32 calc_player_damage_enemy(void) {
 
             gBattleStatus.flags2 |= BS_FLAGS2_4000000;
 
-            if (battleStatus->hpDrainCount >= 6) {
+            if (battleStatus->hpDrainCount > 5) {
                 battleStatus->hpDrainCount = 5;
             }
         }
@@ -476,7 +476,7 @@ s32 calc_player_damage_enemy(void) {
 
             gBattleStatus.flags2 |= BS_FLAGS2_4000000;
 
-            if (battleStatus->hpDrainCount >= 6) {
+            if (battleStatus->hpDrainCount > 5) {
                 battleStatus->hpDrainCount = 5;
             }
         }
@@ -528,7 +528,7 @@ s32 calc_player_damage_enemy(void) {
             currentAttackDamage = 0;
         }
 
-        if (currentAttackDamage >= 100) {
+        if (currentAttackDamage > 99) {
             currentAttackDamage = 99;
         }
 
@@ -546,14 +546,14 @@ s32 calc_player_damage_enemy(void) {
         if (battleStatus->currentAttackElement & DAMAGE_TYPE_POWER_BOUNCE && currentAttackDamage > 0) {
             currentAttackDamage += battleStatus->powerBounceCounter;
 
-            if (currentAttackDamage <= 0) {
+            if (currentAttackDamage < 1) {
                 currentAttackDamage = 1;
             }
         }
 
         battleStatus->lastAttackDamage = 0;
 
-        if (currentAttackDamage <= 0) {
+        if (currentAttackDamage < 1) {
             target->hpChangeCounter = 0;
             retVal = 2;
 

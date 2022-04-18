@@ -331,7 +331,7 @@ s32 calc_partner_damage_enemy(void) {
             }
         }
 
-        if (damageDealt >= 100) {
+        if (damageDealt > 99) {
             damageDealt = 99;
         }
 
@@ -349,14 +349,14 @@ s32 calc_partner_damage_enemy(void) {
         if (battleStatus->currentAttackElement & DAMAGE_TYPE_POWER_BOUNCE && damageDealt > 0) {
             damageDealt += battleStatus->powerBounceCounter;
 
-            if (damageDealt <= 0) {
+            if (damageDealt < 1) {
                 damageDealt = 1;
             }
         }
 
         battleStatus->lastAttackDamage = 0;
 
-        if (damageDealt <= 0) {
+        if (damageDealt < 1) {
             target->hpChangeCounter = 0;
 
             if (!(battleStatus->currentAttackElement & DAMAGE_TYPE_STATUS_ALWAYS_HITS)) {
