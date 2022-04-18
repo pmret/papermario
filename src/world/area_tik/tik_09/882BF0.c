@@ -1,13 +1,25 @@
 #include "tik_09.h"
 
-#include "world/common/set_script_owner_npc_anim.inc.c"
+#include "world/common/atomic/enemy/UnkAI_5.inc.c"
 
-#include "world/common/UnkDistFunc.inc.c"
+ApiStatus func_80241204_8833C4(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    EncounterStatus* encounterStatus = &gCurrentEncounter;
+    s32 enemyCount = 0;
+    s32 i, j;
 
-#include "world/common/UnkNpcAIFunc12.inc.c"
+    for (i = 0; i < encounterStatus->numEncounters; i++) {
+        Encounter* temp = encounterStatus->encounterList[i];
+        if (temp == NULL) {
+            continue;
+        }
+        for (j = 0; j < temp->count; j++) {
+            if (temp->enemy[j] != NULL) {
+                enemyCount++;
+            }
+        }
+    }
 
-#include "world/common/set_script_owner_npc_col_height.inc.c"
-
-#include "world/common/UnkNpcAIMainFunc5.inc.c"
-
-INCLUDE_ASM(s32, "world/area_tik/tik_09/882BF0", func_80241204_8833C4);
+    evt_set_variable(script, *args++, enemyCount);
+    return ApiStatus_DONE2;
+}

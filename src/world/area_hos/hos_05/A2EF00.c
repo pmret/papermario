@@ -5,13 +5,10 @@ extern u8 D_8024DCD3_A37F13;
 extern u8 D_802D9D73;
 
 #define NAMESPACE dup_hos_05
-#include "world/common/UnkFunc27.inc.c"
+#include "world/common/atomic/UnkFunc27.inc.c"
 
-#include "world/common/UnkFunc26.inc.c"
+#include "world/common/atomic/TexturePan.inc.c"
 
-#include "world/common/UnkTexturePanFunc.inc.c"
-
-#include "world/common/UnkTexturePanFunc2.inc.c"
 #define NAMESPACE hos_05
 
 INCLUDE_ASM(s32, "world/area_hos/hos_05/A2EF00", func_802452C4_A2F504);

@@ -15,17 +15,18 @@ void func_802B6000_E26DE0(void) {
     u32 entityType;
     u8 colliderType;
 
-    if (playerStatus->flags & (1 << 31)) {
-        playerStatus->flags &= ~0x80000006;
-        playerStatus->flags |= 0xA;
+    if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
+        playerStatus->flags &= ~(PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED | PLAYER_STATUS_FLAGS_JUMPING | PLAYER_STATUS_FLAGS_FALLING);
+        playerStatus->flags |= (PLAYER_STATUS_FLAGS_JUMPING | PLAYER_STATUS_FLAGS_FLYING);
+
         playerStatus->fallState = 0;
         playerStatus->currentSpeed = 0.0f;
         D_802B6730 = 0.0f;
         playerStatus->gravityIntegrator[0] = 5.2f;
         suggest_player_anim_clearUnkFlag(0x1000A);
         disable_player_input();
-        playerStatus->flags |= 0x200;
-        gCameras[CAM_DEFAULT].moveFlags |= 1;
+        playerStatus->flags |= PLAYER_STATUS_FLAGS_200;
+        gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_FLAGS_1;
         sfx_play_sound_at_player(0x146, 0);
     }
 
@@ -41,7 +42,7 @@ void func_802B6000_E26DE0(void) {
                 playerStatus->gravityIntegrator[0] -= 0.54;
                 if (collisionStatus->currentCeiling < 0) {
                     playerStatus->position.y += playerStatus->gravityIntegrator[0];
-                } else if (collisionStatus->currentCeiling & 0x4000) {
+                } else if (collisionStatus->currentCeiling & COLLISION_WITH_ENTITY_BIT) {
                     entity = get_entity_by_index(collisionStatus->currentCeiling);
                     if (entity != NULL) {
                         playerStatus->position.y = entity->position.y - (playerStatus->colliderHeight * 0.5);
@@ -92,8 +93,8 @@ void func_802B6000_E26DE0(void) {
                 playerStatus->gravityIntegrator[0] = -100.0f;
             }
             if (sp10 >= 0) {
-                if (collisionStatus->currentFloor & 0x4000 && (entityType = get_entity_type(collisionStatus->currentFloor),
-                                                               entityType == 8 || entityType == 7)) {
+                if (collisionStatus->currentFloor & COLLISION_WITH_ENTITY_BIT && (entityType = get_entity_type(collisionStatus->currentFloor),
+                        entityType == ENTITY_TYPE_RED_SWITCH || entityType == ENTITY_TYPE_BLUE_SWITCH)) {
                     get_entity_by_index(collisionStatus->currentFloor)->collisionFlags |= 1;
                     playerStatus->fallState = 0xB;
                     playerStatus->flags &= ~0x8;

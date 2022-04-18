@@ -212,7 +212,7 @@ void load_hit_data(s32 idx, HitFile* hit) {
             break;
     }
 
-    assetBoundingBox = (u32*)((void*)hit + assetCollisionData->boundingBoxesOffset);;
+    assetBoundingBox = (u32*)((void*)hit + assetCollisionData->boundingBoxesOffset);
     collisionData->aabbs = collision_heap_malloc(assetCollisionData->boundingBoxesDataSize * 4);
     for (i = 0, boundingBox = (u32*)(collisionData->aabbs); i < assetCollisionData->boundingBoxesDataSize;
         assetBoundingBox++, boundingBox++, i++) {
@@ -461,7 +461,7 @@ void update_collider_transform(s16 colliderID) {
 }
 
 s32 get_collider_type_by_id(s32 colliderID) {
-    if (colliderID & 0x4000) {
+    if (colliderID & COLLISION_WITH_ENTITY_BIT) {
         return 0;
     } else {
         return gCollisionData.colliderList[colliderID].flags;
@@ -1026,7 +1026,7 @@ ApiStatus func_8005DB00(Evt* script, s32 isInitialCall) {
         script->functionTemp[0] = 1;
         break;
     case 1:
-        if (partnerStatus->actionState.b[3] != 9) {
+        if (partnerStatus->actingPartner != PARTNER_BOW) {
             if (npc->duration != 0 && npc->duration != script->functionTemp[0])
                 return ApiStatus_BLOCK;
 

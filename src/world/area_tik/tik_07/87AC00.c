@@ -2,26 +2,21 @@
 
 #include "world/common/UnkPosFunc2.inc.c"
 
-INCLUDE_ASM(s32, "world/area_tik/tik_07/87AC00", func_80241390_87AF70);
+extern s32 D_802449B0_87E590[4];
 
-#include "world/common/UnkNpcAIFunc23.inc.c"
+ApiStatus func_80241390_87AF70(Evt* script, s32 isInitialCall) {
+    PlayerStatus* player = &gPlayerStatus;
+    u32 i;
 
-#include "world/common/UnkNpcAIFunc35.inc.c"
+    for (i = 0; i < ARRAY_COUNT(D_802449B0_87E590); i++) {
+        if (gCollisionStatus.currentFloor != D_802449B0_87E590[i]) {
+            continue;
+        }
+        if ((player->actionState == ACTION_STATE_GROUND_POUND) || (player->actionState == ACTION_STATE_ULTRA_POUND)) {
+            return ApiStatus_BLOCK;
+        }
+    }
+    return ApiStatus_DONE2;
+}
 
-#include "world/common/UnkNpcAIFunc1_copy.inc.c"
-
-#include "world/common/UnkFunc4.inc.c"
-
-#include "world/common/UnkNpcAIFunc2.inc.c"
-
-#include "world/common/SixFloatsFunc.inc.c"
-
-#include "world/common/UnkNpcAIFunc14.inc.c"
-
-#include "world/common/UnkNpcAIFunc3.inc.c"
-
-#include "world/common/UnkFunc6.inc.c"
-
-#include "world/common/UnkFunc5.inc.c"
-
-#include "world/common/UnkNpcAIMainFunc9.inc.c"
+#include "world/common/atomic/enemy/UnkAI_9.inc.c"

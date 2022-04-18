@@ -35,6 +35,6 @@ INCLUDE_ASM(s32, "world/area_iwa/iwa_02/915D70", func_80240984_9166F4);
 
 INCLUDE_ASM(s32, "world/area_iwa/iwa_02/915D70", func_80240C90_916A00);
 
-INCLUDE_ASM(s32, "world/area_iwa/iwa_02/915D70", func_80240FE0_916D50);
+#include "world/common/StashVars.inc.c"
 
 #include "world/common/GetItemName.inc.c"

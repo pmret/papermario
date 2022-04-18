@@ -10,10 +10,9 @@ enum {
     NPC_BZZAP,
 };
 
-static s32 N(D_80244A20)[91];
+static s32 N(ItemChoiceList)[91];
 static s8 N(D_8024510C_pad)[4];
-static s32 N(D_80245110)[91];
-static s32 N(D_8024527C);
+static s32 N(FlowerGuard_ItemChoiceList)[91];
 
 EntryList N(entryList) = {
     {  620.0f, 0.0f, 0.0f, 270.0f },
@@ -40,7 +39,7 @@ EvtScript N(80242330) = {
 };
 
 EvtScript N(802423A0) = {
-    EVT_SET_GROUP(11)
+    EVT_SET_GROUP(EVT_GROUP_0B)
     EVT_SET(EVT_VAR(10), EVT_VAR(0))
     EVT_SET(EVT_VAR(11), EVT_VAR(1))
     EVT_SET(EVT_VAR(12), EVT_VAR(2))
@@ -197,11 +196,11 @@ NpcSettings N(npcSettings_80242AA0) = {
     .level = 19,
 };
 
-s32 N(D_80242ACC_CF569C) = {
+s32 N(ItemChoice_HasSelectedItem) = {
     0x00000000,
 };
 
-s32 N(D_80242AD0_CF56A0) = {
+s32 N(ItemChoice_SelectedItemID) = {
     0x00000000,
 };
 
@@ -222,7 +221,7 @@ EvtScript N(80242AD4) = {
             EVT_CALL(SetPlayerAnimation, ANIM_10002)
             EVT_CALL(RemoveItemEntity, EVT_VAR(0))
     EVT_END_SWITCH
-    EVT_CALL(N(func_80241DAC_CF497C), EVT_VAR(10))
+    EVT_CALL(N(ItemChoice_SaveSelected), EVT_VAR(10))
     EVT_CALL(CloseChoicePopup)
     EVT_UNBIND
     EVT_RETURN
@@ -230,9 +229,9 @@ EvtScript N(80242AD4) = {
 };
 
 EvtScript N(80242C08) = {
-    EVT_CALL(N(func_80241DE4_CF49B4), EVT_VAR(0))
-    EVT_BIND_PADLOCK(N(80242AD4), 0x10, 0, EVT_PTR(N(D_80244A20)), 0, 1)
-    EVT_CALL(N(func_80241D58_CF4928), EVT_VAR(0))
+    EVT_CALL(N(BuildItemChoiceList), EVT_VAR(0))
+    EVT_BIND_PADLOCK(N(80242AD4), 0x10, 0, EVT_PTR(N(ItemChoiceList)), 0, 1)
+    EVT_CALL(N(ItemChoice_WaitForSelection), EVT_VAR(0))
     EVT_RETURN
     EVT_END
 };
@@ -250,8 +249,8 @@ EvtScript N(interact_80242C58) = {
         EVT_CALL(WaitForCam, 0, EVT_FIXED(1.0))
         EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_gate_flower_Palette_01_Anim_2, NPC_ANIM_gate_flower_Palette_01_Anim_1, 0, MESSAGE_ID(0x11, 0x003B))
         EVT_CALL(SetPlayerAnimation, ANIM_THINKING)
-        EVT_CALL(N(func_80241FB4_CF4B84))
-        EVT_SET(EVT_VAR(0), EVT_PTR(N(D_80245110)))
+        EVT_CALL(N(FlowerGuard_MakeItemList))
+        EVT_SET(EVT_VAR(0), EVT_PTR(N(FlowerGuard_ItemChoiceList)))
         EVT_SET(EVT_VAR(1), 0)
         EVT_EXEC_WAIT(N(80242C08))
         EVT_SWITCH(EVT_VAR(0))
@@ -260,7 +259,7 @@ EvtScript N(interact_80242C58) = {
                 EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_gate_flower_Palette_01_Anim_2, NPC_ANIM_gate_flower_Palette_01_Anim_1, 0, MESSAGE_ID(0x11, 0x003C))
             EVT_CASE_DEFAULT
                 EVT_SET(EVT_VAR(8), EVT_VAR(0))
-                EVT_CALL(N(func_80241F44_CF4B14), EVT_VAR(0))
+                EVT_CALL(N(FlowerGuard_JudgeItemTastiness), EVT_VAR(0))
                 EVT_CALL(MakeItemEntity, EVT_VAR(8), 505, 20, -24, 1, 0)
                 EVT_SET(EVT_VAR(7), EVT_VAR(0))
                 EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_2095, 0)
@@ -322,7 +321,7 @@ EvtScript N(interact_80242C58) = {
                                 EVT_ADDF(EVT_VAR(2), EVT_FIXED(500.0))
                                 EVT_ADDF(EVT_VAR(3), EVT_FIXED(15.0))
                                 EVT_ADDF(EVT_VAR(4), EVT_FIXED(-20.0))
-                                EVT_CALL(N(func_80241E80_CF4A50), EVT_VAR(7), EVT_VAR(2), EVT_VAR(3), EVT_VAR(4))
+                                EVT_CALL(N(FlowerGuard_SetItemEntityPosition), EVT_VAR(7), EVT_VAR(2), EVT_VAR(3), EVT_VAR(4))
                                 EVT_WAIT_FRAMES(1)
                                 EVT_IF_NE(EVT_VAR(1), 1)
                                     EVT_BREAK_LOOP
@@ -341,7 +340,7 @@ EvtScript N(interact_80242C58) = {
                                 EVT_ADDF(EVT_VAR(2), EVT_FIXED(510.0))
                                 EVT_ADDF(EVT_VAR(3), EVT_FIXED(15.0))
                                 EVT_ADDF(EVT_VAR(4), EVT_FIXED(-20.0))
-                                EVT_CALL(N(func_80241E80_CF4A50), EVT_VAR(7), EVT_VAR(2), EVT_VAR(3), EVT_VAR(4))
+                                EVT_CALL(N(FlowerGuard_SetItemEntityPosition), EVT_VAR(7), EVT_VAR(2), EVT_VAR(3), EVT_VAR(4))
                                 EVT_WAIT_FRAMES(1)
                                 EVT_IF_NE(EVT_VAR(1), 1)
                                     EVT_BREAK_LOOP
@@ -514,120 +513,12 @@ static s32 N(pad_3CD8)[] = {
     0x00000000, 0x00000000,
 };
 
-#include "world/common/UnkNpcAIFunc23.inc.c"
+#include "world/common/atomic/enemy/UnkAI_9.inc.c"
 
-#include "world/common/UnkNpcAIFunc35.inc.c"
+#include "world/common/atomic/enemy/UnkAI_10.inc.c"
 
-#include "world/common/UnkNpcAIFunc1_copy.inc.c"
+#include "world/common/atomic/ItemChoice_PartA.inc.c"
 
-#include "world/common/UnkFunc4.inc.c"
+#include "world/common/atomic/MakeConsumableChoice.inc.c"
 
-#include "world/common/UnkNpcAIFunc2.inc.c"
-
-#include "world/common/SixFloatsFunc.inc.c"
-
-#include "world/common/UnkNpcAIFunc14.inc.c"
-
-#include "world/common/UnkNpcAIFunc3.inc.c"
-
-#include "world/common/UnkFunc6.inc.c"
-
-#include "world/common/UnkFunc5.inc.c"
-
-#include "world/common/UnkNpcAIMainFunc9.inc.c"
-
-#include "world/common/UnkNpcAIFunc13.inc.c"
-
-#include "world/common/UnkNpcAIFunc34.inc.c"
-
-#include "world/common/UnkFunc45.inc.c"
-
-#include "world/common/UnkNpcAIMainFunc10.inc.c"
-
-#include "world/common/GetNpcCollisionHeight.inc.c"
-
-#include "world/common/AddPlayerHandsOffset.inc.c"
-
-ApiStatus N(func_80241D58_CF4928)(Evt* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-
-    if (isInitialCall) {
-        N(D_80242ACC_CF569C) = FALSE;
-    }
-
-    if (N(D_80242ACC_CF569C)) {
-        N(D_80242ACC_CF569C) = FALSE;
-        evt_set_variable(script, *args, N(D_80242AD0_CF56A0));
-        return ApiStatus_DONE2;
-    }
-
-    return ApiStatus_BLOCK;
-}
-
-ApiStatus N(func_80241DAC_CF497C)(Evt* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-
-    N(D_80242AD0_CF56A0) = evt_get_variable(script, *args);
-    N(D_80242ACC_CF569C) = TRUE;
-    return ApiStatus_DONE2;
-}
-
-ApiStatus N(func_80241DE4_CF49B4)(Evt* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-    s32* ptr = (s32*) evt_get_variable(script, *args);
-    s32 i;
-
-    if (ptr != NULL) {
-        for (i = 0; ptr[i] != 0; i++) {
-            N(D_80244A20)[i] = ptr[i];
-        }
-        N(D_80244A20)[i] = 0;
-    } else {
-        for (i = 0; i <= 90; i++) {
-            N(D_80244A20)[i] = i + 128;
-            N(D_80244A20)[91] = 0;
-        }
-    }
-    return ApiStatus_DONE2;
-}
-
-ApiStatus N(func_80241E80_CF4A50)(Evt* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-    s32 itemIdx = evt_get_variable(script, *args++);
-    s32 var1 = evt_get_variable(script, *args++);
-    s32 var2 = evt_get_variable(script, *args++);
-    s32 var3 = evt_get_variable(script, *args++);
-    ItemEntity* item = get_item_entity(itemIdx);
-
-    item->position.x = var1;
-    item->position.y = var2;
-    item->position.z = var3;
-
-    return ApiStatus_DONE2;
-}
-
-ApiStatus N(func_80241F44_CF4B14)(Evt* script, s32 isInitialCall) {
-    s32 itemId = evt_get_variable(script, *script->ptrReadPos);
-    ItemData* item = &gItemTable[itemId];
-
-    if (itemId == ITEM_YUMMY_MEAL) {
-        script->varTable[9] = 2;
-    } else if (item->typeFlags & 0x80) {
-        script->varTable[9] = 1;
-    } else {
-        script->varTable[9] = 0;
-    }
-
-    return ApiStatus_DONE2;
-}
-
-ApiStatus N(func_80241FB4_CF4B84)(Evt* script, s32 isInitialCall) {
-    s32 i;
-
-    for (i = 0; i <= 90; i++) {
-        N(D_80245110)[i] = 128 + i;
-    }
-
-    N(D_8024527C) = 0;
-    return ApiStatus_DONE2;
-}
+#include "world/common/atomic/ItemChoice_FlowerGuard.inc.c"

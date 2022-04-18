@@ -657,7 +657,7 @@ typedef struct EffectInstanceDataThing {
     char unk_4C[0x24];
     s32 unk_70;
     s32 unk_74;
-} EffectInstanceDataThing;
+} EffectInstanceDataThing; // TODO remove / convert to appropriate effect data struct
 
 typedef struct EffectInstanceData {
     /* 0x00 */ EffectInstanceDataThing* unk_00;
@@ -759,6 +759,35 @@ typedef struct Effect6FInstance {
     /* 0x0C */ Effect6FData* data;
     /* 0x10 */ struct EffectGraphics* effect;
 } Effect6FInstance;
+
+// fx_quizmo_stage
+typedef struct EffectDataQuizStage {
+   /* 0x00 */ char unk_00[0x4];
+   /* 0x04 */ s32 vanishTimer;
+   /* 0x08 */ s32 lifetime;
+   /* 0x10 */ Vec3f origin;
+   /* 0x18 */ s32 microphoneRaiseAmt;
+   /* 0x1C */ s32 rearWallRaiseAmt;
+   /* 0x20 */ s32 leftWallRaiseAmt;
+   /* 0x24 */ s32 rightWallRaiseAmt;
+   /* 0x28 */ s32 podiumRaiseAmt;
+   /* 0x2C */ s32 lightScrollAmt;
+   /* 0x30 */ s32 lightScrollIncrement;
+   /* 0x34 */ s32 lightScrollDelay;
+   /* 0x38 */ s32 unkEffectMode;
+   /* 0x3C */ s32 unk_3C; // stage hidden when == 0xFF
+   /* 0x3C */ char unk_40[0x10];
+} EffectDataQuizStage; // size ~ 0x50 (as allocated on heap)
+
+// fx_quizmo_assistant
+typedef struct EffectDataQuizVannaT {
+    /* 0x00 */ char unk_00[0x4];
+    /* 0x04 */ Vec3f position;
+    /* 0x10 */ s32 vanishTimer;  
+    /* 0x14 */ s32 lifetime;
+    /* 0x18 */ s32 fadeInAmt; // 0 = all-black, FF = fully-visible
+    /* 0x1C */ s32 anim;
+} EffectDataQuizVannaT; // size = 0x20
 
 enum FireBreathType {
     FIRE_BREATH_LARGE = 0,

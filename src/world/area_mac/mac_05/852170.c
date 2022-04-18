@@ -3,81 +3,23 @@
 static char* N(exit_str_0) = "mac_04";
 static char* N(exit_str_1) = "kgr_01";
 
-#define UNK_ALPHA_FUNC_NPC 6
+#define CHUCK_QUIZMO_NPC_ID 6
 
-#include "world/common/UnkTexturePanFunc.inc.c"
-
-#include "world/common/UnkTexturePanFunc2.inc.c"
+#include "world/common/atomic/TexturePan.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_8024030C_85247C);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_8024047C_8525EC);
 
-#include "world/common/UnkNpcAIFunc24.inc.c"
+#include "world/common/atomic/enemy/UnkAI_1.inc.c"
 
-#include "world/common/UnkFunc13.inc.c"
+extern s32 N(Quizmo_Worker);
+extern s32 N(Quizmo_AnswerResult);
+extern EffectInstance* N(Quizmo_StageEffect);
+extern EffectInstance* N(Quizmo_AudienceEffect);
+extern EffectInstance* N(Quizmo_VannaTEffect);
 
-#include "world/common/UnkNpcAIFunc1.inc.c"
-
-#include "world/common/UnkFunc14.inc.c"
-
-#include "world/common/UnkNpcAIFunc25.inc.c"
-
-#include "world/common/NpcJumpFunc2.inc.c"
-
-#include "world/common/NpcJumpFunc.inc.c"
-
-#include "world/common/UnkNpcAIFunc13.inc.c"
-
-#include "world/common/UnkFunc15.inc.c"
-
-#include "world/common/UnkNpcDurationFlagFunc.inc.c"
-
-#include "world/common/UnkFunc16.inc.c"
-
-#include "world/common/UnkNpcAIMainFunc.inc.c"
-
-INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_80241320_853490);
-
-#include "world/common/GetItemName.inc.c"
-
-#include "world/common/Set80151310.inc.c"
-
-#include "world/common/UnkQuizFunc.inc.c"
-
-#include "world/common/UnkFunc31.inc.c"
-
-INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_80241A0C_853B7C);
-
-INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_80241A90_853C00);
-
-INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_80241CA8_853E18);
-
-INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_80241D5C_853ECC);
-
-INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_80241D90_853F00);
-
-INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_80241E10_853F80);
-
-INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_80241E28_853F98);
-
-INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_80241E44_853FB4);
-
-#include "world/common/GetGameStatus75.inc.c"
-
-#include "world/common/SetCamVfov.inc.c"
-
-#include "world/common/GetCamVfov.inc.c"
-
-#include "world/common/UnkCameraFunc.inc.c"
-
-#include "world/common/UnkRotatePlayer.inc.c"
-
-#include "world/common/UnkPartnerFuncs.inc.c"
-
-INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_80242318_854488);
-
-INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_80242384_8544F4);
+#include "world/common/atomic/Quizmo.inc.c"
 
 #include "world/common/GetNpcCollisionHeight.inc.c"
 

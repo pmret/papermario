@@ -50,7 +50,7 @@ static s32 N(pad_3D88)[] = {
 };
 
 EvtScript N(exitDoubleDoor_80243D90) = {
-    EVT_SET_GROUP(27)
+    EVT_SET_GROUP(EVT_GROUP_1B)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(UseDoorSounds, 3)
     EVT_SET(EVT_VAR(0), 0)
@@ -66,7 +66,7 @@ EvtScript N(exitDoubleDoor_80243D90) = {
 };
 
 EvtScript N(exitDoubleDoor_80243E44) = {
-    EVT_SET_GROUP(27)
+    EVT_SET_GROUP(EVT_GROUP_1B)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(UseDoorSounds, 3)
     EVT_SET(EVT_VAR(0), 1)
@@ -308,7 +308,7 @@ EvtScript N(npcAI_802444E4) = {
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(func_802D2B6C)
     EVT_CALL(DisablePartnerAI, 0)
-    EVT_SET_GROUP(0)
+    EVT_SET_GROUP(EVT_GROUP_00)
     EVT_CALL(SetTimeFreezeMode, 1)
     EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_ADD(EVT_VAR(1), 20)
@@ -988,29 +988,7 @@ EvtScript N(802469E0) = {
     EVT_END
 };
 
-#include "world/common/UnkNpcAIFunc24.inc.c"
-
-#include "world/common/UnkFunc13.inc.c"
-
-#include "world/common/UnkNpcAIFunc1.inc.c"
-
-#include "world/common/UnkFunc14.inc.c"
-
-#include "world/common/UnkNpcAIFunc25.inc.c"
-
-#include "world/common/NpcJumpFunc2.inc.c"
-
-#include "world/common/NpcJumpFunc.inc.c"
-
-#include "world/common/UnkNpcAIFunc13.inc.c"
-
-#include "world/common/UnkFunc15.inc.c"
-
-#include "world/common/UnkNpcDurationFlagFunc.inc.c"
-
-#include "world/common/UnkFunc16.inc.c"
-
-#include "world/common/UnkNpcAIMainFunc.inc.c"
+#include "world/common/atomic/enemy/UnkAI_1.inc.c"
 
 #include "world/common/UnkNpcAIFunc6.inc.c"
 
@@ -1041,7 +1019,7 @@ ApiStatus N(func_802414AC_C4125C)(Evt* script, s32 isInitialCall) {
     territory.unk_18 = 65.0f;
     territory.unk_1C = 0;
 
-    if (isInitialCall || (enemy->unk_B0 & 4)) {
+    if (isInitialCall || (enemy->unk_B0 & ENEMY_AI_FLAGS_4)) {
         script->functionTemp[0] = 0;
         npc->duration = 0;
         npc->currentAnim.w = enemy->animList[0];
@@ -1051,10 +1029,10 @@ ApiStatus N(func_802414AC_C4125C)(Evt* script, s32 isInitialCall) {
         } else {
             npc->flags = (npc->flags & ~0x200) | 0x8;
         }
-        if (enemy->unk_B0 & 4) {
+        if (enemy->unk_B0 & ENEMY_AI_FLAGS_4) {
             script->functionTemp[0] = 99;
             script->functionTemp[1] = 0;
-            enemy->unk_B0 &= ~4;
+            enemy->unk_B0 &= ~ENEMY_AI_FLAGS_4;
         }
         enemy->varTable[0] = 0;
     }
@@ -1109,27 +1087,7 @@ ApiStatus N(func_802414AC_C4125C)(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-#include "world/common/UnkNpcAIFunc23.inc.c"
-
-#include "world/common/UnkNpcAIFunc35.inc.c"
-
-#include "world/common/UnkNpcAIFunc1_copy.inc.c"
-
-#include "world/common/UnkFunc4.inc.c"
-
-#include "world/common/UnkNpcAIFunc2.inc.c"
-
-#include "world/common/SixFloatsFunc.inc.c"
-
-#include "world/common/UnkNpcAIFunc14.inc.c"
-
-#include "world/common/UnkNpcAIFunc3.inc.c"
-
-#include "world/common/UnkFunc6.inc.c"
-
-#include "world/common/UnkFunc5.inc.c"
-
-#include "world/common/UnkNpcAIMainFunc9.inc.c"
+#include "world/common/atomic/enemy/UnkAI_9.inc.c"
 
 void N(func_80242C58_C42A08)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
@@ -1237,7 +1195,7 @@ void N(func_80242F94_C42D44)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
         } else {
             npc->rotation.y = 0.0f;
             npc->flags &= ~0x00200000;
-            if (gPartnerActionStatus.actionState.b[3]  != 9) {
+            if (gPartnerActionStatus.actingPartner  != 9) {
                 disable_player_input();
                 partner_disable_input();
                 npc->duration = 0;
@@ -1281,7 +1239,7 @@ void N(func_802432E8_C43098)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
     if (!(npc->pos.y < (posY + temp_f20))) {
         npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z);
         npc->pos.y = posY + temp_f20;
-        fx_emote(2, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 10, &var);
+        fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 10, &var);
         npc->duration = 10;
         script->functionTemp[0] = 18;
     }
@@ -1303,7 +1261,7 @@ void N(func_802434B0_C43260)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
 
     npc->duration++;
     if (npc->duration >= 3) {
-        if (gPartnerActionStatus.actionState.b[3]  != 9) {
+        if (gPartnerActionStatus.actingPartner  != 9) {
             npc->duration = 0;
             script->functionTemp[0] = 100;
         } else {
@@ -1350,7 +1308,7 @@ void N(func_802435D8_C43388)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
     if (script->functionTemp[1] <= 0) {
         script->functionTemp[1] = aiSettings->unk_14;
         if (func_800490B4(territory, enemy, aiSettings->alertRadius * 0.5, aiSettings->unk_10.f * 0.5, 0)) {
-            fx_emote(0, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 12, &var);
+            fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 12, &var);
             ai_enemy_play_sound(npc, 0x2F4, 0x200000);
             npc->moveToPos.y = npc->pos.y;
             script->functionTemp[0] = 12;

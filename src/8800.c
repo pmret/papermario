@@ -89,7 +89,7 @@ void render_frame(s32 flag) {
     }
 
     if (flag) {
-        camID = CAM_CAM3;
+        camID = CAM_3;
     } else {
         camID = CAM_DEFAULT;
     }
@@ -183,7 +183,7 @@ void render_frame(s32 flag) {
             camera->vpAlt.vp.vtrans[1] = camera->vp.vp.vtrans[1] + gGameStatusPtr->unk_83;
 
             if (!(camera->flags & CAM_FLAG_ORTHO)) {
-                if (gCurrentCamID != CAM_CAM3) {
+                if (gCurrentCamID != CAM_3) {
                     if (!(camera->flags & CAM_FLAG_200)) {
                         render_entities();
                     }
@@ -373,9 +373,9 @@ Camera* initialize_next_camera(CameraInitData* initData) {
     camera->bgColor[1] = 0;
     camera->bgColor[2] = 0;
     camera->unk_C0 = 0;
-    camera->unk_54 = 0;
-    camera->unk_58 = 0;
-    camera->unk_5C = 0;
+    camera->auxPos.x = 0;
+    camera->auxPos.y = 0;
+    camera->auxPos.z = 0;
     camera->targetPos.x = 0;
     camera->targetPos.y = 0;
     camera->targetPos.z = 0;

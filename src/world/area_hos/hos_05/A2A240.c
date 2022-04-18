@@ -3,15 +3,20 @@
 static char* N(exit_str_0) = "hos_04";
 static char* N(exit_str_1) = "";
 
-#include "world/common/UnkFunc27.inc.c"
+#include "world/common/atomic/UnkFunc27.inc.c"
 
-#include "world/common/UnkFunc26.inc.c"
+#include "world/common/atomic/TexturePan.inc.c"
 
-#include "world/common/UnkTexturePanFunc.inc.c"
-
-#include "world/common/UnkTexturePanFunc2.inc.c"
-
-#include "world/common/AwaitScriptComplete.inc.c"
+ApiStatus N(AwaitScriptComplete)(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 waitingScriptID = evt_get_variable(script, *args++);
+    
+    if (!does_script_exist(waitingScriptID)) {
+        return ApiStatus_DONE2;
+    } else {
+        return ApiStatus_BLOCK;
+    }
+}
 
 INCLUDE_ASM(s32, "world/area_hos/hos_05/A2A240", func_80240634_A2A874);
 

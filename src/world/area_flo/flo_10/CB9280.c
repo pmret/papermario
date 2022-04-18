@@ -164,7 +164,7 @@ static s32 N(pad_1CA8)[] = {
     0x00000000, 0x00000000,
 };
 
-s32** N(D_80241CB0_CBAEB0) = NULL;
+s32** N(varStash) = NULL;
 
 EvtScript N(80241CB4) = SCRIPT({
     ShowGotItem(EVT_VAR(0), 1, 0);
@@ -182,13 +182,13 @@ EvtScript N(updateTexturePan_80241D14) = SCRIPT({
         if (EVT_VAR(6) == 1) {
             if (EVT_VAR(7) == 1) {
                 if (EVT_VAR(8) == 1) {
-                    N(UnkTexturePanFunc)();
+                    N(UpdateTexturePanSmooth)();
                     return;
                 }
             }
         }
     }
-    N(UnkTexturePanFunc2)();
+    N(UpdateTexturePanStepped)();
 });
 
 EvtScript N(80241DB0) = SCRIPT({
@@ -805,26 +805,9 @@ static s32 N(pad_4084)[] = {
     0x00000000, 0x00000000, 0x00000000,
 };
 
-ApiStatus N(func_80240080_CB9280)(Evt* script, s32 isInitialCall) {
-    s32 i;
-
-    if (N(D_80241CB0_CBAEB0) == NULL) {
-        N(D_80241CB0_CBAEB0) = heap_malloc(16 * sizeof(s32));
-        for (i = 0; i < 16; i++) {
-            N(D_80241CB0_CBAEB0)[i] = (s32*) script->varTable[i];
-        }
-    } else {
-        for (i = 0; i < 16; i++) {
-            script->varTable[i] = (s32) N(D_80241CB0_CBAEB0)[i];
-        }
-        heap_free(N(D_80241CB0_CBAEB0));
-        N(D_80241CB0_CBAEB0) = NULL;
-    }
-    return ApiStatus_DONE2;
-}
+#include "world/common/StashVars.inc.c"
 
 #include "world/common/GetItemName.inc.c"
 
-#include "world/common/UnkTexturePanFunc.inc.c"
+#include "world/common/atomic/TexturePan.inc.c"
 
-#include "world/common/UnkTexturePanFunc2.inc.c"

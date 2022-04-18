@@ -9,7 +9,7 @@
 ApiStatus N(UnkFunc1)(Evt* script, s32 isInitialCall);
 ApiStatus N(UnkNpcAIMainFunc)(Evt* script, s32 isInitialCall);
 
-extern s32** N(D_802436E0_C59620);
+extern s32** N(varStash);
 
 extern NpcGroupList N(npcGroupList_802436B4);
 extern EvtScript N(main);

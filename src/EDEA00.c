@@ -7,27 +7,9 @@
 
 #include "world/common/UnkFunc41.inc.c"
 
-#include "world/common/UnkNpcAIFunc23.inc.c"
+#include "world/common/atomic/enemy/Dead_UnkAI_9.inc.c"
 
-#include "world/common/UnkNpcAIFunc35.inc.c"
-
-#include "world/common/UnkNpcAIFunc1.inc.c"
-
-#include "world/common/UnkFunc4.inc.c"
-
-#include "world/common/UnkNpcAIFunc2.inc.c"
-
-#include "world/common/SixFloatsFunc.inc.c"
-
-#include "world/common/UnkNpcAIFunc14.inc.c"
-
-#include "world/common/UnkNpcAIFunc3.inc.c"
-
-#include "world/common/UnkFunc6.inc.c"
-
-#include "world/common/UnkFunc5.inc.c"
-
-INCLUDE_ASM(s32, "EDEA00", func_802414D0_EDFE90);
+const char D_80247B44_EE6504[] = "JUGEMU MOVE";
 
 s32 func_802416E8_EE00A8(void) {
     s32 i;
@@ -74,7 +56,7 @@ void func_80241730_EE00F0(Evt* script, NpcAISettings* aiSettings, EnemyTerritory
         if (script->functionTemp[1] <= 0) {
             script->functionTemp[1] = aiSettings->unk_14;
             if (func_800490B4(territory, enemy, aiSettings->alertRadius, aiSettings->unk_10.f, 0) != 0) {
-                fx_emote(0, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &var);
+                fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &var);
                 ai_enemy_play_sound(npc, 0x2F4, 0x200000);
                 x = npc->pos.x;
                 y = npc->pos.y;
@@ -153,7 +135,7 @@ void func_80241B94_EE0554(Evt* script, NpcAISettings* aiSettings, EnemyTerritory
     npc->pos.y = y + temp_f22 + (sin_deg(enemy->varTable[2]) * temp_f20);
     enemy->varTable[2] = clamp_angle(enemy->varTable[2] + 0xC);
     if (func_800490B4(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 1) != 0) {
-        fx_emote(0, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &var);
+        fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &var);
         ai_enemy_play_sound(npc, 0x2F4, 0x200000);
         script->functionTemp[0] = 12;
         return;
@@ -172,13 +154,7 @@ void func_80241B94_EE0554(Evt* script, NpcAISettings* aiSettings, EnemyTerritory
 
 INCLUDE_ASM(s32, "EDEA00", func_80241DE4_EE07A4);
 
-#include "world/common/set_script_owner_npc_anim.inc.c"
-
-#include "world/common/UnkDistFunc.inc.c"
-
-#include "world/common/UnkNpcAIFunc12.inc.c"
-
-#include "world/common/set_script_owner_npc_col_height.inc.c"
+#include "world/common/atomic/enemy/UnkAI_StateHandlers_A.inc.c"
 
 INCLUDE_ASM(s32, "EDEA00", func_80242684_EE1044);
 

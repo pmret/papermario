@@ -22,8 +22,8 @@ glabel clear_entity_data
 /* A73FC 80110CFC 80420070 */  lb        $v0, 0x70($v0)
 /* A7400 80110D00 14400003 */  bnez      $v0, .L80110D10
 /* A7404 80110D04 00000000 */   nop
-/* A7408 80110D08 3C018015 */  lui       $at, %hi(D_80151310)
-/* A740C 80110D0C AC201310 */  sw        $zero, %lo(D_80151310)($at)
+/* A7408 80110D08 3C018015 */  lui       $at, %hi(gEntityHideMode)
+/* A740C 80110D0C AC201310 */  sw        $zero, %lo(gEntityHideMode)($at)
 .L80110D10:
 /* A7410 80110D10 3C028016 */  lui       $v0, %hi(D_8015A578)
 /* A7414 80110D14 2442A578 */  addiu     $v0, $v0, %lo(D_8015A578)

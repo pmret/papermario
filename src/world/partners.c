@@ -351,7 +351,7 @@ s32 use_consumable(s32 invSlot) {
     D_8010CD20 = invSlot;
     invSlot = gPlayerData.invItems[invSlot];
     dma_copy(UseItemDmaArgs[0], UseItemDmaArgs[1], _3251D0_VRAM);
-    script = start_script(UseItemDmaArgs[2], 1, 0);
+    script = start_script(UseItemDmaArgs[2], EVT_PRIORITY_1, 0);
     script->varTable[10] = invSlot;
     return script->id;
 }
@@ -365,7 +365,7 @@ s32 func_800EA4B0(s32 collisionID) {
     s32 ret = TRUE;
 
     if (collisionID >= 0) {
-        if (collisionID & 0x4000) {
+        if (collisionID & COLLISION_WITH_ENTITY_BIT) {
             switch (get_entity_type(collisionID)) {
                 case ENTITY_TYPE_BLUE_SWITCH:
                 case ENTITY_TYPE_RED_SWITCH:
@@ -394,7 +394,7 @@ s32 func_800EA4B0(s32 collisionID) {
 }
 
 s32 partner_is_idle(Npc* partner) {
-    return gPartnerActionStatus.actionState.b[0] == 0;
+    return gPartnerActionStatus.partnerActionState == PARTNER_ACTION_NONE;
 }
 
 s32 world_partner_can_player_pause_default(Npc* partner) {
@@ -512,8 +512,8 @@ void partner_init_after_battle(s32 arg0) {
     if (D_8010CFD8 != arg0) {
         D_8010CFE0 = 1;
         D_8010CFE4 = arg0;
-        actionStatus->actionState.b[0] = 0;
-        actionStatus->actionState.b[1] = 0;
+        actionStatus->partnerActionState = 0;
+        actionStatus->partnerAction_unk_1 = 0;
 
         if (D_8010CFD8 != 0 && arg0 != 0) {
             D_8010CFE8 = 2;
@@ -587,7 +587,7 @@ void partner_reset_data(void) {
     D_8010CFD8 = currentPartner;
 
     if (gGameStatusPtr->keepUsingPartnerOnMapChange != 0) {
-        gPartnerActionStatus.actionState.b[0] = 1;
+        gPartnerActionStatus.partnerActionState = 1;
         gGameStatusPtr->keepUsingPartnerOnMapChange = 0;
     }
 
@@ -614,12 +614,12 @@ void partner_initialize_data(void) {
     D_8010CFE0 = 0;
     D_8010CFE8 = 0;
     D_8010CFC4 = 0;
-    actionStatus->actionState.b[3] = 0;
+    actionStatus->actingPartner = 0;
     actionStatus->inputDisabled = 0;
-    actionStatus->actionState.b[1] = 0;
-    actionStatus->actionState.b[0] = 0;
+    actionStatus->partnerAction_unk_1 = 0;
+    actionStatus->partnerActionState = 0;
     actionStatus->unk_358 = 0;
-    actionStatus->actionState.b[2] = 0;
+    actionStatus->partnerAction_unk_2 = 0;
     wPartner = NULL;
     wSavedPartnerPosX = 0;
     wSavedPartnerPosY = 0;
@@ -665,17 +665,17 @@ void partner_handle_after_battle(void) {
             kill_script_by_ID(wPartnerCurrentScriptID);
         }
 
-        wPartnerCurrentScript = start_script(wPartner->update, 20, 0x20);
+        wPartnerCurrentScript = start_script(wPartner->update, EVT_PRIORITY_14, EVT_FLAG_20);
         wPartnerCurrentScript->owner2.npc = wPartnerNpc;
         wPartnerCurrentScriptID = wPartnerCurrentScript->id;
-        wPartnerCurrentScript->groupFlags = 0xA;
+        wPartnerCurrentScript->groupFlags = (EVT_GROUP_02 | EVT_GROUP_08);
 
         D_8010CFE8 = 1;
 
-        if (playerData->currentPartner != PARTNER_WATT && actionStatus->actionState.b[3] == 6) {
-            gPlayerStatusPtr->animFlags &= ~1;
-            gPlayerStatusPtr->animFlags &= ~2;
-            actionStatus->actionState.b[3] = 0;
+        if (playerData->currentPartner != PARTNER_WATT && actionStatus->actingPartner == PARTNER_WATT) {
+            gPlayerStatusPtr->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT;
+            gPlayerStatusPtr->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_2;
+            actionStatus->actingPartner = PARTNER_NONE;
         }
 
         if (wPartner->postBattle != NULL) {
@@ -787,12 +787,12 @@ void partner_walking_update_motion(Npc* partner) {
     PartnerActionStatus* actionStatus = &gPartnerActionStatus;
 
     if (gGameStatusPtr->unk_81 == 0 || playerStatus->flags & (PLAYER_STATUS_FLAGS_INPUT_DISABLED | PLAYER_STATUS_FLAGS_1000)
-        || actionStatus->inputDisabled != 0 || actionStatus->actionState.b[2] != 0) {
+        || actionStatus->inputDisabled != 0 || actionStatus->partnerAction_unk_2 != 0) {
         if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_800)) {
             partner_walking_follow_player(partner);
         }
         if (actionStatus->pressedButtons & (BUTTON_Z | BUTTON_B | BUTTON_C_LEFT | BUTTON_C_DOWN)) {
-            actionStatus->actionState.b[2] = 0;
+            actionStatus->partnerAction_unk_2 = 0;
         }
     }
 
@@ -1048,7 +1048,7 @@ s32 func_800EF4E0(void) {
     Camera* cameras = gCameras;
     s32 ret;
 
-    if (playerStatus->unk_90 == 0.0f) {
+    if (playerStatus->unk_90[CAM_DEFAULT] == 0.0f) {
         if (!(playerStatus->spriteFacingAngle >= 90.0f) || !(playerStatus->spriteFacingAngle < 270.0f)) {
             ret = 1;
             playerStatus->targetYaw = clamp_angle(cameras[CAM_DEFAULT].currentYaw - 90.0f);

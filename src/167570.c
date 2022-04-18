@@ -267,7 +267,7 @@ void filemenu_yesno_handle_input(MenuPanel* menu) {
                             fio_flush_backups();
                         }
                         fio_load_game(slot3);
-                        set_game_mode(0xF);
+                        set_game_mode(GAME_MODE_END_FILE_SELECT);
                         break;
                 }
                 break;

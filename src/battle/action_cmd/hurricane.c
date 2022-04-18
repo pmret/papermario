@@ -74,7 +74,7 @@ ApiStatus func_802A91A0_42F880(Evt* script, s32 isInitialCall) {
 
     actionCommandStatus->unk_4E = evt_get_variable(script, *args++);
     actionCommandStatus->unk_52 = evt_get_variable(script, *args++);
-    actionCommandStatus->unk_50 = evt_get_variable(script, *args++);;
+    actionCommandStatus->unk_50 = evt_get_variable(script, *args++);
     actionCommandStatus->unk_50 = func_80268224(actionCommandStatus->unk_50);
     actionCommandStatus->unk_64 = evt_get_variable(script, *args++);
 

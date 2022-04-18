@@ -7,6 +7,8 @@
 #include "model.h"
 #include "sprite.h"
 
+extern void D_80283D98;
+
 typedef struct PartnerDMAData {
     /* 0x00 */ u32 dmaStart;
     /* 0x04 */ u32 dmaEnd;
@@ -1067,10 +1069,8 @@ f32 D_80283690[] = {
     1.0f, 0.8f, 0.8f, 0.8f, 0.9f, 0.9f, 0.9f,
 };
 
-// TODO fix raw ptrs
-s32 D_80283744[] = {
-    0x00000000, 0x80283D98, 0x80283D98, 0x80283D98, 0x80283D98, 0x80283D98, 0x80283D98, 0x80283D98, 0x80283D98,
-    0x80283D98, 0x80283D98,
+UNK_PTR D_80283744[] = {
+    NULL, &D_80283D98, &D_80283D98, &D_80283D98, &D_80283D98, &D_80283D98, &D_80283D98, &D_80283D98, &D_80283D98, &D_80283D98, &D_80283D98,
 };
 
 s32 bMessages[] = {
@@ -1586,26 +1586,26 @@ void btl_init_menu_partner(void) {
     }
 }
 
-s32 count_power_plus(s32 arg0) {
-    s32 pp;
+s32 count_power_plus(s32 damageType) {
+    s32 count;
     s32 i;
 
     if (gGameStatusPtr->peachFlags & 1) {
         return 0;
     }
 
-    pp = 0;
+    count = 0;
     for (i = 0; i < ARRAY_COUNT(gPlayerData.equippedBadges); i++) {
         u8 moveID = gItemTable[gPlayerData.equippedBadges[i]].moveID;
 
         if (gMoveTable[moveID].battleSubmenu == 7 && moveID == MOVE_POWER_PLUS) {
-            if (gBattleStatus.flags1 & BS_FLAGS1_10 || arg0 & 0x80) {
-                pp++;
+            if (gBattleStatus.flags1 & BS_FLAGS1_10 || damageType & DAMAGE_TYPE_JUMP) {
+                count++;
             }
         }
     }
 
-    return pp;
+    return count;
 }
 
 void deduct_current_move_fp(void) {
@@ -2321,7 +2321,7 @@ void load_partner_actor(void) {
         partnerActor->debuffIcon = fx_disable_x(0, -142.0f, 34.0f, 1.0f, 0);
         partnerActor->unk_228 = NULL;
 
-        takeTurnScript = start_script(partnerActor->takeTurnScriptSource, 10, 0);
+        takeTurnScript = start_script(partnerActor->takeTurnScriptSource, EVT_PRIORITY_A, 0);
         partnerActor->takeTurnID = takeTurnScript->id;
         takeTurnScript->owner1.actorID = ACTOR_PARTNER;
     }
@@ -2584,7 +2584,7 @@ Actor* create_actor(Formation formation) {
 
     actor->hpFraction = 25;
     actor->actorID = actor->enemyIndex | 0x200;
-    takeTurnScript = start_script(actor->takeTurnScriptSource, 0xA, 0);
+    takeTurnScript = start_script(actor->takeTurnScriptSource, EVT_PRIORITY_A, 0);
     actor->takeTurnID = takeTurnScript->id;
     takeTurnScript->owner1.enemyID = actor->enemyIndex | 0x200;
     actor->shadow.id = create_shadow_type(0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z);
@@ -3663,29 +3663,29 @@ void start_rumble_type(u32 arg0) {
         case 0:
             break;
         case 1:
-            D_802939C0 = start_script(&D_802939C4, 0xA, 0x20)->id;
+            D_802939C0 = start_script(&D_802939C4, EVT_PRIORITY_A, EVT_FLAG_20)->id;
             break;
         case 2:
-            D_802939C0 = start_script(&D_80293A10, 0xA, 0x20)->id;
+            D_802939C0 = start_script(&D_80293A10, EVT_PRIORITY_A, EVT_FLAG_20)->id;
             break;
         case 3:
-            D_802939C0 = start_script(&D_80293A34, 0xA, 0x20)->id;
+            D_802939C0 = start_script(&D_80293A34, EVT_PRIORITY_A, EVT_FLAG_20)->id;
             break;
         case 4:
-            D_802939C0 = start_script(&D_80293A58, 0xA, 0x20)->id;
+            D_802939C0 = start_script(&D_80293A58, EVT_PRIORITY_A, EVT_FLAG_20)->id;
             break;
         case 5:
-            D_802939C0 = start_script(&D_80293A7C, 0xA, 0x20)->id;
+            D_802939C0 = start_script(&D_80293A7C, EVT_PRIORITY_A, EVT_FLAG_20)->id;
             break;
         case 6:
-            D_802939C0 = start_script(&D_80293AA0, 0xA, 0x20)->id;
+            D_802939C0 = start_script(&D_80293AA0, EVT_PRIORITY_A, EVT_FLAG_20)->id;
             break;
         case 7:
         case 8:
         case 9:
         case 10:
         case 11:
-            D_802939C0 = start_script(&D_80293AC4, 0xA, 0x20)->id;
+            D_802939C0 = start_script(&D_80293AC4, EVT_PRIORITY_A, EVT_FLAG_20)->id;
             break;
     }
 }

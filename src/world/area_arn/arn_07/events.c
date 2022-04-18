@@ -51,7 +51,7 @@ EvtScript N(802437AC) = {
 };
 
 EvtScript N(802439B0) = {
-    EVT_SET_GROUP(0)
+    EVT_SET_GROUP(EVT_GROUP_00)
     EVT_CALL(SetTimeFreezeMode, 1)
     EVT_CALL(ShowKeyChoicePopup)
     EVT_IF_EQ(EVT_VAR(0), 0)
@@ -1203,27 +1203,7 @@ NpcGroupList N(npcGroupList_802478E8) = {
     {},
 };
 
-#include "world/common/UnkNpcAIFunc23.inc.c"
-
-#include "world/common/UnkNpcAIFunc35.inc.c"
-
-#include "world/common/UnkNpcAIFunc1_copy.inc.c"
-
-#include "world/common/UnkFunc4.inc.c"
-
-#include "world/common/UnkNpcAIFunc2.inc.c"
-
-#include "world/common/SixFloatsFunc.inc.c"
-
-#include "world/common/UnkNpcAIFunc14.inc.c"
-
-#include "world/common/UnkNpcAIFunc3.inc.c"
-
-#include "world/common/UnkFunc6.inc.c"
-
-#include "world/common/UnkFunc5.inc.c"
-
-#include "world/common/UnkNpcAIMainFunc9.inc.c"
+#include "world/common/atomic/enemy/UnkAI_9.inc.c"
 
 ApiStatus PostChapter3StatUpdate(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;

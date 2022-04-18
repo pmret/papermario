@@ -974,12 +974,12 @@ s32 evt_trigger_on_activate_exec_script(Trigger* trigger) {
             return 0;
         }
 
-        script = start_script((EvtScript*)scriptStart, trigger->priority, 0x20);
+        script = start_script(scriptStart, trigger->priority, EVT_FLAG_20);
         trigger->runningScript = script;
         trigger->runningScriptID = script->id;
-        script->varTable[0] = trigger->scriptVars[0];
-        script->varTable[1] = trigger->scriptVars[1];
-        script->varTable[2] = trigger->scriptVars[2];
+        script->varTable[0] = trigger->varTable[0];
+        script->varTable[1] = trigger->varTable[1];
+        script->varTable[2] = trigger->varTable[2];
         script->owner2.trigger = trigger;
     }
 
@@ -1012,9 +1012,9 @@ ApiStatus evt_handle_bind(Evt* script) {
     trigger->onTriggerEvt = (EvtScript*)triggerScript;
     trigger->runningScript = NULL;
     trigger->priority = script->priority;
-    trigger->scriptVars[0] = evt_get_variable(script, script->varTable[0]);
-    trigger->scriptVars[1] = evt_get_variable(script, script->varTable[1]);
-    trigger->scriptVars[2] = evt_get_variable(script, script->varTable[2]);
+    trigger->varTable[0] = evt_get_variable(script, script->varTable[0]);
+    trigger->varTable[1] = evt_get_variable(script, script->varTable[1]);
+    trigger->varTable[2] = evt_get_variable(script, script->varTable[2]);
 
     if (triggerOut != 0) {
         evt_set_variable(script, triggerOut, (s32)trigger);
@@ -1094,12 +1094,12 @@ ApiStatus evt_handle_does_script_exist(Evt* script) {
 
 s32 evt_trigger_on_activate_lock(Trigger* trigger) {
     if (trigger->runningScript == NULL) {
-        Evt* newScript = start_script(trigger->onTriggerEvt, trigger->priority, 0x20);
+        Evt* newScript = start_script(trigger->onTriggerEvt, trigger->priority, EVT_FLAG_20);
         trigger->runningScript = newScript;
         trigger->runningScriptID = newScript->id;
-        newScript->varTable[0] = trigger->scriptVars[0];
-        newScript->varTable[1] = trigger->scriptVars[1];
-        newScript->varTable[2] = trigger->scriptVars[2];
+        newScript->varTable[0] = trigger->varTable[0];
+        newScript->varTable[1] = trigger->varTable[1];
+        newScript->varTable[2] = trigger->varTable[2];
         newScript->owner2.trigger = trigger;
     }
 
@@ -1132,9 +1132,9 @@ ApiStatus evt_handle_bind_lock(Evt* script) {
     trigger->onTriggerEvt = (EvtScript*)triggerScript;
     trigger->runningScript = NULL;
     trigger->priority = script->priority;
-    trigger->scriptVars[0] = evt_get_variable(script, script->varTable[0]);
-    trigger->scriptVars[1] = evt_get_variable(script, script->varTable[1]);
-    trigger->scriptVars[2] = evt_get_variable(script, script->varTable[2]);
+    trigger->varTable[0] = evt_get_variable(script, script->varTable[0]);
+    trigger->varTable[1] = evt_get_variable(script, script->varTable[1]);
+    trigger->varTable[2] = evt_get_variable(script, script->varTable[2]);
 
     return ApiStatus_DONE2;
 }
@@ -1155,7 +1155,7 @@ ApiStatus evt_handle_thread(Evt* script) {
     } while (opcode != EVT_OP_END_THREAD);
 
     script->ptrNextLine = endLine;
-    newScript = start_script_in_group((EvtScript*)startLine, script->priority, 0x60, script->groupFlags);
+    newScript = start_script_in_group((EvtScript*)startLine, script->priority, (EVT_FLAG_20 | EVT_FLAG_40), script->groupFlags);
     newScript->owner1.enemyID = script->owner1.enemyID;
     newScript->owner2.npcID = script->owner2.npcID;
     newScript->array = script->array;
@@ -1192,7 +1192,7 @@ ApiStatus evt_handle_child_thread(Evt* script) {
     } while (opcode != EVT_OP_END_CHILD_THREAD);
 
     script->ptrNextLine = endLine;
-    newScript = func_802C39F8(script, startLine, 0x60);
+    newScript = func_802C39F8(script, startLine, (EVT_FLAG_20 | EVT_FLAG_40));
     newScript->owner1.enemyID = script->owner1.enemyID;
     newScript->owner2.npcID = script->owner2.npcID;
     newScript->groupFlags = script->groupFlags;

@@ -2,7 +2,7 @@
 
 .section .data
 
-dlabel D_80244BB0_C76030
+dlabel kzn_08_varStash
 .word 0x00000000
 
 dlabel D_80244BB4_C76034

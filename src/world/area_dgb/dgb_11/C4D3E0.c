@@ -35,7 +35,7 @@ static s32 N(pad_168)[] = {
 };
 
 EvtScript N(exitSingleDoor_80240170) = {
-    EVT_SET_GROUP(27)
+    EVT_SET_GROUP(EVT_GROUP_1B)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(UseDoorSounds, 0)
     EVT_SET(EVT_VAR(0), 0)

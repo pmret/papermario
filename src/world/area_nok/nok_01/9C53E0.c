@@ -3,89 +3,19 @@
 static char* N(exit_str_0) = "nok_13";
 static char* N(exit_str_1) = "nok_02";
 
-#define UNK_ALPHA_FUNC_NPC 15
+#define CHUCK_QUIZMO_NPC_ID 15
 
-#include "world/common/UnkNpcAIFunc43.inc.c"
+#include "world/common/atomic/enemy/UnkAI_4.inc.c"
 
-#include "world/common/UnkNpcAIFunc44.inc.c"
+#include "world/common/atomic/ToadHouse.inc.c"
 
-#include "world/common/NpcJumpFunc3.inc.c"
+extern s32 N(Quizmo_Worker);
+extern s32 N(Quizmo_AnswerResult);
+extern EffectInstance* N(Quizmo_StageEffect);
+extern EffectInstance* N(Quizmo_AudienceEffect);
+extern EffectInstance* N(Quizmo_VannaTEffect);
 
-#include "world/common/NpcJumpFunc.inc.c"
-
-#include "world/common/UnkNpcAIFunc13_2.inc.c"
-
-#include "world/common/UnkNpcAIFunc11.inc.c"
-
-#include "world/common/UnkNpcAIFunc10.inc.c"
-
-#include "world/common/UnkNpcAIFunc42.inc.c"
-
-#include "world/common/UnkNpcAIFunc45.inc.c"
-
-#include "world/common/UnkNpcAIMainFunc4.inc.c"
-
-#include "world/common/Call800E9894.inc.c"
-
-#include "world/common/Call800E98C4SyncStatusMenu.inc.c"
-
-#include "world/common/UnkFunc32.inc.c"
-
-#include "world/common/CamSetFOV.inc.c"
-
-#include "world/common/AwaitScriptComplete.inc.c"
-
-#include "world/common/PartnerToggleAbilityScript.inc.c"
-
-#include "world/common/DoesPlayerNeedSleep.inc.c"
-
-#include "world/common/UnkFunc35.inc.c"
-
-#include "world/common/GetPartnerCall800EB168.inc.c"
-
-#include "world/common/UnkFunc36.inc.c"
-
-INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_80240D68_9C6148);
-
-#include "world/common/GetItemName.inc.c"
-
-#include "world/common/Set80151310.inc.c"
-
-#include "world/common/UnkQuizFunc.inc.c"
-
-#include "world/common/UnkFunc31.inc.c"
-
-INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_80241454_9C6834);
-
-INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_802414D8_9C68B8);
-
-INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_802416F0_9C6AD0);
-
-INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_802417A4_9C6B84);
-
-INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_802417D8_9C6BB8);
-
-INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_80241858_9C6C38);
-
-INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_80241870_9C6C50);
-
-INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_8024188C_9C6C6C);
-
-#include "world/common/GetGameStatus75.inc.c"
-
-#include "world/common/SetCamVfov.inc.c"
-
-#include "world/common/GetCamVfov.inc.c"
-
-#include "world/common/UnkCameraFunc.inc.c"
-
-#include "world/common/UnkRotatePlayer.inc.c"
-
-#include "world/common/UnkPartnerFuncs.inc.c"
-
-INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_80241D60_9C7140);
-
-INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_80241DCC_9C71AC);
+#include "world/common/atomic/Quizmo.inc.c"
 
 #include "world/common/GetNpcCollisionHeight.inc.c"
 

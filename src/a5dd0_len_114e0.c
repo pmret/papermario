@@ -1059,7 +1059,7 @@ void update_entities(void) {
                     if (!(entity->flags & ENTITY_FLAGS_8000)) {
                         entity->flags |= ENTITY_FLAGS_2000000;
                     }
-                    entity->boundScript = start_script(entity->boundScriptBytecode, 0xA, 0x20);
+                    entity->boundScript = start_script(entity->boundScriptBytecode, EVT_PRIORITY_A, EVT_FLAG_20);
                 }
 
                 if (entity->flags & ENTITY_FLAGS_2000000) {
@@ -1307,7 +1307,7 @@ void render_entities(void) {
 
         if (entity != NULL) {
             if (!gGameStatusPtr->isBattle) {
-                if (D_80151310 != 0 &&
+                if (gEntityHideMode != 0 &&
                     !(entity->flags & ENTITY_FLAGS_IGNORE_DISTANCE_CULLING) &&
                     dist2D(gPlayerStatusPtr->position.x,
                            gPlayerStatusPtr->position.z,
@@ -1317,11 +1317,11 @@ void render_entities(void) {
                     continue;
                 }
 
-                if (D_80151310 == 1) {
+                if (gEntityHideMode == 1) {
                     if (!(entity->flags & ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE1)) {
                         continue;
                     }
-                } else if (D_80151310 == 2) {
+                } else if (gEntityHideMode == 2) {
                     if (!(entity->flags & ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE2)) {
                         continue;
                     }
@@ -1824,36 +1824,36 @@ s32 MakeEntity(Evt* script, s32 isInitialCall) {
     EntityBlueprint* entityData;
     s32 x, y, z;
     s32 flags;
-    s32 temp_v0;
+    s32 nextArg;
     s32 entityIndex;
-    s32 t80000000;
-    s32* temp;
+    s32 endOfArgs;
+    s32* varArgBufPos;
 
     if (isInitialCall != TRUE) {
         return ApiStatus_DONE2;
     }
 
     entityData = (EntityBlueprint*)evt_get_variable(script, *args++);
-    temp = &CreateEntityVarArgBuffer[2];
-    t80000000 = 0x80000000;
+    varArgBufPos = &CreateEntityVarArgBuffer[2];
+    endOfArgs = MAKE_ENTITY_END;
     x = evt_get_variable(script, *args++);
     y = evt_get_variable(script, *args++);
     z = evt_get_variable(script, *args++);
     flags = evt_get_variable(script, *args++);
 
-    *temp-- = 0;
-    *temp-- = 0;
-    *temp = 0;
+    *varArgBufPos-- = 0;
+    *varArgBufPos-- = 0;
+    *varArgBufPos = 0;
 
     do {
-        temp_v0 = evt_get_variable(script, *args++);
+        nextArg = evt_get_variable(script, *args++);
 
-        if (temp_v0 != t80000000) {
-            *temp++ = temp_v0;
+        if (nextArg != endOfArgs) {
+            *varArgBufPos++ = nextArg;
         }
-    } while (temp_v0 != t80000000);
+    } while (nextArg != endOfArgs);
 
-    entityIndex = create_entity(entityData, x, y, z, flags, CreateEntityVarArgBuffer[0], CreateEntityVarArgBuffer[1], CreateEntityVarArgBuffer[2], t80000000);
+    entityIndex = create_entity(entityData, x, y, z, flags, CreateEntityVarArgBuffer[0], CreateEntityVarArgBuffer[1], CreateEntityVarArgBuffer[2], endOfArgs);
     gLastCreatedEntityIndex = entityIndex;
     script->varTable[0] = entityIndex;
     return ApiStatus_DONE2;
@@ -1898,7 +1898,7 @@ ApiStatus AssignScript(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     if (isInitialCall == TRUE) {
-        Bytecode* toBind = (Bytecode*)evt_get_variable(script, *args++);
+        EvtScript* toBind = (EvtScript*)evt_get_variable(script, *args++);
 
         get_entity_by_index(gLastCreatedEntityIndex)->boundScriptBytecode = toBind;
         return ApiStatus_DONE2;

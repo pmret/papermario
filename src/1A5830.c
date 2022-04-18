@@ -110,7 +110,7 @@ void dispatch_event_actor(Actor* actor, s32 event) {
         Evt* newScript;
 
         actor->lastEventType = event;
-        newScript = start_script(actor->onHitScriptSource, 0xA, 0x20);
+        newScript = start_script(actor->onHitScriptSource, EVT_PRIORITY_A, EVT_FLAG_20);
         actor->onHitScript = newScript;
         actor->onHitID = newScript->id;
         newScript->owner1.actorID = actor->actorID;
@@ -719,54 +719,54 @@ s32 calc_enemy_damage_target(Actor* attacker) {
     }
 
     if ((battleStatus->currentAttackStatus & STATUS_FLAG_SLEEP) && statusInflicted) {
-        script = start_script(&DoSleepHit, 10, 0);
+        script = start_script(&DoSleepHit, EVT_PRIORITY_A, 0);
         script->varTable[0] = state->goalPos.x;
         script->varTable[1] = state->goalPos.y;
         script->varTable[2] = state->goalPos.z;
         sfx_play_sound_at_position(SOUND_INFLICT_SLEEP, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
     if ((battleStatus->currentAttackStatus & STATUS_FLAG_DIZZY) && statusInflicted) {
-        script = start_script(&DoDizzyHit, 10, 0);
+        script = start_script(&DoDizzyHit, EVT_PRIORITY_A, 0);
         script->varTable[0] = state->goalPos.x;
         script->varTable[1] = state->goalPos.y;
         script->varTable[2] = state->goalPos.z;
         sfx_play_sound_at_position(SOUND_INFLICT_STATUS, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
     if ((battleStatus->currentAttackStatus & STATUS_FLAG_PARALYZE) && statusInflicted) {
-        script = start_script(&DoParalyzeHit, 10, 0);
+        script = start_script(&DoParalyzeHit, EVT_PRIORITY_A, 0);
         script->varTable[0] = state->goalPos.x;
         script->varTable[1] = state->goalPos.y;
         script->varTable[2] = state->goalPos.z;
         sfx_play_sound_at_position(SOUND_INFLICT_STATUS, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
     if ((battleStatus->currentAttackStatus & STATUS_FLAG_POISON) && statusInflicted) {
-        script = start_script(&DoPoisonHit, 10, 0);
+        script = start_script(&DoPoisonHit, EVT_PRIORITY_A, 0);
         script->varTable[0] = state->goalPos.x;
         script->varTable[1] = state->goalPos.y;
         script->varTable[2] = state->goalPos.z;
         sfx_play_sound_at_position(SOUND_INFLICT_STATUS, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
     if ((battleStatus->currentAttackStatus & STATUS_FLAG_STOP) && statusInflicted) {
-        script = start_script(&DoStopHit, 10, 0);
+        script = start_script(&DoStopHit, EVT_PRIORITY_A, 0);
         script->varTable[0] = state->goalPos.x;
         script->varTable[1] = state->goalPos.y;
         script->varTable[2] = state->goalPos.z;
         sfx_play_sound_at_position(SOUND_INFLICT_STATUS, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
     if ((battleStatus->currentAttackStatus & STATUS_FLAG_FROZEN) && statusInflicted) {
-        script = start_script(&DoFreezeHit, 10, 0);
+        script = start_script(&DoFreezeHit, EVT_PRIORITY_A, 0);
         script->varTable[0] = state->goalPos.x;
         script->varTable[1] = state->goalPos.y;
         script->varTable[2] = state->goalPos.z;
-        script->varTableActor[3] = target;
+        script->varTablePtr[3] = target;
         sfx_play_sound_at_position(SOUND_HIT_ICE, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
     if ((battleStatus->currentAttackStatus & STATUS_FLAG_SHRINK) && statusInflicted) {
-        script = start_script(&DoShrinkHit, 10, 0);
+        script = start_script(&DoShrinkHit, EVT_PRIORITY_A, 0);
         script->varTable[0] = state->goalPos.x;
         script->varTable[1] = state->goalPos.y;
         script->varTable[2] = state->goalPos.z;
-        script->varTableActor[3] = target;
+        script->varTablePtr[3] = target;
         sfx_play_sound_at_position(SOUND_INFLICT_STATUS, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
 
@@ -939,7 +939,7 @@ ApiStatus BindIdle(Evt* script, s32 isInitialCall) {
     }
 
     actor->idleScriptSource = idleCode;
-    newScriptContext = start_script(idleCode, 10, 0);
+    newScriptContext = start_script(idleCode, EVT_PRIORITY_A, 0);
     actor->idleScript = newScriptContext;
     actor->idleScriptID = newScriptContext->id;
     newScriptContext->owner1.actorID = actorID;
@@ -1029,14 +1029,14 @@ ApiStatus LandJump(Evt* script, s32 isInitialCall) {
         }
 
         actor = get_actor(actorID);
-        script->functionTempActor[1] = actor;
+        script->functionTempPtr[1] = actor;
         actor->state.currentPos.x = actor->currentPos.x;
         actor->state.currentPos.y = actor->currentPos.y;
         actor->state.currentPos.z = actor->currentPos.z;
         script->functionTemp[0] = 1;
     }
 
-    actor = script->functionTempActor[1];
+    actor = script->functionTempPtr[1];
     actor->state.currentPos.y += actor->state.velocity;
     actor->state.velocity -= actor->state.acceleration;
 
@@ -1084,8 +1084,8 @@ s32 LandJumpPart(Evt* script, s32 isInitialCall) {
 
         actor = get_actor(actorID);
         part = get_actor_part(actor, partIndex);
-        script->functionTempActor[1] = actor;
-        script->functionTempActorPart[2] = part;
+        script->functionTempPtr[1] = actor;
+        script->functionTempPtr[2] = part;
         movement = part->movement;
         movement->unk_00.x = part->absolutePosition.x;
         movement->unk_00.y = part->absolutePosition.y;
@@ -1093,7 +1093,7 @@ s32 LandJumpPart(Evt* script, s32 isInitialCall) {
         script->functionTemp[0] = 1;
     }
 
-    part = script->functionTempActorPart[2];
+    part = script->functionTempPtr[2];
     movement = part->movement;
     movement->unk_00.y += movement->unk_2C;
     movement->unk_2C -= movement->jumpScale;

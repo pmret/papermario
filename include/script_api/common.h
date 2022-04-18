@@ -161,7 +161,6 @@ ApiStatus SwitchMessage(Evt* script, s32 isInitialCall);
 ApiStatus ShowChoice(Evt* script, s32 isInitialCall);
 ApiStatus CloseChoice(Evt* script, s32 isInitialCall);
 ApiStatus CancelMessage(Evt* script, s32 isInitialCall);
-ApiStatus CancelMessageAndBlock(void); // ???
 ApiStatus SetMessageImages(Evt* script, s32 isInitialCall);
 ApiStatus SetMessageMsg(Evt* script, s32 isInitialCall);
 ApiStatus SetMessageValue(Evt* script, s32 isInitialCall);

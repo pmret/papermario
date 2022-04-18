@@ -1,14 +1,6 @@
 #include "kzn_03.h"
 
-#include "world/common/set_script_owner_npc_anim.inc.c"
-
-#include "world/common/UnkDistFunc.inc.c"
-
-#include "world/common/UnkNpcAIFunc12.inc.c"
-
-#include "world/common/set_script_owner_npc_col_height.inc.c"
-
-#include "world/common/UnkNpcAIMainFunc5.inc.c"
+#include "world/common/atomic/enemy/UnkAI_5.inc.c"
 
 #include "world/common/AwaitPlayerNearNpc.inc.c"
 
@@ -42,7 +34,7 @@
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C61020", func_8024234C_C6305C);
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C61020", func_8024259C_C632AC);
+#include "world/common/StashVars.inc.c"
 
 #include "world/common/GetItemName.inc.c"
 

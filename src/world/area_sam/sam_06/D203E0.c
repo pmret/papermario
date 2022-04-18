@@ -1,28 +1,8 @@
 #include "sam_06.h"
 
-#include "world/common/UnkNpcAIFunc23.inc.c"
+#include "world/common/atomic/enemy/UnkAI_9.inc.c"
 
-#include "world/common/UnkNpcAIFunc35.inc.c"
-
-#include "world/common/UnkNpcAIFunc1_copy.inc.c"
-
-#include "world/common/UnkFunc4.inc.c"
-
-#include "world/common/UnkNpcAIFunc2.inc.c"
-
-#include "world/common/SixFloatsFunc.inc.c"
-
-#include "world/common/UnkNpcAIFunc14.inc.c"
-
-#include "world/common/UnkNpcAIFunc3.inc.c"
-
-#include "world/common/UnkFunc6.inc.c"
-
-#include "world/common/UnkFunc5.inc.c"
-
-#include "world/common/UnkNpcAIMainFunc9.inc.c"
-
-INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_80241A48_D218D8);
+#include "world/common/StashVars.inc.c"
 
 #include "world/common/GetItemName.inc.c"
 
@@ -38,25 +18,7 @@ INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_80241E18_D21CA8);
 
 INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_80241EB4_D21D44);
 
-#include "world/common/Call800E9894.inc.c"
-
-#include "world/common/Call800E98C4SyncStatusMenu.inc.c"
-
-#include "world/common/UnkFunc32.inc.c"
-
-#include "world/common/CamSetFOV.inc.c"
-
-#include "world/common/AwaitScriptComplete.inc.c"
-
-#include "world/common/PartnerToggleAbilityScript.inc.c"
-
-#include "world/common/DoesPlayerNeedSleep.inc.c"
-
-#include "world/common/UnkFunc35.inc.c"
-
-#include "world/common/GetPartnerCall800EB168.inc.c"
-
-#include "world/common/UnkFunc36.inc.c"
+#include "world/common/atomic/ToadHouse.inc.c"
 
 #include "world/common/SetManyVars.inc.c"
 

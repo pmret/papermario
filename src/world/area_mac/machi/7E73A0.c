@@ -73,7 +73,9 @@ static char* N(exit_str_4) = "jan_00";
 
 INCLUDE_ASM(s32, "world/area_mac/machi/7E73A0", func_80240000_7E73A0);
 
-#include "world/common/UnkFunc36.inc.c"
+ApiStatus N(80240030_7E73D0)(Evt* script, s32 isInitialCall) {
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "world/area_mac/machi/7E73A0", func_80240038_7E73D8);
 

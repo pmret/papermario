@@ -2,7 +2,7 @@
 
 .section .data
 
-dlabel D_802456C0_DBCFD0
+dlabel omo_06_varStash
 .word 0x00000000
 
 dlabel D_802456C4_DBCFD4

@@ -13,18 +13,15 @@
 #define TITLE_POS_TOP 15 // Top edge of the texture on screen (with no offset)
 
 s16 D_800779C0[2] = {0, 0};
-s32 gSaveSlotMetadata = 0;
-s8 D_800779C8[2] = {0, 0};
-s8 D_800779CA = 0;
-s8 D_800779CB = 0x45;
-s32 D_800779CC = 0x52524F52;
-s32 D_800779D0 = 0xF7F7F700;
-s32 D_800779D4 = 0;
-s32 D_800779D8[] = { 0x00000000, 0x00000000, 0x00000045, 0x52524F52, 0xF7F7F700, 0x00000000, 0x00000000, 0x00000000,
-                     0x00000045, 0x52524F52, 0xF7F7F700, 0x00000000, 0x00000000, 0x00000000, 0x00000045, 0x52524F52,
-                     0xF7F7F700, 0x00000000, 0x00000000,
-                   };
-s32 gSaveSlotHasData = 0x01010101;
+
+SaveMetadata gSaveSlotMetadata[4] = {
+    { .filename = {"ERROR\xf7\xf7\xf7"}, },
+    { .filename = {"ERROR\xf7\xf7\xf7"}, },
+    { .filename = {"ERROR\xf7\xf7\xf7"}, },
+    { .filename = {"ERROR\xf7\xf7\xf7"}, },
+};
+
+u8 gSaveSlotHasData[4] = {TRUE, TRUE, TRUE, TRUE};
 s32 D_80077A28 = 0;
 s32 D_80077A2C = 0;
 s32 D_80077A30 = 0;
@@ -124,21 +121,21 @@ void state_init_title_screen(void) {
     gCameras[CAM_DEFAULT].flags |= CAMERA_FLAGS_2;
     gCameras[CAM_BATTLE].flags |= CAMERA_FLAGS_2;
     gCameras[CAM_TATTLE].flags |= CAMERA_FLAGS_2;
-    gCameras[CAM_CAM3].flags |= CAMERA_FLAGS_2;
+    gCameras[CAM_3].flags |= CAMERA_FLAGS_2;
     set_cam_viewport(0, 12, 28, 296, 184);
-    gCameras[CAM_DEFAULT].unk_1E = 40;
+    gCameras[CAM_DEFAULT].auxBoomLength = 40;
     gCameras[CAM_DEFAULT].bgColor[0] = 0;
     gCameras[CAM_DEFAULT].bgColor[1] = 0;
     gCameras[CAM_DEFAULT].bgColor[2] = 0;
-    gCameras[CAM_DEFAULT].unk_54 = 25.0f;
-    gCameras[CAM_DEFAULT].unk_58 = 25.0f;
+    gCameras[CAM_DEFAULT].auxPos.x = 25.0f;
+    gCameras[CAM_DEFAULT].auxPos.y = 25.0f;
     gCameras[CAM_DEFAULT].unk_1C = 0;
     gCameras[CAM_DEFAULT].unk_20 = 100;
-    gCameras[CAM_DEFAULT].unk_22 = 0;
+    gCameras[CAM_DEFAULT].auxBoomPitch = 0;
     gCameras[CAM_DEFAULT].lookAt_eye.x = 500.0f;
     gCameras[CAM_DEFAULT].lookAt_eye.y = 1000.0f;
     gCameras[CAM_DEFAULT].lookAt_eye.z = 1500.0f;
-    gCameras[CAM_DEFAULT].unk_5C = 150.0f;
+    gCameras[CAM_DEFAULT].auxPos.z = 150.0f;
     clear_script_list();
     clear_generic_entity_list();
     clear_render_tasks();

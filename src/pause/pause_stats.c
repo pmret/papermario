@@ -51,7 +51,7 @@ HudScript* gPauseStatsSPIncElements[] = { HudScript_StatusSPIncrement1, HudScrip
 HudScript* gPauseStatsStarElements[] = { HudScript_StatusStar1, HudScript_StatusStar3, HudScript_StatusStar2,
                                          HudScript_StatusStar4, HudScript_StatusStar5, HudScript_StatusStar6,
                                          HudScript_StatusStar7 };
-// TODO replace with array when pause_stats_draw_contents is matched
+//s32 D_8024F46C[] = { -1, 1, 2, 4, 5, 7, 8 };
 s32 D_8024F46C = -1;
 s32 D_8024F470 = 1;
 s32 D_8024F474 = 2;

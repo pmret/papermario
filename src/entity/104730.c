@@ -339,5 +339,5 @@ void entity_breakable_block_create_shattering_entity(Entity* entity) {
         return;
     }
 
-    create_entity(bp, entity->position.x, entity->position.y, entity->position.z, 0, 0x80000000);
+    create_entity(bp, entity->position.x, entity->position.y, entity->position.z, 0, MAKE_ENTITY_END);
 }

@@ -1,48 +1,15 @@
 #include "mac_04.h"
+#include "effects.h"
 
-#define UNK_ALPHA_FUNC_NPC 20
+#define CHUCK_QUIZMO_NPC_ID 20
 
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80240460_843030);
+extern s32 N(Quizmo_Worker);
+extern s32 N(Quizmo_AnswerResult);
+extern EffectInstance* N(Quizmo_StageEffect);
+extern EffectInstance* N(Quizmo_AudienceEffect);
+extern EffectInstance* N(Quizmo_VannaTEffect);
 
-#include "world/common/GetItemName.inc.c"
-
-#include "world/common/Set80151310.inc.c"
-
-#include "world/common/UnkQuizFunc.inc.c"
-
-#include "world/common/UnkFunc31.inc.c"
-
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80240B4C_84371C);
-
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80240BD0_8437A0);
-
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80240DE8_8439B8);
-
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80240E9C_843A6C);
-
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80240ED0_843AA0);
-
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80240F50_843B20);
-
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80240F68_843B38);
-
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80240F84_843B54);
-
-#include "world/common/GetGameStatus75.inc.c"
-
-#include "world/common/SetCamVfov.inc.c"
-
-#include "world/common/GetCamVfov.inc.c"
-
-#include "world/common/UnkCameraFunc.inc.c"
-
-#include "world/common/UnkRotatePlayer.inc.c"
-
-#include "world/common/UnkPartnerFuncs.inc.c"
-
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80241458_844028);
-
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_802414C4_844094);
+#include "world/common/atomic/Quizmo.inc.c"
 
 #include "world/common/GetNpcCollisionHeight.inc.c"
 
@@ -89,7 +56,10 @@ ApiStatus N(SetNpcShadowScale)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#include "world/common/Call800E9894.inc.c"
+ApiStatus N(80241C20_8447F0)(Evt* script, s32 isInitialCall) {
+    func_800E9894();
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80241C40_844810);
 

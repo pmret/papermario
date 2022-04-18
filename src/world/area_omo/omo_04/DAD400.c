@@ -3,7 +3,7 @@
 static char* N(exit_str_0) = "omo_03";
 static char* N(exit_str_1) = "";
 
-INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_80240000_DAD400);
+#include "world/common/StashVars.inc.c"
 
 #include "world/common/GetItemName.inc.c"
 
@@ -17,27 +17,7 @@ INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_80240000_DAD400);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_802402F4_DAD6F4);
 
-#include "world/common/UnkNpcAIFunc23.inc.c"
-
-#include "world/common/UnkNpcAIFunc35.inc.c"
-
-#include "world/common/UnkNpcAIFunc1_copy.inc.c"
-
-#include "world/common/UnkFunc4.inc.c"
-
-#include "world/common/UnkNpcAIFunc2.inc.c"
-
-#include "world/common/SixFloatsFunc.inc.c"
-
-#include "world/common/UnkNpcAIFunc14.inc.c"
-
-#include "world/common/UnkNpcAIFunc3.inc.c"
-
-#include "world/common/UnkFunc6.inc.c"
-
-#include "world/common/UnkFunc5.inc.c"
-
-#include "world/common/UnkNpcAIMainFunc9.inc.c"
+#include "world/common/atomic/enemy/UnkAI_9.inc.c"
 
 INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_80241898_DAEC98);
 

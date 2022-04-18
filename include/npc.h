@@ -58,10 +58,10 @@
 #define OVERRIDE_MOVEMENT_SPEED(speed) (speed * 32767)
 #define NO_OVERRIDE_MOVEMENT_SPEED OVERRIDE_MOVEMENT_SPEED(-1)
 
-typedef struct QuizRequirements {
-    s32 unk_00;
-    s32 unk_04;
-} QuizRequirements; // size = 0x8
+typedef struct QuizRequirement {
+    s32 requiredStoryProgress;
+    s32 numQuestionsUnlocked;
+} QuizRequirement; // size = 0x8
 
 typedef struct NpcBlueprint {
     /* 0x00 */ s32 flags;
@@ -230,6 +230,9 @@ typedef union {
     char PADDING[0xC0];
 } EnemyTerritory; // size = 0xC0
 
+// function signature used for state handlers in AI main functions
+typedef void AIStateHandler(Evt* script, NpcAISettings* settings, EnemyTerritoryThing* territory);
+
 typedef struct Enemy {
     /* 0x00 */ s32 flags;
     /* 0x04 */ s8 encounterIndex;
@@ -261,10 +264,14 @@ typedef struct Enemy {
     /* 0x60 */ s32 defeatScriptID;
     /* 0x64 */ UNK_PTR unk_64;
     /* 0x68 */ char unk_68[4];
-    /* 0x6C */ s32 varTable[16];
+    /* 0x6C */ union {
+    /*      */      s32 varTable[16];
+    /*      */      f32 varTableF[16];
+    /*      */      void* varTablePtr[16];
+    /*      */ };
     /* 0xAC */ u8 unk_AC;
     /* 0xAD */ char unk_AD[3];
-    /* 0xB0 */ s32 unk_B0;
+    /* 0xB0 */ u32 unk_B0;
     /* 0xB4 */ s8 unk_B4;
     /* 0xB5 */ s8 unk_B5;
     /* 0xB6 */ char unk_B6[2];
@@ -324,7 +331,7 @@ s32 func_800397E8(Npc* npc, f32 arg1);
 /// Updates all NPCs.
 void update_npcs(void);
 
-f32 npc_get_render_yaw(void);
+f32 npc_get_render_yaw(Npc* npc);
 
 void appendGfx_npc(Npc* npc);
 
@@ -366,17 +373,17 @@ void npc_set_palswap_1(Npc* npc, s32 palIndexA, s32 palIndexB, s32 timeHoldA, s3
 
 void npc_set_palswap_2(Npc* npc, s32 timeHoldB, s32 timeBA, s32 palIndexC, s32 palIndexD);
 
-void npc_draw_with_palswap(Npc* npc, s32 arg1, s32 arg2);
+void npc_draw_with_palswap(Npc* npc, s32 arg1, Matrix4f mtx);
 
-void npc_draw_palswap_mode_0(Npc* npc, s32 arg1, s32 arg2);
+void npc_draw_palswap_mode_0(Npc* npc, s32 arg1, Matrix4f mtx);
 
-s32 npc_draw_palswap_mode_1(Npc*, s32, s32);
+s32 npc_draw_palswap_mode_1(Npc*, s32, Matrix4f mtx);
 
-s32 npc_blend_palette_colors(void);
+u16 npc_blend_palette_colors(u16 colorA, u16 colorB, s32 lerpAlpha);
 
-s32 npc_draw_palswap_mode_2(Npc*, s32, s32, s32);
+s32 npc_draw_palswap_mode_2(Npc*, s32, s32, Matrix4f mtx);
 
-s32 npc_draw_palswap_mode_4(Npc*, s32, s32);
+s32 npc_draw_palswap_mode_4(Npc*, s32, Matrix4f mtx);
 
 void npc_set_decoration(Npc* npc, s32 idx, s32 decorationType);
 

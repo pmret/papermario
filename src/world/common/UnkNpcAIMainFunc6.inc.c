@@ -24,7 +24,7 @@ ApiStatus N(UnkNpcAIMainFunc6)(Evt* script, s32 isInitialCall) {
 
     if (isInitialCall) {
         enemy->varTable[6] = npc->collisionHeight;
-        enemy->unk_B0 |= 8;
+        enemy->unk_B0 |= ENEMY_AI_FLAGS_8;
     }
 
     if (isInitialCall || (enemy->varTable[10] == 100)) {
@@ -42,10 +42,10 @@ ApiStatus N(UnkNpcAIMainFunc6)(Evt* script, s32 isInitialCall) {
         npc->pos.z = 0.0f;
     }
 
-    if (enemy->unk_B0 & 4) {
+    if (enemy->unk_B0 & ENEMY_AI_FLAGS_4) {
         npc->duration = 0;
         npc->collisionHeight = enemy->varTable[6];
-        enemy->unk_B0 &= ~4;
+        enemy->unk_B0 &= ~ENEMY_AI_FLAGS_4;
         if (npc->flags & NPC_FLAG_NO_Y_MOVEMENT) {
             npc->currentAnim.w = 0x4A0018;
             npc->moveSpeed = 0.0f;
@@ -55,7 +55,7 @@ ApiStatus N(UnkNpcAIMainFunc6)(Evt* script, s32 isInitialCall) {
         } else {
             s32 emoteTemp;
 
-            fx_emote(2, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0x28, &emoteTemp);
+            fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0x28, &emoteTemp);
             npc->currentAnim.w = enemy->animList[0];
             script->functionTemp[1] = 0;
             script->functionTemp[0] = 200;

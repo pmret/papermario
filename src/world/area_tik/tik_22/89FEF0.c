@@ -1,21 +1,14 @@
 #include "tik_22.h"
 
-#include "world/common/UnkTexturePanFunc.inc.c"
+#include "world/common/atomic/TexturePan.inc.c"
 
-#include "world/common/UnkTexturePanFunc2.inc.c"
+#include "world/common/atomic/Pipe.inc.c"
 
-#include "world/common/SetPlayerStatusAnimFlags100000.inc.c"
+s32 func_8014AB60(s32, s16);
 
-#include "world/common/GetCurrentFloor.inc.c"
-
-#include "world/common/UnkFunc25.inc.c"
-
-#include "world/common/GetEntryPos.inc.c"
-
-#include "world/common/GetCurrentCameraYawClamped180.inc.c"
-
-#include "world/common/SomeXYZFunc2.inc.c"
-
-INCLUDE_ASM(s32, "world/area_tik/tik_22/89FEF0", func_8024061C_8A04DC);
+ApiStatus func_8024061C_8A04DC(Evt* script, s32 isInitialCall) {
+    func_8014AB60(0, 2);
+    return ApiStatus_DONE2;
+}
 
 #include "world/common/UnkPosFunc2.inc.c"

@@ -19,7 +19,7 @@ ApiStatus N(UnkNpcAIMainFunc)(Evt* script, s32 isInitialCall) {
     territory.unk_18 = 65.0f;
     territory.unk_1C = 0;
 
-    if (isInitialCall || enemy->unk_B0 & 4) {
+    if (isInitialCall || enemy->unk_B0 & ENEMY_AI_FLAGS_4) {
         script->functionTemp[0] = 0;
         npc->duration = 0;
         npc->currentAnim.w = enemy->animList[0];
@@ -30,10 +30,10 @@ ApiStatus N(UnkNpcAIMainFunc)(Evt* script, s32 isInitialCall) {
             npc->flags = (npc->flags & ~0x200) | 8;
         }
 
-        if (enemy->unk_B0 & 4) {
+        if (enemy->unk_B0 & ENEMY_AI_FLAGS_4) {
             script->functionTemp[0] = 99;
             script->functionTemp[1] = 0;
-            enemy->unk_B0 &= ~4;
+            enemy->unk_B0 &= ~ENEMY_AI_FLAGS_4;
         } else if (enemy->flags & ENEMY_FLAGS_40000000) {
             script->functionTemp[0] = 12;
             enemy->flags &= ~ENEMY_FLAGS_40000000;

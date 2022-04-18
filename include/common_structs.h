@@ -279,14 +279,17 @@ typedef struct PlayerData {
     /* 0x324 */ s32 tradeEventStartTime;
     /* 0x328 */ s32 droTreeOrbitTime;
     /* 0x32C */ s16 starPiecesCollected;
-    /* 0x32E */ s16 jumpGamePlays;
-    /* 0x330 */ s32 jumpGameTotal; /* all-time winnings, max = 99999 */
-    /* 0x334 */ s16 jumpGameRecord;
-    /* 0x336 */ s16 smashGamePlays;
-    /* 0x338 */ s32 smashGameTotal; /* all-time winnings, max = 99999 */
-    /* 0x33C */ s16 smashGameRecord;
+    /* 0x32E */ u16 jumpGamePlays;
+    /* 0x330 */ u32 jumpGameTotal; /* all-time winnings, max = 99999 */
+    /* 0x334 */ u16 jumpGameRecord;
+    /* 0x336 */ u16 smashGamePlays;
+    /* 0x338 */ u32 smashGameTotal; /* all-time winnings, max = 99999 */
+    /* 0x33C */ u16 smashGameRecord;
     /* 0x33E */ char unk_33E[2];
-} PlayerData; // size = 0x340
+    /* 0x340 */ char unk_340[0xE0];
+    /* 0x420 */ s32 starPoints2;
+    /* 0x424 */ char unk_464[4];
+} PlayerData; // size = 0x428
 
 typedef union {
     struct {
@@ -307,7 +310,11 @@ typedef struct Trigger {
     /* 0x10 */ EvtScript* onTriggerEvt;
     /* 0x14 */ struct Evt* runningScript;
     /* 0x18 */ s32 priority;
-    /* 0x1C */ s32 scriptVars[3];
+    /* 0x1C */ union {
+    /*      */     s32 varTable[3];
+    /*      */     f32 varTableF[3];
+    /*      */     void* varTablePtr[3];
+    /*      */ };
     /* 0x28 */ s32 itemList;
     /* 0x2C */ s32 unk_tr_2C; // related to Goombario somehow, custom tattle perhaps?
     /* 0x30 */ u8 hasPlayerInteractPrompt;
@@ -354,15 +361,13 @@ typedef struct Evt {
     /* 0x070 */ union {
     /*       */     s32 functionTemp[4];
     /*       */     f32 functionTempF[4];
-    /*       */     struct Npc* functionTempNpc[4];
-    /*       */     struct Actor* functionTempActor[4];
-    /*       */     struct ActorPart* functionTempActorPart[4];
+    /*       */     void* functionTempPtr[4];
     /*       */ };
     /* 0x080 */ ApiFunc callFunction;
     /* 0x084 */ union {
     /*       */     s32 varTable[16];
-    /*       */     struct Actor* varTableActor[4];
-    /*       */     struct Enemy* varTableEnemy[4];
+    /*       */     f32 varTableF[16];
+    /*       */     void* varTablePtr[16];
     /*       */ };
     /* 0x0C4 */ s32 varFlags[3];
     /* 0x0D0 */ s32 loopStartTable[8];
@@ -619,7 +624,7 @@ typedef struct Entity {
     /* 0x1C */ EntityCallback updateScriptCallback;
     /* 0x20 */ EntityCallback updateMatrixOverride;
     /* 0x24 */ Evt* boundScript;
-    /* 0x28 */ Bytecode* boundScriptBytecode;
+    /* 0x28 */ EvtScript* boundScriptBytecode;
     /* 0x2C */ s32* savedReadPos;
     /* 0x30 */ char unk_30[0x8];
     /* 0x38 */ EntityBlueprint* blueprint;
@@ -807,11 +812,11 @@ typedef struct Camera {
     /* 0x016 */ char unk_16[2];
     /* 0x018 */ f32 vfov;
     /* 0x01C */ s16 unk_1C;
-    /* 0x01E */ s16 unk_1E;
+    /* 0x01E */ s16 auxBoomLength;
     /* 0x020 */ s16 unk_20;
-    /* 0x022 */ s16 unk_22;
-    /* 0x024 */ s16 unk_24;
-    /* 0x026 */ s16 unk_26;
+    /* 0x022 */ s16 auxBoomPitch;
+    /* 0x024 */ s16 auxBoomYaw;
+    /* 0x026 */ s16 auxBoomZOffset;
     /* 0x028 */ s16 unk_28;
     /* 0x02A */ s16 zoomPercent;
     /* 0x02C */ s16 bgColor[3];
@@ -820,9 +825,7 @@ typedef struct Camera {
     /* 0x03A */ char unk_3A[2];
     /* 0x03C */ Vec3f lookAt_eye;
     /* 0x048 */ Vec3f lookAt_obj;
-    /* 0x054 */ f32 unk_54; // x-related
-    /* 0x058 */ f32 unk_58; // y-related
-    /* 0x05C */ f32 unk_5C; // z-related
+    /* 0x054 */ Vec3f auxPos;
     /* 0x060 */ Vec3f targetPos;
     /* 0x06C */ f32 currentYaw;
     /* 0x070 */ f32 unk_70;
@@ -916,7 +919,11 @@ typedef struct FGModelData {
 typedef struct BattleStatus {
     /* 0x000 */ s32 flags1;
     /* 0x004 */ s32 flags2;
-    /* 0x008 */ s32 varTable[16];
+    /* 0x008 */ union {
+    /*       */     s32 varTable[16];
+    /*       */     f32 varTableF[16];
+    /*       */     void* varTablePtr[16];
+    /*       */ };
     /* 0x048 */ s8 currentSubmenu;
     /* 0x049 */ char unk_49[3];
     /* 0x04C */ s8 unk_4C[16];
@@ -1227,25 +1234,25 @@ typedef struct ItemEntity {
 } ItemEntity; // size = 0x5C
 
 typedef struct MessagePrintState {
-    /* 0x000 */ s8* srcBuffer;
+    /* 0x000 */ u8* srcBuffer;
     /* 0x004 */ s16 printBufferPos;
     /* 0x006 */ char unk_06[2];
     /* 0x008 */ s32 msgID;
-    /* 0x00C */ s16 srcBufferPos;
-    /* 0x00E */ s16 currentPrintDelay;
+    /* 0x00C */ u16 srcBufferPos;
+    /* 0x00E */ u16 currentPrintDelay;
     /* 0x010 */ u8 printBuffer[1088]; // slightly larger than source buffer
     /* 0x450 */ s16 printBufferSize;
     /* 0x452 */ u16 effectFrameCounter;
     /* 0x454 */ u8 font;
-    /* 0x455 */ s8 fontVariant;
+    /* 0x455 */ u8 fontVariant;
     /* 0x456 */ Vec2s windowOffsetPos; // offset from baseWindowPos. used to animated window pos?
     /* 0x45A */ Vec2s windowBasePos; // ex: set by the parameters for choice style
     /* 0x45E */ s8 printDelayTime; // delay to print each chunk
-    /* 0x45F */ s8 charsPerChunk; // how many chars to print at once
+    /* 0x45F */ u8 charsPerChunk; // how many chars to print at once
     /* 0x460 */ s32 curLinePos; // position along current line
-    /* 0x464 */ s8 unk_464;
+    /* 0x464 */ u8 unk_464;
     /* 0x465 */ char unk_465;
-    /* 0x466 */ s16 nextLinePos; // ?
+    /* 0x466 */ u16 nextLinePos; // ?
     /* 0x468 */ s8 lineCount;
     /* 0x469 */ char unk_469[0x3];
     /* 0x46C */ s32 unk_46C;
@@ -1256,14 +1263,14 @@ typedef struct MessagePrintState {
     /* 0x47E */ s16 rewindArrowBlinkCounter;
     /* 0x480 */ s16 unk_480;
     /* 0x482 */ Vec2s rewindArrowPos;
-    /* 0x486 */ s8 currentLine;
+    /* 0x486 */ u8 currentLine;
     /* 0x487 */ u8 unkArraySize;
     /* 0x488 */ u16 lineEndPos[4];
     /* 0x490 */ char unk_490[0x38];
     /* 0x4C8 */ u16 unk_4C8;
     /* 0x4CA */ s16 unk_4CA;
     /* 0x4CC */ u16 unk_4CC;
-    /* 0x4CE */ s8 maxOption;
+    /* 0x4CE */ u8 maxOption;
     /* 0x4CF */ char unk_4CF[0x1];
     /* 0x4D0 */ s16 cursorPosX[6];
     /* 0x4DC */ s16 cursorPosY[6];
@@ -1272,7 +1279,7 @@ typedef struct MessagePrintState {
     /* 0x4EA */ u8 cancelOption;
     /* 0x4EB */ char unk_4EB[0x1];
     /* 0x4EC */ s8 targetOption;
-    /* 0x4ED */ s8 unkCounter;
+    /* 0x4ED */ u8 unkCounter;
     /* 0x4EE */ s8 selectedOption;
     /* 0x4EF */ char unk_4EF[0x9];
     /* 0x4F8 */ u8 windowState;
@@ -1290,7 +1297,7 @@ typedef struct MessagePrintState {
     /* 0x514 */ Vec2su windowSize;
     /* 0x518 */ s8 speechSoundType;
     /* 0x519 */ u8 volume;
-    /* 0x51A */ s8 speechPan; // just pan?
+    /* 0x51A */ u8 speechPan; // just pan?
     /* 0x51B */ char unk_51B[0x1];
     /* 0x51C */ u16 speechVolumePitch;
     /* 0x51E */ char unk_51E[0x2];
@@ -1374,6 +1381,15 @@ typedef struct MesasgeFontGlyphData {
     /* 0xA */ s8 charWidth;
     /* 0xB */ s8 charHeight;
 } MesasgeFontGlyphData; // size = 0xC
+
+typedef struct MessageImageData {
+    /* 0x00 */ s32* raster;
+    /* 0x04 */ s32* palette;
+    /* 0x08 */ u16 width;
+    /* 0x0A */ u16 height;
+    /* 0x0C */ s32 format;
+    /* 0x10 */ s32 bitDepth;
+} MessageImageData; // size = 0x14
 
 typedef struct MessageNumber {
     /* 0x00 */ s32* rasters;
@@ -1523,13 +1539,14 @@ typedef struct PartnerAnimations {
     /* 0x00 */ s32 anims[9];
 } PartnerAnimations; // size = 0x24
 
+typedef void (*PushBlockFallCallback)(s32 gridSystemID, s32 index);
 typedef struct PushBlockGrid {
-    /* 0x00 */ s8* cells;
+    /* 0x00 */ u8* cells;
     /* 0x04 */ u8 numCellsX;
     /* 0x05 */ u8 numCellsZ;
     /* 0x06 */ char unk_06[2];
     /* 0x08 */ s32 centerPos[3];
-    /* 0x14 */ UNK_FUN_PTR(dropCallback);
+    /* 0x14 */ PushBlockFallCallback(dropCallback);
     /* 0x18 */ char unk_18[4];
 } PushBlockGrid; // size = 0x1C
 
@@ -1578,7 +1595,12 @@ typedef struct ActorPartMovement {
     /* 0x3A */ s16 unk_3A;
     /* 0x3C */ s32 unk_3C;
     /* 0x40 */ char unk_40[0xC];
-    /* 0x4C */ s32 varTable[16];
+    /* 0x4C */ union {
+    /*      */     s32 varTable[16];
+    /*      */     f32 varTableF[16];
+    /*      */     void* varTablePtr[16];
+    /*      */ };
+
 } ActorPartMovement; // size = 0x8C
 
 typedef struct ActorPartBlueprint {
@@ -1681,7 +1703,7 @@ typedef struct CollisionStatus {
     /* 0x04 */ s16 lastTouchedFloor; /* valid after jump */
     /* 0x06 */ s16 floorBelow;
     /* 0x08 */ s16 currentCeiling; /* valid on touching with head */
-    /* 0x0A */ s16 unk_0A; /* associated with TRIGGER_WALL_PRESS_A */
+    /* 0x0A */ s16 currentInspect; /* associated with TRIGGER_WALL_PRESS_A */
     /* 0x0C */ s16 unk_0C; /* associated with TRIGGER_FLAGS_2000 */
     /* 0x0E */ s16 unk_0E; /* associated with TRIGGER_FLAGS_4000 */
     /* 0x10 */ s16 unk_10; /* associated with TRIGGER_FLAGS_8000 */
@@ -1756,45 +1778,6 @@ typedef struct DecorationTable {
     /* 0x8C0 */ s16 unk_8C0[4];
     /* 0x8C6 */ DecorationUnk unk_8C6[2];
 } DecorationTable; // size = 0x8E8
-
-typedef struct PopupMenu {
-    /* 0x000 */ struct HudScript* ptrIcon[32];
-    /* 0x080 */ char unk_80[0x4];
-    /* 0x084 */ s32 nameMsg[32];
-    /* 0x104 */ char unk_104[0x4];
-    /* 0x108 */ s32 userIndex[32]; // used to map menu order to a user-ID for each item
-    /* 0x188 */ char unk_188[0x4];
-    /* 0x18C */ s32 enabled[32];
-    /* 0x20C */ char unk_20C[0x4];
-    /* 0x210 */ s32 value[32]; // sale price, etc
-    /* 0x290 */ char unk_290[0x4];
-    /* 0x294 */ s32 descMsg[32];
-    /* 0x314 */ char unk_314[0x4];
-    /* 0x318 */ s32 popupType; // C = keys
-    /* 0x31C */ s32 unk_31C;
-    /* 0x320 */ s32 unk_320;
-    /* 0x324 */ s32 numEntries;
-    /* 0x328 */ s32 initialPos;
-    /* 0x32C */ s16 result;
-    /* 0x32E */ char unk_32E[0x2];
-} PopupMenu; // size = 0x330
-
-typedef struct Shop {
-    /* 0x000 */ s16 flags;
-    /* 0x002 */ s16 numItems;
-    /* 0x004 */ s16 numSpecialPrices;
-    /* 0x006 */ char unk_06[0x2];
-    /* 0x008 */ s32 currentItemSlot;
-    /* 0x00C */ s32 selectedStoreItemSlot;
-    /* 0x010 */ ShopOwner* owner;
-    /* 0x014 */ ShopItemLocation* ItemDataPositions;
-    /* 0x018 */ ShopItemData* staticInventory;
-    /* 0x01C */ ShopSellPriceData* staticPriceList;
-    /* 0x020 */ s32 costIconID;
-    /* 0x024 */ s32 inventoryItemFlags;
-    /* 0x028 */ PopupMenu itemSelectMenu;
-    /* 0x358 */ s32 unk_358;
-} Shop; // size = 0x35C
 
 typedef struct Encounter {
     /* 0x00 */ s32 count;
@@ -1883,7 +1866,11 @@ typedef struct ActorState { // TODO: Make the first field of this an ActorMoveme
     /* 0x6B */ u8 jumpPartIndex;
     /* 0x6C */ ChompChainAnimationState* unk_6C;
     /* 0x70 */ char unk_70[12];
-    /* 0x7C */ s32 varTable[16];
+    /* 0x7C */ union {
+    /*      */     s32 varTable[16];
+    /*      */     f32 varTableF[16];
+    /*      */     void* varTablePtr[16];
+    /*      */ };
 } ActorState; // size = 0xBC;
 
 typedef struct Actor {
@@ -2044,10 +2031,7 @@ typedef struct PlayerStatus {
     /* 0x084 */ f32 currentYaw;
     /* 0x088 */ f32 overlapPushYaw;
     /* 0x08C */ f32 pitch;
-    /* 0x090 */ f32 unk_90;
-    /* 0x094 */ s32 unk_94;
-    /* 0x098 */ s32 unk_98;
-    /* 0x09C */ s32 unk_9C;
+    /* 0x090 */ f32 unk_90[4];
     /* 0x0A0 */ f32 heading;
     /* 0x0A4 */ s32 trueAnimation; ///< Encoding back-facing sprite
     /* 0x0A8 */ f32 spriteFacingAngle; /* angle of sprite, relative to camera, from 0 to 180 */
@@ -2130,32 +2114,51 @@ typedef struct EncounterStatus {
     /* 0xFB4 */ char unk_FB4[4];
 } EncounterStatus; // size = 0xFB8
 
+typedef struct SaveDataHeader {
+    /* 0x0000 */ char magicString[16]; /* "Mario Story 006" string */
+    /* 0x0010 */ s8 pad[0x20]; /* always zero */
+    /* 0x0030 */ s32 crc1;
+    /* 0x0034 */ s32 crc2;
+    /* 0x0038 */ s32 saveSlot;
+    /* 0x003C */ s32 saveCount;
+    /* 0x0040 */ s8 ignored[0x40];
+} SaveDataHeader;
+
+typedef struct SaveMetadata {
+    /* 0x00 */ s32 timePlayed;
+    /* 0x04 */ u8 spiritsRescued;
+    /* 0x05 */ char unk_05[0x1];
+    /* 0x06 */ s8 level;
+    /* 0x07 */ unsigned char filename[8];
+    /* 0x0F */ char unk_0F[0x1];
+    /* 0x10 */ s32 unk_10;
+    /* 0x14 */ s32 unk_14;
+} SaveMetadata; // size = 0x18
+
 typedef struct SaveData {
     /* 0x0000 */ char magicString[16]; /* "Mario Story 006" string */
     /* 0x0010 */ s8 pad[32]; /* always zero */
     /* 0x0030 */ s32 crc1;
     /* 0x0034 */ s32 crc2;
     /* 0x0038 */ s32 saveSlot;
-    /* 0x003C */ u32 saveCount;
+    /* 0x003C */ s32 saveCount;
     /* 0x0040 */ PlayerData player;
-    /* 0x0380 */ char unk_380[0xE0];
-    /* 0x0460 */ s32 starPoints;
-    /* 0x0464 */ char unk_464[4];
     /* 0x0468 */ s16 areaID;
     /* 0x046A */ s16 mapID;
     /* 0x046C */ s16 entryID;
     /* 0x046E */ char unk_46E[2];
-    /* 0x0470 */ s32 enemyDefeatFlags[720];
+    /* 0x0470 */ s32 enemyDefeatFlags[60][12];
     /* 0x0FB0 */ s32 globalFlags[64];
     /* 0x10B0 */ s8 globalBytes[512];
     /* 0x12B0 */ s32 areaFlags[8];
     /* 0x12D0 */ s8 areaBytes[16];
-    /* 0x12E0 */ char unk_12E0[6];
+    /* 0x12E0 */ s8 debugEnemyContact;
+    /* 0x12E0 */ s8 unk_12E1;
+    /* 0x12E0 */ s8 unk_12E2;
+    /* 0x12E0 */ s8 musicEnabled;
+    /* 0x12E4 */ char unk_12E4[0x2];
     /* 0x12E6 */ Vec3s savePos;
-    /* 0x12EC */ s32 unk_12EC;
-    /* 0x12F0 */ s8 unk_12F0[12]; /* player name starts at 4th char */
-    /* 0x12FC */ s32 unk_12FC;
-    /* 0x1300 */ s32 unk_1300;
+    /* 0x12EC */ SaveMetadata unk_12EC;
     /* 0x1304 */ char unk_1304[0x7C];
 } SaveData; // size = 0x1380
 
@@ -2312,10 +2315,10 @@ typedef struct TweesterPhysics {
 } TweesterPhysics; // size = 0x1C
 
 typedef struct PartnerActionStatus {
-    /* 0x000 */ union {
-        /*       */     s32 i;
-        /*       */     s8 b[4];
-    } actionState;
+    /* 0x000 */ s8 partnerActionState;
+    /* 0x001 */ s8 partnerAction_unk_1;
+    /* 0x002 */ s8 partnerAction_unk_2;
+    /* 0x003 */ s8 actingPartner;
     /* 0x004 */ s16 stickX;
     /* 0x006 */ s16 stickY;
     /* 0x008 */ s32 currentButtons;
@@ -2432,17 +2435,6 @@ typedef struct Struct8015A578 {
     /* 0x08 */ f32 unk_08;
     /* 0x0C */ char unk_0C[0x4];
 } Struct8015A578; // size = 0x10
-
-typedef struct SaveMetadata {
-    /* 0x00 */ s32 timePlayed;
-    /* 0x04 */ u8 spiritsRescued;
-    /* 0x05 */ char unk_05[0x1];
-    /* 0x06 */ s8 level;
-    /* 0x07 */ unsigned char filename[8];
-    /* 0x0F */ char unk_0F[0x1];
-    /* 0x10 */ s32 unk_10;
-    /* 0x14 */ s32 unk_14;
-} SaveMetadata; // size = 0x18
 
 typedef struct SpriteShadingLightSource {
     /* 0x00 */ s8 flags;

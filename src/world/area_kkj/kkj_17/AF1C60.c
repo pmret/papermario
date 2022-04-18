@@ -3,7 +3,7 @@
 static char* N(exit_str_0) = "kkj_11";
 static char* N(exit_str_1) = "";
 
-INCLUDE_ASM(s32, "world/area_kkj/kkj_17/AF1C60", func_80240000_AF1C60);
+#include "world/common/StashVars.inc.c"
 
 #include "world/common/GetItemName.inc.c"
 

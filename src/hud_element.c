@@ -688,23 +688,23 @@ void init_hud_element_list(void) {
 }
 
 void func_801413F8(void) {
-    set_cam_viewport(CAM_CAM3, 0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1);
-    gCameras[CAM_CAM3].updateMode = 2;
-    gCameras[CAM_CAM3].unk_06 = 1;
-    gCameras[CAM_CAM3].unk_20 = 0x3CBF;
-    gCameras[CAM_CAM3].nearClip = 0x10;
-    gCameras[CAM_CAM3].unk_1C = 0;
-    gCameras[CAM_CAM3].unk_1E = 0;
-    gCameras[CAM_CAM3].unk_22 = 0;
-    gCameras[CAM_CAM3].unk_5C = 0;
-    gCameras[CAM_CAM3].farClip = 0x4000;
-    gCameras[CAM_CAM3].bgColor[0] = 0;
-    gCameras[CAM_CAM3].bgColor[1] = 0;
-    gCameras[CAM_CAM3].bgColor[2] = 0;
-    gCameras[CAM_CAM3].unk_54 = 160.0f;
-    gCameras[CAM_CAM3].unk_58 = -120.0f;
-    gCameras[CAM_CAM3].vfov = 1.0f;
-    gCameras[CAM_CAM3].flags &= ~0x6;
+    set_cam_viewport(CAM_3, 0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1);
+    gCameras[CAM_3].updateMode = 2;
+    gCameras[CAM_3].unk_06 = 1;
+    gCameras[CAM_3].unk_20 = 0x3CBF;
+    gCameras[CAM_3].nearClip = 0x10;
+    gCameras[CAM_3].unk_1C = 0;
+    gCameras[CAM_3].auxBoomLength = 0;
+    gCameras[CAM_3].auxBoomPitch = 0;
+    gCameras[CAM_3].auxPos.z = 0;
+    gCameras[CAM_3].farClip = 0x4000;
+    gCameras[CAM_3].bgColor[0] = 0;
+    gCameras[CAM_3].bgColor[1] = 0;
+    gCameras[CAM_3].bgColor[2] = 0;
+    gCameras[CAM_3].auxPos.x = 160.0f;
+    gCameras[CAM_3].auxPos.y = -120.0f;
+    gCameras[CAM_3].vfov = 1.0f;
+    gCameras[CAM_3].flags &= ~0x6;
 }
 
 s32 hud_element_create(const HudScript* anim) {
@@ -1621,7 +1621,7 @@ void render_hud_elements_world(void) {
     do {
         do {
             count = 0;
-            if (gCurrentCamID == CAM_CAM3) {
+            if (gCurrentCamID == CAM_3) {
                 for (i = 0; i < ARRAY_COUNT(*gHudElements); i++) {
                     hudElement = (*gHudElements)[i];
                     if (hudElement != NULL) {
@@ -1800,11 +1800,11 @@ void func_80143C48(s32 elemID, s32 arg1, s32 camID) {
 }
 
 void func_80144218(s32 arg0) {
-    func_80143C48(arg0, 1, CAM_CAM3);
+    func_80143C48(arg0, 1, CAM_3);
 }
 
 void func_80144238(s32 arg0) {
-    func_80143C48(arg0, 0, CAM_CAM3);
+    func_80143C48(arg0, 0, CAM_3);
 }
 
 void func_80144258(s32 arg0) {

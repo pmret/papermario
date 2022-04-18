@@ -2,7 +2,7 @@
 
 .section .data
 
-dlabel D_80241800_8765C0
+dlabel tik_05_varStash
 .word 0x00000000
 
 dlabel D_80241804_8765C4

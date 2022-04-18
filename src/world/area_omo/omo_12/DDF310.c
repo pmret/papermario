@@ -2,7 +2,7 @@
 
 #include "world/common/UnkFunc41.inc.c"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_12/DDF310", func_80240184_DDF494);
+#include "world/common/atomic/DarkRoom.inc.c"
 
 #include "world/common/SetCamera0Flag1000.inc.c"
 

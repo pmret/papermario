@@ -2,14 +2,14 @@
 #include "camera.h"
 
 EvtScript ShakeCam1 = {
-    EVT_SET_GROUP(0)
+    EVT_SET_GROUP(EVT_GROUP_00)
     EVT_CALL(ShakeCam, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), EVT_FIXED(1.0))
     EVT_RETURN
     EVT_END
 };
 
 EvtScript ShakeCamX = {
-    EVT_SET_GROUP(0)
+    EVT_SET_GROUP(EVT_GROUP_00)
     EVT_CALL(ShakeCam, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), EVT_VAR(3))
     EVT_RETURN
     EVT_END
@@ -77,27 +77,27 @@ ApiStatus func_802CA988(Evt* script, s32 isInitialCall) {
     Bytecode outVar2 = *args++;
     Bytecode outVar3 = *args++;
     Bytecode outVar4 = *args++;
-    f32 temp1, temp2, temp3;
+    f32 dx, dy, dz;
 
     gCameras[id].updateMode = 2;
     gCameras[id].unk_06 = 0;
     gCameras[id].unk_1C = -round(gCameras[id].currentPitch);
-    gCameras[id].unk_1E = -gCameras[id].currentBlendedYawNegated;
+    gCameras[id].auxBoomLength = -gCameras[id].currentBlendedYawNegated;
 
-    temp1 = gCameras[id].lookAt_obj.x - gCameras[id].lookAt_eye.x;
-    temp2 = gCameras[id].lookAt_obj.y - gCameras[id].lookAt_eye.y;
-    temp3 = gCameras[id].lookAt_obj.z - gCameras[id].lookAt_eye.z;
+    dx = gCameras[id].lookAt_obj.x - gCameras[id].lookAt_eye.x;
+    dy = gCameras[id].lookAt_obj.y - gCameras[id].lookAt_eye.y;
+    dz = gCameras[id].lookAt_obj.z - gCameras[id].lookAt_eye.z;
 
-    gCameras[id].unk_20 = round(sqrtf(SQ(temp1) + SQ(temp2) + SQ(temp3)));
-    gCameras[id].unk_22 = 0;
-    gCameras[id].unk_54 = gCameras[id].lookAt_obj.x;
-    gCameras[id].unk_58 = gCameras[id].lookAt_obj.y;
-    gCameras[id].unk_5C = gCameras[id].lookAt_obj.z;
+    gCameras[id].unk_20 = round(sqrtf(SQ(dx) + SQ(dy) + SQ(dz)));
+    gCameras[id].auxBoomPitch = 0;
+    gCameras[id].auxPos.x = gCameras[id].lookAt_obj.x;
+    gCameras[id].auxPos.y = gCameras[id].lookAt_obj.y;
+    gCameras[id].auxPos.z = gCameras[id].lookAt_obj.z;
 
     evt_set_variable(script, outVar1, gCameras[id].unk_1C);
-    evt_set_variable(script, outVar2, gCameras[id].unk_1E);
+    evt_set_variable(script, outVar2, gCameras[id].auxBoomLength);
     evt_set_variable(script, outVar3, gCameras[id].unk_20);
-    evt_set_variable(script, outVar4, gCameras[id].unk_22);
+    evt_set_variable(script, outVar4, gCameras[id].auxBoomPitch);
     return ApiStatus_DONE2;
 }
 
@@ -122,9 +122,9 @@ ApiStatus func_802CABE8(Evt* script, s32 isInitialCall) {
     s16 value4 = evt_get_variable(script, *args++);
     Camera* camera = &gCameras[id];
 
-    camera->unk_22 = value4;
+    camera->auxBoomPitch = value4;
     camera->unk_1C = value1;
-    camera->unk_1E = value2;
+    camera->auxBoomLength = value2;
     camera->unk_20 = value3;
     return ApiStatus_DONE2;
 }
@@ -139,8 +139,8 @@ ApiStatus func_802CACC0(Evt* script, s32 isInitialCall) {
     Camera* camera = &gCameras[id];
 
     camera->zoomPercent = zoomPercent;
-    camera->unk_24 = value1;
-    camera->unk_26 = value2;
+    camera->auxBoomYaw = value1;
+    camera->auxBoomZOffset = value2;
     camera->unk_28 = value3;
     return ApiStatus_DONE2;
 }
@@ -167,9 +167,9 @@ ApiStatus func_802CAE50(Evt* script, s32 isInitialCall) {
     s32 value3 = evt_get_variable(script, *args++);
     Camera* camera = &gCameras[id];
 
-    camera->unk_54 = value1;
-    camera->unk_58 = value2;
-    camera->unk_5C = value3;
+    camera->auxPos.x = value1;
+    camera->auxPos.y = value2;
+    camera->auxPos.z = value3;
     return ApiStatus_DONE2;
 }
 
@@ -192,62 +192,61 @@ INCLUDE_ASM(s32, "evt/cam_api", func_802CB008, Evt* script, s32 isInitialCall);
 ApiStatus ShakeCam(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 camIndex = evt_get_variable(script, *args++);
-    s32 temp_s3 = evt_get_variable(script, *args++);
-    s32 temp_s4 = evt_get_variable(script, *args++);
-    f32 temp_f20 = 2.0f * evt_get_float_variable(script, *args++);
+    s32 shakeMode = evt_get_variable(script, *args++);
+    s32 duration = evt_get_variable(script, *args++);
+    f32 magnitude = 2.0f * evt_get_float_variable(script, *args++);
     Camera* camera = &gCameras[camIndex];
-    f32 temp_f2;
-    f32 phi_f2;
-    s32 temp_a1;
+    f32 scale;
+    f32 rumbleMagnitude;
+    s32 rumbleDuration;
 
     if (isInitialCall) {
-        switch (temp_s3){
-            case 0:
-            case 1:
+        switch (shakeMode){
+            case CAM_SHAKE_CONSTANT_VERTICAL:
+            case CAM_SHAKE_ANGULAR_HORIZONTAL:
                 break;
-            case 2:
-                temp_s4 *= 4;
-                break;
-            default:
+            case CAM_SHAKE_DECAYING_VERTICAL:
+                duration *= 4;
                 break;
         }
 
-        *(f32*)&script->functionTemp[3] = 1.0f;
-        script->functionTemp[1] = temp_s4;
+        *(f32*)&script->functionTemp[3] = 1.0f; //TODO functionTempF ?
+        script->functionTemp[1] = duration;
 
         if (!gGameStatusPtr->isBattle) {
-            if (temp_f20 > 10.0f) {
-                temp_f20 = 10.0f;
+            if (magnitude > 10.0f) {
+                magnitude = 10.0f;
             }
 
-            phi_f2 = temp_f20;
-            if (temp_f20 > 6.0f) {
-                phi_f2 = 6.0f;
+            rumbleMagnitude = magnitude;
+            if (rumbleMagnitude > 6.0f) {
+                rumbleMagnitude = 6.0f;
             }
-            phi_f2 = phi_f2 * 32.0f + 64.0f;
+            rumbleMagnitude = rumbleMagnitude * 32.0f + 64.0f;
 
-            temp_a1 = temp_s4;
-            if (temp_a1 < 5) {
-                temp_a1 = 5;
+            rumbleDuration = duration;
+
+            if (rumbleDuration < 5) {
+                rumbleDuration = 5;
             }
-            start_rumble(phi_f2, (temp_a1 & 0xFFFF) * 2);
+            start_rumble(rumbleMagnitude, (rumbleDuration & 0xFFFF) * 2);
         }
     }
 
     camera->flags |= CAM_FLAG_SHAKING;
-    temp_f2 = script->functionTempF[3];
-    switch (temp_s3) {
-        case 0:
-            guTranslateF(camera->viewMtxShaking, 0.0f, -temp_f2 * temp_f20, 0.0f);
+    scale = script->functionTempF[3];
+    switch (shakeMode) {
+        case CAM_SHAKE_CONSTANT_VERTICAL:
+            guTranslateF(camera->viewMtxShaking, 0.0f, -scale * magnitude, 0.0f);
             script->functionTempF[3] = -script->functionTempF[3];
             break;
-        case 1:
-            guRotateF(camera->viewMtxShaking, temp_f2 * temp_f20, 0.0f, 0.0f, 1.0f);
+        case CAM_SHAKE_ANGULAR_HORIZONTAL:
+            guRotateF(camera->viewMtxShaking, scale * magnitude, 0.0f, 0.0f, 1.0f);
             script->functionTempF[3] = -script->functionTempF[3];
             break;
-        case 2:
-            guTranslateF(camera->viewMtxShaking, 0.0f, -temp_f2 * temp_f20, 0.0f);
-            if ((script->functionTemp[1] < (temp_s4 * 2)) && (temp_s4 < script->functionTemp[1])) {
+        case CAM_SHAKE_DECAYING_VERTICAL:
+            guTranslateF(camera->viewMtxShaking, 0.0f, -scale * magnitude, 0.0f);
+            if ((script->functionTemp[1] < (duration * 2)) && (duration < script->functionTemp[1])) {
                 script->functionTempF[3] = script->functionTempF[3] * -0.8;
             } else {
                 script->functionTempF[3] = -script->functionTempF[3];
@@ -266,7 +265,7 @@ ApiStatus ShakeCam(Evt* script, s32 isInitialCall) {
 void exec_ShakeCam1(s32 camID, s32 mode, s32 duration) {
     Evt* script;
 
-    script = start_script_in_group(&ShakeCam1, 1, 0, 4);
+    script = start_script_in_group(&ShakeCam1, EVT_PRIORITY_1, 0, EVT_GROUP_04);
     script->varTable[0] = camID;
     script->varTable[1] = mode;
     script->varTable[2] = duration;
@@ -275,7 +274,7 @@ void exec_ShakeCam1(s32 camID, s32 mode, s32 duration) {
 void exec_ShakeCamX(s32 camID, s32 mode, s32 duration, f32 magnitude) {
     Evt* script;
 
-    script = start_script_in_group(&ShakeCamX, 1, 0, 4);
+    script = start_script_in_group(&ShakeCamX, EVT_PRIORITY_1, 0, EVT_GROUP_04);
     evt_set_variable(script, EVT_VAR(0), camID);
     evt_set_variable(script, EVT_VAR(1), mode);
     evt_set_variable(script, EVT_VAR(2), duration);
@@ -315,10 +314,10 @@ ApiStatus PanToTarget(Evt* script, s32 isInitialCall) {
 
     camera->unk_506 = 1;
     if (targetType != 0) {
-        camera->followPlayer = 1;
+        camera->followPlayer = TRUE;
         camera->panPhase = panPhase;
     } else {
-        camera->followPlayer = 0;
+        camera->followPlayer = FALSE;
         camera->panPhase = 0.0f;
         camera->moveSpeed = 1.0f;
     }

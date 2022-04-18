@@ -171,7 +171,7 @@ Evt* start_script(EvtScript* source, s32 priority, s32 initialState) {
     gNumScripts++;
     ASSERT(newScript != NULL);
 
-    newScript->state = initialState | 1;
+    newScript->state = initialState | EVT_FLAG_01;
     newScript->currentOpcode = 0;
     newScript->priority = priority;
     newScript->ptrNextLine = (Bytecode*)source;
@@ -186,7 +186,7 @@ Evt* start_script(EvtScript* source, s32 priority, s32 initialState) {
     newScript->owner2.npcID = -1;
     newScript->loopDepth = -1;
     newScript->switchDepth = -1;
-    newScript->groupFlags = ~0x10;
+    newScript->groupFlags = ~EVT_GROUP_10;
     newScript->ptrSavedPosition = NULL;
     newScript->frameCounter = 0.0f;
     newScript->unk_158 = 0;
@@ -204,7 +204,7 @@ Evt* start_script(EvtScript* source, s32 priority, s32 initialState) {
 
     find_script_labels(newScript);
 
-    if (gIsUpdatingScripts && (newScript->state & 0x20)) {
+    if (gIsUpdatingScripts && (newScript->state & EVT_FLAG_20)) {
         scriptListCount = gScriptListCount++;
         gScriptIndexList[scriptListCount] = curScriptIndex;
         gScriptIdList[scriptListCount] = newScript->id;
@@ -243,7 +243,7 @@ Evt* start_script_in_group(EvtScript* source, u8 priority, u8 initialState, u8 g
 
     // Some of this function is surely macros. I think we'll learn more as we do others in this file. -Ethan
     do {
-        newScript->state = initialState | 1;
+        newScript->state = initialState | EVT_FLAG_01;
         newScript->currentOpcode = 0;
         newScript->priority = priority;
         newScript->id = gStaticScriptCounter++;
@@ -274,7 +274,7 @@ Evt* start_script_in_group(EvtScript* source, u8 priority, u8 initialState, u8 g
 
         find_script_labels(newScript);
 
-        if (gIsUpdatingScripts && (newScript->state & 0x20)) {
+        if (gIsUpdatingScripts && (newScript->state & EVT_FLAG_20)) {
             scriptListCount = gScriptListCount++;
             gScriptIndexList[scriptListCount] = curScriptIndex;
             gScriptIdList[scriptListCount] = newScript->id;
@@ -311,8 +311,8 @@ Evt* start_child_script(Evt* parentScript, EvtScript* source, s32 initialState) 
     ASSERT(child != NULL);
 
     parentScript->childScript = child;
-    parentScript->state |= 0x10;
-    child->state = initialState | 1;
+    parentScript->state |= EVT_FLAG_10;
+    child->state = initialState | EVT_FLAG_01;
     child->ptrCurrentLine = child->ptrFirstLine = child->ptrNextLine = (Bytecode*)source;
 
 
@@ -380,7 +380,7 @@ Evt* func_802C39F8(Evt* parentScript, Bytecode* nextLine, s32 newState) {
     gNumScripts++;
     ASSERT(child != NULL);
 
-    child->state = newState | 1;
+    child->state = newState | EVT_FLAG_01;
     child->ptrNextLine = nextLine;
     child->ptrFirstLine = nextLine;
     child->ptrCurrentLine = nextLine;
@@ -671,8 +671,8 @@ Trigger* bind_trigger(EvtScript* script, s32 flags, s32 triggerFlagIndex, s32 tr
     trigger->onTriggerEvt = script;
     trigger->runningScript = NULL;
     trigger->priority = priority;
-    trigger->scriptVars[0] = triggerVar0;
-    trigger->scriptVars[1] = triggerVar1;
+    trigger->varTable[0] = triggerVar0;
+    trigger->varTable[1] = triggerVar1;
     return trigger;
 }
 

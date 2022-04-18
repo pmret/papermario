@@ -1,5 +1,6 @@
 #include "common.h"
 #include "battle/battle.h"
+#include "mapfs/arn_bt04_shape.h"
 
 #define NAMESPACE b_area_arn_arn_04
 
@@ -16,7 +17,7 @@ EvtScript N(afterBattle_80227B3C) = {
 };
 
 s32 N(foregroundModelList_80227B4C)[] = {
-    0x00000014, 0x00000000,
+    MODEL_o349, 0,
 };
 
 Stage NAMESPACE = {

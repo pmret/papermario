@@ -72,7 +72,7 @@ EvtScript N(80240814) = {
 };
 
 EvtScript N(80240880) = {
-    EVT_SET_GROUP(11)
+    EVT_SET_GROUP(EVT_GROUP_0B)
     EVT_SET(EVT_VAR(10), EVT_VAR(0))
     EVT_SET(EVT_VAR(11), EVT_VAR(1))
     EVT_SET(EVT_VAR(12), EVT_VAR(2))
@@ -183,7 +183,7 @@ NpcSettings N(npcSettings_80240EDC) = {
     .level = 99,
 };
 
-s32** N(D_80240F08_CA81A8) = NULL;
+s32** N(varStash) = NULL;
 
 EvtScript N(80240F0C) = {
     EVT_CALL(ShowGotItem, EVT_VAR(0), 1, 0)
@@ -1091,23 +1091,7 @@ NpcGroupList N(npcGroupList_8024442C) = {
     {},
 };
 
-ApiStatus N(func_80240040_CA72E0)(Evt* script, s32 isInitialCall) {
-    s32 i;
-
-    if (N(D_80240F08_CA81A8) == NULL) {
-        N(D_80240F08_CA81A8) = heap_malloc(16 * sizeof(s32));
-        for (i = 0; i < 16; i++) {
-            N(D_80240F08_CA81A8)[i] = script->varTable[i];
-        }
-    } else {
-        for (i = 0; i < 16; i++) {
-            script->varTable[i] = N(D_80240F08_CA81A8)[i];
-        }
-        heap_free(N(D_80240F08_CA81A8));
-        N(D_80240F08_CA81A8) = NULL;
-    }
-    return ApiStatus_DONE2;
-}
+#include "world/common/StashVars.inc.c"
 
 #include "world/common/GetItemName.inc.c"
 

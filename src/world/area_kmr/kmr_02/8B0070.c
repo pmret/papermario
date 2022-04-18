@@ -1,89 +1,28 @@
 #include "kmr_02.h"
+#include "effects.h"
 
 static char* N(exit_str_0) = "kmr_05";
 static char* N(exit_str_1) = "kmr_00";
 static char* N(exit_str_2) = "kmr_09";
 static char* N(exit_str_3) = "";
 
-#define UNK_ALPHA_FUNC_NPC 8
+#define CHUCK_QUIZMO_NPC_ID 8
 
-#include "world/common/SetPlayerStatusAnimFlags100000.inc.c"
-
-#include "world/common/GetCurrentFloor.inc.c"
-
-#include "world/common/UnkFunc25.inc.c"
-
-#include "world/common/GetEntryPos.inc.c"
-
-#include "world/common/GetCurrentCameraYawClamped180.inc.c"
-
-#include "world/common/SomeXYZFunc2.inc.c"
+#include "world/common/atomic/Pipe.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_802402E0_8B0350);
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80240370_8B03E0);
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80240390_8B0400);
+extern s32 N(Quizmo_Worker);
+extern s32 N(Quizmo_AnswerResult);
+extern EffectInstance* N(Quizmo_StageEffect);
+extern EffectInstance* N(Quizmo_AudienceEffect);
+extern EffectInstance* N(Quizmo_VannaTEffect);
 
-#include "world/common/GetItemName.inc.c"
+#include "world/common/atomic/Quizmo.inc.c"
 
-#include "world/common/Set80151310.inc.c"
-
-#include "world/common/UnkQuizFunc.inc.c"
-
-#include "world/common/UnkFunc31.inc.c"
-
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80240A7C_8B0AEC);
-
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80240B00_8B0B70);
-
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80240D18_8B0D88);
-
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80240DCC_8B0E3C);
-
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80240E00_8B0E70);
-
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80240E80_8B0EF0);
-
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80240E98_8B0F08);
-
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80240EB4_8B0F24);
-
-#include "world/common/GetGameStatus75.inc.c"
-
-#include "world/common/SetCamVfov.inc.c"
-
-#include "world/common/GetCamVfov.inc.c"
-
-#include "world/common/UnkCameraFunc.inc.c"
-
-#include "world/common/UnkRotatePlayer.inc.c"
-
-#include "world/common/UnkPartnerFuncs.inc.c"
-
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80241388_8B13F8);
-
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_802413F4_8B1464);
-
-#include "world/common/UnkNpcAIFunc43.inc.c"
-
-#include "world/common/UnkNpcAIFunc44.inc.c"
-
-#include "world/common/NpcJumpFunc3.inc.c"
-
-#include "world/common/NpcJumpFunc.inc.c"
-
-#include "world/common/UnkNpcAIFunc13_2.inc.c"
-
-#include "world/common/UnkNpcAIFunc11.inc.c"
-
-#include "world/common/UnkNpcAIFunc10.inc.c"
-
-#include "world/common/UnkNpcAIFunc42.inc.c"
-
-#include "world/common/UnkNpcAIFunc45.inc.c"
-
-#include "world/common/UnkNpcAIMainFunc4.inc.c"
+#include "world/common/atomic/enemy/UnkAI_4.inc.c"
 
 static char* N(exit_str_4) = "nok_02";
 static char* N(exit_str_5) = "kmr_03";

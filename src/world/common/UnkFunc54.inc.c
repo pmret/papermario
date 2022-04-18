@@ -29,7 +29,7 @@ ApiStatus N(UnkFunc54)(Evt* script, s32 isInitialCall) {
                 npc->unk_AB = npc->collisionHeight / 2;
             }
 
-            if (isInitialCall || (enemy->unk_B0 & 4)) {
+            if (isInitialCall || (enemy->unk_B0 & ENEMY_AI_FLAGS_4)) {
                 script->functionTemp[0] = 0;
                 npc->duration = 0;
                 npc->flags |= NPC_FLAG_40000 | NPC_FLAG_100 | NPC_FLAG_2;
@@ -39,8 +39,8 @@ ApiStatus N(UnkFunc54)(Evt* script, s32 isInitialCall) {
                 enemy->flags |= ENEMY_FLAGS_10000000 | ENEMY_FLAGS_8000000 | ENEMY_FLAGS_IGNORE_HAMMER |
                                 ENEMY_FLAGS_IGNORE_JUMP | ENEMY_FLAGS_IGNORE_TOUCH | ENEMY_FLAGS_200000 |
                                 ENEMY_FLAGS_100000 | ENEMY_FLAGS_40;
-                if (enemy->unk_B0 & 4) {
-                    enemy->unk_B0 &= ~4;
+                if (enemy->unk_B0 & ENEMY_AI_FLAGS_4) {
+                    enemy->unk_B0 &= ~ENEMY_AI_FLAGS_4;
                 }
             }
 

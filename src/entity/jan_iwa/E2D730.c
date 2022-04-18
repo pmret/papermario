@@ -121,7 +121,7 @@ void func_802BB6E0_E2E010(Entity* entity) {
     s32 entityIndex;
 
     get_animator_by_index(entity->virtualModelIndex)->renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;
-    entityIndex = create_entity(&D_802BC7D0_E2F100, entity->position.x, entity->position.y, entity->position.z, 0, 0x80000000);
+    entityIndex = create_entity(&D_802BC7D0_E2F100, entity->position.x, entity->position.y, entity->position.z, 0, MAKE_ENTITY_END);
     data->unk_04.index = entityIndex;
     newEntity = get_entity_by_index(entityIndex);
     data = (structE2D730*)newEntity->dataBuf.unk;
@@ -162,7 +162,7 @@ void func_802BB9E0_E2E310(Entity* entity) {
         case 0:
             if (entity->collisionFlags & 1) {
                 data->unk_01 = 0;
-                if (partnerActionStatus->actionState.b[3] != 0) {
+                if (partnerActionStatus->actingPartner != 0) {
                     playerStatus->animFlags |= 4;
                 }
                 func_800EF300(partnerActionStatus);
@@ -222,7 +222,7 @@ void func_802BB9E0_E2E310(Entity* entity) {
             }
             break;
         case 6:
-            if (!(entity->collisionFlags & 1) && (partnerActionStatus->actionState.b[0] == 0)) {
+            if (!(entity->collisionFlags & 1) && (partnerActionStatus->partnerActionState == PARTNER_ACTION_NONE)) {
                 data->unk_00 = 0;
                 enable_partner_ai();
                 phys_adjust_cam_on_landing();

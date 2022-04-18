@@ -18,7 +18,146 @@ void func_800E5520(void) {
     D_8010C9B0 = 0;
 }
 
-INCLUDE_ASM(s32, "7bb60_len_41b0", phys_adjust_cam_on_landing, void);
+s32 phys_adjust_cam_on_landing(void) {
+    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
+    GameStatus* gameStatus = gGameStatusPtr;
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    s32 ret = 1;
+
+    switch (gameStatus->areaID) {
+        case AREA_OBK:
+            ret = gameStatus->mapID != 4;
+            break;
+        case AREA_ISK:
+            switch (gameStatus->mapID) {
+                case 0:
+                    ret = 2;
+                    break;
+                case 1:
+                    if (D_8010C9B0 == 0) {
+                        if (playerStatus->position.y <= 0.0f) {
+                            D_8010C9B0 = 1;
+                        }
+                        ret = 2;
+                    } else if (playerStatus->position.y > 0.0f) {
+                        ret = 0;
+                    }
+                    break;
+                case 3:
+                    if (playerStatus->position.y > 25.0f) {
+                        ret = 0;
+                    }
+                    break;
+                case 4:
+                    if (playerStatus->position.y > 50.0f) {
+                        ret = 0;
+                    }
+                    break;
+                case 7:
+                    if (playerStatus->position.y > -390.0f) {
+                        ret = 0;
+                    } else if (playerStatus->position.y < -495.0f) {
+                        ret = 0;
+                    }
+                    break;
+                case 8:
+                    if (playerStatus->position.y > -90.0f) {
+                        ret = 0;
+                    } else if (playerStatus->position.y < -370.0f) {
+                        ret = 0;
+                    }
+                    break;
+                case 2:
+                    if (gGameStatusPtr->entryID == 0) {
+                        if (D_8010C9B0 == 0) {
+                            if (!(playerStatus->position.y > 0.0f)) {
+                                D_8010C9B0 = 1;
+                            } else {
+                                ret = 2;
+                                break;
+                            }
+                        }
+
+                        if (playerStatus->position.y > 0.0f) {
+                            ret = 0;
+                        }
+                    } else {
+                        ret = 2;
+                    }
+                    break;
+                case 5:
+                    if (gGameStatusPtr->entryID == 0) {
+                        if (D_8010C9B0 == 0) {
+                            if (!(playerStatus->position.y > -130.0f)) {
+                                D_8010C9B0 = 1;
+                            } else {
+                                ret = 2;
+                                break;
+                            }
+
+                        }
+
+                        if (playerStatus->position.y > -130.0f) {
+                            ret = 0;
+                        }
+                    } else {
+                        ret = 2;
+                    }
+                    break;
+                case 10:
+                    if (D_8010C9B0 == 0) {
+                        if (!(playerStatus->position.y > -520.0f)) {
+                            D_8010C9B0 = 1;
+                        } else {
+                            ret = 2;
+                            break;
+                        }
+                    }
+
+                    if (playerStatus->position.y > -520.0f) {
+                        ret = 0;
+                    }
+                    break;
+                case 11:
+                    if (gGameStatusPtr->entryID == 0) {
+                        if (D_8010C9B0 == 0) {
+                            if (!(playerStatus->position.y > -520.0f)) {
+                                D_8010C9B0 = 1;
+                            } else {
+                                ret = 2;
+                                break;
+                            }
+
+                        }
+
+                        if (playerStatus->position.y > -520.0f) {
+                            ret = 0;
+                        }
+                    }
+
+                    if (evt_get_variable(NULL, EVT_STORY_PROGRESS) >= STORY_CH2_DRAINED_THIRD_SAND_ROOM) {
+                        ret = 2;
+                    }
+                    break;
+            }
+            break;
+    }
+
+    if (ret == 1) {
+        if ((get_collider_type_by_id(gCollisionStatus.currentFloor) & 0xFF) == 3) {
+            ret = 0;
+            gCameras[0].moveFlags |= CAMERA_MOVE_FLAGS_1;
+        } else {
+            gCameras[0].moveFlags &= ~CAMERA_MOVE_FLAGS_1;
+        }
+    } else if (partnerActionStatus->partnerActionState != PARTNER_ACTION_NONE && partnerActionStatus->actingPartner == PARTNER_PARAKARRY) {
+        gCameras[0].moveFlags |= CAMERA_MOVE_FLAGS_2;
+    } else {
+        gCameras[0].moveFlags &= ~CAMERA_MOVE_FLAGS_2;
+    }
+
+    return ret;
+}
 
 void phys_clear_spin_history(void) {
     s32 i;
@@ -64,11 +203,78 @@ void phys_reset_spin_history(void) {
     D_8010C924 = NULL;
 }
 
-INCLUDE_ASM(s32, "7bb60_len_41b0", phys_update_action_state);
+void phys_update_action_state(void) {
+    Camera* cameras = gCameras;
+    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    PlayerSpinState* playerSpinState = &gPlayerSpinState;
+
+    if (!(playerStatus->flags & PLAYER_STATUS_ANIM_FLAGS_40000)) {
+        playerStatus->flags &= ~PLAYER_STATUS_ANIM_FLAGS_20000000;
+    }
+
+    if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS) {
+        phys_peach_update();
+        return;
+    }
+
+    if (playerStatus->unk_C5 != 0) {
+        playerStatus->unk_C5--;
+        if (playerStatus->unk_C5 == 0) {
+            gCameras[CAM_DEFAULT].moveFlags |= 4;
+        }
+    }
+
+    if (playerStatus->decorationList != 0) {
+        if (playerStatus->gravityIntegrator[0] <= 0.0f && D_800F7B90 > 0.0f) {
+            playerStatus->unk_C2 = playerStatus->decorationList;
+        }
+        D_800F7B90 = playerStatus->gravityIntegrator[0];
+    }
+
+    func_800E24F8();
+    if (playerSpinState->stopSoundTimer != 0) {
+        playerSpinState->stopSoundTimer--;
+        if (playerSpinState->stopSoundTimer == 0) {
+            playerStatus->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_SPINNING;
+            if (playerSpinState->spinSoundID != 0) {
+                sfx_stop_sound(playerSpinState->spinSoundID);
+            }
+        }
+    }
+
+    do {
+        s32 actionState = playerStatus->actionState;
+
+        if (actionState == ACTION_STATE_IDLE || actionState == ACTION_STATE_WALK || actionState == ACTION_STATE_RUN) {
+            s32 cond;
+
+            if (!(playerStatus->flags & PLAYER_STATUS_FLAGS_INPUT_DISABLED)) {
+                cond = check_conversation_trigger();
+            } else {
+                cond = FALSE;
+            }
+
+            if ((partnerActionStatus->partnerActionState == PARTNER_ACTION_NONE) && !(playerStatus->flags & PLAYER_STATUS_FLAGS_20) && cond) {
+                set_action_state(ACTION_STATE_TALK);
+            }
+            check_input_spin();
+        }
+
+        if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
+            void* dmaStart = PlayerActionsTable[playerStatus->actionState].dmaStart;
+
+            if (dmaStart != NULL && dmaStart != D_8010C924) {
+                D_8010C924 = dmaStart;
+                dma_copy(dmaStart, PlayerActionsTable[playerStatus->actionState].dmaEnd, (void* )0x802B6000); // TODO fix
+            }
+        }
+        PlayerActionsTable[playerStatus->actionState].update();
+    } while (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED);
+}
 
 void phys_peach_update(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    Action* action;
 
     func_800E24F8();
 
@@ -78,7 +284,8 @@ void phys_peach_update(void) {
         }
 
         if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
-            action = &PlayerActionsTable[playerStatus->actionState];
+            Action* action = &PlayerActionsTable[playerStatus->actionState];
+
             if (action->flag) {
                 if (action->dmaStart != NULL && action->dmaStart != D_8010C924) {
                     D_8010C924 = action->dmaStart;
@@ -109,12 +316,12 @@ void set_action_state(s32 actionState) {
     PlayerData* playerData = &gPlayerData;
     PlayerSpinState* spinState = &gPlayerSpinState;
 
-    if (playerStatus->flags & 0x200) {
-        playerStatus->flags &= ~0x200;
+    if (playerStatus->flags & PLAYER_STATUS_FLAGS_200) {
+        playerStatus->flags &= ~PLAYER_STATUS_FLAGS_200;
         enable_player_input();
     }
 
-    if (playerStatus->animFlags & 0x4000) {
+    if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_8BIT_MARIO) {
         // TODO figure this out
 #ifdef NON_EQUIVALENT
         if (
@@ -131,7 +338,7 @@ void set_action_state(s32 actionState) {
 #endif
             playerStatus->prevActionState = playerStatus->actionState;
             playerStatus->actionState = actionState;
-            playerStatus->flags |= 0x80000000;
+            playerStatus->flags |= PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
         }
         return;
     }
@@ -147,18 +354,18 @@ void set_action_state(s32 actionState) {
         partner = playerData->currentPartner;
 
         if (partner == PARTNER_SUSHIE || partner == PARTNER_LAKILESTER || partner == PARTNER_PARAKARRY) {
-            if (gPartnerActionStatus.actionState.b[0] != 0) {
-                playerStatus->animFlags |= 0x4;
-                playerStatus->flags |= 0x800;
+            if (gPartnerActionStatus.partnerActionState != PARTNER_ACTION_NONE) {
+                playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_4;
+                playerStatus->flags |= PLAYER_STATUS_FLAGS_800;
                 return;
             }
         }
     }
 
     if (actionState == ACTION_STATE_SLIDING) {
-        playerStatus->flags |= 0x10;
+        playerStatus->flags |= PLAYER_STATUS_FLAGS_10;
         playerStatus->moveFrames = 0;
-        playerStatus->flags &= ~0x4000;
+        playerStatus->flags &= ~PLAYER_STATUS_FLAGS_4000;
     }
 
     playerStatus->prevActionState = playerStatus->actionState;
@@ -167,17 +374,17 @@ void set_action_state(s32 actionState) {
     }
 
     if (actionState == ACTION_STATE_ENEMY_FIRST_STRIKE) {
-        playerStatus->animFlags |= 4;
+        playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_4;
     }
     playerStatus->actionState = actionState;
-    playerStatus->flags |= 0x80000000;
+    playerStatus->flags |= PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
 
     if (playerStatus->actionState == ACTION_STATE_SPIN) {
         return;
     }
 
-    playerStatus->flags &= ~0x20000;
-    playerStatus->animFlags &= ~0x10000;
+    playerStatus->flags &= ~PLAYER_STATUS_FLAGS_20000;
+    playerStatus->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_SPINNING;
 
     if (spinState->spinSoundID != 0) {
         sfx_stop_sound(spinState->spinSoundID);
@@ -191,10 +398,14 @@ void set_action_state(s32 actionState) {
 
 void update_locomotion_state(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    do { } while (0); // required to match
 
-    set_action_state((!is_ability_active(ABILITY_SLOW_GO)
-                      && (SQ(playerStatus->stickAxis[0]) + SQ(playerStatus->stickAxis[1]) >= 0xBD2)) ? ACTION_STATE_RUN : ACTION_STATE_WALK);
+    if (!is_ability_active(ABILITY_SLOW_GO) &&
+        SQ(playerStatus->stickAxis[0]) + SQ(playerStatus->stickAxis[1]) > SQ(55))
+    {
+        set_action_state(ACTION_STATE_RUN);
+    } else {
+        set_action_state(ACTION_STATE_WALK);
+    }
 }
 
 void start_falling(void) {
@@ -228,25 +439,68 @@ void start_bounce_b(void) {
     playerStatus->flags |= 0x800000;
 }
 
-// TODO playerData isn't used
 s32 check_input_hammer(void) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
     PlayerData* playerData = &gPlayerData;
 
-    if (gPlayerStatus.pressedButtons & BUTTON_B) {
-        if (!(gPlayerStatus.flags & 4)) {
-            if (gPartnerActionStatus.actionState.b[0] != 1 || gPlayerData.currentPartner != PARTNER_WATT) {
-                if (gPlayerData.hammerLevel != -1) {
-                    set_action_state(ACTION_STATE_HAMMER);
-                    return TRUE;
+    if (playerStatus->pressedButtons & BUTTON_B) {
+        if (playerStatus->flags & PLAYER_STATUS_FLAGS_FALLING) {
+            return FALSE;
+        }
+
+        if (gPartnerActionStatus.partnerActionState == PARTNER_ACTION_USE && playerData->currentPartner == PARTNER_WATT) {
+            return FALSE;
+        }
+
+        if (playerData->hammerLevel == -1) {
+            return FALSE;
+        }
+
+        set_action_state(ACTION_STATE_HAMMER);
+        return TRUE;
+    }
+    return FALSE;
+}
+
+s32 check_input_jump(void) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    CollisionStatus* collisionStatus = &gCollisionStatus;
+
+    if (!(playerStatus->pressedButtons & BUTTON_A)) {
+        return FALSE;
+    }
+
+    if ((get_collider_type_by_id((u16)collisionStatus->currentFloor) == 5) && phys_should_player_be_sliding()) {
+        return FALSE;
+    }
+
+    if (collisionStatus->touchingWallTrigger != 0 ||
+        (playerStatus->animFlags & (PLAYER_STATUS_ANIM_FLAGS_SPEECH_PROMPT_AVAILABLE |
+                                    PLAYER_STATUS_ANIM_FLAGS_INTERACT_PROMPT_AVAILABLE)))
+    {
+        return FALSE;
+    }
+
+    if ((collisionStatus->currentInspect != -1) && (collisionStatus->currentInspect & COLLISION_WITH_ENTITY_BIT)) {
+        Entity* entity = get_entity_by_index(collisionStatus->currentInspect);
+
+        if (entity->flags & ENTITY_FLAGS_SHOWS_INSPECT_PROMPT) {
+            if ((entity->boundScriptBytecode == 0) || (entity->flags & ENTITY_FLAGS_4000)) {
+                if (entity->type == ENTITY_TYPE_PINK_FLOWER ||
+                    entity->type == ENTITY_TYPE_BELLBELL_PLANT ||
+                    entity->type == ENTITY_TYPE_TRUMPET_PLANT)
+                {
+                    return FALSE;
                 }
+            } else {
+                return FALSE;
             }
         }
     }
 
-    return FALSE;
+    set_action_state(ACTION_STATE_JUMP);
+    return TRUE;
 }
-
-INCLUDE_ASM(s32, "7bb60_len_41b0", check_input_jump, void);
 
 void check_input_spin(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -265,7 +519,7 @@ void check_input_spin(void) {
         if (actionState != ACTION_STATE_RIDE) {
             if (actionState < ACTION_STATE_STEP_UP) {
                 if (actionState < ACTION_STATE_JUMP) {
-                    if (actionState >= 0 && !(playerStatus->animFlags & 0x10000)) {
+                    if (actionState >= 0 && !(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_SPINNING)) {
                         if (btnPressed || spinState->hasBufferedSpin) {
                             set_action_state(ACTION_STATE_SPIN);
                             if (spinState->hasBufferedSpin != FALSE) {
@@ -350,11 +604,10 @@ void peach_sync_disguise_npc(void) {
     }
 }
 
-
-#ifdef NON_EQUIVALENT
 Npc* peach_make_disguise_npc(s32 peachDisguise) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    NpcBlueprint blueprint;
+    NpcBlueprint bp;
+    NpcBlueprint* bpPtr = &bp;
     Npc* npc;
     f32 yaw;
 
@@ -364,18 +617,20 @@ Npc* peach_make_disguise_npc(s32 peachDisguise) {
 
     playerStatus->colliderHeight = 37;
     playerStatus->colliderDiameter = 38;
-    playerStatus->peachDisguise = gGameStatusPtr->peachDisguise = peachDisguise;
+    playerStatus->peachDisguise = peachDisguise;
+    gGameStatusPtr->peachDisguise = peachDisguise;
 
-    blueprint.flags = NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_100 | NPC_FLAG_40000;
-    blueprint.initialAnim = BasicPeachDisguiseAnims[playerStatus->peachDisguise].idle;
-    blueprint.onRender = NULL;
-    blueprint.onUpdate = NULL;
-    D_8010C96C = _create_npc_standard(&blueprint, &PeachDisguiseExtraAnims[playerStatus->peachDisguise]);
+    bpPtr->flags = NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_100 | NPC_FLAG_40000;
+    bpPtr->initialAnim = BasicPeachDisguiseAnims[playerStatus->peachDisguise].idle;
+    bpPtr->onUpdate = NULL;
+    bpPtr->onRender = NULL;
+
+    D_8010C96C = _create_npc_standard(bpPtr, PeachDisguiseExtraAnims[playerStatus->peachDisguise]);
     npc = get_npc_by_index(D_8010C96C);
 
     disable_npc_shadow(npc);
 
-    if (playerStatus->spriteFacingAngle >= 90.0f && playerStatus->spriteFacingAngle < 270.0f) {
+    if (!(playerStatus->spriteFacingAngle >= 90.0f) || !(playerStatus->spriteFacingAngle < 270.0f)) {
         yaw = 180.0f;
     } else {
         yaw = 0.0f;
@@ -389,9 +644,29 @@ Npc* peach_make_disguise_npc(s32 peachDisguise) {
 
     return npc;
 }
-#else
-INCLUDE_ASM(Npc*, "7bb60_len_41b0", peach_make_disguise_npc, s32 peachDisguise);
-#endif
 
-INCLUDE_ASM(s32, "7bb60_len_41b0", peach_disguise_check_overlaps);
+void peach_disguise_check_overlaps(void) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    Camera* camera = &gCameras[gCurrentCameraID];
+    f32 yaw;
+    f32 sinTheta;
+    f32 cosTheta;
+    s32 phi_s1;
+    s32 i;
 
+    if (playerStatus->spriteFacingAngle >= 90.0f && playerStatus->spriteFacingAngle < 270.0f) {
+        yaw = camera->currentYaw - 270.0f;
+    } else {
+        yaw = camera->currentYaw - 90.0f;
+    }
+    sin_cos_rad(clamp_angle(yaw) * TAU / 360.0f, &sinTheta, &cosTheta);
+
+    for (phi_s1 = 2, i = 2; i > 0; i--, phi_s1 += 18) {
+        f32 x = playerStatus->position.x + (sinTheta * phi_s1);
+        f32 y = playerStatus->position.y + 4.0f;
+        f32 z = playerStatus->position.z - (cosTheta * phi_s1);
+        if (player_test_lateral_overlap(3, playerStatus, &x, &y, &z, 4.0f, yaw) >= 0) {
+            break;
+        }
+    }
+}

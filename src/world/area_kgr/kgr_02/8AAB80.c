@@ -1,7 +1,24 @@
 #include "kgr_02.h"
 
-INCLUDE_ASM(s32, "world/area_kgr/kgr_02/8AAB80", func_80240730_8AAB80);
+ApiStatus func_80240730_8AAB80(Evt* script, s32 isInitialCall) {
+    if (gPartnerActionStatus.actingPartner == PARTNER_WATT) {
+        return ApiStatus_DONE2;
+    } else {
+        return ApiStatus_BLOCK;
+    }
+}
 
-INCLUDE_ASM(s32, "world/area_kgr/kgr_02/8AAB80", func_80240748_8AAB98);
-
-INCLUDE_ASM(s32, "world/area_kgr/kgr_02/8AAB80", func_80240760_8AABB0);
+ApiStatus func_80240748_8AAB98(Evt* script, s32 isInitialCall) {
+    if (gPartnerActionStatus.actingPartner != PARTNER_WATT) {
+        return ApiStatus_DONE2;
+    } else {
+        return ApiStatus_BLOCK;
+    }
+}
+ 
+ ApiStatus N(HasBombetteExploded)(Evt* script, s32 isInitialCall) {
+    if (gCollisionStatus.bombetteExploded >= 0) {
+        script->varTable[1] = TRUE;
+    }
+    return ApiStatus_DONE2;
+}

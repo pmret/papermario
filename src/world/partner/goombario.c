@@ -164,7 +164,7 @@ s32 world_goombario_can_pause(Npc* goombario) {
     PartnerActionStatus* goombarioActionStatus = &gPartnerActionStatus;
     s32 new_var;
 
-    if (goombarioActionStatus->actionState.b[0] != 0) {
+    if (goombarioActionStatus->partnerActionState != PARTNER_ACTION_NONE) {
         return FALSE;
     }
 
@@ -191,8 +191,8 @@ ApiStatus func_802BDB30_317A50(Evt* script, s32 isInitialCall) {
         enable_player_input();
     }
 
-    goombarioActionStatus->actionState.b[0] = 0;
-    goombarioActionStatus->actionState.b[3] = 0;
+    goombarioActionStatus->partnerActionState = PARTNER_ACTION_NONE;
+    goombarioActionStatus->actingPartner = PARTNER_NONE;
     return ApiStatus_DONE2;
 }
 
@@ -234,15 +234,15 @@ EvtScript world_goombario_put_away = {
 void world_goombario_pre_battle(Npc* goombario) {
     PartnerActionStatus* goombarioActionStatus = &gPartnerActionStatus;
 
-    if (goombarioActionStatus->actionState.b[0] != 0) {
+    if (goombarioActionStatus->partnerActionState != PARTNER_ACTION_NONE) {
         set_time_freeze_mode(TIME_FREEZE_NORMAL);
         enable_player_input();
-        CancelMessageAndBlock();
+        cancel_current_message();
         partner_clear_player_tracking(goombario);
-        goombarioActionStatus->actionState.b[0] = 0;
-        goombarioActionStatus->actionState.b[3] = 0;
+        goombarioActionStatus->partnerActionState = PARTNER_ACTION_NONE;
+        goombarioActionStatus->actingPartner = PARTNER_NONE;
         disable_npc_blur(goombario);
     }
 
-    goombarioActionStatus->actionState.b[3] = 1;
+    goombarioActionStatus->actingPartner = PARTNER_GOOMBARIO;
 }
