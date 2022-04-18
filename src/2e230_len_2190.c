@@ -2,9 +2,9 @@
 
 // data
 extern u16 D_80078530[];
-extern f32 D_80078730[];
-extern u8 D_80078580[];
 extern s32 D_8007854C[2];
+extern u8 D_80078580[];
+extern f32 D_80078730[];
 
 void func_80052E30(u8 index) {
     UnkAl48* temp = &D_8009A5C0->unk_1320[index];

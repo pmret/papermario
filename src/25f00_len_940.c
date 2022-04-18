@@ -11,24 +11,23 @@ u8 nuAuTaskStop = NU_AU_TASK_RUN;
 u8 D_80078181 = 1;
 
 //bss
-extern u8 D_801AA000[0x56000];
-extern s32 D_800DAAB8;
-extern s32 D_800A3638;
 extern Acmd* D_800A3510[3];
 extern NUScTask D_800A3520[3];
-extern u64 rspbootUcodeBuffer[];
-extern u64 n_aspMain_text_bin[];
-extern u64 n_aspMain_data_bin[];
 extern u8* D_800A3628[3];
-extern s32 D_800A3BE4;
-extern NUDMABuffer nuAuDmaBufList[50];
+extern s32 D_800A3634;
+extern s32 D_800A3638;
 extern OSMesgQueue nuAuDmaMesgQ;
 extern OSMesg nuAuDmaMesgBuf[50];
-extern u8 D_800B91A0[];
-extern s32 D_800A3634;
-extern OSMesgQueue D_800DA444;
 extern OSIoMesg nuAuDmaIOMesgBuf[];
 extern NUDMABuffer* D_800A3BD4;
+extern NUDMABuffer nuAuDmaBufList[50];
+extern u8 D_800B91A0[];
+extern u64 rspbootUcodeBuffer[];
+extern OSMesgQueue D_800DA444;
+extern s32 D_800DAAB8;
+extern u64 n_aspMain_text_bin[];
+extern u64 n_aspMain_data_bin[];
+extern u8 D_801AA000[0x56000];
 
 s32 nuAuDmaCallBack(s32 addr, s32 len, void* state, u8 arg3);
 void func_8004B328(NUScMsg, u32);
@@ -55,11 +54,11 @@ void create_audio_system(void) {
     D_800A3634 = (freq2 / 184 + 1) * 184; // NU_AU_AUDIO_SAMPLES ?
     D_800A3638 = D_800A3634 - 184;
 
-    for (i = 0; i < 3; i++) {
+    for (i = 0; i < ARRAY_COUNT(D_800A3510); i++) {
         D_800A3510[i] = alHeapAlloc(config.heap, 1, 0x4000);
     }
 
-    for (i = 0; i < 3; i++) {
+    for (i = 0; i < ARRAY_COUNT(D_800A3520); i++) {
         D_800A3520[i].next = NULL;
         D_800A3520[i].msg = 0;
         D_800A3520[i].list.t.type = M_AUDTASK;
@@ -76,12 +75,12 @@ void create_audio_system(void) {
         D_800A3520[i].list.t.yield_data_size = 0;
     }
 
-    for (i = 0; i < 3; i++) {
+    for (i = 0; i < ARRAY_COUNT(D_800A3628); i++) {
         D_800A3628[i] = alHeapAlloc(config.heap, 1, D_800A3634 * 4);
     }
 
     nuAuDmaBufList[0].node.next = nuAuDmaBufList[0].node.prev = NULL;
-    for (i = 0; i < 49; i++) {
+    for (i = 0; i < ARRAY_COUNT(nuAuDmaBufList) - 1; i++) {
         alLink(&nuAuDmaBufList[i+1].node, &nuAuDmaBufList[i].node);
         nuAuDmaBufList[i].ptr = alHeapAlloc(config.heap, 1, 0x500);
     }
