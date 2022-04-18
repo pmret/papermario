@@ -9,8 +9,6 @@ typedef struct End18 {
 
 extern s32 spr_allocateBtlComponentsOnWorldHeap;
 extern End18 D_80244D74_DFB774[];
-extern s32 D_8024E960; // new 
-extern s32 *D_8024F7E4; // new 
 
 INCLUDE_ASM(s32, "world/area_end/end_00/DF6A20", func_80240020_DF6A20);
 
