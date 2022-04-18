@@ -166,7 +166,7 @@ s32 calc_partner_damage_enemy(void) {
     s32 dispatchEvent;
 
     battleStatus->wasStatusInflicted = FALSE;
-    battleStatus->lastAttackDamage = FALSE;
+    battleStatus->lastAttackDamage = 0;
     battleStatus->attackerActorID = partner->actorID;
     battleStatus->currentTargetID2 = battleStatus->currentTargetID;
     battleStatus->currentTargetPart2 = battleStatus->currentTargetPart;

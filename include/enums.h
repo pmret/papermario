@@ -2593,6 +2593,7 @@ enum BattleStatusFlags2 {
     BS_FLAGS2_NO_TARGET_AVAILABLE             = 0x00001000,
     BS_FLAGS2_1000000                         = 0x01000000,
     BS_FLAGS2_2000000                         = 0x02000000,
+    BS_FLAGS2_4000000                         = 0x04000000,
     BS_FLAGS2_8000000                         = 0x08000000,
 };
 
