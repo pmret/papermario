@@ -345,23 +345,23 @@ s32 func_802DE5C8(s32 arg0) {
 
 INCLUDE_ASM(s32, "sprite", spr_free_sprite);
 
-typedef struct{
+typedef struct {
     /* 0x00 */ char unk_00[0x4F];
     /* 0x4F */ u8 unk_4F;
 } unk802DE748_2;
 
-typedef struct
-{
+typedef struct {
     /* 0x00 */ unk802DE748_2** unk_00;
     /* 0x04 */ char unk_04[0x10];
 } unk802DE748; // size = 0x14
+
 extern unk802DE748 D_802DFA4C[2];
 
 s32 func_802DE748(s32 arg0, s32 arg1) {
     unk802DE748_2** temp_v1 = D_802DFA4C[arg0].unk_00;
 
     if (temp_v1 == NULL) {
-        return -1U;
+        return -1;
     }
 
     return temp_v1[arg1]->unk_4F;
