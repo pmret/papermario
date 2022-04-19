@@ -1,7 +1,7 @@
 #include "common.h"
 #include "npc.h"
 
-void N(UnkNpcAIFunc6)(Evt* script) {
+void N(AttackAheadHitboxAI_30)(Evt* script) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 

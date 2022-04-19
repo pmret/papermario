@@ -97,7 +97,7 @@ glabel func_802423CC_D8F61C
 /* D8F75C 8024250C 8E22006C */  lw        $v0, 0x6c($s1)
 /* D8F760 80242510 14400006 */  bnez      $v0, .L8024252C
 /* D8F764 80242514 00000000 */   nop
-/* D8F768 80242518 0C0907EE */  jal       pra_35_UnkNpcAIFunc26
+/* D8F768 80242518 0C0907EE */  jal       pra_35_AttackAheadHitbox_CanSeePlayer
 /* D8F76C 8024251C 0240202D */   daddu    $a0, $s2, $zero
 /* D8F770 80242520 10400002 */  beqz      $v0, .L8024252C
 /* D8F774 80242524 2402001E */   addiu    $v0, $zero, 0x1e
@@ -175,24 +175,24 @@ glabel func_802423CC_D8F61C
 /* D8F868 80242618 0809099C */  j         .L80242670_D8F8C0
 /* D8F86C 8024261C 00000000 */   nop
 .L80242620_D8F870:
-/* D8F870 80242620 0C09076C */  jal       pra_35_UnkNpcAIFunc6
+/* D8F870 80242620 0C09076C */  jal       pra_35_AttackAheadHitboxAI_30
 /* D8F874 80242624 0240202D */   daddu    $a0, $s2, $zero
 .L80242628_D8F878:
-/* D8F878 80242628 0C090787 */  jal       pra_35_UnkNpcAIFunc7
+/* D8F878 80242628 0C090787 */  jal       pra_35_AttackAheadHitboxAI_31
 /* D8F87C 8024262C 0240202D */   daddu    $a0, $s2, $zero
 /* D8F880 80242630 8E430070 */  lw        $v1, 0x70($s2)
 /* D8F884 80242634 24020020 */  addiu     $v0, $zero, 0x20
 /* D8F888 80242638 1462000D */  bne       $v1, $v0, .L80242670_D8F8C0
 /* D8F88C 8024263C 00000000 */   nop
 .L80242640_D8F890:
-/* D8F890 80242640 0C0907A3 */  jal       pra_35_UnkNpcAIFunc8
+/* D8F890 80242640 0C0907A3 */  jal       pra_35_AttackAheadHitboxAI_32
 /* D8F894 80242644 0240202D */   daddu    $a0, $s2, $zero
 /* D8F898 80242648 8E430070 */  lw        $v1, 0x70($s2)
 /* D8F89C 8024264C 24020021 */  addiu     $v0, $zero, 0x21
 /* D8F8A0 80242650 14620007 */  bne       $v1, $v0, .L80242670_D8F8C0
 /* D8F8A4 80242654 00000000 */   nop
 .L80242658_D8F8A8:
-/* D8F8A8 80242658 0C0907D9 */  jal       pra_35_UnkNpcAIFunc5
+/* D8F8A8 80242658 0C0907D9 */  jal       pra_35_AttackAheadHitboxAI_33
 /* D8F8AC 8024265C 0240202D */   daddu    $a0, $s2, $zero
 /* D8F8B0 80242660 0809099C */  j         .L80242670_D8F8C0
 /* D8F8B4 80242664 00000000 */   nop

@@ -2790,6 +2790,13 @@ enum PiranhaPlantStates {
     AI_STATE_PIRANHA_PLANT_SUSPEND  = 99
 };
 
+enum AttackAheadHitboxStates {
+    AI_STATE_AHEAD_HITBOX_30        = 30,
+    AI_STATE_AHEAD_HITBOX_31        = 31,
+    AI_STATE_AHEAD_HITBOX_32        = 32,
+    AI_STATE_AHEAD_HITBOX_33        = 33,
+};
+
 enum MusicSettingsFlags {
     MUSIC_SETTINGS_FLAGS_1                 = 0x00000001,
     MUSIC_SETTINGS_FLAGS_2                 = 0x00000002,

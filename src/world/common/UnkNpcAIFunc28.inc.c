@@ -36,7 +36,7 @@ ApiStatus N(UnkNpcAIFunc28)(Evt *script, s32 isInitialCall) {
         enemy->varTable[0] = 0;
     }
 
-    if ((script->functionTemp[0] < 30) && (enemy->varTable[0] == 0) && N(UnkNpcAIFunc26)(script)) {
+    if ((script->functionTemp[0] < 30) && (enemy->varTable[0] == 0) && N(AttackAheadHitbox_CanSeePlayer)(script)) {
         script->functionTemp[0] = 30;
     }
 
@@ -65,19 +65,19 @@ ApiStatus N(UnkNpcAIFunc28)(Evt *script, s32 isInitialCall) {
             basic_ai_lose_player(script, npcAISettings, territoryPtr);
             break;
         case 30:
-            N(UnkNpcAIFunc6)(script);
+            N(AttackAheadHitboxAI_30)(script);
         case 31:
-            N(UnkNpcAIFunc7)(script);
+            N(AttackAheadHitboxAI_31)(script);
             if (script->functionTemp[0] != 32) {
                 break;
             }
         case 32:
-            N(UnkNpcAIFunc8)(script);
+            N(AttackAheadHitboxAI_32)(script);
             if (script->functionTemp[0] != 33) {
                 break;
             }
         case 33:
-            N(UnkNpcAIFunc5)(script);
+            N(AttackAheadHitboxAI_33)(script);
             break;
         case 99:
             basic_ai_suspend(script);

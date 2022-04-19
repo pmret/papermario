@@ -62,9 +62,9 @@ extern Npc* wPartnerNpc;
 #define VAR_HITNPC_4        varTable[4]
 #define VAR_HITNPC_SOUND    varTable[15]
 
-//#include "world/common/UnkNpcAIFunc6.inc.c"
+//#include "world/common/AttackAheadHitboxAI_30.inc.c"
 
-void N(UnkNpcAIFunc6)(Evt* script) {
+void N(AttackAheadHitboxAI_30)(Evt* script) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -78,9 +78,9 @@ void N(UnkNpcAIFunc6)(Evt* script) {
     }
 }
 
-//#include "world/common/UnkNpcAIFunc7.inc.c"
+//#include "world/common/AttackAheadHitboxAI_31.inc.c"
 
-void N(UnkNpcAIFunc7)(Evt* script) {
+void N(AttackAheadHitboxAI_31)(Evt* script) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -93,9 +93,9 @@ void N(UnkNpcAIFunc7)(Evt* script) {
     }
 }
 
-//#include "world/common/UnkNpcAIFunc8.inc.c"
+//#include "world/common/AttackAheadHitboxAI_32.inc.c"
 
-void N(UnkNpcAIFunc8)(Evt* script) {
+void N(AttackAheadHitboxAI_32)(Evt* script) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 emoteTemp;
@@ -112,9 +112,9 @@ void N(UnkNpcAIFunc8)(Evt* script) {
     }
 }
 
-//#include "world/common/UnkNpcAIFunc5.inc.c"
+//#include "world/common/AttackAheadHitboxAI_33.inc.c"
 
-void N(UnkNpcAIFunc5)(Evt* script) {
+void N(AttackAheadHitboxAI_33)(Evt* script) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -125,9 +125,9 @@ void N(UnkNpcAIFunc5)(Evt* script) {
     }
 }
 
-//#include "world/common/UnkNpcAIFunc26.inc.c"
+//#include "world/common/AttackAheadHitbox_CanSeePlayer.inc.c"
 
-s32 N(UnkNpcAIFunc26)(Evt* script) {
+s32 N(AttackAheadHitbox_CanSeePlayer)(Evt* script) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Camera* camera = &gCameras[gCurrentCamID];
@@ -165,9 +165,9 @@ s32 N(UnkNpcAIFunc26)(Evt* script) {
     return ret;
 }
 
-//#include "world/common/UnkFunc7.inc.c"
+//#include "world/common/AttackAheadHitbox_Control.inc.c"
 
-ApiStatus N(UnkFunc7)(Evt* script, s32 isInitialCall) {
+ApiStatus N(AttackAheadHitbox_Control)(Evt* script, s32 isInitialCall) {
     Enemy* hitboxEnemy = script->owner1.enemy;
     Npc* hitboxNpc = get_npc_unsafe(hitboxEnemy->npcID);
     Enemy* baseEnemy;
@@ -462,7 +462,7 @@ ApiStatus N(ClubbaNappingAI_Main)(Evt* script, s32 isInitialCall) {
     if (script->TEMP_STATE >= AI_STATE_NAPPING_CLUBBA_10
             && script->TEMP_STATE < AI_STATE_NAPPING_CLUBBA_30
             && enemy->VAR_ATTACK_STATE == CLUBBA_ATTACK_STATE_NONE
-            && N(UnkNpcAIFunc26)(script)) {
+            && N(AttackAheadHitbox_CanSeePlayer)(script)) {
         script->TEMP_STATE = AI_STATE_NAPPING_CLUBBA_30;
     }
 
@@ -498,21 +498,21 @@ ApiStatus N(ClubbaNappingAI_Main)(Evt* script, s32 isInitialCall) {
             script->TEMP_STATE = AI_STATE_NAPPING_CLUBBA_3;
             break;
         case AI_STATE_NAPPING_CLUBBA_30: // pre swing
-            N(UnkNpcAIFunc6)(script);
+            N(AttackAheadHitboxAI_30)(script);
             if (script->TEMP_STATE != AI_STATE_NAPPING_CLUBBA_31) {
                 break;
             }
         case AI_STATE_NAPPING_CLUBBA_31: // raise club
-            N(UnkNpcAIFunc7)(script);
+            N(AttackAheadHitboxAI_31)(script);
             if (script->TEMP_STATE != AI_STATE_NAPPING_CLUBBA_32) {
                 break;
             }
         case AI_STATE_NAPPING_CLUBBA_32: // swing club
             // frustration, attack missed 
-            N(UnkNpcAIFunc8)(script);
+            N(AttackAheadHitboxAI_32)(script);
             break;
         case AI_STATE_NAPPING_CLUBBA_33: // missed
-            N(UnkNpcAIFunc5)(script);
+            N(AttackAheadHitboxAI_33)(script);
             break;
         case AI_STATE_NAPPING_CLUBBA_INIT_RETURN_HOME:
             // START RETURN HOME
@@ -575,7 +575,7 @@ ApiStatus N(func_80241170_C3ED60)(Evt* script, s32 isInitialCall) {
 
     if (script->TEMP_STATE < AI_STATE_NAPPING_CLUBBA_30
             && enemy->VAR_ATTACK_STATE == CLUBBA_ATTACK_STATE_NONE
-            && N(UnkNpcAIFunc26)(script)) {
+            && N(AttackAheadHitbox_CanSeePlayer)(script)) {
         script->TEMP_STATE = AI_STATE_NAPPING_CLUBBA_30;
     }
 
@@ -604,19 +604,19 @@ ApiStatus N(func_80241170_C3ED60)(Evt* script, s32 isInitialCall) {
             basic_ai_lose_player(script, npcAISettings, territoryPtr);
             break;
         case 30:
-            N(UnkNpcAIFunc6)(script);
+            N(AttackAheadHitboxAI_30)(script);
         case 31:
-            N(UnkNpcAIFunc7)(script);
+            N(AttackAheadHitboxAI_31)(script);
             if (script->TEMP_STATE != 32) {
                 break;
             }
         case 32:
-            N(UnkNpcAIFunc8)(script);
+            N(AttackAheadHitboxAI_32)(script);
             if (script->TEMP_STATE != 33) {
                 break;
             }
         case 33:
-            N(UnkNpcAIFunc5)(script);
+            N(AttackAheadHitboxAI_33)(script);
             break;
         case AI_STATE_SUSPEND:
             basic_ai_suspend(script);

@@ -171,7 +171,7 @@ EvtScript N(npcAI_802419A8) = {
     EVT_CALL(SetSelfVar, 3, 32)
     EVT_CALL(SetSelfVar, 4, 3)
     EVT_CALL(SetSelfVar, 15, 8389)
-    EVT_CALL(N(UnkFunc7))
+    EVT_CALL(N(AttackAheadHitbox_Control))
     EVT_RETURN
     EVT_END
 };

@@ -8,8 +8,8 @@
 
 ApiStatus N(UnkFunc11)(Evt* script, s32 isInitialCall);
 ApiStatus N(UnkFunc12)(Evt* script, s32 isInitialCall);
-ApiStatus N(UnkFunc7)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_8024086C_C31D4C)(Evt* script, s32 isInitialCall);
+ApiStatus N(AttackAheadHitbox_Control)(Evt* script, s32 isInitialCall);
+ApiStatus N(AttackAheadHitbox_Main)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_802419B0_C32E90)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_80242480_C33960)(Evt* script, s32 isInitialCall);
 ApiStatus N(SetEntityFlags100000)(Evt* script, s32 isInitialCall);

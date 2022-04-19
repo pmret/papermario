@@ -440,7 +440,7 @@ EvtScript N(npcAI_80243A8C) = {
     EVT_CALL(SetSelfVar, 1, 5)
     EVT_CALL(SetSelfVar, 2, 8)
     EVT_CALL(SetSelfVar, 3, 12)
-    EVT_CALL(N(func_8024086C_C31D4C), EVT_PTR(N(npcAISettings_80243A5C)))
+    EVT_CALL(N(AttackAheadHitbox_Main), EVT_PTR(N(npcAISettings_80243A5C)))
     EVT_RETURN
     EVT_END
 };
@@ -530,7 +530,7 @@ EvtScript N(npcAI_80243CC0) = {
     EVT_CALL(SetSelfVar, 3, 32)
     EVT_CALL(SetSelfVar, 4, 3)
     EVT_CALL(SetSelfVar, 15, 8389)
-    EVT_CALL(N(UnkFunc7))
+    EVT_CALL(N(AttackAheadHitbox_Control))
     EVT_RETURN
     EVT_END
 };
@@ -765,102 +765,13 @@ NpcGroupList N(npcGroupList_80244988) = {
     {},
 };
 
-#include "world/common/UnkNpcAIFunc6.inc.c"
-
-#include "world/common/UnkNpcAIFunc7.inc.c"
-
-#include "world/common/UnkNpcAIFunc8.inc.c"
-
-#include "world/common/UnkNpcAIFunc5.inc.c"
-
-#include "world/common/UnkNpcAIFunc26.inc.c"
-
-#include "world/common/UnkFunc7.inc.c"
-
-ApiStatus N(func_8024086C_C31D4C)(Evt* script, s32 isInitialCall) {
-    Enemy* enemy = script->owner1.enemy;
-    Npc* npc = get_npc_unsafe(enemy->npcID);
-    Bytecode* args = script->ptrReadPos;
-    EnemyTerritoryThing territory;
-    EnemyTerritoryThing* territoryPtr = &territory;
-    NpcAISettings* npcAISettings = (NpcAISettings*)evt_get_variable(script, *args++);
-
-    territory.skipPlayerDetectChance = 0;
-    territory.shape = enemy->territory->wander.detectShape;
-    territory.pointX = enemy->territory->wander.detect.x;
-    territory.pointZ = enemy->territory->wander.detect.z;
-    territory.sizeX = enemy->territory->wander.detectSizeX;
-    territory.sizeZ = enemy->territory->wander.detectSizeZ;
-    territory.halfHeight = 65.0f;
-    territory.unk_1C = 0;
-
-    if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAGS_4)) {
-        script->functionTemp[0] = 0;
-        npc->duration = 0;
-        npc->currentAnim.w = enemy->animList[0];
-        npc->flags &= ~0x800;
-        if (!enemy->territory->wander.isFlying) {
-            npc->flags = (npc->flags | 0x200) & ~0x8;
-        } else {
-            npc->flags = (npc->flags & ~0x200) | 0x8;
-        }
-        if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
-            script->functionTemp[0] = 99;
-            script->functionTemp[1] = 0;
-            enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
-        }
-        enemy->varTable[0] = 0;
-    }
-
-    if ((script->functionTemp[0] < 30) && (enemy->varTable[0] == 0) && N(UnkNpcAIFunc26)(script)) {
-        script->functionTemp[0] = 30;
-    }
-
-    switch (script->functionTemp[0]) {
-        case 0:
-            basic_ai_wander_init(script, npcAISettings, territoryPtr);
-        case 1:
-            basic_ai_wander(script, npcAISettings, territoryPtr);
-            break;
-        case 2:
-            basic_ai_loiter_init(script, npcAISettings, territoryPtr);
-        case 3:
-            basic_ai_loiter(script, npcAISettings, territoryPtr);
-            break;
-        case 10:
-            basic_ai_found_player_jump_init(script, npcAISettings, territoryPtr);
-        case 11:
-            basic_ai_found_player_jump(script, npcAISettings, territoryPtr);
-            break;
-        case 12:
-            basic_ai_chase_init(script, npcAISettings, territoryPtr);
-        case 13:
-            basic_ai_chase(script, npcAISettings, territoryPtr);
-            break;
-        case 14:
-            basic_ai_lose_player(script, npcAISettings, territoryPtr);
-            break;
-        case 30:
-            N(UnkNpcAIFunc6)(script);
-        case 31:
-            N(UnkNpcAIFunc7)(script);
-            if (script->functionTemp[0] != 32) {
-                break;
-            }
-        case 32:
-            N(UnkNpcAIFunc8)(script);
-            if (script->functionTemp[0] != 33) {
-                break;
-            }
-        case 33:
-            N(UnkNpcAIFunc5)(script);
-            break;
-        case 99:
-            basic_ai_suspend(script);
-    }
-
-    return ApiStatus_BLOCK;
-}
+#include "world/common/AttackAheadHitboxAI_30.inc.c"
+#include "world/common/AttackAheadHitboxAI_31.inc.c"
+#include "world/common/AttackAheadHitboxAI_32.inc.c"
+#include "world/common/AttackAheadHitboxAI_33.inc.c"
+#include "world/common/AttackAheadHitbox_CanSeePlayer.inc.c"
+#include "world/common/AttackAheadHitbox_Control.inc.c"
+#include "world/common/AttackAheadHitbox_Main.inc.c"
 
 #include "world/common/atomic/enemy/UnkAI_1.inc.c"
 
@@ -899,7 +810,7 @@ ApiStatus N(func_802419B0_C32E90)(Evt* script, s32 isInitialCall) {
         enemy->varTable[0] = 0;
     }
 
-    if ((script->functionTemp[0] < 30) && (enemy->varTable[0] == 0) && N(UnkNpcAIFunc26)(script)) {
+    if ((script->functionTemp[0] < 30) && (enemy->varTable[0] == 0) && N(AttackAheadHitbox_CanSeePlayer)(script)) {
         script->functionTemp[0] = 30;
     }
 
@@ -931,19 +842,19 @@ ApiStatus N(func_802419B0_C32E90)(Evt* script, s32 isInitialCall) {
             N(UnkNpcDurationFlagFunc)(script, npcAISettings, territoryPtr);
             break;
         case 30:
-            N(UnkNpcAIFunc6)(script);
+            N(AttackAheadHitboxAI_30)(script);
         case 31:
-            N(UnkNpcAIFunc7)(script);
+            N(AttackAheadHitboxAI_31)(script);
             if (script->functionTemp[0] != 32) {
                 break;
             }
         case 32:
-            N(UnkNpcAIFunc8)(script);
+            N(AttackAheadHitboxAI_32)(script);
             if (script->functionTemp[0] != 33) {
                 break;
             }
         case 33:
-            N(UnkNpcAIFunc5)(script);
+            N(AttackAheadHitboxAI_33)(script);
             break;
         case 99:
             basic_ai_suspend(script);
@@ -1166,7 +1077,7 @@ ApiStatus N(func_80242480_C33960)(Evt* script, s32 isInitialCall) {
         enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
     }
 
-    if (((u32)script->functionTemp[0] - 10 < 20) && (enemy->varTable[0] == 0) && N(UnkNpcAIFunc26)(script)) {
+    if (((u32)script->functionTemp[0] - 10 < 20) && (enemy->varTable[0] == 0) && N(AttackAheadHitbox_CanSeePlayer)(script)) {
         script->functionTemp[0] = 30;
     }
 
@@ -1201,20 +1112,20 @@ ApiStatus N(func_80242480_C33960)(Evt* script, s32 isInitialCall) {
             script->functionTemp[0] = 3;
             break;
         case 30:
-            N(UnkNpcAIFunc6)(script);
+            N(AttackAheadHitboxAI_30)(script);
             if (script->functionTemp[0] != 31) {
                 break;
             }
         case 31:
-            N(UnkNpcAIFunc7)(script);
+            N(AttackAheadHitboxAI_31)(script);
             if (script->functionTemp[0] != 32) {
                 break;
             }
         case 32:
-            N(UnkNpcAIFunc8)(script);
+            N(AttackAheadHitboxAI_32)(script);
             break;
         case 33:
-            N(UnkNpcAIFunc5)(script);
+            N(AttackAheadHitboxAI_33)(script);
             break;
         case 40:
             N(func_80242200_C336E0)(script, npcAISettings, territoryPtr);
