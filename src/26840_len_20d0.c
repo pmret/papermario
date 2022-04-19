@@ -83,7 +83,7 @@ void func_8004B440(SoundManager* manager, u8 arg1, u8 arg2, UnkAl19E0* arg3, u8 
     func_8004BA54(manager, 0);
     snd_clear_sfx_queue(manager);
     snd_initialize_bgm_fade(&manager->unk_40, 0, 0x7FFF, 0x7FFF);
-    func_80053A98(manager->unk_BE, manager->unk_40.unk_00.u16, manager->unk_5C);
+    func_80053A98(manager->unk_BE, manager->unk_40.currentVolume.u16, manager->unk_5C);
     manager->unk_8C = 0xFF;
 
     manager->unk_64[0] = &D_80078290;

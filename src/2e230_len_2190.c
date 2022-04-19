@@ -1,5 +1,11 @@
 #include "audio.h"
 
+// data
+extern u16 D_80078530[];
+extern s32 D_8007854C[2];
+extern u8 D_80078580[];
+extern f32 D_80078730[];
+
 void func_80052E30(u8 index) {
     UnkAl48* temp = &D_8009A5C0->unk_1320[index];
 
@@ -12,11 +18,11 @@ void snd_load_audio_data(s32 frequency) {
     s32* temp_v0_2;
     ALHeap* alHeap;
     u32 i;
-    s32 subroutine_arg7[2];
+    SBNFileEntry fileEntry;
     u8 temp6[4];
     UnkAl48* temp5;
 
-    alHeap = D_80078E54->unk_18;
+    alHeap = D_80078E54->heap;
     D_8009A5C0 = alHeapAlloc(alHeap, 1, 0x19E0);
 
     D_8009A664 = alHeapAlloc(alHeap, 1, sizeof(BGMPlayer));
@@ -40,8 +46,8 @@ void snd_load_audio_data(s32 frequency) {
     }
 
     temp4->dataSEF = alHeapAlloc(alHeap, 1, 0x5200);
-    temp4->defaultInstrument = alHeapAlloc(alHeap, 1, 0x30);
-    temp4->dataPER = alHeapAlloc(alHeap, 1, 0x360);
+    temp4->defaultInstrument = alHeapAlloc(alHeap, 1, sizeof(Instrument));
+    temp4->dataPER = alHeapAlloc(alHeap, 1, 6 * sizeof(PEREntry));
     temp4->dataPRG = alHeapAlloc(alHeap, 1, 0x200);
     temp4->unk_94 = alHeapAlloc(alHeap, 1, 0x40);
     temp4->actualFrequency = frequency;
@@ -90,26 +96,26 @@ void snd_load_audio_data(s32 frequency) {
     temp6[1] = 3;
     temp6[2] = 0xff;
     temp6[3] = 0xff;
-    func_8004E344(D_8009A664, &temp6);
+    func_8004E344(D_8009A664, temp6);
     func_8004E158(D_8009A5FC, 2, 2, temp4);
     temp6[0] = 2;
     temp6[1] = 0xff;
     temp6[2] = 0xff;
     temp6[3] = 0xff;
-    func_8004E344(D_8009A5FC, &temp6);
+    func_8004E344(D_8009A5FC, temp6);
     func_8004B440(D_8009A640, 4, 1, temp4, 0x10);
     func_80050B90(D_8009A628, 6, 1, temp4);
     func_80052614(temp4);
     snd_load_BK_headers(temp4, alHeap);
-    if (snd_fetch_SBN_file(temp4->mseqFileList->unk_0, 0x20, subroutine_arg7) == 0) {
-        snd_read_rom(subroutine_arg7[0], temp4->dataSEF, subroutine_arg7[1] & 0xFFFFFF);
+    if (snd_fetch_SBN_file(temp4->mseqFileList->unk_0, 0x20, &fileEntry) == 0) {
+        snd_read_rom(fileEntry.offset, temp4->dataSEF, fileEntry.data & 0xFFFFFF);
     }
     snd_load_sfx_groups_from_SEF(D_8009A640);
-    if (snd_fetch_SBN_file(temp4->mseqFileList->unk_2, 0x40, subroutine_arg7) == 0) {
-        snd_load_PER(temp4, subroutine_arg7[0]);
+    if (snd_fetch_SBN_file(temp4->mseqFileList[1].unk_0, 0x40, &fileEntry) == 0) {
+        snd_load_PER(temp4, fileEntry.offset);
     }
-    if (snd_fetch_SBN_file(temp4->mseqFileList->unk_4, 0x40, subroutine_arg7) == 0) {
-        snd_load_PRG(temp4, subroutine_arg7[0]);
+    if (snd_fetch_SBN_file(temp4->mseqFileList[2].unk_0, 0x40, &fileEntry) == 0) {
+        snd_load_PRG(temp4, fileEntry.offset);
     }
 
     temp4->instrumentGroups[0] = temp4->instrumentGroup1;
@@ -154,7 +160,7 @@ void snd_reset_instrument(Instrument* instrument) {
 void func_80053370(UnkAlC* arg0) {
     arg0->unk_00 = 8208;
     arg0->unk_02 = 4800;
-    arg0->unk_04 = ~0x80;
+    arg0->unk_04 = 0x7F;
     arg0->unk_05 = 64;
     arg0->unk_06 = 0;
     arg0->unk_07 = 0;
@@ -165,7 +171,7 @@ void func_80053370(UnkAlC* arg0) {
 
 void func_800533A8(InstrumentCFG* arg0) {
     arg0->unk_00 = 8208;
-    arg0->unk_02 = ~0x80;
+    arg0->unk_02 = 0x7F;
     arg0->unk_03 = 64;
     arg0->unk_04 = 0;
     arg0->unk_05 = 0;
@@ -188,9 +194,9 @@ void snd_update_sequence_players(void) {
         func_800511BC(temp_s0);
     }
 
-    if (manager->unk_40.unk_0A != 0) {
+    if (manager->unk_40.fadeTime != 0) {
         func_80053A28(&manager->unk_40);
-        func_80053A98(manager->unk_BE, manager->unk_40.unk_00.u16, manager->unk_5C);
+        func_80053A98(manager->unk_BE, manager->unk_40.currentVolume.u16, manager->unk_5C);
     }
 
     manager->unkCounter -= manager->unkCounterStep;
@@ -218,7 +224,7 @@ void snd_update_sequence_players(void) {
                 func_8004DFD4(temp_s2);
             }
             bgmPlayer2 = D_8009A664;
-            if (bgmPlayer2->unk_46 != 0) {
+            if (bgmPlayer2->fadeInfo.unk_1A != 0) {
                 func_80053BA8(&bgmPlayer2->fadeInfo);
                 if (bgmPlayer2->fadeInfo.fadeTime == 0) {
                     func_8004E444(bgmPlayer2);
@@ -352,7 +358,18 @@ void func_800538C4(UnkAl48* arg0, s32 arg1) { // type may be wrong but it seems 
     func_800576EC(arg1, 0, 0xB8);
 }
 
+#ifdef NON_EQUIVALENT
+f32 snd_tune_param_to_timescale(s32 arg0) {
+    if (arg0 >= 0) {
+        return D_80078730[(u32)arg0 & 0x7F] * D_80078730[128 + (((u32)arg0 >> 7) & 0x1F)];
+    } else {
+        arg0 = -arg0;
+        return D_80078730[160 + ((u32)arg0 & 0x7F)] * D_80078730[288 + (((u32)arg0 >> 7) & 0x7F)];
+    }
+}
+#else
 INCLUDE_ASM(s32, "2e230_len_2190", snd_tune_param_to_timescale);
+#endif
 
 void snd_initialize_bgm_fade(Fade* fade, s32 time, s32 startValue, s16 endValue) {
     fade->currentVolume.s32 = startValue * 0x10000;
@@ -375,17 +392,17 @@ void snd_clear_bgm_fade(Fade* fade) {
     fade->fpFadeCallback = NULL;
 }
 
-void func_80053A28(UnkAl1* arg0) {
-    arg0->unk_0A--;
+void func_80053A28(Fade* arg0) {
+    arg0->fadeTime--;
 
-    if ((arg0->unk_0A << 0x10) != 0) {
-        arg0->unk_00.s32 += arg0->unk_04;
+    if ((arg0->fadeTime << 0x10) != 0) {
+        arg0->currentVolume.s32 += arg0->fadeStep;
     } else {
-        arg0->unk_00.s32 = arg0->unk_08 << 0x10;
-        if (arg0->unk_0C != 0) {
-            arg0->unk_0C();
-            arg0->unk_04 = 0;
-            arg0->unk_0C = NULL;
+        arg0->currentVolume.s32 = arg0->endVolume << 0x10;
+        if (arg0->fpFadeCallback != 0) {
+            arg0->fpFadeCallback();
+            arg0->fadeStep = 0;
+            arg0->fpFadeCallback = NULL;
         }
     }
 }
@@ -394,19 +411,19 @@ void func_80053A98(u8 arg0, u16 arg1, s32 arg2) {
     func_80056D78(arg0, (u32)(arg1 * arg2) >> 15);
 }
 
-void func_80053AC8(UnkAl1* arg0) {
-    if (arg0->unk_0A == 0) {
-        arg0->unk_0A = 1;
-        arg0->unk_04 = 0;
-        arg0->unk_08 = arg0->unk_00.u16;
+void func_80053AC8(Fade* fade) {
+    if (fade->fadeTime == 0) {
+        fade->fadeTime = 1;
+        fade->fadeStep = 0;
+        fade->endVolume = fade->currentVolume.u16;
     }
 }
 
-void func_80053AEC(UnkAl1* arg0, s16 arg1) {
-    arg0->unk_10.s32 = arg1 << 16;
-    arg0->unk_18 = arg1;
-    arg0->unk_1A = 0;
-    arg0->unk_14 = 0;
+void func_80053AEC(Fade* fade, s16 arg1) {
+    fade->unk_10.s32 = arg1 << 16;
+    fade->unk_18 = arg1;
+    fade->unk_1A = 0;
+    fade->unk_14 = 0;
 }
 
 void func_80053B04(UnkAl1* arg0, u32 arg1, s16 arg2) {
@@ -426,7 +443,7 @@ void func_80053B04(UnkAl1* arg0, u32 arg1, s16 arg2) {
     }
 }
 
-void func_80053BA8(UnkAl1* arg0) {
+void func_80053BA8(Fade* arg0) {
     arg0->unk_1A--;
 
     if (arg0->unk_1A != 0) {
@@ -437,7 +454,23 @@ void func_80053BA8(UnkAl1* arg0) {
     }
 }
 
-INCLUDE_ASM(s32, "2e230_len_2190", func_80053BE8, UnkAl19E0* arg0, s32 arg1, s32 arg2, s32* arg3);
+Instrument* func_80053BE8(UnkAl19E0* arg0, u32 arg1, u32 arg2, s32** arg3) {
+    void* temp_v0;
+    void* phi_v0;
+
+    Instrument* temp_a2 = (*arg0->instrumentGroups[(arg1 & 0x70) >> 4])[arg2];
+    UnkAl4Plus* temp_a0 = temp_a2->unkOffset;
+    u32 temp_a1 = arg1 % 4;
+
+    if (temp_a1 < temp_a0->count) {
+        arg3[0] = (s32*)(temp_a0->unk_04[temp_a1].unkOffset1 + (s32)temp_a0);
+        arg3[1] = (s32*)(temp_a0->unk_04[temp_a1].unkOffset2 + (s32)temp_a0);
+    } else {
+        arg3[0] = &D_8007854C[0];
+        arg3[1] = &D_8007854C[1];
+    }
+    return temp_a2;
+}
 
 void snd_get_sequence_player_and_track(u32 playerIndex, s32** outCurrentTrackData, BGMPlayer** outPlayer) {
     UnkAl19E0* temp_v1 = D_8009A5C0;
@@ -479,9 +512,108 @@ void snd_get_sequence_player(u32 playerIndex, BGMPlayer** outPlayer) {
     }
 }
 
-INCLUDE_ASM(s32, "2e230_len_2190", snd_load_song_files);
+s32 snd_load_song_files(u32 arg0, UnkAlTrack* arg1, BGMPlayer* arg2) {
+    SBNFileEntry fileEntry;
+    SBNFileEntry fileEntry2;
+    SBNFileEntry* bkFileEntry;
+    UnkAl19E0* soundData;
+    InitSongEntry* songEntry;
+    s32 i;
+    u16 bkFileIndex;
+    s32 bgmFileIndex;
+    u32 data;
+    u32 offset;
+    s32 ret;
+    BGMPlayer* arg2_copy ;
+    UnkAlTrack* arg1_copy;
+    s32 cond;
 
-INCLUDE_ASM(s32, "2e230_len_2190", func_80053E58);
+    soundData = D_8009A5C0;
+
+    // needed to match
+    cond = arg0 < soundData->songListLength;
+    arg2_copy = arg2;
+    arg1_copy = arg1;
+
+    if (cond) {
+        songEntry = &soundData->songList[arg0];
+        ret = snd_fetch_SBN_file(songEntry->bgmFileIndex, 0x10, &fileEntry);
+        if (ret != 0) {
+            return ret;
+        }
+
+        if (func_8004DB28(arg2_copy)) {
+            return 201;
+        }
+
+        snd_read_rom(fileEntry.offset, arg1_copy, fileEntry.data & 0xFFFFFF);
+
+        for (i = 0 ; i < 3; i++) {
+            bkFileIndex = songEntry->bkFileIndex[i];
+            if (bkFileIndex != 0) {
+                bkFileEntry = &soundData->sbnFileList[bkFileIndex];
+
+                offset = (bkFileEntry->offset & 0xFFFFFF) + soundData->baseRomOffset;
+                fileEntry2.offset = offset;
+
+                data = bkFileEntry->data;
+                fileEntry2.data = data;
+
+                if ((data >> 0x18) == 0x30) {
+                    snd_load_BK(offset, i);
+                }
+            }
+        }
+        bgmFileIndex = songEntry->bgmFileIndex;
+        arg2_copy->songID = arg0;
+        arg2_copy->unk_64 = arg1;
+        arg2_copy->bgmFileIndex = bgmFileIndex;
+        return arg1_copy->unk_08;
+    } else {
+        return 151;
+    }
+}
+
+s32 func_80053E58(s32 arg0, u8* arg1) {
+    SBNFileEntry fileEntry;
+    SBNFileEntry sp18;
+    SBNFileEntry* bkFileEntry;
+    UnkAl19E0* soundData;
+    InitSongEntry* temp_s1;
+    s32 i;
+    s32 ret;
+    u32 data;
+    u32 offset;
+    u16 bkFileIndex;
+
+    soundData = D_8009A5C0;
+    temp_s1 = &soundData->songList[arg0];
+    ret =  snd_fetch_SBN_file(temp_s1[0].bgmFileIndex, 0x10, &sp18);
+    if (ret == 0) {
+        snd_read_rom(sp18.offset, arg1, sp18.data & 0xFFFFFF);
+
+        for (i = 0 ; i < 3; i++) {
+            bkFileIndex = temp_s1->bkFileIndex[i];
+            if (bkFileIndex != 0) {
+                bkFileEntry = &soundData->sbnFileList[bkFileIndex];
+
+                offset = (bkFileEntry->offset & 0xFFFFFF) + soundData->baseRomOffset;
+                fileEntry.offset = offset;
+
+                data = bkFileEntry->data;
+                fileEntry.data = data;
+
+                if ((data >> 0x18) == 0x30) {
+                    snd_load_BK(offset, i);
+                } else {
+                    ret = 102;
+                }
+            }
+        }
+    }
+
+    return ret;
+}
 
 BGMPlayer* func_80053F64(s32 arg0) {
     if (arg0 == 0) {
@@ -490,7 +622,62 @@ BGMPlayer* func_80053F64(s32 arg0) {
     return NULL;
 }
 
-INCLUDE_ASM(s32, "2e230_len_2190", func_80053F80);
+s32 func_80053F80(u32 arg0) {
+    u32 i;
+    SBNFileEntry fileEntry;
+    UnkAl19E0* soundData;
+    UnkAl834* temp_s2;
+    s32* trackData;
+
+    soundData = D_8009A5C0;
+    temp_s2 = D_8009A628;
+    if (arg0 < 16) {
+        if (temp_s2->unk_24[0].unk_20 == 0 && snd_fetch_SBN_file(soundData->mseqFileList[D_80078580[arg0]].unk_0, 0x40, &fileEntry) == 0) {
+            snd_read_rom(fileEntry.offset, soundData->currentTrackData[2], fileEntry.data & 0xFFFFFF);
+            temp_s2->unk_10[0] = soundData->currentTrackData[2];
+            for (i = 1; i < 4; i++) {
+                temp_s2->unk_10[i] = NULL;
+            }
+            temp_s2->unk_20 = 1;
+        }
+    } else if (arg0 == 16 && temp_s2->unk_24[0].unk_20 == 0 && temp_s2->unk_24[1].unk_20 == 0 && temp_s2->unk_24[2].unk_20 == 0) {
+        temp_s2->unk_20 = 0;
+        for (i = 0; i < 4; i++) {
+            temp_s2->unk_10[i] = NULL;
+        }
+
+        trackData = soundData->currentTrackData[3];
+        if (snd_fetch_SBN_file(soundData->mseqFileList[D_80078580[arg0]].unk_0, 0x40, &fileEntry) == 0) {
+            snd_read_rom(fileEntry.offset, trackData, fileEntry.data & 0xFFFFFF);
+            temp_s2->unk_10[0] = trackData;
+
+            trackData = (s32*)((u32)trackData + ((fileEntry.data + 0x40) & 0xFFFFFF));
+            if (snd_fetch_SBN_file(soundData->mseqFileList[D_80078580[arg0 + 1]].unk_0, 0x40, &fileEntry) == 0) {
+                snd_read_rom(fileEntry.offset, trackData, fileEntry.data & 0xFFFFFF);
+                temp_s2->unk_10[1] = trackData;
+
+                trackData = (s32*)((u32)trackData + ((fileEntry.data + 0x40) & 0xFFFFFF));
+                if (snd_fetch_SBN_file(soundData->mseqFileList[D_80078580[arg0 + 2]].unk_0, 0x40, &fileEntry) == 0) {
+
+                    snd_read_rom(fileEntry.offset, trackData, fileEntry.data & 0xFFFFFF);
+                    temp_s2->unk_10[2] = trackData;
+
+                    trackData = (s32*)((u32)trackData + ((fileEntry.data + 0x40) & 0xFFFFFF));
+                    if (snd_fetch_SBN_file(soundData->mseqFileList[D_80078580[arg0 + 3]].unk_0, 0x40, &fileEntry) == 0) {
+                        snd_read_rom(fileEntry.offset, trackData, fileEntry.data & 0xFFFFFF);
+                        temp_s2->unk_10[3] = trackData;
+
+                        temp_s2->unk_20 = 4;
+                        if (snd_fetch_SBN_file(soundData->mseqFileList[D_80078580[arg0 + 4]].unk_0, 0x30, &fileEntry) == 0) {
+                            snd_load_BK(fileEntry.offset, 2);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return 0;
+}
 
 BGMPlayer* func_80054248(u8 arg0) {
     switch (arg0) {
@@ -499,19 +686,132 @@ BGMPlayer* func_80054248(u8 arg0) {
         case 2:
             return D_8009A5FC;
         case 4:
-            return D_8009A640;
+            return D_8009A640; // TODO: why return pointer to SoundManager?
         default:
             return NULL;
     }
 }
 
-INCLUDE_ASM(void, "2e230_len_2190", snd_load_INIT, UnkAl19E0* arg0, s32 arg1, ALHeap* arg2);
+void snd_load_INIT(UnkAl19E0* arg0, s32 romAddr, ALHeap* heap) {
+    SBNHeader sbnHeader;
+    INITHeader initHeader;
+    SBNFileEntry* entry;
+    s32 tableSize, initBase, size;
+    s32 tblAddr, shortsAddr;
+    s32* data;
+    s32 numEntries;
+    s32 tblOffset, shortsOffset;
+    s32* romPtr = &arg0->baseRomOffset;
 
-INCLUDE_ASM(s32, "2e230_len_2190", snd_fetch_SBN_file, u16 arg0, s32 arg1, s32* arg2);
+    snd_read_rom(romAddr, &sbnHeader, sizeof(SBNHeader));
+    numEntries = sbnHeader.numEntries;
+    arg0->baseRomOffset = romAddr;
+    tableSize = numEntries * sizeof(SBNFileEntry);
+    arg0->fileListLength = sbnHeader.numEntries;
+    arg0->sbnFileList = alHeapAlloc(heap, 1, tableSize);
+    snd_read_rom(arg0->baseRomOffset + sbnHeader.tableOffset, arg0->sbnFileList, tableSize);
 
-INCLUDE_ASM(void, "2e230_len_2190", snd_load_PER, UnkAl19E0* arg0, s32* arg1);
+    entry = arg0->sbnFileList;
+    while (sbnHeader.numEntries--) {
+        if ((entry->offset & 0xFFFFFF) == 0) {
+            break;
+        }
 
-INCLUDE_ASM(void, "2e230_len_2190", snd_load_PRG, UnkAl19E0* arg0, s32* arg1);
+        size = entry->data;
+        entry->data = (size + 0xF) & ~0xF;
+        entry++;
+    }
+
+    if (sbnHeader.INIToffset != 0) {
+        initBase = *romPtr + sbnHeader.INIToffset;
+        snd_read_rom(initBase, &initHeader, sizeof(INITHeader));
+
+        tblOffset = initHeader.tblOffset;
+        size = (initHeader.tblSize + 0xF) & 0xFFF0;
+        tblAddr = initBase + tblOffset;
+        arg0->songList = alHeapAlloc(heap, 1, size);
+        snd_read_rom(tblAddr, arg0->songList, size);
+
+        shortsOffset = initHeader.shortsOffset;
+        size = (initHeader.shortsSize + 0xF) & 0xFFF0;
+        shortsAddr = initBase + shortsOffset;
+        arg0->mseqFileList = alHeapAlloc(heap, 1, size);
+        snd_read_rom(shortsAddr, arg0->mseqFileList, size);
+
+        arg0->bkFileListOffset = initBase + initHeader.entriesOffset;
+        arg0->bkListLength = (initHeader.entriesSize + 0xF) & 0xFFF0;
+        arg0->songListLength = initHeader.tblSize / sizeof(InitSongEntry) - 1;
+    }
+}
+
+s32 snd_fetch_SBN_file(u32 fileIdx, s32 format, SBNFileEntry* arg2) {
+    SBNFileEntry fileEntry;
+    UnkAl19E0* temp = D_8009A5C0;
+    u32 data;
+    s32 ret = 0;
+
+    if (fileIdx < temp->fileListLength) {
+        SBNFileEntry* entry = &temp->sbnFileList[fileIdx];
+        s32 offset = (entry->offset & 0xFFFFFF) + temp->baseRomOffset;
+
+        fileEntry.offset = offset;
+        data = entry->data;
+        fileEntry.data = data;
+        if ((data >> 0x18) == format) {
+            arg2->offset = offset;
+            arg2->data = fileEntry.data;
+        } else {
+            ret = 102;
+        }
+    } else {
+        ret = 101;
+    }
+    return ret;
+}
+
+void snd_load_PER(UnkAl19E0* arg0, s32 romAddr) {
+    PERHeader header;
+    u32 size;
+    s32 numItemsLeft;
+    s32 numItems;
+    void* end;
+
+    snd_read_rom(romAddr, &header, sizeof(PERHeader));
+    size = header.totalSize - sizeof(PERHeader);
+    snd_read_rom(romAddr + sizeof(PERHeader), arg0->dataPER, size);
+    numItems = size / sizeof(PEREntry);
+    numItemsLeft = 6 - numItems;
+    if (numItemsLeft > 0) {
+        end = &arg0->dataPER[numItems];
+        snd_copy_words(&arg0->unk_08, end, sizeof(UnkAlC));
+        snd_copy_words(end, end + sizeof(UnkAlC), numItemsLeft * sizeof(PEREntry) - sizeof(UnkAlC));
+    }
+}
+
+void snd_load_PRG(UnkAl19E0* arg0, s32 romAddr) {
+    PERHeader header;
+    u32 size;
+    s32 numItemsLeft;
+    s32 numItems;
+    s32 dataRomAddr;
+    void* end;
+
+    snd_read_rom(romAddr, &header, sizeof(PERHeader));
+    dataRomAddr = romAddr + sizeof(PERHeader);
+    size = header.totalSize - sizeof(PERHeader);
+    if (size > 0x200) {
+        size = 0x200;
+    }
+    snd_read_rom(dataRomAddr, arg0->dataPRG, size);
+    numItems = size / sizeof(InstrumentCFG);
+    numItemsLeft = 0x40 - numItems;
+    if (numItemsLeft > 0) {
+        end = &arg0->dataPRG[numItems];
+        snd_copy_words(&arg0->defaultPRGEntry, end, sizeof(InstrumentCFG));
+        snd_copy_words(end, end + sizeof(InstrumentCFG), numItemsLeft * sizeof(InstrumentCFG) - sizeof(InstrumentCFG));
+    }
+}
+
 
 INCLUDE_ASM(s32, "2e230_len_2190", snd_load_BGM);
 
@@ -524,35 +824,113 @@ InstrumentGroup* snd_get_BK_instruments(s32 bankGroup, u32 bankIndex) {
 
     switch (bankGroup) {
         case 1:
-            ret = temp->instrumentGroup1[bankIndex / 16];
+            ret = &temp->instrumentGroup1[bankIndex / 16];
             break;
         case 2:
-            ret = temp->instrumentGroup2[bankIndex / 16];
+            ret = &temp->instrumentGroup2[bankIndex / 16];
             break;
         case 4:
-            ret = temp->instrumentGroup4[bankIndex / 16];
+            ret = &temp->instrumentGroup4[bankIndex / 16];
             break;
         case 5:
-            ret = temp->instrumentGroup5[bankIndex / 16];
+            ret = &temp->instrumentGroup5[bankIndex / 16];
             break;
         case 6:
-            ret = temp->instrumentGroup6[bankIndex / 16];
+            ret = &temp->instrumentGroup6[bankIndex / 16];
             break;
         case 3:
-            ret = temp->instrumentGroup3[bankIndex / 16];
+            ret = &temp->instrumentGroup3[bankIndex / 16];
             break;
     }
 
     return ret;
 }
 
-INCLUDE_ASM(s32, "2e230_len_2190", snd_load_BK_to_bank, s32 bkFileOffset, SoundBank* bank, s32 bankIndex, s32 arg3);
-
-void snd_swizzle_BK_instruments(s32 bkFileOffset, SoundBank* bank, InstrumentGroup instruments, s32 instrumentCount,
-                                u8 arg4);
-// float weirdness
 #ifdef NON_EQUIVALENT
-void snd_swizzle_BK_instruments(s32 bkFileOffset, SoundBank* bank, Instruments instruments, u32 instrumentCount,
+enum BKParseState {
+    EN_0 = 0,
+    EN_11 = 11,
+    EN_21 = 21,
+    EN_101 = 101,
+    EN_111 = 111,
+    EN_201 = 201,
+    EN_301 = 301,
+};
+s32 snd_load_BK_to_bank(s32 bkFileOffset, SoundBank* bank, s32 bankIndex, s32 bankGroup) {
+    ALHeap* heap = D_80078E54->heap;
+    BKHeader bkHeader;
+    BKHeader* header = &bkHeader;
+    u16 s3;
+    u16 s2;
+    s32 size;
+    u8* s4;
+    InstrumentGroup* group;
+    u32 i;
+    s32 a2;
+
+    snd_read_rom(bkFileOffset, header, sizeof(BKHeader));
+    s3 = EN_11;
+    s2 = TRUE;
+    do {
+        switch (s3) {
+            case EN_11:
+                if (header->unk_00 == 0x424B /* BK */ && header->unk_04 != 0) {
+                    s3 = EN_21;
+                } else {
+                    s2 = FALSE;
+                }
+                break;
+            case EN_21:
+                if (header->unk_0C == 0x4352) { // CR
+                    s3 = EN_101;
+                } else if (header->unk_0C == 0x4452) { // DR
+                    s3 = EN_201;
+                } else if (header->unk_0C == 0x5352) { // SR
+                    s3 = EN_301;
+                } else {
+                    s2 = FALSE;
+                }
+                break;
+            case EN_101:
+                size = ALIGN16_(header->unk_32) + ALIGN16_(header->unk_36) + ALIGN16_(header->unk_3A) + ALIGN16_(header->unk_3E) + 0x40;
+                if (bank == NULL) {
+                    bank = alHeapAlloc(heap, 1, size);
+                }
+                snd_read_rom(bkFileOffset, bank, size);
+                group = snd_get_BK_instruments(bankGroup, bankIndex);
+                a2 = 0;
+                for (i = 0; i < ARRAY_COUNT(*group); i++) {
+                    if (header->unk_12[i] != 0) {
+                        (*group)[i] = (s32)bank + header->unk_12[i];
+                        a2++;
+                    } else {
+                        (*group)[i] = NULL;
+                    }
+                }
+
+                if (a2 != 0) {
+                    s3 = EN_111;
+                } else {
+                    s2 = FALSE;
+                }
+                break;
+            case EN_111:
+                snd_swizzle_BK_instruments(bkFileOffset, bank, *group, 16, 1);
+                s3 = 0;
+                break;
+            default:
+                s2 = FALSE;
+                break;
+        }
+    } while (s2);
+
+    return bank;
+}
+#else
+INCLUDE_ASM(s32, "2e230_len_2190", snd_load_BK_to_bank, s32 bkFileOffset, SoundBank* bank, s32 bankIndex, s32 arg3);
+#endif
+
+void snd_swizzle_BK_instruments(s32 bkFileOffset, SoundBank* bank, InstrumentGroup instruments, u32 instrumentCount,
                                 u8 arg4) {
     SoundBank* sb = bank;
     Instrument* defaultInstrument = D_8009A5C0->defaultInstrument;
@@ -577,7 +955,7 @@ void snd_swizzle_BK_instruments(s32 bkFileOffset, SoundBank* bank, Instruments i
                     instrument->unkOffset += (s32)bank;
                 }
                 instrument->unk_25 = arg4;
-                instrument->sampleRate = (instrument->sampleRate / freq);
+                instrument->sampleRate = *((s32*)(&instrument->sampleRate)) / freq; // what is happening here?
             } else {
                 instruments[i] = defaultInstrument;
             }
@@ -585,22 +963,43 @@ void snd_swizzle_BK_instruments(s32 bkFileOffset, SoundBank* bank, Instruments i
         sb->swizzled = 1;
     }
 }
-#else
-INCLUDE_ASM(void, "2e230_len_2190", snd_swizzle_BK_instruments, s32 bkFileOffset, SoundBank* bank,
-            InstrumentGroup instruments, s32 instrumentCount, u8 arg4);
-#endif
-
 
 INCLUDE_ASM(s32, "2e230_len_2190", func_80054AA0);
 
-s32 snd_load_BK(s32 arg0, s32 arg1) {
-    snd_load_BK_to_bank(arg0, D_8009A5C0->banks[arg1], arg1, 1);
+s32 snd_load_BK(s32 bkFileOffset, s32 bankIndex) {
+    snd_load_BK_to_bank(bkFileOffset, D_8009A5C0->banks[bankIndex], bankIndex, 1);
     return 0;
 }
 
-INCLUDE_ASM(s32, "2e230_len_2190", func_80054C84);
+void func_80054C84(s32 bankIndex, s32 bankGroup) {
+    u32 i;
+    Instrument* instrument = D_8009A5C0->defaultInstrument;
+    InstrumentGroup* group =  snd_get_BK_instruments(bankGroup, bankIndex);
+    Instrument** ptr = *group;
+    if (group != NULL) {
+        for (i = 0; i < ARRAY_COUNT(*group); i++) {
+            *ptr++ = instrument;
+        }
+    }
+}
 
-INCLUDE_ASM(void, "2e230_len_2190", func_80054CE0, s32 arg0, s32 arg1);
+void func_80054CE0(s32 arg0, s32 arg1) {
+    s32 temp_s0;
+
+    if (arg1 < 9U) {
+        temp_s0 = D_80078530[arg1];
+        if (arg0 & 1) {
+            D_8009A664->unk_48 = temp_s0;
+            func_80053AC8(&D_8009A664->fadeInfo);
+            D_8009A5FC->unk_48 = temp_s0;
+            func_80053AC8(&D_8009A5FC->fadeInfo);
+        }
+        if (arg0 & 0x10) {
+            D_8009A640->unk_5C = temp_s0;
+            func_80053AC8(&D_8009A640->unk_40);
+        }
+    }
+}
 
 s32 func_80054D74(s32 arg0, s32 arg1) {
     if (arg0 & 0x10) {
@@ -609,11 +1008,79 @@ s32 func_80054D74(s32 arg0, s32 arg1) {
     return 0;
 }
 
-INCLUDE_ASM(s32, "2e230_len_2190", func_80054DA8);
+void func_80054DA8(u32 arg0) {
+    if (arg0 % 2 == 1) {
+        if (D_8009A5C0->unk_130C == 0) {
+            D_8009A5C0->unk_130C = 2;
+        }
+    } else {
+        if (D_8009A5C0->unk_130C != 0) {
+            D_8009A5C0->unk_50 = 1;
+            D_8009A5C0->unk_130C = 0;
+        }
+    }
+}
 
-INCLUDE_ASM(void, "2e230_len_2190", snd_read_rom, s32 arg0, s32* arg1, s32 arg2);
+void snd_read_rom(s32 romAddr, void* buffer, u32 size) {
+    s32 nchunks = size / 0x2000;
+    s32 offset = 0;
 
+    if (nchunks != 0) {
+        while (nchunks--) {
+            nuPiReadRom(romAddr + offset, buffer + offset, 0x2000);
+            offset += 0x2000;
+        }
+    }
+
+    size %= 0x2000;
+    if (size != 0) {
+        nuPiReadRom(romAddr + offset, buffer + offset, size);
+    }
+}
+
+#ifdef NON_MATCHING
+// v0/v1 swap
+void snd_memset(s8* dst, s32 size, s8 value) {
+    s32 count;
+    s32 intValue;
+
+    if (size == 0) {
+        return;
+    }
+
+    if (size < 1024) {
+        while (size--) {
+            *dst++ = value;
+        }
+    } else {
+        count = (u32)dst % 4;
+        if (count != 0) {
+            count = 4 - count;
+            size -= count;
+            while (count--) {
+                *dst++ = value;
+            }
+        }
+
+        count = size >> 2;
+        intValue = value & 0xFF;
+        intValue = intValue * 0x01010101;
+        while (count--) {
+            *(u32*)dst = intValue;
+            dst += 4;
+        }
+
+        count = size & 3;
+        if (count != 0) {
+            while (count--) {
+                *dst++ = value;
+            }
+        }
+    }
+}
+#else
 INCLUDE_ASM(s32, "2e230_len_2190", snd_memset);
+#endif
 
 void snd_bcopy(s8* src, s8* dest, s32 size) {
     if (size > 0) {
@@ -623,18 +1090,18 @@ void snd_bcopy(s8* src, s8* dest, s32 size) {
     }
 }
 
-void snd_copy_words(s32* src, s32* dst, s32 num) {
-    num /= 4;
+void snd_copy_words(void* src, void* dst, s32 size) {
+    size /= 4;
 
-    if (num > 0) {
+    if (size > 0) {
         if (!(((s32) src | (s32) dst) & 3)) {
             s32* srcIt = src;
             s32* dstIt = dst;
 
-            num--;
+            size--;
             do {
                 *dstIt++ = *srcIt++;
-            } while (num-- != 0);
+            } while (size-- != 0);
         }
     }
 }

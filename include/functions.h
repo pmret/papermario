@@ -232,6 +232,7 @@ Actor* get_actor(s32 actorID);
 ActorPart* get_actor_part(Actor* actor, s32 partIndex);
 s32 add_coins(s32 amt);
 s32 is_partner_ability_active(s32);
+s32 count_power_plus(s32);
 
 s32 phys_can_player_interact(void);
 
