@@ -34,8 +34,8 @@ Stage NAMESPACE = {
     .shape = "iwa_bt02_shape",
     .hit = "iwa_bt02_hit",
     .bg = "iwa_bg",
-    .preBattle = N(beforeBattle_80221590),
-    .postBattle = N(afterBattle_802215B0),
+    .preBattle = &N(beforeBattle_80221590),
+    .postBattle = &N(afterBattle_802215B0),
     .foregroundModelList = N(foregroundModelList_802215C0),
 };
 

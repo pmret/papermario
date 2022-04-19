@@ -160,6 +160,6 @@ Stage NAMESPACE = {
     .texture = "kzn_tex",
     .shape = "kzn_bt05_shape",
     .hit = "kzn_bt05_hit",
-    .preBattle = N(beforeBattle_8022916C),
-    .postBattle = N(afterBattle_8022974C),
+    .preBattle = &N(beforeBattle_8022916C),
+    .postBattle = &N(afterBattle_8022974C),
 };

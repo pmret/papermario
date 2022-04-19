@@ -34,7 +34,7 @@ ApiStatus N(func_802A12EC_72E81C)(Evt* script, s32 isInitialCall) {
         ((s32*)partner->debuffIcon->data)[0xF] = partner->koDuration;
     } else {
         partner->koStatus = 0;
-        dispatch_event_partner(0x34);
+        dispatch_event_partner(EVENT_34);
         ((s32*)partner->debuffIcon->data)[0xF] = 0;
     }
 

@@ -262,10 +262,10 @@ typedef struct PlayerData {
     /* 0x29E */ s16 enemyFirstStrikes;
     /* 0x2A0 */ u16 powerBounces;
     /* 0x2A2 */ u16 battlesCount;
-    /* 0x2A4 */ s16 battlesWon;
+    /* 0x2A4 */ u16 battlesWon;
     /* 0x2A6 */ s16 unk_2A6;
     /* 0x2A8 */ s16 battlesFled;
-    /* 0x2AA */ s16 trainingsDone;
+    /* 0x2AA */ u16 trainingsDone;
     /* 0x2AC */ s32 walkingStepsTaken;
     /* 0x2B0 */ s32 runningStepsTaken;
     /* 0x2B4 */ u32 totalCoinsEarned;
@@ -950,7 +950,7 @@ typedef struct BattleStatus {
     /* 0x089 */ u8 hpDrainCount;
     /* 0x08A */ s8 nextMerleeSpellType;
     /* 0x08B */ s8 hustleTurns; /* numTurns from hustle drink, normally 0 */
-    /* 0x08C */ char unk_8C;
+    /* 0x08C */ s8 unk_8C;
     /* 0x08D */ s8 unk_8D;
     /* 0x08E */ s8 initialEnemyCount; /* used for SP award bonus */
     /* 0x08F */ char unk_8F[1];

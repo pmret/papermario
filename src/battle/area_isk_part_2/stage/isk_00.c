@@ -18,6 +18,6 @@ EvtScript N(afterBattle_8021FD2C) = {
 Stage NAMESPACE = {
     .texture = "isk_tex",
     .shape = "isk_bt00_shape",
-    .preBattle = N(beforeBattle_8021FCF0),
-    .postBattle = N(afterBattle_8021FD2C),
+    .preBattle = &N(beforeBattle_8021FCF0),
+    .postBattle = &N(afterBattle_8021FD2C),
 };

@@ -308,7 +308,7 @@ Stage NAMESPACE = {
     .texture = "kgr_tex",
     .shape = "kgr_bt01_shape",
     .hit = "kgr_bt01_hit",
-    .preBattle = N(beforeBattle_8021D3B4),
-    .postBattle = N(afterBattle_8021D598),
+    .preBattle = &N(beforeBattle_8021D3B4),
+    .postBattle = &N(afterBattle_8021D598),
     .foregroundModelList = N(foregroundModelList_8021D5A8),
 };

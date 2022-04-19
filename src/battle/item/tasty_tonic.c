@@ -22,7 +22,7 @@ ApiStatus N(func_802A123C_72223C)(Evt* script, s32 isInitialCall) {
             case ACTOR_CLASS_PLAYER:
                 break;
             case ACTOR_CLASS_PARTNER:
-                dispatch_event_partner(0x31);
+                dispatch_event_partner(EVENT_RECOVER_STATUS);
         }
         ((s32*)(actor->debuffIcon->data))[15] = 0;
     }

@@ -178,7 +178,7 @@ Stage NAMESPACE = {
     .shape = "hos_bt01_shape",
     .hit = "hos_bt01_hit",
     .bg = "hos_bg",
-    .preBattle = N(beforeBattle_80224BD0),
-    .postBattle = N(afterBattle_80225598),
+    .preBattle = &N(beforeBattle_80224BD0),
+    .postBattle = &N(afterBattle_80225598),
     .foregroundModelList = N(foregroundModelList_802255A8),
 };

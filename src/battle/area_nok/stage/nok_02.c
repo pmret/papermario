@@ -73,7 +73,7 @@ Stage NAMESPACE = {
     .shape = "nok_bt02_shape",
     .hit = "nok_bt02_hit",
     .bg = "nok_bg",
-    .preBattle = N(beforeBattle_8022B918),
-    .postBattle = N(afterBattle_8022BACC),
+    .preBattle = &N(beforeBattle_8022B918),
+    .postBattle = &N(afterBattle_8022BACC),
     .foregroundModelList = N(foregroundModelList_8022BADC),
 };

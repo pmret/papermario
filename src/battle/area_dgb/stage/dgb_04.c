@@ -23,7 +23,7 @@ Stage NAMESPACE = {
     .texture = "dgb_tex",
     .shape = "dgb_bt04_shape",
     .hit = "dgb_bt04_hit",
-    .preBattle = N(beforeBattle_8021B170),
-    .postBattle = N(afterBattle_8021B190),
+    .preBattle = &N(beforeBattle_8021B170),
+    .postBattle = &N(afterBattle_8021B190),
     .foregroundModelList = N(foregroundModelList_8021B1A0),
 };

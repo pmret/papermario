@@ -34,7 +34,7 @@ ApiStatus N(func_802A12EC_724FCC)(Evt* script, s32 isInitialCall) {
         ((s32*)partner->debuffIcon->data)[0xF] = partner->koDuration;
     } else {
         partner->koStatus = 0;
-        dispatch_event_partner(0x34);
+        dispatch_event_partner(EVENT_34);
         ((s32*)partner->debuffIcon->data)[0xF] = 0;
     }
 
@@ -60,7 +60,7 @@ ApiStatus N(func_802A1378_725058)(Evt* script, s32 isInitialCall) {
             case ACTOR_CLASS_PLAYER:
                 break;
             case ACTOR_CLASS_PARTNER:
-                dispatch_event_partner(0x31);
+                dispatch_event_partner(EVENT_RECOVER_STATUS);
                 break;
         }
 

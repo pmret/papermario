@@ -34,6 +34,6 @@ Stage NAMESPACE = {
     .texture = "kpa_tex",
     .shape = "kpa_bt13_shape",
     .hit = "kpa_bt13_hit",
-    .preBattle = N(beforeBattle_80234D60),
-    .postBattle = N(afterBattle_80234D9C),
+    .preBattle = &N(beforeBattle_80234D60),
+    .postBattle = &N(afterBattle_80234D9C),
 };

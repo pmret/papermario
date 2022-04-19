@@ -98,6 +98,6 @@ Stage NAMESPACE = {
     .shape = "hos_bt02_shape",
     .hit = "hos_bt02_hit",
     .bg = "nok_bg",
-    .preBattle = N(beforeBattle_802258E0),
-    .postBattle = N(afterBattle_80225E20),
+    .preBattle = &N(beforeBattle_802258E0),
+    .postBattle = &N(afterBattle_80225E20),
 };

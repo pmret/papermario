@@ -119,7 +119,7 @@ Stage NAMESPACE = {
     .texture = "kzn_tex",
     .shape = "kzn_bt04_shape",
     .hit = "kzn_bt04_hit",
-    .preBattle = N(beforeBattle_8022869C),
-    .postBattle = N(afterBattle_802288B8),
+    .preBattle = &N(beforeBattle_8022869C),
+    .postBattle = &N(afterBattle_802288B8),
     .foregroundModelList = N(foregroundModelList_802288C8),
 };
