@@ -1,33 +1,23 @@
 #include "kzn_17.h"
 
 #include "world/common/UnkNpcAIFunc6.inc.c"
-
 #include "world/common/UnkNpcAIFunc7.inc.c"
-
 #include "world/common/UnkNpcAIFunc8.inc.c"
-
 #include "world/common/UnkNpcAIFunc5.inc.c"
-
 #include "world/common/UnkNpcAIFunc26.inc.c"
-
 #include "world/common/UnkFunc7.inc.c"
-
 #include "world/common/UnkNpcAIFunc27.inc.c"
 
-#include "world/common/UnkNpcAIFunc31.inc.c"
+#include "world/common/PiranhaPlantAI_00.inc.c"
+#include "world/common/PiranhaPlantAI_01.inc.c"
 
-#include "world/common/UnkNpcAIFunc32.inc.c"
-
-// Data migration (UnkNpcAIFunc46)
+// Data migration (PiranhaPlantAI_10)
 INCLUDE_ASM(s32, "world/area_kzn/kzn_17/C85DC0", func_80240D48_C867F8);
 
-#include "world/common/UnkNpcDurationFlagFunc3.inc.c"
-
-#include "world/common/UnkNpcAIFunc33.inc.c"
-
-#include "world/common/UnkNpcDurationFlagFunc2.inc.c"
-
-#include "world/common/UnkNpcAIFunc30.inc.c"
+#include "world/common/PiranhaPlantAI_11.inc.c"
+#include "world/common/PiranhaPlantAI_12.inc.c"
+#include "world/common/PiranhaPlantAI_13.inc.c"
+#include "world/common/PiranhaPlantAI_14.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_17/C85DC0", func_80241A64_C87514);
 

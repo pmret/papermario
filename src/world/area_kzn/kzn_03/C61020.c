@@ -1,38 +1,21 @@
 #include "kzn_03.h"
 
+// spike top
 #include "world/common/atomic/enemy/UnkAI_5.inc.c"
 
 #include "world/common/AwaitPlayerNearNpc.inc.c"
 
+// hitbox piranha plant
 #include "world/common/UnkNpcAIFunc6.inc.c"
-
 #include "world/common/UnkNpcAIFunc7.inc.c"
-
 #include "world/common/UnkNpcAIFunc8.inc.c"
-
 #include "world/common/UnkNpcAIFunc5.inc.c"
-
 #include "world/common/UnkNpcAIFunc26.inc.c"
-
 #include "world/common/UnkFunc7.inc.c"
+#include "world/common/UnkNpcAIFunc27.inc.c" // unused?
 
-#include "world/common/UnkNpcAIFunc27.inc.c"
-
-#include "world/common/UnkNpcAIFunc31.inc.c"
-
-#include "world/common/UnkNpcAIFunc32.inc.c"
-
-#include "world/common/UnkNpcAIFunc46.inc.c"
-
-#include "world/common/UnkNpcDurationFlagFunc3.inc.c"
-
-#include "world/common/UnkNpcAIFunc33.inc.c"
-
-#include "world/common/UnkNpcDurationFlagFunc2.inc.c"
-
-#include "world/common/UnkNpcAIFunc30.inc.c"
-
-INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C61020", func_8024234C_C6305C);
+// main piranha plant
+#include "world/common/atomic/enemy/PiranhaPlant.inc.c"
 
 #include "world/common/StashVars.inc.c"
 

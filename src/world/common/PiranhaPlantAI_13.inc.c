@@ -1,7 +1,7 @@
 #include "common.h"
 #include "npc.h"
 
-void N(UnkNpcDurationFlagFunc2)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(PiranhaPlantAI_13)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 

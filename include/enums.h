@@ -2768,7 +2768,6 @@ enum GenericAIStates {
     AI_STATE_SUSPEND        = 99,
 };
 
-
 enum GenericEnemyAnims {
     ENEMY_ANIM_IDLE         = 0,
     ENEMY_ANIM_WALK         = 1,
@@ -2778,6 +2777,17 @@ enum GenericEnemyAnims {
 
 enum EnemyActionFlags {
     AI_ACTION_JUMP_WHEN_SEE_PLAYER  = 1,
+};
+
+enum PiranhaPlantStates {
+    AI_STATE_PIRANHA_PLANT_00       = 0,
+    AI_STATE_PIRANHA_PLANT_01       = 1,
+    AI_STATE_PIRANHA_PLANT_10       = 10,
+    AI_STATE_PIRANHA_PLANT_11       = 11,
+    AI_STATE_PIRANHA_PLANT_12       = 12,
+    AI_STATE_PIRANHA_PLANT_13       = 13,
+    AI_STATE_PIRANHA_PLANT_14       = 14,
+    AI_STATE_PIRANHA_PLANT_SUSPEND  = 99
 };
 
 enum MusicSettingsFlags {

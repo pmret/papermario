@@ -2,7 +2,7 @@
 #include "npc.h"
 
 // Might be something like the check for the general territory area of a burried mole and when to surface?
-void N(UnkNpcAIFunc46)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(PiranhaPlantAI_10)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 phi_s7 = FALSE;

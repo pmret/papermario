@@ -469,33 +469,33 @@ void load_demo_battle(u32 index) {
 
     switch (mode) {
         case 0:
-            gCurrentEncounter.eFirstStrike = 0;
-            gCurrentEncounter.hitType = 1;
+            gCurrentEncounter.eFirstStrike = FIRST_STRIKE_NONE;
+            gCurrentEncounter.hitType = ENCOUNTER_TRIGGER_NONE;
             gCurrentEncounter.hitTier = 0;
             gGameStatusPtr->demoFlags |= 0x10;
             gGameStatusPtr->demoFlags |= 0x20;
             gGameStatusPtr->demoFlags |= 0x40;
             break;
         case 1:
-            gCurrentEncounter.eFirstStrike = 1;
-            gCurrentEncounter.hitType = 4;
+            gCurrentEncounter.eFirstStrike = FIRST_STRIKE_PLAYER;
+            gCurrentEncounter.hitType = ENCOUNTER_TRIGGER_HAMMER;
             gCurrentEncounter.hitTier = playerData->hammerLevel;
             gGameStatusPtr->demoFlags |= 0x10;
             break;
         case 2:
-            gCurrentEncounter.eFirstStrike = 1;
-            gCurrentEncounter.hitType = 2;
+            gCurrentEncounter.eFirstStrike = FIRST_STRIKE_PLAYER;
+            gCurrentEncounter.hitType = ENCOUNTER_TRIGGER_JUMP;
             gCurrentEncounter.hitTier = playerData->bootsLevel;
             gGameStatusPtr->demoFlags |= 0x10;
             break;
         case 3:
-            gCurrentEncounter.eFirstStrike = 1;
-            gCurrentEncounter.hitType = 6;
+            gCurrentEncounter.eFirstStrike = FIRST_STRIKE_PLAYER;
+            gCurrentEncounter.hitType = ENCOUNTER_TRIGGER_PARTNER;
             gGameStatusPtr->demoFlags |= 0x20;
             break;
         case 4:
-            gCurrentEncounter.eFirstStrike = 2;
-            gCurrentEncounter.hitType = 1;
+            gCurrentEncounter.eFirstStrike = FIRST_STRIKE_ENEMY;
+            gCurrentEncounter.hitType = ENCOUNTER_TRIGGER_NONE;
             gCurrentEncounter.hitTier = 0;
             gGameStatusPtr->demoFlags |= 0x40;
             break;

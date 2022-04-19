@@ -14,20 +14,20 @@
 
 #include "world/common/UnkNpcAIFunc27.inc.c"
 
-#include "world/common/UnkNpcAIFunc31.inc.c"
+#include "world/common/PiranhaPlantAI_00.inc.c"
 
-#include "world/common/UnkNpcAIFunc32.inc.c"
+#include "world/common/PiranhaPlantAI_01.inc.c"
 
-// Data migration (UnkNpcAIFunc46)
+// matches PiranhaPlantAI_10, but requires data in kzn_03 to be migrated due to an invalid symbol
 INCLUDE_ASM(s32, "world/area_kzn/kzn_09/C77D00", func_80241A58_C78738);
 
-#include "world/common/UnkNpcDurationFlagFunc3.inc.c"
+#include "world/common/PiranhaPlantAI_11.inc.c"
 
-#include "world/common/UnkNpcAIFunc33.inc.c"
+#include "world/common/PiranhaPlantAI_12.inc.c"
 
-#include "world/common/UnkNpcDurationFlagFunc2.inc.c"
+#include "world/common/PiranhaPlantAI_13.inc.c"
 
-#include "world/common/UnkNpcAIFunc30.inc.c"
+#include "world/common/PiranhaPlantAI_14.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_09/C77D00", func_80242774_C79454);
 

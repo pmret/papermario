@@ -14,19 +14,7 @@
 
 #include "world/common/UnkNpcAIFunc27.inc.c"
 
-#include "world/common/UnkNpcAIFunc31.inc.c"
-
-#include "world/common/UnkNpcAIFunc32.inc.c"
-
-#include "world/common/UnkNpcAIFunc46.inc.c"
-
-#include "world/common/UnkNpcDurationFlagFunc3.inc.c"
-
-#include "world/common/UnkNpcAIFunc33.inc.c"
-
-#include "world/common/UnkNpcDurationFlagFunc2.inc.c"
-
-#include "world/common/UnkNpcAIFunc30.inc.c"
+#include "world/common/atomic/enemy/PiranhaPlant_States.inc.c"
 
 ApiStatus func_80241C54_B95094(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
@@ -59,33 +47,33 @@ ApiStatus func_80241C54_B95094(Evt* script, s32 isInitialCall) {
 
     switch (script->functionTemp[0]) {
         case 0:
-            N(UnkNpcAIFunc31)(script, settings, territoryPtr);
+            N(PiranhaPlantAI_00)(script, settings, territoryPtr);
             /* fallthrough */
         case 1:
-            N(UnkNpcAIFunc32)(script, settings, territoryPtr);
+            N(PiranhaPlantAI_01)(script, settings, territoryPtr);
             break;
         case 10:
-            N(UnkNpcAIFunc46)(script, settings, territoryPtr);
+            N(PiranhaPlantAI_10)(script, settings, territoryPtr);
             if (script->functionTemp[0] != 11) {
                 break;
             }
         case 11:
-            N(UnkNpcDurationFlagFunc3)(script, settings, territoryPtr);
+            N(PiranhaPlantAI_11)(script, settings, territoryPtr);
             if (script->functionTemp[0] != 12) {
                 break;
             }
         case 12:
-            N(UnkNpcAIFunc33)(script, settings, territoryPtr);
+            N(PiranhaPlantAI_12)(script, settings, territoryPtr);
             if (script->functionTemp[0] != 13) {
                 break;
             }
         case 13:
-            N(UnkNpcDurationFlagFunc2)(script, settings, territoryPtr);
+            N(PiranhaPlantAI_13)(script, settings, territoryPtr);
             if (script->functionTemp[0] != 14) {
                 break;
             }
         case 14:
-            N(UnkNpcAIFunc30)(script, settings, territoryPtr);
+            N(PiranhaPlantAI_14)(script, settings, territoryPtr);
             break;
         case 99:
             basic_ai_suspend(script);
