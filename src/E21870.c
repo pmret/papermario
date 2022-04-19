@@ -1,11 +1,12 @@
 #include "common.h"
+#include "effects.h"
 
 s32 func_802B7000_2(void) {
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
     s8 actionState = gPlayerActionState;
 
     if (actionState != ACTION_STATE_USE_TWEESTER) {
-        if (partnerActionStatus->partnerActionState != PARTNER_ACTION_USE || 
+        if (partnerActionStatus->partnerActionState != PARTNER_ACTION_USE ||
                 (partnerActionStatus->actingPartner != PARTNER_BOW
                 && partnerActionStatus->actingPartner != PARTNER_PARAKARRY)) {
             return 0;

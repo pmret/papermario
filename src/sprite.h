@@ -184,7 +184,7 @@ s32 func_802DE5C8(s32 arg0);
 
 s32 spr_free_sprite(s32 spriteInstanceID);
 
-//s32 func_802DE748(); // TODO
+s32 func_802DE748(s32, s32); // TODO
 
 s32 func_802DE780(s32, s32, s32, s32, s32, s32, s32, s32);
 
