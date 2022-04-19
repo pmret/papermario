@@ -946,7 +946,7 @@ typedef struct BattleStatus {
     /* 0x086 */ s8 unk_86;
     /* 0x087 */ s8 blockResult; /* 0 = fail, 1 = success, -1 = mashed */
     /* 0x088 */ s8 itemUsesLeft; /* set to 2 for double dip, 3 for triple dip */
-    /* 0x089 */ u8 hpDrainCount;
+    /* 0x089 */ s8 hpDrainCount;
     /* 0x08A */ s8 nextMerleeSpellType;
     /* 0x08B */ s8 hustleTurns; /* numTurns from hustle drink, normally 0 */
     /* 0x08C */ char unk_8C;
