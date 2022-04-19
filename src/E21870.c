@@ -1,5 +1,4 @@
 #include "common.h"
-#include "effects.h"
 
 s32 func_802B7000_2(void) {
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
