@@ -7,7 +7,7 @@
 #define NAMESPACE dgb_16
 
 ApiStatus N(func_80240E20_C53360)(Evt* script, s32 isInitialCall);
-ApiStatus N(AttackAheadHitbox_Control)(Evt* script, s32 isInitialCall);
+ApiStatus N(MeleeHitbox_Control)(Evt* script, s32 isInitialCall);
 
 extern NpcGroupList N(npcGroupList_8024318C);
 extern EvtScript N(80241780);

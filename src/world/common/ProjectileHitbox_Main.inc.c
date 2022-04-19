@@ -2,7 +2,7 @@
 #include "npc.h"
 #include "effects.h"
 
-ApiStatus N(UnkNpcAIMainFunc7)(Evt* script, s32 isInitialCall) {
+ApiStatus N(ProjectileHitbox_Main)(Evt* script, s32 isInitialCall) {
     EnemyTerritoryThing territory;
     EnemyTerritoryThing* territoryPtr = &territory;
     Enemy* enemy = script->owner1.enemy;
@@ -46,53 +46,53 @@ ApiStatus N(UnkNpcAIMainFunc7)(Evt* script, s32 isInitialCall) {
     }
 
     switch (script->functionTemp[0]) {
-        case 0:
+        case AI_STATE_WANDER_INIT:
             basic_ai_wander_init(script, settings, territoryPtr);
-            /* fallthrough */
-        case 1:
+            // fallthrough
+        case AI_STATE_WANDER:
             basic_ai_wander(script, settings, territoryPtr);
             break;
-        case 2:
+        case AI_STATE_LOITER_INIT:
             basic_ai_loiter_init(script, settings, territoryPtr);
-            /* fallthrough */
-        case 3:
+            // fallthrough
+        case AI_STATE_LOITER:
             basic_ai_loiter(script, settings, territoryPtr);
             break;
-        case 10:
+        case AI_STATE_JUMP_INIT:
             basic_ai_found_player_jump_init(script, settings, territoryPtr);
-            /* fallthrough */
-        case 11:
+            // fallthrough
+        case AI_STATE_JUMP:
             basic_ai_found_player_jump(script, settings, territoryPtr);
             break;
-        case 12:
+        case AI_STATE_CHASE_INIT:
             dist = dist2D(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
             if (enemy->varTable[0] == 0 || enemy->varTable[0] < dist) {
                 N(UnkNpcAIFunc48)(script, settings->chaseRadius, settings->unk_28.f, territoryPtr);
-                if (script->functionTemp[0] != 12) {
+                if (script->functionTemp[0] != AI_STATE_CHASE_INIT) {
                     break;
                 }
             }
             basic_ai_chase_init(script, settings, territoryPtr);
-            /* fallthrough */
-        case 13:
+            // fallthrough
+        case AI_STATE_CHASE:
             basic_ai_chase(script, settings, territoryPtr);
             break;
-        case 14:
+        case AI_STATE_LOSE_PLAYER:
             basic_ai_lose_player(script, settings, territoryPtr);
             break;
-        case 30:
-            N(UnkNpcAIFunc49(script));
+        case AI_STATE_PROJECTILE_HITBOX_30:
+            N(ProjectileHitbox_30(script));
             break;
-        case 31:
-            N(UnkSetDurationFunc(script));
+        case AI_STATE_PROJECTILE_HITBOX_31:
+            N(ProjectileHitbox_31(script));
             break;
-        case 32:
-            N(UnkNpcAIFunc9(script));
+        case AI_STATE_PROJECTILE_HITBOX_32:
+            N(ProjectileHitbox_32(script));
             break;
-        case 33:
-            N(UnkDurationCheckNoArgs(script));
+        case AI_STATE_PROJECTILE_HITBOX_33:
+            N(ProjectileHitbox_33(script));
             break;
-        case 99:
+        case AI_STATE_SUSPEND:
             basic_ai_suspend(script);
             break;
     }

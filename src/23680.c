@@ -198,26 +198,26 @@ s32 basic_ai_try_detect_player(EnemyTerritoryThing* territory, Enemy* enemy, f32
     return FALSE;
 }
 
-s32 func_800493EC(Enemy* enemy, s32 arg1, f32 arg2, f32 arg3) {
+s32 func_800493EC(Enemy* enemy, s32 chance, f32 arg2, f32 radius) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
-    if (arg1 >= 0) {
-        s32 temp;
+    if (chance >= 0) {
+        s32 skipCheckForPlayer;
 
-        if (arg1 != 0) {
-            temp = rand_int(arg1 + 1);
+        if (chance != 0) {
+            skipCheckForPlayer = rand_int(chance + 1);
         } else {
-            temp = 0;
+            skipCheckForPlayer = 0;
         }
 
-        if (temp == 0) {
-            f32 f1 = npc->pos.x;
-            f32 f2 = npc->pos.z;
+        if (!skipCheckForPlayer) {
+            f32 x = npc->pos.x;
+            f32 z = npc->pos.z;
 
-            add_vec2D_polar(&f1, &f2, arg3, 270.0f - npc->renderYaw);
+            add_vec2D_polar(&x, &z, radius, 270.0f - npc->renderYaw);
 
-            if (dist2D(f1, f2, playerStatus->position.x, playerStatus->position.z) <= arg2) {
+            if (dist2D(x, z, playerStatus->position.x, playerStatus->position.z) <= arg2) {
                 return TRUE;
             }
         }

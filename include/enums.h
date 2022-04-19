@@ -2790,12 +2790,22 @@ enum PiranhaPlantStates {
     AI_STATE_PIRANHA_PLANT_SUSPEND  = 99
 };
 
-enum AttackAheadHitboxStates {
-    AI_STATE_AHEAD_HITBOX_30        = 30,
-    AI_STATE_AHEAD_HITBOX_31        = 31,
-    AI_STATE_AHEAD_HITBOX_32        = 32,
-    AI_STATE_AHEAD_HITBOX_33        = 33,
+enum MeleeHitboxStates {
+    AI_STATE_MELEE_HITBOX_30        = 30,
+    AI_STATE_MELEE_HITBOX_31        = 31,
+    AI_STATE_MELEE_HITBOX_32        = 32,
+    AI_STATE_MELEE_HITBOX_33        = 33,
 };
+
+enum ProjectileHitboxStates {
+    AI_STATE_PROJECTILE_HITBOX_30   = 30,
+    AI_STATE_PROJECTILE_HITBOX_31   = 31,
+    AI_STATE_PROJECTILE_HITBOX_32   = 32,
+    AI_STATE_PROJECTILE_HITBOX_33   = 33,
+};
+
+#define VAR_PROJECTILE_HITBOX_STATE varTable[0]
+#define VAR_PROJECTILE_COUNT varTable[3]
 
 enum MusicSettingsFlags {
     MUSIC_SETTINGS_FLAGS_1                 = 0x00000001,

@@ -10,7 +10,7 @@ INCLUDE_ASM(s32, "world/area_omo/omo_17/DEF400", func_802406A0_DEF540);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_17/DEF400", func_80240798_DEF638);
 
-#include "world/common/UnkNpcAIFunc4.inc.c"
+#include "world/common/GrooveGuyAI_02.inc.c"
 
 INCLUDE_ASM(s32, "world/area_omo/omo_17/DEF400", func_80240B1C_DEF9BC);
 

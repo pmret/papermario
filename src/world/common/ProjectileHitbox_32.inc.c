@@ -1,7 +1,7 @@
 #include "common.h"
 #include "npc.h"
 
-void N(UnkNpcAIFunc9)(Evt* script) {
+void N(ProjectileHitbox_32)(Evt* script) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Enemy* enemy2 = get_enemy(enemy->npcID + 1);
@@ -11,6 +11,6 @@ void N(UnkNpcAIFunc9)(Evt* script) {
     if (enemy2->varTable[0] == 0) {
         npc->currentAnim.w = enemy->animList[0];
         npc->duration = enemy->varTable[2];
-        script->functionTemp[0] = 33;
+        script->functionTemp[0] = AI_STATE_PROJECTILE_HITBOX_33;
     }
 }

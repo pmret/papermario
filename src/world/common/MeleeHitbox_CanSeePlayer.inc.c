@@ -1,7 +1,7 @@
 #include "common.h"
 #include "npc.h"
 
-s32 N(AttackAheadHitbox_CanSeePlayer)(Evt* script) {
+s32 N(MeleeHitbox_CanSeePlayer)(Evt* script) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Camera* camera = &gCameras[gCurrentCamID];

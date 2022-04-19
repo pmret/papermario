@@ -151,7 +151,7 @@ glabel func_80240CE0_DEFB80
 .L80240EEC_DEFD8C:
 /* DEFD8C 80240EEC 0260202D */  daddu     $a0, $s3, $zero
 /* DEFD90 80240EF0 0280282D */  daddu     $a1, $s4, $zero
-/* DEFD94 80240EF4 0C0902B3 */  jal       omo_17_UnkNpcAIFunc4
+/* DEFD94 80240EF4 0C0902B3 */  jal       omo_17_GrooveGuyAI_02
 /* DEFD98 80240EF8 02A0302D */   daddu    $a2, $s5, $zero
 .L80240EFC_DEFD9C:
 /* DEFD9C 80240EFC 0260202D */  daddu     $a0, $s3, $zero

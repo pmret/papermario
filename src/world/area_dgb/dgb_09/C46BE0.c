@@ -299,7 +299,7 @@ EvtScript N(npcAI_80244284) = {
     EVT_CALL(SetSelfVar, 3, 32)
     EVT_CALL(SetSelfVar, 4, 3)
     EVT_CALL(SetSelfVar, 15, 8389)
-    EVT_CALL(N(AttackAheadHitbox_Control))
+    EVT_CALL(N(MeleeHitbox_Control))
     EVT_RETURN
     EVT_END
 };
@@ -622,17 +622,17 @@ NpcGroupList N(npcGroupList_8024533C) = {
     {},
 };
 
-#include "world/common/AttackAheadHitboxAI_30.inc.c"
+#include "world/common/MeleeHitbox_30.inc.c"
 
-#include "world/common/AttackAheadHitboxAI_31.inc.c"
+#include "world/common/MeleeHitbox_31.inc.c"
 
-#include "world/common/AttackAheadHitboxAI_32.inc.c"
+#include "world/common/MeleeHitbox_32.inc.c"
 
-#include "world/common/AttackAheadHitboxAI_33.inc.c"
+#include "world/common/MeleeHitbox_33.inc.c"
 
-#include "world/common/AttackAheadHitbox_CanSeePlayer.inc.c"
+#include "world/common/MeleeHitbox_CanSeePlayer.inc.c"
 
-#include "world/common/AttackAheadHitbox_Control.inc.c"
+#include "world/common/MeleeHitbox_Control.inc.c"
 
 ApiStatus N(func_8024061C_C471FC)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
@@ -669,7 +669,7 @@ ApiStatus N(func_8024061C_C471FC)(Evt* script, s32 isInitialCall) {
         enemy->varTable[0] = 0;
     }
 
-    if ((script->functionTemp[0] < 30) && (enemy->varTable[0] == 0) && N(AttackAheadHitbox_CanSeePlayer)(script)) {
+    if ((script->functionTemp[0] < 30) && (enemy->varTable[0] == 0) && N(MeleeHitbox_CanSeePlayer)(script)) {
         script->functionTemp[0] = 30;
     }
 
@@ -698,19 +698,19 @@ ApiStatus N(func_8024061C_C471FC)(Evt* script, s32 isInitialCall) {
             basic_ai_lose_player(script, npcAISettings, territoryPtr);
             break;
         case 30:
-            N(AttackAheadHitboxAI_30)(script);
+            N(MeleeHitbox_30)(script);
         case 31:
-            N(AttackAheadHitboxAI_31)(script);
+            N(MeleeHitbox_31)(script);
             if (script->functionTemp[0] != 32) {
                 break;
             }
         case 32:
-            N(AttackAheadHitboxAI_32)(script);
+            N(MeleeHitbox_32)(script);
             if (script->functionTemp[0] != 33) {
                 break;
             }
         case 33:
-            N(AttackAheadHitboxAI_33)(script);
+            N(MeleeHitbox_33)(script);
             break;
         case 99:
             basic_ai_suspend(script);
@@ -933,7 +933,7 @@ ApiStatus N(func_802410D4_C47CB4)(Evt* script, s32 isInitialCall) {
         enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
     }
 
-    if (((u32)script->functionTemp[0] - 10 < 20) && (enemy->varTable[0] == 0) && N(AttackAheadHitbox_CanSeePlayer)(script)) {
+    if (((u32)script->functionTemp[0] - 10 < 20) && (enemy->varTable[0] == 0) && N(MeleeHitbox_CanSeePlayer)(script)) {
         script->functionTemp[0] = 30;
     }
 
@@ -968,20 +968,20 @@ ApiStatus N(func_802410D4_C47CB4)(Evt* script, s32 isInitialCall) {
             script->functionTemp[0] = 3;
             break;
         case 30:
-            N(AttackAheadHitboxAI_30)(script);
+            N(MeleeHitbox_30)(script);
             if (script->functionTemp[0] != 31) {
                 break;
             }
         case 31:
-            N(AttackAheadHitboxAI_31)(script);
+            N(MeleeHitbox_31)(script);
             if (script->functionTemp[0] != 32) {
                 break;
             }
         case 32:
-            N(AttackAheadHitboxAI_32)(script);
+            N(MeleeHitbox_32)(script);
             break;
         case 33:
-            N(AttackAheadHitboxAI_33)(script);
+            N(MeleeHitbox_33)(script);
             break;
         case 40:
             N(func_80240E54_C47A34)(script, npcAISettings, territoryPtr);

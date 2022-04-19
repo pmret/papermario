@@ -13,16 +13,16 @@ extern s32 D_802466D0[];
 void func_8004D8E0(DeadEnemy*);
 void func_80240DC4_EA16C4(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory);
 
-#include "world/common/AttackAheadHitboxAI_30.inc.c"
+#include "world/common/MeleeHitbox_30.inc.c"
 
-#include "world/common/AttackAheadHitboxAI_31.inc.c"
+#include "world/common/MeleeHitbox_31.inc.c"
 
-#include "world/common/AttackAheadHitboxAI_32.inc.c"
+#include "world/common/MeleeHitbox_32.inc.c"
 
-#include "world/common/AttackAheadHitboxAI_33.inc.c"
+#include "world/common/MeleeHitbox_33.inc.c"
 
-//Basically AttackAheadHitbox_CanSeePlayer.inc.c, but gPartnerActionStatus.partnerActionState access 0, instead of 3
-s32 N(AttackAheadHitbox_CanSeePlayer)(Evt* script) {
+//Basically MeleeHitbox_CanSeePlayer.inc.c, but gPartnerActionStatus.partnerActionState access 0, instead of 3
+s32 N(MeleeHitbox_CanSeePlayer)(Evt* script) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Camera* camera = &gCameras[gCurrentCamID];
@@ -60,7 +60,7 @@ s32 N(AttackAheadHitbox_CanSeePlayer)(Evt* script) {
     return ret;
 }
 
-// Similar to AttackAheadHitbox_Control
+// Similar to MeleeHitbox_Control
 ApiStatus func_802406CC_EA0FCC(Evt* script, s32 isInitialCall) {
     DeadEnemy* enemy = (DeadEnemy*) script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
@@ -141,7 +141,7 @@ ApiStatus func_802406CC_EA0FCC(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-// Similar to AttackAheadHitbox_Main
+// Similar to MeleeHitbox_Main
 ApiStatus func_8024097C_EA127C(Evt* script, s32 isInitialCall) {
     DeadEnemy* enemy = (DeadEnemy*) script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
@@ -183,7 +183,7 @@ ApiStatus func_8024097C_EA127C(Evt* script, s32 isInitialCall) {
         enemy->varTable[0] = 0;
     }
 
-    if (script->functionTemp[0] < 30 && enemy->varTable[0] == 0 && N(AttackAheadHitbox_CanSeePlayer)(script)) {
+    if (script->functionTemp[0] < 30 && enemy->varTable[0] == 0 && N(MeleeHitbox_CanSeePlayer)(script)) {
         script->functionTemp[0] = 30;
     }
 
@@ -216,20 +216,20 @@ ApiStatus func_8024097C_EA127C(Evt* script, s32 isInitialCall) {
             basic_ai_lose_player(script, npcAISettings, territoryPtr);
             break;
         case 30:
-            N(AttackAheadHitboxAI_30)(script);
+            N(MeleeHitbox_30)(script);
             // fallthrough
         case 31:
-            N(AttackAheadHitboxAI_31)(script);
+            N(MeleeHitbox_31)(script);
             if (script->functionTemp[0] != 32) {
                 break;
             }
         case 32:
-            N(AttackAheadHitboxAI_32)(script);
+            N(MeleeHitbox_32)(script);
             if (script->functionTemp[0] != 33) {
                 break;
             }
         case 33:
-            N(AttackAheadHitboxAI_33)(script);
+            N(MeleeHitbox_33)(script);
             break;
         case 99:
             basic_ai_suspend(script);

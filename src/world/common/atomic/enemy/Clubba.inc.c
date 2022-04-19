@@ -62,9 +62,9 @@ extern Npc* wPartnerNpc;
 #define VAR_HITNPC_4        varTable[4]
 #define VAR_HITNPC_SOUND    varTable[15]
 
-//#include "world/common/AttackAheadHitboxAI_30.inc.c"
+//#include "world/common/MeleeHitbox_30.inc.c"
 
-void N(AttackAheadHitboxAI_30)(Evt* script) {
+void N(MeleeHitbox_30)(Evt* script) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -78,9 +78,9 @@ void N(AttackAheadHitboxAI_30)(Evt* script) {
     }
 }
 
-//#include "world/common/AttackAheadHitboxAI_31.inc.c"
+//#include "world/common/MeleeHitbox_31.inc.c"
 
-void N(AttackAheadHitboxAI_31)(Evt* script) {
+void N(MeleeHitbox_31)(Evt* script) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -93,9 +93,9 @@ void N(AttackAheadHitboxAI_31)(Evt* script) {
     }
 }
 
-//#include "world/common/AttackAheadHitboxAI_32.inc.c"
+//#include "world/common/MeleeHitbox_32.inc.c"
 
-void N(AttackAheadHitboxAI_32)(Evt* script) {
+void N(MeleeHitbox_32)(Evt* script) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 emoteTemp;
@@ -112,9 +112,9 @@ void N(AttackAheadHitboxAI_32)(Evt* script) {
     }
 }
 
-//#include "world/common/AttackAheadHitboxAI_33.inc.c"
+//#include "world/common/MeleeHitbox_33.inc.c"
 
-void N(AttackAheadHitboxAI_33)(Evt* script) {
+void N(MeleeHitbox_33)(Evt* script) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -125,9 +125,9 @@ void N(AttackAheadHitboxAI_33)(Evt* script) {
     }
 }
 
-//#include "world/common/AttackAheadHitbox_CanSeePlayer.inc.c"
+//#include "world/common/MeleeHitbox_CanSeePlayer.inc.c"
 
-s32 N(AttackAheadHitbox_CanSeePlayer)(Evt* script) {
+s32 N(MeleeHitbox_CanSeePlayer)(Evt* script) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Camera* camera = &gCameras[gCurrentCamID];
@@ -165,9 +165,9 @@ s32 N(AttackAheadHitbox_CanSeePlayer)(Evt* script) {
     return ret;
 }
 
-//#include "world/common/AttackAheadHitbox_Control.inc.c"
+//#include "world/common/MeleeHitbox_Control.inc.c"
 
-ApiStatus N(AttackAheadHitbox_Control)(Evt* script, s32 isInitialCall) {
+ApiStatus N(MeleeHitbox_Control)(Evt* script, s32 isInitialCall) {
     Enemy* hitboxEnemy = script->owner1.enemy;
     Npc* hitboxNpc = get_npc_unsafe(hitboxEnemy->npcID);
     Enemy* baseEnemy;
@@ -462,7 +462,7 @@ ApiStatus N(ClubbaNappingAI_Main)(Evt* script, s32 isInitialCall) {
     if (script->TEMP_STATE >= AI_STATE_NAPPING_CLUBBA_10
             && script->TEMP_STATE < AI_STATE_NAPPING_CLUBBA_30
             && enemy->VAR_ATTACK_STATE == CLUBBA_ATTACK_STATE_NONE
-            && N(AttackAheadHitbox_CanSeePlayer)(script)) {
+            && N(MeleeHitbox_CanSeePlayer)(script)) {
         script->TEMP_STATE = AI_STATE_NAPPING_CLUBBA_30;
     }
 
@@ -498,21 +498,21 @@ ApiStatus N(ClubbaNappingAI_Main)(Evt* script, s32 isInitialCall) {
             script->TEMP_STATE = AI_STATE_NAPPING_CLUBBA_3;
             break;
         case AI_STATE_NAPPING_CLUBBA_30: // pre swing
-            N(AttackAheadHitboxAI_30)(script);
+            N(MeleeHitbox_30)(script);
             if (script->TEMP_STATE != AI_STATE_NAPPING_CLUBBA_31) {
                 break;
             }
         case AI_STATE_NAPPING_CLUBBA_31: // raise club
-            N(AttackAheadHitboxAI_31)(script);
+            N(MeleeHitbox_31)(script);
             if (script->TEMP_STATE != AI_STATE_NAPPING_CLUBBA_32) {
                 break;
             }
         case AI_STATE_NAPPING_CLUBBA_32: // swing club
             // frustration, attack missed 
-            N(AttackAheadHitboxAI_32)(script);
+            N(MeleeHitbox_32)(script);
             break;
         case AI_STATE_NAPPING_CLUBBA_33: // missed
-            N(AttackAheadHitboxAI_33)(script);
+            N(MeleeHitbox_33)(script);
             break;
         case AI_STATE_NAPPING_CLUBBA_INIT_RETURN_HOME:
             // START RETURN HOME
@@ -575,7 +575,7 @@ ApiStatus N(func_80241170_C3ED60)(Evt* script, s32 isInitialCall) {
 
     if (script->TEMP_STATE < AI_STATE_NAPPING_CLUBBA_30
             && enemy->VAR_ATTACK_STATE == CLUBBA_ATTACK_STATE_NONE
-            && N(AttackAheadHitbox_CanSeePlayer)(script)) {
+            && N(MeleeHitbox_CanSeePlayer)(script)) {
         script->TEMP_STATE = AI_STATE_NAPPING_CLUBBA_30;
     }
 
@@ -604,19 +604,19 @@ ApiStatus N(func_80241170_C3ED60)(Evt* script, s32 isInitialCall) {
             basic_ai_lose_player(script, npcAISettings, territoryPtr);
             break;
         case 30:
-            N(AttackAheadHitboxAI_30)(script);
+            N(MeleeHitbox_30)(script);
         case 31:
-            N(AttackAheadHitboxAI_31)(script);
+            N(MeleeHitbox_31)(script);
             if (script->TEMP_STATE != 32) {
                 break;
             }
         case 32:
-            N(AttackAheadHitboxAI_32)(script);
+            N(MeleeHitbox_32)(script);
             if (script->TEMP_STATE != 33) {
                 break;
             }
         case 33:
-            N(AttackAheadHitboxAI_33)(script);
+            N(MeleeHitbox_33)(script);
             break;
         case AI_STATE_SUSPEND:
             basic_ai_suspend(script);

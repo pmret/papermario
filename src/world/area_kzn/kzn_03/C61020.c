@@ -6,13 +6,13 @@
 #include "world/common/AwaitPlayerNearNpc.inc.c"
 
 // hitbox piranha plant
-#include "world/common/AttackAheadHitboxAI_30.inc.c"
-#include "world/common/AttackAheadHitboxAI_31.inc.c"
-#include "world/common/AttackAheadHitboxAI_32.inc.c"
-#include "world/common/AttackAheadHitboxAI_33.inc.c"
-#include "world/common/AttackAheadHitbox_CanSeePlayer.inc.c"
-#include "world/common/AttackAheadHitbox_Control.inc.c"
-#include "world/common/AttackAheadHitbox_Main.inc.c" // unused?
+#include "world/common/MeleeHitbox_30.inc.c"
+#include "world/common/MeleeHitbox_31.inc.c"
+#include "world/common/MeleeHitbox_32.inc.c"
+#include "world/common/MeleeHitbox_33.inc.c"
+#include "world/common/MeleeHitbox_CanSeePlayer.inc.c"
+#include "world/common/MeleeHitbox_Control.inc.c"
+#include "world/common/MeleeHitbox_Main.inc.c" // unused?
 
 // main piranha plant
 #include "world/common/atomic/enemy/PiranhaPlant.inc.c"

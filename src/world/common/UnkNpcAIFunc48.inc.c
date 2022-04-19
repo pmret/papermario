@@ -14,7 +14,7 @@ void N(UnkNpcAIFunc48)(Evt* script, f32 arg1, f32 arg2, EnemyTerritoryThing* ter
         npc->duration = 20;
         script->functionTemp[0] = 33;
     } else {
-        s32 npcID = N(UnkFunc61)(script);
+        s32 npcID = N(ProjectileHitbox_GetUsableProjectileID)(script);
 
         if (npcID != NPC_SELF && get_enemy(npcID)->varTable[0] == 0 && npc->turnAroundYawAdjustment == 0) {
             npc->currentAnim.w = enemy->animList[8];

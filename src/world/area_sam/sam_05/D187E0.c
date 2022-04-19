@@ -3,19 +3,19 @@
 static char* N(exit_str_0) = "sam_04";
 static char* N(exit_str_1) = "sam_06";
 
-#include "world/common/AttackAheadHitboxAI_30.inc.c"
+#include "world/common/MeleeHitbox_30.inc.c"
 
-#include "world/common/AttackAheadHitboxAI_31.inc.c"
+#include "world/common/MeleeHitbox_31.inc.c"
 
-#include "world/common/AttackAheadHitboxAI_32.inc.c"
+#include "world/common/MeleeHitbox_32.inc.c"
 
-#include "world/common/AttackAheadHitboxAI_33.inc.c"
+#include "world/common/MeleeHitbox_33.inc.c"
 
-#include "world/common/AttackAheadHitbox_CanSeePlayer.inc.c"
+#include "world/common/MeleeHitbox_CanSeePlayer.inc.c"
 
-#include "world/common/AttackAheadHitbox_Control.inc.c"
+#include "world/common/MeleeHitbox_Control.inc.c"
 
-#include "world/common/AttackAheadHitbox_Main.inc.c"
+#include "world/common/MeleeHitbox_Main.inc.c"
 
 #include "world/common/atomic/enemy/PiranhaPlant_States.inc.c"
 
