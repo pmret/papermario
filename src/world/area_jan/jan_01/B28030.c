@@ -7,7 +7,7 @@ static char* N(exit_str_1) = "jan_02";
 
 INCLUDE_ASM(s32, "world/area_jan/jan_01/B28030", func_8024030C_B2833C);
 
-#include "world/common/atomic/enemy/UnkAI_2.inc.c"
+#include "world/common/atomic/enemy/FuzzyAI.inc.c"
 
 #include "world/common/SetCamera0Flag1000.inc.c"
 
