@@ -16,12 +16,12 @@ void N(ProjectileHitbox_30)(Evt* script) {
             fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &emoteTemp);
             npc->currentAnim.w = enemy->animList[0];
         } else {
-            Enemy* enemy2;
+            Enemy* hitboxEnemy;
 
             npc->currentAnim.w = enemy->animList[9];
-            enemy2 = get_enemy(npcID);
-            enemy2->varTable[4] = enemy->npcID;
-            enemy2->varTable[0] = 1;
+            hitboxEnemy = get_enemy(npcID);
+            hitboxEnemy->varTable[4] = enemy->npcID;
+            hitboxEnemy->varTable[0] = 1;
         }
         npc->duration = enemy->varTable[2];
         script->functionTemp[0] = AI_STATE_PROJECTILE_HITBOX_33;

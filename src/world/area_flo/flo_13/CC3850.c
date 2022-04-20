@@ -286,7 +286,7 @@ EvtScript N(npcAI_80244240) = {
     EVT_CALL(SetSelfVar, 3, 18)
     EVT_CALL(SetSelfVar, 5, 3)
     EVT_CALL(SetSelfVar, 7, 4)
-    EVT_CALL(N(UnkNpcAIMainFunc6), EVT_PTR(N(npcAISettings_80244210)))
+    EVT_CALL(N(LakituAI_Main), EVT_PTR(N(npcAISettings_80244210)))
     EVT_RETURN
     EVT_END
 };

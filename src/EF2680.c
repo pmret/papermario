@@ -154,4 +154,4 @@ INCLUDE_ASM(s32, "EF2680", func_80241C90_EF42A0);
 
 #include "world/common/DeadUnkNpcAIMainFunc5.inc.c"
 
-#include "world/common/DeadUnkNpcAIMainFunc6.inc.c"
+#include "world/common/DeadLakituAI_Main.inc.c"
