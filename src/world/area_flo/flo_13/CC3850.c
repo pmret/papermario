@@ -1437,7 +1437,7 @@ ApiStatus N(func_80241DB8_CC55C8)(Evt* script, s32 isInitialCall) {
             break;
 
         case 14:
-            N(UnkFunc6)(script, aiSettings, territoryPtr);
+            N(FlyingAI_14)(script, aiSettings, territoryPtr);
             break;
     }
 

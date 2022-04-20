@@ -177,7 +177,7 @@ glabel func_80241C90_EF42A0
 /* EF451C 80241F0C 00000000 */   nop
 .L80241F10:
 /* EF4520 80241F10 02C0282D */  daddu     $a1, $s6, $zero
-/* EF4524 80241F14 0C0903B2 */  jal       EF2680_UnkFunc6
+/* EF4524 80241F14 0C0903B2 */  jal       EF2680_FlyingAI_14
 /* EF4528 80241F18 02A0302D */   daddu    $a2, $s5, $zero
 .L80241F1C:
 /* EF452C 80241F1C 8E830070 */  lw        $v1, 0x70($s4)

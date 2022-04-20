@@ -166,7 +166,7 @@ glabel flo_17_func_80241C64_CD8F44
 /* CD9194 80241EB4 00000000 */   nop
 .L80241EB8:
 /* CD9198 80241EB8 02C0282D */  daddu     $a1, $s6, $zero
-/* CD919C 80241EBC 0C0903B2 */  jal       flo_17_UnkFunc6
+/* CD919C 80241EBC 0C0903B2 */  jal       flo_17_FlyingAI_14
 /* CD91A0 80241EC0 02A0302D */   daddu    $a2, $s5, $zero
 .L80241EC4:
 /* CD91A4 80241EC4 8E830070 */  lw        $v1, 0x70($s4)

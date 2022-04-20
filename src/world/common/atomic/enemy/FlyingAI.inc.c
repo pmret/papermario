@@ -20,7 +20,7 @@
 
 #include "world/common/FlyingAI_13.inc.c"
 
-#include "world/common/UnkFunc6.inc.c"
+#include "world/common/FlyingAI_14.inc.c"
 
 #include "world/common/UnkFunc5.inc.c"
 

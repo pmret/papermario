@@ -63,7 +63,7 @@ ApiStatus N(DeadFlyingAI_Main)(Evt* script, s32 isInitialCall) {
         N(FlyingAI_13)(script, aiSettings, territoryPtr);
         return 0;
     case 14:
-        N(UnkFunc6)(script, aiSettings, territoryPtr);
+        N(FlyingAI_14)(script, aiSettings, territoryPtr);
         /* fallthrough */
     default:
         return 0;

@@ -55,7 +55,7 @@ ApiStatus N(FlyingAI_Main)(Evt* script, s32 isInitialCall) {
             N(FlyingAI_13)(script, aiSettings, territoryPtr);
             break;
         case 14:
-            N(UnkFunc6)(script, aiSettings, territoryPtr);
+            N(FlyingAI_14)(script, aiSettings, territoryPtr);
             break;
     }
 
