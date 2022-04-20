@@ -1,7 +1,0 @@
-#include "world/common/PiranhaPlantAI_00.inc.c"
-#include "world/common/PiranhaPlantAI_01.inc.c"
-#include "world/common/PiranhaPlantAI_10.inc.c"
-#include "world/common/PiranhaPlantAI_11.inc.c"
-#include "world/common/PiranhaPlantAI_12.inc.c"
-#include "world/common/PiranhaPlantAI_13.inc.c"
-#include "world/common/PiranhaPlantAI_14.inc.c"

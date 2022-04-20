@@ -1,2 +1,16 @@
-#include "world/common/atomic/enemy/PiranhaPlant_States.inc.c"
+#include "world/common/MeleeHitbox_30.inc.c"
+#include "world/common/MeleeHitbox_31.inc.c"
+#include "world/common/MeleeHitbox_32.inc.c"
+#include "world/common/MeleeHitbox_33.inc.c"
+#include "world/common/MeleeHitbox_CanSeePlayer.inc.c"
+#include "world/common/MeleeHitbox_Control.inc.c"
+#include "world/common/MeleeHitbox_Main.inc.c" // unused?
+
+#include "world/common/PiranhaPlantAI_00.inc.c"
+#include "world/common/PiranhaPlantAI_01.inc.c"
+#include "world/common/PiranhaPlantAI_10.inc.c"
+#include "world/common/PiranhaPlantAI_11.inc.c"
+#include "world/common/PiranhaPlantAI_12.inc.c"
+#include "world/common/PiranhaPlantAI_13.inc.c"
+#include "world/common/PiranhaPlantAI_14.inc.c"
 #include "world/common/PiranhaPlantAI_Main.inc.c"

@@ -13,20 +13,4 @@ INCLUDE_ASM(s32, "world/area_sam/sam_07/D2BD30", func_802405B0_D2C2E0);
 
 #include "world/common/UnsetCamera0MoveFlag1.inc.c"
 
-#include "world/common/MeleeHitbox_30.inc.c"
-
-#include "world/common/MeleeHitbox_31.inc.c"
-
-#include "world/common/MeleeHitbox_32.inc.c"
-
-#include "world/common/MeleeHitbox_33.inc.c"
-
-#include "world/common/MeleeHitbox_CanSeePlayer.inc.c"
-
-#include "world/common/MeleeHitbox_Control.inc.c"
-
-#include "world/common/MeleeHitbox_Main.inc.c"
-
-#include "world/common/atomic/enemy/PiranhaPlant_States.inc.c"
-
-INCLUDE_ASM(s32, "world/area_sam/sam_07/D2BD30", func_80241DA4_D2DAD4);
+#include "world/common/atomic/enemy/PiranhaPlant.inc.c"
