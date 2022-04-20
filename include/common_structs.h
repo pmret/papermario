@@ -946,7 +946,7 @@ typedef struct BattleStatus {
     /* 0x086 */ s8 unk_86;
     /* 0x087 */ s8 blockResult; /* 0 = fail, 1 = success, -1 = mashed */
     /* 0x088 */ s8 itemUsesLeft; /* set to 2 for double dip, 3 for triple dip */
-    /* 0x089 */ u8 hpDrainCount;
+    /* 0x089 */ s8 hpDrainCount;
     /* 0x08A */ s8 nextMerleeSpellType;
     /* 0x08B */ s8 hustleTurns; /* numTurns from hustle drink, normally 0 */
     /* 0x08C */ char unk_8C;
@@ -1009,7 +1009,7 @@ typedef struct BattleStatus {
     /* 0x195 */ s8 statusDuration;
     /* 0x196 */ char unk_196;
     /* 0x197 */ u8 targetHomeIndex; /* some sort of home idnex used for target list construction */
-    /* 0x198 */ u8 powerBounceCounter;
+    /* 0x198 */ s8 powerBounceCounter;
     /* 0x199 */ s8 wasStatusInflicted; /* during last attack */
     /* 0x19A */ u8 unk_19A;
     /* 0x19B */ char unk_19B[5];
@@ -1219,7 +1219,7 @@ typedef struct ItemEntity {
     /* 0x28 */ u32* savedReadPos;
     /* 0x2C */ char unk_2C[2];
     /* 0x2E */ u8 unkCounter;
-    /* 0x2F */ s8 unk_2F;
+    /* 0x2F */ u8 unk_2F;
     /* 0x30 */ f32 scale;
     /* 0x34 */ Vec3s unk_34;
     /* 0x3A */ char unk_3A[2];

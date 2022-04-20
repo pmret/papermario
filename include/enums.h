@@ -1813,6 +1813,7 @@ enum StatusFlags {
     STATUS_FLAG_SHRINK          = 0x00080000,
     STATUS_FLAG_STONE           = 0x00100000,
     STATUS_FLAG_STOP            = 0x00200000,
+    STATUS_FLAG_400000          = 0x00400000,
     STATUS_FLAG_KO              = 0x01000000,
     STATUS_FLAG_GLOWING         = 0x02000000,
     STATUS_FLAG_TRANSPARENT     = 0x04000000,
@@ -1869,6 +1870,15 @@ enum PartnerIDs {
     PARTNER_BOW                 = 0x00000009,
     PARTNER_GOOMBARIA           = 0x0000000A,
     PARTNER_TWINK               = 0x0000000B,
+};
+
+enum AttackEventFlags {
+    ATTACK_EVENT_FLAG_1       = 0x1,
+    ATTACK_EVENT_FLAG_2       = 0x2,
+    ATTACK_EVENT_FLAG_4       = 0x4,
+    ATTACK_EVENT_FLAG_8       = 0x8,
+    ATTACK_EVENT_FLAG_10      = 0x10,
+    ATTACK_EVENT_FLAG_80      = 0x80,
 };
 
 enum PartnerActions {
@@ -2585,6 +2595,7 @@ enum BattleStatusFlags2 {
     BS_FLAGS2_NO_TARGET_AVAILABLE             = 0x00001000,
     BS_FLAGS2_1000000                         = 0x01000000,
     BS_FLAGS2_2000000                         = 0x02000000,
+    BS_FLAGS2_4000000                         = 0x04000000,
     BS_FLAGS2_8000000                         = 0x08000000,
 };
 
