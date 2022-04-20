@@ -2,13 +2,6 @@
 #include "npc.h"
 #include "effects.h"
 
-typedef struct TempStuff {
-    /* 0x00 */ f32 unk_00;
-    /* 0x04 */ char unk_04[0x8];
-    /* 0x0C */ f32 unk_0C;
-    /* 0x10 */ f32 unk_10;
-} TempStuff; // size = 0x??
-
 ApiStatus N(UnkFunc54)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Bytecode* args = script->ptrReadPos;
@@ -17,12 +10,12 @@ ApiStatus N(UnkFunc54)(Evt* script, s32 isInitialCall) {
     f32 hitDepth;
     Npc* npc;
     Npc* npc2;
-    TempStuff* temp_s5;
+    NpcAISettings* aiSettings;
     u32 vt0;
 
     if (get_enemy_safe(enemy->npcID) != NULL) {
         if (enemy->varTable[0] != 5) {
-            temp_s5 = (TempStuff*)evt_get_variable(script, *args++);
+            aiSettings = (NpcAISettings*)evt_get_variable(script, *args++);
             npc = get_npc_unsafe(enemy->npcID);
 
             if (enemy->varTable[1] & 2) {
@@ -70,10 +63,10 @@ ApiStatus N(UnkFunc54)(Evt* script, s32 isInitialCall) {
                         npc->rotation.x = 0.0f;
                         npc->rotation.y = 0.0f;
                         npc->rotation.z = 0.0f;
-                        npc->moveSpeed = temp_s5->unk_00;
+                        npc->moveSpeed = aiSettings->moveSpeed;
                         npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
-                        npc->jumpVelocity = temp_s5->unk_0C;
-                        npc->jumpScale = temp_s5->unk_10;
+                        npc->jumpVelocity = aiSettings->alertRadius;
+                        npc->jumpScale = aiSettings->unk_10.f;
                         npc->moveToPos.y = npc2->pos.y;
                         npc->flags &= ~NPC_FLAG_2;
                         enable_npc_shadow(npc);
@@ -88,7 +81,6 @@ ApiStatus N(UnkFunc54)(Evt* script, s32 isInitialCall) {
                 case 2:
                     break;
             }
-
 
             x = npc->pos.x;
             y = npc->pos.y + (npc->collisionHeight * 0.5);
