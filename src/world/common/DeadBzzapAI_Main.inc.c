@@ -54,7 +54,7 @@ ApiStatus N(DeadBzzapAI_Main)(Evt* script, s32 isInitialCall) {
         N(BzzapAI_10)(script, aiSettings, territoryPtr);
         /* fallthrough */
     case 11:
-        N(SixFloatsFunc)(script, aiSettings, territoryPtr);
+        N(BzzapAI_11)(script, aiSettings, territoryPtr);
         return 0;
     case 12:
         N(UnkNpcAIFunc14)(script, aiSettings, territoryPtr);

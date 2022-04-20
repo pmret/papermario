@@ -1,3 +1,9 @@
+// This AI is used by:
+// - Paragoomba + variants
+// - Paratroopa + variants
+// - Sky Guy
+// - Bzzap
+
 #include "world/common/BzzapAI_00.inc.c"
 
 #include "world/common/BzzapAI_01.inc.c"
@@ -8,7 +14,7 @@
 
 #include "world/common/BzzapAI_10.inc.c"
 
-#include "world/common/SixFloatsFunc.inc.c"
+#include "world/common/BzzapAI_11.inc.c"
 
 #include "world/common/UnkNpcAIFunc14.inc.c"
 

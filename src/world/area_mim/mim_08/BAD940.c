@@ -7,7 +7,7 @@ static char* N(exit_str_1) = "mim_05";
 
 ApiStatus func_80240068_BAD9A8(Evt* script, s32 isInitialCall) {
     script->varTable[0] = get_xz_dist_to_player(0.0f, 0.0f);
-    return 2;
+    return ApiStatus_DONE2;
 }
 
 #include "world/common/atomic/enemy/BzzapAI.inc.c"

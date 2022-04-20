@@ -121,7 +121,7 @@ glabel func_8024231C_9B8C9C
 .L802424B4_9B8E34:
 /* 9B8E34 802424B4 0260202D */  daddu     $a0, $s3, $zero
 /* 9B8E38 802424B8 0200282D */  daddu     $a1, $s0, $zero
-/* 9B8E3C 802424BC 0C0905CE */  jal       trd_07_SixFloatsFunc
+/* 9B8E3C 802424BC 0C0905CE */  jal       trd_07_BzzapAI_11
 /* 9B8E40 802424C0 0280302D */   daddu    $a2, $s4, $zero
 /* 9B8E44 802424C4 8E630070 */  lw        $v1, 0x70($s3)
 /* 9B8E48 802424C8 2402000C */  addiu     $v0, $zero, 0xc

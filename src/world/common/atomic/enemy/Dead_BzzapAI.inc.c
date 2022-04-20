@@ -8,7 +8,7 @@
 
 #include "world/common/BzzapAI_10.inc.c"
 
-#include "world/common/SixFloatsFunc.inc.c"
+#include "world/common/BzzapAI_11.inc.c"
 
 #include "world/common/UnkNpcAIFunc14.inc.c"
 

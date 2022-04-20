@@ -121,7 +121,7 @@ glabel func_802422EC_A091EC
 .L80242484_A09384:
 /* A09384 80242484 0260202D */  daddu     $a0, $s3, $zero
 /* A09388 80242488 0200282D */  daddu     $a1, $s0, $zero
-/* A0938C 8024248C 0C0905C2 */  jal       nok_15_SixFloatsFunc
+/* A0938C 8024248C 0C0905C2 */  jal       nok_15_BzzapAI_11
 /* A09390 80242490 0280302D */   daddu    $a2, $s4, $zero
 /* A09394 80242494 8E630070 */  lw        $v1, 0x70($s3)
 /* A09398 80242498 2402000C */  addiu     $v0, $zero, 0xc
