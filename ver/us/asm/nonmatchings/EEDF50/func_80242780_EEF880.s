@@ -129,19 +129,19 @@ glabel func_80242780_EEF880
 .L80242934_EEFA34:
 /* EEFA34 80242934 0280202D */  daddu     $a0, $s4, $zero
 /* EEFA38 80242938 0200282D */  daddu     $a1, $s0, $zero
-/* EEFA3C 8024293C 0C0908DD */  jal       EEDF50_FlyingAI_12
+/* EEFA3C 8024293C 0C0908DD */  jal       EEDF50_FlyingNoFirstStrikeAI_12
 /* EEFA40 80242940 0260302D */   daddu    $a2, $s3, $zero
 .L80242944_EEFA44:
 /* EEFA44 80242944 0280202D */  daddu     $a0, $s4, $zero
 /* EEFA48 80242948 0200282D */  daddu     $a1, $s0, $zero
-/* EEFA4C 8024294C 0C090929 */  jal       EEDF50_FlyingAI_13
+/* EEFA4C 8024294C 0C090929 */  jal       EEDF50_FlyingNoFirstStrikeAI_13
 /* EEFA50 80242950 0260302D */   daddu    $a2, $s3, $zero
 /* EEFA54 80242954 08090A5C */  j         .L80242970
 /* EEFA58 80242958 0000102D */   daddu    $v0, $zero, $zero
 .L8024295C_EEFA5C:
 /* EEFA5C 8024295C 0280202D */  daddu     $a0, $s4, $zero
 /* EEFA60 80242960 0200282D */  daddu     $a1, $s0, $zero
-/* EEFA64 80242964 0C0909C9 */  jal       EEDF50_FlyingAI_20
+/* EEFA64 80242964 0C0909C9 */  jal       EEDF50_FlyingNoFirstStrikeAI_20
 /* EEFA68 80242968 0260302D */   daddu    $a2, $s3, $zero
 .L8024296C_EEFA6C:
 /* EEFA6C 8024296C 0000102D */  daddu     $v0, $zero, $zero

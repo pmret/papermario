@@ -31,7 +31,7 @@ EvtScript N(npcAI_80244058) = {
     EVT_CALL(SetSelfVar, 5, 0)
     EVT_CALL(SetSelfVar, 6, 0)
     EVT_CALL(SetSelfVar, 1, 600)
-    EVT_CALL(N(UnkNpcAIMainFunc10), EVT_PTR(N(npcAISettings_80244028)))
+    EVT_CALL(N(FlyingNoFirstStrikeAI_Main), EVT_PTR(N(npcAISettings_80244028)))
     EVT_RETURN
     EVT_END
 };

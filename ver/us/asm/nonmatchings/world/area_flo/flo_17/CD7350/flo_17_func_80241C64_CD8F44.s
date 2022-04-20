@@ -155,12 +155,12 @@ glabel flo_17_func_80241C64_CD8F44
 .L80241E90:
 /* CD9170 80241E90 0280202D */  daddu     $a0, $s4, $zero
 /* CD9174 80241E94 02C0282D */  daddu     $a1, $s6, $zero
-/* CD9178 80241E98 0C09034C */  jal       flo_17_UnkNpcAIFunc14
+/* CD9178 80241E98 0C09034C */  jal       flo_17_FlyingAI_12
 /* CD917C 80241E9C 02A0302D */   daddu    $a2, $s5, $zero
 .L80241EA0:
 /* CD9180 80241EA0 0280202D */  daddu     $a0, $s4, $zero
 /* CD9184 80241EA4 02C0282D */  daddu     $a1, $s6, $zero
-/* CD9188 80241EA8 0C090399 */  jal       flo_17_UnkNpcAIFunc3
+/* CD9188 80241EA8 0C090399 */  jal       flo_17_FlyingAI_13
 /* CD918C 80241EAC 02A0302D */   daddu    $a2, $s5, $zero
 /* CD9190 80241EB0 080907B1 */  j         .L80241EC4
 /* CD9194 80241EB4 00000000 */   nop

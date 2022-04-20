@@ -1,10 +1,9 @@
 #include "common.h"
 #include "npc.h"
 #include "effects.h"
-#include "dead_structs.h"
 
-ApiStatus N(DeadUnkNpcAIMainFunc10)(Evt* script, s32 isInitialCall) {
-    DeadEnemy* enemy = script->owner1.enemy;
+ApiStatus N(FlyingNoFirstStrikeAI_Main)(Evt* script, s32 isInitialCall) {
+    Enemy* enemy = script->owner1.enemy;
     Bytecode* args = script->ptrReadPos;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     EnemyTerritoryThing territory;
@@ -19,12 +18,6 @@ ApiStatus N(DeadUnkNpcAIMainFunc10)(Evt* script, s32 isInitialCall) {
     territory.sizeZ = enemy->territory->wander.detectSizeZ;
     territory.halfHeight = 120.0f;
     territory.unk_1C = 0;
-
-    enemy->unk_108.x = npc->pos.x;
-    enemy->unk_108.y = npc->pos.y;
-    enemy->unk_108.z = npc->pos.z;
-    enemy->unk_114 = 0.0001f;
-    enemy->unk_118 = 0.0001f;
 
     if (isInitialCall) {
         N(UnkFunc5)(npc, enemy, script, aiSettings);
@@ -56,12 +49,12 @@ ApiStatus N(DeadUnkNpcAIMainFunc10)(Evt* script, s32 isInitialCall) {
             N(FlyingAI_11)(script, aiSettings, territoryPtr);
             break;
         case 12:
-            N(FlyingAI_12)(script, aiSettings, territoryPtr);
+            N(FlyingNoFirstStrikeAI_12)(script, aiSettings, territoryPtr);
         case 13:
-            N(FlyingAI_13)(script, aiSettings, territoryPtr);
+            N(FlyingNoFirstStrikeAI_13)(script, aiSettings, territoryPtr);
             break;
         case 20:
-            N(FlyingAI_20)(script, aiSettings, territoryPtr);
+            N(FlyingNoFirstStrikeAI_20)(script, aiSettings, territoryPtr);
             break;
     }
 

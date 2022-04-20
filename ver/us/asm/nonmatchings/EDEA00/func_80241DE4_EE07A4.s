@@ -166,12 +166,12 @@ glabel func_80241DE4_EE07A4
 .L8024203C:
 /* EE09FC 8024203C 0280202D */  daddu     $a0, $s4, $zero
 /* EE0A00 80242040 02C0282D */  daddu     $a1, $s6, $zero
-/* EE0A04 80242044 0C0903A1 */  jal       EDEA00_UnkNpcAIFunc14
+/* EE0A04 80242044 0C0903A1 */  jal       EDEA00_FlyingAI_12
 /* EE0A08 80242048 02A0302D */   daddu    $a2, $s5, $zero
 .L8024204C:
 /* EE0A0C 8024204C 0280202D */  daddu     $a0, $s4, $zero
 /* EE0A10 80242050 02C0282D */  daddu     $a1, $s6, $zero
-/* EE0A14 80242054 0C0903EE */  jal       EDEA00_UnkNpcAIFunc3
+/* EE0A14 80242054 0C0903EE */  jal       EDEA00_FlyingAI_13
 /* EE0A18 80242058 02A0302D */   daddu    $a2, $s5, $zero
 /* EE0A1C 8024205C 0809081C */  j         .L80242070
 /* EE0A20 80242060 00000000 */   nop

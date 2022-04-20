@@ -16,9 +16,9 @@
 
 #include "world/common/FlyingAI_11.inc.c"
 
-#include "world/common/UnkNpcAIFunc14.inc.c"
+#include "world/common/FlyingAI_12.inc.c"
 
-#include "world/common/UnkNpcAIFunc3.inc.c"
+#include "world/common/FlyingAI_13.inc.c"
 
 #include "world/common/UnkFunc6.inc.c"
 

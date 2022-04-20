@@ -12,7 +12,7 @@
 
 #include "world/common/NpcJumpFunc.inc.c"
 
-#include "world/common/FlyingAI_12.inc.c"
+#include "world/common/FlyingNoFirstStrikeAI_12.inc.c"
 
 #include "world/common/UnkFunc15.inc.c"
 

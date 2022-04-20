@@ -4,26 +4,28 @@
 void N(FlyingAI_12)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
-    f32 tempAngle;
-    f32 angleDiff;
+    f32 vt5 = enemy->varTable[5];
+    f32 jumpVelocity = vt5 / 100.0;
+    f32 vt6 = enemy->varTable[6];
+    f32 jumpScale = vt6 / 100.0;
 
-    npc->duration = (aiSettings->unk_20 / 2) + rand_int(aiSettings->unk_20 / 2 + 1);
-    npc->currentAnim.w = enemy->animList[3];
+    npc->currentAnim.w = enemy->animList[8];
+    npc->jumpVelocity = jumpVelocity;
+    npc->jumpScale = jumpScale;
     npc->moveSpeed = aiSettings->chaseSpeed;
+    npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
 
-    tempAngle = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
-    angleDiff = get_clamped_angle_diff(npc->yaw, tempAngle);
+    enemy->varTable[2] = 0;
 
-    if (aiSettings->unk_1C.s < fabsf(angleDiff)) {
-        tempAngle = npc->yaw;
-
-        if (angleDiff < 0.0f) {
-            tempAngle += -aiSettings->unk_1C.s;
-        } else {
-            tempAngle += aiSettings->unk_1C.s;
-        }
+    if (enemy->npcSettings->unk_2A & 2) {
+        npc->duration = 3;
+        script->functionTemp[0] = 13;
+    } else {
+        npc->duration = 1;
+        script->functionTemp[0] = 14;
+        enemy->unk_10.x = npc->pos.x;
+        enemy->unk_10.y = npc->pos.y;
+        enemy->unk_10.z = npc->pos.z;
+        enemy->unk_07 = 1;
     }
-
-    npc->yaw = clamp_angle(tempAngle);
-    script->functionTemp[0] = 13;
 }

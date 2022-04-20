@@ -3,10 +3,10 @@
 // - Ruff Puff
 // - Ember
 
-#include "world/common/FlyingAI_12.inc.c"
+#include "world/common/FlyingNoFirstStrikeAI_12.inc.c"
 
-#include "world/common/FlyingAI_13.inc.c"
+#include "world/common/FlyingNoFirstStrikeAI_13.inc.c"
 
-#include "world/common/FlyingAI_20.inc.c"
+#include "world/common/FlyingNoFirstStrikeAI_20.inc.c"
 
-#include "world/common/UnkNpcAIMainFunc10.inc.c"
+#include "world/common/FlyingNoFirstStrikeAI_Main.inc.c"

@@ -79,7 +79,7 @@ ApiStatus N(DeadUnkNpcAIMainFunc)(Evt* script, s32 isInitialCall) {
         N(NpcJumpFunc)(script, npcAISettings, territoryPtr);
         break;
     case 0xC:
-        N(FlyingAI_12)(script, npcAISettings, territoryPtr);
+        N(FlyingNoFirstStrikeAI_12)(script, npcAISettings, territoryPtr);
         /* fallthrough */
     case 0xD:
         N(UnkFunc15)(script, npcAISettings, territoryPtr);
