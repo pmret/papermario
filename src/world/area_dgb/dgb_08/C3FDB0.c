@@ -1363,7 +1363,7 @@ ApiStatus N(func_802438F0_C436A0)(Evt* script, s32 isInitialCall) {
         case 2:
             N(BzzapAI_02)(script, npcAISettings, territoryPtr);
         case 3:
-            N(UnkFunc4)(script, npcAISettings, territoryPtr);
+            N(BzzapAI_03)(script, npcAISettings, territoryPtr);
             if (script->functionTemp[0] == 12) {
                 npc->duration = 6;
             }

@@ -41,10 +41,10 @@ ApiStatus N(BzzapAI_Main)(Evt* script, s32 isInitialCall) {
         case 2:
             N(BzzapAI_02)(script, aiSettings, territoryPtr);
         case 3:
-            N(UnkFunc4)(script, aiSettings, territoryPtr);
+            N(BzzapAI_03)(script, aiSettings, territoryPtr);
             break;
         case 10:
-            N(UnkNpcAIFunc2)(script, aiSettings, territoryPtr);
+            N(BzzapAI_10)(script, aiSettings, territoryPtr);
         case 11:
             N(SixFloatsFunc)(script, aiSettings, territoryPtr);
             break;

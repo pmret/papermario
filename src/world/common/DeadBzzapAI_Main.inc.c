@@ -48,10 +48,10 @@ ApiStatus N(DeadBzzapAI_Main)(Evt* script, s32 isInitialCall) {
         N(UnkNpcAIFunc1)(script, aiSettings, territoryPtr);
         /* fallthrough */
     case 3:
-        N(UnkFunc4)(script, aiSettings, territoryPtr);
+        N(BzzapAI_03)(script, aiSettings, territoryPtr);
         return 0;
     case 10:
-        N(UnkNpcAIFunc2)(script, aiSettings, territoryPtr);
+        N(BzzapAI_10)(script, aiSettings, territoryPtr);
         /* fallthrough */
     case 11:
         N(SixFloatsFunc)(script, aiSettings, territoryPtr);

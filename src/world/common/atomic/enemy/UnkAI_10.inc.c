@@ -1,4 +1,4 @@
-#include "world/common/UnkNpcAIFunc13.inc.c"
+#include "world/common/BzzapAI_12.inc.c"
 
 #include "world/common/BzzapAI_13.inc.c"
 

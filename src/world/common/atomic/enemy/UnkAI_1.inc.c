@@ -21,7 +21,7 @@
 #include "world/common/NpcJumpFunc.inc.c"
 
 // found in 4 files
-#include "world/common/UnkNpcAIFunc13.inc.c"
+#include "world/common/BzzapAI_12.inc.c"
 
 #include "world/common/UnkFunc15.inc.c"
 

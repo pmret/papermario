@@ -4,9 +4,9 @@
 
 #include "world/common/UnkNpcAIFunc1.inc.c"
 
-#include "world/common/UnkFunc4.inc.c"
+#include "world/common/BzzapAI_03.inc.c"
 
-#include "world/common/UnkNpcAIFunc2.inc.c"
+#include "world/common/BzzapAI_10.inc.c"
 
 #include "world/common/SixFloatsFunc.inc.c"
 
