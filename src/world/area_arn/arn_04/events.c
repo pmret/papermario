@@ -70,7 +70,7 @@ f32 N(sixFloats)[] = {
     1.5f, 20.0f,
 };
 
-#include "world/common/atomic/enemy/UnkAI_9.inc.c"
+#include "world/common/atomic/enemy/BzzapAI.inc.c"
 
 NpcAISettings N(npcAISettings_802436F4) = {
     .moveSpeed = 1.8f,

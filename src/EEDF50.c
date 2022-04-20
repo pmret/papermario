@@ -5,7 +5,7 @@
 
 #define NAMESPACE EEDF50
 
-#include "world/common/atomic/enemy/Dead_UnkAI_9.inc.c"
+#include "world/common/atomic/enemy/Dead_BzzapAI.inc.c"
 
 #include "world/common/UnkNpcAIFunc13.inc.c"
 

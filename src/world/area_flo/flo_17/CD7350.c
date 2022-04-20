@@ -625,7 +625,7 @@ EvtScript N(makeEntities) = {
     EVT_END
 };
 
-#include "world/common/atomic/enemy/UnkAI_9.inc.c"
+#include "world/common/atomic/enemy/BzzapAI.inc.c"
 
 s32 N(func_80241568_CD8848)(void) {
     s32 i;
@@ -904,4 +904,4 @@ INCLUDE_ASM(ApiStatus, "world/area_flo/flo_17/CD7350", flo_17_func_80241C64_CD8F
             s32 isInitialCall);
 #endif
 
-#include "world/common/atomic/enemy/UnkAI_6.inc.c"
+#include "world/common/atomic/enemy/LakituAI.inc.c"

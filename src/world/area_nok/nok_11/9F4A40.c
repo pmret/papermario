@@ -5,7 +5,7 @@ static char* N(exit_str_1) = "nok_12";
 
 #include "world/common/atomic/enemy/UnkAI_5.inc.c"
 
-#include "world/common/atomic/enemy/UnkAI_9.inc.c"
+#include "world/common/atomic/enemy/BzzapAI.inc.c"
 
 #include "common/foliage.inc.c"
 

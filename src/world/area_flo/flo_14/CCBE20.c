@@ -323,7 +323,7 @@ EvtScript N(80245224) = {
     EVT_END
 };
 
-#include "world/common/atomic/enemy/UnkAI_9.inc.c"
+#include "world/common/atomic/enemy/BzzapAI.inc.c"
 
 #include "world/common/atomic/ItemChoice_PartA.inc.c"
 

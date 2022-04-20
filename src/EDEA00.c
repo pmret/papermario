@@ -7,7 +7,7 @@
 
 #include "world/common/UnkFunc41.inc.c"
 
-#include "world/common/atomic/enemy/Dead_UnkAI_9.inc.c"
+#include "world/common/atomic/enemy/Dead_BzzapAI.inc.c"
 
 const char D_80247B44_EE6504[] = "JUGEMU MOVE";
 

@@ -513,7 +513,7 @@ static s32 N(pad_3CD8)[] = {
     0x00000000, 0x00000000,
 };
 
-#include "world/common/atomic/enemy/UnkAI_9.inc.c"
+#include "world/common/atomic/enemy/BzzapAI.inc.c"
 
 #include "world/common/atomic/enemy/UnkAI_10.inc.c"
 

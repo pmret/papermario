@@ -2,7 +2,7 @@
 
 #include "world/common/atomic/enemy/UnkAI_5.inc.c"
 
-#include "world/common/atomic/enemy/UnkAI_9.inc.c"
+#include "world/common/atomic/enemy/BzzapAI.inc.c"
 
 // todo remove when below are decompiled
 static const f32 padding = 0.0f;

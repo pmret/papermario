@@ -353,6 +353,6 @@ EvtScript N(802451C4) = {
     EVT_END
 };
 
-#include "world/common/atomic/enemy/UnkAI_9.inc.c"
+#include "world/common/atomic/enemy/BzzapAI.inc.c"
 
 #include "world/common/atomic/enemy/UnkAI_10.inc.c"

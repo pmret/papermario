@@ -503,7 +503,7 @@ NpcAISettings N(npcAISettings_80244D24) = {
     .unk_2C = 1,
 };
 
-#include "world/common/atomic/enemy/UnkAI_9.inc.c"
+#include "world/common/atomic/enemy/BzzapAI.inc.c"
 
 void N(func_80241618_BFEE98)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;

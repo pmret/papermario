@@ -1203,7 +1203,7 @@ NpcGroupList N(npcGroupList_802478E8) = {
     {},
 };
 
-#include "world/common/atomic/enemy/UnkAI_9.inc.c"
+#include "world/common/atomic/enemy/BzzapAI.inc.c"
 
 ApiStatus PostChapter3StatUpdate(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
