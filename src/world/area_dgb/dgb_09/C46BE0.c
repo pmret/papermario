@@ -719,90 +719,7 @@ ApiStatus N(func_8024061C_C471FC)(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-void N(func_802408D0_C474B0)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
-    Enemy* enemy = script->owner1.enemy;
-    Npc* npc = get_npc_unsafe(enemy->npcID);
-
-    if (npc->duration > 0) {
-        npc->duration--;
-    }
-
-    if (npc->duration == 1) {
-        npc->currentAnim.w = enemy->animList[12];
-    } else if (npc->duration <= 0) {
-        npc->currentAnim.w = enemy->animList[10];
-        npc->duration = 0;
-        script->functionTemp[0] = 1;
-    }
-}
-
-void N(func_80240958_C47538)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
-    Enemy* enemy = script->owner1.enemy;
-    Npc* npc = get_npc_unsafe(enemy->npcID);
-    PlayerData* playerData = get_player_data();
-    s32 phi_s2 = FALSE;
-    s32 var;
-    f32 posX, posZ;
-
-    if (basic_ai_try_detect_player(territory, enemy, 80.0f, 0.0f, 0)) {
-        if ((gPlayerStatusPtr->actionState ==  2) || (gPlayerStatusPtr->actionState == 26) ||
-            (gPlayerStatusPtr->actionState ==  3) || (gPlayerStatusPtr->actionState == 14) ||
-            (gPlayerStatusPtr->actionState == 16) || (gPlayerStatusPtr->actionState == 11) ||
-            (gPlayerStatusPtr->actionState == 10) || (gPlayerStatusPtr->actionState == 18) ||
-            (gPlayerStatusPtr->actionState == 19) || (gPlayerStatusPtr->actionState == 37)) {
-            phi_s2 = TRUE;
-        }
-
-        if (playerData->currentPartner == PARTNER_KOOPER) {
-            if (gPartnerActionStatus.partnerActionState == playerData->currentPartner) {
-                phi_s2 = TRUE;
-            }
-        }
-    }
-
-    if (((playerData->currentPartner == PARTNER_GOOMBARIO) && (gPartnerActionStatus.partnerActionState != PARTNER_ACTION_NONE)) ||
-        ((playerData->currentPartner == PARTNER_BOMBETTE) && (gPartnerActionStatus.partnerActionState == PARTNER_ACTION_BOMBETTE_2))) {
-        posX = npc->pos.x;
-        posZ = npc->pos.z;
-        add_vec2D_polar(&posX, &posZ, 0.0f, npc->yaw);
-        if (dist2D(posX, posZ, wPartnerNpc->pos.x, wPartnerNpc->pos.z) <= 80.0f) {
-            phi_s2 = TRUE;
-        }
-    }
-
-    if (phi_s2) {
-        ai_enemy_play_sound(npc, 0xB000000E, 0);
-        npc->currentAnim.w = enemy->animList[11];
-        npc->duration = 10;
-        fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &var);
-        ai_enemy_play_sound(npc, 0x2F4, 0x200000);
-        script->functionTemp[0] = 2;
-    }
-
-    npc->duration++;
-    if (npc->duration == 27) {
-        ai_enemy_play_sound(npc, 0xB000000C, 0);
-    } else if (npc->duration == 57) {
-        ai_enemy_play_sound(npc, 0xB000000D, 0);
-    } else if (npc->duration == 59) {
-        npc->currentAnim.w = enemy->animList[12];
-    } else if (npc->duration == 60) {
-        npc->currentAnim.w = enemy->animList[10];
-        npc->duration = 0;
-    }
-}
-
-void N(func_80240C10_C477F0)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
-    Enemy* enemy = script->owner1.enemy;
-    Npc* npc = get_npc_unsafe(enemy->npcID);
-
-    npc->duration--;
-    if (npc->duration <= 0) {
-        npc->duration = 1;
-        enemy->varTable[7] = 40;
-        script->functionTemp[0] = 3;
-    }
-}
+#include "world/common/enemy/ClubbaNappingAI_States.inc.c"
 
 void N(func_80240C74_C47854)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
@@ -939,13 +856,13 @@ ApiStatus N(func_802410D4_C47CB4)(Evt* script, s32 isInitialCall) {
 
     switch (script->functionTemp[0]) {
         case 0:
-            N(func_802408D0_C474B0)(script, npcAISettings, territoryPtr);
+            N(ClubbaNappingAI_Init)(script, npcAISettings, territoryPtr);
             break;
         case 1:
-            N(func_80240958_C47538)(script, npcAISettings, territoryPtr);
+            N(ClubbaNappingAI_Sleep)(script, npcAISettings, territoryPtr);
             break;
         case 2:
-            N(func_80240C10_C477F0)(script, npcAISettings, territoryPtr);
+            N(ClubbaNappingAI_WakeUp)(script, npcAISettings, territoryPtr);
             break;
         case 3:
             N(func_80240C74_C47854)(script, npcAISettings, territoryPtr);

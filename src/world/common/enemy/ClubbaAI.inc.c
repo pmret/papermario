@@ -14,37 +14,6 @@ static AIStateHandler N(MontyMoleAI_PreBurrow);
 static AIStateHandler N(MontyMoleAI_Burrow);
 */
 
-enum AiStateNappingClubba {
-    AI_STATE_NAPPING_CLUBBA_INIT                = 0,
-    AI_STATE_NAPPING_CLUBBA_SLEEP               = 1,
-    AI_STATE_NAPPING_CLUBBA_WAKE_UP             = 2,
-    AI_STATE_NAPPING_CLUBBA_3                   = 3,
-    AI_STATE_NAPPING_CLUBBA_ACQUIRE             = 4,
-    AI_STATE_NAPPING_CLUBBA_10                  = 10,
-    AI_STATE_NAPPING_CLUBBA_11                  = 11,
-    AI_STATE_NAPPING_CLUBBA_INIT_CHASE          = AI_STATE_CHASE_INIT,
-    AI_STATE_NAPPING_CLUBBA_CHASE               = AI_STATE_CHASE,
-    AI_STATE_NAPPING_CLUBBA_LOSE_PLAYER         = AI_STATE_LOSE_PLAYER,
-    AI_STATE_NAPPING_CLUBBA_30                  = 30,
-    AI_STATE_NAPPING_CLUBBA_31                  = 31,
-    AI_STATE_NAPPING_CLUBBA_32                  = 32,
-    AI_STATE_NAPPING_CLUBBA_33                  = 33,
-    AI_STATE_NAPPING_CLUBBA_INIT_RETURN_HOME    = 40,
-    AI_STATE_NAPPING_CLUBBA_RETURN_HOME         = 41,
-    AI_STATE_NAPPING_CLUBBA_50                  = 50,
-    AI_STATE_NAPPING_CLUBBA_99                  = 99,
-};
-
-enum ClubbaAttackState {
-    CLUBBA_ATTACK_STATE_NONE        = 0,
-    CLUBBA_ATTACK_STATE_INIT        = 1,
-    CLUBBA_ATTACK_STATE_PREPARE     = 2,
-    CLUBBA_ATTACK_STATE_STRIKE      = 3,  // hitbox is active
-    CLUBBA_ATTACK_STATE_POST        = 4
-};
-
-extern Npc* wPartnerNpc;
-
 // ai script
 #define TEMP_STATE                  functionTemp[0]
 #define TEMP_STATE_AFTER_SUSPEND    functionTemp[1]
@@ -237,95 +206,7 @@ ApiStatus N(MeleeHitbox_Control)(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-void N(ClubbaNappingAI_Init)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
-    Enemy* enemy = script->owner1.enemy;
-    Npc* npc = get_npc_unsafe(enemy->npcID);
-
-    if (npc->duration > 0) {
-        npc->duration--;
-    }
-
-    if (npc->duration == 1) {
-        npc->currentAnim.w = enemy->animList[12];
-    } else if (npc->duration <= 0) {
-        npc->currentAnim.w = enemy->animList[10];
-        npc->duration = 0;
-        script->TEMP_STATE = AI_STATE_NAPPING_CLUBBA_SLEEP;
-    }
-}
-
-void N(ClubbaNappingAI_Sleep)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
-    Enemy* enemy = script->owner1.enemy;
-    Npc* npc = get_npc_unsafe(enemy->npcID);
-    PlayerData* playerData = get_player_data();
-    s32 shouldWakeUp = FALSE;
-    s32 emoteTemp;
-    f32 posX, posZ;
-
-    if (basic_ai_try_detect_player(territory, enemy, 80.0f, 0.0f, 0)) {
-        if (   gPlayerStatusPtr->actionState == ACTION_STATE_RUN
-            || gPlayerStatusPtr->actionState == ACTION_STATE_SPIN
-            || gPlayerStatusPtr->actionState == ACTION_STATE_JUMP
-            || gPlayerStatusPtr->actionState == ACTION_STATE_GROUND_POUND
-            || gPlayerStatusPtr->actionState == ACTION_STATE_ULTRA_POUND
-            || gPlayerStatusPtr->actionState == ACTION_STATE_STEP_DOWN_LAND
-            || gPlayerStatusPtr->actionState == ACTION_STATE_LAND
-            || gPlayerStatusPtr->actionState == ACTION_STATE_HAMMER
-            || gPlayerStatusPtr->actionState == ACTION_STATE_13
-            || gPlayerStatusPtr->actionState == ACTION_STATE_25) {
-            shouldWakeUp = TRUE;
-        }
-
-        if (playerData->currentPartner == PARTNER_KOOPER) {
-            if (gPartnerActionStatus.partnerActionState == playerData->currentPartner) {
-                shouldWakeUp = TRUE;
-            }
-        }
-    }
-
-    if (((playerData->currentPartner == PARTNER_GOOMBARIO) && (gPartnerActionStatus.partnerActionState != PARTNER_ACTION_NONE)) ||
-        ((playerData->currentPartner == PARTNER_BOMBETTE) && (gPartnerActionStatus.partnerActionState == PARTNER_ACTION_BOMBETTE_2))) {
-        posX = npc->pos.x;
-        posZ = npc->pos.z;
-        add_vec2D_polar(&posX, &posZ, 0.0f, npc->yaw);
-        if (dist2D(posX, posZ, wPartnerNpc->pos.x, wPartnerNpc->pos.z) <= 80.0f) {
-            shouldWakeUp = TRUE;
-        }
-    }
-
-    if (shouldWakeUp) {
-        ai_enemy_play_sound(npc, 0xB000000E, 0);
-        npc->currentAnim.w = enemy->animList[11];
-        npc->duration = 10;
-        fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &emoteTemp);
-        ai_enemy_play_sound(npc, SOUND_2F4, 0x200000);
-        script->TEMP_STATE = AI_STATE_NAPPING_CLUBBA_WAKE_UP;
-    }
-
-    npc->duration++;
-    if (npc->duration == 27) {
-        ai_enemy_play_sound(npc, 0xB000000C, 0);
-    } else if (npc->duration == 57) {
-        ai_enemy_play_sound(npc, 0xB000000D, 0);
-    } else if (npc->duration == 59) {
-        npc->currentAnim.w = enemy->animList[12];
-    } else if (npc->duration == 60) {
-        npc->currentAnim.w = enemy->animList[10];
-        npc->duration = 0;
-    }
-}
-
-void N(ClubbaNappingAI_WakeUp)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
-    Enemy* enemy = script->owner1.enemy;
-    Npc* npc = get_npc_unsafe(enemy->npcID);
-
-    npc->duration--;
-    if (npc->duration <= 0) {
-        npc->duration = 1;
-        enemy->VAR_NEXT_STATE = AI_STATE_NAPPING_CLUBBA_INIT_RETURN_HOME;
-        script->TEMP_STATE = AI_STATE_NAPPING_CLUBBA_3;
-    }
-}
+#include "world/common/enemy/ClubbaNappingAI_States.inc.c"
 
 void N(func_802409C0_C3E5B0)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
