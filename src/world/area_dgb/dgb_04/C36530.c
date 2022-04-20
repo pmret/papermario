@@ -280,7 +280,7 @@ EvtScript N(makeEntities) = {
     EVT_END
 };
 
-#include "world/common/atomic/enemy/BzzapAI.inc.c"
+#include "world/common/atomic/enemy/FlyingAI.inc.c"
 
 void N(func_802414F8_C37A28)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
@@ -535,18 +535,18 @@ ApiStatus N(func_80242154_C38684)(Evt* script, s32 isInitialCall) {
 
     switch (script->functionTemp[0]) {
         case 0:
-            N(BzzapAI_00)(script, aiSettings, territoryPtr);
+            N(FlyingAI_00)(script, aiSettings, territoryPtr);
             func_802DE894(npc->spriteInstanceID, 0, 0, 0, 0, 0, 0);
         case 1:
-            N(BzzapAI_01)(script, aiSettings, territoryPtr);
+            N(FlyingAI_01)(script, aiSettings, territoryPtr);
             if (script->functionTemp[0] == 12) {
                 npc->duration = 6;
             }
             break;
         case 2:
-            N(BzzapAI_02)(script, aiSettings, territoryPtr);
+            N(FlyingAI_02)(script, aiSettings, territoryPtr);
         case 3:
-            N(BzzapAI_03)(script, aiSettings, territoryPtr);
+            N(FlyingAI_03)(script, aiSettings, territoryPtr);
             if (script->functionTemp[0] == 12) {
                 npc->duration = 6;
             }

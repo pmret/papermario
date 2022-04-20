@@ -118,7 +118,7 @@ EvtScript N(npcAI_80243C08) = {
     EVT_CALL(SetSelfVar, 5, -850)
     EVT_CALL(SetSelfVar, 6, 60)
     EVT_CALL(SetSelfVar, 1, 700)
-    EVT_CALL(N(BzzapAI_Main), EVT_PTR(N(npcAISettings_80243BD8)))
+    EVT_CALL(N(FlyingAI_Main), EVT_PTR(N(npcAISettings_80243BD8)))
     EVT_RETURN
     EVT_END
 };
@@ -1203,7 +1203,7 @@ NpcGroupList N(npcGroupList_802478E8) = {
     {},
 };
 
-#include "world/common/atomic/enemy/BzzapAI.inc.c"
+#include "world/common/atomic/enemy/FlyingAI.inc.c"
 
 ApiStatus PostChapter3StatUpdate(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;

@@ -41,27 +41,27 @@ ApiStatus N(DeadUnkNpcAIMainFunc10)(Evt* script, s32 isInitialCall) {
 
     switch (script->functionTemp[0]) {
         case 0:
-            N(BzzapAI_00)(script, aiSettings, territoryPtr);
+            N(FlyingAI_00)(script, aiSettings, territoryPtr);
         case 1:
-            N(BzzapAI_01)(script, aiSettings, territoryPtr);
+            N(FlyingAI_01)(script, aiSettings, territoryPtr);
             break;
         case 2:
-            N(BzzapAI_02)(script, aiSettings, territoryPtr);
+            N(FlyingAI_02)(script, aiSettings, territoryPtr);
         case 3:
-            N(BzzapAI_03)(script, aiSettings, territoryPtr);
+            N(FlyingAI_03)(script, aiSettings, territoryPtr);
             break;
         case 10:
-            N(BzzapAI_10)(script, aiSettings, territoryPtr);
+            N(FlyingAI_10)(script, aiSettings, territoryPtr);
         case 11:
-            N(BzzapAI_11)(script, aiSettings, territoryPtr);
+            N(FlyingAI_11)(script, aiSettings, territoryPtr);
             break;
         case 12:
-            N(BzzapAI_12)(script, aiSettings, territoryPtr);
+            N(FlyingAI_12)(script, aiSettings, territoryPtr);
         case 13:
-            N(BzzapAI_13)(script, aiSettings, territoryPtr);
+            N(FlyingAI_13)(script, aiSettings, territoryPtr);
             break;
         case 20:
-            N(BzzapAI_20)(script, aiSettings, territoryPtr);
+            N(FlyingAI_20)(script, aiSettings, territoryPtr);
             break;
     }
 

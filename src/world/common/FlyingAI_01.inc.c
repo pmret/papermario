@@ -2,7 +2,7 @@
 #include "npc.h"
 #include "effects.h"
 
-void N(BzzapAI_01)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(FlyingAI_01)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 cond = FALSE;

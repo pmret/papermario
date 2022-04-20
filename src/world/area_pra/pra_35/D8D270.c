@@ -82,7 +82,7 @@ ApiStatus func_802423CC_D8F61C(Evt *script, s32 isInitialCall) {
             pra_35_NpcJumpFunc(script, npcAISettings, territoryPtr);
             break;
         case 12:
-            pra_35_BzzapAI_12(script, npcAISettings, territoryPtr);
+            pra_35_FlyingAI_12(script, npcAISettings, territoryPtr);
             // fallthrough
         case 13:
             pra_35_UnkFunc15(script, npcAISettings, territoryPtr);

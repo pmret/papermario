@@ -16,7 +16,7 @@ INCLUDE_ASM(s32, "world/area_omo/omo_17/DEF400", func_80240B1C_DEF9BC);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_17/DEF400", func_80240CE0_DEFB80);
 
-#include "world/common/atomic/enemy/BzzapAI.inc.c"
+#include "world/common/atomic/enemy/FlyingAI.inc.c"
 
 #include "world/common/atomic/enemy/ThrowAttackAI.inc.c"
 

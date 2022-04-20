@@ -17,7 +17,7 @@ static char* N(exit_str_1) = "";
 
 INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_802402F4_DAD6F4);
 
-#include "world/common/atomic/enemy/BzzapAI.inc.c"
+#include "world/common/atomic/enemy/FlyingAI.inc.c"
 
 INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_80241898_DAEC98);
 

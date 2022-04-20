@@ -182,7 +182,7 @@ EvtScript N(npcAI_80242A30) = {
     EVT_CALL(SetSelfVar, 5, -630)
     EVT_CALL(SetSelfVar, 6, 50)
     EVT_CALL(SetSelfVar, 1, 200)
-    EVT_CALL(N(BzzapAI_Main), EVT_PTR(N(npcAISettings_80242A00)))
+    EVT_CALL(N(FlyingAI_Main), EVT_PTR(N(npcAISettings_80242A00)))
     EVT_RETURN
     EVT_END
 };
@@ -513,7 +513,7 @@ static s32 N(pad_3CD8)[] = {
     0x00000000, 0x00000000,
 };
 
-#include "world/common/atomic/enemy/BzzapAI.inc.c"
+#include "world/common/atomic/enemy/FlyingAI.inc.c"
 
 #include "world/common/atomic/enemy/FlyingNoFirstStrikeAI.inc.c"
 

@@ -1221,7 +1221,7 @@ NpcGroupList N(npcGroupList_80247984) = {
 
 #include "world/common/UnkFunc41.inc.c"
 
-#include "world/common/atomic/enemy/BzzapAI.inc.c"
+#include "world/common/atomic/enemy/FlyingAI.inc.c"
 
 s32 N(func_802416BC_CC4ECC)(void) {
     s32 i;
@@ -1401,7 +1401,7 @@ ApiStatus N(func_80241DB8_CC55C8)(Evt* script, s32 isInitialCall) {
 
     switch (script->functionTemp[0]) {
         case 0:
-            N(BzzapAI_00)(script, aiSettings, territoryPtr);
+            N(FlyingAI_00)(script, aiSettings, territoryPtr);
 
         case 1:
             N(func_80241704_CC4F14)(script, aiSettings, territoryPtr);

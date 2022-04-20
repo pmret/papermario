@@ -471,7 +471,7 @@ EvtScript N(npcAI_80243674) = {
     EVT_CALL(SetSelfVar, 5, -630)
     EVT_CALL(SetSelfVar, 6, 50)
     EVT_CALL(SetSelfVar, 1, 200)
-    EVT_CALL(N(BzzapAI_Main), EVT_PTR(N(npcAISettings_80243644)))
+    EVT_CALL(N(FlyingAI_Main), EVT_PTR(N(npcAISettings_80243644)))
     EVT_RETURN
     EVT_END
 };

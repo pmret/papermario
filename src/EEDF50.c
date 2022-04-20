@@ -5,12 +5,12 @@
 
 #define NAMESPACE EEDF50
 
-#include "world/common/atomic/enemy/Dead_BzzapAI.inc.c"
+#include "world/common/atomic/enemy/Dead_FlyingAI.inc.c"
 
-#include "world/common/BzzapAI_12.inc.c"
+#include "world/common/FlyingAI_12.inc.c"
 
-#include "world/common/BzzapAI_13.inc.c"
+#include "world/common/FlyingAI_13.inc.c"
 
-#include "world/common/BzzapAI_20.inc.c"
+#include "world/common/FlyingAI_20.inc.c"
 
 INCLUDE_ASM(s32, "EEDF50", func_80242780_EEF880);

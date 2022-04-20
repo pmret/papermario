@@ -834,7 +834,7 @@ ApiStatus N(func_802419B0_C32E90)(Evt* script, s32 isInitialCall) {
             N(NpcJumpFunc)(script, npcAISettings, territoryPtr);
             break;
         case 12:
-            N(BzzapAI_12)(script, npcAISettings, territoryPtr);
+            N(FlyingAI_12)(script, npcAISettings, territoryPtr);
         case 13:
             N(UnkFunc15)(script, npcAISettings, territoryPtr);
             break;

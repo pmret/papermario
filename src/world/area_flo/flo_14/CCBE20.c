@@ -34,7 +34,7 @@ EvtScript N(npcAI_80244508) = {
     EVT_CALL(SetSelfVar, 5, -630)
     EVT_CALL(SetSelfVar, 6, 50)
     EVT_CALL(SetSelfVar, 1, 200)
-    EVT_CALL(N(BzzapAI_Main), EVT_PTR(N(npcAISettings_802444D8)))
+    EVT_CALL(N(FlyingAI_Main), EVT_PTR(N(npcAISettings_802444D8)))
     EVT_RETURN
     EVT_END
 };
@@ -323,7 +323,7 @@ EvtScript N(80245224) = {
     EVT_END
 };
 
-#include "world/common/atomic/enemy/BzzapAI.inc.c"
+#include "world/common/atomic/enemy/FlyingAI.inc.c"
 
 #include "world/common/atomic/ItemChoice_PartA.inc.c"
 

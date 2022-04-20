@@ -8,7 +8,7 @@
 
 extern const s32 D_802453E0_EEB990[];
 
-#include "world/common/atomic/enemy/Dead_BzzapAI.inc.c"
+#include "world/common/atomic/enemy/Dead_FlyingAI.inc.c"
 
 #include "world/common/GetNpcCollisionHeight.inc.c"
 

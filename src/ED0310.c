@@ -5,4 +5,4 @@
 
 #define NAMESPACE ED0310
 
-#include "world/common/atomic/enemy/Dead_BzzapAI.inc.c"
+#include "world/common/atomic/enemy/Dead_FlyingAI.inc.c"

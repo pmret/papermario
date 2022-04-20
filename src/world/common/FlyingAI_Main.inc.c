@@ -2,7 +2,7 @@
 #include "npc.h"
 #include "effects.h"
 
-ApiStatus N(BzzapAI_Main)(Evt* script, s32 isInitialCall) {
+ApiStatus N(FlyingAI_Main)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Bytecode* args = script->ptrReadPos;
     Npc* npc = get_npc_unsafe(enemy->npcID);
@@ -34,19 +34,19 @@ ApiStatus N(BzzapAI_Main)(Evt* script, s32 isInitialCall) {
 
     switch (script->functionTemp[0]) {
         case 0:
-            N(BzzapAI_00)(script, aiSettings, territoryPtr);
+            N(FlyingAI_00)(script, aiSettings, territoryPtr);
         case 1:
-            N(BzzapAI_01)(script, aiSettings, territoryPtr);
+            N(FlyingAI_01)(script, aiSettings, territoryPtr);
             break;
         case 2:
-            N(BzzapAI_02)(script, aiSettings, territoryPtr);
+            N(FlyingAI_02)(script, aiSettings, territoryPtr);
         case 3:
-            N(BzzapAI_03)(script, aiSettings, territoryPtr);
+            N(FlyingAI_03)(script, aiSettings, territoryPtr);
             break;
         case 10:
-            N(BzzapAI_10)(script, aiSettings, territoryPtr);
+            N(FlyingAI_10)(script, aiSettings, territoryPtr);
         case 11:
-            N(BzzapAI_11)(script, aiSettings, territoryPtr);
+            N(FlyingAI_11)(script, aiSettings, territoryPtr);
             break;
         case 12:
             N(UnkNpcAIFunc14)(script, aiSettings, territoryPtr);

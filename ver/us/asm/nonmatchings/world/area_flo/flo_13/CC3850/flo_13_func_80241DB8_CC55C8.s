@@ -85,7 +85,7 @@ glabel flo_13_func_80241DB8_CC55C8
 .L80241EEC:
 /* CC56FC 80241EEC 0280202D */  daddu     $a0, $s4, $zero
 /* CC5700 80241EF0 02C0282D */  daddu     $a1, $s6, $zero
-/* CC5704 80241EF4 0C090071 */  jal       flo_13_BzzapAI_00
+/* CC5704 80241EF4 0C090071 */  jal       flo_13_FlyingAI_00
 /* CC5708 80241EF8 02A0302D */   daddu    $a2, $s5, $zero
 .L80241EFC:
 /* CC570C 80241EFC 0280202D */  daddu     $a0, $s4, $zero
@@ -97,7 +97,7 @@ glabel flo_13_func_80241DB8_CC55C8
 .L80241F14:
 /* CC5724 80241F14 0280202D */  daddu     $a0, $s4, $zero
 /* CC5728 80241F18 02C0282D */  daddu     $a1, $s6, $zero
-/* CC572C 80241F1C 0C090267 */  jal       flo_13_BzzapAI_02
+/* CC572C 80241F1C 0C090267 */  jal       flo_13_FlyingAI_02
 /* CC5730 80241F20 02A0302D */   daddu    $a2, $s5, $zero
 /* CC5734 80241F24 0280202D */  daddu     $a0, $s4, $zero
 .L80241F28:

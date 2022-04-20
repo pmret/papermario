@@ -9,7 +9,7 @@ static char* N(exit_str_3) = "";
 
 #include "world/common/atomic/enemy/UnkAI_5.inc.c"
 
-#include "world/common/atomic/enemy/BzzapAI.inc.c"
+#include "world/common/atomic/enemy/FlyingAI.inc.c"
 
 // todo remove when below are decompiled
 static const f32 padding = 0.0f;

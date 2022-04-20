@@ -85,7 +85,7 @@ glabel flo_17_func_80241C64_CD8F44
 .L80241D98:
 /* CD9078 80241D98 0280202D */  daddu     $a0, $s4, $zero
 /* CD907C 80241D9C 02C0282D */  daddu     $a1, $s6, $zero
-/* CD9080 80241DA0 0C09001C */  jal       flo_17_BzzapAI_00
+/* CD9080 80241DA0 0C09001C */  jal       flo_17_FlyingAI_00
 /* CD9084 80241DA4 02A0302D */   daddu    $a2, $s5, $zero
 .L80241DA8:
 /* CD9088 80241DA8 0280202D */  daddu     $a0, $s4, $zero
@@ -97,7 +97,7 @@ glabel flo_17_func_80241C64_CD8F44
 .L80241DC0:
 /* CD90A0 80241DC0 0280202D */  daddu     $a0, $s4, $zero
 /* CD90A4 80241DC4 02C0282D */  daddu     $a1, $s6, $zero
-/* CD90A8 80241DC8 0C090212 */  jal       flo_17_BzzapAI_02
+/* CD90A8 80241DC8 0C090212 */  jal       flo_17_FlyingAI_02
 /* CD90AC 80241DCC 02A0302D */   daddu    $a2, $s5, $zero
 /* CD90B0 80241DD0 0280202D */  daddu     $a0, $s4, $zero
 .L80241DD4:

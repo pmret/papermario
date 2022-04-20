@@ -5,7 +5,7 @@
 
 #define NAMESPACE EF2680
 
-#include "world/common/atomic/enemy/Dead_BzzapAI.inc.c"
+#include "world/common/atomic/enemy/Dead_FlyingAI.inc.c"
 
 s32 func_80241594_EF3BA4(void) {
     s32 i;

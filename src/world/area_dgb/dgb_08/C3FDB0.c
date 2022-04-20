@@ -1087,7 +1087,7 @@ ApiStatus N(func_802414AC_C4125C)(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-#include "world/common/atomic/enemy/BzzapAI.inc.c"
+#include "world/common/atomic/enemy/FlyingAI.inc.c"
 
 void N(func_80242C58_C42A08)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
@@ -1352,18 +1352,18 @@ ApiStatus N(func_802438F0_C436A0)(Evt* script, s32 isInitialCall) {
 
     switch (script->functionTemp[0]) {
         case 0:
-            N(BzzapAI_00)(script, npcAISettings, territoryPtr);
+            N(FlyingAI_00)(script, npcAISettings, territoryPtr);
             func_802DE894(npc->spriteInstanceID, 0, 0, 0, 0, 0, 0);
         case 1:
-            N(BzzapAI_01)(script, npcAISettings, territoryPtr);
+            N(FlyingAI_01)(script, npcAISettings, territoryPtr);
             if (script->functionTemp[0] == 12) {
                 npc->duration = 6;
             }
             break;
         case 2:
-            N(BzzapAI_02)(script, npcAISettings, territoryPtr);
+            N(FlyingAI_02)(script, npcAISettings, territoryPtr);
         case 3:
-            N(BzzapAI_03)(script, npcAISettings, territoryPtr);
+            N(FlyingAI_03)(script, npcAISettings, territoryPtr);
             if (script->functionTemp[0] == 12) {
                 npc->duration = 6;
             }
