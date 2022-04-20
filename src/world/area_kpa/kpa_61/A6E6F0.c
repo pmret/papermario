@@ -1,6 +1,6 @@
 #include "kpa_61.h"
 
-#include "world/common/atomic/enemy/UnkAI_5.inc.c"
+#include "world/common/enemy/LungeAI.inc.c"
 
 #include "world/common/UnkNpcAIFunc47.inc.c"
 

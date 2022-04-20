@@ -280,7 +280,7 @@ EvtScript N(makeEntities) = {
     EVT_END
 };
 
-#include "world/common/atomic/enemy/FlyingAI.inc.c"
+#include "world/common/enemy/FlyingAI.inc.c"
 
 void N(func_802414F8_C37A28)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;

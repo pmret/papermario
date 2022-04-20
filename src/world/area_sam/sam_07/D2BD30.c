@@ -13,4 +13,4 @@ INCLUDE_ASM(s32, "world/area_sam/sam_07/D2BD30", func_802405B0_D2C2E0);
 
 #include "world/common/UnsetCamera0MoveFlag1.inc.c"
 
-#include "world/common/atomic/enemy/PiranhaPlantAI.inc.c"
+#include "world/common/enemy/PiranhaPlantAI.inc.c"

@@ -1,6 +1,6 @@
 #include "tik_09.h"
 
-#include "world/common/atomic/enemy/UnkAI_5.inc.c"
+#include "world/common/enemy/LungeAI.inc.c"
 
 ApiStatus func_80241204_8833C4(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

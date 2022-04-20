@@ -2,7 +2,7 @@
 
 #define CHUCK_QUIZMO_NPC_ID 7
 
-#include "world/common/atomic/enemy/FlyingAI.inc.c"
+#include "world/common/enemy/FlyingAI.inc.c"
 
 #include "world/common/atomic/ToadHouse.inc.c"
 

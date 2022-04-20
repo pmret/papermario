@@ -1203,7 +1203,7 @@ NpcGroupList N(npcGroupList_802478E8) = {
     {},
 };
 
-#include "world/common/atomic/enemy/FlyingAI.inc.c"
+#include "world/common/enemy/FlyingAI.inc.c"
 
 ApiStatus PostChapter3StatUpdate(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;

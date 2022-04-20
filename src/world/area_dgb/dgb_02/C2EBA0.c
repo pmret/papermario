@@ -424,17 +424,17 @@ NpcGroupList N(npcGroupList_802425C8) = {
     {},
 };
 
-#include "world/common/MeleeHitbox_30.inc.c"
+#include "world/common/enemy/MeleeHitbox_30.inc.c"
 
-#include "world/common/MeleeHitbox_31.inc.c"
+#include "world/common/enemy/MeleeHitbox_31.inc.c"
 
-#include "world/common/MeleeHitbox_32.inc.c"
+#include "world/common/enemy/MeleeHitbox_32.inc.c"
 
-#include "world/common/MeleeHitbox_33.inc.c"
+#include "world/common/enemy/MeleeHitbox_33.inc.c"
 
-#include "world/common/MeleeHitbox_CanSeePlayer.inc.c"
+#include "world/common/enemy/MeleeHitbox_CanSeePlayer.inc.c"
 
-#include "world/common/MeleeHitbox_Control.inc.c"
+#include "world/common/enemy/MeleeHitbox_Control.inc.c"
 
 ApiStatus N(func_8024061C_C2F1BC)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;

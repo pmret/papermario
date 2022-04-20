@@ -263,4 +263,4 @@ static const s32 N(pad_1E74)[] = {
     0x00000000, 0x00000000
 };
 
-#include "world/common/atomic/enemy/ClubbaAI.inc.c"
+#include "world/common/enemy/ClubbaAI.inc.c"

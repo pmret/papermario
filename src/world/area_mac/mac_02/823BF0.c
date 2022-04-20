@@ -2,7 +2,7 @@
 
 #define CHUCK_QUIZMO_NPC_ID 12
 
-#include "world/common/atomic/enemy/UnkAI_1.inc.c"
+#include "world/common/enemy/UnkAI_1.inc.c"
 
 extern s32 N(Quizmo_Worker);
 extern s32 N(Quizmo_AnswerResult);

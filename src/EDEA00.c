@@ -7,7 +7,7 @@
 
 #include "world/common/UnkFunc41.inc.c"
 
-#include "world/common/atomic/enemy/Dead_FlyingAI.inc.c"
+#include "world/common/enemy/Dead_FlyingAI.inc.c"
 
 const char D_80247B44_EE6504[] = "JUGEMU MOVE";
 
@@ -154,7 +154,7 @@ void func_80241B94_EE0554(Evt* script, NpcAISettings* aiSettings, EnemyTerritory
 
 INCLUDE_ASM(s32, "EDEA00", func_80241DE4_EE07A4);
 
-#include "world/common/atomic/enemy/UnkAI_StateHandlers_A.inc.c"
+#include "world/common/enemy/UnkAI_StateHandlers_A.inc.c"
 
 INCLUDE_ASM(s32, "EDEA00", func_80242684_EE1044);
 

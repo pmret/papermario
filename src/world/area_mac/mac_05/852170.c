@@ -11,7 +11,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_8024030C_85247C);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_8024047C_8525EC);
 
-#include "world/common/atomic/enemy/UnkAI_1.inc.c"
+#include "world/common/enemy/UnkAI_1.inc.c"
 
 extern s32 N(Quizmo_Worker);
 extern s32 N(Quizmo_AnswerResult);

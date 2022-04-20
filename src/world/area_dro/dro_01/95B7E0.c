@@ -1997,7 +1997,7 @@ EvtScript N(makeEntities) = {
     EVT_END
 };
 
-#include "world/common/atomic/enemy/UnkAI_1.inc.c"
+#include "world/common/enemy/UnkAI_1.inc.c"
 
 #include "world/common/atomic/Quizmo.inc.c"
 

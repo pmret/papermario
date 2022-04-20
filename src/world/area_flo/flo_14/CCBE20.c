@@ -323,7 +323,7 @@ EvtScript N(80245224) = {
     EVT_END
 };
 
-#include "world/common/atomic/enemy/FlyingAI.inc.c"
+#include "world/common/enemy/FlyingAI.inc.c"
 
 #include "world/common/atomic/ItemChoice_PartA.inc.c"
 

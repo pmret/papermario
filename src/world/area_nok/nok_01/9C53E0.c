@@ -5,7 +5,7 @@ static char* N(exit_str_1) = "nok_02";
 
 #define CHUCK_QUIZMO_NPC_ID 15
 
-#include "world/common/atomic/enemy/UnkAI_4.inc.c"
+#include "world/common/enemy/UnkAI_4.inc.c"
 
 #include "world/common/atomic/ToadHouse.inc.c"
 

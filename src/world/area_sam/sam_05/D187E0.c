@@ -3,7 +3,7 @@
 static char* N(exit_str_0) = "sam_04";
 static char* N(exit_str_1) = "sam_06";
 
-#include "world/common/atomic/enemy/PiranhaPlantAI.inc.c"
+#include "world/common/enemy/PiranhaPlantAI.inc.c"
 
 INCLUDE_ASM(s32, "world/area_sam/sam_05/D187E0", func_802419A4_D1A184);
 

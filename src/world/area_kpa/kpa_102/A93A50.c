@@ -1,10 +1,10 @@
 #include "kpa_102.h"
 
-#include "world/common/atomic/enemy/ThrowAttackAI.inc.c"
+#include "world/common/enemy/ThrowAttackAI.inc.c"
 
 #include "world/common/GetEncounterEnemyIsOwner.inc.c"
 
-#include "world/common/atomic/enemy/UnkAI_5.inc.c"
+#include "world/common/enemy/LungeAI.inc.c"
 
 #include "world/common/UnkNpcAIFunc47.inc.c"
 

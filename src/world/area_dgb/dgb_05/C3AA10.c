@@ -358,17 +358,17 @@ ApiStatus N(func_80240030_C3AA40)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#include "world/common/MeleeHitbox_30.inc.c"
+#include "world/common/enemy/MeleeHitbox_30.inc.c"
 
-#include "world/common/MeleeHitbox_31.inc.c"
+#include "world/common/enemy/MeleeHitbox_31.inc.c"
 
-#include "world/common/MeleeHitbox_32.inc.c"
+#include "world/common/enemy/MeleeHitbox_32.inc.c"
 
-#include "world/common/MeleeHitbox_33.inc.c"
+#include "world/common/enemy/MeleeHitbox_33.inc.c"
 
-#include "world/common/MeleeHitbox_CanSeePlayer.inc.c"
+#include "world/common/enemy/MeleeHitbox_CanSeePlayer.inc.c"
 
-#include "world/common/MeleeHitbox_Control.inc.c"
+#include "world/common/enemy/MeleeHitbox_Control.inc.c"
 
 void N(func_8024067C_C3B08C)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;

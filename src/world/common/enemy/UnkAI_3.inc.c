@@ -1,4 +1,4 @@
-#include "world/common/atomic/enemy/FuzzyAI.inc.c"
+#include "world/common/enemy/FuzzyAI.inc.c"
 
 #include "world/common/UnkNpcAIFunc40.inc.c"
 

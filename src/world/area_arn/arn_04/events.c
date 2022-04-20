@@ -63,14 +63,14 @@ NpcSettings N(npcSettings_802436B0) = {
     .level = 12,
 };
 
-#include "world/common/atomic/enemy/UnkAI_1.inc.c"
+#include "world/common/enemy/UnkAI_1.inc.c"
 
 f32 N(sixFloats)[] = {
     4.5f, 3.5f, 2.6f, 2.0f,
     1.5f, 20.0f,
 };
 
-#include "world/common/atomic/enemy/FlyingAI.inc.c"
+#include "world/common/enemy/FlyingAI.inc.c"
 
 NpcAISettings N(npcAISettings_802436F4) = {
     .moveSpeed = 1.8f,

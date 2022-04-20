@@ -62,7 +62,7 @@ extern Npc* wPartnerNpc;
 #define VAR_HITNPC_4        varTable[4]
 #define VAR_HITNPC_SOUND    varTable[15]
 
-//#include "world/common/MeleeHitbox_30.inc.c"
+//#include "world/common/enemy/MeleeHitbox_30.inc.c"
 
 void N(MeleeHitbox_30)(Evt* script) {
     Enemy* enemy = script->owner1.enemy;
@@ -78,7 +78,7 @@ void N(MeleeHitbox_30)(Evt* script) {
     }
 }
 
-//#include "world/common/MeleeHitbox_31.inc.c"
+//#include "world/common/enemy/MeleeHitbox_31.inc.c"
 
 void N(MeleeHitbox_31)(Evt* script) {
     Enemy* enemy = script->owner1.enemy;
@@ -93,7 +93,7 @@ void N(MeleeHitbox_31)(Evt* script) {
     }
 }
 
-//#include "world/common/MeleeHitbox_32.inc.c"
+//#include "world/common/enemy/MeleeHitbox_32.inc.c"
 
 void N(MeleeHitbox_32)(Evt* script) {
     Enemy* enemy = script->owner1.enemy;
@@ -112,7 +112,7 @@ void N(MeleeHitbox_32)(Evt* script) {
     }
 }
 
-//#include "world/common/MeleeHitbox_33.inc.c"
+//#include "world/common/enemy/MeleeHitbox_33.inc.c"
 
 void N(MeleeHitbox_33)(Evt* script) {
     Enemy* enemy = script->owner1.enemy;
@@ -125,7 +125,7 @@ void N(MeleeHitbox_33)(Evt* script) {
     }
 }
 
-//#include "world/common/MeleeHitbox_CanSeePlayer.inc.c"
+//#include "world/common/enemy/MeleeHitbox_CanSeePlayer.inc.c"
 
 s32 N(MeleeHitbox_CanSeePlayer)(Evt* script) {
     Enemy* enemy = script->owner1.enemy;
@@ -165,7 +165,7 @@ s32 N(MeleeHitbox_CanSeePlayer)(Evt* script) {
     return ret;
 }
 
-//#include "world/common/MeleeHitbox_Control.inc.c"
+//#include "world/common/enemy/MeleeHitbox_Control.inc.c"
 
 ApiStatus N(MeleeHitbox_Control)(Evt* script, s32 isInitialCall) {
     Enemy* hitboxEnemy = script->owner1.enemy;

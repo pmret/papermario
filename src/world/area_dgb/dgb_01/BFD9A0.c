@@ -503,7 +503,7 @@ NpcAISettings N(npcAISettings_80244D24) = {
     .unk_2C = 1,
 };
 
-#include "world/common/atomic/enemy/FlyingAI.inc.c"
+#include "world/common/enemy/FlyingAI.inc.c"
 
 void N(func_80241618_BFEE98)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
@@ -1033,7 +1033,7 @@ EvtScript N(init_80245784) = {
 
 const char N(dgb_00_name_hack)[] = "dgb_00";
 
-#include "world/common/atomic/enemy/UnkAI_1.inc.c"
+#include "world/common/enemy/UnkAI_1.inc.c"
 
 #include "world/common/UnkFunc1.inc.c"
 

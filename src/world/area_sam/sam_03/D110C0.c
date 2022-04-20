@@ -5,16 +5,16 @@ static char* N(exit_str_1) = "sam_04";
 
 INCLUDE_ASM(s32, "world/area_sam/sam_03/D110C0", func_80240000_D110C0);
 
-#include "world/common/MeleeHitbox_30.inc.c"
+#include "world/common/enemy/MeleeHitbox_30.inc.c"
 
-#include "world/common/MeleeHitbox_31.inc.c"
+#include "world/common/enemy/MeleeHitbox_31.inc.c"
 
-#include "world/common/MeleeHitbox_32.inc.c"
+#include "world/common/enemy/MeleeHitbox_32.inc.c"
 
-#include "world/common/MeleeHitbox_33.inc.c"
+#include "world/common/enemy/MeleeHitbox_33.inc.c"
 
-#include "world/common/MeleeHitbox_CanSeePlayer.inc.c"
+#include "world/common/enemy/MeleeHitbox_CanSeePlayer.inc.c"
 
-#include "world/common/MeleeHitbox_Control.inc.c"
+#include "world/common/enemy/MeleeHitbox_Control.inc.c"
 
-#include "world/common/MeleeHitbox_Main.inc.c"
+#include "world/common/enemy/MeleeHitbox_Main.inc.c"

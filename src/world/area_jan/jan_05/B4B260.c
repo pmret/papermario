@@ -2,9 +2,9 @@
 
 INCLUDE_ASM(s32, "world/area_jan/jan_05/B4B260", func_802407F0_B4B260);
 
-#include "world/common/atomic/enemy/FuzzyAI.inc.c"
+#include "world/common/enemy/FuzzyAI.inc.c"
 
-#include "world/common/atomic/enemy/SpearGuyAI.inc.c"
+#include "world/common/enemy/SpearGuyAI.inc.c"
 
 #define NAMESPACE dup_jan_05
 #include "common/foliage.inc.c"

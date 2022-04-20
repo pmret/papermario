@@ -1,3 +1,3 @@
 #include "mim_07.h"
 
-#include "world/common/atomic/enemy/FuzzyAI.inc.c"
+#include "world/common/enemy/FuzzyAI.inc.c"

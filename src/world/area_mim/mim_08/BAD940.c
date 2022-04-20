@@ -10,6 +10,6 @@ ApiStatus func_80240068_BAD9A8(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#include "world/common/atomic/enemy/FlyingAI.inc.c"
+#include "world/common/enemy/FlyingAI.inc.c"
 
-#include "world/common/atomic/enemy/PiranhaPlantAI.inc.c"
+#include "world/common/enemy/PiranhaPlantAI.inc.c"

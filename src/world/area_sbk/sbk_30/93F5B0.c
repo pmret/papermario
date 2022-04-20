@@ -13,7 +13,7 @@ INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_80240000_93F5B0);
 
 #include "world/common/SpawnSunEffect.inc.c"
 
-#include "world/common/atomic/enemy/UnkAI_4.inc.c"
+#include "world/common/enemy/UnkAI_4.inc.c"
 
 #include "world/common/StashVars.inc.c"
 

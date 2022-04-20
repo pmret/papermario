@@ -2,19 +2,19 @@
 
 #include "world/common/atomic/Reflection.inc.c"
 
-#include "world/common/atomic/enemy/UnkAI_1.inc.c"
+#include "world/common/enemy/UnkAI_1.inc.c"
 
-#include "world/common/MeleeHitbox_30.inc.c"
+#include "world/common/enemy/MeleeHitbox_30.inc.c"
 
-#include "world/common/MeleeHitbox_31.inc.c"
+#include "world/common/enemy/MeleeHitbox_31.inc.c"
 
-#include "world/common/MeleeHitbox_32.inc.c"
+#include "world/common/enemy/MeleeHitbox_32.inc.c"
 
-#include "world/common/MeleeHitbox_33.inc.c"
+#include "world/common/enemy/MeleeHitbox_33.inc.c"
 
-#include "world/common/MeleeHitbox_CanSeePlayer.inc.c"
+#include "world/common/enemy/MeleeHitbox_CanSeePlayer.inc.c"
 
-#include "world/common/MeleeHitbox_Control.inc.c"
+#include "world/common/enemy/MeleeHitbox_Control.inc.c"
 
 // Requires data migration
 #ifdef NON_MATCHING
@@ -118,4 +118,4 @@ ApiStatus func_802423CC_D8F61C(Evt *script, s32 isInitialCall) {
 INCLUDE_ASM(s32, "world/area_pra/pra_35/D8D270", func_802423CC_D8F61C);
 #endif
 
-#include "world/common/MeleeHitbox_Main.inc.c"
+#include "world/common/enemy/MeleeHitbox_Main.inc.c"

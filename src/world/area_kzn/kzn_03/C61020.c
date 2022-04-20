@@ -1,11 +1,11 @@
 #include "kzn_03.h"
 
 // spike top
-#include "world/common/atomic/enemy/UnkAI_5.inc.c"
+#include "world/common/enemy/LungeAI.inc.c"
 
 #include "world/common/AwaitPlayerNearNpc.inc.c"
 
-#include "world/common/atomic/enemy/PiranhaPlantAI.inc.c"
+#include "world/common/enemy/PiranhaPlantAI.inc.c"
 
 #include "world/common/StashVars.inc.c"
 

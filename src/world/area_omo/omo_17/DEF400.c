@@ -10,15 +10,15 @@ INCLUDE_ASM(s32, "world/area_omo/omo_17/DEF400", func_802406A0_DEF540);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_17/DEF400", func_80240798_DEF638);
 
-#include "world/common/GrooveGuyAI_02.inc.c"
+#include "world/common/enemy/GrooveGuyAI_02.inc.c"
 
 INCLUDE_ASM(s32, "world/area_omo/omo_17/DEF400", func_80240B1C_DEF9BC);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_17/DEF400", func_80240CE0_DEFB80);
 
-#include "world/common/atomic/enemy/FlyingAI.inc.c"
+#include "world/common/enemy/FlyingAI.inc.c"
 
-#include "world/common/atomic/enemy/ThrowAttackAI.inc.c"
+#include "world/common/enemy/ThrowAttackAI.inc.c"
 
 #include "world/common/SetNpcB5_3.inc.c"
 

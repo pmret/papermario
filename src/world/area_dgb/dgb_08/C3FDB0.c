@@ -988,19 +988,19 @@ EvtScript N(802469E0) = {
     EVT_END
 };
 
-#include "world/common/atomic/enemy/UnkAI_1.inc.c"
+#include "world/common/enemy/UnkAI_1.inc.c"
 
-#include "world/common/MeleeHitbox_30.inc.c"
+#include "world/common/enemy/MeleeHitbox_30.inc.c"
 
-#include "world/common/MeleeHitbox_31.inc.c"
+#include "world/common/enemy/MeleeHitbox_31.inc.c"
 
-#include "world/common/MeleeHitbox_32.inc.c"
+#include "world/common/enemy/MeleeHitbox_32.inc.c"
 
-#include "world/common/MeleeHitbox_33.inc.c"
+#include "world/common/enemy/MeleeHitbox_33.inc.c"
 
-#include "world/common/MeleeHitbox_CanSeePlayer.inc.c"
+#include "world/common/enemy/MeleeHitbox_CanSeePlayer.inc.c"
 
-#include "world/common/MeleeHitbox_Control.inc.c"
+#include "world/common/enemy/MeleeHitbox_Control.inc.c"
 
 ApiStatus N(func_802414AC_C4125C)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
@@ -1087,7 +1087,7 @@ ApiStatus N(func_802414AC_C4125C)(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-#include "world/common/atomic/enemy/FlyingAI.inc.c"
+#include "world/common/enemy/FlyingAI.inc.c"
 
 void N(func_80242C58_C42A08)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;

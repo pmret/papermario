@@ -1,8 +1,8 @@
 #include "trd_01.h"
 
-#include "world/common/atomic/enemy/UnkAI_5.inc.c"
+#include "world/common/enemy/LungeAI.inc.c"
 
-#include "world/common/atomic/enemy/UnkAI_4.inc.c"
+#include "world/common/enemy/UnkAI_4.inc.c"
 
 ApiStatus func_80241630_99DFC0(Evt* script, s32 isInitialCall) {
     Enemy* owner1 = script->owner1.enemy;

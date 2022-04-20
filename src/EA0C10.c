@@ -13,13 +13,13 @@ extern s32 D_802466D0[];
 void func_8004D8E0(DeadEnemy*);
 void func_80240DC4_EA16C4(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory);
 
-#include "world/common/MeleeHitbox_30.inc.c"
+#include "world/common/enemy/MeleeHitbox_30.inc.c"
 
-#include "world/common/MeleeHitbox_31.inc.c"
+#include "world/common/enemy/MeleeHitbox_31.inc.c"
 
-#include "world/common/MeleeHitbox_32.inc.c"
+#include "world/common/enemy/MeleeHitbox_32.inc.c"
 
-#include "world/common/MeleeHitbox_33.inc.c"
+#include "world/common/enemy/MeleeHitbox_33.inc.c"
 
 //Basically MeleeHitbox_CanSeePlayer.inc.c, but gPartnerActionStatus.partnerActionState access 0, instead of 3
 s32 N(MeleeHitbox_CanSeePlayer)(Evt* script) {
@@ -239,20 +239,20 @@ ApiStatus func_8024097C_EA127C(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-#include "world/common/PiranhaPlantAI_00.inc.c"
+#include "world/common/enemy/PiranhaPlantAI_00.inc.c"
 
-#include "world/common/PiranhaPlantAI_01.inc.c"
+#include "world/common/enemy/PiranhaPlantAI_01.inc.c"
 
 // sqrtf issue - Would be PiranhaPlantAI_10
 INCLUDE_ASM(s32, "EA0C10", func_80240DC4_EA16C4);
 
-#include "world/common/PiranhaPlantAI_11.inc.c"
+#include "world/common/enemy/PiranhaPlantAI_11.inc.c"
 
-#include "world/common/PiranhaPlantAI_12.inc.c"
+#include "world/common/enemy/PiranhaPlantAI_12.inc.c"
 
-#include "world/common/PiranhaPlantAI_13.inc.c"
+#include "world/common/enemy/PiranhaPlantAI_13.inc.c"
 
-#include "world/common/PiranhaPlantAI_14.inc.c"
+#include "world/common/enemy/PiranhaPlantAI_14.inc.c"
 
 ApiStatus func_80241AE0_EA23E0(Evt* script, s32 isInitialCall) {
     DeadEnemy* enemy = (DeadEnemy*) script->owner1.enemy;
@@ -329,7 +329,7 @@ ApiStatus func_80241AE0_EA23E0(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-#include "world/common/atomic/enemy/UnkAI_StateHandlers_A.inc.c"
+#include "world/common/enemy/UnkAI_StateHandlers_A.inc.c"
 
 #include "world/common/DeadUnkNpcAIMainFunc5.inc.c"
 

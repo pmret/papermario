@@ -5,7 +5,7 @@
 
 #define NAMESPACE EF2680
 
-#include "world/common/atomic/enemy/Dead_FlyingAI.inc.c"
+#include "world/common/enemy/Dead_FlyingAI.inc.c"
 
 s32 func_80241594_EF3BA4(void) {
     s32 i;
@@ -150,8 +150,8 @@ void func_80241A40_EF4050(Evt* script, NpcAISettings* aiSettings, EnemyTerritory
 
 INCLUDE_ASM(s32, "EF2680", func_80241C90_EF42A0);
 
- #include "world/common/atomic/enemy/UnkAI_StateHandlers_A.inc.c"
+ #include "world/common/enemy/UnkAI_StateHandlers_A.inc.c"
 
 #include "world/common/DeadUnkNpcAIMainFunc5.inc.c"
 
-#include "world/common/DeadLakituAI_Main.inc.c"
+#include "world/common/enemy/DeadLakituAI_Main.inc.c"

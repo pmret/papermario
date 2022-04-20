@@ -1221,7 +1221,7 @@ NpcGroupList N(npcGroupList_80247984) = {
 
 #include "world/common/UnkFunc41.inc.c"
 
-#include "world/common/atomic/enemy/FlyingAI.inc.c"
+#include "world/common/enemy/FlyingAI.inc.c"
 
 s32 N(func_802416BC_CC4ECC)(void) {
     s32 i;
@@ -1500,7 +1500,7 @@ INCLUDE_ASM(ApiStatus, "world/area_flo/flo_13/CC3850", flo_13_func_80241DB8_CC55
             s32 isInitialCall);
 #endif
 
-#include "world/common/atomic/enemy/LakituAI.inc.c"
+#include "world/common/enemy/LakituAI.inc.c"
 
 #include "world/common/UnkFunc42.inc.c"
 

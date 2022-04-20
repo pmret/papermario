@@ -1,8 +1,8 @@
 #include "trd_07.h"
 
-#include "world/common/atomic/enemy/UnkAI_5.inc.c"
+#include "world/common/enemy/LungeAI.inc.c"
 
-#include "world/common/atomic/enemy/FlyingAI.inc.c"
+#include "world/common/enemy/FlyingAI.inc.c"
 
 // todo remove when below are decompiled
 static const f32 padding = 0.0f;
