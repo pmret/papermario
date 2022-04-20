@@ -2,7 +2,7 @@
 #include "npc.h"
 #include "effects.h"
 
-ApiStatus N(UnkNpcAIMainFunc9)(Evt* script, s32 isInitialCall) {
+ApiStatus N(BzzapAI_Main)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Bytecode* args = script->ptrReadPos;
     Npc* npc = get_npc_unsafe(enemy->npcID);
@@ -34,12 +34,12 @@ ApiStatus N(UnkNpcAIMainFunc9)(Evt* script, s32 isInitialCall) {
 
     switch (script->functionTemp[0]) {
         case 0:
-            N(UnkNpcAIFunc23)(script, aiSettings, territoryPtr);
+            N(BzzapAI_00)(script, aiSettings, territoryPtr);
         case 1:
-            N(UnkNpcAIFunc35)(script, aiSettings, territoryPtr);
+            N(BzzapAI_01)(script, aiSettings, territoryPtr);
             break;
         case 2:
-            N(UnkNpcAIFunc1_copy)(script, aiSettings, territoryPtr);
+            N(BzzapAI_02)(script, aiSettings, territoryPtr);
         case 3:
             N(UnkFunc4)(script, aiSettings, territoryPtr);
             break;

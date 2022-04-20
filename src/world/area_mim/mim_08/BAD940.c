@@ -12,4 +12,4 @@ ApiStatus func_80240068_BAD9A8(Evt* script, s32 isInitialCall) {
 
 #include "world/common/atomic/enemy/BzzapAI.inc.c"
 
-#include "world/common/atomic/enemy/PiranhaPlant.inc.c"
+#include "world/common/atomic/enemy/PiranhaPlantAI.inc.c"

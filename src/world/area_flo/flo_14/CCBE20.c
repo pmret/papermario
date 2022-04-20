@@ -34,7 +34,7 @@ EvtScript N(npcAI_80244508) = {
     EVT_CALL(SetSelfVar, 5, -630)
     EVT_CALL(SetSelfVar, 6, 50)
     EVT_CALL(SetSelfVar, 1, 200)
-    EVT_CALL(N(UnkNpcAIMainFunc9), EVT_PTR(N(npcAISettings_802444D8)))
+    EVT_CALL(N(BzzapAI_Main), EVT_PTR(N(npcAISettings_802444D8)))
     EVT_RETURN
     EVT_END
 };

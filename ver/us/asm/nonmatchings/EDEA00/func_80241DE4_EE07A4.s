@@ -96,7 +96,7 @@ glabel func_80241DE4_EE07A4
 .L80241F44:
 /* EE0904 80241F44 0280202D */  daddu     $a0, $s4, $zero
 /* EE0908 80241F48 02C0282D */  daddu     $a1, $s6, $zero
-/* EE090C 80241F4C 0C090071 */  jal       EDEA00_UnkNpcAIFunc23
+/* EE090C 80241F4C 0C090071 */  jal       EDEA00_BzzapAI_00
 /* EE0910 80241F50 02A0302D */   daddu    $a2, $s5, $zero
 .L80241F54:
 /* EE0914 80241F54 0280202D */  daddu     $a0, $s4, $zero

@@ -535,16 +535,16 @@ ApiStatus N(func_80242154_C38684)(Evt* script, s32 isInitialCall) {
 
     switch (script->functionTemp[0]) {
         case 0:
-            N(UnkNpcAIFunc23)(script, aiSettings, territoryPtr);
+            N(BzzapAI_00)(script, aiSettings, territoryPtr);
             func_802DE894(npc->spriteInstanceID, 0, 0, 0, 0, 0, 0);
         case 1:
-            N(UnkNpcAIFunc35)(script, aiSettings, territoryPtr);
+            N(BzzapAI_01)(script, aiSettings, territoryPtr);
             if (script->functionTemp[0] == 12) {
                 npc->duration = 6;
             }
             break;
         case 2:
-            N(UnkNpcAIFunc1_copy)(script, aiSettings, territoryPtr);
+            N(BzzapAI_02)(script, aiSettings, territoryPtr);
         case 3:
             N(UnkFunc4)(script, aiSettings, territoryPtr);
             if (script->functionTemp[0] == 12) {

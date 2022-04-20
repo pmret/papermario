@@ -31,7 +31,7 @@ ApiStatus N(arn_07_StarSpiritEffectFunc4)(Evt* script, s32 isInitialCall);
 ApiStatus N(arn_07_StarSpiritEffectFunc5)(Evt* script, s32 isInitialCall);
 ApiStatus N(arn_07_StarSpiritEffectFunc6)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_80240800_BED5F0)(Evt* script, s32 isInitialCall);
-ApiStatus N(UnkNpcAIMainFunc9)(Evt* script, s32 isInitialCall);
+ApiStatus N(BzzapAI_Main)(Evt* script, s32 isInitialCall);
 ApiStatus N(SetEntityFlags100000)(Evt* script, s32 isInitialCall);
 ApiStatus N(GetEntityPosition)(Evt* script, s32 isInitialCall);
 ApiStatus PostChapter3StatUpdate(Evt* script, s32 isInitialCall);

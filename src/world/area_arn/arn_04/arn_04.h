@@ -8,7 +8,7 @@
 #define NAMESPACE arn_04
 
 ApiStatus N(UnkNpcAIMainFunc)(Evt* script, s32 isInitialCall);
-ApiStatus N(UnkNpcAIMainFunc9)(Evt* script, s32 isInitialCall);
+ApiStatus N(BzzapAI_Main)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_80243018_BE67C8)(Evt* script, s32 isInitialCall);
 
 extern EvtScript N(main);

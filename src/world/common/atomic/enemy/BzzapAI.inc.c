@@ -1,8 +1,8 @@
-#include "world/common/UnkNpcAIFunc23.inc.c"
+#include "world/common/BzzapAI_00.inc.c"
 
-#include "world/common/UnkNpcAIFunc35.inc.c"
+#include "world/common/BzzapAI_01.inc.c"
 
-#include "world/common/UnkNpcAIFunc1_copy.inc.c"
+#include "world/common/BzzapAI_02.inc.c"
 
 #include "world/common/UnkFunc4.inc.c"
 
@@ -18,4 +18,4 @@
 
 #include "world/common/UnkFunc5.inc.c"
 
-#include "world/common/UnkNpcAIMainFunc9.inc.c"
+#include "world/common/BzzapAI_Main.inc.c"

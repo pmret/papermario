@@ -2,7 +2,7 @@
 #include "npc.h"
 #include "dead_structs.h"
 
-ApiStatus N(DeadUnkNpcAIMainFunc9)(Evt* script, s32 isInitialCall) {
+ApiStatus N(DeadBzzapAI_Main)(Evt* script, s32 isInitialCall) {
     DeadEnemy* enemy = (DeadEnemy*)script->owner1.enemy;
     Bytecode* args = script->ptrReadPos;
     Npc* npc = get_npc_unsafe(enemy->npcID);
@@ -39,10 +39,10 @@ ApiStatus N(DeadUnkNpcAIMainFunc9)(Evt* script, s32 isInitialCall) {
     }
     switch (script->functionTemp[0]) {
     case 0:
-        N(UnkNpcAIFunc23)(script, aiSettings, territoryPtr);
+        N(BzzapAI_00)(script, aiSettings, territoryPtr);
         /* fallthrough */
     case 1:
-        N(UnkNpcAIFunc35)(script, aiSettings, territoryPtr);
+        N(BzzapAI_01)(script, aiSettings, territoryPtr);
         return 0;
     case 2:
         N(UnkNpcAIFunc1)(script, aiSettings, territoryPtr);
