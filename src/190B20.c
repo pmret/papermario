@@ -2065,7 +2065,7 @@ void load_player_actor(void) {
     player->shadowScale = player->size.x / 24.0;
     player->hudElementDataIndex = create_status_icon_set();
     player->debuffEffect = fx_disable_x(0, -142.0f, 34.0f, 1.0f, 0);
-    player->unk_228 = NULL;
+    player->icePillarEffect = NULL;
 
     if (is_ability_active(ABILITY_ZAP_TAP)) {
         player->staticStatus = STATUS_STATIC;
@@ -2319,7 +2319,7 @@ void load_partner_actor(void) {
         partnerActor->shadowScale = partnerActor->size.x / 24.0;
         partnerActor->hudElementDataIndex = create_status_icon_set();
         partnerActor->debuffEffect = fx_disable_x(0, -142.0f, 34.0f, 1.0f, 0);
-        partnerActor->unk_228 = NULL;
+        partnerActor->icePillarEffect = NULL;
 
         takeTurnScript = start_script(partnerActor->takeTurnScriptSource, EVT_PRIORITY_A, 0);
         partnerActor->takeTurnID = takeTurnScript->id;
@@ -2590,7 +2590,7 @@ Actor* create_actor(Formation formation) {
     actor->shadow.id = create_shadow_type(0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z);
     actor->shadowScale = actor->size.x / 24.0;
     actor->debuffEffect = fx_disable_x(0, -142.0f, 34.0f, 1.0f, 0);
-    actor->unk_228 = NULL;
+    actor->icePillarEffect = NULL;
     actor->hudElementDataIndex = create_status_icon_set();
     return actor;
 }
@@ -2764,11 +2764,11 @@ s32 inflict_status(Actor* target, s32 statusTypeKey, s32 duration) {
                     switch (statusTypeKey) {
                         case STATUS_FROZEN:
                             if (target->actorID != ACTOR_PARTNER) {
-                                effect = target->unk_228;
+                                effect = target->icePillarEffect;
                                 if (effect != NULL) {
                                     effect->flags |= EFFECT_INSTANCE_FLAGS_10;
                                 }
-                                target->unk_228 = fx_ice_pillar(0, target->currentPos.x, target->currentPos.y,
+                                target->icePillarEffect = fx_ice_pillar(0, target->currentPos.x, target->currentPos.y,
                                                             target->currentPos.z, 1.0f, 0);
                                 create_status_debuff(target->hudElementDataIndex, STATUS_FROZEN);
                             }
