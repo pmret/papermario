@@ -345,7 +345,7 @@ EvtScript N(npcAI_802443DC) = {
     EVT_CALL(SetSelfVar, 5, -650)
     EVT_CALL(SetSelfVar, 6, 30)
     EVT_CALL(SetSelfVar, 1, 600)
-    EVT_CALL(N(func_80243578_C4A158), EVT_PTR(N(npcAISettings_802443AC)))
+    EVT_CALL(N(SentinelAI_Main), EVT_PTR(N(npcAISettings_802443AC)))
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_WAIT_FRAMES(2)
     EVT_LABEL(20)
@@ -721,8 +721,8 @@ ApiStatus N(func_8024061C_C471FC)(Evt* script, s32 isInitialCall) {
 
 #include "world/common/enemy/ClubbaNappingAI.inc.c"
 
-#include "world/common/enemy/FlyingAI.inc.c"
-
+#define AI_SENTINEL_FIRST_NPC 0
+#define AI_SENTINEL_LAST_NPC  0
 #include "world/common/enemy/SentinelAI.inc.c"
 
 const char N(dgb_00_name_hack)[] = "dgb_00";

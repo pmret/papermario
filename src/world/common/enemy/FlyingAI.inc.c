@@ -1,3 +1,6 @@
+#ifndef AI_REQ_FLYING
+#define AI_REQ_FLYING
+
 // This AI is used by:
 // - Paragoomba + variants
 // - Paratroopa + variants
@@ -25,3 +28,5 @@
 #include "world/common/UnkFunc5.inc.c"
 
 #include "world/common/enemy/FlyingAI_Main.inc.c"
+
+#endif

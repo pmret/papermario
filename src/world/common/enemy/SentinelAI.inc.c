@@ -1,5 +1,16 @@
 #include "common.h"
 #include "npc.h"
+#include "effects.h"
+
+#ifndef AI_SENTINEL_FIRST_NPC
+#error  AI_SENTINEL_FIRST_NPC must be defined for SentinelAI.inc.c
+#endif
+
+#ifndef AI_SENTINEL_LAST_NPC
+#error  AI_SENTINEL_LAST_NPC must be defined for SentinelAI.inc.c
+#endif
+
+#include "world/common/enemy/FlyingAI.inc.c"
 
 void N(SentinelAI_12)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
@@ -48,14 +59,21 @@ void N(SentinelAI_13)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThin
     } else {
         script->functionTemp[0] = 16;
     }
-
 }
 
 void N(SentinelAI_14)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
+    s32 i;
 
-    do { enemy->varTable[0] |= 0x100; npc->pos.x = gPlayerStatusPtr->position.x; } while (0);
+    for (i = AI_SENTINEL_FIRST_NPC; i < AI_SENTINEL_LAST_NPC; i++) {
+        if (i != npc->npcID && (get_enemy(i)->varTable[0] & 0x100)) {
+            return;
+        }
+    }
+
+    enemy->varTable[0] |= 0x100;
+    npc->pos.x = gPlayerStatusPtr->position.x;
     npc->pos.z = gPlayerStatusPtr->position.z;
     if (!(enemy->varTable[0] & 0x1000)) {
         enemy->varTable[0] |= 0x1000;
@@ -230,7 +248,7 @@ void N(SentinelAI_31)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThin
     }
 }
 
-ApiStatus N(func_80243578_C4A158)(Evt* script, s32 isInitialCall) {
+ApiStatus N(SentinelAI_Main)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;
