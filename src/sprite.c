@@ -367,6 +367,7 @@ s32 func_802DE748(s32 arg0, s32 arg1) {
     return temp_v1[arg1]->unk_4F;
 }
 
+
 INCLUDE_ASM(s32, "sprite", func_802DE780);
 
 s32 func_802DE894(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {

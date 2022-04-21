@@ -18,7 +18,8 @@
 extern s32 D_000001E4;
 
 ApiStatus func_8024093C_8756FC(Evt* script, s32 isInitialCall) {
-    Entity* entity = get_entity_by_index(evt_get_variable(script, *script->ptrReadPos));
+    Bytecode* args = script->ptrReadPosition;
+    Entity* entity = get_entity_by_index(evt_get_variable(script, *args++));
 
     if (entity == NULL) {
         return ApiStatus_BLOCK;
