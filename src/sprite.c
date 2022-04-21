@@ -345,7 +345,27 @@ s32 func_802DE5C8(s32 arg0) {
 
 INCLUDE_ASM(s32, "sprite", spr_free_sprite);
 
-INCLUDE_ASM(s32, "sprite", func_802DE748);
+typedef struct {
+    /* 0x00 */ char unk_00[0x4F];
+    /* 0x4F */ u8 unk_4F;
+} Unk802DE748_2;
+
+typedef struct {
+    /* 0x00 */ Unk802DE748_2** unk_00;
+    /* 0x04 */ char unk_04[0x10];
+} Unk802DE748; // size = 0x14
+
+extern Unk802DE748 D_802DFA4C[];
+
+s32 func_802DE748(s32 arg0, s32 arg1) {
+    Unk802DE748_2** unk_00 = D_802DFA4C[arg0].unk_00;
+
+    if (unk_00 == NULL) {
+        return -1;
+    }
+
+    return unk_00[arg1]->unk_4F;
+}
 
 INCLUDE_ASM(s32, "sprite", func_802DE780);
 
@@ -368,7 +388,7 @@ s32 spr_get_npc_raster_info(SpriteRasterInfo* out, s32 npcSpriteID, s32 rasterIn
     UnkSpriteStruct* temp_v1;
     s32** paletteOffsetCopy;
     s32 newVar;
-    
+
     if (sprite != NULL) {
         paletteOffsetCopy = sprite->palettesOffset;
         temp_v1 = (UnkSpriteStruct*)sprite->rastersOffset[rasterIndex];
