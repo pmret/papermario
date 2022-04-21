@@ -348,23 +348,23 @@ INCLUDE_ASM(s32, "sprite", spr_free_sprite);
 typedef struct {
     /* 0x00 */ char unk_00[0x4F];
     /* 0x4F */ u8 unk_4F;
-} unk802DE748_2;
+} Unk802DE748_2;
 
 typedef struct {
-    /* 0x00 */ unk802DE748_2** unk_00;
+    /* 0x00 */ Unk802DE748_2** unk_00;
     /* 0x04 */ char unk_04[0x10];
-} unk802DE748; // size = 0x14
+} Unk802DE748; // size = 0x14
 
-extern unk802DE748 D_802DFA4C[2];
+extern Unk802DE748 D_802DFA4C[];
 
 s32 func_802DE748(s32 arg0, s32 arg1) {
-    unk802DE748_2** temp_v1 = D_802DFA4C[arg0].unk_00;
+    Unk802DE748_2** unk_00 = D_802DFA4C[arg0].unk_00;
 
-    if (temp_v1 == NULL) {
+    if (unk_00 == NULL) {
         return -1;
     }
 
-    return temp_v1[arg1]->unk_4F;
+    return unk_00[arg1]->unk_4F;
 }
 
 INCLUDE_ASM(s32, "sprite", func_802DE780);
