@@ -2,8 +2,6 @@
 #include "sprite/npc/world_clubba.h"
 #include "message_ids.h"
 
-extern Npc* wPartnerNpc;
-
 enum {
     NPC_WORLD_CLUBBA0,
     NPC_WORLD_CLUBBA1,
@@ -773,8 +771,10 @@ NpcGroupList N(npcGroupList_80244988) = {
 #include "world/common/enemy/MeleeHitbox_Control.inc.c"
 #include "world/common/enemy/MeleeHitbox_Main.inc.c"
 
+// wandering clubba
 #include "world/common/enemy/UnkAI_1.inc.c"
 
+// patrolling clubba
 ApiStatus N(func_802419B0_C32E90)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);

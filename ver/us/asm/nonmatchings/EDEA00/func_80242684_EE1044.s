@@ -200,21 +200,21 @@ glabel func_80242684_EE1044
 /* EE1310 80242950 00000000 */   nop
 .L80242954:
 /* EE1314 80242954 0280282D */  daddu     $a1, $s4, $zero
-/* EE1318 80242958 0C013670 */  jal       func_8004D9C0
+/* EE1318 80242958 0C013670 */  jal       dead_basic_ai_wander_init
 /* EE131C 8024295C 02A0302D */   daddu    $a2, $s5, $zero
 /* EE1320 80242960 96220086 */  lhu       $v0, 0x86($s1)
 /* EE1324 80242964 A64200A8 */  sh        $v0, 0xa8($s2)
 .L80242968:
 /* EE1328 80242968 0260202D */  daddu     $a0, $s3, $zero
 /* EE132C 8024296C 0280282D */  daddu     $a1, $s4, $zero
-/* EE1330 80242970 0C0136B6 */  jal       func_8004DAD8
+/* EE1330 80242970 0C0136B6 */  jal       dead_basic_ai_wander
 /* EE1334 80242974 02A0302D */   daddu    $a2, $s5, $zero
 /* EE1338 80242978 08090A97 */  j         .L80242A5C
 /* EE133C 8024297C 00000000 */   nop
 .L80242980:
 /* EE1340 80242980 0260202D */  daddu     $a0, $s3, $zero
 /* EE1344 80242984 0280282D */  daddu     $a1, $s4, $zero
-/* EE1348 80242988 0C0137D9 */  jal       func_8004DF64
+/* EE1348 80242988 0C0137D9 */  jal       dead_basic_ai_loiter_init
 /* EE134C 8024298C 02A0302D */   daddu    $a2, $s5, $zero
 /* EE1350 80242990 8E230088 */  lw        $v1, 0x88($s1)
 /* EE1354 80242994 24020006 */  addiu     $v0, $zero, 6
@@ -243,7 +243,7 @@ glabel func_80242684_EE1044
 /* EE13A8 802429E8 AE220090 */   sw       $v0, 0x90($s1)
 .L802429EC:
 /* EE13AC 802429EC 0280282D */  daddu     $a1, $s4, $zero
-/* EE13B0 802429F0 0C013809 */  jal       func_8004E024
+/* EE13B0 802429F0 0C013809 */  jal       dead_basic_ai_loiter
 /* EE13B4 802429F4 02A0302D */   daddu    $a2, $s5, $zero
 /* EE13B8 802429F8 08090A97 */  j         .L80242A5C
 /* EE13BC 802429FC 00000000 */   nop
@@ -273,7 +273,7 @@ glabel func_80242684_EE1044
 /* EE140C 80242A4C 08090A97 */  j         .L80242A5C
 /* EE1410 80242A50 00000000 */   nop
 .L80242A54:
-/* EE1414 80242A54 0C013AE3 */  jal       func_8004EB8C
+/* EE1414 80242A54 0C013AE3 */  jal       dead_basic_ai_suspend
 /* EE1418 80242A58 0260202D */   daddu    $a0, $s3, $zero
 .L80242A5C:
 /* EE141C 80242A5C 8E230088 */  lw        $v1, 0x88($s1)

@@ -91,7 +91,7 @@ ApiStatus N(DeadUnkNpcAIMainFunc)(Evt* script, s32 isInitialCall) {
         N(UnkFunc16)(script, npcAISettings, territoryPtr);
         break;
     case 0x63:
-        func_8004EB8C(script);
+        dead_basic_ai_suspend(script);
         break;
     }
     return 0;

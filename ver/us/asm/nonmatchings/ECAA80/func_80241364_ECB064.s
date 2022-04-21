@@ -20,7 +20,7 @@ glabel func_80241364_ECB064
 /* ECB0A0 802413A0 AFA30010 */  sw        $v1, 0x10($sp)
 /* ECB0A4 802413A4 8E260024 */  lw        $a2, 0x24($s1)
 /* ECB0A8 802413A8 8E270028 */  lw        $a3, 0x28($s1)
-/* ECB0AC 802413AC 0C013469 */  jal       func_8004D1A4
+/* ECB0AC 802413AC 0C013469 */  jal       dead_basic_ai_try_detect_player
 /* ECB0B0 802413B0 0040802D */   daddu    $s0, $v0, $zero
 /* ECB0B4 802413B4 1440001D */  bnez      $v0, .L8024142C
 /* ECB0B8 802413B8 24040002 */   addiu    $a0, $zero, 2

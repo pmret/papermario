@@ -24,7 +24,7 @@ INCLUDE_ASM(s32, "world/area_omo/omo_09/DCD6B0", func_80241F1C_DCEBEC);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_09/DCD6B0", func_80242014_DCECE4);
 
-#include "world/common/enemy/ThrowAttackAI.inc.c"
+#include "world/common/enemy/ProjectileHitbox.inc.c"
 
 #include "world/common/SetNpcB5_3.inc.c"
 

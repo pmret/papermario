@@ -2766,24 +2766,37 @@ enum EnemyAIFlags {
     ENEMY_AI_FLAGS_80             = 0x00000080,
 };
 
-enum GenericAIStates {
-    AI_STATE_WANDER_INIT    = 0,
-    AI_STATE_WANDER         = 1,
-    AI_STATE_LOITER_INIT    = 2,
-    AI_STATE_LOITER         = 3,
-    AI_STATE_JUMP_INIT      = 10,
-    AI_STATE_JUMP           = 11,
-    AI_STATE_CHASE_INIT     = 12,
-    AI_STATE_CHASE          = 13,
-    AI_STATE_LOSE_PLAYER    = 14,
-    AI_STATE_SUSPEND        = 99,
+enum EnemyAIStates {
+    // basic states
+    AI_STATE_WANDER_INIT            = 0,
+    AI_STATE_WANDER                 = 1,
+    AI_STATE_LOITER_INIT            = 2,
+    AI_STATE_LOITER                 = 3,
+    AI_STATE_JUMP_INIT              = 10,
+    AI_STATE_JUMP                   = 11,
+    AI_STATE_CHASE_INIT             = 12,
+    AI_STATE_CHASE                  = 13,
+    AI_STATE_LOSE_PLAYER            = 14,
+    AI_STATE_SUSPEND                = 99,
+    // melee hitboxes
+    AI_STATE_MELEE_HITBOX_INIT      = 30,
+    AI_STATE_MELEE_HITBOX_PRE       = 31,
+    AI_STATE_MELEE_HITBOX_ACTIVE    = 32,
+    AI_STATE_MELEE_HITBOX_MISS      = 33,
+    // projectile hitboxes
+    AI_STATE_PROJECTILE_HITBOX_30   = 30,
+    AI_STATE_PROJECTILE_HITBOX_31   = 31,
+    AI_STATE_PROJECTILE_HITBOX_32   = 32,
+    AI_STATE_PROJECTILE_HITBOX_33   = 33,
 };
 
-enum GenericEnemyAnims {
+enum EnemyAIAnims {
     ENEMY_ANIM_IDLE         = 0,
     ENEMY_ANIM_WALK         = 1,
     ENEMY_ANIM_CHASE        = 3,
     ENEMY_ANIM_JUMP         = 4,
+    ENEMY_ANIM_MELEE_PRE    = 8,
+    ENEMY_ANIM_MELEE_HIT    = 9,
 };
 
 enum EnemyActionFlags {
@@ -2822,30 +2835,33 @@ enum AiStateNappingClubba {
     AI_STATE_NAPPING_CLUBBA_99                  = 99,
 };
 
-enum ClubbaAttackState {
-    CLUBBA_ATTACK_STATE_NONE        = 0,
-    CLUBBA_ATTACK_STATE_INIT        = 1,
-    CLUBBA_ATTACK_STATE_PREPARE     = 2,
-    CLUBBA_ATTACK_STATE_STRIKE      = 3,  // hitbox is active
-    CLUBBA_ATTACK_STATE_POST        = 4
-};
-
-enum MeleeHitboxStates {
-    AI_STATE_MELEE_HITBOX_30        = 30,
-    AI_STATE_MELEE_HITBOX_31        = 31,
-    AI_STATE_MELEE_HITBOX_32        = 32,
-    AI_STATE_MELEE_HITBOX_33        = 33,
-};
-
-enum ProjectileHitboxStates {
-    AI_STATE_PROJECTILE_HITBOX_30   = 30,
-    AI_STATE_PROJECTILE_HITBOX_31   = 31,
-    AI_STATE_PROJECTILE_HITBOX_32   = 32,
-    AI_STATE_PROJECTILE_HITBOX_33   = 33,
+enum MeleeHitboxAttackStates {
+    MELEE_HITBOX_STATE_NONE         = 0,
+    MELEE_HITBOX_STATE_INIT         = 1,
+    MELEE_HITBOX_STATE_PRE          = 2,
+    MELEE_HITBOX_STATE_ACTIVE       = 3,  // hitbox is active
+    MELEE_HITBOX_STATE_POST         = 4
 };
 
 #define VAR_PROJECTILE_HITBOX_STATE varTable[0]
 #define VAR_PROJECTILE_COUNT varTable[3]
+
+// ai script
+#define AI_TEMP_STATE                  functionTemp[0]
+#define AI_TEMP_STATE_AFTER_SUSPEND    functionTemp[1]
+// melee enemy
+#define AI_VAR_ATTACK_STATE    varTable[0]
+#define AI_VAR_MELEE_PRE_TIME  varTable[1]
+#define AI_VAR_MELEE_HIT_TIME  varTable[2]
+#define AI_VAR_MELEE_MISS_TIME varTable[3]
+#define AI_VAR_NEXT_STATE      varTable[7]
+// melee hitbox
+#define AI_VAR_HITNPC_YOFFSET  varTable[0]
+#define AI_VAR_HITNPC_DIST     varTable[1]
+#define AI_VAR_HITNPC_2        varTable[2]
+#define AI_VAR_HITNPC_3        varTable[3]
+#define AI_VAR_HITNPC_4        varTable[4]
+#define AI_VAR_HITNPC_SOUND    varTable[15]
 
 enum MusicSettingsFlags {
     MUSIC_SETTINGS_FLAGS_1                 = 0x00000001,

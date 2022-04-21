@@ -1,23 +1,5 @@
 #include "common.h"
-
-extern Npc* wPartnerNpc;
-
-// ai script
-#define TEMP_STATE                  functionTemp[0]
-#define TEMP_STATE_AFTER_SUSPEND    functionTemp[1]
-// main clubba enemy
-#define VAR_ATTACK_STATE    varTable[0]
-#define VAR_PREPARE_TIME    varTable[1]
-#define VAR_STRIKE_TIME     varTable[2]
-#define VAR_MISS_TIME       varTable[3]
-#define VAR_NEXT_STATE      varTable[7]
-// hitbox enemy
-#define VAR_HITNPC_YOFFSET  varTable[0]
-#define VAR_HITNPC_DIST     varTable[1]
-#define VAR_HITNPC_2        varTable[2]
-#define VAR_HITNPC_3        varTable[3]
-#define VAR_HITNPC_4        varTable[4]
-#define VAR_HITNPC_SOUND    varTable[15]
+#include "world/partners.h"
 
 void N(ClubbaNappingAI_Init)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
@@ -32,7 +14,7 @@ void N(ClubbaNappingAI_Init)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
     } else if (npc->duration <= 0) {
         npc->currentAnim.w = enemy->animList[10];
         npc->duration = 0;
-        script->TEMP_STATE = AI_STATE_NAPPING_CLUBBA_SLEEP;
+        script->AI_TEMP_STATE = AI_STATE_NAPPING_CLUBBA_SLEEP;
     }
 }
 
@@ -81,7 +63,7 @@ void N(ClubbaNappingAI_Sleep)(Evt* script, NpcAISettings* aiSettings, EnemyTerri
         npc->duration = 10;
         fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &emoteTemp);
         ai_enemy_play_sound(npc, SOUND_2F4, 0x200000);
-        script->TEMP_STATE = AI_STATE_NAPPING_CLUBBA_WAKE_UP;
+        script->AI_TEMP_STATE = AI_STATE_NAPPING_CLUBBA_WAKE_UP;
     }
 
     npc->duration++;
@@ -104,8 +86,8 @@ void N(ClubbaNappingAI_WakeUp)(Evt* script, NpcAISettings* aiSettings, EnemyTerr
     npc->duration--;
     if (npc->duration <= 0) {
         npc->duration = 1;
-        enemy->VAR_NEXT_STATE = AI_STATE_NAPPING_CLUBBA_INIT_RETURN_HOME;
-        script->TEMP_STATE = AI_STATE_NAPPING_CLUBBA_3;
+        enemy->AI_VAR_NEXT_STATE = AI_STATE_NAPPING_CLUBBA_INIT_RETURN_HOME;
+        script->AI_TEMP_STATE = AI_STATE_NAPPING_CLUBBA_3;
     }
 }
 
@@ -116,7 +98,7 @@ void N(ClubbaNappingAI_FindPlayerInit)(Evt* script, NpcAISettings* aiSettings, E
     npc->yaw = clamp_angle((npc->yaw + rand_int(180)) - 90.0f);
     npc->currentAnim.w = enemy->animList[0];
     script->functionTemp[1] = (rand_int(1000) % 2) + 2; // chose random number 2-3
-    script->TEMP_STATE = AI_STATE_NAPPING_CLUBBA_ACQUIRE;
+    script->AI_TEMP_STATE = AI_STATE_NAPPING_CLUBBA_ACQUIRE;
 }
 
 void N(ClubbaNappingAI_FindPlayer)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
@@ -127,7 +109,7 @@ void N(ClubbaNappingAI_FindPlayer)(Evt* script, NpcAISettings* aiSettings, Enemy
     // try to catch sight of player
     if (basic_ai_try_detect_player(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 0)) {
         npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
-        script->TEMP_STATE = AI_STATE_NAPPING_CLUBBA_INIT_CHASE;
+        script->AI_TEMP_STATE = AI_STATE_NAPPING_CLUBBA_INIT_CHASE;
         return;
     }
 
@@ -142,13 +124,13 @@ void N(ClubbaNappingAI_FindPlayer)(Evt* script, NpcAISettings* aiSettings, Enemy
         }
 
         // didnt see player, continue to next state
-        nextState = enemy->VAR_NEXT_STATE;
+        nextState = enemy->AI_VAR_NEXT_STATE;
         if (nextState == AI_STATE_NAPPING_CLUBBA_INIT_RETURN_HOME) {
             npc->duration = 20;
-            script->TEMP_STATE = nextState;
+            script->AI_TEMP_STATE = nextState;
         } else if (nextState == AI_STATE_NAPPING_CLUBBA_50) {
             npc->duration = 25;
-            script->TEMP_STATE = nextState;
+            script->AI_TEMP_STATE = nextState;
         }
     }
 }
@@ -165,7 +147,7 @@ void N(ClubbaNappingAI_ReturnHomeInit)(Evt* script, NpcAISettings* aiSettings, E
         } else {
             npc->moveSpeed = enemy->territory->wander.moveSpeedOverride / 32767.0;
         }
-        script->TEMP_STATE = AI_STATE_NAPPING_CLUBBA_RETURN_HOME;
+        script->AI_TEMP_STATE = AI_STATE_NAPPING_CLUBBA_RETURN_HOME;
     }
 }
 
@@ -176,13 +158,13 @@ void N(ClubbaNappingAI_ReturnHome)(Evt* script, NpcAISettings* aiSettings, Enemy
 
     if (basic_ai_try_detect_player(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 0)) {
         npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
-        script->TEMP_STATE = AI_STATE_NAPPING_CLUBBA_INIT_CHASE;
+        script->AI_TEMP_STATE = AI_STATE_NAPPING_CLUBBA_INIT_CHASE;
     } else if (dist2D(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x,
                       enemy->territory->wander.point.z) <= npc->moveSpeed) {
         npc->currentAnim.w = enemy->animList[0];
         npc->duration = 15;
-        enemy->VAR_NEXT_STATE = AI_STATE_NAPPING_CLUBBA_50;
-        script->TEMP_STATE = AI_STATE_NAPPING_CLUBBA_3;
+        enemy->AI_VAR_NEXT_STATE = AI_STATE_NAPPING_CLUBBA_50;
+        script->AI_TEMP_STATE = AI_STATE_NAPPING_CLUBBA_3;
     } else if (npc->turnAroundYawAdjustment == 0) {
         currentYaw = npc->yaw;
         ai_check_fwd_collisions(npc, 5.0f, &currentYaw, 0, 0, 0);
@@ -200,7 +182,7 @@ void N(ClubbaNappingAI_FallAsleep)(Evt* script, NpcAISettings* aiSettings, Enemy
         npc->duration--;
         if (npc->duration <= 0) {
             npc->duration = 0;
-            script->TEMP_STATE = AI_STATE_NAPPING_CLUBBA_INIT;
+            script->AI_TEMP_STATE = AI_STATE_NAPPING_CLUBBA_INIT;
         }
     }
 }
@@ -223,32 +205,32 @@ ApiStatus N(ClubbaNappingAI_Main)(Evt* script, s32 isInitialCall) {
     territory.unk_1C = 0;
 
     if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAGS_4)) {
-        script->TEMP_STATE = AI_STATE_NAPPING_CLUBBA_INIT;
+        script->AI_TEMP_STATE = AI_STATE_NAPPING_CLUBBA_INIT;
         npc->duration = 30;
         npc->currentAnim.w = enemy->animList[10];
         npc->flags &= ~NPC_FLAG_JUMPING;
-        enemy->VAR_ATTACK_STATE = CLUBBA_ATTACK_STATE_NONE;
+        enemy->AI_VAR_ATTACK_STATE = MELEE_HITBOX_STATE_NONE;
         if (!enemy->territory->wander.isFlying) {
             npc->flags = (npc->flags | NPC_FLAG_GRAVITY) & ~NPC_FLAG_ENABLE_HIT_SCRIPT;
         } else {
             npc->flags = (npc->flags & ~NPC_FLAG_GRAVITY) | NPC_FLAG_ENABLE_HIT_SCRIPT;
         }
         if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
-            script->TEMP_STATE = AI_STATE_NAPPING_CLUBBA_99;
-            script->TEMP_STATE_AFTER_SUSPEND = AI_STATE_NAPPING_CLUBBA_INIT_RETURN_HOME;
+            script->AI_TEMP_STATE = AI_STATE_NAPPING_CLUBBA_99;
+            script->AI_TEMP_STATE_AFTER_SUSPEND = AI_STATE_NAPPING_CLUBBA_INIT_RETURN_HOME;
             npc->currentAnim.w = enemy->animList[0];
         }
         enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
     }
 
-    if (script->TEMP_STATE >= AI_STATE_NAPPING_CLUBBA_10
-            && script->TEMP_STATE < AI_STATE_NAPPING_CLUBBA_30
-            && enemy->VAR_ATTACK_STATE == CLUBBA_ATTACK_STATE_NONE
+    if (script->AI_TEMP_STATE >= AI_STATE_NAPPING_CLUBBA_10
+            && script->AI_TEMP_STATE < AI_STATE_NAPPING_CLUBBA_30
+            && enemy->AI_VAR_ATTACK_STATE == MELEE_HITBOX_STATE_NONE
             && N(MeleeHitbox_CanSeePlayer)(script)) {
-        script->TEMP_STATE = AI_STATE_NAPPING_CLUBBA_30;
+        script->AI_TEMP_STATE = AI_STATE_NAPPING_CLUBBA_30;
     }
 
-    switch (script->TEMP_STATE) {
+    switch (script->AI_TEMP_STATE) {
         case AI_STATE_NAPPING_CLUBBA_INIT:
             N(ClubbaNappingAI_Init)(script, npcAISettings, territoryPtr);
             break;
@@ -266,7 +248,7 @@ ApiStatus N(ClubbaNappingAI_Main)(Evt* script, s32 isInitialCall) {
             break;
         case AI_STATE_NAPPING_CLUBBA_INIT_CHASE:
             basic_ai_chase_init(script, npcAISettings, territoryPtr);
-            if (script->TEMP_STATE != AI_STATE_NAPPING_CLUBBA_CHASE) {
+            if (script->AI_TEMP_STATE != AI_STATE_NAPPING_CLUBBA_CHASE) {
                 break;
             }
         case AI_STATE_NAPPING_CLUBBA_CHASE:
@@ -276,17 +258,17 @@ ApiStatus N(ClubbaNappingAI_Main)(Evt* script, s32 isInitialCall) {
             // LOSE PLAYER
             basic_ai_lose_player(script, npcAISettings, territoryPtr);
             npc->duration = 15;
-            enemy->VAR_NEXT_STATE = AI_STATE_NAPPING_CLUBBA_INIT_RETURN_HOME;
-            script->TEMP_STATE = AI_STATE_NAPPING_CLUBBA_3;
+            enemy->AI_VAR_NEXT_STATE = AI_STATE_NAPPING_CLUBBA_INIT_RETURN_HOME;
+            script->AI_TEMP_STATE = AI_STATE_NAPPING_CLUBBA_3;
             break;
         case AI_STATE_NAPPING_CLUBBA_30: // pre swing
             N(MeleeHitbox_30)(script);
-            if (script->TEMP_STATE != AI_STATE_NAPPING_CLUBBA_31) {
+            if (script->AI_TEMP_STATE != AI_STATE_NAPPING_CLUBBA_31) {
                 break;
             }
         case AI_STATE_NAPPING_CLUBBA_31: // raise club
             N(MeleeHitbox_31)(script);
-            if (script->TEMP_STATE != AI_STATE_NAPPING_CLUBBA_32) {
+            if (script->AI_TEMP_STATE != AI_STATE_NAPPING_CLUBBA_32) {
                 break;
             }
         case AI_STATE_NAPPING_CLUBBA_32: // swing club
@@ -299,7 +281,7 @@ ApiStatus N(ClubbaNappingAI_Main)(Evt* script, s32 isInitialCall) {
         case AI_STATE_NAPPING_CLUBBA_INIT_RETURN_HOME:
             // START RETURN HOME
             N(ClubbaNappingAI_ReturnHomeInit)(script, npcAISettings, territoryPtr);
-            if (script->TEMP_STATE != AI_STATE_NAPPING_CLUBBA_RETURN_HOME) {
+            if (script->AI_TEMP_STATE != AI_STATE_NAPPING_CLUBBA_RETURN_HOME) {
                 break;
             }
         case AI_STATE_NAPPING_CLUBBA_RETURN_HOME:

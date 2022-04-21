@@ -38,8 +38,8 @@ ApiStatus N(MeleeHitbox_Main)(Evt *script, s32 isInitialCall) {
         enemy->varTable[0] = 0;
     }
 
-    if ((script->functionTemp[0] < AI_STATE_MELEE_HITBOX_30) && (enemy->varTable[0] == 0) && N(MeleeHitbox_CanSeePlayer)(script)) {
-        script->functionTemp[0] = AI_STATE_MELEE_HITBOX_30;
+    if ((script->functionTemp[0] < AI_STATE_MELEE_HITBOX_INIT) && (enemy->varTable[0] == 0) && N(MeleeHitbox_CanSeePlayer)(script)) {
+        script->functionTemp[0] = AI_STATE_MELEE_HITBOX_INIT;
     }
 
     switch (script->functionTemp[0]) {
@@ -66,19 +66,19 @@ ApiStatus N(MeleeHitbox_Main)(Evt *script, s32 isInitialCall) {
         case AI_STATE_LOSE_PLAYER:
             basic_ai_lose_player(script, npcAISettings, territoryPtr);
             break;
-        case AI_STATE_MELEE_HITBOX_30:
+        case AI_STATE_MELEE_HITBOX_INIT:
             N(MeleeHitbox_30)(script);
-        case AI_STATE_MELEE_HITBOX_31:
+        case AI_STATE_MELEE_HITBOX_PRE:
             N(MeleeHitbox_31)(script);
-            if (script->functionTemp[0] != AI_STATE_MELEE_HITBOX_32) {
+            if (script->functionTemp[0] != AI_STATE_MELEE_HITBOX_ACTIVE) {
                 break;
             }
-        case AI_STATE_MELEE_HITBOX_32:
+        case AI_STATE_MELEE_HITBOX_ACTIVE:
             N(MeleeHitbox_32)(script);
-            if (script->functionTemp[0] != AI_STATE_MELEE_HITBOX_33) {
+            if (script->functionTemp[0] != AI_STATE_MELEE_HITBOX_MISS) {
                 break;
             }
-        case AI_STATE_MELEE_HITBOX_33:
+        case AI_STATE_MELEE_HITBOX_MISS:
             N(MeleeHitbox_33)(script);
             break;
         case AI_STATE_SUSPEND:

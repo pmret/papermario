@@ -239,7 +239,7 @@ glabel func_80242AF0_EE14B0
 /* EE1810 80242E50 00000000 */   nop
 .L80242E54:
 /* EE1814 80242E54 0260282D */  daddu     $a1, $s3, $zero
-/* EE1818 80242E58 0C013670 */  jal       func_8004D9C0
+/* EE1818 80242E58 0C013670 */  jal       dead_basic_ai_wander_init
 /* EE181C 80242E5C 0280302D */   daddu    $a2, $s4, $zero
 /* EE1820 80242E60 96420086 */  lhu       $v0, 0x86($s2)
 /* EE1824 80242E64 A62200A8 */  sh        $v0, 0xa8($s1)
@@ -269,18 +269,18 @@ glabel func_80242AF0_EE14B0
 /* EE1878 80242EB8 02A0202D */  daddu     $a0, $s5, $zero
 .L80242EBC:
 /* EE187C 80242EBC 0260282D */  daddu     $a1, $s3, $zero
-/* EE1880 80242EC0 0C0136B6 */  jal       func_8004DAD8
+/* EE1880 80242EC0 0C0136B6 */  jal       dead_basic_ai_wander
 /* EE1884 80242EC4 0280302D */   daddu    $a2, $s4, $zero
 /* EE1888 80242EC8 08090CFA */  j         .L802433E8
 /* EE188C 80242ECC 00000000 */   nop
 .L80242ED0:
 /* EE1890 80242ED0 0260282D */  daddu     $a1, $s3, $zero
-/* EE1894 80242ED4 0C0137D9 */  jal       func_8004DF64
+/* EE1894 80242ED4 0C0137D9 */  jal       dead_basic_ai_loiter_init
 /* EE1898 80242ED8 0280302D */   daddu    $a2, $s4, $zero
 .L80242EDC:
 /* EE189C 80242EDC 02A0202D */  daddu     $a0, $s5, $zero
 /* EE18A0 80242EE0 0260282D */  daddu     $a1, $s3, $zero
-/* EE18A4 80242EE4 0C013809 */  jal       func_8004E024
+/* EE18A4 80242EE4 0C013809 */  jal       dead_basic_ai_loiter
 /* EE18A8 80242EE8 0280302D */   daddu    $a2, $s4, $zero
 /* EE18AC 80242EEC 08090CFA */  j         .L802433E8
 /* EE18B0 80242EF0 00000000 */   nop
@@ -617,7 +617,7 @@ glabel func_80242AF0_EE14B0
 /* EE1D98 802433D8 08090CFA */  j         .L802433E8
 /* EE1D9C 802433DC AEA20070 */   sw       $v0, 0x70($s5)
 .L802433E0:
-/* EE1DA0 802433E0 0C013AE3 */  jal       func_8004EB8C
+/* EE1DA0 802433E0 0C013AE3 */  jal       dead_basic_ai_suspend
 /* EE1DA4 802433E4 02A0202D */   daddu    $a0, $s5, $zero
 .L802433E8:
 /* EE1DA8 802433E8 8FBF0080 */  lw        $ra, 0x80($sp)

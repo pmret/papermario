@@ -18,7 +18,7 @@ INCLUDE_ASM(s32, "world/area_omo/omo_02/D9D510", func_80240BA8_D9E078);
 
 #include "world/common/enemy/UnkAI_4.inc.c"
 
-#include "world/common/enemy/ThrowAttackAI.inc.c"
+#include "world/common/enemy/ProjectileHitbox.inc.c"
 
 #include "world/common/SetNpcB5_3.inc.c"
 
