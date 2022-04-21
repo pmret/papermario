@@ -2064,7 +2064,7 @@ void load_player_actor(void) {
     player->shadow.id = create_shadow_type(0, player->currentPos.x, player->currentPos.y, player->currentPos.z);
     player->shadowScale = player->size.x / 24.0;
     player->hudElementDataIndex = create_status_icon_set();
-    player->debuffIcon = fx_disable_x(0, -142.0f, 34.0f, 1.0f, 0);
+    player->debuffEffect = fx_disable_x(0, -142.0f, 34.0f, 1.0f, 0);
     player->unk_228 = NULL;
 
     if (is_ability_active(ABILITY_ZAP_TAP)) {
@@ -2318,7 +2318,7 @@ void load_partner_actor(void) {
         partnerActor->shadow.id = create_shadow_type(0, partnerActor->currentPos.x, partnerActor->currentPos.y, partnerActor->currentPos.z);
         partnerActor->shadowScale = partnerActor->size.x / 24.0;
         partnerActor->hudElementDataIndex = create_status_icon_set();
-        partnerActor->debuffIcon = fx_disable_x(0, -142.0f, 34.0f, 1.0f, 0);
+        partnerActor->debuffEffect = fx_disable_x(0, -142.0f, 34.0f, 1.0f, 0);
         partnerActor->unk_228 = NULL;
 
         takeTurnScript = start_script(partnerActor->takeTurnScriptSource, EVT_PRIORITY_A, 0);
@@ -2589,7 +2589,7 @@ Actor* create_actor(Formation formation) {
     takeTurnScript->owner1.enemyID = actor->enemyIndex | 0x200;
     actor->shadow.id = create_shadow_type(0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z);
     actor->shadowScale = actor->size.x / 24.0;
-    actor->debuffIcon = fx_disable_x(0, -142.0f, 34.0f, 1.0f, 0);
+    actor->debuffEffect = fx_disable_x(0, -142.0f, 34.0f, 1.0f, 0);
     actor->unk_228 = NULL;
     actor->hudElementDataIndex = create_status_icon_set();
     return actor;
@@ -2754,7 +2754,7 @@ s32 inflict_status(Actor* target, s32 statusTypeKey, s32 duration) {
                     if (target->debuff != statusTypeKey) {
                         target->status = statusTypeKey;
                     }
-                    ((s32*)target->debuffIcon->data)[15] = 0;
+                    ((DisableXFXData*)target->debuffEffect->data)->unk_3C = 0;
                     target->debuff = statusTypeKey;
                     target->debuffDuration = duration;
                     if ((s8)duration > 9) {
@@ -3502,7 +3502,7 @@ void btl_update_ko_status(void) {
     player->koDuration = player->debuffDuration;
     if (player->koDuration > 0) {
         player->koStatus = STATUS_DAZE;
-        ((s32*)player->debuffIcon->data)[15] = player->koDuration;
+        ((DisableXFXData*)player->debuffEffect->data)->unk_3C = player->koDuration;
 
         if (koDuration == 0) {
             sfx_play_sound(SOUND_2107);
@@ -3517,7 +3517,7 @@ void btl_update_ko_status(void) {
 
         if (partner->koDuration > 0) {
             partner->koStatus = STATUS_DAZE;
-            ((s32*)partner->debuffIcon->data)[15] = partner->koDuration;
+            ((DisableXFXData*)partner->debuffEffect->data)->unk_3C = partner->koDuration;
         }
     }
 
@@ -3528,7 +3528,7 @@ void btl_update_ko_status(void) {
             enemy->koDuration = enemy->debuffDuration;
             if (enemy->koDuration > 0) {
                 enemy->koStatus = STATUS_DAZE;
-                ((s32*)enemy->debuffIcon->data)[15] = enemy->koDuration;
+                ((DisableXFXData*)enemy->debuffEffect->data)->unk_3C = enemy->koDuration;
             }
         }
     }

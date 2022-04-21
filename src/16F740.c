@@ -79,17 +79,17 @@ void btl_set_state(s32 battleState) {
     flags &= BS_FLAGS2_40;
     if (flags) {
         switch (battleState) {
-            case 14:
-                battleState = 16;
+            case BATTLE_STATE_PARTNER_MENU:
+                battleState = BATTLE_STATE_TWINK_MENU;
                 break;
-            case 13:
-                battleState = 15;
+            case BATTLE_STATE_PLAYER_MENU:
+                battleState = BATTLE_STATE_PEACH_MENU;
                 break;
-            case 7:
-                battleState = 8;
+            case BATTLE_STATE_BEGIN_PLAYER_TURN:
+                battleState = BATTLE_STATE_BEGIN_PARTNER_TURN;
                 break;
-            case 8:
-                battleState = 7;
+            case BATTLE_STATE_BEGIN_PARTNER_TURN:
+                battleState = BATTLE_STATE_BEGIN_PLAYER_TURN;
                 break;
         }
         gBattleState = battleState;
@@ -295,7 +295,7 @@ void btl_state_update_victory(void) {
             player->transStatus = 0;
             player->koStatus = 0;
             player->koDuration = 0;
-            ((s32*)player->debuffIcon->data)[15] = 0;
+            ((DisableXFXData*)player->debuffEffect->data)->unk_3C = 0;
 
             if (partner != NULL) {
                 if (partner->koStatus == STATUS_DAZE) {
@@ -308,7 +308,7 @@ void btl_state_update_victory(void) {
                 partner->transStatus = 0;
                 partner->koStatus = 0;
                 partner->koDuration = 0;
-                ((s32*)partner->debuffIcon->data)[15] = 0;
+                ((DisableXFXData*)partner->debuffEffect->data)->unk_3C = 0;
             }
             break;
         case BATTLE_STATE2_PLAYER_DEFEATED:
@@ -465,21 +465,19 @@ void btl_state_update_end_training_battle(void) {
             player->transStatus = 0;
             player->koStatus = 0;
             player->koDuration = 0;
-            // TODO use proper effect struct here once we have it (disable_x)
-            ((s32*)player->debuffIcon->data)[15] = 0;
+            ((DisableXFXData*)player->debuffEffect->data)->unk_3C = 0;
             if (partner != NULL) {
                 if (partner->koStatus == STATUS_DAZE) {
                     dispatch_event_partner(EVENT_34);
                     gBattleState2 = BATTLE_STATE2_PLAYER_DEFEATED;
                 }
-                // TODO use proper effect struct here once we have it (disable_x)
                 partner->debuff = 0;
                 partner->staticStatus = 0;
                 partner->stoneStatus = 0;
                 partner->transStatus = 0;
                 partner->koStatus = 0;
                 partner->koDuration = 0;
-                ((s32*)partner->debuffIcon->data)[15] = 0;
+                ((DisableXFXData*)partner->debuffEffect->data)->unk_3C = 0;
             }
             break;
         case BATTLE_STATE2_PLAYER_DEFEATED:
@@ -621,7 +619,7 @@ void btl_state_update_defeat(void) {
                 remove_status_debuff(player->hudElementDataIndex);
                 player->koStatus = 0;
                 player->koDuration = 0;
-                ((s32*)player->debuffIcon->data)[15] = 0;
+                ((DisableXFXData*)player->debuffEffect->data)->unk_3C = 0;
             }
 
             func_8024E40C(0x19);

@@ -2751,7 +2751,7 @@ segments:
     vram: 0xE0082000
     subsegments:
     - [0x385640, c, disable_x]
-    - [0x386340, data]
+    - [0x386340]
   - [0x3863B0, bin] # disable_x gfx
   - name: effect_bombette_breaking
     dir: effects

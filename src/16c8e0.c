@@ -1024,7 +1024,7 @@ void btl_delete_actor(Actor* actor) {
 
     delete_shadow(actor->shadow.id);
     remove_all_status_icons(actor->hudElementDataIndex);
-    remove_effect(actor->debuffIcon); // ???
+    remove_effect(actor->debuffEffect);
 
     if (actor->unk_200 != NULL) {
         actor->unk_200[3][9] = 0;
@@ -1067,7 +1067,7 @@ void btl_delete_player_actor(Actor* player) {
 
     delete_shadow(player->shadow.id);
     remove_all_status_icons(player->hudElementDataIndex);
-    remove_effect(player->debuffIcon); // ???
+    remove_effect(player->debuffEffect);
 
     if (player->unk_200 != NULL) {
         player->unk_200[3][9] = 0;

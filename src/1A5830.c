@@ -1997,7 +1997,7 @@ ApiStatus ClearStatusEffects(Evt* script, s32 isInitialCall) {
 
     actor->koStatus = 0;
     actor->koDuration = 0;
-    ((s32*)actor->debuffIcon->data)[15] = 0;
+    ((DisableXFXData*)actor->debuffEffect->data)->unk_3C = 0;
     actor->attackBoost = 0;
     actor->defenseBoost = 0;
     actor->isGlowing = 0;
