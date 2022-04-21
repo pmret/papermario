@@ -7,7 +7,7 @@
 
 #include "world/common/enemy/ClubbaNappingAI.inc.c"
 
-//TODO ClubbaWanderAI_Main ?
+//TODO ClubbaPatrolAI_Main ?
 ApiStatus N(func_80241170_C3ED60)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);

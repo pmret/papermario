@@ -600,6 +600,7 @@ enum SoundIDs {
     SOUND_MOLE_SURFACE              = 0x00000321,
     SOUND_MOLE_DIG                  = 0x00000322,
     SOUND_MOLE_POP                  = 0x00000323,
+    SOUND_328                       = 0x00000328,
     SOUND_32E                       = 0x0000032E,
     SOUND_359                       = 0x00000359,
     SOUND_361                       = 0x00000361,
@@ -689,6 +690,7 @@ enum SoundIDs {
     SOUND_211A                      = 0x0000211A,
     SOUND_212D                      = 0x0000212D,
     SOUND_212E                      = 0x0000212E,
+    SOUND_B0000018                  = 0xB0000018,
 };
 
 enum Cams {
@@ -2841,6 +2843,15 @@ enum MeleeHitboxAttackStates {
     MELEE_HITBOX_STATE_PRE          = 2,
     MELEE_HITBOX_STATE_ACTIVE       = 3,  // hitbox is active
     MELEE_HITBOX_STATE_POST         = 4
+};
+
+enum ProjectileHitboxAttackStates {
+    PROJECTILE_HITBOX_STATE_NONE        = 0,
+    PROJECTILE_HITBOX_STATE_INIT        = 1,
+    PROJECTILE_HITBOX_STATE_PRE         = 2,
+    PROJECTILE_HITBOX_STATE_ACTIVE      = 3,  // hitbox is active
+    PROJECTILE_HITBOX_STATE_POST        = 4,
+    PROJECTILE_HITBOX_STATE_DONE        = 100
 };
 
 #define VAR_PROJECTILE_HITBOX_STATE varTable[0]

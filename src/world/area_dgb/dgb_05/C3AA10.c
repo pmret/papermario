@@ -370,7 +370,7 @@ ApiStatus N(func_80240030_C3AA40)(Evt* script, s32 isInitialCall) {
 
 #include "world/common/enemy/ClubbaNappingAI.inc.c"
 
-ApiStatus N(func_802411D0_C3BBE0)(Evt* script, s32 isInitialCall) {
+ApiStatus N(UnkNpcAIMainFunc)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;

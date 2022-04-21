@@ -74,7 +74,7 @@ static void N(MontyMoleAI_Init)(Evt* script, NpcAISettings* aiSettings, EnemyTer
     enemy->flags |= MONTY_MOLE_UNK_NPC_FLAGS;
     npc->flags |= NPC_FLAG_2;
     script->functionTemp[1] = 0;
-    script->functionTemp[0] = AI_STATE_MOLE_WANDER;
+    script->AI_TEMP_STATE = AI_STATE_MOLE_WANDER;
 }
 
 static void N(MontyMoleAI_Wander)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
@@ -98,14 +98,14 @@ static void N(MontyMoleAI_Wander)(Evt* script, NpcAISettings* aiSettings, EnemyT
         npc_move_heading(npc, npc->moveSpeed, npc->yaw);
     }
     if (npc->flags & NPC_FLAG_4000) {
-        script->functionTemp[0] = AI_STATE_MOLE_INIT;
+        script->AI_TEMP_STATE = AI_STATE_MOLE_INIT;
     }
     if (aiSettings->unk_14 >= 0) {
         if (script->functionTemp[1] <= 0) {
             script->functionTemp[1] = aiSettings->unk_14;
             if (N(MontyMoleAI_CanAttack)(script, territory, aiSettings->alertRadius, aiSettings->unk_10.f)) {
                 npc->duration = 0;
-                script->functionTemp[0] = AI_STATE_MOLE_PRE_SURFACE;
+                script->AI_TEMP_STATE = AI_STATE_MOLE_PRE_SURFACE;
                 return;
             }
         }
@@ -117,7 +117,7 @@ static void N(MontyMoleAI_Wander)(Evt* script, NpcAISettings* aiSettings, EnemyT
     }
     npc->duration--;
     if (npc->duration == 0) {
-        script->functionTemp[0] = AI_STATE_MOLE_INIT;
+        script->AI_TEMP_STATE = AI_STATE_MOLE_INIT;
     }
 }
 
@@ -129,7 +129,7 @@ static void N(MontyMoleAI_PreSurface)(Evt* script, NpcAISettings* aiSettings, En
     npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
     npc->currentAnim.w = NPC_ANIM_monty_mole_Palette_00_Anim_10; // emerge from ground
     npc->duration = 10;
-    script->functionTemp[0] = AI_STATE_MOLE_SURFACE;
+    script->AI_TEMP_STATE = AI_STATE_MOLE_SURFACE;
 }
 
 static void N(MontyMoleAI_Surface)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
@@ -143,7 +143,7 @@ static void N(MontyMoleAI_Surface)(Evt* script, NpcAISettings* aiSettings, Enemy
     if (npc->duration <= 0) {
         npc->currentAnim.w = NPC_ANIM_monty_mole_Palette_00_Anim_18; // get and throw rock
         npc->duration = 10;
-        script->functionTemp[0] = AI_STATE_MOLE_DRAW_ROCK;
+        script->AI_TEMP_STATE = AI_STATE_MOLE_DRAW_ROCK;
     }
 }
 
@@ -158,11 +158,11 @@ static void N(MontyMoleAI_DrawRock)(Evt* script, NpcAISettings* aiSettings, Enem
             fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &emoteOut);
             npc->currentAnim.w = NPC_ANIM_monty_mole_Palette_00_Anim_1; // cancel attack
             npc->duration = 30;
-            script->functionTemp[0] =  AI_STATE_MOLE_PRE_BURROW;
+            script->AI_TEMP_STATE =  AI_STATE_MOLE_PRE_BURROW;
         } else {
             npc->currentAnim.w = NPC_ANIM_monty_mole_Palette_00_Anim_1B; // throw rock
             npc->duration = 15;
-            script->functionTemp[0] =  AI_STATE_MOLE_THROW_ROCK;
+            script->AI_TEMP_STATE =  AI_STATE_MOLE_THROW_ROCK;
         }
     }
 }
@@ -190,7 +190,7 @@ static void N(MontyMoleAI_ThrowRock)(Evt* script, NpcAISettings* aiSettings, Ene
             moleNpc->currentAnim.w = NPC_ANIM_monty_mole_Palette_00_Anim_1;
         }
         moleNpc->duration = 15;
-        script->functionTemp[0] = AI_STATE_MOLE_PRE_BURROW;
+        script->AI_TEMP_STATE = AI_STATE_MOLE_PRE_BURROW;
     }
 }
 
@@ -202,7 +202,7 @@ static void N(MontyMoleAI_PreBurrow)(Evt* script, NpcAISettings* aiSettings, Ene
         ai_enemy_play_sound(npc, SOUND_MOLE_DIG, 0);
         npc->duration = 11;
         npc->currentAnim.w = NPC_ANIM_monty_mole_Palette_00_Anim_11; // retreat into ground
-        script->functionTemp[0] = AI_STATE_MOLE_BURROW;
+        script->AI_TEMP_STATE = AI_STATE_MOLE_BURROW;
     }
 }
 
@@ -216,7 +216,7 @@ static void N(MontyMoleAI_Burrow)(Evt* script, NpcAISettings* aiSettings, EnemyT
     }
     if (npc->duration <= 0) {
         npc->flags |= NPC_FLAG_2;
-        script->functionTemp[0] = AI_STATE_MOLE_INIT;
+        script->AI_TEMP_STATE = AI_STATE_MOLE_INIT;
     }
 }
 
@@ -238,7 +238,7 @@ ApiStatus N(MontyMoleAI_Main)(Evt* script, s32 isInitialCall) {
     territory->unk_1C = 0;
 
     if (isInitialCall) {
-        script->functionTemp[0] = AI_STATE_MOLE_INIT;
+        script->AI_TEMP_STATE = AI_STATE_MOLE_INIT;
         npc->duration = 0;
         npc->flags &= -(NPC_FLAG_PASSIVE | NPC_FLAG_JUMPING);
         enemy->aiFlags |= (ENEMY_AI_FLAGS_8 | ENEMY_AI_FLAGS_10);
@@ -252,7 +252,7 @@ ApiStatus N(MontyMoleAI_Main)(Evt* script, s32 isInitialCall) {
         }
     }
     
-    switch (script->functionTemp[0]) {
+    switch (script->AI_TEMP_STATE) {
     case AI_STATE_MOLE_INIT:
         N(MontyMoleAI_Init)(script, aiSettings, territory);
         // fallthrough
@@ -264,17 +264,17 @@ ApiStatus N(MontyMoleAI_Main)(Evt* script, s32 isInitialCall) {
         // fallthrough
     case AI_STATE_MOLE_SURFACE:
         N(MontyMoleAI_Surface)(script, aiSettings, territory);
-        if (script->functionTemp[0] != AI_STATE_MOLE_DRAW_ROCK) {
+        if (script->AI_TEMP_STATE != AI_STATE_MOLE_DRAW_ROCK) {
             return ApiStatus_BLOCK;
         } // else fallthrough
     case AI_STATE_MOLE_DRAW_ROCK:
         N(MontyMoleAI_DrawRock)(script, aiSettings, territory);
-        if (script->functionTemp[0] != AI_STATE_MOLE_THROW_ROCK) {
+        if (script->AI_TEMP_STATE != AI_STATE_MOLE_THROW_ROCK) {
             return ApiStatus_BLOCK;
         } // else fallthrough
     case AI_STATE_MOLE_THROW_ROCK:
         N(MontyMoleAI_ThrowRock)(script, aiSettings, territory);
-        if (script->functionTemp[0] != AI_STATE_MOLE_UNUSED) {
+        if (script->AI_TEMP_STATE != AI_STATE_MOLE_UNUSED) {
             return ApiStatus_BLOCK;
         } // else fallthrough
     case AI_STATE_MOLE_PRE_BURROW:
