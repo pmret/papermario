@@ -1,20 +1,6 @@
 #include "kzn_17.h"
 
-#include "world/common/enemy/MeleeHitbox_States.inc.c"
-#include "world/common/enemy/MeleeWanderAI.inc.c"
-
-#include "world/common/enemy/PiranhaPlantAI_00.inc.c"
-#include "world/common/enemy/PiranhaPlantAI_01.inc.c"
-
-// Data migration (PiranhaPlantAI_10)
-INCLUDE_ASM(s32, "world/area_kzn/kzn_17/C85DC0", func_80240D48_C867F8);
-
-#include "world/common/enemy/PiranhaPlantAI_11.inc.c"
-#include "world/common/enemy/PiranhaPlantAI_12.inc.c"
-#include "world/common/enemy/PiranhaPlantAI_13.inc.c"
-#include "world/common/enemy/PiranhaPlantAI_14.inc.c"
-
-INCLUDE_ASM(s32, "world/area_kzn/kzn_17/C85DC0", func_80241A64_C87514);
+#include "world/common/enemy/PiranhaPlantAI.inc.c"
 
 #include "world/common/enemy/LungeAI.inc.c"
 
