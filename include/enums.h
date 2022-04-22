@@ -2681,6 +2681,7 @@ enum BattleStates2 {
     BATTLE_STATE2_UNK_40                = 0x00000040,
     BATTLE_STATE2_UNK_41                = 0x00000041,
     BATTLE_STATE2_UNK_46                = 0x00000046,
+    BATTLE_STATE2_UNK_64                = 0x00000064,
     BATTLE_STATE2_UNK_C8                = 0x000000C8,
     BATTLE_STATE2_UNK_C9                = 0x000000C9,
     BATTLE_STATE2_UNK_CA                = 0x000000CA,
