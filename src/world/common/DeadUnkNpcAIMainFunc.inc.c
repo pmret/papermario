@@ -64,7 +64,7 @@ ApiStatus N(DeadUnkNpcAIMainFunc)(Evt* script, s32 isInitialCall) {
         N(PatrolAI_Move)(script, npcAISettings, territoryPtr);
         break;
     case 0x2:
-        N(UnkNpcAIFunc1)(script, npcAISettings, territoryPtr);
+        N(PatrolAI_LoiterInit)(script, npcAISettings, territoryPtr);
         /* fallthrough */
     case 0x3:
         N(PatrolAI_Loiter)(script, npcAISettings, territoryPtr);
@@ -73,19 +73,19 @@ ApiStatus N(DeadUnkNpcAIMainFunc)(Evt* script, s32 isInitialCall) {
         N(PatrolAI_PostLoiter)(script, npcAISettings, territoryPtr);
         break;
     case 0xA:
-        N(NpcJumpFunc2)(script, npcAISettings, territoryPtr);
+        N(PatrolAI_JumpInit)(script, npcAISettings, territoryPtr);
         /* fallthrough */
     case 0xB:
-        N(NpcJumpFunc)(script, npcAISettings, territoryPtr);
+        N(PatrolAI_Jump)(script, npcAISettings, territoryPtr);
         break;
     case 0xC:
         N(FlyingNoFirstStrikeAI_12)(script, npcAISettings, territoryPtr);
         /* fallthrough */
     case 0xD:
-        N(UnkFunc15)(script, npcAISettings, territoryPtr);
+        N(PatrolAI_Chase)(script, npcAISettings, territoryPtr);
         break;
     case 0xE:
-        N(UnkNpcDurationFlagFunc)(script, npcAISettings, territoryPtr);
+        N(PatrolAI_LosePlayer)(script, npcAISettings, territoryPtr);
         break;
     case 0xF:
         N(UnkFunc16)(script, npcAISettings, territoryPtr);

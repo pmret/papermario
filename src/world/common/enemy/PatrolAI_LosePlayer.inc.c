@@ -1,16 +1,16 @@
 #include "common.h"
 #include "npc.h"
 
-void N(UnkNpcDurationFlagFunc)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(PatrolAI_LosePlayer)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
     npc->duration--;
     if (npc->duration == 0) {
         if (enemy->aiFlags & ENEMY_AI_FLAGS_80) {
-            script->functionTemp[0] = 15;
+            script->AI_TEMP_STATE = AI_STATE_PATROL_15;
         } else {
-            script->functionTemp[0] = 0;
+            script->AI_TEMP_STATE = AI_STATE_WANDER_INIT;
         }
     }
 }

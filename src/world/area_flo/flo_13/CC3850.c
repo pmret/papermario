@@ -1408,7 +1408,7 @@ ApiStatus N(func_80241DB8_CC55C8)(Evt* script, s32 isInitialCall) {
             break;
 
         case 2:
-            N(UnkNpcAIFunc1)(script, aiSettings, territoryPtr);
+            N(PatrolAI_LoiterInit)(script, aiSettings, territoryPtr);
 
         case 3:
             N(func_80241B68_CC5378)(script, aiSettings, territoryPtr);

@@ -697,7 +697,7 @@ void sfx_get_spatialized_sound_params(f32 arg0, f32 arg1, f32 arg2, s16* arg3, s
 void sfx_play_sound_with_params(s32 arg0, u8 arg1, u8 arg2, s16 arg3);
 s32 ai_check_fwd_collisions(Npc* npc, f32 arg1, f32* arg2, f32* arg3, f32* arg4, f32* arg5);
 void basic_ai_loiter_init(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory);
-void UnkNpcAIFunc1(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory);
+void PatrolAI_LoiterInit(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory);
 
 s32 func_80263230(Actor*, Actor*);
 void func_80266EA8(ActorPart*, s32);

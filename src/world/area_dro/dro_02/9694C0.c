@@ -475,7 +475,7 @@ NpcAISettings N(npcAISettings_80247408) = {
 };
 
 EvtScript N(npcAI_80247438) = {
-    EVT_CALL(DoBasicAI, EVT_PTR(N(npcAISettings_80247408)))
+    EVT_CALL(BasicAI_Main, EVT_PTR(N(npcAISettings_80247408)))
     EVT_RETURN
     EVT_END
 };
@@ -504,7 +504,7 @@ NpcAISettings N(npcAISettings_802474B0) = {
 };
 
 EvtScript N(npcAI_802474E0) = {
-    EVT_CALL(DoBasicAI, EVT_PTR(N(npcAISettings_802474B0)))
+    EVT_CALL(BasicAI_Main, EVT_PTR(N(npcAISettings_802474B0)))
     EVT_RETURN
     EVT_END
 };

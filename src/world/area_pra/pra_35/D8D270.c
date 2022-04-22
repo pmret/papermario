@@ -57,7 +57,7 @@ ApiStatus func_802423CC_D8F61C(Evt *script, s32 isInitialCall) {
             pra_35_PatrolAI_Move(script, npcAISettings, territoryPtr);
             break;
         case 2:
-            pra_35_UnkNpcAIFunc1(script, npcAISettings, territoryPtr);
+            pra_35_PatrolAI_LoiterInit(script, npcAISettings, territoryPtr);
             // fallthrough
         case 3:
             pra_35_PatrolAI_Loiter(script, npcAISettings, territoryPtr);
@@ -66,19 +66,19 @@ ApiStatus func_802423CC_D8F61C(Evt *script, s32 isInitialCall) {
             pra_35_PatrolAI_PostLoiter(script, npcAISettings, territoryPtr);
             break;
         case 5:
-            pra_35_NpcJumpFunc2(script, npcAISettings, territoryPtr);
+            pra_35_PatrolAI_JumpInit(script, npcAISettings, territoryPtr);
             // fallthrough
         case 11:
-            pra_35_NpcJumpFunc(script, npcAISettings, territoryPtr);
+            pra_35_PatrolAI_Jump(script, npcAISettings, territoryPtr);
             break;
         case 12:
             pra_35_FlyingNoFirstStrikeAI_12(script, npcAISettings, territoryPtr);
             // fallthrough
         case 13:
-            pra_35_UnkFunc15(script, npcAISettings, territoryPtr);
+            pra_35_PatrolAI_Chase(script, npcAISettings, territoryPtr);
             break;
         case 14:
-            pra_35_UnkNpcDurationFlagFunc(script, npcAISettings, territoryPtr);
+            pra_35_PatrolAI_LosePlayer(script, npcAISettings, territoryPtr);
             break;
         case 30:
             pra_35_MeleeHitbox_30(script);

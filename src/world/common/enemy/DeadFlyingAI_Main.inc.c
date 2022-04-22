@@ -45,7 +45,7 @@ ApiStatus N(DeadFlyingAI_Main)(Evt* script, s32 isInitialCall) {
         N(FlyingAI_Wander)(script, aiSettings, territoryPtr);
         return 0;
     case 2:
-        N(UnkNpcAIFunc1)(script, aiSettings, territoryPtr);
+        N(PatrolAI_LoiterInit)(script, aiSettings, territoryPtr);
         /* fallthrough */
     case 3:
         N(FlyingAI_Loiter)(script, aiSettings, territoryPtr);

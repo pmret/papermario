@@ -184,7 +184,7 @@ ApiStatus N(func_8024113C_BDFECC)(Evt* script, s32 isInitialCall) {
             N(func_80240E90_BDFC20)(script, npcAISettings, territoryPtr);
             break;
         case 2:
-            N(UnkNpcAIFunc1)(script, npcAISettings, territoryPtr);
+            N(PatrolAI_LoiterInit)(script, npcAISettings, territoryPtr);
         case 3:
             N(func_80241068_BDFDF8)(script, npcAISettings, territoryPtr);
             break;

@@ -683,7 +683,7 @@ NpcAISettings N(Quizmo_NpcAISettings) = {
 };
 
 EvtScript N(EVS_Quizmo_Npc_AI) = {
-    EVT_CALL(DoBasicAI, EVT_PTR(N(Quizmo_NpcAISettings)))
+    EVT_CALL(BasicAI_Main, EVT_PTR(N(Quizmo_NpcAISettings)))
     EVT_RETURN
     EVT_END
 };

@@ -127,7 +127,7 @@ glabel func_802423CC_D8F61C
 .L80242578_D8F7C8:
 /* D8F7C8 80242578 0240202D */  daddu     $a0, $s2, $zero
 /* D8F7CC 8024257C 0260282D */  daddu     $a1, $s3, $zero
-/* D8F7D0 80242580 0C0904C8 */  jal       pra_35_UnkNpcAIFunc1
+/* D8F7D0 80242580 0C0904C8 */  jal       pra_35_PatrolAI_LoiterInit
 /* D8F7D4 80242584 0280302D */   daddu    $a2, $s4, $zero
 .L80242588_D8F7D8:
 /* D8F7D8 80242588 0240202D */  daddu     $a0, $s2, $zero
@@ -146,12 +146,12 @@ glabel func_802423CC_D8F61C
 .L802425B8_D8F808:
 /* D8F808 802425B8 0240202D */  daddu     $a0, $s2, $zero
 /* D8F80C 802425BC 0260282D */  daddu     $a1, $s3, $zero
-/* D8F810 802425C0 0C090594 */  jal       pra_35_NpcJumpFunc2
+/* D8F810 802425C0 0C090594 */  jal       pra_35_PatrolAI_JumpInit
 /* D8F814 802425C4 0280302D */   daddu    $a2, $s4, $zero
 .L802425C8_D8F818:
 /* D8F818 802425C8 0240202D */  daddu     $a0, $s2, $zero
 /* D8F81C 802425CC 0260282D */  daddu     $a1, $s3, $zero
-/* D8F820 802425D0 0C0905B1 */  jal       pra_35_NpcJumpFunc
+/* D8F820 802425D0 0C0905B1 */  jal       pra_35_PatrolAI_Jump
 /* D8F824 802425D4 0280302D */   daddu    $a2, $s4, $zero
 /* D8F828 802425D8 0809099C */  j         .L80242670_D8F8C0
 /* D8F82C 802425DC 00000000 */   nop
@@ -163,14 +163,14 @@ glabel func_802423CC_D8F61C
 .L802425F0_D8F840:
 /* D8F840 802425F0 0240202D */  daddu     $a0, $s2, $zero
 /* D8F844 802425F4 0260282D */  daddu     $a1, $s3, $zero
-/* D8F848 802425F8 0C09061B */  jal       pra_35_UnkFunc15
+/* D8F848 802425F8 0C09061B */  jal       pra_35_PatrolAI_Chase
 /* D8F84C 802425FC 0280302D */   daddu    $a2, $s4, $zero
 /* D8F850 80242600 0809099C */  j         .L80242670_D8F8C0
 /* D8F854 80242604 00000000 */   nop
 .L80242608_D8F858:
 /* D8F858 80242608 0240202D */  daddu     $a0, $s2, $zero
 /* D8F85C 8024260C 0260282D */  daddu     $a1, $s3, $zero
-/* D8F860 80242610 0C090663 */  jal       pra_35_UnkNpcDurationFlagFunc
+/* D8F860 80242610 0C090663 */  jal       pra_35_PatrolAI_LosePlayer
 /* D8F864 80242614 0280302D */   daddu    $a2, $s4, $zero
 /* D8F868 80242618 0809099C */  j         .L80242670_D8F8C0
 /* D8F86C 8024261C 00000000 */   nop

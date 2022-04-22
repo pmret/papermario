@@ -64,7 +64,7 @@ ApiStatus N(UnkNpcAIMainFunc8)(Evt* script, s32 isInitialCall) {
             N(PatrolAI_Move)(script, settings, territoryPtr);
             break;
         case 2:
-            N(UnkNpcAIFunc1)(script, settings, territoryPtr);
+            N(PatrolAI_LoiterInit)(script, settings, territoryPtr);
             /* fallthrough */
         case 3:
             N(PatrolAI_Loiter)(script, settings, territoryPtr);

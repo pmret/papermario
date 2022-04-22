@@ -94,7 +94,7 @@ ApiStatus N(DeadUnkNpcAIMainFunc6)(Evt* script, s32 isInitialCall) {
             func_800496B8(script, aiSettings, territoryPtr);
             break;
         case 2:
-            base_UnkNpcAIFunc1(script, aiSettings, territoryPtr);
+            base_PatrolAI_LoiterInit(script, aiSettings, territoryPtr);
         case 3:
             func_80049C04(script, aiSettings, territoryPtr);
             break;

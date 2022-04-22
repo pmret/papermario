@@ -50,7 +50,7 @@ ApiStatus N(ClubbaPatrolAI_Main)(Evt* script, s32 isInitialCall) {
             N(PatrolAI_Move)(script, npcAISettings, territoryPtr);
             break;
         case AI_STATE_LOITER_INIT:
-            N(UnkNpcAIFunc1)(script, npcAISettings, territoryPtr);
+            N(PatrolAI_LoiterInit)(script, npcAISettings, territoryPtr);
             // fallthrough
         case AI_STATE_LOITER:
             N(PatrolAI_Loiter)(script, npcAISettings, territoryPtr);
@@ -59,19 +59,19 @@ ApiStatus N(ClubbaPatrolAI_Main)(Evt* script, s32 isInitialCall) {
             N(PatrolAI_PostLoiter)(script, npcAISettings, territoryPtr);
             break;
         case AI_STATE_JUMP_INIT:
-            N(NpcJumpFunc2)(script, npcAISettings, territoryPtr);
+            N(PatrolAI_JumpInit)(script, npcAISettings, territoryPtr);
             // fallthrough
         case AI_STATE_JUMP:
-            N(NpcJumpFunc)(script, npcAISettings, territoryPtr);
+            N(PatrolAI_Jump)(script, npcAISettings, territoryPtr);
             break;
         case AI_STATE_CHASE_INIT:
             N(FlyingNoFirstStrikeAI_12)(script, npcAISettings, territoryPtr);
             // fallthrough
         case AI_STATE_CHASE:
-            N(UnkFunc15)(script, npcAISettings, territoryPtr);
+            N(PatrolAI_Chase)(script, npcAISettings, territoryPtr);
             break;
         case AI_STATE_LOSE_PLAYER:
-            N(UnkNpcDurationFlagFunc)(script, npcAISettings, territoryPtr);
+            N(PatrolAI_LosePlayer)(script, npcAISettings, territoryPtr);
             break;
         case AI_STATE_MELEE_HITBOX_INIT:
             N(MeleeHitbox_30)(script);

@@ -3,8 +3,8 @@
 #include "world/common/UnkNpcAIFunc37.inc.c"
 
 // used in 38 files
-//#include "world/common/UnkNpcAIFunc1.inc.c"
-void N(UnkNpcAIFunc1)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+//#include "world/common/enemy/PatrolAI_LoiterInit.inc.c"
+void N(PatrolAI_LoiterInit)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -79,7 +79,7 @@ ApiStatus N(FuzzyAI_Main)(Evt* script, s32 isInitialCall) {
             N(UnkNpcAIFunc37)(script, aiSettings, territoryPtr);
             break;
         case 2:
-            N(UnkNpcAIFunc1)(script, aiSettings, territoryPtr);
+            N(PatrolAI_LoiterInit)(script, aiSettings, territoryPtr);
             if (script->functionTemp[0] != 3) {
                 break;
             }

@@ -52,7 +52,7 @@ ApiStatus N(UnkNpcAIMainFunc4)(Evt* script, s32 isInitialCall) {
         case 10:
             N(NpcJumpFunc3)(script, aiSettings, territoryPtr);
         case 11:
-            N(NpcJumpFunc)(script, aiSettings, territoryPtr);
+            N(PatrolAI_Jump)(script, aiSettings, territoryPtr);
             break;
         case 12:
             N(UnkNpcAIFunc13_2)(script, aiSettings, territoryPtr);

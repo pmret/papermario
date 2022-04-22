@@ -45,7 +45,7 @@ NpcAISettings N(goombaAISettings) = {
 };
 
 EvtScript kmr_12_GoombaAI = {
-    EVT_CALL(DoBasicAI, EVT_ADDR(N(goombaAISettings)))
+    EVT_CALL(BasicAI_Main, EVT_ADDR(N(goombaAISettings)))
     EVT_RETURN
     EVT_END
 };

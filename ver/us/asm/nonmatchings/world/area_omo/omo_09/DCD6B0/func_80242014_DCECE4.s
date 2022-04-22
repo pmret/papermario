@@ -151,7 +151,7 @@ glabel func_80242014_DCECE4
 .L80242220_DCEEF0:
 /* DCEEF0 80242220 0260202D */  daddu     $a0, $s3, $zero
 /* DCEEF4 80242224 0280282D */  daddu     $a1, $s4, $zero
-/* DCEEF8 80242228 0C0904D3 */  jal       omo_09_UnkNpcAIFunc1
+/* DCEEF8 80242228 0C0904D3 */  jal       omo_09_PatrolAI_LoiterInit
 /* DCEEFC 8024222C 02A0302D */   daddu    $a2, $s5, $zero
 .L80242230_DCEF00:
 /* DCEF00 80242230 0260202D */  daddu     $a0, $s3, $zero
@@ -170,12 +170,12 @@ glabel func_80242014_DCECE4
 .L80242260_DCEF30:
 /* DCEF30 80242260 0260202D */  daddu     $a0, $s3, $zero
 /* DCEF34 80242264 0280282D */  daddu     $a1, $s4, $zero
-/* DCEF38 80242268 0C09059F */  jal       omo_09_NpcJumpFunc2
+/* DCEF38 80242268 0C09059F */  jal       omo_09_PatrolAI_JumpInit
 /* DCEF3C 8024226C 02A0302D */   daddu    $a2, $s5, $zero
 .L80242270_DCEF40:
 /* DCEF40 80242270 0260202D */  daddu     $a0, $s3, $zero
 /* DCEF44 80242274 0280282D */  daddu     $a1, $s4, $zero
-/* DCEF48 80242278 0C0905BC */  jal       omo_09_NpcJumpFunc
+/* DCEF48 80242278 0C0905BC */  jal       omo_09_PatrolAI_Jump
 /* DCEF4C 8024227C 02A0302D */   daddu    $a2, $s5, $zero
 /* DCEF50 80242280 080908CC */  j         .L80242330_DCF000
 /* DCEF54 80242284 00000000 */   nop
@@ -187,7 +187,7 @@ glabel func_80242014_DCECE4
 .L80242298_DCEF68:
 /* DCEF68 80242298 0260202D */  daddu     $a0, $s3, $zero
 /* DCEF6C 8024229C 0280282D */  daddu     $a1, $s4, $zero
-/* DCEF70 802422A0 0C090626 */  jal       omo_09_UnkFunc15
+/* DCEF70 802422A0 0C090626 */  jal       omo_09_PatrolAI_Chase
 /* DCEF74 802422A4 02A0302D */   daddu    $a2, $s5, $zero
 /* DCEF78 802422A8 080908CC */  j         .L80242330_DCF000
 /* DCEF7C 802422AC 00000000 */   nop

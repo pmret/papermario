@@ -2,7 +2,7 @@
 
 #include "world/common/enemy/FlyingAI_Wander.inc.c"
 
-#include "world/common/UnkNpcAIFunc1.inc.c"
+#include "world/common/enemy/PatrolAI_LoiterInit.inc.c"
 
 #include "world/common/enemy/FlyingAI_Loiter.inc.c"
 

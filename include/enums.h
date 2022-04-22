@@ -2784,6 +2784,7 @@ enum EnemyAIStates {
     AI_STATE_CHASE_INIT             = 12,
     AI_STATE_CHASE                  = 13,
     AI_STATE_LOSE_PLAYER            = 14,
+    AI_STATE_PATROL_15              = 15,
     AI_STATE_SUSPEND                = 99,
     // melee hitboxes
     AI_STATE_MELEE_HITBOX_INIT      = 30,
