@@ -1,3 +1,6 @@
+#ifndef AI_MELEE_HITBOX_H
+#define AI_MELEE_HITBOX_H 0
+
 #include "common.h"
 #include "effects.h"
 
@@ -163,3 +166,5 @@ ApiStatus N(MeleeHitbox_Control)(Evt* script, s32 isInitialCall) {
 
     return ApiStatus_BLOCK;
 }
+
+#endif
