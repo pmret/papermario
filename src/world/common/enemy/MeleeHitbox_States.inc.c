@@ -1,4 +1,5 @@
 #include "common.h"
+#include "effects.h"
 
 void N(MeleeHitbox_30)(Evt* script) {
     Enemy* enemy = script->owner1.enemy;

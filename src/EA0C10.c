@@ -141,7 +141,7 @@ ApiStatus func_802406CC_EA0FCC(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-// Similar to MeleeHitbox_Main
+// Similar to MeleeWanderAI_Main
 ApiStatus func_8024097C_EA127C(Evt* script, s32 isInitialCall) {
     DeadEnemy* enemy = (DeadEnemy*) script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);

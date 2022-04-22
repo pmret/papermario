@@ -112,7 +112,7 @@ glabel func_8024231C_9B8C9C
 .L80242494_9B8E14:
 /* 9B8E14 80242494 0260202D */  daddu     $a0, $s3, $zero
 /* 9B8E18 80242498 0200282D */  daddu     $a1, $s0, $zero
-/* 9B8E1C 8024249C 0C0905B0 */  jal       trd_07_FlyingAI_10
+/* 9B8E1C 8024249C 0C0905B0 */  jal       trd_07_FlyingAI_JumpInit
 /* 9B8E20 802424A0 0280302D */   daddu    $a2, $s4, $zero
 /* 9B8E24 802424A4 8E630070 */  lw        $v1, 0x70($s3)
 /* 9B8E28 802424A8 2402000B */  addiu     $v0, $zero, 0xb
@@ -121,7 +121,7 @@ glabel func_8024231C_9B8C9C
 .L802424B4_9B8E34:
 /* 9B8E34 802424B4 0260202D */  daddu     $a0, $s3, $zero
 /* 9B8E38 802424B8 0200282D */  daddu     $a1, $s0, $zero
-/* 9B8E3C 802424BC 0C0905CE */  jal       trd_07_FlyingAI_11
+/* 9B8E3C 802424BC 0C0905CE */  jal       trd_07_FlyingAI_Jump
 /* 9B8E40 802424C0 0280302D */   daddu    $a2, $s4, $zero
 /* 9B8E44 802424C4 8E630070 */  lw        $v1, 0x70($s3)
 /* 9B8E48 802424C8 2402000C */  addiu     $v0, $zero, 0xc

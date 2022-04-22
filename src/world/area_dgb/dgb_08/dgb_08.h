@@ -9,7 +9,7 @@
 ApiStatus N(UnkFunc1)(Evt* script, s32 isInitialCall);
 ApiStatus N(UnkNpcAIMainFunc)(Evt* script, s32 isInitialCall);
 ApiStatus N(MeleeHitbox_Control)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_802414AC_C4125C)(Evt* script, s32 isInitialCall);
+ApiStatus N(MeleeWanderAI_Main)(Evt* script, s32 isInitialCall);
 ApiStatus N(SentinelAI_Main)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_80243B98_C43948)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_80243C10_C439C0)(Evt* script, s32 isInitialCall);

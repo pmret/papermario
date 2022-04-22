@@ -3,7 +3,7 @@
 #include "world/partners.h"
 #include "sprite/npc/world_clubba.h"
 
-#include "world/common/enemy/MeleeHitbox.inc.c"
+#include "world/common/enemy/MeleeHitbox_States.inc.c"
 
 #include "world/common/enemy/ClubbaNappingAI.inc.c"
 
@@ -75,19 +75,19 @@ ApiStatus N(func_80241170_C3ED60)(Evt* script, s32 isInitialCall) {
         case AI_STATE_LOSE_PLAYER:
             basic_ai_lose_player(script, npcAISettings, territoryPtr);
             break;
-        case 30:
+        case AI_STATE_MELEE_HITBOX_INIT:
             N(MeleeHitbox_30)(script);
-        case 31:
+        case AI_STATE_MELEE_HITBOX_PRE:
             N(MeleeHitbox_31)(script);
-            if (script->AI_TEMP_STATE != 32) {
+            if (script->AI_TEMP_STATE != AI_STATE_MELEE_HITBOX_ACTIVE) {
                 break;
             }
-        case 32:
+        case AI_STATE_MELEE_HITBOX_ACTIVE:
             N(MeleeHitbox_32)(script);
-            if (script->AI_TEMP_STATE != 33) {
+            if (script->AI_TEMP_STATE != AI_STATE_MELEE_HITBOX_MISS) {
                 break;
             }
-        case 33:
+        case AI_STATE_MELEE_HITBOX_MISS:
             N(MeleeHitbox_33)(script);
             break;
         case AI_STATE_SUSPEND:

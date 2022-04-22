@@ -4,16 +4,6 @@ INCLUDE_ASM(s32, "world/area_pra/pra_37/D92F40", func_80240000_D92F40);
 
 #include "world/common/atomic/Reflection.inc.c"
 
-#include "world/common/enemy/MeleeHitbox_30.inc.c"
+#include "world/common/enemy/MeleeHitbox_States.inc.c"
 
-#include "world/common/enemy/MeleeHitbox_31.inc.c"
-
-#include "world/common/enemy/MeleeHitbox_32.inc.c"
-
-#include "world/common/enemy/MeleeHitbox_33.inc.c"
-
-#include "world/common/enemy/MeleeHitbox_CanSeePlayer.inc.c"
-
-#include "world/common/enemy/MeleeHitbox_Control.inc.c"
-
-#include "world/common/enemy/MeleeHitbox_Main.inc.c"
+#include "world/common/enemy/MeleeWanderAI.inc.c"

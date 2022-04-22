@@ -44,9 +44,9 @@ ApiStatus N(FlyingNoFirstStrikeAI_Main)(Evt* script, s32 isInitialCall) {
             N(FlyingAI_Loiter)(script, aiSettings, territoryPtr);
             break;
         case 10:
-            N(FlyingAI_10)(script, aiSettings, territoryPtr);
+            N(FlyingAI_JumpInit)(script, aiSettings, territoryPtr);
         case 11:
-            N(FlyingAI_11)(script, aiSettings, territoryPtr);
+            N(FlyingAI_Jump)(script, aiSettings, territoryPtr);
             break;
         case 12:
             N(FlyingNoFirstStrikeAI_12)(script, aiSettings, territoryPtr);

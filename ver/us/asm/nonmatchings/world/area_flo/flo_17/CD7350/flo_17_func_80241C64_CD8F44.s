@@ -155,18 +155,18 @@ glabel flo_17_func_80241C64_CD8F44
 .L80241E90:
 /* CD9170 80241E90 0280202D */  daddu     $a0, $s4, $zero
 /* CD9174 80241E94 02C0282D */  daddu     $a1, $s6, $zero
-/* CD9178 80241E98 0C09034C */  jal       flo_17_FlyingAI_12
+/* CD9178 80241E98 0C09034C */  jal       flo_17_FlyingAI_ChaseInit
 /* CD917C 80241E9C 02A0302D */   daddu    $a2, $s5, $zero
 .L80241EA0:
 /* CD9180 80241EA0 0280202D */  daddu     $a0, $s4, $zero
 /* CD9184 80241EA4 02C0282D */  daddu     $a1, $s6, $zero
-/* CD9188 80241EA8 0C090399 */  jal       flo_17_FlyingAI_13
+/* CD9188 80241EA8 0C090399 */  jal       flo_17_FlyingAI_Chase
 /* CD918C 80241EAC 02A0302D */   daddu    $a2, $s5, $zero
 /* CD9190 80241EB0 080907B1 */  j         .L80241EC4
 /* CD9194 80241EB4 00000000 */   nop
 .L80241EB8:
 /* CD9198 80241EB8 02C0282D */  daddu     $a1, $s6, $zero
-/* CD919C 80241EBC 0C0903B2 */  jal       flo_17_FlyingAI_14
+/* CD919C 80241EBC 0C0903B2 */  jal       flo_17_FlyingAI_LosePlayer
 /* CD91A0 80241EC0 02A0302D */   daddu    $a2, $s5, $zero
 .L80241EC4:
 /* CD91A4 80241EC4 8E830070 */  lw        $v1, 0x70($s4)

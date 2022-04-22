@@ -32,30 +32,30 @@ ApiStatus N(FlyingAI_Main)(Evt* script, s32 isInitialCall) {
         enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
     }
 
-    switch (script->functionTemp[0]) {
-        case 0:
+    switch (script->AI_TEMP_STATE) {
+        case AI_STATE_WANDER_INIT:
             N(FlyingAI_WanderInit)(script, aiSettings, territoryPtr);
-        case 1:
+        case AI_STATE_WANDER:
             N(FlyingAI_Wander)(script, aiSettings, territoryPtr);
             break;
-        case 2:
+        case AI_STATE_LOITER_INIT:
             N(FlyingAI_LoiterInit)(script, aiSettings, territoryPtr);
-        case 3:
+        case AI_STATE_LOITER:
             N(FlyingAI_Loiter)(script, aiSettings, territoryPtr);
             break;
         case 10:
-            N(FlyingAI_10)(script, aiSettings, territoryPtr);
+            N(FlyingAI_JumpInit)(script, aiSettings, territoryPtr);
         case 11:
-            N(FlyingAI_11)(script, aiSettings, territoryPtr);
+            N(FlyingAI_Jump)(script, aiSettings, territoryPtr);
             break;
         case 12:
-            N(FlyingAI_12)(script, aiSettings, territoryPtr);
+            N(FlyingAI_ChaseInit)(script, aiSettings, territoryPtr);
             break;
         case 13:
-            N(FlyingAI_13)(script, aiSettings, territoryPtr);
+            N(FlyingAI_Chase)(script, aiSettings, territoryPtr);
             break;
         case 14:
-            N(FlyingAI_14)(script, aiSettings, territoryPtr);
+            N(FlyingAI_LosePlayer)(script, aiSettings, territoryPtr);
             break;
     }
 

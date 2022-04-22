@@ -166,18 +166,18 @@ glabel func_80241C90_EF42A0
 .L80241EE8:
 /* EF44F8 80241EE8 0280202D */  daddu     $a0, $s4, $zero
 /* EF44FC 80241EEC 02C0282D */  daddu     $a1, $s6, $zero
-/* EF4500 80241EF0 0C09034C */  jal       EF2680_FlyingAI_12
+/* EF4500 80241EF0 0C09034C */  jal       EF2680_FlyingAI_ChaseInit
 /* EF4504 80241EF4 02A0302D */   daddu    $a2, $s5, $zero
 .L80241EF8:
 /* EF4508 80241EF8 0280202D */  daddu     $a0, $s4, $zero
 /* EF450C 80241EFC 02C0282D */  daddu     $a1, $s6, $zero
-/* EF4510 80241F00 0C090399 */  jal       EF2680_FlyingAI_13
+/* EF4510 80241F00 0C090399 */  jal       EF2680_FlyingAI_Chase
 /* EF4514 80241F04 02A0302D */   daddu    $a2, $s5, $zero
 /* EF4518 80241F08 080907C7 */  j         .L80241F1C
 /* EF451C 80241F0C 00000000 */   nop
 .L80241F10:
 /* EF4520 80241F10 02C0282D */  daddu     $a1, $s6, $zero
-/* EF4524 80241F14 0C0903B2 */  jal       EF2680_FlyingAI_14
+/* EF4524 80241F14 0C0903B2 */  jal       EF2680_FlyingAI_LosePlayer
 /* EF4528 80241F18 02A0302D */   daddu    $a2, $s5, $zero
 .L80241F1C:
 /* EF452C 80241F1C 8E830070 */  lw        $v1, 0x70($s4)

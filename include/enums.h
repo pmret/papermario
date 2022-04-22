@@ -602,6 +602,7 @@ enum SoundIDs {
     SOUND_MOLE_POP                  = 0x00000323,
     SOUND_328                       = 0x00000328,
     SOUND_32E                       = 0x0000032E,
+    SOUND_32F                       = 0x0000032F,
     SOUND_359                       = 0x00000359,
     SOUND_361                       = 0x00000361,
     SOUND_362                       = 0x00000362,
@@ -2803,7 +2804,9 @@ enum EnemyAIAnims {
 };
 
 enum EnemyActionFlags {
-    AI_ACTION_JUMP_WHEN_SEE_PLAYER  = 1,
+    AI_ACTION_JUMP_WHEN_SEE_PLAYER          = 0x01,
+    AI_ACTION_02                            = 0x02,
+    AI_ACTION_LOOK_AROUND_DURING_LOITER     = 0x10,
 };
 
 enum PiranhaPlantStates {

@@ -117,12 +117,12 @@ glabel func_80242780_EEF880
 .L8024290C_EEFA0C:
 /* EEFA0C 8024290C 0280202D */  daddu     $a0, $s4, $zero
 /* EEFA10 80242910 0200282D */  daddu     $a1, $s0, $zero
-/* EEFA14 80242914 0C09068B */  jal       EEDF50_FlyingAI_10
+/* EEFA14 80242914 0C09068B */  jal       EEDF50_FlyingAI_JumpInit
 /* EEFA18 80242918 0260302D */   daddu    $a2, $s3, $zero
 .L8024291C_EEFA1C:
 /* EEFA1C 8024291C 0280202D */  daddu     $a0, $s4, $zero
 /* EEFA20 80242920 0200282D */  daddu     $a1, $s0, $zero
-/* EEFA24 80242924 0C0906A9 */  jal       EEDF50_FlyingAI_11
+/* EEFA24 80242924 0C0906A9 */  jal       EEDF50_FlyingAI_Jump
 /* EEFA28 80242928 0260302D */   daddu    $a2, $s3, $zero
 /* EEFA2C 8024292C 08090A5C */  j         .L80242970
 /* EEFA30 80242930 0000102D */   daddu    $v0, $zero, $zero

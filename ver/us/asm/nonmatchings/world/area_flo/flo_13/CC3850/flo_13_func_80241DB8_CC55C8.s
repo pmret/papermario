@@ -155,18 +155,18 @@ glabel flo_13_func_80241DB8_CC55C8
 .L80241FE4:
 /* CC57F4 80241FE4 0280202D */  daddu     $a0, $s4, $zero
 /* CC57F8 80241FE8 02C0282D */  daddu     $a1, $s6, $zero
-/* CC57FC 80241FEC 0C0903A1 */  jal       flo_13_FlyingAI_12
+/* CC57FC 80241FEC 0C0903A1 */  jal       flo_13_FlyingAI_ChaseInit
 /* CC5800 80241FF0 02A0302D */   daddu    $a2, $s5, $zero
 .L80241FF4:
 /* CC5804 80241FF4 0280202D */  daddu     $a0, $s4, $zero
 /* CC5808 80241FF8 02C0282D */  daddu     $a1, $s6, $zero
-/* CC580C 80241FFC 0C0903EE */  jal       flo_13_FlyingAI_13
+/* CC580C 80241FFC 0C0903EE */  jal       flo_13_FlyingAI_Chase
 /* CC5810 80242000 02A0302D */   daddu    $a2, $s5, $zero
 /* CC5814 80242004 08090806 */  j         .L80242018
 /* CC5818 80242008 00000000 */   nop
 .L8024200C:
 /* CC581C 8024200C 02C0282D */  daddu     $a1, $s6, $zero
-/* CC5820 80242010 0C090407 */  jal       flo_13_FlyingAI_14
+/* CC5820 80242010 0C090407 */  jal       flo_13_FlyingAI_LosePlayer
 /* CC5824 80242014 02A0302D */   daddu    $a2, $s5, $zero
 .L80242018:
 /* CC5828 80242018 8E830070 */  lw        $v1, 0x70($s4)

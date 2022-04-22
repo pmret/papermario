@@ -225,7 +225,7 @@ EvtScript N(npcAI_802442F0) = {
     EVT_CALL(SetSelfVar, 1, 5)
     EVT_CALL(SetSelfVar, 2, 8)
     EVT_CALL(SetSelfVar, 3, 12)
-    EVT_CALL(N(func_802414AC_C4125C), EVT_PTR(N(npcAISettings_802442C0)))
+    EVT_CALL(N(MeleeWanderAI_Main), EVT_PTR(N(npcAISettings_802442C0)))
     EVT_RETURN
     EVT_END
 };
@@ -990,102 +990,8 @@ EvtScript N(802469E0) = {
 
 #include "world/common/enemy/UnkAI_1.inc.c"
 
-#include "world/common/enemy/MeleeHitbox_30.inc.c"
-
-#include "world/common/enemy/MeleeHitbox_31.inc.c"
-
-#include "world/common/enemy/MeleeHitbox_32.inc.c"
-
-#include "world/common/enemy/MeleeHitbox_33.inc.c"
-
-#include "world/common/enemy/MeleeHitbox_CanSeePlayer.inc.c"
-
-#include "world/common/enemy/MeleeHitbox_Control.inc.c"
-
-ApiStatus N(func_802414AC_C4125C)(Evt* script, s32 isInitialCall) {
-    Enemy* enemy = script->owner1.enemy;
-    Npc* npc = get_npc_unsafe(enemy->npcID);
-    Bytecode* args = script->ptrReadPos;
-    EnemyTerritoryThing territory;
-    EnemyTerritoryThing* territoryPtr = &territory;
-    NpcAISettings* npcAISettings = (NpcAISettings*)evt_get_variable(script, *args++);
-
-    territory.skipPlayerDetectChance = 0;
-    territory.shape = enemy->territory->wander.detectShape;
-    territory.pointX = enemy->territory->wander.detect.x;
-    territory.pointZ = enemy->territory->wander.detect.z;
-    territory.sizeX = enemy->territory->wander.detectSizeX;
-    territory.sizeZ = enemy->territory->wander.detectSizeZ;
-    territory.halfHeight = 65.0f;
-    territory.unk_1C = 0;
-
-    if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAGS_4)) {
-        script->functionTemp[0] = 0;
-        npc->duration = 0;
-        npc->currentAnim.w = enemy->animList[0];
-        npc->flags &= ~0x800;
-        if (!enemy->territory->wander.isFlying) {
-            npc->flags = (npc->flags | 0x200) & ~0x8;
-        } else {
-            npc->flags = (npc->flags & ~0x200) | 0x8;
-        }
-        if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
-            script->functionTemp[0] = 99;
-            script->functionTemp[1] = 0;
-            enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
-        }
-        enemy->varTable[0] = 0;
-    }
-
-    if ((script->functionTemp[0] < 30) && (enemy->varTable[0] == 0) && N(MeleeHitbox_CanSeePlayer)(script)) {
-        script->functionTemp[0] = 30;
-    }
-
-    switch (script->functionTemp[0]) {
-        case 0:
-            basic_ai_wander_init(script, npcAISettings, territoryPtr);
-        case 1:
-            basic_ai_wander(script, npcAISettings, territoryPtr);
-            break;
-        case 2:
-            basic_ai_loiter_init(script, npcAISettings, territoryPtr);
-        case 3:
-            basic_ai_loiter(script, npcAISettings, territoryPtr);
-            break;
-        case 10:
-            basic_ai_found_player_jump_init(script, npcAISettings, territoryPtr);
-        case 11:
-            basic_ai_found_player_jump(script, npcAISettings, territoryPtr);
-            break;
-        case 12:
-            basic_ai_chase_init(script, npcAISettings, territoryPtr);
-        case 13:
-            basic_ai_chase(script, npcAISettings, territoryPtr);
-            break;
-        case 14:
-            basic_ai_lose_player(script, npcAISettings, territoryPtr);
-            break;
-        case 30:
-            N(MeleeHitbox_30)(script);
-        case 31:
-            N(MeleeHitbox_31)(script);
-            if (script->functionTemp[0] != 32) {
-                break;
-            }
-        case 32:
-            N(MeleeHitbox_32)(script);
-            if (script->functionTemp[0] != 33) {
-                break;
-            }
-        case 33:
-            N(MeleeHitbox_33)(script);
-            break;
-        case 99:
-            basic_ai_suspend(script);
-    }
-
-    return ApiStatus_BLOCK;
-}
+#include "world/common/enemy/MeleeHitbox_States.inc.c"
+#include "world/common/enemy/MeleeWanderAI.inc.c"
 
 #define AI_SENTINEL_FIRST_NPC 7
 #define AI_SENTINEL_LAST_NPC  9
@@ -1097,12 +1003,12 @@ ApiStatus N(func_80243B98_C43948)(Evt* script, s32 isInitialCall) {
     if (get_enemy_safe(9) != 0) {
         Enemy* enemy = get_enemy(9);
         enemy->territory->wander.point.x = 2;
-        enemy->territory->wander.point.y = -0x1C2;
+        enemy->territory->wander.point.y = -450;
         enemy->territory->wander.point.z = 0;
-        enemy->territory->wander.wanderSizeX = 0xAF;
-        enemy->territory->wander.wanderSizeZ = 0x12C;
+        enemy->territory->wander.wanderSizeX = 175;
+        enemy->territory->wander.wanderSizeZ = 300;
         enemy->territory->wander.moveSpeedOverride = 0;
-        enemy->territory->wander.wanderShape = 0xAF;
+        enemy->territory->wander.wanderShape = 175;
         return ApiStatus_DONE2;
     }
 
@@ -1120,7 +1026,7 @@ ApiStatus N(func_80243C10_C439C0)(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus N(func_80243C50_C43A00)(Evt* script, s32 isInitialCall) {
-    ai_enemy_play_sound(get_npc_unsafe(script->owner1.enemy->npcID), 0x32F, 0);
+    ai_enemy_play_sound(get_npc_unsafe(script->owner1.enemy->npcID), SOUND_32F, 0);
     return ApiStatus_DONE2;
 }
 

@@ -51,19 +51,19 @@ ApiStatus N(DeadFlyingAI_Main)(Evt* script, s32 isInitialCall) {
         N(FlyingAI_Loiter)(script, aiSettings, territoryPtr);
         return 0;
     case 10:
-        N(FlyingAI_10)(script, aiSettings, territoryPtr);
+        N(FlyingAI_JumpInit)(script, aiSettings, territoryPtr);
         /* fallthrough */
     case 11:
-        N(FlyingAI_11)(script, aiSettings, territoryPtr);
+        N(FlyingAI_Jump)(script, aiSettings, territoryPtr);
         return 0;
     case 12:
-        N(FlyingAI_12)(script, aiSettings, territoryPtr);
+        N(FlyingAI_ChaseInit)(script, aiSettings, territoryPtr);
         return 0;
     case 13:
-        N(FlyingAI_13)(script, aiSettings, territoryPtr);
+        N(FlyingAI_Chase)(script, aiSettings, territoryPtr);
         return 0;
     case 14:
-        N(FlyingAI_14)(script, aiSettings, territoryPtr);
+        N(FlyingAI_LosePlayer)(script, aiSettings, territoryPtr);
         /* fallthrough */
     default:
         return 0;

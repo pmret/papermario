@@ -356,18 +356,7 @@ ApiStatus N(func_80240030_C3AA40)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#include "world/common/enemy/MeleeHitbox_30.inc.c"
-
-#include "world/common/enemy/MeleeHitbox_31.inc.c"
-
-#include "world/common/enemy/MeleeHitbox_32.inc.c"
-
-#include "world/common/enemy/MeleeHitbox_33.inc.c"
-
-#include "world/common/enemy/MeleeHitbox_CanSeePlayer.inc.c"
-
-#include "world/common/enemy/MeleeHitbox_Control.inc.c"
-
+#include "world/common/enemy/MeleeHitbox_States.inc.c"
 #include "world/common/enemy/ClubbaNappingAI.inc.c"
 
 ApiStatus N(UnkNpcAIMainFunc)(Evt* script, s32 isInitialCall) {

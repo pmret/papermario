@@ -1,7 +1,7 @@
 #include "common.h"
 #include "npc.h"
 
-void N(FlyingAI_14)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(FlyingAI_LosePlayer)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 posX, posY, posZ, posW;
@@ -23,7 +23,7 @@ void N(FlyingAI_14)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing*
         npc->pos.y += npc->jumpVelocity;
         npc->currentAnim.w = enemy->animList[9];
         enemy->unk_07 = 0;
-        if (!(npc->flags & 8)) {
+        if (!(npc->flags & NPC_FLAG_ENABLE_HIT_SCRIPT)) {
             posX = npc->pos.x;
             posY = npc->pos.y;
             posZ = npc->pos.z;

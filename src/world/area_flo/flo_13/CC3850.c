@@ -1430,14 +1430,14 @@ ApiStatus N(func_80241DB8_CC55C8)(Evt* script, s32 isInitialCall) {
 
     switch (script->functionTemp[0]) {
         case 12:
-            N(FlyingAI_12)(script, aiSettings, territoryPtr);
+            N(FlyingAI_ChaseInit)(script, aiSettings, territoryPtr);
 
         case 13:
-            N(FlyingAI_13)(script, aiSettings, territoryPtr);
+            N(FlyingAI_Chase)(script, aiSettings, territoryPtr);
             break;
 
         case 14:
-            N(FlyingAI_14)(script, aiSettings, territoryPtr);
+            N(FlyingAI_LosePlayer)(script, aiSettings, territoryPtr);
             break;
     }
 
