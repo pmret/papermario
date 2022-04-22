@@ -57,20 +57,20 @@ ApiStatus N(UnkNpcAIMainFunc8)(Evt* script, s32 isInitialCall) {
 
     switch (script->functionTemp[0]) {
         case 0:
-            N(UnkNpcAIFunc24)(script, settings, territoryPtr);
+            N(PatrolAI_MoveInit)(script, settings, territoryPtr);
             npc->collisionHeight = enemy->varTable[6];
             /* fallthrough */
         case 1:
-            N(UnkFunc13)(script, settings, territoryPtr);
+            N(PatrolAI_Move)(script, settings, territoryPtr);
             break;
         case 2:
             N(UnkNpcAIFunc1)(script, settings, territoryPtr);
             /* fallthrough */
         case 3:
-            N(UnkFunc14)(script, settings, territoryPtr);
+            N(PatrolAI_Loiter)(script, settings, territoryPtr);
             break;
         case 4:
-            N(UnkNpcAIFunc25)(script, settings, territoryPtr);
+            N(PatrolAI_PostLoiter)(script, settings, territoryPtr);
             break;
         case 12:
             N(set_script_owner_npc_anim)(script, settings, territoryPtr);

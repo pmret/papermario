@@ -295,9 +295,9 @@ void basic_ai_wander(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing
                     enemy->aiFlags &= ~ENEMY_AI_FLAGS_20;
 
                     if (enemy->npcSettings->unk_2A & AI_ACTION_JUMP_WHEN_SEE_PLAYER) {
-                        script->functionTemp[0] = AI_STATE_JUMP_INIT;
+                        script->AI_TEMP_STATE = AI_STATE_JUMP_INIT;
                     } else {
-                        script->functionTemp[0] = AI_STATE_CHASE_INIT;
+                        script->AI_TEMP_STATE = AI_STATE_CHASE_INIT;
                     }
                     return;
                 }
@@ -355,7 +355,7 @@ void basic_ai_wander(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing
             script->functionTemp[0] = AI_STATE_LOITER_INIT;
             script->functionTemp[1] = rand_int(1000) % 3 + 2;
             if (aiSettings->unk_2C <= 0 || aiSettings->waitTime <= 0) {
-                script->functionTemp[0] = AI_STATE_WANDER_INIT;
+                script->AI_TEMP_STATE = AI_STATE_WANDER_INIT;
             }
         }
     }
@@ -368,7 +368,7 @@ void basic_ai_loiter_init(Evt* script, NpcAISettings* aiSettings, EnemyTerritory
     npc->duration = (aiSettings->waitTime / 2) + rand_int((aiSettings->waitTime / 2) + 1);
     npc->yaw = clamp_angle(npc->yaw + rand_int(180) - 90.0f);
     npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
-    script->functionTemp[0] = AI_STATE_LOITER;
+    script->AI_TEMP_STATE = AI_STATE_LOITER;
 }
 
 void basic_ai_loiter(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
@@ -387,27 +387,28 @@ void basic_ai_loiter(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing
             npc->yaw = yaw;
             ai_enemy_play_sound(npc, SOUND_2F4, 0x200000);
             fx_emote(EMOTE_EXCLAMATION, npc, 0, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &emoteTemp);
-            if (enemy->npcSettings->unk_2A & 1) {
-                script->functionTemp[0] = AI_STATE_JUMP_INIT;
+            if (enemy->npcSettings->unk_2A & AI_ACTION_JUMP_WHEN_SEE_PLAYER) {
+                script->AI_TEMP_STATE = AI_STATE_JUMP_INIT;
             } else {
-                script->functionTemp[0] = AI_STATE_CHASE_INIT;
+                script->AI_TEMP_STATE = AI_STATE_CHASE_INIT;
             }
             return;
         }
     }
+
     // look around randomly
     if (npc->turnAroundYawAdjustment == 0) {
         npc->duration--;
         if (npc->duration <= 0) {
             script->functionTemp[1]--;
             if (script->functionTemp[1]) {
-                if (!(enemy->npcSettings->unk_2A & 0x10)) {
+                if (!(enemy->npcSettings->unk_2A & AI_ACTION_LOOK_AROUND_DURING_LOITER)) {
                     npc->yaw = clamp_angle(npc->yaw + 180.0f);
                 }
                 npc->duration = (aiSettings->waitTime / 2) + rand_int(aiSettings->waitTime / 2 + 1);
                 return;
             }
-            script->functionTemp[0] = AI_STATE_WANDER_INIT;
+            script->AI_TEMP_STATE = AI_STATE_WANDER_INIT;
         }
     }
 }

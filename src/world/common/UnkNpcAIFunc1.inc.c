@@ -1,12 +1,13 @@
 #include "common.h"
 #include "npc.h"
 
+// identical to basic_ai_loiter_init
 void N(UnkNpcAIFunc1)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
     npc->duration = (aiSettings->waitTime / 2) + rand_int((aiSettings->waitTime / 2) + 1);
     npc->yaw = clamp_angle(npc->yaw + rand_int(180) - 90.0f);
-    npc->currentAnim.w = *enemy->animList;
-    script->functionTemp[0] = 3;
+    npc->currentAnim.w = enemy->animList[0];
+    script->AI_TEMP_STATE = AI_STATE_LOITER;
 }

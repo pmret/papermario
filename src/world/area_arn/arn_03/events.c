@@ -179,7 +179,7 @@ ApiStatus N(func_8024113C_BDFECC)(Evt* script, s32 isInitialCall) {
 
     switch (script->functionTemp[0]) {
         case 0:
-            N(UnkNpcAIFunc24)(script, npcAISettings, territoryPtr);
+            N(PatrolAI_MoveInit)(script, npcAISettings, territoryPtr);
         case 1:
             N(func_80240E90_BDFC20)(script, npcAISettings, territoryPtr);
             break;
@@ -189,7 +189,7 @@ ApiStatus N(func_8024113C_BDFECC)(Evt* script, s32 isInitialCall) {
             N(func_80241068_BDFDF8)(script, npcAISettings, territoryPtr);
             break;
         case 4:
-            N(UnkNpcAIFunc25)(script, npcAISettings, territoryPtr);
+            N(PatrolAI_PostLoiter)(script, npcAISettings, territoryPtr);
             break;
     }
 

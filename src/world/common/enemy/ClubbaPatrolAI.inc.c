@@ -19,71 +19,81 @@ ApiStatus N(ClubbaPatrolAI_Main)(Evt* script, s32 isInitialCall) {
     territory.unk_1C = 0;
 
     if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAGS_4)) {
-        script->functionTemp[0] = 0;
+        script->AI_TEMP_STATE = AI_STATE_PATROL_INIT;
         npc->duration = 0;
         npc->currentAnim.w = enemy->animList[0];
         npc->flags &= ~0x800;
         if (!enemy->territory->patrol.isFlying) {
-            npc->flags = (npc->flags | 0x200) & ~0x8;
+            npc->flags |= 0x200;
+            npc->flags &= ~0x8;
         } else {
-            npc->flags = (npc->flags & ~0x200) | 0x8;
+            npc->flags &= ~0x200;
+            npc->flags |= 0x8;
         }
         if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
-            script->functionTemp[0] = 99;
-            script->functionTemp[1] = 0;
+            script->AI_TEMP_STATE = AI_STATE_SUSPEND;
+            script->functionTemp[1] = AI_STATE_PATROL_INIT;
             enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
         }
         enemy->varTable[0] = 0;
     }
 
-    if ((script->functionTemp[0] < 30) && (enemy->varTable[0] == 0) && N(MeleeHitbox_CanSeePlayer)(script)) {
-        script->functionTemp[0] = 30;
+    if ((script->AI_TEMP_STATE < AI_STATE_MELEE_HITBOX_INIT) && (enemy->varTable[0] == 0) && N(MeleeHitbox_CanSeePlayer)(script)) {
+        script->AI_TEMP_STATE = AI_STATE_MELEE_HITBOX_INIT;
     }
 
-    switch (script->functionTemp[0]) {
-        case 0:
-            N(UnkNpcAIFunc24)(script, npcAISettings, territoryPtr);
-        case 1:
-            N(UnkFunc13)(script, npcAISettings, territoryPtr);
+    switch (script->AI_TEMP_STATE) {
+        case AI_STATE_PATROL_INIT:
+            N(PatrolAI_MoveInit)(script, npcAISettings, territoryPtr);
+            // fallthrough
+        case AI_STATE_PATROL:
+            N(PatrolAI_Move)(script, npcAISettings, territoryPtr);
             break;
-        case 2:
+        case AI_STATE_LOITER_INIT:
             N(UnkNpcAIFunc1)(script, npcAISettings, territoryPtr);
-        case 3:
-            N(UnkFunc14)(script, npcAISettings, territoryPtr);
+            // fallthrough
+        case AI_STATE_LOITER:
+            N(PatrolAI_Loiter)(script, npcAISettings, territoryPtr);
             break;
-        case 4:
-            N(UnkNpcAIFunc25)(script, npcAISettings, territoryPtr);
+        case AI_STATE_LOITER_POST:
+            N(PatrolAI_PostLoiter)(script, npcAISettings, territoryPtr);
             break;
-        case 10:
+        case AI_STATE_JUMP_INIT:
             N(NpcJumpFunc2)(script, npcAISettings, territoryPtr);
-        case 11:
+            // fallthrough
+        case AI_STATE_JUMP:
             N(NpcJumpFunc)(script, npcAISettings, territoryPtr);
             break;
-        case 12:
+        case AI_STATE_CHASE_INIT:
             N(FlyingNoFirstStrikeAI_12)(script, npcAISettings, territoryPtr);
-        case 13:
+            // fallthrough
+        case AI_STATE_CHASE:
             N(UnkFunc15)(script, npcAISettings, territoryPtr);
             break;
-        case 14:
+        case AI_STATE_LOSE_PLAYER:
             N(UnkNpcDurationFlagFunc)(script, npcAISettings, territoryPtr);
             break;
-        case 30:
+        case AI_STATE_MELEE_HITBOX_INIT:
             N(MeleeHitbox_30)(script);
-        case 31:
+            // fallthrough
+        case AI_STATE_MELEE_HITBOX_PRE:
             N(MeleeHitbox_31)(script);
-            if (script->functionTemp[0] != 32) {
+            if (script->functionTemp[0] != AI_STATE_MELEE_HITBOX_ACTIVE) {
                 break;
             }
-        case 32:
+            // fallthrough
+        case AI_STATE_MELEE_HITBOX_ACTIVE:
             N(MeleeHitbox_32)(script);
-            if (script->functionTemp[0] != 33) {
+            if (script->functionTemp[0] != AI_STATE_MELEE_HITBOX_MISS) {
                 break;
             }
-        case 33:
+            // fallthrough
+        case AI_STATE_MELEE_HITBOX_MISS:
             N(MeleeHitbox_33)(script);
             break;
-        case 99:
+        case AI_STATE_SUSPEND:
             basic_ai_suspend(script);
+            break;
     }
 
     return ApiStatus_BLOCK;

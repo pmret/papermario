@@ -139,12 +139,12 @@ glabel func_80241634_DBE8E4
 .L80241818_DBEAC8:
 /* DBEAC8 80241818 0260202D */  daddu     $a0, $s3, $zero
 /* DBEACC 8024181C 0280282D */  daddu     $a1, $s4, $zero
-/* DBEAD0 80241820 0C09015B */  jal       omo_07_UnkNpcAIFunc24
+/* DBEAD0 80241820 0C09015B */  jal       omo_07_PatrolAI_MoveInit
 /* DBEAD4 80241824 02A0302D */   daddu    $a2, $s5, $zero
 .L80241828_DBEAD8:
 /* DBEAD8 80241828 0260202D */  daddu     $a0, $s3, $zero
 /* DBEADC 8024182C 0280282D */  daddu     $a1, $s4, $zero
-/* DBEAE0 80241830 0C0901B1 */  jal       omo_07_UnkFunc13
+/* DBEAE0 80241830 0C0901B1 */  jal       omo_07_PatrolAI_Move
 /* DBEAE4 80241834 02A0302D */   daddu    $a2, $s5, $zero
 /* DBEAE8 80241838 08090654 */  j         .L80241950_DBEC00
 /* DBEAEC 8024183C 00000000 */   nop
@@ -156,14 +156,14 @@ glabel func_80241634_DBE8E4
 .L80241850_DBEB00:
 /* DBEB00 80241850 0260202D */  daddu     $a0, $s3, $zero
 /* DBEB04 80241854 0280282D */  daddu     $a1, $s4, $zero
-/* DBEB08 80241858 0C09028B */  jal       omo_07_UnkFunc14
+/* DBEB08 80241858 0C09028B */  jal       omo_07_PatrolAI_Loiter
 /* DBEB0C 8024185C 02A0302D */   daddu    $a2, $s5, $zero
 /* DBEB10 80241860 08090654 */  j         .L80241950_DBEC00
 /* DBEB14 80241864 00000000 */   nop
 .L80241868_DBEB18:
 /* DBEB18 80241868 0260202D */  daddu     $a0, $s3, $zero
 /* DBEB1C 8024186C 0280282D */  daddu     $a1, $s4, $zero
-/* DBEB20 80241870 0C0902FA */  jal       omo_07_UnkNpcAIFunc25
+/* DBEB20 80241870 0C0902FA */  jal       omo_07_PatrolAI_PostLoiter
 /* DBEB24 80241874 02A0302D */   daddu    $a2, $s5, $zero
 /* DBEB28 80241878 08090654 */  j         .L80241950_DBEC00
 /* DBEB2C 8024187C 00000000 */   nop

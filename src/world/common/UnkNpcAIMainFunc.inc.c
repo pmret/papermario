@@ -51,17 +51,17 @@ ApiStatus N(UnkNpcAIMainFunc)(Evt* script, s32 isInitialCall) {
 
     switch (script->functionTemp[0]) {
         case 0:
-            N(UnkNpcAIFunc24)(script, npcAISettings, territoryPtr);
+            N(PatrolAI_MoveInit)(script, npcAISettings, territoryPtr);
         case 1:
-            N(UnkFunc13)(script, npcAISettings, territoryPtr);
+            N(PatrolAI_Move)(script, npcAISettings, territoryPtr);
             break;
         case 2:
             N(UnkNpcAIFunc1)(script, npcAISettings, territoryPtr);
         case 3:
-            N(UnkFunc14)(script, npcAISettings, territoryPtr);
+            N(PatrolAI_Loiter)(script, npcAISettings, territoryPtr);
             break;
         case 4:
-            N(UnkNpcAIFunc25)(script, npcAISettings, territoryPtr);
+            N(PatrolAI_PostLoiter)(script, npcAISettings, territoryPtr);
             break;
         case 10:
             N(NpcJumpFunc2)(script, npcAISettings, territoryPtr);

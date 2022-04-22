@@ -1,7 +1,8 @@
 #include "common.h"
 #include "npc.h"
 
-void N(UnkNpcAIFunc24)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+// selects the next patrol point
+void N(PatrolAI_MoveInit)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 ret;

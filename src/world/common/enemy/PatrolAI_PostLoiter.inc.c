@@ -1,7 +1,7 @@
 #include "common.h"
 #include "npc.h"
 
-void N(UnkNpcAIFunc25)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(PatrolAI_PostLoiter)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -15,5 +15,5 @@ void N(UnkNpcAIFunc25)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThi
     } else {
         npc->moveSpeed = enemy->territory->patrol.moveSpeedOverride / 32767.0;
     }
-    script->functionTemp[0] = 1;
+    script->AI_TEMP_STATE = AI_STATE_PATROL;
 }

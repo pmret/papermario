@@ -1,12 +1,12 @@
-#include "world/common/UnkNpcAIFunc24.inc.c"
+#include "world/common/enemy/PatrolAI_MoveInit.inc.c"
 
-#include "world/common/UnkFunc13.inc.c"
+#include "world/common/enemy/PatrolAI_Move.inc.c"
 
 #include "world/common/UnkNpcAIFunc1.inc.c"
 
-#include "world/common/UnkFunc14.inc.c"
+#include "world/common/enemy/PatrolAI_Loiter.inc.c"
 
-#include "world/common/UnkNpcAIFunc25.inc.c"
+#include "world/common/enemy/PatrolAI_PostLoiter.inc.c"
 
 #include "world/common/NpcJumpFunc2.inc.c"
 

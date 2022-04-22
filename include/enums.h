@@ -2774,8 +2774,11 @@ enum EnemyAIStates {
     // basic states
     AI_STATE_WANDER_INIT            = 0,
     AI_STATE_WANDER                 = 1,
+    AI_STATE_PATROL_INIT            = 0,
+    AI_STATE_PATROL                 = 1,
     AI_STATE_LOITER_INIT            = 2,
     AI_STATE_LOITER                 = 3,
+    AI_STATE_LOITER_POST            = 4,
     AI_STATE_JUMP_INIT              = 10,
     AI_STATE_JUMP                   = 11,
     AI_STATE_CHASE_INIT             = 12,

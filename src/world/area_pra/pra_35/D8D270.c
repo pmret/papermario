@@ -51,19 +51,19 @@ ApiStatus func_802423CC_D8F61C(Evt *script, s32 isInitialCall) {
 
     switch (script->functionTemp[0]) {
         case 0:
-            pra_35_UnkNpcAIFunc24(script, npcAISettings, territoryPtr);
+            pra_35_PatrolAI_MoveInit(script, npcAISettings, territoryPtr);
             // fallthrough
         case 1:
-            pra_35_UnkFunc13(script, npcAISettings, territoryPtr);
+            pra_35_PatrolAI_Move(script, npcAISettings, territoryPtr);
             break;
         case 2:
             pra_35_UnkNpcAIFunc1(script, npcAISettings, territoryPtr);
             // fallthrough
         case 3:
-            pra_35_UnkFunc14(script, npcAISettings, territoryPtr);
+            pra_35_PatrolAI_Loiter(script, npcAISettings, territoryPtr);
             break;
         case 7:
-            pra_35_UnkNpcAIFunc25(script, npcAISettings, territoryPtr);
+            pra_35_PatrolAI_PostLoiter(script, npcAISettings, territoryPtr);
             break;
         case 5:
             pra_35_NpcJumpFunc2(script, npcAISettings, territoryPtr);
