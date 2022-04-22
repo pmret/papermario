@@ -2,7 +2,7 @@
 #include "npc.h"
 #include "effects.h"
 
-void N(FlyingAI_01)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(FlyingAI_Wander)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 cond = FALSE;
@@ -96,15 +96,14 @@ void N(FlyingAI_01)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing*
                     basic_ai_try_detect_player(territory, enemy, aiSettings->alertRadius, aiSettings->unk_10.f, 0) != 0) 
                 {
                     s32 emoteTemp;
-
                     fx_emote(EMOTE_EXCLAMATION, npc, 0, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xC, &emoteTemp);
                     npc->moveToPos.y = npc->pos.y;
-                    ai_enemy_play_sound(npc, 0x2F4, 0x200000);
+                    ai_enemy_play_sound(npc, SOUND_2F4, 0x200000);
                     
-                    if (enemy->npcSettings->unk_2A & 1) {
-                        script->functionTemp[0] = 10;
+                    if (enemy->npcSettings->unk_2A & AI_ACTION_JUMP_WHEN_SEE_PLAYER) {
+                        script->AI_TEMP_STATE = AI_STATE_JUMP_INIT;
                     } else {
-                        script->functionTemp[0] = 12;
+                        script->AI_TEMP_STATE = AI_STATE_CHASE_INIT;
                     }
                     return;
                 }
@@ -137,10 +136,10 @@ void N(FlyingAI_01)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing*
     enemy->varTable[4] = npc->pos.y * 100.0;
     if (aiSettings->moveTime > 0) {
         if ((npc->duration <= 0) || (--npc->duration <= 0)) {
-            script->functionTemp[0] = 2;
+            script->AI_TEMP_STATE = AI_STATE_LOITER_INIT;
             script->functionTemp[1] = (rand_int(1000) % 3) + 2;
             if (aiSettings->unk_2C <= 0 || aiSettings->waitTime <= 0 || script->functionTemp[1] < 3) {
-                script->functionTemp[0] = 0;
+                script->AI_TEMP_STATE = AI_STATE_WANDER_INIT;
             }
         }
     }

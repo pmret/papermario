@@ -1,10 +1,10 @@
-#include "world/common/enemy/FlyingAI_00.inc.c"
+#include "world/common/enemy/FlyingAI_WanderInit.inc.c"
 
-#include "world/common/enemy/FlyingAI_01.inc.c"
+#include "world/common/enemy/FlyingAI_Wander.inc.c"
 
 #include "world/common/UnkNpcAIFunc1.inc.c"
 
-#include "world/common/enemy/FlyingAI_03.inc.c"
+#include "world/common/enemy/FlyingAI_Loiter.inc.c"
 
 #include "world/common/enemy/FlyingAI_10.inc.c"
 

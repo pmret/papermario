@@ -805,14 +805,14 @@ ApiStatus N(func_80241C64_CD8F44)(Evt* script, s32 isInitialCall) {
 
     switch (script->functionTemp[0]) {
         case 0:
-            N(FlyingAI_00)(script, aiSettings, territoryPtr);
+            N(FlyingAI_WanderInit)(script, aiSettings, territoryPtr);
 
         case 1:
             N(func_802415B0_CD8890)(script, aiSettings, territoryPtr);
             break;
 
         case 2:
-            N(FlyingAI_02)(script, aiSettings, territoryPtr);
+            N(FlyingAI_LoiterInit)(script, aiSettings, territoryPtr);
 
         case 3:
             N(func_80241A14_CD8CF4)(script, aiSettings, territoryPtr);

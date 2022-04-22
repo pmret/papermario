@@ -34,14 +34,14 @@ ApiStatus N(FlyingNoFirstStrikeAI_Main)(Evt* script, s32 isInitialCall) {
 
     switch (script->functionTemp[0]) {
         case 0:
-            N(FlyingAI_00)(script, aiSettings, territoryPtr);
+            N(FlyingAI_WanderInit)(script, aiSettings, territoryPtr);
         case 1:
-            N(FlyingAI_01)(script, aiSettings, territoryPtr);
+            N(FlyingAI_Wander)(script, aiSettings, territoryPtr);
             break;
         case 2:
-            N(FlyingAI_02)(script, aiSettings, territoryPtr);
+            N(FlyingAI_LoiterInit)(script, aiSettings, territoryPtr);
         case 3:
-            N(FlyingAI_03)(script, aiSettings, territoryPtr);
+            N(FlyingAI_Loiter)(script, aiSettings, territoryPtr);
             break;
         case 10:
             N(FlyingAI_10)(script, aiSettings, territoryPtr);

@@ -1,7 +1,7 @@
 #include "common.h"
 #include "npc.h"
 
-void N(FlyingAI_00)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(FlyingAI_WanderInit)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -22,5 +22,5 @@ void N(FlyingAI_00)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing*
         npc->moveSpeed = enemy->territory->wander.moveSpeedOverride / 32767.0;
     }
     enemy->varTable[4] = npc->pos.y * 100.0;
-    script->functionTemp[0] = 1;
+    script->functionTemp[0] = AI_STATE_WANDER;
 }

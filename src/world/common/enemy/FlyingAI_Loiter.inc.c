@@ -2,7 +2,7 @@
 #include "npc.h"
 #include "effects.h"
 
-void N(FlyingAI_03)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(FlyingAI_Loiter)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 posX, posY, posZ, posW;
@@ -43,11 +43,11 @@ void N(FlyingAI_03)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing*
             && basic_ai_try_detect_player(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 1)) {
             fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 12, &var);
             npc->moveToPos.y = npc->pos.y;
-            ai_enemy_play_sound(npc, 0x2F4, 0x200000);
-            if (enemy->npcSettings->unk_2A & 1) {
-                script->functionTemp[0] = 10;
+            ai_enemy_play_sound(npc, SOUND_2F4, 0x200000);
+            if (enemy->npcSettings->unk_2A & AI_ACTION_JUMP_WHEN_SEE_PLAYER) {
+                script->functionTemp[0] = AI_STATE_JUMP_INIT;
             } else {
-                script->functionTemp[0] = 12;
+                script->functionTemp[0] = AI_STATE_CHASE_INIT;
             }
             return;
         }

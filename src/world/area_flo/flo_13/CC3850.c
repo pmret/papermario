@@ -1401,7 +1401,7 @@ ApiStatus N(func_80241DB8_CC55C8)(Evt* script, s32 isInitialCall) {
 
     switch (script->functionTemp[0]) {
         case 0:
-            N(FlyingAI_00)(script, aiSettings, territoryPtr);
+            N(FlyingAI_WanderInit)(script, aiSettings, territoryPtr);
 
         case 1:
             N(func_80241704_CC4F14)(script, aiSettings, territoryPtr);
