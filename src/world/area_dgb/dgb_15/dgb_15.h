@@ -9,7 +9,7 @@
 ApiStatus N(GetEntityPosition)(Evt* script, s32 isInitialCall);
 ApiStatus N(SetEntityFlags100000)(Evt* script, s32 isInitialCall);
 ApiStatus N(UnkFunc1)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_8024061C_C4FB2C)(Evt* script, s32 isInitialCall);
+ApiStatus N(WanderMeleeAI_Main)(Evt* script, s32 isInitialCall);
 ApiStatus N(PatrolNoAttackAI_Main)(Evt* script, s32 isInitialCall);
 ApiStatus N(MeleeHitbox_Control)(Evt* script, s32 isInitialCall);
 

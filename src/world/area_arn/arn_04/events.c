@@ -322,7 +322,7 @@ s32 N(func_80242388_BE5B38)(Evt* script, NpcAISettings* aiSettings, EnemyTerrito
     return ret;
 }
 
-#include "world/common/UnkNpcAIFunc18.inc.c"
+#include "world/common/enemy/state/CleftAI_00.inc.c"
 
 void N(func_8024255C_BE5D0C)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
@@ -343,15 +343,15 @@ void N(func_8024255C_BE5D0C)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
     script->functionTemp[1]--;
 }
 
-#include "world/common/UnkNpcAIFunc21.inc.c"
+#include "world/common/enemy/state/CleftAI_02.inc.c"
 
-#include "world/common/UnkNpcAIFunc20.inc.c"
+#include "world/common/enemy/state/CleftAI_03.inc.c"
 
-#include "world/common/UnkNpcAIFunc22.inc.c"
+#include "world/common/enemy/state/CleftAI_04.inc.c"
 
-#include "world/common/UnkFunc8.inc.c"
+#include "world/common/enemy/state/CleftAI_05.inc.c"
 
-#include "world/common/UnkNpcAIFunc16.inc.c"
+#include "world/common/enemy/state/CleftAI_20.inc.c"
 
 void N(func_80242A1C_BE61CC)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
@@ -378,7 +378,7 @@ void N(func_80242A1C_BE61CC)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
     }
 }
 
-#include "world/common/UnkFunc10.inc.c"
+#include "world/common/enemy/state/CleftAI_22.inc.c"
 
 void N(func_80242D0C_BE64BC)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
@@ -396,11 +396,11 @@ void N(func_80242D0C_BE64BC)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
     }
 }
 
-#include "world/common/UnkFunc9.inc.c"
+#include "world/common/enemy/state/CleftAI_41.inc.c"
 
-#include "world/common/UnkNpcAIFunc19.inc.c"
+#include "world/common/enemy/state/CleftAI_50.inc.c"
 
-#include "world/common/UnkNpcAIFunc17.inc.c"
+#include "world/common/enemy/state/CleftAI_51.inc.c"
 
 #include "world/common/UnkDurationCheck.inc.c"
 
@@ -451,26 +451,26 @@ ApiStatus N(func_80243018_BE67C8)(Evt* script, s32 isInitialCall) {
 
     switch (script->functionTemp[0]) {
         case 0:
-            N(UnkNpcAIFunc18)(script, aiSettings, territoryPtr);
+            N(CleftAI_00)(script, aiSettings, territoryPtr);
         case 1:
             N(func_8024255C_BE5D0C)(script, aiSettings, territoryPtr);
             if (script->functionTemp[0] != 2) {
                 return ApiStatus_BLOCK;
             }
         case 2:
-            N(UnkNpcAIFunc21)(script, aiSettings, territoryPtr);
+            N(CleftAI_02)(script, aiSettings, territoryPtr);
             if (script->functionTemp[0] != 3) {
                 return ApiStatus_BLOCK;
             }
         case 3:
-            N(UnkNpcAIFunc20)(script, aiSettings, territoryPtr);
+            N(CleftAI_03)(script, aiSettings, territoryPtr);
             if (script->functionTemp[0] != 4) {
                 return ApiStatus_BLOCK;
             }
         case 4:
-            N(UnkNpcAIFunc22)(script, aiSettings, territoryPtr);
+            N(CleftAI_04)(script, aiSettings, territoryPtr);
         case 5:
-            N(UnkFunc8)(script, aiSettings, territoryPtr);
+            N(CleftAI_05)(script, aiSettings, territoryPtr);
             return ApiStatus_BLOCK;
         case 12:
             basic_ai_chase_init(script, aiSettings, territoryPtr);
@@ -489,12 +489,12 @@ ApiStatus N(func_80243018_BE67C8)(Evt* script, s32 isInitialCall) {
             }
             return ApiStatus_BLOCK;
         case 20:
-            N(UnkNpcAIFunc16)(script, aiSettings, territoryPtr);
+            N(CleftAI_20)(script, aiSettings, territoryPtr);
         case 21:
             N(func_80242A1C_BE61CC)(script, aiSettings, territoryPtr);
             return ApiStatus_BLOCK;
         case 22:
-            N(UnkFunc10)(script, aiSettings, territoryPtr);
+            N(CleftAI_22)(script, aiSettings, territoryPtr);
             return ApiStatus_BLOCK;
         case 40:
             N(func_80242D0C_BE64BC)(script, aiSettings, territoryPtr);
@@ -502,12 +502,12 @@ ApiStatus N(func_80243018_BE67C8)(Evt* script, s32 isInitialCall) {
                 return ApiStatus_BLOCK;
             }
         case 41:
-            N(UnkFunc9)(script, aiSettings, territoryPtr);
+            N(CleftAI_41)(script, aiSettings, territoryPtr);
             return ApiStatus_BLOCK;
         case 50:
-            N(UnkNpcAIFunc19)(script, aiSettings, territoryPtr);
+            N(CleftAI_50)(script, aiSettings, territoryPtr);
         case 51:
-            N(UnkNpcAIFunc17)(script, aiSettings, territoryPtr);
+            N(CleftAI_51)(script, aiSettings, territoryPtr);
             if (script->functionTemp[0] != 52) {
                 return ApiStatus_BLOCK;
             }
