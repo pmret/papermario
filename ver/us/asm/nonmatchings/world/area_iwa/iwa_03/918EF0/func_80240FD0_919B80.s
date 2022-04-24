@@ -231,7 +231,7 @@ glabel func_80240FD0_919B80
 .L802412E8_919E98:
 /* 919E98 802412E8 0260202D */  daddu     $a0, $s3, $zero
 /* 919E9C 802412EC 0280282D */  daddu     $a1, $s4, $zero
-/* 919EA0 802412F0 0C0903E3 */  jal       iwa_03_UnkDurationCheck
+/* 919EA0 802412F0 0C0903E3 */  jal       iwa_03_CleftAI_52
 /* 919EA4 802412F4 0200302D */   daddu    $a2, $s0, $zero
 .L802412F8_919EA8:
 /* 919EA8 802412F8 0000102D */  daddu     $v0, $zero, $zero

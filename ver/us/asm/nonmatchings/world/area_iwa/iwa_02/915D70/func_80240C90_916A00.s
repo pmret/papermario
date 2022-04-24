@@ -231,7 +231,7 @@ glabel func_80240C90_916A00
 .L80240FA8_916D18:
 /* 916D18 80240FA8 0260202D */  daddu     $a0, $s3, $zero
 /* 916D1C 80240FAC 0280282D */  daddu     $a1, $s4, $zero
-/* 916D20 80240FB0 0C090313 */  jal       iwa_02_UnkDurationCheck
+/* 916D20 80240FB0 0C090313 */  jal       iwa_02_CleftAI_52
 /* 916D24 80240FB4 0200302D */   daddu    $a2, $s0, $zero
 .L80240FB8_916D28:
 /* 916D28 80240FB8 0000102D */  daddu     $v0, $zero, $zero

@@ -33,7 +33,7 @@ INCLUDE_ASM(s32, "world/area_iwa/iwa_04/91B8E0", func_80240A04_91C2E4);
 
 #include "world/common/enemy/state/CleftAI_51.inc.c"
 
-#include "world/common/UnkDurationCheck.inc.c"
+#include "world/common/enemy/state/CleftAI_52.inc.c"
 
 INCLUDE_ASM(s32, "world/area_iwa/iwa_04/91B8E0", func_80240D10_91C5F0);
 

@@ -231,7 +231,7 @@ glabel func_80242F54_912604
 .L8024326C_91291C:
 /* 91291C 8024326C 0260202D */  daddu     $a0, $s3, $zero
 /* 912920 80243270 0280282D */  daddu     $a1, $s4, $zero
-/* 912924 80243274 0C090BC4 */  jal       dup_iwa_01_UnkDurationCheck
+/* 912924 80243274 0C090BC4 */  jal       dup_iwa_01_CleftAI_52
 /* 912928 80243278 0200302D */   daddu    $a2, $s0, $zero
 .L8024327C_91292C:
 /* 91292C 8024327C 0000102D */  daddu     $v0, $zero, $zero

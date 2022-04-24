@@ -51,7 +51,7 @@ INCLUDE_ASM(s32, "world/area_iwa/iwa_01/90FBD0", func_80242C48_9122F8);
 #include "world/common/enemy/state/CleftAI_51.inc.c"
 
 #define NAMESPACE dup_iwa_01
-#include "world/common/UnkDurationCheck.inc.c"
+#include "world/common/enemy/state/CleftAI_52.inc.c"
 #define NAMESPACE iwa_01
 
 INCLUDE_ASM(s32, "world/area_iwa/iwa_01/90FBD0", func_80242F54_912604);

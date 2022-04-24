@@ -402,7 +402,7 @@ void N(func_80242D0C_BE64BC)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
 
 #include "world/common/enemy/state/CleftAI_51.inc.c"
 
-#include "world/common/UnkDurationCheck.inc.c"
+#include "world/common/enemy/state/CleftAI_52.inc.c"
 
 ApiStatus N(func_80243018_BE67C8)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
@@ -512,7 +512,7 @@ ApiStatus N(func_80243018_BE67C8)(Evt* script, s32 isInitialCall) {
                 return ApiStatus_BLOCK;
             }
         case 52:
-            N(UnkDurationCheck)(script, aiSettings, territoryPtr);
+            N(CleftAI_52)(script, aiSettings, territoryPtr);
             return ApiStatus_BLOCK;
     }
 

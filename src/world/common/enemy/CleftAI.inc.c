@@ -29,8 +29,7 @@
 
 #include "world/common/enemy/state/CleftAI_51.inc.c"
 
-// need to separate
-#include "world/common/UnkDurationCheck.inc.c"
+#include "world/common/enemy/state/CleftAI_52.inc.c"
 
 s32 N(CleftAI_Main)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
@@ -136,7 +135,7 @@ s32 N(CleftAI_Main)(Evt* script, s32 isInitialCall) {
                 return ApiStatus_BLOCK;
             }
         case 52:
-            N(UnkDurationCheck)(script, npcAISettings, territoryPtr);
+            N(CleftAI_52)(script, npcAISettings, territoryPtr);
             return ApiStatus_BLOCK;
     }
 
