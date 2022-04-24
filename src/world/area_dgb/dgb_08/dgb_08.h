@@ -7,7 +7,7 @@
 #define NAMESPACE dgb_08
 
 ApiStatus N(UnkFunc1)(Evt* script, s32 isInitialCall);
-ApiStatus N(UnkNpcAIMainFunc)(Evt* script, s32 isInitialCall);
+ApiStatus N(PatrolAI_NoAttack_Main)(Evt* script, s32 isInitialCall);
 ApiStatus N(MeleeHitbox_Control)(Evt* script, s32 isInitialCall);
 ApiStatus N(MeleeWanderAI_Main)(Evt* script, s32 isInitialCall);
 ApiStatus N(SentinelAI_Main)(Evt* script, s32 isInitialCall);

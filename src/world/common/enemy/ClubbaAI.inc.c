@@ -1,13 +1,8 @@
 #include "common.h"
 #include "effects.h"
 #include "world/partners.h"
-#include "sprite/npc/world_clubba.h"
 
-#include "world/common/enemy/MeleeHitbox_States.inc.c"
-
-#include "world/common/enemy/ClubbaNappingAI.inc.c"
-
-//TODO ClubbaPatrolAI_Main ?
+//TODO ClubbaWanderI_Main ?
 ApiStatus N(func_80241170_C3ED60)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
@@ -26,7 +21,7 @@ ApiStatus N(func_80241170_C3ED60)(Evt* script, s32 isInitialCall) {
     territory.unk_1C = 0;
 
     if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAGS_4)) {
-        script->AI_TEMP_STATE = AI_STATE_NAPPING_CLUBBA_INIT;
+        script->AI_TEMP_STATE = AI_STATE_WANDER_INIT;
         npc->duration = 0;
         npc->currentAnim.w = enemy->animList[0];
         npc->flags &= ~NPC_FLAG_JUMPING;
@@ -38,17 +33,17 @@ ApiStatus N(func_80241170_C3ED60)(Evt* script, s32 isInitialCall) {
             npc->flags |= NPC_FLAG_ENABLE_HIT_SCRIPT;
         }
         if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
-            script->AI_TEMP_STATE = AI_STATE_NAPPING_CLUBBA_99;
-            script->AI_TEMP_STATE_AFTER_SUSPEND = AI_STATE_NAPPING_CLUBBA_INIT;
+            script->AI_TEMP_STATE = AI_STATE_SUSPEND;
+            script->AI_TEMP_STATE_AFTER_SUSPEND = AI_STATE_WANDER_INIT;
             enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
         }
         enemy->AI_VAR_ATTACK_STATE = MELEE_HITBOX_STATE_NONE;
     }
 
-    if (script->AI_TEMP_STATE < AI_STATE_NAPPING_CLUBBA_30
+    if (script->AI_TEMP_STATE < AI_STATE_MELEE_HITBOX_INIT
             && enemy->AI_VAR_ATTACK_STATE == MELEE_HITBOX_STATE_NONE
             && N(MeleeHitbox_CanSeePlayer)(script)) {
-        script->AI_TEMP_STATE = AI_STATE_NAPPING_CLUBBA_30;
+        script->AI_TEMP_STATE = AI_STATE_MELEE_HITBOX_INIT;
     }
 
     switch (script->AI_TEMP_STATE) {

@@ -2785,6 +2785,8 @@ enum EnemyAIStates {
     AI_STATE_CHASE                  = 13,
     AI_STATE_LOSE_PLAYER            = 14,
     AI_STATE_PATROL_15              = 15,
+    AI_RETURN_HOME_INIT             = 40,
+    AI_RETURN_HOME                  = 41,
     AI_STATE_SUSPEND                = 99,
     // melee hitboxes
     AI_STATE_MELEE_HITBOX_INIT      = 30,
@@ -2822,27 +2824,6 @@ enum PiranhaPlantStates {
     AI_STATE_PIRANHA_PLANT_13       = 13,
     AI_STATE_PIRANHA_PLANT_14       = 14,
     AI_STATE_PIRANHA_PLANT_SUSPEND  = 99
-};
-
-enum AiStateNappingClubba {
-    AI_STATE_NAPPING_CLUBBA_INIT                = 0,
-    AI_STATE_NAPPING_CLUBBA_SLEEP               = 1,
-    AI_STATE_NAPPING_CLUBBA_WAKE_UP             = 2,
-    AI_STATE_NAPPING_CLUBBA_3                   = 3,
-    AI_STATE_NAPPING_CLUBBA_ACQUIRE             = 4,
-    AI_STATE_NAPPING_CLUBBA_10                  = 10,
-    AI_STATE_NAPPING_CLUBBA_11                  = 11,
-    AI_STATE_NAPPING_CLUBBA_INIT_CHASE          = AI_STATE_CHASE_INIT,
-    AI_STATE_NAPPING_CLUBBA_CHASE               = AI_STATE_CHASE,
-    AI_STATE_NAPPING_CLUBBA_LOSE_PLAYER         = AI_STATE_LOSE_PLAYER,
-    AI_STATE_NAPPING_CLUBBA_30                  = 30,
-    AI_STATE_NAPPING_CLUBBA_31                  = 31,
-    AI_STATE_NAPPING_CLUBBA_32                  = 32,
-    AI_STATE_NAPPING_CLUBBA_33                  = 33,
-    AI_STATE_NAPPING_CLUBBA_INIT_RETURN_HOME    = 40,
-    AI_STATE_NAPPING_CLUBBA_RETURN_HOME         = 41,
-    AI_STATE_NAPPING_CLUBBA_50                  = 50,
-    AI_STATE_NAPPING_CLUBBA_99                  = 99,
 };
 
 enum MeleeHitboxAttackStates {

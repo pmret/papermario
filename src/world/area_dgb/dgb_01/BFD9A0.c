@@ -619,7 +619,7 @@ NpcAISettings N(npcAISettings_80245298) = {
 };
 
 EvtScript N(npcAI_802452C8) = {
-    EVT_CALL(N(UnkNpcAIMainFunc), EVT_PTR(N(npcAISettings_80245298)))
+    EVT_CALL(N(PatrolAI_NoAttack_Main), EVT_PTR(N(npcAISettings_80245298)))
     EVT_RETURN
     EVT_END
 };
@@ -806,7 +806,7 @@ EvtScript N(idle_8024598C) = {
     EVT_END_THREAD
     EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FIXED(5.0))
     EVT_CALL(NpcMoveTo, NPC_SELF, 259, 167, 0)
-    EVT_CALL(N(UnkNpcAIMainFunc), EVT_PTR(N(npcAISettings_80245298)))
+    EVT_CALL(N(PatrolAI_NoAttack_Main), EVT_PTR(N(npcAISettings_80245298)))
     EVT_RETURN
     EVT_END
 };

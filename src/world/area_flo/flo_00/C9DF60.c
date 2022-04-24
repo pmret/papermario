@@ -371,7 +371,7 @@ NpcAISettings N(npcAISettings_8024286C) = {
 };
 
 EvtScript N(npcAI_8024289C) = SCRIPT({
-    N(UnkNpcAIMainFunc)(N(npcAISettings_8024286C));
+    N(PatrolAI_NoAttack_Main)(N(npcAISettings_8024286C));
 });
 
 NpcSettings N(npcSettings_802428BC) = {

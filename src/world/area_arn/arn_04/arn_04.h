@@ -7,7 +7,7 @@
 
 #define NAMESPACE arn_04
 
-ApiStatus N(UnkNpcAIMainFunc)(Evt* script, s32 isInitialCall);
+ApiStatus N(PatrolAI_NoAttack_Main)(Evt* script, s32 isInitialCall);
 ApiStatus N(FlyingAI_Main)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_80243018_BE67C8)(Evt* script, s32 isInitialCall);
 

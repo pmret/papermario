@@ -104,7 +104,7 @@ NpcAISettings N(npcAISettings_80241580) = {
 };
 
 EvtScript N(802415B0) = {
-    EVT_CALL(N(UnkNpcAIMainFunc), EVT_PTR(N(npcAISettings_80241580)))
+    EVT_CALL(N(PatrolAI_NoAttack_Main), EVT_PTR(N(npcAISettings_80241580)))
     EVT_RETURN
     EVT_END
 };
@@ -421,7 +421,7 @@ EvtScript N(npcAI_80242834) = {
             EVT_WAIT_FRAMES(8)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(N(UnkNpcAIMainFunc), EVT_PTR(N(npcAISettings_80241580)))
+    EVT_CALL(N(PatrolAI_NoAttack_Main), EVT_PTR(N(npcAISettings_80241580)))
     EVT_RETURN
     EVT_END
 };

@@ -267,7 +267,7 @@ NpcAISettings N(npcAISettings_8024508C) = {
 };
 
 EvtScript N(npcAI_802450BC) = {
-    EVT_CALL(N(UnkNpcAIMainFunc), EVT_PTR(N(npcAISettings_8024508C)))
+    EVT_CALL(N(PatrolAI_NoAttack_Main), EVT_PTR(N(npcAISettings_8024508C)))
     EVT_RETURN
     EVT_END
 };
