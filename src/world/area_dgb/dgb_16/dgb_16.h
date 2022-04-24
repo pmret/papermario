@@ -7,7 +7,7 @@
 #define NAMESPACE dgb_16
 
 ApiStatus N(ClubbaNappingAI_Main)(Evt* script, s32 isInitialCall);
-ApiStatus N(MeleeHitbox_Control)(Evt* script, s32 isInitialCall);
+ApiStatus N(MeleeHitbox_Main)(Evt* script, s32 isInitialCall);
 
 extern NpcGroupList N(npcGroupList_8024318C);
 extern EvtScript N(80241780);

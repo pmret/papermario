@@ -148,7 +148,7 @@ EvtScript N(npcAI_80242964) = {
     EVT_CALL(SetSelfVar, 5, 0)
     EVT_CALL(SetSelfVar, 6, 0)
     EVT_CALL(SetSelfVar, 1, 600)
-    EVT_CALL(N(FlyingNoFirstStrikeAI_Main), EVT_PTR(N(npcAISettings_80242934)))
+    EVT_CALL(N(FlyingNoAttackAI_Main), EVT_PTR(N(npcAISettings_80242934)))
     EVT_RETURN
     EVT_END
 };
@@ -515,7 +515,7 @@ static s32 N(pad_3CD8)[] = {
 
 #include "world/common/enemy/FlyingAI.inc.c"
 
-#include "world/common/enemy/FlyingNoFirstStrikeAI.inc.c"
+#include "world/common/enemy/FlyingNoAttackAI.inc.c"
 
 #include "world/common/atomic/ItemChoice_PartA.inc.c"
 

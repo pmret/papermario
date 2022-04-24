@@ -11,7 +11,7 @@ ApiStatus N(TransformFoliage)(Evt* script, s32 isInitialCall);
 ApiStatus N(UnkFunc43)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_80240000_CF2BD0)(Evt* script, s32 isInitialCall);
 ApiStatus N(FlyingAI_Main)(Evt* script, s32 isInitialCall);
-ApiStatus N(FlyingNoFirstStrikeAI_Main)(Evt* script, s32 isInitialCall);
+ApiStatus N(FlyingNoAttackAI_Main)(Evt* script, s32 isInitialCall);
 ApiStatus N(ItemChoice_WaitForSelection)(Evt* script, s32 isInitialCall);
 ApiStatus N(ItemChoice_SaveSelected)(Evt* script, s32 isInitialCall);
 ApiStatus N(BuildItemChoiceList)(Evt* script, s32 isInitialCall);

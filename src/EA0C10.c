@@ -13,17 +13,17 @@ extern s32 D_802466D0[];
 void func_8004D8E0(DeadEnemy*);
 void func_80240DC4_EA16C4(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory);
 
-#include "world/common/enemy/MeleeHitbox_30.inc.c"
+#include "world/common/enemy/state/MeleeHitbox_30.inc.c"
 
-#include "world/common/enemy/MeleeHitbox_31.inc.c"
+#include "world/common/enemy/state/MeleeHitbox_31.inc.c"
 
-#include "world/common/enemy/MeleeHitbox_32.inc.c"
+#include "world/common/enemy/state/MeleeHitbox_32.inc.c"
 
-#include "world/common/enemy/MeleeHitbox_33.inc.c"
+#include "world/common/enemy/state/MeleeHitbox_33.inc.c"
 
-#include "world/common/enemy/MeleeHitbox_CanSeePlayer.inc.c"
+#include "world/common/enemy/state/MeleeHitbox_CanSeePlayer.inc.c"
 
-// Similar to MeleeHitbox_Control
+// Similar to MeleeHitbox_Main
 ApiStatus func_802406CC_EA0FCC(Evt* script, s32 isInitialCall) {
     DeadEnemy* enemy = (DeadEnemy*) script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
@@ -202,22 +202,22 @@ ApiStatus func_8024097C_EA127C(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-#include "world/common/enemy/PiranhaPlantAI_00.inc.c"
+#include "world/common/enemy/state/PiranhaPlantAI_00.inc.c"
 
-#include "world/common/enemy/PiranhaPlantAI_01.inc.c"
+#include "world/common/enemy/state/PiranhaPlantAI_01.inc.c"
 
 // sqrtf issue - Would be PiranhaPlantAI_10
 INCLUDE_ASM(s32, "EA0C10", func_80240DC4_EA16C4);
 
-#include "world/common/enemy/PiranhaPlantAI_11.inc.c"
+#include "world/common/enemy/state/PiranhaPlantAI_11.inc.c"
 
-#include "world/common/enemy/PiranhaPlantAI_12.inc.c"
+#include "world/common/enemy/state/PiranhaPlantAI_12.inc.c"
 
-#include "world/common/enemy/PiranhaPlantAI_13.inc.c"
+#include "world/common/enemy/state/PiranhaPlantAI_13.inc.c"
 
-#include "world/common/enemy/PiranhaPlantAI_14.inc.c"
+#include "world/common/enemy/state/PiranhaPlantAI_14.inc.c"
 
-#include "world/common/enemy/DeadPiranhaPlantAI_Main.inc.c"
+#include "world/common/enemy/Dead_PiranhaPlantAI_Main.inc.c"
 
 #include "world/common/enemy/UnkAI_StateHandlers_A.inc.c"
 

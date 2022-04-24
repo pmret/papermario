@@ -3,7 +3,7 @@
 #include "world/partners.h"
 
 // prerequisites
-#include "world/common/enemy/MeleeHitbox_States.inc.c"
+#include "world/common/enemy/MeleeHitbox.inc.c"
 
 //TODO ClubbaWanderI_Main ?
 ApiStatus N(func_80241170_C3ED60)(Evt* script, s32 isInitialCall) {

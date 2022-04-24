@@ -1,7 +1,7 @@
 #include "common.h"
 #include "npc.h"
 
-void N(FlyingNoFirstStrikeAI_20)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(FlyingNoAttackAI_20)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 

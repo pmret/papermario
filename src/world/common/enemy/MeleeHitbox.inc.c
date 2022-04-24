@@ -97,7 +97,7 @@ s32 N(MeleeHitbox_CanSeePlayer)(Evt* script) {
     return ret;
 }
 
-ApiStatus N(MeleeHitbox_Control)(Evt* script, s32 isInitialCall) {
+ApiStatus N(MeleeHitbox_Main)(Evt* script, s32 isInitialCall) {
     Enemy* hitboxEnemy = script->owner1.enemy;
     Npc* hitboxNpc = get_npc_unsafe(hitboxEnemy->npcID);
     Enemy* baseEnemy;
@@ -117,7 +117,7 @@ ApiStatus N(MeleeHitbox_Control)(Evt* script, s32 isInitialCall) {
         }
     }
 
-    switch (script->functionTemp[0]) {
+    switch (script->AI_TEMP_STATE) {
         case 0:
             baseEnemy = get_enemy(hitboxEnemy->npcID - 1);
             baseNpc = get_npc_unsafe(baseEnemy->npcID);

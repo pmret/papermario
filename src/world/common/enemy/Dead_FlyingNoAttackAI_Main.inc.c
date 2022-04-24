@@ -3,7 +3,7 @@
 #include "effects.h"
 #include "dead_structs.h"
 
-ApiStatus N(DeadFlyingNoFirstStrikeAI_Main)(Evt* script, s32 isInitialCall) {
+ApiStatus N(Dead_FlyingNoAttackAI_Main)(Evt* script, s32 isInitialCall) {
     DeadEnemy* enemy = script->owner1.enemy;
     Bytecode* args = script->ptrReadPos;
     Npc* npc = get_npc_unsafe(enemy->npcID);
@@ -56,12 +56,12 @@ ApiStatus N(DeadFlyingNoFirstStrikeAI_Main)(Evt* script, s32 isInitialCall) {
             N(FlyingAI_Jump)(script, aiSettings, territoryPtr);
             break;
         case 12:
-            N(FlyingNoFirstStrikeAI_12)(script, aiSettings, territoryPtr);
+            N(FlyingNoAttackAI_12)(script, aiSettings, territoryPtr);
         case 13:
-            N(FlyingNoFirstStrikeAI_13)(script, aiSettings, territoryPtr);
+            N(FlyingNoAttackAI_13)(script, aiSettings, territoryPtr);
             break;
         case 20:
-            N(FlyingNoFirstStrikeAI_20)(script, aiSettings, territoryPtr);
+            N(FlyingNoAttackAI_20)(script, aiSettings, territoryPtr);
             break;
     }
 

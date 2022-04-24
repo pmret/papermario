@@ -186,7 +186,7 @@ EvtScript N(npcAI_80241A78) = {
     EVT_CALL(SetSelfVar, 3, 32)
     EVT_CALL(SetSelfVar, 4, 3)
     EVT_CALL(SetSelfVar, 15, 8389)
-    EVT_CALL(N(MeleeHitbox_Control))
+    EVT_CALL(N(MeleeHitbox_Main))
     EVT_RETURN
     EVT_END
 };

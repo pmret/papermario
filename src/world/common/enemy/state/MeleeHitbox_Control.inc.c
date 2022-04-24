@@ -1,7 +1,7 @@
 #include "common.h"
 #include "npc.h"
 
-ApiStatus N(MeleeHitbox_Control)(Evt* script, s32 isInitialCall) {
+ApiStatus N(MeleeHitbox_Main)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Enemy* enemy2;

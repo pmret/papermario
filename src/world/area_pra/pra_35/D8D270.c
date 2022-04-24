@@ -4,7 +4,7 @@
 
 #include "world/common/enemy/PatrolNoAttackAI.inc.c"
 
-#include "world/common/enemy/MeleeHitbox_States.inc.c"
+#include "world/common/enemy/MeleeHitbox.inc.c"
 
 // Requires data migration
 #ifdef NON_MATCHING
@@ -72,7 +72,7 @@ ApiStatus func_802423CC_D8F61C(Evt *script, s32 isInitialCall) {
             pra_35_PatrolAI_Jump(script, npcAISettings, territoryPtr);
             break;
         case 12:
-            pra_35_FlyingNoFirstStrikeAI_12(script, npcAISettings, territoryPtr);
+            pra_35_FlyingNoAttackAI_12(script, npcAISettings, territoryPtr);
             // fallthrough
         case 13:
             pra_35_PatrolAI_Chase(script, npcAISettings, territoryPtr);

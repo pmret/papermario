@@ -8,7 +8,7 @@
 #include "npc.h"
 
 // prerequisites
-#include "world/common/enemy/MeleeHitbox_States.inc.c"
+#include "world/common/enemy/MeleeHitbox.inc.c"
 
 ApiStatus N(WanderMeleeAI_Main)(Evt *script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;

@@ -2,7 +2,7 @@
 #include "world/partners.h"
 
 // prerequisites
-#include "world/common/enemy/MeleeHitbox_States.inc.c"
+#include "world/common/enemy/MeleeHitbox.inc.c"
 
 enum AiStateNappingClubba {
     AI_STATE_NAPPING_CLUBBA_INIT                = 0,

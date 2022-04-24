@@ -78,7 +78,7 @@ ApiStatus N(PatrolNoAttackAI_Main)(Evt* script, s32 isInitialCall) {
             N(PatrolAI_Jump)(script, npcAISettings, territoryPtr);
             break;
         case AI_STATE_CHASE_INIT:
-            N(FlyingNoFirstStrikeAI_12)(script, npcAISettings, territoryPtr);
+            N(FlyingNoAttackAI_12)(script, npcAISettings, territoryPtr);
             // fallthrough
         case AI_STATE_CHASE:
             N(PatrolAI_Chase)(script, npcAISettings, territoryPtr);

@@ -3,7 +3,7 @@
 #include "world/common/UnkNpcAIFunc37.inc.c"
 
 // used in 38 files
-//#include "world/common/enemy/PatrolAI_LoiterInit.inc.c"
+//#include "world/common/enemy/state/PatrolAI_LoiterInit.inc.c"
 void N(PatrolAI_LoiterInit)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);

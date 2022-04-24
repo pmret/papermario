@@ -9,7 +9,7 @@
 ApiStatus N(WanderMeleeAI_Main)(Evt* script, s32 isInitialCall);
 ApiStatus N(ClubbaNappingAI_Main)(Evt* script, s32 isInitialCall);
 ApiStatus N(SentinelAI_Main)(Evt* script, s32 isInitialCall);
-ApiStatus N(MeleeHitbox_Control)(Evt *script, s32 isInitialCall);
+ApiStatus N(MeleeHitbox_Main)(Evt *script, s32 isInitialCall);
 
 extern NpcGroupList N(npcGroupList_8024533C);
 extern EvtScript N(80243F6C);

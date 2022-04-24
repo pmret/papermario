@@ -11,7 +11,7 @@ ApiStatus N(SetEntityFlags100000)(Evt* script, s32 isInitialCall);
 ApiStatus N(UnkFunc1)(Evt* script, s32 isInitialCall);
 ApiStatus N(WanderMeleeAI_Main)(Evt* script, s32 isInitialCall);
 ApiStatus N(PatrolNoAttackAI_Main)(Evt* script, s32 isInitialCall);
-ApiStatus N(MeleeHitbox_Control)(Evt* script, s32 isInitialCall);
+ApiStatus N(MeleeHitbox_Main)(Evt* script, s32 isInitialCall);
 
 extern NpcGroupList N(npcGroupList_80242AB0);
 extern EvtScript N(80242AD0);

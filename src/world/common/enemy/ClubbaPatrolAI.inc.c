@@ -2,7 +2,7 @@
 #include "world/partners.h"
 
 // prerequisites
-#include "world/common/enemy/MeleeHitbox_States.inc.c"
+#include "world/common/enemy/MeleeHitbox.inc.c"
 #include "world/common/enemy/PatrolAI_States.inc.c"
 
 ApiStatus N(ClubbaPatrolAI_Main)(Evt* script, s32 isInitialCall) {
@@ -69,7 +69,7 @@ ApiStatus N(ClubbaPatrolAI_Main)(Evt* script, s32 isInitialCall) {
             N(PatrolAI_Jump)(script, npcAISettings, territoryPtr);
             break;
         case AI_STATE_CHASE_INIT:
-            N(FlyingNoFirstStrikeAI_12)(script, npcAISettings, territoryPtr);
+            N(FlyingNoAttackAI_12)(script, npcAISettings, territoryPtr);
             // fallthrough
         case AI_STATE_CHASE:
             N(PatrolAI_Chase)(script, npcAISettings, territoryPtr);

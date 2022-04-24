@@ -9,7 +9,7 @@
 ApiStatus N(UnkFunc43)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_80240000_CD1E30)(Evt* script, s32 isInitialCall);
 ApiStatus N(UnkFunc44)(Evt* script, s32 isInitialCall);
-ApiStatus N(FlyingNoFirstStrikeAI_Main)(Evt* script, s32 isInitialCall);
+ApiStatus N(FlyingNoAttackAI_Main)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_80242940_CD4770)(Evt* script, s32 isInitialCall);
 
 extern NpcGroupList N(npcGroupList_802444D4);

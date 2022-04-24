@@ -5,7 +5,7 @@
 #include "world/common/NpcJumpFunc3.inc.c"
 
 // shared
-#include "world/common/enemy/PatrolAI_Jump.inc.c"
+#include "world/common/enemy/state/PatrolAI_Jump.inc.c"
 
 #include "world/common/UnkNpcAIFunc13_2.inc.c"
 

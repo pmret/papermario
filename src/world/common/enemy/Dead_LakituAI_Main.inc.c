@@ -4,7 +4,7 @@
 #include "effects.h"
 #include "dead_structs.h"
 
-ApiStatus N(DeadLakituAI_Main)(Evt* script, s32 isInitialCall) {
+ApiStatus N(Dead_LakituAI_Main)(Evt* script, s32 isInitialCall) {
     DeadEnemy* enemy = (DeadEnemy*)script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;

@@ -182,7 +182,7 @@ glabel func_80241634_DBE8E4
 .L802418A8_DBEB58:
 /* DBEB58 802418A8 0260202D */  daddu     $a0, $s3, $zero
 /* DBEB5C 802418AC 0280282D */  daddu     $a1, $s4, $zero
-/* DBEB60 802418B0 0C090362 */  jal       omo_07_FlyingNoFirstStrikeAI_12
+/* DBEB60 802418B0 0C090362 */  jal       omo_07_FlyingNoAttackAI_12
 /* DBEB64 802418B4 02A0302D */   daddu    $a2, $s5, $zero
 .L802418B8_DBEB68:
 /* DBEB68 802418B8 0260202D */  daddu     $a0, $s3, $zero

@@ -2,7 +2,7 @@
 #include "npc.h"
 #include "dead_structs.h"
 
-ApiStatus N(DeadFlyingAI_Main)(Evt* script, s32 isInitialCall) {
+ApiStatus N(Dead_FlyingAI_Main)(Evt* script, s32 isInitialCall) {
     DeadEnemy* enemy = (DeadEnemy*)script->owner1.enemy;
     Bytecode* args = script->ptrReadPos;
     Npc* npc = get_npc_unsafe(enemy->npcID);

@@ -8,7 +8,7 @@
 
 ApiStatus N(func_80240000_C3AA10)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_80240030_C3AA40)(Evt* script, s32 isInitialCall);
-ApiStatus N(MeleeHitbox_Control)(Evt* script, s32 isInitialCall);
+ApiStatus N(MeleeHitbox_Main)(Evt* script, s32 isInitialCall);
 ApiStatus N(ClubbaNappingAI_Main)(Evt* script, s32 isInitialCall);
 
 extern NpcGroupList N(npcGroupList_8024230C);

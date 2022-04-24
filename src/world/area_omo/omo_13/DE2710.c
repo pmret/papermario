@@ -10,7 +10,7 @@ INCLUDE_ASM(s32, "world/area_omo/omo_13/DE2710", func_802403C0_DE2850);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_13/DE2710", func_802404B8_DE2948);
 
-#include "world/common/enemy/GrooveGuyAI_02.inc.c"
+#include "world/common/enemy/state/GrooveGuyAI_02.inc.c"
 
 INCLUDE_ASM(s32, "world/area_omo/omo_13/DE2710", func_8024083C_DE2CCC);
 
