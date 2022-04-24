@@ -7,7 +7,7 @@
 #define NAMESPACE dgb_18
 
 ApiStatus N(UnkFunc1)(Evt* script, s32 isInitialCall);
-ApiStatus N(PatrolAI_NoAttack_Main)(Evt* script, s32 isInitialCall);
+ApiStatus N(PatrolNoAttackAI_Main)(Evt* script, s32 isInitialCall);
 
 extern s32** N(varStash);
 

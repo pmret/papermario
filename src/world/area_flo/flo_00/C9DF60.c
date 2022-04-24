@@ -371,7 +371,7 @@ NpcAISettings N(npcAISettings_8024286C) = {
 };
 
 EvtScript N(npcAI_8024289C) = SCRIPT({
-    N(PatrolAI_NoAttack_Main)(N(npcAISettings_8024286C));
+    N(PatrolNoAttackAI_Main)(N(npcAISettings_8024286C));
 });
 
 NpcSettings N(npcSettings_802428BC) = {
@@ -2080,7 +2080,7 @@ EvtScript N(makeEntities) = SCRIPT({
     }
 });
 
-#include "world/common/enemy/PatrolAI_NoAttack.inc.c"
+#include "world/common/enemy/PatrolNoAttackAI.inc.c"
 
 ApiStatus N(PostChapter6StatUpdate)(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;

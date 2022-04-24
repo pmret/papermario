@@ -1,8 +1,6 @@
 #include "sam_08.h"
 
-#include "world/common/enemy/MeleeHitbox_States.inc.c"
-
-#include "world/common/enemy/MeleeWanderAI.inc.c"
+#include "world/common/enemy/WanderMeleeAI.inc.c"
 
 ApiStatus func_80241610_D31290(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

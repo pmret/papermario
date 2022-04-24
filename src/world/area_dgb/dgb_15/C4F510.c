@@ -340,7 +340,7 @@ EvtScript N(npcAI_8024274C) = {
     EVT_CALL(SetNpcFlagBits, NPC_SELF, ((NPC_FLAG_GRAVITY)), TRUE)
     EVT_CALL(SetNpcAnimation, 0, NPC_ANIM_world_tubba_Palette_00_Anim_C)
     EVT_EXEC(N(802424E8))
-    EVT_CALL(N(PatrolAI_NoAttack_Main), EVT_PTR(N(npcAISettings_8024271C)))
+    EVT_CALL(N(PatrolNoAttackAI_Main), EVT_PTR(N(npcAISettings_8024271C)))
     EVT_RETURN
     EVT_END
 };
@@ -551,7 +551,7 @@ ApiStatus N(func_8024061C_C4FB2C)(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-#include "world/common/enemy/PatrolAI_NoAttack.inc.c"
+#include "world/common/enemy/PatrolNoAttackAI.inc.c"
 
 #include "world/common/UnkFunc1.inc.c"
 

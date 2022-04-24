@@ -11,6 +11,6 @@
 #include "world/common/enemy/FlyingNoFirstStrikeAI_12.inc.c"
 #include "world/common/enemy/PatrolAI_Chase.inc.c"
 #include "world/common/enemy/PatrolAI_LosePlayer.inc.c"
-#include "world/common/enemy/PatrolAI_NoAttack_15.inc.c"
+#include "world/common/enemy/PatrolNoAttackAI_15.inc.c"
 
 #endif

@@ -1,7 +1,16 @@
+// Used by:
+// - Clubba + White Clubba
+// - Spear Guy
+// - Piranha Plant
+// - Putrid Piranha + Frost Piranha
+
 #include "common.h"
 #include "npc.h"
 
-ApiStatus N(MeleeWanderAI_Main)(Evt *script, s32 isInitialCall) {
+// prerequisites
+#include "world/common/enemy/MeleeHitbox_States.inc.c"
+
+ApiStatus N(WanderMeleeAI_Main)(Evt *script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;
@@ -19,30 +28,32 @@ ApiStatus N(MeleeWanderAI_Main)(Evt *script, s32 isInitialCall) {
     territory.unk_1C = 0;
 
     if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAGS_4)) {
-        script->functionTemp[0] = AI_STATE_WANDER_INIT;
+        script->AI_TEMP_STATE = AI_STATE_WANDER_INIT;
         npc->duration = 0;
-        npc->currentAnim.w = enemy->animList[0];
-        npc->flags &= ~0x800;
+        npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
+
+        npc->flags &= ~NPC_FLAG_JUMPING;
         if (!enemy->territory->wander.isFlying) {
-            npc->flags |= 0x200;
-            npc->flags &= ~0x8;
+            npc->flags |= NPC_FLAG_GRAVITY;
+            npc->flags &= ~NPC_FLAG_ENABLE_HIT_SCRIPT;
         } else {
-            npc->flags &= ~0x200;
-            npc->flags |= 0x8;
+            npc->flags &= ~NPC_FLAG_GRAVITY;
+            npc->flags |= NPC_FLAG_ENABLE_HIT_SCRIPT;
         }
+        
         if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
-            script->functionTemp[0] = AI_STATE_SUSPEND;
+            script->AI_TEMP_STATE = AI_STATE_SUSPEND;
             script->functionTemp[1] = AI_STATE_WANDER_INIT;
             enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
         }
         enemy->varTable[0] = 0;
     }
 
-    if ((script->functionTemp[0] < AI_STATE_MELEE_HITBOX_INIT) && (enemy->varTable[0] == 0) && N(MeleeHitbox_CanSeePlayer)(script)) {
-        script->functionTemp[0] = AI_STATE_MELEE_HITBOX_INIT;
+    if ((script->AI_TEMP_STATE < AI_STATE_MELEE_HITBOX_INIT) && (enemy->varTable[0] == 0) && N(MeleeHitbox_CanSeePlayer)(script)) {
+        script->AI_TEMP_STATE = AI_STATE_MELEE_HITBOX_INIT;
     }
 
-    switch (script->functionTemp[0]) {
+    switch (script->AI_TEMP_STATE) {
         case AI_STATE_WANDER_INIT:
             basic_ai_wander_init(script, npcAISettings, territoryPtr);
         case AI_STATE_WANDER:
@@ -70,12 +81,12 @@ ApiStatus N(MeleeWanderAI_Main)(Evt *script, s32 isInitialCall) {
             N(MeleeHitbox_30)(script);
         case AI_STATE_MELEE_HITBOX_PRE:
             N(MeleeHitbox_31)(script);
-            if (script->functionTemp[0] != AI_STATE_MELEE_HITBOX_ACTIVE) {
+            if (script->AI_TEMP_STATE != AI_STATE_MELEE_HITBOX_ACTIVE) {
                 break;
             }
         case AI_STATE_MELEE_HITBOX_ACTIVE:
             N(MeleeHitbox_32)(script);
-            if (script->functionTemp[0] != AI_STATE_MELEE_HITBOX_MISS) {
+            if (script->AI_TEMP_STATE != AI_STATE_MELEE_HITBOX_MISS) {
                 break;
             }
         case AI_STATE_MELEE_HITBOX_MISS:

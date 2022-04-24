@@ -143,7 +143,7 @@ NpcAISettings N(npcAI_80244100) = {
 };
 
 EvtScript N(80244130) = {
-    EVT_CALL(N(PatrolAI_NoAttack_Main), EVT_PTR(N(npcAI_80244100)))
+    EVT_CALL(N(PatrolNoAttackAI_Main), EVT_PTR(N(npcAI_80244100)))
     EVT_RETURN
     EVT_END
 };
@@ -225,7 +225,7 @@ EvtScript N(npcAI_802442F0) = {
     EVT_CALL(SetSelfVar, 1, 5)
     EVT_CALL(SetSelfVar, 2, 8)
     EVT_CALL(SetSelfVar, 3, 12)
-    EVT_CALL(N(MeleeWanderAI_Main), EVT_PTR(N(npcAISettings_802442C0)))
+    EVT_CALL(N(WanderMeleeAI_Main), EVT_PTR(N(npcAISettings_802442C0)))
     EVT_RETURN
     EVT_END
 };
@@ -460,7 +460,7 @@ EvtScript N(npcAI_80244D7C) = {
             EVT_WAIT_FRAMES(8)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(N(PatrolAI_NoAttack_Main), EVT_PTR(N(npcAI_80244100)))
+    EVT_CALL(N(PatrolNoAttackAI_Main), EVT_PTR(N(npcAI_80244100)))
     EVT_RETURN
     EVT_END
 };
@@ -988,10 +988,9 @@ EvtScript N(802469E0) = {
     EVT_END
 };
 
-#include "world/common/enemy/PatrolAI_NoAttack.inc.c"
+#include "world/common/enemy/PatrolNoAttackAI.inc.c"
 
-#include "world/common/enemy/MeleeHitbox_States.inc.c"
-#include "world/common/enemy/MeleeWanderAI.inc.c"
+#include "world/common/enemy/WanderMeleeAI.inc.c"
 
 #define AI_SENTINEL_FIRST_NPC 7
 #define AI_SENTINEL_LAST_NPC  9

@@ -1,7 +1,7 @@
 #include "common.h"
 #include "world/partners.h"
 
-// prerequisties
+// prerequisites
 #include "world/common/enemy/MeleeHitbox_States.inc.c"
 
 enum AiStateNappingClubba {

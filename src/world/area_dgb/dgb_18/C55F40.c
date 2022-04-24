@@ -104,7 +104,7 @@ NpcAISettings N(npcAISettings_80241580) = {
 };
 
 EvtScript N(802415B0) = {
-    EVT_CALL(N(PatrolAI_NoAttack_Main), EVT_PTR(N(npcAISettings_80241580)))
+    EVT_CALL(N(PatrolNoAttackAI_Main), EVT_PTR(N(npcAISettings_80241580)))
     EVT_RETURN
     EVT_END
 };
@@ -421,7 +421,7 @@ EvtScript N(npcAI_80242834) = {
             EVT_WAIT_FRAMES(8)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(N(PatrolAI_NoAttack_Main), EVT_PTR(N(npcAISettings_80241580)))
+    EVT_CALL(N(PatrolNoAttackAI_Main), EVT_PTR(N(npcAISettings_80241580)))
     EVT_RETURN
     EVT_END
 };
@@ -700,7 +700,7 @@ EvtScript N(makeEntities) = {
     EVT_END
 };
 
-#include "world/common/enemy/PatrolAI_NoAttack.inc.c"
+#include "world/common/enemy/PatrolNoAttackAI.inc.c"
 
 #include "world/common/UnkFunc1.inc.c"
 

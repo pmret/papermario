@@ -35,7 +35,7 @@ ApiStatus N(Quizmo_SpinPlayer)(Evt* script, s32 isInitialCall);
 ApiStatus N(UnkYawFunc)(Evt* script, s32 isInitialCall);
 ApiStatus N(UnkFunc27)(Evt* script, s32 isInitialCall);
 ApiStatus N(UnkFunc26)(Evt* script, s32 isInitialCall);
-ApiStatus N(PatrolAI_NoAttack_Main)(Evt* script, s32 isInitialCall);
+ApiStatus N(PatrolNoAttackAI_Main)(Evt* script, s32 isInitialCall);
 ApiStatus N(Quizmo_ShouldAppear)(Evt* script, s32 isInitialCall);
 ApiStatus N(Quizmo_RenderInit)(Evt* script, s32 isInitialCall);
 ApiStatus N(Quizmo_FadeInWorld)(Evt* script, s32 isInitialCall);

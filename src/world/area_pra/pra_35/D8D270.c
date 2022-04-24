@@ -2,7 +2,7 @@
 
 #include "world/common/atomic/Reflection.inc.c"
 
-#include "world/common/enemy/PatrolAI_NoAttack.inc.c"
+#include "world/common/enemy/PatrolNoAttackAI.inc.c"
 
 #include "world/common/enemy/MeleeHitbox_States.inc.c"
 
@@ -108,4 +108,4 @@ ApiStatus func_802423CC_D8F61C(Evt *script, s32 isInitialCall) {
 INCLUDE_ASM(s32, "world/area_pra/pra_35/D8D270", func_802423CC_D8F61C);
 #endif
 
-#include "world/common/enemy/MeleeWanderAI.inc.c"
+#include "world/common/enemy/WanderMeleeAI.inc.c"

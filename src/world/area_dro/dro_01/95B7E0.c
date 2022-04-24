@@ -267,7 +267,7 @@ NpcAISettings N(npcAISettings_8024508C) = {
 };
 
 EvtScript N(npcAI_802450BC) = {
-    EVT_CALL(N(PatrolAI_NoAttack_Main), EVT_PTR(N(npcAISettings_8024508C)))
+    EVT_CALL(N(PatrolNoAttackAI_Main), EVT_PTR(N(npcAISettings_8024508C)))
     EVT_RETURN
     EVT_END
 };
@@ -1997,7 +1997,7 @@ EvtScript N(makeEntities) = {
     EVT_END
 };
 
-#include "world/common/enemy/PatrolAI_NoAttack.inc.c"
+#include "world/common/enemy/PatrolNoAttackAI.inc.c"
 
 #include "world/common/atomic/Quizmo.inc.c"
 

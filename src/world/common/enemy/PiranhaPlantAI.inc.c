@@ -1,5 +1,5 @@
-#include "world/common/enemy/MeleeHitbox_States.inc.c"
-#include "world/common/enemy/MeleeWanderAI.inc.c" // unused?
+
+#include "world/common/enemy/WanderMeleeAI.inc.c" // unused?
 
 #include "world/common/enemy/PiranhaPlantAI_00.inc.c"
 #include "world/common/enemy/PiranhaPlantAI_01.inc.c"

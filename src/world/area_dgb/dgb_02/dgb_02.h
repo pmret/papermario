@@ -6,7 +6,7 @@
 
 #define NAMESPACE dgb_02
 
-ApiStatus N(MeleeWanderAI_Main)(Evt* script, s32 isInitialCall);
+ApiStatus N(WanderMeleeAI_Main)(Evt* script, s32 isInitialCall);
 ApiStatus N(ClubbaNappingAI_Main)(Evt* script, s32 isInitialCall);
 ApiStatus N(MeleeHitbox_Control)(Evt *script, s32 isInitialCall);
 

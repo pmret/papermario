@@ -2,7 +2,7 @@
 
 #define CHUCK_QUIZMO_NPC_ID 12
 
-#include "world/common/enemy/PatrolAI_NoAttack.inc.c"
+#include "world/common/enemy/PatrolNoAttackAI.inc.c"
 
 extern s32 N(Quizmo_Worker);
 extern s32 N(Quizmo_AnswerResult);

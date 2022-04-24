@@ -1,12 +1,13 @@
 #include "common.h"
 #include "npc.h"
+#include "dead_structs.h"
 
 // prerequisites
 #include "world/common/enemy/PatrolAI_States.inc.c"
 
-ApiStatus N(PatrolAI_NoAttack_Main)(Evt* script, s32 isInitialCall) {
-    Enemy* enemy = script->owner1.enemy;
-    Npc* npc = get_npc_unsafe(enemy->npcID);
+ApiStatus N(Dead_PatrolNoAttackAI_Main)(Evt* script, s32 isInitialCall) {
+    DeadEnemy* enemy = (DeadEnemy*)script->owner1.enemy;
+    Npc* npc = dead_get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;
     EnemyTerritoryThing territory;
     EnemyTerritoryThing* territoryPtr = &territory;
@@ -21,6 +22,12 @@ ApiStatus N(PatrolAI_NoAttack_Main)(Evt* script, s32 isInitialCall) {
     territory.sizeZ = enemy->territory->patrol.detectSizeZ;
     territory.halfHeight = 65.0f;
     territory.unk_1C = 0;
+
+    enemy->unk_108.x = npc->pos.x;
+    enemy->unk_108.y = npc->pos.y;
+    enemy->unk_108.z = npc->pos.z;
+    enemy->unk_114 = 0.0001f;
+    enemy->unk_118 = 0.0001f;
 
     if (isInitialCall || enemy->aiFlags & ENEMY_AI_FLAGS_4) {
         script->functionTemp[0] = 0;
@@ -51,44 +58,44 @@ ApiStatus N(PatrolAI_NoAttack_Main)(Evt* script, s32 isInitialCall) {
             npc->pos.y = posY;
         }
     }
-
-    switch (script->AI_TEMP_STATE) {
-        case AI_STATE_PATROL_INIT:
-            N(PatrolAI_MoveInit)(script, npcAISettings, territoryPtr);
-            // fallthrough
-        case AI_STATE_PATROL:
-            N(PatrolAI_Move)(script, npcAISettings, territoryPtr);
-            break;
-        case AI_STATE_LOITER_INIT:
-            N(PatrolAI_LoiterInit)(script, npcAISettings, territoryPtr);
-            // fallthrough
-        case AI_STATE_LOITER:
-            N(PatrolAI_Loiter)(script, npcAISettings, territoryPtr);
-            break;
-        case AI_STATE_LOITER_POST:
-            N(PatrolAI_PostLoiter)(script, npcAISettings, territoryPtr);
-            break;
-        case AI_STATE_JUMP_INIT:
-            N(PatrolAI_JumpInit)(script, npcAISettings, territoryPtr);
-            // fallthrough
-        case AI_STATE_JUMP:
-            N(PatrolAI_Jump)(script, npcAISettings, territoryPtr);
-            break;
-        case AI_STATE_CHASE_INIT:
-            N(FlyingNoFirstStrikeAI_12)(script, npcAISettings, territoryPtr);
-            // fallthrough
-        case AI_STATE_CHASE:
-            N(PatrolAI_Chase)(script, npcAISettings, territoryPtr);
-            break;
-        case AI_STATE_LOSE_PLAYER:
-            N(PatrolAI_LosePlayer)(script, npcAISettings, territoryPtr);
-            break;
-        case AI_STATE_PATROL_15:
-            N(PatrolAI_NoAttack_15)(script, npcAISettings, territoryPtr);
-            break;
-        case AI_STATE_SUSPEND:
-            basic_ai_suspend(script);
-            break;
+    
+    switch (script->functionTemp[0]) {
+    case 0x0:
+        N(PatrolAI_MoveInit)(script, npcAISettings, territoryPtr);
+        /* fallthrough */
+    case 0x1:
+        N(PatrolAI_Move)(script, npcAISettings, territoryPtr);
+        break;
+    case 0x2:
+        N(PatrolAI_LoiterInit)(script, npcAISettings, territoryPtr);
+        /* fallthrough */
+    case 0x3:
+        N(PatrolAI_Loiter)(script, npcAISettings, territoryPtr);
+        break;
+    case 0x4:
+        N(PatrolAI_PostLoiter)(script, npcAISettings, territoryPtr);
+        break;
+    case 0xA:
+        N(PatrolAI_JumpInit)(script, npcAISettings, territoryPtr);
+        /* fallthrough */
+    case 0xB:
+        N(PatrolAI_Jump)(script, npcAISettings, territoryPtr);
+        break;
+    case 0xC:
+        N(FlyingNoFirstStrikeAI_12)(script, npcAISettings, territoryPtr);
+        /* fallthrough */
+    case 0xD:
+        N(PatrolAI_Chase)(script, npcAISettings, territoryPtr);
+        break;
+    case 0xE:
+        N(PatrolAI_LosePlayer)(script, npcAISettings, territoryPtr);
+        break;
+    case 0xF:
+        N(PatrolNoAttackAI_15)(script, npcAISettings, territoryPtr);
+        break;
+    case 0x63:
+        dead_basic_ai_suspend(script);
+        break;
     }
-    return ApiStatus_BLOCK;
+    return 0;
 }

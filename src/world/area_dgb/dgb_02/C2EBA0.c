@@ -209,7 +209,7 @@ EvtScript N(npcAI_80241BCC) = {
     EVT_CALL(SetSelfVar, 1, 5)
     EVT_CALL(SetSelfVar, 2, 8)
     EVT_CALL(SetSelfVar, 3, 12)
-    EVT_CALL(N(MeleeWanderAI_Main), EVT_PTR(N(npcAISettings_80241B9C)))
+    EVT_CALL(N(WanderMeleeAI_Main), EVT_PTR(N(npcAISettings_80241B9C)))
     EVT_RETURN
     EVT_END
 };
@@ -422,6 +422,5 @@ NpcGroupList N(npcGroupList_802425C8) = {
     {},
 };
 
-#include "world/common/enemy/MeleeHitbox_States.inc.c"
-#include "world/common/enemy/MeleeWanderAI.inc.c"
+#include "world/common/enemy/WanderMeleeAI.inc.c"
 #include "world/common/enemy/ClubbaNappingAI.inc.c"

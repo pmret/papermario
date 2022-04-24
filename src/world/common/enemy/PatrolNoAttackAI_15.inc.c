@@ -1,7 +1,7 @@
 #include "common.h"
 #include "npc.h"
 
-void N(PatrolAI_NoAttack_15)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(PatrolNoAttackAI_15)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 i;

@@ -49,7 +49,7 @@ NpcAISettings N(npcAISettings_80243660) = {
 };
 
 EvtScript N(npcAI_80243690) = {
-    EVT_CALL(N(PatrolAI_NoAttack_Main), EVT_PTR(N(npcAISettings_80243660)))
+    EVT_CALL(N(PatrolNoAttackAI_Main), EVT_PTR(N(npcAISettings_80243660)))
     EVT_RETURN
     EVT_END
 };
@@ -63,7 +63,7 @@ NpcSettings N(npcSettings_802436B0) = {
     .level = 12,
 };
 
-#include "world/common/enemy/PatrolAI_NoAttack.inc.c"
+#include "world/common/enemy/PatrolNoAttackAI.inc.c"
 
 f32 N(sixFloats)[] = {
     4.5f, 3.5f, 2.6f, 2.0f,

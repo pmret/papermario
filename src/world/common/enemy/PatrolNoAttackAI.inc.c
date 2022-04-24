@@ -1,0 +1,97 @@
+#include "common.h"
+#include "npc.h"
+
+// prerequisites
+#include "world/common/enemy/PatrolAI_States.inc.c"
+
+ApiStatus N(PatrolNoAttackAI_Main)(Evt* script, s32 isInitialCall) {
+    Enemy* enemy = script->owner1.enemy;
+    Npc* npc = get_npc_unsafe(enemy->npcID);
+    Bytecode* args = script->ptrReadPos;
+    EnemyTerritoryThing territory;
+    EnemyTerritoryThing* territoryPtr = &territory;
+    NpcAISettings* npcAISettings = (NpcAISettings*)evt_get_variable(script, *args++);
+    f32 posX, posY, posZ, posW;
+
+    territory.skipPlayerDetectChance = 0;
+    territory.shape = enemy->territory->patrol.detectShape;
+    territory.pointX = enemy->territory->patrol.detect.x;
+    territory.pointZ = enemy->territory->patrol.detect.z;
+    territory.sizeX = enemy->territory->patrol.detectSizeX;
+    territory.sizeZ = enemy->territory->patrol.detectSizeZ;
+    territory.halfHeight = 65.0f;
+    territory.unk_1C = 0;
+
+    if (isInitialCall || enemy->aiFlags & ENEMY_AI_FLAGS_4) {
+        script->AI_TEMP_STATE = AI_STATE_PATROL_INIT;
+        npc->duration = 0;
+        npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
+
+        npc->flags &= ~NPC_FLAG_JUMPING;
+        if (!enemy->territory->patrol.isFlying) {
+            npc->flags |= NPC_FLAG_GRAVITY;
+            npc->flags &= ~NPC_FLAG_ENABLE_HIT_SCRIPT;
+        } else {
+            npc->flags &= ~NPC_FLAG_GRAVITY;
+            npc->flags |= NPC_FLAG_ENABLE_HIT_SCRIPT;
+        }
+
+        if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
+            script->AI_TEMP_STATE = AI_STATE_SUSPEND;
+            script->functionTemp[1] = 0;
+            enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
+        } else if (enemy->flags & ENEMY_FLAGS_40000000) {
+            script->AI_TEMP_STATE = AI_STATE_CHASE_INIT;
+            enemy->flags &= ~ENEMY_FLAGS_40000000;
+        }
+
+        posX = npc->pos.x;
+        posY = npc->pos.y + npc->collisionHeight;
+        posZ = npc->pos.z;
+        posW = 100.0f;
+
+        if (npc_raycast_down_sides(npc->collisionChannel, &posX, &posY, &posZ, &posW)) {
+            npc->pos.y = posY;
+        }
+    }
+
+    switch (script->AI_TEMP_STATE) {
+        case AI_STATE_PATROL_INIT:
+            N(PatrolAI_MoveInit)(script, npcAISettings, territoryPtr);
+            // fallthrough
+        case AI_STATE_PATROL:
+            N(PatrolAI_Move)(script, npcAISettings, territoryPtr);
+            break;
+        case AI_STATE_LOITER_INIT:
+            N(PatrolAI_LoiterInit)(script, npcAISettings, territoryPtr);
+            // fallthrough
+        case AI_STATE_LOITER:
+            N(PatrolAI_Loiter)(script, npcAISettings, territoryPtr);
+            break;
+        case AI_STATE_LOITER_POST:
+            N(PatrolAI_PostLoiter)(script, npcAISettings, territoryPtr);
+            break;
+        case AI_STATE_JUMP_INIT:
+            N(PatrolAI_JumpInit)(script, npcAISettings, territoryPtr);
+            // fallthrough
+        case AI_STATE_JUMP:
+            N(PatrolAI_Jump)(script, npcAISettings, territoryPtr);
+            break;
+        case AI_STATE_CHASE_INIT:
+            N(FlyingNoFirstStrikeAI_12)(script, npcAISettings, territoryPtr);
+            // fallthrough
+        case AI_STATE_CHASE:
+            N(PatrolAI_Chase)(script, npcAISettings, territoryPtr);
+            break;
+        case AI_STATE_LOSE_PLAYER:
+            N(PatrolAI_LosePlayer)(script, npcAISettings, territoryPtr);
+            break;
+        case AI_STATE_PATROL_15:
+            N(PatrolNoAttackAI_15)(script, npcAISettings, territoryPtr);
+            break;
+        case AI_STATE_SUSPEND:
+            basic_ai_suspend(script);
+            break;
+    }
+    return ApiStatus_BLOCK;
+}
