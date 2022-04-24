@@ -6,7 +6,10 @@
 
 #include "world/common/UnkFunc57.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_61/A6E6F0", func_802411C4_A6F5A4);
+void func_802411C4_A6F5A4(Evt* script) {
+    get_npc_unsafe(script->owner1.enemy->npcID)->duration = 30;
+    script->functionTemp[0] = 11;
+}
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_61/A6E6F0", func_80241200_A6F5E0);
 
