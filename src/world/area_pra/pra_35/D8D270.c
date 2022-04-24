@@ -2,7 +2,7 @@
 
 #include "world/common/atomic/Reflection.inc.c"
 
-#include "world/common/enemy/UnkAI_1.inc.c"
+#include "world/common/enemy/PatrolAI_NoAttack.inc.c"
 
 #include "world/common/enemy/MeleeHitbox_States.inc.c"
 

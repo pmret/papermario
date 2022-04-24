@@ -170,12 +170,12 @@ s32 basic_ai_try_detect_player(EnemyTerritoryThing* territory, Enemy* enemy, f32
     }
 
     if (territory->skipPlayerDetectChance == 0) {
-        skipCheckForPlayer = FALSE;
+        skipCheckForPlayer = 0;
     } else {
         skipCheckForPlayer = rand_int(territory->skipPlayerDetectChance + 1);
     }
 
-    if (!skipCheckForPlayer) {
+    if (skipCheckForPlayer == 0) {
         if (enemy->unk_AC & 2) {
             if (playerStatus->actionState == ACTION_STATE_WALK) {
                 radius *= 1.15;
@@ -211,7 +211,7 @@ s32 func_800493EC(Enemy* enemy, s32 chance, f32 arg2, f32 radius) {
             skipCheckForPlayer = 0;
         }
 
-        if (!skipCheckForPlayer) {
+        if (skipCheckForPlayer == 0) {
             f32 x = npc->pos.x;
             f32 z = npc->pos.z;
 

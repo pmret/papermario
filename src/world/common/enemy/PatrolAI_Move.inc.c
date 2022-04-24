@@ -31,9 +31,9 @@ void N(PatrolAI_Move)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThin
         } else {
             func_8003D660(npc, 1);
         }
-
-        x = script->functionTemp[2][enemy->territory->patrol.points].x;
-        z = script->functionTemp[2][enemy->territory->patrol.points].z;
+        //TODO strange match -- index and array are backwards!
+        x = script->AI_PATROL_GOAL_INDEX[enemy->territory->patrol.points].x;
+        z = script->AI_PATROL_GOAL_INDEX[enemy->territory->patrol.points].z;
         npc->yaw = atan2(npc->pos.x, npc->pos.z, x, z);
         npc_move_heading(npc, npc->moveSpeed, npc->yaw);
         if (dist2D(npc->pos.x, npc->pos.z, x, z) <= npc->moveSpeed) {

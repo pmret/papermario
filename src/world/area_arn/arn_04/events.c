@@ -63,7 +63,7 @@ NpcSettings N(npcSettings_802436B0) = {
     .level = 12,
 };
 
-#include "world/common/enemy/UnkAI_1.inc.c"
+#include "world/common/enemy/PatrolAI_NoAttack.inc.c"
 
 f32 N(sixFloats)[] = {
     4.5f, 3.5f, 2.6f, 2.0f,

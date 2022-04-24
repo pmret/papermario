@@ -13,7 +13,7 @@ INCLUDE_ASM(s32, "world/area_omo/omo_07/DBD2B0", func_80240140_DBD3F0);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_07/DBD2B0", func_80240238_DBD4E8);
 
-#include "world/common/enemy/UnkAI_1.inc.c"
+#include "world/common/enemy/PatrolAI_NoAttack.inc.c"
 
 INCLUDE_ASM(s32, "world/area_omo/omo_07/DBD2B0", func_802413FC_DBE6AC);
 

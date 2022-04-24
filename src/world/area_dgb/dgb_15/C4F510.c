@@ -551,7 +551,7 @@ ApiStatus N(func_8024061C_C4FB2C)(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-#include "world/common/enemy/UnkAI_1.inc.c"
+#include "world/common/enemy/PatrolAI_NoAttack.inc.c"
 
 #include "world/common/UnkFunc1.inc.c"
 

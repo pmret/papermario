@@ -1,6 +1,9 @@
 #include "common.h"
 #include "npc.h"
 
+// prerequisites
+#include "world/common/enemy/PatrolAI_States.inc.c"
+
 ApiStatus N(UnkNpcAIMainFunc)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
@@ -49,38 +52,43 @@ ApiStatus N(UnkNpcAIMainFunc)(Evt* script, s32 isInitialCall) {
         }
     }
 
-    switch (script->functionTemp[0]) {
-        case 0:
+    switch (script->AI_TEMP_STATE) {
+        case AI_STATE_PATROL_INIT:
             N(PatrolAI_MoveInit)(script, npcAISettings, territoryPtr);
-        case 1:
+            // fallthrough
+        case AI_STATE_PATROL:
             N(PatrolAI_Move)(script, npcAISettings, territoryPtr);
             break;
-        case 2:
+        case AI_STATE_LOITER_INIT:
             N(PatrolAI_LoiterInit)(script, npcAISettings, territoryPtr);
-        case 3:
+            // fallthrough
+        case AI_STATE_LOITER:
             N(PatrolAI_Loiter)(script, npcAISettings, territoryPtr);
             break;
-        case 4:
+        case AI_STATE_LOITER_POST:
             N(PatrolAI_PostLoiter)(script, npcAISettings, territoryPtr);
             break;
-        case 10:
+        case AI_STATE_JUMP_INIT:
             N(PatrolAI_JumpInit)(script, npcAISettings, territoryPtr);
-        case 11:
+            // fallthrough
+        case AI_STATE_JUMP:
             N(PatrolAI_Jump)(script, npcAISettings, territoryPtr);
             break;
-        case 12:
+        case AI_STATE_CHASE_INIT:
             N(FlyingNoFirstStrikeAI_12)(script, npcAISettings, territoryPtr);
-        case 13:
+            // fallthrough
+        case AI_STATE_CHASE:
             N(PatrolAI_Chase)(script, npcAISettings, territoryPtr);
             break;
-        case 14:
+        case AI_STATE_LOSE_PLAYER:
             N(PatrolAI_LosePlayer)(script, npcAISettings, territoryPtr);
             break;
-        case 15:
-            N(UnkFunc16)(script, npcAISettings, territoryPtr);
+        case AI_STATE_PATROL_15:
+            N(PatrolAI_NoAttack_15)(script, npcAISettings, territoryPtr);
             break;
-        case 99:
+        case AI_STATE_SUSPEND:
             basic_ai_suspend(script);
+            break;
     }
     return ApiStatus_BLOCK;
 }

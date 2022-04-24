@@ -2862,26 +2862,6 @@ enum ProjectileHitboxAttackStates {
     PROJECTILE_HITBOX_STATE_DONE        = 100
 };
 
-#define VAR_PROJECTILE_HITBOX_STATE varTable[0]
-#define VAR_PROJECTILE_COUNT varTable[3]
-
-// ai script
-#define AI_TEMP_STATE                  functionTemp[0]
-#define AI_TEMP_STATE_AFTER_SUSPEND    functionTemp[1]
-// melee enemy
-#define AI_VAR_ATTACK_STATE    varTable[0]
-#define AI_VAR_MELEE_PRE_TIME  varTable[1]
-#define AI_VAR_MELEE_HIT_TIME  varTable[2]
-#define AI_VAR_MELEE_MISS_TIME varTable[3]
-#define AI_VAR_NEXT_STATE      varTable[7]
-// melee hitbox
-#define AI_VAR_HITNPC_YOFFSET  varTable[0]
-#define AI_VAR_HITNPC_DIST     varTable[1]
-#define AI_VAR_HITNPC_2        varTable[2]
-#define AI_VAR_HITNPC_3        varTable[3]
-#define AI_VAR_HITNPC_4        varTable[4]
-#define AI_VAR_HITNPC_SOUND    varTable[15]
-
 enum MusicSettingsFlags {
     MUSIC_SETTINGS_FLAGS_1                 = 0x00000001,
     MUSIC_SETTINGS_FLAGS_2                 = 0x00000002,

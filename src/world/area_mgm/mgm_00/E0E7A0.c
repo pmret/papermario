@@ -7,7 +7,7 @@ static char* N(exit_str_3) = "";
 
 #include "world/common/atomic/Pipe.inc.c"
 
-#include "world/common/enemy/UnkAI_1.inc.c"
+#include "world/common/enemy/PatrolAI_NoAttack.inc.c"
 
 /* N(GetAvailableGamesCount) */
 ApiStatus func_80241170_E0F910(Evt* script, s32 isInitialCall) {

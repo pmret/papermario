@@ -3,7 +3,7 @@
 static char* N(exit_str_0) = "kpa_90";
 static char* N(exit_str_1) = "";
 
-#include "world/common/enemy/UnkAI_1.inc.c"
+#include "world/common/enemy/PatrolAI_NoAttack.inc.c"
 
 #include "world/common/enemy/UnkAI_StateHandlers_A.inc.c"
 

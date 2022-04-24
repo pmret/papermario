@@ -2,7 +2,10 @@
 #include "npc.h"
 #include "dead_structs.h"
 
-ApiStatus N(DeadUnkNpcAIMainFunc)(Evt* script, s32 isInitialCall) {
+// prerequisites
+#include "world/common/enemy/PatrolAI_States.inc.c"
+
+ApiStatus N(Dead_PatrolAI_NoAttack_Main)(Evt* script, s32 isInitialCall) {
     DeadEnemy* enemy = (DeadEnemy*)script->owner1.enemy;
     Npc* npc = dead_get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;
@@ -88,7 +91,7 @@ ApiStatus N(DeadUnkNpcAIMainFunc)(Evt* script, s32 isInitialCall) {
         N(PatrolAI_LosePlayer)(script, npcAISettings, territoryPtr);
         break;
     case 0xF:
-        N(UnkFunc16)(script, npcAISettings, territoryPtr);
+        N(PatrolAI_NoAttack_15)(script, npcAISettings, territoryPtr);
         break;
     case 0x63:
         dead_basic_ai_suspend(script);

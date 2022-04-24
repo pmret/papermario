@@ -5,7 +5,7 @@
 #include "dead_structs.h"
 #include "sprite/npc/bony_beetle.h"
 
-ApiStatus N(DeadUnkNpcAIMainFunc6)(Evt* script, s32 isInitialCall) {
+ApiStatus N(UnkNpcAIMainFunc6)(Evt* script, s32 isInitialCall) {
     DeadEnemy* enemy = (DeadEnemy*)script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;
