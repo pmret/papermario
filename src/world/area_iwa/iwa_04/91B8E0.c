@@ -3,40 +3,32 @@
 static char* N(exit_str_0) = "iwa_02";
 static char* N(exit_str_1) = "sbk_99";
 
-INCLUDE_ASM(s32, "world/area_iwa/iwa_04/91B8E0", func_80240000_91B8E0);
+ApiStatus func_80240000_91B8E0(Evt* script, s32 isInitialCall) {
+    s32 status = -1;
+    
+    if (gPlayerStatus.lastGoodPosition.y > -100.0) {
+        status = 0;
+    }
+    if (gPlayerStatus.lastGoodPosition.y < -240.0) {
+        status = 1;
+    }
+    if (status >= 0) {
+        evt_set_variable(script, GW(9), status);
+    }
+    
+    return ApiStatus_BLOCK;
+}
 
-INCLUDE_ASM(s32, "world/area_iwa/iwa_04/91B8E0", func_80240080_91B960);
+#include "world/common/enemy/CleftAI.inc.c"
 
-#include "world/common/enemy/state/CleftAI_00.inc.c"
+ApiStatus func_80241060_91C940(Evt* script, s32 isInitialCall) {
+    gCameras->unk_498 = 1.0f;
+    return ApiStatus_BLOCK;
+}
 
-INCLUDE_ASM(s32, "world/area_iwa/iwa_04/91B8E0", func_80240254_91BB34);
-
-#include "world/common/enemy/state/CleftAI_02.inc.c"
-
-#include "world/common/enemy/state/CleftAI_03.inc.c"
-
-#include "world/common/enemy/state/CleftAI_04.inc.c"
-
-#include "world/common/enemy/state/CleftAI_05.inc.c"
-
-#include "world/common/enemy/state/CleftAI_20.inc.c"
-
-INCLUDE_ASM(s32, "world/area_iwa/iwa_04/91B8E0", func_80240714_91BFF4);
-
-#include "world/common/enemy/state/CleftAI_22.inc.c"
-
-INCLUDE_ASM(s32, "world/area_iwa/iwa_04/91B8E0", func_80240A04_91C2E4);
-
-#include "world/common/enemy/state/CleftAI_41.inc.c"
-
-#include "world/common/enemy/state/CleftAI_50.inc.c"
-
-#include "world/common/enemy/state/CleftAI_51.inc.c"
-
-#include "world/common/enemy/state/CleftAI_52.inc.c"
-
-INCLUDE_ASM(s32, "world/area_iwa/iwa_04/91B8E0", func_80240D10_91C5F0);
-
-INCLUDE_ASM(s32, "world/area_iwa/iwa_04/91B8E0", func_80241060_91C940);
-
-INCLUDE_ASM(s32, "world/area_iwa/iwa_04/91B8E0", func_8024107C_91C95C);
+ApiStatus func_8024107C_91C95C(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    Npc* npc = resolve_npc(script, NPC_SELF);
+    npc->renderYaw = (f32) evt_get_variable(script, *args++);
+    return ApiStatus_DONE2;
+}
