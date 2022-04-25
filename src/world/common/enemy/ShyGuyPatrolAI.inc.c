@@ -162,5 +162,6 @@ ApiStatus N(ShyGuyPatrolAI_Main)(Evt* script, s32 isInitialCall) {
         basic_ai_suspend(script);
         break;
     }
-    return 0;
+    
+    return ApiStatus_BLOCK;
 }
