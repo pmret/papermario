@@ -558,6 +558,7 @@ jan_02_Quizmo_AnswerResult = 0x80248938;
 jan_02_Quizmo_StageEffect = 0x80248940;
 jan_02_Quizmo_AudienceEffect = 0x80248944;
 jan_02_Quizmo_VannaTEffect = 0x80248948;
+D_80248760_jan_02 = 0x80248760;
 D_80248F90 = 0x80248F90;
 D_80249158 = 0x80249158;
 D_80249440 = 0x80249440;

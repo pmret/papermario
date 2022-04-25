@@ -3,15 +3,7 @@
 static char* N(exit_str_0) = "omo_06";
 static char* N(exit_str_1) = "";
 
-INCLUDE_ASM(s32, "world/area_omo/omo_07/DBD2B0", func_80240000_DBD2B0);
-
-INCLUDE_ASM(s32, "world/area_omo/omo_07/DBD2B0", func_80240070_DBD320);
-
-INCLUDE_ASM(s32, "world/area_omo/omo_07/DBD2B0", func_80240140_DBD3F0);
-
-#include "world/common/UnkNpcDurationAnimationFunc.inc.c"
-
-INCLUDE_ASM(s32, "world/area_omo/omo_07/DBD2B0", func_80240238_DBD4E8);
+#include "world/common/enemy/ShyGuyAI.inc.c"
 
 #include "world/common/enemy/PatrolNoAttackAI.inc.c"
 

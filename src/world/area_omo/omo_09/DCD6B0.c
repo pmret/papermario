@@ -1,14 +1,6 @@
 #include "omo_09.h"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_09/DCD6B0", func_802409E0_DCD6B0);
-
-INCLUDE_ASM(s32, "world/area_omo/omo_09/DCD6B0", func_80240A50_DCD720);
-
-INCLUDE_ASM(s32, "world/area_omo/omo_09/DCD6B0", func_80240B20_DCD7F0);
-
-#include "world/common/UnkNpcDurationAnimationFunc.inc.c"
-
-INCLUDE_ASM(s32, "world/area_omo/omo_09/DCD6B0", func_80240C18_DCD8E8);
+#include "world/common/enemy/ShyGuyAI.inc.c"
 
 #include "world/common/enemy/PatrolNoAttackAI.inc.c"
 
