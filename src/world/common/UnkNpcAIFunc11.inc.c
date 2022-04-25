@@ -10,7 +10,7 @@ void N(UnkNpcAIFunc11)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThi
         s32 something;
 
         fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &something);
-        npc->currentAnim.w = enemy->animList[0];
+        npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
         npc->duration = 25;
         script->functionTemp[0] = 14;
     } else {

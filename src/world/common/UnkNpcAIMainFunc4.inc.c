@@ -22,7 +22,7 @@ ApiStatus N(UnkNpcAIMainFunc4)(Evt* script, s32 isInitialCall) {
         script->functionTemp[0] = 0;
         npc->duration = 0;
         enemy->varTable[0] = npc->yaw;
-        npc->currentAnim.w = enemy->animList[0];
+        npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
         npc->flags &= ~NPC_FLAG_JUMPING;
 
         if (!(enemy->territory->wander.isFlying)) {

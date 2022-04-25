@@ -8,6 +8,6 @@ void N(FlyingAI_JumpInit)(Evt* script, NpcAISettings* aiSettings, EnemyTerritory
 
     npc->duration = 0;
     npc->yaw = atan2(npc->pos.x, npc->pos.z, playerStatus->position.x, playerStatus->position.z);
-    npc->currentAnim.w = enemy->animList[8];
+    npc->currentAnim.w = enemy->animList[ENEMY_ANIM_MELEE_PRE];
     script->functionTemp[0] = AI_STATE_JUMP;
 }

@@ -108,7 +108,7 @@ void N(ClubbaNappingAI_LoiterInit)(Evt* script, NpcAISettings* aiSettings, Enemy
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
     npc->yaw = clamp_angle((npc->yaw + rand_int(180)) - 90.0f);
-    npc->currentAnim.w = enemy->animList[0];
+    npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
     script->functionTemp[1] = (rand_int(1000) % 2) + 2; // chose random number 2-3
     script->AI_TEMP_STATE = AI_STATE_NAPPING_CLUBBA_LOITER;
 }
@@ -153,7 +153,7 @@ void N(ClubbaNappingAI_ReturnHomeInit)(Evt* script, NpcAISettings* aiSettings, E
 
     npc->duration--;
     if (npc->duration <= 0) {
-        npc->currentAnim.w = enemy->animList[1];
+        npc->currentAnim.w = enemy->animList[ENEMY_ANIM_WALK];
         if (enemy->territory->wander.moveSpeedOverride < 0) {
             npc->moveSpeed = aiSettings->moveSpeed;
         } else {
@@ -173,7 +173,7 @@ void N(ClubbaNappingAI_ReturnHome)(Evt* script, NpcAISettings* aiSettings, Enemy
         script->AI_TEMP_STATE = AI_STATE_CHASE_INIT;
     } else if (dist2D(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x,
                       enemy->territory->wander.point.z) <= npc->moveSpeed) {
-        npc->currentAnim.w = enemy->animList[0];
+        npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
         npc->duration = 15;
         enemy->AI_VAR_NEXT_STATE = AI_STATE_NAPPING_CLUBBA_50;
         script->AI_TEMP_STATE = AI_STATE_NAPPING_CLUBBA_LOITER_INIT;
@@ -230,7 +230,7 @@ ApiStatus N(ClubbaNappingAI_Main)(Evt* script, s32 isInitialCall) {
         if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
             script->AI_TEMP_STATE = AI_STATE_SUSPEND;
             script->AI_TEMP_STATE_AFTER_SUSPEND = AI_RETURN_HOME_INIT;
-            npc->currentAnim.w = enemy->animList[0];
+            npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
         }
         enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
     }

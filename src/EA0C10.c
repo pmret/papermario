@@ -131,7 +131,7 @@ ApiStatus func_8024097C_EA127C(Evt* script, s32 isInitialCall) {
     if (isInitialCall || enemy->aiFlags & ENEMY_AI_FLAGS_4) {
         script->functionTemp[0] = 0;
         npc->duration = 0;
-        npc->currentAnim.w = enemy->animList[0];
+        npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
         npc->flags &= ~NPC_FLAG_JUMPING;
         if (!enemy->territory->wander.isFlying) {
             npc->flags = (npc->flags | NPC_FLAG_GRAVITY) & ~NPC_FLAG_ENABLE_HIT_SCRIPT;

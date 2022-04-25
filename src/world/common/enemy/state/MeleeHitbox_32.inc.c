@@ -9,7 +9,7 @@ void N(MeleeHitbox_32)(Evt* script) {
     npc->duration--;
     if (npc->duration <= 0) {
         enemy->varTable[0] = 4;
-        npc->currentAnim.w = enemy->animList[0];
+        npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
         npc->duration = enemy->varTable[3];
         if (enemy->varTable[3] >= 8) {
             s32 something;

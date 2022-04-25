@@ -10,7 +10,7 @@ void N(PiranhaPlantAI_00)(Evt* script, NpcAISettings* aiSettings, EnemyTerritory
         npc->duration--;
     } else {
         enemy->varTable[0] = 0;
-        npc->currentAnim.w = enemy->animList[0];
+        npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
         script->functionTemp[1] = 0;
         script->functionTemp[0] = 1;
     }

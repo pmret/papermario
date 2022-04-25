@@ -14,7 +14,7 @@ void N(FlyingAI_WanderInit)(Evt* script, NpcAISettings* aiSettings, EnemyTerrito
     } else {
         npc->yaw = clamp_angle((npc->yaw + rand_int(60)) - 30.0f);
     }
-    npc->currentAnim.w = enemy->animList[1];
+    npc->currentAnim.w = enemy->animList[ENEMY_ANIM_WALK];
     script->functionTemp[1] = 0;
     if (enemy->territory->wander.moveSpeedOverride < 0) {
         npc->moveSpeed = aiSettings->moveSpeed;

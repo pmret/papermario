@@ -8,7 +8,7 @@ void N(FlyingNoAttackAI_12)(Evt* script, NpcAISettings* aiSettings, EnemyTerrito
     f32 angleDiff;
 
     npc->duration = (aiSettings->unk_20 / 2) + rand_int(aiSettings->unk_20 / 2 + 1);
-    npc->currentAnim.w = enemy->animList[3];
+    npc->currentAnim.w = enemy->animList[ENEMY_ANIM_CHASE];
     npc->moveSpeed = aiSettings->chaseSpeed;
 
     tempAngle = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);

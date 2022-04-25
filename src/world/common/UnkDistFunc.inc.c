@@ -7,7 +7,7 @@ ApiStatus N(UnkDistFunc)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryT
 
     if ((npc->duration <= 0) || (--npc->duration <= 0)) {
         if (npc->turnAroundYawAdjustment == 0) {
-            npc->currentAnim.w = enemy->animList[9];
+            npc->currentAnim.w = enemy->animList[ENEMY_ANIM_MELEE_HIT];
             npc->moveSpeed = aiSettings->chaseSpeed;
             if ((enemy->varTable[7] == 5) || (enemy->varTable[7] == 0) || (enemy->varTable[7] == 1)) {
                 npc->collisionHeight = enemy->varTable[6] / 2;

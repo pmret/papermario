@@ -8,6 +8,6 @@ void N(PatrolAI_LoiterInit)(Evt* script, NpcAISettings* aiSettings, EnemyTerrito
 
     npc->duration = (aiSettings->waitTime / 2) + rand_int((aiSettings->waitTime / 2) + 1);
     npc->yaw = clamp_angle(npc->yaw + rand_int(180) - 90.0f);
-    npc->currentAnim.w = enemy->animList[0];
+    npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
     script->AI_TEMP_STATE = AI_STATE_LOITER;
 }

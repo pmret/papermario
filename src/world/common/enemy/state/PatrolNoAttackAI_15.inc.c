@@ -15,7 +15,7 @@ void N(PatrolNoAttackAI_15)(Evt* script, NpcAISettings* aiSettings, EnemyTerrito
     }
 
     npc->moveSpeed = aiSettings->moveSpeed;
-    npc->currentAnim.w = enemy->animList[1];
+    npc->currentAnim.w = enemy->animList[ENEMY_ANIM_WALK];
     script->functionTemp[1] = 0;
     script->AI_TEMP_STATE = AI_STATE_PATROL;
 }

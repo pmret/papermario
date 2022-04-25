@@ -2803,8 +2803,12 @@ enum EnemyAIStates {
 enum EnemyAIAnims {
     ENEMY_ANIM_IDLE         = 0,
     ENEMY_ANIM_WALK         = 1,
+    ENEMY_ANIM_RUN          = 2,
     ENEMY_ANIM_CHASE        = 3,
     ENEMY_ANIM_JUMP         = 4,
+    ENEMY_ANIM_05           = 5,
+    ENEMY_ANIM_DEATH        = 6,
+    ENEMY_ANIM_HIT          = 7,
     ENEMY_ANIM_MELEE_PRE    = 8,
     ENEMY_ANIM_MELEE_HIT    = 9,
 };

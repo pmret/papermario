@@ -30,7 +30,7 @@ ApiStatus N(Dead_PiranhaPlantAI_Main)(Evt* script, s32 isInitialCall) {
     if (isInitialCall || enemy->aiFlags & ENEMY_AI_FLAGS_4) {
         script->functionTemp[0] = 0;
         npc->duration = 0;
-        npc->currentAnim.w = enemy->animList[0];
+        npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
         enemy->varTable[0] = 0;
 
         if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {

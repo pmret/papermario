@@ -46,10 +46,12 @@ ApiStatus N(WanderMeleeAI_Main)(Evt *script, s32 isInitialCall) {
             script->functionTemp[1] = AI_STATE_WANDER_INIT;
             enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
         }
-        enemy->varTable[0] = 0;
+        enemy->AI_VAR_ATTACK_STATE = MELEE_HITBOX_STATE_NONE;
     }
 
-    if ((script->AI_TEMP_STATE < AI_STATE_MELEE_HITBOX_INIT) && (enemy->varTable[0] == 0) && N(MeleeHitbox_CanSeePlayer)(script)) {
+    if (script->AI_TEMP_STATE < AI_STATE_MELEE_HITBOX_INIT
+            && enemy->AI_VAR_ATTACK_STATE == MELEE_HITBOX_STATE_NONE
+            && N(MeleeHitbox_CanSeePlayer)(script)) {
         script->AI_TEMP_STATE = AI_STATE_MELEE_HITBOX_INIT;
     }
 

@@ -1,7 +1,6 @@
 #include "common.h"
 #include "npc.h"
 
-// Might be something like the check for the general territory area of a burried mole and when to surface?
 void N(PiranhaPlantAI_10)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
@@ -180,7 +179,7 @@ void N(PiranhaPlantAI_10)(Evt* script, NpcAISettings* aiSettings, EnemyTerritory
 
         npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
         ai_enemy_play_sound(npc, SOUND_MOLE_SURFACE, 0);
-        npc->currentAnim.w = enemy->animList[9];
+        npc->currentAnim.w = enemy->animList[ENEMY_ANIM_MELEE_HIT];
         npc->duration = enemy->varTable[10];
         script->functionTemp[0] = 11;
     }

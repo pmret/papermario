@@ -7,6 +7,6 @@ static char* N(exit_str_1) = "kpa_112";
 
 #include "world/common/UnkFunc12.inc.c"
 
-#include "world/common/enemy/ProjectileHitbox.inc.c"
+#include "world/common/enemy/ProjectileAI.inc.c"
 
 #include "world/common/GetEncounterEnemyIsOwner.inc.c"

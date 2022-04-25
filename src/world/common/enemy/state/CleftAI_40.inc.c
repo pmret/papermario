@@ -8,7 +8,7 @@ void N(CleftAI_40)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* 
 
     npc->duration--;
     if (npc->duration <= 0) {
-        npc->currentAnim.w = enemy->animList[1];
+        npc->currentAnim.w = enemy->animList[ENEMY_ANIM_WALK];
         if (enemy->territory->wander.moveSpeedOverride < 0) {
             npc->moveSpeed = aiSettings->moveSpeed;
         } else {

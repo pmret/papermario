@@ -1,8 +1,17 @@
+// Used by:
+// - Monty Mole
+// - Spy Guy
+// - Dry Bones
+// - Hammer Bros
+
 #include "common.h"
 #include "npc.h"
 #include "effects.h"
 
-ApiStatus N(ProjectileHitbox_Main)(Evt* script, s32 isInitialCall) {
+// prerequisites
+#include "world/common/enemy/ProjectileHitbox.inc.c"
+
+ApiStatus N(ProjectileAI_Main)(Evt* script, s32 isInitialCall) {
     EnemyTerritoryThing territory;
     EnemyTerritoryThing* territoryPtr = &territory;
     Enemy* enemy = script->owner1.enemy;
@@ -21,9 +30,9 @@ ApiStatus N(ProjectileHitbox_Main)(Evt* script, s32 isInitialCall) {
     territory.unk_1C = 0;
 
     if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAGS_4)) {
-        script->functionTemp[0] = 0;
+        script->AI_TEMP_STATE = 0;
         npc->duration = 0;
-        npc->currentAnim.w = enemy->animList[0];
+        npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
         npc->flags &= ~NPC_FLAG_JUMPING;
 
         if (!enemy->territory->wander.isFlying) {
@@ -35,17 +44,17 @@ ApiStatus N(ProjectileHitbox_Main)(Evt* script, s32 isInitialCall) {
         }
 
         if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
-            script->functionTemp[0] = 99;
+            script->AI_TEMP_STATE = AI_STATE_SUSPEND;
             script->functionTemp[1] = 0;
             enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
         } else if (enemy->flags & ENEMY_FLAGS_40000000) {
-            script->functionTemp[0] = 12;
+            script->AI_TEMP_STATE = AI_STATE_CHASE_INIT;
         }
         enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
         enemy->flags &= ~ENEMY_FLAGS_40000000;
     }
 
-    switch (script->functionTemp[0]) {
+    switch (script->AI_TEMP_STATE) {
         case AI_STATE_WANDER_INIT:
             basic_ai_wander_init(script, settings, territoryPtr);
             // fallthrough
@@ -68,7 +77,7 @@ ApiStatus N(ProjectileHitbox_Main)(Evt* script, s32 isInitialCall) {
             dist = dist2D(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
             if (enemy->varTable[0] == 0 || enemy->varTable[0] < dist) {
                 N(UnkNpcAIFunc48)(script, settings->chaseRadius, settings->unk_28.f, territoryPtr);
-                if (script->functionTemp[0] != AI_STATE_CHASE_INIT) {
+                if (script->AI_TEMP_STATE != AI_STATE_CHASE_INIT) {
                     break;
                 }
             }

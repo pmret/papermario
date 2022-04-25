@@ -17,7 +17,7 @@ void func_80243310_9AB700(Evt* script, NpcAISettings* aiSettings, EnemyTerritory
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 yawTemp;
 
-    npc->currentAnim.w = enemy->animList[9];
+    npc->currentAnim.w = enemy->animList[ENEMY_ANIM_MELEE_HIT];
     npc->jumpVelocity = -5.0f;
     npc->jumpScale = 0.15f;
     npc->collisionHeight = enemy->varTable[8] / 2;

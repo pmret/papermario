@@ -39,7 +39,7 @@ ApiStatus N(UnkNpcAIMainFunc6)(Evt* script, s32 isInitialCall) {
     if (isInitialCall || (enemy->varTable[10] == 100)) {
         script->functionTemp[0] = 100;
         npc->duration = 0;
-        npc->currentAnim.w = enemy->animList[0];
+        npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
         npc->flags &= ~NPC_FLAG_NO_Y_MOVEMENT;
         enemy->flags |= ENEMY_FLAGS_200000;
         npc->flags &= ~NPC_FLAG_GRAVITY;
@@ -65,7 +65,7 @@ ApiStatus N(UnkNpcAIMainFunc6)(Evt* script, s32 isInitialCall) {
             s32 emoteTemp;
 
             fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0x28, &emoteTemp);
-            npc->currentAnim.w = enemy->animList[0];
+            npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
             script->functionTemp[1] = 0;
             script->functionTemp[0] = 200;
         }

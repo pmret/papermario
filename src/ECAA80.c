@@ -34,7 +34,7 @@ void func_80240D80_ECAA80(Evt* script, NpcAISettings* npcAISettings, EnemyTerrit
     f32 subroutine_arg10;
 
     npc->duration = npcAISettings->unk_20 / 2 + rand_int(npcAISettings->unk_20 / 2 + 1);
-    npc->currentAnim.w = enemy->animList[3];
+    npc->currentAnim.w = enemy->animList[ENEMY_ANIM_CHASE];
     npc->moveSpeed = npcAISettings->chaseSpeed;
     phi_s3 = FALSE;
 
@@ -120,7 +120,7 @@ void func_80240D80_ECAA80(Evt* script, NpcAISettings* npcAISettings, EnemyTerrit
     }
     if (phi_s3) {
         npc->duration = 0xA;
-        npc->currentAnim.w = enemy->animList[8];
+        npc->currentAnim.w = enemy->animList[ENEMY_ANIM_MELEE_PRE];
     }
     script->functionTemp[0] = 0xD;
 }
@@ -162,7 +162,7 @@ ApiStatus func_8024150C_ECB20C(Evt* script, s32 isInitialCall) {
     if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAGS_4)) {
         script->functionTemp[0] = 0;
         npc->duration = 0;
-        npc->currentAnim.w = enemy->animList[0];
+        npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
         npc->flags &= ~NPC_FLAG_JUMPING;
         if (!enemy->territory->wander.isFlying) {
             npc->flags = (npc->flags | NPC_FLAG_GRAVITY) & ~NPC_FLAG_ENABLE_HIT_SCRIPT;

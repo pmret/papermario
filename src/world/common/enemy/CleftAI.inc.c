@@ -51,13 +51,16 @@ s32 N(CleftAI_Main)(Evt* script, s32 isInitialCall) {
     territory.unk_1C = 0;
 
     if (isInitialCall) {
-        script->functionTemp[0] = 0;
+        script->AI_TEMP_STATE = AI_STATE_WANDER_INIT;
         npc->duration = 0;
-        npc->flags &= ~0x800;
+
+        npc->flags &= ~NPC_FLAG_JUMPING;
         if (!enemy->territory->wander.isFlying) {
-            npc->flags = (npc->flags | 0x200) & ~0x8;
+            npc->flags |= NPC_FLAG_GRAVITY;
+            npc->flags &= ~NPC_FLAG_ENABLE_HIT_SCRIPT;
         } else {
-            npc->flags = (npc->flags & ~0x200) | 0x8;
+            npc->flags &= ~NPC_FLAG_GRAVITY;
+            npc->flags |= NPC_FLAG_ENABLE_HIT_SCRIPT;
         }
     }
 
@@ -68,26 +71,26 @@ s32 N(CleftAI_Main)(Evt* script, s32 isInitialCall) {
         enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
     }
 
-    if ((u32)script->functionTemp[0] - 12 < 3 && N(CleftAI_CanSeePlayer)(script, npcAISettings, territoryPtr)) {
-        script->functionTemp[0] = 20;
+    if ((u32)script->AI_TEMP_STATE - 12 < 3 && N(CleftAI_CanSeePlayer)(script, npcAISettings, territoryPtr)) {
+        script->AI_TEMP_STATE = 20;
     }
 
-    switch (script->functionTemp[0]) {
+    switch (script->AI_TEMP_STATE) {
         case 0:
             N(CleftAI_00)(script, npcAISettings, territoryPtr);
         case 1:
             N(CleftAI_01)(script, npcAISettings, territoryPtr);
-            if (script->functionTemp[0] != 2) {
+            if (script->AI_TEMP_STATE != 2) {
                 return ApiStatus_BLOCK;
             }
         case 2:
             N(CleftAI_02)(script, npcAISettings, territoryPtr);
-            if (script->functionTemp[0] != 3) {
+            if (script->AI_TEMP_STATE != 3) {
                 return ApiStatus_BLOCK;
             }
         case 3:
             N(CleftAI_03)(script, npcAISettings, territoryPtr);
-            if (script->functionTemp[0] != 4) {
+            if (script->AI_TEMP_STATE != 4) {
                 return ApiStatus_BLOCK;
             }
         case 4:
@@ -97,18 +100,18 @@ s32 N(CleftAI_Main)(Evt* script, s32 isInitialCall) {
             return ApiStatus_BLOCK;
         case 12:
             basic_ai_chase_init(script, npcAISettings, territoryPtr);
-            if (script->functionTemp[0] != 13) {
+            if (script->AI_TEMP_STATE != 13) {
                 return ApiStatus_BLOCK;
             }
         case 13:
             basic_ai_chase(script, npcAISettings, territoryPtr);
-            if (script->functionTemp[0] != 14) {
+            if (script->AI_TEMP_STATE != 14) {
                 return ApiStatus_BLOCK;
             }
         case 14:
             npc->duration--;
             if (npc->duration == 0) {
-                script->functionTemp[0] = 40;
+                script->AI_TEMP_STATE = 40;
             }
             return ApiStatus_BLOCK;
         case 20:
@@ -121,7 +124,7 @@ s32 N(CleftAI_Main)(Evt* script, s32 isInitialCall) {
             return ApiStatus_BLOCK;
         case 40:
             N(CleftAI_40)(script, npcAISettings, territoryPtr);
-            if (script->functionTemp[0] != 41) {
+            if (script->AI_TEMP_STATE != 41) {
                 return ApiStatus_BLOCK;
             }
         case 41:
@@ -131,7 +134,7 @@ s32 N(CleftAI_Main)(Evt* script, s32 isInitialCall) {
             N(CleftAI_50)(script, npcAISettings, territoryPtr);
         case 51:
             N(CleftAI_51)(script, npcAISettings, territoryPtr);
-            if (script->functionTemp[0] != 52) {
+            if (script->AI_TEMP_STATE != 52) {
                 return ApiStatus_BLOCK;
             }
         case 52:

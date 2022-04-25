@@ -21,7 +21,7 @@ void N(FlyingAI_LosePlayer)(Evt* script, NpcAISettings* aiSettings, EnemyTerrito
 
     if (npc->jumpVelocity >= 0.0) {
         npc->pos.y += npc->jumpVelocity;
-        npc->currentAnim.w = enemy->animList[9];
+        npc->currentAnim.w = enemy->animList[ENEMY_ANIM_MELEE_HIT];
         enemy->unk_07 = 0;
         if (!(npc->flags & NPC_FLAG_ENABLE_HIT_SCRIPT)) {
             posX = npc->pos.x;

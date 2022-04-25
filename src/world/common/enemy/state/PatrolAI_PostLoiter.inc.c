@@ -9,7 +9,7 @@ void N(PatrolAI_PostLoiter)(Evt* script, NpcAISettings* aiSettings, EnemyTerrito
     if (script->functionTemp[2] >= enemy->territory->patrol.numPoints) {
         script->functionTemp[2] = 0;
     }
-    npc->currentAnim.w = enemy->animList[1];
+    npc->currentAnim.w = enemy->animList[ENEMY_ANIM_WALK];
     if (enemy->territory->patrol.moveSpeedOverride < 0) {
         npc->moveSpeed = aiSettings->moveSpeed;
     } else {

@@ -1,3 +1,6 @@
+#ifndef AI_PROJECTILE_HITBOX_H
+#define AI_PROJECTILE_HITBOX_H 0
+
 #include "world/common/enemy/state/ProjectileHitbox_GetUsableProjectileID.inc.c"
 
 #include "world/common/UnkNpcAIFunc48.inc.c"
@@ -14,4 +17,4 @@
 
 #include "world/common/UnkFunc55.inc.c"
 
-#include "world/common/enemy/state/ProjectileHitbox_Main.inc.c"
+#endif

@@ -1065,7 +1065,7 @@ void N(func_80241068_BE8C48)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
             npc->duration = aiSettings->waitTime / 2 + rand_int(aiSettings->waitTime / 2 + 1);
         } else {
             script->functionTemp[0] = 4;
-            npc->currentAnim.w = enemy->animList[0];
+            npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
         }
     }
 }

@@ -5,7 +5,7 @@ void N(UnkNpcAIFunc43)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThi
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
-    npc->currentAnim.w = enemy->animList[0];
+    npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
     script->functionTemp[0] = 1;
 
     if (enemy->flags & ENEMY_FLAGS_100000) {

@@ -19,9 +19,9 @@ ApiStatus N(SpearGuyAI_Main)(Evt *script, s32 isInitialCall) {
     territory.unk_1C = 0;
 
     if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAGS_4)) {
-        script->functionTemp[0] = 0;
+        script->AI_TEMP_STATE = 0;
         npc->duration = 0;
-        npc->currentAnim.w = enemy->animList[0];
+        npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
         npc->flags &= ~0x800;
         if (!enemy->territory->wander.isFlying) {
             npc->flags = (npc->flags | 0x200) & ~0x8;
@@ -29,18 +29,18 @@ ApiStatus N(SpearGuyAI_Main)(Evt *script, s32 isInitialCall) {
             npc->flags = (npc->flags & ~0x200) | 0x8;
         }
         if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
-            script->functionTemp[0] = 99;
+            script->AI_TEMP_STATE = 99;
             script->functionTemp[1] = 0;
             enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
         }
         enemy->varTable[0] = 0;
     }
 
-    if ((script->functionTemp[0] < 30) && (enemy->varTable[0] == 0) && N(MeleeHitbox_CanSeePlayer)(script)) {
-        script->functionTemp[0] = 30;
+    if ((script->AI_TEMP_STATE < 30) && (enemy->varTable[0] == 0) && N(MeleeHitbox_CanSeePlayer)(script)) {
+        script->AI_TEMP_STATE = 30;
     }
 
-    switch (script->functionTemp[0]) {
+    switch (script->AI_TEMP_STATE) {
         case 0:
             basic_ai_wander_init(script, npcAISettings, territoryPtr);
         case 1:
@@ -68,12 +68,12 @@ ApiStatus N(SpearGuyAI_Main)(Evt *script, s32 isInitialCall) {
             N(MeleeHitbox_30)(script);
         case 31:
             N(MeleeHitbox_31)(script);
-            if (script->functionTemp[0] != 32) {
+            if (script->AI_TEMP_STATE != 32) {
                 break;
             }
         case 32:
             N(MeleeHitbox_32)(script);
-            if (script->functionTemp[0] != 33) {
+            if (script->AI_TEMP_STATE != 33) {
                 break;
             }
         case 33:

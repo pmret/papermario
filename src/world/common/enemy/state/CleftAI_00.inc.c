@@ -10,6 +10,6 @@ void N(CleftAI_00)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* 
     npc->collisionRadius = 24;
     script->functionTemp[1] = 0;
     npc->duration = 0;
-    npc->currentAnim.w = enemy->animList[8];
+    npc->currentAnim.w = enemy->animList[ENEMY_ANIM_MELEE_PRE];
     script->functionTemp[0] = 1;
 }

@@ -1,6 +1,8 @@
 
-#include "world/common/enemy/WanderMeleeAI.inc.c" // unused?
+// hitbox enemy
+#include "world/common/enemy/WanderMeleeAI.inc.c"
 
+// visual enemy
 #include "world/common/enemy/state/PiranhaPlantAI_00.inc.c"
 #include "world/common/enemy/state/PiranhaPlantAI_01.inc.c"
 #include "world/common/enemy/state/PiranhaPlantAI_10.inc.c"

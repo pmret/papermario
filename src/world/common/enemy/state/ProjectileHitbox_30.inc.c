@@ -14,11 +14,11 @@ void N(ProjectileHitbox_30)(Evt* script) {
             s32 emoteTemp;
 
             fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &emoteTemp);
-            npc->currentAnim.w = enemy->animList[0];
+            npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
         } else {
             Enemy* hitboxEnemy;
 
-            npc->currentAnim.w = enemy->animList[9];
+            npc->currentAnim.w = enemy->animList[ENEMY_ANIM_MELEE_HIT];
             hitboxEnemy = get_enemy(npcID);
             hitboxEnemy->varTable[4] = enemy->npcID;
             hitboxEnemy->varTable[0] = 1;

@@ -7,7 +7,7 @@ void N(FlyingAI_ChaseInit)(Evt* script, NpcAISettings* aiSettings, EnemyTerritor
     f32 jumpVelocity = (f32)enemy->varTable[5] / 100.0;
     f32 jumpScale = (f32)enemy->varTable[6] / 100.0;
 
-    npc->currentAnim.w = enemy->animList[8];
+    npc->currentAnim.w = enemy->animList[ENEMY_ANIM_MELEE_PRE];
     npc->jumpVelocity = jumpVelocity;
     npc->jumpScale = jumpScale;
     npc->moveSpeed = aiSettings->chaseSpeed;

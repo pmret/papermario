@@ -845,7 +845,7 @@ void N(func_80240D80_CAFAC0)(Evt* script, NpcAISettings* npcAISettings, EnemyTer
     f32 subroutine_arg10;
 
     npc->duration = npcAISettings->unk_20 / 2 + rand_int(npcAISettings->unk_20 / 2 + 1);
-    npc->currentAnim.w = enemy->animList[3];
+    npc->currentAnim.w = enemy->animList[ENEMY_ANIM_CHASE];
     npc->moveSpeed = npcAISettings->chaseSpeed;
     phi_s3 = FALSE;
 
@@ -931,7 +931,7 @@ void N(func_80240D80_CAFAC0)(Evt* script, NpcAISettings* npcAISettings, EnemyTer
     }
     if (phi_s3) {
         npc->duration = 0xA;
-        npc->currentAnim.w = enemy->animList[8];
+        npc->currentAnim.w = enemy->animList[ENEMY_ANIM_MELEE_PRE];
     }
     script->functionTemp[0] = 0xD;
 }
@@ -943,11 +943,11 @@ void N(func_80241364_CB00A4)(Evt* script, NpcAISettings* npcAISettings, EnemyTer
 
     if (basic_ai_try_detect_player(territory, enemy, npcAISettings->chaseRadius, npcAISettings->unk_28.f, 1) == 0) {
         fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &var);
-        npc->currentAnim.w = enemy->animList[0];
+        npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
         npc->duration = 25;
         script->functionTemp[0] = 14;
     } else {
-        if (npc->currentAnim.w != enemy->animList[8]) {
+        if (npc->currentAnim.w != enemy->animList[ENEMY_ANIM_MELEE_PRE]) {
             if (npc->moveSpeed < 4.0) {
                 func_8003D660(npc, 0);
             } else {
@@ -994,7 +994,7 @@ ApiStatus N(func_8024150C_CB024C)(Evt* script, s32 isInitialCall) {
     if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAGS_4)) {
         script->functionTemp[0] = 0;
         npc->duration = 0;
-        npc->currentAnim.w = enemy->animList[0];
+        npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
         npc->flags &= ~0x800;
         if (!enemy->territory->wander.isFlying) {
             npc->flags = (npc->flags | 0x200) & ~0x8;

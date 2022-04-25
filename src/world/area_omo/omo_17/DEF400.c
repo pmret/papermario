@@ -18,7 +18,7 @@ INCLUDE_ASM(s32, "world/area_omo/omo_17/DEF400", func_80240CE0_DEFB80);
 
 #include "world/common/enemy/FlyingAI.inc.c"
 
-#include "world/common/enemy/ProjectileHitbox.inc.c"
+#include "world/common/enemy/ProjectileAI.inc.c"
 
 #include "world/common/SetNpcB5_3.inc.c"
 

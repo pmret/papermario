@@ -9,7 +9,7 @@ void N(MeleeHitbox_30)(Evt* script) {
     if (npc->turnAroundYawAdjustment == 0) {
         enemy->varTable[0] = 2;
         npc->duration = enemy->varTable[1];
-        npc->currentAnim.w = enemy->animList[8];
+        npc->currentAnim.w = enemy->animList[ENEMY_ANIM_MELEE_PRE];
         script->functionTemp[0] = 31;
     }
 }

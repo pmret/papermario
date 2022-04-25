@@ -28,7 +28,7 @@ ApiStatus N(UnkNpcAIMainFunc8)(Evt* script, s32 isInitialCall) {
         npc->duration = 0;
         script->functionTemp[0] = 0;
         enemy->unk_07 = 0;
-        npc->currentAnim.w = enemy->animList[0];
+        npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
         npc->flags &= ~NPC_FLAG_JUMPING;
         npc->collisionHeight = enemy->varTable[6];
         enemy->unk_B5 = 0;
