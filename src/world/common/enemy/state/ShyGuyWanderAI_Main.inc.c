@@ -1,7 +1,7 @@
 #include "common.h"
 #include "npc.h"
 
-ApiStatus N(ShyGuyAI_Main)(Evt* script, s32 isInitialCall) {
+ApiStatus N(ShyGuyWanderAI_Main)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     EnemyTerritoryThing territory;
@@ -83,25 +83,25 @@ ApiStatus N(ShyGuyAI_Main)(Evt* script, s32 isInitialCall) {
             }
            // fallthrough
         case 0xE:
-            N(ShyGuyAI_14)(script, aiSettings, territoryPtr);
+            N(ShyGuyWanderAI_14)(script, aiSettings, territoryPtr);
             if (script->functionTemp[0] != 0xF) {
                 break;
             }
            // fallthrough
         case 0xF:
-            N(ShyGuyAI_15)(script, aiSettings, territoryPtr);
+            N(ShyGuyWanderAI_15)(script, aiSettings, territoryPtr);
             if (script->functionTemp[0] != 0x10) {
                 break;
             }
             // fallthrough
         case 0x10:
-            N(ShyGuyAI_16)(script, aiSettings, territoryPtr);
+            N(ShyGuyWanderAI_16)(script, aiSettings, territoryPtr);
             if (script->functionTemp[0] != 0x11) {
                 break;
             }
             // fallthrough
         case 0x11:
-            N(UnkNpcDurationAnimationFunc)(script, aiSettings, territoryPtr);
+            N(ShyGuyWanderAI_17)(script, aiSettings, territoryPtr);
             break;
         case 0x63:
             basic_ai_suspend(script);

@@ -1,9 +1,9 @@
 #include "common.h"
 #include "npc.h"
 
-void N(ShyGuyAI_15)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(ShyGuyWanderAI_16)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
-    Npc* npc = get_npc_unsafe((s32) enemy->npcID);
+    Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 yaw = npc->yaw;
     
     if (ai_check_fwd_collisions(npc, npc->moveSpeed, &yaw, NULL, NULL, NULL) == 0) {
@@ -12,10 +12,7 @@ void N(ShyGuyAI_15)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing*
     
     npc->duration--;
     if (npc->duration == 0) {
-        npc->moveSpeed *= 0.6;
-
-        npc->currentAnim.w = enemy->animList[11];
-        npc->duration = 10;
-        script->functionTemp[0] = 16;
+        npc->duration = 30;
+        script->functionTemp[0] = 17;
     }
 }

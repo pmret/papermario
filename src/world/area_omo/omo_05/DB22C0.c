@@ -3,7 +3,7 @@
 static char* N(exit_str_0) = "omo_17";
 static char* N(exit_str_1) = "";
 
-#include "world/common/enemy/ShyGuyAI.inc.c"
+#include "world/common/enemy/ShyGuyWanderAI.inc.c"
 
 #include "world/common/enemy/GrooveGuyAI.inc.c"
 

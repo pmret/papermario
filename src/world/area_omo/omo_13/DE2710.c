@@ -1,6 +1,6 @@
 #include "omo_13.h"
 
-#include "world/common/enemy/ShyGuyAI.inc.c"
+#include "world/common/enemy/ShyGuyWanderAI.inc.c"
 
 #include "world/common/enemy/GrooveGuyAI.inc.c"
 

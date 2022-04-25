@@ -25,7 +25,7 @@ INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_80241908_DAED08);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_802419D8_DAEDD8);
 
-#include "world/common/UnkNpcDurationAnimationFunc.inc.c"
+#include "world/common/enemy/state/ShyGuyWanderAI_17.inc.c"
 
 INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_80241AD0_DAEED0);
 
