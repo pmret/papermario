@@ -13,7 +13,7 @@
 
 #include "world/common/enemy/state/ProjectileHitbox_33.inc.c"
 
-#include "world/common/UnkFunc54.inc.c"
+#include "world/common/UnkFunc54.inc.c" // projectile main
 
 #include "world/common/UnkFunc55.inc.c"
 
