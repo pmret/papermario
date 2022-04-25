@@ -9,8 +9,7 @@
 #include "world/common/AddPlayerHandsOffset.inc.c"
 
 // matches, needs data migration
-INCLUDE_ASM(s32, "world/area_omo/omo_13/DE2710", func_80240F00_DE3390);
-/*
+#ifdef NON_MATCHING
 ApiStatus func_80240F00_DE3390(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     
@@ -26,7 +25,9 @@ ApiStatus func_80240F00_DE3390(Evt* script, s32 isInitialCall) {
     
     return ApiStatus_BLOCK;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_omo/omo_13/DE2710", func_80240F00_DE3390);
+#endif
 
 INCLUDE_ASM(s32, "world/area_omo/omo_13/DE2710", func_80240F54_DE33E4);
 
