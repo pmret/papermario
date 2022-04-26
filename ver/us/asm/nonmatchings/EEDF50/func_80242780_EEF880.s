@@ -64,7 +64,7 @@ glabel func_80242780_EEF880
 /* EEF950 80242850 02A0202D */  daddu     $a0, $s5, $zero
 /* EEF954 80242854 0240282D */  daddu     $a1, $s2, $zero
 /* EEF958 80242858 0280302D */  daddu     $a2, $s4, $zero
-/* EEF95C 8024285C 0C09080E */  jal       EEDF50_UnkFunc5
+/* EEF95C 8024285C 0C09080E */  jal       EEDF50_FlyingAI_Init
 /* EEF960 80242860 0200382D */   daddu    $a3, $s0, $zero
 /* EEF964 80242864 AE800070 */  sw        $zero, 0x70($s4)
 .L80242868:

@@ -5,7 +5,7 @@
 
 #define NAMESPACE EB8E90
 
-#include "world/common/enemy/Dead_PatrolNoAttackAI.inc.c"
+#include "world/common/enemy/PatrolNoAttackAI.inc.c"
 
 ApiStatus N(PostChapter6StatUpdate)(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;

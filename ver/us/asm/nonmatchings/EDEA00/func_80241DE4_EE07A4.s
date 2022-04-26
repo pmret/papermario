@@ -59,7 +59,7 @@ glabel func_80241DE4_EE07A4
 /* EE087C 80241EBC 0240202D */  daddu     $a0, $s2, $zero
 /* EE0880 80241EC0 0260282D */  daddu     $a1, $s3, $zero
 /* EE0884 80241EC4 0280302D */  daddu     $a2, $s4, $zero
-/* EE0888 80241EC8 0C0904EB */  jal       EDEA00_UnkFunc5
+/* EE0888 80241EC8 0C0904EB */  jal       EDEA00_FlyingAI_Init
 /* EE088C 80241ECC 02C0382D */   daddu    $a3, $s6, $zero
 /* EE0890 80241ED0 AE800070 */  sw        $zero, 0x70($s4)
 .L80241ED4:

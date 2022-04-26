@@ -1,11 +1,16 @@
 #include "common.h"
 #include "npc.h"
+#include "dead_structs.h"
 
 // prerequisites
 #include "world/common/enemy/PatrolAI_States.inc.c"
 
 ApiStatus N(PatrolNoAttackAI_Main)(Evt* script, s32 isInitialCall) {
+    #ifdef _DEAD_H_
+    DeadEnemy* enemy = (DeadEnemy*)script->owner1.enemy;
+    #else
     Enemy* enemy = script->owner1.enemy;
+    #endif
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;
     EnemyTerritoryThing territory;
@@ -21,6 +26,14 @@ ApiStatus N(PatrolNoAttackAI_Main)(Evt* script, s32 isInitialCall) {
     territory.sizeZ = enemy->territory->patrol.detectSizeZ;
     territory.halfHeight = 65.0f;
     territory.unk_1C = 0;
+
+    #ifdef _DEAD_H_
+    enemy->unk_108.x = npc->pos.x;
+    enemy->unk_108.y = npc->pos.y;
+    enemy->unk_108.z = npc->pos.z;
+    enemy->unk_114 = 0.0001f;
+    enemy->unk_118 = 0.0001f;
+    #endif
 
     if (isInitialCall || enemy->aiFlags & ENEMY_AI_FLAGS_4) {
         script->AI_TEMP_STATE = AI_STATE_PATROL_INIT;

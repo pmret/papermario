@@ -291,7 +291,7 @@ ApiStatus N(SentinelAI_Main)(Evt* script, s32 isInitialCall) {
 
     if (isInitialCall) {
         script->AI_TEMP_STATE = AI_STATE_SENTINEL_WANDER_INIT;
-        N(UnkFunc5)(npc, enemy, script, aiSettings);
+        N(FlyingAI_Init)(npc, enemy, script, aiSettings);
     }
 
     switch (script->AI_TEMP_STATE) {

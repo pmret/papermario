@@ -53,7 +53,7 @@ glabel func_80243650_9ABA40
 /* 9ABAE4 802436F4 02A0202D */  daddu     $a0, $s5, $zero
 /* 9ABAE8 802436F8 0240282D */  daddu     $a1, $s2, $zero
 /* 9ABAEC 802436FC 0260302D */  daddu     $a2, $s3, $zero
-/* 9ABAF0 80243700 0C090C00 */  jal       trd_04_UnkFunc5
+/* 9ABAF0 80243700 0C090C00 */  jal       trd_04_FlyingAI_Init
 /* 9ABAF4 80243704 0200382D */   daddu    $a3, $s0, $zero
 /* 9ABAF8 80243708 86A200A8 */  lh        $v0, 0xa8($s5)
 /* 9ABAFC 8024370C AE42008C */  sw        $v0, 0x8c($s2)

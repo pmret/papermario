@@ -790,7 +790,7 @@ ApiStatus N(func_80241C64_CD8F44)(Evt* script, s32 isInitialCall) {
     territory.unk_1C = 0;
 
     if (isInitialCall) {
-        N(UnkFunc5)(npc, enemy, script, aiSettings);
+        N(FlyingAI_Init)(npc, enemy, script, aiSettings);
         script->functionTemp[0] = 0;
     }
     npc->unk_AB = -3;

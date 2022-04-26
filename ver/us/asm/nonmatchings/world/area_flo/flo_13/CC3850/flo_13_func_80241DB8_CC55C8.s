@@ -48,7 +48,7 @@ glabel flo_13_func_80241DB8_CC55C8
 /* CC5674 80241E64 0240202D */  daddu     $a0, $s2, $zero
 /* CC5678 80241E68 0260282D */  daddu     $a1, $s3, $zero
 /* CC567C 80241E6C 0280302D */  daddu     $a2, $s4, $zero
-/* CC5680 80241E70 0C0904EB */  jal       flo_13_UnkFunc5
+/* CC5680 80241E70 0C0904EB */  jal       flo_13_FlyingAI_Init
 /* CC5684 80241E74 02C0382D */   daddu    $a3, $s6, $zero
 /* CC5688 80241E78 AE800070 */  sw        $zero, 0x70($s4)
 .L80241E7C:

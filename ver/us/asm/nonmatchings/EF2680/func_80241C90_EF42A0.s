@@ -59,7 +59,7 @@ glabel func_80241C90_EF42A0
 /* EF4378 80241D68 0240202D */  daddu     $a0, $s2, $zero
 /* EF437C 80241D6C 0260282D */  daddu     $a1, $s3, $zero
 /* EF4380 80241D70 0280302D */  daddu     $a2, $s4, $zero
-/* EF4384 80241D74 0C090496 */  jal       EF2680_UnkFunc5
+/* EF4384 80241D74 0C090496 */  jal       EF2680_FlyingAI_Init
 /* EF4388 80241D78 02C0382D */   daddu    $a3, $s6, $zero
 /* EF438C 80241D7C AE800070 */  sw        $zero, 0x70($s4)
 .L80241D80:

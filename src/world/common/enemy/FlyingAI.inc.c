@@ -25,7 +25,7 @@
 
 #include "world/common/enemy/state/FlyingAI_LosePlayer.inc.c"
 
-#include "world/common/UnkFunc5.inc.c"
+#include "world/common/enemy/state/FlyingAI_Init.inc.c"
 
 #include "world/common/enemy/FlyingAI_Main.inc.c"
 

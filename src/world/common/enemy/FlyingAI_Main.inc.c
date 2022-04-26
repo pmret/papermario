@@ -33,7 +33,7 @@ ApiStatus N(FlyingAI_Main)(Evt* script, s32 isInitialCall) {
     #endif
 
     if (isInitialCall) {
-        N(UnkFunc5)(npc, enemy, script, aiSettings);
+        N(FlyingAI_Init)(npc, enemy, script, aiSettings);
     }
 
     npc->unk_AB = -2;
