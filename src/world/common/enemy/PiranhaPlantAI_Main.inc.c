@@ -2,7 +2,11 @@
 #include "npc.h"
 
 s32 N(PiranhaPlantAI_Main)(Evt* script, s32 isInitialCall) {
+    #ifdef _DEAD_H_
+    DeadEnemy* enemy = (DeadEnemy*)script->owner1.enemy;
+    #else
     Enemy* enemy = script->owner1.enemy;
+    #endif
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;
     EnemyTerritoryThing territory;
@@ -17,6 +21,16 @@ s32 N(PiranhaPlantAI_Main)(Evt* script, s32 isInitialCall) {
     territory.sizeZ = enemy->territory->wander.detectSizeZ;
     territory.halfHeight = 200.0f;
     territory.unk_1C = 0;
+
+    #ifdef _DEAD_H_
+    // Dead Func that doesn't seem to have an alive counterpart, probably because of the
+    // difference in the Enemy and DeadEnemy struct.
+    func_8004D8E0(enemy);
+    if (enemy->flags & ENEMY_FLAGS_100000) {
+        enemy->unk_114 = 10.0f;
+        enemy->unk_118 = 0.7f;
+    }
+    #endif
     
     if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAGS_4)) {
         script->AI_TEMP_STATE = AI_STATE_PIRANHA_PLANT_00;

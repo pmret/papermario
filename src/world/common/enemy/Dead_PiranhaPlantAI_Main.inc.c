@@ -3,7 +3,7 @@
 #include "effects.h"
 #include "dead_structs.h"
 
-ApiStatus N(Dead_PiranhaPlantAI_Main)(Evt* script, s32 isInitialCall) {
+ApiStatus N(PiranhaPlantAI_Main)(Evt* script, s32 isInitialCall) {
     DeadEnemy* enemy = (DeadEnemy*) script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     NpcAISettings* settings = (NpcAISettings*) evt_get_variable(script, *script->ptrReadPos);

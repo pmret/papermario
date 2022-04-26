@@ -5,7 +5,7 @@
 
 #define NAMESPACE EEDF50
 
-#include "world/common/enemy/Dead_FlyingAI.inc.c"
+#include "world/common/enemy/FlyingAI.inc.c"
 
 #include "world/common/enemy/state/FlyingNoAttackAI_12.inc.c"
 

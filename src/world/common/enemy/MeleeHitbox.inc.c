@@ -98,11 +98,23 @@ s32 N(MeleeHitbox_CanSeePlayer)(Evt* script) {
 }
 
 ApiStatus N(MeleeHitbox_Main)(Evt* script, s32 isInitialCall) {
+    #ifdef _DEAD_H_
+    DeadEnemy* hitboxEnemy = (DeadEnemy*)script->owner1.enemy;
+    #else
     Enemy* hitboxEnemy = script->owner1.enemy;
+    #endif
     Npc* hitboxNpc = get_npc_unsafe(hitboxEnemy->npcID);
     Enemy* baseEnemy;
     Npc* baseNpc;
     f32 posX, posZ;
+
+    #ifdef _DEAD_H_
+    hitboxEnemy->unk_108.x = hitboxNpc->pos.x;
+    hitboxEnemy->unk_108.y = hitboxNpc->pos.y;
+    hitboxEnemy->unk_108.z = hitboxNpc->pos.z;
+    hitboxEnemy->unk_114 = 0.0001f;
+    hitboxEnemy->unk_118 = 0.0001f;
+    #endif
 
     if (isInitialCall || (hitboxEnemy->aiFlags & ENEMY_AI_FLAGS_4)) {
         script->functionTemp[0] = 0;
@@ -145,7 +157,6 @@ ApiStatus N(MeleeHitbox_Main)(Evt* script, s32 isInitialCall) {
                 script->functionTemp[0] = 1;
             }
             break;
-
         case 1:
             baseEnemy = get_enemy(hitboxEnemy->npcID - 1);
             get_npc_unsafe(baseEnemy->npcID);
@@ -163,6 +174,13 @@ ApiStatus N(MeleeHitbox_Main)(Evt* script, s32 isInitialCall) {
             }
             break;
     }
+
+    #ifdef _DEAD_H_
+    if (hitboxEnemy->unk_07 != 0) {
+        hitboxEnemy->unk_114 = 7.0f;
+        hitboxEnemy->unk_118 = 1.0f;
+    }
+    #endif
 
     return ApiStatus_BLOCK;
 }

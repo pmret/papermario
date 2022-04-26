@@ -4,7 +4,11 @@
 #include "sprite/npc/bony_beetle.h"
 
 ApiStatus N(LungeAI_Main)(Evt* script, s32 isInitialCall) {
+    #ifdef _DEAD_H_
+    DeadEnemy* enemy = (DeadEnemy*)script->owner1.enemy;
+    #else
     Enemy* enemy = script->owner1.enemy;
+    #endif
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;
     EnemyTerritoryThing territory;
@@ -19,6 +23,14 @@ ApiStatus N(LungeAI_Main)(Evt* script, s32 isInitialCall) {
     territory.sizeZ = enemy->territory->wander.detectSizeZ;
     territory.halfHeight = 100.0f;
     territory.unk_1C = 0;
+
+    #ifdef _DEAD_H_
+    enemy->unk_108.x = npc->pos.x;
+    enemy->unk_108.y = npc->pos.y;
+    enemy->unk_108.z = npc->pos.z;
+    enemy->unk_114 = 0.01f;
+    enemy->unk_118 = 0.01f;
+    #endif
 
     if (isInitialCall) {
         enemy->varTable[6] = npc->collisionHeight;

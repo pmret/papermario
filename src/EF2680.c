@@ -5,7 +5,7 @@
 
 #define NAMESPACE EF2680
 
-#include "world/common/enemy/Dead_FlyingAI.inc.c"
+#include "world/common/enemy/FlyingAI.inc.c"
 
 s32 func_80241594_EF3BA4(void) {
     s32 i;
@@ -152,6 +152,6 @@ INCLUDE_ASM(s32, "EF2680", func_80241C90_EF42A0);
 
  #include "world/common/enemy/UnkAI_StateHandlers_A.inc.c"
 
-#include "world/common/enemy/Dead_LungeAI_Main.inc.c"
+#include "world/common/enemy/LungeAI_Main.inc.c"
 
 #include "world/common/enemy/SpinyAI_Main.inc.c"

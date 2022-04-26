@@ -1,9 +1,14 @@
 #include "common.h"
 #include "npc.h"
+#include "dead_structs.h"
 #include "effects.h"
 
 ApiStatus N(FlyingAI_Main)(Evt* script, s32 isInitialCall) {
+    #ifdef _DEAD_H_
+    DeadEnemy* enemy = (DeadEnemy*)script->owner1.enemy;
+    #else
     Enemy* enemy = script->owner1.enemy;
+    #endif
     Bytecode* args = script->ptrReadPos;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     EnemyTerritoryThing territory;
@@ -18,6 +23,14 @@ ApiStatus N(FlyingAI_Main)(Evt* script, s32 isInitialCall) {
     territory.sizeZ = enemy->territory->wander.detectSizeZ;
     territory.halfHeight = 120.0f;
     territory.unk_1C = 0;
+
+    #ifdef _DEAD_H_
+    enemy->unk_108.x = npc->pos.x;
+    enemy->unk_108.y = npc->pos.y;
+    enemy->unk_108.z = npc->pos.z;
+    enemy->unk_114 = 0.0001f;
+    enemy->unk_118 = 0.0001f;
+    #endif
 
     if (isInitialCall) {
         N(UnkFunc5)(npc, enemy, script, aiSettings);
@@ -43,18 +56,18 @@ ApiStatus N(FlyingAI_Main)(Evt* script, s32 isInitialCall) {
         case AI_STATE_LOITER:
             N(FlyingAI_Loiter)(script, aiSettings, territoryPtr);
             break;
-        case 10:
+        case AI_STATE_JUMP_INIT:
             N(FlyingAI_JumpInit)(script, aiSettings, territoryPtr);
-        case 11:
+        case AI_STATE_JUMP:
             N(FlyingAI_Jump)(script, aiSettings, territoryPtr);
             break;
-        case 12:
+        case AI_STATE_CHASE_INIT:
             N(FlyingAI_ChaseInit)(script, aiSettings, territoryPtr);
             break;
-        case 13:
+        case AI_STATE_CHASE:
             N(FlyingAI_Chase)(script, aiSettings, territoryPtr);
             break;
-        case 14:
+        case AI_STATE_LOSE_PLAYER:
             N(FlyingAI_LosePlayer)(script, aiSettings, territoryPtr);
             break;
     }
