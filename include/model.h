@@ -157,6 +157,8 @@ void update_model_animator(s32);
 void update_model_animator_with_transform(s32 animatorID, Mtx* mtx);
 void set_mdl_custom_gfx_set(Model*, s32, u32);
 s32 step_model_animator(ModelAnimator* animator);
+AnimatorNode* get_animator_node_for_tree_index(ModelAnimator* animator, s32 treeIndex);
+AnimatorNode* get_animator_node_with_id(ModelAnimator* animator, s32 id);
 void animator_update_model_transforms(ModelAnimator* animator, Mtx* rootTransform);
 void render_animated_model(s32 animatorID, Mtx* rootTransform);
 void animator_node_update_model_transform(ModelAnimator* animator, f32 (*flipMtx)[4], AnimatorNode* node,
