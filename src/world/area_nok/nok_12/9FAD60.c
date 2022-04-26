@@ -2,8 +2,6 @@
 
 #include "world/common/enemy/LungeAI.inc.c"
 
-#include "world/common/enemy/PatrolNoAttackAI.inc.c"
-
-#include "world/common/UnkNpcAIMainFunc8.inc.c"
+#include "world/common/enemy/KoopaPatrolAI.inc.c"
 
 static char* N(exit_str_0) = "nok_12";

@@ -1,12 +1,10 @@
-#include "dead.h"
 #include "common.h"
 #include "npc.h"
 #include "effects.h"
-#include "dead_structs.h"
 #include "sprite/npc/bony_beetle.h"
 
-ApiStatus N(UnkNpcAIMainFunc5)(Evt* script, s32 isInitialCall) {
-    DeadEnemy* enemy = (DeadEnemy*) script->owner1.enemy;
+ApiStatus N(LungeAI_Main)(Evt* script, s32 isInitialCall) {
+    Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;
     EnemyTerritoryThing territory;
@@ -22,12 +20,6 @@ ApiStatus N(UnkNpcAIMainFunc5)(Evt* script, s32 isInitialCall) {
     territory.halfHeight = 100.0f;
     territory.unk_1C = 0;
 
-    enemy->unk_108.x = npc->pos.x;
-    enemy->unk_108.y = npc->pos.y;
-    enemy->unk_108.z = npc->pos.z;
-    enemy->unk_114 = 0.01f;
-    enemy->unk_118 = 0.01f;
-
     if (isInitialCall) {
         enemy->varTable[6] = npc->collisionHeight;
         enemy->varTable[8] = 0;
@@ -36,7 +28,7 @@ ApiStatus N(UnkNpcAIMainFunc5)(Evt* script, s32 isInitialCall) {
     }
 
     if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAGS_4)) {
-        script->functionTemp[0] = 0;
+        script->AI_TEMP_STATE = 0;
         npc->duration = 0;
         enemy->unk_07 = 0;
         npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
@@ -55,12 +47,12 @@ ApiStatus N(UnkNpcAIMainFunc5)(Evt* script, s32 isInitialCall) {
         if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
             s32 emoteTemp;
 
-            script->functionTemp[0] = 99;
+            script->AI_TEMP_STATE = 99;
             script->functionTemp[1] = 0;
-            fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0x28, &emoteTemp);
+            fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 40, &emoteTemp);
             enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
         } else if (enemy->flags & ENEMY_FLAGS_40000000) {
-            script->functionTemp[0] = 12;
+            script->AI_TEMP_STATE = 12;
             enemy->flags &= ~ENEMY_FLAGS_40000000;
         }
     }
@@ -78,7 +70,7 @@ ApiStatus N(UnkNpcAIMainFunc5)(Evt* script, s32 isInitialCall) {
         }
     }
 
-    switch (script->functionTemp[0]) {
+    switch (script->AI_TEMP_STATE) {
         case 0:
             basic_ai_wander_init(script, aiSettings, territoryPtr);
             npc->collisionHeight = enemy->varTable[6];

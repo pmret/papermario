@@ -1,5 +1,5 @@
-#ifndef AI_PRREQ_FLYING
-#define AI_PRREQ_FLYING 0
+#ifndef _AI_FLYING_INC_
+#define _AI_FLYING_INC_ 0
 
 // This AI is used by:
 // - Paragoomba + variants

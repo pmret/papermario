@@ -3,7 +3,7 @@
 static char* N(exit_str_0) = "isk_12";
 static char* N(exit_str_1) = "";
 
-#include "world/common/enemy/UnkAI_3.inc.c"
+#include "world/common/enemy/StoneChompAI.inc.c"
 
 #include "world/common/UnkFunc53.inc.c"
 

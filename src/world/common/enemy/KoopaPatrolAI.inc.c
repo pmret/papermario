@@ -2,7 +2,11 @@
 #include "npc.h"
 #include "effects.h"
 
-ApiStatus N(UnkNpcAIMainFunc8)(Evt* script, s32 isInitialCall) {
+#include "world/common/enemy/PatrolNoAttackAI.inc.c"
+
+#include "world/common/enemy/UnkAI_StateHandlers_A.inc.c"
+
+ApiStatus N(KoopaPatrolAI_Main)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;

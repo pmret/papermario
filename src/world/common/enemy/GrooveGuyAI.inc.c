@@ -28,14 +28,11 @@ void N(GrooveGuyAI_03)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThi
             phase = enemy->varTable[1] % 16;
             if (phase < 4) {
                 npc->currentAnim.w = 0x3C000C;
-            }
-            else if (phase < 8) {
+            } else if (phase < 8) {
                 npc->currentAnim.w = 0x3C000B;
-            }
-            else if (phase < 12) {
+            } else if (phase < 12) {
                 npc->currentAnim.w = 0x3C000C;
-            }
-            else  if (phase < 16) {
+            } else  if (phase < 16) {
                 npc->currentAnim.w = 0x3C000D;
             }
             enemy->varTable[1]++;

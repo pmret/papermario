@@ -692,6 +692,7 @@ enum SoundIDs {
     SOUND_212D                      = 0x0000212D,
     SOUND_212E                      = 0x0000212E,
     SOUND_80000011                  = 0x80000011,
+    SOUND_B0000017                  = 0xB0000017,
     SOUND_B0000018                  = 0xB0000018,
 };
 
@@ -2776,6 +2777,8 @@ enum EnemyAIStates {
     AI_STATE_WANDER                 = 1,
     AI_STATE_PATROL_INIT            = 0,
     AI_STATE_PATROL                 = 1,
+    AI_STATE_HOP_INIT               = 0,
+    AI_STATE_HOP                    = 1,
     AI_STATE_LOITER_INIT            = 2,
     AI_STATE_LOITER                 = 3,
     AI_STATE_LOITER_POST            = 4,

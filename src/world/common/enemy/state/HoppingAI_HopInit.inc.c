@@ -2,10 +2,11 @@
 #include "npc.h"
 #include "effects.h"
 
-void N(UnkNpcAIFunc36)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(HoppingAI_HopInit)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 x, y, z;
+    s32 i;
 
     basic_ai_wander_init(script, aiSettings, territory);
     npc->flags |= NPC_FLAG_JUMPING;
@@ -17,10 +18,8 @@ void N(UnkNpcAIFunc36)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThi
                                enemy->territory->wander.point.x, 
                                enemy->territory->wander.point.z, 
                                npc->pos.x, npc->pos.z, 
-                               enemy->territory->wander.wanderSizeX, enemy->territory->wander.wanderSizeZ) != 0) 
+                               enemy->territory->wander.wanderSizeX, enemy->territory->wander.wanderSizeZ)) 
     {
-        s32 i;
-
         npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z);
         x = npc->pos.x;
         y = npc->pos.y;

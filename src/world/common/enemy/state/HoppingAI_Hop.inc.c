@@ -2,10 +2,10 @@
 #include "npc.h"
 #include "effects.h"
 
-void N(UnkNpcAIFunc37)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(HoppingAI_Hop)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
-    f32 posX, posY, posZ, posW;
+    f32 posX, posY, posZ, hitDepth;
 
     if (aiSettings->unk_14 >= 0) {
         if (script->functionTemp[1] <= 0) {
@@ -13,11 +13,10 @@ void N(UnkNpcAIFunc37)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThi
                 script->functionTemp[1] = aiSettings->unk_14;
                 if (basic_ai_try_detect_player(territory, enemy, aiSettings->alertRadius, aiSettings->unk_10.f, 0) != 0) {
                     s32 emoteTemp;
-
                     fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &emoteTemp);
                     ai_enemy_play_sound(npc, 0x2F4, 0x200000);
                     npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
-                    script->functionTemp[0] = 12;
+                    script->AI_TEMP_STATE = 12;
                     return;
                 }
             } while (0); // required to match
@@ -50,23 +49,23 @@ void N(UnkNpcAIFunc37)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThi
         posX = npc->pos.x;
         posY = npc->pos.y + 13.0;
         posZ = npc->pos.z;
-        posW = fabsf(npc->jumpVelocity) + 16.0;
+        hitDepth = fabsf(npc->jumpVelocity) + 16.0;
 
-        if (npc_raycast_down_sides(npc->collisionChannel, &posX, &posY, &posZ, &posW) != 0 && 
-            posW <= fabsf(npc->jumpVelocity) + 13.0) 
+        if (npc_raycast_down_sides(npc->collisionChannel, &posX, &posY, &posZ, &hitDepth) != 0 && 
+            hitDepth <= fabsf(npc->jumpVelocity) + 13.0) 
         {
             npc->jumpVelocity = 0.0f;
             npc->pos.y = posY;
             npc->flags &= ~NPC_FLAG_JUMPING;
-            script->functionTemp[0] = 2;
+            script->AI_TEMP_STATE = 2;
             script->functionTemp[1] = (rand_int(1000) % 3) + 2;
 
             if (aiSettings->unk_2C <= 0) {
-                script->functionTemp[0] = 0;
+                script->AI_TEMP_STATE = 0;
             } else if (aiSettings->moveTime <= 0) {
-                script->functionTemp[0] = 0;
+                script->AI_TEMP_STATE = 0;
             } else if (script->functionTemp[1] == 0) {
-                script->functionTemp[0] = 0;
+                script->AI_TEMP_STATE = 0;
             }
             return;
         }

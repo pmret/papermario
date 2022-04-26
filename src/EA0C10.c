@@ -221,7 +221,7 @@ INCLUDE_ASM(s32, "EA0C10", func_80240DC4_EA16C4);
 
 #include "world/common/enemy/UnkAI_StateHandlers_A.inc.c"
 
-#include "world/common/DeadUnkNpcAIMainFunc5.inc.c"
+#include "world/common/enemy/Dead_LungeAI_Main.inc.c"
 
 #include "world/common/AwaitPlayerNearNpc.inc.c"
 

@@ -1,5 +1,5 @@
-#ifndef AI_MELEE_HITBOX_H
-#define AI_MELEE_HITBOX_H 0
+#ifndef _AI_MELEE_HITBOX_INC_
+#define _AI_MELEE_HITBOX_INC_ 0
 
 #include "common.h"
 #include "effects.h"

@@ -286,7 +286,7 @@ EvtScript N(npcAI_80244240) = {
     EVT_CALL(SetSelfVar, 3, 18)
     EVT_CALL(SetSelfVar, 5, 3)
     EVT_CALL(SetSelfVar, 7, 4)
-    EVT_CALL(N(LakituAI_Main), EVT_PTR(N(npcAISettings_80244210)))
+    EVT_CALL(N(SpinyAI_Main), EVT_PTR(N(npcAISettings_80244210)))
     EVT_RETURN
     EVT_END
 };
@@ -1364,6 +1364,7 @@ void N(func_80241B68_CC5378)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
     }
 }
 
+//TODO THIS IS LAKITU AI
 // enemy2 is being copied to a0
 #ifdef NON_EQUIVALENT
 ApiStatus N(func_80241DB8_CC55C8)(Evt* script, s32 isInitialCall) {
@@ -1500,7 +1501,7 @@ INCLUDE_ASM(ApiStatus, "world/area_flo/flo_13/CC3850", flo_13_func_80241DB8_CC55
             s32 isInitialCall);
 #endif
 
-#include "world/common/enemy/LakituAI.inc.c"
+#include "world/common/enemy/SpinyAI.inc.c"
 
 #include "world/common/UnkFunc42.inc.c"
 

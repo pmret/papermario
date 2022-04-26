@@ -2,7 +2,7 @@
 #include "npc.h"
 #include "effects.h"
 
-void N(UnkNpcAIFunc45)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(Unk4AI_16)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -16,9 +16,9 @@ void N(UnkNpcAIFunc45)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThi
                 ai_enemy_play_sound(npc, 0x2F4, 0x200000);
                 npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
                 if (enemy->npcSettings->unk_2A & 1) {
-                    script->functionTemp[0] = 10;
+                    script->AI_TEMP_STATE = 10;
                 } else {
-                    script->functionTemp[0] = 12;
+                    script->AI_TEMP_STATE = 12;
                 }
                 return;
             }
@@ -30,7 +30,7 @@ void N(UnkNpcAIFunc45)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThi
         npc->pos.x = enemy->territory->wander.point.x;
         npc->pos.z = enemy->territory->wander.point.z;
         npc->yaw = enemy->territory->wander.wanderSizeX;
-        script->functionTemp[0] = 0;
+        script->AI_TEMP_STATE = 0;
     }
 
     if (npc->turnAroundYawAdjustment == 0) {

@@ -3,4 +3,4 @@
 
 #include "world/common/enemy/UnkAI_StateHandlers_A.inc.c"
 
-#include "world/common/UnkNpcAIMainFunc5.inc.c"
+#include "world/common/enemy/LungeAI_Main.inc.c"

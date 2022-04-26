@@ -1,4 +1,3 @@
-
 // hitbox enemy
 #include "world/common/enemy/WanderMeleeAI.inc.c"
 

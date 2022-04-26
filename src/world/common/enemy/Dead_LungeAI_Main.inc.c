@@ -1,9 +1,12 @@
+#include "dead.h"
 #include "common.h"
 #include "npc.h"
 #include "effects.h"
+#include "dead_structs.h"
+#include "sprite/npc/bony_beetle.h"
 
-ApiStatus N(UnkNpcAIMainFunc5)(Evt* script, s32 isInitialCall) {
-    Enemy* enemy = script->owner1.enemy;
+ApiStatus N(LungeAI_Main)(Evt* script, s32 isInitialCall) {
+    DeadEnemy* enemy = (DeadEnemy*) script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;
     EnemyTerritoryThing territory;
@@ -18,6 +21,12 @@ ApiStatus N(UnkNpcAIMainFunc5)(Evt* script, s32 isInitialCall) {
     territory.sizeZ = enemy->territory->wander.detectSizeZ;
     territory.halfHeight = 100.0f;
     territory.unk_1C = 0;
+
+    enemy->unk_108.x = npc->pos.x;
+    enemy->unk_108.y = npc->pos.y;
+    enemy->unk_108.z = npc->pos.z;
+    enemy->unk_114 = 0.01f;
+    enemy->unk_118 = 0.01f;
 
     if (isInitialCall) {
         enemy->varTable[6] = npc->collisionHeight;
@@ -48,7 +57,7 @@ ApiStatus N(UnkNpcAIMainFunc5)(Evt* script, s32 isInitialCall) {
 
             script->functionTemp[0] = 99;
             script->functionTemp[1] = 0;
-            fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 40, &emoteTemp);
+            fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0x28, &emoteTemp);
             enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
         } else if (enemy->flags & ENEMY_FLAGS_40000000) {
             script->functionTemp[0] = 12;
@@ -59,8 +68,10 @@ ApiStatus N(UnkNpcAIMainFunc5)(Evt* script, s32 isInitialCall) {
     if (enemy->varTable[9] > 0) {
         enemy->varTable[9]--;
         if (enemy->varTable[9] == 0) {
-            if (npc->currentAnim.w == 0x55002E || npc->currentAnim.w == 0x55002F) {
-                npc->currentAnim.w = 0x55000C;
+            if (npc->currentAnim.w == NPC_ANIM_bony_beetle_Palette_00_Anim_2E ||
+                npc->currentAnim.w == NPC_ANIM_bony_beetle_Palette_00_Anim_2F)
+            {
+                npc->currentAnim.w = NPC_ANIM_bony_beetle_Palette_00_Anim_C;
             }
         } else {
             return ApiStatus_BLOCK;
@@ -81,11 +92,11 @@ ApiStatus N(UnkNpcAIMainFunc5)(Evt* script, s32 isInitialCall) {
                     if (enemy->varTable[8] != 0) {
                         enemy->varTable[8] = 0;
                         enemy->unk_B5 = 0;
-                        npc->currentAnim.w = 0x55002F;
+                        npc->currentAnim.w = NPC_ANIM_bony_beetle_Palette_00_Anim_2F;
                     } else {
                         enemy->varTable[8] = 1;
                         enemy->unk_B5 = 1;
-                        npc->currentAnim.w = 0x55002E;
+                        npc->currentAnim.w = NPC_ANIM_bony_beetle_Palette_00_Anim_2E;
                     }
                     enemy->varTable[9] = 7;
                     return ApiStatus_BLOCK;
@@ -117,14 +128,14 @@ ApiStatus N(UnkNpcAIMainFunc5)(Evt* script, s32 isInitialCall) {
             enemy->unk_B5 = 0;
         }
         if (enemy->varTable[8] != 0) {
-            switch (npc->currentAnim.w - 0x550004) {
-                case 0:
-                case 8:
-                case 10:
-                case 12:
-                case 14:
-                case 18:
-                case 20:
+            switch (npc->currentAnim.w) {
+                case NPC_ANIM_bony_beetle_Palette_00_Anim_4:
+                case NPC_ANIM_bony_beetle_Palette_00_Anim_C:
+                case NPC_ANIM_bony_beetle_Palette_00_Anim_E:
+                case NPC_ANIM_bony_beetle_Palette_00_Anim_10:
+                case NPC_ANIM_bony_beetle_Palette_00_Anim_12:
+                case NPC_ANIM_bony_beetle_Palette_00_Anim_16:
+                case NPC_ANIM_bony_beetle_Palette_00_Anim_18:
                     npc->currentAnim.w++;
                     break;
             }

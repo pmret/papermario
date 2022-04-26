@@ -2,7 +2,7 @@
 #include "npc.h"
 #include "effects.h"
 
-void N(UnkNpcAIFunc39)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(HoppingAI_Chase)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 posX, posY, posZ, posW;

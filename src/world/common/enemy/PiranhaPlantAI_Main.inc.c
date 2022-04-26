@@ -32,37 +32,37 @@ s32 N(PiranhaPlantAI_Main)(Evt* script, s32 isInitialCall) {
     }
 
     switch (script->AI_TEMP_STATE) {
-    case AI_STATE_PIRANHA_PLANT_00:
-        N(PiranhaPlantAI_00)(script, npcAISettings, territoryPtr);
-    case AI_STATE_PIRANHA_PLANT_01:
-        N(PiranhaPlantAI_01)(script, npcAISettings, territoryPtr);
-        break;
-    case AI_STATE_PIRANHA_PLANT_10:
-        N(PiranhaPlantAI_10)(script, npcAISettings, territoryPtr);
-        if (script->AI_TEMP_STATE != AI_STATE_PIRANHA_PLANT_11) {
-             break;
-        }
-    case AI_STATE_PIRANHA_PLANT_11:
-        N(PiranhaPlantAI_11)(script, npcAISettings, territoryPtr);
-        if (script->AI_TEMP_STATE != AI_STATE_PIRANHA_PLANT_12) {
-             break;
-        }
-    case AI_STATE_PIRANHA_PLANT_12:
-        N(PiranhaPlantAI_12)(script, npcAISettings, territoryPtr);
-        if (script->AI_TEMP_STATE != AI_STATE_PIRANHA_PLANT_13) {
-             break;
-        }
-    case AI_STATE_PIRANHA_PLANT_13:
-        N(PiranhaPlantAI_13)(script, npcAISettings, territoryPtr);
-        if (script->AI_TEMP_STATE != AI_STATE_PIRANHA_PLANT_14) {
-             break;
-        }
-    case AI_STATE_PIRANHA_PLANT_14:
-        N(PiranhaPlantAI_14)(script, npcAISettings, territoryPtr);
-        break;
-    case AI_STATE_SUSPEND:
-        basic_ai_suspend(script);
-        break;
+        case AI_STATE_PIRANHA_PLANT_00:
+            N(PiranhaPlantAI_00)(script, npcAISettings, territoryPtr);
+        case AI_STATE_PIRANHA_PLANT_01:
+            N(PiranhaPlantAI_01)(script, npcAISettings, territoryPtr);
+            break;
+        case AI_STATE_PIRANHA_PLANT_10:
+            N(PiranhaPlantAI_10)(script, npcAISettings, territoryPtr);
+            if (script->AI_TEMP_STATE != AI_STATE_PIRANHA_PLANT_11) {
+                break;
+            }
+        case AI_STATE_PIRANHA_PLANT_11:
+            N(PiranhaPlantAI_11)(script, npcAISettings, territoryPtr);
+            if (script->AI_TEMP_STATE != AI_STATE_PIRANHA_PLANT_12) {
+                break;
+            }
+        case AI_STATE_PIRANHA_PLANT_12:
+            N(PiranhaPlantAI_12)(script, npcAISettings, territoryPtr);
+            if (script->AI_TEMP_STATE != AI_STATE_PIRANHA_PLANT_13) {
+                break;
+            }
+        case AI_STATE_PIRANHA_PLANT_13:
+            N(PiranhaPlantAI_13)(script, npcAISettings, territoryPtr);
+            if (script->AI_TEMP_STATE != AI_STATE_PIRANHA_PLANT_14) {
+                break;
+            }
+        case AI_STATE_PIRANHA_PLANT_14:
+            N(PiranhaPlantAI_14)(script, npcAISettings, territoryPtr);
+            break;
+        case AI_STATE_SUSPEND:
+            basic_ai_suspend(script);
+            break;
     }
-    return 0;
+    return ApiStatus_BLOCK;
 }

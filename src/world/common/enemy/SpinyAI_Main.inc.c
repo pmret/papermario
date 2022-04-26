@@ -1,11 +1,13 @@
-#include "dead.h"
 #include "common.h"
 #include "npc.h"
 #include "effects.h"
-#include "dead_structs.h"
 
-ApiStatus N(Dead_LakituAI_Main)(Evt* script, s32 isInitialCall) {
+ApiStatus N(SpinyAI_Main)(Evt* script, s32 isInitialCall) {
+    #ifdef _DEAD_H_
     DeadEnemy* enemy = (DeadEnemy*)script->owner1.enemy;
+    #else
+    Enemy* enemy = script->owner1.enemy;
+    #endif
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;
     EnemyTerritoryThing territory;
@@ -24,11 +26,13 @@ ApiStatus N(Dead_LakituAI_Main)(Evt* script, s32 isInitialCall) {
     territory.halfHeight = 65.0f;
     territory.unk_1C = 0;
 
+    #ifdef _DEAD_H_
     enemy->unk_108.x = npc->pos.x;
     enemy->unk_108.y = npc->pos.y;
     enemy->unk_108.z = npc->pos.z;
     enemy->unk_114 = 0.0001f;
     enemy->unk_118 = 0.0001f;
+    #endif
 
     if (isInitialCall) {
         enemy->varTable[6] = npc->collisionHeight;
@@ -36,7 +40,7 @@ ApiStatus N(Dead_LakituAI_Main)(Evt* script, s32 isInitialCall) {
     }
 
     if (isInitialCall || (enemy->varTable[10] == 100)) {
-        script->functionTemp[0] = 100;
+        script->AI_TEMP_STATE = 100;
         npc->duration = 0;
         npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
         npc->flags &= ~NPC_FLAG_JUMPING;
@@ -59,22 +63,21 @@ ApiStatus N(Dead_LakituAI_Main)(Evt* script, s32 isInitialCall) {
             npc->moveSpeed = 0.0f;
             npc->jumpVelocity = 0.0f;
             npc->jumpScale = 1.0f;
-            script->functionTemp[0] = 102;
+            script->AI_TEMP_STATE = 102;
         } else {
             s32 emoteTemp;
-
             fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0x28, &emoteTemp);
             npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
             script->functionTemp[1] = 0;
-            script->functionTemp[0] = 200;
+            script->AI_TEMP_STATE = 200;
         }
     }
     get_screen_coords(0, npc->pos.x, npc->pos.y, npc->pos.z, &x, &y, &z);
-    if (script->functionTemp[0] < 100 && x + 50 >= 421) {
-        script->functionTemp[0] = 110;
+    if (script->AI_TEMP_STATE < 100 && x + 50 >= 421) {
+        script->AI_TEMP_STATE = 110;
     }
 
-    switch (script->functionTemp[0]) {
+    switch (script->AI_TEMP_STATE) {
         case 0:
             basic_ai_wander_init(script, aiSettings, territoryPtr);
             npc->collisionHeight = enemy->varTable[6];
@@ -127,7 +130,7 @@ ApiStatus N(Dead_LakituAI_Main)(Evt* script, s32 isInitialCall) {
             npc->flags &= ~NPC_FLAG_GRAVITY;
             npc->renderYaw = 0.0f;
             npc->currentAnim.w = 0x4A0018;
-            script->functionTemp[0] = 101;
+            script->AI_TEMP_STATE = 101;
         case 101:
             if (enemy->varTable[10] != 3) {
                 break;
@@ -138,7 +141,7 @@ ApiStatus N(Dead_LakituAI_Main)(Evt* script, s32 isInitialCall) {
             npc->jumpVelocity = 8.0f;
             npc->jumpScale = 0.8f;
             npc->flags |= NPC_FLAG_JUMPING;
-            script->functionTemp[0] = 102;
+            script->AI_TEMP_STATE = 102;
         case 102:
             if (npc->moveSpeed > 0.0) {
                 x2 = npc->pos.x;
@@ -186,7 +189,7 @@ ApiStatus N(Dead_LakituAI_Main)(Evt* script, s32 isInitialCall) {
                     npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
                     npc->currentAnim.w = 0x4A001A;
                     npc->duration = 3;
-                    script->functionTemp[0] = 103;
+                    script->AI_TEMP_STATE = 103;
                     break;
                 }
             }
@@ -198,7 +201,7 @@ ApiStatus N(Dead_LakituAI_Main)(Evt* script, s32 isInitialCall) {
             if (npc->duration <= 0) {
                 npc->flags &= ~NPC_FLAG_40000;
                 npc->currentAnim.w = 0x4A0001;
-                script->functionTemp[0] = 0;
+                script->AI_TEMP_STATE = 0;
             }
             break;
         case 110:
@@ -208,12 +211,12 @@ ApiStatus N(Dead_LakituAI_Main)(Evt* script, s32 isInitialCall) {
             npc->pos.y = -1000.0f;
             npc->flags |= NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_2;
             npc->flags &= ~NPC_FLAG_GRAVITY;
-            script->functionTemp[0] = 111;
+            script->AI_TEMP_STATE = 111;
         case 111:
             npc->duration--;
             if (npc->duration <= 0) {
                 enemy->varTable[10] = 0;
-                script->functionTemp[0] = 100;
+                script->AI_TEMP_STATE = 100;
             }
             break;
         case 200:

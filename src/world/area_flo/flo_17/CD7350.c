@@ -366,7 +366,7 @@ EvtScript N(npcAI_80244520) = {
     EVT_CALL(SetSelfVar, 3, 18)
     EVT_CALL(SetSelfVar, 5, 3)
     EVT_CALL(SetSelfVar, 7, 4)
-    EVT_CALL(N(LakituAI_Main), EVT_PTR(N(npcAISettings_802444F0)))
+    EVT_CALL(N(SpinyAI_Main), EVT_PTR(N(npcAISettings_802444F0)))
     EVT_RETURN
     EVT_END
 };
@@ -904,4 +904,4 @@ INCLUDE_ASM(ApiStatus, "world/area_flo/flo_17/CD7350", flo_17_func_80241C64_CD8F
             s32 isInitialCall);
 #endif
 
-#include "world/common/enemy/LakituAI.inc.c"
+#include "world/common/enemy/SpinyAI.inc.c"

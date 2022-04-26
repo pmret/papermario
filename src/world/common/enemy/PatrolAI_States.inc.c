@@ -1,5 +1,5 @@
-#ifndef AI_PATROL_H
-#define AI_PATROL_H 0
+#ifndef _AI_PATROL_INC_
+#define _AI_PATROL_INC_ 0
 
 #include "world/common/enemy/state/PatrolAI_MoveInit.inc.c"
 #include "world/common/enemy/state/PatrolAI_Move.inc.c"

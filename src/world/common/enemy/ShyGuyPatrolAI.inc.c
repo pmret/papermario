@@ -113,55 +113,54 @@ ApiStatus N(ShyGuyPatrolAI_Main)(Evt* script, s32 isInitialCall) {
     }
     
     switch (script->functionTemp[0]) {
-    case 0x0:
-        N(PatrolAI_MoveInit)(script, aiSettings, territoryPtr);
-        // fallthrough
-    case 0x1:
-        N(PatrolAI_Move)(script, aiSettings, territoryPtr);
-        break;
-    case 0x2:
-        N(PatrolAI_LoiterInit)(script, aiSettings, territoryPtr);
-        // fallthrough
-    case 0x3:
-        N(PatrolAI_Loiter)(script, aiSettings, territoryPtr);
-        break;
-    case 0x4:
-        N(PatrolAI_PostLoiter)(script, aiSettings, territoryPtr);
-        break;
-    case 0xA:
-        N(PatrolAI_JumpInit)(script, aiSettings, territoryPtr);
-        // fallthrough
-    case 0xB:
-        N(PatrolAI_Jump)(script, aiSettings, territoryPtr);
-        break;
-    case 0xC:
-        N(FlyingNoAttackAI_12)(script, aiSettings, territoryPtr);
-        // fallthrough
-    case 0xD:
-        N(PatrolAI_Chase)(script, aiSettings, territoryPtr);
-        break;
-    case 0xE:
-        N(ShyGuyPatrolAI_14)(script, aiSettings, territoryPtr);
-        if (script->functionTemp[0] != 0xF) {
+        case 0x0:
+            N(PatrolAI_MoveInit)(script, aiSettings, territoryPtr);
+            // fallthrough
+        case 0x1:
+            N(PatrolAI_Move)(script, aiSettings, territoryPtr);
             break;
-        }
-    case 0xF:
-        N(ShyGuyPatrolAI_15)(script, aiSettings, territoryPtr);
-        if (script->functionTemp[0] != 0x10) {
+        case 0x2:
+            N(PatrolAI_LoiterInit)(script, aiSettings, territoryPtr);
+            // fallthrough
+        case 0x3:
+            N(PatrolAI_Loiter)(script, aiSettings, territoryPtr);
             break;
-        }
-    case 0x10:
-        N(ShyGuyPatrolAI_16)(script, aiSettings, territoryPtr);
-        if (script->functionTemp[0] != 0x11) {
+        case 0x4:
+            N(PatrolAI_PostLoiter)(script, aiSettings, territoryPtr);
             break;
-        }
-    case 0x11:
-        N(ShyGuyPatrolAI_17)(script, aiSettings, territoryPtr);
-        break;
-    case 0x63:
-        basic_ai_suspend(script);
-        break;
+        case 0xA:
+            N(PatrolAI_JumpInit)(script, aiSettings, territoryPtr);
+            // fallthrough
+        case 0xB:
+            N(PatrolAI_Jump)(script, aiSettings, territoryPtr);
+            break;
+        case 0xC:
+            N(FlyingNoAttackAI_12)(script, aiSettings, territoryPtr);
+            // fallthrough
+        case 0xD:
+            N(PatrolAI_Chase)(script, aiSettings, territoryPtr);
+            break;
+        case 0xE:
+            N(ShyGuyPatrolAI_14)(script, aiSettings, territoryPtr);
+            if (script->functionTemp[0] != 0xF) {
+                break;
+            }
+        case 0xF:
+            N(ShyGuyPatrolAI_15)(script, aiSettings, territoryPtr);
+            if (script->functionTemp[0] != 0x10) {
+                break;
+            }
+        case 0x10:
+            N(ShyGuyPatrolAI_16)(script, aiSettings, territoryPtr);
+            if (script->functionTemp[0] != 0x11) {
+                break;
+            }
+        case 0x11:
+            N(ShyGuyPatrolAI_17)(script, aiSettings, territoryPtr);
+            break;
+        case 0x63:
+            basic_ai_suspend(script);
+            break;
     }
-    
     return ApiStatus_BLOCK;
 }
