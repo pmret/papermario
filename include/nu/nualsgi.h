@@ -210,7 +210,7 @@ extern ALBankFile*	nuAuSndBank_ptr;
 extern ALSndId*       	nuAuSndId;
 extern ALSynConfig	nuAuSynConfig;
 extern ALSeqpConfig	nuAuSeqpConfig;
-extern ALSndpConfig	nuAnSndpConfig;
+extern ALSndpConfig	nuAuSndpConfig;
 extern u8		nuAuTaskStop;
 extern u8		nuAuPreNMI;
 extern NUAuPreNMIFunc	nuAuPreNMIFunc;
@@ -239,9 +239,6 @@ extern u32		nuAuDebAcmdLenMax;	/* Maximum length of the audio command list */
 
 extern s16		nuAuFrameSampleSize;	/* Number of samples created at one time */
 extern s16		nuAuExtraSampleSize;	/* Number of extra samples */
-extern ALSynConfig	nuAuSynConfig;
-extern ALSeqpConfig	nuAuSeqpConfig;
-extern ALSndpConfig	nuAuSndpConfig;
 
 /*----------------------------------------------------------------------*/
 /*----------------------------------------------------------------------*/

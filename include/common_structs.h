@@ -1220,7 +1220,7 @@ typedef struct ItemEntity {
     /* 0x28 */ u32* savedReadPos;
     /* 0x2C */ char unk_2C[2];
     /* 0x2E */ u8 unkCounter;
-    /* 0x2F */ u8 unk_2F;
+    /* 0x2F */ u8 alpha;
     /* 0x30 */ f32 scale;
     /* 0x34 */ Vec3s unk_34;
     /* 0x3A */ char unk_3A[2];
@@ -2111,9 +2111,9 @@ typedef struct SaveData {
     /* 0x1304 */ char unk_1304[0x7C];
 } SaveData; // size = 0x1380
 
-typedef struct {
+typedef struct Path {
     /* 0x00 */ s32 numVectors;
-    /* 0x04 */ s32 unk_04;
+    /* 0x04 */ f32* unk_04;
     /* 0x08 */ Vec3f* staticVectorList;
     /* 0x0C */ Vec3f* vectors;
     /* 0x10 */ s32 timeElapsed;

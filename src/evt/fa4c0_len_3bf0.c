@@ -1,7 +1,9 @@
 #include "common.h"
+#include "pause/pause_common.h"
+#include "hud_element.h"
 
-extern Bytecode D_802D9D34[0];
-extern s32 D_802DB7D0;
+extern EvtScript D_802D9D34;
+extern s32* D_802DB7D0;
 extern s32 D_802DB7D8[10];
 extern s32 D_802DB800[10];
 s32 func_802D5B10();
@@ -17,9 +19,10 @@ EvtScript D_802D9D34 = {
 INCLUDE_ASM(s32, "evt/fa4c0_len_3bf0", func_802D5B10);
 
 ApiStatus func_802D5C70(Evt* script) {
+    Bytecode* args = script->ptrReadPos;
     s32 i;
 
-    D_802DB7D0 = evt_get_variable(script, *script->ptrReadPos);
+    D_802DB7D0 = evt_get_variable(script, *args++);
 
     for (i = 0; i < ARRAY_COUNT(D_802DB7D8); i++) {
         D_802DB7D8[i] = 0;
@@ -477,14 +480,14 @@ ApiStatus SetItemFlags(Evt* script, s32 isInitialCall) {
     }
     return ApiStatus_DONE2;
 }
-;
+
 ApiStatus SetItemAlpha(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 itemEntityIndex = evt_get_variable(script, *args++);
-    s32 var2 = evt_get_variable(script, *args++);
+    s32 alpha = evt_get_variable(script, *args++);
     ItemEntity* itemEntity = get_item_entity(itemEntityIndex);
 
-    itemEntity->unk_2F = var2;
+    itemEntity->alpha = alpha;
     return ApiStatus_DONE2;
 }
 
@@ -523,13 +526,16 @@ ApiStatus ShowGotItem(Evt* script, s32 isInitialCall) {
 
     switch (script->functionTemp[0]) {
         case 0:
-            script->functionTemp[1] = make_item_entity_at_player(evt_get_variable(script, *args++), evt_get_variable(script, *args++), *args++);
+            script->functionTemp[1] = make_item_entity_at_player(evt_get_variable(script, *args++),
+                                                                 evt_get_variable(script, *args++),
+                                                                 *args++);
             script->functionTemp[0] = 1;
             break;
         case 1:
             if (get_item_entity(script->functionTemp[1]) == NULL) {
                 return ApiStatus_DONE2;
             }
+            break;
     }
     return ApiStatus_BLOCK;
 }

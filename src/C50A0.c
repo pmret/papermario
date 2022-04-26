@@ -523,7 +523,7 @@ void func_8013559C(ItemEntity* itemEntity) {
                 }
             } else {
                 if (physicsData->unk_1C < 0xA) {
-                    itemEntity->unk_2F = physicsData->unk_1C * 28;
+                    itemEntity->alpha = physicsData->unk_1C * 28;
                     itemEntity->flags |= 0x80000;
                 }
             }
