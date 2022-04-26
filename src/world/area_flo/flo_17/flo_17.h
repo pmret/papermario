@@ -7,7 +7,7 @@
 #define NAMESPACE flo_17
 
 ApiStatus N(func_80240000_CD72E0)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_80241C64_CD8F44)(Evt* script, s32 isInitialCall);
+ApiStatus N(LakituAI_Main)(Evt* script, s32 isInitialCall);
 ApiStatus N(SpinyAI_Main)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_80240040_CD7320)(Evt *script, s32 isInitialCall);
 

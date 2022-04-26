@@ -8,7 +8,7 @@ dlabel jtbl_80247B58_EE6518
 
 .section .text
 
-glabel func_80242684_EE1044
+glabel EDEA00_LungeAI_Main
 /* EE1044 80242684 27BDFF90 */  addiu     $sp, $sp, -0x70
 /* EE1048 80242688 AFB3005C */  sw        $s3, 0x5c($sp)
 /* EE104C 8024268C 0080982D */  daddu     $s3, $a0, $zero

@@ -67,10 +67,10 @@ ApiStatus N(ProjectileAI_Main)(Evt* script, s32 isInitialCall) {
         case AI_STATE_LOITER:
             basic_ai_loiter(script, settings, territoryPtr);
             break;
-        case AI_STATE_JUMP_INIT:
+        case AI_STATE_ALERT_INIT:
             basic_ai_found_player_jump_init(script, settings, territoryPtr);
             // fallthrough
-        case AI_STATE_JUMP:
+        case AI_STATE_ALERT:
             basic_ai_found_player_jump(script, settings, territoryPtr);
             break;
         case AI_STATE_CHASE_INIT:

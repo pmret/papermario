@@ -33,7 +33,7 @@ s32 N(ProjectileHitbox_GetUsableProjectileID)(Evt* script) {
 
         // choose the first idle projectile hitbox
         for (i = 0; i < enemy->VAR_PROJECTILE_COUNT; i++) {
-            s32 projectileNpcID = enemy->npcID + + i + 1;
+            s32 projectileNpcID = enemy->npcID + i + 1;
             Enemy* projectileEnemy = get_enemy(projectileNpcID);
 
             get_npc_unsafe(projectileNpcID);

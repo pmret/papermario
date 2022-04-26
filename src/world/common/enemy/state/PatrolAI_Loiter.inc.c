@@ -13,7 +13,7 @@ void N(PatrolAI_Loiter)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryTh
         if (!(enemy->npcSettings->unk_2A & AI_ACTION_JUMP_WHEN_SEE_PLAYER)) {
             script->AI_TEMP_STATE = AI_STATE_CHASE_INIT;
         } else {
-            script->AI_TEMP_STATE = AI_STATE_JUMP_INIT;
+            script->AI_TEMP_STATE = AI_STATE_ALERT_INIT;
         }
         return;
     }

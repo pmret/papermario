@@ -235,7 +235,7 @@ ApiStatus N(ClubbaNappingAI_Main)(Evt* script, s32 isInitialCall) {
         enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
     }
 
-    if (script->AI_TEMP_STATE >= AI_STATE_JUMP_INIT
+    if (script->AI_TEMP_STATE >= AI_STATE_ALERT_INIT
             && script->AI_TEMP_STATE < AI_STATE_MELEE_HITBOX_INIT
             && enemy->AI_VAR_ATTACK_STATE == MELEE_HITBOX_STATE_NONE
             && N(MeleeHitbox_CanSeePlayer)(script)) {

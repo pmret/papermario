@@ -80,10 +80,10 @@ ApiStatus N(WanderMeleeAI_Main)(Evt *script, s32 isInitialCall) {
         case AI_STATE_LOITER:
             basic_ai_loiter(script, npcAISettings, territoryPtr);
             break;
-        case AI_STATE_JUMP_INIT:
+        case AI_STATE_ALERT_INIT:
             basic_ai_found_player_jump_init(script, npcAISettings, territoryPtr);
             // fallthrough
-        case AI_STATE_JUMP:
+        case AI_STATE_ALERT:
             basic_ai_found_player_jump(script, npcAISettings, territoryPtr);
             break;
         case AI_STATE_CHASE_INIT:

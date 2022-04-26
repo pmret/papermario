@@ -10,5 +10,5 @@ void N(PatrolAI_JumpInit)(Evt* script, NpcAISettings* aiSettings, EnemyTerritory
     npc->jumpScale = 2.0f;
     npc->moveToPos.y = npc->pos.y;
     npc->flags |= NPC_FLAG_JUMPING;
-    script->functionTemp[0] = AI_STATE_JUMP;
+    script->functionTemp[0] = AI_STATE_ALERT;
 }

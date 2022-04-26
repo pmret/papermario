@@ -295,7 +295,7 @@ void basic_ai_wander(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing
                     enemy->aiFlags &= ~ENEMY_AI_FLAGS_20;
 
                     if (enemy->npcSettings->unk_2A & AI_ACTION_JUMP_WHEN_SEE_PLAYER) {
-                        script->AI_TEMP_STATE = AI_STATE_JUMP_INIT;
+                        script->AI_TEMP_STATE = AI_STATE_ALERT_INIT;
                     } else {
                         script->AI_TEMP_STATE = AI_STATE_CHASE_INIT;
                     }
@@ -388,7 +388,7 @@ void basic_ai_loiter(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing
             ai_enemy_play_sound(npc, SOUND_2F4, 0x200000);
             fx_emote(EMOTE_EXCLAMATION, npc, 0, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &emoteTemp);
             if (enemy->npcSettings->unk_2A & AI_ACTION_JUMP_WHEN_SEE_PLAYER) {
-                script->AI_TEMP_STATE = AI_STATE_JUMP_INIT;
+                script->AI_TEMP_STATE = AI_STATE_ALERT_INIT;
             } else {
                 script->AI_TEMP_STATE = AI_STATE_CHASE_INIT;
             }
@@ -423,7 +423,7 @@ void basic_ai_found_player_jump_init(Evt* script, NpcAISettings* npcAISettings, 
     npc->jumpScale = 2.5f;
     npc->moveToPos.y = npc->pos.y;
     npc->flags |= NPC_FLAG_JUMPING;
-    script->functionTemp[0] = AI_STATE_JUMP;
+    script->functionTemp[0] = AI_STATE_ALERT;
 }
 
 void basic_ai_found_player_jump(Evt* script, NpcAISettings* npcAISettings, EnemyTerritoryThing* territory) {
@@ -593,10 +593,10 @@ ApiStatus BasicAI_Main(Evt* script, s32 isInitialCall) {
         case AI_STATE_LOITER:
             basic_ai_loiter(script, aiSettings, pTerritory);
             break;
-        case AI_STATE_JUMP_INIT:
+        case AI_STATE_ALERT_INIT:
             basic_ai_found_player_jump_init(script, aiSettings, pTerritory);
             // fallthrough
-        case AI_STATE_JUMP:
+        case AI_STATE_ALERT:
             basic_ai_found_player_jump(script, aiSettings, pTerritory);
             break;
         case AI_STATE_CHASE_INIT:

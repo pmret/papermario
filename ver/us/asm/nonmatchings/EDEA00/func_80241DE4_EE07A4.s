@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_80241DE4_EE07A4
+glabel EDEA00_LakituAI_Main
 /* EE07A4 80241DE4 27BDFF98 */  addiu     $sp, $sp, -0x68
 /* EE07A8 80241DE8 AFB40050 */  sw        $s4, 0x50($sp)
 /* EE07AC 80241DEC 0080A02D */  daddu     $s4, $a0, $zero
@@ -101,7 +101,7 @@ glabel func_80241DE4_EE07A4
 .L80241F54:
 /* EE0914 80241F54 0280202D */  daddu     $a0, $s4, $zero
 /* EE0918 80241F58 02C0282D */  daddu     $a1, $s6, $zero
-/* EE091C 80241F5C 0C0905CC */  jal       func_80241730_EE00F0
+/* EE091C 80241F5C 0C0905CC */  jal       EDEA00_LakituAI_Wander
 /* EE0920 80241F60 02A0302D */   daddu    $a2, $s5, $zero
 /* EE0924 80241F64 080907E3 */  j         .L80241F8C
 /* EE0928 80241F68 00000000 */   nop
@@ -113,7 +113,7 @@ glabel func_80241DE4_EE07A4
 /* EE093C 80241F7C 0280202D */  daddu     $a0, $s4, $zero
 .L80241F80:
 /* EE0940 80241F80 02C0282D */  daddu     $a1, $s6, $zero
-/* EE0944 80241F84 0C0906E5 */  jal       func_80241B94_EE0554
+/* EE0944 80241F84 0C0906E5 */  jal       EDEA00_LakituAI_Loiter
 /* EE0948 80241F88 02A0302D */   daddu    $a2, $s5, $zero
 .L80241F8C:
 /* EE094C 80241F8C 8E830070 */  lw        $v1, 0x70($s4)
@@ -128,7 +128,7 @@ glabel func_80241DE4_EE07A4
 /* EE096C 80241FAC 8C460028 */  lw        $a2, 0x28($v0)
 /* EE0970 80241FB0 0C00ABDC */  jal       fio_validate_header_checksums
 /* EE0974 80241FB4 8C470030 */   lw       $a3, 0x30($v0)
-/* EE0978 80241FB8 0C0905BA */  jal       func_802416E8_EE00A8
+/* EE0978 80241FB8 0C0905BA */  jal       EDEA00_LakituAI_GetAvailableSpiny
 /* EE097C 80241FBC E640000C */   swc1     $f0, 0xc($s2)
 /* EE0980 80241FC0 0440000F */  bltz      $v0, .L80242000
 /* EE0984 80241FC4 AE62007C */   sw       $v0, 0x7c($s3)

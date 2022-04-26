@@ -1,7 +1,10 @@
 #include "common.h"
 #include "npc.h"
-#include "dead_structs.h"
 #include "effects.h"
+
+#ifdef _DEAD_H_
+#include "dead_structs.h"
+#endif
 
 ApiStatus N(FlyingAI_Main)(Evt* script, s32 isInitialCall) {
     #ifdef _DEAD_H_
@@ -56,9 +59,9 @@ ApiStatus N(FlyingAI_Main)(Evt* script, s32 isInitialCall) {
         case AI_STATE_LOITER:
             N(FlyingAI_Loiter)(script, aiSettings, territoryPtr);
             break;
-        case AI_STATE_JUMP_INIT:
+        case AI_STATE_ALERT_INIT:
             N(FlyingAI_JumpInit)(script, aiSettings, territoryPtr);
-        case AI_STATE_JUMP:
+        case AI_STATE_ALERT:
             N(FlyingAI_Jump)(script, aiSettings, territoryPtr);
             break;
         case AI_STATE_CHASE_INIT:

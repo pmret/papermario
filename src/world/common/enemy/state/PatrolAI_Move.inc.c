@@ -15,7 +15,7 @@ void N(PatrolAI_Move)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThin
                 fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &emoteTemp);
                 ai_enemy_play_sound(npc, SOUND_2F4, 0x200000);
                 if (enemy->npcSettings->unk_2A & AI_ACTION_JUMP_WHEN_SEE_PLAYER) {
-                    script->AI_TEMP_STATE = AI_STATE_JUMP_INIT;
+                    script->AI_TEMP_STATE = AI_STATE_ALERT_INIT;
                 } else {
                     script->AI_TEMP_STATE = AI_STATE_CHASE_INIT;
                 }

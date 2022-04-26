@@ -4,6 +4,10 @@
 #include "common.h"
 #include "effects.h"
 
+#ifdef _DEAD_H_
+#include "dead_structs.h"
+#endif
+
 void N(MeleeHitbox_30)(Evt* script) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);

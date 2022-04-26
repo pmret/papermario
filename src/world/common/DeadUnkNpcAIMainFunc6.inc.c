@@ -2,8 +2,11 @@
 #include "common.h"
 #include "npc.h"
 #include "effects.h"
-#include "dead_structs.h"
 #include "sprite/npc/bony_beetle.h"
+
+#ifdef _DEAD_H_
+#include "dead_structs.h"
+#endif
 
 ApiStatus N(UnkNpcAIMainFunc6)(Evt* script, s32 isInitialCall) {
     DeadEnemy* enemy = (DeadEnemy*)script->owner1.enemy;
