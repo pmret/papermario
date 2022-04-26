@@ -1578,9 +1578,9 @@ typedef struct SelectableTarget {
     /* 0x0C */ s16 unk_0C;
     /* 0x0E */ s16 unk_0E;
     /* 0x10 */ s8 unk_10;
-    /* 0x11 */ u8 homeCol; /* from xpos --> 0-3 */
-    /* 0x12 */ u8 homeRow; /* from ypos --> 0-3 */
-    /* 0x13 */ u8 layer; /* from zpos? --> 0-1 */
+    /* 0x11 */ s8 homeCol; /* from xpos --> 0-3 */
+    /* 0x12 */ s8 homeRow; /* from ypos --> 0-3 */
+    /* 0x13 */ s8 layer; /* from zpos? --> 0-1 */
 } SelectableTarget; // size = 0x14
 
 typedef struct ActorPartMovement {

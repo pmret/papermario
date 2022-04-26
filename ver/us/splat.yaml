@@ -3553,7 +3553,7 @@ segments:
     overlay: True
     subsegments:
     - [0x425B50, c, "07"]
-    - [0x426130, data]
+    - [0x426130]
   - type: code
     start: 0x426170
     vram: 0x802A9000

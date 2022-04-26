@@ -2382,99 +2382,97 @@ ApiStatus ChooseNextTarget(Evt* script, s32 isInitialCall) {
 #ifdef NON_MATCHING
 s32 func_8026E558(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    Actor* actor;
-    f32 y;
-    f32 x;
-    f32 z;
-    s32 temp_s0_3;
+    s32 actorID;
     s32 temp_s2;
-    s8 temp_v0_4;
-    SelectableTarget* target;
+    s32 outVar;
+    Actor* actor;
+    f32 x, y, z;
+    s32 outVal;
     s32 row;
     s32 column;
     s32 layer;
-    s32 phi_a2;
     s32 i;
 
-    actor = (Actor *) evt_get_variable(script, *args++);
+    actorID = evt_get_variable(script, *args++);
     temp_s2 = evt_get_variable(script, *args++);
-    temp_s0_3 = *args++;
+    outVar = *args++;
 
-    if (actor == ACTOR_SELF) {
-        actor = (Actor *) script->owner1.actor;
+    if (actorID == ACTOR_SELF) {
+        actorID = script->owner1.actorID;
     }
 
-    actor = get_actor((s32) actor);
+    actor = get_actor(actorID);
     x = actor->currentPos.x;
     y = actor->currentPos.y;
     z = actor->currentPos.z;
+
+    outVal = -1;
+
     if (y < 40.0f) {
-        phi_a2 = -1;
         row = 0;
-    } else {
-        phi_a2 = -1;
+    } else if (y < 85.0f) {
         row = 1;
-        if (!(y < 85.0f)) {
-            row = 3;
-            if (y < 100.0f) {
-                row = 2;
-            }
-        }
+    } else if (y < 100.0f) {
+        row = 2;
+    } else {
+        row = 3;
     }
 
-    column = 0;
-    if (!(x < 25.0f)) {
+    if (x < 25.0f) {
+        column = 0;
+    } else if (x < 65.0f) {
         column = 1;
-        if (!(x < 65.0f)) {
-            column = 3;
-            if (x < 105.0f) {
-                column = 2;
-            }
-        }
+    } else if (x < 105.0f) {
+        column = 2;
+    } else {
+        column = 3;
     }
 
-    layer = 1;
     if (z < -30.0f) {
         layer = 0;
+    } else {
+        layer = 1;
     }
 
     switch (temp_s2) {
         case 0:
             for (i = 0; i < actor->targetListLength; i++) {
-                target = &actor->targetData[actor->targetIndexList[i]];
+                SelectableTarget* target = &actor->targetData[actor->targetIndexList[i]];
+
                 if (target->homeCol == column && target->layer == layer && target->homeRow < row) {
                     actor->targetActorID = target->actorID;
                     actor->targetPartIndex = target->partID;
-                    phi_a2 = 0;
+                    outVal = 0;
                 }
             }
             break;
         case 1:
             for (i = 0; i < actor->targetListLength; i++) {
-                target = &actor->targetData[actor->targetIndexList[i]];
+                SelectableTarget* target = &actor->targetData[actor->targetIndexList[i]];
+
                 if (target->homeCol == column && target->layer == layer && target->homeRow < row) {
                     actor->targetActorID = target->actorID;
                     actor->targetPartIndex = target->partID;
-                    phi_a2 = 0;
+                    outVal = 0;
                 }
             }
             break;
         case -1:
             for (i = 0; i < actor->targetListLength; i++) {
-                target = &actor->targetData[actor->targetIndexList[i]];
+                SelectableTarget* target = &actor->targetData[actor->targetIndexList[i]];
+
                 if (target->homeCol == column && target->layer == layer && target->homeRow < row) {
                     actor->targetActorID = target->actorID;
                     actor->targetPartIndex = target->partID;
-                    phi_a2 = 0;
+                    outVal = 0;
                 }
             }
             break;
     }
-    evt_set_variable(script, temp_s0_3, phi_a2);
+    evt_set_variable(script, outVar, outVal);
     return ApiStatus_DONE2;
 }
 #else
-s32 func_8026E558(Evt*, s32);
 INCLUDE_ASM(s32, "actor_api", func_8026E558);
 #endif
 

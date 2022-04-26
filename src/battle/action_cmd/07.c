@@ -7,6 +7,7 @@ extern s32 D_80294280;
 extern s32 D_802A9620;
 extern HudScript HudScript_BlueMeter[];
 extern HudScript HudScript_AButton[];
+extern HudScript HudScript_MashAButton[];
 extern HudScript HudScript_RunAwayOK[];
 
 s32 func_8024FAFC(s32);
@@ -82,7 +83,105 @@ ApiStatus func_802A916C_425CBC(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "battle/action_cmd/07", func_802A9228_425D78);
+void func_802A9228_425D78(void) {
+    ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
+    BattleStatus* battleStatus = &gBattleStatus;
+    s32 id;
+
+    switch (actionCommandStatus->state) {
+        case 0:
+            btl_set_popup_duration(99);
+
+            id = actionCommandStatus->hudElements[0];
+            if (actionCommandStatus->unk_61 != 0) {
+                hud_element_clear_flags(id, 2);
+            }
+            hud_element_set_alpha(id, 0xFF);
+
+            id = actionCommandStatus->hudElements[1];
+            hud_element_set_alpha(id, 0xFF);
+            if (actionCommandStatus->unk_61 != 0) {
+                hud_element_clear_flags(id, 2);
+            }
+
+            id = actionCommandStatus->hudElements[2];
+            hud_element_set_alpha(id, 0xFF);
+            if (actionCommandStatus->unk_61 != 0) {
+                hud_element_clear_flags(id, 2);
+            }
+
+            actionCommandStatus->state = 1;
+            break;
+        case 1:
+            btl_set_popup_duration(99);
+
+            actionCommandStatus->hudElementX += 20;
+            if (actionCommandStatus->hudElementX > 50) {
+                actionCommandStatus->hudElementX = 50;
+            }
+
+            hud_element_set_render_pos(actionCommandStatus->hudElements[0], actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
+            hud_element_set_render_pos(actionCommandStatus->hudElements[1], actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
+            hud_element_set_render_pos(actionCommandStatus->hudElements[2], actionCommandStatus->hudElementX + 31, actionCommandStatus->hudElementY + 14);
+            break;
+        case 10:
+            btl_set_popup_duration(99);
+
+            if (actionCommandStatus->unk_4E != 0) {
+                actionCommandStatus->unk_4E--;
+                return;
+            }
+
+            hud_element_set_script(actionCommandStatus->hudElements[0], HudScript_MashAButton);
+            battleStatus->actionSuccess = 0;
+            D_802A9620 = 1;
+            actionCommandStatus->unk_5D = 0;
+            actionCommandStatus->state = 0xB;
+            actionCommandStatus->unk_54 = actionCommandStatus->unk_52;
+            // fallthrough
+        case 11:
+            btl_set_popup_duration(99);
+
+            if (battleStatus->currentButtonsPressed & BUTTON_A) {
+                s32 fillAmt = battleStatus->unk_434[actionCommandStatus->unk_50] * 6;
+
+                if (actionCommandStatus->unk_5D == 0) {
+                    actionCommandStatus->barFillLevel += fillAmt;
+                }
+            }
+
+            if (actionCommandStatus->barFillLevel > 10000) {
+                actionCommandStatus->barFillLevel = 10000;
+                actionCommandStatus->unk_5D = 3;
+            }
+
+            if (actionCommandStatus->unk_5D != 0) {
+                actionCommandStatus->unk_5D--;
+                if (actionCommandStatus->unk_5D == 0) {
+                    actionCommandStatus->barFillLevel = 0;
+                    battleStatus->actionSuccess++;
+                }
+            }
+
+            battleStatus->unk_84 = actionCommandStatus->barFillLevel / 100;
+
+            if (actionCommandStatus->unk_54 != 0) {
+                actionCommandStatus->unk_54--;
+                return;
+            }
+            btl_set_popup_duration(0);
+            actionCommandStatus->unk_54 = 5;
+            actionCommandStatus->state = 0xC;
+            break;
+        case 12:
+            if (actionCommandStatus->unk_54 != 0) {
+                actionCommandStatus->unk_54--;
+                return;
+            }
+            func_80268C9C();
+            break;
+    }
+}
 
 void func_802A94D8_426028(void) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
