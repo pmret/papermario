@@ -216,7 +216,7 @@ ApiStatus N(FlyingMagikoopaAI_Main)(Evt* script, s32 isInitialCall) {
         script->AI_TEMP_STATE = 10;
     }
 
-    npc->unk_AB = -5;
+    npc->verticalRenderOffset = -5;
 
     if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
         if (enemy->unk_B4 != 0) {

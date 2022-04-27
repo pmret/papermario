@@ -4,7 +4,7 @@
 ApiStatus N(func_80240814_97BE44)(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_safe(script->owner2.npcID);
 
-    npc->unk_AB = npc->collisionHeight;
+    npc->verticalRenderOffset = npc->collisionHeight;
     npc->pos.y -= (f32) npc->collisionHeight;
 
     return ApiStatus_DONE2;
@@ -27,7 +27,7 @@ ApiStatus N(func_802408B4_97BEE4)(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_safe(script->owner2.npcID);
 
     if (isInitialCall) {
-        npc->unk_AB = 0;
+        npc->verticalRenderOffset = 0;
     }
 
     if (npc->flags & 0x1000) {

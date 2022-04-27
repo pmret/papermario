@@ -19,7 +19,7 @@ ApiStatus N(UnkFunc54)(Evt* script, s32 isInitialCall) {
             npc = get_npc_unsafe(enemy->npcID);
 
             if (enemy->varTable[1] & 2) {
-                npc->unk_AB = npc->collisionHeight / 2;
+                npc->verticalRenderOffset = npc->collisionHeight / 2;
             }
 
             if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAGS_4)) {

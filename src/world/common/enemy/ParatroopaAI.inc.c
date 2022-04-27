@@ -119,7 +119,7 @@ ApiStatus N(ParatroopaAI_Main)(Evt* script, s32 isInitialCall) {
         script->AI_TEMP_STATE = 0;
     }
 
-    npc->unk_AB = -3;
+    npc->verticalRenderOffset = -3;
 
     if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
         if (enemy->unk_B4 != 0) {

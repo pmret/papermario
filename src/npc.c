@@ -107,7 +107,7 @@ s32 _create_npc(NpcBlueprint* blueprint, s32** animList, s32 skipLoadingAnims) {
     npc->homePos.y = 0.0f;
     npc->homePos.z = 0.0f;
     npc->unk_96 = 0; // TODO: fix
-    npc->unk_AB = 0;
+    npc->verticalRenderOffset = 0;
     npc->alpha = 255;
     npc->alpha2 = 255;
     npc->jumpScale = 1.0f;
@@ -698,7 +698,7 @@ void appendGfx_npc(Npc* npc) {
     Matrix4f mtx1, mtx2;
     f32 renderYaw = npc_get_render_yaw(npc);
 
-    guTranslateF(mtx1, npc->pos.x, npc->pos.y + npc->unk_AB, npc->pos.z);
+    guTranslateF(mtx1, npc->pos.x, npc->pos.y + npc->verticalRenderOffset, npc->pos.z);
     if (npc->flags & NPC_FLAG_UPSIDE_DOWN) {
         mtx_ident_mirror_y(mtx2);
         guMtxCatF(mtx2, mtx1, mtx1);
@@ -752,7 +752,7 @@ void appendGfx_npc(Npc* npc) {
     }
 
     if (npc->flags & NPC_FLAG_REFLECT_WALL) {
-        guTranslateF(mtx1, npc->pos.x, npc->pos.y + npc->unk_AB, -npc->pos.z);
+        guTranslateF(mtx1, npc->pos.x, npc->pos.y + npc->verticalRenderOffset, -npc->pos.z);
         if (npc->flags & NPC_FLAG_UPSIDE_DOWN) {
             mtx_ident_mirror_y(mtx2);
             guMtxCatF(mtx2, mtx1, mtx1);
@@ -785,7 +785,7 @@ void appendGfx_npc(Npc* npc) {
     }
 
     if (npc->flags & NPC_FLAG_REFLECT_FLOOR) {
-        guTranslateF(mtx1, npc->pos.x, -(npc->pos.y + npc->unk_AB), npc->pos.z);
+        guTranslateF(mtx1, npc->pos.x, -(npc->pos.y + npc->verticalRenderOffset), npc->pos.z);
         mtx_ident_mirror_y(mtx2);
         guMtxCatF(mtx2, mtx1, mtx1);
 

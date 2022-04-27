@@ -23,7 +23,7 @@ ApiStatus N(FlyingNoAttackAI_Main)(Evt* script, s32 isInitialCall) {
         N(FlyingAI_Init)(npc, enemy, script, aiSettings);
         script->functionTemp[0] = 0;
     }
-    npc->unk_AB = -2;
+    npc->verticalRenderOffset = -2;
 
     if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
         if (enemy->unk_B4) {
