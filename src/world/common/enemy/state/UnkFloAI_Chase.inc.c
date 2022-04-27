@@ -23,8 +23,7 @@ void N(UnkFloAI_Chase)(Evt* script, NpcAISettings* npcAISettings, EnemyTerritory
         if (npc->duration > 0) {
             npc->duration--;
             return;
-        } else {
-            script->AI_TEMP_STATE = AI_STATE_CHASE_INIT;
         }
+        script->AI_TEMP_STATE = AI_STATE_CHASE_INIT;
     }
 }

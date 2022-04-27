@@ -130,9 +130,10 @@ s32 N(LakituAI_Main)(Evt* script, s32 isInitialCall) {
             break;
     }
 
-    if ((script->AI_TEMP_STATE - 30) < 2U) {
+    if (script->AI_TEMP_STATE == 30 || script->AI_TEMP_STATE == 31) {
         f32 playerDist;
         f32 lerpDist;
+
         npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
         playerDist = dist2D(gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z, npc->pos.x, npc->pos.z);
         if (!is_point_within_region(territoryPtr->shape,
