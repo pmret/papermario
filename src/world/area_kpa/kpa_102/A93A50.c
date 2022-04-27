@@ -4,7 +4,7 @@
 
 #include "world/common/GetEncounterEnemyIsOwner.inc.c"
 
-#include "world/common/enemy/LungeAI.inc.c"
+#include "world/common/enemy/TackleAI.inc.c"
 
 #include "world/common/UnkNpcAIFunc47.inc.c"
 

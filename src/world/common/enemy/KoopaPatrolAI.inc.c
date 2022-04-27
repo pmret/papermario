@@ -4,7 +4,7 @@
 
 #include "world/common/enemy/PatrolNoAttackAI.inc.c"
 
-#include "world/common/enemy/UnkAI_StateHandlers_A.inc.c"
+#include "world/common/enemy/state/TackleAI_States.inc.c"
 
 ApiStatus N(KoopaPatrolAI_Main)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;

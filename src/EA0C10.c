@@ -32,7 +32,7 @@ INCLUDE_ASM(s32, "EA0C10", func_80240DC4_EA16C4);
 
 #include "world/common/enemy/Dead_PiranhaPlantAI_Main.inc.c"
 
-#include "world/common/enemy/LungeAI.inc.c"
+#include "world/common/enemy/TackleAI.inc.c"
 
 #include "world/common/AwaitPlayerNearNpc.inc.c"
 

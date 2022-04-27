@@ -185,7 +185,7 @@ EvtScript N(npcAI_802414C8) = {
     EVT_CALL(SetSelfVar, 3, 18)
     EVT_CALL(SetSelfVar, 5, 3)
     EVT_CALL(SetSelfVar, 7, 4)
-    EVT_CALL(N(LungeAI_Main), EVT_PTR(N(npcAISettings_80241498)))
+    EVT_CALL(N(TackleAI_Main), EVT_PTR(N(npcAISettings_80241498)))
     EVT_RETURN
     EVT_END
 };
@@ -468,6 +468,6 @@ EvtScript N(makeEntities) = {
 
 #include "world/common/atomic/MakeConsumableChoice.inc.c"
 
-#include "world/common/enemy/LungeAI.inc.c"
+#include "world/common/enemy/TackleAI.inc.c"
 
 #include "world/common/atomic/ItemChoice_FlowerGuard.inc.c"

@@ -3,7 +3,7 @@
 #include "effects.h"
 #include "sprite/npc/bony_beetle.h"
 
-ApiStatus N(LungeAI_Main)(Evt* script, s32 isInitialCall) {
+ApiStatus N(TackleAI_Main)(Evt* script, s32 isInitialCall) {
     #ifdef _DEAD_H_
     DeadEnemy* enemy = (DeadEnemy*)script->owner1.enemy;
     #else

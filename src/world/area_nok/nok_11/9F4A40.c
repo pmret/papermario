@@ -3,7 +3,7 @@
 static char* N(exit_str_0) = "mac_01";
 static char* N(exit_str_1) = "nok_12";
 
-#include "world/common/enemy/LungeAI.inc.c"
+#include "world/common/enemy/TackleAI.inc.c"
 
 #include "world/common/enemy/FlyingAI.inc.c"
 
