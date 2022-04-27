@@ -1,4 +1,5 @@
-#include "world/common/enemy/state/MagikoopaAI_00.inc.c"
+#include "common.h"
+#include "npc.h"
 
 typedef struct MagikoopaTeleportAnim {
     f32 scaleX;
@@ -7,6 +8,19 @@ typedef struct MagikoopaTeleportAnim {
 } MagikoopaTeleportAnim;
 
 extern MagikoopaTeleportAnim N(MagikoopaAI_TeleportAnim)[];
+
+void N(MagikoopaAI_00)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+    Enemy* enemy = script->owner1.enemy;
+    Npc* npc = get_npc_unsafe(enemy->npcID);
+
+    npc->duration--;
+    if (npc->duration <= 0) {
+        npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
+        npc->flags &= ~2;
+        npc->duration = 0;
+        script->AI_TEMP_STATE = 1;
+    }
+}
 
 void N(MagikoopaAI_01)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
@@ -27,10 +41,19 @@ void N(MagikoopaAI_01)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThi
         npc->scale.y = 1.0f;
         npc->scale.z = 1.0f;
         npc->flags |= 2;
-        script->functionTemp[0] = 5;
+        script->AI_TEMP_STATE = 5;
     }
 }
-#include "world/common/enemy/state/MagikoopaAI_05.inc.c"
+
+void N(MagikoopaAI_05)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+    Npc* npc = get_npc_unsafe(script->owner1.enemy->npcID);
+    f32 angle = (rand_int(100) % 2) * 180.0f;
+
+    npc->duration = 15;
+    npc->moveSpeed = 0.8f;
+    npc->yaw = angle + 90.0f;
+    script->AI_TEMP_STATE = 6;
+}
 
 void N(MagikoopaAI_06)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
@@ -69,7 +92,6 @@ void N(MagikoopaAI_10)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThi
     script->AI_TEMP_STATE = 0xB;
 }
 
-
 void N(MagikoopaAI_11)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe((s32) enemy->npcID);
@@ -81,7 +103,7 @@ void N(MagikoopaAI_11)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThi
     } else {
         alpha = (npc->duration * 15) + 30;
     }
-    if (alpha >= 0x100) {
+    if (alpha > 0xFF) {
         alpha = 0xFF;
     }
     npc->alpha = alpha;
@@ -140,7 +162,7 @@ void N(MagikoopaAI_21)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThi
         return;
     }
     if (N(UnkNpcAIFunc47)(script, aiSettings->chaseRadius, aiSettings->unk_28.f, territory) == 1) {
-        ai_enemy_play_sound(npc, 0x20D4, 0);
+        ai_enemy_play_sound(npc, SOUND_SPELL_CAST1, 0);
         npc->currentAnim.w = enemy->animList[8];
         posX = npc->pos.x;
         posY = npc->pos.y + 32.0f;
@@ -176,10 +198,10 @@ void N(MagikoopaAI_23)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThi
         if (projectileEnemy != 1) {
             fx_emote(2, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xC, &emoteTemp);
             npc->currentAnim.w = enemy->animList[0];
-            npc->duration = 0xF;
+            npc->duration = 15;
             script->AI_TEMP_STATE = 0;
         } else {
-            ai_enemy_play_sound(npc, 0x20D5, 0);
+            ai_enemy_play_sound(npc, SOUND_SPELL_CAST2, 0);
             get_enemy(enemy->npcID + 1)->varTable[0] = projectileEnemy;
             npc->duration = 0x14;
             script->AI_TEMP_STATE = 0x18;
