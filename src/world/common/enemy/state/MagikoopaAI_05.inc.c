@@ -1,7 +1,7 @@
 #include "common.h"
 #include "npc.h"
 
-void N(UnkFunc59)(Evt* script, s32 isInitialCall) {
+void N(MagikoopaAI_05)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Npc* npc = get_npc_unsafe(script->owner1.enemy->npcID);
     f32 temp_f0 = (rand_int(100) % 2) * 180.0f;
 

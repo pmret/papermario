@@ -4,11 +4,11 @@
 
 #include "world/common/UnkFunc57.inc.c"
 
-#include "world/common/UnkFunc58.inc.c"
+#include "world/common/enemy/state/MagikoopaAI_00.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_08/A4CAC0", func_802407F4_A4D214);
 
-#include "world/common/UnkFunc59.inc.c"
+#include "world/common/enemy/state/MagikoopaAI_05.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_08/A4CAC0", func_802409C0_A4D3E0);
 
