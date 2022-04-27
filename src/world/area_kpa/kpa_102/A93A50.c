@@ -266,17 +266,17 @@ ApiStatus N(FlyingMagikoopaAI_Main)(Evt* script, s32 isInitialCall) {
             N(FlyingMagikoopaAI_50)(script, aiSettings, territoryPtr);
             break;
     }
-
     return ApiStatus_BLOCK;
 }
 
-// FlyingMagikoopa onHit user functions:
+ApiStatus N(FlyingMagikoopaAI_OnHitInit)(Evt* script, s32 isInitialCall) {
+    Enemy* enemy = script->owner1.enemy;
 
-#define NAMESPACE dup_kpa_102
-#include "world/common/GetEncounterEnemyIsOwner.inc.c"
-#define NAMESPACE kpa_102
+    evt_set_variable(script, EVT_VAR(0), gCurrentEncounter.currentEnemy == enemy);
+    return ApiStatus_DONE2;
+}
 
-ApiStatus func_8024353C_A96C7C(Evt* script, s32 isInitialCall) {
+ApiStatus N(FlyingMagikoopaAI_OnHit)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 

@@ -299,3 +299,41 @@ ApiStatus N(MagikoopaAI_Main)(Evt* script, s32 isInitialCall) {
     }
     return ApiStatus_BLOCK;
 }
+
+ApiStatus N(MagikoopaAI_OnPlayerWon)(Evt* script, s32 isInitialCall) {
+    Enemy* enemy = script->owner1.enemy;
+    Npc* npc = get_npc_unsafe(enemy->npcID);
+
+    npc->alpha = 255;
+    func_802DE894(npc->spriteInstanceID, 0, 0, 0, 0, 0, 0);
+    return ApiStatus_DONE2;
+}
+
+ApiStatus N(MagikoopaAI_OnPlayerFled)(Evt* script, s32 isInitialCall) {
+    Enemy* enemy = script->owner1.enemy;
+    Npc* npc = get_npc_unsafe(enemy->npcID);
+
+    npc->alpha = 255;
+    npc->currentAnim.w = enemy->animList[2];
+    npc->duration = 0;
+    script->functionTemp[0] = 0;
+    return ApiStatus_DONE2;
+}
+
+ApiStatus N(MagikoopaAI_OnHitInit)(Evt* script, s32 isInitialCall) {
+    Enemy* enemy = script->owner1.enemy;
+
+    evt_set_variable(script, EVT_VAR(0), gCurrentEncounter.currentEnemy == enemy);
+    return ApiStatus_DONE2;
+}
+
+ApiStatus N(MagikoopaAI_OnHit)(Evt* script, s32 isInitialCall) {
+    Enemy* enemy = script->owner1.enemy;
+    Npc* npc = get_npc_unsafe(enemy->npcID);
+
+    if (enemy->varTable[0] == 2) {
+        npc->jumpVelocity = 0.0f;
+        npc->moveSpeed = 0.0f;
+    }
+    return ApiStatus_DONE2;
+}
