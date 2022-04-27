@@ -36,8 +36,12 @@ s32 N(LakituAI_Main)(Evt* script, s32 isInitialCall) {
     #endif
 
     if (isInitialCall) {
+        #ifdef _DEAD_H_
+        N(FlyingAI_Init)(npc, (Enemy*)enemy, script, aiSettings);
+        #else
         N(FlyingAI_Init)(npc, enemy, script, aiSettings);
-        script->AI_TEMP_STATE = 0;
+        #endif
+        script->AI_TEMP_STATE = AI_STATE_WANDER_INIT;
     }
     npc->unk_AB = -3;
 
