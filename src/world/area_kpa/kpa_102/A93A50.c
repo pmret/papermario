@@ -30,7 +30,18 @@ INCLUDE_ASM(s32, "world/area_kpa/kpa_102/A93A50", func_80242F74_A966B4);
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_102/A93A50", func_802430A8_A967E8);
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_102/A93A50", func_80243198_A968D8);
+void func_80243198_A968D8(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+    Enemy* enemy = script->owner1.enemy;
+    Npc* npc = get_npc_unsafe(enemy->npcID);
+    f32 basePosY = (f32)enemy->varTable[1] / 100.0;
+    
+    npc->pos.y = basePosY + sin_deg(enemy->varTable[0]) * 6.0;
+    enemy->varTable[0] = clamp_angle(enemy->varTable[0] + 10);
+    npc->duration--;
+    if (npc->duration <= 0) {
+        script->functionTemp[0] = 10;
+    }
+}
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_102/A93A50", func_80243270_A969B0);
 

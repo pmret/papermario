@@ -1,10 +1,10 @@
 // required include args
 #ifndef AI_LAKITU_FIRST_SPINY_ID
-#error  AI_LAKITU_FIRST_SPINY_ID must be defined for LakituAI.inc.c
+#error  AI_LAKITU_FIRST_SPINY_ID must be defined for LakituAI
 #define AI_LAKITU_FIRST_SPINY_ID 0
 #endif
 #ifndef AI_LAKITU_LAST_SPINY_ID
-#error  AI_LAKITU_LAST_SPINY_ID must be defined for LakituAI.inc.c
+#error  AI_LAKITU_LAST_SPINY_ID must be defined for LakituAI
 #define AI_LAKITU_LAST_SPINY_ID 0
 #endif
 

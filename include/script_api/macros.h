@@ -17,7 +17,7 @@
 /// Decimal constant.
 /// Despite the name, "floats" are actually stored as fixed-point values.
 
- // This fixes an issue with fixed point numbers not being correct. POtentially a truncation vs round difference.
+ // This fixes an issue with fixed point numbers not being correct. Potentially a truncation vs round difference.
 #define EVT_FLOAT_ROUND(x) ((x)>=0?(f64)((x) + 0.9):(f64)(x))
 #define EVT_FLOAT(DOUBLE) (((Bytecode)EVT_FLOAT_ROUND((DOUBLE * 1024.0f)) + -230000000))
 
