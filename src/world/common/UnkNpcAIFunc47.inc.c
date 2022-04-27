@@ -1,7 +1,6 @@
 #include "common.h"
 #include "npc.h"
 
-// TODO apiStatus?
 s32 N(UnkNpcAIFunc47)(Evt* script, f32 arg1, f32 arg2, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);

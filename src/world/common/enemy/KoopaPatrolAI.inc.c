@@ -63,13 +63,13 @@ ApiStatus N(KoopaPatrolAI_Main)(Evt* script, s32 isInitialCall) {
         case 0:
             N(PatrolAI_MoveInit)(script, settings, territoryPtr);
             npc->collisionHeight = enemy->varTable[6];
-            /* fallthrough */
+            // fallthrough
         case 1:
             N(PatrolAI_Move)(script, settings, territoryPtr);
             break;
         case 2:
             N(PatrolAI_LoiterInit)(script, settings, territoryPtr);
-            /* fallthrough */
+             // fallthrough
         case 3:
             N(PatrolAI_Loiter)(script, settings, territoryPtr);
             break;
@@ -78,7 +78,7 @@ ApiStatus N(KoopaPatrolAI_Main)(Evt* script, s32 isInitialCall) {
             break;
         case 12:
             N(set_script_owner_npc_anim)(script, settings, territoryPtr);
-            /* fallthrough */
+             // fallthrough
         case 13:
             N(UnkDistFunc)(script, settings, territoryPtr);
             break;
