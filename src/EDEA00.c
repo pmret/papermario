@@ -24,6 +24,9 @@ const char D_80247B44_EE6504[] = "JUGEMU MOVE";
 
 #include "world/common/enemy/LungeAI.inc.c"
 
+//const char D_80247BB8_EE6578[] = "TOGEZO TYPE1 : NORMAL MOVE";
+
+//TODO should be EDEA00_SpinyAI_Main, but the debug string above must somehow be integrated into the function
 INCLUDE_ASM(s32, "EDEA00", func_80242AF0_EE14B0);
 
 #include "world/common/UnkFunc42.inc.c"
