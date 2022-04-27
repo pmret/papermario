@@ -11,7 +11,7 @@ dlabel D_80247BB8_EE6578
 
 .section .text
 
-glabel func_80242AF0_EE14B0
+glabel EDEA00_SpinyAI_Main
 /* EE14B0 80242AF0 27BDFF68 */  addiu     $sp, $sp, -0x98
 /* EE14B4 80242AF4 AFB5007C */  sw        $s5, 0x7c($sp)
 /* EE14B8 80242AF8 0080A82D */  daddu     $s5, $a0, $zero

@@ -7,21 +7,18 @@
 
 #include "world/common/UnkFunc41.inc.c"
 
+// must include this before LakituAI for the debug string to end up in the right position
 #include "world/common/enemy/FlyingAI.inc.c"
 
-// this data prevents a simple LakituAI.inc.c include
 const char D_80247B44_EE6504[] = "JUGEMU MOVE";
 
 #define AI_LAKITU_FIRST_SPINY_ID    50
 #define AI_LAKITU_LAST_SPINY_ID     55
 #include "world/common/enemy/LakituAI.inc.c"
 
-#include "world/common/enemy/LungeAI.inc.c"
+#include "world/common/enemy/SpinyAI.inc.c"
 
-//const char D_80247BB8_EE6578[] = "TOGEZO TYPE1 : NORMAL MOVE";
-
-//TODO should be EDEA00_SpinyAI_Main, but the debug string above must somehow be integrated into the function
-INCLUDE_ASM(s32, "EDEA00", func_80242AF0_EE14B0);
+const char D_80247BB8_EE6578[] = "TOGEZO TYPE1 : NORMAL MOVE";
 
 #include "world/common/UnkFunc42.inc.c"
 
