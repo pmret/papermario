@@ -18,7 +18,51 @@ INCLUDE_ASM(s32, "world/area_kpa/kpa_03/A48720", func_80241368_A49928);
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_03/A48720", func_802413CC_A4998C);
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_03/A48720", func_8024150C_A49ACC);
+void func_8024150C_A49ACC(Evt* arg0, NpcAISettings* arg1, EnemyTerritoryThing* arg2) {
+    Enemy* enemy = arg0->owner1.enemy;
+    Npc* npc = get_npc_unsafe((s32) enemy->npcID);
+    f32 scale;
+    s16 alpha;
+    
+    if (enemy->varTable[0] == 0) {
+        alpha = (npc->duration * 15) + 130;
+    } else {
+        alpha = (npc->duration * 15) + 30;
+    }
+    if (alpha >= 0x100) {
+        alpha = 0xFF;
+    }
+    npc->alpha = alpha;
+    
+    npc->scale.x = ((f32)npc->duration * 0.1) + 0.4;
+    if (npc->scale.x > 1.0) {
+       npc->scale.x = 1.0f;
+    }
+    npc->scale.y = npc->scale.x;
+    npc->scale.z = npc->scale.x;
+    
+    npc->duration++;
+    if (npc->duration == 5) {
+        enable_npc_shadow(npc);
+        enemy->flags &= 0xE0EFFFFF;
+    }
+    if (enemy->varTable[0] == 0) {
+        if (npc->duration >= 20) {
+            func_802DE894(npc->spriteInstanceID, 0, 0, 0, 0, 0, 0);
+            npc->alpha = 0xFF;
+            npc->scale.x = 1.0f;
+            npc->scale.y = 1.0f;
+            npc->scale.z = 1.0f;
+            arg0->functionTemp[0] = 20;
+        }
+    } else if (npc->duration >= 10) {
+        npc->alpha = 0xFF;
+        npc->scale.x = 1.0f;
+        npc->scale.y = 1.0f;
+        npc->scale.z = 1.0f;
+        arg0->functionTemp[0] = 20;
+    }
+}
 
 void func_802416B0_A49C70(Evt* script) {
     get_npc_unsafe(script->owner1.enemy->npcID)->duration = 40;
