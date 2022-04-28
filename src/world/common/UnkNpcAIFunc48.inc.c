@@ -6,7 +6,7 @@ void N(UnkNpcAIFunc48)(Evt* script, f32 arg1, f32 arg2, EnemyDetectVolume* terri
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
-    if (basic_ai_try_detect_player(territory, enemy, arg1, arg2, 1) == 0) {
+    if (basic_ai_check_player_dist(territory, enemy, arg1, arg2, 1) == 0) {
         s32 sp28;
 
         fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &sp28);

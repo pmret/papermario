@@ -80,7 +80,7 @@ void N(UnkFloAI_ChaseInit)(Evt* script, NpcAISettings* npcAISettings, EnemyDetec
         distToPlayer = dist2D(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
 
         if ((distFwd < npc->moveSpeed * 1.5) && (distCW < npc->moveSpeed * 1.5) && (distCCW < npc->moveSpeed * 1.5) &&
-            (basic_ai_try_detect_player(territory, enemy, npcAISettings->alertRadius, npcAISettings->unk_AI_10.f, 0))) {
+            (basic_ai_check_player_dist(territory, enemy, npcAISettings->alertRadius, npcAISettings->unk_AI_10.f, 0))) {
             detectedPlayer = TRUE;
         }
 

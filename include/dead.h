@@ -32,7 +32,7 @@
 #define gPlayerActionState dead_gPlayerActionState
 #define is_point_within_region dead_is_point_within_region
 #define npc_raycast_down_sides dead_npc_raycast_down_sides
-#define basic_ai_try_detect_player dead_basic_ai_try_detect_player
+#define basic_ai_check_player_dist dead_basic_ai_check_player_dist
 #define fx_emote dead_fx_emote
 #define ai_enemy_play_sound dead_ai_enemy_play_sound
 #define npc_move_heading dead_npc_move_heading

@@ -39,7 +39,7 @@ static s32 N(MontyMoleAI_CanAttack)(Evt* script, EnemyDetectVolume* territory, f
     enemy = script->owner1.enemy;
     npc = get_npc_unsafe(enemy->npcID);
     cam = &gCameras[gCurrentCamID];
-    retVal = basic_ai_try_detect_player(territory, enemy, radius * 1.1, arg3, 0) != 0;
+    retVal = basic_ai_check_player_dist(territory, enemy, radius * 1.1, arg3, 0) != 0;
     // check npc facing angle for sight of player
     angle = 270.0f;
     if (clamp_angle(get_clamped_angle_diff(cam->currentYaw, npc->yaw)) < 180.0) {

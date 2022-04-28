@@ -75,10 +75,10 @@ typedef struct NpcAISettings {
     /* 0x04 */ s32 moveTime;
     /* 0x08 */ s32 waitTime;
     /* 0x0C */ f32 alertRadius;
-    /* 0x10 */ X32 unk_AI_10;   // .s only used by Unk4AI
+    /* 0x10 */ X32 unk_AI_10;   // some move speed -- .s form only used by Unk4AI
     /* 0x14 */ s32 playerSearchInterval; // how often to search for player (frames)
     /* 0x18 */ f32 chaseSpeed;
-    /* 0x1C */ X32 unk_AI_1C;   // .f only used by Unk4AI
+    /* 0x1C */ X32 unk_AI_1C;   // .f form only used by Unk4AI
     /* 0x20 */ s32 unk_AI_20;
     /* 0x24 */ f32 chaseRadius;
     /* 0x28 */ f32 unkChase;
@@ -287,7 +287,7 @@ typedef struct Enemy {
     /* 0xDC */ char unk_DC[20];
 } Enemy; // size = 0xF0
 
-s32 basic_ai_try_detect_player(EnemyDetectVolume* arg0, Enemy* arg1, f32 arg2, f32 arg3, s8 arg4);
+s32 basic_ai_check_player_dist(EnemyDetectVolume* arg0, Enemy* arg1, f32 arg2, f32 arg3, s8 arg4);
 
 /// The default Npc::onUpdate and Npc::onRender callback.
 void STUB_npc_callback(Npc*);

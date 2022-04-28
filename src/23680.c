@@ -121,7 +121,7 @@ s32 is_point_within_region(s32 shape, f32 pointX, f32 pointY, f32 centerX, f32 c
     }
 }
 
-s32 basic_ai_try_detect_player(EnemyDetectVolume* territory, Enemy* enemy, f32 radius, f32 moveSpeed, s8 useWorldYaw) {
+s32 basic_ai_check_player_dist(EnemyDetectVolume* territory, Enemy* enemy, f32 radius, f32 moveSpeed, s8 useWorldYaw) {
     Npc* npc = get_npc_unsafe(enemy->npcID);
     PlayerStatus* playerStatus = &gPlayerStatus;
     PartnerActionStatus* partnerActionStatus;
@@ -207,9 +207,10 @@ s32 basic_ai_try_detect_player(EnemyDetectVolume* territory, Enemy* enemy, f32 r
     return FALSE;
 }
 
-s32 func_800493EC(Enemy* enemy, s32 chance, f32 arg2, f32 radius) {
+s32 ai_check_player_dist(Enemy* enemy, s32 chance, f32 radius, f32 moveSpeed) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Npc* npc = get_npc_unsafe(enemy->npcID);
+    f32 posX, posZ;
 
     if (chance >= 0) {
         s32 skipCheckForPlayer;
@@ -221,12 +222,11 @@ s32 func_800493EC(Enemy* enemy, s32 chance, f32 arg2, f32 radius) {
         }
 
         if (skipCheckForPlayer == 0) {
-            f32 x = npc->pos.x;
-            f32 z = npc->pos.z;
+            posX = npc->pos.x;
+            posZ = npc->pos.z;
+            add_vec2D_polar(&posX, &posZ, moveSpeed, 270.0f - npc->renderYaw);
 
-            add_vec2D_polar(&x, &z, radius, 270.0f - npc->renderYaw);
-
-            if (dist2D(x, z, playerStatus->position.x, playerStatus->position.z) <= arg2) {
+            if (dist2D(posX, posZ, playerStatus->position.x, playerStatus->position.z) <= radius) {
                 return TRUE;
             }
         }
@@ -291,7 +291,7 @@ void basic_ai_wander(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* 
     if (aiSettings->playerSearchInterval >= 0) {
         if (script->functionTemp[1] <= 0) {
             script->functionTemp[1] = aiSettings->playerSearchInterval;
-            if (basic_ai_try_detect_player(territory, enemy, aiSettings->alertRadius, aiSettings->unk_AI_10.f, 0)) {
+            if (basic_ai_check_player_dist(territory, enemy, aiSettings->alertRadius, aiSettings->unk_AI_10.f, 0)) {
                 x = npc->pos.x;
                 y = npc->pos.y;
                 z = npc->pos.z;
@@ -387,7 +387,7 @@ void basic_ai_loiter(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* 
     f32 yaw;
     s32 emoteTemp;
 
-    if (aiSettings->playerSearchInterval >= 0 && basic_ai_try_detect_player(territory, enemy, aiSettings->chaseRadius, aiSettings->unkChase, 0)) {
+    if (aiSettings->playerSearchInterval >= 0 && basic_ai_check_player_dist(territory, enemy, aiSettings->chaseRadius, aiSettings->unkChase, 0)) {
         x = npc->pos.x;
         y = npc->pos.y;
         z = npc->pos.z;
@@ -497,7 +497,7 @@ void basic_ai_chase(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* t
     s32 sp28;
     f32 x, y, z;
 
-    if (!basic_ai_try_detect_player(territory, enemy, aiSettings->chaseRadius, aiSettings->unkChase, 1)) {
+    if (!basic_ai_check_player_dist(territory, enemy, aiSettings->chaseRadius, aiSettings->unkChase, 1)) {
         fx_emote(EMOTE_QUESTION, npc, 0, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &sp28);
         npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
         npc->duration = 20;

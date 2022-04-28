@@ -129,7 +129,7 @@ glabel func_802401B0_D54840
 /* D549EC 8024035C AFA00010 */  sw        $zero, 0x10($sp)
 /* D549F0 80240360 8E86000C */  lw        $a2, 0xc($s4)
 /* D549F4 80240364 8E870010 */  lw        $a3, 0x10($s4)
-/* D549F8 80240368 0C01242D */  jal       basic_ai_try_detect_player
+/* D549F8 80240368 0C01242D */  jal       basic_ai_check_player_dist
 /* D549FC 8024036C 0240282D */   daddu    $a1, $s2, $zero
 /* D54A00 80240370 10400006 */  beqz      $v0, .L8024038C
 /* D54A04 80240374 0220202D */   daddu    $a0, $s1, $zero

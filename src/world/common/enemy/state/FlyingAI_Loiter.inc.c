@@ -40,7 +40,7 @@ void N(FlyingAI_Loiter)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolum
 
     if (enemy->varTable[9] <= 0) {
         if ((gPlayerStatusPtr->position.y < npc->pos.y + npc->collisionHeight + 10.0)
-            && basic_ai_try_detect_player(territory, enemy, aiSettings->chaseRadius, aiSettings->unkChase, 1)) {
+            && basic_ai_check_player_dist(territory, enemy, aiSettings->chaseRadius, aiSettings->unkChase, 1)) {
             fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 12, &var);
             npc->moveToPos.y = npc->pos.y;
             ai_enemy_play_sound(npc, SOUND_2F4, 0x200000);

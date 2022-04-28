@@ -12,7 +12,7 @@ s32 N(ProjectileHitbox_GetUsableProjectileID)(Evt* script) {
     f32 deltaAngle;
     s32 i;
 
-    if (func_800493EC(enemy, 0, aiSettings->chaseRadius, aiSettings->unkChase)) {
+    if (ai_check_player_dist(enemy, 0, aiSettings->chaseRadius, aiSettings->unkChase)) {
         if (clamp_angle(get_clamped_angle_diff(camera->currentYaw, npc->yaw)) < 180.0) {
             facingAngle = 90.0f;
         } else {

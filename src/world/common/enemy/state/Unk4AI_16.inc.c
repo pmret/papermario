@@ -9,7 +9,7 @@ void N(Unk4AI_16)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* ter
     if (aiSettings->waitTime >= 0) {
         if (script->functionTemp[1] <= 0) {
             script->functionTemp[1] = aiSettings->waitTime;
-            if (basic_ai_try_detect_player(territory, enemy, aiSettings->chaseSpeed, aiSettings->unk_AI_1C.f, 0) != 0) {
+            if (basic_ai_check_player_dist(territory, enemy, aiSettings->chaseSpeed, aiSettings->unk_AI_1C.f, 0) != 0) {
                 s32 emoteTemp;
 
                 fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, (f32) npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &emoteTemp);

@@ -10,7 +10,7 @@ void N(FlyingNoAttackAI_13)(Evt* script, NpcAISettings* aiSettings, EnemyDetectV
     s32 flag;
     f32 temp_f6;
 
-    if (basic_ai_try_detect_player(territory, enemy, aiSettings->chaseRadius, aiSettings->unkChase, 1) == 0) {
+    if (basic_ai_check_player_dist(territory, enemy, aiSettings->chaseRadius, aiSettings->unkChase, 1) == 0) {
         fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &var);
         npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
         npc->duration = 30;

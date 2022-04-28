@@ -92,7 +92,7 @@ void get_msg_properties(s32 msgID, s32* height, s32* width, s32* maxLineChars, s
 void replace_window_update(s32 idx, s8 arg1, WindowUpdateFunc pendingFunc);
 void decode_yay0(void* src, void* dst);
 
-s32 func_800493EC(Enemy* enemy, s32 arg1, f32 arg2, f32 arg3);
+s32 ai_check_player_dist(Enemy* enemy, s32 arg1, f32 arg2, f32 arg3);
 
 //pause
 void pause_init(void);

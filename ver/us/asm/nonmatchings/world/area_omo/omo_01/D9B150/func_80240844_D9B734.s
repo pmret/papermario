@@ -20,7 +20,7 @@ glabel func_80240844_D9B734
 /* D9B770 80240880 AFA30010 */  sw        $v1, 0x10($sp)
 /* D9B774 80240884 8E260024 */  lw        $a2, 0x24($s1)
 /* D9B778 80240888 8E270028 */  lw        $a3, 0x28($s1)
-/* D9B77C 8024088C 0C01242D */  jal       basic_ai_try_detect_player
+/* D9B77C 8024088C 0C01242D */  jal       basic_ai_check_player_dist
 /* D9B780 80240890 0040802D */   daddu    $s0, $v0, $zero
 /* D9B784 80240894 1440001D */  bnez      $v0, .L8024090C
 /* D9B788 80240898 24040002 */   addiu    $a0, $zero, 2

@@ -6,7 +6,7 @@ s32 N(MagikoopaAI_CanShootSpell)(Evt* script, f32 arg1, f32 arg2, EnemyDetectVol
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Camera* camera = &gCameras[gCurrentCamID];
 
-    if (basic_ai_try_detect_player(territory, enemy, arg1, arg2, 0)) {
+    if (basic_ai_check_player_dist(territory, enemy, arg1, arg2, 0)) {
         f32 angle;
         f32 t1;
 

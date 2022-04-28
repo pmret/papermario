@@ -38,7 +38,7 @@ void N(ClubbaNappingAI_Sleep)(Evt* script, NpcAISettings* aiSettings, EnemyDetec
     s32 emoteTemp;
     f32 posX, posZ;
 
-    if (basic_ai_try_detect_player(territory, enemy, 80.0f, 0.0f, 0)) {
+    if (basic_ai_check_player_dist(territory, enemy, 80.0f, 0.0f, 0)) {
         if (   gPlayerStatusPtr->actionState == ACTION_STATE_RUN
             || gPlayerStatusPtr->actionState == ACTION_STATE_SPIN
             || gPlayerStatusPtr->actionState == ACTION_STATE_JUMP
@@ -119,7 +119,7 @@ void N(ClubbaNappingAI_Loiter)(Evt* script, NpcAISettings* aiSettings, EnemyDete
     s32 nextState;
 
     // try to catch sight of player
-    if (basic_ai_try_detect_player(territory, enemy, aiSettings->chaseRadius, aiSettings->unkChase, 0)) {
+    if (basic_ai_check_player_dist(territory, enemy, aiSettings->chaseRadius, aiSettings->unkChase, 0)) {
         npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
         script->AI_TEMP_STATE = AI_STATE_CHASE_INIT;
         return;
@@ -168,7 +168,7 @@ void N(ClubbaNappingAI_ReturnHome)(Evt* script, NpcAISettings* aiSettings, Enemy
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 currentYaw;
 
-    if (basic_ai_try_detect_player(territory, enemy, aiSettings->chaseRadius, aiSettings->unkChase, 0)) {
+    if (basic_ai_check_player_dist(territory, enemy, aiSettings->chaseRadius, aiSettings->unkChase, 0)) {
         npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
         script->AI_TEMP_STATE = AI_STATE_CHASE_INIT;
     } else if (dist2D(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x,

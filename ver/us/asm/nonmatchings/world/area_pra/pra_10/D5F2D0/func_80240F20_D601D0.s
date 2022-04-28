@@ -129,7 +129,7 @@ glabel func_80240F20_D601D0
 /* D6037C 802410CC AFA00010 */  sw        $zero, 0x10($sp)
 /* D60380 802410D0 8E86000C */  lw        $a2, 0xc($s4)
 /* D60384 802410D4 8E870010 */  lw        $a3, 0x10($s4)
-/* D60388 802410D8 0C01242D */  jal       basic_ai_try_detect_player
+/* D60388 802410D8 0C01242D */  jal       basic_ai_check_player_dist
 /* D6038C 802410DC 0240282D */   daddu    $a1, $s2, $zero
 /* D60390 802410E0 10400006 */  beqz      $v0, .L802410FC
 /* D60394 802410E4 0220202D */   daddu    $a0, $s1, $zero
