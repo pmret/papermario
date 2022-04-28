@@ -24,7 +24,11 @@ ApiStatus PostChapter2StatUpdate(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "world/area_sbk/sbk_02/92A9A0", func_80240B98_92AE48);
+ApiStatus N(CheckTradeEventTime)(Evt* script, s32 isInitialCall) {
+    script->varTable[0] = (s32)((gPlayerData.frameCounter - gPlayerData.tradeEventStartTime) / 3600) < script->varTable[0];
+    return 2;
+}
+
 
 ApiStatus GetItemCount(Evt* script, s32 isInitialCall) {
     script->varTable[0] = get_item_count();

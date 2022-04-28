@@ -3,6 +3,11 @@
 static char* N(exit_str_0) = "sam_11";
 static char* N(exit_str_1) = "sam_04";
 
-INCLUDE_ASM(s32, "world/area_sam/sam_03/D110C0", func_80240000_D110C0);
+ApiStatus func_80240000_D110C0(Evt* script, s32 isInitialCall) {
+    Npc* temp_v0 = get_npc_unsafe(0);
+    
+    script->varTable[0] = atan2(temp_v0->pos.x, temp_v0->pos.z, gPlayerStatus.position.x, gPlayerStatus.position.z);
+    return ApiStatus_DONE2;
+}
 
 #include "world/common/enemy/WanderMeleeAI.inc.c"
