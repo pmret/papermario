@@ -6,7 +6,7 @@
 
 #include "world/common/enemy/FlyingAI.inc.c"
 
-#include "world/common/enemy/ProjectileAI.inc.c" // spy guy
+#include "world/common/enemy/RangedAttackAI.inc.c"
 
 #include "world/common/SetNpcB5_3.inc.c"
 

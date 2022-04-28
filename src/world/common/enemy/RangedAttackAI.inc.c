@@ -11,7 +11,7 @@
 // prerequisites
 #include "world/common/enemy/ProjectileHitbox.inc.c"
 
-ApiStatus N(ProjectileAI_Main)(Evt* script, s32 isInitialCall) {
+ApiStatus N(RangedAttackAI_Main)(Evt* script, s32 isInitialCall) {
     EnemyTerritoryThing territory;
     EnemyTerritoryThing* territoryPtr = &territory;
     Enemy* enemy = script->owner1.enemy;

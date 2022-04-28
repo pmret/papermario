@@ -9,6 +9,6 @@ static char* N(exit_str_3) = "";
 
 #include "world/common/UnkFunc12.inc.c"
 
-#include "world/common/enemy/ProjectileAI.inc.c"
+#include "world/common/enemy/RangedAttackAI.inc.c"
 
 #include "world/common/GetEncounterEnemyIsOwner.inc.c"
