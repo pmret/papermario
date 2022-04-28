@@ -1,6 +1,7 @@
 #include "common.h"
 #include "npc.h"
 #include "effects.h"
+#include "sprite.h"
 
 // required include args
 #ifndef AI_SENTINEL_FIRST_NPC

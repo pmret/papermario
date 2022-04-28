@@ -20,7 +20,7 @@ MapConfig N(config) = {
     .main = &N(main),
     .entryList = &N(entryList),
     .entryCount = ENTRY_COUNT(N(entryList)),
-    .tattle = 0x1900C2,
+    .tattle = { 0x1900C2 },
 };
 
 EvtScript N(802414B0) = {

@@ -102,27 +102,4 @@ ApiStatus func_80242A4C_EA334C(Evt* script, s32 isInitialCall) {
 
 #include "world/common/UnkYawFunc.inc.c"
 
-// Requires data migration
-#ifdef NON_MATCHING
-ApiStatus func_80242D64_EA3664(Evt* script, s32 isInitialCall) {
-    Npc* npc = get_npc_unsafe(script->varTable[2]);
-
-    D_80246894 = npc->currentAnim.w;
-    npc->currentAnim.w = script->varTable[4];
-
-    return ApiStatus_DONE2;
-}
-#else
-INCLUDE_ASM(s32, "EA0C10", func_80242D64_EA3664);
-#endif
-
-// Requires data migration
-#ifdef NON_MATCHING
-ApiStatus func_80242DA8_EA36A8(Evt* script, s32 isInitialCall) {
-    get_npc_unsafe(script->varTable[2])->currentAnim.w = D_80246894;
-
-    return ApiStatus_DONE2;
-}
-#else
-INCLUDE_ASM(s32, "EA0C10", func_80242DA8_EA36A8);
-#endif
+#include "world/common/LetterDelivery.inc.c"

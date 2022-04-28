@@ -1,5 +1,6 @@
 #include "common.h"
 #include "npc.h"
+#include "sprite.h"
 
 typedef struct MagikoopaTeleportAnim {
     f32 scaleX;
