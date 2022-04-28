@@ -1,6 +1,6 @@
 #include "jan_05.h"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_05/B4B260", func_802407F0_B4B260);
+#include "world/common/HeartPlant_SpawnHeart.inc.c"
 
 #include "world/common/enemy/FuzzyAI.inc.c"
 

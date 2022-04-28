@@ -2,6 +2,9 @@
 #include "npc.h"
 #include "sprite/npc/monty_mole.h"
 
+// prerequisites
+#include "world/common/enemy/ProjectileHitbox.inc.c"
+
 // ensure state handlers conform to expected signature
 static AIStateHandler N(MontyMoleAI_Init);
 static AIStateHandler N(MontyMoleAI_Wander);
@@ -122,7 +125,8 @@ static void N(MontyMoleAI_Wander)(Evt* script, NpcAISettings* aiSettings, EnemyT
 }
 
 static void N(MontyMoleAI_PreSurface)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
-    Npc* npc = get_npc_unsafe(script->owner1.enemy->npcID);
+    Enemy* enemy = script->owner1.enemy;
+    Npc* npc = get_npc_unsafe(enemy->npcID);
     
     npc->flags &= -(NPC_FLAG_PASSIVE | NPC_FLAG_2);
     ai_enemy_play_sound(npc, SOUND_MOLE_SURFACE, 0);
@@ -148,10 +152,10 @@ static void N(MontyMoleAI_Surface)(Evt* script, NpcAISettings* aiSettings, Enemy
 }
 
 static void N(MontyMoleAI_DrawRock)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
-    Npc* npc;
+    Enemy* enemy = script->owner1.enemy;
+    Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 emoteOut;
     
-    npc = get_npc_unsafe(script->owner1.enemy->npcID);
     npc->duration--;
     if ((npc->duration) <= 0) {
         if (!N(MontyMoleAI_CanAttack)(script, territory, aiSettings->alertRadius * 1.1, aiSettings->unk_10.f)) {
@@ -195,7 +199,8 @@ static void N(MontyMoleAI_ThrowRock)(Evt* script, NpcAISettings* aiSettings, Ene
 }
 
 static void N(MontyMoleAI_PreBurrow)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
-    Npc* npc = get_npc_unsafe(script->owner1.enemy->npcID);
+    Enemy* enemy = script->owner1.enemy;
+    Npc* npc = get_npc_unsafe(enemy->npcID);
     
     npc->duration--;
     if (npc->duration <= 0) {
@@ -253,36 +258,36 @@ ApiStatus N(MontyMoleAI_Main)(Evt* script, s32 isInitialCall) {
     }
     
     switch (script->AI_TEMP_STATE) {
-    case AI_STATE_MOLE_INIT:
-        N(MontyMoleAI_Init)(script, aiSettings, territory);
-        // fallthrough
-    case AI_STATE_MOLE_WANDER:
-        N(MontyMoleAI_Wander)(script, aiSettings, territory);
-        return ApiStatus_BLOCK;
-    case AI_STATE_MOLE_PRE_SURFACE:
-        N(MontyMoleAI_PreSurface)(script, aiSettings, territory);
-        // fallthrough
-    case AI_STATE_MOLE_SURFACE:
-        N(MontyMoleAI_Surface)(script, aiSettings, territory);
-        if (script->AI_TEMP_STATE != AI_STATE_MOLE_DRAW_ROCK) {
+        case AI_STATE_MOLE_INIT:
+            N(MontyMoleAI_Init)(script, aiSettings, territory);
+            // fallthrough
+        case AI_STATE_MOLE_WANDER:
+            N(MontyMoleAI_Wander)(script, aiSettings, territory);
             return ApiStatus_BLOCK;
-        } // else fallthrough
-    case AI_STATE_MOLE_DRAW_ROCK:
-        N(MontyMoleAI_DrawRock)(script, aiSettings, territory);
-        if (script->AI_TEMP_STATE != AI_STATE_MOLE_THROW_ROCK) {
+        case AI_STATE_MOLE_PRE_SURFACE:
+            N(MontyMoleAI_PreSurface)(script, aiSettings, territory);
+            // fallthrough
+        case AI_STATE_MOLE_SURFACE:
+            N(MontyMoleAI_Surface)(script, aiSettings, territory);
+            if (script->AI_TEMP_STATE != AI_STATE_MOLE_DRAW_ROCK) {
+                return ApiStatus_BLOCK;
+            } // else fallthrough
+        case AI_STATE_MOLE_DRAW_ROCK:
+            N(MontyMoleAI_DrawRock)(script, aiSettings, territory);
+            if (script->AI_TEMP_STATE != AI_STATE_MOLE_THROW_ROCK) {
+                return ApiStatus_BLOCK;
+            } // else fallthrough
+        case AI_STATE_MOLE_THROW_ROCK:
+            N(MontyMoleAI_ThrowRock)(script, aiSettings, territory);
+            if (script->AI_TEMP_STATE != AI_STATE_MOLE_UNUSED) {
+                return ApiStatus_BLOCK;
+            } // else fallthrough
+        case AI_STATE_MOLE_PRE_BURROW:
+            N(MontyMoleAI_PreBurrow)(script, aiSettings, territory);
             return ApiStatus_BLOCK;
-        } // else fallthrough
-    case AI_STATE_MOLE_THROW_ROCK:
-        N(MontyMoleAI_ThrowRock)(script, aiSettings, territory);
-        if (script->AI_TEMP_STATE != AI_STATE_MOLE_UNUSED) {
+        case AI_STATE_MOLE_BURROW:
+            N(MontyMoleAI_Burrow)(script, aiSettings, territory);
             return ApiStatus_BLOCK;
-        } // else fallthrough
-    case AI_STATE_MOLE_PRE_BURROW:
-        N(MontyMoleAI_PreBurrow)(script, aiSettings, territory);
-        return ApiStatus_BLOCK;
-    case AI_STATE_MOLE_BURROW:
-        N(MontyMoleAI_Burrow)(script, aiSettings, territory);
-        return ApiStatus_BLOCK;
     }
     return ApiStatus_BLOCK;
 }

@@ -2,7 +2,7 @@
 
 #include "world/common/enemy/FuzzyAI.inc.c"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_06/B52F70", func_80241554_B53D84);
+#include "world/common/HeartPlant_SpawnHeart.inc.c"
 
 #include "world/common/enemy/SpearGuyAI.inc.c"
 

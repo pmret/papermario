@@ -9,6 +9,8 @@ typedef struct MagikoopaTeleportAnim {
 
 extern MagikoopaTeleportAnim N(MagikoopaAI_TeleportAnim)[];
 
+#include "world/common/enemy/MagikoopaSpellAI.inc.c"
+
 void N(MagikoopaAI_00)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
@@ -161,7 +163,7 @@ void N(MagikoopaAI_21)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThi
         script->AI_TEMP_STATE = 0;
         return;
     }
-    if (N(UnkNpcAIFunc47)(script, aiSettings->chaseRadius, aiSettings->unk_28.f, territory) == 1) {
+    if (N(MagikoopaAI_CanShootSpell)(script, aiSettings->chaseRadius, aiSettings->unk_28.f, territory) == 1) {
         ai_enemy_play_sound(npc, SOUND_SPELL_CAST1, 0);
         npc->currentAnim.w = enemy->animList[8];
         posX = npc->pos.x;
@@ -194,7 +196,7 @@ void N(MagikoopaAI_23)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThi
     
     npc->duration--;
     if (npc->duration <= 0) {
-        projectileEnemy = N(UnkNpcAIFunc47)(script, aiSettings->chaseRadius, aiSettings->unk_28.f, territory);
+        projectileEnemy = N(MagikoopaAI_CanShootSpell)(script, aiSettings->chaseRadius, aiSettings->unk_28.f, territory);
         if (projectileEnemy != 1) {
             fx_emote(2, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xC, &emoteTemp);
             npc->currentAnim.w = enemy->animList[0];

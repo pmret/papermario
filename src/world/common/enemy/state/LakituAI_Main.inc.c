@@ -93,7 +93,7 @@ s32 N(LakituAI_Main)(Evt* script, s32 isInitialCall) {
     }
 
     switch (script->AI_TEMP_STATE) {
-        case 30:
+        case AI_STATE_PROJECTILE_HITBOX_30:
             npc->duration--;
             if (npc->duration > 0) {
                 break;
@@ -101,9 +101,9 @@ s32 N(LakituAI_Main)(Evt* script, s32 isInitialCall) {
             spinyEnemy = get_enemy(enemy->varTable[4]);
             spinyEnemy->varTable[10] = 2;
             npc->duration = 5;
-            script->AI_TEMP_STATE = 31;
+            script->AI_TEMP_STATE = AI_STATE_PROJECTILE_HITBOX_31;
             // fallthrough
-        case 31:
+        case AI_STATE_PROJECTILE_HITBOX_31:
             npc->duration--;
             if (npc->duration > 0) {
                 break;
@@ -112,17 +112,17 @@ s32 N(LakituAI_Main)(Evt* script, s32 isInitialCall) {
             spinyEnemy = get_enemy(enemy->varTable[4]);
             spinyEnemy->varTable[10] = 3;
             npc->duration = 10;
-            script->AI_TEMP_STATE = 32;
+            script->AI_TEMP_STATE = AI_STATE_PROJECTILE_HITBOX_32;
             // fallthrough
-        case 32:
+        case AI_STATE_PROJECTILE_HITBOX_32:
             npc->duration--;
             if (npc->duration > 0) {
                 break;
             }
             npc->duration = 3;
-            script->AI_TEMP_STATE = 33;
+            script->AI_TEMP_STATE = AI_STATE_PROJECTILE_HITBOX_33;
             // fallthrough
-        case 33:
+        case AI_STATE_PROJECTILE_HITBOX_33:
             npc->duration--;
             if (npc->duration <= 0) {
                 script->AI_TEMP_STATE = AI_STATE_WANDER_INIT;
@@ -130,7 +130,7 @@ s32 N(LakituAI_Main)(Evt* script, s32 isInitialCall) {
             break;
     }
 
-    if (script->AI_TEMP_STATE == 30 || script->AI_TEMP_STATE == 31) {
+    if (script->AI_TEMP_STATE == AI_STATE_PROJECTILE_HITBOX_30 || script->AI_TEMP_STATE == AI_STATE_PROJECTILE_HITBOX_31) {
         f32 playerDist;
         f32 lerpDist;
 

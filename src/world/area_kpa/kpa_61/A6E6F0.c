@@ -2,9 +2,7 @@
 
 #include "world/common/enemy/TackleAI.inc.c"
 
-#include "world/common/UnkNpcAIFunc47.inc.c"
-
-#include "world/common/UnkFunc57.inc.c"
+#include "world/common/enemy/MagikoopaSpellAI.inc.c"
 
 void N(FlyingMagikoopaAI_10)(Evt* script, NpcAISettings* arg1, EnemyTerritoryThing* arg2) {
     Enemy* enemy = script->owner1.enemy;
@@ -22,7 +20,7 @@ void N(FlyingMagikoopaAI_11)(Evt* script, NpcAISettings* arg1, EnemyTerritoryThi
     npc->pos.y = basePosY + sin_deg(enemy->varTable[0]) * 6.0;
     enemy->varTable[0] = clamp_angle(enemy->varTable[0] + 10);
     
-    if (N(UnkNpcAIFunc47)(script, arg1->chaseRadius, arg1->unk_28.f, arg2) == 1) {
+    if (N(MagikoopaAI_CanShootSpell)(script, arg1->chaseRadius, arg1->unk_28.f, arg2) == 1) {
         fx_emote(0, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &emoteTemp);
         ai_enemy_play_sound(npc, SOUND_2F4, 0x200000);
         npc->duration = 50;
@@ -105,7 +103,7 @@ void N(FlyingMagikoopaAI_21)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
         npc->currentAnim.w = enemy->animList[0];
         npc->duration = 15;
         script->functionTemp[0] = 50;
-    } else if ((N(UnkNpcAIFunc47)(script, aiSettings->chaseRadius, aiSettings->unk_28.f, territory) == 1) && (npc->turnAroundYawAdjustment == 0)) {
+    } else if ((N(MagikoopaAI_CanShootSpell)(script, aiSettings->chaseRadius, aiSettings->unk_28.f, territory) == 1) && (npc->turnAroundYawAdjustment == 0)) {
         ai_enemy_play_sound(npc, 0x20D4, 0);
         npc->currentAnim.w = enemy->animList[8];
         posX = npc->pos.x;
@@ -138,7 +136,7 @@ void N(FlyingMagikoopaAI_23)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
     
     npc->duration--;
     if (npc->duration <= 0) {
-        temp_s1 = N(UnkNpcAIFunc47)(script, aiSettings->chaseRadius, aiSettings->unk_28.f, territory);
+        temp_s1 = N(MagikoopaAI_CanShootSpell)(script, aiSettings->chaseRadius, aiSettings->unk_28.f, territory);
         if (temp_s1 != 1) {
             fx_emote(2, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 12, &emoteTemp);
             npc->currentAnim.w = enemy->animList[0];
