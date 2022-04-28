@@ -251,7 +251,7 @@ void N(SentinelAI_ReturnHome)(Evt* script, NpcAISettings* aiSettings, EnemyTerri
 
     enemy->varTable[2] = clamp_angle(enemy->varTable[2] + 12);
     if (script->functionTemp[1] <= 0) {
-        script->functionTemp[1] = aiSettings->unk_14;
+        script->functionTemp[1] = aiSettings->playerSearchInterval;
         if (basic_ai_try_detect_player(territory, enemy, aiSettings->alertRadius * 0.5, aiSettings->unk_10.f * 0.5, 0)) {
             fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 12, &emoteTemp);
             ai_enemy_play_sound(npc, SOUND_2F4, 0x200000);

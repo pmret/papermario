@@ -7,7 +7,7 @@ void N(Unk4AI_12)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* t
     f32 tempAngle;
     f32 angleDiff;
 
-    npc->duration = (aiSettings->unk_14 / 2) + rand_int(aiSettings->unk_14 / 2 + 1);
+    npc->duration = (aiSettings->playerSearchInterval / 2) + rand_int(aiSettings->playerSearchInterval / 2 + 1);
     npc->currentAnim.w = enemy->animList[ENEMY_ANIM_CHASE];
     npc->moveSpeed = aiSettings->alertRadius;
 

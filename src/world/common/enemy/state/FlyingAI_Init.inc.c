@@ -24,6 +24,6 @@ void N(FlyingAI_Init)(Npc* npc, Enemy* enemy, Evt* script, NpcAISettings* aiSett
     enemy->varTable[9] = 0;
     enemy->varTable[3] = (depth * 100.0) + 0.5;
     enemy->varTable[7] = (posY * 100.0) + 0.5;
-    script->functionTemp[1] = aiSettings->unk_14;
+    script->functionTemp[1] = aiSettings->playerSearchInterval;
     enemy->aiFlags |= ENEMY_AI_FLAGS_10;
 }

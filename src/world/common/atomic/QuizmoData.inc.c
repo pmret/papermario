@@ -678,7 +678,7 @@ NpcAISettings N(Quizmo_NpcAISettings) = {
     .moveSpeed = 0.7f,
     .moveTime = 30,
     .waitTime = 20,
-    .unk_14 = -1,
+    .playerSearchInterval = -1,
     .unk_2C = 1,
 };
 

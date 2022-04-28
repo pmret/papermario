@@ -30,9 +30,9 @@ void N(LakituAI_Wander)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryTh
     npc->pos.y = y + temp_f24 + (sin_deg(enemy->varTable[2]) * temp_f20);
     enemy->varTable[2] = clamp_angle(enemy->varTable[2] + 0xC);
 
-    if (aiSettings->unk_14 >= 0) {
+    if (aiSettings->playerSearchInterval >= 0) {
         if (script->functionTemp[1] <= 0) {
-            script->functionTemp[1] = aiSettings->unk_14;
+            script->functionTemp[1] = aiSettings->playerSearchInterval;
             if (basic_ai_try_detect_player(territory, enemy, aiSettings->alertRadius, aiSettings->unk_10.f, 0) != 0) {
                 fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &var);
                 ai_enemy_play_sound(npc, 0x2F4, 0x200000);

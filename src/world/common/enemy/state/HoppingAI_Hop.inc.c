@@ -7,10 +7,10 @@ void N(HoppingAI_Hop)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThin
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 posX, posY, posZ, hitDepth;
 
-    if (aiSettings->unk_14 >= 0) {
+    if (aiSettings->playerSearchInterval >= 0) {
         if (script->functionTemp[1] <= 0) {
             do {
-                script->functionTemp[1] = aiSettings->unk_14;
+                script->functionTemp[1] = aiSettings->playerSearchInterval;
                 if (basic_ai_try_detect_player(territory, enemy, aiSettings->alertRadius, aiSettings->unk_10.f, 0) != 0) {
                     s32 emoteTemp;
                     fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &emoteTemp);

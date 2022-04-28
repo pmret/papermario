@@ -366,7 +366,7 @@ NpcAISettings N(npcAISettings_8024286C) = {
     .moveSpeed = 1.5f,
     .moveTime = 30,
     .waitTime = 30,
-    .unk_14 = -1,
+    .playerSearchInterval = -1,
     .unk_2C = 1,
 };
 

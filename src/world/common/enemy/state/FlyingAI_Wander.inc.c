@@ -89,9 +89,9 @@ void N(FlyingAI_Wander)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryTh
     }
 
     if (enemy->varTable[9] <= 0) {
-        if (aiSettings->unk_14 >= 0) {
+        if (aiSettings->playerSearchInterval >= 0) {
             if (script->functionTemp[1] <= 0) {
-                script->functionTemp[1] = aiSettings->unk_14;
+                script->functionTemp[1] = aiSettings->playerSearchInterval;
                 if (gPlayerStatusPtr->position.y < (npc->pos.y + npc->collisionHeight) + 10.0 && 
                     basic_ai_try_detect_player(territory, enemy, aiSettings->alertRadius, aiSettings->unk_10.f, 0) != 0) 
                 {

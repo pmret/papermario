@@ -76,7 +76,7 @@ typedef struct NpcAISettings {
     /* 0x08 */ s32 waitTime;
     /* 0x0C */ f32 alertRadius;
     /* 0x10 */ X32 unk_10;
-    /* 0x14 */ s32 unk_14;
+    /* 0x14 */ s32 playerSearchInterval; // how often to search for player (frames)
     /* 0x18 */ f32 chaseSpeed;
     /* 0x1C */ X32 unk_1C; // chase turn step?
     /* 0x20 */ s32 unk_20;
@@ -269,7 +269,7 @@ typedef struct Enemy {
     /*      */      f32 varTableF[16];
     /*      */      void* varTablePtr[16];
     /*      */ };
-    /* 0xAC */ u8 unk_AC; // detect player flags: 1 = require line of sight | 2 = adjust hitbox for moving player
+    /* 0xAC */ u8 aiDetectFlags; // detect player flags: 1 = require line of sight | 2 = adjust hitbox for moving player
     /* 0xAD */ char unk_AD[3];
     /* 0xB0 */ u32 aiFlags;
     /* 0xB4 */ s8 aiPaused;

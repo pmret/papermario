@@ -99,7 +99,7 @@ NpcAISettings N(npcAISettings_8024046C) = {
     .moveTime = 40,
     .waitTime = 15,
     .alertRadius = 150.0f,
-    .unk_14 = 2,
+    .playerSearchInterval = 2,
     .chaseSpeed = 3.3f,
     .unk_1C = { .s = 70 },
     .unk_20 = 1,

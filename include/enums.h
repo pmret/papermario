@@ -2764,7 +2764,7 @@ enum EnemyFlags {
 // used with enemy->aiFlags
 enum EnemyAIFlags {
     ENEMY_AI_FLAGS_1              = 0x00000001,
-    ENEMY_AI_FLAGS_2              = 0x00000002, // do not move
+    ENEMY_AI_FLAGS_2              = 0x00000002, // do not move; do not sense player
     ENEMY_AI_FLAGS_4              = 0x00000004, // pause ai
     ENEMY_AI_FLAGS_8              = 0x00000008,
     ENEMY_AI_FLAGS_10             = 0x00000010,
@@ -2822,6 +2822,16 @@ enum EnemyActionFlags {
     AI_ACTION_JUMP_WHEN_SEE_PLAYER          = 0x01,
     AI_ACTION_02                            = 0x02,
     AI_ACTION_LOOK_AROUND_DURING_LOITER     = 0x10,
+};
+
+enum EnemyDetectFlags {
+    AI_DETECT_SIGHT                 = 0x01,
+    AI_DETECT_SENSITIVE_MOTION      = 0x02,
+};
+
+enum EnemyTerritoryFlags {
+    AI_TERRITORY_IGNORE_HIDING      = 0x01, // bow and sushi dont prevent enemy detection
+    AI_TERRITORY_IGNORE_ELEVATION   = 0x02, // vertical size of detection volume is ignored
 };
 
 enum PiranhaPlantStates {

@@ -240,7 +240,7 @@ NpcAISettings N(npcAISettings_80245010) = {
     .moveSpeed = 1.5f,
     .moveTime = 60,
     .waitTime = 30,
-    .unk_14 = -1,
+    .playerSearchInterval = -1,
     .unk_2C = 1,
 };
 
@@ -262,7 +262,7 @@ NpcAISettings N(npcAISettings_8024508C) = {
     .moveSpeed = 1.5f,
     .moveTime = 30,
     .waitTime = 30,
-    .unk_14 = -1,
+    .playerSearchInterval = -1,
     .unk_2C = 1,
 };
 

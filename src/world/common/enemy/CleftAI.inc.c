@@ -4,7 +4,7 @@
 
 enum AiStateCleft {
     AI_STATE_CLEFT_0                    = 0,
-    AI_STATE_CLEFT_1                    = 1,
+    AI_STATE_CLEFT_1                    = 1,    // rock form idle
     AI_STATE_CLEFT_2                    = 2,
     AI_STATE_CLEFT_3                    = 3,
     AI_STATE_CLEFT_4                    = 4,
@@ -69,13 +69,13 @@ void N(CleftAI_00)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* 
 void N(CleftAI_01)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
-    s32 var;
+    s32 emoteTemp;
 
     if (script->functionTemp[1] <= 0) {
-        script->functionTemp[1] = aiSettings->unk_14;
-        if (basic_ai_try_detect_player(territory, enemy, aiSettings->alertRadius * 0.85, aiSettings->unk_10.f, 0)) {
-            npc->currentAnim.w = enemy->animList[ENEMY_ANIM_MELEE_HIT];
-            fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &var);
+        script->functionTemp[1] = aiSettings->playerSearchInterval;
+        if (basic_ai_try_detect_player(territory, enemy, aiSettings->alertRadius * 0.85, aiSettings->unk_10.f, FALSE)) {
+            npc->currentAnim.w = enemy->animList[9];
+            fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &emoteTemp);
             ai_enemy_play_sound(npc, SOUND_2F4, 0x200000);
             npc->duration = 12;
             script->AI_TEMP_STATE = AI_STATE_CLEFT_2;

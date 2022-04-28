@@ -134,11 +134,13 @@ s32 basic_ai_try_detect_player(EnemyTerritoryThing* territory, Enemy* enemy, f32
     }
 
     partnerActionStatus = &gPartnerActionStatus;
-    if (partnerActionStatus->actingPartner == PARTNER_BOW && partnerActionStatus->partnerActionState && !(territory->unk_1C & 1)) {
+    if (partnerActionStatus->actingPartner == PARTNER_BOW && partnerActionStatus->partnerActionState
+            && !(territory->unk_1C & AI_TERRITORY_IGNORE_HIDING)) {
         return FALSE;
     }
 
-    if (partnerActionStatus->actingPartner == PARTNER_SUSHIE && partnerActionStatus->partnerActionState && !(territory->unk_1C & 1)) {
+    if (partnerActionStatus->actingPartner == PARTNER_SUSHIE && partnerActionStatus->partnerActionState
+            && !(territory->unk_1C & AI_TERRITORY_IGNORE_HIDING)) {
         return FALSE;
     }
 
@@ -146,11 +148,15 @@ s32 basic_ai_try_detect_player(EnemyTerritoryThing* territory, Enemy* enemy, f32
         return FALSE;
     }
 
-    if (territory->halfHeight <= fabsf(npc->pos.y - playerStatus->position.y) && !(territory->unk_1C & 2)) {
+    if (territory->halfHeight <= fabsf(npc->pos.y - playerStatus->position.y)
+            && !(territory->unk_1C & AI_TERRITORY_IGNORE_ELEVATION)) {
         return FALSE;
     }
 
-    if (territory->sizeX | territory->sizeZ && is_point_within_region(territory->shape, territory->pointX, territory->pointZ, playerStatus->position.x, playerStatus->position.z, territory->sizeX, territory->sizeZ)) {
+    if (territory->sizeX | territory->sizeZ && is_point_within_region(territory->shape,
+            territory->pointX, territory->pointZ,
+            playerStatus->position.x, playerStatus->position.z,
+            territory->sizeX, territory->sizeZ)) {
         return FALSE;
     }
 
@@ -159,12 +165,15 @@ s32 basic_ai_try_detect_player(EnemyTerritoryThing* territory, Enemy* enemy, f32
     }
 
     // check for unbroken line of sight
-    if (enemy->unk_AC & 1) {
+    if (enemy->aiDetectFlags & AI_DETECT_SIGHT) {
         x = npc->pos.x;
         y = npc->pos.y + npc->collisionHeight * 0.5;
         z = npc->pos.z;
         dist = dist2D(npc->pos.x, npc->pos.z, playerStatus->position.x, playerStatus->position.z);
-        if (npc_test_move_simple_with_slipping(0x50000, &x, &y, &z, dist, atan2(npc->pos.x, npc->pos.z, playerStatus->position.x, playerStatus->position.z), 0.1f, 0.1f)) {
+        if (npc_test_move_simple_with_slipping(0x50000,
+                &x, &y, &z,
+                dist, atan2(npc->pos.x, npc->pos.z, playerStatus->position.x, playerStatus->position.z),
+                0.1f, 0.1f)) {
             return FALSE;
         }
     }
@@ -176,7 +185,7 @@ s32 basic_ai_try_detect_player(EnemyTerritoryThing* territory, Enemy* enemy, f32
     }
 
     if (skipCheckForPlayer == 0) {
-        if (enemy->unk_AC & 2) {
+        if (enemy->aiDetectFlags & AI_DETECT_SENSITIVE_MOTION) {
             if (playerStatus->actionState == ACTION_STATE_WALK) {
                 radius *= 1.15;
             } else if (playerStatus->actionState == ACTION_STATE_RUN) {
@@ -226,19 +235,19 @@ s32 func_800493EC(Enemy* enemy, s32 chance, f32 arg2, f32 radius) {
     return FALSE;
 }
 
-void ai_enemy_play_sound(Npc* npc, s32 arg1, s32 arg2) {
+void ai_enemy_play_sound(Npc* npc, s32 soundID, s32 upperSoundFlags) {
     Enemy* enemy = get_enemy(npc->npcID);
-    s32 value2 = (arg2 & 0xFFFF0000) | 2;
+    s32 soundFlags = (upperSoundFlags & 0xFFFF0000) | 2;
 
-    if (arg2 & 1) {
-        value2 |= 0x10000;
+    if (upperSoundFlags & 1) {
+        soundFlags |= 0x10000;
     }
 
     if (enemy->npcSettings->unk_2A & 0x20) {
-        value2 |= 0x20000;
+        soundFlags |= 0x20000;
     }
 
-    sfx_play_sound_at_position(arg1, value2, npc->pos.x, npc->pos.y, npc->pos.z);
+    sfx_play_sound_at_position(soundID, soundFlags, npc->pos.x, npc->pos.y, npc->pos.z);
 }
 
 void ai_try_set_state(Evt* script, s32 state) {
@@ -246,7 +255,7 @@ void ai_try_set_state(Evt* script, s32 state) {
 
     npc->duration--;
     if (npc->duration <= 0) {
-        script->functionTemp[0] = state;
+        script->AI_TEMP_STATE = state;
     }
 }
 
@@ -279,9 +288,9 @@ void basic_ai_wander(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing
     s32 sp34;
     f32 yaw;
 
-    if (aiSettings->unk_14 >= 0) {
+    if (aiSettings->playerSearchInterval >= 0) {
         if (script->functionTemp[1] <= 0) {
-            script->functionTemp[1] = aiSettings->unk_14;
+            script->functionTemp[1] = aiSettings->playerSearchInterval;
             if (basic_ai_try_detect_player(territory, enemy, aiSettings->alertRadius, aiSettings->unk_10.f, 0)) {
                 x = npc->pos.x;
                 y = npc->pos.y;
@@ -378,7 +387,7 @@ void basic_ai_loiter(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing
     f32 yaw;
     s32 emoteTemp;
 
-    if (aiSettings->unk_14 >= 0 && basic_ai_try_detect_player(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 0)) {
+    if (aiSettings->playerSearchInterval >= 0 && basic_ai_try_detect_player(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 0)) {
         x = npc->pos.x;
         y = npc->pos.y;
         z = npc->pos.z;

@@ -103,9 +103,9 @@ static void N(MontyMoleAI_Wander)(Evt* script, NpcAISettings* aiSettings, EnemyT
     if (npc->flags & NPC_FLAG_4000) {
         script->AI_TEMP_STATE = AI_STATE_MOLE_INIT;
     }
-    if (aiSettings->unk_14 >= 0) {
+    if (aiSettings->playerSearchInterval >= 0) {
         if (script->functionTemp[1] <= 0) {
-            script->functionTemp[1] = aiSettings->unk_14;
+            script->functionTemp[1] = aiSettings->playerSearchInterval;
             if (N(MontyMoleAI_CanAttack)(script, territory, aiSettings->alertRadius, aiSettings->unk_10.f)) {
                 npc->duration = 0;
                 script->AI_TEMP_STATE = AI_STATE_MOLE_PRE_SURFACE;
