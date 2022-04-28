@@ -1,3 +1,3 @@
 #include "jan_14.h"
 
-#include "world/common/enemy/FuzzyAI.inc.c"
+#include "world/common/enemy/HoppingAI.inc.c"

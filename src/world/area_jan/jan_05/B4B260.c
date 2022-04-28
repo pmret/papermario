@@ -2,7 +2,7 @@
 
 #include "world/common/HeartPlant_SpawnHeart.inc.c"
 
-#include "world/common/enemy/FuzzyAI.inc.c"
+#include "world/common/enemy/HoppingAI.inc.c"
 
 #include "world/common/enemy/SpearGuyAI.inc.c"
 

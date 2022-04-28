@@ -2,4 +2,4 @@
 
 #include "world/common/enemy/PiranhaPlantAI.inc.c"
 
-#include "world/common/enemy/FuzzyAI.inc.c"
+#include "world/common/enemy/HoppingAI.inc.c"
