@@ -98,4 +98,5 @@ ApiStatus func_80242A4C_EA334C(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
+extern s32 N(LetterDelivery_SavedNpcAnim);
 #include "world/common/LetterDelivery.inc.c"

@@ -23,6 +23,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_03/831B20", func_802417C4_832FC4);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_03/831B20", func_802417FC_832FFC);
 
+extern s32 N(LetterDelivery_SavedNpcAnim);
 #include "world/common/LetterDelivery.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_03/831B20", func_80241B84_833384);

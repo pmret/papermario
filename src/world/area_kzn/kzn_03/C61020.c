@@ -21,4 +21,5 @@ INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C61020", func_80242934_C63644);
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C61020", func_8024296C_C6367C);
 
+extern s32 N(LetterDelivery_SavedNpcAnim);
 #include "world/common/LetterDelivery.inc.c"

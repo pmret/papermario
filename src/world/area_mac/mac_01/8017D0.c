@@ -45,6 +45,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80243D28_8045A8);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80243D60_8045E0);
 
+extern s32 N(LetterDelivery_SavedNpcAnim);
 #include "world/common/LetterDelivery.inc.c"
 
 #include "world/common/GetPlayerCoins.inc.c"

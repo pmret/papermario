@@ -18,6 +18,7 @@ INCLUDE_ASM(s32, "world/area_hos/hos_06/A397F0", func_802406A8_A39B88);
 
 INCLUDE_ASM(s32, "world/area_hos/hos_06/A397F0", func_802406E0_A39BC0);
 
+extern s32 N(LetterDelivery_SavedNpcAnim);
 #include "world/common/LetterDelivery.inc.c"
 
 INCLUDE_ASM(s32, "world/area_hos/hos_06/A397F0", func_80240A68_A39F48);

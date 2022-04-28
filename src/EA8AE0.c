@@ -67,6 +67,7 @@ ApiStatus func_80241838_EAA318(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
+extern s32 N(LetterDelivery_SavedNpcAnim);
 #include "world/common/LetterDelivery.inc.c"
 
 INCLUDE_ASM(s32, "EA8AE0", func_80241BC0_EAA6A0);

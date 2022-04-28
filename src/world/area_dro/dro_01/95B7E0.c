@@ -2156,24 +2156,7 @@ ApiStatus N(func_80242858_95DA58)(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-//TODO should be able to LetterDelivery.inc below
-
-#include "world/common/SetManyVars.inc.c"
-
-#include "world/common/UnkYawFunc.inc.c"
-
-ApiStatus N(LetterDelivery_SaveNpcAnim)(Evt* script, s32 isInitialCall) {
-    Npc* npc = get_npc_unsafe(script->varTable[2]);
-    N(LetterDelivery_SavedNpcAnim) = npc->currentAnim.w;
-    npc->currentAnim.w = script->varTable[4];
-    return ApiStatus_DONE2;
-}
-
-ApiStatus N(LetterDelivery_RestoreNpcAnim)(Evt* script, s32 isInitialCall) {
-    Npc* npc = get_npc_unsafe(script->varTable[2]);
-    npc->currentAnim.w = N(LetterDelivery_SavedNpcAnim);
-    return ApiStatus_DONE2;
-}
+#include "world/common/LetterDelivery.inc.c"
 
 ApiStatus N(func_80243084_95E284)(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
