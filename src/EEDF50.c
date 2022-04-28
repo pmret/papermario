@@ -7,10 +7,5 @@
 
 #include "world/common/enemy/FlyingAI.inc.c"
 
-#include "world/common/enemy/state/FlyingNoAttackAI_12.inc.c"
+#include "world/common/enemy/FlyingNoAttackAI.inc.c"
 
-#include "world/common/enemy/state/FlyingNoAttackAI_13.inc.c"
-
-#include "world/common/enemy/state/FlyingNoAttackAI_20.inc.c"
-
-INCLUDE_ASM(s32, "EEDF50", func_80242780_EEF880);

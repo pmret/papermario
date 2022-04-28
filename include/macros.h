@@ -98,9 +98,6 @@
 
 #define SPRITE_PIXEL_SCALE (5.0 / 7.0)
 
-#define VAR_PROJECTILE_HITBOX_STATE varTable[0]
-#define VAR_PROJECTILE_COUNT varTable[3]
-
 /* common AI function and script variables */
 // ai script
 #define AI_TEMP_STATE                  functionTemp[0]
@@ -119,6 +116,9 @@
 #define AI_VAR_HITNPC_3        varTable[3]
 #define AI_VAR_HITNPC_4        varTable[4]
 #define AI_VAR_HITNPC_SOUND    varTable[15]
+// projectile hitbox
+#define VAR_PROJECTILE_HITBOX_STATE varTable[0]
+#define AI_PROJECTILE_AMMO_COUNT varTable[3]
 
 #ifdef PERMUTER
 #undef SCRIPT

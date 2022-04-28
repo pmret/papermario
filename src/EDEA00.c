@@ -15,7 +15,6 @@ const char D_80247B44_EE6504[] = "JUGEMU MOVE";
 #define AI_LAKITU_FIRST_SPINY_ID    50
 #define AI_LAKITU_LAST_SPINY_ID     55
 #include "world/common/enemy/LakituAI.inc.c"
-
 #include "world/common/enemy/SpinyAI.inc.c"
 
 const char D_80247BB8_EE6578[] = "TOGEZO TYPE1 : NORMAL MOVE";
