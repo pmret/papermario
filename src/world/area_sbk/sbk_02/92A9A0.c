@@ -26,7 +26,7 @@ ApiStatus PostChapter2StatUpdate(Evt* script, s32 isInitialCall) {
 
 ApiStatus N(CheckTradeEventTime)(Evt* script, s32 isInitialCall) {
     script->varTable[0] = (s32)((gPlayerData.frameCounter - gPlayerData.tradeEventStartTime) / 3600) < script->varTable[0];
-    return 2;
+    return ApiStatus_DONE2;
 }
 
 

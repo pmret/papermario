@@ -22,13 +22,7 @@ INCLUDE_ASM(s32, "world/area_jan/jan_00/B20540", func_8024078C_B20CCC);
 
 INCLUDE_ASM(s32, "world/area_jan/jan_00/B20540", func_802407C4_B20D04);
 
-#include "world/common/SetManyVars.inc.c"
-
-#include "world/common/UnkYawFunc.inc.c"
-
-INCLUDE_ASM(s32, "world/area_jan/jan_00/B20540", func_80240ADC_B2101C);
-
-INCLUDE_ASM(s32, "world/area_jan/jan_00/B20540", func_80240B20_B21060);
+#include "world/common/LetterDelivery.inc.c"
 
 INCLUDE_ASM(s32, "world/area_jan/jan_00/B20540", func_80240B4C_B2108C);
 

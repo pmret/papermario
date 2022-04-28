@@ -70,7 +70,7 @@ static EffectInstance* N(Quizmo_VannaTEffect);
 static s8 N(pad_D_8024DFEC)[0x4];
 static s32 N(bigArray)[112];
 static s8 N(pad_D_8024E1B0)[0x4]; // Probably part of the above
-static s32 N(D_8024E1B4);
+static s32 N(LetterDelivery_SavedNpcAnim);
 
 EntryList N(entryList) = {
     { -342.0f, 0.0f, 316.0f, 45.0f },
@@ -423,7 +423,7 @@ EvtScript N(80247D90) = {
     EVT_IF_LT(EVT_SAVE_VAR(0), -70)
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(N(func_80243014_95E214))
+    EVT_CALL(N(LetterDelivery_SaveNpcAnim))
     EVT_CALL(GetCurrentPartnerID, EVT_VAR(0))
     EVT_CALL(FindKeyItem, EVT_VAR(5), EVT_VAR(1))
     EVT_IF_EQ(EVT_VAR(0), 4)
@@ -464,7 +464,7 @@ EvtScript N(80247D90) = {
             EVT_END_SWITCH
         EVT_END_IF
     EVT_END_IF
-    EVT_CALL(N(func_80243058_95E258))
+    EVT_CALL(N(LetterDelivery_RestoreNpcAnim))
     EVT_RETURN
     EVT_END
 };
@@ -2156,20 +2156,22 @@ ApiStatus N(func_80242858_95DA58)(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
+//TODO should be able to LetterDelivery.inc below
+
 #include "world/common/SetManyVars.inc.c"
 
 #include "world/common/UnkYawFunc.inc.c"
 
-ApiStatus N(func_80243014_95E214)(Evt* script, s32 isInitialCall) {
+ApiStatus N(LetterDelivery_SaveNpcAnim)(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(script->varTable[2]);
-
-    N(D_8024E1B4) = npc->currentAnim.w;
+    N(LetterDelivery_SavedNpcAnim) = npc->currentAnim.w;
     npc->currentAnim.w = script->varTable[4];
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_80243058_95E258)(Evt* script, s32 isInitialCall) {
-    get_npc_unsafe(script->varTable[2])->currentAnim.w = N(D_8024E1B4);
+ApiStatus N(LetterDelivery_RestoreNpcAnim)(Evt* script, s32 isInitialCall) {
+    Npc* npc = get_npc_unsafe(script->varTable[2]);
+    npc->currentAnim.w = N(LetterDelivery_SavedNpcAnim);
     return ApiStatus_DONE2;
 }
 

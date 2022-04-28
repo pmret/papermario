@@ -39,12 +39,6 @@ extern EffectInstance* N(Quizmo_VannaTEffect);
 
 #include "world/common/atomic/Quizmo.inc.c"
 
-#include "world/common/SetManyVars.inc.c"
-
-#include "world/common/UnkYawFunc.inc.c"
-
-INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80242EAC_B37A7C);
-
-INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80242EF0_B37AC0);
+#include "world/common/LetterDelivery.inc.c"
 
 INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80242F1C_B37AEC);

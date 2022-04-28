@@ -53,8 +53,8 @@ ApiStatus N(ToadHouse_UpdateScreenOverlay)(Evt* script, s32 isInitialCall);
 ApiStatus N(ToadHouse_CamSetFOV)(Evt* script, s32 isInitialCall);
 ApiStatus N(ToadHouse_DoesPlayerNeedSleep)(Evt* script, s32 isInitialCall);
 ApiStatus N(ToadHouse_InitScreenOverlay)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_802439FC_96CBBC)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_80243A40_96CC00)(Evt* script, s32 isInitialCall);
+ApiStatus N(LetterDelivery_SaveNpcAnim)(Evt* script, s32 isInitialCall);
+ApiStatus N(LetterDelivery_RestoreNpcAnim)(Evt* script, s32 isInitialCall);
 void N(func_8024240C_96B5CC)(Evt *script, s32 isInitialCall);
 void N(func_80242EAC_96C06C)(Evt *script, s32 isInitialCall);
 

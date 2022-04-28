@@ -24,3 +24,4 @@ ApiStatus N(LetterDelivery_RestoreNpcAnim)(Evt* script, s32 isInitialCall) {
     npc->currentAnim.w = N(LetterDelivery_SavedNpcAnim);
     return ApiStatus_DONE2;
 }
+

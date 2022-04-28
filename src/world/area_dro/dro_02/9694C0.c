@@ -72,7 +72,7 @@ static D_8024F010_Struct N(D_8024F010)[3];
 static s8 N(pad_D_8024F07C)[0x4];
 static s32 N(KeyItemChoiceList)[(ITEM_LAST_KEY - ITEM_FIRST_VALID_KEY) + 3];
 static s32 N(ItemChoiceList)[(ITEM_LAST_VALID_CONSUMABLE - ITEM_FIRST_CONSUMABLE) + 2]; // extra entry for list terminator
-static s32 N(D_8024F3B8);
+static s32 N(LetterDelivery_SavedNpcAnim);
 
 // DATA
 
@@ -1383,7 +1383,7 @@ EvtScript N(8024B5A0) = {
     EVT_IF_LT(EVT_SAVE_VAR(0), -70)
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(N(func_802439FC_96CBBC))
+    EVT_CALL(N(LetterDelivery_SaveNpcAnim))
     EVT_CALL(GetCurrentPartnerID, EVT_VAR(0))
     EVT_CALL(FindKeyItem, EVT_VAR(5), EVT_VAR(1))
     EVT_IF_EQ(EVT_VAR(0), 4)
@@ -1424,7 +1424,7 @@ EvtScript N(8024B5A0) = {
             EVT_END_SWITCH
         EVT_END_IF
     EVT_END_IF
-    EVT_CALL(N(func_80243A40_96CC00))
+    EVT_CALL(N(LetterDelivery_RestoreNpcAnim))
     EVT_RETURN
     EVT_END
 };
@@ -2553,19 +2553,21 @@ ApiStatus N(func_80243068_96C228)(Evt* script, s32 isInitialCall) {
 
 #include "world/common/atomic/ToadHouse.inc.c"
 
+//TODO should be able to LetterDelivery.inc below
+
 #include "world/common/SetManyVars.inc.c"
 
 #include "world/common/UnkYawFunc.inc.c"
 
-ApiStatus N(func_802439FC_96CBBC)(Evt* script, s32 isInitialCall) {
+ApiStatus N(LetterDelivery_SaveNpcAnim)(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(script->varTable[2]);
-
-    N(D_8024F3B8) = npc->currentAnim.w;
+    N(LetterDelivery_SavedNpcAnim) = npc->currentAnim.w;
     npc->currentAnim.w = script->varTable[4];
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_80243A40_96CC00)(Evt* script, s32 isInitialCall) {
-    get_npc_unsafe(script->varTable[2])->currentAnim.w = N(D_8024F3B8);
+ApiStatus N(LetterDelivery_RestoreNpcAnim)(Evt* script, s32 isInitialCall) {
+    Npc* npc = get_npc_unsafe(script->varTable[2]);
+    npc->currentAnim.w = N(LetterDelivery_SavedNpcAnim);
     return ApiStatus_DONE2;
 }
