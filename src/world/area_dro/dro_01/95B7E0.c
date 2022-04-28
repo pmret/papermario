@@ -350,7 +350,7 @@ EvtScript N(8024792C) = {
 EvtScript N(8024797C) = {
     EVT_LOOP(0)
         EVT_CALL(GetNpcPos, NPC_PARTNER, EVT_VAR(3), EVT_VAR(4), EVT_VAR(5))
-        EVT_CALL(N(UnkYawFunc), EVT_VAR(3), EVT_VAR(4), EVT_VAR(5))
+        EVT_CALL(N(LetterDelivery_CalcLetterPos), EVT_VAR(3), EVT_VAR(4), EVT_VAR(5))
         EVT_CALL(SetItemPos, EVT_VAR(0), EVT_VAR(3), EVT_VAR(4), EVT_VAR(5))
         EVT_WAIT_FRAMES(1)
     EVT_END_LOOP
@@ -369,7 +369,7 @@ EvtScript N(802479FC) = {
             EVT_CALL(RemoveKeyItemAt, EVT_VAR(1))
             EVT_CALL(DisablePartnerAI, 0)
             EVT_CALL(GetNpcPos, NPC_PARTNER, EVT_VAR(3), EVT_VAR(4), EVT_VAR(5))
-            EVT_CALL(N(UnkYawFunc), EVT_VAR(3), EVT_VAR(4), EVT_VAR(5))
+            EVT_CALL(N(LetterDelivery_CalcLetterPos), EVT_VAR(3), EVT_VAR(4), EVT_VAR(5))
             EVT_BITWISE_OR_CONST(EVT_VAR(0), 0x50000)
             EVT_CALL(MakeItemEntity, EVT_VAR(0), EVT_VAR(3), EVT_VAR(4), EVT_VAR(5), 1, 0)
             EVT_EXEC_GET_TID(N(8024797C), EVT_VAR(10))
@@ -474,7 +474,7 @@ s32 N(D_80248088_963288)[] = {
 };
 
 EvtScript N(80248090) = {
-    EVT_CALL(N(SetManyVars), 6, 9699589, 9699585, 76, 69, 852105, 852106, 852107, 852108, EVT_PTR(N(D_80248088_963288)))
+    EVT_CALL(N(LetterDelivery_Init), 6, 9699589, 9699585, 76, 69, 852105, 852106, 852107, 852108, EVT_PTR(N(D_80248088_963288)))
     EVT_EXEC_WAIT(N(80247D90))
     EVT_RETURN
     EVT_END

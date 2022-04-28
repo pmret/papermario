@@ -5,7 +5,7 @@
 
 // extern s32 N(LetterDelivery_SavedNpcAnim);
 
-ApiStatus N(SetManyVars)(Evt* script, s32 isInitialCall) {
+ApiStatus N(LetterDelivery_Init)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     script->varTable[2] = evt_get_variable(script, *args++);
@@ -21,7 +21,7 @@ ApiStatus N(SetManyVars)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(UnkYawFunc)(Evt* script, s32 isInitialCall) {
+ApiStatus N(LetterDelivery_CalcLetterPos)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 a0 = *args++;
     f32 a = evt_get_variable(script, a0);
