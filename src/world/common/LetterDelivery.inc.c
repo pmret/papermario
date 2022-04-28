@@ -1,10 +1,10 @@
 #include "common.h"
 
-// incomplete dedupe -- only the last two functions for now
-
 /*
 #include "world/common/LetterDelivery.inc.c"
 */
+
+// will begin with a (guarded) include for GetItem functions
 
 #include "world/common/SetManyVars.inc.c"
 

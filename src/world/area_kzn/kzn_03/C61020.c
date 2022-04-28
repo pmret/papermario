@@ -21,10 +21,4 @@ INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C61020", func_80242934_C63644);
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C61020", func_8024296C_C6367C);
 
-#include "world/common/SetManyVars.inc.c"
-
-#include "world/common/UnkYawFunc.inc.c"
-
-INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C61020", func_80242C84_C63994);
-
-INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C61020", func_80242CC8_C639D8);
+#include "world/common/LetterDelivery.inc.c"

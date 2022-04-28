@@ -45,13 +45,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80243D28_8045A8);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80243D60_8045E0);
 
-#include "world/common/SetManyVars.inc.c"
-
-#include "world/common/UnkYawFunc.inc.c"
-
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80244078_8048F8);
-
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_802440BC_80493C);
+#include "world/common/LetterDelivery.inc.c"
 
 #include "world/common/GetPlayerCoins.inc.c"
 
