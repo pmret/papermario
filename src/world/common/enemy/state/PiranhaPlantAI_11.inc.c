@@ -1,6 +1,6 @@
 #include "common.h"
 
-void N(PiranhaPlantAI_11)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(PiranhaPlantAI_11)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 

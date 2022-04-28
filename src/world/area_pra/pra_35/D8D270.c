@@ -12,8 +12,8 @@ ApiStatus func_802423CC_D8F61C(Evt *script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;
-    EnemyTerritoryThing territory;
-    EnemyTerritoryThing* territoryPtr = &territory;
+    EnemyDetectVolume territory;
+    EnemyDetectVolume* territoryPtr = &territory;
     NpcAISettings* npcAISettings = (NpcAISettings*)evt_get_variable(script, *args++);
 
     territory.skipPlayerDetectChance = 0;
@@ -23,7 +23,7 @@ ApiStatus func_802423CC_D8F61C(Evt *script, s32 isInitialCall) {
     territory.sizeX = enemy->territory->patrol.detectSizeX;
     territory.sizeZ = enemy->territory->patrol.detectSizeZ;
     territory.halfHeight = 65.0f;
-    territory.unk_1C = 0;
+    territory.detectFlags = 0;
 
     if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAGS_4)) {
         script->functionTemp[0] = 0;

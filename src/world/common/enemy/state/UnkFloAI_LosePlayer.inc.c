@@ -1,7 +1,7 @@
 #include "common.h"
 #include "npc.h"
 
-void N(UnkFloAI_LosePlayer)(Evt* script, NpcAISettings* npcAISettings, EnemyTerritoryThing* territory) {
+void N(UnkFloAI_LosePlayer)(Evt* script, NpcAISettings* npcAISettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 

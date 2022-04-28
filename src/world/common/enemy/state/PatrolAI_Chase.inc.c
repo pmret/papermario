@@ -1,7 +1,7 @@
 #include "common.h"
 #include "npc.h"
 
-ApiStatus N(PatrolAI_Chase)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+ApiStatus N(PatrolAI_Chase)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 emoteTemp;

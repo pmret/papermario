@@ -1,7 +1,7 @@
 #include "common.h"
 #include "npc.h"
 
-void N(PatrolAI_Loiter)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(PatrolAI_Loiter)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 emoteTemp;

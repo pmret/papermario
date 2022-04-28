@@ -3,7 +3,7 @@
 
 extern f32 N(sixFloats)[];
 
-void N(FlyingAI_Jump)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(FlyingAI_Jump)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 

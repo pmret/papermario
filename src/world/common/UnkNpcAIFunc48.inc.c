@@ -2,7 +2,7 @@
 #include "npc.h"
 #include "effects.h"
 
-void N(UnkNpcAIFunc48)(Evt* script, f32 arg1, f32 arg2, EnemyTerritoryThing* territory) {
+void N(UnkNpcAIFunc48)(Evt* script, f32 arg1, f32 arg2, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 

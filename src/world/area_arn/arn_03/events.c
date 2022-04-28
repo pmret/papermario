@@ -101,7 +101,7 @@ NpcSettings N(npcSettings_80241C3C) = {
 
 #include "world/common/enemy/PatrolNoAttackAI.inc.c"
 
-void N(func_80240E90_BDFC20)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(func_80240E90_BDFC20)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 posX, posY, posZ, posW;
@@ -137,7 +137,7 @@ void N(func_80240E90_BDFC20)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
     }
 }
 
-void N(func_80241068_BDFDF8)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(func_80241068_BDFDF8)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -158,8 +158,8 @@ ApiStatus N(func_8024113C_BDFECC)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Bytecode* args = script->ptrReadPos;
     Npc* npc = get_npc_unsafe(enemy->npcID);
-    EnemyTerritoryThing territory;
-    EnemyTerritoryThing* territoryPtr = &territory;
+    EnemyDetectVolume territory;
+    EnemyDetectVolume* territoryPtr = &territory;
     NpcAISettings* npcAISettings = (NpcAISettings*)evt_get_variable(script, *args++);
 
     territory.skipPlayerDetectChance = 0;
@@ -169,7 +169,7 @@ ApiStatus N(func_8024113C_BDFECC)(Evt* script, s32 isInitialCall) {
     territory.sizeX = enemy->territory->patrol.detectSizeX;
     territory.sizeZ = enemy->territory->patrol.detectSizeZ;
     territory.halfHeight = 100.0f;
-    territory.unk_1C = 0;
+    territory.detectFlags = 0;
 
     if (isInitialCall) {
         script->functionTemp[0] = 0;

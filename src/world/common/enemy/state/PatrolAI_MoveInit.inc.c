@@ -2,7 +2,7 @@
 #include "npc.h"
 
 // selects the next patrol point
-void N(PatrolAI_MoveInit)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(PatrolAI_MoveInit)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 ret;

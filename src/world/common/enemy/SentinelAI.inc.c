@@ -39,7 +39,7 @@ enum AiStateSentinel {
 
 #define SENTINEL_AI_DESCEND_RATE        1.8
 
-void N(SentinelAI_ChaseInit)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(SentinelAI_ChaseInit)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 deltaAngle;
@@ -66,7 +66,7 @@ void N(SentinelAI_ChaseInit)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
     }
 }
 
-void N(SentinelAI_Chase)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(SentinelAI_Chase)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -88,7 +88,7 @@ void N(SentinelAI_Chase)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryT
     }
 }
 
-void N(SentinelAI_DescendInit)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(SentinelAI_DescendInit)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 i;
@@ -110,7 +110,7 @@ void N(SentinelAI_DescendInit)(Evt* script, NpcAISettings* aiSettings, EnemyTerr
     script->AI_TEMP_STATE = AI_STATE_SENTINEL_DESCEND;
 }
 
-void N(SentinelAI_Descend)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(SentinelAI_Descend)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 posX, posY, posZ, hitDepth;
@@ -154,7 +154,7 @@ void N(SentinelAI_Descend)(Evt* script, NpcAISettings* aiSettings, EnemyTerritor
     }
 }
 
-void N(SentinelAI_LosePlayerInit)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(SentinelAI_LosePlayerInit)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -169,7 +169,7 @@ void N(SentinelAI_LosePlayerInit)(Evt* script, NpcAISettings* aiSettings, EnemyT
     script->AI_TEMP_STATE = AI_STATE_SENTINEL_LOSE_PLAYER;
 }
 
-void N(SentinelAI_LosePlayer)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(SentinelAI_LosePlayer)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 posX, posY, posZ, posW;
@@ -191,7 +191,7 @@ void N(SentinelAI_LosePlayer)(Evt* script, NpcAISettings* aiSettings, EnemyTerri
     }
 }
 
-void N(SentinelAI_PostLosePlayer)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(SentinelAI_PostLosePlayer)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -201,7 +201,7 @@ void N(SentinelAI_PostLosePlayer)(Evt* script, NpcAISettings* aiSettings, EnemyT
     }
 }
 
-void N(SentinelAI_GrabPlayer)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(SentinelAI_GrabPlayer)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -218,7 +218,7 @@ void N(SentinelAI_GrabPlayer)(Evt* script, NpcAISettings* aiSettings, EnemyTerri
     }
 }
 
-void N(SentinelAI_ReturnHomeInit)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(SentinelAI_ReturnHomeInit)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -230,7 +230,7 @@ void N(SentinelAI_ReturnHomeInit)(Evt* script, NpcAISettings* aiSettings, EnemyT
     script->functionTemp[1] = 30;
 }
 
-void N(SentinelAI_ReturnHome)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(SentinelAI_ReturnHome)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 posX = npc->pos.x;
@@ -277,8 +277,8 @@ ApiStatus N(SentinelAI_Main)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;
-    EnemyTerritoryThing territory;
-    EnemyTerritoryThing* territoryPtr = &territory;
+    EnemyDetectVolume territory;
+    EnemyDetectVolume* territoryPtr = &territory;
     NpcAISettings* aiSettings =(NpcAISettings*) evt_get_variable(script, *args);
 
     territory.skipPlayerDetectChance = 0;
@@ -288,7 +288,7 @@ ApiStatus N(SentinelAI_Main)(Evt* script, s32 isInitialCall) {
     territory.sizeX = enemy->territory->wander.detectSizeX;
     territory.sizeZ = enemy->territory->wander.detectSizeZ;
     territory.halfHeight = 125.0f;
-    territory.unk_1C = 0;
+    territory.detectFlags = 0;
 
     if (isInitialCall) {
         script->AI_TEMP_STATE = AI_STATE_SENTINEL_WANDER_INIT;

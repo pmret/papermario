@@ -1,7 +1,7 @@
 #include "common.h"
 #include "npc.h"
 
-void N(GrooveGuyAI_02)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(GrooveGuyAI_02)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -11,7 +11,7 @@ void N(GrooveGuyAI_02)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThi
     script->functionTemp[0] = 3;
 }
 
-void N(GrooveGuyAI_03)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(GrooveGuyAI_03)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe((s32) enemy->npcID);
     s32 phase;
@@ -67,8 +67,8 @@ void N(GrooveGuyAI_03)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThi
 ApiStatus N(GrooveGuyAI_Main)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
-    EnemyTerritoryThing territory;
-    EnemyTerritoryThing* territoryPtr = &territory;
+    EnemyDetectVolume territory;
+    EnemyDetectVolume* territoryPtr = &territory;
     Bytecode* args = script->ptrReadPos;
     NpcAISettings* aiSettings = (NpcAISettings*) evt_get_variable(script, *args++);
     f32 posX;
@@ -83,7 +83,7 @@ ApiStatus N(GrooveGuyAI_Main)(Evt* script, s32 isInitialCall) {
     territory.sizeX = enemy->territory->wander.detectSizeX;
     territory.sizeZ = enemy->territory->wander.detectSizeZ;
     territory.halfHeight = 65.0f;
-    territory.unk_1C = 0;
+    territory.detectFlags = 0;
     
     if (isInitialCall || enemy->aiFlags & 4) {
         script->functionTemp[0] = 0;

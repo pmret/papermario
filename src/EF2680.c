@@ -19,7 +19,7 @@ s32 func_80241594_EF3BA4(void) {
     return -1;
 }
 
-void func_802415DC_EF3BEC(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void func_802415DC_EF3BEC(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 x, y, z, w;
@@ -105,7 +105,7 @@ void func_802415DC_EF3BEC(Evt* script, NpcAISettings* aiSettings, EnemyTerritory
     }
 }
 
-void func_80241A40_EF4050(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void func_80241A40_EF4050(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 x, y, z, w;

@@ -1,7 +1,7 @@
 #include "common.h"
 #include "npc.h"
 
-void N(HoppingAI_ChaseInit)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(HoppingAI_ChaseInit)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
     Npc* enemy = get_npc_unsafe(script->owner1.enemy->npcID);
 
     basic_ai_chase_init(script, aiSettings, territory);

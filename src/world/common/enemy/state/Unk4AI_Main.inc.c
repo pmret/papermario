@@ -5,8 +5,8 @@ ApiStatus N(Unk4AI_Main)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
-    EnemyTerritoryThing territory;
-    EnemyTerritoryThing* territoryPtr = &territory;
+    EnemyDetectVolume territory;
+    EnemyDetectVolume* territoryPtr = &territory;
     NpcAISettings* aiSettings = (NpcAISettings*)evt_get_variable(script, *args++);
 
     territory.skipPlayerDetectChance = 0;
@@ -16,7 +16,7 @@ ApiStatus N(Unk4AI_Main)(Evt* script, s32 isInitialCall) {
     territory.sizeX = enemy->territory->wander.detectSizeX;
     territory.sizeZ = enemy->territory->wander.detectSizeZ;
     territory.halfHeight = 65.0f;
-    territory.unk_1C = 0;
+    territory.detectFlags = 0;
 
     if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAGS_4)) {
         script->AI_TEMP_STATE = 0;

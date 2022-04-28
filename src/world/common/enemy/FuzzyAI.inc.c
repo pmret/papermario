@@ -2,7 +2,7 @@
 
 #include "world/common/enemy/state/HoppingAI_Hop.inc.c"
 
-void N(HoppingAI_LoiterInit)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(HoppingAI_LoiterInit)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -18,7 +18,7 @@ void N(HoppingAI_LoiterInit)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
 
 #include "world/common/enemy/state/HoppingAI_Chase.inc.c"
 
-void N(HoppingAI_LosePlayer)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(HoppingAI_LosePlayer)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
     Npc* npc = get_npc_unsafe(script->owner1.enemy->npcID);
 
     npc->duration--;
@@ -32,8 +32,8 @@ ApiStatus N(HoppingAI_Main)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     NpcAISettings* aiSettings = (NpcAISettings*)evt_get_variable(script, *args++);
-    EnemyTerritoryThing territory;
-    EnemyTerritoryThing* territoryPtr;
+    EnemyDetectVolume territory;
+    EnemyDetectVolume* territoryPtr;
 
     enemy->varTable[10] = evt_get_variable(script, *args++);
     territory.skipPlayerDetectChance = 0;
@@ -43,7 +43,7 @@ ApiStatus N(HoppingAI_Main)(Evt* script, s32 isInitialCall) {
     territory.sizeX = enemy->territory->wander.detectSizeX;
     territory.sizeZ = enemy->territory->wander.detectSizeZ;
     territory.halfHeight = 100.0f;
-    territory.unk_1C = 0;
+    territory.detectFlags = 0;
     territoryPtr = &territory;
 
     if (isInitialCall) {

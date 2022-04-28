@@ -11,8 +11,8 @@ ApiStatus N(TackleAI_Main)(Evt* script, s32 isInitialCall) {
     #endif
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;
-    EnemyTerritoryThing territory;
-    EnemyTerritoryThing* territoryPtr = &territory;
+    EnemyDetectVolume territory;
+    EnemyDetectVolume* territoryPtr = &territory;
     NpcAISettings* aiSettings = (NpcAISettings*)evt_get_variable(script, *args++);
 
     territory.skipPlayerDetectChance = 0;
@@ -22,7 +22,7 @@ ApiStatus N(TackleAI_Main)(Evt* script, s32 isInitialCall) {
     territory.sizeX = enemy->territory->wander.detectSizeX;
     territory.sizeZ = enemy->territory->wander.detectSizeZ;
     territory.halfHeight = 100.0f;
-    territory.unk_1C = 0;
+    territory.detectFlags = 0;
 
     #ifdef _DEAD_H_
     enemy->unk_108.x = npc->pos.x;

@@ -22,7 +22,7 @@ enum AiStateCleft {
     AI_STATE_CLEFT_52                   = 52
 };
 
-s32 N(CleftAI_CanSeePlayer)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+s32 N(CleftAI_CanSeePlayer)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* volume) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Camera* camera = &gCameras[gCurrentCamID];
@@ -53,7 +53,7 @@ s32 N(CleftAI_CanSeePlayer)(Evt* script, NpcAISettings* aiSettings, EnemyTerrito
     return seesPlayer;
 }
 
-void N(CleftAI_00)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(CleftAI_00)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* volume) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -66,14 +66,14 @@ void N(CleftAI_00)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* 
     script->AI_TEMP_STATE = AI_STATE_CLEFT_1;
 }
 
-void N(CleftAI_01)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(CleftAI_01)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* volume) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 emoteTemp;
 
     if (script->functionTemp[1] <= 0) {
         script->functionTemp[1] = aiSettings->playerSearchInterval;
-        if (basic_ai_try_detect_player(territory, enemy, aiSettings->alertRadius * 0.85, aiSettings->unk_10.f, FALSE)) {
+        if (basic_ai_try_detect_player(volume, enemy, aiSettings->alertRadius * 0.85, aiSettings->unk_10.f, FALSE)) {
             npc->currentAnim.w = enemy->animList[9];
             fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &emoteTemp);
             ai_enemy_play_sound(npc, SOUND_2F4, 0x200000);
@@ -85,7 +85,7 @@ void N(CleftAI_01)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* 
     script->functionTemp[1]--;
 }
 
-void N(CleftAI_02)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(CleftAI_02)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* volume) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -99,7 +99,7 @@ void N(CleftAI_02)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* 
     }
 }
 
-void N(CleftAI_03)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(CleftAI_03)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* volume) {
     Npc* npc = get_npc_unsafe(script->owner1.enemy->npcID);
 
     npc->duration--;
@@ -111,7 +111,7 @@ void N(CleftAI_03)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* 
     }
 }
 
-void N(CleftAI_04)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(CleftAI_04)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* volume) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -121,12 +121,12 @@ void N(CleftAI_04)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* 
     script->AI_TEMP_STATE = AI_STATE_CLEFT_5;
 }
 
-void N(CleftAI_05)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(CleftAI_05)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* volume) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 var;
 
-    if (basic_ai_try_detect_player(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 0)) {
+    if (basic_ai_try_detect_player(volume, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 0)) {
         npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
         script->AI_TEMP_STATE = AI_STATE_CLEFT_12;
     } else {
@@ -145,7 +145,7 @@ void N(CleftAI_05)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* 
     }
 }
 
-void N(CleftAI_20)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(CleftAI_20)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* volume) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -154,7 +154,7 @@ void N(CleftAI_20)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* 
     script->AI_TEMP_STATE = AI_STATE_CLEFT_21;
 }
 
-void N(CleftAI_21)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(CleftAI_21)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* volume) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -179,7 +179,7 @@ void N(CleftAI_21)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* 
     }
 }
 
-void N(CleftAI_22)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(CleftAI_22)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* volume) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 posX, posY, posZ;
@@ -215,7 +215,7 @@ void N(CleftAI_22)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* 
     }
 }
 
-void N(CleftAI_40)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(CleftAI_40)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* volume) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -231,11 +231,11 @@ void N(CleftAI_40)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* 
     }
 }
 
-void N(CleftAI_41)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(CleftAI_41)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* volume) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
-    if (basic_ai_try_detect_player(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 0)) {
+    if (basic_ai_try_detect_player(volume, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 0)) {
         npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
         script->AI_TEMP_STATE = AI_STATE_CLEFT_12;
     } else if (dist2D(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x,
@@ -248,7 +248,7 @@ void N(CleftAI_41)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* 
     }
 }
 
-void N(CleftAI_50)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(CleftAI_50)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* volume) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -263,7 +263,7 @@ void N(CleftAI_50)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* 
     }
 }
 
-void N(CleftAI_51)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(CleftAI_51)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* volume) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -275,7 +275,7 @@ void N(CleftAI_51)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* 
     }
 }
 
-void N(CleftAI_52)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(CleftAI_52)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* volume) {
     Npc* npc = get_npc_unsafe(script->owner1.enemy->npcID);
 
     npc->duration--;
@@ -289,19 +289,19 @@ s32 N(CleftAI_Main)(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;
     NpcAISettings* npcAISettings = (NpcAISettings*)evt_get_variable(script, *args++);
-    EnemyTerritoryThing territory;
-    EnemyTerritoryThing* territoryPtr = &territory;
+    EnemyDetectVolume curVolume;
+    EnemyDetectVolume* volume = &curVolume;
 
     enemy->varTable[10] = evt_get_variable(script, *args++);
 
-    territory.skipPlayerDetectChance = 0;
-    territory.shape = enemy->territory->wander.detectShape;
-    territory.pointX = enemy->territory->wander.detect.x;
-    territory.pointZ = enemy->territory->wander.detect.z;
-    territory.sizeX = enemy->territory->wander.detectSizeX;
-    territory.sizeZ = enemy->territory->wander.detectSizeZ;
-    territory.halfHeight = 40.0f;
-    territory.unk_1C = 0;
+    curVolume.skipPlayerDetectChance = 0;
+    curVolume.shape = enemy->territory->wander.detectShape;
+    curVolume.pointX = enemy->territory->wander.detect.x;
+    curVolume.pointZ = enemy->territory->wander.detect.z;
+    curVolume.sizeX = enemy->territory->wander.detectSizeX;
+    curVolume.sizeZ = enemy->territory->wander.detectSizeZ;
+    curVolume.halfHeight = 40.0f;
+    curVolume.detectFlags = 0;
 
     if (isInitialCall) {
         script->AI_TEMP_STATE = AI_STATE_WANDER_INIT;
@@ -324,44 +324,53 @@ s32 N(CleftAI_Main)(Evt* script, s32 isInitialCall) {
         enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
     }
 
-    if (((script->AI_TEMP_STATE == 12) || (script->AI_TEMP_STATE == 13) || (script->AI_TEMP_STATE == 14))
-            && N(CleftAI_CanSeePlayer)(script, npcAISettings, territoryPtr)) {
+    if (((script->AI_TEMP_STATE == AI_STATE_CLEFT_12)
+            || (script->AI_TEMP_STATE == AI_STATE_CLEFT_13)
+            || (script->AI_TEMP_STATE == AI_STATE_CLEFT_14))
+            && N(CleftAI_CanSeePlayer)(script, npcAISettings, volume)) {
         script->AI_TEMP_STATE = 20;
     }
 
     switch (script->AI_TEMP_STATE) {
         case AI_STATE_CLEFT_0:
-            N(CleftAI_00)(script, npcAISettings, territoryPtr);
+            N(CleftAI_00)(script, npcAISettings, volume);
+            // fallthrough
         case AI_STATE_CLEFT_1:
-            N(CleftAI_01)(script, npcAISettings, territoryPtr);
+            N(CleftAI_01)(script, npcAISettings, volume);
             if (script->AI_TEMP_STATE != AI_STATE_CLEFT_2) {
                 return ApiStatus_BLOCK;
             }
+            // fallthrough
         case AI_STATE_CLEFT_2:
-            N(CleftAI_02)(script, npcAISettings, territoryPtr);
+            N(CleftAI_02)(script, npcAISettings, volume);
             if (script->AI_TEMP_STATE != AI_STATE_CLEFT_3) {
                 return ApiStatus_BLOCK;
             }
+            // fallthrough
         case AI_STATE_CLEFT_3:
-            N(CleftAI_03)(script, npcAISettings, territoryPtr);
+            N(CleftAI_03)(script, npcAISettings, volume);
             if (script->AI_TEMP_STATE != AI_STATE_CLEFT_4) {
                 return ApiStatus_BLOCK;
             }
+            // fallthrough
         case AI_STATE_CLEFT_4:
-            N(CleftAI_04)(script, npcAISettings, territoryPtr);
+            N(CleftAI_04)(script, npcAISettings, volume);
+            // fallthrough
         case AI_STATE_CLEFT_5:
-            N(CleftAI_05)(script, npcAISettings, territoryPtr);
+            N(CleftAI_05)(script, npcAISettings, volume);
             return ApiStatus_BLOCK;
         case AI_STATE_CLEFT_12:
-            basic_ai_chase_init(script, npcAISettings, territoryPtr);
+            basic_ai_chase_init(script, npcAISettings, volume);
             if (script->AI_TEMP_STATE != AI_STATE_CLEFT_13) {
                 return ApiStatus_BLOCK;
             }
+            // fallthrough
         case AI_STATE_CLEFT_13:
-            basic_ai_chase(script, npcAISettings, territoryPtr);
+            basic_ai_chase(script, npcAISettings, volume);
             if (script->AI_TEMP_STATE != AI_STATE_CLEFT_14) {
                 return ApiStatus_BLOCK;
             }
+            // fallthrough
         case AI_STATE_CLEFT_14:
             npc->duration--;
             if (npc->duration == 0) {
@@ -369,30 +378,34 @@ s32 N(CleftAI_Main)(Evt* script, s32 isInitialCall) {
             }
             return ApiStatus_BLOCK;
         case AI_STATE_CLEFT_20:
-            N(CleftAI_20)(script, npcAISettings, territoryPtr);
+            N(CleftAI_20)(script, npcAISettings, volume);
+            // fallthrough
         case AI_STATE_CLEFT_21:
-            N(CleftAI_21)(script, npcAISettings, territoryPtr);
+            N(CleftAI_21)(script, npcAISettings, volume);
             return ApiStatus_BLOCK;
         case AI_STATE_CLEFT_22:
-            N(CleftAI_22)(script, npcAISettings, territoryPtr);
+            N(CleftAI_22)(script, npcAISettings, volume);
             return ApiStatus_BLOCK;
         case AI_STATE_CLEFT_40:
-            N(CleftAI_40)(script, npcAISettings, territoryPtr);
+            N(CleftAI_40)(script, npcAISettings, volume);
             if (script->AI_TEMP_STATE != AI_STATE_CLEFT_41) {
                 return ApiStatus_BLOCK;
             }
+            // fallthrough
         case AI_STATE_CLEFT_41:
-            N(CleftAI_41)(script, npcAISettings, territoryPtr);
+            N(CleftAI_41)(script, npcAISettings, volume);
             return ApiStatus_BLOCK;
         case AI_STATE_CLEFT_50:
-            N(CleftAI_50)(script, npcAISettings, territoryPtr);
+            N(CleftAI_50)(script, npcAISettings, volume);
+            // fallthrough
         case AI_STATE_CLEFT_51:
-            N(CleftAI_51)(script, npcAISettings, territoryPtr);
+            N(CleftAI_51)(script, npcAISettings, volume);
             if (script->AI_TEMP_STATE != AI_STATE_CLEFT_52) {
                 return ApiStatus_BLOCK;
             }
+            // fallthrough
         case AI_STATE_CLEFT_52:
-            N(CleftAI_52)(script, npcAISettings, territoryPtr);
+            N(CleftAI_52)(script, npcAISettings, volume);
             return ApiStatus_BLOCK;
     }
 

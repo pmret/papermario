@@ -1,7 +1,7 @@
 #include "common.h"
 #include "effects.h"
 
-s32 N(MagikoopaAI_CanShootSpell)(Evt* script, f32 arg1, f32 arg2, EnemyTerritoryThing* territory) {
+s32 N(MagikoopaAI_CanShootSpell)(Evt* script, f32 arg1, f32 arg2, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Camera* camera = &gCameras[gCurrentCamID];

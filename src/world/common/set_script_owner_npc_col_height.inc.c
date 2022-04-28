@@ -2,7 +2,7 @@
 #include "npc.h"
 
 void N(set_script_owner_npc_col_height)(Evt* script, NpcAISettings* aiSettings,
-                                        EnemyTerritoryThing* territory) {
+                                        EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 

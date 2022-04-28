@@ -1,7 +1,7 @@
 #include "common.h"
 #include "npc.h"
 
-void N(ShyGuyWanderAI_14)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territoryPtr) {
+void N(ShyGuyWanderAI_14)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territoryPtr) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     

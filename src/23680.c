@@ -121,7 +121,7 @@ s32 is_point_within_region(s32 shape, f32 pointX, f32 pointY, f32 centerX, f32 c
     }
 }
 
-s32 basic_ai_try_detect_player(EnemyTerritoryThing* territory, Enemy* enemy, f32 radius, f32 moveSpeed, s8 useWorldYaw) {
+s32 basic_ai_try_detect_player(EnemyDetectVolume* territory, Enemy* enemy, f32 radius, f32 moveSpeed, s8 useWorldYaw) {
     Npc* npc = get_npc_unsafe(enemy->npcID);
     PlayerStatus* playerStatus = &gPlayerStatus;
     PartnerActionStatus* partnerActionStatus;
@@ -135,12 +135,12 @@ s32 basic_ai_try_detect_player(EnemyTerritoryThing* territory, Enemy* enemy, f32
 
     partnerActionStatus = &gPartnerActionStatus;
     if (partnerActionStatus->actingPartner == PARTNER_BOW && partnerActionStatus->partnerActionState
-            && !(territory->unk_1C & AI_TERRITORY_IGNORE_HIDING)) {
+            && !(territory->detectFlags & AI_TERRITORY_IGNORE_HIDING)) {
         return FALSE;
     }
 
     if (partnerActionStatus->actingPartner == PARTNER_SUSHIE && partnerActionStatus->partnerActionState
-            && !(territory->unk_1C & AI_TERRITORY_IGNORE_HIDING)) {
+            && !(territory->detectFlags & AI_TERRITORY_IGNORE_HIDING)) {
         return FALSE;
     }
 
@@ -149,7 +149,7 @@ s32 basic_ai_try_detect_player(EnemyTerritoryThing* territory, Enemy* enemy, f32
     }
 
     if (territory->halfHeight <= fabsf(npc->pos.y - playerStatus->position.y)
-            && !(territory->unk_1C & AI_TERRITORY_IGNORE_ELEVATION)) {
+            && !(territory->detectFlags & AI_TERRITORY_IGNORE_ELEVATION)) {
         return FALSE;
     }
 
@@ -259,7 +259,7 @@ void ai_try_set_state(Evt* script, s32 state) {
     }
 }
 
-void basic_ai_wander_init(Evt* script, NpcAISettings* npcAISettings, EnemyTerritoryThing* territory) {
+void basic_ai_wander_init(Evt* script, NpcAISettings* npcAISettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -280,7 +280,7 @@ void basic_ai_wander_init(Evt* script, NpcAISettings* npcAISettings, EnemyTerrit
     script->functionTemp[0] = AI_STATE_WANDER;
 }
 
-void basic_ai_wander(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void basic_ai_wander(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 stillWithinTerritory = FALSE;
@@ -370,7 +370,7 @@ void basic_ai_wander(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing
     }
 }
 
-void basic_ai_loiter_init(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void basic_ai_loiter_init(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -380,7 +380,7 @@ void basic_ai_loiter_init(Evt* script, NpcAISettings* aiSettings, EnemyTerritory
     script->AI_TEMP_STATE = AI_STATE_LOITER;
 }
 
-void basic_ai_loiter(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void basic_ai_loiter(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 x, y, z;
@@ -422,7 +422,7 @@ void basic_ai_loiter(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing
     }
 }
 
-void basic_ai_found_player_jump_init(Evt* script, NpcAISettings* npcAISettings, EnemyTerritoryThing* territory) {
+void basic_ai_found_player_jump_init(Evt* script, NpcAISettings* npcAISettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -435,7 +435,7 @@ void basic_ai_found_player_jump_init(Evt* script, NpcAISettings* npcAISettings, 
     script->functionTemp[0] = AI_STATE_ALERT;
 }
 
-void basic_ai_found_player_jump(Evt* script, NpcAISettings* npcAISettings, EnemyTerritoryThing* territory) {
+void basic_ai_found_player_jump(Evt* script, NpcAISettings* npcAISettings, EnemyDetectVolume* territory) {
     Npc* npc = get_npc_unsafe(script->owner1.enemy->npcID);
     s32 done = FALSE;
 
@@ -456,7 +456,7 @@ void basic_ai_found_player_jump(Evt* script, NpcAISettings* npcAISettings, Enemy
     }
 }
 
-void basic_ai_chase_init(Evt* script, NpcAISettings* npcAISettings, EnemyTerritoryThing* territory) {
+void basic_ai_chase_init(Evt* script, NpcAISettings* npcAISettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 skipTurnAround = FALSE;
@@ -491,7 +491,7 @@ void basic_ai_chase_init(Evt* script, NpcAISettings* npcAISettings, EnemyTerrito
     script->functionTemp[0] = AI_STATE_CHASE;
 }
 
-void basic_ai_chase(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void basic_ai_chase(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 sp28;
@@ -534,7 +534,7 @@ void basic_ai_chase(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing*
     }
 }
 
-void basic_ai_lose_player(Evt* script, NpcAISettings* npcAISettings, EnemyTerritoryThing* territory) {
+void basic_ai_lose_player(Evt* script, NpcAISettings* npcAISettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -550,8 +550,8 @@ ApiStatus BasicAI_Main(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;
-    EnemyTerritoryThing territory;
-    EnemyTerritoryThing* pTerritory = &territory;
+    EnemyDetectVolume territory;
+    EnemyDetectVolume* pTerritory = &territory;
     NpcAISettings* aiSettings = (NpcAISettings*) evt_get_variable(script, *args++);
 
     territory.skipPlayerDetectChance = 0;
@@ -561,7 +561,7 @@ ApiStatus BasicAI_Main(Evt* script, s32 isInitialCall) {
     territory.sizeX = enemy->territory->wander.detectSizeX;
     territory.sizeZ = enemy->territory->wander.detectSizeZ;
     territory.halfHeight = 65.0f;
-    territory.unk_1C = 0;
+    territory.detectFlags = 0;
 
     if (isInitialCall || enemy->aiFlags & ENEMY_AI_FLAGS_4) {
         script->functionTemp[0] = AI_STATE_WANDER_INIT;

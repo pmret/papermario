@@ -1,6 +1,6 @@
 #include "world/common/enemy/FuzzyAI.inc.c"
 
-void N(StoneChompAI_HopInit)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(StoneChompAI_HopInit)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
     Npc* npc = get_npc_unsafe(script->owner1.enemy->npcID);
 
     basic_ai_wander_init(script, aiSettings, territory);
@@ -8,7 +8,7 @@ void N(StoneChompAI_HopInit)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
     npc->jumpScale = 1.5f;
 }
 
-void N(StoneChompAI_ChaseInit)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(StoneChompAI_ChaseInit)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
     Npc* npc = get_npc_unsafe(script->owner1.enemy->npcID);
 
     basic_ai_chase_init(script, aiSettings, territory);
@@ -20,8 +20,8 @@ ApiStatus N(StoneChompAI_Main)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Bytecode* args = script->ptrReadPos;
     Npc* npc = get_npc_unsafe(enemy->npcID);
-    EnemyTerritoryThing territory;
-    EnemyTerritoryThing* territoryPtr = &territory;
+    EnemyDetectVolume territory;
+    EnemyDetectVolume* territoryPtr = &territory;
     NpcAISettings* aiSettings = (NpcAISettings*)evt_get_variable(script, *args);
 
     territory.skipPlayerDetectChance = 0;
@@ -31,7 +31,7 @@ ApiStatus N(StoneChompAI_Main)(Evt* script, s32 isInitialCall) {
     territory.sizeX = enemy->territory->wander.detectSizeX;
     territory.sizeZ = enemy->territory->wander.detectSizeZ;
     territory.halfHeight = 100.0f;
-    territory.unk_1C = 0;
+    territory.detectFlags = 0;
 
     if (isInitialCall) {
         npc->duration = 0;

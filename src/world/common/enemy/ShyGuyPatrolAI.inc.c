@@ -3,7 +3,7 @@
 
 #include "world/common/enemy/PatrolNoAttackAI.inc.c"
 
-void N(ShyGuyPatrolAI_14)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territoryPtr) {
+void N(ShyGuyPatrolAI_14)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territoryPtr) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     
@@ -13,7 +13,7 @@ void N(ShyGuyPatrolAI_14)(Evt* script, NpcAISettings* aiSettings, EnemyTerritory
     script->functionTemp[0] = 0xF;
 }
 
-void N(ShyGuyPatrolAI_15)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(ShyGuyPatrolAI_15)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe((s32) enemy->npcID);
     f32 yaw = npc->yaw;
@@ -32,7 +32,7 @@ void N(ShyGuyPatrolAI_15)(Evt* script, NpcAISettings* aiSettings, EnemyTerritory
     }
 }
 
-void N(ShyGuyPatrolAI_16)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(ShyGuyPatrolAI_16)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 yaw = npc->yaw;
@@ -48,7 +48,7 @@ void N(ShyGuyPatrolAI_16)(Evt* script, NpcAISettings* aiSettings, EnemyTerritory
     }
 }
 
-void N(ShyGuyPatrolAI_17)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(ShyGuyPatrolAI_17)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -62,8 +62,8 @@ void N(ShyGuyPatrolAI_17)(Evt* script, NpcAISettings* aiSettings, EnemyTerritory
 ApiStatus N(ShyGuyPatrolAI_Main)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
-    EnemyTerritoryThing territory;
-    EnemyTerritoryThing* territoryPtr = &territory;
+    EnemyDetectVolume territory;
+    EnemyDetectVolume* territoryPtr = &territory;
     Bytecode* args = script->ptrReadPos;
     NpcAISettings* aiSettings = (NpcAISettings*) evt_get_variable(script, *args++);
     f32 posX;
@@ -78,7 +78,7 @@ ApiStatus N(ShyGuyPatrolAI_Main)(Evt* script, s32 isInitialCall) {
     territory.sizeX = enemy->territory->patrol.detectSizeX;
     territory.sizeZ = enemy->territory->patrol.detectSizeZ;
     territory.halfHeight = 65.0f;
-    territory.unk_1C = 0;
+    territory.detectFlags = 0;
     
    if (isInitialCall || enemy->aiFlags & 4) {
         script->functionTemp[0] = 0;

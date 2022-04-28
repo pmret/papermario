@@ -197,8 +197,8 @@ typedef struct {
     /* 0x10 */ s32 sizeX;
     /* 0x14 */ s32 sizeZ;
     /* 0x18 */ f32 halfHeight;
-    /* 0x1C */ s16 unk_1C;  // 1 = ignore partner hiding (bow/sushie dont work) | 2 = ignore elevation
-} EnemyTerritoryThing; // size = 0x20
+    /* 0x1C */ s16 detectFlags;  // 1 = ignore partner hiding (bow/sushie dont work) | 2 = ignore elevation
+} EnemyDetectVolume; // size = 0x20
 
 typedef struct {
     /* 0x00 */ Vec3i point;
@@ -231,7 +231,7 @@ typedef union {
 } EnemyTerritory; // size = 0xC0
 
 // function signature used for state handlers in AI main functions
-typedef void AIStateHandler(Evt* script, NpcAISettings* settings, EnemyTerritoryThing* territory);
+typedef void AIStateHandler(Evt* script, NpcAISettings* settings, EnemyDetectVolume* territory);
 
 typedef struct Enemy {
     /* 0x00 */ s32 flags;
@@ -287,7 +287,7 @@ typedef struct Enemy {
     /* 0xDC */ char unk_DC[20];
 } Enemy; // size = 0xF0
 
-s32 basic_ai_try_detect_player(EnemyTerritoryThing* arg0, Enemy* arg1, f32 arg2, f32 arg3, s8 arg4);
+s32 basic_ai_try_detect_player(EnemyDetectVolume* arg0, Enemy* arg1, f32 arg2, f32 arg3, s8 arg4);
 
 /// The default Npc::onUpdate and Npc::onRender callback.
 void STUB_npc_callback(Npc*);

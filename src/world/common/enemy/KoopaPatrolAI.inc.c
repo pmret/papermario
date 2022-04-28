@@ -10,18 +10,18 @@ ApiStatus N(KoopaPatrolAI_Main)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;
-    EnemyTerritoryThing territory;
-    EnemyTerritoryThing* territoryPtr = &territory;
+    EnemyDetectVolume territory;
+    EnemyDetectVolume* territoryPtr = &territory;
     NpcAISettings* settings = (NpcAISettings*) evt_get_variable(script, *args++);
 
-    territoryPtr->skipPlayerDetectChance = 0;
-    territoryPtr->shape = enemy->territory->patrol.detectShape;
-    territoryPtr->pointX = enemy->territory->patrol.detect.x;
-    territoryPtr->pointZ = enemy->territory->patrol.detect.z;
-    territoryPtr->sizeX = enemy->territory->patrol.detectSizeX;
-    territoryPtr->sizeZ = enemy->territory->patrol.detectSizeZ;
-    territoryPtr->halfHeight = 100.0f;
-    territoryPtr->unk_1C = 0;
+    territory.skipPlayerDetectChance = 0;
+    territory.shape = enemy->territory->patrol.detectShape;
+    territory.pointX = enemy->territory->patrol.detect.x;
+    territory.pointZ = enemy->territory->patrol.detect.z;
+    territory.sizeX = enemy->territory->patrol.detectSizeX;
+    territory.sizeZ = enemy->territory->patrol.detectSizeZ;
+    territory.halfHeight = 100.0f;
+    territory.detectFlags = 0;
 
     if (isInitialCall) {
         enemy->varTable[6] = npc->collisionHeight;

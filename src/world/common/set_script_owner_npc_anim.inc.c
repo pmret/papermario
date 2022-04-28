@@ -1,7 +1,7 @@
 #include "common.h"
 #include "npc.h"
 
-void N(set_script_owner_npc_anim)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(set_script_owner_npc_anim)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 

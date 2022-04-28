@@ -1,7 +1,7 @@
 #include "common.h"
 #include "npc.h"
 
-void N(LakituAI_Wander)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(LakituAI_Wander)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 x, y, z, w;

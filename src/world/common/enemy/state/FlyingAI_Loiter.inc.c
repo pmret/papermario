@@ -2,7 +2,7 @@
 #include "npc.h"
 #include "effects.h"
 
-void N(FlyingAI_Loiter)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(FlyingAI_Loiter)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 posX, posY, posZ, posW;

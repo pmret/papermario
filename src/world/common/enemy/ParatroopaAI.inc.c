@@ -11,7 +11,7 @@ enum AiStateParatroopa {
     AI_STATE_PARATROOPA_RESET           = 15
 };
 
-void N(ParatroopaAI_Windup)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(ParatroopaAI_Windup)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
     Bytecode* args = script->ptrReadPos;
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
@@ -36,7 +36,7 @@ void N(ParatroopaAI_Windup)(Evt* script, NpcAISettings* aiSettings, EnemyTerrito
     script->AI_TEMP_STATE = AI_STATE_PARATROOPA_DIVE;
 }
 
-void N(ParatroopaAI_Dive)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(ParatroopaAI_Dive)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(script->owner1.enemy->npcID);
 
@@ -55,7 +55,7 @@ void N(ParatroopaAI_Dive)(Evt* script, NpcAISettings* aiSettings, EnemyTerritory
     }
 }
 
-void N(ParatroopaAI_Overshoot)(Evt *script, NpcAISettings *arg1, EnemyTerritoryThing *arg2)
+void N(ParatroopaAI_Overshoot)(Evt *script, NpcAISettings *arg1, EnemyDetectVolume *arg2)
 {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
@@ -87,7 +87,7 @@ void N(ParatroopaAI_Overshoot)(Evt *script, NpcAISettings *arg1, EnemyTerritoryT
     }
 }
 
-void N(ParatroopaAI_Reset)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(ParatroopaAI_Reset)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
     Npc* npc = get_npc_unsafe(script->owner1.enemy->npcID);
 
     npc->duration--;
@@ -100,8 +100,8 @@ ApiStatus N(ParatroopaAI_Main)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
-    EnemyTerritoryThing territory;
-    EnemyTerritoryThing* territoryPtr = &territory;
+    EnemyDetectVolume territory;
+    EnemyDetectVolume* territoryPtr = &territory;
     NpcAISettings* aiSettings = (NpcAISettings*)evt_get_variable(script, *args++);
     
     territory.skipPlayerDetectChance = 0;
@@ -111,7 +111,7 @@ ApiStatus N(ParatroopaAI_Main)(Evt* script, s32 isInitialCall) {
     territory.sizeX = enemy->territory->wander.detectSizeX;
     territory.sizeZ = enemy->territory->wander.detectSizeZ;
     territory.halfHeight = 120.0f;
-    territory.unk_1C = 0;
+    territory.detectFlags = 0;
     
     if (isInitialCall) {
         N(FlyingAI_Init)(npc, enemy, script, aiSettings);

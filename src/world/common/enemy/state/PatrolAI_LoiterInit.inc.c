@@ -2,7 +2,7 @@
 #include "npc.h"
 
 // identical to basic_ai_loiter_init
-void N(PatrolAI_LoiterInit)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(PatrolAI_LoiterInit)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 

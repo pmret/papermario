@@ -9,9 +9,9 @@
 extern s32 N(ItemChoiceList)[];
 extern s32 N(FlowerGuard_ItemChoiceList)[91];
 
-void func_80241364_ECB064(Evt* script, NpcAISettings* npcAISettings, EnemyTerritoryThing* territory);
+void func_80241364_ECB064(Evt* script, NpcAISettings* npcAISettings, EnemyDetectVolume* territory);
 
-void func_80240D80_ECAA80(Evt* script, NpcAISettings* npcAISettings, EnemyTerritoryThing* territory) {
+void func_80240D80_ECAA80(Evt* script, NpcAISettings* npcAISettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -127,7 +127,7 @@ void func_80240D80_ECAA80(Evt* script, NpcAISettings* npcAISettings, EnemyTerrit
 
 INCLUDE_ASM(s32, "ECAA80", func_80241364_ECB064);
 
-void func_802414C8_ECB1C8(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void func_802414C8_ECB1C8(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
     Npc* npc = get_npc_unsafe(script->owner1.enemy->npcID);
 
     npc->duration--;
@@ -140,8 +140,8 @@ ApiStatus func_8024150C_ECB20C(Evt* script, s32 isInitialCall) {
     DeadEnemy* enemy = (DeadEnemy*) script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;
-    EnemyTerritoryThing territory;
-    EnemyTerritoryThing* territoryPtr = &territory;
+    EnemyDetectVolume territory;
+    EnemyDetectVolume* territoryPtr = &territory;
     NpcAISettings* npcAISettings = (NpcAISettings*)evt_get_variable(script, *args++);
 
     territory.skipPlayerDetectChance = 0;
@@ -151,7 +151,7 @@ ApiStatus func_8024150C_ECB20C(Evt* script, s32 isInitialCall) {
     territory.sizeX = enemy->territory->wander.detectSizeX;
     territory.sizeZ = enemy->territory->wander.detectSizeZ;
     territory.halfHeight = 100.0f;
-    territory.unk_1C = 0;
+    territory.detectFlags = 0;
 
     enemy->unk_108.x = npc->pos.x;
     enemy->unk_108.y = npc->pos.y;

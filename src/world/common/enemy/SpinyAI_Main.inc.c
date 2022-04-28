@@ -10,8 +10,8 @@ ApiStatus N(SpinyAI_Main)(Evt* script, s32 isInitialCall) {
     #endif
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;
-    EnemyTerritoryThing territory;
-    EnemyTerritoryThing* territoryPtr = &territory;
+    EnemyDetectVolume territory;
+    EnemyDetectVolume* territoryPtr = &territory;
     NpcAISettings* aiSettings = (NpcAISettings*)evt_get_variable(script, *args);
     u32 x, y, z;
     f32 x2, y2, z2, w2;
@@ -24,7 +24,7 @@ ApiStatus N(SpinyAI_Main)(Evt* script, s32 isInitialCall) {
     territory.sizeX = enemy->territory->wander.detectSizeX;
     territory.sizeZ = enemy->territory->wander.detectSizeZ;
     territory.halfHeight = 65.0f;
-    territory.unk_1C = 0;
+    territory.detectFlags = 0;
 
     #ifdef _DEAD_H_
     enemy->unk_108.x = npc->pos.x;

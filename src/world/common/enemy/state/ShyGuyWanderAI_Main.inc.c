@@ -4,8 +4,8 @@
 ApiStatus N(ShyGuyWanderAI_Main)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
-    EnemyTerritoryThing territory;
-    EnemyTerritoryThing* territoryPtr = &territory;
+    EnemyDetectVolume territory;
+    EnemyDetectVolume* territoryPtr = &territory;
     Bytecode* args = script->ptrReadPos;
     NpcAISettings* aiSettings = (NpcAISettings*) evt_get_variable(script, *args++);
     f32 posX;
@@ -20,7 +20,7 @@ ApiStatus N(ShyGuyWanderAI_Main)(Evt* script, s32 isInitialCall) {
     territory.sizeX = enemy->territory->wander.detectSizeX;
     territory.sizeZ = enemy->territory->wander.detectSizeZ;
     territory.halfHeight = 65.0f;
-    territory.unk_1C = 0;
+    territory.detectFlags = 0;
     
    if (isInitialCall || enemy->aiFlags & 4) {
         script->functionTemp[0] = 0;

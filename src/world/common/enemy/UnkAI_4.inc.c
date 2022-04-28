@@ -4,7 +4,7 @@
 
 #include "world/common/enemy/state/Unk4AI_10.inc.c"
 
-void N(Unk4AI_11)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(Unk4AI_11)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
     Npc* npc = get_npc_unsafe(script->owner1.enemy->npcID);
 
     npc->pos.y += npc->jumpVelocity;

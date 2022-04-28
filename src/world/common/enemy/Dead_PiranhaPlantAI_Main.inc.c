@@ -10,8 +10,8 @@ ApiStatus N(PiranhaPlantAI_Main)(Evt* script, s32 isInitialCall) {
     DeadEnemy* enemy = (DeadEnemy*) script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     NpcAISettings* settings = (NpcAISettings*) evt_get_variable(script, *script->ptrReadPos);
-    EnemyTerritoryThing territory;
-    EnemyTerritoryThing* territoryPtr = &territory;
+    EnemyDetectVolume territory;
+    EnemyDetectVolume* territoryPtr = &territory;
 
     territory.skipPlayerDetectChance = 0;
     territory.shape = enemy->territory->wander.detectShape;
@@ -20,7 +20,7 @@ ApiStatus N(PiranhaPlantAI_Main)(Evt* script, s32 isInitialCall) {
     territory.sizeX = enemy->territory->wander.detectSizeX;
     territory.sizeZ = enemy->territory->wander.detectSizeZ;
     territory.halfHeight = 200.0f;
-    territory.unk_1C = 0;
+    territory.detectFlags = 0;
 
     // Dead Func that doesn't seem to have an alive counterpart, probably because of the
     // difference in the Enemy and DeadEnemy struct.

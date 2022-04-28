@@ -16,8 +16,8 @@ ApiStatus N(PatrolNoAttackAI_Main)(Evt* script, s32 isInitialCall) {
     #endif
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;
-    EnemyTerritoryThing territory;
-    EnemyTerritoryThing* territoryPtr = &territory;
+    EnemyDetectVolume territory;
+    EnemyDetectVolume* territoryPtr = &territory;
     NpcAISettings* npcAISettings = (NpcAISettings*)evt_get_variable(script, *args++);
     f32 posX, posY, posZ, posW;
 
@@ -28,7 +28,7 @@ ApiStatus N(PatrolNoAttackAI_Main)(Evt* script, s32 isInitialCall) {
     territory.sizeX = enemy->territory->patrol.detectSizeX;
     territory.sizeZ = enemy->territory->patrol.detectSizeZ;
     territory.halfHeight = 65.0f;
-    territory.unk_1C = 0;
+    territory.detectFlags = 0;
 
     #ifdef _DEAD_H_
     enemy->unk_108.x = npc->pos.x;

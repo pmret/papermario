@@ -12,7 +12,7 @@ extern MagikoopaTeleportAnim N(MagikoopaAI_TeleportAnim)[];
 
 #include "world/common/enemy/MagikoopaSpellAI.inc.c"
 
-void N(MagikoopaAI_00)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(MagikoopaAI_00)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -25,7 +25,7 @@ void N(MagikoopaAI_00)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThi
     }
 }
 
-void N(MagikoopaAI_01)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(MagikoopaAI_01)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     npc->scale.x = N(MagikoopaAI_TeleportAnim)[npc->duration].scaleX;
@@ -48,7 +48,7 @@ void N(MagikoopaAI_01)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThi
     }
 }
 
-void N(MagikoopaAI_05)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(MagikoopaAI_05)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
     Npc* npc = get_npc_unsafe(script->owner1.enemy->npcID);
     f32 angle = (rand_int(100) % 2) * 180.0f;
 
@@ -58,7 +58,7 @@ void N(MagikoopaAI_05)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThi
     script->AI_TEMP_STATE = 6;
 }
 
-void N(MagikoopaAI_06)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(MagikoopaAI_06)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -69,7 +69,7 @@ void N(MagikoopaAI_06)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThi
     }
 }
 
-void N(MagikoopaAI_10)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(MagikoopaAI_10)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 dist = dist2D(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
@@ -95,7 +95,7 @@ void N(MagikoopaAI_10)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThi
     script->AI_TEMP_STATE = 0xB;
 }
 
-void N(MagikoopaAI_11)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(MagikoopaAI_11)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe((s32) enemy->npcID);
     f32 scale;
@@ -141,7 +141,7 @@ void N(MagikoopaAI_11)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThi
     }
 }
 
-void N(MagikoopaAI_20)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(MagikoopaAI_20)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -149,7 +149,7 @@ void N(MagikoopaAI_20)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThi
     script->AI_TEMP_STATE = 21;
 }
 
-void N(MagikoopaAI_21)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(MagikoopaAI_21)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 posX, posY, posZ;
@@ -177,7 +177,7 @@ void N(MagikoopaAI_21)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThi
     }
 }
 
-void N(MagikoopaAI_22)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(MagikoopaAI_22)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* temp_s0 = script->owner1.enemy;
     Npc* temp_v0 = get_npc_unsafe(temp_s0->npcID);
     
@@ -189,7 +189,7 @@ void N(MagikoopaAI_22)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThi
     }
 }
 
-void N(MagikoopaAI_23)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(MagikoopaAI_23)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 projectileEnemy;
@@ -212,7 +212,7 @@ void N(MagikoopaAI_23)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThi
     }
 }
 
-void N(MagikoopaAI_24)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(MagikoopaAI_24)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     
@@ -227,8 +227,8 @@ void N(MagikoopaAI_24)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThi
 ApiStatus N(MagikoopaAI_Main)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
-    EnemyTerritoryThing territory;
-    EnemyTerritoryThing* territoryPtr = &territory;
+    EnemyDetectVolume territory;
+    EnemyDetectVolume* territoryPtr = &territory;
     Bytecode* args = script->ptrReadPos;
     NpcAISettings* aiSettings = (NpcAISettings*) evt_get_variable(script, *args++);
     f32 posX;
@@ -243,7 +243,7 @@ ApiStatus N(MagikoopaAI_Main)(Evt* script, s32 isInitialCall) {
     territory.sizeX = enemy->territory->wander.detectSizeX;
     territory.sizeZ = enemy->territory->wander.detectSizeZ;
     territory.halfHeight = 100.0f;
-    territory.unk_1C = 0;
+    territory.detectFlags = 0;
     
     if (isInitialCall || (enemy->aiFlags & 4)) {
         npc->currentAnim.w = enemy->animList[0];
