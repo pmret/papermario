@@ -106,7 +106,7 @@ static void N(MontyMoleAI_Wander)(Evt* script, NpcAISettings* aiSettings, EnemyD
     if (aiSettings->playerSearchInterval >= 0) {
         if (script->functionTemp[1] <= 0) {
             script->functionTemp[1] = aiSettings->playerSearchInterval;
-            if (N(MontyMoleAI_CanAttack)(script, territory, aiSettings->alertRadius, aiSettings->unk_10.f)) {
+            if (N(MontyMoleAI_CanAttack)(script, territory, aiSettings->alertRadius, aiSettings->unk_AI_10.f)) {
                 npc->duration = 0;
                 script->AI_TEMP_STATE = AI_STATE_MOLE_PRE_SURFACE;
                 return;
@@ -158,7 +158,7 @@ static void N(MontyMoleAI_DrawRock)(Evt* script, NpcAISettings* aiSettings, Enem
     
     npc->duration--;
     if ((npc->duration) <= 0) {
-        if (!N(MontyMoleAI_CanAttack)(script, territory, aiSettings->alertRadius * 1.1, aiSettings->unk_10.f)) {
+        if (!N(MontyMoleAI_CanAttack)(script, territory, aiSettings->alertRadius * 1.1, aiSettings->unk_AI_10.f)) {
             fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &emoteOut);
             npc->currentAnim.w = NPC_ANIM_monty_mole_Palette_00_Anim_1; // cancel attack
             npc->duration = 30;

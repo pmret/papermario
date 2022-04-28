@@ -33,6 +33,7 @@ dead_get_npc_safe = 0x8003E534; // get_npc_safe
 dead_heap_malloc = 0x8002BFD4;
 dead_general_heap_malloc = 0x8002BF18;
 dead_heap_free = 0x8002C01C;
+dead_func_80041080 = 0x80041080;
 dead_evt_set_variable = 0x802D5468;
 dead_sin_deg = 0x8002B5DC;
 dead_cos_deg = 0x8002B640;

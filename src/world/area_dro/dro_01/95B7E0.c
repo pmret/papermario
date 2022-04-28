@@ -241,7 +241,7 @@ NpcAISettings N(npcAISettings_80245010) = {
     .moveTime = 60,
     .waitTime = 30,
     .playerSearchInterval = -1,
-    .unk_2C = 1,
+    .unk_AI_2C = 1,
 };
 
 EvtScript N(npcAI_80245040) = {
@@ -263,7 +263,7 @@ NpcAISettings N(npcAISettings_8024508C) = {
     .moveTime = 30,
     .waitTime = 30,
     .playerSearchInterval = -1,
-    .unk_2C = 1,
+    .unk_AI_2C = 1,
 };
 
 EvtScript N(npcAI_802450BC) = {

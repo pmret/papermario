@@ -43,16 +43,16 @@ void N(FlyingAI_LosePlayer)(Evt* script, NpcAISettings* aiSettings, EnemyDetectV
         }
     } else if (npc->jumpVelocity < 0.0) {
         npc->duration++;
-        if (npc->duration >= aiSettings->unk_20) {
+        if (npc->duration >= aiSettings->unk_AI_20) {
             npc->duration = 0;
             phi_f20 = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
             temp_f0_2 = get_clamped_angle_diff(npc->yaw, phi_f20);
-            if (aiSettings->unk_1C.s < fabsf(temp_f0_2)) {
+            if (aiSettings->unk_AI_1C.s < fabsf(temp_f0_2)) {
                 phi_f20 = npc->yaw;
                 if (temp_f0_2 < 0.0f) {
-                    phi_f20 += -aiSettings->unk_1C.s;
+                    phi_f20 += -aiSettings->unk_AI_1C.s;
                 } else {
-                    phi_f20 += aiSettings->unk_1C.s;
+                    phi_f20 += aiSettings->unk_AI_1C.s;
                 }
             }
             npc->yaw = clamp_angle(phi_f20);

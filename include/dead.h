@@ -110,5 +110,6 @@
 #define destroy_popup_menu dead_destroy_popup_menu
 #define heap_free dead_heap_free
 #define entity_upgrade_block_hide_content dead_entity_upgrade_block_hide_content
+#define func_8003D660 dead_func_80041080
 
 #endif

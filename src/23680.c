@@ -243,7 +243,7 @@ void ai_enemy_play_sound(Npc* npc, s32 soundID, s32 upperSoundFlags) {
         soundFlags |= 0x10000;
     }
 
-    if (enemy->npcSettings->unk_2A & 0x20) {
+    if (enemy->npcSettings->unk_2A & AI_ACTION_20) {
         soundFlags |= 0x20000;
     }
 
@@ -291,7 +291,7 @@ void basic_ai_wander(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* 
     if (aiSettings->playerSearchInterval >= 0) {
         if (script->functionTemp[1] <= 0) {
             script->functionTemp[1] = aiSettings->playerSearchInterval;
-            if (basic_ai_try_detect_player(territory, enemy, aiSettings->alertRadius, aiSettings->unk_10.f, 0)) {
+            if (basic_ai_try_detect_player(territory, enemy, aiSettings->alertRadius, aiSettings->unk_AI_10.f, 0)) {
                 x = npc->pos.x;
                 y = npc->pos.y;
                 z = npc->pos.z;
@@ -363,7 +363,7 @@ void basic_ai_wander(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* 
         if (npc->duration <= 0) {
             script->functionTemp[0] = AI_STATE_LOITER_INIT;
             script->functionTemp[1] = rand_int(1000) % 3 + 2;
-            if (aiSettings->unk_2C <= 0 || aiSettings->waitTime <= 0) {
+            if (aiSettings->unk_AI_2C <= 0 || aiSettings->waitTime <= 0) {
                 script->AI_TEMP_STATE = AI_STATE_WANDER_INIT;
             }
         }
@@ -472,16 +472,16 @@ void basic_ai_chase_init(Evt* script, NpcAISettings* npcAISettings, EnemyDetectV
         f32 angle = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
         f32 deltaAngleToPlayer = get_clamped_angle_diff(npc->yaw, angle);
 
-        if (npcAISettings->unk_1C.s < fabsf(deltaAngleToPlayer)) {
+        if (npcAISettings->unk_AI_1C.s < fabsf(deltaAngleToPlayer)) {
             angle = npc->yaw;
             if (deltaAngleToPlayer < 0.0f) {
-                angle += -npcAISettings->unk_1C.s;
+                angle += -npcAISettings->unk_AI_1C.s;
             } else {
-                angle += npcAISettings->unk_1C.s;
+                angle += npcAISettings->unk_AI_1C.s;
             }
         }
         npc->yaw = clamp_angle(angle);
-        npc->duration = (npcAISettings->unk_20 / 2) + rand_int((npcAISettings->unk_20 / 2) + 1);
+        npc->duration = (npcAISettings->unk_AI_20 / 2) + rand_int((npcAISettings->unk_AI_20 / 2) + 1);
     } else {
         npc->duration = 0;
     }
@@ -505,7 +505,7 @@ void basic_ai_chase(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* t
         return;
     }
 
-    if (enemy->npcSettings->unk_2A & 4) {
+    if (enemy->npcSettings->unk_2A & AI_ACTION_04) {
         if (dist2D(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z) > (npc->moveSpeed * 5.0)) {
             x = npc->pos.x;
             y = npc->pos.y;

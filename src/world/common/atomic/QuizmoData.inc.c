@@ -679,7 +679,7 @@ NpcAISettings N(Quizmo_NpcAISettings) = {
     .moveTime = 30,
     .waitTime = 20,
     .playerSearchInterval = -1,
-    .unk_2C = 1,
+    .unk_AI_2C = 1,
 };
 
 EvtScript N(EVS_Quizmo_Npc_AI) = {

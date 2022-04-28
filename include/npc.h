@@ -75,14 +75,14 @@ typedef struct NpcAISettings {
     /* 0x04 */ s32 moveTime;
     /* 0x08 */ s32 waitTime;
     /* 0x0C */ f32 alertRadius;
-    /* 0x10 */ X32 unk_10;
+    /* 0x10 */ X32 unk_AI_10;   // .s only used by Unk4AI
     /* 0x14 */ s32 playerSearchInterval; // how often to search for player (frames)
     /* 0x18 */ f32 chaseSpeed;
-    /* 0x1C */ X32 unk_1C; // chase turn step?
-    /* 0x20 */ s32 unk_20;
+    /* 0x1C */ X32 unk_AI_1C;   // .f only used by Unk4AI
+    /* 0x20 */ s32 unk_AI_20;
     /* 0x24 */ f32 chaseRadius;
     /* 0x28 */ f32 unkChase;
-    /* 0x2C */ s32 unk_2C; // bool
+    /* 0x2C */ s32 unk_AI_2C; // flags? either 0/1/3
 } NpcAISettings; // size = 0x30
 
 typedef struct NpcSettings {

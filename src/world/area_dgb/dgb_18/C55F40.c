@@ -93,14 +93,14 @@ static s32 N(pad_1578)[] = {
 NpcAISettings N(npcAISettings_80241580) = {
     .moveSpeed = 4.5f,
     .alertRadius = 170.0f,
-    .unk_10 = { .f = 90.0f },
+    .unk_AI_10 = { .f = 90.0f },
     .playerSearchInterval = 1,
     .chaseSpeed = 3.9f,
-    .unk_1C = { .s = 180 },
-    .unk_20 = 2,
+    .unk_AI_1C = { .s = 180 },
+    .unk_AI_20 = 2,
     .chaseRadius = 170.0f,
     .unkChase = 90.0f,
-    .unk_2C = 1,
+    .unk_AI_2C = 1,
 };
 
 EvtScript N(802415B0) = {

@@ -48,17 +48,17 @@ void N(SentinelAI_ChaseInit)(Evt* script, NpcAISettings* aiSettings, EnemyDetect
     npc->duration--;
     if (npc->duration <= 0) {
         npc->flags &= ~NPC_FLAG_200000;
-        npc->duration = aiSettings->unk_20 / 2 + rand_int(aiSettings->unk_20 / 2 + 1);
+        npc->duration = aiSettings->unk_AI_20 / 2 + rand_int(aiSettings->unk_AI_20 / 2 + 1);
         npc->currentAnim.w = enemy->animList[ENEMY_ANIM_MELEE_PRE];
         npc->moveSpeed = aiSettings->chaseSpeed;
         angle = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
         deltaAngle = get_clamped_angle_diff(npc->yaw, angle);
-        if (aiSettings->unk_1C.s < fabsf(deltaAngle)) {
+        if (aiSettings->unk_AI_1C.s < fabsf(deltaAngle)) {
             angle = npc->yaw;
             if (deltaAngle < 0.0f) {
-                angle += -aiSettings->unk_1C.s;
+                angle += -aiSettings->unk_AI_1C.s;
             } else {
-                angle += aiSettings->unk_1C.s;
+                angle += aiSettings->unk_AI_1C.s;
             }
         }
         npc->yaw = clamp_angle(angle);
@@ -252,7 +252,7 @@ void N(SentinelAI_ReturnHome)(Evt* script, NpcAISettings* aiSettings, EnemyDetec
     enemy->varTable[2] = clamp_angle(enemy->varTable[2] + 12);
     if (script->functionTemp[1] <= 0) {
         script->functionTemp[1] = aiSettings->playerSearchInterval;
-        if (basic_ai_try_detect_player(territory, enemy, aiSettings->alertRadius * 0.5, aiSettings->unk_10.f * 0.5, 0)) {
+        if (basic_ai_try_detect_player(territory, enemy, aiSettings->alertRadius * 0.5, aiSettings->unk_AI_10.f * 0.5, 0)) {
             fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 12, &emoteTemp);
             ai_enemy_play_sound(npc, SOUND_2F4, 0x200000);
             npc->moveToPos.y = npc->pos.y;

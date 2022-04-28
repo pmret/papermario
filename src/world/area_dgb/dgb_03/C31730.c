@@ -423,14 +423,14 @@ NpcAISettings N(npcAISettings_80243A5C) = {
     .moveTime = 120,
     .waitTime = 30,
     .alertRadius = 85.0f,
-    .unk_10 = { .f = 65.0f },
+    .unk_AI_10 = { .f = 65.0f },
     .playerSearchInterval = 5,
     .chaseSpeed = 3.5f,
-    .unk_1C = { .s = 90 },
-    .unk_20 = 12,
+    .unk_AI_1C = { .s = 90 },
+    .unk_AI_20 = 12,
     .chaseRadius = 110.0f,
     .unkChase = 90.0f,
-    .unk_2C = 3,
+    .unk_AI_2C = 3,
 };
 
 EvtScript N(npcAI_80243A8C) = {
@@ -457,14 +457,14 @@ NpcAISettings N(npcAISettings_80243B28) = {
     .moveTime = 20,
     .waitTime = 30,
     .alertRadius = 85.0f,
-    .unk_10 = { .f = 65.0f },
+    .unk_AI_10 = { .f = 65.0f },
     .playerSearchInterval = 5,
     .chaseSpeed = 3.5f,
-    .unk_1C = { .s = 90 },
-    .unk_20 = 12,
+    .unk_AI_1C = { .s = 90 },
+    .unk_AI_20 = 12,
     .chaseRadius = 110.0f,
     .unkChase = 90.0f,
-    .unk_2C = 3,
+    .unk_AI_2C = 3,
 };
 
 EvtScript N(npcAI_80243B58) = {
@@ -491,14 +491,14 @@ NpcAISettings N(npcAISettings_80243BF4) = {
     .moveTime = 120,
     .waitTime = 30,
     .alertRadius = 100.0f,
-    .unk_10 = { .f = 40.0f },
+    .unk_AI_10 = { .f = 40.0f },
     .playerSearchInterval = 10,
     .chaseSpeed = 3.5f,
-    .unk_1C = { .s = 90 },
-    .unk_20 = 15,
+    .unk_AI_1C = { .s = 90 },
+    .unk_AI_20 = 15,
     .chaseRadius = 200.0f,
     .unkChase = 160.0f,
-    .unk_2C = 1,
+    .unk_AI_2C = 1,
 };
 
 EvtScript N(npcAI_80243C24) = {

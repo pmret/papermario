@@ -2,7 +2,11 @@
 #include "npc.h"
 
 ApiStatus N(UnkFloAI_Main)(Evt* script, s32 isInitialCall) {
+    #ifdef _DEAD_H_
+    DeadEnemy* enemy = script->owner1.enemy;
+    #else
     Enemy* enemy = script->owner1.enemy;
+    #endif
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;
     EnemyDetectVolume territory;
@@ -17,6 +21,14 @@ ApiStatus N(UnkFloAI_Main)(Evt* script, s32 isInitialCall) {
     territory.sizeZ = enemy->territory->wander.detectSizeZ;
     territory.halfHeight = 100.0f;
     territory.detectFlags = 0;
+
+    #ifdef _DEAD_H_
+    enemy->unk_108.x = npc->pos.x;
+    enemy->unk_108.y = npc->pos.y;
+    enemy->unk_108.z = npc->pos.z;
+    enemy->unk_114 = 0.01f;
+    enemy->unk_118 = 0.01f;
+    #endif
 
     if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAGS_4)) {
         script->functionTemp[0] = AI_STATE_WANDER_INIT;

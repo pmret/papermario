@@ -2821,7 +2821,10 @@ enum EnemyAIAnims {
 enum EnemyActionFlags {
     AI_ACTION_JUMP_WHEN_SEE_PLAYER          = 0x01,
     AI_ACTION_02                            = 0x02,
+    AI_ACTION_04                            = 0x04,
+    AI_ACTION_08                            = 0x08,
     AI_ACTION_LOOK_AROUND_DURING_LOITER     = 0x10,
+    AI_ACTION_20                            = 0x20
 };
 
 enum EnemyDetectFlags {

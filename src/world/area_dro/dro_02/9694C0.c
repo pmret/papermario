@@ -471,7 +471,7 @@ NpcAISettings N(npcAISettings_80247408) = {
     .moveTime = 60,
     .waitTime = 30,
     .playerSearchInterval = -1,
-    .unk_2C = 1,
+    .unk_AI_2C = 1,
 };
 
 EvtScript N(npcAI_80247438) = {
@@ -500,7 +500,7 @@ NpcAISettings N(npcAISettings_802474B0) = {
     .moveTime = 60,
     .waitTime = 30,
     .playerSearchInterval = -1,
-    .unk_2C = 1,
+    .unk_AI_2C = 1,
 };
 
 EvtScript N(npcAI_802474E0) = {

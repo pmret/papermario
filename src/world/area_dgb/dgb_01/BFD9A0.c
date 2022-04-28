@@ -497,10 +497,10 @@ NpcAISettings N(npcAISettings_80244D24) = {
     .alertRadius = 240.0f,
     .playerSearchInterval = 1,
     .chaseSpeed = 5.3f,
-    .unk_1C = { .s = 180 },
-    .unk_20 = 1,
+    .unk_AI_1C = { .s = 180 },
+    .unk_AI_20 = 1,
     .chaseRadius = 240.0f,
-    .unk_2C = 1,
+    .unk_AI_2C = 1,
 };
 
 #define AI_SENTINEL_FIRST_NPC 0
@@ -608,14 +608,14 @@ NpcSettings N(npcSettings_8024526C) = {
 NpcAISettings N(npcAISettings_80245298) = {
     .moveSpeed = 4.5f,
     .alertRadius = 170.0f,
-    .unk_10 = { .f = 90.0f },
+    .unk_AI_10 = { .f = 90.0f },
     .playerSearchInterval = 1,
     .chaseSpeed = 3.9f,
-    .unk_1C = { .s = 180 },
-    .unk_20 = 2,
+    .unk_AI_1C = { .s = 180 },
+    .unk_AI_20 = 2,
     .chaseRadius = 170.0f,
     .unkChase = 90.0f,
-    .unk_2C = 1,
+    .unk_AI_2C = 1,
 };
 
 EvtScript N(npcAI_802452C8) = {

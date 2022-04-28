@@ -10,10 +10,10 @@ NpcAISettings N(npcAISettings_80240300) = {
     .alertRadius = 250.0f,
     .playerSearchInterval = 2,
     .chaseSpeed = 3.5f,
-    .unk_1C = { .s = 45 },
-    .unk_20 = 6,
+    .unk_AI_1C = { .s = 45 },
+    .unk_AI_20 = 6,
     .chaseRadius = 300.0f,
-    .unk_2C = 1,
+    .unk_AI_2C = 1,
 };
 
 EvtScript N(npcAI_80240330) = {

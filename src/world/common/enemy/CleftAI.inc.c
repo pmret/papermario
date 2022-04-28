@@ -30,7 +30,7 @@ s32 N(CleftAI_CanSeePlayer)(Evt* script, NpcAISettings* aiSettings, EnemyDetectV
     f32 angle;
     s32 seesPlayer = FALSE;
 
-    if (func_800493EC(enemy, 0, aiSettings->alertRadius, aiSettings->unk_10.f)) {
+    if (func_800493EC(enemy, 0, aiSettings->alertRadius, aiSettings->unk_AI_10.f)) {
         seesPlayer = TRUE;
     }
     if (clamp_angle(get_clamped_angle_diff(camera->currentYaw, npc->yaw)) < 180.0) {
@@ -73,7 +73,7 @@ void N(CleftAI_01)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* vo
 
     if (script->functionTemp[1] <= 0) {
         script->functionTemp[1] = aiSettings->playerSearchInterval;
-        if (basic_ai_try_detect_player(volume, enemy, aiSettings->alertRadius * 0.85, aiSettings->unk_10.f, FALSE)) {
+        if (basic_ai_try_detect_player(volume, enemy, aiSettings->alertRadius * 0.85, aiSettings->unk_AI_10.f, FALSE)) {
             npc->currentAnim.w = enemy->animList[9];
             fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &emoteTemp);
             ai_enemy_play_sound(npc, SOUND_2F4, 0x200000);

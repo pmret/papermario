@@ -33,7 +33,7 @@ void N(LakituAI_Wander)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolum
     if (aiSettings->playerSearchInterval >= 0) {
         if (script->functionTemp[1] <= 0) {
             script->functionTemp[1] = aiSettings->playerSearchInterval;
-            if (basic_ai_try_detect_player(territory, enemy, aiSettings->alertRadius, aiSettings->unk_10.f, 0) != 0) {
+            if (basic_ai_try_detect_player(territory, enemy, aiSettings->alertRadius, aiSettings->unk_AI_10.f, 0) != 0) {
                 fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &var);
                 ai_enemy_play_sound(npc, 0x2F4, 0x200000);
                 x = npc->pos.x;
@@ -81,7 +81,7 @@ void N(LakituAI_Wander)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolum
         }
         script->functionTemp[0] = 2;
         script->functionTemp[1] = (rand_int(1000) % 3) + 2;
-        if ((aiSettings->unk_2C <= 0) || (aiSettings->moveTime <= 0) || (script->functionTemp[1] == 0)) {
+        if ((aiSettings->unk_AI_2C <= 0) || (aiSettings->moveTime <= 0) || (script->functionTemp[1] == 0)) {
             script->functionTemp[0] = 0;
         }
     }

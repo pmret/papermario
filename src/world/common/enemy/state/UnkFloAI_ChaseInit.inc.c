@@ -23,7 +23,7 @@ void N(UnkFloAI_ChaseInit)(Evt* script, NpcAISettings* npcAISettings, EnemyDetec
     f32 posYCCW;
     f32 posZCCW;
     
-    npc->duration = npcAISettings->unk_20 / 2 + rand_int(npcAISettings->unk_20 / 2 + 1);
+    npc->duration = npcAISettings->unk_AI_20 / 2 + rand_int(npcAISettings->unk_AI_20 / 2 + 1);
     npc->currentAnim.w = enemy->animList[ENEMY_ANIM_CHASE];
     npc->moveSpeed = npcAISettings->chaseSpeed;
     detectedPlayer = FALSE;
@@ -31,12 +31,12 @@ void N(UnkFloAI_ChaseInit)(Evt* script, NpcAISettings* npcAISettings, EnemyDetec
     yawFwd = clamp_angle(atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x,
                                  gPlayerStatusPtr->position.z) + 180.0f);
     deltaYaw = get_clamped_angle_diff(npc->yaw, yawFwd);
-    if (npcAISettings->unk_1C.s < fabsf(deltaYaw)) {
+    if (npcAISettings->unk_AI_1C.s < fabsf(deltaYaw)) {
         yawFwd = npc->yaw;
         if (deltaYaw < 0.0f) {
-            yawFwd += -npcAISettings->unk_1C.s;
+            yawFwd += -npcAISettings->unk_AI_1C.s;
         } else {
-            yawFwd += npcAISettings->unk_1C.s;
+            yawFwd += npcAISettings->unk_AI_1C.s;
         }
     }
 
@@ -80,7 +80,7 @@ void N(UnkFloAI_ChaseInit)(Evt* script, NpcAISettings* npcAISettings, EnemyDetec
         distToPlayer = dist2D(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
 
         if ((distFwd < npc->moveSpeed * 1.5) && (distCW < npc->moveSpeed * 1.5) && (distCCW < npc->moveSpeed * 1.5) &&
-            (basic_ai_try_detect_player(territory, enemy, npcAISettings->alertRadius, npcAISettings->unk_10.f, 0))) {
+            (basic_ai_try_detect_player(territory, enemy, npcAISettings->alertRadius, npcAISettings->unk_AI_10.f, 0))) {
             detectedPlayer = TRUE;
         }
 
@@ -100,12 +100,12 @@ void N(UnkFloAI_ChaseInit)(Evt* script, NpcAISettings* npcAISettings, EnemyDetec
             }
 
             deltaYaw = get_clamped_angle_diff(npc->yaw, yawFwd);
-            if (npcAISettings->unk_1C.s < fabsf(deltaYaw)) {
+            if (npcAISettings->unk_AI_1C.s < fabsf(deltaYaw)) {
                 yawFwd = npc->yaw;
                 if (deltaYaw < 0.0f) {
-                    yawFwd += -npcAISettings->unk_1C.s;
+                    yawFwd += -npcAISettings->unk_AI_1C.s;
                 } else {
-                    yawFwd += npcAISettings->unk_1C.s;
+                    yawFwd += npcAISettings->unk_AI_1C.s;
                 }
             }
             npc->yaw = clamp_angle(yawFwd);

@@ -93,7 +93,7 @@ void N(FlyingAI_Wander)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolum
             if (script->functionTemp[1] <= 0) {
                 script->functionTemp[1] = aiSettings->playerSearchInterval;
                 if (gPlayerStatusPtr->position.y < (npc->pos.y + npc->collisionHeight) + 10.0 && 
-                    basic_ai_try_detect_player(territory, enemy, aiSettings->alertRadius, aiSettings->unk_10.f, 0) != 0) 
+                    basic_ai_try_detect_player(territory, enemy, aiSettings->alertRadius, aiSettings->unk_AI_10.f, 0) != 0) 
                 {
                     s32 emoteTemp;
                     fx_emote(EMOTE_EXCLAMATION, npc, 0, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xC, &emoteTemp);
@@ -138,7 +138,7 @@ void N(FlyingAI_Wander)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolum
         if ((npc->duration <= 0) || (--npc->duration <= 0)) {
             script->AI_TEMP_STATE = AI_STATE_LOITER_INIT;
             script->functionTemp[1] = (rand_int(1000) % 3) + 2;
-            if (aiSettings->unk_2C <= 0 || aiSettings->waitTime <= 0 || script->functionTemp[1] < 3) {
+            if (aiSettings->unk_AI_2C <= 0 || aiSettings->waitTime <= 0 || script->functionTemp[1] < 3) {
                 script->AI_TEMP_STATE = AI_STATE_WANDER_INIT;
             }
         }

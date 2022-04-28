@@ -129,10 +129,10 @@ NpcAISettings N(npcAISettings_802435B4) = {
     .alertRadius = 240.0f,
     .playerSearchInterval = 1,
     .chaseSpeed = 5.3f,
-    .unk_1C = { .s = 180 },
-    .unk_20 = 1,
+    .unk_AI_1C = { .s = 180 },
+    .unk_AI_20 = 1,
     .chaseRadius = 240.0f,
-    .unk_2C = 1,
+    .unk_AI_2C = 1,
 };
 
 extern const char N(dgb_00_name_hack)[];

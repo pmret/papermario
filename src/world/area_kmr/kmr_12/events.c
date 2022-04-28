@@ -34,14 +34,14 @@ NpcAISettings N(goombaAISettings) = {
     .moveTime = 30,
     .waitTime = 30,
     .alertRadius = 130.0f,
-    .unk_10 = { .f = 0.0f },
+    .unk_AI_10 = { .f = 0.0f },
     .playerSearchInterval = 1,
     .chaseSpeed = 2.5f,
-    .unk_1C = { .s = 180 },
-    .unk_20 = 3,
+    .unk_AI_1C = { .s = 180 },
+    .unk_AI_20 = 3,
     .chaseRadius = 150.0f,
     .unkChase = 0.0f,
-    .unk_2C = TRUE,
+    .unk_AI_2C = 1,
 };
 
 EvtScript kmr_12_GoombaAI = {

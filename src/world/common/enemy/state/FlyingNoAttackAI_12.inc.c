@@ -7,20 +7,20 @@ void N(FlyingNoAttackAI_12)(Evt* script, NpcAISettings* aiSettings, EnemyDetectV
     f32 tempAngle;
     f32 angleDiff;
 
-    npc->duration = (aiSettings->unk_20 / 2) + rand_int(aiSettings->unk_20 / 2 + 1);
+    npc->duration = (aiSettings->unk_AI_20 / 2) + rand_int(aiSettings->unk_AI_20 / 2 + 1);
     npc->currentAnim.w = enemy->animList[ENEMY_ANIM_CHASE];
     npc->moveSpeed = aiSettings->chaseSpeed;
 
     tempAngle = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
     angleDiff = get_clamped_angle_diff(npc->yaw, tempAngle);
 
-    if (aiSettings->unk_1C.s < fabsf(angleDiff)) {
+    if (aiSettings->unk_AI_1C.s < fabsf(angleDiff)) {
         tempAngle = npc->yaw;
 
         if (angleDiff < 0.0f) {
-            tempAngle += -aiSettings->unk_1C.s;
+            tempAngle += -aiSettings->unk_AI_1C.s;
         } else {
-            tempAngle += aiSettings->unk_1C.s;
+            tempAngle += aiSettings->unk_AI_1C.s;
         }
     }
 
