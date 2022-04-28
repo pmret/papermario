@@ -245,7 +245,7 @@ NpcAISettings N(npcAISettings_80244144) = {
     .unk_1C = { .s = 60 },
     .unk_20 = 10,
     .chaseRadius = 80.0f,
-    .unk_28 = { .f = 70.0f },
+    .unkChase = 70.0f,
     .unk_2C = 1,
 };
 
@@ -277,7 +277,7 @@ NpcAISettings N(npcAISettings_80244210) = {
     .playerSearchInterval = 3,
     .chaseSpeed = 6.0f,
     .chaseRadius = 100.0f,
-    .unk_28 = { .f = 30.0f },
+    .unkChase = 30.0f,
     .unk_2C = 3,
 };
 

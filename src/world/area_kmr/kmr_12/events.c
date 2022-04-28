@@ -40,7 +40,7 @@ NpcAISettings N(goombaAISettings) = {
     .unk_1C = { .s = 180 },
     .unk_20 = 3,
     .chaseRadius = 150.0f,
-    .unk_28 = { .f = 0.0f },
+    .unkChase = 0.0f,
     .unk_2C = TRUE,
 };
 

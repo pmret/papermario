@@ -387,7 +387,7 @@ void basic_ai_loiter(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* 
     f32 yaw;
     s32 emoteTemp;
 
-    if (aiSettings->playerSearchInterval >= 0 && basic_ai_try_detect_player(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 0)) {
+    if (aiSettings->playerSearchInterval >= 0 && basic_ai_try_detect_player(territory, enemy, aiSettings->chaseRadius, aiSettings->unkChase, 0)) {
         x = npc->pos.x;
         y = npc->pos.y;
         z = npc->pos.z;
@@ -497,7 +497,7 @@ void basic_ai_chase(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* t
     s32 sp28;
     f32 x, y, z;
 
-    if (!basic_ai_try_detect_player(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 1)) {
+    if (!basic_ai_try_detect_player(territory, enemy, aiSettings->chaseRadius, aiSettings->unkChase, 1)) {
         fx_emote(EMOTE_QUESTION, npc, 0, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &sp28);
         npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
         npc->duration = 20;

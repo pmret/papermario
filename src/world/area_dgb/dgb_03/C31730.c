@@ -429,7 +429,7 @@ NpcAISettings N(npcAISettings_80243A5C) = {
     .unk_1C = { .s = 90 },
     .unk_20 = 12,
     .chaseRadius = 110.0f,
-    .unk_28 = { .f = 90.0f },
+    .unkChase = 90.0f,
     .unk_2C = 3,
 };
 
@@ -463,7 +463,7 @@ NpcAISettings N(npcAISettings_80243B28) = {
     .unk_1C = { .s = 90 },
     .unk_20 = 12,
     .chaseRadius = 110.0f,
-    .unk_28 = { .f = 90.0f },
+    .unkChase = 90.0f,
     .unk_2C = 3,
 };
 
@@ -497,7 +497,7 @@ NpcAISettings N(npcAISettings_80243BF4) = {
     .unk_1C = { .s = 90 },
     .unk_20 = 15,
     .chaseRadius = 200.0f,
-    .unk_28 = { .f = 160.0f },
+    .unkChase = 160.0f,
     .unk_2C = 1,
 };
 

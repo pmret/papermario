@@ -130,7 +130,7 @@ void func_80241A40_EF4050(Evt* script, NpcAISettings* aiSettings, EnemyDetectVol
     npc_raycast_down_sides(npc->collisionChannel, &x, &y, &z, &w);
     npc->pos.y = y + temp_f22 + (sin_deg(enemy->varTable[2]) * temp_f20);
     enemy->varTable[2] = clamp_angle(enemy->varTable[2] + 0xC);
-    if (basic_ai_try_detect_player(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 1)) {
+    if (basic_ai_try_detect_player(territory, enemy, aiSettings->chaseRadius, aiSettings->unkChase, 1)) {
         fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &var);
         ai_enemy_play_sound(npc, 0x2F4, 0x200000);
         script->functionTemp[0] = 12;

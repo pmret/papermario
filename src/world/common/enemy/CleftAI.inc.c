@@ -126,7 +126,7 @@ void N(CleftAI_05)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* vo
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 var;
 
-    if (basic_ai_try_detect_player(volume, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 0)) {
+    if (basic_ai_try_detect_player(volume, enemy, aiSettings->chaseRadius, aiSettings->unkChase, 0)) {
         npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
         script->AI_TEMP_STATE = AI_STATE_CLEFT_12;
     } else {
@@ -235,7 +235,7 @@ void N(CleftAI_41)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* vo
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
-    if (basic_ai_try_detect_player(volume, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 0)) {
+    if (basic_ai_try_detect_player(volume, enemy, aiSettings->chaseRadius, aiSettings->unkChase, 0)) {
         npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
         script->AI_TEMP_STATE = AI_STATE_CLEFT_12;
     } else if (dist2D(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x,
@@ -276,7 +276,8 @@ void N(CleftAI_51)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* vo
 }
 
 void N(CleftAI_52)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* volume) {
-    Npc* npc = get_npc_unsafe(script->owner1.enemy->npcID);
+    Enemy* enemy = script->owner1.enemy;
+    Npc* npc = get_npc_unsafe(enemy->npcID);
 
     npc->duration--;
     if (npc->duration <= 0) {

@@ -39,7 +39,7 @@ void N(HoppingAI_Chase)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolum
             fx_walking_dust(2, npc->pos.x, npc->pos.y, npc->pos.z, 0.0f, 0.0f);
             script->functionTemp[0] = 12;
 
-            if (basic_ai_try_detect_player(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 1) == 0) {
+            if (basic_ai_try_detect_player(territory, enemy, aiSettings->chaseRadius, aiSettings->unkChase, 1) == 0) {
                 s32 emoteTemp;
 
                 fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &emoteTemp);

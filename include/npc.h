@@ -81,7 +81,7 @@ typedef struct NpcAISettings {
     /* 0x1C */ X32 unk_1C; // chase turn step?
     /* 0x20 */ s32 unk_20;
     /* 0x24 */ f32 chaseRadius;
-    /* 0x28 */ X32 unk_28;
+    /* 0x28 */ f32 unkChase;
     /* 0x2C */ s32 unk_2C; // bool
 } NpcAISettings; // size = 0x30
 

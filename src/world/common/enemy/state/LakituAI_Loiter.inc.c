@@ -26,7 +26,7 @@ void N(LakituAI_Loiter)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolum
     npc_raycast_down_sides(npc->collisionChannel, &posX, &posY, &posZ, &hitDepth);
     npc->pos.y = posY + temp_f22 + (sin_deg(enemy->varTable[2]) * temp_f20);
     enemy->varTable[2] = clamp_angle(enemy->varTable[2] + 12);
-    if (basic_ai_try_detect_player(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 1) != 0) {
+    if (basic_ai_try_detect_player(territory, enemy, aiSettings->chaseRadius, aiSettings->unkChase, 1) != 0) {
         fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &emoteTemp);
         ai_enemy_play_sound(npc, SOUND_2F4, 0x200000);
         script->AI_TEMP_STATE = AI_STATE_CHASE_INIT;

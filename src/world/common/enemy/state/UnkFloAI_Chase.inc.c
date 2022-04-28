@@ -6,7 +6,7 @@ void N(UnkFloAI_Chase)(Evt* script, NpcAISettings* npcAISettings, EnemyDetectVol
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 emoteTemp;
 
-    if (!basic_ai_try_detect_player(territory, enemy, npcAISettings->chaseRadius, npcAISettings->unk_28.f, 1)) {
+    if (!basic_ai_try_detect_player(territory, enemy, npcAISettings->chaseRadius, npcAISettings->unkChase, 1)) {
         fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &emoteTemp);
         npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
         npc->duration = 25;

@@ -198,7 +198,7 @@ NpcAISettings N(npcAISettings_80242EB0) = {
     .unk_1C = { .s = 15 },
     .unk_20 = 1,
     .chaseRadius = 140.0f,
-    .unk_28 = { .f = 30.0f },
+    .unkChase = 30.0f,
     .unk_2C = 1,
 };
 
@@ -247,7 +247,7 @@ NpcAISettings N(npcAISettings_8024300C) = {
     .unk_1C = { .s = 40 },
     .unk_20 = 3,
     .chaseRadius = 100.0f,
-    .unk_28 = { .f = 30.0f },
+    .unkChase = 30.0f,
     .unk_2C = 1,
 };
 

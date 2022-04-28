@@ -76,7 +76,7 @@ ApiStatus N(RangedAttackAI_Main)(Evt* script, s32 isInitialCall) {
         case AI_STATE_CHASE_INIT:
             dist = dist2D(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
             if (enemy->varTable[0] == 0 || enemy->varTable[0] < dist) {
-                N(UnkNpcAIFunc48)(script, settings->chaseRadius, settings->unk_28.f, territoryPtr);
+                N(UnkNpcAIFunc48)(script, settings->chaseRadius, settings->unkChase, territoryPtr);
                 if (script->AI_TEMP_STATE != AI_STATE_CHASE_INIT) {
                     break;
                 }

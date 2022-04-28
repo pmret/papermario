@@ -70,7 +70,7 @@ void N(SentinelAI_Chase)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolu
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
-    if (basic_ai_try_detect_player(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 1)) {
+    if (basic_ai_try_detect_player(territory, enemy, aiSettings->chaseRadius, aiSettings->unkChase, 1)) {
         npc_move_heading(npc, npc->moveSpeed, npc->yaw);
         if (dist2D(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x,
                    gPlayerStatusPtr->position.z) <= (npc->moveSpeed * 2.5)) {
@@ -117,7 +117,7 @@ void N(SentinelAI_Descend)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVo
     s32 color;
 
     sfx_adjust_env_sound_pos(SOUND_80000011, 2, npc->pos.x, npc->pos.y, npc->pos.z);
-    if (!basic_ai_try_detect_player(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 1)) {
+    if (!basic_ai_try_detect_player(territory, enemy, aiSettings->chaseRadius, aiSettings->unkChase, 1)) {
         enemy->varTable[0] &= ~SENTINEL_AI_FLAG_CHASING;
         npc->rotation.y = 0.0f;
         npc->flags &= ~NPC_FLAG_200000;
