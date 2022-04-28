@@ -62,7 +62,7 @@ ApiStatus N(HoppingAI_Main)(Evt* script, s32 isInitialCall) {
     }
 
     if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
-        if (enemy->unk_B4 != 0) {
+        if (enemy->aiPaused != 0) {
             return ApiStatus_BLOCK;
         }
         enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;

@@ -57,7 +57,7 @@ ApiStatus N(BulletBillAI_Main)(Evt* script, s32 isInitialCall) {
     }
     
     if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
-        if (enemy->unk_B4 != 0) {
+        if (enemy->aiPaused != 0) {
             return 0;
         }
         enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
@@ -174,7 +174,7 @@ ApiStatus N(BillBlasterAI_Main)(Evt* script, s32 isInitialCall) {
     
     if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
         npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
-        if (enemy->unk_B4 != 0) {
+        if (enemy->aiPaused != 0) {
             return ApiStatus_BLOCK;
         } 
         enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;

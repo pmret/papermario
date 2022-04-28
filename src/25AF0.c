@@ -14,7 +14,7 @@ void basic_ai_suspend(Evt* script) {
     Enemy* enemy = script->owner1.enemy;
 
     get_npc_unsafe(enemy->npcID);
-    if (enemy->unk_B4 == 0) {
+    if (enemy->aiPaused == 0) {
         script->functionTemp[0] = script->functionTemp[1];
     }
 }

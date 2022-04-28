@@ -26,7 +26,7 @@ ApiStatus N(FlyingNoAttackAI_Main)(Evt* script, s32 isInitialCall) {
     npc->verticalRenderOffset = -2;
 
     if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
-        if (enemy->unk_B4) {
+        if (enemy->aiPaused) {
             return ApiStatus_BLOCK;
         }
         enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
