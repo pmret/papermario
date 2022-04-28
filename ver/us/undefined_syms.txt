@@ -533,6 +533,7 @@ EB1170_LetterDelivery_SavedNpcAnim = 0x80244494;
 EA8AE0_LetterDelivery_SavedNpcAnim = 0x8024854C;
 EA0C10_LetterDelivery_SavedNpcAnim = 0x80246894;
 kzn_17_LetterDelivery_SavedNpcAnim = 0x802467B4;
+sam_06_LetterDelivery_SavedNpcAnim = 0x8024C1D8;
 sbk_30_LetterDelivery_SavedNpcAnim = 0x80244D88;
 sbk_34_LetterDelivery_SavedNpcAnim = 0x802429A4;
 D_80246990 = 0x80246990;

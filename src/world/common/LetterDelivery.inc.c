@@ -2,10 +2,13 @@
 
 // incomplete dedupe -- only the last two functions for now
 
-//#include "world/common/SetManyVars.inc.c"
-//#include "world/common/UnkYawFunc.inc.c"
+/*
+#include "world/common/LetterDelivery.inc.c"
+*/
 
-//#include "world/common/LetterDelivery.inc.c"
+#include "world/common/SetManyVars.inc.c"
+
+#include "world/common/UnkYawFunc.inc.c"
 
 extern s32 N(LetterDelivery_SavedNpcAnim);
 

@@ -98,8 +98,4 @@ ApiStatus func_80242A4C_EA334C(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#include "world/common/SetManyVars.inc.c"
-
-#include "world/common/UnkYawFunc.inc.c"
-
 #include "world/common/LetterDelivery.inc.c"
