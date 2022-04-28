@@ -158,7 +158,7 @@ glabel func_802423CC_D8F61C
 .L802425E0_D8F830:
 /* D8F830 802425E0 0240202D */  daddu     $a0, $s2, $zero
 /* D8F834 802425E4 0260282D */  daddu     $a1, $s3, $zero
-/* D8F838 802425E8 0C0905CF */  jal       pra_35_FlyingNoAttackAI_12
+/* D8F838 802425E8 0C0905CF */  jal       pra_35_PatrolAI_ChaseInit
 /* D8F83C 802425EC 0280302D */   daddu    $a2, $s4, $zero
 .L802425F0_D8F840:
 /* D8F840 802425F0 0240202D */  daddu     $a0, $s2, $zero

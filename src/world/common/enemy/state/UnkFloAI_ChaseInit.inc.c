@@ -31,12 +31,12 @@ void N(UnkFloAI_ChaseInit)(Evt* script, NpcAISettings* npcAISettings, EnemyDetec
     yawFwd = clamp_angle(atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x,
                                  gPlayerStatusPtr->position.z) + 180.0f);
     deltaYaw = get_clamped_angle_diff(npc->yaw, yawFwd);
-    if (npcAISettings->unk_AI_1C.s < fabsf(deltaYaw)) {
+    if (npcAISettings->chaseTurnRate.s < fabsf(deltaYaw)) {
         yawFwd = npc->yaw;
         if (deltaYaw < 0.0f) {
-            yawFwd += -npcAISettings->unk_AI_1C.s;
+            yawFwd += -npcAISettings->chaseTurnRate.s;
         } else {
-            yawFwd += npcAISettings->unk_AI_1C.s;
+            yawFwd += npcAISettings->chaseTurnRate.s;
         }
     }
 
@@ -100,12 +100,12 @@ void N(UnkFloAI_ChaseInit)(Evt* script, NpcAISettings* npcAISettings, EnemyDetec
             }
 
             deltaYaw = get_clamped_angle_diff(npc->yaw, yawFwd);
-            if (npcAISettings->unk_AI_1C.s < fabsf(deltaYaw)) {
+            if (npcAISettings->chaseTurnRate.s < fabsf(deltaYaw)) {
                 yawFwd = npc->yaw;
                 if (deltaYaw < 0.0f) {
-                    yawFwd += -npcAISettings->unk_AI_1C.s;
+                    yawFwd += -npcAISettings->chaseTurnRate.s;
                 } else {
-                    yawFwd += npcAISettings->unk_AI_1C.s;
+                    yawFwd += npcAISettings->chaseTurnRate.s;
                 }
             }
             npc->yaw = clamp_angle(yawFwd);

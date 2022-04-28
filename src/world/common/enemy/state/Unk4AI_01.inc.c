@@ -6,7 +6,7 @@ void N(Unk4AI_01)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* ter
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
-    if (aiSettings->waitTime >= 0 && (basic_ai_check_player_dist(territory, enemy, aiSettings->chaseSpeed, aiSettings->unk_AI_1C.f, 0) != 0)) {
+    if (aiSettings->waitTime >= 0 && (basic_ai_check_player_dist(territory, enemy, aiSettings->chaseSpeed, aiSettings->chaseTurnRate.f, 0) != 0)) {
         s32 emoteTemp;
 
         fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &emoteTemp);

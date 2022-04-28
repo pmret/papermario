@@ -6,7 +6,7 @@ void N(Unk4AI_13)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* arg
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
-    if (basic_ai_check_player_dist(arg2, enemy, aiSettings->chaseSpeed, aiSettings->unk_AI_1C.f, 1) == 0) {
+    if (basic_ai_check_player_dist(arg2, enemy, aiSettings->chaseSpeed, aiSettings->chaseTurnRate.f, 1) == 0) {
         s32 something;
 
         fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &something);

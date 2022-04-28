@@ -5,12 +5,12 @@ void N(FlyingAI_LosePlayer)(Evt* script, NpcAISettings* aiSettings, EnemyDetectV
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 posX, posY, posZ, posW;
-    f32 temp_f0_2;
+    f32 deltaAngle;
     f32 temp_f20;
     f32 temp_f22;
     f32 temp_f2;
     s32 phi_v0;
-    f32 phi_f20;
+    f32 angle;
     f32 a = enemy->varTable[3];
     f32 b = enemy->varTable[7];
 
@@ -45,17 +45,17 @@ void N(FlyingAI_LosePlayer)(Evt* script, NpcAISettings* aiSettings, EnemyDetectV
         npc->duration++;
         if (npc->duration >= aiSettings->unk_AI_20) {
             npc->duration = 0;
-            phi_f20 = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
-            temp_f0_2 = get_clamped_angle_diff(npc->yaw, phi_f20);
-            if (aiSettings->unk_AI_1C.s < fabsf(temp_f0_2)) {
-                phi_f20 = npc->yaw;
-                if (temp_f0_2 < 0.0f) {
-                    phi_f20 += -aiSettings->unk_AI_1C.s;
+            angle = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
+            deltaAngle = get_clamped_angle_diff(npc->yaw, angle);
+            if (aiSettings->chaseTurnRate.s < fabsf(deltaAngle)) {
+                angle = npc->yaw;
+                if (deltaAngle < 0.0f) {
+                    angle += -aiSettings->chaseTurnRate.s;
                 } else {
-                    phi_f20 += aiSettings->unk_AI_1C.s;
+                    angle += aiSettings->chaseTurnRate.s;
                 }
             }
-            npc->yaw = clamp_angle(phi_f20);
+            npc->yaw = clamp_angle(angle);
         }
 
         if (npc->flags & 8) {

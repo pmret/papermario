@@ -135,7 +135,7 @@ ApiStatus N(ShyGuyPatrolAI_Main)(Evt* script, s32 isInitialCall) {
             N(PatrolAI_Jump)(script, aiSettings, territoryPtr);
             break;
         case 0xC:
-            N(FlyingNoAttackAI_12)(script, aiSettings, territoryPtr);
+            N(PatrolAI_ChaseInit)(script, aiSettings, territoryPtr);
             // fallthrough
         case 0xD:
             N(PatrolAI_Chase)(script, aiSettings, territoryPtr);
