@@ -6,8 +6,14 @@
 extern HudScript HudScript_BlueMeter[];
 extern HudScript HudScript_StickNeutral[];
 extern HudScript HudScript_100pct[];
+extern HudScript HudScript_StickMashLeft[];
 
 extern s32 D_80294360;
+
+s32 D_802A9970_429C90[] = { 0, 25, 50, 75, 75, };
+s32 D_802A9984_429CA4[] = { 40, 70, 99, 200, };
+s32 D_802A9994_429CB4[] = { 35, 60, 80, 99, 200, };
+s32 D_802A99A8_429CC8[] = { 35, 35, 60, 80, 99, 200, };
 
 ApiStatus func_802A9000_429320(void) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;

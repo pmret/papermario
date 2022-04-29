@@ -96,16 +96,16 @@ void func_802A9228_425D78(void) {
             if (actionCommandStatus->unk_61 != 0) {
                 hud_element_clear_flags(id, 2);
             }
-            hud_element_set_alpha(id, 0xFF);
+            hud_element_set_alpha(id, 255);
 
             id = actionCommandStatus->hudElements[1];
-            hud_element_set_alpha(id, 0xFF);
+            hud_element_set_alpha(id, 255);
             if (actionCommandStatus->unk_61 != 0) {
                 hud_element_clear_flags(id, 2);
             }
 
             id = actionCommandStatus->hudElements[2];
-            hud_element_set_alpha(id, 0xFF);
+            hud_element_set_alpha(id, 255);
             if (actionCommandStatus->unk_61 != 0) {
                 hud_element_clear_flags(id, 2);
             }

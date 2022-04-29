@@ -70,13 +70,13 @@ void func_802A928C_42763C(void) {
             btl_set_popup_duration(99);
 
             id = actionCommandStatus->hudElements[0];
-            hud_element_set_alpha(id, 0xFF);
+            hud_element_set_alpha(id, 255);
             if (actionCommandStatus->unk_61 != 0) {
                 hud_element_clear_flags(id, 2);
             }
 
             id = actionCommandStatus->hudElements[1];
-            hud_element_set_alpha(id, 0xFF);
+            hud_element_set_alpha(id, 255);
             if (actionCommandStatus->unk_61 != 0) {
                 hud_element_clear_flags(id, 2);
             }

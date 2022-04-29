@@ -3607,7 +3607,7 @@ segments:
     overlay: True
     subsegments:
     - [0x428A70, c, air_lift]
-    - [0x4292C0, data]
+    - [0x4292C0]
   - type: code
     start: 0x429320
     vram: 0x802A9000
@@ -3616,7 +3616,7 @@ segments:
     overlay: True
     subsegments:
     - [0x429320, c, air_raid]
-    - [0x429C90, data]
+    - [0x429C90]
   - type: code
     start: 0x429D20
     vram: 0x802A9000
