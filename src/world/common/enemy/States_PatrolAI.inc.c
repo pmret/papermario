@@ -194,13 +194,13 @@ void N(PatrolAI_ChaseInit)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVo
     angle = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
     angleDiff = get_clamped_angle_diff(npc->yaw, angle);
 
-    if (aiSettings->chaseTurnRate.s < fabsf(angleDiff)) {
+    if (aiSettings->chaseTurnRate < fabsf(angleDiff)) {
         angle = npc->yaw;
 
         if (angleDiff < 0.0f) {
-            angle += -aiSettings->chaseTurnRate.s;
+            angle += -aiSettings->chaseTurnRate;
         } else {
-            angle += aiSettings->chaseTurnRate.s;
+            angle += aiSettings->chaseTurnRate;
         }
     }
 

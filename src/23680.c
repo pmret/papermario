@@ -472,12 +472,12 @@ void basic_ai_chase_init(Evt* script, NpcAISettings* npcAISettings, EnemyDetectV
         f32 angle = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
         f32 deltaAngleToPlayer = get_clamped_angle_diff(npc->yaw, angle);
 
-        if (npcAISettings->chaseTurnRate.s < fabsf(deltaAngleToPlayer)) {
+        if (npcAISettings->chaseTurnRate < fabsf(deltaAngleToPlayer)) {
             angle = npc->yaw;
             if (deltaAngleToPlayer < 0.0f) {
-                angle += -npcAISettings->chaseTurnRate.s;
+                angle += -npcAISettings->chaseTurnRate;
             } else {
-                angle += npcAISettings->chaseTurnRate.s;
+                angle += npcAISettings->chaseTurnRate;
             }
         }
         npc->yaw = clamp_angle(angle);

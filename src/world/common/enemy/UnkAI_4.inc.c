@@ -1,13 +1,26 @@
+// Unclear purpose. Used in:
+// - kmr_02	Toad
+// - kmr_07	GoombaBros
+// - kmr_11	GoombaBros/King
+// - sbk_30	(unused)
+// - trd_01	Bombomb
+// - nok_01	(unused)
+// - omo_02	(unused)
+
 #include "common.h"
 #include "npc.h"
 #include "effects.h"
+
+// this AI uses a different(?) NpcAISettings where chaseTurnRate is typed f32 and alertOffsetDist is typed s32
+#define AS_INT(f) (*(s32*)&(f))
+#define AS_FLT(d) (*(f32*)&(d))
 
 void N(Unk4AI_00)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
     npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
-    script->functionTemp[0] = 1;
+    script->AI_TEMP_STATE = 1;
 
     if (enemy->flags & ENEMY_FLAGS_100000) {
         npc->yaw = enemy->varTable[0];
@@ -24,7 +37,7 @@ void N(Unk4AI_01)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* ter
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
-    if (aiSettings->waitTime >= 0 && (basic_ai_check_player_dist(territory, enemy, aiSettings->chaseSpeed, aiSettings->chaseTurnRate.f, 0) != 0)) {
+    if (aiSettings->waitTime >= 0 && (basic_ai_check_player_dist(territory, enemy, aiSettings->chaseSpeed, AS_FLT(aiSettings->chaseTurnRate), 0) != 0)) {
         s32 emoteTemp;
 
         fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &emoteTemp);
@@ -32,9 +45,9 @@ void N(Unk4AI_01)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* ter
         npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
 
         if (!(enemy->npcSettings->unk_2A & AI_ACTION_JUMP_WHEN_SEE_PLAYER)) {
-            script->functionTemp[0] = 12;
+            script->AI_TEMP_STATE = 12;
         } else {
-            script->functionTemp[0] = 10;
+            script->AI_TEMP_STATE = 10;
         }
     }
 }
@@ -46,7 +59,7 @@ void N(Unk4AI_10)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* ter
     npc->jumpScale = 2.0f;
     npc->moveToPos.y = npc->pos.y;
     npc->flags |= 0x800;
-    script->functionTemp[0] = 11;
+    script->AI_TEMP_STATE = 11;
 }
 
 void N(Unk4AI_11)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
@@ -76,37 +89,37 @@ void N(Unk4AI_12)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* ter
     tempAngle = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
     angleDiff = get_clamped_angle_diff(npc->yaw, tempAngle);
 
-    if ((*(s32*)&aiSettings->alertOffsetDist) < fabsf(angleDiff)) {
+    if (AS_INT(aiSettings->alertOffsetDist) < fabsf(angleDiff)) {
         tempAngle = npc->yaw;
 
         if (angleDiff < 0.0f) {
-            tempAngle += -(*(s32*)&aiSettings->alertOffsetDist);
+            tempAngle += -AS_INT(aiSettings->alertOffsetDist);
         } else {
-            tempAngle += (*(s32*)&aiSettings->alertOffsetDist);
+            tempAngle += AS_INT(aiSettings->alertOffsetDist);
         }
     }
 
     npc->yaw = clamp_angle(tempAngle);
-    script->functionTemp[0] = 13;
+    script->AI_TEMP_STATE = 13;
 }
 
 void N(Unk4AI_13)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* arg2) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
-    if (basic_ai_check_player_dist(arg2, enemy, aiSettings->chaseSpeed, aiSettings->chaseTurnRate.f, 1) == 0) {
+    if (basic_ai_check_player_dist(arg2, enemy, aiSettings->chaseSpeed, AS_FLT(aiSettings->chaseTurnRate), 1) == 0) {
         s32 something;
 
         fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &something);
         npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
         npc->duration = 25;
-        script->functionTemp[0] = 14;
+        script->AI_TEMP_STATE = 14;
     } else {
         npc_move_heading(npc, npc->moveSpeed, npc->yaw);
         func_8003D660(npc, 1);
         npc->duration--;
         if (npc->duration == 0) {
-            script->functionTemp[0] = 12;
+            script->AI_TEMP_STATE = 12;
         }
     }
 }
@@ -116,7 +129,7 @@ void N(Unk4AI_14)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* ter
 
     npc->duration--;
     if (npc->duration == 0) {
-        script->functionTemp[0] = 15;
+        script->AI_TEMP_STATE = 15;
     }
 }
 
@@ -131,7 +144,7 @@ void N(Unk4AI_15)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* ter
         npc->moveSpeed = enemy->territory->wander.moveSpeedOverride / 32767.0;
     }
     script->functionTemp[1] = 0;
-    script->functionTemp[0] = 16;
+    script->AI_TEMP_STATE = 16;
 }
 
 void N(Unk4AI_16)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
@@ -141,7 +154,7 @@ void N(Unk4AI_16)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* ter
     if (aiSettings->waitTime >= 0) {
         if (script->functionTemp[1] <= 0) {
             script->functionTemp[1] = aiSettings->waitTime;
-            if (basic_ai_check_player_dist(territory, enemy, aiSettings->chaseSpeed, aiSettings->chaseTurnRate.f, 0) != 0) {
+            if (basic_ai_check_player_dist(territory, enemy, aiSettings->chaseSpeed, AS_FLT(aiSettings->chaseTurnRate), 0) != 0) {
                 s32 emoteTemp;
 
                 fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, (f32) npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &emoteTemp);
@@ -204,7 +217,7 @@ ApiStatus N(Unk4AI_Main)(Evt* script, s32 isInitialCall) {
         }
 
         if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
-            script->AI_TEMP_STATE = 99;
+            script->AI_TEMP_STATE = AI_STATE_SUSPEND;
             script->functionTemp[1] = 15;
             enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
         } else if (enemy->flags & ENEMY_FLAGS_40000000) {
@@ -237,7 +250,7 @@ ApiStatus N(Unk4AI_Main)(Evt* script, s32 isInitialCall) {
         case 16:
             N(Unk4AI_16)(script, aiSettings, territoryPtr);
             break;
-        case 99:
+        case AI_STATE_SUSPEND:
             basic_ai_suspend(script);
             break;
     }

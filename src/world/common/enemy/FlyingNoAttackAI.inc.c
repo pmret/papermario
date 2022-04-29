@@ -23,13 +23,13 @@ void N(FlyingNoAttackAI_12)(Evt* script, NpcAISettings* aiSettings, EnemyDetectV
     tempAngle = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
     angleDiff = get_clamped_angle_diff(npc->yaw, tempAngle);
 
-    if (aiSettings->chaseTurnRate.s < fabsf(angleDiff)) {
+    if (aiSettings->chaseTurnRate < fabsf(angleDiff)) {
         tempAngle = npc->yaw;
 
         if (angleDiff < 0.0f) {
-            tempAngle += -aiSettings->chaseTurnRate.s;
+            tempAngle += -aiSettings->chaseTurnRate;
         } else {
-            tempAngle += aiSettings->chaseTurnRate.s;
+            tempAngle += aiSettings->chaseTurnRate;
         }
     }
 

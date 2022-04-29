@@ -53,12 +53,12 @@ void N(SentinelAI_ChaseInit)(Evt* script, NpcAISettings* aiSettings, EnemyDetect
         npc->moveSpeed = aiSettings->chaseSpeed;
         angle = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
         deltaAngle = get_clamped_angle_diff(npc->yaw, angle);
-        if (aiSettings->chaseTurnRate.s < fabsf(deltaAngle)) {
+        if (aiSettings->chaseTurnRate < fabsf(deltaAngle)) {
             angle = npc->yaw;
             if (deltaAngle < 0.0f) {
-                angle += -aiSettings->chaseTurnRate.s;
+                angle += -aiSettings->chaseTurnRate;
             } else {
-                angle += aiSettings->chaseTurnRate.s;
+                angle += aiSettings->chaseTurnRate;
             }
         }
         npc->yaw = clamp_angle(angle);

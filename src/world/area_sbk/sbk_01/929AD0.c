@@ -10,7 +10,7 @@ NpcAISettings N(npcAISettings_80240370) = {
     .alertRadius = 250.0f,
     .playerSearchInterval = 2,
     .chaseSpeed = 3.5f,
-    .chaseTurnRate = { .s = 45 },
+    .chaseTurnRate= 45,
     .chaseUpdateInterval = 6,
     .chaseRadius = 300.0f,
     .unk_AI_2C = 1,
