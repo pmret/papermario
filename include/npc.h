@@ -243,7 +243,7 @@ typedef struct Enemy {
     /* 0x0A */ s16 spawnPos[3];
     /* 0x10 */ Vec3s unk_10;
     /* 0x16 */ char unk_16[2];
-    /* 0x18 */ struct NpcSettings* npcSettings;
+    /* 0x18 */ NpcSettings* npcSettings;
     /* 0x1C */ EvtScript* initBytecode;
     /* 0x20 */ EvtScript* interactBytecode;
     /* 0x24 */ EvtScript* aiBytecode;

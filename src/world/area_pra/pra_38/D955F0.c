@@ -4,4 +4,4 @@ INCLUDE_ASM(s32, "world/area_pra/pra_38/D955F0", func_80240000_D955F0);
 
 #include "world/common/atomic/Reflection.inc.c"
 
-INCLUDE_ASM(s32, "world/area_pra/pra_38/D955F0", func_80240F50_D96540);
+#include "world/common/UnkFunc001.inc.c"
