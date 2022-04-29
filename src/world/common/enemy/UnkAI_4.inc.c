@@ -7,15 +7,23 @@
 // - nok_01	(unused)
 // - omo_02	(unused)
 
+typedef struct Unk4AISettings {
+    /* 0x00 */ f32 unk_00;
+    /* 0x04 */ s32 unk_04;
+    /* 0x08 */ s32 playerSearchInterval;    // how often to search for player (frames)
+    /* 0x0C */ f32 chaseSpeed;
+    /* 0x10 */ s32 chaseTurnRate;           // how many degrees this NPC can turn per frame while chasing          
+    /* 0x14 */ s32 chaseUpdateInterval;     // how often to re-run chase init and re-acquire player position (frames)
+    /* 0x18 */ f32 chaseRadius;      
+    /* 0x1C */ f32 chaseOffsetDist;         // offset along npc->yaw of the test point for alert volume overlap, creates directionality to enemy 'sight' 
+    /* 0x20 */ s32 unk_20;
+} Unk4AISettings; // size = 0x24
+
 #include "common.h"
 #include "npc.h"
 #include "effects.h"
 
-// this AI uses a different(?) NpcAISettings where chaseTurnRate is typed f32 and alertOffsetDist is typed s32
-#define AS_INT(f) (*(s32*)&(f))
-#define AS_FLT(d) (*(f32*)&(d))
-
-void N(Unk4AI_00)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(Unk4AI_00)(Evt* script, Unk4AISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -27,17 +35,17 @@ void N(Unk4AI_00)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* ter
     }
 
     if (enemy->territory->wander.moveSpeedOverride <= 0) {
-        npc->moveSpeed = aiSettings->alertRadius;
+        npc->moveSpeed = aiSettings->chaseSpeed;
     } else {
         npc->moveSpeed = enemy->territory->wander.moveSpeedOverride / 32767.0;
     }
 }
 
-void N(Unk4AI_01)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(Unk4AI_01)(Evt* script, Unk4AISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
-    if (aiSettings->waitTime >= 0 && (basic_ai_check_player_dist(territory, enemy, aiSettings->chaseSpeed, AS_FLT(aiSettings->chaseTurnRate), 0) != 0)) {
+    if (aiSettings->playerSearchInterval >= 0 && (basic_ai_check_player_dist(territory, enemy, aiSettings->chaseRadius, aiSettings->chaseOffsetDist, 0) != 0)) {
         s32 emoteTemp;
 
         fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &emoteTemp);
@@ -52,7 +60,7 @@ void N(Unk4AI_01)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* ter
     }
 }
 
-void N(Unk4AI_10)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(Unk4AI_10)(Evt* script, Unk4AISettings* aiSettings, EnemyDetectVolume* territory) {
     Npc* npc = get_npc_unsafe(script->owner1.enemy->npcID);
 
     npc->jumpVelocity = 10.0f;
@@ -62,7 +70,7 @@ void N(Unk4AI_10)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* ter
     script->AI_TEMP_STATE = 11;
 }
 
-void N(Unk4AI_11)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(Unk4AI_11)(Evt* script, Unk4AISettings* aiSettings, EnemyDetectVolume* territory) {
     Npc* npc = get_npc_unsafe(script->owner1.enemy->npcID);
 
     npc->pos.y += npc->jumpVelocity;
@@ -76,26 +84,26 @@ void N(Unk4AI_11)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* ter
     }
 }
 
-void N(Unk4AI_12)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(Unk4AI_12)(Evt* script, Unk4AISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 tempAngle;
     f32 angleDiff;
 
-    npc->duration = (aiSettings->playerSearchInterval / 2) + rand_int(aiSettings->playerSearchInterval / 2 + 1);
+    npc->duration = (aiSettings->chaseUpdateInterval / 2) + rand_int(aiSettings->chaseUpdateInterval / 2 + 1);
     npc->currentAnim.w = enemy->animList[ENEMY_ANIM_CHASE];
-    npc->moveSpeed = aiSettings->alertRadius;
+    npc->moveSpeed = aiSettings->chaseSpeed;
 
     tempAngle = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
     angleDiff = get_clamped_angle_diff(npc->yaw, tempAngle);
 
-    if (AS_INT(aiSettings->alertOffsetDist) < fabsf(angleDiff)) {
+    if (aiSettings->chaseTurnRate < fabsf(angleDiff)) {
         tempAngle = npc->yaw;
 
         if (angleDiff < 0.0f) {
-            tempAngle += -AS_INT(aiSettings->alertOffsetDist);
+            tempAngle += -aiSettings->chaseTurnRate;
         } else {
-            tempAngle += AS_INT(aiSettings->alertOffsetDist);
+            tempAngle += aiSettings->chaseTurnRate;
         }
     }
 
@@ -103,11 +111,11 @@ void N(Unk4AI_12)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* ter
     script->AI_TEMP_STATE = 13;
 }
 
-void N(Unk4AI_13)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* arg2) {
+void N(Unk4AI_13)(Evt* script, Unk4AISettings* aiSettings, EnemyDetectVolume* arg2) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
-    if (basic_ai_check_player_dist(arg2, enemy, aiSettings->chaseSpeed, AS_FLT(aiSettings->chaseTurnRate), 1) == 0) {
+    if (basic_ai_check_player_dist(arg2, enemy, aiSettings->chaseRadius, aiSettings->chaseOffsetDist, 1) == 0) {
         s32 something;
 
         fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &something);
@@ -124,7 +132,7 @@ void N(Unk4AI_13)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* arg
     }
 }
 
-void N(Unk4AI_14)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(Unk4AI_14)(Evt* script, Unk4AISettings* aiSettings, EnemyDetectVolume* territory) {
     Npc* npc = get_npc_unsafe(script->owner1.enemy->npcID);
 
     npc->duration--;
@@ -133,13 +141,13 @@ void N(Unk4AI_14)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* ter
     }
 }
 
-void N(Unk4AI_15)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(Unk4AI_15)(Evt* script, Unk4AISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
     npc->currentAnim.w = enemy->animList[ENEMY_ANIM_WALK];
     if (enemy->territory->wander.moveSpeedOverride < 0) {
-        npc->moveSpeed = aiSettings->alertRadius * 0.3;
+        npc->moveSpeed = aiSettings->chaseSpeed * 0.3;
     } else {
         npc->moveSpeed = enemy->territory->wander.moveSpeedOverride / 32767.0;
     }
@@ -147,14 +155,14 @@ void N(Unk4AI_15)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* ter
     script->AI_TEMP_STATE = 16;
 }
 
-void N(Unk4AI_16)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(Unk4AI_16)(Evt* script, Unk4AISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
-    if (aiSettings->waitTime >= 0) {
+    if (aiSettings->playerSearchInterval >= 0) {
         if (script->functionTemp[1] <= 0) {
-            script->functionTemp[1] = aiSettings->waitTime;
-            if (basic_ai_check_player_dist(territory, enemy, aiSettings->chaseSpeed, AS_FLT(aiSettings->chaseTurnRate), 0) != 0) {
+            script->functionTemp[1] = aiSettings->playerSearchInterval;
+            if (basic_ai_check_player_dist(territory, enemy, aiSettings->chaseRadius, aiSettings->chaseOffsetDist, 0) != 0) {
                 s32 emoteTemp;
 
                 fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, (f32) npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &emoteTemp);
@@ -190,7 +198,7 @@ ApiStatus N(Unk4AI_Main)(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(enemy->npcID);
     EnemyDetectVolume territory;
     EnemyDetectVolume* territoryPtr = &territory;
-    NpcAISettings* aiSettings = (NpcAISettings*)evt_get_variable(script, *args++);
+    Unk4AISettings* aiSettings = (Unk4AISettings*)evt_get_variable(script, *args++);
 
     territory.skipPlayerDetectChance = 0;
     territory.shape = enemy->territory->wander.detectShape;
