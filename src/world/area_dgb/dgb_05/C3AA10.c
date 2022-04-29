@@ -149,7 +149,7 @@ NpcAISettings N(npcAISettings_802419AC) = {
     .moveTime = 120,
     .waitTime = 30,
     .alertRadius = 100.0f,
-    .alertOffsetDist = { .f = 40.0f },
+    .alertOffsetDist = 40.0f,
     .playerSearchInterval = 10,
     .chaseSpeed = 3.5f,
     .chaseTurnRate = { .s = 90 },

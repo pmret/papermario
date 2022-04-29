@@ -193,7 +193,7 @@ ApiStatus N(ProjectileAI_Main)(Evt* script, s32 isInitialCall) {
                         npc->moveSpeed = aiSettings->moveSpeed;
                         npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
                         npc->jumpVelocity = aiSettings->alertRadius;
-                        npc->jumpScale = aiSettings->alertOffsetDist.f;
+                        npc->jumpScale = aiSettings->alertOffsetDist;
                         npc->moveToPos.y = npc2->pos.y;
                         npc->flags &= ~NPC_FLAG_2;
                         enable_npc_shadow(npc);

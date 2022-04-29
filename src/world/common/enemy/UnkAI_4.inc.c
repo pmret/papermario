@@ -76,13 +76,13 @@ void N(Unk4AI_12)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* ter
     tempAngle = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
     angleDiff = get_clamped_angle_diff(npc->yaw, tempAngle);
 
-    if (aiSettings->alertOffsetDist.s < fabsf(angleDiff)) {
+    if ((*(s32*)&aiSettings->alertOffsetDist) < fabsf(angleDiff)) {
         tempAngle = npc->yaw;
 
         if (angleDiff < 0.0f) {
-            tempAngle += -aiSettings->alertOffsetDist.s;
+            tempAngle += -(*(s32*)&aiSettings->alertOffsetDist);
         } else {
-            tempAngle += aiSettings->alertOffsetDist.s;
+            tempAngle += (*(s32*)&aiSettings->alertOffsetDist);
         }
     }
 

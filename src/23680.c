@@ -291,7 +291,7 @@ void basic_ai_wander(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* 
     if (aiSettings->playerSearchInterval >= 0) {
         if (script->functionTemp[1] <= 0) {
             script->functionTemp[1] = aiSettings->playerSearchInterval;
-            if (basic_ai_check_player_dist(territory, enemy, aiSettings->alertRadius, aiSettings->alertOffsetDist.f, 0)) {
+            if (basic_ai_check_player_dist(territory, enemy, aiSettings->alertRadius, aiSettings->alertOffsetDist, 0)) {
                 x = npc->pos.x;
                 y = npc->pos.y;
                 z = npc->pos.z;

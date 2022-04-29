@@ -132,7 +132,7 @@ static s32 N(pad_40FC) = {
 NpcAISettings N(npcAI_80244100) = {
     .moveSpeed = 4.5f,
     .alertRadius = 170.0f,
-    .alertOffsetDist = { .f = 90.0f },
+    .alertOffsetDist = 90.0f,
     .playerSearchInterval = 1,
     .chaseSpeed = 3.9f,
     .chaseTurnRate = { .s = 180 },
@@ -210,7 +210,7 @@ NpcAISettings N(npcAISettings_802442C0) = {
     .moveTime = 120,
     .waitTime = 30,
     .alertRadius = 85.0f,
-    .alertOffsetDist = { .f = 65.0f },
+    .alertOffsetDist = 65.0f,
     .playerSearchInterval = 5,
     .chaseSpeed = 3.5f,
     .chaseTurnRate = { .s = 90 },

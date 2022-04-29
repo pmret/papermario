@@ -75,7 +75,7 @@ typedef struct NpcAISettings {
     /* 0x04 */ s32 moveTime;
     /* 0x08 */ s32 waitTime;
     /* 0x0C */ f32 alertRadius;
-    /* 0x10 */ X32 alertOffsetDist;         // offset along npc->yaw of the test point for alert volume overlap, creates directionality to enemy 'sight' -- .s form only used by Unk4AI
+    /* 0x10 */ f32 alertOffsetDist;         // offset along npc->yaw of the test point for alert volume overlap, creates directionality to enemy 'sight'
     /* 0x14 */ s32 playerSearchInterval;    // how often to search for player (frames)
     /* 0x18 */ f32 chaseSpeed;
     /* 0x1C */ X32 chaseTurnRate;           // how many degrees this NPC can turn per frame while chasing -- .f form only used by Unk4AI
