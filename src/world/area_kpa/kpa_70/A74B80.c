@@ -1,3 +1,3 @@
 #include "kpa_70.h"
 
-#include "world/common/atomic/enemy/UnkAI_5.inc.c"
+#include "world/common/enemy/TackleAI.inc.c"

@@ -239,7 +239,7 @@ ApiStatus BowUseAbility(Evt* script, s32 isInitialCall) {
             }
 
             D_802BE0C0 = TRUE;
-            bow->flags &= ~(NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_GRAVITY);
+            bow->flags &= ~(NPC_FLAG_JUMPING | NPC_FLAG_GRAVITY);
             partnerActionStatus->partnerActionState = 1;
             partnerActionStatus->actingPartner = 9;
             playerStatus->flags |= PLAYER_STATUS_FLAGS_8000;

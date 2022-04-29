@@ -904,7 +904,7 @@ StaticNpc N(npcGroup_8024388C) = {
     .id = NPC_PETUNIA,
     .settings = &N(npcSettings_80240EDC),
     .pos = { -30.0f, 0.0f, 100.0f },
-    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
+    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
     .init = &N(init_80241DA4),
     .yaw = 270,
     .dropFlags = NPC_DROP_FLAGS_80,
@@ -935,7 +935,7 @@ StaticNpc N(npcGroup_80243A7C) = {
     .id = NPC_DAYZEE,
     .settings = &N(npcSettings_80240EB0),
     .pos = { -233.0f, 0.0f, -217.0f },
-    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
+    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
     .init = &N(init_80241E10),
     .yaw = 90,
     .dropFlags = NPC_DROP_FLAGS_80,
@@ -965,7 +965,7 @@ StaticNpc N(npcGroup_80243C6C) = {
     .id = NPC_MONTY_MOLE0,
     .settings = &N(npcSettings_80240EB0),
     .pos = { -100.0f, 0.0f, 210.0f },
-    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
+    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
     .init = &N(init_8024338C),
     .yaw = 90,
     .dropFlags = NPC_DROP_FLAGS_80,
@@ -995,7 +995,7 @@ StaticNpc N(npcGroup_80243E5C) = {
     .id = NPC_MONTY_MOLE1,
     .settings = &N(npcSettings_80240EB0),
     .pos = { -130.0f, 0.0f, 0.0f },
-    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
+    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
     .init = &N(init_802434CC),
     .yaw = 90,
     .dropFlags = NPC_DROP_FLAGS_80,
@@ -1025,7 +1025,7 @@ StaticNpc N(npcGroup_8024404C) = {
     .id = NPC_MONTY_MOLE2,
     .settings = &N(npcSettings_80240EB0),
     .pos = { 75.0f, 0.0f, 20.0f },
-    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
+    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
     .init = &N(init_8024360C),
     .yaw = 270,
     .dropFlags = NPC_DROP_FLAGS_80,
@@ -1055,7 +1055,7 @@ StaticNpc N(npcGroup_8024423C) = {
     .id = NPC_MONTY_MOLE3,
     .settings = &N(npcSettings_80240EB0),
     .pos = { 71.0f, 0.0f, 200.0f },
-    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
+    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
     .init = &N(init_8024374C),
     .yaw = 270,
     .dropFlags = NPC_DROP_FLAGS_80,
@@ -1132,18 +1132,18 @@ ApiStatus N(func_80240158_CA73F8)(Evt* script, s32 isInitialCall) {
                 add_vec2D_polar(&sp10, &sp14, 46.0f, clamp);
             }
         }
-        npc->currentAnim.w = enemy->animList[2];
+        npc->currentAnim.w = enemy->animList[ENEMY_ANIM_RUN];
         npc->yaw = atan2(npc->pos.x, npc->pos.z, sp10, sp14);
         npc_move_heading(npc, 2.0f, npc->yaw);
     } else if (temp_f4 > 0.2) {
         npc->yaw = atan2(npc->pos.x, npc->pos.z, sp10, sp14);
         npc->pos.x = sp10;
         npc->pos.z = sp14;
-        npc->currentAnim.w = enemy->animList[1];
+        npc->currentAnim.w = enemy->animList[ENEMY_ANIM_WALK];
     } else {
         npc->pos.x = sp10;
         npc->pos.z = sp14;
-        npc->currentAnim.w = enemy->animList[0];
+        npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
     }
     return ApiStatus_BLOCK;
 }

@@ -37,9 +37,9 @@ typedef struct DeadEnemy {
     /* 0x064 */ void* unk_64;
     /* 0x068 */ char unk_68[4];
     /* 0x06C */ s32 varTable[16];
-    /* 0x0AC */ char unk_AC[4];
-    /* 0x0B0 */ s32 unk_B0;
-    /* 0x0B4 */ s8 unk_B4;
+    /* 0x0AC */ s32 aiDetectFlags;
+    /* 0x0B0 */ s32 aiFlags;
+    /* 0x0B4 */ s8 aiPaused;
     /* 0x0B5 */ s8 unk_B5;
     /* 0x0B6 */ char unk_B6[2];
     /* 0x0B8 */ EvtScript* unk_B8; // some bytecode

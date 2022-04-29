@@ -19,4 +19,4 @@ ApiStatus func_80241390_87AF70(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#include "world/common/atomic/enemy/UnkAI_9.inc.c"
+#include "world/common/enemy/FlyingAI.inc.c"

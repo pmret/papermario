@@ -1,6 +1,6 @@
 #include "mim_02.h"
 
-#include "world/common/atomic/enemy/UnkAI_2.inc.c"
+#include "world/common/enemy/HoppingAI.inc.c"
 
 #include "world/common/GetNpcCollisionHeight.inc.c"
 

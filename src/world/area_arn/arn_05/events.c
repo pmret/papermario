@@ -77,11 +77,11 @@ NpcAISettings N(npcAISettings_802416DC) = {
     .moveTime = 25,
     .waitTime = 30,
     .alertRadius = 50.0f,
-    .unk_10 = { .f = 50.0f },
-    .unk_14 = 10,
+    .alertOffsetDist = 50.0f,
+    .playerSearchInterval = 10,
     .chaseRadius = 100.0f,
-    .unk_28 = { .f = 80.0f },
-    .unk_2C = 1,
+    .chaseOffsetDist = 80.0f,
+    .unk_AI_2C = 1,
 };
 
 EvtScript N(npcAI_8024170C) = {
@@ -320,7 +320,7 @@ StaticNpc N(npcGroup_8024223C)[] = {
         .id = NPC_BOO0,
         .settings = &N(npcSettings_8024172C),
         .pos = { 55.0f, 195.0f, 160.0f },
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
         .init = &N(init_80241FB8),
         .yaw = 270,
         .dropFlags = NPC_DROP_FLAGS_80,
@@ -351,7 +351,7 @@ StaticNpc N(npcGroup_8024223C)[] = {
         .id = NPC_BOO1,
         .settings = &N(npcSettings_80241758),
         .pos = { 160.0f, 191.0f, 250.0f },
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
         .init = &N(init_80242008),
         .yaw = 270,
         .dropFlags = NPC_DROP_FLAGS_80,
@@ -381,7 +381,7 @@ StaticNpc N(npcGroup_8024223C)[] = {
         .id = NPC_BOO2,
         .settings = &N(npcSettings_80241758),
         .pos = { 390.0f, 190.0f, 255.0f },
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
         .init = &N(init_8024202C),
         .yaw = 270,
         .dropFlags = NPC_DROP_FLAGS_80,
@@ -411,7 +411,7 @@ StaticNpc N(npcGroup_8024223C)[] = {
         .id = NPC_BOO3,
         .settings = &N(npcSettings_80241758),
         .pos = { 503.0f, 206.0f, 210.0f },
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
         .init = &N(init_8024212C),
         .yaw = 270,
         .dropFlags = NPC_DROP_FLAGS_80,
@@ -441,7 +441,7 @@ StaticNpc N(npcGroup_8024223C)[] = {
         .id = NPC_BOO4,
         .settings = &N(npcSettings_8024172C),
         .pos = { 350.0f, 185.0f, 197.0f },
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
         .init = &N(init_802421EC),
         .yaw = 270,
         .dropFlags = NPC_DROP_FLAGS_80,
@@ -794,7 +794,7 @@ StaticNpc N(npcGroup_802443AC) = {
     .id = NPC_WORLD_TUBBA,
     .settings = &N(npcSettings_802416B0),
     .pos = { 0.0f, -1000.0f, 0.0f },
-    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_NO_Y_MOVEMENT,
+    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_JUMPING,
     .init = &N(init_80244358),
     .yaw = 270,
     .dropFlags = NPC_DROP_FLAGS_80,
@@ -1015,9 +1015,9 @@ EvtScript N(makeEntities) = {
     EVT_END
 };
 
-#include "world/common/atomic/enemy/UnkAI_1.inc.c"
+#include "world/common/enemy/PatrolNoAttackAI.inc.c"
 
-void N(func_80240E90_BE8A70)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(func_80240E90_BE8A70)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 posX, posY, posZ, posW;
@@ -1053,7 +1053,7 @@ void N(func_80240E90_BE8A70)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
     }
 }
 
-void N(func_80241068_BE8C48)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(func_80241068_BE8C48)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -1065,7 +1065,7 @@ void N(func_80241068_BE8C48)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
             npc->duration = aiSettings->waitTime / 2 + rand_int(aiSettings->waitTime / 2 + 1);
         } else {
             script->functionTemp[0] = 4;
-            npc->currentAnim.w = enemy->animList[0];
+            npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
         }
     }
 }
@@ -1074,18 +1074,18 @@ ApiStatus N(func_8024113C_BE8D1C)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Bytecode* args = script->ptrReadPos;
     Npc* npc = get_npc_unsafe(enemy->npcID);
-    EnemyTerritoryThing territory;
-    EnemyTerritoryThing* territoryPtr = &territory;
+    EnemyDetectVolume territory;
+    EnemyDetectVolume* territoryPtr = &territory;
     NpcAISettings* aiSettings = (NpcAISettings*)evt_get_variable(script, *args++);
 
-    territory.unk_00 = 0;
+    territory.skipPlayerDetectChance = 0;
     territory.shape = enemy->territory->patrol.detectShape;
     territory.pointX = enemy->territory->patrol.detect.x;
     territory.pointZ = enemy->territory->patrol.detect.z;
     territory.sizeX = enemy->territory->patrol.detectSizeX;
     territory.sizeZ = enemy->territory->patrol.detectSizeZ;
-    territory.unk_18 = 100.0f;
-    territory.unk_1C = 0;
+    territory.halfHeight = 100.0f;
+    territory.detectFlags = 0;
 
     if (isInitialCall) {
         script->functionTemp[0] = 0;
@@ -1095,17 +1095,17 @@ ApiStatus N(func_8024113C_BE8D1C)(Evt* script, s32 isInitialCall) {
 
     switch (script->functionTemp[0]) {
         case 0:
-            N(UnkNpcAIFunc24)(script, aiSettings, territoryPtr);
+            N(PatrolAI_MoveInit)(script, aiSettings, territoryPtr);
         case 1:
             N(func_80240E90_BE8A70)(script, aiSettings, territoryPtr);
             break;
         case 2:
-            N(UnkNpcAIFunc1)(script, aiSettings, territoryPtr);
+            N(PatrolAI_LoiterInit)(script, aiSettings, territoryPtr);
         case 3:
             N(func_80241068_BE8C48)(script, aiSettings, territoryPtr);
             break;
         case 4:
-            N(UnkNpcAIFunc25)(script, aiSettings, territoryPtr);
+            N(PatrolAI_PostLoiter)(script, aiSettings, territoryPtr);
     }
 
     enemy->varTable[0] = npc->pos.y;

@@ -2,15 +2,18 @@
 #include "common.h"
 #include "npc.h"
 #include "effects.h"
-#include "dead_structs.h"
 #include "sprite/npc/bony_beetle.h"
 
-ApiStatus N(DeadUnkNpcAIMainFunc6)(Evt* script, s32 isInitialCall) {
+#ifdef _DEAD_H_
+#include "dead_structs.h"
+#endif
+
+ApiStatus N(UnkNpcAIMainFunc6)(Evt* script, s32 isInitialCall) {
     DeadEnemy* enemy = (DeadEnemy*)script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;
-    EnemyTerritoryThing territory;
-    EnemyTerritoryThing* territoryPtr = &territory;
+    EnemyDetectVolume territory;
+    EnemyDetectVolume* territoryPtr = &territory;
     NpcAISettings* aiSettings = (NpcAISettings*)evt_get_variable(script, *args);
     u32 x, y, z;
     f32 x2, y2, z2, w2;
@@ -23,7 +26,7 @@ ApiStatus N(DeadUnkNpcAIMainFunc6)(Evt* script, s32 isInitialCall) {
     territory.sizeX = enemy->territory->wander.detectSizeX;
     territory.sizeZ = enemy->territory->wander.detectSizeZ;
     territory.unk_18 = 65.0f;
-    territory.unk_1C = 0;
+    territory.detectFlags = 0;
 
     enemy->unk_108.x = npc->pos.x;
     enemy->unk_108.y = npc->pos.y;
@@ -39,7 +42,7 @@ ApiStatus N(DeadUnkNpcAIMainFunc6)(Evt* script, s32 isInitialCall) {
     if (isInitialCall || (enemy->varTable[10] == 100)) {
         script->functionTemp[0] = 100;
         npc->duration = 0;
-        npc->currentAnim.w = enemy->animList[0];
+        npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
         npc->flags &= ~NPC_FLAG_NO_Y_MOVEMENT;
         enemy->flags |= ENEMY_FLAGS_200000;
         npc->flags &= ~NPC_FLAG_GRAVITY;
@@ -65,7 +68,7 @@ ApiStatus N(DeadUnkNpcAIMainFunc6)(Evt* script, s32 isInitialCall) {
             s32 emoteTemp;
 
             fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0x28, &emoteTemp);
-            npc->currentAnim.w = enemy->animList[0];
+            npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
             script->functionTemp[1] = 0;
             script->functionTemp[0] = 200;
         }
@@ -94,7 +97,7 @@ ApiStatus N(DeadUnkNpcAIMainFunc6)(Evt* script, s32 isInitialCall) {
             func_800496B8(script, aiSettings, territoryPtr);
             break;
         case 2:
-            base_UnkNpcAIFunc1(script, aiSettings, territoryPtr);
+            base_PatrolAI_LoiterInit(script, aiSettings, territoryPtr);
         case 3:
             func_80049C04(script, aiSettings, territoryPtr);
             break;

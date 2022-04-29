@@ -783,7 +783,7 @@ StaticNpc N(npcGroup_802434FC) = {
     .id = NPC_SENTINEL,
     .settings = &N(npcSettings_8024066C),
     .pos = { 0.0f, 0.0f, -1000.0f },
-    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_400000,
+    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_400000,
     .init = &N(init_802434EC),
     .yaw = 90,
     .dropFlags = NPC_DROP_FLAGS_80,
@@ -837,6 +837,6 @@ EvtScript N(makeEntities) = {
 ApiStatus N(func_80240060_BFA100)(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(get_enemy(6)->npcID);
 
-    sfx_adjust_env_sound_pos(0x32E, 0, npc->pos.x, npc->pos.y, npc->pos.z);
+    sfx_adjust_env_sound_pos(SOUND_32E, 0, npc->pos.x, npc->pos.y, npc->pos.z);
     return ApiStatus_DONE2;
 }

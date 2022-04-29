@@ -67,12 +67,7 @@ ApiStatus func_80241838_EAA318(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#include "world/common/SetManyVars.inc.c"
-
-#include "world/common/UnkYawFunc.inc.c"
-
-INCLUDE_ASM(s32, "EA8AE0", func_80241B50_EAA630);
-
-INCLUDE_ASM(s32, "EA8AE0", func_80241B94_EAA674);
+extern s32 N(LetterDelivery_SavedNpcAnim);
+#include "world/common/LetterDelivery.inc.c"
 
 INCLUDE_ASM(s32, "EA8AE0", func_80241BC0_EAA6A0);

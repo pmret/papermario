@@ -545,8 +545,10 @@ enum SoundIDs {
     SOUND_ENTER_PIPE                = 0x00000163,
     SOUND_SMASH_GOOMNUT_TREE        = 0x00000165,
     SOUND_167                       = 0x00000167,
+    SOUND_168                       = 0x00000168,
     SOUND_172                       = 0x00000172,
     SOUND_17B                       = 0x0000017B,
+    SOUND_185                       = 0x00000185,
     SOUND_194                       = 0x00000194,
     SOUND_1A5                       = 0x000001A5,
     SOUND_1A6                       = 0x000001A6,
@@ -600,7 +602,9 @@ enum SoundIDs {
     SOUND_MOLE_SURFACE              = 0x00000321,
     SOUND_MOLE_DIG                  = 0x00000322,
     SOUND_MOLE_POP                  = 0x00000323,
+    SOUND_328                       = 0x00000328,
     SOUND_32E                       = 0x0000032E,
+    SOUND_32F                       = 0x0000032F,
     SOUND_359                       = 0x00000359,
     SOUND_361                       = 0x00000361,
     SOUND_362                       = 0x00000362,
@@ -620,6 +624,7 @@ enum SoundIDs {
     SOUND_HIT_SHOCK                 = 0x0000037B,
     SOUND_GENERAL_WHISTLE           = 0x00000395,
     SOUND_OPEN_SHELL                = 0x000003D4,
+    SOUND_3E1                       = 0x000003E1,
     SOUND_JUMP_3E2                  = 0x000003E2,
     SOUND_MISS_JUMP                 = 0x000003E3,
     SOUND_DEATH                     = 0x000003E5,
@@ -640,6 +645,7 @@ enum SoundIDs {
     SOUND_CANNON1                   = 0x00002016,
     SOUND_CANNON2                   = 0x00002017,
     SOUND_CANNON3                   = 0x00002018,
+    SOUND_20C1                      = 0x000020C1,
     SOUND_202C                      = 0x0000202C,
     SOUND_202D                      = 0x0000202D,
     SOUND_202E                      = 0x0000202E,
@@ -687,6 +693,9 @@ enum SoundIDs {
     SOUND_211A                      = 0x0000211A,
     SOUND_212D                      = 0x0000212D,
     SOUND_212E                      = 0x0000212E,
+    SOUND_80000011                  = 0x80000011,
+    SOUND_B0000017                  = 0xB0000017,
+    SOUND_B0000018                  = 0xB0000018,
 };
 
 enum Cams {
@@ -1940,9 +1949,9 @@ enum NpcFlags {
     NPC_FLAG_40                      = 0x00000040,
     NPC_FLAG_UPSIDE_DOWN             = 0x00000080, ///< Render NPCs upside-down
     NPC_FLAG_100                     = 0x00000100, // TODO
-    NPC_FLAG_GRAVITY                 = 0x00000200, ///< Enables gravity. Does nothing if NPC_FLAG_NO_Y_MOVEMENT is set.
+    NPC_FLAG_GRAVITY                 = 0x00000200, ///< Enables gravity. Does nothing if NPC_FLAG_JUMPING is set.
     NPC_FLAG_LOCK_ANIMS              = 0x00000400, ///< Do not allow scripts to change animation
-    NPC_FLAG_NO_Y_MOVEMENT           = 0x00000800, ///< Causes NpcMoveTo() to ignore stairs
+    NPC_FLAG_JUMPING                 = 0x00000800, ///< Causes NpcMoveTo() to ignore stairs
     NPC_FLAG_1000                    = 0x00001000,
     NPC_FLAG_NO_PROJECT_SHADOW       = 0x00002000, ///< Draw shadow at base of sprite instead of projecting to ground
     NPC_FLAG_4000                    = 0x00004000,
@@ -1959,7 +1968,7 @@ enum NpcFlags {
     NPC_FLAG_SIMPLIFIED_PHYSICS      = 0x02000000,
     /// Use simpler, faster physics calculations:
     ///  - Perform only one lateral collision test during motion
-    ///  - Allow falling below Y=-2000 (by default, NPC_FLAG_NO_Y_MOVEMENT is set when an NPC falls out-of-bounds)
+    ///  - Allow falling below Y=-2000 (by default, NPC_FLAG_JUMPING is set when an NPC falls out-of-bounds)
     NPC_FLAG_PARTICLE                = 0x04000000,
     NPC_FLAG_8000000                 = 0x08000000,
     NPC_FLAG_10000000                = 0x10000000,
@@ -2748,20 +2757,112 @@ enum EnemyFlags {
     ENEMY_FLAGS_8000000           = 0x08000000,
     ENEMY_FLAGS_10000000          = 0x10000000,
     ENEMY_FLAGS_20000000          = 0x20000000,
-    ENEMY_FLAGS_40000000          = 0x40000000,
+    ENEMY_FLAGS_40000000          = 0x40000000, // spawn in AI_STATE_CHASE_INIT
     ENEMY_FLAGS_80000000          = 0x80000000,
 };
 
-// used with enemy->unk_B0
+// used with enemy->aiFlags
 enum EnemyAIFlags {
     ENEMY_AI_FLAGS_1              = 0x00000001,
-    ENEMY_AI_FLAGS_2              = 0x00000002,
-    ENEMY_AI_FLAGS_4              = 0x00000004,
+    ENEMY_AI_FLAGS_2              = 0x00000002, // do not move; do not sense player
+    ENEMY_AI_FLAGS_4              = 0x00000004, // pause ai
     ENEMY_AI_FLAGS_8              = 0x00000008,
     ENEMY_AI_FLAGS_10             = 0x00000010,
     ENEMY_AI_FLAGS_20             = 0x00000020,
     ENEMY_AI_FLAGS_40             = 0x00000040,
     ENEMY_AI_FLAGS_80             = 0x00000080,
+};
+
+enum EnemyAIStates {
+    // basic states
+    AI_STATE_WANDER_INIT            = 0,
+    AI_STATE_WANDER                 = 1,
+    AI_STATE_PATROL_INIT            = 0,
+    AI_STATE_PATROL                 = 1,
+    AI_STATE_HOP_INIT               = 0,
+    AI_STATE_HOP                    = 1,
+    AI_STATE_LOITER_INIT            = 2,
+    AI_STATE_LOITER                 = 3,
+    AI_STATE_LOITER_POST            = 4,
+    AI_STATE_ALERT_INIT             = 10,
+    AI_STATE_ALERT                  = 11,
+    AI_STATE_CHASE_INIT             = 12,
+    AI_STATE_CHASE                  = 13,
+    AI_STATE_LOSE_PLAYER            = 14,
+    AI_STATE_PATROL_15              = 15,
+    AI_RETURN_HOME_INIT             = 40,
+    AI_RETURN_HOME                  = 41,
+    AI_STATE_SUSPEND                = 99,
+    // melee hitboxes
+    AI_STATE_MELEE_HITBOX_INIT      = 30,
+    AI_STATE_MELEE_HITBOX_PRE       = 31,
+    AI_STATE_MELEE_HITBOX_ACTIVE    = 32,
+    AI_STATE_MELEE_HITBOX_MISS      = 33,
+    // projectile hitboxes
+    AI_STATE_PROJECTILE_HITBOX_30   = 30,
+    AI_STATE_PROJECTILE_HITBOX_31   = 31,
+    AI_STATE_PROJECTILE_HITBOX_32   = 32,
+    AI_STATE_PROJECTILE_HITBOX_33   = 33,
+};
+
+enum EnemyAIAnims {
+    ENEMY_ANIM_IDLE         = 0,
+    ENEMY_ANIM_WALK         = 1,
+    ENEMY_ANIM_RUN          = 2,
+    ENEMY_ANIM_CHASE        = 3,
+    ENEMY_ANIM_JUMP         = 4,
+    ENEMY_ANIM_05           = 5,
+    ENEMY_ANIM_DEATH        = 6,
+    ENEMY_ANIM_HIT          = 7,
+    ENEMY_ANIM_MELEE_PRE    = 8,
+    ENEMY_ANIM_MELEE_HIT    = 9,
+};
+
+enum EnemyActionFlags {
+    AI_ACTION_JUMP_WHEN_SEE_PLAYER          = 0x01,
+    AI_ACTION_02                            = 0x02,
+    AI_ACTION_04                            = 0x04,
+    AI_ACTION_08                            = 0x08,
+    AI_ACTION_LOOK_AROUND_DURING_LOITER     = 0x10,
+    AI_ACTION_20                            = 0x20
+};
+
+enum EnemyDetectFlags {
+    AI_DETECT_SIGHT                 = 0x01,
+    AI_DETECT_SENSITIVE_MOTION      = 0x02,
+};
+
+enum EnemyTerritoryFlags {
+    AI_TERRITORY_IGNORE_HIDING      = 0x01, // bow and sushi dont prevent enemy detection
+    AI_TERRITORY_IGNORE_ELEVATION   = 0x02, // vertical size of detection volume is ignored
+};
+
+enum PiranhaPlantStates {
+    AI_STATE_PIRANHA_PLANT_00       = 0,
+    AI_STATE_PIRANHA_PLANT_01       = 1,
+    AI_STATE_PIRANHA_PLANT_10       = 10,
+    AI_STATE_PIRANHA_PLANT_11       = 11,
+    AI_STATE_PIRANHA_PLANT_12       = 12,
+    AI_STATE_PIRANHA_PLANT_13       = 13,
+    AI_STATE_PIRANHA_PLANT_14       = 14,
+    AI_STATE_PIRANHA_PLANT_SUSPEND  = 99
+};
+
+enum MeleeHitboxAttackStates {
+    MELEE_HITBOX_STATE_NONE         = 0,
+    MELEE_HITBOX_STATE_INIT         = 1,
+    MELEE_HITBOX_STATE_PRE          = 2,
+    MELEE_HITBOX_STATE_ACTIVE       = 3,  // hitbox is active
+    MELEE_HITBOX_STATE_POST         = 4
+};
+
+enum ProjectileHitboxAttackStates {
+    PROJECTILE_HITBOX_STATE_NONE        = 0,
+    PROJECTILE_HITBOX_STATE_INIT        = 1,
+    PROJECTILE_HITBOX_STATE_PRE         = 2,
+    PROJECTILE_HITBOX_STATE_ACTIVE      = 3,  // hitbox is active
+    PROJECTILE_HITBOX_STATE_POST        = 4,
+    PROJECTILE_HITBOX_STATE_DONE        = 100
 };
 
 enum MusicSettingsFlags {

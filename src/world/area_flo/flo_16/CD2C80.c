@@ -8,7 +8,7 @@ enum {
     NPC_TUFF_PUFF1,
 };
 
-f32 N(sixFloats)[] = {
+f32 N(FlyingAI_JumpVels)[] = {
     4.5f, 3.5f, 2.6f, 2.0f,
     1.5f, 20.0f,
 };
@@ -18,12 +18,12 @@ NpcAISettings N(npcAISettings_80244028) = {
     .moveTime = 45,
     .waitTime = 60,
     .alertRadius = 100.0f,
-    .unk_14 = 3,
+    .playerSearchInterval = 3,
     .chaseSpeed = 3.6f,
-    .unk_1C = { .s = 10 },
-    .unk_20 = 1,
+    .chaseTurnRate= 10,
+    .chaseUpdateInterval = 1,
     .chaseRadius = 120.0f,
-    .unk_2C = 1,
+    .unk_AI_2C = 1,
 };
 
 EvtScript N(npcAI_80244058) = {
@@ -31,7 +31,7 @@ EvtScript N(npcAI_80244058) = {
     EVT_CALL(SetSelfVar, 5, 0)
     EVT_CALL(SetSelfVar, 6, 0)
     EVT_CALL(SetSelfVar, 1, 600)
-    EVT_CALL(N(UnkNpcAIMainFunc10), EVT_PTR(N(npcAISettings_80244028)))
+    EVT_CALL(N(FlyingNoAttackAI_Main), EVT_PTR(N(npcAISettings_80244028)))
     EVT_RETURN
     EVT_END
 };
@@ -49,7 +49,7 @@ StaticNpc N(npcGroup_802440F4) = {
     .id = NPC_TUFF_PUFF0,
     .settings = &N(npcSettings_802440C8),
     .pos = { 440.0f, 145.0f, 15.0f },
-    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
+    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
     .yaw = 90,
     .dropFlags = NPC_DROP_FLAGS_80,
     .itemDropChance = 10,
@@ -85,7 +85,7 @@ StaticNpc N(npcGroup_802442E4) = {
     .id = NPC_TUFF_PUFF1,
     .settings = &N(npcSettings_802440C8),
     .pos = { 600.0f, 145.0f, 15.0f },
-    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
+    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
     .yaw = 270,
     .dropFlags = NPC_DROP_FLAGS_80,
     .itemDropChance = 10,
@@ -353,6 +353,6 @@ EvtScript N(802451C4) = {
     EVT_END
 };
 
-#include "world/common/atomic/enemy/UnkAI_9.inc.c"
+#include "world/common/enemy/FlyingAI.inc.c"
 
-#include "world/common/atomic/enemy/UnkAI_10.inc.c"
+#include "world/common/enemy/FlyingNoAttackAI.inc.c"

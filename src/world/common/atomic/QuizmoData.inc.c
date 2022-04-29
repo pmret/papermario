@@ -678,12 +678,12 @@ NpcAISettings N(Quizmo_NpcAISettings) = {
     .moveSpeed = 0.7f,
     .moveTime = 30,
     .waitTime = 20,
-    .unk_14 = -1,
-    .unk_2C = 1,
+    .playerSearchInterval = -1,
+    .unk_AI_2C = 1,
 };
 
 EvtScript N(EVS_Quizmo_Npc_AI) = {
-    EVT_CALL(DoBasicAI, EVT_PTR(N(Quizmo_NpcAISettings)))
+    EVT_CALL(BasicAI_Main, EVT_PTR(N(Quizmo_NpcAISettings)))
     EVT_RETURN
     EVT_END
 };
@@ -696,7 +696,7 @@ NpcSettings N(Quizmo_NpcSettings) = {
     .otherAI = &N(EVS_Quizmo_NPC_OtherAI),
     .onInteract = &N(EVS_Quizmo_NPC_Interact),
     .aux = &N(EVS_Quizmo_NPC_Aux),
-    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
+    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
     .level = 99,
 };
 
@@ -709,7 +709,7 @@ NpcSettings N(Quizmo_AltNpcSettings) = {
     .onInteract = &N(EVS_Quizmo_NPC_Interact),
     .ai = &N(EVS_Quizmo_Npc_AI),
     .aux = &N(EVS_Quizmo_NPC_Aux),
-    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
+    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
     .level = 99,
     .unk_2A = 16,
 };

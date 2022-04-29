@@ -246,8 +246,7 @@ ApiStatus OnDefeatEnemy(Evt* script, s32 isInitialCall) {
         }
     }
 
-    script->functionTemp[1] -= 1;
-
+    script->functionTemp[1]--;
     if (script->functionTemp[1] == 0) {
         npc->flags |= NPC_FLAG_2;
         return ApiStatus_DONE1;

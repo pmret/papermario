@@ -172,12 +172,12 @@ NpcAISettings N(npcAISettings_80241498) = {
     .moveTime = 30,
     .waitTime = 50,
     .alertRadius = 60.0f,
-    .unk_10 = { .f = 30.0f },
-    .unk_14 = 3,
+    .alertOffsetDist = 30.0f,
+    .playerSearchInterval = 3,
     .chaseSpeed = 6.0f,
     .chaseRadius = 100.0f,
-    .unk_28 = { .f = 30.0f },
-    .unk_2C = 3,
+    .chaseOffsetDist = 30.0f,
+    .unk_AI_2C = 3,
 };
 
 EvtScript N(npcAI_802414C8) = {
@@ -185,7 +185,7 @@ EvtScript N(npcAI_802414C8) = {
     EVT_CALL(SetSelfVar, 3, 18)
     EVT_CALL(SetSelfVar, 5, 3)
     EVT_CALL(SetSelfVar, 7, 4)
-    EVT_CALL(N(UnkNpcAIMainFunc5), EVT_PTR(N(npcAISettings_80241498)))
+    EVT_CALL(N(TackleAI_Main), EVT_PTR(N(npcAISettings_80241498)))
     EVT_RETURN
     EVT_END
 };
@@ -353,7 +353,7 @@ StaticNpc N(npcGroup_80241F98) = {
     .id = NPC_GATE_FLOWER,
     .settings = &N(npcSettings_802412E0),
     .pos = { 385.0f, 0.0f, -35.0f },
-    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_PROJECT_SHADOW | NPC_FLAG_400000,
+    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW | NPC_FLAG_400000,
     .init = &N(init_80241E70),
     .yaw = 90,
     .dropFlags = NPC_DROP_FLAGS_80,
@@ -384,7 +384,7 @@ StaticNpc N(npcGroup_80242188) = {
     .id = NPC_SPINY0,
     .settings = &N(npcSettings_80241538),
     .pos = { 80.0f, 0.0f, 0.0f },
-    .flags = NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_PROJECT_SHADOW,
+    .flags = NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW,
     .yaw = 90,
     .dropFlags = NPC_DROP_FLAGS_80,
     .heartDrops = STANDARD_HEART_DROPS(3),
@@ -415,7 +415,7 @@ StaticNpc N(npcGroup_80242378) = {
     .id = NPC_SPINY1,
     .settings = &N(npcSettings_80241538),
     .pos = { -320.0f, 0.0f, 0.0f },
-    .flags = NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_PROJECT_SHADOW,
+    .flags = NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW,
     .yaw = 270,
     .dropFlags = NPC_DROP_FLAGS_80,
     .heartDrops = STANDARD_HEART_DROPS(3),
@@ -468,6 +468,6 @@ EvtScript N(makeEntities) = {
 
 #include "world/common/atomic/MakeConsumableChoice.inc.c"
 
-#include "world/common/atomic/enemy/UnkAI_5.inc.c"
+#include "world/common/enemy/TackleAI.inc.c"
 
 #include "world/common/atomic/ItemChoice_FlowerGuard.inc.c"

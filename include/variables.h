@@ -333,7 +333,4 @@ extern EntityBlueprint Entity_ShatteringHammer2BlockTiny;
 extern EntityBlueprint Entity_ShatteringHammer3BlockTiny;
 extern EntityBlueprint Entity_ShatteringBrickBlock;
 
-// Temporary dead stuff
-extern PartnerActionStatus dead_gPartnerActionStatus2;
-
 #endif

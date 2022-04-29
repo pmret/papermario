@@ -125,7 +125,7 @@ NpcSettings N(npcSettings_802428F0) = {
     .level = 99,
 };
 
-f32 N(sixFloats)[] = {
+f32 N(FlyingAI_JumpVels)[] = {
     4.5f, 3.5f, 2.6f, 2.0f,
     1.5f, 20.0f,
 };
@@ -135,12 +135,12 @@ NpcAISettings N(npcAISettings_80242934) = {
     .moveTime = 45,
     .waitTime = 60,
     .alertRadius = 100.0f,
-    .unk_14 = 3,
+    .playerSearchInterval = 3,
     .chaseSpeed = 3.6f,
-    .unk_1C = { .s = 10 },
-    .unk_20 = 1,
+    .chaseTurnRate= 10,
+    .chaseUpdateInterval = 1,
     .chaseRadius = 120.0f,
-    .unk_2C = 1,
+    .unk_AI_2C = 1,
 };
 
 EvtScript N(npcAI_80242964) = {
@@ -148,7 +148,7 @@ EvtScript N(npcAI_80242964) = {
     EVT_CALL(SetSelfVar, 5, 0)
     EVT_CALL(SetSelfVar, 6, 0)
     EVT_CALL(SetSelfVar, 1, 600)
-    EVT_CALL(N(UnkNpcAIMainFunc10), EVT_PTR(N(npcAISettings_80242934)))
+    EVT_CALL(N(FlyingNoAttackAI_Main), EVT_PTR(N(npcAISettings_80242934)))
     EVT_RETURN
     EVT_END
 };
@@ -167,14 +167,14 @@ NpcAISettings N(npcAISettings_80242A00) = {
     .moveTime = 30,
     .waitTime = 5,
     .alertRadius = 80.0f,
-    .unk_10 = { .f = 30.0f },
-    .unk_14 = 2,
+    .alertOffsetDist = 30.0f,
+    .playerSearchInterval = 2,
     .chaseSpeed = 4.5f,
-    .unk_1C = { .s = 6 },
-    .unk_20 = 1,
+    .chaseTurnRate= 6,
+    .chaseUpdateInterval = 1,
     .chaseRadius = 90.0f,
-    .unk_28 = { .f = 30.0f },
-    .unk_2C = 1,
+    .chaseOffsetDist = 30.0f,
+    .unk_AI_2C = 1,
 };
 
 EvtScript N(npcAI_80242A30) = {
@@ -182,7 +182,7 @@ EvtScript N(npcAI_80242A30) = {
     EVT_CALL(SetSelfVar, 5, -630)
     EVT_CALL(SetSelfVar, 6, 50)
     EVT_CALL(SetSelfVar, 1, 200)
-    EVT_CALL(N(UnkNpcAIMainFunc9), EVT_PTR(N(npcAISettings_80242A00)))
+    EVT_CALL(N(FlyingAI_Main), EVT_PTR(N(npcAISettings_80242A00)))
     EVT_RETURN
     EVT_END
 };
@@ -390,7 +390,7 @@ StaticNpc N(npcGroup_8024368C) = {
     .id = NPC_GATE_FLOWER,
     .settings = &N(npcSettings_802428F0),
     .pos = { 505.0f, 0.0f, -25.0f },
-    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_PROJECT_SHADOW | NPC_FLAG_400000,
+    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW | NPC_FLAG_400000,
     .init = &N(init_80243564),
     .yaw = 90,
     .dropFlags = NPC_DROP_FLAGS_80,
@@ -513,9 +513,9 @@ static s32 N(pad_3CD8)[] = {
     0x00000000, 0x00000000,
 };
 
-#include "world/common/atomic/enemy/UnkAI_9.inc.c"
+#include "world/common/enemy/FlyingAI.inc.c"
 
-#include "world/common/atomic/enemy/UnkAI_10.inc.c"
+#include "world/common/enemy/FlyingNoAttackAI.inc.c"
 
 #include "world/common/atomic/ItemChoice_PartA.inc.c"
 

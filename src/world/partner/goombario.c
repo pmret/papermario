@@ -168,7 +168,7 @@ s32 world_goombario_can_pause(Npc* goombario) {
         return FALSE;
     }
 
-    if ((goombario->flags & (NPC_FLAG_1000 | NPC_FLAG_NO_Y_MOVEMENT)) != NPC_FLAG_1000) {
+    if ((goombario->flags & (NPC_FLAG_1000 | NPC_FLAG_JUMPING)) != NPC_FLAG_1000) {
         return new_var = 0;
         do { } while (new_var); // why though
     }

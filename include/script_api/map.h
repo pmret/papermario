@@ -7,7 +7,7 @@
 #include "script_api/common.h"
 
 ApiStatus MakeNpcs(Evt* script, s32 isInitialCall);
-ApiStatus DoBasicAI(Evt* script, s32 isInitialCall);
+ApiStatus BasicAI_Main(Evt* script, s32 isInitialCall);
 ApiStatus ResetFromLava(Evt* script, s32 isInitialCall);
 ApiStatus MakeShop(Evt* script, s32 isInitialCall);
 ApiStatus MakeShopOwner(Evt* script, s32 isInitialCall);

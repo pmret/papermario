@@ -23,13 +23,8 @@ INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_8024197C_7EC68C);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_80241A18_7EC728);
 
-#include "world/common/SetManyVars.inc.c"
-
-#include "world/common/UnkYawFunc.inc.c"
-
-INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_80241D30_7ECA40);
-
-INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_80241D74_7ECA84);
+extern s32 N(LetterDelivery_SavedNpcAnim);
+#include "world/common/LetterDelivery.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_80241DA0_7ECAB0);
 

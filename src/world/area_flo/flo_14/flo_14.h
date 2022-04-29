@@ -17,7 +17,7 @@ ApiStatus N(func_8024042C_CCB73C)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_8024046C_CCB77C)(Evt* script, s32 isInitialCall);
 void N(func_80240504_CCB814)(void);
 void N(func_802407D4_CCBAE4)(void);
-ApiStatus N(UnkNpcAIMainFunc9)(Evt* script, s32 isInitialCall);
+ApiStatus N(FlyingAI_Main)(Evt* script, s32 isInitialCall);
 ApiStatus N(ItemChoice_WaitForSelection)(Evt* script, s32 isInitialCall);
 ApiStatus N(ItemChoice_SaveSelected)(Evt* script, s32 isInitialCall);
 ApiStatus N(BuildItemChoiceList)(Evt* script, s32 isInitialCall);
