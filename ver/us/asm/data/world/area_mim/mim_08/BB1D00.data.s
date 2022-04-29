@@ -2,7 +2,7 @@
 
 .section .data
 
-dlabel mim_08_sixFloats
+dlabel mim_08_FlyingAI_JumpVels
 .float 4.5, 3.5, 2.6, 2.0, 1.5, 20.0
 
 dlabel D_802443D8_BB1D18

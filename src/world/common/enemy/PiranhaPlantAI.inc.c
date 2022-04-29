@@ -9,4 +9,4 @@
 #include "world/common/enemy/state/PiranhaPlantAI_12.inc.c"
 #include "world/common/enemy/state/PiranhaPlantAI_13.inc.c"
 #include "world/common/enemy/state/PiranhaPlantAI_14.inc.c"
-#include "world/common/enemy/PiranhaPlantAI_Main.inc.c"
+#include "world/common/enemy/state/PiranhaPlantAI_Main.inc.c"

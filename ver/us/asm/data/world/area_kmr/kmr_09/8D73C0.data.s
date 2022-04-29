@@ -20,7 +20,7 @@ dlabel D_80241820_8D7620
 dlabel D_80241840_8D7640
 .word 0x00000000, 0x00140017, 0x00000000, 0x00000000, D_80241820_8D7620, EnemyNpcHit, 0x00000000, EnemyNpcDefeat, 0x00000000, 0x00000000, 0x00050000
 
-dlabel kmr_09_sixFloats
+dlabel kmr_09_FlyingAI_JumpVels
 .float 4.5, 3.5, 2.6, 2.0, 1.5, 20.0
 
 dlabel D_80241884_8D7684

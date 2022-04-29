@@ -2,7 +2,7 @@
 
 .section .data
 
-dlabel kzn_11_sixFloats
+dlabel kzn_11_FlyingAI_JumpVels
 .float 4.5, 3.5, 2.6, 2.0, 1.5, 20.0
 
 dlabel D_802436E8_C83888

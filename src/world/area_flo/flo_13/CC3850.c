@@ -229,7 +229,7 @@ NpcSettings N(npcSettings_80244100) = {
     .level = 20,
 };
 
-f32 N(sixFloats)[] = {
+f32 N(FlyingAI_JumpVels)[] = {
     4.5f, 3.5f, 2.6f, 2.0f,
     1.5f, 20.0f,
 };

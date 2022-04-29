@@ -11,7 +11,7 @@ dlabel D_80242E10_9B9790
 dlabel D_80242E80_9B9800
 .word 0x00000000, 0x00230018, 0x00000000, 0x00000000, D_80242E10_9B9790, EnemyNpcHit, 0x00000000, EnemyNpcDefeat, 0x00000000, 0x00000000, 0x00060000
 
-dlabel trd_07_sixFloats
+dlabel trd_07_FlyingAI_JumpVels
 .float 4.5, 3.5, 2.6, 2.0, 1.5, 20.0
 
 dlabel D_80242EC4_9B9844

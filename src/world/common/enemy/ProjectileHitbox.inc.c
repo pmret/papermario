@@ -1,21 +1,133 @@
+#ifndef _AI_PROJECTILE_HITBOX_INC_
+#define _AI_PROJECTILE_HITBOX_INC_ 0
+
 #include "common.h"
 #include "npc.h"
 #include "effects.h"
 
-#ifndef _AI_PROJECTILE_HITBOX_INC_
-#define _AI_PROJECTILE_HITBOX_INC_ 0
+s32 N(ProjectileHitbox_GetUsableProjectileID)(Evt* script) {
+    Enemy* enemy = script->owner1.enemy;
+    Bytecode* args = script->ptrReadPos;
+    Camera* camera = &gCameras[gCurrentCamID];
+    Npc* npc = get_npc_unsafe(enemy->npcID);
+    NpcAISettings* aiSettings = (NpcAISettings*)evt_get_variable(script, *args++);
+    f32 facingAngle;
+    f32 angleToPlayer;
+    f32 deltaAngle;
+    s32 i;
 
-#include "world/common/enemy/state/ProjectileHitbox_GetUsableProjectileID.inc.c"
+    if (ai_check_player_dist(enemy, 0, aiSettings->chaseRadius, aiSettings->chaseOffsetDist)) {
+        if (clamp_angle(get_clamped_angle_diff(camera->currentYaw, npc->yaw)) < 180.0) {
+            facingAngle = 90.0f;
+        } else {
+            facingAngle = 270.0f;
+        }
 
-#include "world/common/UnkNpcAIFunc48.inc.c"
+        angleToPlayer = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
+        deltaAngle = get_clamped_angle_diff(facingAngle, angleToPlayer);
+        if (fabsf(deltaAngle) > 75.0 || (2.0 * npc->collisionHeight <= fabsf(npc->pos.y - gPlayerStatusPtr->position.y))) {
+           return -1;
+        }
+        if (gPartnerActionStatus.actingPartner == PARTNER_BOW) {
+            return -1;
+        }
+        if (gPartnerActionStatus.actingPartner == PARTNER_SUSHIE) {
+            return -1;
+        }
 
-#include "world/common/enemy/state/ProjectileHitbox_30.inc.c"
+        // choose the first idle projectile hitbox
+        for (i = 0; i < enemy->AI_PROJECTILE_AMMO_COUNT; i++) {
+            s32 projectileNpcID = enemy->npcID + i + 1;
+            Enemy* projectileEnemy = get_enemy(projectileNpcID);
 
-#include "world/common/enemy/state/ProjectileHitbox_31.inc.c"
+            get_npc_unsafe(projectileNpcID);
 
-#include "world/common/enemy/state/ProjectileHitbox_32.inc.c"
+            if (projectileEnemy->VAR_PROJECTILE_HITBOX_STATE == 0) {
+                return projectileNpcID;
+            }
+        }
+    }
+    return -1;
+}
 
-#include "world/common/enemy/state/ProjectileHitbox_33.inc.c"
+void N(UnkNpcAIFunc48)(Evt* script, f32 arg1, f32 arg2, EnemyDetectVolume* territory) {
+    Enemy* enemy = script->owner1.enemy;
+    Npc* npc = get_npc_unsafe(enemy->npcID);
+
+    if (basic_ai_check_player_dist(territory, enemy, arg1, arg2, 1) == 0) {
+        s32 sp28;
+
+        fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &sp28);
+        npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
+        npc->duration = 20;
+        script->functionTemp[0] = 33;
+    } else {
+        s32 npcID = N(ProjectileHitbox_GetUsableProjectileID)(script);
+
+        if (npcID != NPC_SELF && get_enemy(npcID)->varTable[0] == 0 && npc->turnAroundYawAdjustment == 0) {
+            npc->currentAnim.w = enemy->animList[ENEMY_ANIM_MELEE_PRE];
+            npc->duration = enemy->varTable[1];
+            script->functionTemp[0] = 30;
+        }
+    }
+}
+
+void N(ProjectileHitbox_30)(Evt* script) {
+    Enemy* enemy = script->owner1.enemy;
+    Npc* npc = get_npc_unsafe(enemy->npcID);
+    s32 npcID;
+
+    npc->duration--;
+    if (npc->duration <= 0) {
+        npcID = N(ProjectileHitbox_GetUsableProjectileID)(script);
+        if (npcID < 0) {
+            s32 emoteTemp;
+
+            fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &emoteTemp);
+            npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
+        } else {
+            Enemy* hitboxEnemy;
+
+            npc->currentAnim.w = enemy->animList[ENEMY_ANIM_MELEE_HIT];
+            hitboxEnemy = get_enemy(npcID);
+            hitboxEnemy->varTable[4] = enemy->npcID;
+            hitboxEnemy->varTable[0] = 1;
+        }
+        npc->duration = enemy->varTable[2];
+        script->functionTemp[0] = AI_STATE_PROJECTILE_HITBOX_33;
+    }
+}
+
+void N(ProjectileHitbox_31)(Evt* script) {
+    Enemy* enemy = script->owner1.enemy;
+
+    get_npc_unsafe(enemy->npcID)->duration = enemy->varTable[2];
+    script->functionTemp[0] = AI_STATE_PROJECTILE_HITBOX_33;
+}
+
+void N(ProjectileHitbox_32)(Evt* script) {
+    Enemy* enemy = script->owner1.enemy;
+    Npc* npc = get_npc_unsafe(enemy->npcID);
+    Enemy* enemy2 = get_enemy(enemy->npcID + 1);
+    Npc* npc2 = get_npc_unsafe(enemy2->npcID);
+
+    npc->yaw = atan2(npc->pos.x, npc->pos.z, npc2->pos.x, npc2->pos.z);
+    if (enemy2->varTable[0] == 0) {
+        npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
+        npc->duration = enemy->varTable[2];
+        script->functionTemp[0] = AI_STATE_PROJECTILE_HITBOX_33;
+    }
+}
+
+// TODO same as ParatroopaAI_Reset, but removes the extra args since it affects codegen...?
+void N(ProjectileHitbox_33)(Evt* script) {
+    Npc* npc = get_npc_unsafe(script->owner1.enemy->npcID);
+
+    npc->duration--;
+    if (npc->duration <= 0) {
+        script->functionTemp[0] = AI_STATE_WANDER_INIT;
+    }
+}
 
 ApiStatus N(ProjectileAI_Main)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;

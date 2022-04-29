@@ -11,7 +11,7 @@ dlabel D_80243CC0_A0ABC0
 dlabel D_80243D30_A0AC30
 .word 0x00000000, 0x00230018, 0x00000000, 0x00000000, D_80243CC0_A0ABC0, EnemyNpcHit, 0x00000000, EnemyNpcDefeat, 0x00000000, 0x00000000, 0x00060000
 
-dlabel nok_15_sixFloats
+dlabel nok_15_FlyingAI_JumpVels
 .float 4.5, 3.5, 2.6, 2.0, 1.5, 20.0
 
 dlabel D_80243D74_A0AC74

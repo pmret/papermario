@@ -150,6 +150,4 @@ void func_80241A40_EF4050(Evt* script, NpcAISettings* aiSettings, EnemyDetectVol
 
 INCLUDE_ASM(s32, "EF2680", func_80241C90_EF42A0);
 
-#include "world/common/enemy/TackleAI.inc.c"
-
-#include "world/common/enemy/SpinyAI_Main.inc.c"
+#include "world/common/enemy/SpinyAI.inc.c"

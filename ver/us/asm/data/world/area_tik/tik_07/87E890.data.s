@@ -2,7 +2,7 @@
 
 .section .data
 
-dlabel tik_07_sixFloats
+dlabel tik_07_FlyingAI_JumpVels
 .float 4.5, 3.5, 2.6, 2.0, 1.5, 20.0
 
 dlabel D_80244CC8_87E8A8
