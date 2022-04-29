@@ -8,7 +8,7 @@ INCLUDE_ASM(s32, "world/area_omo/omo_02/D9D510", func_8024043C_D9D90C);
 
 #include "world/common/enemy/ShyGuyWanderAI.inc.c"
 
-#include "world/common/enemy/UnkAI_4.inc.c"
+#include "world/common/enemy/StationaryAI.inc.c"
 
 #include "world/common/enemy/RangedAttackAI.inc.c"
 

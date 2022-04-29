@@ -1,13 +1,13 @@
-// Unclear purpose. Used in:
+// Used in:
 // - kmr_02	Toad
 // - kmr_07	GoombaBros
 // - kmr_11	GoombaBros/King
 // - sbk_30	(unused)
-// - trd_01	Bombomb
+// - trd_01	Bombomb <-- only real use case!
 // - nok_01	(unused)
 // - omo_02	(unused)
 
-typedef struct Unk4AISettings {
+typedef struct StationaryAISettings {
     /* 0x00 */ f32 unk_00;
     /* 0x04 */ s32 unk_04;
     /* 0x08 */ s32 playerSearchInterval;    // how often to search for player (frames)
@@ -17,18 +17,26 @@ typedef struct Unk4AISettings {
     /* 0x18 */ f32 chaseRadius;      
     /* 0x1C */ f32 chaseOffsetDist;         // offset along npc->yaw of the test point for alert volume overlap, creates directionality to enemy 'sight' 
     /* 0x20 */ s32 unk_20;
-} Unk4AISettings; // size = 0x24
+} StationaryAISettings; // size = 0x24
+
+// custom states for this AI
+enum AiStateStationary {
+    AI_STATE_STATIONARY_IDLE_INIT           = 0,
+    AI_STATE_STATIONARY_IDLE                = 1,
+    AI_STATE_STATIONARY_RETURN_HOME_INIT    = 15,
+    AI_STATE_STATIONARY_RETURN_HOME         = 16
+};
 
 #include "common.h"
 #include "npc.h"
 #include "effects.h"
 
-void N(Unk4AI_00)(Evt* script, Unk4AISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(StationaryAI_IdleInit)(Evt* script, StationaryAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
     npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
-    script->AI_TEMP_STATE = 1;
+    script->AI_TEMP_STATE = AI_STATE_STATIONARY_IDLE;
 
     if (enemy->flags & ENEMY_FLAGS_100000) {
         npc->yaw = enemy->varTable[0];
@@ -41,36 +49,35 @@ void N(Unk4AI_00)(Evt* script, Unk4AISettings* aiSettings, EnemyDetectVolume* te
     }
 }
 
-void N(Unk4AI_01)(Evt* script, Unk4AISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(StationaryAI_Idle)(Evt* script, StationaryAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
-
-    if (aiSettings->playerSearchInterval >= 0 && (basic_ai_check_player_dist(territory, enemy, aiSettings->chaseRadius, aiSettings->chaseOffsetDist, 0) != 0)) {
-        s32 emoteTemp;
-
-        fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &emoteTemp);
-        ai_enemy_play_sound(npc, 0x2F4, 0x200000);
+    s32 emoteTemp;
+    
+    if (aiSettings->playerSearchInterval >= 0 && basic_ai_check_player_dist(territory, enemy, aiSettings->chaseRadius, aiSettings->chaseOffsetDist, 0)) {
+        fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &emoteTemp);
+        ai_enemy_play_sound(npc, SOUND_2F4, 0x200000);
         npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
 
         if (!(enemy->npcSettings->unk_2A & AI_ACTION_JUMP_WHEN_SEE_PLAYER)) {
-            script->AI_TEMP_STATE = 12;
+            script->AI_TEMP_STATE = AI_STATE_CHASE_INIT;
         } else {
-            script->AI_TEMP_STATE = 10;
+            script->AI_TEMP_STATE = AI_STATE_ALERT_INIT;
         }
     }
 }
 
-void N(Unk4AI_10)(Evt* script, Unk4AISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(StationaryAI_AlertInit)(Evt* script, StationaryAISettings* aiSettings, EnemyDetectVolume* territory) {
     Npc* npc = get_npc_unsafe(script->owner1.enemy->npcID);
 
     npc->jumpVelocity = 10.0f;
     npc->jumpScale = 2.0f;
     npc->moveToPos.y = npc->pos.y;
-    npc->flags |= 0x800;
-    script->AI_TEMP_STATE = 11;
+    npc->flags |= NPC_FLAG_JUMPING;
+    script->AI_TEMP_STATE = AI_STATE_ALERT;
 }
 
-void N(Unk4AI_11)(Evt* script, Unk4AISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(StationaryAI_Alert)(Evt* script, StationaryAISettings* aiSettings, EnemyDetectVolume* territory) {
     Npc* npc = get_npc_unsafe(script->owner1.enemy->npcID);
 
     npc->pos.y += npc->jumpVelocity;
@@ -84,7 +91,7 @@ void N(Unk4AI_11)(Evt* script, Unk4AISettings* aiSettings, EnemyDetectVolume* te
     }
 }
 
-void N(Unk4AI_12)(Evt* script, Unk4AISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(StationaryAI_ChaseInit)(Evt* script, StationaryAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 tempAngle;
@@ -108,40 +115,39 @@ void N(Unk4AI_12)(Evt* script, Unk4AISettings* aiSettings, EnemyDetectVolume* te
     }
 
     npc->yaw = clamp_angle(tempAngle);
-    script->AI_TEMP_STATE = 13;
+    script->AI_TEMP_STATE = AI_STATE_CHASE;
 }
 
-void N(Unk4AI_13)(Evt* script, Unk4AISettings* aiSettings, EnemyDetectVolume* arg2) {
+void N(StationaryAI_Chase)(Evt* script, StationaryAISettings* aiSettings, EnemyDetectVolume* arg2) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
+    s32 emoteTemp;
 
-    if (basic_ai_check_player_dist(arg2, enemy, aiSettings->chaseRadius, aiSettings->chaseOffsetDist, 1) == 0) {
-        s32 something;
-
-        fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &something);
+    if (!basic_ai_check_player_dist(arg2, enemy, aiSettings->chaseRadius, aiSettings->chaseOffsetDist, 1)) {
+        fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &emoteTemp);
         npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
         npc->duration = 25;
-        script->AI_TEMP_STATE = 14;
+        script->AI_TEMP_STATE = AI_STATE_LOSE_PLAYER;
     } else {
         npc_move_heading(npc, npc->moveSpeed, npc->yaw);
         func_8003D660(npc, 1);
         npc->duration--;
         if (npc->duration == 0) {
-            script->AI_TEMP_STATE = 12;
+            script->AI_TEMP_STATE = AI_STATE_CHASE_INIT;
         }
     }
 }
 
-void N(Unk4AI_14)(Evt* script, Unk4AISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(StationaryAI_LosePlayer)(Evt* script, StationaryAISettings* aiSettings, EnemyDetectVolume* territory) {
     Npc* npc = get_npc_unsafe(script->owner1.enemy->npcID);
 
     npc->duration--;
     if (npc->duration == 0) {
-        script->AI_TEMP_STATE = 15;
+        script->AI_TEMP_STATE = AI_STATE_STATIONARY_RETURN_HOME_INIT;
     }
 }
 
-void N(Unk4AI_15)(Evt* script, Unk4AISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(StationaryAI_ReturnHomeInit)(Evt* script, StationaryAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -152,26 +158,25 @@ void N(Unk4AI_15)(Evt* script, Unk4AISettings* aiSettings, EnemyDetectVolume* te
         npc->moveSpeed = enemy->territory->wander.moveSpeedOverride / 32767.0;
     }
     script->functionTemp[1] = 0;
-    script->AI_TEMP_STATE = 16;
+    script->AI_TEMP_STATE = AI_STATE_STATIONARY_RETURN_HOME;
 }
 
-void N(Unk4AI_16)(Evt* script, Unk4AISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(StationaryAI_ReturnHome)(Evt* script, StationaryAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
+    s32 emoteTemp;
 
     if (aiSettings->playerSearchInterval >= 0) {
         if (script->functionTemp[1] <= 0) {
             script->functionTemp[1] = aiSettings->playerSearchInterval;
-            if (basic_ai_check_player_dist(territory, enemy, aiSettings->chaseRadius, aiSettings->chaseOffsetDist, 0) != 0) {
-                s32 emoteTemp;
-
-                fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, (f32) npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &emoteTemp);
-                ai_enemy_play_sound(npc, 0x2F4, 0x200000);
+            if (basic_ai_check_player_dist(territory, enemy, aiSettings->chaseRadius, aiSettings->chaseOffsetDist, 0)) {
+                fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, (f32) npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &emoteTemp);
+                ai_enemy_play_sound(npc, SOUND_2F4, 0x200000);
                 npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
                 if (enemy->npcSettings->unk_2A & AI_ACTION_JUMP_WHEN_SEE_PLAYER) {
-                    script->AI_TEMP_STATE = 10;
+                    script->AI_TEMP_STATE = AI_STATE_ALERT_INIT;
                 } else {
-                    script->AI_TEMP_STATE = 12;
+                    script->AI_TEMP_STATE = AI_STATE_CHASE_INIT;
                 }
                 return;
             }
@@ -183,7 +188,7 @@ void N(Unk4AI_16)(Evt* script, Unk4AISettings* aiSettings, EnemyDetectVolume* te
         npc->pos.x = enemy->territory->wander.point.x;
         npc->pos.z = enemy->territory->wander.point.z;
         npc->yaw = enemy->territory->wander.wanderSizeX;
-        script->AI_TEMP_STATE = 0;
+        script->AI_TEMP_STATE = AI_STATE_STATIONARY_IDLE_INIT;
     }
 
     if (npc->turnAroundYawAdjustment == 0) {
@@ -192,13 +197,13 @@ void N(Unk4AI_16)(Evt* script, Unk4AISettings* aiSettings, EnemyDetectVolume* te
     }
 }
 
-ApiStatus N(Unk4AI_Main)(Evt* script, s32 isInitialCall) {
+ApiStatus N(StationaryAI_Main)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     EnemyDetectVolume territory;
     EnemyDetectVolume* territoryPtr = &territory;
-    Unk4AISettings* aiSettings = (Unk4AISettings*)evt_get_variable(script, *args++);
+    StationaryAISettings* aiSettings = (StationaryAISettings*)evt_get_variable(script, *args++);
 
     territory.skipPlayerDetectChance = 0;
     territory.shape = enemy->territory->wander.detectShape;
@@ -210,7 +215,7 @@ ApiStatus N(Unk4AI_Main)(Evt* script, s32 isInitialCall) {
     territory.detectFlags = 0;
 
     if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAGS_4)) {
-        script->AI_TEMP_STATE = 0;
+        script->AI_TEMP_STATE = AI_STATE_STATIONARY_IDLE_INIT;
         npc->duration = 0;
         enemy->varTable[0] = npc->yaw;
         npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
@@ -229,35 +234,40 @@ ApiStatus N(Unk4AI_Main)(Evt* script, s32 isInitialCall) {
             script->functionTemp[1] = 15;
             enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
         } else if (enemy->flags & ENEMY_FLAGS_40000000) {
-            script->AI_TEMP_STATE = 12;
+            script->AI_TEMP_STATE = AI_STATE_CHASE_INIT;
             enemy->flags &= ~ENEMY_FLAGS_40000000;
         }
     }
 
     switch (script->AI_TEMP_STATE) {
-        case 0:
-            N(Unk4AI_00)(script, aiSettings, territoryPtr);
-        case 1:
-            N(Unk4AI_01)(script, aiSettings, territoryPtr);
+        case AI_STATE_STATIONARY_IDLE_INIT:
+            N(StationaryAI_IdleInit)(script, aiSettings, territoryPtr);
+        case AI_STATE_STATIONARY_IDLE:
+            N(StationaryAI_Idle)(script, aiSettings, territoryPtr);
             break;
-        case 10:
-            N(Unk4AI_10)(script, aiSettings, territoryPtr);
-        case 11:
-            N(Unk4AI_11)(script, aiSettings, territoryPtr);
+
+        case AI_STATE_ALERT_INIT:
+            N(StationaryAI_AlertInit)(script, aiSettings, territoryPtr);
+        case AI_STATE_ALERT:
+            N(StationaryAI_Alert)(script, aiSettings, territoryPtr);
             break;
-        case 12:
-            N(Unk4AI_12)(script, aiSettings, territoryPtr);
-        case 13:
-            N(Unk4AI_13)(script, aiSettings, territoryPtr);
+
+        case AI_STATE_CHASE_INIT:
+            N(StationaryAI_ChaseInit)(script, aiSettings, territoryPtr);
+        case AI_STATE_CHASE:
+            N(StationaryAI_Chase)(script, aiSettings, territoryPtr);
             break;
-        case 14:
-            N(Unk4AI_14)(script, aiSettings, territoryPtr);
+
+        case AI_STATE_LOSE_PLAYER:
+            N(StationaryAI_LosePlayer)(script, aiSettings, territoryPtr);
             break;
-        case 15:
-            N(Unk4AI_15)(script, aiSettings, territoryPtr);
-        case 16:
-            N(Unk4AI_16)(script, aiSettings, territoryPtr);
+
+        case AI_STATE_STATIONARY_RETURN_HOME_INIT:
+            N(StationaryAI_ReturnHomeInit)(script, aiSettings, territoryPtr);
+        case AI_STATE_STATIONARY_RETURN_HOME:
+            N(StationaryAI_ReturnHome)(script, aiSettings, territoryPtr);
             break;
+
         case AI_STATE_SUSPEND:
             basic_ai_suspend(script);
             break;

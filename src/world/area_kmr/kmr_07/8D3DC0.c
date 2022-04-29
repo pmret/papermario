@@ -3,7 +3,7 @@
 static char* N(exit_str_0) = "kmr_06";
 static char* N(exit_str_1) = "kmr_12";
 
-#include "world/common/enemy/UnkAI_4.inc.c"
+#include "world/common/enemy/StationaryAI.inc.c"
 
 // see func_802402BC_8D878C
 #ifdef NON_MATCHING

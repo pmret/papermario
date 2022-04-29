@@ -2,7 +2,7 @@
 
 #include "world/common/enemy/TackleAI.inc.c"
 
-#include "world/common/enemy/UnkAI_4.inc.c"
+#include "world/common/enemy/StationaryAI.inc.c"
 
 ApiStatus func_80241630_99DFC0(Evt* script, s32 isInitialCall) {
     Enemy* owner1 = script->owner1.enemy;
