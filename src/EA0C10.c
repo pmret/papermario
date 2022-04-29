@@ -14,23 +14,17 @@ void func_8004D8E0(DeadEnemy*);
 void func_80240DC4_EA16C4(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory);
 
 #include "world/common/enemy/WanderMeleeAI.inc.c"
-
-#include "world/common/enemy/state/PiranhaPlantAI_00.inc.c"
-
-#include "world/common/enemy/state/PiranhaPlantAI_01.inc.c"
+#include "world/common/enemy/wip/PiranhaPlantAI_00.inc.c"
+#include "world/common/enemy/wip/PiranhaPlantAI_01.inc.c"
 
 // sqrtf issue - Would be PiranhaPlantAI_10
 INCLUDE_ASM(s32, "EA0C10", func_80240DC4_EA16C4);
 
-#include "world/common/enemy/state/PiranhaPlantAI_11.inc.c"
-
-#include "world/common/enemy/state/PiranhaPlantAI_12.inc.c"
-
-#include "world/common/enemy/state/PiranhaPlantAI_13.inc.c"
-
-#include "world/common/enemy/state/PiranhaPlantAI_14.inc.c"
-
-#include "world/common/enemy/Dead_PiranhaPlantAI_Main.inc.c"
+#include "world/common/enemy/wip/PiranhaPlantAI_11.inc.c"
+#include "world/common/enemy/wip/PiranhaPlantAI_12.inc.c"
+#include "world/common/enemy/wip/PiranhaPlantAI_13.inc.c"
+#include "world/common/enemy/wip/PiranhaPlantAI_14.inc.c"
+#include "world/common/enemy/wip/Dead_PiranhaPlantAI_Main.inc.c"
 
 #include "world/common/enemy/TackleAI.inc.c"
 

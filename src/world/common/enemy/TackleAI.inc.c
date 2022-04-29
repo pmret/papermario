@@ -7,7 +7,7 @@
 #include "sprite/npc/bony_beetle.h"
 
 // prerequisites
-#include "world/common/enemy/state/TackleAI_States.inc.c"
+#include "world/common/enemy/States_TackleAI.inc.c"
 
 ApiStatus N(TackleAI_Main)(Evt* script, s32 isInitialCall) {
     #ifdef _DEAD_H_
