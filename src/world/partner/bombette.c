@@ -278,7 +278,7 @@ void world_bombette_pre_battle(Npc* bombette) {
         D_802BE928 = 0;
         playerStatus->flags &= ~PLAYER_STATUS_FLAGS_JUMPING;
         bombette->jumpVelocity = 0.0f;
-        bombette->flags &= ~NPC_FLAG_NO_Y_MOVEMENT;
+        bombette->flags &= ~NPC_FLAG_JUMPING;
 
         set_action_state(ACTION_STATE_IDLE);
         partner_clear_player_tracking(bombette);

@@ -8,17 +8,17 @@ NpcAISettings N(npcAISettings_80240300) = {
     .moveTime = 50,
     .waitTime = 10,
     .alertRadius = 250.0f,
-    .unk_14 = 2,
+    .playerSearchInterval = 2,
     .chaseSpeed = 3.5f,
-    .unk_1C = { .s = 45 },
-    .unk_20 = 6,
+    .chaseTurnRate= 45,
+    .chaseUpdateInterval = 6,
     .chaseRadius = 300.0f,
-    .unk_2C = 1,
+    .unk_AI_2C = 1,
 };
 
 EvtScript N(npcAI_80240330) = {
     EVT_CALL(N(SetNpcB5_3))
-    EVT_CALL(DoBasicAI, EVT_PTR(N(npcAISettings_80240300)))
+    EVT_CALL(BasicAI_Main, EVT_PTR(N(npcAISettings_80240300)))
     EVT_RETURN
     EVT_END
 };
@@ -36,7 +36,7 @@ StaticNpc N(npcGroup_80240388) = {
     .id = 0,
     .settings = &N(npcSettings_8024035C),
     .pos = { -40.0f, 0.0f, 160.0f },
-    .flags = NPC_FLAG_NO_Y_MOVEMENT,
+    .flags = NPC_FLAG_JUMPING,
     .yaw = 90,
     .dropFlags = NPC_DROP_FLAGS_80,
     .itemDropChance = 15,
@@ -73,7 +73,7 @@ StaticNpc N(npcGroup_80240578) = {
     .id = 1,
     .settings = &N(npcSettings_8024035C),
     .pos = { 245.0f, 0.0f, 75.0f },
-    .flags = NPC_FLAG_NO_Y_MOVEMENT,
+    .flags = NPC_FLAG_JUMPING,
     .yaw = 270,
     .dropFlags = NPC_DROP_FLAGS_80,
     .itemDropChance = 15,

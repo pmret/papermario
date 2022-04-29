@@ -73,11 +73,11 @@ NpcAISettings N(npcAISettings_80241BC0) = {
     .moveTime = 25,
     .waitTime = 30,
     .alertRadius = 50.0f,
-    .unk_10 = { .f = 50.0f },
-    .unk_14 = 10,
+    .alertOffsetDist = 50.0f,
+    .playerSearchInterval = 10,
     .chaseRadius = 100.0f,
-    .unk_28 = { .f = 80.0f },
-    .unk_2C = 1,
+    .chaseOffsetDist = 80.0f,
+    .unk_AI_2C = 1,
 };
 
 EvtScript N(npcAI_80241BF0) = {
@@ -99,9 +99,9 @@ NpcSettings N(npcSettings_80241C3C) = {
     .level = 99,
 };
 
-#include "world/common/atomic/enemy/UnkAI_1.inc.c"
+#include "world/common/enemy/PatrolNoAttackAI.inc.c"
 
-void N(func_80240E90_BDFC20)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(func_80240E90_BDFC20)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 posX, posY, posZ, posW;
@@ -137,7 +137,7 @@ void N(func_80240E90_BDFC20)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
     }
 }
 
-void N(func_80241068_BDFDF8)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(func_80241068_BDFDF8)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -149,7 +149,7 @@ void N(func_80241068_BDFDF8)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
             npc->duration = aiSettings->waitTime / 2 + rand_int(aiSettings->waitTime / 2 + 1);
         } else {
             script->functionTemp[0] = 4;
-            npc->currentAnim.w = enemy->animList[0];
+            npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
         }
     }
 }
@@ -158,18 +158,18 @@ ApiStatus N(func_8024113C_BDFECC)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Bytecode* args = script->ptrReadPos;
     Npc* npc = get_npc_unsafe(enemy->npcID);
-    EnemyTerritoryThing territory;
-    EnemyTerritoryThing* territoryPtr = &territory;
+    EnemyDetectVolume territory;
+    EnemyDetectVolume* territoryPtr = &territory;
     NpcAISettings* npcAISettings = (NpcAISettings*)evt_get_variable(script, *args++);
 
-    territory.unk_00 = 0;
+    territory.skipPlayerDetectChance = 0;
     territory.shape = enemy->territory->patrol.detectShape;
     territory.pointX = enemy->territory->patrol.detect.x;
     territory.pointZ = enemy->territory->patrol.detect.z;
     territory.sizeX = enemy->territory->patrol.detectSizeX;
     territory.sizeZ = enemy->territory->patrol.detectSizeZ;
-    territory.unk_18 = 100.0f;
-    territory.unk_1C = 0;
+    territory.halfHeight = 100.0f;
+    territory.detectFlags = 0;
 
     if (isInitialCall) {
         script->functionTemp[0] = 0;
@@ -179,17 +179,17 @@ ApiStatus N(func_8024113C_BDFECC)(Evt* script, s32 isInitialCall) {
 
     switch (script->functionTemp[0]) {
         case 0:
-            N(UnkNpcAIFunc24)(script, npcAISettings, territoryPtr);
+            N(PatrolAI_MoveInit)(script, npcAISettings, territoryPtr);
         case 1:
             N(func_80240E90_BDFC20)(script, npcAISettings, territoryPtr);
             break;
         case 2:
-            N(UnkNpcAIFunc1)(script, npcAISettings, territoryPtr);
+            N(PatrolAI_LoiterInit)(script, npcAISettings, territoryPtr);
         case 3:
             N(func_80241068_BDFDF8)(script, npcAISettings, territoryPtr);
             break;
         case 4:
-            N(UnkNpcAIFunc25)(script, npcAISettings, territoryPtr);
+            N(PatrolAI_PostLoiter)(script, npcAISettings, territoryPtr);
             break;
     }
 

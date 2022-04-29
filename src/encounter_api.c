@@ -797,7 +797,7 @@ ApiStatus func_80045838(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus func_800458CC(Evt* script, s32 isInitialCall) {
-    evt_set_variable(script, *script->ptrReadPos, script->owner1.enemy->npcSettings->unk_2A & 8);
+    evt_set_variable(script, *script->ptrReadPos, script->owner1.enemy->npcSettings->unk_2A & AI_ACTION_08);
     return ApiStatus_DONE2;
 }
 
@@ -806,16 +806,16 @@ ApiStatus func_80045900(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 var0 = evt_get_variable(script, *script->ptrReadPos);
 
-    enemy->unk_B0 |= ENEMY_AI_FLAGS_4;
+    enemy->aiFlags |= ENEMY_AI_FLAGS_4;
 
     if (var0 == 0) {
         s32 unk;
 
-        if (!(enemy->unk_B0 & ENEMY_AI_FLAGS_10)) {
+        if (!(enemy->aiFlags & ENEMY_AI_FLAGS_10)) {
             npc->currentAnim.w = *enemy->animList;
         }
 
-        if (!(enemy->unk_B0 & ENEMY_AI_FLAGS_8)) {
+        if (!(enemy->aiFlags & ENEMY_AI_FLAGS_8)) {
             fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 0.0f, -20.0f, 40, &unk);
         }
 

@@ -1,6 +1,7 @@
 #ifndef _DEAD_H_
 #define _DEAD_H_
 
+
 // There can be multiple invalid references to a symbol from the dead code,
 // so some symbols here have a "2" suffix.
 
@@ -31,7 +32,7 @@
 #define gPlayerActionState dead_gPlayerActionState
 #define is_point_within_region dead_is_point_within_region
 #define npc_raycast_down_sides dead_npc_raycast_down_sides
-#define func_800490B4 func_8004D1A4
+#define basic_ai_check_player_dist dead_basic_ai_check_player_dist
 #define fx_emote dead_fx_emote
 #define ai_enemy_play_sound dead_ai_enemy_play_sound
 #define npc_move_heading dead_npc_move_heading
@@ -39,8 +40,7 @@
 #define get_enemy dead_get_enemy
 #define npc_test_move_simple_with_slipping dead_npc_test_move_simple_with_slipping
 #define get_screen_coords dead_get_screen_coords
-#define func_800495A0 func_800495A0
-#define func_8004A73C func_8004EB8C
+#define basic_ai_suspend dead_basic_ai_suspend
 #define gCurrentCameraID dead_gCurrentCameraID
 #define add_vec2D_polar dead_add_vec2D_polar
 #define gCurrentCamID dead_gCurrentCamID
@@ -92,15 +92,15 @@
 #define get_model_list_index_from_tree_index dead_get_model_list_index_from_tree_index
 #define guMtxCatF dead_guMtxCatF
 #define guMtxIdentF dead_guMtxIdentF
-#define func_800495A0 func_8004D9C0
-#define func_800496B8 func_8004DAD8
-#define base_UnkNpcAIFunc1 func_8004DF64
-#define func_80049C04 func_8004E024
-#define func_80049E3C func_8004E25C
-#define func_80049ECC func_8004E2EC
-#define func_80049F7C func_8004E39C
-#define func_8004A124 func_8004E544
-#define func_8004A3E8 func_8004E808
+#define basic_ai_wander_init dead_basic_ai_wander_init
+#define basic_ai_wander dead_basic_ai_wander
+#define basic_ai_loiter_init dead_basic_ai_loiter_init
+#define basic_ai_loiter dead_basic_ai_loiter
+#define basic_ai_found_player_jump_init dead_basic_ai_found_player_jump_init
+#define basic_ai_found_player_jump dead_basic_ai_found_player_jump
+#define basic_ai_chase_init dead_basic_ai_chase_init
+#define basic_ai_chase dead_basic_ai_chase
+#define basic_ai_lose_player dead_basic_ai_lose_player
 #define gCurrentEncounter dead_gCurrentEncounter
 #define fx_motion_blur_flame dead_fx_motion_blur_flame
 #define wPartnerHudScripts dead_wPartnerHudScripts
@@ -110,5 +110,6 @@
 #define destroy_popup_menu dead_destroy_popup_menu
 #define heap_free dead_heap_free
 #define entity_upgrade_block_hide_content dead_entity_upgrade_block_hide_content
+#define func_8003D660 dead_func_80041080
 
 #endif

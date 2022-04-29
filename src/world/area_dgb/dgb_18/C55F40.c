@@ -93,18 +93,18 @@ static s32 N(pad_1578)[] = {
 NpcAISettings N(npcAISettings_80241580) = {
     .moveSpeed = 4.5f,
     .alertRadius = 170.0f,
-    .unk_10 = { .f = 90.0f },
-    .unk_14 = 1,
+    .alertOffsetDist = 90.0f,
+    .playerSearchInterval = 1,
     .chaseSpeed = 3.9f,
-    .unk_1C = { .s = 180 },
-    .unk_20 = 2,
+    .chaseTurnRate= 180,
+    .chaseUpdateInterval = 2,
     .chaseRadius = 170.0f,
-    .unk_28 = { .f = 90.0f },
-    .unk_2C = 1,
+    .chaseOffsetDist = 90.0f,
+    .unk_AI_2C = 1,
 };
 
 EvtScript N(802415B0) = {
-    EVT_CALL(N(UnkNpcAIMainFunc), EVT_PTR(N(npcAISettings_80241580)))
+    EVT_CALL(N(PatrolNoAttackAI_Main), EVT_PTR(N(npcAISettings_80241580)))
     EVT_RETURN
     EVT_END
 };
@@ -421,7 +421,7 @@ EvtScript N(npcAI_80242834) = {
             EVT_WAIT_FRAMES(8)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(N(UnkNpcAIMainFunc), EVT_PTR(N(npcAISettings_80241580)))
+    EVT_CALL(N(PatrolNoAttackAI_Main), EVT_PTR(N(npcAISettings_80241580)))
     EVT_RETURN
     EVT_END
 };
@@ -584,7 +584,7 @@ StaticNpc N(npcGroup_802432D4) = {
     .id = NPC_WORLD_TUBBA,
     .settings = &N(npcSettings_802415FC),
     .pos = { 0.0f, -1000.0f, 0.0f },
-    .flags = NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_40000 | NPC_FLAG_200000 | NPC_FLAG_NO_DROPS,
+    .flags = NPC_FLAG_JUMPING | NPC_FLAG_40000 | NPC_FLAG_200000 | NPC_FLAG_NO_DROPS,
     .init = &N(init_80242924),
     .yaw = 270,
     .dropFlags = NPC_DROP_FLAGS_80,
@@ -615,7 +615,7 @@ StaticNpc N(npcGroup_802434C4) = {
     .id = NPC_YAKKEY,
     .settings = &N(npcSettings_80241628),
     .pos = { 0.0f, -1000.0f, 0.0f },
-    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_NO_Y_MOVEMENT,
+    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_JUMPING,
     .init = &N(init_8024329C),
     .yaw = 270,
     .dropFlags = NPC_DROP_FLAGS_80,
@@ -700,7 +700,7 @@ EvtScript N(makeEntities) = {
     EVT_END
 };
 
-#include "world/common/atomic/enemy/UnkAI_1.inc.c"
+#include "world/common/enemy/PatrolNoAttackAI.inc.c"
 
 #include "world/common/UnkFunc1.inc.c"
 

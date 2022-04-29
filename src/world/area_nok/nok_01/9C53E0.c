@@ -5,7 +5,7 @@ static char* N(exit_str_1) = "nok_02";
 
 #define CHUCK_QUIZMO_NPC_ID 15
 
-#include "world/common/atomic/enemy/UnkAI_4.inc.c"
+#include "world/common/enemy/StationaryAI.inc.c"
 
 #include "world/common/atomic/ToadHouse.inc.c"
 
@@ -27,13 +27,8 @@ INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_8024207C_9C745C);
 
 INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_802420B4_9C7494);
 
-#include "world/common/SetManyVars.inc.c"
-
-#include "world/common/UnkYawFunc.inc.c"
-
-INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_802423CC_9C77AC);
-
-INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_80242410_9C77F0);
+extern s32 N(LetterDelivery_SavedNpcAnim);
+#include "world/common/LetterDelivery.inc.c"
 
 INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_8024243C_9C781C);
 

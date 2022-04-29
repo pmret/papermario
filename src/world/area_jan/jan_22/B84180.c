@@ -5,7 +5,7 @@ static char* N(exit_str_1) = "jan_16";
 static char* N(exit_str_2) = "kzn_01";
 static char* N(exit_str_3) = "";
 
-#include "world/common/atomic/enemy/UnkAI_1.inc.c"
+#include "world/common/enemy/PatrolNoAttackAI.inc.c"
 
 #include "world/common/StashVars.inc.c"
 

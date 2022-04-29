@@ -1,3 +1,3 @@
 #include "jan_09.h"
 
-#include "world/common/atomic/enemy/SpearGuy.inc.c"
+#include "world/common/enemy/SpearGuyAI.inc.c"

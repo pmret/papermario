@@ -30,7 +30,7 @@ ApiStatus N(UnkFunc53)(Evt* script, s32 isInitialCall) {
         newNpc->pos.y = npc->pos.y;
         newNpc->pos.z = npc->pos.z;
         newNpc->yaw = npc->yaw;
-        newNpc->unk_AB = 3;
+        newNpc->verticalRenderOffset = 3;
         disable_npc_shadow(newNpc);
         unkIt->unk_04 = 0;
         unkIt->unk_08 = 0;

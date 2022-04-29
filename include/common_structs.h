@@ -180,7 +180,7 @@ typedef struct Npc {
     /* 0x0A6 */ s16 collisionRadius;
     /* 0x0A8 */ s16 collisionHeight;
     /* 0x0AA */ s8 renderMode;
-    /* 0x0AB */ s8 unk_AB;
+    /* 0x0AB */ s8 verticalRenderOffset;
     /* 0x0AC */ u8 alpha;
     /* 0x0AD */ u8 alpha2; ///< Multiplied with Npc::alpha
     /* 0x0AE */ char unk_AE[2];

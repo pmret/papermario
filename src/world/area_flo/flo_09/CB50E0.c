@@ -421,18 +421,18 @@ NpcAISettings N(npcAISettings_802435B0) = {
     .moveTime = 500,
     .waitTime = 10,
     .alertRadius = 50.0f,
-    .unk_10 = { .f = 30.0f },
-    .unk_14 = 3,
+    .alertOffsetDist = 30.0f,
+    .playerSearchInterval = 3,
     .chaseSpeed = 3.5f,
-    .unk_1C = { .s = 40 },
-    .unk_20 = 3,
+    .chaseTurnRate= 40,
+    .chaseUpdateInterval = 3,
     .chaseRadius = 100.0f,
-    .unk_28 = { .f = 30.0f },
-    .unk_2C = 1,
+    .chaseOffsetDist = 30.0f,
+    .unk_AI_2C = 1,
 };
 
 EvtScript N(npcAI_802435E0) = {
-    EVT_CALL(DoBasicAI, EVT_PTR(N(npcAISettings_802435B0)))
+    EVT_CALL(BasicAI_Main, EVT_PTR(N(npcAISettings_802435B0)))
     EVT_RETURN
     EVT_END
 };
@@ -446,7 +446,7 @@ NpcSettings N(npcSettings_80243600) = {
     .level = 19,
 };
 
-f32 N(sixFloats)[] = {
+f32 N(FlyingAI_JumpVels)[] = {
     4.5f, 3.5f, 2.6f, 2.0f,
     1.5f, 20.0f,
 };
@@ -456,14 +456,14 @@ NpcAISettings N(npcAISettings_80243644) = {
     .moveTime = 30,
     .waitTime = 5,
     .alertRadius = 80.0f,
-    .unk_10 = { .f = 30.0f },
-    .unk_14 = 2,
+    .alertOffsetDist = 30.0f,
+    .playerSearchInterval = 2,
     .chaseSpeed = 4.5f,
-    .unk_1C = { .s = 6 },
-    .unk_20 = 1,
+    .chaseTurnRate= 6,
+    .chaseUpdateInterval = 1,
     .chaseRadius = 90.0f,
-    .unk_28 = { .f = 30.0f },
-    .unk_2C = 1,
+    .chaseOffsetDist = 30.0f,
+    .unk_AI_2C = 1,
 };
 
 EvtScript N(npcAI_80243674) = {
@@ -471,7 +471,7 @@ EvtScript N(npcAI_80243674) = {
     EVT_CALL(SetSelfVar, 5, -630)
     EVT_CALL(SetSelfVar, 6, 50)
     EVT_CALL(SetSelfVar, 1, 200)
-    EVT_CALL(N(UnkNpcAIMainFunc9), EVT_PTR(N(npcAISettings_80243644)))
+    EVT_CALL(N(FlyingAI_Main), EVT_PTR(N(npcAISettings_80243644)))
     EVT_RETURN
     EVT_END
 };
@@ -543,7 +543,7 @@ StaticNpc N(npcGroup_8024398C) = {
     .id = NPC_DAYZEE0,
     .settings = &N(npcSettings_80243600),
     .pos = { -350.0f, 0.0f, 40.0f },
-    .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_PROJECT_SHADOW,
+    .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW,
     .yaw = 90,
     .dropFlags = NPC_DROP_FLAGS_80,
     .itemDropChance = 15,
@@ -580,7 +580,7 @@ StaticNpc N(npcGroup_80243B7C) = {
     .id = NPC_DAYZEE1,
     .settings = &N(npcSettings_80243600),
     .pos = { 260.0f, 0.0f, 75.0f },
-    .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_PROJECT_SHADOW,
+    .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW,
     .yaw = 270,
     .dropFlags = NPC_DROP_FLAGS_80,
     .itemDropChance = 15,
@@ -617,7 +617,7 @@ StaticNpc N(npcGroup_80243D6C) = {
     .id = NPC_BZZAP0,
     .settings = &N(npcSettings_802436E4),
     .pos = { -50.0f, 55.0f, 90.0f },
-    .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_PROJECT_SHADOW,
+    .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW,
     .yaw = 90,
     .dropFlags = NPC_DROP_FLAGS_80,
     .itemDropChance = 15,
@@ -655,7 +655,7 @@ StaticNpc N(npcGroup_80243F5C) = {
     .id = NPC_BZZAP1,
     .settings = &N(npcSettings_80243710),
     .pos = { 0.0f, -1000.0f, 0.0f },
-    .flags = NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_PROJECT_SHADOW,
+    .flags = NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW,
     .init = &N(init_80243954),
     .yaw = 90,
     .dropFlags = NPC_DROP_FLAGS_80,

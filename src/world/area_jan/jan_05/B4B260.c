@@ -1,10 +1,10 @@
 #include "jan_05.h"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_05/B4B260", func_802407F0_B4B260);
+#include "world/common/HeartPlant_SpawnHeart.inc.c"
 
-#include "world/common/atomic/enemy/UnkAI_2.inc.c"
+#include "world/common/enemy/HoppingAI.inc.c"
 
-#include "world/common/atomic/enemy/SpearGuy.inc.c"
+#include "world/common/enemy/SpearGuyAI.inc.c"
 
 #define NAMESPACE dup_jan_05
 #include "common/foliage.inc.c"

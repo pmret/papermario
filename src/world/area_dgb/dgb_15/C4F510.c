@@ -184,7 +184,7 @@ EvtScript N(80241FBC) = {
     EVT_CALL(SetSelfVar, 1, 5)
     EVT_CALL(SetSelfVar, 2, 8)
     EVT_CALL(SetSelfVar, 3, 12)
-    EVT_CALL(N(func_8024061C_C4FB2C), EVT_PTR(N(D_80241F8C_C5149C)))
+    EVT_CALL(N(WanderMeleeAI_Main), EVT_PTR(N(D_80241F8C_C5149C)))
     EVT_RETURN
     EVT_END
 };
@@ -202,7 +202,7 @@ EvtScript N(80242058) = {
     EVT_CALL(SetSelfVar, 3, 32)
     EVT_CALL(SetSelfVar, 4, 3)
     EVT_CALL(SetSelfVar, 15, 8389)
-    EVT_CALL(N(UnkFunc7))
+    EVT_CALL(N(MeleeHitbox_Main))
     EVT_RETURN
     EVT_END
 };
@@ -325,14 +325,14 @@ NpcAISettings N(npcAISettings_8024271C) = {
     .moveTime = 30,
     .waitTime = 30,
     .alertRadius = 150.0f,
-    .unk_10 = { .f = 80.0f },
-    .unk_14 = 1,
+    .alertOffsetDist = 80.0f,
+    .playerSearchInterval = 1,
     .chaseSpeed = 3.5f,
-    .unk_1C = { .s = 180 },
-    .unk_20 = 2,
+    .chaseTurnRate= 180,
+    .chaseUpdateInterval = 2,
     .chaseRadius = 160.0f,
-    .unk_28 = { .f = 80.0f },
-    .unk_2C = 1,
+    .chaseOffsetDist = 80.0f,
+    .unk_AI_2C = 1,
 };
 
 EvtScript N(npcAI_8024274C) = {
@@ -340,7 +340,7 @@ EvtScript N(npcAI_8024274C) = {
     EVT_CALL(SetNpcFlagBits, NPC_SELF, ((NPC_FLAG_GRAVITY)), TRUE)
     EVT_CALL(SetNpcAnimation, 0, NPC_ANIM_world_tubba_Palette_00_Anim_C)
     EVT_EXEC(N(802424E8))
-    EVT_CALL(N(UnkNpcAIMainFunc), EVT_PTR(N(npcAISettings_8024271C)))
+    EVT_CALL(N(PatrolNoAttackAI_Main), EVT_PTR(N(npcAISettings_8024271C)))
     EVT_RETURN
     EVT_END
 };
@@ -376,7 +376,7 @@ StaticNpc N(npcGroup_802428C0) = {
     .id = NPC_WORLD_TUBBA,
     .settings = &N(npcSettings_8024212C),
     .pos = { 0.0f, -1000.0f, 0.0f },
-    .flags = NPC_FLAG_100 | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_40000 | NPC_FLAG_200000 | NPC_FLAG_NO_DROPS,
+    .flags = NPC_FLAG_100 | NPC_FLAG_JUMPING | NPC_FLAG_40000 | NPC_FLAG_200000 | NPC_FLAG_NO_DROPS,
     .init = &N(init_802427EC),
     .yaw = 270,
     .dropFlags = NPC_DROP_FLAGS_80,
@@ -464,104 +464,9 @@ EvtScript N(makeEntities) = {
     EVT_END
 };
 
-#include "world/common/UnkNpcAIFunc6.inc.c"
+#include "world/common/enemy/WanderMeleeAI.inc.c"
 
-#include "world/common/UnkNpcAIFunc7.inc.c"
-
-#include "world/common/UnkNpcAIFunc8.inc.c"
-
-#include "world/common/UnkNpcAIFunc5.inc.c"
-
-#include "world/common/UnkNpcAIFunc26.inc.c"
-
-#include "world/common/UnkFunc7.inc.c"
-
-ApiStatus N(func_8024061C_C4FB2C)(Evt* script, s32 isInitialCall) {
-    Enemy* enemy = script->owner1.enemy;
-    Npc* npc = get_npc_unsafe(enemy->npcID);
-    Bytecode* args = script->ptrReadPos;
-    EnemyTerritoryThing territory;
-    EnemyTerritoryThing* territoryPtr = &territory;
-    NpcAISettings* npcAISettings = (NpcAISettings*)evt_get_variable(script, *args++);
-
-    territory.unk_00 = 0;
-    territory.shape = enemy->territory->wander.detectShape;
-    territory.pointX = enemy->territory->wander.detect.x;
-    territory.pointZ = enemy->territory->wander.detect.z;
-    territory.sizeX = enemy->territory->wander.detectSizeX;
-    territory.sizeZ = enemy->territory->wander.detectSizeZ;
-    territory.unk_18 = 65.0f;
-    territory.unk_1C = 0;
-
-    if (isInitialCall || (enemy->unk_B0 & ENEMY_AI_FLAGS_4)) {
-        script->functionTemp[0] = 0;
-        npc->duration = 0;
-        npc->currentAnim.w = enemy->animList[0];
-        npc->flags &= ~0x800;
-        if (!enemy->territory->wander.isFlying) {
-            npc->flags = (npc->flags | 0x200) & ~0x8;
-        } else {
-            npc->flags = (npc->flags & ~0x200) | 0x8;
-        }
-        if (enemy->unk_B0 & ENEMY_AI_FLAGS_4) {
-            script->functionTemp[0] = 99;
-            script->functionTemp[1] = 0;
-            enemy->unk_B0 &= ~ENEMY_AI_FLAGS_4;
-        }
-        enemy->varTable[0] = 0;
-    }
-
-    if ((script->functionTemp[0] < 30) && (enemy->varTable[0] == 0) && N(UnkNpcAIFunc26)(script)) {
-        script->functionTemp[0] = 30;
-    }
-
-    switch (script->functionTemp[0]) {
-        case 0:
-            func_800495A0(script, npcAISettings, territoryPtr);
-        case 1:
-            func_800496B8(script, npcAISettings, territoryPtr);
-            break;
-        case 2:
-            base_UnkNpcAIFunc1(script, npcAISettings, territoryPtr);
-        case 3:
-            func_80049C04(script, npcAISettings, territoryPtr);
-            break;
-        case 10:
-            func_80049E3C(script, npcAISettings, territoryPtr);
-        case 11:
-            func_80049ECC(script, npcAISettings, territoryPtr);
-            break;
-        case 12:
-            func_80049F7C(script, npcAISettings, territoryPtr);
-        case 13:
-            func_8004A124(script, npcAISettings, territoryPtr);
-            break;
-        case 14:
-            func_8004A3E8(script, npcAISettings, territoryPtr);
-            break;
-        case 30:
-            N(UnkNpcAIFunc6)(script);
-        case 31:
-            N(UnkNpcAIFunc7)(script);
-            if (script->functionTemp[0] != 32) {
-                break;
-            }
-        case 32:
-            N(UnkNpcAIFunc8)(script);
-            if (script->functionTemp[0] != 33) {
-                break;
-            }
-        case 33:
-            N(UnkNpcAIFunc5)(script);
-            break;
-        case 99:
-            func_8004A73C(script);
-    }
-
-    return ApiStatus_BLOCK;
-}
-
-#include "world/common/atomic/enemy/UnkAI_1.inc.c"
+#include "world/common/enemy/PatrolNoAttackAI.inc.c"
 
 #include "world/common/UnkFunc1.inc.c"
 

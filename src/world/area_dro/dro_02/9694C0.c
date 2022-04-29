@@ -72,7 +72,7 @@ static D_8024F010_Struct N(D_8024F010)[3];
 static s8 N(pad_D_8024F07C)[0x4];
 static s32 N(KeyItemChoiceList)[(ITEM_LAST_KEY - ITEM_FIRST_VALID_KEY) + 3];
 static s32 N(ItemChoiceList)[(ITEM_LAST_VALID_CONSUMABLE - ITEM_FIRST_CONSUMABLE) + 2]; // extra entry for list terminator
-static s32 N(D_8024F3B8);
+static s32 N(LetterDelivery_SavedNpcAnim);
 
 // DATA
 
@@ -470,12 +470,12 @@ NpcAISettings N(npcAISettings_80247408) = {
     .moveSpeed = 1.5f,
     .moveTime = 60,
     .waitTime = 30,
-    .unk_14 = -1,
-    .unk_2C = 1,
+    .playerSearchInterval = -1,
+    .unk_AI_2C = 1,
 };
 
 EvtScript N(npcAI_80247438) = {
-    EVT_CALL(DoBasicAI, EVT_PTR(N(npcAISettings_80247408)))
+    EVT_CALL(BasicAI_Main, EVT_PTR(N(npcAISettings_80247408)))
     EVT_RETURN
     EVT_END
 };
@@ -499,12 +499,12 @@ NpcAISettings N(npcAISettings_802474B0) = {
     .moveSpeed = 1.5f,
     .moveTime = 60,
     .waitTime = 30,
-    .unk_14 = -1,
-    .unk_2C = 1,
+    .playerSearchInterval = -1,
+    .unk_AI_2C = 1,
 };
 
 EvtScript N(npcAI_802474E0) = {
-    EVT_CALL(DoBasicAI, EVT_PTR(N(npcAISettings_802474B0)))
+    EVT_CALL(BasicAI_Main, EVT_PTR(N(npcAISettings_802474B0)))
     EVT_RETURN
     EVT_END
 };
@@ -1310,7 +1310,7 @@ EvtScript N(interact_8024ADE4) = {
 EvtScript N(8024B18C) = {
     EVT_LOOP(0)
         EVT_CALL(GetNpcPos, NPC_PARTNER, EVT_VAR(3), EVT_VAR(4), EVT_VAR(5))
-        EVT_CALL(N(UnkYawFunc), EVT_VAR(3), EVT_VAR(4), EVT_VAR(5))
+        EVT_CALL(N(LetterDelivery_CalcLetterPos), EVT_VAR(3), EVT_VAR(4), EVT_VAR(5))
         EVT_CALL(SetItemPos, EVT_VAR(0), EVT_VAR(3), EVT_VAR(4), EVT_VAR(5))
         EVT_WAIT_FRAMES(1)
     EVT_END_LOOP
@@ -1329,7 +1329,7 @@ EvtScript N(8024B20C) = {
             EVT_CALL(RemoveKeyItemAt, EVT_VAR(1))
             EVT_CALL(DisablePartnerAI, 0)
             EVT_CALL(GetNpcPos, NPC_PARTNER, EVT_VAR(3), EVT_VAR(4), EVT_VAR(5))
-            EVT_CALL(N(UnkYawFunc), EVT_VAR(3), EVT_VAR(4), EVT_VAR(5))
+            EVT_CALL(N(LetterDelivery_CalcLetterPos), EVT_VAR(3), EVT_VAR(4), EVT_VAR(5))
             EVT_BITWISE_OR_CONST(EVT_VAR(0), 0x50000)
             EVT_CALL(MakeItemEntity, EVT_VAR(0), EVT_VAR(3), EVT_VAR(4), EVT_VAR(5), 1, 0)
             EVT_EXEC_GET_TID(N(8024B18C), EVT_VAR(10))
@@ -1383,7 +1383,7 @@ EvtScript N(8024B5A0) = {
     EVT_IF_LT(EVT_SAVE_VAR(0), -70)
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(N(func_802439FC_96CBBC))
+    EVT_CALL(N(LetterDelivery_SaveNpcAnim))
     EVT_CALL(GetCurrentPartnerID, EVT_VAR(0))
     EVT_CALL(FindKeyItem, EVT_VAR(5), EVT_VAR(1))
     EVT_IF_EQ(EVT_VAR(0), 4)
@@ -1424,7 +1424,7 @@ EvtScript N(8024B5A0) = {
             EVT_END_SWITCH
         EVT_END_IF
     EVT_END_IF
-    EVT_CALL(N(func_80243A40_96CC00))
+    EVT_CALL(N(LetterDelivery_RestoreNpcAnim))
     EVT_RETURN
     EVT_END
 };
@@ -1434,7 +1434,7 @@ s32 N(D_8024B898_974A58)[] = {
 };
 
 EvtScript N(8024B8A0) = {
-    EVT_CALL(N(SetManyVars), 1, 9634308, 9634305, 74, 75, 852117, 852118, 852119, 852120, EVT_PTR(N(D_8024B898_974A58)))
+    EVT_CALL(N(LetterDelivery_Init), 1, 9634308, 9634305, 74, 75, 852117, 852118, 852119, 852120, EVT_PTR(N(D_8024B898_974A58)))
     EVT_EXEC_WAIT(N(8024B5A0))
     EVT_RETURN
     EVT_END
@@ -1997,7 +1997,7 @@ StaticNpc N(npcGroup_8024D7B4)[] = {
         .id = NPC_ARCHEOLOGIST,
         .settings = &N(npcSettings_80247484),
         .pos = { -320.0f, 0.0f, -14.0f },
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_PROJECT_SHADOW,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW,
         .init = &N(init_8024BA50),
         .yaw = 90,
         .dropFlags = NPC_DROP_FLAGS_80,
@@ -2028,7 +2028,7 @@ StaticNpc N(npcGroup_8024D7B4)[] = {
         .id = NPC_DRYITE0,
         .settings = &N(npcSettings_80247500),
         .pos = { -20.0f, 0.0f, 40.0f },
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_PROJECT_SHADOW,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW,
         .init = &N(init_8024BBAC),
         .yaw = 270,
         .dropFlags = NPC_DROP_FLAGS_80,
@@ -2059,7 +2059,7 @@ StaticNpc N(npcGroup_8024D7B4)[] = {
         .id = NPC_DISGUISED_MOUSTAFA,
         .settings = &N(npcSettings_80247558),
         .pos = { 245.0f, 0.0f, -35.0f },
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_PROJECT_SHADOW,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW,
         .init = &N(init_8024D04C),
         .yaw = 90,
         .dropFlags = NPC_DROP_FLAGS_80,
@@ -2089,7 +2089,7 @@ StaticNpc N(npcGroup_8024D7B4)[] = {
         .id = NPC_TOAD,
         .settings = &N(npcSettings_80247584),
         .pos = { -143.0f, 0.0f, -170.0f },
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_PROJECT_SHADOW,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW,
         .init = &N(init_8024D790),
         .yaw = 180,
         .dropFlags = NPC_DROP_FLAGS_80,
@@ -2119,7 +2119,7 @@ StaticNpc N(npcGroup_8024D7B4)[] = {
         .id = NPC_WORLD_MERLEE,
         .settings = &N(npcSettings_80248754),
         .pos = { -130.0f, 0.0f, -400.0f },
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_PROJECT_SHADOW,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW,
         .init = &N(init_80247A80),
         .yaw = 180,
         .dropFlags = NPC_DROP_FLAGS_80,
@@ -2149,7 +2149,7 @@ StaticNpc N(npcGroup_8024D7B4)[] = {
         .id = NPC_MOUSTAFA,
         .settings = &N(npcSettings_80247558),
         .pos = { 0.0f, -1000.0f, 0.0f },
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_PROJECT_SHADOW,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW,
         .init = &N(init_8024D130),
         .yaw = 0,
         .dropFlags = NPC_DROP_FLAGS_80,
@@ -2179,7 +2179,7 @@ StaticNpc N(npcGroup_8024D7B4)[] = {
         .id = NPC_DRYITE1,
         .settings = &N(npcSettings_8024752C),
         .pos = { 25.0f, 0.0f, -38.0f },
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_PROJECT_SHADOW,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW,
         .init = &N(init_8024BCD4),
         .yaw = 270,
         .dropFlags = NPC_DROP_FLAGS_80,
@@ -2209,7 +2209,7 @@ StaticNpc N(npcGroup_8024D7B4)[] = {
         .id = NPC_DRYITE2,
         .settings = &N(npcSettings_8024752C),
         .pos = { -375.0f, 0.0f, -10.0f },
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_PROJECT_SHADOW,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW,
         .init = &N(init_8024BD28),
         .yaw = 270,
         .dropFlags = NPC_DROP_FLAGS_80,
@@ -2239,7 +2239,7 @@ StaticNpc N(npcGroup_8024D7B4)[] = {
         .id = NPC_MOUSER0,
         .settings = &N(npcSettings_80247558),
         .pos = { -50.0f, 0.0f, -470.0f },
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_PROJECT_SHADOW,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW,
         .init = &N(init_8024BF10),
         .yaw = 180,
         .dropFlags = NPC_DROP_FLAGS_80,
@@ -2269,7 +2269,7 @@ StaticNpc N(npcGroup_8024D7B4)[] = {
         .id = NPC_MOUSER1,
         .settings = &N(npcSettings_80247558),
         .pos = { -270.0f, 0.0f, 91.0f },
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_PROJECT_SHADOW,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW,
         .init = &N(init_8024C038),
         .yaw = 270,
         .dropFlags = NPC_DROP_FLAGS_80,
@@ -2299,7 +2299,7 @@ StaticNpc N(npcGroup_8024D7B4)[] = {
         .id = NPC_MOUSER2,
         .settings = &N(npcSettings_80247558),
         .pos = { 210.0f, 0.0f, -35.0f },
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_PROJECT_SHADOW,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW,
         .init = &N(init_8024D3E8),
         .yaw = 90,
         .dropFlags = NPC_DROP_FLAGS_80,
@@ -2328,7 +2328,7 @@ StaticNpc N(npcGroup_8024D7B4)[] = {
         .id = NPC_CHUCK_QUIZMO,
         .settings = &N(Quizmo_NpcSettings),
         .pos = { -335.0f, 0.0f, 90.0f },
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_PROJECT_SHADOW,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW,
         .unk_1C = { 00, 00, 00, 01, 00, 03, 02, 01},
         .yaw = 270,
         .dropFlags = NPC_DROP_FLAGS_80,
@@ -2553,19 +2553,4 @@ ApiStatus N(func_80243068_96C228)(Evt* script, s32 isInitialCall) {
 
 #include "world/common/atomic/ToadHouse.inc.c"
 
-#include "world/common/SetManyVars.inc.c"
-
-#include "world/common/UnkYawFunc.inc.c"
-
-ApiStatus N(func_802439FC_96CBBC)(Evt* script, s32 isInitialCall) {
-    Npc* npc = get_npc_unsafe(script->varTable[2]);
-
-    N(D_8024F3B8) = npc->currentAnim.w;
-    npc->currentAnim.w = script->varTable[4];
-    return ApiStatus_DONE2;
-}
-
-ApiStatus N(func_80243A40_96CC00)(Evt* script, s32 isInitialCall) {
-    get_npc_unsafe(script->varTable[2])->currentAnim.w = N(D_8024F3B8);
-    return ApiStatus_DONE2;
-}
+#include "world/common/LetterDelivery.inc.c"

@@ -34,18 +34,18 @@ NpcAISettings N(goombaAISettings) = {
     .moveTime = 30,
     .waitTime = 30,
     .alertRadius = 130.0f,
-    .unk_10 = { .f = 0.0f },
-    .unk_14 = 1,
+    .alertOffsetDist = 0.0f,
+    .playerSearchInterval = 1,
     .chaseSpeed = 2.5f,
-    .unk_1C = { .s = 180 },
-    .unk_20 = 3,
+    .chaseTurnRate= 180,
+    .chaseUpdateInterval = 3,
     .chaseRadius = 150.0f,
-    .unk_28 = { .f = 0.0f },
-    .unk_2C = TRUE,
+    .chaseOffsetDist = 0.0f,
+    .unk_AI_2C = 1,
 };
 
 EvtScript kmr_12_GoombaAI = {
-    EVT_CALL(DoBasicAI, EVT_ADDR(N(goombaAISettings)))
+    EVT_CALL(BasicAI_Main, EVT_ADDR(N(goombaAISettings)))
     EVT_RETURN
     EVT_END
 };

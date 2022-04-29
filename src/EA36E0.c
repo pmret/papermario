@@ -13,7 +13,14 @@ ApiStatus N(SpinyTrompHit)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "EA36E0", func_80242E00_EA3700);
+ApiStatus N(GetActingPartner)(Evt* script, s32 isInitialCall) {
+    if (gPartnerActionStatus.partnerActionState != 0) {
+        script->varTable[0] = gPartnerActionStatus.actingPartner;
+    } else {
+        script->varTable[0] = -1;
+    }
+    return ApiStatus_DONE2;
+}
 
 #include "world/common/UnkFunc46.inc.c"
 

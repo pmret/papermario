@@ -1,17 +1,54 @@
 #include "hos_05.h"
 
-INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_80240880_A2AAC0);
+void set_model_fog_color_parameters(u8 var2, u8 var3, u8 var4, u8 var5, u8 var6, u8 var7, u8 var8, s32 var9, s32 var10);
+
+ApiStatus func_80240880_A2AAC0(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 primR = evt_get_variable(script, *args++);
+    s32 primG = evt_get_variable(script, *args++);
+    s32 primB = evt_get_variable(script, *args++);
+    s32 primA = evt_get_variable(script, *args++);
+    s32 fogR = evt_get_variable(script, *args++);
+    s32 fogG = evt_get_variable(script, *args++);
+    s32 fogB = evt_get_variable(script, *args++);
+    s32 fogStart = evt_get_variable(script, *args++);
+    s32 fogEnd = evt_get_variable(script, *args++);
+
+    set_model_fog_color_parameters(primR, primG, primB, primA, fogR, fogG, fogB, fogStart, fogEnd);
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_802409C4_A2AC04);
 
-INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_80240D54_A2AF94);
+void func_80240D54_A2AF94(s32 camID, f32 fov) {
+    Camera* camera = &gCameras[camID];
+    camera->vfov = fov * 1.1;
+}
 
-INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_80240DA0_A2AFE0);
+ApiStatus func_80240DA0_A2AFE0(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 camID = evt_get_variable(script, *args++);
+    f32 fov = evt_get_float_variable(script, *args++);
 
-INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_80240DF8_A2B038);
+    func_80240D54_A2AF94(camID, fov);
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_80240E30_A2B070);
+ApiStatus func_80240DF8_A2B038(Evt* script, s32 isInitialCall) {
+    GameStatus* gameStatus = gGameStatusPtr;
+    if (gameStatus->creditsViewportMode < 5U) {
+        gameStatus->creditsViewportMode++;
+        state_init_intro();
+    }
+    return ApiStatus_DONE1;
+}
 
+ApiStatus func_80240E30_A2B070(Evt* script, s32 isInitialCall) {
+    mdl_set_all_fog_mode(3);
+    return ApiStatus_DONE2;
+}
+
+// adjusts properties of EmitterVolume:GoldShimmer2 effect
 INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_80240E50_A2B090);
 
 INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_80240F30_A2B170);

@@ -1,3 +1,7 @@
 #include "iwa_00.h"
 
-INCLUDE_ASM(s32, "world/area_iwa/iwa_00/90CEF0", func_802402B0_90CEF0);
+ApiStatus func_802402B0_90CEF0(Evt* script, s32 isInitialCall) {
+    gPlayerStatus.unk_D0 = script->varTablePtr[0];
+    gPlayerStatus.flags |= PLAYER_STATUS_FLAGS_10;
+    return ApiStatus_DONE2;
+}

@@ -6,7 +6,7 @@
 
 #define NAMESPACE dgb_04
 
-ApiStatus N(func_80242154_C38684)(Evt* script, s32 isInitialCall);
+ApiStatus N(SentinelAI_Main)(Evt* script, s32 isInitialCall);
 
 extern NpcGroupList N(npcGroupList_80243D18);
 extern EvtScript N(main);

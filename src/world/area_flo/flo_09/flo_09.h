@@ -9,9 +9,9 @@
 ApiStatus N(TransformFoliage)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_80240000_CB5000)(Evt* script, s32 isInitialCall);
 ApiStatus N(UnkFunc43)(Evt* script, s32 isInitialCall);
-ApiStatus N(UnkNpcAIMainFunc9)(Evt* script, s32 isInitialCall);
+ApiStatus N(FlyingAI_Main)(Evt* script, s32 isInitialCall);
 
-extern f32 N(sixFloats)[];
+extern f32 N(FlyingAI_JumpVels)[];
 extern NpcGroupList N(npcGroupList_8024414C);
 extern EvtScript N(802425DC);
 extern EvtScript N(802434A8);

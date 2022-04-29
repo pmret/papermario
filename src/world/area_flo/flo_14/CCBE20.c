@@ -9,7 +9,7 @@ enum {
 
 BSS s32 N(ItemChoiceList)[91];
 
-f32 N(sixFloats)[] = {
+f32 N(FlyingAI_JumpVels)[] = {
     4.5f, 3.5f, 2.6f, 2.0f,
     1.5f, 20.0f,
 };
@@ -19,14 +19,14 @@ NpcAISettings N(npcAISettings_802444D8) = {
     .moveTime = 30,
     .waitTime = 5,
     .alertRadius = 80.0f,
-    .unk_10 = { .f = 30.0f },
-    .unk_14 = 2,
+    .alertOffsetDist = 30.0f,
+    .playerSearchInterval = 2,
     .chaseSpeed = 4.5f,
-    .unk_1C = { .s = 6 },
-    .unk_20 = 1,
+    .chaseTurnRate= 6,
+    .chaseUpdateInterval = 1,
     .chaseRadius = 90.0f,
-    .unk_28 = { .f = 30.0f },
-    .unk_2C = 1,
+    .chaseOffsetDist = 30.0f,
+    .unk_AI_2C = 1,
 };
 
 EvtScript N(npcAI_80244508) = {
@@ -34,7 +34,7 @@ EvtScript N(npcAI_80244508) = {
     EVT_CALL(SetSelfVar, 5, -630)
     EVT_CALL(SetSelfVar, 6, 50)
     EVT_CALL(SetSelfVar, 1, 200)
-    EVT_CALL(N(UnkNpcAIMainFunc9), EVT_PTR(N(npcAISettings_802444D8)))
+    EVT_CALL(N(FlyingAI_Main), EVT_PTR(N(npcAISettings_802444D8)))
     EVT_RETURN
     EVT_END
 };
@@ -169,7 +169,7 @@ StaticNpc N(npcGroup_80244B20) = {
     .id = NPC_BUBULB,
     .settings = &N(npcSettings_802445A4),
     .pos = { 617.0f, 0.0f, 108.0f },
-    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_4000,
+    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_4000,
     .init = &N(init_80244ADC),
     .yaw = 270,
     .dropFlags = NPC_DROP_FLAGS_80,
@@ -200,7 +200,7 @@ StaticNpc N(npcGroup_80244D10) = {
     .id = NPC_BZZAP,
     .settings = &N(npcSettings_80244578),
     .pos = { -175.0f, 55.0f, 15.0f },
-    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
+    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
     .yaw = 90,
     .dropFlags = NPC_DROP_FLAGS_80,
     .itemDropChance = 15,
@@ -323,7 +323,7 @@ EvtScript N(80245224) = {
     EVT_END
 };
 
-#include "world/common/atomic/enemy/UnkAI_9.inc.c"
+#include "world/common/enemy/FlyingAI.inc.c"
 
 #include "world/common/atomic/ItemChoice_PartA.inc.c"
 

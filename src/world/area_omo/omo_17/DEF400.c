@@ -1,24 +1,12 @@
 #include "omo_17.h"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_17/DEF400", func_80240560_DEF400);
+#include "world/common/enemy/ShyGuyWanderAI.inc.c"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_17/DEF400", func_802405D0_DEF470);
+#include "world/common/enemy/GrooveGuyAI.inc.c"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_17/DEF400", func_802406A0_DEF540);
+#include "world/common/enemy/FlyingAI.inc.c"
 
-#include "world/common/UnkNpcDurationAnimationFunc.inc.c"
-
-INCLUDE_ASM(s32, "world/area_omo/omo_17/DEF400", func_80240798_DEF638);
-
-#include "world/common/UnkNpcAIFunc4.inc.c"
-
-INCLUDE_ASM(s32, "world/area_omo/omo_17/DEF400", func_80240B1C_DEF9BC);
-
-INCLUDE_ASM(s32, "world/area_omo/omo_17/DEF400", func_80240CE0_DEFB80);
-
-#include "world/common/atomic/enemy/UnkAI_9.inc.c"
-
-#include "world/common/atomic/enemy/ThrowAttackAI.inc.c"
+#include "world/common/enemy/RangedAttackAI.inc.c"
 
 #include "world/common/SetNpcB5_3.inc.c"
 
