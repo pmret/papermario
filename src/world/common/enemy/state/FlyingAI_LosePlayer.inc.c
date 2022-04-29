@@ -43,7 +43,7 @@ void N(FlyingAI_LosePlayer)(Evt* script, NpcAISettings* aiSettings, EnemyDetectV
         }
     } else if (npc->jumpVelocity < 0.0) {
         npc->duration++;
-        if (npc->duration >= aiSettings->unk_AI_20) {
+        if (npc->duration >= aiSettings->chaseUpdateInterval) {
             npc->duration = 0;
             angle = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
             deltaAngle = get_clamped_angle_diff(npc->yaw, angle);

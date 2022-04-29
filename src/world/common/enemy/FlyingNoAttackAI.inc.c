@@ -16,7 +16,7 @@ void N(FlyingNoAttackAI_12)(Evt* script, NpcAISettings* aiSettings, EnemyDetectV
     f32 tempAngle;
     f32 angleDiff;
 
-    npc->duration = (aiSettings->unk_AI_20 / 2) + rand_int(aiSettings->unk_AI_20 / 2 + 1);
+    npc->duration = (aiSettings->chaseUpdateInterval / 2) + rand_int(aiSettings->chaseUpdateInterval / 2 + 1);
     npc->currentAnim.w = enemy->animList[ENEMY_ANIM_CHASE];
     npc->moveSpeed = aiSettings->chaseSpeed;
 
@@ -45,7 +45,7 @@ void N(FlyingNoAttackAI_13)(Evt* script, NpcAISettings* aiSettings, EnemyDetectV
     s32 flag;
     f32 temp_f6;
 
-    if (basic_ai_check_player_dist(territory, enemy, aiSettings->chaseRadius, aiSettings->unkChase, 1) == 0) {
+    if (basic_ai_check_player_dist(territory, enemy, aiSettings->chaseRadius, aiSettings->chaseOffsetDist, 1) == 0) {
         fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &var);
         npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
         npc->duration = 30;

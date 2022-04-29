@@ -34,13 +34,13 @@ NpcAISettings N(goombaAISettings) = {
     .moveTime = 30,
     .waitTime = 30,
     .alertRadius = 130.0f,
-    .unk_AI_10 = { .f = 0.0f },
+    .alertOffsetDist = { .f = 0.0f },
     .playerSearchInterval = 1,
     .chaseSpeed = 2.5f,
     .chaseTurnRate = { .s = 180 },
-    .unk_AI_20 = 3,
+    .chaseUpdateInterval = 3,
     .chaseRadius = 150.0f,
-    .unkChase = 0.0f,
+    .chaseOffsetDist = 0.0f,
     .unk_AI_2C = 1,
 };
 

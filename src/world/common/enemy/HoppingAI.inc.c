@@ -48,7 +48,7 @@ void N(HoppingAI_Hop)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume*
         if (script->functionTemp[1] <= 0) {
             do {
                 script->functionTemp[1] = aiSettings->playerSearchInterval;
-                if (basic_ai_check_player_dist(territory, enemy, aiSettings->alertRadius, aiSettings->unk_AI_10.f, 0) != 0) {
+                if (basic_ai_check_player_dist(territory, enemy, aiSettings->alertRadius, aiSettings->alertOffsetDist.f, 0) != 0) {
                     s32 emoteTemp;
                     fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &emoteTemp);
                     ai_enemy_play_sound(npc, SOUND_2F4, 0x200000);
@@ -126,7 +126,7 @@ void N(HoppingAI_Loiter)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolu
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
-    if (aiSettings->playerSearchInterval >= 0 && basic_ai_check_player_dist(territory, enemy, aiSettings->chaseRadius, aiSettings->unkChase, 0) != 0) {
+    if (aiSettings->playerSearchInterval >= 0 && basic_ai_check_player_dist(territory, enemy, aiSettings->chaseRadius, aiSettings->chaseOffsetDist, 0) != 0) {
         s32 emoteTemp;
         fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &emoteTemp);
         ai_enemy_play_sound(npc, SOUND_2F4, 0x200000);
@@ -197,7 +197,7 @@ void N(HoppingAI_Chase)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolum
             fx_walking_dust(2, npc->pos.x, npc->pos.y, npc->pos.z, 0.0f, 0.0f);
             script->functionTemp[0] = 12;
 
-            if (basic_ai_check_player_dist(territory, enemy, aiSettings->chaseRadius, aiSettings->unkChase, 1) == 0) {
+            if (basic_ai_check_player_dist(territory, enemy, aiSettings->chaseRadius, aiSettings->chaseOffsetDist, 1) == 0) {
                 fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &emoteTemp);
                 npc->duration = 25;
                 script->functionTemp[0] = 14;

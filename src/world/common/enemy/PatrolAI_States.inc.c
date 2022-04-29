@@ -53,7 +53,7 @@ void N(PatrolAI_Move)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume*
     if (aiSettings->playerSearchInterval >= 0) {
         if (script->functionTemp[1] <= 0) {
             script->functionTemp[1] = aiSettings->playerSearchInterval;
-            if (basic_ai_check_player_dist(territory, enemy, aiSettings->alertRadius, aiSettings->unk_AI_10.f, 0)) {
+            if (basic_ai_check_player_dist(territory, enemy, aiSettings->alertRadius, aiSettings->alertOffsetDist.f, 0)) {
                 fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &emoteTemp);
                 ai_enemy_play_sound(npc, SOUND_2F4, 0x200000);
                 if (enemy->npcSettings->unk_2A & AI_ACTION_JUMP_WHEN_SEE_PLAYER) {
@@ -109,7 +109,7 @@ void N(PatrolAI_Loiter)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolum
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 emoteTemp;
 
-    if ((aiSettings->playerSearchInterval >= 0) && basic_ai_check_player_dist(territory, enemy, aiSettings->chaseRadius, aiSettings->unkChase, 0)) {
+    if ((aiSettings->playerSearchInterval >= 0) && basic_ai_check_player_dist(territory, enemy, aiSettings->chaseRadius, aiSettings->chaseOffsetDist, 0)) {
         fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &emoteTemp);
         npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
         ai_enemy_play_sound(npc, SOUND_2F4, 0x200000);
@@ -187,7 +187,7 @@ void N(PatrolAI_ChaseInit)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVo
     f32 angle;
     f32 angleDiff;
 
-    npc->duration = (aiSettings->unk_AI_20 / 2) + rand_int(aiSettings->unk_AI_20 / 2 + 1);
+    npc->duration = (aiSettings->chaseUpdateInterval / 2) + rand_int(aiSettings->chaseUpdateInterval / 2 + 1);
     npc->currentAnim.w = enemy->animList[ENEMY_ANIM_CHASE];
     npc->moveSpeed = aiSettings->chaseSpeed;
 
@@ -213,7 +213,7 @@ ApiStatus N(PatrolAI_Chase)(Evt* script, NpcAISettings* aiSettings, EnemyDetectV
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 emoteTemp;
 
-    if (!basic_ai_check_player_dist(territory, enemy, aiSettings->chaseRadius, aiSettings->unkChase, 1)) {
+    if (!basic_ai_check_player_dist(territory, enemy, aiSettings->chaseRadius, aiSettings->chaseOffsetDist, 1)) {
         fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &emoteTemp);
         npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
         npc->duration = 25;

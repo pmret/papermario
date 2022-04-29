@@ -132,13 +132,13 @@ static s32 N(pad_40FC) = {
 NpcAISettings N(npcAI_80244100) = {
     .moveSpeed = 4.5f,
     .alertRadius = 170.0f,
-    .unk_AI_10 = { .f = 90.0f },
+    .alertOffsetDist = { .f = 90.0f },
     .playerSearchInterval = 1,
     .chaseSpeed = 3.9f,
     .chaseTurnRate = { .s = 180 },
-    .unk_AI_20 = 2,
+    .chaseUpdateInterval = 2,
     .chaseRadius = 170.0f,
-    .unkChase = 90.0f,
+    .chaseOffsetDist = 90.0f,
     .unk_AI_2C = 1,
 };
 
@@ -210,13 +210,13 @@ NpcAISettings N(npcAISettings_802442C0) = {
     .moveTime = 120,
     .waitTime = 30,
     .alertRadius = 85.0f,
-    .unk_AI_10 = { .f = 65.0f },
+    .alertOffsetDist = { .f = 65.0f },
     .playerSearchInterval = 5,
     .chaseSpeed = 3.5f,
     .chaseTurnRate = { .s = 90 },
-    .unk_AI_20 = 12,
+    .chaseUpdateInterval = 12,
     .chaseRadius = 110.0f,
-    .unkChase = 90.0f,
+    .chaseOffsetDist = 90.0f,
     .unk_AI_2C = 3,
 };
 
@@ -281,7 +281,7 @@ NpcAISettings N(npcAISettings_802444B4) = {
     .playerSearchInterval = 1,
     .chaseSpeed = 5.3f,
     .chaseTurnRate = { .s = 180 },
-    .unk_AI_20 = 1,
+    .chaseUpdateInterval = 1,
     .chaseRadius = 240.0f,
     .unk_AI_2C = 1,
 };

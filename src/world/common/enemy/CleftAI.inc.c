@@ -30,7 +30,7 @@ s32 N(CleftAI_CanSeePlayer)(Evt* script, NpcAISettings* aiSettings, EnemyDetectV
     f32 angle;
     s32 seesPlayer = FALSE;
 
-    if (ai_check_player_dist(enemy, 0, aiSettings->alertRadius, aiSettings->unk_AI_10.f)) {
+    if (ai_check_player_dist(enemy, 0, aiSettings->alertRadius, aiSettings->alertOffsetDist.f)) {
         seesPlayer = TRUE;
     }
     if (clamp_angle(get_clamped_angle_diff(camera->currentYaw, npc->yaw)) < 180.0) {
@@ -73,7 +73,7 @@ void N(CleftAI_Hiding)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume
 
     if (script->functionTemp[1] <= 0) {
         script->functionTemp[1] = aiSettings->playerSearchInterval;
-        if (basic_ai_check_player_dist(volume, enemy, aiSettings->alertRadius * 0.85, aiSettings->unk_AI_10.f, FALSE)) {
+        if (basic_ai_check_player_dist(volume, enemy, aiSettings->alertRadius * 0.85, aiSettings->alertOffsetDist.f, FALSE)) {
             npc->currentAnim.w = enemy->animList[9];
             fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &emoteTemp);
             ai_enemy_play_sound(npc, SOUND_2F4, 0x200000);
@@ -126,7 +126,7 @@ void N(CleftAI_FindPlayer)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVo
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 var;
 
-    if (basic_ai_check_player_dist(volume, enemy, aiSettings->chaseRadius, aiSettings->unkChase, 0)) {
+    if (basic_ai_check_player_dist(volume, enemy, aiSettings->chaseRadius, aiSettings->chaseOffsetDist, 0)) {
         npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
         script->AI_TEMP_STATE = AI_STATE_CLEFT_CHASE_INIT;
     } else {
@@ -234,7 +234,7 @@ void N(CleftAI_ReturnHome)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVo
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
-    if (basic_ai_check_player_dist(volume, enemy, aiSettings->chaseRadius, aiSettings->unkChase, 0)) {
+    if (basic_ai_check_player_dist(volume, enemy, aiSettings->chaseRadius, aiSettings->chaseOffsetDist, 0)) {
         npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
         script->AI_TEMP_STATE = AI_STATE_CLEFT_CHASE_INIT;
     } else if (dist2D(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z) <= npc->moveSpeed) {

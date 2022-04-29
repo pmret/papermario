@@ -150,13 +150,13 @@ NpcAISettings N(npcAISettings_802418AC) = {
     .moveTime = 120,
     .waitTime = 30,
     .alertRadius = 100.0f,
-    .unk_AI_10 = { .f = 40.0f },
+    .alertOffsetDist = { .f = 40.0f },
     .playerSearchInterval = 10,
     .chaseSpeed = 3.5f,
     .chaseTurnRate = { .s = 90 },
-    .unk_AI_20 = 15,
+    .chaseUpdateInterval = 15,
     .chaseRadius = 200.0f,
-    .unkChase = 160.0f,
+    .chaseOffsetDist = 160.0f,
     .unk_AI_2C = 1,
 };
 

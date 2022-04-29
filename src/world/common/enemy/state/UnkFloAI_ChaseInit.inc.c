@@ -23,7 +23,7 @@ void N(UnkFloAI_ChaseInit)(Evt* script, NpcAISettings* npcAISettings, EnemyDetec
     f32 posYCCW;
     f32 posZCCW;
     
-    npc->duration = npcAISettings->unk_AI_20 / 2 + rand_int(npcAISettings->unk_AI_20 / 2 + 1);
+    npc->duration = npcAISettings->chaseUpdateInterval / 2 + rand_int(npcAISettings->chaseUpdateInterval / 2 + 1);
     npc->currentAnim.w = enemy->animList[ENEMY_ANIM_CHASE];
     npc->moveSpeed = npcAISettings->chaseSpeed;
     detectedPlayer = FALSE;
@@ -80,7 +80,7 @@ void N(UnkFloAI_ChaseInit)(Evt* script, NpcAISettings* npcAISettings, EnemyDetec
         distToPlayer = dist2D(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
 
         if ((distFwd < npc->moveSpeed * 1.5) && (distCW < npc->moveSpeed * 1.5) && (distCCW < npc->moveSpeed * 1.5) &&
-            (basic_ai_check_player_dist(territory, enemy, npcAISettings->alertRadius, npcAISettings->unk_AI_10.f, 0))) {
+            (basic_ai_check_player_dist(territory, enemy, npcAISettings->alertRadius, npcAISettings->alertOffsetDist.f, 0))) {
             detectedPlayer = TRUE;
         }
 

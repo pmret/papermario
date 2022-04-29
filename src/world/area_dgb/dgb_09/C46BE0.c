@@ -228,13 +228,13 @@ NpcAISettings N(npcAISettings_802440EC) = {
     .moveTime = 120,
     .waitTime = 30,
     .alertRadius = 85.0f,
-    .unk_AI_10 = { .f = 65.0f },
+    .alertOffsetDist = { .f = 65.0f },
     .playerSearchInterval = 5,
     .chaseSpeed = 3.5f,
     .chaseTurnRate = { .s = 90 },
-    .unk_AI_20 = 12,
+    .chaseUpdateInterval = 12,
     .chaseRadius = 110.0f,
-    .unkChase = 90.0f,
+    .chaseOffsetDist = 90.0f,
     .unk_AI_2C = 3,
 };
 
@@ -262,13 +262,13 @@ NpcAISettings N(npcAISettings_802441B8) = {
     .moveTime = 120,
     .waitTime = 30,
     .alertRadius = 100.0f,
-    .unk_AI_10 = { .f = 40.0f },
+    .alertOffsetDist = { .f = 40.0f },
     .playerSearchInterval = 10,
     .chaseSpeed = 3.5f,
     .chaseTurnRate = { .s = 90 },
-    .unk_AI_20 = 15,
+    .chaseUpdateInterval = 15,
     .chaseRadius = 200.0f,
-    .unkChase = 160.0f,
+    .chaseOffsetDist = 160.0f,
     .unk_AI_2C = 1,
 };
 
@@ -333,7 +333,7 @@ NpcAISettings N(npcAISettings_802443AC) = {
     .playerSearchInterval = 1,
     .chaseSpeed = 5.3f,
     .chaseTurnRate = { .s = 180 },
-    .unk_AI_20 = 1,
+    .chaseUpdateInterval = 1,
     .chaseRadius = 240.0f,
     .unk_AI_2C = 1,
 };

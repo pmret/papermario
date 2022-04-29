@@ -9,7 +9,7 @@ void N(PiranhaPlantAI_14)(Evt *script, NpcAISettings* aiSettings, EnemyDetectVol
 
     npc->duration--;
     if (npc->duration == 0) {
-        if (basic_ai_check_player_dist(territory, enemy, aiSettings->alertRadius, aiSettings->unk_AI_10.f, 0) == 0) {
+        if (basic_ai_check_player_dist(territory, enemy, aiSettings->alertRadius, aiSettings->alertOffsetDist.f, 0) == 0) {
             fx_emote(EMOTE_QUESTION, npc, 0, npc->collisionHeight, 1, 2, -20, 15, &retVal);
         }
         npc->duration = 0;
