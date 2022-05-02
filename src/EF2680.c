@@ -5,7 +5,7 @@
 
 #define NAMESPACE EF2680
 
-#include "world/common/atomic/enemy/Dead_UnkAI_9.inc.c"
+#include "world/common/enemy/FlyingAI.inc.c"
 
 s32 func_80241594_EF3BA4(void) {
     s32 i;
@@ -19,7 +19,7 @@ s32 func_80241594_EF3BA4(void) {
     return -1;
 }
 
-void func_802415DC_EF3BEC(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void func_802415DC_EF3BEC(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 x, y, z, w;
@@ -48,10 +48,10 @@ void func_802415DC_EF3BEC(Evt* script, NpcAISettings* aiSettings, EnemyTerritory
     npc->pos.y = y + temp_f24 + (sin_deg(enemy->varTable[2]) * temp_f20);
     enemy->varTable[2] = clamp_angle(enemy->varTable[2] + 0xC);
 
-    if (aiSettings->unk_14 >= 0) {
+    if (aiSettings->playerSearchInterval >= 0) {
         if (script->functionTemp[1] <= 0) {
-            script->functionTemp[1] = aiSettings->unk_14;
-            if (func_800490B4(territory, enemy, aiSettings->alertRadius, aiSettings->unk_10.f, 0) != 0) {
+            script->functionTemp[1] = aiSettings->playerSearchInterval;
+            if (basic_ai_check_player_dist(territory, enemy, aiSettings->alertRadius, aiSettings->alertOffsetDist, 0)) {
                 fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &var);
                 ai_enemy_play_sound(npc, 0x2F4, 0x200000);
                 x = npc->pos.x;
@@ -99,13 +99,13 @@ void func_802415DC_EF3BEC(Evt* script, NpcAISettings* aiSettings, EnemyTerritory
         }
         script->functionTemp[0] = 2;
         script->functionTemp[1] = (rand_int(1000) % 3) + 2;
-        if ((aiSettings->unk_2C <= 0) || (aiSettings->moveTime <= 0) || (script->functionTemp[1] == 0)) {
+        if ((aiSettings->unk_AI_2C <= 0) || (aiSettings->moveTime <= 0) || (script->functionTemp[1] == 0)) {
             script->functionTemp[0] = 0;
         }
     }
 }
 
-void func_80241A40_EF4050(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void func_80241A40_EF4050(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 x, y, z, w;
@@ -130,7 +130,7 @@ void func_80241A40_EF4050(Evt* script, NpcAISettings* aiSettings, EnemyTerritory
     npc_raycast_down_sides(npc->collisionChannel, &x, &y, &z, &w);
     npc->pos.y = y + temp_f22 + (sin_deg(enemy->varTable[2]) * temp_f20);
     enemy->varTable[2] = clamp_angle(enemy->varTable[2] + 0xC);
-    if (func_800490B4(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 1) != 0) {
+    if (basic_ai_check_player_dist(territory, enemy, aiSettings->chaseRadius, aiSettings->chaseOffsetDist, 1)) {
         fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &var);
         ai_enemy_play_sound(npc, 0x2F4, 0x200000);
         script->functionTemp[0] = 12;
@@ -150,8 +150,4 @@ void func_80241A40_EF4050(Evt* script, NpcAISettings* aiSettings, EnemyTerritory
 
 INCLUDE_ASM(s32, "EF2680", func_80241C90_EF42A0);
 
- #include "world/common/atomic/enemy/UnkAI_StateHandlers_A.inc.c"
-
-#include "world/common/DeadUnkNpcAIMainFunc5.inc.c"
-
-#include "world/common/DeadUnkNpcAIMainFunc6.inc.c"
+#include "world/common/enemy/SpinyAI.inc.c"

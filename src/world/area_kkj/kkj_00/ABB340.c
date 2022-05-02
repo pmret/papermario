@@ -1,6 +1,6 @@
 #include "kkj_00.h"
 
-#include "world/common/atomic/enemy/UnkAI_1.inc.c"
+#include "world/common/enemy/PatrolNoAttackAI.inc.c"
 
 static char* N(exit_str) = "end_00";
 

@@ -8,10 +8,10 @@
 
 ApiStatus N(UnkFunc11)(Evt* script, s32 isInitialCall);
 ApiStatus N(UnkFunc12)(Evt* script, s32 isInitialCall);
-ApiStatus N(UnkFunc7)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_8024086C_C31D4C)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_802419B0_C32E90)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_80242480_C33960)(Evt* script, s32 isInitialCall);
+ApiStatus N(MeleeHitbox_Main)(Evt* script, s32 isInitialCall);
+ApiStatus N(WanderMeleeAI_Main)(Evt* script, s32 isInitialCall);
+ApiStatus N(ClubbaPatrolAI_Main)(Evt* script, s32 isInitialCall);
+ApiStatus N(ClubbaNappingAI_Main)(Evt* script, s32 isInitialCall);
 ApiStatus N(SetEntityFlags100000)(Evt* script, s32 isInitialCall);
 ApiStatus N(GetEntityPosition)(Evt* script, s32 isInitialCall);
 

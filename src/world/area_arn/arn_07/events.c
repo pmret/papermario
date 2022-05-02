@@ -95,7 +95,7 @@ EvtScript N(makeEntities) = {
     EVT_END
 };
 
-f32 N(sixFloats)[] = {
+f32 N(FlyingAI_JumpVels)[] = {
     4.5f, 3.5f, 2.6f, 2.0f,
     1.5f, 20.0f,
 };
@@ -105,12 +105,12 @@ NpcAISettings N(npcAISettings_80243BD8) = {
     .moveTime = 60,
     .waitTime = 15,
     .alertRadius = 120.0f,
-    .unk_14 = 3,
+    .playerSearchInterval = 3,
     .chaseSpeed = 4.0f,
-    .unk_1C = { .s = 5 },
-    .unk_20 = 1,
+    .chaseTurnRate= 5,
+    .chaseUpdateInterval = 1,
     .chaseRadius = 150.0f,
-    .unk_2C = 1,
+    .unk_AI_2C = 1,
 };
 
 EvtScript N(npcAI_80243C08) = {
@@ -118,7 +118,7 @@ EvtScript N(npcAI_80243C08) = {
     EVT_CALL(SetSelfVar, 5, -850)
     EVT_CALL(SetSelfVar, 6, 60)
     EVT_CALL(SetSelfVar, 1, 700)
-    EVT_CALL(N(UnkNpcAIMainFunc9), EVT_PTR(N(npcAISettings_80243BD8)))
+    EVT_CALL(N(FlyingAI_Main), EVT_PTR(N(npcAISettings_80243BD8)))
     EVT_RETURN
     EVT_END
 };
@@ -731,7 +731,7 @@ StaticNpc N(npcGroup_80245D0C)[] = {
         .id = NPC_WORLD_TUBBA,
         .settings = &N(npcSettings_80243CF0),
         .pos = { 309.0f, 0.0f, 11.0f },
-        .flags = NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_40000 | NPC_FLAG_200000,
+        .flags = NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_40000 | NPC_FLAG_200000,
         .init = &N(init_80245090),
         .yaw = 270,
         .dropFlags = NPC_DROP_FLAGS_80,
@@ -761,7 +761,7 @@ StaticNpc N(npcGroup_80245D0C)[] = {
         .id = NPC_TUBBAS_HEART,
         .settings = &N(npcSettings_80243CC4),
         .pos = { -10.0f, 50.0f, -170.0f },
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_40000 | NPC_FLAG_200000,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_40000 | NPC_FLAG_200000,
         .init = &N(init_80245058),
         .yaw = 90,
         .dropFlags = NPC_DROP_FLAGS_80,
@@ -793,7 +793,7 @@ StaticNpc N(npcGroup_802460EC)[] = {
         .id = NPC_BOO0,
         .settings = &N(npcSettings_80243D1C),
         .pos = { 0.0f, -1000.0f, 0.0f },
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_200000,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_200000,
         .init = &N(init_80245104),
         .yaw = 270,
         .dropFlags = NPC_DROP_FLAGS_80,
@@ -823,7 +823,7 @@ StaticNpc N(npcGroup_802460EC)[] = {
         .id = NPC_BOO1,
         .settings = &N(npcSettings_80243D1C),
         .pos = { 0.0f, -1000.0f, 0.0f },
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_200000,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_200000,
         .init = &N(init_80245104),
         .yaw = 270,
         .dropFlags = NPC_DROP_FLAGS_80,
@@ -853,7 +853,7 @@ StaticNpc N(npcGroup_802460EC)[] = {
         .id = NPC_BOO2,
         .settings = &N(npcSettings_80243D1C),
         .pos = { 0.0f, -1000.0f, 0.0f },
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_200000,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_200000,
         .init = &N(init_80245104),
         .yaw = 270,
         .dropFlags = NPC_DROP_FLAGS_80,
@@ -883,7 +883,7 @@ StaticNpc N(npcGroup_802460EC)[] = {
         .id = NPC_BOO3,
         .settings = &N(npcSettings_80243D1C),
         .pos = { 0.0f, -1000.0f, 0.0f },
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_200000,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_200000,
         .init = &N(init_80245104),
         .yaw = 270,
         .dropFlags = NPC_DROP_FLAGS_80,
@@ -913,7 +913,7 @@ StaticNpc N(npcGroup_802460EC)[] = {
         .id = NPC_BOO4,
         .settings = &N(npcSettings_80243D1C),
         .pos = { 0.0f, -1000.0f, 0.0f },
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_200000,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_200000,
         .init = &N(init_80245104),
         .yaw = 270,
         .dropFlags = NPC_DROP_FLAGS_80,
@@ -943,7 +943,7 @@ StaticNpc N(npcGroup_802460EC)[] = {
         .id = NPC_BOO5,
         .settings = &N(npcSettings_80243D1C),
         .pos = { 0.0f, -1000.0f, 0.0f },
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_200000,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_200000,
         .init = &N(init_80245104),
         .yaw = 270,
         .dropFlags = NPC_DROP_FLAGS_80,
@@ -975,7 +975,7 @@ StaticNpc N(npcGroup_80246C8C) = {
     .id = NPC_WORLD_BOW,
     .settings = &N(npcSettings_80243D1C),
     .pos = { 0.0f, -1000.0f, 0.0f },
-    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_200000,
+    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_200000,
     .init = &N(init_80245164),
     .yaw = 0,
     .dropFlags = NPC_DROP_FLAGS_80,
@@ -1005,7 +1005,7 @@ StaticNpc N(npcGroup_80246E7C) = {
     .id = NPC_BOOTLER,
     .settings = &N(npcSettings_80243D1C),
     .pos = { 0.0f, -1000.0f, 0.0f },
-    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_200000,
+    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_200000,
     .init = &N(init_8024519C),
     .yaw = 0,
     .dropFlags = NPC_DROP_FLAGS_80,
@@ -1046,7 +1046,7 @@ StaticNpc N(npcGroup_802470BC) = {
     .id = NPC_PARAGOOMBA0,
     .settings = &N(npcSettings_80243C78),
     .pos = { -216.0f, 60.0f, -10.0f },
-    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
+    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
     .init = &N(init_8024706C),
     .yaw = 90,
     .dropFlags = NPC_DROP_FLAGS_80,
@@ -1083,7 +1083,7 @@ StaticNpc N(npcGroup_802472AC) = {
     .id = NPC_PARAGOOMBA1,
     .settings = &N(npcSettings_80243C78),
     .pos = { 0.0f, 60.0f, 150.0f },
-    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
+    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
     .init = &N(init_8024706C),
     .yaw = 270,
     .dropFlags = NPC_DROP_FLAGS_80,
@@ -1120,7 +1120,7 @@ StaticNpc N(npcGroup_8024749C) = {
     .id = NPC_PARAGOOMBA2,
     .settings = &N(npcSettings_80243C78),
     .pos = { 260.0f, 60.0f, 30.0f },
-    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
+    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
     .init = &N(init_8024706C),
     .yaw = 90,
     .dropFlags = NPC_DROP_FLAGS_80,
@@ -1157,7 +1157,7 @@ StaticNpc N(npcGroup_8024768C) = {
     .id = NPC_WORLD_SKOLAR,
     .settings = &N(npcSettings_80243D48),
     .pos = { 0.0f, -1000.0f, 0.0f },
-    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
+    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
     .init = &N(init_80245C9C),
     .yaw = 0,
     .dropFlags = NPC_DROP_FLAGS_80,
@@ -1203,7 +1203,7 @@ NpcGroupList N(npcGroupList_802478E8) = {
     {},
 };
 
-#include "world/common/atomic/enemy/UnkAI_9.inc.c"
+#include "world/common/enemy/FlyingAI.inc.c"
 
 ApiStatus PostChapter3StatUpdate(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;

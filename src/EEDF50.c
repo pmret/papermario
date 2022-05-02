@@ -5,12 +5,7 @@
 
 #define NAMESPACE EEDF50
 
-#include "world/common/atomic/enemy/Dead_UnkAI_9.inc.c"
+#include "world/common/enemy/FlyingAI.inc.c"
 
-#include "world/common/UnkNpcAIFunc13.inc.c"
+#include "world/common/enemy/FlyingNoAttackAI.inc.c"
 
-#include "world/common/UnkNpcAIFunc34.inc.c"
-
-#include "world/common/UnkFunc45.inc.c"
-
-INCLUDE_ASM(s32, "EEDF50", func_80242780_EEF880);

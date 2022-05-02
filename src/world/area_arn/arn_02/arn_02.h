@@ -7,7 +7,7 @@
 
 #define NAMESPACE arn_02
 
-ApiStatus N(func_80240C90_BDDE40)(Evt *script, s32 isInitialCall);
+ApiStatus N(CleftAI_Main)(Evt *script, s32 isInitialCall);
 
 extern EvtScript N(main);
 extern EvtScript N(80241040);

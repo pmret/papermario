@@ -129,7 +129,7 @@ glabel func_80240F50_D96540
 /* D966EC 802410FC AFA00010 */  sw        $zero, 0x10($sp)
 /* D966F0 80241100 8E86000C */  lw        $a2, 0xc($s4)
 /* D966F4 80241104 8E870010 */  lw        $a3, 0x10($s4)
-/* D966F8 80241108 0C01242D */  jal       func_800490B4
+/* D966F8 80241108 0C01242D */  jal       basic_ai_check_player_dist
 /* D966FC 8024110C 0240282D */   daddu    $a1, $s2, $zero
 /* D96700 80241110 10400006 */  beqz      $v0, .L8024112C
 /* D96704 80241114 0220202D */   daddu    $a0, $s1, $zero

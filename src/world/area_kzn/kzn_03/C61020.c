@@ -1,38 +1,11 @@
 #include "kzn_03.h"
 
-#include "world/common/atomic/enemy/UnkAI_5.inc.c"
+// spike top
+#include "world/common/enemy/TackleAI.inc.c"
 
 #include "world/common/AwaitPlayerNearNpc.inc.c"
 
-#include "world/common/UnkNpcAIFunc6.inc.c"
-
-#include "world/common/UnkNpcAIFunc7.inc.c"
-
-#include "world/common/UnkNpcAIFunc8.inc.c"
-
-#include "world/common/UnkNpcAIFunc5.inc.c"
-
-#include "world/common/UnkNpcAIFunc26.inc.c"
-
-#include "world/common/UnkFunc7.inc.c"
-
-#include "world/common/UnkNpcAIFunc27.inc.c"
-
-#include "world/common/UnkNpcAIFunc31.inc.c"
-
-#include "world/common/UnkNpcAIFunc32.inc.c"
-
-#include "world/common/UnkNpcAIFunc46.inc.c"
-
-#include "world/common/UnkNpcDurationFlagFunc3.inc.c"
-
-#include "world/common/UnkNpcAIFunc33.inc.c"
-
-#include "world/common/UnkNpcDurationFlagFunc2.inc.c"
-
-#include "world/common/UnkNpcAIFunc30.inc.c"
-
-INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C61020", func_8024234C_C6305C);
+#include "world/common/enemy/PiranhaPlantAI.inc.c"
 
 #include "world/common/StashVars.inc.c"
 
@@ -48,10 +21,5 @@ INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C61020", func_80242934_C63644);
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C61020", func_8024296C_C6367C);
 
-#include "world/common/SetManyVars.inc.c"
-
-#include "world/common/UnkYawFunc.inc.c"
-
-INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C61020", func_80242C84_C63994);
-
-INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C61020", func_80242CC8_C639D8);
+extern s32 N(LetterDelivery_SavedNpcAnim);
+#include "world/common/LetterDelivery.inc.c"

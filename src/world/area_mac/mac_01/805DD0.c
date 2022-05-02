@@ -2,7 +2,7 @@
 
 #define NAMESPACE dup_mac_01
 
-#include "world/common/atomic/enemy/UnkAI_1.inc.c"
+#include "world/common/enemy/PatrolNoAttackAI.inc.c"
 
 #define NAMESPACE mac_01
 
