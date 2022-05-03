@@ -7,9 +7,9 @@
 #include "world/common/GetPeachDisguise.inc.c"
 
 ApiStatus func_80240F44_ACF084(void) {
-    GameStatus *temp_v1 = gGameStatusPtr;
+    GameStatus* gameStatus = gGameStatusPtr;
 
-    temp_v1->peachFlags |= 8;
+    gameStatus->peachFlags |= 8;
     return ApiStatus_DONE2;
 }
 
