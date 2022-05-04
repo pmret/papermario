@@ -6,7 +6,7 @@
 
 #include "world/common/GetPeachDisguise.inc.c"
 
-ApiStatus func_80240F44_ACF084(void) {
+ApiStatus func_80240F44_ACF084(Evt* script, s32 isInitialCall) {
     GameStatus* gameStatus = gGameStatusPtr;
 
     gameStatus->peachFlags |= 8;

@@ -10,7 +10,7 @@ ApiStatus N(SetCamXXVfov)(Evt* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_hos/hos_04/A274B0", func_80240654_A27524);
 
-ApiStatus func_8024068C_A2755C(void) {
+ApiStatus func_8024068C_A2755C(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
