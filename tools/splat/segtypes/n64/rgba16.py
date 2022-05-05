@@ -1,8 +1,6 @@
 from segtypes.n64.img import N64SegImg
 import png
 from util import iter
-from util import log
-from util import options
 from util.color import unpack_color
 
 # TODO: move common behaviour to N64ImgSegment and have all image segments extend that instead
@@ -11,11 +9,20 @@ class N64SegRgba16(N64SegImg):
         path = self.out_path()
         path.parent.mkdir(parents=True, exist_ok=True)
 
-        data = rom_bytes[self.rom_start: self.rom_end]
+        data = rom_bytes[self.rom_start : self.rom_end]
 
         w = self.__class__.get_writer(self.width, self.height)
         with open(path, "wb") as f:
-            w.write_array(f, self.parse_image(data, self.width, self.height, self.flip_horizontal, self.flip_vertical))
+            w.write_array(
+                f,
+                self.parse_image(
+                    data,
+                    self.width,
+                    self.height,
+                    self.flip_horizontal,
+                    self.flip_vertical,
+                ),
+            )
 
         self.log(f"Wrote {self.name} to {path}")
 

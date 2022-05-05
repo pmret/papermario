@@ -20,6 +20,6 @@ Stage NAMESPACE = {
     .shape = "omo_bt02_shape",
     .hit = "omo_bt02_hit",
     .bg = "omo_bg",
-    .preBattle = N(beforeBattle_8022DBA0),
-    .postBattle = N(afterBattle_8022DBDC),
+    .preBattle = &N(beforeBattle_8022DBA0),
+    .postBattle = &N(afterBattle_8022DBDC),
 };

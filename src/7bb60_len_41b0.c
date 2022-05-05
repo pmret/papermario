@@ -204,7 +204,7 @@ void func_800E2BB0(void) {
 void phys_update_jump(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    if (playerStatus->decorationList != 0) {
+    if (playerStatus->timeInAir != 0) {
         switch (playerStatus->actionState) {
             case ACTION_STATE_LAUNCH:
                 func_800E2BB0();
@@ -389,7 +389,7 @@ void phys_player_land(void) {
     f32 moveAngle;
     f32 moveMagnitude;
 
-    playerStatus->decorationList = 0;
+    playerStatus->timeInAir = 0;
     playerStatus->unk_C2 = 0;
     playerStatus->flags &= ~PLAYER_STATUS_FLAGS_800000;
     playerStatus->landPos.x = playerStatus->position.x;
@@ -659,7 +659,7 @@ void collision_main_lateral(void) {
 
                 playerStatus->position.x += playerStatus->extraVelocity.x;
                 playerStatus->position.z += playerStatus->extraVelocity.z;
-                if (playerStatus->decorationList == 0) {
+                if (playerStatus->timeInAir == 0) {
                     playerStatus->position.y += playerStatus->extraVelocity.y;
                 }
 
@@ -874,7 +874,7 @@ void phys_main_collision_below(void) {
     if (collHeightHalf + (temp_f24 * 0.5f) < outLength) {
         result = -1;
     }
-    if (playerStatus->decorationList == 0) {
+    if (playerStatus->timeInAir == 0) {
         collisionStatus->currentFloor = result;
     }
     if (result >= 0) {
@@ -1063,7 +1063,7 @@ void check_input_midair_jump(void) {
     if (!(gPlayerStatus.flags & (PLAYER_STATUS_FLAGS_800000 | PLAYER_STATUS_FLAGS_10 | PLAYER_STATUS_FLAGS_FLYING)) &&
         !(gPlayerStatus.animFlags & 0x4001) &&
         gPlayerStatus.unk_C2 >= 6 &&
-        gPlayerStatus.decorationList < 0x12 &&
+        gPlayerStatus.timeInAir < 18 &&
         gPlayerStatus.pressedButtons & A_BUTTON) {
 
         switch (gPlayerData.bootsLevel) {

@@ -68,7 +68,7 @@ void func_802B6120_E2A7D0(void) {
         mem_clear(&D_802B6E80, sizeof(D_802B6E80));
         disable_player_static_collisions();
         tempUnk_1C = &parasolStruct->unk_1C;
-        playerStatus->decorationList = 0;
+        playerStatus->timeInAir = 0;
         playerStatus->unk_C2 = 0;
         playerStatus->currentSpeed = 0;
         playerStatus->pitch = 0;

@@ -125,6 +125,6 @@ Stage NAMESPACE = {
     .shape = "jan_bt00_shape",
     .hit = "jan_bt00_hit",
     .bg = "yos_bg",
-    .preBattle = N(beforeBattle_802271C4),
-    .postBattle = N(afterBattle_80227298),
+    .preBattle = &N(beforeBattle_802271C4),
+    .postBattle = &N(afterBattle_80227298),
 };

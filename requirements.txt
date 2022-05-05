@@ -6,3 +6,4 @@ colorama
 ninja_syntax
 msgpack
 pylibyaml
+tqdm

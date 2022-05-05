@@ -2,6 +2,7 @@ from segtypes.common.segment import CommonSegment
 from pathlib import Path
 from util import options
 
+
 class CommonSegHeader(CommonSegment):
     def should_split(self):
         return self.extract and options.mode_active("code")
@@ -11,8 +12,8 @@ class CommonSegHeader(CommonSegment):
         if typ == "ascii":
             text = data.decode("ASCII").strip()
             text = text.replace("\x00", "\\0")  # escape NUL chars
-            dstr = "\"" + text + "\""
-        else: # .word, .byte
+            dstr = '"' + text + '"'
+        else:  # .word, .byte
             dstr = "0x" + data.hex().upper()
 
         dstr = dstr.ljust(20 - len(typ))

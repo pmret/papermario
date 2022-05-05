@@ -93,7 +93,7 @@ void reset_player_status(void) {
     playerStatus->overlapPushAmount = 0.0f;
     playerStatus->overlapPushYaw = 0.0f;
     playerStatus->anim = 0;
-    playerStatus->decorationList = 0;
+    playerStatus->timeInAir = 0;
     playerStatus->position.x = 0.0f;
     playerStatus->position.y = 0.0f;
     playerStatus->position.z = 0.0f;

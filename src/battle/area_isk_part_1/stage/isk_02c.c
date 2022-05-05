@@ -26,7 +26,7 @@ Stage NAMESPACE = {
     .texture = "isk_tex",
     .shape = "isk_bt02_shape",
     .hit = "isk_bt02_hit",
-    .preBattle = N(beforeBattle_80223E90),
-    .postBattle = N(afterBattle_80223EF4),
+    .preBattle = &N(beforeBattle_80223E90),
+    .postBattle = &N(afterBattle_80223EF4),
     .foregroundModelList = N(foregroundModelList_80223F04),
 };

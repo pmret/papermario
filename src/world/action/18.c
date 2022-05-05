@@ -46,7 +46,7 @@ void func_802B6000_E245D0(void) {
             func_802B6198_E24768();
         }
         playerStatus->fallState = 0;
-        playerStatus->decorationList = 0;
+        playerStatus->timeInAir = 0;
         playerStatus->unk_C2 = 0;
         playerStatus->gravityIntegrator[0] = 17.7566f;
         playerStatus->gravityIntegrator[1] = -11.3862f;

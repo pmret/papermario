@@ -27,7 +27,7 @@ void func_802B6000_E24920(void) {
             PLAYER_STATUS_FLAGS_JUMPING
         );
         playerStatus->fallState = 0;
-        playerStatus->decorationList = 0;
+        playerStatus->timeInAir = 0;
         playerStatus->unk_C2 = 0;
         playerStatus->landPos.x = playerStatus->position.x;
         playerStatus->landPos.z = playerStatus->position.z;
@@ -91,7 +91,7 @@ void func_802B61C0_E24AE0(void) {
             PLAYER_STATUS_FLAGS_JUMPING
         );
         playerStatus->fallState = 0;
-        playerStatus->decorationList = 0;
+        playerStatus->timeInAir = 0;
         playerStatus->unk_C2 = 0;
         playerStatus->landPos.x = playerStatus->position.x;
         playerStatus->landPos.z = playerStatus->position.z;
@@ -125,7 +125,7 @@ void func_802B62CC_E24BEC(void) {
     if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
         playerStatus->flags &= ~PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
         playerStatus->fallState = 0;
-        playerStatus->decorationList = 0;
+        playerStatus->timeInAir = 0;
         playerStatus->unk_C2 = 0;
         playerStatus->flags &= ~(PLAYER_STATUS_FLAGS_FLYING | PLAYER_STATUS_FLAGS_FALLING | PLAYER_STATUS_FLAGS_JUMPING);
         playerStatus->landPos.x = playerStatus->position.x;
@@ -169,7 +169,7 @@ void func_802B644C_E24D6C(void) {
     if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
         playerStatus->flags &= ~PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
         playerStatus->fallState = 0;
-        playerStatus->decorationList = 0;
+        playerStatus->timeInAir = 0;
         playerStatus->unk_C2 = 0;
         playerStatus->flags &= ~(PLAYER_STATUS_FLAGS_FLYING | PLAYER_STATUS_FLAGS_FALLING | PLAYER_STATUS_FLAGS_JUMPING);
         playerStatus->landPos.x = playerStatus->position.x;

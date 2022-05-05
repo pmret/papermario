@@ -2,14 +2,11 @@ name: mypy
 
 on:
   push:
-    branches: [master]
   pull_request:
-    branches: [master]
 
 jobs:
-  mypy:
+  checks:
     runs-on: ubuntu-latest
-
     name: mypy
     steps:
     - uses: actions/checkout@v1
@@ -20,8 +17,10 @@ jobs:
     - name: Install Dependencies
       run: |
         pip install mypy
+        pip install black
         pip install -r requirements.txt
         pip install types-PyYAML
     - name: mypy
-      run: |
-        mypy --show-column-numbers --hide-error-context .
+      run: mypy --show-column-numbers --hide-error-context .
+    - name: black
+      run: black .

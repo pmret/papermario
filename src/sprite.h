@@ -15,20 +15,21 @@ typedef struct SpriteComponent {
     /* 0x28 */ Vec3f compPos;
     /* 0x34 */ Vec3f rotation;
     /* 0x40 */ Vec3f scale;
-    /* 0x4C */ char unk_4C[4];
+    /* 0x4C */ char unk_4C[3];
+    /* 0x4F */ u8 unk_4F;
 } SpriteComponent; // size = 0x50
 
-struct spr_playerCurrentAnimInfo {
+typedef struct PlayerCurrentAnimInfo {
     /* 0x00 */ SpriteComponent** componentList;
     /* 0x04 */ s32 animID;
     /* 0x08 */ s32 unk_08;
-}; // size = 0xC
+} PlayerCurrentAnimInfo; // size = 0xC
 
-typedef struct SpriteComponentAnim {
+typedef struct SpriteAnimComponent {
     /* 0x00 */ s16** cmdList;
     /* 0x04 */ s16 cmdListSize;
     /* 0x08 */ Vec3s compOffset;
-} SpriteComponentAnim; // size = 0xC
+} SpriteAnimComponent; // size = 0xC
 
 // TODO: consider moving to 101b90_len_8f0 (sprite_cache)
 typedef struct SpriteRasterCacheEntry {
@@ -39,13 +40,21 @@ typedef struct SpriteRasterCacheEntry {
     /* 0x07 */ u8 quadCacheIndex;
 } SpriteRasterCacheEntry; // size = 0x8
 
-struct D_802DFA48 {
-    s32 unk_00;
-    s32 unk_04;
-    s32 unk_08;
-    s32 unk_0C;
-    s32 unk_10;
-}; // size = 0x14
+typedef struct SpriteHeader {
+    /* 0x00 */ SpriteRasterCacheEntry* rasterList;
+    /* 0x04 */ s16** paletteList;
+    /* 0x08 */ s32 maxComponents;
+    /* 0x0C */ s32 colorVariants;
+    /* 0x10 */ SpriteAnimComponent* animListStart;
+} SpriteHeader; // size = 0x14
+
+typedef struct SpriteInstance {
+    /* 0x00 */ s32 spriteIndex;
+    /* 0x04 */ SpriteComponent** componentList;
+    /* 0x08 */ s32 spriteData;
+    /* 0x0C */ s32 currentAnimID;
+    /* 0x10 */ s32 unk_10;
+} SpriteInstance; // size = 0x14
 
 typedef struct PlayerSpriteSet {
     /// Number of cache entries.
@@ -128,7 +137,7 @@ s32 spr_sign_extend_12bit(u16 val);
 
 s32 spr_sign_extend_16bit(u16 val);
 
-void spr_component_update_commands(SpriteComponent* comp, SpriteComponentAnim* anim);
+void spr_component_update_commands(SpriteComponent* comp, SpriteAnimComponent* anim);
 
 void spr_component_update_finish(
     SpriteComponent* comp,

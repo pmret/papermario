@@ -23,12 +23,12 @@ def initialize(all_segments):
 
         for raster_name in raster_map:
             raster = raster_map[raster_name]
-            #print(f"{raster_name} -> {raster.palette_name}")
+            # print(f"{raster_name} -> {raster.palette_name}")
             raster.palette = palette_map.get(raster.palette_name)
 
         for palette_name in palette_map:
             palette = palette_map[palette_name]
-            #print(f"{palette_name} -> {palette.raster_name}")
+            # print(f"{palette_name} -> {palette.raster_name}")
             palette.raster = raster_map.get(palette.raster_name)
 
     process(all_segments)

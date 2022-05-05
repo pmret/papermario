@@ -20,6 +20,6 @@ Stage NAMESPACE = {
     .shape = "isk_bt03_shape",
     .hit = "isk_bt03_hit",
     .bg = "sbk3_bg",
-    .preBattle = N(beforeBattle_80223A40),
-    .postBattle = N(afterBattle_80223A7C),
+    .preBattle = &N(beforeBattle_80223A40),
+    .postBattle = &N(afterBattle_80223A7C),
 };

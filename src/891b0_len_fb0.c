@@ -39,7 +39,7 @@ void func_800EFD08(void) {
         D_8010CFF4 = D_8010CFF0;
     }
 
-    D_8010CFF0 = playerStatus->decorationList;
+    D_8010CFF0 = playerStatus->timeInAir;
 
     switch (colliderType) {
         case 6:
@@ -70,11 +70,11 @@ void func_800F0248(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 sin, cos, x, y, z;
 
-    if (playerStatus->actionState == ACTION_STATE_JUMP && playerStatus->decorationList == 1 && D_80109492 == 5) {
+    if (playerStatus->actionState == ACTION_STATE_JUMP && playerStatus->timeInAir == 1 && D_80109492 == 5) {
         fx_flower_splash(
-            playerStatus->position.x, 
-            playerStatus->position.y + 14.0f, 
-            playerStatus->position.z, 
+            playerStatus->position.x,
+            playerStatus->position.y + 14.0f,
+            playerStatus->position.z,
             D_8010948C
         );
         D_8010948C = clamp_angle(D_8010948C + 35.0f);
@@ -88,7 +88,7 @@ void func_800F0248(void) {
     }
 
     if (
-        playerStatus->actionState != ACTION_STATE_WALK && playerStatus->actionState != ACTION_STATE_RUN && 
+        playerStatus->actionState != ACTION_STATE_WALK && playerStatus->actionState != ACTION_STATE_RUN &&
         (playerStatus->actionState != ACTION_STATE_SPIN || playerStatus->fallState != 0)
     ) {
         D_80109490 = 0;
@@ -127,7 +127,7 @@ void func_800F0864(void) {
 
     if (
         (
-            playerStatus->actionState != ACTION_STATE_WALK && playerStatus->actionState != ACTION_STATE_RUN && 
+            playerStatus->actionState != ACTION_STATE_WALK && playerStatus->actionState != ACTION_STATE_RUN &&
             (playerStatus->actionState != ACTION_STATE_SPIN || playerStatus->fallState != 0) &&
             playerStatus->actionState != ACTION_STATE_LAND && playerStatus->actionState != ACTION_STATE_IDLE
         ) || playerStatus->flags >= 0
@@ -140,10 +140,10 @@ void func_800F0864(void) {
         D_801094A4 = 0;
         sin_cos_rad((clamp_angle(-playerStatus->currentYaw) * TAU) / 360.0f, &sin, &cos);
         fx_footprint(
-            playerStatus->position.x + (playerStatus->colliderDiameter * sin * 0.2f), 
-            playerStatus->position.y + 1.5f, 
-            playerStatus->position.z + (playerStatus->colliderDiameter * cos * 0.2f), 
-            -playerStatus->currentYaw, 
+            playerStatus->position.x + (playerStatus->colliderDiameter * sin * 0.2f),
+            playerStatus->position.y + 1.5f,
+            playerStatus->position.z + (playerStatus->colliderDiameter * cos * 0.2f),
+            -playerStatus->currentYaw,
             D_801094A8
         );
         D_801094A8 = !D_801094A8;

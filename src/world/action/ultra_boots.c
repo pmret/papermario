@@ -133,7 +133,7 @@ void func_802B6000_E26710(void) {
                     return;
                 }
                 playerStatus->currentStateTime = 8;
-                playerStatus->decorationList = 0;
+                playerStatus->timeInAir = 0;
                 playerStatus->actionState = 0x10;
                 playerStatus->fallState++;
                 exec_ShakeCam1(0, 0, 4);

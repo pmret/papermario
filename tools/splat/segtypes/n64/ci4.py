@@ -1,6 +1,7 @@
 from segtypes.n64.ci8 import N64SegCi8
 from util import iter
 
+
 class N64SegCi4(N64SegCi8):
     @staticmethod
     def parse_image(data, width, height, flip_h=False, flip_v=False):

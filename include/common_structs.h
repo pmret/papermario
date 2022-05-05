@@ -262,10 +262,10 @@ typedef struct PlayerData {
     /* 0x29E */ s16 enemyFirstStrikes;
     /* 0x2A0 */ u16 powerBounces;
     /* 0x2A2 */ u16 battlesCount;
-    /* 0x2A4 */ s16 battlesWon;
+    /* 0x2A4 */ u16 battlesWon;
     /* 0x2A6 */ s16 unk_2A6;
     /* 0x2A8 */ s16 battlesFled;
-    /* 0x2AA */ s16 trainingsDone;
+    /* 0x2AA */ u16 trainingsDone;
     /* 0x2AC */ s32 walkingStepsTaken;
     /* 0x2B0 */ s32 runningStepsTaken;
     /* 0x2B4 */ u32 totalCoinsEarned;
@@ -928,7 +928,8 @@ typedef struct BattleStatus {
     /* 0x049 */ char unk_49[3];
     /* 0x04C */ s8 unk_4C[16];
     /* 0x05C */ s8 unk_5C[16];
-    /* 0x06C */ char unk_6C[0x4];
+    /* 0x06C */ s16 unk_6C;
+    /* 0x06E */ s16 unk_6E;
     /* 0x070 */ s16 menuDisableFlags; /* 1 = jump, 2 = hammer, 4 = items */
     /* 0x072 */ char unk_72[2];
     /* 0x074 */ s32 unk_74;
@@ -949,7 +950,7 @@ typedef struct BattleStatus {
     /* 0x089 */ s8 hpDrainCount;
     /* 0x08A */ s8 nextMerleeSpellType;
     /* 0x08B */ s8 hustleTurns; /* numTurns from hustle drink, normally 0 */
-    /* 0x08C */ char unk_8C;
+    /* 0x08C */ s8 unk_8C;
     /* 0x08D */ s8 unk_8D;
     /* 0x08E */ s8 initialEnemyCount; /* used for SP award bonus */
     /* 0x08F */ char unk_8F[1];
@@ -1219,7 +1220,7 @@ typedef struct ItemEntity {
     /* 0x28 */ u32* savedReadPos;
     /* 0x2C */ char unk_2C[2];
     /* 0x2E */ u8 unkCounter;
-    /* 0x2F */ u8 unk_2F;
+    /* 0x2F */ u8 alpha;
     /* 0x30 */ f32 scale;
     /* 0x34 */ Vec3s unk_34;
     /* 0x3A */ char unk_3A[2];
@@ -1577,9 +1578,9 @@ typedef struct SelectableTarget {
     /* 0x0C */ s16 unk_0C;
     /* 0x0E */ s16 unk_0E;
     /* 0x10 */ s8 unk_10;
-    /* 0x11 */ u8 homeCol; /* from xpos --> 0-3 */
-    /* 0x12 */ u8 homeRow; /* from ypos --> 0-3 */
-    /* 0x13 */ u8 layer; /* from zpos? --> 0-1 */
+    /* 0x11 */ s8 homeCol; /* from xpos --> 0-3 */
+    /* 0x12 */ s8 homeRow; /* from ypos --> 0-3 */
+    /* 0x13 */ s8 layer; /* from zpos? --> 0-1 */
 } SelectableTarget; // size = 0x14
 
 typedef struct ActorPartMovement {
@@ -1779,15 +1780,6 @@ typedef struct DecorationTable {
     /* 0x8C6 */ DecorationUnk unk_8C6[2];
 } DecorationTable; // size = 0x8E8
 
-typedef struct Encounter {
-    /* 0x00 */ s32 count;
-    /* 0x04 */ struct Enemy* enemy[16];
-    /* 0x44 */ s16 battle;
-    /* 0x46 */ s16 stage;
-    /* 0x48 */ s16 encounterID;
-    /* 0x4A */ char unk_4C[0x12];
-} Encounter; // size = 0x5C
-
 typedef struct PlayerPathElement {
     /* 0x00 */ s8 isJumping;
     /* 0x03 */ char unk_01[3];
@@ -1884,7 +1876,7 @@ typedef struct Actor {
     /* 0x120 */ s16 flyTime;
     /* 0x122 */ s16 flyArcAmplitude;
     /* 0x124 */ char unk_124[16];
-    /* 0x134 */ s8 unk_134;
+    /* 0x134 */ u8 unk_134;
     /* 0x135 */ u8 footStepCounter;
     /* 0x136 */ u8 actorType;
     /* 0x137 */ char unk_137;
@@ -1964,7 +1956,7 @@ typedef struct Actor {
     /* 0x223 */ s8 chillOutAmount; /* attack reduction */
     /* 0x224 */ s8 chillOutTurns;
     /* 0x225 */ char unk_225[3];
-    /* 0x228 */ struct EffectInstance* unk_228;
+    /* 0x228 */ struct EffectInstance* icePillarEffect;
     /* 0x22C */ struct SelectableTarget targetData[24];
     /* 0x40C */ s8 targetListLength;
     /* 0x40D */ s8 targetIndexList[24]; /* into targetData */
@@ -1981,7 +1973,7 @@ typedef struct Actor {
     /* 0x434 */ s16 renderMode; /* initially 0xD, set to 0x22 if any part is transparent */
     /* 0x436 */ s16 hudElementDataIndex;
     /* 0x438 */ s32 unk_438[2]; /* ??? see FUN_80253974 */
-    /* 0x440 */ struct EffectInstance* debuffIcon; // TODO: figure out the type of data field of debuffIcon
+    /* 0x440 */ struct EffectInstance* debuffEffect;
 } Actor; // size = 0x444
 
 typedef struct BackgroundHeader {
@@ -2046,7 +2038,7 @@ typedef struct PlayerStatus {
     /* 0x0BC */ u16 unk_BC;
     /* 0x0BE */ s8 renderMode;
     /* 0x0BF */ s8 unk_BF;
-    /* 0x0C0 */ s16 decorationList;
+    /* 0x0C0 */ s16 timeInAir;
     /* 0x0C2 */ s16 unk_C2;
     /* 0x0C4 */ char unk_C4;
     /* 0x0C5 */ s8 unk_C5;
@@ -2070,49 +2062,6 @@ typedef struct PlayerStatus {
     /* 0x280 */ s8 unk_280;
     /* 0x281 */ char unk_281[7];
 } PlayerStatus; // size = 0x288
-
-typedef struct EncounterStatus {
-    /* 0x000 */ s32 flags;
-    /* 0x004 */ s8 eFirstStrike; /* 0 = none, 1 = player, 2 = enemy */
-    /* 0x005 */ s8 hitType; /* 1 = none/enemy, 2 = jump */
-    /* 0x006 */ s8 hitTier; /* 0 = normal, 1 = super, 2 = ultra */
-    /* 0x007 */ char unk_07;
-    /* 0x008 */ s8 unk_08;
-    /* 0x009 */ s8 battleOutcome; /* 0 = won, 1 = lost */
-    /* 0x00A */ s8 unk_0A;
-    /* 0x00B */ s8 merleeCoinBonus; /* triple coins when != 0 */
-    /* 0x00C */ u8 damageTaken; /* valid after battle */
-    /* 0x00D */ char unk_0D;
-    /* 0x00E */ s16 coinsEarned; /* valid after battle */
-    /* 0x010 */ char unk_10;
-    /* 0x011 */ u8 allowFleeing;
-    /* 0x012 */ s8 unk_12;
-    /* 0x013 */ u8 dropWhackaBump;
-    /* 0x014 */ s32 songID;
-    /* 0x018 */ s32 unk_18;
-    /* 0x01C */ s8 numEncounters; /* number of encounters for current map (in list) */
-    /* 0x01D */ s8 currentAreaIndex;
-    /* 0x01E */ u8 currentMapIndex;
-    /* 0x01F */ u8 currentEntryIndex;
-    /* 0x020 */ s8 mapID;
-    /* 0x021 */ s8 resetMapEncounterFlags;
-    /* 0x021 */ char unk_22[2];
-    /* 0x024 */ s32* npcGroupList;
-    /* 0x028 */ struct Encounter* encounterList[24];
-    /* 0x088 */ struct Encounter* currentEncounter;
-    /* 0x08C */ struct Enemy* currentEnemy;
-    /* 0x090 */ s32 fadeOutAmount;
-    /* 0x094 */ s32 unk_94;
-    /* 0x098 */ s32 fadeOutAccel;
-    /* 0x09C */ s32 battleStartCountdown;
-    /* 0x0A0 */ s8 unk_A0;
-    /* 0x0A1 */ char unk_A1[0x1];
-    /* 0x0A2 */ s16 unk_A2;
-    /* 0x0A4 */ char unk_A4[0xC];
-    /* 0x0B0 */ s32 defeatFlags[60][12];
-    /* 0xFB0 */ s16 recentMaps[2];
-    /* 0xFB4 */ char unk_FB4[4];
-} EncounterStatus; // size = 0xFB8
 
 typedef struct SaveDataHeader {
     /* 0x0000 */ char magicString[16]; /* "Mario Story 006" string */
@@ -2162,9 +2111,9 @@ typedef struct SaveData {
     /* 0x1304 */ char unk_1304[0x7C];
 } SaveData; // size = 0x1380
 
-typedef struct {
+typedef struct Path {
     /* 0x00 */ s32 numVectors;
-    /* 0x04 */ s32 unk_04;
+    /* 0x04 */ f32* unk_04;
     /* 0x08 */ Vec3f* staticVectorList;
     /* 0x0C */ Vec3f* vectors;
     /* 0x10 */ s32 timeElapsed;

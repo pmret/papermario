@@ -223,7 +223,7 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
         switch (script->functionTemp[0]) {
             case 20:
                 if (playerStatus->inputEnabledCounter == 0) {
-                    if (playerStatus->decorationList == 0) {
+                    if (playerStatus->timeInAir == 0) {
                         if (kooper->flags & 0x1000) {
                             disable_player_input();
                             script->functionTemp[2] = playerStatus->inputEnabledCounter;
@@ -253,7 +253,7 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
 
             case 21:
                 //TODO: make if statement less bad
-                if ((((u8)playerStatus->actionState - 0x15) < 3U) || (playerStatus->decorationList != 0)) {
+                if ((((u8)playerStatus->actionState - 0x15) < 3U) || (playerStatus->timeInAir != 0)) {
                     suggest_player_anim_clearUnkFlag(0x10002);
                     script->functionTemp[0] = 0;
                     break;

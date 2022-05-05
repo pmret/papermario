@@ -274,8 +274,8 @@ typedef struct Stage {
     /* 0x00 */ const char* texture;
     /* 0x04 */ const char* shape;
     /* 0x08 */ const char* hit;
-    /* 0x0C */ Bytecode* preBattle;
-    /* 0x10 */ Bytecode* postBattle;
+    /* 0x0C */ EvtScript* preBattle;
+    /* 0x10 */ EvtScript* postBattle;
     /* 0x14 */ const char* bg;
     /* 0x18 */ s32* foregroundModelList;
     /* 0x1C */ s32 specialFormationSize;
@@ -290,7 +290,9 @@ typedef struct Battle {
     /* 0x08 */ Formation* formation;
     /* 0x0C */ Stage* stage;
     /* 0x10 */ s32 unk_10;
-} BattleList[]; // size = 0x14 * n
+} Battle; // size = 0x14 * n
+
+typedef Battle BattleList[];
 
 /// Zero-terminated.
 typedef struct StageListRow {

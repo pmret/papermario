@@ -118,7 +118,7 @@ void func_802B6000_E26DE0(void) {
                         playerStatus->gravityIntegrator[0] = 10.0f;
                         suggest_player_anim_clearUnkFlag(0x1000B);
                         playerStatus->actionState = ACTION_STATE_GROUND_POUND;
-                        playerStatus->decorationList = 0;
+                        playerStatus->timeInAir = 0;
                         playerStatus->unk_280 = 0xC;
                         playerStatus->pitch = 0.0f;
                         playerStatus->fallState++;

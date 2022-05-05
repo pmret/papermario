@@ -6,8 +6,8 @@ extern s32 spr_allocateBtlComponentsOnWorldHeap;
 extern SpriteAnimData* spr_playerSprites[13];
 extern s32 spr_playerMaxComponents;
 extern SpriteAnimData* spr_npcSprites[0xEA];
-extern struct spr_playerCurrentAnimInfo spr_playerCurrentAnimInfo[3];
-extern struct D_802DFA48 D_802DFA48[51];
+extern PlayerCurrentAnimInfo spr_playerCurrentAnimInfo[3];
+extern SpriteInstance D_802DFA48[51];
 extern u8 spr_npcSpriteInstanceCount[];
 extern s32** D_802DFE44;
 extern s32 D_802DFE48[22];
@@ -272,26 +272,28 @@ void spr_init_sprites(s32 playerSpriteSet) {
     }
 
     for (i = 0; i < ARRAY_COUNT(spr_playerCurrentAnimInfo); i++) {
-        struct spr_playerCurrentAnimInfo* d = &spr_playerCurrentAnimInfo[i];
-        d->componentList = 0;
-        d->animID = -1;
+        PlayerCurrentAnimInfo* animInfo = &spr_playerCurrentAnimInfo[i];
+
+        animInfo->componentList = NULL;
+        animInfo->animID = -1;
     }
 
     for (i = 0; i < ARRAY_COUNT(spr_npcSprites); i++) {
         s32* npcSprites = (s32*)spr_npcSprites;
         u8* npcSpriteInstanceCount = spr_npcSpriteInstanceCount;
 
-        npcSprites[i] = 0;
+        npcSprites[i] = NULL;
         npcSpriteInstanceCount[i] = 0;
     }
 
     for (i = 0; i < ARRAY_COUNT(D_802DFA48); i++) {
-        struct D_802DFA48* d = &D_802DFA48[i];
-        d->unk_00 = 0;
-        d->unk_04 = 0;
-        d->unk_08 = 0;
-        d->unk_0C = -1;
-        d->unk_10 = 0;
+        SpriteInstance* sprite = &D_802DFA48[i];
+
+        sprite->spriteIndex = 0;
+        sprite->componentList = NULL;
+        sprite->spriteData = 0;
+        sprite->currentAnimID = -1;
+        sprite->unk_10 = 0;
     }
 
     spr_init_quad_cache(); // spr_init_quad_cache
@@ -345,26 +347,14 @@ s32 func_802DE5C8(s32 arg0) {
 
 INCLUDE_ASM(s32, "sprite", spr_free_sprite);
 
-typedef struct {
-    /* 0x00 */ char unk_00[0x4F];
-    /* 0x4F */ u8 unk_4F;
-} Unk802DE748_2;
-
-typedef struct {
-    /* 0x00 */ Unk802DE748_2** unk_00;
-    /* 0x04 */ char unk_04[0x10];
-} Unk802DE748; // size = 0x14
-
-extern Unk802DE748 D_802DFA4C[];
-
 s32 func_802DE748(s32 arg0, s32 arg1) {
-    Unk802DE748_2** unk_00 = D_802DFA4C[arg0].unk_00;
+    SpriteComponent** componentList = D_802DFA48[arg0].componentList;
 
-    if (unk_00 == NULL) {
+    if (componentList == NULL) {
         return -1;
     }
 
-    return unk_00[arg1]->unk_4F;
+    return componentList[arg1]->unk_4F;
 }
 
 INCLUDE_ASM(s32, "sprite", func_802DE780);

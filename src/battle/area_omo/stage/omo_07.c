@@ -19,6 +19,6 @@ Stage NAMESPACE = {
     .texture = "omo_tex",
     .shape = "omo_bt07_shape",
     .hit = "omo_bt07_hit",
-    .preBattle = N(beforeBattle_8022F8B0),
-    .postBattle = N(afterBattle_8022F8EC),
+    .preBattle = &N(beforeBattle_8022F8B0),
+    .postBattle = &N(afterBattle_8022F8EC),
 };

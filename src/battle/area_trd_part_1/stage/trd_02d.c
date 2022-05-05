@@ -126,7 +126,7 @@ Stage NAMESPACE = {
     .texture = "trd_tex",
     .shape = "trd_bt02_shape",
     .hit = "trd_bt02_hit",
-    .preBattle = N(beforeBattle_80225364),
-    .postBattle = N(afterBattle_80225418),
+    .preBattle = &N(beforeBattle_80225364),
+    .postBattle = &N(afterBattle_80225418),
     .foregroundModelList = N(foregroundModelList_80225428),
 };

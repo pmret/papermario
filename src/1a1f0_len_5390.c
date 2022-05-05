@@ -5,6 +5,7 @@
 #include "hud_element.h"
 
 extern s32 D_80077C40;
+extern EnemyDrops D_80077EB8;
 
 extern s8 D_8009A654;
 extern s16 D_8009A668;

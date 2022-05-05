@@ -93,7 +93,7 @@ FX_MAIN(fx_3D_main);
 void blast_main(s32, f32, f32, f32, f32, s32);
 EffectInstance* fire_flower_main(s32, f32, f32, f32, s32);
 FX_MAIN(recover_main);
-FX_MAIN(disable_x_main);
+EffectInstance* disable_x_main(s32, f32, f32, f32, s32);
 FX_MAIN(bombette_breaking_main);
 FX_MAIN(firework_main);
 FX_MAIN(confetti_main);

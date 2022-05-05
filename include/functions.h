@@ -388,7 +388,7 @@ s32 is_point_within_region(s32 shape, f32 pointX, f32 pointY, f32 centerX, f32 c
 PlayerData* get_player_data(void);
 
 s32 npc_raycast_down_around(s32, f32*, f32*, f32*, f32*, f32, f32);
-s32 npc_raycast_down_sides(s32, f32*, f32*, f32*, f32*);
+s32 npc_raycast_down_sides(s32 ignoreFlags, f32* posX, f32* posY, f32* posZ, f32* hitDepth);
 s32 npc_raycast_up(s32, f32*, f32*, f32*, f32*);
 s32 player_raycast_up_corners(PlayerStatus*, f32*, f32*, f32*, f32*, f32);
 s32 player_raycast_below_cam_relative(PlayerStatus* playerStatus, f32* outX, f32* outY, f32* outZ, f32* outLength,
@@ -412,6 +412,10 @@ void partner_clear_player_tracking(Npc* partner);
 void set_background_color_blend(u8 r, u8 g, u8 b, u8 a);
 
 void partner_set_tether_distance(f32);
+
+void btl_delete_player_actor(Actor* player);
+
+void kill_all_scripts(void);
 s32 does_script_exist(s32 id);
 s32 does_script_exist_by_ref(Evt* script);
 Evt* start_script(EvtScript* source, s32 priority, s32 initialState);
@@ -476,6 +480,8 @@ s32 check_input_hammer(void);
 Npc* resolve_npc(Evt* script, s32 npcIdOrPtr);
 void enable_npc_blur(Npc* npc);
 void disable_npc_blur(Npc* npc);
+void enable_partner_blur(void);
+void disable_partner_blur(void);
 
 f32 dist2D(f32 ax, f32 ay, f32 bx, f32 by);
 f32 dist3D(f32 ax, f32 ay, f32 az, f32 bx, f32 by, f32 bz);
@@ -560,6 +566,7 @@ void load_partner_actor(void);
 void dispatch_event_partner(s32);
 void dispatch_event_player(s32);
 s32 btl_are_all_enemies_defeated(void);
+s32 btl_check_enemies_defeated(void);
 s32 btl_check_player_defeated(void);
 void btl_show_battle_message(s32, s32);
 void btl_update_ko_status(void);
@@ -789,6 +796,7 @@ s32 get_defense(Actor* actor, s32* defenseTable, s32 elementFlags);
 
 void func_8024EDC0(void);
 
+void remove_all_effects(void);
 void update_effects(void);
 void update_cameras(void);
 void clear_render_tasks(void);

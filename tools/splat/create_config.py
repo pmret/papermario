@@ -1,11 +1,12 @@
 #! /usr/bin/env python3
 
 import argparse
+from pathlib import Path
+
 from util.n64 import rominfo, find_code_length
 
-parser = argparse.ArgumentParser(description="Create a splat config from a ROM. "
-                                             "Only n64 .z64 ROMs are supported")
-parser.add_argument("rom", help="Path to a .z64 ROM")
+parser = argparse.ArgumentParser(description="Create a splat config from an N64 ROM.")
+parser.add_argument("rom", help="Path to a .z64/.n64 ROM")
 
 
 def main(rom_path):
@@ -17,10 +18,11 @@ name: {rom.name.title()} ({rom.get_country_name()})
 sha1: {rom.sha1}
 options:
   basename: {basename}
-  target_path: {rom_path}
+  target_path: {rom_path.with_suffix(".z64")}
   base_path: .
   compiler: {rom.compiler}
   find_file_boundaries: True
+  header_encoding: {rom.header_encoding}
   # platform: n64
   # undefined_funcs_auto_path: undefined_funcs_auto.txt
   # undefined_syms_auto_path: undefined_syms_auto.txt
@@ -57,10 +59,12 @@ segments:
   - [0x{rom.size:X}]
 """.lstrip()
 
-    with open(basename + ".yaml", "w", newline="\n") as f:
+    out_file = f"{basename}.yaml"
+    with open(out_file, "w", newline="\n") as f:
+        print(f"Writing config to {out_file}")
         f.write(header + segments)
 
 
 if __name__ == "__main__":
     args = parser.parse_args()
-    main(args.rom)
+    main(Path(args.rom))

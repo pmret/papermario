@@ -55,11 +55,11 @@ void func_802B6000_E27F40(void) {
             break;
         case 0:
             if (playerStatus->unk_BF == 1) {
-                fx_smoke_burst(0, playerStatus->position.x, playerStatus->position.y, playerStatus->position.z, 1.0f, 0x28);
+                fx_smoke_burst(0, playerStatus->position.x, playerStatus->position.y, playerStatus->position.z, 1.0f, 40);
             }
             suggest_player_anim_setUnkFlag(0x80000 | 2);
             playerStatus->gravityIntegrator[1] = 0.0f;
-            playerStatus->decorationList = 0;
+            playerStatus->timeInAir = 0;
             playerStatus->unk_C2 = 0;
             playerStatus->fallState = 2;
             playerStatus->currentStateTime = 1;
@@ -77,7 +77,7 @@ void func_802B6000_E27F40(void) {
             }
             break;
         case 2:
-            if (playerStatus->unk_BF == 1 && !(playerStatus->decorationList & DECORATION_GOLDEN_FLAMES)) {
+            if (playerStatus->unk_BF == 1 && (playerStatus->timeInAir % 2) == 0) {
                 fx_smoke_burst(0, playerStatus->position.x, playerStatus->position.y, playerStatus->position.z, 0.7f, 18);
             }
             if (playerStatus->position.y < playerStatus->gravityIntegrator[3] + playerStatus->gravityIntegrator[2]) {
@@ -98,10 +98,8 @@ void func_802B6000_E27F40(void) {
             }
             break;
         case 3:
-            if (playerStatus->unk_BF == 1) {
-                if (!(playerStatus->decorationList & DECORATION_GOLDEN_FLAMES)) {
-                    fx_smoke_burst(0, playerStatus->position.x, playerStatus->position.y, playerStatus->position.z, 0.7f, 18);
-                }
+            if (playerStatus->unk_BF == 1 && (playerStatus->timeInAir % 2) == 0) {
+                fx_smoke_burst(0, playerStatus->position.x, playerStatus->position.y, playerStatus->position.z, 0.7f, 18);
             }
             if (get_lava_reset_pos(&sp20, &sp24, &sp28) == 0) {
                 sp20 = playerStatus->position.x;
@@ -156,7 +154,7 @@ void func_802B6000_E27F40(void) {
             }
             break;
         case 6:
-            if (playerStatus->unk_BF == 1 && (playerStatus->decorationList & DECORATION_GOLDEN_FLAMES) == 0) {
+            if (playerStatus->unk_BF == 1 && (playerStatus->timeInAir % 2) == 0) {
                 fx_smoke_burst(0, playerStatus->position.x, playerStatus->position.y, playerStatus->position.z, 0.7f, 18);
             }
             playerStatus->position.y = player_check_collision_below(func_800E34D8(), &sp2C);
@@ -193,6 +191,6 @@ void func_802B6000_E27F40(void) {
             break;
     }
     if (playerStatus->fallState < 7) {
-        playerStatus->decorationList++;
+        playerStatus->timeInAir++;
     }
 }

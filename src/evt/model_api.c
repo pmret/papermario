@@ -12,7 +12,36 @@ void update_animated_models(void) {
     }
 }
 
-INCLUDE_ASM(s32, "evt/model_api", render_animated_models);
+void render_animated_models(void) {
+    Matrix4f sp18;
+    Matrix4f sp58;
+    Matrix4f sp98;
+    Matrix4f spD8;
+    Matrix4f sp118;
+    Matrix4f sp158;
+    Matrix4f sp198;
+    Matrix4f sp1D8;
+    s32 i = 0;
+    Matrix4f* sp218 = &sp58;
+
+    for (; i < MAX_ANIMATED_MODELS; i++) {
+        AnimatedModel* model = (*gCurrentMeshAnimationListPtr)[i];
+
+        if (model->animModelID >= 0) {
+            guTranslateF(sp18, model->pos.x, model->pos.y, model->pos.z);
+            guRotateF(*sp218, model->rot.x, 1.0f, 0.0f, 0.0f);
+            guRotateF(sp98, model->rot.y, 0.0f, 1.0f, 0.0f);
+            guRotateF(spD8, model->rot.z, 0.0f, 0.0f, 1.0f);
+            guScaleF(sp1D8, model->scale.x, model->scale.y, model->scale.z);
+            guMtxCatF(spD8, *sp218, sp158);
+            guMtxCatF(sp158, sp98, sp118);
+            guMtxCatF(sp1D8, sp118, sp158);
+            guMtxCatF(sp158, sp18, sp198);
+            guMtxF2L(sp198, &model->mtx);
+            render_animated_model(model->animModelID, &model->mtx);
+        }
+    }
+}
 
 // split here?
 
@@ -222,7 +251,25 @@ ApiStatus SetAnimatorFlags(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "evt/model_api", reset_model_animators);
+void reset_model_animators(void) {
+    s32 i;
+
+    if (!gGameStatusPtr->isBattle ) {
+        gCurrentMeshAnimationListPtr = &gWorldMeshAnimationList;
+    } else {
+        gCurrentMeshAnimationListPtr = &gBattleMeshAnimationList;
+    }
+
+    for (i = 0; i < MAX_ANIMATED_MODELS; i++) {
+        AnimatedModel* model = heap_malloc(sizeof(*model));
+
+        (*gCurrentMeshAnimationListPtr)[i] = model;
+        ASSERT((*gCurrentMeshAnimationListPtr)[i] != NULL);
+        (*gCurrentMeshAnimationListPtr)[i]->animModelID = -1;
+    }
+
+    create_generic_entity_world(update_animated_models, render_animated_models);
+}
 
 void init_model_animators(void) {
     if (!gGameStatusPtr->isBattle) {
@@ -232,12 +279,92 @@ void init_model_animators(void) {
     }
 }
 
-INCLUDE_ASM(s32, "evt/model_api", GetAnimatedNodePosition);
+ApiStatus GetAnimatedNodePosition(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 listIndex = evt_get_variable(script, *args++);
+    s32 treeIndex = evt_get_variable(script, *args++);
+    s32 outX = *args++;
+    s32 outY = *args++;
+    s32 outZ = *args++;
+    AnimatedModel* model = (*gCurrentMeshAnimationListPtr)[listIndex];
+    AnimatorNode* node = get_animator_node_with_id(get_animator_by_index(model->animModelID), treeIndex);
+    f32 x, y, z;
 
-INCLUDE_ASM(s32, "evt/model_api", GetAnimatedNodeRotation);
+    guMtxXFML(&model->mtx, node->pos.x, node->pos.y, node->pos.z, &x, &y, &z);
+    evt_set_variable(script, outX, x);
+    evt_set_variable(script, outY, y);
+    evt_set_variable(script, outZ, z);
 
-INCLUDE_ASM(s32, "evt/model_api", GetAnimatedPositionByTreeIndex);
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "evt/model_api", GetAnimatedRotationByTreeIndex);
+ApiStatus GetAnimatedNodeRotation(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 listIndex = evt_get_variable(script, *args++);
+    s32 treeIndex = evt_get_variable(script, *args++);
+    s32 outX = *args++;
+    s32 outY = *args++;
+    s32 outZ = *args++;
+    AnimatedModel* model = (*gCurrentMeshAnimationListPtr)[listIndex];
+    AnimatorNode* node = get_animator_node_with_id(get_animator_by_index(model->animModelID), treeIndex);
 
-INCLUDE_ASM(s32, "evt/model_api", SetAnimatedNodeFlags);
+    evt_set_variable(script, outX, node->rotation.x);
+    evt_set_variable(script, outY, node->rotation.y);
+    evt_set_variable(script, outZ, node->rotation.z);
+
+    return ApiStatus_DONE2;
+}
+
+ApiStatus GetAnimatedPositionByTreeIndex(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 listIndex = evt_get_variable(script, *args++);
+    s32 treeIndex = evt_get_variable(script, *args++);
+    s32 outX = *args++;
+    s32 outY = *args++;
+    s32 outZ = *args++;
+    AnimatedModel* model = (*gCurrentMeshAnimationListPtr)[listIndex];
+    AnimatorNode* node = get_animator_node_for_tree_index(get_animator_by_index(model->animModelID), treeIndex);
+    f32 x, y, z;
+
+    guMtxXFML(&model->mtx, node->pos.x, node->pos.y, node->pos.z, &x, &y, &z);
+    evt_set_variable(script, outX, x);
+    evt_set_variable(script, outY, y);
+    evt_set_variable(script, outZ, z);
+
+    return ApiStatus_DONE2;
+}
+
+ApiStatus GetAnimatedRotationByTreeIndex(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 listIndex = evt_get_variable(script, *args++);
+    s32 treeIndex = evt_get_variable(script, *args++);
+    s32 outX = *args++;
+    s32 outY = *args++;
+    s32 outZ = *args++;
+    AnimatedModel* model = (*gCurrentMeshAnimationListPtr)[listIndex];
+    AnimatorNode* node = get_animator_node_for_tree_index(get_animator_by_index(model->animModelID), treeIndex);
+
+    evt_set_variable(script, outX, node->rotation.x);
+    evt_set_variable(script, outY, node->rotation.y);
+    evt_set_variable(script, outZ, node->rotation.z);
+
+    return ApiStatus_DONE2;
+}
+
+ApiStatus SetAnimatedNodeFlags(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 listIndex = evt_get_variable(script, *args++);
+    s32 id = evt_get_variable(script, *args++);
+    s32 flags = *args++;
+    s32 set = evt_get_variable(script, *args++);
+    ModelAnimator* animator = get_animator_by_index((*gCurrentMeshAnimationListPtr)[listIndex]->animModelID);
+    AnimatorNode* node = get_animator_node_with_id(animator, id);
+
+    if (set) {
+        node->flags |= flags;
+    } else {
+        node->flags &= ~flags;
+    }
+
+    return ApiStatus_DONE2;
+}

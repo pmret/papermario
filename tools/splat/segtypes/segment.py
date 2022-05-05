@@ -6,8 +6,8 @@ from pathlib import Path
 
 from util import log
 from util import options
+from util import symbols
 from util.symbols import Symbol
-import sys
 
 # circular import
 if TYPE_CHECKING:
@@ -27,6 +27,13 @@ def parse_segment_subalign(segment: Union[dict, list]) -> int:
     default = options.get_subalign()
     if isinstance(segment, dict):
         return int(segment.get("subalign", default))
+    return default
+
+
+def parse_segment_section_order(segment: Union[dict, list]) -> List[str]:
+    default = options.get_section_order()
+    if isinstance(segment, dict):
+        return segment.get("section_order", default)
     return default
 
 
@@ -69,17 +76,25 @@ class Segment:
 
         ext_path = options.get_extensions_path()
         if not ext_path:
-            log.error(f"could not load presumed extended segment type '{seg_type}' because no extensions path is configured")
+            log.error(
+                f"could not load presumed extended segment type '{seg_type}' because no extensions path is configured"
+            )
 
         try:
-            ext_spec = importlib.util.spec_from_file_location(f"{platform}.segtypes.{seg_type}", ext_path / f"{seg_type}.py")
+            ext_spec = importlib.util.spec_from_file_location(
+                f"{platform}.segtypes.{seg_type}", ext_path / f"{seg_type}.py"
+            )
             ext_mod = importlib.util.module_from_spec(ext_spec)
             ext_spec.loader.exec_module(ext_mod)
         except Exception as err:
             log.write(err, status="error")
-            log.error(f"could not load segment type '{seg_type}'\n(hint: confirm your extension directory is configured correctly)")
+            log.error(
+                f"could not load segment type '{seg_type}'\n(hint: confirm your extension directory is configured correctly)"
+            )
 
-        return getattr(ext_mod, f"{platform.upper()}Seg{seg_type[0].upper()}{seg_type[1:]}")
+        return getattr(
+            ext_mod, f"{platform.upper()}Seg{seg_type[0].upper()}{seg_type[1:]}"
+        )
 
     @staticmethod
     def parse_segment_start(segment: Union[dict, list]) -> RomAddr:
@@ -111,8 +126,20 @@ class Segment:
         else:
             return str(cls.get_default_name(rom_start))
 
-    def __init__(self, rom_start, rom_end, type, name, vram_start, extract = True,
-                 given_subalign = options.get_subalign(), given_is_overlay: Optional[bool] = False, given_dir: Path = Path(), args = [], yaml = {}):
+    def __init__(
+        self,
+        rom_start,
+        rom_end,
+        type,
+        name,
+        vram_start,
+        extract=True,
+        given_subalign=options.get_subalign(),
+        given_is_overlay: Optional[bool] = False,
+        given_dir: Path = Path(),
+        args=[],
+        yaml={},
+    ):
         self.rom_start = rom_start
         self.rom_end = rom_end
         self.type = type
@@ -123,13 +150,20 @@ class Segment:
         self.given_subalign = given_subalign
         self.given_is_overlay = given_is_overlay
         self.given_dir = given_dir
-        self.given_seg_symbols: Dict[int, List[Symbol]] = {} # Symbols known to be in this segment
-        self.given_ext_symbols: Dict[int, List[Symbol]] = {} # Symbols not in this segment but also not from other overlapping ram address ranges
+        self.given_seg_symbols: Dict[
+            int, List[Symbol]
+        ] = {}  # Symbols known to be in this segment
+        self.given_ext_symbols: Dict[
+            int, List[Symbol]
+        ] = (
+            {}
+        )  # Symbols not in this segment but also not from other overlapping ram address ranges
+        self.given_section_order: List[str] = options.get_section_order()
 
-        self.parent:Optional[Segment] = None
-        self.sibling:Optional[Segment] = None
+        self.parent: Optional[Segment] = None
+        self.sibling: Optional[Segment] = None
 
-        self.args:List[str] = args
+        self.args: List[str] = args
         self.yaml = yaml
 
         if "skip" in self.args:
@@ -146,20 +180,44 @@ class Segment:
 
         if isinstance(self.rom_start, int) and isinstance(self.rom_end, int):
             if self.rom_start > self.rom_end:
-                log.error(f"Error: segments out of order - ({self.name} starts at 0x{self.rom_start:X}, but next segment starts at 0x{self.rom_end:X})")
+                log.error(
+                    f"Error: segments out of order - ({self.name} starts at 0x{self.rom_start:X}, but next segment starts at 0x{self.rom_end:X})"
+                )
 
     @staticmethod
-    def from_yaml(cls: Type["Segment"], yaml: Union[dict, list], rom_start: RomAddr, rom_end: RomAddr, vram=None):
+    def from_yaml(
+        cls: Type["Segment"],
+        yaml: Union[dict, list],
+        rom_start: RomAddr,
+        rom_end: RomAddr,
+        vram=None,
+    ):
         type = Segment.parse_segment_type(yaml)
         name = Segment.parse_segment_name(cls, rom_start, yaml)
-        vram_start = vram if vram else parse_segment_vram(yaml)
+        vram_start = vram if vram is not None else parse_segment_vram(yaml)
         extract = bool(yaml.get("extract", True)) if isinstance(yaml, dict) else True
         given_subalign = parse_segment_subalign(yaml)
-        given_is_overlay:Optional[bool] = yaml.get("overlay", False) if isinstance(yaml, dict) else False
+        given_is_overlay: Optional[bool] = (
+            yaml.get("overlay", False) if isinstance(yaml, dict) else False
+        )
         given_dir = Path(yaml.get("dir", "")) if isinstance(yaml, dict) else Path()
-        args:List[str] = [] if isinstance(yaml, dict) else yaml[3:]
+        args: List[str] = [] if isinstance(yaml, dict) else yaml[3:]
 
-        return cls(rom_start, rom_end, type, name, vram_start, extract, given_subalign, given_is_overlay, given_dir, args, yaml)
+        ret = cls(
+            rom_start,
+            rom_end,
+            type,
+            name,
+            vram_start,
+            extract,
+            given_subalign,
+            given_is_overlay,
+            given_dir,
+            args,
+            yaml,
+        )
+        cls.given_section_order = parse_segment_section_order(yaml)
+        return ret
 
     @property
     def needs_symbols(self) -> bool:
@@ -215,6 +273,26 @@ class Segment:
         else:
             return None
 
+    @property
+    def section_order(self) -> List[str]:
+        return self.given_section_order
+
+    @property
+    def rodata_follows_data(self) -> bool:
+        if ".rodata" not in self.section_order or ".data" not in self.section_order:
+            return False
+        return (
+            self.section_order.index(".rodata") - self.section_order.index(".data") == 1
+        )
+
+    @property
+    def text_follows_rodata(self) -> bool:
+        if ".text" not in self.section_order or ".rodata" not in self.section_order:
+            return False
+        return (
+            self.section_order.index(".text") - self.section_order.index(".rodata") == 1
+        )
+
     def contains_vram(self, vram: int) -> bool:
         if self.vram_start is not None and self.vram_end is not None:
             return vram >= self.vram_start and vram < self.vram_end
@@ -266,6 +344,14 @@ class Segment:
     def out_path(self) -> Optional[Path]:
         return None
 
+    def get_most_parent(self) -> "Segment":
+        seg = self
+
+        while seg.parent:
+            seg = seg.parent
+
+        return seg
+
     def get_linker_entries(self) -> "List[LinkerEntry]":
         from segtypes.linker_entry import LinkerEntry
 
@@ -277,7 +363,7 @@ class Segment:
             return []
 
     def log(self, msg):
-        if options.get("verbose", False):
+        if options.verbose():
             log.write(f"{self.type} {self.name}: {msg}")
 
     def warn(self, msg: str):
@@ -308,3 +394,105 @@ class Segment:
     @staticmethod
     def get_default_name(addr) -> str:
         return f"{addr:X}"
+
+    def retrieve_symbol(self, d, k, t):
+        if k not in d:
+            return None
+
+        if t:
+            items = [s for s in d[k] if s.type == t or s.type == "unknown"]
+        else:
+            items = d[k]
+
+        if len(items) > 1:
+            pass  # print(f"Trying to retrieve {k:X} from symbol dict but there are {len(items)} entries to pick from - picking the first")
+        if len(items) == 0:
+            return None
+        return items[0]
+
+    def get_symbol(
+        self,
+        addr,
+        type=None,
+        create=False,
+        define=False,
+        reference=False,
+        offsets=False,
+        local_only=False,
+        dead=True,
+    ) -> Optional[Symbol]:
+        ret = None
+        rom = None
+
+        in_segment = self.contains_vram(addr)
+
+        if in_segment:
+            # If the vram address is within this segment, we can calculate the symbol's rom address
+            rom = self.ram_to_rom(addr)
+            ret = self.retrieve_symbol(self.seg_symbols, addr, type)
+        elif not local_only:
+            ret = self.retrieve_symbol(self.ext_symbols, addr, type)
+
+        # Search for symbol ranges
+        if not ret and offsets:
+            ret = symbols.retrieve_from_ranges(addr, rom)
+
+        # Reject dead symbols unless we allow them
+        if not dead and ret and ret.dead:
+            ret = None
+
+        # Create the symbol if it doesn't exist
+        if not ret and create:
+            ret = Symbol(addr, rom=rom, type=type)
+            symbols.all_symbols.append(ret)
+
+            if in_segment:
+                if self.is_overlay:
+                    ret.in_overlay = True
+                if addr not in self.seg_symbols:
+                    self.seg_symbols[addr] = []
+                self.seg_symbols[addr].append(ret)
+            elif not local_only:
+                if addr not in self.ext_symbols:
+                    self.ext_symbols[addr] = []
+                self.ext_symbols[addr].append(ret)
+
+        if ret:
+            if define:
+                ret.defined = True
+            if reference:
+                ret.referenced = True
+
+        return ret
+
+    def create_symbol(
+        self,
+        addr,
+        type=None,
+        define=False,
+        reference=False,
+        offsets=False,
+        local_only=False,
+        dead=True,
+    ) -> Symbol:
+        ret = self.get_symbol(
+            addr,
+            type=type,
+            create=True,
+            define=define,
+            reference=reference,
+            offsets=offsets,
+            local_only=local_only,
+            dead=dead,
+        )
+        assert ret is not None
+
+        return ret
+
+    def get_func_for_addr(self, addr) -> Optional[Symbol]:
+        for syms in self.seg_symbols.values():
+            for sym in syms:
+                if sym.type == "func" and sym.contains_vram(addr):
+                    return sym
+
+        return None

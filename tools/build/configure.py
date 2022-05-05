@@ -412,7 +412,7 @@ class Configure:
                             if seg.flip_vertical:
                                 flags += "--flip-y "
 
-                            src_paths = [seg.out_path()]
+                            src_paths = [seg.out_path().relative_to(ROOT)]
                             inc_dir = self.build_path() / "include" / seg.dir
                             bin_path = self.build_path() / seg.dir / (seg.name + ".png.bin")
 
@@ -424,7 +424,7 @@ class Configure:
                             build(inc_dir / (seg.name + ".png.h"), src_paths, "img_header")
                             build(inc_dir / (seg.name + ".png.inc.c"), [bin_path], "bin_inc_c")
                         elif isinstance(seg, segtypes.n64.palette.N64SegPalette):
-                            src_paths = [seg.out_path()]
+                            src_paths = [seg.out_path().relative_to(ROOT)]
                             inc_dir = self.build_path() / "include" / seg.dir
                             bin_path = self.build_path() / seg.dir / (seg.name + ".pal.bin")
 

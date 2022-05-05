@@ -4,6 +4,7 @@ import os
 import re
 import subprocess
 import sys
+import tqdm
 
 script_dir = os.path.dirname(os.path.realpath(__file__))
 root_dir = script_dir + "/../"
@@ -157,9 +158,7 @@ def log(s):
 def reconcile_symbols():
     print(f"Processing {str(len(elf_symbols))} elf symbols...")
 
-    for i, elf_sym in enumerate(elf_symbols):
-        if i % 1000 == 0:
-            print(i)
+    for i, elf_sym in tqdm.tqdm(enumerate(elf_symbols), total=len(elf_symbols)):
         name_match = None
         rom_match = None
 
