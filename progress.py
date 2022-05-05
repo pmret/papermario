@@ -30,7 +30,7 @@ def load_latest_progress(version):
 
     return (int(all_funcs), int(nonmatching_funcs), int(matching_funcs), int(total_size), int(nonmatching_size), int(matching_size))
 
-def get_func_sizes():
+def get_func_info():
     try:
         result = subprocess.run(['mips-linux-gnu-objdump', '-x', elf_path], stdout=subprocess.PIPE)
         nm_lines = result.stdout.decode().split("\n")
@@ -39,17 +39,17 @@ def get_func_sizes():
         sys.exit(1)
 
     sizes = {}
-    total = 0
+    vrams = {}
 
     for line in nm_lines:
         if " F " in line:
             components = line.split()
             size = int(components[4], 16)
             name = components[5]
-            total += size
             sizes[name] = size
+            vrams[name] = int(components[0], 16)
 
-    return sizes, total
+    return sizes, vrams
 
 def get_nonmatching_funcs():
     funcs = set()
@@ -61,9 +61,13 @@ def get_nonmatching_funcs():
 
     return funcs
 
-def get_funcs_sizes(sizes, matchings, nonmatchings):
+def get_funcs_sizes(sizes, matchings, nonmatchings, restrict_to=None):
     msize = 0
     nmsize = 0
+
+    if restrict_to:
+        matchings = matchings.intersection(restrict_to)
+        nonmatchings = nonmatchings.intersection(restrict_to)
 
     for func in matchings:
         msize += sizes[func]
@@ -80,16 +84,34 @@ def get_funcs_sizes(sizes, matchings, nonmatchings):
 def lerp(a, b, alpha):
     return a + (b - a) * alpha
 
+def get_funcs_in_vram_range(vrams, vram_min, vram_max):
+    funcs = set()
+    for func in vrams:
+        if vrams[func] >= vram_min and vrams[func] <= vram_max:
+            funcs.add(func)
+    return funcs
+
+def do_section_progress(section_name, vrams, sizes, total_size, matchings, nonmatchings, section_vram_start, section_vram_end):
+    funcs = get_funcs_in_vram_range(vrams, section_vram_start, section_vram_end)
+    matching_size, nonmatching_size = get_funcs_sizes(sizes, matchings, nonmatchings, restrict_to=funcs)
+    section_total_size = matching_size + nonmatching_size
+    progress_ratio = (matching_size / section_total_size) * 100
+    matching_ratio = (matching_size / total_size) * 100
+    total_ratio = (section_total_size / total_size) * 100
+    print(f"\t{section_name}: {matching_size} matching bytes / {section_total_size} total ({progress_ratio:.2f}%)")
+    print(f"\t\t(matched {matching_ratio:.2f}% of {total_ratio:.2f}% total rom for {section_name})")
+
 def main(args):
     set_version(args.version)
 
-    func_sizes, total_size = get_func_sizes()
-    all_funcs = set(func_sizes.keys())
+    sizes, vrams = get_func_info()
+    total_size = sum(sizes.values())
+    all_funcs = set(sizes.keys())
 
     nonmatching_funcs = get_nonmatching_funcs()
     matching_funcs = all_funcs - nonmatching_funcs
 
-    matching_size, nonmatching_size = get_funcs_sizes(func_sizes, matching_funcs, nonmatching_funcs)
+    matching_size, nonmatching_size = get_funcs_sizes(sizes, matching_funcs, nonmatching_funcs)
 
     if len(all_funcs) == 0:
         funcs_matching_ratio = 0.0
@@ -136,6 +158,9 @@ def main(args):
             print("Warning: category/total size mismatch!\n")
         print(f"{len(matching_funcs)} matched functions / {len(all_funcs)} total ({funcs_matching_ratio:.2f}%)")
         print(f"{matching_size} matching bytes / {total_size} total ({matching_ratio:.2f}%)")
+
+        do_section_progress("effects", vrams, sizes, total_size, matching_funcs, nonmatching_funcs, 0xE0000000, 0xE1000000)
+        do_section_progress("map", vrams, sizes, total_size, matching_funcs, nonmatching_funcs, 0x80240000, 0x80250000)
 
         if funcs_delta > 0:
             if funcs_delta == 1:
