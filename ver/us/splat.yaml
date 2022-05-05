@@ -273,7 +273,6 @@ segments:
     - [0x4AC90, pm_effect_loads, effect_loads]
     - [0x4DF30, c, battle/battle]
     - [0x4E5A0, bin, n_aspMain_text]
-    - [0x4F200, data]
     - [0x4F410, .data, main]
     - [0x4F420, .data, main_loop]
     - [0x4F660, .data, rumble]
@@ -363,7 +362,7 @@ segments:
     - [0x8E790, c, 8e790_len_2850]
     - [0x90FE0, .data, npc_collision]
     - [0x913B0, .data, world/actions]
-    - [0x914E0, .data, world/partners] # TODO shiftability: include following images in c file to fix padding issues
+    - [0x914E0, .data, world/partners]
     - start: 0x919B0
       type: .data
       name: 919B0
