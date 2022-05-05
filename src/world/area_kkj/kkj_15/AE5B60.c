@@ -1,5 +1,15 @@
 #include "kkj_15.h"
 
-INCLUDE_ASM(s32, "world/area_kkj/kkj_15/AE5B60", func_802405D0_AE5B60);
+ApiStatus func_802405D0_AE5B60(void) {
+    GameStatus* gameStatus = gGameStatusPtr;
 
-INCLUDE_ASM(s32, "world/area_kkj/kkj_15/AE5B60", func_802405EC_AE5B7C);
+    gameStatus->peachFlags |= 0x10;
+    return ApiStatus_DONE2;
+}
+
+ApiStatus func_802405EC_AE5B7C(Evt* script, s32 isInitialCall) {
+    GameStatus* gameStatus = gGameStatusPtr;
+
+    gameStatus->peachFlags &= ~0x10;
+    return ApiStatus_DONE2;
+}
