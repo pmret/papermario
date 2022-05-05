@@ -274,7 +274,7 @@ void spr_init_sprites(s32 playerSpriteSet) {
     for (i = 0; i < ARRAY_COUNT(spr_playerCurrentAnimInfo); i++) {
         PlayerCurrentAnimInfo* animInfo = &spr_playerCurrentAnimInfo[i];
 
-        animInfo->componentList = 0;
+        animInfo->componentList = NULL;
         animInfo->animID = -1;
     }
 

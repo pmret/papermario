@@ -67,7 +67,6 @@ ApiStatus func_802A9000_429320(void) {
 
 #include "common/MashActionCommandInit.inc.c"
 
-//INCLUDE_ASM(s32, "battle/action_cmd/air_raid", func_802A9294_4295B4);
 void func_802A9294_4295B4(void) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
