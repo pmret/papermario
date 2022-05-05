@@ -6,6 +6,7 @@ from typing import List, Optional
 from util.symbols import Symbol
 from util import floats, options
 
+
 class CommonSegData(CommonSegCodeSubsegment, CommonSegGroup):
     def out_path(self) -> Optional[Path]:
         if self.type.startswith("."):
@@ -17,7 +18,7 @@ class CommonSegData(CommonSegCodeSubsegment, CommonSegGroup):
                 return options.get_src_path() / self.dir / f"{self.name}.c"
         else:
             # ASM
-            return options.get_asm_path() / "data" / self.dir / f"{self.name}.{self.type}.s"
+            return options.get_data_path() / self.dir / f"{self.name}.{self.type}.s"
 
     def scan(self, rom_bytes: bytes):
         CommonSegGroup.scan(self, rom_bytes)
@@ -54,8 +55,10 @@ class CommonSegData(CommonSegCodeSubsegment, CommonSegGroup):
     def get_linker_entries(self):
         return CommonSegCodeSubsegment.get_linker_entries(self)
 
+    # Check symbols marked as jump tables to be valid
     def check_jtbls(self, rom_bytes, syms: List[Symbol]):
-        endian = options.get_endianess()
+        endianness = options.get_endianess()
+
         for i, sym in enumerate(syms):
             if sym.type == "jtbl":
                 start = self.get_most_parent().ram_to_rom(syms[i].vram_start)
@@ -66,14 +69,26 @@ class CommonSegData(CommonSegCodeSubsegment, CommonSegGroup):
                 b = 0
                 last_bits = 0
                 while b < len(sym_bytes):
-                    bits = int.from_bytes(sym_bytes[b : b + 4], endian)
+                    bits = int.from_bytes(sym_bytes[b : b + 4], endianness)
 
-                    if last_bits != 0 and bits != 0 and abs(last_bits - bits) > 0x100000:
+                    if (
+                        last_bits != 0
+                        and bits != 0
+                        and abs(last_bits - bits) > 0x100000
+                    ):
                         new_sym_rom_start = start + b
-                        new_sym_ram_start = self.get_most_parent().rom_to_ram(new_sym_rom_start)
+                        new_sym_ram_start = self.get_most_parent().rom_to_ram(
+                            new_sym_rom_start
+                        )
                         sym.size = new_sym_rom_start - sym.rom
 
-                        syms.insert(i + 1, self.get_most_parent().get_symbol(new_sym_ram_start, create=True, define=True, local_only=True))
+                        # It turns out this isn't a valid jump table, so create a new symbol where it breaks
+                        syms.insert(
+                            i + 1,
+                            self.get_most_parent().create_symbol(
+                                new_sym_ram_start, define=True, local_only=True
+                            ),
+                        )
                         return False
 
                     if bits != 0:
@@ -90,7 +105,11 @@ class CommonSegData(CommonSegCodeSubsegment, CommonSegGroup):
         for i in range(self.rom_start, self.rom_end, 4):
             bits = int.from_bytes(rom_bytes[i : i + 4], endian)
             if self.contains_vram(bits):
-                symset.add(self.get_most_parent().get_symbol(bits, create=True, define=True, local_only=True))
+                symset.add(
+                    self.get_most_parent().create_symbol(
+                        bits, define=True, local_only=True
+                    )
+                )
 
         for symbol_addr in self.seg_symbols:
             for symbol in self.seg_symbols[symbol_addr]:
@@ -98,11 +117,16 @@ class CommonSegData(CommonSegCodeSubsegment, CommonSegGroup):
                     symset.add(symbol)
 
         ret: List[Symbol] = list(symset)
-        ret.sort(key=lambda s:s.vram_start)
+        ret.sort(key=lambda s: s.vram_start)
 
         # Ensure we start at the beginning
         if len(ret) == 0 or ret[0].vram_start != self.vram_start:
-            ret.insert(0, self.get_most_parent().get_symbol(self.vram_start, create=True, define=True, local_only=True))
+            ret.insert(
+                0,
+                self.get_most_parent().create_symbol(
+                    self.vram_start, define=True, local_only=True
+                ),
+            )
 
         # Make a dummy symbol here that marks the end of the previous symbol's disasm range
         ret.append(Symbol(self.vram_end))
@@ -116,14 +140,16 @@ class CommonSegData(CommonSegCodeSubsegment, CommonSegGroup):
 
     def are_null(chars):
         for b in chars:
-            if b != '\x00':
+            if b != "\x00":
                 return False
         return True
 
     @staticmethod
     def is_valid_ascii(bytes):
-        null_char = '\x00'
-        valid_chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890[]():%!#=-_ "
+        null_char = "\x00"
+        valid_chars = (
+            "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890[]():%!#=-_ "
+        )
         invalid_chars = ""
         duplicate_limit = 10
 
@@ -152,7 +178,7 @@ class CommonSegData(CommonSegCodeSubsegment, CommonSegGroup):
                         true_end = i
                     else:
                         pass
-                        #return False
+                        # return False
 
             # Ensure we're not seeing a ton of the same character in a row
             if last_char == c:
@@ -184,6 +210,44 @@ class CommonSegData(CommonSegCodeSubsegment, CommonSegGroup):
 
         return False
 
+    # TODO if we see a new function's jtbl, split it
+    def is_valid_jtbl(self, sym: Symbol, bytes) -> bool:
+        min_jtbl_len = 16
+
+        if len(bytes) % 4 != 0:
+            return False
+
+        # Jump tables must have at least 3 labels
+        if len(bytes) < min_jtbl_len:
+            return False
+
+        most_parent = self.get_most_parent()
+        assert isinstance(most_parent, CommonSegCode)
+
+        # Grab the first word and see if its value is an address within a function
+        word = int.from_bytes(bytes[0:4], options.get_endianess())
+        jtbl_func: Optional[Symbol] = self.get_most_parent().get_func_for_addr(word)
+
+        if not jtbl_func:
+            return False
+
+        for i in range(4, len(bytes), 4):
+            word = int.from_bytes(bytes[i : i + 4], options.get_endianess())
+
+            # If the word doesn't contain an address in the current function, this isn't a valid jump table
+            if not jtbl_func.contains_vram(word):
+                # Allow jump tables that are of a minimum length and end in 0s
+                if i < min_jtbl_len or any(b != 0 for b in bytes[i:]):
+                    return False
+
+        # Mark this symbol as a jump table and record the jump table for later
+        sym.type = "jtbl"
+        most_parent.jumptables[sym.vram_start] = (
+            jtbl_func.vram_start,
+            jtbl_func.vram_end,
+        )
+        return True
+
     def disassemble_symbol(self, sym_bytes, sym_type):
         endian = options.get_endianess()
         if sym_type == "jtbl":
@@ -204,6 +268,8 @@ class CommonSegData(CommonSegCodeSubsegment, CommonSegGroup):
             try:
                 ascii_str = sym_bytes.decode("EUC-JP")
                 # ascii_str = ascii_str.rstrip("\x00")
+                ascii_str = ascii_str.replace("\\", "\\\\")  # escape back slashes
+                ascii_str = ascii_str.replace('"', '\\"')  # escape quotes
                 ascii_str = ascii_str.replace("\x00", "\\0")
                 ascii_str = ascii_str.replace("\n", "\\n")
 
@@ -232,9 +298,9 @@ class CommonSegData(CommonSegCodeSubsegment, CommonSegGroup):
                 if sym:
                     byte_str = sym.name
                 else:
-                    byte_str = '0x{0:0{1}X}'.format(bits, 2 * slen)
+                    byte_str = "0x{0:0{1}X}".format(bits, 2 * slen)
             else:
-                byte_str = '0x{0:0{1}X}'.format(bits, 2 * slen)
+                byte_str = "0x{0:0{1}X}".format(bits, 2 * slen)
 
             if sym_type in ["float", "double"]:
                 if sym_type == "float":
@@ -260,8 +326,8 @@ class CommonSegData(CommonSegCodeSubsegment, CommonSegGroup):
 
     def disassemble_data(self, rom_bytes):
         rodata_encountered = "rodata" in self.type
-        ret = ".include \"macro.inc\"\n\n"
-        ret += f'.section {self.get_linker_section()}'
+        ret = '.include "macro.inc"\n\n'
+        ret += f".section {self.get_linker_section()}"
 
         if self.size == 0:
             return None
@@ -270,30 +336,53 @@ class CommonSegData(CommonSegCodeSubsegment, CommonSegGroup):
 
         for i in range(len(syms) - 1):
             mnemonic = syms[i].access_mnemonic
-            sym = self.get_most_parent().get_symbol(syms[i].vram_start, create=True, define=True, local_only=True)
+            sym = self.get_most_parent().create_symbol(
+                syms[i].vram_start, define=True, local_only=True
+            )
 
-            sym_str = f"\n\nglabel {sym.name}\n"
             dis_start = self.get_most_parent().ram_to_rom(syms[i].vram_start)
             dis_end = self.get_most_parent().ram_to_rom(syms[i + 1].vram_start)
             sym_len = dis_end - dis_start
 
             if self.type == "bss":
-                ret += f".space 0x{sym_len:X}"
+                disasm_str = f".space 0x{sym_len:X}"
             else:
-                sym_bytes = rom_bytes[dis_start : dis_end]
+                sym_bytes = rom_bytes[dis_start:dis_end]
 
                 # Checking if the mnemonic is addiu may be too picky - we'll see
                 if self.is_valid_ascii(sym_bytes) and mnemonic == "addiu":
                     stype = "ascii"
-                elif syms[i].type == "jtbl":
+                elif sym.type == "jtbl":
                     stype = "jtbl"
-                elif len(sym_bytes) % 8 == 0 and mnemonic in CommonSegCodeSubsegment.double_mnemonics:
+                elif self.is_valid_jtbl(sym, sym_bytes):
+                    stype = "jtbl"
+                elif (
+                    len(sym_bytes) % 8 == 0
+                    and mnemonic in CommonSegCodeSubsegment.double_mnemonics
+                ):
                     stype = "double"
-                elif len(sym_bytes) % 4 == 0 and mnemonic in CommonSegCodeSubsegment.float_mnemonics:
+                elif (
+                    len(sym_bytes) % 4 == 0
+                    and mnemonic in CommonSegCodeSubsegment.float_mnemonics
+                ):
                     stype = "float"
-                elif len(sym_bytes) % 4 == 0 and sym.vram_start % 4 == 0 and (mnemonic in CommonSegCodeSubsegment.word_mnemonics or not mnemonic):
+                elif (
+                    len(sym_bytes) % 4 == 0
+                    and sym.vram_start % 4 == 0
+                    and (
+                        mnemonic in CommonSegCodeSubsegment.word_mnemonics
+                        or not mnemonic
+                    )
+                ):
                     stype = "word"
-                elif len(sym_bytes) % 2 == 0 and sym.vram_start % 2 == 0 and (mnemonic in CommonSegCodeSubsegment.short_mnemonics or not mnemonic):
+                elif (
+                    len(sym_bytes) % 2 == 0
+                    and sym.vram_start % 2 == 0
+                    and (
+                        mnemonic in CommonSegCodeSubsegment.short_mnemonics
+                        or not mnemonic
+                    )
+                ):
                     stype = "short"
                 else:
                     stype = "byte"
@@ -304,13 +393,20 @@ class CommonSegData(CommonSegCodeSubsegment, CommonSegGroup):
                 if dis_start % 2 != 0:
                     stype = "byte"
 
-                if not rodata_encountered and mnemonic == "jtbl":
+                # Hint to the user that we are now in the .rodata section and no longer in the .data section (assuming rodata follows data)
+                if (
+                    not rodata_encountered
+                    and mnemonic == "jtbl"
+                    and self.get_most_parent().rodata_follows_data
+                ):
                     rodata_encountered = True
                     ret += "\n\n\n.section .rodata"
 
-                sym_str += self.disassemble_symbol(sym_bytes, stype)
-                sym.disasm_str = sym_str
-                ret += sym_str
+                disasm_str = self.disassemble_symbol(sym_bytes, stype)
+
+            sym.disasm_str = disasm_str
+            name_str = f"\n\n{options.get_asm_data_macro()} {sym.name}\n"
+            ret += name_str + disasm_str
 
         ret += "\n"
 

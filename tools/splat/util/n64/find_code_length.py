@@ -1,4 +1,4 @@
-#! /usr/bin/python3
+#! /usr/bin/env python3
 
 from capstone import *
 
@@ -9,11 +9,16 @@ import argparse
 
 md = Cs(CS_ARCH_MIPS, CS_MODE_MIPS64 + CS_MODE_BIG_ENDIAN)
 
-parser = argparse.ArgumentParser(description="Given a rom and start offset, find where the code ends")
+parser = argparse.ArgumentParser(
+    description="Given a rom and start offset, find where the code ends"
+)
 parser.add_argument("rom", help="path to a .z64 rom")
 parser.add_argument("start", help="start offset")
 parser.add_argument("--end", help="end offset", default=None)
-parser.add_argument("--vram", help="vram address to start disassembly at", default="0x80000000")
+parser.add_argument(
+    "--vram", help="vram address to start disassembly at", default="0x80000000"
+)
+
 
 def run(rom_bytes, start_offset, vram, end_offset=None):
     rom_addr = start_offset

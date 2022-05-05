@@ -1,5 +1,6 @@
 from segtypes.common.data import CommonSegData
-from util import log
+from util import options, log
+
 
 class CommonSegBss(CommonSegData):
     def get_linker_section(self) -> str:
@@ -17,6 +18,6 @@ class CommonSegBss(CommonSegData):
         if self.sibling:
             path = self.sibling.out_path()
         else:
-            log.error("Unlinked bss sections currently unsupported")
+            path = options.get_src_path() / self.name
 
         return [LinkerEntry(self, [path], path, self.get_linker_section())]
