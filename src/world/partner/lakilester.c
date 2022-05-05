@@ -496,7 +496,7 @@ void func_802BDDD8_321928(Npc* npc) {
         npc->moveToPos.x = x;
         npc->moveToPos.z = z;
         npc->jumpScale = 0.0f;
-        playerStatus->decorationList = 0;
+        playerStatus->timeInAir = 0;
 
         if ((get_collider_type_by_id(raycastBelowResult) & 0xFF) == 3) {
 
@@ -510,7 +510,7 @@ void func_802BDDD8_321928(Npc* npc) {
     }
 
     collisionStatus->currentFloor = -1;
-    playerStatus->decorationList = playerStatus->decorationList + 1;
+    playerStatus->timeInAir++;
     npc->currentFloor = -1;
     npc->jumpScale += 1.8;
 

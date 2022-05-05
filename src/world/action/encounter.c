@@ -16,7 +16,7 @@ void func_802B6000_E28A30(void) {
         );
         playerStatus->fallState = 0;
         playerStatus->framesOnGround = 0;
-        playerStatus->decorationList = 0;
+        playerStatus->timeInAir = 0;
         playerStatus->unk_C2 = 0;
         playerStatus->currentSpeed = 0.0f;
         playerStatus->unk_8C = 0.0f;
@@ -67,7 +67,7 @@ void func_802B609C_E28ACC(void) {
         playerStatus->flags &= ~(0x80080000 | 0x80000 | 0x8 | 0x4 | 0x2);
         playerStatus->fallState = 0;
         playerStatus->framesOnGround = 0;
-        playerStatus->decorationList = 0;
+        playerStatus->timeInAir = 0;
         playerStatus->unk_C2 = 0;
         playerStatus->currentSpeed = 0.0f;
         playerStatus->unk_8C = 0.0f;
@@ -142,7 +142,7 @@ void func_802B6350_E28D80(void) {
         playerStatus->flags &= ~(0x80000000 | 0x80000 | 0x8 | 0x4 | 0x2);
         playerStatus->fallState = 0;
         playerStatus->currentStateTime = 0;
-        playerStatus->decorationList = 0;
+        playerStatus->timeInAir = 0;
         playerStatus->unk_C2 = 0;
         playerStatus->currentSpeed = 0.0f;
         playerStatus->pitch = 0.0f;
@@ -165,7 +165,7 @@ void func_802B63D4_E28E04(void) {
     if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
         playerStatus->flags &= ~(0x80000000 | 0x8 | 0x4 | 0x2);
         playerStatus->fallState = 0;
-        playerStatus->decorationList = 0;
+        playerStatus->timeInAir = 0;
         playerStatus->unk_C2 = 0;
         playerStatus->currentSpeed = 0.0f;
         playerStatus->pitch = 0.0f;

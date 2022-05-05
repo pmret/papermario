@@ -2038,7 +2038,7 @@ typedef struct PlayerStatus {
     /* 0x0BC */ u16 unk_BC;
     /* 0x0BE */ s8 renderMode;
     /* 0x0BF */ s8 unk_BF;
-    /* 0x0C0 */ s16 decorationList;
+    /* 0x0C0 */ s16 timeInAir;
     /* 0x0C2 */ s16 unk_C2;
     /* 0x0C4 */ char unk_C4;
     /* 0x0C5 */ s8 unk_C5;

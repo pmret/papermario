@@ -41,7 +41,7 @@ void action_idle_update(void) {
     if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
         s32 anim;
 
-        playerStatus->flags &= 
+        playerStatus->flags &=
             ~(PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED
             | PLAYER_STATUS_FLAGS_80000
             | PLAYER_STATUS_FLAGS_JUMPING
@@ -50,7 +50,7 @@ void action_idle_update(void) {
         wasMoving = TRUE;
         playerStatus->fallState = 0;
         playerStatus->currentStateTime = 0;
-        playerStatus->decorationList = 0;
+        playerStatus->timeInAir = 0;
         playerStatus->unk_C2 = 0;
         playerStatus->currentSpeed = 0.0f;
         playerStatus->pitch = 0.0f;
@@ -105,10 +105,10 @@ void action_idle_update_peach(void) {
         playerStatus->flags &= ~PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
         playerStatus->fallState = 0;
         playerStatus->currentStateTime = 0;
-        playerStatus->decorationList = 0;
+        playerStatus->timeInAir = 0;
         playerStatus->unk_C2 = 0;
         playerStatus->currentSpeed = 0.0f;
-        playerStatus->flags &= 
+        playerStatus->flags &=
             ~(PLAYER_STATUS_FLAGS_JUMPING
             | PLAYER_STATUS_FLAGS_FALLING
             | PLAYER_STATUS_FLAGS_FLYING);

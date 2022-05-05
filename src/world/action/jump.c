@@ -12,7 +12,7 @@ void func_802B6000_E24040(void) {
     s32 temp_v1;
 
     playerStatus->fallState = 0;
-    playerStatus->decorationList = 0;
+    playerStatus->timeInAir = 0;
     playerStatus->unk_C2 = 0;
     playerStatus->flags &= ~0x80000008;
     playerStatus->flags |= 2;
@@ -68,7 +68,7 @@ void func_802B60B4_E240F4(void) {
     }
     suggest_player_anim_clearUnkFlag(anim);
 
-    playerStatus->decorationList++;
+    playerStatus->timeInAir++;
 }
 
 void func_802B6198_E241D8(void) {
@@ -86,7 +86,7 @@ void func_802B6198_E241D8(void) {
         disable_player_input();
     }
 
-    playerStatus->decorationList++;
+    playerStatus->timeInAir++;
 
     if (playerStatus->fallState != 1) {
         return;
@@ -134,7 +134,7 @@ void func_802B6294_E242D4(void) {
         suggest_player_anim_clearUnkFlag(phi_a0);
         gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_FLAGS_1;
     }
-    playerStatus->decorationList++;
+    playerStatus->timeInAir++;
 }
 
 void func_802B6348_E24388(void) {
@@ -159,7 +159,7 @@ void func_802B6348_E24388(void) {
         gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_FLAGS_1;
     }
 
-    playerStatus->decorationList++;
+    playerStatus->timeInAir++;
     phys_update_interact_collider();
     sp28 = playerStatus->position.x;
     sp2C = playerStatus->position.y;
@@ -193,7 +193,7 @@ void func_802B647C_E244BC(void) {
         suggest_player_anim_clearUnkFlag(temp_v1);
         gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_FLAGS_1;
     }
-    playerStatus->decorationList++;
+    playerStatus->timeInAir++;
 }
 
 void func_802B6508_E24548(void) {
@@ -209,6 +209,6 @@ void func_802B6508_E24548(void) {
             suggest_player_anim_clearUnkFlag(0xA0006);
         }
     }
-    playerStatus->decorationList++;
+    playerStatus->timeInAir++;
     phys_update_interact_collider();
 }

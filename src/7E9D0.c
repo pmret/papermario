@@ -225,9 +225,9 @@ void phys_update_action_state(void) {
         }
     }
 
-    if (playerStatus->decorationList != 0) {
+    if (playerStatus->timeInAir != 0) {
         if (playerStatus->gravityIntegrator[0] <= 0.0f && D_800F7B90 > 0.0f) {
-            playerStatus->unk_C2 = playerStatus->decorationList;
+            playerStatus->unk_C2 = playerStatus->timeInAir;
         }
         D_800F7B90 = playerStatus->gravityIntegrator[0];
     }

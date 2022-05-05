@@ -24,14 +24,13 @@ class N64SegCi8(N64SegRgba16):
         if self.palette is None:
             # TODO: output with blank palette
             log.error(f"no palette sibling segment exists\n(hint: add a segment with type 'palette' and name '{self.name}')")
-            return
 
         w = png.Writer(self.width, self.height, palette=self.palette.parse_palette(rom_bytes))
         image = self.__class__.parse_image(data, self.width, self.height, self.flip_horizontal, self.flip_vertical)
 
         with open(self.out_path(), "wb") as f:
             w.write_array(f, image)
-        
+
         self.palette.extract = False
 
     @staticmethod
@@ -39,7 +38,7 @@ class N64SegCi8(N64SegRgba16):
         # hot path
         if not flip_h and not flip_v:
             return data
-        
+
         flipped_data = bytearray()
 
         for x, y, i in iter.iter_image_indexes(width, height, 1, 1, flip_h, flip_v):

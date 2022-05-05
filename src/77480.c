@@ -591,9 +591,9 @@ void update_player(void) {
 
     update_partner_timers();
 
-    if ((playerStatus->decorationList > 100) || (playerStatus->position.y < -2000.0f)) {
+    if ((playerStatus->timeInAir > 100) || (playerStatus->position.y < -2000.0f)) {
         if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_10000000)) {
-            playerStatus->decorationList = 0;
+            playerStatus->timeInAir = 0;
             playerStatus->position.x = playerStatus->lastGoodPosition.x;
             playerStatus->position.y = playerStatus->lastGoodPosition.y;
             playerStatus->position.z = playerStatus->lastGoodPosition.z;
@@ -608,7 +608,7 @@ void update_player(void) {
                 partner->pos.z = playerStatus->lastGoodPosition.z;
                 partner->moveToPos.y = playerStatus->lastGoodPosition.y;
             } else {
-                playerStatus->decorationList = 10;
+                playerStatus->timeInAir = 10;
             }
         }
     }
@@ -718,7 +718,7 @@ void phys_update_standard(void) {
 
         if (
             collision_main_above() < 0 &&
-            playerStatus->decorationList == 0 &&
+            playerStatus->timeInAir == 0 &&
             playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS
         ) {
             func_800E4F10();
@@ -1119,7 +1119,7 @@ s32 func_800E06D8(void) {
     s32 temp = playerStatus->interactingWithID;
     s32 wall;
 
-    if (playerStatus->decorationList || playerStatus->inputEnabledCounter) {
+    if (playerStatus->timeInAir || playerStatus->inputEnabledCounter) {
             return FALSE;
     }
     if (gCollisionStatus.currentWall == -1) {
@@ -1176,7 +1176,7 @@ void check_for_interactables(void) {
             return;
         }
 
-        if (playerStatus->decorationList != NULL) {
+        if (playerStatus->timeInAir != 0) {
             return;
         }
 
