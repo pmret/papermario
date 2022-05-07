@@ -25,7 +25,7 @@ extern Gfx D_090021C0[];
 extern Gfx D_090021E0[];
 extern Gfx D_09002200[];
 
-Gfx *D_E003CCA0[] = {
+Gfx* D_E003CCA0[] = {
     D_09001E50, D_09001E90, D_09001ED0, D_09001F10,
     D_09001F50, D_09001F90, D_09001FD0, D_09002010,
     D_09002050, D_09002090, D_090020D0, D_09002110
@@ -40,18 +40,18 @@ u8 D_E003CCD0[] = {
 };
 
 Color_RGB8 D_E003CCF8[] = {
-    { 0xFE, 0xAC, 0xAC },
-    { 0xFE, 0xAC, 0xD5 },
-    { 0xFE, 0xB4, 0x9A },
-    { 0xD5, 0xB4, 0xFE },
-    { 0xB4, 0xB4, 0xFE },
-    { 0xB4, 0xDD, 0xFE },
-    { 0xB4, 0xFE, 0xFE },
-    { 0xB4, 0xFE, 0xD5 },
-    { 0xB4, 0xFE, 0xB4 },
-    { 0xD5, 0xFE, 0xB4 },
-    { 0xFE, 0xFE, 0xB4 },
-    { 0xFE, 0xD5, 0xAC }
+    { 254, 172, 172 },
+    { 254, 172, 213 },
+    { 254, 180, 154 },
+    { 213, 180, 254 },
+    { 180, 180, 254 },
+    { 180, 221, 254 },
+    { 180, 254, 254 },
+    { 180, 254, 213 },
+    { 180, 254, 180 },
+    { 213, 254, 180 },
+    { 254, 254, 180 },
+    { 254, 213, 172 }
 };
 
 f32 D_E003CD1C[] = {
@@ -66,18 +66,18 @@ f32 D_E003CD1C[] = {
     0.8f
 };
 
-void damage_indicator_init(EffectInstance *effectInst);
-void damage_indicator_update(EffectInstance *effectInst);
-void damage_indicator_render(EffectInstance *effectInst);
-void func_E003C47C(EffectInstance *effectInst);
-void func_E003C498(EffectInstance *effectInst);
+void damage_indicator_init(EffectInstance* effect);
+void damage_indicator_update(EffectInstance* effect);
+void damage_indicator_render(EffectInstance* effect);
+void func_E003C47C(EffectInstance* effect);
+void func_E003C498(EffectInstance* effect);
 
-void damage_indicator_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, s32 numParts, EffectInstance **effectOut) {
+void damage_indicator_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, s32 numParts, EffectInstance** effectOut) {
     EffectBlueprint bp;
     EffectBlueprint* bpPtr = &bp;
     EffectInstance* effect;
     f32 temp_f20;
-    DamageIndicatorFXData *part;
+    DamageIndicatorFXData* part;
     s32 origNumParts = numParts;
     s32 i;
 
@@ -121,19 +121,19 @@ void damage_indicator_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32
         part->unk_1C.x = -shim_sin_deg(temp_f20) * arg4 * 1.5;
         part->unk_1C.y = shim_cos_deg(temp_f20) * arg4 * 1.5;
         part->unk_1C.z = 0;
-        part->alpha = 0xFF;
+        part->alpha = 255;
     }
     *effectOut = effect;
 }
 
-void damage_indicator_init(EffectInstance *effectInst) {
+void damage_indicator_init(EffectInstance* effect) {
 }
 
-void damage_indicator_update(EffectInstance* effectInst) {
+void damage_indicator_update(EffectInstance* effect) {
     s32 temp_a2;
     s32 temp_t0;
     s32 duration;
-    DamageIndicatorFXData* part = effectInst->data;
+    DamageIndicatorFXData* part = effect->data;
     f32 phi_f12;
     s32 i;
 
@@ -148,12 +148,12 @@ void damage_indicator_update(EffectInstance* effectInst) {
 
     /* if duration is less than 0, remove effect*/
     if (duration < 0) {
-        shim_remove_effect(effectInst);
+        shim_remove_effect(effect);
         return;
     }
 
     part++;
-    for(i = 1; i < effectInst->numParts; i++, part++) {
+    for(i = 1; i < effect->numParts; i++, part++) {
         f32 x, y, z;
 
         if (duration > 5) {
@@ -178,22 +178,22 @@ void damage_indicator_update(EffectInstance* effectInst) {
         part->unk_04.y += part->unk_1C.y;
         part->unk_04.z += part->unk_1C.z;
 
-        part->unk_38 = (temp_t0 < 0x29) ? (f32)D_E003CCD0[temp_a2] * 0.01 : 0.0f;
+        part->unk_38 = (temp_t0 <= 40) ? (f32)D_E003CCD0[temp_a2] * 0.01 : 0.0f;
     }
 }
 
-void damage_indicator_render(EffectInstance *effectInst) {
+void damage_indicator_render(EffectInstance* effect) {
 }
 
-void func_E003C47C(EffectInstance *effectInst) {
-    func_E003C498(effectInst);
+void func_E003C47C(EffectInstance* effect) {
+    func_E003C498(effect);
 }
 
 #ifdef NON_MATCHING
-void func_E003C498(EffectInstance *effectInst) {
+void func_E003C498(EffectInstance* effect) {
     Matrix4f sp20;
     Matrix4f sp60;
-    DamageIndicatorFXData* part = effectInst->data;
+    DamageIndicatorFXData* part = effect->data;
     s32 i;
     s32 numParts;
     s32 spA0;
@@ -202,26 +202,26 @@ void func_E003C498(EffectInstance *effectInst) {
 
     spA8 = part->numParts;
     gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, OS_PHYSICAL_TO_K0(effectInst->graphics->data));
+    gSPSegment(gMasterGfxPos++, 0x09, OS_PHYSICAL_TO_K0(effect->graphics->data));
     shim_guTranslateF(sp20, part->unk_04.x, part->unk_04.y, part->unk_04.z);
     shim_guRotateF(sp60, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
     shim_guMtxCatF(sp60, sp20, sp20);
     shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
     gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
-    numParts = effectInst->numParts;
+    numParts = effect->numParts;
     spA0 = part->unk_34 - 1;
     spA4 = numParts - 1;
-    part = &((DamageIndicatorFXData *)effectInst->data)[numParts - 1];
+    part = &((DamageIndicatorFXData*)effect->data)[numParts - 1];
 
-    if (part->alpha == 0xFF) {
+    if (part->alpha == 255) {
         gDPSetRenderMode(gMasterGfxPos++, G_RM_AA_TEX_EDGE, G_RM_AA_TEX_EDGE2);
         gDPSetCombineLERP(gMasterGfxPos++, 1, 0, SHADE, PRIMITIVE, PRIMITIVE, 0, TEXEL0, 0, 1, 0, SHADE, PRIMITIVE, PRIMITIVE, 0, TEXEL0, 0);
     } else {
         gDPSetRenderMode(gMasterGfxPos++, G_RM_CLD_SURF, G_RM_CLD_SURF2);
         gDPSetCombineLERP(gMasterGfxPos++, 1, 0, SHADE, PRIMITIVE, PRIMITIVE, 0, TEXEL0, 0, 1, 0, SHADE, PRIMITIVE, PRIMITIVE, 0, TEXEL0, 0);
     }
-    for(i = 1; i < effectInst->numParts; i++, part--) {
+    for(i = 1; i < effect->numParts; i++, part--) {
         s32 index = (i + spA0);
         gDPSetPrimColor(gMasterGfxPos++, 0, 0, D_E003CCF8[index % 12].r, D_E003CCF8[index % 12].g, D_E003CCF8[index % 12].b, part->alpha);
         gSPDisplayList(gMasterGfxPos++, D_09001D40);
