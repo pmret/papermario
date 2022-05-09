@@ -544,7 +544,7 @@ typedef struct AuraFXData {
     /* 0x1C */ f32 unk_1C;
     /* 0x20 */ f32 unk_20;
     /* 0x24 */ f32 unk_24;
-    /* 0x28 */ s32 unk_28;
+    /* 0x28 */ s32 primA;
     /* 0x2C */ s32 unk_2C;
     /* 0x30 */ s32 unk_30;
     /* 0x34 */ f32 unk_34;
@@ -563,13 +563,13 @@ typedef struct AuraFXData {
                    s32 s;
                    f32 f;
                } unk_64;
-    /* 0x68 */ u8 unk_68;
-    /* 0x69 */ u8 unk_69;
-    /* 0x6A */ u8 unk_6A;
-    /* 0x6B */ u8 unk_6B;
-    /* 0x6C */ u8 unk_6C;
-    /* 0x6D */ u8 unk_6D;
-    /* 0x6E */ u8 unk_6E;
+    /* 0x68 */ u8 primR;
+    /* 0x69 */ u8 primG;
+    /* 0x6A */ u8 primB;
+    /* 0x6B */ u8 envR;
+    /* 0x6C */ u8 envG;
+    /* 0x6D */ u8 engB;
+    /* 0x6E */ u8 engA;
 } AuraFXData; // size = 0x70
 
 typedef struct BlastFXData {
