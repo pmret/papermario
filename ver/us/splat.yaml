@@ -2528,7 +2528,8 @@ segments:
     vram: 0xE003C000
     subsegments:
     - [0x34F4C0, c, damage_indicator]
-    - [0x350160, data]
+    - [0x350160, .data, damage_indicator]
+    - [0x350200, .rodata, damage_indicator]
   - [0x350220, bin] # damage_indicator gfx
   - name: effect_purple_ring
     dir: effects
