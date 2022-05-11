@@ -59,7 +59,7 @@ FX_MAIN(lens_flare_main);
 FX_MAIN(got_item_outline_main);
 FX_MAIN(spiky_white_aura_main);
 FX_MAIN(smoke_impact_main);
-FX_MAIN(damage_indicator_main);
+void damage_indicator_main(s32, f32, f32, f32, f32, f32, s32, EffectInstance**);
 FX_MAIN(purple_ring_main);
 FX_MAIN(flame_main);
 FX_MAIN(stars_burst_main);
