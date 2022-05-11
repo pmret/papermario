@@ -3649,7 +3649,7 @@ segments:
     overlay: True
     subsegments:
     - [0x4269D0, c, fire_shell]
-    - [0x427320, data]
+    - [0x427320]
   - type: code
     start: 0x4273B0
     vram: 0x802A9000
