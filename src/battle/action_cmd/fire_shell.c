@@ -63,7 +63,6 @@ ApiStatus func_802A9000_4269D0(void) {
     return ApiStatus_DONE2;
 }
 
-
 #include "common/MashActionCommandInit.inc.c"
 
 void func_802A9294_426C64(void) {

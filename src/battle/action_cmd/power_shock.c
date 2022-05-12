@@ -20,7 +20,7 @@ ApiStatus N(CreateHudElements)(Evt* script, s32 isInitialCall) {
     s32 hudElement;
     s32 temp_v1;
 
-    battleStatus->unk_82 = 0x64;
+    battleStatus->unk_82 = 100;
     battleStatus->unk_434 = D_802943A0;
 
     if (battleStatus->unk_83 == 0) {
@@ -167,7 +167,7 @@ void func_802A9310_42D220(void) {
             actionCommandStatus->unk_5C = 0;
             D_802A9B00 = 1;
             actionCommandStatus->unk_54 = actionCommandStatus->unk_52;
-            sfx_play_sound_with_params(0x80000041, 0U, 0U, 0U);
+            sfx_play_sound_with_params(0x80000041, 0, 0, 0);
             actionCommandStatus->state = 11;
             // fallthrough
         case 11:
@@ -176,33 +176,33 @@ void func_802A9310_42D220(void) {
             if (actionCommandStatus->unk_68 == 0) {
                 if (actionCommandStatus->unk_64 != 0) {
                     temp_lo = actionCommandStatus->mashMeterCutoffs[actionCommandStatus->mashMeterIntervals];
-                    temp_lo = actionCommandStatus->unk_44 / temp_lo;
-                    phi_v0 = actionCommandStatus->unk_44 - D_802A9AA2_42D9B2[temp_lo / 20 * 2];
+                    temp_lo = actionCommandStatus->barFillLevel / temp_lo;
+                    phi_v0 = actionCommandStatus->barFillLevel - D_802A9AA2_42D9B2[temp_lo / 20 * 2];
                 } else {
-                    phi_v0 = actionCommandStatus->unk_44 - 10;
+                    phi_v0 = actionCommandStatus->barFillLevel - 10;
                 }
-                actionCommandStatus->unk_44 = phi_v0;
-                if (actionCommandStatus->unk_44 < 0) {
-                    actionCommandStatus->unk_44 = 0;
+                actionCommandStatus->barFillLevel = phi_v0;
+                if (actionCommandStatus->barFillLevel < 0) {
+                    actionCommandStatus->barFillLevel = 0;
                 }
             }
 
             if ((battleStatus->currentButtonsPressed & 0x8000) != 0) {
                 if (actionCommandStatus->unk_64 != 0) {
                     // unk_434 = array of scaling values based on attack difficulty (unk_50).
-                    actionCommandStatus->unk_44 +=
+                    actionCommandStatus->barFillLevel +=
                         battleStatus->unk_434[actionCommandStatus->unk_50] * 850 / 100 * actionCommandStatus->unk_64 / 100;
                 } else {
-                    actionCommandStatus->unk_44 += 100;
-                    if (actionCommandStatus->unk_44 >= 500) {
-                        actionCommandStatus->unk_44 = 500;
+                    actionCommandStatus->barFillLevel += 100;
+                    if (actionCommandStatus->barFillLevel >= 500) {
+                        actionCommandStatus->barFillLevel = 500;
                     }
                 }
             }
 
-            if (actionCommandStatus->unk_44 > 10000) {
+            if (actionCommandStatus->barFillLevel > 10000) {
                 hudElement = actionCommandStatus->hudElements[3];
-                actionCommandStatus->unk_44 = 10000;
+                actionCommandStatus->barFillLevel = 10000;
                 actionCommandStatus->unk_68 = 1;
                 hud_element_set_render_pos(
                     hudElement,
@@ -211,11 +211,11 @@ void func_802A9310_42D220(void) {
                 hud_element_clear_flags(hudElement, HUD_ELEMENT_FLAGS_DISABLED);
             }
 
-            battleStatus->unk_84 = actionCommandStatus->unk_44 / 100;
+            battleStatus->unk_84 = actionCommandStatus->barFillLevel / 100;
             sfx_adjust_env_sound_params(0x80000041, 0, 0, battleStatus->unk_84 * 12);
 
             if (actionCommandStatus->unk_54 == 0) {
-                phi_a1 = actionCommandStatus->unk_44;
+                phi_a1 = actionCommandStatus->barFillLevel;
                 if (actionCommandStatus->unk_64 == 0) {
                     phi_a1 = 0;
                 }
@@ -249,9 +249,9 @@ void func_802A9310_42D220(void) {
             break;
         case 12:
             if (actionCommandStatus->unk_64 == 0) {
-                actionCommandStatus->unk_44 -= 100;
-                if (actionCommandStatus->unk_44 < 0) {
-                    actionCommandStatus->unk_44 = 0;
+                actionCommandStatus->barFillLevel -= 100;
+                if (actionCommandStatus->barFillLevel < 0) {
+                    actionCommandStatus->barFillLevel = 0;
                 }
             }
             if (actionCommandStatus->unk_54 != 0) {
