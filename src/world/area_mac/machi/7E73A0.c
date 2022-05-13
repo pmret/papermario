@@ -82,7 +82,7 @@ ApiStatus func_80240038_7E73D8(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus func_80240040_7E73E0(Evt* script, s32 isInitialCall) {
-    return 0;
+    return ApiStatus_BLOCK;
 }
 
 INCLUDE_ASM(s32, "world/area_mac/machi/7E73A0", func_80240048_7E73E8);
