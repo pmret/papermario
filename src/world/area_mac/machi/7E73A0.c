@@ -81,7 +81,7 @@ ApiStatus func_80240038_7E73D8(Evt* script, s32 isInitialCall) {
     return 2;
 }
 
-s32 func_80240040_7E73E0(void) {
+ApiStatus func_80240040_7E73E0(Evt* script, s32 isInitialCall) {
     return 0;
 }
 
