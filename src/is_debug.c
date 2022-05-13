@@ -90,7 +90,7 @@ u32 is_debug_print(void* arg0, const unsigned char* str, u32 count) {
 #ifdef VERSION_US
 // Nop issue with the rodata string
     #ifdef NON_MATCHING
-void func_80025F44(const char* message, char* file, s32 line) {
+void AssertionFailure(const char* message, char* file, s32 line) {
     osSyncPrintf("File:%s Line:%d  %s \n", file, line, message);
     PANIC();
 }
@@ -99,7 +99,7 @@ INCLUDE_ASM(void, "is_debug", func_80025F44, char* arg0, char* file, s32 line);
     #endif
 #elif VERSION_JP
 extern const char D_80097D10[]; // "File:%s Line:%d  %s \n\0\0\0"
-void func_80025F44(char* arg0, char* file, s32 line, char* arg3) {
+void AssertionFailure(char* arg0, char* file, s32 line, char* arg3) {
     osSyncPrintf(D_80097D10, file, line, arg0);
     PANIC();
 }
