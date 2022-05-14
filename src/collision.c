@@ -113,8 +113,8 @@ void load_map_hit_asset(void) {
     map->hitAssetCollisionOffset = uncompressedData->collisionOffset;
     map->hitAssetZoneOffset = uncompressedData->zoneOffset;
 
-    load_hit_data(0, uncompressedData);
-    load_hit_data(1, uncompressedData);
+    load_hit_data(0, uncompressedData); // Colliders
+    load_hit_data(1, uncompressedData); // Zones
 
     heap_free(uncompressedData);
 }
@@ -193,19 +193,20 @@ void load_hit_data(s32 idx, HitFile* hit) {
     map = get_current_map_header();
 
     switch (idx) {
-        case 0:
+        case 0: // Colliders
             collisionOffset = map->hitAssetCollisionOffset;
-            if (collisionOffset == 0)
+            if (collisionOffset == 0) {
                 return;
+            }
 
             assetCollisionData = (HitFileHeader*)((void*)hit + collisionOffset);
             collisionData = &gCollisionData;
             break;
-
-        case 1:
+        case 1: // Zones
             collisionOffset = map->hitAssetZoneOffset;
-            if (collisionOffset == 0)
+            if (collisionOffset == 0) {
                 return;
+            }
 
             assetCollisionData = (HitFileHeader*)((void*)hit + collisionOffset);
             collisionData = &gZoneCollisionData;
@@ -287,12 +288,13 @@ void load_hit_data(s32 idx, HitFile* hit) {
                 normalX = e13_y * e21_z - e13_z * e21_y;
                 normalY = e13_z * e21_x - e13_x * e21_z;
                 normalZ = e13_x * e21_y - e13_y * e21_x;
-                coeff  = SQ(normalX) + SQ(normalY) + SQ(normalZ);
+                coeff = SQ(normalX) + SQ(normalY) + SQ(normalZ);
 
-                if (coeff != 0)
+                if (coeff != 0) {
                     coeff = 1.0f / sqrtf(coeff);
-                else
+                } else {
                     coeff = 0.0f;
+                }
 
                 triangle->normal.x = normalX * coeff;
                 triangle->normal.y = normalY * coeff;
@@ -330,9 +332,9 @@ void parent_collider_to_model(s16 colliderID, s16 modelIndex) {
     collider->vertexTable = collision_heap_malloc(vertexBufferSize * 0x18);
     for (i = 0, vertexTable = collider->vertexTable; i < vertexBufferSize; vertexPtr++, vertexTable += 2, i++) {
         vertex = *vertexPtr;
-        vertexTable->x = vertexTable[1].x = vertex->x;
-        vertexTable->y = vertexTable[1].y = vertex->y;
-        vertexTable->z = vertexTable[1].z = vertex->z;
+        vertexTable[0].x = vertexTable[1].x = vertex->x;
+        vertexTable[0].y = vertexTable[1].y = vertex->y;
+        vertexTable[0].z = vertexTable[1].z = vertex->z;
     }
 
     vertexTable = collider->vertexTable;
@@ -348,9 +350,11 @@ void parent_collider_to_model(s16 colliderID, s16 modelIndex) {
 void _add_hit_vert_to_buffer(Vec3f** buf, Vec3f* vert, s32* bufSize) {
     s32 i;
 
-    for (i = 0; i < *bufSize; i++)
-        if (buf[i] == vert)
+    for (i = 0; i < *bufSize; i++) {
+        if (buf[i] == vert) {
             break;
+        }
+    }
 
     if (i == *bufSize) {
         buf[i] = vert;
@@ -449,10 +453,11 @@ void update_collider_transform(s16 colliderID) {
         normalZ = e13_x * e21_y - e13_y * e21_x;
         coeff  = SQ(normalX) + SQ(normalY) + SQ(normalZ);
 
-        if (coeff != 0)
+        if (coeff != 0) {
             coeff = 1.0f / sqrtf(coeff);
-        else
+        } else {
             coeff = 0.0f;
+        }
 
         triangle->normal.x = normalX * coeff;
         triangle->normal.y = normalY * coeff;
@@ -505,49 +510,68 @@ s32 test_ray_triangle_general(ColliderTriangle* triangle, Vec3f* vertices) {
                           triangle->normal.z * (gCollisionRayStartZ - v1->z);
 
     if (triangle->oneSided) {
-        if (distToTrianglePlane < 0)
+        if (distToTrianglePlane < 0) {
             return FALSE;
+        }
 
-        if (triangle->normal.x * gCollisionRayDirX + triangle->normal.y * gCollisionRayDirY + triangle->normal.z * gCollisionRayDirZ >= 0)
+        if (triangle->normal.x * gCollisionRayDirX + triangle->normal.y * gCollisionRayDirY + triangle->normal.z * gCollisionRayDirZ >= 0) {
             return FALSE;
+        }
 
         if ((gCollisionRayStartX - v1->x) * (triangle->e13.z * gCollisionRayDirY - triangle->e13.y * gCollisionRayDirZ) +
             (gCollisionRayStartY - v1->y) * (triangle->e13.x * gCollisionRayDirZ - triangle->e13.z * gCollisionRayDirX) +
             (gCollisionRayStartZ - v1->z) * (triangle->e13.y * gCollisionRayDirX - triangle->e13.x * gCollisionRayDirY) < 0)
+        {
             return FALSE;
+        }
 
         if ((gCollisionRayStartX - v2->x) * (triangle->e21.z * gCollisionRayDirY - triangle->e21.y * gCollisionRayDirZ) +
             (gCollisionRayStartY - v2->y) * (triangle->e21.x * gCollisionRayDirZ - triangle->e21.z * gCollisionRayDirX) +
             (gCollisionRayStartZ - v2->z) * (triangle->e21.y * gCollisionRayDirX - triangle->e21.x * gCollisionRayDirY) < 0)
+        {
             return FALSE;
+        }
 
         if ((gCollisionRayStartX - v3->x) * (triangle->e32.z * gCollisionRayDirY - triangle->e32.y * gCollisionRayDirZ) +
             (gCollisionRayStartY - v3->y) * (triangle->e32.x * gCollisionRayDirZ - triangle->e32.z * gCollisionRayDirX) +
             (gCollisionRayStartZ - v3->z) * (triangle->e32.y * gCollisionRayDirX - triangle->e32.x * gCollisionRayDirY) < 0)
+        {
             return FALSE;
+        }
     } else {
-        if ((triangle->normal.x * gCollisionRayDirX + triangle->normal.y * gCollisionRayDirY + triangle->normal.z * gCollisionRayDirZ) * distToTrianglePlane >= 0)
+        if ((triangle->normal.x * gCollisionRayDirX + triangle->normal.y * gCollisionRayDirY + triangle->normal.z * gCollisionRayDirZ) * distToTrianglePlane >= 0) {
             return FALSE;
+        }
 
         if (((gCollisionRayStartX - v1->x) * (triangle->e13.z * gCollisionRayDirY - triangle->e13.y * gCollisionRayDirZ) +
              (gCollisionRayStartY - v1->y) * (triangle->e13.x * gCollisionRayDirZ - triangle->e13.z * gCollisionRayDirX) +
-             (gCollisionRayStartZ - v1->z) * (triangle->e13.y * gCollisionRayDirX - triangle->e13.x * gCollisionRayDirY)) * distToTrianglePlane < 0)
+             (gCollisionRayStartZ - v1->z) * (triangle->e13.y * gCollisionRayDirX - triangle->e13.x * gCollisionRayDirY)
+            ) * distToTrianglePlane < 0)
+        {
             return FALSE;
+        }
 
         if (((gCollisionRayStartX - v2->x) * (triangle->e21.z * gCollisionRayDirY - triangle->e21.y * gCollisionRayDirZ) +
              (gCollisionRayStartY - v2->y) * (triangle->e21.x * gCollisionRayDirZ - triangle->e21.z * gCollisionRayDirX) +
-             (gCollisionRayStartZ - v2->z) * (triangle->e21.y * gCollisionRayDirX - triangle->e21.x * gCollisionRayDirY)) * distToTrianglePlane < 0)
+             (gCollisionRayStartZ - v2->z) * (triangle->e21.y * gCollisionRayDirX - triangle->e21.x * gCollisionRayDirY)
+            ) * distToTrianglePlane < 0)
+        {
             return FALSE;
+        }
 
         if (((gCollisionRayStartX - v3->x) * (triangle->e32.z * gCollisionRayDirY - triangle->e32.y * gCollisionRayDirZ) +
              (gCollisionRayStartY - v3->y) * (triangle->e32.x * gCollisionRayDirZ - triangle->e32.z * gCollisionRayDirX) +
-             (gCollisionRayStartZ - v3->z) * (triangle->e32.y * gCollisionRayDirX - triangle->e32.x * gCollisionRayDirY)) * distToTrianglePlane < 0)
+             (gCollisionRayStartZ - v3->z) * (triangle->e32.y * gCollisionRayDirX - triangle->e32.x * gCollisionRayDirY)
+            ) * distToTrianglePlane < 0)
+        {
             return FALSE;
+        }
     }
 
     cosAngle = triangle->normal.x * gCollisionRayDirX + triangle->normal.y * gCollisionRayDirY + triangle->normal.z * gCollisionRayDirZ;
-    if (gCollisionRayLength >= 0 && gCollisionRayLength <= -distToTrianglePlane / cosAngle)
+    if (gCollisionRayLength >= 0 && gCollisionRayLength <= -distToTrianglePlane / cosAngle){
         return FALSE;
+    }
 
     gCollisionRayLength = -distToTrianglePlane  / cosAngle;
 
@@ -568,10 +592,9 @@ s32 test_ray_triangle_down(ColliderTriangle* triangle, Vec3f* vertices) {
     Vec3f* v2;
     Vec3f* v3;
 
-    if (triangle->normal.x == 0 &&
-        triangle->normal.y == 0 &&
-        triangle->normal.z == 0)
+    if (triangle->normal.x == 0 && triangle->normal.y == 0 && triangle->normal.z == 0) {
         return FALSE;
+    }
 
     v1 = triangle->v1;
     v2 = triangle->v2;
@@ -582,37 +605,46 @@ s32 test_ray_triangle_down(ColliderTriangle* triangle, Vec3f* vertices) {
                           triangle->normal.z * (gCollisionRayStartZ - v1->z);
 
     if (triangle->oneSided) {
-        if (distToTrianglePlane < 0)
+        if (distToTrianglePlane < 0) {
             return FALSE;
+        }
 
         if (triangle->normal.y <= 0)
             return FALSE;
 
-        if ((gCollisionRayStartZ - v1->z) * triangle->e13.x - (gCollisionRayStartX - v1->x) * triangle->e13.z < 0)
+        if ((gCollisionRayStartZ - v1->z) * triangle->e13.x - (gCollisionRayStartX - v1->x) * triangle->e13.z < 0){
             return FALSE;
+        }
 
-        if ((gCollisionRayStartZ - v2->z) * triangle->e21.x - (gCollisionRayStartX - v2->x) * triangle->e21.z < 0)
+        if ((gCollisionRayStartZ - v2->z) * triangle->e21.x - (gCollisionRayStartX - v2->x) * triangle->e21.z < 0){
             return FALSE;
+        }
 
-        if ((gCollisionRayStartZ - v3->z) * triangle->e32.x - (gCollisionRayStartX - v3->x) * triangle->e32.z < 0)
+        if ((gCollisionRayStartZ - v3->z) * triangle->e32.x - (gCollisionRayStartX - v3->x) * triangle->e32.z < 0){
             return FALSE;
+        }
     } else {
-        if (triangle->normal.y * distToTrianglePlane <= 0)
+        if (triangle->normal.y * distToTrianglePlane <= 0){
             return FALSE;
+        }
 
-        if (((gCollisionRayStartZ - v1->z) * triangle->e13.x - (gCollisionRayStartX - v1->x) * triangle->e13.z) * distToTrianglePlane < 0)
+        if (((gCollisionRayStartZ - v1->z) * triangle->e13.x - (gCollisionRayStartX - v1->x) * triangle->e13.z) * distToTrianglePlane < 0){
             return FALSE;
+        }
 
-        if (((gCollisionRayStartZ - v2->z) * triangle->e21.x - (gCollisionRayStartX - v2->x) * triangle->e21.z) * distToTrianglePlane < 0)
+        if (((gCollisionRayStartZ - v2->z) * triangle->e21.x - (gCollisionRayStartX - v2->x) * triangle->e21.z) * distToTrianglePlane < 0){
             return FALSE;
+        }
 
-        if (((gCollisionRayStartZ - v3->z) * triangle->e32.x - (gCollisionRayStartX - v3->x) * triangle->e32.z) * distToTrianglePlane < 0)
+        if (((gCollisionRayStartZ - v3->z) * triangle->e32.x - (gCollisionRayStartX - v3->x) * triangle->e32.z) * distToTrianglePlane < 0){
             return FALSE;
+        }
     }
 
     cosAngle = -triangle->normal.y;
-    if (gCollisionRayLength >= 0 && gCollisionRayLength <= -distToTrianglePlane / cosAngle)
+    if (gCollisionRayLength >= 0 && gCollisionRayLength <= -distToTrianglePlane / cosAngle) {
         return FALSE;
+    }
 
     gCollisionRayLength = -distToTrianglePlane  / cosAngle;
 
@@ -633,10 +665,9 @@ s32 test_ray_triangle_horizontal(ColliderTriangle* triangle, Vec3f *vertices) {
     Vec3f* v2;
     Vec3f* v3;
 
-    if (triangle->normal.x == 0 &&
-        triangle->normal.y == 0 &&
-        triangle->normal.z == 0)
+    if (triangle->normal.x == 0 && triangle->normal.y == 0 && triangle->normal.z == 0) {
         return FALSE;
+    }
 
     v1 = triangle->v1;
     v2 = triangle->v2;
@@ -647,49 +678,66 @@ s32 test_ray_triangle_horizontal(ColliderTriangle* triangle, Vec3f *vertices) {
                           triangle->normal.z * (gCollisionRayStartZ - v1->z);
 
     if (triangle->oneSided) {
-        if (distToTrianglePlane < 0)
+        if (distToTrianglePlane < 0) {
             return FALSE;
+        }
 
-        if (triangle->normal.x * gCollisionRayDirX + triangle->normal.z * gCollisionRayDirZ >= 0)
+        if (triangle->normal.x * gCollisionRayDirX + triangle->normal.z * gCollisionRayDirZ >= 0) {
             return FALSE;
+        }
 
         if ((gCollisionRayStartX - v1->x) * (-triangle->e13.y * gCollisionRayDirZ) +
             (gCollisionRayStartY - v1->y) * (triangle->e13.x * gCollisionRayDirZ - triangle->e13.z * gCollisionRayDirX) +
             (gCollisionRayStartZ - v1->z) * (triangle->e13.y * gCollisionRayDirX) < 0)
+        {
             return FALSE;
+        }
 
         if ((gCollisionRayStartX - v2->x) * (-triangle->e21.y * gCollisionRayDirZ) +
             (gCollisionRayStartY - v2->y) * (triangle->e21.x * gCollisionRayDirZ - triangle->e21.z * gCollisionRayDirX) +
             (gCollisionRayStartZ - v2->z) * (triangle->e21.y * gCollisionRayDirX) < 0)
+        {
             return FALSE;
+        }
 
         if ((gCollisionRayStartX - v3->x) * (-triangle->e32.y * gCollisionRayDirZ) +
             (gCollisionRayStartY - v3->y) * (triangle->e32.x * gCollisionRayDirZ - triangle->e32.z * gCollisionRayDirX) +
             (gCollisionRayStartZ - v3->z) * (triangle->e32.y * gCollisionRayDirX) < 0)
+        {
             return FALSE;
+        }
     } else {
         if ((triangle->normal.x * gCollisionRayDirX + triangle->normal.z * gCollisionRayDirZ) * distToTrianglePlane >= 0)
+        {
             return FALSE;
+        }
 
         if (((gCollisionRayStartX - v1->x) * (-triangle->e13.y * gCollisionRayDirZ) +
             (gCollisionRayStartY - v1->y) * (triangle->e13.x * gCollisionRayDirZ - triangle->e13.z * gCollisionRayDirX) +
             (gCollisionRayStartZ - v1->z) * (triangle->e13.y * gCollisionRayDirX)) * distToTrianglePlane < 0)
+        {
             return FALSE;
+        }
 
         if (((gCollisionRayStartX - v2->x) * (-triangle->e21.y * gCollisionRayDirZ) +
             (gCollisionRayStartY - v2->y) * (triangle->e21.x * gCollisionRayDirZ - triangle->e21.z * gCollisionRayDirX) +
             (gCollisionRayStartZ - v2->z) * (triangle->e21.y * gCollisionRayDirX)) * distToTrianglePlane < 0)
+        {
             return FALSE;
+        }
 
         if (((gCollisionRayStartX - v3->x) * (-triangle->e32.y * gCollisionRayDirZ) +
             (gCollisionRayStartY - v3->y) * (triangle->e32.x * gCollisionRayDirZ - triangle->e32.z * gCollisionRayDirX) +
             (gCollisionRayStartZ - v3->z) * (triangle->e32.y * gCollisionRayDirX)) * distToTrianglePlane < 0)
+        {
             return FALSE;
+        }
     }
 
     cosAngle = triangle->normal.x * gCollisionRayDirX + triangle->normal.z * gCollisionRayDirZ;
-    if (gCollisionRayLength >= 0 && gCollisionRayLength <= -distToTrianglePlane / cosAngle)
+    if (gCollisionRayLength >= 0 && gCollisionRayLength <= -distToTrianglePlane / cosAngle) {
         return FALSE;
+    }
 
     gCollisionRayLength = -distToTrianglePlane  / cosAngle;
 
@@ -713,8 +761,9 @@ s32 test_ray_colliders(s32 ignoreFlags, f32 startX, f32 startY, f32 startZ, f32 
     s32 colliderID;
     f32 min_x, min_y, min_z, max_x, max_y, max_z;
 
-    if (dirX == 0 && dirY == 0 && dirZ == 0)
+    if (dirX == 0 && dirY == 0 && dirZ == 0) {
         return 0;
+    }
 
     collisionData = &gCollisionData;
     gCollisionRayDirX = dirX;
@@ -761,21 +810,29 @@ s32 test_ray_colliders(s32 ignoreFlags, f32 startX, f32 startY, f32 startZ, f32 
             min_z > collider->aabb->max.z   ||
             max_y < collider->aabb->min.y   ||
             min_y > collider->aabb->max.y)
-                continue;
+        {
+            continue;
+        }
 
         triangle = collider->triangleTable;
         if (gCollisionRayDirX == 0 && gCollisionRayDirZ == 0 && gCollisionRayDirY == -1.0) {
-            for (j = 0; j < collider->numTriangles; j++)
-                if (test_ray_triangle_down(triangle++, collisionData->vertices))
+            for (j = 0; j < collider->numTriangles; j++) {
+                if (test_ray_triangle_down(triangle++, collisionData->vertices)) {
                     colliderID = i;
+                }
+            }
         } else if (gCollisionRayDirY == 0) {
-            for (j = 0; j < collider->numTriangles; j++)
-                if (test_ray_triangle_horizontal(triangle++, collisionData->vertices))
+            for (j = 0; j < collider->numTriangles; j++) {
+                if (test_ray_triangle_horizontal(triangle++, collisionData->vertices)) {
                     colliderID = i;
+                }
+            }
         } else {
-            for (j = 0; j < collider->numTriangles; j++)
-                if (test_ray_triangle_general(triangle++, collisionData->vertices))
+            for (j = 0; j < collider->numTriangles; j++) {
+                if (test_ray_triangle_general(triangle++, collisionData->vertices)) {
                     colliderID = i;
+                }
+            }
         }
     }
 
@@ -788,8 +845,9 @@ s32 test_ray_colliders(s32 ignoreFlags, f32 startX, f32 startY, f32 startZ, f32 
         *hitNy = gCollisionNormalY;
         *hitNz = gCollisionNormalZ;
         return colliderID;
-    } else
+    } else {
         return colliderID;
+    }
 }
 
 s32 test_ray_zones(f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f32 dirZ,
@@ -820,9 +878,11 @@ s32 test_ray_zones(f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f32 d
             continue;
 
         triangle = collider->triangleTable;
-        for (j = 0; j < collider->numTriangles; j++)
-            if (test_ray_triangle_down(triangle++, collisionData->vertices))
+        for (j = 0; j < collider->numTriangles; j++) {
+            if (test_ray_triangle_down(triangle++, collisionData->vertices)) {
                 colliderID = i;
+            }
+        }
     }
 
     if (colliderID >= 0) {
@@ -834,8 +894,9 @@ s32 test_ray_zones(f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f32 d
         *hitNy = gCollisionNormalY;
         *hitNz = gCollisionNormalZ;
         return colliderID;
-    } else
+    } else {
         return colliderID;
+    }
 }
 
 f32 test_ray_collider_horizontal(s32 ignoreFlags, s32 colliderID, f32 x, f32 y, f32 z, f32 length, f32 yaw) {
@@ -904,32 +965,35 @@ s32 test_ray_entities(f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f3
     for (i = 0; i < MAX_ENTITIES; i++) {
         entity = get_entity_by_index(i);
 
-        if (entity == NULL || (entity->flags & 0x40000020))
+        if (entity == NULL || (entity->flags & 0x40000020)) {
             continue;
+        }
 
         dist = hitDepthHoriz + entity->effectiveSize;
-        if (startX > entity->position.x + dist ||
-            startX < entity->position.x - dist)
+        if (startX > entity->position.x + dist || startX < entity->position.x - dist) {
             continue;
+        }
 
-        if (startZ > entity->position.z + dist ||
-            startZ < entity->position.z - dist)
+        if (startZ > entity->position.z + dist || startZ < entity->position.z - dist) {
             continue;
+        }
 
         switch (type) {
-        case 0:
-        case 1:
-            dist = entity->position.y;
-            dist2 = hitDepthDown + entity->effectiveSize * 2;
-            if (dist + dist2 < startY || startY < dist - dist2)
-                continue;
-            break;
-        case 2:
-            dist = entity->position.y;
-            dist2 = entity->effectiveSize * 2;
-            if (dist + dist2 < startY || startY < dist - dist2)
-                continue;
-            break;
+            case 0:
+            case 1:
+                dist = entity->position.y;
+                dist2 = hitDepthDown + entity->effectiveSize * 2;
+                if (dist + dist2 < startY || startY < dist - dist2) {
+                    continue;
+                }
+                break;
+            case 2:
+                dist = entity->position.y;
+                dist2 = entity->effectiveSize * 2;
+                if (dist + dist2 < startY || startY < dist - dist2) {
+                    continue;
+                }
+                break;
         }
 
         aabbX = entity->aabb.x / 2;
@@ -963,8 +1027,9 @@ s32 test_ray_entities(f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f3
             triangle->normal.y = gEntityColliderNormals[j].y;
             triangle->normal.z = gEntityColliderNormals[j].z;
 
-            if (hasCollision = test_ray_triangle_general(&entityTriangle, boxVertices))
+            if (hasCollision = test_ray_triangle_general(&entityTriangle, boxVertices)) {
                 break;
+            }
         }
 
         if (hasCollision && gCollisionRayLength < *hitDepth) {
@@ -972,16 +1037,16 @@ s32 test_ray_entities(f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f3
             *hitDepth = gCollisionRayLength;
 
             switch (type) {
-            case 0:
-                hitDepthDown = gCollisionRayLength;
-                hitDepthHoriz = gCollisionRayLength;
-                break;
-            case 1:
-                hitDepthDown = gCollisionRayLength;
-                break;
-            case 2:
-                hitDepthHoriz = gCollisionRayLength;
-                break;
+                case 0:
+                    hitDepthDown = gCollisionRayLength;
+                    hitDepthHoriz = gCollisionRayLength;
+                    break;
+                case 1:
+                    hitDepthDown = gCollisionRayLength;
+                    break;
+                case 2:
+                    hitDepthHoriz = gCollisionRayLength;
+                    break;
             }
 
             guRotateF(tempMatrix1, entity->rotation.x, 1.0f, 0.0f, 0.0f);
@@ -1013,48 +1078,49 @@ ApiStatus func_8005DB00(Evt* script, s32 isInitialCall) {
     playerStatus = &gPlayerStatus;
     partnerStatus = &gPartnerActionStatus;
 
-    if (isInitialCall)
+    if (isInitialCall) {
         script->functionTemp[0] = 0;
+    }
 
     switch(script->functionTemp[0]) {
-    case 0:
-        npc->planarFlyDist = evt_get_float_variable(script, LW(0));
-        npc->duration = evt_get_variable(script, LW(1));
-        script->functionTemp[1] = evt_get_variable(script, LW(2));
-        script->functionTemp[2] = evt_get_variable(script, LW(3)) / 2;
-        npc->currentAnim.w = script->varTable[10];
-        script->functionTemp[0] = 1;
-        break;
-    case 1:
-        if (partnerStatus->actingPartner != PARTNER_BOW) {
-            if (npc->duration != 0 && npc->duration != script->functionTemp[0])
-                return ApiStatus_BLOCK;
+        case 0:
+            npc->planarFlyDist = evt_get_float_variable(script, LW(0));
+            npc->duration = evt_get_variable(script, LW(1));
+            script->functionTemp[1] = evt_get_variable(script, LW(2));
+            script->functionTemp[2] = evt_get_variable(script, LW(3)) / 2;
+            npc->currentAnim.w = script->varTable[10];
+            script->functionTemp[0] = 1;
+            break;
+        case 1:
+            if (partnerStatus->actingPartner != PARTNER_BOW) {
+                if (npc->duration != 0 && npc->duration != script->functionTemp[0])
+                    return ApiStatus_BLOCK;
 
-            if (npc->duration == 0) {
-                if (sqrtf(SQ((playerStatus->position.x - npc->pos.x)) +
-                          SQ((playerStatus->position.y - npc->pos.y)) +
-                          SQ((playerStatus->position.z - npc->pos.z))) <= npc->planarFlyDist) {
-                    targetDir = atan2(npc->pos.x, npc->pos.z, playerStatus->position.x, playerStatus->position.z);
-                    npcYaw = script->functionTemp[1] == -1 ? npc->yaw : script->functionTemp[1];
+                if (npc->duration == 0) {
+                    if (sqrtf(SQ((playerStatus->position.x - npc->pos.x)) +
+                            SQ((playerStatus->position.y - npc->pos.y)) +
+                            SQ((playerStatus->position.z - npc->pos.z))) <= npc->planarFlyDist) {
+                        targetDir = atan2(npc->pos.x, npc->pos.z, playerStatus->position.x, playerStatus->position.z);
+                        npcYaw = script->functionTemp[1] == -1 ? npc->yaw : script->functionTemp[1];
 
-                    if (fabsf(get_clamped_angle_diff(npcYaw, targetDir)) < script->functionTemp[2]) {
-                        script->varTable[0] = 1;
-                        return ApiStatus_DONE2;
+                        if (fabsf(get_clamped_angle_diff(npcYaw, targetDir)) < script->functionTemp[2]) {
+                            script->varTable[0] = 1;
+                            return ApiStatus_DONE2;
+                        }
                     }
-                }
-            } else {
-                if (dist2D(npc->pos.x, npc->pos.z, playerStatus->position.x, playerStatus->position.z) <= npc->planarFlyDist) {
-                    targetDir = atan2(npc->pos.x, npc->pos.z, playerStatus->position.x, playerStatus->position.z);
-                    npcYaw = script->functionTemp[1] == -1 ? npc->yaw : script->functionTemp[1];
+                } else {
+                    if (dist2D(npc->pos.x, npc->pos.z, playerStatus->position.x, playerStatus->position.z) <= npc->planarFlyDist) {
+                        targetDir = atan2(npc->pos.x, npc->pos.z, playerStatus->position.x, playerStatus->position.z);
+                        npcYaw = script->functionTemp[1] == -1 ? npc->yaw : script->functionTemp[1];
 
-                    if (fabsf(get_clamped_angle_diff(npcYaw, targetDir)) < script->functionTemp[2]) {
-                        script->varTable[0] = 1;
-                        return ApiStatus_DONE2;
+                        if (fabsf(get_clamped_angle_diff(npcYaw, targetDir)) < script->functionTemp[2]) {
+                            script->varTable[0] = 1;
+                            return ApiStatus_DONE2;
+                        }
                     }
                 }
             }
-        }
-        break;
+            break;
     }
 
     return ApiStatus_BLOCK;
