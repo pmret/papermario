@@ -5,7 +5,7 @@
 
 #define HUD_ELEMENT_BATTLE_ID_MASK 0x800
 
-typedef enum {
+enum HudScriptCmd {
     HUD_ELEMENT_OP_End,
     HUD_ELEMENT_OP_SetRGBA,
     HUD_ELEMENT_OP_SetCI,
@@ -34,7 +34,9 @@ typedef enum {
     HUD_ELEMENT_OP_ClearFlags,
     HUD_ELEMENT_OP_PlaySound,
     HUD_ELEMENT_OP_SetPivot,
-} HudScript[0];
+};
+
+typedef s32 HudScript;
 
 enum {
     HUD_ELEMENT_SIZE_8x8,

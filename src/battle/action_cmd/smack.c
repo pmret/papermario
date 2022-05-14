@@ -156,13 +156,11 @@ void func_802A9298_42E638(void) {
                 }
 
                 if (actionCommandStatus->unk_68 == 0) {
-
                     if (battleStatus->currentButtonsDown & BUTTON_STICK_LEFT) {
                         actionCommandStatus->unk_5C = TRUE;
                     }
 
                     if (!(battleStatus->currentButtonsDown & BUTTON_STICK_LEFT) && actionCommandStatus->unk_5C) {
-                        s16 phi_v1;
                         if (actionCommandStatus->unk_64 == 0) {
                             actionCommandStatus->barFillLevel += battleStatus->unk_434[actionCommandStatus->unk_50] * 13;
                         } else {

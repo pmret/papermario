@@ -3613,7 +3613,29 @@ segments:
     overlay: True
     subsegments:
     - [0x423C70, c, whirlwind]
-    - [0x424550, data]
+    - start: 0x424550
+      type: .data
+      name: whirlwind
+      subsegments:
+      - [0x424550, .data, whirlwind]
+      - [0x424550, ci4, whirlwind_1, 24, 24]
+      - [0x424670, palette, whirlwind_1]
+      - [0x424690, ci4, whirlwind_2, 24, 24]
+      - [0x4247B0, palette, whirlwind_2]
+      - [0x4247D0, ci4, whirlwind_3, 24, 24]
+      - [0x4248F0, palette, whirlwind_3]
+      - [0x424910, ci4, whirlwind_4, 24, 24]
+      - [0x424A30, palette, whirlwind_4]
+      - [0x424A50, ci4, whirlwind_5, 24, 24]
+      - [0x424B70, palette, whirlwind_5]
+      - [0x424B90, ci4, whirlwind_6, 24, 24]
+      - [0x424CB0, palette, whirlwind_6]
+      - [0x424CD0, ci4, whirlwind_7, 24, 24]
+      - [0x424DF0, palette, whirlwind_7]
+      - [0x424E10, ci4, whirlwind_bubble, 56, 48]
+      - [0x425350, palette, whirlwind_bubble]
+      - [0x425370]
+    - [0x425550]
   - type: code
     start: 0x425590
     vram: 0x802A9000
@@ -3703,7 +3725,7 @@ segments:
     overlay: True
     subsegments:
     - [0x429D20, c, squirt]
-    - [0x42A480, data]
+    - [0x42A480]
   - type: code
     start: 0x42A4F0
     vram: 0x802A9000
@@ -3713,6 +3735,7 @@ segments:
     subsegments:
     - [0x42A4F0, c, water_block]
     - [0x42B650, data]
+    - [0x42C6F0]
   - type: code
     start: 0x42C6F0
     vram: 0x802A9000
@@ -3721,8 +3744,7 @@ segments:
     overlay: True
     subsegments:
     - [0x42C6F0, c, tidal_wave]
-    - [0x42CEB0, data]
-    - [0x42CED0]
+    - [0x42CEB0]
   - type: code
     start: 0x42CF10
     vram: 0x802A9000
@@ -3731,8 +3753,7 @@ segments:
     overlay: True
     subsegments:
     - [0x42CF10, c, power_shock]
-    - [0x42D9B0, data]
-    - [0x42D9D0]
+    - [0x42D9B0]
   - type: code
     start: 0x42DA10
     vram: 0x802A9000
@@ -3741,7 +3762,7 @@ segments:
     overlay: True
     subsegments:
     - [0x42DA10, c, mega_shock]
-    - [0x42E342, .data, mega_shock]
+    - [0x42E342] # todo offset ?
   - type: code
     start: 0x42E3A0
     vram: 0x802A9000
@@ -3777,7 +3798,7 @@ segments:
     overlay: True
     subsegments:
     - [0x430020, c, spook]
-    - [0x430940, data]
+    - [0x430940]
   - dir: battle/area_kmr_part_1
     type: code
     start: 0x4309A0

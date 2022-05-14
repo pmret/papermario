@@ -4,11 +4,17 @@
 #define NAMESPACE action_command_tidal_wave
 
 extern HudScript HudScript_BlueMeter[];
+extern HudScript HudScript_PressAButton[];
+extern HudScript HudScript_PressBButton[];
+extern HudScript HudScript_BButtonHeld[];
+extern HudScript HudScript_8029265C[];
+extern HudScript HudScript_PressCDownButton[];
 extern HudScript HudScript_AButton[];
+extern HudScript HudScript_AButtonDown[];
 extern s32 D_802944A0;
 
-extern HudScript* D_802A97C0_42CEB0[];
-extern HudScript* D_802A97CC_42CEBC[];
+HudScript* D_802A97C0_42CEB0[3] = { HudScript_PressAButton, HudScript_PressBButton, HudScript_PressCDownButton };
+HudScript* D_802A97CC_42CEBC[3] = { HudScript_AButtonDown, HudScript_BButtonHeld, HudScript_8029265C };
 
 ApiStatus N(CreateHudElements)(Evt* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
@@ -121,7 +127,7 @@ void N(update)(void) {
             actionCommandStatus->unk_54 = actionCommandStatus->unk_52;
             actionCommandStatus->unk_5C = rand_int(2);
             actionCommandStatus->state = 11;
-            actionCommandStatus->unk_72 = 0U;
+            actionCommandStatus->unk_72 = 0;
             // fallthrough
         case 11:
             btl_set_popup_duration(99);
@@ -173,7 +179,7 @@ void N(update)(void) {
                 // Determine starting point in input buffer.
                 bufferPos = battleStatus->inputBufferPos - numLookbackFrames;
                 if (bufferPos < 0) {
-                    bufferPos += 0x40;
+                    bufferPos += ARRAY_COUNT(battleStatus->pushInputBuffer);
                 }
 
                 // If determined that 0 frames should be searched, search a minimum of 1.
@@ -183,8 +189,8 @@ void N(update)(void) {
 
                 // Check buffer for past N frames' worth of button presses.
                 for (i = 0; i < numLookbackFrames; i++) {
-                    if (bufferPos >= 0x40) {
-                        bufferPos -= 0x40;
+                    if (bufferPos >= ARRAY_COUNT(battleStatus->pushInputBuffer)) {
+                        bufferPos -= ARRAY_COUNT(battleStatus->pushInputBuffer);
                     }
 
                     // If not locked out from previous wrong press...
@@ -203,7 +209,7 @@ void N(update)(void) {
                             } else {
                                 buttonsPressed = battleStatus->pushInputBuffer[bufferPos];
                                 if (buttonsPressed != 0) {
-                                    if (buttonsPressed & ~0x8000) {
+                                    if (buttonsPressed & ~BUTTON_A) {
                                         actionCommandStatus->unk_60 = TRUE;
                                     } else {
                                         success = TRUE;
@@ -217,7 +223,7 @@ void N(update)(void) {
                             } else {
                                 buttonsPressed = battleStatus->pushInputBuffer[bufferPos];
                                 if (buttonsPressed != 0) {
-                                    if (buttonsPressed & ~0x4000) {
+                                    if (buttonsPressed & ~BUTTON_B) {
                                         actionCommandStatus->unk_60 = TRUE;
                                     } else {
                                         success = TRUE;
@@ -231,7 +237,7 @@ void N(update)(void) {
                             } else {
                                 buttonsPressed = battleStatus->pushInputBuffer[bufferPos];
                                 if (buttonsPressed != 0) {
-                                    if (buttonsPressed & ~0x4) {
+                                    if (buttonsPressed & ~BUTTON_C_DOWN) {
                                         actionCommandStatus->unk_60 = TRUE;
                                     } else {
                                         success = TRUE;
@@ -244,7 +250,7 @@ void N(update)(void) {
                     if (actionCommandStatus->unk_60) {
                         // Wrong; prevent successful inputs for 10 frames.
                         actionCommandStatus->unk_72 = 10;
-                        sfx_play_sound(0x21D);
+                        sfx_play_sound(SOUND_MENU_ERROR);
                         actionCommandStatus->unk_70 = 0;
                     }
 
@@ -265,7 +271,7 @@ void N(update)(void) {
                         }
                         actionCommandStatus->state = 11;
                         battleStatus->unk_84++;
-                        sfx_play_sound(0x21C);
+                        sfx_play_sound(SOUND_21C);
                         return;
                     }
 
