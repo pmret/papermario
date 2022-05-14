@@ -879,23 +879,23 @@ ApiStatus evt_handle_call(Evt* script) {
     Bytecode* args = script->ptrReadPos;
     s32 isInitialCall;
     ApiFunc func;
-    Evt* newScript; // todo fake match
+    ApiStatus ret;
 
     if (script->blocked) {
         isInitialCall = FALSE;
         func = script->callFunction;
-        newScript = script; // todo fake match
+        ret = func(script, isInitialCall);
     } else {
         script->callFunction = (ApiFunc)evt_get_variable(script, *args++);
-        newScript = script; // todo fake match
         script->ptrReadPos = args;
         script->currentArgc--;
         script->blocked = TRUE;
         isInitialCall = TRUE;
         func = script->callFunction;
+        ret = func(script, isInitialCall);
     }
 
-    return func(newScript, isInitialCall); // todo fake match
+    return ret;
 }
 
 ApiStatus evt_handle_exec1(Evt* script) {
