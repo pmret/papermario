@@ -60,7 +60,6 @@ ApiStatus func_802A9000_430020(void) {
 
 #include "common/MashActionCommandInit.inc.c"
 
-//INCLUDE_ASM(s32, "battle/action_cmd/spook", func_802A9298_4302B8);
 void func_802A9298_4302B8(void) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
@@ -101,7 +100,7 @@ void func_802A9298_4302B8(void) {
                 actionCommandStatus->unk_4E--;
                 return;
             }
-            hud_element_set_script(actionCommandStatus->hudElements[0], &HudScript_StickMashLeft);
+            hud_element_set_script(actionCommandStatus->hudElements[0], HudScript_StickMashLeft);
             actionCommandStatus->barFillLevel = 0;
             battleStatus->unk_84 = 0;
             actionCommandStatus->unk_5C = 0;

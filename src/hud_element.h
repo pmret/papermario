@@ -166,8 +166,8 @@ typedef struct HudTransform {
 
 typedef struct HudElement {
     /* 0x00 */ u32 flags;
-    /* 0x04 */ const HudScript* readPos;
-    /* 0x08 */ const HudScript* anim;
+    /* 0x04 */ HudScript* readPos;
+    /* 0x08 */ HudScript* anim;
     /* 0x0C */ HudScript* loopStartPos;
     /* 0x10 */ u8* imageAddr;
     /* 0x14 */ u8* paletteAddr;
@@ -236,7 +236,7 @@ extern HudScript* wPartnerHudScripts[];
 #define he_PlaySound(arg0) HUD_ELEMENT_OP_PlaySound, arg0
 #define he_SetPivot(arg0, arg1) HUD_ELEMENT_OP_SetPivot, arg0, arg1
 
-void hud_element_load_script(HudElement* hudElement, const HudScript* anim);
+void hud_element_load_script(HudElement* hudElement, HudScript* anim);
 
 /// @param clamp        0 = repeat; 1 = clamp
 /// @param dropShadow   Whether to render a drop shadow or not
@@ -247,7 +247,7 @@ void hud_element_clear_cache(void);
 void init_hud_element_list(void);
 
 /// Creates a new HUD element and returns its ID.
-s32 hud_element_create(const HudScript* anim);
+s32 hud_element_create(HudScript* anim);
 
 void update_hud_elements(void);
 
@@ -273,7 +273,7 @@ void hud_element_draw_clipped(s32 id);
 void hud_element_draw_next(s32 id);
 void hud_element_draw_without_clipping(s32 id);
 
-void hud_element_set_script(s32 id, const HudScript* anim);
+void hud_element_set_script(s32 id, HudScript* anim);
 
 HudScript* hud_element_get_script(s32 id);
 
@@ -328,7 +328,6 @@ void hud_element_set_transform_rotation_pivot(s32 id, s32 dx, s32 dy);
 void copy_world_hud_element_ref_to_battle(s32 worldID, s32 battleID);
 
 void hud_element_set_aux_cache(void* base, s32 size);
-
 
 void create_popup_menu(PopupMenu*);
 

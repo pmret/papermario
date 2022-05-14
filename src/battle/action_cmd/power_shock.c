@@ -3,11 +3,11 @@
 
 #define NAMESPACE action_command_power_shock
 
-extern const HudScript HudScript_BlueMeter[];
-extern const HudScript HudScript_AButton[];
-extern const HudScript HudScript_MashAButton[];
-extern const HudScript HudScript_RunAwayOK[];
-extern const HudScript HudScript_100pct[];
+extern HudScript HudScript_BlueMeter[];
+extern HudScript HudScript_AButton[];
+extern HudScript HudScript_MashAButton[];
+extern HudScript HudScript_RunAwayOK[];
+extern HudScript HudScript_100pct[];
 extern s32 D_802943A0[];
 s32 D_802A9AA0_42D9B0[] = { 0, 25, 50, 75, 75, 0, 0, 0};
 extern s32 D_802A9B00;

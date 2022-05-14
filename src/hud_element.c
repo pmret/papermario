@@ -126,7 +126,7 @@ extern u8* gHudElementCacheBuffer;
 s32 fold_appendGfx_component(s32 idx, FoldImageRecPart* image, u32 flagBits, Matrix4f mtx);
 void func_801413F8(void);
 
-void hud_element_load_script(HudElement* hudElement, const HudScript* anim) {
+void hud_element_load_script(HudElement* hudElement, HudScript* anim) {
     s32* pos = (s32*)anim;
     s32 raster;
     s32 palette;
@@ -707,7 +707,7 @@ void func_801413F8(void) {
     gCameras[CAM_3].flags &= ~0x6;
 }
 
-s32 hud_element_create(const HudScript* anim) {
+s32 hud_element_create(HudScript* anim) {
     HudElement* hudElement;
     s32 id;
 
@@ -1929,7 +1929,7 @@ void hud_element_draw_without_clipping(s32 id) {
     draw_hud_element_internal(id, HUD_ELEMENT_DRAW_FIRST_WITHOUT_CLIPPING);
 }
 
-void hud_element_set_script(s32 id, const HudScript* anim) {
+void hud_element_set_script(s32 id, HudScript* anim) {
     HudElement* hudElement = (*gHudElements)[id & ~HUD_ELEMENT_BATTLE_ID_MASK];
 
     if (anim == NULL) {
