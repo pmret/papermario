@@ -1,6 +1,7 @@
 #include "common.h"
 #include "script_api/battle.h"
 
+#define LERP(a, b, alpha) ((a) * (alpha) + (b) * (1.0f-(alpha)))
 // battle cam
 extern f32 BattleCam_PosX;
 extern f32 BattleCam_PosY;
@@ -141,7 +142,221 @@ ApiStatus func_80248DD0(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-INCLUDE_ASM(s32, "1776B0", func_80248DE4);
+s32 func_80248DE4(Evt* script, s32 isInitialCall) {
+    Actor* actor;
+    Actor* targetActor;
+    Camera* camera = &gCameras[CAM_BATTLE];
+    BattleStatus* battleStatus = &gBattleStatus;
+    f32 x, y, z;
+    f32 middlePosX, middlePosY, middlePosZ;
+    f32 targetX, targetY, targetZ;
+    f32 sizeX, sizeY;
+    f32 averageSize, targetAverageSize;
+    f32 alpha;
+    f32 distToTarget;
+    f32 adjustedSize;
+    f32 boomLength;
+    f32 extraLength;
+    f32 dist;
+    s32 actorClass = BattleCam_TargetActor & ACTOR_CLASS_MASK;
+    s32 actorID = BattleCam_TargetActor & 0xFF;
+
+    switch (actorClass) {
+        case ACTOR_CLASS_PLAYER:
+            actor = battleStatus->playerActor;
+            if (actor == NULL) {
+                return ApiStatus_BLOCK;
+            }
+            x = actor->currentPos.x;
+            y = actor->currentPos.y + actor->size.y / 2 + actor->size.y / 4;
+            z = actor->currentPos.z;
+
+            sizeY = actor->size.y;
+            sizeX = actor->size.x;
+            averageSize = (sizeY + sizeX) / 2;
+
+            targetActor = get_actor(actor->targetActorID);
+            if (targetActor == NULL) {
+                return ApiStatus_BLOCK;
+            }
+
+            targetX = targetActor->currentPos.x;
+            targetY = targetActor->currentPos.y + targetActor->size.y / 2 + targetActor->size.y / 4;
+            targetZ = targetActor->currentPos.z;
+            targetAverageSize = (targetActor->size.y + targetActor->size.x) / 2;
+
+            middlePosX = x + (targetX - x) / 2;
+            if (D_8029F2A2 >= 0) {
+                if (D_8029F2A2 != 0) {
+                    middlePosY = targetY + (y - targetY) * 0.5f + (y - targetY) / 6.0f;
+                } else {
+                    middlePosY = y;
+                }
+            } else {
+                if (D_8029F2A2 != -1) {
+                    middlePosY = y + (targetY - y) / 4;
+                } else {
+                    middlePosY = targetY;
+                }
+            }
+            middlePosZ = z + (targetZ - z) / 2;
+            break;
+        case ACTOR_CLASS_PARTNER:
+            actor = battleStatus->partnerActor;
+            if (actor == NULL) {
+                return ApiStatus_BLOCK;
+            }
+            x = actor->currentPos.x;
+            y = actor->currentPos.y + actor->size.y / 2 + actor->size.y / 4;
+            z = actor->currentPos.z;
+
+            sizeY = actor->size.y;
+            sizeX = actor->size.x;
+            averageSize = (sizeY + sizeX) / 2;
+
+            targetActor = get_actor(actor->targetActorID);
+            if (targetActor == NULL) {
+                return ApiStatus_BLOCK;
+            }
+
+            targetX = targetActor->currentPos.x;
+            targetY = targetActor->currentPos.y + targetActor->size.y / 2 + targetActor->size.y / 4;
+            targetZ = targetActor->currentPos.z;
+            targetAverageSize = (targetActor->size.y + targetActor->size.x) /2;
+
+            middlePosX = x + (targetX - x) / 2;
+            if (D_8029F2A2 >= 0) {
+                if (D_8029F2A2 != 0) {
+                    middlePosY = targetY + (y - targetY) * 0.5f + (y - targetY) / 6.0f;
+                } else {
+                    middlePosY = y;
+                }
+            } else {
+                middlePosY = targetY;
+            }
+            middlePosZ = z + (targetZ - z) / 2;
+            break;
+        case ACTOR_CLASS_ENEMY:
+            actor = battleStatus->enemyActors[actorID];
+            if (actor == NULL) {
+                return ApiStatus_BLOCK;
+            }
+            x = actor->currentPos.x;
+            y = actor->currentPos.y + actor->size.y / 2 + actor->size.y / 4;
+            z = actor->currentPos.z;
+
+            sizeY = actor->size.y;
+            sizeX = actor->size.x;
+            averageSize = (sizeY + sizeX) * 0.5f;
+
+            targetActor = get_actor(actor->targetActorID);
+            if (targetActor == NULL) {
+                return ApiStatus_BLOCK;
+            }
+
+            targetX = targetActor->currentPos.x;
+            targetY = targetActor->currentPos.y + targetActor->size.y / 2 + targetActor->size.y / 4;
+            targetZ = targetActor->currentPos.z;
+            targetAverageSize = (targetActor->size.y + targetActor->size.x) / 2;
+
+            middlePosX = x + (targetX - x) / 2;
+            if (D_8029F2A2 >= 0) {
+                if (D_8029F2A2 != 0) {
+                    middlePosY = targetY + (y - targetY) * 0.5f + (y - targetY) / 6.0f;
+                } else {
+                    middlePosY = y;
+                }
+            } else {
+                if (D_8029F2A2 == -1) {
+                    middlePosY = targetY;
+                } else {
+                    middlePosY = y;
+                }
+            }
+            middlePosZ = z + (targetZ - z) / 2;
+            break;
+        default:
+            return ApiStatus_BLOCK;
+    }
+
+    if (D_8029F2A6 != 0) {
+        f32 upperBound = (500.0f - BattleCam_TargetBoomLength) * 0.4 + 30.0;
+        f32 lowerBound = -upperBound;
+
+        if (middlePosX < lowerBound) {
+            middlePosX += (lowerBound - middlePosX) / 2;
+        }
+        if (middlePosX > upperBound) {
+            middlePosX += (upperBound - middlePosX) / 2;
+        }
+    }
+    if (isInitialCall) {
+        sizeX -= 24.0f;
+        sizeY -= 24.0f;
+        if (sizeX < 0.0f) {
+            sizeX = 0.0f;
+        }
+        if (sizeY < 0.0f) {
+            sizeY = 0.0f;
+        }
+        BattleCam_BoomLength += sizeX + sizeY;
+        if (D_8029F2A4 != 0) {
+            camera->auxPos.x = middlePosX;
+            camera->auxPos.y = middlePosY;
+            camera->auxPos.z = middlePosZ;
+            camera->auxBoomLength = BattleCam_BoomLength;
+            camera->auxBoomZOffset = BattleCam_BoomZOffset * 256;
+            camera->auxBoomYaw = BattleCam_BoomYaw;
+            camera->auxBoomPitch = BattleCam_BoomPitch;
+        }
+
+        BattleCam_TargetBoomLength = camera->auxBoomLength;
+        BattleCam_TargetBoomPitch = camera->auxBoomPitch;
+        BattleCam_TargetBoomYaw = camera->auxBoomYaw;
+        BattleCam_TargetBoomZOffset = camera->auxBoomZOffset / 256;
+        BattleCam_TargetPosX = camera->auxPos.x;
+        BattleCam_TargetPosY = camera->auxPos.y;
+        BattleCam_TargetPosZ = camera->auxPos.z;
+        BattleCam_MoveTimeTotal = BattleCam_MoveTimeLeft;
+    }
+
+    if (BattleCam_UseLinearInterp == 0) {
+        alpha = BattleCam_MoveTimeLeft;
+        alpha /= BattleCam_MoveTimeTotal;
+        alpha = 1.0f - sin_rad(sin_rad(sin_rad((1.0f - alpha) * PI_S / 2) * PI_S / 2) * PI_S / 2);
+    } else {
+        alpha = BattleCam_MoveTimeLeft;
+        alpha /= BattleCam_MoveTimeTotal;
+    }
+
+    x = camera->auxPos.x;
+    y = camera->auxPos.y;
+    z = camera->auxPos.z;
+
+    camera->auxPos.x = LERP(BattleCam_TargetPosX, middlePosX, alpha);
+    camera->auxPos.y = LERP(BattleCam_TargetPosY, middlePosY, alpha);
+    camera->auxPos.z = LERP(BattleCam_TargetPosZ, middlePosZ, alpha);
+    camera->auxBoomZOffset = LERP(BattleCam_TargetBoomZOffset, BattleCam_BoomZOffset, alpha) * 256.0f;
+
+    dist = dist2D(camera->auxPos.x, camera->auxPos.z, middlePosX, middlePosZ);
+    adjustedSize = (averageSize + targetAverageSize) / 8;
+    extraLength = dist + adjustedSize - 64.0f;
+    distToTarget = dist3D(x, y, z, targetX, targetY, targetZ);
+    boomLength = BattleCam_BoomLength + extraLength + distToTarget * 0.5f;
+
+    camera->auxBoomLength = LERP(BattleCam_TargetBoomLength, boomLength, alpha);
+    camera->auxBoomYaw = LERP(BattleCam_TargetBoomYaw, BattleCam_BoomYaw, alpha);
+    camera->auxBoomPitch = LERP(BattleCam_TargetBoomPitch, BattleCam_BoomPitch, alpha);
+
+    if (BattleCam_MoveTimeLeft == 0) {
+        BattleCam_DoneMoving = TRUE;
+    } else {
+        BattleCam_MoveTimeLeft--;
+    }
+
+    return ApiStatus_BLOCK;
+}
+
 
 INCLUDE_ASM(s32, "1776B0", func_80249804);
 
