@@ -137,7 +137,7 @@ void btl_state_update_begin_player_turn(void) {
     }
 
     if (gBattleState2 != BATTLE_STATE2_UNK_14) {
-        if (gBattleState2 == BATTLE_STATE2_UNK_64 && (btl_cam_is_moving_done())) {
+        if (gBattleState2 == BATTLE_STATE2_UNK_64 && btl_cam_is_moving_done()) {
             gBattleStatus.flags1 &= ~0x80000;
             reset_actor_turn_info();
             battleStatus->unk_86 = 0x7F;
