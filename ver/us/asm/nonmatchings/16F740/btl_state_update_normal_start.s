@@ -563,7 +563,7 @@ glabel btl_state_update_normal_start
 /* 1702E4 80241A04 2402000F */  addiu     $v0, $zero, 0xf
 /* 1702E8 80241A08 14620003 */  bne       $v1, $v0, .L80241A18
 /* 1702EC 80241A0C 00000000 */   nop
-/* 1702F0 80241A10 0C093903 */  jal       func_8024E40C
+/* 1702F0 80241A10 0C093903 */  jal       btl_cam_use_preset
 /* 1702F4 80241A14 24040002 */   addiu    $a0, $zero, 2
 .L80241A18:
 /* 1702F8 80241A18 3C028007 */  lui       $v0, %hi(gGameStatusPtr)

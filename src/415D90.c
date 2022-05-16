@@ -1218,7 +1218,7 @@ void btl_state_update_peach_menu(void) {
 
     switch (gBattleState2) {
         case 0:
-            func_8024E40C(2);
+            btl_cam_use_preset(BTL_CAM_PRESET_C);
             btl_cam_move(0xA);
             if (!(gBattleStatus.flags1 & 0x100000)) {
                 gBattleState2 = 0xB;

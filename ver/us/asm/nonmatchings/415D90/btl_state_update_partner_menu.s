@@ -47,7 +47,7 @@ glabel btl_state_update_partner_menu
 /* 41CFE4 802A8254 080AA0B8 */  j         .L802A82E0
 /* 41CFE8 802A8258 00000000 */   nop
 .L802A825C:
-/* 41CFEC 802A825C 0C093903 */  jal       func_8024E40C
+/* 41CFEC 802A825C 0C093903 */  jal       btl_cam_use_preset
 /* 41CFF0 802A8260 24040002 */   addiu    $a0, $zero, 2
 /* 41CFF4 802A8264 8E820000 */  lw        $v0, ($s4)
 /* 41CFF8 802A8268 3C03F3FF */  lui       $v1, 0xf3ff

@@ -746,7 +746,7 @@ EvtScript D_802A369C_00736C3C = {
     EVT_SUB(LW(0), 32)
     EVT_SET(LW(1), 0)
     EVT_CALL(SetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
-    EVT_CALL(func_8024E664, 43)
+    EVT_CALL(UseBattleCamPresetImmediately, BTL_CAM_PRESET_43)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, LW(10))
     EVT_WAIT_FRAMES(8)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, LW(11))

@@ -3,7 +3,7 @@
 /// Provide arg `TRUE` on `EVT_VAR(1)` to disable refunding.
 EvtScript N(UseItemWithEffect) = {
     EVT_IF_EQ(EVT_VAR(1), 0)
-        EVT_CALL(UseBattleCamPreset, 69)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_69)
         EVT_WAIT_FRAMES(10)
         EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_208D)
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_GOT_ITEM)
@@ -44,7 +44,7 @@ EvtScript N(UseItemWithEffect) = {
 };
 
 EvtScript N(UseItem) = {
-    EVT_CALL(UseBattleCamPreset, 19)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
     EVT_CALL(SetBattleCamTarget, -85, 1, 0)
     EVT_CALL(SetBattleCamOffsetZ, 41)
     EVT_CALL(SetBattleCamZoom, 248)

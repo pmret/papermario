@@ -491,7 +491,7 @@ EvtScript N(nextTurn_80239A3C) = {
         EVT_CASE_EQ(10)
             EVT_IF_EQ(EVT_SAVE_FLAG(1817), 0)
                 EVT_CALL(UseIdleAnimation, 256, 0)
-                EVT_CALL(UseBattleCamPreset, 14)
+                EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_14)
                 EVT_CALL(BattleCamTargetActor, -127)
                 EVT_CALL(MoveBattleCamOver, 20)
                 EVT_WAIT_FRAMES(10)
@@ -530,7 +530,7 @@ EvtScript N(nextTurn_80239A3C) = {
 
 EvtScript N(80239CA8) = {
     EVT_CALL(func_80280818)
-    EVT_CALL(UseBattleCamPreset, 51)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_51)
     EVT_CALL(SetAnimation, 256, -1, 589825)
     EVT_THREAD
         EVT_WAIT_FRAMES(4)
@@ -581,7 +581,7 @@ EvtScript N(80239CA8) = {
 
 EvtScript N(8023A06C) = {
     EVT_CALL(func_80280818)
-    EVT_CALL(UseBattleCamPreset, 3)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
     EVT_CALL(SetAnimation, 256, -1, 589825)
     EVT_CALL(SetGoalToHome, 256)
     EVT_CALL(GetGoalPos, 256, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
@@ -657,7 +657,7 @@ EvtScript N(8023A52C) = {
         EVT_SET(EVT_VAR(3), EVT_VAR(0))
     EVT_END_IF
     EVT_CALL(SetGoalPos, 256, EVT_VAR(3), EVT_VAR(4), EVT_VAR(5))
-    EVT_CALL(UseBattleCamPreset, 47)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_47)
     EVT_CALL(SetActorSpeed, 256, EVT_FIXED(5.0))
     EVT_CALL(SetAnimation, 256, -1, 589827)
     EVT_CALL(RunToGoal, 256, 0)
@@ -694,9 +694,9 @@ EvtScript N(8023A754) = {
     EVT_WAIT_FRAMES(5)
     EVT_CALL(SetActorDispOffset, 256, 0, 19, 0)
     EVT_WAIT_FRAMES(1)
-    EVT_CALL(UseBattleCamPreset, 52)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_52)
     EVT_CALL(func_802A9120_421B10, EVT_VAR(10), 3)
-    EVT_CALL(UseBattleCamPreset, 52)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_52)
     EVT_CALL(SetAnimation, -127, 1, 589830)
     EVT_CALL(SetActorDispOffset, 256, 0, 9, 0)
     EVT_CALL(SetGoalToTarget, 256)
@@ -746,10 +746,10 @@ EvtScript N(8023A754) = {
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_THREAD
-        EVT_CALL(UseBattleCamPreset, 50)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_50)
         EVT_WAIT_FRAMES(5)
         EVT_CALL(SetGoalToTarget, 256)
-        EVT_CALL(UseBattleCamPreset, 53)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_53)
     EVT_END_THREAD
     EVT_CALL(func_80269524, EVT_VAR(15))
     EVT_CALL(CloseActionCommandInfo)
@@ -799,9 +799,9 @@ EvtScript N(8023ADC4) = {
     EVT_WAIT_FRAMES(5)
     EVT_CALL(SetActorDispOffset, 256, 0, 19, 0)
     EVT_WAIT_FRAMES(1)
-    EVT_CALL(UseBattleCamPreset, 52)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_52)
     EVT_CALL(func_802A9120_421B10, EVT_VAR(10), 3)
-    EVT_CALL(UseBattleCamPreset, 52)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_52)
     EVT_CALL(SetAnimation, -127, 1, 589830)
     EVT_CALL(SetActorDispOffset, 256, 0, 9, 0)
     EVT_CALL(SetGoalToTarget, 256)
@@ -851,10 +851,10 @@ EvtScript N(8023ADC4) = {
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_THREAD
-        EVT_CALL(UseBattleCamPreset, 50)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_50)
         EVT_WAIT_FRAMES(5)
         EVT_CALL(SetGoalToTarget, 256)
-        EVT_CALL(UseBattleCamPreset, 53)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_53)
     EVT_END_THREAD
     EVT_CALL(func_80269524, EVT_VAR(15))
     EVT_CALL(CloseActionCommandInfo)
@@ -906,9 +906,9 @@ EvtScript N(8023B45C) = {
     EVT_WAIT_FRAMES(5)
     EVT_CALL(SetActorDispOffset, 256, 0, 19, 0)
     EVT_WAIT_FRAMES(1)
-    EVT_CALL(UseBattleCamPreset, 52)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_52)
     EVT_CALL(func_802A9120_421B10, EVT_VAR(10), 3)
-    EVT_CALL(UseBattleCamPreset, 52)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_52)
     EVT_CALL(SetAnimation, -127, 1, 589830)
     EVT_CALL(SetActorDispOffset, 256, 0, 9, 0)
     EVT_CALL(SetGoalToTarget, 256)
@@ -958,10 +958,10 @@ EvtScript N(8023B45C) = {
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_THREAD
-        EVT_CALL(UseBattleCamPreset, 50)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_50)
         EVT_WAIT_FRAMES(5)
         EVT_CALL(SetGoalToTarget, 256)
-        EVT_CALL(UseBattleCamPreset, 53)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_53)
     EVT_END_THREAD
     EVT_CALL(func_80269524, EVT_VAR(15))
     EVT_CALL(CloseActionCommandInfo)
@@ -1028,9 +1028,9 @@ EvtScript N(8023BB9C) = {
     EVT_WAIT_FRAMES(5)
     EVT_CALL(SetActorDispOffset, 256, 0, 19, 0)
     EVT_WAIT_FRAMES(1)
-    EVT_CALL(UseBattleCamPreset, 52)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_52)
     EVT_CALL(func_802A9120_421B10, EVT_VAR(10), 1)
-    EVT_CALL(UseBattleCamPreset, 52)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_52)
     EVT_CALL(SetAnimation, -127, 1, 589830)
     EVT_CALL(SetActorDispOffset, 256, 0, 9, 0)
     EVT_CALL(SetGoalToTarget, 256)
@@ -1080,10 +1080,10 @@ EvtScript N(8023BB9C) = {
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_THREAD
-        EVT_CALL(UseBattleCamPreset, 50)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_50)
         EVT_WAIT_FRAMES(5)
         EVT_CALL(SetGoalToTarget, 256)
-        EVT_CALL(UseBattleCamPreset, 53)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_53)
     EVT_END_THREAD
     EVT_CALL(func_80269524, EVT_VAR(15))
     EVT_SET(EVT_VAR(13), 0)
@@ -1091,10 +1091,10 @@ EvtScript N(8023BB9C) = {
     EVT_SET(EVT_FLAG(0), 0)
     EVT_LABEL(10)
     EVT_THREAD
-        EVT_CALL(UseBattleCamPreset, 50)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_50)
         EVT_WAIT_FRAMES(5)
         EVT_CALL(SetGoalToTarget, 256)
-        EVT_CALL(UseBattleCamPreset, 53)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_53)
     EVT_END_THREAD
     EVT_CALL(CloseActionCommandInfo)
     EVT_CALL(func_8026919C, EVT_PTR(battle_partner_goombario_D_8023BB78_6ECC58))
@@ -1224,7 +1224,7 @@ EvtScript N(8023C5B8) = {
     EVT_WAIT_FRAMES(12)
     EVT_CALL(SetCamEnabled, 2, 0)
     EVT_WAIT_FRAMES(32)
-    EVT_CALL(UseBattleCamPreset, 2)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_CALL(SetBattleFlagBits, 4, 0)
     EVT_CALL(func_80280818)
     EVT_CALL(SetGoalToHome, 256)
@@ -1238,7 +1238,7 @@ EvtScript N(8023C5B8) = {
 };
 
 EvtScript N(8023C90C) = {
-    EVT_CALL(UseBattleCamPreset, 55)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_55)
     EVT_WAIT_FRAMES(10)
     EVT_CALL(SetAnimation, 256, -1, 589831)
     EVT_CALL(SetActorDispOffset, 256, 0, 19, 0)
@@ -1259,7 +1259,7 @@ EvtScript N(8023C90C) = {
     EVT_WAIT_FRAMES(30)
     EVT_CALL(SetAnimation, 256, -1, 589825)
     EVT_CALL(SetActorDispOffset, 256, 0, 0, 0)
-    EVT_CALL(UseBattleCamPreset, 2)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_CALL(MoveBattleCamOver, 10)
     EVT_CALL(func_80238E74_6F1F54)
     EVT_IF_EQ(EVT_VAR(0), 0)

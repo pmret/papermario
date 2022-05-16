@@ -711,7 +711,7 @@ enum CamShakeModes {
     CAM_SHAKE_DECAYING_VERTICAL     = 2
 };
 
-// for use with func_8024E748
+// for use with SetBattleCamParam
 enum AuxCameraParams {
     AUX_CAM_PARAM_1             = 1,
     AUX_CAM_BOOM_LENGTH         = 2,

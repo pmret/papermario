@@ -116,7 +116,7 @@ glabel btl_state_update_partner_striking_first
 /* 176C0C 8024832C 00822025 */  or        $a0, $a0, $v0
 /* 176C10 80248330 0C03A6D5 */  jal       increment_status_menu_disabled
 /* 176C14 80248334 AEA40000 */   sw       $a0, ($s5)
-/* 176C18 80248338 0C093903 */  jal       func_8024E40C
+/* 176C18 80248338 0C093903 */  jal       btl_cam_use_preset
 /* 176C1C 8024833C 2404000A */   addiu    $a0, $zero, 0xa
 /* 176C20 80248340 0C09390F */  jal       btl_cam_target_actor
 /* 176C24 80248344 24040100 */   addiu    $a0, $zero, 0x100

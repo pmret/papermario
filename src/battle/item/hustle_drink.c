@@ -48,7 +48,7 @@ EvtScript N(main) = {
     EVT_CALL(N(func_802A123C_72619C))
     EVT_CALL(GetActorPos, ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_ADD(EVT_VAR(1), 20)
-    EVT_CALL(UseBattleCamPreset, 13)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_13)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_369)
@@ -108,7 +108,7 @@ EvtScript N(main) = {
     EVT_END_LOOP
     EVT_WAIT_FRAMES(10)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_RUNNING)
-    EVT_CALL(UseBattleCamPreset, 2)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_WAIT_FRAMES(20)
     EVT_EXEC_WAIT(N(PlayerGoHome))

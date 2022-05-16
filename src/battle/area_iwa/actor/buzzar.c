@@ -874,7 +874,7 @@ EvtScript N(8021DF2C) = {
         EVT_CASE_DEFAULT
     EVT_END_SWITCH
     EVT_WAIT_FRAMES(10)
-    EVT_CALL(func_8024E664, 19)
+    EVT_CALL(UseBattleCamPresetImmediately, BTL_CAM_PRESET_19)
     EVT_CALL(SetBattleCamZoom, 360)
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_THREAD

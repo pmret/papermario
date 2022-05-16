@@ -1100,7 +1100,7 @@ segments:
     subsegments:
     - [0x16C8E0, c, 16c8e0]
     - [0x16F740, c, 16F740]
-    - [0x1776B0, c, 1776B0]
+    - [0x1776B0, c, battle_cam]
     - [0x17D6A0, c, 17D6A0]
     - [0x17FEB0, c]
     - [0x181810, c]
@@ -1118,7 +1118,7 @@ segments:
     - [0x1AF120, c]
     - [0x1AF230, c]
     - [0x1AF2D0, .data, 16c8e0]
-    - [0x1AF5C0, .data, 1776B0]
+    - [0x1AF5C0, .data, battle_cam]
     - [0x1AF8A0, .data, 190B20]
     - [0x1B21E0, data, 1AF2D0] # begins with image?
     - [0x1C2EC0, .data, 19FAF0]
@@ -1127,7 +1127,7 @@ segments:
     - [0x1CB0B0, .data, 1AF230]
     - [0x1CB240, .rodata, 16c8e0]
     - [0x1CB368, .rodata, 16F740]
-    - [0x1CB4E0, .rodata, 1776B0]
+    - [0x1CB4E0, .rodata, battle_cam]
     - [0x1CB670, .rodata, 17D6A0]
     - [0x1CBC30, .rodata, 182B30]
     - [0x1CBDD0, .rodata, 18C790]

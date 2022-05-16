@@ -32,7 +32,7 @@ glabel btl_state_update_peach_menu
 /* 41E924 802A9B94 00400008 */  jr        $v0
 /* 41E928 802A9B98 00000000 */   nop
 .L802A9B9C_41E92C:
-/* 41E92C 802A9B9C 0C093903 */  jal       func_8024E40C
+/* 41E92C 802A9B9C 0C093903 */  jal       btl_cam_use_preset
 /* 41E930 802A9BA0 24040002 */   addiu    $a0, $zero, 2
 /* 41E934 802A9BA4 0C093936 */  jal       btl_cam_move
 /* 41E938 802A9BA8 2404000A */   addiu    $a0, $zero, 0xa
