@@ -172,7 +172,7 @@ void btl_state_update_celebration(void) {
                 }
 
                 D_8029FB84 = 0;
-                func_8024E40C(0x17);
+                func_8024E40C(BTL_CAM_PRESET_23);
                 D_8029FB54 = 0;
                 D_8029FB4C = 1;
                 gBattleState2 = BATTLE_STATE2_UNK_1;
@@ -182,7 +182,7 @@ void btl_state_update_celebration(void) {
         case BATTLE_STATE2_UNK_1:
             if (D_8029FB4C != 0) {
                 D_8029FB4C--;
-            } else if (func_8024E584() != 0) {
+            } else if (btl_cam_is_moving_done()) {
                 dma_copy(_7A89A0_ROM_START, _7A89A0_ROM_END, _7A89A0_VRAM);
                 script = start_script(&D_802842B0, EVT_PRIORITY_A, 0);
                 D_8029FB78 = 0;
@@ -264,7 +264,7 @@ void btl_state_update_celebration(void) {
         case BATTLE_STATE2_UNK_4:
             if (D_8029FB84 >= 99) {
                 playerData->level++;
-                func_8024E40C(2);
+                func_8024E40C(BTL_CAM_PRESET_C);
                 btl_cam_move(5);
                 dma_copy(_79EF40_ROM_START, _79EF40_ROM_END, _79EF40_VRAM);
                 sfx_play_sound(0x80000008);

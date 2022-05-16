@@ -364,7 +364,7 @@ void func_8024F7C8(void);
 void func_80263E08(Actor*, ActorPart*, s32);
 void func_80266978(void);
 void func_80266B14(void);
-s32 func_8024E584(void);
+s32 btl_cam_is_moving_done(void);
 void func_8024EE48(void);
 void func_8024EEA8(void);
 void func_80255FD8(void);

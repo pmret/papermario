@@ -28,7 +28,7 @@ EvtScript N(main) = {
     EVT_CALL(N(FadeBackgroundToBlack))
     EVT_THREAD
         EVT_WAIT_FRAMES(5)
-        EVT_CALL(UseBattleCamPreset, 2)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
         EVT_CALL(MoveBattleCamOver, 50)
     EVT_END_THREAD
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_CROUCH)
@@ -53,7 +53,7 @@ EvtScript N(main) = {
         EVT_CALL(MoveBattleCamOver, 2)
         EVT_WAIT_FRAMES(2)
     EVT_END_LOOP
-    EVT_CALL(UseBattleCamPreset, 3)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)

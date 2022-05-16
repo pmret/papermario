@@ -44,7 +44,7 @@ glabel btl_state_update_begin_partner_turn
 /* 171520 80242C40 24020064 */  addiu     $v0, $zero, 0x64
 /* 171524 80242C44 14620048 */  bne       $v1, $v0, .L80242D68
 /* 171528 80242C48 24020001 */   addiu    $v0, $zero, 1
-/* 17152C 80242C4C 0C093961 */  jal       func_8024E584
+/* 17152C 80242C4C 0C093961 */  jal       btl_cam_is_moving_done
 /* 171530 80242C50 00000000 */   nop
 /* 171534 80242C54 10400041 */  beqz      $v0, .L80242D5C
 /* 171538 80242C58 00000000 */   nop

@@ -38,7 +38,7 @@ glabel btl_state_update_begin_player_turn
 /* 170984 802420A4 24020064 */   addiu    $v0, $zero, 0x64
 /* 170988 802420A8 14620041 */  bne       $v1, $v0, .L802421B0
 /* 17098C 802420AC 00000000 */   nop
-/* 170990 802420B0 0C093961 */  jal       func_8024E584
+/* 170990 802420B0 0C093961 */  jal       btl_cam_is_moving_done
 /* 170994 802420B4 00000000 */   nop
 /* 170998 802420B8 1040003D */  beqz      $v0, .L802421B0
 /* 17099C 802420BC 3C03FFF7 */   lui      $v1, 0xfff7

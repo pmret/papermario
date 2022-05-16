@@ -187,7 +187,7 @@ EvtScript N(8022A880) = {
 EvtScript N(8022ABA8) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
     EVT_CALL(SetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
-    EVT_CALL(UseBattleCamPreset, 7)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_H)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(SetBattleCamOffsetZ, 38)
     EVT_CALL(SetBattleCamZoom, 256)
@@ -198,7 +198,7 @@ EvtScript N(8022ABA8) = {
 
 EvtScript N(8022AC40) = {
     EVT_CALL(func_802535B4, 1)
-    EVT_CALL(UseBattleCamPreset, 2)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_CALL(MoveBattleCamOver, 12)
     EVT_RETURN
     EVT_END
@@ -207,7 +207,7 @@ EvtScript N(8022AC40) = {
 EvtScript N(8022AC80) = {
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(UseBattleCamPreset, 55)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_55)
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_RETURN
@@ -392,7 +392,7 @@ EvtScript N(takeTurn_8022B4F0) = {
     EVT_CALL(PlayEffect, 0x13, 0, LW(0), LW(1), LW(2), LW(5), 30, 0, 0, 0, 0, 0, 0, 0)
     EVT_WAIT_FRAMES(30)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_mage_jr_troopa_default_attack2)
-    EVT_CALL(UseBattleCamPreset, 2)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LW(10), DAMAGE_TYPE_NO_CONTACT, 0, 1, 16)
     EVT_SWITCH(LW(10))
         EVT_CASE_OR_EQ(6)
@@ -566,7 +566,7 @@ EvtScript N(8022BF1C) = {
     EVT_CALL(PlaySound, SOUND_DEATH)
     EVT_CALL(DropStarPoints, -127)
     EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
-    EVT_CALL(UseBattleCamPreset, 14)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_14)
     EVT_CALL(SetBattleCamZoom, 260)
     EVT_CALL(SetBattleCamOffsetZ, 15)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
