@@ -172,7 +172,7 @@ void btl_state_update_celebration(void) {
                 }
 
                 D_8029FB84 = 0;
-                func_8024E40C(BTL_CAM_PRESET_23);
+                btl_cam_use_preset(BTL_CAM_PRESET_23);
                 D_8029FB54 = 0;
                 D_8029FB4C = 1;
                 gBattleState2 = BATTLE_STATE2_UNK_1;
@@ -264,7 +264,7 @@ void btl_state_update_celebration(void) {
         case BATTLE_STATE2_UNK_4:
             if (D_8029FB84 >= 99) {
                 playerData->level++;
-                func_8024E40C(BTL_CAM_PRESET_C);
+                btl_cam_use_preset(BTL_CAM_PRESET_C);
                 btl_cam_move(5);
                 dma_copy(_79EF40_ROM_START, _79EF40_ROM_END, _79EF40_VRAM);
                 sfx_play_sound(0x80000008);
@@ -794,7 +794,7 @@ void btl_state_update_celebration(void) {
                     bgm_set_song(0, -1, 0, 1500, 8);
                 }
                 D_80284150 = 0;
-                func_8024E484(1, 270, 100, 8, 0, 0x2400, 0, 100);
+                btl_cam_set_params(1, 270, 100, 8, 0, 0x2400, 0, 100);
                 set_animation(0, 0, 0x30009);
                 if (partner != NULL) {
                     set_animation(ACTOR_PARTNER, 0, D_80284154[playerData->currentPartner]);

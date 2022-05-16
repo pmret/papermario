@@ -2136,7 +2136,7 @@ EvtScript N(80223B74) = {
     EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -10, 10)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_battle_parakarry_Palette_00_Anim_0)
     EVT_WAIT_FRAMES(3)
-    EVT_CALL(func_8024E664, BTL_CAM_PRESET_B)
+    EVT_CALL(UseBattleCamPresetImmediately, BTL_CAM_PRESET_B)
     EVT_CALL(SetActorSounds, -127, 1, 0, 0)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2004)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_battle_parakarry_Palette_00_Anim_14)

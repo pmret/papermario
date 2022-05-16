@@ -1336,7 +1336,7 @@ EvtScript N(8023C990) = {
     EVT_SET(LW(1), 0)
     EVT_CALL(SetActorPos, ACTOR_PARTNER, LW(0), LW(1), LW(2))
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, 0x287)
-    EVT_CALL(func_8024E664, BTL_CAM_PRESET_11)
+    EVT_CALL(UseBattleCamPresetImmediately, BTL_CAM_PRESET_11)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(MoveBattleCamOver, 1)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, NPC_ANIM_battle_bombette_Palette_00_Anim_1A)

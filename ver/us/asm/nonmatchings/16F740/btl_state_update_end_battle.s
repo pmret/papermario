@@ -57,7 +57,7 @@ glabel btl_state_update_end_battle
 /* 1733D0 80244AF0 24020001 */   addiu    $v0, $zero, 1
 /* 1733D4 80244AF4 0C093980 */  jal       btl_cam_unfreeze
 /* 1733D8 80244AF8 00000000 */   nop
-/* 1733DC 80244AFC 0C093903 */  jal       func_8024E40C
+/* 1733DC 80244AFC 0C093903 */  jal       btl_cam_use_preset
 /* 1733E0 80244B00 24040001 */   addiu    $a0, $zero, 1
 /* 1733E4 80244B04 0000202D */  daddu     $a0, $zero, $zero
 /* 1733E8 80244B08 0080282D */  daddu     $a1, $a0, $zero

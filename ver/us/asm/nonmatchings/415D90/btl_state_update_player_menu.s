@@ -46,7 +46,7 @@ glabel btl_state_update_player_menu
 /* 41A79C 802A5A0C AEC00188 */   sw       $zero, 0x188($s6)
 /* 41A7A0 802A5A10 104008D8 */  beqz      $v0, .L802A7D74
 /* 41A7A4 802A5A14 00000000 */   nop
-/* 41A7A8 802A5A18 0C093903 */  jal       func_8024E40C
+/* 41A7A8 802A5A18 0C093903 */  jal       btl_cam_use_preset
 /* 41A7AC 802A5A1C 24040002 */   addiu    $a0, $zero, 2
 /* 41A7B0 802A5A20 0C093936 */  jal       btl_cam_move
 /* 41A7B4 802A5A24 2404000A */   addiu    $a0, $zero, 0xa

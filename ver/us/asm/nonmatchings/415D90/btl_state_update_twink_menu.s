@@ -72,7 +72,7 @@ glabel btl_state_update_twink_menu
 /* 41EF18 802AA188 080AA987 */  j         .L802AA61C_41F3AC
 /* 41EF1C 802AA18C 00000000 */   nop
 .L802AA190:
-/* 41EF20 802AA190 0C093903 */  jal       func_8024E40C
+/* 41EF20 802AA190 0C093903 */  jal       btl_cam_use_preset
 /* 41EF24 802AA194 24040002 */   addiu    $a0, $zero, 2
 /* 41EF28 802AA198 0C093936 */  jal       btl_cam_move
 /* 41EF2C 802AA19C 2404000A */   addiu    $a0, $zero, 0xa

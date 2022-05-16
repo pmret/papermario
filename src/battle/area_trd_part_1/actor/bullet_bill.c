@@ -241,7 +241,7 @@ EvtScript N(takeTurn_802197C0) = {
     EVT_WAIT_FRAMES(1)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, -2, 0)
     EVT_WAIT_FRAMES(15)
-    EVT_CALL(func_8024E664, BTL_CAM_PRESET_19)
+    EVT_CALL(UseBattleCamPresetImmediately, BTL_CAM_PRESET_19)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LW(0), 0, 0, 2, BS_FLAGS1_10)
     EVT_SWITCH(LW(0))
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)

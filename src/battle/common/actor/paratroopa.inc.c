@@ -432,7 +432,7 @@ EvtScript N(takeTurn_8021FA24) = {
     EVT_CALL(AddGoalPos, ACTOR_SELF, 40, 30, 0)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(7.0))
     EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -16, 0)
-    EVT_CALL(func_8024E664, BTL_CAM_PRESET_B)
+    EVT_CALL(UseBattleCamPresetImmediately, BTL_CAM_PRESET_B)
     EVT_WAIT_FRAMES(5)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LW(0), 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LW(0))

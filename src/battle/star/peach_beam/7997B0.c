@@ -145,7 +145,7 @@ EvtScript N(802A2888) = {
 EvtScript N(802A2C20) = {
     EVT_WAIT_FRAMES(8)
     EVT_CALL(SetForegroundModelsVisible, 0)
-    EVT_CALL(func_8024E664, BTL_CAM_PRESET_73)
+    EVT_CALL(UseBattleCamPresetImmediately, BTL_CAM_PRESET_73)
     EVT_CALL(MoveBattleCamOver, 1)
     EVT_CALL(PlaySound, 0x2041)
     EVT_CALL(CreateNpc, 100, LW(0))
