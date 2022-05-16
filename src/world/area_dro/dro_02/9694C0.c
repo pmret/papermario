@@ -35,13 +35,6 @@ enum {
 // BSS
 
 typedef struct {
-    s32 flags;
-    char unk_04[0x4];
-    s32 unk_08;
-    EffectInstanceDataThing* unk_0C;
-} N(temp);
-
-typedef struct {
     s32 unk_00;
     f32 unk_04;
     f32 unk_08;
@@ -57,7 +50,7 @@ static s8 N(pad_D_8024EF80)[0x4];
 static f32 N(D_8024EF84);
 static s32 N(D_8024EF88);
 static s8 N(pad_D_8024EF8C)[0x4];
-static N(temp)* N(D_8024EF90)[4]; // possibly bigger?
+static EffectInstance* N(D_8024EF90)[4]; // possibly bigger?
 static s32 N(Quizmo_Worker);
 static s32 N(pad_D_8024EFA4);
 static s32 N(Quizmo_ScriptArray)[4];

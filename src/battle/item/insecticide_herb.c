@@ -26,29 +26,24 @@ ApiStatus N(func_802A1280_72A9D0)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-typedef struct N(temp) {
-    char unk_00[0xC];
-    EffectInstanceDataThing* unk_0C;
-} N(temp);
-
 ApiStatus N(func_802A12E0_72AA30)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     f32 a = evt_get_variable(script, *args++);
     f32 b = evt_get_variable(script, *args++);
     f32 c = evt_get_variable(script, *args++);
-    struct N(temp)* effect;
+    EffectInstance* effect;
 
     a += rand_int(20) - 10;
     b += rand_int(10) - 5;
 
-    effect = (struct N(temp)*)fx_cold_breath(0, a, b, c, 1.0f, 30);
+    effect = fx_cold_breath(0, a, b, c, 1.0f, 30);
 
-    effect->unk_0C->unk_18 = 0xF4;
-    effect->unk_0C->unk_1C = 0xF4;
-    effect->unk_0C->unk_20 = 0xDC;
-    effect->unk_0C->unk_28 = 0xD2;
-    effect->unk_0C->unk_2C = 0xD2;
-    effect->unk_0C->unk_30 = 0xBE;
+    ((ColdBreathFXData*)effect->data)->unk_18 = 244;
+    ((ColdBreathFXData*)effect->data)->unk_1C = 244;
+    ((ColdBreathFXData*)effect->data)->unk_20 = 220;
+    ((ColdBreathFXData*)effect->data)->unk_28 = 210;
+    ((ColdBreathFXData*)effect->data)->unk_2C = 210;
+    ((ColdBreathFXData*)effect->data)->unk_30 = 190;
 
     return ApiStatus_DONE2;
 }

@@ -2047,7 +2047,7 @@ typedef struct PlayerStatus {
     /* 0x0CC */ s32 shadowID;
     /* 0x0D0 */ f32* unk_D0;
     /* 0x0D4 */ f32 spinRate;
-    /* 0x0D8 */ UNK_PTR** unk_D8;
+    /* 0x0D8 */ struct EffectInstance* unk_D8; // effect 46
     /* 0x0DC */ s32 currentButtons;
     /* 0x0E0 */ s32 pressedButtons;
     /* 0x0E4 */ s32 heldButtons;

@@ -142,66 +142,29 @@ enum EffectID {
     EFFECT_86,
 };
 
-typedef struct {
-    char unk_00[0x38];
-    f32 unk_38[4];
-} EffectUnkStruct1;
-
-typedef struct EffectStruct {
-    char unk_00[0x4];
-    f32 unk_04;
-    f32 unk_08;
-    f32 unk_0C;
-    f32 unk_10;
-    char unk_14[0x4];
-    s32 unk_18;
-    s32 unk_1C;
-    s32 unk_20;
-    X32 unk_24;
-    s32 unk_28;
-    s32 unk_2C;
-    s32 unk_30;
-    u8 unk_34;
-    s32 unk_38;
-    char unk_3C[0xC];
-    EffectUnkStruct1* unk_48;
-    char unk_4C[0x24];
-    s32 unk_70;
-    s32 unk_74;
-} EffectStruct;
-
-typedef struct StarSpiritEffectUnkStruct {
-    char unk_00[0xC];
-    EffectStruct* unk_0C;
-} StarSpiritEffectUnkStruct;
-
-typedef struct StarSpiritEffect {
-    /* 0x00 */ f32 unk_00;
-    /* 0x04 */ f32 unk_04;
+typedef struct StarSpiritsEnergyFXData {
+    /* 0x00 */ char unk_00[0x8];
     /* 0x08 */ f32 unk_08;
     /* 0x0C */ f32 unk_0C;
     /* 0x10 */ f32 unk_10;
-    /* 0x14 */ f32 unk_14;
-    /* 0x18 */ f32 unk_18;
-    /* 0x1C */ f32 unk_1C;
-    /* 0x20 */ f32 unk_20;
+    /* 0x14 */ char unk_14[0x20];
+    /* 0x34 */ s32 unk_34;
+    /* 0x38 */ char unk_38[0x38];
+    /* 0x70 */ s32 unk_70;
+    /* 0x74 */ s32 unk_74;
+} StarSpiritsEnergyFXData; // size = ?
+
+typedef struct SpiritCardFXData {
+    /* 0x00 */ char unk_00[0x4];
+    /* 0x04 */ f32 unk_04;
+    /* 0x08 */ f32 unk_08;
+    /* 0x0C */ f32 unk_0C;
+    /* 0x10 */ char unk_10[0x10];
+    /* 0x20 */ s32 unk_20;
     /* 0x24 */ f32 unk_24;
-    /* 0x28 */ f32 unk_28;
-    /* 0x2C */ f32 unk_2C;
-    /* 0x30 */ f32 unk_30;
-    /* 0x34 */ f32 unk_34;
-    /* 0x38 */ s32 unk_38;
-    /* 0x3C */ s32 unk_3C;
-    /* 0x40 */ s32 unk_40; // a shadowID
-    /* 0x44 */ s16 unk_44;
-    /* 0x46 */ s16 unk_46;
-    /* 0x48 */ s16 unk_48;
-    /* 0x4A */ s16 unk_4A;
-    /* 0x4C */ s16 unk_4C;
-    /* 0x4E */ s16 unk_4E;
-    /* 0x50 */ struct StarSpiritEffectUnkStruct* unk_50;
-    /* 0x54 */ struct StarSpiritEffectUnkStruct* unk_54;
-} StarSpiritEffect; // size = 0x58
+    /* 0x28 */ char unk_28[0xC];
+    /* 0x34 */ s8 unk_34;
+} SpiritCardFXData; // ?
 
 typedef struct BigSmokePuffFXData {
     /* 0x00 */ s16 unk_00;
@@ -218,6 +181,10 @@ typedef struct BigSmokePuffFXData {
     /* 0x24 */ f32 unk_24;
     /* 0x28 */ char unk_28[0x4];
 } BigSmokePuffFXData; // size = 0x2C
+
+typedef struct BigSnowflakeFXData {
+    /* 0x00 */ char unk_00[0x30];
+} BigSnowflakeFXData; // size = 0x30
 
 typedef struct LandingDustFXData {
     /* 0x00 */ u16 type;
@@ -660,98 +627,15 @@ typedef struct DamageIndicatorFXData {
     /* 0x3C */ s32 numParts;
 } DamageIndicatorFXData; // size = 0x40
 
-// TODO figure out what this actually is
-// fx_quizmo_stage invokes gEffectTable[78]'s entryPoint function
-// fx_cold_breath invokes gEffectTable[111]'s entryPoint function
-// fx_star_spirits_energy invokes gEffectTable[131]'s entryPoint function
-// These functions are currently typed to return void
-// Assume they return an Effect*, and this struct is accessed at unk_0C,
-// but this struct differs from EffectInstanceData
-// Search for "struct N(temp)" for examples
-typedef struct EffectInstanceDataThing {
-    char unk_00[0x4];
-    f32 unk_04;
-    f32 unk_08;
-    f32 unk_0C;
-    f32 unk_10;
-    char unk_14[0x4];
-    s32 unk_18;
-    s32 unk_1C;
-    s32 unk_20;
-    X32 unk_24;
-    s32 unk_28;
-    s32 unk_2C;
-    s32 unk_30;
-    s32 unk_34;
-    s32 unk_38;
-    char unk_3C[0xC];
-    EffectUnkStruct1* unk_48;
-    char unk_4C[0x24];
-    s32 unk_70;
-    s32 unk_74;
-} EffectInstanceDataThing; // TODO remove / convert to appropriate effect data struct
-
-typedef struct EffectInstanceData {
-    /* 0x00 */ EffectInstanceDataThing* unk_00;
-    /* 0x04 */ Vec3f pos;
-    /* 0x10 */ Vec3f rotation;
-    /* 0x1C */ Vec3f scale;
-    /* 0x28 */ f32 unk_28;
-    /* 0x2C */ s32 unk_2C;
-    /* 0x30 */ f32 unk_30;
-    /* 0x34 */ f32 unk_34;
-    /* 0x38 */ f32 unk_38;
-    /* 0x3C */ s32 unk_3C;
-    /* 0x40 */ char unk_40[0x24];
-    /* 0x64 */ f32 unk_64;
-    /* 0x68 */ char unk_68[0x18];
-} EffectInstanceData; // size = 0x80
-
-typedef struct EffectInstance {
-    /* 0x00 */ s32 flags;
-    /* 0x04 */ s32 effectIndex;
-    /* 0x08 */ s32 numParts;
-    /* 0x0C */ void* data;
-    /* 0x10 */ struct EffectGraphics* graphics;
-} EffectInstance; // size = 0x14
-
-typedef struct EffectBlueprint {
-    /* 0x00 */ s32 unk_00;
-    /* 0x04 */ s32 effectID;
-    /* 0x08 */ void (*init)(EffectInstance* effectInst);
-    /* 0x0C */ void (*update)(EffectInstance* effectInst);
-    /* 0x10 */ void (*renderWorld)(EffectInstance* effectInst);
-    /* 0x14 */ void (*unk_14)(EffectInstance* effectInst);
-} EffectBlueprint; // size = 0x18
-
-typedef struct EffectGraphics {
-    /* 0x00 */ s32 flags;
-    /* 0x04 */ s32 effectIndex;
-    /* 0x08 */ s32 instanceCounter;
-    /* 0x0C */ s32 freeDelay;
-    /* 0x10 */ void (*update)(EffectInstance* effectInst);
-    /* 0x14 */ void (*renderWorld)(EffectInstance* effectInst);
-    /* 0x18 */ void (*renderUI)(EffectInstance* effectInst);
-    /* 0x1C */ s32* data;
-} EffectGraphics; // size = 0x20
-
-typedef struct EffectTableEntry {
-    /* 0x00 */ void (*entryPoint);
-    /* 0x04 */ void* dmaStart;
-    /* 0x08 */ void* dmaEnd;
-    /* 0x0C */ void* dmaDest;
-    /* 0x10 */ void* graphicsDmaStart;
-    /* 0x14 */ void* graphicsDmaEnd;
-} EffectTableEntry; // size = 0x18
-
-typedef struct EffectWhirlwind {
-    /* 0x00 */ char unk_00[40];
+// seems to actually be PlayerStatus, but it's too large seemingly given the bss padding in UnkWhirlwindEffectFunc.inc.c
+typedef struct EffectWhirlwindUnk {
+    /* 0x00 */ char unk_00[0x28];
     /* 0x28 */ f32 unk_28;
     /* 0x2C */ f32 unk_2C;
     /* 0x30 */ f32 unk_30;
-} EffectWhirlwind;
+} EffectWhirlwindUnk;
 
-typedef struct Effect6BData {
+typedef struct Effect6BFXData {
     /* 0x00 */ s32 unk_00;
     /* 0x04 */ Vec3f pos;
     /* 0x10 */ char unk_10[12];
@@ -764,16 +648,32 @@ typedef struct Effect6BData {
     /* 0x38 */ f32 unk_38;
     /* 0x3C */ s32 unk_3C;
     /* 0x40 */ char unk_40[0x4];
-} Effect6BData; // size = 0x44
+} Effect6BFXData; // size = 0x44
 
-typedef struct Effect6BInstance {
-    /* 0x00 */ s32 unk_00;
-    /* 0x04 */ char unk_04[8];
-    /* 0x0C */ Effect6BData* data;
-} Effect6BInstance;
+typedef struct ColdBreathFXData {
+    /* 0x00 */ char unk_00[0x18];
+    /* 0x18 */ s32 unk_18;
+    /* 0x1C */ s32 unk_1C;
+    /* 0x20 */ s32 unk_20;
+    /* 0x24 */ char unk_24[0x4];
+    /* 0x28 */ s32 unk_28;
+    /* 0x2C */ s32 unk_2C;
+    /* 0x30 */ s32 unk_30;
+} ColdBreathFXData; // size = ?
 
-typedef struct Effect6FData {
-    /* 0x00 */ EffectInstanceDataThing* unk_00;
+typedef struct LightningFXData {
+    /* 0x00 */ char unk_00[0x30];
+    /* 0x30 */ s32 unk_30;
+    /* 0x34 */ s32 unk_34;
+    /* 0x38 */ s32 unk_38;
+    /* 0x3C */ char unk_3C[0x4];
+    /* 0x40 */ s32 unk_40;
+    /* 0x44 */ s32 unk_44;
+    /* 0x48 */ s32 unk_48;
+} LightningFXData; // size = ?
+
+typedef struct Effect6FFXData {
+    /* 0x00 */ char unk_00[0x4];
     /* 0x04 */ Vec3f pos;
     /* 0x10 */ Vec3i rotation;
     /* 0x1C */ Vec3i scale;
@@ -782,15 +682,28 @@ typedef struct Effect6FData {
     /* 0x38 */ f32 unk_38;
     /* 0x3C */ s32 unk_3C;
     /* 0x40 */ char unk_40[0x4];
-} Effect6FData; // size = 0x44
+} Effect6FFXData; // size = 0x44
 
-typedef struct Effect6FInstance {
-    /* 0x00 */ s32 flags;
-    /* 0x04 */ s32 effectIndex;
-    /* 0x08 */ s32 numParts;
-    /* 0x0C */ Effect6FData* data;
-    /* 0x10 */ struct EffectGraphics* effect;
-} Effect6FInstance;
+typedef struct MiscParticlesFXData {
+    char unk_00[0x38];
+    s32 unk_38;
+    s32 unk_3C;
+    s32 unk_40;
+    char unk_44[0x4];
+    s32 unk_48;
+    s32 unk_4C;
+    s32 unk_50;
+} MiscParticlesFXData;
+
+typedef struct Effect46FXData {
+    /* 0x00 */ char unk_00[0x24];
+    /* 0x04 */ s32 unk_24;
+} Effect46FXData; // size = 0x44
+
+typedef struct ThunderboltRingFXData {
+    /* 0x00 */ char unk_00[0x30];
+    /* 0x30 */ s32 unk_30;
+} ThunderboltRingFXData; // size = ?
 
 // fx_quizmo_stage
 typedef struct EffectDataQuizStage {
@@ -820,6 +733,87 @@ typedef struct EffectDataQuizVannaT {
     /* 0x18 */ s32 fadeInAmt; // 0 = all-black, FF = fully-visible
     /* 0x1C */ s32 anim;
 } EffectDataQuizVannaT; // size = 0x20
+
+typedef struct EffectInstanceData {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ Vec3f pos;
+    /* 0x10 */ Vec3f rotation;
+    /* 0x1C */ Vec3f scale;
+    /* 0x28 */ f32 unk_28;
+    /* 0x2C */ s32 unk_2C;
+    /* 0x30 */ f32 unk_30;
+    /* 0x34 */ f32 unk_34;
+    /* 0x38 */ f32 unk_38;
+    /* 0x3C */ s32 unk_3C;
+    /* 0x40 */ char unk_40[0x24];
+    /* 0x64 */ f32 unk_64;
+    /* 0x68 */ char unk_68[0x18];
+} EffectInstanceData; // size = 0x80
+
+typedef struct EffectInstance {
+    /* 0x00 */ s32 flags;
+    /* 0x04 */ s32 effectIndex;
+    /* 0x08 */ s32 numParts;
+    /* 0x0C */ BigSnowflakeFXData* data;
+    /* 0x10 */ struct EffectGraphics* graphics;
+} EffectInstance; // size = 0x14
+
+typedef struct StarSpiritData {
+    /* 0x00 */ f32 unk_00;
+    /* 0x04 */ f32 unk_04;
+    /* 0x08 */ f32 unk_08;
+    /* 0x0C */ f32 unk_0C;
+    /* 0x10 */ f32 unk_10;
+    /* 0x14 */ f32 unk_14;
+    /* 0x18 */ f32 unk_18;
+    /* 0x1C */ f32 unk_1C;
+    /* 0x20 */ f32 unk_20;
+    /* 0x24 */ f32 unk_24;
+    /* 0x28 */ f32 unk_28;
+    /* 0x2C */ f32 unk_2C;
+    /* 0x30 */ f32 unk_30;
+    /* 0x34 */ f32 unk_34;
+    /* 0x38 */ s32 unk_38;
+    /* 0x3C */ s32 unk_3C;
+    /* 0x40 */ s32 unk_40; // a shadowID
+    /* 0x44 */ s16 unk_44;
+    /* 0x46 */ s16 unk_46;
+    /* 0x48 */ s16 unk_48;
+    /* 0x4A */ s16 unk_4A;
+    /* 0x4C */ s16 unk_4C;
+    /* 0x4E */ s16 unk_4E;
+    /* 0x50 */ EffectInstance* unk_50;
+    /* 0x54 */ EffectInstance* unk_54;
+} StarSpiritData; // size = 0x58
+
+typedef struct EffectBlueprint {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ s32 effectID;
+    /* 0x08 */ void (*init)(EffectInstance* effectInst);
+    /* 0x0C */ void (*update)(EffectInstance* effectInst);
+    /* 0x10 */ void (*renderWorld)(EffectInstance* effectInst);
+    /* 0x14 */ void (*unk_14)(EffectInstance* effectInst);
+} EffectBlueprint; // size = 0x18
+
+typedef struct EffectGraphics {
+    /* 0x00 */ s32 flags;
+    /* 0x04 */ s32 effectIndex;
+    /* 0x08 */ s32 instanceCounter;
+    /* 0x0C */ s32 freeDelay;
+    /* 0x10 */ void (*update)(EffectInstance* effectInst);
+    /* 0x14 */ void (*renderWorld)(EffectInstance* effectInst);
+    /* 0x18 */ void (*renderUI)(EffectInstance* effectInst);
+    /* 0x1C */ s32* data;
+} EffectGraphics; // size = 0x20
+
+typedef struct EffectTableEntry {
+    /* 0x00 */ void (*entryPoint);
+    /* 0x04 */ void* dmaStart;
+    /* 0x08 */ void* dmaEnd;
+    /* 0x0C */ void* dmaDest;
+    /* 0x10 */ void* graphicsDmaStart;
+    /* 0x14 */ void* graphicsDmaEnd;
+} EffectTableEntry; // size = 0x18
 
 enum FireBreathType {
     FIRE_BREATH_LARGE = 0,
@@ -897,7 +891,7 @@ EffectInstance* fx_bombette_breaking(s32, s32, s32, f32, s32, s32);
 EffectInstance* fx_firework(s32, f32, f32, f32, f32, s32);
 EffectInstance* fx_confetti(s32, f32, f32, f32, f32, s32);
 EffectInstance* fx_snowfall(s32, s32);
-EffectInstance* fx_46(s32, EffectWhirlwind*, f32, s32);
+EffectInstance* fx_46(s32, EffectWhirlwindUnk*, f32, s32);
 EffectInstance* fx_gather_magic(s32, f32, f32, f32, f32, s32);
 EffectInstance* fx_attack_result_text(s32, f32, f32, f32, f32, s32);
 EffectInstance* fx_small_gold_sparkle(s32, f32, f32, f32, f32, s32);
