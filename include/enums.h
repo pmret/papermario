@@ -487,6 +487,8 @@ enum Easings {
 
 enum SoundIDs {
     SOUND_0                         = 0x00000000,
+    SOUND_3                         = 0x00000003,
+    SOUND_4                         = 0x00000004,
     SOUND_MENU_BADGE_EQUIP          = 0x00000005,
     SOUND_MENU_BADGE_UNEQUIP        = 0x00000006,
     SOUND_MENU_START_TUTORIAL       = 0x00000009,
@@ -1889,7 +1891,7 @@ enum AttackEventFlags {
 };
 
 enum PartnerActions {
-    PARTNER_ACTION_NONE             = 0, // genetic state
+    PARTNER_ACTION_NONE             = 0, // generic state
     PARTNER_ACTION_USE              = 1, // generic state
     PARTNER_ACTION_KOOPER_1         = 1,
     PARTNER_ACTION_KOOPER_2         = 2,
