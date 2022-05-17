@@ -28,7 +28,7 @@ MapConfig N(config) = {
 
 EvtScript N(802403E0) = {
     EVT_SWITCH(EVT_SAVE_VAR(0))
-        EVT_CASE_LT(53)
+        EVT_CASE_LT(STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE)
             EVT_CALL(SetMusicTrack, 0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8)
         EVT_CASE_DEFAULT
             EVT_CALL(SetMusicTrack, 0, SONG_FLOWER_FIELDS_SUNNY, 0, 8)
