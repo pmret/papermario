@@ -1,5388 +1,2836 @@
 #include "common.h"
 #include "hud_element.h"
 
+#define ICON_key_Gift_raster 0x0
+#define ICON_key_Gift_palette 0x200
+#define ICON_key_CakeDone_raster 0x220
+#define ICON_key_CakeDone_palette 0x420
+#define ICON_key_CakeBaked_raster 0x440
+#define ICON_key_CakeBaked_palette 0x640
+#define ICON_key_CakePan_raster 0x660
+#define ICON_key_CakePan_palette 0x860
+#define ICON_key_CakeBatter_raster 0x880
+#define ICON_key_CakeBatter_palette 0xA80
+#define ICON_key_CakeBowl_raster 0xAA0
+#define ICON_key_CakeBowl_palette 0xCA0
+#define ICON_key_CakeMix_raster 0xCC0
+#define ICON_key_CakeMix_palette 0xEC0
+#define ICON_key_CakeIcing_raster 0xEE0
+#define ICON_key_CakeIcing_palette 0x10E0
+#define ICON_key_CakeBerries_raster 0x1100
+#define ICON_key_CakeBerries_palette 0x1300
+#define ICON_Hammer1_raster 0x2D940
+#define ICON_Hammer1_palette 0x2DB40
+#define ICON_Hammer2_raster 0x2DB80
+#define ICON_Hammer2_palette 0x2DD80
+#define ICON_Hammer3_raster 0x2DDC0
+#define ICON_Hammer3_palette 0x2DFC0
+#define ICON_Boots1_raster 0x2E000
+#define ICON_Boots1_palette 0x2E200
+#define ICON_Boots2_raster 0x2E240
+#define ICON_Boots2_palette 0x2E440
+#define ICON_Boots3_raster 0x2E480
+#define ICON_Boots3_palette 0x2E680
+#define ICON_Items_raster 0x2E6C0
+#define ICON_Items_palette 0x2E8C0
+#define ICON_anim_heart_piece_raster 0x30CE0
+#define ICON_anim_heart_piece_palette 0x30E00
+#define ICON_anim_heart_0_raster 0x30A60
+#define ICON_anim_heart_0_palette 0x30B80
+#define ICON_anim_heart_1_raster 0x30BA0
+#define ICON_anim_heart_1_palette 0x30CC0
+#define ICON_anim_coin_0_raster 0x2F5C0
+#define ICON_anim_coin_0_palette 0x2F6E0
+#define ICON_anim_coin_1_raster 0x2F700
+#define ICON_anim_coin_1_palette 0x2F820
+#define ICON_anim_coin_4_raster 0x2FAC0
+#define ICON_anim_coin_4_palette 0x2FBE0
+#define ICON_anim_coin_5_raster 0x2FC00
+#define ICON_anim_coin_5_palette 0x2FD20
+#define ICON_anim_coin_6_raster 0x2FD40
+#define ICON_anim_coin_6_palette 0x2FE60
+#define ICON_anim_coin_7_raster 0x2FE80
+#define ICON_anim_coin_7_palette 0x2FFA0
+#define ICON_anim_coin_8_raster 0x2FFC0
+#define ICON_anim_coin_8_palette 0x300E0
+#define ICON_anim_coin_9_raster 0x30100
+#define ICON_anim_coin_9_palette 0x30220
+#define ICON_anim_coin_2_raster 0x2F840
+#define ICON_anim_coin_2_palette 0x2F960
+#define ICON_anim_coin_3_raster 0x2F980
+#define ICON_anim_coin_3_palette 0x2FAA0
+#define ICON_anim_shimmer_0_raster 0x30240
+#define ICON_anim_shimmer_0_palette 0x30260
+#define ICON_anim_shimmer_1_raster 0x30280
+#define ICON_anim_shimmer_1_palette 0x302A0
+#define ICON_anim_shimmer_2_raster 0x302C0
+#define ICON_anim_shimmer_2_palette 0x302E0
+#define ICON_anim_shimmer_6_raster 0x303C0
+#define ICON_anim_shimmer_6_palette 0x303E0
+#define ICON_anim_shimmer_3_raster 0x30300
+#define ICON_anim_shimmer_3_palette 0x30320
+#define ICON_anim_shimmer_4_raster 0x30340
+#define ICON_anim_shimmer_4_palette 0x30360
+#define ICON_anim_shimmer_5_raster 0x30380
+#define ICON_anim_shimmer_5_palette 0x303A0
+#define ICON_anim_sp_0_raster 0x30E20
+#define ICON_anim_sp_0_palette 0x30F40
+#define ICON_anim_sp_1_raster 0x30F60
+#define ICON_anim_sp_1_palette 0x31080
+#define ICON_anim_sp_2_raster 0x310A0
+#define ICON_anim_sp_2_palette 0x311C0
+#define ICON_anim_sp_3_raster 0x311E0
+#define ICON_anim_sp_3_palette 0x31300
+#define ICON_anim_sp_4_raster 0x31320
+#define ICON_anim_sp_4_palette 0x31440
+#define ICON_anim_sp_5_raster 0x31460
+#define ICON_anim_sp_5_palette 0x31580
+#define ICON_anim_sp_6_raster 0x315A0
+#define ICON_anim_sp_6_palette 0x316C0
+#define ICON_anim_sp_7_raster 0x316E0
+#define ICON_anim_sp_7_palette 0x31800
+#define ICON_anim_sp_small_0_raster 0x31CA0
+#define ICON_anim_sp_small_0_palette 0x31CC0
+#define ICON_anim_sp_small_1_raster 0x31CE0
+#define ICON_anim_sp_small_1_palette 0x31D00
+#define ICON_anim_sp_small_2_raster 0x31D20
+#define ICON_anim_sp_small_2_palette 0x31D40
+#define ICON_anim_sp_small_3_raster 0x31D60
+#define ICON_anim_sp_small_3_palette 0x31D80
+#define ICON_anim_sp_small_4_raster 0x31DA0
+#define ICON_anim_sp_small_4_palette 0x31DC0
+#define ICON_anim_sp_small_5_raster 0x31DE0
+#define ICON_anim_sp_small_5_palette 0x31E00
+#define ICON_anim_sp_small_6_raster 0x31E20
+#define ICON_anim_sp_small_6_palette 0x31E40
+#define ICON_anim_sp_small_7_raster 0x31E60
+#define ICON_anim_sp_small_7_palette 0x31E80
+#define ICON_anim_hp_0_raster 0x2E900
+#define ICON_anim_hp_0_palette 0x2EB00
+#define ICON_anim_hp_1_raster 0x2EB20
+#define ICON_anim_hp_1_palette 0x2ED20
+#define ICON_anim_hp_2_raster 0x2ED40
+#define ICON_anim_hp_2_palette 0x2EF40
+#define ICON_anim_fp_0_raster 0x2EF60
+#define ICON_anim_fp_0_palette 0x2F160
+#define ICON_anim_fp_1_raster 0x2F180
+#define ICON_anim_fp_1_palette 0x2F380
+#define ICON_anim_fp_2_raster 0x2F3A0
+#define ICON_anim_fp_2_palette 0x2F5A0
+#define ICON_anim_star_piece_0_raster 0x30400
+#define ICON_anim_star_piece_0_palette 0x30600
+#define ICON_anim_star_piece_1_raster 0x30620
+#define ICON_anim_star_piece_1_palette 0x30820
+#define ICON_anim_star_piece_2_raster 0x30840
+#define ICON_anim_star_piece_2_palette 0x30A40
+#define ICON_key_gear_boots_1_raster 0x1320
+#define ICON_key_gear_boots_1_palette 0x1520
+#define ICON_key_gear_boots_2_raster 0x1540
+#define ICON_key_gear_boots_2_palette 0x1740
+#define ICON_key_gear_boots_3_raster 0x1760
+#define ICON_key_gear_boots_3_palette 0x1960
+#define ICON_key_gear_hammer_1_raster 0x1980
+#define ICON_key_gear_hammer_1_palette 0x1B80
+#define ICON_key_gear_hammer_2_raster 0x1BA0
+#define ICON_key_gear_hammer_2_palette 0x1DA0
+#define ICON_key_gear_hammer_3_raster 0x1DC0
+#define ICON_key_gear_hammer_3_palette 0x1FC0
+#define ICON_key_gear_lucky_star_raster 0x1FE0
+#define ICON_key_gear_lucky_star_palette 0x21E0
+#define ICON_key_map_raster 0x2200
+#define ICON_key_map_palette 0x2400
+#define ICON_key_key_koopa_fortress_raster 0x9020
+#define ICON_key_key_koopa_fortress_palette 0x9220
+#define ICON_key_key_ruins_raster 0x9240
+#define ICON_key_key_ruins_palette 0x9440
+#define ICON_key_key_tubba_castle_raster 0x9460
+#define ICON_key_key_tubba_castle_palette 0x9660
+#define ICON_key_key_ice_palace_raster 0x9680
+#define ICON_key_key_ice_palace_palette 0x9880
+#define ICON_key_key_bowser_castle_raster 0x98A0
+#define ICON_key_key_bowser_castle_palette 0x9AA0
+#define ICON_key_dolly_raster 0x9AC0
+#define ICON_key_dolly_palette 0x9CC0
+#define ICON_key_kooper_shell_raster 0x9CE0
+#define ICON_key_kooper_shell_palette 0x9EE0
+#define ICON_key_pulse_stone_raster 0x9F00
+#define ICON_key_pulse_stone_palette 0xA100
+#define ICON_key_artifact_raster 0xA120
+#define ICON_key_artifact_palette 0xA320
+#define ICON_key_vase_raster 0xA340
+#define ICON_key_vase_palette 0xA540
+#define ICON_key_ruins_stone_pyramid_raster 0xA560
+#define ICON_key_ruins_stone_pyramid_palette 0xA760
+#define ICON_key_ruins_stone_star_raster 0xA780
+#define ICON_key_ruins_stone_star_palette 0xA980
+#define ICON_key_ruins_stone_moon_raster 0xA9A0
+#define ICON_key_ruins_stone_moon_palette 0xABA0
+#define ICON_key_forest_pass_raster 0xABC0
+#define ICON_key_forest_pass_palette 0xADC0
+#define ICON_key_boo_record_mask_raster 0xADE0
+#define ICON_key_boo_record_mask_palette 0xAFE0
+#define ICON_key_boo_record_raster 0xB000
+#define ICON_key_boo_record_palette 0xB200
+#define ICON_key_boo_weight_raster 0xB220
+#define ICON_key_boo_weight_palette 0xB420
+#define ICON_key_boo_portrait_raster 0xB440
+#define ICON_key_boo_portrait_palette 0xB640
+#define ICON_key_mystic_key_raster 0xB660
+#define ICON_key_mystic_key_palette 0xB860
+#define ICON_key_key_storeroom_raster 0xB880
+#define ICON_key_key_storeroom_palette 0xBA80
+#define ICON_key_toybox_train_raster 0xBAA0
+#define ICON_key_toybox_train_palette 0xBCA0
+#define ICON_key_frying_pan_raster 0xBCC0
+#define ICON_key_frying_pan_palette 0xBEC0
+#define ICON_key_dictionary_raster 0xBEE0
+#define ICON_key_dictionary_palette 0xC0E0
+#define ICON_key_mystery_note_raster 0xC100
+#define ICON_key_mystery_note_palette 0xC300
+#define ICON_key_suspicious_note_raster 0xC320
+#define ICON_key_suspicious_note_palette 0xC520
+#define ICON_key_seed_1_raster 0xC540
+#define ICON_key_seed_1_palette 0xC740
+#define ICON_key_seed_2_raster 0xC760
+#define ICON_key_seed_2_palette 0xC960
+#define ICON_key_seed_3_raster 0xC980
+#define ICON_key_seed_3_palette 0xCB80
+#define ICON_key_seed_4_raster 0xCBA0
+#define ICON_key_seed_4_palette 0xCDA0
+#define ICON_key_crystal_berry_raster 0xCDC0
+#define ICON_key_crystal_berry_palette 0xCFC0
+#define ICON_key_water_stone_raster 0xCFE0
+#define ICON_key_water_stone_palette 0xD1E0
+#define ICON_key_magic_bean_raster 0xD200
+#define ICON_key_magic_bean_palette 0xD400
+#define ICON_key_fertile_soil_raster 0xD420
+#define ICON_key_fertile_soil_palette 0xD620
+#define ICON_key_miracle_water_raster 0xD640
+#define ICON_key_miracle_water_palette 0xD840
+#define ICON_key_ultra_stone_raster 0xD860
+#define ICON_key_ultra_stone_palette 0xDA60
+#define ICON_key_toad_doll_raster 0xDAA0
+#define ICON_key_toad_doll_palette 0xDCA0
+#define ICON_key_calculator_raster 0xDCC0
+#define ICON_key_calculator_palette 0xDEC0
+#define ICON_key_screwdriver_raster 0xDEE0
+#define ICON_key_screwdriver_palette 0xE0E0
+#define ICON_key_book_cook_raster 0xE100
+#define ICON_key_book_cook_palette 0xE300
+#define ICON_key_jade_raven_raster 0xE320
+#define ICON_key_jade_raven_palette 0xE520
+#define ICON_key_snowman_bucket_raster 0xE540
+#define ICON_key_snowman_bucket_palette 0xE740
+#define ICON_key_snowman_scarf_raster 0xE760
+#define ICON_key_snowman_scarf_palette 0xE960
+#define ICON_key_key_red_raster 0xE980
+#define ICON_key_key_red_palette 0xEB80
+#define ICON_key_key_blue_raster 0xEBC0
+#define ICON_key_key_blue_palette 0xEDC0
+#define ICON_key_koot_package_raster 0xEDE0
+#define ICON_key_koot_package_palette 0xEFE0
+#define ICON_key_koot_red_jar_raster 0xF000
+#define ICON_key_koot_red_jar_palette 0xF200
+#define ICON_key_book_melody_raster 0xF220
+#define ICON_key_book_melody_palette 0xF420
+#define ICON_key_book_lyrics_raster 0xF440
+#define ICON_key_book_lyrics_palette 0xF640
+#define ICON_key_mailbag_raster 0xF660
+#define ICON_key_mailbag_palette 0xF860
+#define ICON_key_star_stone_raster 0xF880
+#define ICON_key_star_stone_palette 0xFA80
+#define ICON_peach_sneaky_parasol_raster 0xFAA0
+#define ICON_peach_sneaky_parasol_palette 0xFCA0
+#define ICON_key_key_peach_raster 0xFCE0
+#define ICON_key_key_peach_palette 0xFEE0
+#define ICON_key_1DC210_raster 0xFF00
+#define ICON_key_1DC210_palette 0x10100
+#define ICON_key_1DC430_raster 0x10120
+#define ICON_key_1DC430_palette 0x10320
+#define ICON_key_1DC650_raster 0x10340
+#define ICON_key_1DC650_palette 0x10540
+#define ICON_key_1DC870_raster 0x10560
+#define ICON_key_1DC870_palette 0x10760
+#define ICON_key_dojo_card_1_raster 0x10780
+#define ICON_key_dojo_card_1_palette 0x10980
+#define ICON_key_dojo_card_2_raster 0x109A0
+#define ICON_key_dojo_card_2_palette 0x10BA0
+#define ICON_key_dojo_card_3_raster 0x10BC0
+#define ICON_key_dojo_card_3_palette 0x10DC0
+#define ICON_key_dojo_card_4_raster 0x10E00
+#define ICON_key_dojo_card_4_palette 0x11000
+#define ICON_key_dojo_card_5_raster 0x11020
+#define ICON_key_dojo_card_5_palette 0x11220
+#define ICON_key_crystal_ball_raster 0x11240
+#define ICON_key_crystal_ball_palette 0x11440
+#define ICON_key_card_gold_raster 0x11460
+#define ICON_key_card_gold_palette 0x11660
+#define ICON_key_card_silver_raster 0x11680
+#define ICON_key_card_silver_palette 0x11880
+#define ICON_key_koot_book_raster 0x118A0
+#define ICON_key_koot_book_palette 0x11AA0
+#define ICON_key_koot_the_tape_raster 0x11AC0
+#define ICON_key_koot_the_tape_palette 0x11CC0
+#define ICON_key_koot_autograph_luigi_raster 0x11CE0
+#define ICON_key_koot_autograph_luigi_palette 0x11EE0
+#define ICON_key_koot_empty_wallet_raster 0x11F20
+#define ICON_key_koot_empty_wallet_palette 0x12120
+#define ICON_key_koot_autograph_merluvlee_raster 0x12140
+#define ICON_key_koot_autograph_merluvlee_palette 0x12340
+#define ICON_key_koot_shell_raster 0x12360
+#define ICON_key_koot_shell_palette 0x12560
+#define ICON_key_koot_photo_raster 0x12580
+#define ICON_key_koot_photo_palette 0x12780
+#define ICON_key_koot_glasses_raster 0x127A0
+#define ICON_key_koot_glasses_palette 0x129A0
+#define ICON_key_Letter_raster 0x129C0
+#define ICON_key_Letter_palette 0x12BC0
+#define ICON_key_Letter_disabled_raster 0x129C0
+#define ICON_key_Letter_disabled_palette 0x12BE0
+#define ICON_key_LongLetter_raster 0x12C00
+#define ICON_key_LongLetter_palette 0x12E00
+#define ICON_key_LongLetter_disabled_raster 0x12C00
+#define ICON_key_LongLetter_disabled_palette 0x12E20
+#define ICON_key_TealLetter_raster 0x12E40
+#define ICON_key_TealLetter_palette 0x13040
+#define ICON_key_TealLetter_disabled_raster 0x12E40
+#define ICON_key_TealLetter_disabled_palette 0x13060
+#define ICON_key_Postcard_raster 0x13080
+#define ICON_key_Postcard_palette 0x13280
+#define ICON_key_Postcard_disabled_raster 0x13080
+#define ICON_key_Postcard_disabled_palette 0x132A0
+#define ICON_key_EmptyBook_raster 0x132C0
+#define ICON_key_EmptyBook_palette 0x134C0
+#define ICON_key_EmptyBook_disabled_raster 0x132C0
+#define ICON_key_EmptyBook_disabled_palette 0x134E0
+#define ICON_unused_08D_raster 0x13500
+#define ICON_unused_08D_palette 0x13700
+#define ICON_unused_08D_disabled_raster 0x13500
+#define ICON_unused_08D_disabled_palette 0x13720
+#define ICON_unused_08E_raster 0x13740
+#define ICON_unused_08E_palette 0x13940
+#define ICON_unused_08E_disabled_raster 0x13740
+#define ICON_unused_08E_disabled_palette 0x13960
+#define ICON_unused_08F_raster 0x13980
+#define ICON_unused_08F_palette 0x13B80
+#define ICON_unused_08F_disabled_raster 0x13980
+#define ICON_unused_08F_disabled_palette 0x13BA0
+#define ICON_battle_PleaseComeBack_raster 0x13BC0
+#define ICON_battle_PleaseComeBack_palette 0x13DC0
+#define ICON_battle_PleaseComeBack_disabled_raster 0x13BC0
+#define ICON_battle_PleaseComeBack_disabled_palette 0x13DE0
+#define ICON_battle_139_raster 0x13E00
+#define ICON_battle_139_palette 0x14000
+#define ICON_battle_139_disabled_raster 0x13E00
+#define ICON_battle_139_disabled_palette 0x14020
+#define ICON_battle_FrightJar_raster 0x14040
+#define ICON_battle_FrightJar_palette 0x14240
+#define ICON_battle_FrightJar_disabled_raster 0x14040
+#define ICON_battle_FrightJar_disabled_palette 0x14260
+#define ICON_battle_Mystery_raster 0x14280
+#define ICON_battle_Mystery_palette 0x14480
+#define ICON_battle_Mystery_disabled_raster 0x14280
+#define ICON_battle_Mystery_disabled_palette 0x144A0
+#define ICON_battle_RepelGel_raster 0x144C0
+#define ICON_battle_RepelGel_palette 0x146C0
+#define ICON_battle_RepelGel_disabled_raster 0x144C0
+#define ICON_battle_RepelGel_disabled_palette 0x146E0
+#define ICON_battle_InsecticideHerb_raster 0x14700
+#define ICON_battle_InsecticideHerb_palette 0x14900
+#define ICON_battle_InsecticideHerb_disabled_raster 0x14700
+#define ICON_battle_InsecticideHerb_disabled_palette 0x14920
+#define ICON_battle_13E_raster 0x14940
+#define ICON_battle_13E_palette 0x14B40
+#define ICON_battle_13E_disabled_raster 0x14940
+#define ICON_battle_13E_disabled_palette 0x14B60
+#define ICON_battle_13F_raster 0x14B80
+#define ICON_battle_13F_palette 0x14D80
+#define ICON_battle_13F_disabled_raster 0x14B80
+#define ICON_battle_13F_disabled_palette 0x14DA0
+#define ICON_food_SpicySoup_raster 0x2420
+#define ICON_food_SpicySoup_palette 0x2620
+#define ICON_food_SpicySoup_disabled_raster 0x2420
+#define ICON_food_SpicySoup_disabled_palette 0x2640
+#define ICON_food_ApplePie_raster 0x2660
+#define ICON_food_ApplePie_palette 0x2860
+#define ICON_food_ApplePie_disabled_raster 0x2660
+#define ICON_food_ApplePie_disabled_palette 0x2880
+#define ICON_food_HoneyUltra_raster 0x28A0
+#define ICON_food_HoneyUltra_palette 0x2AA0
+#define ICON_food_HoneyUltra_disabled_raster 0x28A0
+#define ICON_food_HoneyUltra_disabled_palette 0x2AC0
+#define ICON_food_MapleUltra_raster 0x2AE0
+#define ICON_food_MapleUltra_palette 0x2CE0
+#define ICON_food_MapleUltra_disabled_raster 0x2AE0
+#define ICON_food_MapleUltra_disabled_palette 0x2D00
+#define ICON_food_JellyUltra_raster 0x2D20
+#define ICON_food_JellyUltra_palette 0x2F20
+#define ICON_food_JellyUltra_disabled_raster 0x2D20
+#define ICON_food_JellyUltra_disabled_palette 0x2F40
+#define ICON_food_Koopasta_raster 0x2F60
+#define ICON_food_Koopasta_palette 0x3160
+#define ICON_food_Koopasta_disabled_raster 0x2F60
+#define ICON_food_Koopasta_disabled_palette 0x3180
+#define ICON_food_FriedShroom_raster 0x31A0
+#define ICON_food_FriedShroom_palette 0x33A0
+#define ICON_food_FriedShroom_disabled_raster 0x31A0
+#define ICON_food_FriedShroom_disabled_palette 0x33C0
+#define ICON_food_ShroomCake_raster 0x33E0
+#define ICON_food_ShroomCake_palette 0x35E0
+#define ICON_food_ShroomCake_disabled_raster 0x33E0
+#define ICON_food_ShroomCake_disabled_palette 0x3600
+#define ICON_food_ShroomSteak_raster 0x3620
+#define ICON_food_ShroomSteak_palette 0x3820
+#define ICON_food_ShroomSteak_disabled_raster 0x3620
+#define ICON_food_ShroomSteak_disabled_palette 0x3840
+#define ICON_food_HotShroom_raster 0x3860
+#define ICON_food_HotShroom_palette 0x3A60
+#define ICON_food_HotShroom_disabled_raster 0x3860
+#define ICON_food_HotShroom_disabled_palette 0x3A80
+#define ICON_food_SweetShroom_raster 0x3AA0
+#define ICON_food_SweetShroom_palette 0x3CA0
+#define ICON_food_SweetShroom_disabled_raster 0x3AA0
+#define ICON_food_SweetShroom_disabled_palette 0x3CC0
+#define ICON_food_HealthyJuice_raster 0x3CE0
+#define ICON_food_HealthyJuice_palette 0x3EE0
+#define ICON_food_HealthyJuice_disabled_raster 0x3CE0
+#define ICON_food_HealthyJuice_disabled_palette 0x3F00
+#define ICON_food_BlandMeal_raster 0x3F20
+#define ICON_food_BlandMeal_palette 0x4120
+#define ICON_food_BlandMeal_disabled_raster 0x3F20
+#define ICON_food_BlandMeal_disabled_palette 0x4140
+#define ICON_food_YummyMeal_raster 0x4160
+#define ICON_food_YummyMeal_palette 0x4360
+#define ICON_food_YummyMeal_disabled_raster 0x4160
+#define ICON_food_YummyMeal_disabled_palette 0x4380
+#define ICON_food_DeluxeFeast_raster 0x43A0
+#define ICON_food_DeluxeFeast_palette 0x45A0
+#define ICON_food_DeluxeFeast_disabled_raster 0x43A0
+#define ICON_food_DeluxeFeast_disabled_palette 0x45C0
+#define ICON_food_SpecialShake_raster 0x45E0
+#define ICON_food_SpecialShake_palette 0x47E0
+#define ICON_food_SpecialShake_disabled_raster 0x45E0
+#define ICON_food_SpecialShake_disabled_palette 0x4800
+#define ICON_food_BigCookie_raster 0x4820
+#define ICON_food_BigCookie_palette 0x4A20
+#define ICON_food_BigCookie_disabled_raster 0x4820
+#define ICON_food_BigCookie_disabled_palette 0x4A40
+#define ICON_food_Cake_raster 0x4A60
+#define ICON_food_Cake_palette 0x4C60
+#define ICON_food_Cake_disabled_raster 0x4A60
+#define ICON_food_Cake_disabled_palette 0x4C80
+#define ICON_food_Mistake_raster 0x4CA0
+#define ICON_food_Mistake_palette 0x4EA0
+#define ICON_food_Mistake_disabled_raster 0x4CA0
+#define ICON_food_Mistake_disabled_palette 0x4EC0
+#define ICON_food_KoopaTea_raster 0x4EE0
+#define ICON_food_KoopaTea_palette 0x50E0
+#define ICON_food_KoopaTea_disabled_raster 0x4EE0
+#define ICON_food_KoopaTea_disabled_palette 0x5100
+#define ICON_food_HoneySuper_raster 0x5120
+#define ICON_food_HoneySuper_palette 0x5320
+#define ICON_food_HoneySuper_disabled_raster 0x5120
+#define ICON_food_HoneySuper_disabled_palette 0x5340
+#define ICON_food_MapleSuper_raster 0x5360
+#define ICON_food_MapleSuper_palette 0x5560
+#define ICON_food_MapleSuper_disabled_raster 0x5360
+#define ICON_food_MapleSuper_disabled_palette 0x5580
+#define ICON_food_JellySuper_raster 0x55A0
+#define ICON_food_JellySuper_palette 0x57A0
+#define ICON_food_JellySuper_disabled_raster 0x55A0
+#define ICON_food_JellySuper_disabled_palette 0x57C0
+#define ICON_food_Spaghetti_raster 0x57E0
+#define ICON_food_Spaghetti_palette 0x59E0
+#define ICON_food_Spaghetti_disabled_raster 0x57E0
+#define ICON_food_Spaghetti_disabled_palette 0x5A00
+#define ICON_food_EggMissile_raster 0x5A20
+#define ICON_food_EggMissile_palette 0x5C20
+#define ICON_food_EggMissile_disabled_raster 0x5A20
+#define ICON_food_EggMissile_disabled_palette 0x5C40
+#define ICON_food_FriedEgg_raster 0x5C60
+#define ICON_food_FriedEgg_palette 0x5E60
+#define ICON_food_FriedEgg_disabled_raster 0x5C60
+#define ICON_food_FriedEgg_disabled_palette 0x5E80
+#define ICON_food_HoneyShroom_raster 0x5EA0
+#define ICON_food_HoneyShroom_palette 0x60A0
+#define ICON_food_HoneyShroom_disabled_raster 0x5EA0
+#define ICON_food_HoneyShroom_disabled_palette 0x60C0
+#define ICON_food_HoneyCandy_raster 0x60E0
+#define ICON_food_HoneyCandy_palette 0x62E0
+#define ICON_food_HoneyCandy_disabled_raster 0x60E0
+#define ICON_food_HoneyCandy_disabled_palette 0x6300
+#define ICON_food_ElectroPop_raster 0x6320
+#define ICON_food_ElectroPop_palette 0x6520
+#define ICON_food_ElectroPop_disabled_raster 0x6320
+#define ICON_food_ElectroPop_disabled_palette 0x6540
+#define ICON_food_FirePop_raster 0x6560
+#define ICON_food_FirePop_palette 0x6760
+#define ICON_food_FirePop_disabled_raster 0x6560
+#define ICON_food_FirePop_disabled_palette 0x6780
+#define ICON_food_LimeCandy_raster 0x67A0
+#define ICON_food_LimeCandy_palette 0x69A0
+#define ICON_food_LimeCandy_disabled_raster 0x67A0
+#define ICON_food_LimeCandy_disabled_palette 0x69C0
+#define ICON_food_CocoPop_raster 0x69E0
+#define ICON_food_CocoPop_palette 0x6BE0
+#define ICON_food_CocoPop_disabled_raster 0x69E0
+#define ICON_food_CocoPop_disabled_palette 0x6C00
+#define ICON_food_LemonCandy_raster 0x6C20
+#define ICON_food_LemonCandy_palette 0x6E20
+#define ICON_food_LemonCandy_disabled_raster 0x6C20
+#define ICON_food_LemonCandy_disabled_palette 0x6E40
+#define ICON_food_JellyPop_raster 0x6E60
+#define ICON_food_JellyPop_palette 0x7060
+#define ICON_food_JellyPop_disabled_raster 0x6E60
+#define ICON_food_JellyPop_disabled_palette 0x7080
+#define ICON_food_StrangeCake_raster 0x70A0
+#define ICON_food_StrangeCake_palette 0x72A0
+#define ICON_food_StrangeCake_disabled_raster 0x70A0
+#define ICON_food_StrangeCake_disabled_palette 0x72C0
+#define ICON_food_KookyCookie_raster 0x72E0
+#define ICON_food_KookyCookie_palette 0x74E0
+#define ICON_food_KookyCookie_disabled_raster 0x72E0
+#define ICON_food_KookyCookie_disabled_palette 0x7500
+#define ICON_food_FrozenFries_raster 0x7520
+#define ICON_food_FrozenFries_palette 0x7720
+#define ICON_food_FrozenFries_disabled_raster 0x7520
+#define ICON_food_FrozenFries_disabled_palette 0x7740
+#define ICON_food_PotatoSalad_raster 0x7760
+#define ICON_food_PotatoSalad_palette 0x7960
+#define ICON_food_PotatoSalad_disabled_raster 0x7760
+#define ICON_food_PotatoSalad_disabled_palette 0x7980
+#define ICON_food_NuttyCake_raster 0x79A0
+#define ICON_food_NuttyCake_palette 0x7BA0
+#define ICON_food_NuttyCake_disabled_raster 0x79A0
+#define ICON_food_NuttyCake_disabled_palette 0x7BC0
+#define ICON_food_MapleShroom_raster 0x7BE0
+#define ICON_food_MapleShroom_palette 0x7DE0
+#define ICON_food_MapleShroom_disabled_raster 0x7BE0
+#define ICON_food_MapleShroom_disabled_palette 0x7E00
+#define ICON_food_BoiledEgg_raster 0x7E20
+#define ICON_food_BoiledEgg_palette 0x8020
+#define ICON_food_BoiledEgg_disabled_raster 0x7E20
+#define ICON_food_BoiledEgg_disabled_palette 0x8040
+#define ICON_food_YoshiCookie_raster 0x8060
+#define ICON_food_YoshiCookie_palette 0x8260
+#define ICON_food_YoshiCookie_disabled_raster 0x8060
+#define ICON_food_YoshiCookie_disabled_palette 0x8280
+#define ICON_food_JellyShroom_raster 0x82A0
+#define ICON_food_JellyShroom_palette 0x84A0
+#define ICON_food_JellyShroom_disabled_raster 0x82A0
+#define ICON_food_JellyShroom_disabled_palette 0x84C0
+#define ICON_unused_02C_raster 0x84E0
+#define ICON_unused_02C_palette 0x86E0
+#define ICON_unused_02C_disabled_raster 0x84E0
+#define ICON_unused_02C_disabled_palette 0x8700
+#define ICON_unused_02D_raster 0x8720
+#define ICON_unused_02D_palette 0x8920
+#define ICON_unused_02D_disabled_raster 0x8720
+#define ICON_unused_02D_disabled_palette 0x8940
+#define ICON_unused_02E_raster 0x8960
+#define ICON_unused_02E_palette 0x8B60
+#define ICON_unused_02E_disabled_raster 0x8960
+#define ICON_unused_02E_disabled_palette 0x8B80
+#define ICON_unused_02F_raster 0x8BA0
+#define ICON_unused_02F_palette 0x8DA0
+#define ICON_unused_02F_disabled_raster 0x8BA0
+#define ICON_unused_02F_disabled_palette 0x8DC0
+#define ICON_unused_030_raster 0x8DE0
+#define ICON_unused_030_palette 0x8FE0
+#define ICON_unused_030_disabled_raster 0x8DE0
+#define ICON_unused_030_disabled_palette 0x9000
+#define ICON_badge_SpinSmash_raster 0x14DC0
+#define ICON_badge_SpinSmash_palette 0x14FC0
+#define ICON_badge_SpinSmash_disabled_raster 0x14DC0
+#define ICON_badge_SpinSmash_disabled_palette 0x14FE0
+#define ICON_badge_Multibounce_raster 0x15000
+#define ICON_badge_Multibounce_palette 0x15200
+#define ICON_badge_Multibounce_disabled_raster 0x15000
+#define ICON_badge_Multibounce_disabled_palette 0x15220
+#define ICON_badge_PowerPlus_raster 0x15240
+#define ICON_badge_PowerPlus_palette 0x15440
+#define ICON_badge_PowerPlus_disabled_raster 0x15240
+#define ICON_badge_PowerPlus_disabled_palette 0x15460
+#define ICON_badge_DodgeMaster_raster 0x15480
+#define ICON_badge_DodgeMaster_palette 0x15680
+#define ICON_badge_DodgeMaster_disabled_raster 0x15480
+#define ICON_badge_DodgeMaster_disabled_palette 0x156A0
+#define ICON_badge_PowerBounce_raster 0x156C0
+#define ICON_badge_PowerBounce_palette 0x158C0
+#define ICON_badge_PowerBounce_disabled_raster 0x156C0
+#define ICON_badge_PowerBounce_disabled_palette 0x158E0
+#define ICON_badge_SpikeShield_raster 0x15900
+#define ICON_badge_SpikeShield_palette 0x15B00
+#define ICON_badge_SpikeShield_disabled_raster 0x15900
+#define ICON_badge_SpikeShield_disabled_palette 0x15B20
+#define ICON_badge_FirstAttack_raster 0x15B40
+#define ICON_badge_FirstAttack_palette 0x15D40
+#define ICON_badge_FirstAttack_disabled_raster 0x15B40
+#define ICON_badge_FirstAttack_disabled_palette 0x15D60
+#define ICON_badge_HPPlus_raster 0x15D80
+#define ICON_badge_HPPlus_palette 0x15F80
+#define ICON_badge_HPPlus_disabled_raster 0x15D80
+#define ICON_badge_HPPlus_disabled_palette 0x15FA0
+#define ICON_badge_QuakeHammer_raster 0x15FC0
+#define ICON_badge_QuakeHammer_palette 0x161C0
+#define ICON_badge_QuakeHammer_disabled_raster 0x15FC0
+#define ICON_badge_QuakeHammer_disabled_palette 0x161E0
+#define ICON_badge_DoubleDip_raster 0x16200
+#define ICON_badge_DoubleDip_palette 0x16400
+#define ICON_badge_DoubleDip_disabled_raster 0x16200
+#define ICON_badge_DoubleDip_disabled_palette 0x16420
+#define ICON_badge_PowerQuake_raster 0x16440
+#define ICON_badge_PowerQuake_palette 0x16640
+#define ICON_badge_PowerQuake_disabled_raster 0x16440
+#define ICON_badge_PowerQuake_disabled_palette 0x16660
+#define ICON_badge_MegaQuake_raster 0x16680
+#define ICON_badge_MegaQuake_palette 0x16880
+#define ICON_badge_MegaQuake_disabled_raster 0x16680
+#define ICON_badge_MegaQuake_disabled_palette 0x168A0
+#define ICON_badge_SleepStomp_raster 0x168C0
+#define ICON_badge_SleepStomp_palette 0x16AC0
+#define ICON_badge_SleepStomp_disabled_raster 0x168C0
+#define ICON_badge_SleepStomp_disabled_palette 0x16AE0
+#define ICON_badge_SmashCharge_raster 0x16B00
+#define ICON_badge_SmashCharge_palette 0x16D00
+#define ICON_badge_SmashCharge_disabled_raster 0x16B00
+#define ICON_badge_SmashCharge_disabled_palette 0x16D20
+#define ICON_badge_SSmashChg_raster 0x16D40
+#define ICON_badge_SSmashChg_palette 0x16F40
+#define ICON_badge_SSmashChg_disabled_raster 0x16D40
+#define ICON_badge_SSmashChg_disabled_palette 0x16F60
+#define ICON_badge_AutoSmash_raster 0x16F80
+#define ICON_badge_AutoSmash_palette 0x17180
+#define ICON_badge_AutoSmash_disabled_raster 0x16F80
+#define ICON_badge_AutoSmash_disabled_palette 0x171A0
+#define ICON_badge_FireShield_raster 0x171C0
+#define ICON_badge_FireShield_palette 0x173C0
+#define ICON_badge_FireShield_disabled_raster 0x171C0
+#define ICON_badge_FireShield_disabled_palette 0x173E0
+#define ICON_badge_JumpCharge_raster 0x17400
+#define ICON_badge_JumpCharge_palette 0x17600
+#define ICON_badge_JumpCharge_disabled_raster 0x17400
+#define ICON_badge_JumpCharge_disabled_palette 0x17620
+#define ICON_badge_SJumpChg_raster 0x17640
+#define ICON_badge_SJumpChg_palette 0x17840
+#define ICON_badge_SJumpChg_disabled_raster 0x17640
+#define ICON_badge_SJumpChg_disabled_palette 0x17860
+#define ICON_badge_AutoJump_raster 0x17880
+#define ICON_badge_AutoJump_palette 0x17A80
+#define ICON_badge_AutoJump_disabled_raster 0x17880
+#define ICON_badge_AutoJump_disabled_palette 0x17AA0
+#define ICON_badge_DDownPound_raster 0x17AC0
+#define ICON_badge_DDownPound_palette 0x17CC0
+#define ICON_badge_DDownPound_disabled_raster 0x17AC0
+#define ICON_badge_DDownPound_disabled_palette 0x17CE0
+#define ICON_badge_AutoMultibounce_raster 0x17D00
+#define ICON_badge_AutoMultibounce_palette 0x17F00
+#define ICON_badge_AutoMultibounce_disabled_raster 0x17D00
+#define ICON_badge_AutoMultibounce_disabled_palette 0x17F20
+#define ICON_badge_DizzyStomp_raster 0x17F40
+#define ICON_badge_DizzyStomp_palette 0x18140
+#define ICON_badge_DizzyStomp_disabled_raster 0x17F40
+#define ICON_badge_DizzyStomp_disabled_palette 0x18160
+#define ICON_badge_HammerThrow_raster 0x18180
+#define ICON_badge_HammerThrow_palette 0x18380
+#define ICON_badge_HammerThrow_disabled_raster 0x18180
+#define ICON_badge_HammerThrow_disabled_palette 0x183A0
+#define ICON_badge_SmashCharge0_raster 0x183C0
+#define ICON_badge_SmashCharge0_palette 0x185C0
+#define ICON_badge_SmashCharge0_disabled_raster 0x183C0
+#define ICON_badge_SmashCharge0_disabled_palette 0x185E0
+#define ICON_badge_PrettyLucky_raster 0x18600
+#define ICON_badge_PrettyLucky_palette 0x18800
+#define ICON_badge_PrettyLucky_disabled_raster 0x18600
+#define ICON_badge_PrettyLucky_disabled_palette 0x18820
+#define ICON_badge_FeelingFine_raster 0x18840
+#define ICON_badge_FeelingFine_palette 0x18A40
+#define ICON_badge_FeelingFine_disabled_raster 0x18840
+#define ICON_badge_FeelingFine_disabled_palette 0x18A60
+#define ICON_badge_AttackFXA_raster 0x18A80
+#define ICON_badge_AttackFXA_palette 0x18C80
+#define ICON_badge_AttackFXA_disabled_raster 0x18A80
+#define ICON_badge_AttackFXA_disabled_palette 0x18CA0
+#define ICON_badge_AllorNothing_raster 0x18CC0
+#define ICON_badge_AllorNothing_palette 0x18EC0
+#define ICON_badge_AllorNothing_disabled_raster 0x18CC0
+#define ICON_badge_AllorNothing_disabled_palette 0x18EE0
+#define ICON_badge_HPDrain_raster 0x18F00
+#define ICON_badge_HPDrain_palette 0x19100
+#define ICON_badge_HPDrain_disabled_raster 0x18F00
+#define ICON_badge_HPDrain_disabled_palette 0x19120
+#define ICON_badge_JumpCharge0_raster 0x19140
+#define ICON_badge_JumpCharge0_palette 0x19340
+#define ICON_badge_JumpCharge0_disabled_raster 0x19140
+#define ICON_badge_JumpCharge0_disabled_palette 0x19360
+#define ICON_badge_SlowGo_raster 0x19380
+#define ICON_badge_SlowGo_palette 0x19580
+#define ICON_badge_SlowGo_disabled_raster 0x19380
+#define ICON_badge_SlowGo_disabled_palette 0x195A0
+#define ICON_badge_FPPlus_raster 0x195C0
+#define ICON_badge_FPPlus_palette 0x197C0
+#define ICON_badge_FPPlus_disabled_raster 0x195C0
+#define ICON_badge_FPPlus_disabled_palette 0x197E0
+#define ICON_badge_MegaRush_raster 0x19800
+#define ICON_badge_MegaRush_palette 0x19A00
+#define ICON_badge_MegaRush_disabled_raster 0x19800
+#define ICON_badge_MegaRush_disabled_palette 0x19A20
+#define ICON_badge_IcePower_raster 0x19A40
+#define ICON_badge_IcePower_palette 0x19C40
+#define ICON_badge_IcePower_disabled_raster 0x19A40
+#define ICON_badge_IcePower_disabled_palette 0x19C60
+#define ICON_badge_DefendPlus_raster 0x19C80
+#define ICON_badge_DefendPlus_palette 0x19E80
+#define ICON_badge_DefendPlus_disabled_raster 0x19C80
+#define ICON_badge_DefendPlus_disabled_palette 0x19EA0
+#define ICON_badge_PayOff_raster 0x19EC0
+#define ICON_badge_PayOff_palette 0x1A0C0
+#define ICON_badge_PayOff_disabled_raster 0x19EC0
+#define ICON_badge_PayOff_disabled_palette 0x1A0E0
+#define ICON_badge_MoneyMoney_raster 0x1A100
+#define ICON_badge_MoneyMoney_palette 0x1A300
+#define ICON_badge_MoneyMoney_disabled_raster 0x1A100
+#define ICON_badge_MoneyMoney_disabled_palette 0x1A320
+#define ICON_badge_ChillOut_raster 0x1A340
+#define ICON_badge_ChillOut_palette 0x1A540
+#define ICON_badge_ChillOut_disabled_raster 0x1A340
+#define ICON_badge_ChillOut_disabled_palette 0x1A560
+#define ICON_badge_HappyHeart_raster 0x1A580
+#define ICON_badge_HappyHeart_palette 0x1A780
+#define ICON_badge_HappyHeart_disabled_raster 0x1A580
+#define ICON_badge_HappyHeart_disabled_palette 0x1A7A0
+#define ICON_badge_ZapTap_raster 0x1A7C0
+#define ICON_badge_ZapTap_palette 0x1A9C0
+#define ICON_badge_ZapTap_disabled_raster 0x1A7C0
+#define ICON_badge_ZapTap_disabled_palette 0x1A9E0
+#define ICON_badge_Berserker_raster 0x1AA00
+#define ICON_badge_Berserker_palette 0x1AC00
+#define ICON_badge_Berserker_disabled_raster 0x1AA00
+#define ICON_badge_Berserker_disabled_palette 0x1AC20
+#define ICON_badge_RightOn_raster 0x1AC40
+#define ICON_badge_RightOn_palette 0x1AE40
+#define ICON_badge_RightOn_disabled_raster 0x1AC40
+#define ICON_badge_RightOn_disabled_palette 0x1AE60
+#define ICON_badge_RunawayPay_raster 0x1AE80
+#define ICON_badge_RunawayPay_palette 0x1B080
+#define ICON_badge_RunawayPay_disabled_raster 0x1AE80
+#define ICON_badge_RunawayPay_disabled_palette 0x1B0A0
+#define ICON_badge_Refund_raster 0x1B0C0
+#define ICON_badge_Refund_palette 0x1B2C0
+#define ICON_badge_Refund_disabled_raster 0x1B0C0
+#define ICON_badge_Refund_disabled_palette 0x1B2E0
+#define ICON_badge_FlowerSaver_raster 0x1B300
+#define ICON_badge_FlowerSaver_palette 0x1B500
+#define ICON_badge_FlowerSaver_disabled_raster 0x1B300
+#define ICON_badge_FlowerSaver_disabled_palette 0x1B520
+#define ICON_badge_TripleDip_raster 0x1B540
+#define ICON_badge_TripleDip_palette 0x1B740
+#define ICON_badge_TripleDip_disabled_raster 0x1B540
+#define ICON_badge_TripleDip_disabled_palette 0x1B760
+#define ICON_badge_FlowerFanatic_raster 0x1B780
+#define ICON_badge_FlowerFanatic_palette 0x1B980
+#define ICON_badge_FlowerFanatic_disabled_raster 0x1B780
+#define ICON_badge_FlowerFanatic_disabled_palette 0x1B9A0
+#define ICON_badge_PowerJump_raster 0x1B9C0
+#define ICON_badge_PowerJump_palette 0x1BBC0
+#define ICON_badge_PowerJump_disabled_raster 0x1B9C0
+#define ICON_badge_PowerJump_disabled_palette 0x1BBE0
+#define ICON_badge_SuperJump_raster 0x1BC00
+#define ICON_badge_SuperJump_palette 0x1BE00
+#define ICON_badge_SuperJump_disabled_raster 0x1BC00
+#define ICON_badge_SuperJump_disabled_palette 0x1BE20
+#define ICON_badge_MegaJump_raster 0x1BE40
+#define ICON_badge_MegaJump_palette 0x1C040
+#define ICON_badge_MegaJump_disabled_raster 0x1BE40
+#define ICON_badge_MegaJump_disabled_palette 0x1C060
+#define ICON_badge_PowerSmash_raster 0x1C080
+#define ICON_badge_PowerSmash_palette 0x1C280
+#define ICON_badge_PowerSmash_disabled_raster 0x1C080
+#define ICON_badge_PowerSmash_disabled_palette 0x1C2A0
+#define ICON_badge_SuperSmash_raster 0x1C2C0
+#define ICON_badge_SuperSmash_palette 0x1C4C0
+#define ICON_badge_SuperSmash_disabled_raster 0x1C2C0
+#define ICON_badge_SuperSmash_disabled_palette 0x1C4E0
+#define ICON_badge_MegaSmash_raster 0x1C500
+#define ICON_badge_MegaSmash_palette 0x1C700
+#define ICON_badge_MegaSmash_disabled_raster 0x1C500
+#define ICON_badge_MegaSmash_disabled_palette 0x1C720
+#define ICON_badge_LuckyDay_raster 0x1C740
+#define ICON_badge_LuckyDay_palette 0x1C940
+#define ICON_badge_LuckyDay_disabled_raster 0x1C740
+#define ICON_badge_LuckyDay_disabled_palette 0x1C960
+#define ICON_badge_MegaHPDrain_raster 0x1C980
+#define ICON_badge_MegaHPDrain_palette 0x1CB80
+#define ICON_badge_MegaHPDrain_disabled_raster 0x1C980
+#define ICON_badge_MegaHPDrain_disabled_palette 0x1CBA0
+#define ICON_badge_BumpAttack_raster 0x1CBC0
+#define ICON_badge_BumpAttack_palette 0x1CDC0
+#define ICON_badge_BumpAttack_disabled_raster 0x1CBC0
+#define ICON_badge_BumpAttack_disabled_palette 0x1CDE0
+#define ICON_badge_PUpDDown_raster 0x1CE00
+#define ICON_badge_PUpDDown_palette 0x1D000
+#define ICON_badge_PUpDDown_disabled_raster 0x1CE00
+#define ICON_badge_PUpDDown_disabled_palette 0x1D020
+#define ICON_badge_PDownDUp_raster 0x1D040
+#define ICON_badge_PDownDUp_palette 0x1D240
+#define ICON_badge_PDownDUp_disabled_raster 0x1D040
+#define ICON_badge_PDownDUp_disabled_palette 0x1D260
+#define ICON_badge_HeartFinder_raster 0x1D280
+#define ICON_badge_HeartFinder_palette 0x1D480
+#define ICON_badge_HeartFinder_disabled_raster 0x1D280
+#define ICON_badge_HeartFinder_disabled_palette 0x1D4A0
+#define ICON_badge_FlowerFinder_raster 0x1D4C0
+#define ICON_badge_FlowerFinder_palette 0x1D6C0
+#define ICON_badge_FlowerFinder_disabled_raster 0x1D4C0
+#define ICON_badge_FlowerFinder_disabled_palette 0x1D6E0
+#define ICON_badge_DizzyAttack_raster 0x1D700
+#define ICON_badge_DizzyAttack_palette 0x1D900
+#define ICON_badge_DizzyAttack_disabled_raster 0x1D700
+#define ICON_badge_DizzyAttack_disabled_palette 0x1D920
+#define ICON_badge_SpeedySpin_raster 0x1D940
+#define ICON_badge_SpeedySpin_palette 0x1DB40
+#define ICON_badge_SpeedySpin_disabled_raster 0x1D940
+#define ICON_badge_SpeedySpin_disabled_palette 0x1DB60
+#define ICON_badge_SpinAttack_raster 0x1DB80
+#define ICON_badge_SpinAttack_palette 0x1DD80
+#define ICON_badge_SpinAttack_disabled_raster 0x1DB80
+#define ICON_badge_SpinAttack_disabled_palette 0x1DDA0
+#define ICON_badge_ISpy_raster 0x1DDC0
+#define ICON_badge_ISpy_palette 0x1DFC0
+#define ICON_badge_ISpy_disabled_raster 0x1DDC0
+#define ICON_badge_ISpy_disabled_palette 0x1DFE0
+#define ICON_badge_PowerRush_raster 0x1E000
+#define ICON_badge_PowerRush_palette 0x1E200
+#define ICON_badge_PowerRush_disabled_raster 0x1E000
+#define ICON_badge_PowerRush_disabled_palette 0x1E220
+#define ICON_badge_LastStand_raster 0x1E240
+#define ICON_badge_LastStand_palette 0x1E440
+#define ICON_badge_LastStand_disabled_raster 0x1E240
+#define ICON_badge_LastStand_disabled_palette 0x1E460
+#define ICON_badge_CloseCall_raster 0x1E480
+#define ICON_badge_CloseCall_palette 0x1E680
+#define ICON_badge_CloseCall_disabled_raster 0x1E480
+#define ICON_badge_CloseCall_disabled_palette 0x1E6A0
+#define ICON_badge_CrazyHeart_raster 0x1E6C0
+#define ICON_badge_CrazyHeart_palette 0x1E8C0
+#define ICON_badge_CrazyHeart_disabled_raster 0x1E6C0
+#define ICON_badge_CrazyHeart_disabled_palette 0x1E8E0
+#define ICON_unused_0D5_raster 0x1E900
+#define ICON_unused_0D5_palette 0x1EB00
+#define ICON_unused_0D5_disabled_raster 0x1E900
+#define ICON_unused_0D5_disabled_palette 0x1EB20
+#define ICON_unused_0D6_raster 0x1EB40
+#define ICON_unused_0D6_palette 0x1ED40
+#define ICON_unused_0D6_disabled_raster 0x1EB40
+#define ICON_unused_0D6_disabled_palette 0x1ED60
+#define ICON_unused_0D7_raster 0x1ED80
+#define ICON_unused_0D7_palette 0x1EF80
+#define ICON_unused_0D7_disabled_raster 0x1ED80
+#define ICON_unused_0D7_disabled_palette 0x1EFA0
+#define ICON_badge_ShrinkSmash_raster 0x1EFC0
+#define ICON_badge_ShrinkSmash_palette 0x1F1C0
+#define ICON_badge_ShrinkSmash_disabled_raster 0x1EFC0
+#define ICON_badge_ShrinkSmash_disabled_palette 0x1F1E0
+#define ICON_badge_ShrinkStomp_raster 0x1F200
+#define ICON_badge_ShrinkStomp_palette 0x1F400
+#define ICON_badge_ShrinkStomp_disabled_raster 0x1F200
+#define ICON_badge_ShrinkStomp_disabled_palette 0x1F420
+#define ICON_badge_DDownJump_raster 0x1F440
+#define ICON_badge_DDownJump_palette 0x1F640
+#define ICON_badge_DDownJump_disabled_raster 0x1F440
+#define ICON_badge_DDownJump_disabled_palette 0x1F660
+#define ICON_badge_DamageDodge_raster 0x1F680
+#define ICON_badge_DamageDodge_palette 0x1F880
+#define ICON_badge_DamageDodge_disabled_raster 0x1F680
+#define ICON_badge_DamageDodge_disabled_palette 0x1F8A0
+#define ICON_badge_EarthquakeJump_raster 0x1F8C0
+#define ICON_badge_EarthquakeJump_palette 0x1FAC0
+#define ICON_badge_EarthquakeJump_disabled_raster 0x1F8C0
+#define ICON_badge_EarthquakeJump_disabled_palette 0x1FAE0
+#define ICON_badge_HappyFlower_raster 0x1FB00
+#define ICON_badge_HappyFlower_palette 0x1FD00
+#define ICON_badge_HappyFlower_disabled_raster 0x1FB00
+#define ICON_badge_HappyFlower_disabled_palette 0x1FD20
+#define ICON_badge_HappyCoin_raster 0x1FD40
+#define ICON_badge_HappyCoin_palette 0x1FF40
+#define ICON_badge_HappyCoin_disabled_raster 0x1FD40
+#define ICON_badge_HappyCoin_disabled_palette 0x1FF60
+#define ICON_unused_0DF_raster 0x1FF80
+#define ICON_unused_0DF_palette 0x20180
+#define ICON_unused_0DF_disabled_raster 0x1FF80
+#define ICON_unused_0DF_disabled_palette 0x201A0
+#define ICON_badge_DeepFocus_raster 0x201C0
+#define ICON_badge_DeepFocus_palette 0x203C0
+#define ICON_badge_DeepFocus_disabled_raster 0x201C0
+#define ICON_badge_DeepFocus_disabled_palette 0x203E0
+#define ICON_badge_SuperFocus_raster 0x20400
+#define ICON_badge_SuperFocus_palette 0x20600
+#define ICON_badge_SuperFocus_disabled_raster 0x20400
+#define ICON_badge_SuperFocus_disabled_palette 0x20620
+#define ICON_badge_Kaiden_raster 0x20640
+#define ICON_badge_Kaiden_palette 0x20840
+#define ICON_badge_Kaiden_disabled_raster 0x20640
+#define ICON_badge_Kaiden_disabled_palette 0x20860
+#define ICON_badge_QuickChange_raster 0x20880
+#define ICON_badge_QuickChange_palette 0x20A80
+#define ICON_badge_QuickChange_disabled_raster 0x20880
+#define ICON_badge_QuickChange_disabled_palette 0x20AA0
+#define ICON_unused_0E4_raster 0x20AC0
+#define ICON_unused_0E4_palette 0x20CC0
+#define ICON_unused_0E4_disabled_raster 0x20AC0
+#define ICON_unused_0E4_disabled_palette 0x20CE0
+#define ICON_unused_0E5_raster 0x20D00
+#define ICON_unused_0E5_palette 0x20F00
+#define ICON_unused_0E5_disabled_raster 0x20D00
+#define ICON_unused_0E5_disabled_palette 0x20F20
+#define ICON_unused_0E6_raster 0x20F40
+#define ICON_unused_0E6_palette 0x21140
+#define ICON_unused_0E6_disabled_raster 0x20F40
+#define ICON_unused_0E6_disabled_palette 0x21160
+#define ICON_unused_0E7_raster 0x21180
+#define ICON_unused_0E7_palette 0x21380
+#define ICON_unused_0E7_disabled_raster 0x21180
+#define ICON_unused_0E7_disabled_palette 0x213A0
+#define ICON_badge_Peekaboo_raster 0x213C0
+#define ICON_badge_Peekaboo_palette 0x215C0
+#define ICON_badge_Peekaboo_disabled_raster 0x213C0
+#define ICON_badge_Peekaboo_disabled_palette 0x215E0
+#define ICON_badge_GroupFocus_raster 0x21600
+#define ICON_badge_GroupFocus_palette 0x21800
+#define ICON_badge_GroupFocus_disabled_raster 0x21600
+#define ICON_badge_GroupFocus_disabled_palette 0x21820
+#define ICON_badge_AttackFXD_raster 0x21840
+#define ICON_badge_AttackFXD_palette 0x21A40
+#define ICON_badge_AttackFXD_disabled_raster 0x21840
+#define ICON_badge_AttackFXD_disabled_palette 0x21A60
+#define ICON_badge_AttackFXB_raster 0x21A80
+#define ICON_badge_AttackFXB_palette 0x21C80
+#define ICON_badge_AttackFXB_disabled_raster 0x21A80
+#define ICON_badge_AttackFXB_disabled_palette 0x21CA0
+#define ICON_badge_AttackFXE_raster 0x21CC0
+#define ICON_badge_AttackFXE_palette 0x21EC0
+#define ICON_badge_AttackFXE_disabled_raster 0x21CC0
+#define ICON_badge_AttackFXE_disabled_palette 0x21EE0
+#define ICON_badge_AttackFXC_raster 0x21F00
+#define ICON_badge_AttackFXC_palette 0x22100
+#define ICON_badge_AttackFXC_disabled_raster 0x21F00
+#define ICON_badge_AttackFXC_disabled_palette 0x22120
+#define ICON_badge_AttackFXF_raster 0x22140
+#define ICON_badge_AttackFXF_palette 0x22340
+#define ICON_badge_AttackFXF_disabled_raster 0x22140
+#define ICON_badge_AttackFXF_disabled_palette 0x22360
+#define ICON_unused_0EF_raster 0x22380
+#define ICON_unused_0EF_palette 0x22580
+#define ICON_unused_0EF_disabled_raster 0x22380
+#define ICON_unused_0EF_disabled_palette 0x225A0
+#define ICON_badge_HealthyHealthy_raster 0x225C0
+#define ICON_badge_HealthyHealthy_palette 0x227C0
+#define ICON_badge_HealthyHealthy_disabled_raster 0x225C0
+#define ICON_badge_HealthyHealthy_disabled_palette 0x227E0
+#define ICON_unused_0F1_raster 0x22800
+#define ICON_unused_0F1_palette 0x22A00
+#define ICON_unused_0F1_disabled_raster 0x22800
+#define ICON_unused_0F1_disabled_palette 0x22A20
+#define ICON_unused_0F2_raster 0x22A40
+#define ICON_unused_0F2_palette 0x22C40
+#define ICON_unused_0F2_disabled_raster 0x22A40
+#define ICON_unused_0F2_disabled_palette 0x22C60
+#define ICON_unused_0F3_raster 0x22C80
+#define ICON_unused_0F3_palette 0x22E80
+#define ICON_unused_0F3_disabled_raster 0x22C80
+#define ICON_unused_0F3_disabled_palette 0x22EA0
+#define ICON_unused_0F4_raster 0x22EC0
+#define ICON_unused_0F4_palette 0x230C0
+#define ICON_unused_0F4_disabled_raster 0x22EC0
+#define ICON_unused_0F4_disabled_palette 0x230E0
+#define ICON_unused_0F5_raster 0x23100
+#define ICON_unused_0F5_palette 0x23300
+#define ICON_unused_0F5_disabled_raster 0x23100
+#define ICON_unused_0F5_disabled_palette 0x23320
+#define ICON_unused_0F6_raster 0x23340
+#define ICON_unused_0F6_palette 0x23540
+#define ICON_unused_0F6_disabled_raster 0x23340
+#define ICON_unused_0F6_disabled_palette 0x23560
+#define ICON_unused_0F7_raster 0x23580
+#define ICON_unused_0F7_palette 0x23780
+#define ICON_unused_0F7_disabled_raster 0x23580
+#define ICON_unused_0F7_disabled_palette 0x237A0
+#define ICON_battle_FireFlower_raster 0x2A3C0
+#define ICON_battle_FireFlower_palette 0x2A5C0
+#define ICON_battle_FireFlower_disabled_raster 0x2A3C0
+#define ICON_battle_FireFlower_disabled_palette 0x2A5E0
+#define ICON_battle_SnowmanDoll_raster 0x2A600
+#define ICON_battle_SnowmanDoll_palette 0x2A800
+#define ICON_battle_SnowmanDoll_disabled_raster 0x2A600
+#define ICON_battle_SnowmanDoll_disabled_palette 0x2A820
+#define ICON_battle_ThunderRage_raster 0x2A840
+#define ICON_battle_ThunderRage_palette 0x2AA40
+#define ICON_battle_ThunderRage_disabled_raster 0x2A840
+#define ICON_battle_ThunderRage_disabled_palette 0x2AA60
+#define ICON_battle_ThunderBolt_raster 0x2AA80
+#define ICON_battle_ThunderBolt_palette 0x2AC80
+#define ICON_battle_ThunderBolt_disabled_raster 0x2AA80
+#define ICON_battle_ThunderBolt_disabled_palette 0x2ACA0
+#define ICON_battle_ShootingStar_raster 0x2ACC0
+#define ICON_battle_ShootingStar_palette 0x2AEC0
+#define ICON_battle_ShootingStar_disabled_raster 0x2ACC0
+#define ICON_battle_ShootingStar_disabled_palette 0x2AEE0
+#define ICON_battle_DustyHammer_raster 0x2AF00
+#define ICON_battle_DustyHammer_palette 0x2B100
+#define ICON_battle_DustyHammer_disabled_raster 0x2AF00
+#define ICON_battle_DustyHammer_disabled_palette 0x2B120
+#define ICON_battle_Pebble_raster 0x2B140
+#define ICON_battle_Pebble_palette 0x2B340
+#define ICON_battle_Pebble_disabled_raster 0x2B140
+#define ICON_battle_Pebble_disabled_palette 0x2B360
+#define ICON_unused_127_raster 0x2B380
+#define ICON_unused_127_palette 0x2B580
+#define ICON_unused_127_disabled_raster 0x2B380
+#define ICON_unused_127_disabled_palette 0x2B5A0
+#define ICON_battle_StoneCap_raster 0x2B5C0
+#define ICON_battle_StoneCap_palette 0x2B7C0
+#define ICON_battle_StoneCap_disabled_raster 0x2B5C0
+#define ICON_battle_StoneCap_disabled_palette 0x2B7E0
+#define ICON_battle_VoltShroom_raster 0x2B800
+#define ICON_battle_VoltShroom_palette 0x2BA00
+#define ICON_battle_VoltShroom_disabled_raster 0x2B800
+#define ICON_battle_VoltShroom_disabled_palette 0x2BA20
+#define ICON_battle_PowerStar_raster 0x2BA40
+#define ICON_battle_PowerStar_palette 0x2BC40
+#define ICON_battle_PowerStar_disabled_raster 0x2BA40
+#define ICON_battle_PowerStar_disabled_palette 0x2BC60
+#define ICON_battle_Parasol_raster 0x2BC80
+#define ICON_battle_Parasol_palette 0x2BE80
+#define ICON_battle_Parasol_disabled_raster 0x2BC80
+#define ICON_battle_Parasol_disabled_palette 0x2BEA0
+#define ICON_battle_MagicMirror_raster 0x2BEC0
+#define ICON_battle_MagicMirror_palette 0x2C0C0
+#define ICON_battle_MagicMirror_disabled_raster 0x2BEC0
+#define ICON_battle_MagicMirror_disabled_palette 0x2C0E0
+#define ICON_unused_12D_raster 0x2C100
+#define ICON_unused_12D_palette 0x2C300
+#define ICON_unused_12D_disabled_raster 0x2C100
+#define ICON_unused_12D_disabled_palette 0x2C320
+#define ICON_unused_12E_raster 0x2C340
+#define ICON_unused_12E_palette 0x2C540
+#define ICON_unused_12E_disabled_raster 0x2C340
+#define ICON_unused_12E_disabled_palette 0x2C560
+#define ICON_unused_12F_raster 0x2C580
+#define ICON_unused_12F_palette 0x2C780
+#define ICON_unused_12F_disabled_raster 0x2C580
+#define ICON_unused_12F_disabled_palette 0x2C7A0
+#define ICON_food_Mushroom_raster 0x237C0
+#define ICON_food_Mushroom_palette 0x239C0
+#define ICON_food_Mushroom_disabled_raster 0x237C0
+#define ICON_food_Mushroom_disabled_palette 0x239E0
+#define ICON_food_SuperShroom_raster 0x23A00
+#define ICON_food_SuperShroom_palette 0x23C00
+#define ICON_food_SuperShroom_disabled_raster 0x23A00
+#define ICON_food_SuperShroom_disabled_palette 0x23C20
+#define ICON_food_UltraShroom_raster 0x23C40
+#define ICON_food_UltraShroom_palette 0x23E40
+#define ICON_food_UltraShroom_disabled_raster 0x23C40
+#define ICON_food_UltraShroom_disabled_palette 0x23E60
+#define ICON_food_LifeShroom_raster 0x23E80
+#define ICON_food_LifeShroom_palette 0x24080
+#define ICON_food_LifeShroom_disabled_raster 0x23E80
+#define ICON_food_LifeShroom_disabled_palette 0x240A0
+#define ICON_food_DriedShroom_raster 0x240C0
+#define ICON_food_DriedShroom_palette 0x242C0
+#define ICON_food_DriedShroom_disabled_raster 0x240C0
+#define ICON_food_DriedShroom_disabled_palette 0x242E0
+#define ICON_food_TastyTonic_raster 0x24300
+#define ICON_food_TastyTonic_palette 0x24500
+#define ICON_food_TastyTonic_disabled_raster 0x24300
+#define ICON_food_TastyTonic_disabled_palette 0x24520
+#define ICON_food_SuperSoda_raster 0x24540
+#define ICON_food_SuperSoda_palette 0x24740
+#define ICON_food_SuperSoda_disabled_raster 0x24540
+#define ICON_food_SuperSoda_disabled_palette 0x24760
+#define ICON_food_BlueBerry_raster 0x24780
+#define ICON_food_BlueBerry_palette 0x24980
+#define ICON_food_BlueBerry_disabled_raster 0x24780
+#define ICON_food_BlueBerry_disabled_palette 0x249A0
+#define ICON_food_RedBerry_raster 0x249C0
+#define ICON_food_RedBerry_palette 0x24BC0
+#define ICON_food_RedBerry_disabled_raster 0x249C0
+#define ICON_food_RedBerry_disabled_palette 0x24BE0
+#define ICON_food_YellowBerry_raster 0x24C00
+#define ICON_food_YellowBerry_palette 0x24E00
+#define ICON_food_YellowBerry_disabled_raster 0x24C00
+#define ICON_food_YellowBerry_disabled_palette 0x24E20
+#define ICON_food_BubbleBerry_raster 0x24E40
+#define ICON_food_BubbleBerry_palette 0x25040
+#define ICON_food_BubbleBerry_disabled_raster 0x24E40
+#define ICON_food_BubbleBerry_disabled_palette 0x25060
+#define ICON_food_Goomnut_raster 0x25080
+#define ICON_food_Goomnut_palette 0x25280
+#define ICON_food_Goomnut_disabled_raster 0x25080
+#define ICON_food_Goomnut_disabled_palette 0x252A0
+#define ICON_food_KoopaLeaf_raster 0x252C0
+#define ICON_food_KoopaLeaf_palette 0x254C0
+#define ICON_food_KoopaLeaf_disabled_raster 0x252C0
+#define ICON_food_KoopaLeaf_disabled_palette 0x254E0
+#define ICON_food_DriedPasta_raster 0x25500
+#define ICON_food_DriedPasta_palette 0x25700
+#define ICON_food_DriedPasta_disabled_raster 0x25500
+#define ICON_food_DriedPasta_disabled_palette 0x25720
+#define ICON_food_Lime_raster 0x25740
+#define ICON_food_Lime_palette 0x25940
+#define ICON_food_Lime_disabled_raster 0x25740
+#define ICON_food_Lime_disabled_palette 0x25960
+#define ICON_food_Lemon_raster 0x25980
+#define ICON_food_Lemon_palette 0x25B80
+#define ICON_food_Lemon_disabled_raster 0x25980
+#define ICON_food_Lemon_disabled_palette 0x25BA0
+#define ICON_food_DriedFruit_raster 0x25BC0
+#define ICON_food_DriedFruit_palette 0x25DC0
+#define ICON_food_DriedFruit_disabled_raster 0x25BC0
+#define ICON_food_DriedFruit_disabled_palette 0x25DE0
+#define ICON_food_StrangeLeaf_raster 0x25E00
+#define ICON_food_StrangeLeaf_palette 0x26000
+#define ICON_food_StrangeLeaf_disabled_raster 0x25E00
+#define ICON_food_StrangeLeaf_disabled_palette 0x26020
+#define ICON_food_CakeMix_raster 0x26040
+#define ICON_food_CakeMix_palette 0x26240
+#define ICON_food_CakeMix_disabled_raster 0x26040
+#define ICON_food_CakeMix_disabled_palette 0x26260
+#define ICON_food_Egg_raster 0x26280
+#define ICON_food_Egg_palette 0x26480
+#define ICON_food_Egg_disabled_raster 0x26280
+#define ICON_food_Egg_disabled_palette 0x264A0
+#define ICON_food_Coconut_raster 0x264C0
+#define ICON_food_Coconut_palette 0x266C0
+#define ICON_food_Coconut_disabled_raster 0x264C0
+#define ICON_food_Coconut_disabled_palette 0x266E0
+#define ICON_food_Melon_raster 0x26700
+#define ICON_food_Melon_palette 0x26900
+#define ICON_food_Melon_disabled_raster 0x26700
+#define ICON_food_Melon_disabled_palette 0x26920
+#define ICON_food_StinkyHerb_raster 0x26940
+#define ICON_food_StinkyHerb_palette 0x26B40
+#define ICON_food_StinkyHerb_disabled_raster 0x26940
+#define ICON_food_StinkyHerb_disabled_palette 0x26B60
+#define ICON_food_IcedPotato_raster 0x26B80
+#define ICON_food_IcedPotato_palette 0x26D80
+#define ICON_food_IcedPotato_disabled_raster 0x26B80
+#define ICON_food_IcedPotato_disabled_palette 0x26DA0
+#define ICON_food_HoneySyrup_raster 0x26DC0
+#define ICON_food_HoneySyrup_palette 0x26FC0
+#define ICON_food_HoneySyrup_disabled_raster 0x26DC0
+#define ICON_food_HoneySyrup_disabled_palette 0x26FE0
+#define ICON_food_MapleSyrup_raster 0x27000
+#define ICON_food_MapleSyrup_palette 0x27200
+#define ICON_food_MapleSyrup_disabled_raster 0x27000
+#define ICON_food_MapleSyrup_disabled_palette 0x27220
+#define ICON_food_JamminJelly_raster 0x27240
+#define ICON_food_JamminJelly_palette 0x27440
+#define ICON_food_JamminJelly_disabled_raster 0x27240
+#define ICON_food_JamminJelly_disabled_palette 0x27460
+#define ICON_food_WhackasBump_raster 0x27480
+#define ICON_food_WhackasBump_palette 0x27680
+#define ICON_food_WhackasBump_disabled_raster 0x27480
+#define ICON_food_WhackasBump_disabled_palette 0x276A0
+#define ICON_food_Apple_raster 0x276C0
+#define ICON_food_Apple_palette 0x278C0
+#define ICON_food_Apple_disabled_raster 0x276C0
+#define ICON_food_Apple_disabled_palette 0x278E0
+#define ICON_peach_BakingSalt_raster 0x27900
+#define ICON_peach_BakingSalt_palette 0x27B00
+#define ICON_peach_BakingSalt_disabled_raster 0x27900
+#define ICON_peach_BakingSalt_disabled_palette 0x27B20
+#define ICON_peach_BakingSugar_raster 0x27B40
+#define ICON_peach_BakingSugar_palette 0x27D40
+#define ICON_peach_BakingSugar_disabled_raster 0x27B40
+#define ICON_peach_BakingSugar_disabled_palette 0x27D60
+#define ICON_peach_BakingEgg_raster 0x27D80
+#define ICON_peach_BakingEgg_palette 0x27F80
+#define ICON_peach_BakingEgg_disabled_raster 0x27D80
+#define ICON_peach_BakingEgg_disabled_palette 0x27FA0
+#define ICON_peach_BakingCream_raster 0x27FC0
+#define ICON_peach_BakingCream_palette 0x281C0
+#define ICON_peach_BakingCream_disabled_raster 0x27FC0
+#define ICON_peach_BakingCream_disabled_palette 0x281E0
+#define ICON_peach_BakingStrawberry_raster 0x28200
+#define ICON_peach_BakingStrawberry_palette 0x28400
+#define ICON_peach_BakingStrawberry_disabled_raster 0x28200
+#define ICON_peach_BakingStrawberry_disabled_palette 0x28420
+#define ICON_peach_BakingButter_raster 0x28440
+#define ICON_peach_BakingButter_palette 0x28640
+#define ICON_peach_BakingButter_disabled_raster 0x28440
+#define ICON_peach_BakingButter_disabled_palette 0x28660
+#define ICON_peach_BakingCleanser_raster 0x28680
+#define ICON_peach_BakingCleanser_palette 0x28880
+#define ICON_peach_BakingCleanser_disabled_raster 0x28680
+#define ICON_peach_BakingCleanser_disabled_palette 0x288A0
+#define ICON_peach_BakingWater_raster 0x288C0
+#define ICON_peach_BakingWater_palette 0x28AC0
+#define ICON_peach_BakingWater_disabled_raster 0x288C0
+#define ICON_peach_BakingWater_disabled_palette 0x28AE0
+#define ICON_peach_BakingFlour_raster 0x28B00
+#define ICON_peach_BakingFlour_palette 0x28D00
+#define ICON_peach_BakingFlour_disabled_raster 0x28B00
+#define ICON_peach_BakingFlour_disabled_palette 0x28D20
+#define ICON_peach_BakingMilk_raster 0x28D40
+#define ICON_peach_BakingMilk_palette 0x28F40
+#define ICON_peach_BakingMilk_disabled_raster 0x28D40
+#define ICON_peach_BakingMilk_disabled_palette 0x28F60
+#define ICON_unused_11F_raster 0x28F80
+#define ICON_unused_11F_palette 0x29180
+#define ICON_unused_11F_disabled_raster 0x28F80
+#define ICON_unused_11F_disabled_palette 0x291A0
+#define ICON_battle_SleepySheep_raster 0x291C0
+#define ICON_battle_SleepySheep_palette 0x293C0
+#define ICON_battle_SleepySheep_disabled_raster 0x291C0
+#define ICON_battle_SleepySheep_disabled_palette 0x293E0
+#define ICON_battle_XBandage_raster 0x29400
+#define ICON_battle_XBandage_palette 0x29600
+#define ICON_battle_XBandage_disabled_raster 0x29400
+#define ICON_battle_XBandage_disabled_palette 0x29620
+#define ICON_battle_POWBlock_raster 0x29640
+#define ICON_battle_POWBlock_palette 0x29840
+#define ICON_battle_POWBlock_disabled_raster 0x29640
+#define ICON_battle_POWBlock_disabled_palette 0x29860
+#define ICON_battle_HustleDrink_raster 0x29880
+#define ICON_battle_HustleDrink_palette 0x29A80
+#define ICON_battle_HustleDrink_disabled_raster 0x29880
+#define ICON_battle_HustleDrink_disabled_palette 0x29AA0
+#define ICON_battle_StopWatch_raster 0x29AC0
+#define ICON_battle_StopWatch_palette 0x29CC0
+#define ICON_battle_StopWatch_disabled_raster 0x29AC0
+#define ICON_battle_StopWatch_disabled_palette 0x29CE0
+#define ICON_battle_DizzyDial_raster 0x29D00
+#define ICON_battle_DizzyDial_palette 0x29F00
+#define ICON_battle_DizzyDial_disabled_raster 0x29D00
+#define ICON_battle_DizzyDial_disabled_palette 0x29F20
+#define ICON_battle_136_raster 0x29F40
+#define ICON_battle_136_palette 0x2A140
+#define ICON_battle_136_disabled_raster 0x29F40
+#define ICON_battle_136_disabled_palette 0x2A160
+#define ICON_battle_137_raster 0x2A180
+#define ICON_battle_137_palette 0x2A380
+#define ICON_battle_137_disabled_raster 0x2A180
+#define ICON_battle_137_disabled_palette 0x2A3A0
+#define ICON_anim_hand_0_raster 0x2C7C0
+#define ICON_anim_hand_0_palette 0x2C8E0
+#define ICON_anim_hand_1_raster 0x2C900
+#define ICON_anim_hand_1_palette 0x2CA20
+#define ICON_anim_hand_2_raster 0x2CA40
+#define ICON_anim_hand_2_palette 0x2CB60
+#define ICON_anim_hand_3_raster 0x2CB80
+#define ICON_anim_hand_3_palette 0x2CCA0
+#define ICON_anim_hand_4_raster 0x2CCC0
+#define ICON_anim_hand_4_palette 0x2CDE0
+#define ICON_anim_hand_5_raster 0x2CE00
+#define ICON_anim_hand_5_palette 0x2CF20
+#define ICON_anim_hand_6_raster 0x2CF40
+#define ICON_anim_hand_6_palette 0x2D060
+#define ICON_anim_hand_7_raster 0x2D080
+#define ICON_anim_hand_7_palette 0x2D1A0
+#define ICON_anim_hand_8_raster 0x2D1C0
+#define ICON_anim_hand_8_palette 0x2D2E0
+#define ICON_anim_hand_9_raster 0x2D300
+#define ICON_anim_hand_9_palette 0x2D420
+
+typedef s32 ItemScript[0];
+
+enum {
+    ITEM_SCRIPT_OP_End,
+    ITEM_SCRIPT_OP_SetImage,
+    ITEM_SCRIPT_OP_Restart,
+    ITEM_SCRIPT_OP_Loop,
+    ITEM_SCRIPT_OP_RandomRestart
+};
+
+#define is_End ITEM_SCRIPT_OP_End,
+#define is_SetIcon(time, icon) ITEM_SCRIPT_OP_SetImage, time, ICON_##icon##_raster, ICON_##icon##_palette, 0, 0,
+#define is_Restart ITEM_SCRIPT_OP_Restart,
+#define is_Loop ITEM_SCRIPT_OP_Loop,
+#define is_RandomRestart(max, cutoff) ITEM_SCRIPT_OP_RandomRestart, max, cutoff,
+
+#define STANDARD_ITEM_SCRIPT(icon) \
+    { \
+        is_SetIcon(60, icon) \
+		is_Restart \
+		is_End \
+    }
+
+#define STANDARD_ITEM_HUD_SCRIPT(icon) \
+    { \
+		he_SetVisible \
+		he_SetTileSize(HUD_ELEMENT_SIZE_32x32) \
+		he_Loop \
+			he_SetIcon(60, icon) \
+		he_Restart \
+		he_End \
+    }
+
 HudScript HudScript_HandPointDownLoop = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_24x24),
-	he_Loop,
-		he_SetTexelOffset(0, -1),
-		he_SetImage(1, 0x0002C7C0, 0x0002C8E0),
-		he_SetTexelOffset(0, -1),
-		he_SetImage(1, 0x0002C7C0, 0x0002C8E0),
-		he_SetTexelOffset(0, -1),
-		he_SetImage(1, 0x0002C7C0, 0x0002C8E0),
-		he_SetTexelOffset(0, -1),
-		he_SetImage(1, 0x0002C7C0, 0x0002C8E0),
-		he_SetTexelOffset(2, -1),
-		he_SetImage(1, 0x0002C900, 0x0002CA20),
-		he_SetTexelOffset(2, -1),
-		he_SetImage(1, 0x0002CA40, 0x0002CB60),
-		he_SetTexelOffset(2, -1),
-		he_SetImage(4, 0x0002CB80, 0x0002CCA0),
-		he_SetTexelOffset(2, 4),
-		he_SetImage(1, 0x0002C900, 0x0002CA20),
-		he_SetTexelOffset(0, 3),
-		he_SetImage(1, 0x0002C7C0, 0x0002C8E0),
-		he_SetTexelOffset(0, -1),
-		he_SetImage(14, 0x0002CCC0, 0x0002CDE0),
-	he_Restart,
+	he_SetVisible
+	he_SetTileSize(HUD_ELEMENT_SIZE_24x24)
+	he_Loop
+		he_SetTexelOffset(0, -1)
+		he_SetIcon(1, anim_hand_0)
+		he_SetTexelOffset(0, -1)
+		he_SetIcon(1, anim_hand_0)
+		he_SetTexelOffset(0, -1)
+		he_SetIcon(1, anim_hand_0)
+		he_SetTexelOffset(0, -1)
+		he_SetIcon(1, anim_hand_0)
+		he_SetTexelOffset(2, -1)
+		he_SetIcon(1, anim_hand_1)
+		he_SetTexelOffset(2, -1)
+		he_SetIcon(1, anim_hand_2)
+		he_SetTexelOffset(2, -1)
+		he_SetIcon(4, anim_hand_3)
+		he_SetTexelOffset(2, 4)
+		he_SetIcon(1, anim_hand_1)
+		he_SetTexelOffset(0, 3)
+		he_SetIcon(1, anim_hand_0)
+		he_SetTexelOffset(0, -1)
+		he_SetIcon(14, anim_hand_4)
+	he_Restart
 	he_End
 };
 
 HudScript HudScript_HandPointDown = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_24x24),
-	he_SetTexelOffset(0, -1),
-	he_SetImage(1, 0x0002C7C0, 0x0002C8E0),
-	he_SetTexelOffset(2, -1),
-	he_SetImage(1, 0x0002C900, 0x0002CA20),
-	he_SetTexelOffset(2, -1),
-	he_SetImage(1, 0x0002CA40, 0x0002CB60),
-	he_SetTexelOffset(2, -1),
-	he_SetImage(4, 0x0002CB80, 0x0002CCA0),
-	he_SetTexelOffset(2, 4),
-	he_SetImage(1, 0x0002C900, 0x0002CA20),
-	he_SetTexelOffset(0, 3),
-	he_SetImage(1, 0x0002C7C0, 0x0002C8E0),
-	he_SetTexelOffset(0, -1),
-	he_SetImage(2, 0x0002CCC0, 0x0002CDE0),
-	he_SetTexelOffset(0, 3),
-	he_Loop,
-		he_SetImage(60, 0x0002C7C0, 0x0002C8E0),
-	he_Restart,
+	he_SetVisible
+	he_SetTileSize(HUD_ELEMENT_SIZE_24x24)
+	he_SetTexelOffset(0, -1)
+	he_SetIcon(1, anim_hand_0)
+	he_SetTexelOffset(2, -1)
+	he_SetIcon(1, anim_hand_1)
+	he_SetTexelOffset(2, -1)
+	he_SetIcon(1, anim_hand_2)
+	he_SetTexelOffset(2, -1)
+	he_SetIcon(4, anim_hand_3)
+	he_SetTexelOffset(2, 4)
+	he_SetIcon(1, anim_hand_1)
+	he_SetTexelOffset(0, 3)
+	he_SetIcon(1, anim_hand_0)
+	he_SetTexelOffset(0, -1)
+	he_SetIcon(2, anim_hand_4)
+	he_SetTexelOffset(0, 3)
+	he_Loop
+		he_SetIcon(60, anim_hand_0)
+	he_Restart
 	he_End
 };
 
 HudScript HudScript_HandPointDownHeld = {
-    he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_24x24),
-	he_Loop,
-	    he_SetImage(60, 0x0002C7C0, 0x0002C8E0),
-	he_Restart,
+	he_SetVisible
+	he_SetTileSize(HUD_ELEMENT_SIZE_24x24)
+	he_Loop
+		he_SetIcon(60, anim_hand_0)
+	he_Restart
 	he_End
 };
 
 HudScript HudScript_HandPointLeftLoop = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_24x24),
-	he_Loop,
-		he_SetTexelOffset(0, 0),
-		he_SetImage(1, 0x0002CE00, 0x0002CF20),
-		he_SetTexelOffset(0, 0),
-		he_SetImage(1, 0x0002CE00, 0x0002CF20),
-		he_SetTexelOffset(0, 0),
-		he_SetImage(1, 0x0002CE00, 0x0002CF20),
-		he_SetTexelOffset(0, 0),
-		he_SetImage(1, 0x0002CE00, 0x0002CF20),
-		he_SetTexelOffset(0, -1),
-		he_SetImage(1, 0x0002CF40, 0x0002D060),
-		he_SetTexelOffset(0, -1),
-		he_SetImage(1, 0x0002D080, 0x0002D1A0),
-		he_SetTexelOffset(1, -3),
-		he_SetImage(4, 0x0002D1C0, 0x0002D2E0),
-		he_SetTexelOffset(0, 4),
-		he_SetImage(1, 0x0002CF40, 0x0002D060),
-		he_SetTexelOffset(0, 4),
-		he_SetImage(1, 0x0002CE00, 0x0002CF20),
-		he_SetTexelOffset(0, 1),
-		he_SetImage(14, 0x0002D300, 0x0002D420),
-	he_Restart,
+	he_SetVisible
+	he_SetTileSize(HUD_ELEMENT_SIZE_24x24)
+	he_Loop
+		he_SetTexelOffset(0, 0)
+		he_SetIcon(1, anim_hand_5)
+		he_SetTexelOffset(0, 0)
+		he_SetIcon(1, anim_hand_5)
+		he_SetTexelOffset(0, 0)
+		he_SetIcon(1, anim_hand_5)
+		he_SetTexelOffset(0, 0)
+		he_SetIcon(1, anim_hand_5)
+		he_SetTexelOffset(0, -1)
+		he_SetIcon(1, anim_hand_6)
+		he_SetTexelOffset(0, -1)
+		he_SetIcon(1, anim_hand_7)
+		he_SetTexelOffset(1, -3)
+		he_SetIcon(4, anim_hand_8)
+		he_SetTexelOffset(0, 4)
+		he_SetIcon(1, anim_hand_6)
+		he_SetTexelOffset(0, 4)
+		he_SetIcon(1, anim_hand_5)
+		he_SetTexelOffset(0, 1)
+		he_SetIcon(14, anim_hand_9)
+	he_Restart
 	he_End
 };
 
 HudScript HudScript_HandPointLeft = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_24x24),
-	he_SetTexelOffset(0, 0),
-	he_SetImage(1, 0x0002CE00, 0x0002CF20),
-	he_SetTexelOffset(0, -1),
-	he_SetImage(1, 0x0002CF40, 0x0002D060),
-	he_SetTexelOffset(0, -1),
-	he_SetImage(1, 0x0002D080, 0x0002D1A0),
-	he_SetTexelOffset(1, -3),
-	he_SetImage(4, 0x0002D1C0, 0x0002D2E0),
-	he_SetTexelOffset(0, 4),
-	he_SetImage(1, 0x0002CF40, 0x0002D060),
-	he_SetTexelOffset(0, 4),
-	he_SetImage(1, 0x0002CE00, 0x0002CF20),
-	he_SetTexelOffset(0, 1),
-	he_SetImage(2, 0x0002D300, 0x0002D420),
-	he_SetTexelOffset(0, 4),
-	he_Loop,
-		he_SetImage(60, 0x0002CE00, 0x0002CF20),
-	he_Restart,
+	he_SetVisible
+	he_SetTileSize(HUD_ELEMENT_SIZE_24x24)
+	he_SetTexelOffset(0, 0)
+	he_SetIcon(1, anim_hand_5)
+	he_SetTexelOffset(0, -1)
+	he_SetIcon(1, anim_hand_6)
+	he_SetTexelOffset(0, -1)
+	he_SetIcon(1, anim_hand_7)
+	he_SetTexelOffset(1, -3)
+	he_SetIcon(4, anim_hand_8)
+	he_SetTexelOffset(0, 4)
+	he_SetIcon(1, anim_hand_6)
+	he_SetTexelOffset(0, 4)
+	he_SetIcon(1, anim_hand_5)
+	he_SetTexelOffset(0, 1)
+	he_SetIcon(2, anim_hand_9)
+	he_SetTexelOffset(0, 4)
+	he_Loop
+		he_SetIcon(60, anim_hand_5)
+	he_Restart
 	he_End
 };
 
 HudScript HudScript_HandPointLeftHeld = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_24x24),
-	he_Loop,
-		he_SetImage(60, 0x0002CE00, 0x0002CF20),
-	he_Restart,
+	he_SetVisible
+	he_SetTileSize(HUD_ELEMENT_SIZE_24x24)
+	he_Loop
+		he_SetIcon(60, anim_hand_5)
+	he_Restart
 	he_End
 };
 
-HudScript HudScript_Item_Present = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00000000, 0x00000200),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Present = STANDARD_ITEM_HUD_SCRIPT(key_Gift);
 
-HudScript HudScript_Item_CakeDone = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00000220, 0x00000420),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_CakeDone = STANDARD_ITEM_HUD_SCRIPT(key_CakeDone);
 
-HudScript HudScript_Item_CakeBaked = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00000440, 0x00000640),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_CakeBaked = STANDARD_ITEM_HUD_SCRIPT(key_CakeBaked);
 
-HudScript HudScript_Item_CakePan = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00000660, 0x00000860),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_CakePan = STANDARD_ITEM_HUD_SCRIPT(key_CakePan);
 
-HudScript HudScript_Item_CakeBatter = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00000880, 0x00000A80),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_CakeBatter = STANDARD_ITEM_HUD_SCRIPT(key_CakeBatter);
 
-HudScript HudScript_Item_CakeBowl = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00000AA0, 0x00000CA0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_CakeBowl = STANDARD_ITEM_HUD_SCRIPT(key_CakeBowl);
 
-HudScript HudScript_Item_CakeMixed = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00000CC0, 0x00000EC0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_CakeMixed = STANDARD_ITEM_HUD_SCRIPT(key_CakeMix);
 
-HudScript HudScript_Item_CakeIcing = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00000EE0, 0x000010E0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_CakeIcing = STANDARD_ITEM_HUD_SCRIPT(key_CakeIcing);
 
-HudScript HudScript_Item_CakeBerries = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00001100, 0x00001300),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_CakeBerries = STANDARD_ITEM_HUD_SCRIPT(key_CakeBerries);
 
-HudScript HudScript_Item_Hammer1 = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0002D940, 0x0002DB40),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Hammer1 = STANDARD_ITEM_HUD_SCRIPT(Hammer1);
 
-HudScript HudScript_Item_Hammer2 = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0002DB80, 0x0002DD80),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Hammer2 = STANDARD_ITEM_HUD_SCRIPT(Hammer2);
 
-HudScript HudScript_Item_Hammer3 = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0002DDC0, 0x0002DFC0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Hammer3 = STANDARD_ITEM_HUD_SCRIPT(Hammer3);
 
-HudScript HudScript_Item_Boots1 = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0002E000, 0x0002E200),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Boots1 = STANDARD_ITEM_HUD_SCRIPT(Boots1);
 
-HudScript HudScript_Item_Boots2 = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0002E240, 0x0002E440),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Boots2 = STANDARD_ITEM_HUD_SCRIPT(Boots2);
 
-HudScript HudScript_Item_Boots3 = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0002E480, 0x0002E680),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Boots3 = STANDARD_ITEM_HUD_SCRIPT(Boots3);
 
-HudScript HudScript_Item_Items = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0002E6C0, 0x0002E8C0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Items = STANDARD_ITEM_HUD_SCRIPT(Items);
 
 HudScript HudScript_Item_HeartPiece = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_24x24),
-	he_Loop,
-		he_SetImage(60, 0x00030CE0, 0x00030E00),
-	he_Restart,
+	he_SetVisible
+	he_SetTileSize(HUD_ELEMENT_SIZE_24x24)
+	he_Loop
+		he_SetIcon(60, anim_heart_piece)
+	he_Restart
 	he_End
 };
 
 HudScript HudScript_Item_Heart = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_24x24),
-	he_Loop,
-		he_SetImage(10, 0x00030A60, 0x00030B80),
-		he_SetImage(6, 0x00030BA0, 0x00030CC0),
-	he_Restart,
+	he_SetVisible
+	he_SetTileSize(HUD_ELEMENT_SIZE_24x24)
+	he_Loop
+		he_SetIcon(10, anim_heart_0)
+		he_SetIcon(6, anim_heart_1)
+	he_Restart
 	he_End
 };
 
 HudScript HudScript_Item_Coin = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_24x24),
-	he_Loop,
-		he_op_15(00000000),
-		he_SetImage(3, 0x0002F5C0, 0x0002F6E0),
-		he_SetImage(3, 0x0002F700, 0x0002F820),
-		he_SetImage(3, 0x0002FAC0, 0x0002FBE0),
-		he_SetImage(3, 0x0002FC00, 0x0002FD20),
-		he_SetImage(3, 0x0002FD40, 0x0002FE60),
-		he_SetImage(3, 0x0002FE80, 0x0002FFA0),
-		he_SetImage(3, 0x0002FFC0, 0x000300E0),
-		he_SetImage(3, 0x00030100, 0x00030220),
-		he_RandomRestart(100, 70),
-		he_op_15(00000001),
-		he_SetImage(3, 0x0002F5C0, 0x0002F6E0),
-		he_SetImage(2, 0x0002F700, 0x0002F820),
-		he_SetImage(1, 0x0002F840, 0x0002F960),
-		he_SetImage(1, 0x0002F980, 0x0002FAA0),
-		he_SetImage(2, 0x0002FAC0, 0x0002FBE0),
-		he_SetImage(3, 0x0002FC00, 0x0002FD20),
-		he_SetImage(3, 0x0002FD40, 0x0002FE60),
-		he_SetImage(3, 0x0002FE80, 0x0002FFA0),
-		he_SetImage(3, 0x0002FFC0, 0x000300E0),
-		he_SetImage(3, 0x00030100, 0x00030220),
-	he_Restart,
+	he_SetVisible
+	he_SetTileSize(HUD_ELEMENT_SIZE_24x24)
+	he_Loop
+		he_op_15(00000000)
+		he_SetIcon(3, anim_coin_0)
+		he_SetIcon(3, anim_coin_1)
+		he_SetIcon(3, anim_coin_4)
+		he_SetIcon(3, anim_coin_5)
+		he_SetIcon(3, anim_coin_6)
+		he_SetIcon(3, anim_coin_7)
+		he_SetIcon(3, anim_coin_8)
+		he_SetIcon(3, anim_coin_9)
+		he_RandomRestart(100, 70)
+		he_op_15(00000001)
+		he_SetIcon(3, anim_coin_0)
+		he_SetIcon(2, anim_coin_1)
+		he_SetIcon(1, anim_coin_2)
+		he_SetIcon(1, anim_coin_3)
+		he_SetIcon(2, anim_coin_4)
+		he_SetIcon(3, anim_coin_5)
+		he_SetIcon(3, anim_coin_6)
+		he_SetIcon(3, anim_coin_7)
+		he_SetIcon(3, anim_coin_8)
+		he_SetIcon(3, anim_coin_9)
+	he_Restart
 	he_End
 };
 
 HudScript HudScript_Item_CoinSparkleA = {
-	he_SetTexelOffset(-8, 0),
-	he_SetImage(1, 0x00030240, 0x00030260),
-	he_SetImage(1, 0x00030280, 0x000302A0),
-	he_SetImage(1, 0x000302C0, 0x000302E0),
-	he_SetImage(2, 0x000303C0, 0x000303E0),
-	he_SetImage(1, 0x000302C0, 0x000302E0),
-	he_SetImage(1, 0x00030300, 0x00030320),
-	he_SetImage(1, 0x000303C0, 0x000303E0),
-	he_SetImage(1, 0x00030340, 0x00030360),
-	he_SetImage(1, 0x000303C0, 0x000303E0),
-	he_SetImage(1, 0x00030380, 0x000303A0),
-	he_SetImage(16, 0x000303C0, 0x000303E0),
+	he_SetTexelOffset(-8, 0)
+	he_SetIcon(1, anim_shimmer_0)
+	he_SetIcon(1, anim_shimmer_1)
+	he_SetIcon(1, anim_shimmer_2)
+	he_SetIcon(2, anim_shimmer_6)
+	he_SetIcon(1, anim_shimmer_2)
+	he_SetIcon(1, anim_shimmer_3)
+	he_SetIcon(1, anim_shimmer_6)
+	he_SetIcon(1, anim_shimmer_4)
+	he_SetIcon(1, anim_shimmer_6)
+	he_SetIcon(1, anim_shimmer_5)
+	he_SetIcon(16, anim_shimmer_6)
 	he_End
 };
 
 HudScript HudScript_Item_CoinSparkleB = {
-	he_SetTexelOffset(8, 8),
-	he_SetImage(1, 0x00030240, 0x00030260),
-	he_SetImage(1, 0x00030280, 0x000302A0),
-	he_SetImage(1, 0x000302C0, 0x000302E0),
-	he_SetImage(2, 0x000303C0, 0x000303E0),
-	he_SetImage(1, 0x000302C0, 0x000302E0),
-	he_SetImage(1, 0x00030300, 0x00030320),
-	he_SetImage(1, 0x000303C0, 0x000303E0),
-	he_SetImage(1, 0x00030340, 0x00030360),
-	he_SetImage(1, 0x000303C0, 0x000303E0),
-	he_SetImage(1, 0x00030380, 0x000303A0),
-	he_SetImage(16, 0x000303C0, 0x000303E0),
+	he_SetTexelOffset(8, 8)
+	he_SetIcon(1, anim_shimmer_0)
+	he_SetIcon(1, anim_shimmer_1)
+	he_SetIcon(1, anim_shimmer_2)
+	he_SetIcon(2, anim_shimmer_6)
+	he_SetIcon(1, anim_shimmer_2)
+	he_SetIcon(1, anim_shimmer_3)
+	he_SetIcon(1, anim_shimmer_6)
+	he_SetIcon(1, anim_shimmer_4)
+	he_SetIcon(1, anim_shimmer_6)
+	he_SetIcon(1, anim_shimmer_5)
+	he_SetIcon(16, anim_shimmer_6)
 	he_End
 };
 
 HudScript HudScript_Item_CoinSparkleC = {
-	he_SetTexelOffset(-4, 8),
-	he_SetImage(1, 0x00030240, 0x00030260),
-	he_SetImage(1, 0x00030280, 0x000302A0),
-	he_SetImage(1, 0x000302C0, 0x000302E0),
-	he_SetImage(2, 0x000303C0, 0x000303E0),
-	he_SetImage(1, 0x000302C0, 0x000302E0),
-	he_SetImage(1, 0x00030300, 0x00030320),
-	he_SetImage(1, 0x000303C0, 0x000303E0),
-	he_SetImage(1, 0x00030340, 0x00030360),
-	he_SetImage(1, 0x000303C0, 0x000303E0),
-	he_SetImage(1, 0x00030380, 0x000303A0),
-	he_SetImage(16, 0x000303C0, 0x000303E0),
+	he_SetTexelOffset(-4, 8)
+	he_SetIcon(1, anim_shimmer_0)
+	he_SetIcon(1, anim_shimmer_1)
+	he_SetIcon(1, anim_shimmer_2)
+	he_SetIcon(2, anim_shimmer_6)
+	he_SetIcon(1, anim_shimmer_2)
+	he_SetIcon(1, anim_shimmer_3)
+	he_SetIcon(1, anim_shimmer_6)
+	he_SetIcon(1, anim_shimmer_4)
+	he_SetIcon(1, anim_shimmer_6)
+	he_SetIcon(1, anim_shimmer_5)
+	he_SetIcon(16, anim_shimmer_6)
 	he_End
 };
 
 HudScript HudScript_Item_CoinSparkleD = {
-	he_SetTexelOffset(6, -6),
-	he_SetImage(1, 0x00030240, 0x00030260),
-	he_SetImage(1, 0x00030280, 0x000302A0),
-	he_SetImage(1, 0x000302C0, 0x000302E0),
-	he_SetImage(2, 0x000303C0, 0x000303E0),
-	he_SetImage(1, 0x000302C0, 0x000302E0),
-	he_SetImage(1, 0x00030300, 0x00030320),
-	he_SetImage(1, 0x000303C0, 0x000303E0),
-	he_SetImage(1, 0x00030340, 0x00030360),
-	he_SetImage(1, 0x000303C0, 0x000303E0),
-	he_SetImage(1, 0x00030380, 0x000303A0),
-	he_SetImage(16, 0x000303C0, 0x000303E0),
+	he_SetTexelOffset(6, -6)
+	he_SetIcon(1, anim_shimmer_0)
+	he_SetIcon(1, anim_shimmer_1)
+	he_SetIcon(1, anim_shimmer_2)
+	he_SetIcon(2, anim_shimmer_6)
+	he_SetIcon(1, anim_shimmer_2)
+	he_SetIcon(1, anim_shimmer_3)
+	he_SetIcon(1, anim_shimmer_6)
+	he_SetIcon(1, anim_shimmer_4)
+	he_SetIcon(1, anim_shimmer_6)
+	he_SetIcon(1, anim_shimmer_5)
+	he_SetIcon(16, anim_shimmer_6)
 	he_End
 };
 
 HudScript HudScript_Item_CoinSparkleE = {
-	he_SetTexelOffset(1, -8),
-	he_SetImage(1, 0x00030240, 0x00030260),
-	he_SetImage(1, 0x00030280, 0x000302A0),
-	he_SetImage(1, 0x000302C0, 0x000302E0),
-	he_SetImage(2, 0x000303C0, 0x000303E0),
-	he_SetImage(1, 0x000302C0, 0x000302E0),
-	he_SetImage(1, 0x00030300, 0x00030320),
-	he_SetImage(1, 0x000303C0, 0x000303E0),
-	he_SetImage(1, 0x00030340, 0x00030360),
-	he_SetImage(1, 0x000303C0, 0x000303E0),
-	he_SetImage(1, 0x00030380, 0x000303A0),
-	he_SetImage(16, 0x000303C0, 0x000303E0),
+	he_SetTexelOffset(1, -8)
+	he_SetIcon(1, anim_shimmer_0)
+	he_SetIcon(1, anim_shimmer_1)
+	he_SetIcon(1, anim_shimmer_2)
+	he_SetIcon(2, anim_shimmer_6)
+	he_SetIcon(1, anim_shimmer_2)
+	he_SetIcon(1, anim_shimmer_3)
+	he_SetIcon(1, anim_shimmer_6)
+	he_SetIcon(1, anim_shimmer_4)
+	he_SetIcon(1, anim_shimmer_6)
+	he_SetIcon(1, anim_shimmer_5)
+	he_SetIcon(16, anim_shimmer_6)
 	he_End
 };
 
-//TODO unclear how to use he_RandomBranch
 HudScript HudScript_Item_CoinSparkleRandom = {
-0x00000008, 0x00000005, 0x00000000, 0x00000017, 0x00000005, (s32)HudScript_Item_CoinSparkleA, (s32)HudScript_Item_CoinSparkleB, (s32)HudScript_Item_CoinSparkleC, (s32)HudScript_Item_CoinSparkleD, (s32)HudScript_Item_CoinSparkleE, 0x00000000
-};
-
-/*
-HudScript HudScript_Item_CoinSparkleRandom = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_8x8),
-	he_RandomBranch(HudScript_Item_CoinSparkleA, HudScript_Item_CoinSparkleB, HudScript_Item_CoinSparkleC, HudScript_Item_CoinSparkleD, HudScript_Item_CoinSparkleE),
+	he_SetVisible
+	he_SetTileSize(HUD_ELEMENT_SIZE_8x8)
+	he_RandomBranch(HudScript_Item_CoinSparkleA,HudScript_Item_CoinSparkleB,HudScript_Item_CoinSparkleC,HudScript_Item_CoinSparkleD,HudScript_Item_CoinSparkleE)
 	he_End
 };
-*/
 
 HudScript HudScript_Item_StarPoint = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_24x24),
-	he_Loop,
-		he_SetImage(2, 0x00030E20, 0x00030F40),
-		he_SetImage(2, 0x00030F60, 0x00031080),
-		he_SetImage(2, 0x000310A0, 0x000311C0),
-		he_SetImage(2, 0x000311E0, 0x00031300),
-		he_SetImage(2, 0x00031320, 0x00031440),
-		he_SetImage(2, 0x00031460, 0x00031580),
-		he_SetImage(2, 0x000315A0, 0x000316C0),
-		he_SetImage(2, 0x000316E0, 0x00031800),
-	he_Restart,
+	he_SetVisible
+	he_SetTileSize(HUD_ELEMENT_SIZE_24x24)
+	he_Loop
+		he_SetIcon(2, anim_sp_0)
+		he_SetIcon(2, anim_sp_1)
+		he_SetIcon(2, anim_sp_2)
+		he_SetIcon(2, anim_sp_3)
+		he_SetIcon(2, anim_sp_4)
+		he_SetIcon(2, anim_sp_5)
+		he_SetIcon(2, anim_sp_6)
+		he_SetIcon(2, anim_sp_7)
+	he_Restart
 	he_End
 };
 
 HudScript HudScript_Item_SmallStarPoint = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_8x8),
-	he_Loop,
-		he_SetImage(2, 0x00031CA0, 0x00031CC0),
-		he_SetImage(2, 0x00031CE0, 0x00031D00),
-		he_SetImage(2, 0x00031D20, 0x00031D40),
-		he_SetImage(2, 0x00031D60, 0x00031D80),
-		he_SetImage(2, 0x00031DA0, 0x00031DC0),
-		he_SetImage(2, 0x00031DE0, 0x00031E00),
-		he_SetImage(2, 0x00031E20, 0x00031E40),
-		he_SetImage(2, 0x00031E60, 0x00031E80),
-	he_Restart,
+	he_SetVisible
+	he_SetTileSize(HUD_ELEMENT_SIZE_8x8)
+	he_Loop
+		he_SetIcon(2, anim_sp_small_0)
+		he_SetIcon(2, anim_sp_small_1)
+		he_SetIcon(2, anim_sp_small_2)
+		he_SetIcon(2, anim_sp_small_3)
+		he_SetIcon(2, anim_sp_small_4)
+		he_SetIcon(2, anim_sp_small_5)
+		he_SetIcon(2, anim_sp_small_6)
+		he_SetIcon(2, anim_sp_small_7)
+	he_Restart
 	he_End
 };
 
 HudScript HudScript_Item_HeartPoint = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(8, 0x0002E900, 0x0002EB00),
-		he_SetImage(5, 0x0002EB20, 0x0002ED20),
-		he_SetImage(8, 0x0002ED40, 0x0002EF40),
-	he_Restart,
+	he_SetVisible
+	he_SetTileSize(HUD_ELEMENT_SIZE_32x32)
+	he_Loop
+		he_SetIcon(8, anim_hp_0)
+		he_SetIcon(5, anim_hp_1)
+		he_SetIcon(8, anim_hp_2)
+	he_Restart
 	he_End
 };
 
 HudScript HudScript_Item_FlowerPoint = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(8, 0x0002EF60, 0x0002F160),
-		he_SetImage(5, 0x0002F180, 0x0002F380),
-		he_SetImage(8, 0x0002F3A0, 0x0002F5A0),
-	he_Restart,
+	he_SetVisible
+	he_SetTileSize(HUD_ELEMENT_SIZE_32x32)
+	he_Loop
+		he_SetIcon(8, anim_fp_0)
+		he_SetIcon(5, anim_fp_1)
+		he_SetIcon(8, anim_fp_2)
+	he_Restart
 	he_End
 };
 
 HudScript HudScript_Item_StarPiece = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(12, 0x00030400, 0x00030600),
-		he_SetImage(4, 0x00030620, 0x00030820),
-		he_SetImage(12, 0x00030840, 0x00030A40),
-		he_SetImage(4, 0x00030620, 0x00030820),
-	he_Restart,
+	he_SetVisible
+	he_SetTileSize(HUD_ELEMENT_SIZE_32x32)
+	he_Loop
+		he_SetIcon(12, anim_star_piece_0)
+		he_SetIcon(4, anim_star_piece_1)
+		he_SetIcon(12, anim_star_piece_2)
+		he_SetIcon(4, anim_star_piece_1)
+	he_Restart
 	he_End
 };
 
-HudScript HudScript_Item_GearBoots1 = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00001320, 0x00001520),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_GearBoots2 = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00001540, 0x00001740),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_GearBoots3 = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00001760, 0x00001960),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_GearHammer1 = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00001980, 0x00001B80),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_GearHammer2 = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00001BA0, 0x00001DA0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_GearHammer3 = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00001DC0, 0x00001FC0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_LuckyStar = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00001FE0, 0x000021E0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_Map = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00002200, 0x00002400),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_KoopaFortressKey = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00009020, 0x00009220),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_RuinsKey = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00009240, 0x00009440),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_TubbaCastleKey = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00009460, 0x00009660),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_IcePalaceKey = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00009680, 0x00009880),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_BowserCastleKey = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000098A0, 0x00009AA0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_Dolly = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00009AC0, 0x00009CC0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_KooperShell = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00009CE0, 0x00009EE0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_PulseStone = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00009F00, 0x0000A100),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_Artifact = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0000A120, 0x0000A320),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_AncientVase = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0000A340, 0x0000A540),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_RuinsStonePyramid = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0000A560, 0x0000A760),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_RuinsStoneStar = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0000A780, 0x0000A980),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_RuinsStoneMoon = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0000A9A0, 0x0000ABA0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_ForestPass = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0000ABC0, 0x0000ADC0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_BooRecordOutline = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0000ADE0, 0x0000AFE0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_BooRecord = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0000B000, 0x0000B200),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_BooWeight = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0000B220, 0x0000B420),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_BooPortrait = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0000B440, 0x0000B640),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_MysticKey = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0000B660, 0x0000B860),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_StoreroomKey = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0000B880, 0x0000BA80),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_ToyboxTrain = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0000BAA0, 0x0000BCA0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_FryingPan = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0000BCC0, 0x0000BEC0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_Dictionary = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0000BEE0, 0x0000C0E0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_MysteryNote = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0000C100, 0x0000C300),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_SuspiciousNote = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0000C320, 0x0000C520),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_Seed1 = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0000C540, 0x0000C740),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_Seed2 = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0000C760, 0x0000C960),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_Seed3 = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0000C980, 0x0000CB80),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_Seed4 = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0000CBA0, 0x0000CDA0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_CrystalBerry = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0000CDC0, 0x0000CFC0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_WaterStone = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0000CFE0, 0x0000D1E0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_MagicBean = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0000D200, 0x0000D400),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_FertileSoil = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0000D420, 0x0000D620),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_MiracleWater = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0000D640, 0x0000D840),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_UltraStone = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0000D860, 0x0000DA60),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_ToadDoll = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0000DAA0, 0x0000DCA0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_Calculator = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0000DCC0, 0x0000DEC0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_Screwdriver = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0000DEE0, 0x0000E0E0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_CookBook = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0000E100, 0x0000E300),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_JadeRaven = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0000E320, 0x0000E520),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_SnowmanBucket = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0000E540, 0x0000E740),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_SnowmanScarf = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0000E760, 0x0000E960),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_RedKey = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0000E980, 0x0000EB80),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_BlueKey = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0000EBC0, 0x0000EDC0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_KootPackage = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0000EDE0, 0x0000EFE0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_KootRedJar = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0000F000, 0x0000F200),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_Melody = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0000F220, 0x0000F420),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_Lyrics = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0000F440, 0x0000F640),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_Mailbag = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0000F660, 0x0000F860),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_StarStone = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0000F880, 0x0000FA80),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_SneakyParasol = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0000FAA0, 0x0000FCA0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_PeachKey = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0000FCE0, 0x0000FEE0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_UNK_1DC210 = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0000FF00, 0x00010100),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_UNK_1DC430 = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00010120, 0x00010320),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_UNK_1DC650 = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00010340, 0x00010540),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_UNK_1DC870 = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00010560, 0x00010760),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_DojoCard1 = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00010780, 0x00010980),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_DojoCard2 = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000109A0, 0x00010BA0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_DojoCard3 = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00010BC0, 0x00010DC0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_DojoCard4 = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00010E00, 0x00011000),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_DojoCard5 = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00011020, 0x00011220),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_CrystalBall = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00011240, 0x00011440),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_GoldCard = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00011460, 0x00011660),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_SilverCard = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00011680, 0x00011880),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_KootBook = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000118A0, 0x00011AA0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_KootTheTape = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00011AC0, 0x00011CC0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_KootMerluvleeAutograph = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00011CE0, 0x00011EE0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_KootEmptyWallet = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00011F20, 0x00012120),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_KootLuigiAutograph = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00012140, 0x00012340),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_KootShell = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00012360, 0x00012560),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_KootPhoto = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00012580, 0x00012780),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_KootGlasses = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000127A0, 0x000129A0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_Letter = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000129C0, 0x00012BC0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_Letter_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000129C0, 0x00012BE0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_ITEM_089 = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00012C00, 0x00012E00),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_ITEM_089_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00012C00, 0x00012E20),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_ITEM_08A = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00012E40, 0x00013040),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_ITEM_08A_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00012E40, 0x00013060),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_ITEM_08B = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00013080, 0x00013280),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_ITEM_08B_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00013080, 0x000132A0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_ITEM_08C = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000132C0, 0x000134C0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_ITEM_08C_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000132C0, 0x000134E0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_ITEM_08D = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00013500, 0x00013700),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_ITEM_08D_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00013500, 0x00013720),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_ITEM_08E = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00013740, 0x00013940),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_ITEM_08E_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00013740, 0x00013960),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_ITEM_08F = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00013980, 0x00013B80),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_ITEM_08F_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00013980, 0x00013BA0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_PleaseComeBack = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00013BC0, 0x00013DC0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_PleaseComeBack_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00013BC0, 0x00013DE0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_ITEM_139 = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00013E00, 0x00014000),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_ITEM_139_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00013E00, 0x00014020),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_FrightJar = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00014040, 0x00014240),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_FrightJar_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00014040, 0x00014260),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_Mystery = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00014280, 0x00014480),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_Mystery_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00014280, 0x000144A0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_RepelGel = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000144C0, 0x000146C0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_RepelGel_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000144C0, 0x000146E0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_InsecticideHerb = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00014700, 0x00014900),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_InsecticideHerb_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00014700, 0x00014920),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_ITEM_13E = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00014940, 0x00014B40),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_ITEM_13E_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00014940, 0x00014B60),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_ITEM_13F = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00014B80, 0x00014D80),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_ITEM_13F_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00014B80, 0x00014DA0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_SpicySoup = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00002420, 0x00002620),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_SpicySoup_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00002420, 0x00002640),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_ApplePie = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00002660, 0x00002860),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_ApplePie_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00002660, 0x00002880),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_HoneyUltra = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000028A0, 0x00002AA0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_HoneyUltra_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000028A0, 0x00002AC0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_MapleUltra = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00002AE0, 0x00002CE0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_MapleUltra_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00002AE0, 0x00002D00),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_JellyUltra = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00002D20, 0x00002F20),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_JellyUltra_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00002D20, 0x00002F40),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_Koopasta = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00002F60, 0x00003160),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_Koopasta_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00002F60, 0x00003180),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_FriedShroom = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000031A0, 0x000033A0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_FriedShroom_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000031A0, 0x000033C0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_ShroomCake = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000033E0, 0x000035E0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_ShroomCake_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000033E0, 0x00003600),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_ShroomSteak = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00003620, 0x00003820),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_ShroomSteak_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00003620, 0x00003840),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_HotShroom = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00003860, 0x00003A60),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_HotShroom_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00003860, 0x00003A80),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_SweetShroom = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00003AA0, 0x00003CA0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_SweetShroom_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00003AA0, 0x00003CC0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_HealthyJuice = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00003CE0, 0x00003EE0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_HealthyJuice_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00003CE0, 0x00003F00),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_BlandMeal = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00003F20, 0x00004120),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_BlandMeal_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00003F20, 0x00004140),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_YummyMeal = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00004160, 0x00004360),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_YummyMeal_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00004160, 0x00004380),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_DeluxeFeast = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000043A0, 0x000045A0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_DeluxeFeast_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000043A0, 0x000045C0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_SpecialShake = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000045E0, 0x000047E0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_SpecialShake_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000045E0, 0x00004800),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_BigCookie = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00004820, 0x00004A20),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_BigCookie_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00004820, 0x00004A40),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_Cake = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00004A60, 0x00004C60),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_Cake_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00004A60, 0x00004C80),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_Mistake = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00004CA0, 0x00004EA0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_Mistake_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00004CA0, 0x00004EC0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_KoopaTea = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00004EE0, 0x000050E0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_KoopaTea_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00004EE0, 0x00005100),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_HoneySuper = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00005120, 0x00005320),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_HoneySuper_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00005120, 0x00005340),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_MapleSuper = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00005360, 0x00005560),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_MapleSuper_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00005360, 0x00005580),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_JellySuper = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000055A0, 0x000057A0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_JellySuper_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000055A0, 0x000057C0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_Spaghetti = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000057E0, 0x000059E0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_Spaghetti_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000057E0, 0x00005A00),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_EggMissile = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00005A20, 0x00005C20),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_EggMissile_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00005A20, 0x00005C40),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_FriedEgg = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00005C60, 0x00005E60),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_FriedEgg_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00005C60, 0x00005E80),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_HoneyShroom = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00005EA0, 0x000060A0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_HoneyShroom_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00005EA0, 0x000060C0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_HoneyCandy = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000060E0, 0x000062E0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_HoneyCandy_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000060E0, 0x00006300),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_ElectroPop = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00006320, 0x00006520),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_ElectroPop_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00006320, 0x00006540),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_FirePop = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00006560, 0x00006760),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_FirePop_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00006560, 0x00006780),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_LimeCandy = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000067A0, 0x000069A0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_LimeCandy_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000067A0, 0x000069C0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_CocoPop = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000069E0, 0x00006BE0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_CocoPop_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000069E0, 0x00006C00),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_LemonCandy = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00006C20, 0x00006E20),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_LemonCandy_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00006C20, 0x00006E40),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_JellyPop = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00006E60, 0x00007060),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_JellyPop_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00006E60, 0x00007080),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_StrangeCake = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000070A0, 0x000072A0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_StrangeCake_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000070A0, 0x000072C0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_KookyCookie = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000072E0, 0x000074E0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_KookyCookie_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000072E0, 0x00007500),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_FrozenFries = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00007520, 0x00007720),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_FrozenFries_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00007520, 0x00007740),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_PotatoSalad = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00007760, 0x00007960),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_PotatoSalad_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00007760, 0x00007980),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_NuttyCake = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000079A0, 0x00007BA0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_NuttyCake_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000079A0, 0x00007BC0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_MapleShroom = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00007BE0, 0x00007DE0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_MapleShroom_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00007BE0, 0x00007E00),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_BoiledEgg = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00007E20, 0x00008020),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_BoiledEgg_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00007E20, 0x00008040),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_YoshiCookie = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00008060, 0x00008260),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_YoshiCookie_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00008060, 0x00008280),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_JellyShroom = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000082A0, 0x000084A0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_JellyShroom_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000082A0, 0x000084C0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_ITEM_02C = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000084E0, 0x000086E0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_ITEM_02C_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000084E0, 0x00008700),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_ITEM_02D = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00008720, 0x00008920),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_ITEM_02D_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00008720, 0x00008940),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_ITEM_02E = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00008960, 0x00008B60),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_ITEM_02E_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00008960, 0x00008B80),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_ITEM_02F = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00008BA0, 0x00008DA0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_ITEM_02F_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00008BA0, 0x00008DC0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_ITEM_030 = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00008DE0, 0x00008FE0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_ITEM_030_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00008DE0, 0x00009000),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_SpinSmash = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00014DC0, 0x00014FC0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_SpinSmash_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00014DC0, 0x00014FE0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_Multibounce = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00015000, 0x00015200),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_Multibounce_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00015000, 0x00015220),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_PowerPlus = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00015240, 0x00015440),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_PowerPlus_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00015240, 0x00015460),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_DodgeMaster = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00015480, 0x00015680),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_DodgeMaster_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00015480, 0x000156A0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_PowerBounce = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000156C0, 0x000158C0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_PowerBounce_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000156C0, 0x000158E0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_SpikeShield = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00015900, 0x00015B00),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_SpikeShield_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00015900, 0x00015B20),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_FirstAttack = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00015B40, 0x00015D40),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_FirstAttack_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00015B40, 0x00015D60),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_HPPlus = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00015D80, 0x00015F80),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_HPPlus_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00015D80, 0x00015FA0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_QuakeHammer = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00015FC0, 0x000161C0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_QuakeHammer_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00015FC0, 0x000161E0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_DoubleDip = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00016200, 0x00016400),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_DoubleDip_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00016200, 0x00016420),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_PowerQuake = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00016440, 0x00016640),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_PowerQuake_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00016440, 0x00016660),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_MegaQuake = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00016680, 0x00016880),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_MegaQuake_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00016680, 0x000168A0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_SleepStomp = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000168C0, 0x00016AC0),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_SleepStomp_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000168C0, 0x00016AE0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_GearBoots1 = STANDARD_ITEM_HUD_SCRIPT(key_gear_boots_1);
 
-HudScript HudScript_Item_SmashCharge = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00016B00, 0x00016D00),
-	he_Restart,
-	he_End
-};
-
-HudScript HudScript_Item_SmashCharge_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00016B00, 0x00016D20),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_GearBoots2 = STANDARD_ITEM_HUD_SCRIPT(key_gear_boots_2);
 
-HudScript HudScript_Item_SSmashChg = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00016D40, 0x00016F40),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_GearBoots3 = STANDARD_ITEM_HUD_SCRIPT(key_gear_boots_3);
 
-HudScript HudScript_Item_SSmashChg_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00016D40, 0x00016F60),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_GearHammer1 = STANDARD_ITEM_HUD_SCRIPT(key_gear_hammer_1);
 
-HudScript HudScript_Item_AutoSmash = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00016F80, 0x00017180),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_GearHammer2 = STANDARD_ITEM_HUD_SCRIPT(key_gear_hammer_2);
 
-HudScript HudScript_Item_AutoSmash_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00016F80, 0x000171A0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_GearHammer3 = STANDARD_ITEM_HUD_SCRIPT(key_gear_hammer_3);
 
-HudScript HudScript_Item_FireShield = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000171C0, 0x000173C0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_LuckyStar = STANDARD_ITEM_HUD_SCRIPT(key_gear_lucky_star);
 
-HudScript HudScript_Item_FireShield_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000171C0, 0x000173E0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Map = STANDARD_ITEM_HUD_SCRIPT(key_map);
 
-HudScript HudScript_Item_JumpCharge = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00017400, 0x00017600),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_KoopaFortressKey = STANDARD_ITEM_HUD_SCRIPT(key_key_koopa_fortress);
 
-HudScript HudScript_Item_JumpCharge_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00017400, 0x00017620),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_RuinsKey = STANDARD_ITEM_HUD_SCRIPT(key_key_ruins);
 
-HudScript HudScript_Item_SJumpChg = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00017640, 0x00017840),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_TubbaCastleKey = STANDARD_ITEM_HUD_SCRIPT(key_key_tubba_castle);
 
-HudScript HudScript_Item_SJumpChg_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00017640, 0x00017860),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_IcePalaceKey = STANDARD_ITEM_HUD_SCRIPT(key_key_ice_palace);
 
-HudScript HudScript_Item_AutoJump = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00017880, 0x00017A80),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_BowserCastleKey = STANDARD_ITEM_HUD_SCRIPT(key_key_bowser_castle);
 
-HudScript HudScript_Item_AutoJump_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00017880, 0x00017AA0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Dolly = STANDARD_ITEM_HUD_SCRIPT(key_dolly);
 
-HudScript HudScript_Item_DDownPound = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00017AC0, 0x00017CC0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_KooperShell = STANDARD_ITEM_HUD_SCRIPT(key_kooper_shell);
 
-HudScript HudScript_Item_DDownPound_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00017AC0, 0x00017CE0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_PulseStone = STANDARD_ITEM_HUD_SCRIPT(key_pulse_stone);
 
-HudScript HudScript_Item_AutoMultibounce = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00017D00, 0x00017F00),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Artifact = STANDARD_ITEM_HUD_SCRIPT(key_artifact);
 
-HudScript HudScript_Item_AutoMultibounce_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00017D00, 0x00017F20),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_AncientVase = STANDARD_ITEM_HUD_SCRIPT(key_vase);
 
-HudScript HudScript_Item_DizzyStomp = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00017F40, 0x00018140),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_RuinsStonePyramid = STANDARD_ITEM_HUD_SCRIPT(key_ruins_stone_pyramid);
 
-HudScript HudScript_Item_DizzyStomp_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00017F40, 0x00018160),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_RuinsStoneStar = STANDARD_ITEM_HUD_SCRIPT(key_ruins_stone_star);
 
-HudScript HudScript_Item_HammerThrow = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00018180, 0x00018380),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_RuinsStoneMoon = STANDARD_ITEM_HUD_SCRIPT(key_ruins_stone_moon);
 
-HudScript HudScript_Item_HammerThrow_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00018180, 0x000183A0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_ForestPass = STANDARD_ITEM_HUD_SCRIPT(key_forest_pass);
 
-HudScript HudScript_Item_SmashCharge0 = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000183C0, 0x000185C0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_BooRecordOutline = STANDARD_ITEM_HUD_SCRIPT(key_boo_record_mask);
 
-HudScript HudScript_Item_SmashCharge0_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000183C0, 0x000185E0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_BooRecord = STANDARD_ITEM_HUD_SCRIPT(key_boo_record);
 
-HudScript HudScript_Item_PrettyLucky = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00018600, 0x00018800),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_BooWeight = STANDARD_ITEM_HUD_SCRIPT(key_boo_weight);
 
-HudScript HudScript_Item_PrettyLucky_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00018600, 0x00018820),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_BooPortrait = STANDARD_ITEM_HUD_SCRIPT(key_boo_portrait);
 
-HudScript HudScript_Item_FeelingFine = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00018840, 0x00018A40),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_MysticKey = STANDARD_ITEM_HUD_SCRIPT(key_mystic_key);
 
-HudScript HudScript_Item_FeelingFine_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00018840, 0x00018A60),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_IronKey = STANDARD_ITEM_HUD_SCRIPT(key_key_storeroom);
 
-HudScript HudScript_Item_AttackFXA = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00018A80, 0x00018C80),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_ToyboxTrain = STANDARD_ITEM_HUD_SCRIPT(key_toybox_train);
 
-HudScript HudScript_Item_AttackFXA_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00018A80, 0x00018CA0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_FryingPan = STANDARD_ITEM_HUD_SCRIPT(key_frying_pan);
 
-HudScript HudScript_Item_AllorNothing = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00018CC0, 0x00018EC0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Dictionary = STANDARD_ITEM_HUD_SCRIPT(key_dictionary);
 
-HudScript HudScript_Item_AllorNothing_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00018CC0, 0x00018EE0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_MysteryNote = STANDARD_ITEM_HUD_SCRIPT(key_mystery_note);
 
-HudScript HudScript_Item_HPDrain = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00018F00, 0x00019100),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_SuspiciousNote = STANDARD_ITEM_HUD_SCRIPT(key_suspicious_note);
 
-HudScript HudScript_Item_HPDrain_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00018F00, 0x00019120),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_MagicalSeed1 = STANDARD_ITEM_HUD_SCRIPT(key_seed_1);
 
-HudScript HudScript_Item_JumpCharge0 = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00019140, 0x00019340),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_MagicalSeed2 = STANDARD_ITEM_HUD_SCRIPT(key_seed_2);
 
-HudScript HudScript_Item_JumpCharge0_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00019140, 0x00019360),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_MagicalSeed3 = STANDARD_ITEM_HUD_SCRIPT(key_seed_3);
 
-HudScript HudScript_Item_SlowGo = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00019380, 0x00019580),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_MagicalSeed4 = STANDARD_ITEM_HUD_SCRIPT(key_seed_4);
 
-HudScript HudScript_Item_SlowGo_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00019380, 0x000195A0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_CrystalBerry = STANDARD_ITEM_HUD_SCRIPT(key_crystal_berry);
 
-HudScript HudScript_Item_FPPlus = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000195C0, 0x000197C0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_WaterStone = STANDARD_ITEM_HUD_SCRIPT(key_water_stone);
 
-HudScript HudScript_Item_FPPlus_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000195C0, 0x000197E0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_MagicBean = STANDARD_ITEM_HUD_SCRIPT(key_magic_bean);
 
-HudScript HudScript_Item_MegaRush = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00019800, 0x00019A00),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_FertileSoil = STANDARD_ITEM_HUD_SCRIPT(key_fertile_soil);
 
-HudScript HudScript_Item_MegaRush_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00019800, 0x00019A20),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_MiracleWater = STANDARD_ITEM_HUD_SCRIPT(key_miracle_water);
 
-HudScript HudScript_Item_IcePower = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00019A40, 0x00019C40),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_UltraStone = STANDARD_ITEM_HUD_SCRIPT(key_ultra_stone);
 
-HudScript HudScript_Item_IcePower_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00019A40, 0x00019C60),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_ToadDoll = STANDARD_ITEM_HUD_SCRIPT(key_toad_doll);
 
-HudScript HudScript_Item_DefendPlus = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00019C80, 0x00019E80),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Calculator = STANDARD_ITEM_HUD_SCRIPT(key_calculator);
 
-HudScript HudScript_Item_DefendPlus_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00019C80, 0x00019EA0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Screwdriver = STANDARD_ITEM_HUD_SCRIPT(key_screwdriver);
 
-HudScript HudScript_Item_PayOff = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00019EC0, 0x0001A0C0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_CookBook = STANDARD_ITEM_HUD_SCRIPT(key_book_cook);
 
-HudScript HudScript_Item_PayOff_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00019EC0, 0x0001A0E0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_JadeRaven = STANDARD_ITEM_HUD_SCRIPT(key_jade_raven);
 
-HudScript HudScript_Item_MoneyMoney = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001A100, 0x0001A300),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_SnowmanBucket = STANDARD_ITEM_HUD_SCRIPT(key_snowman_bucket);
 
-HudScript HudScript_Item_MoneyMoney_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001A100, 0x0001A320),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_SnowmanScarf = STANDARD_ITEM_HUD_SCRIPT(key_snowman_scarf);
 
-HudScript HudScript_Item_ChillOut = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001A340, 0x0001A540),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_RedKey = STANDARD_ITEM_HUD_SCRIPT(key_key_red);
 
-HudScript HudScript_Item_ChillOut_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001A340, 0x0001A560),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_BlueKey = STANDARD_ITEM_HUD_SCRIPT(key_key_blue);
 
-HudScript HudScript_Item_HappyHeart = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001A580, 0x0001A780),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_KootPackage = STANDARD_ITEM_HUD_SCRIPT(key_koot_package);
 
-HudScript HudScript_Item_HappyHeart_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001A580, 0x0001A7A0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_KootRedJar = STANDARD_ITEM_HUD_SCRIPT(key_koot_red_jar);
 
-HudScript HudScript_Item_ZapTap = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001A7C0, 0x0001A9C0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Melody = STANDARD_ITEM_HUD_SCRIPT(key_book_melody);
 
-HudScript HudScript_Item_ZapTap_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001A7C0, 0x0001A9E0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Lyrics = STANDARD_ITEM_HUD_SCRIPT(key_book_lyrics);
 
-HudScript HudScript_Item_Berserker = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001AA00, 0x0001AC00),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Mailbag = STANDARD_ITEM_HUD_SCRIPT(key_mailbag);
 
-HudScript HudScript_Item_Berserker_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001AA00, 0x0001AC20),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_StarStone = STANDARD_ITEM_HUD_SCRIPT(key_star_stone);
 
-HudScript HudScript_Item_RightOn = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001AC40, 0x0001AE40),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_SneakyParasol = STANDARD_ITEM_HUD_SCRIPT(peach_sneaky_parasol);
 
-HudScript HudScript_Item_RightOn_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001AC40, 0x0001AE60),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_PeachKey = STANDARD_ITEM_HUD_SCRIPT(key_key_peach);
 
-HudScript HudScript_Item_RunawayPay = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001AE80, 0x0001B080),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_UNK_1DC210 = STANDARD_ITEM_HUD_SCRIPT(key_1DC210);
 
-HudScript HudScript_Item_RunawayPay_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001AE80, 0x0001B0A0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_UNK_1DC430 = STANDARD_ITEM_HUD_SCRIPT(key_1DC430);
 
-HudScript HudScript_Item_Refund = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001B0C0, 0x0001B2C0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_UNK_1DC650 = STANDARD_ITEM_HUD_SCRIPT(key_1DC650);
 
-HudScript HudScript_Item_Refund_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001B0C0, 0x0001B2E0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_UNK_1DC870 = STANDARD_ITEM_HUD_SCRIPT(key_1DC870);
 
-HudScript HudScript_Item_FlowerSaver = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001B300, 0x0001B500),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_DojoCard1 = STANDARD_ITEM_HUD_SCRIPT(key_dojo_card_1);
 
-HudScript HudScript_Item_FlowerSaver_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001B300, 0x0001B520),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_DojoCard2 = STANDARD_ITEM_HUD_SCRIPT(key_dojo_card_2);
 
-HudScript HudScript_Item_TripleDip = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001B540, 0x0001B740),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_DojoCard3 = STANDARD_ITEM_HUD_SCRIPT(key_dojo_card_3);
 
-HudScript HudScript_Item_TripleDip_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001B540, 0x0001B760),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_DojoCard4 = STANDARD_ITEM_HUD_SCRIPT(key_dojo_card_4);
 
-HudScript HudScript_Item_FlowerFanatic = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001B780, 0x0001B980),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_DojoCard5 = STANDARD_ITEM_HUD_SCRIPT(key_dojo_card_5);
 
-HudScript HudScript_Item_FlowerFanatic_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001B780, 0x0001B9A0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_CrystalBall = STANDARD_ITEM_HUD_SCRIPT(key_crystal_ball);
 
-HudScript HudScript_Item_PowerJump = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001B9C0, 0x0001BBC0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_GoldCard = STANDARD_ITEM_HUD_SCRIPT(key_card_gold);
 
-HudScript HudScript_Item_PowerJump_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001B9C0, 0x0001BBE0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_SilverCard = STANDARD_ITEM_HUD_SCRIPT(key_card_silver);
 
-HudScript HudScript_Item_SuperJump = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001BC00, 0x0001BE00),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_KootBook = STANDARD_ITEM_HUD_SCRIPT(key_koot_book);
 
-HudScript HudScript_Item_SuperJump_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001BC00, 0x0001BE20),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_KootTheTape = STANDARD_ITEM_HUD_SCRIPT(key_koot_the_tape);
 
-HudScript HudScript_Item_MegaJump = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001BE40, 0x0001C040),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_KootMerluvleeAutograph = STANDARD_ITEM_HUD_SCRIPT(key_koot_autograph_luigi);
 
-HudScript HudScript_Item_MegaJump_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001BE40, 0x0001C060),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_KootEmptyWallet = STANDARD_ITEM_HUD_SCRIPT(key_koot_empty_wallet);
 
-HudScript HudScript_Item_PowerSmash1 = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001C080, 0x0001C280),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_KootLuigiAutograph = STANDARD_ITEM_HUD_SCRIPT(key_koot_autograph_merluvlee);
 
-HudScript HudScript_Item_PowerSmash1_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001C080, 0x0001C2A0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_KootShell = STANDARD_ITEM_HUD_SCRIPT(key_koot_shell);
 
-HudScript HudScript_Item_SuperSmash = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001C2C0, 0x0001C4C0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_KootPhoto = STANDARD_ITEM_HUD_SCRIPT(key_koot_photo);
 
-HudScript HudScript_Item_SuperSmash_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001C2C0, 0x0001C4E0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_KootGlasses = STANDARD_ITEM_HUD_SCRIPT(key_koot_glasses);
 
-HudScript HudScript_Item_MegaSmash = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001C500, 0x0001C700),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Letter = STANDARD_ITEM_HUD_SCRIPT(key_Letter);
+HudScript HudScript_Item_Letter_disabled = STANDARD_ITEM_HUD_SCRIPT(key_Letter_disabled);
 
-HudScript HudScript_Item_MegaSmash_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001C500, 0x0001C720),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Unused_089 = STANDARD_ITEM_HUD_SCRIPT(key_LongLetter);
+HudScript HudScript_Item_Unused_089_disabled = STANDARD_ITEM_HUD_SCRIPT(key_LongLetter_disabled);
 
-HudScript HudScript_Item_LuckyDay = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001C740, 0x0001C940),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Unused_08A = STANDARD_ITEM_HUD_SCRIPT(key_TealLetter);
+HudScript HudScript_Item_Unused_08A_disabled = STANDARD_ITEM_HUD_SCRIPT(key_TealLetter_disabled);
 
-HudScript HudScript_Item_LuckyDay_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001C740, 0x0001C960),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Unused_08B = STANDARD_ITEM_HUD_SCRIPT(key_Postcard);
+HudScript HudScript_Item_Unused_08B_disabled = STANDARD_ITEM_HUD_SCRIPT(key_Postcard_disabled);
 
-HudScript HudScript_Item_MegaHPDrain = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001C980, 0x0001CB80),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Unused_08C = STANDARD_ITEM_HUD_SCRIPT(key_EmptyBook);
+HudScript HudScript_Item_Unused_08C_disabled = STANDARD_ITEM_HUD_SCRIPT(key_EmptyBook_disabled);
 
-HudScript HudScript_Item_MegaHPDrain_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001C980, 0x0001CBA0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Unused_08D = STANDARD_ITEM_HUD_SCRIPT(unused_08D);
+HudScript HudScript_Item_Unused_08D_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_08D_disabled);
 
-HudScript HudScript_Item_BumpAttack = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001CBC0, 0x0001CDC0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Unused_08E = STANDARD_ITEM_HUD_SCRIPT(unused_08E);
+HudScript HudScript_Item_Unused_08E_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_08E_disabled);
 
-HudScript HudScript_Item_BumpAttack_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001CBC0, 0x0001CDE0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Unused_08F = STANDARD_ITEM_HUD_SCRIPT(unused_08F);
+HudScript HudScript_Item_Unused_08F_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_08F_disabled);
 
-HudScript HudScript_Item_PUpDDown = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001CE00, 0x0001D000),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_PleaseComeBack = STANDARD_ITEM_HUD_SCRIPT(battle_PleaseComeBack);
+HudScript HudScript_Item_PleaseComeBack_disabled = STANDARD_ITEM_HUD_SCRIPT(battle_PleaseComeBack_disabled);
 
-HudScript HudScript_Item_PUpDDown_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001CE00, 0x0001D020),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Unused_139 = STANDARD_ITEM_HUD_SCRIPT(battle_139);
+HudScript HudScript_Item_Unused_139_disabled = STANDARD_ITEM_HUD_SCRIPT(battle_139_disabled);
 
-HudScript HudScript_Item_PDownDUp = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001D040, 0x0001D240),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_FrightJar = STANDARD_ITEM_HUD_SCRIPT(battle_FrightJar);
+HudScript HudScript_Item_FrightJar_disabled = STANDARD_ITEM_HUD_SCRIPT(battle_FrightJar_disabled);
 
-HudScript HudScript_Item_PDownDUp_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001D040, 0x0001D260),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Mystery = STANDARD_ITEM_HUD_SCRIPT(battle_Mystery);
+HudScript HudScript_Item_Mystery_disabled = STANDARD_ITEM_HUD_SCRIPT(battle_Mystery_disabled);
 
-HudScript HudScript_Item_HeartFinder = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001D280, 0x0001D480),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_RepelGel = STANDARD_ITEM_HUD_SCRIPT(battle_RepelGel);
+HudScript HudScript_Item_RepelGel_disabled = STANDARD_ITEM_HUD_SCRIPT(battle_RepelGel_disabled);
 
-HudScript HudScript_Item_HeartFinder_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001D280, 0x0001D4A0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_InsecticideHerb = STANDARD_ITEM_HUD_SCRIPT(battle_InsecticideHerb);
+HudScript HudScript_Item_InsecticideHerb_disabled = STANDARD_ITEM_HUD_SCRIPT(battle_InsecticideHerb_disabled);
 
-HudScript HudScript_Item_FlowerFinder = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001D4C0, 0x0001D6C0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Unused_13E = STANDARD_ITEM_HUD_SCRIPT(battle_13E);
+HudScript HudScript_Item_Unused_13E_disabled = STANDARD_ITEM_HUD_SCRIPT(battle_13E_disabled);
 
-HudScript HudScript_Item_FlowerFinder_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001D4C0, 0x0001D6E0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Unused_13F = STANDARD_ITEM_HUD_SCRIPT(battle_13F);
+HudScript HudScript_Item_Unused_13F_disabled = STANDARD_ITEM_HUD_SCRIPT(battle_13F_disabled);
 
-HudScript HudScript_Item_DizzyAttack = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001D700, 0x0001D900),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_SpicySoup = STANDARD_ITEM_HUD_SCRIPT(food_SpicySoup);
+HudScript HudScript_Item_SpicySoup_disabled = STANDARD_ITEM_HUD_SCRIPT(food_SpicySoup_disabled);
 
-HudScript HudScript_Item_DizzyAttack_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001D700, 0x0001D920),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_ApplePie = STANDARD_ITEM_HUD_SCRIPT(food_ApplePie);
+HudScript HudScript_Item_ApplePie_disabled = STANDARD_ITEM_HUD_SCRIPT(food_ApplePie_disabled);
 
-HudScript HudScript_Item_SpeedySpin = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001D940, 0x0001DB40),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_HoneyUltra = STANDARD_ITEM_HUD_SCRIPT(food_HoneyUltra);
+HudScript HudScript_Item_HoneyUltra_disabled = STANDARD_ITEM_HUD_SCRIPT(food_HoneyUltra_disabled);
 
-HudScript HudScript_Item_SpeedySpin_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001D940, 0x0001DB60),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_MapleUltra = STANDARD_ITEM_HUD_SCRIPT(food_MapleUltra);
+HudScript HudScript_Item_MapleUltra_disabled = STANDARD_ITEM_HUD_SCRIPT(food_MapleUltra_disabled);
 
-HudScript HudScript_Item_SpinAttack = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001DB80, 0x0001DD80),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_JellyUltra = STANDARD_ITEM_HUD_SCRIPT(food_JellyUltra);
+HudScript HudScript_Item_JellyUltra_disabled = STANDARD_ITEM_HUD_SCRIPT(food_JellyUltra_disabled);
 
-HudScript HudScript_Item_SpinAttack_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001DB80, 0x0001DDA0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Koopasta = STANDARD_ITEM_HUD_SCRIPT(food_Koopasta);
+HudScript HudScript_Item_Koopasta_disabled = STANDARD_ITEM_HUD_SCRIPT(food_Koopasta_disabled);
 
-HudScript HudScript_Item_ISpy = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001DDC0, 0x0001DFC0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_FriedShroom = STANDARD_ITEM_HUD_SCRIPT(food_FriedShroom);
+HudScript HudScript_Item_FriedShroom_disabled = STANDARD_ITEM_HUD_SCRIPT(food_FriedShroom_disabled);
 
-HudScript HudScript_Item_ISpy_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001DDC0, 0x0001DFE0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_ShroomCake = STANDARD_ITEM_HUD_SCRIPT(food_ShroomCake);
+HudScript HudScript_Item_ShroomCake_disabled = STANDARD_ITEM_HUD_SCRIPT(food_ShroomCake_disabled);
 
-HudScript HudScript_Item_PowerRush = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001E000, 0x0001E200),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_ShroomSteak = STANDARD_ITEM_HUD_SCRIPT(food_ShroomSteak);
+HudScript HudScript_Item_ShroomSteak_disabled = STANDARD_ITEM_HUD_SCRIPT(food_ShroomSteak_disabled);
 
-HudScript HudScript_Item_PowerRush_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001E000, 0x0001E220),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_HotShroom = STANDARD_ITEM_HUD_SCRIPT(food_HotShroom);
+HudScript HudScript_Item_HotShroom_disabled = STANDARD_ITEM_HUD_SCRIPT(food_HotShroom_disabled);
 
-HudScript HudScript_Item_LastStand = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001E240, 0x0001E440),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_SweetShroom = STANDARD_ITEM_HUD_SCRIPT(food_SweetShroom);
+HudScript HudScript_Item_SweetShroom_disabled = STANDARD_ITEM_HUD_SCRIPT(food_SweetShroom_disabled);
 
-HudScript HudScript_Item_LastStand_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001E240, 0x0001E460),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_HealthyJuice = STANDARD_ITEM_HUD_SCRIPT(food_HealthyJuice);
+HudScript HudScript_Item_HealthyJuice_disabled = STANDARD_ITEM_HUD_SCRIPT(food_HealthyJuice_disabled);
 
-HudScript HudScript_Item_CloseCall = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001E480, 0x0001E680),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_BlandMeal = STANDARD_ITEM_HUD_SCRIPT(food_BlandMeal);
+HudScript HudScript_Item_BlandMeal_disabled = STANDARD_ITEM_HUD_SCRIPT(food_BlandMeal_disabled);
 
-HudScript HudScript_Item_CloseCall_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001E480, 0x0001E6A0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_YummyMeal = STANDARD_ITEM_HUD_SCRIPT(food_YummyMeal);
+HudScript HudScript_Item_YummyMeal_disabled = STANDARD_ITEM_HUD_SCRIPT(food_YummyMeal_disabled);
 
-HudScript HudScript_Item_CrazyHeart = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001E6C0, 0x0001E8C0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_DeluxeFeast = STANDARD_ITEM_HUD_SCRIPT(food_DeluxeFeast);
+HudScript HudScript_Item_DeluxeFeast_disabled = STANDARD_ITEM_HUD_SCRIPT(food_DeluxeFeast_disabled);
 
-HudScript HudScript_Item_CrazyHeart_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001E6C0, 0x0001E8E0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_SpecialShake = STANDARD_ITEM_HUD_SCRIPT(food_SpecialShake);
+HudScript HudScript_Item_SpecialShake_disabled = STANDARD_ITEM_HUD_SCRIPT(food_SpecialShake_disabled);
 
-HudScript HudScript_Item_ITEM_0D5 = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001E900, 0x0001EB00),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_BigCookie = STANDARD_ITEM_HUD_SCRIPT(food_BigCookie);
+HudScript HudScript_Item_BigCookie_disabled = STANDARD_ITEM_HUD_SCRIPT(food_BigCookie_disabled);
 
-HudScript HudScript_Item_ITEM_0D5_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001E900, 0x0001EB20),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Cake = STANDARD_ITEM_HUD_SCRIPT(food_Cake);
+HudScript HudScript_Item_Cake_disabled = STANDARD_ITEM_HUD_SCRIPT(food_Cake_disabled);
 
-HudScript HudScript_Item_ITEM_0D6 = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001EB40, 0x0001ED40),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Mistake = STANDARD_ITEM_HUD_SCRIPT(food_Mistake);
+HudScript HudScript_Item_Mistake_disabled = STANDARD_ITEM_HUD_SCRIPT(food_Mistake_disabled);
 
-HudScript HudScript_Item_ITEM_0D6_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001EB40, 0x0001ED60),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_KoopaTea = STANDARD_ITEM_HUD_SCRIPT(food_KoopaTea);
+HudScript HudScript_Item_KoopaTea_disabled = STANDARD_ITEM_HUD_SCRIPT(food_KoopaTea_disabled);
 
-HudScript HudScript_Item_ITEM_0D7 = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001ED80, 0x0001EF80),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_HoneySuper = STANDARD_ITEM_HUD_SCRIPT(food_HoneySuper);
+HudScript HudScript_Item_HoneySuper_disabled = STANDARD_ITEM_HUD_SCRIPT(food_HoneySuper_disabled);
 
-HudScript HudScript_Item_ITEM_0D7_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001ED80, 0x0001EFA0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_MapleSuper = STANDARD_ITEM_HUD_SCRIPT(food_MapleSuper);
+HudScript HudScript_Item_MapleSuper_disabled = STANDARD_ITEM_HUD_SCRIPT(food_MapleSuper_disabled);
 
-HudScript HudScript_Item_ShrinkSmash = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001EFC0, 0x0001F1C0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_JellySuper = STANDARD_ITEM_HUD_SCRIPT(food_JellySuper);
+HudScript HudScript_Item_JellySuper_disabled = STANDARD_ITEM_HUD_SCRIPT(food_JellySuper_disabled);
 
-HudScript HudScript_Item_ShrinkSmash_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001EFC0, 0x0001F1E0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Spaghetti = STANDARD_ITEM_HUD_SCRIPT(food_Spaghetti);
+HudScript HudScript_Item_Spaghetti_disabled = STANDARD_ITEM_HUD_SCRIPT(food_Spaghetti_disabled);
 
-HudScript HudScript_Item_ShrinkStomp = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001F200, 0x0001F400),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_EggMissile = STANDARD_ITEM_HUD_SCRIPT(food_EggMissile);
+HudScript HudScript_Item_EggMissile_disabled = STANDARD_ITEM_HUD_SCRIPT(food_EggMissile_disabled);
 
-HudScript HudScript_Item_ShrinkStomp_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001F200, 0x0001F420),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_FriedEgg = STANDARD_ITEM_HUD_SCRIPT(food_FriedEgg);
+HudScript HudScript_Item_FriedEgg_disabled = STANDARD_ITEM_HUD_SCRIPT(food_FriedEgg_disabled);
 
-HudScript HudScript_Item_DDownJump = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001F440, 0x0001F640),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_HoneyShroom = STANDARD_ITEM_HUD_SCRIPT(food_HoneyShroom);
+HudScript HudScript_Item_HoneyShroom_disabled = STANDARD_ITEM_HUD_SCRIPT(food_HoneyShroom_disabled);
 
-HudScript HudScript_Item_DDownJump_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001F440, 0x0001F660),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_HoneyCandy = STANDARD_ITEM_HUD_SCRIPT(food_HoneyCandy);
+HudScript HudScript_Item_HoneyCandy_disabled = STANDARD_ITEM_HUD_SCRIPT(food_HoneyCandy_disabled);
 
-HudScript HudScript_Item_DamageDodge = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001F680, 0x0001F880),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_ElectroPop = STANDARD_ITEM_HUD_SCRIPT(food_ElectroPop);
+HudScript HudScript_Item_ElectroPop_disabled = STANDARD_ITEM_HUD_SCRIPT(food_ElectroPop_disabled);
 
-HudScript HudScript_Item_DamageDodge_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001F680, 0x0001F8A0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_FirePop = STANDARD_ITEM_HUD_SCRIPT(food_FirePop);
+HudScript HudScript_Item_FirePop_disabled = STANDARD_ITEM_HUD_SCRIPT(food_FirePop_disabled);
 
-HudScript HudScript_Item_EarthquakeJump = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001F8C0, 0x0001FAC0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_LimeCandy = STANDARD_ITEM_HUD_SCRIPT(food_LimeCandy);
+HudScript HudScript_Item_LimeCandy_disabled = STANDARD_ITEM_HUD_SCRIPT(food_LimeCandy_disabled);
 
-HudScript HudScript_Item_EarthquakeJump_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001F8C0, 0x0001FAE0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_CocoPop = STANDARD_ITEM_HUD_SCRIPT(food_CocoPop);
+HudScript HudScript_Item_CocoPop_disabled = STANDARD_ITEM_HUD_SCRIPT(food_CocoPop_disabled);
 
-HudScript HudScript_Item_HappyFlower = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001FB00, 0x0001FD00),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_LemonCandy = STANDARD_ITEM_HUD_SCRIPT(food_LemonCandy);
+HudScript HudScript_Item_LemonCandy_disabled = STANDARD_ITEM_HUD_SCRIPT(food_LemonCandy_disabled);
 
-HudScript HudScript_Item_HappyFlower_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001FB00, 0x0001FD20),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_JellyPop = STANDARD_ITEM_HUD_SCRIPT(food_JellyPop);
+HudScript HudScript_Item_JellyPop_disabled = STANDARD_ITEM_HUD_SCRIPT(food_JellyPop_disabled);
 
-HudScript HudScript_Item_ITEM_0DE = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001FD40, 0x0001FF40),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_StrangeCake = STANDARD_ITEM_HUD_SCRIPT(food_StrangeCake);
+HudScript HudScript_Item_StrangeCake_disabled = STANDARD_ITEM_HUD_SCRIPT(food_StrangeCake_disabled);
 
-HudScript HudScript_Item_ITEM_0DE_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001FD40, 0x0001FF60),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_KookyCookie = STANDARD_ITEM_HUD_SCRIPT(food_KookyCookie);
+HudScript HudScript_Item_KookyCookie_disabled = STANDARD_ITEM_HUD_SCRIPT(food_KookyCookie_disabled);
 
-HudScript HudScript_Item_ITEM_0DF = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001FF80, 0x00020180),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_FrozenFries = STANDARD_ITEM_HUD_SCRIPT(food_FrozenFries);
+HudScript HudScript_Item_FrozenFries_disabled = STANDARD_ITEM_HUD_SCRIPT(food_FrozenFries_disabled);
 
-HudScript HudScript_Item_ITEM_0DF_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0001FF80, 0x000201A0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_PotatoSalad = STANDARD_ITEM_HUD_SCRIPT(food_PotatoSalad);
+HudScript HudScript_Item_PotatoSalad_disabled = STANDARD_ITEM_HUD_SCRIPT(food_PotatoSalad_disabled);
 
-HudScript HudScript_Item_DeepFocus3 = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000201C0, 0x000203C0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_NuttyCake = STANDARD_ITEM_HUD_SCRIPT(food_NuttyCake);
+HudScript HudScript_Item_NuttyCake_disabled = STANDARD_ITEM_HUD_SCRIPT(food_NuttyCake_disabled);
 
-HudScript HudScript_Item_DeepFocus3_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000201C0, 0x000203E0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_MapleShroom = STANDARD_ITEM_HUD_SCRIPT(food_MapleShroom);
+HudScript HudScript_Item_MapleShroom_disabled = STANDARD_ITEM_HUD_SCRIPT(food_MapleShroom_disabled);
 
-HudScript HudScript_Item_SuperFocus = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00020400, 0x00020600),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_BoiledEgg = STANDARD_ITEM_HUD_SCRIPT(food_BoiledEgg);
+HudScript HudScript_Item_BoiledEgg_disabled = STANDARD_ITEM_HUD_SCRIPT(food_BoiledEgg_disabled);
 
-HudScript HudScript_Item_SuperFocus_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00020400, 0x00020620),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_YoshiCookie = STANDARD_ITEM_HUD_SCRIPT(food_YoshiCookie);
+HudScript HudScript_Item_YoshiCookie_disabled = STANDARD_ITEM_HUD_SCRIPT(food_YoshiCookie_disabled);
 
-HudScript HudScript_Item_Kaiden = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00020640, 0x00020840),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_JellyShroom = STANDARD_ITEM_HUD_SCRIPT(food_JellyShroom);
+HudScript HudScript_Item_JellyShroom_disabled = STANDARD_ITEM_HUD_SCRIPT(food_JellyShroom_disabled);
 
-HudScript HudScript_Item_Kaiden_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00020640, 0x00020860),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Unused_02C = STANDARD_ITEM_HUD_SCRIPT(unused_02C);
+HudScript HudScript_Item_Unused_02C_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_02C_disabled);
 
-HudScript HudScript_Item_QuickChange = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00020880, 0x00020A80),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Unused_02D = STANDARD_ITEM_HUD_SCRIPT(unused_02D);
+HudScript HudScript_Item_Unused_02D_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_02D_disabled);
 
-HudScript HudScript_Item_QuickChange_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00020880, 0x00020AA0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Unused_02E = STANDARD_ITEM_HUD_SCRIPT(unused_02E);
+HudScript HudScript_Item_Unused_02E_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_02E_disabled);
 
-HudScript HudScript_Item_ITEM_0E4 = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00020AC0, 0x00020CC0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Unused_02F = STANDARD_ITEM_HUD_SCRIPT(unused_02F);
+HudScript HudScript_Item_Unused_02F_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_02F_disabled);
 
-HudScript HudScript_Item_ITEM_0E4_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00020AC0, 0x00020CE0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Unused_030 = STANDARD_ITEM_HUD_SCRIPT(unused_030);
+HudScript HudScript_Item_Unused_030_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_030_disabled);
 
-HudScript HudScript_Item_ITEM_0E5 = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00020D00, 0x00020F00),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_SpinSmash = STANDARD_ITEM_HUD_SCRIPT(badge_SpinSmash);
+HudScript HudScript_Item_SpinSmash_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_SpinSmash_disabled);
 
-HudScript HudScript_Item_ITEM_0E5_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00020D00, 0x00020F20),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Multibounce = STANDARD_ITEM_HUD_SCRIPT(badge_Multibounce);
+HudScript HudScript_Item_Multibounce_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_Multibounce_disabled);
 
-HudScript HudScript_Item_ITEM_0E6 = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00020F40, 0x00021140),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_PowerPlus = STANDARD_ITEM_HUD_SCRIPT(badge_PowerPlus);
+HudScript HudScript_Item_PowerPlus_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_PowerPlus_disabled);
 
-HudScript HudScript_Item_ITEM_0E6_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00020F40, 0x00021160),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_DodgeMaster = STANDARD_ITEM_HUD_SCRIPT(badge_DodgeMaster);
+HudScript HudScript_Item_DodgeMaster_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_DodgeMaster_disabled);
 
-HudScript HudScript_Item_ITEM_0E7 = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00021180, 0x00021380),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_PowerBounce = STANDARD_ITEM_HUD_SCRIPT(badge_PowerBounce);
+HudScript HudScript_Item_PowerBounce_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_PowerBounce_disabled);
 
-HudScript HudScript_Item_ITEM_0E7_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00021180, 0x000213A0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_SpikeShield = STANDARD_ITEM_HUD_SCRIPT(badge_SpikeShield);
+HudScript HudScript_Item_SpikeShield_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_SpikeShield_disabled);
 
-HudScript HudScript_Item_Peekaboo = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000213C0, 0x000215C0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_FirstAttack = STANDARD_ITEM_HUD_SCRIPT(badge_FirstAttack);
+HudScript HudScript_Item_FirstAttack_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_FirstAttack_disabled);
 
-HudScript HudScript_Item_Peekaboo_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000213C0, 0x000215E0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_HPPlus = STANDARD_ITEM_HUD_SCRIPT(badge_HPPlus);
+HudScript HudScript_Item_HPPlus_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_HPPlus_disabled);
 
-HudScript HudScript_Item_GroupFocus = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00021600, 0x00021800),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_QuakeHammer = STANDARD_ITEM_HUD_SCRIPT(badge_QuakeHammer);
+HudScript HudScript_Item_QuakeHammer_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_QuakeHammer_disabled);
 
-HudScript HudScript_Item_GroupFocus_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00021600, 0x00021820),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_DoubleDip = STANDARD_ITEM_HUD_SCRIPT(badge_DoubleDip);
+HudScript HudScript_Item_DoubleDip_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_DoubleDip_disabled);
 
-HudScript HudScript_Item_AttackFXD = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00021840, 0x00021A40),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_PowerQuake = STANDARD_ITEM_HUD_SCRIPT(badge_PowerQuake);
+HudScript HudScript_Item_PowerQuake_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_PowerQuake_disabled);
 
-HudScript HudScript_Item_AttackFXD_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00021840, 0x00021A60),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_MegaQuake = STANDARD_ITEM_HUD_SCRIPT(badge_MegaQuake);
+HudScript HudScript_Item_MegaQuake_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_MegaQuake_disabled);
 
-HudScript HudScript_Item_AttackFXB = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00021A80, 0x00021C80),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_SleepStomp = STANDARD_ITEM_HUD_SCRIPT(badge_SleepStomp);
+HudScript HudScript_Item_SleepStomp_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_SleepStomp_disabled);
 
-HudScript HudScript_Item_AttackFXB_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00021A80, 0x00021CA0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_SmashCharge = STANDARD_ITEM_HUD_SCRIPT(badge_SmashCharge);
+HudScript HudScript_Item_SmashCharge_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_SmashCharge_disabled);
 
-HudScript HudScript_Item_AttackFXE = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00021CC0, 0x00021EC0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_SSmashChg = STANDARD_ITEM_HUD_SCRIPT(badge_SSmashChg);
+HudScript HudScript_Item_SSmashChg_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_SSmashChg_disabled);
 
-HudScript HudScript_Item_AttackFXE_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00021CC0, 0x00021EE0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_AutoSmash = STANDARD_ITEM_HUD_SCRIPT(badge_AutoSmash);
+HudScript HudScript_Item_AutoSmash_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_AutoSmash_disabled);
 
-HudScript HudScript_Item_AttackFXC = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00021F00, 0x00022100),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_FireShield = STANDARD_ITEM_HUD_SCRIPT(badge_FireShield);
+HudScript HudScript_Item_FireShield_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_FireShield_disabled);
 
-HudScript HudScript_Item_AttackFXC_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00021F00, 0x00022120),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_JumpCharge = STANDARD_ITEM_HUD_SCRIPT(badge_JumpCharge);
+HudScript HudScript_Item_JumpCharge_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_JumpCharge_disabled);
 
-HudScript HudScript_Item_AttackFXF = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00022140, 0x00022340),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_SJumpChg = STANDARD_ITEM_HUD_SCRIPT(badge_SJumpChg);
+HudScript HudScript_Item_SJumpChg_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_SJumpChg_disabled);
 
-HudScript HudScript_Item_AttackFXF_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00022140, 0x00022360),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_AutoJump = STANDARD_ITEM_HUD_SCRIPT(badge_AutoJump);
+HudScript HudScript_Item_AutoJump_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_AutoJump_disabled);
 
-HudScript HudScript_Item_ITEM_0EF = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00022380, 0x00022580),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_DDownPound = STANDARD_ITEM_HUD_SCRIPT(badge_DDownPound);
+HudScript HudScript_Item_DDownPound_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_DDownPound_disabled);
 
-HudScript HudScript_Item_ITEM_0EF_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00022380, 0x000225A0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_AutoMultibounce = STANDARD_ITEM_HUD_SCRIPT(badge_AutoMultibounce);
+HudScript HudScript_Item_AutoMultibounce_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_AutoMultibounce_disabled);
 
-HudScript HudScript_Item_HealthyHealthy = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000225C0, 0x000227C0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_DizzyStomp = STANDARD_ITEM_HUD_SCRIPT(badge_DizzyStomp);
+HudScript HudScript_Item_DizzyStomp_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_DizzyStomp_disabled);
 
-HudScript HudScript_Item_HealthyHealthy_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000225C0, 0x000227E0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_HammerThrow = STANDARD_ITEM_HUD_SCRIPT(badge_HammerThrow);
+HudScript HudScript_Item_HammerThrow_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_HammerThrow_disabled);
 
-HudScript HudScript_Item_ITEM_0F1 = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00022800, 0x00022A00),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_SmashCharge0 = STANDARD_ITEM_HUD_SCRIPT(badge_SmashCharge0);
+HudScript HudScript_Item_SmashCharge0_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_SmashCharge0_disabled);
 
-HudScript HudScript_Item_ITEM_0F1_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00022800, 0x00022A20),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_PrettyLucky = STANDARD_ITEM_HUD_SCRIPT(badge_PrettyLucky);
+HudScript HudScript_Item_PrettyLucky_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_PrettyLucky_disabled);
 
-HudScript HudScript_Item_ITEM_0F2 = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00022A40, 0x00022C40),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_FeelingFine = STANDARD_ITEM_HUD_SCRIPT(badge_FeelingFine);
+HudScript HudScript_Item_FeelingFine_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_FeelingFine_disabled);
 
-HudScript HudScript_Item_ITEM_0F2_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00022A40, 0x00022C60),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_AttackFXA = STANDARD_ITEM_HUD_SCRIPT(badge_AttackFXA);
+HudScript HudScript_Item_AttackFXA_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_AttackFXA_disabled);
 
-HudScript HudScript_Item_ITEM_0F3 = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00022C80, 0x00022E80),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_AllorNothing = STANDARD_ITEM_HUD_SCRIPT(badge_AllorNothing);
+HudScript HudScript_Item_AllorNothing_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_AllorNothing_disabled);
 
-HudScript HudScript_Item_ITEM_0F3_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00022C80, 0x00022EA0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_HPDrain = STANDARD_ITEM_HUD_SCRIPT(badge_HPDrain);
+HudScript HudScript_Item_HPDrain_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_HPDrain_disabled);
 
-HudScript HudScript_Item_ITEM_0F4 = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00022EC0, 0x000230C0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_JumpCharge0 = STANDARD_ITEM_HUD_SCRIPT(badge_JumpCharge0);
+HudScript HudScript_Item_JumpCharge0_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_JumpCharge0_disabled);
 
-HudScript HudScript_Item_ITEM_0F4_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00022EC0, 0x000230E0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_SlowGo = STANDARD_ITEM_HUD_SCRIPT(badge_SlowGo);
+HudScript HudScript_Item_SlowGo_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_SlowGo_disabled);
 
-HudScript HudScript_Item_ITEM_0F5 = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00023100, 0x00023300),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_FPPlus = STANDARD_ITEM_HUD_SCRIPT(badge_FPPlus);
+HudScript HudScript_Item_FPPlus_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_FPPlus_disabled);
 
-HudScript HudScript_Item_ITEM_0F5_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00023100, 0x00023320),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_MegaRush = STANDARD_ITEM_HUD_SCRIPT(badge_MegaRush);
+HudScript HudScript_Item_MegaRush_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_MegaRush_disabled);
 
-HudScript HudScript_Item_ITEM_0F6 = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00023340, 0x00023540),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_IcePower = STANDARD_ITEM_HUD_SCRIPT(badge_IcePower);
+HudScript HudScript_Item_IcePower_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_IcePower_disabled);
 
-HudScript HudScript_Item_ITEM_0F6_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00023340, 0x00023560),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_DefendPlus = STANDARD_ITEM_HUD_SCRIPT(badge_DefendPlus);
+HudScript HudScript_Item_DefendPlus_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_DefendPlus_disabled);
 
-HudScript HudScript_Item_ITEM_0F7 = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00023580, 0x00023780),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_PayOff = STANDARD_ITEM_HUD_SCRIPT(badge_PayOff);
+HudScript HudScript_Item_PayOff_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_PayOff_disabled);
 
-HudScript HudScript_Item_ITEM_0F7_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00023580, 0x000237A0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_MoneyMoney = STANDARD_ITEM_HUD_SCRIPT(badge_MoneyMoney);
+HudScript HudScript_Item_MoneyMoney_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_MoneyMoney_disabled);
+
+HudScript HudScript_Item_ChillOut = STANDARD_ITEM_HUD_SCRIPT(badge_ChillOut);
+HudScript HudScript_Item_ChillOut_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_ChillOut_disabled);
 
-HudScript HudScript_Item_FireFlower = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0002A3C0, 0x0002A5C0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_HappyHeart = STANDARD_ITEM_HUD_SCRIPT(badge_HappyHeart);
+HudScript HudScript_Item_HappyHeart_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_HappyHeart_disabled);
 
-HudScript HudScript_Item_FireFlower_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0002A3C0, 0x0002A5E0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_ZapTap = STANDARD_ITEM_HUD_SCRIPT(badge_ZapTap);
+HudScript HudScript_Item_ZapTap_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_ZapTap_disabled);
 
-HudScript HudScript_Item_SnowmanDoll = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0002A600, 0x0002A800),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Berserker = STANDARD_ITEM_HUD_SCRIPT(badge_Berserker);
+HudScript HudScript_Item_Berserker_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_Berserker_disabled);
 
-HudScript HudScript_Item_SnowmanDoll_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0002A600, 0x0002A820),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_RightOn = STANDARD_ITEM_HUD_SCRIPT(badge_RightOn);
+HudScript HudScript_Item_RightOn_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_RightOn_disabled);
 
-HudScript HudScript_Item_ThunderRage = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0002A840, 0x0002AA40),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_RunawayPay = STANDARD_ITEM_HUD_SCRIPT(badge_RunawayPay);
+HudScript HudScript_Item_RunawayPay_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_RunawayPay_disabled);
 
-HudScript HudScript_Item_ThunderRage_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0002A840, 0x0002AA60),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Refund = STANDARD_ITEM_HUD_SCRIPT(badge_Refund);
+HudScript HudScript_Item_Refund_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_Refund_disabled);
 
-HudScript HudScript_Item_ThunderBolt = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0002AA80, 0x0002AC80),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_FlowerSaver = STANDARD_ITEM_HUD_SCRIPT(badge_FlowerSaver);
+HudScript HudScript_Item_FlowerSaver_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_FlowerSaver_disabled);
 
-HudScript HudScript_Item_ThunderBolt_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0002AA80, 0x0002ACA0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_TripleDip = STANDARD_ITEM_HUD_SCRIPT(badge_TripleDip);
+HudScript HudScript_Item_TripleDip_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_TripleDip_disabled);
 
-HudScript HudScript_Item_ShootingStar = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0002ACC0, 0x0002AEC0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_FlowerFanatic = STANDARD_ITEM_HUD_SCRIPT(badge_FlowerFanatic);
+HudScript HudScript_Item_FlowerFanatic_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_FlowerFanatic_disabled);
 
-HudScript HudScript_Item_ShootingStar_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0002ACC0, 0x0002AEE0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_PowerJump = STANDARD_ITEM_HUD_SCRIPT(badge_PowerJump);
+HudScript HudScript_Item_PowerJump_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_PowerJump_disabled);
 
-HudScript HudScript_Item_DustyHammer = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0002AF00, 0x0002B100),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_SuperJump = STANDARD_ITEM_HUD_SCRIPT(badge_SuperJump);
+HudScript HudScript_Item_SuperJump_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_SuperJump_disabled);
 
-HudScript HudScript_Item_DustyHammer_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0002AF00, 0x0002B120),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_MegaJump = STANDARD_ITEM_HUD_SCRIPT(badge_MegaJump);
+HudScript HudScript_Item_MegaJump_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_MegaJump_disabled);
 
-HudScript HudScript_Item_Pebble = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0002B140, 0x0002B340),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_PowerSmash1 = STANDARD_ITEM_HUD_SCRIPT(badge_PowerSmash);
+HudScript HudScript_Item_PowerSmash1_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_PowerSmash_disabled);
 
-HudScript HudScript_Item_Pebble_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0002B140, 0x0002B360),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_SuperSmash = STANDARD_ITEM_HUD_SCRIPT(badge_SuperSmash);
+HudScript HudScript_Item_SuperSmash_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_SuperSmash_disabled);
 
-HudScript HudScript_Item_ITEM_127 = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0002B380, 0x0002B580),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_MegaSmash = STANDARD_ITEM_HUD_SCRIPT(badge_MegaSmash);
+HudScript HudScript_Item_MegaSmash_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_MegaSmash_disabled);
 
-HudScript HudScript_Item_ITEM_127_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0002B380, 0x0002B5A0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_LuckyDay = STANDARD_ITEM_HUD_SCRIPT(badge_LuckyDay);
+HudScript HudScript_Item_LuckyDay_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_LuckyDay_disabled);
 
-HudScript HudScript_Item_StoneCap = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0002B5C0, 0x0002B7C0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_MegaHPDrain = STANDARD_ITEM_HUD_SCRIPT(badge_MegaHPDrain);
+HudScript HudScript_Item_MegaHPDrain_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_MegaHPDrain_disabled);
 
-HudScript HudScript_Item_StoneCap_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0002B5C0, 0x0002B7E0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_BumpAttack = STANDARD_ITEM_HUD_SCRIPT(badge_BumpAttack);
+HudScript HudScript_Item_BumpAttack_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_BumpAttack_disabled);
 
-HudScript HudScript_Item_VoltShroom = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0002B800, 0x0002BA00),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_PUpDDown = STANDARD_ITEM_HUD_SCRIPT(badge_PUpDDown);
+HudScript HudScript_Item_PUpDDown_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_PUpDDown_disabled);
 
-HudScript HudScript_Item_VoltShroom_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0002B800, 0x0002BA20),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_PDownDUp = STANDARD_ITEM_HUD_SCRIPT(badge_PDownDUp);
+HudScript HudScript_Item_PDownDUp_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_PDownDUp_disabled);
 
-HudScript HudScript_Item_PowerStar = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0002BA40, 0x0002BC40),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_HeartFinder = STANDARD_ITEM_HUD_SCRIPT(badge_HeartFinder);
+HudScript HudScript_Item_HeartFinder_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_HeartFinder_disabled);
 
-HudScript HudScript_Item_PowerStar_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0002BA40, 0x0002BC60),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_FlowerFinder = STANDARD_ITEM_HUD_SCRIPT(badge_FlowerFinder);
+HudScript HudScript_Item_FlowerFinder_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_FlowerFinder_disabled);
 
-HudScript HudScript_Item_Parasol = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0002BC80, 0x0002BE80),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_DizzyAttack = STANDARD_ITEM_HUD_SCRIPT(badge_DizzyAttack);
+HudScript HudScript_Item_DizzyAttack_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_DizzyAttack_disabled);
 
-HudScript HudScript_Item_Parasol_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0002BC80, 0x0002BEA0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_SpeedySpin = STANDARD_ITEM_HUD_SCRIPT(badge_SpeedySpin);
+HudScript HudScript_Item_SpeedySpin_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_SpeedySpin_disabled);
 
-HudScript HudScript_Item_MagicMirror = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0002BEC0, 0x0002C0C0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_SpinAttack = STANDARD_ITEM_HUD_SCRIPT(badge_SpinAttack);
+HudScript HudScript_Item_SpinAttack_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_SpinAttack_disabled);
 
-HudScript HudScript_Item_MagicMirror_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0002BEC0, 0x0002C0E0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_ISpy = STANDARD_ITEM_HUD_SCRIPT(badge_ISpy);
+HudScript HudScript_Item_ISpy_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_ISpy_disabled);
 
-HudScript HudScript_Item_ITEM_12D = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0002C100, 0x0002C300),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_PowerRush = STANDARD_ITEM_HUD_SCRIPT(badge_PowerRush);
+HudScript HudScript_Item_PowerRush_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_PowerRush_disabled);
 
-HudScript HudScript_Item_ITEM_12D_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0002C100, 0x0002C320),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_LastStand = STANDARD_ITEM_HUD_SCRIPT(badge_LastStand);
+HudScript HudScript_Item_LastStand_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_LastStand_disabled);
 
-HudScript HudScript_Item_ITEM_12E = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0002C340, 0x0002C540),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_CloseCall = STANDARD_ITEM_HUD_SCRIPT(badge_CloseCall);
+HudScript HudScript_Item_CloseCall_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_CloseCall_disabled);
 
-HudScript HudScript_Item_ITEM_12E_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0002C340, 0x0002C560),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_CrazyHeart = STANDARD_ITEM_HUD_SCRIPT(badge_CrazyHeart);
+HudScript HudScript_Item_CrazyHeart_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_CrazyHeart_disabled);
 
-HudScript HudScript_Item_ITEM_12F = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0002C580, 0x0002C780),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Unused_0D5 = STANDARD_ITEM_HUD_SCRIPT(unused_0D5);
+HudScript HudScript_Item_Unused_0D5_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_0D5_disabled);
 
-HudScript HudScript_Item_ITEM_12F_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0002C580, 0x0002C7A0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Unused_0D6 = STANDARD_ITEM_HUD_SCRIPT(unused_0D6);
+HudScript HudScript_Item_Unused_0D6_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_0D6_disabled);
 
-HudScript HudScript_Item_Mushroom = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000237C0, 0x000239C0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Unused_0D7 = STANDARD_ITEM_HUD_SCRIPT(unused_0D7);
+HudScript HudScript_Item_Unused_0D7_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_0D7_disabled);
 
-HudScript HudScript_Item_Mushroom_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000237C0, 0x000239E0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_ShrinkSmash = STANDARD_ITEM_HUD_SCRIPT(badge_ShrinkSmash);
+HudScript HudScript_Item_ShrinkSmash_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_ShrinkSmash_disabled);
 
-HudScript HudScript_Item_SuperShroom = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00023A00, 0x00023C00),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_ShrinkStomp = STANDARD_ITEM_HUD_SCRIPT(badge_ShrinkStomp);
+HudScript HudScript_Item_ShrinkStomp_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_ShrinkStomp_disabled);
 
-HudScript HudScript_Item_SuperShroom_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00023A00, 0x00023C20),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_DDownJump = STANDARD_ITEM_HUD_SCRIPT(badge_DDownJump);
+HudScript HudScript_Item_DDownJump_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_DDownJump_disabled);
 
-HudScript HudScript_Item_UltraShroom = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00023C40, 0x00023E40),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_DamageDodge = STANDARD_ITEM_HUD_SCRIPT(badge_DamageDodge);
+HudScript HudScript_Item_DamageDodge_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_DamageDodge_disabled);
 
-HudScript HudScript_Item_UltraShroom_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00023C40, 0x00023E60),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_EarthquakeJump = STANDARD_ITEM_HUD_SCRIPT(badge_EarthquakeJump);
+HudScript HudScript_Item_EarthquakeJump_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_EarthquakeJump_disabled);
 
-HudScript HudScript_Item_LifeShroom = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00023E80, 0x00024080),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_HappyFlower = STANDARD_ITEM_HUD_SCRIPT(badge_HappyFlower);
+HudScript HudScript_Item_HappyFlower_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_HappyFlower_disabled);
 
-HudScript HudScript_Item_LifeShroom_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00023E80, 0x000240A0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Unused_0DE = STANDARD_ITEM_HUD_SCRIPT(badge_HappyCoin);
+HudScript HudScript_Item_Unused_0DE_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_HappyCoin_disabled);
 
-HudScript HudScript_Item_DriedShroom = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000240C0, 0x000242C0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Unused_0DF = STANDARD_ITEM_HUD_SCRIPT(unused_0DF);
+HudScript HudScript_Item_Unused_0DF_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_0DF_disabled);
 
-HudScript HudScript_Item_DriedShroom_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000240C0, 0x000242E0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_DeepFocus = STANDARD_ITEM_HUD_SCRIPT(badge_DeepFocus);
+HudScript HudScript_Item_DeepFocus_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_DeepFocus_disabled);
 
-HudScript HudScript_Item_TastyTonic = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00024300, 0x00024500),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_SuperFocus = STANDARD_ITEM_HUD_SCRIPT(badge_SuperFocus);
+HudScript HudScript_Item_SuperFocus_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_SuperFocus_disabled);
 
-HudScript HudScript_Item_TastyTonic_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00024300, 0x00024520),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Kaiden = STANDARD_ITEM_HUD_SCRIPT(badge_Kaiden);
+HudScript HudScript_Item_Kaiden_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_Kaiden_disabled);
 
-HudScript HudScript_Item_SuperSoda = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00024540, 0x00024740),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_QuickChange = STANDARD_ITEM_HUD_SCRIPT(badge_QuickChange);
+HudScript HudScript_Item_QuickChange_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_QuickChange_disabled);
 
-HudScript HudScript_Item_SuperSoda_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00024540, 0x00024760),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Unused_0E4 = STANDARD_ITEM_HUD_SCRIPT(unused_0E4);
+HudScript HudScript_Item_Unused_0E4_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_0E4_disabled);
 
-HudScript HudScript_Item_BlueBerry = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00024780, 0x00024980),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Unused_0E5 = STANDARD_ITEM_HUD_SCRIPT(unused_0E5);
+HudScript HudScript_Item_Unused_0E5_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_0E5_disabled);
 
-HudScript HudScript_Item_BlueBerry_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00024780, 0x000249A0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Unused_0E6 = STANDARD_ITEM_HUD_SCRIPT(unused_0E6);
+HudScript HudScript_Item_Unused_0E6_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_0E6_disabled);
 
-HudScript HudScript_Item_RedBerry = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000249C0, 0x00024BC0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Unused_0E7 = STANDARD_ITEM_HUD_SCRIPT(unused_0E7);
+HudScript HudScript_Item_Unused_0E7_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_0E7_disabled);
 
-HudScript HudScript_Item_RedBerry_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000249C0, 0x00024BE0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Peekaboo = STANDARD_ITEM_HUD_SCRIPT(badge_Peekaboo);
+HudScript HudScript_Item_Peekaboo_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_Peekaboo_disabled);
 
-HudScript HudScript_Item_YellowBerry = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00024C00, 0x00024E00),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_GroupFocus = STANDARD_ITEM_HUD_SCRIPT(badge_GroupFocus);
+HudScript HudScript_Item_GroupFocus_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_GroupFocus_disabled);
 
-HudScript HudScript_Item_YellowBerry_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00024C00, 0x00024E20),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_AttackFXD = STANDARD_ITEM_HUD_SCRIPT(badge_AttackFXD);
+HudScript HudScript_Item_AttackFXD_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_AttackFXD_disabled);
 
-HudScript HudScript_Item_BubbleBerry = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00024E40, 0x00025040),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_AttackFXB = STANDARD_ITEM_HUD_SCRIPT(badge_AttackFXB);
+HudScript HudScript_Item_AttackFXB_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_AttackFXB_disabled);
 
-HudScript HudScript_Item_BubbleBerry_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00024E40, 0x00025060),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_AttackFXE = STANDARD_ITEM_HUD_SCRIPT(badge_AttackFXE);
+HudScript HudScript_Item_AttackFXE_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_AttackFXE_disabled);
 
-HudScript HudScript_Item_Goomnut = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00025080, 0x00025280),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_AttackFXC = STANDARD_ITEM_HUD_SCRIPT(badge_AttackFXC);
+HudScript HudScript_Item_AttackFXC_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_AttackFXC_disabled);
 
-HudScript HudScript_Item_Goomnut_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00025080, 0x000252A0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_AttackFXF = STANDARD_ITEM_HUD_SCRIPT(badge_AttackFXF);
+HudScript HudScript_Item_AttackFXF_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_AttackFXF_disabled);
 
-HudScript HudScript_Item_KoopaLeaf = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000252C0, 0x000254C0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Unused_0EF = STANDARD_ITEM_HUD_SCRIPT(unused_0EF);
+HudScript HudScript_Item_Unused_0EF_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_0EF_disabled);
 
-HudScript HudScript_Item_KoopaLeaf_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000252C0, 0x000254E0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_HealthyHealthy = STANDARD_ITEM_HUD_SCRIPT(badge_HealthyHealthy);
+HudScript HudScript_Item_HealthyHealthy_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_HealthyHealthy_disabled);
 
-HudScript HudScript_Item_DriedPasta = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00025500, 0x00025700),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Unused_0F1 = STANDARD_ITEM_HUD_SCRIPT(unused_0F1);
+HudScript HudScript_Item_Unused_0F1_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_0F1_disabled);
 
-HudScript HudScript_Item_DriedPasta_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00025500, 0x00025720),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Unused_0F2 = STANDARD_ITEM_HUD_SCRIPT(unused_0F2);
+HudScript HudScript_Item_Unused_0F2_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_0F2_disabled);
 
-HudScript HudScript_Item_Lime = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00025740, 0x00025940),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Unused_0F3 = STANDARD_ITEM_HUD_SCRIPT(unused_0F3);
+HudScript HudScript_Item_Unused_0F3_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_0F3_disabled);
 
-HudScript HudScript_Item_Lime_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00025740, 0x00025960),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Unused_0F4 = STANDARD_ITEM_HUD_SCRIPT(unused_0F4);
+HudScript HudScript_Item_Unused_0F4_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_0F4_disabled);
 
-HudScript HudScript_Item_Lemon = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00025980, 0x00025B80),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Unused_0F5 = STANDARD_ITEM_HUD_SCRIPT(unused_0F5);
+HudScript HudScript_Item_Unused_0F5_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_0F5_disabled);
 
-HudScript HudScript_Item_Lemon_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00025980, 0x00025BA0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Unused_0F6 = STANDARD_ITEM_HUD_SCRIPT(unused_0F6);
+HudScript HudScript_Item_Unused_0F6_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_0F6_disabled);
 
-HudScript HudScript_Item_DriedFruit = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00025BC0, 0x00025DC0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Unused_0F7 = STANDARD_ITEM_HUD_SCRIPT(unused_0F7);
+HudScript HudScript_Item_Unused_0F7_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_0F7_disabled);
 
-HudScript HudScript_Item_DriedFruit_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00025BC0, 0x00025DE0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_FireFlower = STANDARD_ITEM_HUD_SCRIPT(battle_FireFlower);
+HudScript HudScript_Item_FireFlower_disabled = STANDARD_ITEM_HUD_SCRIPT(battle_FireFlower_disabled);
 
-HudScript HudScript_Item_StrangeLeaf = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00025E00, 0x00026000),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_SnowmanDoll = STANDARD_ITEM_HUD_SCRIPT(battle_SnowmanDoll);
+HudScript HudScript_Item_SnowmanDoll_disabled = STANDARD_ITEM_HUD_SCRIPT(battle_SnowmanDoll_disabled);
 
-HudScript HudScript_Item_StrangeLeaf_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00025E00, 0x00026020),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_ThunderRage = STANDARD_ITEM_HUD_SCRIPT(battle_ThunderRage);
+HudScript HudScript_Item_ThunderRage_disabled = STANDARD_ITEM_HUD_SCRIPT(battle_ThunderRage_disabled);
 
-HudScript HudScript_Item_CakeMix = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00026040, 0x00026240),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_ThunderBolt = STANDARD_ITEM_HUD_SCRIPT(battle_ThunderBolt);
+HudScript HudScript_Item_ThunderBolt_disabled = STANDARD_ITEM_HUD_SCRIPT(battle_ThunderBolt_disabled);
 
-HudScript HudScript_Item_CakeMix_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00026040, 0x00026260),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_ShootingStar = STANDARD_ITEM_HUD_SCRIPT(battle_ShootingStar);
+HudScript HudScript_Item_ShootingStar_disabled = STANDARD_ITEM_HUD_SCRIPT(battle_ShootingStar_disabled);
 
-HudScript HudScript_Item_Egg = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00026280, 0x00026480),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_DustyHammer = STANDARD_ITEM_HUD_SCRIPT(battle_DustyHammer);
+HudScript HudScript_Item_DustyHammer_disabled = STANDARD_ITEM_HUD_SCRIPT(battle_DustyHammer_disabled);
 
-HudScript HudScript_Item_Egg_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00026280, 0x000264A0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Pebble = STANDARD_ITEM_HUD_SCRIPT(battle_Pebble);
+HudScript HudScript_Item_Pebble_disabled = STANDARD_ITEM_HUD_SCRIPT(battle_Pebble_disabled);
 
-HudScript HudScript_Item_Coconut = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000264C0, 0x000266C0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Unused_127 = STANDARD_ITEM_HUD_SCRIPT(unused_127);
+HudScript HudScript_Item_Unused_127_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_127_disabled);
 
-HudScript HudScript_Item_Coconut_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000264C0, 0x000266E0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_StoneCap = STANDARD_ITEM_HUD_SCRIPT(battle_StoneCap);
+HudScript HudScript_Item_StoneCap_disabled = STANDARD_ITEM_HUD_SCRIPT(battle_StoneCap_disabled);
 
-HudScript HudScript_Item_Melon = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00026700, 0x00026900),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_VoltShroom = STANDARD_ITEM_HUD_SCRIPT(battle_VoltShroom);
+HudScript HudScript_Item_VoltShroom_disabled = STANDARD_ITEM_HUD_SCRIPT(battle_VoltShroom_disabled);
 
-HudScript HudScript_Item_Melon_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00026700, 0x00026920),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_PowerStar = STANDARD_ITEM_HUD_SCRIPT(battle_PowerStar);
+HudScript HudScript_Item_PowerStar_disabled = STANDARD_ITEM_HUD_SCRIPT(battle_PowerStar_disabled);
 
-HudScript HudScript_Item_StinkyHerb = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00026940, 0x00026B40),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Parasol = STANDARD_ITEM_HUD_SCRIPT(battle_Parasol);
+HudScript HudScript_Item_Parasol_disabled = STANDARD_ITEM_HUD_SCRIPT(battle_Parasol_disabled);
 
-HudScript HudScript_Item_StinkyHerb_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00026940, 0x00026B60),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_MagicMirror = STANDARD_ITEM_HUD_SCRIPT(battle_MagicMirror);
+HudScript HudScript_Item_MagicMirror_disabled = STANDARD_ITEM_HUD_SCRIPT(battle_MagicMirror_disabled);
 
-HudScript HudScript_Item_IcedPotato = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00026B80, 0x00026D80),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Unused_12D = STANDARD_ITEM_HUD_SCRIPT(unused_12D);
+HudScript HudScript_Item_Unused_12D_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_12D_disabled);
 
-HudScript HudScript_Item_IcedPotato_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00026B80, 0x00026DA0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Unused_12E = STANDARD_ITEM_HUD_SCRIPT(unused_12E);
+HudScript HudScript_Item_Unused_12E_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_12E_disabled);
 
-HudScript HudScript_Item_HoneySyrup = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00026DC0, 0x00026FC0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Unused_12F = STANDARD_ITEM_HUD_SCRIPT(unused_12F);
+HudScript HudScript_Item_Unused_12F_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_12F_disabled);
 
-HudScript HudScript_Item_HoneySyrup_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00026DC0, 0x00026FE0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Mushroom = STANDARD_ITEM_HUD_SCRIPT(food_Mushroom);
+HudScript HudScript_Item_Mushroom_disabled = STANDARD_ITEM_HUD_SCRIPT(food_Mushroom_disabled);
 
-HudScript HudScript_Item_MapleSyrup = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00027000, 0x00027200),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_SuperShroom = STANDARD_ITEM_HUD_SCRIPT(food_SuperShroom);
+HudScript HudScript_Item_SuperShroom_disabled = STANDARD_ITEM_HUD_SCRIPT(food_SuperShroom_disabled);
 
-HudScript HudScript_Item_MapleSyrup_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00027000, 0x00027220),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_UltraShroom = STANDARD_ITEM_HUD_SCRIPT(food_UltraShroom);
+HudScript HudScript_Item_UltraShroom_disabled = STANDARD_ITEM_HUD_SCRIPT(food_UltraShroom_disabled);
 
-HudScript HudScript_Item_JamminJelly = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00027240, 0x00027440),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_LifeShroom = STANDARD_ITEM_HUD_SCRIPT(food_LifeShroom);
+HudScript HudScript_Item_LifeShroom_disabled = STANDARD_ITEM_HUD_SCRIPT(food_LifeShroom_disabled);
 
-HudScript HudScript_Item_JamminJelly_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00027240, 0x00027460),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_DriedShroom = STANDARD_ITEM_HUD_SCRIPT(food_DriedShroom);
+HudScript HudScript_Item_DriedShroom_disabled = STANDARD_ITEM_HUD_SCRIPT(food_DriedShroom_disabled);
 
-HudScript HudScript_Item_WhackasBump = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00027480, 0x00027680),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_TastyTonic = STANDARD_ITEM_HUD_SCRIPT(food_TastyTonic);
+HudScript HudScript_Item_TastyTonic_disabled = STANDARD_ITEM_HUD_SCRIPT(food_TastyTonic_disabled);
 
-HudScript HudScript_Item_WhackasBump_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00027480, 0x000276A0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_SuperSoda = STANDARD_ITEM_HUD_SCRIPT(food_SuperSoda);
+HudScript HudScript_Item_SuperSoda_disabled = STANDARD_ITEM_HUD_SCRIPT(food_SuperSoda_disabled);
 
-HudScript HudScript_Item_Apple = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000276C0, 0x000278C0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_BlueBerry = STANDARD_ITEM_HUD_SCRIPT(food_BlueBerry);
+HudScript HudScript_Item_BlueBerry_disabled = STANDARD_ITEM_HUD_SCRIPT(food_BlueBerry_disabled);
 
-HudScript HudScript_Item_Apple_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000276C0, 0x000278E0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_RedBerry = STANDARD_ITEM_HUD_SCRIPT(food_RedBerry);
+HudScript HudScript_Item_RedBerry_disabled = STANDARD_ITEM_HUD_SCRIPT(food_RedBerry_disabled);
 
-HudScript HudScript_Item_BakingSalt = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00027900, 0x00027B00),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_YellowBerry = STANDARD_ITEM_HUD_SCRIPT(food_YellowBerry);
+HudScript HudScript_Item_YellowBerry_disabled = STANDARD_ITEM_HUD_SCRIPT(food_YellowBerry_disabled);
 
-HudScript HudScript_Item_BakingSalt_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00027900, 0x00027B20),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_BubbleBerry = STANDARD_ITEM_HUD_SCRIPT(food_BubbleBerry);
+HudScript HudScript_Item_BubbleBerry_disabled = STANDARD_ITEM_HUD_SCRIPT(food_BubbleBerry_disabled);
 
-HudScript HudScript_Item_BakingSugar = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00027B40, 0x00027D40),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Goomnut = STANDARD_ITEM_HUD_SCRIPT(food_Goomnut);
+HudScript HudScript_Item_Goomnut_disabled = STANDARD_ITEM_HUD_SCRIPT(food_Goomnut_disabled);
 
-HudScript HudScript_Item_BakingSugar_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00027B40, 0x00027D60),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_KoopaLeaf = STANDARD_ITEM_HUD_SCRIPT(food_KoopaLeaf);
+HudScript HudScript_Item_KoopaLeaf_disabled = STANDARD_ITEM_HUD_SCRIPT(food_KoopaLeaf_disabled);
 
-HudScript HudScript_Item_BakingEgg = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00027D80, 0x00027F80),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_DriedPasta = STANDARD_ITEM_HUD_SCRIPT(food_DriedPasta);
+HudScript HudScript_Item_DriedPasta_disabled = STANDARD_ITEM_HUD_SCRIPT(food_DriedPasta_disabled);
 
-HudScript HudScript_Item_BakingEgg_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00027D80, 0x00027FA0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Lime = STANDARD_ITEM_HUD_SCRIPT(food_Lime);
+HudScript HudScript_Item_Lime_disabled = STANDARD_ITEM_HUD_SCRIPT(food_Lime_disabled);
 
-HudScript HudScript_Item_BakingCream = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00027FC0, 0x000281C0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Lemon = STANDARD_ITEM_HUD_SCRIPT(food_Lemon);
+HudScript HudScript_Item_Lemon_disabled = STANDARD_ITEM_HUD_SCRIPT(food_Lemon_disabled);
 
-HudScript HudScript_Item_BakingCream_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00027FC0, 0x000281E0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_DriedFruit = STANDARD_ITEM_HUD_SCRIPT(food_DriedFruit);
+HudScript HudScript_Item_DriedFruit_disabled = STANDARD_ITEM_HUD_SCRIPT(food_DriedFruit_disabled);
 
-HudScript HudScript_Item_BakingStrawberry = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00028200, 0x00028400),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_StrangeLeaf = STANDARD_ITEM_HUD_SCRIPT(food_StrangeLeaf);
+HudScript HudScript_Item_StrangeLeaf_disabled = STANDARD_ITEM_HUD_SCRIPT(food_StrangeLeaf_disabled);
 
-HudScript HudScript_Item_BakingStrawberry_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00028200, 0x00028420),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_CakeMix = STANDARD_ITEM_HUD_SCRIPT(food_CakeMix);
+HudScript HudScript_Item_CakeMix_disabled = STANDARD_ITEM_HUD_SCRIPT(food_CakeMix_disabled);
 
-HudScript HudScript_Item_BakingButter = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00028440, 0x00028640),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Egg = STANDARD_ITEM_HUD_SCRIPT(food_Egg);
+HudScript HudScript_Item_Egg_disabled = STANDARD_ITEM_HUD_SCRIPT(food_Egg_disabled);
 
-HudScript HudScript_Item_BakingButter_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00028440, 0x00028660),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Coconut = STANDARD_ITEM_HUD_SCRIPT(food_Coconut);
+HudScript HudScript_Item_Coconut_disabled = STANDARD_ITEM_HUD_SCRIPT(food_Coconut_disabled);
 
-HudScript HudScript_Item_BakingCleanser = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00028680, 0x00028880),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Melon = STANDARD_ITEM_HUD_SCRIPT(food_Melon);
+HudScript HudScript_Item_Melon_disabled = STANDARD_ITEM_HUD_SCRIPT(food_Melon_disabled);
 
-HudScript HudScript_Item_BakingCleanser_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00028680, 0x000288A0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_StinkyHerb = STANDARD_ITEM_HUD_SCRIPT(food_StinkyHerb);
+HudScript HudScript_Item_StinkyHerb_disabled = STANDARD_ITEM_HUD_SCRIPT(food_StinkyHerb_disabled);
 
-HudScript HudScript_Item_BakingWater = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000288C0, 0x00028AC0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_IcedPotato = STANDARD_ITEM_HUD_SCRIPT(food_IcedPotato);
+HudScript HudScript_Item_IcedPotato_disabled = STANDARD_ITEM_HUD_SCRIPT(food_IcedPotato_disabled);
 
-HudScript HudScript_Item_BakingWater_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000288C0, 0x00028AE0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_HoneySyrup = STANDARD_ITEM_HUD_SCRIPT(food_HoneySyrup);
+HudScript HudScript_Item_HoneySyrup_disabled = STANDARD_ITEM_HUD_SCRIPT(food_HoneySyrup_disabled);
 
-HudScript HudScript_Item_BakingFlour = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00028B00, 0x00028D00),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_MapleSyrup = STANDARD_ITEM_HUD_SCRIPT(food_MapleSyrup);
+HudScript HudScript_Item_MapleSyrup_disabled = STANDARD_ITEM_HUD_SCRIPT(food_MapleSyrup_disabled);
 
-HudScript HudScript_Item_BakingFlour_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00028B00, 0x00028D20),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_JamminJelly = STANDARD_ITEM_HUD_SCRIPT(food_JamminJelly);
+HudScript HudScript_Item_JamminJelly_disabled = STANDARD_ITEM_HUD_SCRIPT(food_JamminJelly_disabled);
 
-HudScript HudScript_Item_BakingMilk = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00028D40, 0x00028F40),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_WhackasBump = STANDARD_ITEM_HUD_SCRIPT(food_WhackasBump);
+HudScript HudScript_Item_WhackasBump_disabled = STANDARD_ITEM_HUD_SCRIPT(food_WhackasBump_disabled);
 
-HudScript HudScript_Item_BakingMilk_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00028D40, 0x00028F60),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Apple = STANDARD_ITEM_HUD_SCRIPT(food_Apple);
+HudScript HudScript_Item_Apple_disabled = STANDARD_ITEM_HUD_SCRIPT(food_Apple_disabled);
 
-HudScript HudScript_Item_ITEM_11F = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00028F80, 0x00029180),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_BakingSalt = STANDARD_ITEM_HUD_SCRIPT(peach_BakingSalt);
+HudScript HudScript_Item_BakingSalt_disabled = STANDARD_ITEM_HUD_SCRIPT(peach_BakingSalt_disabled);
 
-HudScript HudScript_Item_ITEM_11F_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00028F80, 0x000291A0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_BakingSugar = STANDARD_ITEM_HUD_SCRIPT(peach_BakingSugar);
+HudScript HudScript_Item_BakingSugar_disabled = STANDARD_ITEM_HUD_SCRIPT(peach_BakingSugar_disabled);
 
-HudScript HudScript_Item_SleepySheep = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000291C0, 0x000293C0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_BakingEgg = STANDARD_ITEM_HUD_SCRIPT(peach_BakingEgg);
+HudScript HudScript_Item_BakingEgg_disabled = STANDARD_ITEM_HUD_SCRIPT(peach_BakingEgg_disabled);
 
-HudScript HudScript_Item_SleepySheep_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x000291C0, 0x000293E0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_BakingCream = STANDARD_ITEM_HUD_SCRIPT(peach_BakingCream);
+HudScript HudScript_Item_BakingCream_disabled = STANDARD_ITEM_HUD_SCRIPT(peach_BakingCream_disabled);
 
-HudScript HudScript_Item_XBandage = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00029400, 0x00029600),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_BakingStrawberry = STANDARD_ITEM_HUD_SCRIPT(peach_BakingStrawberry);
+HudScript HudScript_Item_BakingStrawberry_disabled = STANDARD_ITEM_HUD_SCRIPT(peach_BakingStrawberry_disabled);
 
-HudScript HudScript_Item_XBandage_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00029400, 0x00029620),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_BakingButter = STANDARD_ITEM_HUD_SCRIPT(peach_BakingButter);
+HudScript HudScript_Item_BakingButter_disabled = STANDARD_ITEM_HUD_SCRIPT(peach_BakingButter_disabled);
 
-HudScript HudScript_Item_POWBlock = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00029640, 0x00029840),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_BakingCleanser = STANDARD_ITEM_HUD_SCRIPT(peach_BakingCleanser);
+HudScript HudScript_Item_BakingCleanser_disabled = STANDARD_ITEM_HUD_SCRIPT(peach_BakingCleanser_disabled);
 
-HudScript HudScript_Item_POWBlock_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00029640, 0x00029860),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_BakingWater = STANDARD_ITEM_HUD_SCRIPT(peach_BakingWater);
+HudScript HudScript_Item_BakingWater_disabled = STANDARD_ITEM_HUD_SCRIPT(peach_BakingWater_disabled);
 
-HudScript HudScript_Item_HustleDrink = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00029880, 0x00029A80),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_BakingFlour = STANDARD_ITEM_HUD_SCRIPT(peach_BakingFlour);
+HudScript HudScript_Item_BakingFlour_disabled = STANDARD_ITEM_HUD_SCRIPT(peach_BakingFlour_disabled);
 
-HudScript HudScript_Item_HustleDrink_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00029880, 0x00029AA0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_BakingMilk = STANDARD_ITEM_HUD_SCRIPT(peach_BakingMilk);
+HudScript HudScript_Item_BakingMilk_disabled = STANDARD_ITEM_HUD_SCRIPT(peach_BakingMilk_disabled);
 
-HudScript HudScript_Item_StopWatch = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00029AC0, 0x00029CC0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Unused_11F = STANDARD_ITEM_HUD_SCRIPT(unused_11F);
+HudScript HudScript_Item_Unused_11F_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_11F_disabled);
 
-HudScript HudScript_Item_StopWatch_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00029AC0, 0x00029CE0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_SleepySheep = STANDARD_ITEM_HUD_SCRIPT(battle_SleepySheep);
+HudScript HudScript_Item_SleepySheep_disabled = STANDARD_ITEM_HUD_SCRIPT(battle_SleepySheep_disabled);
 
-HudScript HudScript_Item_DizzyDial = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00029D00, 0x00029F00),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_XBandage = STANDARD_ITEM_HUD_SCRIPT(battle_XBandage);
+HudScript HudScript_Item_XBandage_disabled = STANDARD_ITEM_HUD_SCRIPT(battle_XBandage_disabled);
 
-HudScript HudScript_Item_DizzyDial_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00029D00, 0x00029F20),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_POWBlock = STANDARD_ITEM_HUD_SCRIPT(battle_POWBlock);
+HudScript HudScript_Item_POWBlock_disabled = STANDARD_ITEM_HUD_SCRIPT(battle_POWBlock_disabled);
 
-HudScript HudScript_Item_ITEM_136 = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00029F40, 0x0002A140),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_HustleDrink = STANDARD_ITEM_HUD_SCRIPT(battle_HustleDrink);
+HudScript HudScript_Item_HustleDrink_disabled = STANDARD_ITEM_HUD_SCRIPT(battle_HustleDrink_disabled);
 
-HudScript HudScript_Item_ITEM_136_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x00029F40, 0x0002A160),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_StopWatch = STANDARD_ITEM_HUD_SCRIPT(battle_StopWatch);
+HudScript HudScript_Item_StopWatch_disabled = STANDARD_ITEM_HUD_SCRIPT(battle_StopWatch_disabled);
 
-HudScript HudScript_Item_ITEM_137 = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0002A180, 0x0002A380),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_DizzyDial = STANDARD_ITEM_HUD_SCRIPT(battle_DizzyDial);
+HudScript HudScript_Item_DizzyDial_disabled = STANDARD_ITEM_HUD_SCRIPT(battle_DizzyDial_disabled);
 
-HudScript HudScript_Item_ITEM_137_disabled = {
-	he_SetVisible,
-	he_SetTileSize(HUD_ELEMENT_SIZE_32x32),
-	he_Loop,
-		he_SetImage(60, 0x0002A180, 0x0002A3A0),
-	he_Restart,
-	he_End
-};
+HudScript HudScript_Item_Unused_136 = STANDARD_ITEM_HUD_SCRIPT(battle_136);
+HudScript HudScript_Item_Unused_136_disabled = STANDARD_ITEM_HUD_SCRIPT(battle_136_disabled);
+
+HudScript HudScript_Item_Unused_137 = STANDARD_ITEM_HUD_SCRIPT(battle_137);
+HudScript HudScript_Item_Unused_137_disabled = STANDARD_ITEM_HUD_SCRIPT(battle_137_disabled);
 
 //TODO padding
 s32 pad_after_item_hudscripts[] = {
     0x00000000, 0x00000000
 };
 
+// handle the mapping from HudScript name to gItemHudScripts array index,
+// allowing item table entries to reference their HudScripts by name
+#define ITEM_HS_INDEX(scrName) HS_INDEX_##scrName
+
+enum ItemHudElemIDs {
+	HS_INDEX_HudScript_Item_SpicySoup				= 0x1,
+	HS_INDEX_HudScript_Item_ApplePie				= 0x2,
+	HS_INDEX_HudScript_Item_HoneyUltra				= 0x3,
+	HS_INDEX_HudScript_Item_MapleUltra				= 0x4,
+	HS_INDEX_HudScript_Item_JellyUltra				= 0x5,
+	HS_INDEX_HudScript_Item_Koopasta				= 0x6,
+	HS_INDEX_HudScript_Item_FriedShroom				= 0x7,
+	HS_INDEX_HudScript_Item_ShroomCake				= 0x8,
+	HS_INDEX_HudScript_Item_ShroomSteak				= 0x9,
+	HS_INDEX_HudScript_Item_HotShroom				= 0xA,
+	HS_INDEX_HudScript_Item_SweetShroom				= 0xB,
+	HS_INDEX_HudScript_Item_HealthyJuice			= 0xC,
+	HS_INDEX_HudScript_Item_BlandMeal				= 0xD,
+	HS_INDEX_HudScript_Item_YummyMeal				= 0xE,
+	HS_INDEX_HudScript_Item_DeluxeFeast				= 0xF,
+	HS_INDEX_HudScript_Item_SpecialShake			= 0x10,
+	HS_INDEX_HudScript_Item_BigCookie				= 0x11,
+	HS_INDEX_HudScript_Item_Cake					= 0x12,
+	HS_INDEX_HudScript_Item_Mistake					= 0x13,
+	HS_INDEX_HudScript_Item_KoopaTea				= 0x14,
+	HS_INDEX_HudScript_Item_HoneySuper				= 0x15,
+	HS_INDEX_HudScript_Item_MapleSuper				= 0x16,
+	HS_INDEX_HudScript_Item_JellySuper				= 0x17,
+	HS_INDEX_HudScript_Item_Spaghetti				= 0x18,
+	HS_INDEX_HudScript_Item_EggMissile				= 0x19,
+	HS_INDEX_HudScript_Item_FriedEgg				= 0x1A,
+	HS_INDEX_HudScript_Item_HoneyShroom				= 0x1B,
+	HS_INDEX_HudScript_Item_HoneyCandy				= 0x1C,
+	HS_INDEX_HudScript_Item_ElectroPop				= 0x1D,
+	HS_INDEX_HudScript_Item_FirePop					= 0x1E,
+	HS_INDEX_HudScript_Item_LimeCandy				= 0x1F,
+	HS_INDEX_HudScript_Item_CocoPop					= 0x20,
+	HS_INDEX_HudScript_Item_LemonCandy				= 0x21,
+	HS_INDEX_HudScript_Item_JellyPop				= 0x22,
+	HS_INDEX_HudScript_Item_StrangeCake				= 0x23,
+	HS_INDEX_HudScript_Item_KookyCookie				= 0x24,
+	HS_INDEX_HudScript_Item_FrozenFries				= 0x25,
+	HS_INDEX_HudScript_Item_PotatoSalad				= 0x26,
+	HS_INDEX_HudScript_Item_NuttyCake				= 0x27,
+	HS_INDEX_HudScript_Item_MapleShroom				= 0x28,
+	HS_INDEX_HudScript_Item_BoiledEgg				= 0x29,
+	HS_INDEX_HudScript_Item_YoshiCookie				= 0x2A,
+	HS_INDEX_HudScript_Item_JellyShroom				= 0x2B,
+	HS_INDEX_HudScript_Item_Unused_02C				= 0x2C,
+	HS_INDEX_HudScript_Item_Unused_02D				= 0x2D,
+	HS_INDEX_HudScript_Item_Unused_02E				= 0x2E,
+	HS_INDEX_HudScript_Item_Unused_02F				= 0x2F,
+	HS_INDEX_HudScript_Item_Unused_030				= 0x30,
+	HS_INDEX_HudScript_Item_Heart					= 0x31,
+	HS_INDEX_HudScript_Item_Coin					= 0x32,
+	HS_INDEX_HudScript_Item_HeartPiece				= 0x33,
+	HS_INDEX_HudScript_Item_StarPoint				= 0x34,
+	HS_INDEX_HudScript_Item_HeartPoint				= 0x35,
+	HS_INDEX_HudScript_Item_FlowerPoint				= 0x36,
+	HS_INDEX_HudScript_Item_StarPiece				= 0x37,
+	HS_INDEX_HudScript_Item_Jump					= 0x38,
+	HS_INDEX_HudScript_Item_SpinJump				= 0x39,
+	HS_INDEX_HudScript_Item_TornadoJump				= 0x3A,
+	HS_INDEX_HudScript_Item_Hammer					= 0x3B,
+	HS_INDEX_HudScript_Item_SuperHammer				= 0x3C,
+	HS_INDEX_HudScript_Item_UltraHammer				= 0x3D,
+	HS_INDEX_HudScript_Item_LuckyStar				= 0x3E,
+	HS_INDEX_HudScript_Item_Map						= 0x3F,
+	HS_INDEX_HudScript_Item_KoopaFortressKey		= 0x40,
+	HS_INDEX_HudScript_Item_RuinsKey				= 0x41,
+	HS_INDEX_HudScript_Item_TubbaCastleKey			= 0x42,
+	HS_INDEX_HudScript_Item_CrystalPalaceKey		= 0x43,
+	HS_INDEX_HudScript_Item_BowserCastleKey			= 0x44,
+	HS_INDEX_HudScript_Item_Dolly					= 0x45,
+	HS_INDEX_HudScript_Item_KooperShell				= 0x46,
+	HS_INDEX_HudScript_Item_PulseStone				= 0x47,
+	HS_INDEX_HudScript_Item_Artifact				= 0x48,
+	HS_INDEX_HudScript_Item_VolcanoVase				= 0x49,
+	HS_INDEX_HudScript_Item_PyramidStone			= 0x4A,
+	HS_INDEX_HudScript_Item_DiamondStone			= 0x4B,
+	HS_INDEX_HudScript_Item_LunarStone				= 0x4C,
+	HS_INDEX_HudScript_Item_ForestPass				= 0x4D,
+	HS_INDEX_HudScript_Item_BooRecordOutline		= 0x4E,
+	HS_INDEX_HudScript_Item_BooRecord				= 0x4F,
+	HS_INDEX_HudScript_Item_BooWeight				= 0x50,
+	HS_INDEX_HudScript_Item_BooPortrait				= 0x51,
+	HS_INDEX_HudScript_Item_MysticalKey				= 0x52,
+	HS_INDEX_HudScript_Item_IronKey					= 0x53,
+	HS_INDEX_HudScript_Item_ToyTrain				= 0x54,
+	HS_INDEX_HudScript_Item_FryingPan				= 0x55,
+	HS_INDEX_HudScript_Item_Dictionary				= 0x56,
+	HS_INDEX_HudScript_Item_MysteryNote				= 0x57,
+	HS_INDEX_HudScript_Item_SuspiciousNote			= 0x58,
+	HS_INDEX_HudScript_Item_MagicalSeed1			= 0x59,
+	HS_INDEX_HudScript_Item_MagicalSeed2			= 0x5A,
+	HS_INDEX_HudScript_Item_MagicalSeed3			= 0x5B,
+	HS_INDEX_HudScript_Item_MagicalSeed4			= 0x5C,
+	HS_INDEX_HudScript_Item_CrystalBerry			= 0x5D,
+	HS_INDEX_HudScript_Item_WaterStone				= 0x5E,
+	HS_INDEX_HudScript_Item_MagicalBean				= 0x5F,
+	HS_INDEX_HudScript_Item_FertileSoil				= 0x60,
+	HS_INDEX_HudScript_Item_MiracleWater			= 0x61,
+	HS_INDEX_HudScript_Item_UltraStone				= 0x62,
+	HS_INDEX_HudScript_Item_ToadDoll				= 0x63,
+	HS_INDEX_HudScript_Item_Calculator				= 0x64,
+	HS_INDEX_HudScript_Item_Screwdriver				= 0x65,
+	HS_INDEX_HudScript_Item_Cookbook				= 0x66,
+	HS_INDEX_HudScript_Item_JadeRaven				= 0x67,
+	HS_INDEX_HudScript_Item_SnowmanBucket			= 0x68,
+	HS_INDEX_HudScript_Item_SnowmanScarf			= 0x69,
+	HS_INDEX_HudScript_Item_RedKey					= 0x6A,
+	HS_INDEX_HudScript_Item_BlueKey					= 0x6B,
+	HS_INDEX_HudScript_Item_KootPackage				= 0x6C,
+	HS_INDEX_HudScript_Item_KootRedJar				= 0x6D,
+	HS_INDEX_HudScript_Item_Melody					= 0x6E,
+	HS_INDEX_HudScript_Item_Lyrics					= 0x6F,
+	HS_INDEX_HudScript_Item_Mailbag					= 0x70,
+	HS_INDEX_HudScript_Item_StarStone				= 0x71,
+	HS_INDEX_HudScript_Item_SneakyParasol			= 0x72,
+	HS_INDEX_HudScript_Item_PeachKey				= 0x73,
+	HS_INDEX_HudScript_Item_UNK_1DC210				= 0x74,
+	HS_INDEX_HudScript_Item_UNK_1DC430				= 0x75,
+	HS_INDEX_HudScript_Item_UNK_1DC650   			= 0x76,
+	HS_INDEX_HudScript_Item_UNK_1DC870				= 0x77,
+	HS_INDEX_HudScript_Item_FirstDegreeCard			= 0x78,
+	HS_INDEX_HudScript_Item_SecondDegreeCard		= 0x79,
+	HS_INDEX_HudScript_Item_ThirdDegreeCard			= 0x7A,
+	HS_INDEX_HudScript_Item_FourthDegreeCard		= 0x7B,
+	HS_INDEX_HudScript_Item_Diploma					= 0x7C,
+	HS_INDEX_HudScript_Item_CrystalBall				= 0x7D,
+	HS_INDEX_HudScript_Item_GoldCredit				= 0x7E,
+	HS_INDEX_HudScript_Item_SilverCredit			= 0x7F,
+	HS_INDEX_HudScript_Item_KootKoopaLegends		= 0x80,
+	HS_INDEX_HudScript_Item_KootTheTape				= 0x81,
+	HS_INDEX_HudScript_Item_KootLuigiAutograph		= 0x82,
+	HS_INDEX_HudScript_Item_KootEmptyWallet			= 0x83,
+	HS_INDEX_HudScript_Item_KootMerluvleeAutograph	= 0x84,
+	HS_INDEX_HudScript_Item_KootShell				= 0x85,
+	HS_INDEX_HudScript_Item_KootPhoto				= 0x86,
+	HS_INDEX_HudScript_Item_KootGlasses				= 0x87,
+	HS_INDEX_HudScript_Item_Letter					= 0x88,
+	HS_INDEX_HudScript_Item_Unused_089				= 0x89,
+	HS_INDEX_HudScript_Item_Unused_08A				= 0x8A,
+	HS_INDEX_HudScript_Item_Unused_08B				= 0x8B,
+	HS_INDEX_HudScript_Item_Unused_08C				= 0x8C,
+	HS_INDEX_HudScript_Item_Unused_08D				= 0x8D,
+	HS_INDEX_HudScript_Item_Unused_08E				= 0x8E,
+	HS_INDEX_HudScript_Item_Unused_08F				= 0x8F,
+	HS_INDEX_HudScript_Item_SpinSmash				= 0x90,
+	HS_INDEX_HudScript_Item_Multibounce				= 0x91,
+	HS_INDEX_HudScript_Item_PowerPlus				= 0x92,
+	HS_INDEX_HudScript_Item_DodgeMaster				= 0x93,
+	HS_INDEX_HudScript_Item_PowerBounce				= 0x94,
+	HS_INDEX_HudScript_Item_SpikeShield				= 0x95,
+	HS_INDEX_HudScript_Item_FirstAttack				= 0x96,
+	HS_INDEX_HudScript_Item_HPPlus					= 0x97,
+	HS_INDEX_HudScript_Item_QuakeHammer				= 0x98,
+	HS_INDEX_HudScript_Item_DoubleDip				= 0x99,
+	HS_INDEX_HudScript_Item_PowerQuake				= 0x9A,
+	HS_INDEX_HudScript_Item_MegaQuake				= 0x9B,
+	HS_INDEX_HudScript_Item_SleepStomp				= 0x9C,
+	HS_INDEX_HudScript_Item_SmashCharge				= 0x9D,
+	HS_INDEX_HudScript_Item_SSmashChg				= 0x9E,
+	HS_INDEX_HudScript_Item_AutoSmash				= 0x9F,
+	HS_INDEX_HudScript_Item_FireShield				= 0xA0,
+	HS_INDEX_HudScript_Item_JumpCharge				= 0xA1,
+	HS_INDEX_HudScript_Item_SJumpChg				= 0xA2,
+	HS_INDEX_HudScript_Item_AutoJump				= 0xA3,
+	HS_INDEX_HudScript_Item_DDownPound				= 0xA4,
+	HS_INDEX_HudScript_Item_AutoMultibounce			= 0xA5,
+	HS_INDEX_HudScript_Item_DizzyStomp				= 0xA6,
+	HS_INDEX_HudScript_Item_HammerThrow				= 0xA7,
+	HS_INDEX_HudScript_Item_SmashCharge0			= 0xA8,
+	HS_INDEX_HudScript_Item_PrettyLucky				= 0xA9,
+	HS_INDEX_HudScript_Item_FeelingFine				= 0xAA,
+	HS_INDEX_HudScript_Item_AttackFXA				= 0xAB,
+	HS_INDEX_HudScript_Item_AllorNothing			= 0xAC,
+	HS_INDEX_HudScript_Item_HPDrain					= 0xAD,
+	HS_INDEX_HudScript_Item_JumpCharge0				= 0xAE,
+	HS_INDEX_HudScript_Item_SlowGo					= 0xAF,
+	HS_INDEX_HudScript_Item_FPPlus					= 0xB0,
+	HS_INDEX_HudScript_Item_MegaRush				= 0xB1,
+	HS_INDEX_HudScript_Item_IcePower				= 0xB2,
+	HS_INDEX_HudScript_Item_DefendPlus				= 0xB3,
+	HS_INDEX_HudScript_Item_PayOff					= 0xB4,
+	HS_INDEX_HudScript_Item_MoneyMoney				= 0xB5,
+	HS_INDEX_HudScript_Item_ChillOut				= 0xB6,
+	HS_INDEX_HudScript_Item_HappyHeart				= 0xB7,
+	HS_INDEX_HudScript_Item_ZapTap					= 0xB8,
+	HS_INDEX_HudScript_Item_Berserker				= 0xB9,
+	HS_INDEX_HudScript_Item_RightOn					= 0xBA,
+	HS_INDEX_HudScript_Item_RunawayPay				= 0xBB,
+	HS_INDEX_HudScript_Item_Refund					= 0xBC,
+	HS_INDEX_HudScript_Item_FlowerSaver				= 0xBD,
+	HS_INDEX_HudScript_Item_TripleDip				= 0xBE,
+	HS_INDEX_HudScript_Item_FlowerFanatic			= 0xBF,
+	HS_INDEX_HudScript_Item_PowerJump				= 0xC0,
+	HS_INDEX_HudScript_Item_SuperJump				= 0xC1,
+	HS_INDEX_HudScript_Item_MegaJump				= 0xC2,
+	HS_INDEX_HudScript_Item_PowerSmash1				= 0xC3,
+	HS_INDEX_HudScript_Item_SuperSmash				= 0xC4,
+	HS_INDEX_HudScript_Item_MegaSmash				= 0xC5,
+	HS_INDEX_HudScript_Item_LuckyDay				= 0xC6,
+	HS_INDEX_HudScript_Item_MegaHPDrain				= 0xC7,
+	HS_INDEX_HudScript_Item_BumpAttack				= 0xC8,
+	HS_INDEX_HudScript_Item_PUpDDown				= 0xC9,
+	HS_INDEX_HudScript_Item_PDownDUp				= 0xCA,
+	HS_INDEX_HudScript_Item_HeartFinder				= 0xCB,
+	HS_INDEX_HudScript_Item_FlowerFinder			= 0xCC,
+	HS_INDEX_HudScript_Item_DizzyAttack				= 0xCD,
+	HS_INDEX_HudScript_Item_SpeedySpin				= 0xCE,
+	HS_INDEX_HudScript_Item_SpinAttack				= 0xCF,
+	HS_INDEX_HudScript_Item_ISpy					= 0xD0,
+	HS_INDEX_HudScript_Item_PowerRush				= 0xD1,
+	HS_INDEX_HudScript_Item_LastStand				= 0xD2,
+	HS_INDEX_HudScript_Item_CloseCall				= 0xD3,
+	HS_INDEX_HudScript_Item_CrazyHeart				= 0xD4,
+	HS_INDEX_HudScript_Item_Unused_0D5 				= 0xD5,
+	HS_INDEX_HudScript_Item_Unused_0D6 				= 0xD6,
+	HS_INDEX_HudScript_Item_Unused_0D7 				= 0xD7,
+	HS_INDEX_HudScript_Item_ShrinkSmash				= 0xD8,
+	HS_INDEX_HudScript_Item_ShrinkStomp				= 0xD9,
+	HS_INDEX_HudScript_Item_DDownJump				= 0xDA,
+	HS_INDEX_HudScript_Item_DamageDodge				= 0xDB,
+	HS_INDEX_HudScript_Item_EarthquakeJump			= 0xDC,
+	HS_INDEX_HudScript_Item_HappyFlower				= 0xDD,
+	HS_INDEX_HudScript_Item_Unused_0DE				= 0xDE,
+	HS_INDEX_HudScript_Item_Unused_0DF				= 0xDF,
+	HS_INDEX_HudScript_Item_DeepFocus				= 0xE0,
+	HS_INDEX_HudScript_Item_SuperFocus				= 0xE1,
+	HS_INDEX_HudScript_Item_Kaiden					= 0xE2,
+	HS_INDEX_HudScript_Item_QuickChange				= 0xE3,
+	HS_INDEX_HudScript_Item_Unused_0E4				= 0xE4,
+	HS_INDEX_HudScript_Item_Unused_0E5				= 0xE5,
+	HS_INDEX_HudScript_Item_Unused_0E6				= 0xE6,
+	HS_INDEX_HudScript_Item_Unused_0E7				= 0xE7,
+	HS_INDEX_HudScript_Item_Peekaboo				= 0xE8,
+	HS_INDEX_HudScript_Item_GroupFocus				= 0xE9,
+	HS_INDEX_HudScript_Item_AttackFXD				= 0xEA,
+	HS_INDEX_HudScript_Item_AttackFXB				= 0xEB,
+	HS_INDEX_HudScript_Item_AttackFXE				= 0xEC,
+	HS_INDEX_HudScript_Item_AttackFXC				= 0xED,
+	HS_INDEX_HudScript_Item_AttackFXF				= 0xEE,
+	HS_INDEX_HudScript_Item_Unused_0EF				= 0xEF,
+	HS_INDEX_HudScript_Item_HealthyHealthy			= 0xF0,
+	HS_INDEX_HudScript_Item_Unused_0F1				= 0xF1,
+	HS_INDEX_HudScript_Item_Unused_0F2				= 0xF2,
+	HS_INDEX_HudScript_Item_Unused_0F3				= 0xF3,
+	HS_INDEX_HudScript_Item_Unused_0F4				= 0xF4,
+	HS_INDEX_HudScript_Item_Unused_0F5				= 0xF5,
+	HS_INDEX_HudScript_Item_Unused_0F6				= 0xF6,
+	HS_INDEX_HudScript_Item_Unused_0F7				= 0xF7,
+	HS_INDEX_HudScript_Item_Mushroom				= 0xF8,
+	HS_INDEX_HudScript_Item_SuperShroom				= 0xF9,
+	HS_INDEX_HudScript_Item_UltraShroom				= 0xFA,
+	HS_INDEX_HudScript_Item_LifeShroom				= 0xFB,
+	HS_INDEX_HudScript_Item_DriedShroom				= 0xFC,
+	HS_INDEX_HudScript_Item_TastyTonic				= 0xFD,
+	HS_INDEX_HudScript_Item_SuperSoda				= 0xFE,
+	HS_INDEX_HudScript_Item_BlueBerry				= 0xFF,
+	HS_INDEX_HudScript_Item_RedBerry				= 0x100,
+	HS_INDEX_HudScript_Item_YellowBerry				= 0x101,
+	HS_INDEX_HudScript_Item_BubbleBerry				= 0x102,
+	HS_INDEX_HudScript_Item_Goomnut					= 0x103,
+	HS_INDEX_HudScript_Item_KoopaLeaf				= 0x104,
+	HS_INDEX_HudScript_Item_DriedPasta				= 0x105,
+	HS_INDEX_HudScript_Item_Lime					= 0x106,
+	HS_INDEX_HudScript_Item_Lemon					= 0x107,
+	HS_INDEX_HudScript_Item_DriedFruit				= 0x108,
+	HS_INDEX_HudScript_Item_StrangeLeaf				= 0x109,
+	HS_INDEX_HudScript_Item_CakeMix					= 0x10A,
+	HS_INDEX_HudScript_Item_Egg						= 0x10B,
+	HS_INDEX_HudScript_Item_Coconut					= 0x10C,
+	HS_INDEX_HudScript_Item_Melon					= 0x10D,
+	HS_INDEX_HudScript_Item_StinkyHerb				= 0x10E,
+	HS_INDEX_HudScript_Item_IcedPotato				= 0x10F,
+	HS_INDEX_HudScript_Item_HoneySyrup				= 0x110,
+	HS_INDEX_HudScript_Item_MapleSyrup				= 0x111,
+	HS_INDEX_HudScript_Item_JamminJelly				= 0x112,
+	HS_INDEX_HudScript_Item_WhackasBump				= 0x113,
+	HS_INDEX_HudScript_Item_Apple					= 0x114,
+	HS_INDEX_HudScript_Item_BakingSalt				= 0x115,
+	HS_INDEX_HudScript_Item_BakingSugar				= 0x116,
+	HS_INDEX_HudScript_Item_BakingEgg				= 0x117,
+	HS_INDEX_HudScript_Item_BakingCream				= 0x118,
+	HS_INDEX_HudScript_Item_BakingStrawberry		= 0x119,
+	HS_INDEX_HudScript_Item_BakingButter			= 0x11A,
+	HS_INDEX_HudScript_Item_BakingCleanser			= 0x11B,
+	HS_INDEX_HudScript_Item_BakingWater				= 0x11C,
+	HS_INDEX_HudScript_Item_BakingFlour				= 0x11D,
+	HS_INDEX_HudScript_Item_BakingMilk				= 0x11E,
+	HS_INDEX_HudScript_Item_Unused_11F				= 0x11F,
+	HS_INDEX_HudScript_Item_FireFlower				= 0x120,
+	HS_INDEX_HudScript_Item_SnowmanDoll				= 0x121,
+	HS_INDEX_HudScript_Item_ThunderRage				= 0x122,
+	HS_INDEX_HudScript_Item_ThunderBolt				= 0x123,
+	HS_INDEX_HudScript_Item_ShootingStar			= 0x124,
+	HS_INDEX_HudScript_Item_DustyHammer				= 0x125,
+	HS_INDEX_HudScript_Item_Pebble					= 0x126,
+	HS_INDEX_HudScript_Item_Unused_127				= 0x127,
+	HS_INDEX_HudScript_Item_StoneCap				= 0x128,
+	HS_INDEX_HudScript_Item_VoltShroom				= 0x129,
+	HS_INDEX_HudScript_Item_PowerStar				= 0x12A,
+	HS_INDEX_HudScript_Item_Parasol					= 0x12B,
+	HS_INDEX_HudScript_Item_MagicMirror				= 0x12C,
+	HS_INDEX_HudScript_Item_Unused_12D				= 0x12D,
+	HS_INDEX_HudScript_Item_Unused_12E				= 0x12E,
+	HS_INDEX_HudScript_Item_Unused_12F				= 0x12F,
+	HS_INDEX_HudScript_Item_SleepySheep				= 0x130,
+	HS_INDEX_HudScript_Item_XBandage				= 0x131,
+	HS_INDEX_HudScript_Item_POWBlock				= 0x132,
+	HS_INDEX_HudScript_Item_HustleDrink				= 0x133,
+	HS_INDEX_HudScript_Item_StopWatch				= 0x134,
+	HS_INDEX_HudScript_Item_DizzyDial				= 0x135,
+	HS_INDEX_HudScript_Item_Unused_136				= 0x136,
+	HS_INDEX_HudScript_Item_Unused_137				= 0x137,
+	HS_INDEX_HudScript_Item_PleaseComeBack			= 0x138,
+	HS_INDEX_HudScript_Item_Unused_139				= 0x139,
+	HS_INDEX_HudScript_Item_FrightJar				= 0x13A,
+	HS_INDEX_HudScript_Item_Mystery					= 0x13B,
+	HS_INDEX_HudScript_Item_RepelGel				= 0x13C,
+	HS_INDEX_HudScript_Item_InsecticideHerb			= 0x13D,
+	HS_INDEX_HudScript_Item_Unused_13E				= 0x13E,
+	HS_INDEX_HudScript_Item_Unused_13F				= 0x13F,
+	HS_INDEX_HudScript_Item_Present					= 0x140,
+	HS_INDEX_HudScript_Item_CakeDone				= 0x141,
+	HS_INDEX_HudScript_Item_CakeBare				= 0x142,
+	HS_INDEX_HudScript_Item_CakePan					= 0x143,
+	HS_INDEX_HudScript_Item_CakeBatter				= 0x144,
+	HS_INDEX_HudScript_Item_CakeBowl				= 0x145,
+	HS_INDEX_HudScript_Item_CakeMixed				= 0x146,
+	HS_INDEX_HudScript_Item_CakeWithIcing			= 0x147,
+	HS_INDEX_HudScript_Item_CakeWithBerries			= 0x148,
+	HS_INDEX_HudScript_Item_PartnerAttack			= 0x149,
+	HS_INDEX_HudScript_Item_Hammer1Icon				= 0x14A,
+	HS_INDEX_HudScript_Item_Hammer2Icon				= 0x14B,
+	HS_INDEX_HudScript_Item_Hammer3Icon				= 0x14C,
+	HS_INDEX_HudScript_Item_Boots1Icon				= 0x14D,
+	HS_INDEX_HudScript_Item_Boots2Icon				= 0x14E,
+	HS_INDEX_HudScript_Item_Boots3Icon				= 0x14F,
+	HS_INDEX_HudScript_Item_ItemsIcon				= 0x150
+};
+
 ItemData gItemTable[] = {
 {	// item 0: Nothing
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = 0,
-	.hudElemID = 0x140,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Present),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -5392,10 +2840,10 @@ ItemData gItemTable[] = {
 },
 {	// item 1: Jump
 	.nameMsg = MESSAGE_ID(0x26, 0x0A0),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = -1,
-	.hudElemID = 0x38,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Jump),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_GEAR | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -5405,10 +2853,10 @@ ItemData gItemTable[] = {
 },
 {	// item 2: SpinJump
 	.nameMsg = MESSAGE_ID(0x26, 0x0A1),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = -1,
-	.hudElemID = 0x39,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_SpinJump),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_2,
 	.typeFlags = ITEM_TYPE_FLAG_GEAR | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -5418,10 +2866,10 @@ ItemData gItemTable[] = {
 },
 {	// item 3: TornadoJump
 	.nameMsg = MESSAGE_ID(0x26, 0x0A2),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = -1,
-	.hudElemID = 0x3A,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_TornadoJump),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY,
 	.typeFlags = ITEM_TYPE_FLAG_GEAR | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -5431,10 +2879,10 @@ ItemData gItemTable[] = {
 },
 {	// item 4: Hammer
 	.nameMsg = MESSAGE_ID(0x26, 0x0A3),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = -1,
-	.hudElemID = 0x3B,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Hammer),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_GEAR | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -5444,10 +2892,10 @@ ItemData gItemTable[] = {
 },
 {	// item 5: SuperHammer
 	.nameMsg = MESSAGE_ID(0x26, 0x0A4),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = -1,
-	.hudElemID = 0x3C,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_SuperHammer),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY,
 	.typeFlags = ITEM_TYPE_FLAG_GEAR | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -5457,10 +2905,10 @@ ItemData gItemTable[] = {
 },
 {	// item 6: UltraHammer
 	.nameMsg = MESSAGE_ID(0x26, 0x0A5),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = -1,
-	.hudElemID = 0x3D,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_UltraHammer),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_2,
 	.typeFlags = ITEM_TYPE_FLAG_GEAR | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -5473,7 +2921,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0A6),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0A6),
 	.sellValue = -1,
-	.hudElemID = 0x3E,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_LuckyStar),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_2,
 	.typeFlags = ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -5482,11 +2930,11 @@ ItemData gItemTable[] = {
 	.potencyB = 0
 },
 {	// item 8: Map
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = -1,
-	.hudElemID = 0x140,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Present),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_2,
 	.typeFlags = ITEM_TYPE_FLAG_GEAR | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -5495,11 +2943,11 @@ ItemData gItemTable[] = {
 	.potencyB = 0
 },
 {	// item 9: BigMap
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = -1,
-	.hudElemID = 0x140,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Present),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_2,
 	.typeFlags = ITEM_TYPE_FLAG_GEAR | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -5512,7 +2960,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0E2),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0E2),
 	.sellValue = -1,
-	.hudElemID = 0x78,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_FirstDegreeCard),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_2,
 	.typeFlags = ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -5525,7 +2973,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0E3),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0E3),
 	.sellValue = -1,
-	.hudElemID = 0x79,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_SecondDegreeCard),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_2,
 	.typeFlags = ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -5538,7 +2986,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0E4),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0E4),
 	.sellValue = -1,
-	.hudElemID = 0x7A,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_ThirdDegreeCard),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_2,
 	.typeFlags = ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -5551,7 +2999,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0E5),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0E5),
 	.sellValue = -1,
-	.hudElemID = 0x7B,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_FourthDegreeCard),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_2,
 	.typeFlags = ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -5564,7 +3012,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0E6),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0E6),
 	.sellValue = -1,
-	.hudElemID = 0x7C,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Diploma),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_2,
 	.typeFlags = ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -5577,7 +3025,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0E7),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0E7),
 	.sellValue = -1,
-	.hudElemID = 0x62,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_UltraStone),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_2,
 	.typeFlags = ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -5590,7 +3038,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0A7),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0A7),
 	.sellValue = -1,
-	.hudElemID = 0x40,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_KoopaFortressKey),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -5603,7 +3051,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0A8),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0A8),
 	.sellValue = -1,
-	.hudElemID = 0x41,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_RuinsKey),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -5616,7 +3064,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0B0),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0B0),
 	.sellValue = -1,
-	.hudElemID = 0x47,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_PulseStone),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -5629,7 +3077,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0A9),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0A9),
 	.sellValue = -1,
-	.hudElemID = 0x42,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_TubbaCastleKey),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -5642,7 +3090,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0AA),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0AA),
 	.sellValue = -1,
-	.hudElemID = 0x43,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_CrystalPalaceKey),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -5655,7 +3103,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0B3),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0B3),
 	.sellValue = -1,
-	.hudElemID = 0x4C,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_LunarStone),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -5668,7 +3116,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0B4),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0B4),
 	.sellValue = -1,
-	.hudElemID = 0x4A,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_PyramidStone),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -5681,7 +3129,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0B5),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0B5),
 	.sellValue = -1,
-	.hudElemID = 0x4B,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_DiamondStone),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -5689,12 +3137,12 @@ ItemData gItemTable[] = {
 	.potencyA = 0,
 	.potencyB = 0
 },
-{	// item 18: VolcanoVase
+{	// item 18: GoldenJar
 	.nameMsg = MESSAGE_ID(0x26, 0x0B2),
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0B2),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0B2),
 	.sellValue = -1,
-	.hudElemID = 0x49,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_VolcanoVase),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -5707,7 +3155,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0AF),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0AF),
 	.sellValue = -1,
-	.hudElemID = 0x46,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_KooperShell),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -5720,7 +3168,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0AB),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0AB),
 	.sellValue = -1,
-	.hudElemID = 0x44,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_BowserCastleKey),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -5729,11 +3177,11 @@ ItemData gItemTable[] = {
 	.potencyB = 0
 },
 {	// item 1B: ForestPass
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = -1,
-	.hudElemID = 0x4D,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_ForestPass),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -5746,7 +3194,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0B7),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0B7),
 	.sellValue = -1,
-	.hudElemID = 0x50,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_BooWeight),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -5759,7 +3207,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0B8),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0B8),
 	.sellValue = -1,
-	.hudElemID = 0x51,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_BooPortrait),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -5772,7 +3220,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0C4),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0C4),
 	.sellValue = -1,
-	.hudElemID = 0x5D,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_CrystalBerry),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -5785,7 +3233,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0B9),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0B9),
 	.sellValue = -1,
-	.hudElemID = 0x52,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_MysticalKey),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -5798,7 +3246,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0BA),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0BA),
 	.sellValue = -1,
-	.hudElemID = 0x53,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_IronKey),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -5811,7 +3259,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0BB),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0BB),
 	.sellValue = -1,
-	.hudElemID = 0x54,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_ToyTrain),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -5824,7 +3272,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0B6),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0B6),
 	.sellValue = -1,
-	.hudElemID = 0x4F,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_BooRecord),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -5837,7 +3285,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0BC),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0BC),
 	.sellValue = -1,
-	.hudElemID = 0x55,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_FryingPan),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -5850,7 +3298,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0BD),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0BD),
 	.sellValue = -1,
-	.hudElemID = 0x56,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Dictionary),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -5863,7 +3311,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0BE),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0BE),
 	.sellValue = -1,
-	.hudElemID = 0x57,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_MysteryNote),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -5872,11 +3320,11 @@ ItemData gItemTable[] = {
 	.potencyB = 0
 },
 {	// item 26: SuspiciousNote
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = -1,
-	.hudElemID = 0x58,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_SuspiciousNote),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -5889,7 +3337,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0C9),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0C9),
 	.sellValue = -1,
-	.hudElemID = 0x7D,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_CrystalBall),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -5898,11 +3346,11 @@ ItemData gItemTable[] = {
 	.potencyB = 0
 },
 {	// item 28: Screwdriver
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = -1,
-	.hudElemID = 0x65,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Screwdriver),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -5915,7 +3363,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0CB),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0CB),
 	.sellValue = -1,
-	.hudElemID = 0x66,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Cookbook),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -5928,7 +3376,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0CC),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0CC),
 	.sellValue = -1,
-	.hudElemID = 0x67,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_JadeRaven),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -5941,7 +3389,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0C0),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0C0),
 	.sellValue = -1,
-	.hudElemID = 0x59,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_MagicalSeed1),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -5954,7 +3402,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0C1),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0C1),
 	.sellValue = -1,
-	.hudElemID = 0x5A,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_MagicalSeed2),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -5967,7 +3415,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0C2),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0C2),
 	.sellValue = -1,
-	.hudElemID = 0x5B,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_MagicalSeed3),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -5980,7 +3428,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0C3),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0C3),
 	.sellValue = -1,
-	.hudElemID = 0x5C,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_MagicalSeed4),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -5989,11 +3437,11 @@ ItemData gItemTable[] = {
 	.potencyB = 0
 },
 {	// item 2F: ToadDoll
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = -1,
-	.hudElemID = 0x63,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_ToadDoll),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6006,7 +3454,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0CA),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0CA),
 	.sellValue = -1,
-	.hudElemID = 0x64,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Calculator),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6019,7 +3467,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0CF),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0CF),
 	.sellValue = -1,
-	.hudElemID = 0x68,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_SnowmanBucket),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6032,7 +3480,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0D0),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0D0),
 	.sellValue = -1,
-	.hudElemID = 0x69,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_SnowmanScarf),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6045,7 +3493,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0D2),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0D2),
 	.sellValue = -1,
-	.hudElemID = 0x6A,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_RedKey),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6058,7 +3506,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0D3),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0D3),
 	.sellValue = -1,
-	.hudElemID = 0x6B,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_BlueKey),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6067,11 +3515,11 @@ ItemData gItemTable[] = {
 	.potencyB = 0
 },
 {	// item 35: UnusedLetter01
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = -1,
-	.hudElemID = 0x88,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Letter),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6084,7 +3532,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0EB),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0EB),
 	.sellValue = -1,
-	.hudElemID = 0x88,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Letter),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6097,7 +3545,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0EC),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0EC),
 	.sellValue = -1,
-	.hudElemID = 0x88,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Letter),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6110,7 +3558,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0ED),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0ED),
 	.sellValue = -1,
-	.hudElemID = 0x88,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Letter),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6123,7 +3571,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0EE),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0EE),
 	.sellValue = -1,
-	.hudElemID = 0x88,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Letter),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6136,7 +3584,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0EF),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0EF),
 	.sellValue = -1,
-	.hudElemID = 0x88,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Letter),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6149,7 +3597,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0F0),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0F0),
 	.sellValue = -1,
-	.hudElemID = 0x88,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Letter),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6162,7 +3610,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0F1),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0F1),
 	.sellValue = -1,
-	.hudElemID = 0x88,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Letter),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6175,7 +3623,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0F2),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0F2),
 	.sellValue = -1,
-	.hudElemID = 0x88,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Letter),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6188,7 +3636,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0F3),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0F3),
 	.sellValue = -1,
-	.hudElemID = 0x88,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Letter),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6197,11 +3645,11 @@ ItemData gItemTable[] = {
 	.potencyB = 0
 },
 {	// item 3F: UnusedLetter02
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = -1,
-	.hudElemID = 0x88,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Letter),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6214,7 +3662,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0F4),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0F4),
 	.sellValue = -1,
-	.hudElemID = 0x88,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Letter),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6227,7 +3675,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0F5),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0F5),
 	.sellValue = -1,
-	.hudElemID = 0x88,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Letter),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6236,11 +3684,11 @@ ItemData gItemTable[] = {
 	.potencyB = 0
 },
 {	// item 42: UnusedLetter03
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = -1,
-	.hudElemID = 0x88,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Letter),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6249,11 +3697,11 @@ ItemData gItemTable[] = {
 	.potencyB = 0
 },
 {	// item 43: UnusedLetter04
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = -1,
-	.hudElemID = 0x88,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Letter),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6262,11 +3710,11 @@ ItemData gItemTable[] = {
 	.potencyB = 0
 },
 {	// item 44: UnusedLetter05
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = -1,
-	.hudElemID = 0x88,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Letter),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6279,7 +3727,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0F6),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0F6),
 	.sellValue = -1,
-	.hudElemID = 0x88,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Letter),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6292,7 +3740,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0F7),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0F7),
 	.sellValue = -1,
-	.hudElemID = 0x88,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Letter),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6305,7 +3753,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0F8),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0F8),
 	.sellValue = -1,
-	.hudElemID = 0x88,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Letter),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6318,7 +3766,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0F9),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0F9),
 	.sellValue = -1,
-	.hudElemID = 0x88,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Letter),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6331,7 +3779,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0FA),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0FA),
 	.sellValue = -1,
-	.hudElemID = 0x88,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Letter),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6344,7 +3792,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0FB),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0FB),
 	.sellValue = -1,
-	.hudElemID = 0x88,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Letter),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6357,7 +3805,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0FC),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0FC),
 	.sellValue = -1,
-	.hudElemID = 0x88,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Letter),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6370,7 +3818,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0FD),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0FD),
 	.sellValue = -1,
-	.hudElemID = 0x88,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Letter),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6379,11 +3827,11 @@ ItemData gItemTable[] = {
 	.potencyB = 0
 },
 {	// item 4D: UnusedLetter06
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = -1,
-	.hudElemID = 0x88,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Letter),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6396,7 +3844,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0FE),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0FE),
 	.sellValue = -1,
-	.hudElemID = 0x88,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Letter),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6409,7 +3857,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0FF),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0FF),
 	.sellValue = -1,
-	.hudElemID = 0x88,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Letter),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6422,7 +3870,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x100),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x100),
 	.sellValue = -1,
-	.hudElemID = 0x88,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Letter),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6435,7 +3883,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x101),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x101),
 	.sellValue = -1,
-	.hudElemID = 0x88,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Letter),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6448,7 +3896,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x102),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x102),
 	.sellValue = -1,
-	.hudElemID = 0x88,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Letter),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6461,7 +3909,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0B1),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0B1),
 	.sellValue = -1,
-	.hudElemID = 0x48,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Artifact),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6474,7 +3922,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0EA),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0EA),
 	.sellValue = -1,
-	.hudElemID = 0x88,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Letter),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6483,11 +3931,11 @@ ItemData gItemTable[] = {
 	.potencyB = 0
 },
 {	// item 55: UnusedLetter07
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = -1,
-	.hudElemID = 0x88,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Letter),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6500,7 +3948,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0AE),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0AE),
 	.sellValue = -1,
-	.hudElemID = 0x45,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Dolly),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6513,7 +3961,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0C5),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0C5),
 	.sellValue = -1,
-	.hudElemID = 0x5E,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_WaterStone),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6526,7 +3974,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0C6),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0C6),
 	.sellValue = -1,
-	.hudElemID = 0x5F,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_MagicalBean),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6539,7 +3987,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0C7),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0C7),
 	.sellValue = -1,
-	.hudElemID = 0x60,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_FertileSoil),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6552,7 +4000,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0C8),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0C8),
 	.sellValue = -1,
-	.hudElemID = 0x61,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_MiracleWater),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6565,7 +4013,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0CD),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0CD),
 	.sellValue = -1,
-	.hudElemID = 0x49,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_VolcanoVase),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6578,7 +4026,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x104),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x104),
 	.sellValue = -1,
-	.hudElemID = 0x81,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_KootTheTape),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6591,7 +4039,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0D8),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0D8),
 	.sellValue = -1,
-	.hudElemID = 0x116,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_BakingSugar),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6604,7 +4052,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0D9),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0D9),
 	.sellValue = -1,
-	.hudElemID = 0x115,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_BakingSalt),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6617,7 +4065,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0DA),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0DA),
 	.sellValue = -1,
-	.hudElemID = 0x117,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_BakingEgg),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6630,7 +4078,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0DB),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0DB),
 	.sellValue = -1,
-	.hudElemID = 0x118,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_BakingCream),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6643,7 +4091,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0DC),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0DC),
 	.sellValue = -1,
-	.hudElemID = 0x119,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_BakingStrawberry),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6656,7 +4104,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0DD),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0DD),
 	.sellValue = -1,
-	.hudElemID = 0x11A,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_BakingButter),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6669,7 +4117,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0DE),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0DE),
 	.sellValue = -1,
-	.hudElemID = 0x11B,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_BakingCleanser),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6682,7 +4130,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0DF),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0DF),
 	.sellValue = -1,
-	.hudElemID = 0x11C,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_BakingWater),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6695,7 +4143,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0E0),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0E0),
 	.sellValue = -1,
-	.hudElemID = 0x11D,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_BakingFlour),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6708,7 +4156,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0E1),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0E1),
 	.sellValue = -1,
-	.hudElemID = 0x11E,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_BakingMilk),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6721,7 +4169,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0D6),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0D6),
 	.sellValue = -1,
-	.hudElemID = 0x6F,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Lyrics),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6734,7 +4182,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0D7),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0D7),
 	.sellValue = -1,
-	.hudElemID = 0x6E,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Melody),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6747,7 +4195,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0BF),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0BF),
 	.sellValue = -1,
-	.hudElemID = 0x70,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Mailbag),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6760,7 +4208,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0AC),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0AC),
 	.sellValue = -1,
-	.hudElemID = 0x73,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_PeachKey),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6773,7 +4221,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0AD),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0AD),
 	.sellValue = -1,
-	.hudElemID = 0x53,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_IronKey),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6786,7 +4234,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0D1),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0D1),
 	.sellValue = -1,
-	.hudElemID = 0x71,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_StarStone),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6799,7 +4247,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0D4),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0D4),
 	.sellValue = -1,
-	.hudElemID = 0x72,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_SneakyParasol),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6812,7 +4260,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x103),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x103),
 	.sellValue = -1,
-	.hudElemID = 0x80,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_KootKoopaLegends),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6825,7 +4273,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x105),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x105),
 	.sellValue = -1,
-	.hudElemID = 0x82,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_KootLuigiAutograph),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6838,7 +4286,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x106),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x106),
 	.sellValue = -1,
-	.hudElemID = 0x83,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_KootEmptyWallet),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6851,7 +4299,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x107),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x107),
 	.sellValue = -1,
-	.hudElemID = 0x84,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_KootMerluvleeAutograph),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6860,11 +4308,11 @@ ItemData gItemTable[] = {
 	.potencyB = 0
 },
 {	// item 72: KootShell
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = -1,
-	.hudElemID = 0x85,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_KootShell),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6877,7 +4325,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x108),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x108),
 	.sellValue = -1,
-	.hudElemID = 0x86,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_KootPhoto),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6890,7 +4338,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x109),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x109),
 	.sellValue = -1,
-	.hudElemID = 0x87,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_KootGlasses),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6899,11 +4347,11 @@ ItemData gItemTable[] = {
 	.potencyB = 0
 },
 {	// item 75: KootAltPhoto
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = -1,
-	.hudElemID = 0x86,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_KootPhoto),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6916,7 +4364,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x10A),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x10A),
 	.sellValue = -1,
-	.hudElemID = 0x6C,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_KootPackage),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6929,7 +4377,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x10B),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x10B),
 	.sellValue = -1,
-	.hudElemID = 0x6D,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_KootRedJar),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6942,7 +4390,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0AC),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0AC),
 	.sellValue = -1,
-	.hudElemID = 0x73,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_PeachKey),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6955,7 +4403,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0CE),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0CE),
 	.sellValue = -1,
-	.hudElemID = 0x53,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_IronKey),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6968,7 +4416,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0D5),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0D5),
 	.sellValue = -1,
-	.hudElemID = 0x53,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_IronKey),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6981,7 +4429,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0E8),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0E8),
 	.sellValue = -1,
-	.hudElemID = 0x7F,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_SilverCredit),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -6994,7 +4442,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0E9),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0E9),
 	.sellValue = -1,
-	.hudElemID = 0x7E,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_GoldCredit),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7007,7 +4455,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0D5),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0D5),
 	.sellValue = -1,
-	.hudElemID = 0x73,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_PeachKey),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7020,7 +4468,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0D5),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0D5),
 	.sellValue = -1,
-	.hudElemID = 0x73,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_PeachKey),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7033,7 +4481,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x0D5),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0D5),
 	.sellValue = -1,
-	.hudElemID = 0x73,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_PeachKey),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_KEY | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7046,7 +4494,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x000),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x000),
 	.sellValue = 4,
-	.hudElemID = 0x120,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_FireFlower),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_2 | ITEM_TARGET_FLAG_8000,
 	.typeFlags = ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7059,7 +4507,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x001),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x001),
 	.sellValue = 6,
-	.hudElemID = 0x121,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_SnowmanDoll),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_2 | ITEM_TARGET_FLAG_8000,
 	.typeFlags = ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7072,7 +4520,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x002),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x002),
 	.sellValue = 8,
-	.hudElemID = 0x122,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_ThunderRage),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_2 | ITEM_TARGET_FLAG_8000,
 	.typeFlags = ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7085,7 +4533,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x004),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x004),
 	.sellValue = 15,
-	.hudElemID = 0x124,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_ShootingStar),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_2 | ITEM_TARGET_FLAG_8000,
 	.typeFlags = ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7098,7 +4546,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x003),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x003),
 	.sellValue = 4,
-	.hudElemID = 0x123,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_ThunderBolt),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_2 | ITEM_TARGET_FLAG_8000,
 	.typeFlags = ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7111,7 +4559,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x006),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x006),
 	.sellValue = 1,
-	.hudElemID = 0x126,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Pebble),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_2 | ITEM_TARGET_FLAG_8000,
 	.typeFlags = ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7124,7 +4572,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x005),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x005),
 	.sellValue = 1,
-	.hudElemID = 0x125,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_DustyHammer),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_2 | ITEM_TARGET_FLAG_8000,
 	.typeFlags = ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7133,11 +4581,11 @@ ItemData gItemTable[] = {
 	.potencyB = 0
 },
 {	// item 87: InsecticideHerb
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = 1,
-	.hudElemID = 0x13D,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_InsecticideHerb),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_2 | ITEM_TARGET_FLAG_8000,
 	.typeFlags = ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7150,7 +4598,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x007),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x007),
 	.sellValue = 15,
-	.hudElemID = 0x128,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_StoneCap),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7163,7 +4611,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x00E),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x00E),
 	.sellValue = 1,
-	.hudElemID = 0xFD,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_TastyTonic),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_USE_DRINK_ANIMATION | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7176,7 +4624,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x009),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x009),
 	.sellValue = 2,
-	.hudElemID = 0xF8,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Mushroom),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7189,7 +4637,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x008),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x008),
 	.sellValue = 7,
-	.hudElemID = 0x129,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_VoltShroom),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7202,7 +4650,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x00A),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x00A),
 	.sellValue = 7,
-	.hudElemID = 0xF9,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_SuperShroom),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7215,7 +4663,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x00D),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x00D),
 	.sellValue = 1,
-	.hudElemID = 0xFC,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_DriedShroom),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7228,7 +4676,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x00B),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x00B),
 	.sellValue = 50,
-	.hudElemID = 0xFA,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_UltraShroom),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7241,7 +4689,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x026),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x026),
 	.sellValue = 4,
-	.hudElemID = 0x130,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_SleepySheep),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_2 | ITEM_TARGET_FLAG_8000,
 	.typeFlags = ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7254,7 +4702,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x027),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x027),
 	.sellValue = 3,
-	.hudElemID = 0x132,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_POWBlock),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_2 | ITEM_TARGET_FLAG_8000,
 	.typeFlags = ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7263,11 +4711,11 @@ ItemData gItemTable[] = {
 	.potencyB = 0
 },
 {	// item 91: HustleDrink
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = 10,
-	.hudElemID = 0x133,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_HustleDrink),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_USE_DRINK_ANIMATION | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7280,7 +4728,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x028),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x028),
 	.sellValue = 10,
-	.hudElemID = 0x134,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_StopWatch),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_2 | ITEM_TARGET_FLAG_8000,
 	.typeFlags = ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7293,7 +4741,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x019),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x019),
 	.sellValue = 30,
-	.hudElemID = 0x113,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_WhackasBump),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7306,7 +4754,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x01A),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x01A),
 	.sellValue = 2,
-	.hudElemID = 0x114,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Apple),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7319,7 +4767,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x00C),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x00C),
 	.sellValue = 20,
-	.hudElemID = 0xFB,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_LifeShroom),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7332,7 +4780,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x02B),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x02B),
 	.sellValue = 1,
-	.hudElemID = 0x13B,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Mystery),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7345,7 +4793,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x02C),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x02C),
 	.sellValue = 15,
-	.hudElemID = 0x13C,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_RepelGel),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7358,7 +4806,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x02A),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x02A),
 	.sellValue = 3,
-	.hudElemID = 0x13A,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_FrightJar),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_2 | ITEM_TARGET_FLAG_8000,
 	.typeFlags = ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7367,11 +4815,11 @@ ItemData gItemTable[] = {
 	.potencyB = 0
 },
 {	// item 99: PleaseComeBack
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = 5,
-	.hudElemID = 0x138,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_PleaseComeBack),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7384,7 +4832,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x029),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x029),
 	.sellValue = 6,
-	.hudElemID = 0x135,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_DizzyDial),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_2 | ITEM_TARGET_FLAG_8000,
 	.typeFlags = ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7397,7 +4845,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x00F),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x00F),
 	.sellValue = 3,
-	.hudElemID = 0xFE,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_SuperSoda),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_USE_DRINK_ANIMATION | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7410,7 +4858,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x015),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x015),
 	.sellValue = 1,
-	.hudElemID = 0x107,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Lemon),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7423,7 +4871,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x014),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x014),
 	.sellValue = 1,
-	.hudElemID = 0x106,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Lime),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7436,7 +4884,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x010),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x010),
 	.sellValue = 2,
-	.hudElemID = 0xFF,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_BlueBerry),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7449,7 +4897,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x011),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x011),
 	.sellValue = 2,
-	.hudElemID = 0x100,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_RedBerry),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7462,7 +4910,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x012),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x012),
 	.sellValue = 2,
-	.hudElemID = 0x101,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_YellowBerry),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7475,7 +4923,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x013),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x013),
 	.sellValue = 3,
-	.hudElemID = 0x102,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_BubbleBerry),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7488,7 +4936,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x018),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x018),
 	.sellValue = 50,
-	.hudElemID = 0x112,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_JamminJelly),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7501,7 +4949,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x017),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x017),
 	.sellValue = 10,
-	.hudElemID = 0x111,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_MapleSyrup),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_USE_DRINK_ANIMATION | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7514,7 +4962,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x016),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x016),
 	.sellValue = 3,
-	.hudElemID = 0x110,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_HoneySyrup),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_USE_DRINK_ANIMATION | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7527,7 +4975,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x01B),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x01B),
 	.sellValue = 2,
-	.hudElemID = 0x103,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Goomnut),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7540,7 +4988,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x01C),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x01C),
 	.sellValue = 1,
-	.hudElemID = 0x104,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_KoopaLeaf),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7553,7 +5001,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x01D),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x01D),
 	.sellValue = 4,
-	.hudElemID = 0x105,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_DriedPasta),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7566,7 +5014,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x01E),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x01E),
 	.sellValue = 5,
-	.hudElemID = 0x108,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_DriedFruit),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7579,7 +5027,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x01F),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x01F),
 	.sellValue = 2,
-	.hudElemID = 0x109,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_StrangeLeaf),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7592,7 +5040,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x020),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x020),
 	.sellValue = 3,
-	.hudElemID = 0x10A,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_CakeMix),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7605,7 +5053,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x021),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x021),
 	.sellValue = 2,
-	.hudElemID = 0x10B,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Egg),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7618,7 +5066,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x022),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x022),
 	.sellValue = 1,
-	.hudElemID = 0x10C,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Coconut),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_2 | ITEM_TARGET_FLAG_8000,
 	.typeFlags = ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7631,7 +5079,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x023),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x023),
 	.sellValue = 7,
-	.hudElemID = 0x10D,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Melon),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7644,7 +5092,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x024),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x024),
 	.sellValue = 1,
-	.hudElemID = 0x10E,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_StinkyHerb),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7657,7 +5105,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x025),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x025),
 	.sellValue = 3,
-	.hudElemID = 0x10F,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_IcedPotato),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7670,7 +5118,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x02D),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x02D),
 	.sellValue = 10,
-	.hudElemID = 0x1,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_SpicySoup),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_USE_DRINK_ANIMATION | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7683,7 +5131,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x02E),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x02E),
 	.sellValue = 10,
-	.hudElemID = 0x2,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_ApplePie),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7696,7 +5144,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x035),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x035),
 	.sellValue = 75,
-	.hudElemID = 0x3,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_HoneyUltra),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7709,7 +5157,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x036),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x036),
 	.sellValue = 100,
-	.hudElemID = 0x4,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_MapleUltra),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7722,7 +5170,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x037),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x037),
 	.sellValue = 150,
-	.hudElemID = 0x5,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_JellyUltra),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7735,7 +5183,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x038),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x038),
 	.sellValue = 10,
-	.hudElemID = 0x6,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Koopasta),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7748,7 +5196,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x039),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x039),
 	.sellValue = 5,
-	.hudElemID = 0x7,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_FriedShroom),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7761,7 +5209,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x03C),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x03C),
 	.sellValue = 20,
-	.hudElemID = 0x8,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_ShroomCake),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7774,7 +5222,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x03B),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x03B),
 	.sellValue = 45,
-	.hudElemID = 0x9,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_ShroomSteak),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7787,7 +5235,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x03A),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x03A),
 	.sellValue = 15,
-	.hudElemID = 0xA,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_HotShroom),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7800,7 +5248,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x03D),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x03D),
 	.sellValue = 50,
-	.hudElemID = 0xB,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_SweetShroom),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7813,7 +5261,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x03F),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x03F),
 	.sellValue = 15,
-	.hudElemID = 0xE,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_YummyMeal),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7826,7 +5274,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x042),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x042),
 	.sellValue = 25,
-	.hudElemID = 0xC,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_HealthyJuice),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_USE_DRINK_ANIMATION | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7839,7 +5287,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x03E),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x03E),
 	.sellValue = 10,
-	.hudElemID = 0xD,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_BlandMeal),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7852,7 +5300,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x040),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x040),
 	.sellValue = 60,
-	.hudElemID = 0xF,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_DeluxeFeast),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7865,7 +5313,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x041),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x041),
 	.sellValue = 10,
-	.hudElemID = 0x10,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_SpecialShake),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_USE_DRINK_ANIMATION | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7878,7 +5326,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x043),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x043),
 	.sellValue = 10,
-	.hudElemID = 0x11,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_BigCookie),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7891,7 +5339,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x044),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x044),
 	.sellValue = 10,
-	.hudElemID = 0x12,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Cake),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7904,7 +5352,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x045),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x045),
 	.sellValue = 1,
-	.hudElemID = 0x13,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Mistake),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7917,7 +5365,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x046),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x046),
 	.sellValue = 3,
-	.hudElemID = 0x14,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_KoopaTea),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_USE_DRINK_ANIMATION | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7930,7 +5378,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x032),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x032),
 	.sellValue = 20,
-	.hudElemID = 0x15,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_HoneySuper),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7943,7 +5391,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x033),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x033),
 	.sellValue = 35,
-	.hudElemID = 0x16,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_MapleSuper),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7956,7 +5404,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x034),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x034),
 	.sellValue = 100,
-	.hudElemID = 0x17,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_JellySuper),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7969,7 +5417,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x047),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x047),
 	.sellValue = 7,
-	.hudElemID = 0x18,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Spaghetti),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7982,7 +5430,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x048),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x048),
 	.sellValue = 10,
-	.hudElemID = 0x19,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_EggMissile),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_2 | ITEM_TARGET_FLAG_8000,
 	.typeFlags = ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -7995,7 +5443,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x049),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x049),
 	.sellValue = 7,
-	.hudElemID = 0x1A,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_FriedEgg),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8008,7 +5456,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x02F),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x02F),
 	.sellValue = 10,
-	.hudElemID = 0x1B,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_HoneyShroom),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8021,7 +5469,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x04A),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x04A),
 	.sellValue = 15,
-	.hudElemID = 0x1C,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_HoneyCandy),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8034,7 +5482,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x04B),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x04B),
 	.sellValue = 25,
-	.hudElemID = 0x1D,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_ElectroPop),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8047,7 +5495,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x04C),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x04C),
 	.sellValue = 20,
-	.hudElemID = 0x1E,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_FirePop),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8060,7 +5508,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x04D),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x04D),
 	.sellValue = 15,
-	.hudElemID = 0x1F,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_LimeCandy),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8073,7 +5521,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x04E),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x04E),
 	.sellValue = 12,
-	.hudElemID = 0x20,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_CocoPop),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8086,7 +5534,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x04F),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x04F),
 	.sellValue = 15,
-	.hudElemID = 0x21,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_LemonCandy),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8099,7 +5547,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x050),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x050),
 	.sellValue = 100,
-	.hudElemID = 0x22,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_JellyPop),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8112,7 +5560,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x051),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x051),
 	.sellValue = 10,
-	.hudElemID = 0x23,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_StrangeCake),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8125,7 +5573,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x052),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x052),
 	.sellValue = 12,
-	.hudElemID = 0x24,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_KookyCookie),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8138,7 +5586,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x053),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x053),
 	.sellValue = 15,
-	.hudElemID = 0x25,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_FrozenFries),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8151,7 +5599,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x054),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x054),
 	.sellValue = 6,
-	.hudElemID = 0x26,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_PotatoSalad),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8164,7 +5612,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x055),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x055),
 	.sellValue = 6,
-	.hudElemID = 0x27,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_NuttyCake),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8177,7 +5625,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x030),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x030),
 	.sellValue = 25,
-	.hudElemID = 0x28,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_MapleShroom),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8190,7 +5638,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x056),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x056),
 	.sellValue = 10,
-	.hudElemID = 0x29,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_BoiledEgg),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8203,7 +5651,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x057),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x057),
 	.sellValue = 20,
-	.hudElemID = 0x2A,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_YoshiCookie),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8216,7 +5664,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x031),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x031),
 	.sellValue = 75,
-	.hudElemID = 0x2B,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_JellyShroom),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8229,7 +5677,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x031),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x031),
 	.sellValue = 75,
-	.hudElemID = 0x2B,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_JellyShroom),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8242,7 +5690,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x031),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x031),
 	.sellValue = 75,
-	.hudElemID = 0x2B,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_JellyShroom),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8255,7 +5703,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x031),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x031),
 	.sellValue = 75,
-	.hudElemID = 0x2B,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_JellyShroom),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8268,7 +5716,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x031),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x031),
 	.sellValue = 75,
-	.hudElemID = 0x2B,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_JellyShroom),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8281,7 +5729,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x031),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x031),
 	.sellValue = 75,
-	.hudElemID = 0x2B,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_JellyShroom),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_ENEMY | ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_WORLD_USABLE | ITEM_TYPE_FLAG_BATTLE_USABLE | ITEM_TYPE_FLAG_CONSUMABLE | ITEM_TYPE_FLAG_FOOD_OR_DRINK | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8294,7 +5742,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x068),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x068),
 	.sellValue = 75,
-	.hudElemID = 0x90,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_SpinSmash),
 	.sortValue = 23,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8307,7 +5755,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x05E),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x05E),
 	.sellValue = 75,
-	.hudElemID = 0x91,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Multibounce),
 	.sortValue = 4,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8320,7 +5768,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x073),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x073),
 	.sellValue = 250,
-	.hudElemID = 0x92,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_PowerPlus),
 	.sortValue = 67,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8333,7 +5781,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x080),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x080),
 	.sellValue = 100,
-	.hudElemID = 0x93,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_DodgeMaster),
 	.sortValue = 40,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8346,7 +5794,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x061),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x061),
 	.sellValue = 100,
-	.hudElemID = 0x94,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_PowerBounce),
 	.sortValue = 13,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8359,7 +5807,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x07F),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x07F),
 	.sellValue = 100,
-	.hudElemID = 0x95,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_SpikeShield),
 	.sortValue = 92,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8372,7 +5820,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x087),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x087),
 	.sellValue = 100,
-	.hudElemID = 0x96,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_FirstAttack),
 	.sortValue = 109,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8385,7 +5833,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x071),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x071),
 	.sellValue = 150,
-	.hudElemID = 0x97,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_HPPlus),
 	.sortValue = 53,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8398,7 +5846,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x06A),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x06A),
 	.sellValue = 100,
-	.hudElemID = 0x98,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_QuakeHammer),
 	.sortValue = 24,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8411,7 +5859,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x06D),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x06D),
 	.sellValue = 100,
-	.hudElemID = 0x99,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_DoubleDip),
 	.sortValue = 33,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8420,11 +5868,11 @@ ItemData gItemTable[] = {
 	.potencyB = 0
 },
 {	// item EA: MysteryScroll
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = 100,
-	.hudElemID = 0x140,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Present),
 	.sortValue = 0,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8437,7 +5885,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x05C),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x05C),
 	.sellValue = 75,
-	.hudElemID = 0x9C,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_SleepStomp),
 	.sortValue = 9,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8450,7 +5898,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x097),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x097),
 	.sellValue = 75,
-	.hudElemID = 0xA0,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_FireShield),
 	.sortValue = 91,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8463,7 +5911,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x070),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x070),
 	.sellValue = 200,
-	.hudElemID = 0xE3,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_QuickChange),
 	.sortValue = 36,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8476,7 +5924,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x069),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x069),
 	.sellValue = 75,
-	.hudElemID = 0xA4,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_DDownPound),
 	.sortValue = 29,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8489,7 +5937,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x05D),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x05D),
 	.sellValue = 75,
-	.hudElemID = 0xA6,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_DizzyStomp),
 	.sortValue = 10,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8498,11 +5946,11 @@ ItemData gItemTable[] = {
 	.potencyB = 0
 },
 {	// item F0: SmashCharge0
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = 30,
-	.hudElemID = 0xA8,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_SmashCharge0),
 	.sortValue = 20,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8515,7 +5963,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x081),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x081),
 	.sellValue = 100,
-	.hudElemID = 0xA9,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_PrettyLucky),
 	.sortValue = 85,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8528,7 +5976,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x08C),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x08C),
 	.sellValue = 100,
-	.hudElemID = 0xAA,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_FeelingFine),
 	.sortValue = 94,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8541,7 +5989,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x08D),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x08D),
 	.sellValue = 30,
-	.hudElemID = 0xAB,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_AttackFXA),
 	.sortValue = 112,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8554,7 +6002,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x093),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x093),
 	.sellValue = 100,
-	.hudElemID = 0xAC,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_AllorNothing),
 	.sortValue = 80,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8567,7 +6015,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x078),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x078),
 	.sellValue = 50,
-	.hudElemID = 0xAD,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_HPDrain),
 	.sortValue = 79,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8576,11 +6024,11 @@ ItemData gItemTable[] = {
 	.potencyB = 0
 },
 {	// item F6: JumpCharge0
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = 30,
-	.hudElemID = 0xAE,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_JumpCharge0),
 	.sortValue = 4,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8593,7 +6041,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x094),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x094),
 	.sellValue = 10,
-	.hudElemID = 0xAF,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_SlowGo),
 	.sortValue = 111,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8606,7 +6054,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x072),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x072),
 	.sellValue = 150,
-	.hudElemID = 0xB0,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_FPPlus),
 	.sortValue = 58,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8619,7 +6067,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x086),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x086),
 	.sellValue = 50,
-	.hudElemID = 0xB1,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_MegaRush),
 	.sortValue = 81,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8632,7 +6080,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x095),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x095),
 	.sellValue = 75,
-	.hudElemID = 0xB2,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_IcePower),
 	.sortValue = 90,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8645,7 +6093,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x074),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x074),
 	.sellValue = 250,
-	.hudElemID = 0xB3,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_DefendPlus),
 	.sortValue = 70,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8658,7 +6106,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x096),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x096),
 	.sellValue = 50,
-	.hudElemID = 0xB4,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_PayOff),
 	.sortValue = 101,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8671,7 +6119,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x09A),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x09A),
 	.sellValue = 200,
-	.hudElemID = 0xB5,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_MoneyMoney),
 	.sortValue = 101,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8684,7 +6132,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x098),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x098),
 	.sellValue = 50,
-	.hudElemID = 0xB6,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_ChillOut),
 	.sortValue = 105,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8697,7 +6145,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x079),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x079),
 	.sellValue = 100,
-	.hudElemID = 0xB7,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_HappyHeart),
 	.sortValue = 42,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8710,7 +6158,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x099),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x099),
 	.sellValue = 100,
-	.hudElemID = 0xB8,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_ZapTap),
 	.sortValue = 95,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8719,11 +6167,11 @@ ItemData gItemTable[] = {
 	.potencyB = 0
 },
 {	// item 101: Berserker
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = 300,
-	.hudElemID = 0xB9,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Berserker),
 	.sortValue = 88,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8736,7 +6184,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x09B),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x09B),
 	.sellValue = 300,
-	.hudElemID = 0xBA,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_RightOn),
 	.sortValue = 41,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8749,7 +6197,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x09C),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x09C),
 	.sellValue = 50,
-	.hudElemID = 0xBB,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_RunawayPay),
 	.sortValue = 99,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8762,7 +6210,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x09D),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x09D),
 	.sellValue = 50,
-	.hudElemID = 0xBC,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Refund),
 	.sortValue = 100,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8775,7 +6223,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x07B),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x07B),
 	.sellValue = 250,
-	.hudElemID = 0xBD,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_FlowerSaver),
 	.sortValue = 63,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8788,7 +6236,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x06E),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x06E),
 	.sellValue = 200,
-	.hudElemID = 0xBE,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_TripleDip),
 	.sortValue = 34,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8801,7 +6249,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x066),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x066),
 	.sellValue = 75,
-	.hudElemID = 0xA7,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_HammerThrow),
 	.sortValue = 28,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8814,7 +6262,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x06C),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x06C),
 	.sellValue = 200,
-	.hudElemID = 0x9B,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_MegaQuake),
 	.sortValue = 26,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8827,7 +6275,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x064),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x064),
 	.sellValue = 50,
-	.hudElemID = 0x9D,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_SmashCharge),
 	.sortValue = 21,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8840,7 +6288,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x05A),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x05A),
 	.sellValue = 50,
-	.hudElemID = 0xA1,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_JumpCharge),
 	.sortValue = 5,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8853,7 +6301,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x065),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x065),
 	.sellValue = 100,
-	.hudElemID = 0x9E,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_SSmashChg),
 	.sortValue = 22,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8866,7 +6314,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x05B),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x05B),
 	.sellValue = 100,
-	.hudElemID = 0xA2,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_SJumpChg),
 	.sortValue = 6,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8879,7 +6327,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x084),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x084),
 	.sellValue = 50,
-	.hudElemID = 0xD1,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_PowerRush),
 	.sortValue = 83,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8888,11 +6336,11 @@ ItemData gItemTable[] = {
 	.potencyB = 0
 },
 {	// item 10E: AutoJump
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = 50,
-	.hudElemID = 0xA3,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_AutoJump),
 	.sortValue = 15,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8901,11 +6349,11 @@ ItemData gItemTable[] = {
 	.potencyB = 0
 },
 {	// item 10F: AutoSmash
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = 50,
-	.hudElemID = 0x9F,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_AutoSmash),
 	.sortValue = 31,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8914,11 +6362,11 @@ ItemData gItemTable[] = {
 	.potencyB = 0
 },
 {	// item 110: CrazyHeart
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = 300,
-	.hudElemID = 0xD4,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_CrazyHeart),
 	.sortValue = 45,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8931,7 +6379,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x085),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x085),
 	.sellValue = 50,
-	.hudElemID = 0xD2,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_LastStand),
 	.sortValue = 82,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8944,7 +6392,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x083),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x083),
 	.sellValue = 50,
-	.hudElemID = 0xD3,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_CloseCall),
 	.sortValue = 84,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8957,7 +6405,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x076),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x076),
 	.sellValue = 100,
-	.hudElemID = 0xC9,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_PUpDDown),
 	.sortValue = 78,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8970,7 +6418,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x082),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x082),
 	.sellValue = 300,
-	.hudElemID = 0xC6,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_LuckyDay),
 	.sortValue = 86,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8979,11 +6427,11 @@ ItemData gItemTable[] = {
 	.potencyB = 0
 },
 {	// item 115: MegaHPDrain
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = 100,
-	.hudElemID = 0xC7,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_MegaHPDrain),
 	.sortValue = 87,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -8996,7 +6444,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x077),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x077),
 	.sellValue = 100,
-	.hudElemID = 0xCA,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_PDownDUp),
 	.sortValue = 77,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9009,7 +6457,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x06B),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x06B),
 	.sellValue = 150,
-	.hudElemID = 0x9A,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_PowerQuake),
 	.sortValue = 25,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9018,11 +6466,11 @@ ItemData gItemTable[] = {
 	.potencyB = 0
 },
 {	// item 118: AutoMultibounce
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = 75,
-	.hudElemID = 0xA5,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_AutoMultibounce),
 	.sortValue = 14,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9031,11 +6479,11 @@ ItemData gItemTable[] = {
 	.potencyB = 0
 },
 {	// item 119: FlowerFanatic
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = 300,
-	.hudElemID = 0xBF,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_FlowerFanatic),
 	.sortValue = 66,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9048,7 +6496,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x07C),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x07C),
 	.sellValue = 75,
-	.hudElemID = 0xCB,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_HeartFinder),
 	.sortValue = 97,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9061,7 +6509,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x07D),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x07D),
 	.sellValue = 75,
-	.hudElemID = 0xCC,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_FlowerFinder),
 	.sortValue = 98,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9074,7 +6522,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x089),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x089),
 	.sellValue = 150,
-	.hudElemID = 0xCF,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_SpinAttack),
 	.sortValue = 108,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9087,7 +6535,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x08A),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x08A),
 	.sellValue = 100,
-	.hudElemID = 0xCD,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_DizzyAttack),
 	.sortValue = 107,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9100,7 +6548,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x09E),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x09E),
 	.sellValue = 200,
-	.hudElemID = 0xD0,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_ISpy),
 	.sortValue = 104,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9113,7 +6561,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x08B),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x08B),
 	.sellValue = 50,
-	.hudElemID = 0xCE,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_SpeedySpin),
 	.sortValue = 106,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9126,7 +6574,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x088),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x088),
 	.sellValue = 200,
-	.hudElemID = 0xC8,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_BumpAttack),
 	.sortValue = 110,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9139,7 +6587,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x058),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x058),
 	.sellValue = 50,
-	.hudElemID = 0xC0,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_PowerJump),
 	.sortValue = 1,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9148,11 +6596,11 @@ ItemData gItemTable[] = {
 	.potencyB = 0
 },
 {	// item 122: SuperJump
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = 100,
-	.hudElemID = 0xC1,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_SuperJump),
 	.sortValue = 2,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9165,7 +6613,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x059),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x059),
 	.sellValue = 200,
-	.hudElemID = 0xC2,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_MegaJump),
 	.sortValue = 3,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9178,7 +6626,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x062),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x062),
 	.sellValue = 50,
-	.hudElemID = 0xC3,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_PowerSmash1),
 	.sortValue = 17,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9187,11 +6635,11 @@ ItemData gItemTable[] = {
 	.potencyB = 0
 },
 {	// item 125: SuperSmash
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = 100,
-	.hudElemID = 0xC4,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_SuperSmash),
 	.sortValue = 18,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9204,7 +6652,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x063),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x063),
 	.sellValue = 200,
-	.hudElemID = 0xC5,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_MegaSmash),
 	.sortValue = 19,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9217,7 +6665,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x062),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x062),
 	.sellValue = 50,
-	.hudElemID = 0x140,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Present),
 	.sortValue = 17,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9230,7 +6678,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x062),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x062),
 	.sellValue = 50,
-	.hudElemID = 0x140,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Present),
 	.sortValue = 17,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9243,7 +6691,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x07E),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x07E),
 	.sellValue = 50,
-	.hudElemID = 0xE0,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_DeepFocus),
 	.sortValue = 49,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9252,11 +6700,11 @@ ItemData gItemTable[] = {
 	.potencyB = 0
 },
 {	// item 12A: SuperFocus
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = 100,
-	.hudElemID = 0xE1,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_SuperFocus),
 	.sortValue = 52,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9269,7 +6717,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x067),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x067),
 	.sellValue = 75,
-	.hudElemID = 0xD8,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_ShrinkSmash),
 	.sortValue = 27,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9278,11 +6726,11 @@ ItemData gItemTable[] = {
 	.potencyB = 0
 },
 {	// item 12C: ShellCrack
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = 100,
-	.hudElemID = 0x140,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Present),
 	.sortValue = 30,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9291,11 +6739,11 @@ ItemData gItemTable[] = {
 	.potencyB = 0
 },
 {	// item 12D: Kaiden
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = 300,
-	.hudElemID = 0xE2,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Kaiden),
 	.sortValue = 39,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9308,7 +6756,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x060),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x060),
 	.sellValue = 100,
-	.hudElemID = 0xDA,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_DDownJump),
 	.sortValue = 12,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9321,7 +6769,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x05F),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x05F),
 	.sellValue = 75,
-	.hudElemID = 0xD9,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_ShrinkStomp),
 	.sortValue = 8,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9334,7 +6782,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x075),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x075),
 	.sellValue = 150,
-	.hudElemID = 0xDB,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_DamageDodge),
 	.sortValue = 73,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9343,11 +6791,11 @@ ItemData gItemTable[] = {
 	.potencyB = 0
 },
 {	// item 131: EarthquakeJump
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = 100,
-	.hudElemID = 0xDC,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_EarthquakeJump),
 	.sortValue = 11,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9360,7 +6808,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x07E),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x07E),
 	.sellValue = 50,
-	.hudElemID = 0xE0,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_DeepFocus),
 	.sortValue = 49,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9373,7 +6821,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x07E),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x07E),
 	.sellValue = 50,
-	.hudElemID = 0xE0,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_DeepFocus),
 	.sortValue = 49,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9386,7 +6834,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x071),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x071),
 	.sellValue = 150,
-	.hudElemID = 0x97,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_HPPlus),
 	.sortValue = 53,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9399,7 +6847,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x072),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x072),
 	.sellValue = 150,
-	.hudElemID = 0xB0,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_FPPlus),
 	.sortValue = 58,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9412,7 +6860,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x079),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x079),
 	.sellValue = 100,
-	.hudElemID = 0xB7,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_HappyHeart),
 	.sortValue = 42,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9425,7 +6873,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x079),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x079),
 	.sellValue = 100,
-	.hudElemID = 0xB7,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_HappyHeart),
 	.sortValue = 42,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9438,7 +6886,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x07B),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x07B),
 	.sellValue = 250,
-	.hudElemID = 0xBD,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_FlowerSaver),
 	.sortValue = 63,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9451,7 +6899,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x07B),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x07B),
 	.sellValue = 250,
-	.hudElemID = 0xBD,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_FlowerSaver),
 	.sortValue = 63,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9464,7 +6912,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x075),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x075),
 	.sellValue = 150,
-	.hudElemID = 0xDB,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_DamageDodge),
 	.sortValue = 73,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9477,7 +6925,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x075),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x075),
 	.sellValue = 150,
-	.hudElemID = 0xDB,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_DamageDodge),
 	.sortValue = 73,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9490,7 +6938,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x073),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x073),
 	.sellValue = 250,
-	.hudElemID = 0x92,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_PowerPlus),
 	.sortValue = 67,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9503,7 +6951,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x073),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x073),
 	.sellValue = 250,
-	.hudElemID = 0x92,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_PowerPlus),
 	.sortValue = 67,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9516,7 +6964,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x074),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x074),
 	.sellValue = 250,
-	.hudElemID = 0xB3,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_DefendPlus),
 	.sortValue = 70,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9529,7 +6977,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x074),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x074),
 	.sellValue = 250,
-	.hudElemID = 0xB3,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_DefendPlus),
 	.sortValue = 70,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9542,7 +6990,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x07A),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x07A),
 	.sellValue = 100,
-	.hudElemID = 0xDD,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_HappyFlower),
 	.sortValue = 46,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9555,7 +7003,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x07A),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x07A),
 	.sellValue = 100,
-	.hudElemID = 0xDD,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_HappyFlower),
 	.sortValue = 46,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9568,7 +7016,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x07A),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x07A),
 	.sellValue = 100,
-	.hudElemID = 0xDD,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_HappyFlower),
 	.sortValue = 46,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9581,7 +7029,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x06F),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x06F),
 	.sellValue = 100,
-	.hudElemID = 0xE9,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_GroupFocus),
 	.sortValue = 35,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9594,7 +7042,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x09F),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x09F),
 	.sellValue = 100,
-	.hudElemID = 0xE8,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Peekaboo),
 	.sortValue = 37,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9607,7 +7055,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x08E),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x08E),
 	.sellValue = 30,
-	.hudElemID = 0xEA,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_AttackFXD),
 	.sortValue = 115,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9620,7 +7068,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x08F),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x08F),
 	.sellValue = 30,
-	.hudElemID = 0xEB,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_AttackFXB),
 	.sortValue = 113,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9633,7 +7081,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x090),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x090),
 	.sellValue = 30,
-	.hudElemID = 0xEC,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_AttackFXE),
 	.sortValue = 116,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9646,7 +7094,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x091),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x091),
 	.sellValue = 30,
-	.hudElemID = 0xED,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_AttackFXC),
 	.sortValue = 114,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9659,7 +7107,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x092),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x092),
 	.sellValue = 30,
-	.hudElemID = 0xEE,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_AttackFXF),
 	.sortValue = 117,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9672,7 +7120,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x071),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x071),
 	.sellValue = 150,
-	.hudElemID = 0x97,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_HPPlus),
 	.sortValue = 53,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9685,7 +7133,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x071),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x071),
 	.sellValue = 150,
-	.hudElemID = 0x97,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_HPPlus),
 	.sortValue = 53,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9698,7 +7146,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x071),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x071),
 	.sellValue = 150,
-	.hudElemID = 0x97,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_HPPlus),
 	.sortValue = 53,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9711,7 +7159,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x072),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x072),
 	.sellValue = 150,
-	.hudElemID = 0xB0,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_FPPlus),
 	.sortValue = 58,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9724,7 +7172,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x072),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x072),
 	.sellValue = 150,
-	.hudElemID = 0xB0,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_FPPlus),
 	.sortValue = 58,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9737,7 +7185,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x072),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x072),
 	.sellValue = 150,
-	.hudElemID = 0xB0,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_FPPlus),
 	.sortValue = 58,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9746,11 +7194,11 @@ ItemData gItemTable[] = {
 	.potencyB = 0
 },
 {	// item 150: HealthyHealthy
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = 100,
-	.hudElemID = 0xF0,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_HealthyHealthy),
 	.sortValue = 93,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9763,7 +7211,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x092),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x092),
 	.sellValue = 30,
-	.hudElemID = 0xEE,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_AttackFXF),
 	.sortValue = 117,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9776,7 +7224,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x092),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x092),
 	.sellValue = 30,
-	.hudElemID = 0xEE,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_AttackFXF),
 	.sortValue = 117,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9789,7 +7237,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x092),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x092),
 	.sellValue = 30,
-	.hudElemID = 0xEE,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_AttackFXF),
 	.sortValue = 117,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9802,7 +7250,7 @@ ItemData gItemTable[] = {
 	.fullDescMsg = MESSAGE_ID(0x25, 0x092),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x092),
 	.sellValue = 30,
-	.hudElemID = 0xEE,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_AttackFXF),
 	.sortValue = 117,
 	.targetFlags = 0,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9811,11 +7259,11 @@ ItemData gItemTable[] = {
 	.potencyB = 0
 },
 {	// item 155: PartnerAttack
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = 1,
-	.hudElemID = 0x149,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_PartnerAttack),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_BADGE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9824,11 +7272,11 @@ ItemData gItemTable[] = {
 	.potencyB = 0
 },
 {	// item 156: Heart
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = -1,
-	.hudElemID = 0x31,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Heart),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = 0,
@@ -9837,11 +7285,11 @@ ItemData gItemTable[] = {
 	.potencyB = 0
 },
 {	// item 157: Coin
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = 1,
-	.hudElemID = 0x32,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Coin),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_ENTITY_COLLECTIBLE,
@@ -9850,11 +7298,11 @@ ItemData gItemTable[] = {
 	.potencyB = 0
 },
 {	// item 158: HeartPiece
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = -1,
-	.hudElemID = 0x33,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_HeartPiece),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_ENTITY_COLLECTIBLE,
@@ -9863,11 +7311,11 @@ ItemData gItemTable[] = {
 	.potencyB = 0
 },
 {	// item 159: StarPoint
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = -1,
-	.hudElemID = 0x34,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_StarPoint),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_ENTITY_COLLECTIBLE,
@@ -9876,11 +7324,11 @@ ItemData gItemTable[] = {
 	.potencyB = 0
 },
 {	// item 15A: HeartPoint
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = -1,
-	.hudElemID = 0x35,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_HeartPoint),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_ENTITY_COLLECTIBLE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9889,11 +7337,11 @@ ItemData gItemTable[] = {
 	.potencyB = 0
 },
 {	// item 15B: FlowerPoint
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = 1,
-	.hudElemID = 0x36,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_FlowerPoint),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_ENTITY_COLLECTIBLE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9903,10 +7351,10 @@ ItemData gItemTable[] = {
 },
 {	// item 15C: StarPiece
 	.nameMsg = MESSAGE_ID(0x26, 0x10C),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = 1,
-	.hudElemID = 0x37,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_StarPiece),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_ENTITY_COLLECTIBLE | ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9915,11 +7363,11 @@ ItemData gItemTable[] = {
 	.potencyB = 0
 },
 {	// item 15D: Present
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = 0,
-	.hudElemID = 0x140,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Present),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9928,11 +7376,11 @@ ItemData gItemTable[] = {
 	.potencyB = 0
 },
 {	// item 15E: CakeDone
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = 0,
-	.hudElemID = 0x141,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_CakeDone),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9941,11 +7389,11 @@ ItemData gItemTable[] = {
 	.potencyB = 0
 },
 {	// item 15F: CakeBare
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = 0,
-	.hudElemID = 0x142,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_CakeBare),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9954,11 +7402,11 @@ ItemData gItemTable[] = {
 	.potencyB = 0
 },
 {	// item 160: CakePan
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = 0,
-	.hudElemID = 0x143,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_CakePan),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9967,11 +7415,11 @@ ItemData gItemTable[] = {
 	.potencyB = 0
 },
 {	// item 161: CakeBatter
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = 0,
-	.hudElemID = 0x144,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_CakeBatter),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9980,11 +7428,11 @@ ItemData gItemTable[] = {
 	.potencyB = 0
 },
 {	// item 162: CakeBowl
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = 0,
-	.hudElemID = 0x145,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_CakeBowl),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -9993,11 +7441,11 @@ ItemData gItemTable[] = {
 	.potencyB = 0
 },
 {	// item 163: CakeMixed
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = 0,
-	.hudElemID = 0x146,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_CakeMixed),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -10006,11 +7454,11 @@ ItemData gItemTable[] = {
 	.potencyB = 0
 },
 {	// item 164: CakeWithIcing
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = 0,
-	.hudElemID = 0x147,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_CakeWithIcing),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -10019,11 +7467,11 @@ ItemData gItemTable[] = {
 	.potencyB = 0
 },
 {	// item 165: CakeWithBerries
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = 0,
-	.hudElemID = 0x148,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_CakeWithBerries),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -10032,11 +7480,11 @@ ItemData gItemTable[] = {
 	.potencyB = 0
 },
 {	// item 166: Hammer1Icon
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = 0,
-	.hudElemID = 0x14A,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Hammer1Icon),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -10045,11 +7493,11 @@ ItemData gItemTable[] = {
 	.potencyB = 0
 },
 {	// item 167: Hammer2Icon
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = 0,
-	.hudElemID = 0x14B,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Hammer2Icon),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -10058,11 +7506,11 @@ ItemData gItemTable[] = {
 	.potencyB = 0
 },
 {	// item 168: Hammer3Icon
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = 0,
-	.hudElemID = 0x14C,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Hammer3Icon),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -10071,11 +7519,11 @@ ItemData gItemTable[] = {
 	.potencyB = 0
 },
 {	// item 169: Boots1Icon
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = 0,
-	.hudElemID = 0x14D,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Boots1Icon),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -10084,11 +7532,11 @@ ItemData gItemTable[] = {
 	.potencyB = 0
 },
 {	// item 16A: Boots2Icon
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = 0,
-	.hudElemID = 0x14E,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Boots2Icon),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -10097,11 +7545,11 @@ ItemData gItemTable[] = {
 	.potencyB = 0
 },
 {	// item 16B: Boots3Icon
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = 0,
-	.hudElemID = 0x14F,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_Boots3Icon),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -10110,11 +7558,11 @@ ItemData gItemTable[] = {
 	.potencyB = 0
 },
 {	// item 16C: ItemsIcon
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.sellValue = 0,
-	.hudElemID = 0x150,
+	.hudElemID = ITEM_HS_INDEX(HudScript_Item_ItemsIcon),
 	.sortValue = 0,
 	.targetFlags = ITEM_TARGET_FLAG_PLAYER,
 	.typeFlags = ITEM_TYPE_FLAG_ENTITY_FULLSIZE,
@@ -10169,11 +7617,11 @@ IconHudScriptPair gItemHudScripts[] = {
 { .enabled = &HudScript_Item_BoiledEgg, .disabled = &HudScript_Item_BoiledEgg_disabled },
 { .enabled = &HudScript_Item_YoshiCookie, .disabled = &HudScript_Item_YoshiCookie_disabled },
 { .enabled = &HudScript_Item_JellyShroom, .disabled = &HudScript_Item_JellyShroom_disabled },
-{ .enabled = &HudScript_Item_ITEM_02C, .disabled = &HudScript_Item_ITEM_02C_disabled },
-{ .enabled = &HudScript_Item_ITEM_02D, .disabled = &HudScript_Item_ITEM_02D_disabled },
-{ .enabled = &HudScript_Item_ITEM_02E, .disabled = &HudScript_Item_ITEM_02E_disabled },
-{ .enabled = &HudScript_Item_ITEM_02F, .disabled = &HudScript_Item_ITEM_02F_disabled },
-{ .enabled = &HudScript_Item_ITEM_030, .disabled = &HudScript_Item_ITEM_030_disabled },
+{ .enabled = &HudScript_Item_Unused_02C, .disabled = &HudScript_Item_Unused_02C_disabled },
+{ .enabled = &HudScript_Item_Unused_02D, .disabled = &HudScript_Item_Unused_02D_disabled },
+{ .enabled = &HudScript_Item_Unused_02E, .disabled = &HudScript_Item_Unused_02E_disabled },
+{ .enabled = &HudScript_Item_Unused_02F, .disabled = &HudScript_Item_Unused_02F_disabled },
+{ .enabled = &HudScript_Item_Unused_030, .disabled = &HudScript_Item_Unused_030_disabled },
 { .enabled = &HudScript_Item_Heart, .disabled = &HudScript_Item_Heart },
 { .enabled = &HudScript_Item_Coin, .disabled = &HudScript_Item_Coin },
 { .enabled = &HudScript_Item_HeartPiece, .disabled = &HudScript_Item_HeartPiece },
@@ -10208,16 +7656,16 @@ IconHudScriptPair gItemHudScripts[] = {
 { .enabled = &HudScript_Item_BooWeight, .disabled = &HudScript_Item_BooWeight },
 { .enabled = &HudScript_Item_BooPortrait, .disabled = &HudScript_Item_BooPortrait },
 { .enabled = &HudScript_Item_MysticKey, .disabled = &HudScript_Item_MysticKey },
-{ .enabled = &HudScript_Item_StoreroomKey, .disabled = &HudScript_Item_StoreroomKey },
+{ .enabled = &HudScript_Item_IronKey, .disabled = &HudScript_Item_IronKey },
 { .enabled = &HudScript_Item_ToyboxTrain, .disabled = &HudScript_Item_ToyboxTrain },
 { .enabled = &HudScript_Item_FryingPan, .disabled = &HudScript_Item_FryingPan },
 { .enabled = &HudScript_Item_Dictionary, .disabled = &HudScript_Item_Dictionary },
 { .enabled = &HudScript_Item_MysteryNote, .disabled = &HudScript_Item_MysteryNote },
 { .enabled = &HudScript_Item_SuspiciousNote, .disabled = &HudScript_Item_SuspiciousNote },
-{ .enabled = &HudScript_Item_Seed1, .disabled = &HudScript_Item_Seed1 },
-{ .enabled = &HudScript_Item_Seed2, .disabled = &HudScript_Item_Seed2 },
-{ .enabled = &HudScript_Item_Seed3, .disabled = &HudScript_Item_Seed3 },
-{ .enabled = &HudScript_Item_Seed4, .disabled = &HudScript_Item_Seed4 },
+{ .enabled = &HudScript_Item_MagicalSeed1, .disabled = &HudScript_Item_MagicalSeed1 },
+{ .enabled = &HudScript_Item_MagicalSeed2, .disabled = &HudScript_Item_MagicalSeed2 },
+{ .enabled = &HudScript_Item_MagicalSeed3, .disabled = &HudScript_Item_MagicalSeed3 },
+{ .enabled = &HudScript_Item_MagicalSeed4, .disabled = &HudScript_Item_MagicalSeed4 },
 { .enabled = &HudScript_Item_CrystalBerry, .disabled = &HudScript_Item_CrystalBerry },
 { .enabled = &HudScript_Item_WaterStone, .disabled = &HudScript_Item_WaterStone },
 { .enabled = &HudScript_Item_MagicBean, .disabled = &HudScript_Item_MagicBean },
@@ -10262,13 +7710,13 @@ IconHudScriptPair gItemHudScripts[] = {
 { .enabled = &HudScript_Item_KootPhoto, .disabled = &HudScript_Item_KootPhoto },
 { .enabled = &HudScript_Item_KootGlasses, .disabled = &HudScript_Item_KootGlasses },
 { .enabled = &HudScript_Item_Letter, .disabled = &HudScript_Item_Letter_disabled },
-{ .enabled = &HudScript_Item_ITEM_089, .disabled = &HudScript_Item_ITEM_089_disabled },
-{ .enabled = &HudScript_Item_ITEM_08A, .disabled = &HudScript_Item_ITEM_08A_disabled },
-{ .enabled = &HudScript_Item_ITEM_08B, .disabled = &HudScript_Item_ITEM_08B_disabled },
-{ .enabled = &HudScript_Item_ITEM_08C, .disabled = &HudScript_Item_ITEM_08C_disabled },
-{ .enabled = &HudScript_Item_ITEM_08D, .disabled = &HudScript_Item_ITEM_08D_disabled },
-{ .enabled = &HudScript_Item_ITEM_08E, .disabled = &HudScript_Item_ITEM_08E_disabled },
-{ .enabled = &HudScript_Item_ITEM_08F, .disabled = &HudScript_Item_ITEM_08F_disabled },
+{ .enabled = &HudScript_Item_Unused_089, .disabled = &HudScript_Item_Unused_089_disabled },
+{ .enabled = &HudScript_Item_Unused_08A, .disabled = &HudScript_Item_Unused_08A_disabled },
+{ .enabled = &HudScript_Item_Unused_08B, .disabled = &HudScript_Item_Unused_08B_disabled },
+{ .enabled = &HudScript_Item_Unused_08C, .disabled = &HudScript_Item_Unused_08C_disabled },
+{ .enabled = &HudScript_Item_Unused_08D, .disabled = &HudScript_Item_Unused_08D_disabled },
+{ .enabled = &HudScript_Item_Unused_08E, .disabled = &HudScript_Item_Unused_08E_disabled },
+{ .enabled = &HudScript_Item_Unused_08F, .disabled = &HudScript_Item_Unused_08F_disabled },
 { .enabled = &HudScript_Item_SpinSmash, .disabled = &HudScript_Item_SpinSmash_disabled },
 { .enabled = &HudScript_Item_Multibounce, .disabled = &HudScript_Item_Multibounce_disabled },
 { .enabled = &HudScript_Item_PowerPlus, .disabled = &HudScript_Item_PowerPlus_disabled },
@@ -10338,25 +7786,25 @@ IconHudScriptPair gItemHudScripts[] = {
 { .enabled = &HudScript_Item_LastStand, .disabled = &HudScript_Item_LastStand_disabled },
 { .enabled = &HudScript_Item_CloseCall, .disabled = &HudScript_Item_CloseCall_disabled },
 { .enabled = &HudScript_Item_CrazyHeart, .disabled = &HudScript_Item_CrazyHeart_disabled },
-{ .enabled = &HudScript_Item_ITEM_0D5, .disabled = &HudScript_Item_ITEM_0D5_disabled },
-{ .enabled = &HudScript_Item_ITEM_0D6, .disabled = &HudScript_Item_ITEM_0D6_disabled },
-{ .enabled = &HudScript_Item_ITEM_0D7, .disabled = &HudScript_Item_ITEM_0D7_disabled },
+{ .enabled = &HudScript_Item_Unused_0D5, .disabled = &HudScript_Item_Unused_0D5_disabled },
+{ .enabled = &HudScript_Item_Unused_0D6, .disabled = &HudScript_Item_Unused_0D6_disabled },
+{ .enabled = &HudScript_Item_Unused_0D7, .disabled = &HudScript_Item_Unused_0D7_disabled },
 { .enabled = &HudScript_Item_ShrinkSmash, .disabled = &HudScript_Item_ShrinkSmash_disabled },
 { .enabled = &HudScript_Item_ShrinkStomp, .disabled = &HudScript_Item_ShrinkStomp_disabled },
 { .enabled = &HudScript_Item_DDownJump, .disabled = &HudScript_Item_DDownJump_disabled },
 { .enabled = &HudScript_Item_DamageDodge, .disabled = &HudScript_Item_DamageDodge_disabled },
 { .enabled = &HudScript_Item_EarthquakeJump, .disabled = &HudScript_Item_EarthquakeJump_disabled },
 { .enabled = &HudScript_Item_HappyFlower, .disabled = &HudScript_Item_HappyFlower_disabled },
-{ .enabled = &HudScript_Item_ITEM_0DE, .disabled = &HudScript_Item_ITEM_0DE_disabled },
-{ .enabled = &HudScript_Item_ITEM_0DF, .disabled = &HudScript_Item_ITEM_0DF_disabled },
-{ .enabled = &HudScript_Item_DeepFocus3, .disabled = &HudScript_Item_DeepFocus3_disabled },
+{ .enabled = &HudScript_Item_Unused_0DE, .disabled = &HudScript_Item_Unused_0DE_disabled },
+{ .enabled = &HudScript_Item_Unused_0DF, .disabled = &HudScript_Item_Unused_0DF_disabled },
+{ .enabled = &HudScript_Item_DeepFocus, .disabled = &HudScript_Item_DeepFocus_disabled },
 { .enabled = &HudScript_Item_SuperFocus, .disabled = &HudScript_Item_SuperFocus_disabled },
 { .enabled = &HudScript_Item_Kaiden, .disabled = &HudScript_Item_Kaiden_disabled },
 { .enabled = &HudScript_Item_QuickChange, .disabled = &HudScript_Item_QuickChange_disabled },
-{ .enabled = &HudScript_Item_ITEM_0E4, .disabled = &HudScript_Item_ITEM_0E4_disabled },
-{ .enabled = &HudScript_Item_ITEM_0E5, .disabled = &HudScript_Item_ITEM_0E5_disabled },
-{ .enabled = &HudScript_Item_ITEM_0E6, .disabled = &HudScript_Item_ITEM_0E6_disabled },
-{ .enabled = &HudScript_Item_ITEM_0E7, .disabled = &HudScript_Item_ITEM_0E7_disabled },
+{ .enabled = &HudScript_Item_Unused_0E4, .disabled = &HudScript_Item_Unused_0E4_disabled },
+{ .enabled = &HudScript_Item_Unused_0E5, .disabled = &HudScript_Item_Unused_0E5_disabled },
+{ .enabled = &HudScript_Item_Unused_0E6, .disabled = &HudScript_Item_Unused_0E6_disabled },
+{ .enabled = &HudScript_Item_Unused_0E7, .disabled = &HudScript_Item_Unused_0E7_disabled },
 { .enabled = &HudScript_Item_Peekaboo, .disabled = &HudScript_Item_Peekaboo_disabled },
 { .enabled = &HudScript_Item_GroupFocus, .disabled = &HudScript_Item_GroupFocus_disabled },
 { .enabled = &HudScript_Item_AttackFXD, .disabled = &HudScript_Item_AttackFXD_disabled },
@@ -10364,15 +7812,15 @@ IconHudScriptPair gItemHudScripts[] = {
 { .enabled = &HudScript_Item_AttackFXE, .disabled = &HudScript_Item_AttackFXE_disabled },
 { .enabled = &HudScript_Item_AttackFXC, .disabled = &HudScript_Item_AttackFXC_disabled },
 { .enabled = &HudScript_Item_AttackFXF, .disabled = &HudScript_Item_AttackFXF_disabled },
-{ .enabled = &HudScript_Item_ITEM_0EF, .disabled = &HudScript_Item_ITEM_0EF_disabled },
+{ .enabled = &HudScript_Item_Unused_0EF, .disabled = &HudScript_Item_Unused_0EF_disabled },
 { .enabled = &HudScript_Item_HealthyHealthy, .disabled = &HudScript_Item_HealthyHealthy_disabled },
-{ .enabled = &HudScript_Item_ITEM_0F1, .disabled = &HudScript_Item_ITEM_0F1_disabled },
-{ .enabled = &HudScript_Item_ITEM_0F2, .disabled = &HudScript_Item_ITEM_0F2_disabled },
-{ .enabled = &HudScript_Item_ITEM_0F3, .disabled = &HudScript_Item_ITEM_0F3_disabled },
-{ .enabled = &HudScript_Item_ITEM_0F4, .disabled = &HudScript_Item_ITEM_0F4_disabled },
-{ .enabled = &HudScript_Item_ITEM_0F5, .disabled = &HudScript_Item_ITEM_0F5_disabled },
-{ .enabled = &HudScript_Item_ITEM_0F6, .disabled = &HudScript_Item_ITEM_0F6_disabled },
-{ .enabled = &HudScript_Item_ITEM_0F7, .disabled = &HudScript_Item_ITEM_0F7_disabled },
+{ .enabled = &HudScript_Item_Unused_0F1, .disabled = &HudScript_Item_Unused_0F1_disabled },
+{ .enabled = &HudScript_Item_Unused_0F2, .disabled = &HudScript_Item_Unused_0F2_disabled },
+{ .enabled = &HudScript_Item_Unused_0F3, .disabled = &HudScript_Item_Unused_0F3_disabled },
+{ .enabled = &HudScript_Item_Unused_0F4, .disabled = &HudScript_Item_Unused_0F4_disabled },
+{ .enabled = &HudScript_Item_Unused_0F5, .disabled = &HudScript_Item_Unused_0F5_disabled },
+{ .enabled = &HudScript_Item_Unused_0F6, .disabled = &HudScript_Item_Unused_0F6_disabled },
+{ .enabled = &HudScript_Item_Unused_0F7, .disabled = &HudScript_Item_Unused_0F7_disabled },
 { .enabled = &HudScript_Item_Mushroom, .disabled = &HudScript_Item_Mushroom_disabled },
 { .enabled = &HudScript_Item_SuperShroom, .disabled = &HudScript_Item_SuperShroom_disabled },
 { .enabled = &HudScript_Item_UltraShroom, .disabled = &HudScript_Item_UltraShroom_disabled },
@@ -10412,7 +7860,7 @@ IconHudScriptPair gItemHudScripts[] = {
 { .enabled = &HudScript_Item_BakingWater, .disabled = &HudScript_Item_BakingWater_disabled },
 { .enabled = &HudScript_Item_BakingFlour, .disabled = &HudScript_Item_BakingFlour_disabled },
 { .enabled = &HudScript_Item_BakingMilk, .disabled = &HudScript_Item_BakingMilk_disabled },
-{ .enabled = &HudScript_Item_ITEM_11F, .disabled = &HudScript_Item_ITEM_11F_disabled },
+{ .enabled = &HudScript_Item_Unused_11F, .disabled = &HudScript_Item_Unused_11F_disabled },
 { .enabled = &HudScript_Item_FireFlower, .disabled = &HudScript_Item_FireFlower_disabled },
 { .enabled = &HudScript_Item_SnowmanDoll, .disabled = &HudScript_Item_SnowmanDoll_disabled },
 { .enabled = &HudScript_Item_ThunderRage, .disabled = &HudScript_Item_ThunderRage_disabled },
@@ -10420,31 +7868,31 @@ IconHudScriptPair gItemHudScripts[] = {
 { .enabled = &HudScript_Item_ShootingStar, .disabled = &HudScript_Item_ShootingStar_disabled },
 { .enabled = &HudScript_Item_DustyHammer, .disabled = &HudScript_Item_DustyHammer_disabled },
 { .enabled = &HudScript_Item_Pebble, .disabled = &HudScript_Item_Pebble_disabled },
-{ .enabled = &HudScript_Item_ITEM_127, .disabled = &HudScript_Item_ITEM_127_disabled },
+{ .enabled = &HudScript_Item_Unused_127, .disabled = &HudScript_Item_Unused_127_disabled },
 { .enabled = &HudScript_Item_StoneCap, .disabled = &HudScript_Item_StoneCap_disabled },
 { .enabled = &HudScript_Item_VoltShroom, .disabled = &HudScript_Item_VoltShroom_disabled },
 { .enabled = &HudScript_Item_PowerStar, .disabled = &HudScript_Item_PowerStar_disabled },
 { .enabled = &HudScript_Item_Parasol, .disabled = &HudScript_Item_Parasol_disabled },
 { .enabled = &HudScript_Item_MagicMirror, .disabled = &HudScript_Item_MagicMirror_disabled },
-{ .enabled = &HudScript_Item_ITEM_12D, .disabled = &HudScript_Item_ITEM_12D_disabled },
-{ .enabled = &HudScript_Item_ITEM_12E, .disabled = &HudScript_Item_ITEM_12E_disabled },
-{ .enabled = &HudScript_Item_ITEM_12F, .disabled = &HudScript_Item_ITEM_12F_disabled },
+{ .enabled = &HudScript_Item_Unused_12D, .disabled = &HudScript_Item_Unused_12D_disabled },
+{ .enabled = &HudScript_Item_Unused_12E, .disabled = &HudScript_Item_Unused_12E_disabled },
+{ .enabled = &HudScript_Item_Unused_12F, .disabled = &HudScript_Item_Unused_12F_disabled },
 { .enabled = &HudScript_Item_SleepySheep, .disabled = &HudScript_Item_SleepySheep_disabled },
 { .enabled = &HudScript_Item_XBandage, .disabled = &HudScript_Item_XBandage_disabled },
 { .enabled = &HudScript_Item_POWBlock, .disabled = &HudScript_Item_POWBlock_disabled },
 { .enabled = &HudScript_Item_HustleDrink, .disabled = &HudScript_Item_HustleDrink_disabled },
 { .enabled = &HudScript_Item_StopWatch, .disabled = &HudScript_Item_StopWatch_disabled },
 { .enabled = &HudScript_Item_DizzyDial, .disabled = &HudScript_Item_DizzyDial_disabled },
-{ .enabled = &HudScript_Item_ITEM_136, .disabled = &HudScript_Item_ITEM_136_disabled },
-{ .enabled = &HudScript_Item_ITEM_137, .disabled = &HudScript_Item_ITEM_137_disabled },
+{ .enabled = &HudScript_Item_Unused_136, .disabled = &HudScript_Item_Unused_136_disabled },
+{ .enabled = &HudScript_Item_Unused_137, .disabled = &HudScript_Item_Unused_137_disabled },
 { .enabled = &HudScript_Item_PleaseComeBack, .disabled = &HudScript_Item_PleaseComeBack_disabled },
-{ .enabled = &HudScript_Item_ITEM_139, .disabled = &HudScript_Item_ITEM_139_disabled },
+{ .enabled = &HudScript_Item_Unused_139, .disabled = &HudScript_Item_Unused_139_disabled },
 { .enabled = &HudScript_Item_FrightJar, .disabled = &HudScript_Item_FrightJar_disabled },
 { .enabled = &HudScript_Item_Mystery, .disabled = &HudScript_Item_Mystery_disabled },
 { .enabled = &HudScript_Item_RepelGel, .disabled = &HudScript_Item_RepelGel_disabled },
 { .enabled = &HudScript_Item_InsecticideHerb, .disabled = &HudScript_Item_InsecticideHerb_disabled },
-{ .enabled = &HudScript_Item_ITEM_13E, .disabled = &HudScript_Item_ITEM_13E_disabled },
-{ .enabled = &HudScript_Item_ITEM_13F, .disabled = &HudScript_Item_ITEM_13F_disabled },
+{ .enabled = &HudScript_Item_Unused_13E, .disabled = &HudScript_Item_Unused_13E_disabled },
+{ .enabled = &HudScript_Item_Unused_13F, .disabled = &HudScript_Item_Unused_13F_disabled },
 { .enabled = &HudScript_Item_Present, .disabled = &HudScript_Item_Present },
 { .enabled = &HudScript_Item_CakeDone, .disabled = &HudScript_Item_CakeDone },
 { .enabled = &HudScript_Item_CakeBaked, .disabled = &HudScript_Item_CakeBaked },
@@ -10464,1360 +7912,1880 @@ IconHudScriptPair gItemHudScripts[] = {
 { .enabled = &HudScript_Item_Items, .disabled = &HudScript_Item_Items }
 };
 
-s32 ItemScript_Jump[] = {
-0x00000001, 0x000000FF, 0x00000000, 0x00000200, 0x00000000, 0x00000000, 0x00000000
+ItemScript ItemScript_Jump = {
+	is_SetIcon(255, key_Gift)
+	is_End
 };
 
-s32 ItemScript_CompleteCake[] = {
-0x00000001, 0x000000FF, 0x00000000, 0x00000200, 0x00000000, 0x00000000, 0x00000000
+ItemScript ItemScript_CompleteCake = {
+	is_SetIcon(255, key_Gift)
+	is_End
 };
 
-s32 ItemScript_CakeDone[] = {
-0x00000001, 0x000000FF, 0x00000220, 0x00000420, 0x00000000, 0x00000000, 0x00000000
+ItemScript ItemScript_CakeDone = {
+	is_SetIcon(255, key_CakeDone)
+	is_End
 };
 
-s32 ItemScript_CakeBaked[] = {
-0x00000001, 0x000000FF, 0x00000440, 0x00000640, 0x00000000, 0x00000000, 0x00000000
+ItemScript ItemScript_CakeBaked = {
+	is_SetIcon(255, key_CakeBaked)
+	is_End
 };
 
-s32 ItemScript_CakePan[] = {
-0x00000001, 0x000000FF, 0x00000660, 0x00000860, 0x00000000, 0x00000000, 0x00000000
+ItemScript ItemScript_CakePan = {
+	is_SetIcon(255, key_CakePan)
+	is_End
 };
 
-s32 ItemScript_CakeBatter[] = {
-0x00000001, 0x000000FF, 0x00000880, 0x00000A80, 0x00000000, 0x00000000, 0x00000000
+ItemScript ItemScript_CakeBatter = {
+	is_SetIcon(255, key_CakeBatter)
+	is_End
 };
 
-s32 ItemScript_CakeBowl[] = {
-0x00000001, 0x000000FF, 0x00000AA0, 0x00000CA0, 0x00000000, 0x00000000, 0x00000000
+ItemScript ItemScript_CakeBowl = {
+	is_SetIcon(255, key_CakeBowl)
+	is_End
 };
 
-s32 ItemScript_CakeMixed[] = {
-0x00000001, 0x000000FF, 0x00000CC0, 0x00000EC0, 0x00000000, 0x00000000, 0x00000000
+ItemScript ItemScript_CakeMixed = {
+	is_SetIcon(255, key_CakeMix)
+	is_End
 };
 
-s32 ItemScript_CakeIcing[] = {
-0x00000001, 0x000000FF, 0x00000EE0, 0x000010E0, 0x00000000, 0x00000000, 0x00000000
+ItemScript ItemScript_CakeIcing = {
+	is_SetIcon(255, key_CakeIcing)
+	is_End
 };
 
-s32 ItemScript_CakeBerries[] = {
-0x00000001, 0x000000FF, 0x00001100, 0x00001300, 0x00000000, 0x00000000, 0x00000000
+ItemScript ItemScript_CakeBerries = {
+	is_SetIcon(255, key_CakeBerries)
+	is_End
 };
 
-s32 ItemScript_Hammer1[] = {
-0x00000001, 0x000000FF, 0x0002D940, 0x0002DB40, 0x00000000, 0x00000000, 0x00000000
+ItemScript ItemScript_Hammer1 = {
+	is_SetIcon(255, Hammer1)
+	is_End
 };
 
-s32 ItemScript_Hammer2[] = {
-0x00000001, 0x000000FF, 0x0002DB80, 0x0002DD80, 0x00000000, 0x00000000, 0x00000000
+ItemScript ItemScript_Hammer2 = {
+	is_SetIcon(255, Hammer2)
+	is_End
 };
 
-s32 ItemScript_Hammer3[] = {
-0x00000001, 0x000000FF, 0x0002DDC0, 0x0002DFC0, 0x00000000, 0x00000000, 0x00000000
+ItemScript ItemScript_Hammer3 = {
+	is_SetIcon(255, Hammer3)
+	is_End
 };
 
-s32 ItemScript_Boots1[] = {
-0x00000001, 0x000000FF, 0x0002E000, 0x0002E200, 0x00000000, 0x00000000, 0x00000000
+ItemScript ItemScript_Boots1 = {
+	is_SetIcon(255, Boots1)
+	is_End
 };
 
-s32 ItemScript_Boots2[] = {
-0x00000001, 0x000000FF, 0x0002E240, 0x0002E440, 0x00000000, 0x00000000, 0x00000000
+ItemScript ItemScript_Boots2 = {
+	is_SetIcon(255, Boots2)
+	is_End
 };
 
-s32 ItemScript_Boots3[] = {
-0x00000001, 0x000000FF, 0x0002E480, 0x0002E680, 0x00000000, 0x00000000, 0x00000000
+ItemScript ItemScript_Boots3 = {
+	is_SetIcon(255, Boots3)
+	is_End
 };
 
-s32 ItemScript_Items[] = {
-0x00000001, 0x000000FF, 0x0002E6C0, 0x0002E8C0, 0x00000000, 0x00000000, 0x00000000
+ItemScript ItemScript_Items = {
+	is_SetIcon(255, Items)
+	is_End
 };
 
-s32 ItemScript_PleaseComeBack[] = {
-0x00000001, 0x0000003C, 0x00013BC0, 0x00013DC0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_PleaseComeBack = STANDARD_ITEM_SCRIPT(battle_PleaseComeBack);
 
-s32 ItemScript_ITEM_139[] = {
-0x00000001, 0x0000003C, 0x00013E00, 0x00014000, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_ITEM_139 = STANDARD_ITEM_SCRIPT(battle_139);
 
-s32 ItemScript_FrightJar[] = {
-0x00000001, 0x0000003C, 0x00014040, 0x00014240, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_FrightJar = STANDARD_ITEM_SCRIPT(battle_FrightJar);
 
-s32 ItemScript_Mystery[] = {
-0x00000001, 0x0000003C, 0x00014280, 0x00014480, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_Mystery = STANDARD_ITEM_SCRIPT(battle_Mystery);
 
-s32 ItemScript_RepelGel[] = {
-0x00000001, 0x0000003C, 0x000144C0, 0x000146C0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_RepelGel = STANDARD_ITEM_SCRIPT(battle_RepelGel);
 
-s32 ItemScript_InsecticideHerb[] = {
-0x00000001, 0x0000003C, 0x00014700, 0x00014900, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_InsecticideHerb = STANDARD_ITEM_SCRIPT(battle_InsecticideHerb);
 
-s32 ItemScript_ITEM_13E[] = {
-0x00000001, 0x0000003C, 0x00014940, 0x00014B40, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_ITEM_13E = STANDARD_ITEM_SCRIPT(battle_13E);
 
-s32 ItemScript_ITEM_13F[] = {
-0x00000001, 0x0000003C, 0x00014B80, 0x00014D80, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_ITEM_13F = STANDARD_ITEM_SCRIPT(battle_13F);
 
-s32 ItemScript_GearBoots1[] = {
-0x00000001, 0x0000003C, 0x00001320, 0x00001520, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_GearBoots1 = STANDARD_ITEM_SCRIPT(key_gear_boots_1);
 
-s32 ItemScript_GearBoots2[] = {
-0x00000001, 0x0000003C, 0x00001540, 0x00001740, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_GearBoots2 = STANDARD_ITEM_SCRIPT(key_gear_boots_2);
 
-s32 ItemScript_GearBoots3[] = {
-0x00000001, 0x0000003C, 0x00001760, 0x00001960, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_GearBoots3 = STANDARD_ITEM_SCRIPT(key_gear_boots_3);
 
-s32 ItemScript_GearHammer1[] = {
-0x00000001, 0x0000003C, 0x00001980, 0x00001B80, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_GearHammer1 = STANDARD_ITEM_SCRIPT(key_gear_hammer_1);
 
-s32 ItemScript_GearHammer2[] = {
-0x00000001, 0x0000003C, 0x00001BA0, 0x00001DA0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_GearHammer2 = STANDARD_ITEM_SCRIPT(key_gear_hammer_2);
 
-s32 ItemScript_GearHammer3[] = {
-0x00000001, 0x0000003C, 0x00001DC0, 0x00001FC0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_GearHammer3 = STANDARD_ITEM_SCRIPT(key_gear_hammer_3);
 
-s32 ItemScript_LuckyStar[] = {
-0x00000001, 0x0000003C, 0x00001FE0, 0x000021E0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_LuckyStar = STANDARD_ITEM_SCRIPT(key_gear_lucky_star);
 
-s32 ItemScript_Map[] = {
-0x00000001, 0x0000003C, 0x00002200, 0x00002400, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_Map = STANDARD_ITEM_SCRIPT(key_map);
 
-s32 ItemScript_KoopaFortressKey[] = {
-0x00000001, 0x0000003C, 0x00009020, 0x00009220, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_KoopaFortressKey = STANDARD_ITEM_SCRIPT(key_key_koopa_fortress);
 
-s32 ItemScript_RuinsKey[] = {
-0x00000001, 0x0000003C, 0x00009240, 0x00009440, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_RuinsKey = STANDARD_ITEM_SCRIPT(key_key_ruins);
 
-s32 ItemScript_TubbaCastleKey[] = {
-0x00000001, 0x0000003C, 0x00009460, 0x00009660, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_TubbaCastleKey = STANDARD_ITEM_SCRIPT(key_key_tubba_castle);
 
-s32 ItemScript_IcePalaceKey[] = {
-0x00000001, 0x0000003C, 0x00009680, 0x00009880, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_IcePalaceKey = STANDARD_ITEM_SCRIPT(key_key_ice_palace);
 
-s32 ItemScript_BowserCastleKey[] = {
-0x00000001, 0x0000003C, 0x000098A0, 0x00009AA0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_BowserCastleKey = STANDARD_ITEM_SCRIPT(key_key_bowser_castle);
 
-s32 ItemScript_Dolly[] = {
-0x00000001, 0x0000003C, 0x00009AC0, 0x00009CC0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_Dolly = STANDARD_ITEM_SCRIPT(key_dolly);
 
-s32 ItemScript_KooperShell[] = {
-0x00000001, 0x0000003C, 0x00009CE0, 0x00009EE0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_KooperShell = STANDARD_ITEM_SCRIPT(key_kooper_shell);
 
-s32 ItemScript_PulseStone[] = {
-0x00000001, 0x0000003C, 0x00009F00, 0x0000A100, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_PulseStone = STANDARD_ITEM_SCRIPT(key_pulse_stone);
 
-s32 ItemScript_Artifact[] = {
-0x00000001, 0x0000003C, 0x0000A120, 0x0000A320, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_Artifact = STANDARD_ITEM_SCRIPT(key_artifact);
 
-s32 ItemScript_AncientVase[] = {
-0x00000001, 0x0000003C, 0x0000A340, 0x0000A540, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_AncientVase = STANDARD_ITEM_SCRIPT(key_vase);
 
-s32 ItemScript_RuinsStonePyramid[] = {
-0x00000001, 0x0000003C, 0x0000A560, 0x0000A760, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_RuinsStonePyramid = STANDARD_ITEM_SCRIPT(key_ruins_stone_pyramid);
 
-s32 ItemScript_RuinsStoneStar[] = {
-0x00000001, 0x0000003C, 0x0000A780, 0x0000A980, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_RuinsStoneStar = STANDARD_ITEM_SCRIPT(key_ruins_stone_star);
 
-s32 ItemScript_RuinsStoneMoon[] = {
-0x00000001, 0x0000003C, 0x0000A9A0, 0x0000ABA0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_RuinsStoneMoon = STANDARD_ITEM_SCRIPT(key_ruins_stone_moon);
 
-s32 ItemScript_ForestPass[] = {
-0x00000001, 0x0000003C, 0x0000ABC0, 0x0000ADC0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_ForestPass = STANDARD_ITEM_SCRIPT(key_forest_pass);
 
-s32 ItemScript_BooRecordOutline[] = {
-0x00000001, 0x0000003C, 0x0000ADE0, 0x0000AFE0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_BooRecordOutline = STANDARD_ITEM_SCRIPT(key_boo_record_mask);
 
-s32 ItemScript_BooRecord[] = {
-0x00000001, 0x0000003C, 0x0000B000, 0x0000B200, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_BooRecord = STANDARD_ITEM_SCRIPT(key_boo_record);
 
-s32 ItemScript_BooWeight[] = {
-0x00000001, 0x0000003C, 0x0000B220, 0x0000B420, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_BooWeight = STANDARD_ITEM_SCRIPT(key_boo_weight);
 
-s32 ItemScript_BoosPortrait[] = {
-0x00000001, 0x0000003C, 0x0000B440, 0x0000B640, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_BoosPortrait = STANDARD_ITEM_SCRIPT(key_boo_portrait);
 
-s32 ItemScript_MysticKey[] = {
-0x00000001, 0x0000003C, 0x0000B660, 0x0000B860, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_MysticKey = STANDARD_ITEM_SCRIPT(key_mystic_key);
 
-s32 ItemScript_StoreroomKey[] = {
-0x00000001, 0x0000003C, 0x0000B880, 0x0000BA80, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_StoreroomKey = STANDARD_ITEM_SCRIPT(key_key_storeroom);
 
-s32 ItemScript_ToyTrain[] = {
-0x00000001, 0x0000003C, 0x0000BAA0, 0x0000BCA0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_ToyTrain = STANDARD_ITEM_SCRIPT(key_toybox_train);
 
-s32 ItemScript_FryingPan[] = {
-0x00000001, 0x0000003C, 0x0000BCC0, 0x0000BEC0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_FryingPan = STANDARD_ITEM_SCRIPT(key_frying_pan);
 
-s32 ItemScript_Dictionary[] = {
-0x00000001, 0x0000003C, 0x0000BEE0, 0x0000C0E0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_Dictionary = STANDARD_ITEM_SCRIPT(key_dictionary);
 
-s32 ItemScript_MysteryNote[] = {
-0x00000001, 0x0000003C, 0x0000C100, 0x0000C300, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_MysteryNote = STANDARD_ITEM_SCRIPT(key_mystery_note);
 
-s32 ItemScript_SuspiciousNote[] = {
-0x00000001, 0x0000003C, 0x0000C320, 0x0000C520, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_SuspiciousNote = STANDARD_ITEM_SCRIPT(key_suspicious_note);
 
-s32 ItemScript_MagicalSeed1[] = {
-0x00000001, 0x0000003C, 0x0000C540, 0x0000C740, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_MagicalSeed1 = STANDARD_ITEM_SCRIPT(key_seed_1);
 
-s32 ItemScript_MagicalSeed2[] = {
-0x00000001, 0x0000003C, 0x0000C760, 0x0000C960, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_MagicalSeed2 = STANDARD_ITEM_SCRIPT(key_seed_2);
 
-s32 ItemScript_MagicalSeed3[] = {
-0x00000001, 0x0000003C, 0x0000C980, 0x0000CB80, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_MagicalSeed3 = STANDARD_ITEM_SCRIPT(key_seed_3);
 
-s32 ItemScript_MagicalSeed4[] = {
-0x00000001, 0x0000003C, 0x0000CBA0, 0x0000CDA0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_MagicalSeed4 = STANDARD_ITEM_SCRIPT(key_seed_4);
 
-s32 ItemScript_CrystalBerry[] = {
-0x00000001, 0x0000003C, 0x0000CDC0, 0x0000CFC0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_CrystalBerry = STANDARD_ITEM_SCRIPT(key_crystal_berry);
 
-s32 ItemScript_WaterStone[] = {
-0x00000001, 0x0000003C, 0x0000CFE0, 0x0000D1E0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_WaterStone = STANDARD_ITEM_SCRIPT(key_water_stone);
 
-s32 ItemScript_MagicalBean[] = {
-0x00000001, 0x0000003C, 0x0000D200, 0x0000D400, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_MagicalBean = STANDARD_ITEM_SCRIPT(key_magic_bean);
 
-s32 ItemScript_FertileSoil[] = {
-0x00000001, 0x0000003C, 0x0000D420, 0x0000D620, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_FertileSoil = STANDARD_ITEM_SCRIPT(key_fertile_soil);
 
-s32 ItemScript_MiracleWater[] = {
-0x00000001, 0x0000003C, 0x0000D640, 0x0000D840, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_MiracleWater = STANDARD_ITEM_SCRIPT(key_miracle_water);
 
-s32 ItemScript_UltraStone[] = {
-0x00000001, 0x0000003C, 0x0000D860, 0x0000DA60, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_UltraStone = STANDARD_ITEM_SCRIPT(key_ultra_stone);
 
-s32 ItemScript_ToadDoll[] = {
-0x00000001, 0x0000003C, 0x0000DAA0, 0x0000DCA0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_ToadDoll = STANDARD_ITEM_SCRIPT(key_toad_doll);
 
-s32 ItemScript_Calculator[] = {
-0x00000001, 0x0000003C, 0x0000DCC0, 0x0000DEC0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_Calculator = STANDARD_ITEM_SCRIPT(key_calculator);
 
-s32 ItemScript_Screwdriver[] = {
-0x00000001, 0x0000003C, 0x0000DEE0, 0x0000E0E0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_Screwdriver = STANDARD_ITEM_SCRIPT(key_screwdriver);
 
-s32 ItemScript_Cookbook[] = {
-0x00000001, 0x0000003C, 0x0000E100, 0x0000E300, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_Cookbook = STANDARD_ITEM_SCRIPT(key_book_cook);
 
-s32 ItemScript_JadeRaven[] = {
-0x00000001, 0x0000003C, 0x0000E320, 0x0000E520, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_JadeRaven = STANDARD_ITEM_SCRIPT(key_jade_raven);
 
-s32 ItemScript_SnowmanBucket[] = {
-0x00000001, 0x0000003C, 0x0000E540, 0x0000E740, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_SnowmanBucket = STANDARD_ITEM_SCRIPT(key_snowman_bucket);
 
-s32 ItemScript_SnowmanScarf[] = {
-0x00000001, 0x0000003C, 0x0000E760, 0x0000E960, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_SnowmanScarf = STANDARD_ITEM_SCRIPT(key_snowman_scarf);
 
-s32 ItemScript_RedKey[] = {
-0x00000001, 0x0000003C, 0x0000E980, 0x0000EB80, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_RedKey = STANDARD_ITEM_SCRIPT(key_key_red);
 
-s32 ItemScript_BlueKey[] = {
-0x00000001, 0x0000003C, 0x0000EBC0, 0x0000EDC0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_BlueKey = STANDARD_ITEM_SCRIPT(key_key_blue);
 
-s32 ItemScript_KootPackage[] = {
-0x00000001, 0x0000003C, 0x0000EDE0, 0x0000EFE0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_KootPackage = STANDARD_ITEM_SCRIPT(key_koot_package);
 
-s32 ItemScript_KootRedJar[] = {
-0x00000001, 0x0000003C, 0x0000F000, 0x0000F200, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_KootRedJar = STANDARD_ITEM_SCRIPT(key_koot_red_jar);
 
-s32 ItemScript_Melody[] = {
-0x00000001, 0x0000003C, 0x0000F220, 0x0000F420, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_Melody = STANDARD_ITEM_SCRIPT(key_book_melody);
 
-s32 ItemScript_Lyrics[] = {
-0x00000001, 0x0000003C, 0x0000F440, 0x0000F640, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_Lyrics = STANDARD_ITEM_SCRIPT(key_book_lyrics);
 
-s32 ItemScript_Mailbag[] = {
-0x00000001, 0x0000003C, 0x0000F660, 0x0000F860, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_Mailbag = STANDARD_ITEM_SCRIPT(key_mailbag);
 
-s32 ItemScript_StarStone[] = {
-0x00000001, 0x0000003C, 0x0000F880, 0x0000FA80, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_StarStone = STANDARD_ITEM_SCRIPT(key_star_stone);
 
-s32 ItemScript_SneakyParasol[] = {
-0x00000001, 0x0000003C, 0x0000FAA0, 0x0000FCA0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_SneakyParasol = STANDARD_ITEM_SCRIPT(peach_sneaky_parasol);
 
-s32 ItemScript_PeachKey[] = {
-0x00000001, 0x0000003C, 0x0000FCE0, 0x0000FEE0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_PeachKey = STANDARD_ITEM_SCRIPT(key_key_peach);
 
-s32 ItemScript_1DC210[] = {
-0x00000001, 0x0000003C, 0x0000FF00, 0x00010100, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_1DC210 = STANDARD_ITEM_SCRIPT(key_1DC210);
 
-s32 ItemScript_1DC430[] = {
-0x00000001, 0x0000003C, 0x00010120, 0x00010320, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_1DC430 = STANDARD_ITEM_SCRIPT(key_1DC430);
 
-s32 ItemScript_1DC650[] = {
-0x00000001, 0x0000003C, 0x00010340, 0x00010540, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_1DC650 = STANDARD_ITEM_SCRIPT(key_1DC650);
 
-s32 ItemScript_1DC870[] = {
-0x00000001, 0x0000003C, 0x00010560, 0x00010760, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_1DC870 = STANDARD_ITEM_SCRIPT(key_1DC870);
 
-s32 ItemScript_DojoCard1[] = {
-0x00000001, 0x0000003C, 0x00010780, 0x00010980, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_DojoCard1 = STANDARD_ITEM_SCRIPT(key_dojo_card_1);
 
-s32 ItemScript_DojoCard2[] = {
-0x00000001, 0x0000003C, 0x000109A0, 0x00010BA0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_DojoCard2 = STANDARD_ITEM_SCRIPT(key_dojo_card_2);
 
-s32 ItemScript_DojoCard3[] = {
-0x00000001, 0x0000003C, 0x00010BC0, 0x00010DC0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_DojoCard3 = STANDARD_ITEM_SCRIPT(key_dojo_card_3);
 
-s32 ItemScript_DojoCard4[] = {
-0x00000001, 0x0000003C, 0x00010E00, 0x00011000, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_DojoCard4 = STANDARD_ITEM_SCRIPT(key_dojo_card_4);
 
-s32 ItemScript_DojoCard5[] = {
-0x00000001, 0x0000003C, 0x00011020, 0x00011220, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_DojoCard5 = STANDARD_ITEM_SCRIPT(key_dojo_card_5);
 
-s32 ItemScript_CrystalBall[] = {
-0x00000001, 0x0000003C, 0x00011240, 0x00011440, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_CrystalBall = STANDARD_ITEM_SCRIPT(key_crystal_ball);
 
-s32 ItemScript_GoldCard[] = {
-0x00000001, 0x0000003C, 0x00011460, 0x00011660, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_GoldCard = STANDARD_ITEM_SCRIPT(key_card_gold);
 
-s32 ItemScript_SilverCard[] = {
-0x00000001, 0x0000003C, 0x00011680, 0x00011880, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_SilverCard = STANDARD_ITEM_SCRIPT(key_card_silver);
 
-s32 ItemScript_KootBook[] = {
-0x00000001, 0x0000003C, 0x000118A0, 0x00011AA0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_KootBook = STANDARD_ITEM_SCRIPT(key_koot_book);
 
-s32 ItemScript_KootTheTape[] = {
-0x00000001, 0x0000003C, 0x00011AC0, 0x00011CC0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_KootTheTape = STANDARD_ITEM_SCRIPT(key_koot_the_tape);
 
-s32 ItemScript_KootAutographMerluvlee[] = {
-0x00000001, 0x0000003C, 0x00011CE0, 0x00011EE0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_KootAutographMerluvlee = STANDARD_ITEM_SCRIPT(key_koot_autograph_luigi);
 
-s32 ItemScript_KootEmptyWallet[] = {
-0x00000001, 0x0000003C, 0x00011F20, 0x00012120, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_KootEmptyWallet = STANDARD_ITEM_SCRIPT(key_koot_empty_wallet);
 
-s32 ItemScript_KootAutographLuigi[] = {
-0x00000001, 0x0000003C, 0x00012140, 0x00012340, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_KootAutographLuigi = STANDARD_ITEM_SCRIPT(key_koot_autograph_merluvlee);
 
-s32 ItemScript_KootKoopaShell[] = {
-0x00000001, 0x0000003C, 0x00012360, 0x00012560, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_KootKoopaShell = STANDARD_ITEM_SCRIPT(key_koot_shell);
 
-s32 ItemScript_KootOldPhoto[] = {
-0x00000001, 0x0000003C, 0x00012580, 0x00012780, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_KootOldPhoto = STANDARD_ITEM_SCRIPT(key_koot_photo);
 
-s32 ItemScript_KootGlasses[] = {
-0x00000001, 0x0000003C, 0x000127A0, 0x000129A0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_KootGlasses = STANDARD_ITEM_SCRIPT(key_koot_glasses);
 
-s32 ItemScript_Letter[] = {
-0x00000001, 0x0000003C, 0x000129C0, 0x00012BC0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_Letter = STANDARD_ITEM_SCRIPT(key_Letter);
 
-s32 ItemScript_ITEM_089[] = {
-0x00000001, 0x0000003C, 0x00012C00, 0x00012E00, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_Unused_089 = STANDARD_ITEM_SCRIPT(key_LongLetter);
 
-s32 ItemScript_ITEM_08A[] = {
-0x00000001, 0x0000003C, 0x00012E40, 0x00013040, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_Unused_08A = STANDARD_ITEM_SCRIPT(key_TealLetter);
 
-s32 ItemScript_ITEM_08B[] = {
-0x00000001, 0x0000003C, 0x00013080, 0x00013280, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_Unused_08B = STANDARD_ITEM_SCRIPT(key_Postcard);
 
-s32 ItemScript_ITEM_08C[] = {
-0x00000001, 0x0000003C, 0x000132C0, 0x000134C0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_Unused_08C = STANDARD_ITEM_SCRIPT(key_EmptyBook);
 
-s32 ItemScript_ITEM_08D[] = {
-0x00000001, 0x0000003C, 0x00013500, 0x00013700, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_Unused_08D = STANDARD_ITEM_SCRIPT(unused_08D);
 
-s32 ItemScript_ITEM_08E[] = {
-0x00000001, 0x0000003C, 0x00013740, 0x00013940, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_Unused_08E = STANDARD_ITEM_SCRIPT(unused_08E);
 
-s32 ItemScript_ITEM_08F[] = {
-0x00000001, 0x0000003C, 0x00013980, 0x00013B80, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_Unused_08F = STANDARD_ITEM_SCRIPT(unused_08F);
 
-s32 ItemScript_SpinSmash[] = {
-0x00000001, 0x0000003C, 0x00014DC0, 0x00014FC0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_SpinSmash = STANDARD_ITEM_SCRIPT(badge_SpinSmash);
 
-s32 ItemScript_Multibounce[] = {
-0x00000001, 0x0000003C, 0x00015000, 0x00015200, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_Multibounce = STANDARD_ITEM_SCRIPT(badge_Multibounce);
 
-s32 ItemScript_PowerPlus[] = {
-0x00000001, 0x0000003C, 0x00015240, 0x00015440, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_PowerPlus = STANDARD_ITEM_SCRIPT(badge_PowerPlus);
 
-s32 ItemScript_DodgeMaster[] = {
-0x00000001, 0x0000003C, 0x00015480, 0x00015680, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_DodgeMaster = STANDARD_ITEM_SCRIPT(badge_DodgeMaster);
 
-s32 ItemScript_PowerBounce[] = {
-0x00000001, 0x0000003C, 0x000156C0, 0x000158C0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_PowerBounce = STANDARD_ITEM_SCRIPT(badge_PowerBounce);
 
-s32 ItemScript_SpikeShield[] = {
-0x00000001, 0x0000003C, 0x00015900, 0x00015B00, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_SpikeShield = STANDARD_ITEM_SCRIPT(badge_SpikeShield);
 
-s32 ItemScript_FirstAttack[] = {
-0x00000001, 0x0000003C, 0x00015B40, 0x00015D40, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_FirstAttack = STANDARD_ITEM_SCRIPT(badge_FirstAttack);
 
-s32 ItemScript_HPPlus[] = {
-0x00000001, 0x0000003C, 0x00015D80, 0x00015F80, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_HPPlus = STANDARD_ITEM_SCRIPT(badge_HPPlus);
 
-s32 ItemScript_QuakeHammer[] = {
-0x00000001, 0x0000003C, 0x00015FC0, 0x000161C0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_QuakeHammer = STANDARD_ITEM_SCRIPT(badge_QuakeHammer);
 
-s32 ItemScript_DoubleDip[] = {
-0x00000001, 0x0000003C, 0x00016200, 0x00016400, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_DoubleDip = STANDARD_ITEM_SCRIPT(badge_DoubleDip);
 
-s32 ItemScript_PowerQuake[] = {
-0x00000001, 0x0000003C, 0x00016440, 0x00016640, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_PowerQuake = STANDARD_ITEM_SCRIPT(badge_PowerQuake);
 
-s32 ItemScript_MegaQuake[] = {
-0x00000001, 0x0000003C, 0x00016680, 0x00016880, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_MegaQuake = STANDARD_ITEM_SCRIPT(badge_MegaQuake);
 
-s32 ItemScript_SleepStomp[] = {
-0x00000001, 0x0000003C, 0x000168C0, 0x00016AC0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_SleepStomp = STANDARD_ITEM_SCRIPT(badge_SleepStomp);
 
-s32 ItemScript_SmashCharge[] = {
-0x00000001, 0x0000003C, 0x00016B00, 0x00016D00, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_SmashCharge = STANDARD_ITEM_SCRIPT(badge_SmashCharge);
 
-s32 ItemScript_SSmashChg[] = {
-0x00000001, 0x0000003C, 0x00016D40, 0x00016F40, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_SSmashChg = STANDARD_ITEM_SCRIPT(badge_SSmashChg);
 
-s32 ItemScript_AutoSmash[] = {
-0x00000001, 0x0000003C, 0x00016F80, 0x00017180, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_AutoSmash = STANDARD_ITEM_SCRIPT(badge_AutoSmash);
 
-s32 ItemScript_FireShield[] = {
-0x00000001, 0x0000003C, 0x000171C0, 0x000173C0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_FireShield = STANDARD_ITEM_SCRIPT(badge_FireShield);
 
-s32 ItemScript_JumpCharge[] = {
-0x00000001, 0x0000003C, 0x00017400, 0x00017600, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_JumpCharge = STANDARD_ITEM_SCRIPT(badge_JumpCharge);
 
-s32 ItemScript_SJumpChg[] = {
-0x00000001, 0x0000003C, 0x00017640, 0x00017840, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_SJumpChg = STANDARD_ITEM_SCRIPT(badge_SJumpChg);
 
-s32 ItemScript_AutoJump[] = {
-0x00000001, 0x0000003C, 0x00017880, 0x00017A80, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_AutoJump = STANDARD_ITEM_SCRIPT(badge_AutoJump);
 
-s32 ItemScript_DDownPound[] = {
-0x00000001, 0x0000003C, 0x00017AC0, 0x00017CC0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_DDownPound = STANDARD_ITEM_SCRIPT(badge_DDownPound);
 
-s32 ItemScript_AutoMultibounce[] = {
-0x00000001, 0x0000003C, 0x00017D00, 0x00017F00, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_AutoMultibounce = STANDARD_ITEM_SCRIPT(badge_AutoMultibounce);
 
-s32 ItemScript_DizzyStomp[] = {
-0x00000001, 0x0000003C, 0x00017F40, 0x00018140, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_DizzyStomp = STANDARD_ITEM_SCRIPT(badge_DizzyStomp);
 
-s32 ItemScript_HammerThrow[] = {
-0x00000001, 0x0000003C, 0x00018180, 0x00018380, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_HammerThrow = STANDARD_ITEM_SCRIPT(badge_HammerThrow);
 
-s32 ItemScript_SmashCharge0[] = {
-0x00000001, 0x0000003C, 0x000183C0, 0x000185C0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_SmashCharge0 = STANDARD_ITEM_SCRIPT(badge_SmashCharge0);
 
-s32 ItemScript_PrettyLucky[] = {
-0x00000001, 0x0000003C, 0x00018600, 0x00018800, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_PrettyLucky = STANDARD_ITEM_SCRIPT(badge_PrettyLucky);
 
-s32 ItemScript_FeelingFine[] = {
-0x00000001, 0x0000003C, 0x00018840, 0x00018A40, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_FeelingFine = STANDARD_ITEM_SCRIPT(badge_FeelingFine);
 
-s32 ItemScript_AttackFXA[] = {
-0x00000001, 0x0000003C, 0x00018A80, 0x00018C80, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_AttackFXA = STANDARD_ITEM_SCRIPT(badge_AttackFXA);
 
-s32 ItemScript_AllorNothing[] = {
-0x00000001, 0x0000003C, 0x00018CC0, 0x00018EC0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_AllorNothing = STANDARD_ITEM_SCRIPT(badge_AllorNothing);
 
-s32 ItemScript_HPDrain[] = {
-0x00000001, 0x0000003C, 0x00018F00, 0x00019100, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_HPDrain = STANDARD_ITEM_SCRIPT(badge_HPDrain);
 
-s32 ItemScript_JumpCharge0[] = {
-0x00000001, 0x0000003C, 0x00019140, 0x00019340, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_JumpCharge0 = STANDARD_ITEM_SCRIPT(badge_JumpCharge0);
 
-s32 ItemScript_SlowGo[] = {
-0x00000001, 0x0000003C, 0x00019380, 0x00019580, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_SlowGo = STANDARD_ITEM_SCRIPT(badge_SlowGo);
 
-s32 ItemScript_FPPlus[] = {
-0x00000001, 0x0000003C, 0x000195C0, 0x000197C0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_FPPlus = STANDARD_ITEM_SCRIPT(badge_FPPlus);
 
-s32 ItemScript_MegaRush[] = {
-0x00000001, 0x0000003C, 0x00019800, 0x00019A00, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_MegaRush = STANDARD_ITEM_SCRIPT(badge_MegaRush);
 
-s32 ItemScript_IcePower[] = {
-0x00000001, 0x0000003C, 0x00019A40, 0x00019C40, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_IcePower = STANDARD_ITEM_SCRIPT(badge_IcePower);
 
-s32 ItemScript_DefendPlus[] = {
-0x00000001, 0x0000003C, 0x00019C80, 0x00019E80, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_DefendPlus = STANDARD_ITEM_SCRIPT(badge_DefendPlus);
 
-s32 ItemScript_PayOff[] = {
-0x00000001, 0x0000003C, 0x00019EC0, 0x0001A0C0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_PayOff = STANDARD_ITEM_SCRIPT(badge_PayOff);
 
-s32 ItemScript_MoneyMoney[] = {
-0x00000001, 0x0000003C, 0x0001A100, 0x0001A300, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_MoneyMoney = STANDARD_ITEM_SCRIPT(badge_MoneyMoney);
 
-s32 ItemScript_ChillOut[] = {
-0x00000001, 0x0000003C, 0x0001A340, 0x0001A540, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_ChillOut = STANDARD_ITEM_SCRIPT(badge_ChillOut);
 
-s32 ItemScript_HappyHeart[] = {
-0x00000001, 0x0000003C, 0x0001A580, 0x0001A780, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_HappyHeart = STANDARD_ITEM_SCRIPT(badge_HappyHeart);
 
-s32 ItemScript_ZapTap[] = {
-0x00000001, 0x0000003C, 0x0001A7C0, 0x0001A9C0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_ZapTap = STANDARD_ITEM_SCRIPT(badge_ZapTap);
 
-s32 ItemScript_Berserker[] = {
-0x00000001, 0x0000003C, 0x0001AA00, 0x0001AC00, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_Berserker = STANDARD_ITEM_SCRIPT(badge_Berserker);
 
-s32 ItemScript_RightOn[] = {
-0x00000001, 0x0000003C, 0x0001AC40, 0x0001AE40, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_RightOn = STANDARD_ITEM_SCRIPT(badge_RightOn);
 
-s32 ItemScript_RunawayPay[] = {
-0x00000001, 0x0000003C, 0x0001AE80, 0x0001B080, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_RunawayPay = STANDARD_ITEM_SCRIPT(badge_RunawayPay);
 
-s32 ItemScript_Refund[] = {
-0x00000001, 0x0000003C, 0x0001B0C0, 0x0001B2C0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_Refund = STANDARD_ITEM_SCRIPT(badge_Refund);
 
-s32 ItemScript_FlowerSaver[] = {
-0x00000001, 0x0000003C, 0x0001B300, 0x0001B500, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_FlowerSaver = STANDARD_ITEM_SCRIPT(badge_FlowerSaver);
 
-s32 ItemScript_TripleDip[] = {
-0x00000001, 0x0000003C, 0x0001B540, 0x0001B740, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_TripleDip = STANDARD_ITEM_SCRIPT(badge_TripleDip);
 
-s32 ItemScript_FlowerFanatic[] = {
-0x00000001, 0x0000003C, 0x0001B780, 0x0001B980, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_FlowerFanatic = STANDARD_ITEM_SCRIPT(badge_FlowerFanatic);
 
-s32 ItemScript_PowerJump[] = {
-0x00000001, 0x0000003C, 0x0001B9C0, 0x0001BBC0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_PowerJump = STANDARD_ITEM_SCRIPT(badge_PowerJump);
 
-s32 ItemScript_SuperJump[] = {
-0x00000001, 0x0000003C, 0x0001BC00, 0x0001BE00, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_SuperJump = STANDARD_ITEM_SCRIPT(badge_SuperJump);
 
-s32 ItemScript_MegaJump[] = {
-0x00000001, 0x0000003C, 0x0001BE40, 0x0001C040, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_MegaJump = STANDARD_ITEM_SCRIPT(badge_MegaJump);
 
-s32 ItemScript_PowerSmash[] = {
-0x00000001, 0x0000003C, 0x0001C080, 0x0001C280, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_PowerSmash = STANDARD_ITEM_SCRIPT(badge_PowerSmash);
 
-s32 ItemScript_SuperSmash[] = {
-0x00000001, 0x0000003C, 0x0001C2C0, 0x0001C4C0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_SuperSmash = STANDARD_ITEM_SCRIPT(badge_SuperSmash);
 
-s32 ItemScript_MegaSmash[] = {
-0x00000001, 0x0000003C, 0x0001C500, 0x0001C700, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_MegaSmash = STANDARD_ITEM_SCRIPT(badge_MegaSmash);
 
-s32 ItemScript_LuckyDay[] = {
-0x00000001, 0x0000003C, 0x0001C740, 0x0001C940, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_LuckyDay = STANDARD_ITEM_SCRIPT(badge_LuckyDay);
 
-s32 ItemScript_MegaHPDrain[] = {
-0x00000001, 0x0000003C, 0x0001C980, 0x0001CB80, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_MegaHPDrain = STANDARD_ITEM_SCRIPT(badge_MegaHPDrain);
 
-s32 ItemScript_BumpAttack[] = {
-0x00000001, 0x0000003C, 0x0001CBC0, 0x0001CDC0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_BumpAttack = STANDARD_ITEM_SCRIPT(badge_BumpAttack);
 
-s32 ItemScript_PUpDDown[] = {
-0x00000001, 0x0000003C, 0x0001CE00, 0x0001D000, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_PUpDDown = STANDARD_ITEM_SCRIPT(badge_PUpDDown);
 
-s32 ItemScript_PDownDUp[] = {
-0x00000001, 0x0000003C, 0x0001D040, 0x0001D240, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_PDownDUp = STANDARD_ITEM_SCRIPT(badge_PDownDUp);
 
-s32 ItemScript_HeartFinder[] = {
-0x00000001, 0x0000003C, 0x0001D280, 0x0001D480, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_HeartFinder = STANDARD_ITEM_SCRIPT(badge_HeartFinder);
 
-s32 ItemScript_FlowerFinder[] = {
-0x00000001, 0x0000003C, 0x0001D4C0, 0x0001D6C0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_FlowerFinder = STANDARD_ITEM_SCRIPT(badge_FlowerFinder);
 
-s32 ItemScript_DizzyAttack[] = {
-0x00000001, 0x0000003C, 0x0001D700, 0x0001D900, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_DizzyAttack = STANDARD_ITEM_SCRIPT(badge_DizzyAttack);
 
-s32 ItemScript_SpeedySpin[] = {
-0x00000001, 0x0000003C, 0x0001D940, 0x0001DB40, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_SpeedySpin = STANDARD_ITEM_SCRIPT(badge_SpeedySpin);
 
-s32 ItemScript_SpinAttack[] = {
-0x00000001, 0x0000003C, 0x0001DB80, 0x0001DD80, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_SpinAttack = STANDARD_ITEM_SCRIPT(badge_SpinAttack);
 
-s32 ItemScript_ISpy[] = {
-0x00000001, 0x0000003C, 0x0001DDC0, 0x0001DFC0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_ISpy = STANDARD_ITEM_SCRIPT(badge_ISpy);
 
-s32 ItemScript_PowerRush[] = {
-0x00000001, 0x0000003C, 0x0001E000, 0x0001E200, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_PowerRush = STANDARD_ITEM_SCRIPT(badge_PowerRush);
 
-s32 ItemScript_LastStand[] = {
-0x00000001, 0x0000003C, 0x0001E240, 0x0001E440, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_LastStand = STANDARD_ITEM_SCRIPT(badge_LastStand);
 
-s32 ItemScript_CloseCall[] = {
-0x00000001, 0x0000003C, 0x0001E480, 0x0001E680, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_CloseCall = STANDARD_ITEM_SCRIPT(badge_CloseCall);
 
-s32 ItemScript_CrazyHeart[] = {
-0x00000001, 0x0000003C, 0x0001E6C0, 0x0001E8C0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_CrazyHeart = STANDARD_ITEM_SCRIPT(badge_CrazyHeart);
 
-s32 ItemScript_ITEM_0D5[] = {
-0x00000001, 0x0000003C, 0x0001E900, 0x0001EB00, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_Unused_0D5 = STANDARD_ITEM_SCRIPT(unused_0D5);
 
-s32 ItemScript_ITEM_0D6[] = {
-0x00000001, 0x0000003C, 0x0001EB40, 0x0001ED40, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_Unused_0D6 = STANDARD_ITEM_SCRIPT(unused_0D6);
 
-s32 ItemScript_ITEM_0D7[] = {
-0x00000001, 0x0000003C, 0x0001ED80, 0x0001EF80, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_Unused_0D7 = STANDARD_ITEM_SCRIPT(unused_0D7);
 
-s32 ItemScript_ShrinkSmash[] = {
-0x00000001, 0x0000003C, 0x0001EFC0, 0x0001F1C0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_ShrinkSmash = STANDARD_ITEM_SCRIPT(badge_ShrinkSmash);
 
-s32 ItemScript_ShrinkStomp[] = {
-0x00000001, 0x0000003C, 0x0001F200, 0x0001F400, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_ShrinkStomp = STANDARD_ITEM_SCRIPT(badge_ShrinkStomp);
 
-s32 ItemScript_DDownJump[] = {
-0x00000001, 0x0000003C, 0x0001F440, 0x0001F640, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_DDownJump = STANDARD_ITEM_SCRIPT(badge_DDownJump);
 
-s32 ItemScript_DamageDodge[] = {
-0x00000001, 0x0000003C, 0x0001F680, 0x0001F880, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_DamageDodge = STANDARD_ITEM_SCRIPT(badge_DamageDodge);
 
-s32 ItemScript_EarthquakeJump[] = {
-0x00000001, 0x0000003C, 0x0001F8C0, 0x0001FAC0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_EarthquakeJump = STANDARD_ITEM_SCRIPT(badge_EarthquakeJump);
 
-s32 ItemScript_HappyFlower[] = {
-0x00000001, 0x0000003C, 0x0001FB00, 0x0001FD00, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_HappyFlower = STANDARD_ITEM_SCRIPT(badge_HappyFlower);
 
-s32 ItemScript_HappyCoin[] = {
-0x00000001, 0x0000003C, 0x0001FD40, 0x0001FF40, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_HappyCoin = STANDARD_ITEM_SCRIPT(badge_HappyCoin);
 
-s32 ItemScript_ITEM_0DF[] = {
-0x00000001, 0x0000003C, 0x0001FF80, 0x00020180, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_Unused_0DF = STANDARD_ITEM_SCRIPT(unused_0DF);
 
-s32 ItemScript_DeepFocus[] = {
-0x00000001, 0x0000003C, 0x000201C0, 0x000203C0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_DeepFocus = STANDARD_ITEM_SCRIPT(badge_DeepFocus);
 
-s32 ItemScript_SuperFocus[] = {
-0x00000001, 0x0000003C, 0x00020400, 0x00020600, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_SuperFocus = STANDARD_ITEM_SCRIPT(badge_SuperFocus);
 
-s32 ItemScript_Kaiden[] = {
-0x00000001, 0x0000003C, 0x00020640, 0x00020840, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_Kaiden = STANDARD_ITEM_SCRIPT(badge_Kaiden);
 
-s32 ItemScript_QuickChange[] = {
-0x00000001, 0x0000003C, 0x00020880, 0x00020A80, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_QuickChange = STANDARD_ITEM_SCRIPT(badge_QuickChange);
 
-s32 ItemScript_ITEM_0E4[] = {
-0x00000001, 0x0000003C, 0x00020AC0, 0x00020CC0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_Unused_0E4 = STANDARD_ITEM_SCRIPT(unused_0E4);
 
-s32 ItemScript_ITEM_0E5[] = {
-0x00000001, 0x0000003C, 0x00020D00, 0x00020F00, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_Unused_0E5 = STANDARD_ITEM_SCRIPT(unused_0E5);
 
-s32 ItemScript_ITEM_0E6[] = {
-0x00000001, 0x0000003C, 0x00020F40, 0x00021140, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_Unused_0E6 = STANDARD_ITEM_SCRIPT(unused_0E6);
 
-s32 ItemScript_ITEM_0E7[] = {
-0x00000001, 0x0000003C, 0x00021180, 0x00021380, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_Unused_0E7 = STANDARD_ITEM_SCRIPT(unused_0E7);
 
-s32 ItemScript_Peekaboo[] = {
-0x00000001, 0x0000003C, 0x000213C0, 0x000215C0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_Peekaboo = STANDARD_ITEM_SCRIPT(badge_Peekaboo);
 
-s32 ItemScript_GroupFocus[] = {
-0x00000001, 0x0000003C, 0x00021600, 0x00021800, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_GroupFocus = STANDARD_ITEM_SCRIPT(badge_GroupFocus);
 
-s32 ItemScript_AttackFXD[] = {
-0x00000001, 0x0000003C, 0x00021840, 0x00021A40, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_AttackFXD = STANDARD_ITEM_SCRIPT(badge_AttackFXD);
 
-s32 ItemScript_AttackFXB[] = {
-0x00000001, 0x0000003C, 0x00021A80, 0x00021C80, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_AttackFXB = STANDARD_ITEM_SCRIPT(badge_AttackFXB);
 
-s32 ItemScript_AttackFXE[] = {
-0x00000001, 0x0000003C, 0x00021CC0, 0x00021EC0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_AttackFXE = STANDARD_ITEM_SCRIPT(badge_AttackFXE);
 
-s32 ItemScript_AttackFXC[] = {
-0x00000001, 0x0000003C, 0x00021F00, 0x00022100, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_AttackFXC = STANDARD_ITEM_SCRIPT(badge_AttackFXC);
 
-s32 ItemScript_AttackFXF[] = {
-0x00000001, 0x0000003C, 0x00022140, 0x00022340, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_AttackFXF = STANDARD_ITEM_SCRIPT(badge_AttackFXF);
 
-s32 ItemScript_ITEM_0EF[] = {
-0x00000001, 0x0000003C, 0x00022380, 0x00022580, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_Unused_0EF = STANDARD_ITEM_SCRIPT(unused_0EF);
 
-s32 ItemScript_HealthyHealthy[] = {
-0x00000001, 0x0000003C, 0x000225C0, 0x000227C0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_HealthyHealthy = STANDARD_ITEM_SCRIPT(badge_HealthyHealthy);
 
-s32 ItemScript_ITEM_0F1[] = {
-0x00000001, 0x0000003C, 0x00022800, 0x00022A00, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_Unused_0F1 = STANDARD_ITEM_SCRIPT(unused_0F1);
 
-s32 ItemScript_ITEM_0F2[] = {
-0x00000001, 0x0000003C, 0x00022A40, 0x00022C40, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_Unused_0F2 = STANDARD_ITEM_SCRIPT(unused_0F2);
 
-s32 ItemScript_ITEM_0F3[] = {
-0x00000001, 0x0000003C, 0x00022C80, 0x00022E80, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_Unused_0F3 = STANDARD_ITEM_SCRIPT(unused_0F3);
 
-s32 ItemScript_ITEM_0F4[] = {
-0x00000001, 0x0000003C, 0x00022EC0, 0x000230C0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_Unused_0F4 = STANDARD_ITEM_SCRIPT(unused_0F4);
 
-s32 ItemScript_ITEM_0F5[] = {
-0x00000001, 0x0000003C, 0x00023100, 0x00023300, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_Unused_0F5 = STANDARD_ITEM_SCRIPT(unused_0F5);
 
-s32 ItemScript_ITEM_0F6[] = {
-0x00000001, 0x0000003C, 0x00023340, 0x00023540, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_Unused_0F6 = STANDARD_ITEM_SCRIPT(unused_0F6);
 
-s32 ItemScript_ITEM_0F7[] = {
-0x00000001, 0x0000003C, 0x00023580, 0x00023780, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_Unused_0F7 = STANDARD_ITEM_SCRIPT(unused_0F7);
 
-s32 ItemScript_Heart[] = {
-0x00000001, 0x0000000A, 0x00030A60, 0x00030B80, 0x00000000, 0x00000000, 0x00000001, 0x00000006, 0x00030BA0, 0x00030CC0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+ItemScript ItemScript_Heart = {
+	is_SetIcon(10, anim_heart_0)
+	is_SetIcon(6, anim_heart_1)
+	is_Restart
+	is_End
 };
 
-s32 ItemScript_Coin[] = {
-0x00000003, 0x00000001, 0x00000003, 0x0002F5C0, 0x0002F6E0, 0x00000000, 0x00000000, 0x00000001, 0x00000003, 0x0002F700, 0x0002F820, 0x00000000, 0x00000000, 0x00000001, 0x00000003, 0x0002FAC0, 0x0002FBE0, 0x00000000, 0x00000000, 0x00000001, 0x00000003, 0x0002FC00, 0x0002FD20, 0x00000000, 0x00000000, 0x00000001, 0x00000003, 0x0002FD40, 0x0002FE60, 0x00000000, 0x00000000, 0x00000001, 0x00000003, 0x0002FE80, 0x0002FFA0, 0x00000000, 0x00000000, 0x00000001, 0x00000003, 0x0002FFC0, 0x000300E0, 0x00000000, 0x00000000, 0x00000001, 0x00000003, 0x00030100, 0x00030220, 0x00000000, 0x00000000, 0x00000004, 0x00000064, 0x00000032, 0x00000001, 0x00000003, 0x0002F5C0, 0x0002F6E0, 0x00000000, 0x00000000, 0x00000001, 0x00000002, 0x0002F700, 0x0002F820, 0x00000000, 0x00000000, 0x00000001, 0x00000001, 0x0002F840, 0x0002F960, 0x00000000, 0x00000000, 0x00000001, 0x00000001, 0x0002F980, 0x0002FAA0, 0x00000000, 0x00000000, 0x00000001, 0x00000002, 0x0002FAC0, 0x0002FBE0, 0x00000000, 0x00000000, 0x00000001, 0x00000003, 0x0002FC00, 0x0002FD20, 0x00000000, 0x00000000, 0x00000001, 0x00000003, 0x0002FD40, 0x0002FE60, 0x00000000, 0x00000000, 0x00000001, 0x00000003, 0x0002FE80, 0x0002FFA0, 0x00000000, 0x00000000, 0x00000001, 0x00000003, 0x0002FFC0, 0x000300E0, 0x00000000, 0x00000000, 0x00000001, 0x00000003, 0x00030100, 0x00030220, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+ItemScript ItemScript_Coin = {
+	is_Loop
+		is_SetIcon(3, anim_coin_0)
+		is_SetIcon(3, anim_coin_1)
+		is_SetIcon(3, anim_coin_4)
+		is_SetIcon(3, anim_coin_5)
+		is_SetIcon(3, anim_coin_6)
+		is_SetIcon(3, anim_coin_7)
+		is_SetIcon(3, anim_coin_8)
+		is_SetIcon(3, anim_coin_9)
+	is_RandomRestart(100, 50)
+		is_SetIcon(3, anim_coin_0)
+		is_SetIcon(2, anim_coin_1)
+		is_SetIcon(1, anim_coin_2)
+		is_SetIcon(1, anim_coin_3)
+		is_SetIcon(2, anim_coin_4)
+		is_SetIcon(3, anim_coin_5)
+		is_SetIcon(3, anim_coin_6)
+		is_SetIcon(3, anim_coin_7)
+		is_SetIcon(3, anim_coin_8)
+		is_SetIcon(3, anim_coin_9)
+	is_Restart
+	is_End
 };
 
-s32 ItemScript_HeartPiece[] = {
-0x00000001, 0x0000003C, 0x00030CE0, 0x00030E00, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_HeartPiece = STANDARD_ITEM_SCRIPT(anim_heart_piece);
 
-s32 ItemScript_StarPoint[] = {
-0x00000001, 0x00000002, 0x00030E20, 0x00030F40, 0x00000000, 0x00000000, 0x00000001, 0x00000002, 0x00030F60, 0x00031080, 0x00000000, 0x00000000, 0x00000001, 0x00000002, 0x000310A0, 0x000311C0, 0x00000000, 0x00000000, 0x00000001, 0x00000002, 0x000311E0, 0x00031300, 0x00000000, 0x00000000, 0x00000001, 0x00000002, 0x00031320, 0x00031440, 0x00000000, 0x00000000, 0x00000001, 0x00000002, 0x00031460, 0x00031580, 0x00000000, 0x00000000, 0x00000001, 0x00000002, 0x000315A0, 0x000316C0, 0x00000000, 0x00000000, 0x00000001, 0x00000002, 0x000316E0, 0x00031800, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+ItemScript ItemScript_StarPoint = {
+	is_SetIcon(2, anim_sp_0)
+	is_SetIcon(2, anim_sp_1)
+	is_SetIcon(2, anim_sp_2)
+	is_SetIcon(2, anim_sp_3)
+	is_SetIcon(2, anim_sp_4)
+	is_SetIcon(2, anim_sp_5)
+	is_SetIcon(2, anim_sp_6)
+	is_SetIcon(2, anim_sp_7)
+	is_Restart
+	is_End
 };
 
-s32 ItemScript_HeartPoint[] = {
-0x00000001, 0x00000008, 0x0002E900, 0x0002EB00, 0x00000000, 0x00000000, 0x00000001, 0x00000005, 0x0002EB20, 0x0002ED20, 0x00000000, 0x00000000, 0x00000001, 0x00000008, 0x0002ED40, 0x0002EF40, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+ItemScript ItemScript_HeartPoint = {
+	is_SetIcon(8, anim_hp_0)
+	is_SetIcon(5, anim_hp_1)
+	is_SetIcon(8, anim_hp_2)
+	is_Restart
+	is_End
 };
 
-s32 ItemScript_FlowerPoint[] = {
-0x00000001, 0x00000008, 0x0002EF60, 0x0002F160, 0x00000000, 0x00000000, 0x00000001, 0x00000005, 0x0002F180, 0x0002F380, 0x00000000, 0x00000000, 0x00000001, 0x00000008, 0x0002F3A0, 0x0002F5A0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+ItemScript ItemScript_FlowerPoint = {
+	is_SetIcon(8, anim_fp_0)
+	is_SetIcon(5, anim_fp_1)
+	is_SetIcon(8, anim_fp_2)
+	is_Restart
+	is_End
 };
 
-s32 ItemScript_StarPiece[] = {
-0x00000001, 0x0000000C, 0x00030400, 0x00030600, 0x00000000, 0x00000000, 0x00000001, 0x00000004, 0x00030620, 0x00030820, 0x00000000, 0x00000000, 0x00000001, 0x0000000C, 0x00030840, 0x00030A40, 0x00000000, 0x00000000, 0x00000001, 0x00000004, 0x00030620, 0x00030820, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+ItemScript ItemScript_StarPiece = {
+	is_SetIcon(12, anim_star_piece_0)
+	is_SetIcon(4, anim_star_piece_1)
+	is_SetIcon(12, anim_star_piece_2)
+	is_SetIcon(4, anim_star_piece_1)
+	is_Restart
+	is_End
 };
 
-s32 ItemScript_SpicySoup[] = {
-0x00000001, 0x0000003C, 0x00002420, 0x00002620, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_SpicySoup = STANDARD_ITEM_SCRIPT(food_SpicySoup);
 
-s32 ItemScript_ApplePie[] = {
-0x00000001, 0x0000003C, 0x00002660, 0x00002860, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_ApplePie = STANDARD_ITEM_SCRIPT(food_ApplePie);
 
-s32 ItemScript_HoneyUltra[] = {
-0x00000001, 0x0000003C, 0x000028A0, 0x00002AA0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_HoneyUltra = STANDARD_ITEM_SCRIPT(food_HoneyUltra);
 
-s32 ItemScript_MapleUltra[] = {
-0x00000001, 0x0000003C, 0x00002AE0, 0x00002CE0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_MapleUltra = STANDARD_ITEM_SCRIPT(food_MapleUltra);
 
-s32 ItemScript_JellyUltra[] = {
-0x00000001, 0x0000003C, 0x00002D20, 0x00002F20, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_JellyUltra = STANDARD_ITEM_SCRIPT(food_JellyUltra);
 
-s32 ItemScript_Koopasta[] = {
-0x00000001, 0x0000003C, 0x00002F60, 0x00003160, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_Koopasta = STANDARD_ITEM_SCRIPT(food_Koopasta);
 
-s32 ItemScript_FriedShroom[] = {
-0x00000001, 0x0000003C, 0x000031A0, 0x000033A0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_FriedShroom = STANDARD_ITEM_SCRIPT(food_FriedShroom);
 
-s32 ItemScript_ShroomCake[] = {
-0x00000001, 0x0000003C, 0x000033E0, 0x000035E0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_ShroomCake = STANDARD_ITEM_SCRIPT(food_ShroomCake);
 
-s32 ItemScript_ShroomSteak[] = {
-0x00000001, 0x0000003C, 0x00003620, 0x00003820, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_ShroomSteak = STANDARD_ITEM_SCRIPT(food_ShroomSteak);
 
-s32 ItemScript_HotShroom[] = {
-0x00000001, 0x0000003C, 0x00003860, 0x00003A60, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_HotShroom = STANDARD_ITEM_SCRIPT(food_HotShroom);
 
-s32 ItemScript_SweetShroom[] = {
-0x00000001, 0x0000003C, 0x00003AA0, 0x00003CA0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_SweetShroom = STANDARD_ITEM_SCRIPT(food_SweetShroom);
 
-s32 ItemScript_HealthyJuice[] = {
-0x00000001, 0x0000003C, 0x00003CE0, 0x00003EE0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_HealthyJuice = STANDARD_ITEM_SCRIPT(food_HealthyJuice);
 
-s32 ItemScript_BlandMeal[] = {
-0x00000001, 0x0000003C, 0x00003F20, 0x00004120, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_BlandMeal = STANDARD_ITEM_SCRIPT(food_BlandMeal);
 
-s32 ItemScript_YummyMeal[] = {
-0x00000001, 0x0000003C, 0x00004160, 0x00004360, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_YummyMeal = STANDARD_ITEM_SCRIPT(food_YummyMeal);
 
-s32 ItemScript_DeluxeFeast[] = {
-0x00000001, 0x0000003C, 0x000043A0, 0x000045A0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_DeluxeFeast = STANDARD_ITEM_SCRIPT(food_DeluxeFeast);
 
-s32 ItemScript_SpecialShake[] = {
-0x00000001, 0x0000003C, 0x000045E0, 0x000047E0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_SpecialShake = STANDARD_ITEM_SCRIPT(food_SpecialShake);
 
-s32 ItemScript_BigCookie[] = {
-0x00000001, 0x0000003C, 0x00004820, 0x00004A20, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_BigCookie = STANDARD_ITEM_SCRIPT(food_BigCookie);
 
-s32 ItemScript_Cake[] = {
-0x00000001, 0x0000003C, 0x00004A60, 0x00004C60, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_Cake = STANDARD_ITEM_SCRIPT(food_Cake);
 
-s32 ItemScript_Mistake[] = {
-0x00000001, 0x0000003C, 0x00004CA0, 0x00004EA0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_Mistake = STANDARD_ITEM_SCRIPT(food_Mistake);
 
-s32 ItemScript_KoopaTea[] = {
-0x00000001, 0x0000003C, 0x00004EE0, 0x000050E0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_KoopaTea = STANDARD_ITEM_SCRIPT(food_KoopaTea);
 
-s32 ItemScript_HoneySuper[] = {
-0x00000001, 0x0000003C, 0x00005120, 0x00005320, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_HoneySuper = STANDARD_ITEM_SCRIPT(food_HoneySuper);
 
-s32 ItemScript_MapleSuper[] = {
-0x00000001, 0x0000003C, 0x00005360, 0x00005560, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_MapleSuper = STANDARD_ITEM_SCRIPT(food_MapleSuper);
 
-s32 ItemScript_JellySuper[] = {
-0x00000001, 0x0000003C, 0x000055A0, 0x000057A0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_JellySuper = STANDARD_ITEM_SCRIPT(food_JellySuper);
 
-s32 ItemScript_Spaghetti[] = {
-0x00000001, 0x0000003C, 0x000057E0, 0x000059E0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_Spaghetti = STANDARD_ITEM_SCRIPT(food_Spaghetti);
 
-s32 ItemScript_EggMissile[] = {
-0x00000001, 0x0000003C, 0x00005A20, 0x00005C20, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_EggMissile = STANDARD_ITEM_SCRIPT(food_EggMissile);
 
-s32 ItemScript_FriedEgg[] = {
-0x00000001, 0x0000003C, 0x00005C60, 0x00005E60, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_FriedEgg = STANDARD_ITEM_SCRIPT(food_FriedEgg);
 
-s32 ItemScript_HoneyShroom[] = {
-0x00000001, 0x0000003C, 0x00005EA0, 0x000060A0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_HoneyShroom = STANDARD_ITEM_SCRIPT(food_HoneyShroom);
 
-s32 ItemScript_HoneyCandy[] = {
-0x00000001, 0x0000003C, 0x000060E0, 0x000062E0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_HoneyCandy = STANDARD_ITEM_SCRIPT(food_HoneyCandy);
 
-s32 ItemScript_ElectroPop[] = {
-0x00000001, 0x0000003C, 0x00006320, 0x00006520, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_ElectroPop = STANDARD_ITEM_SCRIPT(food_ElectroPop);
 
-s32 ItemScript_FirePop[] = {
-0x00000001, 0x0000003C, 0x00006560, 0x00006760, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_FirePop = STANDARD_ITEM_SCRIPT(food_FirePop);
 
-s32 ItemScript_LimeCandy[] = {
-0x00000001, 0x0000003C, 0x000067A0, 0x000069A0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_LimeCandy = STANDARD_ITEM_SCRIPT(food_LimeCandy);
 
-s32 ItemScript_CocoPop[] = {
-0x00000001, 0x0000003C, 0x000069E0, 0x00006BE0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_CocoPop = STANDARD_ITEM_SCRIPT(food_CocoPop);
 
-s32 ItemScript_LemonCandy[] = {
-0x00000001, 0x0000003C, 0x00006C20, 0x00006E20, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_LemonCandy = STANDARD_ITEM_SCRIPT(food_LemonCandy);
 
-s32 ItemScript_JellyPop[] = {
-0x00000001, 0x0000003C, 0x00006E60, 0x00007060, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_JellyPop = STANDARD_ITEM_SCRIPT(food_JellyPop);
 
-s32 ItemScript_StrangeCake[] = {
-0x00000001, 0x0000003C, 0x000070A0, 0x000072A0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_StrangeCake = STANDARD_ITEM_SCRIPT(food_StrangeCake);
 
-s32 ItemScript_KookyCookie[] = {
-0x00000001, 0x0000003C, 0x000072E0, 0x000074E0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_KookyCookie = STANDARD_ITEM_SCRIPT(food_KookyCookie);
 
-s32 ItemScript_FrozenFries[] = {
-0x00000001, 0x0000003C, 0x00007520, 0x00007720, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_FrozenFries = STANDARD_ITEM_SCRIPT(food_FrozenFries);
 
-s32 ItemScript_PotatoSalad[] = {
-0x00000001, 0x0000003C, 0x00007760, 0x00007960, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_PotatoSalad = STANDARD_ITEM_SCRIPT(food_PotatoSalad);
 
-s32 ItemScript_NuttyCake[] = {
-0x00000001, 0x0000003C, 0x000079A0, 0x00007BA0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_NuttyCake = STANDARD_ITEM_SCRIPT(food_NuttyCake);
 
-s32 ItemScript_MapleShroom[] = {
-0x00000001, 0x0000003C, 0x00007BE0, 0x00007DE0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_MapleShroom = STANDARD_ITEM_SCRIPT(food_MapleShroom);
 
-s32 ItemScript_BoiledEgg[] = {
-0x00000001, 0x0000003C, 0x00007E20, 0x00008020, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_BoiledEgg = STANDARD_ITEM_SCRIPT(food_BoiledEgg);
 
-s32 ItemScript_YoshiCookie[] = {
-0x00000001, 0x0000003C, 0x00008060, 0x00008260, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_YoshiCookie = STANDARD_ITEM_SCRIPT(food_YoshiCookie);
 
-s32 ItemScript_JellyShroom[] = {
-0x00000001, 0x0000003C, 0x000082A0, 0x000084A0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_JellyShroom = STANDARD_ITEM_SCRIPT(food_JellyShroom);
 
-s32 ItemScript_ITEM_02C[] = {
-0x00000001, 0x0000003C, 0x000084E0, 0x000086E0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_Unused_02C = STANDARD_ITEM_SCRIPT(unused_02C);
 
-s32 ItemScript_ITEM_02D[] = {
-0x00000001, 0x0000003C, 0x00008720, 0x00008920, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_Unused_02D = STANDARD_ITEM_SCRIPT(unused_02D);
 
-s32 ItemScript_ITEM_02E[] = {
-0x00000001, 0x0000003C, 0x00008960, 0x00008B60, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_Unused_02E = STANDARD_ITEM_SCRIPT(unused_02E);
 
-s32 ItemScript_ITEM_02F[] = {
-0x00000001, 0x0000003C, 0x00008BA0, 0x00008DA0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_Unused_02F = STANDARD_ITEM_SCRIPT(unused_02F);
 
-s32 ItemScript_ITEM_030[] = {
-0x00000001, 0x0000003C, 0x00008DE0, 0x00008FE0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_Unused_030 = STANDARD_ITEM_SCRIPT(unused_030);
 
-s32 ItemScript_FireFlower[] = {
-0x00000001, 0x0000003C, 0x0002A3C0, 0x0002A5C0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_FireFlower = STANDARD_ITEM_SCRIPT(battle_FireFlower);
 
-s32 ItemScript_SnowmanDoll[] = {
-0x00000001, 0x0000003C, 0x0002A600, 0x0002A800, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_SnowmanDoll = STANDARD_ITEM_SCRIPT(battle_SnowmanDoll);
 
-s32 ItemScript_ThunderRage[] = {
-0x00000001, 0x0000003C, 0x0002A840, 0x0002AA40, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_ThunderRage = STANDARD_ITEM_SCRIPT(battle_ThunderRage);
 
-s32 ItemScript_ThunderBolt[] = {
-0x00000001, 0x0000003C, 0x0002AA80, 0x0002AC80, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_ThunderBolt = STANDARD_ITEM_SCRIPT(battle_ThunderBolt);
 
-s32 ItemScript_ShootingStar[] = {
-0x00000001, 0x0000003C, 0x0002ACC0, 0x0002AEC0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_ShootingStar = STANDARD_ITEM_SCRIPT(battle_ShootingStar);
 
-s32 ItemScript_DustyHammer[] = {
-0x00000001, 0x0000003C, 0x0002AF00, 0x0002B100, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_DustyHammer = STANDARD_ITEM_SCRIPT(battle_DustyHammer);
 
-s32 ItemScript_Pebble[] = {
-0x00000001, 0x0000003C, 0x0002B140, 0x0002B340, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_Pebble = STANDARD_ITEM_SCRIPT(battle_Pebble);
 
-s32 ItemScript_ITEM_127[] = {
-0x00000001, 0x0000003C, 0x0002B380, 0x0002B580, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_ITEM_127 = STANDARD_ITEM_SCRIPT(unused_127);
 
-s32 ItemScript_StoneCap[] = {
-0x00000001, 0x0000003C, 0x0002B5C0, 0x0002B7C0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_StoneCap = STANDARD_ITEM_SCRIPT(battle_StoneCap);
 
-s32 ItemScript_VoltShroom[] = {
-0x00000001, 0x0000003C, 0x0002B800, 0x0002BA00, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_VoltShroom = STANDARD_ITEM_SCRIPT(battle_VoltShroom);
 
-s32 ItemScript_PowerStar[] = {
-0x00000001, 0x0000003C, 0x0002BA40, 0x0002BC40, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_PowerStar = STANDARD_ITEM_SCRIPT(battle_PowerStar);
 
-s32 ItemScript_Parasol[] = {
-0x00000001, 0x0000003C, 0x0002BC80, 0x0002BE80, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_Parasol = STANDARD_ITEM_SCRIPT(battle_Parasol);
 
-s32 ItemScript_MagicMirror[] = {
-0x00000001, 0x0000003C, 0x0002BEC0, 0x0002C0C0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_MagicMirror = STANDARD_ITEM_SCRIPT(battle_MagicMirror);
 
-s32 ItemScript_ITEM_12D[] = {
-0x00000001, 0x0000003C, 0x0002C100, 0x0002C300, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_ITEM_12D = STANDARD_ITEM_SCRIPT(unused_12D);
 
-s32 ItemScript_ITEM_12E[] = {
-0x00000001, 0x0000003C, 0x0002C340, 0x0002C540, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_ITEM_12E = STANDARD_ITEM_SCRIPT(unused_12E);
 
-s32 ItemScript_ITEM_12F[] = {
-0x00000001, 0x0000003C, 0x0002C580, 0x0002C780, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_ITEM_12F = STANDARD_ITEM_SCRIPT(unused_12F);
 
-s32 ItemScript_Mushroom[] = {
-0x00000001, 0x0000003C, 0x000237C0, 0x000239C0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_Mushroom = STANDARD_ITEM_SCRIPT(food_Mushroom);
 
-s32 ItemScript_SuperShroom[] = {
-0x00000001, 0x0000003C, 0x00023A00, 0x00023C00, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_SuperShroom = STANDARD_ITEM_SCRIPT(food_SuperShroom);
 
-s32 ItemScript_UltraShroom[] = {
-0x00000001, 0x0000003C, 0x00023C40, 0x00023E40, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_UltraShroom = STANDARD_ITEM_SCRIPT(food_UltraShroom);
 
-s32 ItemScript_LifeShroom[] = {
-0x00000001, 0x0000003C, 0x00023E80, 0x00024080, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_LifeShroom = STANDARD_ITEM_SCRIPT(food_LifeShroom);
 
-s32 ItemScript_DriedShroom[] = {
-0x00000001, 0x0000003C, 0x000240C0, 0x000242C0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_DriedShroom = STANDARD_ITEM_SCRIPT(food_DriedShroom);
 
-s32 ItemScript_TastyTonic[] = {
-0x00000001, 0x0000003C, 0x00024300, 0x00024500, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_TastyTonic = STANDARD_ITEM_SCRIPT(food_TastyTonic);
 
-s32 ItemScript_SuperSoda[] = {
-0x00000001, 0x0000003C, 0x00024540, 0x00024740, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_SuperSoda = STANDARD_ITEM_SCRIPT(food_SuperSoda);
 
-s32 ItemScript_BlueBerry[] = {
-0x00000001, 0x0000003C, 0x00024780, 0x00024980, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_BlueBerry = STANDARD_ITEM_SCRIPT(food_BlueBerry);
 
-s32 ItemScript_RedBerry[] = {
-0x00000001, 0x0000003C, 0x000249C0, 0x00024BC0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_RedBerry = STANDARD_ITEM_SCRIPT(food_RedBerry);
 
-s32 ItemScript_YellowBerry[] = {
-0x00000001, 0x0000003C, 0x00024C00, 0x00024E00, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_YellowBerry = STANDARD_ITEM_SCRIPT(food_YellowBerry);
 
-s32 ItemScript_BubbleBerry[] = {
-0x00000001, 0x0000003C, 0x00024E40, 0x00025040, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_BubbleBerry = STANDARD_ITEM_SCRIPT(food_BubbleBerry);
 
-s32 ItemScript_Goomnut[] = {
-0x00000001, 0x0000003C, 0x00025080, 0x00025280, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_Goomnut = STANDARD_ITEM_SCRIPT(food_Goomnut);
 
-s32 ItemScript_KoopaLeaf[] = {
-0x00000001, 0x0000003C, 0x000252C0, 0x000254C0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_KoopaLeaf = STANDARD_ITEM_SCRIPT(food_KoopaLeaf);
 
-s32 ItemScript_DriedPasta[] = {
-0x00000001, 0x0000003C, 0x00025500, 0x00025700, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_DriedPasta = STANDARD_ITEM_SCRIPT(food_DriedPasta);
 
-s32 ItemScript_Lime[] = {
-0x00000001, 0x0000003C, 0x00025740, 0x00025940, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_Lime = STANDARD_ITEM_SCRIPT(food_Lime);
 
-s32 ItemScript_Lemon[] = {
-0x00000001, 0x0000003C, 0x00025980, 0x00025B80, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_Lemon = STANDARD_ITEM_SCRIPT(food_Lemon);
 
-s32 ItemScript_DriedFruit[] = {
-0x00000001, 0x0000003C, 0x00025BC0, 0x00025DC0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_DriedFruit = STANDARD_ITEM_SCRIPT(food_DriedFruit);
 
-s32 ItemScript_StrangeLeaf[] = {
-0x00000001, 0x0000003C, 0x00025E00, 0x00026000, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_StrangeLeaf = STANDARD_ITEM_SCRIPT(food_StrangeLeaf);
 
-s32 ItemScript_CakeMix[] = {
-0x00000001, 0x0000003C, 0x00026040, 0x00026240, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_CakeMix = STANDARD_ITEM_SCRIPT(food_CakeMix);
 
-s32 ItemScript_Egg[] = {
-0x00000001, 0x0000003C, 0x00026280, 0x00026480, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_Egg = STANDARD_ITEM_SCRIPT(food_Egg);
 
-s32 ItemScript_Coconut[] = {
-0x00000001, 0x0000003C, 0x000264C0, 0x000266C0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_Coconut = STANDARD_ITEM_SCRIPT(food_Coconut);
 
-s32 ItemScript_Melon[] = {
-0x00000001, 0x0000003C, 0x00026700, 0x00026900, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_Melon = STANDARD_ITEM_SCRIPT(food_Melon);
 
-s32 ItemScript_StinkyHerb[] = {
-0x00000001, 0x0000003C, 0x00026940, 0x00026B40, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_StinkyHerb = STANDARD_ITEM_SCRIPT(food_StinkyHerb);
 
-s32 ItemScript_IcedPotato[] = {
-0x00000001, 0x0000003C, 0x00026B80, 0x00026D80, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_IcedPotato = STANDARD_ITEM_SCRIPT(food_IcedPotato);
 
-s32 ItemScript_HoneySyrup[] = {
-0x00000001, 0x0000003C, 0x00026DC0, 0x00026FC0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_HoneySyrup = STANDARD_ITEM_SCRIPT(food_HoneySyrup);
 
-s32 ItemScript_MapleSyrup[] = {
-0x00000001, 0x0000003C, 0x00027000, 0x00027200, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_MapleSyrup = STANDARD_ITEM_SCRIPT(food_MapleSyrup);
 
-s32 ItemScript_JamminJelly[] = {
-0x00000001, 0x0000003C, 0x00027240, 0x00027440, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_JamminJelly = STANDARD_ITEM_SCRIPT(food_JamminJelly);
 
-s32 ItemScript_WhackasBump[] = {
-0x00000001, 0x0000003C, 0x00027480, 0x00027680, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_WhackasBump = STANDARD_ITEM_SCRIPT(food_WhackasBump);
 
-s32 ItemScript_Apple[] = {
-0x00000001, 0x0000003C, 0x000276C0, 0x000278C0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_Apple = STANDARD_ITEM_SCRIPT(food_Apple);
 
-s32 ItemScript_BakingSalt[] = {
-0x00000001, 0x0000003C, 0x00027900, 0x00027B00, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_BakingSalt = STANDARD_ITEM_SCRIPT(peach_BakingSalt);
 
-s32 ItemScript_BakingSugar[] = {
-0x00000001, 0x0000003C, 0x00027B40, 0x00027D40, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_BakingSugar = STANDARD_ITEM_SCRIPT(peach_BakingSugar);
 
-s32 ItemScript_BakingEgg[] = {
-0x00000001, 0x0000003C, 0x00027D80, 0x00027F80, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_BakingEgg = STANDARD_ITEM_SCRIPT(peach_BakingEgg);
 
-s32 ItemScript_BakingCream[] = {
-0x00000001, 0x0000003C, 0x00027FC0, 0x000281C0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_BakingCream = STANDARD_ITEM_SCRIPT(peach_BakingCream);
 
-s32 ItemScript_BakingStrawberry[] = {
-0x00000001, 0x0000003C, 0x00028200, 0x00028400, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_BakingStrawberry = STANDARD_ITEM_SCRIPT(peach_BakingStrawberry);
 
-s32 ItemScript_BakingButter[] = {
-0x00000001, 0x0000003C, 0x00028440, 0x00028640, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_BakingButter = STANDARD_ITEM_SCRIPT(peach_BakingButter);
 
-s32 ItemScript_BakingCleanser[] = {
-0x00000001, 0x0000003C, 0x00028680, 0x00028880, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_BakingCleanser = STANDARD_ITEM_SCRIPT(peach_BakingCleanser);
 
-s32 ItemScript_BakingWater[] = {
-0x00000001, 0x0000003C, 0x000288C0, 0x00028AC0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_BakingWater = STANDARD_ITEM_SCRIPT(peach_BakingWater);
 
-s32 ItemScript_BakingFlour[] = {
-0x00000001, 0x0000003C, 0x00028B00, 0x00028D00, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_BakingFlour = STANDARD_ITEM_SCRIPT(peach_BakingFlour);
 
-s32 ItemScript_BakingMilk[] = {
-0x00000001, 0x0000003C, 0x00028D40, 0x00028F40, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_BakingMilk = STANDARD_ITEM_SCRIPT(peach_BakingMilk);
 
-s32 ItemScript_ITEM_118[] = {
-0x00000001, 0x0000003C, 0x00028F80, 0x00029180, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_ITEM_11F = STANDARD_ITEM_SCRIPT(unused_11F);
 
-s32 ItemScript_SleepySheep[] = {
-0x00000001, 0x0000003C, 0x000291C0, 0x000293C0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_SleepySheep = STANDARD_ITEM_SCRIPT(battle_SleepySheep);
 
-s32 ItemScript_XBandage[] = {
-0x00000001, 0x0000003C, 0x00029400, 0x00029600, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_XBandage = STANDARD_ITEM_SCRIPT(battle_XBandage);
 
-s32 ItemScript_POWBlock[] = {
-0x00000001, 0x0000003C, 0x00029640, 0x00029840, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_POWBlock = STANDARD_ITEM_SCRIPT(battle_POWBlock);
 
-s32 ItemScript_HustleDrink[] = {
-0x00000001, 0x0000003C, 0x00029880, 0x00029A80, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_HustleDrink = STANDARD_ITEM_SCRIPT(battle_HustleDrink);
 
-s32 ItemScript_StopWatch[] = {
-0x00000001, 0x0000003C, 0x00029AC0, 0x00029CC0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_StopWatch = STANDARD_ITEM_SCRIPT(battle_StopWatch);
 
-s32 ItemScript_DizzyDial[] = {
-0x00000001, 0x0000003C, 0x00029D00, 0x00029F00, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_DizzyDial = STANDARD_ITEM_SCRIPT(battle_DizzyDial);
 
-s32 ItemScript_ITEM_136[] = {
-0x00000001, 0x0000003C, 0x00029F40, 0x0002A140, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_ITEM_136 = STANDARD_ITEM_SCRIPT(battle_136);
 
-s32 ItemScript_ITEM_137[] = {
-0x00000001, 0x0000003C, 0x0002A180, 0x0002A380, 0x00000000, 0x00000000, 0x00000002, 0x00000000
-};
+ItemScript ItemScript_ITEM_137 = STANDARD_ITEM_SCRIPT(battle_137);
 
+/* indexed by itemID */
 s32* gItemEntityScripts[] = {
-ItemScript_Jump, ItemScript_GearBoots1, ItemScript_GearBoots2, ItemScript_GearBoots3, ItemScript_GearHammer1, ItemScript_GearHammer2, ItemScript_GearHammer3, ItemScript_LuckyStar, ItemScript_Jump, ItemScript_Jump, ItemScript_DojoCard1, ItemScript_DojoCard2, ItemScript_DojoCard3, ItemScript_DojoCard4, ItemScript_DojoCard5, ItemScript_UltraStone, ItemScript_KoopaFortressKey, ItemScript_RuinsKey, ItemScript_PulseStone, ItemScript_TubbaCastleKey, ItemScript_IcePalaceKey, ItemScript_RuinsStoneMoon, ItemScript_RuinsStonePyramid, ItemScript_RuinsStoneStar, ItemScript_AncientVase, ItemScript_KooperShell, ItemScript_BowserCastleKey, ItemScript_ForestPass, ItemScript_BooWeight, ItemScript_BoosPortrait, ItemScript_CrystalBerry, ItemScript_MysticKey, ItemScript_StoreroomKey, ItemScript_ToyTrain, ItemScript_BooRecord, ItemScript_FryingPan, ItemScript_Dictionary, ItemScript_MysteryNote, ItemScript_SuspiciousNote, ItemScript_CrystalBall, ItemScript_Screwdriver, ItemScript_Cookbook, ItemScript_JadeRaven, ItemScript_MagicalSeed1, ItemScript_MagicalSeed2, ItemScript_MagicalSeed3, ItemScript_MagicalSeed4, ItemScript_ToadDoll, ItemScript_Calculator, ItemScript_SnowmanBucket, ItemScript_SnowmanScarf, ItemScript_RedKey, ItemScript_BlueKey, ItemScript_Letter, ItemScript_Letter, ItemScript_Letter, ItemScript_Letter, ItemScript_Letter, ItemScript_Letter, ItemScript_Letter, ItemScript_Letter, ItemScript_Letter, ItemScript_Letter, ItemScript_Letter, ItemScript_Letter, ItemScript_Letter, ItemScript_Letter, ItemScript_Letter, ItemScript_Letter, ItemScript_Letter, ItemScript_Letter, ItemScript_Letter, ItemScript_Letter, ItemScript_Letter, ItemScript_Letter, ItemScript_Letter, ItemScript_Letter, ItemScript_Letter, ItemScript_Letter, ItemScript_Letter, ItemScript_Letter, ItemScript_Letter, ItemScript_Letter, ItemScript_Artifact, ItemScript_Letter, ItemScript_Letter, ItemScript_Dolly, ItemScript_WaterStone, ItemScript_MagicalBean, ItemScript_FertileSoil, ItemScript_MiracleWater, ItemScript_AncientVase, ItemScript_KootTheTape, ItemScript_BakingSugar, ItemScript_BakingSalt, ItemScript_BakingEgg, ItemScript_BakingCream, ItemScript_BakingStrawberry, ItemScript_BakingButter, ItemScript_BakingCleanser, ItemScript_BakingWater, ItemScript_BakingFlour, ItemScript_BakingMilk, ItemScript_Lyrics, ItemScript_Melody, ItemScript_Mailbag, ItemScript_PeachKey, ItemScript_StoreroomKey, ItemScript_StarStone, ItemScript_SneakyParasol, ItemScript_KootBook, ItemScript_KootAutographMerluvlee, ItemScript_KootEmptyWallet, ItemScript_KootAutographLuigi, ItemScript_KootKoopaShell, ItemScript_KootOldPhoto, ItemScript_KootGlasses, ItemScript_KootOldPhoto, ItemScript_KootPackage, ItemScript_KootRedJar, ItemScript_PeachKey, ItemScript_StoreroomKey, ItemScript_StoreroomKey, ItemScript_SilverCard, ItemScript_GoldCard, ItemScript_Jump, ItemScript_Jump, ItemScript_Jump, ItemScript_FireFlower, ItemScript_SnowmanDoll, ItemScript_ThunderRage, ItemScript_ShootingStar, ItemScript_ThunderBolt, ItemScript_Pebble, ItemScript_DustyHammer, ItemScript_InsecticideHerb, ItemScript_StoneCap, ItemScript_TastyTonic, ItemScript_Mushroom, ItemScript_VoltShroom, ItemScript_SuperShroom, ItemScript_DriedShroom, ItemScript_UltraShroom, ItemScript_SleepySheep, ItemScript_POWBlock, ItemScript_HustleDrink, ItemScript_StopWatch, ItemScript_WhackasBump, ItemScript_Apple, ItemScript_LifeShroom, ItemScript_Mystery, ItemScript_RepelGel, ItemScript_FrightJar, ItemScript_PleaseComeBack, ItemScript_DizzyDial, ItemScript_SuperSoda, ItemScript_Lemon, ItemScript_Lime, ItemScript_BlueBerry, ItemScript_RedBerry, ItemScript_YellowBerry, ItemScript_BubbleBerry, ItemScript_JamminJelly, ItemScript_MapleSyrup, ItemScript_HoneySyrup, ItemScript_Goomnut, ItemScript_KoopaLeaf, ItemScript_DriedPasta, ItemScript_DriedFruit, ItemScript_StrangeLeaf, ItemScript_CakeMix, ItemScript_Egg, ItemScript_Coconut, ItemScript_Melon, ItemScript_StinkyHerb, ItemScript_IcedPotato, ItemScript_SpicySoup, ItemScript_ApplePie, ItemScript_HoneyUltra, ItemScript_MapleUltra, ItemScript_JellyUltra, ItemScript_Koopasta, ItemScript_FriedShroom, ItemScript_ShroomCake, ItemScript_ShroomSteak, ItemScript_HotShroom, ItemScript_SweetShroom, ItemScript_YummyMeal, ItemScript_HealthyJuice, ItemScript_BlandMeal, ItemScript_DeluxeFeast, ItemScript_SpecialShake, ItemScript_BigCookie, ItemScript_Cake, ItemScript_Mistake, ItemScript_KoopaTea, ItemScript_HoneySuper, ItemScript_MapleSuper, ItemScript_JellySuper, ItemScript_Spaghetti, ItemScript_EggMissile, ItemScript_FriedEgg, ItemScript_HoneyShroom, ItemScript_HoneyCandy, ItemScript_ElectroPop, ItemScript_FirePop, ItemScript_LimeCandy, ItemScript_CocoPop, ItemScript_LemonCandy, ItemScript_JellyPop, ItemScript_StrangeCake, ItemScript_KookyCookie, ItemScript_FrozenFries, ItemScript_PotatoSalad, ItemScript_NuttyCake, ItemScript_MapleShroom, ItemScript_BoiledEgg, ItemScript_YoshiCookie, ItemScript_JellyShroom, ItemScript_Jump, ItemScript_Jump, ItemScript_Jump, ItemScript_Jump, ItemScript_Jump, ItemScript_SpinSmash, ItemScript_Multibounce, ItemScript_PowerPlus, ItemScript_DodgeMaster, ItemScript_PowerBounce, ItemScript_SpikeShield, ItemScript_FirstAttack, ItemScript_HPPlus, ItemScript_QuakeHammer, ItemScript_DoubleDip, ItemScript_Jump, ItemScript_SleepStomp, ItemScript_FireShield, ItemScript_QuickChange, ItemScript_DDownPound, ItemScript_DizzyStomp, ItemScript_SmashCharge0, ItemScript_PrettyLucky, ItemScript_FeelingFine, ItemScript_AttackFXA, ItemScript_AllorNothing, ItemScript_HPDrain, ItemScript_JumpCharge0, ItemScript_SlowGo, ItemScript_FPPlus, ItemScript_MegaRush, ItemScript_IcePower, ItemScript_DefendPlus, ItemScript_PayOff, ItemScript_MoneyMoney, ItemScript_ChillOut, ItemScript_HappyHeart, ItemScript_ZapTap, ItemScript_Berserker, ItemScript_RightOn, ItemScript_RunawayPay, ItemScript_Refund, ItemScript_FlowerSaver, ItemScript_TripleDip, ItemScript_HammerThrow, ItemScript_MegaQuake, ItemScript_SmashCharge, ItemScript_JumpCharge, ItemScript_SSmashChg, ItemScript_SJumpChg, ItemScript_PowerRush, ItemScript_AutoJump, ItemScript_AutoSmash, ItemScript_CrazyHeart, ItemScript_LastStand, ItemScript_CloseCall, ItemScript_PUpDDown, ItemScript_LuckyDay, ItemScript_MegaHPDrain, ItemScript_PDownDUp, ItemScript_PowerQuake, ItemScript_AutoMultibounce, ItemScript_FlowerFanatic, ItemScript_HeartFinder, ItemScript_FlowerFinder, ItemScript_SpinAttack, ItemScript_DizzyAttack, ItemScript_ISpy, ItemScript_SpeedySpin, ItemScript_BumpAttack, ItemScript_PowerJump, ItemScript_SuperJump, ItemScript_MegaJump, ItemScript_PowerSmash, ItemScript_SuperSmash, ItemScript_MegaSmash, ItemScript_Jump, ItemScript_Jump, ItemScript_DeepFocus, ItemScript_SuperFocus, ItemScript_ShrinkSmash, ItemScript_Jump, ItemScript_Kaiden, ItemScript_DDownJump, ItemScript_ShrinkStomp, ItemScript_DamageDodge, ItemScript_EarthquakeJump, ItemScript_DeepFocus, ItemScript_SuperFocus, ItemScript_HPPlus, ItemScript_FPPlus, ItemScript_HappyHeart, ItemScript_HappyHeart, ItemScript_FlowerSaver, ItemScript_FlowerSaver, ItemScript_DamageDodge, ItemScript_DamageDodge, ItemScript_PowerPlus, ItemScript_PowerPlus, ItemScript_DefendPlus, ItemScript_DefendPlus, ItemScript_HappyFlower, ItemScript_HappyFlower, ItemScript_HappyFlower, ItemScript_GroupFocus, ItemScript_Peekaboo, ItemScript_AttackFXD, ItemScript_AttackFXB, ItemScript_AttackFXE, ItemScript_AttackFXC, ItemScript_AttackFXF, ItemScript_HPPlus, ItemScript_HPPlus, ItemScript_HPPlus, ItemScript_FPPlus, ItemScript_FPPlus, ItemScript_FPPlus, ItemScript_HealthyHealthy, ItemScript_Jump, ItemScript_Jump, ItemScript_Jump, ItemScript_Jump, ItemScript_Jump, ItemScript_Heart, ItemScript_Coin, ItemScript_HeartPiece, ItemScript_StarPoint, ItemScript_HeartPoint, ItemScript_FlowerPoint, ItemScript_StarPiece, ItemScript_CompleteCake, ItemScript_CakeDone, ItemScript_CakeBaked, ItemScript_CakePan, ItemScript_CakeBatter, ItemScript_CakeBowl, ItemScript_CakeMixed, ItemScript_CakeIcing, ItemScript_CakeBerries, ItemScript_Hammer1, ItemScript_Hammer2, ItemScript_Hammer3, ItemScript_Boots1, ItemScript_Boots2, ItemScript_Boots3, ItemScript_Items, ItemScript_Jump, ItemScript_Jump, ItemScript_Jump, ItemScript_Jump, ItemScript_Jump, ItemScript_Jump, ItemScript_Jump, ItemScript_Jump, ItemScript_Jump, ItemScript_Jump, ItemScript_Jump, ItemScript_Jump, ItemScript_Jump, ItemScript_Jump, ItemScript_Jump, ItemScript_Jump, ItemScript_Jump, ItemScript_Jump, ItemScript_Jump, ItemScript_Jump
+	ItemScript_Jump,
+	ItemScript_GearBoots1,
+	ItemScript_GearBoots2,
+	ItemScript_GearBoots3,
+	ItemScript_GearHammer1,
+	ItemScript_GearHammer2,
+	ItemScript_GearHammer3,
+	ItemScript_LuckyStar,
+	ItemScript_Jump,
+	ItemScript_Jump,
+	ItemScript_DojoCard1,
+	ItemScript_DojoCard2,
+	ItemScript_DojoCard3,
+	ItemScript_DojoCard4,
+	ItemScript_DojoCard5,
+	ItemScript_UltraStone,
+	ItemScript_KoopaFortressKey,
+	ItemScript_RuinsKey,
+	ItemScript_PulseStone,
+	ItemScript_TubbaCastleKey,
+	ItemScript_IcePalaceKey,
+	ItemScript_RuinsStoneMoon,
+	ItemScript_RuinsStonePyramid,
+	ItemScript_RuinsStoneStar,
+	ItemScript_AncientVase,
+	ItemScript_KooperShell,
+	ItemScript_BowserCastleKey,
+	ItemScript_ForestPass,
+	ItemScript_BooWeight,
+	ItemScript_BoosPortrait,
+	ItemScript_CrystalBerry,
+	ItemScript_MysticKey,
+	ItemScript_StoreroomKey,
+	ItemScript_ToyTrain,
+	ItemScript_BooRecord,
+	ItemScript_FryingPan,
+	ItemScript_Dictionary,
+	ItemScript_MysteryNote,
+	ItemScript_SuspiciousNote,
+	ItemScript_CrystalBall,
+	ItemScript_Screwdriver,
+	ItemScript_Cookbook,
+	ItemScript_JadeRaven,
+	ItemScript_MagicalSeed1,
+	ItemScript_MagicalSeed2,
+	ItemScript_MagicalSeed3,
+	ItemScript_MagicalSeed4,
+	ItemScript_ToadDoll,
+	ItemScript_Calculator,
+	ItemScript_SnowmanBucket,
+	ItemScript_SnowmanScarf,
+	ItemScript_RedKey,
+	ItemScript_BlueKey,
+	ItemScript_Letter,
+	ItemScript_Letter,
+	ItemScript_Letter,
+	ItemScript_Letter,
+	ItemScript_Letter,
+	ItemScript_Letter,
+	ItemScript_Letter,
+	ItemScript_Letter,
+	ItemScript_Letter,
+	ItemScript_Letter,
+	ItemScript_Letter,
+	ItemScript_Letter,
+	ItemScript_Letter,
+	ItemScript_Letter,
+	ItemScript_Letter,
+	ItemScript_Letter,
+	ItemScript_Letter,
+	ItemScript_Letter,
+	ItemScript_Letter,
+	ItemScript_Letter,
+	ItemScript_Letter,
+	ItemScript_Letter,
+	ItemScript_Letter,
+	ItemScript_Letter,
+	ItemScript_Letter,
+	ItemScript_Letter,
+	ItemScript_Letter,
+	ItemScript_Letter,
+	ItemScript_Letter,
+	ItemScript_Letter,
+	ItemScript_Artifact,
+	ItemScript_Letter,
+	ItemScript_Letter,
+	ItemScript_Dolly,
+	ItemScript_WaterStone,
+	ItemScript_MagicalBean,
+	ItemScript_FertileSoil,
+	ItemScript_MiracleWater,
+	ItemScript_AncientVase,
+	ItemScript_KootTheTape,
+	ItemScript_BakingSugar,
+	ItemScript_BakingSalt,
+	ItemScript_BakingEgg,
+	ItemScript_BakingCream,
+	ItemScript_BakingStrawberry,
+	ItemScript_BakingButter,
+	ItemScript_BakingCleanser,
+	ItemScript_BakingWater,
+	ItemScript_BakingFlour,
+	ItemScript_BakingMilk,
+	ItemScript_Lyrics,
+	ItemScript_Melody,
+	ItemScript_Mailbag,
+	ItemScript_PeachKey,
+	ItemScript_StoreroomKey,
+	ItemScript_StarStone,
+	ItemScript_SneakyParasol,
+	ItemScript_KootBook,
+	ItemScript_KootAutographMerluvlee,
+	ItemScript_KootEmptyWallet,
+	ItemScript_KootAutographLuigi,
+	ItemScript_KootKoopaShell,
+	ItemScript_KootOldPhoto,
+	ItemScript_KootGlasses,
+	ItemScript_KootOldPhoto,
+	ItemScript_KootPackage,
+	ItemScript_KootRedJar,
+	ItemScript_PeachKey,
+	ItemScript_StoreroomKey,
+	ItemScript_StoreroomKey,
+	ItemScript_SilverCard,
+	ItemScript_GoldCard,
+	ItemScript_Jump,
+	ItemScript_Jump,
+	ItemScript_Jump,
+	ItemScript_FireFlower,
+	ItemScript_SnowmanDoll,
+	ItemScript_ThunderRage,
+	ItemScript_ShootingStar,
+	ItemScript_ThunderBolt,
+	ItemScript_Pebble,
+	ItemScript_DustyHammer,
+	ItemScript_InsecticideHerb,
+	ItemScript_StoneCap,
+	ItemScript_TastyTonic,
+	ItemScript_Mushroom,
+	ItemScript_VoltShroom,
+	ItemScript_SuperShroom,
+	ItemScript_DriedShroom,
+	ItemScript_UltraShroom,
+	ItemScript_SleepySheep,
+	ItemScript_POWBlock,
+	ItemScript_HustleDrink,
+	ItemScript_StopWatch,
+	ItemScript_WhackasBump,
+	ItemScript_Apple,
+	ItemScript_LifeShroom,
+	ItemScript_Mystery,
+	ItemScript_RepelGel,
+	ItemScript_FrightJar,
+	ItemScript_PleaseComeBack,
+	ItemScript_DizzyDial,
+	ItemScript_SuperSoda,
+	ItemScript_Lemon,
+	ItemScript_Lime,
+	ItemScript_BlueBerry,
+	ItemScript_RedBerry,
+	ItemScript_YellowBerry,
+	ItemScript_BubbleBerry,
+	ItemScript_JamminJelly,
+	ItemScript_MapleSyrup,
+	ItemScript_HoneySyrup,
+	ItemScript_Goomnut,
+	ItemScript_KoopaLeaf,
+	ItemScript_DriedPasta,
+	ItemScript_DriedFruit,
+	ItemScript_StrangeLeaf,
+	ItemScript_CakeMix,
+	ItemScript_Egg,
+	ItemScript_Coconut,
+	ItemScript_Melon,
+	ItemScript_StinkyHerb,
+	ItemScript_IcedPotato,
+	ItemScript_SpicySoup,
+	ItemScript_ApplePie,
+	ItemScript_HoneyUltra,
+	ItemScript_MapleUltra,
+	ItemScript_JellyUltra,
+	ItemScript_Koopasta,
+	ItemScript_FriedShroom,
+	ItemScript_ShroomCake,
+	ItemScript_ShroomSteak,
+	ItemScript_HotShroom,
+	ItemScript_SweetShroom,
+	ItemScript_YummyMeal,
+	ItemScript_HealthyJuice,
+	ItemScript_BlandMeal,
+	ItemScript_DeluxeFeast,
+	ItemScript_SpecialShake,
+	ItemScript_BigCookie,
+	ItemScript_Cake,
+	ItemScript_Mistake,
+	ItemScript_KoopaTea,
+	ItemScript_HoneySuper,
+	ItemScript_MapleSuper,
+	ItemScript_JellySuper,
+	ItemScript_Spaghetti,
+	ItemScript_EggMissile,
+	ItemScript_FriedEgg,
+	ItemScript_HoneyShroom,
+	ItemScript_HoneyCandy,
+	ItemScript_ElectroPop,
+	ItemScript_FirePop,
+	ItemScript_LimeCandy,
+	ItemScript_CocoPop,
+	ItemScript_LemonCandy,
+	ItemScript_JellyPop,
+	ItemScript_StrangeCake,
+	ItemScript_KookyCookie,
+	ItemScript_FrozenFries,
+	ItemScript_PotatoSalad,
+	ItemScript_NuttyCake,
+	ItemScript_MapleShroom,
+	ItemScript_BoiledEgg,
+	ItemScript_YoshiCookie,
+	ItemScript_JellyShroom,
+	ItemScript_Jump,
+	ItemScript_Jump,
+	ItemScript_Jump,
+	ItemScript_Jump,
+	ItemScript_Jump,
+	ItemScript_SpinSmash,
+	ItemScript_Multibounce,
+	ItemScript_PowerPlus,
+	ItemScript_DodgeMaster,
+	ItemScript_PowerBounce,
+	ItemScript_SpikeShield,
+	ItemScript_FirstAttack,
+	ItemScript_HPPlus,
+	ItemScript_QuakeHammer,
+	ItemScript_DoubleDip,
+	ItemScript_Jump,
+	ItemScript_SleepStomp,
+	ItemScript_FireShield,
+	ItemScript_QuickChange,
+	ItemScript_DDownPound,
+	ItemScript_DizzyStomp,
+	ItemScript_SmashCharge0,
+	ItemScript_PrettyLucky,
+	ItemScript_FeelingFine,
+	ItemScript_AttackFXA,
+	ItemScript_AllorNothing,
+	ItemScript_HPDrain,
+	ItemScript_JumpCharge0,
+	ItemScript_SlowGo,
+	ItemScript_FPPlus,
+	ItemScript_MegaRush,
+	ItemScript_IcePower,
+	ItemScript_DefendPlus,
+	ItemScript_PayOff,
+	ItemScript_MoneyMoney,
+	ItemScript_ChillOut,
+	ItemScript_HappyHeart,
+	ItemScript_ZapTap,
+	ItemScript_Berserker,
+	ItemScript_RightOn,
+	ItemScript_RunawayPay,
+	ItemScript_Refund,
+	ItemScript_FlowerSaver,
+	ItemScript_TripleDip,
+	ItemScript_HammerThrow,
+	ItemScript_MegaQuake,
+	ItemScript_SmashCharge,
+	ItemScript_JumpCharge,
+	ItemScript_SSmashChg,
+	ItemScript_SJumpChg,
+	ItemScript_PowerRush,
+	ItemScript_AutoJump,
+	ItemScript_AutoSmash,
+	ItemScript_CrazyHeart,
+	ItemScript_LastStand,
+	ItemScript_CloseCall,
+	ItemScript_PUpDDown,
+	ItemScript_LuckyDay,
+	ItemScript_MegaHPDrain,
+	ItemScript_PDownDUp,
+	ItemScript_PowerQuake,
+	ItemScript_AutoMultibounce,
+	ItemScript_FlowerFanatic,
+	ItemScript_HeartFinder,
+	ItemScript_FlowerFinder,
+	ItemScript_SpinAttack,
+	ItemScript_DizzyAttack,
+	ItemScript_ISpy,
+	ItemScript_SpeedySpin,
+	ItemScript_BumpAttack,
+	ItemScript_PowerJump,
+	ItemScript_SuperJump,
+	ItemScript_MegaJump,
+	ItemScript_PowerSmash,
+	ItemScript_SuperSmash,
+	ItemScript_MegaSmash,
+	ItemScript_Jump,
+	ItemScript_Jump,
+	ItemScript_DeepFocus,
+	ItemScript_SuperFocus,
+	ItemScript_ShrinkSmash,
+	ItemScript_Jump,
+	ItemScript_Kaiden,
+	ItemScript_DDownJump,
+	ItemScript_ShrinkStomp,
+	ItemScript_DamageDodge,
+	ItemScript_EarthquakeJump,
+	ItemScript_DeepFocus,
+	ItemScript_SuperFocus,
+	ItemScript_HPPlus,
+	ItemScript_FPPlus,
+	ItemScript_HappyHeart,
+	ItemScript_HappyHeart,
+	ItemScript_FlowerSaver,
+	ItemScript_FlowerSaver,
+	ItemScript_DamageDodge,
+	ItemScript_DamageDodge,
+	ItemScript_PowerPlus,
+	ItemScript_PowerPlus,
+	ItemScript_DefendPlus,
+	ItemScript_DefendPlus,
+	ItemScript_HappyFlower,
+	ItemScript_HappyFlower,
+	ItemScript_HappyFlower,
+	ItemScript_GroupFocus,
+	ItemScript_Peekaboo,
+	ItemScript_AttackFXD,
+	ItemScript_AttackFXB,
+	ItemScript_AttackFXE,
+	ItemScript_AttackFXC,
+	ItemScript_AttackFXF,
+	ItemScript_HPPlus,
+	ItemScript_HPPlus,
+	ItemScript_HPPlus,
+	ItemScript_FPPlus,
+	ItemScript_FPPlus,
+	ItemScript_FPPlus,
+	ItemScript_HealthyHealthy,
+	ItemScript_Jump,
+	ItemScript_Jump,
+	ItemScript_Jump,
+	ItemScript_Jump,
+	ItemScript_Jump,
+	ItemScript_Heart,
+	ItemScript_Coin,
+	ItemScript_HeartPiece,
+	ItemScript_StarPoint,
+	ItemScript_HeartPoint,
+	ItemScript_FlowerPoint,
+	ItemScript_StarPiece,
+	ItemScript_CompleteCake,
+	ItemScript_CakeDone,
+	ItemScript_CakeBaked,
+	ItemScript_CakePan,
+	ItemScript_CakeBatter,
+	ItemScript_CakeBowl,
+	ItemScript_CakeMixed,
+	ItemScript_CakeIcing,
+	ItemScript_CakeBerries,
+	ItemScript_Hammer1,
+	ItemScript_Hammer2,
+	ItemScript_Hammer3,
+	ItemScript_Boots1,
+	ItemScript_Boots2,
+	ItemScript_Boots3,
+	ItemScript_Items,
+	ItemScript_Jump,
+	ItemScript_Jump,
+	ItemScript_Jump,
+	ItemScript_Jump,
+	ItemScript_Jump,
+	ItemScript_Jump,
+	ItemScript_Jump,
+	ItemScript_Jump,
+	ItemScript_Jump,
+	ItemScript_Jump,
+	ItemScript_Jump,
+	ItemScript_Jump,
+	ItemScript_Jump,
+	ItemScript_Jump,
+	ItemScript_Jump,
+	ItemScript_Jump,
+	ItemScript_Jump,
+	ItemScript_Jump,
+	ItemScript_Jump,
+	ItemScript_Jump
 };
 
+/* indexed by itemID */
 s32 gItemIconRasterOffsets[] = {
-0x00000000, 0x00001320, 0x00001540, 0x00001760, 0x00001980, 0x00001BA0, 0x00001DC0, 0x00001FE0, 0x00000000, 0x00000000, 0x00010780, 0x000109A0, 0x00010BC0, 0x00010E00, 0x00011020, 0x0000D860, 0x00009020, 0x00009240, 0x00009F00, 0x00009460, 0x00009680, 0x0000A9A0, 0x0000A560, 0x0000A780, 0x0000A340, 0x00009CE0, 0x000098A0, 0x0000ABC0, 0x0000B220, 0x0000B440, 0x0000CDC0, 0x0000B660, 0x0000B880, 0x0000BAA0, 0x0000B000, 0x0000BCC0, 0x0000BEE0, 0x0000C100, 0x0000C320, 0x00011240, 0x0000DEE0, 0x0000E100, 0x0000E320, 0x0000C540, 0x0000C760, 0x0000C980, 0x0000CBA0, 0x0000DAA0, 0x0000DCC0, 0x0000E540, 0x0000E760, 0x0000E980, 0x0000EBC0, 0x000129C0, 0x000129C0, 0x000129C0, 0x000129C0, 0x000129C0, 0x000129C0, 0x000129C0, 0x000129C0, 0x000129C0, 0x000129C0, 0x000129C0, 0x000129C0, 0x000129C0, 0x000129C0, 0x000129C0, 0x000129C0, 0x000129C0, 0x000129C0, 0x000129C0, 0x000129C0, 0x000129C0, 0x000129C0, 0x000129C0, 0x000129C0, 0x000129C0, 0x000129C0, 0x000129C0, 0x000129C0, 0x000129C0, 0x000129C0, 0x0000A120, 0x000129C0, 0x000129C0, 0x00009AC0, 0x0000CFE0, 0x0000D200, 0x0000D420, 0x0000D640, 0x0000A340, 0x00011AC0, 0x00027B40, 0x00027900, 0x00027D80, 0x00027FC0, 0x00028200, 0x00028440, 0x00028680, 0x000288C0, 0x00028B00, 0x00028D40, 0x0000F440, 0x0000F220, 0x0000F660, 0x0000FCE0, 0x0000B880, 0x0000F880, 0x0000FAA0, 0x000118A0, 0x00011CE0, 0x00011F20, 0x00012140, 0x00012360, 0x00012580, 0x000127A0, 0x00012580, 0x0000EDE0, 0x0000F000, 0x0000FCE0, 0x0000B880, 0x0000B880, 0x00011680, 0x00011460, 0x00000000, 0x00000000, 0x00000000, 0x0002A3C0, 0x0002A600, 0x0002A840, 0x0002ACC0, 0x0002AA80, 0x0002B140, 0x0002AF00, 0x00014700, 0x0002B5C0, 0x00024300, 0x000237C0, 0x0002B800, 0x00023A00, 0x000240C0, 0x00023C40, 0x000291C0, 0x00029640, 0x00029880, 0x00029AC0, 0x00027480, 0x000276C0, 0x00023E80, 0x00014280, 0x000144C0, 0x00014040, 0x00013BC0, 0x00029D00, 0x00024540, 0x00025980, 0x00025740, 0x00024780, 0x000249C0, 0x00024C00, 0x00024E40, 0x00027240, 0x00027000, 0x00026DC0, 0x00025080, 0x000252C0, 0x00025500, 0x00025BC0, 0x00025E00, 0x00026040, 0x00026280, 0x000264C0, 0x00026700, 0x00026940, 0x00026B80, 0x00002420, 0x00002660, 0x000028A0, 0x00002AE0, 0x00002D20, 0x00002F60, 0x000031A0, 0x000033E0, 0x00003620, 0x00003860, 0x00003AA0, 0x00004160, 0x00003CE0, 0x00003F20, 0x000043A0, 0x000045E0, 0x00004820, 0x00004A60, 0x00004CA0, 0x00004EE0, 0x00005120, 0x00005360, 0x000055A0, 0x000057E0, 0x00005A20, 0x00005C60, 0x00005EA0, 0x000060E0, 0x00006320, 0x00006560, 0x000067A0, 0x000069E0, 0x00006C20, 0x00006E60, 0x000070A0, 0x000072E0, 0x00007520, 0x00007760, 0x000079A0, 0x00007BE0, 0x00007E20, 0x00008060, 0x000082A0, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00014DC0, 0x00015000, 0x00015240, 0x00015480, 0x000156C0, 0x00015900, 0x00015B40, 0x00015D80, 0x00015FC0, 0x00016200, 0x00000000, 0x000168C0, 0x000171C0, 0x00020880, 0x00017AC0, 0x00017F40, 0x000183C0, 0x00018600, 0x00018840, 0x00018A80, 0x00018CC0, 0x00018F00, 0x00019140, 0x00019380, 0x000195C0, 0x00019800, 0x00019A40, 0x00019C80, 0x00019EC0, 0x0001A100, 0x0001A340, 0x0001A580, 0x0001A7C0, 0x0001AA00, 0x0001AC40, 0x0001AE80, 0x0001B0C0, 0x0001B300, 0x0001B540, 0x00018180, 0x00016680, 0x00016B00, 0x00017400, 0x00016D40, 0x00017640, 0x0001E000, 0x00017880, 0x00016F80, 0x0001E6C0, 0x0001E240, 0x0001E480, 0x0001CE00, 0x0001C740, 0x0001C980, 0x0001D040, 0x00016440, 0x00017D00, 0x0001B780, 0x0001D280, 0x0001D4C0, 0x0001DB80, 0x0001D700, 0x0001DDC0, 0x0001D940, 0x0001CBC0, 0x0001B9C0, 0x0001BC00, 0x0001BE40, 0x0001C080, 0x0001C2C0, 0x0001C500, 0x00000000, 0x00000000, 0x000201C0, 0x00020400, 0x0001EFC0, 0x00000000, 0x00020640, 0x0001F440, 0x0001F200, 0x0001F680, 0x0001F8C0, 0x000201C0, 0x00020400, 0x00015D80, 0x000195C0, 0x0001A580, 0x0001A580, 0x0001B300, 0x0001B300, 0x0001F680, 0x0001F680, 0x00015240, 0x00015240, 0x00019C80, 0x00019C80, 0x0001FB00, 0x0001FB00, 0x0001FB00, 0x00021600, 0x000213C0, 0x00021840, 0x00021A80, 0x00021CC0, 0x00021F00, 0x00022140, 0x00015D80, 0x00015D80, 0x00015D80, 0x000195C0, 0x000195C0, 0x000195C0, 0x000225C0, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00030A60, 0x0002F5C0, 0x00030CE0, 0x00030E20, 0x0002E900, 0x0002EF60, 0x00030400
+	ICON_key_Gift_raster,
+	ICON_key_gear_boots_1_raster,
+	ICON_key_gear_boots_2_raster,
+	ICON_key_gear_boots_3_raster,
+	ICON_key_gear_hammer_1_raster,
+	ICON_key_gear_hammer_2_raster,
+	ICON_key_gear_hammer_3_raster,
+	ICON_key_gear_lucky_star_raster,
+	ICON_key_Gift_raster,
+	ICON_key_Gift_raster,
+	ICON_key_dojo_card_1_raster,
+	ICON_key_dojo_card_2_raster,
+	ICON_key_dojo_card_3_raster,
+	ICON_key_dojo_card_4_raster,
+	ICON_key_dojo_card_5_raster,
+	ICON_key_ultra_stone_raster,
+	ICON_key_key_koopa_fortress_raster,
+	ICON_key_key_ruins_raster,
+	ICON_key_pulse_stone_raster,
+	ICON_key_key_tubba_castle_raster,
+	ICON_key_key_ice_palace_raster,
+	ICON_key_ruins_stone_moon_raster,
+	ICON_key_ruins_stone_pyramid_raster,
+	ICON_key_ruins_stone_star_raster,
+	ICON_key_vase_raster,
+	ICON_key_kooper_shell_raster,
+	ICON_key_key_bowser_castle_raster,
+	ICON_key_forest_pass_raster,
+	ICON_key_boo_weight_raster,
+	ICON_key_boo_portrait_raster,
+	ICON_key_crystal_berry_raster,
+	ICON_key_mystic_key_raster,
+	ICON_key_key_storeroom_raster,
+	ICON_key_toybox_train_raster,
+	ICON_key_boo_record_raster,
+	ICON_key_frying_pan_raster,
+	ICON_key_dictionary_raster,
+	ICON_key_mystery_note_raster,
+	ICON_key_suspicious_note_raster,
+	ICON_key_crystal_ball_raster,
+	ICON_key_screwdriver_raster,
+	ICON_key_book_cook_raster,
+	ICON_key_jade_raven_raster,
+	ICON_key_seed_1_raster,
+	ICON_key_seed_2_raster,
+	ICON_key_seed_3_raster,
+	ICON_key_seed_4_raster,
+	ICON_key_toad_doll_raster,
+	ICON_key_calculator_raster,
+	ICON_key_snowman_bucket_raster,
+	ICON_key_snowman_scarf_raster,
+	ICON_key_key_red_raster,
+	ICON_key_key_blue_raster,
+	ICON_key_Letter_raster,
+	ICON_key_Letter_raster,
+	ICON_key_Letter_raster,
+	ICON_key_Letter_raster,
+	ICON_key_Letter_raster,
+	ICON_key_Letter_raster,
+	ICON_key_Letter_raster,
+	ICON_key_Letter_raster,
+	ICON_key_Letter_raster,
+	ICON_key_Letter_raster,
+	ICON_key_Letter_raster,
+	ICON_key_Letter_raster,
+	ICON_key_Letter_raster,
+	ICON_key_Letter_raster,
+	ICON_key_Letter_raster,
+	ICON_key_Letter_raster,
+	ICON_key_Letter_raster,
+	ICON_key_Letter_raster,
+	ICON_key_Letter_raster,
+	ICON_key_Letter_raster,
+	ICON_key_Letter_raster,
+	ICON_key_Letter_raster,
+	ICON_key_Letter_raster,
+	ICON_key_Letter_raster,
+	ICON_key_Letter_raster,
+	ICON_key_Letter_raster,
+	ICON_key_Letter_raster,
+	ICON_key_Letter_raster,
+	ICON_key_Letter_raster,
+	ICON_key_Letter_raster,
+	ICON_key_artifact_raster,
+	ICON_key_Letter_raster,
+	ICON_key_Letter_raster,
+	ICON_key_dolly_raster,
+	ICON_key_water_stone_raster,
+	ICON_key_magic_bean_raster,
+	ICON_key_fertile_soil_raster,
+	ICON_key_miracle_water_raster,
+	ICON_key_vase_raster,
+	ICON_key_koot_the_tape_raster,
+	ICON_peach_BakingSugar_raster,
+	ICON_peach_BakingSalt_raster,
+	ICON_peach_BakingEgg_raster,
+	ICON_peach_BakingCream_raster,
+	ICON_peach_BakingStrawberry_raster,
+	ICON_peach_BakingButter_raster,
+	ICON_peach_BakingCleanser_raster,
+	ICON_peach_BakingWater_raster,
+	ICON_peach_BakingFlour_raster,
+	ICON_peach_BakingMilk_raster,
+	ICON_key_book_lyrics_raster,
+	ICON_key_book_melody_raster,
+	ICON_key_mailbag_raster,
+	ICON_key_key_peach_raster,
+	ICON_key_key_storeroom_raster,
+	ICON_key_star_stone_raster,
+	ICON_peach_sneaky_parasol_raster,
+	ICON_key_koot_book_raster,
+	ICON_key_koot_autograph_luigi_raster,
+	ICON_key_koot_empty_wallet_raster,
+	ICON_key_koot_autograph_merluvlee_raster,
+	ICON_key_koot_shell_raster,
+	ICON_key_koot_photo_raster,
+	ICON_key_koot_glasses_raster,
+	ICON_key_koot_photo_raster,
+	ICON_key_koot_package_raster,
+	ICON_key_koot_red_jar_raster,
+	ICON_key_key_peach_raster,
+	ICON_key_key_storeroom_raster,
+	ICON_key_key_storeroom_raster,
+	ICON_key_card_silver_raster,
+	ICON_key_card_gold_raster,
+	ICON_key_Gift_raster,
+	ICON_key_Gift_raster,
+	ICON_key_Gift_raster,
+	ICON_battle_FireFlower_raster,
+	ICON_battle_SnowmanDoll_raster,
+	ICON_battle_ThunderRage_raster,
+	ICON_battle_ShootingStar_raster,
+	ICON_battle_ThunderBolt_raster,
+	ICON_battle_Pebble_raster,
+	ICON_battle_DustyHammer_raster,
+	ICON_battle_InsecticideHerb_raster,
+	ICON_battle_StoneCap_raster,
+	ICON_food_TastyTonic_raster,
+	ICON_food_Mushroom_raster,
+	ICON_battle_VoltShroom_raster,
+	ICON_food_SuperShroom_raster,
+	ICON_food_DriedShroom_raster,
+	ICON_food_UltraShroom_raster,
+	ICON_battle_SleepySheep_raster,
+	ICON_battle_POWBlock_raster,
+	ICON_battle_HustleDrink_raster,
+	ICON_battle_StopWatch_raster,
+	ICON_food_WhackasBump_raster,
+	ICON_food_Apple_raster,
+	ICON_food_LifeShroom_raster,
+	ICON_battle_Mystery_raster,
+	ICON_battle_RepelGel_raster,
+	ICON_battle_FrightJar_raster,
+	ICON_battle_PleaseComeBack_raster,
+	ICON_battle_DizzyDial_raster,
+	ICON_food_SuperSoda_raster,
+	ICON_food_Lemon_raster,
+	ICON_food_Lime_raster,
+	ICON_food_BlueBerry_raster,
+	ICON_food_RedBerry_raster,
+	ICON_food_YellowBerry_raster,
+	ICON_food_BubbleBerry_raster,
+	ICON_food_JamminJelly_raster,
+	ICON_food_MapleSyrup_raster,
+	ICON_food_HoneySyrup_raster,
+	ICON_food_Goomnut_raster,
+	ICON_food_KoopaLeaf_raster,
+	ICON_food_DriedPasta_raster,
+	ICON_food_DriedFruit_raster,
+	ICON_food_StrangeLeaf_raster,
+	ICON_food_CakeMix_raster,
+	ICON_food_Egg_raster,
+	ICON_food_Coconut_raster,
+	ICON_food_Melon_raster,
+	ICON_food_StinkyHerb_raster,
+	ICON_food_IcedPotato_raster,
+	ICON_food_SpicySoup_raster,
+	ICON_food_ApplePie_raster,
+	ICON_food_HoneyUltra_raster,
+	ICON_food_MapleUltra_raster,
+	ICON_food_JellyUltra_raster,
+	ICON_food_Koopasta_raster,
+	ICON_food_FriedShroom_raster,
+	ICON_food_ShroomCake_raster,
+	ICON_food_ShroomSteak_raster,
+	ICON_food_HotShroom_raster,
+	ICON_food_SweetShroom_raster,
+	ICON_food_YummyMeal_raster,
+	ICON_food_HealthyJuice_raster,
+	ICON_food_BlandMeal_raster,
+	ICON_food_DeluxeFeast_raster,
+	ICON_food_SpecialShake_raster,
+	ICON_food_BigCookie_raster,
+	ICON_food_Cake_raster,
+	ICON_food_Mistake_raster,
+	ICON_food_KoopaTea_raster,
+	ICON_food_HoneySuper_raster,
+	ICON_food_MapleSuper_raster,
+	ICON_food_JellySuper_raster,
+	ICON_food_Spaghetti_raster,
+	ICON_food_EggMissile_raster,
+	ICON_food_FriedEgg_raster,
+	ICON_food_HoneyShroom_raster,
+	ICON_food_HoneyCandy_raster,
+	ICON_food_ElectroPop_raster,
+	ICON_food_FirePop_raster,
+	ICON_food_LimeCandy_raster,
+	ICON_food_CocoPop_raster,
+	ICON_food_LemonCandy_raster,
+	ICON_food_JellyPop_raster,
+	ICON_food_StrangeCake_raster,
+	ICON_food_KookyCookie_raster,
+	ICON_food_FrozenFries_raster,
+	ICON_food_PotatoSalad_raster,
+	ICON_food_NuttyCake_raster,
+	ICON_food_MapleShroom_raster,
+	ICON_food_BoiledEgg_raster,
+	ICON_food_YoshiCookie_raster,
+	ICON_food_JellyShroom_raster,
+	ICON_key_Gift_raster,
+	ICON_key_Gift_raster,
+	ICON_key_Gift_raster,
+	ICON_key_Gift_raster,
+	ICON_key_Gift_raster,
+	ICON_badge_SpinSmash_raster,
+	ICON_badge_Multibounce_raster,
+	ICON_badge_PowerPlus_raster,
+	ICON_badge_DodgeMaster_raster,
+	ICON_badge_PowerBounce_raster,
+	ICON_badge_SpikeShield_raster,
+	ICON_badge_FirstAttack_raster,
+	ICON_badge_HPPlus_raster,
+	ICON_badge_QuakeHammer_raster,
+	ICON_badge_DoubleDip_raster,
+	ICON_key_Gift_raster,
+	ICON_badge_SleepStomp_raster,
+	ICON_badge_FireShield_raster,
+	ICON_badge_QuickChange_raster,
+	ICON_badge_DDownPound_raster,
+	ICON_badge_DizzyStomp_raster,
+	ICON_badge_SmashCharge0_raster,
+	ICON_badge_PrettyLucky_raster,
+	ICON_badge_FeelingFine_raster,
+	ICON_badge_AttackFXA_raster,
+	ICON_badge_AllorNothing_raster,
+	ICON_badge_HPDrain_raster,
+	ICON_badge_JumpCharge0_raster,
+	ICON_badge_SlowGo_raster,
+	ICON_badge_FPPlus_raster,
+	ICON_badge_MegaRush_raster,
+	ICON_badge_IcePower_raster,
+	ICON_badge_DefendPlus_raster,
+	ICON_badge_PayOff_raster,
+	ICON_badge_MoneyMoney_raster,
+	ICON_badge_ChillOut_raster,
+	ICON_badge_HappyHeart_raster,
+	ICON_badge_ZapTap_raster,
+	ICON_badge_Berserker_raster,
+	ICON_badge_RightOn_raster,
+	ICON_badge_RunawayPay_raster,
+	ICON_badge_Refund_raster,
+	ICON_badge_FlowerSaver_raster,
+	ICON_badge_TripleDip_raster,
+	ICON_badge_HammerThrow_raster,
+	ICON_badge_MegaQuake_raster,
+	ICON_badge_SmashCharge_raster,
+	ICON_badge_JumpCharge_raster,
+	ICON_badge_SSmashChg_raster,
+	ICON_badge_SJumpChg_raster,
+	ICON_badge_PowerRush_raster,
+	ICON_badge_AutoJump_raster,
+	ICON_badge_AutoSmash_raster,
+	ICON_badge_CrazyHeart_raster,
+	ICON_badge_LastStand_raster,
+	ICON_badge_CloseCall_raster,
+	ICON_badge_PUpDDown_raster,
+	ICON_badge_LuckyDay_raster,
+	ICON_badge_MegaHPDrain_raster,
+	ICON_badge_PDownDUp_raster,
+	ICON_badge_PowerQuake_raster,
+	ICON_badge_AutoMultibounce_raster,
+	ICON_badge_FlowerFanatic_raster,
+	ICON_badge_HeartFinder_raster,
+	ICON_badge_FlowerFinder_raster,
+	ICON_badge_SpinAttack_raster,
+	ICON_badge_DizzyAttack_raster,
+	ICON_badge_ISpy_raster,
+	ICON_badge_SpeedySpin_raster,
+	ICON_badge_BumpAttack_raster,
+	ICON_badge_PowerJump_raster,
+	ICON_badge_SuperJump_raster,
+	ICON_badge_MegaJump_raster,
+	ICON_badge_PowerSmash_raster,
+	ICON_badge_SuperSmash_raster,
+	ICON_badge_MegaSmash_raster,
+	ICON_key_Gift_raster,
+	ICON_key_Gift_raster,
+	ICON_badge_DeepFocus_raster,
+	ICON_badge_SuperFocus_raster,
+	ICON_badge_ShrinkSmash_raster,
+	ICON_key_Gift_raster,
+	ICON_badge_Kaiden_raster,
+	ICON_badge_DDownJump_raster,
+	ICON_badge_ShrinkStomp_raster,
+	ICON_badge_DamageDodge_raster,
+	ICON_badge_EarthquakeJump_raster,
+	ICON_badge_DeepFocus_raster,
+	ICON_badge_SuperFocus_raster,
+	ICON_badge_HPPlus_raster,
+	ICON_badge_FPPlus_raster,
+	ICON_badge_HappyHeart_raster,
+	ICON_badge_HappyHeart_raster,
+	ICON_badge_FlowerSaver_raster,
+	ICON_badge_FlowerSaver_raster,
+	ICON_badge_DamageDodge_raster,
+	ICON_badge_DamageDodge_raster,
+	ICON_badge_PowerPlus_raster,
+	ICON_badge_PowerPlus_raster,
+	ICON_badge_DefendPlus_raster,
+	ICON_badge_DefendPlus_raster,
+	ICON_badge_HappyFlower_raster,
+	ICON_badge_HappyFlower_raster,
+	ICON_badge_HappyFlower_raster,
+	ICON_badge_GroupFocus_raster,
+	ICON_badge_Peekaboo_raster,
+	ICON_badge_AttackFXD_raster,
+	ICON_badge_AttackFXB_raster,
+	ICON_badge_AttackFXE_raster,
+	ICON_badge_AttackFXC_raster,
+	ICON_badge_AttackFXF_raster,
+	ICON_badge_HPPlus_raster,
+	ICON_badge_HPPlus_raster,
+	ICON_badge_HPPlus_raster,
+	ICON_badge_FPPlus_raster,
+	ICON_badge_FPPlus_raster,
+	ICON_badge_FPPlus_raster,
+	ICON_badge_HealthyHealthy_raster,
+	ICON_key_Gift_raster,
+	ICON_key_Gift_raster,
+	ICON_key_Gift_raster,
+	ICON_key_Gift_raster,
+	ICON_key_Gift_raster,
+	ICON_anim_heart_0_raster,
+	ICON_anim_coin_0_raster,
+	ICON_anim_heart_piece_raster,
+	ICON_anim_sp_0_raster,
+	ICON_anim_hp_0_raster,
+	ICON_anim_fp_0_raster,
+	ICON_anim_star_piece_0_raster
 };
 
+/* indexed by itemID */
 s32 gItemIconPaletteOffsets[] = {
-0x00000200, 0x00001520, 0x00001740, 0x00001960, 0x00001B80, 0x00001DA0, 0x00001FC0, 0x000021E0, 0x00000200, 0x00000200, 0x00010980, 0x00010BA0, 0x00010DC0, 0x00011000, 0x00011220, 0x0000DA60, 0x00009220, 0x00009440, 0x0000A100, 0x00009660, 0x00009880, 0x0000ABA0, 0x0000A760, 0x0000A980, 0x0000A540, 0x00009EE0, 0x00009AA0, 0x0000ADC0, 0x0000B420, 0x0000B640, 0x0000CFC0, 0x0000B860, 0x0000BA80, 0x0000BCA0, 0x0000B200, 0x0000BEC0, 0x0000C0E0, 0x0000C300, 0x0000C520, 0x00011440, 0x0000E0E0, 0x0000E300, 0x0000E520, 0x0000C740, 0x0000C960, 0x0000CB80, 0x0000CDA0, 0x0000DCA0, 0x0000DEC0, 0x0000E740, 0x0000E960, 0x0000EB80, 0x0000EDC0, 0x00012BC0, 0x00012BC0, 0x00012BC0, 0x00012BC0, 0x00012BC0, 0x00012BC0, 0x00012BC0, 0x00012BC0, 0x00012BC0, 0x00012BC0, 0x00012BC0, 0x00012BC0, 0x00012BC0, 0x00012BC0, 0x00012BC0, 0x00012BC0, 0x00012BC0, 0x00012BC0, 0x00012BC0, 0x00012BC0, 0x00012BC0, 0x00012BC0, 0x00012BC0, 0x00012BC0, 0x00012BC0, 0x00012BC0, 0x00012BC0, 0x00012BC0, 0x00012BC0, 0x00012BC0, 0x0000A320, 0x00012BC0, 0x00012BC0, 0x00009CC0, 0x0000D1E0, 0x0000D400, 0x0000D620, 0x0000D840, 0x0000A540, 0x00011CC0, 0x00027D40, 0x00027B00, 0x00027F80, 0x000281C0, 0x00028400, 0x00028640, 0x00028880, 0x00028AC0, 0x00028D00, 0x00028F40, 0x0000F640, 0x0000F420, 0x0000F860, 0x0000FEE0, 0x0000BA80, 0x0000FA80, 0x0000FCA0, 0x00011AA0, 0x00011EE0, 0x00012120, 0x00012340, 0x00012560, 0x00012780, 0x000129A0, 0x00012780, 0x0000EFE0, 0x0000F200, 0x0000FEE0, 0x0000BA80, 0x0000BA80, 0x00011880, 0x00011660, 0x00000200, 0x00000200, 0x00000200, 0x0002A5C0, 0x0002A800, 0x0002AA40, 0x0002AEC0, 0x0002AC80, 0x0002B340, 0x0002B100, 0x00014900, 0x0002B7C0, 0x00024500, 0x000239C0, 0x0002BA00, 0x00023C00, 0x000242C0, 0x00023E40, 0x000293C0, 0x00029840, 0x00029A80, 0x00029CC0, 0x00027680, 0x000278C0, 0x00024080, 0x00014480, 0x000146C0, 0x00014240, 0x00013DC0, 0x00029F00, 0x00024740, 0x00025B80, 0x00025940, 0x00024980, 0x00024BC0, 0x00024E00, 0x00025040, 0x00027440, 0x00027200, 0x00026FC0, 0x00025280, 0x000254C0, 0x00025700, 0x00025DC0, 0x00026000, 0x00026240, 0x00026480, 0x000266C0, 0x00026900, 0x00026B40, 0x00026D80, 0x00002620, 0x00002860, 0x00002AA0, 0x00002CE0, 0x00002F20, 0x00003160, 0x000033A0, 0x000035E0, 0x00003820, 0x00003A60, 0x00003CA0, 0x00004360, 0x00003EE0, 0x00004120, 0x000045A0, 0x000047E0, 0x00004A20, 0x00004C60, 0x00004EA0, 0x000050E0, 0x00005320, 0x00005560, 0x000057A0, 0x000059E0, 0x00005C20, 0x00005E60, 0x000060A0, 0x000062E0, 0x00006520, 0x00006760, 0x000069A0, 0x00006BE0, 0x00006E20, 0x00007060, 0x000072A0, 0x000074E0, 0x00007720, 0x00007960, 0x00007BA0, 0x00007DE0, 0x00008020, 0x00008260, 0x000084A0, 0x00000200, 0x00000200, 0x00000200, 0x00000200, 0x00000200, 0x00014FC0, 0x00015200, 0x00015440, 0x00015680, 0x000158C0, 0x00015B00, 0x00015D40, 0x00015F80, 0x000161C0, 0x00016400, 0x00000200, 0x00016AC0, 0x000173C0, 0x00020A80, 0x00017CC0, 0x00018140, 0x000185C0, 0x00018800, 0x00018A40, 0x00018C80, 0x00018EC0, 0x00019100, 0x00019340, 0x00019580, 0x000197C0, 0x00019A00, 0x00019C40, 0x00019E80, 0x0001A0C0, 0x0001A300, 0x0001A540, 0x0001A780, 0x0001A9C0, 0x0001AC00, 0x0001AE40, 0x0001B080, 0x0001B2C0, 0x0001B500, 0x0001B740, 0x00018380, 0x00016880, 0x00016D00, 0x00017600, 0x00016F40, 0x00017840, 0x0001E200, 0x00017A80, 0x00017180, 0x0001E8C0, 0x0001E440, 0x0001E680, 0x0001D000, 0x0001C940, 0x0001CB80, 0x0001D240, 0x00016640, 0x00017F00, 0x0001B980, 0x0001D480, 0x0001D6C0, 0x0001DD80, 0x0001D900, 0x0001DFC0, 0x0001DB40, 0x0001CDC0, 0x0001BBC0, 0x0001BE00, 0x0001C040, 0x0001C280, 0x0001C4C0, 0x0001C700, 0x00000200, 0x00000200, 0x000203C0, 0x00020600, 0x0001F1C0, 0x00000200, 0x00020840, 0x0001F640, 0x0001F400, 0x0001F880, 0x0001FAC0, 0x000203C0, 0x00020600, 0x00015F80, 0x000197C0, 0x0001A780, 0x0001A780, 0x0001B500, 0x0001B500, 0x0001F880, 0x0001F880, 0x00015440, 0x00015440, 0x00019E80, 0x00019E80, 0x0001FD00, 0x0001FD00, 0x0001FD00, 0x00021800, 0x000215C0, 0x00021A40, 0x00021C80, 0x00021EC0, 0x00022100, 0x00022340, 0x00015F80, 0x00015F80, 0x00015F80, 0x000197C0, 0x000197C0, 0x000197C0, 0x000227C0, 0x00000200, 0x00000200, 0x00000200, 0x00000200, 0x00000200, 0x00030B80, 0x0002F6E0, 0x00030E00, 0x00030F40, 0x0002EB00, 0x0002F160, 0x00030600
+	ICON_key_Gift_palette,
+	ICON_key_gear_boots_1_palette,
+	ICON_key_gear_boots_2_palette,
+	ICON_key_gear_boots_3_palette,
+	ICON_key_gear_hammer_1_palette,
+	ICON_key_gear_hammer_2_palette,
+	ICON_key_gear_hammer_3_palette,
+	ICON_key_gear_lucky_star_palette,
+	ICON_key_Gift_palette,
+	ICON_key_Gift_palette,
+	ICON_key_dojo_card_1_palette,
+	ICON_key_dojo_card_2_palette,
+	ICON_key_dojo_card_3_palette,
+	ICON_key_dojo_card_4_palette,
+	ICON_key_dojo_card_5_palette,
+	ICON_key_ultra_stone_palette,
+	ICON_key_key_koopa_fortress_palette,
+	ICON_key_key_ruins_palette,
+	ICON_key_pulse_stone_palette,
+	ICON_key_key_tubba_castle_palette,
+	ICON_key_key_ice_palace_palette,
+	ICON_key_ruins_stone_moon_palette,
+	ICON_key_ruins_stone_pyramid_palette,
+	ICON_key_ruins_stone_star_palette,
+	ICON_key_vase_palette,
+	ICON_key_kooper_shell_palette,
+	ICON_key_key_bowser_castle_palette,
+	ICON_key_forest_pass_palette,
+	ICON_key_boo_weight_palette,
+	ICON_key_boo_portrait_palette,
+	ICON_key_crystal_berry_palette,
+	ICON_key_mystic_key_palette,
+	ICON_key_key_storeroom_palette,
+	ICON_key_toybox_train_palette,
+	ICON_key_boo_record_palette,
+	ICON_key_frying_pan_palette,
+	ICON_key_dictionary_palette,
+	ICON_key_mystery_note_palette,
+	ICON_key_suspicious_note_palette,
+	ICON_key_crystal_ball_palette,
+	ICON_key_screwdriver_palette,
+	ICON_key_book_cook_palette,
+	ICON_key_jade_raven_palette,
+	ICON_key_seed_1_palette,
+	ICON_key_seed_2_palette,
+	ICON_key_seed_3_palette,
+	ICON_key_seed_4_palette,
+	ICON_key_toad_doll_palette,
+	ICON_key_calculator_palette,
+	ICON_key_snowman_bucket_palette,
+	ICON_key_snowman_scarf_palette,
+	ICON_key_key_red_palette,
+	ICON_key_key_blue_palette,
+	ICON_key_Letter_palette,
+	ICON_key_Letter_palette,
+	ICON_key_Letter_palette,
+	ICON_key_Letter_palette,
+	ICON_key_Letter_palette,
+	ICON_key_Letter_palette,
+	ICON_key_Letter_palette,
+	ICON_key_Letter_palette,
+	ICON_key_Letter_palette,
+	ICON_key_Letter_palette,
+	ICON_key_Letter_palette,
+	ICON_key_Letter_palette,
+	ICON_key_Letter_palette,
+	ICON_key_Letter_palette,
+	ICON_key_Letter_palette,
+	ICON_key_Letter_palette,
+	ICON_key_Letter_palette,
+	ICON_key_Letter_palette,
+	ICON_key_Letter_palette,
+	ICON_key_Letter_palette,
+	ICON_key_Letter_palette,
+	ICON_key_Letter_palette,
+	ICON_key_Letter_palette,
+	ICON_key_Letter_palette,
+	ICON_key_Letter_palette,
+	ICON_key_Letter_palette,
+	ICON_key_Letter_palette,
+	ICON_key_Letter_palette,
+	ICON_key_Letter_palette,
+	ICON_key_Letter_palette,
+	ICON_key_artifact_palette,
+	ICON_key_Letter_palette,
+	ICON_key_Letter_palette,
+	ICON_key_dolly_palette,
+	ICON_key_water_stone_palette,
+	ICON_key_magic_bean_palette,
+	ICON_key_fertile_soil_palette,
+	ICON_key_miracle_water_palette,
+	ICON_key_vase_palette,
+	ICON_key_koot_the_tape_palette,
+	ICON_peach_BakingSugar_palette,
+	ICON_peach_BakingSalt_palette,
+	ICON_peach_BakingEgg_palette,
+	ICON_peach_BakingCream_palette,
+	ICON_peach_BakingStrawberry_palette,
+	ICON_peach_BakingButter_palette,
+	ICON_peach_BakingCleanser_palette,
+	ICON_peach_BakingWater_palette,
+	ICON_peach_BakingFlour_palette,
+	ICON_peach_BakingMilk_palette,
+	ICON_key_book_lyrics_palette,
+	ICON_key_book_melody_palette,
+	ICON_key_mailbag_palette,
+	ICON_key_key_peach_palette,
+	ICON_key_key_storeroom_palette,
+	ICON_key_star_stone_palette,
+	ICON_peach_sneaky_parasol_palette,
+	ICON_key_koot_book_palette,
+	ICON_key_koot_autograph_luigi_palette,
+	ICON_key_koot_empty_wallet_palette,
+	ICON_key_koot_autograph_merluvlee_palette,
+	ICON_key_koot_shell_palette,
+	ICON_key_koot_photo_palette,
+	ICON_key_koot_glasses_palette,
+	ICON_key_koot_photo_palette,
+	ICON_key_koot_package_palette,
+	ICON_key_koot_red_jar_palette,
+	ICON_key_key_peach_palette,
+	ICON_key_key_storeroom_palette,
+	ICON_key_key_storeroom_palette,
+	ICON_key_card_silver_palette,
+	ICON_key_card_gold_palette,
+	ICON_key_Gift_palette,
+	ICON_key_Gift_palette,
+	ICON_key_Gift_palette,
+	ICON_battle_FireFlower_palette,
+	ICON_battle_SnowmanDoll_palette,
+	ICON_battle_ThunderRage_palette,
+	ICON_battle_ShootingStar_palette,
+	ICON_battle_ThunderBolt_palette,
+	ICON_battle_Pebble_palette,
+	ICON_battle_DustyHammer_palette,
+	ICON_battle_InsecticideHerb_palette,
+	ICON_battle_StoneCap_palette,
+	ICON_food_TastyTonic_palette,
+	ICON_food_Mushroom_palette,
+	ICON_battle_VoltShroom_palette,
+	ICON_food_SuperShroom_palette,
+	ICON_food_DriedShroom_palette,
+	ICON_food_UltraShroom_palette,
+	ICON_battle_SleepySheep_palette,
+	ICON_battle_POWBlock_palette,
+	ICON_battle_HustleDrink_palette,
+	ICON_battle_StopWatch_palette,
+	ICON_food_WhackasBump_palette,
+	ICON_food_Apple_palette,
+	ICON_food_LifeShroom_palette,
+	ICON_battle_Mystery_palette,
+	ICON_battle_RepelGel_palette,
+	ICON_battle_FrightJar_palette,
+	ICON_battle_PleaseComeBack_palette,
+	ICON_battle_DizzyDial_palette,
+	ICON_food_SuperSoda_palette,
+	ICON_food_Lemon_palette,
+	ICON_food_Lime_palette,
+	ICON_food_BlueBerry_palette,
+	ICON_food_RedBerry_palette,
+	ICON_food_YellowBerry_palette,
+	ICON_food_BubbleBerry_palette,
+	ICON_food_JamminJelly_palette,
+	ICON_food_MapleSyrup_palette,
+	ICON_food_HoneySyrup_palette,
+	ICON_food_Goomnut_palette,
+	ICON_food_KoopaLeaf_palette,
+	ICON_food_DriedPasta_palette,
+	ICON_food_DriedFruit_palette,
+	ICON_food_StrangeLeaf_palette,
+	ICON_food_CakeMix_palette,
+	ICON_food_Egg_palette,
+	ICON_food_Coconut_palette,
+	ICON_food_Melon_palette,
+	ICON_food_StinkyHerb_palette,
+	ICON_food_IcedPotato_palette,
+	ICON_food_SpicySoup_palette,
+	ICON_food_ApplePie_palette,
+	ICON_food_HoneyUltra_palette,
+	ICON_food_MapleUltra_palette,
+	ICON_food_JellyUltra_palette,
+	ICON_food_Koopasta_palette,
+	ICON_food_FriedShroom_palette,
+	ICON_food_ShroomCake_palette,
+	ICON_food_ShroomSteak_palette,
+	ICON_food_HotShroom_palette,
+	ICON_food_SweetShroom_palette,
+	ICON_food_YummyMeal_palette,
+	ICON_food_HealthyJuice_palette,
+	ICON_food_BlandMeal_palette,
+	ICON_food_DeluxeFeast_palette,
+	ICON_food_SpecialShake_palette,
+	ICON_food_BigCookie_palette,
+	ICON_food_Cake_palette,
+	ICON_food_Mistake_palette,
+	ICON_food_KoopaTea_palette,
+	ICON_food_HoneySuper_palette,
+	ICON_food_MapleSuper_palette,
+	ICON_food_JellySuper_palette,
+	ICON_food_Spaghetti_palette,
+	ICON_food_EggMissile_palette,
+	ICON_food_FriedEgg_palette,
+	ICON_food_HoneyShroom_palette,
+	ICON_food_HoneyCandy_palette,
+	ICON_food_ElectroPop_palette,
+	ICON_food_FirePop_palette,
+	ICON_food_LimeCandy_palette,
+	ICON_food_CocoPop_palette,
+	ICON_food_LemonCandy_palette,
+	ICON_food_JellyPop_palette,
+	ICON_food_StrangeCake_palette,
+	ICON_food_KookyCookie_palette,
+	ICON_food_FrozenFries_palette,
+	ICON_food_PotatoSalad_palette,
+	ICON_food_NuttyCake_palette,
+	ICON_food_MapleShroom_palette,
+	ICON_food_BoiledEgg_palette,
+	ICON_food_YoshiCookie_palette,
+	ICON_food_JellyShroom_palette,
+	ICON_key_Gift_palette,
+	ICON_key_Gift_palette,
+	ICON_key_Gift_palette,
+	ICON_key_Gift_palette,
+	ICON_key_Gift_palette,
+	ICON_badge_SpinSmash_palette,
+	ICON_badge_Multibounce_palette,
+	ICON_badge_PowerPlus_palette,
+	ICON_badge_DodgeMaster_palette,
+	ICON_badge_PowerBounce_palette,
+	ICON_badge_SpikeShield_palette,
+	ICON_badge_FirstAttack_palette,
+	ICON_badge_HPPlus_palette,
+	ICON_badge_QuakeHammer_palette,
+	ICON_badge_DoubleDip_palette,
+	ICON_key_Gift_palette,
+	ICON_badge_SleepStomp_palette,
+	ICON_badge_FireShield_palette,
+	ICON_badge_QuickChange_palette,
+	ICON_badge_DDownPound_palette,
+	ICON_badge_DizzyStomp_palette,
+	ICON_badge_SmashCharge0_palette,
+	ICON_badge_PrettyLucky_palette,
+	ICON_badge_FeelingFine_palette,
+	ICON_badge_AttackFXA_palette,
+	ICON_badge_AllorNothing_palette,
+	ICON_badge_HPDrain_palette,
+	ICON_badge_JumpCharge0_palette,
+	ICON_badge_SlowGo_palette,
+	ICON_badge_FPPlus_palette,
+	ICON_badge_MegaRush_palette,
+	ICON_badge_IcePower_palette,
+	ICON_badge_DefendPlus_palette,
+	ICON_badge_PayOff_palette,
+	ICON_badge_MoneyMoney_palette,
+	ICON_badge_ChillOut_palette,
+	ICON_badge_HappyHeart_palette,
+	ICON_badge_ZapTap_palette,
+	ICON_badge_Berserker_palette,
+	ICON_badge_RightOn_palette,
+	ICON_badge_RunawayPay_palette,
+	ICON_badge_Refund_palette,
+	ICON_badge_FlowerSaver_palette,
+	ICON_badge_TripleDip_palette,
+	ICON_badge_HammerThrow_palette,
+	ICON_badge_MegaQuake_palette,
+	ICON_badge_SmashCharge_palette,
+	ICON_badge_JumpCharge_palette,
+	ICON_badge_SSmashChg_palette,
+	ICON_badge_SJumpChg_palette,
+	ICON_badge_PowerRush_palette,
+	ICON_badge_AutoJump_palette,
+	ICON_badge_AutoSmash_palette,
+	ICON_badge_CrazyHeart_palette,
+	ICON_badge_LastStand_palette,
+	ICON_badge_CloseCall_palette,
+	ICON_badge_PUpDDown_palette,
+	ICON_badge_LuckyDay_palette,
+	ICON_badge_MegaHPDrain_palette,
+	ICON_badge_PDownDUp_palette,
+	ICON_badge_PowerQuake_palette,
+	ICON_badge_AutoMultibounce_palette,
+	ICON_badge_FlowerFanatic_palette,
+	ICON_badge_HeartFinder_palette,
+	ICON_badge_FlowerFinder_palette,
+	ICON_badge_SpinAttack_palette,
+	ICON_badge_DizzyAttack_palette,
+	ICON_badge_ISpy_palette,
+	ICON_badge_SpeedySpin_palette,
+	ICON_badge_BumpAttack_palette,
+	ICON_badge_PowerJump_palette,
+	ICON_badge_SuperJump_palette,
+	ICON_badge_MegaJump_palette,
+	ICON_badge_PowerSmash_palette,
+	ICON_badge_SuperSmash_palette,
+	ICON_badge_MegaSmash_palette,
+	ICON_key_Gift_palette,
+	ICON_key_Gift_palette,
+	ICON_badge_DeepFocus_palette,
+	ICON_badge_SuperFocus_palette,
+	ICON_badge_ShrinkSmash_palette,
+	ICON_key_Gift_palette,
+	ICON_badge_Kaiden_palette,
+	ICON_badge_DDownJump_palette,
+	ICON_badge_ShrinkStomp_palette,
+	ICON_badge_DamageDodge_palette,
+	ICON_badge_EarthquakeJump_palette,
+	ICON_badge_DeepFocus_palette,
+	ICON_badge_SuperFocus_palette,
+	ICON_badge_HPPlus_palette,
+	ICON_badge_FPPlus_palette,
+	ICON_badge_HappyHeart_palette,
+	ICON_badge_HappyHeart_palette,
+	ICON_badge_FlowerSaver_palette,
+	ICON_badge_FlowerSaver_palette,
+	ICON_badge_DamageDodge_palette,
+	ICON_badge_DamageDodge_palette,
+	ICON_badge_PowerPlus_palette,
+	ICON_badge_PowerPlus_palette,
+	ICON_badge_DefendPlus_palette,
+	ICON_badge_DefendPlus_palette,
+	ICON_badge_HappyFlower_palette,
+	ICON_badge_HappyFlower_palette,
+	ICON_badge_HappyFlower_palette,
+	ICON_badge_GroupFocus_palette,
+	ICON_badge_Peekaboo_palette,
+	ICON_badge_AttackFXD_palette,
+	ICON_badge_AttackFXB_palette,
+	ICON_badge_AttackFXE_palette,
+	ICON_badge_AttackFXC_palette,
+	ICON_badge_AttackFXF_palette,
+	ICON_badge_HPPlus_palette,
+	ICON_badge_HPPlus_palette,
+	ICON_badge_HPPlus_palette,
+	ICON_badge_FPPlus_palette,
+	ICON_badge_FPPlus_palette,
+	ICON_badge_FPPlus_palette,
+	ICON_badge_HealthyHealthy_palette,
+	ICON_key_Gift_palette,
+	ICON_key_Gift_palette,
+	ICON_key_Gift_palette,
+	ICON_key_Gift_palette,
+	ICON_key_Gift_palette,
+	ICON_anim_heart_0_palette,
+	ICON_anim_coin_0_palette,
+	ICON_anim_heart_piece_palette,
+	ICON_anim_sp_0_palette,
+	ICON_anim_hp_0_palette,
+	ICON_anim_fp_0_palette,
+	ICON_anim_star_piece_0_palette
 };
 
 s32 D_8008EEC0[] = {
@@ -11888,9 +9856,9 @@ IconHudScriptPair gPartnerIconHudScripts[] = {
 
 MoveData gMoveTable[] = {
 {	// move 0: Nothing
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.flags = 0,
 	.category = MOVE_TYPE_NONE,
 	.actionTip = MOVE_ACTION_TIP_NONE,
@@ -11898,9 +9866,9 @@ MoveData gMoveTable[] = {
 	.costBP = 0
 },
 {	// move 1: Unused_01
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.flags = MOVE_DATA_FLAG_2,
 	.category = MOVE_TYPE_NONE,
 	.actionTip = MOVE_ACTION_TIP_NONE,
@@ -11908,9 +9876,9 @@ MoveData gMoveTable[] = {
 	.costBP = 0
 },
 {	// move 2: Unused_02
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.flags = MOVE_DATA_FLAG_TARGET_PLAYER,
 	.category = MOVE_TYPE_NONE,
 	.actionTip = MOVE_ACTION_TIP_NONE,
@@ -11919,7 +9887,7 @@ MoveData gMoveTable[] = {
 },
 {	// move 3: Hammer1
 	.nameMsg = MESSAGE_ID(0x1D, 0x038),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
+	.fullDescMsg = 0,
 	.shortDescMsg = MESSAGE_ID(0x23, 0x0A3),
 	.flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_4 | MOVE_DATA_FLAG_1000 | MOVE_DATA_FLAG_2000 | MOVE_DATA_FLAG_10000,
 	.category = MOVE_TYPE_HAMMER,
@@ -11949,8 +9917,8 @@ MoveData gMoveTable[] = {
 },
 {	// move 6: Unused_Hammer4
 	.nameMsg = MESSAGE_ID(0x1D, 0x038),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_4 | MOVE_DATA_FLAG_1000 | MOVE_DATA_FLAG_2000 | MOVE_DATA_FLAG_10000,
 	.category = MOVE_TYPE_HAMMER,
 	.actionTip = MOVE_ACTION_TIP_1,
@@ -11958,9 +9926,9 @@ MoveData gMoveTable[] = {
 	.costBP = 0
 },
 {	// move 7: Unused_Hammer5
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_4 | MOVE_DATA_FLAG_1000 | MOVE_DATA_FLAG_2000 | MOVE_DATA_FLAG_10000,
 	.category = MOVE_TYPE_HAMMER,
 	.actionTip = MOVE_ACTION_TIP_1,
@@ -11998,9 +9966,9 @@ MoveData gMoveTable[] = {
 	.costBP = 2
 },
 {	// move B: SmashCharge0
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.flags = MOVE_DATA_FLAG_TARGET_PLAYER,
 	.category = MOVE_TYPE_HAMMER,
 	.actionTip = MOVE_ACTION_TIP_NONE,
@@ -12009,8 +9977,8 @@ MoveData gMoveTable[] = {
 },
 {	// move C: Unused_Hammer_0C
 	.nameMsg = MESSAGE_ID(0x1D, 0x038),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_1000 | MOVE_DATA_FLAG_4000 | MOVE_DATA_FLAG_10000 | MOVE_DATA_FLAG_40000,
 	.category = MOVE_TYPE_HAMMER,
 	.actionTip = MOVE_ACTION_TIP_1,
@@ -12078,9 +10046,9 @@ MoveData gMoveTable[] = {
 	.costBP = 0
 },
 {	// move 13: AutoSmash
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_4 | MOVE_DATA_FLAG_1000 | MOVE_DATA_FLAG_2000 | MOVE_DATA_FLAG_10000,
 	.category = MOVE_TYPE_HAMMER,
 	.actionTip = MOVE_ACTION_TIP_NONE,
@@ -12108,9 +10076,9 @@ MoveData gMoveTable[] = {
 	.costBP = 1
 },
 {	// move 16: SuperSmash
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_4 | MOVE_DATA_FLAG_1000 | MOVE_DATA_FLAG_2000 | MOVE_DATA_FLAG_10000,
 	.category = MOVE_TYPE_HAMMER,
 	.actionTip = MOVE_ACTION_TIP_1,
@@ -12138,9 +10106,9 @@ MoveData gMoveTable[] = {
 	.costBP = 1
 },
 {	// move 19: ShellCrack
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_4 | MOVE_DATA_FLAG_1000 | MOVE_DATA_FLAG_2000 | MOVE_DATA_FLAG_10000,
 	.category = MOVE_TYPE_HAMMER,
 	.actionTip = MOVE_ACTION_TIP_1,
@@ -12179,8 +10147,8 @@ MoveData gMoveTable[] = {
 },
 {	// move 1D: Unused_Jump4
 	.nameMsg = MESSAGE_ID(0x1D, 0x039),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_80 | MOVE_DATA_FLAG_800 | MOVE_DATA_FLAG_4000 | MOVE_DATA_FLAG_10000 | MOVE_DATA_FLAG_40000,
 	.category = MOVE_TYPE_JUMP,
 	.actionTip = MOVE_ACTION_TIP_0,
@@ -12189,8 +10157,8 @@ MoveData gMoveTable[] = {
 },
 {	// move 1E: Unused_Jump5
 	.nameMsg = MESSAGE_ID(0x1D, 0x039),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_80 | MOVE_DATA_FLAG_800 | MOVE_DATA_FLAG_4000 | MOVE_DATA_FLAG_10000 | MOVE_DATA_FLAG_40000,
 	.category = MOVE_TYPE_JUMP,
 	.actionTip = MOVE_ACTION_TIP_0,
@@ -12238,9 +10206,9 @@ MoveData gMoveTable[] = {
 	.costBP = 1
 },
 {	// move 23: JumpCharge0
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.flags = MOVE_DATA_FLAG_TARGET_PLAYER | MOVE_DATA_FLAG_800,
 	.category = MOVE_TYPE_JUMP,
 	.actionTip = MOVE_ACTION_TIP_NONE,
@@ -12249,8 +10217,8 @@ MoveData gMoveTable[] = {
 },
 {	// move 24: Unused_24
 	.nameMsg = MESSAGE_ID(0x1D, 0x039),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_80 | MOVE_DATA_FLAG_800 | MOVE_DATA_FLAG_4000 | MOVE_DATA_FLAG_10000 | MOVE_DATA_FLAG_40000,
 	.category = MOVE_TYPE_JUMP,
 	.actionTip = MOVE_ACTION_TIP_0,
@@ -12298,9 +10266,9 @@ MoveData gMoveTable[] = {
 	.costBP = 0
 },
 {	// move 29: AutoJump
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_80 | MOVE_DATA_FLAG_800 | MOVE_DATA_FLAG_4000 | MOVE_DATA_FLAG_10000 | MOVE_DATA_FLAG_40000,
 	.category = MOVE_TYPE_JUMP,
 	.actionTip = MOVE_ACTION_TIP_NONE,
@@ -12308,9 +10276,9 @@ MoveData gMoveTable[] = {
 	.costBP = 1
 },
 {	// move 2A: AutoMultibounce
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.flags = MOVE_DATA_FLAG_80 | MOVE_DATA_FLAG_800 | MOVE_DATA_FLAG_4000 | MOVE_DATA_FLAG_8000 | MOVE_DATA_FLAG_40000,
 	.category = MOVE_TYPE_JUMP,
 	.actionTip = MOVE_ACTION_TIP_NONE,
@@ -12328,9 +10296,9 @@ MoveData gMoveTable[] = {
 	.costBP = 1
 },
 {	// move 2C: SuperJump
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_80 | MOVE_DATA_FLAG_800 | MOVE_DATA_FLAG_4000 | MOVE_DATA_FLAG_10000 | MOVE_DATA_FLAG_40000,
 	.category = MOVE_TYPE_JUMP,
 	.actionTip = MOVE_ACTION_TIP_0,
@@ -12368,9 +10336,9 @@ MoveData gMoveTable[] = {
 	.costBP = 1
 },
 {	// move 30: EarthquakeJump
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.flags = MOVE_DATA_FLAG_20 | MOVE_DATA_FLAG_8000,
 	.category = MOVE_TYPE_JUMP,
 	.actionTip = MOVE_ACTION_TIP_20,
@@ -12378,7 +10346,7 @@ MoveData gMoveTable[] = {
 	.costBP = 2
 },
 {	// move 31: Unused_DefendPlus
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
 	.fullDescMsg = MESSAGE_ID(0x25, 0x074),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x074),
 	.flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_4 | MOVE_DATA_FLAG_10000,
@@ -12388,9 +10356,9 @@ MoveData gMoveTable[] = {
 	.costBP = 6
 },
 {	// move 32: Unused_32
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.flags = MOVE_DATA_FLAG_TARGET_PLAYER,
 	.category = MOVE_TYPE_3,
 	.actionTip = MOVE_ACTION_TIP_NONE,
@@ -12409,7 +10377,7 @@ MoveData gMoveTable[] = {
 },
 {	// move 34: Items
 	.nameMsg = MESSAGE_ID(0x1D, 0x03F),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
+	.fullDescMsg = 0,
 	.shortDescMsg = MESSAGE_ID(0x1D, 0x0A4),
 	.flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_4 | MOVE_DATA_FLAG_10000,
 	.category = MOVE_TYPE_ITEMS,
@@ -12439,8 +10407,8 @@ MoveData gMoveTable[] = {
 },
 {	// move 37: Unused_37
 	.nameMsg = 0x80098A04,
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.flags = 0,
 	.category = MOVE_TYPE_TACTICS,
 	.actionTip = MOVE_ACTION_TIP_NONE,
@@ -12459,8 +10427,8 @@ MoveData gMoveTable[] = {
 },
 {	// move 39: Unused_39
 	.nameMsg = 0x80098A04,
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_4 | MOVE_DATA_FLAG_10000,
 	.category = MOVE_TYPE_6,
 	.actionTip = MOVE_ACTION_TIP_NONE,
@@ -12469,8 +10437,8 @@ MoveData gMoveTable[] = {
 },
 {	// move 3A: Unused_3A
 	.nameMsg = 0x80098A04,
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.flags = 0,
 	.category = MOVE_TYPE_ATTACK_UP,
 	.actionTip = MOVE_ACTION_TIP_NONE,
@@ -12519,8 +10487,8 @@ MoveData gMoveTable[] = {
 },
 {	// move 3F: Unused_3F
 	.nameMsg = 0x80098A04,
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_4 | MOVE_DATA_FLAG_10000,
 	.category = MOVE_TYPE_DEFENSE_UP,
 	.actionTip = MOVE_ACTION_TIP_NONE,
@@ -12588,7 +10556,7 @@ MoveData gMoveTable[] = {
 	.costBP = 6
 },
 {	// move 46: LastStand
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
 	.fullDescMsg = MESSAGE_ID(0x25, 0x085),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x085),
 	.flags = 0,
@@ -12598,7 +10566,7 @@ MoveData gMoveTable[] = {
 	.costBP = 1
 },
 {	// move 47: CloseCall
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
 	.fullDescMsg = MESSAGE_ID(0x25, 0x083),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x083),
 	.flags = 0,
@@ -12608,7 +10576,7 @@ MoveData gMoveTable[] = {
 	.costBP = 1
 },
 {	// move 48: LuckyDay
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
 	.fullDescMsg = MESSAGE_ID(0x25, 0x082),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x082),
 	.flags = 0,
@@ -12628,9 +10596,9 @@ MoveData gMoveTable[] = {
 	.costBP = 2
 },
 {	// move 4A: HealthyHealthy
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.flags = 0,
 	.category = MOVE_TYPE_DEFENSE_UP,
 	.actionTip = MOVE_ACTION_TIP_NONE,
@@ -12639,8 +10607,8 @@ MoveData gMoveTable[] = {
 },
 {	// move 4B: Unused_4B
 	.nameMsg = 0x80098A04,
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.flags = 0,
 	.category = MOVE_TYPE_9,
 	.actionTip = MOVE_ACTION_TIP_NONE,
@@ -12688,7 +10656,7 @@ MoveData gMoveTable[] = {
 	.costBP = 8
 },
 {	// move 50: BumpAttack
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
 	.fullDescMsg = MESSAGE_ID(0x25, 0x088),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x088),
 	.flags = 0,
@@ -12699,8 +10667,8 @@ MoveData gMoveTable[] = {
 },
 {	// move 51: Unused_51
 	.nameMsg = 0x80098A04,
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_4 | MOVE_DATA_FLAG_10000,
 	.category = MOVE_TYPE_NONE,
 	.actionTip = MOVE_ACTION_TIP_NONE,
@@ -12718,9 +10686,9 @@ MoveData gMoveTable[] = {
 	.costBP = 3
 },
 {	// move 53: MysteryScroll
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.flags = MOVE_DATA_FLAG_2,
 	.category = MOVE_TYPE_NONE,
 	.actionTip = MOVE_ACTION_TIP_NONE,
@@ -12848,9 +10816,9 @@ MoveData gMoveTable[] = {
 	.costBP = 1
 },
 {	// move 60: Berserker
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.flags = MOVE_DATA_FLAG_2,
 	.category = MOVE_TYPE_NONE,
 	.actionTip = MOVE_ACTION_TIP_NONE,
@@ -12888,7 +10856,7 @@ MoveData gMoveTable[] = {
 	.costBP = 2
 },
 {	// move 64: PowerRush
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
 	.fullDescMsg = MESSAGE_ID(0x25, 0x084),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x084),
 	.flags = MOVE_DATA_FLAG_2,
@@ -12898,9 +10866,9 @@ MoveData gMoveTable[] = {
 	.costBP = 1
 },
 {	// move 65: CrazyHeart
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.flags = MOVE_DATA_FLAG_2,
 	.category = MOVE_TYPE_NONE,
 	.actionTip = MOVE_ACTION_TIP_NONE,
@@ -12908,9 +10876,9 @@ MoveData gMoveTable[] = {
 	.costBP = 10
 },
 {	// move 66: MegaHPDrain
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.flags = MOVE_DATA_FLAG_2,
 	.category = MOVE_TYPE_NONE,
 	.actionTip = MOVE_ACTION_TIP_NONE,
@@ -12918,9 +10886,9 @@ MoveData gMoveTable[] = {
 	.costBP = 10
 },
 {	// move 67: FlowerFanatic
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.flags = MOVE_DATA_FLAG_2,
 	.category = MOVE_TYPE_NONE,
 	.actionTip = MOVE_ACTION_TIP_NONE,
@@ -12928,7 +10896,7 @@ MoveData gMoveTable[] = {
 	.costBP = 10
 },
 {	// move 68: HeartFinder
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
 	.fullDescMsg = MESSAGE_ID(0x25, 0x07C),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x07C),
 	.flags = MOVE_DATA_FLAG_2,
@@ -12938,7 +10906,7 @@ MoveData gMoveTable[] = {
 	.costBP = 3
 },
 {	// move 69: FlowerFinder
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
 	.fullDescMsg = MESSAGE_ID(0x25, 0x07D),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x07D),
 	.flags = MOVE_DATA_FLAG_2,
@@ -12948,7 +10916,7 @@ MoveData gMoveTable[] = {
 	.costBP = 3
 },
 {	// move 6A: SpinAttack
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
 	.fullDescMsg = MESSAGE_ID(0x25, 0x089),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x089),
 	.flags = MOVE_DATA_FLAG_2,
@@ -12958,7 +10926,7 @@ MoveData gMoveTable[] = {
 	.costBP = 3
 },
 {	// move 6B: DizzyAttack
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
 	.fullDescMsg = MESSAGE_ID(0x25, 0x08A),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x08A),
 	.flags = MOVE_DATA_FLAG_2,
@@ -12968,7 +10936,7 @@ MoveData gMoveTable[] = {
 	.costBP = 2
 },
 {	// move 6C: ISpy
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
 	.fullDescMsg = MESSAGE_ID(0x25, 0x09E),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x09E),
 	.flags = MOVE_DATA_FLAG_2,
@@ -12978,7 +10946,7 @@ MoveData gMoveTable[] = {
 	.costBP = 1
 },
 {	// move 6D: SpeedySpin
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
 	.fullDescMsg = MESSAGE_ID(0x25, 0x08B),
 	.shortDescMsg = MESSAGE_ID(0x23, 0x08B),
 	.flags = MOVE_DATA_FLAG_2,
@@ -12999,8 +10967,8 @@ MoveData gMoveTable[] = {
 },
 {	// move 6F: Unused_FinalGoompa
 	.nameMsg = 0x800989F0,
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.flags = MOVE_DATA_FLAG_2,
 	.category = MOVE_TYPE_NONE,
 	.actionTip = MOVE_ACTION_TIP_NONE,
@@ -13009,8 +10977,8 @@ MoveData gMoveTable[] = {
 },
 {	// move 70: Unused_FinalBombomb
 	.nameMsg = 0x800989DC,
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.flags = MOVE_DATA_FLAG_2,
 	.category = MOVE_TYPE_NONE,
 	.actionTip = MOVE_ACTION_TIP_NONE,
@@ -13028,9 +10996,9 @@ MoveData gMoveTable[] = {
 	.costBP = 1
 },
 {	// move 72: SuperFocus
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.flags = MOVE_DATA_FLAG_2,
 	.category = MOVE_TYPE_NONE,
 	.actionTip = MOVE_ACTION_TIP_NONE,
@@ -13038,9 +11006,9 @@ MoveData gMoveTable[] = {
 	.costBP = 5
 },
 {	// move 73: Kaiden
-	.nameMsg = MESSAGE_ID(0x00, 0x000),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.nameMsg = 0,
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.flags = MOVE_DATA_FLAG_80000000,
 	.category = MOVE_TYPE_NONE,
 	.actionTip = MOVE_ACTION_TIP_NONE,
@@ -13079,7 +11047,7 @@ MoveData gMoveTable[] = {
 },
 {	// move 77: Focus
 	.nameMsg = MESSAGE_ID(0x1D, 0x014),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
+	.fullDescMsg = 0,
 	.shortDescMsg = MESSAGE_ID(0x1D, 0x020),
 	.flags = MOVE_DATA_FLAG_80000000,
 	.category = MOVE_TYPE_STAR_POWER,
@@ -13089,7 +11057,7 @@ MoveData gMoveTable[] = {
 },
 {	// move 78: Refresh
 	.nameMsg = MESSAGE_ID(0x1D, 0x015),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
+	.fullDescMsg = 0,
 	.shortDescMsg = MESSAGE_ID(0x1D, 0x021),
 	.flags = MOVE_DATA_FLAG_TARGET_PLAYER,
 	.category = MOVE_TYPE_STAR_POWER,
@@ -13099,7 +11067,7 @@ MoveData gMoveTable[] = {
 },
 {	// move 79: Lullaby
 	.nameMsg = MESSAGE_ID(0x1D, 0x016),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
+	.fullDescMsg = 0,
 	.shortDescMsg = MESSAGE_ID(0x1D, 0x022),
 	.flags = MOVE_DATA_FLAG_2 | MOVE_DATA_FLAG_8000,
 	.category = MOVE_TYPE_STAR_POWER,
@@ -13109,7 +11077,7 @@ MoveData gMoveTable[] = {
 },
 {	// move 7A: StarStorm
 	.nameMsg = MESSAGE_ID(0x1D, 0x017),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
+	.fullDescMsg = 0,
 	.shortDescMsg = MESSAGE_ID(0x1D, 0x023),
 	.flags = MOVE_DATA_FLAG_2 | MOVE_DATA_FLAG_8000,
 	.category = MOVE_TYPE_STAR_POWER,
@@ -13119,7 +11087,7 @@ MoveData gMoveTable[] = {
 },
 {	// move 7B: ChillOutMove
 	.nameMsg = MESSAGE_ID(0x1D, 0x018),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
+	.fullDescMsg = 0,
 	.shortDescMsg = MESSAGE_ID(0x1D, 0x024),
 	.flags = MOVE_DATA_FLAG_2 | MOVE_DATA_FLAG_8000,
 	.category = MOVE_TYPE_STAR_POWER,
@@ -13129,7 +11097,7 @@ MoveData gMoveTable[] = {
 },
 {	// move 7C: Smooch
 	.nameMsg = MESSAGE_ID(0x1D, 0x019),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
+	.fullDescMsg = 0,
 	.shortDescMsg = MESSAGE_ID(0x1D, 0x025),
 	.flags = MOVE_DATA_FLAG_TARGET_PLAYER,
 	.category = MOVE_TYPE_STAR_POWER,
@@ -13139,7 +11107,7 @@ MoveData gMoveTable[] = {
 },
 {	// move 7D: TimeOut
 	.nameMsg = MESSAGE_ID(0x1D, 0x01A),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
+	.fullDescMsg = 0,
 	.shortDescMsg = MESSAGE_ID(0x1D, 0x026),
 	.flags = MOVE_DATA_FLAG_2 | MOVE_DATA_FLAG_8000,
 	.category = MOVE_TYPE_STAR_POWER,
@@ -13149,7 +11117,7 @@ MoveData gMoveTable[] = {
 },
 {	// move 7E: UpAndAway
 	.nameMsg = MESSAGE_ID(0x1D, 0x01B),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
+	.fullDescMsg = 0,
 	.shortDescMsg = MESSAGE_ID(0x1D, 0x027),
 	.flags = MOVE_DATA_FLAG_2 | MOVE_DATA_FLAG_8000,
 	.category = MOVE_TYPE_STAR_POWER,
@@ -13159,7 +11127,7 @@ MoveData gMoveTable[] = {
 },
 {	// move 7F: StarBeam
 	.nameMsg = MESSAGE_ID(0x1D, 0x01C),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
+	.fullDescMsg = 0,
 	.shortDescMsg = MESSAGE_ID(0x1D, 0x028),
 	.flags = MOVE_DATA_FLAG_2 | MOVE_DATA_FLAG_8000,
 	.category = MOVE_TYPE_STAR_POWER,
@@ -13169,7 +11137,7 @@ MoveData gMoveTable[] = {
 },
 {	// move 80: PeachBeam
 	.nameMsg = MESSAGE_ID(0x1D, 0x01D),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
+	.fullDescMsg = 0,
 	.shortDescMsg = MESSAGE_ID(0x1D, 0x029),
 	.flags = MOVE_DATA_FLAG_2 | MOVE_DATA_FLAG_8000,
 	.category = MOVE_TYPE_STAR_POWER,
@@ -13179,7 +11147,7 @@ MoveData gMoveTable[] = {
 },
 {	// move 81: PeachFocus
 	.nameMsg = MESSAGE_ID(0x1D, 0x01E),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
+	.fullDescMsg = 0,
 	.shortDescMsg = MESSAGE_ID(0x1D, 0x020),
 	.flags = MOVE_DATA_FLAG_100,
 	.category = MOVE_TYPE_STAR_POWER,
@@ -13189,7 +11157,7 @@ MoveData gMoveTable[] = {
 },
 {	// move 82: TwinkDash
 	.nameMsg = MESSAGE_ID(0x1D, 0x01F),
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
+	.fullDescMsg = 0,
 	.shortDescMsg = MESSAGE_ID(0x1D, 0x020),
 	.flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_2 | MOVE_DATA_FLAG_8000,
 	.category = MOVE_TYPE_STAR_POWER,
@@ -13439,8 +11407,8 @@ MoveData gMoveTable[] = {
 },
 {	// move 9B: Unused_LoneFool1
 	.nameMsg = 0x800989D0,
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_2,
 	.category = MOVE_TYPE_PARTNER,
 	.actionTip = MOVE_ACTION_TIP_0,
@@ -13449,8 +11417,8 @@ MoveData gMoveTable[] = {
 },
 {	// move 9C: Unused_LoneFool2
 	.nameMsg = 0x800989D0,
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_2,
 	.category = MOVE_TYPE_PARTNER,
 	.actionTip = MOVE_ACTION_TIP_0,
@@ -13459,8 +11427,8 @@ MoveData gMoveTable[] = {
 },
 {	// move 9D: Unused_LoneFool3
 	.nameMsg = 0x800989D0,
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_2,
 	.category = MOVE_TYPE_PARTNER,
 	.actionTip = MOVE_ACTION_TIP_0,
@@ -13469,8 +11437,8 @@ MoveData gMoveTable[] = {
 },
 {	// move 9E: Unused_Mumble
 	.nameMsg = 0x800989C0,
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.flags = MOVE_DATA_FLAG_4,
 	.category = MOVE_TYPE_PARTNER,
 	.actionTip = MOVE_ACTION_TIP_0,
@@ -13479,8 +11447,8 @@ MoveData gMoveTable[] = {
 },
 {	// move 9F: Unused_Preach
 	.nameMsg = 0x800989B4,
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_2,
 	.category = MOVE_TYPE_PARTNER,
 	.actionTip = MOVE_ACTION_TIP_0,
@@ -13489,8 +11457,8 @@ MoveData gMoveTable[] = {
 },
 {	// move A0: Unused_Awakening
 	.nameMsg = 0x800989A8,
-	.fullDescMsg = MESSAGE_ID(0x00, 0x000),
-	.shortDescMsg = MESSAGE_ID(0x00, 0x000),
+	.fullDescMsg = 0,
+	.shortDescMsg = 0,
 	.flags = MOVE_DATA_FLAG_SINGLE_TARGET | MOVE_DATA_FLAG_2,
 	.category = MOVE_TYPE_PARTNER,
 	.actionTip = MOVE_ACTION_TIP_0,
@@ -13745,5 +11713,5 @@ s32 pad_after_move_table[] = {
 };
 
 s32 gMessageBoxFrameParts[] = {
-0x802EBFF0, 0x802EC010, 0x802EC030, 0x802EC050, 0x802EC070, 0x802EC090, 0x802EC0B0, 0x802EC0D0, 0x802EC0F0, 0x802EC110, 0x802EC130, 0x802EC150, 0x802EC170, 0x802EC190, 0x802EC1B0, 0x802EC1D0, 0x802EC1F0, 0x802EC210, 0x802EC230, 0x802EC250, 0x802EC270, 0x802EC290, 0x802EC2B0, 0x802EC2D0, 0x802EC2F0, 0x802EC310, 0x802EC330, 0x802EC350, 0x802EC370, 0x802EC390, 0x802EC3B0, 0x802EC3D0
+	0x802EBFF0, 0x802EC010, 0x802EC030, 0x802EC050, 0x802EC070, 0x802EC090, 0x802EC0B0, 0x802EC0D0, 0x802EC0F0, 0x802EC110, 0x802EC130, 0x802EC150, 0x802EC170, 0x802EC190, 0x802EC1B0, 0x802EC1D0, 0x802EC1F0, 0x802EC210, 0x802EC230, 0x802EC250, 0x802EC270, 0x802EC290, 0x802EC2B0, 0x802EC2D0, 0x802EC2F0, 0x802EC310, 0x802EC330, 0x802EC350, 0x802EC370, 0x802EC390, 0x802EC3B0, 0x802EC3D0
 };
