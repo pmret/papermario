@@ -35,13 +35,13 @@ ApiStatus func_802A9000_423C70(Evt* script, s32 isInitialCall) {
     actionCommandStatus->hudElementX = -48;
     actionCommandStatus->hudElementY = 80;
 
-    hudElement = hud_element_create(HudScript_AButton);
+    hudElement = hud_element_create(&HudScript_AButton);
     actionCommandStatus->hudElements[0] = hudElement;
     hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
     hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
     hud_element_set_render_depth(hudElement, 0);
 
-    hudElement = hud_element_create(HudScript_BlueMeter);
+    hudElement = hud_element_create(&HudScript_BlueMeter);
     actionCommandStatus->hudElements[1] = hudElement;
     hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
     hud_element_set_render_depth(hudElement, 0);

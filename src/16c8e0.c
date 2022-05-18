@@ -884,7 +884,7 @@ void btl_update_starpoints_display(void) {
             for (i = 0; i < tens; i++) {
                 id = D_8029EFC0[i];
                 if (hud_element_get_script(id) != HudScript_Item_StarPoint) {
-                    hud_element_set_script(id, HudScript_Item_StarPoint);
+                    hud_element_set_script(id, &HudScript_Item_StarPoint);
                 }
                 hud_element_clear_flags(id, 2);
                 hud_element_set_render_pos(id, posX, posY);
@@ -892,7 +892,7 @@ void btl_update_starpoints_display(void) {
 
                 id = D_8029EFE8[i];
                 if (hud_element_get_script(id) != HudScript_StatusSPShine) {
-                    hud_element_set_script(id, HudScript_StatusSPShine);
+                    hud_element_set_script(id, &HudScript_StatusSPShine);
                 }
                 hud_element_clear_flags(id, 2);
                 hud_element_set_render_pos(id, posX, posY - 5);
@@ -917,7 +917,7 @@ void btl_update_starpoints_display(void) {
             for (i = 0; i < ones; i++) {
                 id = D_8029F010[i];
                 if (hud_element_get_script(id) != HudScript_Item_SmallStarPoint) {
-                    hud_element_set_script(id, HudScript_Item_SmallStarPoint);
+                    hud_element_set_script(id, &HudScript_Item_SmallStarPoint);
                 }
                 hud_element_clear_flags(id, 2);
                 hud_element_set_render_pos(id, posX, posY);

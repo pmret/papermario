@@ -3,8 +3,8 @@
 
 #define NAMESPACE action_command_tidal_wave
 
-extern HudScript HudScript_BlueMeter[];
-extern HudScript HudScript_AButton[];
+extern HudScript HudScript_BlueMeter;
+extern HudScript HudScript_AButton;
 extern s32 D_802944A0;
 
 extern HudScript* D_802A97C0_42CEB0[];
@@ -33,14 +33,14 @@ ApiStatus N(CreateHudElements)(Evt* script, s32 isInitialCall) {
         actionCommandStatus->hudElementX = -48;
         actionCommandStatus->hudElementY = 80;
 
-        hudElement = hud_element_create(HudScript_BlueMeter);
+        hudElement = hud_element_create(&HudScript_BlueMeter);
         actionCommandStatus->hudElements[0] = hudElement;
         hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
         hud_element_set_render_depth(hudElement, 0);
         hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
         for (i = 1; i < ARRAY_COUNT(actionCommandStatus->hudElements); i++) {
-            hudElement = hud_element_create(HudScript_AButton);
+            hudElement = hud_element_create(&HudScript_AButton);
             actionCommandStatus->hudElements[i] = hudElement;
             hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
             hud_element_set_render_depth(hudElement, 0);

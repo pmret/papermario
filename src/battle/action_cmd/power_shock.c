@@ -162,7 +162,7 @@ void func_802A9310_42D220(void) {
                 actionCommandStatus->unk_4E--;
                 break;
             }
-            hud_element_set_script(actionCommandStatus->hudElements[0], HudScript_MashAButton);
+            hud_element_set_script(actionCommandStatus->hudElements[0], &HudScript_MashAButton);
             actionCommandStatus->unk_44 = 0;
             actionCommandStatus->unk_5C = 0;
             D_802A9B00 = 1;

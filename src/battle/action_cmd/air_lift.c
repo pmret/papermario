@@ -141,7 +141,7 @@ void func_802A9278_428CE8(void) {
                 return;
             }
 
-            hud_element_set_script(actionCommandStatus->hudElements[0], HudScript_MashAButton);
+            hud_element_set_script(actionCommandStatus->hudElements[0], &HudScript_MashAButton);
             air_lift_bss_0 = 1;
             actionCommandStatus->unk_54 = actionCommandStatus->unk_52;
             sfx_play_sound_with_params(0x80000041, 0, 0, 0);

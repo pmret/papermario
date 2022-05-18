@@ -35,8 +35,8 @@ static s32 gPausePartnersLevel;
 static s32 gPausePartnersNumPartners;
 
 HudScript* gPausePartnersIconScripts[] = {
-    HudScript_FPCost, HudScript_StatFp_1, HudScript_PartnerRank, HudScript_PartnerRank,
-    HudScript_MoveDiamond, HudScript_MoveBlueOrb, HudScript_MoveGreenOrb, HudScript_MoveRedOrb
+    &HudScript_FPCost, &HudScript_StatFp_1, &HudScript_PartnerRank, &HudScript_PartnerRank,
+    &HudScript_MoveDiamond, &HudScript_MoveBlueOrb, &HudScript_MoveGreenOrb, &HudScript_MoveRedOrb
 };
 Vp gPausePartnersViewport = {
     .vp = {

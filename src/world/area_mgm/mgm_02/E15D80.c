@@ -24,9 +24,9 @@ void partner_enable_input(void);
 #define BOBOMB_NPC_ID_BASE 0x1E
 #define LUIGI_NPC_ID_BASE  0x64
 
-extern HudScript HudScript_BlueMeter[];
-extern HudScript HudScript_AButton[];
-extern HudScript HudScript_MashAButton[];
+extern HudScript HudScript_BlueMeter;
+extern HudScript HudScript_AButton;
+extern HudScript HudScript_MashAButton;
 
 extern s32 mgm_02_InitialConfigurations[3][NUM_BOXES];
 extern s32 mgm_02_BoxModelIDs[NUM_BOXES];
@@ -199,14 +199,14 @@ ApiStatus N(CreateScoreDisplay)(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         data->workerID = create_generic_entity_world(NULL, &mgm_02_work_draw_score);
 
-        hudElemA = hud_element_create(HudScript_AButton);
+        hudElemA = hud_element_create(&HudScript_AButton);
         data->hudElemID_AButton = hudElemA;
         hud_element_set_render_depth(hudElemA, 0);
         hud_element_set_flags(hudElemA, HUD_ELEMENT_FLAGS_80);
         hud_element_set_tint(hudElemA, 255, 255, 255);
-        hud_element_set_script(hudElemA, HudScript_AButton);
+        hud_element_set_script(hudElemA, &HudScript_AButton);
 
-        hudElemMeter = hud_element_create(HudScript_BlueMeter);
+        hudElemMeter = hud_element_create(&HudScript_BlueMeter);
         data->hudElemID_Meter = hudElemMeter;
         hud_element_set_render_depth(hudElemMeter, 0);
         hud_element_set_flags(hudElemMeter, HUD_ELEMENT_FLAGS_80);
@@ -471,7 +471,7 @@ ApiStatus N(RunMinigame)(Evt* script, s32 isInitialCall) {
                     }
                     break;
                 case BOX_STATE_FUZZY_HIT:
-                    hud_element_set_script(data->hudElemID_AButton, HudScript_AButton);
+                    hud_element_set_script(data->hudElemID_AButton, &HudScript_AButton);
                     hud_element_set_alpha(data->hudElemID_AButton, 160);
                     hud_element_set_alpha(data->hudElemID_Meter, 160);
                     data->mashProgress = 0;
@@ -515,7 +515,7 @@ ApiStatus N(RunMinigame)(Evt* script, s32 isInitialCall) {
                         npc->pos.x = gPlayerStatusPtr->position.x;
                         npc->pos.y = gPlayerStatusPtr->position.y + 28.0;
                         npc->pos.z = gPlayerStatusPtr->position.z + 2.0;
-                        hud_element_set_script(data->hudElemID_AButton, HudScript_MashAButton);
+                        hud_element_set_script(data->hudElemID_AButton, &HudScript_MashAButton);
                         hud_element_set_alpha(data->hudElemID_AButton, 255);
                         hud_element_set_alpha(data->hudElemID_Meter, 255);
                         data->box[i].state = BOX_STATE_FUZZY_GRAB;
@@ -532,7 +532,7 @@ ApiStatus N(RunMinigame)(Evt* script, s32 isInitialCall) {
                         data->stunFlags |= STUN_FLAGS_CHANGED;
                         data->box[i].state = BOX_STATE_FUZZY_DETACH;
                         npc->duration = 10;
-                        hud_element_set_script(data->hudElemID_AButton, HudScript_AButton);
+                        hud_element_set_script(data->hudElemID_AButton, &HudScript_AButton);
                         hud_element_set_alpha(data->hudElemID_AButton, 160);
                         hud_element_set_alpha(data->hudElemID_Meter, 160);
                         npc->currentAnim.w = NPC_ANIM_fuzzy_Palette_00_Anim_8;

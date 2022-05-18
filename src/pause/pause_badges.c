@@ -32,12 +32,12 @@ static s32 gPauseBadgesIconIDs[22];
 #define BADGE_INVALID 0x7FFF
 
 HudScript* gPauseBadgesElements[] = {
-    HudScript_StatBp, HudScript_StatBp, HudScript_StatBp, HudScript_StatBp,
-    HudScript_StatBp, HudScript_StatBp, HudScript_StatBp, HudScript_StatBp,
-    HudScript_StatBp, HudScript_StatBp, HudScript_StatBp, HudScript_StatBp,
-    HudScript_StatBp, HudScript_StatBp, HudScript_StatBp, HudScript_StatBp,
-    HudScript_StatBp, HudScript_ListPrevPage, HudScript_ListNextPage,
-    HudScript_Dash, HudScript_LabelBpNeeded, HudScript_StatusStar1
+    &HudScript_StatBp, &HudScript_StatBp, &HudScript_StatBp, &HudScript_StatBp,
+    &HudScript_StatBp, &HudScript_StatBp, &HudScript_StatBp, &HudScript_StatBp,
+    &HudScript_StatBp, &HudScript_StatBp, &HudScript_StatBp, &HudScript_StatBp,
+    &HudScript_StatBp, &HudScript_StatBp, &HudScript_StatBp, &HudScript_StatBp,
+    &HudScript_StatBp, &HudScript_ListPrevPage, &HudScript_ListNextPage,
+    &HudScript_Dash, &HudScript_LabelBpNeeded, &HudScript_StatusStar1
 };
 MenuWindowBP gPauseBadgesWindowBPs[] = {
     {

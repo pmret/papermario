@@ -2,8 +2,8 @@
 #include "effects.h"
 #include "hud_element.h"
 
-extern HudScript HudScript_Happy[];
-extern HudScript HudScript_HPDrain[];
+extern HudScript HudScript_Happy;
+extern HudScript HudScript_HPDrain;
 
 extern s32 D_8029FB90;
 extern f32 D_8029FB94;
@@ -407,13 +407,13 @@ ApiStatus func_802619E8(Evt* script, s32 isInitialCall) {
     screenY -= 19;
 
     if (script->varTable[10] > 0) {
-        D_8029FBAC = hud_element_create(HudScript_HPDrain);
+        D_8029FBAC = hud_element_create(&HudScript_HPDrain);
         hud_element_set_render_pos(D_8029FBAC, screenX, screenY);
         screenY += 9;
     }
 
     if (script->varTable[11] > 0 || script->varTable[12] > 0) {
-        D_8029FBA8 = hud_element_create(HudScript_Happy);
+        D_8029FBA8 = hud_element_create(&HudScript_Happy);
         hud_element_set_render_pos(D_8029FBA8, screenX, screenY);
     }
     return ApiStatus_DONE2;
