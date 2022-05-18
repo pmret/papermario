@@ -1069,10 +1069,10 @@ typedef struct MoveData {
     /* 0x04 */ s32 flags;
     /* 0x08 */ s32 shortDescMsg;
     /* 0x0C */ s32 fullDescMsg;
-    /* 0x10 */ s8 battleSubmenu; ///< @see enum BattleSubmenu
+    /* 0x10 */ s8 category; ///< @see enum MoveType
     /* 0x11 */ s8 costFP;
     /* 0x12 */ s8 costBP;
-    /* 0x13 */ u8 actionCommandID;
+    /* 0x13 */ u8 actionTip;
 } MoveData; // size = 0x14
 
 typedef struct Collider {

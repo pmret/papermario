@@ -1312,7 +1312,6 @@ s32 btl_check_player_defeated(void) {
     return TRUE;
 }
 
-
 void btl_init_menu_boots(void) {
     BattleStatus* battleStatus = &gBattleStatus;
     PlayerData* playerData = &gPlayerData;
@@ -1348,7 +1347,7 @@ void btl_init_menu_boots(void) {
                 u8 moveID = gItemTable[badge].moveID;
 
                 move = &moveTable[moveID];
-                if (move->battleSubmenu == BATTLE_SUBMENU_JUMP) {
+                if (move->category == MOVE_TYPE_JUMP) {
                     battleStatus->submenuMoves[moveCount] = moveID;
                     battleStatus->submenuIcons[moveCount] = playerData->equippedBadges[i];
                     moveCount++;
@@ -1409,7 +1408,6 @@ void btl_init_menu_boots(void) {
     }
 }
 
-
 void btl_init_menu_hammer(void) {
     BattleStatus* battleStatus = &gBattleStatus;
     PlayerData* playerData = &gPlayerData;
@@ -1443,7 +1441,7 @@ void btl_init_menu_hammer(void) {
                 MoveData* moveTable = gMoveTable;
                 u8 moveID = gItemTable[badge].moveID;
                 move = &moveTable[moveID];
-                if (move->battleSubmenu == BATTLE_SUBMENU_HAMMER) {
+                if (move->category == MOVE_TYPE_HAMMER) {
                     battleStatus->submenuMoves[moveCount] = moveID;
                     battleStatus->submenuIcons[moveCount] = playerData->equippedBadges[i];
                     moveCount++;
@@ -1598,7 +1596,7 @@ s32 count_power_plus(s32 damageType) {
     for (i = 0; i < ARRAY_COUNT(gPlayerData.equippedBadges); i++) {
         u8 moveID = gItemTable[gPlayerData.equippedBadges[i]].moveID;
 
-        if (gMoveTable[moveID].battleSubmenu == 7 && moveID == MOVE_POWER_PLUS) {
+        if (gMoveTable[moveID].category == MOVE_TYPE_ATTACK_UP && moveID == MOVE_POWER_PLUS) {
             if (gBattleStatus.flags1 & BS_FLAGS1_10 || damageType & DAMAGE_TYPE_JUMP) {
                 count++;
             }
