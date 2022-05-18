@@ -1550,7 +1550,12 @@ HudScript HudScript_Item_CoinSparkleE = {
 HudScript HudScript_Item_CoinSparkleRandom = {
 	he_SetVisible
 	he_SetTileSize(HUD_ELEMENT_SIZE_8x8)
-	he_RandomBranch(HudScript_Item_CoinSparkleA,HudScript_Item_CoinSparkleB,HudScript_Item_CoinSparkleC,HudScript_Item_CoinSparkleD,HudScript_Item_CoinSparkleE)
+	he_RandomBranch(
+		HS_PTR(HudScript_Item_CoinSparkleA),
+		HS_PTR(HudScript_Item_CoinSparkleB),
+		HS_PTR(HudScript_Item_CoinSparkleC),
+		HS_PTR(HudScript_Item_CoinSparkleD),
+		HS_PTR(HudScript_Item_CoinSparkleE))
 	he_End
 };
 
