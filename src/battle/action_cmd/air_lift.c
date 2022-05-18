@@ -7,10 +7,10 @@
 
 void func_80268834(s32, s32, s16, s32);
 
-extern HudScript HudScript_BlueMeter[];
-extern HudScript HudScript_AButton[];
-extern HudScript HudScript_MashAButton[];
-extern HudScript HudScript_100pct[];
+extern HudScript HudScript_BlueMeter;
+extern HudScript HudScript_AButton;
+extern HudScript HudScript_MashAButton;
+extern HudScript HudScript_100pct;
 extern s32 D_80294340;
 
 s32 D_802A9852_4292C0[] = { 0, 25, 50, 75, 75, 0, 0, 0 };
@@ -43,19 +43,19 @@ ApiStatus func_802A9000_428A70(Evt* script, s32 isInitialCall) {
     air_lift_bss_0 = 0;
     actionCommandStatus->hudElementY = 80;
 
-    hudElement = hud_element_create(HudScript_AButton);
+    hudElement = hud_element_create(&HudScript_AButton);
     actionCommandStatus->hudElements[0] = hudElement;
     hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
     hud_element_set_render_depth(hudElement, 0);
     hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
-    hudElement = hud_element_create(HudScript_BlueMeter);
+    hudElement = hud_element_create(&HudScript_BlueMeter);
     actionCommandStatus->hudElements[1] = hudElement;
     hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
     hud_element_set_render_depth(hudElement, 0);
     hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
-    hudElement = hud_element_create(HudScript_100pct);
+    hudElement = hud_element_create(&HudScript_100pct);
     actionCommandStatus->hudElements[2] = hudElement;
     hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
     hud_element_set_render_depth(hudElement, 0);
@@ -141,7 +141,7 @@ void func_802A9278_428CE8(void) {
                 return;
             }
 
-            hud_element_set_script(actionCommandStatus->hudElements[0], HudScript_MashAButton);
+            hud_element_set_script(actionCommandStatus->hudElements[0], &HudScript_MashAButton);
             air_lift_bss_0 = 1;
             actionCommandStatus->unk_54 = actionCommandStatus->unk_52;
             sfx_play_sound_with_params(0x80000041, 0, 0, 0);

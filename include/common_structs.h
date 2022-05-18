@@ -1065,14 +1065,14 @@ typedef struct TextureHeader {
 } TextureHeader; // size = 0x30
 
 typedef struct MoveData {
-    /* 0x00 */ s32 moveNameID;
+    /* 0x00 */ s32 nameMsg;
     /* 0x04 */ s32 flags;
-    /* 0x08 */ s32 worldDescID;
-    /* 0x0C */ s32 menuDescID;
-    /* 0x10 */ s8 battleSubmenu; ///< @see enum BattleSubmenu
+    /* 0x08 */ s32 shortDescMsg;
+    /* 0x0C */ s32 fullDescMsg;
+    /* 0x10 */ s8 category; ///< @see enum MoveType
     /* 0x11 */ s8 costFP;
     /* 0x12 */ s8 costBP;
-    /* 0x13 */ u8 actionCommandID;
+    /* 0x13 */ u8 actionTip;
 } MoveData; // size = 0x14
 
 typedef struct Collider {
@@ -1188,13 +1188,13 @@ typedef struct ColliderBoundingBox {
 
 typedef struct ItemData {
     /* 0x00 */ s32 nameMsg;
-    /* 0x04 */ s16 iconID;
-    /* 0x06 */ s16 badgeSortPriority;
+    /* 0x04 */ s16 hudElemID;
+    /* 0x06 */ s16 sortValue;
     /* 0x08 */ s32 targetFlags;
     /* 0x0C */ s16 sellValue;
     /* 0x0E */ char unk_0E[2];
-    /* 0x10 */ s32 menuMsg;
-    /* 0x14 */ s32 itemMsg;
+    /* 0x10 */ s32 fullDescMsg;
+    /* 0x14 */ s32 shortDescMsg;
     /* 0x18 */ s16 typeFlags;
     /* 0x1A */ u8 moveID;
     /* 0x1B */ s8 potencyA;

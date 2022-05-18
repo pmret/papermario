@@ -545,7 +545,7 @@ ApiStatus func_802189DC_447E1C(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     f32 posX = evt_get_float_variable(script, *args++);
     f32 posY = evt_get_float_variable(script, *args++);
-    s32 icon = hud_element_create(HudScript_AnimatedHandPointer);
+    s32 icon = hud_element_create(&HudScript_AnimatedHandPointer);
 
     hud_element_set_render_pos(icon, posX, posY);
     hud_element_set_scale(icon, 1.5f);

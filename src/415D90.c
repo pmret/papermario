@@ -1,89 +1,87 @@
 #include "common.h"
 #include "hud_element.h"
 
-extern s32 D_8008FA78;
+extern HudScript HudScript_YellowArrow;
 
-extern HudScript HudScript_YellowArrow[];
+extern HudScript HudScript_MenuFlee;
+extern HudScript HudScript_MenuFleeDisabled;
+extern HudScript HudScript_MenuDefend;
+extern HudScript HudScript_MenuDefendDisabled;
+extern HudScript HudScript_MenuStrategies;
+extern HudScript HudScript_MenuStrategiesDisabled;
+extern HudScript HudScript_MenuPouch;
+extern HudScript HudScript_MenuPouchDisabled;
+extern HudScript HudScript_MenuDoNothing;
+extern HudScript HudScript_MenuDoNothingDisabled;
 
-extern HudScript HudScript_MenuFlee[];
-extern HudScript HudScript_MenuFleeDisabled[];
-extern HudScript HudScript_MenuDefend[];
-extern HudScript HudScript_MenuDefendDisabled[];
-extern HudScript HudScript_MenuStrategies[];
-extern HudScript HudScript_MenuStrategiesDisabled[];
-extern HudScript HudScript_MenuPouch[];
-extern HudScript HudScript_MenuPouchDisabled[];
-extern HudScript HudScript_MenuDoNothing[];
-extern HudScript HudScript_MenuDoNothingDisabled[];
+extern HudScript HudScript_Kooper;
+extern HudScript HudScript_Bombette;
+extern HudScript HudScript_Partner0;
+extern HudScript HudScript_Partner0Disabled;
+extern HudScript HudScript_Goombario;
+extern HudScript HudScript_GoombarioDisabled;
+extern HudScript HudScript_KooperDisabled;
+extern HudScript HudScript_BombetteDisabled;
+extern HudScript HudScript_Parakarry;
+extern HudScript HudScript_ParakarryDisabled;
+extern HudScript HudScript_Bow;
+extern HudScript HudScript_BowDisabled;
+extern HudScript HudScript_Watt;
+extern HudScript HudScript_WattDisabled;
+extern HudScript HudScript_Sushie;
+extern HudScript HudScript_SushieDisabled;
+extern HudScript HudScript_Lakilester;
+extern HudScript HudScript_LakilesterDisabled;
+extern HudScript HudScript_PartnerA;
+extern HudScript HudScript_PartnerADisabled;
 
-extern HudScript HudScript_Kooper[];
-extern HudScript HudScript_Bombette[];
-extern HudScript HudScript_Partner0[];
-extern HudScript HudScript_Partner0Disabled[];
-extern HudScript HudScript_Goombario[];
-extern HudScript HudScript_GoombarioDisabled[];
-extern HudScript HudScript_KooperDisabled[];
-extern HudScript HudScript_BombetteDisabled[];
-extern HudScript HudScript_Parakarry[];
-extern HudScript HudScript_ParakarryDisabled[];
-extern HudScript HudScript_Bow[];
-extern HudScript HudScript_BowDisabled[];
-extern HudScript HudScript_Watt[];
-extern HudScript HudScript_WattDisabled[];
-extern HudScript HudScript_Sushie[];
-extern HudScript HudScript_SushieDisabled[];
-extern HudScript HudScript_Lakilester[];
-extern HudScript HudScript_LakilesterDisabled[];
-extern HudScript HudScript_PartnerA[];
-extern HudScript HudScript_PartnerADisabled[];
+extern HudScript HudScript_MenuBoots1;
+extern HudScript HudScript_MenuBoots1Disabled;
+extern HudScript HudScript_MenuBoots2;
+extern HudScript HudScript_MenuBoots2Disabled;
+extern HudScript HudScript_MenuBoots3;
+extern HudScript HudScript_MenuBoots3Disabled;
 
-extern HudScript HudScript_MenuBoots1[];
-extern HudScript HudScript_MenuBoots1Disabled[];
-extern HudScript HudScript_MenuBoots2[];
-extern HudScript HudScript_MenuBoots2Disabled[];
-extern HudScript HudScript_MenuBoots3[];
-extern HudScript HudScript_MenuBoots3Disabled[];
+extern HudScript HudScript_MenuHammer1;
+extern HudScript HudScript_MenuHammer1Disabled;
+extern HudScript HudScript_MenuHammer2;
+extern HudScript HudScript_MenuHammer2Disabled;
+extern HudScript HudScript_MenuHammer3;
+extern HudScript HudScript_MenuHammer3Disabled;
 
-extern HudScript HudScript_MenuHammer1[];
-extern HudScript HudScript_MenuHammer1Disabled[];
-extern HudScript HudScript_MenuHammer2[];
-extern HudScript HudScript_MenuHammer2Disabled[];
-extern HudScript HudScript_MenuHammer3[];
-extern HudScript HudScript_MenuHammer3Disabled[];
+extern HudScript HudScript_MenuItem;
+extern HudScript HudScript_MenuItemDisabled;
 
-extern HudScript HudScript_MenuItem[];
-extern HudScript HudScript_MenuItemDisabled[];
+extern HudScript HudScript_MenuStarPower;
+extern HudScript HudScript_MenuStarPowerDisabled;
 
-extern HudScript HudScript_MenuStarPower[];
-extern HudScript HudScript_MenuStarPowerDisabled[];
+extern HudScript HudScript_Eldstar;
+extern HudScript HudScript_EldstarDisabled;
+extern HudScript HudScript_Mamar;
+extern HudScript HudScript_MamarDisabled;
+extern HudScript HudScript_Skolar;
+extern HudScript HudScript_SkolarDisabled;
+extern HudScript HudScript_Muskular;
+extern HudScript HudScript_MuskularDisabled;
+extern HudScript HudScript_Misstar;
+extern HudScript HudScript_MisstarDisabled;
+extern HudScript HudScript_Klevar;
+extern HudScript HudScript_KlevarDisabled;
+extern HudScript HudScript_Kalmar;
+extern HudScript HudScript_KalmarDisabled;
+extern HudScript HudScript_StarBeam;
+extern HudScript HudScript_StarBeamDisabled;
+extern HudScript HudScript_PeachBeam;
+extern HudScript HudScript_PeachBeamDisabled;
 
-extern HudScript HudScript_Eldstar[];
-extern HudScript HudScript_EldstarDisabled[];
-extern HudScript HudScript_Mamar[];
-extern HudScript HudScript_MamarDisabled[];
-extern HudScript HudScript_Skolar[];
-extern HudScript HudScript_SkolarDisabled[];
-extern HudScript HudScript_Muskular[];
-extern HudScript HudScript_MuskularDisabled[];
-extern HudScript HudScript_Misstar[];
-extern HudScript HudScript_MisstarDisabled[];
-extern HudScript HudScript_Klevar[];
-extern HudScript HudScript_KlevarDisabled[];
-extern HudScript HudScript_Kalmar[];
-extern HudScript HudScript_KalmarDisabled[];
-extern HudScript HudScript_StarBeam[];
-extern HudScript HudScript_StarBeamDisabled[];
-extern HudScript HudScript_PeachBeam[];
-extern HudScript HudScript_PeachBeamDisabled[];
-
-extern HudScript HudScript_MoveDiamond[];
-extern HudScript HudScript_MoveBlueOrb[];
-extern HudScript HudScript_MoveGreenOrb[];
-extern HudScript HudScript_MoveRedOrb[];
-extern HudScript HudScript_MoveDiamondDisabled[];
-extern HudScript HudScript_MoveBlueOrbDisabled[];
-extern HudScript HudScript_MoveGreenOrbDisabled[];
-extern HudScript HudScript_MoveRedOrbDisabled[];
+extern HudScript HudScript_MoveDiamond;
+extern HudScript HudScript_MoveBlueOrb;
+extern HudScript HudScript_MoveGreenOrb;
+extern HudScript HudScript_MoveRedOrb;
+extern HudScript HudScript_MoveDiamondDisabled;
+extern HudScript HudScript_MoveBlueOrbDisabled;
+extern HudScript HudScript_MoveGreenOrbDisabled;
+extern HudScript HudScript_MoveRedOrbDisabled;
 
 extern s32 D_802ACC60;
 extern s32 D_802ACC6C;
@@ -168,51 +166,51 @@ s16 D_802AB340[] = { 28, 40 };
 s16 D_802AB344[] = { 0, -2 };
 
 HudScript* battle_menu_JumpHudScripts[] = {
-    HudScript_MenuBoots1Disabled, HudScript_MenuBoots1Disabled,
-    HudScript_MenuBoots1,HudScript_MenuBoots1Disabled,
-    HudScript_MenuBoots2, HudScript_MenuBoots2Disabled,
-    HudScript_MenuBoots3, HudScript_MenuBoots3Disabled };
+    &HudScript_MenuBoots1Disabled, &HudScript_MenuBoots1Disabled,
+    &HudScript_MenuBoots1,&HudScript_MenuBoots1Disabled,
+    &HudScript_MenuBoots2, &HudScript_MenuBoots2Disabled,
+    &HudScript_MenuBoots3, &HudScript_MenuBoots3Disabled };
 
 HudScript* battle_menu_HammerHudScripts[] = {
-    HudScript_MenuHammer1Disabled, HudScript_MenuHammer1Disabled,
-    HudScript_MenuHammer1, HudScript_MenuHammer1Disabled,
-    HudScript_MenuHammer2, HudScript_MenuHammer2Disabled,
-    HudScript_MenuHammer3, HudScript_MenuHammer3Disabled };
+    &HudScript_MenuHammer1Disabled, &HudScript_MenuHammer1Disabled,
+    &HudScript_MenuHammer1, &HudScript_MenuHammer1Disabled,
+    &HudScript_MenuHammer2, &HudScript_MenuHammer2Disabled,
+    &HudScript_MenuHammer3, &HudScript_MenuHammer3Disabled };
 
-HudScript* battle_menu_ItemHudScripts[] = { HudScript_MenuItem, HudScript_MenuItemDisabled };
+HudScript* battle_menu_ItemHudScripts[] = { &HudScript_MenuItem, &HudScript_MenuItemDisabled };
 
-HudScript* battle_menu_StarPowerHudScripts[] = { HudScript_MenuStarPower, HudScript_MenuStarPowerDisabled };
+HudScript* battle_menu_StarPowerHudScripts[] = { &HudScript_MenuStarPower, &HudScript_MenuStarPowerDisabled };
 
 HudScript* battle_menu_StarPowerMovesHudScripts[] = {
-    HudScript_MenuStarPower, HudScript_MenuStarPowerDisabled, HudScript_Eldstar, HudScript_EldstarDisabled,
-    HudScript_Mamar, HudScript_MamarDisabled, HudScript_Skolar, HudScript_SkolarDisabled,
-    HudScript_Muskular, HudScript_MuskularDisabled, HudScript_Misstar, HudScript_MisstarDisabled,
-    HudScript_Klevar, HudScript_KlevarDisabled, HudScript_Kalmar, HudScript_KalmarDisabled,
-    HudScript_StarBeam, HudScript_StarBeamDisabled, HudScript_PeachBeam, HudScript_PeachBeamDisabled,
-    HudScript_MenuStarPower, HudScript_MenuStarPowerDisabled, HudScript_MenuStarPower, HudScript_MenuStarPowerDisabled
+    &HudScript_MenuStarPower, &HudScript_MenuStarPowerDisabled, &HudScript_Eldstar, &HudScript_EldstarDisabled,
+    &HudScript_Mamar, &HudScript_MamarDisabled, &HudScript_Skolar, &HudScript_SkolarDisabled,
+    &HudScript_Muskular, &HudScript_MuskularDisabled, &HudScript_Misstar, &HudScript_MisstarDisabled,
+    &HudScript_Klevar, &HudScript_KlevarDisabled, &HudScript_Kalmar, &HudScript_KalmarDisabled,
+    &HudScript_StarBeam, &HudScript_StarBeamDisabled, &HudScript_PeachBeam, &HudScript_PeachBeamDisabled,
+    &HudScript_MenuStarPower, &HudScript_MenuStarPowerDisabled, &HudScript_MenuStarPower, &HudScript_MenuStarPowerDisabled
 };
 
 HudScript* battle_menu_PartnerHudScripts[] = {
-    HudScript_Partner0, HudScript_Goombario, HudScript_Kooper, HudScript_Bombette,
-    HudScript_Parakarry, HudScript_Partner0, HudScript_Watt, HudScript_Sushie,
-    HudScript_Lakilester, HudScript_Bow, HudScript_PartnerA, HudScript_PartnerA,
-    HudScript_PartnerA, HudScript_PartnerA, HudScript_PartnerA, HudScript_PartnerA
+    &HudScript_Partner0, &HudScript_Goombario, &HudScript_Kooper, &HudScript_Bombette,
+    &HudScript_Parakarry, &HudScript_Partner0, &HudScript_Watt, &HudScript_Sushie,
+    &HudScript_Lakilester, &HudScript_Bow, &HudScript_PartnerA, &HudScript_PartnerA,
+    &HudScript_PartnerA, &HudScript_PartnerA, &HudScript_PartnerA, &HudScript_PartnerA
 };
 
 HudScript* battle_menu_DisabledPartnerHudScripts[] = {
-    HudScript_Partner0Disabled, HudScript_GoombarioDisabled, HudScript_KooperDisabled, HudScript_BombetteDisabled,
-    HudScript_ParakarryDisabled, HudScript_Partner0Disabled, HudScript_WattDisabled, HudScript_SushieDisabled,
-    HudScript_LakilesterDisabled, HudScript_BowDisabled, HudScript_PartnerADisabled, HudScript_PartnerADisabled,
-    HudScript_PartnerADisabled, HudScript_PartnerADisabled, HudScript_PartnerADisabled, HudScript_PartnerADisabled
+    &HudScript_Partner0Disabled, &HudScript_GoombarioDisabled, &HudScript_KooperDisabled, &HudScript_BombetteDisabled,
+    &HudScript_ParakarryDisabled, &HudScript_Partner0Disabled, &HudScript_WattDisabled, &HudScript_SushieDisabled,
+    &HudScript_LakilesterDisabled, &HudScript_BowDisabled, &HudScript_PartnerADisabled, &HudScript_PartnerADisabled,
+    &HudScript_PartnerADisabled, &HudScript_PartnerADisabled, &HudScript_PartnerADisabled, &HudScript_PartnerADisabled
 };
 
-HudScript* battle_menu_StrategiesHudScript[] = { HudScript_MenuStrategies };
+HudScript* battle_menu_StrategiesHudScript[] = { &HudScript_MenuStrategies };
 
-HudScript* battle_menu_DisabledStrategiesHudScript[] = { HudScript_MenuStrategiesDisabled };
+HudScript* battle_menu_DisabledStrategiesHudScript[] = { &HudScript_MenuStrategiesDisabled };
 
-HudScript* battle_menu_DoNothingHudScripts[] = { HudScript_MenuDoNothing, HudScript_MenuDoNothingDisabled };
+HudScript* battle_menu_DoNothingHudScripts[] = { &HudScript_MenuDoNothing, &HudScript_MenuDoNothingDisabled };
 
-HudScript* battle_menu_FleeHudScripts[] = { HudScript_MenuFlee, HudScript_MenuFleeDisabled };
+HudScript* battle_menu_FleeHudScripts[] = { &HudScript_MenuFlee, &HudScript_MenuFleeDisabled };
 
 // Jump, Hammer, Items, RunAway, Defense
 s32 battle_menu_leftJustfiedMessagesA[] = { 0x001D0039, 0x001D0038, 0x001D003F, 0x001D003B, 0x001D0044 };
@@ -251,22 +249,22 @@ s32 D_802AB558[] = {
 
 HudScript* battle_menu_PartnerMoveHudScripts[] = {
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    HudScript_Goombario, HudScript_GoombarioDisabled, HudScript_MoveDiamond, HudScript_MoveDiamondDisabled, HudScript_MoveBlueOrb, HudScript_MoveBlueOrbDisabled, HudScript_MoveGreenOrb, HudScript_MoveGreenOrbDisabled, HudScript_MoveRedOrb, HudScript_MoveRedOrbDisabled,
-    HudScript_Kooper, HudScript_KooperDisabled, HudScript_MoveDiamond, HudScript_MoveDiamondDisabled, HudScript_MoveBlueOrb, HudScript_MoveBlueOrbDisabled, HudScript_MoveGreenOrb, HudScript_MoveGreenOrbDisabled, HudScript_MoveRedOrb, HudScript_MoveRedOrbDisabled,
-    HudScript_Bombette, HudScript_BombetteDisabled, HudScript_MoveDiamond, HudScript_MoveDiamondDisabled, HudScript_MoveBlueOrb, HudScript_MoveBlueOrbDisabled, HudScript_MoveGreenOrb, HudScript_MoveGreenOrbDisabled, HudScript_MoveRedOrb, HudScript_MoveRedOrbDisabled,
-    HudScript_Parakarry, HudScript_ParakarryDisabled, HudScript_MoveDiamond, HudScript_MoveDiamondDisabled, HudScript_MoveBlueOrb, HudScript_MoveBlueOrbDisabled, HudScript_MoveGreenOrb, HudScript_MoveGreenOrbDisabled, HudScript_MoveRedOrb, HudScript_MoveRedOrbDisabled,
-    HudScript_Partner0, HudScript_Partner0Disabled, HudScript_MoveDiamond, HudScript_MoveDiamondDisabled, HudScript_MoveBlueOrb, HudScript_MoveBlueOrbDisabled, HudScript_MoveGreenOrb, HudScript_MoveGreenOrbDisabled, HudScript_MoveRedOrb, HudScript_MoveRedOrbDisabled,
-    HudScript_Watt, HudScript_WattDisabled, HudScript_MoveDiamond, HudScript_MoveDiamondDisabled, HudScript_MoveBlueOrb, HudScript_MoveBlueOrbDisabled, HudScript_MoveGreenOrb, HudScript_MoveGreenOrbDisabled, HudScript_MoveRedOrb, HudScript_MoveRedOrbDisabled,
-    HudScript_Sushie, HudScript_SushieDisabled, HudScript_MoveDiamond, HudScript_MoveDiamondDisabled, HudScript_MoveBlueOrb, HudScript_MoveBlueOrbDisabled, HudScript_MoveGreenOrb, HudScript_MoveGreenOrbDisabled, HudScript_MoveRedOrb, HudScript_MoveRedOrbDisabled,
-    HudScript_Lakilester, HudScript_LakilesterDisabled, HudScript_MoveDiamond, HudScript_MoveDiamondDisabled, HudScript_MoveBlueOrb, HudScript_MoveBlueOrbDisabled, HudScript_MoveGreenOrb, HudScript_MoveGreenOrbDisabled, HudScript_MoveRedOrb, HudScript_MoveRedOrbDisabled,
-    HudScript_Bow, HudScript_BowDisabled, HudScript_MoveDiamond, HudScript_MoveDiamondDisabled, HudScript_MoveBlueOrb, HudScript_MoveBlueOrbDisabled, HudScript_MoveGreenOrb, HudScript_MoveGreenOrbDisabled, HudScript_MoveRedOrb, HudScript_MoveRedOrbDisabled };
+    &HudScript_Goombario, &HudScript_GoombarioDisabled, &HudScript_MoveDiamond, &HudScript_MoveDiamondDisabled, &HudScript_MoveBlueOrb, &HudScript_MoveBlueOrbDisabled, &HudScript_MoveGreenOrb, &HudScript_MoveGreenOrbDisabled, &HudScript_MoveRedOrb, &HudScript_MoveRedOrbDisabled,
+    &HudScript_Kooper, &HudScript_KooperDisabled, &HudScript_MoveDiamond, &HudScript_MoveDiamondDisabled, &HudScript_MoveBlueOrb, &HudScript_MoveBlueOrbDisabled, &HudScript_MoveGreenOrb, &HudScript_MoveGreenOrbDisabled, &HudScript_MoveRedOrb, &HudScript_MoveRedOrbDisabled,
+    &HudScript_Bombette, &HudScript_BombetteDisabled, &HudScript_MoveDiamond, &HudScript_MoveDiamondDisabled, &HudScript_MoveBlueOrb, &HudScript_MoveBlueOrbDisabled, &HudScript_MoveGreenOrb, &HudScript_MoveGreenOrbDisabled, &HudScript_MoveRedOrb, &HudScript_MoveRedOrbDisabled,
+    &HudScript_Parakarry, &HudScript_ParakarryDisabled, &HudScript_MoveDiamond, &HudScript_MoveDiamondDisabled, &HudScript_MoveBlueOrb, &HudScript_MoveBlueOrbDisabled, &HudScript_MoveGreenOrb, &HudScript_MoveGreenOrbDisabled, &HudScript_MoveRedOrb, &HudScript_MoveRedOrbDisabled,
+    &HudScript_Partner0, &HudScript_Partner0Disabled, &HudScript_MoveDiamond, &HudScript_MoveDiamondDisabled, &HudScript_MoveBlueOrb, &HudScript_MoveBlueOrbDisabled, &HudScript_MoveGreenOrb, &HudScript_MoveGreenOrbDisabled, &HudScript_MoveRedOrb, &HudScript_MoveRedOrbDisabled,
+    &HudScript_Watt, &HudScript_WattDisabled, &HudScript_MoveDiamond, &HudScript_MoveDiamondDisabled, &HudScript_MoveBlueOrb, &HudScript_MoveBlueOrbDisabled, &HudScript_MoveGreenOrb, &HudScript_MoveGreenOrbDisabled, &HudScript_MoveRedOrb, &HudScript_MoveRedOrbDisabled,
+    &HudScript_Sushie, &HudScript_SushieDisabled, &HudScript_MoveDiamond, &HudScript_MoveDiamondDisabled, &HudScript_MoveBlueOrb, &HudScript_MoveBlueOrbDisabled, &HudScript_MoveGreenOrb, &HudScript_MoveGreenOrbDisabled, &HudScript_MoveRedOrb, &HudScript_MoveRedOrbDisabled,
+    &HudScript_Lakilester, &HudScript_LakilesterDisabled, &HudScript_MoveDiamond, &HudScript_MoveDiamondDisabled, &HudScript_MoveBlueOrb, &HudScript_MoveBlueOrbDisabled, &HudScript_MoveGreenOrb, &HudScript_MoveGreenOrbDisabled, &HudScript_MoveRedOrb, &HudScript_MoveRedOrbDisabled,
+    &HudScript_Bow, &HudScript_BowDisabled, &HudScript_MoveDiamond, &HudScript_MoveDiamondDisabled, &HudScript_MoveBlueOrb, &HudScript_MoveBlueOrbDisabled, &HudScript_MoveGreenOrb, &HudScript_MoveGreenOrbDisabled, &HudScript_MoveRedOrb, &HudScript_MoveRedOrbDisabled };
 
-HudScript* battle_menu_PeachStarPowerHudScripts[] = { HudScript_MenuStarPower, HudScript_MenuStarPowerDisabled };
+HudScript* battle_menu_PeachStarPowerHudScripts[] = { &HudScript_MenuStarPower, &HudScript_MenuStarPowerDisabled };
 
 // Focus
 s32 D_802AB728[] = { 0x001D0055 };
 
-HudScript* battle_menu_TwinkStarPowerHudScripts[] = { HudScript_MenuStarPower, HudScript_MenuStarPowerDisabled };
+HudScript* battle_menu_TwinkStarPowerHudScripts[] = { &HudScript_MenuStarPower, &HudScript_MenuStarPowerDisabled };
 
 // Dash
 s32 D_802AB734[] = { 0x001D0057 };
@@ -628,7 +626,7 @@ void func_802A2910(void) {
         hud_element_set_tint(moveOptionCostUnitIconIDs[i], 255, 255, 255);
     }
 
-    hud_element_set_script(battle_menu_moveCursorIcon, HudScript_AnimatedHandPointer);
+    hud_element_set_script(battle_menu_moveCursorIcon, &HudScript_AnimatedHandPointer);
     set_window_update(WINDOW_ID_1, WINDOW_UPDATE_TRANSPARENT);
 
     if (!battle_menu_hasSpiritsMenu) {
@@ -679,7 +677,7 @@ void func_802A2AB8(void) {
         hud_element_set_tint(moveOptionCostUnitIconIDs[i], 255, 255, 255);
     }
 
-    hud_element_set_script(battle_menu_moveCursorIcon, HudScript_AnimatedHandPointer);
+    hud_element_set_script(battle_menu_moveCursorIcon, &HudScript_AnimatedHandPointer);
     battle_menu_moveTextColor = 10;
     D_802AD10F = 1;
     battle_menu_moveState = 20;
@@ -830,7 +828,7 @@ void func_802A47E0(void) {
     hud_element_set_tint(D_802AD618, 0xFF, 0xFF, 0xFF);
     hud_element_set_tint(D_802AD61C, 0xFF, 0xFF, 0xFF);
     hud_element_set_tint(D_802AD620, 0xFF, 0xFF, 0xFF);
-    hud_element_set_script(D_802AD618, HudScript_AnimatedHandPointer);
+    hud_element_set_script(D_802AD618, &HudScript_AnimatedHandPointer);
     set_window_update(WINDOW_ID_6, WINDOW_UPDATE_TRANSPARENT);
     set_window_update(WINDOW_ID_7, WINDOW_UPDATE_TRANSPARENT);
     set_window_update(WINDOW_ID_8, WINDOW_UPDATE_SHOW);
@@ -854,7 +852,7 @@ void func_802A48FC(void) {
     hud_element_set_tint(D_802AD618, 0xFF, 0xFF, 0xFF);
     hud_element_set_tint(D_802AD61C, 0xFF, 0xFF, 0xFF);
     hud_element_set_tint(D_802AD620, 0xFF, 0xFF, 0xFF);
-    hud_element_set_script(D_802AD618, HudScript_AnimatedHandPointer);
+    hud_element_set_script(D_802AD618, &HudScript_AnimatedHandPointer);
     D_802AD614 = 10;
     D_802AD60B = 1;
     D_802AD604 = 20;
@@ -1320,9 +1318,9 @@ void btl_state_update_peach_menu(void) {
                 battleStatus->unk_6C = 4;
                 battleStatus->unk_6E = 5;
                 battleStatus->moveCategory = 8;
-                battleStatus->selectedMoveID = 0x81;
+                battleStatus->selectedMoveID = MOVE_PEACH_FOCUS;
                 battleStatus->selectedItemID = 0xA;
-                battleStatus->currentTargetListFlags = D_8008FA78;
+                battleStatus->currentTargetListFlags = gMoveTable[MOVE_PEACH_FOCUS].flags;
                 btl_set_state(0x11);
             }
             break;

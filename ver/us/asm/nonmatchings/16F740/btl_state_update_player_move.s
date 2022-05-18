@@ -169,9 +169,9 @@ glabel btl_state_update_player_move
 /* 1745F0 80245D10 00031080 */   sll      $v0, $v1, 2
 /* 1745F4 80245D14 00431021 */  addu      $v0, $v0, $v1
 /* 1745F8 80245D18 00021080 */  sll       $v0, $v0, 2
-/* 1745FC 80245D1C 3C048009 */  lui       $a0, %hi(D_8008F073)
+/* 1745FC 80245D1C 3C048009 */  lui       $a0, %hi(gMoveTable+0x13)
 /* 174600 80245D20 00822021 */  addu      $a0, $a0, $v0
-/* 174604 80245D24 8084F073 */  lb        $a0, %lo(D_8008F073)($a0)
+/* 174604 80245D24 8084F073 */  lb        $a0, %lo(gMoveTable+0x13)($a0)
 /* 174608 80245D28 04800003 */  bltz      $a0, .L80245D38
 /* 17460C 80245D2C 2484002E */   addiu    $a0, $a0, 0x2e
 /* 174610 80245D30 0C093E58 */  jal       btl_show_battle_message

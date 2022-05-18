@@ -3,10 +3,10 @@
 
 #define NAMESPACE action_command_body_slam
 
-extern HudScript HudScript_BlueMeter[];
-extern HudScript HudScript_AButton[];
-extern HudScript HudScript_TimingWait[];
-extern HudScript HudScript_FillGaugeResult[];
+extern HudScript HudScript_BlueMeter;
+extern HudScript HudScript_AButton;
+extern HudScript HudScript_TimingWait;
+extern HudScript HudScript_FillGaugeResult;
 extern s32 D_80294320;
 
 ApiStatus N(CreateHudElements)(Evt* script, s32 isInitialCall) {
@@ -34,25 +34,25 @@ ApiStatus N(CreateHudElements)(Evt* script, s32 isInitialCall) {
     actionCommandStatus->hudElementX = -48;
     actionCommandStatus->hudElementY = 80;
 
-    hudElement = hud_element_create(HudScript_AButton);
+    hudElement = hud_element_create(&HudScript_AButton);
     actionCommandStatus->hudElements[0] = hudElement;
     hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
     hud_element_set_render_depth(hudElement, 0);
     hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
-    hudElement = hud_element_create(HudScript_BlueMeter);
+    hudElement = hud_element_create(&HudScript_BlueMeter);
     actionCommandStatus->hudElements[1] = hudElement;
     hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
     hud_element_set_render_depth(hudElement, 0);
     hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
-    hudElement = hud_element_create(HudScript_FillGaugeResult);
+    hudElement = hud_element_create(&HudScript_FillGaugeResult);
     actionCommandStatus->hudElements[3] = hudElement;
     hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
     hud_element_set_render_depth(hudElement, 0);
     hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
-    hudElement = hud_element_create(HudScript_TimingWait);
+    hudElement = hud_element_create(&HudScript_TimingWait);
     actionCommandStatus->hudElements[2] = hudElement;
     hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX + 41, actionCommandStatus->hudElementY + 22);
     hud_element_set_render_depth(hudElement, 0);

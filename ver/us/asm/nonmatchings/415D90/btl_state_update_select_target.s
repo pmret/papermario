@@ -74,9 +74,9 @@ glabel btl_state_update_select_target
 /* 41F518 802AA788 00031080 */   sll      $v0, $v1, 2
 /* 41F51C 802AA78C 00431021 */  addu      $v0, $v0, $v1
 /* 41F520 802AA790 00021080 */  sll       $v0, $v0, 2
-/* 41F524 802AA794 3C048009 */  lui       $a0, %hi(D_8008F073)
+/* 41F524 802AA794 3C048009 */  lui       $a0, %hi(gMoveTable+0x13)
 /* 41F528 802AA798 00822021 */  addu      $a0, $a0, $v0
-/* 41F52C 802AA79C 8084F073 */  lb        $a0, %lo(D_8008F073)($a0)
+/* 41F52C 802AA79C 8084F073 */  lb        $a0, %lo(gMoveTable+0x13)($a0)
 /* 41F530 802AA7A0 04800003 */  bltz      $a0, .L802AA7B0
 /* 41F534 802AA7A4 2484002E */   addiu    $a0, $a0, 0x2e
 /* 41F538 802AA7A8 0C093E58 */  jal       btl_show_battle_message

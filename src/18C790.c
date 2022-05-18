@@ -422,7 +422,7 @@ void btl_state_update_celebration(void) {
 
                 if (is_ability_active(ABILITY_FP_PLUS)) {
                     id = D_8029FAA8;
-                    hud_element_set_script(id, gItemHudScripts[gItemTable[248].iconID].enabled);
+                    hud_element_set_script(id, gItemHudScripts[gItemTable[248].hudElemID].enabled);
                     hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     hud_element_set_scale(id, 0.5f);
                     hud_element_get_render_pos(id, &x, &y);
@@ -491,7 +491,7 @@ void btl_state_update_celebration(void) {
 
                 if (is_ability_active(ABILITY_HP_PLUS)) {
                     id = D_8029FAC4;
-                    hud_element_set_script(id, gItemHudScripts[gItemTable[231].iconID].enabled);
+                    hud_element_set_script(id, gItemHudScripts[gItemTable[231].hudElemID].enabled);
                     hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     hud_element_set_scale(id, 0.5f);
                     hud_element_get_render_pos(id, &x, &y);

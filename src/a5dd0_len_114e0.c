@@ -3519,13 +3519,13 @@ void get_model_env_color_parameters(u8* primR, u8* primG, u8* primB, u8* envR, u
 void mdl_get_vertex_count(Gfx* gfx, s32* numVertices, s32* baseVtx, s32* gfxCount, Vtx* baseAddr) {
     s8 stuff[2];
 
-    s32 temp_t0_2;
+    s32 vtxCount;
     u32 w0, w1;
     u32 cmd;
-    u32 temp_v1;
+    u32 vtxEndAddr;
     s32 minVtx;
     s32 maxVtx;
-    u32 phi_v1;
+    u32 vtxStartAddr;
 
     minVtx = 0;
     maxVtx = 0;
@@ -3539,25 +3539,24 @@ void mdl_get_vertex_count(Gfx* gfx, s32* numVertices, s32* baseVtx, s32* gfxCoun
         do {
             w0 = gfx->words.w0;
             w1 = gfx->words.w1;
-            cmd = w0 >> 0x18;
+            cmd = _SHIFTR(w0,24,8);
 
-            if (cmd == G_DL_NOPUSH) {
-                phi_v1 = w1;
+            if (cmd == G_VTX) {
+                vtxStartAddr = w1;
                 if (baseAddr != NULL) {
-                    phi_v1 = (phi_v1 & 0xFFFF) + (s32)baseAddr;
+                    vtxStartAddr = (vtxStartAddr & 0xFFFF) + (s32)baseAddr;
                 }
-
-                temp_t0_2 = (w0 >> 0xC) & 0xFF;
+                vtxCount = _SHIFTR(w0,12,8);
                 if (minVtx == 0) {
-                    minVtx = phi_v1;
-                    maxVtx = phi_v1 + (temp_t0_2 * 0x10);
+                    minVtx = vtxStartAddr;
+                    maxVtx = vtxStartAddr + (vtxCount * sizeof(Vtx));
                 }
-                temp_v1 = phi_v1 + (temp_t0_2 * 0x10);
-                if (maxVtx < temp_v1) {
-                    maxVtx = temp_v1;
+                vtxEndAddr = vtxStartAddr + (vtxCount * sizeof(Vtx));
+                if (maxVtx < vtxEndAddr) {
+                    maxVtx = vtxEndAddr;
                 }
-                if (minVtx > temp_v1) {
-                    minVtx = temp_v1;
+                if (minVtx > vtxEndAddr) {
+                    minVtx = vtxEndAddr;
                 }
             }
             gfx++;

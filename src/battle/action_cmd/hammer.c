@@ -4,13 +4,13 @@
 #define NAMESPACE action_command_hammer
 
 // icon indexes for hud elements
-extern HudScript HudScript_TimingBar1Chance[];
-extern HudScript HudScript_TimingWait[];
-extern HudScript HudScript_TimingCharge4a[];
-extern HudScript HudScript_TimingCharge4b[];
-extern HudScript HudScript_TimingCharge4c[];
-extern HudScript HudScript_StickHoldLeft[];
-extern HudScript HudScript_RightOn[];
+extern HudScript HudScript_TimingBar1Chance;
+extern HudScript HudScript_TimingWait;
+extern HudScript HudScript_TimingCharge4a;
+extern HudScript HudScript_TimingCharge4b;
+extern HudScript HudScript_TimingCharge4c;
+extern HudScript HudScript_StickHoldLeft;
+extern HudScript HudScript_RightOn;
 
 extern s32 D_802941E0;
 
@@ -36,43 +36,43 @@ ApiStatus N(CreateHudElements)(Evt* script, s32 isInitialCall) {
     actionCommandStatus->unk_60 = 0;
     actionCommandStatus->hudElementY = 96;
 
-    hudElement = hud_element_create(HudScript_TimingBar1Chance);
+    hudElement = hud_element_create(&HudScript_TimingBar1Chance);
     actionCommandStatus->hudElements[0] = hudElement;
     hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
     hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
     hud_element_set_render_depth(hudElement, 10);
 
-    hudElement = hud_element_create(HudScript_TimingWait);
+    hudElement = hud_element_create(&HudScript_TimingWait);
     actionCommandStatus->hudElements[1] = hudElement;
     hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
     hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
     hud_element_set_render_depth(hudElement, 0);
 
-    hudElement = hud_element_create(HudScript_TimingCharge4a);
+    hudElement = hud_element_create(&HudScript_TimingCharge4a);
     actionCommandStatus->hudElements[2] = hudElement;
     hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
     hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
     hud_element_set_render_depth(hudElement, 0);
 
-    hudElement = hud_element_create(HudScript_TimingCharge4b);
+    hudElement = hud_element_create(&HudScript_TimingCharge4b);
     actionCommandStatus->hudElements[3] = hudElement;
     hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
     hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
     hud_element_set_render_depth(hudElement, 0);
 
-    hudElement = hud_element_create(HudScript_TimingCharge4c);
+    hudElement = hud_element_create(&HudScript_TimingCharge4c);
     actionCommandStatus->hudElements[4] = hudElement;
     hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
     hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
     hud_element_set_render_depth(hudElement, 0);
 
-    hudElement = hud_element_create(HudScript_StickHoldLeft);
+    hudElement = hud_element_create(&HudScript_StickHoldLeft);
     actionCommandStatus->hudElements[5] = hudElement;
     hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
     hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
     hud_element_set_render_depth(hudElement, 0);
 
-    hudElement = hud_element_create(HudScript_RightOn);
+    hudElement = hud_element_create(&HudScript_RightOn);
     actionCommandStatus->hudElements[6] = hudElement;
     hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
     hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
