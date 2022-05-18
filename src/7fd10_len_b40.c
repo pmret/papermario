@@ -146,7 +146,7 @@ s32 setup_item_popup(PopupMenu* menu) {
 
         if (itemIdx != 0) {
             ItemData* item = &gItemTable[itemIdx];
-            HudScriptPair* itemScripts = &gItemHudScripts[item->iconID];
+            IconHudScriptPair* itemScripts = &gItemHudScripts[item->hudElemID];
 
             if (item->typeFlags & 1) {
                 menu->ptrIcon[optionCount] = itemScripts->enabled;
@@ -158,7 +158,7 @@ s32 setup_item_popup(PopupMenu* menu) {
                 menu->enabled[optionCount] = FALSE;
             }
             menu->nameMsg[optionCount] = item->nameMsg;
-            menu->descMsg[optionCount] = item->itemMsg;
+            menu->descMsg[optionCount] = item->shortDescMsg;
             optionCount++;
         }
     }

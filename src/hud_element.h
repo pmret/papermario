@@ -5,7 +5,9 @@
 
 #define HUD_ELEMENT_BATTLE_ID_MASK 0x800
 
-typedef enum {
+typedef s32 HudScript[0];
+
+enum {
     HUD_ELEMENT_OP_End,
     HUD_ELEMENT_OP_SetRGBA,
     HUD_ELEMENT_OP_SetCI,
@@ -34,7 +36,7 @@ typedef enum {
     HUD_ELEMENT_OP_ClearFlags,
     HUD_ELEMENT_OP_PlaySound,
     HUD_ELEMENT_OP_SetPivot,
-} HudScript[0];
+};
 
 enum {
     HUD_ELEMENT_SIZE_8x8,
@@ -144,10 +146,10 @@ typedef struct Shop {
     /* 0x358 */ s32 unk_358;
 } Shop; // size = 0x35C
 
-typedef struct HudScriptPair {
+typedef struct IconHudScriptPair {
     /* 0x00 */ HudScript* enabled;
     /* 0x04 */ HudScript* disabled;
-} HudScriptPair; // size = 0x08
+} IconHudScriptPair; // size = 0x08
 
 typedef struct VtxRect {
     Vtx vtx[4];
@@ -164,8 +166,8 @@ typedef struct HudTransform {
 
 typedef struct HudElement {
     /* 0x00 */ u32 flags;
-    /* 0x04 */ const HudScript* readPos;
-    /* 0x08 */ const HudScript* anim;
+    /* 0x04 */ HudScript* readPos;
+    /* 0x08 */ HudScript* anim;
     /* 0x0C */ HudScript* loopStartPos;
     /* 0x10 */ u8* imageAddr;
     /* 0x14 */ u8* paletteAddr;
@@ -194,12 +196,12 @@ typedef struct HudElement {
 
 typedef HudElement* HudElementList[320];
 
-extern HudScript HudScript_AnimatedHandPointer[];
-extern HudScript HudScript_StatusCoin[];
-extern HudScript HudScript_Refund[];
-extern HudScript HudScript_MenuTimes[];
+extern HudScript HudScript_AnimatedHandPointer;
+extern HudScript HudScript_StatusCoin;
+extern HudScript HudScript_Refund;
+extern HudScript HudScript_MenuTimes;
 
-extern s32 gPartnerPopupProperties[11][4];
+extern s32 gPartnerPopupProperties[13][4];
 extern HudScript* wDisabledPartnerHudScripts[];
 extern HudScript* wPartnerHudScripts[];
 
@@ -216,7 +218,7 @@ extern HudScript* wPartnerHudScripts[];
 #define he_AddTexelOffsetX(x) HUD_ELEMENT_OP_AddTexelOffsetX, x
 #define he_AddTexelOffsetY(y) HUD_ELEMENT_OP_AddTexelOffsetY, y
 #define he_SetTexelOffset(x, y) HUD_ELEMENT_OP_SetTexelOffset, x, y
-#define he_SetImage(arg0, raster, palette, arg2, arg3) HUD_ELEMENT_OP_SetImage, arg0, raster, palette, arg2, arg3
+#define he_SetImage(arg0, raster, palette) HUD_ELEMENT_OP_SetImage, arg0, raster, palette, 0, 0
 #define he_SetScale(scale) HUD_ELEMENT_OP_SetScale, (s32)(scale * 65536.0f)
 #define he_SetAlpha(alpha) HUD_ELEMENT_OP_SetAlpha, alpha
 #define he_RandomDelay(arg0, arg1) HUD_ELEMENT_OP_RandomDelay, arg0, arg1
@@ -234,7 +236,7 @@ extern HudScript* wPartnerHudScripts[];
 #define he_PlaySound(arg0) HUD_ELEMENT_OP_PlaySound, arg0
 #define he_SetPivot(arg0, arg1) HUD_ELEMENT_OP_SetPivot, arg0, arg1
 
-void hud_element_load_script(HudElement* hudElement, const HudScript* anim);
+void hud_element_load_script(HudElement* hudElement, HudScript* anim);
 
 /// @param clamp        0 = repeat; 1 = clamp
 /// @param dropShadow   Whether to render a drop shadow or not
@@ -245,7 +247,7 @@ void hud_element_clear_cache(void);
 void init_hud_element_list(void);
 
 /// Creates a new HUD element and returns its ID.
-s32 hud_element_create(const HudScript* anim);
+s32 hud_element_create(HudScript* anim);
 
 void update_hud_elements(void);
 
@@ -271,7 +273,7 @@ void hud_element_draw_clipped(s32 id);
 void hud_element_draw_next(s32 id);
 void hud_element_draw_without_clipping(s32 id);
 
-void hud_element_set_script(s32 id, const HudScript* anim);
+void hud_element_set_script(s32 id, HudScript* anim);
 
 HudScript* hud_element_get_script(s32 id);
 

@@ -569,7 +569,7 @@ void func_80136A08(ItemEntity* itemEntity, s32 posX, s32 posY) {
         case 3:
         case 10:
         case 11:
-            itemMsg = itemData->itemMsg;
+            itemMsg = itemData->shortDescMsg;
             draw_msg(itemMsg, posX + 8, posY, 255, 0xA, 0);
             break;
     }

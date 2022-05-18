@@ -9,7 +9,7 @@
 #include "sprite/npc/world_sushie.h"
 #include "sprite/npc/world_lakilester.h"
 
-extern s32 gPartnerPopupProperties[11][4];
+extern s32 gPartnerPopupProperties[13][4];
 extern s8 gPauseBufferPal1[512];
 extern s8 gPauseBufferImg1[15752];
 extern s8 gPauseBufferPal2[512];
@@ -455,9 +455,9 @@ void pause_partners_draw_movelist(MenuPanel* menu, s32 baseX, s32 baseY, s32 wid
         style = 1;
 
         if (i == 0) {
-            moveNameID = gMoveTable[gPausePartnersMoveBase[gPausePartnersPartnerIdx[gPausePartnersCurrentPartnerIdx]]].moveNameID;
+            moveNameID = gMoveTable[gPausePartnersMoveBase[gPausePartnersPartnerIdx[gPausePartnersCurrentPartnerIdx]]].nameMsg;
         } else {
-            moveNameID =  gMoveTable[gPausePartnersMoveBase[gPausePartnersPartnerIdx[gPausePartnersCurrentPartnerIdx]] + 2 + i].moveNameID;
+            moveNameID =  gMoveTable[gPausePartnersMoveBase[gPausePartnersPartnerIdx[gPausePartnersCurrentPartnerIdx]] + 2 + i].nameMsg;
         }
 
         if (i > 0) {
@@ -652,9 +652,9 @@ void pause_partners_handle_input(MenuPanel* panel) {
     if (gPausePartnersLevel == 0) {
         gPauseCurrentDescMsg = gPausePartnersMessages[gPausePartnersPartnerIdx[gPausePartnersCurrentPartnerIdx]];
     } else if (gPausePartnersSelectedMove == 0) {
-        gPauseCurrentDescMsg = gMoveTable[gPausePartnersMoveBase[gPausePartnersPartnerIdx[gPausePartnersCurrentPartnerIdx]]].menuDescID;
+        gPauseCurrentDescMsg = gMoveTable[gPausePartnersMoveBase[gPausePartnersPartnerIdx[gPausePartnersCurrentPartnerIdx]]].fullDescMsg;
     } else {
-        gPauseCurrentDescMsg = gMoveTable[gPausePartnersMoveBase[gPausePartnersPartnerIdx[gPausePartnersCurrentPartnerIdx]] + 2 + gPausePartnersSelectedMove].menuDescID;
+        gPauseCurrentDescMsg = gMoveTable[gPausePartnersMoveBase[gPausePartnersPartnerIdx[gPausePartnersCurrentPartnerIdx]] + 2 + gPausePartnersSelectedMove].fullDescMsg;
     }
 }
 

@@ -93,10 +93,10 @@ extern s32 D_8029EFBC;
 extern s32 D_8029EFC0[10];
 extern s32 D_8029EFE8[10];
 extern s32 D_8029F010[10];
-extern HudScript HudScript_HPBar[];
-extern HudScript HudScript_Item_SmallStarPoint[];
-extern HudScript HudScript_Item_StarPoint[];
-extern HudScript HudScript_StatusSPShine[];
+extern HudScript HudScript_HPBar;
+extern HudScript HudScript_Item_SmallStarPoint;
+extern HudScript HudScript_Item_StarPoint;
+extern HudScript HudScript_StatusSPShine;
 
 void func_8023ED5C(void);
 void func_8023F088(Camera*);
@@ -198,23 +198,23 @@ void initialize_battle(void) {
     func_8024EDC0();
     func_80268E88();
     set_windows_visible(WINDOW_GROUP_1);
-    D_8029EFBC = hud_element_create(HudScript_HPBar);
+    D_8029EFBC = hud_element_create(&HudScript_HPBar);
     hud_element_set_flags(D_8029EFBC, HUD_ELEMENT_FLAGS_80);
 
     for (i = 0; i < ARRAY_COUNT(D_8029EFC0); i++) {
-        hudElemID = D_8029EFC0[i] = hud_element_create(HudScript_Item_StarPoint);
+        hudElemID = D_8029EFC0[i] = hud_element_create(&HudScript_Item_StarPoint);
         hud_element_set_flags(hudElemID, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
         hud_element_set_render_depth(hudElemID, 20);
     }
 
     for (i = 0; i < ARRAY_COUNT(D_8029EFE8); i++) {
-        hudElemID = D_8029EFE8[i] = hud_element_create(HudScript_StatusSPShine);
+        hudElemID = D_8029EFE8[i] = hud_element_create(&HudScript_StatusSPShine);
         hud_element_set_flags(hudElemID, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
         hud_element_set_render_depth(hudElemID, 20);
     }
 
     for (i = 0; i < ARRAY_COUNT(D_8029F010); i++) {
-        hudElemID = D_8029F010[i] = hud_element_create(HudScript_Item_SmallStarPoint);
+        hudElemID = D_8029F010[i] = hud_element_create(&HudScript_Item_SmallStarPoint);
         hud_element_set_flags(hudElemID, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
         hud_element_set_render_depth(hudElemID, 20);
     }

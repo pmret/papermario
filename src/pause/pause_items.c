@@ -233,10 +233,10 @@ void pause_items_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
                     } else {
                         if (isSelected) {
                             hud_element_set_flags(itemIcon, HUD_ELEMENT_FLAGS_DROP_SHADOW);
-                            gPauseCurrentDescIconScript = gItemHudScripts[gItemTable[itemID].iconID].enabled;
+                            gPauseCurrentDescIconScript = gItemHudScripts[gItemTable[itemID].hudElemID].enabled;
                         }
 
-                        hud_element_set_script(itemIcon, gItemHudScripts[gItemTable[itemID].iconID].enabled);
+                        hud_element_set_script(itemIcon, gItemHudScripts[gItemTable[itemID].hudElemID].enabled);
                         hud_element_set_scale(itemIcon, 0.670816f);
                     }
 
@@ -539,7 +539,7 @@ void pause_items_handle_input(MenuPanel* panel) {
 
     if (gPauseItemsLevel == 1) {
         if (gPauseItemsSelectedItem != ITEM_NONE_STANDIN && gPauseItemsSelectedItem != ITEM_INVALID && gPauseItemsSelectedItem != 0) {
-            gPauseCurrentDescMsg = gItemTable[gPauseItemsSelectedItem].menuMsg;
+            gPauseCurrentDescMsg = gItemTable[gPauseItemsSelectedItem].fullDescMsg;
         } else {
             gPauseCurrentDescMsg = 0;
             gPauseCurrentDescIconScript = NULL;

@@ -61,7 +61,7 @@ extern HudScript HudScript_StatusSPIncrement5[];
 extern HudScript HudScript_StatusSPIncrement6[];
 extern HudScript HudScript_StatusSPIncrement7[];
 extern HudScript HudScript_StatusSPEmptyIncrement[];
-extern HudScriptPair gItemHudScripts[];
+extern IconHudScriptPair gItemHudScripts[];
 
 extern WindowStyleCustom gPauseWS_0;
 extern WindowStyleCustom gPauseWS_1;
