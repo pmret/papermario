@@ -141,18 +141,18 @@ HudScript HudScript_HandPointLeftHeld = {
 	hs_End
 };
 
-#include "item_hud_scripts.c"
+#include "item_hud_scripts.inc.c"
 
 //TODO padding
 s32 pad_after_item_hudscripts[] = {
     0x00000000, 0x00000000
 };
 
-#include "item_table.c"
+#include "item_table.inc.c"
 
-#include "item_hud_script_table.c"
+#include "item_hud_script_table.inc.c"
 
-#include "item_entity_scripts.c"
+#include "item_entity_scripts.inc.c"
 
 s32 D_8008EEC0[] = {
 0, 0x00000001, 0x00000002, 0x00000003, 0x00000004, 0x00000009, 0x00000006, 0x00000007, 0x00000008, 0x00000005, 0x0000000A, 0x0000000B
@@ -220,7 +220,7 @@ IconHudScriptPair gPartnerIconHudScripts[] = {
     { .enabled = (HudScript*)0x80108018, .disabled = (HudScript*)0x80108040 },
 };
 
-#include "move_table.c"
+#include "move_table.inc.c"
 
 //TODO padding
 s32 pad_after_move_table[] = {
