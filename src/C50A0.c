@@ -4,13 +4,13 @@
 
 #define MAX_ITEM_ENTITIES 256
 
-extern s32 D_801512F8;
-extern s32 D_80155D84;
-extern s32 D_80155D88;
-extern ItemEntity* D_80155DA0[MAX_ITEM_ENTITIES];
-extern ItemEntity* D_801561A0[MAX_ITEM_ENTITIES];
-extern ItemEntity** D_801565A0; // item entity list
-extern s16 D_801565A4;
+extern s32 ItemEntitiesCreated;
+extern s32 ItemEntityAlternatingSpawn;
+extern s32 ItemEntityRenderGroup;
+extern ItemEntity* WorldItemEntities[MAX_ITEM_ENTITIES];
+extern ItemEntity* BattleItemEntities[MAX_ITEM_ENTITIES];
+extern ItemEntity** gCurrentItemEntities;
+extern s16 isPickingUpItem;
 extern s16 D_801565A8;
 extern s32 D_80155D80;
 extern s16 D_80155D8C;
@@ -23,7 +23,7 @@ void item_entity_load(ItemEntity*);
 void item_entity_update(ItemEntity*);
 void appendGfx_item_entity(void*);
 void draw_item_entities(void);
-void func_80132D94(void);
+void draw_item_entities_UI(void);
 s32 test_item_player_collision(ItemEntity*);
 void update_item_entity_collectable(ItemEntity*);
 void func_8013559C(ItemEntity*);
@@ -56,38 +56,38 @@ s32 integer_log(s32 number, u32 base) {
 INCLUDE_ASM(s32, "C50A0", draw_adjustable_tiled_image);
 
 void sparkle_script_init(ItemEntity* itemEntity, s32* state) {
-    itemEntity->currentState = state;
-    itemEntity->framesLeft = 1;
-    itemEntity->sequenceStart = state;
+    itemEntity->sparkleReadPos = state;
+    itemEntity->sparkleNextUpdate = 1;
+    itemEntity->sparkleSavedPos = state;
 }
 
 s32 sparkle_script_step(ItemEntity* itemEntity) {
-    s32* currentState = itemEntity->currentState;
+    s32* currentState = itemEntity->sparkleReadPos;
 
     switch (*currentState++) {
         case 1:
-            itemEntity->framesLeft = *currentState++;
-            itemEntity->unk_44 = *currentState++;
-            itemEntity->currentState = currentState;
+            itemEntity->sparkleNextUpdate = *currentState++;
+            itemEntity->sparkleUnk44 = *currentState++;
+            itemEntity->sparkleReadPos = currentState;
             break;
         case 2:
-            itemEntity->currentState = itemEntity->sequenceStart;
+            itemEntity->sparkleReadPos = itemEntity->sparkleSavedPos;
             return TRUE;
         case 3:
-            itemEntity->sequenceStart = currentState;
-            itemEntity->currentState = currentState;
+            itemEntity->sparkleSavedPos = currentState;
+            itemEntity->sparkleReadPos = currentState;
             return TRUE;
         case 7:
-            itemEntity->framesLeft = *currentState++;
-            itemEntity->unk_4C = *currentState++;
-            itemEntity->unk_50 = *currentState++;
-            itemEntity->unk_54 = *currentState++;
-            itemEntity->unk_58 = *currentState++;
-            itemEntity->currentState = currentState;
+            itemEntity->sparkleNextUpdate = *currentState++;
+            itemEntity->sparkleRaster = *currentState++;
+            itemEntity->sparklePalette = *currentState++;
+            itemEntity->sparkleWidth = *currentState++;
+            itemEntity->sparkleHeight = *currentState++;
+            itemEntity->sparkleReadPos = currentState;
             break;
         case 4:
-            itemEntity->currentState = currentState++;
-            itemEntity->currentState = currentState++;
+            itemEntity->sparkleReadPos = currentState++;
+            itemEntity->sparkleReadPos = currentState++;
         case 0:
             return TRUE;
     }
@@ -95,18 +95,16 @@ s32 sparkle_script_step(ItemEntity* itemEntity) {
 }
 
 void sparkle_script_update(ItemEntity* itemEntity) {
-    itemEntity->framesLeft--;
-    if (itemEntity->framesLeft <= 0) {
-        while (sparkle_script_step(itemEntity) != 0) {
-
-        }
+    itemEntity->sparkleNextUpdate--;
+    if (itemEntity->sparkleNextUpdate <= 0) {
+        while (sparkle_script_step(itemEntity) != 0) {}
     }
 }
 
 INCLUDE_ASM(s32, "C50A0", draw_coin_sparkles);
 
 ItemEntity* get_item_entity(s32 itemEntityIndex) {
-    return D_801565A0[itemEntityIndex];
+    return gCurrentItemEntities[itemEntityIndex];
 }
 
 void item_entity_disable_shadow(ItemEntity* itemEntity) {
@@ -133,42 +131,42 @@ void clear_item_entity_data(void) {
     s32 i;
 
     if (!gGameStatusPtr->isBattle) {
-        D_801565A0 = D_80155DA0;
+        gCurrentItemEntities = WorldItemEntities;
     } else {
-        D_801565A0 = D_801561A0;
+        gCurrentItemEntities = BattleItemEntities;
     }
 
     for (i = 0; i < MAX_ITEM_ENTITIES; i++) {
-        D_801565A0[i] = NULL;
+        gCurrentItemEntities[i] = NULL;
     }
 
-    D_801512F8 = 0;
+    ItemEntitiesCreated = 0;
     D_80155D8C = 0;
     D_80155D8E = 0;
     D_80155D90 = 0;
-    D_80155D84 = 0;
+    ItemEntityAlternatingSpawn = 0;
 
     if (!gGameStatusPtr->isBattle) {
-        D_80155D88 = 0;
+        ItemEntityRenderGroup = 0;
     }
 
     create_generic_entity_world(NULL, draw_item_entities);
-    create_generic_entity_frontUI(NULL, func_80132D94);
-    D_801565A4 = 0;
+    create_generic_entity_frontUI(NULL, draw_item_entities_UI);
+    isPickingUpItem = FALSE;
     D_801565A8 = 0;
 }
 
 void init_item_entity_list(void) {
     if (!gGameStatusPtr->isBattle) {
-        D_801565A0 = D_80155DA0;
+        gCurrentItemEntities = WorldItemEntities;
     } else {
-        D_801565A0 = D_801561A0;
+        gCurrentItemEntities = BattleItemEntities;
     }
 
-    D_801565A4 = 0;
+    isPickingUpItem = FALSE;
     D_801565A8 = 0;
-    D_801512F8 = 0;
-    D_80155D84 = 0;
+    ItemEntitiesCreated = 0;
+    ItemEntityAlternatingSpawn = 0;
 }
 
 INCLUDE_ASM(s32, "C50A0", item_entity_load);
@@ -184,7 +182,88 @@ s32 make_item_entity_delayed(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode,
     return make_item_entity(itemID, x, y, z, itemSpawnMode, pickupDelay, -1, pickupVar);
 }
 
-INCLUDE_ASM(s32, "C50A0", make_item_entity_at_player);
+s32 make_item_entity_at_player(s32 itemID, s32 arg1, s32 pickupMsgFlags) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    ItemEntity* item;
+    Shadow* shadow;
+    s32 i;
+    f32 posX;
+    f32 posY;
+    f32 posZ;
+    f32 depth;
+    s32 id;
+    
+    for(i = 0; i < MAX_ITEM_ENTITIES; i++) {
+        if (gCurrentItemEntities[i] == NULL) {
+            break;
+        }
+    }
+    ASSERT(i < MAX_ITEM_ENTITIES);
+    id = i;
+    
+    gCurrentItemEntities[id] = item = heap_malloc(sizeof(ItemEntity));
+    ItemEntitiesCreated++;
+    ASSERT(item != NULL);
+    
+    itemID &= 0xFFFF;
+    item->renderGroup = -1;
+    item->flags = (ITEM_ENTITY_FLAGS_CAM0 | ITEM_ENTITY_FLAGS_CAM1 | ITEM_ENTITY_FLAGS_CAM2 | ITEM_ENTITY_FLAGS_10 | ITEM_ENTITY_FLAGS_2000000);
+    if (arg1 != 0) {
+        item->flags |= ITEM_ENTITY_FLAGS_4000000;
+    }
+    item->pickupMsgFlags = pickupMsgFlags;
+    item->spawnType = ITEM_SPAWN_AT_PLAYER;
+    item->state = 0;
+    item->boundVar = 0;
+    item->position.x = playerStatus->position.x;
+    item->position.y = playerStatus->position.y;
+    item->position.z = playerStatus->position.z;
+    
+    item->shadowIndex = -1;
+    item->nextUpdate = 1;
+    item->unk_34.x = -9999;
+    item->unk_34.y = -9999;
+    item->unk_34.z = -9999;
+    item->scale = 1.0f;
+    item->itemID = itemID;
+    item->physicsData = NULL;
+    item->pickupDelay = 0;
+    item->wsFaceAngle = 0;
+    item->flags |= ITEM_ENTITY_FLAGS_TINY;
+
+    if (gItemTable[itemID].typeFlags & ITEM_TYPE_FLAG_ENTITY_FULLSIZE) {
+        item->flags = (item->flags | ITEM_ENTITY_FLAGS_40000) & ~ITEM_ENTITY_FLAGS_TINY;
+    }
+    if (ItemEntityAlternatingSpawn != 0) {
+        item->flags |= ITEM_ENTITY_FLAGS_20000;
+    }
+    ItemEntityAlternatingSpawn = 1 - ItemEntityAlternatingSpawn;
+    
+    item->shadowIndex = create_shadow_type(0, item->position.x, item->position.y, item->position.z);
+    shadow = get_shadow_by_index(item->shadowIndex);
+    shadow->flags |= 1;
+
+    posX = item->position.x;
+    posY = item->position.y + 12.0f;
+    posZ = item->position.z;
+    depth = 1000.0f;
+    npc_raycast_down_sides(0x20000, &posX, &posY, &posZ, &depth);
+    shadow->position.x = posX;
+    shadow->position.y = posY;
+    shadow->position.z = posZ;
+    
+    shadow->rotation.x = gGameStatusPtr->playerGroundTraceAngles.x;
+    shadow->rotation.y = 0.0f;
+    shadow->rotation.z = gGameStatusPtr->playerGroundTraceAngles.z;
+    set_standard_shadow_scale(shadow, depth * 0.5f);
+    
+    item_entity_load(item);
+    if (item->itemID == ITEM_COIN) {
+        sparkle_script_init(item, &SparkleScript_Coin);
+        sparkle_script_update(item);
+    }
+    return id;
+}
 
 INCLUDE_ASM(s32, "C50A0", item_entity_update);
 
@@ -197,7 +276,7 @@ void update_item_entities(void) {
 
     if (!(gOverrideFlags & (GLOBAL_OVERRIDES_400 | GLOBAL_OVERRIDES_800))) {
         for (i = 0; i < 0x100; i++) {
-            entity = D_801565A0[i];
+            entity = gCurrentItemEntities[i];
 
             if (entity != NULL && entity->flags != 0) {
                 if (entity->itemID == ITEM_COIN) {
@@ -212,37 +291,37 @@ void update_item_entities(void) {
 
                 item_entity_update(entity);
 
-                switch (entity->type) {
-                    case 0:
+                switch (entity->spawnType) {
+                    case ITEM_SPAWN_MODE_NOTHING:
                         update_item_entity_static(entity);
                         break;
-                    case 1:
-                    case 2:
+                    case ITEM_SPAWN_MODE_DECORATION:
+                    case ITEM_SPAWN_MODE_INVISIBLE:
                         func_801356CC(entity);
                         break;
-                    case 3:
-                    case 12:
-                    case 16:
-                    case 20:
-                    case 23:
+                    case ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS:
+                    case ITEM_SPAWN_MODE_FALL_SPAWN_ALWAYS:
+                    case ITEM_SPAWN_MODE_FIXED_SPAWN_ALWAYS:
+                    case ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS:
+                    case ITEM_SPAWN_MODE_TOSS_FADE1:
                         update_item_entity_collectable(entity);
                         break;
-                    case 28:
+                    case ITEM_SPAWN_AT_PLAYER:
                         update_item_entity_temp(entity);
                         break;
                 }
 
 
-                entity = D_801565A0[i];
+                entity = gCurrentItemEntities[i];
                 if (entity != NULL) {
                     s32 xs, ys, zs;
 
-                    switch (entity->type) {
-                        case 0:
-                        case 3:
-                        case 12:
-                        case 16:
-                        case 28:
+                    switch (entity->spawnType) {
+                        case ITEM_SPAWN_MODE_NOTHING:
+                        case ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS:
+                        case ITEM_SPAWN_MODE_FALL_SPAWN_ALWAYS:
+                        case ITEM_SPAWN_MODE_FIXED_SPAWN_ALWAYS:
+                        case ITEM_SPAWN_AT_PLAYER:
                             xs = entity->position.x;
                             ys = entity->position.y;
                             zs = entity->position.z;
@@ -285,11 +364,11 @@ void draw_item_entities(void) {
     s32 i;
 
     for (i = 0; i < MAX_ITEM_ENTITIES; i++) {
-        ItemEntity* itemEntity = D_801565A0[i];
+        ItemEntity* itemEntity = gCurrentItemEntities[i];
 
         if (itemEntity != NULL && itemEntity->flags != 0 && !(itemEntity->flags & ITEM_ENTITY_FLAGS_40) &&
             (itemEntity->flags & (1 << gCurrentCamID)) && !(itemEntity->flags & ITEM_ENTITY_FLAGS_100000) &&
-            !(itemEntity->unk_1D != -1 && D_80155D88 != itemEntity->unk_1D))
+            !(itemEntity->renderGroup != -1 && ItemEntityRenderGroup != itemEntity->renderGroup))
         {
             if (!(itemEntity->flags & ITEM_ENTITY_FLAGS_TRANSPARENT)) {
                 rtPtr->renderMode = RENDER_MODE_ALPHATEST;
@@ -309,27 +388,27 @@ void draw_item_entities(void) {
     }
 }
 
-void func_80132D94(void) {
-    if (!(gOverrideFlags & 0xC000)) {
+void draw_item_entities_UI(void) {
+    if (!(gOverrideFlags & (GLOBAL_OVERRIDES_4000 | GLOBAL_OVERRIDES_8000))) {
         s32 i;
 
         for (i = 0; i < MAX_ITEM_ENTITIES; i++) {
-            ItemEntity* itemEntity = D_801565A0[i];
+            ItemEntity* itemEntity = gCurrentItemEntities[i];
 
             if (itemEntity != NULL && itemEntity->flags != 0) {
-                switch (itemEntity->type) {
-                    case 0:
+                switch (itemEntity->spawnType) {
+                    case ITEM_SPAWN_MODE_NOTHING:
                         func_801356C4();
                         break;
-                    case 1:
-                    case 2:
+                    case ITEM_SPAWN_MODE_DECORATION:
+                    case ITEM_SPAWN_MODE_INVISIBLE:
                         func_801356D4();
                         break;
-                    case 3:
-                    case 12:
-                    case 16:
-                    case 20:
-                    case 23:
+                    case ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS:
+                    case ITEM_SPAWN_MODE_FALL_SPAWN_ALWAYS:
+                    case ITEM_SPAWN_MODE_FIXED_SPAWN_ALWAYS:
+                    case ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS:
+                    case ITEM_SPAWN_MODE_TOSS_FADE1:
                         func_8013559C(itemEntity);
                         break;
                 }
@@ -346,7 +425,7 @@ void remove_item_entity_by_reference(ItemEntity* entity) {
     s32 index;
 
     for (index = 0; index < MAX_ITEM_ENTITIES; index++) {
-        if (D_801565A0[index] == entity) {
+        if (gCurrentItemEntities[index] == entity) {
             break;
         }
     }
@@ -356,51 +435,51 @@ void remove_item_entity_by_reference(ItemEntity* entity) {
             heap_free(entity->physicsData);
         }
 
-        switch (entity->type) {
-            case 0:
-            case 3:
-            case 12:
-            case 16:
-            case 20:
-            case 28:
+        switch (entity->spawnType) {
+            case ITEM_SPAWN_MODE_NOTHING:
+            case ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS:
+            case ITEM_SPAWN_MODE_FALL_SPAWN_ALWAYS:
+            case ITEM_SPAWN_MODE_FIXED_SPAWN_ALWAYS:
+            case ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS:
+            case ITEM_SPAWN_AT_PLAYER:
                 delete_shadow(entity->shadowIndex);
                 break;
         }
 
-        heap_free(D_801565A0[index]);
-        D_801565A4 = 0;
-        D_801565A0[index] = NULL;
+        heap_free(gCurrentItemEntities[index]);
+        isPickingUpItem = FALSE;
+        gCurrentItemEntities[index] = NULL;
     }
 }
 
 void remove_item_entity_by_index(s32 index) {
-    ItemEntity* itemEntity = D_801565A0[index];
+    ItemEntity* itemEntity = gCurrentItemEntities[index];
 
-    switch (itemEntity->type) {
-        case 0:
-        case 3:
-        case 12:
-        case 16:
-        case 20:
-        case 28:
+    switch (itemEntity->spawnType) {
+        case ITEM_SPAWN_MODE_NOTHING:
+        case ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS:
+        case ITEM_SPAWN_MODE_FALL_SPAWN_ALWAYS:
+        case ITEM_SPAWN_MODE_FIXED_SPAWN_ALWAYS:
+        case ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS:
+        case ITEM_SPAWN_AT_PLAYER:
             delete_shadow(itemEntity->shadowIndex);
             break;
     }
 
-    heap_free(D_801565A0[index]);
-    D_801565A0[index] = NULL;
-    D_801565A4 = 0;
+    heap_free(gCurrentItemEntities[index]);
+    gCurrentItemEntities[index] = NULL;
+    isPickingUpItem = FALSE;
 }
 
 void func_80133A94(s32 idx, s32 itemID) {
-    ItemEntity* item = D_801565A0[idx];
+    ItemEntity* item = gCurrentItemEntities[idx];
 
     item->itemID = itemID;
 
     item->flags |= ENTITY_FLAGS_4000;
     item->flags &= ~ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE2;
 
-    if (gItemTable[itemID].typeFlags & 0x1000) {
+    if (gItemTable[itemID].typeFlags & ITEM_TYPE_FLAG_ENTITY_FULLSIZE) {
         item->flags |= ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE2;
         item->flags &= ~ENTITY_FLAGS_4000;
     }
@@ -415,14 +494,14 @@ s32 test_item_entity_position(f32 x, f32 y, f32 z, f32 dist) {
     f32 dx, dy, dz;
     s32 i;
 
-    if (is_starting_conversation() || D_801565A4 || get_time_freeze_mode() != 0 ||
+    if (is_starting_conversation() || isPickingUpItem || get_time_freeze_mode() != 0 ||
         gOverrideFlags & GLOBAL_OVERRIDES_CANT_PICK_UP_ITEMS)
     {
         return -1;
     }
 
     for (i = 0; i < MAX_ITEM_ENTITIES; i++){
-        item = D_801565A0[i];
+        item = gCurrentItemEntities[i];
 
         if (item == NULL) {
             continue;
@@ -432,11 +511,11 @@ s32 test_item_entity_position(f32 x, f32 y, f32 z, f32 dist) {
             continue;
         }
 
-        if (item->type == ENTITY_TYPE_SHADOW) {
+        if (item->spawnType == ENTITY_TYPE_SHADOW) {
             continue;
         }
 
-        if (item->type == ENTITY_TYPE_2) {
+        if (item->spawnType == ENTITY_TYPE_2) {
             continue;
         }
 
@@ -459,7 +538,7 @@ s32 test_item_entity_position(f32 x, f32 y, f32 z, f32 dist) {
 }
 
 void set_item_entity_flags(s32 index, s32 flags) {
-    ItemEntity* itemEntity = D_801565A0[index];
+    ItemEntity* itemEntity = gCurrentItemEntities[index];
 
     itemEntity->flags |= flags;
     if (itemEntity->flags & ENTITY_FLAGS_200000) {
@@ -468,13 +547,13 @@ void set_item_entity_flags(s32 index, s32 flags) {
 }
 
 void clear_item_entity_flags(s32 index, s32 flags) {
-    ItemEntity* itemEntity = D_801565A0[index];
+    ItemEntity* itemEntity = gCurrentItemEntities[index];
 
     itemEntity->flags &= ~flags;
 }
 
 void func_801341B0(s32 index) {
-    ItemEntity* itemEntity = D_801565A0[index];
+    ItemEntity* itemEntity = gCurrentItemEntities[index];
     gOverrideFlags |= GLOBAL_OVERRIDES_40;
     itemEntity->flags |= ENTITY_FLAGS_100;
 }
@@ -483,26 +562,26 @@ void func_801341B0(s32 index) {
 s32 is_picking_up_item(void) {
     s32 ret = D_801565A8 != 0;
 
-    if (D_801565A4 != 0) {
+    if (isPickingUpItem) {
         ret = TRUE;
     }
     return ret;
 }
 
 void set_item_entity_position(s32 itemEntityIndex, f32 x, f32 y, f32 z) {
-    ItemEntity* itemEntity = D_801565A0[itemEntityIndex];
+    ItemEntity* itemEntity = gCurrentItemEntities[itemEntityIndex];
 
     itemEntity->position.x = x;
     itemEntity->position.y = y;
     itemEntity->position.z = z;
 }
 
-void func_80134230(s32 arg0) {
-    D_80155D88 = arg0;
+void set_current_item_entity_render_group(s32 group) {
+    ItemEntityRenderGroup = group;
 }
 
-s32 func_80134240(void) {
-    return D_80155D88;
+s32 get_current_item_entity_render_group(void) {
+    return ItemEntityRenderGroup;
 }
 
 INCLUDE_ASM(s32, "C50A0", update_item_entity_collectable);
@@ -510,21 +589,21 @@ INCLUDE_ASM(s32, "C50A0", update_item_entity_collectable);
 void func_8013559C(ItemEntity* itemEntity) {
     if (itemEntity->state == 1) {
         ItemEntityPhysicsData* physicsData = itemEntity->physicsData;
-        s32 flag = (itemEntity->flags & 0x20000) > 0;
+        s32 flag = (itemEntity->flags & ITEM_ENTITY_FLAGS_20000) > 0;
 
-        if (itemEntity->type != 0x14) {
-            if (itemEntity->type != 0x17) {
+        if (itemEntity->spawnType != ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS) {
+            if (itemEntity->spawnType != ITEM_SPAWN_MODE_TOSS_FADE1) {
                 if (physicsData->unk_1C < 60) {
-                    if ((itemEntity->flags & 0x200000) || ((gGameStatusPtr->frameCounter + flag) & 1)) {
-                        itemEntity->flags &= ~0x40;
+                    if ((itemEntity->flags & ITEM_ENTITY_FLAGS_200000) || ((gGameStatusPtr->frameCounter + flag) & 1)) {
+                        itemEntity->flags &= ~ITEM_ENTITY_FLAGS_40;
                     } else {
-                        itemEntity->flags |= 0x40;
+                        itemEntity->flags |= ITEM_ENTITY_FLAGS_40;
                     }
                 }
             } else {
-                if (physicsData->unk_1C < 0xA) {
+                if (physicsData->unk_1C < 10) {
                     itemEntity->alpha = physicsData->unk_1C * 28;
-                    itemEntity->flags |= 0x80000;
+                    itemEntity->flags |= ITEM_ENTITY_FLAGS_TRANSPARENT;
                 }
             }
         }
@@ -533,8 +612,8 @@ void func_8013559C(ItemEntity* itemEntity) {
 
 void update_item_entity_static(ItemEntity* itemEntity) {
     if (itemEntity->state == 0 && test_item_player_collision(itemEntity)) {
-        D_801565A4 = 1;
-        itemEntity->type = 28;
+        isPickingUpItem = TRUE;
+        itemEntity->spawnType = ITEM_SPAWN_AT_PLAYER;
         itemEntity->state = 0;
         D_801565A8 = 0;
         gOverrideFlags |= GLOBAL_OVERRIDES_40;
@@ -557,7 +636,7 @@ INCLUDE_ASM(s32, "C50A0", func_801363A0);
 INCLUDE_ASM(s32, "C50A0", func_8013673C);
 
 void func_801369D0(s32 arg1, s32 x, s32 y) {
-    draw_msg(0x1D0060, x + 12, y + 4, 255, 52, 0);
+    draw_msg(MESSAGE_ID(0x1D,0x060), x + 12, y + 4, 255, 52, 0);
 }
 
 void func_80136A08(ItemEntity* itemEntity, s32 posX, s32 posY) {
@@ -570,7 +649,7 @@ void func_80136A08(ItemEntity* itemEntity, s32 posX, s32 posY) {
         case 10:
         case 11:
             itemMsg = itemData->shortDescMsg;
-            draw_msg(itemMsg, posX + 8, posY, 255, 0xA, 0);
+            draw_msg(itemMsg, posX + 8, posY, 255, 10, 0);
             break;
     }
 }

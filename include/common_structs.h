@@ -1204,34 +1204,35 @@ typedef struct ItemData {
 
 typedef struct ItemEntity {
     /* 0x00 */ s32 flags;
-    /* 0x04 */ s16 boundVar; /* see make_item_entity */
-    /* 0x06 */ s16 unk_06;
+    /* 0x04 */ s16 boundVar;
+    /* 0x06 */ s16 pickupMsgFlags;
     /* 0x08 */ Vec3f position;
     /* 0x14 */ struct ItemEntityPhysicsData* physicsData;
-    /* 0x18 */ s16 itemID; /* into item table, also worldIconID */
+    /* 0x18 */ s16 itemID;
     /* 0x1A */ s8 state;
-    /* 0x1B */ s8 type;
+    /* 0x1B */ s8 spawnType;
     /* 0x1C */ u8 pickupDelay; /* num frames before item can be picked up */
-    /* 0x1D */ char unk_1D;
+    /* 0x1D */ s8 renderGroup;
     /* 0x1E */ s16 wsFaceAngle; /* < 0 means none */
     /* 0x20 */ s16 shadowIndex;
     /* 0x22 */ char unk_22[2];
     /* 0x24 */ u32* readPos;
     /* 0x28 */ u32* savedReadPos;
-    /* 0x2C */ char unk_2C[2];
-    /* 0x2E */ u8 unkCounter;
+    /* 0x2C */ s8 lookupRasterIndex;
+    /* 0x2D */ s8 lookupPaletteIndex;
+    /* 0x2E */ u8 nextUpdate;
     /* 0x2F */ u8 alpha;
     /* 0x30 */ f32 scale;
     /* 0x34 */ Vec3s unk_34;
     /* 0x3A */ char unk_3A[2];
-    /* 0x3C */ s32 framesLeft;
-    /* 0x40 */ s32* currentState;
-    /* 0x44 */ s32 unk_44;
-    /* 0x48 */ s32* sequenceStart;
-    /* 0x4C */ s32* unk_4C;
-    /* 0x50 */ s32* unk_50;
-    /* 0x54 */ s32 unk_54;
-    /* 0x58 */ s32 unk_58;
+    /* 0x3C */ s32 sparkleNextUpdate;
+    /* 0x40 */ s32* sparkleReadPos;
+    /* 0x44 */ s32 sparkleUnk44;
+    /* 0x48 */ s32* sparkleSavedPos;
+    /* 0x4C */ s32* sparkleRaster;
+    /* 0x50 */ s32* sparklePalette;
+    /* 0x54 */ s32 sparkleWidth;
+    /* 0x58 */ s32 sparkleHeight;
 } ItemEntity; // size = 0x5C
 
 typedef struct MessagePrintState {

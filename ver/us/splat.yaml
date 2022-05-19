@@ -11765,9 +11765,9 @@ segments:
   - [0xFA08A0, bin, bgm/Bowser_s_Attacks_95]
   - [0xFA3C60, bin, bgm/End_Parade_1_90]
   - [0xFA85F0, bin, bgm/End_Parade_2_91]
-  - [0xFABE90, bin, bgm/The_End_6E]
+  - [0xFABE90, bin, bgm/Ths_End_6E]
   - [0xFACC80, bin, bgm/Koopa_Radio_Station_2D]
-  - [0xFAD210, bin, bgm/The_End_Low_Frequency__2E]
+  - [0xFAD210, bin, bgm/Ths_End_Low_Frequency__2E]
   - [0xFAD8F0, bin, bgm/SMW_Remix_2F]
   - [0xFADE70, bin, bgm/New_Partner_82] # BGM end
   - [0xFAE860, bin] # sfx

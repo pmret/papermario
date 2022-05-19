@@ -19,8 +19,8 @@ typedef struct HudCacheEntry {
 u8* gHudElementAuxCache = NULL;
 s32 gHudElementCacheCapacity = 0x11000;
 
-HudScript hud_element_defaultAnim = {
-    he_End
+HudScript HudScript_Empty = {
+    hs_End
 };
 
 HudElementSize gHudElementSizes[] = {
@@ -727,7 +727,7 @@ s32 hud_element_create(HudScript* anim) {
     hudElement->flags = HUD_ELEMENT_FLAGS_INITIALIZED;
     hudElement->readPos = anim;
     if (anim == NULL) {
-        hudElement->readPos = &hud_element_defaultAnim;
+        hudElement->readPos = &HudScript_Empty;
     }
     hudElement->updateTimer = 1;
     hudElement->drawSizePreset = -1;
@@ -1933,7 +1933,7 @@ void hud_element_set_script(s32 id, HudScript* anim) {
     HudElement* hudElement = (*gHudElements)[id & ~HUD_ELEMENT_BATTLE_ID_MASK];
 
     if (anim == NULL) {
-        anim = &hud_element_defaultAnim;
+        anim = &HudScript_Empty;
     }
 
     hudElement->updateTimer = 1;
