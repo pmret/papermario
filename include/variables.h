@@ -166,9 +166,6 @@ extern s16 D_8009A6A2;
 extern s16 D_8009A6A4;
 extern s16 D_8009A6A6;
 
-extern s32* D_800A0914;
-extern s32* D_800A0918;
-extern s32* D_800A091C;
 extern s8 D_800A0920;
 extern s32 D_800A0924;
 extern s8 D_800A0921;
