@@ -35,9 +35,15 @@ void copy_matrix(Matrix4f src, Matrix4f dest);
 
 s32 _Printf(PrintCallback pfn, char* arg, const char* fmt, va_list ap);
 
+s8 set_global_byte(s32 index, s32 value);
 s32 get_global_byte(s32 index);
+s32 set_global_flag(s32 index);
+s32 clear_global_flag(s32 index);
 s32 get_global_flag(s32 index);
+s8 set_area_byte(s32 index, s32 value);
 s32 get_area_byte(s32 index);
+s32 set_area_flag(s32 index);
+s32 clear_area_flag(s32 index);
 s32 get_area_flag(s32 index);
 
 Shadow* get_shadow_by_index(s32 index);
@@ -728,14 +734,11 @@ s32 mdl_get_next_texture_address(s32);
 void draw_msg(s32 msgID, s32 posX, s32 posY, s32 opacity, s32 palette, u8 style);
 void get_background_color_blend(u8* r, u8* g, u8* b, u8* a);
 
-s8 set_global_byte(s32 index, s32 value);
-
 s32 entity_base_block_idle(Entity* entity);
 s32 recover_hp(s32 amt);
 s32 recover_fp(s32 amt);
 void entity_set_render_script(Entity* entity, u32* commandList);
 s32 entity_can_collide_with_jumping_player(Entity* entity);
-s32 set_global_flag(s32 index);
 void entity_base_block_init(Entity* entity);
 s32 entity_start_script(Entity* entity);
 void remove_item_entity_by_index(s32 index);

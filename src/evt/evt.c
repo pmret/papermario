@@ -1832,7 +1832,88 @@ s32 evt_get_variable_index_alt(s32 var) {
     return var;
 }
 
-INCLUDE_ASM(s32, "evt/si", evt_set_variable, Evt* script, Bytecode var, s32 value);
+s32 evt_set_variable(Evt* script, Bytecode var, s32 value) {
+    s32 temp;
+    s32 oldValue;
+
+    if (var <= -270000000) {
+        return value;
+    } else if (var <= -220000000) {
+        return evt_fixed_var_to_float(value);
+    } else if (var <= -200000000) {
+        var += 210000000;
+        temp = var % 32;
+        if (value) {
+            script->flagArray[var / 32] |= 1 << temp;
+        } else {
+            script->flagArray[var / 32] &= ~(1 << temp);
+        }
+        return value;
+    } else if (var <= -180000000) {
+        var += 190000000;
+        oldValue = script->array[var];
+        script->array[var] = value;
+        return oldValue;
+    } else if (var <= -160000000) {
+        var += 170000000;
+        oldValue = get_global_byte(var);
+        set_global_byte(var, value);
+        return oldValue;
+    } else if (var <= -140000000) {
+        var += 150000000;
+        oldValue = get_area_byte(var);
+        set_area_byte(var, value);
+        return oldValue;
+    } else if (var <= -120000000) {
+        var += 130000000;
+        oldValue = get_global_flag(var);
+        if (value) {
+            set_global_flag(var);
+        } else {
+            clear_global_flag(var);
+        }
+        return oldValue;
+    } else if (var <= -100000000) {
+        var += 110000000;
+        oldValue = get_area_flag(var);
+        if (value) {
+            set_area_flag(var);
+        } else {
+            clear_area_flag(var);
+        }
+        return oldValue;
+    } else if (var <= -80000000) {
+        var += 90000000;
+        temp = var % 32;
+        if (value) {
+            gMapFlags[var / 32] |= 1 << temp;
+        } else {
+            gMapFlags[var / 32] &= ~(1 << temp);
+        }
+        return value;
+    } else if (var <= -60000000) {
+        var += 70000000;
+        temp = var % 32;
+        if (value) {
+            script->varFlags[var / 32] |= 1 << temp;
+        } else {
+            script->varFlags[var / 32] &= ~(1 << temp);
+        }
+        return value;
+    } else if (var <= -40000000) {
+        var += 50000000;
+        oldValue = gMapVars[var];
+        gMapVars[var] = value;
+        return oldValue;
+    } else if (var <= -20000000) {
+        var += 30000000;
+        oldValue = script->varTable[var];
+        script->varTable[var] = value;
+        return oldValue;
+    } else {
+        return value;
+    }
+}
 
 f32 evt_get_float_variable(Evt* script, Bytecode var) {
     s32 temp;
@@ -1881,7 +1962,51 @@ f32 evt_get_float_variable(Evt* script, Bytecode var) {
     }
 }
 
-INCLUDE_ASM(f32, "evt/si", evt_set_float_variable, Evt* script, Bytecode var, f32 value);
+f32 evt_set_float_variable(Evt* script, Bytecode var, f32 value) {
+    s32 temp;
+    s32 oldValue;
+
+    if (var <= -270000000) {
+        return value;
+    } else if (var <= -220000000) {
+        return value;
+    } else if (var <= -180000000) {
+        var += 190000000;
+        oldValue = script->array[var];
+        script->array[var] = evt_float_to_fixed_var(value);
+        return evt_fixed_var_to_float(oldValue);
+    } else if (var <= -80000000) {
+        var += 90000000;
+        temp = var % 32;
+        if (value) {
+            gMapFlags[var / 32] |= 1 << temp;
+        } else {
+            gMapFlags[var / 32] &= ~(1 << temp);
+        }
+        return value;
+    } else if (var <= -60000000) {
+        var += 70000000;
+        temp = var % 32;
+        if (value) {
+            script->varFlags[var / 32] |= 1 << temp;
+        } else {
+            script->varFlags[var / 32] &= ~(1 << temp);
+        }
+        return value;
+    } else if (var <= -40000000) {
+        var += 50000000;
+        oldValue = gMapVars[var];
+        gMapVars[var] = evt_float_to_fixed_var(value);
+        return evt_fixed_var_to_float(oldValue);
+    } else if (var <= -20000000) {
+        var += 30000000;
+        oldValue = script->varTable[var];
+        script->varTable[var] = evt_float_to_fixed_var(value);
+        return evt_fixed_var_to_float(oldValue);
+    } else {
+        return value;
+    }
+}
 
 Bytecode* evt_find_label(Evt* script, s32 arg1) {
     Bytecode* ret = script->ptrReadPos;
@@ -1989,7 +2114,33 @@ Bytecode* evt_skip_else(Evt* script) {
     } while(1);
 }
 
-INCLUDE_ASM(Bytecode*, "evt/si", evt_goto_end_case, Evt* script);
+Bytecode* evt_goto_end_case(Evt* script) {
+    s32 switchDepth = 1;
+    Bytecode* pos = script->ptrNextLine;
+    s32* opcode;
+    s32* nargs;
+
+    do {
+        opcode = pos++;
+        nargs = pos++;
+        pos += *nargs;
+
+        switch (*opcode) {
+            case EVT_OP_END:
+                PANIC();
+                break;
+            case EVT_OP_SWITCH:
+                switchDepth++;
+                break;
+            case EVT_OP_END_SWITCH:
+                switchDepth--;
+                if (switchDepth == 0) {
+                    return opcode;
+                }
+                break;
+        }
+    } while(1);
+}
 
 Bytecode* evt_goto_next_case(Evt* script) {
     s32 switchDepth = 1;

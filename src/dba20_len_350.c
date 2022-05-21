@@ -156,7 +156,7 @@ s32 get_area_flag(s32 index) {
     return flag;
 }
 
-s8 set_area_byte(s32 index, s8 value) {
+s8 set_area_byte(s32 index, s32 value) {
     SaveData* saveFile = &gCurrentSaveFile;
     s32 ret = saveFile->areaBytes[index];
 
