@@ -837,7 +837,7 @@ s32 MakeShop(Evt* script, s32 isInitialCall) {
     ShopItemData* inventory = evt_get_variable(script, *args++);
     ShopSellPriceData* prices = evt_get_variable(script, *args++);
     s32 inventoryItemFlags = evt_get_variable(script, *args++);
-    Shop* shop = heap_malloc(sizeof(Shop));
+    Shop* shop = heap_malloc(sizeof(*shop));
     Model* model;
     s32 numShopItems;
     f32 centerX;

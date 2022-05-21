@@ -52,8 +52,8 @@ glabel make_item_entity
 /* C7B74 80131474 2402FFFF */   addiu    $v0, $zero, -1
 .L80131478_C7B78:
 /* C7B78 80131478 0000182D */  daddu     $v1, $zero, $zero
-/* C7B7C 8013147C 3C048015 */  lui       $a0, %hi(D_801565A0)
-/* C7B80 80131480 8C8465A0 */  lw        $a0, %lo(D_801565A0)($a0)
+/* C7B7C 8013147C 3C048015 */  lui       $a0, %hi(gCurrentItemEntities)
+/* C7B80 80131480 8C8465A0 */  lw        $a0, %lo(gCurrentItemEntities)($a0)
 .L80131484:
 /* C7B84 80131484 8C820000 */  lw        $v0, ($a0)
 /* C7B88 80131488 10400006 */  beqz      $v0, .L801314A4
@@ -73,10 +73,10 @@ glabel make_item_entity
 /* C7BB4 801314B4 0C00AB39 */  jal       heap_malloc
 /* C7BB8 801314B8 0060A02D */   daddu    $s4, $v1, $zero
 /* C7BBC 801314BC 00142080 */  sll       $a0, $s4, 2
-/* C7BC0 801314C0 3C038015 */  lui       $v1, %hi(D_801565A0)
-/* C7BC4 801314C4 8C6365A0 */  lw        $v1, %lo(D_801565A0)($v1)
-/* C7BC8 801314C8 3C058015 */  lui       $a1, %hi(D_801512F8)
-/* C7BCC 801314CC 24A512F8 */  addiu     $a1, $a1, %lo(D_801512F8)
+/* C7BC0 801314C0 3C038015 */  lui       $v1, %hi(gCurrentItemEntities)
+/* C7BC4 801314C4 8C6365A0 */  lw        $v1, %lo(gCurrentItemEntities)($v1)
+/* C7BC8 801314C8 3C058015 */  lui       $a1, %hi(ItemEntitiesCreated)
+/* C7BCC 801314CC 24A512F8 */  addiu     $a1, $a1, %lo(ItemEntitiesCreated)
 /* C7BD0 801314D0 00832021 */  addu      $a0, $a0, $v1
 /* C7BD4 801314D4 8CA30000 */  lw        $v1, ($a1)
 /* C7BD8 801314D8 0040802D */  daddu     $s0, $v0, $zero
@@ -144,8 +144,8 @@ glabel make_item_entity
 /* C7CC4 801315C4 00431024 */  and       $v0, $v0, $v1
 /* C7CC8 801315C8 AE020000 */  sw        $v0, ($s0)
 .L801315CC:
-/* C7CCC 801315CC 3C048015 */  lui       $a0, %hi(D_80155D84)
-/* C7CD0 801315D0 24845D84 */  addiu     $a0, $a0, %lo(D_80155D84)
+/* C7CCC 801315CC 3C048015 */  lui       $a0, %hi(ItemEntityAlternatingSpawn)
+/* C7CD0 801315D0 24845D84 */  addiu     $a0, $a0, %lo(ItemEntityAlternatingSpawn)
 /* C7CD4 801315D4 8C820000 */  lw        $v0, ($a0)
 /* C7CD8 801315D8 10400005 */  beqz      $v0, .L801315F0
 /* C7CDC 801315DC 3C030002 */   lui      $v1, 2

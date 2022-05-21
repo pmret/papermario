@@ -3206,7 +3206,7 @@ void make_transform_group(u16 modelID) {
             }
         }
 
-        (*gCurrentTransformGroups)[i] = newMtg = heap_malloc(sizeof(ModelTransformGroup));
+        (*gCurrentTransformGroups)[i] = newMtg = heap_malloc(sizeof(*newMtg));
         newMtg->flags = MODEL_TRANSFORM_GROUP_FLAGS_1;
         newMtg->groupModelID = modelID;
         newMtg->minChildModelIndex = get_model_list_index_from_tree_index(D_80153374);
@@ -3301,7 +3301,7 @@ void clone_model(u16 srcModelID, u16 newModelID) {
         }
     }
 
-    (*gCurrentModels)[i] = newModel = heap_malloc(sizeof(Model));
+    (*gCurrentModels)[i] = newModel = heap_malloc(sizeof(*newModel));
     *newModel = *srcModel;
     newModel->modelID = newModelID;
 }

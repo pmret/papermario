@@ -18,7 +18,7 @@ ApiStatus N(StarSpiritEffectFunc2)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     if (isInitialCall) {
-        StarSpiritEffect* ptr = heap_malloc(sizeof(StarSpiritEffect));
+        StarSpiritEffect* ptr = heap_malloc(sizeof(*ptr));
         script->varTable[0] = (s32) ptr;
         evt_set_variable(NULL, EVT_MAP_VAR(1), script->varTable[0]);
         ptr->unk_38 = evt_get_variable(script, *args++);
@@ -147,7 +147,7 @@ ApiStatus N(StarSpiritEffectFunc5)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     if (isInitialCall) {
-        StarSpiritEffect* ptr = (StarSpiritEffect*) heap_malloc(sizeof(StarSpiritEffect));
+        StarSpiritEffect* ptr = (StarSpiritEffect*) heap_malloc(sizeof(*ptr));
         script->varTable[0] = (s32) ptr;
         ptr->unk_38 = evt_get_variable(script, *args++);
         ptr->unk_18 = evt_get_float_variable(script, *args++);

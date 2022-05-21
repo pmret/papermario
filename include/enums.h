@@ -1492,6 +1492,7 @@ enum ItemSpawnModes {
     ITEM_SPAWN_MODE_TOSS_FADE3                                   = 0x00000019,
     ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS_SMALL                      = 0x0000001A,
     ITEM_SPAWN_MODE_UNKNOWN_1B                                   = 0x0000001B,
+    ITEM_SPAWN_AT_PLAYER                                         = 0x0000001C,
 };
 
 enum Locations {
@@ -1768,11 +1769,20 @@ enum TriggerFlags {
 };
 
 enum ItemEntityFlags {
+    ITEM_ENTITY_FLAGS_CAM0          = 0x00000001,
+    ITEM_ENTITY_FLAGS_CAM1          = 0x00000002,
+    ITEM_ENTITY_FLAGS_CAM2          = 0x00000004,
+    ITEM_ENTITY_FLAGS_CAM3          = 0x00000008,
     ITEM_ENTITY_FLAGS_10            = 0x00000010,
     ITEM_ENTITY_FLAGS_40            = 0x00000040,
     ITEM_ENTITY_FLAGS_TINY          = 0x00004000,
+    ITEM_ENTITY_FLAGS_20000         = 0x00020000,
+    ITEM_ENTITY_FLAGS_40000         = 0x00040000,
     ITEM_ENTITY_FLAGS_TRANSPARENT   = 0x00080000,
     ITEM_ENTITY_FLAGS_100000        = 0x00100000,
+    ITEM_ENTITY_FLAGS_200000        = 0x00200000,
+    ITEM_ENTITY_FLAGS_2000000       = 0x02000000,
+    ITEM_ENTITY_FLAGS_4000000       = 0x04000000,
     ITEM_ENTITY_FLAGS_8000000       = 0x08000000,
 };
 

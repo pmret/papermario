@@ -109,7 +109,7 @@ void damage_indicator_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32
     part->numParts = origNumParts;
 
     part++;
-    for(i = 1; i < numParts; i++, part++) {
+    for (i = 1; i < numParts; i++, part++) {
         part->unk_04.x = 0.0f;
         part->unk_04.y = 0.0f;
         part->unk_04.z = 0.0f;
@@ -153,7 +153,7 @@ void damage_indicator_update(EffectInstance* effect) {
     }
 
     part++;
-    for(i = 1; i < effect->numParts; i++, part++) {
+    for (i = 1; i < effect->numParts; i++, part++) {
         f32 x, y, z;
 
         if (duration > 5) {
@@ -221,7 +221,7 @@ void func_E003C498(EffectInstance* effect) {
         gDPSetRenderMode(gMasterGfxPos++, G_RM_CLD_SURF, G_RM_CLD_SURF2);
         gDPSetCombineLERP(gMasterGfxPos++, 1, 0, SHADE, PRIMITIVE, PRIMITIVE, 0, TEXEL0, 0, 1, 0, SHADE, PRIMITIVE, PRIMITIVE, 0, TEXEL0, 0);
     }
-    for(i = 1; i < effect->numParts; i++, part--) {
+    for (i = 1; i < effect->numParts; i++, part--) {
         s32 index = (i + spA0);
         gDPSetPrimColor(gMasterGfxPos++, 0, 0, D_E003CCF8[index % 12].r, D_E003CCF8[index % 12].g, D_E003CCF8[index % 12].b, part->alpha);
         gSPDisplayList(gMasterGfxPos++, D_09001D40);

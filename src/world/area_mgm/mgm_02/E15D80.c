@@ -955,7 +955,7 @@ ApiStatus N(CleanupGame)(Evt* script, s32 isInitialCall) {
 
 ApiStatus N(CreateMinigame)(Evt* script, s32 isInitialCall) {
     Enemy* scorekeeper = get_enemy(SCOREKEEPER_ENEMY_IDX);
-    SmashGameData* data = heap_malloc(sizeof(SmashGameData));
+    SmashGameData* data = heap_malloc(sizeof(*data));
     scorekeeper->varTablePtr[SMASH_DATA_VAR_IDX] = data;
 
     data->windowA_posX = -80;

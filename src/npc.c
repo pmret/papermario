@@ -78,7 +78,7 @@ s32 _create_npc(NpcBlueprint* blueprint, s32** animList, s32 skipLoadingAnims) {
     }
     ASSERT(i < MAX_NPCS);
 
-    (*gCurrentNpcListPtr)[i] = npc = heap_malloc(sizeof(Npc));
+    (*gCurrentNpcListPtr)[i] = npc = heap_malloc(sizeof(*npc));
     gNpcCount++;
     ASSERT(npc != NULL);
 
@@ -961,7 +961,7 @@ void enable_npc_blur(Npc* npc) {
 
         npc->flags |= NPC_FLAG_MOTION_BLUR;
 
-        blurBuf = heap_malloc(sizeof(BlurBuffer));
+        blurBuf = heap_malloc(sizeof(*blurBuf));
         npc->blurBuf = blurBuf;
         ASSERT(blurBuf != NULL);
         blurBuf->unk_00 = 0;

@@ -66,7 +66,7 @@ void func_802B6000_E26710(void) {
             playerStatus->position.y = player_check_collision_below(temp_f20, &sp10);
             if (sp10 >= 0 && collisionStatus->currentFloor & COLLISION_WITH_ENTITY_BIT ) {
                 entityType = get_entity_type(collisionStatus->currentFloor);
-                if(entityType == 7 || entityType == 8) {
+                if (entityType == ENTITY_TYPE_BLUE_SWITCH || entityType == ENTITY_TYPE_RED_SWITCH) {
                     get_entity_by_index(collisionStatus->currentFloor)->collisionFlags |= 1;
                     disable_player_input();
                     playerStatus->fallState = 0xB;
@@ -78,7 +78,7 @@ void func_802B6000_E26710(void) {
                 playerStatus->currentStateTime = 3;
                 playerStatus->flags |= 4;
                 playerStatus->fallState++;
-                sfx_play_sound_at_player(0x147, 0);
+                sfx_play_sound_at_player(SOUND_TORNADO_JUMP, 0);
             }
             if (sp10 >= 0) {
                 playerStatus->flags &= ~0x00020008;

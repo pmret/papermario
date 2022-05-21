@@ -55,7 +55,7 @@ void __osPackReadData(void) {
     readformat.button = -1;
     readformat.stick_x = -1;
     readformat.stick_y = -1;
-    for(i = 0; i < __osMaxControllers; i++) {
+    for (i = 0; i < __osMaxControllers; i++) {
         *(__OSContReadFormat*)ptr = readformat;
         ptr += sizeof(__OSContReadFormat);
     }

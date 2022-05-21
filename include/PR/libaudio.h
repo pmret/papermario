@@ -98,7 +98,7 @@ typedef u8      ALPan;
 #ifdef _DEBUG
 #define ALFlagFailIf(condition, flag, error)	\
             if (condition) {		\
-                if(flag) __osError(error, 0);	\
+                if (flag) __osError(error, 0);	\
                 return; }
 
 #else
