@@ -7,8 +7,6 @@
 
 s32 D_802946E0[] = { 100, 100, 100, 110, 130, 130, 130, 130, 130, 130, 130, 130, 130, 130, 130 };
 
-f32 update_lerp_battle(s32 easing, f32 start, f32 end, s32 elapsed, s32 duration);
-
 s32 has_enchanted_part(Actor* actor) {
     ActorPart* partIt = actor->partsTable;
     s32 ret = FALSE;
@@ -1565,6 +1563,7 @@ s32 RunPartTo(Evt* script, s32 isInitialCall) {
     }
 }
 
+f32 update_lerp_battle(s32 easing, f32 start, f32 end, s32 elapsed, s32 duration);
 INCLUDE_ASM(s32, "1A5830", update_lerp_battle);
 
 INCLUDE_ASM(s32, "1A5830", FlyToGoal);
