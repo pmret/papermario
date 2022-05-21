@@ -74,7 +74,7 @@ s32 load_entity_model(s32* cmdList) {
 
     {
         s32* entityModelCount;
-        (*gCurrentEntityModelList)[i] = newEntityModel = heap_malloc(sizeof(EntityModel));
+        (*gCurrentEntityModelList)[i] = newEntityModel = heap_malloc(sizeof(*newEntityModel));
         entityModelCount = &gEntityModelCount;
         (*entityModelCount)++;
     }
@@ -113,7 +113,7 @@ s32 ALT_load_entity_model(s32* cmdList) {
 
     {
         s32* entityModelCount;
-        (*gCurrentEntityModelList)[i] = newEntityModel = heap_malloc(sizeof(EntityModel));
+        (*gCurrentEntityModelList)[i] = newEntityModel = heap_malloc(sizeof(*newEntityModel));
         entityModelCount = &gEntityModelCount;
         (*entityModelCount)++;
     }
@@ -385,7 +385,7 @@ s32 create_generic_entity_world(void (*updateFunc)(Evt*, s32), void (*drawFunc)(
     }
     ASSERT(i < MAX_DYNAMIC_ENTITIES);
 
-    (*gCurrentDynamicEntityListPtr)[i] = newDynEntity = heap_malloc(sizeof(DynamicEntity));
+    (*gCurrentDynamicEntityListPtr)[i] = newDynEntity = heap_malloc(sizeof(*newDynEntity));
     ASSERT(newDynEntity != NULL);
 
     newDynEntity->flags = ENTITY_FLAGS_HIDDEN | ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE1;
@@ -416,7 +416,7 @@ s32 create_generic_entity_frontUI(void (*updateFunc)(void), void (*drawFunc)(voi
     }
     ASSERT(i < MAX_DYNAMIC_ENTITIES);
 
-    (*gCurrentDynamicEntityListPtr)[i] = newDynEntity = heap_malloc(sizeof(DynamicEntity));
+    (*gCurrentDynamicEntityListPtr)[i] = newDynEntity = heap_malloc(sizeof(*newDynEntity));
     ASSERT(newDynEntity != NULL);
 
     newDynEntity->flags = ENTITY_FLAGS_HIDDEN | ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE1 | ENTITY_FLAGS_HAS_DYNAMIC_SHADOW;
@@ -447,7 +447,7 @@ s32 create_generic_entity_backUI(void (*updateFunc)(void), void (*drawFunc)(void
     }
     ASSERT(i < MAX_DYNAMIC_ENTITIES);
 
-    (*gCurrentDynamicEntityListPtr)[i] = newDynEntity = heap_malloc(sizeof(DynamicEntity));
+    (*gCurrentDynamicEntityListPtr)[i] = newDynEntity = heap_malloc(sizeof(*newDynEntity));
     ASSERT(newDynEntity != NULL);
 
     newDynEntity->flags = ENTITY_FLAGS_HIDDEN | ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE1 | ENTITY_FLAGS_HAS_ANIMATED_MODEL;

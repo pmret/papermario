@@ -1,3 +1,6 @@
+#ifndef ITEM_ENTITY_H
+#define ITEM_ENTITY_H
+
 #include "common.h"
 
 typedef s32 ItemScript[0];
@@ -15,3 +18,5 @@ enum {
 #define is_Restart ITEM_SCRIPT_OP_Restart,
 #define is_Loop ITEM_SCRIPT_OP_Loop,
 #define is_RandomRestart(max, cutoff) ITEM_SCRIPT_OP_RandomRestart, max, cutoff,
+
+#endif

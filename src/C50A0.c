@@ -193,7 +193,7 @@ s32 make_item_entity_at_player(s32 itemID, s32 arg1, s32 pickupMsgFlags) {
     f32 depth;
     s32 id;
     
-    for(i = 0; i < MAX_ITEM_ENTITIES; i++) {
+    for (i = 0; i < MAX_ITEM_ENTITIES; i++) {
         if (gCurrentItemEntities[i] == NULL) {
             break;
         }
@@ -201,7 +201,7 @@ s32 make_item_entity_at_player(s32 itemID, s32 arg1, s32 pickupMsgFlags) {
     ASSERT(i < MAX_ITEM_ENTITIES);
     id = i;
     
-    gCurrentItemEntities[id] = item = heap_malloc(sizeof(ItemEntity));
+    gCurrentItemEntities[id] = item = heap_malloc(sizeof(*item));
     ItemEntitiesCreated++;
     ASSERT(item != NULL);
     

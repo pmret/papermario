@@ -70,7 +70,7 @@ ApiStatus CreatePushBlockGrid(Evt* script, s32 isInitialCall) {
     u8* dataToCopy;
     s32 i;
 
-    D_802DBC88[blockSystemID] = blockGrid = general_heap_malloc(sizeof(PushBlockGrid));
+    D_802DBC88[blockSystemID] = blockGrid = general_heap_malloc(sizeof(*blockGrid));
 
     blockGrid->cells = general_heap_malloc(sizeNx*sizeNz);
 

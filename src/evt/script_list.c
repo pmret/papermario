@@ -236,7 +236,7 @@ Evt* start_script_in_group(EvtScript* source, u8 priority, u8 initialState, u8 g
     ASSERT(i < MAX_SCRIPTS);
     curScriptIndex = i;
 
-    (*gCurrentScriptListPtr)[curScriptIndex] = newScript = heap_malloc(sizeof(Evt));
+    (*gCurrentScriptListPtr)[curScriptIndex] = newScript = heap_malloc(sizeof(*newScript));
     numScripts = &gNumScripts;
     (*numScripts)++;
     ASSERT(newScript != NULL);

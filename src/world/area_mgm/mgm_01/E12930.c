@@ -637,7 +637,7 @@ ApiStatus N(InitializePanels)(Evt* script, s32 isInitialCall) {
 
 ApiStatus N(CreateMinigame)(Evt* script, s32 isInitialCall) {
     Enemy* scorekeeper = get_enemy(SCOREKEEPER_ENEMY_IDX);
-    JumpGameData* data = general_heap_malloc(sizeof(JumpGameData));
+    JumpGameData* data = general_heap_malloc(sizeof(*data));
     s32 hudElemID;
 
     scorekeeper->varTablePtr[JUMP_DATA_VAR_IDX] = data;

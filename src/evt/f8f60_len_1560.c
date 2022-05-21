@@ -390,7 +390,7 @@ s32 LoadPath(Evt* script, s32 isInitialCall) {
     Vec3f* vectorList = (Vec3f*) evt_get_variable(script, *args++);
     s32 numVectors = evt_get_variable(script, *args++);
     s32 easingType = evt_get_variable(script, *args++);
-    Path* path = heap_malloc(sizeof(Path));
+    Path* path = heap_malloc(sizeof(*path));
 
     script->varTablePtr[15] = path;
     path->numVectors = numVectors;

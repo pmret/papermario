@@ -63,7 +63,7 @@ void N(FlyingMagikoopaAI_15)(Evt* arg0, NpcAISettings* arg1, EnemyDetectVolume* 
         if (is_point_within_region(enemy->territory->wander.wanderShape, enemy->territory->wander.point.x, enemy->territory->wander.point.z, npc->pos.x, npc->pos.z, enemy->territory->wander.wanderSizeX, enemy->territory->wander.wanderSizeZ)) {
             npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z) - iterations;
             moveDist = dist2D(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z);
-            if(randomDist > moveDist) {
+            if (randomDist > moveDist) {
                 randomDist = moveDist;
             }
         } else {

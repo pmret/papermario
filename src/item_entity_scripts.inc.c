@@ -1,3 +1,5 @@
+#include "item_entity.h"
+
 ItemScript ItemScript_Jump = {
     is_SetIcon(255, key_Gift)
     is_End

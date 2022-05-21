@@ -343,7 +343,7 @@ EffectInstance* create_effect_instance(EffectBlueprint* effectBp) {
     ASSERT(i < ARRAY_COUNT(gEffectInstances));
 
     // Allocate space for the new instance
-    gEffectInstances[i] = newEffectInst = general_heap_malloc(sizeof(EffectInstance));
+    gEffectInstances[i] = newEffectInst = general_heap_malloc(sizeof(*newEffectInst));
     ASSERT(newEffectInst != NULL);
 
     curEffect = &gEffectGraphicsData[0];
