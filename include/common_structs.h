@@ -1590,9 +1590,9 @@ typedef struct ActorPartMovement {
     /* 0x24 */ f32 jumpScale;
     /* 0x28 */ f32 moveSpeed;
     /* 0x2C */ f32 unk_2C;
-    /* 0x30 */ f32 unk_30;
-    /* 0x34 */ f32 unk_34;
-    /* 0x38 */ s16 unk_38;
+    /* 0x30 */ f32 angle;
+    /* 0x34 */ f32 distance;
+    /* 0x38 */ s16 moveTime;
     /* 0x3A */ s16 unk_3A;
     /* 0x3C */ s32 unk_3C;
     /* 0x40 */ char unk_40[0xC];
