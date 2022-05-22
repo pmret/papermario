@@ -1267,12 +1267,12 @@ s32 JumpPartTo(Evt* script, s32 isInitialCall) {
 
         if (movement->moveTime == 0) {
             movement->moveTime = movement->distance / movement->moveSpeed;
-            deltaDist = (movement->distance - movement->moveTime * movement->moveSpeed);
+            deltaDist = movement->distance - movement->moveTime * movement->moveSpeed;
         } else {
             movement->moveSpeed = movement->distance / movement->moveTime;
-            deltaDist = (movement->distance - movement->moveTime * movement->moveSpeed);
+            deltaDist = movement->distance - movement->moveTime * movement->moveSpeed;
         }
-        movement->moveSpeed +=  deltaDist / movement->moveTime;
+        movement->moveSpeed += deltaDist / movement->moveTime;
         movement->unk_2C = movement->jumpScale * movement->moveTime * 0.5f + y / movement->moveTime;
         if (part->partTypeData[4] != 0) {
             sfx_play_sound_at_position(part->partTypeData[4], 0, part->absolutePosition.x, part->absolutePosition.y, part->absolutePosition.z);
