@@ -859,8 +859,6 @@ void func_80259A48(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
     }
 }
 
-INCLUDE_ASM(s32, "182B30", func_80259AAC);
-/*
 void func_80259AAC(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
     DecorationTable* decorationTable = part->decorationTable;
     s32 i, j;
@@ -884,18 +882,22 @@ void func_80259AAC(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
     }
 
     for (i = 0; i < decorationTable->numPalettes; i++) {
-        u16* palette = decorationTable->palettes[i];
-        u16* temp2 = decorationTable->unk_6D4[i] = &decorationTable->unk_00[i];
-        if (palette != NULL) {
+        u16* palIn = decorationTable->palettes[i];
+        u16* palOut = decorationTable->unk_00[i];
+        decorationTable->unk_6D4[i] = palOut;
+        if (palIn != NULL) {
             for (j = 0; j < 16; j++) {
-                u8 r = ((palette[j] >> 11) & 0x1F);
-                u8 g = ((palette[j] >> 6) & 0x1F);
-                u8 b = ((palette[j] >> 1) & 0x1F);
-                u8 a = palette[j] & 1;
+                u8 r = ((*palIn >> 11) & 0x1F);
+                u8 g = ((*palIn >> 6) & 0x1F);
+                u8 b = ((*palIn >> 1) & 0x1F);
+                u8 a = *palIn & 1;
+                palIn++;
+
                 r *= 0.2;
                 g *= 0.4;
                 b *= 0.7;
-                temp2[j] = (r << 11) | (g << 6) | (b << 1) | a;
+
+                *palOut++ = (r << 11) | (g << 6) | (b << 1) | a;
             }
         }
     }
@@ -910,7 +912,7 @@ void func_80259AAC(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
             break;
     }
 }
-*/
+
 
 INCLUDE_ASM(s32, "182B30", func_80259D9C);
 
