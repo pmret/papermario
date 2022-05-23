@@ -4,15 +4,15 @@
 extern s32 TimesHudScript;
 extern s32 DigitHudScripts[10];
 
-extern HudScript HudScript_StatusHP[];
-extern HudScript HudScript_StatusHeart[];
-extern HudScript HudScript_StatusFP[];
-extern HudScript HudScript_StatusFlower[];
-extern HudScript HudScript_Item_CoinSparkleRandom[];
-extern HudScript HudScript_StatusStarPoint[];
-extern HudScript HudScript_StatusStar1[];
-extern HudScript HudScript_StatusTimes[];
-extern HudScript HudScript_StatusSPShine[];
+extern HudScript HudScript_StatusHP;
+extern HudScript HudScript_StatusHeart;
+extern HudScript HudScript_StatusFP;
+extern HudScript HudScript_StatusFlower;
+extern HudScript HudScript_Item_CoinSparkleRandom;
+extern HudScript HudScript_StatusStarPoint;
+extern HudScript HudScript_StatusStar1;
+extern HudScript HudScript_StatusTimes;
+extern HudScript HudScript_StatusSPShine;
 
 void clear_player_data(void) {
     PlayerData* playerData = &gPlayerData;
@@ -330,68 +330,68 @@ void initialize_status_menu(void) {
 
     close_status_menu();
 
-    iconIndex = hud_element_create(HudScript_StatusHP);
+    iconIndex = hud_element_create(&HudScript_StatusHP);
     uiStatus->hpIconIndices[0] = iconIndex;
     hud_element_set_flags(iconIndex, HUD_ELEMENT_FLAGS_80);
     hud_element_clear_flags(iconIndex, HUD_ELEMENT_FLAGS_FILTER_TEX);
 
-    iconIndex = hud_element_create(HudScript_StatusHeart);
+    iconIndex = hud_element_create(&HudScript_StatusHeart);
     uiStatus->hpIconIndices[1] = iconIndex;
     hud_element_set_flags(iconIndex, HUD_ELEMENT_FLAGS_80);
     hud_element_clear_flags(iconIndex, HUD_ELEMENT_FLAGS_FILTER_TEX);
 
-    iconIndex = hud_element_create(HudScript_StatusFP);
+    iconIndex = hud_element_create(&HudScript_StatusFP);
     uiStatus->fpIconIndices[0] = iconIndex;
     hud_element_set_flags(iconIndex, HUD_ELEMENT_FLAGS_80);
     hud_element_clear_flags(iconIndex, HUD_ELEMENT_FLAGS_FILTER_TEX);
 
-    iconIndex = hud_element_create(HudScript_StatusFlower);
+    iconIndex = hud_element_create(&HudScript_StatusFlower);
     uiStatus->fpIconIndices[1] = iconIndex;
     hud_element_set_flags(iconIndex, HUD_ELEMENT_FLAGS_80);
     hud_element_clear_flags(iconIndex, HUD_ELEMENT_FLAGS_FILTER_TEX);
 
-    iconIndex = hud_element_create(HudScript_StatusCoin);
+    iconIndex = hud_element_create(&HudScript_StatusCoin);
     uiStatus->coinIconIndex = iconIndex;
     hud_element_set_flags(iconIndex, HUD_ELEMENT_FLAGS_80);
     hud_element_clear_flags(iconIndex, HUD_ELEMENT_FLAGS_FILTER_TEX);
 
-    iconIndex = hud_element_create(HudScript_Item_CoinSparkleRandom);
+    iconIndex = hud_element_create(&HudScript_Item_CoinSparkleRandom);
     uiStatus->coinSparkleIconIndex = iconIndex;
     hud_element_set_flags(iconIndex, HUD_ELEMENT_FLAGS_80);
     hud_element_clear_flags(iconIndex, HUD_ELEMENT_FLAGS_FILTER_TEX);
 
-    iconIndex = hud_element_create(HudScript_StatusStarPoint);
+    iconIndex = hud_element_create(&HudScript_StatusStarPoint);
     uiStatus->starpointsIconIndex = iconIndex;
     hud_element_set_flags(iconIndex, HUD_ELEMENT_FLAGS_80);
     hud_element_clear_flags(iconIndex, HUD_ELEMENT_FLAGS_FILTER_TEX);
 
-    iconIndex = hud_element_create(HudScript_StatusSPShine);
+    iconIndex = hud_element_create(&HudScript_StatusSPShine);
     uiStatus->starpointsShineIconIndex = iconIndex;
     hud_element_set_flags(iconIndex, HUD_ELEMENT_FLAGS_80);
     hud_element_clear_flags(iconIndex, HUD_ELEMENT_FLAGS_FILTER_TEX);
 
-    newVar = hud_element_create(HudScript_StatusTimes);
+    newVar = hud_element_create(&HudScript_StatusTimes);
     iconIndex = newVar;
     uiStatus->iconIndex8 = iconIndex;
     hud_element_set_flags(iconIndex, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
     hud_element_clear_flags(iconIndex, HUD_ELEMENT_FLAGS_FILTER_TEX);
 
-    iconIndex = hud_element_create(HudScript_StatusTimes);
+    iconIndex = hud_element_create(&HudScript_StatusTimes);
     uiStatus->iconIndex9 = iconIndex;
     hud_element_set_flags(iconIndex, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
     hud_element_clear_flags(iconIndex, HUD_ELEMENT_FLAGS_FILTER_TEX);
 
-    iconIndex = hud_element_create(HudScript_StatusTimes);
+    iconIndex = hud_element_create(&HudScript_StatusTimes);
     uiStatus->iconIndexA = iconIndex;
     hud_element_set_flags(iconIndex, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
     hud_element_clear_flags(iconIndex, HUD_ELEMENT_FLAGS_FILTER_TEX);
 
-    iconIndex = hud_element_create(HudScript_StatusTimes);
+    iconIndex = hud_element_create(&HudScript_StatusTimes);
     uiStatus->iconIndexB = iconIndex;
     hud_element_set_flags(iconIndex, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
     hud_element_clear_flags(iconIndex, HUD_ELEMENT_FLAGS_FILTER_TEX);
 
-    iconIndex = hud_element_create(HudScript_StatusStar1);
+    iconIndex = hud_element_create(&HudScript_StatusStar1);
     uiStatus->starIconIndex = iconIndex;
     hud_element_set_flags(iconIndex, HUD_ELEMENT_FLAGS_80);
     hud_element_clear_flags(iconIndex, HUD_ELEMENT_FLAGS_FILTER_TEX);
@@ -528,11 +528,11 @@ void show_coin_counter(void) {
     if (uiStatus->unk_6C[0] == 0) {
         set_window_properties(0x14, 32, 164, 64, 20, 0x15, coin_counter_draw_content, 0, -1);
         set_window_update(WINDOW_ID_20, (s32)basic_window_update);
-        index = hud_element_create(HudScript_MenuTimes);
+        index = hud_element_create(&HudScript_MenuTimes);
         uiStatus->iconIndex10 = index;
         hud_element_set_flags(index, HUD_ELEMENT_FLAGS_80);
         hud_element_set_tint(index, 255, 255, 255);
-        index = hud_element_create(HudScript_StatusCoin);
+        index = hud_element_create(&HudScript_StatusCoin);
         uiStatus->iconIndex11 = index;
         hud_element_set_flags(index, HUD_ELEMENT_FLAGS_80);
         hud_element_set_tint(index, 255, 255, 255);

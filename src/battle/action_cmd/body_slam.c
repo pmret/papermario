@@ -3,18 +3,18 @@
 
 #define NAMESPACE action_command_body_slam
 
-extern HudScript HudScript_BlueMeter[];
-extern HudScript HudScript_AButton[];
-extern HudScript HudScript_AButtonDown[];
-extern HudScript HudScript_TimingWait[];
-extern HudScript HudScript_TimingReady[];
-extern HudScript HudScript_FillGaugeResult[];
+extern HudScript HudScript_BlueMeter;
+extern HudScript HudScript_AButton;
+extern HudScript HudScript_AButtonDown;
+extern HudScript HudScript_TimingWait;
+extern HudScript HudScript_TimingReady;
+extern HudScript HudScript_FillGaugeResult;
 extern s32 D_80294320;
 
 ApiStatus N(CreateHudElements)(Evt* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
-    s32 hudElement;
+    s32 id;
 
     battleStatus->unk_82 = 100;
     battleStatus->unk_434 = &D_80294320;
@@ -36,29 +36,29 @@ ApiStatus N(CreateHudElements)(Evt* script, s32 isInitialCall) {
     actionCommandStatus->hudElementX = -48;
     actionCommandStatus->hudElementY = 80;
 
-    hudElement = hud_element_create(HudScript_AButton);
-    actionCommandStatus->hudElements[0] = hudElement;
-    hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
-    hud_element_set_render_depth(hudElement, 0);
-    hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+    id = hud_element_create(&HudScript_AButton);
+    actionCommandStatus->hudElements[0] = id;
+    hud_element_set_render_pos(id, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
+    hud_element_set_render_depth(id, 0);
+    hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
-    hudElement = hud_element_create(HudScript_BlueMeter);
-    actionCommandStatus->hudElements[1] = hudElement;
-    hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
-    hud_element_set_render_depth(hudElement, 0);
-    hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+    id = hud_element_create(&HudScript_BlueMeter);
+    actionCommandStatus->hudElements[1] = id;
+    hud_element_set_render_pos(id, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
+    hud_element_set_render_depth(id, 0);
+    hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
-    hudElement = hud_element_create(HudScript_FillGaugeResult);
-    actionCommandStatus->hudElements[3] = hudElement;
-    hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
-    hud_element_set_render_depth(hudElement, 0);
-    hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+    id = hud_element_create(&HudScript_FillGaugeResult);
+    actionCommandStatus->hudElements[3] = id;
+    hud_element_set_render_pos(id, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
+    hud_element_set_render_depth(id, 0);
+    hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
-    hudElement = hud_element_create(HudScript_TimingWait);
-    actionCommandStatus->hudElements[2] = hudElement;
-    hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX + 41, actionCommandStatus->hudElementY + 22);
-    hud_element_set_render_depth(hudElement, 0);
-    hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80);
+    id = hud_element_create(&HudScript_TimingWait);
+    actionCommandStatus->hudElements[2] = id;
+    hud_element_set_render_pos(id, actionCommandStatus->hudElementX + 41, actionCommandStatus->hudElementY + 22);
+    hud_element_set_render_depth(id, 0);
+    hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80);
     return ApiStatus_DONE2;
 }
 
@@ -117,7 +117,7 @@ void func_802A92D4_4285B4(void) {
                 actionCommandStatus->unk_4E--;
                 return;
             }
-            hud_element_set_script(actionCommandStatus->hudElements[0], HudScript_AButtonDown);
+            hud_element_set_script(actionCommandStatus->hudElements[0], &HudScript_AButtonDown);
             actionCommandStatus->barFillLevel = 0;
             actionCommandStatus->unk_46 = 0;
             actionCommandStatus->unk_54 = actionCommandStatus->unk_52;
@@ -135,8 +135,8 @@ void func_802A92D4_4285B4(void) {
 
             if (actionCommandStatus->barFillLevel >= 10000) {
                 actionCommandStatus->barFillLevel = 10000;
-                hud_element_set_script(actionCommandStatus->hudElements[2], HudScript_TimingReady);
-                hud_element_set_script(actionCommandStatus->hudElements[0], HudScript_AButton);
+                hud_element_set_script(actionCommandStatus->hudElements[2], &HudScript_TimingReady);
+                hud_element_set_script(actionCommandStatus->hudElements[0], &HudScript_AButton);
                 if (actionCommandStatus->unk_68 == 0) {
                     sfx_play_sound(SOUND_234);
                     actionCommandStatus->unk_68 = 1;

@@ -38,7 +38,7 @@ ApiStatus func_80240118_90CD58(Evt* script, s32 isInitialCall) {
     }
     
     script->functionTemp[1]--;
-    if(script->functionTemp[1] == 0) {
+    if (script->functionTemp[1] == 0) {
         return ApiStatus_DONE1;
     } else {
         return ApiStatus_BLOCK;

@@ -58,8 +58,8 @@ glabel test_item_player_collision
 /* CA2D8 80133BD8 00621024 */  and       $v0, $v1, $v0
 /* CA2DC 80133BDC 144000EC */  bnez      $v0, .L80133F90
 /* CA2E0 80133BE0 0000102D */   daddu    $v0, $zero, $zero
-/* CA2E4 80133BE4 3C028015 */  lui       $v0, %hi(D_801565A4)
-/* CA2E8 80133BE8 844265A4 */  lh        $v0, %lo(D_801565A4)($v0)
+/* CA2E4 80133BE4 3C028015 */  lui       $v0, %hi(isPickingUpItem)
+/* CA2E8 80133BE8 844265A4 */  lh        $v0, %lo(isPickingUpItem)($v0)
 /* CA2EC 80133BEC 144000E8 */  bnez      $v0, .L80133F90
 /* CA2F0 80133BF0 0000102D */   daddu    $v0, $zero, $zero
 /* CA2F4 80133BF4 30620040 */  andi      $v0, $v1, 0x40

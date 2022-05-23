@@ -4,19 +4,19 @@
 #define NAMESPACE action_command_hurricane
 
 extern s32 D_80294420;
-extern HudScript HudScript_BlueMeter[];
-extern HudScript HudScript_AButton[];
-extern HudScript HudScript_MashAButton[];
-extern HudScript HudScript_BButton[];
-extern HudScript HudScript_MashBButton1[];
-extern HudScript HudScript_100pct[];
+extern HudScript HudScript_BlueMeter;
+extern HudScript HudScript_AButton;
+extern HudScript HudScript_MashAButton;
+extern HudScript HudScript_BButton;
+extern HudScript HudScript_MashBButton1;
+extern HudScript HudScript_100pct;
 
 s32 D_802A98E0_42FFC0[8] = { 0, 25, 50, 75, 75, 0, 0, 0 };
 
 ApiStatus func_802A9000_42F6E0(void) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
-    s32 hudElement;
+    s32 id;
 
     battleStatus->unk_82 = 5;
     battleStatus->unk_434 = &D_80294420;
@@ -37,29 +37,29 @@ ApiStatus func_802A9000_42F6E0(void) {
     actionCommandStatus->unk_68 = 0;
     actionCommandStatus->hudElementY = 80;
 
-    hudElement = hud_element_create(HudScript_AButton);
-    actionCommandStatus->hudElements[0] = hudElement;
-    hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
-    hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
-    hud_element_set_render_depth(hudElement, 0);
+    id = hud_element_create(&HudScript_AButton);
+    actionCommandStatus->hudElements[0] = id;
+    hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+    hud_element_set_render_pos(id, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
+    hud_element_set_render_depth(id, 0);
 
-    hudElement = hud_element_create(HudScript_BButton);
-    actionCommandStatus->hudElements[2] = hudElement;
-    hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
-    hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
-    hud_element_set_render_depth(hudElement, 0);
+    id = hud_element_create(&HudScript_BButton);
+    actionCommandStatus->hudElements[2] = id;
+    hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+    hud_element_set_render_pos(id, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
+    hud_element_set_render_depth(id, 0);
 
-    hudElement = hud_element_create(HudScript_BlueMeter);
-    actionCommandStatus->hudElements[1] = hudElement;
-    hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
-    hud_element_set_render_depth(hudElement, 0);
-    hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+    id = hud_element_create(&HudScript_BlueMeter);
+    actionCommandStatus->hudElements[1] = id;
+    hud_element_set_render_pos(id, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
+    hud_element_set_render_depth(id, 0);
+    hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
-    hudElement = hud_element_create(HudScript_100pct);
-    actionCommandStatus->hudElements[4] = hudElement;
-    hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
-    hud_element_set_render_depth(hudElement, 0);
-    hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+    id = hud_element_create(&HudScript_100pct);
+    actionCommandStatus->hudElements[4] = id;
+    hud_element_set_render_pos(id, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
+    hud_element_set_render_depth(id, 0);
+    hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
     return ApiStatus_DONE2;
 }
@@ -67,7 +67,7 @@ ApiStatus func_802A9000_42F6E0(void) {
 ApiStatus func_802A91A0_42F880(Evt* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
-    s32* args = script->ptrReadPos;
+    Bytecode* args = script->ptrReadPos;
 
     if (battleStatus->unk_83 == 0) {
         battleStatus->actionSuccess = 0;
@@ -158,8 +158,8 @@ void func_802A92A0_42F980(void) {
                 actionCommandStatus->unk_4E--;
                 break;
             }
-            hud_element_set_script(actionCommandStatus->hudElements[0], HudScript_MashAButton);
-            hud_element_set_script(actionCommandStatus->hudElements[2], HudScript_MashBButton1);
+            hud_element_set_script(actionCommandStatus->hudElements[0], &HudScript_MashAButton);
+            hud_element_set_script(actionCommandStatus->hudElements[2], &HudScript_MashBButton1);
             actionCommandStatus->barFillLevel = 0;
             actionCommandStatus->unk_5C = 0;
             actionCommandStatus->unk_54 = actionCommandStatus->unk_52;
@@ -317,14 +317,14 @@ void func_802A97AC_42FE8C(void) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     s32 hudY;
     s32 hudX;
-    s32 hudElement;
+    s32 id;
 
     hud_element_draw_clipped(actionCommandStatus->hudElements[0]);
     hud_element_draw_clipped(actionCommandStatus->hudElements[2]);
 
-    hudElement = actionCommandStatus->hudElements[1];
-    hud_element_draw_clipped(hudElement);
-    hud_element_get_render_pos(hudElement, &hudX, &hudY);
+    id = actionCommandStatus->hudElements[1];
+    hud_element_draw_clipped(id);
+    hud_element_get_render_pos(id, &hudX, &hudY);
 
     if (actionCommandStatus->unk_68 == 0) {
         func_80268770(hudX, hudY, actionCommandStatus->barFillLevel / 100);

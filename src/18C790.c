@@ -172,7 +172,7 @@ void btl_state_update_celebration(void) {
                 }
 
                 D_8029FB84 = 0;
-                func_8024E40C(0x17);
+                btl_cam_use_preset(BTL_CAM_PRESET_23);
                 D_8029FB54 = 0;
                 D_8029FB4C = 1;
                 gBattleState2 = BATTLE_STATE2_UNK_1;
@@ -182,7 +182,7 @@ void btl_state_update_celebration(void) {
         case BATTLE_STATE2_UNK_1:
             if (D_8029FB4C != 0) {
                 D_8029FB4C--;
-            } else if (func_8024E584() != 0) {
+            } else if (btl_cam_is_moving_done()) {
                 dma_copy(_7A89A0_ROM_START, _7A89A0_ROM_END, _7A89A0_VRAM);
                 script = start_script(&D_802842B0, EVT_PRIORITY_A, 0);
                 D_8029FB78 = 0;
@@ -264,7 +264,7 @@ void btl_state_update_celebration(void) {
         case BATTLE_STATE2_UNK_4:
             if (D_8029FB84 >= 99) {
                 playerData->level++;
-                func_8024E40C(2);
+                btl_cam_use_preset(BTL_CAM_PRESET_C);
                 btl_cam_move(5);
                 dma_copy(_79EF40_ROM_START, _79EF40_ROM_END, _79EF40_VRAM);
                 sfx_play_sound(0x80000008);
@@ -422,7 +422,7 @@ void btl_state_update_celebration(void) {
 
                 if (is_ability_active(ABILITY_FP_PLUS)) {
                     id = D_8029FAA8;
-                    hud_element_set_script(id, gItemHudScripts[gItemTable[248].iconID].enabled);
+                    hud_element_set_script(id, gItemHudScripts[gItemTable[248].hudElemID].enabled);
                     hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     hud_element_set_scale(id, 0.5f);
                     hud_element_get_render_pos(id, &x, &y);
@@ -491,7 +491,7 @@ void btl_state_update_celebration(void) {
 
                 if (is_ability_active(ABILITY_HP_PLUS)) {
                     id = D_8029FAC4;
-                    hud_element_set_script(id, gItemHudScripts[gItemTable[231].iconID].enabled);
+                    hud_element_set_script(id, gItemHudScripts[gItemTable[231].hudElemID].enabled);
                     hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     hud_element_set_scale(id, 0.5f);
                     hud_element_get_render_pos(id, &x, &y);
@@ -794,7 +794,7 @@ void btl_state_update_celebration(void) {
                     bgm_set_song(0, -1, 0, 1500, 8);
                 }
                 D_80284150 = 0;
-                func_8024E484(1, 270, 100, 8, 0, 0x2400, 0, 100);
+                btl_cam_set_params(1, 270, 100, 8, 0, 0x2400, 0, 100);
                 set_animation(0, 0, 0x30009);
                 if (partner != NULL) {
                     set_animation(ACTOR_PARTNER, 0, D_80284154[playerData->currentPartner]);

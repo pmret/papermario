@@ -60,9 +60,9 @@ glabel btl_state_update_partner_striking_first
 /* 176B38 80248258 00021080 */  sll       $v0, $v0, 2
 /* 176B3C 8024825C A6A0017A */  sh        $zero, 0x17a($s5)
 /* 176B40 80248260 A6A3017C */  sh        $v1, 0x17c($s5)
-/* 176B44 80248264 3C018009 */  lui       $at, %hi(D_8008F064)
+/* 176B44 80248264 3C018009 */  lui       $at, %hi(gMoveTable + 0x4)
 /* 176B48 80248268 00220821 */  addu      $at, $at, $v0
-/* 176B4C 8024826C 8C22F064 */  lw        $v0, %lo(D_8008F064)($at)
+/* 176B4C 8024826C 8C22F064 */  lw        $v0, %lo(gMoveTable + 0x4)($at)
 /* 176B50 80248270 AEA20184 */  sw        $v0, 0x184($s5)
 .L80248274:
 /* 176B54 80248274 0C09A75B */  jal       get_actor
@@ -116,7 +116,7 @@ glabel btl_state_update_partner_striking_first
 /* 176C0C 8024832C 00822025 */  or        $a0, $a0, $v0
 /* 176C10 80248330 0C03A6D5 */  jal       increment_status_menu_disabled
 /* 176C14 80248334 AEA40000 */   sw       $a0, ($s5)
-/* 176C18 80248338 0C093903 */  jal       func_8024E40C
+/* 176C18 80248338 0C093903 */  jal       btl_cam_use_preset
 /* 176C1C 8024833C 2404000A */   addiu    $a0, $zero, 0xa
 /* 176C20 80248340 0C09390F */  jal       btl_cam_target_actor
 /* 176C24 80248344 24040100 */   addiu    $a0, $zero, 0x100

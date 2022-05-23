@@ -11,22 +11,22 @@ extern s32 D_8023BDBC;
 extern s32 D_8023BDC0;
 extern s32 D_8023BDC4;
 extern s32 D_8023BDC8;
-extern HudScript HudScript_AimMarkerA[0];
-extern HudScript HudScript_AimMarkerB[0];
-extern HudScript HudScript_AimMarkerC[0];
-extern HudScript HudScript_AimMarkerD[0];
-extern HudScript HudScript_AimMarkerE[0];
-extern HudScript HudScript_AimMarkerF[0];
-extern HudScript HudScript_AimReticle[0];
-extern HudScript HudScript_AimShimmerA[0];
-extern HudScript HudScript_AimShimmerB[0];
-extern HudScript HudScript_AimShimmerC[0];
-extern HudScript HudScript_AimShimmerD[0];
-extern HudScript HudScript_AimShimmerE[0];
-extern HudScript HudScript_AimShimmerF[0];
-extern HudScript HudScript_AimTarget[0];
-extern HudScript HudScript_StickHoldLeft[0];
-extern HudScript HudScript_StickNeutral[0];
+extern HudScript HudScript_AimMarkerA;
+extern HudScript HudScript_AimMarkerB;
+extern HudScript HudScript_AimMarkerC;
+extern HudScript HudScript_AimMarkerD;
+extern HudScript HudScript_AimMarkerE;
+extern HudScript HudScript_AimMarkerF;
+extern HudScript HudScript_AimReticle;
+extern HudScript HudScript_AimShimmerA;
+extern HudScript HudScript_AimShimmerB;
+extern HudScript HudScript_AimShimmerC;
+extern HudScript HudScript_AimShimmerD;
+extern HudScript HudScript_AimShimmerE;
+extern HudScript HudScript_AimShimmerF;
+extern HudScript HudScript_AimTarget;
+extern HudScript HudScript_StickHoldLeft;
+extern HudScript HudScript_StickNeutral;
 
 extern f64 D_8023BD60_703AE0;
 
@@ -49,66 +49,66 @@ ApiStatus func_80238000_6FFD80(Evt* evt, s32 isInitialCall) {
 
     switch (evt->functionTemp[0]) {
         case 0:
-            D_8023BD78[0] = hudID = hud_element_create(HudScript_AimMarkerF);
+            D_8023BD78[0] = hudID = hud_element_create(&HudScript_AimMarkerF);
             hud_element_set_render_depth(hudID, 10);
             hud_element_set_render_pos(hudID, -100, -100);
 
-            D_8023BD78[1] = hudID = hud_element_create(HudScript_AimMarkerE);
+            D_8023BD78[1] = hudID = hud_element_create(&HudScript_AimMarkerE);
             hud_element_set_render_depth(hudID, 10);
             hud_element_set_render_pos(hudID, -100, -100);
 
-            D_8023BD78[2] = hudID = hud_element_create(HudScript_AimMarkerD);
+            D_8023BD78[2] = hudID = hud_element_create(&HudScript_AimMarkerD);
             hud_element_set_render_depth(hudID, 10);
             hud_element_set_render_pos(hudID, -100, -100);
 
-            D_8023BD78[3] = hudID = hud_element_create(HudScript_AimMarkerC);
+            D_8023BD78[3] = hudID = hud_element_create(&HudScript_AimMarkerC);
             hud_element_set_render_depth(hudID, 10);
             hud_element_set_render_pos(hudID, -100, -100);
 
-            D_8023BD78[4] = hudID = hud_element_create(HudScript_AimMarkerB);
+            D_8023BD78[4] = hudID = hud_element_create(&HudScript_AimMarkerB);
             hud_element_set_render_depth(hudID, 10);
             hud_element_set_render_pos(hudID, -100, -100);
 
-            D_8023BD78[5] = hudID = hud_element_create(HudScript_AimMarkerA);
+            D_8023BD78[5] = hudID = hud_element_create(&HudScript_AimMarkerA);
             hud_element_set_render_depth(hudID, 10);
             hud_element_set_render_pos(hudID, -100, -100);
 
-            D_8023BD78[6] = hudID = hud_element_create(HudScript_AimReticle);
+            D_8023BD78[6] = hudID = hud_element_create(&HudScript_AimReticle);
             hud_element_set_render_depth(hudID, 10);
             hud_element_set_render_pos(hudID, -100, -100);
 
-            D_8023BD98[0] = hudID = hud_element_create(HudScript_AimShimmerF);
+            D_8023BD98[0] = hudID = hud_element_create(&HudScript_AimShimmerF);
             hud_element_set_render_depth(hudID, 9);
             hud_element_set_render_pos(hudID, -100, -100);
 
-            D_8023BD98[1] = hudID = hud_element_create(HudScript_AimShimmerE);
+            D_8023BD98[1] = hudID = hud_element_create(&HudScript_AimShimmerE);
             hud_element_set_render_depth(hudID, 9);
             hud_element_set_render_pos(hudID, -100, -100);
 
-            D_8023BD98[2] = hudID = hud_element_create(HudScript_AimShimmerD);
+            D_8023BD98[2] = hudID = hud_element_create(&HudScript_AimShimmerD);
             hud_element_set_render_depth(hudID, 9);
             hud_element_set_render_pos(hudID, -100, -100);
 
-            D_8023BD98[3] = hudID = hud_element_create(HudScript_AimShimmerC);
+            D_8023BD98[3] = hudID = hud_element_create(&HudScript_AimShimmerC);
             hud_element_set_render_depth(hudID, 9);
             hud_element_set_render_pos(hudID, -100, -100);
 
-            D_8023BD98[4] = hudID = hud_element_create(HudScript_AimShimmerB);
+            D_8023BD98[4] = hudID = hud_element_create(&HudScript_AimShimmerB);
             hud_element_set_render_depth(hudID, 9);
             hud_element_set_render_pos(hudID, -100, -100);
 
-            D_8023BD98[5] = hudID = hud_element_create(HudScript_AimShimmerA);
+            D_8023BD98[5] = hudID = hud_element_create(&HudScript_AimShimmerA);
             hud_element_set_render_depth(hudID, 9);
             hud_element_set_render_pos(hudID, -100, -100);
 
-            D_8023BDB4 = hudID = hud_element_create(HudScript_AimTarget);
+            D_8023BDB4 = hudID = hud_element_create(&HudScript_AimTarget);
             hud_element_set_render_depth(hudID, 10);
             hud_element_create_transform_A(D_8023BDB4);
             hud_element_set_render_pos(hudID, -100, -100);
             D_8023BDC4 = -48;
             D_8023BDC8 = 80;
 
-            D_8023BDC0 = hudID = hud_element_create(HudScript_StickHoldLeft);
+            D_8023BDC0 = hudID = hud_element_create(&HudScript_StickHoldLeft);
             hud_element_set_render_pos(hudID, D_8023BDC4, D_8023BDC8);
             hud_element_set_render_depth(hudID, 0);
 
@@ -272,9 +272,9 @@ ApiStatus func_80238000_6FFD80(Evt* evt, s32 isInitialCall) {
             tempAngle = fabsf(clampedAngleDiff) / state->unk_24 * targetActor->scalingFactor;
 
             if (tempAngle < 7.0f) {
-                hud_element_set_script(hudID, HudScript_StickNeutral);
+                hud_element_set_script(hudID, &HudScript_StickNeutral);
             } else {
-                hud_element_set_script(hudID, HudScript_StickHoldLeft);
+                hud_element_set_script(hudID, &HudScript_StickHoldLeft);
             }
 
             D_8023BDC4 += 20;

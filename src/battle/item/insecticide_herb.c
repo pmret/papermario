@@ -56,10 +56,10 @@ static s32 _pad = 0; // XXX
 #include "battle/item/insecticide_herb.pal.inc.c"
 
 Vtx N(model)[] = {
-    { .v = { -16, -16, 0, FALSE, 0,    0,    0, 0, 0, 255 } },
-    { .v = { 15,  -16, 0, FALSE, 1024, 0,    0, 0, 0, 255 } },
-    { .v = { 15,  15,  0, FALSE, 1024, 1024, 0, 0, 0, 255 } },
-    { .v = { -16, 15,  0, FALSE, 0,    1024, 0, 0, 0, 255 } },
+    { .v = { .ob = {-16, -16, 0}, FALSE, .tc = {0,    0},    .cn = {0, 0, 0, 255} } },
+    { .v = { .ob = {15,  -16, 0}, FALSE, .tc = {1024, 0},    .cn = {0, 0, 0, 255} } },
+    { .v = { .ob = {15,  15,  0}, FALSE, .tc = {1024, 1024}, .cn = {0, 0, 0, 255} } },
+    { .v = { .ob = {-16, 15,  0}, FALSE, .tc = {0,    1024}, .cn = {0, 0, 0, 255} } },
 };
 
 Gfx N(displayList)[] = {
@@ -91,7 +91,7 @@ s32 N(modelCommandList)[] = {
 EvtScript script = {
     EVT_SET_CONST(EVT_VAR(10), 0x00000087)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
-    EVT_CALL(UseBattleCamPreset, 3)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
     EVT_CALL(MoveBattleCamOver, 15)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_THROW)
     EVT_CALL(PlaySound, SOUND_THROW)

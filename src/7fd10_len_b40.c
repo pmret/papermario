@@ -15,7 +15,7 @@ extern s16 D_8010CCFE;
 void func_800E6860(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    if (gPartnerActionStatus.partnerActionState != 0 && gPartnerActionStatus.actingPartner == PARTNER_BOW) {
+    if (gPartnerActionStatus.partnerActionState != PARTNER_ACTION_NONE && gPartnerActionStatus.actingPartner == PARTNER_BOW) {
         Npc* partner = get_npc_unsafe(NPC_PARTNER);
 
         func_802DDEE4(0, -1, 7, 0, 0, 0, playerStatus->alpha1, 0);
@@ -112,36 +112,33 @@ void func_800E6B68(void) {
 
 s32 setup_partner_popup(PopupMenu* menu) {
     PlayerData* playerData = &gPlayerData;
-    s32 temp_a1;
-    s32* phi_t0;
-    s32 ret;
+    s32 optionCount = 0;
     s32 i;
 
-    ret = 0;
     for (i = 1; i < ARRAY_COUNT(D_8008EEC0); i++) {
-        temp_a1 = D_8008EEC0[i];
-        if (playerData->partners[temp_a1].enabled && temp_a1 != 5) {
-            s32* properties = gPartnerPopupProperties[temp_a1];
+        s32 partnerID = D_8008EEC0[i];
+        if (playerData->partners[partnerID].enabled && partnerID != PARTNER_GOOMPA) {
+            s32* properties = gPartnerPopupProperties[partnerID];
 
-            menu->ptrIcon[ret] = wPartnerHudScripts[temp_a1];
-            menu->userIndex[ret] = temp_a1;
-            menu->enabled[ret] = TRUE;
-            menu->nameMsg[ret] = properties[0];
-            menu->descMsg[ret] = properties[2];
-            menu->value[ret] = playerData->partners[temp_a1].level;
-            if (playerData->currentPartner == temp_a1) {
-                menu->enabled[ret] = FALSE;
-                menu->ptrIcon[ret] = wDisabledPartnerHudScripts[temp_a1];
+            menu->ptrIcon[optionCount] = wPartnerHudScripts[partnerID];
+            menu->userIndex[optionCount] = partnerID;
+            menu->enabled[optionCount] = TRUE;
+            menu->nameMsg[optionCount] = properties[0];
+            menu->descMsg[optionCount] = properties[2];
+            menu->value[optionCount] = playerData->partners[partnerID].level;
+            if (playerData->currentPartner == partnerID) {
+                menu->enabled[optionCount] = FALSE;
+                menu->ptrIcon[optionCount] = wDisabledPartnerHudScripts[partnerID];
             }
-            ret++;
+            optionCount++;
         }
     }
-    return ret;
+    return optionCount;
 }
 
 s32 setup_item_popup(PopupMenu* menu) {
     PlayerData* playerData = &gPlayerData;
-    s32 ret = 0;
+    s32 optionCount = 0;
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(playerData->invItems); i++) {
@@ -149,23 +146,23 @@ s32 setup_item_popup(PopupMenu* menu) {
 
         if (itemIdx != 0) {
             ItemData* item = &gItemTable[itemIdx];
-            HudScriptPair* itemScripts = &gItemHudScripts[item->iconID];
+            IconHudScriptPair* itemScripts = &gItemHudScripts[item->hudElemID];
 
             if (item->typeFlags & 1) {
-                menu->ptrIcon[ret] = itemScripts->enabled;
-                menu->userIndex[ret] = i;
-                menu->enabled[ret] = 1;
+                menu->ptrIcon[optionCount] = itemScripts->enabled;
+                menu->userIndex[optionCount] = i;
+                menu->enabled[optionCount] = 1;
             } else {
-                menu->ptrIcon[ret] = itemScripts->disabled;
-                menu->userIndex[ret] = i;
-                menu->enabled[ret] = FALSE;
+                menu->ptrIcon[optionCount] = itemScripts->disabled;
+                menu->userIndex[optionCount] = i;
+                menu->enabled[optionCount] = FALSE;
             }
-            menu->nameMsg[ret] = item->nameMsg;
-            menu->descMsg[ret] = item->itemMsg;
-            ret++;
+            menu->nameMsg[optionCount] = item->nameMsg;
+            menu->descMsg[optionCount] = item->shortDescMsg;
+            optionCount++;
         }
     }
-    return ret;
+    return optionCount;
 }
 
 INCLUDE_ASM(s32, "7fd10_len_b40", check_input_open_menus);
@@ -182,18 +179,18 @@ void check_input_status_menu(void) {
         }
 
         if (!is_status_menu_visible()) {
-            if (!(playerStatus->currentButtons & Z_TRIG + R_TRIG) && (pressedButtons & BUTTON_C_UP) && func_800E9860()) {
+            if (!(playerStatus->currentButtons & (Z_TRIG | R_TRIG)) && (pressedButtons & BUTTON_C_UP) && func_800E9860()) {
                 open_status_menu_long();
 
                 if (!is_picking_up_item()) {
-                    sfx_play_sound(3);
+                    sfx_play_sound(SOUND_3);
                 }
             }
-        } else if (!(playerStatus->currentButtons & Z_TRIG + R_TRIG) && (pressedButtons & BUTTON_C_UP) && func_800E9860()) {
+        } else if (!(playerStatus->currentButtons & (Z_TRIG | R_TRIG)) && (pressedButtons & BUTTON_C_UP) && func_800E9860()) {
             close_status_menu();
 
             if (!is_picking_up_item()) {
-                sfx_play_sound(4);
+                sfx_play_sound(SOUND_4);
             }
         }
     }

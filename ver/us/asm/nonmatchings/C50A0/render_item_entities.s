@@ -24,8 +24,8 @@ glabel render_item_entities
 /* C95A0 80132EA0 AFB00120 */  sw        $s0, 0x120($sp)
 /* C95A4 80132EA4 F7B40148 */  sdc1      $f20, 0x148($sp)
 .L80132EA8:
-/* C95A8 80132EA8 3C038015 */  lui       $v1, %hi(D_801565A0)
-/* C95AC 80132EAC 8C6365A0 */  lw        $v1, %lo(D_801565A0)($v1)
+/* C95A8 80132EA8 3C038015 */  lui       $v1, %hi(gCurrentItemEntities)
+/* C95AC 80132EAC 8C6365A0 */  lw        $v1, %lo(gCurrentItemEntities)($v1)
 /* C95B0 80132EB0 00161080 */  sll       $v0, $s6, 2
 /* C95B4 80132EB4 00431021 */  addu      $v0, $v0, $v1
 /* C95B8 80132EB8 8C520000 */  lw        $s2, ($v0)

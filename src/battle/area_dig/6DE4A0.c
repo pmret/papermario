@@ -2,18 +2,15 @@
 
 #define NAMESPACE b_area_dig
 
-extern s32 D_8008F2E4;
-extern s32 D_8008FC44;
-
 ApiStatus func_802186E0_6DE4A0(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
     SelectableTarget* selectableTarget;
 
     battleStatus->moveCategory = 0;
-    battleStatus->selectedMoveID = 0x20;
+    battleStatus->selectedMoveID = MOVE_POWER_BOUNCE;
     battleStatus->selectedItemID = gCurrentEncounter.hitTier;
-    battleStatus->currentTargetListFlags = D_8008F2E4;
+    battleStatus->currentTargetListFlags = gMoveTable[MOVE_POWER_BOUNCE].flags;
 
     player_create_target_list(player);
     player->selectedTargetIndex = 1;
@@ -32,8 +29,8 @@ ApiStatus func_80218770_6DE530(Evt* script, s32 isInitialCall) {
     battleStatus->moveCategory = 6;
     do {} while (0);
     battleStatus->selectedItemID = 0;
-    battleStatus->selectedMoveID = 0x98;
-    battleStatus->currentTargetListFlags = D_8008FC44;
+    battleStatus->selectedMoveID = MOVE_SHELL_SHOT;
+    battleStatus->currentTargetListFlags = gMoveTable[MOVE_SHELL_SHOT].flags;
 
     player_create_target_list(partner);
     partner->selectedTargetIndex = 0;

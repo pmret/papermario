@@ -32,12 +32,12 @@ static s32 gPauseBadgesIconIDs[22];
 #define BADGE_INVALID 0x7FFF
 
 HudScript* gPauseBadgesElements[] = {
-    HudScript_StatBp, HudScript_StatBp, HudScript_StatBp, HudScript_StatBp,
-    HudScript_StatBp, HudScript_StatBp, HudScript_StatBp, HudScript_StatBp,
-    HudScript_StatBp, HudScript_StatBp, HudScript_StatBp, HudScript_StatBp,
-    HudScript_StatBp, HudScript_StatBp, HudScript_StatBp, HudScript_StatBp,
-    HudScript_StatBp, HudScript_ListPrevPage, HudScript_ListNextPage,
-    HudScript_Dash, HudScript_LabelBpNeeded, HudScript_StatusStar1
+    &HudScript_StatBp, &HudScript_StatBp, &HudScript_StatBp, &HudScript_StatBp,
+    &HudScript_StatBp, &HudScript_StatBp, &HudScript_StatBp, &HudScript_StatBp,
+    &HudScript_StatBp, &HudScript_StatBp, &HudScript_StatBp, &HudScript_StatBp,
+    &HudScript_StatBp, &HudScript_StatBp, &HudScript_StatBp, &HudScript_StatBp,
+    &HudScript_StatBp, &HudScript_ListPrevPage, &HudScript_ListNextPage,
+    &HudScript_Dash, &HudScript_LabelBpNeeded, &HudScript_StatusStar1
 };
 MenuWindowBP gPauseBadgesWindowBPs[] = {
     {
@@ -78,13 +78,13 @@ s32 pause_badges_comparator(s16* a, s16* b) {
     if (*a == 0) {
         aVal = BADGE_INVALID;
     } else {
-        aVal = gItemTable[*a].badgeSortPriority;
+        aVal = gItemTable[*a].sortValue;
     }
 
     if (*b == 0) {
         bVal = BADGE_INVALID;
     } else {
-        bVal = gItemTable[*b].badgeSortPriority;
+        bVal = gItemTable[*b].sortValue;
     }
 
     if (aVal == bVal) {
@@ -443,13 +443,13 @@ void pause_badges_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width
                     } else {
                         if (isSelected) {
                             hud_element_set_flags(badgeIconElement, HUD_ELEMENT_FLAGS_DROP_SHADOW);
-                            gPauseCurrentDescIconScript = gItemHudScripts[gItemTable[badgeID].iconID].enabled;
+                            gPauseCurrentDescIconScript = gItemHudScripts[gItemTable[badgeID].hudElemID].enabled;
                         }
 
                         if (!isEquipped && cannotBeEquipped) {
-                            hud_element_set_script(badgeIconElement, gItemHudScripts[gItemTable[badgeID].iconID].disabled);
+                            hud_element_set_script(badgeIconElement, gItemHudScripts[gItemTable[badgeID].hudElemID].disabled);
                         } else {
-                            hud_element_set_script(badgeIconElement, gItemHudScripts[gItemTable[badgeID].iconID].enabled);
+                            hud_element_set_script(badgeIconElement, gItemHudScripts[gItemTable[badgeID].hudElemID].enabled);
                         }
 
                         hud_element_set_scale(badgeIconElement, 0.670816f);
@@ -939,7 +939,7 @@ void pause_badges_handle_input(MenuPanel* panel) {
         s32 itemID = gPauseBadgesSelectedItem;
 
         if (((itemID != BADGE_NONE_STANDIN) && (itemID != BADGE_INVALID) && (itemID != 0))) {
-            gPauseCurrentDescMsg = gItemTable[itemID].menuMsg;
+            gPauseCurrentDescMsg = gItemTable[itemID].fullDescMsg;
         } else {
             gPauseCurrentDescMsg = 0;
             gPauseCurrentDescIconScript = NULL;

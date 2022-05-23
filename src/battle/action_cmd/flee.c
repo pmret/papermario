@@ -3,14 +3,14 @@
 
 #define NAMESPACE action_command_flee
 
-extern HudScript HudScript_BlueMeter[];
-extern HudScript HudScript_AButton[];
-extern HudScript HudScript_RunAwayOK[];
-extern HudScript HudScript_RunningAway[];
-extern HudScript HudScript_100pct[];
+extern HudScript HudScript_BlueMeter;
+extern HudScript HudScript_AButton;
+extern HudScript HudScript_RunAwayOK;
+extern HudScript HudScript_RunningAway;
+extern HudScript HudScript_100pct;
 extern s32 D_80294200;
 extern s32 D_802A9920;
-extern HudScript HudScript_MashAButton[];
+extern HudScript HudScript_MashAButton;
 
 ApiStatus func_802A9000_422AD0(Evt* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
@@ -38,25 +38,25 @@ ApiStatus func_802A9000_422AD0(Evt* script, s32 isInitialCall) {
     D_802A9920 = 0;
     actionCommandStatus->hudElementY = 80;
 
-    hudElement = hud_element_create(HudScript_AButton);
+    hudElement = hud_element_create(&HudScript_AButton);
     actionCommandStatus->hudElements[0] = hudElement;
     hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
     hud_element_set_render_depth(hudElement, 0);
     hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
-    hudElement = hud_element_create(HudScript_BlueMeter);
+    hudElement = hud_element_create(&HudScript_BlueMeter);
     actionCommandStatus->hudElements[1] = hudElement;
     hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
     hud_element_set_render_depth(hudElement, 0);
     hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
-    hudElement = hud_element_create(HudScript_RunningAway);
+    hudElement = hud_element_create(&HudScript_RunningAway);
     actionCommandStatus->hudElements[2] = hudElement;
     hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
     hud_element_set_render_depth(hudElement, 0);
     hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
-    hudElement = hud_element_create(HudScript_RunAwayOK);
+    hudElement = hud_element_create(&HudScript_RunAwayOK);
     actionCommandStatus->hudElements[3] = hudElement;
     hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
     hud_element_set_render_depth(hudElement, 0);
@@ -66,7 +66,7 @@ ApiStatus func_802A9000_422AD0(Evt* script, s32 isInitialCall) {
     hud_element_set_render_pos(actionCommandStatus->hudElements[3], actionCommandStatus->hudElementX - xOffset, actionCommandStatus->hudElementY + 17);
     hud_element_set_render_pos(actionCommandStatus->hudElements[2], actionCommandStatus->hudElementX - xOffset, actionCommandStatus->hudElementY - 1);
 
-    hudElement = hud_element_create(HudScript_100pct);
+    hudElement = hud_element_create(&HudScript_100pct);
     actionCommandStatus->hudElements[4] = hudElement;
     hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
     hud_element_set_render_depth(hudElement, 0);
@@ -142,7 +142,7 @@ void func_802A9378_422E48(void) {
                 break;
             }
 
-            hud_element_set_script(actionCommandStatus->hudElements[0], HudScript_MashAButton);
+            hud_element_set_script(actionCommandStatus->hudElements[0], &HudScript_MashAButton);
             D_802A9920 = 1;
             actionCommandStatus->state = 11;
             actionCommandStatus->unk_54 = actionCommandStatus->unk_52;

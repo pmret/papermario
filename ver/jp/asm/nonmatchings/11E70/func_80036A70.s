@@ -14,8 +14,8 @@ glabel func_80036A70
 /* 11E94 80036A94 AE400000 */  sw        $zero, ($s2)
 /* 11E98 80036A98 3C01800A */  lui       $at, %hi(D_8009A5B8)
 /* 11E9C 80036A9C AC20A5B8 */  sw        $zero, %lo(D_8009A5B8)($at)
-/* 11EA0 80036AA0 3C018015 */  lui       $at, %hi(D_801512F8)
-/* 11EA4 80036AA4 A02212F8 */  sb        $v0, %lo(D_801512F8)($at)
+/* 11EA0 80036AA0 3C018015 */  lui       $at, %hi(ItemEntitiesCreated)
+/* 11EA4 80036AA4 A02212F8 */  sb        $v0, %lo(ItemEntitiesCreated)($at)
 /* 11EA8 80036AA8 0C00AAF0 */  jal       func_8002ABC0
 /* 11EAC 80036AAC 00000000 */   nop
 /* 11EB0 80036AB0 0C04A221 */  jal       func_80128884

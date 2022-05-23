@@ -253,7 +253,7 @@ glabel btl_state_update_enemy_move
 /* 1761BC 802478DC 00431025 */  or        $v0, $v0, $v1
 /* 1761C0 802478E0 AE820000 */  sw        $v0, ($s4)
 .L802478E4:
-/* 1761C4 802478E4 0C093903 */  jal       func_8024E40C
+/* 1761C4 802478E4 0C093903 */  jal       btl_cam_use_preset
 /* 1761C8 802478E8 24040021 */   addiu    $a0, $zero, 0x21
 /* 1761CC 802478EC 92A2021C */  lbu       $v0, 0x21c($s5)
 /* 1761D0 802478F0 2442FFFC */  addiu     $v0, $v0, -4
@@ -301,7 +301,7 @@ glabel btl_state_update_enemy_move
 /* 176254 80247974 00000000 */   nop
 /* 176258 80247978 14400014 */  bnez      $v0, .L802479CC_1762AC
 /* 17625C 8024797C 00000000 */   nop
-/* 176260 80247980 0C093903 */  jal       func_8024E40C
+/* 176260 80247980 0C093903 */  jal       btl_cam_use_preset
 /* 176264 80247984 24040002 */   addiu    $a0, $zero, 2
 /* 176268 80247988 0C093936 */  jal       btl_cam_move
 /* 17626C 8024798C 2404000F */   addiu    $a0, $zero, 0xf
@@ -355,7 +355,7 @@ glabel btl_state_update_enemy_move
 /* 176314 80247A34 8E820000 */  lw        $v0, ($s4)
 /* 176318 80247A38 24040036 */  addiu     $a0, $zero, 0x36
 /* 17631C 80247A3C 00431025 */  or        $v0, $v0, $v1
-/* 176320 80247A40 0C093903 */  jal       func_8024E40C
+/* 176320 80247A40 0C093903 */  jal       btl_cam_use_preset
 /* 176324 80247A44 AE820000 */   sw       $v0, ($s4)
 /* 176328 80247A48 24040023 */  addiu     $a0, $zero, 0x23
 /* 17632C 80247A4C 0C093E58 */  jal       btl_show_battle_message
@@ -368,7 +368,7 @@ glabel btl_state_update_enemy_move
 /* 176344 80247A64 00000000 */   nop
 /* 176348 80247A68 14400013 */  bnez      $v0, .L80247AB8
 /* 17634C 80247A6C 00000000 */   nop
-/* 176350 80247A70 0C093903 */  jal       func_8024E40C
+/* 176350 80247A70 0C093903 */  jal       btl_cam_use_preset
 /* 176354 80247A74 24040002 */   addiu    $a0, $zero, 2
 /* 176358 80247A78 0C093936 */  jal       btl_cam_move
 /* 17635C 80247A7C 2404000F */   addiu    $a0, $zero, 0xf

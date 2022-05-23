@@ -396,7 +396,7 @@ ApiStatus N(Quizmo_SpinPlayer)(Evt* script, s32 isInitialCall) {
 
     script->functionTemp[0]--;
 
-    if(script->functionTemp[0] < 0) {
+    if (script->functionTemp[0] < 0) {
         return ApiStatus_DONE2;
     } else {
         return ApiStatus_BLOCK;
@@ -417,7 +417,7 @@ ApiStatus N(Quizmo_SpinPartner)(Evt* script, s32 isInitialCall) {
 
     script->functionTemp[0]--;
 
-    if(script->functionTemp[0] < 0) {
+    if (script->functionTemp[0] < 0) {
         return ApiStatus_DONE2;
     } else {
         return ApiStatus_BLOCK;
@@ -442,7 +442,7 @@ ApiStatus N(Quizmo_UpdatePartnerPosition)(Evt* script, s32 isInitialCall) {
     npc->pos.z += *z;
     script->functionTemp[0]--;
 
-    if(script->functionTemp[0] == 0) {
+    if (script->functionTemp[0] == 0) {
         return ApiStatus_DONE2;
     } else {
         return ApiStatus_BLOCK;

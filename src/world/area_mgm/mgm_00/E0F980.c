@@ -121,7 +121,7 @@ ApiStatus N(UpdateRecordDisplay)(Evt* script, s32 isInitialCall) {
     s32 gameType = evt_get_variable(script, *args++);
 
     if (isInitialCall) {
-        data = heap_malloc(sizeof(RecordDisplayData));
+        data = heap_malloc(sizeof(*data));
         script->functionTempPtr[0] = data;
         data->state = RECORD_START_SHOW;
         data->alpha = 255;

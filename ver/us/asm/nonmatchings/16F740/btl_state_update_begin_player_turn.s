@@ -25,7 +25,7 @@ glabel btl_state_update_begin_player_turn
 /* 170954 80242074 8E420000 */  lw        $v0, ($s2)
 /* 170958 80242078 14400007 */  bnez      $v0, .L80242098
 /* 17095C 8024207C 8E3401F4 */   lw       $s4, 0x1f4($s1)
-/* 170960 80242080 0C093903 */  jal       func_8024E40C
+/* 170960 80242080 0C093903 */  jal       btl_cam_use_preset
 /* 170964 80242084 24040002 */   addiu    $a0, $zero, 2
 /* 170968 80242088 0C093936 */  jal       btl_cam_move
 /* 17096C 8024208C 24040005 */   addiu    $a0, $zero, 5
@@ -38,7 +38,7 @@ glabel btl_state_update_begin_player_turn
 /* 170984 802420A4 24020064 */   addiu    $v0, $zero, 0x64
 /* 170988 802420A8 14620041 */  bne       $v1, $v0, .L802421B0
 /* 17098C 802420AC 00000000 */   nop
-/* 170990 802420B0 0C093961 */  jal       func_8024E584
+/* 170990 802420B0 0C093961 */  jal       btl_cam_is_moving_done
 /* 170994 802420B4 00000000 */   nop
 /* 170998 802420B8 1040003D */  beqz      $v0, .L802421B0
 /* 17099C 802420BC 3C03FFF7 */   lui      $v1, 0xfff7

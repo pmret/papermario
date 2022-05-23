@@ -24,7 +24,7 @@ static s32 gPauseMapCursorCurrentOption;
 static s32 gPauseMapCursorCurrentOptionCopy;
 static s32 gPauseMapSpacesInSnapRange;
 
-HudScript* gPauseMapIconScripts[] = { HudScript_MapWalk0 };
+HudScript* gPauseMapIconScripts[] = { &HudScript_MapWalk0 };
 s32 D_8024FA34 = -1;
 Vec2b gPauseMapPaths[][32] = {
     { { 1, -10 }, { 1, -8 }, { -9, -2 }, { -8, 0 }, { -8, 0 }, { -7, -3 }, { -5, -3 }, },

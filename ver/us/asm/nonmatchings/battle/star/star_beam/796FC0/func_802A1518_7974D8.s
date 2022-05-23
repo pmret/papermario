@@ -391,7 +391,7 @@ glabel func_802A1518_7974D8
 /* 797A48 802A1A88 8FC20074 */  lw        $v0, 0x74($fp)
 /* 797A4C 802A1A8C 1440016F */  bnez      $v0, .L802A204C
 /* 797A50 802A1A90 2442FFFF */   addiu    $v0, $v0, -1
-/* 797A54 802A1A94 0C093903 */  jal       func_8024E40C
+/* 797A54 802A1A94 0C093903 */  jal       btl_cam_use_preset
 /* 797A58 802A1A98 24040002 */   addiu    $a0, $zero, 2
 /* 797A5C 802A1A9C 0C093936 */  jal       btl_cam_move
 /* 797A60 802A1AA0 2404000A */   addiu    $a0, $zero, 0xa
@@ -628,7 +628,7 @@ glabel func_802A1518_7974D8
 /* 797DC4 802A1E04 2A420008 */  slti      $v0, $s2, 8
 /* 797DC8 802A1E08 1440FFF1 */  bnez      $v0, .L802A1DD0
 /* 797DCC 802A1E0C 2484001C */   addiu    $a0, $a0, 0x1c
-/* 797DD0 802A1E10 0C093903 */  jal       func_8024E40C
+/* 797DD0 802A1E10 0C093903 */  jal       btl_cam_use_preset
 /* 797DD4 802A1E14 24040003 */   addiu    $a0, $zero, 3
 /* 797DD8 802A1E18 0C093936 */  jal       btl_cam_move
 /* 797DDC 802A1E1C 2404001E */   addiu    $a0, $zero, 0x1e

@@ -4,9 +4,9 @@
 
 #define NAMESPACE action_command_whirlwind
 
-extern HudScript HudScript_BlueMeter[];
-extern HudScript HudScript_MashAButton[];
-extern HudScript HudScript_AButton[];
+extern HudScript HudScript_BlueMeter;
+extern HudScript HudScript_MashAButton;
+extern HudScript HudScript_AButton;
 
 extern s32 D_80294240;
 
@@ -34,7 +34,7 @@ extern s32 D_80294240;
 #include "battle/action_cmd/whirlwind_bubble.png.inc.c"
 #include "battle/action_cmd/whirlwind_bubble.pal.inc.c"
 
-HudScript HudScript_Whirlwind1[] = {
+HudScript HudScript_Whirlwind1 = {
     HUD_ELEMENT_OP_SetVisible,
     HUD_ELEMENT_OP_SetTileSize, HUD_ELEMENT_SIZE_24x24,
     HUD_ELEMENT_OP_Loop,
@@ -43,7 +43,7 @@ HudScript HudScript_Whirlwind1[] = {
     HUD_ELEMENT_OP_End
 };
 
-HudScript HudScript_Whirlwind2[] = {
+HudScript HudScript_Whirlwind2 = {
     HUD_ELEMENT_OP_SetVisible,
     HUD_ELEMENT_OP_SetTileSize, HUD_ELEMENT_SIZE_24x24,
     HUD_ELEMENT_OP_Loop,
@@ -52,7 +52,7 @@ HudScript HudScript_Whirlwind2[] = {
     HUD_ELEMENT_OP_End
 };
 
-HudScript HudScript_Whirlwind3[] = {
+HudScript HudScript_Whirlwind3 = {
     HUD_ELEMENT_OP_SetVisible,
     HUD_ELEMENT_OP_SetTileSize, HUD_ELEMENT_SIZE_24x24,
     HUD_ELEMENT_OP_Loop,
@@ -62,7 +62,7 @@ HudScript HudScript_Whirlwind3[] = {
     HUD_ELEMENT_OP_End
 };
 
-HudScript HudScript_Whirlwind4[] = {
+HudScript HudScript_Whirlwind4 = {
     HUD_ELEMENT_OP_SetVisible,
     HUD_ELEMENT_OP_SetTileSize, HUD_ELEMENT_SIZE_24x24,
     HUD_ELEMENT_OP_Loop,
@@ -72,7 +72,7 @@ HudScript HudScript_Whirlwind4[] = {
     HUD_ELEMENT_OP_End
 };
 
-HudScript HudScript_Whirlwind5[] = {
+HudScript HudScript_Whirlwind5 = {
     HUD_ELEMENT_OP_SetVisible,
     HUD_ELEMENT_OP_SetTileSize, HUD_ELEMENT_SIZE_24x24,
     HUD_ELEMENT_OP_Loop,
@@ -82,7 +82,7 @@ HudScript HudScript_Whirlwind5[] = {
     HUD_ELEMENT_OP_End
 };
 
-HudScript HudScript_Whirlwind6[] = {
+HudScript HudScript_Whirlwind6 = {
     HUD_ELEMENT_OP_SetVisible,
     HUD_ELEMENT_OP_SetTileSize, HUD_ELEMENT_SIZE_24x24,
     HUD_ELEMENT_OP_Loop,
@@ -92,7 +92,7 @@ HudScript HudScript_Whirlwind6[] = {
     HUD_ELEMENT_OP_End
 };
 
-HudScript HudScript_Whirlwind7[] = {
+HudScript HudScript_Whirlwind7 = {
     HUD_ELEMENT_OP_SetVisible,
     HUD_ELEMENT_OP_SetTileSize, HUD_ELEMENT_SIZE_24x24,
     HUD_ELEMENT_OP_Loop,
@@ -102,7 +102,7 @@ HudScript HudScript_Whirlwind7[] = {
     HUD_ELEMENT_OP_End
 };
 
-HudScript HudScript_WhirlwindBubble[] = {
+HudScript HudScript_WhirlwindBubble = {
     HUD_ELEMENT_OP_SetVisible,
     HUD_ELEMENT_OP_SetCustomSize, battle_action_cmd_whirlwind_bubble_png_width, battle_action_cmd_whirlwind_bubble_png_height,
     0x00000004,
@@ -116,11 +116,11 @@ s32 D_802AA844_4254B4[] = { 0, 25, 50, 75, 100, 100 };
 s32 D_802AA85C_4254CC[] = { 50, 50, 50, 50, 75, 75, 75, 100, 100, 100, 100 };
 
 HudScript* D_802AA888_4254F8[] = {
-    HudScript_Whirlwind7, HudScript_Whirlwind6, HudScript_Whirlwind5, HudScript_Whirlwind4, HudScript_Whirlwind3, HudScript_Whirlwind2
+    &HudScript_Whirlwind7, &HudScript_Whirlwind6, &HudScript_Whirlwind5, &HudScript_Whirlwind4, &HudScript_Whirlwind3, &HudScript_Whirlwind2
 };
 
 HudScript* D_802AA8A0_425510[] = {
-    HudScript_Whirlwind1, HudScript_Whirlwind1, HudScript_Whirlwind2, HudScript_Whirlwind3, HudScript_Whirlwind3
+    &HudScript_Whirlwind1, &HudScript_Whirlwind1, &HudScript_Whirlwind2, &HudScript_Whirlwind3, &HudScript_Whirlwind3
 };
 
 s32 D_802AA8B4_425524[] = { 3, 3, 3, 3, 2, 2, 2, 1, 1, 1, 1 };
@@ -155,25 +155,25 @@ ApiStatus func_802A9000_423C70(Evt* script, s32 isInitialCall) {
     actionCommandStatus->hudElementX = -48;
     actionCommandStatus->hudElementY = 80;
 
-    id = hud_element_create(HudScript_AButton);
+    id = hud_element_create(&HudScript_AButton);
     actionCommandStatus->hudElements[0] = id;
     hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
     hud_element_set_render_pos(id, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
     hud_element_set_render_depth(id, 0);
 
-    id = hud_element_create(HudScript_BlueMeter);
+    id = hud_element_create(&HudScript_BlueMeter);
     actionCommandStatus->hudElements[1] = id;
     hud_element_set_render_pos(id, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
     hud_element_set_render_depth(id, 0);
     hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
-    id = hud_element_create(HudScript_Whirlwind7);
+    id = hud_element_create(&HudScript_Whirlwind7);
     actionCommandStatus->hudElements[2] = id;
     hud_element_set_render_pos(id, actionCommandStatus->hudElementX + 54, actionCommandStatus->hudElementY + 28);
     hud_element_set_render_depth(id, 0);
     hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
-    id = hud_element_create(HudScript_WhirlwindBubble);
+    id = hud_element_create(&HudScript_WhirlwindBubble);
     actionCommandStatus->hudElements[3] = id;
     hud_element_set_render_pos(id, actionCommandStatus->hudElementX + 60, actionCommandStatus->hudElementY + 28);
     hud_element_set_render_depth(id, 0);
@@ -267,7 +267,7 @@ void func_802A92F0_423F60(void) {
                 actionCommandStatus->unk_4E--;
                 return;
             }
-            hud_element_set_script(actionCommandStatus->hudElements[0], HudScript_MashAButton);
+            hud_element_set_script(actionCommandStatus->hudElements[0], &HudScript_MashAButton);
             actionCommandStatus->barFillLevel = 0;
             actionCommandStatus->state = 11;
             actionCommandStatus->unk_54 = actionCommandStatus->unk_52;
@@ -335,28 +335,28 @@ void func_802A9744_4243B4(void) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
     s32 x, y;
-    s32 hudElement;
+    s32 id;
 
     if (actionCommandStatus->unk_6A == 0) {
         hud_element_draw_clipped(actionCommandStatus->hudElements[0]);
     }
-    hudElement = actionCommandStatus->hudElements[1];
-    hud_element_draw_clipped(hudElement);
-    hud_element_get_render_pos(hudElement, &x, &y);
+    id = actionCommandStatus->hudElements[1];
+    hud_element_draw_clipped(id);
+    hud_element_get_render_pos(id, &x, &y);
 
     func_80268798(x, y, actionCommandStatus->barFillLevel / 100, 1);
     hud_element_draw_clipped(actionCommandStatus->hudElements[3]);
-    hudElement = actionCommandStatus->hudElements[2];
+    id = actionCommandStatus->hudElements[2];
     if (actionCommandStatus->unk_64 == 0) {
-        if (D_802AA888_4254F8[battleStatus->unk_84] != hud_element_get_script(hudElement)) {
-            hud_element_set_script(hudElement, D_802AA888_4254F8[battleStatus->unk_84]);
+        if (D_802AA888_4254F8[battleStatus->unk_84] != hud_element_get_script(id)) {
+            hud_element_set_script(id, D_802AA888_4254F8[battleStatus->unk_84]);
         }
     } else {
-        if (D_802AA8A0_425510[battleStatus->unk_84] != hud_element_get_script(hudElement)) {
-            hud_element_set_script(hudElement, D_802AA8A0_425510[battleStatus->unk_84]);
+        if (D_802AA8A0_425510[battleStatus->unk_84] != hud_element_get_script(id)) {
+            hud_element_set_script(id, D_802AA8A0_425510[battleStatus->unk_84]);
         }
     }
-    hud_element_draw_clipped(hudElement);
+    hud_element_draw_clipped(id);
 }
 
 void func_802A9898_424508(void) {

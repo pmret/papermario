@@ -4,10 +4,10 @@
 #define NAMESPACE action_command_spiny_surge
 
 extern s32 D_80294400;
-extern HudScript HudScript_BlueMeter[];
-extern HudScript HudScript_StickNeutral[];
-extern HudScript HudScript_StickMashLeft[];
-extern HudScript HudScript_100pct[];
+extern HudScript HudScript_BlueMeter;
+extern HudScript HudScript_StickNeutral;
+extern HudScript HudScript_StickMashLeft;
+extern HudScript HudScript_100pct;
 
 s32 D_802A9860_42F680[8] = { 0, 25, 50, 75, 75, 0, 0, 0 };
 extern s32 D_802A98C0; // bss?
@@ -15,7 +15,7 @@ extern s32 D_802A98C0; // bss?
 ApiStatus func_802A9000_42EE20(void) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
-    s32 hudElement;
+    s32 id;
 
     battleStatus->unk_82 = 0x10;
     battleStatus->unk_434 = &D_80294400;
@@ -39,23 +39,23 @@ ApiStatus func_802A9000_42EE20(void) {
     actionCommandStatus->hudElementX = -48;
     actionCommandStatus->hudElementY = 80;
 
-    hudElement = hud_element_create(HudScript_StickNeutral);
-    actionCommandStatus->hudElements[0] = hudElement;
-    hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
-    hud_element_set_render_depth(hudElement, 0);
-    hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+    id = hud_element_create(&HudScript_StickNeutral);
+    actionCommandStatus->hudElements[0] = id;
+    hud_element_set_render_pos(id, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
+    hud_element_set_render_depth(id, 0);
+    hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
-    hudElement = hud_element_create(HudScript_BlueMeter);
-    actionCommandStatus->hudElements[1] = hudElement;
-    hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
-    hud_element_set_render_depth(hudElement, 0);
-    hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+    id = hud_element_create(&HudScript_BlueMeter);
+    actionCommandStatus->hudElements[1] = id;
+    hud_element_set_render_pos(id, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
+    hud_element_set_render_depth(id, 0);
+    hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
-    hudElement = hud_element_create(HudScript_100pct);
-    actionCommandStatus->hudElements[2] = hudElement;
-    hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
-    hud_element_set_render_depth(hudElement, 0);
-    hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+    id = hud_element_create(&HudScript_100pct);
+    actionCommandStatus->hudElements[2] = id;
+    hud_element_set_render_pos(id, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
+    hud_element_set_render_depth(id, 0);
+    hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
     return ApiStatus_DONE2;
 }
@@ -63,7 +63,7 @@ ApiStatus func_802A9000_42EE20(void) {
 ApiStatus func_802A916C_42EF8C(Evt* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
-    s32* args = script->ptrReadPos;
+    Bytecode* args = script->ptrReadPos;
 
     if (battleStatus->unk_83 == 0) {
         battleStatus->actionSuccess = 0;
@@ -139,7 +139,7 @@ void func_802A9254_42F074(void) {
                 break;
             }
 
-            hud_element_set_script(actionCommandStatus->hudElements[0], HudScript_StickMashLeft);
+            hud_element_set_script(actionCommandStatus->hudElements[0], &HudScript_StickMashLeft);
             actionCommandStatus->unk_5C = 0;
             D_802A98C0 = 0;
             actionCommandStatus->unk_54 = actionCommandStatus->unk_52;

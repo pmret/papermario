@@ -320,7 +320,7 @@ segments:
     - [0x542E0, data]
     - [0x5A3E0, .data, 341d0]
     - [0x5A610, .data, effects]
-    - [0x5B320, data]
+    - [0x5B320, .data, 5B320]
     - [0x6B360, .data, world/world]
     - [0x6EAC0, data] # has scripts
     - [0x6F0E0, .data, os/nusys/nuContRmbMgr]
@@ -1100,7 +1100,7 @@ segments:
     subsegments:
     - [0x16C8E0, c, 16c8e0]
     - [0x16F740, c, 16F740]
-    - [0x1776B0, c, 1776B0]
+    - [0x1776B0, c, battle_cam]
     - [0x17D6A0, c, 17D6A0]
     - [0x17FEB0, c]
     - [0x181810, c]
@@ -1118,7 +1118,7 @@ segments:
     - [0x1AF120, c]
     - [0x1AF230, c]
     - [0x1AF2D0, .data, 16c8e0]
-    - [0x1AF5C0, .data, 1776B0]
+    - [0x1AF5C0, .data, battle_cam]
     - [0x1AF8A0, .data, 190B20]
     - [0x1B21E0, data, 1AF2D0] # begins with image?
     - [0x1C2EC0, .data, 19FAF0]
@@ -1127,7 +1127,7 @@ segments:
     - [0x1CB0B0, .data, 1AF230]
     - [0x1CB240, .rodata, 16c8e0]
     - [0x1CB368, .rodata, 16F740]
-    - [0x1CB4E0, .rodata, 1776B0]
+    - [0x1CB4E0, .rodata, battle_cam]
     - [0x1CB670, .rodata, 17D6A0]
     - [0x1CBC30, .rodata, 182B30]
     - [0x1CBDD0, .rodata, 18C790]
@@ -11807,9 +11807,9 @@ segments:
   - [0xFA08A0, bin, bgm/Bowser_s_Attacks_95]
   - [0xFA3C60, bin, bgm/End_Parade_1_90]
   - [0xFA85F0, bin, bgm/End_Parade_2_91]
-  - [0xFABE90, bin, bgm/The_End_6E]
+  - [0xFABE90, bin, bgm/Ths_End_6E]
   - [0xFACC80, bin, bgm/Koopa_Radio_Station_2D]
-  - [0xFAD210, bin, bgm/The_End_Low_Frequency__2E]
+  - [0xFAD210, bin, bgm/Ths_End_Low_Frequency__2E]
   - [0xFAD8F0, bin, bgm/SMW_Remix_2F]
   - [0xFADE70, bin, bgm/New_Partner_82] # BGM end
   - [0xFAE860, bin] # sfx

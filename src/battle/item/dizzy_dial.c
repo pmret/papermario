@@ -48,7 +48,7 @@ ApiStatus N(func_802A1270_727B80)(Evt* script, s32 isInitialCall) {
 EvtScript N(main) = {
     EVT_SET_CONST(EVT_VAR(10), 0x0000009A)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
-    EVT_CALL(UseBattleCamPreset, 2)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_WAIT_FRAMES(10)
     EVT_THREAD
@@ -71,7 +71,7 @@ EvtScript N(main) = {
         EVT_CALL(ShakeCam, 1, 0, 2, EVT_FIXED(1.0))
         EVT_CALL(ShakeCam, 1, 0, 2, EVT_FIXED(0.5))
         EVT_WAIT_FRAMES(10)
-        EVT_CALL(UseBattleCamPreset, 3)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
         EVT_CALL(MoveBattleCamOver, 10)
         EVT_CALL(func_8024ECF8, 0, 0, 0)
     EVT_END_THREAD

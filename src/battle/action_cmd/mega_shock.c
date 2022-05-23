@@ -3,10 +3,10 @@
 
 #define NAMESPACE action_command_mega_shock
 
-extern HudScript HudScript_BlueMeter[];
-extern HudScript HudScript_AButton[];
-extern HudScript HudScript_BButton[];
-extern HudScript HudScript_100pct[];
+extern HudScript HudScript_BlueMeter;
+extern HudScript HudScript_AButton;
+extern HudScript HudScript_BButton;
+extern HudScript HudScript_100pct;
 extern s32 D_802943C0;
 
 extern HudScript HudScript_MashAButton[];
@@ -37,25 +37,25 @@ ApiStatus func_802A9000_42DA10(Evt* script, s32 isInitialCall) {
     actionCommandStatus->hudElementX = -0x30;
     actionCommandStatus->hudElementY = 0x50;
 
-    elementID = hud_element_create(HudScript_AButton);
+    elementID = hud_element_create(&HudScript_AButton);
     actionCommandStatus->hudElements[0] = elementID;
     hud_element_set_flags(elementID, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
     hud_element_set_render_pos(elementID, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
     hud_element_set_render_depth(elementID, 0);
 
-    elementID = hud_element_create(HudScript_BButton);
+    elementID = hud_element_create(&HudScript_BButton);
     actionCommandStatus->hudElements[2] = elementID;
     hud_element_set_flags(elementID, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
     hud_element_set_render_pos(elementID, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
     hud_element_set_render_depth(elementID, 0);
 
-    elementID = hud_element_create(HudScript_BlueMeter);
+    elementID = hud_element_create(&HudScript_BlueMeter);
     actionCommandStatus->hudElements[1] = elementID;
     hud_element_set_render_pos(elementID, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 0x1C);
     hud_element_set_render_depth(elementID, 0);
     hud_element_set_flags(elementID, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
-    elementID = hud_element_create(HudScript_100pct);
+    elementID = hud_element_create(&HudScript_100pct);
     actionCommandStatus->hudElements[4] = elementID;
     hud_element_set_render_pos(elementID, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 0x1C);
     hud_element_set_render_depth(elementID, 0);

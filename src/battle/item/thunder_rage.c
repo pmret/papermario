@@ -56,7 +56,7 @@ EvtScript N(main) = {
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_CHILD_THREAD
         EVT_WAIT_FRAMES(5)
-        EVT_CALL(UseBattleCamPreset, 2)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
         EVT_CALL(MoveBattleCamOver, 20)
     EVT_END_CHILD_THREAD
     EVT_CALL(N(FadeBackgroundToBlack))
@@ -82,7 +82,7 @@ EvtScript N(main) = {
     EVT_IF_NE(EVT_VAR(0), -1)
         EVT_GOTO(0)
     EVT_END_IF
-    EVT_CALL(UseBattleCamPreset, 3)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10002)
     EVT_WAIT_FRAMES(30)

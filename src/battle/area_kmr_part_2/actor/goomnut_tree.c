@@ -343,7 +343,7 @@ EvtScript N(80223DBC) = {
     EVT_IF_NE(LW(0), 0)
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(UseBattleCamPreset, 15)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_15)
     EVT_CALL(BattleCamTargetActor, ACTOR_ENEMY0)
     EVT_WAIT_FRAMES(20)
     EVT_CALL(SetActorVar, -127, 5, 1)
@@ -374,7 +374,7 @@ EvtScript N(80223DBC) = {
     EVT_ELSE
         EVT_CALL(FallPartTo, -127, 2, 10, 32, 10, 10)
     EVT_END_IF
-    EVT_CALL(UseBattleCamPreset, 2)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_CALL(SetOwnerTarget, 512, 2)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)

@@ -130,59 +130,14 @@ static s32 N(pad_868)[] = {
     0x00000000, 0x00000000,
 };
 
-static s32** N(varStash) = NULL;
-#include "world/common/StashVars.inc.c"
-
-EvtScript N(80240874) = {
-    EVT_SET_GROUP(EVT_GROUP_00)
-    EVT_CALL(SetTimeFreezeMode, 2)
-    EVT_WAIT_FRAMES(40)
-    EVT_CALL(ShowGotItem, EVT_VAR(0), 0, 0)
-    EVT_CALL(SetTimeFreezeMode, 0)
-    EVT_RETURN
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(802408DC) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_SET(EVT_VAR(0), EVT_VAR(10))
-    EVT_IF_NE(EVT_VAR(10), 0)
-        EVT_EXEC_WAIT(N(80240874))
-    EVT_END_IF
-    EVT_SWITCH(EVT_VAR(11))
-        EVT_CASE_EQ(0)
-            EVT_CALL(AddItem, EVT_VAR(10), EVT_VAR(0))
-        EVT_CASE_EQ(1)
-            EVT_CALL(AddKeyItem, EVT_VAR(10))
-        EVT_CASE_EQ(2)
-            EVT_CALL(AddBadge, EVT_VAR(10), EVT_VAR(0))
-    EVT_END_SWITCH
-    EVT_WAIT_FRAMES(15)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(802409BC) = {
-    EVT_SET(EVT_VAR(10), 19)
-    EVT_SET(EVT_VAR(11), 1)
-    EVT_SET(EVT_SAVE_FLAG(1057), 1)
-    EVT_EXEC_WAIT(N(802408DC))
-    EVT_RETURN
-    EVT_END
-};
+#define CHEST_ITEM  19
+#define CHEST_FLAG  1057
+#include "world/common/atomic/Chest.inc.c"
 
 EvtScript N(makeEntities) = {
     EVT_CALL(MakeEntity, 0x802EAE30, -225, 0, -245, 0, 0, MAKE_ENTITY_END)
     EVT_CALL(AssignChestFlag, EVT_SAVE_FLAG(1057))
-    EVT_CALL(AssignScript, EVT_PTR(N(802409BC)))
+    EVT_CALL(AssignScript, EVT_PTR(N(EVS_Chest_Interact)))
     EVT_RETURN
     EVT_END
 };
-
-#include "world/common/GetItemName.inc.c"
-
-#include "world/common/SomeItemEntityFunc.inc.c"
-
-#include "world/common/CheckItemFlags40.inc.c"

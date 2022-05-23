@@ -4,25 +4,25 @@
 #define NAMESPACE action_command_hammer
 
 // icon indexes for hud elements
-extern HudScript HudScript_TimingBar1Chance[];
-extern HudScript HudScript_TimingWait[];
-extern HudScript HudScript_TimingCharge1[];
-extern HudScript HudScript_TimingCharge2[];
-extern HudScript HudScript_TimingCharge3[];
-extern HudScript HudScript_TimingCharge4a[];
-extern HudScript HudScript_TimingCharge4b[];
-extern HudScript HudScript_TimingCharge4c[];
-extern HudScript HudScript_StickHoldLeft[];
-extern HudScript HudScript_StickTapNeutral[];
-extern HudScript HudScript_RightOn[];
-extern HudScript HudScript_TimingReady[];
+extern HudScript HudScript_TimingBar1Chance;
+extern HudScript HudScript_TimingWait;
+extern HudScript HudScript_TimingCharge1;
+extern HudScript HudScript_TimingCharge2;
+extern HudScript HudScript_TimingCharge3;
+extern HudScript HudScript_TimingCharge4a;
+extern HudScript HudScript_TimingCharge4b;
+extern HudScript HudScript_TimingCharge4c;
+extern HudScript HudScript_StickHoldLeft;
+extern HudScript HudScript_StickTapNeutral;
+extern HudScript HudScript_RightOn;
+extern HudScript HudScript_TimingReady;
 
 extern s32 D_802941E0;
 
 ApiStatus N(CreateHudElements)(Evt* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
-    s32 hudElement;
+    s32 id;
 
     battleStatus->unk_82 = 1;
     battleStatus->unk_434 = &D_802941E0;
@@ -41,48 +41,48 @@ ApiStatus N(CreateHudElements)(Evt* script, s32 isInitialCall) {
     actionCommandStatus->unk_60 = 0;
     actionCommandStatus->hudElementY = 96;
 
-    hudElement = hud_element_create(HudScript_TimingBar1Chance);
-    actionCommandStatus->hudElements[0] = hudElement;
-    hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
-    hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
-    hud_element_set_render_depth(hudElement, 10);
+    id = hud_element_create(&HudScript_TimingBar1Chance);
+    actionCommandStatus->hudElements[0] = id;
+    hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+    hud_element_set_render_pos(id, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
+    hud_element_set_render_depth(id, 10);
 
-    hudElement = hud_element_create(HudScript_TimingWait);
-    actionCommandStatus->hudElements[1] = hudElement;
-    hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
-    hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
-    hud_element_set_render_depth(hudElement, 0);
+    id = hud_element_create(&HudScript_TimingWait);
+    actionCommandStatus->hudElements[1] = id;
+    hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+    hud_element_set_render_pos(id, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
+    hud_element_set_render_depth(id, 0);
 
-    hudElement = hud_element_create(HudScript_TimingCharge4a);
-    actionCommandStatus->hudElements[2] = hudElement;
-    hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
-    hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
-    hud_element_set_render_depth(hudElement, 0);
+    id = hud_element_create(&HudScript_TimingCharge4a);
+    actionCommandStatus->hudElements[2] = id;
+    hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+    hud_element_set_render_pos(id, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
+    hud_element_set_render_depth(id, 0);
 
-    hudElement = hud_element_create(HudScript_TimingCharge4b);
-    actionCommandStatus->hudElements[3] = hudElement;
-    hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
-    hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
-    hud_element_set_render_depth(hudElement, 0);
+    id = hud_element_create(&HudScript_TimingCharge4b);
+    actionCommandStatus->hudElements[3] = id;
+    hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+    hud_element_set_render_pos(id, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
+    hud_element_set_render_depth(id, 0);
 
-    hudElement = hud_element_create(HudScript_TimingCharge4c);
-    actionCommandStatus->hudElements[4] = hudElement;
-    hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
-    hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
-    hud_element_set_render_depth(hudElement, 0);
+    id = hud_element_create(&HudScript_TimingCharge4c);
+    actionCommandStatus->hudElements[4] = id;
+    hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+    hud_element_set_render_pos(id, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
+    hud_element_set_render_depth(id, 0);
 
-    hudElement = hud_element_create(HudScript_StickHoldLeft);
-    actionCommandStatus->hudElements[5] = hudElement;
-    hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
-    hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
-    hud_element_set_render_depth(hudElement, 0);
+    id = hud_element_create(&HudScript_StickHoldLeft);
+    actionCommandStatus->hudElements[5] = id;
+    hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+    hud_element_set_render_pos(id, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
+    hud_element_set_render_depth(id, 0);
 
-    hudElement = hud_element_create(HudScript_RightOn);
-    actionCommandStatus->hudElements[6] = hudElement;
-    hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
-    hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
-    hud_element_set_render_depth(hudElement, 0);
-    hud_element_set_alpha(hudElement, 0xFF);
+    id = hud_element_create(&HudScript_RightOn);
+    actionCommandStatus->hudElements[6] = id;
+    hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+    hud_element_set_render_pos(id, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
+    hud_element_set_render_depth(id, 0);
+    hud_element_set_alpha(id, 0xFF);
 
     return ApiStatus_DONE2;
 }
@@ -226,13 +226,13 @@ void func_802A936C_42236C(void) {
             temp_f20 = (actionCommandStatus->unk_52 - new_var) / 3;
 
             if (actionCommandStatus->unk_54 < temp_f20) {
-                hud_element_set_script(actionCommandStatus->hudElements[4], HudScript_TimingCharge3);
+                hud_element_set_script(actionCommandStatus->hudElements[4], &HudScript_TimingCharge3);
                 battleStatus->unk_84 = 0;
                 if (actionCommandStatus->unk_54 == 0 && actionCommandStatus->unk_62 != 0) {
                     sfx_play_sound(SOUND_233);
                 }
             } else if (actionCommandStatus->unk_54 < temp_f20 * 2) {
-                hud_element_set_script(actionCommandStatus->hudElements[3], HudScript_TimingCharge2);
+                hud_element_set_script(actionCommandStatus->hudElements[3], &HudScript_TimingCharge2);
                 battleStatus->unk_84 = 1;
                 if (actionCommandStatus->unk_54 == temp_f20) {
                     if (actionCommandStatus->unk_62 != 0) {
@@ -240,7 +240,7 @@ void func_802A936C_42236C(void) {
                     }
                 }
             } else if (actionCommandStatus->unk_54 < temp_f20 * 3.0f) {
-                hud_element_set_script(actionCommandStatus->hudElements[2], HudScript_TimingCharge1);
+                hud_element_set_script(actionCommandStatus->hudElements[2], &HudScript_TimingCharge1);
                 battleStatus->unk_84 = 2;
                 if (actionCommandStatus->unk_54 == temp_f20 * 2) {
                     if (actionCommandStatus->unk_62 != 0) {
@@ -251,8 +251,8 @@ void func_802A936C_42236C(void) {
 
             if (actionCommandStatus->unk_54 == (~phi_s0 + actionCommandStatus->unk_52)) {
                 battleStatus->unk_84 = 3;
-                hud_element_set_script(actionCommandStatus->hudElements[1], HudScript_TimingReady);
-                hud_element_set_script(actionCommandStatus->hudElements[5], HudScript_StickTapNeutral);
+                hud_element_set_script(actionCommandStatus->hudElements[1], &HudScript_TimingReady);
+                hud_element_set_script(actionCommandStatus->hudElements[5], &HudScript_StickTapNeutral);
                 if (actionCommandStatus->unk_62 != 0) {
                     sfx_play_sound(SOUND_234);
                 }

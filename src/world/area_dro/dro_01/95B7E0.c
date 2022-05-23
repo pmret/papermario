@@ -68,7 +68,7 @@ static EffectInstance* N(Quizmo_StageEffect);
 static EffectInstance* N(Quizmo_AudienceEffect);
 static EffectInstance* N(Quizmo_VannaTEffect);
 static s8 N(pad_D_8024DFEC)[0x4];
-static s32 N(bigArray)[112];
+static s32 N(KeyItemChoiceList)[112];
 static s8 N(pad_D_8024E1B0)[0x4]; // Probably part of the above
 static s32 N(LetterDelivery_SavedNpcAnim);
 
@@ -340,8 +340,8 @@ EvtScript N(802477E8) = {
 };
 
 EvtScript N(8024792C) = {
-    EVT_CALL(N(BigArrayFunc), EVT_VAR(0))
-    EVT_BIND_PADLOCK(N(802477E8), 0x10, 0, EVT_PTR(N(bigArray)), 0, 1)
+    EVT_CALL(N(BuildKeyItemChoiceList), EVT_VAR(0))
+    EVT_BIND_PADLOCK(N(802477E8), 0x10, 0, EVT_PTR(N(KeyItemChoiceList)), 0, 1)
     EVT_CALL(N(func_80242730_95D930), EVT_VAR(0))
     EVT_RETURN
     EVT_END
@@ -411,8 +411,8 @@ EvtScript N(802479FC) = {
 EvtScript N(80247D20) = {
     EVT_SET(EVT_VAR(0), EVT_VAR(11))
     EVT_SET(EVT_VAR(1), EVT_VAR(2))
-    EVT_CALL(N(BigArrayFunc), EVT_VAR(0))
-    EVT_BIND_PADLOCK(N(802479FC), 0x10, 0, EVT_PTR(N(bigArray)), 0, 1)
+    EVT_CALL(N(BuildKeyItemChoiceList), EVT_VAR(0))
+    EVT_BIND_PADLOCK(N(802479FC), 0x10, 0, EVT_PTR(N(KeyItemChoiceList)), 0, 1)
     EVT_CALL(N(func_80242730_95D930), EVT_VAR(0))
     EVT_RETURN
     EVT_END
@@ -2034,7 +2034,7 @@ ApiStatus N(func_80242784_95D984)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#include "world/common/BigArrayFunc.inc.c"
+#include "world/common/atomic/MakeKeyChoice.inc.c"
 
 ApiStatus N(func_80242858_95DA58)(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
