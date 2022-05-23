@@ -27,7 +27,125 @@ s32 WalkPeachAnims[] = {
 void action_run_update_peach(void);
 
 // walk
+// This is actually matching, but I can't figure out how to get rid of the goto
+#ifdef NON_MATCHING
+void func_802B6000_E236E0(void) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    PlayerData* playerData = &gPlayerData;
+    f32 moveVectorMagnitude;
+    f32 moveVectorAngle;
+    s32 temp_f8;
+    s32 stickAxisX;
+    s32 stickAxisY;
+    s32 playerStatusFlags;
+    u32 playerAnimFlags;
+    u32 playerAnimFlags2;
+    s32 unkFlagArg;
+    s32 phi_s3;
+    s32 phi_v0;
+    u32 phi_v0_2;
+    s32 phi_v1;
+
+    playerAnimFlags = playerStatus->animFlags;
+    phi_s3 = 0;
+
+    if ((playerAnimFlags & 0x1000) != 0) {
+        func_802B65E8_E23CC8();
+        return;
+    }
+
+    playerStatusFlags = playerStatus->flags;
+    if (playerStatusFlags < 0) {
+        playerStatus->flags = playerStatusFlags & 0x7F77FFFF;
+        playerStatus->unk_60 = 0;
+        phi_s3 = 1;
+
+        if ((playerStatusFlags & PLAYER_STATUS_ANIM_FLAGS_8BIT_MARIO) == 0) {
+            playerStatus->currentSpeed = playerStatus->walkSpeed;
+        }
+
+        if ((playerAnimFlags & PLAYER_STATUS_ANIM_FLAGS_8BIT_MARIO) != 0) {
+            unkFlagArg = 0x9 << 16;
+            unkFlagArg |= 0x3;
+        } else {
+            unkFlagArg = 0x60000;
+            if ((playerAnimFlags & 1) == 0) {
+                unkFlagArg = 0x1 << 16;
+                unkFlagArg |= 0x4;
+            }
+        }
+        // Removing the below line causes the function to unmatch
+        playerAnimFlags2 = unkFlagArg;
+        
+        suggest_player_anim_clearUnkFlag(unkFlagArg);
+    }
+    
+
+    if ((playerStatus->flags & PLAYER_STATUS_ANIM_FLAGS_8BIT_MARIO) != 0) {
+        playerStatus->targetYaw = playerStatus->heading;
+        try_player_footstep_sounds(8);
+        return;
+    }
+
+    player_input_to_move_vector(&moveVectorAngle, &moveVectorMagnitude);
+    phys_update_interact_collider();
+
+    if (check_input_jump() == 0) {
+        if(phi_s3 != 0 || check_input_hammer() == 0) {
+
+            player_input_to_move_vector(&moveVectorAngle, &moveVectorMagnitude);
+            if (moveVectorMagnitude == 0.0f) {
+                set_action_state(ACTION_STATE_IDLE);
+                return;
+            }
+
+            if (fabsf(D_800F7B40 - moveVectorAngle) <= 90.0f) {
+                temp_f8 =  (moveVectorMagnitude - D_800F7B44);
+                phi_v0 = temp_f8;
+                if (temp_f8 < 0) {
+                    phi_v0 = -temp_f8;
+                }
+                if (phi_v0 < 0x14) {
+
+                    if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_80000000)) {
+                        if (moveVectorMagnitude >= 20.0f) {
+                            playerStatus->targetYaw = moveVectorAngle;
+                        }
+                    }
+                    phi_v0_2 = playerStatus->animFlags & (~PLAYER_STATUS_ANIM_FLAGS_80000000);
+
+                    goto block_32;
+                }
+            }
+
+            playerAnimFlags2 = playerStatus->animFlags;
+
+            if (playerAnimFlags2 & PLAYER_STATUS_ANIM_FLAGS_80000000) {
+                playerStatus->targetYaw = moveVectorAngle;
+            } else {
+                phi_v0_2 = playerAnimFlags2 | PLAYER_STATUS_ANIM_FLAGS_80000000;
+block_32:
+                playerStatus->animFlags = phi_v0_2;
+            }
+
+            if (is_ability_active(0xB) == 0) {
+                stickAxisX = playerStatus->stickAxis[0];
+                stickAxisY = playerStatus->stickAxis[1];
+                if (((stickAxisX * stickAxisX) + (stickAxisY * stickAxisY)) >= 0xBD2) {
+                    set_action_state(ACTION_STATE_RUN);
+                    return;
+                }
+            }
+            
+            try_player_footstep_sounds(8);
+            playerData->walkingStepsTaken += 1;
+        }
+    }
+}
+#else
 INCLUDE_ASM(void, "world/action/walk", func_802B6000_E236E0, void);
+#endif
+
 
 // run
 void action_run_update(void) {

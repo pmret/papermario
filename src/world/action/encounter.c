@@ -31,6 +31,10 @@ s32 func_802B6000_E28A30(void) {
             return func_802BD100_317020(oldFlags);
         }
     }
+
+    #ifdef AVOID_UB
+        return 0;
+    #endif
 }
 
 //wip - not good yet
