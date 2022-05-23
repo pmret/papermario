@@ -2,7 +2,6 @@
 #include "world/actions.h"
 
 extern f32 D_802B6770_E27C80;
-extern s32 func_802BD100_317020(s32 arg0);
 
 s32 func_802B6000_E28A30(void) {
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
