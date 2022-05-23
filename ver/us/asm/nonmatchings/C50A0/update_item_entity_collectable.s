@@ -9,8 +9,8 @@ dlabel D_80150E18
 .section .text
 
 glabel update_item_entity_collectable
-/* CA950 80134250 3C028015 */  lui       $v0, %hi(D_801565A4)
-/* CA954 80134254 844265A4 */  lh        $v0, %lo(D_801565A4)($v0)
+/* CA950 80134250 3C028015 */  lui       $v0, %hi(isPickingUpItem)
+/* CA954 80134254 844265A4 */  lh        $v0, %lo(isPickingUpItem)($v0)
 /* CA958 80134258 27BDFFA0 */  addiu     $sp, $sp, -0x60
 /* CA95C 8013425C AFB20038 */  sw        $s2, 0x38($sp)
 /* CA960 80134260 AFB40040 */  sw        $s4, 0x40($sp)
@@ -1314,8 +1314,8 @@ glabel update_item_entity_collectable
 .L80135538:
 /* CBC38 80135538 1462000D */  bne       $v1, $v0, .L80135570
 /* CBC3C 8013553C 24020001 */   addiu    $v0, $zero, 1
-/* CBC40 80135540 3C018015 */  lui       $at, %hi(D_801565A4)
-/* CBC44 80135544 A42265A4 */  sh        $v0, %lo(D_801565A4)($at)
+/* CBC40 80135540 3C018015 */  lui       $at, %hi(isPickingUpItem)
+/* CBC44 80135544 A42265A4 */  sh        $v0, %lo(isPickingUpItem)($at)
 /* CBC48 80135548 2402001C */  addiu     $v0, $zero, 0x1c
 /* CBC4C 8013554C 3C03800A */  lui       $v1, %hi(gOverrideFlags)
 /* CBC50 80135550 2463A650 */  addiu     $v1, $v1, %lo(gOverrideFlags)

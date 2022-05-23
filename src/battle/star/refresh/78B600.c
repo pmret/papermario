@@ -60,7 +60,7 @@ ApiStatus func_802A19A8_78BFA8(Evt* script, s32 isInitialCall) {
 EvtScript N(802A1A70) = {
     EVT_CALL(GetOwnerID, LW(10))
     EVT_IF_EQ(LW(10), 0)
-        EVT_CALL(UseBattleCamPreset, 69)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_69)
         EVT_WAIT_FRAMES(10)
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_GOT_ITEM)
         EVT_CALL(GetActorPos, ACTOR_PLAYER, LW(0), LW(1), LW(2))
@@ -83,7 +83,7 @@ EvtScript N(802A1A70) = {
         EVT_WAIT_FRAMES(30)
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, 0x01002A)
     EVT_ELSE
-        EVT_CALL(UseBattleCamPreset, 69)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_69)
         EVT_WAIT_FRAMES(10)
         EVT_CALL(N(UnkStarFunc), 0)
         EVT_CALL(GetActorPos, ACTOR_PARTNER, LW(0), LW(1), LW(2))
@@ -115,7 +115,7 @@ EvtScript N(802A1A70) = {
 EvtScript N(802A1E08) = {
     EVT_CALL(GetOwnerID, LW(10))
     EVT_IF_EQ(LW(10), 0)
-        EVT_CALL(UseBattleCamPreset, 69)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_69)
         EVT_WAIT_FRAMES(10)
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_GOT_ITEM)
         EVT_CALL(GetActorPos, ACTOR_PLAYER, LW(0), LW(1), LW(2))
@@ -138,7 +138,7 @@ EvtScript N(802A1E08) = {
         EVT_WAIT_FRAMES(30)
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, 0x01002A)
     EVT_ELSE
-        EVT_CALL(UseBattleCamPreset, 69)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_69)
         EVT_WAIT_FRAMES(10)
         EVT_CALL(N(UnkStarFunc), 0)
         EVT_CALL(GetActorPos, ACTOR_PARTNER, LW(0), LW(1), LW(2))
@@ -170,7 +170,7 @@ EvtScript N(802A1E08) = {
 EvtScript N(802A21A0) = {
     EVT_WAIT_FRAMES(8)
     EVT_CALL(SetForegroundModelsVisible, 0)
-    EVT_CALL(func_8024E664, 73)
+    EVT_CALL(UseBattleCamPresetImmediately, BTL_CAM_PRESET_73)
     EVT_CALL(MoveBattleCamOver, 1)
     EVT_CALL(PlaySound, 0x2041)
     EVT_CALL(CreateNpc, 100, LW(0))
@@ -191,7 +191,7 @@ EvtScript N(802A21A0) = {
     EVT_CALL(EnableNpcBlur, 100, 0)
     EVT_THREAD
         EVT_WAIT_FRAMES(10)
-        EVT_CALL(UseBattleCamPreset, 69)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_69)
     EVT_END_THREAD
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LW(0), LW(1), LW(2))
     EVT_ADD(LW(1), 50)
@@ -204,7 +204,7 @@ EvtScript N(802A21A0) = {
 EvtScript N(802A23AC) = {
     EVT_CALL(GetOwnerID, LW(10))
     EVT_IF_EQ(LW(10), 0)
-        EVT_CALL(UseBattleCamPreset, 2)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
         EVT_CALL(PlaySound, 0x2047)
         EVT_THREAD
             EVT_LOOP(5)
@@ -236,7 +236,7 @@ EvtScript N(802A23AC) = {
         EVT_CALL(EnableNpcBlur, 100, 0)
         EVT_CALL(DeleteNpc, 100)
     EVT_ELSE
-        EVT_CALL(UseBattleCamPreset, 2)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
         EVT_CALL(PlaySound, 0x2045)
         EVT_THREAD
             EVT_LOOP(5)
@@ -303,7 +303,7 @@ EvtScript N(usePower) = {
     EVT_WAIT_FRAMES(16)
     EVT_THREAD
         EVT_WAIT_FRAMES(10)
-        EVT_CALL(UseBattleCamPreset, 2)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_END_THREAD
     EVT_CALL(PlaySound, 0x242)
     EVT_CALL(EnableNpcBlur, 100, 1)

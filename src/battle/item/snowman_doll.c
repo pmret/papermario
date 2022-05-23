@@ -52,7 +52,7 @@ EvtScript N(main) = {
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_WAIT_FRAMES(10)
-    EVT_CALL(UseBattleCamPreset, 3)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
     EVT_CALL(MoveBattleCamOver, 50)
     EVT_WAIT_FRAMES(50)
     EVT_CALL(PlayEffect, 0x60, 0, 0, 0, 20, EVT_FIXED(1.0), 160, 0, 0, 0, 0, 0, 0, 0)

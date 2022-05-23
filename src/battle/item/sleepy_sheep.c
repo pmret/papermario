@@ -338,7 +338,7 @@ s32 N(modelCommandList)[] = {
 EvtScript N(main) = {
     EVT_SET_CONST(EVT_VAR(10), 0x0000008F)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
-    EVT_CALL(UseBattleCamPreset, 19)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
     EVT_CALL(SetBattleCamTarget, -67, -15, -5)
     EVT_CALL(SetBattleCamOffsetZ, 45)
     EVT_CALL(SetBattleCamZoom, 169)
@@ -390,7 +390,7 @@ EvtScript N(main) = {
         EVT_CALL(N(func_802A1740_71ED90))
         EVT_CALL(N(func_802A1848_71EE98))
     EVT_END_THREAD
-    EVT_CALL(UseBattleCamPreset, 2)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_WAIT_FRAMES(8)
     EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_1002B, ANIM_1002B, ANIM_MIDAIR)
@@ -461,7 +461,7 @@ EvtScript N(main) = {
         EVT_CALL(DeleteVirtualEntity, EVT_VAR(10))
     EVT_END_THREAD
     EVT_WAIT_FRAMES(30)
-    EVT_CALL(UseBattleCamPreset, 3)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)

@@ -48,7 +48,7 @@ s32 N(modelCommandList)[] = {
 EvtScript N(main) = {
     EVT_SET_CONST(EVT_VAR(10), 0x000000AC)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
-    EVT_CALL(UseBattleCamPreset, 3)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
     EVT_CALL(MoveBattleCamOver, 15)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_THROW)
     EVT_CALL(PlaySound, SOUND_THROW)

@@ -61,7 +61,7 @@ void func_802B60A4_E29514(void) {
 
         TempPointer = &D_802B6ED0;
         if (sp20 >= 0){
-            if(!(sp20 & COLLISION_WITH_ENTITY_BIT)) {
+            if (!(sp20 & COLLISION_WITH_ENTITY_BIT)) {
                 D_802B6ED0 = -1;
             } else {
                 D_802B6ED0 = sp20 & 0x3FF;

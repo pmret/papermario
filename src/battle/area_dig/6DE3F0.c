@@ -4,17 +4,15 @@
 
 #include "common/Set80218630_Var0.inc.c"
 
-extern s32 D_8008F0A0;
-
 ApiStatus func_80218644_6DE404(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
     SelectableTarget* selectableTarget;
 
     battleStatus->moveCategory = 1;
-    battleStatus->selectedMoveID = 3;
+    battleStatus->selectedMoveID = MOVE_HAMMER1;
     battleStatus->selectedItemID = gCurrentEncounter.hitTier;
-    battleStatus->currentTargetListFlags = D_8008F0A0;
+    battleStatus->currentTargetListFlags = gMoveTable[MOVE_HAMMER1].flags;
 
     player_create_target_list(player);
     player->selectedTargetIndex = 0;

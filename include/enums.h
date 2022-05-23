@@ -487,6 +487,8 @@ enum Easings {
 
 enum SoundIDs {
     SOUND_0                         = 0x00000000,
+    SOUND_3                         = 0x00000003,
+    SOUND_4                         = 0x00000004,
     SOUND_MENU_BADGE_EQUIP          = 0x00000005,
     SOUND_MENU_BADGE_UNEQUIP        = 0x00000006,
     SOUND_MENU_START_TUTORIAL       = 0x00000009,
@@ -711,7 +713,7 @@ enum CamShakeModes {
     CAM_SHAKE_DECAYING_VERTICAL     = 2
 };
 
-// for use with func_8024E748
+// for use with SetBattleCamParam
 enum AuxCameraParams {
     AUX_CAM_PARAM_1             = 1,
     AUX_CAM_BOOM_LENGTH         = 2,
@@ -1114,6 +1116,13 @@ enum ItemTypeFlags {
     ITEM_TYPE_FLAG_ENTITY_FULLSIZE      = 0x1000,
 };
 
+enum ItemTargetFlags {
+    ITEM_TARGET_FLAG_ENEMY              = 0x0001,
+    ITEM_TARGET_FLAG_2                  = 0x0002,
+    ITEM_TARGET_FLAG_PLAYER             = 0x0008,
+    ITEM_TARGET_FLAG_8000               = 0x8000
+};
+
 // TODO: use NPC_ANIM-like macro for player animations
 enum PlayerAnims {
     ANIM_1                          = 0x00000001,
@@ -1483,6 +1492,7 @@ enum ItemSpawnModes {
     ITEM_SPAWN_MODE_TOSS_FADE3                                   = 0x00000019,
     ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS_SMALL                      = 0x0000001A,
     ITEM_SPAWN_MODE_UNKNOWN_1B                                   = 0x0000001B,
+    ITEM_SPAWN_AT_PLAYER                                         = 0x0000001C,
 };
 
 enum Locations {
@@ -1759,11 +1769,20 @@ enum TriggerFlags {
 };
 
 enum ItemEntityFlags {
+    ITEM_ENTITY_FLAGS_CAM0          = 0x00000001,
+    ITEM_ENTITY_FLAGS_CAM1          = 0x00000002,
+    ITEM_ENTITY_FLAGS_CAM2          = 0x00000004,
+    ITEM_ENTITY_FLAGS_CAM3          = 0x00000008,
     ITEM_ENTITY_FLAGS_10            = 0x00000010,
     ITEM_ENTITY_FLAGS_40            = 0x00000040,
     ITEM_ENTITY_FLAGS_TINY          = 0x00004000,
+    ITEM_ENTITY_FLAGS_20000         = 0x00020000,
+    ITEM_ENTITY_FLAGS_40000         = 0x00040000,
     ITEM_ENTITY_FLAGS_TRANSPARENT   = 0x00080000,
     ITEM_ENTITY_FLAGS_100000        = 0x00100000,
+    ITEM_ENTITY_FLAGS_200000        = 0x00200000,
+    ITEM_ENTITY_FLAGS_2000000       = 0x02000000,
+    ITEM_ENTITY_FLAGS_4000000       = 0x04000000,
     ITEM_ENTITY_FLAGS_8000000       = 0x08000000,
 };
 
@@ -1889,7 +1908,7 @@ enum AttackEventFlags {
 };
 
 enum PartnerActions {
-    PARTNER_ACTION_NONE             = 0, // genetic state
+    PARTNER_ACTION_NONE             = 0, // generic state
     PARTNER_ACTION_USE              = 1, // generic state
     PARTNER_ACTION_KOOPER_1         = 1,
     PARTNER_ACTION_KOOPER_2         = 2,
@@ -3129,38 +3148,63 @@ enum BtlCameraPreset {
 };
 
 enum MoveDataFlags {
-    STATIC_MOVE_FLAGS_1                 = 0x00000001,
-    STATIC_MOVE_FLAGS_2                 = 0x00000002,
-    STATIC_MOVE_FLAGS_4                 = 0x00000004,
-    STATIC_MOVE_FLAGS_8                 = 0x00000008,
-    STATIC_MOVE_FLAGS_10                = 0x00000010,
-    STATIC_MOVE_FLAGS_20                = 0x00000020,
-    STATIC_MOVE_FLAGS_40                = 0x00000040,
-    STATIC_MOVE_FLAGS_80                = 0x00000080,
-    STATIC_MOVE_FLAGS_100               = 0x00000100,
-    STATIC_MOVE_FLAGS_200               = 0x00000200,
-    STATIC_MOVE_FLAGS_400               = 0x00000400,
-    STATIC_MOVE_FLAGS_800               = 0x00000800,
-    STATIC_MOVE_FLAGS_1000              = 0x00001000,
-    STATIC_MOVE_FLAGS_2000              = 0x00002000,
-    STATIC_MOVE_FLAGS_4000              = 0x00004000,
-    STATIC_MOVE_FLAGS_8000              = 0x00008000,
-    STATIC_MOVE_FLAGS_10000             = 0x00010000,
-    STATIC_MOVE_FLAGS_20000             = 0x00020000,
-    STATIC_MOVE_FLAGS_40000             = 0x00040000,
-    STATIC_MOVE_FLAGS_80000             = 0x00080000,
-    STATIC_MOVE_FLAGS_100000            = 0x00100000,
-    STATIC_MOVE_FLAGS_200000            = 0x00200000,
-    STATIC_MOVE_FLAGS_400000            = 0x00400000,
-    STATIC_MOVE_FLAGS_800000            = 0x00800000,
-    STATIC_MOVE_FLAGS_1000000           = 0x01000000,
-    STATIC_MOVE_FLAGS_2000000           = 0x02000000,
-    STATIC_MOVE_FLAGS_4000000           = 0x04000000,
-    STATIC_MOVE_FLAGS_8000000           = 0x08000000,
-    STATIC_MOVE_FLAGS_10000000          = 0x10000000,
-    STATIC_MOVE_FLAGS_20000000          = 0x20000000,
-    STATIC_MOVE_FLAGS_40000000          = 0x40000000,
-    STATIC_MOVE_FLAGS_80000000          = 0x80000000,
+    MOVE_DATA_FLAG_SINGLE_TARGET     = 0x00000001,
+    MOVE_DATA_FLAG_2                 = 0x00000002,
+    MOVE_DATA_FLAG_4                 = 0x00000004,
+    MOVE_DATA_FLAG_TARGET_PLAYER     = 0x00000008,
+    MOVE_DATA_FLAG_10                = 0x00000010,
+    MOVE_DATA_FLAG_20                = 0x00000020,
+    MOVE_DATA_FLAG_40                = 0x00000040,
+    MOVE_DATA_FLAG_80                = 0x00000080,
+    MOVE_DATA_FLAG_100               = 0x00000100,
+    MOVE_DATA_FLAG_200               = 0x00000200,
+    MOVE_DATA_FLAG_400               = 0x00000400,
+    MOVE_DATA_FLAG_800               = 0x00000800,
+    MOVE_DATA_FLAG_1000              = 0x00001000,
+    MOVE_DATA_FLAG_2000              = 0x00002000,
+    MOVE_DATA_FLAG_4000              = 0x00004000,
+    MOVE_DATA_FLAG_8000              = 0x00008000,
+    MOVE_DATA_FLAG_10000             = 0x00010000,
+    MOVE_DATA_FLAG_20000             = 0x00020000,
+    MOVE_DATA_FLAG_40000             = 0x00040000,
+    MOVE_DATA_FLAG_80000             = 0x00080000,
+    MOVE_DATA_FLAG_100000            = 0x00100000,
+    MOVE_DATA_FLAG_200000            = 0x00200000,
+    MOVE_DATA_FLAG_400000            = 0x00400000,
+    MOVE_DATA_FLAG_800000            = 0x00800000,
+    MOVE_DATA_FLAG_1000000           = 0x01000000,
+    MOVE_DATA_FLAG_2000000           = 0x02000000,
+    MOVE_DATA_FLAG_4000000           = 0x04000000,
+    MOVE_DATA_FLAG_8000000           = 0x08000000,
+    MOVE_DATA_FLAG_10000000          = 0x10000000,
+    MOVE_DATA_FLAG_20000000          = 0x20000000,
+    MOVE_DATA_FLAG_40000000          = 0x40000000,
+    MOVE_DATA_FLAG_80000000          = 0x80000000,
+};
+
+enum MoveActionTips {
+    MOVE_ACTION_TIP_NONE            = -1,
+    MOVE_ACTION_TIP_0               = 0,
+    MOVE_ACTION_TIP_1               = 1,
+    MOVE_ACTION_TIP_2               = 2,
+    MOVE_ACTION_TIP_3               = 3,
+    MOVE_ACTION_TIP_4               = 4,
+    MOVE_ACTION_TIP_5               = 5,
+    MOVE_ACTION_TIP_6               = 6,
+    MOVE_ACTION_TIP_7               = 7,
+    MOVE_ACTION_TIP_8               = 8,
+    MOVE_ACTION_TIP_9               = 9,
+    MOVE_ACTION_TIP_10              = 10,
+    MOVE_ACTION_TIP_11              = 11,
+    MOVE_ACTION_TIP_12              = 12,
+    MOVE_ACTION_TIP_13              = 13,
+    MOVE_ACTION_TIP_14              = 14,
+    MOVE_ACTION_TIP_15              = 15,
+    MOVE_ACTION_TIP_16              = 16,
+    MOVE_ACTION_TIP_17              = 17,
+    MOVE_ACTION_TIP_18              = 18,
+    MOVE_ACTION_TIP_19              = 19,
+    MOVE_ACTION_TIP_20              = 20
 };
 
 enum AnimatorNodeFlags {
@@ -3567,12 +3611,22 @@ enum FoldStateFlags {
     FOLD_STATE_FLAG_100000            = 0x00100000,
 };
 
-enum BattleSubmenu {
-    BATTLE_SUBMENU_HAMMER       = 1,
-    BATTLE_SUBMENU_JUMP         = 2,
+enum MoveType {
+    MOVE_TYPE_NONE          = 0,
+    MOVE_TYPE_HAMMER        = 1,
+    MOVE_TYPE_JUMP          = 2,
+    MOVE_TYPE_3             = 3,
+    MOVE_TYPE_ITEMS         = 4,
+    MOVE_TYPE_TACTICS       = 5,
+    MOVE_TYPE_6             = 6,
+    MOVE_TYPE_ATTACK_UP     = 7,
+    MOVE_TYPE_DEFENSE_UP    = 8,
+    MOVE_TYPE_9             = 9,
+    MOVE_TYPE_STAR_POWER    = 10,
+    MOVE_TYPE_PARTNER       = 11
 };
 
-enum BattleSubmenuStatus {
+enum BattleMenuStatus {
     BATTLE_SUBMENU_STATUS_ENABLED           = 1,
     BATTLE_SUBMENU_STATUS_NOT_ENOUGH_FP     = 0,
     BATTLE_SUBMENU_STATUS_NO_TARGETS        = -1,

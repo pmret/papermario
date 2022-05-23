@@ -39,7 +39,7 @@ glabel btl_state_update_run_away
 /* 173864 80244F84 3442001E */  ori       $v0, $v0, 0x1e
 /* 173868 80244F88 24630001 */  addiu     $v1, $v1, 1
 /* 17386C 80244F8C AE220004 */  sw        $v0, 4($s1)
-/* 173870 80244F90 0C093903 */  jal       func_8024E40C
+/* 173870 80244F90 0C093903 */  jal       btl_cam_use_preset
 /* 173874 80244F94 A6A302A6 */   sh       $v1, 0x2a6($s5)
 /* 173878 80244F98 0C09390F */  jal       btl_cam_target_actor
 /* 17387C 80244F9C 0200202D */   daddu    $a0, $s0, $zero

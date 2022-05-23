@@ -647,6 +647,19 @@ typedef struct FireBreathFXData {
     /* 0x78 */ s32 envB;
 } FireBreathFXData; // size = 0x7C
 
+typedef struct DamageIndicatorFXData {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ Vec3f unk_04;
+    /* 0x10 */ Vec3f unk_10;
+    /* 0x1C */ Vec3f unk_1C;
+    /* 0x28 */ f32 unk_28;
+    /* 0x2C */ s32 alpha;
+    /* 0x30 */ s32 effectDurationTimer;
+    /* 0x34 */ s32 unk_34;
+    /* 0x38 */ f32 unk_38;
+    /* 0x3C */ s32 numParts;
+} DamageIndicatorFXData; // size = 0x40
+
 // TODO figure out what this actually is
 // fx_quizmo_stage invokes gEffectTable[78]'s entryPoint function
 // fx_cold_breath invokes gEffectTable[111]'s entryPoint function

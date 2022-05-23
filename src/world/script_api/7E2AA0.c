@@ -108,13 +108,13 @@ INCLUDE_ASM(s32, "world/script_api/7E2AA0", func_80282700);
 ApiStatus func_80282774(Evt* script, s32 isInitialCall) {
     DoorStuff* doorStuff = (DoorStuff*)script->functionTemp[1];
 
-    doorStuff->unk_0A = func_80134240();
-    func_80134230(doorStuff->unk_08);
+    doorStuff->unk_0A = get_current_item_entity_render_group();
+    set_current_item_entity_render_group(doorStuff->unk_08);
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_802827A8(Evt* script, s32 isInitialCall) {
-    func_80134230(((DoorStuff*)script->functionTemp[1])->unk_0A);
+    set_current_item_entity_render_group(((DoorStuff*)script->functionTemp[1])->unk_0A);
     return ApiStatus_DONE2;
 }
 

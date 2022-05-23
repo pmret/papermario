@@ -58,7 +58,7 @@ void func_80048E34(Enemy* enemy, s32 arg1, s32 arg2) {
         enemy->aiScript = NULL;
     }
 
-    if (enemy->unk_BC != 0) {
+    if (enemy->unk_BC != NULL) {
         kill_script_by_ID(enemy->unk_C0);
         enemy->unk_BC = NULL;
     }
@@ -277,7 +277,7 @@ void basic_ai_wander_init(Evt* script, NpcAISettings* npcAISettings, EnemyDetect
 
     enemy->aiFlags &= ~ENEMY_AI_FLAGS_40;
     enemy->aiFlags &= ~ENEMY_AI_FLAGS_20;
-    script->functionTemp[0] = AI_STATE_WANDER;
+    script->AI_TEMP_STATE = AI_STATE_WANDER;
 }
 
 void basic_ai_wander(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
@@ -361,7 +361,7 @@ void basic_ai_wander(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* 
     if (aiSettings->moveTime > 0) {
         npc->duration--;
         if (npc->duration <= 0) {
-            script->functionTemp[0] = AI_STATE_LOITER_INIT;
+            script->AI_TEMP_STATE = AI_STATE_LOITER_INIT;
             script->functionTemp[1] = rand_int(1000) % 3 + 2;
             if (aiSettings->unk_AI_2C <= 0 || aiSettings->waitTime <= 0) {
                 script->AI_TEMP_STATE = AI_STATE_WANDER_INIT;
@@ -432,7 +432,7 @@ void basic_ai_found_player_jump_init(Evt* script, NpcAISettings* npcAISettings, 
     npc->jumpScale = 2.5f;
     npc->moveToPos.y = npc->pos.y;
     npc->flags |= NPC_FLAG_JUMPING;
-    script->functionTemp[0] = AI_STATE_ALERT;
+    script->AI_TEMP_STATE = AI_STATE_ALERT;
 }
 
 void basic_ai_found_player_jump(Evt* script, NpcAISettings* npcAISettings, EnemyDetectVolume* territory) {
@@ -452,7 +452,7 @@ void basic_ai_found_player_jump(Evt* script, NpcAISettings* npcAISettings, Enemy
     } else {
         npc->jumpVelocity = 0.0f;
         npc->flags &= ~NPC_FLAG_JUMPING;
-        script->functionTemp[0] = AI_STATE_CHASE_INIT;
+        script->AI_TEMP_STATE = AI_STATE_CHASE_INIT;
     }
 }
 
@@ -488,7 +488,7 @@ void basic_ai_chase_init(Evt* script, NpcAISettings* npcAISettings, EnemyDetectV
 
     npc->currentAnim.w = enemy->animList[ENEMY_ANIM_CHASE];
     npc->moveSpeed = npcAISettings->chaseSpeed;
-    script->functionTemp[0] = AI_STATE_CHASE;
+    script->AI_TEMP_STATE = AI_STATE_CHASE;
 }
 
 void basic_ai_chase(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
@@ -501,7 +501,7 @@ void basic_ai_chase(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* t
         fx_emote(EMOTE_QUESTION, npc, 0, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &sp28);
         npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
         npc->duration = 20;
-        script->functionTemp[0] = AI_STATE_LOSE_PLAYER;
+        script->AI_TEMP_STATE = AI_STATE_LOSE_PLAYER;
         return;
     }
 
@@ -514,7 +514,7 @@ void basic_ai_chase(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* t
                 fx_emote(EMOTE_QUESTION, npc, 0, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xC, &sp28);
                 npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
                 npc->duration = 15;
-                script->functionTemp[0] = AI_STATE_LOSE_PLAYER;
+                script->AI_TEMP_STATE = AI_STATE_LOSE_PLAYER;
                 return;
             }
         }
@@ -530,7 +530,7 @@ void basic_ai_chase(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* t
     if (npc->duration > 0) {
         npc->duration--;
     } else {
-        script->functionTemp[0] = AI_STATE_CHASE_INIT;
+        script->AI_TEMP_STATE = AI_STATE_CHASE_INIT;
     }
 }
 
@@ -542,7 +542,7 @@ void basic_ai_lose_player(Evt* script, NpcAISettings* npcAISettings, EnemyDetect
     if (npc->duration == 0) {
         // turn to face home position
         npc->yaw = clamp_angle(atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z));
-        script->functionTemp[0] = AI_STATE_WANDER_INIT;
+        script->AI_TEMP_STATE = AI_STATE_WANDER_INIT;
     }
 }
 
@@ -564,7 +564,7 @@ ApiStatus BasicAI_Main(Evt* script, s32 isInitialCall) {
     territory.detectFlags = 0;
 
     if (isInitialCall || enemy->aiFlags & ENEMY_AI_FLAGS_4) {
-        script->functionTemp[0] = AI_STATE_WANDER_INIT;
+        script->AI_TEMP_STATE = AI_STATE_WANDER_INIT;
         npc->duration = 0;
 
         npc->currentAnim.w = enemy->animList[ENEMY_ANIM_IDLE];
@@ -579,44 +579,43 @@ ApiStatus BasicAI_Main(Evt* script, s32 isInitialCall) {
         }
 
         if (enemy->aiFlags & ENEMY_AI_FLAGS_4) {
-            script->functionTemp[0] = AI_STATE_SUSPEND;
+            script->AI_TEMP_STATE = AI_STATE_SUSPEND;
             script->functionTemp[1] = AI_STATE_WANDER_INIT;
         } else if (enemy->flags & ENEMY_FLAGS_40000000) {
-            script->functionTemp[0] = AI_STATE_CHASE_INIT;
+            script->AI_TEMP_STATE = AI_STATE_CHASE_INIT;
         }
 
         enemy->aiFlags &= ~ENEMY_AI_FLAGS_4;
         enemy->flags &= ~ENEMY_FLAGS_40000000;
     }
 
-    switch (script->functionTemp[0]) {
+    switch (script->AI_TEMP_STATE) {
         case AI_STATE_WANDER_INIT:
             basic_ai_wander_init(script, aiSettings, pTerritory);
-            // fallthrough
         case AI_STATE_WANDER:
             basic_ai_wander(script, aiSettings, pTerritory);
             break;
+
         case AI_STATE_LOITER_INIT:
             basic_ai_loiter_init(script, aiSettings, pTerritory);
-            // fallthrough
         case AI_STATE_LOITER:
             basic_ai_loiter(script, aiSettings, pTerritory);
             break;
+
         case AI_STATE_ALERT_INIT:
             basic_ai_found_player_jump_init(script, aiSettings, pTerritory);
-            // fallthrough
         case AI_STATE_ALERT:
             basic_ai_found_player_jump(script, aiSettings, pTerritory);
             break;
+
         case AI_STATE_CHASE_INIT:
             basic_ai_chase_init(script, aiSettings, pTerritory);
-            // fallthrough
         case AI_STATE_CHASE:
             basic_ai_chase(script, aiSettings, pTerritory);
-            if (script->functionTemp[0] != AI_STATE_LOSE_PLAYER) {
+            if (script->AI_TEMP_STATE != AI_STATE_LOSE_PLAYER) {
                 break;
             }
-            // fallthrough
+
         case AI_STATE_LOSE_PLAYER:
             basic_ai_lose_player(script, aiSettings, pTerritory);
             break;

@@ -19,8 +19,8 @@ typedef struct HudCacheEntry {
 u8* gHudElementAuxCache = NULL;
 s32 gHudElementCacheCapacity = 0x11000;
 
-HudScript hud_element_defaultAnim = {
-    he_End,
+HudScript HudScript_Empty = {
+    hs_End
 };
 
 HudElementSize gHudElementSizes[] = {
@@ -126,7 +126,7 @@ extern u8* gHudElementCacheBuffer;
 s32 fold_appendGfx_component(s32 idx, FoldImageRecPart* image, u32 flagBits, Matrix4f mtx);
 void func_801413F8(void);
 
-void hud_element_load_script(HudElement* hudElement, const HudScript* anim) {
+void hud_element_load_script(HudElement* hudElement, HudScript* anim) {
     s32* pos = (s32*)anim;
     s32 raster;
     s32 palette;
@@ -707,7 +707,7 @@ void func_801413F8(void) {
     gCameras[CAM_3].flags &= ~0x6;
 }
 
-s32 hud_element_create(const HudScript* anim) {
+s32 hud_element_create(HudScript* anim) {
     HudElement* hudElement;
     s32 id;
 
@@ -719,7 +719,7 @@ s32 hud_element_create(const HudScript* anim) {
 
     ASSERT(id < ARRAY_COUNT(*gHudElements));
 
-    (*gHudElements)[id] = hudElement = heap_malloc(sizeof(HudElement));
+    (*gHudElements)[id] = hudElement = heap_malloc(sizeof(*hudElement));
     gHudElementsNumber += 1;
 
     ASSERT(hudElement != NULL);
@@ -727,7 +727,7 @@ s32 hud_element_create(const HudScript* anim) {
     hudElement->flags = HUD_ELEMENT_FLAGS_INITIALIZED;
     hudElement->readPos = anim;
     if (anim == NULL) {
-        hudElement->readPos = &hud_element_defaultAnim;
+        hudElement->readPos = &HudScript_Empty;
     }
     hudElement->updateTimer = 1;
     hudElement->drawSizePreset = -1;
@@ -1929,11 +1929,11 @@ void hud_element_draw_without_clipping(s32 id) {
     draw_hud_element_internal(id, HUD_ELEMENT_DRAW_FIRST_WITHOUT_CLIPPING);
 }
 
-void hud_element_set_script(s32 id, const HudScript* anim) {
+void hud_element_set_script(s32 id, HudScript* anim) {
     HudElement* hudElement = (*gHudElements)[id & ~HUD_ELEMENT_BATTLE_ID_MASK];
 
     if (anim == NULL) {
-        anim = &hud_element_defaultAnim;
+        anim = &HudScript_Empty;
     }
 
     hudElement->updateTimer = 1;
@@ -2117,7 +2117,7 @@ void hud_element_set_tint(s32 id, s32 r, s32 g, s32 b) {
 
 void hud_element_create_transform_A(s32 id) {
     HudElement* element = (*gHudElements)[id & ~HUD_ELEMENT_BATTLE_ID_MASK];
-    HudTransform* transform = general_heap_malloc(sizeof(HudTransform));
+    HudTransform* transform = general_heap_malloc(sizeof(*transform));
 
     element->hudTransform = transform;
     ASSERT(transform != NULL);
@@ -2139,7 +2139,7 @@ void hud_element_create_transform_A(s32 id) {
 
 void hud_element_create_transform_B(s32 id) {
     HudElement* element = (*gHudElements)[id & ~HUD_ELEMENT_BATTLE_ID_MASK];
-    HudTransform* transform = general_heap_malloc(sizeof(HudTransform));
+    HudTransform* transform = general_heap_malloc(sizeof(*transform));
 
     element->hudTransform = transform;
     ASSERT(transform != NULL);
@@ -2159,7 +2159,7 @@ void hud_element_create_transform_B(s32 id) {
 
 void hud_element_create_transform_C(s32 id) {
     HudElement* element = (*gHudElements)[id & ~HUD_ELEMENT_BATTLE_ID_MASK];
-    HudTransform* transform = general_heap_malloc(sizeof(HudTransform));
+    HudTransform* transform = general_heap_malloc(sizeof(*transform));
 
     element->hudTransform = transform;
     ASSERT(transform != NULL);

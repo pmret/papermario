@@ -71,7 +71,7 @@ glabel btl_state_update_end_turn
 /* 1723A8 80243AC8 26520004 */   addiu    $s2, $s2, 4
 /* 1723AC 80243ACC 16800006 */  bnez      $s4, .L80243AE8
 /* 1723B0 80243AD0 00000000 */   nop
-/* 1723B4 80243AD4 0C093903 */  jal       func_8024E40C
+/* 1723B4 80243AD4 0C093903 */  jal       btl_cam_use_preset
 /* 1723B8 80243AD8 24040002 */   addiu    $a0, $zero, 2
 /* 1723BC 80243ADC 24020001 */  addiu     $v0, $zero, 1
 /* 1723C0 80243AE0 3C01800E */  lui       $at, %hi(gBattleState2)
@@ -384,7 +384,7 @@ glabel btl_state_update_end_turn
 .L80243F5C:
 /* 17283C 80243F5C 16800006 */  bnez      $s4, .L80243F78
 /* 172840 80243F60 00000000 */   nop
-/* 172844 80243F64 0C093903 */  jal       func_8024E40C
+/* 172844 80243F64 0C093903 */  jal       btl_cam_use_preset
 /* 172848 80243F68 24040002 */   addiu    $a0, $zero, 2
 /* 17284C 80243F6C 24020003 */  addiu     $v0, $zero, 3
 /* 172850 80243F70 3C01800E */  lui       $at, %hi(gBattleState2)

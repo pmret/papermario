@@ -60,7 +60,7 @@ EvtScript N(main) = {
     EVT_CALL(PlayEffect, 0x7, 2, -40, 55, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10002)
     EVT_WAIT_FRAMES(20)
-    EVT_CALL(UseBattleCamPreset, 2)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_THREAD
         EVT_WAIT_FRAMES(15)
@@ -95,7 +95,7 @@ EvtScript N(main) = {
     EVT_CALL(SetGoalPos, ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_CALL(func_80273444, 20, 0, 0)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10002)
-    EVT_CALL(UseBattleCamPreset, 3)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)

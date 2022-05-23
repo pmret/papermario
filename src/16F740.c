@@ -131,13 +131,13 @@ void btl_state_update_begin_player_turn(void) {
     s32 phi_v0_2;
 
     if (gBattleState2 == BATTLE_STATE2_UNK_0) {
-        func_8024E40C(2);
+        btl_cam_use_preset(BTL_CAM_PRESET_C);
         btl_cam_move(5);
         gBattleState2 = BATTLE_STATE2_UNK_64;
     }
 
     if (gBattleState2 != BATTLE_STATE2_UNK_14) {
-        if (gBattleState2 == BATTLE_STATE2_UNK_64 && (func_8024E584() != 0)) {
+        if (gBattleState2 == BATTLE_STATE2_UNK_64 && btl_cam_is_moving_done()) {
             gBattleStatus.flags1 &= ~0x80000;
             reset_actor_turn_info();
             battleStatus->unk_86 = 0x7F;
@@ -565,7 +565,7 @@ void btl_state_draw_end_turn(void) {
 }
 
 void btl_state_update_1C(void) {
-    func_8024E40C(2);
+    btl_cam_use_preset(BTL_CAM_PRESET_C);
     btl_set_state(BATTLE_STATE_PREPARE_MENU);
 }
 
@@ -713,7 +713,7 @@ void btl_state_update_victory(void) {
     }
 
     if (gBattleState2 == BATTLE_STATE2_UNK_2) {
-        func_8024E40C(2);
+        btl_cam_use_preset(BTL_CAM_PRESET_C);
         if (battleStatus->nextMerleeSpellType == 3) {
             if (battleStatus->totalStarPoints == 0) {
                 battleStatus->nextMerleeSpellType = 0;
@@ -865,7 +865,7 @@ void btl_state_update_end_training_battle(void) {
 
     switch (gBattleState2) {
         case BATTLE_STATE2_UNK_D:
-            func_8024E40C(2);
+            btl_cam_use_preset(BTL_CAM_PRESET_C);
             D_8029F248 = 30;
             gBattleState2 = BATTLE_STATE2_UNK_E;
             break;
@@ -961,7 +961,7 @@ void btl_state_update_defeat(void) {
                 ((DisableXFXData*)player->debuffEffect->data)->unk_3C = 0;
             }
 
-            func_8024E40C(0x19);
+            btl_cam_use_preset(BTL_CAM_PRESET_25);
             btl_cam_target_actor(0);
             battleStatus->battlePhase = PHASE_RUN_AWAY_RESET;
             script = start_script(&PlayerScriptDispatcher, EVT_PRIORITY_A, 0);
@@ -1036,9 +1036,9 @@ void btl_state_update_change_partner(void) {
             partner->flags &= ~ACTOR_FLAG_8000000;
             battleStatus->unk_8C = 0;
             gBattleStatus.flags2 |= BS_FLAGS2_10;
-            func_8024E40C(0x13);
+            btl_cam_use_preset(BTL_CAM_PRESET_19);
             btl_cam_set_target_pos(-89.0, 40.0, -99.0);
-            btl_cam_set_zoom(0x174);
+            btl_cam_set_zoom(372);
             btl_cam_set_zoffset(0);
             gBattleStatus.flags1 &= ~BS_FLAGS1_2;
 
@@ -1122,7 +1122,7 @@ void btl_state_update_change_partner(void) {
             partner = battleStatus->partnerActor;
             if (partner == NULL || partner->onTurnChanceScriptSource == NULL
                                 || !does_script_exist(partner->onTurnChangeID)) {
-                func_8024E40C(2);
+                btl_cam_use_preset(BTL_CAM_PRESET_C);
                 gBattleState2 = BATTLE_STATE2_UNK_7;
             }
             break;
@@ -1199,7 +1199,7 @@ void btl_state_update_partner_move(void) {
                         enemyActor->status = 0;
                     }
                 }
-                func_8024E40C(2);
+                btl_cam_use_preset(BTL_CAM_PRESET_C);
                 gBattleState2 = BATTLE_STATE2_UNK_2;
             }
             break;
@@ -1292,7 +1292,7 @@ void btl_state_update_partner_move(void) {
                                 btl_update_ko_status();
 
                                 if ((s8) partner->status == 0xD && btl_are_all_enemies_defeated() == FALSE) {
-                                    func_8024E40C(0x36);
+                                    btl_cam_use_preset(BTL_CAM_PRESET_54);
                                     btl_show_battle_message(0x23, 0x3C);
                                     partner->status = 0;
                                     partner->unk_21D = 0;
@@ -1311,8 +1311,8 @@ void btl_state_update_partner_move(void) {
             break;
         case BATTLE_STATE2_UNK_B:
             if (btl_is_popup_displayed() == FALSE) {
-                func_8024E40C(2);
-                btl_cam_move(0xF);
+                btl_cam_use_preset(BTL_CAM_PRESET_C);
+                btl_cam_move(15);
                 D_8029F248 = 0xA;
                 gBattleState2 = BATTLE_STATE2_UNK_C;
             }
@@ -1341,7 +1341,7 @@ void btl_state_update_partner_move(void) {
             if (phi_s3 == FALSE) {
                 gBattleState2 = BATTLE_STATE2_UNK_1E;
             } else {
-                func_8024E40C(3);
+                btl_cam_use_preset(BTL_CAM_PRESET_D);
                 switchCondition = enemyActor->status - 4;
                 switch (switchCondition) {
                     case 0:
@@ -1388,8 +1388,8 @@ void btl_state_update_partner_move(void) {
             break;
         case BATTLE_STATE2_UNK_15:
             if (btl_is_popup_displayed() == FALSE) {
-                func_8024E40C(2);
-                btl_cam_move(0xF);
+                btl_cam_use_preset(BTL_CAM_PRESET_C);
+                btl_cam_move(15);
                 D_8029F248 = 10;
                 gBattleState2 = BATTLE_STATE2_UNK_16;
             }
