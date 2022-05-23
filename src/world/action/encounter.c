@@ -2,40 +2,37 @@
 #include "world/actions.h"
 
 extern f32 D_802B6770_E27C80;
+extern s32 func_802BD100_317020(s32 arg0);
 
-// the switch
-#ifdef NON_MATCHING
-void func_802B6000_E28A30(void) {
+s32 func_802B6000_E28A30(void) {
+    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 oldFlags = playerStatus->flags;
-
+    
     if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
         playerStatus->flags &= ~(
-            PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED | PLAYER_STATUS_FLAGS_80000 | PLAYER_STATUS_FLAGS_8 |
+            PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED | PLAYER_STATUS_FLAGS_80000 | PLAYER_STATUS_FLAGS_FLYING |
             PLAYER_STATUS_FLAGS_FALLING | PLAYER_STATUS_FLAGS_JUMPING
         );
         playerStatus->fallState = 0;
-        playerStatus->framesOnGround = 0;
+        playerStatus->currentStateTime = 0;
         playerStatus->timeInAir = 0;
         playerStatus->unk_C2 = 0;
         playerStatus->currentSpeed = 0.0f;
-        playerStatus->unk_8C = 0.0f;
+        playerStatus->pitch = 0.0f;
     }
 
-    if (playerStatus->animFlags & 0x400000) {
-        switch (gPartnerActionStatus.actingPartner) {
-            case 8:
-                func_802BD100_317020(oldFlags);
-                break;
-            case 7:
-                func_802BD100_317020(oldFlags);
-                break;
+    if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_400000) {  
+        if(partnerActionStatus->actingPartner == PARTNER_LAKILESTER)
+        {
+            return func_802BD100_317020(oldFlags);
+        }
+        if(partnerActionStatus->actingPartner == PARTNER_SUSHIE)
+        {
+            return func_802BD100_317020(oldFlags);
         }
     }
 }
-#else
-INCLUDE_ASM(s32, "world/action/encounter", func_802B6000_E28A30);
-#endif
 
 //wip - not good yet
 #ifdef NON_EQUIVALENT
