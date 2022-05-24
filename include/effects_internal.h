@@ -76,7 +76,7 @@ FX_MAIN(falling_leaves_main);
 FX_MAIN(stars_spread_main);
 FX_MAIN(steam_burst_main);
 FX_MAIN(stars_orbiting_main);
-FX_MAIN(big_snowflakes_main);
+void big_snowflakes_main(s32, f32, f32, f32);
 EffectInstance* debuff_main(s32, f32, f32, f32);
 FX_MAIN(green_impact_main);
 FX_MAIN(radial_shimmer_main);
