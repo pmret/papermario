@@ -37,40 +37,39 @@ s32 func_802B6000_E28A30(void) {
     #endif
 }
 
-//wip - not good yet
-#ifdef NON_EQUIVALENT
 void func_802B609C_E28ACC(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    s32 sp4C;
-    s32 sp48;
-    s32 sp44;
-    s32 sp40;
-    f32 sp3C;
-    f32 sp38;
-    f32 sp34;
-    f32 sp30;
+    s32 hitDirZ;
+    s32 hitDirX;
+    s32 hitRz;
+    s32 hitRx;
+    f32 outLength;
+    f32 outZ;
+    f32 outY;
+    f32 outX;
+    
     f32 cosTheta;
     f32 sinTheta;
-    f32 *temp_a1;
-    f32 *temp_a2;
-    f32 *temp_a3;
-    f32 *temp_v0;
-    f32 temp_f20;
-    f32 temp_f4;
-    f32 temp_f6;
-    f32 phi_f4;
+    f32 miscTempVariable;
+    f32 playerXOffset;
+    f32 playerZOffset;
     f32 zDelta;
-    f32 phi_f20;
+
+    f32 playerOffsetTempVar;
 
     if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
-        playerStatus->flags &= ~(0x80080000 | 0x80000 | 0x8 | 0x4 | 0x2);
+        playerStatus->flags &= ~(PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED | 
+                                 PLAYER_STATUS_FLAGS_80000 | 
+                                 PLAYER_STATUS_FLAGS_FLYING | 
+                                 PLAYER_STATUS_FLAGS_FALLING | 
+                                 PLAYER_STATUS_FLAGS_JUMPING);
         playerStatus->fallState = 0;
-        playerStatus->framesOnGround = 0;
+        playerStatus->currentStateTime = 0;
         playerStatus->timeInAir = 0;
         playerStatus->unk_C2 = 0;
         playerStatus->currentSpeed = 0.0f;
-        playerStatus->unk_8C = 0.0f;
+        playerStatus->pitch = 0.0f;
         D_802B6770_E27C80 = D_8010C938;
     }
 
@@ -84,56 +83,51 @@ void func_802B609C_E28ACC(void) {
     }
 
     sin_cos_rad((D_8010C990 * TAU) / 360.0f, &sinTheta, &cosTheta);
-    temp_f20 = sinTheta * 3.0f;
+    miscTempVariable = 3.0f;
+    miscTempVariable = sinTheta * miscTempVariable;
     sin_cos_rad((D_802B6770_E27C80 * TAU) / 360.0f, &sinTheta, &cosTheta);
-    temp_f4 = sinTheta * temp_f20;
-    temp_f6 = cosTheta * temp_f20;
+    
+    playerXOffset = sinTheta * miscTempVariable;
+    playerZOffset = cosTheta * miscTempVariable;
 
-    if (!(fabs(temp_f4) < 0.1)) {
-        phi_f4 = temp_f4;
-    } else {
-        phi_f4 = 0.1f;
-        if (temp_f4 < 0.0f) {
-            phi_f4 = -0.1f;
+    if (fabs(playerXOffset) < 0.1f) {
+        playerOffsetTempVar = 0.1f;
+        if (playerXOffset < 0.0f) {
+            playerOffsetTempVar = -0.1f;
         }
+        playerXOffset = playerOffsetTempVar;
     }
-
-    zDelta = temp_f6;
-    if (fabs(temp_f6) < 0.1) {
-        zDelta = 0.1f;
-        if (temp_f6 < 0.0f) {
-            zDelta = -0.1f;
+    
+    if (fabs(playerZOffset) < 0.1f) {
+        playerOffsetTempVar = 0.1f;
+        if (playerZOffset < 0.0f) {
+            playerOffsetTempVar = -0.1f;
         }
+        playerZOffset = playerOffsetTempVar;
+    }
+    
+
+    playerStatus->position.x += playerXOffset;
+    playerStatus->position.z -= playerZOffset;
+    outX = playerStatus->position.x;
+    outY = playerStatus->position.y;
+    outZ = playerStatus->position.z;
+    outLength = 5.0f;
+    if (player_raycast_below_cam_relative(playerStatus, &outX, &outY, &outZ, &outLength, &hitRx, &hitRz, &hitDirX, &hitDirZ) >= 0) {
+        playerStatus->position.y = outY;
     }
 
-    temp_a1 = &sp30;
-    temp_a2 = &sp34;
-    temp_v0 = &sp3C;
-
-    playerStatus->position.x += phi_f4;
-    playerStatus->position.z -= zDelta;
-    temp_a3 = &sp38;
-    sp30 = playerStatus->position.x;
-    sp34 = playerStatus->position.y;
-    sp38 = playerStatus->position.z;
-    sp3C = 5.0f;
-    if (player_raycast_below_cam_relative(&gPlayerStatus, temp_a1, temp_a2, temp_a3, temp_v0, &sp40, &sp44, &sp48, &sp4C) >= 0) {
-        playerStatus->position.y = sp34;
-    }
-
-    phi_f20 = 60.0f;
     if (gGameStatusPtr->areaID == AREA_SBK) {
-        phi_f20 = 30.0f;
+        miscTempVariable = 30.0f;
+    } else {
+        miscTempVariable = 60.0f;
     }
 
-    if (D_8010C990 < phi_f20) {
+    if (D_8010C990 < miscTempVariable) {
         set_action_state(ACTION_STATE_FALLING);
         gravity_use_fall_parms();
     }
 }
-#else
-INCLUDE_ASM(s32, "world/action/encounter", func_802B609C_E28ACC);
-#endif
 
 void func_802B6350_E28D80(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
