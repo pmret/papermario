@@ -152,6 +152,7 @@ typedef enum ShapeTypes {
 
 typedef ModelTreeInfo ModelTreeInfoList[0x200];
 extern ModelTreeInfoList* mdl_currentModelTreeNodeInfo;
+extern ModelList* gCurrentModels;
 
 void update_model_animator(s32);
 void update_model_animator_with_transform(s32 animatorID, Mtx* mtx);

@@ -256,6 +256,7 @@ f32 clamp_angle(f32 theta);
 s32 sign(s32 value);
 s32 func_80055448(s32);
 s32 func_80055464(s32, s32);
+s32 func_80055618(s32, s32);
 s32 func_800E0208(void);
 
 s32 battle_heap_create(void);
