@@ -6,6 +6,93 @@
 ApiStatus func_80219D60_4491A0(Evt* script, s32 isInitialCall);
 INCLUDE_ASM(s32, "battle/area_kmr_part_3/448E80", func_80219D60_4491A0);
 
+// ApiStatus func_80219D60_4491A0(Evt* script, s32 isInitialCall) {
+//     Bytecode* args = script->ptrReadPos;
+//     f32 out0;
+//     f32 out1;
+//     f32 out2;
+//     f32 sp18;
+//     f32 temp_f28;
+//     f32 temp_f30;
+//     f64 temp_f20;
+
+//     script->functionTemp[0] = evt_get_variable(script, *args++);
+//     switch (script->functionTemp[0]) {
+//         case 0:
+//             out0 = 142.0f;
+//             out1 = 0.0f;
+//             out2 = -118.0f;
+//             script->varTable[3] = 142;
+//             script->varTable[4] = 0;
+//             script->varTable[5] = -118;
+//             script->varTable[6] = 44;
+//             script->varTable[7] = -118;
+//             script->varTable[8] = 3;
+//             script->varTable[9] = 0;
+//             script->varTable[11] = 0;
+//             script->functionTemp[0] = 1;
+//             break;
+//         case 3:
+//             out0 = 91.0f;
+//             out1 = 0.0f;
+//             out2 = -118.0f;
+//             script->varTable[3] = 91;
+//             script->varTable[4] = 0;
+//             script->varTable[5] = -118;
+//             script->varTable[6] = 91;
+//             script->varTable[7] = -118;
+//             script->varTable[8] = 3;
+//             script->varTable[9] = 0;
+//             script->varTable[11] = 0;
+//             script->functionTemp[0] = 1;
+//             break;
+//         case 1:
+//             script->varTable[9] += script->varTable[8];
+//             if (script->varTable[9] > 45) {
+//                 script->varTable[9] = 45;
+//             }
+//             out0 = script->varTable[3];
+//             out1 = script->varTable[4];
+//             temp_f30 = script->varTable[5];
+//             temp_f28 = script->varTable[6];
+//             sp18 = script->varTable[7];
+
+//             temp_f20 = out0 * (1.0 - sin_rad(script->varTable[9] * TAU / 360.0f));
+//             out0 = (temp_f20 + (temp_f28 * sin_rad(script->varTable[9] * TAU / 360.0f)));
+//             out1 += sin_rad(((script->varTable[9] * 2) * TAU) / 360.0f) * 90.0f;
+//             temp_f20 = temp_f30 * (1.0 - sin_rad(script->varTable[9] * TAU / 360.0f));
+//             out2 = temp_f20 + (sp18 * sin_rad(script->varTable[9] * TAU / 360.0f));
+//             if (script->varTable[9] == 45) {
+//                 script->varTable[11] = 1;
+//             }
+//             break;
+//         case 2:
+//             script->varTable[9] += script->varTable[8];
+//             if (script->varTable[9] > 90) {
+//                 script->varTable[9] = 90;
+//             }
+//             out0 = script->varTable[3];
+//             out1 = script->varTable[4];
+//             temp_f30 = script->varTable[5];
+//             temp_f28 = script->varTable[6];
+//             sp18 = script->varTable[7];
+
+//             temp_f20 = out0 * (1.0 - sin_rad(script->varTable[9] * TAU / 360.0f));
+//             out0 = (temp_f20 + (temp_f28 * sin_rad(script->varTable[9] * TAU / 360.0f)));
+//             out1 += sin_rad(((script->varTable[9] * 2) * TAU) / 360.0f) * 90.0f;
+//             temp_f20 = (temp_f30 * (1.0 - sin_rad(script->varTable[9] * TAU / 360.0f)));
+//             out2 = temp_f20 + (sp18 * sin_rad(script->varTable[9] * TAU / 360.0f));
+//             if (script->varTable[9] == 90) {
+//                 script->varTable[11] = 2;
+//             }
+//             break;
+//     }
+//     script->varTable[0] = out0;
+//     script->varTable[1] = out1;
+//     script->varTable[2] = out2;
+//     return ApiStatus_DONE2;
+// }
+
 EvtScript N(80233AF0) = {
     EVT_SET(LW(10), LW(0))
     EVT_LABEL(0)

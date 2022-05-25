@@ -1616,7 +1616,7 @@ typedef struct ActorPartBlueprint {
     /* 0x14 */ s32 eventFlags;
     /* 0x18 */ s32 elementImmunityFlags;
     /* 0x1C */ s8 unk_1C;
-    /* 0x1C */ s8 unk_1D;
+    /* 0x1D */ s8 unk_1D;
     /* 0x1E */ char unk_1E[2];
     /* 0x20 */ s32 unk_20;
 } ActorPartBlueprint; // size = 0x24

@@ -4435,6 +4435,7 @@ segments:
     - [0x69F320, c]
     - [0x6A2B50, c]
     - [0x6A44E0, data]
+    - [0x6BB940]
   - dir: battle/area_kpa3
     type: code
     start: 0x6BBB90
