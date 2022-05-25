@@ -432,7 +432,7 @@ ModelAnimator* get_animator_by_index(s32 arg0);
 void set_screen_overlay_params_front(u8, f32);
 void set_screen_overlay_params_back(u8, f32);
 void set_screen_overlay_alpha(s32, f32);
-void get_screen_overlay_params(s32, u8*, f32*);
+void get_screen_overlay_params(s32, u8* type, f32* zoom);
 void set_screen_overlay_color(s32, u8, u8, u8);
 void set_screen_overlay_center(s32, s32, s32, s32);
 s32 rand_int(s32);
