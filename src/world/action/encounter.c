@@ -22,12 +22,10 @@ s32 func_802B6000_E28A30(void) {
     }
 
     if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_400000) {  
-        if(partnerActionStatus->actingPartner == PARTNER_LAKILESTER)
-        {
+        if(partnerActionStatus->actingPartner == PARTNER_LAKILESTER) {
             return func_802BD100_317020(oldFlags);
         }
-        if(partnerActionStatus->actingPartner == PARTNER_SUSHIE)
-        {
+        if(partnerActionStatus->actingPartner == PARTNER_SUSHIE) {
             return func_802BD100_317020(oldFlags);
         }
     }
@@ -39,7 +37,6 @@ s32 func_802B6000_E28A30(void) {
 
 void func_802B609C_E28ACC(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-
     s32 hitDirZ;
     s32 hitDirX;
     s32 hitRz;
@@ -48,22 +45,19 @@ void func_802B609C_E28ACC(void) {
     f32 outZ;
     f32 outY;
     f32 outX;
-    
     f32 cosTheta;
     f32 sinTheta;
     f32 miscTempVariable;
     f32 playerXOffset;
     f32 playerZOffset;
     f32 zDelta;
-
     f32 playerOffsetTempVar;
 
     if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
-        playerStatus->flags &= ~(PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED | 
-                                 PLAYER_STATUS_FLAGS_80000 | 
-                                 PLAYER_STATUS_FLAGS_FLYING | 
-                                 PLAYER_STATUS_FLAGS_FALLING | 
-                                 PLAYER_STATUS_FLAGS_JUMPING);
+        playerStatus->flags &= ~(
+            PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED | PLAYER_STATUS_FLAGS_80000 | PLAYER_STATUS_FLAGS_FLYING | 
+            PLAYER_STATUS_FLAGS_FALLING | PLAYER_STATUS_FLAGS_JUMPING
+        );
         playerStatus->fallState = 0;
         playerStatus->currentStateTime = 0;
         playerStatus->timeInAir = 0;
@@ -83,8 +77,10 @@ void func_802B609C_E28ACC(void) {
     }
 
     sin_cos_rad((D_8010C990 * TAU) / 360.0f, &sinTheta, &cosTheta);
+
     miscTempVariable = 3.0f;
     miscTempVariable = sinTheta * miscTempVariable;
+
     sin_cos_rad((D_802B6770_E27C80 * TAU) / 360.0f, &sinTheta, &cosTheta);
     
     playerXOffset = sinTheta * miscTempVariable;
@@ -106,7 +102,6 @@ void func_802B609C_E28ACC(void) {
         playerZOffset = playerOffsetTempVar;
     }
     
-
     playerStatus->position.x += playerXOffset;
     playerStatus->position.z -= playerZOffset;
     outX = playerStatus->position.x;
