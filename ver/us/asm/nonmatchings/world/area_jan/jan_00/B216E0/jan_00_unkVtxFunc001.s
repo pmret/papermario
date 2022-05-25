@@ -8,7 +8,7 @@ dlabel jtbl_80247AB8_B27FF8
 
 .section .text
 
-glabel func_80241338_B21878
+glabel jan_00_unkVtxFunc001
 /* B21878 80241338 27BDFF98 */  addiu     $sp, $sp, -0x68
 /* B2187C 8024133C AFB20018 */  sw        $s2, 0x18($sp)
 /* B21880 80241340 0080902D */  daddu     $s2, $a0, $zero

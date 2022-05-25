@@ -8,7 +8,7 @@ dlabel jtbl_80252970_864AE0
 
 .section .text
 
-glabel func_80243588_8556F8
+glabel mac_05_unkVtxFunc001
 /* 8556F8 80243588 27BDFF98 */  addiu     $sp, $sp, -0x68
 /* 8556FC 8024358C AFB20018 */  sw        $s2, 0x18($sp)
 /* 855700 80243590 0080902D */  daddu     $s2, $a0, $zero

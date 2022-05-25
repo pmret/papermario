@@ -1,8 +1,5 @@
 #include "kgr_01.h"
 
-void mdl_get_copied_vertices(s32 copyIndex, Vtx** firstVertex, Vtx** copiedVertices, s32* numCopied);
-Gfx* mdl_get_copied_gfx(s32 copyIndex);
-
 #define TONGUE_WIGGLE_RATE 10
 
 extern u16 N(TongueWiggleTime); // tongue wiggle rate
@@ -16,7 +13,7 @@ void N(add_tongue_deformation)(Vtx* src, Vtx* dest, s32 numVertices, s32 time) {
     s32 offset;
     s32 pct;
     s32 i;
-    
+
     for (i = 0; i < numVertices; i++) {
         vs = &src[i].v;
         vd = &dest[i].v;
@@ -61,7 +58,7 @@ void N(make_tongue_gfx)(s32 index) {
     Vtx* vtxSrc;
     Vtx* vtxCopy;
     s32 numCopied;
-    
+
     mdl_get_copied_vertices(1, &vtxSrc, &vtxCopy, &numCopied);
     N(add_tongue_deformation)(vtxSrc, vtxCopy, numCopied, N(TongueWiggleTime));
     gSPDisplayList(gMasterGfxPos++, mdl_get_copied_gfx(1));
@@ -74,10 +71,10 @@ void N(make_tongue_gfx)(s32 index) {
 // ignoring minor undulations and deformation imposed by the player.
 ApiStatus N(GetEffectiveTongueOffset)(Evt* script, s32 isInitialCall) {
     f32 amplitude = 2.0f * sin_rad(
-        (f32)script->varTable[0] * 0.06 + 
-        (f32)script->varTable[2] * 0.03f + 
+        (f32)script->varTable[0] * 0.06 +
+        (f32)script->varTable[2] * 0.03f +
         (f32)N(TongueWiggleTime) * 0.01f);
-    
+
     f32 percent = 200.0f - (f32)script->varTable[0];
     if (percent < 0.0f){
         percent = 0.0f;
