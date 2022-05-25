@@ -1,8 +1,6 @@
 #include "common.h"
 #include "world/actions.h"
 
-extern f32 D_802B6770_E27C80;
-
 s32 func_802B6000_E28A30(void) {
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -34,6 +32,8 @@ s32 func_802B6000_E28A30(void) {
         return 0;
     #endif
 }
+
+extern f32 D_802B6770_E27C80;
 
 void func_802B609C_E28ACC(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
