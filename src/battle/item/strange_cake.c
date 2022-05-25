@@ -14,52 +14,35 @@ extern HudScript* N(D_802A2848_732B48)[];
 extern s32 N(D_802A2858_732B58)[];
 
 extern s32 D_802A2DD8[5];
-extern u32 D_802A2DEC;
+extern s32 D_802A2DE4;
+extern s32 D_802A2DEC;
 extern s32 D_802A2DF0;
 extern s32 D_802A2DF4;
 extern s32 D_802A2DF8;
 extern s32 D_802A2DFC;
 extern s32 D_802A2E00;
 
-void battle_item_strange_cake_func_802A123C_73153C(void);
-
-#ifdef NON_EQUIVALENT
-
-extern s32 D_802A25E4;
-extern HudElement* D_802A2DF4;
-extern s32 D_802A2DD8;
-
-void N(func_802A123C_73153C)(void) {
+void N(func_802A123C_73153C(void)) {
+    s32 var_s3;
+    s32 id;
     s32 i;
-    HudElement** ptr;
-    s32 var;
-    s32* var2;
 
-    if (D_802A25E4 < 6) {
-        if (D_802A25E4 > 0) {
-            draw_box(0, 7, 0x6A, 0x56, 0, 0x24, 0x24, 0xFF, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0x140, 0xF0, 0);
-
+    if (D_802A2DEC < 6) {
+        if (D_802A2DEC > 0) {
+            draw_box(0, 7, 106, 86, 0, 36, 36, 255, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, NULL, NULL, NULL, SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
             gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, 108, 90, 139, 118);
 
-            ptr = &D_802A2DF4;
-            for (i = 0; i < 7; i++) {
-                var2 = *ptr;
-                var = (D_802A2DD8 / 100) - 0x68;
-                ptr++;
-                hud_element_set_render_pos(var2, 0x7C, (i * 0x1A) - var);
-                hud_element_draw_without_clipping(var2);
+            for (i = 0; i < ARRAY_COUNT(D_802A2DD8); i++) {
+                id = D_802A2DD8[i];
+                hud_element_set_render_pos(id, 124, (i * 26) + 104 - (D_802A2DF4 / 100));
+                hud_element_draw_without_clipping(id);
             }
-
-            var2 = D_802A2DF4;
-            var = (D_802A2DD8 / 100) - 0x68;
-            hud_element_set_render_pos(var2, 0x7C, (i * 0x1A) - var);
-            hud_element_draw_without_clipping(var2);
+            id = D_802A2DD8[0];
+            hud_element_set_render_pos(id, 124, (i * 26) + 104 - (D_802A2DF4 / 100));
+            hud_element_draw_without_clipping(id);
         }
     }
 }
-#else
-INCLUDE_ASM(ApiStatus, "battle/item/strange_cake", battle_item_strange_cake_func_802A123C_73153C);
-#endif
 
 s32 N(func_802A13E4_7316E4)(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;

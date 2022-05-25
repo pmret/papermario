@@ -9,7 +9,7 @@ BSS s32 D_802A25B8[2];
 #include "ItemRefund.inc.c"
 
 extern s32 D_802A25C8[7];
-extern u32 D_802A25E4;
+extern s32 D_802A25E4;
 extern s32 D_802A25E8;
 extern s32 D_802A25EC;
 extern s32 D_802A25F0;
@@ -17,46 +17,27 @@ extern s32 D_802A25F4;
 extern s32 D_802A25F8;
 extern s32* D_802A25FC;
 
-void N(func_802A123C_72C7EC(void));
-
-#ifdef NON_EQUIVALENT
-
-extern s32 D_802A25E4;
-extern HudElement* D_802A25C8;
-extern s32 D_802A25EC;
-
-void N(func_802A123C_72C7EC)(void) {
+void N(func_802A123C_72C7EC(void)) {
+    s32 var_s3;
+    s32 id;
     s32 i;
-    HudElement** ptr;
-    s32 var;
-    s32* var2;
 
     if (D_802A25E4 < 6) {
         if (D_802A25E4 > 0) {
-            draw_box(0, 7, 0x6A, 0x56, 0, 0x24, 0x24, 0xFF, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0x140, 0xF0, 0);
-
+            draw_box(0, 7, 106, 86, 0, 36, 36, 255, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, NULL, NULL, NULL, SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
             gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, 108, 90, 139, 118);
 
-            ptr = &D_802A25C8;
-            for (i = 0; i < 7; i++) {
-                var2 = *ptr;
-                var = (D_802A25EC / 100) - 0x68;
-                ptr++;
-                hud_element_set_render_pos(var2, 0x7C, (i * 0x1A) - var);
-                hud_element_draw_without_clipping(var2);
+            for (i = 0; i < ARRAY_COUNT(D_802A25C8); i++) {
+                id = D_802A25C8[i];
+                hud_element_set_render_pos(id, 124, (i * 26) + 104 - (D_802A25EC / 100));
+                hud_element_draw_without_clipping(id);
             }
-
-            var2 = D_802A25C8;
-            var = (D_802A25EC / 100) - 0x68;
-            hud_element_set_render_pos(var2, 0x7C, (i * 0x1A) - var);
-            hud_element_draw_without_clipping(var2);
+            id = D_802A25C8[0];
+            hud_element_set_render_pos(id, 124, (i * 26) + 104 - (D_802A25EC / 100));
+            hud_element_draw_without_clipping(id);
         }
     }
 }
-#else
-INCLUDE_ASM(ApiStatus, "battle/item/mystery", battle_item_mystery_func_802A123C_72C7EC, Evt* script,
-            s32 isInitialCall);
-#endif
 
 s32 N(func_802A13E4_72C994)(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
