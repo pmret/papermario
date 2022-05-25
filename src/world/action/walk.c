@@ -139,9 +139,7 @@ void action_run_update(void) {
         }
         if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_8BIT_MARIO) {
             phi_a0 = 0x90003;
-        }
-        else
-        {
+        } else {
             if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT)) {
                 phi_a0 = 0x10005;
             } else {
@@ -182,8 +180,7 @@ void action_run_update(void) {
 
         if (fabsf(D_800F7B40 - moveX) <= 90.0f) {
             temp_v1 = playerStatus->animFlags;
-            if (temp_v1 >= 0)
-            {
+            if (temp_v1 >= 0) {
                 playerStatus->targetYaw = moveX;
             }
             playerStatus->animFlags &= ~0x80000000;
