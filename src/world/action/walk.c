@@ -25,6 +25,7 @@ s32 WalkPeachAnims[] = {
 };
 
 void action_run_update_peach(void);
+void func_802B65E8_E23CC8(void);
 
 // walk
 void func_802B6000_E236E0(void) {
@@ -36,7 +37,6 @@ void func_802B6000_E236E0(void) {
     s32 stickAxisY;
     s32 playerAnim;
     s32 changedAnim = FALSE;
-
     if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS) {
         func_802B65E8_E23CC8();
         return;

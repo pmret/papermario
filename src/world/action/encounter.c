@@ -1,5 +1,6 @@
 #include "common.h"
 #include "world/actions.h"
+#include "world/partner/goombario.h"
 
 s32 func_802B6000_E28A30(void) {
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
@@ -37,10 +38,10 @@ extern f32 D_802B6770_E27C80;
 
 void func_802B609C_E28ACC(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    s32 hitDirZ;
-    s32 hitDirX;
-    s32 hitRz;
-    s32 hitRx;
+    f32 hitDirZ;
+    f32 hitDirX;
+    f32 hitRz;
+    f32 hitRx;
     f32 outLength;
     f32 outZ;
     f32 outY;
