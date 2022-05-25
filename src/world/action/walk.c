@@ -220,8 +220,7 @@ void func_802B6550_E23C30(void) {
     peach_set_disguise_anim(BasicPeachDisguiseAnims[gPlayerStatus.peachDisguise].walk);
 }
 
-void func_802B65E8_E23CC8(void)
-{
+void func_802B65E8_E23CC8(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 magnitude;
     f32 angle;
