@@ -3,51 +3,21 @@
 
 #include "ItemRefund.inc.c"
 
-#ifdef NON_EQUIVALENT
-ApiStatus N(func_802A123C_71D9AC)(Evt* script, s32 isInitialCall) {
-    s32 c8 = 200;
-    s32 temp_s1 = 100 + rand_int(c8);
-    s32 temp_s0 = rand_int(40);
-    s32 phi_a0;
-    s32 phi_v0;
-    s32 rand;
-    f32 temp_f20;
-    f32 temp_f22;
-    f32 test;
+ApiStatus battle_item_shooting_star_func_802A123C_71D9AC(Evt* script, s32 isInitialCall) {
+    s32 t1 = 200;
+    s32 r1 = rand_int(t1) + 100; // 100-299
+    s32 r2 = rand_int(40); // 0-39
+    f32 var_f22;
 
-    if (script->varTable[0] & 3) {
-        rand = rand_int(100);
-        rand += c8;
-        temp_f22 = temp_s1 - rand;
-        rand = rand_int(100);
-        rand -= 50;
-        temp_f20 = temp_s0 - rand;
-        phi_v0 = rand_int(10);
-        phi_a0 = 2;
+    if ((script->varTable[0] % 4) != 0) {
+        var_f22 = r1 - (rand_int(100) + t1);
+        fx_star(2, r1, t1, r2, var_f22, 0.0f, r2 + 50 - rand_int(100), rand_int(10) + 7);
     } else {
-        rand = rand_int(100);
-        rand += 200;
-        temp_f22 = temp_s1 - rand;
-        rand = rand_int(100);
-        rand -= 50;
-        temp_f20 = temp_s0 - rand;
-        phi_v0 = rand_int(10);
-        phi_a0 = 3;
+        var_f22 = r1 - (rand_int(100) + t1);
+        fx_star(3, r1, t1, r2, var_f22, 0.0f, r2 + 50 - rand_int(100), rand_int(10) + 7);
     }
-
-    do {
-        fx_star(phi_a0, temp_s1, c8, temp_s0, temp_f22, 0, temp_f20, phi_v0 + 7);
-        if (temp_f20) {
-            temp_f20 -= rand;
-        }
-    } while (0);
-
     return ApiStatus_DONE2;
 }
-#else
-INCLUDE_ASM(ApiStatus, "battle/item/shooting_star", battle_item_shooting_star_func_802A123C_71D9AC,
-            Evt* script, s32 isInitialCall);
-#endif
 
 ApiStatus N(func_802A1388_71DAF8)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
