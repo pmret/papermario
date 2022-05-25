@@ -2627,6 +2627,7 @@ enum BattleStatusFlags2 {
     BS_FLAGS2_2000000                         = 0x02000000,
     BS_FLAGS2_4000000                         = 0x04000000,
     BS_FLAGS2_8000000                         = 0x08000000,
+    BS_FLAGS2_10000000                        = 0x10000000,
 };
 
 enum BattleStates {

@@ -1074,7 +1074,114 @@ void btl_state_update_end_training_battle(void) {
 void btl_state_draw_end_training_battle(void) {
 }
 
-INCLUDE_ASM(s32, "16F740", btl_state_update_end_battle);
+void btl_state_update_end_battle(void) {
+    Battle* blah = (*D_800DC4FC);
+    EncounterStatus* encounterStatus = &gCurrentEncounter;
+    BattleStatus* battleStatus = &gBattleStatus;
+    Stage* stage;
+    Evt* script;
+    s32 i;
+
+    switch (gBattleState2) {
+        case BATTLE_STATE2_UNK_0:
+            D_80280A30 = 0;
+            if (gGameStatusPtr->debugEnemyContact == 2) {
+                D_80280A30 = 255;
+            }
+            if (encounterStatus->battleOutcome == 1 && !(gBattleStatus.flags1 & BS_FLAGS1_800000)) {
+                btl_cam_unfreeze();
+                btl_cam_use_preset(BTL_CAM_PRESET_B);
+                set_screen_overlay_color(0, 0, 0, 0);
+                set_screen_overlay_center(0, 0, 160, 120);
+            }
+            gBattleState2 = BATTLE_STATE2_UNK_1;
+            break;
+        case BATTLE_STATE2_UNK_1:
+            if (D_80280A30 == 255) {
+                gBattleState2 = BATTLE_STATE2_UNK_2;
+                break;
+            }
+            D_80280A30 += battleStatus->unk_8D;
+            if (D_80280A30 > 255) {
+                D_80280A30 = 255;
+            }
+            break;
+        case BATTLE_STATE2_UNK_2:
+            D_80280A30 = 255;
+            gBattleStatus.flags1 &= ~BS_FLAGS1_1;
+            if (D_800DC064 == NULL) {
+                stage = blah->stage;
+            } else {
+                stage = D_800DC064[1];
+            }
+            if (stage->postBattle == NULL) {
+                gBattleState2 = BATTLE_STATE2_UNK_4;
+                return;
+            }
+            script = start_script(stage->postBattle, 0xA, 0);
+            battleStatus->controlScript = script;
+            gBattleState2 = BATTLE_STATE2_UNK_3;
+            battleStatus->controlScriptID = script->id;
+            break;
+        case BATTLE_STATE2_UNK_3:
+            if (!does_script_exist(battleStatus->controlScriptID)) {
+                gBattleState2 = BATTLE_STATE2_UNK_4;
+            } else {
+                break;
+            }
+        case BATTLE_STATE2_UNK_4:
+            kill_all_scripts();
+            for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
+                if (battleStatus->enemyActors[i] != NULL) {
+                    btl_delete_actor(battleStatus->enemyActors[i]);
+                }
+            }
+            if (battleStatus->partnerActor != NULL) {
+                btl_delete_actor(battleStatus->partnerActor);
+            }
+
+            btl_delete_player_actor(battleStatus->playerActor);
+
+            if (battleStatus->nextMerleeSpellType == 4) {
+                encounterStatus->merleeCoinBonus = 1;
+                battleStatus->nextMerleeSpellType = 0;
+            }
+
+            encounterStatus->damageTaken = battleStatus->damageTaken;
+
+            if (gBattleStatus.flags2 & BS_FLAGS2_10000000) {
+                encounterStatus->dropWhackaBump = 1;
+            }
+
+            remove_all_effects();
+            set_windows_visible(0);
+
+            if (gBattleStatus.flags2 & BS_FLAGS2_40) {
+                decrement_status_menu_disabled();
+            }
+
+            if (encounterStatus->battleOutcome == OUTCOME_PLAYER_LOST &&
+                !(gBattleStatus.flags1 & BS_FLAGS1_800000))
+            {
+                s16 areaID;
+                s16 mapID;
+
+                btl_set_state(BATTLE_STATE_0);
+                D_800DC4D0 = gBattleState;
+                get_map_IDs_by_name("gv_01", &areaID, &mapID);
+                gGameStatusPtr->areaID = areaID;
+                gGameStatusPtr->mapID = mapID;
+                gGameStatusPtr->entryID = 0;
+                set_game_mode(GAME_MODE_ENTER_WORLD);
+            } else {
+                btl_set_state(BATTLE_STATE_0);
+                D_800DC4D0 = gBattleState;
+                func_8003E514(1);
+                set_game_mode(GAME_MODE_END_BATTLE);
+            }
+            break;
+    }
+}
 
 void btl_state_draw_end_battle(void) {
     Camera* camera = &gCameras[gCurrentCameraID];
