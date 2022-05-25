@@ -2283,7 +2283,7 @@ typedef struct PartnerActionStatus {
 
 typedef struct EntityModel {
     /* 0x00 */ s32 flags;
-    /* 0x04 */ u8 renderMode;
+    /* 0x04 */ s8 renderMode;
     /* 0x05 */ u8 unk_05;
     /* 0x06 */ u8 unk_06;
     /* 0x07 */ u8 unk_07;
@@ -2291,7 +2291,7 @@ typedef struct EntityModel {
     /* 0x0C */ f32 timeScale; ///< Default is 1.0
     /* 0x10 */ s32* cmdListReadPos;
     /* 0x14 */ Gfx* displayList;
-    /* 0x18 */ Matrix4s transform;
+    /* 0x18 */ Mtx transform;
     /* 0x58 */ s32* cmdListSavedPos;
     /* 0x5C */ Vtx* vertexArray;
     /* 0x60 */ UNK_FUN_PTR(fpSetupGfxCallback);
