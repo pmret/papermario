@@ -86,7 +86,7 @@ void func_802B609C_E28ACC(void) {
     playerXOffset = sinTheta * miscTempVariable;
     playerZOffset = cosTheta * miscTempVariable;
 
-    if (fabs(playerXOffset) < 0.1f) {
+    if (fabs(playerXOffset) < 0.1) {
         playerOffsetTempVar = 0.1f;
         if (playerXOffset < 0.0f) {
             playerOffsetTempVar = -0.1f;
@@ -94,7 +94,7 @@ void func_802B609C_E28ACC(void) {
         playerXOffset = playerOffsetTempVar;
     }
     
-    if (fabs(playerZOffset) < 0.1f) {
+    if (fabs(playerZOffset) < 0.1) {
         playerOffsetTempVar = 0.1f;
         if (playerZOffset < 0.0f) {
             playerOffsetTempVar = -0.1f;
