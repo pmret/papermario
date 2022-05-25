@@ -513,6 +513,19 @@ typedef struct SleepBubbleFXData {
     /* 0xC8 */ f32 unk_C8;
 } SleepBubbleFXData; // size = 0xCC
 
+typedef struct WaterFountainFXData {
+    /* 0x00 */ char unk_00[0x18];
+    /* 0x18 */ s32 unk_18;
+    /* 0x1C */ s32 unk_1C;
+    /* 0x20 */ s32 unk_20;
+    /* 0x24 */ char unk_24[0x4];
+    /* 0x28 */ s32 unk_28;
+    /* 0x2C */ s32 unk_2C;
+    /* 0x30 */ s32 unk_30;
+    /* 0x34 */ char unk_34[0x4];
+    /* 0x38 */ f32 unk_38;
+} WaterFountainFXData; // size = ?
+
 typedef struct AuraFXData {
     /* 0x00 */ s32 type;
     /* 0x04 */ Vec3f pos;

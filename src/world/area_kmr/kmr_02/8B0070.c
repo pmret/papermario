@@ -61,7 +61,8 @@ INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_802427EC_8B285C);
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_8024280C_8B287C);
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80242860_8B28D0);
+#define UNK_NPC_POS_FUNC_NUM 7
+#include "world/common/UnkNpcPosFunc.inc.c"
 
 #include "world/common/SyncStatusMenu.inc.c"
 
