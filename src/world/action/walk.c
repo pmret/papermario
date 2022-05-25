@@ -28,8 +28,8 @@ void action_run_update_peach(void);
 
 // walk
 void func_802B6000_E236E0(void) {
-    PlayerStatus *playerStatus = &gPlayerStatus;
-    PlayerData *playerData = &gPlayerData;
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    PlayerData* playerData = &gPlayerData;
     f32 moveVectorMagnitude;
     f32 moveVectorAngle;
     s32 stickAxisX;
@@ -113,8 +113,8 @@ void func_802B6000_E236E0(void) {
 
 // run
 void action_run_update(void) {
-    PlayerStatus *playerStatus = &gPlayerStatus;
-    PlayerData *playerData = &gPlayerData;
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    PlayerData* playerData = &gPlayerData;
     f32 moveX;
     f32 moveY;
     s32 temp_v1;
@@ -225,7 +225,7 @@ void func_802B6550_E23C30(void) {
 
 void func_802B65E8_E23CC8(void)
 {
-    PlayerStatus *playerStatus = &gPlayerStatus;
+    PlayerStatus* playerStatus = &gPlayerStatus;
     f32 magnitude;
     f32 angle;
 
@@ -261,8 +261,8 @@ void func_802B65E8_E23CC8(void)
 }
 
 void action_run_update_peach(void) {
-    PlayerStatus *playerStatus = &gPlayerStatus;
-    GameStatus *gameStatus;
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    GameStatus* gameStatus;
     f32 moveX;
     f32 moveY;
 
