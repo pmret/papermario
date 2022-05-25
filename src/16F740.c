@@ -15,61 +15,131 @@ extern u8 D_8029F244;
 extern s32 D_8029F248;
 extern s32 D_8029F258;
 
-// Almost good but some reorderings at the beginning
-#ifdef NON_EQUIVALENT
 void btl_merlee_on_start_turn(void) {
-    PlayerData* playerData = &gPlayerData;
     BattleStatus* battleStatus = &gBattleStatus;
     EncounterStatus* currentEncounter = &gCurrentEncounter;
+    PlayerData* playerData = &gPlayerData;
 
-    if (!(gBattleStatus.flags2 & 0x40) && battleStatus->unk_8A != 3 && battleStatus->unk_8A != 4 && playerData->merleeCastsLeft > 0) {
-        if (playerData->merleeTurnCount <= 0) {
-            s32 d100 = rand_int(100);
+    do {
+        if (!(gBattleStatus.flags2 & BS_FLAGS2_40) &&
+            battleStatus->nextMerleeSpellType != 3 &&
+            battleStatus->nextMerleeSpellType != 4 &&
+            playerData->merleeCastsLeft > 0)
+        {
+            if (playerData->merleeTurnCount <= 0) {
+                s32 temp = rand_int(100);
 
-            if (currentEncounter->currentEnemy != NULL) {
-                if (currentEncounter->currentEnemy->flags & 0x40000) {
-                    if (d100 <= 45) {
+                if (currentEncounter->currentEnemy != NULL) {
+                    if (currentEncounter->currentEnemy->flags & ENEMY_FLAGS_40000) {
+                        if (temp <= 45) {
+                            playerData->merleeSpellType = 1;
+                        } else if (temp <= 90) {
+                            playerData->merleeSpellType = 2;
+                        } else {
+                            playerData->merleeSpellType = 3;
+                        }
+                    } else if (temp <= 30) {
                         playerData->merleeSpellType = 1;
-                    } else if (d100 <= 90) {
+                    } else if (temp <= 60) {
                         playerData->merleeSpellType = 2;
-                    } else {
+                    } else if (temp <= 80) {
                         playerData->merleeSpellType = 3;
+                    } else {
+                        playerData->merleeSpellType = 4;
                     }
-                } else if (d100 <= 30) {
+                } else if (temp <= 30) {
                     playerData->merleeSpellType = 1;
-                } else if (d100 <= 60) {
+                } else if (temp <= 60) {
                     playerData->merleeSpellType = 2;
-                } else if (d100 <= 80) {
+                } else if (temp <= 80) {
                     playerData->merleeSpellType = 3;
                 } else {
                     playerData->merleeSpellType = 4;
                 }
-            } else if (d100 <= 30) {
-                playerData->merleeSpellType = 1;
-            } else if (d100 <= 60) {
-                playerData->merleeSpellType = 2;
-            } else if (d100 <= 80) {
-                playerData->merleeSpellType = 3;
-            } else {
-                playerData->merleeSpellType = 4;
+
+                temp = rand_int(10) + 6;
+                playerData->merleeTurnCount = temp;
             }
-            playerData->merleeTurnCount = rand_int(10) + 6;
-        }
 
-        if (playerData->merleeTurnCount >= 2) {
-            playerData->merleeTurnCount--;
-        } else {
-            playerData->merleeTurnCount = 0;
-            battleStatus->unk_8A = playerData->merleeSpellType;
-            playerData->merleeCastsLeft--;
+            if (playerData->merleeTurnCount >= 2) {
+                playerData->merleeTurnCount--;
+            } else {
+                playerData->merleeTurnCount = 0;
+                battleStatus->nextMerleeSpellType = playerData->merleeSpellType;
+                playerData->merleeCastsLeft--;
+            }
         }
-    }
+    } while (0); // TODO: required to match
 }
-#else
-INCLUDE_ASM(s32, "16F740", btl_merlee_on_start_turn);
-#endif
 
-INCLUDE_ASM(s32, "16F740", btl_merlee_on_first_strike);
+void btl_merlee_on_first_strike(void) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    EncounterStatus* currentEncounter = &gCurrentEncounter;
+    PlayerData* playerData = &gPlayerData;
+
+    do {
+        if (!(gBattleStatus.flags2 & BS_FLAGS2_40) &&
+            battleStatus->nextMerleeSpellType != 3 &&
+            battleStatus->nextMerleeSpellType != 4 &&
+            playerData->merleeCastsLeft > 0)
+        {
+            if (playerData->merleeTurnCount <= 0) {
+                s32 temp = rand_int(100);
+
+                if (currentEncounter->currentEnemy != NULL) {
+                    if (currentEncounter->currentEnemy->flags & ENEMY_FLAGS_40000) {
+                        if (temp <= 45) {
+                            playerData->merleeSpellType = 1;
+                        } else if (temp <= 90) {
+                            playerData->merleeSpellType = 2;
+                        } else {
+                            playerData->merleeSpellType = 3;
+                        }
+                    } else if (temp <= 30) {
+                        playerData->merleeSpellType = 1;
+                    } else if (temp <= 60) {
+                        playerData->merleeSpellType = 2;
+                    } else if (temp <= 80) {
+                        playerData->merleeSpellType = 3;
+                    } else {
+                        playerData->merleeSpellType = 4;
+                    }
+                } else if (temp <= 30) {
+                    playerData->merleeSpellType = 1;
+                } else if (temp <= 60) {
+                    playerData->merleeSpellType = 2;
+                } else if (temp <= 80) {
+                    playerData->merleeSpellType = 3;
+                } else {
+                    playerData->merleeSpellType = 4;
+                }
+
+                if (playerData->merleeSpellType != 4) {
+                    // same outcome either way. has to be written like this, and the check does exist in the code. bug?
+                    if (playerData->merleeTurnCount == -1) {
+                        temp = rand_int(5) + 5;
+                    } else {
+                        temp = rand_int(5) + 5;
+
+                    }
+                } else {
+                    temp = rand_int(8) + 5;
+                }
+                playerData->merleeTurnCount = temp;
+            }
+
+            if (playerData->merleeSpellType == 3 || playerData->merleeSpellType == 4) {
+                if (playerData->merleeTurnCount >= 2) {
+                    playerData->merleeTurnCount--;
+                } else {
+                    battleStatus->nextMerleeSpellType = playerData->merleeSpellType;
+                    playerData->merleeTurnCount = 0;
+                    playerData->merleeCastsLeft--;
+                }
+            }
+        }
+    } while (0); // TODO: required to match
+}
 
 void btl_set_state(s32 battleState) {
     s32 flags = gBattleStatus.flags2;
@@ -441,9 +511,9 @@ void btl_state_update_begin_player_turn(void) {
             }
 
             if (D_8029F254 == 0) {
-                btl_set_state(BATTLE_STATE2_PLAYER_DEFEATED);
+                btl_set_state(BATTLE_STATE_SWITCH_TO_PLAYER);
             } else{
-                btl_set_state(BATTLE_STATE2_UNK_8);
+                btl_set_state(BATTLE_STATE_BEGIN_PARTNER_TURN);
                 gBattleStatus.flags2 |= 2;
             }
         }
@@ -489,7 +559,122 @@ void btl_state_update_switch_to_player(void) {
 void btl_state_draw_switch_to_player(void) {
 }
 
-INCLUDE_ASM(s32, "16F740", btl_state_update_begin_partner_turn);
+//INCLUDE_ASM(s32, "16F740", btl_state_update_begin_partner_turn);
+void btl_state_update_begin_partner_turn(void) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    Actor* partner = battleStatus->partnerActor;
+    Actor* enemy;
+    s32 i;
+
+    if (gBattleState2 == BATTLE_STATE2_UNK_0) {
+        if (partner == NULL) {
+            D_8029F254 = 1;
+            gBattleState2 = BATTLE_STATE2_PLAYER_DEFEATED;
+        } else if ((battleStatus->flags2 & (BS_FLAGS2_4 | BS_FLAGS2_2)) != (BS_FLAGS2_4 | BS_FLAGS2_2)) {
+            if (!(partner->flags & ACTOR_FLAG_NO_ATTACK)) {
+                btl_cam_use_preset(2);
+                btl_cam_move(5);
+                gBattleState2 = BATTLE_STATE2_UNK_64;
+            } else {
+                btl_set_state(BATTLE_STATE_9);
+                return;
+            }
+        } else {
+            btl_set_state(BATTLE_STATE_9);
+            return;
+        }
+    }
+
+    if (gBattleState2 == BATTLE_STATE2_UNK_64) {
+        if (btl_cam_is_moving_done()) {
+            D_8029F258 = 0;
+            reset_actor_turn_info();
+            partner = battleStatus->partnerActor;
+            battleStatus->unk_86 = 0x7F;
+            battleStatus->blockResult = 0x7F;
+            D_8029F254 = 0;
+            gBattleStatus.flags1 |= BS_FLAGS1_80000;
+            gBattleStatus.flags2 |= BS_FLAGS1_100000;
+            partner->flags |= ACTOR_FLAG_8000000;
+
+            if (partner->koStatus != 0) {
+                partner->koDuration--;
+                D_8029F254 = 1;
+                D_8029F258 = 20;
+                if (partner->koDuration > 0) {
+                    // TODO: We believe these are DebuffFXData*,
+                    // but unk_3C is a u8 for these and we need it to be an s32...
+                    ((s32*)(partner->debuffEffect->data))[15] = partner->koDuration;
+                } else {
+                    partner->koStatus = 0;
+                    dispatch_event_partner(0x34);
+                    // TODO: We believe these are DebuffFXData*,
+                    // but unk_3C is a u8 for these and we need it to be an s32...
+                    ((s32*)(partner->debuffEffect->data))[15] = 0;
+                    gBattleStatus.flags2 |= BS_FLAGS2_8;
+                }
+            }
+
+            for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
+                enemy = battleStatus->enemyActors[i];
+                if (enemy != NULL) {
+                    enemy->flags |= ACTOR_FLAG_8000000 | ACTOR_FLAG_4000000;
+                }
+            }
+            gBattleState2 = BATTLE_STATE2_UNK_1;
+        }
+    }
+
+    if (gBattleState2 == BATTLE_STATE2_UNK_1) {
+        if (partner != NULL) {
+            if (partner->onHitScript == NULL || !does_script_exist(partner->onHitID)) {
+                partner->onHitScript = NULL;
+            } else {
+                goto block_27; // TODO find a way to remove
+            }
+        }
+
+        gBattleStatus.flags2 &= ~BS_FLAGS2_8;
+        if (btl_check_player_defeated() || btl_check_enemies_defeated()) {
+            return;
+        }
+        gBattleState2 = BATTLE_STATE2_UNK_8;
+    }
+
+block_27:
+    if (gBattleState2 == BATTLE_STATE2_UNK_8) {
+        if (partner->onTurnChanceScriptSource != NULL) {
+            Evt* script;
+
+            battleStatus->battlePhase = 0xC;
+            script = start_script(partner->onTurnChanceScriptSource, 0xA, 0);
+            partner->onTurnChangeScript = script;
+            partner->onTurnChangeID = script->id;
+            script->owner1.actorID = ACTOR_PARTNER;
+        }
+        gBattleState2 = BATTLE_STATE2_UNK_9;
+    }
+
+    if (gBattleState2 == BATTLE_STATE2_UNK_9 &&
+        (partner->onTurnChanceScriptSource == NULL || !does_script_exist(partner->onTurnChangeID)))
+    {
+        gBattleState2 = BATTLE_STATE2_PLAYER_DEFEATED;
+    }
+
+    if (gBattleState2 == BATTLE_STATE2_PLAYER_DEFEATED) {
+        if (D_8029F258 != 0) {
+            D_8029F258--;
+            return;
+        }
+        gBattleStatus.flags2 &= ~BS_FLAGS2_100000;
+        if (D_8029F254 == 0) {
+            btl_set_state(BATTLE_STATE_SWITCH_TO_PARTNER);
+        } else {
+            gBattleStatus.flags2 |= BS_FLAGS2_4;
+            btl_set_state(BATTLE_STATE_9);
+        }
+    }
+}
 
 void btl_state_draw_begin_partner_turn(void) {
 }

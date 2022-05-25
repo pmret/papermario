@@ -245,7 +245,7 @@ typedef struct PlayerData {
     /* 0x1C8 */ s16 storedItems[32];
     /* 0x208 */ s16 equippedBadges[64];
     /* 0x288 */ char unk_288;
-    /* 0x289 */ u8 merleeSpellType;
+    /* 0x289 */ s8 merleeSpellType;
     /* 0x28A */ s8 merleeCastsLeft;
     /* 0x28B */ char unk_28B;
     /* 0x28C */ s16 merleeTurnCount;
