@@ -2206,7 +2206,190 @@ void btl_state_draw_partner_striking_first(void) {
 
 // ugly loops and such
 #ifdef NON_EQUIVALENT
-TODO PASTE
+void btl_state_update_enemy_striking_first(void) {
+    PlayerData* playerData = &gPlayerData;
+    BattleStatus* battleStatus = &gBattleStatus;
+    Actor* player = battleStatus->playerActor;
+    Actor* partner = battleStatus->partnerActor;
+    Evt* script;
+    Actor* enemy;
+    s32 cond;
+    s32 i;
+    s32 j;
+
+    Actor* temp_s0;
+    s32 temp_t0;
+    s32 temp_a1;
+    s16* temp_t4;
+    s16* var_a2;
+    s16* var_t3;
+    s32 temp_v0;
+    s32 var_a3;
+    s32 var_t2;
+
+    s32 nextEnemyIdx;
+    s32 count;
+
+    switch (gBattleState2) {
+        case 0:
+            battleStatus->unk_8C = 0;
+            battleStatus->lastAttackDamage = 0;
+            battleStatus->unk_19A = 0;
+            playerData->enemyFirstStrikes++;
+            battleStatus->flags1 &= ~2;
+            D_8029F254 = 0;
+            player->flags &= ~ACTOR_FLAG_8000000;
+            if (partner != NULL) {
+                partner->flags &= ~ACTOR_FLAG_8000000;
+            }
+            battleStatus->flags2 |= 0x01000000 | 0x4000;
+            count = 0;
+            for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
+                if (battleStatus->enemyActors[i] != NULL) {
+                    battleStatus->enemyIDs[i] = i | 0x200;
+                    count++;
+                }
+            }
+
+            battleStatus->numEnemyActors = count;
+            // for (i = 0; i < count - 1; i++) {
+            //     for (j = i + 1; j < count; j++) {
+            //         s32 temp_t0;
+            //         s32 temp_a1;
+
+            //         temp_t0 = battleStatus->enemyActors[battleStatus->enemyIDs[i]]->turnPriority;
+            //         temp_a1 = battleStatus->enemyActors[battleStatus->enemyIDs[j]]->turnPriority;
+            //         if (temp_t0 < temp_a1) {
+            //             battleStatus->enemyActors[battleStatus->enemyIDs[i]]->turnPriority = temp_a1;
+            //             battleStatus->enemyActors[battleStatus->enemyIDs[j]]->turnPriority = temp_t0;
+            //         }
+            //     }
+            // }
+
+            i = 0;
+            temp_v0 = var_t2 - 1;
+            temp_t4 = battleStatus->enemyIDs;
+            if (temp_v0 > 0) {
+                var_t3 = temp_t4;
+                do {
+                    var_a3 = i + 1;
+                    if (var_a3 < var_t2) {
+                        var_a2 = &temp_t4[var_a3];
+                        do {
+                            temp_t0 = (u16) *var_t3;
+                            temp_a1 = (u16) *var_a2;
+                            var_a3 += 1;
+                            if (battleStatus->enemyActors[temp_t0 & 0xFF]->turnPriority < battleStatus->enemyActors[temp_a1 & 0xFF]->turnPriority) {
+                                *var_t3 = temp_a1;
+                                *var_a2 = temp_t0;
+                            }
+                            var_a2 += 2;
+                        } while (var_a3 < var_t2);
+                    }
+                    i++;
+                    var_t3 += 2;
+                } while (i < temp_v0);
+            }
+
+            battleStatus->nextEnemyIndex = 0;
+            i = 0;
+    loop_18:
+    loop_19:
+            temp_s0 = battleStatus->enemyActors[battleStatus->enemyIDs[i]];
+            if (temp_s0 == NULL) {
+    block_21:
+                i++;
+                if (i >= battleStatus->numEnemyActors) {
+                    i = 0;
+                    goto loop_18;
+                }
+                goto loop_19;
+            }
+            if (temp_s0->flags & 0x204000) {
+                goto block_21;
+            }
+
+            nextEnemyIdx = i + 1;
+            battleStatus->currentTurnEnemy = enemy;
+            battleStatus->activeEnemyActorID = battleStatus->enemyIDs[i];
+            if (nextEnemyIdx >= battleStatus->numEnemyActors) {
+                nextEnemyIdx = 0;
+            }
+            battleStatus->nextEnemyIndex = nextEnemyIdx;
+            btl_cam_target_actor(battleStatus->activeEnemyActorID);
+            enemy = battleStatus->currentTurnEnemy;
+            reset_actor_turn_info();
+            battleStatus->battlePhase = 1;
+            script = start_script(enemy->takeTurnScriptSource, 0xA, 0);
+            enemy->takeTurnScript = script;
+            D_8029F248 = 3;
+            enemy->takeTurnID = script->id;
+            gBattleState2 = 2;
+            script->owner1.enemyID = battleStatus->activeEnemyActorID;
+            break;
+        case 2:
+            if (D_8029F248 != 0) {
+                D_8029F248--;
+            } else {
+                D_8029F254 = 1;
+            }
+
+            enemy = battleStatus->currentTurnEnemy;
+            if ((enemy->takeTurnScript == NULL || !does_script_exist(enemy->takeTurnID)) &&
+                ((enemy->takeTurnScript = NULL, (player->onHitScript == NULL)) || !does_script_exist(player->onHitID))) {
+                player->onHitScript = NULL;
+                if (partner != NULL) {
+                    if (partner->onHitScript == NULL || !does_script_exist(partner->onHitID)) {
+                        partner->onHitScript = NULL;
+                        goto block_39;
+                    }
+                } else {
+    block_39:
+                    for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
+                        enemy = battleStatus->enemyActors[i];
+                        if (enemy != NULL && enemy->takeTurnScript != NULL) {
+                            if (does_script_exist(enemy->takeTurnID)) {
+                                cond = TRUE;
+                            } else {
+                                enemy->takeTurnScript = NULL;
+                            }
+                        }
+                    }
+
+                    if (!cond) {
+                        for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
+                            enemy = battleStatus->enemyActors[i];
+                            if (enemy != NULL && enemy->onHitScript != NULL) {
+                                if (does_script_exist(enemy->onHitID)) {
+                                    cond = TRUE;
+                                } else {
+                                    enemy->onHitScript = NULL;
+                                }
+                            }
+                        }
+
+                        if (!cond) {
+                            gBattleStatus.flags2 &= ~0x4000;
+                            for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
+                                enemy = battleStatus->enemyActors[i];
+                                if (enemy != NULL) {
+                                    enemy->flags &= 0xFFF7FFFF;
+                                }
+                            }
+
+                            if (battleStatus->unk_8C == 0 &&
+                                !btl_check_player_defeated() &&
+                                !btl_check_enemies_defeated())
+                            {
+                                btl_set_state(5);
+                            }
+                        }
+                    }
+                }
+            }
+            break;
+    }
+}
 #else
 INCLUDE_ASM(s32, "16F740", btl_state_update_enemy_striking_first);
 #endif
