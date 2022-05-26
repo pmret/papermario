@@ -160,7 +160,7 @@ segments:
     - [0x3FA50, hasm, os/bcopy]
     - [0x3FD70, hasm, os/bzero]
     - [0x3FE10, c, os/string, gcc_272 -O3]
-    - [0x3FEA0, c, os/3FEA0]
+    - [0x3FEA0, c, os/xprintf, gcc_272 -O3]
     - [0x408EC, c, os/sprintf] # MOVE_ADDU
     - [0x40980, c, os/osCreateMesgQueue]
     - [0x409B0, c, os/osJamMesg, gcc_272 -O3]
@@ -334,7 +334,7 @@ segments:
     - [0x6F1C0, .data, os/position]
     - [0x6F1D0, .data, os/rotateRPY]
     - [0x6F1E0, .data, os/sins]
-    - [0x6F9E0, .data, os/3FEA0]
+    - [0x6F9E0, .data, os/xprintf]
     - [0x6FA30, .data, os/seteventmesg]
     - [0x6FA40, .data, os/siacs]
     - [0x6FA50, .data, os/osSetThreadPri]
