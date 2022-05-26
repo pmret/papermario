@@ -885,6 +885,9 @@ void func_80254950(void);
 void func_802549A0(void);
 void func_802549C0(void);
 
+void func_8023E104(void);
+void func_8023E11C(void);
+
 void set_goal_pos_to_part(ActorState* state, s32 actorID, s32 partIndex);
 
 void init_encounters_ui(void);
@@ -897,6 +900,8 @@ s32 get_asset_offset(char*, s32*);
 void initialize_status_menu(void);
 void status_menu_start_blinking_fp(void);
 s32 is_status_menu_visible(void);
+void status_menu_start_blinking_starpoints(void);
+void status_menu_stop_blinking_starpoints(void);
 void status_menu_start_blinking_hp(void);
 void status_menu_start_blinking_sp(void);
 void status_menu_stop_blinking_fp(void);

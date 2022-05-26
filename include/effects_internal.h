@@ -113,7 +113,7 @@ FX_MAIN(motion_blur_flame_main);
 FX_MAIN(energy_orb_wave_main);
 FX_MAIN(merlin_house_stars_main);
 FX_MAIN(quizmo_audience_main);
-FX_MAIN(butterflies_main);
+EffectInstance* butterflies_main(s32, f32, f32, f32);
 EffectInstance* stat_change_main(s32, f32, f32, f32, f32, s32);
 FX_MAIN(snaking_static_main);
 FX_MAIN(thunderbolt_ring_main);

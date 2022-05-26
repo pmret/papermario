@@ -717,7 +717,28 @@ typedef struct MiscParticlesFXData {
     s32 unk_48;
     s32 unk_4C;
     s32 unk_50;
-} MiscParticlesFXData;
+} MiscParticlesFXData; // size = ?
+
+typedef struct ButterflyFXData {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ s32 unk_04;
+    /* 0x08 */ s32 unk_08;
+    /* 0x0C */ f32 unk_0C;
+    /* 0x10 */ f32 unk_10;
+    /* 0x14 */ f32 unk_14;
+    /* 0x18 */ f32 unk_18;
+    /* 0x1C */ f32 unk_1C;
+    /* 0x20 */ f32 unk_20;
+    /* 0x24 */ s32 unk_24;
+    /* 0x28 */ f32 unk_28;
+    /* 0x2C */ s32 unk_2C;
+    /* 0x30 */ s32 unk_30;
+    /* 0x34 */ f32 unk_34;
+    /* 0x38 */ f32 unk_38;
+    /* 0x3C */ f32 unk_3C;
+    /* 0x40 */ f32 unk_40;
+    /* 0x44 */ f32 unk_44;
+} ButterflyFXData; // size = 0x48
 
 typedef struct Effect46FXData {
     /* 0x00 */ char unk_00[0x24];
@@ -778,7 +799,7 @@ typedef struct EffectInstance {
     /* 0x00 */ s32 flags;
     /* 0x04 */ s32 effectIndex;
     /* 0x08 */ s32 numParts;
-    /* 0x0C */ void* data;
+    /* 0x0C */ ButterflyFXData* data;
     /* 0x10 */ struct EffectGraphics* graphics;
 } EffectInstance; // size = 0x14
 
