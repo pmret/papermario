@@ -147,7 +147,6 @@ void func_802A9310_42D220(void) {
                     actionCommandStatus->hudElementX,
                     actionCommandStatus->hudElementY + 28);
 
-                //temp_v0_2 = (((100 - actionCommandStatus->unk_46) * 60) / 100);
                 cutoff = 100 - actionCommandStatus->unk_46;
                 cutoff = (cutoff * 60) / 100;
                 temp_v0_2 = 29 - cutoff;

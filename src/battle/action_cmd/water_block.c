@@ -253,8 +253,6 @@ ApiStatus func_802A9398_42A888(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-//INCLUDE_ASM(s32, "battle/action_cmd/water_block", func_802A948C_42A97C);
-
 void func_802A948C_42A97C(void) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
@@ -312,7 +310,7 @@ void func_802A948C_42A97C(void) {
                 hud_element_clear_flags(id, 2);
             }
             actionCommandStatus->state = 1;
-            return;
+            break;
         case 1:
             btl_set_popup_duration(99);
             if (actionCommandStatus->unk_6C != 0) {
@@ -345,7 +343,7 @@ void func_802A948C_42A97C(void) {
             hud_element_set_render_pos(actionCommandStatus->hudElements[11], actionCommandStatus->hudElementX - 5, actionCommandStatus->hudElementY + 29);
             hud_element_set_render_pos(actionCommandStatus->hudElements[12], actionCommandStatus->hudElementX + 7, actionCommandStatus->hudElementY + 29);
             hud_element_set_render_pos(actionCommandStatus->hudElements[13], actionCommandStatus->hudElementX + 92, actionCommandStatus->hudElementY + 23);
-            return;
+            break;
         case 10:
             btl_set_popup_duration(99);
             if (actionCommandStatus->unk_4E != 0) {
@@ -358,6 +356,7 @@ void func_802A948C_42A97C(void) {
                 actionCommandStatus->unk_54 = 42;
             }
             actionCommandStatus->state = 11;
+            // fallthrough
         case 11:
             btl_set_popup_duration(99);
             if (actionCommandStatus->unk_54 == 42) {
@@ -380,7 +379,6 @@ void func_802A948C_42A97C(void) {
                 actionCommandStatus->state = 12;
                 actionCommandStatus->unk_5C = 0;
                 actionCommandStatus->unk_60 = 0;
-                return;
             }
             break;
         case 12:
@@ -451,7 +449,6 @@ void func_802A948C_42A97C(void) {
                 actionCommandStatus->state = 13;
                 actionCommandStatus->unk_5C = 0;
                 actionCommandStatus->unk_60 = 0;
-                return;
             }
             break;
         case 13:
@@ -491,6 +488,7 @@ void func_802A948C_42A97C(void) {
                     }
                 }
             }
+
             if ((actionCommandStatus->unk_5D >= -4) && ((actionCommandStatus->unk_60 != 0) || (actionCommandStatus->unk_5C != 0))) {
                 id = actionCommandStatus->hudElements[7];
                 if (actionCommandStatus->unk_5C != 0) {

@@ -121,7 +121,6 @@ void func_802A928C_4263FC(void) {
                         actionCommandStatus->barFillLevel = 0;
                     }
                 }
-
             }
 
             if (battleStatus->currentButtonsPressed & A_BUTTON) {
@@ -137,7 +136,6 @@ void func_802A928C_4263FC(void) {
                         actionCommandStatus->barFillLevel = 500;
                     }
                 }
-
             }
 
             if (actionCommandStatus->barFillLevel >= 10000) {

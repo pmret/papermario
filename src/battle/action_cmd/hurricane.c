@@ -164,6 +164,7 @@ void func_802A92A0_42F980(void) {
             actionCommandStatus->unk_5C = 0;
             actionCommandStatus->unk_54 = actionCommandStatus->unk_52;
             actionCommandStatus->state = 11;
+            // fallthrough
         case 11:
             btl_set_popup_duration(99);
             if (actionCommandStatus->unk_68 == 0) {

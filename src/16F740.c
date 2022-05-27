@@ -564,7 +564,6 @@ void btl_state_update_switch_to_player(void) {
 void btl_state_draw_switch_to_player(void) {
 }
 
-//INCLUDE_ASM(s32, "16F740", btl_state_update_begin_partner_turn);
 void btl_state_update_begin_partner_turn(void) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partner = battleStatus->partnerActor;
@@ -612,7 +611,7 @@ void btl_state_update_begin_partner_turn(void) {
                     ((s32*)(partner->debuffEffect->data))[15] = partner->koDuration;
                 } else {
                     partner->koStatus = 0;
-                    dispatch_event_partner(0x34);
+                    dispatch_event_partner(EVENT_34);
                     // TODO: We believe these are DebuffFXData*,
                     // but unk_3C is a u8 for these and we need it to be an s32...
                     ((s32*)(partner->debuffEffect->data))[15] = 0;
@@ -1131,6 +1130,7 @@ void btl_state_update_end_battle(void) {
         case BATTLE_STATE2_UNK_3:
             if (!does_script_exist(battleStatus->controlScriptID)) {
                 gBattleState2 = BATTLE_STATE2_UNK_4;
+                // fallthrough
             } else {
                 break;
             }
@@ -1243,7 +1243,7 @@ void btl_state_update_run_away(void) {
             playerData->unk_2A6++;
             btl_cam_use_preset(BTL_CAM_PRESET_25);
             var_s0 = 0;
-            btl_cam_target_actor(0);
+            btl_cam_target_actor(ACTOR_PLAYER);
             var_f2 = 0.0f;
 
             for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
