@@ -4,7 +4,9 @@
 #define NAMESPACE EB5470
 
 ApiStatus func_80240340_EB5470(Evt* script, s32 isInitialCall) {
-    evt_set_variable(script, *script->ptrReadPos, dead_gCollisionStatus.pushingAgainstWall);
+    Bytecode* args = script->ptrReadPos;
+
+    evt_set_variable(script, *args++, gCollisionStatus.currentFloor);
     return ApiStatus_DONE2;
 }
 

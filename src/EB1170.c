@@ -77,6 +77,6 @@ ApiStatus func_80240A68_EB18C8(Evt* script, s32 isInitialCall) {
 ApiStatus func_80240A8C_EB18EC(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
-    evt_set_variable(script, *args++, dead_gCollisionStatus.pushingAgainstWall);
+    evt_set_variable(script, *args++, gCollisionStatus.currentFloor);
     return ApiStatus_DONE2;
 }
