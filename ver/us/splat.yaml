@@ -160,7 +160,7 @@ segments:
     - [0x3FA50, hasm, os/bcopy]
     - [0x3FD70, hasm, os/bzero]
     - [0x3FE10, c, os/string, gcc_272 -O3]
-    - [0x3FEA0, c, os/3FEA0]
+    - [0x3FEA0, c, os/xprintf, gcc_272 -O3]
     - [0x408EC, c, os/sprintf] # MOVE_ADDU
     - [0x40980, c, os/osCreateMesgQueue]
     - [0x409B0, c, os/osJamMesg, gcc_272 -O3]
@@ -334,7 +334,7 @@ segments:
     - [0x6F1C0, .data, os/position]
     - [0x6F1D0, .data, os/rotateRPY]
     - [0x6F1E0, .data, os/sins]
-    - [0x6F9E0, .data, os/3FEA0]
+    - [0x6F9E0, .data, os/xprintf]
     - [0x6FA30, .data, os/seteventmesg]
     - [0x6FA40, .data, os/siacs]
     - [0x6FA50, .data, os/osSetThreadPri]
@@ -2678,7 +2678,7 @@ segments:
     vram: 0xE0060000
     subsegments:
     - [0x363160, c, big_snowflakes]
-    - [0x363890, data]
+    - [0x363890]
   - [0x3638C0, bin] # big_snowflakes gfx
   - name: effect_debuff
     dir: effects
@@ -3586,7 +3586,7 @@ segments:
     overlay: True
     subsegments:
     - [0x422000, c, hammer]
-    - [0x422A90, data]
+    - [0x422A90]
   - type: code
     start: 0x422AD0
     vram: 0x802A9000
@@ -3604,7 +3604,7 @@ segments:
     overlay: True
     subsegments:
     - [0x4233F0, c, break_free]
-    - [0x423C30, data]
+    - [0x423C30]
   - type: code
     start: 0x423C70
     vram: 0x802A9000
@@ -3613,7 +3613,29 @@ segments:
     overlay: True
     subsegments:
     - [0x423C70, c, whirlwind]
-    - [0x424550, data]
+    - start: 0x424550
+      type: .data
+      name: whirlwind
+      subsegments:
+      - [0x424550, .data, whirlwind]
+      - [0x424550, ci4, whirlwind_1, 24, 24]
+      - [0x424670, palette, whirlwind_1]
+      - [0x424690, ci4, whirlwind_2, 24, 24]
+      - [0x4247B0, palette, whirlwind_2]
+      - [0x4247D0, ci4, whirlwind_3, 24, 24]
+      - [0x4248F0, palette, whirlwind_3]
+      - [0x424910, ci4, whirlwind_4, 24, 24]
+      - [0x424A30, palette, whirlwind_4]
+      - [0x424A50, ci4, whirlwind_5, 24, 24]
+      - [0x424B70, palette, whirlwind_5]
+      - [0x424B90, ci4, whirlwind_6, 24, 24]
+      - [0x424CB0, palette, whirlwind_6]
+      - [0x424CD0, ci4, whirlwind_7, 24, 24]
+      - [0x424DF0, palette, whirlwind_7]
+      - [0x424E10, ci4, whirlwind_bubble, 56, 48]
+      - [0x425350, palette, whirlwind_bubble]
+      - [0x425370]
+    - [0x425550]
   - type: code
     start: 0x425590
     vram: 0x802A9000
@@ -3640,7 +3662,7 @@ segments:
     overlay: True
     subsegments:
     - [0x426170, c, dizzy_shell]
-    - [0x426970, data]
+    - [0x426970]
   - type: code
     start: 0x4269D0
     vram: 0x802A9000
@@ -3649,7 +3671,7 @@ segments:
     overlay: True
     subsegments:
     - [0x4269D0, c, fire_shell]
-    - [0x427320, data]
+    - [0x427320]
   - type: code
     start: 0x4273B0
     vram: 0x802A9000
@@ -3703,7 +3725,7 @@ segments:
     overlay: True
     subsegments:
     - [0x429D20, c, squirt]
-    - [0x42A480, data]
+    - [0x42A480]
   - type: code
     start: 0x42A4F0
     vram: 0x802A9000
@@ -3712,7 +3734,29 @@ segments:
     overlay: True
     subsegments:
     - [0x42A4F0, c, water_block]
-    - [0x42B650, data]
+    - start: 0x42B650
+      type: .data
+      name: water_block
+      subsegments:
+      - [0x42B650, .data, water_block]
+      - [0x42B650, ci4, water_block_1, 24, 24]
+      - [0x42B770, palette, water_block_1]
+      - [0x42B790, ci4, water_block_2, 24, 24]
+      - [0x42B8B0, palette, water_block_2]
+      - [0x42B8D0, ci4, water_block_3, 24, 24]
+      - [0x42B9F0, palette, water_block_3]
+      - [0x42BA10, ci4, water_block_0, 24, 24]
+      - [0x42BB30, palette, water_block_0]
+      - [0x42BB50, ci4, water_block_block, 32, 32]
+      - [0x42BD50, palette, water_block_block]
+      - [0x42BD70, ci4, water_block_circle, 40, 40]
+      - [0x42C090, palette, water_block_circle]
+      - [0x42C0B0, ci4, water_block_cloud, 40, 40]
+      - [0x42C3D0, palette, water_block_cloud]
+      - [0x42C3F0, ci4, water_block_4, 24, 24]
+      - [0x42C510, palette, water_block_4]
+      - [0x42C530]
+    - [0x42C6F0]
   - type: code
     start: 0x42C6F0
     vram: 0x802A9000
@@ -3721,8 +3765,7 @@ segments:
     overlay: True
     subsegments:
     - [0x42C6F0, c, tidal_wave]
-    - [0x42CEB0, data]
-    - [0x42CED0]
+    - [0x42CEB0]
   - type: code
     start: 0x42CF10
     vram: 0x802A9000
@@ -3731,8 +3774,7 @@ segments:
     overlay: True
     subsegments:
     - [0x42CF10, c, power_shock]
-    - [0x42D9B0, data]
-    - [0x42D9D0]
+    - [0x42D9B0]
   - type: code
     start: 0x42DA10
     vram: 0x802A9000
@@ -3741,7 +3783,7 @@ segments:
     overlay: True
     subsegments:
     - [0x42DA10, c, mega_shock]
-    - [0x42E342, .data, mega_shock]
+    - [0x42E342] # todo offset ?
   - type: code
     start: 0x42E3A0
     vram: 0x802A9000
@@ -3759,7 +3801,7 @@ segments:
     overlay: True
     subsegments:
     - [0x42EE20, c, spiny_surge]
-    - [0x42F680, data]
+    - [0x42F680]
   - type: code
     start: 0x42F6E0
     vram: 0x802A9000
@@ -3768,7 +3810,7 @@ segments:
     overlay: True
     subsegments:
     - [0x42F6E0, c, hurricane]
-    - [0x42FFC0, data]
+    - [0x42FFC0]
   - type: code
     start: 0x430020
     vram: 0x802A9000
@@ -3777,7 +3819,7 @@ segments:
     overlay: True
     subsegments:
     - [0x430020, c, spook]
-    - [0x430940, data]
+    - [0x430940]
   - dir: battle/area_kmr_part_1
     type: code
     start: 0x4309A0
@@ -4393,6 +4435,7 @@ segments:
     - [0x69F320, c]
     - [0x6A2B50, c]
     - [0x6A44E0, data]
+    - [0x6BB940]
   - dir: battle/area_kpa3
     type: code
     start: 0x6BBB90

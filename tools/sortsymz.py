@@ -8,7 +8,7 @@ groups = {}
 
 with open("tools/symz.txt") as f:
     for line in f.readlines():
-        if line and not line.startswith("//"):
+        if line.strip() and not line.startswith("//"):
             name, addr = line.strip().strip(";").split(" = ")
             syms.append({"name": name, "address": int(addr, 0), "found_in": set(), "dead": False})
 

@@ -332,7 +332,6 @@ void copy_world_hud_element_ref_to_battle(s32 worldID, s32 battleID);
 
 void hud_element_set_aux_cache(void* base, s32 size);
 
-
 void create_popup_menu(PopupMenu*);
 
 #endif

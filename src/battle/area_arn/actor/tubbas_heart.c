@@ -144,17 +144,17 @@ EvtScript N(init_80223DA0) = {
 
 ApiStatus func_80218680_4FF0D0(Evt* script, s32 isInitialCall) {
     Bytecode *args = script->ptrReadPos;
-    Effect6BInstance* effect = (Effect6BInstance*) evt_get_variable(script, *args++);
+    EffectInstance* effect = (EffectInstance*) evt_get_variable(script, *args++);
 
     s32 x = evt_get_variable(script, *args++);
     s32 y = evt_get_variable(script, *args++);
     s32 z = evt_get_variable(script, *args++);
     f32 scale = evt_get_float_variable(script, *args++);
 
-    effect->data->pos.x = x;
-    effect->data->pos.y = y;
-    effect->data->pos.z = z;
-    effect->data->scale = scale;
+    ((Effect6BFXData*)effect->data)->pos.x = x;
+    ((Effect6BFXData*)effect->data)->pos.y = y;
+    ((Effect6BFXData*)effect->data)->pos.z = z;
+    ((Effect6BFXData*)effect->data)->scale = scale;
 
     return ApiStatus_DONE2;
 }

@@ -23,7 +23,7 @@ void small_gold_sparkle_update(EffectInstance* effect);
 void small_gold_sparkle_render(EffectInstance* effect);
 void small_gold_sparkle_appendGfx(void* effect);
 
-EffectInstance* small_gold_sparkle_main(EffectInstanceDataThing* arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4) {
+EffectInstance* small_gold_sparkle_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4) {
     EffectBlueprint bp;
     EffectInstance* effect;
     SmallGoldSparkleFXData* data;

@@ -67,28 +67,26 @@ ApiStatus func_802384B0_703FA0(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus func_80238570_704060(Evt* script, s32 isInitialCall) {
-    s32* var = D_80239A0C_7054FC;
+    EffectInstance* effect = D_80239A0C_7054FC;
 
-    if (var != NULL) {
-        *var |= 0x10;
+    if (effect != NULL) {
+        effect->flags |= 0x10;
     }
     D_80239A0C_7054FC = NULL;
 
     return ApiStatus_DONE2;
 }
 
-// Beware this demon because "EffectInstanceDataThing" is one hell of a
-// janky solution, but this does match.
 ApiStatus func_8023859C_70408C(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 var1 = evt_get_variable(script, *args++);
     s32 var2 = evt_get_variable(script, *args++);
     s32 var3 = evt_get_variable(script, *args++);
-    EffectInstanceDataThing* dataThing;
+    ThunderboltRingFXData* data;
 
     D_8023C1B4 = fx_thunderbolt_ring(0, var1, var2, var3, 1.0f, 10);
-    dataThing = D_8023C1B4->data;
-    dataThing->unk_30 = 3;
+    data = D_8023C1B4->data;
+    data->unk_30 = 3;
 
     return ApiStatus_DONE2;
 }
@@ -116,18 +114,16 @@ ApiStatus func_80238784_704274(Evt* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "battle/partner/watt", func_80238810_704300);
 
-// Beware this demon because "EffectInstanceDataThing" is one hell of a
-// janky solution, but this does match.
 ApiStatus func_80238B3C_70462C(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 var1 = evt_get_variable(script, *args++);
     s32 var2 = evt_get_variable(script, *args++);
     s32 var3 = evt_get_variable(script, *args++);
-    EffectInstanceDataThing* temp_a0;
+    ThunderboltRingFXData* data;
 
     D_8023C1B4 = fx_thunderbolt_ring(0, var1, var2, var3, 1.0f, 60);
-    temp_a0 = D_8023C1B4->data;
-    temp_a0->unk_30 = 2;
+    data = D_8023C1B4->data;
+    data->unk_30 = 2;
 
     return ApiStatus_DONE2;
 }

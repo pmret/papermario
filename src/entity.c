@@ -8,6 +8,8 @@ extern EntityModelList gWorldEntityModelList;
 extern EntityModelList gBattleEntityModelList;
 extern EntityModelList* gCurrentEntityModelList;
 extern s32 gEntityModelCount;
+
+extern s32 D_80154374;
 extern s32 entity_fog_enabled;
 extern s32 entity_fog_red;
 extern s32 entity_fog_green;
@@ -15,6 +17,7 @@ extern s32 entity_fog_blue;
 extern s32 entity_fog_alpha;
 extern s32 entity_fog_dist_min;
 extern s32 entity_fog_dist_max;
+
 
 s32 step_entity_model_commandlist(EntityModel* entityModel);
 void free_entity_model_by_ref(EntityModel* entityModel);
@@ -214,15 +217,73 @@ void make_entity_model_mtx_flipZ(Matrix4f mtx) {
     mtx[3][3] = 1.0f;
 }
 
+void appendGfx_entity_model(void* data);
 INCLUDE_ASM(s32, "entity", appendGfx_entity_model);
 
 INCLUDE_ASM(s32, "entity", draw_entity_model_A);
 
 INCLUDE_ASM(s32, "entity", draw_entity_model_B);
 
-INCLUDE_ASM(s32, "entity", draw_entity_model_C);
+void draw_entity_model_C(s32 modelIdx, Mtx* transformMtx) {
+    EntityModel* model;
+    RenderTask rt;
+    RenderTask* rtPtr = &rt;
 
-INCLUDE_ASM(s32, "entity", draw_entity_model_D);
+    if ((gGameStatusPtr->isBattle == 0) || (modelIdx & 0x800)) {
+        modelIdx &= ~0x800;
+        model = (*gCurrentEntityModelList)[modelIdx];
+
+        if (model != NULL) {
+            if (model->flags != 0) {
+                if (!(model->flags & MODEL_FLAGS_USE_CAMERA_UNK_MATRIX)) {
+                    if (!(model->flags & MODEL_FLAGS_FLAG_20)) {
+                        if (!(model->flags & MODEL_FLAGS_FLAG_40) && (model->flags & (1 << gCurrentCamID))) {
+                            model->flags |= MODEL_FLAGS_FLAG_200;
+                            model->transform = *transformMtx;
+                            model->vertexArray = NULL;
+                            rtPtr->renderMode = model->renderMode;
+                            rtPtr->appendGfxArg = model;
+                            rtPtr->appendGfx = appendGfx_entity_model;
+                            rtPtr->distance = (u32)(model->flags & 0xF000) >> 8;
+                            queue_render_task(rtPtr);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+void draw_entity_model_D(s32 modelIdx, Mtx* transformMtx, s32 arg2, Vtx* vertexArray) {
+    EntityModel* model;
+    RenderTask rt;
+    RenderTask* rtPtr = &rt;
+
+    if ((gGameStatusPtr->isBattle == 0) || (modelIdx & 0x800)) {
+        modelIdx &= ~0x800;
+        model = (*gCurrentEntityModelList)[modelIdx];
+
+        if (model != NULL) {
+            if (model->flags != 0) {
+                if (!(model->flags & MODEL_FLAGS_USE_CAMERA_UNK_MATRIX)) {
+                    if (!(model->flags & MODEL_FLAGS_FLAG_20)) {
+                        if (model->flags & (1 << gCurrentCamID)) {
+                            model->flags |= MODEL_FLAGS_FLAG_200;
+                            model->transform = *transformMtx;
+                            D_80154374 = arg2;
+                            model->vertexArray = vertexArray;
+                            rtPtr->renderMode = model->renderMode;
+                            rtPtr->appendGfxArg = model;
+                            rtPtr->appendGfx = appendGfx_entity_model;
+                            rtPtr->distance = (u32)(model->flags & 0xF000) >> 8;
+                            queue_render_task(rtPtr);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
 
 INCLUDE_ASM(s32, "entity", draw_entity_model_E);
 
@@ -373,7 +434,7 @@ void init_generic_entity_list(void) {
     }
 }
 
-s32 create_generic_entity_world(void (*updateFunc)(Evt*, s32), void (*drawFunc)(Evt*, s32)) {
+s32 create_generic_entity_world(void (*updateFunc)(void), void (*drawFunc)(void)) {
     s32 i;
     DynamicEntity* newDynEntity;
 

@@ -9,22 +9,10 @@ extern HudScript HudScript_BButton;
 extern HudScript HudScript_100pct;
 extern s32 D_802943C0;
 
-extern HudScript HudScript_MashAButton;
-extern HudScript HudScript_MashBButton1;
+extern HudScript HudScript_MashAButton[];
+extern HudScript HudScript_MashBButton1[];
 
-typedef struct structD_802A9930_42E340 {
-    /* 0x00 */ s16 unk_0;
-    /* 0x08 */ u16 unk_8;
-} structD_802A9930_42E340;
-
-structD_802A9930_42E340 D_802A9930_42E340[] = {
-    { 0, 0, },
-    { 0, 0x19 },
-    { 0, 0x32 },
-    { 0, 0x4B },
-    { 0, 0x4B },
-    { 0, 0 },
-};
+s32 D_802A9930_42E340[] = { 0, 25, 50, 75, 75, 0, 0, 0 };
 
 ApiStatus func_802A9000_42DA10(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
@@ -175,8 +163,8 @@ void func_802A92A0_42DCB0(void) {
                 actionCommandStatus->unk_4E--;
                 break;
             }
-            hud_element_set_script(actionCommandStatus->hudElements[0], &HudScript_MashAButton);
-            hud_element_set_script(actionCommandStatus->hudElements[2], &HudScript_MashBButton1);
+            hud_element_set_script(actionCommandStatus->hudElements[0], HudScript_MashAButton);
+            hud_element_set_script(actionCommandStatus->hudElements[2], HudScript_MashBButton1);
             actionCommandStatus->barFillLevel = 0;
             actionCommandStatus->unk_5C = 0;
             actionCommandStatus->unk_54 = actionCommandStatus->unk_52;
@@ -194,7 +182,7 @@ void func_802A92A0_42DCB0(void) {
 
                     mashMeterCutoff = mashMeterCutoffs[mashMeterIntervals];
                     index = actionCommandStatus->barFillLevel / mashMeterCutoff / 20;
-                    newFillLevel = actionCommandStatus->barFillLevel - D_802A9930_42E340[index].unk_8;
+                    newFillLevel = actionCommandStatus->barFillLevel - D_802A9930_42E340[index];
                 } else {
                     newFillLevel = actionCommandStatus->barFillLevel - 10;
                 }

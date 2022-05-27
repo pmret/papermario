@@ -191,8 +191,10 @@ extern HudScript HudScript_Parakarry;
 extern HudScript HudScript_Watt;
 extern HudScript HudScript_Sushie;
 extern HudScript HudScript_Lakilester;
+extern HudScript HudScript_Partner9;
 extern HudScript HudScript_Bow;
 extern HudScript HudScript_PartnerA;
+extern HudScript HudScript_PartnerB;
 extern HudScript HudScript_Partner0Disabled;
 extern HudScript HudScript_GoombarioDisabled;
 extern HudScript HudScript_KooperDisabled;
@@ -201,8 +203,10 @@ extern HudScript HudScript_ParakarryDisabled;
 extern HudScript HudScript_WattDisabled;
 extern HudScript HudScript_SushieDisabled;
 extern HudScript HudScript_LakilesterDisabled;
+extern HudScript HudScript_Partner9Disabled;
 extern HudScript HudScript_BowDisabled;
 extern HudScript HudScript_PartnerADisabled;
+extern HudScript HudScript_PartnerBDisabled;
 
 IconHudScriptPair gPartnerIconHudScripts[] = {
     { .enabled = &HudScript_Partner0, .disabled = &HudScript_Partner0Disabled, },
@@ -214,10 +218,10 @@ IconHudScriptPair gPartnerIconHudScripts[] = {
     { .enabled = &HudScript_Watt, .disabled = &HudScript_WattDisabled, },
     { .enabled = &HudScript_Sushie, .disabled = &HudScript_SushieDisabled, },
     { .enabled = &HudScript_Lakilester, .disabled = &HudScript_LakilesterDisabled, },
-    { .enabled = (HudScript*)0x80107F78, .disabled = (HudScript*)0x80107FA0, },
+    { .enabled = &HudScript_Partner9, .disabled = &HudScript_Partner9Disabled, },
     { .enabled = &HudScript_PartnerA, .disabled = &HudScript_PartnerADisabled, },
-    { .enabled = (HudScript*)0x80108018, .disabled = (HudScript*)0x80108040, },
-    { .enabled = (HudScript*)0x80108018, .disabled = (HudScript*)0x80108040 },
+    { .enabled = &HudScript_PartnerB, .disabled = &HudScript_PartnerBDisabled, },
+    { .enabled = &HudScript_PartnerB, .disabled = &HudScript_PartnerBDisabled },
 };
 
 #include "move_table.inc.c"

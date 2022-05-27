@@ -65,6 +65,8 @@ s32 N(statusTable_80224A40)[] = {
     STATUS_END,
 };
 
+BSS EffectWhirlwindUnk D_802310D0;
+
 ActorPartBlueprint N(partsTable_80224AEC)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
@@ -594,8 +596,6 @@ EvtScript N(randomSummon) = {
     EVT_RETURN
     EVT_END
 };
-
-BSS EffectWhirlwind D_802310D0;
 
 s32 func_8021878C_512D5C(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

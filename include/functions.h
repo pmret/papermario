@@ -6,6 +6,7 @@
 #include "map.h"
 #include "enums.h"
 #include "stdlib/stdarg.h"
+#include "xstdio.h"
 
 f32 fabsf(f32 f);
 f64 fabs(f64 f);
@@ -32,8 +33,6 @@ HeapNode* _heap_create(HeapNode* addr, u32 size);
 s32 dma_copy(Addr romStart, Addr romEnd, void* vramDest);
 f32 rand_float(void);
 void copy_matrix(Matrix4f src, Matrix4f dest);
-
-s32 _Printf(PrintCallback pfn, char* arg, const char* fmt, va_list ap);
 
 s32 get_global_byte(s32 index);
 s32 get_global_flag(s32 index);
@@ -256,6 +255,7 @@ f32 clamp_angle(f32 theta);
 s32 sign(s32 value);
 s32 func_80055448(s32);
 s32 func_80055464(s32, s32);
+s32 func_80055618(s32, s32);
 s32 func_800E0208(void);
 
 s32 battle_heap_create(void);
@@ -432,7 +432,7 @@ ModelAnimator* get_animator_by_index(s32 arg0);
 void set_screen_overlay_params_front(u8, f32);
 void set_screen_overlay_params_back(u8, f32);
 void set_screen_overlay_alpha(s32, f32);
-void get_screen_overlay_params(s32, u8*, f32*);
+void get_screen_overlay_params(s32, u8* type, f32* zoom);
 void set_screen_overlay_color(s32, u8, u8, u8);
 void set_screen_overlay_center(s32, s32, s32, s32);
 s32 rand_int(s32);
@@ -722,6 +722,8 @@ void load_font(s32 font);
 
 void* load_asset_by_name(const char* assetName, u32* decompressedSize);
 
+Gfx* mdl_get_copied_gfx(s32 copyIndex);
+void mdl_get_copied_vertices(s32 copyIndex, Vtx** firstVertex, Vtx** copiedVertices, s32* numCopied);
 void mdl_draw_hidden_panel_surface(Gfx** arg0, u16 treeIndex);
 s32 func_8011CFBC(void);
 void set_screen_overlay_center_worldpos(s32 idx, s32 posIdx, s32 x, s32 y, s32 z);
@@ -769,8 +771,11 @@ void hide_foreground_models_unchecked(void);
 void show_foreground_models(void);
 void hide_foreground_models(void);
 void btl_set_state(s32 battleState);
-void draw_entity_model_E(s32, Mtx*);
 void draw_entity_model_A(s32, Mtx*);
+void draw_entity_model_B(s32, Mtx*, s32, s32);
+void draw_entity_model_C(s32, Mtx*);
+void draw_entity_model_D(s32, Mtx*, s32, Vtx*);
+void draw_entity_model_E(s32, Mtx*);
 void free_entity_model_by_index(s32 idx);
 void btl_cam_use_preset(s32);
 void btl_cam_set_params(s16, s16, s16, s16, s32, s32, s32, s32);
@@ -879,6 +884,9 @@ void func_80254950(void);
 void func_802549A0(void);
 void func_802549C0(void);
 
+void func_8023E104(void);
+void func_8023E11C(void);
+
 void set_goal_pos_to_part(ActorState* state, s32 actorID, s32 partIndex);
 
 void init_encounters_ui(void);
@@ -891,6 +899,8 @@ s32 get_asset_offset(char*, s32*);
 void initialize_status_menu(void);
 void status_menu_start_blinking_fp(void);
 s32 is_status_menu_visible(void);
+void status_menu_start_blinking_starpoints(void);
+void status_menu_stop_blinking_starpoints(void);
 void status_menu_start_blinking_hp(void);
 void status_menu_start_blinking_sp(void);
 void status_menu_stop_blinking_fp(void);

@@ -192,7 +192,7 @@ s32 make_item_entity_at_player(s32 itemID, s32 arg1, s32 pickupMsgFlags) {
     f32 posZ;
     f32 depth;
     s32 id;
-    
+
     for (i = 0; i < MAX_ITEM_ENTITIES; i++) {
         if (gCurrentItemEntities[i] == NULL) {
             break;
@@ -200,11 +200,11 @@ s32 make_item_entity_at_player(s32 itemID, s32 arg1, s32 pickupMsgFlags) {
     }
     ASSERT(i < MAX_ITEM_ENTITIES);
     id = i;
-    
+
     gCurrentItemEntities[id] = item = heap_malloc(sizeof(*item));
     ItemEntitiesCreated++;
     ASSERT(item != NULL);
-    
+
     itemID &= 0xFFFF;
     item->renderGroup = -1;
     item->flags = (ITEM_ENTITY_FLAGS_CAM0 | ITEM_ENTITY_FLAGS_CAM1 | ITEM_ENTITY_FLAGS_CAM2 | ITEM_ENTITY_FLAGS_10 | ITEM_ENTITY_FLAGS_2000000);
@@ -218,7 +218,7 @@ s32 make_item_entity_at_player(s32 itemID, s32 arg1, s32 pickupMsgFlags) {
     item->position.x = playerStatus->position.x;
     item->position.y = playerStatus->position.y;
     item->position.z = playerStatus->position.z;
-    
+
     item->shadowIndex = -1;
     item->nextUpdate = 1;
     item->unk_34.x = -9999;
@@ -238,7 +238,7 @@ s32 make_item_entity_at_player(s32 itemID, s32 arg1, s32 pickupMsgFlags) {
         item->flags |= ITEM_ENTITY_FLAGS_20000;
     }
     ItemEntityAlternatingSpawn = 1 - ItemEntityAlternatingSpawn;
-    
+
     item->shadowIndex = create_shadow_type(0, item->position.x, item->position.y, item->position.z);
     shadow = get_shadow_by_index(item->shadowIndex);
     shadow->flags |= 1;
@@ -251,12 +251,12 @@ s32 make_item_entity_at_player(s32 itemID, s32 arg1, s32 pickupMsgFlags) {
     shadow->position.x = posX;
     shadow->position.y = posY;
     shadow->position.z = posZ;
-    
+
     shadow->rotation.x = gGameStatusPtr->playerGroundTraceAngles.x;
     shadow->rotation.y = 0.0f;
     shadow->rotation.z = gGameStatusPtr->playerGroundTraceAngles.z;
     set_standard_shadow_scale(shadow, depth * 0.5f);
-    
+
     item_entity_load(item);
     if (item->itemID == ITEM_COIN) {
         sparkle_script_init(item, &SparkleScript_Coin);

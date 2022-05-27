@@ -10,21 +10,7 @@ extern s32 D_80294300;
 
 extern HudScript HudScript_MashAButton;
 
-typedef struct UnkVec2s {
-    /* 0x00 */ s16 unk_0;
-    /* 0x02 */ s16 unk_2;
-} UnkVec2s;
-
-UnkVec2s D_802A9812_428280[] = {
-    { 0x0, 0x00 },
-    { 0x0, 0x19 },
-    { 0x0, 0x32 },
-    { 0x0, 0x4B },
-    { 0x0, 0x4B },
-    { 0x0, 0x00 },
-    { 0x0, 0x00 },
-    { 0x0, 0x00 },
-};
+s32 D_802A9810_428280[] = { 0, 25, 50, 75, 75, 0, 0, 0 };
 
 ApiStatus func_802A9000_427A70(Evt* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
@@ -132,7 +118,7 @@ void func_802A928C_427CFC(void) {
             if (!actionCommandStatus->unk_68) {
                 mashMeterCutoff = actionCommandStatus->mashMeterCutoffs[actionCommandStatus->mashMeterIntervals];
                 actionCommandStatus->barFillLevel -=
-                    D_802A9812_428280[actionCommandStatus->barFillLevel / mashMeterCutoff / 20].unk_2;
+                    D_802A9810_428280[actionCommandStatus->barFillLevel / mashMeterCutoff / 20];
 
                 if (actionCommandStatus->barFillLevel < 0) {
                     actionCommandStatus->barFillLevel = 0;

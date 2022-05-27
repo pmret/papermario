@@ -4,6 +4,7 @@
 #include "world/partners.h"
 #include "world/actions.h"
 #include "npc.h"
+#include "effects.h"
 
 extern void* D_8010C924;
 extern s32 D_8010C964;
@@ -390,8 +391,8 @@ void set_action_state(s32 actionState) {
         sfx_stop_sound(spinState->spinSoundID);
     }
 
-    if (playerStatus->unk_D8) {
-        playerStatus->unk_D8[3][9] = 0xA; // TODO: Substruct? Currently UB.
+    if (playerStatus->unk_D8 != NULL) {
+        ((Effect46FXData*)playerStatus->unk_D8->data)->unk_24 = 10;
         playerStatus->unk_D8 = NULL;
     }
 }

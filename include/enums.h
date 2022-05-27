@@ -574,6 +574,8 @@ enum SoundIDs {
     SOUND_21C                       = 0x0000021C,
     SOUND_MENU_ERROR                = 0x0000021D,
     SOUND_231                       = 0x00000231,
+    SOUND_233                       = 0x00000233,
+    SOUND_234                       = 0x00000234,
     SOUND_246                       = 0x00000246,
     SOUND_259                       = 0x00000259,
     SOUND_25A                       = 0x0000025A,
@@ -2585,7 +2587,7 @@ enum BattleStatusFlags1 {
     BS_FLAGS1_400              = 0x00000400,
     BS_FLAGS1_800              = 0x00000800,
     BS_FLAGS1_1000             = 0x00001000,
-    BS_FLAGS1_2000             = 0x08002000,
+    BS_FLAGS1_2000             = 0x00002000,
     BS_FLAGS1_4000             = 0x00004000,
     BS_FLAGS1_8000             = 0x00008000,
     BS_FLAGS1_10000            = 0x00010000,
@@ -2620,10 +2622,12 @@ enum BattleStatusFlags2 {
     BS_FLAGS2_800                             = 0x00000800,
     BS_FLAGS2_NO_TARGET_AVAILABLE             = 0x00001000,
     BS_FLAGS2_10000                           = 0x00010000,
+    BS_FLAGS2_100000                          = 0x00100000,
     BS_FLAGS2_1000000                         = 0x01000000,
     BS_FLAGS2_2000000                         = 0x02000000,
     BS_FLAGS2_4000000                         = 0x04000000,
     BS_FLAGS2_8000000                         = 0x08000000,
+    BS_FLAGS2_10000000                        = 0x10000000,
 };
 
 enum BattleStates {
