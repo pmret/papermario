@@ -709,7 +709,11 @@ typedef struct Effect6FFXData {
 } Effect6FFXData; // size = 0x44
 
 typedef struct MiscParticlesFXData {
-    char unk_00[0x38];
+    char unk_00[0x4];
+    Vec3f pos;
+    f32 scaleX;
+    f32 scaleY;
+    char unk_18[0x20];
     s32 unk_38;
     s32 unk_3C;
     s32 unk_40;

@@ -4399,10 +4399,10 @@ segments:
     vram: 0x80218000
     overlay: True
     subsegments:
-    - [0x660750, c]
-    - [0x660D20, c]
-    - [0x660E10, c]
-    - [0x661150, data]
+    - [0x660750, c, actor/crystal_king]
+    - [0x660D20, c, actor/crystal_bit]
+    - [0x660E10, c, stage/sam_04]
+    - [0x661150, c, area]
   - dir: battle/area_pra3
     type: code
     start: 0x669D80
