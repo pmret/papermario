@@ -798,11 +798,12 @@ s32 dispatch_damage_event_partner(s32 damageAmount, s32 event, s32 stopMotion) {
     ActorMovement* state = &partner->state;
     s32 flagCheck;
     s32 temp_a1;
+    s16 temp_v1;
 
-    damageAmount = (s16)damageAmount;
     battleStatus->currentAttackDamage = damageAmount;
     partner->currentHP = 127;
-    temp_a1 = (s16)(partner->hpChangeCounter + damageAmount);
+    temp_v1 = partner->hpChangeCounter + damageAmount;
+    temp_a1 = temp_v1;
     partner->hpChangeCounter += damageAmount;
     partner->hpChangeCounter -= temp_a1;
     partner->damageCounter += temp_a1;
@@ -829,8 +830,7 @@ s32 dispatch_damage_event_partner(s32 damageAmount, s32 event, s32 stopMotion) {
     }
 
     if (battleStatus->lastAttackDamage > 0) {
-        BattleStatus* battleStatus2 = &gBattleStatus; // TODO macro for setting flags of battleStatus
-        battleStatus2->flags1 |= 0x20;
+        gBattleStatus.flags1 |= 0x20;
 
         inflict_status(partner, 0xD, battleStatus->lastAttackDamage);
     }

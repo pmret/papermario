@@ -2070,7 +2070,7 @@ typedef struct SaveDataHeader {
     /* 0x0030 */ s32 crc1;
     /* 0x0034 */ s32 crc2;
     /* 0x0038 */ s32 saveSlot;
-    /* 0x003C */ s32 saveCount;
+    /* 0x003C */ u32 saveCount;
     /* 0x0040 */ s8 ignored[0x40];
 } SaveDataHeader;
 

@@ -20,8 +20,8 @@ extern s32 D_800B8DEC;
 
 #include "world/common/AddPlayerHandsOffset.inc.c"
 
-// LW %LO issue.
-#ifdef NON_EQUIVALENT
+// Needs data migrated
+#ifdef NON_MATCHING
 ApiStatus func_80240654_EB14B4(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
@@ -37,7 +37,7 @@ ApiStatus func_80240654_EB14B4(Evt* script, s32 isInitialCall) {
 }
 #else
 INCLUDE_ASM(s32, "EB1170", func_80240654_EB14B4);
-#endif // NON_EQUIVALENT
+#endif
 
 ApiStatus func_802406A8_EB1508(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -77,6 +77,6 @@ ApiStatus func_80240A68_EB18C8(Evt* script, s32 isInitialCall) {
 ApiStatus func_80240A8C_EB18EC(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
-    evt_set_variable(script, *args++, dead_gCollisionStatus.pushingAgainstWall);
+    evt_set_variable(script, *args++, gCollisionStatus.currentFloor);
     return ApiStatus_DONE2;
 }

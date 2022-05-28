@@ -8,6 +8,8 @@
 #include "world/common/UnsetCamera0Flag1000.inc.c"
 
 ApiStatus func_80240388_EA7358(Evt* script, s32 isInitialCall) {
-    evt_set_variable(script, *script->ptrReadPos, dead_gCollisionStatus.pushingAgainstWall);
+    Bytecode* args = script->ptrReadPos;
+
+    evt_set_variable(script, *args++, gCollisionStatus.currentFloor);
     return ApiStatus_DONE2;
 }

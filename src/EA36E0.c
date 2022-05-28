@@ -28,7 +28,7 @@ ApiStatus N(GetActingPartner)(Evt* script, s32 isInitialCall) {
 // Normally this would be #include "world/common/UnkFunc47.inc.c"
 // Due to sqrtf being an inline/instrinsic func, we can't use dead.h
 #ifdef NON_MATCHING
-ApiStatus func_80242EC4_EA37C4(Evt* script, s32 isInitialCall) {
+ApiStatus N(UnkFunc47(Evt* script, s32 isInitialCall) {
     f32 var1 = script->varTable[0] - gPlayerStatus.position.x;
     f32 var2 = script->varTable[2] - gPlayerStatus.position.y;
     f32 var3 = 0.0f - gPlayerStatus.position.z;

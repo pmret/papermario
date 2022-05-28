@@ -1,6 +1,8 @@
 #include "common.h"
 #include "filemenu.h"
 #include "hud_element.h"
+#include "fio.h"
+#include "ld_addrs.h"
 
 void filemenu_draw_cursor(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
 void filemenu_draw_contents_copy_arrow(
@@ -17,6 +19,7 @@ extern MenuPanel D_8024A158;
 extern MenuPanel D_8024A1D8;
 extern s32 D_8024BA60;
 extern s32 D_8024BA98;
+extern s32 D_8024C088;
 
 s32* D_80249B80[] = { &D_80241ECC };
 MenuPanel* filemenu_menus[4] = { &D_8024A098, &D_8024A114, &D_8024A158, &D_8024A1D8 };
@@ -54,7 +57,8 @@ Vp D_80249D60 = {
 };
 f32 D_80249D70[15] = { 7.0f, 12.5f, 13.0f, 14.5f, 14.0f, 13.0f, 11.5f, 9.5f, 7.5f, 5.5f, 3.5f, 2.0f, 1.0f, 0.5f, 0.0f };
 s32 D_80249DAC[] = { 0x2C000010, 0x00180120, 0x00C00000, 0x00000000, 0x00000000, 0xFF000000, 0x00000001, 0x40000000, };
-s32 D_80249DCC[] = { &D_8024BA60, 0x18000000, 0x00000120, 0x00C00000, filemenu_draw_contents_copy_arrow, 0x00000000,
+s32** D_80249DCC = &D_8024BA60;
+s32 D_80249DD0[] = { 0x18000000, 0x00000120, 0x00C00000, filemenu_draw_contents_copy_arrow, 0x00000000,
                      0x2C000000, 0x00000001, 0x00000000, &D_8024BA98, 0x17000000, 0x00000140, 0x00F00000,
                      filemenu_draw_cursor, 0x00000000, 0xFF000000, 0x00000001, 0x00000000, &D_8024BA98, 0x00000000,
                      0x00000000, };
@@ -79,7 +83,15 @@ BSS u8 filemenu_8024C110[8];
 
 s32 func_80244BC4(void);
 
-INCLUDE_ASM(s32, "163400", mainmenu_draw_rect);
+void mainmenu_draw_rect(s32 ulx, s32 uly, s32 lrx, s32 lry, s32 tileDescriptor, s32 uls, s32 ult, s32 dsdx, s32 dtdy) {
+    if (ulx <= -2688 || uly <= -2688 || lrx <= 0 || lry <= 0) {
+        return;
+    }
+    if (ulx >= 1280 || uly >= 960 || lrx >= 2688 || lry >= 2688) {
+        return;
+    }
+    gSPScisTextureRectangle(gMasterGfxPos++, ulx, uly, lrx, lry, tileDescriptor, uls, ult, dsdx, dtdy);
+}
 
 void filemenu_set_selected(MenuPanel* menu, s32 col, s32 row) {
     menu->col = col;
@@ -800,7 +812,63 @@ void filemenu_draw_contents_copy_arrow(MenuPanel* menu, s32 baseX, s32 baseY, s3
     }
 }
 
+// some reordering at the end
+#ifdef NON_MATCHING
+void filemenu_init(s32 arg0) {
+    MenuPanel* menu;
+    u32 temp_a2;
+    s32 i;
+
+    dma_copy(ui_images_ROM_START, ui_images_ROM_END, ui_images_VRAM);
+    for (i = 0; i < ARRAY_COUNT(filemenu_cursorHudElemID); i++) {
+        filemenu_cursorHudElemID[i] = hud_element_create(D_80249B80[i]);
+        hud_element_set_flags(filemenu_cursorHudElemID[i], HUD_ELEMENT_FLAGS_DROP_SHADOW | HUD_ELEMENT_FLAGS_80);
+    }
+
+    D_8024C088 = filemenu_cursorHudElemID[1];
+    if (arg0 == 0) {
+        *D_80249DCC = NULL;
+    }
+    setup_pause_menu_tab(D_80249DAC, 3);
+    menu = filemenu_menus[0];
+    filemenu_8024C098 = 0;
+    if (arg0 == 0) {
+        menu->page = 0;
+    } else {
+        menu->page = 2;
+    }
+
+    if (menu->page == 0) {
+        for (i = 0; i < ARRAY_COUNT(filemenu_menus); i++) {
+            if (!fio_load_game(i)) {
+                gSaveSlotHasData[i] = FALSE;
+            } else {
+                gSaveSlotMetadata[i] = gCurrentSaveFile.unk_12EC;
+                gSaveSlotHasData[i] = TRUE;
+            }
+        }
+
+        if (menu->page == 0) {
+            fio_has_valid_backup();
+            if (D_800D95E8.saveCount >= 4) {
+                D_800D95E8.saveCount = 0;
+            }
+            gGameStatusPtr->saveSlot = D_800D95E8.saveCount;
+        }
+    }
+
+    filemenu_set_selected(menu, (gGameStatusPtr->saveSlot & 1) * 2, gGameStatusPtr->saveSlot >> 1);
+
+    for (i = 0; i < ARRAY_COUNT(filemenu_menus); i++) {
+        if (filemenu_menus[i]->fpInit != NULL) {
+            filemenu_menus[i]->fpInit(filemenu_menus[i]);
+        }
+    }
+    update_window_hierarchy(0x17, 0x40);
+}
+#else
 INCLUDE_ASM(void, "163400", filemenu_init);
+#endif
 
 // TODO bad match, look into
 void filemenu_cleanup(void) {

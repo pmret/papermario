@@ -183,7 +183,7 @@ void func_802A9228_425D78(void) {
     }
 }
 
-void func_802A94D8_426028(void) {
+void N(draw_hud_elements)(void) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     s32 hudX;
     s32 hudY;
