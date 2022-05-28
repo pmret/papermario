@@ -12,10 +12,25 @@ extern u8 D_80284120[];
 void func_80255FE0(s32, void*);
 void func_802571F0(s32, Actor*);
 void update_player_actor_shadow(void);
-void func_8025950C(ActorPart*, s32, s32);
-void func_802597B0(ActorPart*, s32, s32);
+void func_8025950C(ActorPart*, s32, Matrix4f);
+void func_802596C0(ActorPart*, s32, Matrix4f);
+void func_802597B0(ActorPart*, s32, Matrix4f);
+void func_8025995C(ActorPart*, s32, Matrix4f);
 void func_8025C918(void);
 void func_8025CD40(void);
+
+void func_80259A48(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4);
+void func_80259AAC(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4);
+void func_80259D9C(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4);
+void func_8025A2C4(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4);
+void func_8025A50C(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4);
+void func_8025A74C(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4);
+void func_8025AA80(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4);
+void func_8025AD90(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4);
+void func_8025B1A8(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4);
+void func_8025B5C0(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4, s32 arg5);
+void func_8025BAA0(s32 arg0, ActorPart* part, s32 yaw, s32 arg3, Matrix4f mtx, s32 arg5);
+void func_8025C120(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4);
 
 s32 func_80254250(void) {
     s32 ret;
@@ -873,13 +888,13 @@ void func_80259AAC(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
         if (arg0 == 0) {
             decorationTable->palettes = spr_get_player_palettes(part->currentAnimation >> 16);
             decorationTable->numPalettes = 0;
-            while (decorationTable->palettes[decorationTable->numPalettes] != -1) {
+            while ((s32)decorationTable->palettes[decorationTable->numPalettes] != -1) {
                 decorationTable->numPalettes++;
             }
         } else {
             decorationTable->palettes = spr_get_npc_palettes(part->currentAnimation >> 16);
             decorationTable->numPalettes = 0;
-            while (decorationTable->palettes[decorationTable->numPalettes] != -1) {
+            while ((s32)decorationTable->palettes[decorationTable->numPalettes] != -1) {
                 decorationTable->numPalettes++;
             }
         }
@@ -930,14 +945,14 @@ void func_80259D9C(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
         if (arg0 == 0) {
             decorationTable->palettes = spr_get_player_palettes(part->currentAnimation >> 16);
             decorationTable->numPalettes = 0;
-            while (decorationTable->palettes[decorationTable->numPalettes] != -1) {
+            while ((s32)decorationTable->palettes[decorationTable->numPalettes] != -1) {
                 decorationTable->numPalettes++;
             }
             decorationTable->unk_6CC = 6;
         } else {
             decorationTable->palettes = spr_get_npc_palettes(part->currentAnimation >> 16);
             decorationTable->numPalettes = 0;
-            while (decorationTable->palettes[decorationTable->numPalettes] != -1) {
+            while ((s32)decorationTable->palettes[decorationTable->numPalettes] != -1) {
                 decorationTable->numPalettes++;
             }
             decorationTable->unk_6CC = spr_get_npc_color_variations(part->currentAnimation >> 16);
@@ -1043,13 +1058,13 @@ void func_8025A2C4(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
         if (arg0 == 0) {
             decorationTable->palettes = spr_get_player_palettes(part->currentAnimation >> 16);
             decorationTable->numPalettes = 2;
-            while (decorationTable->palettes[decorationTable->numPalettes] != -1) {
+            while ((s32)decorationTable->palettes[decorationTable->numPalettes] != -1) {
                 decorationTable->numPalettes++;
             }
         } else {
             decorationTable->palettes = spr_get_npc_palettes(part->currentAnimation >> 16);
             decorationTable->numPalettes = 0;
-            while (decorationTable->palettes[decorationTable->numPalettes] != -1) {
+            while ((s32)decorationTable->palettes[decorationTable->numPalettes] != -1) {
                 decorationTable->numPalettes++;
             }
         }
@@ -1105,14 +1120,14 @@ void func_8025A50C(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
         if (arg0 == 0) {
             decorationTable->palettes = spr_get_player_palettes(part->currentAnimation >> 16);
             decorationTable->numPalettes = 0;
-            while (decorationTable->palettes[decorationTable->numPalettes] != -1) {
+            while ((s32)decorationTable->palettes[decorationTable->numPalettes] != -1) {
                 decorationTable->numPalettes++;
             }
             decorationTable->unk_6CC = 6;
         } else {
             decorationTable->palettes = spr_get_npc_palettes(part->currentAnimation >> 16);
             decorationTable->numPalettes = 0;
-            while (decorationTable->palettes[decorationTable->numPalettes] != -1) {
+            while ((s32)decorationTable->palettes[decorationTable->numPalettes] != -1) {
                 decorationTable->numPalettes++;
             }
             decorationTable->unk_6CC = spr_get_npc_color_variations(part->currentAnimation >> 16);
@@ -1163,13 +1178,13 @@ void func_8025A74C(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
         if (arg0 == 0) {
             decorationTable->palettes = spr_get_player_palettes(part->currentAnimation >> 16);
             decorationTable->numPalettes = 0;
-            while (decorationTable->palettes[decorationTable->numPalettes] != -1) {
+            while ((s32)decorationTable->palettes[decorationTable->numPalettes] != -1) {
                 decorationTable->numPalettes++;
             }
         } else {
             decorationTable->palettes = spr_get_npc_palettes(part->currentAnimation >> 16);
             decorationTable->numPalettes = 0;
-            while (decorationTable->palettes[decorationTable->numPalettes] != -1) {
+            while ((s32)decorationTable->palettes[decorationTable->numPalettes] != -1) {
                 decorationTable->numPalettes++;
             }
         }
@@ -1262,14 +1277,14 @@ void func_8025AA80(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
         if (arg0 == 0) {
             decorationTable->palettes = spr_get_player_palettes(part->currentAnimation >> 16);
             decorationTable->numPalettes = 0;
-            while (decorationTable->palettes[decorationTable->numPalettes] != -1) {
+            while ((s32)decorationTable->palettes[decorationTable->numPalettes] != -1) {
                 decorationTable->numPalettes++;
             }
             decorationTable->unk_6C2 = 0;
         } else {
             decorationTable->palettes = spr_get_npc_palettes(part->currentAnimation >> 16);
             decorationTable->numPalettes = 0;
-            while (decorationTable->palettes[decorationTable->numPalettes] != -1) {
+            while ((s32)decorationTable->palettes[decorationTable->numPalettes] != -1) {
                 decorationTable->numPalettes++;
             }
             decorationTable->unk_6C2 = 0;
@@ -1321,14 +1336,14 @@ void func_8025AD90(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
         if (arg0 == 0) {
             decorationTable->palettes = spr_get_player_palettes(part->currentAnimation >> 16);
             decorationTable->numPalettes = 0;
-            while (decorationTable->palettes[decorationTable->numPalettes] != -1) {
+            while ((s32)decorationTable->palettes[decorationTable->numPalettes] != -1) {
                 decorationTable->numPalettes++;
             }
             decorationTable->unk_6CC = 6;
         } else {
             decorationTable->palettes = spr_get_npc_palettes(part->currentAnimation >> 16);
             decorationTable->numPalettes = 0;
-            while (decorationTable->palettes[decorationTable->numPalettes] != -1) {
+            while ((s32)decorationTable->palettes[decorationTable->numPalettes] != -1) {
                 decorationTable->numPalettes++;
             }
             decorationTable->unk_6CC = spr_get_npc_color_variations(part->currentAnimation >> 16);
@@ -1424,14 +1439,14 @@ void func_8025B1A8(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
         if (arg0 == 0) {
             decorationTable->palettes = spr_get_player_palettes(part->currentAnimation >> 16);
             decorationTable->numPalettes = 0;
-            while (decorationTable->palettes[decorationTable->numPalettes] != -1) {
+            while ((s32)decorationTable->palettes[decorationTable->numPalettes] != -1) {
                 decorationTable->numPalettes++;
             }
             decorationTable->unk_6CC = 6;
         } else {
             decorationTable->palettes = spr_get_npc_palettes(part->currentAnimation >> 16);
             decorationTable->numPalettes = 0;
-            while (decorationTable->palettes[decorationTable->numPalettes] != -1) {
+            while ((s32)decorationTable->palettes[decorationTable->numPalettes] != -1) {
                 decorationTable->numPalettes++;
             }
             decorationTable->unk_6CC = spr_get_npc_color_variations(part->currentAnimation >> 16);
@@ -1528,7 +1543,7 @@ void func_8025B5C0(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4, s
         if (arg0 == 0) {
             decorationTable->palettes = spr_get_player_palettes(part->currentAnimation >> 16);
             decorationTable->numPalettes = 0;
-            while (decorationTable->palettes[decorationTable->numPalettes] != -1) {
+            while ((s32)decorationTable->palettes[decorationTable->numPalettes] != -1) {
                 decorationTable->numPalettes++;
             }
 
@@ -1540,7 +1555,7 @@ void func_8025B5C0(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4, s
         } else {
             decorationTable->palettes = spr_get_npc_palettes(part->currentAnimation >> 16);
             decorationTable->numPalettes = 0;
-            while (decorationTable->palettes[decorationTable->numPalettes] != -1) {
+            while ((s32)decorationTable->palettes[decorationTable->numPalettes] != -1) {
                 decorationTable->numPalettes++;
             }
             decorationTable->unk_6CC = spr_get_npc_color_variations(part->currentAnimation >> 16);
