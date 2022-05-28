@@ -1,6 +1,16 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+dlabel D_80234810_6BBA10
+.word 0x0000005A, 0x00000087, 0x000000E1, 0x0000010E, 0x0000013B, 0x00000195
+
+dlabel D_80234828_6BBA28
+.double 14.4
+
+.section .text
+
 glabel func_8021B9A8_6A2BA8
 /* 6A2BA8 8021B9A8 27BDFF78 */  addiu     $sp, $sp, -0x88
 /* 6A2BAC 8021B9AC AFB10044 */  sw        $s1, 0x44($sp)

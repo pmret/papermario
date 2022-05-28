@@ -4,6 +4,7 @@
 #include "sprite/npc/lakitu.h"
 #include "sprite/npc/magikoopa.h"
 #include "sprite/npc/world_lakilester.h"
+#include "effects.h"
 
 enum {
     NPC_LAKITU0,
@@ -964,7 +965,7 @@ NpcSettings N(npcSettings_80243F10) = {
     .onHit = &EnemyNpcHit,
     .onDefeat = &EnemyNpcDefeat,
     .level = 20,
-}; 
+};
 
 NpcSettings N(npcSettings_80243F3C) = {
     .height = 34,
@@ -1736,42 +1737,27 @@ static s32 N(pad_66B4)[] = {
 
 // It seems like fx_sun was not properly defined for this file. Having a proper
 // declaration makes it not match.
+
 #ifdef AVOID_UB
-void fx_sun(s32, f32, f32, f32, f32, s32);
+void fx_sun_undeclared(s32, f32, f32, f32, f32, s32);
 #else
-void fx_sun(s32, s32, s32, s32, s32, s32);
+void fx_sun_undeclared(s32, s32, s32, s32, s32, s32);
 #endif
 
 ApiStatus N(func_8024030C_CDC9AC)(Evt* script, s32 isInitialCall) {
-    fx_sun(1, 0, 0, 0, 0, 0);
+    fx_sun_undeclared(1, 0, 0, 0, 0, 0);
     return ApiStatus_DONE2;
 }
 
-typedef struct N(unk_effect) {
-    char unk_00[0x30];
-    s32 unk_30;
-    s32 unk_34;
-    s32 unk_38;
-    char unk_3C[0x4];
-    s32 unk_40;
-    s32 unk_44;
-    s32 unk_48;
-} N(unk_effect);
-
-typedef struct N(temp) {
-    char unk_00[0xC];
-    N(unk_effect)* unk_0C;
-} N(temp);
-
 ApiStatus N(func_80240340_CDC9E0)(Evt* script, s32 isInitialCall) {
-    N(temp)* ptr = (N(temp)*) script->varTable[15];
+    EffectInstance* effect = (EffectInstance*) script->varTable[15];
 
-    ptr->unk_0C->unk_30 = 69;
-    ptr->unk_0C->unk_34 = 255;
-    ptr->unk_0C->unk_38 = 217;
-    ptr->unk_0C->unk_40 = 176;
-    ptr->unk_0C->unk_44 = 254;
-    ptr->unk_0C->unk_48 = 124;
+    ((LightningFXData*)effect->data)->unk_30 = 69;
+    ((LightningFXData*)effect->data)->unk_34 = 255;
+    ((LightningFXData*)effect->data)->unk_38 = 217;
+    ((LightningFXData*)effect->data)->unk_40 = 176;
+    ((LightningFXData*)effect->data)->unk_44 = 254;
+    ((LightningFXData*)effect->data)->unk_48 = 124;
     return ApiStatus_DONE2;
 }
 

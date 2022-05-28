@@ -15,7 +15,7 @@ void func_802B6000_E25D60(void) {
     s32 phi_s2, phi_s3, phi_s4;
     s32 temp_v1_2;
     s32 phi_s5 = 0;
-    
+
     if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
         playerStatus->flags &= ~(PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED | PLAYER_STATUS_FLAGS_80000);
         playerStatus->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_40000;
@@ -50,7 +50,7 @@ void func_802B6000_E25D60(void) {
         if (is_ability_active(ABILITY_DIZZY_ATTACK)) {
             phi_s2 = phi_s2 | 2;
         }
-        
+
         if (is_ability_active(ABILITY_SPEEDY_SPIN)) {
             playerSpinState->initialSpinTime = 30;
             playerSpinState->spinRate = 40.0f;
@@ -60,10 +60,10 @@ void func_802B6000_E25D60(void) {
             playerSpinState->frictionScale = 0.9f;
             phi_s2 |= 1;
         }
-        
+
         phi_s4 = -1;
         phi_s3 = 0x10010;
-        
+
         if (phi_s2) {
             if (phi_s2 & 4) {
                 phi_s4 = 2;
@@ -75,10 +75,10 @@ void func_802B6000_E25D60(void) {
                 phi_s3 = 0x10011;
             }
         }
-        
+
         playerSpinState->spinSoundID = SOUND_2111;
         temp_v1_2 = phi_s2 & ~2;
-        
+
         if (temp_v1_2 == 4) {
             playerSpinState->spinSoundID = SOUND_2113;
         }
@@ -88,10 +88,10 @@ void func_802B6000_E25D60(void) {
         if (temp_v1_2 == 5) {
             playerSpinState->spinSoundID = SOUND_2114;
         }
-        
+
         sfx_play_sound_at_player(playerSpinState->spinSoundID, 0);
         suggest_player_anim_setUnkFlag(phi_s3);
-        
+
         if ((clamp_angle(playerStatus->targetYaw - gCameras[gCurrentCameraID].currentYaw) <= 180.0f)) {
             playerStatus->spinRate = playerSpinState->spinRate;
         } else {
@@ -99,31 +99,31 @@ void func_802B6000_E25D60(void) {
             playerStatus->spinRate = -playerSpinState->spinRate;
         }
         if (phi_s2 != 0) {
-            playerStatus->unk_D8 = (void*)fx_46(phi_s4, (EffectWhirlwind* ) playerStatus, 1.0f, 1000);
+            playerStatus->unk_D8 = fx_46(phi_s4, playerStatus, 1.0f, 1000);
         }
-        
+
         phys_clear_spin_history();
         player_input_to_move_vector(&sp10, &sp14);
         playerStatus->targetYaw = sp10;
         playerSpinState->inputMagnitude = sp14;
     }
-    
+
     gSpinHistoryPosAngle[gSpinHistoryBufferPos++] = playerStatus->spriteFacingAngle;
-    
+
     if (gSpinHistoryBufferPos >= 6) {
         gSpinHistoryBufferPos = 0;
     }
-    
+
     gSpinHistoryPosX[gSpinHistoryBufferPos] = playerStatus->position.x;
     gSpinHistoryPosY[gSpinHistoryBufferPos] = playerStatus->position.y;
     gSpinHistoryPosZ[gSpinHistoryBufferPos] = playerStatus->position.z;
     gSpinHistoryPosAngle[gSpinHistoryBufferPos] = playerStatus->spriteFacingAngle;
     gSpinHistoryBufferPos++;
-    
+
     if (gSpinHistoryBufferPos >= 6) {
         gSpinHistoryBufferPos = 0;
     }
-    
+
     if (phi_s5 == 0 && (check_input_hammer() || check_input_jump())) {
         playerStatus->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_SPINNING;
         playerStatus->flags &= ~PLAYER_STATUS_FLAGS_20000;
@@ -132,20 +132,20 @@ void func_802B6000_E25D60(void) {
         playerStatus->targetYaw = sp10;
         return;
     }
-    
+
     if (playerSpinState->spinCountdown < 11 && playerStatus->pressedButtons & Z_TRIG) {
         playerSpinState->hasBufferedSpin = 1;
         playerSpinState->prevActionState = playerStatus->prevActionState;
         playerSpinState->bufferedStickAxis.x = playerStatus->stickAxis[0];
         playerSpinState->bufferedStickAxis.y = playerStatus->stickAxis[1];
     }
-    
+
     if (playerStatus->fallState >= 2) {
         playerSpinState->spinDirectionMagnitude = playerSpinState->spinDirectionMagnitude - 1.0f;;
         if (playerSpinState->spinDirectionMagnitude < 0.0f) {
             playerSpinState->spinDirectionMagnitude = 0.0f;
         }
-        
+
         sp10 = clamp_angle(playerStatus->targetYaw - gCameras[gCurrentCameraID].currentYaw);
         playerSpinState->spinDirection.x = sin_rad(sp10 * TAU / 360.0f) * playerSpinState->spinDirectionMagnitude;
         playerSpinState->spinDirection.y = -cos_rad((sp10 * TAU) / 360.0f) * playerSpinState->spinDirectionMagnitude;
@@ -160,7 +160,7 @@ void func_802B6000_E25D60(void) {
         playerStatus->currentSpeed = 0.0f;
         return;
     }
-    
+
     if (playerStatus->fallState == 0) {
         if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_40000) {
             playerStatus->fallState = 1;
@@ -171,15 +171,15 @@ void func_802B6000_E25D60(void) {
             }
         }
     }
-    
+
     if (!(playerStatus->currentStateTime > playerSpinState->fullSpeedSpinTime)) {
         temp_f24 = (playerSpinState->inputMagnitude) ? playerSpinState->speedScale : 0.0f;
         playerSpinState->spinDirectionMagnitude = playerSpinState->spinDirectionMagnitude + 0.9;
-        
+
         if (playerSpinState->spinDirectionMagnitude > 9.0f) {
             playerSpinState->spinDirectionMagnitude = 9.0f;
         }
-        
+
         sp10 = clamp_angle(playerStatus->targetYaw - gCameras[gCurrentCameraID].currentYaw);
         playerSpinState->spinDirection.x = sin_rad(sp10 * TAU / 360.0f) * playerSpinState->spinDirectionMagnitude;
         playerSpinState->spinDirection.y = -cos_rad(sp10 * TAU / 360.0f) * playerSpinState->spinDirectionMagnitude;
@@ -188,19 +188,19 @@ void func_802B6000_E25D60(void) {
         if (temp_f24 < 0.1) {
             temp_f24 = 0.1f;
         }
-        
+
         if (playerSpinState->inputMagnitude == 0.0f) {
             temp_f24 = 0.0f;
         }
 
-        playerSpinState->spinDirectionMagnitude -= 1.0f; 
+        playerSpinState->spinDirectionMagnitude -= 1.0f;
         if (playerSpinState->spinDirectionMagnitude < 0.0f) {
             playerSpinState->spinDirectionMagnitude = 0.0f;
         }
     }
 
     playerStatus->currentStateTime++;
-    
+
     switch (playerStatus->prevActionState) {
         case 0:
             player_input_to_move_vector(&sp10, &sp14);
@@ -228,11 +228,11 @@ void func_802B6000_E25D60(void) {
             playerStatus->fallState = 1;
         }
     }
-    
+
     if (playerStatus->fallState == 1) {
         sp10 = playerStatus->spriteFacingAngle;
         playerStatus->spriteFacingAngle = sp10 + playerStatus->spinRate;
-        
+
         if (playerSpinState->hasBufferedSpin != 0) {
             playerStatus->currentStateTime = 2;
             playerStatus->fallState = 2;

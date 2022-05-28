@@ -1,17 +1,17 @@
 #include "common.h"
 #include "effects_internal.h"
 
-extern Gfx D_090023E0[];
-extern Gfx D_09002440[];
-extern Gfx D_090023F8[];
-extern Gfx D_09002458[];
-extern Gfx D_090023B0[];
-extern Gfx D_09002410[];
-extern Gfx D_090023C8[];
-extern Gfx D_09002428[];
 extern Gfx D_09002000[];
 extern Gfx D_090020E8[];
 extern Gfx D_090021D0[];
+extern Gfx D_090023B0[];
+extern Gfx D_090023C8[];
+extern Gfx D_090023E0[];
+extern Gfx D_090023F8[];
+extern Gfx D_09002410[];
+extern Gfx D_09002428[];
+extern Gfx D_09002440[];
+extern Gfx D_09002458[];
 
 Gfx* D_E0076E90[] = { D_090023E0, D_090023E0, D_09002440, D_09002440 };
 Gfx* D_E0076EA0[] = { D_090023F8, D_090023F8, D_09002458, D_09002458 };
@@ -57,20 +57,20 @@ void aura_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, EffectInstance*
     part->unk_2C = 100;
     part->type = arg0;
     part->unk_30 = 0;
-    part->unk_28 = 0;
+    part->primA = 0;
     part->pos.x = arg1;
     part->pos.y = arg2;
     part->pos.z = arg3;
 
     switch (arg0) {
         case 0:
-            part->unk_68 = 75;
-            part->unk_69 = 75;
-            part->unk_6A = 75;
-            part->unk_6B = 255;
-            part->unk_6C = 247;
-            part->unk_6D = 155;
-            part->unk_6E = 0;
+            part->primR = 75;
+            part->primG = 75;
+            part->primB = 75;
+            part->envR = 255;
+            part->envG = 247;
+            part->engB = 155;
+            part->engA = 0;
             part->unk_24 = arg4;
             part->unk_20 = arg4 * 0.6;
             part->unk_1C = arg4 * 2.0;
@@ -84,13 +84,13 @@ void aura_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, EffectInstance*
             part->unk_60 = 0.9f;
             break;
         case 1:
-            part->unk_68 = 75;
-            part->unk_69 = 75;
-            part->unk_6A = 75;
-            part->unk_6B = 255;
-            part->unk_6C = 0;
-            part->unk_6D = 0;
-            part->unk_6E = 0;
+            part->primR = 75;
+            part->primG = 75;
+            part->primB = 75;
+            part->envR = 255;
+            part->envG = 0;
+            part->engB = 0;
+            part->engA = 0;
             part->unk_1C = arg4;
             part->unk_20 = arg4;
             part->unk_24 = arg4;
@@ -104,13 +104,13 @@ void aura_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, EffectInstance*
             part->unk_60 = 0.9f;
             break;
         case 2:
-            part->unk_68 = 25;
-            part->unk_69 = 121;
-            part->unk_6A = 142;
-            part->unk_6B = 34;
-            part->unk_6D = 255;
-            part->unk_6C = 0;
-            part->unk_6E = 81;
+            part->primR = 25;
+            part->primG = 121;
+            part->primB = 142;
+            part->envR = 34;
+            part->engB = 255;
+            part->envG = 0;
+            part->engA = 81;
             part->unk_1C = arg4;
             part->unk_20 = arg4;
             part->unk_24 = arg4;
@@ -124,13 +124,13 @@ void aura_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, EffectInstance*
             part->unk_60 = 1.04f;
             break;
         default:
-            part->unk_68 = 179;
-            part->unk_69 = 169;
-            part->unk_6A = 85;
-            part->unk_6B = 34;
-            part->unk_6D = 255;
-            part->unk_6C = 0;
-            part->unk_6E = 63;
+            part->primR = 179;
+            part->primG = 169;
+            part->primB = 85;
+            part->envR = 34;
+            part->engB = 255;
+            part->envG = 0;
+            part->engA = 63;
             part->unk_1C = arg4;
             part->unk_20 = arg4;
             part->unk_24 = arg4;
@@ -187,16 +187,16 @@ void aura_update(EffectInstance* effect) {
 
     if (type < 2) {
         if (unk_30 <= 10) {
-            data->unk_28 += (128 - data->unk_28) * 0.5;
+            data->primA += (128 - data->primA) * 0.5;
         }
     } else {
         if (unk_30 <= 10) {
-            data->unk_28 = (unk_30 * 0xFF) / 10;
+            data->primA = (unk_30 * 0xFF) / 10;
         }
     }
 
     if (unk_2C < 10) {
-        data->unk_28 *= 0.5;
+        data->primA *= 0.5;
     }
 
     if (type == 0) {
@@ -263,4 +263,68 @@ void func_E007684C(void) {
 void func_E0076854(void) {
 }
 
-INCLUDE_ASM(s32, "effects/aura", aura_appendGfx);
+void aura_appendGfx(void* effect) {
+    Matrix4f sp18, sp58, sp98;
+    EffectInstance* eff = (EffectInstance*)effect;
+    AuraFXData* data = ((EffectInstance*)effect)->data;
+    s32 type = data->type;
+    s32 primA = data->primA;
+    s32 v1, v2;
+
+    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPDisplayList(gMasterGfxPos++, D_E0076ED0[type]);
+
+    shim_guTranslateF(sp18, data->unk_10, data->unk_14, data->unk_18);
+    if (type == 2) {
+        shim_guRotateF(sp58, data->unk_64.f, 0.0f, 1.0f, 0.0f);
+    } else {
+        shim_guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    }
+    shim_guMtxCatF(sp58, sp18, sp98);
+    shim_guScaleF(sp58, data->unk_1C, data->unk_20, 1.0f);
+    shim_guMtxCatF(sp58, sp98, sp98);
+    if (type == 0) {
+        shim_guTranslateF(sp58, (-(data->unk_1C - data->unk_24) / data->unk_24) * 10.0f, 0.0f, 0.0f);
+        shim_guMtxCatF(sp58, sp98, sp98);
+    }
+    shim_guMtxF2L(sp98, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPDisplayList(gMasterGfxPos++, D_E0076EC0[type]);
+    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+
+    shim_guTranslateF(sp18, data->pos.x, data->pos.y, data->pos.z);
+    if (type == 2) {
+        shim_guRotateF(sp58, data->unk_64.f, 0.0f, 1.0f, 0.0f);
+    } else {
+        shim_guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    }
+    shim_guMtxCatF(sp58, sp18, sp98);
+    shim_guScaleF(sp58, data->unk_1C, data->unk_20, 1.0f);
+    shim_guMtxCatF(sp58, sp98, sp98);
+    if (type == 0) {
+        shim_guTranslateF(sp58, (-(data->unk_1C - data->unk_24) / data->unk_24) * 10.0f, 0.0f, 0.0f);
+        shim_guMtxCatF(sp58, sp98, sp98);
+    }
+    shim_guMtxF2L(sp98, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPDisplayList(gMasterGfxPos++, D_E0076EB0[type]);
+    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+
+    gDPSetPrimColor(gMasterGfxPos++, 0, 0, data->primR, data->primG, data->primB, primA);
+    gDPSetEnvColor(gMasterGfxPos++, data->envR, data->envG, data->engB, data->engA);
+
+    v1 = data->unk_34 * 4.0f;
+    v2 = data->unk_40 * 4.0f;
+
+    gDPSetTileSize(gMasterGfxPos++, 1, v1, v2, v1 + 124, v2 + 508);
+    gSPDisplayList(gMasterGfxPos++, D_E0076E90[type]);
+
+    v1 = data->unk_4C * 4.0f;
+    v2 = data->unk_58 * 4.0f;
+
+    gDPSetTileSize(gMasterGfxPos++, 1, v1 + 30, v2 + 30, v1 + 282, v2 + 538);
+    gSPDisplayList(gMasterGfxPos++, D_E0076EA0[type]);
+    gDPPipeSync(gMasterGfxPos++);
+}

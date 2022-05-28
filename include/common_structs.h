@@ -245,7 +245,7 @@ typedef struct PlayerData {
     /* 0x1C8 */ s16 storedItems[32];
     /* 0x208 */ s16 equippedBadges[64];
     /* 0x288 */ char unk_288;
-    /* 0x289 */ u8 merleeSpellType;
+    /* 0x289 */ s8 merleeSpellType;
     /* 0x28A */ s8 merleeCastsLeft;
     /* 0x28B */ char unk_28B;
     /* 0x28C */ s16 merleeTurnCount;
@@ -1616,7 +1616,7 @@ typedef struct ActorPartBlueprint {
     /* 0x14 */ s32 eventFlags;
     /* 0x18 */ s32 elementImmunityFlags;
     /* 0x1C */ s8 unk_1C;
-    /* 0x1C */ s8 unk_1D;
+    /* 0x1D */ s8 unk_1D;
     /* 0x1E */ char unk_1E[2];
     /* 0x20 */ s32 unk_20;
 } ActorPartBlueprint; // size = 0x24
@@ -2051,7 +2051,7 @@ typedef struct PlayerStatus {
     /* 0x0CC */ s32 shadowID;
     /* 0x0D0 */ f32* unk_D0;
     /* 0x0D4 */ f32 spinRate;
-    /* 0x0D8 */ UNK_PTR** unk_D8;
+    /* 0x0D8 */ struct EffectInstance* unk_D8; // effect 46
     /* 0x0DC */ s32 currentButtons;
     /* 0x0E0 */ s32 pressedButtons;
     /* 0x0E4 */ s32 heldButtons;
@@ -2286,7 +2286,7 @@ typedef struct PartnerActionStatus {
 
 typedef struct EntityModel {
     /* 0x00 */ s32 flags;
-    /* 0x04 */ u8 renderMode;
+    /* 0x04 */ s8 renderMode;
     /* 0x05 */ u8 unk_05;
     /* 0x06 */ u8 unk_06;
     /* 0x07 */ u8 unk_07;
@@ -2294,7 +2294,7 @@ typedef struct EntityModel {
     /* 0x0C */ f32 timeScale; ///< Default is 1.0
     /* 0x10 */ s32* cmdListReadPos;
     /* 0x14 */ Gfx* displayList;
-    /* 0x18 */ Matrix4s transform;
+    /* 0x18 */ Mtx transform;
     /* 0x58 */ s32* cmdListSavedPos;
     /* 0x5C */ Vtx* vertexArray;
     /* 0x60 */ UNK_FUN_PTR(fpSetupGfxCallback);

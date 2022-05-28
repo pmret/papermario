@@ -2,215 +2,162 @@
 #include "effects.h"
 #include "ld_addrs.h"
 #include "battle/item/mystery.png.h"
+#include "pause/pause_common.h"
+
+BSS s32 D_802A25B8[2];
 
 #include "ItemRefund.inc.c"
 
-#ifdef NON_EQUIVALENT
-
-extern s32 D_802A25E4;
-extern HudElement* D_802A25C8;
-extern s32 D_802A25EC;
-
-void N(func_802A123C_72C7EC)(void) {
-    s32 i;
-    HudElement** ptr;
-    s32 var;
-    s32* var2;
-
-    if (D_802A25E4 < 6) {
-        if (D_802A25E4 > 0) {
-            draw_box(0, 7, 0x6A, 0x56, 0, 0x24, 0x24, 0xFF, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0x140, 0xF0, 0);
-
-            gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, 108, 90, 139, 118);
-
-            ptr = &D_802A25C8;
-            for (i = 0; i < 7; i++) {
-                var2 = *ptr;
-                var = (D_802A25EC / 100) - 0x68;
-                ptr++;
-                hud_element_set_render_pos(var2, 0x7C, (i * 0x1A) - var);
-                hud_element_draw_without_clipping(var2);
-            }
-
-            var2 = D_802A25C8;
-            var = (D_802A25EC / 100) - 0x68;
-            hud_element_set_render_pos(var2, 0x7C, (i * 0x1A) - var);
-            hud_element_draw_without_clipping(var2);
-        }
-    }
-}
-#else
-INCLUDE_ASM(ApiStatus, "battle/item/mystery", battle_item_mystery_func_802A123C_72C7EC, Evt* script,
-            s32 isInitialCall);
-#endif
-
-#ifdef NON_EQUIVALENT
-
+extern s32 D_802A25C8[7];
 extern s32 D_802A25E4;
 extern s32 D_802A25E8;
 extern s32 D_802A25EC;
 extern s32 D_802A25F0;
 extern s32 D_802A25F4;
 extern s32 D_802A25F8;
-extern s16** D_802A25FC;
-extern HudElement** D_802A25C8;
-extern struct N(tempStc) gItemHudScripts[100];
+extern s32* D_802A25FC;
 
-ApiStatus N(func_802A13E4_72C994)(Evt* script, s32 isInitialCall) {
+void N(func_802A123C_72C7EC(void)) {
+    s32 var_s3;
+    s32 id;
+    s32 i;
+
+    if (D_802A25E4 < 6) {
+        if (D_802A25E4 > 0) {
+            draw_box(0, 7, 106, 86, 0, 36, 36, 255, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, NULL, NULL, NULL, SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
+            gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, 108, 90, 139, 118);
+
+            for (i = 0; i < ARRAY_COUNT(D_802A25C8); i++) {
+                id = D_802A25C8[i];
+                hud_element_set_render_pos(id, 124, (i * 26) + 104 - (D_802A25EC / 100));
+                hud_element_draw_without_clipping(id);
+            }
+            id = D_802A25C8[0];
+            hud_element_set_render_pos(id, 124, (i * 26) + 104 - (D_802A25EC / 100));
+            hud_element_draw_without_clipping(id);
+        }
+    }
+}
+
+s32 N(func_802A13E4_72C994)(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
+    s32 temp_a0_4;
+    s32 temp_v1_3;
+    s32 var_v0_2;
+    s32 var_v0_3;
+    s32 id;
+    s32 i;
 
     if (isInitialCall) {
         D_802A25E4 = 0;
     }
 
     switch (D_802A25E4) {
-        case 0: {
-            s32* tablePtr;
-            s32 i;
-            f32 t0;
-            f32 t1;
-            HudElement* icon;
-            HudElement** iconPtr;
-            struct N(tempStc)* ic;
-            ItemData* itemTable;
-
-            D_802A25F8 = create_generic_entity_frontUI(NULL, func_802A123C_72C7EC);
+        case 0:
+            D_802A25F8 = create_generic_entity_frontUI(NULL, N(func_802A123C_72C7EC));
             D_802A25EC = rand_int(18200);
             D_802A25F0 = 1000;
-            tablePtr = &D_802A25FC;
-            *tablePtr = N(D_802A227C_72D82C);
+            D_802A25FC = N(D_802A227C_72D82C);
 
             if (battleStatus->unk_432 > 0) {
-                get_screen_overlay_params(1, &t0, &t1);
-                if (t1 >= 215.0f) {
-                    *tablePtr = N(D_802A229C_72D84C);
+                u8 type;
+                f32 zoom;
+
+                get_screen_overlay_params(1, &type, &zoom);
+                if (zoom >= 215.0f) {
+                    D_802A25FC = N(D_802A229C_72D84C);
                 }
             }
 
-            i = 0;
-            ic = &gItemHudScripts;
-            itemTable = gItemTable;
-            iconPtr = &D_802A25C8;
-            for (; i < 7; i++, iconPtr++) {
-                icon = hud_element_create(ic[itemTable[D_802A25FC[i]].iconID].iconId);
-                *iconPtr = icon;
-                hud_element_set_flags(icon, HUD_ELEMENT_FLAGS_80);
+            for (i = 0; i < ARRAY_COUNT(D_802A25C8); i++) {
+                id = hud_element_create(gItemHudScripts[gItemTable[D_802A25FC[i]].hudElemID].enabled);
+                D_802A25C8[i] = id;
+                hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80);
             }
             D_802A25E4 = 1;
-        }
-        break;
-
-        case 1: {
-            s32* ECptr = &D_802A25EC;
-            s32* F0ptr = &D_802A25F0;
-
-            *ECptr += *F0ptr;
-            if (*ECptr / 100 > 181) {
-                s32* test = ECptr;
-                *test -= 0x4718;
+            return ApiStatus_BLOCK;
+        case 1:
+            D_802A25EC += D_802A25F0;
+            if (D_802A25EC / 100 >= 182) {
+                D_802A25EC -= 18200;
             }
 
-            if (*F0ptr > 400) {
-                *F0ptr -= 10;
-            } else if (*F0ptr > 100) {
-                *F0ptr -= 5;
+            if (D_802A25F0 > 400) {
+                D_802A25F0 -= 10;
+            } else if (D_802A25F0 > 100) {
+                D_802A25F0 -= 5;
             } else {
-                *F0ptr -= 1;
+                D_802A25F0 -= 1;
             }
 
             if (D_802A25F0 < 10) {
                 D_802A25E8 = D_802A25EC / 100;
-                if (D_802A25E8 % 26 < 13) {
+
+                if (((D_802A25EC / 100) % 26) < 13) {
                     if (rand_int(100) < 80) {
                         D_802A25E4 = 2;
                     } else {
                         D_802A25E4 = 3;
                     }
-                } else if (rand_int(100) < 60) {
+                    break;
+                }
+
+                if (rand_int(100) < 60) {
                     D_802A25E4 = 3;
                 } else {
                     D_802A25E4 = 2;
                 }
             }
-        }
-        break;
-
-        case 2: {
-            s32* E8ptr = &D_802A25E8;
-            s32 a, b, c, d;
-
-            d = *E8ptr % 26;
-            a = d;
-            c = a + 3;
-            if (c < 0) {
-                c = a + 6;
+            break;
+        case 2:
+            temp_a0_4 = D_802A25E8 % 26;
+            var_v0_2 = temp_a0_4 + 3;
+            if (var_v0_2 < 0) {
+                var_v0_2 += 3;
             }
-            d = c >> 2;
-            *E8ptr -= d;
-            D_802A25EC = *E8ptr * 100;
-            if (d == 0) {
+            temp_a0_4 = var_v0_2 >> 2;
+            D_802A25E8 -= temp_a0_4;
+            D_802A25EC = D_802A25E8 * 100;
+            if (temp_a0_4 == 0) {
                 D_802A25E4 = 4;
             }
-        }
-        break;
-
-        case 3: {
-            s32* E8ptr = &D_802A25E8;
-            s32 a, b, c, d;
-
-            d = *E8ptr % 26;
-            if (d == 0) {
+            break;
+        case 3:
+            temp_v1_3 = D_802A25E8 % 26;
+            if (temp_v1_3 == 0) {
                 D_802A25E4 = 4;
                 break;
             }
-            a = d;
-            b = 26;
-            b -= a;
-            c = b + 3;
-            if (c < 0) {
-                c = b + 6;
+            temp_a0_4 = 26 - temp_v1_3;
+            var_v0_3 = temp_a0_4 + 3;
+            if (var_v0_3 < 0) {
+                var_v0_3 += 3;
             }
-            c = c >> 2;
-            *E8ptr += c;
-            D_802A25EC = *E8ptr * 100;
-        }
-        break;
-
-        case 4: {
+            temp_a0_4 = var_v0_3 >> 2;
+            D_802A25E8 += temp_a0_4;
+            D_802A25EC = D_802A25E8 * 100;
+            break;
+        case 4:
             D_802A25F4 = 20;
             D_802A25E4 = 5;
-        }
-        break;
-
-        case 5: {
-            s32* F4ptr = &D_802A25F4;
-            s32 i;
-            s16 g;
-            HudElement** iconPtr;
-
-            if (*F4ptr != 0) {
-                *F4ptr -= 1;
+            break;
+        case 5:
+            if (D_802A25F4 != 0) {
+                D_802A25F4--;
                 break;
             }
-            iconPtr = &D_802A25C8;
-            i = D_802A25E8 / 26;
-            g = D_802A25FC[i];
-            battleStatus->selectedItemID = g;
-            script->varTable[0] = g;
-            free_generic_entity(D_802A25F8);
-            for (i = 0; i < 7; i++) {
-                hud_element_free(*iconPtr++);
-            }
-        }
-        return ApiStatus_DONE2;
-    }
 
+            var_v0_3 = i = D_802A25E8 / 26; // use of i required to match
+            battleStatus->selectedItemID = D_802A25FC[D_802A25E8 / 26];
+            script->varTable[0] = battleStatus->selectedItemID;
+            free_generic_entity(D_802A25F8);
+            for (i = 0; i < ARRAY_COUNT(D_802A25C8); i++) {
+                hud_element_free(D_802A25C8[i]);
+            }
+            return ApiStatus_DONE2;
+    }
     return ApiStatus_BLOCK;
 }
-#else
-INCLUDE_ASM(ApiStatus, "battle/item/mystery", battle_item_mystery_func_802A13E4_72C994, Evt* script,
-            s32 isInitialCall);
-#endif
 
 ApiStatus N(func_802A188C_72CE3C)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -260,7 +207,7 @@ Gfx N(displayList)[] = {
 };
 
 s32 N(modelCommandList)[] = {
-    0x00000004, 0x0000000D, 0x00000001, sizeof(N(displayList)) / sizeof(s32), &N(displayList), 0x00000002, 0x00000000,
+    0x00000004, 0x0000000D, 0x00000001, sizeof(N(displayList)) / sizeof(s32), (s32) &N(displayList), 0x00000002, 0x00000000,
 };
 
 s32 N(D_802A227C_72D82C)[8] = {

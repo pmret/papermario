@@ -56,7 +56,6 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
     cc_272_dir = f"{BUILD_TOOLS}/cc/gcc2.7.2/"
     cc_272 = f"{cc_272_dir}/gcc"
     cxx = f"{BUILD_TOOLS}/cc/gcc/g++"
-    compile_script = f"$python {BUILD_TOOLS}/cc_dsl/compile_script.py"
 
     CPPFLAGS_COMMON = "-Iver/$version/build/include -Iinclude -Isrc -Iassets/$version -D_LANGUAGE_C -D_FINALROM " \
                "-DVERSION=$version -DF3DEX_GBI_2 -D_MIPS_SZLONG=32"
@@ -103,13 +102,6 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
     ninja.rule("cc",
         description="gcc $in",
         command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} $cppflags -MD -MF $out.d $in -o - | {iconv} > $out.i && {ccache}{cc} {cflags} $cflags $out.i -o $out'",
-        depfile="$out.d",
-        deps="gcc",
-    )
-
-    ninja.rule("cc_dsl",
-        description="dsl $in",
-        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} $cppflags -MD -MF $out.d $in -o - | {compile_script} | {iconv} > $out.i && {cc} {cflags} $cflags $out.i -o $out'",
         depfile="$out.d",
         deps="gcc",
     )
@@ -345,7 +337,7 @@ class Configure:
 
                 if task == "yay0":
                     implicit.append(YAY0_COMPRESS_TOOL)
-                elif task in ["cc", "cc_dsl", "cxx"]:
+                elif task in ["cc", "cxx"]:
                     order_only.append("generated_headers_" + self.version)
 
                 ninja.build(
@@ -381,14 +373,10 @@ class Configure:
                     else: # papermario
                         cflags = "-fforce-addr"
 
-                # check for dsl
+                # c
                 task = "cc"
                 if entry.src_paths[0].suffixes[-1] == ".cpp":
                     task = "cxx"
-                with entry.src_paths[0].open() as f:
-                    s = f.read()
-                    if " SCRIPT(" in s or "#pragma SCRIPT" in s:
-                        task = "cc_dsl"
 
                 if seg.name.endswith("osFlash"):
                     task = "cc_ido"

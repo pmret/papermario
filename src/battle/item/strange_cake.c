@@ -1,209 +1,158 @@
 #include "strange_cake.h"
 #include "effects.h"
+#include "pause/pause_common.h"
+#include "hud_element.h"
 #include "battle/item/strange_cake1.png.h"
 #include "battle/item/strange_cake2.png.h"
 #include "battle/item/strange_cake3.png.h"
 
+BSS s32 D_802A2DC8[2];
+
 #include "ItemRefund.inc.c"
 
-#ifdef NON_EQUIVALENT
+extern HudScript* N(D_802A2848_732B48)[];
+extern s32 N(D_802A2858_732B58)[];
 
-extern s32 D_802A25E4;
-extern HudElement* D_802A2DF4;
-extern s32 D_802A2DD8;
-
-ApiStatus N(func_802A123C_73153C)(Evt* script, s32 isInitialCall) {
-    s32 i;
-    HudElement** ptr;
-    s32 var;
-    s32* var2;
-
-    if (D_802A25E4 < 6) {
-        if (D_802A25E4 > 0) {
-            draw_box(0, 7, 0x6A, 0x56, 0, 0x24, 0x24, 0xFF, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0x140, 0xF0, 0);
-
-            gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, 108, 90, 139, 118);
-
-            ptr = &D_802A2DF4;
-            for (i = 0; i < 7; i++) {
-                var2 = *ptr;
-                var = (D_802A2DD8 / 100) - 0x68;
-                ptr++;
-                hud_element_set_render_pos(var2, 0x7C, (i * 0x1A) - var);
-                hud_element_draw_without_clipping(var2);
-            }
-
-            var2 = D_802A2DF4;
-            var = (D_802A2DD8 / 100) - 0x68;
-            hud_element_set_render_pos(var2, 0x7C, (i * 0x1A) - var);
-            hud_element_draw_without_clipping(var2);
-        }
-    }
-}
-#else
-INCLUDE_ASM(ApiStatus, "battle/item/strange_cake", battle_item_strange_cake_func_802A123C_73153C);
-#endif
-
-#ifdef NON_EQUIVALENT
-
+extern s32 D_802A2DD8[5];
+extern s32 D_802A2DE4;
 extern s32 D_802A2DEC;
 extern s32 D_802A2DF0;
 extern s32 D_802A2DF4;
 extern s32 D_802A2DF8;
 extern s32 D_802A2DFC;
 extern s32 D_802A2E00;
-extern s32* D_802A2DD8;
-extern HudElement** D_802A25C8;
 
-s32 N(D_802A2848_732B48)[] = {
-    0x802A27F8, 0x802A2820, 0x802A27D0, 0x802A27F8
-};
+void N(func_802A123C_73153C(void)) {
+    s32 var_s3;
+    s32 id;
+    s32 i;
 
-s32 N(D_802A2858_732B58)[] = {
-    0x00000000, 0x00000001, 0x00000002, 0x00000000, 0x00000001
-};
+    if (D_802A2DEC < 6) {
+        if (D_802A2DEC > 0) {
+            draw_box(0, 7, 106, 86, 0, 36, 36, 255, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, NULL, NULL, NULL, SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
+            gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, 108, 90, 139, 118);
 
-ApiStatus N(func_802A13E4_7316E4)(Evt* script, s32 isInitialCall) {
+            for (i = 0; i < ARRAY_COUNT(D_802A2DD8); i++) {
+                id = D_802A2DD8[i];
+                hud_element_set_render_pos(id, 124, (i * 26) + 104 - (D_802A2DF4 / 100));
+                hud_element_draw_without_clipping(id);
+            }
+            id = D_802A2DD8[0];
+            hud_element_set_render_pos(id, 124, (i * 26) + 104 - (D_802A2DF4 / 100));
+            hud_element_draw_without_clipping(id);
+        }
+    }
+}
+
+s32 N(func_802A13E4_7316E4)(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
+    s32 temp_a0_4;
+    s32 temp_v1_3;
+    s32 var_v0_2;
+    s32 var_v0_3;
+    s32 id;
+    s32 i;
 
     if (isInitialCall) {
         D_802A2DEC = 0;
     }
 
     switch (D_802A2DEC) {
-        case 0: {
-            s32 i;
-            HudElement** iconPtr;
-
-            D_802A2E00 = create_generic_entity_frontUI(NULL, func_802A123C_73153C);
-            i = rand_int(13000);
-            D_802A2DF4 = i;
-
+        case 0:
+            D_802A2E00 = create_generic_entity_frontUI(NULL, N(func_802A123C_73153C));
+            D_802A2DF4 = rand_int(13000);
             D_802A2DF8 = 1000;
 
-            for (i = 0; i < 5; i++) {
-                s32* B48Ptr = &N(D_802A2848_732B48);
-                s32* B58Ptr = &N(D_802A2858_732B58);
-                HudElement* icon = hud_element_create(*(B48Ptr + * (B58Ptr + i)));
-
-                *(&D_802A2DD8 + i) = icon;
-                hud_element_set_flags(icon, HUD_ELEMENT_FLAGS_80);
+            for (i = 0; i < ARRAY_COUNT(D_802A2DD8); i++) {
+                id = hud_element_create(N(D_802A2848_732B48)[N(D_802A2858_732B58)[i]]);
+                D_802A2DD8[i] = id;
+                hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80);
             }
             D_802A2DEC = 1;
-        }
-        break;
 
-        case 1: {
-            s32* ECptr = &D_802A2DF4;
-            s32* F0ptr = &D_802A2DF8;
-
-            *ECptr += *F0ptr;
-            if (*ECptr / 100 >= 130) {
-                s32* test = ECptr;
-                *test -= 0x32C8;
+            return ApiStatus_BLOCK;
+        case 1:
+            D_802A2DF4 += D_802A2DF8;
+            if (D_802A2DF4 / 100 >= 130) {
+                D_802A2DF4 -= 13000;
             }
 
-            if (*F0ptr > 400) {
-                *F0ptr -= 10;
-            } else if (*F0ptr > 100) {
-                *F0ptr -= 5;
+            if (D_802A2DF8 > 400) {
+                D_802A2DF8 -= 10;
+            } else if (D_802A2DF8 > 100) {
+                D_802A2DF8 -= 5;
             } else {
-                *F0ptr -= 1;
+                D_802A2DF8 -= 1;
             }
 
             if (D_802A2DF8 < 10) {
                 D_802A2DF0 = D_802A2DF4 / 100;
-                if (D_802A2DF0 % 26 < 13) {
+
+                if (((D_802A2DF4 / 100) % 26) < 13) {
                     if (rand_int(100) < 80) {
                         D_802A2DEC = 2;
                     } else {
                         D_802A2DEC = 3;
                     }
-                } else if (rand_int(100) < 60) {
+                    break;
+                }
+
+                if (rand_int(100) < 60) {
                     D_802A2DEC = 3;
                 } else {
                     D_802A2DEC = 2;
                 }
             }
-        }
-        break;
-
-        case 2: {
-            s32* E8ptr = &D_802A2DF0;
-            s32 a, b, c, d;
-
-            d = *E8ptr % 26;
-            a = d;
-            c = a + 3;
-            if (c < 0) {
-                c = a + 6;
+            break;
+        case 2:
+            temp_a0_4 = D_802A2DF0 % 26;
+            var_v0_2 = temp_a0_4 + 3;
+            if (var_v0_2 < 0) {
+                var_v0_2 += 3;
             }
-            d = c >> 2;
-            *E8ptr -= d;
-            D_802A2DF4 = *E8ptr * 100;
-            if (d == 0) {
+            temp_a0_4 = var_v0_2 >> 2;
+            D_802A2DF0 -= temp_a0_4;
+            D_802A2DF4 = D_802A2DF0 * 100;
+            if (temp_a0_4 == 0) {
                 D_802A2DEC = 4;
             }
-        }
-        break;
-
-        case 3: {
-            s32* E8ptr = &D_802A2DF0;
-            s32 a, b, c, d;
-
-            d = *E8ptr % 26;
-            if (d == 0) {
+            break;
+        case 3:
+            temp_v1_3 = D_802A2DF0 % 26;
+            if (temp_v1_3 == 0) {
                 D_802A2DEC = 4;
                 break;
             }
-            a = d;
-            b = 26;
-            b -= a;
-            c = b + 3;
-            if (c < 0) {
-                c = b + 6;
+            temp_a0_4 = 26 - temp_v1_3;
+            var_v0_3 = temp_a0_4 + 3;
+            if (var_v0_3 < 0) {
+                var_v0_3 += 3;
             }
-            c = c >> 2;
-            *E8ptr += c;
-            D_802A2DF4 = *E8ptr * 100;
-        }
-        break;
-
-        case 4: {
+            temp_a0_4 = var_v0_3 >> 2;
+            D_802A2DF0 += temp_a0_4;
+            D_802A2DF4 = D_802A2DF0 * 100;
+            break;
+        case 4:
             D_802A2DFC = 20;
             D_802A2DEC = 5;
-        }
-        break;
-
-        case 5: {
-            s32* F4ptr = &D_802A2DFC;
-            s32 i;
-            s16 g;
-            HudElement** iconPtr;
-
-            if (*F4ptr != 0) {
-                *F4ptr -= 1;
+            break;
+        case 5:
+            if (D_802A2DFC != 0) {
+                D_802A2DFC--;
                 break;
             }
-            iconPtr = &D_802A25C8;
-            i = D_802A2DF0 / 26;
-            g = N(D_802A2858_732B58)[i];
-            battleStatus->selectedItemID = g;
-            script->varTable[0] = g;
-            free_generic_entity(D_802A2E00);
-            for (i = 0; i < 5; i++) {
-                hud_element_free(*iconPtr++);
-            }
-        }
-        return ApiStatus_DONE2;
-    }
 
+            var_v0_3 = i = D_802A2DF0 / 26; // use of i required to match
+            battleStatus->selectedItemID = N(D_802A2858_732B58)[var_v0_3];
+            script->varTable[0] = battleStatus->selectedItemID;
+            free_generic_entity(D_802A2E00);
+            for (i = 0; i < ARRAY_COUNT(D_802A2DD8); i++) {
+                hud_element_free(D_802A2DD8[i]);
+            }
+            return ApiStatus_DONE2;
+    }
     return ApiStatus_BLOCK;
 }
-#else
-INCLUDE_ASM(ApiStatus, "battle/item/strange_cake", battle_item_strange_cake_func_802A13E4_7316E4,
-            Evt* script, s32 isInitialCall);
-#endif
 
 ApiStatus N(func_802A1818_731B18)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -302,23 +251,38 @@ static s32 _pad = 0; // XXX
 #include "battle/item/strange_cake3.png.inc.c"
 #include "battle/item/strange_cake3.pal.inc.c"
 
-s32 N(data)[] = {
-    0x00000008, 0x00000005, 0x00000003, 0x00000004,
-    0x00000002, 0x0000003C, 0x802A2170, 0x802A2370,
-    0x00000003, 0x00000000, 0x00000008, 0x00000005,
-    0x00000003, 0x00000004, 0x00000002, 0x0000003C,
-    0x802A2390, 0x802A2590, 0x00000003, 0x00000000,
-    0x00000008, 0x00000005, 0x00000003, 0x00000004,
-    0x00000002, 0x0000003C, 0x802A25B0, 0x802A27B0,
-    0x00000003, 0x00000000
+HudScript N(D_802A27D0) = {
+    HUD_ELEMENT_OP_SetVisible,
+    HUD_ELEMENT_OP_SetTileSize, HUD_ELEMENT_SIZE_32x32, HUD_ELEMENT_OP_Loop,
+    HUD_ELEMENT_OP_SetCI, 60, (s32) battle_item_strange_cake1_png, (s32) battle_item_strange_cake1_pal,
+    0x00000003,
+    HUD_ELEMENT_OP_End,
 };
 
-s32 N(D_802A2848_732B48)[] = {
-    0x802A27F8, 0x802A2820, 0x802A27D0, 0x802A27F8
+HudScript N(D_802A27F8) = {
+    HUD_ELEMENT_OP_SetVisible,
+    HUD_ELEMENT_OP_SetTileSize, HUD_ELEMENT_SIZE_32x32, HUD_ELEMENT_OP_Loop,
+    HUD_ELEMENT_OP_SetCI, 60, (s32) battle_item_strange_cake2_png, (s32) battle_item_strange_cake2_pal,
+    0x00000003,
+    HUD_ELEMENT_OP_End,
 };
 
+HudScript N(D_802A2820) = {
+    HUD_ELEMENT_OP_SetVisible,
+    HUD_ELEMENT_OP_SetTileSize, HUD_ELEMENT_SIZE_32x32,
+    HUD_ELEMENT_OP_Loop,
+    HUD_ELEMENT_OP_SetCI, 60, (s32) battle_item_strange_cake3_png, (s32) battle_item_strange_cake3_pal,
+    0x00000003,
+    HUD_ELEMENT_OP_End
+};
+
+HudScript* N(D_802A2848_732B48)[] = {
+    &N(D_802A27F8), &N(D_802A2820), &N(D_802A27D0), &N(D_802A27F8)
+};
+
+// indexes into D_802A2848_732B48
 s32 N(D_802A2858_732B58)[] = {
-    0x00000000, 0x00000001, 0x00000002, 0x00000000, 0x00000001, 0x000000000
+    0, 1, 2, 0, 1, 0
 };
 
 EvtScript N(script6) = {

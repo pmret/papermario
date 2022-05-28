@@ -1,33 +1,115 @@
 #include "common.h"
 #include "world/actions.h"
 
-s32 WalkPeachAnims[] = { 
-    0x000A0002,	// none
-    0x000A002B,	// cream
-    0x000A002D,	// strawberry
-    0x000A002F,	// butter
-    0x000A0031,	// cleanser
-    0x000A0033,	// water
-    0x000A0035,	// milk
-    0x000A0037,	// flour
-    0x000A0039,	// egg
-    0x000A003B,	// complete cake
-    0x000A003D,	// cake bowl
-    0x000A003F,	// cake mixed
-    0x000A0041,	// cake pan
-    0x000A0043,	// cake batter
-    0x000A0045,	// cake bare
-    0x000A0047,	// salt
-    0x000A0049,	// sugar
-    0x000A004B,	// cake with icing
-    0x000A004D,	// cake with berries
+s32 WalkPeachAnims[] = {
+    0x000A0002, // none
+    0x000A002B, // cream
+    0x000A002D, // strawberry
+    0x000A002F, // butter
+    0x000A0031, // cleanser
+    0x000A0033, // water
+    0x000A0035, // milk
+    0x000A0037, // flour
+    0x000A0039, // egg
+    0x000A003B, // complete cake
+    0x000A003D, // cake bowl
+    0x000A003F, // cake mixed
+    0x000A0041, // cake pan
+    0x000A0043, // cake batter
+    0x000A0045, // cake bare
+    0x000A0047, // salt
+    0x000A0049, // sugar
+    0x000A004B, // cake with icing
+    0x000A004D, // cake with berries
     0x00000000
 };
 
 void action_run_update_peach(void);
+void func_802B65E8_E23CC8(void);
 
 // walk
-INCLUDE_ASM(void, "world/action/walk", func_802B6000_E236E0, void);
+void func_802B6000_E236E0(void) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    PlayerData* playerData = &gPlayerData;
+    f32 moveVectorMagnitude;
+    f32 moveVectorAngle;
+    s32 stickAxisX;
+    s32 stickAxisY;
+    s32 playerAnim;
+    s32 changedAnim = FALSE;
+    if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS) {
+        func_802B65E8_E23CC8();
+        return;
+    }
+
+    if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
+        playerStatus->flags &= ~(
+            PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED | PLAYER_STATUS_FLAGS_800000 | PLAYER_STATUS_FLAGS_80000);
+        playerStatus->unk_60 = 0;
+        changedAnim = TRUE;
+
+        if (!(playerStatus->flags & PLAYER_STATUS_ANIM_FLAGS_8BIT_MARIO)) {
+            playerStatus->currentSpeed = playerStatus->walkSpeed;
+        }
+
+        if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_8BIT_MARIO) {
+            playerAnim = 0x90003;
+        }
+        else if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT)) {
+            playerAnim = 0x10004;
+        }
+        else {
+            playerAnim = 0x60000;
+        }
+        suggest_player_anim_clearUnkFlag(playerAnim);
+    }
+
+    if (playerStatus->flags & PLAYER_STATUS_ANIM_FLAGS_8BIT_MARIO) {
+        playerStatus->targetYaw = playerStatus->heading;
+        try_player_footstep_sounds(8);
+        return;
+    }
+
+    player_input_to_move_vector(&moveVectorAngle, &moveVectorMagnitude);
+    phys_update_interact_collider();
+
+    if (!check_input_jump()) {
+        if (changedAnim != 0 || !check_input_hammer()) {
+            player_input_to_move_vector(&moveVectorAngle, &moveVectorMagnitude);
+            if (moveVectorMagnitude == 0.0f) {
+                set_action_state(ACTION_STATE_IDLE);
+                return;
+            }
+
+            if (fabsf(D_800F7B40 - moveVectorAngle) <= 90.0f && abs(moveVectorMagnitude - D_800F7B44) < 20) {
+                if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_80000000)) {
+                    if (moveVectorMagnitude >= 20.0f) {
+                        playerStatus->targetYaw = moveVectorAngle;
+                    }
+                }
+                playerStatus->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_80000000;
+            } else {
+                if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_80000000) {
+                    playerStatus->targetYaw = moveVectorAngle;
+                } else {
+                    playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_80000000;
+                }
+            }
+
+            if (!is_ability_active(ABILITY_SLOW_GO)) {
+                stickAxisX = playerStatus->stickAxis[0];
+                stickAxisY = playerStatus->stickAxis[1];
+                if (SQ(stickAxisX) + SQ(stickAxisY) > SQ(55)) {
+                    set_action_state(ACTION_STATE_RUN);
+                    return;
+                }
+            }
+
+            try_player_footstep_sounds(8);
+            playerData->walkingStepsTaken++;
+        }
+    }
+}
 
 // run
 void action_run_update(void) {
@@ -101,7 +183,7 @@ void action_run_update(void) {
             if (temp_v1 >= 0) {
                 playerStatus->targetYaw = moveX;
             }
-           playerStatus->animFlags &= ~0x80000000;
+            playerStatus->animFlags &= ~0x80000000;
         } else {
             temp_v1 = playerStatus->animFlags;
             temp_v1 = temp_v1 < 0;
