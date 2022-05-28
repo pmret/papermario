@@ -5,7 +5,7 @@
 #include "sprite.h"
 #include "nu/nusys.h"
 
-void appendGfx_intro_logos();
+void appendGfx_intro_logos(void);
 
 s32 D_800778C0[] = { 0, 0 };
 

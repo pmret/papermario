@@ -773,7 +773,6 @@ INCLUDE_ASM(void, "182B30", func_80257DA4);
 INCLUDE_ASM(void, "182B30", func_80258E14);
 
 s32 func_802591EC(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
-    s16 temp_v1;
     s32 opacity;
     s32 sprMask;
 
@@ -803,51 +802,51 @@ s32 func_802591EC(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
         }
         return 0;
     } else {
-    switch (part->decorationTable->unk_6C0) {
-        case 0:
-            func_80259A48(arg0, part, yaw, mtx, arg4);
-            return 0;
-        case 3:
-            func_80259AAC(arg0, part, yaw, mtx, arg4);
-            break;
-        case 4:
-            func_80259D9C(arg0, part, yaw, mtx, arg4);
-            break;
-        case 5:
-            func_8025A2C4(arg0, part, yaw, mtx, arg4);
-            break;
-        case 6:
-            func_8025A50C(arg0, part, yaw, mtx, arg4);
-            break;
-        case 7:
-            func_8025A74C(arg0, part, yaw, mtx, arg4);
-            break;
-        case 8:
-            func_8025AA80(arg0, part, yaw, mtx, arg4);
-            break;
-        case 9:
-            func_8025AD90(arg0, part, yaw, mtx, arg4);
-            break;
-        case 10:
-            func_8025B1A8(arg0, part, yaw, mtx, arg4);
-            break;
-        case 12:
-            func_8025B5C0(arg0, part, yaw, mtx, arg4, 0);
-            break;
-        case 13:
-            func_8025B5C0(arg0, part, yaw, mtx, arg4, 1);
-            break;
-        case 14:
-            func_8025BAA0(arg0, part, yaw, 0, mtx, arg4);
-            break;
-        case 15:
-            func_8025BAA0(arg0, part, yaw, 1, mtx, arg4);
-            break;
-        case 16:
-            func_8025C120(arg0, part, yaw, mtx, arg4);
-            break;
-        default:
-            break;
+        switch (part->decorationTable->unk_6C0) {
+            case 0:
+                func_80259A48(arg0, part, yaw, mtx, arg4);
+                return 0;
+            case 3:
+                func_80259AAC(arg0, part, yaw, mtx, arg4);
+                break;
+            case 4:
+                func_80259D9C(arg0, part, yaw, mtx, arg4);
+                break;
+            case 5:
+                func_8025A2C4(arg0, part, yaw, mtx, arg4);
+                break;
+            case 6:
+                func_8025A50C(arg0, part, yaw, mtx, arg4);
+                break;
+            case 7:
+                func_8025A74C(arg0, part, yaw, mtx, arg4);
+                break;
+            case 8:
+                func_8025AA80(arg0, part, yaw, mtx, arg4);
+                break;
+            case 9:
+                func_8025AD90(arg0, part, yaw, mtx, arg4);
+                break;
+            case 10:
+                func_8025B1A8(arg0, part, yaw, mtx, arg4);
+                break;
+            case 12:
+                func_8025B5C0(arg0, part, yaw, mtx, arg4, 0);
+                break;
+            case 13:
+                func_8025B5C0(arg0, part, yaw, mtx, arg4, 1);
+                break;
+            case 14:
+                func_8025BAA0(arg0, part, yaw, 0, mtx, arg4);
+                break;
+            case 15:
+                func_8025BAA0(arg0, part, yaw, 1, mtx, arg4);
+                break;
+            case 16:
+                func_8025C120(arg0, part, yaw, mtx, arg4);
+                break;
+            default:
+                break;
         }
     }
 
