@@ -906,7 +906,7 @@ void func_80259AAC(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
         u16* palOut = decorationTable->unk_00[i];
         decorationTable->unk_6D4[i] = palOut;
         if (palIn != NULL) {
-            for (j = 0; j < 16; j++) {
+            for (j = 0; j < ARRAY_COUNT(decorationTable->unk_00[i]); j++) {
                 u8 r = ((*palIn >> 11) & 0x1F);
                 u8 g = ((*palIn >> 6) & 0x1F);
                 u8 b = ((*palIn >> 1) & 0x1F);
@@ -961,7 +961,7 @@ void func_80259D9C(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
             palIn = decorationTable->palettes[i];
             palOut = decorationTable->unk_00[i];
             if (palIn != NULL) {
-                for (j = 0; j < 16; j++) {
+                for (j = 0; j < ARRAY_COUNT(decorationTable->unk_00[i]); j++) {
                     *palOut++ = *palIn++;
                 }
             }
@@ -991,7 +991,7 @@ void func_80259D9C(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
                 palIn = decorationTable->palettes[i];
                 palOut = decorationTable->unk_00[i];
                 if (palIn != NULL) {
-                    for (j = 0; j < 16; j++) {
+                    for (j = 0; j < ARRAY_COUNT(decorationTable->unk_00[i]); j++) {
                         *palOut++ = *palIn++;
                     }
                 }
@@ -1002,7 +1002,7 @@ void func_80259D9C(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
                 palIn = decorationTable->palettes[decorationTable->unk_6CC * 3 + i];
                 palOut = decorationTable->unk_00[i];
                 if (palIn != NULL) {
-                    for (j = 0; j < 16; j++) {
+                    for (j = 0; j < ARRAY_COUNT(decorationTable->unk_00[i]); j++) {
                         *palOut++ = *palIn++;
                     }
                 }
@@ -1013,7 +1013,7 @@ void func_80259D9C(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
                 palIn = decorationTable->palettes[i];
                 palOut = decorationTable->unk_00[i];
                 if (palIn != NULL) {
-                    for (j = 0; j < 16; j++) {
+                    for (j = 0; j < ARRAY_COUNT(decorationTable->unk_00[i]); j++) {
                         u8 r = ((*palIn >> 11) & 0x1F);
                         u8 g = ((*palIn >> 6) & 0x1F);
                         u8 b = ((*palIn >> 1) & 0x1F);
@@ -1079,7 +1079,7 @@ void func_8025A2C4(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
         palOut = decorationTable->unk_00[i];
         decorationTable->unk_6D4[i] = palOut;
         if (palIn != NULL) {
-            for (j = 0; j < 16; j++) {
+            for (j = 0; j < ARRAY_COUNT(decorationTable->unk_00[i]); j++) {
                 u8 r = ((*palIn >> 12) & 0xF);
                 u8 g = ((*palIn >> 7) & 0xF);
                 u8 b = ((*palIn >> 2) & 0xF);
@@ -1141,7 +1141,7 @@ void func_8025A50C(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
         palIn = decorationTable->palettes[i];
         palOut = decorationTable->unk_00[i];
         if (palIn != NULL) {
-            for (j = 0; j < 16; j++) {
+            for (j = 0; j < ARRAY_COUNT(decorationTable->unk_00[i]); j++) {
                 *palOut++ = *palIn++;
             }
         }
@@ -1150,7 +1150,7 @@ void func_8025A50C(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
         palIn = decorationTable->palettes[decorationTable->unk_6CC + i];
         palOut = decorationTable->unk_00[i];
         if (palIn != NULL) {
-            for (j = 0; j < 16; j++) {
+            for (j = 0; j < ARRAY_COUNT(decorationTable->unk_00[i]); j++) {
                 *palOut++ = *palIn++;
             }
         }
@@ -1197,7 +1197,7 @@ void func_8025A74C(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
         palIn = decorationTable->palettes[i];
         palOut = decorationTable->unk_00[i];
         if (palIn != NULL) {
-            for (j = 0; j < 16; j++) {
+            for (j = 0; j < ARRAY_COUNT(decorationTable->unk_00[i]); j++) {
                 u8 r = ((*palIn >> 11) & 0x1F);
                 u8 g = ((*palIn >> 6) & 0x1F);
                 u8 b = ((*palIn >> 1) & 0x1F);
@@ -1297,7 +1297,7 @@ void func_8025AA80(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
         u16* palIn = decorationTable->palettes[i];
         u16* palOut = decorationTable->unk_00[i];
         if (palIn != NULL) {
-            for (j = 0; j < 16; j++) {
+            for (j = 0; j < ARRAY_COUNT(decorationTable->unk_00[i]); j++) {
                 u8 r = ((*palIn >> 11) & 0x1F);
                 u8 g = ((*palIn >> 6) & 0x1F);
                 u8 b = ((*palIn >> 1) & 0x1F);
@@ -1352,7 +1352,7 @@ void func_8025AD90(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
             palIn = decorationTable->palettes[i];
             palOut = decorationTable->unk_00[i];
             if (palIn != NULL) {
-                for (j = 0; j < 16; j++) {
+                for (j = 0; j < ARRAY_COUNT(decorationTable->unk_00[i]); j++) {
                     *palOut++ = *palIn++;
                 }
             }
@@ -1382,7 +1382,7 @@ void func_8025AD90(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
                 palIn = decorationTable->palettes[i];
                 palOut = decorationTable->unk_00[i];
                 if (palIn != NULL) {
-                    for (j = 0; j < 16; j++) {
+                    for (j = 0; j < ARRAY_COUNT(decorationTable->unk_00[i]); j++) {
                         *palOut++ = *palIn++;
                     }
                 }
@@ -1393,7 +1393,7 @@ void func_8025AD90(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
                 palIn = decorationTable->palettes[decorationTable->unk_6CC * 5 + i];
                 palOut = decorationTable->unk_00[i];
                 if (palIn != NULL) {
-                    for (j = 0; j < 16; j++) {
+                    for (j = 0; j < ARRAY_COUNT(decorationTable->unk_00[i]); j++) {
                         *palOut++ = *palIn++;
                     }
                 }
@@ -1404,7 +1404,7 @@ void func_8025AD90(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
                 palIn = decorationTable->palettes[decorationTable->unk_6CC * 6 + i];
                 palOut = decorationTable->unk_00[i];
                 if (palIn != NULL) {
-                    for (j = 0; j < 16; j++) {
+                    for (j = 0; j < ARRAY_COUNT(decorationTable->unk_00[i]); j++) {
                         *palOut++ = *palIn++;
                     }
                 }
@@ -1455,7 +1455,7 @@ void func_8025B1A8(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
             palIn = decorationTable->palettes[i];
             palOut = decorationTable->unk_00[i];
             if (palIn != NULL) {
-                for (j = 0; j < 16; j++) {
+                for (j = 0; j < ARRAY_COUNT(decorationTable->unk_00[i]); j++) {
                     *palOut++ = *palIn++;
                 }
             }
@@ -1485,7 +1485,7 @@ void func_8025B1A8(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
                 palIn = decorationTable->palettes[i];
                 palOut = decorationTable->unk_00[i];
                 if (palIn != NULL) {
-                    for (j = 0; j < 16; j++) {
+                    for (j = 0; j < ARRAY_COUNT(decorationTable->unk_00[i]); j++) {
                         *palOut++ = *palIn++;
                     }
                 }
@@ -1496,7 +1496,7 @@ void func_8025B1A8(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
                 palIn = decorationTable->palettes[decorationTable->unk_6CC * 5 + i];
                 palOut = decorationTable->unk_00[i];
                 if (palIn != NULL) {
-                    for (j = 0; j < 16; j++) {
+                    for (j = 0; j < ARRAY_COUNT(decorationTable->unk_00[i]); j++) {
                         *palOut++ = *palIn++;
                     }
                 }
@@ -1507,7 +1507,7 @@ void func_8025B1A8(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
                 palIn = decorationTable->palettes[decorationTable->unk_6CC * 6 + i];
                 palOut = decorationTable->unk_00[i];
                 if (palIn != NULL) {
-                    for (j = 0; j < 16; j++) {
+                    for (j = 0; j < ARRAY_COUNT(decorationTable->unk_00[i]); j++) {
                         *palOut++ = *palIn++;
                     }
                 }
@@ -1573,7 +1573,7 @@ void func_8025B5C0(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4, s
             palIn2 = decorationTable->unk_00[i];
             decorationTable->unk_6D4[i] = palIn2;
             if (palIn != NULL) {
-                for (j = 0; j < 16; j++) {
+                for (j = 0; j < ARRAY_COUNT(decorationTable->unk_00[i]); j++) {
                     *palIn2++ = *palIn++;
                 }
             }
@@ -1583,7 +1583,7 @@ void func_8025B5C0(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4, s
             for (i = 0; i < decorationTable->unk_6CC; i++) {
                 palIn = decorationTable->palettes[decorationTable->unk_6CC + i];
                 palOut = decorationTable->unk_00[i];
-                for (j = 0; j < 16; j++) {
+                for (j = 0; j < ARRAY_COUNT(decorationTable->unk_00[i]); j++) {
                     *palOut++ = *palIn++;
                 }
             }
@@ -1615,7 +1615,7 @@ void func_8025B5C0(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4, s
                 palIn2 = decorationTable->palettes[decorationTable->unk_6CC * 2 + i];
                 palOut = decorationTable->unk_00[i];
 
-                for (j = 0; j < 16; j++) {
+                for (j = 0; j < ARRAY_COUNT(decorationTable->unk_00[i]); j++) {
                     u8 r = (*palIn >> 11) & 0x1F;
                     u8 g = (*palIn >> 6) & 0x1F;
                     u8 b = (*palIn >> 1) & 0x1F;
@@ -1692,7 +1692,7 @@ void func_8025BAA0(s32 arg0, ActorPart* part, s32 yaw, s32 arg3, Matrix4f mtx, s
             t1 = decorationTable->unk_00[i];
             decorationTable->unk_6D4[i] = t1;
             if (t2 != NULL) {
-                for (j = 0; j < 16; j++) {
+                for (j = 0; j < ARRAY_COUNT(decorationTable->unk_00[i]); j++) {
                     *t1++ = *t2++;
                 }
             }
@@ -1736,7 +1736,7 @@ void func_8025BAA0(s32 arg0, ActorPart* part, s32 yaw, s32 arg3, Matrix4f mtx, s
             palOut = decorationTable->unk_00[0];
             decorationTable->unk_6D4[0] = palOut;
 
-            for (j = 0; j < 16; t2++, t1++, j++) {
+            for (j = 0; j < ARRAY_COUNT(decorationTable->unk_00[0]); t2++, t1++, j++) {
                 s32 r1 = (*t1 >> 11) & 0x1F;
                 s32 r = (*t2 >> 11) & 0x1F;
                 s32 g1 = (*t1 >> 6) & 0x1F;
@@ -1781,7 +1781,7 @@ void func_8025BAA0(s32 arg0, ActorPart* part, s32 yaw, s32 arg3, Matrix4f mtx, s
             palOut = decorationTable->unk_00[0];
             decorationTable->unk_6D4[0] = palOut;
 
-            for (j = 0; j < 16; j++) {
+            for (j = 0; j < ARRAY_COUNT(decorationTable->unk_00[0]); j++) {
                 s32 r1 = (*t1 >> 11) & 0x1F;
                 s32 r = (*t2 >> 11) & 0x1F;
                 s32 g1 = (*t1 >> 6) & 0x1F;

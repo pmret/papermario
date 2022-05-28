@@ -99,7 +99,7 @@ ApiStatus func_8005DB00(Evt* script, s32 isInitialCall) {
         script->functionTemp[0] = 0;
     }
 
-    switch(script->functionTemp[0]) {
+    switch (script->functionTemp[0]) {
         case 0:
             npc->planarFlyDist = evt_get_float_variable(script, LW(0));
             npc->duration = evt_get_variable(script, LW(1));
@@ -110,8 +110,9 @@ ApiStatus func_8005DB00(Evt* script, s32 isInitialCall) {
             break;
         case 1:
             if (partnerStatus->actingPartner != PARTNER_BOW) {
-                if (npc->duration != 0 && npc->duration != script->functionTemp[0])
+                if (npc->duration != 0 && npc->duration != script->functionTemp[0]) {
                     return ApiStatus_BLOCK;
+                }
 
                 if (npc->duration == 0) {
                     if (sqrtf(SQ((playerStatus->position.x - npc->pos.x)) +

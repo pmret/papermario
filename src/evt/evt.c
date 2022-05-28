@@ -2063,7 +2063,7 @@ Bytecode* evt_skip_if(Evt* script) {
                 }
             break;
         }
-    } while(TRUE);
+    } while (TRUE);
 }
 
 Bytecode* evt_skip_else(Evt* script) {
@@ -2111,7 +2111,7 @@ Bytecode* evt_skip_else(Evt* script) {
                 nestedIfDepth++;
                 break;
         }
-    } while(TRUE);
+    } while (TRUE);
 }
 
 Bytecode* evt_goto_end_case(Evt* script) {
@@ -2139,7 +2139,7 @@ Bytecode* evt_goto_end_case(Evt* script) {
                 }
                 break;
         }
-    } while(TRUE);
+    } while (TRUE);
 }
 
 Bytecode* evt_goto_next_case(Evt* script) {
@@ -2182,7 +2182,7 @@ Bytecode* evt_goto_next_case(Evt* script) {
                 }
                 break;
         }
-    } while(TRUE);
+    } while (TRUE);
 }
 
 Bytecode* evt_goto_end_loop(Evt* script) {
@@ -2210,5 +2210,5 @@ Bytecode* evt_goto_end_loop(Evt* script) {
                 loopDepth++;
                 break;
         }
-    } while(TRUE);
+    } while (TRUE);
 }

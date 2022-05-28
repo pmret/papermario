@@ -132,7 +132,7 @@ typedef struct BlurBuffer {
     /* 0xA4 */ f32 z[20];
 } BlurBuffer; // size = 0xF4
 
-typedef s16 Palette16[16]; // size = 0x20
+typedef u16 Palette16[16]; // size = 0x20
 
 typedef struct Npc {
     /* 0x000 */ s32 flags;
@@ -1729,7 +1729,7 @@ typedef struct DecorationUnk {
 } DecorationUnk; // size = 0x10
 
 typedef struct DecorationTable {
-    /* 0x000 */ s16 unk_00[54][16];
+    /* 0x000 */ Palette16 unk_00[54];
     /* 0x6C0 */ s8 unk_6C0;
     /* 0x6C1 */ s8 unk_6C1;
     /* 0x6C2 */ s8 unk_6C2;
