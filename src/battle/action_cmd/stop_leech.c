@@ -146,7 +146,7 @@ void func_802A91F8_425788(void) {
     }
 }
 
-void func_802A94A4_425A34(void) {
+void N(draw_hud_elements)(void) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     s32 x, y;
     s32 hudElement;
@@ -161,7 +161,7 @@ void func_802A94A4_425A34(void) {
     func_80268798(x, y, actionCommandStatus->barFillLevel / 100, 2);
 }
 
-void func_802A9544_425AD4(void) {
+void N(free_hud_elements)(void) {
     hud_element_free(gActionCommandStatus.hudElements[0]);
     hud_element_free(gActionCommandStatus.hudElements[1]);
 }

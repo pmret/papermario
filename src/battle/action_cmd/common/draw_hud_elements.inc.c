@@ -1,6 +1,6 @@
 #include "common.h"
 
-void N(UnkActionCommandFunc1)(void) {
+void N(draw_hud_elements)(void) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
 
     s32 hudX;

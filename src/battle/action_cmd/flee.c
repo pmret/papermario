@@ -203,7 +203,7 @@ void func_802A9378_422E48(void) {
     }
 }
 
-void func_802A96F4_4231C4(void) {
+void N(draw_hud_elements)(void) {
     s32 y;
     s32 x;
     s32 temp_a1;
@@ -243,7 +243,7 @@ void func_802A96F4_4231C4(void) {
     hud_element_draw_clipped(actionCommandStatus->hudElements[4]);
 }
 
-void func_802A9894_423364(void) {
+void N(free_hud_elements)(void) {
     hud_element_free(gActionCommandStatus.hudElements[0]);
     hud_element_free(gActionCommandStatus.hudElements[1]);
     hud_element_free(gActionCommandStatus.hudElements[2]);
