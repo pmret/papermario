@@ -132,7 +132,7 @@ typedef struct BlurBuffer {
     /* 0xA4 */ f32 z[20];
 } BlurBuffer; // size = 0xF4
 
-typedef s16 Palette16[16]; // size = 0x20
+typedef u16 Palette16[16]; // size = 0x20
 
 typedef struct Npc {
     /* 0x000 */ s32 flags;
@@ -1649,7 +1649,7 @@ typedef struct ActorPart {
     /* 0x7C */ s32 eventFlags;
     /* 0x80 */ s32 partFlags3;
     /* 0x84 */ s32 unk_84;
-    /* 0x88 */ s32 currentAnimation;
+    /* 0x88 */ u32 currentAnimation;
     /* 0x8C */ s32 unk_8C;
     /* 0x90 */ f32 animationRate;
     /* 0x94 */ u32* idleAnimations;
@@ -1729,15 +1729,18 @@ typedef struct DecorationUnk {
 } DecorationUnk; // size = 0x10
 
 typedef struct DecorationTable {
-    /* 0x000 */ char unk_00[0x6C0];
+    /* 0x000 */ Palette16 unk_00[54];
     /* 0x6C0 */ s8 unk_6C0;
     /* 0x6C1 */ s8 unk_6C1;
     /* 0x6C2 */ s8 unk_6C2;
-    /* 0x6C3 */ char unk_6C3[10];
-    /* 0x6CD */ s8 unk_6CD;
-    /* 0x6CE */ char unk_6CE[6];
-    /* 0x6D4 */ s32* unk_6D4;
-    /* 0x6D8 */ char unk_6D8[0x68];
+    /* 0x6C3 */ char unk_6C3[5];
+    /* 0x6C8 */ s16 unk_6C8;
+    /* 0x6CA */ u16 unk_6CA;
+    /* 0x6CC */ s8 unk_6CC;
+    /* 0x6CD */ s8 numPalettes;
+    /* 0x6CE */ char unk_6CE[2];
+    /* 0x6D0 */ u16** palettes;
+    /* 0x6D4 */ u16* unk_6D4[27];
     /* 0x740 */ s16 unk_740;
     /* 0x742 */ s16 unk_742;
     /* 0x744 */ s16 unk_744;

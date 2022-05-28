@@ -34,9 +34,15 @@ s32 dma_copy(Addr romStart, Addr romEnd, void* vramDest);
 f32 rand_float(void);
 void copy_matrix(Matrix4f src, Matrix4f dest);
 
+s8 set_global_byte(s32 index, s32 value);
 s32 get_global_byte(s32 index);
+s32 set_global_flag(s32 index);
+s32 clear_global_flag(s32 index);
 s32 get_global_flag(s32 index);
+s8 set_area_byte(s32 index, s32 value);
 s32 get_area_byte(s32 index);
+s32 set_area_flag(s32 index);
+s32 clear_area_flag(s32 index);
 s32 get_area_flag(s32 index);
 
 Shadow* get_shadow_by_index(s32 index);
@@ -130,7 +136,7 @@ f32 player_check_collision_below(f32, s32* colliderID);
 s32 can_trigger_loading_zone(void);
 void func_80266684(void);
 void func_802667F0(s32, Actor*, f32, f32, f32);
-void func_802591EC(s32, ActorPart*, s32, Matrix4f*, s32);
+s32 func_802591EC(s32, ActorPart*, s32, Matrix4f, s32);
 
 HeapNode* general_heap_create(void);
 void* general_heap_malloc(s32 size);
@@ -731,14 +737,11 @@ s32 mdl_get_next_texture_address(s32);
 void draw_msg(s32 msgID, s32 posX, s32 posY, s32 opacity, s32 palette, u8 style);
 void get_background_color_blend(u8* r, u8* g, u8* b, u8* a);
 
-s8 set_global_byte(s32 index, s32 value);
-
 s32 entity_base_block_idle(Entity* entity);
 s32 recover_hp(s32 amt);
 s32 recover_fp(s32 amt);
 void entity_set_render_script(Entity* entity, u32* commandList);
 s32 entity_can_collide_with_jumping_player(Entity* entity);
-s32 set_global_flag(s32 index);
 void entity_base_block_init(Entity* entity);
 s32 entity_start_script(Entity* entity);
 void remove_item_entity_by_index(s32 index);
