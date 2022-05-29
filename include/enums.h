@@ -599,6 +599,7 @@ enum SoundIDs {
     SOUND_2F6                       = 0x000002F6,
     SOUND_2F7                       = 0x000002F7,
     SOUND_CLOSE_SHELL               = 0x000002FF,
+    SOUND_301                       = 0x00000301,
     SOUND_SHY_GUY_SCREAMS1          = 0x0000030C,
     SOUND_SHY_GUY_SCREAMS2          = 0x0000030D,
     SOUND_SHY_GUY_SCREAMS3          = 0x0000030E,

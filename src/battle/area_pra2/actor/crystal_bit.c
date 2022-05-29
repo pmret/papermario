@@ -301,7 +301,7 @@ EvtScript N(handleEvent) = {
             EVT_CALL(GetAnimation, ACTOR_SELF, 1, LW(1))
             EVT_EXEC_WAIT(DoNormalHit)
             EVT_CALL(func_8027D32C, ACTOR_SELF)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x301)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_301)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.8))
             EVT_CALL(GetActorPos, ACTOR_SELF, LW(1), LW(2), LW(3))
             EVT_CALL(SetGoalPos, ACTOR_SELF, LW(1), 0, LW(3))
@@ -363,7 +363,7 @@ EvtScript N(handleEvent) = {
             EVT_END_IF
             EVT_EXEC_WAIT(DoBurnHit)
             EVT_CALL(func_8027D32C, ACTOR_SELF)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x301)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_301)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.8))
             EVT_CALL(GetActorPos, ACTOR_SELF, LW(1), LW(2), LW(3))
             EVT_CALL(SetGoalPos, ACTOR_SELF, LW(1), 0, LW(3))
