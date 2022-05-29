@@ -12,7 +12,7 @@ enum N(StatusFlags) {
     N(FLAG_SUMMONED_CLONES_ONCE)    = 0x04,
     N(FLAG_FORBID_SECOND_ATTACK)    = 0x10,
     N(FLAG_HAS_CLONES)              = 0x20,
-    N(FLAG_NOT_IDLE)              = 0x40,
+    N(FLAG_NOT_IDLE)                = 0x40,
 };
 
 enum N(Phase) {
