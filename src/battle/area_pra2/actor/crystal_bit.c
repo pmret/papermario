@@ -224,7 +224,7 @@ EvtScript N(init) = {
     EVT_END
 };
 
-ApiStatus UpdateMiscParticles(Evt* script, s32 isInitialCall) {
+ApiStatus UpdateCrystalBitEffect(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Actor* actor = get_actor(script->owner1.actorID);
     ActorPart* actorPart = get_actor_part(actor, 1);
@@ -249,7 +249,7 @@ EvtScript N(idle) = {
     EVT_CALL(PlayEffect, EFFECT_MISC_PARTICLES, 1, 0, -1000, 0, 24, 24, EVT_FLOAT(1.0), 5, 0, 0, 0, 0, 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, 0, LW(15))
     EVT_CHILD_THREAD
-        EVT_CALL(UpdateMiscParticles, LW(15))
+        EVT_CALL(UpdateCrystalBitEffect, LW(15))
     EVT_END_CHILD_THREAD
     EVT_LOOP(0)
         EVT_WAIT_FRAMES(1)

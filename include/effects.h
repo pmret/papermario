@@ -674,6 +674,30 @@ typedef struct Effect6BFXData {
     /* 0x40 */ char unk_40[0x4];
 } Effect6BFXData; // size = 0x44
 
+typedef struct HuffPuffBreathFXData {
+    /* 0x00 */ char unk_00[0x18];
+    /* 0x18 */ s32 unk_18;
+    /* 0x1C */ s32 unk_1C;
+    /* 0x20 */ s32 unk_20;
+    /* 0x24 */ char unk_24[0x4];
+    /* 0x28 */ s32 unk_28;
+    /* 0x2C */ s32 unk_2C;
+    /* 0x30 */ s32 unk_30;
+} HuffPuffBreathFXData; // size = ?
+
+typedef struct LightningBoltFXData {
+    /* 0x00 */ char unk_00[0xC];
+    /* 0x0C */ f32 unk_0C;
+    /* 0x10 */ char unk_10[0x20];
+    /* 0x30 */ s32 unk_30;
+    /* 0x34 */ s32 unk_34;
+    /* 0x38 */ s32 unk_38;
+    /* 0x3C */ char unk_3C[0x4];
+    /* 0x40 */ s32 unk_40;
+    /* 0x44 */ s32 unk_44;
+    /* 0x48 */ s32 unk_48;
+} LightningBoltFXData; // size = ?
+
 typedef struct ColdBreathFXData {
     /* 0x00 */ char unk_00[0x18];
     /* 0x18 */ s32 unk_18;
