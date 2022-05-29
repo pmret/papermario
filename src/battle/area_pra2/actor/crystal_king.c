@@ -12,7 +12,7 @@ enum N(StatusFlags) {
     N(FLAG_SUMMONED_CLONES_ONCE)    = 0x04,
     N(FLAG_FORBID_SECOND_ATTACK)    = 0x10,
     N(FLAG_HAS_CLONES)              = 0x20,
-    N(STATUS_NOT_IDLE)              = 0x40,
+    N(FLAG_NOT_IDLE)              = 0x40,
 };
 
 enum N(Phase) {
@@ -275,7 +275,7 @@ EvtScript N(FlyWithClones) = {
     EVT_SET(LW(15), 0)
     EVT_LABEL(1)
     EVT_CALL(GetActorVar, ACTOR_ENEMY0, N(VAR_FLAGS), LW(0))
-    EVT_IF_NOT_FLAG(LW(0), N(STATUS_NOT_IDLE))
+    EVT_IF_NOT_FLAG(LW(0), N(FLAG_NOT_IDLE))
         EVT_SET(LW(0), ACTOR_SELF)
         EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_CLONE1_ID), LW(1))
         EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_CLONE2_ID), LW(2))
@@ -545,7 +545,7 @@ EvtScript N(handleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(GetActorVar, ACTOR_ENEMY0, N(VAR_FLAGS), LW(0))
-    EVT_BITWISE_OR_CONST(LW(0), N(STATUS_NOT_IDLE))
+    EVT_BITWISE_OR_CONST(LW(0), N(FLAG_NOT_IDLE))
     EVT_CALL(SetActorVar, ACTOR_ENEMY0, N(VAR_FLAGS), LW(0))
     EVT_CALL(SetPartAlpha, ACTOR_SELF, 1, 255)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LW(0))
@@ -793,7 +793,7 @@ EvtScript N(handleEvent) = {
         EVT_CASE_DEFAULT
     EVT_END_SWITCH
     EVT_CALL(GetActorVar, ACTOR_ENEMY0, N(VAR_FLAGS), LW(0))
-    EVT_BITWISE_AND_CONST(LW(0), ~N(STATUS_NOT_IDLE))
+    EVT_BITWISE_AND_CONST(LW(0), ~N(FLAG_NOT_IDLE))
     EVT_CALL(SetActorVar, ACTOR_ENEMY0, N(VAR_FLAGS), LW(0))
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
@@ -1550,7 +1550,7 @@ EvtScript N(AttackIcyBreathWithClones) = {
     EVT_CALL(UseIdleAnimation, LW(10), FALSE)
     EVT_CALL(UseIdleAnimation, LW(11), FALSE)
     EVT_CALL(GetActorVar, ACTOR_ENEMY0, N(VAR_FLAGS), LW(0))
-    EVT_BITWISE_OR_CONST(LW(0), N(STATUS_NOT_IDLE))
+    EVT_BITWISE_OR_CONST(LW(0), N(FLAG_NOT_IDLE))
     EVT_CALL(SetActorVar, ACTOR_ENEMY0, N(VAR_FLAGS), LW(0))
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
@@ -1663,7 +1663,7 @@ EvtScript N(AttackIcyBreathWithClones) = {
             EVT_WAIT_FRAMES(20)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(GetActorVar, ACTOR_ENEMY0, N(VAR_FLAGS), LW(0))
-            EVT_BITWISE_AND_CONST(LW(0), ~N(STATUS_NOT_IDLE))
+            EVT_BITWISE_AND_CONST(LW(0), ~N(FLAG_NOT_IDLE))
             EVT_CALL(SetActorVar, ACTOR_ENEMY0, N(VAR_FLAGS), LW(0))
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_CALL(UseIdleAnimation, LW(10), TRUE)
@@ -1730,7 +1730,7 @@ EvtScript N(AttackIcyBreathWithClones) = {
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_CALL(GetActorVar, ACTOR_ENEMY0, N(VAR_FLAGS), LW(0))
-    EVT_BITWISE_AND_CONST(LW(0), ~N(STATUS_NOT_IDLE))
+    EVT_BITWISE_AND_CONST(LW(0), ~N(FLAG_NOT_IDLE))
     EVT_CALL(SetActorVar, ACTOR_ENEMY0, N(VAR_FLAGS), LW(0))
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_CALL(UseIdleAnimation, LW(10), TRUE)
