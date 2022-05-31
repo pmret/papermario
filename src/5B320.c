@@ -232,7 +232,7 @@ s32 pad_after_move_table[] = {
     0x00000000, 0x00000000, 0x00000000
 };
 
-s32 gMessageBoxFrameParts[] = {
+s32* gMessageBoxFrameParts[] = {
 	D_802EBFF0, D_802EC010, D_802EC030, D_802EC050,
 	D_802EC070, D_802EC090, D_802EC0B0, D_802EC0D0,
 	D_802EC0F0, D_802EC110, D_802EC130, D_802EC150,

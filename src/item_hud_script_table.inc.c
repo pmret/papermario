@@ -1,5 +1,5 @@
-extern HudScript_MoveDiamond[];
-extern HudScript_MoveDiamondDisabled[];
+extern HudScript HudScript_MoveDiamond[];
+extern HudScript HudScript_MoveDiamondDisabled[];
 
 IconHudScriptPair gItemHudScripts[] = {
 { .enabled = NULL, .disabled = NULL },
