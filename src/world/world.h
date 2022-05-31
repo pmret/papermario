@@ -3,6 +3,4 @@
 
 #include "common.h"
 
-extern const s32 D_800989A0[];
-
 #endif
