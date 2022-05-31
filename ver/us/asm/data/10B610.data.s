@@ -60,10 +60,52 @@ dlabel Entity_InertRedBlock
 .word 0x42000020, D_802E9F9C, 0x00000000, entity_init_Hammer1Block_normal, D_802E9E0C, entity_block_handle_collision, 0x00E42740, 0x00E431F0, 0x13191919
 
 dlabel D_802EA0C4
-.word 0x42800020, D_802EA044, 0x00000000, entity_base_block_init, D_802E9EB4, entity_block_handle_collision, 0x00E3DDB0, 0x00E3E260, 0x0D191919, 0x42000020, D_802E9FB8, 0x00000000, entity_MulticoinBlock_init, D_802E9F28, entity_block_handle_collision, 0x00E3DDB0, 0x00E3E260, 0x0E191919, 0x42800020, D_802E9FD4, 0x00000000, entity_init_Hammer1Block_normal, D_802E9F00, entity_block_handle_collision, 0x00E31530, 0x00E31A30, 0x15323232, 0x42800020, D_802E9FD4, 0x00000000, entity_init_Hammer1Block_normal, D_802E9F00, entity_block_handle_collision, 0x00E31530, 0x00E31A30, 0x15643232, 0x42800020, D_802E9FD4, 0x00000000, entity_init_Hammer1Block_normal, D_802E9F00, entity_block_handle_collision, 0x00E31530, 0x00E31A30, 0x15323264, 0x42800020, D_802E9FD4, 0x00000000, entity_init_HammerBlock_small, D_802E9DCC, entity_block_handle_collision, 0x00E31530, 0x00E31A30, 0x18191919, 0x42800020, D_802E9FF0, 0x00000000, entity_base_block_init, D_802E9DCC, entity_block_handle_collision, 0x00E31A30, 0x00E31F30, 0x16323232, 0x42800020, D_802E9FF0, 0x00000000, entity_base_block_init, D_802E9DCC, entity_block_handle_collision, 0x00E31A30, 0x00E31F30, 0x16643232, 0x42800020, D_802E9FF0, 0x00000000, entity_base_block_init, D_802E9DCC, entity_block_handle_collision, 0x00E31A30, 0x00E31F30, 0x16323264, 0x42800020, D_802E9FF0, 0x00000000, entity_init_HammerBlock_small, D_802E9DCC, entity_block_handle_collision, 0x00E31A30, 0x00E31F30, 0x19191919, 0x42800020, D_802EA00C, 0x00000000, entity_base_block_init, D_802E9DCC, entity_block_handle_collision, 0x00E31F30, 0x00E32420, 0x17323232, 0x42800020, D_802EA00C, 0x00000000, entity_base_block_init, D_802E9DCC, entity_block_handle_collision, 0x00E31F30, 0x00E32420, 0x17643232, 0x42800020, D_802EA00C, 0x00000000, entity_base_block_init, D_802E9DCC, entity_block_handle_collision, 0x00E31F30, 0x00E32420, 0x17323264, 0x42800020, D_802EA00C, 0x00000000, entity_init_HammerBlock_small, D_802E9DCC, entity_block_handle_collision, 0x00E31F30, 0x00E32420, 0x1A191919
+.word 0x42800020, D_802EA044, 0x00000000, entity_base_block_init, D_802E9EB4, entity_block_handle_collision, 0x00E3DDB0, 0x00E3E260, 0x0D191919
+
+dlabel D_802EA0E8
+.word 0x42000020, D_802E9FB8, 0x00000000, entity_MulticoinBlock_init, D_802E9F28, entity_block_handle_collision, 0x00E3DDB0, 0x00E3E260, 0x0E191919
+
+dlabel D_802EA10C
+.word 0x42800020, D_802E9FD4, 0x00000000, entity_init_Hammer1Block_normal, D_802E9F00, entity_block_handle_collision, 0x00E31530, 0x00E31A30, 0x15323232
+
+dlabel D_802EA130
+.word 0x42800020, D_802E9FD4, 0x00000000, entity_init_Hammer1Block_normal, D_802E9F00, entity_block_handle_collision, 0x00E31530, 0x00E31A30, 0x15643232
+
+dlabel D_802EA154
+.word 0x42800020, D_802E9FD4, 0x00000000, entity_init_Hammer1Block_normal, D_802E9F00, entity_block_handle_collision, 0x00E31530, 0x00E31A30, 0x15323264
+
+dlabel D_802EA178
+.word 0x42800020, D_802E9FD4, 0x00000000, entity_init_HammerBlock_small, D_802E9DCC, entity_block_handle_collision, 0x00E31530, 0x00E31A30, 0x18191919
+
+dlabel D_802EA19C
+.word 0x42800020, D_802E9FF0, 0x00000000, entity_base_block_init, D_802E9DCC, entity_block_handle_collision, 0x00E31A30, 0x00E31F30, 0x16323232
+
+dlabel D_802EA1C0
+.word 0x42800020, D_802E9FF0, 0x00000000, entity_base_block_init, D_802E9DCC, entity_block_handle_collision, 0x00E31A30, 0x00E31F30, 0x16643232
+
+dlabel D_802EA1E4
+.word 0x42800020, D_802E9FF0, 0x00000000, entity_base_block_init, D_802E9DCC, entity_block_handle_collision, 0x00E31A30, 0x00E31F30, 0x16323264
+
+dlabel D_802EA208
+.word 0x42800020, D_802E9FF0, 0x00000000, entity_init_HammerBlock_small, D_802E9DCC, entity_block_handle_collision, 0x00E31A30, 0x00E31F30, 0x19191919
+
+dlabel D_802EA22C
+.word 0x42800020, D_802EA00C, 0x00000000, entity_base_block_init, D_802E9DCC, entity_block_handle_collision, 0x00E31F30, 0x00E32420, 0x17323232
+
+dlabel D_802EA250
+.word 0x42800020, D_802EA00C, 0x00000000, entity_base_block_init, D_802E9DCC, entity_block_handle_collision, 0x00E31F30, 0x00E32420, 0x17643232
+
+dlabel D_802EA274
+.word 0x42800020, D_802EA00C, 0x00000000, entity_base_block_init, D_802E9DCC, entity_block_handle_collision, 0x00E31F30, 0x00E32420, 0x17323264
+
+dlabel D_802EA298
+.word 0x42800020, D_802EA00C, 0x00000000, entity_init_HammerBlock_small, D_802E9DCC, entity_block_handle_collision, 0x00E31F30, 0x00E32420, 0x1A191919
 
 dlabel D_802EA2BC
-.word 0x40000020, D_802EA028, 0x00000000, entity_base_block_init, D_802E9DCC, entity_block_handle_collision, 0x00E3DA60, 0x00E3DDB0, 0x0C191919, 0x40000020, D_802EA060, 0x00000000, entity_base_block_init, D_802E9D90, entity_block_handle_collision, 0x00E43B20, 0x00E44800, 0x211E1919, 0x00000000, 0x00000000, 0x00000000
+.word 0x40000020, D_802EA028, 0x00000000, entity_base_block_init, D_802E9DCC, entity_block_handle_collision, 0x00E3DA60, 0x00E3DDB0, 0x0C191919
+
+dlabel D_802EA2E0
+.word 0x40000020, D_802EA060, 0x00000000, entity_base_block_init, D_802E9D90, entity_block_handle_collision, 0x00E43B20, 0x00E44800, 0x211E1919, 0x00000000, 0x00000000, 0x00000000
 
 dlabel D_802EA310
 .word 0x00000003, 0x00000002, 0x00000000, 0x00000007, 0x20000000, 0x00000000
@@ -99,7 +141,10 @@ dlabel D_802EA52C
 .word 0x00000004, 0x00000001, 0x00000001, 0x0000003C, 0x0A000A90, 0x00000002, 0x00000000
 
 dlabel D_802EA548
-.word 0x00000004, 0x00000016, 0x00000001, 0x0000003C, 0x0A000A90, 0x00000002, 0x00000000, 0x42000020, D_802EA4F4, 0x00000000, entity_ItemBlock_init, D_802EA328, entity_block_handle_collision, 0x00E3B870, 0x00E3C320, 0x0F191919, 0x42000020, D_802EA510, 0x00000000, entity_HiddenItemBlock_init, D_802EA38C, entity_block_handle_collision, 0x00E3B870, 0x00E3C320, 0x11191919, 0x42000020, D_802EA52C, 0x00000000, entity_ItemBlock_init, D_802EA328, entity_block_handle_collision, 0x00E3C320, 0x00E3CDD0, 0x14191919, 0x42000020, D_802EA548, 0x00000000, entity_HiddenItemBlock_init, D_802EA38C, entity_block_handle_collision, 0x00E3C320, 0x00E3CDD0, 0x12191919, 0xC2080020, 0x0000023C, 0x00000084, entity_ItemlessBlock_init, D_802EA440, entity_block_handle_collision, D_802EA4C4, 0x00000000, 0x10191919
+.word 0x00000004, 0x00000016, 0x00000001, 0x0000003C, 0x0A000A90, 0x00000002, 0x00000000
+
+dlabel D_802EA564
+.word 0x42000020, D_802EA4F4, 0x00000000, entity_ItemBlock_init, D_802EA328, entity_block_handle_collision, 0x00E3B870, 0x00E3C320, 0x0F191919, 0x42000020, D_802EA510, 0x00000000, entity_HiddenItemBlock_init, D_802EA38C, entity_block_handle_collision, 0x00E3B870, 0x00E3C320, 0x11191919, 0x42000020, D_802EA52C, 0x00000000, entity_ItemBlock_init, D_802EA328, entity_block_handle_collision, 0x00E3C320, 0x00E3CDD0, 0x14191919, 0x42000020, D_802EA548, 0x00000000, entity_HiddenItemBlock_init, D_802EA38C, entity_block_handle_collision, 0x00E3C320, 0x00E3CDD0, 0x12191919, 0xC2080020, 0x0000023C, 0x00000084, entity_ItemlessBlock_init, D_802EA440, entity_block_handle_collision, D_802EA4C4, 0x00000000, 0x10191919
 
 dlabel Entity_HitGroundedYellowBlock
 .word 0x42080020, 0x0000023C, 0x00000084, entity_ItemlessBlock_init, D_802EA3F0, 0x00000000, D_802EA4C4, 0x00000000, 0x0F191919

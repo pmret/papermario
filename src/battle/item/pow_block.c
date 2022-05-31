@@ -51,7 +51,7 @@ EvtScript N(main) = {
     EVT_SET_CONST(EVT_VAR(10), 0x00000090)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_WAIT_FRAMES(10)
-    EVT_CALL(MakeEntity, 0x802EA2E0, -40, 60, 0, 0, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, D_802EA2E0, -40, 60, 0, 0, MAKE_ENTITY_END)
     EVT_SET(EVT_VAR(10), EVT_VAR(0))
     EVT_CALL(N(func_802A1318_718B68))
     EVT_CALL(PlayEffect, 0x7, 2, -40, 60, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0)

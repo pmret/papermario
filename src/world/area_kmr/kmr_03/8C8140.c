@@ -1,5 +1,6 @@
 #include "kmr_03.h"
 #include "sprite/npc/goompa.h"
+#include "variables.h"
 
 enum {
     NPC_GOOMPA,
@@ -270,20 +271,20 @@ EvtScript N(802414C8) = {
 
 EvtScript N(makeEntities) = {
     EVT_IF_LT(EVT_SAVE_VAR(0), -117)
-        EVT_CALL(MakeEntity, 0x802EA10C, 45, 0, 70, 15, MAKE_ENTITY_END)
+        EVT_CALL(MakeEntity, D_802EA10C, 45, 0, 70, 15, MAKE_ENTITY_END)
         EVT_CALL(AssignScript, EVT_PTR(N(80241470)))
     EVT_ELSE
         EVT_CALL(ModifyColliderFlags, 0, 9, 0x7FFFFE00)
     EVT_END_IF
     EVT_IF_EQ(EVT_SAVE_FLAG(54), 0)
-        EVT_CALL(MakeEntity, 0x802EA19C, 230, 0, 310, 15, MAKE_ENTITY_END)
+        EVT_CALL(MakeEntity, D_802EA19C, 230, 0, 310, 15, MAKE_ENTITY_END)
         EVT_CALL(AssignScript, EVT_PTR(N(802414A8)))
     EVT_END_IF
     EVT_CALL(MakeEntity, 0x802EA588, 230, 60, 310, 15, 151, MAKE_ENTITY_END)
     EVT_CALL(AssignBlockFlag, EVT_SAVE_FLAG(52))
     EVT_CALL(MakeEntity, EVT_PTR(D_802EA0C4), 230, 50, -160, 15, MAKE_ENTITY_END)
     EVT_CALL(MakeEntity, EVT_PTR(D_802EA0C4), 165, 0, 380, 20, MAKE_ENTITY_END)
-    EVT_CALL(MakeEntity, 0x802EA564, -170, 0, 370, 43, 343, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, D_802EA564, -170, 0, 370, 43, 343, MAKE_ENTITY_END)
     EVT_CALL(AssignBlockFlag, EVT_SAVE_FLAG(50))
     EVT_CALL(MakeEntity, 0x802EAA54, 345, 75, -250, 0, 100, MAKE_ENTITY_END)
     EVT_CALL(MakeItemEntity, ITEM_COIN, 345, 205, -250, 17, EVT_SAVE_FLAG(56))
