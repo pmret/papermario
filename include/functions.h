@@ -118,6 +118,7 @@ void update_enemy_shadows(void);
 void update_hero_shadows(void);
 
 // append gfx funcs
+void appendGfx_background_texture(void);
 void func_80257B28(void*);
 void func_8025595C(void*);
 void func_80257B68(void*);
@@ -530,13 +531,51 @@ void func_80266D6C(ActorPart*, s32);
 char* int_to_string(s32, char*, s32);
 
 Evt* get_script_by_index(s32 index);
+Evt* get_script_by_id(s32 id);
+s32 partner_test_enemy_collision(s32 arg0);
 
 s32 get_lava_reset_pos(f32* x, f32* y, f32* z);
 void start_rumble(s32, s32);
 void update_locomotion_state(void);
 void start_rumble_type(u32);
 void start_falling(void);
+void start_bounce_a(void);
 void start_bounce_b(void);
+
+void update_input(void);
+void update_max_rumble_duration(void);
+void func_8011BAE8(void);
+void update_generic_entities(void);
+void update_triggers(void);
+void update_scripts(void);
+void update_messages(void);
+void step_current_game_mode(void);
+void update_entities(void);
+void func_80138198(void);
+void bgm_update_music_settings(void);
+void update_ambient_sounds(void);
+void sfx_update_looping_sound_params(void);
+void update_windows(void);
+void sfx_stop_env_sounds(void);
+void player_render_interact_prompts(void);
+void func_802C3EE4(void);
+void render_screen_overlay_backUI(void);
+void render_generic_entities_backUI(void);
+void render_effects_UI(void);
+void state_render_backUI(void);
+void render_window_root(void);
+void render_messages(void);
+void render_generic_entities_frontUI(void);
+void render_screen_overlay_frontUI(void);
+void render_curtains(void);
+void state_render_frontUI(void);
+void fio_init_flash(void);
+void func_80028838(void);
+void clear_screen_overlays(void);
+void bgm_reset_sequence_players(void);
+void reset_ambient_sounds(void);
+void sfx_clear_sounds(void);
+void poll_rumble(void);
 
 void set_action_state(s32 actionState);
 s32 get_collider_type_by_id(s32 colliderID);
@@ -880,6 +919,9 @@ void func_8025DD40(ActorPart*, s32);
 void func_8025DE88(ActorPart*, s32);
 void func_800E9894(void);
 void func_8013A854(u32);
+
+void set_script_flags(Evt* script, s32 flags);
+void clear_script_flags(Evt* script, s32 flags);
 
 void disable_player_blur(void);
 void enable_player_blur(void);
