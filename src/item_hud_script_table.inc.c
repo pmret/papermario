@@ -1,3 +1,6 @@
+extern HudScript_MoveDiamond[];
+extern HudScript_MoveDiamondDisabled[];
+
 IconHudScriptPair gItemHudScripts[] = {
 { .enabled = NULL, .disabled = NULL },
 { .enabled = &HudScript_Item_SpicySoup, .disabled = &HudScript_Item_SpicySoup_disabled },
@@ -328,7 +331,7 @@ IconHudScriptPair gItemHudScripts[] = {
 { .enabled = &HudScript_Item_CakeMixed, .disabled = &HudScript_Item_CakeMixed },
 { .enabled = &HudScript_Item_CakeIcing, .disabled = &HudScript_Item_CakeIcing },
 { .enabled = &HudScript_Item_CakeBerries, .disabled = &HudScript_Item_CakeBerries },
-{ .enabled = (HudScript*)0x80109338, .disabled = (HudScript*)0x801093D8 },
+{ .enabled = &HudScript_MoveDiamond, .disabled = &HudScript_MoveDiamondDisabled },
 { .enabled = &HudScript_Item_Hammer1, .disabled = &HudScript_Item_Hammer1 },
 { .enabled = &HudScript_Item_Hammer2, .disabled = &HudScript_Item_Hammer2 },
 { .enabled = &HudScript_Item_Hammer3, .disabled = &HudScript_Item_Hammer3 },

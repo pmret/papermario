@@ -329,4 +329,38 @@ extern EntityBlueprint Entity_ShatteringHammer2BlockTiny;
 extern EntityBlueprint Entity_ShatteringHammer3BlockTiny;
 extern EntityBlueprint Entity_ShatteringBrickBlock;
 
+
+extern s32 D_802EBFF0[];
+extern s32 D_802EC010[];
+extern s32 D_802EC030[];
+extern s32 D_802EC050[];
+extern s32 D_802EC070[];
+extern s32 D_802EC090[];
+extern s32 D_802EC0B0[];
+extern s32 D_802EC0D0[];
+extern s32 D_802EC0F0[];
+extern s32 D_802EC110[];
+extern s32 D_802EC130[];
+extern s32 D_802EC150[];
+extern s32 D_802EC170[];
+extern s32 D_802EC190[];
+extern s32 D_802EC1B0[];
+extern s32 D_802EC1D0[];
+extern s32 D_802EC1F0[];
+extern s32 D_802EC210[];
+extern s32 D_802EC230[];
+extern s32 D_802EC250[];
+extern s32 D_802EC270[];
+extern s32 D_802EC290[];
+extern s32 D_802EC2B0[];
+extern s32 D_802EC2D0[];
+extern s32 D_802EC2F0[];
+extern s32 D_802EC310[];
+extern s32 D_802EC330[];
+extern s32 D_802EC350[];
+extern s32 D_802EC370[];
+extern s32 D_802EC390[];
+extern s32 D_802EC3B0[];
+extern s32 D_802EC3D0[];
+
 #endif
