@@ -91,6 +91,7 @@ segments:
     - [0x31650, c, 31650]
     - [0x33450, c]
     - [0x341D0, c, 341d0]
+    - [0x341D0, c, 5B320]
     - [0x35080, c, effects]
     - [0x35AC0, c, world/world]
     - [0x362A0, c, collision]
