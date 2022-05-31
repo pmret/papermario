@@ -108,7 +108,7 @@ static s32 N(pad_47C) = {
 };
 
 EvtScript N(makeEntities) = {
-    EVT_CALL(MakeEntity, D_802EA564, 500, 60, 75, 0, 163, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, EVT_PTR(Entity_D_802EA564), 500, 60, 75, 0, 163, MAKE_ENTITY_END)
     EVT_CALL(AssignBlockFlag, EVT_SAVE_FLAG(1065))
     EVT_RETURN
     EVT_END

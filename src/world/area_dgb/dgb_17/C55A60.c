@@ -109,7 +109,7 @@ EvtScript N(main) = {
 
 EvtScript N(makeEntities) = {
     EVT_CALL(MakeEntity, EVT_PTR(Entity_SavePoint), -300, 60, 75, 0, MAKE_ENTITY_END)
-    EVT_CALL(MakeEntity, 0x802EA7E0, -450, 60, 75, 0, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, EVT_PTR(Entity_HeartBlock), -450, 60, 75, 0, MAKE_ENTITY_END)
     EVT_RETURN
     EVT_END
 };
