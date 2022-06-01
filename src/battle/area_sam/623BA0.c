@@ -38,7 +38,7 @@ ApiStatus func_80218B2C_6246CC(Evt* script, s32 isInitialCall) {
 INCLUDE_ASM(s32, "battle/area_sam/623BA0", func_80218E88_624A28);
 
 ApiStatus func_80219304_624EA4(Evt* script, s32 isInitialCall) {
-    UnkDuplighost* unkDuplighost = (UnkDuplighost*)get_actor(script->owner1.actorID)->state.varTable[2];
+    WattEffectData* unkDuplighost = (WattEffectData*)get_actor(script->owner1.actorID)->state.varTable[2];
 
     unkDuplighost->flags = 0;
 
@@ -55,7 +55,7 @@ ApiStatus func_80219304_624EA4(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_80219358_624EF8(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    UnkDuplighost* unkDuplighost = (UnkDuplighost*)get_actor(script->owner1.actorID)->state.varTable[2];
+    WattEffectData* unkDuplighost = (WattEffectData*)get_actor(script->owner1.actorID)->state.varTable[2];
 
     unkDuplighost->unk_04 = evt_get_variable(script, *args++);
     return ApiStatus_DONE2;
@@ -63,7 +63,7 @@ ApiStatus func_80219358_624EF8(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_802193A4_624F44(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    UnkDuplighost* unkDuplighost = (UnkDuplighost*)get_actor(script->owner1.enemyID)->state.varTable[2];
+    WattEffectData* unkDuplighost = (WattEffectData*)get_actor(script->owner1.enemyID)->state.varTable[2];
 
     unkDuplighost->unk_0C = evt_get_variable(script, *args++);
     return ApiStatus_DONE2;
@@ -71,7 +71,7 @@ ApiStatus func_802193A4_624F44(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_802193F0_624F90(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    UnkDuplighost* unkDuplighost = (UnkDuplighost*)get_actor(script->owner1.enemyID)->state.varTable[2];
+    WattEffectData* unkDuplighost = (WattEffectData*)get_actor(script->owner1.enemyID)->state.varTable[2];
 
     unkDuplighost->unk_10 = evt_get_variable(script, *args++);
     return ApiStatus_DONE2;

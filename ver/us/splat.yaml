@@ -4410,11 +4410,18 @@ segments:
     vram: 0x80218000
     overlay: True
     subsegments:
-    - [0x669D80, c]
-    - [0x66B5B0, c]
-    - [0x66B920, c]
-    - [0x66BC90, data]
-    - [0x684750]
+    - [0x669D80, c, actor/duplighost]
+    - [0x66B370, c, actor/swoopula]
+    - [0x66B5B0, c, actor/white_clubba]
+    - [0x66B5B0, c, actor/red_magikoopa]
+    - [0x66B920, c, actor/gray_magikoopa]
+    - [0x66BC90, c, stage/pra_01]
+    - [0x66BC90, c, stage/pra_02]
+    - [0x66BC90, c, stage/pra_03]
+    - [0x66BC90, c, stage/pra_03b]
+    - [0x66BC90, c, stage/pra_03c]
+    - [0x66BC90, c, stage/pra_04]
+    - [0x66BC90, c, area]
   - dir: battle/area_kpa
     type: code
     start: 0x684A30
