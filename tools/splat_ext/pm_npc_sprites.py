@@ -10,7 +10,7 @@ import xml.etree.ElementTree as ET
 import struct
 
 import pylibyaml
-import yaml
+import yaml as yaml_loader
 
 class Sprite:
     def __init__(self):
@@ -253,13 +253,42 @@ class Component:
 class N64SegPm_npc_sprites(N64Segment):
     DEFAULT_SPRITE_NAMES = [f"{i:02X}" for i in range(0xEA)]
 
-    def __init__(self, rom_start, rom_end, type, name, vram_start, extract, given_subalign, given_is_overlay, given_dir, args, yml):
-        super().__init__(rom_start, rom_end, type, name, vram_start, extract, given_subalign, given_is_overlay, given_dir, args, yml)
+    def __init__(
+        self,
+        rom_start,
+        rom_end,
+        type,
+        name,
+        vram_start,
+        extract,
+        given_subalign,
+        exclusive_ram_id,
+        given_dir,
+        symbol_name_format,
+        symbol_name_format_no_rom,
+        args,
+        yaml,
+    ):
+        super().__init__(
+            rom_start,
+            rom_end,
+            type,
+            name,
+            vram_start,
+            extract,
+            given_subalign,
+            exclusive_ram_id,
+            given_dir,
+            symbol_name_format=symbol_name_format,
+            symbol_name_format_no_rom=symbol_name_format_no_rom,
+            args=args,
+            yaml=yaml,
+        )
 
-        self.files = yml["files"]
+        self.files = yaml["files"]
 
         with (Path(__file__).parent / f"{self.name}.yaml").open("r") as f:
-            self.sprite_cfg = yaml.load(f.read(), Loader=yaml.SafeLoader)
+            self.sprite_cfg = yaml_loader.load(f.read(), Loader=yaml_loader.SafeLoader)
 
     def split(self, rom_bytes):
         out_dir = options.get_asset_path() / self.dir / self.name

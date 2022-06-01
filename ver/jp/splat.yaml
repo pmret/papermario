@@ -17,7 +17,9 @@ options:
   asset_path: assets/jp
   build_path: ver/jp/build
   cache_path: ver/jp/.splat_cache
+  create_undefined_funcs_auto: False
   undefined_funcs_auto_path: ver/jp/undefined_funcs_auto.txt
+  create_undefined_syms_auto: False
   undefined_syms_auto_path: ver/jp/undefined_syms_auto.txt
 asset_stack:
   - jp

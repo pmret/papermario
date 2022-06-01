@@ -7,7 +7,7 @@ options:
   mnemonic_ljust: 10
   platform: n64
   subalign: 8
-  auto_all_sections: True
+  auto_all_sections: [".data", ".rodata", ".bss"]
 
   base_path: ../..
   target_path: ver/us/baserom.z64
@@ -37,7 +37,8 @@ segments:
     subsegments:
     - [0x0040, asm, boot]
     - [0x0B70, bin, rspboot_font]
-  - type: code
+  - name: main
+    type: code
     start: 0x1000
     vram: 0x80025C00
     subsegments:
@@ -1085,7 +1086,8 @@ segments:
       - [0x161E70, .data,      pause_gfx]
     - [0x162D30, .data,      pause_styles]
     - [0x1632A0]
-  - type: code
+  - name: filemenu
+    type: code
     start: 0x163400
     vram: 0x80242BA0
     subsegments:
