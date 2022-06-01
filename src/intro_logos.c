@@ -13,7 +13,7 @@ void intro_logos_set_fade_color(s16 color) {
 s32 intro_logos_fade_in(s16 subtractAlpha) {
     if (gGameStatusPtr->bootAlpha != 0) {
         gGameStatusPtr->bootAlpha -= subtractAlpha;
-        if (gGameStatusPtr->bootAlpha << 16 < 0) {
+        if (gGameStatusPtr->bootAlpha < 0) {
             gGameStatusPtr->bootAlpha = 0;
         }
     } else {

@@ -27,7 +27,52 @@
 
 extern void* actionCommandDmaTable[23];
 extern s32 D_8029FBC0;
-extern s16 D_8029FC4C;
+
+void action_command_jump_draw_hud_elements(void);
+void action_command_hammer_draw_hud_elements(void);
+void action_command_flee_draw_hud_elements(void);
+void action_command_break_free_draw_hud_elements(void);
+void action_command_whirlwind_draw_hud_elements(void);
+void action_command_stop_leech_draw_hud_elements(void);
+void action_command_07_draw_hud_elements(void);
+void action_command_dizzy_shell_draw_hud_elements(void);
+void action_command_fire_shell_draw_hud_elements(void);
+void action_command_0A_draw_hud_elements(void);
+void action_command_bomb_draw_hud_elements(void);
+void action_command_body_slam_draw_hud_elements(void);
+void action_command_air_lift_draw_hud_elements(void);
+void action_command_air_raid_draw_hud_elements(void);
+void action_command_squirt_draw_hud_elements(void);
+void action_command_power_shock_draw_hud_elements(void);
+void action_command_mega_shock_draw_hud_elements(void);
+void action_command_smack_draw_hud_elements(void);
+void action_command_spiny_surge_draw_hud_elements(void);
+void action_command_hurricane_draw_hud_elements(void);
+void action_command_spook_draw_hud_elements(void);
+void action_command_water_block_draw_hud_elements(void);
+void action_command_tidal_wave_draw_hud_elements(void);
+void action_command_jump_free_hud_elements(void);
+void action_command_hammer_free_hud_elements(void);
+void action_command_flee_free_hud_elements(void);
+void action_command_break_free_free_hud_elements(void);
+void action_command_whirlwind_free_hud_elements(void);
+void action_command_07_free_hud_elements(void);
+void action_command_dizzy_shell_free_hud_elements(void);
+void action_command_fire_shell_free_hud_elements(void);
+void action_command_0A_free_hud_elements(void);
+void action_command_bomb_free_hud_elements(void);
+void action_command_body_slam_free_hud_elements(void);
+void action_command_air_lift_free_hud_elements(void);
+void action_command_air_raid_free_hud_elements(void);
+void action_command_squirt_free_hud_elements(void);
+void action_command_power_shock_free_hud_elements(void);
+void action_command_mega_shock_free_hud_elements(void);
+void action_command_smack_free_hud_elements(void);
+void action_command_spiny_surge_free_hud_elements(void);
+void action_command_hurricane_free_hud_elements(void);
+void action_command_spook_free_hud_elements(void);
+void action_command_water_block_free_hud_elements(void);
+void action_command_tidal_wave_free_hud_elements(void);
 
 ApiStatus LoadActionCommand(Evt* script, s32 isInitialCall) {
     s32 cmd = evt_get_variable(script, *script->ptrReadPos);
@@ -51,6 +96,7 @@ s32 func_80268224(s32 arg0) {
     return arg0;
 }
 
+void func_80268284(s32, s32, s32, s32);
 INCLUDE_ASM(s32, "196AA0", func_80268284);
 
 void func_80268770(s32 arg0, s32 arg1, s32 arg2) {
@@ -198,10 +244,165 @@ void func_80268938(void) {
     }
 }
 
-void func_80268AF8(void);
-INCLUDE_ASM(s32, "196AA0", func_80268AF8);
+void func_80268AF8(void) {
+    switch (gActionCommandStatus.actionCommandID) {
+        case ACTION_COMMAND_NONE:
+            break;
+        case ACTION_COMMAND_JUMP:
+            action_command_jump_draw_hud_elements();
+            break;
+        case ACTION_COMMAND_SMASH:
+            action_command_hammer_draw_hud_elements();
+            break;
+        case ACTION_COMMAND_FLEE:
+            action_command_flee_draw_hud_elements();
+            break;
+        case ACTION_COMMAND_BREAK_FREE:
+            action_command_break_free_draw_hud_elements();
+            break;
+        case ACTION_COMMAND_WHIRLWIND:
+            action_command_whirlwind_draw_hud_elements();
+            break;
+        case ACTION_COMMAND_STOP_LEECH:
+            action_command_stop_leech_draw_hud_elements();
+            break;
+        case ACTION_COMMAND_07:
+            action_command_07_draw_hud_elements();
+            break;
+        case ACTION_COMMAND_DIZZY_SHELL:
+            action_command_dizzy_shell_draw_hud_elements();
+            break;
+        case ACTION_COMMAND_FIRE_SHELL:
+            action_command_fire_shell_draw_hud_elements();
+            break;
+        case ACTION_COMMAND_0A:
+            action_command_0A_draw_hud_elements();
+            break;
+        case ACTION_COMMAND_BOMB:
+            action_command_bomb_draw_hud_elements();
+            break;
+        case ACTION_COMMAND_BODY_SLAM:
+            action_command_body_slam_draw_hud_elements();
+            break;
+        case ACTION_COMMAND_AIR_LIFT:
+            action_command_air_lift_draw_hud_elements();
+            break;
+        case ACTION_COMMAND_AIR_RAID:
+            action_command_air_raid_draw_hud_elements();
+            break;
+        case ACTION_COMMAND_SQUIRT:
+            action_command_squirt_draw_hud_elements();
+            break;
+        case ACTION_COMMAND_POWER_SHOCK:
+            action_command_power_shock_draw_hud_elements();
+            break;
+        case ACTION_COMMAND_MEGA_SHOCK:
+            action_command_mega_shock_draw_hud_elements();
+            break;
+        case ACTION_COMMAND_SMACK:
+            action_command_smack_draw_hud_elements();
+            break;
+        case ACTION_COMMAND_SPINY_SURGE:
+            action_command_spiny_surge_draw_hud_elements();
+            break;
+        case ACTION_COMMAND_HURRICANE:
+            action_command_hurricane_draw_hud_elements();
+            break;
+        case ACTION_COMMAND_SPOOK:
+            action_command_spook_draw_hud_elements();
+            break;
+        case ACTION_COMMAND_WATER_BLOCK:
+            action_command_water_block_draw_hud_elements();
+            break;
+        case ACTION_COMMAND_TIDAL_WAVE:
+            action_command_tidal_wave_draw_hud_elements();
+    }
+}
 
-INCLUDE_ASM(s32, "196AA0", func_80268C9C);
+void func_80268C9C(void) {
+    ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
+
+    switch (actionCommandStatus->actionCommandID) {
+        case ACTION_COMMAND_NONE:
+            break;
+        case ACTION_COMMAND_JUMP:
+            action_command_jump_free_hud_elements();
+            break;
+        case ACTION_COMMAND_SMASH:
+            action_command_hammer_free_hud_elements();
+            break;
+        case ACTION_COMMAND_FLEE:
+            action_command_flee_free_hud_elements();
+            break;
+        case ACTION_COMMAND_BREAK_FREE:
+            action_command_break_free_free_hud_elements();
+            break;
+        case ACTION_COMMAND_WHIRLWIND:
+            action_command_whirlwind_free_hud_elements();
+            break;
+        case ACTION_COMMAND_STOP_LEECH:
+            action_command_jump_draw_hud_elements();
+            break;
+        case ACTION_COMMAND_07:
+            action_command_07_free_hud_elements();
+            break;
+        case ACTION_COMMAND_DIZZY_SHELL:
+            action_command_dizzy_shell_free_hud_elements();
+            break;
+        case ACTION_COMMAND_FIRE_SHELL:
+            action_command_fire_shell_free_hud_elements();
+            break;
+        case ACTION_COMMAND_0A:
+            action_command_0A_free_hud_elements();
+            break;
+        case ACTION_COMMAND_BOMB:
+            action_command_bomb_free_hud_elements();
+            break;
+        case ACTION_COMMAND_BODY_SLAM:
+            action_command_body_slam_free_hud_elements();
+            break;
+        case ACTION_COMMAND_AIR_LIFT:
+            action_command_air_lift_free_hud_elements();
+            break;
+        case ACTION_COMMAND_AIR_RAID:
+            action_command_air_raid_free_hud_elements();
+            break;
+        case ACTION_COMMAND_SQUIRT:
+            action_command_squirt_free_hud_elements();
+            break;
+        case ACTION_COMMAND_POWER_SHOCK:
+            action_command_power_shock_free_hud_elements();
+            break;
+        case ACTION_COMMAND_MEGA_SHOCK:
+            action_command_mega_shock_free_hud_elements();
+            break;
+        case ACTION_COMMAND_SMACK:
+            action_command_smack_free_hud_elements();
+            break;
+        case ACTION_COMMAND_SPINY_SURGE:
+            action_command_spiny_surge_free_hud_elements();
+            break;
+        case ACTION_COMMAND_HURRICANE:
+            action_command_hurricane_free_hud_elements();
+            break;
+        case ACTION_COMMAND_SPOOK:
+            action_command_spook_free_hud_elements();
+            break;
+        case ACTION_COMMAND_WATER_BLOCK:
+            action_command_water_block_free_hud_elements();
+            break;
+        case ACTION_COMMAND_TIDAL_WAVE:
+            action_command_tidal_wave_free_hud_elements();
+            break;
+    }
+
+    actionCommandStatus->actionCommandID = ACTION_COMMAND_NONE;
+    gBattleStatus.flags1 &= ~BS_FLAGS1_2000;
+    gBattleStatus.flags1 &= ~BS_FLAGS1_8000;
+    gBattleStatus.flags1 &= ~BS_FLAGS1_4000;
+    close_action_command_instruction_popup();
+    btl_set_popup_duration(0);
+}
 
 void func_80268E88(void) {
     ActionCommandStatus* actionCmdStatus = &gActionCommandStatus;
@@ -223,7 +424,7 @@ s32 check_block_input(s32 buttonMask) {
 
     battleStatus->blockResult = 0; // Fail
 
-    if (battleStatus->unk_83 == -1 && (battleStatus->flags1 & 0x2000000)) {
+    if (battleStatus->unk_83 == -1 && (battleStatus->flags1 & BS_FLAGS1_2000000)) {
         battleStatus->blockResult = 1;
         return TRUE;
     }
@@ -243,7 +444,7 @@ s32 check_block_input(s32 buttonMask) {
     blockWindow = 3;
     mashWindow = 10;
 
-    if (!(gBattleStatus.flags1 & 0x80000) && is_ability_active(ABILITY_DODGE_MASTER)) {
+    if (!(gBattleStatus.flags1 & BS_FLAGS1_80000) && is_ability_active(ABILITY_DODGE_MASTER)) {
         blockWindow = 5;
     }
 
@@ -373,7 +574,7 @@ ApiStatus GetActionCommandMode(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus func_80269344(Evt* script, s32 isInitialCall) {
-    D_8029FC4C = evt_get_variable(script, *script->ptrReadPos);
+    gActionCommandStatus.unk_6C = evt_get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
@@ -394,7 +595,7 @@ ApiStatus SetCommandAutoSuccess(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus func_802693F0(Evt* script, s32 isInitialCall) {
-    gBattleStatus.flags1 &= ~0x4000;
+    gBattleStatus.flags1 &= ~BS_FLAGS1_4000;
     return ApiStatus_DONE2;
 }
 

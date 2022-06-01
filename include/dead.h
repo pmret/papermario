@@ -111,5 +111,6 @@
 #define heap_free dead_heap_free
 #define entity_upgrade_block_hide_content dead_entity_upgrade_block_hide_content
 #define func_8003D660 dead_func_80041080
+#define fx_misc_particles dead_fx_misc_particles
 
 #endif

@@ -180,7 +180,7 @@ s32 func_802DDFF8(s32, s32, s32, s32, s32, s32, u16);
 
 void spr_get_player_raster_info(SpriteRasterInfo* out, s32 playerSpriteID, s32 rasterIndex);
 
-s16** spr_get_player_palettes(s32 spriteIndex);
+u16** spr_get_player_palettes(s32 spriteIndex);
 
 /// @param animID - Set MSB for tail allocation (i.e. `0x80XXYYZZ`)
 s32 spr_load_npc_sprite(s32 animID, s32* extraAnimList);
@@ -203,7 +203,7 @@ s32 func_802DE894(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s3
 
 s32 spr_get_npc_raster_info(SpriteRasterInfo* out, s32 npcSpriteID, s32 rasterIndex);
 
-s32** spr_get_npc_palettes(s32 npcSpriteID);
+u16** spr_get_npc_palettes(s32 npcSpriteID);
 
 s32 spr_get_npc_color_variations(s32 npcSpriteID);
 

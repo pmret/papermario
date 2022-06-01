@@ -41,6 +41,11 @@ ApiStatus N(Pipe_GetEntryPos)(Evt* script, s32 isInitialCall) {
     evt_set_variable(script, EVT_VAR(2), ((Vec4f*)*mapConfig->entryList)[index].y);
     evt_set_variable(script, EVT_VAR(3), ((Vec4f*)*mapConfig->entryList)[index].z);
     evt_set_variable(script, EVT_VAR(4), ((Vec4f*)*mapConfig->entryList)[index].yaw);
+    #ifdef _DEAD_H_
+    osSyncPrintf("[%d] dokan get pos  (no=%d)  pos=%d, %d, %d,  dir=%d\n",
+                 gGameStatusPtr->frameCounter, script->varTable[0], script->varTable[1], script->varTable[2],
+                 script->varTable[3], script->varTable[4]);
+    #endif
     return ApiStatus_DONE2;
 }
 

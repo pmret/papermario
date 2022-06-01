@@ -284,7 +284,9 @@ typedef struct Enemy {
     /* 0xD0 */ EnemyTerritory* territory;
     /* 0xD4 */ EnemyDrops* drops;
     /* 0xD8 */ u32 tattleMsg;
-    /* 0xDC */ char unk_DC[20];
+    /* 0xDC */ s32 unk_DC;
+    /* 0xE0 */ s16 unk_E0;
+    /* 0xE2 */ char unk_E2[0xE];
 } Enemy; // size = 0xF0
 
 typedef struct Encounter {

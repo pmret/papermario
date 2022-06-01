@@ -3,17 +3,43 @@
 #include "camera.h"
 #include "hud_element.h"
 #include "sprite.h"
+#include "nu/nusys.h"
 
-void appendGfx_intro_logos();
+void appendGfx_intro_logos(void);
 
-// bss?
-extern s8* D_800A0910;
+s32 D_800778C0[] = { 0, 0 };
+
+Gfx D_800778C8[] = {
+    gsDPPipeSync(),
+    gsDPSetCycleType(G_CYC_COPY),
+    gsDPSetTexturePersp(G_TP_NONE),
+    gsDPSetTextureLUT(G_TT_NONE),
+    gsDPSetCombineMode(G_CC_DECALRGB, G_CC_DECALRGB),
+    gsDPSetRenderMode(G_RM_NOOP, G_RM_NOOP2),
+    gsDPSetTextureFilter(G_TF_POINT),
+    gsSPEndDisplayList(),
+};
+
+Gfx D_80077908[] = {
+    gsDPPipeSync(),
+    gsDPSetCycleType(G_CYC_1CYCLE),
+    gsDPSetTexturePersp(G_TP_NONE),
+    gsDPSetTextureLUT(G_TT_NONE),
+    gsDPSetCombineMode(G_CC_DECALRGB, G_CC_DECALRGB),
+    gsDPSetRenderMode(G_RM_OPA_SURF, G_RM_OPA_SURF2),
+    gsDPSetTextureFilter(G_TF_POINT),
+    gsSPEndDisplayList(),
+};
+
+// BSS
+extern u8* gLogosImages;
+extern u8* gLogosImage3;
+extern u8* gLogosImage1;
+extern u8* gLogosImage2;
 
 void state_init_logos(void) {
     s8* romStart;
     s8* romEnd;
-    s32* logoRam;
-    s32* temp_800A0910;
 
     general_heap_create();
     gGameStatusPtr->introState = INTRO_STATE_0;
@@ -24,17 +50,12 @@ void state_init_logos(void) {
 
     romEnd = logos_ROM_END;
     romStart = logos_ROM_START;
-    logoRam = heap_malloc(romEnd - romStart);
+    gLogosImages = heap_malloc(romEnd - romStart);
+    dma_copy(romStart, romEnd, gLogosImages);
 
-    temp_800A0910 = &D_800A0910;
-    D_800A0910 = logoRam;
-
-    dma_copy(romStart, romEnd, logoRam);
-
-    // TODO probably this is not ideal
-    D_800A0918 = D_800A0910 + 0x0;
-    D_800A0914 = D_800A0910 + 0x7000;
-    D_800A091C = D_800A0910 + 0x15000;
+    gLogosImage1 = gLogosImages + 0x0;
+    gLogosImage3 = gLogosImages + 0x7000;
+    gLogosImage2 = gLogosImages + 0x15000;
 
     nuContRmbForceStop();
     create_cameras_a();
@@ -80,13 +101,19 @@ void state_init_logos(void) {
 
 void state_step_logos(void) {
     if (gGameStatusPtr->bSkipIntro) {
-        if (intro_logos_fade_out(0xA) != 0) {
+        if (intro_logos_fade_out(10)) {
             set_curtain_scale(1.0f);
             set_curtain_fade(0.0f);
             set_game_mode(GAME_MODE_TITLE_SCREEN);
         }
     } else {
         switch (gGameStatusPtr->introState) {
+            case INTRO_STATE_0:
+                if (intro_logos_fade_in(10)) {
+                    gGameStatusPtr->introState++;
+                    gGameStatusPtr->introCounter = 30;
+                }
+                break;
             case INTRO_STATE_1:
                 if (gGameStatusPtr->introCounter == 0) {
                     intro_logos_set_fade_color(208);
@@ -95,12 +122,12 @@ void state_step_logos(void) {
                 gGameStatusPtr->introCounter--;
                 break;
             case INTRO_STATE_2:
-                if (intro_logos_fade_out(0xA)) {
+                if (intro_logos_fade_out(10)) {
                     gGameStatusPtr->introState++;
                 }
                 break;
             case INTRO_STATE_3:
-                if (intro_logos_fade_in(0xA)) {
+                if (intro_logos_fade_in(10)) {
                     gGameStatusPtr->introState++;
                     gGameStatusPtr->introCounter = 40;
                 }
@@ -113,13 +140,12 @@ void state_step_logos(void) {
                 gGameStatusPtr->introCounter--;
                 break;
             case INTRO_STATE_5:
-                if (intro_logos_fade_out(0xA)) {
+                if (intro_logos_fade_out(10)) {
                     gGameStatusPtr->introState++;
                 }
                 break;
-            case INTRO_STATE_0:
             case INTRO_STATE_6:
-                if (intro_logos_fade_in(0xA)) {
+                if (intro_logos_fade_in(10)) {
                     gGameStatusPtr->introState++;
                     gGameStatusPtr->introCounter = 30;
                 }
@@ -143,7 +169,7 @@ void state_step_logos(void) {
                 }
                 break;
             case INTRO_STATE_9:
-                if (intro_logos_fade_out(0xA) != 0) {
+                if (intro_logos_fade_out(10)) {
                     gGameStatusPtr->introCounter = 15;
                     gGameStatusPtr->introState++;
                 }
@@ -156,9 +182,8 @@ void state_step_logos(void) {
                 }
                 break;
             case INTRO_STATE_B:
-                heap_free(D_800A0910);
-                D_800A0910 = 0;
-
+                heap_free(gLogosImages);
+                gLogosImages = NULL;
                 intro_logos_set_fade_alpha(255);
                 gGameStatusPtr->creditsViewportMode = 0;
                 set_game_mode(GAME_MODE_INTRO);
@@ -174,9 +199,6 @@ void state_drawUI_logos(void) {
     appendGfx_intro_logos();
 }
 
-// all sorts of issues, but I think it's mostly with D_800A0918, 1C, and 14. Those need better types so they can have
-// proper array accesses. the display list macros should mostly be good
-#ifdef NON_EQUIVALENT
 void appendGfx_intro_logos(void) {
     s32 i;
 
@@ -184,74 +206,47 @@ void appendGfx_intro_logos(void) {
     gDPSetRenderMode(gMasterGfxPos++, G_RM_NOOP, G_RM_NOOP2);
     gDPSetCombineMode(gMasterGfxPos++, G_CC_DECALRGB, G_CC_DECALRGB);
     gDPSetCycleType(gMasterGfxPos++, G_CYC_FILL);
-    gDPSetFillColor(gMasterGfxPos++, 0xE739E739);
-    gDPFillRectangle(gMasterGfxPos++, 0, 0, 319, 239);
+    gDPSetFillColor(gMasterGfxPos++, PACK_FILL_COLOR(224, 224, 224, 1));
+    gDPFillRectangle(gMasterGfxPos++, 0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1);
     gDPPipeSync(gMasterGfxPos++);
 
-    switch (gGameStatusPtr->loadMenuState) {
-        case 0:
-        case 1:
-        case 2:
+    switch (gGameStatusPtr->introState) {
+        case INTRO_STATE_0:
+        case INTRO_STATE_1:
+        case INTRO_STATE_2:
             gSPDisplayList(gMasterGfxPos++, D_80077908);
-
             for (i = 0; i < 7; i++) {
-                gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 128, D_800A0918 + (i << 0xC));
-                gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 0x0000, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_WRAP,
-                           G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
-                gDPLoadSync(gMasterGfxPos++);
-                gDPLoadTile(gMasterGfxPos++, G_TX_LOADTILE, 0, 0, 508, 60);
-                gDPPipeSync(gMasterGfxPos++);
-                gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 0x0000, G_TX_RENDERTILE, 0,
-                           G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK,
-                           G_TX_NOLOD);
-                gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, 0, 0, 508, 60);
-                gSPTextureRectangle(gMasterGfxPos++, 384, 256 + i * 64, 896, 320 + i * 64, G_TX_RENDERTILE, 0, 0, 1024, 1024);
+                gDPLoadTextureTile(gMasterGfxPos++, gLogosImage1 + i * 0x1000, G_IM_FMT_RGBA, G_IM_SIZ_16b, 128, 112,
+                                   0, 0, 127, 15, 0,
+                                   G_TX_WRAP, G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+                gSPTextureRectangle(gMasterGfxPos++, 96 * 4, (64 + i * 16) * 4, 224 * 4, (80 + i * 16) * 4, G_TX_RENDERTILE, 0, 0, 1024, 1024);
                 gDPPipeSync(gMasterGfxPos++);
             }
             break;
-        case 3:
-        case 4:
-        case 5:
+        case INTRO_STATE_3:
+        case INTRO_STATE_4:
+        case INTRO_STATE_5:
             gSPDisplayList(gMasterGfxPos++, D_80077908);
-
             for (i = 0; i < 6; i++) {
-                gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 256, D_800A091C + (i << 0xC));
-                gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 0x0000, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_WRAP,
-                           G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
-                gDPLoadSync(gMasterGfxPos++);
-                gDPLoadTile(gMasterGfxPos++, G_TX_LOADTILE, 0, 0, 1020, 28);
-                gDPPipeSync(gMasterGfxPos++);
-                gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 64, 0x0000, G_TX_RENDERTILE, 0,
-                           G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK,
-                           G_TX_NOLOD);
-                gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, 0, 0, 1020, 28);
-                gSPTextureRectangle(gMasterGfxPos++, 128, 356 + i * 32, 1152, 388 + i * 32, G_TX_RENDERTILE, 0, 0, 1024, 1024);
+                gDPLoadTextureTile(gMasterGfxPos++, gLogosImage2 + i * 0x1000, G_IM_FMT_RGBA, G_IM_SIZ_16b, 256, 48,
+                                   0, 0, 255, 7, 0,
+                                   G_TX_WRAP, G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+                gSPTextureRectangle(gMasterGfxPos++, 32 * 4, (89 + i * 8) * 4, 288 * 4, (97 + i * 8) * 4, G_TX_RENDERTILE, 0, 0, 1024, 1024);
                 gDPPipeSync(gMasterGfxPos++);
             }
             break;
-        case 6:
-        case 7:
-        case 8:
-        case 9:
+        case INTRO_STATE_6:
+        case INTRO_STATE_7:
+        case INTRO_STATE_8:
+        case INTRO_STATE_9:
             gSPDisplayList(gMasterGfxPos++, D_80077908);
-
             for (i = 0; i < 14; i++) {
-                gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 256, D_800A0914[i] + (i << 0xC));
-                gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 0x0000, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_WRAP,
-                           G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
-                gDPLoadSync(gMasterGfxPos++);
-                gDPLoadTile(gMasterGfxPos++, G_TX_LOADTILE, 0, 0, 1020, 28);
-                gDPPipeSync(gMasterGfxPos++);
-                gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 64, 0x0000, G_TX_RENDERTILE, 0,
-                           G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK,
-                           G_TX_NOLOD);
-                gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, 0, 0, 1020, 28);
-                gSPTextureRectangle(gMasterGfxPos++, 128, 236 + i * 32, 1152, 268 + i * 32, G_TX_RENDERTILE, 0, 0, 1024, 1024);
+                gDPLoadTextureTile(gMasterGfxPos++, gLogosImage3 + i * 0x1000, G_IM_FMT_RGBA, G_IM_SIZ_16b, 256, 112,
+                                   0, 0, 255, 7, 0,
+                                   G_TX_WRAP, G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+                gSPTextureRectangle(gMasterGfxPos++, 32 * 4, (59 + i * 8) * 4, 288 * 4, (67 + i * 8) * 4, G_TX_RENDERTILE, 0, 0, 1024, 1024);
                 gDPPipeSync(gMasterGfxPos++);
             }
             break;
     }
 }
-#else
-INCLUDE_ASM(void, "state_logos", appendGfx_intro_logos);
-#endif

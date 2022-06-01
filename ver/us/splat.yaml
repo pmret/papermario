@@ -91,9 +91,11 @@ segments:
     - [0x31650, c, 31650]
     - [0x33450, c]
     - [0x341D0, c, 341d0]
+    - [0x341D0, c, 5B320]
     - [0x35080, c, effects]
     - [0x35AC0, c, world/world]
     - [0x362A0, c, collision]
+    - [0x38F00, c, 38F00]
     - [0x39210, c, 39210_len_aa0]
     - [0x39CB0, c, os/39cb0_len_100]
     - [0x39DB0, c, os/nusys/nuSched]
@@ -308,6 +310,7 @@ segments:
     - [0x52810, .data, camera]
     - [0x52820, .data, game_modes]
     - [0x52CA0, .data, state_battle]
+    - [0x52CC0, .data, state_logos]
     - [0x52D50, .data, state_pause]
     - [0x52D80, .data, state_file_select]
     - [0x52DC0, .data, state_title_screen]
@@ -322,7 +325,8 @@ segments:
     - [0x5A610, .data, effects]
     - [0x5B320, .data, 5B320]
     - [0x6B360, .data, world/world]
-    - [0x6EAC0, data] # has scripts
+    - [0x6EAC0, .data, 38F00]
+    - [0x6EF80, data, 6EF80]
     - [0x6F0E0, .data, os/nusys/nuContRmbMgr]
     - [0x6F110, .data, os/nusys/nuGfxFuncSet]
     - [0x6F120, .data, os/nusys/nuContMgr]
@@ -890,7 +894,8 @@ segments:
   - [0x1164B8, ci8,     peach_letter, 150, 105]
   - [0x11A240, palette, peach_letter]
   - [0x11A440, bin]
-  - type: code
+  - name: ui_images
+    type: code
     start: 0x131340
     vram: 0x8023E000
     subsegments:

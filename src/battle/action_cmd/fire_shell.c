@@ -215,6 +215,6 @@ void func_802A9294_426C64(void) {
     }
 }
 
-#include "common/UnkActionCommandFunc1.inc.c"
+#include "common/draw_hud_elements.inc.c"
 
 #include "common/free_hud_elements.inc.c"

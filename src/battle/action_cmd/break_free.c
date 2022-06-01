@@ -222,7 +222,7 @@ void func_802A92DC_4236CC(void) {
     }
 }
 
-void func_802A96B8_423AA8(void) {
+void N(draw_hud_elements)(void) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     s32* hudElements = actionCommandStatus->hudElements;
     s32 hudX;
@@ -254,7 +254,7 @@ void func_802A96B8_423AA8(void) {
     hud_element_draw_clipped(hudElements[3]);
 }
 
-void func_802A97FC_423BEC(void) {
+void N(free_hud_elements)(void) {
     hud_element_free(gActionCommandStatus.hudElements[0]);
     hud_element_free(gActionCommandStatus.hudElements[1]);
     hud_element_free(gActionCommandStatus.hudElements[2]);

@@ -382,6 +382,12 @@ void gfx_transfer_frame_to_depth(u16* frameBuffer0, u16* frameBuffer1, u16* zBuf
         for (x = 2; x < SCREEN_WIDTH - 2; x++) {
             s32 pixel = SCREEN_WIDTH * y + x;
 
+            /*
+            The application of gfx_frame_filter_pass_0 is done to the following pixels, where x is the current pixel.
+               . .
+              . x .
+               . .
+            */
             if (((frameBuffer1[pixel] >> 2) & 0xF) < 8) {
                 gfx_frame_filter_pass_0(frameBuffer0, frameBuffer1, y - 1, x - 1, &filterBuf0[0]);
                 gfx_frame_filter_pass_0(frameBuffer0, frameBuffer1, y - 1, x + 1, &filterBuf0[4]);
@@ -390,7 +396,10 @@ void gfx_transfer_frame_to_depth(u16* frameBuffer0, u16* frameBuffer1, u16* zBuf
                 gfx_frame_filter_pass_0(frameBuffer0, frameBuffer1, y + 1, x - 1, &filterBuf0[16]);
                 gfx_frame_filter_pass_0(frameBuffer0, frameBuffer1, y + 1, x + 1, &filterBuf0[20]);
                 gfx_frame_filter_pass_0(frameBuffer0, frameBuffer1, y,     x,     &filterBuf1[0]);
-                gfx_frame_filter_pass_1(&filterBuf0, (filterBuf1[0] << 24) | (filterBuf1[1] << 16) | (filterBuf1[2] << 8) | filterBuf1[3], &zBuffer[pixel]);
+                gfx_frame_filter_pass_1(filterBuf0, (filterBuf1[0] << 24) |
+                                                     (filterBuf1[1] << 16) |
+                                                     (filterBuf1[2] << 8) |
+                                                     (filterBuf1[3] << 0), &zBuffer[pixel]);
             } else {
                 // Don't apply any filters to the edges of the screen
                 zBuffer[pixel] = frameBuffer0[pixel] | 1;

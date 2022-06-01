@@ -204,7 +204,7 @@ void func_802A9208_429F28(void) {
     }
 }
 
-void func_802A9634_42A354(void) {
+void N(draw_hud_elements)(void) {
     s32 x, y;
     s32 id;
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
@@ -220,7 +220,7 @@ void func_802A9634_42A354(void) {
     }
 }
 
-void func_802A9720_42A440(void) {
+void N(free_hud_elements)(void) {
     sfx_stop_sound(0x80000041);
     hud_element_free(gActionCommandStatus.hudElements[0]);
     hud_element_free(gActionCommandStatus.hudElements[1]);
