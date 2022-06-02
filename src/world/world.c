@@ -15,7 +15,6 @@ s32 D_8008FF60[] = { 0, 1, 2, 3 };
 extern MapConfig gMapConfig;
 extern s32 gMap;
 
-
 extern s32 D_800D9668;
 
 typedef struct {
