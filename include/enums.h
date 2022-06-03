@@ -494,6 +494,7 @@ enum SoundIDs {
     SOUND_MENU_START_TUTORIAL       = 0x00000009,
     SOUND_D                         = 0x0000000D,
     SOUND_E                         = 0x0000000E,
+    SOUND_25                        = 0x00000025,
     SOUND_43                        = 0x00000043,
     SOUND_JR_TROOPA_SPLASH          = 0x00000045,
     SOUND_JR_TROOPA_SWIM            = 0x00000046,

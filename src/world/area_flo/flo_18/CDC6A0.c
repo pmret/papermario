@@ -31,7 +31,7 @@ EvtScript N(80240830) = {
     EVT_SWITCH(EVT_SAVE_VAR(0))
         EVT_CASE_LT(53)
             EVT_CALL(SetMusicTrack, 0, SONG_PUFF_PUFF_MACHINE, 0, 8)
-            EVT_CALL(PlaySoundAtCollider, 20, 0x80000025, 0)
+            EVT_CALL(PlaySoundAtCollider, 20, 0x80000000 | SOUND_25, 0)
         EVT_CASE_DEFAULT
             EVT_CALL(SetMusicTrack, 0, SONG_FLOWER_FIELDS_SUNNY, 0, 8)
     EVT_END_SWITCH
