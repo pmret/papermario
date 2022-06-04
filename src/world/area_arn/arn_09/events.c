@@ -81,7 +81,7 @@ EvtScript N(802403A0) = {
 };
 
 EvtScript N(makeEntities) = {
-    EVT_CALL(MakeEntity, 0x802EAA30, 0, 0, 0, 0, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, EVT_PTR(Entity_D_802EAA30), 0, 0, 0, 0, MAKE_ENTITY_END)
     EVT_CALL(AssignScript, EVT_PTR(N(802403A0)))
     EVT_RETURN
     EVT_END
