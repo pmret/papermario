@@ -3,7 +3,7 @@
 #include "script_api/battle.h"
 #include "mapfs/sam_bt02_shape.h"
 
-#define NAMESPACE b_area_sam_sam_02b
+#define NAMESPACE b_area_sam2_sam_02b
 
 #include "common/UnkModelStuff.inc.c"
 

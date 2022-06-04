@@ -16,21 +16,21 @@ EvtScript N(beforeBattle) = {
     EVT_THREAD
         EVT_SET(LW(0), 16)
         EVT_SET(LW(1), 0)
-        EVT_EXEC(EVT_ADDR(N(UnkModelStuffScript3)))
+        EVT_EXEC(N(UnkModelStuffScript3))
         EVT_WAIT_FRAMES(5)
         EVT_SET(LW(0), 25)
         EVT_SET(LW(1), 0)
-        EVT_EXEC(EVT_ADDR(N(UnkModelStuffScript4)))
+        EVT_EXEC(N(UnkModelStuffScript4))
         EVT_WAIT_FRAMES(5)
         EVT_SET(LW(0), 22)
         EVT_SET(LW(1), 0)
-        EVT_EXEC(EVT_ADDR(N(UnkModelStuffScript4)))
+        EVT_EXEC(N(UnkModelStuffScript4))
         EVT_WAIT_FRAMES(5)
         EVT_SET(LW(0), 19)
         EVT_SET(LW(1), 0)
-        EVT_EXEC(EVT_ADDR(N(UnkModelStuffScript4)))
+        EVT_EXEC(N(UnkModelStuffScript4))
     EVT_END_THREAD
-    EVT_EXEC(EVT_ADDR(N(UnkModelStuffScript1)))
+    EVT_EXEC(N(UnkModelStuffScript1))
     EVT_RETURN
     EVT_END
 };

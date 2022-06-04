@@ -113,11 +113,11 @@ EvtScript N(idle) = {
     EVT_IF_FLAG(LW(10), STATUS_FLAG_DIZZY)
         EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -27, 33)
         EVT_CALL(func_8027D4C8, ACTOR_SELF, 1, 5, -11)
-        EVT_CALL(EVT_ADDR(N(UnkBattleFunc1)), -37, 9, -7, 31)
+        EVT_CALL(N(UnkBattleFunc1), -37, 9, -7, 31)
     EVT_ELSE
         EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -15, 50)
         EVT_CALL(func_8027D4C8, ACTOR_SELF, 1, 3, -14)
-        EVT_CALL(EVT_ADDR(N(UnkBattleFunc1)), -22, 32, 1, 44)
+        EVT_CALL(N(UnkBattleFunc1), -22, 32, 1, 44)
     EVT_END_IF
     EVT_WAIT_FRAMES(1)
     EVT_GOTO(0)
@@ -178,7 +178,7 @@ EvtScript N(handleEvent) = {
             EVT_SET_CONST(LW(1), NPC_ANIM_putrid_piranha_Palette_01_Anim_E)
             EVT_EXEC_WAIT(DoShockHit)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(4.0))
-            EVT_EXEC_WAIT(EVT_ADDR(N(return_home)))
+            EVT_EXEC_WAIT(N(return_home))
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
             EVT_SET_CONST(LW(0), 1)
             EVT_SET_CONST(LW(1), NPC_ANIM_putrid_piranha_Palette_01_Anim_E)
@@ -233,19 +233,19 @@ EvtScript N(handleEvent) = {
 EvtScript N(takeTurn) = {
     EVT_CALL(GetBattlePhase, LW(0))
     EVT_IF_EQ(LW(0), PHASE_FIRST_STRIKE)
-        EVT_EXEC_WAIT(EVT_ADDR(N(attack_bite)))
+        EVT_EXEC_WAIT(N(attack_bite))
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(GetStatusFlags, ACTOR_PLAYER, LW(0))
     EVT_IF_FLAG(LW(0), STATUS_FLAG_FROZEN)
-        EVT_EXEC_WAIT(EVT_ADDR(N(attack_bite)))
+        EVT_EXEC_WAIT(N(attack_bite))
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(RandInt, 1000, LW(0))
     EVT_IF_LT(LW(0), 250)
-        EVT_EXEC_WAIT(EVT_ADDR(N(attack_icy_breath)))
+        EVT_EXEC_WAIT(N(attack_icy_breath))
     EVT_ELSE
-        EVT_EXEC_WAIT(EVT_ADDR(N(attack_bite)))
+        EVT_EXEC_WAIT(N(attack_bite))
     EVT_END_IF
     EVT_RETURN
     EVT_END
@@ -342,7 +342,7 @@ EvtScript N(attack_bite) = {
                 EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(7.0))
                 EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
                 EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, 2)
-                EVT_EXEC_WAIT(EVT_ADDR(N(return_home)))
+                EVT_EXEC_WAIT(N(return_home))
                 EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
                 EVT_CALL(SetAnimationRate, ACTOR_SELF, 1, EVT_FLOAT(1.0))
             EVT_END_IF
@@ -383,7 +383,7 @@ EvtScript N(attack_bite) = {
                 EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, 0)
             EVT_ELSE
                 EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(4.0))
-                EVT_EXEC_WAIT(EVT_ADDR(N(return_home)))
+                EVT_EXEC_WAIT(N(return_home))
             EVT_END_IF
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
@@ -432,7 +432,7 @@ EvtScript N(attack_icy_breath) = {
         EVT_SET(LW(1), 13)
         EVT_SETF(LW(3), EVT_FLOAT(1.0))
     EVT_END_IF
-    EVT_CALL(EVT_ADDR(N(UnkEffect6FFunc)), LW(2), LW(0), LW(1), LW(2), LW(3), 30, 120, 0, 120)
+    EVT_CALL(N(UnkEffect6FFunc), LW(2), LW(0), LW(1), LW(2), LW(3), 30, 120, 0, 120)
     EVT_WAIT_FRAMES(1)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_putrid_piranha_Palette_01_Anim_C)
     EVT_WAIT_FRAMES(5)
@@ -452,7 +452,7 @@ EvtScript N(attack_icy_breath) = {
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(7.0))
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
             EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, 2)
-            EVT_EXEC_WAIT(EVT_ADDR(N(return_home)))
+            EVT_EXEC_WAIT(N(return_home))
             EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
             EVT_CALL(SetAnimationRate, ACTOR_SELF, 1, EVT_FLOAT(1.0))
             EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
@@ -473,7 +473,7 @@ EvtScript N(attack_icy_breath) = {
             EVT_WAIT_FRAMES(20)
             EVT_CALL(YieldTurn)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
-            EVT_EXEC_WAIT(EVT_ADDR(N(return_home)))
+            EVT_EXEC_WAIT(N(return_home))
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)

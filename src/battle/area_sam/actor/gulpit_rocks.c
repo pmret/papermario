@@ -138,7 +138,7 @@ EvtScript N(handleEvent) = {
             EVT_SET_CONST(LW(0), 1)
             EVT_SET_CONST(LW(1), NPC_ANIM_gulpit_Palette_00_Anim_10)
             EVT_SET_CONST(LW(2), NPC_ANIM_gulpit_Palette_00_Anim_12)
-            EVT_EXEC_WAIT(EVT_ADDR(N(setAnim)))
+            EVT_EXEC_WAIT(N(setAnim))
             EVT_EXEC_WAIT(DoNormalHit)
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
@@ -148,7 +148,7 @@ EvtScript N(handleEvent) = {
             EVT_SET_CONST(LW(0), 1)
             EVT_SET_CONST(LW(1), NPC_ANIM_gulpit_Palette_00_Anim_10)
             EVT_SET_CONST(LW(2), NPC_ANIM_gulpit_Palette_00_Anim_12)
-            EVT_EXEC_WAIT(EVT_ADDR(N(setAnim)))
+            EVT_EXEC_WAIT(N(setAnim))
             EVT_EXEC_WAIT(DoImmune)
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(EVENT_BURN_DEATH)
@@ -156,7 +156,7 @@ EvtScript N(handleEvent) = {
             EVT_SET_CONST(LW(0), 1)
             EVT_SET_CONST(LW(1), NPC_ANIM_gulpit_Palette_00_Anim_10)
             EVT_SET_CONST(LW(2), NPC_ANIM_gulpit_Palette_00_Anim_12)
-            EVT_EXEC_WAIT(EVT_ADDR(N(setAnim)))
+            EVT_EXEC_WAIT(N(setAnim))
             EVT_EXEC_WAIT(DoNormalHit)
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, 1)
             EVT_CALL(GetActorVar, ACTOR_SELF, 0, LW(0))

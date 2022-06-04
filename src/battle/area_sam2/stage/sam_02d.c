@@ -3,13 +3,15 @@
 #include "script_api/battle.h"
 #include "mapfs/sam_bt02_shape.h"
 
-#define NAMESPACE b_area_sam_sam_02b
+#define NAMESPACE b_area_sam2_sam_02d
 
 #include "common/UnkModelStuff.inc.c"
 
 EvtScript N(beforeBattle) = {
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetGroupEnabled, 3, 0)
+    EVT_CALL(SetGroupEnabled, 10, 0)
+    EVT_CALL(SetGroupEnabled, 12, 0)
     EVT_CALL(SetGroupEnabled, 26, 0)
     EVT_EXEC(N(UnkModelStuffScript1))
     EVT_RETURN

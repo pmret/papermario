@@ -195,7 +195,7 @@ EvtScript N(handleEvent) = {
             EVT_SET_CONST(LW(0), 1)
             EVT_SET_CONST(LW(1), NPC_ANIM_gulpit_Palette_00_Anim_B)
             EVT_EXEC_WAIT(DoJumpBack)
-            EVT_EXEC_WAIT(EVT_ADDR(N(returnHome)))
+            EVT_EXEC_WAIT(N(returnHome))
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
             EVT_SET_CONST(LW(0), 1)
             EVT_SET_CONST(LW(1), NPC_ANIM_gulpit_Palette_00_Anim_B)
@@ -292,7 +292,7 @@ EvtScript N(attack_lick) = {
             EVT_CALL(YieldTurn)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
             EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, 2)
-            EVT_EXEC_WAIT(EVT_ADDR(N(returnHome)))
+            EVT_EXEC_WAIT(N(returnHome))
             EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
             EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
@@ -308,7 +308,7 @@ EvtScript N(attack_lick) = {
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_WAIT_FRAMES(10)
             EVT_CALL(YieldTurn)
-            EVT_EXEC_WAIT(EVT_ADDR(N(returnHome)))
+            EVT_EXEC_WAIT(N(returnHome))
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
@@ -382,7 +382,7 @@ EvtScript N(attack_rock) = {
             EVT_WAIT_FRAMES(15)
             EVT_CALL(YieldTurn)
             EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, 2)
-            EVT_EXEC_WAIT(EVT_ADDR(N(returnHome)))
+            EVT_EXEC_WAIT(N(returnHome))
             EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
             EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
@@ -419,7 +419,7 @@ EvtScript N(attack_rock) = {
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, LW(10), ACTOR_PART_FLAG_INVISIBLE, 1)
             EVT_WAIT_FRAMES(10)
             EVT_CALL(YieldTurn)
-            EVT_EXEC_WAIT(EVT_ADDR(N(returnHome)))
+            EVT_EXEC_WAIT(N(returnHome))
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
@@ -431,12 +431,12 @@ EvtScript N(attack_rock) = {
 EvtScript N(takeTurn) = {
     EVT_CALL(GetBattlePhase, LW(0))
     EVT_IF_EQ(LW(0), PHASE_FIRST_STRIKE)
-        EVT_EXEC_WAIT(EVT_ADDR(N(attack_lick)))
+        EVT_EXEC_WAIT(N(attack_lick))
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LW(0))
     EVT_IF_FLAG(LW(0), STATUS_FLAG_SHRINK)
-        EVT_EXEC_WAIT(EVT_ADDR(N(attack_lick)))
+        EVT_EXEC_WAIT(N(attack_lick))
         EVT_RETURN
     EVT_END_IF
     EVT_SET(LW(10), 0)
@@ -462,10 +462,10 @@ EvtScript N(takeTurn) = {
     EVT_END_IF
     EVT_SWITCH(LW(10))
         EVT_CASE_EQ(0)
-            EVT_EXEC_WAIT(EVT_ADDR(N(attack_lick)))
+            EVT_EXEC_WAIT(N(attack_lick))
         EVT_CASE_EQ(1)
             EVT_SET(LW(0), LW(11))
-            EVT_EXEC_WAIT(EVT_ADDR(N(attack_rock)))
+            EVT_EXEC_WAIT(N(attack_rock))
         EVT_CASE_EQ(2)
             EVT_CALL(RandInt, 1, LW(0))
             EVT_SWITCH(LW(0))
@@ -474,7 +474,7 @@ EvtScript N(takeTurn) = {
                 EVT_CASE_EQ(1)
                     EVT_SET(LW(0), LW(12))
             EVT_END_SWITCH
-            EVT_EXEC_WAIT(EVT_ADDR(N(attack_rock)))
+            EVT_EXEC_WAIT(N(attack_rock))
         EVT_CASE_GE(3)
             EVT_CALL(RandInt, 2, LW(0))
             EVT_SWITCH(LW(0))
@@ -485,7 +485,7 @@ EvtScript N(takeTurn) = {
                 EVT_CASE_EQ(2)
                     EVT_SET(LW(0), LW(13))
             EVT_END_SWITCH
-            EVT_EXEC_WAIT(EVT_ADDR(N(attack_rock)))
+            EVT_EXEC_WAIT(N(attack_rock))
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END

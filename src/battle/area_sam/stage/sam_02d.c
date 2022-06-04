@@ -13,7 +13,7 @@ EvtScript N(beforeBattle) = {
     EVT_CALL(SetGroupEnabled, 10, 0)
     EVT_CALL(SetGroupEnabled, 12, 0)
     EVT_CALL(SetGroupEnabled, 26, 0)
-    EVT_EXEC(EVT_ADDR(N(UnkModelStuffScript1)))
+    EVT_EXEC(N(UnkModelStuffScript1))
     EVT_RETURN
     EVT_END
 };

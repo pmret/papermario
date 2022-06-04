@@ -4388,11 +4388,41 @@ segments:
     vram: 0x80218000
     overlay: True
     subsegments:
-    - [0x63D1E0, c]
-    - [0x63D710, c]
-    - [0x63D9F0, c]
-    - [0x63DD60, c]
-    - [0x63F040, data]
+    - [0x63D1E0, c, actor/monstar]
+    - [0x63D710, c, actor/paragoomba]
+    - [0x63D9F0, c, actor/gray_magikoopa]
+    - [0x63DD60, c, stage/sam_01]
+    - [0x63E080, c, stage/sam_02]
+    - [0x63E3A0, c, stage/sam_02b]
+    - [0x63E6C0, c, stage/sam_02c]
+    - [0x63E9E0, c, stage/sam_02d]
+    - [0x63ED00, c, stage/sam_03]
+    - [0x63F040, c, area]
+    - [0x63F040, c, dlist]
+    - start: 0x63F040
+      type: .data
+      name: actor/monstar
+      subsegments:
+      - [0x63F040, .data, actor/monstar]
+      - [0x63F278, ci4, actor/img, 32, 32]
+      - [0x63F478, palette, actor/img]
+      - [0x63F498]
+    - [0x641070, .data, actor/paragoomba]
+    - [0x644310, .data, actor/gray_magikoopa]
+    - [0x646FD0, .data, stage/sam_01]
+    - [0x6473E0, .data, stage/sam_02]
+    - [0x647820, .data, stage/sam_02b]
+    - [0x647B70, .data, stage/sam_02c]
+    - [0x647EE0, .data, stage/sam_02d]
+    - [0x648260, .data, stage/sam_03]
+    - [0x648670, .data, area]
+    - [0x648750, .data, dlist]
+    - start: 0x648860
+      type: .data
+      name: vtx
+      subsegments:
+      - [0x648860, vtx, monstar_bubbles]
+    - [0x648C80]
   - dir: battle/area_pra
     type: code
     start: 0x648E10
