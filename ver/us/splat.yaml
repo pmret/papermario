@@ -4369,11 +4369,19 @@ segments:
     vram: 0x80218000
     overlay: True
     subsegments:
-    - [0x623BA0, c]
-    - [0x6253E0, c]
-    - [0x625750, c]
-    - [0x626A30, data]
-    - [0x63CE70]
+    - [0x623BA0, c, actor/duplighost]
+    - [0x625190, c, actor/gulpit]
+    - [0x625190, c, actor/gulpit_rocks]
+    - [0x625190, c, actor/white_clubba]
+    - [0x625190, c, actor/frost_piranha]
+    - [0x6253E0, c, actor/gray_magikoopa]
+    - [0x625750, c, stage/sam_01]
+    - [0x625A70, c, stage/sam_02]
+    - [0x625D90, c, stage/sam_02b]
+    - [0x6260B0, c, stage/sam_02c]
+    - [0x6263D0, c, stage/sam_02d]
+    - [0x6266F0, c, stage/sam_03]
+    - [0x626A30, c, area]
   - dir: battle/area_sam2
     type: code
     start: 0x63D1E0
