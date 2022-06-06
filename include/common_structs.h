@@ -2406,16 +2406,16 @@ typedef struct SpriteShadingProfile {
     /* 0xAF */ s8 ambientPower; // ?
 } SpriteShadingProfile; // size = 0xB0
 
-typedef struct UnkDuplighost {
+typedef struct WattEffectData {
     /* 0x00 */ s32 flags;
     /* 0x04 */ s32 unk_04;
-    /* 0x08 */ s32 unk_08;
+    /* 0x08 */ s32 angle;
     /* 0x0C */ s32 unk_0C;
     /* 0x10 */ s32 unk_10;
     /* 0x14 */ struct EffectInstance* effect1;
     /* 0x18 */ struct EffectInstance* effect2;
     /* 0x1C */ s32 debuff;
-} UnkDuplighost;
+} WattEffectData;
 
 typedef struct UnkStruct1 {
     /* 0x00 */ char unk_00[8];
