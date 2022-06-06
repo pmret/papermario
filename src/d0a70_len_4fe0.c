@@ -635,7 +635,7 @@ void fold_set_state_flags(s32 idx, u16 flagBits, s32 mode) {
     }
 }
 
-s32 fold_appendGfx_component(s32 idx, FoldImageRec* image, u32 flagBits, Matrix4f mtx) {
+s32 fold_appendGfx_component(s32 idx, FoldImageRecPart* image, u32 flagBits, Matrix4f mtx) {
     FoldState* state = &(*D_80156954)[idx];
     s32 ret = 0;
 

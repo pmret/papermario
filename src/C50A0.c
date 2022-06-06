@@ -11,20 +11,16 @@ extern ItemEntity* WorldItemEntities[MAX_ITEM_ENTITIES];
 extern ItemEntity* BattleItemEntities[MAX_ITEM_ENTITIES];
 extern ItemEntity** gCurrentItemEntities;
 extern s16 isPickingUpItem;
-extern s16 D_801565A6;
-extern s16 D_801565A8;
 extern s32 D_80155D80;
 extern s16 D_80155D8C;
 extern s16 D_80155D8E;
 extern s16 D_80155D90;
+extern s16 D_801565A6;
+extern s16 D_801565A8;
 extern s32 D_801568E0;
 extern s32 D_801568EC;
 
-extern Lights1 D_8014C6C8;
-
 extern HudScript SparkleScript_Coin;
-
-s32 fold_appendGfx_component(s32 idx, FoldImageRecPart* image, u32 flagBits, Matrix4f mtx);
 
 void item_entity_load(ItemEntity*);
 void item_entity_update(ItemEntity*);
@@ -664,6 +660,7 @@ s32 make_item_entity_at_player(s32 itemID, s32 arg1, s32 pickupMsgFlags) {
     return id;
 }
 
+//TODO remove this
 static const f32 rodata_padding_2 = 0.0f;
 
 INCLUDE_ASM(s32, "C50A0", item_entity_update);
