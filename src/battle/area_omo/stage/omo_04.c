@@ -12,6 +12,7 @@ extern EvtScript N(takeTurn_8022F4A8);
 extern EvtScript N(idle_8022E1F8);
 extern EvtScript N(handleEvent_8022ED54);
 
+BSS char D_80231110[0x250];
 BSS s32 D_80231360[10];
 
 EvtScript N(beforeBattle_8022DD30) = {
@@ -172,7 +173,7 @@ ActorBlueprint N(slot_machine_start) = {
 #include "common/IsGameStatusUnkAA_1.inc.c"
 
 EvtScript N(init_8022E060) = {
-    EVT_USE_ARRAY(0x80231360)
+    EVT_USE_ARRAY(D_80231360)
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_8022F4A8)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_8022E1F8)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_8022ED54)))
@@ -201,7 +202,7 @@ EvtScript N(init_8022E060) = {
 };
 
 EvtScript N(idle_8022E1F8) = {
-    EVT_USE_ARRAY(0x80231360)
+    EVT_USE_ARRAY(D_80231360)
     EVT_CALL(EnableTexPanning, 45, 1)
     EVT_SET(LW(14), 0)
     EVT_SET(LW(15), 0)
@@ -396,7 +397,7 @@ EvtScript N(idle_8022E1F8) = {
 };
 
 EvtScript N(handleEvent_8022ED54) = {
-    EVT_USE_ARRAY(0x80231360)
+    EVT_USE_ARRAY(D_80231360)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LW(0))
     EVT_SWITCH(LW(0))
@@ -510,7 +511,7 @@ EvtScript N(handleEvent_8022ED54) = {
 };
 
 EvtScript N(takeTurn_8022F4A8) = {
-    EVT_USE_ARRAY(0x80231360)
+    EVT_USE_ARRAY(D_80231360)
     EVT_RETURN
     EVT_END
 };

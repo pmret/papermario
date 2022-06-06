@@ -328,5 +328,55 @@ extern EntityBlueprint Entity_ShatteringHammer1BlockTiny;
 extern EntityBlueprint Entity_ShatteringHammer2BlockTiny;
 extern EntityBlueprint Entity_ShatteringHammer3BlockTiny;
 extern EntityBlueprint Entity_ShatteringBrickBlock;
+extern EntityBlueprint Entity_D_802EA2E0;
+extern EntityBlueprint Entity_D_802EA564;
+extern EntityBlueprint Entity_D_802EA0E8;
+extern EntityBlueprint Entity_D_802EA10C;
+extern EntityBlueprint Entity_D_802EA130;
+extern EntityBlueprint Entity_D_802EA154;
+extern EntityBlueprint Entity_D_802EA178;
+extern EntityBlueprint Entity_D_802EA19C;
+extern EntityBlueprint Entity_D_802EA588;
+extern EntityBlueprint Entity_D_802EA5AC;
+extern EntityBlueprint Entity_D_802EA5D0; //unused
+extern EntityBlueprint Entity_D_802EA798; //unused
+extern EntityBlueprint Entity_HeartBlock; //unused
+extern EntityBlueprint Entity_D_802EAA30;
+extern EntityBlueprint Entity_D_802EAA54;
+extern EntityBlueprint Entity_D_802EA910;
+
+
+extern s32 D_802EBFF0[];
+extern s32 D_802EC010[];
+extern s32 D_802EC030[];
+extern s32 D_802EC050[];
+extern s32 D_802EC070[];
+extern s32 D_802EC090[];
+extern s32 D_802EC0B0[];
+extern s32 D_802EC0D0[];
+extern s32 D_802EC0F0[];
+extern s32 D_802EC110[];
+extern s32 D_802EC130[];
+extern s32 D_802EC150[];
+extern s32 D_802EC170[];
+extern s32 D_802EC190[];
+extern s32 D_802EC1B0[];
+extern s32 D_802EC1D0[];
+extern s32 D_802EC1F0[];
+extern s32 D_802EC210[];
+extern s32 D_802EC230[];
+extern s32 D_802EC250[];
+extern s32 D_802EC270[];
+extern s32 D_802EC290[];
+extern s32 D_802EC2B0[];
+extern s32 D_802EC2D0[];
+extern s32 D_802EC2F0[];
+extern s32 D_802EC310[];
+extern s32 D_802EC330[];
+extern s32 D_802EC350[];
+extern s32 D_802EC370[];
+extern s32 D_802EC390[];
+extern s32 D_802EC3B0[];
+extern s32 D_802EC3D0[];
 
 #endif

@@ -1,29 +1,29 @@
 #include "common.h"
 
 // TODO: Define the table.
-extern f32 N(floatTable)[];
+extern f32 N(sinTable)[];
 
-u32 N(BattleAreaAngleStuff1)(f32 x, f32 y) {
-    f32 tempF = abs(y) / length2D(x, y);
-    u16 angle1 = 0;
-    u16 angle2 = 90;
+u32 N(ArcsinDeg)(f32 x, f32 y) {
+    f32 sinAngle = abs(y) / length2D(x, y);
+    u16 minAngle = 0;
+    u16 maxAngle = 90;
     u16 ret;
     u16 i;
 
     for (i = 0; i < 7; i++) {
-        u16 temp_v1 = angle1 + ((angle2 - angle1) / 2);
+        u16 midAngle = minAngle + ((maxAngle - minAngle) / 2);
 
-        if (N(floatTable)[temp_v1] < tempF) {
-            angle1 = temp_v1;
+        if (N(sinTable)[midAngle] < sinAngle) {
+            minAngle = midAngle;
         } else {
-            angle2 = temp_v1;
+            maxAngle = midAngle;
         }
     }
 
-    if (fabsf(N(floatTable)[angle1] - tempF) < fabsf(N(floatTable)[angle2] - tempF)) {
-        ret = angle1;
+    if (fabsf(N(sinTable)[minAngle] - sinAngle) < fabsf(N(sinTable)[maxAngle] - sinAngle)) {
+        ret = minAngle;
     } else {
-        ret = angle2;
+        ret = maxAngle;
     }
 
     if (x < 0.0f && y >= 0.0f) {
@@ -41,22 +41,22 @@ u32 N(BattleAreaAngleStuff1)(f32 x, f32 y) {
     return ret;
 }
 
-ApiStatus N(AngleCalculate)(Evt* script, s32 isInitialCall) {
+ApiStatus N(CalculateRotationZ)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 var1 = evt_get_variable(script, *args++);
-    s32 var2 = evt_get_variable(script, *args++);
-    s32 var3 = evt_get_variable(script, *args++);
-    s32 var4 = evt_get_variable(script, *args++);
-    s32 var5 = evt_get_variable(script, *args);
+    s32 x1 = evt_get_variable(script, *args++);
+    s32 y1 = evt_get_variable(script, *args++);
+    s32 x2 = evt_get_variable(script, *args++);
+    s32 y2 = evt_get_variable(script, *args++);
+    s32 outVar = evt_get_variable(script, *args);
 
-    var3 -= var1;
-    var4 -= var2;
+    x2 -= x1;
+    y2 -= y1;
 
-    if (var3 == 0 && var4 == 0) {
-        evt_set_variable(script, *args, var5);
+    if (x2 == 0 && y2 == 0) {
+        evt_set_variable(script, *args, outVar);
         return ApiStatus_DONE2;
     } else {
-        evt_set_variable(script, *args, N(BattleAreaAngleStuff1)(var3, var4) - 90);
+        evt_set_variable(script, *args, N(ArcsinDeg)(x2, y2) - 90);
         return ApiStatus_DONE2;
     }
 }
