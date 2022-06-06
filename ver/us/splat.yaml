@@ -2310,7 +2310,43 @@ segments:
     - [0x325AD0, c]
     - [0x325EE0, pm_effect_shims, effect_shims]
     - [0x326160, .data, 325AD0]
-  - [0x326410, bin] # big_smoke_puff gfx
+  - name: effect_gfx_big_smoke_puff
+    dir: effects/gfx
+    type: code
+    start: 0x326410
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x326410, c, big_smoke_puff]
+    - start: 0x326410
+      type: .data
+      name: big_smoke_puff
+      subsegments:
+      - [0x326410, .data, big_smoke_puff]
+      - [0x326410, ci4,     D_09000000_326410, 32, 32]
+      - [0x326610, palette, D_09000000_326410]
+      - [0x326630, ci4,     D_09000220_326630, 32, 32]
+      - [0x326830, palette, D_09000220_326630]
+      - [0x326850, ci4,     D_09000440_326850, 32, 32]
+      - [0x326A50, palette, D_09000440_326850]
+      - [0x326A70, ci4,     D_09000660_326A70, 32, 32]
+      - [0x326C70, palette, D_09000660_326A70]
+      - [0x326C90, ci4,     D_09000880_326C90, 32, 32]
+      - [0x326E90, palette, D_09000880_326C90]
+      - [0x326EB0, ci4,     D_09000AA0_326EB0, 32, 32]
+      - [0x3270B0, palette, D_09000AA0_326EB0]
+      - [0x3270D0, ci4,     D_09000CC0_3270D0, 32, 32]
+      - [0x3272D0, palette, D_09000CC0_3270D0]
+      - [0x3272F0, vtx, D_09000EE0_3272F0]
+      - [0x327330, gfx, D_09000F20_327330]
+      - [0x327398, gfx, D_09000F88_327398]
+      - [0x3273B0, gfx, D_09000FA0_3273B0]
+      - [0x327470, gfx, D_09001060_327470]
+      - [0x327530, gfx, D_09001120_327530]
+      - [0x3275F0, gfx, D_090011E0_3275F0]
+      - [0x3276B0, gfx, D_090012A0_3276B0]
+      - [0x327770, gfx, D_09001360_327770]
+      - [0x327830, gfx, D_09001420_327830]
   - name: effect_big_smoke_puff
     dir: effects
     type: code
@@ -2537,7 +2573,63 @@ segments:
     - [0x34F4C0, c, damage_indicator]
     - [0x350160, .data, damage_indicator]
     - [0x350200, .rodata, damage_indicator]
-  - [0x350220, bin] # damage_indicator gfx
+  - name: effect_gfx_damage_indicator
+    dir: effects/gfx
+    type: code
+    start: 0x350220
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x350220, c, damage_indicator]
+    - start: 0x350220
+      type: .data
+      name: damage_indicator
+      subsegments:
+      - [0x350220, .data, damage_indicator]
+      - [0x350220, i4, D_09000000_350220, 32, 32]
+      - [0x350420, i4, D_09000200_350420, 32, 32]
+      - [0x350620, i4, D_09000400_350620, 32, 32]
+      - [0x350820, i4, D_09000600_350820, 32, 32]
+      - [0x350A20, i4, D_09000800_350A20, 32, 32]
+      - [0x350C20, i4, D_09000A00_350C20, 32, 32]
+      - [0x350E20, i4, D_09000C00_350E20, 32, 32]
+      - [0x351020, i4, D_09000E00_351020, 32, 32]
+      - [0x351220, i4, D_09001000_351220, 32, 32]
+      - [0x351420, i4, D_09001200_351420, 32, 32]
+      - [0x351620, i4, D_09001400_351620, 32, 32]
+      - [0x351820, i4, D_09001600_351820, 32, 32]
+      - [0x351A20, i4, D_09001800_351A20, 32, 32]
+      - [0x351C20, i4, D_09001A00_351C20, 32, 32]
+      - [0x351E20, vtx, D_09001C00_351E20]
+      - [0x351E30, vtx, D_09001C10_351E30]
+      - [0x351E50, vtx, D_09001C30_351E50]
+      - [0x351E60, vtx, D_09001C40_351E60]
+      - [0x351EA0, vtx, D_09001C80_351EA0]
+      - [0x351EE0, vtx, D_09001CC0_351EE0]
+      - [0x351F20, vtx, D_09001D00_351F20]
+      - [0x351F60, gfx, D_09001D40_351F60]
+      - [0x352000, gfx, D_09001DE0_352000]
+      - [0x352070, gfx, D_09001E50_352070]
+      - [0x3520B0, gfx, D_09001E90_3520B0]
+      - [0x3520F0, gfx, D_09001ED0_3520F0]
+      - [0x352130, gfx, D_09001F10_352130]
+      - [0x352170, gfx, D_09001F50_352170]
+      - [0x3521B0, gfx, D_09001F90_3521B0]
+      - [0x3521F0, gfx, D_09001FD0_3521F0]
+      - [0x352230, gfx, D_09002010_352230]
+      - [0x352270, gfx, D_09002050_352270]
+      - [0x3522B0, gfx, D_09002090_3522B0]
+      - [0x3522F0, gfx, D_090020D0_3522F0]
+      - [0x352330, gfx, D_09002110_352330]
+      - [0x352370, gfx, D_09002150_352370]
+      - [0x352380, gfx, D_09002160_352380]
+      - [0x352390, gfx, D_09002170_352390]
+      - [0x3523A0, gfx, D_09002180_3523A0]
+      - [0x3523B0, gfx, D_09002190_3523B0]
+      - [0x3523C8, gfx, D_090021A8_3523C8]
+      - [0x3523E0, gfx, D_090021C0_3523E0]
+      - [0x352400, gfx, D_090021E0_352400]
+      - [0x352420, gfx, D_09002200_352420]
   - name: effect_purple_ring
     dir: effects
     type: code

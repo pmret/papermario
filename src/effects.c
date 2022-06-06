@@ -28,7 +28,7 @@ extern s32 D_801A6000;
 
 EffectTableEntry gEffectTable[] = {
     /* 0x00 */ {},
-    /* 0x01 */ FX_ENTRY(big_smoke_puff, _326410),
+    /* 0x01 */ FX_ENTRY(big_smoke_puff, effect_gfx_big_smoke_puff),
     /* 0x02 */ {},
     /* 0x03 */ {},
     /* 0x04 */ {},
@@ -57,7 +57,7 @@ EffectTableEntry gEffectTable[] = {
     /* 0x1B */ FX_ENTRY(got_item_outline, _345B40),
     /* 0x1C */ FX_ENTRY(spiky_white_aura, _34E770),
     /* 0x1D */ FX_ENTRY(smoke_impact, _328EA0),
-    /* 0x1E */ FX_ENTRY(damage_indicator, _350220),
+    /* 0x1E */ FX_ENTRY(damage_indicator, effect_gfx_damage_indicator),
     /* 0x1F */ FX_ENTRY(purple_ring, _352CE0),
     /* 0x20 */ FX_ENTRY(flame, _353BB0),
     /* 0x21 */ FX_ENTRY(stars_burst, _343040),
