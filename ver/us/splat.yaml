@@ -2715,7 +2715,24 @@ segments:
     subsegments:
     - [0x364300, c, debuff]
     - [0x364BC0]
-  - [0x364C00, bin] # debuff gfx
+  - name: effect_gfx_debuff
+    dir: effects/gfx
+    type: code
+    start: 0x364C00
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x364C00, c, debuff]
+    - start: 0x364C00
+      type: .data
+      name: debuff
+      subsegments:
+      - [0x364C00, .data, debuff]
+      - [0x364C00, i4, D_09000000_364C00, 32, 32]
+      - [0x364E00] # unmapped
+      - [0x364E40, gfx, D_09000240_364E40]
+      - [0x364EE8, gfx, D_090002E8_364EE8]
+      - [0x364F08]
   - name: effect_green_impact
     dir: effects
     type: code

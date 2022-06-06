@@ -41,7 +41,7 @@ class Segment:
     require_unique_name = True
 
     @staticmethod
-    def get_class_for_type(seg_type) -> type["Segment"]:
+    def get_class_for_type(seg_type) -> Type["Segment"]:
         # so .data loads SegData, for example
         if seg_type.startswith("."):
             seg_type = seg_type[1:]

@@ -76,7 +76,7 @@ EffectTableEntry gEffectTable[] = {
     /* 0x2E */ FX_ENTRY(steam_burst, _361670),
     /* 0x2F */ FX_ENTRY(stars_orbiting, _362C50),
     /* 0x30 */ FX_ENTRY(big_snowflakes, effect_gfx_big_snowflakes),
-    /* 0x31 */ FX_ENTRY(debuff, _364C00),
+    /* 0x31 */ FX_ENTRY(debuff, effect_gfx_debuff),
     /* 0x32 */ FX_ENTRY(green_impact, _3659B0),
     /* 0x33 */ FX_ENTRY(radial_shimmer, _366D60),
     /* 0x34 */ FX_ENTRY(ending_decals, _36AEE0),
