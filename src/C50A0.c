@@ -41,6 +41,9 @@ void func_801356D4(ItemEntity*);
 void update_item_entity_temp(ItemEntity*);
 s32 draw_image_with_clipping(s32* raster, s32 width, s32 height, s32 fmt, s32 bitDepth, s16 posX, s16 posY, u16 clipULx,
                              u16 clipULy, u16 clipLRx, u16 clipRLy);
+void func_8013673C(ItemEntity* itemEntity, s32 posX, s32 posY);
+void func_801369D0(ItemEntity* itemEntity, s32 posX, s32 posY);
+void func_80136A08(ItemEntity* itemEntity, s32 posX, s32 posY);
 
 Vtx D_8014C5A0[4] = {
     {{{ -12,  0, 0 }, 0, { 0x2300, 0x2300 }, { 0, 0, 0, 255 }}},
@@ -1029,9 +1032,105 @@ void func_801356D4(ItemEntity* itemEntity) {
 
 INCLUDE_ASM(s32, "C50A0", update_item_entity_temp);
 
-INCLUDE_ASM(s32, "C50A0", func_801363A0);
 
-void func_8013673C(ItemEntity* itemEntity, s32 arg1, s32 arg2) {
+#ifdef NON_EQUIVALENT
+void func_801363A0(ItemEntity* itemEntity) {
+    ItemData* itemData = &gItemTable[itemEntity->itemID];
+    s32 itemMsg;
+    s32 offsetY;
+    s32 s1;
+    s32 temp;
+    s32 s3;
+    s32 temp2;
+    s32 v1;
+
+    switch (itemEntity->state) {
+        case 2:
+        case 10:
+            if (!(itemData->typeFlags & ITEM_TYPE_FLAG_BADGE)) {
+                if (!(itemEntity->flags & ITEM_ENTITY_FLAGS_4000000) || (itemEntity->pickupMsgFlags & 0x4)) {
+                    itemMsg = MESSAGE_ID(0x1D, 0x058);
+                } else {
+                    itemMsg = MESSAGE_ID(0x1D, 0x05A);
+                }
+
+                if (itemEntity->pickupMsgFlags & 0x10) {
+                    itemMsg = MESSAGE_ID(0x1D, 0x05D);
+                }
+                if (itemEntity->pickupMsgFlags & 0x20) {
+                    itemMsg = MESSAGE_ID(0x1D, 0x05E);
+                }
+                if (itemEntity->pickupMsgFlags & 0x40) {
+                    itemMsg = MESSAGE_ID(0x1D, 0x05C);
+                }
+
+                set_message_msg(itemData->nameMsg, 0);
+
+                if (!(gItemTable[itemEntity->itemID].typeFlags & ITEM_TYPE_FLAG_KEY) &&
+                    itemEntity->itemID != ITEM_STAR_PIECE &&
+                    !(gItemTable[itemEntity->itemID].typeFlags & ITEM_TYPE_FLAG_GEAR) &&
+                    !(itemEntity->pickupMsgFlags & 0x30)) {
+                    offsetY = get_msg_width(itemMsg, 0) + 54;
+                } else {
+                    offsetY = get_msg_width(itemMsg, 0) + 30;
+                }
+                s1 = 160 - offsetY / 2;
+                s3 = 0x4C;
+            } else {
+                if (!(itemEntity->flags & ITEM_ENTITY_FLAGS_4000000) || (itemEntity->pickupMsgFlags & 0x4)) {
+                    itemMsg = MESSAGE_ID(0x1D, 0x059);
+                } else {
+                    itemMsg = MESSAGE_ID(0x1D, 0x05B);
+                }
+
+                if (itemEntity->pickupMsgFlags & 0x10) {
+                    itemMsg = MESSAGE_ID(0x1D, 0x05D);
+                }
+                if (itemEntity->pickupMsgFlags & 0x20) {
+                    itemMsg = MESSAGE_ID(0x1D, 0x05E);
+                }
+                if (itemEntity->pickupMsgFlags & 0x40) {
+                    itemMsg = MESSAGE_ID(0x1D, 0x05C);
+                }
+
+                set_message_msg(itemData->nameMsg, 0);
+                offsetY = get_msg_width(itemMsg, 0) + 30;
+                s1 = 160 - offsetY / 2;
+                s3 = 0x4C;
+            }
+            temp2 = D_8014C6E0[get_msg_lines(itemMsg) - 1];
+            if (itemEntity->state != 2) {
+                temp = 0x1C;
+            } else {
+                temp = 0;
+            }
+            if (gItemTable[itemEntity->itemID].typeFlags) {
+                set_window_properties(0xC, s1, s3 - 0x18 + temp, offsetY,
+                                    temp2, 0, func_8013673C, itemEntity, -1);
+            } else {
+                set_window_properties(0xC, s1, s3 - 0x18 + temp, offsetY,
+                                    temp2, 0, func_8013673C, itemEntity, -1);
+            }
+            if (itemEntity->itemID != ITEM_STAR_PIECE && itemEntity->itemID != ITEM_COIN) {
+                set_window_properties(0x13, 0x14, 0xBA, 0x118, 0x20, NULL, func_80136A08, itemEntity, -1);
+            }
+            if (itemEntity->state != 2) {
+                offsetY = get_msg_width(MESSAGE_ID(0x1D, 0x060), 0) + 0x18;
+                set_window_properties(0x11, 160 - offsetY / 2, 0x24, offsetY, 40, NULL, func_801369D0, itemEntity, -1);
+            }
+            break;
+        case 12:
+            set_message_msg(itemData->nameMsg, 0);
+            offsetY = get_msg_width(MESSAGE_ID(0x1D, 0x05F), 0) + 0x36;
+            set_window_properties(0xC, 160 - offsetY / 2, 0x4C, offsetY, 40, NULL, func_8013673C, itemEntity, -1);
+            break;
+    }
+}
+#else
+INCLUDE_ASM(s32, "C50A0", func_801363A0);
+#endif
+
+void func_8013673C(ItemEntity* itemEntity, s32 posX, s32 posY) {
     ItemData* itemData = &gItemTable[itemEntity->itemID];
     s32 itemMsg;
     s32 offsetY;
@@ -1086,11 +1185,11 @@ void func_8013673C(ItemEntity* itemEntity, s32 arg1, s32 arg2) {
                 (gItemTable[itemEntity->itemID].typeFlags & ITEM_TYPE_FLAG_GEAR) ||
                 (itemEntity->pickupMsgFlags & 0x30)) {
 
-                draw_msg(itemMsg, arg1 + 15, arg2 + offsetY, 255, 47, 0);
+                draw_msg(itemMsg, posX + 15, posY + offsetY, 255, 47, 0);
             } else {
-                draw_msg(itemMsg, arg1 + 40, arg2 + offsetY, 255, 47, 0);
+                draw_msg(itemMsg, posX + 40, posY + offsetY, 255, 47, 0);
                 if (!(itemEntity->pickupMsgFlags & 0x30)) {
-                    hud_element_set_render_pos(D_801568E0, arg1 + 20, arg2 + 20);
+                    hud_element_set_render_pos(D_801568E0, posX + 20, posY + 20);
                     hud_element_draw_next(D_801568E0);
                 }
             }
@@ -1098,14 +1197,14 @@ void func_8013673C(ItemEntity* itemEntity, s32 arg1, s32 arg2) {
         case 13:
         case 14:
             set_message_msg(gItemTable[D_801568EC].nameMsg, 0);
-            draw_msg(MESSAGE_ID(0x1D, 0x05F), arg1 + 40, arg2 + 4, 255, 47, 0);
-            hud_element_set_render_pos(D_801568E0, arg1 + 20, arg2 + 20);
+            draw_msg(MESSAGE_ID(0x1D, 0x05F), posX + 40, posY + 4, 255, 47, 0);
+            hud_element_set_render_pos(D_801568E0, posX + 20, posY + 20);
             hud_element_draw_next(D_801568E0);
             break;
     }
 }
 
-void func_801369D0(s32 arg1, s32 x, s32 y) {
+void func_801369D0(ItemEntity* itemEntity, s32 x, s32 y) {
     draw_msg(MESSAGE_ID(0x1D,0x060), x + 12, y + 4, 255, 52, 0);
 }
 
