@@ -2692,6 +2692,7 @@ segments:
     type: code
     start: 0x3638C0
     vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
     subsegments:
     - [0x3638C0, c, big_snowflakes]
     - start: 0x3638C0
