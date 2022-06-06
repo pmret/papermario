@@ -2686,7 +2686,27 @@ segments:
     subsegments:
     - [0x363160, c, big_snowflakes]
     - [0x363890]
-  - [0x3638C0, bin] # big_snowflakes gfx
+  #- [0x3638C0, bin] # big_snowflakes gfx
+  - name: effect_gfx_big_snowflakes
+    dir: effects/gfx
+    type: code
+    start: 0x3638C0
+    vram: 0x09000000
+    subsegments:
+    - [0x3638C0, c, big_snowflakes]
+    - start: 0x3638C0
+      type: .data
+      name: big_snowflakes
+      subsegments:
+      - [0x3638C0, .data, big_snowflakes]
+      - [0x3638C0, i4, D_09000000_3638C0, 16, 16]
+      - [0x363940, i4, D_09000080_363940, 64, 64]
+      - [0x364140, vtx, D_09000880_364140]
+      - [0x364180, vtx, D_090008C0_364180]
+      - [0x3641C0, gfx, D_09000900_3641C0]
+      - [0x3642A8, gfx, D_090009E8_3642A8]
+      - [0x3642D0, gfx, D_09000A10_3642D0]
+      - [0x3642F8]
   - name: effect_debuff
     dir: effects
     type: code

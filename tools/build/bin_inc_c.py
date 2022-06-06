@@ -1,13 +1,15 @@
 #! /usr/bin/python3
 
+from pathlib import Path
 from sys import argv
 import re
-import png
 
 if __name__ == "__main__":
     infile, outfile = argv[1:]
 
-    cname = re.sub(r"[^0-9a-zA-Z_]", "_", outfile)
+    fname = Path(infile).stem
+
+    cname = re.sub(r"[^0-9a-zA-Z_]", "_", fname)
 
     if cname.startswith("ver_"):
         cname = "_".join(cname.split("_")[2:])
