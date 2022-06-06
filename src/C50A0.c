@@ -11,6 +11,7 @@ extern ItemEntity* WorldItemEntities[MAX_ITEM_ENTITIES];
 extern ItemEntity* BattleItemEntities[MAX_ITEM_ENTITIES];
 extern ItemEntity** gCurrentItemEntities;
 extern s16 isPickingUpItem;
+extern s16 D_801565A6;
 extern s16 D_801565A8;
 extern s32 D_80155D80;
 extern s16 D_80155D8C;
@@ -28,12 +29,48 @@ s32 test_item_player_collision(ItemEntity*);
 void update_item_entity_collectable(ItemEntity*);
 void func_8013559C(ItemEntity*);
 void update_item_entity_static(ItemEntity*);
-void func_801356C4(void);
+void func_801356C4(ItemEntity*);
 void func_801356CC(ItemEntity*);
-void func_801356D4(void);
+void func_801356D4(ItemEntity*);
 void update_item_entity_temp(ItemEntity*);
 
-INCLUDE_ASM(s32, "C50A0", draw_ci_image_with_clipping);
+s32 draw_image_with_clipping(s32* raster, s32 width, s32 height, s32 fmt, s32 bitDepth, s16 posX, s16 posY, u16 clipULx,
+                             u16 clipULy, u16 clipLRx, u16 clipRLy);
+
+s32 draw_ci_image_with_clipping(s32* raster, s32 width, s32 height, s32 fmt, s32 bitDepth, s32* palette, s16 posX,
+                                s16 posY, u16 clipULx, u16 clipULy, u16 clipLRx, u16 clipRLy, u8 opacity) {
+    s32 ret;
+
+    gDPPipeSync(gMasterGfxPos++);
+    gDPSetCycleType(gMasterGfxPos++, G_CYC_1CYCLE);
+    gDPSetTextureFilter(gMasterGfxPos++, G_TF_POINT);
+    gDPSetTexturePersp(gMasterGfxPos++, G_TP_NONE);
+
+    if (opacity == 255) {
+        gDPSetRenderMode(gMasterGfxPos++, G_RM_TEX_EDGE, G_RM_TEX_EDGE2);
+        gDPSetCombineMode(gMasterGfxPos++, G_CC_DECALRGBA, G_CC_DECALRGBA);
+    } else if (opacity == 0) {
+        return 1;
+    } else {
+        gDPSetRenderMode(gMasterGfxPos++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
+        gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0);
+        gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, opacity);
+    }
+
+    if (fmt == G_IM_FMT_CI) {
+        gDPSetTextureLUT(gMasterGfxPos++, G_TT_RGBA16);
+        if (bitDepth == G_IM_SIZ_4b) {
+            gDPLoadTLUT_pal16(gMasterGfxPos++, 0, palette);
+        } else {
+            gDPLoadTLUT_pal256(gMasterGfxPos++, palette);
+        }
+    } else {
+        gDPSetTextureLUT(gMasterGfxPos++, G_TT_NONE);
+    }
+    ret = draw_image_with_clipping(raster, width, height, fmt, bitDepth, posX, posY, clipULx, clipULy, clipLRx, clipRLy);
+    gDPPipeSync(gMasterGfxPos++);
+    return ret;
+}
 
 INCLUDE_ASM(s32, "C50A0", draw_image_with_clipping);
 
@@ -110,7 +147,7 @@ ItemEntity* get_item_entity(s32 itemEntityIndex) {
 void item_entity_disable_shadow(ItemEntity* itemEntity) {
     Shadow* shadow;
 
-    itemEntity->flags |= ENTITY_FLAGS_CONTINUOUS_COLLISION;
+    itemEntity->flags |= ITEM_ENTITY_FLAGS_40;
     if (itemEntity->shadowIndex >= 0) {
         shadow = get_shadow_by_index(itemEntity->shadowIndex);
         shadow->flags |= SHADOW_FLAGS_HIDDEN;
@@ -120,7 +157,7 @@ void item_entity_disable_shadow(ItemEntity* itemEntity) {
 void item_entity_enable_shadow(ItemEntity* itemEntity) {
     Shadow* shadow;
 
-    itemEntity->flags &= ~ENTITY_FLAGS_CONTINUOUS_COLLISION;
+    itemEntity->flags &= ~ITEM_ENTITY_FLAGS_40;
     if (itemEntity->shadowIndex >= 0) {
         shadow = get_shadow_by_index(itemEntity->shadowIndex);
         shadow->flags &= ~SHADOW_FLAGS_HIDDEN;
@@ -171,8 +208,268 @@ void init_item_entity_list(void) {
 
 INCLUDE_ASM(s32, "C50A0", item_entity_load);
 
-INCLUDE_ASM(s32, "C50A0", make_item_entity, s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pickupDelay,
-            s32 facingAngleSign, s32 pickupVar);
+s32 make_item_entity(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pickupDelay, s32 facingAngleSign, s32 pickupVar) {
+    s32 i;
+    s32 id;
+    ItemEntity* itemEntity;
+    f32 hitDepth;
+    Shadow* shadow;
+
+    if (pickupVar <= -120000000) {
+        pickupVar = pickupVar + 130000000;
+    }
+
+    if (pickupVar > 0) {
+        switch (itemSpawnMode) {
+            case ITEM_SPAWN_MODE_NOTHING:
+            case ITEM_SPAWN_MODE_TOSS_NEVER_VANISH:
+            case ITEM_SPAWN_MODE_TOSS:
+            case ITEM_SPAWN_MODE_TOSS_SPAWN_ONCE:
+            case ITEM_SPAWN_MODE_TOSS_SPAWN_ONCE_NEVER_VANISH:
+            case ITEM_SPAWN_MODE_ITEM_BLOCK_ITEM:
+            case ITEM_SPAWN_MODE_ITEM_BLOCK_BADGE:
+            case ITEM_SPAWN_MODE_FALL_NEVER_VANISH:
+            case ITEM_SPAWN_MODE_FALL:
+            case ITEM_SPAWN_MODE_FALL_SPAWN_ONCE:
+            case ITEM_SPAWN_MODE_FIXED_NEVER_VANISH:
+            case ITEM_SPAWN_MODE_FIXED:
+            case ITEM_SPAWN_MODE_ITEM_BLOCK_COIN:
+            case ITEM_SPAWN_MODE_TOSS_HIGHER_NEVER_VANISH:
+                if (get_global_flag(pickupVar) != 0) {
+                    return -1;
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    for (i = 0; i < MAX_ITEM_ENTITIES; i++) {
+        if (gCurrentItemEntities[i] == NULL) {
+            break;
+        }
+    }
+
+    ASSERT(i < MAX_ITEM_ENTITIES);
+
+    id = i;
+    gCurrentItemEntities[id] = itemEntity = heap_malloc(sizeof(*itemEntity));
+    ItemEntitiesCreated++;
+    ASSERT(itemEntity != NULL);
+
+    itemEntity->renderGroup = ((u32)itemID >> 0x10) & 0xF;
+    if (itemEntity->renderGroup == 5) {
+        itemEntity->renderGroup = -1;
+    }
+
+    itemEntity->spawnType = itemSpawnMode;
+    itemEntity->state = 0;
+    itemEntity->position.x = x;
+    itemEntity->position.y = y;
+    itemEntity->position.z = z;
+
+    itemID &= 0xFFFF;
+
+    itemEntity->flags = ITEM_ENTITY_FLAGS_80 | ITEM_ENTITY_FLAGS_10 | ITEM_ENTITY_FLAGS_CAM2 | ITEM_ENTITY_FLAGS_CAM1 | ITEM_ENTITY_FLAGS_CAM0;
+    itemEntity->pickupMsgFlags = 0;
+    itemEntity->boundVar = pickupVar;
+    itemEntity->itemID = itemID;
+    itemEntity->physicsData = NULL;
+    itemEntity->pickupDelay = pickupDelay;
+    itemEntity->scale = 1.0f;
+    itemEntity->wsFaceAngle = facingAngleSign;
+    itemEntity->shadowIndex = -1;
+    itemEntity->nextUpdate = 1;
+    itemEntity->unk_34.x = -9999;
+    itemEntity->unk_34.y = -9999;
+    itemEntity->unk_34.z = -9999;
+    D_801565A6 = 30;
+
+    itemEntity->flags |= ITEM_ENTITY_FLAGS_TINY;
+    if (gItemTable[itemID].typeFlags & ITEM_TYPE_FLAG_ENTITY_FULLSIZE) {
+        itemEntity->flags |= ITEM_ENTITY_FLAGS_40000;
+        itemEntity->flags &= ~ITEM_ENTITY_FLAGS_TINY;
+    }
+
+    if (ItemEntityAlternatingSpawn != 0) {
+        itemEntity->flags |= ITEM_ENTITY_FLAGS_20000;
+    }
+
+    ItemEntityAlternatingSpawn = 1 - ItemEntityAlternatingSpawn;
+
+    switch (itemEntity->spawnType) {
+        case ITEM_SPAWN_MODE_NOTHING:
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_80000000;
+            break;
+        case ITEM_SPAWN_MODE_DECORATION:
+        case ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS:
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_800000;
+            break;
+        case ITEM_SPAWN_MODE_INVISIBLE:
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_100000;
+            break;
+        case ITEM_SPAWN_MODE_BATTLE_REWARD:
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_800000;
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_10000;
+            itemEntity->spawnType = ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS;
+            break;
+        case ITEM_SPAWN_MODE_TOSS_NEVER_VANISH:
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_800000 | ITEM_ENTITY_FLAGS_400 | ITEM_ENTITY_FLAGS_NEVER_VANISH;
+            itemEntity->spawnType = ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS;
+            break;
+        case ITEM_SPAWN_MODE_TOSS:
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_800000 | ITEM_ENTITY_FLAGS_400;
+            itemEntity->spawnType = ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS;
+            break;
+        case ITEM_SPAWN_MODE_TOSS_SPAWN_ONCE:
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_800000 | ITEM_ENTITY_FLAGS_800;
+            itemEntity->spawnType = ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS;
+            break;
+        case ITEM_SPAWN_MODE_TOSS_SPAWN_ONCE_NEVER_VANISH:
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_800000 | ITEM_ENTITY_FLAGS_800 | ITEM_ENTITY_FLAGS_NEVER_VANISH;
+            itemEntity->spawnType = ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS;
+            break;
+        case ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS_NEVER_VANISH:
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_800000 | ITEM_ENTITY_FLAGS_NEVER_VANISH;
+            itemEntity->spawnType = ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS;
+            break;
+        case ITEM_SPAWN_MODE_ITEM_BLOCK_ITEM:
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_800000 | ITEM_ENTITY_FLAGS_400;
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_40000000;
+            itemEntity->spawnType = ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS;
+            break;
+        case ITEM_SPAWN_MODE_ITEM_BLOCK_BADGE:
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_800000 | ITEM_ENTITY_FLAGS_400;
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_40000000 | ITEM_ENTITY_FLAGS_NEVER_VANISH;
+            itemEntity->spawnType = ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS;
+            break;
+        case ITEM_SPAWN_MODE_FALL_SPAWN_ALWAYS:
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_800000;
+            break;
+        case ITEM_SPAWN_MODE_FALL_NEVER_VANISH:
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_800000 | ITEM_ENTITY_FLAGS_400 | ITEM_ENTITY_FLAGS_NEVER_VANISH;
+            itemEntity->spawnType = ITEM_SPAWN_MODE_FALL_SPAWN_ALWAYS;
+            break;
+        case ITEM_SPAWN_MODE_FALL:
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_800000 | ITEM_ENTITY_FLAGS_400;
+            itemEntity->spawnType = ITEM_SPAWN_MODE_FALL_SPAWN_ALWAYS;
+            break;
+        case ITEM_SPAWN_MODE_FALL_SPAWN_ONCE:
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_800000 | ITEM_ENTITY_FLAGS_800;
+            itemEntity->spawnType = ITEM_SPAWN_MODE_FALL_SPAWN_ALWAYS;
+            break;
+        case ITEM_SPAWN_MODE_FIXED_SPAWN_ALWAYS:
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_800000 | ITEM_ENTITY_FLAGS_FIXED;
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_10000000;
+            break;
+        case ITEM_SPAWN_MODE_FIXED_NEVER_VANISH:
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_800000 | ITEM_ENTITY_FLAGS_FIXED | ITEM_ENTITY_FLAGS_400 | ITEM_ENTITY_FLAGS_NEVER_VANISH;
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_10000000;
+            itemEntity->spawnType = ITEM_SPAWN_MODE_FIXED_SPAWN_ALWAYS;
+            break;
+        case ITEM_SPAWN_MODE_FIXED:
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_800000 | ITEM_ENTITY_FLAGS_FIXED | ITEM_ENTITY_FLAGS_400;
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_10000000;
+            itemEntity->spawnType = ITEM_SPAWN_MODE_FIXED_SPAWN_ALWAYS;
+            break;
+        case ITEM_SPAWN_MODE_FIXED_SPAWN_ALWAYS_NEVER_VANISH:
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_800000 | ITEM_ENTITY_FLAGS_FIXED | ITEM_ENTITY_FLAGS_NEVER_VANISH;
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_10000000;
+            itemEntity->spawnType = ITEM_SPAWN_MODE_FIXED_SPAWN_ALWAYS;
+            break;
+        case ITEM_SPAWN_MODE_TOSS_FADE1:
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_800000 | ITEM_ENTITY_FLAGS_1000;
+            itemEntity->scale = 0.8f;
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_TINY;
+            break;
+        case ITEM_SPAWN_MODE_TOSS_FADE2:
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_800000 | ITEM_ENTITY_FLAGS_1000;
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_10000;
+            itemEntity->spawnType = ITEM_SPAWN_MODE_TOSS_FADE1;
+            itemEntity->scale = 0.8f;
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_TINY;
+            break;
+        case ITEM_SPAWN_MODE_TOSS_FADE3:
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_800000 | ITEM_ENTITY_FLAGS_1000;
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_400000;
+            itemEntity->spawnType = ITEM_SPAWN_MODE_TOSS_FADE1;
+            itemEntity->scale = 0.8f;
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_TINY;
+            break;
+        case ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS_SMALL:
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_800000;
+            itemEntity->spawnType = ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS;
+            itemEntity->scale = 0.8f;
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_TINY;
+            break;
+        case ITEM_SPAWN_MODE_UNKNOWN_1B:
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_800000 | ITEM_ENTITY_FLAGS_8000;
+            itemEntity->spawnType = ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS;
+            itemEntity->scale = 0.8f;
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_TINY;
+            break;
+        case ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS:
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_800000 | ITEM_ENTITY_FLAGS_8000 | ITEM_ENTITY_FLAGS_NEVER_VANISH;
+            break;
+        case ITEM_SPAWN_MODE_ITEM_BLOCK_COIN:
+            itemEntity->spawnType = ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS;
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_800000 | ITEM_ENTITY_FLAGS_8000 | ITEM_ENTITY_FLAGS_400 | ITEM_ENTITY_FLAGS_NEVER_VANISH;
+            break;
+        case ITEM_SPAWN_MODE_TOSS_HIGHER_NEVER_VANISH:
+            itemEntity->spawnType = ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS;
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_800000 | ITEM_ENTITY_FLAGS_400 | ITEM_ENTITY_FLAGS_NEVER_VANISH;
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_1000000;
+            break;
+    }
+
+    switch (itemEntity->spawnType) {
+        case ITEM_SPAWN_MODE_NOTHING:
+        case ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS:
+        case ITEM_SPAWN_MODE_FALL_SPAWN_ALWAYS:
+        case ITEM_SPAWN_MODE_FIXED_SPAWN_ALWAYS:
+        case ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS:
+            itemEntity->shadowIndex = create_shadow_type(0, itemEntity->position.x, itemEntity->position.y, itemEntity->position.z);
+            shadow = get_shadow_by_index(itemEntity->shadowIndex);
+
+            if (itemEntity->spawnType == ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS) {
+                shadow->flags |= SHADOW_FLAGS_HIDDEN;
+            }
+
+            x = itemEntity->position.x;
+            y = itemEntity->position.y + 12.0f;
+            z = itemEntity->position.z;
+            hitDepth = 1000.0f;
+            npc_raycast_down_sides(0x20000, &x, &y, &z, &hitDepth);
+            shadow->position.x = x;
+            shadow->position.y = y;
+            shadow->position.z = z;
+            shadow->rotation.x = gGameStatusPtr->playerGroundTraceAngles.x;
+            shadow->rotation.y = 0.0f;
+            shadow->rotation.z = gGameStatusPtr->playerGroundTraceAngles.z;
+            set_standard_shadow_scale(shadow, hitDepth * 0.5f);
+            break;
+    }
+
+    if (itemEntity->pickupDelay != 0) {
+        item_entity_disable_shadow(itemEntity);
+    }
+
+    item_entity_load(itemEntity);
+
+    if (itemEntity->itemID == ITEM_COIN) {
+        sparkle_script_init(itemEntity, &SparkleScript_Coin);
+        sparkle_script_update(itemEntity);
+    }
+
+    if (itemEntity->itemID == ITEM_STAR_PIECE) {
+        itemEntity->flags &= ~ITEM_ENTITY_FLAGS_80;
+    }
+
+    return id;
+}
+
+// TODO remove this
+static const f32 rodata_padding = 0.0f;
 
 s32 make_item_entity_nodelay(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pickupVar) {
     return make_item_entity(itemID, x, y, z, itemSpawnMode, 0, -1, pickupVar);
@@ -398,11 +695,11 @@ void draw_item_entities_UI(void) {
             if (itemEntity != NULL && itemEntity->flags != 0) {
                 switch (itemEntity->spawnType) {
                     case ITEM_SPAWN_MODE_NOTHING:
-                        func_801356C4();
+                        func_801356C4(itemEntity);
                         break;
                     case ITEM_SPAWN_MODE_DECORATION:
                     case ITEM_SPAWN_MODE_INVISIBLE:
-                        func_801356D4();
+                        func_801356D4(itemEntity);
                         break;
                     case ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS:
                     case ITEM_SPAWN_MODE_FALL_SPAWN_ALWAYS:
@@ -476,12 +773,12 @@ void func_80133A94(s32 idx, s32 itemID) {
 
     item->itemID = itemID;
 
-    item->flags |= ENTITY_FLAGS_4000;
-    item->flags &= ~ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE2;
+    item->flags |= ITEM_ENTITY_FLAGS_TINY;
+    item->flags &= ~ITEM_ENTITY_FLAGS_40000;
 
     if (gItemTable[itemID].typeFlags & ITEM_TYPE_FLAG_ENTITY_FULLSIZE) {
-        item->flags |= ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE2;
-        item->flags &= ~ENTITY_FLAGS_4000;
+        item->flags |= ITEM_ENTITY_FLAGS_40000;
+        item->flags &= ~ITEM_ENTITY_FLAGS_TINY;
     }
 
     item_entity_load(item);
@@ -511,19 +808,19 @@ s32 test_item_entity_position(f32 x, f32 y, f32 z, f32 dist) {
             continue;
         }
 
-        if (item->spawnType == ENTITY_TYPE_SHADOW) {
+        if (item->spawnType == ITEM_SPAWN_MODE_DECORATION) {
             continue;
         }
 
-        if (item->spawnType == ENTITY_TYPE_2) {
+        if (item->spawnType == ITEM_SPAWN_MODE_INVISIBLE) {
             continue;
         }
 
-        if (item->flags & ENTITY_FLAGS_CONTINUOUS_COLLISION) {
+        if (item->flags & ITEM_ENTITY_FLAGS_40) {
             continue;
         }
 
-        if (item->flags & ENTITY_FLAGS_200000) {
+        if (item->flags & ITEM_ENTITY_FLAGS_200000) {
             continue;
         }
 
@@ -541,7 +838,7 @@ void set_item_entity_flags(s32 index, s32 flags) {
     ItemEntity* itemEntity = gCurrentItemEntities[index];
 
     itemEntity->flags |= flags;
-    if (itemEntity->flags & ENTITY_FLAGS_200000) {
+    if (itemEntity->flags & ITEM_ENTITY_FLAGS_200000) {
         D_801565A8 = 1;
     }
 }
@@ -555,7 +852,7 @@ void clear_item_entity_flags(s32 index, s32 flags) {
 void func_801341B0(s32 index) {
     ItemEntity* itemEntity = gCurrentItemEntities[index];
     gOverrideFlags |= GLOBAL_OVERRIDES_40;
-    itemEntity->flags |= ENTITY_FLAGS_100;
+    itemEntity->flags |= ITEM_ENTITY_FLAGS_100;
 }
 
 /// @returns TRUE when "you got X" popup is on-screen
@@ -620,13 +917,13 @@ void update_item_entity_static(ItemEntity* itemEntity) {
     }
 }
 
-void func_801356C4(void) {
+void func_801356C4(ItemEntity* itemEntity) {
 }
 
 void func_801356CC(ItemEntity* itemEntity) {
 }
 
-void func_801356D4(void) {
+void func_801356D4(ItemEntity* itemEntity) {
 }
 
 INCLUDE_ASM(s32, "C50A0", update_item_entity_temp);
