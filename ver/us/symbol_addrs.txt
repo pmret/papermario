@@ -8903,6 +8903,7 @@ b_area_kmr_part_3_paragoomba2_CalculateRotationZ = 0x80218744; // type:func rom:
 b_area_kmr_part_3_para_jr_troopa_UnkBattleFunc1 = 0x80218840; // type:func rom:0x447C80
 b_area_kmr_part_3_spiked_para_jr_troopa_UnkBattleFunc1 = 0x80218910; // type:func rom:0x447D50
 func_802189DC_447E1C = 0x802189DC; // type:func rom:0x447E1C
+monstar_bubbles = 0x80223680; // type:data rom:0x648860
 b_area_kmr_part_3_spiked_para_jr_troopa_FreeIcon = 0x80218AA4; // type:func rom:0x447EE4
 b_area_kmr_part_3_final_jr_troopa_UnkBattleFunc1 = 0x80218AD0; // type:func rom:0x447F10
 b_area_kmr_part_3_final_jr_troopa_ArcsinDeg = 0x80218B9C; // type:func rom:0x447FDC
