@@ -1,5 +1,8 @@
 from segtypes.common.data import CommonSegData
+from segtypes.linker_entry import LinkerEntry
 from util import options, log
+
+from typing import List
 
 
 class CommonSegBss(CommonSegData):
@@ -12,12 +15,14 @@ class CommonSegBss(CommonSegData):
     def split(self, rom_bytes: bytes):
         pass
 
-    def get_linker_entries(self):
-        from segtypes.linker_entry import LinkerEntry
+    def get_linker_entries(self) -> "List[LinkerEntry]":
 
         if self.sibling:
             path = self.sibling.out_path()
         else:
-            path = options.get_src_path() / self.name
+            path = self.out_path()
 
-        return [LinkerEntry(self, [path], path, self.get_linker_section())]
+        if path:
+            return [LinkerEntry(self, [path], path, self.get_linker_section())]
+        else:
+            return []

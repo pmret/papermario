@@ -21,6 +21,6 @@ jobs:
         pip install -r requirements.txt
         pip install types-PyYAML
     - name: mypy
-      run: mypy --show-column-numbers --hide-error-context .
+      run: mypy --show-column-numbers --hide-error-context --exclude segtypes/n64/pygfxd .
     - name: black
-      run: black .
+      run: black --exclude segtypes/n64/pygfxd .
