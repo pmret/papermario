@@ -905,7 +905,7 @@ EvtScript N(8022ED10) = {
     EVT_END
 };
 
-ApiStatus N(AngleCalculate)(Evt* script, s32 isInitialCall);
+ApiStatus N(CalculateRotationZ)(Evt* script, s32 isInitialCall);
 
 EvtScript N(8022F468) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
@@ -942,7 +942,7 @@ EvtScript N(8022F468) = {
             EVT_CALL(GetActorPos, ACTOR_SELF, LW(1), LW(2), LW(3))
             EVT_LOOP(20)
                 EVT_CALL(GetActorPos, ACTOR_SELF, LW(4), LW(5), LW(6))
-                EVT_CALL(N(AngleCalculate), LW(1), LW(2), LW(4), LW(5), LW(0))
+                EVT_CALL(N(CalculateRotationZ), LW(1), LW(2), LW(4), LW(5), LW(0))
                 EVT_CALL(SetPartRotation, -127, 2, 0, 0, LW(0))
                 EVT_SET(LW(1), LW(4))
                 EVT_SET(LW(2), LW(5))
@@ -963,7 +963,7 @@ EvtScript N(8022F468) = {
             EVT_CALL(GetActorPos, ACTOR_SELF, LW(1), LW(2), LW(3))
             EVT_LOOP(14)
                 EVT_CALL(GetActorPos, ACTOR_SELF, LW(4), LW(5), LW(6))
-                EVT_CALL(N(AngleCalculate), LW(1), LW(2), LW(4), LW(5), LW(0))
+                EVT_CALL(N(CalculateRotationZ), LW(1), LW(2), LW(4), LW(5), LW(0))
                 EVT_SET(LW(7), LW(0))
                 EVT_ADD(LW(7), 180)
                 EVT_CALL(SetPartRotation, -127, 2, 0, 0, LW(7))
@@ -1002,7 +1002,7 @@ EvtScript N(8022F468) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LW(1), LW(2), LW(3))
     EVT_LOOP(20)
         EVT_CALL(GetActorPos, ACTOR_SELF, LW(4), LW(5), LW(6))
-        EVT_CALL(N(AngleCalculate), LW(1), LW(2), LW(4), LW(5), LW(0))
+        EVT_CALL(N(CalculateRotationZ), LW(1), LW(2), LW(4), LW(5), LW(0))
         EVT_CALL(SetPartRotation, -127, 2, 0, 0, LW(0))
         EVT_SET(LW(1), LW(4))
         EVT_SET(LW(2), LW(5))
@@ -1023,7 +1023,7 @@ EvtScript N(8022F468) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LW(1), LW(2), LW(3))
     EVT_LOOP(14)
         EVT_CALL(GetActorPos, ACTOR_SELF, LW(4), LW(5), LW(6))
-        EVT_CALL(N(AngleCalculate), LW(1), LW(2), LW(4), LW(5), LW(0))
+        EVT_CALL(N(CalculateRotationZ), LW(1), LW(2), LW(4), LW(5), LW(0))
         EVT_SET(LW(7), LW(0))
         EVT_ADD(LW(7), 180)
         EVT_CALL(SetPartRotation, -127, 2, 0, 0, LW(7))

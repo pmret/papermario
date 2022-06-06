@@ -187,8 +187,8 @@ BattleArea gBattleAreas[0x30] = {
     {
         AREA(area_sam),
         .name = "エリア ＳＡＭ",
-        .battles = 0x80231164,
-        .stages = 0x80231290,
+        .battles = &b_area_sam_formationTable,
+        .stages = &b_area_sam_stageTable,
     },
     {
         AREA(area_sam2),
@@ -205,14 +205,14 @@ BattleArea gBattleAreas[0x30] = {
     {
         AREA(area_pra2),
         .name = "エリア ＰＲＡ２",
-        .battles = 0x802215A0,
-        .stages = 0x802215C8,
+        .battles = &b_area_pra2_formationTable,
+        .stages = &b_area_pra2_stageTable,
     },
     {
         AREA(area_pra3),
         .name = "エリア ＰＲＡ３",
-        .battles = 0x80232888,
-        .stages = 0x8023298C,
+        .battles = &b_area_pra3_formationTable,
+        .stages = &b_area_pra3_stageTable,
     },
     {
         AREA(area_kpa),
