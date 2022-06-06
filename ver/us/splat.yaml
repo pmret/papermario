@@ -2686,7 +2686,6 @@ segments:
     subsegments:
     - [0x363160, c, big_snowflakes]
     - [0x363890]
-  #- [0x3638C0, bin] # big_snowflakes gfx
   - name: effect_gfx_big_snowflakes
     dir: effects/gfx
     type: code
