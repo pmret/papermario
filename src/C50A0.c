@@ -17,8 +17,14 @@ extern s32 D_80155D80;
 extern s16 D_80155D8C;
 extern s16 D_80155D8E;
 extern s16 D_80155D90;
+extern s32 D_801568E0;
+extern s32 D_801568EC;
 
-extern s32* SparkleScript_Coin;
+extern Lights1 D_8014C6C8;
+
+extern HudScript SparkleScript_Coin;
+
+s32 fold_appendGfx_component(s32 idx, FoldImageRecPart* image, u32 flagBits, Matrix4f mtx);
 
 void item_entity_load(ItemEntity*);
 void item_entity_update(ItemEntity*);
@@ -33,9 +39,57 @@ void func_801356C4(ItemEntity*);
 void func_801356CC(ItemEntity*);
 void func_801356D4(ItemEntity*);
 void update_item_entity_temp(ItemEntity*);
-
 s32 draw_image_with_clipping(s32* raster, s32 width, s32 height, s32 fmt, s32 bitDepth, s16 posX, s16 posY, u16 clipULx,
                              u16 clipULy, u16 clipLRx, u16 clipRLy);
+
+Vtx D_8014C5A0[4] = {
+    {{{ -12,  0, 0 }, 0, { 0x2300, 0x2300 }, { 0, 0, 0, 255 }}},
+    {{{  11,  0, 0 }, 0, { 0x2000, 0x2300 }, { 0, 0, 0, 255 }}},
+    {{{  11, 23, 0 }, 0, { 0x2000, 0x2000 }, { 0, 0, 0, 255 }}},
+    {{{ -12, 23, 0 }, 0, { 0x2300, 0x2000 }, { 0, 0, 0, 255 }}},
+};
+
+Vtx D_8014C5E0[4] = {
+    {{{ -16,  0, 0 }, 0, { 0x2400, 0x2400 }, { 0, 0, 0, 255 }}},
+    {{{  15,  0, 0 }, 0, { 0x2000, 0x2400 }, { 0, 0, 0, 255 }}},
+    {{{  15, 31, 0 }, 0, { 0x2000, 0x2000 }, { 0, 0, 0, 255 }}},
+    {{{ -16, 31, 0 }, 0, { 0x2400, 0x2000 }, { 0, 0, 0, 255 }}},
+};
+
+Gfx D_8014C620[] = {
+    gsDPPipeSync(),
+    gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
+    gsDPSetCombineMode(G_CC_DECALRGBA, G_CC_DECALRGBA),
+    gsDPSetTexturePersp(G_TP_PERSP),
+    gsDPSetTextureDetail(G_TD_CLAMP),
+    gsDPSetTextureLOD(G_TL_TILE),
+    gsDPSetTextureLUT(G_TT_NONE),
+    gsDPSetTextureFilter(G_TF_BILERP),
+    gsDPSetTextureConvert(G_TC_FILT),
+    gsDPSetTextureLUT(G_TT_RGBA16),
+    gsSPEndDisplayList(),
+};
+
+Gfx D_8014C678[] = {
+    gsSPClearGeometryMode(G_CULL_BACK | G_LIGHTING | G_SHADING_SMOOTH),
+    gsSPVertex(D_8014C5A0, 4, 0),
+    gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
+    gsDPPipeSync(),
+    gsSPEndDisplayList(),
+};
+
+Gfx D_8014C6A0[] = {
+    gsSPClearGeometryMode(G_CULL_BACK | G_LIGHTING | G_SHADING_SMOOTH),
+    gsSPVertex(D_8014C5E0, 4, 0),
+    gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
+    gsDPPipeSync(),
+    gsSPEndDisplayList(),
+};
+
+Lights1 D_8014C6C8 = gdSPDefLights1(255, 255, 255, 0, 0, 0, 0, 0, 0);
+
+s16 D_8014C6E0[] = { 32, 40 };
+s16 D_8014C6E4[] = { 8, 4 };
 
 s32 draw_ci_image_with_clipping(s32* raster, s32 width, s32 height, s32 fmt, s32 bitDepth, s32* palette, s16 posX,
                                 s16 posY, u16 clipULx, u16 clipULy, u16 clipLRx, u16 clipRLy, u8 opacity) {
@@ -138,7 +192,55 @@ void sparkle_script_update(ItemEntity* itemEntity) {
     }
 }
 
-INCLUDE_ASM(s32, "C50A0", draw_coin_sparkles);
+void draw_coin_sparkles(ItemEntity* itemEntity) {
+    f32 x, y, z;
+    f32 angle;
+    Matrix4f sp18;
+    Matrix4f sp58;
+    Matrix4f sp98;
+    Matrix4f spD8;
+    FoldImageRecPart foldImage;
+
+    x = D_80155D8C;
+    y = D_80155D8E;
+    z = D_80155D90;
+    angle = clamp_angle(180.0f - gCameras[gCurrentCamID].currentYaw);
+
+    guTranslateF(sp18, x, y, z);
+    guTranslateF(sp58, itemEntity->position.x, itemEntity->position.y + 12.0f, itemEntity->position.z);
+    guRotateF(sp98, angle, 0.0f, 1.0f, 0.0f);
+    guMtxCatF(sp18, sp98, sp98);
+    guMtxCatF(sp98, sp58, spD8);
+    guMtxF2L(spD8, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gDPSetCycleType(gMasterGfxPos++, G_CYC_1CYCLE);
+    gSPClearGeometryMode(gMasterGfxPos++, G_ZBUFFER | G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH);
+    gSPSetGeometryMode(gMasterGfxPos++, G_ZBUFFER | G_SHADE | G_LIGHTING | G_SHADING_SMOOTH);
+    gSPSetLights1(gMasterGfxPos++, D_8014C6C8);
+    gSPTexture(gMasterGfxPos++, -1, -1, 0, G_TX_RENDERTILE, G_ON);
+    gDPSetTextureLOD(gMasterGfxPos++, G_TL_TILE);
+    gDPSetTexturePersp(gMasterGfxPos++, G_TP_PERSP);
+    gDPSetTextureFilter(gMasterGfxPos++, G_TF_BILERP);
+    gDPSetColorDither(gMasterGfxPos++, G_CD_DISABLE);
+    gDPSetTextureDetail(gMasterGfxPos++, G_TD_CLAMP);
+    gDPSetTextureConvert(gMasterGfxPos++, G_TC_FILT);
+    gDPSetCombineKey(gMasterGfxPos++, G_CK_NONE);
+    gDPSetAlphaCompare(gMasterGfxPos++, G_AC_NONE);
+
+    foldImage.raster = itemEntity->sparkleRaster;
+    foldImage.palette = itemEntity->sparklePalette;
+    foldImage.width = itemEntity->sparkleWidth;
+    foldImage.height = itemEntity->sparkleHeight;
+    foldImage.xOffset = -itemEntity->sparkleWidth / 2;
+    foldImage.yOffset = itemEntity->sparkleHeight / 2;
+    foldImage.unk_10 = 255;
+    fold_appendGfx_component(0, &foldImage, 0, spD8);
+
+    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+    gDPPipeSync(gMasterGfxPos++);
+
+}
 
 ItemEntity* get_item_entity(s32 itemEntityIndex) {
     return gCurrentItemEntities[itemEntityIndex];
@@ -457,7 +559,7 @@ s32 make_item_entity(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pic
     item_entity_load(itemEntity);
 
     if (itemEntity->itemID == ITEM_COIN) {
-        sparkle_script_init(itemEntity, &SparkleScript_Coin);
+        sparkle_script_init(itemEntity, SparkleScript_Coin);
         sparkle_script_update(itemEntity);
     }
 
@@ -467,9 +569,6 @@ s32 make_item_entity(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pic
 
     return id;
 }
-
-// TODO remove this
-static const f32 rodata_padding = 0.0f;
 
 s32 make_item_entity_nodelay(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pickupVar) {
     return make_item_entity(itemID, x, y, z, itemSpawnMode, 0, -1, pickupVar);
@@ -556,11 +655,13 @@ s32 make_item_entity_at_player(s32 itemID, s32 arg1, s32 pickupMsgFlags) {
 
     item_entity_load(item);
     if (item->itemID == ITEM_COIN) {
-        sparkle_script_init(item, &SparkleScript_Coin);
+        sparkle_script_init(item, SparkleScript_Coin);
         sparkle_script_update(item);
     }
     return id;
 }
+
+static const f32 rodata_padding_2 = 0.0f;
 
 INCLUDE_ASM(s32, "C50A0", item_entity_update);
 
@@ -578,7 +679,7 @@ void update_item_entities(void) {
             if (entity != NULL && entity->flags != 0) {
                 if (entity->itemID == ITEM_COIN) {
                     if (rand_int(100) > 90) {
-                        sparkle_script_init(entity, &SparkleScript_Coin);
+                        sparkle_script_init(entity, SparkleScript_Coin);
                         D_80155D8C = rand_int(16) - 8;
                         D_80155D8E = rand_int(16) - 8;
                         D_80155D90 = 5;
@@ -930,7 +1031,79 @@ INCLUDE_ASM(s32, "C50A0", update_item_entity_temp);
 
 INCLUDE_ASM(s32, "C50A0", func_801363A0);
 
-INCLUDE_ASM(s32, "C50A0", func_8013673C);
+void func_8013673C(ItemEntity* itemEntity, s32 arg1, s32 arg2) {
+    ItemData* itemData = &gItemTable[itemEntity->itemID];
+    s32 itemMsg;
+    s32 offsetY;
+
+    switch (itemEntity->state) {
+        case 2:
+        case 3:
+        case 10:
+        case 11:
+            if (!(itemData->typeFlags & ITEM_TYPE_FLAG_BADGE)) {
+                if (!(itemEntity->flags & ITEM_ENTITY_FLAGS_4000000) || (itemEntity->pickupMsgFlags & 0x4)) {
+                    itemMsg = MESSAGE_ID(0x1D, 0x058);
+                } else {
+                    itemMsg = MESSAGE_ID(0x1D, 0x05A);
+                }
+                set_message_msg(itemData->nameMsg, 0);
+
+                if (itemEntity->pickupMsgFlags & 0x10) {
+                    itemMsg = MESSAGE_ID(0x1D, 0x05D);
+                }
+                if (itemEntity->pickupMsgFlags & 0x20) {
+                    itemMsg = MESSAGE_ID(0x1D, 0x05E);
+                }
+                if (itemEntity->pickupMsgFlags & 0x40) {
+                    itemMsg = MESSAGE_ID(0x1D, 0x05C);
+                }
+            } else {
+                if (!(itemEntity->flags & ITEM_ENTITY_FLAGS_4000000) || (itemEntity->pickupMsgFlags & 0x4)) {
+                    itemMsg = MESSAGE_ID(0x1D, 0x059);
+                } else {
+                    itemMsg = MESSAGE_ID(0x1D, 0x05B);
+                }
+
+                if (itemEntity->pickupMsgFlags & 0x10) {
+                    itemMsg = MESSAGE_ID(0x1D, 0x05D);
+                }
+                if (itemEntity->pickupMsgFlags & 0x20) {
+                    itemMsg = MESSAGE_ID(0x1D, 0x05E);
+                }
+                if (itemEntity->pickupMsgFlags & 0x40) {
+                    itemMsg = MESSAGE_ID(0x1D, 0x05C);
+                }
+
+                set_message_msg(itemData->nameMsg, 0);
+            }
+
+            offsetY = D_8014C6E4[get_msg_lines(itemMsg) - 1];
+
+            if ((gItemTable[itemEntity->itemID].typeFlags & ITEM_TYPE_FLAG_BADGE) ||
+                (gItemTable[itemEntity->itemID].typeFlags & ITEM_TYPE_FLAG_KEY) ||
+                itemEntity->itemID == ITEM_STAR_PIECE ||
+                (gItemTable[itemEntity->itemID].typeFlags & ITEM_TYPE_FLAG_GEAR) ||
+                (itemEntity->pickupMsgFlags & 0x30)) {
+
+                draw_msg(itemMsg, arg1 + 15, arg2 + offsetY, 255, 47, 0);
+            } else {
+                draw_msg(itemMsg, arg1 + 40, arg2 + offsetY, 255, 47, 0);
+                if (!(itemEntity->pickupMsgFlags & 0x30)) {
+                    hud_element_set_render_pos(D_801568E0, arg1 + 20, arg2 + 20);
+                    hud_element_draw_next(D_801568E0);
+                }
+            }
+            break;
+        case 13:
+        case 14:
+            set_message_msg(gItemTable[D_801568EC].nameMsg, 0);
+            draw_msg(MESSAGE_ID(0x1D, 0x05F), arg1 + 40, arg2 + 4, 255, 47, 0);
+            hud_element_set_render_pos(D_801568E0, arg1 + 20, arg2 + 20);
+            hud_element_draw_next(D_801568E0);
+            break;
+    }
+}
 
 void func_801369D0(s32 arg1, s32 x, s32 y) {
     draw_msg(MESSAGE_ID(0x1D,0x060), x + 12, y + 4, 255, 52, 0);
@@ -950,3 +1123,6 @@ void func_80136A08(ItemEntity* itemEntity, s32 posX, s32 posY) {
             break;
     }
 }
+
+// TODO remove this
+static const f32 rodata_padding[] = { 0.0f, 0.0f };
