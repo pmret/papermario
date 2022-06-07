@@ -4174,30 +4174,28 @@ segments:
     vram: 0x80231000
     overlay: True
     subsegments:
-    - [0x5483E0, c]
-    - [0x548500, data]
+    - [0x5483E0, c, actor/stilt_guy]
   - dir: battle/area_omo2_3
     type: code
     start: 0x54CC70
     vram: 0x80231000
     overlay: True
     subsegments:
-    - [0x54CC70, c]
-    - [0x54CCA0, data]
+    - [0x54CC70, c, actor/shy_stack]
   - dir: battle/area_omo2_4
     type: code
     start: 0x552440
     vram: 0x80231000
     overlay: True
     subsegments:
-    - [0x552440, data]
+    - [0x552440, c, actor/signal_guy]
   - dir: battle/area_omo2_5
     type: code
     start: 0x552BB0
     vram: 0x80231000
     overlay: True
     subsegments:
-    - [0x552BB0, data]
+    - [0x552BB0, c, actor/shy_squad_dup]
   - dir: battle/area_omo2_6
     type: code
     start: 0x556C90

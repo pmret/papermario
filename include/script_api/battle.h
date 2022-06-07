@@ -145,6 +145,7 @@ ApiStatus GetPartEventFlags(Evt* script, s32 isInitialCall);
 ApiStatus HPBarToHome(Evt* script, s32 isInitialCall);
 ApiStatus HPBarToCurrent(Evt* script, s32 isInitialCall);
 ApiStatus func_8026D940(Evt* script, s32 isInitialCall);
+ApiStatus func_8026DA94(Evt* script, s32 isInitialCall);
 ApiStatus SummonEnemy(Evt* script, s32 isInitialCall);
 ApiStatus GetOwnerID(Evt* script, s32 isInitialCall);
 ApiStatus SetOwnerID(Evt* script, s32 isInitialCall);
