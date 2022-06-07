@@ -1173,7 +1173,7 @@ typedef struct ModelAnimator {
     /* 0x2C8 */ StaticAnimatorNode** staticRoot;
     /* 0x2CC */ s32 treeIndexPos;
     /* 0x2D0 */ s32 savedTreePos;
-    /* 0x2D4 */ void (*fpRenderCallback)(void);
+    /* 0x2D4 */ void (*fpRenderCallback)(void*);
     /* 0x2D8 */ s32 renderCallbackArg;
     /* 0x2DC */ char unk_2DC[4];
 } ModelAnimator; // size = 0x2E0

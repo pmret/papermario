@@ -29,8 +29,21 @@ extern Matrix4f gAnimTranslateMtx;
 extern Matrix4f gAnimRotScaleMtx;
 extern StaticAnimatorNode** gAnimTreeRoot;
 
-// reg swap
-#ifdef NON_EQUIVALENT
+extern Gfx D_8014B7F8[];
+extern Gfx D_8014B820[];
+extern Gfx D_8014B848[];
+extern Gfx D_8014B870[];
+extern Gfx D_8014B898[];
+extern Gfx D_8014B8C0[];
+extern Gfx D_8014B8E8[];
+extern Gfx D_8014BE78[];
+extern Gfx D_8014BEA0[];
+extern Gfx D_8014BEC8[];
+extern Gfx D_8014BEF0[];
+extern Gfx D_8014BF18[];
+extern Gfx D_8014BF40[];
+extern Gfx D_8014BF68[];
+
 Vtx* animator_copy_vertices_to_buffer(ModelAnimator* animator, AnimatorNode* node, Vec3s* buffer, s32 vtxCount,
                                       s32 overhead, s32 startIdx) {
     DisplayListBufferHandle* handle;
@@ -56,7 +69,8 @@ Vtx* animator_copy_vertices_to_buffer(ModelAnimator* animator, AnimatorNode* nod
     phi_v1 = &node->fcData.vtxList[startIdx];
 
     if (animator->vertexArray != NULL) {
-        buffer = ((s32)buffer & 0xFFFFFF) + (s32)animator->vertexArray;
+        i = ((s32)buffer & 0xFFFFFF); // needed to match
+        buffer = i + (s32)animator->vertexArray;
     }
 
     for (i = 0; i < vtxCount; i++) {
@@ -70,9 +84,6 @@ Vtx* animator_copy_vertices_to_buffer(ModelAnimator* animator, AnimatorNode* nod
     }
     return handle->addr;
 }
-#else
-INCLUDE_ASM(s32, "B4580", animator_copy_vertices_to_buffer);
-#endif
 
 void animator_make_mirrorZ(Matrix4f mtx) {
     guMtxIdentF(mtx);
@@ -521,20 +532,118 @@ void update_model_animator_with_transform(s32 animatorID, Mtx* mtx) {
     }
 }
 
-INCLUDE_ASM(s32, "B4580", step_model_animator);
+s32 step_model_animator(ModelAnimator* animator) {
+    s16* args = animator->animReadPos;
+    AnimatorNode* node;
+    f32 x, y, z;
+    s32 flags;
+    s32 nodeId;
+
+    switch (*args++) {
+        case 0:
+            return -1;
+        case 18:
+            animator->renderMode = *args++;
+            animator->animReadPos = args;
+            return 1;
+        case 1:
+            animator->nextUpdateTime = *args++;
+            animator->animReadPos = args;
+            break;
+        case 3:
+            animator->animReadPos = animator->savedReadPos;
+            return 1;
+        case 10:
+            animator->animReadPos = animator->savedReadPos = args;
+            return 1;
+        case 14:
+            flags = *args++;
+            animator->animReadPos = args;
+            animator->flags |= flags & 0xFFFF;
+            return 1;
+        case 15:
+            node = get_animator_child_with_id(animator->rootNode, animator->staticNodeIDs[*args++ - 1]);
+            flags = *args++;
+            node->flags |= flags;
+            animator->animReadPos = args;
+            return 1;
+        case 16:
+            node = get_animator_child_with_id(animator->rootNode, animator->staticNodeIDs[*args++ - 1]);
+            flags = *args++;
+            node->flags &= ~flags;
+            animator->animReadPos = args;
+            return 1;
+        case 19:
+            animator->flags |= MODEL_ANIMATOR_FLAGS_20000;
+            animator->animReadPos = args;
+            return 1;
+        case 5:
+            nodeId = animator->staticNodeIDs[*args++ - 1];
+            x = (f32)*args++ * 180.0 / 32767.0;
+            y = (f32)*args++ * 180.0 / 32767.0;
+            z = (f32)*args++ * 180.0 / 32767.0;
+            animator->animReadPos = args;
+
+            node = get_animator_child_with_id(animator->rootNode, nodeId);
+            ASSERT(node != NULL);
+            node->rotation.x = x;
+            node->rotation.y = y;
+            node->rotation.z = z;
+            return 1;
+        case 6:
+            nodeId = animator->staticNodeIDs[*args++ - 1];
+            x = (f32)*args++ * 180.0 / 32767.0;
+            y = (f32)*args++ * 180.0 / 32767.0;
+            z = (f32)*args++ * 180.0 / 32767.0;
+            animator->animReadPos = args;
+
+            node = get_animator_child_with_id(animator->rootNode, nodeId);
+            ASSERT(node != NULL);
+            node->rotation.x += x;
+            node->rotation.y += y;
+            node->rotation.z += z;
+            return 1;
+        case 8:
+            nodeId = animator->staticNodeIDs[*args++ - 1];
+            x = *args++;
+            y = *args++;
+            z = *args++;
+            animator->animReadPos = args;
+            node = get_animator_child_with_id(animator->rootNode, nodeId);
+            ASSERT(node != NULL);
+            node->pos.x = x;
+            node->pos.y = y;
+            node->pos.z = z;
+            return 1;
+        case 17:
+            nodeId = animator->staticNodeIDs[*args++ - 1];
+            x = (f32)*args++ * 180.0 / 32767.0;
+            y = (f32)*args++ * 180.0 / 32767.0;
+            z = (f32)*args++ * 180.0 / 32767.0;
+            animator->animReadPos = args;
+
+            node = get_animator_child_with_id(animator->rootNode, nodeId);
+            ASSERT(node != NULL);
+            node->scale.x = x;
+            node->scale.y = y;
+            node->scale.z = z;
+            return 1;
+    }
+    return 0;
+}
 
 void animator_update_model_transforms(ModelAnimator* animator, Mtx* rootTransform) {
     Matrix4f flipMtx;
 
     if (animator->rootNode != NULL) {
         switch (animator->flags & (MODEL_ANIMATOR_FLAGS_100 | MODEL_ANIMATOR_FLAGS_200 | MODEL_ANIMATOR_FLAGS_400)) {
-            case 0x100:
+            case MODEL_ANIMATOR_FLAGS_100:
                 animator_make_mirrorZ(flipMtx);
                 break;
-            case 0x200:
+            case MODEL_ANIMATOR_FLAGS_200:
                 animator_make_mirrorY(flipMtx);
                 break;
-            case 0x400:
+            case MODEL_ANIMATOR_FLAGS_400:
                 animator_make_mirrorX(flipMtx);
                 break;
             default:
@@ -625,15 +734,82 @@ void render_animated_model_with_vertices(s32 animatorID, Mtx* rootTransform, s32
     }
 }
 
-INCLUDE_ASM(s32, "B4580", appendGfx_animator);
+void appendGfx_animator(ModelAnimator* animator) {
+    Matrix4f sp10;
+
+    if (animator->vertexArray != NULL) {
+        gSPSegment(gMasterGfxPos++, D_80153A60, VIRTUAL_TO_PHYSICAL(animator->vertexArray));
+    }
+
+    gDisplayContext->matrixStack[gMatrixListPos] = animator->mtx;
+    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+
+    switch (gAnimModelFogEnabled != 0) {
+        case FALSE:
+            switch (animator->renderMode) {
+                case RENDER_MODE_SURFACE_OPA:
+                    gSPDisplayList(gMasterGfxPos++, D_8014B7F8);
+                    break;
+                case RENDER_MODE_DECAL_OPA:
+                    gSPDisplayList(gMasterGfxPos++, D_8014B820);
+                    break;
+                case RENDER_MODE_INTERSECTING_OPA:
+                    gSPDisplayList(gMasterGfxPos++, D_8014B848);
+                    break;
+                case RENDER_MODE_ALPHATEST:
+                    gSPDisplayList(gMasterGfxPos++, D_8014B870);
+                    break;
+                case RENDER_MODE_SURFACE_XLU_LAYER1:
+                    gSPDisplayList(gMasterGfxPos++, D_8014B898);
+                    break;
+                case RENDER_MODE_DECAL_XLU:
+                    gSPDisplayList(gMasterGfxPos++, D_8014B8C0);
+                    break;
+                case RENDER_MODE_INTERSECTING_XLU:
+                    gSPDisplayList(gMasterGfxPos++, D_8014B8E8);
+                    break;
+            }
+            break;
+        case TRUE:
+            switch (animator->renderMode) {
+                case RENDER_MODE_SURFACE_OPA:
+                    gSPDisplayList(gMasterGfxPos++, D_8014BE78);
+                    break;
+                case RENDER_MODE_DECAL_OPA:
+                    gSPDisplayList(gMasterGfxPos++, D_8014BEA0);
+                    break;
+                case RENDER_MODE_INTERSECTING_OPA:
+                    gSPDisplayList(gMasterGfxPos++, D_8014BEC8);
+                    break;
+                case RENDER_MODE_ALPHATEST:
+                    gSPDisplayList(gMasterGfxPos++, D_8014BEF0);
+                    break;
+                case RENDER_MODE_SURFACE_XLU_LAYER1:
+                    gSPDisplayList(gMasterGfxPos++, D_8014BF18);
+                    break;
+                case RENDER_MODE_DECAL_XLU:
+                    gSPDisplayList(gMasterGfxPos++, D_8014BF40);
+                    break;
+                case RENDER_MODE_INTERSECTING_XLU:
+                    gSPDisplayList(gMasterGfxPos++, D_8014BF68);
+                    break;
+            }
+
+            gDPSetFogColor(gMasterGfxPos++, gAnimModelFogR, gAnimModelFogG, gAnimModelFogB, gAnimModelFogA);
+            gSPFogFactor(gMasterGfxPos++, 128000 / (gAnimModelFogEnd - gAnimModelFogStart), (500 - gAnimModelFogStart) * 256 / (gAnimModelFogEnd - gAnimModelFogStart));
+            break;
+    }
+
+    guMtxL2F(sp10, &animator->mtx);
+    appendGfx_animator_node(animator, animator->rootNode, sp10);
+    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+}
 
 INCLUDE_ASM(s32, "B4580", appendGfx_animator_node);
 
-AnimatorNode* get_animator_node_for_tree_index(ModelAnimator* animator, s32 treeIndex);
-INCLUDE_ASM(s32, "B4580", get_animator_node_for_tree_index);
-// AnimatorNode* get_animator_node_for_tree_index(ModelAnimator* animator, s32 arg1) {
-//     return get_animator_child_with_id(animator->rootNode, animator->unk_14[arg1]);
-// }
+AnimatorNode* get_animator_node_for_tree_index(ModelAnimator* animator, s32 arg1) {
+    return get_animator_child_with_id(animator->rootNode, animator->staticNodeIDs[arg1 - 1]);
+}
 
 AnimatorNode* get_animator_node_with_id(ModelAnimator* animator, s32 id) {
     return get_animator_child_for_model(animator->rootNode, id);
@@ -877,4 +1053,139 @@ void reload_mesh_animator_tree(ModelAnimator* animator) {
     set_animator_tree_to_node_map(animator, nodeIDs, ARRAY_COUNT(nodeIDs));
 }
 
-INCLUDE_ASM(s32, "B4580", step_mesh_animator);
+s32 step_mesh_animator(ModelAnimator* animator) {
+    s16* args = animator->animReadPos;
+    s16* oldPos = animator->animReadPos;
+    AnimatorNode* node;
+    f32 x, y, z;
+    s32 flags;
+    s32 nodeId;
+
+    switch (*args++) {
+        case 0:
+            return -1;
+        case 18:
+            animator->renderMode = *args++;
+            animator->animReadPos = args;
+            return 1;
+        case 1:
+            args++;
+            animator->animReadPos = args;
+            return 1;
+        case 3:
+            animator->animReadPos = animator->savedReadPos;
+            animator->treeIndexPos = animator->savedTreePos;
+            reload_mesh_animator_tree(animator);
+            return 1;
+        case 4:
+            animator->animReadPos = animator->savedReadPos;
+            animator->treeIndexPos = animator->savedTreePos;
+            break;
+        case 10:
+            animator->animReadPos = animator->savedReadPos = args;
+            animator->savedTreePos = animator->treeIndexPos;
+            return 1;
+        case 14:
+            flags = *args++;
+            animator->animReadPos = args;
+            animator->flags |= flags & 0xFFFF;
+            return 1;
+        case 15:
+            node = get_animator_child_with_id(animator->rootNode, animator->staticNodeIDs[*args++ - 1]);
+            flags = *args++;
+            node->flags |= flags;
+            animator->animReadPos = args;
+            return 1;
+        case 16:
+            node = get_animator_child_with_id(animator->rootNode, animator->staticNodeIDs[*args++ - 1]);
+            flags = *args++;
+            node->flags &= ~flags;
+            animator->animReadPos = args;
+            return 1;
+        case 19:
+            animator->flags |= MODEL_ANIMATOR_FLAGS_20000;
+            animator->animReadPos = args;
+            return 1;
+        case 5:
+            nodeId = animator->staticNodeIDs[*args++ - 1];
+            x = (f32)*args++ * 180.0 / 32767.0;
+            y = (f32)*args++ * 180.0 / 32767.0;
+            z = (f32)*args++ * 180.0 / 32767.0;
+            animator->animReadPos = args;
+            if (nodeId != 0xFF) {
+                node = get_animator_child_with_id(animator->rootNode, nodeId);
+                if (node != NULL) {
+                    node->rotation.x = x;
+                    node->rotation.y = y;
+                    node->rotation.z = z;
+                    return 1;
+                } else {
+                    animator->animReadPos = oldPos;
+                    animator->treeIndexPos++;
+                    break;
+                }
+            }
+            return 1;
+        case 6:
+            nodeId = animator->staticNodeIDs[*args++ - 1];
+            x = (f32)*args++ * 180.0 / 32767.0;
+            y = (f32)*args++ * 180.0 / 32767.0;
+            z = (f32)*args++ * 180.0 / 32767.0;
+            animator->animReadPos = args;
+            if (nodeId != 0xFF) {
+                node = get_animator_child_with_id(animator->rootNode, nodeId);
+                if (node != NULL) {
+                    node->rotation.x += x;
+                    node->rotation.y += y;
+                    node->rotation.z += z;
+                    return 1;
+                } else {
+                    animator->animReadPos = oldPos;
+                    animator->treeIndexPos++;
+                    break;
+                }
+            }
+            return 1;
+        case 8:
+            nodeId = animator->staticNodeIDs[*args++ - 1];
+            x = *args++;
+            y = *args++;
+            z = *args++;
+            animator->animReadPos = args;
+            if (nodeId != 0xFF) {
+                node = get_animator_child_with_id(animator->rootNode, nodeId);
+                if (node != NULL) {
+                    node->pos.x = x;
+                    node->pos.y = y;
+                    node->pos.z = z;
+                    return 1;
+                } else {
+                    animator->animReadPos = oldPos;
+                    animator->treeIndexPos++;
+                    break;
+                }
+            }
+            return 1;
+        case 17:
+            nodeId = animator->staticNodeIDs[*args++ - 1];
+            x = (f32)*args++ * 180.0 / 32767.0;
+            y = (f32)*args++ * 180.0 / 32767.0;
+            z = (f32)*args++ * 180.0 / 32767.0;
+            animator->animReadPos = args;
+            if (nodeId != 0xFF) {
+                node = get_animator_child_with_id(animator->rootNode, nodeId);
+                if (node != NULL) {
+                    node->scale.x = x;
+                    node->scale.y = y;
+                    node->scale.z = z;
+                    return 1;
+                } else {
+                    animator->animReadPos = oldPos;
+                    animator->treeIndexPos++;
+                    break;
+                }
+            }
+            return 1;
+    }
+    return 0;
+}
