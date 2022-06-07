@@ -340,8 +340,6 @@ s32 make_item_entity(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pic
                     return -1;
                 }
                 break;
-            default:
-                break;
         }
     }
 
