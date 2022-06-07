@@ -56,7 +56,7 @@ class N64SegGfx(CommonSegCodeSubsegment):
         self.file_text = self.disassemble_data(rom_bytes)
 
     def get_gfxd_target(self):
-        opt = options.get_gfx_target()
+        opt = options.get_gfx_ucode()
 
         if opt == "f3d":
             return gfxd_f3d  # type: ignore

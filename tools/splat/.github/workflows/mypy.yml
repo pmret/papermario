@@ -10,10 +10,10 @@ jobs:
     name: mypy
     steps:
     - uses: actions/checkout@v1
-    - name: Set up Python 3.9
+    - name: Set up Python 3.8
       uses: actions/setup-python@v1
       with:
-        python-version: 3.9
+        python-version: 3.8
     - name: Install Dependencies
       run: |
         pip install mypy
@@ -21,6 +21,6 @@ jobs:
         pip install -r requirements.txt
         pip install types-PyYAML
     - name: mypy
-      run: mypy --show-column-numbers --hide-error-context --exclude segtypes/n64/pygfxd .
+      run: mypy --show-column-numbers --hide-error-context .
     - name: black
-      run: black --exclude segtypes/n64/pygfxd .
+      run: black .

@@ -4,6 +4,7 @@ import hashlib
 from typing import Dict, List, Union, Set, Any
 import argparse
 import spimdisasm
+import tqdm
 import yaml
 import pickle
 from colorama import Style, Fore
@@ -14,6 +15,9 @@ from util import options
 from util import symbols
 from util import palettes
 from util import compiler
+from util.symbols import Symbol
+
+from intervaltree import Interval, IntervalTree
 
 VERSION = "0.9.0"
 
@@ -32,6 +36,8 @@ parser.add_argument(
 linker_writer: LinkerWriter
 config: Dict[str, Any]
 
+segment_roms: IntervalTree = IntervalTree()
+segment_rams: IntervalTree = IntervalTree()
 
 def fmt_size(size):
     if size > 1000000:
@@ -43,6 +49,12 @@ def fmt_size(size):
 
 
 def initialize_segments(config_segments: Union[dict, list]) -> List[Segment]:
+    global segment_roms
+    global segment_rams
+
+    segment_roms = IntervalTree()
+    segment_rams = IntervalTree()
+
     seen_segment_names: Set[str] = set()
     ret = []
 
@@ -69,38 +81,34 @@ def initialize_segments(config_segments: Union[dict, list]) -> List[Segment]:
             seen_segment_names.add(segment.name)
 
         ret.append(segment)
+        if isinstance(segment.rom_start, int) and isinstance(segment.rom_end, int):
+            segment_roms.addi(segment.rom_start, segment.rom_end, segment)
+        if isinstance(segment.vram_start, int) and isinstance(segment.vram_end, int):
+            segment_rams.addi(segment.vram_start, segment.vram_end, segment)
 
     return ret
 
 
-def get_segment_symbols(segment, all_segments):
-    seg_syms = {}
-    other_syms = {}
+def assign_symbols_to_segments():
+    seg_syms: dict[int, list[Symbol]] = {}
 
     for symbol in symbols.all_symbols:
-        if symbols.is_symbol_isolated(symbol, all_segments) and not symbol.rom:
-            if symbol.segment == segment or (
-                not segment.get_exclusive_ram_id()
-                and segment.get_most_parent().contains_vram(symbol.vram_start)
-            ):
-                if symbol.vram_start not in seg_syms:
-                    seg_syms[symbol.vram_start] = []
-                seg_syms[symbol.vram_start].append(symbol)
+        if symbol.rom:
+            cands = segment_roms[symbol.rom]
+            if len(cands) > 1:
+                log.error("multiple segments rom overlap symbol", symbol)
+            elif len(cands) == 0:
+                log.error("no segment rom overlaps symbol", symbol)
             else:
-                if symbol.vram_start not in other_syms:
-                    other_syms[symbol.vram_start] = []
-                other_syms[symbol.vram_start].append(symbol)
+                cand: Interval = cands.pop()
+                seg: Segment = cand.data
+                seg.add_seg_symbol(symbol)
         else:
-            if symbol.rom and segment.get_most_parent().contains_rom(symbol.rom):
-                if symbol.vram_start not in seg_syms:
-                    seg_syms[symbol.vram_start] = []
-                seg_syms[symbol.vram_start].append(symbol)
-            else:
-                if symbol.vram_start not in other_syms:
-                    other_syms[symbol.vram_start] = []
-                other_syms[symbol.vram_start].append(symbol)
-
-    return seg_syms, other_syms
+            cands: Set[Interval] = segment_rams[symbol.vram_start]
+            segs: List[Segment] = [cand.data for cand in cands]
+            for seg in segs:
+                if not seg.get_exclusive_ram_id():
+                    seg.add_seg_symbol(symbol)
 
 
 def do_statistics(seg_sizes, rom_bytes, seg_split, seg_cached):
@@ -222,11 +230,17 @@ def configure_disassembler():
         symbols.spim_context.fillDefaultBannedSymbols()
 
 
+def brief_seg_name(seg: Segment, limit: int, ellipsis="…") -> str:
+    s = seg.name.strip()
+    if len(s) > limit:
+        return s[:limit].strip() + ellipsis
+    return s
+
+
 def main(config_path, base_dir, target_path, modes, verbose, use_cache=True):
     global config
 
-    log.write(f"splat {VERSION}")
-    log.write(f"Powered by spimdisasm {spimdisasm.__version__}")
+    log.write(f"splat {VERSION} (powered by spimdisasm {spimdisasm.__version__})")
 
     # Load config
     config = {}
@@ -287,8 +301,11 @@ def main(config_path, base_dir, target_path, modes, verbose, use_cache=True):
     all_segments = initialize_segments(config["segments"])
 
     # Load and process symbols
-    log.write("Loading and processing symbols")
     symbols.initialize(all_segments)
+
+    # Assign symbols to segments
+    assign_symbols_to_segments()
+
     if options.mode_active("code"):
         symbols.initialize_spim_context(all_segments)
 
@@ -297,8 +314,10 @@ def main(config_path, base_dir, target_path, modes, verbose, use_cache=True):
         palettes.initialize(all_segments)
 
     # Scan
-    log.write("Starting scan")
-    for segment in all_segments:
+    scan_bar = tqdm.tqdm(all_segments, total=len(all_segments))
+    for segment in scan_bar:
+        assert isinstance(segment, Segment)
+        scan_bar.set_description(f"Scanning {brief_seg_name(segment, 20)}")
         typ = segment.type
         if segment.type == "bin" and segment.is_name_default():
             typ = "unk"
@@ -315,13 +334,6 @@ def main(config_path, base_dir, target_path, modes, verbose, use_cache=True):
                 if segment.cache() == cache.get(segment.unique_id()):
                     continue
 
-            if segment.needs_symbols:
-                segment_symbols, other_symbols = get_segment_symbols(
-                    segment, all_segments
-                )
-                segment.given_seg_symbols = segment_symbols
-                segment.given_ext_symbols = other_symbols
-
             segment.did_run = True
             segment.scan(rom_bytes)
 
@@ -329,11 +341,12 @@ def main(config_path, base_dir, target_path, modes, verbose, use_cache=True):
 
             seg_split[typ] += 1
 
-        log.dot(status=segment.status())
-
     # Split
-    log.write("Starting split")
-    for segment in all_segments:
+    for segment in tqdm.tqdm(
+        all_segments,
+        total=len(all_segments),
+        desc=f"Splitting {brief_seg_name(segment, 20)}",
+    ):
         if use_cache:
             cached = segment.cache()
 
@@ -347,8 +360,6 @@ def main(config_path, base_dir, target_path, modes, verbose, use_cache=True):
 
         if segment.should_split():
             segment.split(rom_bytes)
-
-        log.dot(status=segment.status())
 
     if options.mode_active("ld"):
         global linker_writer

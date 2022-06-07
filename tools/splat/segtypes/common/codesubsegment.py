@@ -56,8 +56,7 @@ class CommonSegCodeSubsegment(Segment):
         for symbol_list in self.seg_symbols.values():
             symbols.add_symbol_to_spim_section(self.text_section, symbol_list[0])
 
-        for symbol_list in self.ext_symbols.values():
-            sym = symbol_list[0]
+        for sym in symbols.all_symbols:
             if sym.user_declared:
                 symbols.add_symbol_to_spim_section(self.text_section, sym)
 

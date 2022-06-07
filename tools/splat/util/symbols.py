@@ -1,5 +1,6 @@
-from typing import Dict, List, Optional, TYPE_CHECKING
+from typing import Dict, List, Optional, TYPE_CHECKING, Set
 import spimdisasm
+import tqdm
 
 # circular import
 if TYPE_CHECKING:
@@ -7,10 +8,11 @@ if TYPE_CHECKING:
 
 from util import options, log
 
-all_symbols: "List[Symbol]" = []
-ignored_addresses: set[int] = set()
-symbol_ranges: "List[Symbol]" = []
-sym_isolated_map: "Dict[Symbol, bool]" = {}
+all_symbols: List["Symbol"] = []
+all_symbols_dict: Dict[int, List["Symbol"]] = {}
+ignored_addresses: Set[int] = set()
+symbol_ranges: List["Symbol"] = []
+
 # Initialize a spimdisasm context, used to store symbols and functions
 spim_context = spimdisasm.common.Context()
 
@@ -26,11 +28,21 @@ def is_falsey(str: str) -> bool:
     return str.lower() in FALSEY_VALS
 
 
+def add_symbol(sym: "Symbol"):
+    all_symbols.append(sym)
+    if sym.vram_start is not None:
+        if sym.vram_start not in all_symbols_dict:
+            all_symbols_dict[sym.vram_start] = []
+        all_symbols_dict[sym.vram_start].append(sym)
+
+
 def initialize(all_segments: "List[Segment]"):
     global all_symbols
+    global all_symbols_dict
     global symbol_ranges
 
     all_symbols = []
+    all_symbols_dict = {}
     symbol_ranges = []
 
     def get_seg_for_name(name: str) -> Optional["Segment"]:
@@ -44,7 +56,9 @@ def initialize(all_segments: "List[Segment]"):
         if path.exists():
             with open(path) as f:
                 sym_addrs_lines = f.readlines()
-                for line_num, line in enumerate(sym_addrs_lines):
+                for line_num, line in enumerate(
+                    tqdm.tqdm(sym_addrs_lines, desc=f"Loading symbols ({path.stem})")
+                ):
                     line = line.strip()
                     if not line == "" and not line.startswith("//"):
                         comment_loc = line.find("//")
@@ -118,7 +132,10 @@ def initialize(all_segments: "List[Segment]"):
                                                     f"Cannot find segment '{attr_val}'"
                                                 )
                                                 log.error("")
-                                            sym.segment = seg
+                                            else:
+                                                # Add segment to symbol, symbol to segment
+                                                sym.segment = seg
+                                                seg.add_seg_symbol(sym)
                                             continue
                                     except:
                                         log.parsing_error_preamble(path, line_num, line)
@@ -162,13 +179,11 @@ def initialize(all_segments: "List[Segment]"):
                             continue
 
                         sym.user_declared = True
-                        all_symbols.append(sym)
+                        add_symbol(sym)
 
                         # Symbol ranges
                         if sym.size > 4:
                             symbol_ranges.append(sym)
-
-                        is_symbol_isolated(sym, all_segments)
 
 
 def initialize_spim_context(all_segments: "List[Segment]") -> None:
@@ -321,22 +336,6 @@ def create_symbol_from_spim_symbol(
     return sym
 
 
-def is_symbol_isolated(symbol, all_segments):
-    if symbol in sym_isolated_map:
-        return sym_isolated_map[symbol]
-
-    relevant_segs = 0
-
-    for segment in all_segments:
-        if segment.contains_vram(symbol.vram_start):
-            relevant_segs += 1
-            if relevant_segs > 1:
-                break
-
-    sym_isolated_map[symbol] = relevant_segs < 2
-    return sym_isolated_map[symbol]
-
-
 def retrieve_from_ranges(vram, rom=None):
     rom_matches = []
     ram_matches = []
@@ -452,3 +451,6 @@ class Symbol:
         self.extract = True
         self.user_declared: bool = False
         self.segment = segment
+
+    def __str__(self):
+        return self.name

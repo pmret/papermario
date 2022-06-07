@@ -169,11 +169,6 @@ class Segment:
         self.given_seg_symbols: Dict[
             int, List[Symbol]
         ] = {}  # Symbols known to be in this segment
-        self.given_ext_symbols: Dict[
-            int, List[Symbol]
-        ] = (
-            {}
-        )  # Symbols not in this segment but also not from other overlapping ram address ranges
         self.given_section_order: List[str] = options.get_section_order()
 
         self.given_symbol_name_format = symbol_name_format
@@ -272,19 +267,17 @@ class Segment:
             return self.parent.get_exclusive_ram_id()
         return self.exclusive_ram_id
 
+    def add_seg_symbol(self, symbol: Symbol):
+        if symbol.vram_start not in self.given_seg_symbols:
+            self.given_seg_symbols[symbol.vram_start] = []
+        self.given_seg_symbols[symbol.vram_start].append(symbol)
+
     @property
     def seg_symbols(self) -> Dict[int, List[Symbol]]:
         if self.parent:
             return self.parent.seg_symbols
         else:
             return self.given_seg_symbols
-
-    @property
-    def ext_symbols(self) -> Dict[int, List[Symbol]]:
-        if self.parent:
-            return self.parent.ext_symbols
-        else:
-            return self.given_ext_symbols
 
     @property
     def size(self) -> Optional[int]:
@@ -466,7 +459,7 @@ class Segment:
             rom = most_parent.ram_to_rom(addr)
             ret = most_parent.retrieve_symbol(most_parent.seg_symbols, addr)
         elif not local_only:
-            ret = most_parent.retrieve_symbol(most_parent.ext_symbols, addr)
+            ret = most_parent.retrieve_symbol(symbols.all_symbols_dict, addr)
 
         # Search for symbol ranges
         if not ret and offsets:
@@ -479,17 +472,13 @@ class Segment:
         # Create the symbol if it doesn't exist
         if not ret and create:
             ret = Symbol(addr, rom=rom, type=type)
-            symbols.all_symbols.append(ret)
+            symbols.add_symbol(ret)
 
             if in_segment:
                 ret.segment = most_parent
                 if addr not in most_parent.seg_symbols:
                     most_parent.seg_symbols[addr] = []
                 most_parent.seg_symbols[addr].append(ret)
-            elif not local_only:
-                if addr not in most_parent.ext_symbols:
-                    most_parent.ext_symbols[addr] = []
-                most_parent.ext_symbols[addr].append(ret)
 
         if ret:
             if define:

@@ -373,13 +373,13 @@ def get_header_encoding() -> str:
     return opts.get("header_encoding", "ASCII")
 
 
-# Determines the gfx target (used by the gfx segment type)
+# Determines the type gfx ucode (used by gfx segments)
 # Valid options are ['f3d', 'f3db', 'f3dex', 'f3dexb', 'f3dex2']
-def get_gfx_target() -> str:
-    valid_options =  ['f3d', 'f3db', 'f3dex', 'f3dexb', 'f3dex2']
-    ret = opts.get("gfx_target", "f3dex2")
+def get_gfx_ucode() -> str:
+    valid_options = ["f3d", "f3db", "f3dex", "f3dexb", "f3dex2"]
+    ret = opts.get("gfx_ucode", "f3dex2")
     if ret not in valid_options:
-        log.error(f"Invalid gfx_target: {ret}. Valid options are: {valid_options}")
+        log.error(f"Invalid gfx_ucode: {ret}. Valid options are: {valid_options}")
     return ret
 
 

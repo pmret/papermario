@@ -4,3 +4,5 @@ pypng
 colorama
 spimdisasm>=1.1.6
 pygfxd
+tqdm
+intervaltree
