@@ -4167,8 +4167,7 @@ segments:
     vram: 0x80231000
     overlay: True
     subsegments:
-    - [0x543570, c]
-    - [0x543620, data]
+    - [0x543570, c, actor/shy_squad]
   - dir: battle/area_omo2_2
     type: code
     start: 0x5483E0
