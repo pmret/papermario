@@ -1,9 +1,27 @@
 #include "common.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
+#include "effects.h"
 #include "sprite/npc/tank_guy.h"
 
-#define NAMESPACE b_area_omo2_1_shy_squad_dup
+#define NAMESPACE b_area_omo2_5_shy_squad_dup
+
+extern s32 N(idleAnimations)[];
+extern EvtScript N(init);
+extern EvtScript N(takeTurn);
+extern EvtScript N(idle);
+extern EvtScript N(handleEvent);
+extern EvtScript N(nextTurn);
+extern EvtScript N(80232104);
+extern EvtScript N(8023233C);
+extern EvtScript N(80233088);
+extern EvtScript N(8023392C);
+extern EvtScript N(80233DA4);
+extern EvtScript N(80234024);
+extern EvtScript N(80234370);
+extern EvtScript N(802343A8);
+extern EvtScript N(80234624);
+extern EvtScript N(80234EC4);
 
 s32 N(defenseTable)[] = {
     ELEMENT_NORMAL, 0,

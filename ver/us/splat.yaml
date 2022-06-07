@@ -4202,7 +4202,7 @@ segments:
     vram: 0x80231000
     overlay: True
     subsegments:
-    - [0x556C90, data]
+    - [0x556C90, c, actor/shy_guy_dup]
   - dir: battle/area_omo3
     type: code
     start: 0x5573E0
