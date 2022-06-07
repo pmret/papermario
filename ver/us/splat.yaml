@@ -8,6 +8,7 @@ options:
   platform: n64
   subalign: 8
   auto_all_sections: [".data", ".rodata", ".bss"]
+  asm_data_macro: "dlabel"
 
   base_path: ../..
   target_path: ver/us/baserom.z64
