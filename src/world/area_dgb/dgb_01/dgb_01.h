@@ -3,6 +3,7 @@
 
 #include "common.h"
 #include "map.h"
+#include "animation_script.h"
 
 #define NAMESPACE dgb_01
 
@@ -30,7 +31,7 @@ extern EvtScript N(80244AD0);
 extern EvtScript N(main);
 extern EvtScript N(makeEntities);
 extern StaticAnimatorNode* N(D_80252F4C_C107CC)[];
-extern EvtScript N(D_802539A0_C11220);
+extern AnimScript N(D_802539A0_C11220);
 extern NpcGroupList N(npcGroupList_80246E50);
 extern NpcGroupList N(npcGroupList_80246ED4);
 extern NpcGroupList N(npcGroupList_80246E8C);
