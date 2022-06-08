@@ -27,7 +27,7 @@
 #include "battle/action_cmd/water_block_4.png.inc.c"
 #include "battle/action_cmd/water_block_4.pal.inc.c"
 
-HudScript HudScript_WaterBlock1 = {
+HudScript HES_WaterBlock1 = {
     HUD_ELEMENT_OP_SetVisible,
     HUD_ELEMENT_OP_SetTileSize, HUD_ELEMENT_SIZE_24x24,
     HUD_ELEMENT_OP_Loop,
@@ -36,7 +36,7 @@ HudScript HudScript_WaterBlock1 = {
     HUD_ELEMENT_OP_End
 };
 
-HudScript HudScript_WaterBlock2 = {
+HudScript HES_WaterBlock2 = {
     HUD_ELEMENT_OP_SetVisible,
     HUD_ELEMENT_OP_SetTileSize, HUD_ELEMENT_SIZE_24x24,
     HUD_ELEMENT_OP_Loop,
@@ -45,7 +45,7 @@ HudScript HudScript_WaterBlock2 = {
     HUD_ELEMENT_OP_End
 };
 
-HudScript HudScript_WaterBlock3 = {
+HudScript HES_WaterBlock3 = {
     HUD_ELEMENT_OP_SetVisible,
     HUD_ELEMENT_OP_SetTileSize, HUD_ELEMENT_SIZE_24x24,
     HUD_ELEMENT_OP_Loop,
@@ -54,7 +54,7 @@ HudScript HudScript_WaterBlock3 = {
     HUD_ELEMENT_OP_End
 };
 
-HudScript HudScript_WaterBlock0 = {
+HudScript HES_WaterBlock0 = {
     HUD_ELEMENT_OP_SetVisible,
     HUD_ELEMENT_OP_SetTileSize, HUD_ELEMENT_SIZE_24x24,
     HUD_ELEMENT_OP_Loop,
@@ -63,7 +63,7 @@ HudScript HudScript_WaterBlock0 = {
     HUD_ELEMENT_OP_End
 };
 
-HudScript HudScript_WaterBlock4 = {
+HudScript HES_WaterBlock4 = {
     HUD_ELEMENT_OP_SetVisible,
     HUD_ELEMENT_OP_SetTileSize, HUD_ELEMENT_SIZE_24x24,
     HUD_ELEMENT_OP_Loop,
@@ -72,7 +72,7 @@ HudScript HudScript_WaterBlock4 = {
     HUD_ELEMENT_OP_End
 };
 
-HudScript HudScript_WaterBlockBlock = {
+HudScript HES_WaterBlockBlock = {
     HUD_ELEMENT_OP_SetVisible,
     HUD_ELEMENT_OP_SetTileSize, HUD_ELEMENT_SIZE_32x32,
     HUD_ELEMENT_OP_Loop,
@@ -81,7 +81,7 @@ HudScript HudScript_WaterBlockBlock = {
     HUD_ELEMENT_OP_End
 };
 
-HudScript HudScript_WaterBlockCircle = {
+HudScript HES_WaterBlockCircle = {
     HUD_ELEMENT_OP_SetVisible,
     HUD_ELEMENT_OP_SetTileSize, HUD_ELEMENT_SIZE_40x40,
     HUD_ELEMENT_OP_Loop,
@@ -90,7 +90,7 @@ HudScript HudScript_WaterBlockCircle = {
     HUD_ELEMENT_OP_End
 };
 
-HudScript HudScript_WaterBlockCloud = {
+HudScript HES_WaterBlockCloud = {
     HUD_ELEMENT_OP_SetVisible,
     HUD_ELEMENT_OP_SetTileSize, HUD_ELEMENT_SIZE_40x40,
     HUD_ELEMENT_OP_Loop,
@@ -100,26 +100,26 @@ HudScript HudScript_WaterBlockCloud = {
 };
 
 HudScript* D_802AB180_42C670[] = {
-    &HudScript_WaterBlock0
+    &HES_WaterBlock0
 };
 
 HudScript* D_802AB184_42C674[] = {
-    &HudScript_WaterBlock1, &HudScript_WaterBlock2, &HudScript_WaterBlock3, &HudScript_WaterBlock4, &HudScript_WaterBlock4, &HudScript_WaterBlock4, &HudScript_WaterBlock4, &HudScript_WaterBlock4, &HudScript_WaterBlock4, 0, 0
+    &HES_WaterBlock1, &HES_WaterBlock2, &HES_WaterBlock3, &HES_WaterBlock4, &HES_WaterBlock4, &HES_WaterBlock4, &HES_WaterBlock4, &HES_WaterBlock4, &HES_WaterBlock4, 0, 0
 };
 
 extern s32 D_80294460;
 
-extern HudScript HudScript_AButton;
-extern HudScript HudScript_AButtonDown;
-extern HudScript HudScript_TimingBar3Chances;
-extern HudScript HudScript_TimingCharge2;
-extern HudScript HudScript_TimingCharge3;
-extern HudScript HudScript_TimingCharge4b;
-extern HudScript HudScript_TimingCharge4c;
-extern HudScript HudScript_TimingOK;
-extern HudScript HudScript_TimingMiss;
-extern HudScript HudScript_TimingWait;
-extern HudScript HudScript_TimingReady;
+extern HudScript HES_AButton;
+extern HudScript HES_AButtonDown;
+extern HudScript HES_TimingBar3Chances;
+extern HudScript HES_TimingCharge2;
+extern HudScript HES_TimingCharge3;
+extern HudScript HES_TimingCharge4b;
+extern HudScript HES_TimingCharge4c;
+extern HudScript HES_TimingOK;
+extern HudScript HES_TimingMiss;
+extern HudScript HES_TimingWait;
+extern HudScript HES_TimingReady;
 
 ApiStatus func_802A9000_42A4F0(Evt* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
@@ -147,49 +147,49 @@ ApiStatus func_802A9000_42A4F0(Evt* script, s32 isInitialCall) {
     actionCommandStatus->hudElementX = -48;
     actionCommandStatus->hudElementY = 80;
 
-    id = hud_element_create(&HudScript_AButton);
+    id = hud_element_create(&HES_AButton);
     actionCommandStatus->hudElements[0] = id;
     hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
     hud_element_set_render_pos(id, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
     hud_element_set_render_depth(id, 0);
 
-    id = hud_element_create(&HudScript_TimingBar3Chances);
+    id = hud_element_create(&HES_TimingBar3Chances);
     actionCommandStatus->hudElements[1] = id;
     hud_element_set_render_pos(id, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
     hud_element_set_render_depth(id, 0);
     hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
-    id = hud_element_create(&HudScript_TimingWait);
+    id = hud_element_create(&HES_TimingWait);
     actionCommandStatus->hudElements[2] = id;
     hud_element_set_render_pos(id, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
     hud_element_set_render_depth(id, 0);
     hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
-    id = hud_element_create(&HudScript_TimingWait);
+    id = hud_element_create(&HES_TimingWait);
     actionCommandStatus->hudElements[3] = id;
     hud_element_set_render_pos(id, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
     hud_element_set_render_depth(id, 0);
     hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
-    id = hud_element_create(&HudScript_TimingWait);
+    id = hud_element_create(&HES_TimingWait);
     actionCommandStatus->hudElements[4] = id;
     hud_element_set_render_pos(id, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
     hud_element_set_render_depth(id, 0);
     hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
-    id = hud_element_create(&HudScript_TimingOK);
+    id = hud_element_create(&HES_TimingOK);
     actionCommandStatus->hudElements[6] = id;
     hud_element_set_render_pos(id, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
     hud_element_set_render_depth(id, 0);
     hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
-    id = hud_element_create(&HudScript_TimingOK);
+    id = hud_element_create(&HES_TimingOK);
     actionCommandStatus->hudElements[7] = id;
     hud_element_set_render_pos(id, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
     hud_element_set_render_depth(id, 0);
     hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
-    id = hud_element_create(&HudScript_TimingOK);
+    id = hud_element_create(&HES_TimingOK);
     actionCommandStatus->hudElements[8] = id;
     hud_element_set_render_pos(id, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
     hud_element_set_render_depth(id, 0);
@@ -199,25 +199,25 @@ ApiStatus func_802A9000_42A4F0(Evt* script, s32 isInitialCall) {
     hud_element_set_render_pos(actionCommandStatus->hudElements[10],
                                actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
 
-    actionCommandStatus->hudElements[11] = hud_element_create(&HudScript_TimingCharge4c);
+    actionCommandStatus->hudElements[11] = hud_element_create(&HES_TimingCharge4c);
     hud_element_set_render_pos(actionCommandStatus->hudElements[11],
                                actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
 
-    id = hud_element_create(&HudScript_TimingCharge4b);
+    id = hud_element_create(&HES_TimingCharge4b);
     actionCommandStatus->hudElements[12] = id;
     hud_element_set_render_pos(id, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
 
     switch (actionCommandStatus->unk_64) {
         case 0:
-            actionCommandStatus->hudElements[13] = hud_element_create(&HudScript_WaterBlockBlock);
+            actionCommandStatus->hudElements[13] = hud_element_create(&HES_WaterBlockBlock);
             id = actionCommandStatus->hudElements[13];
             break;
         case 1:
-            actionCommandStatus->hudElements[13] = hud_element_create(&HudScript_WaterBlockCircle);
+            actionCommandStatus->hudElements[13] = hud_element_create(&HES_WaterBlockCircle);
             id = actionCommandStatus->hudElements[13];
             break;
         case 2:
-            actionCommandStatus->hudElements[13] = hud_element_create(&HudScript_WaterBlockCloud);
+            actionCommandStatus->hudElements[13] = hud_element_create(&HES_WaterBlockCloud);
             id = actionCommandStatus->hudElements[13];
             break;
     }
@@ -360,16 +360,16 @@ void func_802A948C_42A97C(void) {
         case 11:
             btl_set_popup_duration(99);
             if (actionCommandStatus->unk_54 == 42) {
-                hud_element_set_script(actionCommandStatus->hudElements[11], &HudScript_TimingCharge3);
+                hud_element_set_script(actionCommandStatus->hudElements[11], &HES_TimingCharge3);
                 sfx_play_sound(SOUND_233);
             }
             if (actionCommandStatus->unk_54 == 22) {
-                hud_element_set_script(actionCommandStatus->hudElements[12], &HudScript_TimingCharge2);
+                hud_element_set_script(actionCommandStatus->hudElements[12], &HES_TimingCharge2);
                 sfx_play_sound(SOUND_233);
             }
             if (actionCommandStatus->unk_54 == 2) {
-                hud_element_set_script(actionCommandStatus->hudElements[2], &HudScript_TimingReady);
-                hud_element_set_script(actionCommandStatus->hudElements[0], &HudScript_AButtonDown);
+                hud_element_set_script(actionCommandStatus->hudElements[2], &HES_TimingReady);
+                hud_element_set_script(actionCommandStatus->hudElements[0], &HES_AButtonDown);
                 sfx_play_sound(SOUND_234);
             }
             actionCommandStatus->unk_54--;
@@ -417,9 +417,9 @@ void func_802A948C_42A97C(void) {
             if ((actionCommandStatus->unk_5D >= -4) && ((actionCommandStatus->unk_60 != 0) || (actionCommandStatus->unk_5C != 0))) {
                 id = actionCommandStatus->hudElements[6];
                 if (actionCommandStatus->unk_5C != 0) {
-                    hud_element_set_script(id, &HudScript_TimingOK);
+                    hud_element_set_script(id, &HES_TimingOK);
                 } else {
-                    hud_element_set_script(id, &HudScript_TimingMiss);
+                    hud_element_set_script(id, &HES_TimingMiss);
                 }
                 hud_element_set_render_pos(id, actionCommandStatus->hudElementX + 28, actionCommandStatus->hudElementY + 38);
                 hud_element_clear_flags(id, 2);
@@ -428,18 +428,18 @@ void func_802A948C_42A97C(void) {
             if (actionCommandStatus->unk_5D == -5) {
                 id = actionCommandStatus->hudElements[6];
                 if (actionCommandStatus->unk_5C != 0) {
-                    hud_element_set_script(id, &HudScript_TimingOK);
+                    hud_element_set_script(id, &HES_TimingOK);
                 } else {
-                    hud_element_set_script(id, &HudScript_TimingMiss);
+                    hud_element_set_script(id, &HES_TimingMiss);
                 }
                 hud_element_set_render_pos(id, actionCommandStatus->hudElementX + 28, actionCommandStatus->hudElementY + 38);
                 hud_element_clear_flags(id, 2);
-                hud_element_set_script(actionCommandStatus->hudElements[0], &HudScript_AButton);
+                hud_element_set_script(actionCommandStatus->hudElements[0], &HES_AButton);
             }
             actionCommandStatus->unk_5D--;
             if (actionCommandStatus->unk_54 == 2) {
-                hud_element_set_script(actionCommandStatus->hudElements[3], &HudScript_TimingReady);
-                hud_element_set_script(actionCommandStatus->hudElements[0], &HudScript_AButtonDown);
+                hud_element_set_script(actionCommandStatus->hudElements[3], &HES_TimingReady);
+                hud_element_set_script(actionCommandStatus->hudElements[0], &HES_AButtonDown);
                 sfx_play_sound(SOUND_234);
             }
             actionCommandStatus->unk_54--;
@@ -492,9 +492,9 @@ void func_802A948C_42A97C(void) {
             if ((actionCommandStatus->unk_5D >= -4) && ((actionCommandStatus->unk_60 != 0) || (actionCommandStatus->unk_5C != 0))) {
                 id = actionCommandStatus->hudElements[7];
                 if (actionCommandStatus->unk_5C != 0) {
-                    hud_element_set_script(id, &HudScript_TimingOK);
+                    hud_element_set_script(id, &HES_TimingOK);
                 } else {
-                    hud_element_set_script(id, &HudScript_TimingMiss);
+                    hud_element_set_script(id, &HES_TimingMiss);
                 }
                 hud_element_set_render_pos(id, actionCommandStatus->hudElementX + 48, actionCommandStatus->hudElementY + 38);
                 hud_element_clear_flags(id, 2);
@@ -502,18 +502,18 @@ void func_802A948C_42A97C(void) {
             if (actionCommandStatus->unk_5D == -5) {
                 id = actionCommandStatus->hudElements[7];
                 if (actionCommandStatus->unk_5C != 0) {
-                    hud_element_set_script(id, &HudScript_TimingOK);
+                    hud_element_set_script(id, &HES_TimingOK);
                 } else {
-                    hud_element_set_script(id, &HudScript_TimingMiss);
+                    hud_element_set_script(id, &HES_TimingMiss);
                 }
                 hud_element_set_render_pos(id, actionCommandStatus->hudElementX + 48, actionCommandStatus->hudElementY + 38);
                 hud_element_clear_flags(id, 2);
-                hud_element_set_script(actionCommandStatus->hudElements[0], &HudScript_AButton);
+                hud_element_set_script(actionCommandStatus->hudElements[0], &HES_AButton);
             }
             actionCommandStatus->unk_5D--;
             if (actionCommandStatus->unk_54 == 2) {
-                hud_element_set_script(actionCommandStatus->hudElements[4], &HudScript_TimingReady);
-                hud_element_set_script(actionCommandStatus->hudElements[0], &HudScript_AButtonDown);
+                hud_element_set_script(actionCommandStatus->hudElements[4], &HES_TimingReady);
+                hud_element_set_script(actionCommandStatus->hudElements[0], &HES_AButtonDown);
                 sfx_play_sound(SOUND_234);
             }
             actionCommandStatus->unk_54--;
@@ -566,9 +566,9 @@ void func_802A948C_42A97C(void) {
                 if ((actionCommandStatus->unk_60 != 0) || (actionCommandStatus->unk_5C != 0)) {
                     id = actionCommandStatus->hudElements[8];
                     if (actionCommandStatus->unk_5C != 0) {
-                        hud_element_set_script(id, &HudScript_TimingOK);
+                        hud_element_set_script(id, &HES_TimingOK);
                     } else {
-                        hud_element_set_script(id, &HudScript_TimingMiss);
+                        hud_element_set_script(id, &HES_TimingMiss);
                     }
                     hud_element_set_render_pos(id, actionCommandStatus->hudElementX + 68, actionCommandStatus->hudElementY + 38);
                     hud_element_clear_flags(id, 2);
@@ -577,13 +577,13 @@ void func_802A948C_42A97C(void) {
             if (actionCommandStatus->unk_5D == -5) {
                 id = actionCommandStatus->hudElements[8];
                 if (actionCommandStatus->unk_5C != 0) {
-                    hud_element_set_script(id, &HudScript_TimingOK);
+                    hud_element_set_script(id, &HES_TimingOK);
                 } else {
-                    hud_element_set_script(id, &HudScript_TimingMiss);
+                    hud_element_set_script(id, &HES_TimingMiss);
                 }
                 hud_element_set_render_pos(id, actionCommandStatus->hudElementX + 68, actionCommandStatus->hudElementY + 38);
                 hud_element_clear_flags(id, 2);
-                hud_element_set_script(actionCommandStatus->hudElements[0], &HudScript_AButton);
+                hud_element_set_script(actionCommandStatus->hudElements[0], &HES_AButton);
                 actionCommandStatus->state = 16;
                 return;
             }

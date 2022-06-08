@@ -37,55 +37,55 @@
 #include "partner/twink.h"
 #include "sprite/npc/twink.h"
 
-extern HudScript HudScript_Partner0;
-extern HudScript HudScript_Goombario;
-extern HudScript HudScript_Kooper;
-extern HudScript HudScript_Bombette;
-extern HudScript HudScript_Parakarry;
-extern HudScript HudScript_Watt;
-extern HudScript HudScript_Sushie;
-extern HudScript HudScript_Lakilester;
-extern HudScript HudScript_Bow;
-extern HudScript HudScript_PartnerA;
-extern HudScript HudScript_Partner0Disabled;
-extern HudScript HudScript_GoombarioDisabled;
-extern HudScript HudScript_KooperDisabled;
-extern HudScript HudScript_BombetteDisabled;
-extern HudScript HudScript_ParakarryDisabled;
-extern HudScript HudScript_WattDisabled;
-extern HudScript HudScript_SushieDisabled;
-extern HudScript HudScript_LakilesterDisabled;
-extern HudScript HudScript_BowDisabled;
-extern HudScript HudScript_PartnerADisabled;
+extern HudScript HES_Partner0;
+extern HudScript HES_Goombario;
+extern HudScript HES_Kooper;
+extern HudScript HES_Bombette;
+extern HudScript HES_Parakarry;
+extern HudScript HES_Watt;
+extern HudScript HES_Sushie;
+extern HudScript HES_Lakilester;
+extern HudScript HES_Bow;
+extern HudScript HES_PartnerA;
+extern HudScript HES_Partner0Disabled;
+extern HudScript HES_GoombarioDisabled;
+extern HudScript HES_KooperDisabled;
+extern HudScript HES_BombetteDisabled;
+extern HudScript HES_ParakarryDisabled;
+extern HudScript HES_WattDisabled;
+extern HudScript HES_SushieDisabled;
+extern HudScript HES_LakilesterDisabled;
+extern HudScript HES_BowDisabled;
+extern HudScript HES_PartnerADisabled;
 
-extern HudScript HudScript_StatusDigit0;
-extern HudScript HudScript_StatusDigit1;
-extern HudScript HudScript_StatusDigit2;
-extern HudScript HudScript_StatusDigit3;
-extern HudScript HudScript_StatusDigit4;
-extern HudScript HudScript_StatusDigit5;
-extern HudScript HudScript_StatusDigit6;
-extern HudScript HudScript_StatusDigit7;
-extern HudScript HudScript_StatusDigit8;
-extern HudScript HudScript_StatusDigit9;
-extern HudScript HudScript_StatusTimes;
-extern HudScript HudScript_StatusSlash;
+extern HudScript HES_StatusDigit0;
+extern HudScript HES_StatusDigit1;
+extern HudScript HES_StatusDigit2;
+extern HudScript HES_StatusDigit3;
+extern HudScript HES_StatusDigit4;
+extern HudScript HES_StatusDigit5;
+extern HudScript HES_StatusDigit6;
+extern HudScript HES_StatusDigit7;
+extern HudScript HES_StatusDigit8;
+extern HudScript HES_StatusDigit9;
+extern HudScript HES_StatusTimes;
+extern HudScript HES_StatusSlash;
 
-extern HudScript HudScript_StatusStar1;
-extern HudScript HudScript_StatusStar2;
-extern HudScript HudScript_StatusStar3;
-extern HudScript HudScript_StatusStar4;
-extern HudScript HudScript_StatusStar5;
-extern HudScript HudScript_StatusStar6;
-extern HudScript HudScript_StatusStar7;
+extern HudScript HES_StatusStar1;
+extern HudScript HES_StatusStar2;
+extern HudScript HES_StatusStar3;
+extern HudScript HES_StatusStar4;
+extern HudScript HES_StatusStar5;
+extern HudScript HES_StatusStar6;
+extern HudScript HES_StatusStar7;
 
-extern HudScript HudScript_StatusSPIncrement1;
-extern HudScript HudScript_StatusSPIncrement2;
-extern HudScript HudScript_StatusSPIncrement3;
-extern HudScript HudScript_StatusSPIncrement4;
-extern HudScript HudScript_StatusSPIncrement5;
-extern HudScript HudScript_StatusSPIncrement6;
-extern HudScript HudScript_StatusSPIncrement7;
+extern HudScript HES_StatusSPIncrement1;
+extern HudScript HES_StatusSPIncrement2;
+extern HudScript HES_StatusSPIncrement3;
+extern HudScript HES_StatusSPIncrement4;
+extern HudScript HES_StatusSPIncrement5;
+extern HudScript HES_StatusSPIncrement6;
+extern HudScript HES_StatusSPIncrement7;
 
 extern f32 wPartnerTetherDistance;
 extern s16 D_8010CFC8;
@@ -105,27 +105,27 @@ void _use_partner_ability(void);
 
 // Partner icons
 HudScript* wPartnerHudScripts[] = {
-    &HudScript_Partner0, &HudScript_Goombario, &HudScript_Kooper, &HudScript_Bombette,
-    &HudScript_Parakarry, &HudScript_Partner0, &HudScript_Watt, &HudScript_Sushie,
-    &HudScript_Lakilester, &HudScript_Bow, &HudScript_PartnerA, &HudScript_PartnerA,
-    &HudScript_PartnerA, &HudScript_PartnerA, &HudScript_PartnerA, &HudScript_PartnerA,
+    &HES_Partner0, &HES_Goombario, &HES_Kooper, &HES_Bombette,
+    &HES_Parakarry, &HES_Partner0, &HES_Watt, &HES_Sushie,
+    &HES_Lakilester, &HES_Bow, &HES_PartnerA, &HES_PartnerA,
+    &HES_PartnerA, &HES_PartnerA, &HES_PartnerA, &HES_PartnerA,
 };
 HudScript* wDisabledPartnerHudScripts[] = {
-    &HudScript_Partner0Disabled, &HudScript_GoombarioDisabled, &HudScript_KooperDisabled, &HudScript_BombetteDisabled,
-    &HudScript_ParakarryDisabled, &HudScript_Partner0Disabled, &HudScript_WattDisabled, &HudScript_SushieDisabled,
-    &HudScript_LakilesterDisabled, &HudScript_BowDisabled, &HudScript_PartnerADisabled, &HudScript_PartnerADisabled,
-    &HudScript_PartnerADisabled, &HudScript_PartnerADisabled, &HudScript_PartnerADisabled, &HudScript_PartnerADisabled,
+    &HES_Partner0Disabled, &HES_GoombarioDisabled, &HES_KooperDisabled, &HES_BombetteDisabled,
+    &HES_ParakarryDisabled, &HES_Partner0Disabled, &HES_WattDisabled, &HES_SushieDisabled,
+    &HES_LakilesterDisabled, &HES_BowDisabled, &HES_PartnerADisabled, &HES_PartnerADisabled,
+    &HES_PartnerADisabled, &HES_PartnerADisabled, &HES_PartnerADisabled, &HES_PartnerADisabled,
 };
 HudScript* DigitHudScripts[] = {
-    &HudScript_StatusDigit0, &HudScript_StatusDigit1, &HudScript_StatusDigit2, &HudScript_StatusDigit3, &HudScript_StatusDigit4,
-    &HudScript_StatusDigit5, &HudScript_StatusDigit6, &HudScript_StatusDigit7, &HudScript_StatusDigit8, &HudScript_StatusDigit9,
+    &HES_StatusDigit0, &HES_StatusDigit1, &HES_StatusDigit2, &HES_StatusDigit3, &HES_StatusDigit4,
+    &HES_StatusDigit5, &HES_StatusDigit6, &HES_StatusDigit7, &HES_StatusDigit8, &HES_StatusDigit9,
 };
-HudScript* TimesHudScript = &HudScript_StatusTimes;
-HudScript* SlashHudScript = &HudScript_StatusSlash;
-HudScript* SPIncrementHudScripts[] = { &HudScript_StatusSPIncrement1, &HudScript_StatusSPIncrement3, &HudScript_StatusSPIncrement2,
-    &HudScript_StatusSPIncrement4, &HudScript_StatusSPIncrement5, &HudScript_StatusSPIncrement6, &HudScript_StatusSPIncrement7 };
-HudScript* SPStarHudScripts[] = { &HudScript_StatusStar1, &HudScript_StatusStar3, &HudScript_StatusStar2, &HudScript_StatusStar4,
-    &HudScript_StatusStar5, &HudScript_StatusStar6, &HudScript_StatusStar7 };
+HudScript* TimesHudScript = &HES_StatusTimes;
+HudScript* SlashHudScript = &HES_StatusSlash;
+HudScript* SPIncrementHudScripts[] = { &HES_StatusSPIncrement1, &HES_StatusSPIncrement3, &HES_StatusSPIncrement2,
+    &HES_StatusSPIncrement4, &HES_StatusSPIncrement5, &HES_StatusSPIncrement6, &HES_StatusSPIncrement7 };
+HudScript* SPStarHudScripts[] = { &HES_StatusStar1, &HES_StatusStar3, &HES_StatusStar2, &HES_StatusStar4,
+    &HES_StatusStar5, &HES_StatusStar6, &HES_StatusStar7 };
 
 s32 D_800F7FE8 = -1;
 s32 D_800F7FEC = 1;

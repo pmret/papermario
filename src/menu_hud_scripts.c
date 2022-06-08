@@ -2,7 +2,7 @@
 #include "hud_element.h"
 #include "ld_addrs.h"
 
-s32 HudScript_UnusedBadge[] = {
+HudScript HES_UnusedBadge = {
 	hs_SetVisible
 	hs_SetTileSize(HUD_ELEMENT_SIZE_24x24)
 	hs_Loop
@@ -11,7 +11,7 @@ s32 HudScript_UnusedBadge[] = {
 	hs_End
 };
 
-s32 HudScript_UnusedBadge_disabled[] = {
+HudScript HES_UnusedBadge_disabled = {
 	hs_SetVisible
 	hs_SetTileSize(HUD_ELEMENT_SIZE_24x24)
 	hs_Loop
@@ -20,7 +20,7 @@ s32 HudScript_UnusedBadge_disabled[] = {
 	hs_End
 };
 
-s32 HudScript_UnusedCompass[] = {
+HudScript HES_UnusedCompass = {
 	hs_SetVisible
 	hs_SetTileSize(HUD_ELEMENT_SIZE_24x24)
 	hs_Loop
@@ -29,7 +29,7 @@ s32 HudScript_UnusedCompass[] = {
 	hs_End
 };
 
-s32 HudScript_UnusedCompass_disabled[] = {
+HudScript HES_UnusedCompass_disabled = {
 	hs_SetVisible
 	hs_SetTileSize(HUD_ELEMENT_SIZE_24x24)
 	hs_Loop
@@ -38,7 +38,7 @@ s32 HudScript_UnusedCompass_disabled[] = {
 	hs_End
 };
 
-s32 HudScript_CursorHand[] = {
+HudScript HES_CursorHand = {
 	hs_SetVisible
 	hs_SetCustomSize(16, 16)
 	hs_Loop
@@ -47,7 +47,7 @@ s32 HudScript_CursorHand[] = {
 	hs_End
 };
 
-s32 HudScript_AnimatedCursorHand[] = {
+HudScript HES_AnimatedCursorHand = {
 	hs_SetVisible
 	hs_SetCustomSize(16, 16)
 	hs_Loop
@@ -59,7 +59,7 @@ s32 HudScript_AnimatedCursorHand[] = {
 	hs_End
 };
 
-s32 HudScript_JpSuper[] = {
+HudScript HES_JpSuper = {
 	hs_SetVisible
 	hs_SetCustomSize(40, 16)
 	hs_Loop
@@ -68,7 +68,7 @@ s32 HudScript_JpSuper[] = {
 	hs_End
 };
 
-s32 HudScript_JpUltra[] = {
+HudScript HES_JpUltra = {
 	hs_SetVisible
 	hs_SetCustomSize(40, 16)
 	hs_Loop
@@ -77,7 +77,7 @@ s32 HudScript_JpUltra[] = {
 	hs_End
 };
 
-s32 HudScript_FilenameCaret[] = {
+HudScript HES_FilenameCaret = {
 	hs_SetVisible
 	hs_SetCustomSize(16, 16)
 	hs_Loop
@@ -89,7 +89,7 @@ s32 HudScript_FilenameCaret[] = {
 	hs_End
 };
 
-s32 HudScript_FilenameSpace[] = {
+HudScript HES_FilenameSpace = {
 	hs_SetVisible
 	hs_SetCustomSize(8, 8)
 	hs_Loop
@@ -98,7 +98,7 @@ s32 HudScript_FilenameSpace[] = {
 	hs_End
 };
 
-s32 HudScript_HeaderStats[] = {
+HudScript HES_HeaderStats = {
 	hs_SetVisible
 	hs_SetCustomSize(48, 16)
 	hs_Loop
@@ -107,7 +107,7 @@ s32 HudScript_HeaderStats[] = {
 	hs_End
 };
 
-s32 HudScript_HeaderBadges[] = {
+HudScript HES_HeaderBadges = {
 	hs_SetVisible
 	hs_SetCustomSize(48, 16)
 	hs_Loop
@@ -116,7 +116,7 @@ s32 HudScript_HeaderBadges[] = {
 	hs_End
 };
 
-s32 HudScript_HeaderItems[] = {
+HudScript HES_HeaderItems = {
 	hs_SetVisible
 	hs_SetCustomSize(48, 16)
 	hs_Loop
@@ -125,7 +125,7 @@ s32 HudScript_HeaderItems[] = {
 	hs_End
 };
 
-s32 HudScript_HeaderParty[] = {
+HudScript HES_HeaderParty = {
 	hs_SetVisible
 	hs_SetCustomSize(48, 16)
 	hs_Loop
@@ -134,7 +134,7 @@ s32 HudScript_HeaderParty[] = {
 	hs_End
 };
 
-s32 HudScript_HeaderSpirits[] = {
+HudScript HES_HeaderSpirits = {
 	hs_SetVisible
 	hs_SetCustomSize(48, 16)
 	hs_Loop
@@ -143,7 +143,7 @@ s32 HudScript_HeaderSpirits[] = {
 	hs_End
 };
 
-s32 HudScript_HeaderMap[] = {
+HudScript HES_HeaderMap = {
 	hs_SetVisible
 	hs_SetCustomSize(48, 16)
 	hs_Loop
@@ -152,7 +152,7 @@ s32 HudScript_HeaderMap[] = {
 	hs_End
 };
 
-s32 HudScript_SmallText0[] = {
+HudScript HES_SmallText0 = {
 	hs_SetVisible
 	hs_SetCustomSize(8, 8)
 	hs_Loop
@@ -161,7 +161,7 @@ s32 HudScript_SmallText0[] = {
 	hs_End
 };
 
-s32 HudScript_SmallText1[] = {
+HudScript HES_SmallText1 = {
 	hs_SetVisible
 	hs_SetCustomSize(8, 8)
 	hs_Loop
@@ -170,7 +170,7 @@ s32 HudScript_SmallText1[] = {
 	hs_End
 };
 
-s32 HudScript_SmallText2[] = {
+HudScript HES_SmallText2 = {
 	hs_SetVisible
 	hs_SetCustomSize(8, 8)
 	hs_Loop
@@ -179,7 +179,7 @@ s32 HudScript_SmallText2[] = {
 	hs_End
 };
 
-s32 HudScript_SmallText3[] = {
+HudScript HES_SmallText3 = {
 	hs_SetVisible
 	hs_SetCustomSize(8, 8)
 	hs_Loop
@@ -188,7 +188,7 @@ s32 HudScript_SmallText3[] = {
 	hs_End
 };
 
-s32 HudScript_SmallText4[] = {
+HudScript HES_SmallText4 = {
 	hs_SetVisible
 	hs_SetCustomSize(8, 8)
 	hs_Loop
@@ -197,7 +197,7 @@ s32 HudScript_SmallText4[] = {
 	hs_End
 };
 
-s32 HudScript_SmallText5[] = {
+HudScript HES_SmallText5 = {
 	hs_SetVisible
 	hs_SetCustomSize(8, 8)
 	hs_Loop
@@ -206,7 +206,7 @@ s32 HudScript_SmallText5[] = {
 	hs_End
 };
 
-s32 HudScript_SmallText6[] = {
+HudScript HES_SmallText6 = {
 	hs_SetVisible
 	hs_SetCustomSize(8, 8)
 	hs_Loop
@@ -215,7 +215,7 @@ s32 HudScript_SmallText6[] = {
 	hs_End
 };
 
-s32 HudScript_SmallText7[] = {
+HudScript HES_SmallText7 = {
 	hs_SetVisible
 	hs_SetCustomSize(8, 8)
 	hs_Loop
@@ -224,7 +224,7 @@ s32 HudScript_SmallText7[] = {
 	hs_End
 };
 
-s32 HudScript_SmallText8[] = {
+HudScript HES_SmallText8 = {
 	hs_SetVisible
 	hs_SetCustomSize(8, 8)
 	hs_Loop
@@ -233,7 +233,7 @@ s32 HudScript_SmallText8[] = {
 	hs_End
 };
 
-s32 HudScript_SmallText9[] = {
+HudScript HES_SmallText9 = {
 	hs_SetVisible
 	hs_SetCustomSize(8, 8)
 	hs_Loop
@@ -242,7 +242,7 @@ s32 HudScript_SmallText9[] = {
 	hs_End
 };
 
-s32 HudScript_SmallTextBp[] = {
+HudScript HES_SmallTextBp = {
 	hs_SetVisible
 	hs_SetCustomSize(8, 8)
 	hs_Loop
@@ -251,7 +251,7 @@ s32 HudScript_SmallTextBp[] = {
 	hs_End
 };
 
-s32 HudScript_JpFile[] = {
+HudScript HES_JpFile = {
 	hs_SetVisible
 	hs_SetCustomSize(32, 16)
 	hs_Loop
@@ -260,7 +260,7 @@ s32 HudScript_JpFile[] = {
 	hs_End
 };
 
-s32 HudScript_JpFileDisabled[] = {
+HudScript HES_JpFileDisabled = {
 	hs_SetVisible
 	hs_SetCustomSize(32, 16)
 	hs_Loop
@@ -269,7 +269,7 @@ s32 HudScript_JpFileDisabled[] = {
 	hs_End
 };
 
-s32 HudScript_OptionMonoOn[] = {
+HudScript HES_OptionMonoOn = {
 	hs_SetVisible
 	hs_SetCustomSize(64, 16)
 	hs_Loop
@@ -278,7 +278,7 @@ s32 HudScript_OptionMonoOn[] = {
 	hs_End
 };
 
-s32 HudScript_OptionMonoOff[] = {
+HudScript HES_OptionMonoOff = {
 	hs_SetVisible
 	hs_SetCustomSize(64, 16)
 	hs_Loop
@@ -287,7 +287,7 @@ s32 HudScript_OptionMonoOff[] = {
 	hs_End
 };
 
-s32 HudScript_OptionStereoOn[] = {
+HudScript HES_OptionStereoOn = {
 	hs_SetVisible
 	hs_SetCustomSize(64, 16)
 	hs_Loop
@@ -296,7 +296,7 @@ s32 HudScript_OptionStereoOn[] = {
 	hs_End
 };
 
-s32 HudScript_OptionStereoOff[] = {
+HudScript HES_OptionStereoOff = {
 	hs_SetVisible
 	hs_SetCustomSize(64, 16)
 	hs_Loop
@@ -305,7 +305,7 @@ s32 HudScript_OptionStereoOff[] = {
 	hs_End
 };
 
-s32 HudScript_Spirit1[] = {
+HudScript HES_Spirit1 = {
 	hs_SetVisible
 	hs_SetCustomSize(16, 16)
 	hs_Loop
@@ -314,7 +314,7 @@ s32 HudScript_Spirit1[] = {
 	hs_End
 };
 
-s32 HudScript_Spirit1Missing[] = {
+HudScript HES_Spirit1Missing = {
 	hs_SetVisible
 	hs_SetCustomSize(16, 16)
 	hs_Loop
@@ -323,7 +323,7 @@ s32 HudScript_Spirit1Missing[] = {
 	hs_End
 };
 
-s32 HudScript_Spirit2[] = {
+HudScript HES_Spirit2 = {
 	hs_SetVisible
 	hs_SetCustomSize(16, 16)
 	hs_Loop
@@ -332,7 +332,7 @@ s32 HudScript_Spirit2[] = {
 	hs_End
 };
 
-s32 HudScript_Spirit2Missing[] = {
+HudScript HES_Spirit2Missing = {
 	hs_SetVisible
 	hs_SetCustomSize(16, 16)
 	hs_Loop
@@ -341,7 +341,7 @@ s32 HudScript_Spirit2Missing[] = {
 	hs_End
 };
 
-s32 HudScript_Spirit3[] = {
+HudScript HES_Spirit3 = {
 	hs_SetVisible
 	hs_SetCustomSize(16, 16)
 	hs_Loop
@@ -350,7 +350,7 @@ s32 HudScript_Spirit3[] = {
 	hs_End
 };
 
-s32 HudScript_Spirit3Missing[] = {
+HudScript HES_Spirit3Missing = {
 	hs_SetVisible
 	hs_SetCustomSize(16, 16)
 	hs_Loop
@@ -359,7 +359,7 @@ s32 HudScript_Spirit3Missing[] = {
 	hs_End
 };
 
-s32 HudScript_Spirit4[] = {
+HudScript HES_Spirit4 = {
 	hs_SetVisible
 	hs_SetCustomSize(16, 16)
 	hs_Loop
@@ -368,7 +368,7 @@ s32 HudScript_Spirit4[] = {
 	hs_End
 };
 
-s32 HudScript_Spirit4Missing[] = {
+HudScript HES_Spirit4Missing = {
 	hs_SetVisible
 	hs_SetCustomSize(16, 16)
 	hs_Loop
@@ -377,7 +377,7 @@ s32 HudScript_Spirit4Missing[] = {
 	hs_End
 };
 
-s32 HudScript_Spirit5[] = {
+HudScript HES_Spirit5 = {
 	hs_SetVisible
 	hs_SetCustomSize(16, 16)
 	hs_Loop
@@ -386,7 +386,7 @@ s32 HudScript_Spirit5[] = {
 	hs_End
 };
 
-s32 HudScript_Spirit5Missing[] = {
+HudScript HES_Spirit5Missing = {
 	hs_SetVisible
 	hs_SetCustomSize(16, 16)
 	hs_Loop
@@ -395,7 +395,7 @@ s32 HudScript_Spirit5Missing[] = {
 	hs_End
 };
 
-s32 HudScript_Spirit6[] = {
+HudScript HES_Spirit6 = {
 	hs_SetVisible
 	hs_SetCustomSize(16, 16)
 	hs_Loop
@@ -404,7 +404,7 @@ s32 HudScript_Spirit6[] = {
 	hs_End
 };
 
-s32 HudScript_Spirit6Missing[] = {
+HudScript HES_Spirit6Missing = {
 	hs_SetVisible
 	hs_SetCustomSize(16, 16)
 	hs_Loop
@@ -413,7 +413,7 @@ s32 HudScript_Spirit6Missing[] = {
 	hs_End
 };
 
-s32 HudScript_Spirit7[] = {
+HudScript HES_Spirit7 = {
 	hs_SetVisible
 	hs_SetCustomSize(16, 16)
 	hs_Loop
@@ -422,7 +422,7 @@ s32 HudScript_Spirit7[] = {
 	hs_End
 };
 
-s32 HudScript_Spirit7Missing[] = {
+HudScript HES_Spirit7Missing = {
 	hs_SetVisible
 	hs_SetCustomSize(16, 16)
 	hs_Loop
@@ -431,7 +431,7 @@ s32 HudScript_Spirit7Missing[] = {
 	hs_End
 };
 
-s32 HudScript_MapWalk0[] = {
+HudScript HES_MapWalk0 = {
 	hs_SetVisible
 	hs_SetCustomSize(24, 24)
 	hs_Loop
@@ -443,7 +443,7 @@ s32 HudScript_MapWalk0[] = {
 	hs_End
 };
 
-s32 HudScript_ListPrevPage[] = {
+HudScript HES_ListPrevPage = {
 	hs_SetVisible
 	hs_SetCustomSize(16, 16)
 	hs_Loop
@@ -452,7 +452,7 @@ s32 HudScript_ListPrevPage[] = {
 	hs_End
 };
 
-s32 HudScript_ListNextPage[] = {
+HudScript HES_ListNextPage = {
 	hs_SetVisible
 	hs_SetCustomSize(16, 16)
 	hs_Loop
@@ -461,7 +461,7 @@ s32 HudScript_ListNextPage[] = {
 	hs_End
 };
 
-s32 HudScript_133F40_133FC0[] = {
+HudScript HES_133F40_133FC0 = {
 	hs_SetVisible
 	hs_SetCustomSize(16, 16)
 	hs_Loop
@@ -470,7 +470,7 @@ s32 HudScript_133F40_133FC0[] = {
 	hs_End
 };
 
-s32 HudScript_133FE0_134060[] = {
+HudScript HES_133FE0_134060 = {
 	hs_SetVisible
 	hs_SetCustomSize(16, 16)
 	hs_Loop
@@ -479,7 +479,7 @@ s32 HudScript_133FE0_134060[] = {
 	hs_End
 };
 
-s32 HudScript_LabelBpNeeded[] = {
+HudScript HES_LabelBpNeeded = {
 	hs_SetVisible
 	hs_SetCustomSize(48, 8)
 	hs_Loop
@@ -488,7 +488,7 @@ s32 HudScript_LabelBpNeeded[] = {
 	hs_End
 };
 
-s32 HudScript_MarioHeadLarge[] = {
+HudScript HES_MarioHeadLarge = {
 	hs_SetVisible
 	hs_SetCustomSize(32, 32)
 	hs_Loop
@@ -497,7 +497,7 @@ s32 HudScript_MarioHeadLarge[] = {
 	hs_End
 };
 
-s32 HudScript_Dash[] = {
+HudScript HES_Dash = {
 	hs_SetVisible
 	hs_SetCustomSize(16, 8)
 	hs_Loop
@@ -506,7 +506,7 @@ s32 HudScript_Dash[] = {
 	hs_End
 };
 
-s32 HudScript_DescMsgPrev[] = {
+HudScript HES_DescMsgPrev = {
 	hs_SetVisible
 	hs_SetCustomSize(16, 16)
 	hs_Loop
@@ -518,7 +518,7 @@ s32 HudScript_DescMsgPrev[] = {
 	hs_End
 };
 
-s32 HudScript_DescMsgNext[] = {
+HudScript HES_DescMsgNext = {
 	hs_SetVisible
 	hs_SetCustomSize(16, 16)
 	hs_Loop
@@ -530,7 +530,7 @@ s32 HudScript_DescMsgNext[] = {
 	hs_End
 };
 
-s32 HudScript_StatBoots0[] = {
+HudScript HES_StatBoots0 = {
 	hs_SetVisible
 	hs_SetTileSize(HUD_ELEMENT_SIZE_16x16)
 	hs_Loop
@@ -539,7 +539,7 @@ s32 HudScript_StatBoots0[] = {
 	hs_End
 };
 
-s32 HudScript_StatBoots1[] = {
+HudScript HES_StatBoots1 = {
 	hs_SetVisible
 	hs_SetTileSize(HUD_ELEMENT_SIZE_16x16)
 	hs_Loop
@@ -548,7 +548,7 @@ s32 HudScript_StatBoots1[] = {
 	hs_End
 };
 
-s32 HudScript_StatBoots2[] = {
+HudScript HES_StatBoots2 = {
 	hs_SetVisible
 	hs_SetTileSize(HUD_ELEMENT_SIZE_16x16)
 	hs_Loop
@@ -557,7 +557,7 @@ s32 HudScript_StatBoots2[] = {
 	hs_End
 };
 
-s32 HudScript_StatBoots3[] = {
+HudScript HES_StatBoots3 = {
 	hs_SetVisible
 	hs_SetTileSize(HUD_ELEMENT_SIZE_16x16)
 	hs_Loop
@@ -566,7 +566,7 @@ s32 HudScript_StatBoots3[] = {
 	hs_End
 };
 
-s32 HudScript_StatHammer0[] = {
+HudScript HES_StatHammer0 = {
 	hs_SetVisible
 	hs_SetTileSize(HUD_ELEMENT_SIZE_16x16)
 	hs_Loop
@@ -575,7 +575,7 @@ s32 HudScript_StatHammer0[] = {
 	hs_End
 };
 
-s32 HudScript_StatHammer1[] = {
+HudScript HES_StatHammer1 = {
 	hs_SetVisible
 	hs_SetTileSize(HUD_ELEMENT_SIZE_16x16)
 	hs_Loop
@@ -584,7 +584,7 @@ s32 HudScript_StatHammer1[] = {
 	hs_End
 };
 
-s32 HudScript_StatHammer2[] = {
+HudScript HES_StatHammer2 = {
 	hs_SetVisible
 	hs_SetTileSize(HUD_ELEMENT_SIZE_16x16)
 	hs_Loop
@@ -593,7 +593,7 @@ s32 HudScript_StatHammer2[] = {
 	hs_End
 };
 
-s32 HudScript_StatHammer3[] = {
+HudScript HES_StatHammer3 = {
 	hs_SetVisible
 	hs_SetTileSize(HUD_ELEMENT_SIZE_16x16)
 	hs_Loop
@@ -602,7 +602,7 @@ s32 HudScript_StatHammer3[] = {
 	hs_End
 };
 
-s32 HudScript_StatBp[] = {
+HudScript HES_StatBp = {
 	hs_SetVisible
 	hs_SetTileSize(HUD_ELEMENT_SIZE_16x16)
 	hs_Loop
@@ -611,7 +611,7 @@ s32 HudScript_StatBp[] = {
 	hs_End
 };
 
-s32 HudScript_MarioHeadSmall[] = {
+HudScript HES_MarioHeadSmall = {
 	hs_SetVisible
 	hs_SetTileSize(HUD_ELEMENT_SIZE_16x16)
 	hs_Loop
@@ -620,7 +620,7 @@ s32 HudScript_MarioHeadSmall[] = {
 	hs_End
 };
 
-s32 HudScript_Clock[] = {
+HudScript HES_Clock = {
 	hs_SetVisible
 	hs_SetTileSize(HUD_ELEMENT_SIZE_16x16)
 	hs_Loop
@@ -629,7 +629,7 @@ s32 HudScript_Clock[] = {
 	hs_End
 };
 
-s32 HudScript_StatStarPiece_1[] = {
+HudScript HES_StatStarPiece_1 = {
 	hs_SetVisible
 	hs_SetTileSize(HUD_ELEMENT_SIZE_16x16)
 	hs_Loop
@@ -641,7 +641,7 @@ s32 HudScript_StatStarPiece_1[] = {
 	hs_End
 };
 
-s32 HudScript_StatStarPiece_2[] = {
+HudScript HES_StatStarPiece_2 = {
 	hs_SetVisible
 	hs_SetTileSize(HUD_ELEMENT_SIZE_16x16)
 	hs_Loop
@@ -653,7 +653,7 @@ s32 HudScript_StatStarPiece_2[] = {
 	hs_End
 };
 
-s32 HudScript_StatFp_1[] = {
+HudScript HES_StatFp_1 = {
 	hs_SetVisible
 	hs_SetTileSize(HUD_ELEMENT_SIZE_16x16)
 	hs_Loop
@@ -662,7 +662,7 @@ s32 HudScript_StatFp_1[] = {
 	hs_End
 };
 
-s32 HudScript_StatFp_2[] = {
+HudScript HES_StatFp_2 = {
 	hs_SetVisible
 	hs_SetTileSize(HUD_ELEMENT_SIZE_16x16)
 	hs_Loop
@@ -671,7 +671,7 @@ s32 HudScript_StatFp_2[] = {
 	hs_End
 };
 
-s32 HudScript_StatTimes[] = {
+HudScript HES_StatTimes = {
 	hs_SetVisible
 	hs_SetTileSize(HUD_ELEMENT_SIZE_8x8)
 	hs_Loop
@@ -680,7 +680,7 @@ s32 HudScript_StatTimes[] = {
 	hs_End
 };
 
-s32 HudScript_PartnerRank[] = {
+HudScript HES_PartnerRank = {
 	hs_SetVisible
 	hs_SetTileSize(HUD_ELEMENT_SIZE_16x16)
 	hs_Loop
@@ -689,7 +689,7 @@ s32 HudScript_PartnerRank[] = {
 	hs_End
 };
 
-s32 HudScript_134F60_135120[] = {
+HudScript HES_134F60_135120 = {
 	hs_SetVisible
 	hs_SetCustomSize(56, 16)
 	hs_Loop

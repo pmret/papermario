@@ -197,10 +197,10 @@ typedef struct HudElement {
 
 typedef HudElement* HudElementList[320];
 
-extern HudScript HudScript_AnimatedHandPointer;
-extern HudScript HudScript_StatusCoin;
-extern HudScript HudScript_Refund;
-extern HudScript HudScript_MenuTimes;
+extern HudScript HES_AnimatedHandPointer;
+extern HudScript HES_StatusCoin;
+extern HudScript HES_Refund;
+extern HudScript HES_MenuTimes;
 
 extern s32 gPartnerPopupProperties[13][4];
 extern HudScript* wDisabledPartnerHudScripts[];

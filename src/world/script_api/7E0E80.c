@@ -12,7 +12,7 @@ extern s32 D_80286524;
 extern s32 D_80286530;
 extern s32 D_80286534;
 extern Evt* D_8028652C;
-extern HudScript* HudScript_Item_Coin;
+extern HudScript* HES_Item_Coin;
 
 ApiStatus func_802803C8(Evt* script, s32 isInitialCall);
 ApiStatus func_80280410(Evt* script, s32 isInitialCall);
@@ -898,7 +898,7 @@ s32 MakeShop(Evt* script, s32 isInitialCall) {
         numShopItems++;
     }
 
-    shop->costIconID = hud_element_create(&HudScript_Item_Coin);
+    shop->costIconID = hud_element_create(&HES_Item_Coin);
     hud_element_set_flags(shop->costIconID, HUD_ELEMENT_FLAGS_80);
     hud_element_clear_flags(shop->costIconID, HUD_ELEMENT_FLAGS_FILTER_TEX);
     get_generic_entity(create_generic_entity_frontUI(NULL, draw_shop_items));

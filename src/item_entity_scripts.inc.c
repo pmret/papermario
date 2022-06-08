@@ -1,498 +1,498 @@
 #include "item_entity.h"
 
-ItemScript ItemScript_Jump = {
+ItemScript IES_Jump = {
     is_SetIcon(255, key_Gift)
     is_End
 };
 
-ItemScript ItemScript_CompleteCake = {
+ItemScript IES_CompleteCake = {
     is_SetIcon(255, key_Gift)
     is_End
 };
 
-ItemScript ItemScript_CakeDone = {
+ItemScript IES_CakeDone = {
     is_SetIcon(255, key_CakeDone)
     is_End
 };
 
-ItemScript ItemScript_CakeBaked = {
+ItemScript IES_CakeBaked = {
     is_SetIcon(255, key_CakeBaked)
     is_End
 };
 
-ItemScript ItemScript_CakePan = {
+ItemScript IES_CakePan = {
     is_SetIcon(255, key_CakePan)
     is_End
 };
 
-ItemScript ItemScript_CakeBatter = {
+ItemScript IES_CakeBatter = {
     is_SetIcon(255, key_CakeBatter)
     is_End
 };
 
-ItemScript ItemScript_CakeBowl = {
+ItemScript IES_CakeBowl = {
     is_SetIcon(255, key_CakeBowl)
     is_End
 };
 
-ItemScript ItemScript_CakeMixed = {
+ItemScript IES_CakeMixed = {
     is_SetIcon(255, key_CakeMix)
     is_End
 };
 
-ItemScript ItemScript_CakeIcing = {
+ItemScript IES_CakeIcing = {
     is_SetIcon(255, key_CakeIcing)
     is_End
 };
 
-ItemScript ItemScript_CakeBerries = {
+ItemScript IES_CakeBerries = {
     is_SetIcon(255, key_CakeBerries)
     is_End
 };
 
-ItemScript ItemScript_Hammer1 = {
+ItemScript IES_Hammer1 = {
     is_SetIcon(255, Hammer1)
     is_End
 };
 
-ItemScript ItemScript_Hammer2 = {
+ItemScript IES_Hammer2 = {
     is_SetIcon(255, Hammer2)
     is_End
 };
 
-ItemScript ItemScript_Hammer3 = {
+ItemScript IES_Hammer3 = {
     is_SetIcon(255, Hammer3)
     is_End
 };
 
-ItemScript ItemScript_Boots1 = {
+ItemScript IES_Boots1 = {
     is_SetIcon(255, Boots1)
     is_End
 };
 
-ItemScript ItemScript_Boots2 = {
+ItemScript IES_Boots2 = {
     is_SetIcon(255, Boots2)
     is_End
 };
 
-ItemScript ItemScript_Boots3 = {
+ItemScript IES_Boots3 = {
     is_SetIcon(255, Boots3)
     is_End
 };
 
-ItemScript ItemScript_Items = {
+ItemScript IES_Items = {
     is_SetIcon(255, Items)
     is_End
 };
 
-ItemScript ItemScript_PleaseComeBack = STANDARD_ITEM_SCRIPT(battle_PleaseComeBack);
+ItemScript IES_PleaseComeBack = STANDARD_ITEM_SCRIPT(battle_PleaseComeBack);
 
-ItemScript ItemScript_ITEM_139 = STANDARD_ITEM_SCRIPT(battle_139);
+ItemScript IES_ITEM_139 = STANDARD_ITEM_SCRIPT(battle_139);
 
-ItemScript ItemScript_FrightJar = STANDARD_ITEM_SCRIPT(battle_FrightJar);
+ItemScript IES_FrightJar = STANDARD_ITEM_SCRIPT(battle_FrightJar);
 
-ItemScript ItemScript_Mystery = STANDARD_ITEM_SCRIPT(battle_Mystery);
+ItemScript IES_Mystery = STANDARD_ITEM_SCRIPT(battle_Mystery);
 
-ItemScript ItemScript_RepelGel = STANDARD_ITEM_SCRIPT(battle_RepelGel);
+ItemScript IES_RepelGel = STANDARD_ITEM_SCRIPT(battle_RepelGel);
 
-ItemScript ItemScript_InsecticideHerb = STANDARD_ITEM_SCRIPT(battle_InsecticideHerb);
+ItemScript IES_InsecticideHerb = STANDARD_ITEM_SCRIPT(battle_InsecticideHerb);
 
-ItemScript ItemScript_ITEM_13E = STANDARD_ITEM_SCRIPT(battle_13E);
+ItemScript IES_ITEM_13E = STANDARD_ITEM_SCRIPT(battle_13E);
 
-ItemScript ItemScript_ITEM_13F = STANDARD_ITEM_SCRIPT(battle_13F);
+ItemScript IES_ITEM_13F = STANDARD_ITEM_SCRIPT(battle_13F);
 
-ItemScript ItemScript_GearBoots1 = STANDARD_ITEM_SCRIPT(key_gear_boots_1);
+ItemScript IES_GearBoots1 = STANDARD_ITEM_SCRIPT(key_gear_boots_1);
 
-ItemScript ItemScript_GearBoots2 = STANDARD_ITEM_SCRIPT(key_gear_boots_2);
+ItemScript IES_GearBoots2 = STANDARD_ITEM_SCRIPT(key_gear_boots_2);
 
-ItemScript ItemScript_GearBoots3 = STANDARD_ITEM_SCRIPT(key_gear_boots_3);
+ItemScript IES_GearBoots3 = STANDARD_ITEM_SCRIPT(key_gear_boots_3);
 
-ItemScript ItemScript_GearHammer1 = STANDARD_ITEM_SCRIPT(key_gear_hammer_1);
+ItemScript IES_GearHammer1 = STANDARD_ITEM_SCRIPT(key_gear_hammer_1);
 
-ItemScript ItemScript_GearHammer2 = STANDARD_ITEM_SCRIPT(key_gear_hammer_2);
+ItemScript IES_GearHammer2 = STANDARD_ITEM_SCRIPT(key_gear_hammer_2);
 
-ItemScript ItemScript_GearHammer3 = STANDARD_ITEM_SCRIPT(key_gear_hammer_3);
+ItemScript IES_GearHammer3 = STANDARD_ITEM_SCRIPT(key_gear_hammer_3);
 
-ItemScript ItemScript_LuckyStar = STANDARD_ITEM_SCRIPT(key_gear_lucky_star);
+ItemScript IES_LuckyStar = STANDARD_ITEM_SCRIPT(key_gear_lucky_star);
 
-ItemScript ItemScript_Map = STANDARD_ITEM_SCRIPT(key_map);
+ItemScript IES_Map = STANDARD_ITEM_SCRIPT(key_map);
 
-ItemScript ItemScript_KoopaFortressKey = STANDARD_ITEM_SCRIPT(key_key_koopa_fortress);
+ItemScript IES_KoopaFortressKey = STANDARD_ITEM_SCRIPT(key_key_koopa_fortress);
 
-ItemScript ItemScript_RuinsKey = STANDARD_ITEM_SCRIPT(key_key_ruins);
+ItemScript IES_RuinsKey = STANDARD_ITEM_SCRIPT(key_key_ruins);
 
-ItemScript ItemScript_TubbaCastleKey = STANDARD_ITEM_SCRIPT(key_key_tubba_castle);
+ItemScript IES_TubbaCastleKey = STANDARD_ITEM_SCRIPT(key_key_tubba_castle);
 
-ItemScript ItemScript_IcePalaceKey = STANDARD_ITEM_SCRIPT(key_key_ice_palace);
+ItemScript IES_IcePalaceKey = STANDARD_ITEM_SCRIPT(key_key_ice_palace);
 
-ItemScript ItemScript_BowserCastleKey = STANDARD_ITEM_SCRIPT(key_key_bowser_castle);
+ItemScript IES_BowserCastleKey = STANDARD_ITEM_SCRIPT(key_key_bowser_castle);
 
-ItemScript ItemScript_Dolly = STANDARD_ITEM_SCRIPT(key_dolly);
+ItemScript IES_Dolly = STANDARD_ITEM_SCRIPT(key_dolly);
 
-ItemScript ItemScript_KooperShell = STANDARD_ITEM_SCRIPT(key_kooper_shell);
+ItemScript IES_KooperShell = STANDARD_ITEM_SCRIPT(key_kooper_shell);
 
-ItemScript ItemScript_PulseStone = STANDARD_ITEM_SCRIPT(key_pulse_stone);
+ItemScript IES_PulseStone = STANDARD_ITEM_SCRIPT(key_pulse_stone);
 
-ItemScript ItemScript_Artifact = STANDARD_ITEM_SCRIPT(key_artifact);
+ItemScript IES_Artifact = STANDARD_ITEM_SCRIPT(key_artifact);
 
-ItemScript ItemScript_AncientVase = STANDARD_ITEM_SCRIPT(key_vase);
+ItemScript IES_AncientVase = STANDARD_ITEM_SCRIPT(key_vase);
 
-ItemScript ItemScript_RuinsStonePyramid = STANDARD_ITEM_SCRIPT(key_ruins_stone_pyramid);
+ItemScript IES_RuinsStonePyramid = STANDARD_ITEM_SCRIPT(key_ruins_stone_pyramid);
 
-ItemScript ItemScript_RuinsStoneStar = STANDARD_ITEM_SCRIPT(key_ruins_stone_star);
+ItemScript IES_RuinsStoneStar = STANDARD_ITEM_SCRIPT(key_ruins_stone_star);
 
-ItemScript ItemScript_RuinsStoneMoon = STANDARD_ITEM_SCRIPT(key_ruins_stone_moon);
+ItemScript IES_RuinsStoneMoon = STANDARD_ITEM_SCRIPT(key_ruins_stone_moon);
 
-ItemScript ItemScript_ForestPass = STANDARD_ITEM_SCRIPT(key_forest_pass);
+ItemScript IES_ForestPass = STANDARD_ITEM_SCRIPT(key_forest_pass);
 
-ItemScript ItemScript_BooRecordOutline = STANDARD_ITEM_SCRIPT(key_boo_record_mask);
+ItemScript IES_BooRecordOutline = STANDARD_ITEM_SCRIPT(key_boo_record_mask);
 
-ItemScript ItemScript_BooRecord = STANDARD_ITEM_SCRIPT(key_boo_record);
+ItemScript IES_BooRecord = STANDARD_ITEM_SCRIPT(key_boo_record);
 
-ItemScript ItemScript_BooWeight = STANDARD_ITEM_SCRIPT(key_boo_weight);
+ItemScript IES_BooWeight = STANDARD_ITEM_SCRIPT(key_boo_weight);
 
-ItemScript ItemScript_BoosPortrait = STANDARD_ITEM_SCRIPT(key_boo_portrait);
+ItemScript IES_BoosPortrait = STANDARD_ITEM_SCRIPT(key_boo_portrait);
 
-ItemScript ItemScript_MysticKey = STANDARD_ITEM_SCRIPT(key_mystic_key);
+ItemScript IES_MysticKey = STANDARD_ITEM_SCRIPT(key_mystic_key);
 
-ItemScript ItemScript_StoreroomKey = STANDARD_ITEM_SCRIPT(key_key_storeroom);
+ItemScript IES_StoreroomKey = STANDARD_ITEM_SCRIPT(key_key_storeroom);
 
-ItemScript ItemScript_ToyTrain = STANDARD_ITEM_SCRIPT(key_toybox_train);
+ItemScript IES_ToyTrain = STANDARD_ITEM_SCRIPT(key_toybox_train);
 
-ItemScript ItemScript_FryingPan = STANDARD_ITEM_SCRIPT(key_frying_pan);
+ItemScript IES_FryingPan = STANDARD_ITEM_SCRIPT(key_frying_pan);
 
-ItemScript ItemScript_Dictionary = STANDARD_ITEM_SCRIPT(key_dictionary);
+ItemScript IES_Dictionary = STANDARD_ITEM_SCRIPT(key_dictionary);
 
-ItemScript ItemScript_MysteryNote = STANDARD_ITEM_SCRIPT(key_mystery_note);
+ItemScript IES_MysteryNote = STANDARD_ITEM_SCRIPT(key_mystery_note);
 
-ItemScript ItemScript_SuspiciousNote = STANDARD_ITEM_SCRIPT(key_suspicious_note);
+ItemScript IES_SuspiciousNote = STANDARD_ITEM_SCRIPT(key_suspicious_note);
 
-ItemScript ItemScript_MagicalSeed1 = STANDARD_ITEM_SCRIPT(key_seed_1);
+ItemScript IES_MagicalSeed1 = STANDARD_ITEM_SCRIPT(key_seed_1);
 
-ItemScript ItemScript_MagicalSeed2 = STANDARD_ITEM_SCRIPT(key_seed_2);
+ItemScript IES_MagicalSeed2 = STANDARD_ITEM_SCRIPT(key_seed_2);
 
-ItemScript ItemScript_MagicalSeed3 = STANDARD_ITEM_SCRIPT(key_seed_3);
+ItemScript IES_MagicalSeed3 = STANDARD_ITEM_SCRIPT(key_seed_3);
 
-ItemScript ItemScript_MagicalSeed4 = STANDARD_ITEM_SCRIPT(key_seed_4);
+ItemScript IES_MagicalSeed4 = STANDARD_ITEM_SCRIPT(key_seed_4);
 
-ItemScript ItemScript_CrystalBerry = STANDARD_ITEM_SCRIPT(key_crystal_berry);
+ItemScript IES_CrystalBerry = STANDARD_ITEM_SCRIPT(key_crystal_berry);
 
-ItemScript ItemScript_WaterStone = STANDARD_ITEM_SCRIPT(key_water_stone);
+ItemScript IES_WaterStone = STANDARD_ITEM_SCRIPT(key_water_stone);
 
-ItemScript ItemScript_MagicalBean = STANDARD_ITEM_SCRIPT(key_magic_bean);
+ItemScript IES_MagicalBean = STANDARD_ITEM_SCRIPT(key_magic_bean);
 
-ItemScript ItemScript_FertileSoil = STANDARD_ITEM_SCRIPT(key_fertile_soil);
+ItemScript IES_FertileSoil = STANDARD_ITEM_SCRIPT(key_fertile_soil);
 
-ItemScript ItemScript_MiracleWater = STANDARD_ITEM_SCRIPT(key_miracle_water);
+ItemScript IES_MiracleWater = STANDARD_ITEM_SCRIPT(key_miracle_water);
 
-ItemScript ItemScript_UltraStone = STANDARD_ITEM_SCRIPT(key_ultra_stone);
+ItemScript IES_UltraStone = STANDARD_ITEM_SCRIPT(key_ultra_stone);
 
-ItemScript ItemScript_ToadDoll = STANDARD_ITEM_SCRIPT(key_toad_doll);
+ItemScript IES_ToadDoll = STANDARD_ITEM_SCRIPT(key_toad_doll);
 
-ItemScript ItemScript_Calculator = STANDARD_ITEM_SCRIPT(key_calculator);
+ItemScript IES_Calculator = STANDARD_ITEM_SCRIPT(key_calculator);
 
-ItemScript ItemScript_Screwdriver = STANDARD_ITEM_SCRIPT(key_screwdriver);
+ItemScript IES_Screwdriver = STANDARD_ITEM_SCRIPT(key_screwdriver);
 
-ItemScript ItemScript_Cookbook = STANDARD_ITEM_SCRIPT(key_book_cook);
+ItemScript IES_Cookbook = STANDARD_ITEM_SCRIPT(key_book_cook);
 
-ItemScript ItemScript_JadeRaven = STANDARD_ITEM_SCRIPT(key_jade_raven);
+ItemScript IES_JadeRaven = STANDARD_ITEM_SCRIPT(key_jade_raven);
 
-ItemScript ItemScript_SnowmanBucket = STANDARD_ITEM_SCRIPT(key_snowman_bucket);
+ItemScript IES_SnowmanBucket = STANDARD_ITEM_SCRIPT(key_snowman_bucket);
 
-ItemScript ItemScript_SnowmanScarf = STANDARD_ITEM_SCRIPT(key_snowman_scarf);
+ItemScript IES_SnowmanScarf = STANDARD_ITEM_SCRIPT(key_snowman_scarf);
 
-ItemScript ItemScript_RedKey = STANDARD_ITEM_SCRIPT(key_key_red);
+ItemScript IES_RedKey = STANDARD_ITEM_SCRIPT(key_key_red);
 
-ItemScript ItemScript_BlueKey = STANDARD_ITEM_SCRIPT(key_key_blue);
+ItemScript IES_BlueKey = STANDARD_ITEM_SCRIPT(key_key_blue);
 
-ItemScript ItemScript_KootPackage = STANDARD_ITEM_SCRIPT(key_koot_package);
+ItemScript IES_KootPackage = STANDARD_ITEM_SCRIPT(key_koot_package);
 
-ItemScript ItemScript_KootRedJar = STANDARD_ITEM_SCRIPT(key_koot_red_jar);
+ItemScript IES_KootRedJar = STANDARD_ITEM_SCRIPT(key_koot_red_jar);
 
-ItemScript ItemScript_Melody = STANDARD_ITEM_SCRIPT(key_book_melody);
+ItemScript IES_Melody = STANDARD_ITEM_SCRIPT(key_book_melody);
 
-ItemScript ItemScript_Lyrics = STANDARD_ITEM_SCRIPT(key_book_lyrics);
+ItemScript IES_Lyrics = STANDARD_ITEM_SCRIPT(key_book_lyrics);
 
-ItemScript ItemScript_Mailbag = STANDARD_ITEM_SCRIPT(key_mailbag);
+ItemScript IES_Mailbag = STANDARD_ITEM_SCRIPT(key_mailbag);
 
-ItemScript ItemScript_StarStone = STANDARD_ITEM_SCRIPT(key_star_stone);
+ItemScript IES_StarStone = STANDARD_ITEM_SCRIPT(key_star_stone);
 
-ItemScript ItemScript_SneakyParasol = STANDARD_ITEM_SCRIPT(peach_sneaky_parasol);
+ItemScript IES_SneakyParasol = STANDARD_ITEM_SCRIPT(peach_sneaky_parasol);
 
-ItemScript ItemScript_PeachKey = STANDARD_ITEM_SCRIPT(key_key_peach);
+ItemScript IES_PeachKey = STANDARD_ITEM_SCRIPT(key_key_peach);
 
-ItemScript ItemScript_1DC210 = STANDARD_ITEM_SCRIPT(key_1DC210);
+ItemScript IES_1DC210 = STANDARD_ITEM_SCRIPT(key_1DC210);
 
-ItemScript ItemScript_1DC430 = STANDARD_ITEM_SCRIPT(key_1DC430);
+ItemScript IES_1DC430 = STANDARD_ITEM_SCRIPT(key_1DC430);
 
-ItemScript ItemScript_1DC650 = STANDARD_ITEM_SCRIPT(key_1DC650);
+ItemScript IES_1DC650 = STANDARD_ITEM_SCRIPT(key_1DC650);
 
-ItemScript ItemScript_1DC870 = STANDARD_ITEM_SCRIPT(key_1DC870);
+ItemScript IES_1DC870 = STANDARD_ITEM_SCRIPT(key_1DC870);
 
-ItemScript ItemScript_DojoCard1 = STANDARD_ITEM_SCRIPT(key_dojo_card_1);
+ItemScript IES_DojoCard1 = STANDARD_ITEM_SCRIPT(key_dojo_card_1);
 
-ItemScript ItemScript_DojoCard2 = STANDARD_ITEM_SCRIPT(key_dojo_card_2);
+ItemScript IES_DojoCard2 = STANDARD_ITEM_SCRIPT(key_dojo_card_2);
 
-ItemScript ItemScript_DojoCard3 = STANDARD_ITEM_SCRIPT(key_dojo_card_3);
+ItemScript IES_DojoCard3 = STANDARD_ITEM_SCRIPT(key_dojo_card_3);
 
-ItemScript ItemScript_DojoCard4 = STANDARD_ITEM_SCRIPT(key_dojo_card_4);
+ItemScript IES_DojoCard4 = STANDARD_ITEM_SCRIPT(key_dojo_card_4);
 
-ItemScript ItemScript_DojoCard5 = STANDARD_ITEM_SCRIPT(key_dojo_card_5);
+ItemScript IES_DojoCard5 = STANDARD_ITEM_SCRIPT(key_dojo_card_5);
 
-ItemScript ItemScript_CrystalBall = STANDARD_ITEM_SCRIPT(key_crystal_ball);
+ItemScript IES_CrystalBall = STANDARD_ITEM_SCRIPT(key_crystal_ball);
 
-ItemScript ItemScript_GoldCard = STANDARD_ITEM_SCRIPT(key_card_gold);
+ItemScript IES_GoldCard = STANDARD_ITEM_SCRIPT(key_card_gold);
 
-ItemScript ItemScript_SilverCard = STANDARD_ITEM_SCRIPT(key_card_silver);
+ItemScript IES_SilverCard = STANDARD_ITEM_SCRIPT(key_card_silver);
 
-ItemScript ItemScript_KootBook = STANDARD_ITEM_SCRIPT(key_koot_book);
+ItemScript IES_KootBook = STANDARD_ITEM_SCRIPT(key_koot_book);
 
-ItemScript ItemScript_KootTheTape = STANDARD_ITEM_SCRIPT(key_koot_the_tape);
+ItemScript IES_KootTheTape = STANDARD_ITEM_SCRIPT(key_koot_the_tape);
 
-ItemScript ItemScript_KootAutographMerluvlee = STANDARD_ITEM_SCRIPT(key_koot_autograph_luigi);
+ItemScript IES_KootAutographMerluvlee = STANDARD_ITEM_SCRIPT(key_koot_autograph_luigi);
 
-ItemScript ItemScript_KootEmptyWallet = STANDARD_ITEM_SCRIPT(key_koot_empty_wallet);
+ItemScript IES_KootEmptyWallet = STANDARD_ITEM_SCRIPT(key_koot_empty_wallet);
 
-ItemScript ItemScript_KootAutographLuigi = STANDARD_ITEM_SCRIPT(key_koot_autograph_merluvlee);
+ItemScript IES_KootAutographLuigi = STANDARD_ITEM_SCRIPT(key_koot_autograph_merluvlee);
 
-ItemScript ItemScript_KootKoopaShell = STANDARD_ITEM_SCRIPT(key_koot_shell);
+ItemScript IES_KootKoopaShell = STANDARD_ITEM_SCRIPT(key_koot_shell);
 
-ItemScript ItemScript_KootOldPhoto = STANDARD_ITEM_SCRIPT(key_koot_photo);
+ItemScript IES_KootOldPhoto = STANDARD_ITEM_SCRIPT(key_koot_photo);
 
-ItemScript ItemScript_KootGlasses = STANDARD_ITEM_SCRIPT(key_koot_glasses);
+ItemScript IES_KootGlasses = STANDARD_ITEM_SCRIPT(key_koot_glasses);
 
-ItemScript ItemScript_Letter = STANDARD_ITEM_SCRIPT(key_Letter);
+ItemScript IES_Letter = STANDARD_ITEM_SCRIPT(key_Letter);
 
-ItemScript ItemScript_Unused_089 = STANDARD_ITEM_SCRIPT(key_LongLetter);
+ItemScript IES_Unused_089 = STANDARD_ITEM_SCRIPT(key_LongLetter);
 
-ItemScript ItemScript_Unused_08A = STANDARD_ITEM_SCRIPT(key_TealLetter);
+ItemScript IES_Unused_08A = STANDARD_ITEM_SCRIPT(key_TealLetter);
 
-ItemScript ItemScript_Unused_08B = STANDARD_ITEM_SCRIPT(key_Postcard);
+ItemScript IES_Unused_08B = STANDARD_ITEM_SCRIPT(key_Postcard);
 
-ItemScript ItemScript_Unused_08C = STANDARD_ITEM_SCRIPT(key_EmptyBook);
+ItemScript IES_Unused_08C = STANDARD_ITEM_SCRIPT(key_EmptyBook);
 
-ItemScript ItemScript_Unused_08D = STANDARD_ITEM_SCRIPT(unused_08D);
+ItemScript IES_Unused_08D = STANDARD_ITEM_SCRIPT(unused_08D);
 
-ItemScript ItemScript_Unused_08E = STANDARD_ITEM_SCRIPT(unused_08E);
+ItemScript IES_Unused_08E = STANDARD_ITEM_SCRIPT(unused_08E);
 
-ItemScript ItemScript_Unused_08F = STANDARD_ITEM_SCRIPT(unused_08F);
+ItemScript IES_Unused_08F = STANDARD_ITEM_SCRIPT(unused_08F);
 
-ItemScript ItemScript_SpinSmash = STANDARD_ITEM_SCRIPT(badge_SpinSmash);
+ItemScript IES_SpinSmash = STANDARD_ITEM_SCRIPT(badge_SpinSmash);
 
-ItemScript ItemScript_Multibounce = STANDARD_ITEM_SCRIPT(badge_Multibounce);
+ItemScript IES_Multibounce = STANDARD_ITEM_SCRIPT(badge_Multibounce);
 
-ItemScript ItemScript_PowerPlus = STANDARD_ITEM_SCRIPT(badge_PowerPlus);
+ItemScript IES_PowerPlus = STANDARD_ITEM_SCRIPT(badge_PowerPlus);
 
-ItemScript ItemScript_DodgeMaster = STANDARD_ITEM_SCRIPT(badge_DodgeMaster);
+ItemScript IES_DodgeMaster = STANDARD_ITEM_SCRIPT(badge_DodgeMaster);
 
-ItemScript ItemScript_PowerBounce = STANDARD_ITEM_SCRIPT(badge_PowerBounce);
+ItemScript IES_PowerBounce = STANDARD_ITEM_SCRIPT(badge_PowerBounce);
 
-ItemScript ItemScript_SpikeShield = STANDARD_ITEM_SCRIPT(badge_SpikeShield);
+ItemScript IES_SpikeShield = STANDARD_ITEM_SCRIPT(badge_SpikeShield);
 
-ItemScript ItemScript_FirstAttack = STANDARD_ITEM_SCRIPT(badge_FirstAttack);
+ItemScript IES_FirstAttack = STANDARD_ITEM_SCRIPT(badge_FirstAttack);
 
-ItemScript ItemScript_HPPlus = STANDARD_ITEM_SCRIPT(badge_HPPlus);
+ItemScript IES_HPPlus = STANDARD_ITEM_SCRIPT(badge_HPPlus);
 
-ItemScript ItemScript_QuakeHammer = STANDARD_ITEM_SCRIPT(badge_QuakeHammer);
+ItemScript IES_QuakeHammer = STANDARD_ITEM_SCRIPT(badge_QuakeHammer);
 
-ItemScript ItemScript_DoubleDip = STANDARD_ITEM_SCRIPT(badge_DoubleDip);
+ItemScript IES_DoubleDip = STANDARD_ITEM_SCRIPT(badge_DoubleDip);
 
-ItemScript ItemScript_PowerQuake = STANDARD_ITEM_SCRIPT(badge_PowerQuake);
+ItemScript IES_PowerQuake = STANDARD_ITEM_SCRIPT(badge_PowerQuake);
 
-ItemScript ItemScript_MegaQuake = STANDARD_ITEM_SCRIPT(badge_MegaQuake);
+ItemScript IES_MegaQuake = STANDARD_ITEM_SCRIPT(badge_MegaQuake);
 
-ItemScript ItemScript_SleepStomp = STANDARD_ITEM_SCRIPT(badge_SleepStomp);
+ItemScript IES_SleepStomp = STANDARD_ITEM_SCRIPT(badge_SleepStomp);
 
-ItemScript ItemScript_SmashCharge = STANDARD_ITEM_SCRIPT(badge_SmashCharge);
+ItemScript IES_SmashCharge = STANDARD_ITEM_SCRIPT(badge_SmashCharge);
 
-ItemScript ItemScript_SSmashChg = STANDARD_ITEM_SCRIPT(badge_SSmashChg);
+ItemScript IES_SSmashChg = STANDARD_ITEM_SCRIPT(badge_SSmashChg);
 
-ItemScript ItemScript_AutoSmash = STANDARD_ITEM_SCRIPT(badge_AutoSmash);
+ItemScript IES_AutoSmash = STANDARD_ITEM_SCRIPT(badge_AutoSmash);
 
-ItemScript ItemScript_FireShield = STANDARD_ITEM_SCRIPT(badge_FireShield);
+ItemScript IES_FireShield = STANDARD_ITEM_SCRIPT(badge_FireShield);
 
-ItemScript ItemScript_JumpCharge = STANDARD_ITEM_SCRIPT(badge_JumpCharge);
+ItemScript IES_JumpCharge = STANDARD_ITEM_SCRIPT(badge_JumpCharge);
 
-ItemScript ItemScript_SJumpChg = STANDARD_ITEM_SCRIPT(badge_SJumpChg);
+ItemScript IES_SJumpChg = STANDARD_ITEM_SCRIPT(badge_SJumpChg);
 
-ItemScript ItemScript_AutoJump = STANDARD_ITEM_SCRIPT(badge_AutoJump);
+ItemScript IES_AutoJump = STANDARD_ITEM_SCRIPT(badge_AutoJump);
 
-ItemScript ItemScript_DDownPound = STANDARD_ITEM_SCRIPT(badge_DDownPound);
+ItemScript IES_DDownPound = STANDARD_ITEM_SCRIPT(badge_DDownPound);
 
-ItemScript ItemScript_AutoMultibounce = STANDARD_ITEM_SCRIPT(badge_AutoMultibounce);
+ItemScript IES_AutoMultibounce = STANDARD_ITEM_SCRIPT(badge_AutoMultibounce);
 
-ItemScript ItemScript_DizzyStomp = STANDARD_ITEM_SCRIPT(badge_DizzyStomp);
+ItemScript IES_DizzyStomp = STANDARD_ITEM_SCRIPT(badge_DizzyStomp);
 
-ItemScript ItemScript_HammerThrow = STANDARD_ITEM_SCRIPT(badge_HammerThrow);
+ItemScript IES_HammerThrow = STANDARD_ITEM_SCRIPT(badge_HammerThrow);
 
-ItemScript ItemScript_SmashCharge0 = STANDARD_ITEM_SCRIPT(badge_SmashCharge0);
+ItemScript IES_SmashCharge0 = STANDARD_ITEM_SCRIPT(badge_SmashCharge0);
 
-ItemScript ItemScript_PrettyLucky = STANDARD_ITEM_SCRIPT(badge_PrettyLucky);
+ItemScript IES_PrettyLucky = STANDARD_ITEM_SCRIPT(badge_PrettyLucky);
 
-ItemScript ItemScript_FeelingFine = STANDARD_ITEM_SCRIPT(badge_FeelingFine);
+ItemScript IES_FeelingFine = STANDARD_ITEM_SCRIPT(badge_FeelingFine);
 
-ItemScript ItemScript_AttackFXA = STANDARD_ITEM_SCRIPT(badge_AttackFXA);
+ItemScript IES_AttackFXA = STANDARD_ITEM_SCRIPT(badge_AttackFXA);
 
-ItemScript ItemScript_AllorNothing = STANDARD_ITEM_SCRIPT(badge_AllorNothing);
+ItemScript IES_AllorNothing = STANDARD_ITEM_SCRIPT(badge_AllorNothing);
 
-ItemScript ItemScript_HPDrain = STANDARD_ITEM_SCRIPT(badge_HPDrain);
+ItemScript IES_HPDrain = STANDARD_ITEM_SCRIPT(badge_HPDrain);
 
-ItemScript ItemScript_JumpCharge0 = STANDARD_ITEM_SCRIPT(badge_JumpCharge0);
+ItemScript IES_JumpCharge0 = STANDARD_ITEM_SCRIPT(badge_JumpCharge0);
 
-ItemScript ItemScript_SlowGo = STANDARD_ITEM_SCRIPT(badge_SlowGo);
+ItemScript IES_SlowGo = STANDARD_ITEM_SCRIPT(badge_SlowGo);
 
-ItemScript ItemScript_FPPlus = STANDARD_ITEM_SCRIPT(badge_FPPlus);
+ItemScript IES_FPPlus = STANDARD_ITEM_SCRIPT(badge_FPPlus);
 
-ItemScript ItemScript_MegaRush = STANDARD_ITEM_SCRIPT(badge_MegaRush);
+ItemScript IES_MegaRush = STANDARD_ITEM_SCRIPT(badge_MegaRush);
 
-ItemScript ItemScript_IcePower = STANDARD_ITEM_SCRIPT(badge_IcePower);
+ItemScript IES_IcePower = STANDARD_ITEM_SCRIPT(badge_IcePower);
 
-ItemScript ItemScript_DefendPlus = STANDARD_ITEM_SCRIPT(badge_DefendPlus);
+ItemScript IES_DefendPlus = STANDARD_ITEM_SCRIPT(badge_DefendPlus);
 
-ItemScript ItemScript_PayOff = STANDARD_ITEM_SCRIPT(badge_PayOff);
+ItemScript IES_PayOff = STANDARD_ITEM_SCRIPT(badge_PayOff);
 
-ItemScript ItemScript_MoneyMoney = STANDARD_ITEM_SCRIPT(badge_MoneyMoney);
+ItemScript IES_MoneyMoney = STANDARD_ITEM_SCRIPT(badge_MoneyMoney);
 
-ItemScript ItemScript_ChillOut = STANDARD_ITEM_SCRIPT(badge_ChillOut);
+ItemScript IES_ChillOut = STANDARD_ITEM_SCRIPT(badge_ChillOut);
 
-ItemScript ItemScript_HappyHeart = STANDARD_ITEM_SCRIPT(badge_HappyHeart);
+ItemScript IES_HappyHeart = STANDARD_ITEM_SCRIPT(badge_HappyHeart);
 
-ItemScript ItemScript_ZapTap = STANDARD_ITEM_SCRIPT(badge_ZapTap);
+ItemScript IES_ZapTap = STANDARD_ITEM_SCRIPT(badge_ZapTap);
 
-ItemScript ItemScript_Berserker = STANDARD_ITEM_SCRIPT(badge_Berserker);
+ItemScript IES_Berserker = STANDARD_ITEM_SCRIPT(badge_Berserker);
 
-ItemScript ItemScript_RightOn = STANDARD_ITEM_SCRIPT(badge_RightOn);
+ItemScript IES_RightOn = STANDARD_ITEM_SCRIPT(badge_RightOn);
 
-ItemScript ItemScript_RunawayPay = STANDARD_ITEM_SCRIPT(badge_RunawayPay);
+ItemScript IES_RunawayPay = STANDARD_ITEM_SCRIPT(badge_RunawayPay);
 
-ItemScript ItemScript_Refund = STANDARD_ITEM_SCRIPT(badge_Refund);
+ItemScript IES_Refund = STANDARD_ITEM_SCRIPT(badge_Refund);
 
-ItemScript ItemScript_FlowerSaver = STANDARD_ITEM_SCRIPT(badge_FlowerSaver);
+ItemScript IES_FlowerSaver = STANDARD_ITEM_SCRIPT(badge_FlowerSaver);
 
-ItemScript ItemScript_TripleDip = STANDARD_ITEM_SCRIPT(badge_TripleDip);
+ItemScript IES_TripleDip = STANDARD_ITEM_SCRIPT(badge_TripleDip);
 
-ItemScript ItemScript_FlowerFanatic = STANDARD_ITEM_SCRIPT(badge_FlowerFanatic);
+ItemScript IES_FlowerFanatic = STANDARD_ITEM_SCRIPT(badge_FlowerFanatic);
 
-ItemScript ItemScript_PowerJump = STANDARD_ITEM_SCRIPT(badge_PowerJump);
+ItemScript IES_PowerJump = STANDARD_ITEM_SCRIPT(badge_PowerJump);
 
-ItemScript ItemScript_SuperJump = STANDARD_ITEM_SCRIPT(badge_SuperJump);
+ItemScript IES_SuperJump = STANDARD_ITEM_SCRIPT(badge_SuperJump);
 
-ItemScript ItemScript_MegaJump = STANDARD_ITEM_SCRIPT(badge_MegaJump);
+ItemScript IES_MegaJump = STANDARD_ITEM_SCRIPT(badge_MegaJump);
 
-ItemScript ItemScript_PowerSmash = STANDARD_ITEM_SCRIPT(badge_PowerSmash);
+ItemScript IES_PowerSmash = STANDARD_ITEM_SCRIPT(badge_PowerSmash);
 
-ItemScript ItemScript_SuperSmash = STANDARD_ITEM_SCRIPT(badge_SuperSmash);
+ItemScript IES_SuperSmash = STANDARD_ITEM_SCRIPT(badge_SuperSmash);
 
-ItemScript ItemScript_MegaSmash = STANDARD_ITEM_SCRIPT(badge_MegaSmash);
+ItemScript IES_MegaSmash = STANDARD_ITEM_SCRIPT(badge_MegaSmash);
 
-ItemScript ItemScript_LuckyDay = STANDARD_ITEM_SCRIPT(badge_LuckyDay);
+ItemScript IES_LuckyDay = STANDARD_ITEM_SCRIPT(badge_LuckyDay);
 
-ItemScript ItemScript_MegaHPDrain = STANDARD_ITEM_SCRIPT(badge_MegaHPDrain);
+ItemScript IES_MegaHPDrain = STANDARD_ITEM_SCRIPT(badge_MegaHPDrain);
 
-ItemScript ItemScript_BumpAttack = STANDARD_ITEM_SCRIPT(badge_BumpAttack);
+ItemScript IES_BumpAttack = STANDARD_ITEM_SCRIPT(badge_BumpAttack);
 
-ItemScript ItemScript_PUpDDown = STANDARD_ITEM_SCRIPT(badge_PUpDDown);
+ItemScript IES_PUpDDown = STANDARD_ITEM_SCRIPT(badge_PUpDDown);
 
-ItemScript ItemScript_PDownDUp = STANDARD_ITEM_SCRIPT(badge_PDownDUp);
+ItemScript IES_PDownDUp = STANDARD_ITEM_SCRIPT(badge_PDownDUp);
 
-ItemScript ItemScript_HeartFinder = STANDARD_ITEM_SCRIPT(badge_HeartFinder);
+ItemScript IES_HeartFinder = STANDARD_ITEM_SCRIPT(badge_HeartFinder);
 
-ItemScript ItemScript_FlowerFinder = STANDARD_ITEM_SCRIPT(badge_FlowerFinder);
+ItemScript IES_FlowerFinder = STANDARD_ITEM_SCRIPT(badge_FlowerFinder);
 
-ItemScript ItemScript_DizzyAttack = STANDARD_ITEM_SCRIPT(badge_DizzyAttack);
+ItemScript IES_DizzyAttack = STANDARD_ITEM_SCRIPT(badge_DizzyAttack);
 
-ItemScript ItemScript_SpeedySpin = STANDARD_ITEM_SCRIPT(badge_SpeedySpin);
+ItemScript IES_SpeedySpin = STANDARD_ITEM_SCRIPT(badge_SpeedySpin);
 
-ItemScript ItemScript_SpinAttack = STANDARD_ITEM_SCRIPT(badge_SpinAttack);
+ItemScript IES_SpinAttack = STANDARD_ITEM_SCRIPT(badge_SpinAttack);
 
-ItemScript ItemScript_ISpy = STANDARD_ITEM_SCRIPT(badge_ISpy);
+ItemScript IES_ISpy = STANDARD_ITEM_SCRIPT(badge_ISpy);
 
-ItemScript ItemScript_PowerRush = STANDARD_ITEM_SCRIPT(badge_PowerRush);
+ItemScript IES_PowerRush = STANDARD_ITEM_SCRIPT(badge_PowerRush);
 
-ItemScript ItemScript_LastStand = STANDARD_ITEM_SCRIPT(badge_LastStand);
+ItemScript IES_LastStand = STANDARD_ITEM_SCRIPT(badge_LastStand);
 
-ItemScript ItemScript_CloseCall = STANDARD_ITEM_SCRIPT(badge_CloseCall);
+ItemScript IES_CloseCall = STANDARD_ITEM_SCRIPT(badge_CloseCall);
 
-ItemScript ItemScript_CrazyHeart = STANDARD_ITEM_SCRIPT(badge_CrazyHeart);
+ItemScript IES_CrazyHeart = STANDARD_ITEM_SCRIPT(badge_CrazyHeart);
 
-ItemScript ItemScript_Unused_0D5 = STANDARD_ITEM_SCRIPT(unused_0D5);
+ItemScript IES_Unused_0D5 = STANDARD_ITEM_SCRIPT(unused_0D5);
 
-ItemScript ItemScript_Unused_0D6 = STANDARD_ITEM_SCRIPT(unused_0D6);
+ItemScript IES_Unused_0D6 = STANDARD_ITEM_SCRIPT(unused_0D6);
 
-ItemScript ItemScript_Unused_0D7 = STANDARD_ITEM_SCRIPT(unused_0D7);
+ItemScript IES_Unused_0D7 = STANDARD_ITEM_SCRIPT(unused_0D7);
 
-ItemScript ItemScript_ShrinkSmash = STANDARD_ITEM_SCRIPT(badge_ShrinkSmash);
+ItemScript IES_ShrinkSmash = STANDARD_ITEM_SCRIPT(badge_ShrinkSmash);
 
-ItemScript ItemScript_ShrinkStomp = STANDARD_ITEM_SCRIPT(badge_ShrinkStomp);
+ItemScript IES_ShrinkStomp = STANDARD_ITEM_SCRIPT(badge_ShrinkStomp);
 
-ItemScript ItemScript_DDownJump = STANDARD_ITEM_SCRIPT(badge_DDownJump);
+ItemScript IES_DDownJump = STANDARD_ITEM_SCRIPT(badge_DDownJump);
 
-ItemScript ItemScript_DamageDodge = STANDARD_ITEM_SCRIPT(badge_DamageDodge);
+ItemScript IES_DamageDodge = STANDARD_ITEM_SCRIPT(badge_DamageDodge);
 
-ItemScript ItemScript_EarthquakeJump = STANDARD_ITEM_SCRIPT(badge_EarthquakeJump);
+ItemScript IES_EarthquakeJump = STANDARD_ITEM_SCRIPT(badge_EarthquakeJump);
 
-ItemScript ItemScript_HappyFlower = STANDARD_ITEM_SCRIPT(badge_HappyFlower);
+ItemScript IES_HappyFlower = STANDARD_ITEM_SCRIPT(badge_HappyFlower);
 
-ItemScript ItemScript_HappyCoin = STANDARD_ITEM_SCRIPT(badge_HappyCoin);
+ItemScript IES_HappyCoin = STANDARD_ITEM_SCRIPT(badge_HappyCoin);
 
-ItemScript ItemScript_Unused_0DF = STANDARD_ITEM_SCRIPT(unused_0DF);
+ItemScript IES_Unused_0DF = STANDARD_ITEM_SCRIPT(unused_0DF);
 
-ItemScript ItemScript_DeepFocus = STANDARD_ITEM_SCRIPT(badge_DeepFocus);
+ItemScript IES_DeepFocus = STANDARD_ITEM_SCRIPT(badge_DeepFocus);
 
-ItemScript ItemScript_SuperFocus = STANDARD_ITEM_SCRIPT(badge_SuperFocus);
+ItemScript IES_SuperFocus = STANDARD_ITEM_SCRIPT(badge_SuperFocus);
 
-ItemScript ItemScript_Kaiden = STANDARD_ITEM_SCRIPT(badge_Kaiden);
+ItemScript IES_Kaiden = STANDARD_ITEM_SCRIPT(badge_Kaiden);
 
-ItemScript ItemScript_QuickChange = STANDARD_ITEM_SCRIPT(badge_QuickChange);
+ItemScript IES_QuickChange = STANDARD_ITEM_SCRIPT(badge_QuickChange);
 
-ItemScript ItemScript_Unused_0E4 = STANDARD_ITEM_SCRIPT(unused_0E4);
+ItemScript IES_Unused_0E4 = STANDARD_ITEM_SCRIPT(unused_0E4);
 
-ItemScript ItemScript_Unused_0E5 = STANDARD_ITEM_SCRIPT(unused_0E5);
+ItemScript IES_Unused_0E5 = STANDARD_ITEM_SCRIPT(unused_0E5);
 
-ItemScript ItemScript_Unused_0E6 = STANDARD_ITEM_SCRIPT(unused_0E6);
+ItemScript IES_Unused_0E6 = STANDARD_ITEM_SCRIPT(unused_0E6);
 
-ItemScript ItemScript_Unused_0E7 = STANDARD_ITEM_SCRIPT(unused_0E7);
+ItemScript IES_Unused_0E7 = STANDARD_ITEM_SCRIPT(unused_0E7);
 
-ItemScript ItemScript_Peekaboo = STANDARD_ITEM_SCRIPT(badge_Peekaboo);
+ItemScript IES_Peekaboo = STANDARD_ITEM_SCRIPT(badge_Peekaboo);
 
-ItemScript ItemScript_GroupFocus = STANDARD_ITEM_SCRIPT(badge_GroupFocus);
+ItemScript IES_GroupFocus = STANDARD_ITEM_SCRIPT(badge_GroupFocus);
 
-ItemScript ItemScript_AttackFXD = STANDARD_ITEM_SCRIPT(badge_AttackFXD);
+ItemScript IES_AttackFXD = STANDARD_ITEM_SCRIPT(badge_AttackFXD);
 
-ItemScript ItemScript_AttackFXB = STANDARD_ITEM_SCRIPT(badge_AttackFXB);
+ItemScript IES_AttackFXB = STANDARD_ITEM_SCRIPT(badge_AttackFXB);
 
-ItemScript ItemScript_AttackFXE = STANDARD_ITEM_SCRIPT(badge_AttackFXE);
+ItemScript IES_AttackFXE = STANDARD_ITEM_SCRIPT(badge_AttackFXE);
 
-ItemScript ItemScript_AttackFXC = STANDARD_ITEM_SCRIPT(badge_AttackFXC);
+ItemScript IES_AttackFXC = STANDARD_ITEM_SCRIPT(badge_AttackFXC);
 
-ItemScript ItemScript_AttackFXF = STANDARD_ITEM_SCRIPT(badge_AttackFXF);
+ItemScript IES_AttackFXF = STANDARD_ITEM_SCRIPT(badge_AttackFXF);
 
-ItemScript ItemScript_Unused_0EF = STANDARD_ITEM_SCRIPT(unused_0EF);
+ItemScript IES_Unused_0EF = STANDARD_ITEM_SCRIPT(unused_0EF);
 
-ItemScript ItemScript_HealthyHealthy = STANDARD_ITEM_SCRIPT(badge_HealthyHealthy);
+ItemScript IES_HealthyHealthy = STANDARD_ITEM_SCRIPT(badge_HealthyHealthy);
 
-ItemScript ItemScript_Unused_0F1 = STANDARD_ITEM_SCRIPT(unused_0F1);
+ItemScript IES_Unused_0F1 = STANDARD_ITEM_SCRIPT(unused_0F1);
 
-ItemScript ItemScript_Unused_0F2 = STANDARD_ITEM_SCRIPT(unused_0F2);
+ItemScript IES_Unused_0F2 = STANDARD_ITEM_SCRIPT(unused_0F2);
 
-ItemScript ItemScript_Unused_0F3 = STANDARD_ITEM_SCRIPT(unused_0F3);
+ItemScript IES_Unused_0F3 = STANDARD_ITEM_SCRIPT(unused_0F3);
 
-ItemScript ItemScript_Unused_0F4 = STANDARD_ITEM_SCRIPT(unused_0F4);
+ItemScript IES_Unused_0F4 = STANDARD_ITEM_SCRIPT(unused_0F4);
 
-ItemScript ItemScript_Unused_0F5 = STANDARD_ITEM_SCRIPT(unused_0F5);
+ItemScript IES_Unused_0F5 = STANDARD_ITEM_SCRIPT(unused_0F5);
 
-ItemScript ItemScript_Unused_0F6 = STANDARD_ITEM_SCRIPT(unused_0F6);
+ItemScript IES_Unused_0F6 = STANDARD_ITEM_SCRIPT(unused_0F6);
 
-ItemScript ItemScript_Unused_0F7 = STANDARD_ITEM_SCRIPT(unused_0F7);
+ItemScript IES_Unused_0F7 = STANDARD_ITEM_SCRIPT(unused_0F7);
 
-ItemScript ItemScript_Heart = {
+ItemScript IES_Heart = {
     is_SetIcon(10, anim_heart_0)
     is_SetIcon(6, anim_heart_1)
     is_Restart
     is_End
 };
 
-ItemScript ItemScript_Coin = {
+ItemScript IES_Coin = {
     is_Loop
         is_SetIcon(3, anim_coin_0)
         is_SetIcon(3, anim_coin_1)
@@ -517,9 +517,9 @@ ItemScript ItemScript_Coin = {
     is_End
 };
 
-ItemScript ItemScript_HeartPiece = STANDARD_ITEM_SCRIPT(anim_heart_piece);
+ItemScript IES_HeartPiece = STANDARD_ITEM_SCRIPT(anim_heart_piece);
 
-ItemScript ItemScript_StarPoint = {
+ItemScript IES_StarPoint = {
     is_SetIcon(2, anim_sp_0)
     is_SetIcon(2, anim_sp_1)
     is_SetIcon(2, anim_sp_2)
@@ -532,7 +532,7 @@ ItemScript ItemScript_StarPoint = {
     is_End
 };
 
-ItemScript ItemScript_HeartPoint = {
+ItemScript IES_HeartPoint = {
     is_SetIcon(8, anim_hp_0)
     is_SetIcon(5, anim_hp_1)
     is_SetIcon(8, anim_hp_2)
@@ -540,7 +540,7 @@ ItemScript ItemScript_HeartPoint = {
     is_End
 };
 
-ItemScript ItemScript_FlowerPoint = {
+ItemScript IES_FlowerPoint = {
     is_SetIcon(8, anim_fp_0)
     is_SetIcon(5, anim_fp_1)
     is_SetIcon(8, anim_fp_2)
@@ -548,7 +548,7 @@ ItemScript ItemScript_FlowerPoint = {
     is_End
 };
 
-ItemScript ItemScript_StarPiece = {
+ItemScript IES_StarPiece = {
     is_SetIcon(12, anim_star_piece_0)
     is_SetIcon(4, anim_star_piece_1)
     is_SetIcon(12, anim_star_piece_2)
@@ -557,617 +557,617 @@ ItemScript ItemScript_StarPiece = {
     is_End
 };
 
-ItemScript ItemScript_SpicySoup = STANDARD_ITEM_SCRIPT(food_SpicySoup);
+ItemScript IES_SpicySoup = STANDARD_ITEM_SCRIPT(food_SpicySoup);
 
-ItemScript ItemScript_ApplePie = STANDARD_ITEM_SCRIPT(food_ApplePie);
+ItemScript IES_ApplePie = STANDARD_ITEM_SCRIPT(food_ApplePie);
 
-ItemScript ItemScript_HoneyUltra = STANDARD_ITEM_SCRIPT(food_HoneyUltra);
+ItemScript IES_HoneyUltra = STANDARD_ITEM_SCRIPT(food_HoneyUltra);
 
-ItemScript ItemScript_MapleUltra = STANDARD_ITEM_SCRIPT(food_MapleUltra);
+ItemScript IES_MapleUltra = STANDARD_ITEM_SCRIPT(food_MapleUltra);
 
-ItemScript ItemScript_JellyUltra = STANDARD_ITEM_SCRIPT(food_JellyUltra);
+ItemScript IES_JellyUltra = STANDARD_ITEM_SCRIPT(food_JellyUltra);
 
-ItemScript ItemScript_Koopasta = STANDARD_ITEM_SCRIPT(food_Koopasta);
+ItemScript IES_Koopasta = STANDARD_ITEM_SCRIPT(food_Koopasta);
 
-ItemScript ItemScript_FriedShroom = STANDARD_ITEM_SCRIPT(food_FriedShroom);
+ItemScript IES_FriedShroom = STANDARD_ITEM_SCRIPT(food_FriedShroom);
 
-ItemScript ItemScript_ShroomCake = STANDARD_ITEM_SCRIPT(food_ShroomCake);
+ItemScript IES_ShroomCake = STANDARD_ITEM_SCRIPT(food_ShroomCake);
 
-ItemScript ItemScript_ShroomSteak = STANDARD_ITEM_SCRIPT(food_ShroomSteak);
+ItemScript IES_ShroomSteak = STANDARD_ITEM_SCRIPT(food_ShroomSteak);
 
-ItemScript ItemScript_HotShroom = STANDARD_ITEM_SCRIPT(food_HotShroom);
+ItemScript IES_HotShroom = STANDARD_ITEM_SCRIPT(food_HotShroom);
 
-ItemScript ItemScript_SweetShroom = STANDARD_ITEM_SCRIPT(food_SweetShroom);
+ItemScript IES_SweetShroom = STANDARD_ITEM_SCRIPT(food_SweetShroom);
 
-ItemScript ItemScript_HealthyJuice = STANDARD_ITEM_SCRIPT(food_HealthyJuice);
+ItemScript IES_HealthyJuice = STANDARD_ITEM_SCRIPT(food_HealthyJuice);
 
-ItemScript ItemScript_BlandMeal = STANDARD_ITEM_SCRIPT(food_BlandMeal);
+ItemScript IES_BlandMeal = STANDARD_ITEM_SCRIPT(food_BlandMeal);
 
-ItemScript ItemScript_YummyMeal = STANDARD_ITEM_SCRIPT(food_YummyMeal);
+ItemScript IES_YummyMeal = STANDARD_ITEM_SCRIPT(food_YummyMeal);
 
-ItemScript ItemScript_DeluxeFeast = STANDARD_ITEM_SCRIPT(food_DeluxeFeast);
+ItemScript IES_DeluxeFeast = STANDARD_ITEM_SCRIPT(food_DeluxeFeast);
 
-ItemScript ItemScript_SpecialShake = STANDARD_ITEM_SCRIPT(food_SpecialShake);
+ItemScript IES_SpecialShake = STANDARD_ITEM_SCRIPT(food_SpecialShake);
 
-ItemScript ItemScript_BigCookie = STANDARD_ITEM_SCRIPT(food_BigCookie);
+ItemScript IES_BigCookie = STANDARD_ITEM_SCRIPT(food_BigCookie);
 
-ItemScript ItemScript_Cake = STANDARD_ITEM_SCRIPT(food_Cake);
+ItemScript IES_Cake = STANDARD_ITEM_SCRIPT(food_Cake);
 
-ItemScript ItemScript_Mistake = STANDARD_ITEM_SCRIPT(food_Mistake);
+ItemScript IES_Mistake = STANDARD_ITEM_SCRIPT(food_Mistake);
 
-ItemScript ItemScript_KoopaTea = STANDARD_ITEM_SCRIPT(food_KoopaTea);
+ItemScript IES_KoopaTea = STANDARD_ITEM_SCRIPT(food_KoopaTea);
 
-ItemScript ItemScript_HoneySuper = STANDARD_ITEM_SCRIPT(food_HoneySuper);
+ItemScript IES_HoneySuper = STANDARD_ITEM_SCRIPT(food_HoneySuper);
 
-ItemScript ItemScript_MapleSuper = STANDARD_ITEM_SCRIPT(food_MapleSuper);
+ItemScript IES_MapleSuper = STANDARD_ITEM_SCRIPT(food_MapleSuper);
 
-ItemScript ItemScript_JellySuper = STANDARD_ITEM_SCRIPT(food_JellySuper);
+ItemScript IES_JellySuper = STANDARD_ITEM_SCRIPT(food_JellySuper);
 
-ItemScript ItemScript_Spaghetti = STANDARD_ITEM_SCRIPT(food_Spaghetti);
+ItemScript IES_Spaghetti = STANDARD_ITEM_SCRIPT(food_Spaghetti);
 
-ItemScript ItemScript_EggMissile = STANDARD_ITEM_SCRIPT(food_EggMissile);
+ItemScript IES_EggMissile = STANDARD_ITEM_SCRIPT(food_EggMissile);
 
-ItemScript ItemScript_FriedEgg = STANDARD_ITEM_SCRIPT(food_FriedEgg);
+ItemScript IES_FriedEgg = STANDARD_ITEM_SCRIPT(food_FriedEgg);
 
-ItemScript ItemScript_HoneyShroom = STANDARD_ITEM_SCRIPT(food_HoneyShroom);
+ItemScript IES_HoneyShroom = STANDARD_ITEM_SCRIPT(food_HoneyShroom);
 
-ItemScript ItemScript_HoneyCandy = STANDARD_ITEM_SCRIPT(food_HoneyCandy);
+ItemScript IES_HoneyCandy = STANDARD_ITEM_SCRIPT(food_HoneyCandy);
 
-ItemScript ItemScript_ElectroPop = STANDARD_ITEM_SCRIPT(food_ElectroPop);
+ItemScript IES_ElectroPop = STANDARD_ITEM_SCRIPT(food_ElectroPop);
 
-ItemScript ItemScript_FirePop = STANDARD_ITEM_SCRIPT(food_FirePop);
+ItemScript IES_FirePop = STANDARD_ITEM_SCRIPT(food_FirePop);
 
-ItemScript ItemScript_LimeCandy = STANDARD_ITEM_SCRIPT(food_LimeCandy);
+ItemScript IES_LimeCandy = STANDARD_ITEM_SCRIPT(food_LimeCandy);
 
-ItemScript ItemScript_CocoPop = STANDARD_ITEM_SCRIPT(food_CocoPop);
+ItemScript IES_CocoPop = STANDARD_ITEM_SCRIPT(food_CocoPop);
 
-ItemScript ItemScript_LemonCandy = STANDARD_ITEM_SCRIPT(food_LemonCandy);
+ItemScript IES_LemonCandy = STANDARD_ITEM_SCRIPT(food_LemonCandy);
 
-ItemScript ItemScript_JellyPop = STANDARD_ITEM_SCRIPT(food_JellyPop);
+ItemScript IES_JellyPop = STANDARD_ITEM_SCRIPT(food_JellyPop);
 
-ItemScript ItemScript_StrangeCake = STANDARD_ITEM_SCRIPT(food_StrangeCake);
+ItemScript IES_StrangeCake = STANDARD_ITEM_SCRIPT(food_StrangeCake);
 
-ItemScript ItemScript_KookyCookie = STANDARD_ITEM_SCRIPT(food_KookyCookie);
+ItemScript IES_KookyCookie = STANDARD_ITEM_SCRIPT(food_KookyCookie);
 
-ItemScript ItemScript_FrozenFries = STANDARD_ITEM_SCRIPT(food_FrozenFries);
+ItemScript IES_FrozenFries = STANDARD_ITEM_SCRIPT(food_FrozenFries);
 
-ItemScript ItemScript_PotatoSalad = STANDARD_ITEM_SCRIPT(food_PotatoSalad);
+ItemScript IES_PotatoSalad = STANDARD_ITEM_SCRIPT(food_PotatoSalad);
 
-ItemScript ItemScript_NuttyCake = STANDARD_ITEM_SCRIPT(food_NuttyCake);
+ItemScript IES_NuttyCake = STANDARD_ITEM_SCRIPT(food_NuttyCake);
 
-ItemScript ItemScript_MapleShroom = STANDARD_ITEM_SCRIPT(food_MapleShroom);
+ItemScript IES_MapleShroom = STANDARD_ITEM_SCRIPT(food_MapleShroom);
 
-ItemScript ItemScript_BoiledEgg = STANDARD_ITEM_SCRIPT(food_BoiledEgg);
+ItemScript IES_BoiledEgg = STANDARD_ITEM_SCRIPT(food_BoiledEgg);
 
-ItemScript ItemScript_YoshiCookie = STANDARD_ITEM_SCRIPT(food_YoshiCookie);
+ItemScript IES_YoshiCookie = STANDARD_ITEM_SCRIPT(food_YoshiCookie);
 
-ItemScript ItemScript_JellyShroom = STANDARD_ITEM_SCRIPT(food_JellyShroom);
+ItemScript IES_JellyShroom = STANDARD_ITEM_SCRIPT(food_JellyShroom);
 
-ItemScript ItemScript_Unused_02C = STANDARD_ITEM_SCRIPT(unused_02C);
+ItemScript IES_Unused_02C = STANDARD_ITEM_SCRIPT(unused_02C);
 
-ItemScript ItemScript_Unused_02D = STANDARD_ITEM_SCRIPT(unused_02D);
+ItemScript IES_Unused_02D = STANDARD_ITEM_SCRIPT(unused_02D);
 
-ItemScript ItemScript_Unused_02E = STANDARD_ITEM_SCRIPT(unused_02E);
+ItemScript IES_Unused_02E = STANDARD_ITEM_SCRIPT(unused_02E);
 
-ItemScript ItemScript_Unused_02F = STANDARD_ITEM_SCRIPT(unused_02F);
+ItemScript IES_Unused_02F = STANDARD_ITEM_SCRIPT(unused_02F);
 
-ItemScript ItemScript_Unused_030 = STANDARD_ITEM_SCRIPT(unused_030);
+ItemScript IES_Unused_030 = STANDARD_ITEM_SCRIPT(unused_030);
 
-ItemScript ItemScript_FireFlower = STANDARD_ITEM_SCRIPT(battle_FireFlower);
+ItemScript IES_FireFlower = STANDARD_ITEM_SCRIPT(battle_FireFlower);
 
-ItemScript ItemScript_SnowmanDoll = STANDARD_ITEM_SCRIPT(battle_SnowmanDoll);
+ItemScript IES_SnowmanDoll = STANDARD_ITEM_SCRIPT(battle_SnowmanDoll);
 
-ItemScript ItemScript_ThunderRage = STANDARD_ITEM_SCRIPT(battle_ThunderRage);
+ItemScript IES_ThunderRage = STANDARD_ITEM_SCRIPT(battle_ThunderRage);
 
-ItemScript ItemScript_ThunderBolt = STANDARD_ITEM_SCRIPT(battle_ThunderBolt);
+ItemScript IES_ThunderBolt = STANDARD_ITEM_SCRIPT(battle_ThunderBolt);
 
-ItemScript ItemScript_ShootingStar = STANDARD_ITEM_SCRIPT(battle_ShootingStar);
+ItemScript IES_ShootingStar = STANDARD_ITEM_SCRIPT(battle_ShootingStar);
 
-ItemScript ItemScript_DustyHammer = STANDARD_ITEM_SCRIPT(battle_DustyHammer);
+ItemScript IES_DustyHammer = STANDARD_ITEM_SCRIPT(battle_DustyHammer);
 
-ItemScript ItemScript_Pebble = STANDARD_ITEM_SCRIPT(battle_Pebble);
+ItemScript IES_Pebble = STANDARD_ITEM_SCRIPT(battle_Pebble);
 
-ItemScript ItemScript_ITEM_127 = STANDARD_ITEM_SCRIPT(unused_127);
+ItemScript IES_ITEM_127 = STANDARD_ITEM_SCRIPT(unused_127);
 
-ItemScript ItemScript_StoneCap = STANDARD_ITEM_SCRIPT(battle_StoneCap);
+ItemScript IES_StoneCap = STANDARD_ITEM_SCRIPT(battle_StoneCap);
 
-ItemScript ItemScript_VoltShroom = STANDARD_ITEM_SCRIPT(battle_VoltShroom);
+ItemScript IES_VoltShroom = STANDARD_ITEM_SCRIPT(battle_VoltShroom);
 
-ItemScript ItemScript_PowerStar = STANDARD_ITEM_SCRIPT(battle_PowerStar);
+ItemScript IES_PowerStar = STANDARD_ITEM_SCRIPT(battle_PowerStar);
 
-ItemScript ItemScript_Parasol = STANDARD_ITEM_SCRIPT(battle_Parasol);
+ItemScript IES_Parasol = STANDARD_ITEM_SCRIPT(battle_Parasol);
 
-ItemScript ItemScript_MagicMirror = STANDARD_ITEM_SCRIPT(battle_MagicMirror);
+ItemScript IES_MagicMirror = STANDARD_ITEM_SCRIPT(battle_MagicMirror);
 
-ItemScript ItemScript_ITEM_12D = STANDARD_ITEM_SCRIPT(unused_12D);
+ItemScript IES_ITEM_12D = STANDARD_ITEM_SCRIPT(unused_12D);
 
-ItemScript ItemScript_ITEM_12E = STANDARD_ITEM_SCRIPT(unused_12E);
+ItemScript IES_ITEM_12E = STANDARD_ITEM_SCRIPT(unused_12E);
 
-ItemScript ItemScript_ITEM_12F = STANDARD_ITEM_SCRIPT(unused_12F);
+ItemScript IES_ITEM_12F = STANDARD_ITEM_SCRIPT(unused_12F);
 
-ItemScript ItemScript_Mushroom = STANDARD_ITEM_SCRIPT(food_Mushroom);
+ItemScript IES_Mushroom = STANDARD_ITEM_SCRIPT(food_Mushroom);
 
-ItemScript ItemScript_SuperShroom = STANDARD_ITEM_SCRIPT(food_SuperShroom);
+ItemScript IES_SuperShroom = STANDARD_ITEM_SCRIPT(food_SuperShroom);
 
-ItemScript ItemScript_UltraShroom = STANDARD_ITEM_SCRIPT(food_UltraShroom);
+ItemScript IES_UltraShroom = STANDARD_ITEM_SCRIPT(food_UltraShroom);
 
-ItemScript ItemScript_LifeShroom = STANDARD_ITEM_SCRIPT(food_LifeShroom);
+ItemScript IES_LifeShroom = STANDARD_ITEM_SCRIPT(food_LifeShroom);
 
-ItemScript ItemScript_DriedShroom = STANDARD_ITEM_SCRIPT(food_DriedShroom);
+ItemScript IES_DriedShroom = STANDARD_ITEM_SCRIPT(food_DriedShroom);
 
-ItemScript ItemScript_TastyTonic = STANDARD_ITEM_SCRIPT(food_TastyTonic);
+ItemScript IES_TastyTonic = STANDARD_ITEM_SCRIPT(food_TastyTonic);
 
-ItemScript ItemScript_SuperSoda = STANDARD_ITEM_SCRIPT(food_SuperSoda);
+ItemScript IES_SuperSoda = STANDARD_ITEM_SCRIPT(food_SuperSoda);
 
-ItemScript ItemScript_BlueBerry = STANDARD_ITEM_SCRIPT(food_BlueBerry);
+ItemScript IES_BlueBerry = STANDARD_ITEM_SCRIPT(food_BlueBerry);
 
-ItemScript ItemScript_RedBerry = STANDARD_ITEM_SCRIPT(food_RedBerry);
+ItemScript IES_RedBerry = STANDARD_ITEM_SCRIPT(food_RedBerry);
 
-ItemScript ItemScript_YellowBerry = STANDARD_ITEM_SCRIPT(food_YellowBerry);
+ItemScript IES_YellowBerry = STANDARD_ITEM_SCRIPT(food_YellowBerry);
 
-ItemScript ItemScript_BubbleBerry = STANDARD_ITEM_SCRIPT(food_BubbleBerry);
+ItemScript IES_BubbleBerry = STANDARD_ITEM_SCRIPT(food_BubbleBerry);
 
-ItemScript ItemScript_Goomnut = STANDARD_ITEM_SCRIPT(food_Goomnut);
+ItemScript IES_Goomnut = STANDARD_ITEM_SCRIPT(food_Goomnut);
 
-ItemScript ItemScript_KoopaLeaf = STANDARD_ITEM_SCRIPT(food_KoopaLeaf);
+ItemScript IES_KoopaLeaf = STANDARD_ITEM_SCRIPT(food_KoopaLeaf);
 
-ItemScript ItemScript_DriedPasta = STANDARD_ITEM_SCRIPT(food_DriedPasta);
+ItemScript IES_DriedPasta = STANDARD_ITEM_SCRIPT(food_DriedPasta);
 
-ItemScript ItemScript_Lime = STANDARD_ITEM_SCRIPT(food_Lime);
+ItemScript IES_Lime = STANDARD_ITEM_SCRIPT(food_Lime);
 
-ItemScript ItemScript_Lemon = STANDARD_ITEM_SCRIPT(food_Lemon);
+ItemScript IES_Lemon = STANDARD_ITEM_SCRIPT(food_Lemon);
 
-ItemScript ItemScript_DriedFruit = STANDARD_ITEM_SCRIPT(food_DriedFruit);
+ItemScript IES_DriedFruit = STANDARD_ITEM_SCRIPT(food_DriedFruit);
 
-ItemScript ItemScript_StrangeLeaf = STANDARD_ITEM_SCRIPT(food_StrangeLeaf);
+ItemScript IES_StrangeLeaf = STANDARD_ITEM_SCRIPT(food_StrangeLeaf);
 
-ItemScript ItemScript_CakeMix = STANDARD_ITEM_SCRIPT(food_CakeMix);
+ItemScript IES_CakeMix = STANDARD_ITEM_SCRIPT(food_CakeMix);
 
-ItemScript ItemScript_Egg = STANDARD_ITEM_SCRIPT(food_Egg);
+ItemScript IES_Egg = STANDARD_ITEM_SCRIPT(food_Egg);
 
-ItemScript ItemScript_Coconut = STANDARD_ITEM_SCRIPT(food_Coconut);
+ItemScript IES_Coconut = STANDARD_ITEM_SCRIPT(food_Coconut);
 
-ItemScript ItemScript_Melon = STANDARD_ITEM_SCRIPT(food_Melon);
+ItemScript IES_Melon = STANDARD_ITEM_SCRIPT(food_Melon);
 
-ItemScript ItemScript_StinkyHerb = STANDARD_ITEM_SCRIPT(food_StinkyHerb);
+ItemScript IES_StinkyHerb = STANDARD_ITEM_SCRIPT(food_StinkyHerb);
 
-ItemScript ItemScript_IcedPotato = STANDARD_ITEM_SCRIPT(food_IcedPotato);
+ItemScript IES_IcedPotato = STANDARD_ITEM_SCRIPT(food_IcedPotato);
 
-ItemScript ItemScript_HoneySyrup = STANDARD_ITEM_SCRIPT(food_HoneySyrup);
+ItemScript IES_HoneySyrup = STANDARD_ITEM_SCRIPT(food_HoneySyrup);
 
-ItemScript ItemScript_MapleSyrup = STANDARD_ITEM_SCRIPT(food_MapleSyrup);
+ItemScript IES_MapleSyrup = STANDARD_ITEM_SCRIPT(food_MapleSyrup);
 
-ItemScript ItemScript_JamminJelly = STANDARD_ITEM_SCRIPT(food_JamminJelly);
+ItemScript IES_JamminJelly = STANDARD_ITEM_SCRIPT(food_JamminJelly);
 
-ItemScript ItemScript_WhackasBump = STANDARD_ITEM_SCRIPT(food_WhackasBump);
+ItemScript IES_WhackasBump = STANDARD_ITEM_SCRIPT(food_WhackasBump);
 
-ItemScript ItemScript_Apple = STANDARD_ITEM_SCRIPT(food_Apple);
+ItemScript IES_Apple = STANDARD_ITEM_SCRIPT(food_Apple);
 
-ItemScript ItemScript_BakingSalt = STANDARD_ITEM_SCRIPT(peach_BakingSalt);
+ItemScript IES_BakingSalt = STANDARD_ITEM_SCRIPT(peach_BakingSalt);
 
-ItemScript ItemScript_BakingSugar = STANDARD_ITEM_SCRIPT(peach_BakingSugar);
+ItemScript IES_BakingSugar = STANDARD_ITEM_SCRIPT(peach_BakingSugar);
 
-ItemScript ItemScript_BakingEgg = STANDARD_ITEM_SCRIPT(peach_BakingEgg);
+ItemScript IES_BakingEgg = STANDARD_ITEM_SCRIPT(peach_BakingEgg);
 
-ItemScript ItemScript_BakingCream = STANDARD_ITEM_SCRIPT(peach_BakingCream);
+ItemScript IES_BakingCream = STANDARD_ITEM_SCRIPT(peach_BakingCream);
 
-ItemScript ItemScript_BakingStrawberry = STANDARD_ITEM_SCRIPT(peach_BakingStrawberry);
+ItemScript IES_BakingStrawberry = STANDARD_ITEM_SCRIPT(peach_BakingStrawberry);
 
-ItemScript ItemScript_BakingButter = STANDARD_ITEM_SCRIPT(peach_BakingButter);
+ItemScript IES_BakingButter = STANDARD_ITEM_SCRIPT(peach_BakingButter);
 
-ItemScript ItemScript_BakingCleanser = STANDARD_ITEM_SCRIPT(peach_BakingCleanser);
+ItemScript IES_BakingCleanser = STANDARD_ITEM_SCRIPT(peach_BakingCleanser);
 
-ItemScript ItemScript_BakingWater = STANDARD_ITEM_SCRIPT(peach_BakingWater);
+ItemScript IES_BakingWater = STANDARD_ITEM_SCRIPT(peach_BakingWater);
 
-ItemScript ItemScript_BakingFlour = STANDARD_ITEM_SCRIPT(peach_BakingFlour);
+ItemScript IES_BakingFlour = STANDARD_ITEM_SCRIPT(peach_BakingFlour);
 
-ItemScript ItemScript_BakingMilk = STANDARD_ITEM_SCRIPT(peach_BakingMilk);
+ItemScript IES_BakingMilk = STANDARD_ITEM_SCRIPT(peach_BakingMilk);
 
-ItemScript ItemScript_ITEM_11F = STANDARD_ITEM_SCRIPT(unused_11F);
+ItemScript IES_ITEM_11F = STANDARD_ITEM_SCRIPT(unused_11F);
 
-ItemScript ItemScript_SleepySheep = STANDARD_ITEM_SCRIPT(battle_SleepySheep);
+ItemScript IES_SleepySheep = STANDARD_ITEM_SCRIPT(battle_SleepySheep);
 
-ItemScript ItemScript_XBandage = STANDARD_ITEM_SCRIPT(battle_XBandage);
+ItemScript IES_XBandage = STANDARD_ITEM_SCRIPT(battle_XBandage);
 
-ItemScript ItemScript_POWBlock = STANDARD_ITEM_SCRIPT(battle_POWBlock);
+ItemScript IES_POWBlock = STANDARD_ITEM_SCRIPT(battle_POWBlock);
 
-ItemScript ItemScript_HustleDrink = STANDARD_ITEM_SCRIPT(battle_HustleDrink);
+ItemScript IES_HustleDrink = STANDARD_ITEM_SCRIPT(battle_HustleDrink);
 
-ItemScript ItemScript_StopWatch = STANDARD_ITEM_SCRIPT(battle_StopWatch);
+ItemScript IES_StopWatch = STANDARD_ITEM_SCRIPT(battle_StopWatch);
 
-ItemScript ItemScript_DizzyDial = STANDARD_ITEM_SCRIPT(battle_DizzyDial);
+ItemScript IES_DizzyDial = STANDARD_ITEM_SCRIPT(battle_DizzyDial);
 
-ItemScript ItemScript_ITEM_136 = STANDARD_ITEM_SCRIPT(battle_136);
+ItemScript IES_ITEM_136 = STANDARD_ITEM_SCRIPT(battle_136);
 
-ItemScript ItemScript_ITEM_137 = STANDARD_ITEM_SCRIPT(battle_137);
+ItemScript IES_ITEM_137 = STANDARD_ITEM_SCRIPT(battle_137);
 
 /* indexed by itemID */
 s32* gItemEntityScripts[] = {
-    ItemScript_Jump,
-    ItemScript_GearBoots1,
-    ItemScript_GearBoots2,
-    ItemScript_GearBoots3,
-    ItemScript_GearHammer1,
-    ItemScript_GearHammer2,
-    ItemScript_GearHammer3,
-    ItemScript_LuckyStar,
-    ItemScript_Jump,
-    ItemScript_Jump,
-    ItemScript_DojoCard1,
-    ItemScript_DojoCard2,
-    ItemScript_DojoCard3,
-    ItemScript_DojoCard4,
-    ItemScript_DojoCard5,
-    ItemScript_UltraStone,
-    ItemScript_KoopaFortressKey,
-    ItemScript_RuinsKey,
-    ItemScript_PulseStone,
-    ItemScript_TubbaCastleKey,
-    ItemScript_IcePalaceKey,
-    ItemScript_RuinsStoneMoon,
-    ItemScript_RuinsStonePyramid,
-    ItemScript_RuinsStoneStar,
-    ItemScript_AncientVase,
-    ItemScript_KooperShell,
-    ItemScript_BowserCastleKey,
-    ItemScript_ForestPass,
-    ItemScript_BooWeight,
-    ItemScript_BoosPortrait,
-    ItemScript_CrystalBerry,
-    ItemScript_MysticKey,
-    ItemScript_StoreroomKey,
-    ItemScript_ToyTrain,
-    ItemScript_BooRecord,
-    ItemScript_FryingPan,
-    ItemScript_Dictionary,
-    ItemScript_MysteryNote,
-    ItemScript_SuspiciousNote,
-    ItemScript_CrystalBall,
-    ItemScript_Screwdriver,
-    ItemScript_Cookbook,
-    ItemScript_JadeRaven,
-    ItemScript_MagicalSeed1,
-    ItemScript_MagicalSeed2,
-    ItemScript_MagicalSeed3,
-    ItemScript_MagicalSeed4,
-    ItemScript_ToadDoll,
-    ItemScript_Calculator,
-    ItemScript_SnowmanBucket,
-    ItemScript_SnowmanScarf,
-    ItemScript_RedKey,
-    ItemScript_BlueKey,
-    ItemScript_Letter,
-    ItemScript_Letter,
-    ItemScript_Letter,
-    ItemScript_Letter,
-    ItemScript_Letter,
-    ItemScript_Letter,
-    ItemScript_Letter,
-    ItemScript_Letter,
-    ItemScript_Letter,
-    ItemScript_Letter,
-    ItemScript_Letter,
-    ItemScript_Letter,
-    ItemScript_Letter,
-    ItemScript_Letter,
-    ItemScript_Letter,
-    ItemScript_Letter,
-    ItemScript_Letter,
-    ItemScript_Letter,
-    ItemScript_Letter,
-    ItemScript_Letter,
-    ItemScript_Letter,
-    ItemScript_Letter,
-    ItemScript_Letter,
-    ItemScript_Letter,
-    ItemScript_Letter,
-    ItemScript_Letter,
-    ItemScript_Letter,
-    ItemScript_Letter,
-    ItemScript_Letter,
-    ItemScript_Letter,
-    ItemScript_Artifact,
-    ItemScript_Letter,
-    ItemScript_Letter,
-    ItemScript_Dolly,
-    ItemScript_WaterStone,
-    ItemScript_MagicalBean,
-    ItemScript_FertileSoil,
-    ItemScript_MiracleWater,
-    ItemScript_AncientVase,
-    ItemScript_KootTheTape,
-    ItemScript_BakingSugar,
-    ItemScript_BakingSalt,
-    ItemScript_BakingEgg,
-    ItemScript_BakingCream,
-    ItemScript_BakingStrawberry,
-    ItemScript_BakingButter,
-    ItemScript_BakingCleanser,
-    ItemScript_BakingWater,
-    ItemScript_BakingFlour,
-    ItemScript_BakingMilk,
-    ItemScript_Lyrics,
-    ItemScript_Melody,
-    ItemScript_Mailbag,
-    ItemScript_PeachKey,
-    ItemScript_StoreroomKey,
-    ItemScript_StarStone,
-    ItemScript_SneakyParasol,
-    ItemScript_KootBook,
-    ItemScript_KootAutographMerluvlee,
-    ItemScript_KootEmptyWallet,
-    ItemScript_KootAutographLuigi,
-    ItemScript_KootKoopaShell,
-    ItemScript_KootOldPhoto,
-    ItemScript_KootGlasses,
-    ItemScript_KootOldPhoto,
-    ItemScript_KootPackage,
-    ItemScript_KootRedJar,
-    ItemScript_PeachKey,
-    ItemScript_StoreroomKey,
-    ItemScript_StoreroomKey,
-    ItemScript_SilverCard,
-    ItemScript_GoldCard,
-    ItemScript_Jump,
-    ItemScript_Jump,
-    ItemScript_Jump,
-    ItemScript_FireFlower,
-    ItemScript_SnowmanDoll,
-    ItemScript_ThunderRage,
-    ItemScript_ShootingStar,
-    ItemScript_ThunderBolt,
-    ItemScript_Pebble,
-    ItemScript_DustyHammer,
-    ItemScript_InsecticideHerb,
-    ItemScript_StoneCap,
-    ItemScript_TastyTonic,
-    ItemScript_Mushroom,
-    ItemScript_VoltShroom,
-    ItemScript_SuperShroom,
-    ItemScript_DriedShroom,
-    ItemScript_UltraShroom,
-    ItemScript_SleepySheep,
-    ItemScript_POWBlock,
-    ItemScript_HustleDrink,
-    ItemScript_StopWatch,
-    ItemScript_WhackasBump,
-    ItemScript_Apple,
-    ItemScript_LifeShroom,
-    ItemScript_Mystery,
-    ItemScript_RepelGel,
-    ItemScript_FrightJar,
-    ItemScript_PleaseComeBack,
-    ItemScript_DizzyDial,
-    ItemScript_SuperSoda,
-    ItemScript_Lemon,
-    ItemScript_Lime,
-    ItemScript_BlueBerry,
-    ItemScript_RedBerry,
-    ItemScript_YellowBerry,
-    ItemScript_BubbleBerry,
-    ItemScript_JamminJelly,
-    ItemScript_MapleSyrup,
-    ItemScript_HoneySyrup,
-    ItemScript_Goomnut,
-    ItemScript_KoopaLeaf,
-    ItemScript_DriedPasta,
-    ItemScript_DriedFruit,
-    ItemScript_StrangeLeaf,
-    ItemScript_CakeMix,
-    ItemScript_Egg,
-    ItemScript_Coconut,
-    ItemScript_Melon,
-    ItemScript_StinkyHerb,
-    ItemScript_IcedPotato,
-    ItemScript_SpicySoup,
-    ItemScript_ApplePie,
-    ItemScript_HoneyUltra,
-    ItemScript_MapleUltra,
-    ItemScript_JellyUltra,
-    ItemScript_Koopasta,
-    ItemScript_FriedShroom,
-    ItemScript_ShroomCake,
-    ItemScript_ShroomSteak,
-    ItemScript_HotShroom,
-    ItemScript_SweetShroom,
-    ItemScript_YummyMeal,
-    ItemScript_HealthyJuice,
-    ItemScript_BlandMeal,
-    ItemScript_DeluxeFeast,
-    ItemScript_SpecialShake,
-    ItemScript_BigCookie,
-    ItemScript_Cake,
-    ItemScript_Mistake,
-    ItemScript_KoopaTea,
-    ItemScript_HoneySuper,
-    ItemScript_MapleSuper,
-    ItemScript_JellySuper,
-    ItemScript_Spaghetti,
-    ItemScript_EggMissile,
-    ItemScript_FriedEgg,
-    ItemScript_HoneyShroom,
-    ItemScript_HoneyCandy,
-    ItemScript_ElectroPop,
-    ItemScript_FirePop,
-    ItemScript_LimeCandy,
-    ItemScript_CocoPop,
-    ItemScript_LemonCandy,
-    ItemScript_JellyPop,
-    ItemScript_StrangeCake,
-    ItemScript_KookyCookie,
-    ItemScript_FrozenFries,
-    ItemScript_PotatoSalad,
-    ItemScript_NuttyCake,
-    ItemScript_MapleShroom,
-    ItemScript_BoiledEgg,
-    ItemScript_YoshiCookie,
-    ItemScript_JellyShroom,
-    ItemScript_Jump,
-    ItemScript_Jump,
-    ItemScript_Jump,
-    ItemScript_Jump,
-    ItemScript_Jump,
-    ItemScript_SpinSmash,
-    ItemScript_Multibounce,
-    ItemScript_PowerPlus,
-    ItemScript_DodgeMaster,
-    ItemScript_PowerBounce,
-    ItemScript_SpikeShield,
-    ItemScript_FirstAttack,
-    ItemScript_HPPlus,
-    ItemScript_QuakeHammer,
-    ItemScript_DoubleDip,
-    ItemScript_Jump,
-    ItemScript_SleepStomp,
-    ItemScript_FireShield,
-    ItemScript_QuickChange,
-    ItemScript_DDownPound,
-    ItemScript_DizzyStomp,
-    ItemScript_SmashCharge0,
-    ItemScript_PrettyLucky,
-    ItemScript_FeelingFine,
-    ItemScript_AttackFXA,
-    ItemScript_AllorNothing,
-    ItemScript_HPDrain,
-    ItemScript_JumpCharge0,
-    ItemScript_SlowGo,
-    ItemScript_FPPlus,
-    ItemScript_MegaRush,
-    ItemScript_IcePower,
-    ItemScript_DefendPlus,
-    ItemScript_PayOff,
-    ItemScript_MoneyMoney,
-    ItemScript_ChillOut,
-    ItemScript_HappyHeart,
-    ItemScript_ZapTap,
-    ItemScript_Berserker,
-    ItemScript_RightOn,
-    ItemScript_RunawayPay,
-    ItemScript_Refund,
-    ItemScript_FlowerSaver,
-    ItemScript_TripleDip,
-    ItemScript_HammerThrow,
-    ItemScript_MegaQuake,
-    ItemScript_SmashCharge,
-    ItemScript_JumpCharge,
-    ItemScript_SSmashChg,
-    ItemScript_SJumpChg,
-    ItemScript_PowerRush,
-    ItemScript_AutoJump,
-    ItemScript_AutoSmash,
-    ItemScript_CrazyHeart,
-    ItemScript_LastStand,
-    ItemScript_CloseCall,
-    ItemScript_PUpDDown,
-    ItemScript_LuckyDay,
-    ItemScript_MegaHPDrain,
-    ItemScript_PDownDUp,
-    ItemScript_PowerQuake,
-    ItemScript_AutoMultibounce,
-    ItemScript_FlowerFanatic,
-    ItemScript_HeartFinder,
-    ItemScript_FlowerFinder,
-    ItemScript_SpinAttack,
-    ItemScript_DizzyAttack,
-    ItemScript_ISpy,
-    ItemScript_SpeedySpin,
-    ItemScript_BumpAttack,
-    ItemScript_PowerJump,
-    ItemScript_SuperJump,
-    ItemScript_MegaJump,
-    ItemScript_PowerSmash,
-    ItemScript_SuperSmash,
-    ItemScript_MegaSmash,
-    ItemScript_Jump,
-    ItemScript_Jump,
-    ItemScript_DeepFocus,
-    ItemScript_SuperFocus,
-    ItemScript_ShrinkSmash,
-    ItemScript_Jump,
-    ItemScript_Kaiden,
-    ItemScript_DDownJump,
-    ItemScript_ShrinkStomp,
-    ItemScript_DamageDodge,
-    ItemScript_EarthquakeJump,
-    ItemScript_DeepFocus,
-    ItemScript_SuperFocus,
-    ItemScript_HPPlus,
-    ItemScript_FPPlus,
-    ItemScript_HappyHeart,
-    ItemScript_HappyHeart,
-    ItemScript_FlowerSaver,
-    ItemScript_FlowerSaver,
-    ItemScript_DamageDodge,
-    ItemScript_DamageDodge,
-    ItemScript_PowerPlus,
-    ItemScript_PowerPlus,
-    ItemScript_DefendPlus,
-    ItemScript_DefendPlus,
-    ItemScript_HappyFlower,
-    ItemScript_HappyFlower,
-    ItemScript_HappyFlower,
-    ItemScript_GroupFocus,
-    ItemScript_Peekaboo,
-    ItemScript_AttackFXD,
-    ItemScript_AttackFXB,
-    ItemScript_AttackFXE,
-    ItemScript_AttackFXC,
-    ItemScript_AttackFXF,
-    ItemScript_HPPlus,
-    ItemScript_HPPlus,
-    ItemScript_HPPlus,
-    ItemScript_FPPlus,
-    ItemScript_FPPlus,
-    ItemScript_FPPlus,
-    ItemScript_HealthyHealthy,
-    ItemScript_Jump,
-    ItemScript_Jump,
-    ItemScript_Jump,
-    ItemScript_Jump,
-    ItemScript_Jump,
-    ItemScript_Heart,
-    ItemScript_Coin,
-    ItemScript_HeartPiece,
-    ItemScript_StarPoint,
-    ItemScript_HeartPoint,
-    ItemScript_FlowerPoint,
-    ItemScript_StarPiece,
-    ItemScript_CompleteCake,
-    ItemScript_CakeDone,
-    ItemScript_CakeBaked,
-    ItemScript_CakePan,
-    ItemScript_CakeBatter,
-    ItemScript_CakeBowl,
-    ItemScript_CakeMixed,
-    ItemScript_CakeIcing,
-    ItemScript_CakeBerries,
-    ItemScript_Hammer1,
-    ItemScript_Hammer2,
-    ItemScript_Hammer3,
-    ItemScript_Boots1,
-    ItemScript_Boots2,
-    ItemScript_Boots3,
-    ItemScript_Items,
-    ItemScript_Jump,
-    ItemScript_Jump,
-    ItemScript_Jump,
-    ItemScript_Jump,
-    ItemScript_Jump,
-    ItemScript_Jump,
-    ItemScript_Jump,
-    ItemScript_Jump,
-    ItemScript_Jump,
-    ItemScript_Jump,
-    ItemScript_Jump,
-    ItemScript_Jump,
-    ItemScript_Jump,
-    ItemScript_Jump,
-    ItemScript_Jump,
-    ItemScript_Jump,
-    ItemScript_Jump,
-    ItemScript_Jump,
-    ItemScript_Jump,
-    ItemScript_Jump
+    IES_Jump,
+    IES_GearBoots1,
+    IES_GearBoots2,
+    IES_GearBoots3,
+    IES_GearHammer1,
+    IES_GearHammer2,
+    IES_GearHammer3,
+    IES_LuckyStar,
+    IES_Jump,
+    IES_Jump,
+    IES_DojoCard1,
+    IES_DojoCard2,
+    IES_DojoCard3,
+    IES_DojoCard4,
+    IES_DojoCard5,
+    IES_UltraStone,
+    IES_KoopaFortressKey,
+    IES_RuinsKey,
+    IES_PulseStone,
+    IES_TubbaCastleKey,
+    IES_IcePalaceKey,
+    IES_RuinsStoneMoon,
+    IES_RuinsStonePyramid,
+    IES_RuinsStoneStar,
+    IES_AncientVase,
+    IES_KooperShell,
+    IES_BowserCastleKey,
+    IES_ForestPass,
+    IES_BooWeight,
+    IES_BoosPortrait,
+    IES_CrystalBerry,
+    IES_MysticKey,
+    IES_StoreroomKey,
+    IES_ToyTrain,
+    IES_BooRecord,
+    IES_FryingPan,
+    IES_Dictionary,
+    IES_MysteryNote,
+    IES_SuspiciousNote,
+    IES_CrystalBall,
+    IES_Screwdriver,
+    IES_Cookbook,
+    IES_JadeRaven,
+    IES_MagicalSeed1,
+    IES_MagicalSeed2,
+    IES_MagicalSeed3,
+    IES_MagicalSeed4,
+    IES_ToadDoll,
+    IES_Calculator,
+    IES_SnowmanBucket,
+    IES_SnowmanScarf,
+    IES_RedKey,
+    IES_BlueKey,
+    IES_Letter,
+    IES_Letter,
+    IES_Letter,
+    IES_Letter,
+    IES_Letter,
+    IES_Letter,
+    IES_Letter,
+    IES_Letter,
+    IES_Letter,
+    IES_Letter,
+    IES_Letter,
+    IES_Letter,
+    IES_Letter,
+    IES_Letter,
+    IES_Letter,
+    IES_Letter,
+    IES_Letter,
+    IES_Letter,
+    IES_Letter,
+    IES_Letter,
+    IES_Letter,
+    IES_Letter,
+    IES_Letter,
+    IES_Letter,
+    IES_Letter,
+    IES_Letter,
+    IES_Letter,
+    IES_Letter,
+    IES_Letter,
+    IES_Letter,
+    IES_Artifact,
+    IES_Letter,
+    IES_Letter,
+    IES_Dolly,
+    IES_WaterStone,
+    IES_MagicalBean,
+    IES_FertileSoil,
+    IES_MiracleWater,
+    IES_AncientVase,
+    IES_KootTheTape,
+    IES_BakingSugar,
+    IES_BakingSalt,
+    IES_BakingEgg,
+    IES_BakingCream,
+    IES_BakingStrawberry,
+    IES_BakingButter,
+    IES_BakingCleanser,
+    IES_BakingWater,
+    IES_BakingFlour,
+    IES_BakingMilk,
+    IES_Lyrics,
+    IES_Melody,
+    IES_Mailbag,
+    IES_PeachKey,
+    IES_StoreroomKey,
+    IES_StarStone,
+    IES_SneakyParasol,
+    IES_KootBook,
+    IES_KootAutographMerluvlee,
+    IES_KootEmptyWallet,
+    IES_KootAutographLuigi,
+    IES_KootKoopaShell,
+    IES_KootOldPhoto,
+    IES_KootGlasses,
+    IES_KootOldPhoto,
+    IES_KootPackage,
+    IES_KootRedJar,
+    IES_PeachKey,
+    IES_StoreroomKey,
+    IES_StoreroomKey,
+    IES_SilverCard,
+    IES_GoldCard,
+    IES_Jump,
+    IES_Jump,
+    IES_Jump,
+    IES_FireFlower,
+    IES_SnowmanDoll,
+    IES_ThunderRage,
+    IES_ShootingStar,
+    IES_ThunderBolt,
+    IES_Pebble,
+    IES_DustyHammer,
+    IES_InsecticideHerb,
+    IES_StoneCap,
+    IES_TastyTonic,
+    IES_Mushroom,
+    IES_VoltShroom,
+    IES_SuperShroom,
+    IES_DriedShroom,
+    IES_UltraShroom,
+    IES_SleepySheep,
+    IES_POWBlock,
+    IES_HustleDrink,
+    IES_StopWatch,
+    IES_WhackasBump,
+    IES_Apple,
+    IES_LifeShroom,
+    IES_Mystery,
+    IES_RepelGel,
+    IES_FrightJar,
+    IES_PleaseComeBack,
+    IES_DizzyDial,
+    IES_SuperSoda,
+    IES_Lemon,
+    IES_Lime,
+    IES_BlueBerry,
+    IES_RedBerry,
+    IES_YellowBerry,
+    IES_BubbleBerry,
+    IES_JamminJelly,
+    IES_MapleSyrup,
+    IES_HoneySyrup,
+    IES_Goomnut,
+    IES_KoopaLeaf,
+    IES_DriedPasta,
+    IES_DriedFruit,
+    IES_StrangeLeaf,
+    IES_CakeMix,
+    IES_Egg,
+    IES_Coconut,
+    IES_Melon,
+    IES_StinkyHerb,
+    IES_IcedPotato,
+    IES_SpicySoup,
+    IES_ApplePie,
+    IES_HoneyUltra,
+    IES_MapleUltra,
+    IES_JellyUltra,
+    IES_Koopasta,
+    IES_FriedShroom,
+    IES_ShroomCake,
+    IES_ShroomSteak,
+    IES_HotShroom,
+    IES_SweetShroom,
+    IES_YummyMeal,
+    IES_HealthyJuice,
+    IES_BlandMeal,
+    IES_DeluxeFeast,
+    IES_SpecialShake,
+    IES_BigCookie,
+    IES_Cake,
+    IES_Mistake,
+    IES_KoopaTea,
+    IES_HoneySuper,
+    IES_MapleSuper,
+    IES_JellySuper,
+    IES_Spaghetti,
+    IES_EggMissile,
+    IES_FriedEgg,
+    IES_HoneyShroom,
+    IES_HoneyCandy,
+    IES_ElectroPop,
+    IES_FirePop,
+    IES_LimeCandy,
+    IES_CocoPop,
+    IES_LemonCandy,
+    IES_JellyPop,
+    IES_StrangeCake,
+    IES_KookyCookie,
+    IES_FrozenFries,
+    IES_PotatoSalad,
+    IES_NuttyCake,
+    IES_MapleShroom,
+    IES_BoiledEgg,
+    IES_YoshiCookie,
+    IES_JellyShroom,
+    IES_Jump,
+    IES_Jump,
+    IES_Jump,
+    IES_Jump,
+    IES_Jump,
+    IES_SpinSmash,
+    IES_Multibounce,
+    IES_PowerPlus,
+    IES_DodgeMaster,
+    IES_PowerBounce,
+    IES_SpikeShield,
+    IES_FirstAttack,
+    IES_HPPlus,
+    IES_QuakeHammer,
+    IES_DoubleDip,
+    IES_Jump,
+    IES_SleepStomp,
+    IES_FireShield,
+    IES_QuickChange,
+    IES_DDownPound,
+    IES_DizzyStomp,
+    IES_SmashCharge0,
+    IES_PrettyLucky,
+    IES_FeelingFine,
+    IES_AttackFXA,
+    IES_AllorNothing,
+    IES_HPDrain,
+    IES_JumpCharge0,
+    IES_SlowGo,
+    IES_FPPlus,
+    IES_MegaRush,
+    IES_IcePower,
+    IES_DefendPlus,
+    IES_PayOff,
+    IES_MoneyMoney,
+    IES_ChillOut,
+    IES_HappyHeart,
+    IES_ZapTap,
+    IES_Berserker,
+    IES_RightOn,
+    IES_RunawayPay,
+    IES_Refund,
+    IES_FlowerSaver,
+    IES_TripleDip,
+    IES_HammerThrow,
+    IES_MegaQuake,
+    IES_SmashCharge,
+    IES_JumpCharge,
+    IES_SSmashChg,
+    IES_SJumpChg,
+    IES_PowerRush,
+    IES_AutoJump,
+    IES_AutoSmash,
+    IES_CrazyHeart,
+    IES_LastStand,
+    IES_CloseCall,
+    IES_PUpDDown,
+    IES_LuckyDay,
+    IES_MegaHPDrain,
+    IES_PDownDUp,
+    IES_PowerQuake,
+    IES_AutoMultibounce,
+    IES_FlowerFanatic,
+    IES_HeartFinder,
+    IES_FlowerFinder,
+    IES_SpinAttack,
+    IES_DizzyAttack,
+    IES_ISpy,
+    IES_SpeedySpin,
+    IES_BumpAttack,
+    IES_PowerJump,
+    IES_SuperJump,
+    IES_MegaJump,
+    IES_PowerSmash,
+    IES_SuperSmash,
+    IES_MegaSmash,
+    IES_Jump,
+    IES_Jump,
+    IES_DeepFocus,
+    IES_SuperFocus,
+    IES_ShrinkSmash,
+    IES_Jump,
+    IES_Kaiden,
+    IES_DDownJump,
+    IES_ShrinkStomp,
+    IES_DamageDodge,
+    IES_EarthquakeJump,
+    IES_DeepFocus,
+    IES_SuperFocus,
+    IES_HPPlus,
+    IES_FPPlus,
+    IES_HappyHeart,
+    IES_HappyHeart,
+    IES_FlowerSaver,
+    IES_FlowerSaver,
+    IES_DamageDodge,
+    IES_DamageDodge,
+    IES_PowerPlus,
+    IES_PowerPlus,
+    IES_DefendPlus,
+    IES_DefendPlus,
+    IES_HappyFlower,
+    IES_HappyFlower,
+    IES_HappyFlower,
+    IES_GroupFocus,
+    IES_Peekaboo,
+    IES_AttackFXD,
+    IES_AttackFXB,
+    IES_AttackFXE,
+    IES_AttackFXC,
+    IES_AttackFXF,
+    IES_HPPlus,
+    IES_HPPlus,
+    IES_HPPlus,
+    IES_FPPlus,
+    IES_FPPlus,
+    IES_FPPlus,
+    IES_HealthyHealthy,
+    IES_Jump,
+    IES_Jump,
+    IES_Jump,
+    IES_Jump,
+    IES_Jump,
+    IES_Heart,
+    IES_Coin,
+    IES_HeartPiece,
+    IES_StarPoint,
+    IES_HeartPoint,
+    IES_FlowerPoint,
+    IES_StarPiece,
+    IES_CompleteCake,
+    IES_CakeDone,
+    IES_CakeBaked,
+    IES_CakePan,
+    IES_CakeBatter,
+    IES_CakeBowl,
+    IES_CakeMixed,
+    IES_CakeIcing,
+    IES_CakeBerries,
+    IES_Hammer1,
+    IES_Hammer2,
+    IES_Hammer3,
+    IES_Boots1,
+    IES_Boots2,
+    IES_Boots3,
+    IES_Items,
+    IES_Jump,
+    IES_Jump,
+    IES_Jump,
+    IES_Jump,
+    IES_Jump,
+    IES_Jump,
+    IES_Jump,
+    IES_Jump,
+    IES_Jump,
+    IES_Jump,
+    IES_Jump,
+    IES_Jump,
+    IES_Jump,
+    IES_Jump,
+    IES_Jump,
+    IES_Jump,
+    IES_Jump,
+    IES_Jump,
+    IES_Jump,
+    IES_Jump
 };
 
 /* indexed by itemID */

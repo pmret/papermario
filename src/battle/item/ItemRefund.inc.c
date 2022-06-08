@@ -40,7 +40,7 @@ ApiStatus N(GiveRefund)(Evt* script, s32 isInitialCall) {
         posZ = player->currentPos.z;
 
         get_screen_coords(gCurrentCameraID, posX, posY, posZ, &iconX, &iconY, &iconZ);
-        itemIcon = hud_element_create(&HudScript_Refund);
+        itemIcon = hud_element_create(&HES_Refund);
         hud_element_set_render_pos(itemIcon, iconX + 36, iconY - 63);
     }
 

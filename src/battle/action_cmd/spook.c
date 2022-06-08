@@ -3,10 +3,10 @@
 
 #define NAMESPACE action_command_spook
 
-extern HudScript HudScript_BlueMeter;
-extern HudScript HudScript_StickNeutral;
-extern HudScript HudScript_StickMashLeft;
-extern HudScript HudScript_100pct;
+extern HudScript HES_BlueMeter;
+extern HudScript HES_StickNeutral;
+extern HudScript HES_StickMashLeft;
+extern HudScript HES_100pct;
 extern s32 D_80294440;
 
 s32 D_802A9920_430940[8] = { 0, 25, 50, 75, 75, 0, 0, 0 };
@@ -37,19 +37,19 @@ ApiStatus func_802A9000_430020(void) {
     actionCommandStatus->hudElementX = -48;
     actionCommandStatus->hudElementY = 80;
 
-    id = hud_element_create(&HudScript_StickNeutral);
+    id = hud_element_create(&HES_StickNeutral);
     actionCommandStatus->hudElements[0] = id;
     hud_element_set_render_pos(id, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
     hud_element_set_render_depth(id, 0);
     hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
-    id = hud_element_create(&HudScript_BlueMeter);
+    id = hud_element_create(&HES_BlueMeter);
     actionCommandStatus->hudElements[1] = id;
     hud_element_set_render_pos(id, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
     hud_element_set_render_depth(id, 0);
     hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
-    id = hud_element_create(&HudScript_100pct);
+    id = hud_element_create(&HES_100pct);
     actionCommandStatus->hudElements[2] = id;
     hud_element_set_render_pos(id, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
     hud_element_set_render_depth(id, 0);
@@ -100,7 +100,7 @@ void func_802A9298_4302B8(void) {
                 actionCommandStatus->unk_4E--;
                 return;
             }
-            hud_element_set_script(actionCommandStatus->hudElements[0], &HudScript_StickMashLeft);
+            hud_element_set_script(actionCommandStatus->hudElements[0], &HES_StickMashLeft);
             actionCommandStatus->barFillLevel = 0;
             battleStatus->unk_84 = 0;
             actionCommandStatus->unk_5C = 0;

@@ -33,7 +33,7 @@ extern HudScript D_802AA320;
 extern HudScript D_802AA694;
 extern HudScript D_802AAA08;
 extern HudScript D_802AAA30;
-extern HudScript HudScript_ProjectorBeam;
+extern HudScript HES_ProjectorBeam;
 extern EvtScript PlayerScriptDispatcher;
 
 extern s32 D_8029FA80[4];
@@ -553,7 +553,7 @@ void btl_state_update_celebration(void) {
                     D_8029FB60[2] = 1;
                 }
 
-                D_8029FAE8 = id = hud_element_create(&HudScript_ProjectorBeam);
+                D_8029FAE8 = id = hud_element_create(&HES_ProjectorBeam);
                 hud_element_create_transform_B(id);
                 hud_element_set_render_pos(id, 156, 13);
                 hud_element_set_tint(id, 255, 255, 255);

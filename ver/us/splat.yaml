@@ -752,7 +752,8 @@ segments:
       - [0x9D658, rgba32,  ui/stat_heart, 16, 16]
       - [0x9DA58]
       - [0x9DA60, rgba32,  ui/stat_flower, 16, 16]
-    - [0x9DE60, data]
+    - [0x9DE60, .data, 9DE60]
+    - [0xA2930, data]
     - [0xA2D40, .data, 8a860_len_3f30]
     - start: 0xA2D90
       type: .data
