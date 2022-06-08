@@ -1231,8 +1231,10 @@ typedef struct ItemEntity {
     /* 0x48 */ s32* sparkleSavedPos;
     /* 0x4C */ s32* sparkleRaster;
     /* 0x50 */ s32* sparklePalette;
-    /* 0x54 */ s32 sparkleWidth;
-    /* 0x58 */ s32 sparkleHeight;
+    /* 0x54 */ s16 sparkleOffsetX;
+    /* 0x56 */ s16 sparkleWidth;
+    /* 0x58 */ s16 sparkleOffsetY;
+    /* 0x5A */ s16 sparkleHeight;
 } ItemEntity; // size = 0x5C
 
 typedef struct MessagePrintState {
