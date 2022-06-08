@@ -2998,7 +2998,55 @@ segments:
     subsegments:
     - [0x385640, c, disable_x]
     - [0x386340]
-  - [0x3863B0, bin] # disable_x gfx
+  - name: effect_gfx_disable_x
+    dir: effects/gfx
+    type: code
+    start: 0x3863B0
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x3863B0, c, disable_x]
+    - start: 0x3863B0
+      type: .data
+      name: disable_x
+      subsegments:
+      - [0x3863B0, .data, disable_x]
+      - [0x3863B0, i4, D_09000000_3863B0, 32, 32]
+      - [0x3865B0, i4, D_09000200_3865B0, 32, 32]
+      - [0x3867B0, i4, D_09000400_3867B0, 32, 32]
+      - [0x3869B0, i4, D_09000600_3869B0, 32, 32]
+      - [0x386BB0, i4, D_09000800_386BB0, 32, 32]
+      - [0x386DB0, i4, D_09000A00_386DB0, 32, 32]
+      - [0x386FB0, i4, D_09000C00_386FB0, 32, 32]
+      - [0x3871B0, i4, D_09000E00_3871B0, 32, 32]
+      - [0x3873B0, i4, D_09001000_3873B0, 32, 32]
+      - [0x3875B0, i4, D_09001200_3875B0, 32, 32]
+      - [0x3877B0, i4, D_09001400_3877B0, 32, 32]
+      - [0x3879B0, i4, D_09001600_3879B0, 32, 32]
+      - [0x387BB0, rgba16, D_09001800_387BB0, 32, 32]
+      - [0x3883B0, vtx, D_09002000_3883B0]
+      - [0x3883F0, vtx, D_09002040_3883F0]
+      - [0x388430, vtx, D_09002080_388430]
+      - [0x388470, vtx, D_090020C0_388470]
+      - [0x3884B0, gfx, D_09002100_3884B0]
+      - [0x388548, gfx, D_09002198_388548]
+      - [0x3885E0, gfx, D_09002230_3885E0]
+      - [0x388600, gfx, D_09002250_388600]
+      - [0x388620, gfx, D_09002270_388620]
+      - [0x388640, gfx, D_09002290_388640]
+      - [0x388660, gfx, D_090022B0_388660]
+      - [0x3886D0, gfx, D_09002320_3886D0]
+      - [0x388710, gfx, D_09002360_388710]
+      - [0x388750, gfx, D_090023A0_388750]
+      - [0x388790, gfx, D_090023E0_388790]
+      - [0x3887D0, gfx, D_09002420_3887D0]
+      - [0x388810, gfx, D_09002460_388810]
+      - [0x388850, gfx, D_090024A0_388850]
+      - [0x388890, gfx, D_090024E0_388890]
+      - [0x3888D0, gfx, D_09002520_3888D0]
+      - [0x388910, gfx, D_09002560_388910]
+      - [0x388950, gfx, D_090025A0_388950]
+      - [0x388990, gfx, D_090025E0_388990]
   - name: effect_bombette_breaking
     dir: effects
     type: code
@@ -3182,7 +3230,56 @@ segments:
     subsegments:
     - [0x3AA920, c, butterflies]
     - [0x3AAFE0]
-  - [0x3AB030, bin] # butterflies gfx
+  - name: effect_gfx_butterflies
+    dir: effects/gfx
+    type: code
+    start: 0x3AB030
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x3AB030, c, butterflies]
+    - start: 0x3AB030
+      type: .data
+      name: butterflies
+      subsegments:
+      - [0x3AB030, .data, butterflies]
+      - [0x3AB030, ci4, D_09000000_3AB030, 32, 64]
+      - [0x3AB430, palette, D_09000000_3AB030]
+      - [0x3AB450, ci4, D_09000420_3AB450, 32, 64]
+      - [0x3AB850, palette, D_09000420_3AB450]
+      - [0x3AB870, ci4, D_09000840_3AB870, 32, 64]
+      - [0x3ABC70, palette, D_09000840_3AB870]
+      - [0x3ABC80, ci4, D_09000C50_3ABC80, 32, 64]
+      - [0x3AC080, palette, D_09000C50_3ABC80]
+      - [0x3AC0A0, ci4, D_09001070_3AC0A0, 32, 64]
+      - [0x3AC4A0, palette, D_09001070_3AC0A0]
+      - [0x3AC4B0, ci4, D_09001480_3AC4B0, 32, 64]
+      - [0x3AC8B0, palette, D_09001480_3AC4B0]
+      - [0x3AC8D0, ci4, D_090018A0_3AC8D0, 32, 64]
+      - [0x3ACCD0, palette, D_090018A0_3AC8D0]
+      - [0x3ACCF0, ci4, D_09001CC0_3ACCF0, 32, 64]
+      - [0x3AD0F0, palette, D_09001CC0_3ACCF0]
+      - [0x3AD110, ci4, D_090020E0_3AD110, 32, 64]
+      - [0x3AD510, palette, D_090020E0_3AD110]
+      - [0x3AD530, ci4, D_09002500_3AD530, 32, 64]
+      - [0x3AD930, palette, D_09002500_3AD530]
+      - [0x3AD950, ci4, D_09002920_3AD950, 32, 64]
+      - [0x3ADD50, palette, D_09002920_3AD950]
+      - [0x3ADD70, vtx, D_09002D40_3ADD70]
+      - [0x3AE8B0, gfx, D_09003880_3AE8B0]
+      - [0x3AE928, gfx, D_090038F8_3AE928]
+      - [0x3AE998, gfx, D_09003968_3AE998]
+      - [0x3AEA08, gfx, D_090039D8_3AEA08]
+      - [0x3AEA78, gfx, D_09003A48_3AEA78]
+      - [0x3AEAE8, gfx, D_09003AB8_3AEAE8]
+      - [0x3AEB58, gfx, D_09003B28_3AEB58]
+      - [0x3AEBC8, gfx, D_09003B98_3AEBC8]
+      - [0x3AEC38, gfx, D_09003C08_3AEC38]
+      - [0x3AECA8, gfx, D_09003C78_3AECA8]
+      - [0x3AED18, gfx, D_09003CE8_3AED18]
+      - [0x3AED88, gfx, D_09003D58_3AED88]
+      - [0x3AEDF8, gfx, D_09003DC8_3AEDF8]
+      - [0x3AEE18]
   - name: effect_stat_change
     dir: effects
     type: code
