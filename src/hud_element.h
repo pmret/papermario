@@ -209,8 +209,9 @@ extern HudScript* wPartnerHudScripts[];
 #define HS_PTR(sym)         (s32)&sym
 
 #define hs_End HUD_ELEMENT_OP_End,
-#define hs_SetRGBA(arg0, image) HUD_ELEMENT_OP_SetRGBA, arg0, (s32)image,
-#define hs_SetCI(arg0, raster, palette) HUD_ELEMENT_OP_SetCI, arg0, (s32)raster, (s32)palette,
+#define hs_SetRGBA(time, image) HUD_ELEMENT_OP_SetRGBA, time, (s32)image,
+#define hs_SetCI(time, name) HUD_ELEMENT_OP_SetCI, time, (s32)name##_png, (s32)name##_pal,
+#define hs_SetCI_Explicit(time, raster, palette) HUD_ELEMENT_OP_SetCI, time, (s32)raster##_png, (s32)palette##_pal,
 #define hs_Restart HUD_ELEMENT_OP_Restart,
 #define hs_Loop HUD_ELEMENT_OP_Loop,
 #define hs_SetTileSize(size) HUD_ELEMENT_OP_SetTileSize, size,
