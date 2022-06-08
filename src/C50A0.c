@@ -81,8 +81,8 @@ s32 sparkle_script_step(ItemEntity* itemEntity) {
             itemEntity->sparkleNextUpdate = *currentState++;
             itemEntity->sparkleRaster = *currentState++;
             itemEntity->sparklePalette = *currentState++;
-            *(s32*)&itemEntity->sparkleOffsetX = *currentState++;
-            *(s32*)&itemEntity->sparkleOffsetY = *currentState++;
+            itemEntity->sparkleWidth = *currentState++;
+            itemEntity->sparkleHeight = *currentState++;
             itemEntity->sparkleReadPos = currentState;
             break;
         case 4:
