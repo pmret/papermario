@@ -1,8 +1,12 @@
 #include "common.h"
 #include "effects.h"
 #include "hud_element.h"
+#include "pause/pause_common.h"
+#include "world/partners.h"
 
 #define MAX_ITEM_ENTITIES 256
+
+extern s32 SparkleScript_Coin;
 
 extern Lights1 D_8014C6C8;
 
@@ -19,7 +23,15 @@ extern s16 D_80155D8C;
 extern s16 D_80155D8E;
 extern s16 D_80155D90;
 
-extern s32 SparkleScript_Coin;
+// BSS
+extern PopupMenu D_801565B0;
+extern s32 D_801568E0;
+extern s32 D_801568E4;
+extern s32 D_801568E8;
+extern s32 D_801568EC;
+extern EffectInstance* D_801568F0;
+extern MessagePrintState* D_801568F4;
+extern s32 D_801568F8;
 
 void item_entity_load(ItemEntity*);
 void item_entity_update(ItemEntity*);

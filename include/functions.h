@@ -786,6 +786,7 @@ void entity_base_block_init(Entity* entity);
 s32 entity_start_script(Entity* entity);
 void remove_item_entity_by_index(s32 index);
 void set_entity_commandlist(Entity* entity, s32* entityScript);
+s32 func_800DFCF4(void);
 void func_800EF3E4(void);
 void func_80268858(void);
 void func_80269118(void);
