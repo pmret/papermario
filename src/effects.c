@@ -127,7 +127,7 @@ EffectTableEntry gEffectTable[] = {
     /* 0x61 */ FX_ENTRY(fright_jar, _3C1BA0),
     /* 0x62 */ FX_ENTRY(stop_watch, _3CB890),
     /* 0x63 */ FX_ENTRY_NUMBERED(63, _3CD6E0),
-    /* 0x64 */ FX_ENTRY(throw_spiny, _3CFAF0),
+    /* 0x64 */ FX_ENTRY(throw_spiny, effect_gfx_throw_spiny),
     /* 0x65 */ FX_ENTRY_NUMBERED(65, _3D11E0),
     /* 0x66 */ FX_ENTRY(tubba_heart_attack, _3D2580),
     /* 0x67 */ FX_ENTRY(whirlwind, _3D3930),

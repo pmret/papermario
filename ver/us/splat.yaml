@@ -3316,7 +3316,29 @@ segments:
     subsegments:
     - [0x3CF3A0, c, throw_spiny]
     - [0x3CFAB0]
-  - [0x3CFAF0, bin] # throw_spiny gfx
+  - name: effect_gfx_throw_spiny
+    dir: effects/gfx
+    type: code
+    start: 0x3CFAF0
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x3CFAF0, c, throw_spiny]
+    - start: 0x3CFAF0
+      type: .data
+      name: throw_spiny
+      subsegments:
+      - [0x3CFAF0, .data, throw_spiny]
+      - [0x3CFAF0, ci4, D_09000000_3CFAF0, 32, 32]
+      - [0x3CFCF0, palette, D_09000000_3CFAF0]
+      - [0x3CFD10] # padding
+      - [0x3CFEF0, ci4, D_09000400_3CFEF0, 32, 32]
+      - [0x3D00F0, palette, D_09000400_3CFEF0]
+      - [0x3D0110] # padding
+      - [0x3D02F0, gfx, D_09000800_3D02F0]
+      - [0x3D03C8, gfx, D_090008D8_3D03C8]
+      - [0x3D04A0, vtx, D_090009B0_3D04A0]
+      - [0x3D04E0, gfx, D_090009F0_3D04E0]
   - name: effect_effect_65
     dir: effects
     type: code
