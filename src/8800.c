@@ -400,8 +400,6 @@ Camera* initialize_next_camera(CameraInitData* initData) {
     return camera;
 }
 
-// Ordering shtuff
-#ifdef NON_EQUIVALENT
 void set_cam_viewport(s16 id, s16 x, s16 y, s16 width, s16 height) {
     Camera* camera = &gCameras[id];
 
@@ -415,8 +413,9 @@ void set_cam_viewport(s16 id, s16 x, s16 y, s16 width, s16 height) {
     camera->vp.vp.vscale[2] = 0x1FF;
     camera->vp.vp.vscale[3] = 0;
 
-    camera->vp.vp.vtrans[0] = (((camera->viewportStartX + (camera->viewportW / 2)) << 16) >> 14);
-    camera->vp.vp.vtrans[1] = (((camera->viewportStartY + (camera->viewportH / 2)) << 16) >> 14);
+    camera->vp.vp.vtrans[0] = (((u16)camera->viewportStartX + (camera->viewportW / 2)) << 16) >> 14;
+    camera->vp.vp.vtrans[1] = ((u16)camera->viewportStartY + (camera->viewportH / 2));
+    camera->vp.vp.vtrans[1] = (camera->vp.vp.vtrans[1] << 16) >> 14; // needed to match
     camera->vp.vp.vtrans[2] = 0x1FF;
     camera->vp.vp.vtrans[3] = 0;
 
@@ -430,9 +429,6 @@ void set_cam_viewport(s16 id, s16 x, s16 y, s16 width, s16 height) {
     camera->vpAlt.vp.vtrans[2] = 0x200;
     camera->vpAlt.vp.vtrans[3] = 0;
 }
-#else
-INCLUDE_ASM(void, "8800", set_cam_viewport, s16 id, s16 x, s16 y, s16 width, s16 height);
-#endif
 
 void get_cam_viewport(s32 camID, u16* x, u16* y, u16* width, u16* height) {
     *width = gCameras[camID].viewportW;
