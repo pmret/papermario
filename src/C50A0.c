@@ -19,7 +19,7 @@ extern s16 D_80155D8C;
 extern s16 D_80155D8E;
 extern s16 D_80155D90;
 
-extern s32* SparkleScript_Coin;
+extern s32 SparkleScript_Coin;
 
 void item_entity_load(ItemEntity*);
 void item_entity_update(ItemEntity*);
@@ -141,7 +141,7 @@ void draw_coin_sparkles(ItemEntity* item) {
     recPart.yOffset =  item->sparkleHeight / 2;
     recPart.unk_10 = 0xFF;
 
-    fold_appendGfx_component(0, &recPart, 0, &mtxD);
+    fold_appendGfx_component(0, &recPart, 0, mtxD);
 
     gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
     gDPPipeSync(gMasterGfxPos++);

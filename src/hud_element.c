@@ -123,7 +123,6 @@ extern u8* gHudElementCacheBufferWorld;
 extern u8* gHudElementCacheBufferBattle;
 extern u8* gHudElementCacheBuffer;
 
-s32 fold_appendGfx_component(s32 idx, FoldImageRecPart* image, u32 flagBits, Matrix4f mtx);
 void func_801413F8(void);
 
 void hud_element_load_script(HudElement* hudElement, HudScript* anim) {

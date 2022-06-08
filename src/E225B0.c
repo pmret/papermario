@@ -22,7 +22,7 @@ typedef struct UnknownCommand {
     /* 0x0C */ s16 unk_0C;
     /* 0x0E */ s16 unk_0E;
     /* 0x10 */ u8 unk_10;
-} UnknownCommand;
+} UnknownCommand; // TODO remove this. it's FoldImageRecPart
 
 extern Matrix4f D_802B7580_E22B30;
 extern Matrix4f D_802B7BA0_E23150;
@@ -33,7 +33,6 @@ extern Gfx D_802B7C00_E231B0[];
 extern void (*D_8010C93C)(void);
 extern struct802B7C78* D_802B7C78_E23228;
 
-void fold_appendGfx_component(s32, UnknownCommand*, s32, Matrix4f*);
 void func_802B735C_E2290C(void);
 
 void func_802B7000_E225B0(void) {
