@@ -81,9 +81,9 @@ def initialize_segments(config_segments: Union[dict, list]) -> List[Segment]:
             seen_segment_names.add(segment.name)
 
         ret.append(segment)
-        if isinstance(segment.rom_start, int) and isinstance(segment.rom_end, int):
+        if isinstance(segment.rom_start, int) and isinstance(segment.rom_end, int) and segment.rom_start != segment.rom_end:
             segment_roms.addi(segment.rom_start, segment.rom_end, segment)
-        if isinstance(segment.vram_start, int) and isinstance(segment.vram_end, int):
+        if isinstance(segment.vram_start, int) and isinstance(segment.vram_end, int) and segment.vram_start != segment.vram_end:
             segment_rams.addi(segment.vram_start, segment.vram_end, segment)
 
     return ret

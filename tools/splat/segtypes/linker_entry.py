@@ -1,6 +1,8 @@
 from typing import Union, List
 from pathlib import Path
+from segtypes.common.data import CommonSegData
 from segtypes.common.linker_section import LinkerSection, dotless_type
+from segtypes.n64.img import N64SegImg
 from segtypes.n64.palette import N64SegPalette
 from util import options
 from segtypes.segment import Segment
@@ -167,6 +169,13 @@ class LinkerWriter:
                     + ".".join(entry.object_path.suffixes[:-1]),
                 )
                 self._write_symbol(path_cname, ".")
+
+            # Write out manual entries for images inside .data segments
+            seg = entry.segment
+            if isinstance(seg, CommonSegData):
+                for subseg in seg.subsegments:
+                    if isinstance(subseg, N64SegImg):
+                        self._write_symbol(get_segment_cname(subseg), f"0x{subseg.rom_start:X}")
 
             self._writeln(f"{entry.object_path}({cur_section});")
 
