@@ -4,6 +4,8 @@
 
 #define MAX_ITEM_ENTITIES 256
 
+extern Lights1 D_8014C6C8;
+
 extern s32 ItemEntitiesCreated;
 extern s32 ItemEntityAlternatingSpawn;
 extern s32 ItemEntityRenderGroup;
@@ -101,7 +103,49 @@ void sparkle_script_update(ItemEntity* itemEntity) {
     }
 }
 
-INCLUDE_ASM(s32, "C50A0", draw_coin_sparkles);
+void draw_coin_sparkles(ItemEntity* item) {
+    Matrix4f mtxA, mtxB, mtxC, mtxD;
+    FoldImageRecPart recPart;
+    f32 x = D_80155D8C;
+    f32 y = D_80155D8E;
+    f32 z = D_80155D90;
+    f32 fwdYaw = clamp_angle(180.0f - gCameras[gCurrentCamID].currentYaw);
+
+    guTranslateF(mtxA, x, y, z);
+    guTranslateF(mtxB, item->position.x, item->position.y + 12.0f, item->position.z);
+    guRotateF(mtxC, fwdYaw, 0.0f, 1.0f, 0.0f);
+    guMtxCatF(mtxA, mtxC, mtxC);
+    guMtxCatF(mtxC, mtxB, mtxD);
+    guMtxF2L(mtxD, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gDPSetCycleType(gMasterGfxPos++, G_CYC_1CYCLE);
+    gSPClearGeometryMode(gMasterGfxPos++, G_ZBUFFER | G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH);
+    gSPSetGeometryMode(gMasterGfxPos++, G_ZBUFFER | G_SHADE | G_LIGHTING | G_SHADING_SMOOTH);
+    gSPSetLights1(gMasterGfxPos++, D_8014C6C8);
+    gSPTexture(gMasterGfxPos++, 0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON);
+    gDPSetTextureLOD(gMasterGfxPos++, G_TL_TILE);
+    gDPSetTexturePersp(gMasterGfxPos++, G_TP_PERSP);
+    gDPSetTextureFilter(gMasterGfxPos++, G_TF_BILERP);
+    gDPSetColorDither(gMasterGfxPos++, G_CD_DISABLE);
+    gDPSetTextureDetail(gMasterGfxPos++, G_TD_CLAMP);
+    gDPSetTextureConvert(gMasterGfxPos++, G_TC_FILT);
+    gDPSetCombineKey(gMasterGfxPos++, G_CK_NONE);
+    gDPSetAlphaCompare(gMasterGfxPos++, G_AC_NONE);
+
+    recPart.raster = (s8*)item->sparkleRaster;
+    recPart.palette = (s8*)item->sparklePalette;
+    recPart.width = item->sparkleWidth;
+    recPart.height = item->sparkleHeight;
+    recPart.xOffset = -item->sparkleWidth / 2;
+    recPart.yOffset =  item->sparkleHeight / 2;
+    recPart.unk_10 = 0xFF;
+
+    fold_appendGfx_component(0, &recPart, 0, &mtxD);
+
+    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+    gDPPipeSync(gMasterGfxPos++);
+}
 
 ItemEntity* get_item_entity(s32 itemEntityIndex) {
     return gCurrentItemEntities[itemEntityIndex];
