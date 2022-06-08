@@ -1,8 +1,8 @@
 #include "common.h"
 #include "effects_internal.h"
 
-extern Gfx D_09000E20[];
-extern Gfx D_09000E38[];
+extern Gfx D_09000E20_32DCE0[];
+extern Gfx D_09000E38_32DCF8[];
 
 void flower_trail_init(EffectInstance* effect);
 void flower_trail_update(EffectInstance* effect);
@@ -167,9 +167,9 @@ void flower_trail_appendGfx(void* effect) {
     for (i = 0; i < effectTemp->numParts; i++, part++) {
         if (part->unk_00 != 0) {
             if (part->unk_09 != 0) {
-                dlist = D_09000E20;
+                dlist = D_09000E20_32DCE0;
             } else {
-                dlist = D_09000E38;
+                dlist = D_09000E38_32DCF8;
             }
 
             gDisplayContext->matrixStack[gMatrixListPos] = part->unk_30;

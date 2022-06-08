@@ -2381,7 +2381,38 @@ segments:
     subsegments:
     - [0x32C7A0, c, flower_splash]
     - [0x32CEB0]
-  - [0x32CEC0, bin] # flower_splash, flower_trail gfx
+  - name: effect_gfx_flower_splash_trail
+    dir: effects/gfx
+    type: code
+    start: 0x32CEC0
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x32CEC0, c, flower_splash_trail]
+    - start: 0x32CEC0
+      type: .data
+      name: flower_splash_trail
+      subsegments:
+      - [0x32CEC0, .data, flower_splash_trail]
+      - [0x32CEC0, ci4, D_09000000_32CEC0, 16, 16]
+      - [0x32CF40, palette, D_09000000_32CEC0]
+      - [0x32CF60, palette, D_09000000_32CEC0.yellow]
+      - [0x32CF80, rgba16, D_090000C0_32CF80, 32, 32]
+      - [0x32D780, vtx, D_090008C0_32D780]
+      - [0x32D8F0, vtx, D_09000A30_32D8F0]
+      - [0x32D900, vtx, D_09000A40_32D900]
+      - [0x32D910, vtx, D_09000A50_32D910]
+      - [0x32D950, vtx, D_09000A90_32D950]
+      - [0x32D970, vtx, D_09000AB0_32D970]
+      - [0x32D9B0, vtx, D_09000AF0_32D9B0]
+      - [0x32DA10, gfx, D_09000B50_32DA10]
+      - [0x32DAD0, gfx, D_09000C10_32DAD0]
+      - [0x32DB90, gfx, D_09000CD0_32DB90]
+      - [0x32DC18, gfx, D_09000D58_32DC18]
+      - [0x32DC50, gfx, D_09000D90_32DC50]
+      - [0x32DCC8, gfx, D_09000E08_32DCC8]
+      - [0x32DCE0, gfx, D_09000E20_32DCE0]
+      - [0x32DCF8, gfx, D_09000E38_32DCF8]
   - name: effect_flower_trail
     dir: effects
     type: code
