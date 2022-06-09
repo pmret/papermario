@@ -53,7 +53,7 @@ HudScript HES_Item_Coin = {
     hs_SetVisible
     hs_SetTileSize(HUD_ELEMENT_SIZE_24x24)
     hs_Loop
-        hs_op_15(00000000)
+        hs_op_15(0)
         hs_SetIcon(3, anim_coin_0)
         hs_SetIcon(3, anim_coin_1)
         hs_SetIcon(3, anim_coin_4)
@@ -63,7 +63,7 @@ HudScript HES_Item_Coin = {
         hs_SetIcon(3, anim_coin_8)
         hs_SetIcon(3, anim_coin_9)
         hs_RandomRestart(100, 70)
-        hs_op_15(00000001)
+        hs_op_15(1)
         hs_SetIcon(3, anim_coin_0)
         hs_SetIcon(2, anim_coin_1)
         hs_SetIcon(1, anim_coin_2)
