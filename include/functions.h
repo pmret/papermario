@@ -814,7 +814,7 @@ void show_foreground_models(void);
 void hide_foreground_models(void);
 void btl_set_state(s32 battleState);
 void draw_entity_model_A(s32, Mtx*);
-void draw_entity_model_B(s32, Mtx*, s32, s32);
+void draw_entity_model_B(s32, Mtx*, s32, Vec3s*);
 void draw_entity_model_C(s32, Mtx*);
 void draw_entity_model_D(s32, Mtx*, s32, Vtx*);
 void draw_entity_model_E(s32, Mtx*);

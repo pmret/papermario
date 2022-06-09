@@ -17,7 +17,7 @@ def parse(f):
             print(f'{indent}AS_END,')
             break
         if op == 1:
-            print(f'{indent}AS_WAIT,')
+            print(f'{indent}AS_WAIT, {read(f)},')
         elif op == 3:
             indent = indent[:-4]
             print(f'{indent}AS_END_LOOP,')
