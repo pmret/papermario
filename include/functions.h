@@ -745,6 +745,7 @@ s32 create_generic_entity_world(WorldArgs, WorldArgs);
 EntityModel* get_entity_model(s32 idx);
 f32 phys_get_spin_history(s32 lag, s32* x, s32* y, s32* z);
 void fold_update(u32, s32, s32, s32, s32, s32, s32);
+s32 fold_appendGfx_component(s32, FoldImageRecPart*, u32, Matrix4f);
 s32 func_8013A704(s32);
 void free_generic_entity(s32);
 

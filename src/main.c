@@ -7,6 +7,9 @@ void gfxRetrace_Callback(s32);
 void gfxPreNMI_Callback(void);
 void gfx_task_main(void);
 
+void gfx_draw_frame(void);
+void gfx_init_state(void);
+
 // TODO: name these symbols the same, this is just a shift
 #ifdef VERSION_US
 extern s32 D_80073E00;
@@ -16,7 +19,7 @@ extern s32 D_80073DE0;
 extern u16* D_80073E04;
 extern s16 D_80073E08;
 extern s16 D_80073E0A;
-extern s32 D_80073E10;
+extern s32 D_80073E10[];
 extern u16* D_8009A680;
 extern OSViMode _osViModeNtscLan1;
 extern OSViMode _osViModeMPalLan1;
@@ -105,21 +108,12 @@ void gfxRetrace_Callback(s32 arg0) {
 INCLUDE_ASM(s32, "main", gfxRetrace_Callback);
 #endif
 
-// the loops & gSPTextureRectangle
-#ifdef NON_EQUIVALENT
+#ifdef VERSION_US
 void gfx_task_main(void) {
-    u16 t;
-    s32 temp_a0_3;
-    s32 temp_a1_3;
-    s32 temp_a2;
-    s32 temp_a3_2;
-    s32 temp_s0_3;
-    s32 temp_s1_2;
-    s32 temp_s3;
-    s32 temp_t7;
+    s16 t;
     s16 i;
     s16 j;
-    s32* temp;
+    u16* temp;
 
     gMatrixListPos = 0;
     gDisplayContext = &D_80164000[gCurrentDisplayContextIndex];
@@ -139,43 +133,54 @@ void gfx_task_main(void) {
     gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, 0, 0, 0, 0, TEXEL0, 0, 0, 0, 0, 0, 0, 0, TEXEL0);
     gDPSetAlphaCompare(gMasterGfxPos++, G_AC_THRESHOLD);
     gDPSetBlendColor(gMasterGfxPos++, 0, 0, 0, 127);
-    gDPLoadTextureTile_4b(gMasterGfxPos++, &D_80073E10, G_IM_FMT_I, 128, 0, 0, 0, 127, 7, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadTextureTile_4b(gMasterGfxPos++, D_80073E10, G_IM_FMT_I, 128, 8, 0, 0, 127, 7, 0, G_TX_NOMIRROR | G_TX_WRAP,
                           G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
     for (i = 0; i < 20; i++) {
-        temp_s3 = ((i * 8) + 168) * 4;
-        temp_s1_2 = ((i * 8) + 160) * 4;
-        temp_s0_3 = (160 - (i * 8)) * 4;
-        temp_t7 = (152 - (i * 8)) * 4;
-
         for (j = 0; j < 15; j++) {
-            t = (33 - ((i + 14) - j)) / 2 - (D_80074010 - 15);
-            if (t < 16 && t >= 0) {
-                temp_a0_3 = ((j * 8) + 8) * 4;
-                temp_a3_2 = ((j * 8) - 8) * 4;
-                temp_a1_3 = (SCREEN_HEIGHT - (j * 8)) * 4;
-                temp_a2 = (232 - (j * 8)) * 4;
-
-                gSPTextureRectangle(gMasterGfxPos++, temp_s3, temp_a0_3, temp_s1_2, temp_a3_2, 4, -0x2000, t, 0x0400, 0x0400);
-                gSPTextureRectangle(gMasterGfxPos++, temp_s3, temp_a1_3, temp_s1_2, temp_a2, 4, -0x2000, t, 0x0400, -0x0400);
-                gSPTextureRectangle(gMasterGfxPos++, temp_s0_3, temp_a0_3, temp_t7, temp_a3_2, 4, -0x2000, t, -0x0400, 0x0400);
-                gSPTextureRectangle(gMasterGfxPos++, temp_s0_3, temp_a1_3, temp_t7, temp_a2, 4, -0x2000, t, -0x0400, -0x0400);
+            s32 s4 = i + 14;
+            t = (33 - (s4 - j)) / 2 + 15 - D_80074010;
+            if (t >= 16) {
+                continue;
             }
+            if (t < 0) {
+                continue;
+            }
+            gSPTextureRectangle(gMasterGfxPos++, ((i * 8) + 160) * 4,
+                                                 ((j * 8)) * 4,
+                                                 ((i * 8) + 168) * 4,
+                                                 ((j * 8) + 8) * 4,
+                                                 G_TX_RENDERTILE,
+                                                 (t * 8) * 32, 0, 0x0400, 0x0400);
+            gSPTextureRectangle(gMasterGfxPos++, ((i * 8) + 160) * 4,
+                                                 (232 - (j * 8)) * 4,
+                                                 ((i * 8) + 168) * 4,
+                                                 (240 - (j * 8)) * 4,
+                                                 G_TX_RENDERTILE,
+                                                 (t * 8) * 32, 7 * 32, 0x0400, -0x0400);
+            gSPTextureRectangle(gMasterGfxPos++, (152 - (i * 8)) * 4,
+                                                 ((j * 8)) * 4,
+                                                 (160 - (i * 8)) * 4,
+                                                 ((j * 8) + 8) * 4,
+                                                 G_TX_RENDERTILE,
+                                                 (t * 8 + 7) * 32, 0, -0x0400, 0x0400);
+            gSPTextureRectangle(gMasterGfxPos++, (152 - (i * 8)) * 4,
+                                                 (232 - (j * 8)) * 4,
+                                                 (160 - (i * 8)) * 4,
+                                                 (240 - (j * 8)) * 4,
+                                                 G_TX_RENDERTILE,
+                                                 (t * 8 + 7) * 32, 7 * 32, -0x0400, -0x0400);
         }
     }
 
     D_80074010++;
     gDPFullSync(gMasterGfxPos++);
     gSPEndDisplayList(gMasterGfxPos++);
-    nuGfxTaskStart(gDisplayContext->mainGfx, (u32)(gMasterGfxPos - gDisplayContext->mainGfx) * 8, 0, 0x40000);
+    nuGfxTaskStart(gDisplayContext->mainGfx, (u32)(gMasterGfxPos - gDisplayContext->mainGfx) * 8, NU_GFX_UCODE_F3DEX, NU_SC_TASK_LODABLE);
     gCurrentDisplayContextIndex ^= 1;
 }
 #else
-    #ifdef VERSION_US
-INCLUDE_ASM(void, "main", gfx_task_main);
-    #else
 INCLUDE_ASM(s32, "main", func_80026148);
-    #endif
 #endif
 
 void gfxPreNMI_Callback(void) {
