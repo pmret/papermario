@@ -170,8 +170,8 @@ s32 sparkle_script_step(ItemEntity* itemEntity) {
             return TRUE;
         case SPARKLE_OP_SetCI:
             itemEntity->sparkleNextUpdate = *readPos++;
-            itemEntity->sparkleRaster = (s32*)*readPos++;
-            itemEntity->sparklePalette = (s32*)*readPos++;
+            itemEntity->sparkleRaster = (s8*)*readPos++;
+            itemEntity->sparklePalette = (s8*)*readPos++;
             itemEntity->sparkleWidth = *readPos++;
             itemEntity->sparkleHeight = *readPos++;
             itemEntity->sparkleReadPos = readPos;
@@ -557,7 +557,7 @@ s32 make_item_entity(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pic
     item_entity_load(itemEntity);
 
     if (itemEntity->itemID == ITEM_COIN) {
-        sparkle_script_init(itemEntity, SparkleScript_Coin);
+        sparkle_script_init(itemEntity, &SparkleScript_Coin);
         sparkle_script_update(itemEntity);
     }
 
@@ -653,7 +653,7 @@ s32 make_item_entity_at_player(s32 itemID, s32 arg1, s32 pickupMsgFlags) {
 
     item_entity_load(item);
     if (item->itemID == ITEM_COIN) {
-        sparkle_script_init(item, SparkleScript_Coin);
+        sparkle_script_init(item, &SparkleScript_Coin);
         sparkle_script_update(item);
     }
     return id;
@@ -678,7 +678,7 @@ void update_item_entities(void) {
             if (entity != NULL && entity->flags != 0) {
                 if (entity->itemID == ITEM_COIN) {
                     if (rand_int(100) > 90) {
-                        sparkle_script_init(entity, SparkleScript_Coin);
+                        sparkle_script_init(entity, &SparkleScript_Coin);
                         D_80155D8C = rand_int(16) - 8;
                         D_80155D8E = rand_int(16) - 8;
                         D_80155D90 = 5;
