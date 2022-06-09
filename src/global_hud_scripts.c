@@ -214,10 +214,10 @@
 #define ui_kalmar_disabled_png ui_kalmar_png
 #include "ui/kalmar.disabled.pal.inc.c"
 
-#include "ui/all_spirits.png.inc.c"
-#include "ui/all_spirits.pal.inc.c"
-#define ui_all_spirits_disabled_png ui_all_spirits_png
-#include "ui/all_spirits.disabled.pal.inc.c"
+#include "ui/star_beam.png.inc.c"
+#include "ui/star_beam.pal.inc.c"
+#define ui_star_beam_disabled_png ui_star_beam_png
+#include "ui/star_beam.disabled.pal.inc.c"
 
 #include "ui/peach_beam.png.inc.c"
 #include "ui/peach_beam.pal.inc.c"
@@ -1761,9 +1761,9 @@ HudScript HES_Kalmar = HES_TEMPLATE_CI_CUSTOM_SIZE(ui_kalmar, 32, 32);
 
 HudScript HES_KalmarDisabled = HES_TEMPLATE_CI_CUSTOM_SIZE(ui_kalmar_disabled, 32, 32);
 
-HudScript HES_StarBeam = HES_TEMPLATE_CI_CUSTOM_SIZE(ui_all_spirits, 32, 32);
+HudScript HES_StarBeam = HES_TEMPLATE_CI_CUSTOM_SIZE(ui_star_beam, 32, 32);
 
-HudScript HES_StarBeamDisabled = HES_TEMPLATE_CI_CUSTOM_SIZE(ui_all_spirits_disabled, 32, 32);
+HudScript HES_StarBeamDisabled = HES_TEMPLATE_CI_CUSTOM_SIZE(ui_star_beam_disabled, 32, 32);
 
 HudScript HES_PeachBeam = HES_TEMPLATE_CI_CUSTOM_SIZE(ui_peach_beam, 32, 32);
 
