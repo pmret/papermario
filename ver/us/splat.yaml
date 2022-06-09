@@ -4158,9 +4158,11 @@ segments:
     vram: 0x80218000
     overlay: True
     subsegments:
-    - [0x52B6A0, c]
-    - [0x52B7C0, c]
-    - [0x52B9D0, data]
+    - [0x52B6A0, c, actor/general_guy]
+    - [0x52B7C0, c, actor/toy_tank]
+    - [0x52B8F0, c, actor/light_bulb]
+    - [0x52B9D0, c, stage/omo_07]
+    - [0x52B9D0, c, area]
   - dir: battle/area_omo2_1
     type: code
     start: 0x543570

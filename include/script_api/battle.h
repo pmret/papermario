@@ -329,6 +329,10 @@ ApiStatus func_8026EBF8(Evt* script, s32 isInitialCall);
 ApiStatus SetupMashMeter(Evt* script, s32 isInitialCall);
 ApiStatus SetActionResult(Evt* script, s32 isInitialCall);
 ApiStatus BattleCamTargetActorPart(Evt* script, s32 isInitialCall);
+ApiStatus func_802537C0(Evt* script, s32 isInitialCall);
+ApiStatus CancelEnemyTurn(Evt* script, s32 isInitialCall);
+ApiStatus GetAnimatedNodeRotation(Evt* script, s32 isInitialCall);
+ApiStatus GetAnimatedNodePosition(Evt* script, s32 isInitialCall);
 
 extern EvtScript PlayerScriptDispatcher;
 extern EvtScript PeachScriptDispatcher;

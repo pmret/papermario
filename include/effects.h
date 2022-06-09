@@ -775,6 +775,14 @@ typedef struct ButterflyFXData {
     /* 0x44 */ f32 unk_44;
 } ButterflyFXData; // size = 0x48
 
+typedef struct IceShardFXData {
+    /* 0x00 */ char unk_00[0x4C];
+    /* 0x4C */ f32 unk_4C;
+    /* 0x50 */ f32 unk_50;
+    /* 0x54 */ f32 unk_54;
+    /* 0x58 */ f32 unk_58;
+} IceShardFXData; // size = ?
+
 typedef struct Effect46FXData {
     /* 0x00 */ char unk_00[0x24];
     /* 0x04 */ s32 unk_24;

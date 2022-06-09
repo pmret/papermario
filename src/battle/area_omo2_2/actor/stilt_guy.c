@@ -10,8 +10,10 @@
 
 #include "common/GetSelectedMoveID.inc.c"
 
-INCLUDE_ASM(s32, "battle/area_omo2_2/5483E0", func_8023102C_54840C);
-ApiStatus func_8023102C_54840C(Evt* script, s32 isInitialCall);
+ApiStatus SetActorLevelToZero(Evt* script, s32 isInitialCall) {
+    get_actor(script->owner1.actorID)->actorBlueprint->level = 0;
+    return ApiStatus_DONE2;
+}
 
 #include "common/UnkBattleFunc1.inc.c"
 
@@ -796,7 +798,7 @@ EvtScript N(fallOff) = {
     EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
     EVT_CALL(GetActorSize, ACTOR_SELF, LW(0), LW(1))
     EVT_CALL(SetActorSize, ACTOR_SELF, 24, LW(1))
-    EVT_CALL(func_8023102C_54840C)
+    EVT_CALL(SetActorLevelToZero)
     EVT_RETURN
     EVT_END
 };

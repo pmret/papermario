@@ -300,10 +300,10 @@ s32 N(80231334)[] = {
 };
 
 EvtScript N(init) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, N(takeTurn))
-    EVT_CALL(BindIdle, ACTOR_SELF, N(idle))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, N(handleEvent))
-    EVT_CALL(BindNextTurn, ACTOR_SELF, N(nextTurn))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent)))
+    EVT_CALL(BindNextTurn, ACTOR_SELF, EVT_ADDR(N(nextTurn)))
     EVT_CALL(SetActorVar, ACTOR_SELF, 3, 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, 4, 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, 15, 0)
@@ -442,17 +442,17 @@ EvtScript N(idle) = {
     EVT_LABEL(0)
     EVT_CALL(GetCurrentPartnerID, LW(0))
     EVT_IF_EQ(LW(0), 6)
-        EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, N(80231334))
+        EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(80231334)))
         EVT_SET(LW(0), 2)
         EVT_LOOP(15)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, LW(0), N(80231334))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, LW(0), EVT_ADDR(N(80231334)))
             EVT_ADD(LW(0), 1)
         EVT_END_LOOP
     EVT_ELSE
-        EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, N(idleAnimations))
+        EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations)))
         EVT_SET(LW(0), 2)
         EVT_LOOP(15)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, LW(0), N(idleAnimations))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, LW(0), EVT_ADDR(N(idleAnimations)))
             EVT_ADD(LW(0), 1)
         EVT_END_LOOP
     EVT_END_IF

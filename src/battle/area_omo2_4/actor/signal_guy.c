@@ -4,7 +4,7 @@
 #include "effects.h"
 #include "sprite/npc/marshal_guy.h"
 
-#define NAMESPACE b_area_omo2_2_signal_guy
+#define NAMESPACE b_area_omo2_4_signal_guy
 
 extern s32 N(idleAnimations)[];
 
@@ -88,9 +88,9 @@ s32 N(idleAnimations)[] = {
 };
 
 EvtScript N(init) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, N(takeTurn))
-    EVT_CALL(BindIdle, ACTOR_SELF, N(idle))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, N(handleEvent))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent)))
     EVT_CALL(SetActorPos, ACTOR_SELF, 180, 0, 0)
     EVT_CALL(ForceHomePos, ACTOR_SELF, 180, 0, 0)
     EVT_CALL(HPBarToHome, ACTOR_SELF)
