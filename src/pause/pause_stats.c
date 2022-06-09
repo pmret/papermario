@@ -14,12 +14,12 @@ typedef struct {
     s32 baseMsgID;
 } StatsEntryData; // size = 0xC
 
-HudScript* gStatsMenuElements[] = { &HudScript_MarioHeadSmall, &HudScript_StatBoots0, &HudScript_StatHammer0,
-                                    &HudScript_StatusCoin, &HudScript_StatusStarPoint, &HudScript_StatStarPiece_1,
-                                    &HudScript_Clock, &HudScript_StatusHeart, &HudScript_StatFp_1, &HudScript_StatBp,
-                                    &HudScript_StatusStar1, &HudScript_StatTimes};
-HudScript* gStatsBootsElements[] = { &HudScript_StatBoots0, &HudScript_StatBoots1, &HudScript_StatBoots2, &HudScript_StatBoots3 };
-HudScript* gStatsHammerElements[] = { &HudScript_StatHammer0, &HudScript_StatHammer1, &HudScript_StatHammer2, &HudScript_StatHammer3 };
+HudScript* gStatsMenuElements[] = { &HES_MarioHeadSmall, &HES_StatBoots0, &HES_StatHammer0,
+                                    &HES_StatusCoin, &HES_StatusStarPoint, &HES_StatStarPiece_1,
+                                    &HES_Clock, &HES_StatusHeart, &HES_StatFp_1, &HES_StatBp,
+                                    &HES_StatusStar1, &HES_StatTimes};
+HudScript* gStatsBootsElements[] = { &HES_StatBoots0, &HES_StatBoots1, &HES_StatBoots2, &HES_StatBoots3 };
+HudScript* gStatsHammerElements[] = { &HES_StatHammer0, &HES_StatHammer1, &HES_StatHammer2, &HES_StatHammer3 };
 s32 gPauseStatsBootsMessages[] = { 59, 60, 61, 62 };
 s32 gPauseStatsHammerMessages[] = { 63, 64, 65, 66 };
 s8 gPauseStatsGridData[] = {
@@ -44,13 +44,13 @@ StatsEntryData gStatsMenuEntries[] = {
     {.cursorX = 125, .cursorY = 121, .baseMsgID = 47},
     {.cursorX = 125, .cursorY = 138, .baseMsgID = 49}
 };
-HudScript* gPauseStatsSPIncElements[] = { &HudScript_StatusSPIncrement1, &HudScript_StatusSPIncrement3,
-                                          &HudScript_StatusSPIncrement2, &HudScript_StatusSPIncrement4,
-                                          &HudScript_StatusSPIncrement5, &HudScript_StatusSPIncrement6,
-                                          &HudScript_StatusSPIncrement7 };
-HudScript* gPauseStatsStarElements[] = { &HudScript_StatusStar1, &HudScript_StatusStar3, &HudScript_StatusStar2,
-                                         &HudScript_StatusStar4, &HudScript_StatusStar5, &HudScript_StatusStar6,
-                                         &HudScript_StatusStar7 };
+HudScript* gPauseStatsSPIncElements[] = { &HES_StatusSPIncrement1, &HES_StatusSPIncrement3,
+                                          &HES_StatusSPIncrement2, &HES_StatusSPIncrement4,
+                                          &HES_StatusSPIncrement5, &HES_StatusSPIncrement6,
+                                          &HES_StatusSPIncrement7 };
+HudScript* gPauseStatsStarElements[] = { &HES_StatusStar1, &HES_StatusStar3, &HES_StatusStar2,
+                                         &HES_StatusStar4, &HES_StatusStar5, &HES_StatusStar6,
+                                         &HES_StatusStar7 };
 //s32 D_8024F46C[] = { -1, 1, 2, 4, 5, 7, 8 };
 s32 D_8024F46C = -1;
 s32 D_8024F470 = 1;

@@ -1079,8 +1079,8 @@ glabel update_status_menu
 /* 82500 800E9050 16200012 */  bnez      $s1, .L800E909C
 /* 82504 800E9054 24020001 */   addiu    $v0, $zero, 1
 /* 82508 800E9058 26100001 */  addiu     $s0, $s0, 1
-/* 8250C 800E905C 3C058011 */  lui       $a1, %hi(HudScript_StatusSPEmptyIncrement)
-/* 82510 800E9060 24A583B0 */  addiu     $a1, $a1, %lo(HudScript_StatusSPEmptyIncrement)
+/* 8250C 800E905C 3C058011 */  lui       $a1, %hi(HES_StatusSPEmptyIncrement)
+/* 82510 800E9060 24A583B0 */  addiu     $a1, $a1, %lo(HES_StatusSPEmptyIncrement)
 /* 82514 800E9064 0C0511FF */  jal       hud_element_set_script
 /* 82518 800E9068 0240202D */   daddu    $a0, $s2, $zero
 /* 8251C 800E906C 0240202D */  daddu     $a0, $s2, $zero
@@ -1099,8 +1099,8 @@ glabel update_status_menu
 /* 8254C 800E909C 56220011 */  bnel      $s1, $v0, .L800E90E4
 /* 82550 800E90A0 24020002 */   addiu    $v0, $zero, 2
 /* 82554 800E90A4 02028021 */  addu      $s0, $s0, $v0
-/* 82558 800E90A8 3C058011 */  lui       $a1, %hi(HudScript_StatusSPEmptyIncrement)
-/* 8255C 800E90AC 24A583B0 */  addiu     $a1, $a1, %lo(HudScript_StatusSPEmptyIncrement)
+/* 82558 800E90A8 3C058011 */  lui       $a1, %hi(HES_StatusSPEmptyIncrement)
+/* 8255C 800E90AC 24A583B0 */  addiu     $a1, $a1, %lo(HES_StatusSPEmptyIncrement)
 /* 82560 800E90B0 0C0511FF */  jal       hud_element_set_script
 /* 82564 800E90B4 0240202D */   daddu    $a0, $s2, $zero
 /* 82568 800E90B8 0240202D */  daddu     $a0, $s2, $zero
@@ -1118,8 +1118,8 @@ glabel update_status_menu
 /* 82594 800E90E4 16220011 */  bne       $s1, $v0, .L800E912C
 /* 82598 800E90E8 24020003 */   addiu    $v0, $zero, 3
 /* 8259C 800E90EC 26100001 */  addiu     $s0, $s0, 1
-/* 825A0 800E90F0 3C058011 */  lui       $a1, %hi(HudScript_StatusSPEmptyIncrement)
-/* 825A4 800E90F4 24A583B0 */  addiu     $a1, $a1, %lo(HudScript_StatusSPEmptyIncrement)
+/* 825A0 800E90F0 3C058011 */  lui       $a1, %hi(HES_StatusSPEmptyIncrement)
+/* 825A4 800E90F4 24A583B0 */  addiu     $a1, $a1, %lo(HES_StatusSPEmptyIncrement)
 /* 825A8 800E90F8 0C0511FF */  jal       hud_element_set_script
 /* 825AC 800E90FC 0240202D */   daddu    $a0, $s2, $zero
 /* 825B0 800E9100 0240202D */  daddu     $a0, $s2, $zero
@@ -1137,8 +1137,8 @@ glabel update_status_menu
 /* 825DC 800E912C 16220011 */  bne       $s1, $v0, .L800E9174
 /* 825E0 800E9130 24020004 */   addiu    $v0, $zero, 4
 /* 825E4 800E9134 26100001 */  addiu     $s0, $s0, 1
-/* 825E8 800E9138 3C058011 */  lui       $a1, %hi(HudScript_StatusSPEmptyIncrement)
-/* 825EC 800E913C 24A583B0 */  addiu     $a1, $a1, %lo(HudScript_StatusSPEmptyIncrement)
+/* 825E8 800E9138 3C058011 */  lui       $a1, %hi(HES_StatusSPEmptyIncrement)
+/* 825EC 800E913C 24A583B0 */  addiu     $a1, $a1, %lo(HES_StatusSPEmptyIncrement)
 /* 825F0 800E9140 0C0511FF */  jal       hud_element_set_script
 /* 825F4 800E9144 0240202D */   daddu    $a0, $s2, $zero
 /* 825F8 800E9148 0240202D */  daddu     $a0, $s2, $zero
@@ -1156,8 +1156,8 @@ glabel update_status_menu
 /* 82624 800E9174 16220011 */  bne       $s1, $v0, .L800E91BC
 /* 82628 800E9178 24020005 */   addiu    $v0, $zero, 5
 /* 8262C 800E917C 26100001 */  addiu     $s0, $s0, 1
-/* 82630 800E9180 3C058011 */  lui       $a1, %hi(HudScript_StatusSPEmptyIncrement)
-/* 82634 800E9184 24A583B0 */  addiu     $a1, $a1, %lo(HudScript_StatusSPEmptyIncrement)
+/* 82630 800E9180 3C058011 */  lui       $a1, %hi(HES_StatusSPEmptyIncrement)
+/* 82634 800E9184 24A583B0 */  addiu     $a1, $a1, %lo(HES_StatusSPEmptyIncrement)
 /* 82638 800E9188 0C0511FF */  jal       hud_element_set_script
 /* 8263C 800E918C 0240202D */   daddu    $a0, $s2, $zero
 /* 82640 800E9190 0240202D */  daddu     $a0, $s2, $zero
@@ -1175,8 +1175,8 @@ glabel update_status_menu
 /* 8266C 800E91BC 16220011 */  bne       $s1, $v0, .L800E9204
 /* 82670 800E91C0 24020006 */   addiu    $v0, $zero, 6
 /* 82674 800E91C4 26100001 */  addiu     $s0, $s0, 1
-/* 82678 800E91C8 3C058011 */  lui       $a1, %hi(HudScript_StatusSPEmptyIncrement)
-/* 8267C 800E91CC 24A583B0 */  addiu     $a1, $a1, %lo(HudScript_StatusSPEmptyIncrement)
+/* 82678 800E91C8 3C058011 */  lui       $a1, %hi(HES_StatusSPEmptyIncrement)
+/* 8267C 800E91CC 24A583B0 */  addiu     $a1, $a1, %lo(HES_StatusSPEmptyIncrement)
 /* 82680 800E91D0 0C0511FF */  jal       hud_element_set_script
 /* 82684 800E91D4 0240202D */   daddu    $a0, $s2, $zero
 /* 82688 800E91D8 0240202D */  daddu     $a0, $s2, $zero
@@ -1194,8 +1194,8 @@ glabel update_status_menu
 /* 826B4 800E9204 16220011 */  bne       $s1, $v0, .L800E924C
 /* 826B8 800E9208 24020007 */   addiu    $v0, $zero, 7
 /* 826BC 800E920C 26100001 */  addiu     $s0, $s0, 1
-/* 826C0 800E9210 3C058011 */  lui       $a1, %hi(HudScript_StatusSPEmptyIncrement)
-/* 826C4 800E9214 24A583B0 */  addiu     $a1, $a1, %lo(HudScript_StatusSPEmptyIncrement)
+/* 826C0 800E9210 3C058011 */  lui       $a1, %hi(HES_StatusSPEmptyIncrement)
+/* 826C4 800E9214 24A583B0 */  addiu     $a1, $a1, %lo(HES_StatusSPEmptyIncrement)
 /* 826C8 800E9218 0C0511FF */  jal       hud_element_set_script
 /* 826CC 800E921C 0240202D */   daddu    $a0, $s2, $zero
 /* 826D0 800E9220 0240202D */  daddu     $a0, $s2, $zero
@@ -1213,8 +1213,8 @@ glabel update_status_menu
 /* 826FC 800E924C 1622000F */  bne       $s1, $v0, .L800E928C
 /* 82700 800E9250 0000882D */   daddu    $s1, $zero, $zero
 /* 82704 800E9254 26100001 */  addiu     $s0, $s0, 1
-/* 82708 800E9258 3C058011 */  lui       $a1, %hi(HudScript_StatusStarEmpty)
-/* 8270C 800E925C 24A584F0 */  addiu     $a1, $a1, %lo(HudScript_StatusStarEmpty)
+/* 82708 800E9258 3C058011 */  lui       $a1, %hi(HES_StatusStarEmpty)
+/* 8270C 800E925C 24A584F0 */  addiu     $a1, $a1, %lo(HES_StatusStarEmpty)
 /* 82710 800E9260 0C0511FF */  jal       hud_element_set_script
 /* 82714 800E9264 0240202D */   daddu    $a0, $s2, $zero
 /* 82718 800E9268 0240202D */  daddu     $a0, $s2, $zero

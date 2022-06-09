@@ -17,8 +17,8 @@ static s32 gPauseTabsIconIDs[6];
 static s32 gPauseTabsPreviousTab;
 static s32 gPauseTabsHorizScrollPos;
 
-HudScript* gPauseTabsHudScripts[] = { &HudScript_HeaderStats, &HudScript_HeaderBadges, &HudScript_HeaderItems,
-                            &HudScript_HeaderParty, &HudScript_HeaderSpirits, &HudScript_HeaderMap };
+HudScript* gPauseTabsHudScripts[] = { &HES_HeaderStats, &HES_HeaderBadges, &HES_HeaderItems,
+                            &HES_HeaderParty, &HES_HeaderSpirits, &HES_HeaderMap };
 s8 gPauseTabsGridData[] = { 0, 1, 2, 3, 4, 5 };
 u8 gPauseTabsPanelIDs[] = { 1, 2, 3, 4, 5, 6 };
 u8 gPauseTabsWindowIDs[] = { WINDOW_ID_PAUSE_TAB_STATS, WINDOW_ID_PAUSE_TAB_BADGES, WINDOW_ID_PAUSE_TAB_ITEMS, WINDOW_ID_PAUSE_TAB_PARTY, WINDOW_ID_PAUSE_TAB_SPIRITS, WINDOW_ID_PAUSE_TAB_MAP };

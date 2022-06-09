@@ -177,21 +177,21 @@ DefaultWindowStyle D_801098E0[] = {
     }
 };
 
-#include "ui/corners9.png.inc.c"
-#include "ui/corners8.png.inc.c"
-#include "ui/corners6.png.inc.c"
-#include "ui/corners7.png.inc.c"
-#include "ui/corners3.png.inc.c"
-#include "ui/corners5.png.inc.c"
-#include "ui/corners4.png.inc.c"
-#include "ui/background1.png.inc.c"
-#include "ui/corners1.png.inc.c"
-#include "ui/corners2.png.inc.c"
-#include "ui/background2.png.inc.c"
+#include "ui/box/corners9.png.inc.c"
+#include "ui/box/corners8.png.inc.c"
+#include "ui/box/corners6.png.inc.c"
+#include "ui/box/corners7.png.inc.c"
+#include "ui/box/corners3.png.inc.c"
+#include "ui/box/corners5.png.inc.c"
+#include "ui/box/corners4.png.inc.c"
+#include "ui/box/bg_tile.png.inc.c"
+#include "ui/box/corners1.png.inc.c"
+#include "ui/box/corners2.png.inc.c"
+#include "ui/box/bg_flat.png.inc.c"
 
 WindowBackground D_8010BAE8[] = {
     {
-        .imgData = ui_background1_png,
+        .imgData = ui_box_bg_tile_png,
         .packedTileFormat = 0x40,
         .width = 16,
         .height = 16,
@@ -199,7 +199,7 @@ WindowBackground D_8010BAE8[] = {
         .size = 128
     },
     {
-        .imgData = ui_background2_png,
+        .imgData = ui_box_bg_flat_png,
         .packedTileFormat = 0x40,
         .width = 16,
         .height = 1,
@@ -210,7 +210,7 @@ WindowBackground D_8010BAE8[] = {
 
 WindowCorners D_8010BB00[] = {
     {
-        .imgData = ui_corners1_png,
+        .imgData = ui_box_corners1_png,
         .packedTileFormat = 0x31,
         .size1 = { 16, 16},
         .size2 = { 16, 16},
@@ -219,7 +219,7 @@ WindowCorners D_8010BB00[] = {
         .unk_0D = { 0, 0, 0}
     },
     {
-        .imgData = ui_corners2_png,
+        .imgData = ui_box_corners2_png,
         .packedTileFormat = 0x40,
         .size1 = { 16, 16},
         .size2 = { 16, 16},
@@ -228,7 +228,7 @@ WindowCorners D_8010BB00[] = {
         .unk_0D = { 0, 0, 0}
     },
     {
-        .imgData = ui_corners3_png,
+        .imgData = ui_box_corners3_png,
         .packedTileFormat = 0x31,
         .size1 = { 16, 32},
         .size2 = { 16, 32},
@@ -237,7 +237,7 @@ WindowCorners D_8010BB00[] = {
         .unk_0D = { 0, 0, 0}
     },
     {
-        .imgData = ui_corners4_png,
+        .imgData = ui_box_corners4_png,
         .packedTileFormat = 0x31,
         .size1 = { 8, 8},
         .size2 = { 8, 8},
@@ -246,7 +246,7 @@ WindowCorners D_8010BB00[] = {
         .unk_0D = { 0, 0, 0}
     },
     {
-        .imgData = ui_corners5_png,
+        .imgData = ui_box_corners5_png,
         .packedTileFormat = 0x31,
         .size1 = { 16, 8},
         .size2 = { 16, 8},
@@ -255,7 +255,7 @@ WindowCorners D_8010BB00[] = {
         .unk_0D = { 0, 0, 0}
     },
     {
-        .imgData = ui_corners6_png,
+        .imgData = ui_box_corners6_png,
         .packedTileFormat = 0x31,
         .size1 = { 16, 8},
         .size2 = { 16, 8},
@@ -264,7 +264,7 @@ WindowCorners D_8010BB00[] = {
         .unk_0D = { 0, 0, 0}
     },
     {
-        .imgData = ui_corners7_png,
+        .imgData = ui_box_corners7_png,
         .packedTileFormat = 0x31,
         .size1 = { 16, 8},
         .size2 = { 16, 8},
@@ -273,7 +273,7 @@ WindowCorners D_8010BB00[] = {
         .unk_0D = { 0, 0, 0}
     },
     {
-        .imgData = ui_corners8_png,
+        .imgData = ui_box_corners8_png,
         .packedTileFormat = 0x31,
         .size1 = { 24, 24},
         .size2 = { 24, 24},
@@ -282,7 +282,7 @@ WindowCorners D_8010BB00[] = {
         .unk_0D = { 0, 0, 0}
     },
     {
-        .imgData = ui_corners9_png,
+        .imgData = ui_box_corners9_png,
         .packedTileFormat = 0x31,
         .size1 = { 16, 16},
         .size2 = { 16, 16},

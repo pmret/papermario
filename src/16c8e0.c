@@ -12,20 +12,20 @@ s16 D_802809F6 = -1;
 s16 D_802809F8 = 0;
 u16 D_802809FA = 0;
 
-extern HudScript HudScript_HPDigit0;
-extern HudScript HudScript_HPDigit1;
-extern HudScript HudScript_HPDigit2;
-extern HudScript HudScript_HPDigit3;
-extern HudScript HudScript_HPDigit4;
-extern HudScript HudScript_HPDigit5;
-extern HudScript HudScript_HPDigit6;
-extern HudScript HudScript_HPDigit7;
-extern HudScript HudScript_HPDigit8;
-extern HudScript HudScript_HPDigit9;
+extern HudScript HES_HPDigit0;
+extern HudScript HES_HPDigit1;
+extern HudScript HES_HPDigit2;
+extern HudScript HES_HPDigit3;
+extern HudScript HES_HPDigit4;
+extern HudScript HES_HPDigit5;
+extern HudScript HES_HPDigit6;
+extern HudScript HES_HPDigit7;
+extern HudScript HES_HPDigit8;
+extern HudScript HES_HPDigit9;
 
 HudScript* bHPDigitHudScripts[] = {
-    &HudScript_HPDigit0, &HudScript_HPDigit1, &HudScript_HPDigit2, &HudScript_HPDigit3, &HudScript_HPDigit4,
-    &HudScript_HPDigit5, &HudScript_HPDigit6, &HudScript_HPDigit7, &HudScript_HPDigit8, &HudScript_HPDigit9,
+    &HES_HPDigit0, &HES_HPDigit1, &HES_HPDigit2, &HES_HPDigit3, &HES_HPDigit4,
+    &HES_HPDigit5, &HES_HPDigit6, &HES_HPDigit7, &HES_HPDigit8, &HES_HPDigit9,
     NULL, NULL, NULL,
 };
 
@@ -93,10 +93,10 @@ extern s32 D_8029EFBC;
 extern s32 D_8029EFC0[10];
 extern s32 D_8029EFE8[10];
 extern s32 D_8029F010[10];
-extern HudScript HudScript_HPBar;
-extern HudScript HudScript_Item_SmallStarPoint;
-extern HudScript HudScript_Item_StarPoint;
-extern HudScript HudScript_StatusSPShine;
+extern HudScript HES_HPBar;
+extern HudScript HES_Item_SmallStarPoint;
+extern HudScript HES_Item_StarPoint;
+extern HudScript HES_StatusSPShine;
 
 void func_8023ED5C(void);
 void func_8023F088(Camera*);
@@ -198,23 +198,23 @@ void initialize_battle(void) {
     func_8024EDC0();
     func_80268E88();
     set_windows_visible(WINDOW_GROUP_1);
-    D_8029EFBC = hud_element_create(&HudScript_HPBar);
+    D_8029EFBC = hud_element_create(&HES_HPBar);
     hud_element_set_flags(D_8029EFBC, HUD_ELEMENT_FLAGS_80);
 
     for (i = 0; i < ARRAY_COUNT(D_8029EFC0); i++) {
-        hudElemID = D_8029EFC0[i] = hud_element_create(&HudScript_Item_StarPoint);
+        hudElemID = D_8029EFC0[i] = hud_element_create(&HES_Item_StarPoint);
         hud_element_set_flags(hudElemID, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
         hud_element_set_render_depth(hudElemID, 20);
     }
 
     for (i = 0; i < ARRAY_COUNT(D_8029EFE8); i++) {
-        hudElemID = D_8029EFE8[i] = hud_element_create(&HudScript_StatusSPShine);
+        hudElemID = D_8029EFE8[i] = hud_element_create(&HES_StatusSPShine);
         hud_element_set_flags(hudElemID, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
         hud_element_set_render_depth(hudElemID, 20);
     }
 
     for (i = 0; i < ARRAY_COUNT(D_8029F010); i++) {
-        hudElemID = D_8029F010[i] = hud_element_create(&HudScript_Item_SmallStarPoint);
+        hudElemID = D_8029F010[i] = hud_element_create(&HES_Item_SmallStarPoint);
         hud_element_set_flags(hudElemID, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
         hud_element_set_render_depth(hudElemID, 20);
     }
@@ -771,7 +771,7 @@ void btl_draw_enemy_health_bars(void) {
                             screenY += 16;
                             id = D_8029EFBC;
                             hud_element_set_render_depth(id, 10);
-                            hud_element_set_script(id, &HudScript_HPBar);
+                            hud_element_set_script(id, &HES_HPBar);
                             hud_element_set_render_pos(id, screenX, screenY);
                             hud_element_draw_clipped(id);
 
@@ -883,16 +883,16 @@ void btl_update_starpoints_display(void) {
 
             for (i = 0; i < tens; i++) {
                 id = D_8029EFC0[i];
-                if (hud_element_get_script(id) != HudScript_Item_StarPoint) {
-                    hud_element_set_script(id, &HudScript_Item_StarPoint);
+                if (hud_element_get_script(id) != HES_Item_StarPoint) {
+                    hud_element_set_script(id, &HES_Item_StarPoint);
                 }
                 hud_element_clear_flags(id, 2);
                 hud_element_set_render_pos(id, posX, posY);
                 hud_element_draw_clipped(id);
 
                 id = D_8029EFE8[i];
-                if (hud_element_get_script(id) != HudScript_StatusSPShine) {
-                    hud_element_set_script(id, &HudScript_StatusSPShine);
+                if (hud_element_get_script(id) != HES_StatusSPShine) {
+                    hud_element_set_script(id, &HES_StatusSPShine);
                 }
                 hud_element_clear_flags(id, 2);
                 hud_element_set_render_pos(id, posX, posY - 5);
@@ -916,8 +916,8 @@ void btl_update_starpoints_display(void) {
 
             for (i = 0; i < ones; i++) {
                 id = D_8029F010[i];
-                if (hud_element_get_script(id) != HudScript_Item_SmallStarPoint) {
-                    hud_element_set_script(id, &HudScript_Item_SmallStarPoint);
+                if (hud_element_get_script(id) != HES_Item_SmallStarPoint) {
+                    hud_element_set_script(id, &HES_Item_SmallStarPoint);
                 }
                 hud_element_clear_flags(id, 2);
                 hud_element_set_render_pos(id, posX, posY);

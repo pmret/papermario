@@ -3,10 +3,10 @@
 
 #define NAMESPACE action_command_squirt
 
-extern HudScript HudScript_BlueMeter;
-extern HudScript HudScript_AButton;
-extern HudScript HudScript_AButtonDown;
-extern HudScript HudScript_PressAButton;
+extern HudScript HES_BlueMeter;
+extern HudScript HES_AButton;
+extern HudScript HES_AButtonDown;
+extern HudScript HES_PressAButton;
 extern s32 D_80294380;
 
 s32 D_802A9760_42A480[] = { 300, 300, 265, 220, 175, 175, };
@@ -35,13 +35,13 @@ ApiStatus func_802A9000_429D20(void) {
     actionCommandStatus->unk_5C = 0;
     actionCommandStatus->hudElementY = 80;
 
-    id = hud_element_create(&HudScript_AButton);
+    id = hud_element_create(&HES_AButton);
     actionCommandStatus->hudElements[0] = id;
     hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
     hud_element_set_render_pos(id, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
     hud_element_set_render_depth(id, 0);
 
-    id = hud_element_create(&HudScript_BlueMeter);
+    id = hud_element_create(&HES_BlueMeter);
     actionCommandStatus->hudElements[1] = id;
     hud_element_set_render_pos(id, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
     hud_element_set_render_depth(id, 0);
@@ -123,7 +123,7 @@ void func_802A9208_429F28(void) {
                 break;
             }
 
-            hud_element_set_script(actionCommandStatus->hudElements[0], &HudScript_AButtonDown);
+            hud_element_set_script(actionCommandStatus->hudElements[0], &HES_AButtonDown);
             actionCommandStatus->barFillLevel = 0;
             actionCommandStatus->unk_5C = 0;
             actionCommandStatus->unk_54 = actionCommandStatus->unk_52;
@@ -159,12 +159,12 @@ void func_802A9208_429F28(void) {
             sfx_adjust_env_sound_params(0x80000041, 0, 0, battleStatus->unk_84 * 12);
             id = actionCommandStatus->hudElements[0];
             if (temp < 80) {
-                if (hud_element_get_script(id) != &HudScript_AButtonDown) {
-                    hud_element_set_script(id, &HudScript_AButtonDown);
+                if (hud_element_get_script(id) != &HES_AButtonDown) {
+                    hud_element_set_script(id, &HES_AButtonDown);
                 }
             } else {
-                if (hud_element_get_script(id) != &HudScript_PressAButton) {
-                    hud_element_set_script(id, &HudScript_PressAButton);
+                if (hud_element_get_script(id) != &HES_PressAButton) {
+                    hud_element_set_script(id, &HES_PressAButton);
                 }
             }
 
