@@ -651,6 +651,8 @@ enum SoundIDs {
     SOUND_DEATH                     = 0x000003E5,
     SOUND_BIG_POWER_UP              = 0x000003E6,
     SOUND_MOLE_THROW                = 0x000003E8,
+    SOUND_DANGER                    = 0x000003F1,
+    SOUND_PERIL                     = 0x000003F2,
     SOUND_3F3                       = 0x000003F3,
     SOUND_THROW                     = 0x000003FA,
     SOUND_749                       = 0x00000749,

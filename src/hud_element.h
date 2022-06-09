@@ -240,6 +240,28 @@ extern HudScript* wPartnerHudScripts[];
 #define hs_PlaySound(arg0) HUD_ELEMENT_OP_PlaySound, arg0,
 #define hs_SetPivot(arg0, arg1) HUD_ELEMENT_OP_SetPivot, arg0, arg1,
 
+/// Basic HudScript used for static CI images, setting size with hs_SetTileSize
+#define HES_TEMPLATE_CI_ENUM_SIZE(name, sizeX, sizeY) \
+    { \
+		hs_SetVisible \
+		hs_SetTileSize(HUD_ELEMENT_SIZE_##sizeX##x##sizeY) \
+		hs_Loop \
+			hs_SetCI(60, name) \
+		hs_Restart \
+		hs_End \
+    }
+
+/// Basic HudScript used for static CI images, setting size with hs_SetCustomSize
+#define HES_TEMPLATE_CI_CUSTOM_SIZE(name, sizeX, sizeY) \
+    { \
+		hs_SetVisible \
+		hs_SetCustomSize(sizeX, sizeY) \
+		hs_Loop \
+			hs_SetCI(60, name) \
+		hs_Restart \
+		hs_End \
+    }
+
 void hud_element_load_script(HudElement* hudElement, HudScript* anim);
 
 /// @param clamp        0 = repeat; 1 = clamp

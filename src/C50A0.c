@@ -1,6 +1,7 @@
 #include "common.h"
 #include "effects.h"
 #include "hud_element.h"
+#include "sparkle_script.h"
 
 #define MAX_ITEM_ENTITIES 256
 
@@ -17,7 +18,7 @@ extern s16 D_80155D8C;
 extern s16 D_80155D8E;
 extern s16 D_80155D90;
 
-extern s32* SparkleScript_Coin;
+extern SparkleScript SparkleScript_Coin;
 
 void item_entity_load(ItemEntity*);
 void item_entity_update(ItemEntity*);
@@ -55,40 +56,40 @@ s32 integer_log(s32 number, u32 base) {
 
 INCLUDE_ASM(s32, "C50A0", draw_adjustable_tiled_image);
 
-void sparkle_script_init(ItemEntity* itemEntity, s32* state) {
-    itemEntity->sparkleReadPos = state;
+void sparkle_script_init(ItemEntity* itemEntity, SparkleScript* script) {
+    itemEntity->sparkleReadPos = (s32*)script;
     itemEntity->sparkleNextUpdate = 1;
-    itemEntity->sparkleSavedPos = state;
+    itemEntity->sparkleSavedPos = (s32*)script;
 }
 
 s32 sparkle_script_step(ItemEntity* itemEntity) {
-    s32* currentState = itemEntity->sparkleReadPos;
+    s32* readPos = itemEntity->sparkleReadPos;
 
-    switch (*currentState++) {
-        case 1:
-            itemEntity->sparkleNextUpdate = *currentState++;
-            itemEntity->sparkleUnk44 = *currentState++;
-            itemEntity->sparkleReadPos = currentState;
+    switch (*readPos++) {
+        case SPARKLE_OP_SetGfx:
+            itemEntity->sparkleNextUpdate = *readPos++;
+            itemEntity->sparkleUnk44 = *readPos++;
+            itemEntity->sparkleReadPos = readPos;
             break;
-        case 2:
+        case SPARKLE_OP_Restart:
             itemEntity->sparkleReadPos = itemEntity->sparkleSavedPos;
             return TRUE;
-        case 3:
-            itemEntity->sparkleSavedPos = currentState;
-            itemEntity->sparkleReadPos = currentState;
+        case SPARKLE_OP_Jump:
+            itemEntity->sparkleSavedPos = readPos;
+            itemEntity->sparkleReadPos = readPos;
             return TRUE;
-        case 7:
-            itemEntity->sparkleNextUpdate = *currentState++;
-            itemEntity->sparkleRaster = *currentState++;
-            itemEntity->sparklePalette = *currentState++;
-            itemEntity->sparkleWidth = *currentState++;
-            itemEntity->sparkleHeight = *currentState++;
-            itemEntity->sparkleReadPos = currentState;
+        case SPARKLE_OP_SetCI:
+            itemEntity->sparkleNextUpdate = *readPos++;
+            itemEntity->sparkleRaster = (s32*)*readPos++;
+            itemEntity->sparklePalette = (s32*)*readPos++;
+            itemEntity->sparkleWidth = *readPos++;
+            itemEntity->sparkleHeight = *readPos++;
+            itemEntity->sparkleReadPos = readPos;
             break;
-        case 4:
-            itemEntity->sparkleReadPos = currentState++;
-            itemEntity->sparkleReadPos = currentState++;
-        case 0:
+        case SPARKLE_OP_Break:
+            readPos++; // ignore arg
+            itemEntity->sparkleReadPos = readPos;
+        case SPARKLE_OP_End:
             return TRUE;
     }
     return FALSE;
@@ -97,7 +98,7 @@ s32 sparkle_script_step(ItemEntity* itemEntity) {
 void sparkle_script_update(ItemEntity* itemEntity) {
     itemEntity->sparkleNextUpdate--;
     if (itemEntity->sparkleNextUpdate <= 0) {
-        while (sparkle_script_step(itemEntity) != 0) {}
+        while (sparkle_script_step(itemEntity)) {}
     }
 }
 

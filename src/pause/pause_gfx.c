@@ -6,9 +6,9 @@
 #include "pause/world_map.png.h"
 #include "pause/spirits_bg.png.h"
 #include "pause/orbs.png.h"
-#include "pause/image_15F570.png.h"
-#include "pause/image_15F670.png.h"
-#include "pause/arrows.png.h"
+#include "pause/map_location.png.h"
+#include "pause/map_path_marker.png.h"
+#include "pause/map_arrows.png.h"
 #include "pause/banner_hp.png.h"
 #include "pause/banner_fp.png.h"
 #include "pause/banner_bp.png.h"
@@ -27,9 +27,9 @@
 #include "pause/spirits_bg.png.inc.c"
 #include "pause/spirits_bg.pal.inc.c"
 #include "pause/orbs.png.inc.c"
-#include "pause/image_15F570.png.inc.c"
-#include "pause/image_15F670.png.inc.c"
-#include "pause/arrows.png.inc.c"
+#include "pause/map_location.png.inc.c"
+#include "pause/map_path_marker.png.inc.c"
+#include "pause/map_arrows.png.inc.c"
 #include "pause/banner_hp.png.inc.c"
 #include "pause/banner_hp.pal.inc.c"
 #include "pause/banner_fp.png.inc.c"
@@ -212,9 +212,9 @@ Gfx gPauseDLPathPoints[] = {
     gsDPSetRenderMode(G_RM_CLD_SURF, G_RM_CLD_SURF2),
     gsDPSetCombineLERP(PRIMITIVE, 0, TEXEL0, 0, PRIMITIVE, 0, TEXEL0, 0, PRIMITIVE, 0, TEXEL0, 0, PRIMITIVE, 0, TEXEL0, 0),
     gsDPSetTextureLUT(G_TT_NONE),
-    gsDPLoadTextureTile(pause_image_15F570_png, G_IM_FMT_IA, G_IM_SIZ_8b, 16, 16, 0, 0, 15, 15, 0, G_TX_CLAMP, G_TX_CLAMP, 4, 4, G_TX_NOLOD, G_TX_NOLOD),
+    gsDPLoadTextureTile(pause_map_location_png, G_IM_FMT_IA, G_IM_SIZ_8b, 16, 16, 0, 0, 15, 15, 0, G_TX_CLAMP, G_TX_CLAMP, 4, 4, G_TX_NOLOD, G_TX_NOLOD),
     gsDPSetTextureLUT(G_TT_NONE),
-    gsDPLoadMultiTile(pause_image_15F670_png, 0x100, 1, G_IM_FMT_IA, G_IM_SIZ_8b, 16, 16, 0, 0, 15, 15, 0, G_TX_CLAMP, G_TX_CLAMP, 4, 4, G_TX_NOLOD, G_TX_NOLOD),
+    gsDPLoadMultiTile(pause_map_path_marker_png, 0x100, 1, G_IM_FMT_IA, G_IM_SIZ_8b, 16, 16, 0, 0, 15, 15, 0, G_TX_CLAMP, G_TX_CLAMP, 4, 4, G_TX_NOLOD, G_TX_NOLOD),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_SHADE | G_CULL_BACK | G_SHADING_SMOOTH),
     gsSPEndDisplayList(),
@@ -230,7 +230,7 @@ Gfx gPauseDLArrows[] = {
     gsDPSetTextureFilter(G_TF_POINT),
     gsDPSetTextureConvert(G_TC_FILT),
     gsDPSetTextureLUT(G_TT_NONE),
-    gsDPLoadTextureTile_4b(pause_arrows_png, G_IM_FMT_IA, pause_arrows_png_width, pause_arrows_png_height, 0, 0, pause_arrows_png_width - 1, pause_arrows_png_height - 1, 0, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, 4, 6, G_TX_NOLOD, G_TX_NOLOD),
+    gsDPLoadTextureTile_4b(pause_map_arrows_png, G_IM_FMT_IA, pause_map_arrows_png_width, pause_map_arrows_png_height, 0, 0, pause_map_arrows_png_width - 1, pause_map_arrows_png_height - 1, 0, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, 4, 6, G_TX_NOLOD, G_TX_NOLOD),
     gsDPSetRenderMode(AA_EN | CVG_DST_FULL | ZMODE_OPA | CVG_X_ALPHA | GBL_c1(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_A_MEM), AA_EN | CVG_DST_FULL | ZMODE_OPA | CVG_X_ALPHA | GBL_c2(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_A_MEM)),
     gsDPSetCombineMode(G_CC_DECALRGBA, G_CC_DECALRGBA),
     gsSPClearGeometryMode(G_LIGHTING),
