@@ -752,6 +752,7 @@ void appendGfx_animator(ModelAnimator* animator) {
     gDisplayContext->matrixStack[gMatrixListPos] = animator->mtx;
     gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
+    //TODO find better match
     switch (gAnimModelFogEnabled != 0) {
         case FALSE:
             switch (animator->renderMode) {
