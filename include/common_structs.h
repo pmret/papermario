@@ -643,7 +643,7 @@ typedef struct Entity {
         SimpleSpringData* simpleSpring;
         s32* unk;
     } dataBuf;
-    /* 0x44 */ Mtx* vertexData;
+    /* 0x44 */ Vec3s* vertexData;
     /* 0x48 */ Vec3f position;
     /* 0x54 */ Vec3f scale;
     /* 0x60 */ Vec3f rotation;
@@ -680,7 +680,7 @@ typedef struct Shadow {
     /* 0x07 */ char unk_07;
     /* 0x08 */ s16 entityModelID;
     /* 0x0A */ s16 vertexSegment;
-    /* 0x0C */ Vtx* vertexArray;
+    /* 0x0C */ Vec3s* vertexArray;
     /* 0x10 */ Vec3f position;
     /* 0x1C */ Vec3f scale;
     /* 0x28 */ Vec3f rotation;
@@ -1158,8 +1158,8 @@ typedef struct ModelAnimator {
     /* 0x000 */ u32 flags;
     /* 0x004 */ s8 renderMode;
     /* 0x005 */ char unk_05[3];
-    /* 0x008 */ s8* animReadPos;
-    /* 0x00C */ s8* savedReadPos;
+    /* 0x008 */ s16* animReadPos;
+    /* 0x00C */ s16* savedReadPos;
     /* 0x010 */ AnimatorNode* rootNode;
     /* 0x014 */ u8 nextUniqueID;
     /* 0x015 */ u8 staticNodeIDs[0x7A]; // ?
@@ -1167,13 +1167,13 @@ typedef struct ModelAnimator {
     /* 0x090 */ f32 nextUpdateTime;
     /* 0x094 */ f32 timeScale;
     /* 0x098 */ Mtx mtx;
-    /* 0x0D8 */ Vtx** vertexArray;
-    /* 0x0DC */ s8* animationBuffer;
+    /* 0x0D8 */ Vec3s* vertexArray;
+    /* 0x0DC */ s16* animationBuffer;
     /* 0x0E0 */ StaticAnimatorNode* staticNodes[0x7A];
     /* 0x2C8 */ StaticAnimatorNode** staticRoot;
     /* 0x2CC */ s32 treeIndexPos;
     /* 0x2D0 */ s32 savedTreePos;
-    /* 0x2D4 */ void (*fpRenderCallback)(void);
+    /* 0x2D4 */ void (*fpRenderCallback)(void*);
     /* 0x2D8 */ s32 renderCallbackArg;
     /* 0x2DC */ char unk_2DC[4];
 } ModelAnimator; // size = 0x2E0
@@ -1229,8 +1229,8 @@ typedef struct ItemEntity {
     /* 0x40 */ s32* sparkleReadPos;
     /* 0x44 */ s32 sparkleUnk44;
     /* 0x48 */ s32* sparkleSavedPos;
-    /* 0x4C */ s32* sparkleRaster;
-    /* 0x50 */ s32* sparklePalette;
+    /* 0x4C */ s8* sparkleRaster;
+    /* 0x50 */ s8* sparklePalette;
     /* 0x54 */ s32 sparkleWidth;
     /* 0x58 */ s32 sparkleHeight;
 } ItemEntity; // size = 0x5C
