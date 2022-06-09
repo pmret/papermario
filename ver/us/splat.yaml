@@ -2457,7 +2457,22 @@ segments:
     vram: 0xE0018000
     subsegments:
     - [0x32F580, c, footprint]
-  - [0x32FB50, bin] # footprint gfx
+  - name: effect_gfx_footprint
+    dir: effects/gfx
+    type: code
+    start: 0x32FB50
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x32FB50, c, footprint]
+    - start: 0x32FB50
+      type: .data
+      name: footprint
+      subsegments:
+      - [0x32FB50, i4, D_09000000_32FB50, 32, 32]
+      - [0x32FD50, vtx, D_09000200_32FD50]
+      - [0x32FD90, gfx, D_09000240_32FD90]
+      - [0x32FE28]
   - name: effect_floating_flower
     dir: effects
     type: code
@@ -2466,7 +2481,26 @@ segments:
     subsegments:
     - [0x32FE30, c, floating_flower]
     - [0x330440]
-  - [0x330460, bin] # floating_flower gfx
+  - name: effect_gfx_floating_flower
+    dir: effects/gfx
+    type: code
+    start: 0x330460
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x330460, c, floating_flower]
+    - start: 0x330460
+      type: .data
+      name: floating_flower
+      subsegments:
+      - [0x330460, ci4, D_09000000_330460, 16, 16]
+      - [0x3304E0, palette, D_09000000_330460]
+      - [0x330500, vtx, D_090000A0_330500]
+      - [0x3305D0, vtx, D_09000170_3305D0]
+      - [0x330690, vtx, D_09000230_330690]
+      - [0x330750, gfx, D_090002F0_330750]
+      - [0x3308B0, gfx, D_09000450_3308B0]
+      - [0x330908]
   - name: effect_snowflake
     dir: effects
     type: code
@@ -2475,7 +2509,26 @@ segments:
     subsegments:
     - [0x330910, c, snowflake]
     - [0x330EF0]
-  - [0x330F00, bin] # snowflake gfx
+  - name: effect_gfx_snowflake
+    dir: effects/gfx
+    type: code
+    start: 0x330F00
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x330F00, c, snowflake]
+    - start: 0x330F00
+      type: .data
+      name: snowflake
+      subsegments:
+      - [0x330F00, i4, D_09000000_330F00, 16, 16]
+      - [0x330F80, i4, D_09000080_330F80, 64, 64]
+      - [0x331780, vtx, D_09000880_331780]
+      - [0x3317C0, vtx, D_090008C0_3317C0]
+      - [0x331800, gfx, D_09000900_331800]
+      - [0x3318E8, gfx, D_090009E8_3318E8]
+      - [0x331910, gfx, D_09000A10_331910]
+      - [0x331938]
   - name: effect_star
     dir: effects
     type: code
@@ -3134,7 +3187,31 @@ segments:
     subsegments:
     - [0x391D30, c, small_gold_sparkle]
     - [0x3923C0]
-  - [0x392440, bin] # small_gold_sparkle gfx
+  - name: effect_gfx_small_gold_sparkle
+    dir: effects/gfx
+    type: code
+    start: 0x392440
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x392440, c, small_gold_sparkle]
+    - start: 0x392440
+      type: .data
+      name: small_gold_sparkle
+      subsegments:
+      - [0x392440, i4, D_09000000_392440, 16, 16]
+      - [0x3924C0, i4, D_09000080_3924C0, 16, 16]
+      - [0x392540, i4, D_09000100_392540, 16, 16]
+      - [0x3925C0, i4, D_09000180_3925C0, 16, 16]
+      - [0x392640, i4, D_09000200_392640, 16, 16]
+      - [0x3926C0, vtx, D_09000280_3926C0]
+      - [0x392700, gfx, D_090002C0_392700]
+      - [0x392770, gfx, D_09000330_392770]
+      - [0x3927B0, gfx, D_09000370_3927B0]
+      - [0x3927F0, gfx, D_090003B0_3927F0]
+      - [0x392830, gfx, D_090003F0_392830]
+      - [0x392870, gfx, D_09000430_392870]
+      - [0x3928B0, gfx, D_09000470_3928B0]
   - name: effect_flashing_box_shockwave
     dir: effects
     type: code
