@@ -7,14 +7,14 @@ extern HudScript HES_BlueMeter;
 extern HudScript HES_PressAButton;
 extern HudScript HES_PressBButton;
 extern HudScript HES_BButtonHeld;
-extern HudScript HES_8029265C;
+extern HudScript HES_CDownButtonHeld;
 extern HudScript HES_PressCDownButton;
 extern HudScript HES_AButton;
 extern HudScript HES_AButtonDown;
 extern s32 D_802944A0;
 
 HudScript* D_802A97C0_42CEB0[3] = { &HES_PressAButton, &HES_PressBButton, &HES_PressCDownButton };
-HudScript* D_802A97CC_42CEBC[3] = { &HES_AButtonDown, &HES_BButtonHeld, &HES_8029265C };
+HudScript* D_802A97CC_42CEBC[3] = { &HES_AButtonDown, &HES_BButtonHeld, &HES_CDownButtonHeld };
 
 ApiStatus N(CreateHudElements)(Evt* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;

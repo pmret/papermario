@@ -275,8 +275,8 @@ glabel func_802A11B0
 /* 416360 802A15D0 0220202D */  daddu     $a0, $s1, $zero
 /* 416364 802A15D4 0C051280 */  jal       hud_element_set_flags
 /* 416368 802A15D8 24050002 */   addiu    $a1, $zero, 2
-/* 41636C 802A15DC 3C048029 */  lui       $a0, %hi(D_80292CF4)
-/* 416370 802A15E0 24842CF4 */  addiu     $a0, $a0, %lo(D_80292CF4)
+/* 41636C 802A15DC 3C048029 */  lui       $a0, %hi(HES_SwapBackground)
+/* 416370 802A15E0 24842CF4 */  addiu     $a0, $a0, %lo(HES_SwapBackground)
 /* 416374 802A15E4 0C050529 */  jal       hud_element_create
 /* 416378 802A15E8 00000000 */   nop
 /* 41637C 802A15EC 0040882D */  daddu     $s1, $v0, $zero
