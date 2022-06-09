@@ -13,10 +13,12 @@
 #include "effects/gfx/D_09001400_3877B0.png.inc.c"
 #include "effects/gfx/D_09001600_3879B0.png.inc.c"
 #include "effects/gfx/D_09001800_387BB0.png.inc.c"
+
 #include "effects/gfx/D_09002000_3883B0.vtx.inc.c"
 #include "effects/gfx/D_09002040_3883F0.vtx.inc.c"
 #include "effects/gfx/D_09002080_388430.vtx.inc.c"
 #include "effects/gfx/D_090020C0_388470.vtx.inc.c"
+
 #include "effects/gfx/D_09002100_3884B0.gfx.inc.c"
 #include "effects/gfx/D_09002198_388548.gfx.inc.c"
 #include "effects/gfx/D_09002230_3885E0.gfx.inc.c"

@@ -288,7 +288,6 @@ segments:
       type: .data
       name: curtains
       subsegments:
-      - [0x4F9E0, .data, curtains]
       - [0x4F9E0, i4, sprite/unk_checkers, 16, 32]
       - [0x4FAE0]
       - [0x4FB30, rgba32, sprite/curtains, 32, 32]
@@ -375,7 +374,6 @@ segments:
       type: .data
       name: 919B0
       subsegments:
-      - [0x919B0, .data, 919B0]
       - [0x919B0, ci4,     ui/a_button_unpressed, 48, 40]
       - [0x91D70, palette, ui/a_button_unpressed]
       - [0x91D90, ci4,     ui/a_button_pressed, 48, 40]
@@ -760,7 +758,7 @@ segments:
       type: .data
       name: 8e790_len_2850
       subsegments:
-      - [0xA2D90, .data, 8e790_len_2850]
+      - [0xA2D90]
       - [0xA2E90, ia8, ui/corners9, 16, 64]
       - [0xA3290, ia8, ui/corners8, 24, 96]
       - [0xA3B90, ia8, ui/corners6, 16, 40]
@@ -807,7 +805,7 @@ segments:
       type: .data
       name: cd180_len_38f0
       subsegments:
-      - [0xE2DF0, .data, cd180_len_38f0]
+      - [0xE2DF0]
       - [0xE2E00, i4, ui/star_silhouette, 32, 64]
       - [0xE3200, i4, ui/mario_head_silhouette, 64, 64]
       - [0xE3A00, i4, ui/quarter_circle_silhouette, 32, 32]
@@ -2323,7 +2321,6 @@ segments:
       type: .data
       name: big_smoke_puff
       subsegments:
-      - [0x326410, .data, big_smoke_puff]
       - [0x326410, ci4,     D_09000000_326410, 32, 32]
       - [0x326610, palette, D_09000000_326410]
       - [0x326630, ci4,     D_09000220_326630, 32, 32]
@@ -2393,7 +2390,6 @@ segments:
       type: .data
       name: flower_splash_trail
       subsegments:
-      - [0x32CEC0, .data, flower_splash_trail]
       - [0x32CEC0, ci4, D_09000000_32CEC0, 16, 16]
       - [0x32CF40, palette, D_09000000_32CEC0]
       - [0x32CF60, palette, D_09000000_32CEC0.yellow]
@@ -2428,7 +2424,24 @@ segments:
     subsegments:
     - [0x32E490, c, cloud_puff]
     - [0x32EC10]
-  - [0x32EC50, bin] # cloud_puff, cloud_trail gfx
+  - name: effect_gfx_cloud_puff_trail
+    dir: effects/gfx
+    type: code
+    start: 0x32EC50
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x32EC50, c, cloud_puff_trail]
+    - start: 0x32EC50
+      type: .data
+      name: cloud_puff_trail
+      subsegments:
+      - [0x32EC50, ci4, D_09000000_32EC50, 16, 16]
+      - [0x32ECD0, palette, D_09000000_32EC50]
+      - [0x32ECF0, vtx, D_090000A0_32ECF0]
+      - [0x32ED30, gfx, D_090000E0_32ED30]
+      - [0x32EE08, gfx, D_090001B8_32EE08]
+      - [0x32EE28]
   - name: effect_cloud_trail
     dir: effects
     type: code
@@ -2617,7 +2630,6 @@ segments:
       type: .data
       name: damage_indicator
       subsegments:
-      - [0x350220, .data, damage_indicator]
       - [0x350220, i4, D_09000000_350220, 32, 32]
       - [0x350420, i4, D_09000200_350420, 32, 32]
       - [0x350620, i4, D_09000400_350620, 32, 32]
@@ -2822,7 +2834,6 @@ segments:
       type: .data
       name: big_snowflakes
       subsegments:
-      - [0x3638C0, .data, big_snowflakes]
       - [0x3638C0, i4, D_09000000_3638C0, 16, 16]
       - [0x363940, i4, D_09000080_363940, 64, 64]
       - [0x364140, vtx, D_09000880_364140]
@@ -2851,7 +2862,6 @@ segments:
       type: .data
       name: debuff
       subsegments:
-      - [0x364C00, .data, debuff]
       - [0x364C00, i4, D_09000000_364C00, 32, 32]
       - [0x364E00, vtx, D_09000200_364E00]
       - [0x364E40, gfx, D_09000240_364E40]
@@ -3010,7 +3020,6 @@ segments:
       type: .data
       name: disable_x
       subsegments:
-      - [0x3863B0, .data, disable_x]
       - [0x3863B0, i4, D_09000000_3863B0, 32, 32]
       - [0x3865B0, i4, D_09000200_3865B0, 32, 32]
       - [0x3867B0, i4, D_09000400_3867B0, 32, 32]
@@ -3242,7 +3251,6 @@ segments:
       type: .data
       name: butterflies
       subsegments:
-      - [0x3AB030, .data, butterflies]
       - [0x3AB030, ci4, D_09000000_3AB030, 32, 64]
       - [0x3AB430, palette, D_09000000_3AB030]
       - [0x3AB450, ci4, D_09000420_3AB450, 32, 64]
@@ -3425,7 +3433,6 @@ segments:
       type: .data
       name: throw_spiny
       subsegments:
-      - [0x3CFAF0, .data, throw_spiny]
       - [0x3CFAF0, ci4, D_09000000_3CFAF0, 32, 32]
       - [0x3CFCF0, palette, D_09000000_3CFAF0]
       - [0x3CFD10] # padding
@@ -3904,7 +3911,6 @@ segments:
       type: .data
       name: whirlwind
       subsegments:
-      - [0x424550, .data, whirlwind]
       - [0x424550, ci4, whirlwind_1, 24, 24]
       - [0x424670, palette, whirlwind_1]
       - [0x424690, ci4, whirlwind_2, 24, 24]
@@ -4025,7 +4031,6 @@ segments:
       type: .data
       name: water_block
       subsegments:
-      - [0x42B650, .data, water_block]
       - [0x42B650, ci4, water_block_1, 24, 24]
       - [0x42B770, palette, water_block_1]
       - [0x42B790, ci4, water_block_2, 24, 24]
@@ -4685,7 +4690,7 @@ segments:
       type: .data
       name: actor/monstar
       subsegments:
-      - [0x63F040, .data, actor/monstar]
+      - [0x63F040]
       - [0x63F278, ci4, actor/img, 32, 32]
       - [0x63F478, palette, actor/img]
       - [0x63F498]
@@ -4910,7 +4915,7 @@ segments:
     vram: 0x802A1000
     overlay: True
     subsegments:
-    - [0x715850, c, mushroom] # TODO fix auto_all for .data
+    - [0x715850, c, mushroom]
     - [0x715E50]
   - name: fire_flower
     dir: battle/item
@@ -5017,7 +5022,7 @@ segments:
       type: .data
       name: sleepy_sheep
       subsegments:
-      - [0x71EFC0, .data, sleepy_sheep]
+      - [0x71EFC0]
       - [0x71F580, ci4, sleepy_sheep1, 56, 48]
       - [0x71FAC0, palette, sleepy_sheep1]
       - [0x71FAE0, ci4, sleepy_sheep2, 56, 48]
@@ -5127,7 +5132,7 @@ segments:
       type: .data
       name: egg_missile
       subsegments:
-      - [0x7291D0, .data, egg_missile]
+      - [0x7291D0]
       - [0x729790, ci4, egg_missile1, 32, 32]
       - [0x729990, palette, egg_missile1]
       - [0x7299B0, ci4, egg_missile2, 32, 32]
@@ -5174,7 +5179,7 @@ segments:
       type: .data
       name: mystery
       subsegments:
-      - [0x72CF00, .data, mystery]
+      - [0x72CF00]
       - [0x72D4C0, ci4, mystery, 32, 32]
       - [0x72D6C0, palette, mystery]
       - [0x72D6E0]
@@ -5208,7 +5213,7 @@ segments:
       type: .data
       name: coconut
       subsegments:
-      - [0x72F960, .data, coconut]
+      - [0x72F960]
       - [0x72FF20, ci4, coconut, 32, 32]
       - [0x730120, palette, coconut]
       - [0x730140]
@@ -5233,7 +5238,7 @@ segments:
       type: .data
       name: strange_cake
       subsegments:
-      - [0x731EA0, .data, strange_cake]
+      - [0x731EA0]
       - [0x732470, ci4, strange_cake1, 32, 32]
       - [0x732670, palette, strange_cake1]
       - [0x732690, ci4, strange_cake2, 32, 32]
@@ -7099,7 +7104,7 @@ segments:
       type: .data
       name: 9694C0
       subsegments:
-      - [0x96CC30,   .data, 9694C0]
+      - [0x96CC30]
       - [0x971F98,     vtx, vtx/971F98]
       - [0x9722B8,     vtx, vtx/9722B8]
       - [0x973578]

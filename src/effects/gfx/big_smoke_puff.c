@@ -14,7 +14,9 @@
 #include "effects/gfx/D_09000AA0_326EB0.pal.inc.c"
 #include "effects/gfx/D_09000CC0_3270D0.png.inc.c"
 #include "effects/gfx/D_09000CC0_3270D0.pal.inc.c"
+
 #include "effects/gfx/D_09000EE0_3272F0.vtx.inc.c"
+
 #include "effects/gfx/D_09000F20_327330.gfx.inc.c"
 #include "effects/gfx/D_09000F88_327398.gfx.inc.c"
 #include "effects/gfx/D_09000FA0_3273B0.gfx.inc.c"

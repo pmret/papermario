@@ -14,6 +14,7 @@
 #include "effects/gfx/D_09001600_351820.png.inc.c"
 #include "effects/gfx/D_09001800_351A20.png.inc.c"
 #include "effects/gfx/D_09001A00_351C20.png.inc.c"
+
 #include "effects/gfx/D_09001C00_351E20.vtx.inc.c"
 #include "effects/gfx/D_09001C10_351E30.vtx.inc.c"
 #include "effects/gfx/D_09001C30_351E50.vtx.inc.c"
@@ -21,6 +22,7 @@
 #include "effects/gfx/D_09001C80_351EA0.vtx.inc.c"
 #include "effects/gfx/D_09001CC0_351EE0.vtx.inc.c"
 #include "effects/gfx/D_09001D00_351F20.vtx.inc.c"
+
 #include "effects/gfx/D_09001D40_351F60.gfx.inc.c"
 #include "effects/gfx/D_09001DE0_352000.gfx.inc.c"
 #include "effects/gfx/D_09001E50_352070.gfx.inc.c"
