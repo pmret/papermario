@@ -123,7 +123,6 @@ extern u8* gHudElementCacheBufferWorld;
 extern u8* gHudElementCacheBufferBattle;
 extern u8* gHudElementCacheBuffer;
 
-s32 fold_appendGfx_component(s32 idx, FoldImageRecPart* image, u32 flagBits, Matrix4f mtx);
 void func_801413F8(void);
 
 void hud_element_load_script(HudElement* hudElement, HudScript* anim) {
@@ -1658,9 +1657,7 @@ void render_hud_elements_world(void) {
                     gDPPipeSync(gMasterGfxPos++);
                     gSPClearGeometryMode(gMasterGfxPos++, G_ZBUFFER | G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH);
                     gSPSetGeometryMode(gMasterGfxPos++, G_ZBUFFER | G_SHADE | G_LIGHTING | G_SHADING_SMOOTH);
-                    gSPNumLights(gMasterGfxPos++, 1);
-                    gSPLight(gMasterGfxPos++, &D_8014F108.l, 1);
-                    gSPLight(gMasterGfxPos++, &D_8014F108.a, 2);
+                    gSPSetLights1(gMasterGfxPos++, D_8014F108);
                     gSPTexture(gMasterGfxPos++, -1, -1, 0, G_TX_RENDERTILE, G_ON);
                     gDPSetAlphaCompare(gMasterGfxPos++, G_AC_NONE);
                     gSPSetOtherMode(gMasterGfxPos++, G_SETOTHERMODE_H, G_MDSFT_ALPHADITHER, 18, G_AD_DISABLE | G_CD_DISABLE | G_CK_NONE | G_TC_FILT | G_TF_BILERP | G_TT_NONE | G_TL_TILE | G_TD_CLAMP | G_TP_PERSP | G_CYC_1CYCLE);
@@ -1708,9 +1705,7 @@ void render_hud_elements_world(void) {
                     gDPPipeSync(gMasterGfxPos++);
                     gSPClearGeometryMode(gMasterGfxPos++, G_ZBUFFER | G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH);
                     gSPSetGeometryMode(gMasterGfxPos++, G_ZBUFFER | G_SHADE | G_LIGHTING | G_SHADING_SMOOTH);
-                    gSPNumLights(gMasterGfxPos++, 1);
-                    gSPLight(gMasterGfxPos++, &D_8014F108.l, 1);
-                    gSPLight(gMasterGfxPos++, &D_8014F108.a, 2);
+                    gSPSetLights1(gMasterGfxPos++, D_8014F108);
                     gSPTexture(gMasterGfxPos++, -1, -1, 0, G_TX_RENDERTILE, G_ON);
                     gDPSetAlphaCompare(gMasterGfxPos++, G_AC_NONE);
                     gSPSetOtherMode(gMasterGfxPos++, G_SETOTHERMODE_H, G_MDSFT_ALPHADITHER, 18, G_AD_DISABLE | G_CD_DISABLE | G_CK_NONE | G_TC_FILT | G_TF_BILERP | G_TT_NONE | G_TL_TILE | G_TD_CLAMP | G_TP_PERSP | G_CYC_1CYCLE);

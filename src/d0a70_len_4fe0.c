@@ -87,29 +87,7 @@ FoldImageRec* fold_currentImage = &D_80156920;
 
 u16 fold_vtxCount = 0;
 
-Lights2 D_8014EE18 = {
-    .a = {
-        .l = {
-            .col = { 144, 144, 144 },
-            .colc = { 144, 144, 144 },
-        }
-    },
-    .l = {
-        {
-            .l = {
-                .col = { 255, 255, 255 },
-                .colc = { 255, 255, 255 },
-                .dir = { 0, 0, 120},
-            }
-        }, {
-            .l = {
-                .col = { 255, 255, 255 },
-                .colc = { 255, 255, 255 },
-                .dir = { 0, 0, 136 },
-            }
-        }
-    }
-};
+Lights2 D_8014EE18 = gdSPDefLights2(144, 144, 144, 255, 255, 255, 0, 0, 120, 255, 255, 255, 0, 0, 136);
 
 Vp D_8014EE40 = {
     .vp = {
@@ -635,7 +613,7 @@ void fold_set_state_flags(s32 idx, u16 flagBits, s32 mode) {
     }
 }
 
-s32 fold_appendGfx_component(s32 idx, FoldImageRec* image, u32 flagBits, Matrix4f mtx) {
+s32 fold_appendGfx_component(s32 idx, FoldImageRecPart* image, u32 flagBits, Matrix4f mtx) {
     FoldState* state = &(*D_80156954)[idx];
     s32 ret = 0;
 

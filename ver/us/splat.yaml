@@ -800,7 +800,7 @@ segments:
     - [0xE2950, .data, B4580]
     - [0xE2960, .data, entity]
     - [0xE2980, .data, msg]
-    - [0xE2CA0, data]
+    - [0xE2CA0, .data, C50A0]
     - start: 0xE2DF0
       type: .data
       name: cd180_len_38f0
