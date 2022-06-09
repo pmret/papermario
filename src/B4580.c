@@ -364,7 +364,7 @@ AnimatorNode* add_anim_node(ModelAnimator* animator, s32 parentNodeID, AnimatorN
     ret = heap_malloc(sizeof(*ret));
     ASSERT(ret != NULL);
 
-    ret->flags = ANIMATOR_NODE_FLAGS_10;
+    ret->flags = MODEL_ANIMATOR_FLAGS_ENABLED;
     ret->displayList = nodeBP->displayList;
     ret->basePos.x = nodeBP->basePos.x;
     ret->basePos.y = nodeBP->basePos.y;
@@ -679,7 +679,7 @@ void animator_node_update_model_transform(ModelAnimator* animator, f32 (*flipMtx
 
     copy_matrix(sp10, node->mtx);
 
-    if (node->flags & ANIMATOR_NODE_FLAGS_HAS_MODEL) {
+    if (node->flags & MODEL_ANIMATOR_FLAGS_HAS_MODEL) {
         Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(node->fcData.modelID));
 
         copy_matrix(sp10, model->transformMatrix);
@@ -823,7 +823,7 @@ void appendGfx_animator_node(ModelAnimator* animator, AnimatorNode* node, Matrix
     s32 totalVtxCount;
     s32 cmd;
 
-    if (node->flags & ANIMATOR_NODE_FLAGS_80) {
+    if (node->flags & MODEL_ANIMATOR_FLAGS_HIDDEN) {
         for (i = 0; i < ARRAY_COUNT(node->children); i++) {
             if (node->children[i] != NULL) {
                 guMtxCatF(node->mtx, mtx, node->mtx);
@@ -1057,7 +1057,7 @@ void load_model_animator_node(StaticAnimatorNode* node, ModelAnimator* animator,
 
         if (node->modelID != 0) {
             newNode->fcData.modelID = node->modelID - 1;
-            newNode->flags |= ANIMATOR_NODE_FLAGS_HAS_MODEL;
+            newNode->flags |= MODEL_ANIMATOR_FLAGS_HAS_MODEL;
         }
 
         i = 0;

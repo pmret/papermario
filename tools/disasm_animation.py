@@ -6,7 +6,7 @@ def read(f):
     return struct.unpack('>h', f.read(2))[0]
 
 def i2f(x):
-    return x * 180 / 32767
+    return round(x * 180 / 32767 * 200) / 200
 
 def parse(f):
     print('AnimScript script = {')
@@ -22,9 +22,9 @@ def parse(f):
             indent = indent[:-4]
             print(f'{indent}AS_END_LOOP,')
         elif op == 5:
-            print(f'{indent}AS_SET_ROTATION, {read(f)}, {read(f)}, {read(f)}, {read(f)},')
+            print(f'{indent}AS_SET_ROTATION, {read(f)}, AS_F({i2f(read(f))}), AS_F({i2f(read(f))}), AS_F({i2f(read(f))}),')
         elif op == 6:
-            print(f'{indent}AS_ADD_ROTATION, {read(f)}, {read(f)}, {read(f)}, {read(f)},')
+            print(f'{indent}AS_ADD_ROTATION, {read(f)}, AS_F({i2f(read(f))}), AS_F({i2f(read(f))}), AS_F({i2f(read(f))}),')
         elif op == 8:
             print(f'{indent}AS_SET_POS, {read(f)}, {read(f)}, {read(f)}, {read(f)},')
         elif op == 10:
@@ -37,7 +37,7 @@ def parse(f):
         elif op == 16:
             print(f'{indent}AS_CLEAR_NODE_FLAGS, {read(f)}, {read(f)},')
         elif op == 17:
-            print(f'{indent}AS_SET_SCALE, {read(f)}, {read(f)}, {read(f)}, {read(f)},')
+            print(f'{indent}AS_SET_SCALE, {read(f)}, AS_F({i2f(read(f))}), AS_F({i2f(read(f))}), AS_F({i2f(read(f))}),')
         elif op == 18:
             print(f'{indent}AS_SET_RENDER_MODE, {read(f)}')
         elif op == 19:

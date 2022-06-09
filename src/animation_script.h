@@ -28,4 +28,8 @@ enum {
     AS_OP_19,
 };
 
+#define _AS_ROUND(x) ((int) (x < 0 ? x - 0.5 : x + 0.5))
+
+#define AS_F(x) (_AS_ROUND((x) * 32767.0 / 180.0))
+
 #endif
