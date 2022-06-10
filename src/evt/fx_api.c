@@ -1,33 +1,69 @@
 #include "common.h"
 #include "effects.h"
 
-INCLUDE_ASM(void, "evt/fx_api", func_802D7460, f32 x, f32 y, f32 z, s32 arg3);
+void show_start_recovery_shimmer(f32 x, f32 y, f32 z, s32 amt) {
+    fx_stars_shimmer(1, x, y, z, amt + 30, amt + 30, (amt / 2) + 10, 30);
+}
 
-INCLUDE_ASM(void, "evt/fx_api", func_802D74C0, f32 x, f32 y, f32 z, s32 arg3);
+void show_recovery_shimmer(f32 x, f32 y, f32 z, s32 amt) {
+    fx_stars_shimmer(2, x, y, z, amt + 30, amt + 30, (amt / 2) + 10, 30);
+}
 
-ApiStatus func_802D7520(Evt* script, s32 isInitialCall) {
+ApiStatus ShowStartRecoveryShimmer(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     f32 x = evt_get_float_variable(script, *args++);
     f32 y = evt_get_float_variable(script, *args++);
     f32 z = evt_get_float_variable(script, *args++);
 
-    func_802D7460(x, y, z, evt_get_variable(script, *args++));
-    sfx_play_sound_at_position(0x2055, 0, x, y, z);
+    show_start_recovery_shimmer(x, y, z, evt_get_variable(script, *args++));
+    sfx_play_sound_at_position(SOUND_2055, 0, x, y, z);
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802D75D8(Evt* script, s32 isInitialCall) {
+ApiStatus ShowRecoveryShimmer(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     f32 x = evt_get_float_variable(script, *args++);
     f32 y = evt_get_float_variable(script, *args++);
     f32 z = evt_get_float_variable(script, *args++);
 
-    func_802D74C0(x, y, z, evt_get_variable(script, *args++));
-    sfx_play_sound_at_position(0x378, 0, x, y, z);
+    show_recovery_shimmer(x, y, z, evt_get_variable(script, *args++));
+    sfx_play_sound_at_position(SOUND_378, 0, x, y, z);
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "evt/fx_api", func_802D7690);
+ApiStatus func_802D7690(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    f32 posX = evt_get_float_variable(script, *args++);
+    f32 posY = evt_get_float_variable(script, *args++);
+    f32 posZ = evt_get_float_variable(script, *args++);
+    f32 angle = evt_get_float_variable(script, *args++);
+    f32 magnitude = evt_get_float_variable(script, *args++);
+    s32 duration = evt_get_variable(script, *args++);
+    f32 offsetX, offsetY, offsetZ;
+    f32 sinA, cosA;
+    
+    if (isInitialCall) {
+        script->functionTemp[0] = 0;
+    }
+    
+    offsetX = rand_int(10) - 5;
+    offsetZ = rand_int(10) - 5;
+    offsetY = -2.0f - ((SQ(offsetX) + SQ(offsetZ)) / 5.0f);
+    sinA = sin_rad(angle * TAU / 360.0f);
+    cosA = cos_rad(angle * TAU / 360.0f);
+    fx_cloud_trail(
+        posX + ((sinA * magnitude * script->functionTemp[0]) / duration) + offsetX,
+        posY + 15.5f + offsetY,
+        posZ + ((-cosA * magnitude * script->functionTemp[0]) / duration) + offsetZ,
+        0.0f);
+
+    script->functionTemp[0]++;
+    if (script->functionTemp[0] < duration) {
+        return ApiStatus_BLOCK;
+    } else {
+        return ApiStatus_DONE2;
+    }
+}
 
 INCLUDE_ASM(s32, "evt/fx_api", ShowEmote, Evt* script, s32 isInitialCall);
 
@@ -40,9 +76,9 @@ ApiStatus RemoveEffect(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_802D7B10(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32* ptrValue = (s32*) evt_get_variable(script, *args++);
+    EffectInstance* effect = (EffectInstance*)evt_get_variable(script, *args++);
 
-    *ptrValue |= 0x10;
+    effect->flags |= EFFECT_INSTANCE_FLAGS_10;
     return ApiStatus_DONE2;
 }
 
@@ -64,61 +100,62 @@ ApiStatus func_802D7B74(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802D7BA4(Evt* script, s32 isInitialCall) {
-    s32 var1 = script->varTable[1];
-    s32 var2 = script->varTable[2];
-    s32 var3 = script->varTable[3];
-    s32 var4 = script->varTable[4];
-    s32 var5 = script->varTable[5];
-    s32 var6 = script->varTable[6];
-    s32 temp;
-    u8 t0;
-    f32 t1;
+ApiStatus InterpMotionBlurParams(Evt* script, s32 isInitialCall) {
+    s32 centerX0 = script->varTable[1];
+    s32 centerY0 = script->varTable[2];
+    s32 centerX1 = script->varTable[3];
+    s32 centerY1 = script->varTable[4];
+    s32 finalAmt = script->varTable[5];
+    s32 duration = script->varTable[6];
+    s32 delta;
+    u8 overlayType;
+    f32 initialAmt;
 
     if (isInitialCall) {
-        script->functionTemp[0] = var6;
-        get_screen_overlay_params(1, &t0, &t1);
-        script->functionTemp[1] = t1;
-        set_screen_overlay_center(1, 0, var1, var2);
-        set_screen_overlay_center(1, 1, var3, var4);
+        script->functionTemp[0] = duration;
+        get_screen_overlay_params(1, &overlayType, &initialAmt);
+        script->functionTemp[1] = initialAmt;
+        set_screen_overlay_center(1, 0, centerX0, centerY0);
+        set_screen_overlay_center(1, 1, centerX1, centerY1);
     }
 
-    get_screen_overlay_params(1, &t0, &t1);
-    temp = (script->functionTemp[1] - var5) * script->functionTemp[0];
-    set_screen_overlay_params_back(12, (temp / var6) + var5);
+    get_screen_overlay_params(1, &overlayType, &initialAmt);
+    // lerp from initialAmt (stored in functionTemp[1]) to finalAmt (stored in varTable[5])
+    delta = (script->functionTemp[1] - finalAmt);
+    set_screen_overlay_params_back(12, (delta * script->functionTemp[0] / duration) + finalAmt);
 
     script->functionTemp[0]--;
     if (script->functionTemp[0] < 0) {
-        set_screen_overlay_params_back(12, var5);
+        set_screen_overlay_params_back(12, finalAmt);
         return ApiStatus_DONE2;
     }
     return ApiStatus_BLOCK;
 }
 
-EvtScript D_802D9D50 = {
-    EVT_CALL(func_802D7BA4)
+EvtScript EVS_UpdateMotionBlurParams = {
+    EVT_CALL(InterpMotionBlurParams)
     EVT_RETURN
     EVT_END
 };
 
-ApiStatus Spawn802D9D50(Evt* script, s32 isInitialCall) {
+ApiStatus SetMotionBlurParams(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 var0 = evt_get_variable(script, *args++);
-    s32 var1 = evt_get_variable(script, *args++);
-    s32 var2 = evt_get_variable(script, *args++);
-    s32 var3 = evt_get_variable(script, *args++);
-    s32 var4 = evt_get_variable(script, *args++);
-    s32 var5 = evt_get_variable(script, *args++);
-    s32 var6 = evt_get_variable(script, *args++);
+    s32 centerX0 = evt_get_variable(script, *args++);
+    s32 centerY0 = evt_get_variable(script, *args++);
+    s32 centerX1 = evt_get_variable(script, *args++);
+    s32 centerY1 = evt_get_variable(script, *args++);
+    s32 finalAmt = evt_get_variable(script, *args++);
+    s32 duration = evt_get_variable(script, *args++);
 
-    Evt* newScript = start_script(&D_802D9D50, EVT_PRIORITY_1, 0);
-    newScript->varTable[0] = var0;
-    newScript->varTable[1] = var1;
-    newScript->varTable[2] = var2;
-    newScript->varTable[3] = var3;
-    newScript->varTable[4] = var4;
-    newScript->varTable[5] = var5;
-    newScript->varTable[6] = var6;
+    Evt* blurEvt = start_script(&EVS_UpdateMotionBlurParams, EVT_PRIORITY_1, 0);
+    blurEvt->varTable[0] = var0;
+    blurEvt->varTable[1] = centerX0;
+    blurEvt->varTable[2] = centerY0;
+    blurEvt->varTable[3] = centerX1;
+    blurEvt->varTable[4] = centerY1;
+    blurEvt->varTable[5] = finalAmt;
+    blurEvt->varTable[6] = duration;
 
     return ApiStatus_DONE2;
 }

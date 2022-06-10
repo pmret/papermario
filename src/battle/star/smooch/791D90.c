@@ -382,7 +382,7 @@ EvtScript N(usePower) = {
     EVT_CALL(func_802A156C_7922FC, LW(0), LW(1), LW(2), 20)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LW(0), LW(1), LW(2))
     EVT_ADD(LW(1), 25)
-    EVT_CALL(func_802D7520, LW(0), LW(1), LW(2), 20)
+    EVT_CALL(ShowStartRecoveryShimmer, LW(0), LW(1), LW(2), 20)
     EVT_CALL(N(AddHP), 20)
     EVT_THREAD
         EVT_CALL(N(UnkBackgroundFunc))

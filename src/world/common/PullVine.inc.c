@@ -16,7 +16,7 @@ ApiStatus N(PullVine_WaitForPlayerGrab)(Evt* script, s32 isInitialCall) {
     dy = script->varTable[1] - modelY;
     dz = script->varTable[2] - modelZ;
     result = 1;
-    if (!(dx*dx + dy*dy + dz*dz < dist*dist)) {
+    if (!(SQ(dx) + SQ(dy) + SQ(dz) < SQ(dist))) {
         result = 0;
     }
     script->varTable[0] = result;

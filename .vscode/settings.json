@@ -50,4 +50,5 @@
         "docs/doxygen": true,
     },
     "C_Cpp.default.cStandard": "c89",
+    "C_Cpp.errorSquiggles": "Disabled",
 }

@@ -187,7 +187,70 @@ ApiStatus SetCamTarget(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "evt/cam_api", func_802CB008, Evt* script, s32 isInitialCall);
+ApiStatus InterpCamTargetPos(Evt* script, s32 isInitialCall) {
+    typedef struct CamInterpData {
+        /* 0x00 */ Camera* cam;
+        /* 0x04 */ s32 useTarget;
+        /* 0x08 */ Vec3f vel;
+        /* 0x14 */ s32 time;
+    } CamInterpData; // size = 0x18
+    
+    Bytecode* args = script->ptrReadPos;
+    CamInterpData* data;
+    Camera* cam;
+
+    if (isInitialCall) {
+        s32 camID = evt_get_variable(script, *args++);
+        s32 useTarget = evt_get_variable(script, *args++);
+        s32 posX = evt_get_variable(script, *args++);
+        s32 posY = evt_get_variable(script, *args++);
+        s32 posZ = evt_get_variable(script, *args++);
+        s32 time = evt_get_variable(script, *args++);
+        
+        data = heap_malloc(sizeof(*data));
+        script->userData = data;
+        cam = &gCameras[camID];
+        data->cam = cam;
+        data->useTarget = useTarget;
+        data->time = time;
+        
+        switch (data->useTarget) {
+        case 0:
+            data->vel.x = (posX - cam->auxPos.x) / data->time;
+            data->vel.y = (posY - cam->auxPos.y) / data->time;
+            data->vel.z = (posZ - cam->auxPos.z) / data->time;
+            break;
+        case 1:
+            data->vel.x = (posX - cam->targetPos.x) / data->time;
+            data->vel.y = (posY - cam->targetPos.y) / data->time;
+            data->vel.z = (posZ - cam->targetPos.z) / data->time;
+            break;
+        }
+    }
+    
+    data = script->userData;
+    cam = data->cam;
+    switch (data->useTarget) {
+    case 0:
+        cam->auxPos.x += data->vel.x;
+        cam->auxPos.y += data->vel.y;
+        cam->auxPos.z += data->vel.z;
+        break;
+    case 1:
+        cam->targetPos.x += data->vel.x;
+        cam->targetPos.y += data->vel.y;
+        cam->targetPos.z += data->vel.z;
+        break;
+    }
+    
+    data->time--;
+    if (data->time == 0) {
+        heap_free(script->userData);
+        script->userData = NULL;
+        return ApiStatus_DONE2;
+    }
+    return ApiStatus_BLOCK;
+}
 
 ApiStatus ShakeCam(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

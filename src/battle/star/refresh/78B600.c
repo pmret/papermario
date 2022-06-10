@@ -320,7 +320,7 @@ EvtScript N(usePower) = {
     EVT_CALL(func_802A19A8_78BFA8, LW(0), LW(1), LW(2), 5)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LW(0), LW(1), LW(2))
     EVT_ADD(LW(1), 25)
-    EVT_CALL(func_802D7520, LW(0), LW(1), LW(2), 5)
+    EVT_CALL(ShowStartRecoveryShimmer, LW(0), LW(1), LW(2), 5)
     EVT_CALL(N(AddHP), 5)
     EVT_CALL(N(AddFP), 5)
     EVT_CALL(func_802A17D4_78BDD4)
