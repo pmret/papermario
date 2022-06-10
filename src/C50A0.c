@@ -3,6 +3,7 @@
 #include "hud_element.h"
 #include "pause/pause_common.h"
 #include "world/partners.h"
+#include "sparkle_script.h"
 
 #define MAX_ITEM_ENTITIES 256
 
@@ -17,12 +18,14 @@ extern ItemEntity* WorldItemEntities[MAX_ITEM_ENTITIES];
 extern ItemEntity* BattleItemEntities[MAX_ITEM_ENTITIES];
 extern ItemEntity** gCurrentItemEntities;
 extern s16 isPickingUpItem;
-extern s16 D_801565A6;
-extern s16 D_801565A8;
 extern s32 D_80155D80;
 extern s16 D_80155D8C;
 extern s16 D_80155D8E;
 extern s16 D_80155D90;
+extern s16 D_801565A6;
+extern s16 D_801565A8;
+extern s32 D_801568E0;
+extern s32 D_801568EC;
 
 // BSS
 extern PopupMenu D_801565B0;
@@ -43,12 +46,99 @@ s32 test_item_player_collision(ItemEntity*);
 void update_item_entity_collectable(ItemEntity*);
 void func_8013559C(ItemEntity*);
 void update_item_entity_static(ItemEntity*);
-void func_801356C4(void);
+void func_801356C4(ItemEntity*);
 void func_801356CC(ItemEntity*);
-void func_801356D4(void);
+void func_801356D4(ItemEntity*);
 void update_item_entity_temp(ItemEntity*);
+s32 draw_image_with_clipping(s32* raster, s32 width, s32 height, s32 fmt, s32 bitDepth, s16 posX, s16 posY, u16 clipULx,
+                             u16 clipULy, u16 clipLRx, u16 clipRLy);
+void func_8013673C(ItemEntity* itemEntity, s32 posX, s32 posY);
+void func_801369D0(ItemEntity* itemEntity, s32 posX, s32 posY);
+void func_80136A08(ItemEntity* itemEntity, s32 posX, s32 posY);
 
-INCLUDE_ASM(s32, "C50A0", draw_ci_image_with_clipping);
+Vtx D_8014C5A0[4] = {
+    {{{ -12,  0, 0 }, 0, { 0x2300, 0x2300 }, { 0, 0, 0, 255 }}},
+    {{{  11,  0, 0 }, 0, { 0x2000, 0x2300 }, { 0, 0, 0, 255 }}},
+    {{{  11, 23, 0 }, 0, { 0x2000, 0x2000 }, { 0, 0, 0, 255 }}},
+    {{{ -12, 23, 0 }, 0, { 0x2300, 0x2000 }, { 0, 0, 0, 255 }}},
+};
+
+Vtx D_8014C5E0[4] = {
+    {{{ -16,  0, 0 }, 0, { 0x2400, 0x2400 }, { 0, 0, 0, 255 }}},
+    {{{  15,  0, 0 }, 0, { 0x2000, 0x2400 }, { 0, 0, 0, 255 }}},
+    {{{  15, 31, 0 }, 0, { 0x2000, 0x2000 }, { 0, 0, 0, 255 }}},
+    {{{ -16, 31, 0 }, 0, { 0x2400, 0x2000 }, { 0, 0, 0, 255 }}},
+};
+
+Gfx D_8014C620[] = {
+    gsDPPipeSync(),
+    gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
+    gsDPSetCombineMode(G_CC_DECALRGBA, G_CC_DECALRGBA),
+    gsDPSetTexturePersp(G_TP_PERSP),
+    gsDPSetTextureDetail(G_TD_CLAMP),
+    gsDPSetTextureLOD(G_TL_TILE),
+    gsDPSetTextureLUT(G_TT_NONE),
+    gsDPSetTextureFilter(G_TF_BILERP),
+    gsDPSetTextureConvert(G_TC_FILT),
+    gsDPSetTextureLUT(G_TT_RGBA16),
+    gsSPEndDisplayList(),
+};
+
+Gfx D_8014C678[] = {
+    gsSPClearGeometryMode(G_CULL_BACK | G_LIGHTING | G_SHADING_SMOOTH),
+    gsSPVertex(D_8014C5A0, 4, 0),
+    gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
+    gsDPPipeSync(),
+    gsSPEndDisplayList(),
+};
+
+Gfx D_8014C6A0[] = {
+    gsSPClearGeometryMode(G_CULL_BACK | G_LIGHTING | G_SHADING_SMOOTH),
+    gsSPVertex(D_8014C5E0, 4, 0),
+    gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
+    gsDPPipeSync(),
+    gsSPEndDisplayList(),
+};
+
+Lights1 D_8014C6C8 = gdSPDefLights1(255, 255, 255, 0, 0, 0, 0, 0, 0);
+
+s16 D_8014C6E0[] = { 32, 40 };
+s16 D_8014C6E4[] = { 8, 4 };
+
+s32 draw_ci_image_with_clipping(s32* raster, s32 width, s32 height, s32 fmt, s32 bitDepth, s32* palette, s16 posX,
+                                s16 posY, u16 clipULx, u16 clipULy, u16 clipLRx, u16 clipRLy, u8 opacity) {
+    s32 ret;
+
+    gDPPipeSync(gMasterGfxPos++);
+    gDPSetCycleType(gMasterGfxPos++, G_CYC_1CYCLE);
+    gDPSetTextureFilter(gMasterGfxPos++, G_TF_POINT);
+    gDPSetTexturePersp(gMasterGfxPos++, G_TP_NONE);
+
+    if (opacity == 255) {
+        gDPSetRenderMode(gMasterGfxPos++, G_RM_TEX_EDGE, G_RM_TEX_EDGE2);
+        gDPSetCombineMode(gMasterGfxPos++, G_CC_DECALRGBA, G_CC_DECALRGBA);
+    } else if (opacity == 0) {
+        return 1;
+    } else {
+        gDPSetRenderMode(gMasterGfxPos++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
+        gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0);
+        gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, opacity);
+    }
+
+    if (fmt == G_IM_FMT_CI) {
+        gDPSetTextureLUT(gMasterGfxPos++, G_TT_RGBA16);
+        if (bitDepth == G_IM_SIZ_4b) {
+            gDPLoadTLUT_pal16(gMasterGfxPos++, 0, palette);
+        } else {
+            gDPLoadTLUT_pal256(gMasterGfxPos++, palette);
+        }
+    } else {
+        gDPSetTextureLUT(gMasterGfxPos++, G_TT_NONE);
+    }
+    ret = draw_image_with_clipping(raster, width, height, fmt, bitDepth, posX, posY, clipULx, clipULy, clipLRx, clipRLy);
+    gDPPipeSync(gMasterGfxPos++);
+    return ret;
+}
 
 INCLUDE_ASM(s32, "C50A0", draw_image_with_clipping);
 
@@ -70,40 +160,40 @@ s32 integer_log(s32 number, u32 base) {
 
 INCLUDE_ASM(s32, "C50A0", draw_adjustable_tiled_image);
 
-void sparkle_script_init(ItemEntity* itemEntity, s32* state) {
-    itemEntity->sparkleReadPos = state;
+void sparkle_script_init(ItemEntity* itemEntity, SparkleScript* script) {
+    itemEntity->sparkleReadPos = (s32*)script;
     itemEntity->sparkleNextUpdate = 1;
-    itemEntity->sparkleSavedPos = state;
+    itemEntity->sparkleSavedPos = (s32*)script;
 }
 
 s32 sparkle_script_step(ItemEntity* itemEntity) {
-    s32* currentState = itemEntity->sparkleReadPos;
+    s32* readPos = itemEntity->sparkleReadPos;
 
-    switch (*currentState++) {
-        case 1:
-            itemEntity->sparkleNextUpdate = *currentState++;
-            itemEntity->sparkleUnk44 = *currentState++;
-            itemEntity->sparkleReadPos = currentState;
+    switch (*readPos++) {
+        case SPARKLE_OP_SetGfx:
+            itemEntity->sparkleNextUpdate = *readPos++;
+            itemEntity->sparkleUnk44 = *readPos++;
+            itemEntity->sparkleReadPos = readPos;
             break;
-        case 2:
+        case SPARKLE_OP_Restart:
             itemEntity->sparkleReadPos = itemEntity->sparkleSavedPos;
             return TRUE;
-        case 3:
-            itemEntity->sparkleSavedPos = currentState;
-            itemEntity->sparkleReadPos = currentState;
+        case SPARKLE_OP_Jump:
+            itemEntity->sparkleSavedPos = readPos;
+            itemEntity->sparkleReadPos = readPos;
             return TRUE;
-        case 7:
-            itemEntity->sparkleNextUpdate = *currentState++;
-            itemEntity->sparkleRaster = *currentState++;
-            itemEntity->sparklePalette = *currentState++;
-            itemEntity->sparkleWidth = *currentState++;
-            itemEntity->sparkleHeight = *currentState++;
-            itemEntity->sparkleReadPos = currentState;
+        case SPARKLE_OP_SetCI:
+            itemEntity->sparkleNextUpdate = *readPos++;
+            itemEntity->sparkleRaster = (s8*)*readPos++;
+            itemEntity->sparklePalette = (s8*)*readPos++;
+            itemEntity->sparkleWidth = *readPos++;
+            itemEntity->sparkleHeight = *readPos++;
+            itemEntity->sparkleReadPos = readPos;
             break;
-        case 4:
-            itemEntity->sparkleReadPos = currentState++;
-            itemEntity->sparkleReadPos = currentState++;
-        case 0:
+        case SPARKLE_OP_Break:
+            readPos++; // ignore arg
+            itemEntity->sparkleReadPos = readPos;
+        case SPARKLE_OP_End:
             return TRUE;
     }
     return FALSE;
@@ -112,31 +202,37 @@ s32 sparkle_script_step(ItemEntity* itemEntity) {
 void sparkle_script_update(ItemEntity* itemEntity) {
     itemEntity->sparkleNextUpdate--;
     if (itemEntity->sparkleNextUpdate <= 0) {
-        while (sparkle_script_step(itemEntity) != 0) {}
+        while (sparkle_script_step(itemEntity)) {}
     }
 }
 
-void draw_coin_sparkles(ItemEntity* item) {
-    Matrix4f mtxA, mtxB, mtxC, mtxD;
-    FoldImageRecPart recPart;
-    f32 x = D_80155D8C;
-    f32 y = D_80155D8E;
-    f32 z = D_80155D90;
-    f32 fwdYaw = clamp_angle(180.0f - gCameras[gCurrentCamID].currentYaw);
+void draw_coin_sparkles(ItemEntity* itemEntity) {
+    f32 x, y, z;
+    f32 angle;
+    Matrix4f sp18;
+    Matrix4f sp58;
+    Matrix4f sp98;
+    Matrix4f spD8;
+    FoldImageRecPart foldImage;
 
-    guTranslateF(mtxA, x, y, z);
-    guTranslateF(mtxB, item->position.x, item->position.y + 12.0f, item->position.z);
-    guRotateF(mtxC, fwdYaw, 0.0f, 1.0f, 0.0f);
-    guMtxCatF(mtxA, mtxC, mtxC);
-    guMtxCatF(mtxC, mtxB, mtxD);
-    guMtxF2L(mtxD, &gDisplayContext->matrixStack[gMatrixListPos]);
+    x = D_80155D8C;
+    y = D_80155D8E;
+    z = D_80155D90;
+    angle = clamp_angle(180.0f - gCameras[gCurrentCamID].currentYaw);
+
+    guTranslateF(sp18, x, y, z);
+    guTranslateF(sp58, itemEntity->position.x, itemEntity->position.y + 12.0f, itemEntity->position.z);
+    guRotateF(sp98, angle, 0.0f, 1.0f, 0.0f);
+    guMtxCatF(sp18, sp98, sp98);
+    guMtxCatF(sp98, sp58, spD8);
+    guMtxF2L(spD8, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gDPSetCycleType(gMasterGfxPos++, G_CYC_1CYCLE);
     gSPClearGeometryMode(gMasterGfxPos++, G_ZBUFFER | G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH);
     gSPSetGeometryMode(gMasterGfxPos++, G_ZBUFFER | G_SHADE | G_LIGHTING | G_SHADING_SMOOTH);
     gSPSetLights1(gMasterGfxPos++, D_8014C6C8);
-    gSPTexture(gMasterGfxPos++, 0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON);
+    gSPTexture(gMasterGfxPos++, -1, -1, 0, G_TX_RENDERTILE, G_ON);
     gDPSetTextureLOD(gMasterGfxPos++, G_TL_TILE);
     gDPSetTexturePersp(gMasterGfxPos++, G_TP_PERSP);
     gDPSetTextureFilter(gMasterGfxPos++, G_TF_BILERP);
@@ -146,15 +242,14 @@ void draw_coin_sparkles(ItemEntity* item) {
     gDPSetCombineKey(gMasterGfxPos++, G_CK_NONE);
     gDPSetAlphaCompare(gMasterGfxPos++, G_AC_NONE);
 
-    recPart.raster = (s8*)item->sparkleRaster;
-    recPart.palette = (s8*)item->sparklePalette;
-    recPart.width = item->sparkleWidth;
-    recPart.height = item->sparkleHeight;
-    recPart.xOffset = -item->sparkleWidth / 2;
-    recPart.yOffset =  item->sparkleHeight / 2;
-    recPart.unk_10 = 0xFF;
-
-    fold_appendGfx_component(0, &recPart, 0, mtxD);
+    foldImage.raster = itemEntity->sparkleRaster;
+    foldImage.palette = itemEntity->sparklePalette;
+    foldImage.width = itemEntity->sparkleWidth;
+    foldImage.height = itemEntity->sparkleHeight;
+    foldImage.xOffset = -itemEntity->sparkleWidth / 2;
+    foldImage.yOffset = itemEntity->sparkleHeight / 2;
+    foldImage.unk_10 = 255;
+    fold_appendGfx_component(0, &foldImage, 0, spD8);
 
     gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
     gDPPipeSync(gMasterGfxPos++);
@@ -167,7 +262,7 @@ ItemEntity* get_item_entity(s32 itemEntityIndex) {
 void item_entity_disable_shadow(ItemEntity* itemEntity) {
     Shadow* shadow;
 
-    itemEntity->flags |= ENTITY_FLAGS_CONTINUOUS_COLLISION;
+    itemEntity->flags |= ITEM_ENTITY_FLAGS_40;
     if (itemEntity->shadowIndex >= 0) {
         shadow = get_shadow_by_index(itemEntity->shadowIndex);
         shadow->flags |= SHADOW_FLAGS_HIDDEN;
@@ -177,7 +272,7 @@ void item_entity_disable_shadow(ItemEntity* itemEntity) {
 void item_entity_enable_shadow(ItemEntity* itemEntity) {
     Shadow* shadow;
 
-    itemEntity->flags &= ~ENTITY_FLAGS_CONTINUOUS_COLLISION;
+    itemEntity->flags &= ~ITEM_ENTITY_FLAGS_40;
     if (itemEntity->shadowIndex >= 0) {
         shadow = get_shadow_by_index(itemEntity->shadowIndex);
         shadow->flags &= ~SHADOW_FLAGS_HIDDEN;
@@ -228,8 +323,263 @@ void init_item_entity_list(void) {
 
 INCLUDE_ASM(s32, "C50A0", item_entity_load);
 
-INCLUDE_ASM(s32, "C50A0", make_item_entity, s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pickupDelay,
-            s32 facingAngleSign, s32 pickupVar);
+s32 make_item_entity(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pickupDelay, s32 facingAngleSign, s32 pickupVar) {
+    s32 i;
+    s32 id;
+    ItemEntity* itemEntity;
+    f32 hitDepth;
+    Shadow* shadow;
+
+    if (pickupVar <= -120000000) {
+        pickupVar = pickupVar + 130000000;
+    }
+
+    if (pickupVar > 0) {
+        switch (itemSpawnMode) {
+            case ITEM_SPAWN_MODE_NOTHING:
+            case ITEM_SPAWN_MODE_TOSS_NEVER_VANISH:
+            case ITEM_SPAWN_MODE_TOSS:
+            case ITEM_SPAWN_MODE_TOSS_SPAWN_ONCE:
+            case ITEM_SPAWN_MODE_TOSS_SPAWN_ONCE_NEVER_VANISH:
+            case ITEM_SPAWN_MODE_ITEM_BLOCK_ITEM:
+            case ITEM_SPAWN_MODE_ITEM_BLOCK_BADGE:
+            case ITEM_SPAWN_MODE_FALL_NEVER_VANISH:
+            case ITEM_SPAWN_MODE_FALL:
+            case ITEM_SPAWN_MODE_FALL_SPAWN_ONCE:
+            case ITEM_SPAWN_MODE_FIXED_NEVER_VANISH:
+            case ITEM_SPAWN_MODE_FIXED:
+            case ITEM_SPAWN_MODE_ITEM_BLOCK_COIN:
+            case ITEM_SPAWN_MODE_TOSS_HIGHER_NEVER_VANISH:
+                if (get_global_flag(pickupVar) != 0) {
+                    return -1;
+                }
+                break;
+        }
+    }
+
+    for (i = 0; i < MAX_ITEM_ENTITIES; i++) {
+        if (gCurrentItemEntities[i] == NULL) {
+            break;
+        }
+    }
+
+    ASSERT(i < MAX_ITEM_ENTITIES);
+
+    id = i;
+    gCurrentItemEntities[id] = itemEntity = heap_malloc(sizeof(*itemEntity));
+    ItemEntitiesCreated++;
+    ASSERT(itemEntity != NULL);
+
+    itemEntity->renderGroup = ((u32)itemID >> 0x10) & 0xF;
+    if (itemEntity->renderGroup == 5) {
+        itemEntity->renderGroup = -1;
+    }
+
+    itemEntity->spawnType = itemSpawnMode;
+    itemEntity->state = 0;
+    itemEntity->position.x = x;
+    itemEntity->position.y = y;
+    itemEntity->position.z = z;
+
+    itemID &= 0xFFFF;
+
+    itemEntity->flags = ITEM_ENTITY_FLAGS_80 | ITEM_ENTITY_FLAGS_10 | ITEM_ENTITY_FLAGS_CAM2 | ITEM_ENTITY_FLAGS_CAM1 | ITEM_ENTITY_FLAGS_CAM0;
+    itemEntity->pickupMsgFlags = 0;
+    itemEntity->boundVar = pickupVar;
+    itemEntity->itemID = itemID;
+    itemEntity->physicsData = NULL;
+    itemEntity->pickupDelay = pickupDelay;
+    itemEntity->scale = 1.0f;
+    itemEntity->wsFaceAngle = facingAngleSign;
+    itemEntity->shadowIndex = -1;
+    itemEntity->nextUpdate = 1;
+    itemEntity->unk_34.x = -9999;
+    itemEntity->unk_34.y = -9999;
+    itemEntity->unk_34.z = -9999;
+    D_801565A6 = 30;
+
+    itemEntity->flags |= ITEM_ENTITY_FLAGS_TINY;
+    if (gItemTable[itemID].typeFlags & ITEM_TYPE_FLAG_ENTITY_FULLSIZE) {
+        itemEntity->flags |= ITEM_ENTITY_FLAGS_40000;
+        itemEntity->flags &= ~ITEM_ENTITY_FLAGS_TINY;
+    }
+
+    if (ItemEntityAlternatingSpawn != 0) {
+        itemEntity->flags |= ITEM_ENTITY_FLAGS_20000;
+    }
+
+    ItemEntityAlternatingSpawn = 1 - ItemEntityAlternatingSpawn;
+
+    switch (itemEntity->spawnType) {
+        case ITEM_SPAWN_MODE_NOTHING:
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_80000000;
+            break;
+        case ITEM_SPAWN_MODE_DECORATION:
+        case ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS:
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_800000;
+            break;
+        case ITEM_SPAWN_MODE_INVISIBLE:
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_100000;
+            break;
+        case ITEM_SPAWN_MODE_BATTLE_REWARD:
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_800000;
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_10000;
+            itemEntity->spawnType = ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS;
+            break;
+        case ITEM_SPAWN_MODE_TOSS_NEVER_VANISH:
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_800000 | ITEM_ENTITY_FLAGS_400 | ITEM_ENTITY_FLAGS_NEVER_VANISH;
+            itemEntity->spawnType = ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS;
+            break;
+        case ITEM_SPAWN_MODE_TOSS:
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_800000 | ITEM_ENTITY_FLAGS_400;
+            itemEntity->spawnType = ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS;
+            break;
+        case ITEM_SPAWN_MODE_TOSS_SPAWN_ONCE:
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_800000 | ITEM_ENTITY_FLAGS_800;
+            itemEntity->spawnType = ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS;
+            break;
+        case ITEM_SPAWN_MODE_TOSS_SPAWN_ONCE_NEVER_VANISH:
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_800000 | ITEM_ENTITY_FLAGS_800 | ITEM_ENTITY_FLAGS_NEVER_VANISH;
+            itemEntity->spawnType = ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS;
+            break;
+        case ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS_NEVER_VANISH:
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_800000 | ITEM_ENTITY_FLAGS_NEVER_VANISH;
+            itemEntity->spawnType = ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS;
+            break;
+        case ITEM_SPAWN_MODE_ITEM_BLOCK_ITEM:
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_800000 | ITEM_ENTITY_FLAGS_400;
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_40000000;
+            itemEntity->spawnType = ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS;
+            break;
+        case ITEM_SPAWN_MODE_ITEM_BLOCK_BADGE:
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_800000 | ITEM_ENTITY_FLAGS_400;
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_40000000 | ITEM_ENTITY_FLAGS_NEVER_VANISH;
+            itemEntity->spawnType = ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS;
+            break;
+        case ITEM_SPAWN_MODE_FALL_SPAWN_ALWAYS:
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_800000;
+            break;
+        case ITEM_SPAWN_MODE_FALL_NEVER_VANISH:
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_800000 | ITEM_ENTITY_FLAGS_400 | ITEM_ENTITY_FLAGS_NEVER_VANISH;
+            itemEntity->spawnType = ITEM_SPAWN_MODE_FALL_SPAWN_ALWAYS;
+            break;
+        case ITEM_SPAWN_MODE_FALL:
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_800000 | ITEM_ENTITY_FLAGS_400;
+            itemEntity->spawnType = ITEM_SPAWN_MODE_FALL_SPAWN_ALWAYS;
+            break;
+        case ITEM_SPAWN_MODE_FALL_SPAWN_ONCE:
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_800000 | ITEM_ENTITY_FLAGS_800;
+            itemEntity->spawnType = ITEM_SPAWN_MODE_FALL_SPAWN_ALWAYS;
+            break;
+        case ITEM_SPAWN_MODE_FIXED_SPAWN_ALWAYS:
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_800000 | ITEM_ENTITY_FLAGS_FIXED;
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_10000000;
+            break;
+        case ITEM_SPAWN_MODE_FIXED_NEVER_VANISH:
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_800000 | ITEM_ENTITY_FLAGS_FIXED | ITEM_ENTITY_FLAGS_400 | ITEM_ENTITY_FLAGS_NEVER_VANISH;
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_10000000;
+            itemEntity->spawnType = ITEM_SPAWN_MODE_FIXED_SPAWN_ALWAYS;
+            break;
+        case ITEM_SPAWN_MODE_FIXED:
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_800000 | ITEM_ENTITY_FLAGS_FIXED | ITEM_ENTITY_FLAGS_400;
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_10000000;
+            itemEntity->spawnType = ITEM_SPAWN_MODE_FIXED_SPAWN_ALWAYS;
+            break;
+        case ITEM_SPAWN_MODE_FIXED_SPAWN_ALWAYS_NEVER_VANISH:
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_800000 | ITEM_ENTITY_FLAGS_FIXED | ITEM_ENTITY_FLAGS_NEVER_VANISH;
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_10000000;
+            itemEntity->spawnType = ITEM_SPAWN_MODE_FIXED_SPAWN_ALWAYS;
+            break;
+        case ITEM_SPAWN_MODE_TOSS_FADE1:
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_800000 | ITEM_ENTITY_FLAGS_1000;
+            itemEntity->scale = 0.8f;
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_TINY;
+            break;
+        case ITEM_SPAWN_MODE_TOSS_FADE2:
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_800000 | ITEM_ENTITY_FLAGS_1000;
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_10000;
+            itemEntity->spawnType = ITEM_SPAWN_MODE_TOSS_FADE1;
+            itemEntity->scale = 0.8f;
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_TINY;
+            break;
+        case ITEM_SPAWN_MODE_TOSS_FADE3:
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_800000 | ITEM_ENTITY_FLAGS_1000;
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_400000;
+            itemEntity->spawnType = ITEM_SPAWN_MODE_TOSS_FADE1;
+            itemEntity->scale = 0.8f;
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_TINY;
+            break;
+        case ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS_SMALL:
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_800000;
+            itemEntity->spawnType = ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS;
+            itemEntity->scale = 0.8f;
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_TINY;
+            break;
+        case ITEM_SPAWN_MODE_UNKNOWN_1B:
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_800000 | ITEM_ENTITY_FLAGS_8000;
+            itemEntity->spawnType = ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS;
+            itemEntity->scale = 0.8f;
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_TINY;
+            break;
+        case ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS:
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_800000 | ITEM_ENTITY_FLAGS_8000 | ITEM_ENTITY_FLAGS_NEVER_VANISH;
+            break;
+        case ITEM_SPAWN_MODE_ITEM_BLOCK_COIN:
+            itemEntity->spawnType = ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS;
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_800000 | ITEM_ENTITY_FLAGS_8000 | ITEM_ENTITY_FLAGS_400 | ITEM_ENTITY_FLAGS_NEVER_VANISH;
+            break;
+        case ITEM_SPAWN_MODE_TOSS_HIGHER_NEVER_VANISH:
+            itemEntity->spawnType = ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS;
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_800000 | ITEM_ENTITY_FLAGS_400 | ITEM_ENTITY_FLAGS_NEVER_VANISH;
+            itemEntity->flags |= ITEM_ENTITY_FLAGS_1000000;
+            break;
+    }
+
+    switch (itemEntity->spawnType) {
+        case ITEM_SPAWN_MODE_NOTHING:
+        case ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS:
+        case ITEM_SPAWN_MODE_FALL_SPAWN_ALWAYS:
+        case ITEM_SPAWN_MODE_FIXED_SPAWN_ALWAYS:
+        case ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS:
+            itemEntity->shadowIndex = create_shadow_type(0, itemEntity->position.x, itemEntity->position.y, itemEntity->position.z);
+            shadow = get_shadow_by_index(itemEntity->shadowIndex);
+
+            if (itemEntity->spawnType == ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS) {
+                shadow->flags |= SHADOW_FLAGS_HIDDEN;
+            }
+
+            x = itemEntity->position.x;
+            y = itemEntity->position.y + 12.0f;
+            z = itemEntity->position.z;
+            hitDepth = 1000.0f;
+            npc_raycast_down_sides(0x20000, &x, &y, &z, &hitDepth);
+            shadow->position.x = x;
+            shadow->position.y = y;
+            shadow->position.z = z;
+            shadow->rotation.x = gGameStatusPtr->playerGroundTraceAngles.x;
+            shadow->rotation.y = 0.0f;
+            shadow->rotation.z = gGameStatusPtr->playerGroundTraceAngles.z;
+            set_standard_shadow_scale(shadow, hitDepth * 0.5f);
+            break;
+    }
+
+    if (itemEntity->pickupDelay != 0) {
+        item_entity_disable_shadow(itemEntity);
+    }
+
+    item_entity_load(itemEntity);
+
+    if (itemEntity->itemID == ITEM_COIN) {
+        sparkle_script_init(itemEntity, &SparkleScript_Coin);
+        sparkle_script_update(itemEntity);
+    }
+
+    if (itemEntity->itemID == ITEM_STAR_PIECE) {
+        itemEntity->flags &= ~ITEM_ENTITY_FLAGS_80;
+    }
+
+    return id;
+}
 
 s32 make_item_entity_nodelay(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pickupVar) {
     return make_item_entity(itemID, x, y, z, itemSpawnMode, 0, -1, pickupVar);
@@ -321,6 +671,9 @@ s32 make_item_entity_at_player(s32 itemID, s32 arg1, s32 pickupMsgFlags) {
     }
     return id;
 }
+
+//TODO remove this
+static const f32 rodata_padding_2 = 0.0f;
 
 INCLUDE_ASM(s32, "C50A0", item_entity_update);
 
@@ -455,11 +808,11 @@ void draw_item_entities_UI(void) {
             if (itemEntity != NULL && itemEntity->flags != 0) {
                 switch (itemEntity->spawnType) {
                     case ITEM_SPAWN_MODE_NOTHING:
-                        func_801356C4();
+                        func_801356C4(itemEntity);
                         break;
                     case ITEM_SPAWN_MODE_DECORATION:
                     case ITEM_SPAWN_MODE_INVISIBLE:
-                        func_801356D4();
+                        func_801356D4(itemEntity);
                         break;
                     case ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS:
                     case ITEM_SPAWN_MODE_FALL_SPAWN_ALWAYS:
@@ -533,12 +886,12 @@ void func_80133A94(s32 idx, s32 itemID) {
 
     item->itemID = itemID;
 
-    item->flags |= ENTITY_FLAGS_4000;
-    item->flags &= ~ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE2;
+    item->flags |= ITEM_ENTITY_FLAGS_TINY;
+    item->flags &= ~ITEM_ENTITY_FLAGS_40000;
 
     if (gItemTable[itemID].typeFlags & ITEM_TYPE_FLAG_ENTITY_FULLSIZE) {
-        item->flags |= ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE2;
-        item->flags &= ~ENTITY_FLAGS_4000;
+        item->flags |= ITEM_ENTITY_FLAGS_40000;
+        item->flags &= ~ITEM_ENTITY_FLAGS_TINY;
     }
 
     item_entity_load(item);
@@ -712,19 +1065,19 @@ s32 test_item_entity_position(f32 x, f32 y, f32 z, f32 dist) {
             continue;
         }
 
-        if (item->spawnType == ENTITY_TYPE_SHADOW) {
+        if (item->spawnType == ITEM_SPAWN_MODE_DECORATION) {
             continue;
         }
 
-        if (item->spawnType == ENTITY_TYPE_2) {
+        if (item->spawnType == ITEM_SPAWN_MODE_INVISIBLE) {
             continue;
         }
 
-        if (item->flags & ENTITY_FLAGS_CONTINUOUS_COLLISION) {
+        if (item->flags & ITEM_ENTITY_FLAGS_40) {
             continue;
         }
 
-        if (item->flags & ENTITY_FLAGS_200000) {
+        if (item->flags & ITEM_ENTITY_FLAGS_200000) {
             continue;
         }
 
@@ -742,7 +1095,7 @@ void set_item_entity_flags(s32 index, s32 flags) {
     ItemEntity* itemEntity = gCurrentItemEntities[index];
 
     itemEntity->flags |= flags;
-    if (itemEntity->flags & ENTITY_FLAGS_200000) {
+    if (itemEntity->flags & ITEM_ENTITY_FLAGS_200000) {
         D_801565A8 = 1;
     }
 }
@@ -756,7 +1109,7 @@ void clear_item_entity_flags(s32 index, s32 flags) {
 void func_801341B0(s32 index) {
     ItemEntity* itemEntity = gCurrentItemEntities[index];
     gOverrideFlags |= GLOBAL_OVERRIDES_40;
-    itemEntity->flags |= ENTITY_FLAGS_100;
+    itemEntity->flags |= ITEM_ENTITY_FLAGS_100;
 }
 
 /// @returns TRUE when "you got X" popup is on-screen
@@ -821,22 +1174,190 @@ void update_item_entity_static(ItemEntity* itemEntity) {
     }
 }
 
-void func_801356C4(void) {
+void func_801356C4(ItemEntity* itemEntity) {
 }
 
 void func_801356CC(ItemEntity* itemEntity) {
 }
 
-void func_801356D4(void) {
+void func_801356D4(ItemEntity* itemEntity) {
 }
 
 INCLUDE_ASM(s32, "C50A0", update_item_entity_temp);
 
+
+#ifdef NON_EQUIVALENT
+void func_801363A0(ItemEntity* itemEntity) {
+    ItemData* itemData = &gItemTable[itemEntity->itemID];
+    s32 itemMsg;
+    s32 offsetY;
+    s32 s1;
+    s32 temp;
+    s32 s3;
+    s32 temp2;
+    s32 v1;
+
+    switch (itemEntity->state) {
+        case 2:
+        case 10:
+            if (!(itemData->typeFlags & ITEM_TYPE_FLAG_BADGE)) {
+                if (!(itemEntity->flags & ITEM_ENTITY_FLAGS_4000000) || (itemEntity->pickupMsgFlags & 0x4)) {
+                    itemMsg = MESSAGE_ID(0x1D, 0x058);
+                } else {
+                    itemMsg = MESSAGE_ID(0x1D, 0x05A);
+                }
+
+                if (itemEntity->pickupMsgFlags & 0x10) {
+                    itemMsg = MESSAGE_ID(0x1D, 0x05D);
+                }
+                if (itemEntity->pickupMsgFlags & 0x20) {
+                    itemMsg = MESSAGE_ID(0x1D, 0x05E);
+                }
+                if (itemEntity->pickupMsgFlags & 0x40) {
+                    itemMsg = MESSAGE_ID(0x1D, 0x05C);
+                }
+
+                set_message_msg(itemData->nameMsg, 0);
+
+                if (!(gItemTable[itemEntity->itemID].typeFlags & ITEM_TYPE_FLAG_KEY) &&
+                    itemEntity->itemID != ITEM_STAR_PIECE &&
+                    !(gItemTable[itemEntity->itemID].typeFlags & ITEM_TYPE_FLAG_GEAR) &&
+                    !(itemEntity->pickupMsgFlags & 0x30)) {
+                    offsetY = get_msg_width(itemMsg, 0) + 54;
+                } else {
+                    offsetY = get_msg_width(itemMsg, 0) + 30;
+                }
+                s1 = 160 - offsetY / 2;
+                s3 = 0x4C;
+            } else {
+                if (!(itemEntity->flags & ITEM_ENTITY_FLAGS_4000000) || (itemEntity->pickupMsgFlags & 0x4)) {
+                    itemMsg = MESSAGE_ID(0x1D, 0x059);
+                } else {
+                    itemMsg = MESSAGE_ID(0x1D, 0x05B);
+                }
+
+                if (itemEntity->pickupMsgFlags & 0x10) {
+                    itemMsg = MESSAGE_ID(0x1D, 0x05D);
+                }
+                if (itemEntity->pickupMsgFlags & 0x20) {
+                    itemMsg = MESSAGE_ID(0x1D, 0x05E);
+                }
+                if (itemEntity->pickupMsgFlags & 0x40) {
+                    itemMsg = MESSAGE_ID(0x1D, 0x05C);
+                }
+
+                set_message_msg(itemData->nameMsg, 0);
+                offsetY = get_msg_width(itemMsg, 0) + 30;
+                s1 = 160 - offsetY / 2;
+                s3 = 0x4C;
+            }
+            temp2 = D_8014C6E0[get_msg_lines(itemMsg) - 1];
+            if (itemEntity->state != 2) {
+                temp = 0x1C;
+            } else {
+                temp = 0;
+            }
+            if (gItemTable[itemEntity->itemID].typeFlags) {
+                set_window_properties(0xC, s1, s3 - 0x18 + temp, offsetY,
+                                    temp2, 0, func_8013673C, itemEntity, -1);
+            } else {
+                set_window_properties(0xC, s1, s3 - 0x18 + temp, offsetY,
+                                    temp2, 0, func_8013673C, itemEntity, -1);
+            }
+            if (itemEntity->itemID != ITEM_STAR_PIECE && itemEntity->itemID != ITEM_COIN) {
+                set_window_properties(0x13, 0x14, 0xBA, 0x118, 0x20, NULL, func_80136A08, itemEntity, -1);
+            }
+            if (itemEntity->state != 2) {
+                offsetY = get_msg_width(MESSAGE_ID(0x1D, 0x060), 0) + 0x18;
+                set_window_properties(0x11, 160 - offsetY / 2, 0x24, offsetY, 40, NULL, func_801369D0, itemEntity, -1);
+            }
+            break;
+        case 12:
+            set_message_msg(itemData->nameMsg, 0);
+            offsetY = get_msg_width(MESSAGE_ID(0x1D, 0x05F), 0) + 0x36;
+            set_window_properties(0xC, 160 - offsetY / 2, 0x4C, offsetY, 40, NULL, func_8013673C, itemEntity, -1);
+            break;
+    }
+}
+#else
 INCLUDE_ASM(s32, "C50A0", func_801363A0);
+#endif
 
-INCLUDE_ASM(s32, "C50A0", func_8013673C);
+void func_8013673C(ItemEntity* itemEntity, s32 posX, s32 posY) {
+    ItemData* itemData = &gItemTable[itemEntity->itemID];
+    s32 itemMsg;
+    s32 offsetY;
 
-void func_801369D0(s32 arg1, s32 x, s32 y) {
+    switch (itemEntity->state) {
+        case 2:
+        case 3:
+        case 10:
+        case 11:
+            if (!(itemData->typeFlags & ITEM_TYPE_FLAG_BADGE)) {
+                if (!(itemEntity->flags & ITEM_ENTITY_FLAGS_4000000) || (itemEntity->pickupMsgFlags & 0x4)) {
+                    itemMsg = MESSAGE_ID(0x1D, 0x058);
+                } else {
+                    itemMsg = MESSAGE_ID(0x1D, 0x05A);
+                }
+                set_message_msg(itemData->nameMsg, 0);
+
+                if (itemEntity->pickupMsgFlags & 0x10) {
+                    itemMsg = MESSAGE_ID(0x1D, 0x05D);
+                }
+                if (itemEntity->pickupMsgFlags & 0x20) {
+                    itemMsg = MESSAGE_ID(0x1D, 0x05E);
+                }
+                if (itemEntity->pickupMsgFlags & 0x40) {
+                    itemMsg = MESSAGE_ID(0x1D, 0x05C);
+                }
+            } else {
+                if (!(itemEntity->flags & ITEM_ENTITY_FLAGS_4000000) || (itemEntity->pickupMsgFlags & 0x4)) {
+                    itemMsg = MESSAGE_ID(0x1D, 0x059);
+                } else {
+                    itemMsg = MESSAGE_ID(0x1D, 0x05B);
+                }
+
+                if (itemEntity->pickupMsgFlags & 0x10) {
+                    itemMsg = MESSAGE_ID(0x1D, 0x05D);
+                }
+                if (itemEntity->pickupMsgFlags & 0x20) {
+                    itemMsg = MESSAGE_ID(0x1D, 0x05E);
+                }
+                if (itemEntity->pickupMsgFlags & 0x40) {
+                    itemMsg = MESSAGE_ID(0x1D, 0x05C);
+                }
+
+                set_message_msg(itemData->nameMsg, 0);
+            }
+
+            offsetY = D_8014C6E4[get_msg_lines(itemMsg) - 1];
+
+            if ((gItemTable[itemEntity->itemID].typeFlags & ITEM_TYPE_FLAG_BADGE) ||
+                (gItemTable[itemEntity->itemID].typeFlags & ITEM_TYPE_FLAG_KEY) ||
+                itemEntity->itemID == ITEM_STAR_PIECE ||
+                (gItemTable[itemEntity->itemID].typeFlags & ITEM_TYPE_FLAG_GEAR) ||
+                (itemEntity->pickupMsgFlags & 0x30)) {
+
+                draw_msg(itemMsg, posX + 15, posY + offsetY, 255, 47, 0);
+            } else {
+                draw_msg(itemMsg, posX + 40, posY + offsetY, 255, 47, 0);
+                if (!(itemEntity->pickupMsgFlags & 0x30)) {
+                    hud_element_set_render_pos(D_801568E0, posX + 20, posY + 20);
+                    hud_element_draw_next(D_801568E0);
+                }
+            }
+            break;
+        case 13:
+        case 14:
+            set_message_msg(gItemTable[D_801568EC].nameMsg, 0);
+            draw_msg(MESSAGE_ID(0x1D, 0x05F), posX + 40, posY + 4, 255, 47, 0);
+            hud_element_set_render_pos(D_801568E0, posX + 20, posY + 20);
+            hud_element_draw_next(D_801568E0);
+            break;
+    }
+}
+
+void func_801369D0(ItemEntity* itemEntity, s32 x, s32 y) {
     draw_msg(MESSAGE_ID(0x1D,0x060), x + 12, y + 4, 255, 52, 0);
 }
 
@@ -854,3 +1375,6 @@ void func_80136A08(ItemEntity* itemEntity, s32 posX, s32 posY) {
             break;
     }
 }
+
+// TODO remove this
+static const f32 rodata_padding[] = { 0.0f, 0.0f };

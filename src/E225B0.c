@@ -14,20 +14,10 @@ typedef struct struct802B7C78 {
     /* 0x28 */ s32 unk_28;
 } struct802B7C78;
 
-typedef struct UnknownCommand {
-    /* 0x00 */ Matrix4f* unk_00;
-    /* 0x04 */ Matrix4f* unk_04;
-    /* 0x08 */ s16 unk_08;
-    /* 0x0A */ s16 unk_0A;
-    /* 0x0C */ s16 unk_0C;
-    /* 0x0E */ s16 unk_0E;
-    /* 0x10 */ u8 unk_10;
-} UnknownCommand; // TODO remove this. it's FoldImageRecPart
-
-extern Matrix4f D_802B7580_E22B30;
-extern Matrix4f D_802B7BA0_E23150;
-extern Matrix4f D_802B7BC0_E23170;
-extern Matrix4f D_802B7BE0_E23190;
+extern u8 D_802B7580_E22B30[];
+extern u8 D_802B7BA0_E23150[];
+extern u8 D_802B7BC0_E23170[];
+extern u8 D_802B7BE0_E23190[];
 extern Gfx D_802B7C00_E231B0[];
 
 extern void (*D_8010C93C)(void);
@@ -38,7 +28,7 @@ void func_802B735C_E2290C(void);
 void func_802B7000_E225B0(void) {
     Matrix4f matrix1;
     Matrix4f matrix2;
-    UnknownCommand command;
+    FoldImageRecPart foldImage;
 
     Gfx* oldMasterGfxPos;
     f32 scale;
@@ -71,31 +61,31 @@ void func_802B7000_E225B0(void) {
             case 1:
             case 2:
             case 3:
-                command.unk_04 = &D_802B7BA0_E23150;
+                foldImage.palette = D_802B7BA0_E23150;
                 break;
             case 4:
             case 5:
             case 6:
             case 7:
-                command.unk_04 = &D_802B7BC0_E23170;
+                foldImage.palette = D_802B7BC0_E23170;
                 break;
             case 8:
             case 9:
             case 10:
             case 11:
-                command.unk_04 = &D_802B7BE0_E23190;
+                foldImage.palette = D_802B7BE0_E23190;
                 break;
         }
         fold_update(0, 7, 0xFF, 0xFF, 0xFF, D_802B7C78_E23228->unk_28, 0);
 
-        command.unk_00 = &D_802B7580_E22B30;
-        command.unk_08 = 0x38;
-        command.unk_0A = 0x38;
-        command.unk_0C = -0x1C;
-        command.unk_0E = 0x2E;
-        command.unk_10 = 0xFF;
+        foldImage.raster = D_802B7580_E22B30;
+        foldImage.width = 56;
+        foldImage.height = 56;
+        foldImage.xOffset = -28;
+        foldImage.yOffset = 46;
+        foldImage.unk_10 = 255;
 
-        fold_appendGfx_component(0, &command, 0, &matrix2);
+        fold_appendGfx_component(0, &foldImage, 0, matrix2);
         gSPPopMatrix(gMasterGfxPos++, 0);
     }
 }

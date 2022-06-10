@@ -37,8 +37,8 @@ static HudScript* gPauseShownDescIconScript;
 static s32 gPauseTutorialSprites[3];
 
 static HudScript* gPauseIconScripts[] = {
-    &HudScript_AnimatedCursorHand, &HudScript_DescMsgPrev, &HudScript_DescMsgNext, &HudScript_UnusedBadge,
-    &HudScript_StickTapRight, &HudScript_PressAButton, &HudScript_PressStartButton, &HudScript_StartButtonText
+    &HES_AnimatedCursorHand, &HES_DescMsgPrev, &HES_DescMsgNext, &HES_UnusedBadge,
+    &HES_StickTapRight, &HES_PressAButton, &HES_PressStartButton, &HES_StartButtonText
 };
 MenuPanel* gPausePanels[] = {
     &gPausePanelTabs, &gPausePanelStats, &gPausePanelBadges, &gPausePanelItems, &gPausePanelPartners,
@@ -582,7 +582,7 @@ void pause_init(void) {
 
     for (i = 0; i < ARRAY_COUNT(gPauseIconScripts); i++) {
         gPauseCommonIconIDs[i] = hud_element_create(gPauseIconScripts[i]);
-        if (gPauseIconScripts[i] == &HudScript_AnimatedCursorHand) {
+        if (gPauseIconScripts[i] == &HES_AnimatedCursorHand) {
             hud_element_set_flags(gPauseCommonIconIDs[i], HUD_ELEMENT_FLAGS_DROP_SHADOW | HUD_ELEMENT_FLAGS_80);
         } else {
             hud_element_set_flags(gPauseCommonIconIDs[i], HUD_ELEMENT_FLAGS_80);

@@ -643,7 +643,7 @@ ApiStatus N(CreateMinigame)(Evt* script, s32 isInitialCall) {
     scorekeeper->varTablePtr[JUMP_DATA_VAR_IDX] = data;
     data->workerID = create_generic_entity_world(NULL, &mgm_01_work_draw_score);
 
-    hudElemID = hud_element_create(&HudScript_StatusCoin);
+    hudElemID = hud_element_create(&HES_StatusCoin);
     data->hudElemID = hudElemID;
     hud_element_set_flags(data->hudElemID, HUD_ELEMENT_FLAGS_80);
     hud_element_set_tint(data->hudElemID, 255, 255, 255);

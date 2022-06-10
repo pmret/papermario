@@ -26,11 +26,11 @@ static s32 gPauseItemsIconIDs[20];
 #define ITEM_INVALID 0x7FFF
 
 HudScript* gPauseItemsElements[] = {
-    &HudScript_StatBp, &HudScript_StatBp, &HudScript_StatBp, &HudScript_StatBp, &HudScript_StatBp,
-    &HudScript_StatBp, &HudScript_StatBp, &HudScript_StatBp, &HudScript_StatBp, &HudScript_StatBp,
-    &HudScript_StatBp, &HudScript_StatBp, &HudScript_StatBp, &HudScript_StatBp, &HudScript_StatBp,
-    &HudScript_StatBp, &HudScript_ListPrevPage, &HudScript_ListNextPage, &HudScript_Dash,
-    &HudScript_StatusStar1
+    &HES_StatBp, &HES_StatBp, &HES_StatBp, &HES_StatBp, &HES_StatBp,
+    &HES_StatBp, &HES_StatBp, &HES_StatBp, &HES_StatBp, &HES_StatBp,
+    &HES_StatBp, &HES_StatBp, &HES_StatBp, &HES_StatBp, &HES_StatBp,
+    &HES_StatBp, &HES_ListPrevPage, &HES_ListNextPage, &HES_Dash,
+    &HES_StatusStar1
 };
 MenuWindowBP gPauseItemsWindowBPs[] = {
     {

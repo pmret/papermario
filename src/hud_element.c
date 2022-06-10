@@ -19,7 +19,7 @@ typedef struct HudCacheEntry {
 u8* gHudElementAuxCache = NULL;
 s32 gHudElementCacheCapacity = 0x11000;
 
-HudScript HudScript_Empty = {
+HudScript HES_Empty = {
     hs_End
 };
 
@@ -726,7 +726,7 @@ s32 hud_element_create(HudScript* anim) {
     hudElement->flags = HUD_ELEMENT_FLAGS_INITIALIZED;
     hudElement->readPos = anim;
     if (anim == NULL) {
-        hudElement->readPos = &HudScript_Empty;
+        hudElement->readPos = &HES_Empty;
     }
     hudElement->updateTimer = 1;
     hudElement->drawSizePreset = -1;
@@ -1657,9 +1657,7 @@ void render_hud_elements_world(void) {
                     gDPPipeSync(gMasterGfxPos++);
                     gSPClearGeometryMode(gMasterGfxPos++, G_ZBUFFER | G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH);
                     gSPSetGeometryMode(gMasterGfxPos++, G_ZBUFFER | G_SHADE | G_LIGHTING | G_SHADING_SMOOTH);
-                    gSPNumLights(gMasterGfxPos++, 1);
-                    gSPLight(gMasterGfxPos++, &D_8014F108.l, 1);
-                    gSPLight(gMasterGfxPos++, &D_8014F108.a, 2);
+                    gSPSetLights1(gMasterGfxPos++, D_8014F108);
                     gSPTexture(gMasterGfxPos++, -1, -1, 0, G_TX_RENDERTILE, G_ON);
                     gDPSetAlphaCompare(gMasterGfxPos++, G_AC_NONE);
                     gSPSetOtherMode(gMasterGfxPos++, G_SETOTHERMODE_H, G_MDSFT_ALPHADITHER, 18, G_AD_DISABLE | G_CD_DISABLE | G_CK_NONE | G_TC_FILT | G_TF_BILERP | G_TT_NONE | G_TL_TILE | G_TD_CLAMP | G_TP_PERSP | G_CYC_1CYCLE);
@@ -1707,9 +1705,7 @@ void render_hud_elements_world(void) {
                     gDPPipeSync(gMasterGfxPos++);
                     gSPClearGeometryMode(gMasterGfxPos++, G_ZBUFFER | G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH);
                     gSPSetGeometryMode(gMasterGfxPos++, G_ZBUFFER | G_SHADE | G_LIGHTING | G_SHADING_SMOOTH);
-                    gSPNumLights(gMasterGfxPos++, 1);
-                    gSPLight(gMasterGfxPos++, &D_8014F108.l, 1);
-                    gSPLight(gMasterGfxPos++, &D_8014F108.a, 2);
+                    gSPSetLights1(gMasterGfxPos++, D_8014F108);
                     gSPTexture(gMasterGfxPos++, -1, -1, 0, G_TX_RENDERTILE, G_ON);
                     gDPSetAlphaCompare(gMasterGfxPos++, G_AC_NONE);
                     gSPSetOtherMode(gMasterGfxPos++, G_SETOTHERMODE_H, G_MDSFT_ALPHADITHER, 18, G_AD_DISABLE | G_CD_DISABLE | G_CK_NONE | G_TC_FILT | G_TF_BILERP | G_TT_NONE | G_TL_TILE | G_TD_CLAMP | G_TP_PERSP | G_CYC_1CYCLE);
@@ -1932,7 +1928,7 @@ void hud_element_set_script(s32 id, HudScript* anim) {
     HudElement* hudElement = (*gHudElements)[id & ~HUD_ELEMENT_BATTLE_ID_MASK];
 
     if (anim == NULL) {
-        anim = &HudScript_Empty;
+        anim = &HES_Empty;
     }
 
     hudElement->updateTimer = 1;

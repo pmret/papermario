@@ -3,9 +3,9 @@
 
 #define NAMESPACE action_command_stop_leech
 
-extern HudScript HudScript_MashAButton;
-extern HudScript HudScript_BlueMeter;
-extern HudScript HudScript_AButton;
+extern HudScript HES_MashAButton;
+extern HudScript HES_BlueMeter;
+extern HudScript HES_AButton;
 extern s32 D_80294260;
 
 ApiStatus func_802A9000_425590(Evt* script, s32 isInitialCall) {
@@ -29,13 +29,13 @@ ApiStatus func_802A9000_425590(Evt* script, s32 isInitialCall) {
     actionCommandStatus->unk_48 = 0;
     actionCommandStatus->hudElementY = 80;
 
-    hudElement = hud_element_create(&HudScript_AButton);
+    hudElement = hud_element_create(&HES_AButton);
     actionCommandStatus->hudElements[0] = hudElement;
     hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
     hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
     hud_element_set_render_depth(hudElement, 0);
 
-    hudElement = hud_element_create(&HudScript_BlueMeter);
+    hudElement = hud_element_create(&HES_BlueMeter);
     actionCommandStatus->hudElements[1] = hudElement;
     hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
     hud_element_set_render_depth(hudElement, 0);
@@ -106,7 +106,7 @@ void func_802A91F8_425788(void) {
                 actionCommandStatus->unk_4E -= 1;
                 break;
             }
-            hud_element_set_script(actionCommandStatus->hudElements[0], &HudScript_MashAButton);
+            hud_element_set_script(actionCommandStatus->hudElements[0], &HES_MashAButton);
             actionCommandStatus->barFillLevel = 0;
             actionCommandStatus->state = 11;
             actionCommandStatus->unk_54 = actionCommandStatus->unk_52;

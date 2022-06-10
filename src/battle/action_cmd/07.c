@@ -5,10 +5,10 @@
 
 extern s32 D_80294280;
 extern s32 D_802A9620;
-extern HudScript HudScript_BlueMeter;
-extern HudScript HudScript_AButton;
-extern HudScript HudScript_MashAButton;
-extern HudScript HudScript_RunAwayOK;
+extern HudScript HES_BlueMeter;
+extern HudScript HES_AButton;
+extern HudScript HES_MashAButton;
+extern HudScript HES_RunAwayOK;
 
 s32 func_8024FAFC(s32);
 
@@ -32,7 +32,7 @@ ApiStatus func_802A9000_425B50(Evt* script, s32 isInitialCall) {
     D_802A9620 = 0;
     actionCommandStatus->hudElementY = 80;
 
-    hudElement = hud_element_create(&HudScript_AButton);
+    hudElement = hud_element_create(&HES_AButton);
     actionCommandStatus->hudElements[0] = hudElement;
     hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
     hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX,
@@ -40,7 +40,7 @@ ApiStatus func_802A9000_425B50(Evt* script, s32 isInitialCall) {
     hud_element_set_render_depth(hudElement, 0);
 
     // Weird use of an extra temp settles regalloc here.
-    hudElementTemp = hud_element_create(&HudScript_BlueMeter);
+    hudElementTemp = hud_element_create(&HES_BlueMeter);
     hudElement = hudElementTemp;
     actionCommandStatus->hudElements[1] = hudElement;
     hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX,
@@ -48,7 +48,7 @@ ApiStatus func_802A9000_425B50(Evt* script, s32 isInitialCall) {
     hud_element_set_render_depth(hudElement, 0);
     hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
-    hudElement = hud_element_create(&HudScript_RunAwayOK);
+    hudElement = hud_element_create(&HES_RunAwayOK);
     actionCommandStatus->hudElements[2] = hudElement;
     hud_element_set_render_pos(hudElement, actionCommandStatus->hudElementX,
         actionCommandStatus->hudElementY + 28);
@@ -132,7 +132,7 @@ void func_802A9228_425D78(void) {
                 return;
             }
 
-            hud_element_set_script(actionCommandStatus->hudElements[0], &HudScript_MashAButton);
+            hud_element_set_script(actionCommandStatus->hudElements[0], &HES_MashAButton);
             battleStatus->actionSuccess = 0;
             D_802A9620 = 1;
             actionCommandStatus->unk_5D = 0;

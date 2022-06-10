@@ -745,7 +745,7 @@ s32 create_generic_entity_world(WorldArgs, WorldArgs);
 EntityModel* get_entity_model(s32 idx);
 f32 phys_get_spin_history(s32 lag, s32* x, s32* y, s32* z);
 void fold_update(u32, s32, s32, s32, s32, s32, s32);
-s32 fold_appendGfx_component(s32 idx, FoldImageRecPart* image, u32 flagBits, Matrix4f mtx);
+s32 fold_appendGfx_component(s32, FoldImageRecPart*, u32, Matrix4f);
 s32 func_8013A704(s32);
 void free_generic_entity(s32);
 
@@ -816,7 +816,7 @@ void show_foreground_models(void);
 void hide_foreground_models(void);
 void btl_set_state(s32 battleState);
 void draw_entity_model_A(s32, Mtx*);
-void draw_entity_model_B(s32, Mtx*, s32, s32);
+void draw_entity_model_B(s32, Mtx*, s32, Vec3s*);
 void draw_entity_model_C(s32, Mtx*);
 void draw_entity_model_D(s32, Mtx*, s32, Vtx*);
 void draw_entity_model_E(s32, Mtx*);

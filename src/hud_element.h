@@ -197,10 +197,10 @@ typedef struct HudElement {
 
 typedef HudElement* HudElementList[320];
 
-extern HudScript HudScript_AnimatedHandPointer;
-extern HudScript HudScript_StatusCoin;
-extern HudScript HudScript_Refund;
-extern HudScript HudScript_MenuTimes;
+extern HudScript HES_AnimatedHandPointer;
+extern HudScript HES_StatusCoin;
+extern HudScript HES_Refund;
+extern HudScript HES_MenuTimes;
 
 extern s32 gPartnerPopupProperties[13][4];
 extern HudScript* wDisabledPartnerHudScripts[];
@@ -209,8 +209,9 @@ extern HudScript* wPartnerHudScripts[];
 #define HS_PTR(sym)         (s32)&sym
 
 #define hs_End HUD_ELEMENT_OP_End,
-#define hs_SetRGBA(arg0, image) HUD_ELEMENT_OP_SetRGBA, arg0, (s32)image,
-#define hs_SetCI(arg0, raster, palette) HUD_ELEMENT_OP_SetCI, arg0, (s32)raster, (s32)palette,
+#define hs_SetRGBA(time, image) HUD_ELEMENT_OP_SetRGBA, time, (s32)image,
+#define hs_SetCI(time, name) HUD_ELEMENT_OP_SetCI, time, (s32)name##_png, (s32)name##_pal,
+#define hs_SetCI_Explicit(time, raster, palette) HUD_ELEMENT_OP_SetCI, time, (s32)raster##_png, (s32)palette##_pal,
 #define hs_Restart HUD_ELEMENT_OP_Restart,
 #define hs_Loop HUD_ELEMENT_OP_Loop,
 #define hs_SetTileSize(size) HUD_ELEMENT_OP_SetTileSize, size,
@@ -238,6 +239,28 @@ extern HudScript* wPartnerHudScripts[];
 #define hs_ClearFlags(arg0) HUD_ELEMENT_OP_ClearFlags, arg0,
 #define hs_PlaySound(arg0) HUD_ELEMENT_OP_PlaySound, arg0,
 #define hs_SetPivot(arg0, arg1) HUD_ELEMENT_OP_SetPivot, arg0, arg1,
+
+/// Basic HudScript used for static CI images, setting size with hs_SetTileSize
+#define HES_TEMPLATE_CI_ENUM_SIZE(name, sizeX, sizeY) \
+    { \
+		hs_SetVisible \
+		hs_SetTileSize(HUD_ELEMENT_SIZE_##sizeX##x##sizeY) \
+		hs_Loop \
+			hs_SetCI(60, name) \
+		hs_Restart \
+		hs_End \
+    }
+
+/// Basic HudScript used for static CI images, setting size with hs_SetCustomSize
+#define HES_TEMPLATE_CI_CUSTOM_SIZE(name, sizeX, sizeY) \
+    { \
+		hs_SetVisible \
+		hs_SetCustomSize(sizeX, sizeY) \
+		hs_Loop \
+			hs_SetCI(60, name) \
+		hs_Restart \
+		hs_End \
+    }
 
 void hud_element_load_script(HudElement* hudElement, HudScript* anim);
 

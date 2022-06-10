@@ -20,7 +20,7 @@
 		hs_End \
     }
 
-HudScript HudScript_HandPointDownLoop = {
+HudScript HES_HandPointDownLoop = {
 	hs_SetVisible
 	hs_SetTileSize(HUD_ELEMENT_SIZE_24x24)
 	hs_Loop
@@ -48,7 +48,7 @@ HudScript HudScript_HandPointDownLoop = {
 	hs_End
 };
 
-HudScript HudScript_HandPointDown = {
+HudScript HES_HandPointDown = {
 	hs_SetVisible
 	hs_SetTileSize(HUD_ELEMENT_SIZE_24x24)
 	hs_SetTexelOffset(0, -1)
@@ -72,7 +72,7 @@ HudScript HudScript_HandPointDown = {
 	hs_End
 };
 
-HudScript HudScript_HandPointDownHeld = {
+HudScript HES_HandPointDownHeld = {
 	hs_SetVisible
 	hs_SetTileSize(HUD_ELEMENT_SIZE_24x24)
 	hs_Loop
@@ -81,7 +81,7 @@ HudScript HudScript_HandPointDownHeld = {
 	hs_End
 };
 
-HudScript HudScript_HandPointLeftLoop = {
+HudScript HES_HandPointLeftLoop = {
 	hs_SetVisible
 	hs_SetTileSize(HUD_ELEMENT_SIZE_24x24)
 	hs_Loop
@@ -109,7 +109,7 @@ HudScript HudScript_HandPointLeftLoop = {
 	hs_End
 };
 
-HudScript HudScript_HandPointLeft = {
+HudScript HES_HandPointLeft = {
 	hs_SetVisible
 	hs_SetTileSize(HUD_ELEMENT_SIZE_24x24)
 	hs_SetTexelOffset(0, 0)
@@ -133,7 +133,7 @@ HudScript HudScript_HandPointLeft = {
 	hs_End
 };
 
-HudScript HudScript_HandPointLeftHeld = {
+HudScript HES_HandPointLeftHeld = {
 	hs_SetVisible
 	hs_SetTileSize(HUD_ELEMENT_SIZE_24x24)
 	hs_Loop
@@ -186,45 +186,45 @@ s32 pad8[] = {
     0x00000000, 0x00000000
 };
 
-extern HudScript HudScript_Partner0;
-extern HudScript HudScript_Goombario;
-extern HudScript HudScript_Kooper;
-extern HudScript HudScript_Bombette;
-extern HudScript HudScript_Parakarry;
-extern HudScript HudScript_Watt;
-extern HudScript HudScript_Sushie;
-extern HudScript HudScript_Lakilester;
-extern HudScript HudScript_Partner9;
-extern HudScript HudScript_Bow;
-extern HudScript HudScript_PartnerA;
-extern HudScript HudScript_PartnerB;
-extern HudScript HudScript_Partner0Disabled;
-extern HudScript HudScript_GoombarioDisabled;
-extern HudScript HudScript_KooperDisabled;
-extern HudScript HudScript_BombetteDisabled;
-extern HudScript HudScript_ParakarryDisabled;
-extern HudScript HudScript_WattDisabled;
-extern HudScript HudScript_SushieDisabled;
-extern HudScript HudScript_LakilesterDisabled;
-extern HudScript HudScript_Partner9Disabled;
-extern HudScript HudScript_BowDisabled;
-extern HudScript HudScript_PartnerADisabled;
-extern HudScript HudScript_PartnerBDisabled;
+extern HudScript HES_Partner0;
+extern HudScript HES_Goombario;
+extern HudScript HES_Kooper;
+extern HudScript HES_Bombette;
+extern HudScript HES_Parakarry;
+extern HudScript HES_Watt;
+extern HudScript HES_Sushie;
+extern HudScript HES_Lakilester;
+extern HudScript HES_Partner9;
+extern HudScript HES_Bow;
+extern HudScript HES_PartnerA;
+extern HudScript HES_PartnerB;
+extern HudScript HES_Partner0Disabled;
+extern HudScript HES_GoombarioDisabled;
+extern HudScript HES_KooperDisabled;
+extern HudScript HES_BombetteDisabled;
+extern HudScript HES_ParakarryDisabled;
+extern HudScript HES_WattDisabled;
+extern HudScript HES_SushieDisabled;
+extern HudScript HES_LakilesterDisabled;
+extern HudScript HES_Partner9Disabled;
+extern HudScript HES_BowDisabled;
+extern HudScript HES_PartnerADisabled;
+extern HudScript HES_PartnerBDisabled;
 
 IconHudScriptPair gPartnerIconHudScripts[] = {
-    { .enabled = &HudScript_Partner0, .disabled = &HudScript_Partner0Disabled, },
-    { .enabled = &HudScript_Goombario, .disabled = &HudScript_GoombarioDisabled, },
-    { .enabled = &HudScript_Kooper, .disabled = &HudScript_KooperDisabled, },
-    { .enabled = &HudScript_Bombette, .disabled = &HudScript_BombetteDisabled, },
-    { .enabled = &HudScript_Parakarry, .disabled = &HudScript_ParakarryDisabled, },
-    { .enabled = &HudScript_Bow, .disabled = &HudScript_BowDisabled, },
-    { .enabled = &HudScript_Watt, .disabled = &HudScript_WattDisabled, },
-    { .enabled = &HudScript_Sushie, .disabled = &HudScript_SushieDisabled, },
-    { .enabled = &HudScript_Lakilester, .disabled = &HudScript_LakilesterDisabled, },
-    { .enabled = &HudScript_Partner9, .disabled = &HudScript_Partner9Disabled, },
-    { .enabled = &HudScript_PartnerA, .disabled = &HudScript_PartnerADisabled, },
-    { .enabled = &HudScript_PartnerB, .disabled = &HudScript_PartnerBDisabled, },
-    { .enabled = &HudScript_PartnerB, .disabled = &HudScript_PartnerBDisabled },
+    { .enabled = &HES_Partner0, .disabled = &HES_Partner0Disabled, },
+    { .enabled = &HES_Goombario, .disabled = &HES_GoombarioDisabled, },
+    { .enabled = &HES_Kooper, .disabled = &HES_KooperDisabled, },
+    { .enabled = &HES_Bombette, .disabled = &HES_BombetteDisabled, },
+    { .enabled = &HES_Parakarry, .disabled = &HES_ParakarryDisabled, },
+    { .enabled = &HES_Bow, .disabled = &HES_BowDisabled, },
+    { .enabled = &HES_Watt, .disabled = &HES_WattDisabled, },
+    { .enabled = &HES_Sushie, .disabled = &HES_SushieDisabled, },
+    { .enabled = &HES_Lakilester, .disabled = &HES_LakilesterDisabled, },
+    { .enabled = &HES_Partner9, .disabled = &HES_Partner9Disabled, },
+    { .enabled = &HES_PartnerA, .disabled = &HES_PartnerADisabled, },
+    { .enabled = &HES_PartnerB, .disabled = &HES_PartnerBDisabled, },
+    { .enabled = &HES_PartnerB, .disabled = &HES_PartnerBDisabled },
 };
 
 #include "move_table.inc.c"
