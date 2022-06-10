@@ -299,7 +299,7 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
 
                         suggest_player_anim_clearUnkFlag(0x10007);
                         D_802BEC60 = 0;
-                        sfx_play_sound_at_npc(0x2081, 0, -4);
+                        sfx_play_sound_at_npc(SOUND_JUMP_2081, 0, -4);
                         script->functionTemp[0] = 2;
                     }
                 }
@@ -353,8 +353,8 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
                         script->functionTemp[0] = 3;
                         D_802BEC60 = 0;
                         gCameras->moveFlags |= CAMERA_FLAGS_1;
-                        sfx_play_sound_at_npc(0x283, 0, -4);
-                        sfx_play_sound_at_npc(0x284, 0, -4);
+                        sfx_play_sound_at_npc(SOUND_283, 0, -4);
+                        sfx_play_sound_at_npc(SOUND_284, 0, -4);
                     }
                 }
                 break;
@@ -370,7 +370,7 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
                                                            kooper->yaw - 20.0f, kooper->collisionHeight,
                                                            (kooper->collisionRadius / 2)) != 0) {
                         if (func_802BD100_31B120(kooper) == 0) {
-                            sfx_play_sound_at_npc(0x10C, 0, -4);
+                            sfx_play_sound_at_npc(SOUND_IMMUNE, 0, -4);
                         }
 
                         temp_f20_3 = sin_deg(kooper->yaw);
@@ -413,7 +413,7 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
 
                         if ((kooper->flags & 0x2000000) == 0) {
                             if (func_802BD17C_31B19C(kooper) != 0) {
-                                sfx_play_sound_at_npc(0x286, 0, -4);
+                                sfx_play_sound_at_npc(SOUND_286, 0, -4);
                                 temp_f20_3 = sin_deg(kooper->yaw);
                                 fx_damage_stars(3, kooper->pos.x, kooper->pos.y + kooper->collisionHeight, kooper->pos.z,
                                           temp_f20_3, -1.0f, -cos_deg(kooper->yaw), 1);
@@ -453,7 +453,7 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
                         }
                     } else {
                         if (func_802BD100_31B120(kooper) == 0) {
-                            sfx_play_sound_at_npc(0x10C, 0, -4);
+                            sfx_play_sound_at_npc(SOUND_IMMUNE, 0, -4);
                         }
 
                         temp_f20_3 = sin_deg(kooper->yaw);
@@ -532,7 +532,7 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
                     kooper->pos.x = sp20;
                     kooper->pos.y = sp24;
                     kooper->pos.z = sp28;
-                    sfx_play_sound_at_npc(0x10C, 0, -4);
+                    sfx_play_sound_at_npc(SOUND_IMMUNE, 0, -4);
                     temp_f20_3 = sin_deg(kooper->yaw + 180.0f);
                     fx_damage_stars(3, kooper->pos.x, kooper->pos.y + kooper->collisionHeight, kooper->pos.z,
                             temp_f20_3, -1.0f, -cos_deg(kooper->yaw + 180.0f), 1);

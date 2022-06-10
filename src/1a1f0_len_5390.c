@@ -93,7 +93,7 @@ ApiStatus FadeInMerlee(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(NPC_BTL_MERLEE);
 
     if (isInitialCall) {
-        sfx_play_sound(0x24B);
+        sfx_play_sound(SOUND_24B);
         npc->alpha = 0;
     }
 
@@ -130,7 +130,7 @@ ApiStatus MerleeUpdateFX(Evt* script, s32 isInitialCall) {
         D_800A0BAC = fx_energy_orb_wave(3, merlee->pos.x, merlee->pos.y, merlee->pos.z, 0.00001f, 0);
         D_800A0BB8 = 0;
         D_800A0BA0 = 12;
-        sfx_play_sound(0x2074);
+        sfx_play_sound(SOUND_2074);
     }
 
     merlee->pos.y = D_800A0BA4 + (sin_rad((script->functionTemp[1] * TAU) / 360.0f) * 3.0f);

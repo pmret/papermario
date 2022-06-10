@@ -454,7 +454,7 @@ void coin_counter_draw_content(UNK_TYPE arg0, s32 posX, s32 posY) {
     s32 iconIndex;
 
     if ((gPlayerData.coins != uiStatus->displayCoins) && ((gGameStatusPtr->frameCounter % 3) == 0)) {
-        sfx_play_sound(0x211);
+        sfx_play_sound(SOUND_211);
     }
 
     iconIndex = uiStatus->iconIndex10;
@@ -1200,7 +1200,7 @@ void add_SP(s32 amt) {
     PlayerData* playerData = &gPlayerData;
     UiStatus* uiStatus = &gUIStatus;
     s32 phi_v1;
-    s32 blah;
+    s32 maxPower;
 
     uiStatus->unk_57[0] = 1;
     uiStatus->unk_57[1] = 60;
@@ -1213,9 +1213,9 @@ void add_SP(s32 amt) {
 
     playerData->specialBarsFilled += amt;
 
-    blah = playerData->maxStarPower << 8;
-    if (playerData->specialBarsFilled > blah) {
-        playerData->specialBarsFilled = blah;
+    maxPower = playerData->maxStarPower << 8;
+    if (playerData->specialBarsFilled > maxPower) {
+        playerData->specialBarsFilled = maxPower;
     }
 
     gUIStatus.displaySP = gPlayerData.specialBarsFilled;

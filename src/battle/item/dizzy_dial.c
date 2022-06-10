@@ -21,7 +21,7 @@ ApiStatus N(func_802A1270_727B80)(Evt* script, s32 isInitialCall) {
         case 0:
             script->functionTemp[1] = 0;
             script->functionTemp[2] = 0;
-            sfx_play_sound(0x2033);
+            sfx_play_sound(SOUND_2033);
             camera->unk_1C = 0;
             D_802A1CD0 = create_generic_entity_frontUI(NULL, func_802A123C_727B4C);
             script->functionTemp[0] = 1;

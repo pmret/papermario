@@ -104,7 +104,7 @@ ApiStatus N(UnkFunc62)(Evt* script, s32 isInitialCall) {
             state->velocity = velocity + ((phi_f0 * phi_f2 * temp_f22_3) + temp_f22_3);
         }
         set_animation(ACTOR_SELF, 1, state->animJumpRise);
-        sfx_play_sound(0x2081);
+        sfx_play_sound(SOUND_JUMP_2081);
         script->functionTemp[0] = 1;
     }
 

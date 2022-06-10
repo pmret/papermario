@@ -1277,9 +1277,9 @@ void npc_update_decoration_sweat(Npc* npc, s32 idx) {
     switch (npc->decorationInitialised[idx]) {
         case 0:
             if (npc->yawCamOffset > 90) {
-                fx_sweat(0, npc->pos.x, npc->pos.y + npc->collisionHeight, npc->pos.z, 5.0f, 45.0f, 0x14);
+                fx_sweat(0, npc->pos.x, npc->pos.y + npc->collisionHeight, npc->pos.z, 5.0f, 45.0f, 20);
             } else {
-                fx_sweat(0, npc->pos.x, npc->pos.y + npc->collisionHeight, npc->pos.z, 5.0f, -45.0f, 0x14);
+                fx_sweat(0, npc->pos.x, npc->pos.y + npc->collisionHeight, npc->pos.z, 5.0f, -45.0f, 20);
             }
             npc->decorationUnk[idx] = 10;
             npc->decorationInitialised[idx] = 1;

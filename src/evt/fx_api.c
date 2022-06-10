@@ -67,12 +67,11 @@ ApiStatus func_802D7690(Evt* script, s32 isInitialCall) {
 
 ApiStatus ShowEmote(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    
     s32 npcID = evt_get_variable(script, *args++);
     s32 emoteType = evt_get_variable(script, *args++);
     f32 pitch = evt_get_float_variable(script, *args++);
     s32 duration = evt_get_variable(script, *args++);
-    s32 npcType = evt_get_variable(script, *args++);
+    s32 emoterType = evt_get_variable(script, *args++);
     f32 dX = evt_get_float_variable(script, *args++);
     f32 dY = evt_get_float_variable(script, *args++);
     f32 dZ = evt_get_float_variable(script, *args++);
@@ -82,7 +81,7 @@ ApiStatus ShowEmote(Evt* script, s32 isInitialCall) {
     s32 emoteHandle;
     f32 X, Y, Z, R;
     
-    switch (npcType) {
+    switch (emoterType) {
         case EMOTER_PLAYER:
             // show emote from player
             npc = (Npc*)-1;
@@ -133,21 +132,19 @@ ApiStatus func_802D7B10(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
+//TODO fix this!
 ApiStatus func_802D7B44(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32** ptrValue = (s32**) evt_get_variable(script, *args++);
-    s32* ptrTemp = ptrValue[3];
-
-    ptrTemp[5] = 10;
+    EffectInstance* effect = (EffectInstance*)evt_get_variable(script, *args++);
+    ((s32*)(effect->data))[5] = 10; // offset 0x14 in GotItemOutline effect data
     return ApiStatus_DONE2;
 }
 
+//TODO fix this!
 ApiStatus func_802D7B74(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32** ptrValue = (s32**) evt_get_variable(script, *args++);
-    s32* ptrTemp = ptrValue[3];
-
-    ptrTemp[12] = 5;
+    EffectInstance* effect = (EffectInstance*)evt_get_variable(script, *args++);
+    ((s32*)(effect->data))[12] = 5; // offset 0x30 in unknown effect data
     return ApiStatus_DONE2;
 }
 
@@ -211,11 +208,104 @@ ApiStatus SetMotionBlurParams(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "evt/fx_api", func_802D7E08);
+ApiStatus ShowSweat(Evt* script) {
+    Bytecode* args = script->ptrReadPos;
+    s32 npcID = evt_get_variable(script, *args++);
+    s32 type = evt_get_variable(script, *args++);
+    f32 pitch = evt_get_float_variable(script, *args++);
+    s32 emoterType = evt_get_variable(script, *args++);
+    f32 posX = evt_get_float_variable(script, *args++);
+    f32 posY = evt_get_float_variable(script, *args++);
+    f32 posZ = evt_get_float_variable(script, *args++);
+    f32 radius = evt_get_float_variable(script, *args++);
+    s32 duration = evt_get_variable(script, *args++);
 
-INCLUDE_ASM(ApiStatus, "evt/fx_api", ShowSleepBubble, Evt* script, s32 isInitialCall);
+    Npc* npc;
+    f32 X, Y, Z, R;
+    
+    switch (emoterType) {
+        case EMOTER_PLAYER:
+            X = gPlayerStatus.position.x;
+            Y = gPlayerStatus.position.y + (gPlayerStatus.colliderHeight * 2) / 3;
+            Z = gPlayerStatus.position.z;    
+            R = gPlayerStatus.colliderHeight / 3;
+            break;
+        case EMOTER_NPC:
+            npc = resolve_npc(script, npcID);
+            if (npc == NULL) {
+                return ApiStatus_DONE2;
+            }
+            X = npc->pos.x;
+            Y = npc->pos.y + (npc->collisionHeight * 2) / 3;
+            Z = npc->pos.z;
+            R = npc->collisionHeight / 3;
+            break;
+        default:
+            X = posX;
+            Y = posY;
+            Z = posZ;
+            R = radius;
+            break;
+    }
+    fx_sweat(type, X, Y, Z, R, pitch, duration);
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(ApiStatus, "evt/fx_api", func_802D8248, Evt* script, s32 isInitialCall);
+ApiStatus ShowSleepBubble(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 npcID = evt_get_variable(script, *args++);
+    s32 type = evt_get_variable(script, *args++); 
+    f32 pitch = evt_get_float_variable(script, *args++);
+    s32 emoterType = evt_get_variable(script, *args++);
+    f32 posX = evt_get_float_variable(script, *args++);
+    f32 posY = evt_get_float_variable(script, *args++);
+    f32 posZ = evt_get_float_variable(script, *args++);
+    f32 radius = evt_get_float_variable(script, *args++);
+    s32 outVar = *args++;
+
+    Npc* npc;
+    f32 X, Y, Z, R;
+    s32 effectHandle;
+    
+    switch (emoterType) {
+        case EMOTER_PLAYER:
+            X = gPlayerStatus.position.x;
+            Y = gPlayerStatus.position.y + (gPlayerStatus.colliderHeight * 2) / 3;
+            Z = gPlayerStatus.position.z;
+            R = gPlayerStatus.colliderHeight / 3;
+            break;
+        case EMOTER_NPC:
+            npc = resolve_npc(script, npcID);
+            if (npc == NULL) {
+                return ApiStatus_DONE2;
+            }
+            X = npc->pos.x;
+            Y = npc->pos.y + (npc->collisionHeight * 2) / 3;
+            Z = npc->pos.z;
+            R = npc->collisionHeight / 3;
+            break;
+        default:
+            X = posX;
+            Y = posY;
+            Z = posZ;
+            R = radius;
+            break;
+    }
+
+    fx_sleep_bubble(type, X, Y, Z, R, pitch, &effectHandle);
+    evt_set_variable(script, outVar, effectHandle);
+    return ApiStatus_DONE2;
+}
+
+//TODO rename after field is identified
+ApiStatus SetSleepBubbleUnk1C(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    EffectInstance* effect = (EffectInstance*)evt_get_variable(script, *args++);
+    s32 value = evt_get_variable(script, *args++);
+
+    ((s32*)(effect->data))[7] = value; // offset 0x1C in SleepBubbleFX data
+    return ApiStatus_DONE2;
+}
 
 ApiStatus PlayEffect(Evt* script, s32 isInitialCall) {
     Bytecode* intArgs = script->ptrReadPos;

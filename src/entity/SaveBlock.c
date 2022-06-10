@@ -47,7 +47,7 @@ void entity_SaveBlock_save_data(void) {
 void entity_SaveBlock_show_tutorial_message(Entity* entity) {
     if (!get_global_flag(EVT_SAVE_FLAG(95))) {
         SaveBlockTutorialPrinterClosed = FALSE;
-        msg_get_printer_for_msg(0x1D0000, &SaveBlockTutorialPrinterClosed);
+        msg_get_printer_for_msg(MESSAGE_ID(0x1D, 0x0), &SaveBlockTutorialPrinterClosed);
         set_global_flag(EVT_SAVE_FLAG(95));
         return;
     }
@@ -65,13 +65,13 @@ void entity_SaveBlock_wait_for_close_tutorial(Entity* entity) {
 void entity_SaveBlock_show_choice_message(void) {
     SaveBlockTutorialPrinterClosed = FALSE;
     SaveBlockResultPrinterClosed = FALSE;
-    SaveBlockResultPrinter = msg_get_printer_for_msg(0x1D0004, &SaveBlockResultPrinterClosed);
-    SaveBlockTutorialPrinter = msg_get_printer_for_msg(0x1E000A, &SaveBlockTutorialPrinterClosed);
+    SaveBlockResultPrinter = msg_get_printer_for_msg(MESSAGE_ID(0x1D, 0x4), &SaveBlockResultPrinterClosed);
+    SaveBlockTutorialPrinter = msg_get_printer_for_msg(MESSAGE_ID(0x1E, 0xA), &SaveBlockTutorialPrinterClosed);
 }
 
 void entity_SaveBlock_show_result_message(void) {
-    msg_printer_load_msg(0x1D0005, SaveBlockResultPrinter);
-    sfx_play_sound(0x10);
+    msg_printer_load_msg(MESSAGE_ID(0x1D, 0x5), SaveBlockResultPrinter);
+    sfx_play_sound(SOUND_10);
 }
 
 void entity_SaveBlock_wait_for_close_result(Entity* entity) {

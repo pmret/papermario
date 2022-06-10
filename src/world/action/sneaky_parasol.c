@@ -91,7 +91,7 @@ void func_802B6120_E2A7D0(void) {
             temp_v0 = get_npc_by_index(D_8010C96C);
             temp_v0->flags |= 0x40000;
             playerStatus->flags |= 0x100000;
-            sfx_play_sound_at_player(0xFD, 0);
+            sfx_play_sound_at_player(SOUND_FD, 0);
         }
     }
 
@@ -100,7 +100,7 @@ void func_802B6120_E2A7D0(void) {
             if (playerStatus->unk_90[CAM_DEFAULT] == 0) {
                 if (peach_disguise_check_overlaps() < 0) {
                     suggest_player_anim_clearUnkFlag(0xC0024);
-                    sfx_play_sound_at_player(0x92, 0);
+                    sfx_play_sound_at_player(SOUND_92, 0);
                     playerStatus->fallState++;
                 } else {
                     suggest_player_anim_clearUnkFlag(0xC0027);
@@ -125,7 +125,7 @@ void func_802B6120_E2A7D0(void) {
                 playerStatus->currentStateTime = 12;
                 playerStatus->flags |= 0x100000;
                 playerStatus->fallState++;
-                sfx_play_sound_at_player(0xFD, 0);
+                sfx_play_sound_at_player(SOUND_FD, 0);
             }
             break;
         case 3:
@@ -351,9 +351,9 @@ void func_802B6120_E2A7D0(void) {
         }
     }
     if (parasolStruct->unk_0C != 0) {
-        if (parasolStruct->unk_0C < 0xB) {
-            if (parasolStruct->unk_0C == 0xA) {
-                sfx_play_sound_at_player(0xFE, 0);
+        if (parasolStruct->unk_0C < 11) {
+            if (parasolStruct->unk_0C == 10) {
+                sfx_play_sound_at_player(SOUND_FE, 0);
             }
             if ((parasolStruct->unk_0C & 3) == 0) {
                 fx_stars_shimmer(4, playerStatus->position.x, playerStatus->position.y, playerStatus->position.z, 50, 50, 0x28, 0x1E);

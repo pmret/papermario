@@ -1148,7 +1148,7 @@ s32 func_802BFBA0_3236F0(Evt* script, s32 isInitialCall) {
                 }
             }
 
-            sfx_play_sound_at_npc(0x295, 0, -4);
+            sfx_play_sound_at_npc(SOUND_295, 0, -4);
             playerStatus->anim = 0x8000E;
             playerStatus->unk_BC = 0;
             playerStatus->flags |= PLAYER_STATUS_FLAGS_10000000;

@@ -142,6 +142,6 @@ void func_802BC3E4_E2ED14(Entity* entity) {
         data->unk_10 -= 360.0f;
     }
     if (data->unk_10 == 96.0f) {
-        sfx_play_sound(0x392);
+        sfx_play_sound(SOUND_392);
     }
 }

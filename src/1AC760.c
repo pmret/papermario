@@ -73,7 +73,7 @@ s32 calc_partner_test_enemy(void) {
             if (!(actorPart->eventFlags & 0x20) && actor->transStatus != 0xE) {
                 if ((battleStatus->currentAttackElement & 0x80) != 0) {
                     if (actorPart->eventFlags & 0x10 && !(actor->flags2 & 0x800)) {
-                        sfx_play_sound_at_position(0x108, 0, partner->state.currentPos.x,
+                        sfx_play_sound_at_position(SOUND_108, 0, partner->state.currentPos.x,
                                                    partner->state.currentPos.y, partner->state.currentPos.z);
                         return 4;
                     }
@@ -82,7 +82,7 @@ s32 calc_partner_test_enemy(void) {
                 if (!(battleStatus->currentAttackElement & (0x10000000 | 0x80)) &&
                     (actorPart->eventFlags & 0x10000) && !(battleStatus->currentAttackEventSuppression & 4) &&
                     !(player_team_is_ability_active(state, ABILITY_SPIKE_SHIELD))) {
-                    sfx_play_sound_at_position(0x108, 0, partner->state.currentPos.x,
+                    sfx_play_sound_at_position(SOUND_108, 0, partner->state.currentPos.x,
                                                partner->state.currentPos.y, partner->state.currentPos.z);
                     dispatch_damage_event_partner_1(1, 0x2A);
                     dispatch_event_actor(actor, 0x1B);
@@ -95,7 +95,7 @@ s32 calc_partner_test_enemy(void) {
                         if (!(battleStatus->currentAttackElement & 0x10000000)) {
                             if ((actorPart->eventFlags & 0x10) && (!(actor->flags & 0x800))&&
                                 !(battleStatus->currentAttackEventSuppression & 1)) {
-                                sfx_play_sound_at_position(0x108, 0, partner->state.currentPos.x,
+                                sfx_play_sound_at_position(SOUND_108, 0, partner->state.currentPos.x,
                                                            partner->state.currentPos.y, partner->state.currentPos.z);
                                 dispatch_damage_event_partner_1(1, 0x2A);
                                 dispatch_event_actor(actor, 0x1B);
@@ -105,7 +105,7 @@ s32 calc_partner_test_enemy(void) {
                             if ((!(battleStatus->currentAttackElement & 0x10000000)) &&
                                 (actorPart->eventFlags & 0x200000) && !(actor->flags & 0x800) &&
                                 !(battleStatus->currentAttackEventSuppression & 0x80)) {
-                                sfx_play_sound_at_position(0x108, 0, partner->state.currentPos.x,
+                                sfx_play_sound_at_position(SOUND_108, 0, partner->state.currentPos.x,
                                                            partner->state.currentPos.y, partner->state.currentPos.z);
                                 dispatch_damage_event_partner_1(1, 0x2A);
                                 dispatch_event_actor(actor, 0x1B);
@@ -120,7 +120,7 @@ s32 calc_partner_test_enemy(void) {
                         if ((actor->staticStatus == 0xB || actorPart->eventFlags & 0x80) &&
                             !(battleStatus->currentAttackElement & 0x10000000) &&
                             !(battleStatus->currentAttackEventSuppression & 8)) {
-                            sfx_play_sound_at_position(0x37B, 0, partner->state.currentPos.x,
+                            sfx_play_sound_at_position(SOUND_HIT_SHOCK, 0, partner->state.currentPos.x,
                                                        partner->state.currentPos.y, partner->state.currentPos.z);
                             func_80251474(partner);
                             dispatch_damage_event_partner_1(1, 0x2F);
@@ -129,7 +129,7 @@ s32 calc_partner_test_enemy(void) {
                     }
                 }
                 //missing code here (?)
-                sfx_play_sound_at_position(0xEA, 0, partner->state.currentPos.x,
+                sfx_play_sound_at_position(SOUND_HIT_FIRE, 0, partner->state.currentPos.x,
                                            partner->state.currentPos.y, partner->state.currentPos.z);
                 dispatch_damage_event_partner_1(1, 0x2C);
                 dispatch_event_actor(actor, 0x1C);

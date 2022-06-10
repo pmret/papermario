@@ -560,7 +560,7 @@ s32 popup_menu_update(void) {
                     }
 
                     if (gGameStatusPtr->pressedButtons & buttons) {
-                        sfx_play_sound(0xCA);
+                        sfx_play_sound(SOUND_MENU_BACK);
                         if (D_8010D698 != 0) {
                             if (D_8010D68E == 0) {
                                 D_8010D640 = -3;
@@ -590,7 +590,7 @@ s32 popup_menu_update(void) {
                     }
 
                     if (D_8010D68E != 0 && (gGameStatusPtr->pressedButtons & buttons)) {
-                        sfx_play_sound(0xCA);
+                        sfx_play_sound(SOUND_MENU_BACK);
                         D_8010D640 = -6;
                         break;
                     }

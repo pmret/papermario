@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_802D8248
+glabel SetSleepBubbleUnk1C
 /* FCBF8 802D8248 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* FCBFC 802D824C AFB10014 */  sw        $s1, 0x14($sp)
 /* FCC00 802D8250 0080882D */  daddu     $s1, $a0, $zero

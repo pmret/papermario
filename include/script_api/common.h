@@ -289,7 +289,7 @@ ApiStatus ModifyGlobalOverrideFlags(Evt* script, s32 isInitialCall);
 ApiStatus func_802CF56C(Evt* script, s32 isInitialCall);
 ApiStatus func_802CA988(Evt* script, s32 isInitialCall);
 ApiStatus func_802CDE68(Evt* script, s32 isInitialCall);
-ApiStatus func_802D8248(Evt* script, s32 isInitialCall);
+ApiStatus SetSleepBubbleUnk1C(Evt* script, s32 isInitialCall);
 ApiStatus func_802D286C(Evt* script, s32 isInitialCall);
 ApiStatus func_802D2520(Evt* script, s32 isInitialCall);
 ApiStatus PushSong(Evt* script, s32 isInitialCall);
