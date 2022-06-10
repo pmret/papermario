@@ -215,32 +215,32 @@ ApiStatus InterpCamTargetPos(Evt* script, s32 isInitialCall) {
         data->time = time;
         
         switch (data->useTarget) {
-        case 0:
-            data->vel.x = (posX - cam->auxPos.x) / data->time;
-            data->vel.y = (posY - cam->auxPos.y) / data->time;
-            data->vel.z = (posZ - cam->auxPos.z) / data->time;
-            break;
-        case 1:
-            data->vel.x = (posX - cam->targetPos.x) / data->time;
-            data->vel.y = (posY - cam->targetPos.y) / data->time;
-            data->vel.z = (posZ - cam->targetPos.z) / data->time;
-            break;
+            case 0:
+                data->vel.x = (posX - cam->auxPos.x) / data->time;
+                data->vel.y = (posY - cam->auxPos.y) / data->time;
+                data->vel.z = (posZ - cam->auxPos.z) / data->time;
+                break;
+            case 1:
+                data->vel.x = (posX - cam->targetPos.x) / data->time;
+                data->vel.y = (posY - cam->targetPos.y) / data->time;
+                data->vel.z = (posZ - cam->targetPos.z) / data->time;
+                break;
         }
     }
     
     data = script->userData;
     cam = data->cam;
     switch (data->useTarget) {
-    case 0:
-        cam->auxPos.x += data->vel.x;
-        cam->auxPos.y += data->vel.y;
-        cam->auxPos.z += data->vel.z;
-        break;
-    case 1:
-        cam->targetPos.x += data->vel.x;
-        cam->targetPos.y += data->vel.y;
-        cam->targetPos.z += data->vel.z;
-        break;
+        case 0:
+            cam->auxPos.x += data->vel.x;
+            cam->auxPos.y += data->vel.y;
+            cam->auxPos.z += data->vel.z;
+            break;
+        case 1:
+            cam->targetPos.x += data->vel.x;
+            cam->targetPos.y += data->vel.y;
+            cam->targetPos.z += data->vel.z;
+            break;
     }
     
     data->time--;

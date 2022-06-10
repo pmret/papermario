@@ -79,41 +79,39 @@ ApiStatus ShowEmote(Evt* script, s32 isInitialCall) {
 
     Npc* npc;
     s32 emoteHandle;
-    f32 X, Y, Z, R;
+    f32 x, y, z, r;
     
     switch (emoterType) {
         case EMOTER_PLAYER:
             // show emote from player
             npc = (Npc*)-1;
-            X = 0.0f;
-            Y = (gPlayerStatus.colliderHeight * 2) / 3;
-            Z = 0.0f;
-            R = gPlayerStatus.colliderHeight / 3;
+            x = 0.0f;
+            y = (gPlayerStatus.colliderHeight * 2) / 3;
+            z = 0.0f;
+            r = gPlayerStatus.colliderHeight / 3;
             break;
-        
         case EMOTER_NPC:
             // show emote from NPC
             npc = resolve_npc(script, npcID);
             if (npc == NULL) {
                 return ApiStatus_DONE2;
             }
-            X = 0.0f;
-            Y = (npc->collisionHeight * 4) / 5;
-            Z = 0.0f;
-            R = npc->collisionHeight / 3;
+            x = 0.0f;
+            y = (npc->collisionHeight * 4) / 5;
+            z = 0.0f;
+            r = npc->collisionHeight / 3;
             break;
-
         default:
             // show emote at arbitrary position
-            X = dX;
-            Y = dY;
-            Z = dZ;
-            R = radius;
+            x = dX;
+            y = dY;
+            z = dZ;
+            r = radius;
             npc = NULL;
-        break;
+            break;
     }
-    fx_emote(emoteType, npc, X, Y, Z, R, pitch, duration, &emoteHandle);
 
+    fx_emote(emoteType, npc, x, y, z, r, pitch, duration, &emoteHandle);
     return ApiStatus_DONE2;
 }
 
@@ -221,33 +219,34 @@ ApiStatus ShowSweat(Evt* script) {
     s32 duration = evt_get_variable(script, *args++);
 
     Npc* npc;
-    f32 X, Y, Z, R;
+    f32 x, y, z, r;
     
     switch (emoterType) {
         case EMOTER_PLAYER:
-            X = gPlayerStatus.position.x;
-            Y = gPlayerStatus.position.y + (gPlayerStatus.colliderHeight * 2) / 3;
-            Z = gPlayerStatus.position.z;    
-            R = gPlayerStatus.colliderHeight / 3;
+            x = gPlayerStatus.position.x;
+            y = gPlayerStatus.position.y + (gPlayerStatus.colliderHeight * 2) / 3;
+            z = gPlayerStatus.position.z;    
+            r = gPlayerStatus.colliderHeight / 3;
             break;
         case EMOTER_NPC:
             npc = resolve_npc(script, npcID);
             if (npc == NULL) {
                 return ApiStatus_DONE2;
             }
-            X = npc->pos.x;
-            Y = npc->pos.y + (npc->collisionHeight * 2) / 3;
-            Z = npc->pos.z;
-            R = npc->collisionHeight / 3;
+            x = npc->pos.x;
+            y = npc->pos.y + (npc->collisionHeight * 2) / 3;
+            z = npc->pos.z;
+            r = npc->collisionHeight / 3;
             break;
         default:
-            X = posX;
-            Y = posY;
-            Z = posZ;
-            R = radius;
+            x = posX;
+            y = posY;
+            z = posZ;
+            r = radius;
             break;
     }
-    fx_sweat(type, X, Y, Z, R, pitch, duration);
+    
+    fx_sweat(type, x, y, z, r, pitch, duration);
     return ApiStatus_DONE2;
 }
 
@@ -264,35 +263,35 @@ ApiStatus ShowSleepBubble(Evt* script, s32 isInitialCall) {
     s32 outVar = *args++;
 
     Npc* npc;
-    f32 X, Y, Z, R;
+    f32 x, y, z, r;
     s32 effectHandle;
     
     switch (emoterType) {
         case EMOTER_PLAYER:
-            X = gPlayerStatus.position.x;
-            Y = gPlayerStatus.position.y + (gPlayerStatus.colliderHeight * 2) / 3;
-            Z = gPlayerStatus.position.z;
-            R = gPlayerStatus.colliderHeight / 3;
+            x = gPlayerStatus.position.x;
+            y = gPlayerStatus.position.y + (gPlayerStatus.colliderHeight * 2) / 3;
+            z = gPlayerStatus.position.z;
+            r = gPlayerStatus.colliderHeight / 3;
             break;
         case EMOTER_NPC:
             npc = resolve_npc(script, npcID);
             if (npc == NULL) {
                 return ApiStatus_DONE2;
             }
-            X = npc->pos.x;
-            Y = npc->pos.y + (npc->collisionHeight * 2) / 3;
-            Z = npc->pos.z;
-            R = npc->collisionHeight / 3;
+            x = npc->pos.x;
+            y = npc->pos.y + (npc->collisionHeight * 2) / 3;
+            z = npc->pos.z;
+            r = npc->collisionHeight / 3;
             break;
         default:
-            X = posX;
-            Y = posY;
-            Z = posZ;
-            R = radius;
+            x = posX;
+            y = posY;
+            z = posZ;
+            r = radius;
             break;
     }
 
-    fx_sleep_bubble(type, X, Y, Z, R, pitch, &effectHandle);
+    fx_sleep_bubble(type, x, y, z, r, pitch, &effectHandle);
     evt_set_variable(script, outVar, effectHandle);
     return ApiStatus_DONE2;
 }
