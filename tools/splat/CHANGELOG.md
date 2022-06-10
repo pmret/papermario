@@ -12,7 +12,7 @@ We plan to roll this out in phases. Currently, it only handles actual code disas
 * A new `gfx` segment type is available, which creates a c file containing a disassembled display list according to the segment's start and end offsets. Thanks to [Glank](https://github.com/glankk) and [Tharo](https://github.com/thar0/) for their work on [libgfxd](https://github.com/glankk/libgfxd) and [pygfxd](https://github.com/thar0/pygfxd/), respectively, for helping make this a possibility in splat.
 
 ### API breaking changes
-* Some Segment() arguments have changed, which may cause extensions to break. Please see the `__init__` function for Segment for more details.
+* Some `Segment()` arguments have changed, which may cause extensions to break. Please see the `__init__` function for `Segment` for more details.
 
 ### symbol_addrs.txt changes
 * symbol_addrs now supports the `segment:` attribute, which allows specifying the symbol's top-level segment. This can be helpful for symbol resolution when overlays use overlapping vram ranges. See `exclusive_ram_id` below for more information.
@@ -38,7 +38,11 @@ The default values for these options are as follows
 The appropriate prefix string will still automatically be applied depending on the type of the symbol: `D_` for data, `jtbl_` for jump tables, and `func_` for functions. This functionality may be customizable in the future.
 
 ----
-The `auto_all_section` option now should be a list of section names (`[".data", ".rodata", ".bss"]` by default) for which linker entries are automatically added if the segment doesn't otherwise specify these types somewhere. Previously, this option was a bool, and it enabled this feature for all sections specified in `section_order`. Now, the desired sections must be specified manually. The default setting for this option retains previous behavior.
+The `auto_all_section` option now should be a list of section names (`[".data", ".rodata", ".bss"]` by default) indicating the sections that should be linked from .o files built from source files (.c or asm/hasm .s files), when no subsegment explicitly indicates linking this type of section.
+
+For example, if any subsegment of a code segment is of segment type `data` or `.data`, the `.data` section from all `c`/`asm`/`hasm` subsegments will not be linked unless explicitly indicated with a relevant `.data` subsegment.
+
+Previously, this option was a bool, and it enabled this feature for all sections specified in `section_order`. Now, the desired sections must be specified manually. The default value for this option retains previous behavior.
 
 ----
 The new `mips_abi_float_regs` option allows for changing the format of float registers for MIPS disassembly. The default value does not change any prior behavior, but `o32` is heavily encouraged and may become the default option in the future. For more information, see this [great writeup](https://gist.github.com/EllipticEllipsis/27eef11205c7a59d8ea85632bc49224d).
