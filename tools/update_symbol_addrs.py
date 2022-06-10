@@ -129,6 +129,7 @@ def read_elf():
                 continue
 
             if "/" in name or \
+               "." in name or \
                name in ignores or \
                name.startswith("_") or \
                name.startswith("jtbl_") or \
