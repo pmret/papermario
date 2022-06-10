@@ -1,4 +1,5 @@
 #include "animation_script.h"
+#include "mapfs/omo_bt07_shape.h"
 
 StaticAnimatorNode N(8021A2A0) = {
     .pos = { 79.0f, 47.0f, 0.0f },
@@ -178,7 +179,7 @@ StaticAnimatorNode N(8021A694) = {
     .child = &N(8021A668),
 };
 
-StaticAnimatorNode* N(8021A6C0)[] = {
+StaticAnimatorNode* toy_tank_model[] = {
     &N(8021A694),
     &N(8021A668),
     &N(8021A2A0),
@@ -2921,7 +2922,7 @@ AnimScript toy_tank_as_3 = {
     AS_END,
 };
 
-AnimScript toy_tank_as_4 = {
+AnimScript toy_tank_as_attack = {
     AS_OP_19,
     AS_SET_ROTATION, 1, AS_F(0.0), AS_F(0.0), AS_F(0.0),
     AS_SET_POS, 1, 0, 0, 0,

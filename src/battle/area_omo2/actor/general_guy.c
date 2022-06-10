@@ -10,14 +10,14 @@
 
 extern ActorBlueprint b_area_omo2_1_shy_squad;
 extern AnimScript toy_tank_as_3;
-extern AnimScript toy_tank_as_4;
+extern AnimScript toy_tank_as_attack;
 
 extern EvtScript N(init);
 extern EvtScript N(takeTurn);
 extern EvtScript N(idle);
 extern EvtScript N(handleEvent);
-extern EvtScript N(80218C8C);
-extern EvtScript N(8021963C);
+extern EvtScript N(attack_throw_bomb);
+extern EvtScript N(attack_lightning_shot);
 extern s32 N(idleAnimations)[];
 extern s32 N(idleAnimations2)[];
 extern Formation N(formation_shy_squad);
@@ -191,13 +191,13 @@ EvtScript N(handleEvent) = {
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_BURN_HIT)
             EVT_SET(LW(0), 1)
-            EVT_SET(LW(1), 7733256)
-            EVT_SET(LW(2), 7733257)
+            EVT_SET(LW(1), NPC_ANIM_general_guy_Palette_00_Anim_8)
+            EVT_SET(LW(2), NPC_ANIM_general_guy_Palette_00_Anim_9)
             EVT_EXEC_WAIT(DoBurnHit)
         EVT_CASE_EQ(EVENT_BURN_DEATH)
             EVT_SET(LW(0), 1)
-            EVT_SET(LW(1), 7733256)
-            EVT_SET(LW(2), 7733257)
+            EVT_SET(LW(1), NPC_ANIM_general_guy_Palette_00_Anim_8)
+            EVT_SET(LW(2), NPC_ANIM_general_guy_Palette_00_Anim_9)
             EVT_EXEC_WAIT(DoBurnHit)
             EVT_WAIT_FRAMES(10)
             EVT_SET_CONST(LW(0), 1)
@@ -281,17 +281,17 @@ EvtScript N(takeTurn) = {
         EVT_IF_NOT_FLAG(LW(0), STATUS_FLAG_KO)
             EVT_CALL(RandInt, 100, LW(0))
             EVT_IF_LT(LW(0), 60)
-                EVT_EXEC_WAIT(N(8021963C))
+                EVT_EXEC_WAIT(N(attack_lightning_shot))
                 EVT_RETURN
             EVT_END_IF
         EVT_END_IF
     EVT_END_IF
-    EVT_EXEC_WAIT(N(80218C8C))
+    EVT_EXEC_WAIT(N(attack_throw_bomb))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(80218C8C) = {
+EvtScript N(attack_throw_bomb) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
@@ -308,7 +308,7 @@ EvtScript N(80218C8C) = {
     EVT_CALL(PlaySoundAtPart, ACTOR_ENEMY0, 1, 0x206A)
     EVT_CALL(SetAnimation, ACTOR_ENEMY0, 1, NPC_ANIM_general_guy_Palette_00_Anim_B)
     EVT_CALL(SetPartFlagBits, ACTOR_ENEMY0, 1, ACTOR_PART_FLAG_INVISIBLE, 0)
-    EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_4))
+    EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_attack))
     EVT_WAIT_FRAMES(20)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_general_guy_Palette_00_Anim_B)
     EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
@@ -411,7 +411,7 @@ EvtScript N(80218C8C) = {
     EVT_END
 };
 
-EvtScript N(8021963C) = {
+EvtScript N(attack_lightning_shot) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
@@ -426,7 +426,7 @@ EvtScript N(8021963C) = {
     EVT_CALL(PlaySoundAtPart, ACTOR_ENEMY0, 1, 0x206A)
     EVT_CALL(SetAnimation, ACTOR_ENEMY0, 1, NPC_ANIM_general_guy_Palette_00_Anim_B)
     EVT_CALL(SetPartFlagBits, ACTOR_ENEMY0, 1, ACTOR_PART_FLAG_INVISIBLE, 0)
-    EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_4))
+    EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_attack))
     EVT_WAIT_FRAMES(10)
     EVT_CALL(GetActorVar, ACTOR_ENEMY1, 7, LW(0))
     EVT_IF_NE(LW(0), 0)

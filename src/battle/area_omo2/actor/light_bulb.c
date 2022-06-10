@@ -25,9 +25,9 @@ extern EvtScript N(init);
 extern EvtScript N(takeTurn);
 extern EvtScript N(idle);
 extern EvtScript N(handleEvent);
-extern EvtScript N(8022F9D8);
+extern EvtScript N(onHit);
 extern EvtScript N(8022F9F4);
-extern EvtScript N(8022FA54);
+extern EvtScript N(onDeath);
 
 s32 N(defenseTable)[] = {
     ELEMENT_NORMAL, 1,
@@ -121,13 +121,13 @@ EvtScript N(handleEvent) = {
     EVT_CALL(GetLastEvent, ACTOR_SELF, LW(0))
     EVT_SWITCH(LW(0))
         EVT_CASE_EQ(EVENT_HIT_COMBO)
-            EVT_EXEC_WAIT(N(8022F9D8))
+            EVT_EXEC_WAIT(N(onHit))
         EVT_CASE_OR_EQ(EVENT_HIT)
         EVT_CASE_OR_EQ(EVENT_BURN_HIT)
-            EVT_EXEC_WAIT(N(8022F9D8))
+            EVT_EXEC_WAIT(N(onHit))
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_SPIN_SMASH_HIT)
-            EVT_EXEC_WAIT(N(8022F9D8))
+            EVT_EXEC_WAIT(N(onHit))
         EVT_CASE_EQ(EVENT_UNKNOWN_TRIGGER)
             EVT_CALL(GetActorVar, ACTOR_ENEMY1, 9, LW(0))
             EVT_IF_EQ(LW(0), 0)
@@ -144,11 +144,11 @@ EvtScript N(handleEvent) = {
         EVT_CASE_EQ(EVENT_AIR_LIFT_FAILED)
         EVT_CASE_OR_EQ(EVENT_DEATH)
         EVT_CASE_OR_EQ(EVENT_BURN_DEATH)
-            EVT_EXEC_WAIT(N(8022FA54))
+            EVT_EXEC_WAIT(N(onDeath))
             EVT_RETURN
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_SPIN_SMASH_DEATH)
-            EVT_EXEC_WAIT(N(8022FA54))
+            EVT_EXEC_WAIT(N(onDeath))
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SPIKE_CONTACT)
         EVT_CASE_EQ(EVENT_BURN_CONTACT)
@@ -166,7 +166,7 @@ EvtScript N(takeTurn) = {
     EVT_END
 };
 
-EvtScript N(8022F9D8) = {
+EvtScript N(onHit) = {
     EVT_EXEC_WAIT(N(8022F9F4))
     EVT_RETURN
     EVT_END
@@ -379,7 +379,7 @@ ApiStatus func_80218250_52B8F0(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-EvtScript N(8022FA54) = {
+EvtScript N(onDeath) = {
     EVT_CALL(PlaySoundAtActor, ACTOR_ENEMY2, 0x3AE)
     EVT_CALL(func_80218250_52B8F0)
     EVT_CALL(EnableModel, 39, 0)

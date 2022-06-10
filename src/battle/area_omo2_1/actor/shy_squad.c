@@ -7,9 +7,9 @@
 #define NAMESPACE b_area_omo2_1_shy_squad
 
 enum N(ActorVars) {
-    N(ACTOR_VAR_0) = 0,
-    N(ACTOR_VAR_1) = 1,
-    N(ACTOR_VAR_2) = 2,
+    N(ACTOR_VAR_SQUAD_APPEARED) = 0,
+    N(ACTOR_VAR_TIMES_ATTACKED) = 1,
+    N(ACTOR_VAR_WAS_ATTACKED) = 2,
     N(ACTOR_VAR_3) = 3,
     N(ACTOR_VAR_4) = 4,
 };
@@ -37,7 +37,7 @@ extern EvtScript N(idle);
 extern EvtScript N(handleEvent);
 extern EvtScript N(nextTurn);
 
-extern EvtScript N(802325EC);
+extern EvtScript N(move_squad_to_home);
 extern EvtScript N(80232810);
 extern EvtScript N(80233568);
 extern EvtScript N(onHit);
@@ -331,9 +331,9 @@ EvtScript N(init) = {
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent)))
     EVT_CALL(BindNextTurn, ACTOR_SELF, EVT_ADDR(N(nextTurn)))
-    EVT_CALL(SetActorVar, ACTOR_SELF, N(ACTOR_VAR_0), 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, N(ACTOR_VAR_1), 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, N(ACTOR_VAR_2), 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, N(ACTOR_VAR_SQUAD_APPEARED), 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, N(ACTOR_VAR_TIMES_ATTACKED), 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, N(ACTOR_VAR_WAS_ATTACKED), 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, N(ACTOR_VAR_3), 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, N(ACTOR_VAR_4), 0)
     EVT_CALL(SetPartMovementVar, ACTOR_SELF, 2, 0, 50)
@@ -457,12 +457,12 @@ EvtScript N(nextTurn) = {
     EVT_CALL(GetBattlePhase, LW(0))
     EVT_SWITCH(LW(0))
         EVT_CASE_EQ(PHASE_PLAYER_BEGIN)
-            EVT_CALL(GetActorVar, ACTOR_SELF, N(ACTOR_VAR_0), LW(0))
+            EVT_CALL(GetActorVar, ACTOR_SELF, N(ACTOR_VAR_SQUAD_APPEARED), LW(0))
             EVT_IF_EQ(LW(0), 0)
-                EVT_CALL(SetActorVar, ACTOR_SELF, N(ACTOR_VAR_0), 1)
+                EVT_CALL(SetActorVar, ACTOR_SELF, N(ACTOR_VAR_SQUAD_APPEARED), 1)
                 EVT_SET(LW(0), 2)
                 EVT_LOOP(15)
-                    EVT_CALL(SetAnimation, ACTOR_SELF, LW(0), 0x6E0003)
+                    EVT_CALL(SetAnimation, ACTOR_SELF, LW(0), NPC_ANIM_shy_squad_guy_Palette_00_Anim_3)
                     EVT_ADD(LW(0), 1)
                 EVT_END_LOOP
                 EVT_CALL(SetHomePos, ACTOR_SELF, 65, 0, -10)
@@ -471,7 +471,7 @@ EvtScript N(nextTurn) = {
                 EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
                 EVT_SET(LW(1), NPC_ANIM_shy_squad_guy_Palette_00_Anim_3)
                 EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_SHY_GUY_SCREAMS1)
-                EVT_EXEC_WAIT(N(802325EC))
+                EVT_EXEC_WAIT(N(move_squad_to_home))
                 EVT_WAIT_FRAMES(10)
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
                 EVT_CALL(SetBattleCamZoom, 360)
@@ -494,15 +494,15 @@ EvtScript N(nextTurn) = {
                 EVT_END_LOOP
             EVT_END_IF
         EVT_CASE_EQ(PHASE_ENEMY_BEGIN)
-            EVT_CALL(GetActorVar, ACTOR_SELF, N(ACTOR_VAR_2), LW(0))
+            EVT_CALL(GetActorVar, ACTOR_SELF, N(ACTOR_VAR_WAS_ATTACKED), LW(0))
             EVT_IF_NE(LW(0), 0)
-                EVT_CALL(SetActorVar, ACTOR_SELF, N(ACTOR_VAR_2), 0)
-                EVT_CALL(GetActorVar, ACTOR_SELF, N(ACTOR_VAR_1), LW(0))
+                EVT_CALL(SetActorVar, ACTOR_SELF, N(ACTOR_VAR_WAS_ATTACKED), 0)
+                EVT_CALL(GetActorVar, ACTOR_SELF, N(ACTOR_VAR_TIMES_ATTACKED), LW(0))
                 EVT_ADD(LW(0), 1)
-                EVT_CALL(SetActorVar, ACTOR_SELF, N(ACTOR_VAR_1), LW(0))
+                EVT_CALL(SetActorVar, ACTOR_SELF, N(ACTOR_VAR_TIMES_ATTACKED), LW(0))
                 EVT_IF_GE(LW(0), 2)
                     EVT_CALL(GetActorVar, ACTOR_ENEMY0, 1, LW(0))
-                    EVT_BITWISE_OR_CONST(LW(0), 0x1)
+                    EVT_BITWISE_OR_CONST(LW(0), 0x1) // set 'squadFleed' flag
                     EVT_CALL(SetActorVar, ACTOR_ENEMY0, 1, LW(0))
                     EVT_EXEC_WAIT(N(flee))
                     EVT_RETURN
@@ -523,7 +523,7 @@ EvtScript N(idle) = {
     EVT_END
 };
 
-EvtScript N(80232488) = {
+EvtScript N(move_guy_to_pos) = {
     EVT_SET(LW(10), 2)
     EVT_CALL(GetActorVar, ACTOR_SELF, N(ACTOR_VAR_3), LW(11))
     EVT_ADD(LW(10), LW(11))
@@ -546,7 +546,7 @@ EvtScript N(80232488) = {
     EVT_END
 };
 
-EvtScript N(802325EC) = {
+EvtScript N(move_squad_to_home) = {
     EVT_SET(LW(0), 2)
     EVT_LOOP(15)
         EVT_THREAD
@@ -558,13 +558,13 @@ EvtScript N(802325EC) = {
             EVT_ADD(LW(3), LW(4))
             EVT_SET(LW(4), EVT_FLOAT(6.0))
             EVT_SET(LW(5), 0)
-            EVT_EXEC_WAIT(N(80232488))
+            EVT_EXEC_WAIT(N(move_guy_to_pos))
             EVT_SET(LW(10), 2)
             EVT_CALL(GetActorVar, ACTOR_SELF, N(ACTOR_VAR_3), LW(11))
             EVT_ADD(LW(10), LW(11))
             EVT_IF_GE(LW(0), LW(10))
                 EVT_CALL(SetPartYaw, ACTOR_SELF, LW(0), 0)
-                EVT_CALL(SetAnimation, ACTOR_SELF, LW(0), 0x6E0001)
+                EVT_CALL(SetAnimation, ACTOR_SELF, LW(0), NPC_ANIM_shy_squad_guy_Palette_00_Anim_1)
             EVT_END_IF
         EVT_END_THREAD
         EVT_ADD(LW(0), 1)
@@ -812,7 +812,7 @@ EvtScript N(handleEvent) = {
         EVT_CASE_EQ(EVENT_BEGIN_FIRST_STRIKE)
         EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
         EVT_CASE_OR_EQ(EVENT_HIT)
-            EVT_CALL(SetActorVar, ACTOR_SELF, N(ACTOR_VAR_2), 1)
+            EVT_CALL(SetActorVar, ACTOR_SELF, N(ACTOR_VAR_WAS_ATTACKED), 1)
             EVT_SET_CONST(LW(1), NPC_ANIM_shy_squad_guy_Palette_00_Anim_D)
             EVT_EXEC_WAIT(N(onHit))
             EVT_SET_CONST(LW(1), NPC_ANIM_shy_squad_guy_Palette_00_Anim_D)
@@ -828,7 +828,7 @@ EvtScript N(handleEvent) = {
             EVT_EXEC_WAIT(N(onDeath))
             EVT_RETURN
         EVT_CASE_EQ(EVENT_BURN_HIT)
-            EVT_CALL(SetActorVar, ACTOR_SELF, N(ACTOR_VAR_2), 1)
+            EVT_CALL(SetActorVar, ACTOR_SELF, N(ACTOR_VAR_WAS_ATTACKED), 1)
             EVT_SET_CONST(LW(1), NPC_ANIM_shy_squad_guy_Palette_00_Anim_E)
             EVT_EXEC_WAIT(N(onHit))
             EVT_SET(LW(0), 2)
@@ -844,7 +844,7 @@ EvtScript N(handleEvent) = {
             EVT_END_LOOP
             EVT_WAIT_FRAMES(15)
         EVT_CASE_EQ(EVENT_BURN_DEATH)
-            EVT_CALL(SetActorVar, ACTOR_SELF, N(ACTOR_VAR_2), 1)
+            EVT_CALL(SetActorVar, ACTOR_SELF, N(ACTOR_VAR_WAS_ATTACKED), 1)
             EVT_SET_CONST(LW(1), NPC_ANIM_shy_squad_guy_Palette_00_Anim_E)
             EVT_EXEC_WAIT(N(onHit))
             EVT_SET(LW(0), 2)
@@ -864,7 +864,7 @@ EvtScript N(handleEvent) = {
             EVT_EXEC_WAIT(N(onDeath))
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SPIN_SMASH_HIT)
-            EVT_CALL(SetActorVar, ACTOR_SELF, N(ACTOR_VAR_2), 1)
+            EVT_CALL(SetActorVar, ACTOR_SELF, N(ACTOR_VAR_WAS_ATTACKED), 1)
             EVT_SET_CONST(LW(1), NPC_ANIM_shy_squad_guy_Palette_00_Anim_D)
             EVT_EXEC_WAIT(N(onHit))
             EVT_SET_CONST(LW(1), NPC_ANIM_shy_squad_guy_Palette_00_Anim_D)
@@ -887,7 +887,7 @@ EvtScript N(handleEvent) = {
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
             EVT_SET(LW(1), NPC_ANIM_shy_squad_guy_Palette_00_Anim_3)
-            EVT_EXEC_WAIT(N(802325EC))
+            EVT_EXEC_WAIT(N(move_squad_to_home))
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
             EVT_SET_CONST(LW(1), NPC_ANIM_shy_squad_guy_Palette_00_Anim_D)
             EVT_EXEC_WAIT(N(onHit))
@@ -922,7 +922,7 @@ EvtScript N(handleEvent) = {
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
             EVT_SET(LW(1), NPC_ANIM_shy_squad_guy_Palette_00_Anim_3)
-            EVT_EXEC_WAIT(N(802325EC))
+            EVT_EXEC_WAIT(N(move_squad_to_home))
             EVT_CALL(HPBarToHome, ACTOR_SELF)
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
             EVT_SET_CONST(LW(0), 1)
@@ -1141,7 +1141,7 @@ EvtScript N(attack) = {
             EVT_ADD(LW(3), LW(5))
             EVT_SETF(LW(4), EVT_FLOAT(6.0))
             EVT_SET(LW(5), 30)
-            EVT_EXEC_WAIT(N(80232488))
+            EVT_EXEC_WAIT(N(move_guy_to_pos))
         EVT_END_THREAD
         EVT_ADD(LW(0), 1)
     EVT_END_LOOP
@@ -1209,7 +1209,7 @@ EvtScript N(attack) = {
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
             EVT_SET(LW(1), NPC_ANIM_shy_squad_guy_Palette_00_Anim_4)
-            EVT_EXEC_WAIT(N(802325EC))
+            EVT_EXEC_WAIT(N(move_squad_to_home))
             EVT_SET(LW(1), NPC_ANIM_shy_squad_guy_Palette_00_Anim_1)
             EVT_EXEC_WAIT(N(802343DC))
             EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
@@ -1266,7 +1266,7 @@ EvtScript N(attack) = {
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x3EC)
     EVT_END_SWITCH
     EVT_SET(LW(1), NPC_ANIM_shy_squad_guy_Palette_00_Anim_4)
-    EVT_EXEC_WAIT(N(802325EC))
+    EVT_EXEC_WAIT(N(move_squad_to_home))
     EVT_SET(LW(1), NPC_ANIM_shy_squad_guy_Palette_00_Anim_1)
     EVT_EXEC_WAIT(N(802343DC))
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
@@ -1306,7 +1306,7 @@ EvtScript N(flee) = {
             EVT_ADD(LW(3), -50)
             EVT_SETF(LW(4), EVT_FLOAT(6.0))
             EVT_SET(LW(5), 0)
-            EVT_EXEC_WAIT(N(80232488))
+            EVT_EXEC_WAIT(N(move_guy_to_pos))
         EVT_END_THREAD
         EVT_ADD(LW(0), 1)
     EVT_END_LOOP
@@ -1317,7 +1317,7 @@ EvtScript N(flee) = {
         EVT_SET(LW(3), 0)
         EVT_SETF(LW(4), EVT_FLOAT(6.0))
         EVT_SET(LW(5), 0)
-        EVT_EXEC_WAIT(N(80232488))
+        EVT_EXEC_WAIT(N(move_guy_to_pos))
     EVT_END_THREAD
     EVT_SET(LW(0), 15)
     EVT_CALL(GetActorVar, ACTOR_SELF, N(ACTOR_VAR_3), LW(1))
@@ -1368,7 +1368,7 @@ EvtScript N(flee) = {
             EVT_CALL(RandInt, 100, LW(3))
             EVT_ADD(LW(3), -50)
             EVT_SETF(LW(4), EVT_FLOAT(10.0))
-            EVT_EXEC_WAIT(N(80232488))
+            EVT_EXEC_WAIT(N(move_guy_to_pos))
         EVT_END_THREAD
         EVT_ADD(LW(0), 1)
     EVT_END_LOOP
@@ -1410,7 +1410,7 @@ EvtScript N(flee) = {
         EVT_SET(LW(3), 0)
         EVT_SETF(LW(4), EVT_FLOAT(10.0))
         EVT_SET(LW(5), 0)
-        EVT_EXEC_WAIT(N(80232488))
+        EVT_EXEC_WAIT(N(move_guy_to_pos))
     EVT_END_THREAD
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(10.0))
     EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
