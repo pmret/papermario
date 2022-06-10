@@ -58,6 +58,8 @@ D_F79DDD0F = 0xF79DDD0F;
 D_FA000028 = 0xFA000028;
 D_FD100008 = 0xFD100008;
 
+D_7599F6D8 = 0x7599F6D8;
+
 // Obfuscation symbols
 obfuscated_battle_heap_create = battle_heap_create - 0xFEFFFFF;
 obfuscated_general_heap_create = general_heap_create - 0xFEFEFEF;
