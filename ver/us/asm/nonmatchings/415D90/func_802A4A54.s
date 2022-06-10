@@ -83,8 +83,8 @@ glabel func_802A4A54
 /* 4198F8 802A4B68 1440FFEF */  bnez      $v0, .L802A4B28
 /* 4198FC 802A4B6C 26730004 */   addiu    $s3, $s3, 4
 .L802A4B70:
-/* 419900 802A4B70 3C048010 */  lui       $a0, %hi(HudScript_AnimatedHandPointer)
-/* 419904 802A4B74 24844A28 */  addiu     $a0, $a0, %lo(HudScript_AnimatedHandPointer)
+/* 419900 802A4B70 3C048010 */  lui       $a0, %hi(HES_AnimatedHandPointer)
+/* 419904 802A4B74 24844A28 */  addiu     $a0, $a0, %lo(HES_AnimatedHandPointer)
 /* 419908 802A4B78 0C050529 */  jal       hud_element_create
 /* 41990C 802A4B7C 00000000 */   nop
 /* 419910 802A4B80 0040902D */  daddu     $s2, $v0, $zero
@@ -102,8 +102,8 @@ glabel func_802A4A54
 /* 419940 802A4BB0 86260000 */  lh        $a2, ($s1)
 /* 419944 802A4BB4 0C051261 */  jal       hud_element_set_render_pos
 /* 419948 802A4BB8 0240202D */   daddu    $a0, $s2, $zero
-/* 41994C 802A4BBC 3C048010 */  lui       $a0, %hi(HudScript_GreenArrowUp)
-/* 419950 802A4BC0 248477E4 */  addiu     $a0, $a0, %lo(HudScript_GreenArrowUp)
+/* 41994C 802A4BBC 3C048010 */  lui       $a0, %hi(HES_GreenArrowUp)
+/* 419950 802A4BC0 248477E4 */  addiu     $a0, $a0, %lo(HES_GreenArrowUp)
 /* 419954 802A4BC4 0C050529 */  jal       hud_element_create
 /* 419958 802A4BC8 00000000 */   nop
 /* 41995C 802A4BCC 0040902D */  daddu     $s2, $v0, $zero
@@ -119,8 +119,8 @@ glabel func_802A4A54
 /* 419984 802A4BF4 24A50027 */  addiu     $a1, $a1, 0x27
 /* 419988 802A4BF8 0C051261 */  jal       hud_element_set_render_pos
 /* 41998C 802A4BFC 24C6FFF9 */   addiu    $a2, $a2, -7
-/* 419990 802A4C00 3C048010 */  lui       $a0, %hi(HudScript_GreenArrowDown)
-/* 419994 802A4C04 24847798 */  addiu     $a0, $a0, %lo(HudScript_GreenArrowDown)
+/* 419990 802A4C00 3C048010 */  lui       $a0, %hi(HES_GreenArrowDown)
+/* 419994 802A4C04 24847798 */  addiu     $a0, $a0, %lo(HES_GreenArrowDown)
 /* 419998 802A4C08 0C050529 */  jal       hud_element_create
 /* 41999C 802A4C0C 00000000 */   nop
 /* 4199A0 802A4C10 0040902D */  daddu     $s2, $v0, $zero
@@ -394,8 +394,8 @@ glabel func_802A4A54
 /* 419D90 802A5000 0C0513BF */  jal       hud_element_set_tint
 /* 419D94 802A5004 00A0382D */   daddu    $a3, $a1, $zero
 /* 419D98 802A5008 8E040000 */  lw        $a0, ($s0)
-/* 419D9C 802A500C 3C058010 */  lui       $a1, %hi(HudScript_HandPointer)
-/* 419DA0 802A5010 24A54A00 */  addiu     $a1, $a1, %lo(HudScript_HandPointer)
+/* 419D9C 802A500C 3C058010 */  lui       $a1, %hi(HES_HandPointer)
+/* 419DA0 802A5010 24A54A00 */  addiu     $a1, $a1, %lo(HES_HandPointer)
 /* 419DA4 802A5014 0C0511FF */  jal       hud_element_set_script
 /* 419DA8 802A5018 00000000 */   nop
 /* 419DAC 802A501C 24040006 */  addiu     $a0, $zero, 6

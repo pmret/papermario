@@ -1,6 +1,7 @@
 #include "common.h"
 #include "effects.h"
 #include "hud_element.h"
+#include "sparkle_script.h"
 
 #define MAX_ITEM_ENTITIES 256
 
@@ -20,7 +21,7 @@ extern s16 D_801565A8;
 extern s32 D_801568E0;
 extern s32 D_801568EC;
 
-extern HudScript SparkleScript_Coin;
+extern SparkleScript SparkleScript_Coin;
 
 void item_entity_load(ItemEntity*);
 void item_entity_update(ItemEntity*);
@@ -145,40 +146,40 @@ s32 integer_log(s32 number, u32 base) {
 
 INCLUDE_ASM(s32, "C50A0", draw_adjustable_tiled_image);
 
-void sparkle_script_init(ItemEntity* itemEntity, s32* state) {
-    itemEntity->sparkleReadPos = state;
+void sparkle_script_init(ItemEntity* itemEntity, SparkleScript* script) {
+    itemEntity->sparkleReadPos = (s32*)script;
     itemEntity->sparkleNextUpdate = 1;
-    itemEntity->sparkleSavedPos = state;
+    itemEntity->sparkleSavedPos = (s32*)script;
 }
 
 s32 sparkle_script_step(ItemEntity* itemEntity) {
-    s32* currentState = itemEntity->sparkleReadPos;
+    s32* readPos = itemEntity->sparkleReadPos;
 
-    switch (*currentState++) {
-        case 1:
-            itemEntity->sparkleNextUpdate = *currentState++;
-            itemEntity->sparkleUnk44 = *currentState++;
-            itemEntity->sparkleReadPos = currentState;
+    switch (*readPos++) {
+        case SPARKLE_OP_SetGfx:
+            itemEntity->sparkleNextUpdate = *readPos++;
+            itemEntity->sparkleUnk44 = *readPos++;
+            itemEntity->sparkleReadPos = readPos;
             break;
-        case 2:
+        case SPARKLE_OP_Restart:
             itemEntity->sparkleReadPos = itemEntity->sparkleSavedPos;
             return TRUE;
-        case 3:
-            itemEntity->sparkleSavedPos = currentState;
-            itemEntity->sparkleReadPos = currentState;
+        case SPARKLE_OP_Jump:
+            itemEntity->sparkleSavedPos = readPos;
+            itemEntity->sparkleReadPos = readPos;
             return TRUE;
-        case 7:
-            itemEntity->sparkleNextUpdate = *currentState++;
-            itemEntity->sparkleRaster = *currentState++;
-            itemEntity->sparklePalette = *currentState++;
-            itemEntity->sparkleWidth = *currentState++;
-            itemEntity->sparkleHeight = *currentState++;
-            itemEntity->sparkleReadPos = currentState;
+        case SPARKLE_OP_SetCI:
+            itemEntity->sparkleNextUpdate = *readPos++;
+            itemEntity->sparkleRaster = (s8*)*readPos++;
+            itemEntity->sparklePalette = (s8*)*readPos++;
+            itemEntity->sparkleWidth = *readPos++;
+            itemEntity->sparkleHeight = *readPos++;
+            itemEntity->sparkleReadPos = readPos;
             break;
-        case 4:
-            itemEntity->sparkleReadPos = currentState++;
-            itemEntity->sparkleReadPos = currentState++;
-        case 0:
+        case SPARKLE_OP_Break:
+            readPos++; // ignore arg
+            itemEntity->sparkleReadPos = readPos;
+        case SPARKLE_OP_End:
             return TRUE;
     }
     return FALSE;
@@ -187,7 +188,7 @@ s32 sparkle_script_step(ItemEntity* itemEntity) {
 void sparkle_script_update(ItemEntity* itemEntity) {
     itemEntity->sparkleNextUpdate--;
     if (itemEntity->sparkleNextUpdate <= 0) {
-        while (sparkle_script_step(itemEntity) != 0) {}
+        while (sparkle_script_step(itemEntity)) {}
     }
 }
 
@@ -556,7 +557,7 @@ s32 make_item_entity(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pic
     item_entity_load(itemEntity);
 
     if (itemEntity->itemID == ITEM_COIN) {
-        sparkle_script_init(itemEntity, SparkleScript_Coin);
+        sparkle_script_init(itemEntity, &SparkleScript_Coin);
         sparkle_script_update(itemEntity);
     }
 
@@ -652,7 +653,7 @@ s32 make_item_entity_at_player(s32 itemID, s32 arg1, s32 pickupMsgFlags) {
 
     item_entity_load(item);
     if (item->itemID == ITEM_COIN) {
-        sparkle_script_init(item, SparkleScript_Coin);
+        sparkle_script_init(item, &SparkleScript_Coin);
         sparkle_script_update(item);
     }
     return id;
@@ -677,7 +678,7 @@ void update_item_entities(void) {
             if (entity != NULL && entity->flags != 0) {
                 if (entity->itemID == ITEM_COIN) {
                     if (rand_int(100) > 90) {
-                        sparkle_script_init(entity, SparkleScript_Coin);
+                        sparkle_script_init(entity, &SparkleScript_Coin);
                         D_80155D8C = rand_int(16) - 8;
                         D_80155D8E = rand_int(16) - 8;
                         D_80155D90 = 5;

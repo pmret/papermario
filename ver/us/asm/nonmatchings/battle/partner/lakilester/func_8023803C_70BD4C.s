@@ -42,8 +42,8 @@ glabel func_8023803C_70BD4C
 /* 70BDD8 802380C8 0808E21D */  j         .L80238874
 /* 70BDDC 802380CC 00000000 */   nop
 .L802380D0:
-/* 70BDE0 802380D0 3C048029 */  lui       $a0, %hi(HudScript_AimReticle)
-/* 70BDE4 802380D4 2484369C */  addiu     $a0, $a0, %lo(HudScript_AimReticle)
+/* 70BDE0 802380D0 3C048029 */  lui       $a0, %hi(HES_AimReticle)
+/* 70BDE4 802380D4 2484369C */  addiu     $a0, $a0, %lo(HES_AimReticle)
 /* 70BDE8 802380D8 0C050529 */  jal       hud_element_create
 /* 70BDEC 802380DC 0000902D */   daddu    $s2, $zero, $zero
 /* 70BDF0 802380E0 0040202D */  daddu     $a0, $v0, $zero
@@ -51,8 +51,8 @@ glabel func_8023803C_70BD4C
 /* 70BDF8 802380E8 AC24D288 */  sw        $a0, %lo(D_8023D288)($at)
 /* 70BDFC 802380EC 0C051277 */  jal       hud_element_set_render_depth
 /* 70BE00 802380F0 2405000A */   addiu    $a1, $zero, 0xa
-/* 70BE04 802380F4 3C048029 */  lui       $a0, %hi(HudScript_AimTarget)
-/* 70BE08 802380F8 248436D4 */  addiu     $a0, $a0, %lo(HudScript_AimTarget)
+/* 70BE04 802380F4 3C048029 */  lui       $a0, %hi(HES_AimTarget)
+/* 70BE08 802380F8 248436D4 */  addiu     $a0, $a0, %lo(HES_AimTarget)
 /* 70BE0C 802380FC 0C050529 */  jal       hud_element_create
 /* 70BE10 80238100 00000000 */   nop
 /* 70BE14 80238104 0040202D */  daddu     $a0, $v0, $zero
@@ -67,8 +67,8 @@ glabel func_8023803C_70BD4C
 /* 70BE38 80238128 3C138024 */  lui       $s3, %hi(D_8023AB80_70E890)
 /* 70BE3C 8023812C 0C0513CA */  jal       hud_element_create_transform_A
 /* 70BE40 80238130 2673AB80 */   addiu    $s3, $s3, %lo(D_8023AB80_70E890)
-/* 70BE44 80238134 3C048011 */  lui       $a0, %hi(HudScript_StickNeutral)
-/* 70BE48 80238138 24848E1C */  addiu     $a0, $a0, %lo(HudScript_StickNeutral)
+/* 70BE44 80238134 3C048011 */  lui       $a0, %hi(HES_StickNeutral)
+/* 70BE48 80238138 24848E1C */  addiu     $a0, $a0, %lo(HES_StickNeutral)
 /* 70BE4C 8023813C 3C118024 */  lui       $s1, %hi(D_8023D2C0)
 /* 70BE50 80238140 2631D2C0 */  addiu     $s1, $s1, %lo(D_8023D2C0)
 /* 70BE54 80238144 2402FFD0 */  addiu     $v0, $zero, -0x30
@@ -231,8 +231,8 @@ glabel func_8023803C_70BD4C
 /* 70C0B8 802383A8 0808E21D */  j         .L80238874
 /* 70C0BC 802383AC AC620000 */   sw       $v0, ($v1)
 .L802383B0:
-/* 70C0C0 802383B0 3C058011 */  lui       $a1, %hi(HudScript_StickTapRight)
-/* 70C0C4 802383B4 24A591E4 */  addiu     $a1, $a1, %lo(HudScript_StickTapRight)
+/* 70C0C0 802383B0 3C058011 */  lui       $a1, %hi(HES_StickTapRight)
+/* 70C0C4 802383B4 24A591E4 */  addiu     $a1, $a1, %lo(HES_StickTapRight)
 /* 70C0C8 802383B8 3C048024 */  lui       $a0, %hi(D_8023D2BC)
 /* 70C0CC 802383BC 8C84D2BC */  lw        $a0, %lo(D_8023D2BC)($a0)
 /* 70C0D0 802383C0 24020050 */  addiu     $v0, $zero, 0x50

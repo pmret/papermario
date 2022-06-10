@@ -272,94 +272,82 @@ ApiStatus func_802D4D88(Evt* script, s32 initialCall) {
     return ApiStatus_DONE2;
 }
 
-void load_path_data(s32 numVectors, f32* arg1, Vec3f* staticVectorList, Vec3f* vectors);
-
-#ifdef NON_EQUIVALENT
-// most likely functionally equivalent, lots of issues though.
-void load_path_data(s32 numVectors, f32* arg1, Vec3f* staticVectorList, Vec3f* vectors) {
-    struct Vec3f* temp_s4;
-    f32* temp_s7;
+void load_path_data(s32 num, f32* normalizedLengths, Vec3f* pathPositions, Vec3f* outVectors) {
+    f32* lenBuf = heap_malloc(num * sizeof(f32));
+    Vec3f* vecBuf = heap_malloc(num * sizeof(Vec3f));
     s32 i;
-    f32* temp;
-    f32 new_var;
-    f32 new_var2;
 
-    temp_s7 = heap_malloc(numVectors * sizeof(f32));
-    temp_s4 = heap_malloc(numVectors * sizeof(Vec3f));
-    arg1[0] = 0.0f;
-
-    for (i = 1; i < numVectors; i++) {
-        f32 temp_x = SQ(staticVectorList[i].x - staticVectorList[i - 1].x);
-        f32 temp_y = SQ(staticVectorList[i].y - staticVectorList[i - 1].y);
-        f32 temp_z = SQ(staticVectorList[i].z - staticVectorList[i - 1].z);
-        arg1[i] = arg1[i - 1] + sqrtf(temp_x + temp_y + temp_z);
+    // compute the distance of each vector along the path and map to the range [0,1]
+    normalizedLengths[0] = 0.0f;
+    for (i = 1; i < num; i++) {
+        f32 dx = pathPositions[i].x - pathPositions[i-1].x;
+        f32 dy = pathPositions[i].y - pathPositions[i-1].y;
+        f32 dz = pathPositions[i].z - pathPositions[i-1].z;
+        f32 length = sqrtf(SQ(dx) + SQ(dy) + SQ(dz));
+        normalizedLengths[i] = normalizedLengths[i-1] + length;
+    }
+    for (i = 1; i < num; i++) {
+        normalizedLengths[i] /= normalizedLengths[num-1];
     }
 
-    for (i = 1; i < numVectors; i++) {
-        arg1[i] = arg1[i] / arg1[numVectors - 1];
+    // end points
+    outVectors[0].x = 0.0f;
+    outVectors[0].y = 0.0f;
+    outVectors[0].z = 0.0f;
+    outVectors[num-1].x = 0.0f;
+    outVectors[num-1].y = 0.0f;
+    outVectors[num-1].z = 0.0f;
+    
+    for (i = 0; i < num - 1; i++) {
+        lenBuf[i] = normalizedLengths[i+1] - normalizedLengths[i];
+        vecBuf[i+1].x = (pathPositions[i+1].x - pathPositions[i].x) / lenBuf[i];
+        vecBuf[i+1].y = (pathPositions[i+1].y - pathPositions[i].y) / lenBuf[i];
+        vecBuf[i+1].z = (pathPositions[i+1].z - pathPositions[i].z) / lenBuf[i];
     }
 
-    vectors[0].x = 0;
+    // n = 1
+    outVectors[1].x = vecBuf[2].x - vecBuf[1].x;
+    outVectors[1].y = vecBuf[2].y - vecBuf[1].y;
+    outVectors[1].z = vecBuf[2].z - vecBuf[1].z;
+    vecBuf[1].x = 2.0f * (normalizedLengths[2] - normalizedLengths[0]);
+    vecBuf[1].y = 2.0f * (normalizedLengths[2] - normalizedLengths[0]);
+    vecBuf[1].z = 2.0f * (normalizedLengths[2] - normalizedLengths[0]);
 
-    vectors[numVectors - 1].z = 0;
-    vectors[0].z = 0;
-
-    vectors[numVectors - 1].x = 0;
-
-    vectors[0].y = 0;
-    vectors[numVectors - 1].y = 0;
-
-    for (i = 0; i < (numVectors - 1); i++) {
-        f32 temp = temp_s7[i];
-        temp_s7[i] = arg1[i + 1] - arg1[i];
-        temp_s4[i + 1].x = ((staticVectorList[i + 1].x - staticVectorList[i].x) / temp_s7[i]);
-        temp_s4[i + 1].y = ((staticVectorList[i + 1].y - staticVectorList[i].y) / temp);
-        temp_s4[i + 1].z = ((staticVectorList[i + 1].z - staticVectorList[i].z) / temp);
+    // 1 < n < N - 2
+    for (i = 1; i < num - 2; i++) {
+        f32 sx = lenBuf[i] / vecBuf[i].x;
+        f32 sy = lenBuf[i] / vecBuf[i].y;
+        f32 sz = lenBuf[i] / vecBuf[i].z;
+        outVectors[i+1].x = (vecBuf[i+2].x - vecBuf[i+1].x) - outVectors[i].x * sx;
+        outVectors[i+1].y = (vecBuf[i+2].y - vecBuf[i+1].y) - outVectors[i].y * sy;
+        outVectors[i+1].z = (vecBuf[i+2].z - vecBuf[i+1].z) - outVectors[i].z * sz;
+        vecBuf[i+1].x = 2.0f * (normalizedLengths[i+2] - normalizedLengths[i]) - lenBuf[i] * sx;
+        vecBuf[i+1].y = 2.0f * (normalizedLengths[i+2] - normalizedLengths[i]) - lenBuf[i] * sy;
+        vecBuf[i+1].z = 2.0f * (normalizedLengths[i+2] - normalizedLengths[i]) - lenBuf[i] * sz;
     }
 
-    vectors[1].x = temp_s4[2].x - temp_s4[1].x;
-    vectors[1].y = temp_s4[2].y - temp_s4[1].y;
-    vectors[1].z = temp_s4[2].z - temp_s4[1].z;
-    temp_s4[1].x = ((arg1[2] - arg1[0]) * 2);
-    temp_s4[1].y = ((arg1[2] - arg1[0]) * 2);
-    temp_s4[1].z = ((arg1[2] - arg1[0]) * 2);
+    // n = N - 2
+    outVectors[num-2].x -= (lenBuf[num-2] * outVectors[num-1].x);
+    outVectors[num-2].y -= (lenBuf[num-2] * outVectors[num-1].y);
+    outVectors[num-2].z -= (lenBuf[num-2] * outVectors[num-1].z);
 
-    for (i = 1; i < numVectors - 2; i++) {
-        f32 temp_x = temp_s7[i] / temp_s4[i].x;
-        f32 temp_y = temp_s7[i] / temp_s4[i].y;
-        f32 temp_z = temp_s7[i] / temp_s4[i].z;
-        new_var = vectors[i].x;
-        vectors[i + 1].x = (temp_s4[i + 2].x - temp_s4[i].x) - (new_var * temp_x);
-        vectors[i + 1].y = (temp_s4[i + 2].y - temp_s4[i].y) - (new_var * temp_y);
-        vectors[i + 1].z = (temp_s4[i + 2].z - temp_s4[i].z) - (new_var * temp_z);
-        temp_s4[i].x = ((arg1[i + 2] - arg1[i]) * 2) - (temp_s7[i] * temp_x);
-        temp_s4[i].y = ((arg1[i + 2] - arg1[i]) * 2) - (temp_s7[i] * temp_y);
-        temp_s4[i].z = ((arg1[i + 2] - arg1[i]) * 2) - (temp_s7[i] * temp_z);
+    for (i = num - 2; i > 0; i--) {
+        outVectors[i].x = (outVectors[i].x - (lenBuf[i] * outVectors[i+1].x)) / vecBuf[i].x;
+        outVectors[i].y = (outVectors[i].y - (lenBuf[i] * outVectors[i+1].y)) / vecBuf[i].y;
+        outVectors[i].z = (outVectors[i].z - (lenBuf[i] * outVectors[i+1].z)) / vecBuf[i].z;
     }
-
-    vectors[numVectors - 2].x = vectors[numVectors - 2].x - (temp_s7[numVectors - 2] * vectors[numVectors - 1].x);
-    vectors[numVectors - 2].y = vectors[numVectors - 2].y - (temp_s7[numVectors - 2] * vectors[numVectors - 1].y);
-    vectors[numVectors - 2].z = vectors[numVectors - 2].z - (temp_s7[numVectors - 2] * vectors[numVectors - 1].z);
-
-    for (i = (numVectors - 2); i > 0 ; i--) {
-        vectors[i].x = (vectors[i].x - (temp_s7[i] * vectors[i + 1].x)) / temp_s4[i].x;
-        vectors[i].y = (vectors[i].y - (temp_s7[i] * vectors[i + 1].y)) / temp_s4[i].y;
-        vectors[i].z = (vectors[i].z - (temp_s7[i] * vectors[i + 1].z)) / temp_s4[i].z;
-    }
-
-    heap_free(temp_s7);
-    heap_free(temp_s4);
+    
+    heap_free(lenBuf);
+    heap_free(vecBuf);
 }
-#else
-INCLUDE_ASM(s32, "evt/f8f60_len_1560", load_path_data);
-#endif
 
-void get_path_position(f32 alpha, Vec3f* outPos, s32 numVectors, f32* normalizedLengths, Vec3f* staticVectors, Vec3f* vectors) {
+void get_path_position(f32 alpha, Vec3f* outPos, s32 numVectors, f32* normalizedLengths, Vec3f* pathPoints, Vec3f* vectors) {
     s32 limit = numVectors - 1;
-    f32 lenDiff;
-    f32 diff2;
+    f32 curLength;
+    f32 curProgress;
+    f32 ax, ay, az, bx, by, bz, dx, dy, dz;
     s32 i;
-
+    
     for (i = 0; i < limit;) {
         s32 temp_v1 = (i + limit) / 2;
 
@@ -373,15 +361,24 @@ void get_path_position(f32 alpha, Vec3f* outPos, s32 numVectors, f32* normalized
     if (i > 0) {
         i--;
     }
+    
+    curLength = normalizedLengths[i+1] - normalizedLengths[i];
+    curProgress = alpha - normalizedLengths[i];
 
-    lenDiff = normalizedLengths[i + 1] - normalizedLengths[i];
-    diff2 = alpha - normalizedLengths[i];
+    dx = (pathPoints[i+1].x - pathPoints[i].x) / curLength;
+    ax = (((vectors[i+1].x - vectors[i].x) * curProgress / curLength) + (3.0f * vectors[i].x)) * curProgress;
+    bx = dx - (((2.0f * vectors[i].x) + vectors[i+1].x) * curLength);
+    outPos->x = ((ax + bx) * curProgress) + pathPoints[i].x;
 
-    outPos->x = (((((((vectors[i + 1].x - vectors[i].x) * diff2) / lenDiff) + (vectors[i].x * 3.0f)) * diff2) + (((staticVectors[i + 1].x - staticVectors[i].x) / lenDiff) - (((2.0f * vectors[i].x) + vectors[i + 1].x) * lenDiff))) * diff2) + staticVectors[i].x;
+    dy = (pathPoints[i+1].y - pathPoints[i].y) / curLength;
+    ay = (((vectors[i+1].y - vectors[i].y) * curProgress / curLength) + (3.0f * vectors[i].y)) * curProgress;
+    by = dy - (((2.0f * vectors[i].y) + vectors[i+1].y) * curLength);
+    outPos->y = ((ay + by) * curProgress) + pathPoints[i].y;
 
-    outPos->y = (((((((vectors[i + 1].y - vectors[i].y) * diff2) / lenDiff) + (vectors[i].y * 3.0f)) * diff2) + (((staticVectors[i + 1].y - staticVectors[i].y) / lenDiff) - (((2.0f * vectors[i].y) + vectors[i + 1].y) * lenDiff))) * diff2) + staticVectors[i].y;
-
-    outPos->z = (((((((vectors[i + 1].z - vectors[i].z) * diff2) / lenDiff) + (vectors[i].z * 3.0f)) * diff2) + (((staticVectors[i + 1].z - staticVectors[i].z) / lenDiff) - (((2.0f * vectors[i].z) + vectors[i + 1].z) * lenDiff))) * diff2) + staticVectors[i].z;
+    dz = (pathPoints[i+1].z - pathPoints[i].z) / curLength;
+    az = (((vectors[i+1].z - vectors[i].z) * curProgress / curLength) + (3.0f * vectors[i].z)) * curProgress;
+    bz = dz - (((2.0f * vectors[i].z) + vectors[i+1].z) * curLength);
+    outPos->z = ((az + bz) * curProgress) + pathPoints[i].z;
 }
 
 s32 LoadPath(Evt* script, s32 isInitialCall) {
@@ -413,17 +410,17 @@ ApiStatus GetNextPathPos(Evt* script, s32 isInitialCall) {
     f32 diff;
 
     switch (path->easingType) {
-        case 0:
+        case EASING_LINEAR:
             alpha = 1.0f / path->timeLeft * path->timeElapsed;
             break;
-        case 1:
+        case EASING_QUADRATIC_IN:
             alpha = 1.0f / SQ(path->timeLeft) * SQ(path->timeElapsed);
             break;
-        case 4:
+        case EASING_QUADRATIC_OUT:
             diff = path->timeLeft - path->timeElapsed;
             alpha = 1.0f - (SQ(diff) / SQ(path->timeLeft));
             break;
-        case 10:
+        case EASING_COS_IN_OUT:
             alpha = (1.0f - cos_rad((PI / path->timeLeft) * path->timeElapsed)) * 0.5f;
             break;
         default:

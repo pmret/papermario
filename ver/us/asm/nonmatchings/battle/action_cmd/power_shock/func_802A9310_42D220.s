@@ -126,8 +126,8 @@ glabel func_802A9310_42D220
 /* 42D3C8 802A94B8 A622004E */   sh       $v0, 0x4e($s1)
 .L802A94BC:
 /* 42D3CC 802A94BC 8E240004 */  lw        $a0, 4($s1)
-/* 42D3D0 802A94C0 3C058011 */  lui       $a1, %hi(HudScript_MashAButton)
-/* 42D3D4 802A94C4 24A58B80 */  addiu     $a1, $a1, %lo(HudScript_MashAButton)
+/* 42D3D0 802A94C0 3C058011 */  lui       $a1, %hi(HES_MashAButton)
+/* 42D3D4 802A94C4 24A58B80 */  addiu     $a1, $a1, %lo(HES_MashAButton)
 /* 42D3D8 802A94C8 0C0511FF */  jal       hud_element_set_script
 /* 42D3DC 802A94CC 00000000 */   nop
 /* 42D3E0 802A94D0 3C048000 */  lui       $a0, 0x8000

@@ -2,8 +2,8 @@
 #include "effects.h"
 #include "hud_element.h"
 
-extern HudScript HudScript_Happy;
-extern HudScript HudScript_HPDrain;
+extern HudScript HES_Happy;
+extern HudScript HES_HPDrain;
 
 extern s32 D_8029FB90;
 extern f32 D_8029FB94;
@@ -59,7 +59,7 @@ ApiStatus func_80260B70(Evt* script, s32 isInitialCall) {
     Actor* player = gBattleStatus.playerActor;
 
     func_802667F0(2, player, player->currentPos.x, player->currentPos.y + 20.0f, player->currentPos.z);
-    sfx_play_sound(0x3FC);
+    sfx_play_sound(SOUND_3FC);
     script->varTable[0] = FALSE;
     if (player->debuff == STATUS_FEAR || player->debuff == STATUS_DIZZY || player->debuff == STATUS_PARALYZE ||
         player->debuff == STATUS_SLEEP ||player->debuff == STATUS_FROZEN || player->debuff == STATUS_STOP) {
@@ -135,7 +135,7 @@ ApiStatus N(GiveRefund)(Evt* script, s32 isInitialCall) {
         posY = player->currentPos.y;
         posZ = player->currentPos.z;
         get_screen_coords(gCurrentCameraID, posX, posY, posZ, &iconPosX, &iconPosY, &iconPosZ);
-        D_8029FBA0 = hud_element_create(&HudScript_Refund);
+        D_8029FBA0 = hud_element_create(&HES_Refund);
         hud_element_set_render_pos(D_8029FBA0, iconPosX + 36, iconPosY - 63);
     }
 
@@ -296,13 +296,13 @@ ApiStatus func_80261648(Evt* script, s32 isInitialCall) {
     Npc* merlee = get_npc_unsafe(NPC_BTL_MERLEE);
 
     if (isInitialCall) {
-        sfx_play_sound(0x24B);
+        sfx_play_sound(SOUND_24B);
         merlee->alpha = 0;
     }
 
     merlee->alpha += 17;
-    if (merlee->alpha >= 0xFF) {
-        merlee->alpha = 0xFF;
+    if (merlee->alpha >= 255) {
+        merlee->alpha = 255;
         return ApiStatus_DONE1;
     }
 
@@ -332,7 +332,7 @@ ApiStatus func_802616F4(Evt* script, s32 isInitialCall) {
         D_8029FB9C = fx_energy_orb_wave(3, merlee->pos.x, merlee->pos.y, merlee->pos.z, 0.00001f, 0);
         D_8029FBA4 = 0;
         D_8029FB90 = 12;
-        sfx_play_sound(0x2074);
+        sfx_play_sound(SOUND_2074);
     }
     merlee->pos.y = D_8029FB94 + (sin_rad((script->functionTemp[1] * TAU) / 360.0f) * 3.0f);
 
@@ -407,13 +407,13 @@ ApiStatus func_802619E8(Evt* script, s32 isInitialCall) {
     screenY -= 19;
 
     if (script->varTable[10] > 0) {
-        D_8029FBAC = hud_element_create(&HudScript_HPDrain);
+        D_8029FBAC = hud_element_create(&HES_HPDrain);
         hud_element_set_render_pos(D_8029FBAC, screenX, screenY);
         screenY += 9;
     }
 
     if (script->varTable[11] > 0 || script->varTable[12] > 0) {
-        D_8029FBA8 = hud_element_create(&HudScript_Happy);
+        D_8029FBA8 = hud_element_create(&HES_Happy);
         hud_element_set_render_pos(D_8029FBA8, screenX, screenY);
     }
     return ApiStatus_DONE2;

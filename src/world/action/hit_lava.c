@@ -38,7 +38,7 @@ void func_802B6000_E27F40(void) {
         subtract_hp(1);
         open_status_menu_long();
         gOverrideFlags |= GLOBAL_OVERRIDES_40;
-        sfx_play_sound_at_player(0xE8, 0);
+        sfx_play_sound_at_player(SOUND_E8, 0);
     }
 
     switch (playerStatus->fallState) {
@@ -163,7 +163,7 @@ void func_802B6000_E27F40(void) {
                 start_rumble(0x100, 0x32);
                 phys_adjust_cam_on_landing();
                 gCameras[CAM_DEFAULT].moveFlags &= ~CAMERA_MOVE_FLAGS_2;
-                sfx_play_sound_at_player(0x3FB, 0);
+                sfx_play_sound_at_player(SOUND_3FB, 0);
                 suggest_player_anim_setUnkFlag(0x8001A);
                 playerStatus->flags &= ~0x800;
                 playerStatus->flags &= ~8;

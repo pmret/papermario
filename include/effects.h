@@ -954,7 +954,7 @@ EffectInstance* fx_ring_blast(s32, f32, f32, f32, f32, s32);
 EffectInstance* fx_shockwave(s32, f32, f32, f32);
 void fx_music_note(s32, f32, f32, f32);
 EffectInstance* fx_smoke_burst(s32, f32, f32, f32, f32, s32);
-void fx_sweat(s32, f32 x, f32 y, f32 z, f32, f32, s32);
+void fx_sweat(s32, f32 x, f32 y, f32 z, f32 radius, f32 pitch, s32 duration);
 void fx_sleep_bubble(s32, f32, f32, f32, f32, f32, s32*);
 EffectInstance* fx_2A(s32, f32, f32, f32);
 EffectInstance* fx_windy_leaves(s32, f32, f32, f32);

@@ -24,7 +24,7 @@ static s32 gPauseMapCursorCurrentOption;
 static s32 gPauseMapCursorCurrentOptionCopy;
 static s32 gPauseMapSpacesInSnapRange;
 
-HudScript* gPauseMapIconScripts[] = { &HudScript_MapWalk0 };
+HudScript* gPauseMapIconScripts[] = { &HES_MapWalk0 };
 s32 D_8024FA34 = -1;
 Vec2b gPauseMapPaths[][32] = {
     { { 1, -10 }, { 1, -8 }, { -9, -2 }, { -8, 0 }, { -8, 0 }, { -7, -3 }, { -5, -3 }, },
@@ -510,7 +510,7 @@ void pause_map_handle_input(MenuPanel* tab) {
     }
 
     if (gPausePressedButtons & B_BUTTON) {
-        sfx_play_sound(0xCA);
+        sfx_play_sound(SOUND_MENU_BACK);
         gPauseMenuCurrentTab = 0;
         return;
     }

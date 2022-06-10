@@ -33,7 +33,7 @@ extern HudScript D_802AA320;
 extern HudScript D_802AA694;
 extern HudScript D_802AAA08;
 extern HudScript D_802AAA30;
-extern HudScript HudScript_ProjectorBeam;
+extern HudScript HES_ProjectorBeam;
 extern EvtScript PlayerScriptDispatcher;
 
 extern s32 D_8029FA80[4];
@@ -267,7 +267,7 @@ void btl_state_update_celebration(void) {
                 btl_cam_use_preset(BTL_CAM_PRESET_C);
                 btl_cam_move(5);
                 dma_copy(_79EF40_ROM_START, _79EF40_ROM_END, _79EF40_VRAM);
-                sfx_play_sound(0x80000008);
+                sfx_play_sound(SOUND_80000008);
                 D_8029FB84 = 0;
                 gBattleState2 = BATTLE_STATE2_UNK_5;
             }
@@ -553,7 +553,7 @@ void btl_state_update_celebration(void) {
                     D_8029FB60[2] = 1;
                 }
 
-                D_8029FAE8 = id = hud_element_create(&HudScript_ProjectorBeam);
+                D_8029FAE8 = id = hud_element_create(&HES_ProjectorBeam);
                 hud_element_create_transform_B(id);
                 hud_element_set_render_pos(id, 156, 13);
                 hud_element_set_tint(id, 255, 255, 255);
@@ -630,7 +630,7 @@ void btl_state_update_celebration(void) {
                     sfx_play_sound(SOUND_749);
                     gBattleState2 = BATTLE_STATE2_UNK_9;
                 } else {
-                    sfx_play_sound(0x21D);
+                    sfx_play_sound(SOUND_MENU_ERROR);
                     gBattleState2 = BATTLE_STATE2_UNK_F;
                 }
                 break;

@@ -73,41 +73,41 @@ extern s16 D_80078160[];
 extern s16 D_80078164[];
 extern s32 D_80078168[];
 
-extern HudScript HudScript_Item_Present;
+extern HudScript HES_Item_Present;
 
 extern PopupMessage D_800A0BC0[32];
 extern s32 D_800A0F40;
 extern HudStatusIcon* D_800A0F44;
 
-extern HudScript HudScript_AsleepBegin;
-extern HudScript HudScript_AsleepEnd;
-extern HudScript HudScript_ElectrifiedBegin;
-extern HudScript HudScript_ElectrifiedEnd;
-extern HudScript HudScript_ParalyzedBegin;
-extern HudScript HudScript_ParalyzedEnd;
-extern HudScript HudScript_DizzyEnd;
-extern HudScript HudScript_PoisonedBegin;
-extern HudScript HudScript_PoisonedEnd;
-extern HudScript HudScript_DizzyBegin;
-extern HudScript HudScript_FrozenBegin;
-extern HudScript HudScript_FrozenEnd;
-extern HudScript HudScript_WeakenedLoop;
-extern HudScript HudScript_WeakenedBegin;
-extern HudScript HudScript_WeakenedEnd;
-extern HudScript HudScript_StoppedBegin;
-extern HudScript HudScript_StoppedEnd;
-extern HudScript HudScript_ShrunkBegin;
-extern HudScript HudScript_ShrunkEnd;
-extern HudScript HudScript_TransparentBegin;
-extern HudScript HudScript_TransparentEnd;
-extern HudScript HudScript_BoostJumpBegin;
-extern HudScript HudScript_BoostJumpEnd;
-extern HudScript HudScript_BoostHammerBegin;
-extern HudScript HudScript_BoostHammerEnd;
-extern HudScript HudScript_BoostPartner;
-extern HudScript HudScript_Surprise;
-extern HudScript HudScript_Peril;
-extern HudScript HudScript_Danger;
+extern HudScript HES_AsleepBegin;
+extern HudScript HES_AsleepEnd;
+extern HudScript HES_ElectrifiedBegin;
+extern HudScript HES_ElectrifiedEnd;
+extern HudScript HES_ParalyzedBegin;
+extern HudScript HES_ParalyzedEnd;
+extern HudScript HES_DizzyEnd;
+extern HudScript HES_PoisonedBegin;
+extern HudScript HES_PoisonedEnd;
+extern HudScript HES_DizzyBegin;
+extern HudScript HES_FrozenBegin;
+extern HudScript HES_FrozenEnd;
+extern HudScript HES_WeakenedLoop;
+extern HudScript HES_WeakenedBegin;
+extern HudScript HES_WeakenedEnd;
+extern HudScript HES_StoppedBegin;
+extern HudScript HES_StoppedEnd;
+extern HudScript HES_ShrunkBegin;
+extern HudScript HES_ShrunkEnd;
+extern HudScript HES_TransparentBegin;
+extern HudScript HES_TransparentEnd;
+extern HudScript HES_BoostJumpBegin;
+extern HudScript HES_BoostJumpEnd;
+extern HudScript HES_BoostHammerBegin;
+extern HudScript HES_BoostHammerEnd;
+extern HudScript HES_BoostPartner;
+extern HudScript HES_Surprise;
+extern HudScript HES_Peril;
+extern HudScript HES_Danger;
 
 
 void update_merlee_message(PopupMessage* popup);
@@ -310,31 +310,31 @@ void update_all_status_icons(PopupMessage* popup) {
         if (icon->status1.activeTask == STATUS_ICON_TASK_LOAD) {
             switch (icon->status1.active) {
                 case STATUS_SLEEP:
-                    elementID = icon->status1.activeElementID = hud_element_create(&HudScript_AsleepBegin);
+                    elementID = icon->status1.activeElementID = hud_element_create(&HES_AsleepBegin);
                     break;
                 case STATUS_PARALYZE:
-                    elementID = icon->status1.activeElementID = hud_element_create(&HudScript_ParalyzedBegin);
+                    elementID = icon->status1.activeElementID = hud_element_create(&HES_ParalyzedBegin);
                     break;
                 case STATUS_DIZZY:
-                    elementID = icon->status1.activeElementID = hud_element_create(&HudScript_DizzyBegin);
+                    elementID = icon->status1.activeElementID = hud_element_create(&HES_DizzyBegin);
                     break;
                 case STATUS_FEAR:
-                    elementID = icon->status1.activeElementID = hud_element_create(&HudScript_WeakenedLoop);
+                    elementID = icon->status1.activeElementID = hud_element_create(&HES_WeakenedLoop);
                     break;
                 case STATUS_STOP:
-                    elementID = icon->status1.activeElementID = hud_element_create(&HudScript_StoppedBegin);
+                    elementID = icon->status1.activeElementID = hud_element_create(&HES_StoppedBegin);
                     break;
                 case STATUS_POISON:
-                    elementID = icon->status1.activeElementID = hud_element_create(&HudScript_PoisonedBegin);
+                    elementID = icon->status1.activeElementID = hud_element_create(&HES_PoisonedBegin);
                     break;
                 case STATUS_SHRINK:
-                    elementID = icon->status1.activeElementID = hud_element_create(&HudScript_ShrunkBegin);
+                    elementID = icon->status1.activeElementID = hud_element_create(&HES_ShrunkBegin);
                     break;
                 case STATUS_FROZEN:
-                    elementID = icon->status1.activeElementID = hud_element_create(&HudScript_FrozenBegin);
+                    elementID = icon->status1.activeElementID = hud_element_create(&HES_FrozenBegin);
                     break;
                 default:
-                    elementID = icon->status1.activeElementID = hud_element_create(&HudScript_Item_Present);
+                    elementID = icon->status1.activeElementID = hud_element_create(&HES_Item_Present);
                     break;
             }
             hud_element_set_flags(elementID, HUD_ELEMENT_FLAGS_DISABLED);
@@ -348,31 +348,31 @@ void update_all_status_icons(PopupMessage* popup) {
             case STATUS_ICON_TASK_LOAD:
                 switch (icon->status1.removing) {
                     case STATUS_SLEEP:
-                        hud_element_set_script(icon->status1.removingElementID, &HudScript_AsleepEnd);
+                        hud_element_set_script(icon->status1.removingElementID, &HES_AsleepEnd);
                         break;
                     case STATUS_PARALYZE:
-                        hud_element_set_script(icon->status1.removingElementID, &HudScript_ParalyzedEnd);
+                        hud_element_set_script(icon->status1.removingElementID, &HES_ParalyzedEnd);
                         break;
                     case STATUS_DIZZY:
-                        hud_element_set_script(icon->status1.removingElementID, &HudScript_DizzyEnd);
+                        hud_element_set_script(icon->status1.removingElementID, &HES_DizzyEnd);
                         break;
                     case STATUS_FEAR:
-                        hud_element_set_script(icon->status1.removingElementID, &HudScript_WeakenedLoop);
+                        hud_element_set_script(icon->status1.removingElementID, &HES_WeakenedLoop);
                         break;
                     case STATUS_STOP:
-                        hud_element_set_script(icon->status1.removingElementID, &HudScript_StoppedEnd);
+                        hud_element_set_script(icon->status1.removingElementID, &HES_StoppedEnd);
                         break;
                     case STATUS_POISON:
-                        hud_element_set_script(icon->status1.removingElementID, &HudScript_PoisonedEnd);
+                        hud_element_set_script(icon->status1.removingElementID, &HES_PoisonedEnd);
                         break;
                     case STATUS_SHRINK:
-                        hud_element_set_script(icon->status1.removingElementID, &HudScript_ShrunkEnd);
+                        hud_element_set_script(icon->status1.removingElementID, &HES_ShrunkEnd);
                         break;
                     case STATUS_FROZEN:
-                        hud_element_set_script(icon->status1.removingElementID, &HudScript_FrozenEnd);
+                        hud_element_set_script(icon->status1.removingElementID, &HES_FrozenEnd);
                         break;
                     default:
-                        hud_element_set_script(icon->status1.removingElementID, &HudScript_Item_Present);
+                        hud_element_set_script(icon->status1.removingElementID, &HES_Item_Present);
                         break;
                 }
 
@@ -394,10 +394,10 @@ void update_all_status_icons(PopupMessage* popup) {
         if (icon->status2.activeTask == STATUS_ICON_TASK_LOAD) {
             switch (icon->status2.active) {
                 case STATUS_STATIC:
-                    elementID = icon->status2.activeElementID = hud_element_create(&HudScript_ElectrifiedBegin);
+                    elementID = icon->status2.activeElementID = hud_element_create(&HES_ElectrifiedBegin);
                     break;
                 default:
-                    elementID = icon->status2.activeElementID = hud_element_create(&HudScript_Item_Present);
+                    elementID = icon->status2.activeElementID = hud_element_create(&HES_Item_Present);
                     break;
             }
 
@@ -412,10 +412,10 @@ void update_all_status_icons(PopupMessage* popup) {
             case STATUS_ICON_TASK_LOAD:
                 switch (icon->status2.removing) {
                     case STATUS_STATIC:
-                        hud_element_set_script(icon->status2.removingElementID, &HudScript_ElectrifiedEnd);
+                        hud_element_set_script(icon->status2.removingElementID, &HES_ElectrifiedEnd);
                         break;
                     default:
-                        hud_element_set_script(icon->status2.removingElementID, &HudScript_Item_Present);
+                        hud_element_set_script(icon->status2.removingElementID, &HES_Item_Present);
                         break;
                 }
 
@@ -436,10 +436,10 @@ void update_all_status_icons(PopupMessage* popup) {
         if (icon->status3.activeTask == STATUS_ICON_TASK_LOAD) {
             switch (icon->status3.active) {
                 case STATUS_E:
-                    elementID = icon->status3.activeElementID = hud_element_create(&HudScript_TransparentBegin);
+                    elementID = icon->status3.activeElementID = hud_element_create(&HES_TransparentBegin);
                     break;
                 default:
-                    elementID = icon->status3.activeElementID = hud_element_create(&HudScript_Item_Present);
+                    elementID = icon->status3.activeElementID = hud_element_create(&HES_Item_Present);
                     break;
             }
 
@@ -454,10 +454,10 @@ void update_all_status_icons(PopupMessage* popup) {
             case STATUS_ICON_TASK_LOAD:
                 switch (icon->status3.removing) {
                     case STATUS_E:
-                        hud_element_set_script(icon->status3.removingElementID, &HudScript_TransparentEnd);
+                        hud_element_set_script(icon->status3.removingElementID, &HES_TransparentEnd);
                         break;
                     default:
-                        hud_element_set_script(icon->status3.removingElementID, &HudScript_Item_Present);
+                        hud_element_set_script(icon->status3.removingElementID, &HES_Item_Present);
                         break;
                 }
 
@@ -476,7 +476,7 @@ void update_all_status_icons(PopupMessage* popup) {
         }
 
         if (icon->status4.activeTask == STATUS_ICON_TASK_LOAD) {
-            elementID = icon->status4.activeElementID = hud_element_create(&HudScript_WeakenedBegin);
+            elementID = icon->status4.activeElementID = hud_element_create(&HES_WeakenedBegin);
             hud_element_set_flags(elementID, HUD_ELEMENT_FLAGS_DISABLED);
             hud_element_set_flags(elementID, HUD_ELEMENT_FLAGS_80);
             icon->status4.activeTask = STATUS_ICON_TASK_DRAW;
@@ -486,7 +486,7 @@ void update_all_status_icons(PopupMessage* popup) {
             case STATUS_ICON_TASK_NONE:
                 break;
             case STATUS_ICON_TASK_LOAD:
-                hud_element_set_script(icon->status4.removingElementID, &HudScript_WeakenedEnd);
+                hud_element_set_script(icon->status4.removingElementID, &HES_WeakenedEnd);
                 icon->status4.frameCounter = 20;
                 icon->status4.removingTask = STATUS_ICON_TASK_DRAW;
                 break;
@@ -1112,7 +1112,7 @@ void create_status_icon_boost_jump(s32 iconID) {
     statusIcon->flags &= ~STATUS_ICON_FLAG_BOOST_JUMP;
     if (!statusIcon->boostJump.active) {
         statusIcon->boostJump.active = TRUE;
-        hudElement = hud_element_create(&HudScript_BoostJumpBegin);
+        hudElement = hud_element_create(&HES_BoostJumpBegin);
         hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_DISABLED);
         hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80);
         statusIcon->boostJump.activeElementID = hudElement;
@@ -1127,7 +1127,7 @@ void remove_status_icon_boost_jump(s32 iconID) {
         statusIcon->boostJump.active = FALSE;
         statusIcon->boostJump.removing = TRUE;
         statusIcon->prevIndexBoostJump = hudElemIndex;
-        hud_element_set_script(hudElemIndex, &HudScript_BoostJumpEnd);
+        hud_element_set_script(hudElemIndex, &HES_BoostJumpEnd);
     }
 }
 
@@ -1144,7 +1144,7 @@ void create_status_icon_boost_hammer(s32 iconID) {
     statusIcon->flags &= ~STATUS_ICON_FLAG_BOOST_HAMMER;
     if (!statusIcon->boostHammer.active) {
         statusIcon->boostHammer.active = TRUE;
-        hudElement = hud_element_create(&HudScript_BoostHammerBegin);
+        hudElement = hud_element_create(&HES_BoostHammerBegin);
         hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_DISABLED);
         hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80);
         statusIcon->boostHammer.activeElementID = hudElement;
@@ -1159,7 +1159,7 @@ void remove_status_icon_boost_hammer(s32 iconID) {
         statusIcon->boostHammer.active = FALSE;
         statusIcon->boostHammer.removing = FALSE;
         statusIcon->prevIndexBoostHammer = hudElemIndex;
-        hud_element_set_script(hudElemIndex, &HudScript_BoostHammerEnd);
+        hud_element_set_script(hudElemIndex, &HES_BoostHammerEnd);
     }
 }
 
@@ -1176,7 +1176,7 @@ void create_status_icon_boost_partner(s32 iconID) {
     statusIcon->flags &= ~STATUS_ICON_FLAG_BOOST_PARTNER;
     if (!statusIcon->boostPartner.active) {
         statusIcon->boostPartner.active = TRUE;
-        hudElement = hud_element_create(&HudScript_BoostPartner);
+        hudElement = hud_element_create(&HES_BoostPartner);
         hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_DISABLED);
         hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80);
         statusIcon->boostPartner.activeElementID = hudElement;
@@ -1205,7 +1205,7 @@ void create_status_icon_surprise(s32 iconID) {
     statusIcon->flags &= ~STATUS_ICON_FLAG_SURPRISE;
     if (!statusIcon->surprise.active) {
         statusIcon->surprise.active = TRUE;
-        hudElement = hud_element_create(&HudScript_Surprise);
+        hudElement = hud_element_create(&HES_Surprise);
         hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_DISABLED);
         hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80);
         statusIcon->surprise.activeElementID = hudElement;
@@ -1234,7 +1234,7 @@ void create_status_icon_peril(s32 iconID) {
     statusIcon->flags &= ~STATUS_ICON_FLAG_PERIL;
     if (!statusIcon->peril.active) {
         statusIcon->peril.active = TRUE;
-        hudElement = hud_element_create(&HudScript_Peril);
+        hudElement = hud_element_create(&HES_Peril);
         hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_DISABLED);
         hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80);
         statusIcon->peril.activeElementID = hudElement;
@@ -1263,7 +1263,7 @@ void create_status_icon_danger(s32 iconID) {
     statusIcon->flags &= ~STATUS_ICON_FLAG_DANGER;
     if (!statusIcon->danger.active) {
         statusIcon->danger.active = TRUE;
-        hudElement = hud_element_create(&HudScript_Danger);
+        hudElement = hud_element_create(&HES_Danger);
         hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_DISABLED);
         hud_element_set_flags(hudElement, HUD_ELEMENT_FLAGS_80);
         statusIcon->danger.activeElementID = hudElement;

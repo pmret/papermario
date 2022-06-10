@@ -58,8 +58,8 @@ glabel func_802406C4_AF8014
 /* AF80C0 80240770 0681FFFD */  bgez      $s4, .L80240768
 /* AF80C4 80240774 2463FFFC */   addiu    $v1, $v1, -4
 /* AF80C8 80240778 2414000A */  addiu     $s4, $zero, 0xa
-/* AF80CC 8024077C 3C048011 */  lui       $a0, %hi(HudScript_AButton)
-/* AF80D0 80240780 24848B28 */  addiu     $a0, $a0, %lo(HudScript_AButton)
+/* AF80CC 8024077C 3C048011 */  lui       $a0, %hi(HES_AButton)
+/* AF80D0 80240780 24848B28 */  addiu     $a0, $a0, %lo(HES_AButton)
 /* AF80D4 80240784 3C038024 */  lui       $v1, %hi(D_80246538_kkj_19)
 /* AF80D8 80240788 24636538 */  addiu     $v1, $v1, %lo(D_80246538_kkj_19)
 /* AF80DC 8024078C 2402000C */  addiu     $v0, $zero, 0xc
@@ -101,8 +101,8 @@ glabel func_802406C4_AF8014
 /* AF816C 8024081C 0260202D */  daddu     $a0, $s3, $zero
 /* AF8170 80240820 0C051280 */  jal       hud_element_set_flags
 /* AF8174 80240824 24050082 */   addiu    $a1, $zero, 0x82
-/* AF8178 80240828 3C048011 */  lui       $a0, %hi(HudScript_BlueMeter)
-/* AF817C 8024082C 24848AFC */  addiu     $a0, $a0, %lo(HudScript_BlueMeter)
+/* AF8178 80240828 3C048011 */  lui       $a0, %hi(HES_BlueMeter)
+/* AF817C 8024082C 24848AFC */  addiu     $a0, $a0, %lo(HES_BlueMeter)
 /* AF8180 80240830 0C050529 */  jal       hud_element_create
 /* AF8184 80240834 00000000 */   nop
 /* AF8188 80240838 0040982D */  daddu     $s3, $v0, $zero
@@ -175,8 +175,8 @@ glabel func_802406C4_AF8014
 .L80240938_AF8288:
 /* AF8288 80240938 3C048024 */  lui       $a0, %hi(D_80246568_C8C018)
 /* AF828C 8024093C 8C846568 */  lw        $a0, %lo(D_80246568_C8C018)($a0)
-/* AF8290 80240940 3C058011 */  lui       $a1, %hi(HudScript_MashAButton)
-/* AF8294 80240944 24A58B80 */  addiu     $a1, $a1, %lo(HudScript_MashAButton)
+/* AF8290 80240940 3C058011 */  lui       $a1, %hi(HES_MashAButton)
+/* AF8294 80240944 24A58B80 */  addiu     $a1, $a1, %lo(HES_MashAButton)
 /* AF8298 80240948 0C0511FF */  jal       hud_element_set_script
 /* AF829C 8024094C 00000000 */   nop
 /* AF82A0 80240950 2402000B */  addiu     $v0, $zero, 0xb

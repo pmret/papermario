@@ -181,7 +181,7 @@ EvtScript D_802C05CC_32579C = {
     EVT_END_IF
     EVT_CALL(GetPlayerPos, LW(0), LW(1), LW(2))
     EVT_ADD(LW(1), 25)
-    EVT_CALL(func_802D7520, LW(0), LW(1), LW(2), LW(11))
+    EVT_CALL(ShowStartRecoveryShimmer, LW(0), LW(1), LW(2), LW(11))
     EVT_IF_NE(LW(11), 0)
         EVT_CALL(func_802C022C, LW(11))
     EVT_END_IF
@@ -196,7 +196,7 @@ EvtScript D_802C05CC_32579C = {
         EVT_WAIT_FRAMES(30)
     EVT_END_IF
     EVT_CALL(GetPlayerPos, LW(0), LW(1), LW(2))
-    EVT_CALL(func_802D75D8, LW(0), LW(1), LW(2), LW(11))
+    EVT_CALL(ShowRecoveryShimmer, LW(0), LW(1), LW(2), LW(11))
     EVT_CALL(SetPlayerAnimation, ANIM_10002)
     EVT_WAIT_FRAMES(20)
     EVT_CALL(func_802C03E8)

@@ -396,8 +396,8 @@ glabel _render_transition_stencil
 /* CD724 80137024 8C637410 */  lw        $v1, %lo(gCurrentCameraID)($v1)
 /* CD728 80137028 3C02DE00 */  lui       $v0, 0xde00
 /* CD72C 8013702C AD020000 */  sw        $v0, ($t0)
-/* CD730 80137030 3C028015 */  lui       $v0, %hi(D_8014E670)
-/* CD734 80137034 2442E670 */  addiu     $v0, $v0, %lo(D_8014E670)
+/* CD730 80137030 3C028015 */  lui       $v0, %hi(Gfx_LoadStencilTex_Mario)
+/* CD734 80137034 2442E670 */  addiu     $v0, $v0, %lo(Gfx_LoadStencilTex_Mario)
 /* CD738 80137038 AD020004 */  sw        $v0, 4($t0)
 /* CD73C 8013703C AFB40010 */  sw        $s4, 0x10($sp)
 /* CD740 80137040 AFB50014 */  sw        $s5, 0x14($sp)
@@ -419,8 +419,8 @@ glabel _render_transition_stencil
 /* CD77C 8013707C AC620000 */  sw        $v0, ($v1)
 /* CD780 80137080 3C02DE00 */  lui       $v0, 0xde00
 /* CD784 80137084 AD020000 */  sw        $v0, ($t0)
-/* CD788 80137088 3C028015 */  lui       $v0, %hi(D_8014E670)
-/* CD78C 8013708C 2442E670 */  addiu     $v0, $v0, %lo(D_8014E670)
+/* CD788 80137088 3C028015 */  lui       $v0, %hi(Gfx_LoadStencilTex_Mario)
+/* CD78C 8013708C 2442E670 */  addiu     $v0, $v0, %lo(Gfx_LoadStencilTex_Mario)
 /* CD790 80137090 0804DC51 */  j         .L80137144
 /* CD794 80137094 0260382D */   daddu    $a3, $s3, $zero
 .L80137098_CD798:
@@ -442,8 +442,8 @@ glabel _render_transition_stencil
 /* CD7D4 801370D4 8C637410 */  lw        $v1, %lo(gCurrentCameraID)($v1)
 /* CD7D8 801370D8 3C02DE00 */  lui       $v0, 0xde00
 /* CD7DC 801370DC AD020000 */  sw        $v0, ($t0)
-/* CD7E0 801370E0 3C028015 */  lui       $v0, %hi(D_8014E6C0)
-/* CD7E4 801370E4 2442E6C0 */  addiu     $v0, $v0, %lo(D_8014E6C0)
+/* CD7E0 801370E0 3C028015 */  lui       $v0, %hi(Gfx_LoadStencilTex_Star)
+/* CD7E4 801370E4 2442E6C0 */  addiu     $v0, $v0, %lo(Gfx_LoadStencilTex_Star)
 /* CD7E8 801370E8 AD020004 */  sw        $v0, 4($t0)
 /* CD7EC 801370EC AFB40010 */  sw        $s4, 0x10($sp)
 /* CD7F0 801370F0 AFB50014 */  sw        $s5, 0x14($sp)
@@ -466,8 +466,8 @@ glabel _render_transition_stencil
 /* CD830 80137130 AC620000 */  sw        $v0, ($v1)
 /* CD834 80137134 3C02DE00 */  lui       $v0, 0xde00
 /* CD838 80137138 AD020000 */  sw        $v0, ($t0)
-/* CD83C 8013713C 3C028015 */  lui       $v0, %hi(D_8014E6C0)
-/* CD840 80137140 2442E6C0 */  addiu     $v0, $v0, %lo(D_8014E6C0)
+/* CD83C 8013713C 3C028015 */  lui       $v0, %hi(Gfx_LoadStencilTex_Star)
+/* CD840 80137140 2442E6C0 */  addiu     $v0, $v0, %lo(Gfx_LoadStencilTex_Star)
 .L80137144:
 /* CD844 80137144 AD020004 */  sw        $v0, 4($t0)
 /* CD848 80137148 2402FFFF */  addiu     $v0, $zero, -1
@@ -496,8 +496,8 @@ glabel _render_transition_stencil
 /* CD89C 8013719C 8C637410 */  lw        $v1, %lo(gCurrentCameraID)($v1)
 /* CD8A0 801371A0 3C02DE00 */  lui       $v0, 0xde00
 /* CD8A4 801371A4 AD020000 */  sw        $v0, ($t0)
-/* CD8A8 801371A8 3C028015 */  lui       $v0, %hi(D_8014E618)
-/* CD8AC 801371AC 2442E618 */  addiu     $v0, $v0, %lo(D_8014E618)
+/* CD8A8 801371A8 3C028015 */  lui       $v0, %hi(Gfx_LoadStencilTex_SharpCircle)
+/* CD8AC 801371AC 2442E618 */  addiu     $v0, $v0, %lo(Gfx_LoadStencilTex_SharpCircle)
 /* CD8B0 801371B0 AD020004 */  sw        $v0, 4($t0)
 /* CD8B4 801371B4 AFA00010 */  sw        $zero, 0x10($sp)
 /* CD8B8 801371B8 AFA00014 */  sw        $zero, 0x14($sp)
@@ -519,8 +519,8 @@ glabel _render_transition_stencil
 /* CD8F4 801371F4 AC620000 */  sw        $v0, ($v1)
 /* CD8F8 801371F8 3C02DE00 */  lui       $v0, 0xde00
 /* CD8FC 801371FC AD020000 */  sw        $v0, ($t0)
-/* CD900 80137200 3C028015 */  lui       $v0, %hi(D_8014E618)
-/* CD904 80137204 2442E618 */  addiu     $v0, $v0, %lo(D_8014E618)
+/* CD900 80137200 3C028015 */  lui       $v0, %hi(Gfx_LoadStencilTex_SharpCircle)
+/* CD904 80137204 2442E618 */  addiu     $v0, $v0, %lo(Gfx_LoadStencilTex_SharpCircle)
 /* CD908 80137208 AD020004 */  sw        $v0, 4($t0)
 /* CD90C 8013720C 2402FFFF */  addiu     $v0, $zero, -1
 /* CD910 80137210 AFA00010 */  sw        $zero, 0x10($sp)
@@ -1230,8 +1230,8 @@ glabel _render_transition_stencil
 /* CE3E0 80137CE0 AC620000 */  sw        $v0, ($v1)
 /* CE3E4 80137CE4 3C02DE00 */  lui       $v0, 0xde00
 /* CE3E8 80137CE8 AD020000 */  sw        $v0, ($t0)
-/* CE3EC 80137CEC 3C028015 */  lui       $v0, %hi(D_8014E718)
-/* CE3F0 80137CF0 2442E718 */  addiu     $v0, $v0, %lo(D_8014E718)
+/* CE3EC 80137CEC 3C028015 */  lui       $v0, %hi(Gfx_LoadStencilTex_BlurryCircle)
+/* CE3F0 80137CF0 2442E718 */  addiu     $v0, $v0, %lo(Gfx_LoadStencilTex_BlurryCircle)
 /* CE3F4 80137CF4 AD020004 */  sw        $v0, 4($t0)
 /* CE3F8 80137CF8 0C04E395 */  jal       func_80138E54
 /* CE3FC 80137CFC E7B80010 */   swc1     $f24, 0x10($sp)

@@ -4,10 +4,10 @@
 #define NAMESPACE action_command_dizzy_shell
 
 extern s32 D_802942A0;
-extern HudScript HudScript_BlueMeter;
-extern HudScript HudScript_AButton;
-extern HudScript HudScript_MashAButton;
-extern HudScript HudScript_100pct;
+extern HudScript HES_BlueMeter;
+extern HudScript HES_AButton;
+extern HudScript HES_MashAButton;
+extern HudScript HES_100pct;
 
 s32 D_802A9800_426970[8] = { 0, 25, 50, 75, 75, 0, 0, 0 };
 
@@ -37,19 +37,19 @@ ApiStatus func_802A9000_426170(void) {
     actionCommandStatus->hudElementX = -48;
     actionCommandStatus->hudElementY = 80;
 
-    id = hud_element_create(&HudScript_AButton);
+    id = hud_element_create(&HES_AButton);
     actionCommandStatus->hudElements[0] = id;
     hud_element_set_render_pos(id, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
     hud_element_set_render_depth(id, 0);
     hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
-    id = hud_element_create(&HudScript_BlueMeter);
+    id = hud_element_create(&HES_BlueMeter);
     actionCommandStatus->hudElements[1] = id;
     hud_element_set_render_pos(id, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
     hud_element_set_render_depth(id, 0);
     hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
-    id = hud_element_create(&HudScript_100pct);
+    id = hud_element_create(&HES_100pct);
     actionCommandStatus->hudElements[2] = id;
     hud_element_set_render_pos(id, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
     hud_element_set_render_depth(id, 0);
@@ -100,7 +100,7 @@ void func_802A928C_4263FC(void) {
                 actionCommandStatus->unk_4E--;
                 return;
             }
-            hud_element_set_script(actionCommandStatus->hudElements[0], &HudScript_MashAButton);
+            hud_element_set_script(actionCommandStatus->hudElements[0], &HES_MashAButton);
             actionCommandStatus->barFillLevel = 0;
             actionCommandStatus->unk_54 = actionCommandStatus->unk_52;
             sfx_play_sound_with_params(0x80000041, 0, 0, 0);

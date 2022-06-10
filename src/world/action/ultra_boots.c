@@ -110,7 +110,7 @@ void func_802B6000_E26710(void) {
                         playerStatus->flags &= ~0x00020008;
                         phys_player_land();
                         exec_ShakeCam1(0, 0, 4);
-                        sfx_play_sound_at_player(0x14A, 0);
+                        sfx_play_sound_at_player(SOUND_14A, 0);
                         start_rumble(0x100, 0x32);
 
                         D_8015A578.unk_00 = 1;
@@ -137,7 +137,7 @@ void func_802B6000_E26710(void) {
                 playerStatus->actionState = 0x10;
                 playerStatus->fallState++;
                 exec_ShakeCam1(0, 0, 4);
-                sfx_play_sound_at_player(0x14A, 0);
+                sfx_play_sound_at_player(SOUND_14A, 0);
                 start_rumble(0x100, 0x32);
 
                 D_8015A578.unk_00 = 1;
