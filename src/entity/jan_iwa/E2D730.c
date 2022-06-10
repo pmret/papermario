@@ -82,11 +82,11 @@ void func_802BB298_E2DBC8(Entity* entity) {
 }
 
 void func_802BB314_E2DC44(Entity* entity) {
-    sfx_play_sound_at_position(0x8000006A, 0, entity->position.x, entity->position.y, entity->position.z);
+    sfx_play_sound_at_position(SOUND_8000006A, 0, entity->position.x, entity->position.y, entity->position.z);
 }
 
 void func_802BB34C_E2DC7C(void) {
-    sfx_play_sound(0x791);
+    sfx_play_sound(SOUND_791);
     func_80149A6C(0x391, 1);
 }
 

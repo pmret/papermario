@@ -147,7 +147,7 @@ void N(update)(void) {
                 actionCommandStatus->hudElementX + ((actionCommandStatus->unk_5D - 1) * 20) + 16,
                 actionCommandStatus->hudElementY);
             hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
-            sfx_play_sound(0x233);
+            sfx_play_sound(SOUND_233);
             actionCommandStatus->unk_70 = 1;
             actionCommandStatus->state = 12;
             // fallthrough

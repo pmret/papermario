@@ -289,7 +289,7 @@ ApiStatus ModifyGlobalOverrideFlags(Evt* script, s32 isInitialCall);
 ApiStatus func_802CF56C(Evt* script, s32 isInitialCall);
 ApiStatus func_802CA988(Evt* script, s32 isInitialCall);
 ApiStatus func_802CDE68(Evt* script, s32 isInitialCall);
-ApiStatus func_802D8248(Evt* script, s32 isInitialCall);
+ApiStatus SetSleepBubbleUnk1C(Evt* script, s32 isInitialCall);
 ApiStatus func_802D286C(Evt* script, s32 isInitialCall);
 ApiStatus func_802D2520(Evt* script, s32 isInitialCall);
 ApiStatus PushSong(Evt* script, s32 isInitialCall);
@@ -303,7 +303,7 @@ ApiStatus SetNpcPaletteSwapMode(Evt* script, s32 isInitialCall);
 ApiStatus SetNpcPaletteSwapping(Evt* script, s32 isInitialCall);
 ApiStatus MakeTransformGroup(Evt* script, s32 isInitialCall);
 
-ApiStatus Spawn802D9D50(Evt* script, s32 isInitialCall);
+ApiStatus SetMotionBlurParams(Evt* script, s32 isInitialCall);
 
 extern EvtScript EnemyNpcHit;
 extern EvtScript EnemyNpcDefeat;

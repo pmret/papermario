@@ -261,7 +261,7 @@ void btl_state_update_begin_player_turn(void) {
                     fx_water_splash(0, player->currentPos.x - 15.0f, player->currentPos.y + 32.0f, player->currentPos.z + 5.0f, 1.0f, 0x18);
                     fx_water_splash(1, player->currentPos.x + 15.0f, player->currentPos.y + 22.0f, player->currentPos.z + 5.0f, 1.0f, 0x18);
                     battleStatus->waterBlockEffect = NULL;
-                    sfx_play_sound(0x299);
+                    sfx_play_sound(SOUND_299);
                     btl_show_battle_message(0x27, 0x3C);
                     gBattleState2 = BATTLE_STATE2_UNK_2;
                 } else {
@@ -406,7 +406,7 @@ void btl_state_update_begin_player_turn(void) {
                     player->debuffDuration--;
                     if (player->debuffDuration <= 0) {
                         if (player->debuff == STATUS_FROZEN) {
-                            sfx_play_sound(0xE7);
+                            sfx_play_sound(SOUND_FROZEN_SHATTER);
                             player->icePillarEffect->flags |= 0x10;
                             player->icePillarEffect = NULL;
                             dispatch_event_player(0x32);

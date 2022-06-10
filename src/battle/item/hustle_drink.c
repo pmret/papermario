@@ -43,7 +43,7 @@ EvtScript N(main) = {
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_SQUISH)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_ADD(EVT_VAR(1), 25)
-    EVT_CALL(func_802D7520, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 5)
+    EVT_CALL(ShowStartRecoveryShimmer, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 5)
     EVT_CALL(N(func_802A12C4_726224))
     EVT_CALL(N(func_802A123C_72619C))
     EVT_CALL(GetActorPos, ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
