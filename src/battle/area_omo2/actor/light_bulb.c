@@ -19,14 +19,14 @@ typedef struct IceShardBlueprint {
     /* 0x24 */ f32 unk_24;
 } IceShardBlueprint; // size = 0x28
 
-extern AnimScript toy_tank_as_3;
+extern AnimScript toy_tank_as_close_hatch;
 
 extern EvtScript N(init);
 extern EvtScript N(takeTurn);
 extern EvtScript N(idle);
 extern EvtScript N(handleEvent);
 extern EvtScript N(onHit);
-extern EvtScript N(8022F9F4);
+extern EvtScript N(shake_tank);
 extern EvtScript N(onDeath);
 
 s32 N(defenseTable)[] = {
@@ -132,13 +132,13 @@ EvtScript N(handleEvent) = {
             EVT_CALL(GetActorVar, ACTOR_ENEMY1, 9, LW(0))
             EVT_IF_EQ(LW(0), 0)
                 EVT_CALL(func_8026E914, LW(0), LW(1))
-                EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_3))
+                EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_close_hatch))
                 EVT_WAIT_FRAMES(30)
             EVT_END_IF
         EVT_CASE_EQ(EVENT_IMMUNE)
             EVT_CALL(GetActorVar, ACTOR_ENEMY1, 9, LW(0))
             EVT_IF_EQ(LW(0), 0)
-                EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_3))
+                EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_close_hatch))
                 EVT_WAIT_FRAMES(30)
             EVT_END_IF
         EVT_CASE_EQ(EVENT_AIR_LIFT_FAILED)
@@ -167,15 +167,15 @@ EvtScript N(takeTurn) = {
 };
 
 EvtScript N(onHit) = {
-    EVT_EXEC_WAIT(N(8022F9F4))
+    EVT_EXEC_WAIT(N(shake_tank))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(8022F9F4) = {
+EvtScript N(shake_tank) = {
     EVT_CALL(GetActorVar, ACTOR_ENEMY1, 9, LW(0))
     EVT_IF_EQ(LW(0), 0)
-        EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_3))
+        EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_close_hatch))
         EVT_WAIT_FRAMES(30)
     EVT_END_IF
     EVT_RETURN
@@ -380,7 +380,7 @@ ApiStatus func_80218250_52B8F0(Evt* script, s32 isInitialCall) {
 }
 
 EvtScript N(onDeath) = {
-    EVT_CALL(PlaySoundAtActor, ACTOR_ENEMY2, 0x3AE)
+    EVT_CALL(PlaySoundAtActor, ACTOR_ENEMY2, SOUND_3AE)
     EVT_CALL(func_80218250_52B8F0)
     EVT_CALL(EnableModel, 39, 0)
     EVT_CALL(EnableModel, 41, 0)

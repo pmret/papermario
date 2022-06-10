@@ -87,7 +87,7 @@ EffectTableEntry gEffectTable[] = {
     /* 0x39 */ FX_ENTRY(energy_shockwave, _375510),
     /* 0x3A */ FX_ENTRY(shimmer_wave, _337FC0),
     /* 0x3B */ FX_ENTRY(aura, _377F80),
-    /* 0x3C */ FX_ENTRY_NUMBERED(3C, _37ADD0),
+    /* 0x3C */ FX_ENTRY(bulb_glow, _37ADD0),
     /* 0x3D */ FX_ENTRY_NUMBERED(3D, _37D180),
     /* 0x3E */ FX_ENTRY(blast, _37D9D0),
     /* 0x3F */ FX_ENTRY(fire_flower, _3803A0),

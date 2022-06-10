@@ -207,7 +207,7 @@ StaticAnimatorNode* toy_tank_model[] = {
     NULL,
 };
 
-AnimScript toy_tank_as_1 = {
+AnimScript toy_tank_as_shake = {
     AS_SET_ROTATION, 1, AS_F(0.0), AS_F(0.0), AS_F(0.0),
     AS_SET_POS, 1, 0, 0, 0,
     AS_SET_SCALE, 1, AS_F(1.0), AS_F(1.0), AS_F(1.0),
@@ -1356,7 +1356,7 @@ AnimScript toy_tank_as_1 = {
     AS_END,
 };
 
-AnimScript toy_tank_as_2 = {
+AnimScript toy_tank_as_fall_apart = {
     AS_SET_ROTATION, 1, AS_F(0.0), AS_F(0.0), AS_F(0.0),
     AS_SET_POS, 1, 0, 0, 0,
     AS_SET_SCALE, 1, AS_F(1.0), AS_F(1.0), AS_F(1.0),
@@ -1924,11 +1924,11 @@ AnimScript toy_tank_as_2 = {
     AS_WAIT, 1,
     AS_WAIT, 1,
     AS_WAIT, 1,
-AS_END_LOOP,
-AS_END,
+    AS_END_LOOP,
+    AS_END,
 };
 
-AnimScript toy_tank_as_3 = {
+AnimScript toy_tank_as_close_hatch = {
     AS_SET_ROTATION, 1, AS_F(0.0), AS_F(0.0), AS_F(0.0),
     AS_SET_POS, 1, 0, 0, 0,
     AS_SET_SCALE, 1, AS_F(1.0), AS_F(1.0), AS_F(1.0),
@@ -2922,7 +2922,7 @@ AnimScript toy_tank_as_3 = {
     AS_END,
 };
 
-AnimScript toy_tank_as_attack = {
+AnimScript toy_tank_as_open_hatch = {
     AS_OP_19,
     AS_SET_ROTATION, 1, AS_F(0.0), AS_F(0.0), AS_F(0.0),
     AS_SET_POS, 1, 0, 0, 0,
@@ -3702,7 +3702,7 @@ AnimScript toy_tank_as_5 = {
     AS_END,
 };
 
-AnimScript toy_tank_as_6 = {
+AnimScript toy_tank_as_move_forward = {
     AS_OP_19,
     AS_SET_ROTATION, 1, AS_F(0.0), AS_F(0.0), AS_F(0.0),
     AS_SET_POS, 1, 0, 0, 0,
@@ -7135,8 +7135,8 @@ AnimScript toy_tank_as_6 = {
     AS_SET_ROTATION, 19, AS_F(0.0), AS_F(0.0), AS_F(-0.07),
     AS_SET_POS, 19, 97, 72, 0,
     AS_WAIT, 1,
-AS_END_LOOP,
-AS_END,
+    AS_END_LOOP,
+    AS_END,
 };
 
 AnimScript toy_tank_as_7 = {
@@ -7749,11 +7749,11 @@ AnimScript toy_tank_as_7 = {
     AS_SET_ROTATION, 4, AS_F(0.0), AS_F(0.0), AS_F(0.0),
     AS_SET_POS, 4, 65, 46, 0,
     AS_WAIT, 1,
-AS_END_LOOP,
-AS_END,
+    AS_END_LOOP,
+    AS_END,
 };
 
-AnimScript toy_tank_as_8 = {
+AnimScript toy_tank_as_idle = {
     AS_SET_ROTATION, 1, AS_F(0.0), AS_F(0.0), AS_F(0.0),
     AS_SET_POS, 1, 0, 0, 0,
     AS_SET_SCALE, 1, AS_F(1.0), AS_F(1.0), AS_F(1.0),
@@ -7828,6 +7828,6 @@ AnimScript toy_tank_as_8 = {
     AS_SET_SCALE, 24, AS_F(1.0), AS_F(1.0), AS_F(1.0),
     AS_WAIT, 1,
     AS_WAIT, 1,
-AS_END_LOOP,
-AS_END,
+    AS_END_LOOP,
+    AS_END,
 };

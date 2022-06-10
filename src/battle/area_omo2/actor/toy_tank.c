@@ -4,6 +4,7 @@
 #include "effects.h"
 #include "message_ids.h"
 #include "sprite/npc/general_guy.h"
+#include "sprite/npc/tank_guy.h"
 #include "mapfs/omo_bt07_shape.h"
 
 #define NAMESPACE b_area_omo2_toy_tank
@@ -18,14 +19,14 @@ extern EvtScript N(takeTurn);
 extern EvtScript N(idle);
 extern EvtScript N(handleEvent);
 extern EvtScript N(onHit);
-extern EvtScript N(8022D5B8);
-extern EvtScript N(8022D5E8);
-extern EvtScript N(8022DB10);
-extern EvtScript N(8022DBA0);
-extern EvtScript N(summon_shy_stacks);
+extern EvtScript N(shake_tank);
+extern EvtScript N(select_phase);
+extern EvtScript N(update_phase);
+extern EvtScript N(start_stilt_guys_phase);
+extern EvtScript N(start_shy_stack_phase);
 extern EvtScript N(summon_stilt_guys);
-extern EvtScript N(8022E734);
-extern EvtScript N(8022EB80);
+extern EvtScript N(summon_tank_squad);
+extern EvtScript N(start_battle_with_tank);
 extern EvtScript N(onDeath);
 extern EvtScript N(8022F4D0);
 extern EvtScript N(8022F458);
@@ -38,8 +39,21 @@ extern Formation N(formation_shy_stack_1);
 extern Formation N(formation_shy_stack_2);
 extern Formation N(formation_shy_squad_dup);
 
-INCLUDE_ASM(s32, "battle/area_omo2/52B7C0", func_80218120_52B7C0);
-ApiStatus func_80218120_52B7C0(Evt* script, s32 isInitialCall);
+ApiStatus N(UpdateBulbGlow)(Evt* script, s32 isInitialCall) {
+    Bytecode *args = script->ptrReadPos;
+
+    s32 x = evt_get_variable(script, *args++);
+    s32 y = evt_get_variable(script, *args++);
+    s32 z = evt_get_variable(script, *args++);
+    s32 rotation = evt_get_variable(script, *args++);
+    BulbGlowFXData* effectData = ((EffectInstance*) evt_get_variable(script, *args++))->data;
+
+    effectData->pos.x = x;
+    effectData->pos.y = y;
+    effectData->pos.z = z + 2;
+
+    return ApiStatus_DONE2;
+}
 
 ApiStatus func_802181F4_52B894(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -164,17 +178,17 @@ EvtScript N(init) = {
     EVT_CALL(SetPartPos, ACTOR_SELF, 2, 85, 30, 0)
     EVT_CALL(SetPartPos, ACTOR_SELF, 3, 80, 0, 0)
     EVT_CALL(LoadAnimatedModel, 0, EVT_ADDR(toy_tank_model))
-    EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_8))
-    EVT_CALL(EnableModel, MODEL_shy, 0)
+    EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_idle))
+    EVT_CALL(EnableModel, 62, 0)
     EVT_CALL(SetAnimatedModelRootPosition, 0, 200, 0, 0)
     EVT_CALL(SetPartTargetFlagBits, ACTOR_SELF, 3, 1, 1)
-    EVT_CALL(GetModelCenter, MODEL_kyu3)
-    EVT_CALL(PlayEffect, EFFECT_3C, 2, LW(0), LW(1), LW(2), EVT_FLOAT(1.0), LW(5), 0, 0, 0, 0, 0, 0, 0)
+    EVT_CALL(GetModelCenter, 39)
+    EVT_CALL(PlayEffect, EFFECT_BULB_GLOW, 2, LW(0), LW(1), LW(2), EVT_FLOAT(1.0), LW(5), 0, 0, 0, 0, 0, 0, 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, 5, LW(5))
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent)))
-    EVT_EXEC(N(8022D5E8))
+    EVT_EXEC(N(select_phase))
     EVT_RETURN
     EVT_END
 };
@@ -203,7 +217,7 @@ EvtScript N(idle) = {
                         EVT_SET(LW(0), 1000)
                     EVT_END_IF
                 EVT_END_IF
-                EVT_CALL(func_80218120_52B7C0, LW(0), LW(1), LW(2), LW(3), LW(5))
+                EVT_CALL(N(UpdateBulbGlow), LW(0), LW(1), LW(2), LW(3), LW(5))
             EVT_END_IF
         EVT_END_IF
         EVT_WAIT_FRAMES(1)
@@ -223,35 +237,35 @@ EvtScript N(handleEvent) = {
             EVT_CALL(SetAnimation, ACTOR_ENEMY0, 1, NPC_ANIM_general_guy_Palette_00_Anim_2)
             EVT_CALL(SetEnemyTargetOffset, ACTOR_SELF, 2, 0, 35)
             EVT_CALL(SetPartFlagBits, ACTOR_ENEMY0, 1, ACTOR_PART_FLAG_INVISIBLE, 1)
-            EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_3))
-            EVT_CALL(PlaySoundAtPart, ACTOR_ENEMY0, 1, 0x206B)
+            EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_close_hatch))
+            EVT_CALL(PlaySoundAtPart, ACTOR_ENEMY0, 1, SOUND_206B)
         EVT_CASE_OR_EQ(EVENT_HIT)
         EVT_CASE_OR_EQ(EVENT_BURN_HIT)
             EVT_EXEC_WAIT(N(onHit))
             EVT_CALL(SetAnimation, ACTOR_ENEMY0, 1, NPC_ANIM_general_guy_Palette_00_Anim_2)
             EVT_CALL(SetEnemyTargetOffset, ACTOR_SELF, 2, 0, 35)
             EVT_CALL(SetPartFlagBits, ACTOR_ENEMY0, 1, ACTOR_PART_FLAG_INVISIBLE, 1)
-            EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_3))
-            EVT_CALL(PlaySoundAtPart, ACTOR_ENEMY0, 1, 0x206B)
+            EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_close_hatch))
+            EVT_CALL(PlaySoundAtPart, ACTOR_ENEMY0, 1, SOUND_206B)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_SPIN_SMASH_HIT)
             EVT_EXEC_WAIT(N(onHit))
             EVT_CALL(SetAnimation, ACTOR_ENEMY0, 1, NPC_ANIM_general_guy_Palette_00_Anim_2)
             EVT_CALL(SetEnemyTargetOffset, ACTOR_SELF, 2, 0, 35)
             EVT_CALL(SetPartFlagBits, ACTOR_ENEMY0, 1, ACTOR_PART_FLAG_INVISIBLE, 1)
-            EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_3))
-            EVT_CALL(PlaySoundAtPart, ACTOR_ENEMY0, 1, 0x206B)
+            EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_close_hatch))
+            EVT_CALL(PlaySoundAtPart, ACTOR_ENEMY0, 1, SOUND_206B)
         EVT_CASE_EQ(EVENT_UNKNOWN_TRIGGER)
             EVT_CALL(func_8026E914, LW(0), LW(1))
-            EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_3))
-            EVT_CALL(PlaySoundAtPart, ACTOR_ENEMY0, 1, 0x206B)
+            EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_close_hatch))
+            EVT_CALL(PlaySoundAtPart, ACTOR_ENEMY0, 1, SOUND_206B)
             EVT_WAIT_FRAMES(30)
         EVT_CASE_EQ(EVENT_IMMUNE)
-            EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_3))
-            EVT_CALL(PlaySoundAtPart, ACTOR_ENEMY0, 1, 0x206B)
+            EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_close_hatch))
+            EVT_CALL(PlaySoundAtPart, ACTOR_ENEMY0, 1, SOUND_206B)
             EVT_WAIT_FRAMES(30)
         EVT_CASE_EQ(EVENT_AIR_LIFT_FAILED)
-            EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_3))
+            EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_close_hatch))
             EVT_WAIT_FRAMES(30)
         EVT_CASE_OR_EQ(EVENT_DEATH)
         EVT_CASE_OR_EQ(EVENT_BURN_DEATH)
@@ -285,12 +299,12 @@ EvtScript N(onHit) = {
     EVT_CALL(SetAnimation, ACTOR_ENEMY0, 1, NPC_ANIM_general_guy_Palette_00_Anim_5)
     EVT_CALL(SetPartFlagBits, ACTOR_ENEMY0, 1, ACTOR_PART_FLAG_INVISIBLE, 0)
     EVT_CALL(SetEnemyTargetOffset, ACTOR_SELF, 2, 0, 50)
-    EVT_EXEC_WAIT(N(8022D5B8))
+    EVT_EXEC_WAIT(N(shake_tank))
     EVT_CALL(GetActorVar, ACTOR_ENEMY0, 1, LW(0))
     EVT_CALL(func_80269E80, LW(1))
     EVT_SWITCH(LW(1))
         EVT_CASE_EQ(19)
-            EVT_IF_NOT_FLAG(LW(0), 0x00000002)
+            EVT_IF_NOT_FLAG(LW(0), 0x2)
                 EVT_BITWISE_OR_CONST(LW(0), 0xE)
                 EVT_CALL(SetActorVar, ACTOR_ENEMY0, 1, LW(0))
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
@@ -304,7 +318,7 @@ EvtScript N(onHit) = {
             EVT_END_IF
         EVT_CASE_OR_EQ(3)
         EVT_CASE_OR_EQ(4)
-            EVT_IF_NOT_FLAG(LW(0), 0x00000004)
+            EVT_IF_NOT_FLAG(LW(0), 0x4)
                 EVT_BITWISE_OR_CONST(LW(0), 0xC)
                 EVT_CALL(SetActorVar, ACTOR_ENEMY0, 1, LW(0))
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
@@ -318,7 +332,7 @@ EvtScript N(onHit) = {
             EVT_END_IF
         EVT_END_CASE_GROUP
         EVT_CASE_DEFAULT
-            EVT_IF_NOT_FLAG(LW(0), 0x00000008)
+            EVT_IF_NOT_FLAG(LW(0), 0x8)
                 EVT_BITWISE_OR_CONST(LW(0), 0xC)
                 EVT_CALL(SetActorVar, ACTOR_ENEMY0, 1, LW(0))
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
@@ -336,14 +350,14 @@ EvtScript N(onHit) = {
     EVT_END
 };
 
-EvtScript N(8022D5B8) = {
-    EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_1))
+EvtScript N(shake_tank) = {
+    EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_shake))
     EVT_WAIT_FRAMES(30)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(8022D5E8) = {
+EvtScript N(select_phase) = {
     EVT_LABEL(0)
     EVT_CALL(ActorExists, ACTOR_ENEMY1, LW(0))
     EVT_IF_EQ(LW(0), FALSE)
@@ -353,8 +367,8 @@ EvtScript N(8022D5E8) = {
     EVT_IF_EQ(LW(0), 1)
         EVT_CALL(SetActorVar, ACTOR_SELF, 1, 2)
         EVT_CALL(CancelEnemyTurn, 1)
-        EVT_EXEC_WAIT(N(8022DB10))
-        EVT_EXEC_WAIT(N(8022DBA0))
+        EVT_EXEC_WAIT(N(update_phase))
+        EVT_EXEC_WAIT(N(start_stilt_guys_phase))
     EVT_ELSE
         EVT_WAIT_FRAMES(1)
         EVT_GOTO(0)
@@ -368,8 +382,8 @@ EvtScript N(8022D5E8) = {
     EVT_IF_EQ(LW(0), 2)
         EVT_CALL(SetActorVar, ACTOR_SELF, 2, 3)
         EVT_CALL(CancelEnemyTurn, 1)
-        EVT_EXEC_WAIT(N(8022DB10))
-        EVT_EXEC_WAIT(N(summon_shy_stacks))
+        EVT_EXEC_WAIT(N(update_phase))
+        EVT_EXEC_WAIT(N(start_shy_stack_phase))
     EVT_ELSE
         EVT_WAIT_FRAMES(1)
         EVT_GOTO(1)
@@ -387,9 +401,9 @@ EvtScript N(8022D5E8) = {
     EVT_CALL(SetActorVar, ACTOR_SELF, 4, 2)
     EVT_CALL(CancelEnemyTurn, 1)
     EVT_CALL(SetActorVar, ACTOR_ENEMY0, 2, 8)
-    EVT_EXEC_WAIT(N(8022EB80))
+    EVT_EXEC_WAIT(N(start_battle_with_tank))
     EVT_GOTO(99)
-    EVT_LABEL(3)
+    EVT_LABEL(3) // unreachable code
     EVT_CALL(ActorExists, ACTOR_ENEMY1, LW(0))
     EVT_IF_EQ(LW(0), FALSE)
         EVT_GOTO(99)
@@ -400,12 +414,12 @@ EvtScript N(8022D5E8) = {
         EVT_GOTO(3)
     EVT_END_IF
     EVT_CALL(GetCurrentPartnerID, LW(0))
-    EVT_IF_EQ(LW(0), 6)
+    EVT_IF_EQ(LW(0), PARTNER_WATT)
         EVT_CALL(SetActorVar, ACTOR_SELF, 2, 3)
         EVT_CALL(SetActorVar, ACTOR_SELF, 3, 0)
         EVT_CALL(CancelEnemyTurn, 1)
-        EVT_EXEC_WAIT(N(8022DB10))
-        EVT_EXEC_WAIT(N(summon_shy_stacks))
+        EVT_EXEC_WAIT(N(update_phase))
+        EVT_EXEC_WAIT(N(start_shy_stack_phase))
         EVT_WAIT_FRAMES(1)
         EVT_GOTO(2)
     EVT_ELSE
@@ -413,7 +427,7 @@ EvtScript N(8022D5E8) = {
         EVT_CALL(SetActorVar, ACTOR_SELF, 2, 3)
         EVT_CALL(CancelEnemyTurn, 1)
         EVT_CALL(SetActorVar, ACTOR_ENEMY0, 2, 7)
-        EVT_EXEC_WAIT(N(8022E734))
+        EVT_EXEC_WAIT(N(summon_tank_squad))
         EVT_WAIT_FRAMES(1)
         EVT_GOTO(10)
     EVT_END_IF
@@ -427,7 +441,7 @@ EvtScript N(8022D5E8) = {
         EVT_CALL(SetActorVar, ACTOR_SELF, 4, 2)
         EVT_CALL(CancelEnemyTurn, 1)
         EVT_CALL(SetActorVar, ACTOR_ENEMY0, 2, 8)
-        EVT_EXEC_WAIT(N(8022EB80))
+        EVT_EXEC_WAIT(N(start_battle_with_tank))
     EVT_END_IF
     EVT_WAIT_FRAMES(1)
     EVT_GOTO(10)
@@ -436,7 +450,7 @@ EvtScript N(8022D5E8) = {
     EVT_END
 };
 
-EvtScript N(8022DB10) = {
+EvtScript N(update_phase) = {
     EVT_CALL(GetActorVar, ACTOR_ENEMY0, 2, LW(0))
     EVT_SWITCH(LW(0))
         EVT_CASE_EQ(6)
@@ -449,15 +463,15 @@ EvtScript N(8022DB10) = {
     EVT_END
 };
 
-EvtScript N(8022DBA0) = {
+EvtScript N(start_stilt_guys_phase) = {
     EVT_CALL(func_802535B4, 0)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_WAIT_FRAMES(30)
     EVT_CALL(GetActorVar, ACTOR_ENEMY0, 1, LW(0))
-    EVT_IF_NOT_FLAG(LW(0), 0x00000001)
+    EVT_IF_NOT_FLAG(LW(0), 0x1)
         EVT_CALL(ActorSpeak, MESSAGE_ID(0x0F, 0x0069), ACTOR_ENEMY0, 1, NPC_ANIM_general_guy_Palette_00_Anim_0, NPC_ANIM_general_guy_Palette_00_Anim_0)
-    EVT_ELSE
+    EVT_ELSE // shy squad has fleed
         EVT_CALL(ActorSpeak, MESSAGE_ID(0x0F, 0x006A), ACTOR_ENEMY0, 1, NPC_ANIM_general_guy_Palette_00_Anim_C, NPC_ANIM_general_guy_Palette_00_Anim_2)
     EVT_END_IF
     EVT_CALL(LoadBattleSection, 44)
@@ -465,7 +479,7 @@ EvtScript N(8022DBA0) = {
     EVT_WAIT_FRAMES(60)
     EVT_CALL(PlaySoundAtPart, ACTOR_ENEMY0, 1, SOUND_TOY_TANK_MOVE1)
     EVT_WAIT_FRAMES(5)
-    EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_6))
+    EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_move_forward))
     EVT_CALL(SetAnimatedModelRootPosition, 0, 20, 0, 0)
     EVT_CALL(SetAnimation, ACTOR_ENEMY0, 1, NPC_ANIM_general_guy_Palette_00_Anim_3)
     EVT_WAIT_FRAMES(25)
@@ -481,7 +495,7 @@ EvtScript N(8022DBA0) = {
     EVT_WAIT_FRAMES(4)
     EVT_CALL(SetAnimation, ACTOR_ENEMY0, 1, NPC_ANIM_general_guy_Palette_00_Anim_2)
     EVT_WAIT_FRAMES(20)
-    EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_8))
+    EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_idle))
     EVT_WAIT_FRAMES(26)
     EVT_EXEC_WAIT(N(summon_stilt_guys))
     EVT_CALL(GetActorPos, ACTOR_ENEMY0, LW(0), LW(1), LW(2))
@@ -495,7 +509,7 @@ EvtScript N(8022DBA0) = {
     EVT_END
 };
 
-EvtScript N(summon_shy_stacks) = {
+EvtScript N(start_shy_stack_phase) = {
     EVT_CALL(func_802535B4, 0)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_14)
     EVT_CALL(BattleCamTargetActor, ACTOR_ENEMY0)
@@ -514,7 +528,7 @@ EvtScript N(summon_shy_stacks) = {
     EVT_WAIT_FRAMES(124)
     EVT_CALL(SummonEnemy, EVT_ADDR(N(formation_shy_stack_2)), 1)
     EVT_WAIT_FRAMES(114)
-    EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_8))
+    EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_idle))
     EVT_LABEL(0)
     EVT_CALL(GetActorVar, ACTOR_SELF, 2, LW(0))
     EVT_IF_NE(LW(0), 4)
@@ -621,7 +635,7 @@ EvtScript N(summon_stilt_guys) = {
     EVT_END
 };
 
-EvtScript N(8022E734) = {
+EvtScript N(summon_tank_squad) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_WAIT_FRAMES(30)
@@ -666,13 +680,13 @@ EvtScript N(8022E734) = {
         EVT_CALL(RandInt, 3, LW(1))
         EVT_SWITCH(LW(1))
             EVT_CASE_EQ(0)
-                EVT_SET(LW(1), 7864328)
+                EVT_SET(LW(1), NPC_ANIM_tank_guy_Palette_00_Anim_8)
             EVT_CASE_EQ(1)
-                EVT_SET(LW(1), 7864329)
+                EVT_SET(LW(1), NPC_ANIM_tank_guy_Palette_00_Anim_9)
             EVT_CASE_EQ(2)
-                EVT_SET(LW(1), 7864330)
+                EVT_SET(LW(1), NPC_ANIM_tank_guy_Palette_00_Anim_A)
             EVT_CASE_DEFAULT
-                EVT_SET(LW(1), 7864326)
+                EVT_SET(LW(1), NPC_ANIM_tank_guy_Palette_00_Anim_6)
         EVT_END_SWITCH
         EVT_CALL(SetAnimation, ACTOR_ENEMY3, LW(0), LW(1))
         EVT_ADD(LW(0), 1)
@@ -684,7 +698,7 @@ EvtScript N(8022E734) = {
     EVT_CALL(SetAnimation, ACTOR_ENEMY0, 1, NPC_ANIM_general_guy_Palette_00_Anim_2)
     EVT_SET(LW(0), 2)
     EVT_LOOP(15)
-        EVT_CALL(SetAnimation, ACTOR_ENEMY3, LW(0), 0x780001)
+        EVT_CALL(SetAnimation, ACTOR_ENEMY3, LW(0), NPC_ANIM_tank_guy_Palette_00_Anim_1)
         EVT_ADD(LW(0), 1)
     EVT_END_LOOP
     EVT_CALL(func_8026BF48, 0)
@@ -692,7 +706,7 @@ EvtScript N(8022E734) = {
     EVT_END
 };
 
-EvtScript N(8022EB80) = {
+EvtScript N(start_battle_with_tank) = {
     EVT_CALL(func_802535B4, 0)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_14)
     EVT_CALL(BattleCamTargetActor, ACTOR_ENEMY0)
@@ -710,8 +724,8 @@ EvtScript N(8022EB80) = {
     EVT_CALL(SetAnimation, ACTOR_ENEMY0, 1, NPC_ANIM_general_guy_Palette_00_Anim_2)
     EVT_CALL(SetEnemyTargetOffset, ACTOR_SELF, 2, 0, 35)
     EVT_CALL(SetPartFlagBits, ACTOR_ENEMY0, 1, ACTOR_PART_FLAG_INVISIBLE, 1)
-    EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_3))
-    EVT_CALL(PlaySoundAtPart, ACTOR_ENEMY0, 1, 0x206B)
+    EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_close_hatch))
+    EVT_CALL(PlaySoundAtPart, ACTOR_ENEMY0, 1, SOUND_206B)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_CALL(func_802535B4, 1)
@@ -722,8 +736,8 @@ EvtScript N(8022EB80) = {
 
 EvtScript N(onDeath) = {
     EVT_WAIT_FRAMES(15)
-    EVT_CALL(PlaySoundAtActor, ACTOR_ENEMY1, 0x36F)
-    EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_2))
+    EVT_CALL(PlaySoundAtActor, ACTOR_ENEMY1, SOUND_36F)
+    EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_fall_apart))
     EVT_CALL(GetActorVar, ACTOR_SELF, 5, LW(0))
     EVT_IF_NE(LW(0), 0)
         EVT_CALL(RemoveEffect, LW(0))
@@ -740,7 +754,7 @@ EvtScript N(onDeath) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_14)
     EVT_CALL(BattleCamTargetActor, ACTOR_ENEMY0)
     EVT_CALL(MoveBattleCamOver, 60)
-    EVT_CALL(PlaySoundAtActor, ACTOR_ENEMY1, 0x34E)
+    EVT_CALL(PlaySoundAtActor, ACTOR_ENEMY1, SOUND_34E)
     EVT_CALL(SetActorJumpGravity, ACTOR_ENEMY0, EVT_FLOAT(0.6))
     EVT_CALL(SetActorDispOffset, ACTOR_ENEMY0, 0, 0, 0)
     EVT_CALL(GetActorPos, ACTOR_ENEMY0, LW(0), LW(1), LW(2))
@@ -752,7 +766,7 @@ EvtScript N(onDeath) = {
     EVT_END_THREAD
     EVT_CALL(SetGoalPos, ACTOR_ENEMY0, LW(0), LW(1), LW(2))
     EVT_CALL(JumpToGoal, ACTOR_ENEMY0, 50, FALSE, TRUE, FALSE)
-    EVT_CALL(PlaySoundAtActor, ACTOR_ENEMY0, 0x20E4)
+    EVT_CALL(PlaySoundAtActor, ACTOR_ENEMY0, SOUND_20E4)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_CALL(SetAnimation, ACTOR_ENEMY0, 1, NPC_ANIM_general_guy_Palette_00_Anim_10)
@@ -772,7 +786,7 @@ EvtScript N(onDeath) = {
     EVT_ADD(LW(0), 10)
     EVT_ADD(LW(1), 30)
     EVT_CALL(PlayEffect, EFFECT_STARS_ORBITING, 0, LW(0), LW(1), LW(2), 20, 4, LW(15), 0, 0, 0, 0, 0, 0)
-    EVT_CALL(PlaySoundAtActor, ACTOR_ENEMY0, 0x20E5)
+    EVT_CALL(PlaySoundAtActor, ACTOR_ENEMY0, SOUND_20E5)
     EVT_CALL(DropStarPoints, 512)
     EVT_WAIT_FRAMES(30)
     EVT_CALL(RemoveEffect, LW(15))

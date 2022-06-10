@@ -1,27 +1,23 @@
 #include "common.h"
 #include "effects_internal.h"
 
-typedef struct Effect60 {
-    /* 0x00 */ s32 unk_00;
-} Effect60; // size = 0x??
+void bulb_glow_appendGfx(void* effect);
 
-void fx_3C_appendGfx(void* effect);
+INCLUDE_ASM(s32, "effects/bulb_glow", bulb_glow_main);
 
-INCLUDE_ASM(s32, "effects/effect_3C", fx_3C_main);
-
-void fx_3C_init(void) {
+void bulb_glow_init(void) {
 }
 
-INCLUDE_ASM(s32, "effects/effect_3C", fx_3C_update);
+INCLUDE_ASM(s32, "effects/bulb_glow", bulb_glow_update);
 
-void fx_3C_render(EffectInstance* effect) {
-    Effect60* effect60 = effect->data;
+void bulb_glow_render(EffectInstance* effect) {
+    BulbGlowFXData* effect60 = effect->data;
     RenderTask renderTask;
     RenderTask* renderTaskPtr = &renderTask;
     RenderTask* retTask;
 
     renderTask.appendGfxArg = effect;
-    renderTask.appendGfx = fx_3C_appendGfx;
+    renderTask.appendGfx = bulb_glow_appendGfx;
     if (effect60->unk_00 == 5) {
         renderTask.distance = 0;
         renderTaskPtr->renderMode = RENDER_MODE_SURFACE_OPA;
@@ -37,4 +33,4 @@ void fx_3C_render(EffectInstance* effect) {
 void func_E0078274(void) {
 }
 
-INCLUDE_ASM(s32, "effects/effect_3C", fx_3C_appendGfx);
+INCLUDE_ASM(s32, "effects/bulb_glow", bulb_glow_appendGfx);

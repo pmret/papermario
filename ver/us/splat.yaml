@@ -2782,15 +2782,15 @@ segments:
     - [0x377070, c, aura]
     - [0x377F00]
   - [0x377F80, bin] # aura gfx
-  - name: effect_effect_3C
+  - name: effect_bulb_glow
     dir: effects
     type: code
     start: 0x37A3F0
     vram: 0xE0078000
     subsegments:
-    - [0x37A3F0, c, effect_3C]
+    - [0x37A3F0, c, bulb_glow]
     - [0x37ACF0, data]
-  - [0x37ADD0, bin] # effect_3C gfx
+  - [0x37ADD0, bin] # bulb_glow gfx
   - name: effect_effect_3D
     dir: effects
     type: code

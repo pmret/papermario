@@ -152,7 +152,7 @@ EvtScript N(handleEvent) = {
                 EVT_CALL(PlayEffect, EFFECT_SWEAT, 0, LW(0), LW(1), LW(2), 10, 45, 4, 0, 0, 0, 0, 0, 0)
                 EVT_WAIT_FRAMES(6)
             EVT_END_LOOP
-            EVT_CALL(SetActorSounds, ACTOR_SELF, 0, 8378, 948)
+            EVT_CALL(SetActorSounds, ACTOR_SELF, 0, SOUND_20BA, SOUND_3B4)
             EVT_CALL(SetActorSounds, ACTOR_SELF, 4, 10, 0)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_marshal_guy_Palette_00_Anim_C)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
