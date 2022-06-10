@@ -469,6 +469,11 @@ enum Emotes {
     EMOTE_INVALID            = 5,
 };
 
+enum Emoters {
+    EMOTER_PLAYER   = 0,
+    EMOTER_NPC      = 1
+};
+
 enum Easings {
     EASING_LINEAR                   = 0,
     EASING_QUADRATIC_IN             = 1,

@@ -65,7 +65,58 @@ ApiStatus func_802D7690(Evt* script, s32 isInitialCall) {
     }
 }
 
-INCLUDE_ASM(s32, "evt/fx_api", ShowEmote, Evt* script, s32 isInitialCall);
+ApiStatus ShowEmote(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    
+    s32 npcID = evt_get_variable(script, *args++);
+    s32 emoteType = evt_get_variable(script, *args++);
+    f32 pitch = evt_get_float_variable(script, *args++);
+    s32 duration = evt_get_variable(script, *args++);
+    s32 npcType = evt_get_variable(script, *args++);
+    f32 dX = evt_get_float_variable(script, *args++);
+    f32 dY = evt_get_float_variable(script, *args++);
+    f32 dZ = evt_get_float_variable(script, *args++);
+    f32 radius = evt_get_float_variable(script, *args++);
+
+    Npc* npc;
+    s32 emoteHandle;
+    f32 X, Y, Z, R;
+    
+    switch (npcType) {
+        case EMOTER_PLAYER:
+            // show emote from player
+            npc = (Npc*)-1;
+            X = 0.0f;
+            Y = (gPlayerStatus.colliderHeight * 2) / 3;
+            Z = 0.0f;
+            R = gPlayerStatus.colliderHeight / 3;
+            break;
+        
+        case EMOTER_NPC:
+            // show emote from NPC
+            npc = resolve_npc(script, npcID);
+            if (npc == NULL) {
+                return ApiStatus_DONE2;
+            }
+            X = 0.0f;
+            Y = (npc->collisionHeight * 4) / 5;
+            Z = 0.0f;
+            R = npc->collisionHeight / 3;
+            break;
+
+        default:
+            // show emote at arbitrary position
+            X = dX;
+            Y = dY;
+            Z = dZ;
+            R = radius;
+            npc = NULL;
+        break;
+    }
+    fx_emote(emoteType, npc, X, Y, Z, R, pitch, duration, &emoteHandle);
+
+    return ApiStatus_DONE2;
+}
 
 ApiStatus RemoveEffect(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
