@@ -149,10 +149,10 @@ EvtScript N(init) = {
 #include "battle/area_sam2/actor/img.pal.inc.c"
 
 UnknownMonstarStruct D_8021A2B8_63F498 = {
-    .raster = D_8021A098,
-    .palette = D_8021A298,
-    .width = D_8021A098_width,
-    .height = D_8021A098_height,
+    .raster = battle_area_sam2_actor_img_png,
+    .palette = battle_area_sam2_actor_img_pal,
+    .width = battle_area_sam2_actor_img_png_width,
+    .height = battle_area_sam2_actor_img_png_height,
     .unk_0C = -4,
     .unk_10 = 0,
     .dlist = N(dlist),
