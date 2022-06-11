@@ -3667,7 +3667,7 @@ ApiStatus HealActor(Evt* script, s32 isInitialCall) {
             if (script->functionTemp[3] == 0) {
                 dispatch_event_actor(actor, EVENT_SWAP_PARTNER);
                 fx_recover(0, x2, y2, z2, hpBoost);
-                func_802D7460(x1, y1, z1, hpBoost);
+                show_start_recovery_shimmer(x1, y1, z1, hpBoost);
                 script->functionTemp[3] = 30;
                 script->functionTemp[0] = 2;
             } else {
@@ -3683,7 +3683,7 @@ ApiStatus HealActor(Evt* script, s32 isInitialCall) {
                 if (actor->maxHP < actor->currentHP) {
                     actor->currentHP = actor->maxHP;
                 }
-                func_802D74C0(x1, y1, z1, hpBoost);
+                show_recovery_shimmer(x1, y1, z1, hpBoost);
                 script->functionTemp[3] = 15;
                 script->functionTemp[0] = 3;
             } else {

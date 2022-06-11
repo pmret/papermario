@@ -267,7 +267,7 @@ void btl_state_update_celebration(void) {
                 btl_cam_use_preset(BTL_CAM_PRESET_C);
                 btl_cam_move(5);
                 dma_copy(_79EF40_ROM_START, _79EF40_ROM_END, _79EF40_VRAM);
-                sfx_play_sound(0x80000008);
+                sfx_play_sound(SOUND_80000008);
                 D_8029FB84 = 0;
                 gBattleState2 = BATTLE_STATE2_UNK_5;
             }
@@ -630,7 +630,7 @@ void btl_state_update_celebration(void) {
                     sfx_play_sound(SOUND_749);
                     gBattleState2 = BATTLE_STATE2_UNK_9;
                 } else {
-                    sfx_play_sound(0x21D);
+                    sfx_play_sound(SOUND_MENU_ERROR);
                     gBattleState2 = BATTLE_STATE2_UNK_F;
                 }
                 break;

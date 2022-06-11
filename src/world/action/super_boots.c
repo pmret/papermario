@@ -27,7 +27,7 @@ void func_802B6000_E26DE0(void) {
         disable_player_input();
         playerStatus->flags |= PLAYER_STATUS_FLAGS_200;
         gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_FLAGS_1;
-        sfx_play_sound_at_player(0x146, 0);
+        sfx_play_sound_at_player(SOUND_146, 0);
     }
 
     tempCondition = 0;
@@ -123,7 +123,7 @@ void func_802B6000_E26DE0(void) {
                         playerStatus->pitch = 0.0f;
                         playerStatus->fallState++;
                         exec_ShakeCam1(0, 0, 4);
-                        sfx_play_sound_at_player(0x149, 0);
+                        sfx_play_sound_at_player(SOUND_149, 0);
                         start_rumble(0x80, 0x19);
                         tempStruct = &D_8015A578;
                         tempStruct->unk_00 = 1;

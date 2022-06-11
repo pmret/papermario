@@ -510,7 +510,7 @@ void pause_map_handle_input(MenuPanel* tab) {
     }
 
     if (gPausePressedButtons & B_BUTTON) {
-        sfx_play_sound(0xCA);
+        sfx_play_sound(SOUND_MENU_BACK);
         gPauseMenuCurrentTab = 0;
         return;
     }

@@ -41,8 +41,8 @@ void func_802B6000_E24920(void) {
         }
 
         suggest_player_anim_clearUnkFlag(phi_a0);
-        sfx_play_sound_at_player(0x8161, 0);
-        sfx_play_sound_at_player(0x148, 0);
+        sfx_play_sound_at_player(SOUND_8161, 0);
+        sfx_play_sound_at_player(SOUND_SOFT_LAND, 0);
 
         if (!(collisionStatus->currentFloor & COLLISION_WITH_ENTITY_BIT)) {
             phys_adjust_cam_on_landing();

@@ -28,7 +28,7 @@ ApiStatus N(func_802A1354_71B4F4)(Evt* script, s32 isInitialCall) {
     s32 scaleX, scaleY;
 
     if (actor != NULL) {
-        sfx_play_sound(0x366);
+        sfx_play_sound(SOUND_366);
 
         posX = actor->currentPos.x;
         posY = actor->currentPos.y + (actor->size.y / 10);

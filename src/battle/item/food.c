@@ -149,13 +149,13 @@ EvtScript N(script6) = {
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_CALL(GetActorPos, ACTOR_PARTNER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_ADD(EVT_VAR(1), 25)
-    EVT_CALL(func_802D7520, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), EVT_VAR(11))
+    EVT_CALL(ShowStartRecoveryShimmer, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), EVT_VAR(11))
     EVT_IF_GT(EVT_VAR(11), 0)
         EVT_CALL(N(func_802A12EC_7333BC), EVT_VAR(11))
     EVT_END_IF
     EVT_WAIT_FRAMES(30)
     EVT_CALL(GetActorPos, ACTOR_PARTNER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-    EVT_CALL(func_802D75D8, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), EVT_VAR(11))
+    EVT_CALL(ShowRecoveryShimmer, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), EVT_VAR(11))
     EVT_WAIT_FRAMES(20)
     EVT_CALL(SetActorYaw, ACTOR_PLAYER, 150)
     EVT_WAIT_FRAMES(1)
@@ -214,7 +214,7 @@ EvtScript N(main) = {
     EVT_END_IF
     EVT_CALL(GetActorPos, ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_ADD(EVT_VAR(1), 25)
-    EVT_CALL(func_802D7520, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), EVT_VAR(11))
+    EVT_CALL(ShowStartRecoveryShimmer, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), EVT_VAR(11))
     EVT_IF_NE(EVT_VAR(11), 0)
         EVT_CALL(N(AddHP), EVT_VAR(11))
     EVT_END_IF
@@ -229,7 +229,7 @@ EvtScript N(main) = {
         EVT_WAIT_FRAMES(30)
     EVT_END_IF
     EVT_CALL(GetActorPos, ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-    EVT_CALL(func_802D75D8, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), EVT_VAR(11))
+    EVT_CALL(ShowRecoveryShimmer, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), EVT_VAR(11))
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10002)
     EVT_WAIT_FRAMES(20)
     EVT_EXEC_WAIT(N(PlayerGoHome))

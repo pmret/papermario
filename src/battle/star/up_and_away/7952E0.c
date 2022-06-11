@@ -308,7 +308,7 @@ EvtScript N(usePower) = {
     EVT_CALL(SetNpcAnimation, 100, NPC_ANIM_battle_kalmar_Palette_00_Anim_2)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_WAIT_FRAMES(20)
-    EVT_CALL(Spawn802D9D50, 0, 0, 0, 320, 240, 128, 10)
+    EVT_CALL(SetMotionBlurParams, 0, 0, 0, 320, 240, 128, 10)
     EVT_CALL(func_802A1518_7957F8)
     EVT_CALL(PlaySound, 0x247)
     EVT_CALL(PlayEffect, 0x39, 0, 0, 20, 0, EVT_FLOAT(1.0), 90, 0, 0, 0, 0, 0, 0, 0)
@@ -318,7 +318,7 @@ EvtScript N(usePower) = {
     EVT_END_THREAD
     EVT_CALL(PlayEffect, 0x39, 0, 0, 20, 0, EVT_FLOAT(1.0), 90, 0, 0, 0, 0, 0, 0, 0)
     EVT_WAIT_FRAMES(75)
-    EVT_CALL(Spawn802D9D50, 0, 0, 0, 320, 240, 0, 10)
+    EVT_CALL(SetMotionBlurParams, 0, 0, 0, 320, 240, 0, 10)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)

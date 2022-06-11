@@ -25,12 +25,12 @@ s32 calc_item_check_hit(void) {
             if (actor->transStatus == 0xE) {
                 return HIT_RESULT_MISS;
             }
-            if (actor->stoneStatus == 0xC) {
-                sfx_play_sound_at_position(0x10C, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+            if (actor->stoneStatus == STATUS_STONE) {
+                sfx_play_sound_at_position(SOUND_IMMUNE, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
                 return HIT_RESULT_IMMUNE;
             }
             if ((battleStatus->currentAttackElement & DAMAGE_TYPE_JUMP) && (actorPart->eventFlags & ACTOR_EVENT_FLAG_SPIKY_TOP)) {
-                sfx_play_sound_at_position(0xE9, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+                sfx_play_sound_at_position(SOUND_HIT_NORMAL, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
                 return HIT_RESULT_LANDED_ON_SPIKE;
             }
         } else {
@@ -90,7 +90,7 @@ s32 calc_item_damage_enemy(void) {
     }
 
     if (battleStatus->currentAttackElement & DAMAGE_TYPE_FIRE) {
-        fx_ring_blast(0, state->goalPos.x, state->goalPos.y, state->goalPos.z + 5.0f, 1.0f, 0x18);
+        fx_ring_blast(0, state->goalPos.x, state->goalPos.y, state->goalPos.z + 5.0f, 1.0f, 24);
         isFireDamage = TRUE;
     }
     if (battleStatus->currentAttackElement & DAMAGE_TYPE_ELECTRIC) {
@@ -98,7 +98,7 @@ s32 calc_item_damage_enemy(void) {
         isElectricDamage = TRUE;
     }
     if (battleStatus->currentAttackElement & DAMAGE_TYPE_WATER) {
-        fx_water_splash(0, state->goalPos.x, state->goalPos.y, state->goalPos.z + 5.0f, 1.0f, 0x18);
+        fx_water_splash(0, state->goalPos.x, state->goalPos.y, state->goalPos.z + 5.0f, 1.0f, 24);
     }
     if (battleStatus->currentAttackElement & DAMAGE_TYPE_ICE) {
         fx_big_snowflakes(0, state->goalPos.x, state->goalPos.y, state->goalPos.z + 5.0f);

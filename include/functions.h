@@ -591,8 +591,8 @@ void exec_entity_commandlist(Entity* entity);
 
 void sfx_reset_door_sounds(void);
 
-void func_802D7460(f32 x, f32 y, f32 z, s32 arg3);
-void func_802D74C0(f32 x, f32 y, f32 z, s32 arg3);
+void show_start_recovery_shimmer(f32 x, f32 y, f32 z, s32 arg3);
+void show_recovery_shimmer(f32 x, f32 y, f32 z, s32 arg3);
 
 void show_damage_popup(f32 x, f32 y, f32 z, s32 damageAmount, s32);
 void add_xz_vec3f(Vec3f* vector, f32 speed, f32 angleDeg);

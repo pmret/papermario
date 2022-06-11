@@ -19,7 +19,7 @@ void entity_SimpleSpring_idle(Entity* ent) {
         play_model_animation(ent->virtualModelIndex, 0x1E4);
         entity_start_script(ent);
         exec_entity_commandlist(ent);
-        sfx_play_sound_at_position(0x2086, 0, ent->position.x, ent->position.y, ent->position.z);
+        sfx_play_sound_at_position(SOUND_2086, 0, ent->position.x, ent->position.y, ent->position.z);
         disable_player_input();
         gPlayerStatus.currentSpeed = 0;
     }
