@@ -7,6 +7,7 @@ import argparse
 import itertools
 import struct
 import spimdisasm
+import rabbitizer
 
 from pathlib import Path
 
@@ -193,14 +194,14 @@ def get_compiler_info(rom_bytes, entry_point, print_result=True):
 
     vram = entry_point
     wordList = spimdisasm.common.Utils.bytesToBEWords(rom_bytes[0x1000:])
-
-    for insn in spimdisasm.mips.instructions.wordsToInstructionsIter(wordList, vram):
+    for word in wordList:
+        insn = rabbitizer.Instruction(word)
         if not insn.isImplemented():
             break
 
-        if insn.uniqueId == spimdisasm.mips.instructions.InstructionId.J:
+        if insn.uniqueId == rabbitizer.InstrId.cpu_j:
             jumps += 1
-        elif insn.uniqueId == spimdisasm.mips.instructions.InstructionId.B:
+        elif insn.uniqueId == rabbitizer.InstrId.cpu_b:
             branches += 1
 
     compiler = "IDO" if branches > jumps else "GCC"
@@ -213,7 +214,7 @@ def get_compiler_info(rom_bytes, entry_point, print_result=True):
 
 
 def main():
-    spimdisasm.mips.instructions.InstructionConfig.PSEUDO_B = True
+    rabbitizer.config.pseudos_pseudoB = True
 
     args = parser.parse_args()
     rom_bytes = read_rom(Path(args.rom))

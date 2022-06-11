@@ -5,6 +5,7 @@ import os
 import re
 from pathlib import Path
 import spimdisasm
+import rabbitizer
 
 from util import log, options
 from util.compiler import GCC, SN64
@@ -155,8 +156,8 @@ class CommonSegC(CommonSegCodeSubsegment):
     def mark_c_funcs_as_defined(self, c_funcs):
         for func_name in c_funcs:
             found = False
-            for func_addr in self.seg_symbols:
-                for symbol in self.seg_symbols[func_addr]:
+            for symbols in self.seg_symbols.values():
+                for symbol in symbols:
                     if symbol.name == func_name:
                         symbol.defined = True
                         found = True
@@ -226,10 +227,8 @@ class CommonSegC(CommonSegCodeSubsegment):
             # Terrible hack to "auto-decompile" empty functions
             if (
                 options.get_auto_decompile_empty_functions()
-                and func.instructions[0].uniqueId
-                == spimdisasm.mips.instructions.InstructionId.JR
-                and func.instructions[1].uniqueId
-                == spimdisasm.mips.instructions.InstructionId.NOP
+                and func.instructions[0].isJrRa()
+                and func.instructions[1].isNop()
             ):
                 c_lines.append("void " + func.getName() + "(void) {")
                 c_lines.append("}")

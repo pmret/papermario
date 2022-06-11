@@ -1,5 +1,6 @@
 from typing import Dict, List, Optional, TYPE_CHECKING, Set
 import spimdisasm
+import rabbitizer
 import tqdm
 
 # circular import
@@ -135,7 +136,7 @@ def initialize(all_segments: "List[Segment]"):
                                             else:
                                                 # Add segment to symbol, symbol to segment
                                                 sym.segment = seg
-                                                seg.add_seg_symbol(sym)
+                                                seg.add_symbol(sym)
                                             continue
                                     except:
                                         log.parsing_error_preamble(path, line_num, line)
@@ -356,6 +357,32 @@ def retrieve_from_ranges(vram, rom=None):
 
 
 class Symbol:
+    def __init__(
+        self,
+        vram: int,
+        given_name: Optional[str] = None,
+        rom: Optional[int] = None,
+        type: Optional[str] = "unknown",
+        given_size: Optional[int] = None,
+        segment: Optional["Segment"] = None,
+    ):
+        self.defined: bool = False
+        self.referenced: bool = False
+        self.vram_start = vram
+        self.rom = rom
+        self.type = type
+        self.given_size = given_size
+        self.given_name = given_name
+        self.access_mnemonic: Optional[rabbitizer.Enum] = None
+        self.disasm_str: Optional[str] = None
+        self.dead: bool = False
+        self.extract: bool = True
+        self.user_declared: bool = False
+        self.segment: Optional["Segment"] = segment
+
+    def __str__(self):
+        return self.name
+
     def format_name(self, format: str) -> str:
         ret = format
 
@@ -379,7 +406,7 @@ class Symbol:
 
     @property
     def default_name(self) -> str:
-        if self.segment is not None:
+        if self.segment:
             if isinstance(self.rom, int):
                 suffix = self.format_name(self.segment.symbol_name_format)
             else:
@@ -426,31 +453,3 @@ class Symbol:
 
     def contains_rom(self, offset):
         return offset >= self.rom and offset < self.rom_end
-
-    def __init__(
-        self,
-        vram: int,
-        given_name: Optional[str] = None,
-        rom: Optional[int] = None,
-        type: Optional[str] = "unknown",
-        given_size: Optional[int] = None,
-        segment: Optional["Segment"] = None,
-    ):
-        self.defined: bool = False
-        self.referenced: bool = False
-        self.vram_start = vram
-        self.rom = rom
-        self.type = type
-        self.given_size = given_size
-        self.given_name = given_name
-        self.access_mnemonic: Optional[
-            spimdisasm.mips.instructions.InstructionId
-        ] = None
-        self.disasm_str = None
-        self.dead = False
-        self.extract = True
-        self.user_declared: bool = False
-        self.segment = segment
-
-    def __str__(self):
-        return self.name

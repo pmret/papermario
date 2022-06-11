@@ -175,7 +175,9 @@ class LinkerWriter:
             if isinstance(seg, CommonSegData):
                 for subseg in seg.subsegments:
                     if isinstance(subseg, N64SegImg):
-                        self._write_symbol(get_segment_cname(subseg), f"0x{subseg.rom_start:X}")
+                        self._write_symbol(
+                            get_segment_cname(subseg), f"0x{subseg.rom_start:X}"
+                        )
 
             self._writeln(f"{entry.object_path}({cur_section});")
 

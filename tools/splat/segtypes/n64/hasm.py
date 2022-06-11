@@ -1,8 +1,25 @@
-from segtypes.n64.asm import N64SegAsm
+from segtypes.common.hasm import CommonSegHasm
+
+from util import options
 
 
-class N64SegHasm(N64SegAsm):
-    def split_write(self, out_path, out_lines):
-        if not out_path.exists():
-            with open(out_path, "w", newline="\n") as f:
-                f.write("\n".join(out_lines))
+class N64SegHasm(CommonSegHasm):
+    @staticmethod
+    def get_file_header():
+        ret = []
+
+        ret.append('.include "macro.inc"')
+        ret.append("")
+        ret.append("# assembler directives")
+        ret.append(".set noat      # allow manual use of $at")
+        ret.append(".set noreorder # don't insert nops after branches")
+        ret.append(".set gp=64     # allow use of 64-bit general purpose registers")
+        ret.append("")
+        preamble = options.get_generated_s_preamble()
+        if preamble:
+            ret.append(preamble)
+            ret.append("")
+        ret.append('.section .text, "ax"')
+        ret.append("")
+
+        return ret

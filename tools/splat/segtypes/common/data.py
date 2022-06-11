@@ -3,7 +3,7 @@ from segtypes.common.codesubsegment import CommonSegCodeSubsegment
 from segtypes.common.group import CommonSegGroup
 from pathlib import Path
 from typing import List, Optional
-import spimdisasm
+import rabbitizer
 from util.symbols import Symbol
 from util import floats, options
 
@@ -365,7 +365,7 @@ class CommonSegData(CommonSegCodeSubsegment, CommonSegGroup):
                 # Checking if the mnemonic is addiu may be too picky - we'll see
                 if (
                     self.is_valid_ascii(sym_bytes)
-                    and mnemonic == spimdisasm.mips.instructions.InstructionId.ADDIU
+                    and mnemonic == rabbitizer.InstrId.cpu_addiu
                 ):
                     stype = "ascii"
                 elif sym.type == "jtbl":

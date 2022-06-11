@@ -1,6 +1,7 @@
 from util import options
 from segtypes.common.code import CommonSegCode
 import spimdisasm
+import rabbitizer
 
 from segtypes.segment import Segment
 from util.symbols import Symbol
@@ -10,28 +11,28 @@ from util import symbols
 # abstract class for c, asm, data, etc
 class CommonSegCodeSubsegment(Segment):
     double_mnemonics = [
-        spimdisasm.mips.instructions.InstructionId.LDC1,
-        spimdisasm.mips.instructions.InstructionId.SDC1,
+        rabbitizer.InstrId.cpu_ldc1,
+        rabbitizer.InstrId.cpu_sdc1,
     ]
     word_mnemonics = [
-        spimdisasm.mips.instructions.InstructionId.ADDIU,
-        spimdisasm.mips.instructions.InstructionId.SW,
-        spimdisasm.mips.instructions.InstructionId.LW,
+        rabbitizer.InstrId.cpu_addiu,
+        rabbitizer.InstrId.cpu_sw,
+        rabbitizer.InstrId.cpu_lw,
     ]
     float_mnemonics = [
-        spimdisasm.mips.instructions.InstructionId.LWC1,
-        spimdisasm.mips.instructions.InstructionId.SWC1,
+        rabbitizer.InstrId.cpu_lwc1,
+        rabbitizer.InstrId.cpu_swc1,
     ]
     short_mnemonics = [
-        spimdisasm.mips.instructions.InstructionId.ADDIU,
-        spimdisasm.mips.instructions.InstructionId.LH,
-        spimdisasm.mips.instructions.InstructionId.SH,
-        spimdisasm.mips.instructions.InstructionId.LHU,
+        rabbitizer.InstrId.cpu_addiu,
+        rabbitizer.InstrId.cpu_lh,
+        rabbitizer.InstrId.cpu_sh,
+        rabbitizer.InstrId.cpu_lhu,
     ]
     byte_mnemonics = [
-        spimdisasm.mips.instructions.InstructionId.LB,
-        spimdisasm.mips.instructions.InstructionId.SB,
-        spimdisasm.mips.instructions.InstructionId.LBU,
+        rabbitizer.InstrId.cpu_lb,
+        rabbitizer.InstrId.cpu_sb,
+        rabbitizer.InstrId.cpu_lbu,
     ]
 
     @property
@@ -68,12 +69,11 @@ class CommonSegCodeSubsegment(Segment):
         for func in self.text_section.symbolList:
             assert isinstance(func, spimdisasm.mips.symbols.SymbolFunction)
 
-            self.process_insns(func, is_asm=is_asm)
+            self.process_insns(func)
 
         # Process jumptable labels and pass them to spimdisasm
         self.gather_jumptable_labels(rom_bytes)
         for jtbl_label_vram in self.parent.jtbl_glabels_to_add:
-            rom_addr = self.get_most_parent().ram_to_rom(jtbl_label_vram)
             sym = self.create_symbol(
                 jtbl_label_vram, True, type="jtbl_label", define=True
             )
@@ -83,7 +83,6 @@ class CommonSegCodeSubsegment(Segment):
     def process_insns(
         self,
         func_spim: spimdisasm.mips.symbols.SymbolFunction,
-        is_asm=False,
     ):
         assert isinstance(self.parent, CommonSegCode)
         assert func_spim.vram is not None
@@ -140,10 +139,7 @@ class CommonSegCodeSubsegment(Segment):
                     if self.parent:
                         self.parent.check_rodata_sym(func_spim.vram, sym)
 
-    def update_access_mnemonic(
-        self, sym: Symbol, insn: spimdisasm.mips.instructions.InstructionBase
-    ):
-        assert isinstance(insn.uniqueId, spimdisasm.mips.instructions.InstructionId)
+    def update_access_mnemonic(self, sym: Symbol, insn: rabbitizer.Instruction):
         if not sym.access_mnemonic:
             sym.access_mnemonic = insn.uniqueId
         elif sym.access_mnemonic in self.double_mnemonics:
@@ -153,7 +149,7 @@ class CommonSegCodeSubsegment(Segment):
             and insn.uniqueId in self.double_mnemonics
         ):
             sym.access_mnemonic = insn.uniqueId
-        elif sym.access_mnemonic == spimdisasm.mips.instructions.InstructionId.ADDIU:
+        elif sym.access_mnemonic == rabbitizer.InstrId.cpu_addiu:
             sym.access_mnemonic = insn.uniqueId
         elif sym.access_mnemonic in self.short_mnemonics:
             return

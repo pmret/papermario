@@ -2,6 +2,7 @@
 
 import argparse
 import spimdisasm
+import rabbitizer
 
 
 def int_any_base(x):
@@ -27,13 +28,12 @@ def run(rom_bytes, start_offset, vram, end_offset=None):
     last_return = rom_addr
 
     wordList = spimdisasm.common.Utils.bytesToBEWords(rom_bytes[start_offset:])
+    for word in wordList:
+        insn = rabbitizer.Instruction(word)
+        if not insn.isImplemented():
+            break
 
-    for insn in spimdisasm.mips.instructions.wordsToInstructionsIter(wordList, vram):
-        # insn.rs == $ra
-        if (
-            insn.uniqueId == spimdisasm.mips.instructions.InstructionId.JR
-            and insn.rs == 31
-        ):
+        if insn.isJrRa():
             last_return = rom_addr
         rom_addr += 4
         if end_offset and rom_addr >= end_offset:

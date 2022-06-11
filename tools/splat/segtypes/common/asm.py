@@ -32,7 +32,3 @@ class CommonSegAsm(CommonSegCodeSubsegment):
                     for line in self.get_file_header():
                         f.write(line + "\n")
                     f.write(self.text_section.disassemble())
-
-    def split_write(self, out_path, out_lines):
-        with open(out_path, "w", newline="\n") as f:
-            f.write("\n".join(out_lines))
