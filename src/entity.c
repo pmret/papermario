@@ -1,8 +1,7 @@
 #include "common.h"
 
-s32 D_8014C260[] = { 0x00000000, 0x00000000, 0xFFFFFF00, 0xFFFFFF00 };
-
-s32 D_8014C270[] = { 0x00000000, 0x00000000, 0x00000000, 0x00000000 };
+s32 D_8014C260[] = { 0x00000000, 0x00000000 };
+Lights1 D_8014C268 = gdSPDefLights1(255, 255, 255, 0, 0, 0, 0, 0, 0);
 
 extern EntityModelList gWorldEntityModelList;
 extern EntityModelList gBattleEntityModelList;
@@ -17,6 +16,29 @@ extern s32 entity_fog_blue;
 extern s32 entity_fog_alpha;
 extern s32 entity_fog_dist_min;
 extern s32 entity_fog_dist_max;
+
+extern Gfx D_8014B7F8[];
+extern Gfx D_8014B820[];
+extern Gfx D_8014B848[];
+extern Gfx D_8014B870[];
+extern Gfx D_8014B898[];
+extern Gfx D_8014B8C0[];
+extern Gfx D_8014B8E8[];
+extern Gfx D_8014B988[];
+extern Gfx D_8014B9B0[];
+extern Gfx D_8014B9D8[];
+extern Gfx D_8014BA00[];
+extern Gfx D_8014BA48[];
+extern Gfx D_8014BA70[];
+extern Gfx D_8014BA98[];
+extern Gfx D_8014BAE8[];
+extern Gfx D_8014BE78[];
+extern Gfx D_8014BEA0[];
+extern Gfx D_8014BEC8[];
+extern Gfx D_8014BEF0[];
+extern Gfx D_8014BF18[];
+extern Gfx D_8014BF40[];
+extern Gfx D_8014BF68[];
 
 
 s32 step_entity_model_commandlist(EntityModel* entityModel);
@@ -85,7 +107,7 @@ s32 load_entity_model(s32* cmdList) {
 
     newEntityModel->flags = (ENTITY_MODEL_FLAGS_1 | ENTITY_MODEL_FLAGS_2 | ENTITY_MODEL_FLAGS_4 | ENTITY_MODEL_FLAGS_10);
     newEntityModel->renderMode = 1;
-    newEntityModel->displayList = NULL;
+    newEntityModel->gfx.displayList = NULL;
     newEntityModel->cmdListReadPos = cmdList;
     newEntityModel->nextFrameTime = 1.0f;
     newEntityModel->timeScale = 1.0f;
@@ -104,7 +126,7 @@ s32 load_entity_model(s32* cmdList) {
 
 s32 ALT_load_entity_model(s32* cmdList) {
     EntityModel* newEntityModel;
-    Gfx* newDisplayList;
+    SpriteRasterInfo* imageData;
     s32 i;
 
     for (i = 0; i < MAX_ENTITY_MODELS; i++) {
@@ -123,8 +145,8 @@ s32 ALT_load_entity_model(s32* cmdList) {
 
     ASSERT(newEntityModel != NULL);
 
-    newEntityModel->displayList = newDisplayList = heap_malloc(sizeof(Gfx) * 2);
-    ASSERT(newDisplayList != NULL);
+    newEntityModel->gfx.imageData = imageData = heap_malloc(sizeof(*imageData));
+    ASSERT(imageData != NULL);
 
     newEntityModel->flags = (ENTITY_MODEL_FLAGS_1 | ENTITY_MODEL_FLAGS_2 | ENTITY_MODEL_FLAGS_4 | ENTITY_MODEL_FLAGS_10 | ENTITY_MODEL_FLAGS_400);
     newEntityModel->renderMode = 1;
@@ -166,7 +188,7 @@ void exec_entity_model_commandlist(s32 idx) {
 }
 
 s32 step_entity_model_commandlist(EntityModel* entityModel) {
-    Gfx* displayList;
+    SpriteRasterInfo* imageData;
 
     u32* curPos = entityModel->cmdListReadPos;
     switch (*curPos++) {
@@ -175,7 +197,7 @@ s32 step_entity_model_commandlist(EntityModel* entityModel) {
             return 1;
         case 1: // set display list ptr
             entityModel->nextFrameTime = (f32) *curPos++;
-            entityModel->displayList = (Gfx*) *curPos++;
+            entityModel->gfx.displayList = (Gfx*) *curPos++;
             entityModel->cmdListReadPos = curPos;
             break;
         case 2: // restore saved position
@@ -196,13 +218,13 @@ s32 step_entity_model_commandlist(EntityModel* entityModel) {
             entityModel->flags &= ~*curPos++;
             entityModel->cmdListReadPos = curPos;
             return 1;
-        case 7: // populate display list
-            displayList = entityModel->displayList;
+        case 7: // set image data
+            imageData = entityModel->gfx.imageData;
             entityModel->nextFrameTime = *curPos++;
-            displayList[0].words.w0 = *curPos++;
-            displayList[0].words.w1 = *curPos++;
-            displayList[1].words.w0 = *curPos++;
-            displayList[1].words.w1 = *curPos++;
+            imageData->raster = *curPos++;
+            imageData->defaultPal = *curPos++;
+            imageData->width = *curPos++;
+            imageData->height = *curPos++;
             entityModel->cmdListReadPos = curPos;
             break;
     }
@@ -217,12 +239,250 @@ void make_entity_model_mtx_flipZ(Matrix4f mtx) {
     mtx[3][3] = 1.0f;
 }
 
-void appendGfx_entity_model(void* data);
-INCLUDE_ASM(s32, "entity", appendGfx_entity_model);
+void appendGfx_entity_model(EntityModel* model) {
+    Matrix4f mtx;
+    Matrix4f mtx2;
+    FoldImageRecPart foldImage;
+    Matrix4f foldMtx;
 
-INCLUDE_ASM(s32, "entity", draw_entity_model_A);
+    gDisplayContext->matrixStack[gMatrixListPos] = model->transform;
+    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    if (!(model->flags & MODEL_FLAGS_HAS_TRANSFORM_APPLIED)) {
+        if (!(model->flags & 0x10000)) {
+            s32 cond;
 
-INCLUDE_ASM(s32, "entity", draw_entity_model_B);
+            gDPPipeSync(gMasterGfxPos++);
+            gDPSetRenderMode(gMasterGfxPos++, G_RM_TEX_EDGE, G_RM_TEX_EDGE2);
+            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 255, 255, 255, 255);
+            gDPSetCombineMode(gMasterGfxPos++, G_CC_MODULATEIA_PRIM, G_CC_MODULATEIA_PRIM);
+            gDPSetAlphaCompare(gMasterGfxPos++, G_AC_NONE);
+            gSPSetOtherMode(gMasterGfxPos++, G_SETOTHERMODE_H, G_MDSFT_ALPHADITHER, 18, G_AD_DISABLE | G_CD_DISABLE | G_CK_NONE | G_TC_FILT | G_TF_POINT | G_TT_NONE | G_TL_TILE | G_TD_CLAMP | G_TP_NONE | G_CYC_1CYCLE);
+
+            cond = FALSE;
+            if (entity_fog_enabled && !(model->flags & 0x800)) {
+                cond = TRUE;
+            }
+            switch (cond) {
+                case FALSE:
+                    switch (model->renderMode) {
+                        case RENDER_MODE_SURFACE_OPA:
+                            gSPDisplayList(gMasterGfxPos++, D_8014B7F8);
+                            break;
+                        case RENDER_MODE_DECAL_OPA:
+                            gSPDisplayList(gMasterGfxPos++, D_8014B820);
+                            break;
+                        case RENDER_MODE_INTERSECTING_OPA:
+                            gSPDisplayList(gMasterGfxPos++, D_8014B848);
+                            break;
+                        case RENDER_MODE_ALPHATEST:
+                            gSPDisplayList(gMasterGfxPos++, D_8014B870);
+                            break;
+                        case RENDER_MODE_SURFACE_XLU_LAYER1:
+                        case RENDER_MODE_SURFACE_XLU_LAYER2:
+                        case RENDER_MODE_SURFACE_XLU_LAYER3:
+                            gSPDisplayList(gMasterGfxPos++, D_8014B898);
+                            break;
+                        case RENDER_MODE_SURFACE_XLU_NO_AA:
+                            gSPDisplayList(gMasterGfxPos++, D_8014B9B0);
+                            break;
+                        case RENDER_MODE_DECAL_XLU:
+                        case RENDER_MODE_1E:
+                            gSPDisplayList(gMasterGfxPos++, D_8014B8C0);
+                            break;
+                        case RENDER_MODE_DECAL_XLU_NOAA:
+                        case RENDER_MODE_SHADOW:
+                            gSPDisplayList(gMasterGfxPos++, D_8014B9D8);
+                            break;
+                        case RENDER_MODE_INTERSECTING_XLU:
+                            gSPDisplayList(gMasterGfxPos++, D_8014B8E8);
+                            break;
+                        case RENDER_MODE_28:
+                            gSPDisplayList(gMasterGfxPos++, D_8014BA00);
+                            break;
+                        case RENDER_MODE_ALPHATEST_ONESIDED:
+                            gSPDisplayList(gMasterGfxPos++, D_8014B988);
+                            break;
+                        case RENDER_MODE_SURFACE_OPA_NO_ZB:
+                        case RENDER_MODE_2A:
+                            gSPDisplayList(gMasterGfxPos++, D_8014BA48);
+                            break;
+                        case RENDER_MODE_ALPHATEST_NO_ZB:
+                        case RENDER_MODE_2B:
+                            gSPDisplayList(gMasterGfxPos++, D_8014BA70);
+                            break;
+                        case RENDER_MODE_SURFACE_XLU_NO_ZB:
+                        case RENDER_MODE_2C:
+                            gSPDisplayList(gMasterGfxPos++, D_8014BA98);
+                            break;
+                        case RENDER_MODE_2D:
+                            gSPDisplayList(gMasterGfxPos++, D_8014BAE8);
+                            break;
+                    }
+                    break;
+                case TRUE:
+                    switch (model->renderMode) {
+                        case RENDER_MODE_SURFACE_OPA:
+                            gSPDisplayList(gMasterGfxPos++, D_8014BE78);
+                            break;
+                        case RENDER_MODE_DECAL_OPA:
+                            gSPDisplayList(gMasterGfxPos++, D_8014BEA0);
+                            break;
+                        case RENDER_MODE_INTERSECTING_OPA:
+                            gSPDisplayList(gMasterGfxPos++, D_8014BEC8);
+                            break;
+                        case RENDER_MODE_ALPHATEST:
+                            gSPDisplayList(gMasterGfxPos++, D_8014BEF0);
+                            break;
+                        case RENDER_MODE_SURFACE_XLU_LAYER1:
+                            gSPDisplayList(gMasterGfxPos++, D_8014BF18);
+                            break;
+                        case RENDER_MODE_DECAL_XLU:
+                            gSPDisplayList(gMasterGfxPos++, D_8014BF40);
+                            break;
+                        case RENDER_MODE_INTERSECTING_XLU:
+                            gSPDisplayList(gMasterGfxPos++, D_8014BF68);
+                            break;
+                    }
+                    gDPSetFogColor(gMasterGfxPos++, entity_fog_red, entity_fog_green, entity_fog_blue, entity_fog_alpha);
+                    gSPFogPosition(gMasterGfxPos++, entity_fog_dist_min, entity_fog_dist_max);
+                    break;
+            }
+            gSPClearGeometryMode(gMasterGfxPos++, G_LIGHTING);
+            if (!entity_fog_enabled || (model->flags & 0x800)) {
+                gDPSetCombineMode(gMasterGfxPos++, G_CC_MODULATEIA, G_CC_MODULATEIA);
+            } else {
+                gDPSetCombineLERP(gMasterGfxPos++, TEXEL0, 0, SHADE, 0, TEXEL0, 0, 0, TEXEL0, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+            }
+        }
+        if (model->vertexArray != NULL) {
+            gSPSegment(gMasterGfxPos++, D_80154374, VIRTUAL_TO_PHYSICAL(model->vertexArray));
+        }
+        gDPPipeSync(gMasterGfxPos++);
+
+        if (model->fpSetupGfxCallback != NULL) {
+            model->fpSetupGfxCallback(model->setupGfxCallbackArg0);
+        }
+        gDPPipeSync(gMasterGfxPos++);
+
+        gSPDisplayList(gMasterGfxPos++, model->gfx.displayList);
+        gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+        gDPPipeSync(gMasterGfxPos++);
+
+        if (!(model->flags & 0x200)) {
+            return;
+        }
+
+        guMtxL2F(mtx, &model->transform);
+        make_entity_model_mtx_flipZ(mtx2);
+        guMtxCatF(mtx, mtx2, mtx);
+        guMtxF2L(mtx, &model->transform);
+        gDisplayContext->matrixStack[gMatrixListPos] = model->transform;
+        gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+        gSPDisplayList(gMasterGfxPos++, model->gfx.displayList);
+    } else {
+        SpriteRasterInfo* imageData;
+
+        gDPPipeSync(gMasterGfxPos++);
+        gSPClearGeometryMode(gMasterGfxPos++, G_ZBUFFER | G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH);
+        gSPSetGeometryMode(gMasterGfxPos++, G_ZBUFFER | G_SHADE | G_LIGHTING | G_SHADING_SMOOTH);
+        gSPSetLights1(gMasterGfxPos++, D_8014C268);
+        gSPTexture(gMasterGfxPos++, -1, -1, 0, G_TX_RENDERTILE, G_ON);
+        gDPSetAlphaCompare(gMasterGfxPos++, G_AC_NONE);
+        gSPSetOtherMode(gMasterGfxPos++, G_SETOTHERMODE_H, G_MDSFT_ALPHADITHER, 18, G_AD_DISABLE | G_CD_DISABLE | G_CK_NONE | G_TC_FILT | G_TF_BILERP | G_TT_NONE | G_TL_TILE | G_TD_CLAMP | G_TP_PERSP | G_CYC_1CYCLE);
+
+        imageData = model->gfx.imageData;
+        foldImage.raster = imageData->raster;
+        foldImage.palette = imageData->defaultPal;
+        foldImage.width = imageData->width;
+        foldImage.height = imageData->height;
+        foldImage.xOffset = -imageData->width / 2;
+        foldImage.yOffset = imageData->height / 2;
+        foldImage.unk_10 = 255;
+        guMtxL2F(foldMtx, &model->transform);
+        fold_appendGfx_component(0, &foldImage, 0, foldMtx);
+    }
+
+    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+    gDPPipeSync(gMasterGfxPos++);
+}
+
+
+void draw_entity_model_A(s32 modelIdx, Mtx* transformMtx) {
+    EntityModel* model;
+    RenderTask rt;
+    RenderTask* rtPtr = &rt;
+    Camera* camera = &gCameras[gCurrentCamID];
+    Matrix4f mtx;
+    f32 x, y, z, s;
+    f32 inX, inY, inZ;
+
+    if ((gGameStatusPtr->isBattle == 0) || (modelIdx & 0x800)) {
+        modelIdx &= ~0x800;
+        model = (*gCurrentEntityModelList)[modelIdx];
+
+        if (model != NULL) {
+            if (model->flags != 0) {
+                if (!(model->flags & MODEL_FLAGS_USE_CAMERA_UNK_MATRIX)) {
+                    if (!(model->flags & MODEL_FLAGS_FLAG_20)) {
+                        if (!(model->flags & MODEL_FLAGS_FLAG_40) && (model->flags & (1 << gCurrentCamID))) {
+                            model->transform = *transformMtx;
+                            model->vertexArray = NULL;
+                            guMtxL2F(mtx, transformMtx);
+                            inX = mtx[3][0];
+                            inY = mtx[3][1];
+                            inZ = mtx[3][2];
+                            transform_point(camera->perspectiveMatrix, inX, inY, inZ, 1.0f, &x, &y, &z, &s);
+                            rtPtr->renderMode = model->renderMode;
+                            rtPtr->appendGfxArg = model;
+                            rtPtr->appendGfx = appendGfx_entity_model;
+                            rtPtr->distance = ((u32)(model->flags & 0xF000) >> 8) + inZ;
+                            queue_render_task(rtPtr);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+void draw_entity_model_B(s32 modelIdx, Mtx* transformMtx, s32 vertexSegment, Vec3s* vertexArray) {
+    EntityModel* model;
+    RenderTask rt;
+    RenderTask* rtPtr = &rt;
+    Camera* camera = &gCameras[gCurrentCamID];
+    Matrix4f mtx;
+    f32 x, y, z, s;
+    f32 inX, inY, inZ;
+
+    if ((gGameStatusPtr->isBattle == 0) || (modelIdx & 0x800)) {
+        modelIdx &= ~0x800;
+        model = (*gCurrentEntityModelList)[modelIdx];
+
+        if (model != NULL) {
+            if (model->flags != 0) {
+                if (!(model->flags & MODEL_FLAGS_USE_CAMERA_UNK_MATRIX)) {
+                    if (!(model->flags & MODEL_FLAGS_FLAG_20)) {
+                        if (model->flags & (1 << gCurrentCamID)) {
+                            model->transform = *transformMtx;
+                            D_80154374 = vertexSegment;
+                            model->vertexArray = vertexArray;
+                            guMtxL2F(mtx, transformMtx);
+                            inX = mtx[3][0];
+                            inY = mtx[3][1];
+                            inZ = mtx[3][2];
+                            transform_point(camera->perspectiveMatrix, inX, inY, inZ, 1.0f, &x, &y, &z, &s);
+                            rtPtr->renderMode = model->renderMode;
+                            rtPtr->appendGfxArg = model;
+                            rtPtr->appendGfx = appendGfx_entity_model;
+                            rtPtr->distance = ((u32)(model->flags & 0xF000) >> 8) + inZ;
+                            queue_render_task(rtPtr);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
 
 void draw_entity_model_C(s32 modelIdx, Mtx* transformMtx) {
     EntityModel* model;
@@ -285,7 +545,175 @@ void draw_entity_model_D(s32 modelIdx, Mtx* transformMtx, s32 arg2, Vtx* vertexA
     }
 }
 
-INCLUDE_ASM(s32, "entity", draw_entity_model_E);
+void draw_entity_model_E(s32 modelIdx, Mtx* transformMtx) {
+    EntityModel* model = (*gCurrentEntityModelList)[modelIdx & ~0x800];
+    Matrix4f mtx;
+    Matrix4f mtx2;
+    FoldImageRecPart foldImage;
+    Matrix4f foldMtx;
+
+    if (model == NULL) {
+        return;
+    }
+    if (model->flags == 0) {
+        return;
+    }
+    if (model->flags & MODEL_FLAGS_USE_CAMERA_UNK_MATRIX) {
+        return;
+    }
+    if (model->flags & MODEL_FLAGS_FLAG_20) {
+        return;
+    }
+    if (model->flags & MODEL_FLAGS_FLAG_40) {
+        return;
+    }
+    if (!(model->flags & MODEL_FLAGS_TRANSFORM_GROUP_MEMBER)) {
+        return;
+    }
+
+    model->transform = *transformMtx;
+    model->vertexArray = NULL;
+    gDisplayContext->matrixStack[gMatrixListPos] = model->transform;
+    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    if (!(model->flags & MODEL_FLAGS_HAS_TRANSFORM_APPLIED)) {
+        s32 cond = FALSE;
+        if (entity_fog_enabled && !(model->flags & 0x800)) {
+            cond = TRUE;
+        }
+        switch (cond) {
+            case FALSE:
+                switch (model->renderMode) {
+                    case RENDER_MODE_SURFACE_OPA:
+                        gSPDisplayList(gMasterGfxPos++, D_8014B7F8);
+                        break;
+                    case RENDER_MODE_DECAL_OPA:
+                        gSPDisplayList(gMasterGfxPos++, D_8014B820);
+                        break;
+                    case RENDER_MODE_INTERSECTING_OPA:
+                        gSPDisplayList(gMasterGfxPos++, D_8014B848);
+                        break;
+                    case RENDER_MODE_ALPHATEST:
+                        gSPDisplayList(gMasterGfxPos++, D_8014B870);
+                        break;
+                    case RENDER_MODE_SURFACE_XLU_LAYER1:
+                    case RENDER_MODE_SURFACE_XLU_LAYER2:
+                    case RENDER_MODE_SURFACE_XLU_LAYER3:
+                        gSPDisplayList(gMasterGfxPos++, D_8014B898);
+                        break;
+                    case RENDER_MODE_SURFACE_XLU_NO_AA:
+                        gSPDisplayList(gMasterGfxPos++, D_8014B9B0);
+                        break;
+                    case RENDER_MODE_DECAL_XLU:
+                    case RENDER_MODE_1E:
+                        gSPDisplayList(gMasterGfxPos++, D_8014B8C0);
+                        break;
+                    case RENDER_MODE_DECAL_XLU_NOAA:
+                    case RENDER_MODE_SHADOW:
+                        gSPDisplayList(gMasterGfxPos++, D_8014B9D8);
+                        break;
+                    case RENDER_MODE_INTERSECTING_XLU:
+                        gSPDisplayList(gMasterGfxPos++, D_8014B8E8);
+                        break;
+                    case RENDER_MODE_28:
+                        gSPDisplayList(gMasterGfxPos++, D_8014BA00);
+                        break;
+                    case RENDER_MODE_ALPHATEST_ONESIDED:
+                        gSPDisplayList(gMasterGfxPos++, D_8014B988);
+                        break;
+                    case RENDER_MODE_SURFACE_OPA_NO_ZB:
+                    case RENDER_MODE_2A:
+                        gSPDisplayList(gMasterGfxPos++, D_8014BA48);
+                        break;
+                    case RENDER_MODE_ALPHATEST_NO_ZB:
+                    case RENDER_MODE_2B:
+                        gSPDisplayList(gMasterGfxPos++, D_8014BA70);
+                        break;
+                    case RENDER_MODE_SURFACE_XLU_NO_ZB:
+                    case RENDER_MODE_2C:
+                        gSPDisplayList(gMasterGfxPos++, D_8014BA98);
+                        break;
+                    case RENDER_MODE_2D:
+                        gSPDisplayList(gMasterGfxPos++, D_8014BAE8);
+                        break;
+                }
+                break;
+            case TRUE:
+                switch (model->renderMode) {
+                    case RENDER_MODE_SURFACE_OPA:
+                        gSPDisplayList(gMasterGfxPos++, D_8014BE78);
+                        break;
+                    case RENDER_MODE_DECAL_OPA:
+                        gSPDisplayList(gMasterGfxPos++, D_8014BEA0);
+                        break;
+                    case RENDER_MODE_INTERSECTING_OPA:
+                        gSPDisplayList(gMasterGfxPos++, D_8014BEC8);
+                        break;
+                    case RENDER_MODE_ALPHATEST:
+                        gSPDisplayList(gMasterGfxPos++, D_8014BEF0);
+                        break;
+                    case RENDER_MODE_SURFACE_XLU_LAYER1:
+                        gSPDisplayList(gMasterGfxPos++, D_8014BF18);
+                        break;
+                    case RENDER_MODE_DECAL_XLU:
+                        gSPDisplayList(gMasterGfxPos++, D_8014BF40);
+                        break;
+                    case RENDER_MODE_INTERSECTING_XLU:
+                        gSPDisplayList(gMasterGfxPos++, D_8014BF68);
+                        break;
+                }
+                gDPSetFogColor(gMasterGfxPos++, entity_fog_red, entity_fog_green, entity_fog_blue, entity_fog_alpha);
+                gSPFogPosition(gMasterGfxPos++, entity_fog_dist_min, entity_fog_dist_max);
+                break;
+        }
+        gSPClearGeometryMode(gMasterGfxPos++, G_LIGHTING);
+        if (!entity_fog_enabled || (model->flags & 0x800)) {
+            gDPSetCombineMode(gMasterGfxPos++, G_CC_MODULATEIA, G_CC_MODULATEIA);
+        } else {
+            gDPSetCombineLERP(gMasterGfxPos++, TEXEL0, 0, SHADE, 0, TEXEL0, 0, 0, TEXEL0, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+        }
+        if (model->vertexArray != NULL) {
+            gSPSegment(gMasterGfxPos++, D_80154374, VIRTUAL_TO_PHYSICAL(model->vertexArray));
+        }
+        gSPDisplayList(gMasterGfxPos++, model->gfx.displayList);
+        gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+        gDPPipeSync(gMasterGfxPos++);
+        if (!(model->flags & 0x200)) {
+            return;
+        }
+
+        guMtxL2F(mtx, &model->transform);
+        make_entity_model_mtx_flipZ(mtx2);
+        guMtxCatF(mtx, mtx2, mtx);
+        guMtxF2L(mtx, &model->transform);
+        gDisplayContext->matrixStack[gMatrixListPos] = model->transform;
+        gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+        gSPDisplayList(gMasterGfxPos++, model->gfx.displayList);
+    } else {
+        SpriteRasterInfo* imageData;
+
+        gDPPipeSync(gMasterGfxPos++);
+        gSPClearGeometryMode(gMasterGfxPos++, G_ZBUFFER | G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH);
+        gSPSetGeometryMode(gMasterGfxPos++, G_ZBUFFER | G_SHADE | G_LIGHTING | G_SHADING_SMOOTH);
+        gSPSetLights1(gMasterGfxPos++, D_8014C268);
+        gSPTexture(gMasterGfxPos++, -1, -1, 0, G_TX_RENDERTILE, G_ON);
+        gDPSetAlphaCompare(gMasterGfxPos++, G_AC_NONE);
+        gSPSetOtherMode(gMasterGfxPos++, G_SETOTHERMODE_H, G_MDSFT_ALPHADITHER, 18, G_AD_DISABLE | G_CD_DISABLE | G_CK_NONE | G_TC_FILT | G_TF_BILERP | G_TT_NONE | G_TL_TILE | G_TD_CLAMP | G_TP_PERSP | G_CYC_1CYCLE);
+
+        imageData = model->gfx.imageData;
+        foldImage.raster = imageData->raster;
+        foldImage.palette = imageData->defaultPal;
+        foldImage.width = imageData->width;
+        foldImage.height = imageData->height;
+        foldImage.xOffset = -imageData->width / 2;
+        foldImage.yOffset = imageData->height / 2;
+        foldImage.unk_10 = 255;
+        guMtxL2F(foldMtx, &model->transform);
+        fold_appendGfx_component(0, &foldImage, 0, foldMtx);
+    }
+
+    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+    gDPPipeSync(gMasterGfxPos++);
+}
 
 void set_entity_model_render_command_list(s32 idx, u32* commandList) {
     u32* phi_a1;
@@ -313,7 +741,7 @@ void free_entity_model_by_index(s32 idx) {
 
     if (entityModel != NULL && entityModel->flags) {
         if (entityModel->flags & ENTITY_MODEL_FLAGS_400) {
-            heap_free(entityModel->displayList);
+            heap_free(entityModel->gfx.imageData);
         }
         {
             s32* modelCount = &gEntityModelCount;

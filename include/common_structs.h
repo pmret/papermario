@@ -2284,6 +2284,13 @@ typedef struct PartnerActionStatus {
     /* 0x35C */ char unk_35C[0x4];
 } PartnerActionStatus; // size = 0x360
 
+typedef struct SpriteRasterInfo {
+    /* 0x00 */ void* raster;
+    /* 0x04 */ void* defaultPal;
+    /* 0x08 */ s32 width;
+    /* 0x0C */ s32 height;
+} SpriteRasterInfo; // size = 0x10
+
 typedef struct EntityModel {
     /* 0x00 */ s32 flags;
     /* 0x04 */ s8 renderMode;
@@ -2293,11 +2300,14 @@ typedef struct EntityModel {
     /* 0x08 */ f32 nextFrameTime; ///< Set to 1.0 after each update
     /* 0x0C */ f32 timeScale; ///< Default is 1.0
     /* 0x10 */ s32* cmdListReadPos;
-    /* 0x14 */ Gfx* displayList;
+    /* 0x14 */ union {
+                    Gfx* displayList;
+                    SpriteRasterInfo* imageData;
+               } gfx;
     /* 0x18 */ Mtx transform;
     /* 0x58 */ s32* cmdListSavedPos;
     /* 0x5C */ Vtx* vertexArray;
-    /* 0x60 */ UNK_FUN_PTR(fpSetupGfxCallback);
+    /* 0x60 */ void (*fpSetupGfxCallback)(void*);
     /* 0x64 */ s32 setupGfxCallbackArg0;
 } EntityModel; // size = 0x68
 
