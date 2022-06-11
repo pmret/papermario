@@ -10,3 +10,4 @@ tqdm
 spimdisasm
 pygfxd
 intervaltree
+rabbitizer
