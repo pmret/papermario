@@ -3,20 +3,20 @@
 #include "ld_addrs.h"
 #include "mips.h"
 
-extern s32 D_F79DDD0F[];
-extern s32 D_7599F6D8[];
+extern s8 D_F79DDD0F[];
+extern s8 D_7599F6D8[];
 
 void func_8002D160(void) {
     s32 (*readFunc)(OSPiHandle*, u32, u32*);
     s32 (*readFunc2)(OSPiHandle*, u32, u32*);
-    s32 vramDest = D_7599F6D8;
-    s32 romStart = D_F79DDD0F;
+    s8* vramDest = D_7599F6D8;
+    s8* romStart = D_F79DDD0F;
     s32 seed;
     u32 hash;
     u32 thisInsn;
     u32 thisInsn2;
     u32 prevInsn;
-    u32* it;
+    u8* it;
 
     // vramDest
     readFunc = osEPiReadIo;
@@ -26,8 +26,8 @@ void func_8002D160(void) {
     seed -= thisInsn;
     prevInsn = 0;
 
-    for (it = _316D90_ROM_START; it < _316D90_ROM_END; it++) {
-        readFunc(nuPiCartHandle, it, &thisInsn);
+    for (it = _316D90_ROM_START; it < _316D90_ROM_END; it += 4) {
+        readFunc(nuPiCartHandle, (u32)it, &thisInsn);
         hash += LOWER(thisInsn) + UPPER(thisInsn);
 
         if (OPCODE(prevInsn) == LUI && (OPCODE(thisInsn) == ADDIU || OPCODE(thisInsn) == LW)) {
@@ -53,8 +53,8 @@ void func_8002D160(void) {
     seed -= thisInsn2;
     prevInsn = 0;
 
-    for (it = _316F30_ROM_START; it < _316F30_ROM_END; it++) {
-        readFunc2(nuPiCartHandle, it, &thisInsn2);
+    for (it = _316F30_ROM_START; it < _316F30_ROM_END; it += 4) {
+        readFunc2(nuPiCartHandle, (u32)it, &thisInsn2);
         hash += LOWER(thisInsn2) + UPPER(thisInsn2);
 
         if (OPCODE(prevInsn) == LUI && (OPCODE(thisInsn2) == ADDIU || OPCODE(thisInsn2) == LW)) {

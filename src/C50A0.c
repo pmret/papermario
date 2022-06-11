@@ -7,27 +7,23 @@
 
 #define MAX_ITEM_ENTITIES 256
 
-extern s32 SparkleScript_Coin;
+extern SparkleScript SparkleScript_Coin;
 
 extern Lights1 D_8014C6C8;
 
 extern s32 ItemEntitiesCreated;
+extern s32 D_80155D80;
 extern s32 ItemEntityAlternatingSpawn;
 extern s32 ItemEntityRenderGroup;
+extern s16 D_80155D8C;
+extern s16 D_80155D8E;
+extern s16 D_80155D90;
 extern ItemEntity* WorldItemEntities[MAX_ITEM_ENTITIES];
 extern ItemEntity* BattleItemEntities[MAX_ITEM_ENTITIES];
 extern ItemEntity** gCurrentItemEntities;
 extern s16 isPickingUpItem;
-extern s32 D_80155D80;
-extern s16 D_80155D8C;
-extern s16 D_80155D8E;
-extern s16 D_80155D90;
 extern s16 D_801565A6;
 extern s16 D_801565A8;
-extern s32 D_801568E0;
-extern s32 D_801568EC;
-
-// BSS
 extern PopupMenu D_801565B0;
 extern s32 D_801568E0;
 extern s32 D_801568E4;
