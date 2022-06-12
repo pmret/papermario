@@ -434,6 +434,11 @@ typedef struct AttackResultTextFXData {
     /* 0x34 */ f32 unk_34;
 } AttackResultTextFXData; // size = 0x38
 
+typedef struct GotItemOutlineFXData {
+    /* 0x00 */ char unk_00[0x14];
+    /* 0x14 */ s32 unk_14;
+} GotItemOutlineFXData; // size = ???
+
 typedef struct SmallGoldSparkleFXData {
     /* 0x00 */ s32 unk_00;
     /* 0x04 */ s32 unk_04;

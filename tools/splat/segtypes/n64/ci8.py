@@ -19,8 +19,10 @@ class N64SegCi8(N64SegRgba16):
         vram_start,
         extract,
         given_subalign,
-        given_is_overlay,
+        exclusive_ram_id,
         given_dir,
+        symbol_name_format,
+        symbol_name_format_no_rom,
         args,
         yaml,
     ):
@@ -32,10 +34,12 @@ class N64SegCi8(N64SegRgba16):
             vram_start,
             extract,
             given_subalign,
-            given_is_overlay,
-            given_dir,
-            args,
-            yaml,
+            exclusive_ram_id=exclusive_ram_id,
+            given_dir=given_dir,
+            symbol_name_format=symbol_name_format,
+            symbol_name_format_no_rom=symbol_name_format_no_rom,
+            args=args,
+            yaml=yaml,
         )
 
         self.palette: "Optional[Palette]" = None
@@ -52,7 +56,6 @@ class N64SegCi8(N64SegRgba16):
             log.error(
                 f"no palette sibling segment exists\n(hint: add a segment with type 'palette' and name '{self.name}')"
             )
-            return
 
         w = png.Writer(
             self.width, self.height, palette=self.palette.parse_palette(rom_bytes)

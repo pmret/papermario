@@ -3,12 +3,12 @@
 #include "ld_addrs.h"
 #include "mips.h"
 
-extern s32 D_7012ACA1[];
+extern s32 obfuscated_battle_heap_create[];
 
 void func_802AE000(void) {
     s32(*readFunc)(OSPiHandle*, u32, u32*) = osEPiReadIo;
     s32 seed = 0x33F50000;
-    UNK_FUN_PTR(battle_heap_create) = D_7012ACA1;
+    UNK_FUN_PTR(battle_heap_create) = obfuscated_battle_heap_create;
     u32 hash = 0;
     u32 thisInsn;
     u32* it;

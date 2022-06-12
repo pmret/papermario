@@ -3,12 +3,12 @@
 #include "ld_addrs.h"
 #include "mips.h"
 
-extern s32 D_7012BC11[];
+extern s32 obfuscated_general_heap_create[];
 
 void func_802AE000_316C00(void) {
     s32(*readFunc)(OSPiHandle*, u32, u32*) = osEPiReadIo;
     s32 seed = 0x3C016C07 + 0xFEFEFEF;
-    HeapNode*(*generalHeapCreate)(void) = D_7012BC11; // general_heap_create - 0xFEFEFEF
+    HeapNode*(*generalHeapCreate)(void) = obfuscated_general_heap_create; // general_heap_create - 0xFEFEFEF
     u32 hash = 0;
     u32 thisInsn;
     u32* it;

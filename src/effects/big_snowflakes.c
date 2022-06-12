@@ -1,12 +1,12 @@
 #include "common.h"
 #include "effects_internal.h"
 
-extern Gfx D_09000900[];
-extern Gfx D_090009E8[];
-extern Gfx D_09000A10[];
+extern Gfx D_09000900_3641C0[];
+extern Gfx D_090009E8_3642A8[];
+extern Gfx D_09000A10_3642D0[];
 
-Gfx* D_E0060730[] = { D_090009E8, D_09000A10 };
-Gfx* D_E0060738[] = { D_09000900, D_09000900 };
+Gfx* D_E0060730[] = { D_090009E8_3642A8, D_09000A10_3642D0 };
+Gfx* D_E0060738[] = { D_09000900_3641C0, D_09000900_3641C0 };
 
 void big_snowflakes_init(EffectInstance* effect);
 void big_snowflakes_update(EffectInstance* effect);

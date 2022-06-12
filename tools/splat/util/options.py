@@ -226,10 +226,16 @@ def get_subalign() -> int:
     return opts.get("subalign", 16)
 
 
-# Determines whether to automatically configure the linker script to link against common sections for all files
-# when the yaml doesn't have specific configurations for these sections. See release notes for details
-def auto_all_sections() -> bool:
-    return opts.get("auto_all_sections", False)
+# The following option determines whether to automatically configure the linker script to link against
+# specified sections for all "base" (asm/c) files when the yaml doesn't have manual configurations
+# for these sections.
+def auto_all_sections() -> List[str]:
+    val = opts.get("auto_all_sections", [".data", ".rodata", ".bss"])
+    if not isinstance(val, list):
+        raise RuntimeError(
+            'auto_all_sections must be a list (for example, [".data", ".rodata", ".bss"])'
+        )
+    return val
 
 
 # Determines the desired path to the linker symbol header, which exposes externed definitions for all segment ram/rom start/end locations
@@ -268,9 +274,11 @@ def ld_section_labels() -> List[str]:
 def get_create_c_files() -> bool:
     return opts.get("create_c_files", True)
 
+
 # Determines whether to "auto-decompile" empty functions
 def get_auto_decompile_empty_functions() -> bool:
     return opts.get("auto_decompile_empty_functions", True)
+
 
 # Determines whether to detect matched/unmatched functions in existing c files
 # so we can avoid creating .s files for already-decompiled functions
@@ -286,6 +294,16 @@ def c_newline() -> str:
 ################################################################################
 # (Dis)assembly-related options
 ################################################################################
+
+# The following options determine the format that symbols should be named by default
+def get_symbol_name_format() -> str:
+    return opts.get("symbol_name_format", "$VRAM")
+
+
+# Same as above but for symbols with no rom address
+def get_symbol_name_format_no_rom() -> str:
+    return opts.get("symbol_name_format_no_rom", "$VRAM_$SEG")
+
 
 # Determines whether to detect and hint to the user about likely file splits when disassembling
 def find_file_boundaries() -> bool:
@@ -332,6 +350,20 @@ def rom_address_padding() -> bool:
     return opts.get("rom_address_padding", False)
 
 
+# Determines which ABI names to use for general purpose registers
+# Valid values: 'numeric', 'o32', 'n32', 'n64'
+def get_mips_abi_gpr() -> str:
+    return opts.get("mips_abi_gpr", "o32")
+
+
+# Determines which ABI names to use for floating point registers
+# Valid values: 'numeric', 'o32', 'n32', 'n64'
+# o32 is highly recommended, as it provides logically named registers for floating point instructions
+# For more info, see https://gist.github.com/EllipticEllipsis/27eef11205c7a59d8ea85632bc49224d
+def get_mips_abi_float_regs() -> str:
+    return opts.get("mips_abi_float_regs", "numeric")
+
+
 ################################################################################
 # N64-specific options
 ################################################################################
@@ -339,6 +371,16 @@ def rom_address_padding() -> bool:
 # Determines the encoding of the header
 def get_header_encoding() -> str:
     return opts.get("header_encoding", "ASCII")
+
+
+# Determines the type gfx ucode (used by gfx segments)
+# Valid options are ['f3d', 'f3db', 'f3dex', 'f3dexb', 'f3dex2']
+def get_gfx_ucode() -> str:
+    valid_options = ["f3d", "f3db", "f3dex", "f3dexb", "f3dex2"]
+    ret = opts.get("gfx_ucode", "f3dex2")
+    if ret not in valid_options:
+        log.error(f"Invalid gfx_ucode: {ret}. Valid options are: {valid_options}")
+    return ret
 
 
 ################################################################################

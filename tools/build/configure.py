@@ -140,12 +140,12 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
 
     ninja.rule("img_header",
         description="img_header $in",
-        command=f"$python {BUILD_TOOLS}/img/header.py $in $out",
+        command=f"$python {BUILD_TOOLS}/img/header.py $in $out $c_name",
     )
 
     ninja.rule("bin_inc_c",
         description="bin_inc_c $out",
-        command=f"$python {BUILD_TOOLS}/bin_inc_c.py $in $out",
+        command=f"$python {BUILD_TOOLS}/bin_inc_c.py $in $out $c_name",
     )
 
     ninja.rule("yay0",
@@ -231,7 +231,7 @@ class Configure:
 
         modes = ["ld"]
         if assets:
-            modes.extend(["bin", "Yay0", "img", "vtx", "pm_map_data", "pm_msg", "pm_npc_sprites", "pm_charset",
+            modes.extend(["bin", "Yay0", "img", "vtx", "gfx", "pm_map_data", "pm_msg", "pm_npc_sprites", "pm_charset",
                           "pm_charset_palettes", "pm_effect_loads", "pm_effect_shims"])
         if code:
             modes.extend(["code", "c", "data", "rodata"])
@@ -409,8 +409,12 @@ class Configure:
                                 "img_flags": flags,
                             })
 
-                            build(inc_dir / (seg.name + ".png.h"), src_paths, "img_header")
-                            build(inc_dir / (seg.name + ".png.inc.c"), [bin_path], "bin_inc_c")
+                            c_sym = seg.create_symbol(
+                                addr=seg.vram_start, in_segment=True, type="data", define=True
+                            )
+                            vars = {"c_name": c_sym.name}
+                            build(inc_dir / (seg.name + ".png.h"), src_paths, "img_header", vars)
+                            build(inc_dir / (seg.name + ".png.inc.c"), [bin_path], "bin_inc_c", vars)
                         elif isinstance(seg, segtypes.n64.palette.N64SegPalette):
                             src_paths = [seg.out_path().relative_to(ROOT)]
                             inc_dir = self.build_path() / "include" / seg.dir
@@ -420,7 +424,12 @@ class Configure:
                                 "img_type": seg.type,
                                 "img_flags": "",
                             })
-                            build(inc_dir / (seg.name + ".pal.inc.c"), [bin_path], "bin_inc_c")
+
+                            c_sym = seg.create_symbol(
+                                addr=seg.vram_start, in_segment=True, type="data", define=True
+                            )
+                            vars = {"c_name": c_sym.name}
+                            build(inc_dir / (seg.name + ".pal.inc.c"), [bin_path], "bin_inc_c", vars)
             elif isinstance(seg, segtypes.common.bin.CommonSegBin):
                 build(entry.object_path, entry.src_paths, "bin")
             elif isinstance(seg, segtypes.n64.Yay0.N64SegYay0):
@@ -443,6 +452,10 @@ class Configure:
                 })
                 build(entry.object_path, [bin_path], "bin")
 
+                # c_sym = seg.create_symbol(
+                #     addr=seg.vram_start, in_segment=True, type="data", define=True
+                # )
+                # vars = {"c_name": c_sym.name}
                 build(inc_dir / (seg.name + ".png.h"), entry.src_paths, "img_header")
             elif isinstance(seg, segtypes.n64.palette.N64SegPalette):
                 bin_path = entry.object_path.with_suffix(".bin")

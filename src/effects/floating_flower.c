@@ -3,7 +3,7 @@
 
 s32 D_E001A610 = 0;
 
-extern Gfx D_090002F0[];
+extern Gfx D_090002F0_330750[];
 
 void floating_flower_init(EffectInstance* effect);
 void floating_flower_update(EffectInstance* effect);
@@ -164,7 +164,7 @@ void floating_flower_appendGfx(void* effect) {
 
     if (alpha != 0) {
         gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, alpha);
-        gSPDisplayList(gMasterGfxPos++, D_090002F0);
+        gSPDisplayList(gMasterGfxPos++, D_090002F0_330750);
         gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
     }
 }

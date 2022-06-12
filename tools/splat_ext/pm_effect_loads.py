@@ -1,7 +1,6 @@
-from yaml.loader import Loader
 from segtypes.n64.segment import N64Segment
 from util import options
-import yaml
+import yaml as yaml_loader
 
 class N64SegPm_effect_loads(N64Segment):
     effects = []
@@ -47,11 +46,40 @@ glabel {name}
     def effect_path(self, effect):
         return options.get_build_path() / "asm" / "effects" / f"{effect}.s"
 
-    def __init__(self, rom_start, rom_end, type, name, vram_start, extract, given_subalign, given_is_overlay, given_dir, args, yml):
-        super().__init__(rom_start, rom_end, type, name, vram_start, extract, given_subalign, given_is_overlay, given_dir, args, yml)
+    def __init__(
+        self,
+        rom_start,
+        rom_end,
+        type,
+        name,
+        vram_start,
+        extract,
+        given_subalign,
+        exclusive_ram_id,
+        given_dir,
+        symbol_name_format,
+        symbol_name_format_no_rom,
+        args,
+        yaml,
+    ):
+        super().__init__(
+            rom_start,
+            rom_end,
+            type,
+            name,
+            vram_start,
+            extract,
+            given_subalign,
+            exclusive_ram_id,
+            given_dir,
+            symbol_name_format=symbol_name_format,
+            symbol_name_format_no_rom=symbol_name_format_no_rom,
+            args=args,
+            yaml=yaml,
+        )
 
         with open(options.get_asm_path() / ".." / "effects.yaml") as f:
-            self.effects = yaml.load(f.read(), Loader=yaml.SafeLoader)
+            self.effects = yaml_loader.load(f.read(), Loader=yaml_loader.SafeLoader)
 
     def split(self, rom_bytes):
         for i, effect in enumerate(self.effects):

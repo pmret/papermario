@@ -1,8 +1,8 @@
 #include "common.h"
 #include "effects_internal.h"
 
-extern Gfx D_090000E0[];
-extern Gfx D_090001B8[];
+extern Gfx D_090000E0_32ED30[];
+extern Gfx D_090001B8_32EE08[];
 
 void cloud_trail_init(EffectInstance* effect);
 void cloud_trail_update(EffectInstance* effect);
@@ -122,7 +122,7 @@ void cloud_trail_appendGfx(void* effect) {
 
     gDPPipeSync(gMasterGfxPos++);
     gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effectTemp->graphics->data));
-    gSPDisplayList(gMasterGfxPos++, D_090000E0);
+    gSPDisplayList(gMasterGfxPos++, D_090000E0_32ED30);
 
     for (i = 0; i < effectTemp->numParts; i++, part++) {
         if (part->alive) {
@@ -137,7 +137,7 @@ void cloud_trail_appendGfx(void* effect) {
             gDPSetPrimColor(gMasterGfxPos++, 0, 0, 112, 96, 24, part->alpha);
             gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
                         G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-            gSPDisplayList(gMasterGfxPos++, D_090001B8);
+            gSPDisplayList(gMasterGfxPos++, D_090001B8_32EE08);
             gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
         }
     }

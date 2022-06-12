@@ -1,29 +1,29 @@
 #include "common.h"
 #include "effects_internal.h"
 
-extern Gfx D_09002100[];
-extern Gfx D_09002198[];
-extern Gfx D_09002230[];
-extern Gfx D_09002250[];
-extern Gfx D_09002270[];
-extern Gfx D_09002290[];
-extern Gfx D_090022B0[];
-extern Gfx D_09002320[];
-extern Gfx D_09002360[];
-extern Gfx D_090023A0[];
-extern Gfx D_090023E0[];
-extern Gfx D_09002420[];
-extern Gfx D_09002460[];
-extern Gfx D_090024A0[];
-extern Gfx D_090024E0[];
-extern Gfx D_09002520[];
-extern Gfx D_09002560[];
-extern Gfx D_090025A0[];
-extern Gfx D_090025E0[];
+extern Gfx D_09002100_3884B0[];
+extern Gfx D_09002198_388548[];
+extern Gfx D_09002230_3885E0[];
+extern Gfx D_09002250_388600[];
+extern Gfx D_09002270_388620[];
+extern Gfx D_09002290_388640[];
+extern Gfx D_090022B0_388660[];
+extern Gfx D_09002320_3886D0[];
+extern Gfx D_09002360_388710[];
+extern Gfx D_090023A0_388750[];
+extern Gfx D_090023E0_388790[];
+extern Gfx D_09002420_3887D0[];
+extern Gfx D_09002460_388810[];
+extern Gfx D_090024A0_388850[];
+extern Gfx D_090024E0_388890[];
+extern Gfx D_09002520_3888D0[];
+extern Gfx D_09002560_388910[];
+extern Gfx D_090025A0_388950[];
+extern Gfx D_090025E0_388990[];
 
 Gfx* D_E0082D00[] = {
-    D_09002320, D_09002360, D_090023A0, D_090023E0, D_09002420, D_09002460, D_090024A0, D_090024E0, D_09002520,
-    D_09002560, D_090025A0, D_090025E0
+    D_09002320_3886D0, D_09002360_388710, D_090023A0_388750, D_090023E0_388790, D_09002420_3887D0, D_09002460_388810,
+    D_090024A0_388850, D_090024E0_388890, D_09002520_3888D0, D_09002560_388910, D_090025A0_388950, D_090025E0_388990
 };
 
 void disable_x_init(EffectInstance* effect);
@@ -269,12 +269,12 @@ void func_E00828B4(EffectInstance* effect) {
     for (i = 1; i < effect->numParts; i++, data++) {
         if (unk_38 > 0 || type == 10) {
             if (type == 1) {
-                gSPDisplayList(gMasterGfxPos++, D_09002198);
+                gSPDisplayList(gMasterGfxPos++, D_09002198_388548);
             } else {
-                gSPDisplayList(gMasterGfxPos++, D_09002100);
+                gSPDisplayList(gMasterGfxPos++, D_09002100_3884B0);
             }
             func_E00826C4(data);
-            gSPDisplayList(gMasterGfxPos++, D_09002230);
+            gSPDisplayList(gMasterGfxPos++, D_09002230_3885E0);
             gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
         }
     }
@@ -296,19 +296,19 @@ void func_E0082A84(EffectInstance* effect) {
     for (i = 1; i < effect->numParts; i++, data++) {
         func_E00826C4(data);
         if (unk_38 > 0) {
-            gSPDisplayList(gMasterGfxPos++, D_090022B0);
+            gSPDisplayList(gMasterGfxPos++, D_090022B0_388660);
             if (unk_38 < 10) {
                 gSPDisplayList(gMasterGfxPos++, D_E0082D00[unk_38]);
-                gSPDisplayList(gMasterGfxPos++, D_09002250);
+                gSPDisplayList(gMasterGfxPos++, D_09002250_388600);
             } else {
                 s32 ones = unk_38 % 10;
                 s32 tens = unk_38 / 10;
 
                 gSPDisplayList(gMasterGfxPos++, D_E0082D00[ones]);
                 gSPDisplayList(gMasterGfxPos++, D_E0082D00[tens]);
-                gSPDisplayList(gMasterGfxPos++, D_09002290);
+                gSPDisplayList(gMasterGfxPos++, D_09002290_388640);
                 gSPDisplayList(gMasterGfxPos++, D_E0082D00[tens]);
-                gSPDisplayList(gMasterGfxPos++, D_09002270);
+                gSPDisplayList(gMasterGfxPos++, D_09002270_388620);
             }
         }
         gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
