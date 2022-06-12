@@ -107,7 +107,7 @@ glabel lightning_main
 /* 36E358 E006C188 3C07429A */  lui       $a3, 0x429a
 /* 36E35C E006C18C 0000202D */  daddu     $a0, $zero, $zero
 /* 36E360 E006C190 E7B40010 */  swc1      $f20, 0x10($sp)
-/* 36E364 E006C194 0C01E000 */  jal       fx_3C_main
+/* 36E364 E006C194 0C01E000 */  jal       bulb_glow_main
 /* 36E368 E006C198 AFB20014 */   sw       $s2, 0x14($sp)
 /* 36E36C E006C19C 0801B087 */  j         .LE006C21C
 /* 36E370 E006C1A0 2A820003 */   slti     $v0, $s4, 3

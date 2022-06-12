@@ -145,6 +145,7 @@ ApiStatus GetPartEventFlags(Evt* script, s32 isInitialCall);
 ApiStatus HPBarToHome(Evt* script, s32 isInitialCall);
 ApiStatus HPBarToCurrent(Evt* script, s32 isInitialCall);
 ApiStatus func_8026D940(Evt* script, s32 isInitialCall);
+ApiStatus func_8026DA94(Evt* script, s32 isInitialCall);
 ApiStatus SummonEnemy(Evt* script, s32 isInitialCall);
 ApiStatus GetOwnerID(Evt* script, s32 isInitialCall);
 ApiStatus SetOwnerID(Evt* script, s32 isInitialCall);
@@ -328,6 +329,10 @@ ApiStatus func_8026EBF8(Evt* script, s32 isInitialCall);
 ApiStatus SetupMashMeter(Evt* script, s32 isInitialCall);
 ApiStatus SetActionResult(Evt* script, s32 isInitialCall);
 ApiStatus BattleCamTargetActorPart(Evt* script, s32 isInitialCall);
+ApiStatus func_802537C0(Evt* script, s32 isInitialCall);
+ApiStatus CancelEnemyTurn(Evt* script, s32 isInitialCall);
+ApiStatus GetAnimatedNodeRotation(Evt* script, s32 isInitialCall);
+ApiStatus GetAnimatedNodePosition(Evt* script, s32 isInitialCall);
 
 extern EvtScript PlayerScriptDispatcher;
 extern EvtScript PeachScriptDispatcher;

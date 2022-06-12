@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel fx_3C_main
+glabel bulb_glow_main
 /* 37A3F0 E0078000 27BDFFB0 */  addiu     $sp, $sp, -0x50
 /* 37A3F4 E0078004 F7B40038 */  sdc1      $f20, 0x38($sp)
 /* 37A3F8 E0078008 4485A000 */  mtc1      $a1, $f20
@@ -12,14 +12,14 @@ glabel fx_3C_main
 /* 37A40C E007801C 27A40010 */  addiu     $a0, $sp, 0x10
 /* 37A410 E0078020 F7B80048 */  sdc1      $f24, 0x48($sp)
 /* 37A414 E0078024 4487C000 */  mtc1      $a3, $f24
-/* 37A418 E0078028 3C02E008 */  lui       $v0, %hi(fx_3C_init)
-/* 37A41C E007802C 24428124 */  addiu     $v0, $v0, %lo(fx_3C_init)
+/* 37A418 E0078028 3C02E008 */  lui       $v0, %hi(bulb_glow_init)
+/* 37A41C E007802C 24428124 */  addiu     $v0, $v0, %lo(bulb_glow_init)
 /* 37A420 E0078030 AFA20018 */  sw        $v0, 0x18($sp)
-/* 37A424 E0078034 3C02E008 */  lui       $v0, %hi(fx_3C_update)
-/* 37A428 E0078038 2442812C */  addiu     $v0, $v0, %lo(fx_3C_update)
+/* 37A424 E0078034 3C02E008 */  lui       $v0, %hi(bulb_glow_update)
+/* 37A428 E0078038 2442812C */  addiu     $v0, $v0, %lo(bulb_glow_update)
 /* 37A42C E007803C AFA2001C */  sw        $v0, 0x1c($sp)
-/* 37A430 E0078040 3C02E008 */  lui       $v0, %hi(fx_3C_render)
-/* 37A434 E0078044 24428210 */  addiu     $v0, $v0, %lo(fx_3C_render)
+/* 37A430 E0078040 3C02E008 */  lui       $v0, %hi(bulb_glow_render)
+/* 37A434 E0078044 24428210 */  addiu     $v0, $v0, %lo(bulb_glow_render)
 /* 37A438 E0078048 AFA20020 */  sw        $v0, 0x20($sp)
 /* 37A43C E007804C 2402003C */  addiu     $v0, $zero, 0x3c
 /* 37A440 E0078050 AFBF0034 */  sw        $ra, 0x34($sp)
