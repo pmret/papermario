@@ -2306,9 +2306,9 @@ typedef struct EntityModel {
                } gfx;
     /* 0x18 */ Mtx transform;
     /* 0x58 */ s32* cmdListSavedPos;
-    /* 0x5C */ Vtx* vertexArray;
+    /* 0x5C */ Vec3s* vertexArray;
     /* 0x60 */ void (*fpSetupGfxCallback)(void*);
-    /* 0x64 */ s32 setupGfxCallbackArg0;
+    /* 0x64 */ void* setupGfxCallbackArg0;
 } EntityModel; // size = 0x68
 
 typedef EntityModel* EntityModelList[MAX_ENTITY_MODELS];
