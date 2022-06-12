@@ -125,7 +125,7 @@ void func_80138D88(s32 x1, s32 y1, s32 x2, s32 y2, f32 alpha) {
 
 void func_80138E54(s32 arg0, s32 arg1, s32 arg2, f32 arg3, f32 arg4) {
     Camera* camera = &gCameras[gCurrentCameraID];
-    f32 f22, f24;
+    f32 texScale, f24;
     s32 i;
 
     if (arg3 == 0.0f) {
@@ -133,10 +133,10 @@ void func_80138E54(s32 arg0, s32 arg1, s32 arg2, f32 arg3, f32 arg4) {
     }
 
     if (arg0 == 0) {
-        f22 = (255.0f - arg3) * 10.0f / 255.0f + 0.14;
+        texScale = (255.0f - arg3) * 10.0f / 255.0f + 0.14;
     } else {
-        f22 = 0.5f;
-        f22 = (255.0f - arg3) * 9.5f / 255.0f + f22;
+        texScale = 0.5f;
+        texScale = (255.0f - arg3) * 9.5f / 255.0f + texScale;
         arg1 += (camera->viewportW / 2 - arg1) * (255.0f - arg3) / 255.0f;
         arg2 += (camera->viewportH / 2 - arg2) * (255.0f - arg3) / 255.0f;
     }
@@ -226,21 +226,21 @@ void func_80138E54(s32 arg0, s32 arg1, s32 arg2, f32 arg3, f32 arg4) {
                             camera->viewportStartX * 4, camera->viewportStartY * 4,
                             (camera->viewportStartX + camera->viewportW) * 4, (camera->viewportStartY + camera->viewportH) * 4,
                             G_TX_RENDERTILE,
-                            (12 - arg1) * 32.0f / f22 + 16.0f + 1024.0f, (19 - arg2) * 32.0f / f22 + 16.0f + 1024.0f,
-                            1024.0f / f22, 1024.0f / f22);
+                            (12 - arg1) * 32.0f / texScale + 16.0f + 1024.0f, (19 - arg2) * 32.0f / texScale + 16.0f + 1024.0f,
+                            1024.0f / texScale, 1024.0f / texScale);
     } else {
         gSPTextureRectangle(gMasterGfxPos++,
                             camera->viewportStartX * 4, camera->viewportStartY * 4,
                             (camera->viewportStartX + camera->viewportW) * 4, (camera->viewportStartY + camera->viewportH) * 4,
                             G_TX_RENDERTILE,
-                            (9 - arg1) * 32.0f / f22 + 1024.0f, (32 - arg2) * 32.0f / f22 + 1024.0f,
-                            1024.0f / f22, 1024.0f / f22);
+                            (9 - arg1) * 32.0f / texScale + 1024.0f, (32 - arg2) * 32.0f / texScale + 1024.0f,
+                            1024.0f / texScale, 1024.0f / texScale);
     }
 }
 
 void func_80139F10(s32 arg0, s32 arg1, f32 alpha, s32 primR, s32 primG, s32 primB, s32 primA, s32 camID) {
     s32 x1, y1, x2, y2, t5, t6;
-    f32 scale;
+    f32 texScale;
 
     if (camID >= 0) {
         x1 = gCameras[camID].viewportStartX;
@@ -267,9 +267,9 @@ void func_80139F10(s32 arg0, s32 arg1, f32 alpha, s32 primR, s32 primG, s32 prim
         gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, PRIMITIVE, 0, 0, 0, 1, 0, 0, 0, PRIMITIVE, 0, 0, 0, 1);
     }
     gDPSetPrimColor(gMasterGfxPos++, 0, 0, primR, primG, primB, primA);
-    scale = (255.0f - alpha) * 10.5f / 255.0f + 0.09;
+    texScale = (255.0f - alpha) * 10.5f / 255.0f + 0.09; // range from
     gSPTextureRectangle(gMasterGfxPos++, x1 * 4, y1 * 4, x2 * 4, y2 * 4, G_TX_RENDERTILE,
-                        (t5 - arg0) * 32.0f / scale + 16.0f + 1024.0f, (t6 - arg1) * 32.0f / scale + 16.0f + 1024.0f,
-                        1024.0f / scale, 1024.0f / scale);
+                        (t5 - arg0) * 32.0f / texScale + 16.0f + 1024.0f, (t6 - arg1) * 32.0f / texScale + 16.0f + 1024.0f,
+                        1024.0f / texScale, 1024.0f / texScale);
     gDPPipeSync(gMasterGfxPos++);
 }
