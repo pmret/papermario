@@ -3,6 +3,7 @@
 
 #define NAMESPACE battle_partner_watt
 
+extern EffectInstance* D_8023C1B0;
 extern EffectInstance* D_8023C1B4;
 extern s32 D_8023C1B8;
 extern s32 D_8023C1BC;
@@ -11,7 +12,6 @@ extern s32 D_8023C1C8;
 extern EffectInstance* D_8023C1CC;
 extern EffectInstance* D_8023C1D0;
 extern EffectInstance* D_80239A0C_7054FC;
-extern EffectInstance* D_8023C1B0;
 
 INCLUDE_ASM(s32, "battle/partner/watt", func_80238000_703AF0);
 

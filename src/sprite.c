@@ -233,10 +233,10 @@ void spr_init_anim_state(SpriteComponent** compList, s16** cmdList) {
     SpriteComponent* component;
     SpriteComponent** compListIt = compList;
     s16** cmdListIt = cmdList;
-    while (*compListIt != -1) {
+    while (*compListIt != (SpriteComponent*)-1) {
         component = *compListIt++;
         spr_init_component_anim_state(component, (s16***)*cmdListIt);
-        if (*cmdListIt != -1) {
+        if (*cmdListIt != (s16*)-1) {
             cmdListIt++;
         }
     }
@@ -342,10 +342,10 @@ void func_802DDEE4(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s
         componentListIt = spr_playerCurrentAnimInfo[arg0].componentList;
         i = 0;
         
-        while (*componentListIt != -1) { // this should check component->initialized, but then it doesn't match
+        while (*componentListIt != (SpriteComponent*)-1) {
             component = *componentListIt;
             if (arg1 == -1 || i == arg1) {
-                fold_update((u8)component->unk_4C, arg2, arg3, arg4, arg5, arg6, arg7);
+                fold_update(component->unk_4C & 0xFF, arg2, arg3, arg4, arg5, arg6, arg7);
                 if (arg2 != 0) {
                     component->unk_4C |= 0x10000000;
                 } else {
@@ -392,7 +392,7 @@ s32 func_802DE748(s32 arg0, s32 arg1) {
         return -1;
     }
 
-    return (u8)componentList[arg1]->unk_4C;
+    return componentList[arg1]->unk_4C & 0xFF;
 }
 
 INCLUDE_ASM(s32, "sprite", func_802DE780);
