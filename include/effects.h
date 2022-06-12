@@ -981,7 +981,7 @@ EffectInstance* fx_shimmer_burst(s32, f32, f32, f32, f32, s32);
 EffectInstance* fx_energy_shockwave(s32, f32, f32, f32, f32, s32);
 EffectInstance* fx_shimmer_wave(s32, f32, f32, f32, f32, f32, s32, s32);
 void fx_aura(s32, f32, f32, f32, f32, EffectInstance**);
-EffectInstance* fx_bulb_glow(s32, f32, f32, f32, f32, s32*);
+EffectInstance* fx_bulb_glow(s32, f32, f32, f32, f32, EffectInstance**);
 void fx_3D(s32, f32, f32, f32, f32, f32, f32, s32, s32*);
 EffectInstance* fx_blast(s32, f32, f32, f32, f32, s32);
 EffectInstance* fx_fire_flower(s32, f32, f32, f32, s32);
