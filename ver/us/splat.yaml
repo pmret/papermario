@@ -2968,15 +2968,15 @@ segments:
     - [0x377070, c, aura]
     - [0x377F00]
   - [0x377F80, bin] # aura gfx
-  - name: effect_effect_3C
+  - name: effect_bulb_glow
     dir: effects
     type: code
     start: 0x37A3F0
     vram: 0xE0078000
     subsegments:
-    - [0x37A3F0, c, effect_3C]
+    - [0x37A3F0, c, bulb_glow]
     - [0x37ACF0, data]
-  - [0x37ADD0, bin] # effect_3C gfx
+  - [0x37ADD0, bin] # bulb_glow gfx
   - name: effect_effect_3D
     dir: effects
     type: code
@@ -4344,54 +4344,53 @@ segments:
     vram: 0x80218000
     overlay: True
     subsegments:
-    - [0x52B6A0, c]
-    - [0x52B7C0, c]
-    - [0x52B9D0, data]
+    - [0x52B6A0, c, actor/general_guy]
+    - [0x52B7C0, c, actor/toy_tank]
+    - [0x52B8F0, c, actor/light_bulb]
+    - [0x52B9D0, c, stage/omo_07]
+    - [0x52B9D0, c, area]
   - dir: battle/area_omo2_1
     type: code
     start: 0x543570
     vram: 0x80231000
     overlay: True
     subsegments:
-    - [0x543570, c]
-    - [0x543620, data]
+    - [0x543570, c, actor/shy_squad]
   - dir: battle/area_omo2_2
     type: code
     start: 0x5483E0
     vram: 0x80231000
     overlay: True
     subsegments:
-    - [0x5483E0, c]
-    - [0x548500, data]
+    - [0x5483E0, c, actor/stilt_guy]
   - dir: battle/area_omo2_3
     type: code
     start: 0x54CC70
     vram: 0x80231000
     overlay: True
     subsegments:
-    - [0x54CC70, c]
-    - [0x54CCA0, data]
+    - [0x54CC70, c, actor/shy_stack]
   - dir: battle/area_omo2_4
     type: code
     start: 0x552440
     vram: 0x80231000
     overlay: True
     subsegments:
-    - [0x552440, data]
+    - [0x552440, c, actor/signal_guy]
   - dir: battle/area_omo2_5
     type: code
     start: 0x552BB0
     vram: 0x80231000
     overlay: True
     subsegments:
-    - [0x552BB0, data]
+    - [0x552BB0, c, actor/shy_squad_dup]
   - dir: battle/area_omo2_6
     type: code
     start: 0x556C90
     vram: 0x80231000
     overlay: True
     subsegments:
-    - [0x556C90, data]
+    - [0x556C90, c, actor/shy_guy_dup]
   - dir: battle/area_omo3
     type: code
     start: 0x5573E0
