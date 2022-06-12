@@ -349,7 +349,7 @@ void func_802DDEE4(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s
                 if (arg2 != 0) {
                     component->unk_4C |= 0x10000000;
                 } else {
-                    component->unk_4C &= 0x0FFFFFFF;
+                    component->unk_4C &= ~0xF0000000;
                 }
             }
             componentListIt++;
