@@ -88,7 +88,7 @@ FX_MAIN(shimmer_burst_main);
 FX_MAIN(energy_shockwave_main);
 FX_MAIN(shimmer_wave_main);
 void aura_main(s32, f32, f32, f32, f32, EffectInstance**);
-FX_MAIN(fx_3C_main);
+FX_MAIN(bulb_glow_main);
 FX_MAIN(fx_3D_main);
 void blast_main(s32, f32, f32, f32, f32, s32);
 EffectInstance* fire_flower_main(s32, f32, f32, f32, s32);

@@ -2449,4 +2449,20 @@ typedef struct FoldImageRecPart {
     /* 0x11 */ char unk_11[0x7];
 } FoldImageRecPart; // size = 0x18
 
+typedef struct FoldImageRec {
+    /* 0x00 */ s8* raster;
+    /* 0x04 */ s8* palette;
+    /* 0x08 */ u16 width;
+    /* 0x0A */ u16 height;
+    /* 0x0C */ s16 xOffset;
+    /* 0x0E */ s16 yOffset;
+    /* 0x10 */ u8 unk_10;
+    /* 0x11 */ char unk_11[0x7];
+    /* 0x18 */ s16 unk_18;
+    /* 0x1A */ char unk_1A[0x4];
+    /* 0x1E */ s16 unk_1E;
+    /* 0x20 */ char unk_20[0x4];
+    /* 0x24 */ u8 alphaMultiplier;
+} FoldImageRec; // size = 0x25
+
 #endif

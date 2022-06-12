@@ -543,8 +543,8 @@ ApiStatus PlayEffect(Evt* script, s32 isInitialCall) {
             fx_aura(iVar1, fVar2, fVar3, fVar4, fVar5, &sp34);
             evt_set_variable(script, a6, sp34);
             break;
-        case EFFECT_3C:
-            fx_3C(iVar1, fVar2, fVar3, fVar4, fVar5, &sp34);
+        case EFFECT_BULB_GLOW:
+            fx_bulb_glow(iVar1, fVar2, fVar3, fVar4, fVar5, &sp34);
             evt_set_variable(script, a6, sp34);
             break;
         case EFFECT_3D:

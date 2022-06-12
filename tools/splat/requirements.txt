@@ -2,4 +2,8 @@ PyYAML
 pylibyaml
 pypng
 colorama
-capstone
+spimdisasm>=1.2.1
+rabbitizer
+pygfxd
+tqdm
+intervaltree

@@ -1,34 +1,34 @@
 #include "common.h"
 #include "effects_internal.h"
 
-extern Gfx D_09001D40[];
-extern Gfx D_09001DE0[];
-extern Gfx D_09001E50[];
-extern Gfx D_09001E90[];
-extern Gfx D_09001ED0[];
-extern Gfx D_09001F10[];
-extern Gfx D_09001F50[];
-extern Gfx D_09001F90[];
-extern Gfx D_09001FD0[];
-extern Gfx D_09002010[];
-extern Gfx D_09002050[];
-extern Gfx D_09002090[];
-extern Gfx D_090020D0[];
-extern Gfx D_09002110[];
-extern Gfx D_09002150[];
-extern Gfx D_09002160[];
-extern Gfx D_09002170[];
-extern Gfx D_09002180[];
-extern Gfx D_090021A8[];
-extern Gfx D_09002190[];
-extern Gfx D_090021C0[];
-extern Gfx D_090021E0[];
-extern Gfx D_09002200[];
+extern Gfx D_09001D40_351F60[];
+extern Gfx D_09001DE0_352000[];
+extern Gfx D_09001E50_352070[];
+extern Gfx D_09001E90_3520B0[];
+extern Gfx D_09001ED0_3520F0[];
+extern Gfx D_09001F10_352130[];
+extern Gfx D_09001F50_352170[];
+extern Gfx D_09001F90_3521B0[];
+extern Gfx D_09001FD0_3521F0[];
+extern Gfx D_09002010_352230[];
+extern Gfx D_09002050_352270[];
+extern Gfx D_09002090_3522B0[];
+extern Gfx D_090020D0_3522F0[];
+extern Gfx D_09002110_352330[];
+extern Gfx D_09002150_352370[];
+extern Gfx D_09002160_352380[];
+extern Gfx D_09002170_352390[];
+extern Gfx D_09002180_3523A0[];
+extern Gfx D_09002190_3523B0[];
+extern Gfx D_090021A8_3523C8[];
+extern Gfx D_090021C0_3523E0[];
+extern Gfx D_090021E0_352400[];
+extern Gfx D_09002200_352420[];
 
 Gfx* D_E003CCA0[] = {
-    D_09001E50, D_09001E90, D_09001ED0, D_09001F10,
-    D_09001F50, D_09001F90, D_09001FD0, D_09002010,
-    D_09002050, D_09002090, D_090020D0, D_09002110
+    D_09001E50_352070, D_09001E90_3520B0, D_09001ED0_3520F0, D_09001F10_352130,
+    D_09001F50_352170, D_09001F90_3521B0, D_09001FD0_3521F0, D_09002010_352230,
+    D_09002050_352270, D_09002090_3522B0, D_090020D0_3522F0, D_09002110_352330
 };
 
 u8 D_E003CCD0[] = {
@@ -224,20 +224,20 @@ void func_E003C498(EffectInstance* effect) {
     for (i = 1; i < effect->numParts; i++, part--) {
         s32 index = (i + spA0);
         gDPSetPrimColor(gMasterGfxPos++, 0, 0, D_E003CCF8[index % 12].r, D_E003CCF8[index % 12].g, D_E003CCF8[index % 12].b, part->alpha);
-        gSPDisplayList(gMasterGfxPos++, D_09001D40);
+        gSPDisplayList(gMasterGfxPos++, D_09001D40_351F60);
         if (i == spA4) {
             shim_guPositionF(sp20, 0.0f, 0.0f, 0.0f, part->unk_38, part->unk_10.x, part->unk_10.y, part->unk_10.z);
             shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
             gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-            gSPDisplayList(gMasterGfxPos++, D_09002150);
+            gSPDisplayList(gMasterGfxPos++, D_09002150_352370);
             gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
             shim_guPositionF(sp20, 0.0f, 0.0f, 0.0f, part->unk_38, (part->unk_10.x + part->unk_04.x) * 0.5, (part->unk_10.y + part->unk_04.y) * 0.5, (part->unk_10.z + part->unk_04.z) * 0.5);
             shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
             gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-            gSPDisplayList(gMasterGfxPos++, D_09002160);
+            gSPDisplayList(gMasterGfxPos++, D_09002160_352380);
             gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
         }
-        gSPDisplayList(gMasterGfxPos++, D_09001D40);
+        gSPDisplayList(gMasterGfxPos++, D_09001D40_351F60);
         shim_guTranslateF(sp20, part->unk_04.x, part->unk_04.y, part->unk_04.z);
         shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
         gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
@@ -246,27 +246,27 @@ void func_E003C498(EffectInstance* effect) {
         gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
         if (i == spA4) {
-            gSPDisplayList(gMasterGfxPos++, &D_09002170);
+            gSPDisplayList(gMasterGfxPos++, &D_09002170_352390);
         } else {
-            gSPDisplayList(gMasterGfxPos++, &D_09002180);
+            gSPDisplayList(gMasterGfxPos++, &D_09002180_3523A0);
         }
         if (i == spA4) {
-            gSPDisplayList(gMasterGfxPos++, D_090021A8);
+            gSPDisplayList(gMasterGfxPos++, D_090021A8_3523C8);
             gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
-            gSPDisplayList(gMasterGfxPos++, D_09001DE0);
+            gSPDisplayList(gMasterGfxPos++, D_090021E0_352400);
             if (spA8 < 10) {
                 gSPDisplayList(gMasterGfxPos++, D_E003CCA0[i]);
-                gSPDisplayList(gMasterGfxPos++, D_090021C0);
+                gSPDisplayList(gMasterGfxPos++, D_090021C0_3523E0);
             } else {
                 s32 temp = spA8 % 10;
                 s32 temp2 = spA8 / 10;
                 gSPDisplayList(gMasterGfxPos++, D_E003CCA0[temp]);
-                gSPDisplayList(gMasterGfxPos++, D_09002200);
+                gSPDisplayList(gMasterGfxPos++, D_09002200_352420);
                 gSPDisplayList(gMasterGfxPos++, D_E003CCA0[temp2]);
-                gSPDisplayList(gMasterGfxPos++, D_090021E0);
+                gSPDisplayList(gMasterGfxPos++, D_090021E0_352400);
             }
         } else {
-            gSPDisplayList(gMasterGfxPos++, D_09002190);
+            gSPDisplayList(gMasterGfxPos++, D_09002190_3523B0);
             gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
         }
         gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);

@@ -7,7 +7,6 @@ Originally written by Mark Street (https://github.com/mkst)
 
 import re
 import struct
-from typing import Optional
 from pathlib import Path
 from util.log import error
 
@@ -25,10 +24,12 @@ class N64SegVtx(CommonSegCodeSubsegment):
         vram_start,
         extract,
         given_subalign,
-        given_is_overlay,
+        exclusive_ram_id,
         given_dir,
-        args=[],
-        yaml={},
+        symbol_name_format,
+        symbol_name_format_no_rom,
+        args,
+        yaml,
     ):
         super().__init__(
             rom_start,
@@ -38,10 +39,12 @@ class N64SegVtx(CommonSegCodeSubsegment):
             vram_start,
             extract,
             given_subalign,
-            given_is_overlay,
-            given_dir,
-            args,
-            yaml,
+            exclusive_ram_id=exclusive_ram_id,
+            given_dir=given_dir,
+            symbol_name_format=symbol_name_format,
+            symbol_name_format_no_rom=symbol_name_format_no_rom,
+            args=args,
+            yaml=yaml,
         )
         self.file_text = None
 
@@ -68,8 +71,10 @@ class N64SegVtx(CommonSegCodeSubsegment):
         lines.append("")
 
         vertex_count = segment_length // 16
-        cname = re.sub(r"[^0-9a-zA-Z_]", "_", self.name)
-        lines.append(f"Vtx {cname}[{vertex_count}] = {{")
+        sym = self.create_symbol(
+            addr=self.vram_start, in_segment=True, type="data", define=True
+        )
+        lines.append(f"Vtx {sym.name}[{vertex_count}] = {{")
 
         for vtx in struct.iter_unpack(">hhhHhhBBBB", vertex_data):
             x, y, z, flg, t, c, r, g, b, a = vtx

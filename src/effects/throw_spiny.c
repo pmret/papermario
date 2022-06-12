@@ -8,11 +8,11 @@ void throw_spiny_init(EffectInstance* effect);
 void throw_spiny_update(EffectInstance* effect);
 void throw_spiny_render(EffectInstance* effect);
 
-extern Gfx D_09000800[];
-extern Gfx D_090008D8[];
-extern Gfx D_090009F0[];
+extern Gfx D_09000800_3D02F0[];
+extern Gfx D_090008D8_3D03C8[];
+extern Gfx D_090009F0_3D04E0[];
 
-Gfx* D_E00C8710[2] = { D_09000800, D_090008D8 };
+Gfx* D_E00C8710[2] = { D_09000800_3D02F0, D_090008D8_3D03C8 };
 
 u8 D_E00C8718[8] = { 110, 150, 130, 110, 100, 95, 100, 0 };
 u8 D_E00C8720[8] = { 80, 60, 80, 100, 120, 110, 100, 0 };
@@ -207,6 +207,6 @@ void throw_spiny_appendGfx(void* effect) {
     gSPMatrix(gMasterGfxPos++, camera->unkMatrix, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
     gDPSetPrimColor(gMasterGfxPos++, 0, 0, data->unk_30, data->unk_34, data->unk_38, temp_s5);
     gSPDisplayList(gMasterGfxPos++, D_E00C8710[temp_s6]);
-    gSPDisplayList(gMasterGfxPos++, D_090009F0);
+    gSPDisplayList(gMasterGfxPos++, D_090009F0_3D04E0);
     gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
 }

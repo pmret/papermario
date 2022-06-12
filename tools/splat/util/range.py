@@ -1,7 +1,11 @@
+import dataclasses
+from typing import Optional
+
+
+@dataclasses.dataclass
 class Range:
-    def __init__(self, start=None, end=None):
-        self.start = start
-        self.end = end
+    start: Optional[int] = None
+    end: Optional[int] = None
 
     def has_start(self):
         return self.start is not None

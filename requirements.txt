@@ -7,3 +7,7 @@ ninja_syntax
 msgpack
 pylibyaml
 tqdm
+spimdisasm
+pygfxd
+intervaltree
+rabbitizer
