@@ -885,7 +885,7 @@ void virtual_entity_list_render_world(void) {
     for (i = 0; i < ARRAY_COUNT(*D_802DB7C0); i++) {
         virtualEntity = (*D_802DB7C0)[i];
         if (virtualEntity != NULL) {
-            if (!(virtualEntity->entityModelIndex < 0 || get_entity_model(virtualEntity->entityModelIndex)->flags & 8)) {
+            if (!(virtualEntity->entityModelIndex < 0 || get_entity_model(virtualEntity->entityModelIndex)->flags & ENTITY_MODEL_FLAGS_CAM3)) {
                 guTranslateF(translation, virtualEntity->pos.x, virtualEntity->pos.y, virtualEntity->pos.z);
                 guRotateF(xRot, virtualEntity->rot.x, 1.0f, 0.0f, 0.0f);
                 guRotateF(yRot, virtualEntity->rot.y, 0.0f, 1.0f, 0.0f);
@@ -918,7 +918,7 @@ void virtual_entity_list_render_UI(void) {
     for (i = 0; i < ARRAY_COUNT(*D_802DB7C0); i++) {
         virtualEntity = (*D_802DB7C0)[i];
         if (virtualEntity != NULL) {
-            if (!(virtualEntity->entityModelIndex < 0 || !(get_entity_model(virtualEntity->entityModelIndex)->flags & 8))) {
+            if (!(virtualEntity->entityModelIndex < 0 || !(get_entity_model(virtualEntity->entityModelIndex)->flags & ENTITY_MODEL_FLAGS_CAM3))) {
                 guTranslateF(translation, virtualEntity->pos.x, virtualEntity->pos.y, virtualEntity->pos.z);
                 guRotateF(xRot, virtualEntity->rot.x, 1.0f, 0.0f, 0.0f);
                 guRotateF(yRot, virtualEntity->rot.y, 0.0f, 1.0f, 0.0f);

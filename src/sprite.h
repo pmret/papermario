@@ -76,13 +76,6 @@ typedef struct SpriteAnimData {
     /* 0x0C */ s32 colorVariations;
 } SpriteAnimData; // size = 0x10
 
-typedef struct SpriteRasterInfo {
-    /* 0x00 */ void* raster;
-    /* 0x04 */ void* defaultPal;
-    /* 0x08 */ s32 width;
-    /* 0x0C */ s32 height;
-} SpriteRasterInfo; // size = 0x10
-
 extern Vtx spr_defaultQuad[4];
 extern Vp D_802DF3D0;
 extern Vp D_802DF3E0;

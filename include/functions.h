@@ -818,7 +818,7 @@ void btl_set_state(s32 battleState);
 void draw_entity_model_A(s32, Mtx*);
 void draw_entity_model_B(s32, Mtx*, s32, Vec3s*);
 void draw_entity_model_C(s32, Mtx*);
-void draw_entity_model_D(s32, Mtx*, s32, Vtx*);
+void draw_entity_model_D(s32, Mtx*, s32, Vec3s*);
 void draw_entity_model_E(s32, Mtx*);
 void free_entity_model_by_index(s32 idx);
 void btl_cam_use_preset(s32);
