@@ -814,7 +814,7 @@ segments:
       - [0xE4CA0]
       - [0xE4E70, vtx, vtx/stencil2]
       - [0xE4FF0]
-    - [0xE5490, data]
+    - [0xE5490, .data, CEE40]
     - [0xE5510, .data, d0a70_len_4fe0]
     - [0xE56C0, .data, hud_element]
     - [0xE5820, .data, dc470_len_14c0]
