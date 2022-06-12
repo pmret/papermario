@@ -50,14 +50,14 @@ Gfx Gfx_LoadStencilTex_SharpCircle[] = {
     gsSPEndDisplayList()
 };
 
-Gfx Gfx_LoadStencilTex_Mario[] = {  
+Gfx Gfx_LoadStencilTex_Mario[] = {
     gsSPDisplayList(&Gfx_LoadStencilTex_CommonParams),
     gsDPSetTextureLUT(G_TT_NONE),
     gsDPLoadTextureTile_4b(ui_stencil_mario_png, G_IM_FMT_I, 64, 0, 0, 0, 63, 63, 0, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, 6, 6, G_TX_NOLOD, G_TX_NOLOD),
     gsSPEndDisplayList()
 };
 
-Gfx Gfx_LoadStencilTex_Star[] = {  
+Gfx Gfx_LoadStencilTex_Star[] = {
     gsSPDisplayList(&Gfx_LoadStencilTex_CommonParams),
     gsDPSetTextureLUT(G_TT_NONE),
     gsDPLoadTextureTile_4b(ui_stencil_star_png, G_IM_FMT_I, 32, 0, 0, 0, 31, 63, 0, G_TX_MIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, 5, 6, G_TX_NOLOD, G_TX_NOLOD),
@@ -172,7 +172,191 @@ Gfx D_8014EA48[] = {
     gsDPSetDepthSource(G_ZS_PIXEL)
 };
 
-INCLUDE_ASM(void, "cd180_len_38f0", _render_transition_stencil, u8 arg0, f32 arg1, ScreenOverlay* arg2);
+void _render_transition_stencil(u8 arg0, f32 arg1, ScreenOverlay* overlay) {
+    Camera* camera = &gCameras[gCurrentCameraID];
+    u8 s3, s4, s5;
+    s32 s1, s2, s6, s7;
+    f32 f28;
+    s16 v0;
+    s16 s0;
+    Mtx* matrixStack = gDisplayContext->matrixStack;
+
+    if (arg1 == 0.0f) {
+        return;
+    }
+
+    if (overlay != NULL) {
+        s3 = overlay->color.r;
+        s4 = overlay->color.g;
+        s5 = overlay->color.b;
+        s1 = overlay->screenPos[0][0];
+        s2 = overlay->screenPos[0][1];
+        s6 = overlay->screenPos[1][0];
+        s7 = overlay->screenPos[1][1];
+        f28 = overlay->alpha;
+    } else {
+        s3 = s4 = s5 = 0;
+        s1 = s2 = s6 = s7 = 0;
+        f28 = 0.0f;
+    }
+
+    switch (arg0) {
+        case 0:
+            gDPPipeSync(gMasterGfxPos++);
+            gDPSetColorDither(gMasterGfxPos++, G_CD_MAGICSQ);
+            gDPSetAlphaDither(gMasterGfxPos++, G_AD_PATTERN);
+            gDPSetCycleType(gMasterGfxPos++, G_CYC_1CYCLE);
+            if (arg1 == 255.0f) {
+                gDPSetRenderMode(gMasterGfxPos++, CVG_DST_SAVE | G_RM_OPA_SURF, CVG_DST_SAVE | G_RM_OPA_SURF2);
+            } else {
+                gDPSetRenderMode(gMasterGfxPos++, G_RM_CLD_SURF, G_RM_CLD_SURF2);
+            }
+            gDPSetCombineMode(gMasterGfxPos++, G_CC_PRIMITIVE, G_CC_PRIMITIVE);
+            gDPSetPrimColor(gMasterGfxPos++, 0, 0, s3, s4, s5, arg1);
+            gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+            gDPFillRectangle(gMasterGfxPos++, 0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1);
+            gDPSetColorDither(gMasterGfxPos++, G_CD_DISABLE);
+            return;
+        case 1:
+            gDPPipeSync(gMasterGfxPos++);
+            gDPSetColorDither(gMasterGfxPos++, G_CD_MAGICSQ);
+            gDPSetAlphaDither(gMasterGfxPos++, G_AD_PATTERN);
+            gDPSetCycleType(gMasterGfxPos++, G_CYC_1CYCLE);
+            if (arg1 == 255.0f) {
+                gDPSetRenderMode(gMasterGfxPos++, CVG_DST_SAVE | G_RM_OPA_SURF, CVG_DST_SAVE | G_RM_OPA_SURF2);
+            } else {
+                gDPSetRenderMode(gMasterGfxPos++, G_RM_CLD_SURF, G_RM_CLD_SURF2);
+            }
+            gDPSetCombineMode(gMasterGfxPos++, G_CC_PRIMITIVE, G_CC_PRIMITIVE);
+            gDPSetPrimColor(gMasterGfxPos++, 0, 0, s3, s4, s5, arg1);
+            gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+            gDPFillRectangle(gMasterGfxPos++, camera->viewportStartX, camera->viewportStartY,
+                             camera->viewportStartX + camera->viewportW, camera->viewportStartY + camera->viewportH);
+            gDPSetColorDither(gMasterGfxPos++, G_CD_DISABLE);
+            return;
+    }
+
+    guOrtho(&matrixStack[gMatrixListPos], 0.0f, 320.0f, 0.0f, 240.0f, -1000.0f, 1000.0f, 1.0f);
+    gSPMatrix(gMasterGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
+
+    switch (arg0) {
+        case 4:
+            gSPDisplayList(gMasterGfxPos++, Gfx_LoadStencilTex_Mario);
+            func_80139F10(160, 120, arg1, s3, s4, s5, arg1 * f28 / 255.0f, gCurrentCameraID);
+            break;
+        case 7:
+            gSPDisplayList(gMasterGfxPos++, Gfx_LoadStencilTex_Mario);
+            func_80139F10(160, 120, arg1, s3, s4, s5, arg1 * f28 / 255.0f, -1);
+            break;
+        case 5:
+            gSPDisplayList(gMasterGfxPos++, Gfx_LoadStencilTex_Star);
+            func_80139F10(160, 120, arg1, s3, s4, s5, arg1 * f28 / 255.0f, gCurrentCameraID);
+            break;
+        case 8:
+            gSPDisplayList(gMasterGfxPos++, Gfx_LoadStencilTex_Star);
+            func_80139F10(160, 120, arg1, s3, s4, s5, arg1 * f28 / 255.0f, -1);
+            break;
+        case 3:
+            gSPDisplayList(gMasterGfxPos++, Gfx_LoadStencilTex_SharpCircle);
+            func_80139F10(s1, s2, arg1, 0, 0, 0, 0, gCurrentCameraID);
+            break;
+        case 6:
+            gSPDisplayList(gMasterGfxPos++, Gfx_LoadStencilTex_SharpCircle);
+            func_80139F10(s1, s2, arg1, 0, 0, 0, 0, -1);
+            break;
+        case 2:
+            s0 = arg1;
+            guTranslate(&matrixStack[gMatrixListPos], 80.0f, 120.0f, 0.0f);
+            gSPMatrix(gMasterGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+            guScale(&matrixStack[gMatrixListPos], (1.0f - s0 / 255.0f) * 0.8, (1.0f - s0 / 255.0f) * 0.8, 1.0f);
+            gSPMatrix(gMasterGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+            guRotate(&matrixStack[gMatrixListPos], s0 * 0.5f, 0.0f, 0.0f, 1.0f);
+            gSPMatrix(gMasterGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+            gSPDisplayList(gMasterGfxPos++, D_8014E8F0);
+            gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+
+            guTranslate(&matrixStack[gMatrixListPos], 240.0f, 120.0f, 0.0f);
+            gSPMatrix(gMasterGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+            guScale(&matrixStack[gMatrixListPos], (1.0f - s0 / 255.0f) * 0.8, (1.0f - s0 / 255.0f) * 0.8, 1.0f);
+            gSPMatrix(gMasterGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+            guRotate(&matrixStack[gMatrixListPos], s0 * 0.5f, 0.0f, 0.0f, 1.0f);
+            gSPMatrix(gMasterGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+            gSPDisplayList(gMasterGfxPos++, D_8014E8F0);
+            gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+
+            guTranslate(&matrixStack[gMatrixListPos], 0.0f, 0.0f, 0.0f);
+            gSPMatrix(gMasterGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+            gSPDisplayList(gMasterGfxPos++, D_8014EA48);
+            gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+            break;
+        case 9:
+            s0 = arg1;
+            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, 0);
+            guTranslate(&matrixStack[gMatrixListPos], s1, SCREEN_HEIGHT - s2, 0.0f);
+            gSPMatrix(gMasterGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+            guScale(&matrixStack[gMatrixListPos], (1.0f - s0 / 255.0f) * 0.8, (1.0f - s0 / 255.0f) * 0.8, 1.0f);
+            gSPMatrix(gMasterGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+            guRotate(&matrixStack[gMatrixListPos], -s0, 0.0f, 0.0f, 1.0f);
+            gSPMatrix(gMasterGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+            gSPDisplayList(gMasterGfxPos++, D_8014E8F0);
+            gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+
+            guTranslate(&matrixStack[gMatrixListPos], s6, SCREEN_HEIGHT - s7, 0.0f);
+            gSPMatrix(gMasterGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+            guScale(&matrixStack[gMatrixListPos], (1.0f - s0 / 255.0f) * 0.8, (1.0f - s0 / 255.0f) * 0.8, 1.0f);
+            gSPMatrix(gMasterGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+            guRotate(&matrixStack[gMatrixListPos], -s0, 0.0f, 0.0f, 1.0f);
+            gSPMatrix(gMasterGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+            gSPDisplayList(gMasterGfxPos++, D_8014E8F0);
+            gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+
+            guTranslate(&matrixStack[gMatrixListPos], 0.0f, 0.0f, 0.0f);
+            gSPMatrix(gMasterGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, f28);
+            gSPDisplayList(gMasterGfxPos++, D_8014E9A8);
+            gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+            break;
+        case 10:
+            s0 = arg1;
+            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, 0);
+            guTranslate(&matrixStack[gMatrixListPos], s1, SCREEN_HEIGHT - s2, 0.0f);
+            gSPMatrix(gMasterGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+            guScale(&matrixStack[gMatrixListPos], (1.0f - s0 / 255.0f) * 0.8, (1.0f - s0 / 255.0f) * 0.8, 1.0f);
+            gSPMatrix(gMasterGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+            guRotate(&matrixStack[gMatrixListPos], (f32)(-s0) * 0.5, 0.0f, 0.0f, 1.0f);
+            gSPMatrix(gMasterGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+            gSPDisplayList(gMasterGfxPos++, D_8014E8F0);
+            gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+
+            guTranslate(&matrixStack[gMatrixListPos], 0.0f, 0.0f, 0.0f);
+            gSPMatrix(gMasterGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, f28);
+            gSPDisplayList(gMasterGfxPos++, D_8014E9A8);
+            gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+            v0 = arg1 + 40;
+            if (arg1 > 170) {
+                v0 = 170;
+            }
+            func_80138D88(0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1, v0);
+            break;
+        case 11:
+            gSPDisplayList(gMasterGfxPos++, Gfx_LoadStencilTex_BlurryCircle);
+            func_80138E54(1, s6, s7, f28, arg1);
+            break;
+        case 12:
+            func_80138D88(s1, s2, s6, s7, arg1);
+            break;
+        case 13:
+            gSPDisplayList(gMasterGfxPos++, Gfx_LoadStencilTex_BlurryCircle);
+            func_80138E54(0, s1, s2, f28, arg1);
+            break;
+        case 14:
+        case 15:
+            break;
+    }
+
+    gSPMatrix(gMasterGfxPos++, &gDisplayContext->camPerspMatrix[gCurrentCameraID], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
+}
 
 void set_screen_overlay_params_front(u8 type, f32 zoom) {
     screen_overlay_frontType = type;
@@ -233,7 +417,7 @@ void set_screen_overlay_center_worldpos(s32 idx, s32 posIdx, s32 x, s32 y, s32 z
     switch (idx) {
         case 0:
         case 1:
-            transform_point(camera->perspectiveMatrix[0], x, y, z, 1.0f, &tx, &ty, &tz, &ts);
+            transform_point(camera->perspectiveMatrix, x, y, z, 1.0f, &tx, &ty, &tz, &ts);
             ts = 1.0f / ts;
             tx *= ts;
             ty *= -ts;
@@ -308,25 +492,14 @@ void set_map_transition_effect(s32 arg0) {
     D_8014C6F0 = arg0;
 }
 
-// r g b register ordering issues
-#ifdef NON_EQUIVALENT
 s32 update_exit_map_screen_overlay(s16* progress) {
     u8 overlayColor;
-    u8 type;
-    s32 phi_s2;
-    s16 t;
-    u8 r;
-    u8 g;
-    u8 b;
-
-    type = 0;
-
-    g = 0;
-    b = 0;
-    r = 0;
-
-    t = 0;
-    phi_s2 = 20;
+    u8 type = 0;
+    u8 r = 0;
+    u8 g = 0;
+    u8 b = 0;
+    s16 t = 0;
+    s32 amt = 20;
 
     switch (D_8014C6F0) {
         case 1:
@@ -335,13 +508,15 @@ s32 update_exit_map_screen_overlay(s16* progress) {
         case 3:
             r = g = b = 208;
             type = 1;
-            phi_s2 = 10;
+            amt = 10;
             if (gGameStatusPtr->demoState == 2) {
                 gGameStatusPtr->nextDemoScene = 18;
             }
             break;
         case 6:
             r = g = b = 208;
+            type = 1;
+            break;
         case 0:
             type = 1;
             break;
@@ -349,19 +524,29 @@ s32 update_exit_map_screen_overlay(s16* progress) {
             if (gGameStatusPtr->demoState == 2) {
                 gGameStatusPtr->nextDemoScene = 18;
             }
+            r = g = b = 208;
+            type = 1;
+            amt = 7;
+            break;
         case 11:
         case 15:
             r = g = b = 208;
+            type = 1;
+            amt = 7;
+            break;
         case 4:
         case 5:
             type = 1;
-            phi_s2 = 7;
+            amt = 7;
             break;
         case 14:
             r = g = b = 208;
+            type = 1;
+            amt = 50;
+            break;
         case 2:
             type = 1;
-            phi_s2 = 50;
+            amt = 50;
             break;
         case 8:
             set_screen_overlay_alpha(0, 0.0f);
@@ -369,21 +554,25 @@ s32 update_exit_map_screen_overlay(s16* progress) {
             break;
         case 9:
             r = g = b = 208;
+            set_screen_overlay_alpha(0, 0.0f);
+            type = 4;
+            amt = 7;
+            break;
         case 10:
             set_screen_overlay_alpha(0, 0.0f);
             type = 4;
-            phi_s2 = 7;
+            amt = 7;
             break;
         case 12:
             set_screen_overlay_alpha(0, 160.0f);
             r = g = b = 208;
             type = 5;
-            phi_s2 = 7;
+            amt = 7;
             break;
         case 13:
             set_screen_overlay_alpha(0, 0.0f);
             type = 5;
-            phi_s2 = 7;
+            amt = 7;
             break;
         case 16:
             set_screen_overlay_center(0, 0, 15, 28);
@@ -401,7 +590,7 @@ s32 update_exit_map_screen_overlay(s16* progress) {
             return 1;
         }
 
-        *progress += phi_s2;
+        *progress += amt;
         if (*progress > 0xFF) {
             *progress = 0xFF;
         }
@@ -418,16 +607,13 @@ s32 update_exit_map_screen_overlay(s16* progress) {
             return 1;
         }
 
-        *progress += phi_s2;
+        *progress += amt;
         if (*progress > 0xFF) {
             *progress = 0xFF;
         }
     }
     return 0;
 }
-#else
-INCLUDE_ASM(s32, "cd180_len_38f0", update_exit_map_screen_overlay);
-#endif
 
 u8 update_enter_map_screen_overlay(s16* progress) {
     u8 frontType = 0;
