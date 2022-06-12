@@ -114,8 +114,8 @@ BattleArea gBattleAreas[0x30] = {
     {
         AREA(area_omo2),
         .name = "エリア ＯＭＯ２",
-        .battles = 0x8022FBF4,
-        .stages = 0x8022FC1C,
+        .battles = &b_area_omo2_formationTable,
+        .stages = &b_area_omo2_stageTable,
     },
     {
         AREA(area_omo3),
