@@ -51,8 +51,53 @@ ApiStatus func_802A163C_79070C(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802A16F4_7907C4(Evt* script, s32 isInitialCall);
-INCLUDE_ASM(s32, "battle/star/chill_out/7900D0", func_802A16F4_7907C4);
+ApiStatus func_802A16F4_7907C4(Evt* script, s32 isInitialCall) {
+    Actor* enemy = get_actor(script->owner1.enemyID);
+    Actor* target = get_actor(enemy->targetActorID);
+    ActorPart* targetPart = get_actor_part(target, enemy->targetPartIndex);
+    f32 x, y, z;
+
+    if (target->flags & ACTOR_FLAG_TARGET_ONLY) {
+        return ApiStatus_DONE2;
+    }
+
+    if (target->flags & ACTOR_FLAG_NO_DMG_APPLY) {
+        return ApiStatus_DONE2;
+    }
+
+    if (target->flags & ACTOR_FLAG_2000) {
+        return ApiStatus_DONE2;
+    }
+
+    if (targetPart->eventFlags & ACTOR_PART_FLAG_40000) {
+        return ApiStatus_DONE2;
+    }
+
+    if (targetPart->eventFlags & ACTOR_PART_FLAG_80000) {
+        return ApiStatus_DONE2;
+    }
+
+    target->chillOutTurns = 4;
+    target->chillOutAmount = 3;
+
+    dispatch_damage_event_actor_0(target, 0, 10);
+
+    x = target->currentPos.x + target->headOffset.x + (target->size.x / 2);
+    if (target->flags & ACTOR_FLAG_HP_OFFSET_BELOW) {
+        y = target->currentPos.y + target->headOffset.y - target->size.y;
+    } else if (!(target->flags & ACTOR_FLAG_8000)) {
+        y = target->currentPos.y + target->headOffset.y + target->size.y;
+    } else {
+        y = target->currentPos.y + target->headOffset.y + target->size.y * 2;
+    }
+    z = target->currentPos.z + target->headOffset.z + 5.0f;
+
+    fx_stat_change(5, x, y, z, 1.0f, 60);
+    sfx_play_sound(SOUND_2106);
+    D_802A2CC0 = 1;
+
+    return ApiStatus_DONE2;
+}
 
 EvtScript N(802A18F0) = {
     EVT_CALL(GetOwnerID, LW(10))

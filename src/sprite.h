@@ -15,8 +15,7 @@ typedef struct SpriteComponent {
     /* 0x28 */ Vec3f compPos;
     /* 0x34 */ Vec3f rotation;
     /* 0x40 */ Vec3f scale;
-    /* 0x4C */ char unk_4C[3];
-    /* 0x4F */ u8 unk_4F;
+    /* 0x4C */ s32 unk_4C;
 } SpriteComponent; // size = 0x50
 
 typedef struct PlayerCurrentAnimInfo {
@@ -71,7 +70,7 @@ typedef struct PlayerSpriteSet {
 /// Sprite data header.
 typedef struct SpriteAnimData {
     /* 0x00 */ s32** rastersOffset;
-    /* 0x04 */ s32** palettesOffset;
+    /* 0x04 */ u16** palettesOffset;
     /* 0x08 */ s32 maxComponents;
     /* 0x0C */ s32 colorVariations;
 } SpriteAnimData; // size = 0x10
@@ -173,10 +172,9 @@ s32 spr_draw_player_sprite(s32 arg0, s32 yaw, s32 arg2, s16** paletteList, Matri
 
 s32 func_802DDEC4(s32 arg0);
 
-s32 func_802DDEE4(s32, s32, s32, s32, s32, s32, s32, s32);
+void func_802DDEE4(s32, s32, s32, s32, s32, s32, s32, s32);
 
-// TODO: problem with arg6, see the NON_MATCHING in sprite.c
-s32 func_802DDFF8(s32, s32, s32, s32, s32, s32, u16);
+void func_802DDFF8(s32, s32, s32, s32, s32, s32, s32);
 
 void spr_get_player_raster_info(SpriteRasterInfo* out, s32 playerSpriteID, s32 rasterIndex);
 
