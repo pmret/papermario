@@ -10,7 +10,7 @@
 
 #include "common/GetSelectedMoveID.inc.c"
 
-ApiStatus SetActorLevelToZero(Evt* script, s32 isInitialCall) {
+ApiStatus N(SetActorLevelToZero)(Evt* script, s32 isInitialCall) {
     get_actor(script->owner1.actorID)->actorBlueprint->level = 0;
     return ApiStatus_DONE2;
 }
@@ -798,7 +798,7 @@ EvtScript N(fallOff) = {
     EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
     EVT_CALL(GetActorSize, ACTOR_SELF, LW(0), LW(1))
     EVT_CALL(SetActorSize, ACTOR_SELF, 24, LW(1))
-    EVT_CALL(SetActorLevelToZero)
+    EVT_CALL(N(SetActorLevelToZero))
     EVT_RETURN
     EVT_END
 };
