@@ -1,8 +1,6 @@
 #ifndef _WORLD_PARTNERS_H
 #define _WORLD_PARTNERS_H
 
-#include "common.h"
-
 typedef void (*PartnerFunc)(Npc* partner);
 typedef s32 (*PartnerBoolFunc)(Npc* partner);
 typedef s32 (*PartnerUnkFunc)(Npc* partner, Npc* enemy);
@@ -26,17 +24,6 @@ typedef struct WorldPartner {
     /* 0x3C */ EvtScript* whileRiding;
 } WorldPartner; // size = 0x40
 
-extern s32 D_8010CFC4;
-extern Evt* wPartnerCurrentScript;
-extern s32 D_8010CFD8;
-extern s32 wPartnerCurrentScriptID;
-extern s32 D_8010CFE0;
-extern s32 D_8010CFE4;
-extern s32 D_8010CFE8;
-
-extern WorldPartner wPartners[12];
-extern WorldPartner* wPartner;
-extern s32 D_8010CFD0; // wPartnerNpcIndex
 extern Npc* wPartnerNpc; // wPartnerNpc
 
 s32 partner_init_get_out(Npc*);

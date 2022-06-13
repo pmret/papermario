@@ -1,6 +1,85 @@
-#include "common.h"
-#include "ld_addrs.h"
+#include "common_structs.h"
 #include "partners.h"
+#include "macros.h"
+
+// BSS
+BSS s32 D_8010CD34;
+BSS PlayerPathElement gPlayerMoveHistory[40];
+BSS s32 gPlayerMoveHistoryIndex;
+BSS s32 D_8010CFBC;
+BSS f32 wPartnerTetherDistance;
+BSS s32 D_8010CFC4;
+BSS s16 D_8010CFC8;
+BSS s16 D_8010CFCA;
+BSS s16 D_8010CFCC;
+BSS s16 D_8010CFCE;
+BSS s32 D_8010CFD0;
+BSS Evt* wPartnerCurrentScript;
+BSS s32 D_8010CFD8;
+BSS s32 wPartnerCurrentScriptID;
+BSS s32 D_8010CFE0;
+BSS s32 D_8010CFE4;
+BSS s32 D_8010CFE8;
+BSS WorldPartner* wPartner;
+BSS s32 D_8010CFF0;
+BSS s32 D_8010CFF4;
+BSS char D_8010CFF8[0x8];
+BSS s32 D_8010D000;
+BSS char D_8010D004[0x63C];
+BSS s32 D_8010D640;
+BSS s32 D_8010D644;
+BSS s32 D_8010D648;
+BSS s32 D_8010D64C;
+BSS s32 D_8010D650;
+BSS s8 D_8010D654;
+BSS s8 D_8010D655;
+BSS s16 D_8010D656;
+BSS s16 D_8010D658;
+BSS s16 D_8010D65A;
+BSS s32 D_8010D65C;
+BSS s32 D_8010D660;
+BSS s32 D_8010D664;
+BSS s32 D_8010D668;
+BSS s32 D_8010D66C;
+BSS s32 D_8010D670;
+BSS s32 D_8010D674;
+BSS s32 D_8010D678;
+BSS s16 D_8010D67C;
+BSS s16 D_8010D67E;
+BSS s16 D_8010D680;
+BSS s16 D_8010D682;
+BSS s16 D_8010D684;
+BSS s16 D_8010D686;
+BSS s16 D_8010D688;
+BSS s16 D_8010D68A;
+BSS s16 D_8010D68C;
+BSS s8 D_8010D68E;
+BSS s8 D_8010D68F;
+BSS s8 D_8010D690;
+BSS s8 D_8010D691;
+BSS s8 D_8010D692;
+BSS s8 D_8010D693;
+BSS s32 D_8010D694;
+BSS s8 D_8010D698;
+BSS s8 D_8010D699;
+BSS s16 D_8010D69A;
+BSS s32 gPopupMenu;
+BSS s32 D_8010D6A0;
+BSS s32 D_8010D6A4;
+BSS char D_8010D6A8[0x8];
+BSS char D_8010D6B0[0x1500];
+BSS PartnerActionStatus gPartnerActionStatus;
+BSS char gSpinHistoryPosY[0x18];
+BSS char gSpinHistoryPosX[0x18];
+BSS char gSpinHistoryPosZ[0x18];
+BSS UiStatus gUIStatus;
+BSS PlayerStatus gPlayerStatus;
+BSS PlayerSpinState gPlayerSpinState;
+BSS s8 D_8010F284[0xC];
+BSS PlayerData gPlayerData;
+BSS s8 gSpinHistoryPosAngle[0x18];
+
+#include "ld_addrs.h"
 #include "npc.h"
 #include "hud_element.h"
 
@@ -86,17 +165,6 @@ extern HudScript HES_StatusSPIncrement4;
 extern HudScript HES_StatusSPIncrement5;
 extern HudScript HES_StatusSPIncrement6;
 extern HudScript HES_StatusSPIncrement7;
-
-extern s32 D_8010CD34;
-extern PlayerPathElement gPlayerMoveHistory[40];
-
-extern f32 wPartnerTetherDistance;
-extern s16 D_8010CFC8;
-extern s16 D_8010CFCA;
-extern s16 D_8010CFCE;
-extern s32 gPlayerMoveHistoryIndex;
-extern s32 D_8010CFBC;
-extern s16 D_8010CFCC;
 
 extern s32 D_802C0000;
 extern EvtScript D_802C05CC_32579C;
@@ -491,8 +559,7 @@ void partner_free_npc(void) {
     free_npc_by_index(D_8010CFD0);
 }
 
-INCLUDE_ASM(void, "world/partners", _use_partner_ability, Npc* partner);
-/*void _use_partner_ability(void) {
+void _use_partner_ability(void) {
     static u32 D_8010CD30;
 
     PlayerData* playerData = &gPlayerData;
@@ -765,7 +832,7 @@ INCLUDE_ASM(void, "world/partners", _use_partner_ability, Npc* partner);
     }
 }
 
-static const s32 padding = 0;*/
+static const s32 padding = 0;
 
 void switch_to_partner(s32 arg0) {
     PlayerStatus* playerStatus = &gPlayerStatus;

@@ -1654,7 +1654,7 @@ s32 test_player_entity_aabb(Entity* entity) {
 }
 
 s32 is_player_action_state(s8 actionState) {
-    return actionState == gPlayerActionState;
+    return actionState == gPlayerStatus.actionState;
 }
 
 void entity_set_render_script(Entity* entity, u32* commandList) {
