@@ -342,7 +342,7 @@ INCLUDE_ASM(s32, "28910_len_5090", func_8004EC04);
 INCLUDE_ASM(s32, "28910_len_5090", func_8004EC68);
 
 void snd_BGMCmd_E0_MasterTempo(BGMPlayer* player, BGMPlayerTrack* track) {
-    u32 unk_D4 = player->seqCmdArgs1.u16;
+    u32 unk_D4 = player->seqCmdArgs.u16[0];
     s32 temp_v0;
 
     player->masterTempoBPM = unk_D4;
@@ -370,7 +370,7 @@ s32 snd_bpm_to_tempo(BGMPlayer* player, u32 tempo) {
 }
 
 void snd_BGMCmd_E1_MasterVolume(BGMPlayer* player, BGMPlayerTrack* track) {
-    s32 volume = player->seqCmdArgs1.u8[0] & 0x7F;
+    s32 volume = player->seqCmdArgs.u8[0] & 0x7F;
 
     if (volume != 0) {
         volume = volume << 0x18;
@@ -385,30 +385,30 @@ void snd_BGMCmd_E1_MasterVolume(BGMPlayer* player, BGMPlayerTrack* track) {
 }
 
 void snd_BGMCmd_E2_MasterTranspose(BGMPlayer* player, BGMPlayerTrack* track) {
-    player->masterTranspose = (s8)player->seqCmdArgs1.u8[0] * 100;
+    player->masterTranspose = (s8)player->seqCmdArgs.u8[0] * 100;
 }
 
 void snd_BGMCmd_E3(BGMPlayer* player, BGMPlayerTrack* track) {
-    player->data->unk_40[player->unk_235].unk_00 = player->seqCmdArgs1.u8[0];
+    player->data->unk_40[player->unk_235].unk_00 = player->seqCmdArgs.u8[0];
     player->data->unk_40[player->unk_235].unk_01 = 1;
 }
 
 void snd_BGMCmd_E6_MasterEffect(BGMPlayer* player, BGMPlayerTrack* track) {
-    u8 unk_D4 = player->seqCmdArgs1.u8[0];
+    u8 unk_D4 = player->seqCmdArgs.u8[0];
     u32 temp_v1 = player->unk_4C[unk_D4];
 
     if ((unk_D4 < 4) && (temp_v1 < 0x80)) {
-        if (player->data->unk_40[temp_v1].unk_00 != player->seqCmdArgs1.u8[1]) {
-            player->data->unk_40[temp_v1].unk_00 = player->seqCmdArgs1.u8[1];
+        if (player->data->unk_40[temp_v1].unk_00 != player->seqCmdArgs.u8[1]) {
+            player->data->unk_40[temp_v1].unk_00 = player->seqCmdArgs.u8[1];
             player->data->unk_40[temp_v1].unk_01 = 1;
         }
-        player->unk_224[unk_D4] = player->seqCmdArgs1.u8[1];
+        player->unk_224[unk_D4] = player->seqCmdArgs.u8[1];
     }
 }
 
 void snd_BGMCmd_E4_MasterTempoFade(BGMPlayer* player, BGMPlayerTrack* track) {
-    s32 unk_D4 = player->seqCmdArgs1.u16;
-    s32 temp_a0 = snd_bpm_to_tempo(player, player->seqCmdArgs2.u16);
+    s32 unk_D4 = player->seqCmdArgs.u16[0];
+    s32 temp_a0 = snd_bpm_to_tempo(player, player->seqCmdArgs.u16[1]);
     s32 temp_v0;
 
     if (unk_D4 <= 0) {
@@ -422,8 +422,8 @@ void snd_BGMCmd_E4_MasterTempoFade(BGMPlayer* player, BGMPlayerTrack* track) {
 }
 
 void snd_BGMCmd_E5_MasterVolumeFade(BGMPlayer* player, BGMPlayerTrack* track) {
-    s32 temp_a1 = player->seqCmdArgs1.u16;
-    s32 temp_a2 = player->seqCmdArgs2.u8[0] & 0x7F;
+    s32 temp_a1 = player->seqCmdArgs.u16[0];
+    s32 temp_a2 = player->seqCmdArgs.u8[2] & 0x7F;
 
     if (temp_a2 != 0) {
         temp_a2 = temp_a2 << 0x18;
@@ -439,12 +439,12 @@ void snd_BGMCmd_E5_MasterVolumeFade(BGMPlayer* player, BGMPlayerTrack* track) {
 }
 
 void snd_BGMCmd_E8_TrackOverridePatch(BGMPlayer* player, BGMPlayerTrack* track) {
-    track->unk_44 = player->seqCmdArgs1.u8[1];
-    track->unk_0C = func_80053BE8(player->data, player->seqCmdArgs1.u8[0], track->unk_44, track->unk_10);
+    track->unk_44 = player->seqCmdArgs.u8[1];
+    track->unk_0C = func_80053BE8(player->data, player->seqCmdArgs.u8[0], track->unk_44, track->unk_10);
 }
 
 void snd_BGMCmd_E9_SubTrackVolume(BGMPlayer* arg0, BGMPlayerTrack* track) {
-    u32 unk_D4 = arg0->seqCmdArgs1.u8[0] & 0x7F;
+    u32 unk_D4 = arg0->seqCmdArgs.u8[0] & 0x7F;
 
     if (unk_D4 != 0) {
         unk_D4 = unk_D4 << 0x18;
@@ -455,8 +455,8 @@ void snd_BGMCmd_E9_SubTrackVolume(BGMPlayer* arg0, BGMPlayerTrack* track) {
 }
 
 void snd_BGMCmd_F6_TrackVolumeFade(BGMPlayer* player, BGMPlayerTrack* track) {
-    s32 temp_a0 = player->seqCmdArgs2.u8[0] & 0x7F;
-    s32 temp_a2 = player->seqCmdArgs1.u16;
+    s32 temp_a0 = player->seqCmdArgs.u8[2] & 0x7F;
+    s32 temp_a2 = player->seqCmdArgs.u16[0];
 
     if (temp_a0 != 0) {
         temp_a0 = temp_a0 << 0x18;
@@ -474,46 +474,46 @@ void snd_BGMCmd_F6_TrackVolumeFade(BGMPlayer* player, BGMPlayerTrack* track) {
 }
 
 void snd_BGMCmd_EA_SubTrackPan(BGMPlayer* player, BGMPlayerTrack* track) {
-    track->subTrackPan = player->seqCmdArgs1.u8[0] & 0x7F;
+    track->subTrackPan = player->seqCmdArgs.u8[0] & 0x7F;
     track->unk_57 = 0;
     track->panChanged = 1;
 }
 
 void snd_BGMCmd_EB_SubTrackReverb(BGMPlayer* player, BGMPlayerTrack* track) {
-    track->subTrackReverb = player->seqCmdArgs1.u8[0] & 0x7F;
+    track->subTrackReverb = player->seqCmdArgs.u8[0] & 0x7F;
     track->reverbChanged = 1;
 }
 
 void snd_BGMCmd_EC_SegTrackVolume(BGMPlayer* player, BGMPlayerTrack* track) {
-    track->segTrackVolume = player->seqCmdArgs1.u8[0] & 0x7F;
+    track->segTrackVolume = player->seqCmdArgs.u8[0] & 0x7F;
     track->volumeChanged = 1;
 }
 
 void snd_BGMCmd_ED_SubTrackCoarseTune(BGMPlayer* player, BGMPlayerTrack* track) {
-    track->subTrackCoarseTune = (s8)player->seqCmdArgs1.u8[0] * 100;
+    track->subTrackCoarseTune = (s8)player->seqCmdArgs.u8[0] * 100;
 }
 
 void snd_BGMCmd_EE_SubTrackFineTune(BGMPlayer* player, BGMPlayerTrack* track) {
-    track->subTrackFineTune = player->seqCmdArgs1.u8[0];
+    track->subTrackFineTune = player->seqCmdArgs.u8[0];
 }
 
 void snd_BGMCmd_EF_SegTrackTune(BGMPlayer* player, BGMPlayerTrack* track) {
-    track->segTrackTune = player->seqCmdArgs1.u16;
+    track->segTrackTune = player->seqCmdArgs.u16[0];
     track->tuneChanged = 1;
 }
 
 void snd_BGMCmd_F0_TrackTremolo(BGMPlayer* player, BGMPlayerTrack* track) {
-    track->trackTremoloAmount = player->seqCmdArgs1.u8[0];
-    track->trackTremoloSpeed = player->seqCmdArgs1.u8[1];
-    track->trackTremoloTime = player->seqCmdArgs2.u8[0];
+    track->trackTremoloAmount = player->seqCmdArgs.u8[0];
+    track->trackTremoloSpeed = player->seqCmdArgs.u8[1];
+    track->trackTremoloTime = player->seqCmdArgs.u8[2];
 }
 
 void snd_BGMCmd_F1_TrackTremoloSpeed(BGMPlayer* player, BGMPlayerTrack* track) {
-    track->trackTremoloSpeed = player->seqCmdArgs1.u8[0];
+    track->trackTremoloSpeed = player->seqCmdArgs.u8[0];
 }
 
 void snd_BGMCmd_F2_TrackTremoloTime(BGMPlayer* player, BGMPlayerTrack* track) {
-    track->trackTremoloTime = player->seqCmdArgs1.u8[0];
+    track->trackTremoloTime = player->seqCmdArgs.u8[0];
 }
 
 void snd_BGMCmd_F3_TrackTremoloStop(BGMPlayer* player, BGMPlayerTrack* track) {
@@ -521,14 +521,14 @@ void snd_BGMCmd_F3_TrackTremoloStop(BGMPlayer* player, BGMPlayerTrack* track) {
 }
 
 void snd_BGMCmd_F4(BGMPlayer* player, BGMPlayerTrack* track) {
-    track->subTrackPan = player->seqCmdArgs1.u8[0] & 0x7F;
-    track->unk_57 = player->seqCmdArgs1.u8[1] & 0x7F;
+    track->subTrackPan = player->seqCmdArgs.u8[0] & 0x7F;
+    track->unk_57 = player->seqCmdArgs.u8[1] & 0x7F;
 }
 
 INCLUDE_ASM(void, "28910_len_5090", snd_BGMCmd_F5_TrackVoice, BGMPlayer* player, BGMPlayerTrack* track);
 
 void snd_BGMCmd_F7_SubTrackReverbType(BGMPlayer* player, BGMPlayerTrack* track) {
-    u8 temp_v0 = player->seqCmdArgs1.u8[0];
+    u8 temp_v0 = player->seqCmdArgs.u8[0];
     u8 temp_v1 = player->unk_4C[temp_v0];
 
     if ((temp_v0 < 4) && ((s8)temp_v1 >= 0)) {
@@ -548,9 +548,9 @@ INCLUDE_ASM(void, "28910_len_5090", snd_BGMCmd_FD, BGMPlayer* player, BGMPlayerT
 #endif
 
 void snd_BGMCmd_FE(BGMPlayer* player, BGMPlayerTrack* track) {
-    s32 temp = player->seqCmdArgs1.u16 + (s32)player->unk_64;
+    s32 temp = player->seqCmdArgs.u16[0] + (s32)player->unk_64;
 
-    track->unk_3E = player->seqCmdArgs2.u8[0];
+    track->unk_3E = player->seqCmdArgs.u8[2];
     track->unk_04 = track->bgmReadPos;
     track->bgmReadPos = temp;
 }
@@ -601,8 +601,8 @@ void func_8005083C(BGMPlayer* player, s32 arg1, s16 arg2, s8 arg3) {
     BGMPlayerTrack* track = &player->unk_25C[arg1];
 
     if (track->bgmReadPos != 0) {
-        player->seqCmdArgs1.u16 = arg2;
-        player->seqCmdArgs2.u8[0] = arg3;
+        player->seqCmdArgs.u16[0] = arg2;
+        player->seqCmdArgs.u8[2] = arg3;
         snd_BGMCmd_F6_TrackVolumeFade(player, track);
     }
 }

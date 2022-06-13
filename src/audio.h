@@ -25,6 +25,12 @@ typedef union X16 {
     u16 u16;
 } X16;
 
+typedef union SeqArgs {
+    u8 u8[4];
+    u16 u16[2];
+    u32 u32;
+} SeqArgs;
+
 typedef struct UnkAl1 {
     /* 0x00 */ UnkField unk_00;
     /* 0x04 */ s32 unk_04;
@@ -560,8 +566,7 @@ typedef struct BGMPlayer {
     /* 0x0C8 */ s32 masterVolumeFadeVolume;
     /* 0x0CC */ s32 masterVolumeFadeTime;
     /* 0x0D0 */ f32 unk_D0;
-    /* 0x0D4 */ X16 seqCmdArgs1;
-    /* 0x0D6 */ X16 seqCmdArgs2;
+    /* 0x0D4 */ SeqArgs seqCmdArgs;
     /* 0x0D8 */ char unk_D8[0x90];
     /* 0x168 */ s32 unk_168;
     /* 0x16C */ char unk_16C[0x8];
