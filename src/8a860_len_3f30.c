@@ -486,7 +486,7 @@ s32 popup_menu_update(void) {
                     D_8010D655 = D_8010D654 + D_8010D68F;
                 }
 
-                if (gGameStatusPtr->pressedButtons[0] & 0x8000) {
+                if (gGameStatusPtr->pressedButtons[0] & BUTTON_A) {
                     switch (gPopupMenu->popupType) {
                         case 8:
                             sfx_play_sound(SOUND_MENU_NEXT);

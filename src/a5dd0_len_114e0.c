@@ -1029,6 +1029,7 @@ void update_entity_inverse_rotation_matrix(Entity* entity);
 void delete_entity(s32 entityIndex);
 void delete_entity_and_unload_data(s32 entityIndex);
 void _delete_shadow(s32 shadowIndex);
+void func_80110F10(void);
 s32 entity_get_collision_flags(Entity* entity);
 void entity_free_static_data(EntityBlueprint* data);
 void update_entity_shadow_position(Entity* entity);
@@ -1280,7 +1281,7 @@ void exec_entity_commandlist(Entity* entity) {
     while (step_entity_commandlist(entity));
 }
 
-void func_8010FD98(s32 arg0, s32 alpha) {
+void func_8010FD98(void* arg0, s32 alpha) {
     if (alpha >= 255) {
         gDPSetRenderMode(gMasterGfxPos++, G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2);
         gDPSetCombineMode(gMasterGfxPos++, G_CC_MODULATEIA, G_CC_MODULATEIA);
@@ -1290,7 +1291,7 @@ void func_8010FD98(s32 arg0, s32 alpha) {
     }
 }
 
-void func_8010FE44(s32 arg0) {
+void func_8010FE44(void* arg0) {
     func_8010FD98(arg0, D_8014AFB0);
 }
 
@@ -1621,7 +1622,7 @@ s32 entity_get_collision_flags(Entity* entity) {
     }
 
     flag = gCollisionStatus.currentWall;
-    if (flag != -1 && (flag & COLLISION_WITH_ENTITY_BIT) && listIndex == (u8)flag && gPlayerStatusPtr->pressedButtons & 0x8000) {
+    if (flag != -1 && (flag & COLLISION_WITH_ENTITY_BIT) && listIndex == (u8)flag && gPlayerStatusPtr->pressedButtons & BUTTON_A) {
         entityFlags |= ENTITY_COLLISION_PLAYER_TOUCH_WALL;
     }
 
@@ -1677,11 +1678,11 @@ void func_80110BF8(Entity* entity) {
 void load_area_specific_entity_data(void) {
     if (D_8015132C == 0) {
         if (gGameStatusPtr->areaID == AREA_JAN || gGameStatusPtr->areaID == AREA_IWA) {
-            dma_copy(entity_jan_iwa_ROM_START, entity_jan_iwa_ROM_END, AREA_SPECIFIC_ENTITY_VRAM);
+            dma_copy(entity_jan_iwa_ROM_START, entity_jan_iwa_ROM_END, (void*)AREA_SPECIFIC_ENTITY_VRAM);
         } else if (gGameStatusPtr->areaID == AREA_SBK || gGameStatusPtr->areaID == AREA_OMO) {
-            dma_copy(entity_sbk_omo_ROM_START, entity_sbk_omo_ROM_END, AREA_SPECIFIC_ENTITY_VRAM);
+            dma_copy(entity_sbk_omo_ROM_START, entity_sbk_omo_ROM_END, (void*)AREA_SPECIFIC_ENTITY_VRAM);
         } else {
-            dma_copy(entity_default_ROM_START, entity_default_ROM_END, AREA_SPECIFIC_ENTITY_VRAM);
+            dma_copy(entity_default_ROM_START, entity_default_ROM_END, (void*)AREA_SPECIFIC_ENTITY_VRAM);
         }
 
         D_8015132C = 1;
@@ -2399,7 +2400,7 @@ void state_render_frontUI(void) {
     }
 
     // re-initialization needed - evidence of inlining? or just copy/pasting?
-    gameMode = &gMainGameState;
+    gameMode = &gMainGameState[0];
     for (i = 0; i < ARRAY_COUNT(gMainGameState); i++, gameMode++) {
         if (gameMode->flags != 0) {
             if (!(gameMode->flags & 4)) {

@@ -173,6 +173,7 @@ s32 partner_is_idle(Npc* partner);
 s32 world_partner_can_player_pause_default(Npc* partner);
 void _use_partner_ability(void);
 void partner_flying_follow_player(Npc*);
+void partner_move_to_goal(Npc*, s32);
 
 // Partner icons
 HudScript* wPartnerHudScripts[] = {
@@ -1110,7 +1111,7 @@ void partner_walking_update_player_tracking(Npc* partner) {
     s32 isPlayerJumping;
     PlayerPathElement* currentSnapshot;
 
-    if ((playerStatus->flags & 6) != 0) {
+    if (playerStatus->flags & (PLAYER_STATUS_FLAGS_FALLING | PLAYER_STATUS_FLAGS_JUMPING)) {
         isPlayerJumping = (playerStatus->actionState == ACTION_STATE_LAND || playerStatus->actionState == ACTION_STATE_STEP_DOWN) ^ 1;
     } else {
         isPlayerJumping = FALSE;

@@ -389,7 +389,7 @@ void func_802BDDD8_321928(Npc* npc) {
     if (npc_test_move_taller_with_slipping(npc->collisionChannel, &x, &y, &z, npc->collisionRadius, npc->yaw,
         npc->collisionHeight, npc->collisionRadius) != 0) {
 
-        collisionStatus->currentInspect = (partnerActionStatus->pressedButtons & 0x8000) ? D_8010C97A : -1;
+        collisionStatus->currentInspect = (partnerActionStatus->pressedButtons & BUTTON_A) ? D_8010C97A : -1;
     }
 
     if (moveSpeed != 0.0f) {
