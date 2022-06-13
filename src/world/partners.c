@@ -480,27 +480,27 @@ s32 world_partner_can_player_pause_default(Npc* partner) {
 s32 func_800EA52C(s32 arg0) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     u32 playerActionState = playerStatus->actionState;
-    s32 ret = 0;
+    s32 ret = FALSE;
 
     if (playerStatus->flags & PLAYER_STATUS_FLAGS_800) {
-        return 0;
+        return FALSE;
     }
 
     if (playerActionState < ACTION_STATE_JUMP) {
-        ret = 1;
+        ret = TRUE;
     }
 
     if (arg0 == 9) {
         if (playerActionState == ACTION_STATE_RIDE) {
-            ret = 1;
+            ret = TRUE;
         }
     } else if (arg0 == 4) {
         if ((playerActionState != ACTION_STATE_RIDE) && (playerActionState != ACTION_STATE_IDLE) && (playerActionState != ACTION_STATE_WALK)) {
             if (playerActionState == ACTION_STATE_RUN) {
-                ret = 1;
+                ret = TRUE;
             }
         } else {
-            ret = 1;
+            ret = TRUE;
         }
     }
 
@@ -511,8 +511,9 @@ s32 partner_is_flying(void) {
     return !wPartner->isFlying;
 }
 
-void func_800EA5B8(s32* arg0) {
-    *arg0 &= ~0x2007800;
+void func_800EA5B8(s32* partnerNpcFlags) {
+    *partnerNpcFlags &= ~(NPC_FLAG_SIMPLIFIED_PHYSICS | NPC_FLAG_4000 | NPC_FLAG_NO_PROJECT_SHADOW | NPC_FLAG_1000 |
+                          NPC_FLAG_JUMPING);
 }
 
 void partner_create_npc(void) {
@@ -560,7 +561,7 @@ void partner_free_npc(void) {
 }
 
 void _use_partner_ability(void) {
-    static u32 D_8010CD30;
+    static u32 D_8010CD30; // goes into BSS, needs to be static for the function to match
 
     PlayerData* playerData = &gPlayerData;
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
@@ -606,7 +607,7 @@ void _use_partner_ability(void) {
             switch (D_8010CD34) {
                 case 0:
                     disable_player_input();
-                    sfx_play_sound(0xD);
+                    sfx_play_sound(SOUND_D);
                     kill_script_by_ID(wPartnerCurrentScriptID);
                     wPartnerCurrentScript = start_script(wPartner->putAway, 0x14, 0x20);
                     wPartnerCurrentScript->owner2.npc = wPartnerNpc;
@@ -623,7 +624,7 @@ void _use_partner_ability(void) {
                     partner_free_npc();
                     playerData->currentPartner = D_8010CFD8 = D_8010CFE4;
                     partner_create_npc();
-                    sfx_play_sound(0xE);
+                    sfx_play_sound(SOUND_E);
                     wPartner->init(wPartnerNpc);
                     D_8010CD34 += 1;
                 case 2:
@@ -683,7 +684,7 @@ void _use_partner_ability(void) {
             switch (D_8010CD34) {
                 case 0:
                     disable_player_input();
-                    sfx_play_sound(0xD);
+                    sfx_play_sound(SOUND_D);
                     kill_script_by_ID(wPartnerCurrentScriptID);
                     wPartnerCurrentScript = start_script(wPartner->putAway, 0x14, 0x20);
                     wPartnerCurrentScript->owner2.npc = wPartnerNpc;
@@ -832,7 +833,7 @@ void _use_partner_ability(void) {
     }
 }
 
-static const s32 padding = 0;
+static const f32 rodata_padding = 0.0f;
 
 void switch_to_partner(s32 arg0) {
     PlayerStatus* playerStatus = &gPlayerStatus;
