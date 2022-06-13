@@ -384,9 +384,9 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
                             parakarry->pos.y = playerStatus->position.y + 32.0f;
                         }
                         if (!(parakarry->flags & NPC_FLAG_4000)) {
-                            gCameras->targetPos.x = playerStatus->position.x;
-                            gCameras->targetPos.y = playerStatus->position.y;
-                            gCameras->targetPos.z = playerStatus->position.z;
+                            gCameras[CAM_DEFAULT].targetPos.x = playerStatus->position.x;
+                            gCameras[CAM_DEFAULT].targetPos.y = playerStatus->position.y;
+                            gCameras[CAM_DEFAULT].targetPos.z = playerStatus->position.z;
                             if (D_802BEBC4 != 0) {
                                 D_802BEBC4--;
                             } else {
@@ -491,9 +491,9 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
                                                 if (!phys_adjust_cam_on_landing()) {
                                                     gCameras[0].moveFlags &= ~CAMERA_MOVE_FLAGS_2;
                                                 }
-                                                gCameras->targetPos.x = playerStatus->position.x;
-                                                gCameras->targetPos.y = playerStatus->position.y;
-                                                gCameras->targetPos.z = playerStatus->position.z;
+                                                gCameras[CAM_DEFAULT].targetPos.x = playerStatus->position.x;
+                                                gCameras[CAM_DEFAULT].targetPos.y = playerStatus->position.y;
+                                                gCameras[CAM_DEFAULT].targetPos.z = playerStatus->position.z;
                                                 if (!(parakarry->flags & NPC_FLAG_4000)) {
                                                     parakarry->duration++;
                                                     if (!(parakarry->planarFlyDist < 100.0f)) {

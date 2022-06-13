@@ -114,9 +114,9 @@ void reset_player_status(void) {
         }
     }
 
-    gCameras->targetPos.x = playerStatus->position.x;
-    gCameras->targetPos.y = playerStatus->position.y;
-    gCameras->targetPos.z = playerStatus->position.z;
+    gCameras[CAM_DEFAULT].targetPos.x = playerStatus->position.x;
+    gCameras[CAM_DEFAULT].targetPos.y = playerStatus->position.y;
+    gCameras[CAM_DEFAULT].targetPos.z = playerStatus->position.z;
 
     phys_reset_spin_history(mapConfig);
     mem_clear(&gPlayerSpinState, sizeof(gPlayerSpinState));

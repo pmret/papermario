@@ -295,7 +295,7 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
                         kooper->moveToPos.y = playerStatus->position.y;
                         kooper->moveToPos.z = playerStatus->position.y + playerStatus->colliderHeight / 3;
                         playerStatus->flags |= PLAYER_STATUS_FLAGS_JUMPING;
-                        gCameras->moveFlags |= CAMERA_FLAGS_1;
+                        gCameras[CAM_DEFAULT].moveFlags |= CAMERA_FLAGS_1;
 
                         suggest_player_anim_clearUnkFlag(0x10007);
                         D_802BEC60 = 0;
@@ -352,7 +352,7 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
 
                         script->functionTemp[0] = 3;
                         D_802BEC60 = 0;
-                        gCameras->moveFlags |= CAMERA_FLAGS_1;
+                        gCameras[CAM_DEFAULT].moveFlags |= CAMERA_FLAGS_1;
                         sfx_play_sound_at_npc(SOUND_283, 0, -4);
                         sfx_play_sound_at_npc(SOUND_284, 0, -4);
                     }
