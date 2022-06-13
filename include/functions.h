@@ -260,8 +260,8 @@ s32 round(f32);
 f32 atan2(f32 startX, f32 startZ, f32 endX, f32 endZ);
 f32 clamp_angle(f32 theta);
 s32 sign(s32 value);
-s32 func_80055448(s32);
-s32 func_80055464(s32, s32);
+s32 snd_ambient_80055448(s32);
+s32 snd_ambient_80055464(s32, s32);
 s32 func_80055618(s32, s32);
 s32 func_800E0208(void);
 

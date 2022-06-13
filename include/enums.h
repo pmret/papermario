@@ -771,6 +771,23 @@ enum SoundIDs {
     SOUND_B000001E                  = 0xB000001E,
 };
 
+enum SoundInstanceFlags {
+    SOUND_INSTANCE_FLAG_4           = 0x00000004,
+};
+
+enum SoundType {
+    SOUND_TYPE_SPECIAL              = 0x80000000,
+    SOUND_TYPE_LOOPING              = 0,
+    SOUND_TYPE_DOOR1                = 1,
+    SOUND_TYPE_DOOR2                = 2,
+    SOUND_TYPE_ALTERNATING          = 3
+};
+
+typedef enum MusicError {
+    MUSIC_ERROR_NONE                = 0,
+    MUSIC_ERROR_11                  = 11,
+} MusicError;
+
 enum Cams {
     CAM_DEFAULT      = 0,
     CAM_BATTLE       = 1,

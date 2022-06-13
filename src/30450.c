@@ -1,7 +1,7 @@
 #include "common.h"
 #include "audio.h"
 
-s32 D_80078DB0 = 0;
+s32 D_80078DB0 = FALSE;
 u16 D_80078DB4 = 0;
 u16 D_80078DB6 = 0;
 
@@ -17,7 +17,7 @@ s32 D_80078E30[] = { 0x05640666, 0x0758086E, 0x097E0A58, 0x0B640C64, 0x0D6A0E64,
 
 void func_80055050(ALHeap* heap) {
     D_80078DB4 = 1;
-    D_80078DB0 = 0;
+    D_80078DB0 = FALSE;
 }
 
 void func_80055068(u32 arg0) {
@@ -98,25 +98,25 @@ void func_8005513C(u32 arg0) {
 
 void snd_start_sound(s32 soundID, u8 volume, u8 pan) {
     SoundManager* soundManager = D_8009A640;
-    s16 a1temp = volume * 256;
+    s16 vol = volume * 256;
 
-    if (a1temp != 0) {
-        a1temp |= 0xFF;
+    if (vol != 0) {
+        vol |= 0xFF;
     }
 
     if (pan > 0x7F) {
         pan = 0x7F;
     }
 
-    snd_enqueue_sfx_event(soundManager, soundID, a1temp, 0, pan);
+    snd_enqueue_sfx_event(soundManager, soundID, vol, 0, pan);
 }
 
 void snd_start_sound_with_shift(s32 soundID, u8 volume, u8 pan, s16 pitchShift) {
     SoundManager* soundManager = D_8009A640;
-    s16 a1temp = volume * 256;
+    s16 vol = volume * 256;
 
-    if (a1temp != 0) {
-        a1temp |= 0xFF;
+    if (vol != 0) {
+        vol |= 0xFF;
     }
 
     if (pan > 0x7F) {
@@ -129,22 +129,22 @@ void snd_start_sound_with_shift(s32 soundID, u8 volume, u8 pan, s16 pitchShift) 
         pitchShift = -0x960;
     }
 
-    snd_enqueue_sfx_event(soundManager, soundID, a1temp, pitchShift, pan);
+    snd_enqueue_sfx_event(soundManager, soundID, vol, pitchShift, pan);
 }
 
 void snd_adjust_sound(s32 soundID, u8 volume, u8 pan) {
     SoundManager* soundManager = D_8009A640;
-    s16 a1temp = volume * 256;
+    s16 vol = volume * 256;
 
-    if (a1temp != 0) {
-        a1temp |= 0xFF;
+    if (vol != 0) {
+        vol |= 0xFF;
     }
 
     if (pan > 0x7F) {
         pan = 0x7F;
     }
 
-    snd_enqueue_sfx_event(soundManager, soundID | 0x1000, a1temp, 0, pan);
+    snd_enqueue_sfx_event(soundManager, soundID | 0x1000, vol, 0, pan);
 }
 
 void snd_adjust_sound_with_shift(s32 soundID, u8 volume, u8 pan, s16 pitchShift) {
@@ -184,17 +184,17 @@ void snd_start_sound_raw(s32 soundID, s16 volume, s16 pitchShift, s32 pan) {
     snd_enqueue_sfx_event(soundManager, soundID, volume, pitchShift, pan);
 }
 
-s32 func_80055448(s32 arg0) {
+s32 snd_ambient_80055448(s32 arg0) {
     return func_80053F80(arg0);
 }
 
-s32 func_80055464(s32 arg0, s32 arg1) {
+s32 snd_ambient_80055464(s32 arg0, s32 arg1) {
     if (func_80050C30(arg0) == 0) {
         func_80050CA0(arg0, arg1);
     }
 }
 
-s32 func_800554A4(s32 arg0) {
+s32 snd_ambient_fade_out_800554A4(s32 arg0) {
     s32 ret = func_80050C30(arg0);
 
     if (ret == 0) {
@@ -204,7 +204,7 @@ s32 func_800554A4(s32 arg0) {
     return ret;
 }
 
-s32 func_800554E8(s32 arg0, s32 arg1) {
+s32 snd_ambient_fade_out_800554E8(s32 arg0, s32 arg1) {
     s32 ret = func_80050C30(arg0);
 
     if (ret == 0) {
@@ -214,7 +214,7 @@ s32 func_800554E8(s32 arg0, s32 arg1) {
     return ret;
 }
 
-s32 func_8005553C(s32 arg0, s32 arg1) {
+s32 snd_ambient_8005553C(s32 arg0, s32 arg1) {
     s32 ret = func_80050C30(arg0);
 
     if (ret == 0) {
@@ -224,7 +224,7 @@ s32 func_8005553C(s32 arg0, s32 arg1) {
     return ret;
 }
 
-s32 func_80055590(s32 arg0, s32 arg1) {
+s32 snd_ambient_80055590(s32 arg0, s32 arg1) {
     s32 ret = func_80050C30(arg0);
 
     if (ret == 0) {
@@ -234,7 +234,7 @@ s32 func_80055590(s32 arg0, s32 arg1) {
     return ret;
 }
 
-void func_800555E4(s32 arg0) {
+void snd_ambient_800555E4(s32 arg0) {
     if (func_80050C30(arg0) == 0) {
         func_80051050(arg0);
     }
@@ -287,7 +287,7 @@ void func_80055760(s32 arg0) {
     D_80078DB6 = 0xFF;
 
     for (i = 0; i < lim; i++) {
-        if (func_80055464(i, 0) != 0) {
+        if (snd_ambient_80055464(i, 0) != 0) {
             return;
         }
     }
@@ -302,9 +302,9 @@ s32 func_800557CC(s32 arg0) {
 
     for (i = 0; i < lim; i++) {
         if (i == D_80078DB6) {
-            phi_v1 = func_800554E8(i, arg0);
+            phi_v1 = snd_ambient_fade_out_800554E8(i, arg0);
         } else {
-            phi_v1 = func_800554A4(i);
+            phi_v1 = snd_ambient_fade_out_800554A4(i);
         }
 
         if (phi_v1 != 0) {
@@ -354,9 +354,39 @@ s32 snd_load_song(s32 songID, s32 playerIndex) {
     }
 }
 
-INCLUDE_ASM(s32, "30450", snd_start_song);
+MusicError snd_start_song(s32 songName) {
+    MusicError error;
+    SongUpdateEvent s;
 
-INCLUDE_ASM(s32, "30450", snd_start_song_variation);
+    D_80078DB0 = TRUE;
+    s.songName = songName;
+    s.duration = 0;
+    s.startVolume = 127;
+    s.finalVolume = 127;
+    s.variation = 0;
+    s.unk14 = 0;
+    error = snd_dispatch_bgm_player_event(&s);
+    D_80078DB0 = FALSE;
+
+    return error;
+}
+
+MusicError snd_start_song_variation(s32 songName, s32 variation) {
+    MusicError error;
+    SongUpdateEvent s;
+
+    D_80078DB0 = TRUE;
+    s.songName = songName;
+    s.duration = 0;
+    s.startVolume = 127;
+    s.finalVolume = 127;
+    s.variation = variation;
+    s.unk14 = 0;
+    error = snd_dispatch_bgm_player_event(&s);
+    D_80078DB0 = FALSE;
+
+    return error;
+}
 
 s32 func_800559C4(UNK_TYPE arg0) {
     return func_8004DA0C(arg0);
@@ -370,29 +400,141 @@ s32 func_800559FC(void) {
     return snd_is_song_playing();
 }
 
-INCLUDE_ASM(s32, "30450", snd_set_song_variation_fade);
+MusicError snd_set_song_variation_fade(s32 songName, s32 variation, s32 fadeInTime, s32 startVolume, s32 endVolume) {
+    MusicError error;
+    SongUpdateEvent s;
 
-INCLUDE_ASM(s32, "30450", snd_set_song_fade);
+    D_80078DB0 = TRUE;
+    s.songName = songName;
+    s.duration = fadeInTime;
+    s.startVolume = startVolume;
+    s.finalVolume = endVolume;
+    s.variation = variation;
+    s.unk14 = 0;
+    error = snd_dispatch_bgm_player_event(&s);
+    D_80078DB0 = FALSE;
 
-INCLUDE_ASM(s32, "30450", snd_set_song_variation_fade_time);
+    return error;
+}
 
-INCLUDE_ASM(s32, "30450", func_80055AF0);
+MusicError snd_set_song_fade(s32 songName, s32 fadeInTime, s32 startVolume, s32 endVolume) {
+    MusicError error;
+    SongUpdateEvent s;
 
-INCLUDE_ASM(s32, "30450", func_80055B28);
+    D_80078DB0 = TRUE;
+    s.songName = songName;
+    s.duration = fadeInTime;
+    s.startVolume = startVolume;
+    s.finalVolume = endVolume;
+    s.variation = 0;
+    s.unk14 = 0;
+    error = snd_dispatch_bgm_player_event(&s);
+    D_80078DB0 = FALSE;
 
-INCLUDE_ASM(s32, "30450", func_80055B80);
+    return error;
+}
 
-INCLUDE_ASM(s32, "30450", func_80055BB8);
+MusicError snd_set_song_variation_fade_time(s32 songName, s32 fadeTime, s32 variation) {
+    SongUpdateEvent s;
+    s.songName = songName;
+    s.duration = fadeTime;
+    s.startVolume = 0;
+    s.finalVolume = 0;
+    s.variation = variation;
+    s.unk14 = 0;
+    return func_8004DB4C(&s);
+}
 
-INCLUDE_ASM(s32, "30450", func_80055BF0);
+void func_80055AF0(s32 songName) {
+    SongUpdateEvent s;
+    s.songName = songName;
+    s.duration = 0;
+    s.startVolume = 0;
+    s.finalVolume = 0;
+    s.variation = 0;
+    s.unk14 = 0;
+    func_8004DCB8(&s, 0);
+}
 
-INCLUDE_ASM(s32, "30450", func_80055C2C);
+void func_80055B28(s32 songName) {
+    SongUpdateEvent s;
+    D_80078DB0 = TRUE;
+    s.songName = songName;
+    s.duration = 2000;
+    s.startVolume = 1;
+    s.finalVolume = 127;
+    s.variation = 0;
+    s.unk14 = 0;
+    func_8004DE2C(&s);
+    D_80078DB0 = FALSE;
+}
 
-INCLUDE_ASM(s32, "30450", func_80055C64);
+void func_80055B80(s32 songName) {
+    SongUpdateEvent s;
+    s.songName = songName;
+    s.duration = 0;
+    s.startVolume = 0;
+    s.finalVolume = 0;
+    s.variation = 0;
+    s.unk14 = 0;
+    func_8004DCB8(&s, 1);
+}
 
-INCLUDE_ASM(s32, "30450", func_80055C94);
+void func_80055BB8(s32 songName, s32 fadeTime) {
+    SongUpdateEvent s;
+    s.songName = songName;
+    s.duration = fadeTime;
+    s.startVolume = 0;
+    s.finalVolume = 0;
+    s.variation = 0;
+    s.unk14 = 1;
+    func_8004DB4C(&s);
+}
 
-INCLUDE_ASM(s32, "30450", func_80055CC4);
+void func_80055BF0(s32 songName) {
+    SongUpdateEvent s;
+    s.songName = songName;
+    s.duration = 0;
+    s.startVolume = 0;
+    s.finalVolume = 0;
+    s.variation = 0;
+    s.unk14 = 1;
+    func_8004DCB8(&s, 0);
+}
+
+void func_80055C2C(s32 songName) {
+    SongUpdateEvent s;
+    s.songName = songName;
+    s.duration = 0;
+    s.startVolume = 0;
+    s.finalVolume = 0;
+    s.variation = 0;
+    s.unk14 = 1;
+    func_8004DE2C(&s);
+}
+
+void func_80055C64(s32 songName) {
+    SongUpdateEvent s;
+    s.songName = songName;
+    s.duration = 500;
+    s.finalVolume = 0x2000;
+    func_8004E0F4(&s);
+}
+
+void func_80055C94(s32 songName) {
+    SongUpdateEvent s;
+    s.songName = songName;
+    s.duration = 500;
+    s.finalVolume = 0x7FFF;
+    func_8004E0F4(&s);
+}
+
+s32 snd_set_song_variation(s32 songName, s32 variation) {
+    SongUpdateEvent s;
+    s.songName = songName;
+    s.variation = variation;
+    return func_80050970(&s);
+}
 
 s32 func_80055CE8(s32 songName, s32* arg1, BGMPlayer** player);
 // We need to figure out what currentTrackData is a list of
@@ -416,72 +558,72 @@ s32 func_80055CE8(s32 songName, s32* arg1, BGMPlayer** player) {
 INCLUDE_ASM(s32, "30450", func_80055CE8, s32 songName, s32* arg1, BGMPlayer** player);
 #endif
 
-s32 func_80055D38(s32 songName, f32 arg1) {
-    s32 ret;
+MusicError func_80055D38(s32 songName, f32 arg1) {
+    s32 error;
     s32 unkArg1;
     BGMPlayer* bgmPlayer;
 
-    ret = func_80055CE8(songName, &unkArg1, &bgmPlayer);
+    error = func_80055CE8(songName, &unkArg1, &bgmPlayer);
 
-    if (ret == 0) {
+    if (error == MUSIC_ERROR_NONE) {
         func_80050770(bgmPlayer, arg1);
     }
 
-    return ret;
+    return error;
 }
 
-s32 func_80055D8C(s32 songName, s32 arg1) {
-    s32 ret;
+MusicError func_80055D8C(s32 songName, s32 arg1) {
+    s32 error;
     s32 unkArg1;
     BGMPlayer* bgmPlayer;
 
-    ret = func_80055CE8(songName, &unkArg1, &bgmPlayer);
+    error = func_80055CE8(songName, &unkArg1, &bgmPlayer);
 
-    if (ret == 0) {
+    if (error == MUSIC_ERROR_NONE) {
         func_80050818(bgmPlayer, arg1);
     }
 
-    return ret;
+    return error;
 }
 
-s32 func_80055DDC(s32 songName, s32 arg1) {
-    s32 ret;
+MusicError func_80055DDC(s32 songName, s32 arg1) {
+    s32 error;
     s32 unkArg1;
     BGMPlayer* bgmPlayer;
 
-    ret = func_80055CE8(songName, &unkArg1, &bgmPlayer);
+    error = func_80055CE8(songName, &unkArg1, &bgmPlayer);
 
-    if (ret == 0) {
+    if (error == MUSIC_ERROR_NONE) {
         s32* temp_v0 = func_80055EB4(arg1);
 
         if (temp_v0 != NULL) {
             func_8005087C(bgmPlayer, temp_v0, 1);
         } else {
-            ret = 11;
+            error = MUSIC_ERROR_11;
         }
     }
 
-    return ret;
+    return error;
 }
 
-s32 func_80055E48(s32 songName, s32 arg1) {
-    s32 ret;
+MusicError func_80055E48(s32 songName, s32 arg1) {
+    s32 error;
     s32 unkArg1;
     BGMPlayer* bgmPlayer;
 
-    ret = func_80055CE8(songName, &unkArg1, &bgmPlayer);
+    error = func_80055CE8(songName, &unkArg1, &bgmPlayer);
 
-    if (ret == 0) {
+    if (error == MUSIC_ERROR_NONE) {
         s32* temp_v0 = func_80055EB4(arg1);
 
         if (temp_v0 != NULL) {
             func_8005087C(bgmPlayer, temp_v0, 0);
         } else {
-            ret = 11;
+            error = MUSIC_ERROR_11;
         }
     }
 
-    return ret;
+    return error;
 }
 
 s32* func_80055EB4(s32 arg0) {

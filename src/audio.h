@@ -319,7 +319,7 @@ typedef struct UnkAl48 { // Track?
 
 typedef struct SBNHeader {
     /* 0x00 */ s32 signature; // 'SBN '
-    /* 0x04 */ s32 totalSize;
+    /* 0x04 */ s32 size;
     /* 0x08 */ s32 unk_08;
     /* 0x0C */ s32 unk_0C;
     /* 0x10 */ s32 tableOffset; // = 0x40
@@ -336,9 +336,21 @@ typedef struct SBNHeader {
     /* 0x3C */ s32 unk_3C;
 } SBNHeader; // size = 0x40
 
+typedef struct SEFHeader {
+    /* 0x00 */ s32 signature; // 'SEF '
+    /* 0x04 */ s32 size;
+    /* 0x08 */ s32 unk8;
+    /* 0x0C */ s8 unkC; // 0
+    /* 0x0D */ s8 unkD; // 0
+    /* 0x0E */ u8 hasExtraSection; // 1
+    /* 0x0F */ s8 unkF; // 0
+    /* 0x10 */ u16 sections[8];
+    /* 0x14 */ u16 section2000;
+} SEFHeader; // size = 0x16
+
 typedef struct INITHeader {
     /* 0x00 */ s32 signature; // 'INIT'
-    /* 0x04 */ s32 unk_04;
+    /* 0x04 */ s32 size;
     /* 0x08 */ u16 entriesOffset;
     /* 0x0A */ u16 entriesSize;
     /* 0x0C */ u16 tblOffset;
@@ -350,7 +362,7 @@ typedef struct INITHeader {
 
 typedef struct PERHeader {
     /* 0x00 */ s32 signature; // 'PER ' or 'PRG '
-    /* 0x04 */ s32 totalSize; // including this header
+    /* 0x04 */ s32 size; // including this header
     /* 0x08 */ char unk_08[8];
 } PERHeader; // size = 0x10
 
@@ -469,7 +481,10 @@ typedef struct BGMPlayerTrack {
     /* 0x20 */ s32 subTrackVolumeFadeVolume;
     /* 0x24 */ s32 subTrackVolumeFadeTime;
     /* 0x28 */ s32 unk_28;
-    /* 0x2C */ char unk_2C[0xC];
+    /* 0x2C */ s32 unk2C;
+    /* 0x30 */ s32 unk30;
+    /* 0x34 */ s16 unk34;
+    /* 0x36 */ s16 unk36;
     /* 0x38 */ u16 segTrackTune;
     /* 0x3A */ s16 trackTremoloAmount;
     /* 0x3C */ char unk_3C[0x2];
@@ -485,12 +500,16 @@ typedef struct BGMPlayerTrack {
     /* 0x4A */ u8 subTrackPan;
     /* 0x4B */ u8 subTrackReverb;
     /* 0x4C */ u8 unk_4C;
-    /* 0x4D */ char unk_4D[0x8];
+    /* 0x4D */ char unk_4D[0x5];
+    /* 0x52 */ u8 unk_52;
+    /* 0x53 */ u8 unk_53;
+    /* 0x54 */ char unk_54[0x1];
     /* 0x55 */ s8 trackTremoloSpeed;
     /* 0x56 */ s8 trackTremoloTime;
     /* 0x57 */ s8 unk_57;
     /* 0x58 */ u8 unk_58;
-    /* 0x59 */ char unk_59[0x2];
+    /* 0x59 */ u8 unk_59;
+    /* 0x5A */ u8 unk_5A;
     /* 0x5B */ s8 subtrackReverbType;
     /* 0x5C */ u8 unk_5C;
     /* 0x5D */ char unk_5D[0x3];
@@ -528,32 +547,36 @@ typedef struct BGMPlayer {
     /* 0x05C */ s16 unk_5C;
     /* 0x05E */ char unk_5E[0x6];
     /* 0x064 */ struct UnkAlTrack* unk_64;
-    /* 0x068 */ s32 unk_68;
+    /* 0x068 */ s32* unk_68;
     /* 0x06C */ s32 unk_6C;
     /* 0x070 */ s32 unk_70;
     /* 0x074 */ char unk_74[0x3C];
-    /* 0x0B0 */ s32 unk_B0;
-    /* 0x0B4 */ s32 unk_B4;
-    /* 0x0B8 */ s32 unk_B8;
-    /* 0x0BC */ s32 unk_BC;
-    /* 0x0C0 */ s32 unk_C0;
-    /* 0x0C4 */ s32 unk_C4;
-    /* 0x0C8 */ s32 unk_C8;
-    /* 0x0CC */ s32 unk_CC;
+    /* 0x0B0 */ s32 masterTempo;
+    /* 0x0B4 */ s32 masterTempoFadeDelta;
+    /* 0x0B8 */ s32 masterTempoFadeTempo;
+    /* 0x0BC */ s32 masterTempoFadeTime;
+    /* 0x0C0 */ s32 masterVolume;
+    /* 0x0C4 */ s32 masterVolumeFadeDelta;
+    /* 0x0C8 */ s32 masterVolumeFadeVolume;
+    /* 0x0CC */ s32 masterVolumeFadeTime;
     /* 0x0D0 */ f32 unk_D0;
-    /* 0x0D4 */ X16 unk_D4;
-    /* 0x0D6 */ X16 unk_D6;
+    /* 0x0D4 */ X16 seqCmdArgs1;
+    /* 0x0D6 */ X16 seqCmdArgs2;
     /* 0x0D8 */ char unk_D8[0x90];
     /* 0x168 */ s32 unk_168;
-    /* 0x16C */ char unk_16C[0x98];
+    /* 0x16C */ char unk_16C[0x8];
+    /* 0x174 */ s16 unk_174[8][9];
     /* 0x204 */ s32* unk_204;
-    /* 0x208 */ u16 unk_208;
-    /* 0x20A */ u16 unk_20A;
-    /* 0x20C */ s16 unk_20C;
+    /* 0x208 */ u16 masterTempoBPM;
+    /* 0x20A */ u16 bgmKhz;
+    /* 0x20C */ s16 masterTranspose;
     /* 0x20E */ s16 unk_20E;
     /* 0x210 */ char unk_210[0xA];
     /* 0x21A */ u8 unk_21A;
-    /* 0x21B */ char unk_21B[0x5];
+    /* 0x21B */ char unk_21B[0x1];
+    /* 0x21C */ u8 bgmDrumCount;
+    /* 0x21D */ u8 bgmInstrumentCount;
+    /* 0x21B */ char unk_21E[0x2];
     /* 0x220 */ u8 unk_220;
     /* 0x221 */ u8 unk_221;
     /* 0x222 */ u8 unk_222;
@@ -594,17 +617,32 @@ typedef struct UnkAl8 {
 } UnkAl8; // size = 0x8
 
 typedef struct UnkAl1E4 {
-    /* 0x00 */ char unk_00[0x8];
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ s32 unk_04;
     /* 0x08 */ s32 unk_08;
-    /* 0x0C */ char unk_0C[0x14];
+    /* 0x0C */ s32 unk_0C;
+    /* 0x10 */ s32 unk_10;
+    /* 0x14 */ s8 unk_14;
+    /* 0x15 */ char unk_15[3];
+    /* 0x18 */ s32 unk_18;
+    /* 0x1C */ s32 unk_1C;
     /* 0x20 */ s32 unk_20;
     /* 0x24 */ u8 unk_24;
     /* 0x25 */ u8 unk_25;
-    /* 0x26 */ char unk_26[0x2];
+    /* 0x26 */ u8 unk_26;
+    /* 0x26 */ u8 unk_27;
     /* 0x28 */ u16 unk_28;
-    /* 0x29 */ char unk_2A[0x1BA];
+    /* 0x2A */ u8 unk_2A;
+    /* 0x2B */ u8 unk_2B;
+    /* 0x2C */ char unk_2C[0xC];
+    /* 0x38 */ s32 unk_38;
+    /* 0x3C */ s32 unk_3C;
+    /* 0x40 */ s16 unk_40;
+    /* 0x42 */ s8 unk_42;
+    /* 0x43 */ char unk_43[0x1A1];
 } UnkAl1E4; // size = 0x1E4
 
+//TODO possibly AmbientSoundManager
 typedef struct UnkAl834 {
     /* 0x000 */ UnkAl19E0* unk_00;
     /* 0x004 */ s32 unk_04;
@@ -614,7 +652,7 @@ typedef struct UnkAl834 {
     /* 0x020 */ u8 unk_20;
     /* 0x021 */ u8 unk_21;
     /* 0x022 */ u8 unk_22;
-    /* 0x023 */ char unk_23[0x1];
+    /* 0x023 */ u8 unk_23;
     /* 0x024 */ UnkAl1E4 unk_24[4];
     /* 0x7B4 */ UnkAl8 unk_7B4[16];
 } UnkAl834;
@@ -739,7 +777,7 @@ void func_80050818(BGMPlayer*, s32);
 void func_8005087C(BGMPlayer*, s32*, s32);
 s32 func_80056068(s32, u8);
 s32 func_800506C8(s32, s32);
-void func_80050B90(UnkAl834*, s32, s32, UnkAl19E0*);
+void func_80050B90(UnkAl834*, s8, s8, UnkAl19E0*);
 s32 func_80050C30(u32);
 void func_80050D50(UnkAl1E4*);
 void func_800511BC(UnkAl834*);

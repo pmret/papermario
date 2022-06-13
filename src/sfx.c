@@ -20,7 +20,7 @@ typedef struct AlternatingSoundSet {
 } AlternatingSoundSet; // size = 0x08
 
 // sound IDs
-s32 D_8014F2D0[] = {
+s32 LoopingSounds[] = {
     0x00000287, 0x000002A8, 0x00000054, 0x00000056, 0x00000024, 0x00000027, 0x00000021, 0x00000022, 0x00000349,
     0x00000273, 0x00000275, 0x00000275, 0x00000274, 0x00000273, 0x00000274, 0x00000099, 0x0000009E, 0x0000032E,
     0x0000008E, 0x00000089, 0x00000083, 0x00000388, 0x000000A0, 0x0000004A, 0x0000009F, 0x00000168, 0x00000185,
@@ -36,6 +36,7 @@ s32 D_8014F2D0[] = {
     0x000003AD, 0x0000022C, 0x0000022D,
 };
 
+// all sound IDs for alternating sounds
 s32 D_8014F48C[] = { 0x00000336, 0x00000316 };
 s32 D_8014F494[] = { 0x00000337, 0x00000317 };
 s32 D_8014F49C[] = { 0x00000338, 0x00000318 };
@@ -71,7 +72,7 @@ s32 D_8014F58C[] = { 0x00002043, 0x00002044 };
 s32 D_8014F594[] = { 0x00002078, 0x00002079 };
 s32 D_8014F59C[] = { 0x000003B6, 0x000003B7 };
 
-AlternatingSoundSet D_8014F5A4[] = {
+AlternatingSoundSet AlternatingSounds[] = {
     {
         .sounds = D_8014F48C,
         .soundCount = ARRAY_COUNT(D_8014F48C),
@@ -210,21 +211,14 @@ AlternatingSoundSet D_8014F5A4[] = {
     }
 };
 
-s32 D_8014F6B4[] = {
-    SOUND_BASIC_DOOR_OPEN,
-    SOUND_BASIC_DOOR_CLOSE,
-    SOUND_METAL_DOOR_OPEN,
-    SOUND_METAL_DOOR_CLOSE,
-    SOUND_LARGE_DOOR_OPEN,
-    SOUND_LARGE_DOOR_CLOSE,
-    SOUND_CREAKY_DOOR_OPEN,
-    SOUND_CREAKY_DOOR_CLOSE,
-    SOUND_METAL_GATE_OPEN,
-    SOUND_METAL_GATE_CLOSE,
-    SOUND_1CB,
-    SOUND_1CC,
-    SOUND_20A3,
-    SOUND_20A4,
+s32 OpenCloseSounds[][2] = {
+    { SOUND_BASIC_DOOR_OPEN, SOUND_BASIC_DOOR_CLOSE },
+    { SOUND_METAL_DOOR_OPEN, SOUND_METAL_DOOR_CLOSE },
+    { SOUND_LARGE_DOOR_OPEN, SOUND_LARGE_DOOR_CLOSE },
+    { SOUND_CREAKY_DOOR_OPEN, SOUND_CREAKY_DOOR_CLOSE },
+    { SOUND_METAL_GATE_OPEN, SOUND_METAL_GATE_CLOSE },
+    { SOUND_1CB, SOUND_1CC },
+    { SOUND_20A3, SOUND_20A4 },
 };
 
 extern SoundInstance D_801598A0[MAX_SOUND_INSTANCES];
@@ -475,57 +469,50 @@ void func_80149A6C(s32 soundID, s32 keepPlaying) {
     SoundInstance* sound = sfx_get_env_sound_instance(soundID);
 
     if (sound != NULL) {
-        sound->flags &= -4;
+        sound->flags &= -SOUND_INSTANCE_FLAG_4;
         if (!keepPlaying) {
             snd_stop_sound(sound->soundID);
         }
     }
 }
 
-#ifdef NON_EQUIVALENT // weird & 0xFF everywhere
-void sfx_play_sound_with_params(s32 soundID, u8 arg1, u8 arg2, s16 arg3) {
-    AlternatingSoundSet* alternatingSound;
+void sfx_play_sound_with_params(s32 soundID, u8 volume, u8 pan, s16 pitchShift) {
+    AlternatingSoundSet* alternatingSet;
 
     if (gGameStatusPtr->demoState) {
         return;
     }
 
-    if (soundID < 0) {
-        s32 sound = soundID & 0xFF;
-        switch ((soundID >> 0x1C) & 7) {
-            case 0:
-                sfx_play_sound_looping(D_8014F2D0[sound], arg1, arg2, arg3);
+    if(soundID & SOUND_TYPE_SPECIAL) {
+        s32 soundIndex = soundID & 0xFF;
+        s32 soundType = ((u32)soundID >> 0x1C) & 7;
+        switch(soundType) {
+            case SOUND_TYPE_LOOPING:
+                sfx_play_sound_looping(LoopingSounds[soundIndex], volume, pan, pitchShift);
+                return;
+            case SOUND_TYPE_DOOR1:
+                soundID = OpenCloseSounds[gCurrentDoorSoundsSet][soundIndex];
                 break;
-            case 1:
-                snd_start_sound_with_shift(D_8014F6B4[sound + ((u16)gCurrentDoorSoundsSet * 2)], arg1, arg2, arg3);
+            case SOUND_TYPE_DOOR2:
+                soundID = OpenCloseSounds[D_80151308][soundIndex];
                 break;
-            case 2:
-                snd_start_sound_with_shift(D_8014F6B4[sound + ((u16)D_80151308 * 2)], arg1, arg2, arg3);
-                break;
-            case 3:
-                alternatingSound = &D_8014F5A4[sound];
-                if (alternatingSound->currentIndex >= alternatingSound->soundCount) {
-                    alternatingSound->currentIndex = 0;
+            case SOUND_TYPE_ALTERNATING:
+                alternatingSet = &AlternatingSounds[soundIndex];
+                if (alternatingSet->currentIndex >= alternatingSet->soundCount) {
+                    alternatingSet->currentIndex = 0;
                 }
-                snd_start_sound_with_shift(alternatingSound->sounds[alternatingSound->currentIndex++], arg1, arg2, arg3);
-                break;
-            default:
-                snd_start_sound_with_shift(soundID, arg1, arg2, arg3);
+                soundID = alternatingSet->sounds[alternatingSet->currentIndex++];
                 break;
         }
-    } else {
-        snd_start_sound_with_shift(soundID, arg1, arg2, arg3);
     }
+    snd_start_sound_with_shift(soundID, volume, pan, pitchShift);
 }
-#else
-INCLUDE_ASM(void, "sfx", sfx_play_sound_with_params, s32 arg0, u8 arg1, u8 arg2, s16 arg3);
-#endif
 
 void sfx_adjust_env_sound_params(s32 soundID, u8 volume, u8 pan, s16 pitchShift) {
     SoundInstance* sound;
 
-    if (soundID < 0) {
-        sound = sfx_get_env_sound_instance(D_8014F2D0[soundID & 0xFFFF]);
+    if (soundID & SOUND_TYPE_SPECIAL) {
+        sound = sfx_get_env_sound_instance(LoopingSounds[soundID & 0xFFFF]);
         if (sound != NULL) {
             sound->volume = volume;
             sound->pan = pan;
@@ -539,8 +526,8 @@ void sfx_adjust_env_sound_params(s32 soundID, u8 volume, u8 pan, s16 pitchShift)
 void sfx_stop_sound(s32 soundID) {
     s32 sound = soundID;
 
-    if (sound < 0) {
-        func_80149A6C(D_8014F2D0[sound & 0xFFFF], 0);
+    if (sound & SOUND_TYPE_SPECIAL) {
+        func_80149A6C(LoopingSounds[sound & 0xFFFF], 0);
     } else {
         snd_stop_sound(sound);
     }
@@ -566,7 +553,7 @@ void sfx_play_sound_at_npc(s32 soundID, s32 arg1, s32 npcID) {
 
 void sfx_play_sound_at_position(s32 soundID, s32 flags, f32 posX, f32 posY, f32 posZ) {
     if ((soundID & 0xF0000000) == 0x80000000) {
-        s32 id = D_8014F2D0[soundID & 0xFFFF];
+        s32 id = LoopingSounds[soundID & 0xFFFF];
 
         sfx_register_looping_sound_at_position(id, flags, posX, posY, posZ);
     } else {
@@ -581,16 +568,16 @@ void sfx_play_sound_at_position(s32 soundID, s32 flags, f32 posX, f32 posY, f32 
 }
 
 void sfx_get_spatialized_sound_params(f32 x, f32 y, f32 z, s16* volume, s16* pan, s32 flags) {
-    s32 temp_s0;
-    u32 temp_2;
+    u32 upperFlags;
+    u32 lowerFlags;
 
-    temp_s0 = flags & 0xFFFF0000;
+    upperFlags = flags & 0xFFFF0000;
 
     do {
-        temp_2 = flags & 0xFFFF;
+        lowerFlags = flags & 0xFFFF;
     } while (0); // required to match
 
-    switch (temp_2) {
+    switch (lowerFlags) {
         case 0:
             sfx_compute_spatialized_sound_params_0(x, y, z, volume, pan);
             break;
@@ -598,21 +585,21 @@ void sfx_get_spatialized_sound_params(f32 x, f32 y, f32 z, s16* volume, s16* pan
             sfx_compute_spatialized_sound_params_1(x, y, z, volume, pan);
             break;
         case 2:
-            sfx_compute_spatialized_sound_params_2(x, y, z, volume, pan, temp_s0);
+            sfx_compute_spatialized_sound_params_2(x, y, z, volume, pan, upperFlags);
             break;
     }
 
-    if (temp_s0 & 0x10000) {
+    if (upperFlags & 0x10000) {
         *volume = 0;
-    } else if (temp_s0 & 0x400000) {
+    } else if (upperFlags & 0x400000) {
         if (*volume < 80) {
             *volume = 80;
         }
-    } else if (temp_s0 & 0x200000) {
+    } else if (upperFlags & 0x200000) {
         if (*volume < 60) {
             *volume = 60;
         }
-    } else if (temp_s0 & 0x100000) {
+    } else if (upperFlags & 0x100000) {
         if (*volume < 40) {
             *volume = 40;
         }
@@ -655,7 +642,7 @@ void sfx_compute_spatialized_sound_params_0(f32 x, f32 y, f32 z, s16* volume, s1
         *pan = (screenX * 0.2f) + 32.0f;
     } else {
         f32 temp_f20 = ((screenX * 127.0) / 320.0) - 64.0;
-        *pan = (s32) (temp_f20 * sin_rad((fabs(temp_f20) * 90.0 * 0.015625 * TAU) / 360.0)) + 64;
+        *pan = (s32) (temp_f20 * sin_rad((fabs(temp_f20) * 90.0 * (1/64.0) * TAU) / 360.0)) + 64;
     }
 }
 

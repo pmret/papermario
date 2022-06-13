@@ -1,84 +1,88 @@
 #include "common.h"
 
-// TODO: most likely part of the MusicPlayer struct
 typedef struct {
-    /* 0x0 */ s16 fadeFlags;
+    /* 0x0 */ s16 flags;
     /* 0x2 */ s16 fadeState;
-    /* 0x4 */ s32 fadeOutTime;
-    /* 0x8 */ s32 fadeInTime;
+    /* 0x4 */ s32 fadeTime;
+    /* 0x8 */ s32 soundID;
     /* 0xC */ s32 unkC;
-} struct_80147230;
+} AmbientSoundSettings;
 
-struct_80147230 D_8014F140 = {
-    .fadeFlags = 0,
+typedef enum AmbientSoundState {
+    AMBIENT_SOUND_IDLE        = 0,
+    AMBIENT_SOUND_FADE_OUT    = 1,  // fade out old sounds
+    AMBIENT_SOUND_FADE_IN     = 2   // fade in new sounds
+} AmbientSoundState;
+
+AmbientSoundSettings DefaultAmbientSoundData = {
+    .flags = 0,
     .fadeState = 0,
-    .fadeOutTime = 0,
-    .fadeInTime = -1,
+    .fadeTime = 0,
+    .soundID = -1,
     .unkC = -1
 };
 
-extern struct_80147230 D_8015C7C0;
+extern AmbientSoundSettings AmbientSoundData;
 
 void reset_ambient_sounds(void) {
-    D_8015C7C0 = D_8014F140;
+    AmbientSoundData = DefaultAmbientSoundData;
 }
 
 void update_ambient_sounds(void) {
-    struct_80147230* temp = &D_8015C7C0;
+    AmbientSoundSettings* ambientSoundState = &AmbientSoundData;
 
-    switch (temp->fadeState) {
-        case 0: // idle
+    switch (ambientSoundState->fadeState) {
+        case AMBIENT_SOUND_IDLE:
             break;
-        case 1: // fading out
-            if (temp->fadeFlags & 1) {
+        case AMBIENT_SOUND_FADE_OUT:
+            if (ambientSoundState->flags & 1) {
                 s32 phi_v0;
-                if (temp->fadeOutTime < 250) {
-                    phi_v0 = func_800554A4(0, temp->fadeOutTime);
+                if (ambientSoundState->fadeTime < 250) {
+                    phi_v0 = snd_ambient_fade_out_800554A4(0, ambientSoundState->fadeTime);
                 } else {
-                    phi_v0 = func_800554E8(0, temp->fadeOutTime);
+                    phi_v0 = snd_ambient_fade_out_800554E8(0, ambientSoundState->fadeTime);
                 }
 
                 if (phi_v0 != 0) {
                     return;
                 }
             }
-            temp->fadeState = 2;
+            ambientSoundState->fadeState = AMBIENT_SOUND_FADE_IN;
             break;
-        case 2: // fading in
-            if (temp->fadeFlags & 1) {
-                if (func_800555E4(0) != 0) {
+        case AMBIENT_SOUND_FADE_IN:
+            if (ambientSoundState->flags & 1) {
+                if (snd_ambient_800555E4(0) != 0) {
                     return;
                 }
-                temp->fadeFlags &= ~1;
+                ambientSoundState->flags &= ~1;
             }
-            if (temp->fadeInTime < 0) {
-                temp->fadeState = 0;
-            } else if (func_80055448(temp->fadeInTime) == 0) {
-                if (func_80055464(0, 0) == 0) {
-                    temp->fadeState = 0;
-                    temp->fadeFlags |= 1;
+            if (ambientSoundState->soundID < 0) {
+                ambientSoundState->fadeState = AMBIENT_SOUND_IDLE;
+            } else if (snd_ambient_80055448(ambientSoundState->soundID) == 0) {
+                if (snd_ambient_80055464(0, 0) == 0) {
+                    ambientSoundState->fadeState = AMBIENT_SOUND_IDLE;
+                    ambientSoundState->flags |= 1;
                 }
             }
             break;
     }
 }
 
-s32 play_ambient_sounds(s32 fadeInTime, s32 fadeOutTime) {
-    struct_80147230* temp1 = &D_8015C7C0;
-    struct_80147230* temp2 = &D_8015C7C0;
+s32 play_ambient_sounds(s32 soundID, s32 fadeTime) {
+    AmbientSoundSettings* state = &AmbientSoundData;
 
     if (!gGameStatusPtr->musicEnabled) {
-        func_800554A4(temp1->fadeInTime, fadeOutTime);
-        temp1->fadeFlags &= ~1;
+        snd_ambient_fade_out_800554A4(state->soundID, fadeTime);
+        state->flags &= ~1;
         return 1;
     }
 
-    if (temp1->fadeInTime == fadeInTime) {
+    if (state->soundID == soundID) {
         return 2;
     }
 
-    temp2->fadeInTime = fadeInTime;
-    temp2->fadeOutTime = fadeOutTime;
-    temp2->fadeState = 1;
+    state->soundID = soundID;
+    state->fadeTime = fadeTime;
+    state->fadeState = AMBIENT_SOUND_FADE_OUT;
     return 1;
 }

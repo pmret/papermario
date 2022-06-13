@@ -205,7 +205,7 @@ void snd_update_sequence_players(void) {
         manager->unk_BA = func_8004C444(manager);
     }
 
-    if (D_80078DB0 == 0) {
+    if (!D_80078DB0) {
         bgmPlayer1 = D_8009A5FC;
         if (bgmPlayer1->fadeInfo.fadeTime != 0) {
             snd_update_bgm_fade(bgmPlayer1);
@@ -219,7 +219,7 @@ void snd_update_sequence_players(void) {
             bgmPlayer1->unk_10 += bgmPlayer1->unk_0C;
             bgmPlayer1->unk_5C = func_8004E4B8(bgmPlayer1);
         }
-        if (D_80078DB0 == 0) {
+        if (!D_80078DB0) {
             if (temp_s2->unk_80 != 0) {
                 func_8004DFD4(temp_s2);
             }
@@ -777,7 +777,7 @@ void snd_load_PER(UnkAl19E0* arg0, s32 romAddr) {
     void* end;
 
     snd_read_rom(romAddr, &header, sizeof(PERHeader));
-    size = header.totalSize - sizeof(PERHeader);
+    size = header.size - sizeof(PERHeader);
     snd_read_rom(romAddr + sizeof(PERHeader), arg0->dataPER, size);
     numItems = size / sizeof(PEREntry);
     numItemsLeft = 6 - numItems;
@@ -798,7 +798,7 @@ void snd_load_PRG(UnkAl19E0* arg0, s32 romAddr) {
 
     snd_read_rom(romAddr, &header, sizeof(PERHeader));
     dataRomAddr = romAddr + sizeof(PERHeader);
-    size = header.totalSize - sizeof(PERHeader);
+    size = header.size - sizeof(PERHeader);
     if (size > 0x200) {
         size = 0x200;
     }

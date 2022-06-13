@@ -5,7 +5,7 @@ glabel func_80240000_8EBE20
 /* 8EBE20 80240000 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 8EBE24 80240004 0000202D */  daddu     $a0, $zero, $zero
 /* 8EBE28 80240008 AFBF0010 */  sw        $ra, 0x10($sp)
-/* 8EBE2C 8024000C 0C01553A */  jal       func_800554E8
+/* 8EBE2C 8024000C 0C01553A */  jal       snd_ambient_fade_out_800554E8
 /* 8EBE30 80240010 240501F4 */   addiu    $a1, $zero, 0x1f4
 /* 8EBE34 80240014 8FBF0010 */  lw        $ra, 0x10($sp)
 /* 8EBE38 80240018 24020002 */  addiu     $v0, $zero, 2

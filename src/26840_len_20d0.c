@@ -107,7 +107,25 @@ void func_8004B440(SoundManager* manager, u8 arg1, u8 arg2, UnkAl19E0* arg3, u8 
     func_8004B9E4(manager, 0);
 }
 
-INCLUDE_ASM(void, "26840_len_20d0", snd_load_sfx_groups_from_SEF, SoundManager* manager);
+void snd_load_sfx_groups_from_SEF(SoundManager* sndMgr) {
+    SEFHeader* sefData = sndMgr->soundData->dataSEF;
+    s32 sections = ARRAY_COUNT(sefData->sections);
+    u32 i;
+
+    sndMgr->sefData = sefData;
+    
+    for (i = 0; i < sections; i++) {
+        if (sefData->sections[i] != 0) {
+            sndMgr->normalSounds[i] = sefData->sections[i] + (s32)sefData;
+        }
+    }
+
+    if (sefData->hasExtraSection == 1) {
+        if (sefData->section2000 != 0) {
+            sndMgr->soundsWithBit2000 = sefData->section2000 + (s32)sefData;
+        }
+    }
+}
 
 void snd_clear_sfx_queue(SoundManager* manager) {
     s32 i;
@@ -263,7 +281,7 @@ INCLUDE_ASM(void, "26840_len_20d0", snd_SEFCmd_03_SetReverb, SoundManager* manag
 INCLUDE_ASM(void, "26840_len_20d0", snd_SEFCmd_04, SoundManager* manager, SoundPlayer* player);
 
 void snd_SEFCmd_05(SoundManager* manager, SoundPlayer* player) {
-    s32 temp_v1 = *player->sefDataReadPos;
+    u32 temp_v1 = *player->sefDataReadPos;
 
     player->sefDataReadPos++;
     player->unk_92 = temp_v1 * 100;
@@ -297,9 +315,33 @@ void snd_SEFCmd_0B(SoundManager* manager, SoundPlayer* player) {
     }
 }
 
-INCLUDE_ASM(void, "26840_len_20d0", snd_SEFCmd_0C, SoundManager* manager, SoundPlayer* player);
+void snd_SEFCmd_0C(SoundManager* manager, SoundPlayer* player) {
+    s32 vol = *(u8*)player->sefDataReadPos++;
+    if (vol != 0) {
+        vol = (vol << 0x18) | 0xFFFFFF;
+    }
+    player->volumeLerp.current = vol;
+    player->changedVolume = 1;
+}
 
-INCLUDE_ASM(void, "26840_len_20d0", snd_SEFCmd_0D, SoundManager* manager, SoundPlayer* player);
+void snd_SEFCmd_0D(SoundManager* manager, SoundPlayer* player) {
+    s16 vol;
+    s32 volH = ((u8*)player->sefDataReadPos)[0];
+    s32 volL = ((u8*)player->sefDataReadPos)[1];
+    s32 time = ((u8*)player->sefDataReadPos)[2];
+    player->sefDataReadPos += 3;
+    
+    vol = volL + (volH << 8);
+    if (time != 0) {
+        time = (time << 8) | 0xFF;
+    }
+    if ((vol << 0x10) <= 0) {
+        vol = 1;
+    }
+    player->volumeLerp.goal = vol;
+    player->volumeLerp.time = time;
+    player->volumeLerp.step = ((time << 0x10) - player->volumeLerp.current) / vol;
+}
 
 INCLUDE_ASM(void, "26840_len_20d0", snd_SEFCmd_0E, SoundManager* manager, SoundPlayer* player);
 

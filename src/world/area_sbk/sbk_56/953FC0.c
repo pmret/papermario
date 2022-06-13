@@ -7,8 +7,14 @@ static char* N(exit_str_3) = "";
 
 #include "world/common/SpawnSunEffect.inc.c"
 
-INCLUDE_ASM(s32, "world/area_sbk/sbk_56/953FC0", func_80240038_953FF8);
+ApiStatus func_80240038_953FF8(void) {
+    bgm_set_variation(0, 1);
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "world/area_sbk/sbk_56/953FC0", func_8024005C_95401C);
+ApiStatus func_8024005C_95401C(void) {
+    bgm_set_variation(0, 0);
+    return ApiStatus_DONE2;
+}
 
 #include "world/common/atomic/SuperBlock.inc.c"

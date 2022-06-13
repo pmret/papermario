@@ -79,7 +79,7 @@ extern s8 D_800A0900;
 extern f32 GravityParamsStartFall[];
 extern s16 D_800F7B80;
 extern u8* D_801512F0;
-extern s16 D_80151308;
+extern u16 D_80151308;
 extern s32 gEntityHideMode;
 
 extern s32 D_8010C92C;
@@ -189,7 +189,7 @@ extern f32 gCurtainFade;
 extern f32 gCurtainFadeGoal;
 extern UNK_FUN_PTR(gCurtainDrawCallback);
 
-extern s16 gCurrentDoorSoundsSet;
+extern u16 gCurrentDoorSoundsSet;
 
 extern s32 D_800D9620;
 extern UNK_TYPE D_800E92D8;

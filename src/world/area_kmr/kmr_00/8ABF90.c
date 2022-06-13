@@ -35,17 +35,17 @@ ApiStatus func_80240530_8AC4C0(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus func_80240584_8AC514(Evt* script, s32 isInitialCall) {
-    func_8005553C(0, 2000);
+    snd_ambient_8005553C(0, 2000);
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_802405A8_8AC538(Evt* script, s32 isInitialCall) {
-    func_80055590(0, 2000);
+    snd_ambient_80055590(0, 2000);
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_802405CC_8AC55C(Evt* script, s32 isInitialCall) {
-    func_800554E8(0, 1000);
+    snd_ambient_fade_out_800554E8(0, 1000);
     return ApiStatus_DONE2;
 }
 
