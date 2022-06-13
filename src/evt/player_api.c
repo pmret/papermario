@@ -4,7 +4,7 @@
 
 Npc* playerNpc = (Npc*) 0x802DB270; // TODO: raw ptr, shiftability
 
-extern s16 D_802DB5B0;
+extern u16 D_802DB5B0;
 extern VirtualEntityList D_802DB5C0;
 extern VirtualEntityList D_802DB6C0;
 extern VirtualEntityList* D_802DB7C0;

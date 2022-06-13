@@ -1839,14 +1839,14 @@ s32 func_8025C840(s32 arg0, ActorPart* arg1) {
     return 0;
 }
 
-s32 func_8025C8A0(s32 arg0, ActorPart* arg1) {
-
+void func_8025C8A0(s32 arg0, ActorPart* arg1) {
     if (arg1->decorationTable->unk_751 != 0) {
         arg1->decorationTable->unk_751 = 0;
         if (arg0 == 0) {
-            return func_802DDFF8(0, 0, 0, 0, 0, 0, 0);
+            func_802DDFF8(0, 0, 0, 0, 0, 0, 0);
+        } else {
+            func_802DE894(arg1->unk_84, 0, 0, 0, 0, 0, 0);
         }
-        return func_802DE894(arg1->unk_84, 0, 0, 0, 0, 0, 0);
     }
 }
 
