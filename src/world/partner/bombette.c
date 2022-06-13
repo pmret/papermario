@@ -16,7 +16,7 @@ void entity_interacts_with_current_partner(s32 arg0);
 void func_802BD100_317E50(Npc* npc) {
     f32 x, y, z;
     f32 angle = 0.0f;
-    
+
     while (angle < 360.0f) {
         x = npc->pos.x;
         y = npc->pos.y;
@@ -43,7 +43,7 @@ void func_802BD100_317E50(Npc* npc) {
                 angle += 45.0f;
             }
         }
-        
+
         if (!(angle >= 360.0f)) {
             if (D_8010C978 >= 0 && (D_8010C978 & COLLISION_WITH_ENTITY_BIT) != 0) {
                 entity_interacts_with_current_partner(D_8010C978 & ~COLLISION_WITH_ENTITY_BIT);
@@ -180,7 +180,7 @@ void func_802BD6DC_31842C(Npc* npc) {
     }
 }
 
-s32 world_bombette_can_use_ability(void) {
+s32 world_bombette_can_use_ability(Npc* npc) {
     if (gPartnerActionStatus.partnerActionState != PARTNER_ACTION_NONE) {
         D_802BE934 = 1;
         return FALSE;
@@ -188,7 +188,7 @@ s32 world_bombette_can_use_ability(void) {
     return TRUE;
 }
 
-s32 world_bombette_can_player_pause(void) {
+s32 world_bombette_can_player_pause(Npc* npc) {
     return gPartnerActionStatus.partnerActionState == PARTNER_ACTION_NONE;
 }
 

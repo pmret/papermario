@@ -4,11 +4,11 @@ void update_player_input(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 inputBufPos = playerStatus->inputBufPos;
 
-    playerStatus->stickAxis[0] = gGameStatusPtr->stickX;
-    playerStatus->stickAxis[1] = gGameStatusPtr->stickY;
-    playerStatus->currentButtons = gGameStatusPtr->currentButtons;
-    playerStatus->pressedButtons = gGameStatusPtr->pressedButtons;
-    playerStatus->heldButtons = gGameStatusPtr->heldButtons;
+    playerStatus->stickAxis[0] = gGameStatusPtr->stickX[0];
+    playerStatus->stickAxis[1] = gGameStatusPtr->stickY[0];
+    playerStatus->currentButtons = gGameStatusPtr->currentButtons[0];
+    playerStatus->pressedButtons = gGameStatusPtr->pressedButtons[0];
+    playerStatus->heldButtons = gGameStatusPtr->heldButtons[0];
 
     inputBufPos++;
     if (inputBufPos >= 10) {
@@ -22,7 +22,7 @@ void update_player_input(void) {
     playerStatus->heldButtonsBuffer[inputBufPos] = playerStatus->heldButtons;
     playerStatus->inputBufPos = inputBufPos;
 
-    if (playerStatus->flags & 0x3000) {
+    if (playerStatus->flags & (PLAYER_STATUS_FLAGS_INPUT_DISABLED | PLAYER_STATUS_FLAGS_1000)) {
         playerStatus->stickAxis[0] = 0;
         playerStatus->stickAxis[1] = 0;
         playerStatus->currentButtons = 0;
@@ -31,7 +31,7 @@ void update_player_input(void) {
     }
 
     if (playerStatus->animFlags & 8) {
-        playerStatus->animFlags |= 0x200000;
+        playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_200000;
         playerStatus->pressedButtons |= 4;
     }
 }
@@ -158,8 +158,8 @@ void player_input_to_move_vector(f32* angle, f32* magnitude) {
 
 void game_input_to_move_vector(f32* outAngle, f32* outMagnitude) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    f32 stickX = gGameStatusPtr->stickX;
-    f32 stickY = -gGameStatusPtr->stickY;
+    f32 stickX = gGameStatusPtr->stickX[0];
+    f32 stickY = -gGameStatusPtr->stickY[0];
     f32 maxRadius = 70.0f;
     f32 magnitude;
     f32 angle;

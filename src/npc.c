@@ -474,7 +474,7 @@ s32 func_800397E8(Npc* npc, f32 arg1) {
 
         if (npc->flags & NPC_FLAG_JUMPING) {
             npc->flags &= ~NPC_FLAG_1000;
-            return 0;
+            return FALSE;
         }
 
         length = oldLength = fabsf(arg1) + 16;
@@ -492,14 +492,14 @@ s32 func_800397E8(Npc* npc, f32 arg1) {
             npc->pos.y = y;
             npc->currentFloor = D_8010C97A;
             npc->flags |= NPC_FLAG_1000;
-            return 1;
+            return TRUE;
         }
     } else {
-        return 0;
+        return FALSE;
     }
 
     npc->flags &= ~NPC_FLAG_1000;
-    return 0;
+    return FALSE;
 }
 
 void update_npcs(void) {

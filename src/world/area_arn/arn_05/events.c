@@ -1113,7 +1113,7 @@ ApiStatus N(func_8024113C_BE8D1C)(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus N(func_802412B0_BE8E90)(Evt* script, s32 isInitialCall) {
-    return (gGameStatusPtr->pressedButtons >> 1) & ApiStatus_DONE2;
+    return (gGameStatusPtr->pressedButtons[0] >> 1) & ApiStatus_DONE2;
 }
 
 #include "world/common/SwitchToPartner.inc.c"

@@ -74,7 +74,7 @@ void state_init_intro(void) {
 
 void state_step_intro(void) {
     PlayerData* playerData = &gPlayerData;
-    u32 pressedButtons = gGameStatusPtr->pressedButtons;
+    u32 pressedButtons = gGameStatusPtr->pressedButtons[0];
     s32 i;
 
     if (gGameStatusPtr->creditsViewportMode != -1) {

@@ -532,7 +532,7 @@ char* int_to_string(s32, char*, s32);
 
 Evt* get_script_by_index(s32 index);
 Evt* get_script_by_id(s32 id);
-s32 partner_test_enemy_collision(s32 arg0);
+s32 partner_test_enemy_collision(Npc* enemy);
 
 s32 get_lava_reset_pos(f32* x, f32* y, f32* z);
 void start_rumble(s32, s32);

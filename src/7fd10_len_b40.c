@@ -175,7 +175,7 @@ void check_input_status_menu(void) {
         if (playerStatus->actionState != ACTION_STATE_RIDE) {
             pressedButtons = playerStatus->pressedButtons;
         } else {
-            pressedButtons = gGameStatusPtr->pressedButtons;
+            pressedButtons = gGameStatusPtr->pressedButtons[0];
         }
 
         if (!is_status_menu_visible()) {

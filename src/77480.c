@@ -966,7 +966,7 @@ s32 func_800E0208(void) {
     s32 ret = FALSE;
 
     if (gGameStatusPtr->disableScripts &&
-        (gGameStatusPtr->currentButtons & PLAYER_STATUS_FLAGS_10))
+        (gGameStatusPtr->currentButtons[0] & PLAYER_STATUS_FLAGS_10))
     {
         if (gPartnerActionStatus.partnerActionState == PARTNER_ACTION_NONE) {
             set_action_state(ACTION_STATE_IDLE);

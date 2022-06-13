@@ -122,7 +122,7 @@ void func_802B60A4_E29514(void) {
                 D_802B6EF0 = 1.6f;
                 playerStatus->flags |= 0x800000;
             }
-            if (gGameStatusPtr->pressedButtons & BUTTON_Z && !(playerStatus->animFlags & (PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT | PLAYER_STATUS_ANIM_FLAGS_2))) {
+            if (gGameStatusPtr->pressedButtons[0] & BUTTON_Z && !(playerStatus->animFlags & (PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT | PLAYER_STATUS_ANIM_FLAGS_2))) {
                 suggest_player_anim_setUnkFlag(0x10007);
                 playerStatus->fallState = 3;
                 playerStatus->currentStateTime = 30;
