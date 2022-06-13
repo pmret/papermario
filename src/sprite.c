@@ -227,8 +227,7 @@ void spr_init_component_anim_state(SpriteComponent* comp, s16*** anim) {
 }
 
 
-// matches, but has a very questionable cast, spr_init_component_anim_state args are probably wrong
-#ifdef NON_EQUIVALENT
+// very questionable cast, spr_init_component_anim_state args are probably wrong
 void spr_init_anim_state(SpriteComponent** compList, s16** cmdList) {
     SpriteComponent* component;
     SpriteComponent** compListIt = compList;
@@ -241,9 +240,6 @@ void spr_init_anim_state(SpriteComponent** compList, s16** cmdList) {
         }
     }
 }
-#else
-INCLUDE_ASM(s32, "sprite", spr_init_anim_state);
-#endif
 
 void spr_set_anim_timescale(f32 timescale) {
     spr_animUpdateTimeScale = timescale * 2.0f;
