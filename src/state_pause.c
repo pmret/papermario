@@ -94,7 +94,7 @@ void state_step_pause(void) {
                 pause_handle_input(0, 0);
                 D_800A0920--;
             } else {
-                pause_handle_input(gGameStatusPtr->pressedButtons, gGameStatusPtr->heldButtons);
+                pause_handle_input(gGameStatusPtr->pressedButtons[0], gGameStatusPtr->heldButtons[0]);
             }
             D_800A0922 = 0;
             break;

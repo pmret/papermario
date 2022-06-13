@@ -775,7 +775,7 @@ void btl_state_update_celebration(void) {
             gBattleState2 = BATTLE_STATE2_UNK_10;
             break;
         case BATTLE_STATE2_UNK_10:
-            if (gGameStatusPtr->pressedButtons & (BUTTON_A | BUTTON_B)) {
+            if (gGameStatusPtr->pressedButtons[0] & (BUTTON_A | BUTTON_B)) {
                 D_8029FB4C = 0;
             }
             if (D_8029FB4C != 0) {

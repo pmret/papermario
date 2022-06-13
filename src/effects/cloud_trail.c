@@ -75,7 +75,7 @@ void cloud_trail_update(EffectInstance* effect) {
                 part->unk_1C = part->unk_28 + shim_sin_deg(part->unk_30) * 0.1;
                 part->unk_20 = part->unk_2C + shim_cos_deg(part->unk_30) * 0.1;
 
-                if (part->unk_04 == 0 && (part->lifetime == 5 && gPlayerActionState == ACTION_STATE_IDLE)) {
+                if (part->unk_04 == 0 && (part->lifetime == 5 && gPlayerStatus.actionState == ACTION_STATE_IDLE)) {
                     part->lifetime++;
                     return;
                 }

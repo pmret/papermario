@@ -113,7 +113,7 @@ void func_802A91F8_425788(void) {
         case 11:
             btl_set_popup_duration(99);
             if (actionCommandStatus->unk_6A == 0) {
-                if ((battleStatus->currentButtonsPressed & 0x8000) != 0) {
+                if (battleStatus->currentButtonsPressed & BUTTON_A) {
                     actionCommandStatus->barFillLevel += battleStatus->unk_434[actionCommandStatus->unk_50];
                 }
             } else {

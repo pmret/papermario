@@ -254,19 +254,19 @@ void btl_update(void) {
         if (battleStatus->flags1 & BS_FLAGS1_80000 && gGameStatusPtr->unk_81 != 0) {
             s32 inputBitmask = battleStatus->inputBitmask;
 
-            battleStatus->currentButtonsDown = gGameStatusPtr->altCurrentButtons & inputBitmask;
-            battleStatus->currentButtonsPressed = gGameStatusPtr->altPressedButtons & inputBitmask;
-            battleStatus->currentButtonsHeld = gGameStatusPtr->altHeldButtons & inputBitmask;
-            battleStatus->stickX = gGameStatusPtr->altStickX;
-            battleStatus->stickY = gGameStatusPtr->altStickY;
+            battleStatus->currentButtonsDown = gGameStatusPtr->currentButtons[1] & inputBitmask;
+            battleStatus->currentButtonsPressed = gGameStatusPtr->pressedButtons[1] & inputBitmask;
+            battleStatus->currentButtonsHeld = gGameStatusPtr->heldButtons[1] & inputBitmask;
+            battleStatus->stickX = gGameStatusPtr->stickX[1];
+            battleStatus->stickY = gGameStatusPtr->stickY[1];
         } else {
             s32 inputBitmask2 = battleStatus->inputBitmask;
 
-            battleStatus->currentButtonsDown = gGameStatusPtr->currentButtons & inputBitmask2;
-            battleStatus->currentButtonsPressed = gGameStatusPtr->pressedButtons & inputBitmask2;
-            battleStatus->currentButtonsHeld = gGameStatusPtr->heldButtons & inputBitmask2;
-            battleStatus->stickX = gGameStatusPtr->stickX;
-            battleStatus->stickY = gGameStatusPtr->stickY;
+            battleStatus->currentButtonsDown = gGameStatusPtr->currentButtons[0] & inputBitmask2;
+            battleStatus->currentButtonsPressed = gGameStatusPtr->pressedButtons[0] & inputBitmask2;
+            battleStatus->currentButtonsHeld = gGameStatusPtr->heldButtons[0] & inputBitmask2;
+            battleStatus->stickX = gGameStatusPtr->stickX[0];
+            battleStatus->stickY = gGameStatusPtr->stickY[0];
         }
     }
 

@@ -217,8 +217,8 @@ void filemenu_update(void) {
     }
 
     if (i >= ARRAY_COUNT(gWindows)) {
-        filemenu_heldButtons = gGameStatusPtr->heldButtons;
-        filemenu_pressedButtons = gGameStatusPtr->pressedButtons;
+        filemenu_heldButtons = gGameStatusPtr->heldButtons[0];
+        filemenu_pressedButtons = gGameStatusPtr->pressedButtons[0];
     } else {
         filemenu_heldButtons = 0;
         filemenu_pressedButtons = 0;

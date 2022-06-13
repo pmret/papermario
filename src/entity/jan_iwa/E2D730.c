@@ -144,9 +144,9 @@ void func_802BB8D4_E2E204(Entity* entity) {
 
 void func_802BB98C_E2E2BC(Entity* entity) {
     structE2D730* data = (structE2D730*)entity->dataBuf.unk;
-    gCameras->targetPos.x = gPlayerStatus.position.x;
-    gCameras->targetPos.y = gPlayerStatus.position.y;
-    gCameras->targetPos.z = gPlayerStatus.position.z;
+    gCameras[CAM_DEFAULT].targetPos.x = gPlayerStatus.position.x;
+    gCameras[CAM_DEFAULT].targetPos.y = gPlayerStatus.position.y;
+    gCameras[CAM_DEFAULT].targetPos.z = gPlayerStatus.position.z;
     add_vec2D_polar(&gPlayerStatus.position.x, &gPlayerStatus.position.z, data->unk_08, data->unk_04.f);
 }
 

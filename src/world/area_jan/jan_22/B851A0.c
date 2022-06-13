@@ -2,7 +2,7 @@
 
 ApiStatus func_80241020_B851A0(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    
+
     if (*args++ != 0) {
         script->functionTemp[0] = evt_get_variable(script, *args++);
         script->functionTemp[1] = evt_get_variable(script, *args++);
@@ -14,7 +14,7 @@ ApiStatus func_80241020_B851A0(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_802410C4_B85244(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    
+
     if (*args++ != 0) {
         script->functionTemp[0] = evt_get_variable(script, *args++);
         script->functionTemp[1] = evt_get_variable(script, *args++);
@@ -34,11 +34,11 @@ ApiStatus func_802412E0_B85460(Evt* script, s32 isInitialCall) {
     s32 posB = evt_get_variable(script, *args++);
     s32 bx1 = posB - 17;
     s32 bx2 = posB + 17;
-    
+
     script->varTable[8] = -1;
     if (((gPlayerStatus.position.x < ax1) || (ax2 < gPlayerStatus.position.x))
      && ((gPlayerStatus.position.x < bx1) || (bx2 < gPlayerStatus.position.x))) {
-        script->varTable[8] = gGameStatusPtr->pressedButtons & BUTTON_A;
+        script->varTable[8] = gGameStatusPtr->pressedButtons[0] & BUTTON_A;
     }
     return ApiStatus_DONE2;
 }

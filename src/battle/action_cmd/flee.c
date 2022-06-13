@@ -147,7 +147,7 @@ void func_802A9378_422E48(void) {
             actionCommandStatus->state = 11;
             actionCommandStatus->unk_54 = actionCommandStatus->unk_52;
         case 11:
-            if ((battleStatus->unk_83 != 0) && ((battleStatus->currentButtonsPressed & 0x8000) != 0)) {
+            if ((battleStatus->unk_83 != 0) && (battleStatus->currentButtonsPressed & BUTTON_A)) {
                 actionCommandStatus->barFillLevel += (battleStatus->unk_434[actionCommandStatus->unk_50] * 180 / 100);
             }
             if (actionCommandStatus->barFillLevel >= 10000) {

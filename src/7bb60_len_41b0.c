@@ -540,9 +540,9 @@ void collision_main_lateral(void) {
                     playerStatus->extraVelocity.y != 0.0f ||
                     playerStatus->extraVelocity.z != 0.0f)
                 {
-                    gCameras->targetPos.x = playerStatus->position.x;
-                    gCameras->targetPos.y = playerStatus->position.y;
-                    gCameras->targetPos.z = playerStatus->position.z;
+                    gCameras[CAM_DEFAULT].targetPos.x = playerStatus->position.x;
+                    gCameras[CAM_DEFAULT].targetPos.y = playerStatus->position.y;
+                    gCameras[CAM_DEFAULT].targetPos.z = playerStatus->position.z;
                     if (playerStatus->alpha1 != 128) {
                         collision_check_player_intersecting_world(0, 0,
                             atan2(0.0f, 0.0f, playerStatus->extraVelocity.x, playerStatus->extraVelocity.z));
@@ -559,9 +559,9 @@ void collision_main_lateral(void) {
                 playerStatus->extraVelocity.y != 0.0f ||
                 playerStatus->extraVelocity.z != 0.0f)
             {
-                gCameras->targetPos.x = playerStatus->position.x;
-                gCameras->targetPos.y = playerStatus->position.y;
-                gCameras->targetPos.z = playerStatus->position.z;
+                gCameras[CAM_DEFAULT].targetPos.x = playerStatus->position.x;
+                gCameras[CAM_DEFAULT].targetPos.y = playerStatus->position.y;
+                gCameras[CAM_DEFAULT].targetPos.z = playerStatus->position.z;
             }
             if (playerStatus->extraVelocity.x != 0.0f ||
                 playerStatus->extraVelocity.y != 0.0f ||
@@ -579,9 +579,9 @@ void collision_main_lateral(void) {
                 playerStatus->extraVelocity.y != 0.0f ||
                 playerStatus->extraVelocity.z != 0.0f)
             {
-                gCameras->targetPos.x = playerStatus->position.x;
-                gCameras->targetPos.y = playerStatus->position.y;
-                gCameras->targetPos.z = playerStatus->position.z;
+                gCameras[CAM_DEFAULT].targetPos.x = playerStatus->position.x;
+                gCameras[CAM_DEFAULT].targetPos.y = playerStatus->position.y;
+                gCameras[CAM_DEFAULT].targetPos.z = playerStatus->position.z;
             }
 
             playerX = playerStatus->position.x;
@@ -668,9 +668,9 @@ void collision_main_lateral(void) {
                     playerStatus->extraVelocity.y != 0.0f ||
                     playerStatus->extraVelocity.z != 0.0f)
                 {
-                    gCameras->targetPos.x = playerStatus->position.x;
-                    gCameras->targetPos.y = playerStatus->position.y;
-                    gCameras->targetPos.z = playerStatus->position.z;
+                    gCameras[CAM_DEFAULT].targetPos.x = playerStatus->position.x;
+                    gCameras[CAM_DEFAULT].targetPos.y = playerStatus->position.y;
+                    gCameras[CAM_DEFAULT].targetPos.z = playerStatus->position.z;
                 }
 
                 playerX = playerStatus->position.x;
