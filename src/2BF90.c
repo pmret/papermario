@@ -91,7 +91,6 @@ void func_80050D50(UnkAl1E4* arg0) {
     arg0->unk_2B = 0;
 }
 
-//CLOVER document
 void func_80050E18(s32 arg0, s32 arg1) {
     UnkAl1E4* temp_v1 = &D_8009A628->unk_24[arg0];
     
@@ -107,7 +106,6 @@ void func_80050E18(s32 arg0, s32 arg1) {
     }
 }
 
-//CLOVER document
 void func_80050E84(s32 arg0, s32 arg1) {
     UnkAl1E4* temp_v1 = &D_8009A628->unk_24[arg0];
     
@@ -124,7 +122,6 @@ void func_80050E84(s32 arg0, s32 arg1) {
     }
 }
 
-//CLOVER document
 void func_80050EF0(s32 arg0) {
     UnkAl1E4* temp_v1 = &D_8009A628->unk_24[arg0];
     
@@ -140,7 +137,6 @@ void func_80050EF0(s32 arg0) {
     }
 }
 
-//CLOVER document
 void func_80050F64(s32 arg0, s32 arg1) {
     UnkAl1E4* temp_v1 = &D_8009A628->unk_24[arg0];
     
@@ -156,7 +152,6 @@ void func_80050F64(s32 arg0, s32 arg1) {
     }
 }
 
-//CLOVER document
 void func_80050FD0(s32 arg0, s32 arg1, s32 arg2) {
     UnkAl1E4* temp_v1 = &D_8009A628->unk_24[arg0];
     if ((temp_v1->unk_04 != 0) && (temp_v1->unk_08 != 0)) {
@@ -176,7 +171,6 @@ void func_80050FD0(s32 arg0, s32 arg1, s32 arg2) {
     }
 }
 
-//CLOVER document
 s32 func_80051050(s32 arg0) {
     UnkAl1E4* temp_v1 = &D_8009A628->unk_24[arg0];
     s32 var_a0 = 0;

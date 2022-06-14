@@ -269,7 +269,7 @@ INCLUDE_ASM(void, "26840_len_20d0", snd_SEFCmd_00_SetVolume, SoundManager* manag
 void snd_SEFCmd_01_SetPan(SoundManager* manager, SoundPlayer* player) {
     u8* buf = player->sefDataReadPos;
     s32 sfxPan = buf[0];
-    player->sefDataReadPos++;
+    player->sefDataReadPos = &buf[1];
 
     player->changedPan = TRUE;
     player->sfxPan = sfxPan;
@@ -279,7 +279,7 @@ void snd_SEFCmd_02_SetInstrument(SoundManager* manager, SoundPlayer* player) {
     u8* buf = player->sefDataReadPos;
     s32 temp_a1 = buf[0];
     s32 temp_a2 = buf[1];
-    player->sefDataReadPos += 2;
+    player->sefDataReadPos = &buf[2];
     
     player->instrumentIndex = temp_a2;
     player->sfxInstrumentRef = func_80053BE8(manager->soundData, temp_a1, temp_a2, &player->unk10);
@@ -288,7 +288,7 @@ void snd_SEFCmd_02_SetInstrument(SoundManager* manager, SoundPlayer* player) {
 void snd_SEFCmd_03_SetReverb(SoundManager* manager, SoundPlayer* player) {
     u8* buf = player->sefDataReadPos;
     u8 reverb = buf[0];
-    player->sefDataReadPos += 1;
+    player->sefDataReadPos = &buf[1];
     
     if ((player->sfxParamsFlags & 0x20) != 0) {
         reverb = manager->unk_8D;
@@ -310,7 +310,7 @@ void snd_SEFCmd_05(SoundManager* manager, SoundPlayer* player) {
 void snd_SEFCmd_06(SoundManager* manager, SoundPlayer* player) {
     u8* buf = player->sefDataReadPos;
     s32 unkTemp = buf[0];
-    player->sefDataReadPos++;
+    player->sefDataReadPos = &buf[1];
 
     player->unk_94 = unkTemp;
 }
@@ -327,7 +327,7 @@ INCLUDE_ASM(void, "26840_len_20d0", snd_SEFCmd_08, SoundManager* manager, SoundP
 void snd_SEFCmd_09_StartLoop(SoundManager* manager, SoundPlayer* player) {
     u8* buf = player->sefDataReadPos;
     s32 loopIterCount = buf[0];
-    player->sefDataReadPos++;
+    player->sefDataReadPos = &buf[1];
 
     player->loopStartPos = player->sefDataReadPos;
     player->loopIterCount = loopIterCount;
@@ -350,7 +350,7 @@ void snd_SEFCmd_0B(SoundManager* manager, SoundPlayer* player) {
 void snd_SEFCmd_0C(SoundManager* manager, SoundPlayer* player) {
     u8* buf = player->sefDataReadPos;
     s32 vol = buf[0];
-    player->sefDataReadPos++;
+    player->sefDataReadPos = &buf[1];
 
     if (vol != 0) {
         vol = (vol << 0x18) | 0xFFFFFF;
@@ -365,7 +365,7 @@ void snd_SEFCmd_0D(SoundManager* manager, SoundPlayer* player) {
     s32 volL = buf[1];
     s32 time = buf[2];
     s16 vol = volL + (volH << 8);
-    player->sefDataReadPos += 3;
+    player->sefDataReadPos = &buf[3];
     
     if (time != 0) {
         time = (time << 8) | 0xFF;
@@ -383,7 +383,7 @@ void snd_SEFCmd_0E(SoundManager* manager, SoundPlayer* player) {
     u8* buf = player->sefDataReadPos;
     s32 pos = (buf[1] << 8) + buf[2];
     u8 type = buf[0];
-    player->sefDataReadPos += 3;
+    player->sefDataReadPos = &buf[3];
     
     pos += (s32)data;
     player->unk_84 = (s32)type;
@@ -422,7 +422,7 @@ void snd_SEFCmd_12_NOP(SoundManager* manager, SoundPlayer* player) {
 void snd_SEFCmd_SetUnkA1(SoundManager* manager, SoundPlayer* player) {
     u8* buf = player->sefDataReadPos;
     s32 unkTemp = buf[0];
-    player->sefDataReadPos++;
+    player->sefDataReadPos = &buf[1];
 
     player->unk_A1 = unkTemp;
 }
@@ -430,7 +430,7 @@ void snd_SEFCmd_SetUnkA1(SoundManager* manager, SoundPlayer* player) {
 void snd_SEFCmd_SetUnkA2(SoundManager* manager, SoundPlayer* player) {
     u8* buf = player->sefDataReadPos;
     s32 unkTemp = buf[0];
-    player->sefDataReadPos++;
+    player->sefDataReadPos = &buf[1];
 
     player->unk_A2 = unkTemp;
 }
@@ -438,12 +438,24 @@ void snd_SEFCmd_SetUnkA2(SoundManager* manager, SoundPlayer* player) {
 void snd_SEFCmd_SetUnkA3(SoundManager* manager, SoundPlayer* player) {
     u8* buf = player->sefDataReadPos;
     s32 unkTemp = buf[0];
-    player->sefDataReadPos++;
+    player->sefDataReadPos = &buf[1];
 
     player->unk_A3 = unkTemp;
 }
 
-INCLUDE_ASM(void, "26840_len_20d0", snd_SEFCmd_16, SoundManager* manager, SoundPlayer* player);
+void snd_SEFCmd_16(SoundManager* manager, SoundPlayer* player) {
+    s8* data = manager->sefData;
+    u8* buf = player->sefDataReadPos;
+    s32 offset = (buf[0] << 8) + buf[1];
+
+    if (offset != 0) {
+        player->unk_18 = offset + (s32)manager->sefData;
+    } else {
+        player->unk_18 = NULL;
+    }
+
+    player->sefDataReadPos = &buf[2];
+}
 
 void snd_SEFCmd_17(SoundManager* manager, SoundPlayer* player) {
     u8* buf = player->sefDataReadPos;
