@@ -4979,13 +4979,21 @@ segments:
     vram: 0x80218000
     overlay: True
     subsegments:
-    - [0x648E10, c]
-    - [0x649050, c]
-    - [0x649480, c]
-    - [0x6497F0, c]
-    - [0x649B60, c]
-    - [0x649ED0, c]
-    - [0x64A340, data]
+    - [0x648E10, c, actor/swoopula]
+    - [0x649050, c, actor/albino_dino]
+    - [0x649050, c, actor/white_clubba]
+    - [0x649050, c, actor/red_magikoopa]
+    - [0x649480, c, actor/green_magikoopa]
+    - [0x6497F0, c, actor/yellow_magikoopa]
+    - [0x649B60, c, actor/gray_magikoopa]
+    - [0x649ED0, c, actor/white_magikoopa]
+    - [0x64A340, c, stage/pra_01]
+    - [0x64A340, c, stage/pra_02]
+    - [0x64A340, c, stage/pra_03]
+    - [0x64A340, c, stage/pra_03b]
+    - [0x64A340, c, stage/pra_03c]
+    - [0x64A340, c, stage/pra_04]
+    - [0x64A340, c, area]
   - dir: battle/area_pra2
     type: code
     start: 0x660750

@@ -1,4 +1,13 @@
 
+#include "common.h"
+#include "battle/battle.h"
+#include "script_api/battle.h"
+#include "effects.h"
+#include "sprite/npc/magikoopa.h"
+#include "sprite/npc/flying_magikoopa.h"
+
+#define NAMESPACE b_area_pra_green_magikoopa
+
 s32 N(802222A0)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_END,
@@ -117,7 +126,7 @@ ActorPartBlueprint N(80222434)[] = {
     },
 };
 
-ActorBlueprint N(green_magikoopa) = {
+ActorBlueprint NAMESPACE = {
     .flags = 0,
     .type = ACTOR_TYPE_GREEN_MAGIKOOPA,
     .level = 21,
@@ -140,7 +149,7 @@ ActorBlueprint N(green_magikoopa) = {
     .statusMessageOffset = { 10, 32 },
 };
 
-ActorBlueprint N(802224C8) = {
+ActorBlueprint N(flying) = {
     .flags = ACTOR_FLAG_FLYING,
     .type = ACTOR_TYPE_FLYING_GREEN_MAGIKOOPA,
     .level = 21,
@@ -198,6 +207,12 @@ EvtScript N(80222594) = {
     EVT_RETURN
     EVT_END
 };
+
+#include "common/ShrinkActor.inc.c"
+#include "common/GetSelectedMoveID.inc.c"
+#include "common/UnkBattleFunc1.inc.c"
+#include "common/StartRumbleWithParams.inc.c"
+#include "world/common/UnkFunc52.inc.c"
 
 EvtScript N(802225A4) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)

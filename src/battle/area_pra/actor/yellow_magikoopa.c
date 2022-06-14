@@ -1,15 +1,23 @@
+#include "common.h"
+#include "battle/battle.h"
+#include "script_api/battle.h"
+#include "effects.h"
+#include "sprite/npc/magikoopa.h"
+#include "sprite/npc/flying_magikoopa.h"
 
-s32 N(80224F60)[] = {
+#define NAMESPACE b_area_pra_yellow_magikoopa
+
+s32 N(defenseTable)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_END,
 };
 
-s32 N(80224F6C)[] = {
+s32 N(defenseTable_flying)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_END,
 };
 
-s32 N(80224F78)[] = {
+s32 N(statusTable)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 50,
@@ -34,7 +42,7 @@ s32 N(80224F78)[] = {
     STATUS_END,
 };
 
-s32 N(80225024)[] = {
+s32 N(statusTable_flying)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 50,
@@ -59,15 +67,15 @@ s32 N(80225024)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(802250D0)[] = {
+ActorPartBlueprint N(parts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 2, 35 },
         .opacity = 255,
-        .idleAnimations = N(802251B0),
-        .defenseTable = N(80224F60),
+        .idleAnimations = N(idleAnimations),
+        .defenseTable = N(defenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
         .unk_1C = -5,
@@ -75,15 +83,15 @@ ActorPartBlueprint N(802250D0)[] = {
     },
 };
 
-ActorPartBlueprint N(802250F4)[] = {
+ActorPartBlueprint N(parts_flying)[] = {
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET,
         .index = 1,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 2, 35 },
         .opacity = 255,
-        .idleAnimations = N(802251B0),
-        .defenseTable = N(80224F6C),
+        .idleAnimations = N(idleAnimations),
+        .defenseTable = N(defenseTable_flying),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
         .unk_1C = -5,
@@ -95,8 +103,8 @@ ActorPartBlueprint N(802250F4)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -10, 35 },
         .opacity = 255,
-        .idleAnimations = N(802251FC),
-        .defenseTable = N(80224F6C),
+        .idleAnimations = N(idleAnimations_flying),
+        .defenseTable = N(defenseTable_flying),
         .eventFlags = ACTOR_EVENT_FLAG_800000,
         .elementImmunityFlags = 0,
         .unk_1C = 0,
@@ -109,7 +117,7 @@ ActorPartBlueprint N(802250F4)[] = {
         .targetOffset = { 0, 0 },
         .opacity = 255,
         .idleAnimations = N(80225248),
-        .defenseTable = N(80224F6C),
+        .defenseTable = N(defenseTable_flying),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
         .unk_1C = 0,
@@ -117,15 +125,15 @@ ActorPartBlueprint N(802250F4)[] = {
     },
 };
 
-ActorBlueprint N(yellow_magikoopa) = {
+ActorBlueprint NAMESPACE = {
     .flags = 0,
     .type = ACTOR_TYPE_YELLOW_MAGIKOOPA,
     .level = 21,
     .maxHP = 11,
-    .partCount = ARRAY_COUNT(N(802250D0)),
-    .partsData = N(802250D0),
-    .script = &N(80227398),
-    .statusTable = N(80224F78),
+    .partCount = ARRAY_COUNT(N(parts)),
+    .partsData = N(parts),
+    .script = &N(init),
+    .statusTable = N(statusTable),
     .escapeChance = 40,
     .airLiftChance = 80,
     .spookChance = 70,
@@ -140,15 +148,15 @@ ActorBlueprint N(yellow_magikoopa) = {
     .statusMessageOffset = { 10, 32 },
 };
 
-ActorBlueprint N(yellow_magikoopa_flying) = {
+ActorBlueprint N(flying) = {
     .flags = ACTOR_FLAG_FLYING,
     .type = ACTOR_TYPE_FLYING_YELLOW_MAGIKOOPA,
     .level = 21,
     .maxHP = 11,
-    .partCount = ARRAY_COUNT(N(802250F4)),
-    .partsData = N(802250F4),
-    .script = &N(8022743C),
-    .statusTable = N(80225024),
+    .partCount = ARRAY_COUNT(N(parts_flying)),
+    .partsData = N(parts_flying),
+    .script = &N(init_flying),
+    .statusTable = N(statusTable_flying),
     .escapeChance = 40,
     .airLiftChance = 95,
     .spookChance = 75,
@@ -163,7 +171,7 @@ ActorBlueprint N(yellow_magikoopa_flying) = {
     .statusMessageOffset = { 1, 34 },
 };
 
-s32 N(802251B0)[] = {
+s32 N(idleAnimations)[] = {
     STATUS_NORMAL, NPC_ANIM_magikoopa_Palette_02_Anim_1,
     STATUS_STONE, NPC_ANIM_magikoopa_Palette_02_Anim_0,
     STATUS_SLEEP, NPC_ANIM_magikoopa_Palette_02_Anim_8,
@@ -176,7 +184,7 @@ s32 N(802251B0)[] = {
     STATUS_END,
 };
 
-s32 N(802251FC)[] = {
+s32 N(idleAnimations_flying)[] = {
     STATUS_NORMAL, NPC_ANIM_flying_magikoopa_Palette_02_Anim_1,
     STATUS_STONE, NPC_ANIM_flying_magikoopa_Palette_02_Anim_0,
     STATUS_SLEEP, NPC_ANIM_flying_magikoopa_Palette_02_Anim_8,
@@ -194,12 +202,18 @@ s32 N(80225248)[] = {
     STATUS_END,
 };
 
-EvtScript N(80225254) = {
+EvtScript N(idle) = {
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(80225264) = {
+#include "common/ShrinkActor.inc.c"
+#include "common/GetSelectedMoveID.inc.c"
+#include "common/UnkBattleFunc1.inc.c"
+#include "common/StartRumbleWithParams.inc.c"
+#include "world/common/UnkFunc52.inc.c"
+
+EvtScript N(handleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LW(0))
@@ -373,9 +387,9 @@ EvtScript N(80225888) = {
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, 3, ACTOR_PART_FLAG_INVISIBLE, 1)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_magikoopa_Palette_02_Anim_1)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLYING, 0)
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, N(80225264))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, N(handleEvent))
     EVT_CALL(SetActorType, ACTOR_SELF, ACTOR_TYPE_YELLOW_MAGIKOOPA)
-    EVT_CALL(SetStatusTable, ACTOR_SELF, N(80224F78))
+    EVT_CALL(SetStatusTable, ACTOR_SELF, N(statusTable))
     EVT_CALL(N(80218B64), -10, 20, 10, 32)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_1000, 1)
     EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
@@ -391,7 +405,7 @@ EvtScript N(80225888) = {
     EVT_END
 };
 
-EvtScript N(80225E84) = {
+EvtScript N(handleEvent_flying) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LW(0))
@@ -735,10 +749,10 @@ EvtScript N(80227174) = {
     EVT_END
 };
 
-EvtScript N(80227398) = {
-    EVT_CALL(BindIdle, ACTOR_SELF, N(80225254))
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, N(802274E0))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, N(80225264))
+EvtScript N(init) = {
+    EVT_CALL(BindIdle, ACTOR_SELF, N(idle))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, N(takeTurn))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, N(handleEvent))
     EVT_CALL(gPauseMsg_38, 2, LW(0))
     EVT_IF_EQ(LW(0), 0)
         EVT_CALL(SetBattleVar, 2, -1)
@@ -748,10 +762,10 @@ EvtScript N(80227398) = {
     EVT_END
 };
 
-EvtScript N(8022743C) = {
-    EVT_CALL(BindIdle, ACTOR_SELF, N(80225254))
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, N(802274E0))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, N(80225E84))
+EvtScript N(init_flying) = {
+    EVT_CALL(BindIdle, ACTOR_SELF, N(idle))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, N(takeTurn))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, N(handleEvent_flying))
     EVT_CALL(gPauseMsg_38, 2, LW(0))
     EVT_IF_EQ(LW(0), 0)
         EVT_CALL(SetBattleVar, 2, -1)
@@ -761,7 +775,7 @@ EvtScript N(8022743C) = {
     EVT_END
 };
 
-EvtScript N(802274E0) = {
+EvtScript N(takeTurn) = {
     EVT_SET(LF(0), 0)
     EVT_LABEL(10)
     EVT_CALL(EnemyCreateTargetList, 32770)
