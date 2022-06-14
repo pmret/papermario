@@ -1027,7 +1027,7 @@ void btl_delete_actor(Actor* actor) {
     remove_effect(actor->debuffEffect);
 
     if (actor->unk_200 != NULL) {
-        actor->unk_200[3][9] = 0;
+        ((AttackResultTextFXData*)actor->unk_200->data)->unk_24 = 0;
     }
 
     battleStatus = &gBattleStatus;
@@ -1070,7 +1070,7 @@ void btl_delete_player_actor(Actor* player) {
     remove_effect(player->debuffEffect);
 
     if (player->unk_200 != NULL) {
-        player->unk_200[3][9] = 0;
+        ((AttackResultTextFXData*)player->unk_200->data)->unk_24 = 0;
     }
 
     heap_free(movement);

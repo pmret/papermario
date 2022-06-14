@@ -1443,18 +1443,12 @@ typedef struct ShopSellPriceData {
 } ShopSellPriceData; // size = 0xC
 
 typedef struct GameStatus {
-    /* 0x000 */ u32 currentButtons[2];
-    /* 0x008 */ char unk_08[8];
-    /* 0x010 */ u32 pressedButtons[2]; /* bits = 1 for frame of button press */
-    /* 0x018 */ char unk_18[8];
-    /* 0x020 */ u32 heldButtons[2]; /* bits = 1 every 4th frame during hold */
-    /* 0x028 */ char unk_28[8];
-    /* 0x030 */ u32 prevButtons; /* from previous frame */
-    /* 0x034 */ char unk_34[12];
-    /* 0x040 */ s8 stickX[2]; /* with deadzone */
-    /* 0x042 */ char unk_42[2];
-    /* 0x044 */ s8 stickY[2]; /* with deadzone */
-    /* 0x046 */ char unk_46[2];
+    /* 0x000 */ u32 currentButtons[4];
+    /* 0x010 */ u32 pressedButtons[4]; /* bits = 1 for frame of button press */
+    /* 0x020 */ u32 heldButtons[4]; /* bits = 1 every 4th frame during hold */
+    /* 0x030 */ u32 prevButtons[4]; /* from previous frame */
+    /* 0x040 */ s8 stickX[4]; /* with deadzone */
+    /* 0x044 */ s8 stickY[4]; /* with deadzone */
     /* 0x048 */ s16 unk_48[4];
     /* 0x050 */ s16 unk_50[4];
     /* 0x058 */ s16 unk_58;
@@ -1934,7 +1928,7 @@ typedef struct Actor {
     /* 0x1FA */ s16 hpChangeCounter;
     /* 0x1FC */ u16 damageCounter;
     /* 0x1FE */ char unk_1FE[2];
-    /* 0x200 */ s32** unk_200; // Probably a struct but not sure what yet
+    /* 0x200 */ struct EffectInstance* unk_200; // fx_attack_result_text
     /* 0x204 */ s8 unk_204;
     /* 0x205 */ s8 unk_205;
     /* 0x206 */ s8 unk_206;

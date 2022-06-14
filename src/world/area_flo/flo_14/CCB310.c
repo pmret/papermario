@@ -408,9 +408,7 @@ EvtScript N(80243870) = {
     EVT_END
 };
 
-s32 N(D_80243B14_CCEE24) = {
-    0x00000000,
-};
+f32 N(D_80243B14_CCEE24) = 0.0f;
 
 s32 N(D_80243B18_CCEE28) = {
     0x0000005A,
@@ -613,12 +611,11 @@ ApiStatus N(func_8024046C_CCB77C)(Evt* script, s32 isInitialCall) {
 
 // graphics macros
 #ifdef NON_EQUIVALENT
-void guMtxF2L(Matrix4f, Mtx* m);
-void guMtxIdentF(Matrix4f);
-
 void N(func_80240504_CCB814)(void) {
     Matrix4f matrix;
-    s32 x, y, z;
+    Vtx* sp50;
+    Vtx* sp54;
+    s32 sp58;
 
     guMtxIdentF(matrix);
 
@@ -636,7 +633,7 @@ void N(func_80240504_CCB814)(void) {
 
     guMtxF2L(matrix, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-    mdl_get_copied_vertices(0, &x, &y, &z);
+    mdl_get_copied_vertices(0, &sp50, &sp54, &sp58);
     gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
     gSPDisplayList(gMasterGfxPos++, mdl_get_copied_gfx(0));
 
