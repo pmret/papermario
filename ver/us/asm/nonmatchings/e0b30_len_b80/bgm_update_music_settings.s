@@ -137,8 +137,8 @@ glabel bgm_update_music_settings
 /* E0E08 8014A708 080529C8 */  j         .L8014A720
 /* E0E0C 8014A70C A6220000 */   sh       $v0, ($s1)
 .L8014A710:
-/* E0E10 8014A710 3C048016 */  lui       $a0, %hi(gMusicUnkVolume)
-/* E0E14 8014A714 84849AE0 */  lh        $a0, %lo(gMusicUnkVolume)($a0)
+/* E0E10 8014A710 3C048016 */  lui       $a0, %hi(gMusicDefaultVolume)
+/* E0E14 8014A714 84849AE0 */  lh        $a0, %lo(gMusicDefaultVolume)($a0)
 /* E0E18 8014A718 0C052B21 */  jal       bgm_set_target_volume
 /* E0E1C 8014A71C 00000000 */   nop
 .L8014A720:

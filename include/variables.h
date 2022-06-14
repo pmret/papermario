@@ -256,8 +256,8 @@ extern EvtScript SCRIPT_NpcDefeat;
 extern EvtScript ShakeCam1;
 extern EvtScript ShakeCamX;
 
-extern s16 gMusicUnkVolume;
-extern s16 gMusicUnkVolume2;
+extern s16 gMusicDefaultVolume;
+extern s16 gMusicMaxVolume;
 extern s16 gMusicCurrentVolume;
 extern s16 gMusicTargetVolume;
 extern MusicSettings gMusicSettings[4];

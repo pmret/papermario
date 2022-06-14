@@ -14,7 +14,7 @@ void func_80052E30(u8 index) {
 }
 
 void snd_load_audio_data(s32 frequency) {
-    UnkAl19E0* temp4;
+    SndGlobals* temp4;
     s32* temp_v0_2;
     ALHeap* alHeap;
     u32 i;
@@ -180,7 +180,7 @@ void func_800533A8(InstrumentCFG* arg0) {
 
 
 void snd_update_sequence_players(void) {
-    UnkAl19E0* temp_s2 = D_8009A5C0;
+    SndGlobals* temp_s2 = D_8009A5C0;
     SoundManager* manager = D_8009A640;
     UnkAl834* temp_s0 = D_8009A628;
     BGMPlayer* bgmPlayer1;
@@ -249,7 +249,7 @@ void snd_update_sequence_players(void) {
 }
 
 void func_800535C0(void) {
-    UnkAl19E0* temp_s1 = D_8009A5C0;
+    SndGlobals* temp_s1 = D_8009A5C0;
     BGMPlayer* player = D_8009A664;
     SoundManager* manager = D_8009A640;
 
@@ -268,7 +268,7 @@ void func_800535C0(void) {
     func_8004B748(manager);
 }
 
-void func_80053654(UnkAl19E0* arg0) {
+void func_80053654(SndGlobals* arg0) {
     u32 i;
 
     if (arg0->unk_130C == 2) {
@@ -454,12 +454,9 @@ void func_80053BA8(Fade* arg0) {
     }
 }
 
-Instrument* func_80053BE8(UnkAl19E0* arg0, u32 arg1, u32 arg2, s32** arg3) {
-    void* temp_v0;
-    void* phi_v0;
-
-    Instrument* temp_a2 = (*arg0->instrumentGroups[(arg1 & 0x70) >> 4])[arg2];
-    UnkAl4Plus* temp_a0 = temp_a2->unkOffset;
+Instrument* func_80053BE8(SndGlobals* arg0, u32 arg1, u32 arg2, s32** arg3) {
+    Instrument* instrument = (*arg0->instrumentGroups[(arg1 & 0x70) >> 4])[arg2];
+    UnkAl4Plus* temp_a0 = instrument->unkOffset;
     u32 temp_a1 = arg1 % 4;
 
     if (temp_a1 < temp_a0->count) {
@@ -469,11 +466,11 @@ Instrument* func_80053BE8(UnkAl19E0* arg0, u32 arg1, u32 arg2, s32** arg3) {
         arg3[0] = &D_8007854C[0];
         arg3[1] = &D_8007854C[1];
     }
-    return temp_a2;
+    return instrument;
 }
 
 void snd_get_sequence_player_and_track(u32 playerIndex, s32** outCurrentTrackData, BGMPlayer** outPlayer) {
-    UnkAl19E0* temp_v1 = D_8009A5C0;
+    SndGlobals* temp_v1 = D_8009A5C0;
 
     switch (playerIndex) {
         case 0:
@@ -516,7 +513,7 @@ s32 snd_load_song_files(u32 arg0, UnkAlTrack* arg1, BGMPlayer* arg2) {
     SBNFileEntry fileEntry;
     SBNFileEntry fileEntry2;
     SBNFileEntry* bkFileEntry;
-    UnkAl19E0* soundData;
+    SndGlobals* soundData;
     InitSongEntry* songEntry;
     s32 i;
     u16 bkFileIndex;
@@ -578,7 +575,7 @@ s32 func_80053E58(s32 arg0, u8* arg1) {
     SBNFileEntry fileEntry;
     SBNFileEntry sp18;
     SBNFileEntry* bkFileEntry;
-    UnkAl19E0* soundData;
+    SndGlobals* soundData;
     InitSongEntry* temp_s1;
     s32 i;
     s32 ret;
@@ -625,7 +622,7 @@ BGMPlayer* func_80053F64(s32 arg0) {
 s32 func_80053F80(u32 arg0) {
     u32 i;
     SBNFileEntry fileEntry;
-    UnkAl19E0* soundData;
+    SndGlobals* soundData;
     UnkAl834* temp_s2;
     s32* trackData;
 
@@ -692,7 +689,7 @@ BGMPlayer* func_80054248(u8 arg0) {
     }
 }
 
-void snd_load_INIT(UnkAl19E0* arg0, s32 romAddr, ALHeap* heap) {
+void snd_load_INIT(SndGlobals* arg0, s32 romAddr, ALHeap* heap) {
     SBNHeader sbnHeader;
     INITHeader initHeader;
     SBNFileEntry* entry;
@@ -746,7 +743,7 @@ void snd_load_INIT(UnkAl19E0* arg0, s32 romAddr, ALHeap* heap) {
 
 s32 snd_fetch_SBN_file(u32 fileIdx, s32 format, SBNFileEntry* arg2) {
     SBNFileEntry fileEntry;
-    UnkAl19E0* temp = D_8009A5C0;
+    SndGlobals* temp = D_8009A5C0;
     u32 data;
     s32 ret = 0;
 
@@ -769,7 +766,7 @@ s32 snd_fetch_SBN_file(u32 fileIdx, s32 format, SBNFileEntry* arg2) {
     return ret;
 }
 
-void snd_load_PER(UnkAl19E0* arg0, s32 romAddr) {
+void snd_load_PER(SndGlobals* arg0, s32 romAddr) {
     PERHeader header;
     u32 size;
     s32 numItemsLeft;
@@ -788,7 +785,7 @@ void snd_load_PER(UnkAl19E0* arg0, s32 romAddr) {
     }
 }
 
-void snd_load_PRG(UnkAl19E0* arg0, s32 romAddr) {
+void snd_load_PRG(SndGlobals* arg0, s32 romAddr) {
     PERHeader header;
     u32 size;
     s32 numItemsLeft;
@@ -817,7 +814,7 @@ INCLUDE_ASM(s32, "2e230_len_2190", snd_load_BGM);
 
 InstrumentGroup* snd_get_BK_instruments(s32 bankGroup, u32 bankIndex) {
     InstrumentGroup* ret = NULL;
-    UnkAl19E0* temp = D_8009A5C0;
+    SndGlobals* temp = D_8009A5C0;
 
     // TODO fake match - this multiplying the bankIndex by 16 and then dividing it right after is dumb
     bankIndex *= 16;
@@ -1038,9 +1035,7 @@ void snd_read_rom(s32 romAddr, void* buffer, u32 size) {
     }
 }
 
-#ifdef NON_MATCHING
-// v0/v1 swap
-void snd_memset(s8* dst, s32 size, s8 value) {
+void snd_memset(s8* dst, s32 size, u8 value) {
     s32 count;
     s32 intValue;
 
@@ -1053,7 +1048,7 @@ void snd_memset(s8* dst, s32 size, s8 value) {
             *dst++ = value;
         }
     } else {
-        count = (u32)dst % 4;
+        count = (u32)dst & 0x3;
         if (count != 0) {
             count = 4 - count;
             size -= count;
@@ -1063,13 +1058,13 @@ void snd_memset(s8* dst, s32 size, s8 value) {
         }
 
         count = size >> 2;
-        intValue = value & 0xFF;
-        intValue = intValue * 0x01010101;
+        intValue = (value << 8) + value;
+        intValue = (intValue << 16) + intValue;
         while (count--) {
             *(u32*)dst = intValue;
             dst += 4;
         }
-
+        
         count = size & 3;
         if (count != 0) {
             while (count--) {
@@ -1078,9 +1073,6 @@ void snd_memset(s8* dst, s32 size, s8 value) {
         }
     }
 }
-#else
-INCLUDE_ASM(s32, "2e230_len_2190", snd_memset);
-#endif
 
 void snd_bcopy(s8* src, s8* dest, s32 size) {
     if (size > 0) {

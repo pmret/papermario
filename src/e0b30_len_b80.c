@@ -3,7 +3,7 @@
 
 MusicSettings D_8014F6F0 = {
     .flags = 0,
-    .unk_02 = 0,
+    .state = 0,
     .fadeOutTime = -1,
     .fadeInTime = 0,
     .unk_0C = 0,
@@ -13,8 +13,9 @@ MusicSettings D_8014F6F0 = {
     .songName = -1,
     .battleSongID = 0,
     .battleVariation = 0,
-    .unk_28 = 0,
-    .unk_2C = 0
+    .savedSongID = 0,
+    .savedVariation = 0,
+    .savedSongName = 0
 };
 
 s32 gSongsUsingVariationFlag[] = {
@@ -26,7 +27,7 @@ s32 gSongsUsingVariationFlag[] = {
     SONG_NEW_PARTNER,
 };
 
-s16 D_8014F738 = 0;
+s16 gNextVolumeUpdateTimer = 0;
 
 void bgm_set_target_volume(s16 volume);
 
@@ -57,14 +58,14 @@ void bgm_reset_sequence_players(void) {
     }
 
     gMusicTargetVolume = 8;
-    gMusicUnkVolume2 = 8;
+    gMusicMaxVolume = 8;
     gMusicCurrentVolume = 8;
     func_800561A4(8);
 }
 
 void bgm_reset_volume(void) {
     gMusicTargetVolume = 8;
-    gMusicUnkVolume2 = 8;
+    gMusicMaxVolume = 8;
 }
 
 // Loop struct shenanigans
@@ -165,7 +166,7 @@ void bgm_update_music_settings(void) {
                                 snd_set_song_variation_fade(inner->songName, inner->variation, inner->fadeInTime, inner->unk_0C, inner->unk_0E);
                                 phi_s1->flags &= ~0x20;
                             } else {
-                                bgm_set_target_volume(gMusicUnkVolume);
+                                bgm_set_target_volume(gMusicDefaultVolume);
                             }
                             if (snd_start_song_variation(inner->songName, inner->variation) == 0) {
                                 phi_s1->flags |= 1;
@@ -228,11 +229,11 @@ s32 _bgm_set_song(s32 playerIndex, s32 songID, s32 variation, s32 fadeOutTime, s
         return 2;
     }
 
-    gMusicUnkVolume = volume;
+    gMusicDefaultVolume = volume;
     musicSetting->songID = songID;
     musicSetting->variation = variation;
     musicSetting->fadeOutTime = fadeOutTime;
-    musicSetting->unk_02 = 1;
+    musicSetting->state = 1;
     musicSetting->flags &= ~MUSIC_SETTINGS_FLAGS_2;
 
     return 1;
@@ -271,7 +272,7 @@ s32 func_8014A964(s32 playerIndex, s32 songID, s32 variation, s32 fadeInTime, s1
     musicSetting->songID = songID;
     musicSetting->variation = variation;
     musicSetting->flags |= MUSIC_SETTINGS_FLAGS_20;
-    musicSetting->unk_02 = 1;
+    musicSetting->state = 1;
     musicSetting->flags &= ~MUSIC_SETTINGS_FLAGS_2;
 
     return 1;
@@ -340,11 +341,11 @@ s32 bgm_init_music_players(void) {
 }
 
 void bgm_quiet_max_volume(void) {
-    gMusicUnkVolume2 = 4;
+    gMusicMaxVolume = 4;
 }
 
 void bgm_reset_max_volume(void) {
-    gMusicUnkVolume2 = 8;
+    gMusicMaxVolume = 8;
 }
 
 void bgm_set_target_volume(s16 volume) {
@@ -354,14 +355,14 @@ void bgm_set_target_volume(s16 volume) {
 void bgm_update_volume(void) {
     s16 toVolume;
 
-    if (D_8014F738 != 0) {
-        D_8014F738--;
+    if (gNextVolumeUpdateTimer != 0) {
+        gNextVolumeUpdateTimer--;
         return;
     }
 
     toVolume = gMusicTargetVolume;
-    if (toVolume > gMusicUnkVolume2) {
-        toVolume = gMusicUnkVolume2;
+    if (toVolume > gMusicMaxVolume) {
+        toVolume = gMusicMaxVolume;
     }
 
     if (gMusicCurrentVolume != toVolume) {
@@ -371,7 +372,7 @@ void bgm_update_volume(void) {
             gMusicCurrentVolume++;
         }
         func_800561A4(gMusicCurrentVolume);
-        D_8014F738 = 3;
+        gNextVolumeUpdateTimer = 3;
     }
 }
 
@@ -396,7 +397,7 @@ void bgm_pop_song(void) {
 
     if (gGameStatusPtr->demoState == 0) {
         musicSetting->flags |= MUSIC_SETTINGS_FLAGS_8;
-        _bgm_set_song(0, musicSetting->unk_24, musicSetting->unk_28, 0, 8);
+        _bgm_set_song(0, musicSetting->savedSongID, musicSetting->savedVariation, 0, 8);
     }
 }
 
@@ -404,9 +405,9 @@ void bgm_push_song(s32 songID, s32 variation) {
     MusicSettings* musicSetting = &gMusicSettings[0];
 
     if (gGameStatusPtr->demoState == 0) {
-        musicSetting->unk_24 = musicSetting->songID;
-        musicSetting->unk_28 = musicSetting->variation;
-        musicSetting->unk_2C = musicSetting->songName;
+        musicSetting->savedSongID = musicSetting->songID;
+        musicSetting->savedVariation = musicSetting->variation;
+        musicSetting->savedSongName = musicSetting->songName;
         musicSetting->flags |= MUSIC_SETTINGS_FLAGS_4;
         bgm_set_song(0, songID, variation, 500, 8);
     }
@@ -420,7 +421,7 @@ void bgm_pop_battle_song(void) {
             gOverrideFlags &= ~GLOBAL_OVERRIDES_20000;
         } else {
             musicSetting->flags |= MUSIC_SETTINGS_FLAGS_8;
-            _bgm_set_song(0, musicSetting->unk_24, musicSetting->unk_28, 0, 8);
+            _bgm_set_song(0, musicSetting->savedSongID, musicSetting->savedVariation, 0, 8);
             snd_ambient_80055590(0, 250);
         }
     }
@@ -431,9 +432,9 @@ void bgm_push_battle_song(void) {
 
     if (gGameStatusPtr->demoState == 0 && !(gOverrideFlags & GLOBAL_OVERRIDES_20000)) {
         snd_ambient_8005553C(0, 250);
-        musicSetting->unk_24 = musicSetting->songID;
-        musicSetting->unk_28 = musicSetting->variation;
-        musicSetting->unk_2C = musicSetting->songName;
+        musicSetting->savedSongID = musicSetting->songID;
+        musicSetting->savedVariation = musicSetting->variation;
+        musicSetting->savedSongName = musicSetting->songName;
         musicSetting->flags |= MUSIC_SETTINGS_FLAGS_4;
         bgm_set_song(0, musicSetting->battleSongID, musicSetting->battleVariation, 500, 8);
     }

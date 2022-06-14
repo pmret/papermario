@@ -194,7 +194,7 @@ s32 snd_ambient_80055464(s32 arg0, s32 arg1) {
     }
 }
 
-s32 snd_ambient_fade_out_800554A4(s32 arg0) {
+s32 snd_ambient_quick_fade_out(s32 arg0) {
     s32 ret = func_80050C30(arg0);
 
     if (ret == 0) {
@@ -204,7 +204,7 @@ s32 snd_ambient_fade_out_800554A4(s32 arg0) {
     return ret;
 }
 
-s32 snd_ambient_fade_out_800554E8(s32 arg0, s32 arg1) {
+s32 snd_ambient_slow_fade_out(s32 arg0, s32 arg1) {
     s32 ret = func_80050C30(arg0);
 
     if (ret == 0) {
@@ -302,9 +302,9 @@ s32 func_800557CC(s32 arg0) {
 
     for (i = 0; i < lim; i++) {
         if (i == D_80078DB6) {
-            phi_v1 = snd_ambient_fade_out_800554E8(i, arg0);
+            phi_v1 = snd_ambient_slow_fade_out(i, arg0);
         } else {
-            phi_v1 = snd_ambient_fade_out_800554A4(i);
+            phi_v1 = snd_ambient_quick_fade_out(i);
         }
 
         if (phi_v1 != 0) {
@@ -540,7 +540,7 @@ s32 func_80055CE8(s32 songName, s32* arg1, BGMPlayer** player);
 // We need to figure out what currentTrackData is a list of
 #ifdef NON_EQUIVALENT
 s32 func_80055CE8(s32 songName, s32* arg1, BGMPlayer** player) {
-    UnkAl19E0* temp_a3 = D_8009A5C0;
+    SndGlobals* temp_a3 = D_8009A5C0;
     s32 ret = 0;
 
     if (songName == temp_a3->currentTrackData[0][2]) {
@@ -703,7 +703,7 @@ s32 func_80056068(s32 arg0, u8 arg1) {
 }
 
 void func_8005608C(s32* arg0, s32* arg1) {
-    UnkAl19E0* temp_v0 = D_8009A5C0;
+    SndGlobals* temp_v0 = D_8009A5C0;
 
     *arg0 = temp_v0->unk_94;
     *arg1 = temp_v0->unk_98;

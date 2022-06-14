@@ -2,7 +2,7 @@
 
 extern s32 D_80078520;
 
-void func_80050B90(UnkAl834* arg0, s8 arg1, s8 arg2, UnkAl19E0* arg3) {
+void func_80050B90(UnkAl834* arg0, s8 arg1, s8 arg2, SndGlobals* arg3) {
     UnkAl1E4* temp_v0;
     s32 i;
     

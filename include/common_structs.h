@@ -700,7 +700,7 @@ typedef DynamicEntity* DynamicEntityList[MAX_DYNAMIC_ENTITIES];
 
 typedef struct MusicSettings {
     /* 0x00 */ u16 flags;
-    /* 0x02 */ s16 unk_02;
+    /* 0x02 */ s16 state;
     /* 0x04 */ s32 fadeOutTime;
     /* 0x08 */ s32 fadeInTime;
     /* 0x0C */ s16 unk_0C;
@@ -710,9 +710,9 @@ typedef struct MusicSettings {
     /* 0x18 */ s32 songName;
     /* 0x1C */ s32 battleSongID;
     /* 0x20 */ s32 battleVariation;
-    /* 0x24 */ s32 unk_24;
-    /* 0x28 */ s32 unk_28;
-    /* 0x2C */ s32 unk_2C;
+    /* 0x24 */ s32 savedSongID;
+    /* 0x28 */ s32 savedVariation;
+    /* 0x2C */ s32 savedSongName;
 } MusicSettings; // size = 0x30
 
 typedef struct UiStatus {

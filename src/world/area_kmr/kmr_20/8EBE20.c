@@ -7,4 +7,7 @@ static char* N(exit_str_3) = "kmr_02";
 static char* N(exit_str_4) = "mac_00\0\0";
 static char* N(exit_str_5) = "";
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8EBE20", func_80240000_8EBE20);
+ApiStatus func_80240000_8EBE20(Evt* script, s32 isInitialCall) {
+    snd_ambient_slow_fade_out(0, 500);
+    return ApiStatus_DONE2;
+}

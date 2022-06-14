@@ -202,8 +202,8 @@ glabel func_8004C884
 /* 27F50 8004CB50 00021080 */  sll       $v0, $v0, 2
 /* 27F54 8004CB54 00551021 */  addu      $v0, $v0, $s5
 /* 27F58 8004CB58 8C420000 */  lw        $v0, ($v0)
-/* 27F5C 8004CB5C 3C01800A */  lui       $at, %hi(D_8009A5D4)
-/* 27F60 8004CB60 AC22A5D4 */  sw        $v0, %lo(D_8009A5D4)($at)
+/* 27F5C 8004CB5C 3C01800A */  lui       $at, %hi(CurrentSEFCmdHandler)
+/* 27F60 8004CB60 AC22A5D4 */  sw        $v0, %lo(CurrentSEFCmdHandler)($at)
 /* 27F64 8004CB64 0040F809 */  jalr      $v0
 /* 27F68 8004CB68 0200282D */   daddu    $a1, $s0, $zero
 .L8004CB6C:

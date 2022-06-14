@@ -7,7 +7,7 @@
 #define ALIGN16_(val) (((val) + 0xF) & 0xFFF0)
 
 struct BGMPlayer;
-struct UnkAl19E0;
+struct SndGlobals;
 struct UnkAl48;
 
 typedef void (*UnkFuncAl)(void);
@@ -20,13 +20,9 @@ typedef union UnkField {
     s32 s32;
 } UnkField;
 
-typedef union X16 {
-    u8 u8[2];
-    u16 u16;
-} X16;
-
 typedef union SeqArgs {
     u8 u8[4];
+    s8 s8[4];
     u16 u16[2];
     u32 u32;
 } SeqArgs;
@@ -180,7 +176,9 @@ typedef struct SoundLerp {
 
 typedef struct SoundPlayer {
     /* 0x00 */ s8* sefDataReadPos;
-    /* 0x04 */ char unk_04[0x14];
+    /* 0x04 */ char pad4[0xC];
+    /* 0x10 */ s32* unk10;
+    /* 0x14 */ char pad14[4];
     /* 0x18 */ s32 unk_18;
     /* 0x1C */ Instrument* sfxInstrumentRef;
     /* 0x20 */ Instrument sfxInstrument;
@@ -240,7 +238,7 @@ typedef struct SoundSefHeader {
 } SoundSefHeader; // size = 0x22
 
 typedef struct SoundManager {
-    /* 0x000 */ struct UnkAl19E0* soundData;
+    /* 0x000 */ struct SndGlobals* soundData;
     /* 0x004 */ struct UnkAl48* unk_04;
     /* 0x008 */ s32* sefData;
     /* 0x00C */ s32* normalSounds[8];
@@ -426,7 +424,7 @@ typedef struct SoundBank {
     /* 0x010 */ char unk_0F[0x831];
 } SoundBank; // size = 0x840
 
-typedef struct UnkAl19E0 {
+typedef struct SndGlobals {
     /* 0x0000 */ f32 actualFrequency;
     /* 0x0004 */ Instrument* defaultInstrument;
     /* 0x0008 */ UnkAlC unk_08;
@@ -474,7 +472,7 @@ typedef struct UnkAl19E0 {
     /* 0x1310 */ SoundBank* banks[3];
     /* 0x131C */ char unk_131C[4];
     /* 0x1320 */ UnkAl48 unk_1320[24];
-} UnkAl19E0; // size = 0x19E0
+} SndGlobals; // size = 0x19E0
 
 typedef struct BGMPlayerTrack {
     /* 0x00 */ u32 bgmReadPos;
@@ -533,7 +531,7 @@ typedef struct UnkAl24 {
 } UnkAl24; // size = 0x18;
 
 typedef struct BGMPlayer {
-    /* 0x000 */ UnkAl19E0* data;
+    /* 0x000 */ SndGlobals* data;
     /* 0x004 */ SoundManager* soundManager;
     /* 0x008 */ s32 unkFrequency; //?
     /* 0x00C */ s32 unk_0C;
@@ -649,7 +647,7 @@ typedef struct UnkAl1E4 {
 
 //TODO possibly AmbientSoundManager
 typedef struct UnkAl834 {
-    /* 0x000 */ UnkAl19E0* unk_00;
+    /* 0x000 */ SndGlobals* unk_00;
     /* 0x004 */ s32 unk_04;
     /* 0x008 */ s32 unk_08;
     /* 0x00C */ s32 unk_0C;
@@ -707,7 +705,7 @@ extern s16 D_80078E5A;
 extern s8 D_80078E5C;
 extern s32* D_8007F1F8[1]; // points to 80078290
 
-extern UnkAl19E0* D_8009A5C0;
+extern SndGlobals* D_8009A5C0;
 extern BGMPlayer* D_8009A5CC;
 extern BGMPlayer* D_8009A5FC;
 extern UnkFuncAl D_8009A5E8;
@@ -724,9 +722,9 @@ extern s8 D_800A3FEC;
 extern s16 D_800A3FEE;
 extern s32 D_800A3FF0;
 
-void snd_load_BK_headers(UnkAl19E0* arg0, ALHeap*);
+void snd_load_BK_headers(SndGlobals* arg0, ALHeap*);
 
-void func_8004B440(SoundManager*, u8, u8, UnkAl19E0*, u8);
+void func_8004B440(SoundManager*, u8, u8, SndGlobals*, u8);
 void snd_load_sfx_groups_from_SEF(SoundManager*);
 void snd_clear_sfx_queue(SoundManager*);
 void snd_enqueue_sfx_event(SoundManager*, s32, s16, s16, u8);
@@ -741,8 +739,8 @@ s32 func_8004DA0C(UNK_TYPE);
 void func_8004DAA8(BGMPlayer*);
 s32 func_8004DB28(BGMPlayer*);
 void func_8004DC80(s32);
-void func_8004DFD4(UnkAl19E0*);
-void func_8004E158(BGMPlayer*, s32, s32, UnkAl19E0*);
+void func_8004DFD4(SndGlobals*);
+void func_8004E158(BGMPlayer*, s32, s32, SndGlobals*);
 void func_8004E344(BGMPlayer*, u8*);
 void snd_update_bgm_fade(BGMPlayer*);
 void func_8004E444(BGMPlayer*);
@@ -782,7 +780,7 @@ void func_80050818(BGMPlayer*, s32);
 void func_8005087C(BGMPlayer*, s32*, s32);
 s32 func_80056068(s32, u8);
 s32 func_800506C8(s32, s32);
-void func_80050B90(UnkAl834*, s8, s8, UnkAl19E0*);
+void func_80050B90(UnkAl834*, s8, s8, SndGlobals*);
 s32 func_80050C30(u32);
 void func_80050D50(UnkAl1E4*);
 void func_800511BC(UnkAl834*);
@@ -792,23 +790,23 @@ void func_800521E8(UnkAl834*, UnkAl1E4*);
 void func_800522A8(UnkAl834*, UnkAl1E4*);
 void func_8005232C(UnkAl834*, UnkAl1E4*);
 
-void func_800525A0(UnkAl19E0*);
-void func_80052614(UnkAl19E0*);
-void func_80052660(UnkAl19E0*);
+void func_800525A0(SndGlobals*);
+void func_80052614(SndGlobals*);
+void func_80052660(SndGlobals*);
 void func_80052B44(UnkAl48*);
 void func_80052BF8(UnkAl48*, s32*);
 
 void snd_reset_instrument(Instrument*);
 void func_80053370(UnkAlC*);
 void func_800533A8(InstrumentCFG*);
-void func_80053654(UnkAl19E0*);
+void func_80053654(SndGlobals*);
 void snd_initialize_bgm_fade(Fade*, s32, s32, s16);
 void snd_clear_bgm_fade(Fade*);
 void func_80053A28(Fade*);
 void func_80053A98(u8, u16, s32);
 void func_80053AEC(Fade*, s16);
 void func_80053BA8(Fade*);
-Instrument* func_80053BE8(UnkAl19E0*, u32, u32, s32**);
+Instrument* func_80053BE8(SndGlobals*, u32, u32, s32**);
 s32 snd_load_BK(s32, s32);
 void func_80054CE0(s32, s32);
 
@@ -849,10 +847,10 @@ void func_80057EB0(void);
 void func_80057ED0(s16);
 
 SoundBank* snd_load_BK_to_bank(s32 bkFileOffset, SoundBank* bank, s32 bankIndex, s32 bankGroup);
-void snd_load_INIT(UnkAl19E0*, s32, ALHeap*);
+void snd_load_INIT(SndGlobals*, s32, ALHeap*);
 s32 snd_fetch_SBN_file(u32, s32, SBNFileEntry*);
-void snd_load_PER(UnkAl19E0*, s32);
-void snd_load_PRG(UnkAl19E0*, s32);
+void snd_load_PER(SndGlobals*, s32);
+void snd_load_PRG(SndGlobals*, s32);
 void snd_read_rom(s32, void*, u32);
 void snd_copy_words(void*, void*, s32);
 

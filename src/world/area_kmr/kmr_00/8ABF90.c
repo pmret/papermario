@@ -45,7 +45,7 @@ ApiStatus func_802405A8_8AC538(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus func_802405CC_8AC55C(Evt* script, s32 isInitialCall) {
-    snd_ambient_fade_out_800554E8(0, 1000);
+    snd_ambient_slow_fade_out(0, 1000);
     return ApiStatus_DONE2;
 }
 
