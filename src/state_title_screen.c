@@ -143,7 +143,7 @@ void state_init_title_screen(void) {
 
 void state_step_title_screen(void) {
     s16* temp;
-    u32 pressedButtons = gGameStatusPtr->pressedButtons;
+    u32 pressedButtons = gGameStatusPtr->pressedButtons[0];
 
     set_curtain_scale(1.0f);
     set_curtain_fade(0.0f);

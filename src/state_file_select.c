@@ -8,15 +8,15 @@
 s32 D_80077980[] = { &D_8038F800, &D_803B5000, &heap_battleHead, };
 
 NUPiOverlaySegment D_8007798C = {
-    .romStart = _163400_ROM_START,
-    .romEnd = _163400_ROM_END,
-    .ramStart = _163400_VRAM,
-    .textStart = _163400_TEXT_START,
-    .textEnd = _163400_TEXT_END,
-    .dataStart = _163400_DATA_START,
-    .dataEnd = _163400_DATA_END,
-    .bssStart = _163400_BSS_START,
-    .bssEnd = _163400_BSS_END,
+    .romStart = filemenu_ROM_START,
+    .romEnd = filemenu_ROM_END,
+    .ramStart = filemenu_VRAM,
+    .textStart = filemenu_TEXT_START,
+    .textEnd = filemenu_TEXT_END,
+    .dataStart = filemenu_DATA_START,
+    .dataEnd = filemenu_DATA_END,
+    .bssStart = filemenu_BSS_START,
+    .bssEnd = filemenu_BSS_END,
 };
 
 u8 D_800779B0 = 0;

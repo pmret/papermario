@@ -2,12 +2,12 @@
 #include "ld_addrs.h"
 #include "mips.h"
 
-extern s32 D_80026AC7[];
+extern s32 obfuscated_load_engine_data[];
 
 void func_80200080(void) {
     s32 seed = 0x3C01A775;
     u32 thisInsn = 0xB0018FFC;
-    HeapNode*(*load_engine_data)(s32) = D_80026AC7; // load_engine_data - ????????
+    HeapNode*(*load_engine_data)(s32) = obfuscated_load_engine_data; // load_engine_data - ????????
     s32 hash = 0;
     u32 prevInsn;
     u32* it;

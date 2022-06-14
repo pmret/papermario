@@ -7,11 +7,6 @@
 #include "macros.h"
 #include "enums.h"
 
-extern UiStatus gUIStatus;
-extern PlayerData gPlayerData;
-extern s8 gPlayerActionState;
-extern s32 gPlayerAnimation;
-extern PlayerStatus gPlayerStatus;
 extern PlayerStatus* gPlayerStatusPtr;
 extern CollisionStatus gCollisionStatus;
 extern GameStatus gGameStatus;
@@ -211,8 +206,6 @@ extern f32 D_8010C990;
 extern s32 D_8010C978;
 extern Vec3s btl_actorHomePositions[];
 
-extern PartnerActionStatus gPartnerActionStatus; // something with partners
-extern PlayerSpinState gPlayerSpinState; // sfx_play_sound state struct?
 
 extern SaveData gCurrentSaveFile;
 
@@ -378,5 +371,11 @@ extern s32 D_802EC370[];
 extern s32 D_802EC390[];
 extern s32 D_802EC3B0[];
 extern s32 D_802EC3D0[];
+
+extern PartnerActionStatus gPartnerActionStatus; // something with partners
+extern UiStatus gUIStatus;
+extern PlayerStatus gPlayerStatus;
+extern PlayerSpinState gPlayerSpinState;
+extern PlayerData gPlayerData;
 
 #endif

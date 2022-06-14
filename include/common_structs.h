@@ -108,6 +108,13 @@ typedef struct DmaTable {
     /* 0x08 */ s32 dmaDest;
 } DmaTable;
 
+typedef struct UseItemStruct {
+    /* 0x00 */ u8* dmaStart;
+    /* 0x04 */ u8* dmaEnd;
+    /* 0x08 */ EvtScript* script;
+    /* 0x0C */ s32 unk_0C;
+} UseItemStruct;
+
 typedef struct PartnerData {
     /* 0x00 */ u8 enabled;
     /* 0x01 */ s8 level;
@@ -1436,22 +1443,17 @@ typedef struct ShopSellPriceData {
 } ShopSellPriceData; // size = 0xC
 
 typedef struct GameStatus {
-    /* 0x000 */ u32 currentButtons;
-    /* 0x004 */ u32 altCurrentButtons; /* input used for batte when flag 80000 set */
+    /* 0x000 */ u32 currentButtons[2];
     /* 0x008 */ char unk_08[8];
-    /* 0x010 */ u32 pressedButtons; /* bits = 1 for frame of button press */
-    /* 0x014 */ u32 altPressedButtons; /* input used for batte when flag 80000 set */
+    /* 0x010 */ u32 pressedButtons[2]; /* bits = 1 for frame of button press */
     /* 0x018 */ char unk_18[8];
-    /* 0x020 */ u32 heldButtons; /* bits = 1 every 4th frame during hold */
-    /* 0x024 */ u32 altHeldButtons; /* input used for batte when flag 80000 set */
+    /* 0x020 */ u32 heldButtons[2]; /* bits = 1 every 4th frame during hold */
     /* 0x028 */ char unk_28[8];
     /* 0x030 */ u32 prevButtons; /* from previous frame */
     /* 0x034 */ char unk_34[12];
-    /* 0x040 */ s8 stickX; /* with deadzone */
-    /* 0x041 */ s8 altStickX; /* input used for batte when flag 80000 set */
+    /* 0x040 */ s8 stickX[2]; /* with deadzone */
     /* 0x042 */ char unk_42[2];
-    /* 0x044 */ s8 stickY; /* with deadzone */
-    /* 0x045 */ s8 altStickY; /* input used for batte when flag 80000 set */
+    /* 0x044 */ s8 stickY[2]; /* with deadzone */
     /* 0x046 */ char unk_46[2];
     /* 0x048 */ s16 unk_48[4];
     /* 0x050 */ s16 unk_50[4];
@@ -2284,6 +2286,13 @@ typedef struct PartnerActionStatus {
     /* 0x35C */ char unk_35C[0x4];
 } PartnerActionStatus; // size = 0x360
 
+typedef struct SpriteRasterInfo {
+    /* 0x00 */ void* raster;
+    /* 0x04 */ void* defaultPal;
+    /* 0x08 */ s32 width;
+    /* 0x0C */ s32 height;
+} SpriteRasterInfo; // size = 0x10
+
 typedef struct EntityModel {
     /* 0x00 */ s32 flags;
     /* 0x04 */ s8 renderMode;
@@ -2293,12 +2302,15 @@ typedef struct EntityModel {
     /* 0x08 */ f32 nextFrameTime; ///< Set to 1.0 after each update
     /* 0x0C */ f32 timeScale; ///< Default is 1.0
     /* 0x10 */ s32* cmdListReadPos;
-    /* 0x14 */ Gfx* displayList;
+    /* 0x14 */ union {
+                    Gfx* displayList;
+                    SpriteRasterInfo* imageData;
+               } gfx;
     /* 0x18 */ Mtx transform;
     /* 0x58 */ s32* cmdListSavedPos;
-    /* 0x5C */ Vtx* vertexArray;
-    /* 0x60 */ UNK_FUN_PTR(fpSetupGfxCallback);
-    /* 0x64 */ s32 setupGfxCallbackArg0;
+    /* 0x5C */ Vec3s* vertexArray;
+    /* 0x60 */ void (*fpSetupGfxCallback)(void*);
+    /* 0x64 */ void* setupGfxCallbackArg0;
 } EntityModel; // size = 0x68
 
 typedef EntityModel* EntityModelList[MAX_ENTITY_MODELS];
@@ -2438,6 +2450,22 @@ typedef struct FoldImageRecPart {
     /* 0x10 */ u8 unk_10;
     /* 0x11 */ char unk_11[0x7];
 } FoldImageRecPart; // size = 0x18
+
+typedef struct FoldImageRec {
+    /* 0x00 */ s8* raster;
+    /* 0x04 */ s8* palette;
+    /* 0x08 */ u16 width;
+    /* 0x0A */ u16 height;
+    /* 0x0C */ s16 xOffset;
+    /* 0x0E */ s16 yOffset;
+    /* 0x10 */ u8 unk_10;
+    /* 0x11 */ char unk_11[0x7];
+    /* 0x18 */ s16 unk_18;
+    /* 0x1A */ char unk_1A[0x4];
+    /* 0x1E */ s16 unk_1E;
+    /* 0x20 */ char unk_20[0x4];
+    /* 0x24 */ u8 alphaMultiplier;
+} FoldImageRec; // size = 0x25
 
 typedef struct SongUpdateEvent {
     /* 0x00 */ s32 songName;

@@ -24,7 +24,9 @@ SN64 = Compiler(
     c_newline="\r\n",
 )
 
-compiler_for_name = {"GCC": GCC, "SN64": SN64}
+IDO = Compiler("IDO")
+
+compiler_for_name = {"GCC": GCC, "SN64": SN64, "IDO": IDO}
 
 
 def for_name(name: str) -> Compiler:

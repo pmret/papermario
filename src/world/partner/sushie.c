@@ -57,7 +57,7 @@ void func_802BD20C_31DF7C(f32* arg0, f32* arg1) {
 
     D_802BFDB0_320B20 = temp_f0;
     D_802BFDB4_320B24 = temp_f2;
-    temp_f22 = clamp_angle(atan2(0.0f, 0.0f, temp_f0, -temp_f2) + gCameras->currentYaw);
+    temp_f22 = clamp_angle(atan2(0.0f, 0.0f, temp_f0, -temp_f2) + gCameras[CAM_DEFAULT].currentYaw);
     phi_f20 = 0.0f;
 
     if (dist2D(0.0f, 0.0f, D_802BFDB0_320B20, -D_802BFDB4_320B24) >= 1.0) {

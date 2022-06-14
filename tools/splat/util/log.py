@@ -31,13 +31,6 @@ def parsing_error_preamble(path, line_num, line):
     write(f"\t{line}")
 
 
-def dot(status: Status = None):
-    global newline
-
-    print(status_to_ansi(status) + ".", end="")
-    newline = False
-
-
 def status_to_ansi(status: Status):
     if status == "ok":
         return Fore.GREEN

@@ -1,7 +1,7 @@
 #include "common.h"
 #include "effects_internal.h"
 
-extern Gfx D_09000E08[];
+extern Gfx D_09000E08_32DCC8[];
 
 void flower_splash_init(EffectInstance* effect);
 void flower_splash_update(EffectInstance* effect);
@@ -147,7 +147,7 @@ void flower_splash_appendGfx(void* effect) {
 
     for (i = 0; i < effectTemp->numParts; i++, data++) {
         if (data->unk_00 != 0) {
-            Gfx* dlist = D_09000E08;
+            Gfx* dlist = D_09000E08_32DCC8;
 
             gDisplayContext->matrixStack[gMatrixListPos] = data->unk_30;
 

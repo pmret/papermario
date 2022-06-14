@@ -30,7 +30,7 @@ ApiStatus CheckActionState(Evt* script, s32 isInitialCall) {
     Bytecode a0 = *args++;
     s32 var = evt_get_float_variable(script, *args++);
 
-    evt_set_variable(script, a0, gPlayerActionState == var);
+    evt_set_variable(script, a0, gPlayerStatus.actionState == var);
     return ApiStatus_DONE2;
 }
 

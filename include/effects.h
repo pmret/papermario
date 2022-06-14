@@ -65,7 +65,7 @@ enum EffectID {
     EFFECT_ENERGY_SHOCKWAVE,
     EFFECT_SHIMMER_WAVE,
     EFFECT_AURA,
-    EFFECT_3C,
+    EFFECT_BULB_GLOW,
     EFFECT_3D,
     EFFECT_BLAST,
     EFFECT_FIRE_FLOWER,
@@ -434,6 +434,11 @@ typedef struct AttackResultTextFXData {
     /* 0x34 */ f32 unk_34;
 } AttackResultTextFXData; // size = 0x38
 
+typedef struct GotItemOutlineFXData {
+    /* 0x00 */ char unk_00[0x14];
+    /* 0x14 */ s32 unk_14;
+} GotItemOutlineFXData; // size = ???
+
 typedef struct SmallGoldSparkleFXData {
     /* 0x00 */ s32 unk_00;
     /* 0x04 */ s32 unk_04;
@@ -775,6 +780,14 @@ typedef struct ButterflyFXData {
     /* 0x44 */ f32 unk_44;
 } ButterflyFXData; // size = 0x48
 
+typedef struct IceShardFXData {
+    /* 0x00 */ char unk_00[0x4C];
+    /* 0x4C */ f32 unk_4C;
+    /* 0x50 */ f32 unk_50;
+    /* 0x54 */ f32 unk_54;
+    /* 0x58 */ f32 unk_58;
+} IceShardFXData; // size = ?
+
 typedef struct Effect46FXData {
     /* 0x00 */ char unk_00[0x24];
     /* 0x04 */ s32 unk_24;
@@ -784,6 +797,13 @@ typedef struct ThunderboltRingFXData {
     /* 0x00 */ char unk_00[0x30];
     /* 0x30 */ s32 unk_30;
 } ThunderboltRingFXData; // size = ?
+
+typedef struct BulbGlowFXData {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ Vec3f pos;
+    /* 0x10 */ char unk_10[0x4];
+    /* 0x14 */ s32 unk_14;
+} BulbGlowFXData; // size = ?
 
 // fx_quizmo_stage
 typedef struct EffectDataQuizStage {
@@ -961,7 +981,7 @@ EffectInstance* fx_shimmer_burst(s32, f32, f32, f32, f32, s32);
 EffectInstance* fx_energy_shockwave(s32, f32, f32, f32, f32, s32);
 EffectInstance* fx_shimmer_wave(s32, f32, f32, f32, f32, f32, s32, s32);
 void fx_aura(s32, f32, f32, f32, f32, EffectInstance**);
-EffectInstance* fx_3C(s32, f32, f32, f32, f32, s32*);
+EffectInstance* fx_bulb_glow(s32, f32, f32, f32, f32, EffectInstance**);
 void fx_3D(s32, f32, f32, f32, f32, f32, f32, s32, s32*);
 EffectInstance* fx_blast(s32, f32, f32, f32, f32, s32);
 EffectInstance* fx_fire_flower(s32, f32, f32, f32, s32);

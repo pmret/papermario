@@ -3,6 +3,7 @@ from segtypes.common.codesubsegment import CommonSegCodeSubsegment
 from segtypes.common.group import CommonSegGroup
 from pathlib import Path
 from typing import List, Optional
+import rabbitizer
 from util.symbols import Symbol
 from util import floats, options
 
@@ -80,13 +81,15 @@ class CommonSegData(CommonSegCodeSubsegment, CommonSegGroup):
                         new_sym_ram_start = self.get_most_parent().rom_to_ram(
                             new_sym_rom_start
                         )
-                        sym.size = new_sym_rom_start - sym.rom
+                        assert sym.rom is not None
+                        assert new_sym_ram_start is not None
+                        sym.given_size = new_sym_rom_start - sym.rom
 
                         # It turns out this isn't a valid jump table, so create a new symbol where it breaks
                         syms.insert(
                             i + 1,
-                            self.get_most_parent().create_symbol(
-                                new_sym_ram_start, define=True, local_only=True
+                            self.create_symbol(
+                                new_sym_ram_start, True, define=True, local_only=True
                             ),
                         )
                         return False
@@ -102,12 +105,13 @@ class CommonSegData(CommonSegCodeSubsegment, CommonSegGroup):
         endian = options.get_endianess()
 
         # Find inter-data symbols
+        assert isinstance(self.rom_start, int) and isinstance(self.rom_end, int)
         for i in range(self.rom_start, self.rom_end, 4):
             bits = int.from_bytes(rom_bytes[i : i + 4], endian)
             if self.contains_vram(bits):
                 symset.add(
-                    self.get_most_parent().create_symbol(
-                        bits, define=True, local_only=True
+                    self.create_symbol(
+                        bits, in_segment=True, define=True, local_only=True
                     )
                 )
 
@@ -123,12 +127,13 @@ class CommonSegData(CommonSegCodeSubsegment, CommonSegGroup):
         if len(ret) == 0 or ret[0].vram_start != self.vram_start:
             ret.insert(
                 0,
-                self.get_most_parent().create_symbol(
-                    self.vram_start, define=True, local_only=True
+                self.create_symbol(
+                    self.vram_start, in_segment=True, define=True, local_only=True
                 ),
             )
 
         # Make a dummy symbol here that marks the end of the previous symbol's disasm range
+        assert self.vram_end is not None
         ret.append(Symbol(self.vram_end))
 
         while True:
@@ -231,6 +236,10 @@ class CommonSegData(CommonSegCodeSubsegment, CommonSegGroup):
         if not jtbl_func:
             return False
 
+        # A label of a jump table shouldn't point to the start of the function
+        if word == jtbl_func.vram_start:
+            return False
+
         for i in range(4, len(bytes), 4):
             word = int.from_bytes(bytes[i : i + 4], options.get_endianess())
 
@@ -239,6 +248,10 @@ class CommonSegData(CommonSegCodeSubsegment, CommonSegGroup):
                 # Allow jump tables that are of a minimum length and end in 0s
                 if i < min_jtbl_len or any(b != 0 for b in bytes[i:]):
                     return False
+
+            # A label of a jump table shouldn't point to the start of the function
+            if word == jtbl_func.vram_start:
+                return False
 
         # Mark this symbol as a jump table and record the jump table for later
         sym.type = "jtbl"
@@ -287,14 +300,13 @@ class CommonSegData(CommonSegCodeSubsegment, CommonSegGroup):
                 if bits == 0:
                     byte_str = "0"
                 else:
-                    rom_addr = self.get_most_parent().ram_to_rom(bits)
-
-                    if rom_addr:
-                        byte_str = f"L{bits:X}_{rom_addr:X}"
+                    sym = self.get_symbol(bits, True)
+                    if sym is not None:
+                        byte_str = sym.name
                     else:
                         byte_str = f"0x{bits:X}"
             elif slen == 4 and bits >= 0x80000000:
-                sym = self.get_most_parent().get_symbol(bits, reference=True)
+                sym = self.get_symbol(bits, reference=True)
                 if sym:
                     byte_str = sym.name
                 else:
@@ -336,12 +348,13 @@ class CommonSegData(CommonSegCodeSubsegment, CommonSegGroup):
 
         for i in range(len(syms) - 1):
             mnemonic = syms[i].access_mnemonic
-            sym = self.get_most_parent().create_symbol(
-                syms[i].vram_start, define=True, local_only=True
+            sym = self.create_symbol(
+                syms[i].vram_start, in_segment=True, define=True, local_only=True
             )
 
             dis_start = self.get_most_parent().ram_to_rom(syms[i].vram_start)
             dis_end = self.get_most_parent().ram_to_rom(syms[i + 1].vram_start)
+            assert dis_start is not None and dis_end is not None
             sym_len = dis_end - dis_start
 
             if self.type == "bss":
@@ -350,7 +363,10 @@ class CommonSegData(CommonSegCodeSubsegment, CommonSegGroup):
                 sym_bytes = rom_bytes[dis_start:dis_end]
 
                 # Checking if the mnemonic is addiu may be too picky - we'll see
-                if self.is_valid_ascii(sym_bytes) and mnemonic == "addiu":
+                if (
+                    self.is_valid_ascii(sym_bytes)
+                    and mnemonic == rabbitizer.InstrId.cpu_addiu
+                ):
                     stype = "ascii"
                 elif sym.type == "jtbl":
                     stype = "jtbl"
@@ -396,7 +412,7 @@ class CommonSegData(CommonSegCodeSubsegment, CommonSegGroup):
                 # Hint to the user that we are now in the .rodata section and no longer in the .data section (assuming rodata follows data)
                 if (
                     not rodata_encountered
-                    and mnemonic == "jtbl"
+                    and stype == "jtbl"
                     and self.get_most_parent().rodata_follows_data
                 ):
                     rodata_encountered = True

@@ -125,7 +125,7 @@ void func_802A928C_427CFC(void) {
                 }
             }
 
-            if (battleStatus->currentButtonsPressed & 0x8000) {
+            if (battleStatus->currentButtonsPressed & BUTTON_A) {
                 switch(actionCommandStatus->unk_64) {
                     case 0: {
                         s32 fillOffset = battleStatus->unk_434[actionCommandStatus->unk_50] * 235 * 4;

@@ -1,27 +1,37 @@
 #include "common.h"
 #include "effects.h"
 #include "hud_element.h"
+#include "pause/pause_common.h"
+#include "world/partners.h"
 #include "sparkle_script.h"
 
 #define MAX_ITEM_ENTITIES 256
 
+extern SparkleScript SparkleScript_Coin;
+
+extern Lights1 D_8014C6C8;
+
 extern s32 ItemEntitiesCreated;
+extern s32 D_80155D80;
 extern s32 ItemEntityAlternatingSpawn;
 extern s32 ItemEntityRenderGroup;
+extern s16 D_80155D8C;
+extern s16 D_80155D8E;
+extern s16 D_80155D90;
 extern ItemEntity* WorldItemEntities[MAX_ITEM_ENTITIES];
 extern ItemEntity* BattleItemEntities[MAX_ITEM_ENTITIES];
 extern ItemEntity** gCurrentItemEntities;
 extern s16 isPickingUpItem;
-extern s32 D_80155D80;
-extern s16 D_80155D8C;
-extern s16 D_80155D8E;
-extern s16 D_80155D90;
 extern s16 D_801565A6;
 extern s16 D_801565A8;
+extern PopupMenu D_801565B0;
 extern s32 D_801568E0;
+extern s32 D_801568E4;
+extern s32 D_801568E8;
 extern s32 D_801568EC;
-
-extern SparkleScript SparkleScript_Coin;
+extern EffectInstance* D_801568F0;
+extern MessagePrintState* D_801568F4;
+extern s32 D_801568F8;
 
 void item_entity_load(ItemEntity*);
 void item_entity_update(ItemEntity*);
@@ -239,7 +249,6 @@ void draw_coin_sparkles(ItemEntity* itemEntity) {
 
     gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
     gDPPipeSync(gMasterGfxPos++);
-
 }
 
 ItemEntity* get_item_entity(s32 itemEntityIndex) {
@@ -884,7 +893,151 @@ void func_80133A94(s32 idx, s32 itemID) {
     item_entity_load(item);
 }
 
+// float/stack crap
+#ifdef NON_EQUIVALENT
+s32 test_item_player_collision(ItemEntity* item) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
+    EncounterStatus* encounterStatus = &gCurrentEncounter;
+    Camera* camera = &gCameras[gCurrentCameraID];
+    s32 actionState;
+    f32 t;
+    f32 itemX;
+    f32 itemY;
+    f32 itemZ;
+    f32 playerX;
+    f32 playerY;
+    f32 playerZ;
+
+    f32 sp10;
+    f32 sp14;
+    f32 sp1C;
+    f32 sp20;
+    f32 sp24;
+    f32 zDiff;
+    f32 temp_f14;
+    f32 xDiff;
+    f32 angle;
+    s32 cond;
+    f32 f1;
+
+
+    actionState = playerStatus->actionState;
+
+    if (item->flags & 0x100) {
+        item->flags &= ~0x100;
+        return TRUE;
+    }
+
+    if (gGameState != 2 && gGameState != 0) {
+        return FALSE;
+    }
+
+    if (encounterStatus->hitType == 5) {
+        return FALSE;
+    }
+
+    if (item->flags & 0x200000) {
+        return FALSE;
+    }
+
+    if (isPickingUpItem) {
+        return FALSE;
+    }
+
+    if (item->flags & 0x40) {
+        return FALSE;
+    }
+
+    if (get_time_freeze_mode() != 0) {
+        return FALSE;
+    }
+
+    if (partnerActionStatus->partnerActionState != 0 && partnerActionStatus->actingPartner == 9) {
+        return FALSE;
+    }
+
+    if ((actionState == 0x1D || actionState == 0x1E || actionState == 0x1F) && item->itemID != ITEM_COIN) {
+        return FALSE;
+    }
+
+    if (gOverrideFlags & 0x200000) {
+        return FALSE;
+    }
+
+    cond = FALSE;
+    sp1C = playerStatus->colliderHeight / 2;
+    playerX = playerStatus->position.x;
+    playerY = playerStatus->position.y;
+    playerZ = playerStatus->position.z;
+
+    sp20 = playerStatus->colliderDiameter / 4;
+    if (playerStatus->spriteFacingAngle < 180.0f) {
+        temp_f14 = clamp_angle(camera->currentYaw - 90.0f);
+    } else {
+        temp_f14 = clamp_angle(camera->currentYaw + 90.0f);
+    }
+    sp10 = playerX;
+    sp24 = playerY;
+    sp14 = playerZ;
+    if (get_clamped_angle_diff(camera->currentYaw, temp_f14) < 0.0f) {
+        angle = clamp_angle(camera->currentYaw - 90.0f);
+        if (playerStatus->trueAnimation & 0x01000000) {
+            angle = clamp_angle(angle + 30.0f);
+        }
+    } else {
+        angle = clamp_angle(camera->currentYaw + 90.0f);
+        if (playerStatus->trueAnimation & 0x01000000) {
+            angle = clamp_angle(angle - 30.0f);
+        }
+    }
+    add_vec2D_polar(&sp10, &sp14, 24.0f, angle);
+    itemX = item->position.x;
+    itemY = item->position.y;
+    itemZ = item->position.z;
+    t = 13.5f;
+    xDiff = itemX - playerX;
+    zDiff = itemZ - playerZ;
+    f1 = sqrtf(SQ(xDiff) + SQ(zDiff));
+    if (!(sp20 + t <= f1) &&
+        !(itemY + 27.0f < playerY) &&
+        !(playerY + sp1C < itemY))
+    {
+        cond = TRUE;
+    }
+
+    if (playerStatus->actionState == 0x12 && (playerStatus->flags & 0x01000000)) {
+        xDiff = itemX - sp10;
+        zDiff = itemZ - sp14;
+        f1 = sqrtf(SQ(xDiff) + SQ(zDiff));
+        if (!(14.0f + t <= f1) &&
+            !(itemY + 27.0f < sp24) &&
+            !(sp24 + 18.0f < itemY))
+        {
+            cond = TRUE;
+        }
+    }
+
+    if (cond) {
+        if (item->flags & 0x80) {
+            if (D_801565A6 != 0) {
+                D_801565A6--;
+                return FALSE;
+            } else {
+                item->flags &= ~0x80;
+            }
+        }
+        return TRUE;
+    }
+
+    if (item->flags & 0x80) {
+        item->flags &= ~0x80;
+    }
+    return FALSE;
+}
+#else
 INCLUDE_ASM(s32, "C50A0", test_item_player_collision);
+#endif
 
 s32 test_item_entity_position(f32 x, f32 y, f32 z, f32 dist) {
     ItemEntity* item;

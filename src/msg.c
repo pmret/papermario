@@ -293,11 +293,11 @@ s32 _update_message(MessagePrintState* printer) {
                     if (printer->stateFlags & MSG_STATE_FLAG_80000) {
                         buttons = BUTTON_A | BUTTON_C_DOWN;
                     }
-                    if ((buttons & gGameStatusPtr->pressedButtons) || (gGameStatusPtr->currentButtons & BUTTON_B)) {
+                    if ((buttons & gGameStatusPtr->pressedButtons[0]) || (gGameStatusPtr->currentButtons[0] & BUTTON_B)) {
                         printer->windowState = MSG_WINDOW_STATE_PRINTING;
                         printer->currentPrintDelay = 0;
                         printer->stateFlags |= 4;
-                        if (gGameStatusPtr->pressedButtons & (BUTTON_A | BUTTON_C_DOWN)) {
+                        if (gGameStatusPtr->pressedButtons[0] & (BUTTON_A | BUTTON_C_DOWN)) {
                             cond = TRUE;
                             sfx_play_sound_with_params(SOUND_MENU_NEXT, 0, 0, 0);
                         } else if (printer->srcBuffer[printer->srcBufferPos] != 0xFD) {
@@ -313,7 +313,7 @@ s32 _update_message(MessagePrintState* printer) {
                         {
                             sfx_play_sound_with_params(SOUND_MENU_NEXT, 0, 0, 0);
                         }
-                    } else if ((gGameStatusPtr->pressedButtons & BUTTON_Z) &&
+                    } else if ((gGameStatusPtr->pressedButtons[0] & BUTTON_Z) &&
                                !(printer->stateFlags & MSG_STATE_FLAG_40000) &&
                                (printer->currentLine != 0))
                     {
@@ -325,13 +325,13 @@ s32 _update_message(MessagePrintState* printer) {
                     }
                     break;
                 case MSG_WINDOW_STATE_C:
-                    if (gGameStatusPtr->pressedButtons & BUTTON_B) {
+                    if (gGameStatusPtr->pressedButtons[0] & BUTTON_B) {
                         printer->windowState = MSG_WINDOW_STATE_B;
                         printer->unk_4CC = 0;
                         printer->unkArraySize = printer->currentLine;
                         printer->unk_4C8 = abs(printer->curLinePos - printer->lineEndPos[printer->unkArraySize]);
                         sfx_play_sound_with_params(SOUND_CC, 0, 0, 0);
-                    } else if (gGameStatusPtr->pressedButtons & BUTTON_Z) {
+                    } else if (gGameStatusPtr->pressedButtons[0] & BUTTON_Z) {
                         if (printer->unkArraySize > 0) {
                             printer->windowState = MSG_WINDOW_STATE_B;
                             printer->unk_4CC = 0;
@@ -340,7 +340,7 @@ s32 _update_message(MessagePrintState* printer) {
                             sfx_play_sound_with_params(SOUND_CD, 0, 0, 0);
                         }
                     } else {
-                        if (gGameStatusPtr->pressedButtons & BUTTON_A) {
+                        if (gGameStatusPtr->pressedButtons[0] & BUTTON_A) {
                             printer->windowState = MSG_WINDOW_STATE_B;
                             printer->unk_4CC = 0;
                             printer->unkArraySize++;
@@ -350,13 +350,13 @@ s32 _update_message(MessagePrintState* printer) {
                     }
                     break;
                 case MSG_WINDOW_STATE_WAITING_FOR_CHOICE:
-                    if (gGameStatusPtr->pressedButtons & BUTTON_A) {
+                    if (gGameStatusPtr->pressedButtons[0] & BUTTON_A) {
                         printer->madeChoice = 1;
                         printer->windowState = MSG_WINDOW_STATE_PRINTING;
                         printer->unkCounter = 0;
                         printer->stateFlags |= MSG_STATE_FLAG_20000;
                         sfx_play_sound_with_params(SOUND_MENU_NEXT, 0, 0, 0);
-                    } else if (printer->cancelOption != 0xFF && (gGameStatusPtr->pressedButtons & BUTTON_B)) {
+                    } else if (printer->cancelOption != 0xFF && (gGameStatusPtr->pressedButtons[0] & BUTTON_B)) {
                         if (printer->cancelOption >= printer->maxOption) {
                             printer->selectedOption = printer->currentOption;
                         } else {
@@ -368,14 +368,14 @@ s32 _update_message(MessagePrintState* printer) {
                         printer->currentOption = printer->cancelOption;
                         printer->stateFlags |= MSG_STATE_FLAG_20000;
                         sfx_play_sound_with_params(SOUND_MENU_BACK, 0, 0, 0);
-                    } else if (gGameStatusPtr->heldButtons & BUTTON_STICK_DOWN) {
+                    } else if (gGameStatusPtr->heldButtons[0] & BUTTON_STICK_DOWN) {
                         if (printer->currentOption != printer->maxOption - 1) {
                             printer->targetOption = printer->currentOption + 1;
                             printer->windowState = MSG_WINDOW_STATE_SCROLLING_BACK;
                             printer->unkCounter = 1;
                             sfx_play_sound_with_params(SOUND_MENU_CHANGE_SELECTION, 0, 0, 0);
                         }
-                    } else if (gGameStatusPtr->heldButtons & BUTTON_STICK_UP) {
+                    } else if (gGameStatusPtr->heldButtons[0] & BUTTON_STICK_UP) {
                         if (printer->currentOption != 0) {
                             printer->targetOption = printer->currentOption - 1;
                             printer->windowState = MSG_WINDOW_STATE_SCROLLING_BACK;
@@ -398,14 +398,14 @@ s32 _update_message(MessagePrintState* printer) {
             }
         } else if (!(printer->stateFlags & MSG_STATE_FLAG_20) &&
                     printer->windowState == 5 &&
-                    (gGameStatusPtr->pressedButtons & BUTTON_A))
+                    (gGameStatusPtr->pressedButtons[0] & BUTTON_A))
         {
             printer->windowState = MSG_WINDOW_STATE_PRINTING;
             printer->currentPrintDelay = 0;
             printer->stateFlags |= MSG_STATE_FLAG_4;
         }
 
-        if (printer->stateFlags & MSG_STATE_FLAG_4 && !(gGameStatusPtr->currentButtons & BUTTON_A)) {
+        if (printer->stateFlags & MSG_STATE_FLAG_4 && !(gGameStatusPtr->currentButtons[0] & BUTTON_A)) {
             printer->stateFlags &= ~MSG_STATE_FLAG_4;
         }
 
@@ -417,7 +417,7 @@ s32 _update_message(MessagePrintState* printer) {
 
         switch (printer->windowState) {
             case MSG_WINDOW_STATE_PRINTING:
-                if ((gGameStatusPtr->pressedButtons & BUTTON_A) | (gGameStatusPtr->currentButtons & BUTTON_B)) {
+                if ((gGameStatusPtr->pressedButtons[0] & BUTTON_A) | (gGameStatusPtr->currentButtons[0] & BUTTON_B)) {
                     if (!(printer->stateFlags & (MSG_STATE_FLAG_20 | MSG_STATE_FLAG_10)) && !cond) {
                         printer->stateFlags |= MSG_STATE_FLAG_100;
 
@@ -434,7 +434,7 @@ s32 _update_message(MessagePrintState* printer) {
                     printer->currentPrintDelay = 0;
                 } else if (!(printer->stateFlags & MSG_STATE_FLAG_4)) {
                     if (!(printer->stateFlags & (MSG_STATE_FLAG_20 | MSG_STATE_FLAG_10)) &&
-                        (gGameStatusPtr->currentButtons & BUTTON_A))
+                        (gGameStatusPtr->currentButtons[0] & BUTTON_A))
                     {
                         phi_a1_3 = 6;
                         printer->currentPrintDelay = 0;
@@ -445,7 +445,7 @@ s32 _update_message(MessagePrintState* printer) {
                 }
                 break;
             case MSG_WINDOW_STATE_SCROLLING:
-                if (gGameStatusPtr->pressedButtons & (BUTTON_A | BUTTON_B)) {
+                if (gGameStatusPtr->pressedButtons[0] & (BUTTON_A | BUTTON_B)) {
                     if (!(printer->stateFlags & (MSG_STATE_FLAG_20 | MSG_STATE_FLAG_10))) {
                         printer->stateFlags |= MSG_STATE_FLAG_100;
                     }
@@ -453,7 +453,7 @@ s32 _update_message(MessagePrintState* printer) {
                 printer->curLinePos += printer->unk_464;
                 if ((printer->stateFlags & MSG_STATE_FLAG_100) ||
                     (!(printer->stateFlags & (MSG_STATE_FLAG_10 | MSG_STATE_FLAG_4)) &&
-                    (gGameStatusPtr->currentButtons & BUTTON_A)))
+                    (gGameStatusPtr->currentButtons[0] & BUTTON_A)))
                 {
                     printer->curLinePos += 6;
                 }

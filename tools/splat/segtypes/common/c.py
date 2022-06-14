@@ -4,6 +4,8 @@ from typing import Optional, Set
 import os
 import re
 from pathlib import Path
+import spimdisasm
+import rabbitizer
 
 from util import log, options
 from util.compiler import GCC, SN64
@@ -122,26 +124,25 @@ class CommonSegC(CommonSegCodeSubsegment):
             asm_out_dir = options.get_nonmatchings_path() / self.dir
             asm_out_dir.mkdir(parents=True, exist_ok=True)
 
-            is_new_c_file = False
+            self.print_file_boundaries()
 
-            self.funcs_text = self.split_code(rom_bytes)
+            is_new_c_file = False
 
             c_path = self.out_path()
             if c_path:
                 if not os.path.exists(c_path) and options.get_create_c_files():
-                    self.create_c_file(self.funcs_text, asm_out_dir, c_path)
+                    self.create_c_file(asm_out_dir, c_path)
                     is_new_c_file = True
 
-            for func_addr in self.funcs_text:
-                func_sym = self.parent.get_symbol(
-                    func_addr, type="func", local_only=True
+            for func in self.text_section.symbolList:
+                assert func.vram is not None
+                func_sym = self.get_symbol(
+                    func.vram, in_segment=True, type="func", local_only=True
                 )
                 assert func_sym is not None
 
-                if func_sym.name in self.global_asm_funcs or is_new_c_file:
-                    self.create_c_asm_file(
-                        self.funcs_text, func_addr, asm_out_dir, func_sym
-                    )
+                if func.getName() in self.global_asm_funcs or is_new_c_file:
+                    self.create_c_asm_file(func, asm_out_dir, func_sym)
 
     def get_c_preamble(self):
         ret = []
@@ -155,8 +156,8 @@ class CommonSegC(CommonSegCodeSubsegment):
     def mark_c_funcs_as_defined(self, c_funcs):
         for func_name in c_funcs:
             found = False
-            for func_addr in self.seg_symbols:
-                for symbol in self.seg_symbols[func_addr]:
+            for symbols in self.seg_symbols.values():
+                for symbol in symbols:
                     if symbol.name == func_name:
                         symbol.defined = True
                         found = True
@@ -164,8 +165,11 @@ class CommonSegC(CommonSegCodeSubsegment):
                 if found:
                     break
 
-    def create_c_asm_file(self, funcs_text, func_addr, out_dir, func_sym: Symbol):
+    def create_c_asm_file(
+        self, func: spimdisasm.mips.symbols.SymbolBase, out_dir, func_sym: Symbol
+    ):
         outpath = Path(os.path.join(out_dir, self.name, func_sym.name + ".s"))
+        assert func.vram is not None
 
         # Skip extraction if the file exists and the symbol is marked as extract=false
         if outpath.exists() and not func_sym.extract:
@@ -179,10 +183,10 @@ class CommonSegC(CommonSegCodeSubsegment):
         if self.parent and isinstance(self.parent, CommonSegGroup):
             if (
                 options.get_migrate_rodata_to_functions()
-                and func_addr in self.parent.rodata_syms
+                and func.vram in self.parent.rodata_syms
             ):
                 func_rodata = list(
-                    {s for s in self.parent.rodata_syms[func_addr] if s.disasm_str}
+                    {s for s in self.parent.rodata_syms[func.vram] if s.disasm_str}
                 )
                 func_rodata.sort(key=lambda s: s.vram_start)
 
@@ -205,8 +209,7 @@ class CommonSegC(CommonSegCodeSubsegment):
                         out_lines.append(".section .text")
                         out_lines.append("")
 
-        out_lines.extend(funcs_text[func_addr][0])
-        out_lines.append("")
+        out_lines.append(func.disassemble())
 
         outpath.parent.mkdir(parents=True, exist_ok=True)
 
@@ -215,21 +218,19 @@ class CommonSegC(CommonSegCodeSubsegment):
             f.write(newline_sep.join(out_lines))
         self.log(f"Disassembled {func_sym.name} to {outpath}")
 
-    def create_c_file(self, funcs_text, asm_out_dir, c_path):
+    def create_c_file(self, asm_out_dir, c_path):
         c_lines = self.get_c_preamble()
 
-        for func in funcs_text:
-            func_name = self.parent.get_symbol(func, type="func", local_only=True).name
+        for func in self.text_section.symbolList:
+            assert isinstance(func, spimdisasm.mips.symbols.SymbolFunction)
 
             # Terrible hack to "auto-decompile" empty functions
-            # TODO move disassembly into funcs_text or somewhere we can access it from here
             if (
                 options.get_auto_decompile_empty_functions()
-                and len(funcs_text[func][0]) == 3
-                and funcs_text[func][0][1][-3:] in ["$ra", "$31"]
-                and funcs_text[func][0][2][-3:] == "nop"
+                and func.instructions[0].isJrRa()
+                and func.instructions[1].isNop()
             ):
-                c_lines.append("void " + func_name + "(void) {")
+                c_lines.append("void " + func.getName() + "(void) {")
                 c_lines.append("}")
             else:
                 if options.get_compiler() in [GCC, SN64]:
@@ -237,12 +238,16 @@ class CommonSegC(CommonSegCodeSubsegment):
                         rel_asm_out_dir = asm_out_dir.relative_to(
                             options.get_nonmatchings_path()
                         )
-                        c_lines.append(f'INCLUDE_ASM(s32, "{rel_asm_out_dir / self.name}", {func_name});')
+                        c_lines.append(
+                            f'INCLUDE_ASM(s32, "{rel_asm_out_dir / self.name}", {func.getName()});'
+                        )
                     else:
-                        c_lines.append(f'INCLUDE_ASM("{asm_out_dir / self.name}", {func_name});')
+                        c_lines.append(
+                            f'INCLUDE_ASM("{asm_out_dir / self.name}", {func.getName()});'
+                        )
                 else:
                     asm_outpath = Path(
-                        os.path.join(asm_out_dir, self.name, func_name + ".s")
+                        os.path.join(asm_out_dir, self.name, func.getName() + ".s")
                     )
                     rel_asm_outpath = os.path.relpath(
                         asm_outpath, options.get_base_path()

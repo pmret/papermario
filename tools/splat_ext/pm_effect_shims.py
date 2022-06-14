@@ -1,7 +1,7 @@
 from yaml.loader import Loader
 from segtypes.n64.segment import N64Segment
 from util import options
-import yaml
+import yaml as yaml_loader
 
 class N64SegPm_effect_shims(N64Segment):
     shims = []
@@ -27,11 +27,40 @@ glabel {name}
     def shim_path(self, shim):
         return options.get_build_path() / "asm" / "effect_shims" / f"{shim}.s"
 
-    def __init__(self, rom_start, rom_end, type, name, vram_start, extract, given_subalign, given_is_overlay, given_dir, args, yml):
-        super().__init__(rom_start, rom_end, type, name, vram_start, extract, given_subalign, given_is_overlay, given_dir, args, yml)
+    def __init__(
+        self,
+        rom_start,
+        rom_end,
+        type,
+        name,
+        vram_start,
+        extract,
+        given_subalign,
+        exclusive_ram_id,
+        given_dir,
+        symbol_name_format,
+        symbol_name_format_no_rom,
+        args,
+        yaml,
+    ):
+        super().__init__(
+            rom_start,
+            rom_end,
+            type,
+            name,
+            vram_start,
+            extract,
+            given_subalign,
+            exclusive_ram_id,
+            given_dir,
+            symbol_name_format=symbol_name_format,
+            symbol_name_format_no_rom=symbol_name_format_no_rom,
+            args=args,
+            yaml=yaml,
+        )
 
         with open(options.get_asm_path() / ".." / "effect_shims.yaml") as f:
-            self.shims = yaml.load(f.read(), Loader=yaml.SafeLoader)
+            self.shims = yaml_loader.load(f.read(), Loader=yaml_loader.SafeLoader)
 
     def split(self, rom_bytes):
         for i, shim in enumerate(self.shims):

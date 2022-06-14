@@ -2,7 +2,7 @@
 
 s32 func_802B7000_2(void) {
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
-    s8 actionState = gPlayerActionState;
+    s8 actionState = gPlayerStatus.actionState;
 
     if (actionState != ACTION_STATE_USE_TWEESTER) {
         if (partnerActionStatus->partnerActionState != PARTNER_ACTION_USE ||

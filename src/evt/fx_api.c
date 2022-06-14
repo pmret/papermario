@@ -501,7 +501,7 @@ ApiStatus PlayEffect(Evt* script, s32 isInitialCall) {
             fx_steam_burst(iVar1, fVar2, fVar3, fVar4, fVar5, iVar6);
             break;
         case EFFECT_STARS_ORBITING:
-            fx_stars_orbiting(iVar1, fVar2, fVar3, fVar4, fVar5, iVar6, &sp38);
+            fx_stars_orbiting(iVar1, fVar2, fVar3, fVar4, fVar5, iVar6, (EffectInstance**)&sp38);
             evt_set_variable(script, a7, sp38);
             break;
         case EFFECT_BIG_SNOWFLAKES:
@@ -540,11 +540,11 @@ ApiStatus PlayEffect(Evt* script, s32 isInitialCall) {
             fx_shimmer_wave(iVar1, fVar2, fVar3, fVar4, fVar5, fVar6, iVar7, iVar8);
             break;
         case EFFECT_AURA:
-            fx_aura(iVar1, fVar2, fVar3, fVar4, fVar5, &sp34);
+            fx_aura(iVar1, fVar2, fVar3, fVar4, fVar5, (EffectInstance**)&sp34);
             evt_set_variable(script, a6, sp34);
             break;
-        case EFFECT_3C:
-            fx_3C(iVar1, fVar2, fVar3, fVar4, fVar5, &sp34);
+        case EFFECT_BULB_GLOW:
+            fx_bulb_glow(iVar1, fVar2, fVar3, fVar4, fVar5, (EffectInstance**)&sp34);
             evt_set_variable(script, a6, sp34);
             break;
         case EFFECT_3D:

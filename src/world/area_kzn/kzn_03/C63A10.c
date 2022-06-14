@@ -8,7 +8,7 @@ INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C63A10", func_80242D38_C63A48);
 
 ApiStatus func_80242DB0_C63AC0(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    
+
     if (*args++ != 0) {
         script->functionTemp[0] = evt_get_variable(script, *args++);
         script->functionTemp[1] = evt_get_variable(script, *args++);
@@ -20,7 +20,7 @@ ApiStatus func_80242DB0_C63AC0(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_80242E54_C63B64(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    
+
     if (*args++ != 0) {
         script->functionTemp[0] = evt_get_variable(script, *args++);
         script->functionTemp[1] = evt_get_variable(script, *args++);
@@ -33,6 +33,6 @@ ApiStatus func_80242E54_C63B64(Evt* script, s32 isInitialCall) {
 INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C63A10", func_80242EF8_C63C08);
 
 ApiStatus func_80243070_C63D80(Evt* script, s32 isInitialCall) {
-    script->varTable[8] = gGameStatusPtr->pressedButtons & BUTTON_A;
+    script->varTable[8] = gGameStatusPtr->pressedButtons[0] & BUTTON_A;
     return ApiStatus_DONE2;
 }

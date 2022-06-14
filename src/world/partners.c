@@ -1,6 +1,85 @@
-#include "common.h"
-#include "ld_addrs.h"
+#include "common_structs.h"
 #include "partners.h"
+#include "macros.h"
+
+// BSS
+BSS s32 D_8010CD34;
+BSS PlayerPathElement gPlayerMoveHistory[40];
+BSS s32 gPlayerMoveHistoryIndex;
+BSS s32 D_8010CFBC;
+BSS f32 wPartnerTetherDistance;
+BSS s32 D_8010CFC4;
+BSS s16 D_8010CFC8;
+BSS s16 D_8010CFCA;
+BSS s16 D_8010CFCC;
+BSS s16 D_8010CFCE;
+BSS s32 D_8010CFD0;
+BSS Evt* wPartnerCurrentScript;
+BSS s32 D_8010CFD8;
+BSS s32 wPartnerCurrentScriptID;
+BSS s32 D_8010CFE0;
+BSS s32 D_8010CFE4;
+BSS s32 D_8010CFE8;
+BSS WorldPartner* wPartner;
+BSS s32 D_8010CFF0;
+BSS s32 D_8010CFF4;
+BSS char D_8010CFF8[0x8];
+BSS s32 D_8010D000;
+BSS char D_8010D004[0x63C];
+BSS s32 D_8010D640;
+BSS s32 D_8010D644;
+BSS s32 D_8010D648;
+BSS s32 D_8010D64C;
+BSS s32 D_8010D650;
+BSS s8 D_8010D654;
+BSS s8 D_8010D655;
+BSS s16 D_8010D656;
+BSS s16 D_8010D658;
+BSS s16 D_8010D65A;
+BSS s32 D_8010D65C;
+BSS s32 D_8010D660;
+BSS s32 D_8010D664;
+BSS s32 D_8010D668;
+BSS s32 D_8010D66C;
+BSS s32 D_8010D670;
+BSS s32 D_8010D674;
+BSS s32 D_8010D678;
+BSS s16 D_8010D67C;
+BSS s16 D_8010D67E;
+BSS s16 D_8010D680;
+BSS s16 D_8010D682;
+BSS s16 D_8010D684;
+BSS s16 D_8010D686;
+BSS s16 D_8010D688;
+BSS s16 D_8010D68A;
+BSS s16 D_8010D68C;
+BSS s8 D_8010D68E;
+BSS s8 D_8010D68F;
+BSS s8 D_8010D690;
+BSS s8 D_8010D691;
+BSS s8 D_8010D692;
+BSS s8 D_8010D693;
+BSS s32 D_8010D694;
+BSS s8 D_8010D698;
+BSS s8 D_8010D699;
+BSS s16 D_8010D69A;
+BSS s32 gPopupMenu;
+BSS s32 D_8010D6A0;
+BSS s32 D_8010D6A4;
+BSS char D_8010D6A8[0x8];
+BSS char D_8010D6B0[0x1500];
+BSS PartnerActionStatus gPartnerActionStatus;
+BSS char gSpinHistoryPosY[0x18];
+BSS char gSpinHistoryPosX[0x18];
+BSS char gSpinHistoryPosZ[0x18];
+BSS UiStatus gUIStatus;
+BSS PlayerStatus gPlayerStatus;
+BSS PlayerSpinState gPlayerSpinState;
+BSS s8 D_8010F284[0xC];
+BSS PlayerData gPlayerData;
+BSS s8 gSpinHistoryPosAngle[0x18];
+
+#include "ld_addrs.h"
 #include "npc.h"
 #include "hud_element.h"
 
@@ -87,21 +166,14 @@ extern HudScript HES_StatusSPIncrement5;
 extern HudScript HES_StatusSPIncrement6;
 extern HudScript HES_StatusSPIncrement7;
 
-extern f32 wPartnerTetherDistance;
-extern s16 D_8010CFC8;
-extern s16 D_8010CFCA;
-extern s16 D_8010CFCE;
 extern s32 D_802C0000;
-extern s32 gPlayerMoveHistoryIndex;
-extern s32 D_8010CFBC;
-extern s16 D_8010CFCC;
-
-extern PlayerPathElement gPlayerMoveHistory[40];
 extern EvtScript D_802C05CC_32579C;
 
 s32 partner_is_idle(Npc* partner);
 s32 world_partner_can_player_pause_default(Npc* partner);
 void _use_partner_ability(void);
+void partner_flying_follow_player(Npc*);
+void partner_move_to_goal(Npc*, s32);
 
 // Partner icons
 HudScript* wPartnerHudScripts[] = {
@@ -134,7 +206,12 @@ s32 D_800F7FF4 = 4;
 s32 D_800F7FF8 = 5;
 s32 D_800F7FFC = 7;
 s32 D_800F8000[] = { 8, 0, 0, 0 };
-s32 UseItemDmaArgs[] = { _3251D0_ROM_START, _3251D0_ROM_END, (s32) D_802C05CC_32579C, 0x00000000 };
+UseItemStruct UseItemDmaArgs = {
+    _3251D0_ROM_START,
+    _3251D0_ROM_END,
+    &D_802C05CC_32579C,
+    0
+};
 s32 D_800F8020 = 0;
 s32 wPartnerMoveGoalX = 0;
 s32 wPartnerMoveGoalZ = 0;
@@ -152,10 +229,10 @@ WorldPartner wPartners[12] = {
         .dmaDest = &world_partner_goombario_VRAM,
         .isFlying = FALSE,
         .init = world_goombario_init,
-        .takeOut = world_goombario_take_out,
-        .update = world_goombario_update,
-        .useAbility = world_goombario_use_ability,
-        .putAway = world_goombario_put_away,
+        .takeOut = &world_goombario_take_out,
+        .update = &world_goombario_update,
+        .useAbility = &world_goombario_use_ability,
+        .putAway = &world_goombario_put_away,
         .idle = NPC_ANIM_world_goombario_normal_idle,
         .canUseAbility = world_goombario_can_pause,
         .canPlayerPause = world_goombario_can_pause,
@@ -168,10 +245,10 @@ WorldPartner wPartners[12] = {
         .dmaDest = &world_partner_kooper_VRAM,
         .isFlying = FALSE,
         .init = world_kooper_init,
-        .takeOut = world_kooper_take_out,
-        .update = world_kooper_update,
-        .useAbility = world_kooper_use_ability,
-        .putAway = world_kooper_put_away,
+        .takeOut = &world_kooper_take_out,
+        .update = &world_kooper_update,
+        .useAbility = &world_kooper_use_ability,
+        .putAway = &world_kooper_put_away,
         .idle = NPC_ANIM_world_kooper_normal_idle,
         .testFirstStrike = world_kooper_test_first_strike,
         .canUseAbility = partner_is_idle,
@@ -186,10 +263,10 @@ WorldPartner wPartners[12] = {
         .dmaDest = &world_partner_bombette_VRAM,
         .isFlying = FALSE,
         .init = world_bombette_init,
-        .takeOut = world_bombette_take_out,
-        .update = world_bombette_update,
-        .useAbility = world_bombette_use_ability,
-        .putAway = world_bombette_put_away,
+        .takeOut = &world_bombette_take_out,
+        .update = &world_bombette_update,
+        .useAbility = &world_bombette_use_ability,
+        .putAway = &world_bombette_put_away,
         .idle = NPC_ANIM_world_bombette_normal_idle,
         .testFirstStrike = world_bombette_test_first_strike,
         .canUseAbility = world_bombette_can_use_ability,
@@ -203,10 +280,10 @@ WorldPartner wPartners[12] = {
         .dmaDest = &world_partner_parakarry_VRAM,
         .isFlying = TRUE,
         .init = world_parakarry_init,
-        .takeOut = world_parakarry_take_out,
-        .update = world_parakarry_update,
-        .useAbility = world_parakarry_use_ability,
-        .putAway = world_parakarry_put_away,
+        .takeOut = &world_parakarry_take_out,
+        .update = &world_parakarry_update,
+        .useAbility = &world_parakarry_use_ability,
+        .putAway = &world_parakarry_put_away,
         .idle = NPC_ANIM_world_parakarry_Palette_00_Anim_1,
         .canPlayerPause = partner_is_idle,
         .preBattle = world_parakarry_pre_battle,
@@ -219,10 +296,10 @@ WorldPartner wPartners[12] = {
         .dmaDest = &world_partner_goompa_VRAM,
         .isFlying = FALSE,
         .init = world_goompa_init,
-        .takeOut = world_goompa_take_out,
-        .update = world_goompa_update,
-        .useAbility = world_goompa_use_ability,
-        .putAway = world_goompa_put_away,
+        .takeOut = &world_goompa_take_out,
+        .update = &world_goompa_update,
+        .useAbility = &world_goompa_use_ability,
+        .putAway = &world_goompa_put_away,
         .idle = NPC_ANIM_goompa_Palette_00_Anim_1,
     },
     {
@@ -232,15 +309,15 @@ WorldPartner wPartners[12] = {
         .dmaDest = &world_partner_watt_VRAM,
         .isFlying = TRUE,
         .init = world_watt_init,
-        .takeOut = world_watt_take_out,
-        .update = world_watt_update,
-        .useAbility = world_watt_use_ability,
-        .putAway = world_watt_put_away,
+        .takeOut = &world_watt_take_out,
+        .update = &world_watt_update,
+        .useAbility = &world_watt_use_ability,
+        .putAway = &world_watt_put_away,
         .idle = NPC_ANIM_world_watt_Palette_00_Anim_1,
         .canPlayerPause = world_partner_can_player_pause_default,
         .preBattle = world_watt_pre_battle,
         .postBattle = world_watt_post_battle,
-        .whileRiding = world_watt_while_riding,
+        .whileRiding = &world_watt_while_riding,
     },
     {
         // Sushie
@@ -249,15 +326,15 @@ WorldPartner wPartners[12] = {
         .dmaDest = &world_partner_sushie_VRAM,
         .isFlying = FALSE,
         .init = world_sushie_init,
-        .takeOut = world_sushie_take_out,
-        .update = world_sushie_update,
-        .useAbility = world_sushie_use_ability,
-        .putAway = world_sushie_put_away,
+        .takeOut = &world_sushie_take_out,
+        .update = &world_sushie_update,
+        .useAbility = &world_sushie_use_ability,
+        .putAway = &world_sushie_put_away,
         .idle = NPC_ANIM_world_sushie_Palette_00_Anim_1,
         .canPlayerPause = world_partner_can_player_pause_default,
         .preBattle = world_sushie_pre_battle,
         .postBattle = world_sushie_post_battle,
-        .whileRiding = world_sushie_while_riding,
+        .whileRiding = &world_sushie_while_riding,
     },
     {
         // Lakilester
@@ -266,15 +343,15 @@ WorldPartner wPartners[12] = {
         .dmaDest = &world_partner_lakilester_VRAM,
         .isFlying = TRUE,
         .init = world_lakilester_init,
-        .takeOut = world_lakilester_take_out,
-        .update = world_lakilester_update,
-        .useAbility = world_lakilester_use_ability,
-        .putAway = world_lakilester_put_away,
+        .takeOut = &world_lakilester_take_out,
+        .update = &world_lakilester_update,
+        .useAbility = &world_lakilester_use_ability,
+        .putAway = &world_lakilester_put_away,
         .idle = NPC_ANIM_world_lakilester_Palette_00_Anim_1,
         .canPlayerPause = world_partner_can_player_pause_default,
         .preBattle = world_lakilester_pre_battle,
         .postBattle = world_lakilester_post_battle,
-        .whileRiding = world_lakilester_while_riding,
+        .whileRiding = &world_lakilester_while_riding,
     },
     {
         // Bow
@@ -283,10 +360,10 @@ WorldPartner wPartners[12] = {
         .dmaDest = &world_partner_bow_VRAM,
         .isFlying = TRUE,
         .init = world_bow_init,
-        .takeOut = world_bow_take_out,
-        .update = world_bow_update,
-        .useAbility = world_bow_use_ability,
-        .putAway = world_bow_put_away,
+        .takeOut = &world_bow_take_out,
+        .update = &world_bow_update,
+        .useAbility = &world_bow_use_ability,
+        .putAway = &world_bow_put_away,
         .idle = NPC_ANIM_world_bow_Palette_00_Anim_1,
         .canUseAbility = partner_is_idle,
         .canPlayerPause = world_partner_can_player_pause_default,
@@ -299,10 +376,10 @@ WorldPartner wPartners[12] = {
         .dmaDest = &world_partner_goombaria_VRAM,
         .isFlying = FALSE,
         .init = world_goombaria_init,
-        .takeOut = world_goombaria_take_out,
-        .update = world_goombaria_update,
-        .useAbility = world_goombaria_use_ability,
-        .putAway = world_goombaria_put_away,
+        .takeOut = &world_goombaria_take_out,
+        .update = &world_goombaria_update,
+        .useAbility = &world_goombaria_use_ability,
+        .putAway = &world_goombaria_put_away,
         .idle = NPC_ANIM_goombaria_Palette_00_Anim_1,
         .canUseAbility = partner_is_idle,
         .canPlayerPause = partner_is_idle,
@@ -314,10 +391,10 @@ WorldPartner wPartners[12] = {
         .dmaDest = &world_partner_twink_VRAM,
         .isFlying = TRUE,
         .init = world_twink_init,
-        .takeOut = world_twink_take_out,
-        .update = world_twink_update,
-        .useAbility = world_twink_use_ability,
-        .putAway = world_twink_put_away,
+        .takeOut = &world_twink_take_out,
+        .update = &world_twink_update,
+        .useAbility = &world_twink_use_ability,
+        .putAway = &world_twink_put_away,
         .idle = NPC_ANIM_twink_Palette_00_Anim_1,
         .canUseAbility = partner_is_idle,
         .canPlayerPause = partner_is_idle,
@@ -329,29 +406,29 @@ f32 wSavedPartnerPosY = 0;
 f32 wSavedPartnerPosZ = 0;
 
 PartnerAnimations gPartnerAnimations[] = {
-    {0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000},
-    {0x00010000, 0x00010002, 0x00010004, 0x00010005, 0x00010001, 0x00010001, 0x00010003, 0x00010008, 0x00010007},
-    {0x00020000, 0x00020004, 0x00020006, 0x00020007, 0x00020000, 0x00020003, 0x00020005, 0x0002000D, 0x0002000C},
-    {0x00030000, 0x00030005, 0x00030009, 0x0003000A, 0x00030000, 0x00030003, 0x00030007, 0x0003000E, 0x0003000D},
-    {0x00040000, 0x00040002, 0x00040008, 0x00040002, 0x00040002, 0x00040001, 0x00040003, 0x00040006, 0x00040005},
-    {0x009D0000, 0x009D0002, 0x009D0004, 0x009D0005, 0x009D0001, 0x009D0001, 0x009D0003, 0x009D0008, 0x009D0001},
-    {0x00060000, 0x00060002, 0x00060002, 0x00060002, 0x00060000, 0x00060001, 0x00060003, 0x00060004, 0x00060007},
-    {0x00070000, 0x00070002, 0x00070002, 0x00070002, 0x00070000, 0x00070001, 0x00070003, 0x00070004, 0x00070008},
-    {0x00080000, 0x00080005, 0x00080005, 0x00080005, 0x00080000, 0x00080001, 0x00080007, 0x00080009, 0x0008000A},
-    {0x00050000, 0x00050002, 0x00050002, 0x00050002, 0x00050000, 0x00050001, 0x00050003, 0x00050004, 0x0005000C},
-    {0x009E0000, 0x009E0005, 0x009E0012, 0x009E0013, 0x009E0001, 0x009E0001, 0x009E0007, 0x009E000B, 0x009E0001},
-    {0x00200000, 0x00200001, 0x00200001, 0x00200001, 0x00200001, 0x00200001, 0x00200001, 0x00200009, 0x00200020},
+    {{0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000}},
+    {{0x00010000, 0x00010002, 0x00010004, 0x00010005, 0x00010001, 0x00010001, 0x00010003, 0x00010008, 0x00010007}},
+    {{0x00020000, 0x00020004, 0x00020006, 0x00020007, 0x00020000, 0x00020003, 0x00020005, 0x0002000D, 0x0002000C}},
+    {{0x00030000, 0x00030005, 0x00030009, 0x0003000A, 0x00030000, 0x00030003, 0x00030007, 0x0003000E, 0x0003000D}},
+    {{0x00040000, 0x00040002, 0x00040008, 0x00040002, 0x00040002, 0x00040001, 0x00040003, 0x00040006, 0x00040005}},
+    {{0x009D0000, 0x009D0002, 0x009D0004, 0x009D0005, 0x009D0001, 0x009D0001, 0x009D0003, 0x009D0008, 0x009D0001}},
+    {{0x00060000, 0x00060002, 0x00060002, 0x00060002, 0x00060000, 0x00060001, 0x00060003, 0x00060004, 0x00060007}},
+    {{0x00070000, 0x00070002, 0x00070002, 0x00070002, 0x00070000, 0x00070001, 0x00070003, 0x00070004, 0x00070008}},
+    {{0x00080000, 0x00080005, 0x00080005, 0x00080005, 0x00080000, 0x00080001, 0x00080007, 0x00080009, 0x0008000A}},
+    {{0x00050000, 0x00050002, 0x00050002, 0x00050002, 0x00050000, 0x00050001, 0x00050003, 0x00050004, 0x0005000C}},
+    {{0x009E0000, 0x009E0005, 0x009E0012, 0x009E0013, 0x009E0001, 0x009E0001, 0x009E0007, 0x009E000B, 0x009E0001}},
+    {{0x00200000, 0x00200001, 0x00200001, 0x00200001, 0x00200001, 0x00200001, 0x00200001, 0x00200009, 0x00200020}},
 };
 
-s32 D_800F84F8 = 0;
+f32 D_800F84F8 = 0.0f;
 
 s32 use_consumable(s32 invSlot) {
     Evt* script;
 
     D_8010CD20 = invSlot;
     invSlot = gPlayerData.invItems[invSlot];
-    dma_copy(UseItemDmaArgs[0], UseItemDmaArgs[1], _3251D0_VRAM);
-    script = start_script(UseItemDmaArgs[2], EVT_PRIORITY_1, 0);
+    dma_copy(UseItemDmaArgs.dmaStart, UseItemDmaArgs.dmaEnd, _3251D0_VRAM);
+    script = start_script(UseItemDmaArgs.script, EVT_PRIORITY_1, 0);
     script->varTable[10] = invSlot;
     return script->id;
 }
@@ -404,27 +481,27 @@ s32 world_partner_can_player_pause_default(Npc* partner) {
 s32 func_800EA52C(s32 arg0) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     u32 playerActionState = playerStatus->actionState;
-    s32 ret = 0;
+    s32 ret = FALSE;
 
     if (playerStatus->flags & PLAYER_STATUS_FLAGS_800) {
-        return 0;
+        return FALSE;
     }
 
     if (playerActionState < ACTION_STATE_JUMP) {
-        ret = 1;
+        ret = TRUE;
     }
 
     if (arg0 == 9) {
         if (playerActionState == ACTION_STATE_RIDE) {
-            ret = 1;
+            ret = TRUE;
         }
     } else if (arg0 == 4) {
         if ((playerActionState != ACTION_STATE_RIDE) && (playerActionState != ACTION_STATE_IDLE) && (playerActionState != ACTION_STATE_WALK)) {
             if (playerActionState == ACTION_STATE_RUN) {
-                ret = 1;
+                ret = TRUE;
             }
         } else {
-            ret = 1;
+            ret = TRUE;
         }
     }
 
@@ -435,8 +512,9 @@ s32 partner_is_flying(void) {
     return !wPartner->isFlying;
 }
 
-void func_800EA5B8(s32* arg0) {
-    *arg0 &= ~0x2007800;
+void func_800EA5B8(s32* partnerNpcFlags) {
+    *partnerNpcFlags &= ~(NPC_FLAG_SIMPLIFIED_PHYSICS | NPC_FLAG_4000 | NPC_FLAG_NO_PROJECT_SHADOW | NPC_FLAG_1000 |
+                          NPC_FLAG_JUMPING);
 }
 
 void partner_create_npc(void) {
@@ -483,7 +561,280 @@ void partner_free_npc(void) {
     free_npc_by_index(D_8010CFD0);
 }
 
-INCLUDE_ASM(s32, "world/partners", _use_partner_ability);
+void _use_partner_ability(void) {
+    static u32 D_8010CD30; // goes into BSS, needs to be static for the function to match
+
+    PlayerData* playerData = &gPlayerData;
+    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
+    PlayerStatus* playerStatus = &gPlayerStatus;
+
+    if (!partnerActionStatus->inputDisabled) {
+        partnerActionStatus->stickX = gGameStatusPtr->stickX[gGameStatusPtr->unk_81];
+        partnerActionStatus->stickY = gGameStatusPtr->stickY[gGameStatusPtr->unk_81];
+        partnerActionStatus->currentButtons = gGameStatusPtr->currentButtons[gGameStatusPtr->unk_81];
+        partnerActionStatus->pressedButtons = gGameStatusPtr->pressedButtons[gGameStatusPtr->unk_81];
+        partnerActionStatus->heldButtons = gGameStatusPtr->heldButtons[gGameStatusPtr->unk_81];
+    } else {
+        partnerActionStatus->stickX = 0;
+        partnerActionStatus->stickY = 0;
+        partnerActionStatus->currentButtons = 0;
+        partnerActionStatus->pressedButtons = 0;
+        partnerActionStatus->heldButtons = 0;
+    }
+
+    if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_4) {
+        playerStatus->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_4;
+        partnerActionStatus->pressedButtons |= BUTTON_B | BUTTON_C_DOWN;
+        playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_40000000;
+    }
+
+    if (D_8010CFE8 != 0) {
+        D_8010CD30 = D_8010CFE8;
+        D_8010CD34 = 0;
+        D_8010CFE8 = 0;
+    }
+
+    if (D_8010CD30 >= 2) {
+        if (D_8010CD30 != 8) {
+            D_8010CFC4 = 0;
+        }
+    }
+
+    switch (D_8010CD30) {
+        case 0:
+            break;
+        case 3:
+            D_8010CFC4 = 3;
+            switch (D_8010CD34) {
+                case 0:
+                    disable_player_input();
+                    sfx_play_sound(SOUND_D);
+                    kill_script_by_ID(wPartnerCurrentScriptID);
+                    wPartnerCurrentScript = start_script(wPartner->putAway, 0x14, 0x20);
+                    wPartnerCurrentScript->owner2.npc = wPartnerNpc;
+                    wPartnerCurrentScriptID = wPartnerCurrentScript->id;
+                    wPartnerCurrentScript->groupFlags = 0xA;
+                    D_8010CD34 += 1;
+                    set_time_freeze_mode(1);
+                    break;
+                case 1:
+                    if (does_script_exist(wPartnerCurrentScriptID)) {
+                        break;
+                    }
+                    set_time_freeze_mode(0);
+                    partner_free_npc();
+                    playerData->currentPartner = D_8010CFD8 = D_8010CFE4;
+                    partner_create_npc();
+                    sfx_play_sound(SOUND_E);
+                    wPartner->init(wPartnerNpc);
+                    D_8010CD34 += 1;
+                case 2:
+                    wPartnerCurrentScript = start_script(wPartner->takeOut, 0x14, 0x20);
+                    wPartnerCurrentScript->owner2.npc = wPartnerNpc;
+                    wPartnerCurrentScriptID = wPartnerCurrentScript->id;
+                    wPartnerCurrentScript->groupFlags = 0xA;
+                    D_8010CD34 += 1;
+                    set_time_freeze_mode(1);
+                    break;
+                case 3:
+                    if (does_script_exist(wPartnerCurrentScriptID)) {
+                        break;
+                    }
+                    wPartnerCurrentScript = start_script(wPartner->update, 0x14, 0x20);
+                    wPartnerCurrentScript->owner2.npc = wPartnerNpc;
+                    wPartnerCurrentScriptID = wPartnerCurrentScript->id;
+                    wPartnerCurrentScript->groupFlags = 0xA;
+                    D_8010CD30 = 1;
+                    enable_player_input();
+                    set_time_freeze_mode(0);
+                    break;
+            }
+            break;
+        case 2:
+            D_8010CFC4 = 3;
+            switch (D_8010CD34) {
+                case 0:
+                    kill_script_by_ID(wPartnerCurrentScriptID);
+                    D_8010CD34 += 1;
+                case 1:
+                    partner_free_npc();
+                    playerData->currentPartner = D_8010CFD8 = D_8010CFE4;
+                    partner_create_npc();
+                    wPartnerNpc->pos.x = wSavedPartnerPosX;
+                    wPartnerNpc->pos.y = wSavedPartnerPosY;
+                    wPartnerNpc->pos.z = wSavedPartnerPosZ;
+                    wPartnerNpc->jumpVelocity = 0.0f;
+                    wPartnerNpc->scale.x = 1.0f;
+                    wPartnerNpc->scale.y = 1.0f;
+                    wPartnerNpc->scale.z = 1.0f;
+                    wPartner->init(wPartnerNpc);
+                    D_8010CD34 += 1;
+                case 2:
+                    D_8010CD34 += 1;
+                    break;
+                case 3:
+                    wPartnerCurrentScript = start_script(wPartner->update, 0x14, 0x20);
+                    wPartnerCurrentScript->owner2.npc = wPartnerNpc;
+                    wPartnerCurrentScriptID = wPartnerCurrentScript->id;
+                    wPartnerCurrentScript->groupFlags = 0xA;
+                    D_8010CD30 = 1;
+                    break;
+            }
+            break;
+        case 4:
+            switch (D_8010CD34) {
+                case 0:
+                    disable_player_input();
+                    sfx_play_sound(SOUND_D);
+                    kill_script_by_ID(wPartnerCurrentScriptID);
+                    wPartnerCurrentScript = start_script(wPartner->putAway, 0x14, 0x20);
+                    wPartnerCurrentScript->owner2.npc = wPartnerNpc;
+                    wPartnerCurrentScriptID = wPartnerCurrentScript->id;
+                    wPartnerCurrentScript->groupFlags = 0xA;
+                    D_8010CD34 += 1;
+                    break;
+                case 1:
+                    if (does_script_exist(wPartnerCurrentScriptID)) {
+                        break;
+                    }
+                    partner_free_npc();
+                    D_8010CD30 = 1;
+                    playerData->currentPartner = D_8010CFD8 = D_8010CFE4;
+                    enable_player_input();
+                    break;
+            }
+            break;
+        case 5:
+            if (D_8010CD34 == 0) {
+                kill_script_by_ID(wPartnerCurrentScriptID);
+                partner_free_npc();
+                D_8010CD30 = 1;
+                playerData->currentPartner = D_8010CFD8 = D_8010CFE4;
+                break;
+            }
+            break;
+        case 6:
+            switch (D_8010CD34) {
+                case 0:
+                    disable_player_input();
+                    playerData->currentPartner = D_8010CFD8 = D_8010CFE4;
+                    partner_create_npc();
+                    wPartner->init(wPartnerNpc);
+                    D_8010CD34 += 1;
+                case 1:
+                    wPartnerCurrentScript = start_script(wPartner->takeOut, 0x14, 0x20);
+                    wPartnerCurrentScript->owner2.npc = wPartnerNpc;
+                    wPartnerCurrentScriptID = wPartnerCurrentScript->id;
+                    wPartnerCurrentScript->groupFlags = 0xA;
+                    D_8010CD34 += 1;
+                    break;
+                case 2:
+                    if (does_script_exist(wPartnerCurrentScriptID)) {
+                        break;
+                    }
+                    wPartnerCurrentScript = start_script(wPartner->update, 0x14, 0x20);
+                    wPartnerCurrentScript->owner2.npc = wPartnerNpc;
+                    wPartnerCurrentScriptID = wPartnerCurrentScript->id;
+                    wPartnerCurrentScript->groupFlags = 0xA;
+                    D_8010CD30 = 1;
+                    enable_player_input();
+                    break;
+            }
+            break;
+        case 7:
+            D_8010CFC4 = 2;
+            switch (D_8010CD34) {
+                case 0:
+                    disable_player_input();
+                    playerData->currentPartner = D_8010CFD8 = D_8010CFE4;
+                    partner_create_npc();
+                    wPartnerNpc->pos.x = wSavedPartnerPosX;
+                    wPartnerNpc->pos.y = wSavedPartnerPosY;
+                    wPartnerNpc->pos.z = wSavedPartnerPosZ;
+                    wPartnerNpc->jumpVelocity = 0.0f;
+                    wPartnerNpc->scale.x = 1.0f;
+                    wPartnerNpc->scale.y = 1.0f;
+                    wPartnerNpc->scale.z = 1.0f;
+                    wPartner->init(wPartnerNpc);
+                    D_8010CD34 += 1;
+                    break;
+                case 1:
+                    wPartnerCurrentScript = start_script(wPartner->update, 0x14, 0x20);
+                    wPartnerCurrentScript->owner2.npc = wPartnerNpc;
+                    wPartnerCurrentScriptID = wPartnerCurrentScript->id;
+                    wPartnerCurrentScript->groupFlags = 0xA;
+                    D_8010CD30 = 1;
+                    wPartnerNpc->currentAnim.w = gPartnerAnimations[D_8010CFD8].anims[4];
+                    enable_player_input();
+                    break;
+            }
+            break;
+        case 8:
+            switch (D_8010CD34) {
+                case 0:
+                    kill_script_by_ID(wPartnerCurrentScriptID);
+                    wPartnerCurrentScript = start_script(wPartner->useAbility, 0x14, 0x20);
+                    wPartnerCurrentScript->owner2.npc = wPartnerNpc;
+                    wPartnerCurrentScriptID = wPartnerCurrentScript->id;
+                    wPartnerCurrentScript->groupFlags = 0xA;
+                    D_8010CD34 += 1;
+                    break;
+                case 1:
+                    if (does_script_exist(wPartnerCurrentScriptID)) {
+                        break;
+                    }
+                    wPartnerCurrentScript = start_script(wPartner->update, 0x14, 0x20);
+                    wPartnerCurrentScript->owner2.npc = wPartnerNpc;
+                    wPartnerCurrentScriptID = wPartnerCurrentScript->id;
+                    wPartnerCurrentScript->groupFlags = 0xA;
+                    D_8010CD30 = 1;
+                    break;
+            }
+            break;
+        case 9:
+            D_8010CFC4 = 1;
+            switch (D_8010CD34) {
+                case 0:
+                    disable_player_input();
+                    wPartner->init(wPartnerNpc);
+                    D_8010CD34 += 1;
+                case 1:
+                    D_8010CD34 += 1;
+                    break;
+                case 2:
+                    if (partnerActionStatus->partnerActionState != 1) {
+                        wSavedPartnerPosX = playerStatus->position.x;
+                        wSavedPartnerPosY = playerStatus->position.y;
+                        wSavedPartnerPosZ = playerStatus->position.z;
+                        wPartnerCurrentScript = start_script(wPartner->update, 0x14, 0x20);
+                        wPartnerCurrentScript->owner2.npc = wPartnerNpc;
+                        wPartnerCurrentScriptID = wPartnerCurrentScript->id;
+                        wPartnerCurrentScript->groupFlags = 0xA;
+                    }
+                    enable_player_input();
+                    D_8010CD30 = 1;
+                    break;
+            }
+            break;
+        case 10:
+            if (D_8010CD34 == 0) {
+                if (does_script_exist(wPartnerCurrentScriptID)) {
+                    kill_script_by_ID(wPartnerCurrentScriptID);
+                }
+                D_8010CD34 += 1;
+            }
+            break;
+        case 1:
+            D_8010CD30 = 0;
+            D_8010CFE0 = 0;
+            if (D_8010CFC4 != 3) {
+                D_8010CFC4 = 0;
+            }
+            break;
+    }
+}
+
+static const f32 rodata_padding = 0.0f;
 
 void switch_to_partner(s32 arg0) {
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -626,14 +977,14 @@ void partner_initialize_data(void) {
     wSavedPartnerPosZ = 0;
 }
 
-s32 partner_test_enemy_collision(s32 arg0) {
+s32 partner_test_enemy_collision(Npc* enemy) {
     if (D_8010CFD8 != 0 && wPartner->testFirstStrike != NULL) {
-        return wPartner->testFirstStrike(wPartnerNpc, arg0);
+        return wPartner->testFirstStrike(wPartnerNpc, enemy);
     }
     return FALSE;
 }
 
-Bytecode* partner_get_ride_script(void) {
+EvtScript* partner_get_ride_script(void) {
     WorldPartner* partner = wPartner;
 
     if (partner == NULL) {
@@ -760,7 +1111,7 @@ void partner_walking_update_player_tracking(Npc* partner) {
     s32 isPlayerJumping;
     PlayerPathElement* currentSnapshot;
 
-    if ((playerStatus->flags & 6) != 0) {
+    if (playerStatus->flags & (PLAYER_STATUS_FLAGS_FALLING | PLAYER_STATUS_FLAGS_JUMPING)) {
         isPlayerJumping = (playerStatus->actionState == ACTION_STATE_LAND || playerStatus->actionState == ACTION_STATE_STEP_DOWN) ^ 1;
     } else {
         isPlayerJumping = FALSE;
@@ -884,7 +1235,87 @@ void partner_flying_update_player_tracking(Npc* partner) {
     }
 }
 
-INCLUDE_ASM(void, "world/partners", partner_flying_update_motion, Npc* partner);
+void partner_flying_update_motion(Npc* partner) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
+    f32 x, y, z, hitDepth;
+    f32 var_f0;
+    f32 var_f2;
+
+    if (gGameStatusPtr->unk_81 == 0 ||
+        (playerStatus->flags & (PLAYER_STATUS_FLAGS_INPUT_DISABLED | PLAYER_STATUS_FLAGS_1000)) ||
+        partnerActionStatus->inputDisabled ||
+        partnerActionStatus->partnerAction_unk_2 != 0)
+    {
+        if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_800) || D_800F8020 == 0) {
+            partner_flying_follow_player(partner);
+        }
+        if (partnerActionStatus->pressedButtons & (BUTTON_B | BUTTON_Z | BUTTON_C_DOWN | BUTTON_C_LEFT)) {
+            partnerActionStatus->partnerAction_unk_2 = 0;
+        }
+    }
+    if (D_8010CFC8 != 50 && fabsf(partner->pos.y - playerStatus->position.y) > 1000.0f) {
+        partner->pos.x = playerStatus->position.x;
+        partner->pos.y = playerStatus->position.y;
+        partner->pos.z = playerStatus->position.z;
+        partner->jumpVelocity = 0.0f;
+        partner->jumpScale = 0.0f;
+        partner->flags &= ~NPC_FLAG_JUMPING;
+    }
+
+    D_800F8020 = 0;
+    x = partner->pos.x;
+    y = partner->pos.y + (partner->collisionHeight * 0.5f);
+    z = partner->pos.z;
+
+    hitDepth = partner->collisionHeight * 0.5f;
+    if (npc_raycast_up(0, &x, &y, &z, &hitDepth) != 0) {
+        D_800F8020 = 1;
+        wSavedPartnerPosX = partner->pos.x;
+        wSavedPartnerPosY = partner->pos.y;
+        wSavedPartnerPosZ = partner->pos.z;
+    } else {
+        partner_do_player_collision(partner);
+        if (D_8010CFC8 != 0x32) {
+            x = partner->pos.x;
+            y = partner->pos.y;
+            z = partner->pos.z;
+            hitDepth = 1000.0f;
+            if (npc_raycast_down_around(0x10000, &x, &y, &z, &hitDepth, partner->yaw, partner->collisionRadius) == 0) {
+                y = playerStatus->position.y;
+            }
+
+            if (partner->pos.y <= y + partner->collisionHeight + 2.0f) {
+                if (playerStatus->currentSpeed != 0.0f) {
+                    D_800F84F8 = ((y + (partner->collisionHeight / 2) + 2.0f) - partner->pos.y) * 0.125f;
+                } else {
+                    if (y < playerStatus->position.y) {
+                        var_f0 = playerStatus->position.y + 10.0f - partner->pos.y;
+                    } else {
+                        var_f0 = y + 10.0f - partner->pos.y;
+                    }
+                    var_f2 = 0.25f;
+                    D_800F84F8 = var_f0 * var_f2;
+                }
+            } else {
+                if (playerStatus->position.y + playerStatus->colliderHeight < y) {
+                    D_800F84F8 = (y + partner->collisionHeight - partner->pos.y) * 0.125f;
+                    if (partner->pos.y + D_800F84F8 <= y + partner->collisionHeight) {
+                        D_800F84F8 = (y + partner->collisionHeight - partner->pos.y) * 0.25f;
+                    }
+                } else {
+                    var_f0 = (playerStatus->position.y + playerStatus->colliderHeight + 5.0f) - partner->pos.y;
+                    var_f2 = 0.0625f;
+                    D_800F84F8 = var_f0 * var_f2;
+                }
+            }
+            partner->pos.y += D_800F84F8;
+        }
+        wSavedPartnerPosX = partner->pos.x;
+        wSavedPartnerPosY = partner->pos.y;
+        wSavedPartnerPosZ = partner->pos.z;
+    }
+}
 
 INCLUDE_ASM(s32, "world/partners", partner_flying_follow_player);
 
@@ -959,19 +1390,140 @@ s32 partner_put_away(Npc* partner) {
             partner->jumpVelocity = 0.0f;
             partner->pos.y = partner->moveToPos.y;
             disable_npc_blur(partner);
-            return 1;
+            return TRUE;
     }
-    return 0;
+    return FALSE;
 }
 
-s32 partner_init_get_out(Npc* arg0) {
-    arg0->collisionChannel = 0x10000;
+s32 partner_init_get_out(Npc* npc) {
+    npc->collisionChannel = 0x10000;
     D_8010CFC8 = 0;
-    arg0->flags |= 0x100;
+    npc->flags |= NPC_FLAG_100;
     return D_8010CFC8;
 }
 
 INCLUDE_ASM(s32, "world/partners", partner_get_out);
+// s32 partner_get_out(Npc* npc) {
+//     PlayerStatus* playerStatus = &gPlayerStatus;
+//     Camera* camera = &gCameras[gCurrentCameraID];
+//     f32 sp20;
+//     f32 sp24;
+//     f32 sp28;
+//     f32 sp2C;
+//     f32 temp_f0_2;
+//     f32 temp_f12;
+//     f32 temp_f14;
+//     f32 temp_f2;
+//     f32 duration;
+//     f32 x, y, z;
+
+//     switch (D_8010CFC8) {
+//         case 0:
+//             if (clamp_angle(playerStatus->spriteFacingAngle) < 180.0f) {
+//                 npc->yaw = clamp_angle(camera->currentYaw + 90.0f);
+//             } else {
+//                 npc->yaw = clamp_angle(camera->currentYaw - 90.0f);
+//             }
+//             npc->moveToPos.x = playerStatus->position.x;
+//             npc->moveToPos.y = playerStatus->position.y;
+//             if (wPartner->isFlying) {
+//                 npc->moveToPos.y = playerStatus->position.y;
+//             }
+//             npc->moveToPos.z = playerStatus->position.z;
+//             add_vec2D_polar(&npc->moveToPos.x, &npc->moveToPos.z, playerStatus->colliderDiameter, npc->yaw);
+//             x = npc->moveToPos.x;
+//             y = npc->moveToPos.y;
+//             z = npc->moveToPos.z;
+//             if (!wPartner->isFlying) {
+//                 sp20 = x;
+//                 sp28 = y + npc->collisionHeight;
+//                 sp24 = z;
+//                 add_vec2D_polar(&sp20, &sp24, 2.0f, gCameras[gCurrentCameraID].currentYaw);
+
+//                 sp2C = 1000.0f;
+
+//                 if (((npc_raycast_down_around(0x10000, &sp20, &sp28, &sp24, &sp2C, npc->yaw, npc->collisionRadius) == 0)) || ((u32) (get_collider_type_by_id(D_8010C978) - 2) < 2U) || (sp2C > 100.0f))
+//                 {
+//                     x = playerStatus->position.x;
+//                     y = playerStatus->position.y;
+//                     z = playerStatus->position.z;
+//                     add_vec2D_polar(&sp20, &sp24, 2.0f, gCameras[gCurrentCameraID].currentYaw);
+//                 }
+//             }
+//             temp_f12 = playerStatus->position.x;
+//             npc->pos.x = playerStatus->position.x;
+//             temp_f2 = playerStatus->position.y + (playerStatus->colliderHeight / 2);
+//             npc->pos.y = temp_f2;
+//             temp_f14 = playerStatus->position.z;
+//             sp20 = temp_f12;
+//             sp28 = temp_f2;
+//             npc->moveSpeed = 4.0f;
+//             npc->jumpScale = 1.2f;
+//             npc->pos.z = temp_f14;
+//             sp24 = temp_f14;
+//             npc->planarFlyDist = dist2D(temp_f12, temp_f14, x, z);
+//             npc->yaw = atan2(temp_f12, temp_f14, x, z);
+//             npc->duration = npc->planarFlyDist / npc->moveSpeed;
+//             if (npc->duration < 10) {
+//                 npc->duration = 10;
+//                 npc->moveSpeed = npc->planarFlyDist / 10.0f;
+//             }
+//             npc->jumpVelocity = (y - sp28 + ((npc->jumpScale * npc->duration) * npc->duration * 0.5f)) / npc->duration;
+//             D_8010CFC8 = 1;
+//             sp28 = y - sp28;
+//             npc->currentAnim.w = gPartnerAnimations[D_8010CFD8].anims[2];
+//             break;
+//         case 1:
+//             if (npc->jumpVelocity < 0.0f && func_800397E8(npc, fabsf(npc->jumpVelocity))) {
+//                 D_8010CFC8 = 2;
+//                 return 0;
+//             }
+//             npc->jumpVelocity -= npc->jumpScale;
+//             npc->pos.y += npc->jumpVelocity;
+//             if (npc->jumpVelocity <= 0.0f) {
+//                 npc->currentAnim.w = gPartnerAnimations[D_8010CFD8].anims[3];
+//             }
+//             npc_move_heading(npc, npc->moveSpeed, npc->yaw);
+//             npc_do_world_collision(npc);
+//             duration = npc->duration;
+//             if (duration > 10.0f) {
+//                 duration = 10.0f;
+//             }
+//             npc->duration--;
+//             temp_f0_2 = (10.0f - duration) / 10.0f;
+//             npc->scale.x = temp_f0_2;
+//             npc->scale.y = temp_f0_2;
+//             npc->scale.z = temp_f0_2;
+//             if (npc->duration < 0) {
+//                 D_8010CFC8 = 2;
+//             }
+//             break;
+//         case 2:
+//             npc->pos.y = npc->moveToPos.y;
+//             npc->jumpVelocity = 0.0f;
+//             npc->moveToPos.x = npc->pos.x;
+//             npc->moveToPos.z = npc->pos.z;
+//             npc->scale.x = 1.0f;
+//             npc->scale.y = 1.0f;
+//             npc->scale.z = 1.0f;
+//             npc->moveToPos.y = npc->pos.y;
+//             npc->pos.y = playerStatus->position.y;
+//             if (wPartner->isFlying) {
+//                 npc->pos.y = playerStatus->position.y;
+//             }
+//             partner_clear_player_tracking(npc);
+//             npc->pos.x = npc->moveToPos.x;
+//             npc->pos.y = npc->moveToPos.y;
+//             npc->pos.z = npc->moveToPos.z;
+//             if (npc->flags & NPC_FLAG_1000) {
+//                 if (!wPartner->isFlying) {
+//                     func_8003D660(npc, 2);
+//                 }
+//             }
+//             return TRUE;
+//     }
+//     return FALSE;
+// }
 
 void func_800EF300(void) {
     D_8010CFC8 = 40;
@@ -1093,8 +1645,8 @@ void partner_do_player_collision(Npc* partner) {
     f32 partnerScreenZ;
     f32 W;
 
-    transform_point(gCameras->perspectiveMatrix, playerStatus->position.x, playerStatus->position.y, playerStatus->position.z, 1.0f, &playerScreenX, &playerScreenY, &playerScreenZ, &W);
-    transform_point(gCameras->perspectiveMatrix, partner->pos.x, partner->pos.y, partner->pos.z, 1.0f, &partnerScreenX, &partnerScreenY, &partnerScreenZ, &W);
+    transform_point(gCameras[CAM_DEFAULT].perspectiveMatrix, playerStatus->position.x, playerStatus->position.y, playerStatus->position.z, 1.0f, &playerScreenX, &playerScreenY, &playerScreenZ, &W);
+    transform_point(gCameras[CAM_DEFAULT].perspectiveMatrix, partner->pos.x, partner->pos.y, partner->pos.z, 1.0f, &partnerScreenX, &partnerScreenY, &partnerScreenZ, &W);
     playerScreenX = fabsf(playerScreenX - partnerScreenX);
     playerScreenY = fabsf(playerScreenY - partnerScreenY);
     playerScreenZ = fabsf(playerScreenZ - partnerScreenZ);

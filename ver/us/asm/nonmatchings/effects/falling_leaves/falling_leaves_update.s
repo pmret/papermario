@@ -20,8 +20,8 @@ glabel falling_leaves_update
 /* 35EB10 E00581F0 3C020004 */   lui      $v0, 4
 /* 35EB14 E00581F4 16400006 */  bnez      $s2, .LE0058210
 /* 35EB18 E00581F8 3442F1A0 */   ori      $v0, $v0, 0xf1a0
-/* 35EB1C E00581FC 3C028011 */  lui       $v0, %hi(gPlayerActionState)
-/* 35EB20 E0058200 8042F07C */  lb        $v0, %lo(gPlayerActionState)($v0)
+/* 35EB1C E00581FC 3C028011 */  lui       $v0, %hi(gPlayerStatus + 0xB4)
+/* 35EB20 E0058200 8042F07C */  lb        $v0, %lo(gPlayerStatus + 0xB4)($v0)
 /* 35EB24 E0058204 10400099 */  beqz      $v0, .LE005846C
 /* 35EB28 E0058208 3C020004 */   lui      $v0, 4
 .LE005820C:

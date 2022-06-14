@@ -3,6 +3,7 @@
 
 #define NAMESPACE battle_partner_watt
 
+extern EffectInstance* D_8023C1B0;
 extern EffectInstance* D_8023C1B4;
 extern s32 D_8023C1B8;
 extern s32 D_8023C1BC;
@@ -91,7 +92,26 @@ ApiStatus func_8023859C_70408C(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "battle/partner/watt", func_80238668_704158);
+ApiStatus func_80238668_704158(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    Actor* partner = gBattleStatus.partnerActor;
+    f32 x = partner->currentPos.x + partner->headOffset.x;
+    f32 y = partner->currentPos.y + partner->headOffset.y + partner->unk_19A + 12.0f;
+    f32 z = partner->currentPos.z + partner->headOffset.z;
+
+    if (isInitialCall) {
+        script->functionTemp[0] = evt_get_variable(script, *args++);
+        fx_bulb_glow(0, x, y, z, 1.0f, &D_8023C1B0);
+    }
+
+    script->functionTemp[0]--;
+    if (script->functionTemp[0] == 0) {
+        ((BulbGlowFXData*)D_8023C1B0->data)->unk_14 = 5;
+        return ApiStatus_DONE2;
+    }
+
+    return ApiStatus_BLOCK;
+}
 
 ApiStatus func_80238784_704274(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;

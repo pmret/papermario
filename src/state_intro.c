@@ -74,7 +74,7 @@ void state_init_intro(void) {
 
 void state_step_intro(void) {
     PlayerData* playerData = &gPlayerData;
-    u32 pressedButtons = gGameStatusPtr->pressedButtons;
+    u32 pressedButtons = gGameStatusPtr->pressedButtons[0];
     s32 i;
 
     if (gGameStatusPtr->creditsViewportMode != -1) {
@@ -198,7 +198,7 @@ void state_step_intro(void) {
             }
             D_800A0954 = 255 - D_800A0958;
             gOverrideFlags &= ~GLOBAL_OVERRIDES_8;
-            gCameras->flags &= ~0x2;
+            gCameras[CAM_DEFAULT].flags &= ~0x2;
             gOverrideFlags &= ~GLOBAL_OVERRIDES_DISABLE_RENDER_WORLD;
             update_player();
             update_encounters();

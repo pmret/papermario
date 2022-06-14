@@ -3,8 +3,8 @@
 
 s32 D_E001C5E0 = 0;
 
-extern Gfx D_09000900[];
-extern Gfx D_090009E8[];
+extern Gfx D_09000900_331800[];
+extern Gfx D_090009E8_3318E8[];
 
 void snowflake_init(EffectInstance* effect);
 void snowflake_update(EffectInstance* effect);
@@ -124,7 +124,7 @@ void snowflake_appendGfx(void* effect) {
 
     gDPPipeSync(gMasterGfxPos++);
     gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effectTemp->graphics->data));
-    gSPDisplayList(gMasterGfxPos++, D_09000900);
+    gSPDisplayList(gMasterGfxPos++, D_09000900_331800);
 
     shim_guTranslateF(sp18, part->xPos, part->yPos, part->zPos);
     shim_guRotateF(spD8, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
@@ -140,7 +140,7 @@ void snowflake_appendGfx(void* effect) {
     shim_guMtxF2L(sp118, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-    gSPDisplayList(gMasterGfxPos++, D_090009E8);
+    gSPDisplayList(gMasterGfxPos++, D_090009E8_3318E8);
     gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
     gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
 }

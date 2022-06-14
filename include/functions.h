@@ -189,6 +189,7 @@ void get_screen_coords(s32 camID, f32 x, f32 y, f32 z, s32* screenX, s32* screen
 void parent_collider_to_model(s16 colliderID, s16 modelIndex);
 void clone_model(u16 srcModelID, u16 newModelID);
 struct Model* get_model_from_list_index(s32 listIndex);
+s32 create_model_animator(s16* animPos);
 s32 get_model_list_index_from_tree_index(s32 treeIndex);
 s32 get_transform_group_index(s32);
 void get_model_center_and_size(u16 modelID, f32* centerX, f32* centerY, f32* centerZ, f32* sizeX, f32* sizeY,
@@ -532,7 +533,7 @@ char* int_to_string(s32, char*, s32);
 
 Evt* get_script_by_index(s32 index);
 Evt* get_script_by_id(s32 id);
-s32 partner_test_enemy_collision(s32 arg0);
+s32 partner_test_enemy_collision(Npc* enemy);
 
 s32 get_lava_reset_pos(f32* x, f32* y, f32* z);
 void start_rumble(s32, s32);
@@ -786,6 +787,7 @@ void entity_base_block_init(Entity* entity);
 s32 entity_start_script(Entity* entity);
 void remove_item_entity_by_index(s32 index);
 void set_entity_commandlist(Entity* entity, s32* entityScript);
+s32 func_800DFCF4(void);
 void func_800EF3E4(void);
 void func_80268858(void);
 void func_80269118(void);
@@ -817,7 +819,7 @@ void btl_set_state(s32 battleState);
 void draw_entity_model_A(s32, Mtx*);
 void draw_entity_model_B(s32, Mtx*, s32, Vec3s*);
 void draw_entity_model_C(s32, Mtx*);
-void draw_entity_model_D(s32, Mtx*, s32, Vtx*);
+void draw_entity_model_D(s32, Mtx*, s32, Vec3s*);
 void draw_entity_model_E(s32, Mtx*);
 void free_entity_model_by_index(s32 idx);
 void btl_cam_use_preset(s32);
@@ -902,7 +904,7 @@ void disable_actor_blur(Actor*);
 void reset_actor_blur(Actor*);
 void enable_actor_blur(Actor*);
 void func_80251474(Actor*);
-s32 func_8025C8A0(s32, ActorPart*);
+void func_8025C8A0(s32, ActorPart*);
 void func_8025CD28(s32, ActorPart*);
 void func_8025CEC8(ActorPart*);
 void _remove_part_decoration(ActorPart* part, s32 decorationIndex);

@@ -5,7 +5,7 @@ from util import options
 import re
 
 import pylibyaml
-import yaml
+import yaml as yaml_loader
 
 CHARSET = {
     0x00: "[NOTE]",
@@ -367,13 +367,42 @@ CHARSET_CREDITS = {
 }
 
 class N64SegPm_msg(N64Segment):
-    def __init__(self, rom_start, rom_end, type, name, vram_start, extract, given_subalign, given_is_overlay, given_dir, args, yml):
-        super().__init__(rom_start, rom_end, type, name, vram_start, extract, given_subalign, given_is_overlay, given_dir, args, yml)
+    def __init__(
+        self,
+        rom_start,
+        rom_end,
+        type,
+        name,
+        vram_start,
+        extract,
+        given_subalign,
+        exclusive_ram_id,
+        given_dir,
+        symbol_name_format,
+        symbol_name_format_no_rom,
+        args,
+        yaml,
+    ):
+        super().__init__(
+            rom_start,
+            rom_end,
+            type,
+            name,
+            vram_start,
+            extract,
+            given_subalign,
+            exclusive_ram_id,
+            given_dir,
+            symbol_name_format=symbol_name_format,
+            symbol_name_format_no_rom=symbol_name_format_no_rom,
+            args=args,
+            yaml=yaml,
+        )
 
-        self.files = yml.get("files", []) if isinstance(yml, dict) else []
+        self.files = yaml.get("files", []) if isinstance(yaml, dict) else []
 
         with (Path(__file__).parent / f"{self.name}.yaml").open("r") as f:
-            self.msg_names = yaml.load(f.read(), Loader=yaml.SafeLoader)
+            self.msg_names = yaml_loader.load(f.read(), Loader=yaml_loader.SafeLoader)
 
     def split(self, rom_bytes):
         data = rom_bytes[self.rom_start: self.rom_end]

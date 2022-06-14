@@ -437,16 +437,16 @@ s32 popup_menu_update(void) {
             } else {
                 D_8010D64C = D_8010D648;
 
-                if (gGameStatusPtr->heldButtons & (BUTTON_STICK_UP | BUTTON_Z) &&
-                    (D_8010D648 > 0 || (gGameStatusPtr->pressedButtons & 0x12000)))
+                if (gGameStatusPtr->heldButtons[0] & (BUTTON_STICK_UP | BUTTON_Z) &&
+                    (D_8010D648 > 0 || (gGameStatusPtr->pressedButtons[0] & 0x12000)))
                 {
                     do {
                         D_8010D648--;
                     } while (0); // required to match
                 }
 
-                if (gGameStatusPtr->heldButtons & (BUTTON_STICK_DOWN | BUTTON_R) &&
-                    ((D_8010D648 < gPopupMenu->numEntries - 1) || (gGameStatusPtr->pressedButtons & (BUTTON_STICK_DOWN | BUTTON_R))))
+                if (gGameStatusPtr->heldButtons[0] & (BUTTON_STICK_DOWN | BUTTON_R) &&
+                    ((D_8010D648 < gPopupMenu->numEntries - 1) || (gGameStatusPtr->pressedButtons[0] & (BUTTON_STICK_DOWN | BUTTON_R))))
                 {
                     do {
                         D_8010D648++;
@@ -486,7 +486,7 @@ s32 popup_menu_update(void) {
                     D_8010D655 = D_8010D654 + D_8010D68F;
                 }
 
-                if (gGameStatusPtr->pressedButtons & 0x8000) {
+                if (gGameStatusPtr->pressedButtons[0] & BUTTON_A) {
                     switch (gPopupMenu->popupType) {
                         case 8:
                             sfx_play_sound(SOUND_MENU_NEXT);
@@ -559,7 +559,7 @@ s32 popup_menu_update(void) {
                             break;
                     }
 
-                    if (gGameStatusPtr->pressedButtons & buttons) {
+                    if (gGameStatusPtr->pressedButtons[0] & buttons) {
                         sfx_play_sound(SOUND_MENU_BACK);
                         if (D_8010D698 != 0) {
                             if (D_8010D68E == 0) {
@@ -589,7 +589,7 @@ s32 popup_menu_update(void) {
                             break;
                     }
 
-                    if (D_8010D68E != 0 && (gGameStatusPtr->pressedButtons & buttons)) {
+                    if (D_8010D68E != 0 && (gGameStatusPtr->pressedButtons[0] & buttons)) {
                         sfx_play_sound(SOUND_MENU_BACK);
                         D_8010D640 = -6;
                         break;
@@ -700,7 +700,7 @@ s32 popup_menu_update(void) {
             D_8010D640 = 0x20;
             return 0;
         case 32:
-            if (gGameStatusPtr->pressedButtons & (BUTTON_A | BUTTON_B | BUTTON_C_RIGHT)) {
+            if (gGameStatusPtr->pressedButtons[0] & (BUTTON_A | BUTTON_B | BUTTON_C_RIGHT)) {
                 D_8010D644 = 0;
             }
             if (D_8010D644 != 0) {

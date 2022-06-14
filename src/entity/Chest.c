@@ -201,8 +201,8 @@ void entity_GiantChest_open(Entity* entity) {
                 chest->state++;
                 if (chest->itemID != 0) {
                     suggest_player_anim_setUnkFlag(0x6000C);
-                    sin_cos_rad((90.0f - gCameras->currentYaw) * TAU / 360.0f, &sinRight, &cosRight);
-                    sin_cos_rad((180.0f - gCameras->currentYaw) * TAU / 360.0f, &sinFwd, &cosFwd);
+                    sin_cos_rad((90.0f - gCameras[CAM_DEFAULT].currentYaw) * TAU / 360.0f, &sinRight, &cosRight);
+                    sin_cos_rad((180.0f - gCameras[CAM_DEFAULT].currentYaw) * TAU / 360.0f, &sinFwd, &cosFwd);
                     horizontalOffset = 0.0f;
                     depthOffset = 4.0f;
                     //RadialFlowOut

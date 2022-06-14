@@ -5,9 +5,9 @@
 #include "script_api/map.h"
 
 void world_bombette_init(Npc*);
-void world_bombette_test_first_strike(Npc*);
-void world_bombette_can_use_ability(void);
-s32 world_bombette_can_player_pause(void);
+s32 world_bombette_test_first_strike(Npc*, Npc*);
+s32 world_bombette_can_use_ability(Npc* npc);
+s32 world_bombette_can_player_pause(Npc* );
 void world_bombette_pre_battle(Npc*);
 
 extern EvtScript world_bombette_take_out;

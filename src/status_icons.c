@@ -224,7 +224,7 @@ void update_merlee_message(PopupMessage* popup) {
             popup->unk_16 = 2;
             break;
         case 2:
-            if (gGameStatusPtr->pressedButtons & 0xC000) {
+            if (gGameStatusPtr->pressedButtons[0] & 0xC000) {
                 popup->duration = 0;
             }
             if (popup->duration != 0) {
