@@ -188,7 +188,7 @@ typedef struct SoundPlayer {
     /* 0x56 */ u8 changedPan;
     /* 0x57 */ u8 changedReverb;
     /* 0x58 */ f32 actualSampleRate;
-    /* 0x5C */ u16 sfxVolume;
+    /* 0x5C */ s16 sfxVolume;
     /* 0x5E */ s16 unk_5E;
     /* 0x60 */ SoundLerp tuneLerp;
     /* 0x6C */ SoundLerp volumeLerp;
@@ -215,7 +215,7 @@ typedef struct SoundPlayer {
     /* 0x96 */ s16 currentSoundID;
     /* 0x98 */ u8 unk_98;
     /* 0x99 */ u8 unk_99;
-    /* 0x9A */ s8 sfxParamsFlags;
+    /* 0x9A */ u8 sfxParamsFlags;
     /* 0x9B */ u8 sfxPan;
     /* 0x9C */ u8 reverb;
     /* 0x9D */ u8 instrumentIndex; // ?
@@ -554,7 +554,9 @@ typedef struct BGMPlayer {
     /* 0x068 */ s32* unk_68;
     /* 0x06C */ s32 unk_6C;
     /* 0x070 */ s32 unk_70;
-    /* 0x074 */ char unk_74[0x3C];
+    /* 0x074 */ char unk_74[0x8];
+    /* 0x07C */ s32 unk7C;
+    /* 0x080 */ char unk_80[0x30];
     /* 0x0B0 */ s32 masterTempo;
     /* 0x0B4 */ s32 masterTempoFadeDelta;
     /* 0x0B8 */ s32 masterTempoFadeTempo;

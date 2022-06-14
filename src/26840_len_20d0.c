@@ -256,7 +256,17 @@ s16 func_8004C444(SoundManager* manager) {
 
 INCLUDE_ASM(s32, "26840_len_20d0", func_8004C578);
 
-INCLUDE_ASM(s32, "26840_len_20d0", snd_get_scaled_volume);
+s16 snd_get_scaled_volume(SoundManager* manager, SoundPlayer* player) {
+    s32 outVolume;
+
+    outVolume = (manager->unk_B8 * player->sfxVolume) >> 0xF;
+    if (!(player->sfxParamsFlags & 4)) {
+        if (player->masterVolume != 0) {
+            outVolume = (outVolume * player->masterVolume) >> 0xF;
+        }
+    }
+    return outVolume;
+}
 
 INCLUDE_ASM(s32, "26840_len_20d0", func_8004C884);
 
@@ -264,7 +274,13 @@ INCLUDE_ASM(s32, "26840_len_20d0", snd_set_voice_volume);
 
 INCLUDE_ASM(s32, "26840_len_20d0", func_8004CDF8);
 
-INCLUDE_ASM(void, "26840_len_20d0", snd_SEFCmd_00_SetVolume, SoundManager* manager, SoundPlayer* player);
+void snd_SEFCmd_00_SetVolume(SoundManager* manager, SoundPlayer* player) {
+    player->sfxVolume = *(u8*)player->sefDataReadPos++;
+    if (player->sfxVolume != 0) {
+        player->sfxVolume = player->sfxVolume << 8 | 0xFF;
+    }
+    player->changedVolume = TRUE;
+}
 
 void snd_SEFCmd_01_SetPan(SoundManager* manager, SoundPlayer* player) {
     u8* buf = player->sefDataReadPos;
@@ -410,7 +426,11 @@ void snd_SEFCmd_0F(SoundManager* manager, SoundPlayer* player) {
     }
 }
 
-INCLUDE_ASM(void, "26840_len_20d0", snd_SEFCmd_10_Jump, SoundManager* manager, SoundPlayer* player);
+void snd_SEFCmd_10_Jump(SoundManager* manager, SoundPlayer* player) {
+    u8* buf = player->sefDataReadPos;
+    player->sefReadStart = &buf[2];
+    player->sefDataReadPos = ((buf[0] << 8) + buf[1]) + (s32)manager->sefData;
+}
 
 void snd_SEFCmd_11_Restart(SoundManager* manager, SoundPlayer* player) {
     player->sefDataReadPos = player->sefReadStart;
@@ -471,7 +491,12 @@ void snd_SEFCmd_17(SoundManager* manager, SoundPlayer* player) {
     player->sefDataReadPos = &buf[4];
 }
 
-INCLUDE_ASM(void, "26840_len_20d0", snd_SEFCmd_18, SoundManager* manager, SoundPlayer* player);
+void snd_SEFCmd_18(SoundManager* manager, SoundPlayer* player) {
+    player->unk_5E = *(u8*)player->sefDataReadPos++;
+    if (player->unk_5E != 0) {
+        player->unk_5E = player->unk_5E << 8 | 0xFF;
+    }
+}
 
 INCLUDE_ASM(s32, "26840_len_20d0", func_8004D428);
 
