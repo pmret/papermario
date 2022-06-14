@@ -438,8 +438,8 @@ void pause_map_init(MenuPanel* tab) {
 }
 
 void pause_map_handle_input(MenuPanel* tab) {
-    f32 xMovement = gGameStatusPtr->stickX * 0.05f;
-    f32 yMovement = -gGameStatusPtr->stickY * 0.05f;
+    f32 xMovement = gGameStatusPtr->stickX[0] * 0.05f;
+    f32 yMovement = -gGameStatusPtr->stickY[0] * 0.05f;
     f32 gPauseMapTargetYPosTemp = gPauseMapTargetY;
     f32 gPauseMapTargetXPosTemp = gPauseMapTargetX;
     s32 xTemp;

@@ -735,9 +735,9 @@ void phys_update_standard(void) {
     }
 
     if (!(playerStatus->flags & PLAYER_STATUS_FLAGS_CAMERA_DOESNT_FOLLOW)) {
-        gCameras->targetPos.x = playerStatus->position.x;
-        gCameras->targetPos.y = playerStatus->position.y;
-        gCameras->targetPos.z = playerStatus->position.z;
+        gCameras[CAM_DEFAULT].targetPos.x = playerStatus->position.x;
+        gCameras[CAM_DEFAULT].targetPos.y = playerStatus->position.y;
+        gCameras[CAM_DEFAULT].targetPos.z = playerStatus->position.z;
     }
 }
 
@@ -966,7 +966,7 @@ s32 func_800E0208(void) {
     s32 ret = FALSE;
 
     if (gGameStatusPtr->disableScripts &&
-        (gGameStatusPtr->currentButtons & PLAYER_STATUS_FLAGS_10))
+        (gGameStatusPtr->currentButtons[0] & PLAYER_STATUS_FLAGS_10))
     {
         if (gPartnerActionStatus.partnerActionState == PARTNER_ACTION_NONE) {
             set_action_state(ACTION_STATE_IDLE);

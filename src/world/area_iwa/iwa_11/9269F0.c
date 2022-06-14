@@ -8,7 +8,7 @@ static char* N(exit_str_4) = "kmr_22";
 static char* N(exit_str_5) = "";
 
 ApiStatus func_80240000_9269F0(Evt* script, s32 isInitialCall) {
-    if (gGameStatusPtr->pressedButtons & (BUTTON_A | BUTTON_B)) {
+    if (gGameStatusPtr->pressedButtons[0] & (BUTTON_A | BUTTON_B)) {
         return ApiStatus_DONE2;
     } else {
         return ApiStatus_BLOCK;

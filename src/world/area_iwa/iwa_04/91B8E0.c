@@ -22,7 +22,7 @@ ApiStatus func_80240000_91B8E0(Evt* script, s32 isInitialCall) {
 #include "world/common/enemy/CleftAI.inc.c"
 
 ApiStatus func_80241060_91C940(Evt* script, s32 isInitialCall) {
-    gCameras->unk_498 = 1.0f;
+    gCameras[CAM_DEFAULT].unk_498 = 1.0f;
     return ApiStatus_BLOCK;
 }
 

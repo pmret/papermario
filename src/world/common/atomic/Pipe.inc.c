@@ -20,8 +20,8 @@ ApiStatus N(Pipe_AwaitDownInput)(Evt* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    stickX = abs(gGameStatusPtr->stickX);
-    stickY = gGameStatusPtr->stickY;
+    stickX = abs(gGameStatusPtr->stickX[0]);
+    stickY = gGameStatusPtr->stickY[0];
 
     if (stickX != 0 || stickY != 0) {
         if (atan2(0.0f, 0.0f, stickX, stickY) < 60.0f) {

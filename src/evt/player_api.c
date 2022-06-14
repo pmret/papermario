@@ -4,7 +4,7 @@
 
 Npc* playerNpc = (Npc*) 0x802DB270; // TODO: raw ptr, shiftability
 
-extern s16 D_802DB5B0;
+extern u16 D_802DB5B0;
 extern VirtualEntityList D_802DB5C0;
 extern VirtualEntityList D_802DB6C0;
 extern VirtualEntityList* D_802DB7C0;
@@ -112,9 +112,9 @@ ApiStatus SetPlayerAnimation(Evt* script, s32 isInitialCall) {
 
     do { } while (0); // Needed to match for some reason
 
-    gPlayerAnimation = playerNpc->currentAnim.w;
+    gPlayerStatus.anim = playerNpc->currentAnim.w;
 
-    if (gPlayerAnimation == shakeAnim) {
+    if (gPlayerStatus.anim == shakeAnim) {
         exec_ShakeCam1(0, 0, 2);
     }
 
@@ -453,7 +453,7 @@ ApiStatus SetPlayerFlagBits(Evt* script, s32 isInitialCall) {
 
 ApiStatus GetPlayerActionState(Evt* script, s32 isInitialCall) {
     Bytecode outVar = *script->ptrReadPos;
-    evt_set_variable(script, outVar, gPlayerActionState);
+    evt_set_variable(script, outVar, gPlayerStatus.actionState);
     return ApiStatus_DONE2;
 }
 
@@ -473,7 +473,7 @@ ApiStatus GetPlayerPos(Evt* script, s32 isInitialCall) {
 ApiStatus GetPlayerAnimation(Evt* script, s32 isInitialCall) {
     Bytecode outVar = *script->ptrReadPos;
 
-    evt_set_variable(script, outVar, gPlayerAnimation);
+    evt_set_variable(script, outVar, gPlayerStatus.anim);
     return ApiStatus_DONE2;
 }
 
@@ -579,10 +579,10 @@ ApiStatus UseExitHeading(Evt* script, s32 isInitialCall) {
 }
 
 s32 func_802D23F8(void) {
-    if (gPlayerActionState == ACTION_STATE_IDLE || gPlayerActionState == ACTION_STATE_WALK ||
-        gPlayerActionState == ACTION_STATE_RUN || gPlayerActionState == ACTION_STATE_LAND ||
-        gPlayerActionState == ACTION_STATE_STEP_DOWN_LAND || gPlayerActionState == ACTION_STATE_GROUND_POUND ||
-        gPlayerActionState == ACTION_STATE_ULTRA_POUND || gPlayerActionState == ACTION_STATE_SPIN) {
+    if (gPlayerStatus.actionState == ACTION_STATE_IDLE || gPlayerStatus.actionState == ACTION_STATE_WALK ||
+        gPlayerStatus.actionState == ACTION_STATE_RUN || gPlayerStatus.actionState == ACTION_STATE_LAND ||
+        gPlayerStatus.actionState == ACTION_STATE_STEP_DOWN_LAND || gPlayerStatus.actionState == ACTION_STATE_GROUND_POUND ||
+        gPlayerStatus.actionState == ACTION_STATE_ULTRA_POUND || gPlayerStatus.actionState == ACTION_STATE_SPIN) {
         return TRUE;
     }
     return FALSE;

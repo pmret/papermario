@@ -213,7 +213,7 @@ ApiStatus func_80280410(Evt* script, s32 isInitialCall) {
         func_800E98EC();
         shop->unk_358 = 5;
 
-        if (gGameStatusPtr->pressedButtons & 0x8000) {
+        if (gGameStatusPtr->pressedButtons[0] & BUTTON_A) {
 
             Evt* childScript;
 

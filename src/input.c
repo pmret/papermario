@@ -4,11 +4,11 @@
 extern OSContPad D_8009A5B8;
 
 void func_800287F0(void) {
-    gGameStatusPtr->currentButtons = 0;
-    gGameStatusPtr->pressedButtons = 0;
-    gGameStatusPtr->heldButtons = 0;
-    gGameStatusPtr->stickX = 0;
-    gGameStatusPtr->stickY = 0;
+    gGameStatusPtr->currentButtons[0] = 0;
+    gGameStatusPtr->pressedButtons[0] = 0;
+    gGameStatusPtr->heldButtons[0] = 0;
+    gGameStatusPtr->stickX[0] = 0;
+    gGameStatusPtr->stickY[0] = 0;
     gGameStatusPtr->prevButtons = 0;
     gGameStatusPtr->unk_50[0] = 4;
     gGameStatusPtr->unk_48[0] = 15;

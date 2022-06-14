@@ -801,6 +801,8 @@ typedef struct ThunderboltRingFXData {
 typedef struct BulbGlowFXData {
     /* 0x00 */ s32 unk_00;
     /* 0x04 */ Vec3f pos;
+    /* 0x10 */ char unk_10[0x4];
+    /* 0x14 */ s32 unk_14;
 } BulbGlowFXData; // size = ?
 
 // fx_quizmo_stage
@@ -979,7 +981,7 @@ EffectInstance* fx_shimmer_burst(s32, f32, f32, f32, f32, s32);
 EffectInstance* fx_energy_shockwave(s32, f32, f32, f32, f32, s32);
 EffectInstance* fx_shimmer_wave(s32, f32, f32, f32, f32, f32, s32, s32);
 void fx_aura(s32, f32, f32, f32, f32, EffectInstance**);
-EffectInstance* fx_bulb_glow(s32, f32, f32, f32, f32, s32*);
+EffectInstance* fx_bulb_glow(s32, f32, f32, f32, f32, EffectInstance**);
 void fx_3D(s32, f32, f32, f32, f32, f32, f32, s32, s32*);
 EffectInstance* fx_blast(s32, f32, f32, f32, f32, s32);
 EffectInstance* fx_fire_flower(s32, f32, f32, f32, s32);

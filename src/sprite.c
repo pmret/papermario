@@ -226,7 +226,20 @@ void spr_init_component_anim_state(SpriteComponent* comp, s16*** anim) {
     comp->scale.z = 1.0f;
 }
 
-INCLUDE_ASM(s32, "sprite", spr_init_anim_state);
+
+// very questionable cast, spr_init_component_anim_state args are probably wrong
+void spr_init_anim_state(SpriteComponent** compList, s16** cmdList) {
+    SpriteComponent* component;
+    SpriteComponent** compListIt = compList;
+    s16** cmdListIt = cmdList;
+    while (*compListIt != (SpriteComponent*)-1) {
+        component = *compListIt++;
+        spr_init_component_anim_state(component, (s16***)*cmdListIt);
+        if (*cmdListIt != (s16*)-1) {
+            cmdListIt++;
+        }
+    }
+}
 
 void spr_set_anim_timescale(f32 timescale) {
     spr_animUpdateTimeScale = timescale * 2.0f;
@@ -316,24 +329,45 @@ s32 func_802DDEC4(s32 arg0) {
     return D_802DF590[arg0 * 3]; // The struct of D_802DF590 is probably 0xC in size with this taking the first field.
 }
 
-INCLUDE_ASM(s32, "sprite", func_802DDEE4);
+void func_802DDEE4(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7) {
+    SpriteComponent* component;
+    SpriteComponent** componentListIt;
+    s32 i;
 
-#ifdef NON_EQUIVALENT
-
-// There's a problem here: this matches if arg6 is an s32, but the uses of this function match if it is a u16...
-s32 func_802DDFF8(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, u16 arg6) {
-    return func_802DDEE4(0, -1, arg1, arg2, arg3, arg4, arg5, arg6);
+    if (spr_playerCurrentAnimInfo[arg0].componentList != NULL) {
+        componentListIt = spr_playerCurrentAnimInfo[arg0].componentList;
+        i = 0;
+        
+        while (*componentListIt != (SpriteComponent*)-1) {
+            component = *componentListIt;
+            if (arg1 == -1 || i == arg1) {
+                fold_update(component->unk_4C & 0xFF, arg2, arg3, arg4, arg5, arg6, arg7);
+                if (arg2 != 0) {
+                    component->unk_4C |= 0x10000000;
+                } else {
+                    component->unk_4C &= ~0xF0000000;
+                }
+            }
+            componentListIt++;
+            i++;
+        }
+    }
 }
 
-#else
-
-INCLUDE_ASM(s32, "sprite", func_802DDFF8);
-
-#endif
+void func_802DDFF8(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+    func_802DDEE4(0, -1, arg1, arg2, arg3, arg4, arg5, arg6);
+}
 
 INCLUDE_ASM(s32, "sprite", spr_get_player_raster_info);
 
-INCLUDE_ASM(s32, "sprite", spr_get_player_palettes);
+u16** spr_get_player_palettes(s32 spriteIndex) {
+    SpriteAnimData* sprites = spr_playerSprites[spriteIndex - 1];
+    if (sprites == NULL) {
+        return NULL;
+    }
+    
+    return sprites->palettesOffset;
+}
 
 INCLUDE_ASM(s32, "sprite", spr_load_npc_sprite);
 
@@ -354,7 +388,7 @@ s32 func_802DE748(s32 arg0, s32 arg1) {
         return -1;
     }
 
-    return componentList[arg1]->unk_4F;
+    return componentList[arg1]->unk_4C & 0xFF;
 }
 
 INCLUDE_ASM(s32, "sprite", func_802DE780);
@@ -376,7 +410,7 @@ typedef struct UnkSpriteStruct {
 s32 spr_get_npc_raster_info(SpriteRasterInfo* out, s32 npcSpriteID, s32 rasterIndex) {
     SpriteAnimData* sprite = spr_npcSprites[npcSpriteID];
     UnkSpriteStruct* temp_v1;
-    s32** paletteOffsetCopy;
+    u16** paletteOffsetCopy;
     s32 newVar;
 
     if (sprite != NULL) {

@@ -413,7 +413,7 @@ ApiStatus N(RunMinigame)(Evt* script, s32 isInitialCall) {
     f32 centerX, centerY, centerZ;
     f32 sizeX, sizeY, sizeZ;
     s32 i;
-   
+
     s32 gameFinished;
     s32 hittingPeachBlock;
 
@@ -523,7 +523,7 @@ ApiStatus N(RunMinigame)(Evt* script, s32 isInitialCall) {
                     break;
                 case BOX_STATE_FUZZY_GRAB:
                     gPlayerStatusPtr->anim = ANIM_RUN_PANIC;
-                    if (gGameStatusPtr->pressedButtons & BUTTON_A) {
+                    if (gGameStatusPtr->pressedButtons[0] & BUTTON_A) {
                         data->mashProgress++;
                     }
                     if (data->mashProgress >= 12) {

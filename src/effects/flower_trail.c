@@ -26,7 +26,7 @@ void func_E0012000(FlowerFXData* effect) {
 }
 
 void func_E0012104(FlowerFXData* effect) {
-    if (effect->unk_04 == 0 && effect->unk_78 != 0.0f && gPlayerActionState == ACTION_STATE_IDLE) {
+    if (effect->unk_04 == 0 && effect->unk_78 != 0.0f && gPlayerStatus.actionState == ACTION_STATE_IDLE) {
         effect->unk_06++;
         return;
     }

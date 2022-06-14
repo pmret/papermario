@@ -181,7 +181,7 @@ void func_802BD6BC_32120C(f32* outAngle, f32* outMagnitude) {
     PartnerActionStatus* lakilesterActionStatus = &gPartnerActionStatus;
     f32 stickX = lakilesterActionStatus->stickX;
     f32 stickY = lakilesterActionStatus->stickY;
-    f32 angle = clamp_angle(atan2(0.0f, 0.0f, stickX, -stickY) + gCameras->currentYaw);
+    f32 angle = clamp_angle(atan2(0.0f, 0.0f, stickX, -stickY) + gCameras[CAM_DEFAULT].currentYaw);
     f32 magnitude = 0.0f;
 
     if (dist2D(0.0f, 0.0f, stickX, -stickY) >= 1.0) {
@@ -389,7 +389,7 @@ void func_802BDDD8_321928(Npc* npc) {
     if (npc_test_move_taller_with_slipping(npc->collisionChannel, &x, &y, &z, npc->collisionRadius, npc->yaw,
         npc->collisionHeight, npc->collisionRadius) != 0) {
 
-        collisionStatus->currentInspect = (partnerActionStatus->pressedButtons & 0x8000) ? D_8010C97A : -1;
+        collisionStatus->currentInspect = (partnerActionStatus->pressedButtons & BUTTON_A) ? D_8010C97A : -1;
     }
 
     if (moveSpeed != 0.0f) {
@@ -993,9 +993,9 @@ ApiStatus func_802BF4F0_323040(Evt* script, s32 isInitialCall) {
             break;
     }
 
-    gCameras->targetPos.x = playerStatus->position.x;
-    gCameras->targetPos.y = playerStatus->position.y;
-    gCameras->targetPos.z = playerStatus->position.z;
+    gCameras[CAM_DEFAULT].targetPos.x = playerStatus->position.x;
+    gCameras[CAM_DEFAULT].targetPos.y = playerStatus->position.y;
+    gCameras[CAM_DEFAULT].targetPos.z = playerStatus->position.z;
 
     switch (D_802BFF00) {
         case 3:

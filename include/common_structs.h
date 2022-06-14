@@ -108,6 +108,13 @@ typedef struct DmaTable {
     /* 0x08 */ s32 dmaDest;
 } DmaTable;
 
+typedef struct UseItemStruct {
+    /* 0x00 */ u8* dmaStart;
+    /* 0x04 */ u8* dmaEnd;
+    /* 0x08 */ EvtScript* script;
+    /* 0x0C */ s32 unk_0C;
+} UseItemStruct;
+
 typedef struct PartnerData {
     /* 0x00 */ u8 enabled;
     /* 0x01 */ s8 level;
@@ -1436,22 +1443,17 @@ typedef struct ShopSellPriceData {
 } ShopSellPriceData; // size = 0xC
 
 typedef struct GameStatus {
-    /* 0x000 */ u32 currentButtons;
-    /* 0x004 */ u32 altCurrentButtons; /* input used for batte when flag 80000 set */
+    /* 0x000 */ u32 currentButtons[2];
     /* 0x008 */ char unk_08[8];
-    /* 0x010 */ u32 pressedButtons; /* bits = 1 for frame of button press */
-    /* 0x014 */ u32 altPressedButtons; /* input used for batte when flag 80000 set */
+    /* 0x010 */ u32 pressedButtons[2]; /* bits = 1 for frame of button press */
     /* 0x018 */ char unk_18[8];
-    /* 0x020 */ u32 heldButtons; /* bits = 1 every 4th frame during hold */
-    /* 0x024 */ u32 altHeldButtons; /* input used for batte when flag 80000 set */
+    /* 0x020 */ u32 heldButtons[2]; /* bits = 1 every 4th frame during hold */
     /* 0x028 */ char unk_28[8];
     /* 0x030 */ u32 prevButtons; /* from previous frame */
     /* 0x034 */ char unk_34[12];
-    /* 0x040 */ s8 stickX; /* with deadzone */
-    /* 0x041 */ s8 altStickX; /* input used for batte when flag 80000 set */
+    /* 0x040 */ s8 stickX[2]; /* with deadzone */
     /* 0x042 */ char unk_42[2];
-    /* 0x044 */ s8 stickY; /* with deadzone */
-    /* 0x045 */ s8 altStickY; /* input used for batte when flag 80000 set */
+    /* 0x044 */ s8 stickY[2]; /* with deadzone */
     /* 0x046 */ char unk_46[2];
     /* 0x048 */ s16 unk_48[4];
     /* 0x050 */ s16 unk_50[4];

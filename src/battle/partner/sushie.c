@@ -4,41 +4,34 @@
 extern f64 D_8023C060_70BD00;
 extern s32 D_8023C070;
 
-#ifdef NON_EQUIVALENT
 ApiStatus func_80238000_707CA0(Evt* script, s32 isInitialCall) {
-    BattleStatus* battleStatus = &gBattleStatus;
-    Actor* partnerActor = battleStatus->partnerActor;
-    ActorPart* partsTable;
-    f32 temp_f0;
-    f32 temp_f2;
-    f32 temp_f4;
-    f32 temp_f4_2;
-    f32 temp_f6;
+    ActorPart* targetPart;
 
-    set_goal_pos_to_part(partnerActor + 10, partnerActor->targetActorID, partnerActor->targetPartIndex);
-    partsTable = get_actor_part(get_actor(partnerActor->targetActorID), partnerActor->targetPartIndex);
-    temp_f2 = partnerActor->walk.goalPos.x + partsTable->unk_75;
-    temp_f6 = partnerActor->currentPos.x + 8;
-    temp_f4 = partnerActor->currentPos.y + 16;
-    partnerActor->walk.goalPos.x = temp_f2;
-    partnerActor->walk.currentPos.x = temp_f6;
-    partnerActor->walk.currentPos.y = temp_f4;
-    partnerActor->walk.goalPos.y = (f32) (partnerActor->walk.goalPos.y + (f32) partsTable->unk_76);
-    partnerActor->walk.currentPos.z = (f32) partnerActor->currentPos.z;
-    temp_f0 = atan2(temp_f6, temp_f4, temp_f2, partnerActor->walk.goalPos.y);
-    temp_f4_2 = (temp_f0 - 90.0f) * 0.25f;
-    partnerActor->walk.distance = temp_f0;
-    partnerActor->rotation.z = temp_f4_2;
+    Actor* partner = gBattleStatus.partnerActor;
+    set_goal_pos_to_part(&partner->state, partner->targetActorID, partner->targetPartIndex);
+    targetPart = get_actor_part(get_actor(partner->targetActorID), partner->targetPartIndex);
 
-    if (temp_f4_2 < 0) {
-        partnerActor->rotation.z = 0;
+    partner->state.goalPos.x += targetPart->unk_75;
+    partner->state.goalPos.y += targetPart->unk_76;
+    partner->state.goalPos.z = partner->state.goalPos.z; // required to match
+
+    partner->state.currentPos.x = partner->currentPos.x + 8.0f;
+    partner->state.currentPos.y = partner->currentPos.y + 16.0f;
+    partner->state.currentPos.z = partner->currentPos.z;
+
+    partner->state.angle = atan2(
+        partner->state.currentPos.x, partner->state.currentPos.y,
+        partner->state.goalPos.x, partner->state.goalPos.y
+    );
+
+    partner->rotation.z = (partner->state.angle - 90.0f) * 0.25f;
+
+    if (partner->rotation.z < 0.0f) {
+        partner->rotation.z = 0.0f;
     }
 
     return ApiStatus_DONE2;
 }
-#else
-INCLUDE_ASM(s32, "battle/partner/sushie", func_80238000_707CA0);
-#endif
 
 INCLUDE_ASM(s32, "battle/partner/sushie", func_80238114_707DB4);
 
