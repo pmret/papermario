@@ -503,7 +503,7 @@ typedef struct BGMPlayerTrack {
     /* 0x3A */ s16 trackTremoloAmount;
     /* 0x3C */ char unk_3C[0x2];
     /* 0x3E */ s16 unk_3E;
-    /* 0x40 */ s8 tuneChanged;
+    /* 0x40 */ s8 tuneChanged;  //TODO may be a SoundPlayChange here
     /* 0x41 */ s8 volumeChanged;
     /* 0x42 */ s8 panChanged;
     /* 0x43 */ s8 reverbChanged;
@@ -514,7 +514,11 @@ typedef struct BGMPlayerTrack {
     /* 0x4A */ u8 subTrackPan;
     /* 0x4B */ u8 subTrackReverb;
     /* 0x4C */ u8 unk_4C;
-    /* 0x4D */ char unk_4D[0x5];
+    /* 0x4D */ char unk_4D[0x1];
+    /* 0x4E */ u8 unk_4E;
+    /* 0x4F */ u8 unk_4F;
+    /* 0x50 */ u8 unk_50;
+    /* 0x51 */ char unk_51[0x1];
     /* 0x52 */ u8 unk_52;
     /* 0x53 */ u8 unk_53;
     /* 0x54 */ char unk_54[0x1];
@@ -579,7 +583,9 @@ typedef struct BGMPlayer {
     /* 0x0D4 */ SeqArgs seqCmdArgs;
     /* 0x0D8 */ char unk_D8[0x90];
     /* 0x168 */ s32 unk_168;
-    /* 0x16C */ char unk_16C[0x8];
+    /* 0x16C */ char unk_16C[0x5];
+    /* 0x171 */ u8 unk_171;
+    /* 0x172 */ char unk_172[0x2];
     /* 0x174 */ s16 unk_174[8][9];
     /* 0x204 */ s32* unk_204;
     /* 0x208 */ u16 masterTempoBPM;

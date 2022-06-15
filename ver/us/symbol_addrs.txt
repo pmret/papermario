@@ -5262,7 +5262,6 @@ gMusicMaxVolume = 0x80159AE4; // rom:0xF01E4
 gMusicCurrentVolume = 0x80159AE6; // rom:0xF01E6
 D_80159AE8 = 0x80159AE8; // type:data rom:0xF01E8
 gMusicSettings = 0x80159AF0; // rom:0xF01F0
-D_80159B08 = 0x80159B08; // type:data rom:0xF0208
 UseSettingsFrom = 0x802CB860; // type:func rom:0xF0210
 D_80159B50 = 0x80159B50; // type:data rom:0xF0250
 LoadSettings = 0x802CB9F8; // type:func rom:0xF03A8

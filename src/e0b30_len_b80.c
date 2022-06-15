@@ -68,126 +68,110 @@ void bgm_reset_volume(void) {
     gMusicMaxVolume = 8;
 }
 
-// Loop struct shenanigans
-#ifdef NON_EQUIVALENT
+void bgm_update_volume();
+s32 func_800559C4(s32);
+s32 func_800559FC(s32);
+s32 func_80055AF0(s32);
+s32 func_80055B28(s32);
+s32 func_80055BB8(s32, s32);
+u32 snd_load_song(s32, s32);
+s32 snd_set_song_variation_fade(s32, s32, s32, s32, s32);
+s32 snd_set_song_variation_fade_time(s32, s32, s32);
+s32 snd_start_song_variation(u32, s32);
 
-// Experiment to fix loop
-typedef struct MusicSettingsInner {
-    /* 0x02 */ s16 unk_02;
-    /* 0x04 */ s32 fadeOutTime;
-    /* 0x08 */ s32 fadeInTime;
-    /* 0x0C */ s16 unk_0C;
-    /* 0x0E */ s16 unk_0E;
-    /* 0x10 */ s32 songID;
-    /* 0x14 */ s32 variation;
-    /* 0x18 */ s32 songName;
-    /* 0x1C */ s32 unk_1C;
-    /* 0x20 */ s32 unk_20;
-    /* 0x24 */ s32 unk_24;
-    /* 0x28 */ s32 unk_28;
-    /* 0x2C */ s32 unk_2C;
-} MusicSettingsInner;
-
-typedef struct MusicSettings2 {
-    /* 0x00 */ u16 flags;
-    /* 0x02 */ MusicSettingsInner unk_02;
-} MusicSettings2; // size = 0x30
-
+#ifdef NONEQUIVALENT
 void bgm_update_music_settings(void) {
-    MusicSettingsInner* inner;
-    MusicSettings2* phi_s1;
-    s32* flags;
-    s32 phi_v0;
-    s32 i;
-    s32 a;
-    s32 c;
-
-    phi_s1 = gMusicSettings;
-
-    for (i = 0; i < 2; i++, phi_s1++) {
-        inner = &phi_s1->unk_02;
-        c = 2;
-        a = ~0x4;
-
-        switch (inner->unk_02) {
-            case 0:
-                break;
-            case 1:
-                if (phi_s1->flags & 1) {
-                    if (inner->fadeOutTime < 250) {
-                        if (!(phi_s1->flags & 4)) {
-                            phi_v0 = func_800559C4(inner->songName);
+    MusicSettings* MUSIC = &gMusicSettings[0];
+    s32 error;
+    s32 i = 0;
+    s16 x = 2;
+    s16 mask = ~4;
+    s32 flags;
+    
+    for(i; i < 2; i++, MUSIC++) {
+        switch (MUSIC->state) {
+        case 0:
+            break;
+        case 1:
+            if (MUSIC->flags & 1) {
+                if (MUSIC->fadeOutTime < 250) {
+                    if (!(MUSIC->flags & 4)) {
+                        if (func_800559C4(MUSIC->songName) == 0) {
+                            MUSIC->state = x;
+                        }
+                    } else {
+                        if (func_80055AF0(MUSIC->songName) == 0) {
+                           MUSIC->state = x;
+                        }
+                    }
+                } else if (!(MUSIC->flags & 4)) {
+                    if (snd_set_song_variation_fade_time(MUSIC->songName, MUSIC->fadeOutTime, 0) == 0) {
+                        MUSIC->state = x;
+                    }
+                } else {
+                    if (func_80055BB8(MUSIC->songName, 250) == 0) {
+                        MUSIC->state = x;
+                    }
+                }
+            } else {
+                if (MUSIC->flags & 4) {
+                    MUSIC->flags |= 0x10;
+                }
+                MUSIC->flags &= mask;
+                MUSIC->state = 5;
+            }
+            break;
+        case 2:
+            flags = MUSIC->flags;
+            MUSIC->flags &= mask;
+            if (flags & 1) {
+                if (func_800559FC(MUSIC->songName) == 0) {
+                    MUSIC->flags &= ~1;
+                    MUSIC->state = 3;
+                }
+            } else {
+                MUSIC->state = 5;
+            }
+            break;
+        case 3:
+            MUSIC->state = 4;
+            break;
+        case 4:
+            MUSIC->state = 5;
+            break;
+        case 5:
+            if (!(MUSIC->flags & 8)) {
+                if (MUSIC->songID < 0) {
+                    MUSIC->state = 0;
+                } else {
+                    MUSIC->songName = snd_load_song(MUSIC->songID, i);
+                    if (MUSIC->songName > 0xFFFFU) {
+                        if ((MUSIC->flags & 0x20)) {
+                            snd_set_song_variation_fade(MUSIC->songName, MUSIC->variation, MUSIC->fadeInTime, MUSIC->unk_0C, MUSIC->unk_0E);
+                            MUSIC->flags &= ~0x20;
                         } else {
-                            phi_v0 = func_80055AF0(inner->songName);
+                            bgm_set_target_volume(gMusicDefaultVolume);
                         }
-                    } else if (!(phi_s1->flags & 4)) {
-                        phi_v0 = snd_set_song_variation_fade_time(inner->songName, inner->fadeOutTime, 0);
-                    } else {
-                        phi_v0 = func_80055BB8(inner->songName, 0xFA);
-                    }
-                    if (phi_v0 == 0) {
-                        inner->unk_02 = c;
-                    }
-                } else {
-                    if (phi_s1->flags & 4) {
-                        phi_s1->flags |= 0x10;
-                    }
-                    phi_s1->flags &= a;
-                    inner->unk_02 = 5;
-                }
-                break;
-            case 2:
-                phi_s1->flags &= a;
-                if (!(phi_s1->flags & 1)) {
-                    inner->unk_02 = 5;
-                    break;
-                }
-
-                if (func_800559FC(inner->songName) == 0) {
-                    phi_s1->flags &= ~0x1;
-                    inner->unk_02 = 3;
-                }
-
-                break;
-            case 3:
-                inner->unk_02 = 4;
-                break;
-            case 4:
-                inner->unk_02 = 5;
-                break;
-            case 5:
-                if (!(phi_s1->flags & 8)) {
-                    if (inner->songID < 0) {
-                        inner->unk_02 = 0;
-                    } else {
-                        inner->songName = snd_load_song(inner->songID, i);
-                        if (inner->songName > 0xFFFFU) {
-                            if ((phi_s1->flags & 0x20) != 0) {
-                                snd_set_song_variation_fade(inner->songName, inner->variation, inner->fadeInTime, inner->unk_0C, inner->unk_0E);
-                                phi_s1->flags &= ~0x20;
-                            } else {
-                                bgm_set_target_volume(gMusicDefaultVolume);
-                            }
-                            if (snd_start_song_variation(inner->songName, inner->variation) == 0) {
-                                phi_s1->flags |= 1;
-                                inner->unk_02 = 0;
-                            }
+                        if (snd_start_song_variation(MUSIC->songName, MUSIC->variation) == 0) {
+                            MUSIC->flags |= 1;
+                            MUSIC->state = 0;
                         }
                     }
-                } else {
-                    if (phi_s1->flags & 0x10) {
-                        inner->unk_02 = 0;
-                        phi_s1->flags &= ~0x18;
-                    } else if (func_80055B28(inner->unk_2C) == 0) {
-                        inner->unk_02 = 0;
-                        inner->songID = inner->unk_24;
-                        inner->variation = inner->unk_28;
-                        inner->songName = inner->unk_2C;
-                        phi_s1->flags |= 1;
-                        phi_s1->flags &= ~0x8;
-                    }
                 }
-                break;
+            } else {
+                if (MUSIC->flags & 0x10) {
+                    MUSIC->state = 0;
+                    MUSIC->flags &= ~0x18;
+                } else if (func_80055B28(MUSIC->savedSongName) == 0) {
+                    MUSIC->songID = MUSIC->savedSongID;
+                    MUSIC->variation = MUSIC->savedVariation;
+                    MUSIC->songName = MUSIC->savedSongName;
+                    MUSIC->state = 0;
+                    MUSIC->flags |= 1; 
+                    MUSIC->flags &= ~0x8;
+                }
+            }
+            break;
         }
     }
     bgm_update_volume();
