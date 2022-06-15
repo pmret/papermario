@@ -600,8 +600,8 @@ typedef struct SimpleSpringData {
 typedef s32 (*EntityCallback)(struct Entity*);
 
 typedef struct EntityBlueprint {
-    /* 0x00 */ s16 flags;
-    /* 0x02 */ s16 typeDataSize;
+    /* 0x00 */ u16 flags;
+    /* 0x02 */ u16 typeDataSize;
     /* 0x04 */ UNK_PTR renderCommandList;
     /* 0x08 */ UNK_PTR modelAnimationNodes;
     /* 0x0C */ EntityCallback(fpInit);
@@ -610,16 +610,16 @@ typedef struct EntityBlueprint {
     /* 0x18 */ s32 dmaStart;
     /* 0x1C */ s32 dmaEnd;
     /* 0x20 */ u8 entityType;
-    /* 0x21 */ char aabbSize[3];
+    /* 0x21 */ u8 aabbSize[3];
 } EntityBlueprint; // size = 0x24
 
 typedef struct Entity {
     /* 0x00 */ s32 flags;
     /* 0x04 */ u8 listIndex;
-    /* 0x05 */ char unk_05;
+    /* 0x05 */ s8 unk_05;
     /* 0x06 */ u8 collisionFlags;
     /* 0x07 */ s8 unk_07;
-    /* 0x08 */ char unk_08;
+    /* 0x08 */ u8 unk_08;
     /* 0x09 */ u8 hasEntityScript;
     /* 0x0A */ u8 type;
     /* 0x0B */ u8 alpha;

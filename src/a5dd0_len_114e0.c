@@ -1,6 +1,7 @@
 #include "common.h"
 #include "model.h"
 #include "ld_addrs.h"
+#include "stdlib/stdarg.h"
 
 typedef struct GameMode {
     /* 0x00 */ u16 flags;
@@ -1007,10 +1008,11 @@ extern s32 texPannerAuxU[MAX_TEX_PANNERS];
 extern s32 texPannerAuxV[MAX_TEX_PANNERS];
 extern u32 mdl_nextTextureAddress;
 extern u16 mdl_currentTransformGroupChildIndex;
+extern u16 D_80153226;
 extern ModelNode* D_80153370;
 extern u16 D_80153374;
 extern u16 D_80153376;
-extern s16 D_8015336E;
+extern u16 D_8015336E;
 extern RenderTask* mdl_renderTaskLists[3];
 extern s32 mdl_renderTaskMode;
 extern s32 mdl_renderTaskCount; // num render task entries?
@@ -1032,6 +1034,7 @@ void _delete_shadow(s32 shadowIndex);
 void func_80110F10(void);
 s32 entity_get_collision_flags(Entity* entity);
 void entity_free_static_data(EntityBlueprint* data);
+s32 create_entity_shadow(Entity* entity, f32 x, f32 y, f32 z);
 void update_entity_shadow_position(Entity* entity);
 void func_80117D00(Model* model);
 void appendGfx_model_group(Model* model);
@@ -1832,8 +1835,135 @@ s32 func_80111790(void) {
 
 INCLUDE_ASM(void, "a5dd0_len_114e0", entity_free_static_data, EntityBlueprint* data);
 
+// close, but va_args is hard
+#ifdef NON_EQUIVALENT
+s32 create_entity(unsigned int n_args, ...) {
+    va_list ap;
+    EntityBlueprint* bp;
+    EntityBlueprint** bpPtr;
+    f32 x;
+    f32 y;
+    f32 z;
+    f32 rotY;
+    s32 i;
+    s32 listIndex;
+    Entity* entity;
+    s32* a;
+
+    va_start(ap, n_args);
+
+    load_area_specific_entity_data();
+
+    bp = va_arg(ap, Entity*);
+    bpPtr = &bp;
+    x = va_arg(ap, s32);
+    y = va_arg(ap, s32);
+    z = va_arg(ap, s32);
+    rotY = va_arg(ap, s32);
+
+    a = &CreateEntityVarArgBuffer[3];
+
+    *a-- = 0;
+    *a-- = 0;
+    *a-- = 0;
+
+    for (i = 0; i < 4; i++) {
+        s32 arg = va_arg(ap, s32);
+
+        CreateEntityVarArgBuffer[i] = arg;
+        if (arg == 0x80000000) {
+            break;
+        }
+    }
+
+    va_end(ap);
+
+    for (listIndex = 0; listIndex < ARRAY_COUNT(*gCurrentEntityListPtr); listIndex++) {
+        if ((*gCurrentEntityListPtr)[listIndex] == NULL) {
+            break;
+        }
+    }
+
+    if (listIndex >= 30) {
+        return -1;
+    }
+
+    (*gCurrentEntityListPtr)[listIndex] = entity = heap_malloc(sizeof(*entity));
+    mem_clear(entity, sizeof(*entity));
+    entity->dataBuf.any = NULL;
+    if (bp->typeDataSize != 0) {
+        entity->dataBuf.any = heap_malloc(bp->typeDataSize);
+        mem_clear(entity->dataBuf.any, bp->typeDataSize);
+    }
+    entity->type = bp->entityType;
+    entity->listIndex = listIndex;
+    entity->boundScript = NULL;
+    entity->updateMatrixOverride = NULL;
+    entity->blueprint = bp;
+    entity->scriptReadPos = bp->updateEntityScript;
+    entity->hasEntityScript = entity->scriptReadPos != NULL;
+    entity->savedReadPos = bp->updateEntityScript;
+    entity->updateScriptCallback = NULL;
+    entity->flags = bp->flags | 0x80000000;
+    entity->collisionFlags = 0;
+    entity->unk_07 = 0;
+    entity->renderSetupFunc = NULL;
+    entity->position.x = x;
+    entity->position.y = y;
+    entity->position.z = z;
+    entity->rotation.x = 0.0f;
+    entity->rotation.y = rotY;
+    entity->rotation.z = 0.0f;
+    entity->scale.x = 1.0f;
+    entity->scale.y = 1.0f;
+    entity->scale.z = 1.0f;
+    entity->aabb.x = bp->aabbSize[0];
+    entity->aabb.y = bp->aabbSize[1];
+    entity->aabb.z = bp->aabbSize[2];
+    entity->unk_05 = 1;
+    entity->unk_08 = -1;
+    entity->alpha = -1;
+    entity->virtualModelIndex = -1;
+    entity->shadowIndex = -1;
+    entity->vertexData = NULL;
+
+    if (!(bp->flags & 8)) {
+        if (bp->dmaStart != 0) {
+            load_simple_entity_data(entity, bp);
+        }
+        if (bp->renderCommandList != NULL) {
+            entity->virtualModelIndex = load_entity_model(bp->renderCommandList);
+            exec_entity_model_commandlist(entity->virtualModelIndex);
+        }
+    } else {
+        load_split_entity_data(entity, bp, listIndex);
+    }
+
+    if (bp->entityType != 1 && (entity->flags & (0x200 | 0x100))) {
+        create_entity_shadow(entity, x, y, z);
+    }
+
+    switch (bp->entityType) {
+        case 7:
+        case 8:
+        case 46:
+        case 47:
+        case 49:
+            entity->flags |= ENTITY_FLAGS_4000;
+            break;
+    }
+
+    if ((*bpPtr)->fpInit != NULL) {
+        (*bpPtr)->fpInit(entity);
+    }
+
+    update_entity_transform_matrix(entity);
+    return entity->listIndex;
+}
+#else
 INCLUDE_ASM(s32, "a5dd0_len_114e0", create_entity, EntityBlueprint* data, s32 x, s32 y, s32 z, s32 arg4,
             ...);
+#endif
 
 s32 create_shadow_from_data(ShadowBlueprint* data, f32 x, f32 y, f32 z) {
     Shadow* shadow;
@@ -3239,8 +3369,56 @@ ModelTransformGroup* get_transform_group(s32 index) {
     return (*gCurrentTransformGroups)[index];
 }
 
-void func_8011B1D8(ModelNode*);
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011B1D8);
+void func_8011B1D8(ModelNode* node) {
+    ModelNode* childNode;
+    ModelNodeProperty* prop;
+    s32 numChildren;
+    s32 i;
+    u16 childCount;
+
+    if (node->type == 2) {
+        D_80153376 = D_80153226;
+        return;
+    }
+
+    if (node->type == 5) {
+        prop = get_model_property(node, MODEL_PROP_KEY_GROUP_TYPE);
+        if (prop != NULL && prop->data.s != 0) {
+            mdl_treeIterPos += mdl_get_child_count(node);
+            D_80153376 = mdl_treeIterPos;
+            return;
+        }
+    }
+
+    if (node->groupData != NULL) {
+        numChildren = node->groupData->numChildren;
+        if (numChildren != 0) {
+            for (i = 0; i < numChildren; i++) {
+                childNode = node->groupData->childList[i];
+                childCount = mdl_treeIterPos;
+                if (childNode->type == 5) {
+                    prop = get_model_property(childNode, MODEL_PROP_KEY_GROUP_TYPE);
+                    if (prop != NULL && prop->data.s != 0) {
+                        childCount += mdl_get_child_count(childNode);
+                    }
+                }
+                func_8011B1D8(childNode);
+
+                if (D_80153370 != NULL) {
+                    break;
+                }
+
+                if (D_8015336E == mdl_treeIterPos) {
+                    D_80153370 = childNode;
+                    D_80153374 = childCount;
+                    break;
+                }
+
+                mdl_treeIterPos++;
+            }
+        }
+    }
+}
 
 void make_transform_group(u16 modelID) {
     mdl_treeIterPos = 0;
