@@ -1476,7 +1476,7 @@ typedef struct GameStatus {
     /* 0x07E */ u8 peachFlags; /* (1 = isPeach, 2 = isTransformed, 4 = hasUmbrella) */
     /* 0x07F */ s8 peachDisguise; /* (1 = koopatrol, 2 = hammer bros, 3 = clubba) */
     /* 0x080 */ u8 peachCookingIngredient; ///< @see enum CookingIngredient
-    /* 0x081 */ s8 unk_81;
+    /* 0x081 */ s8 multiplayerEnabled;
     /* 0x082 */ s8 unk_82;
     /* 0x083 */ s8 unk_83;
     /* 0x084 */ s8 playerSpriteSet;

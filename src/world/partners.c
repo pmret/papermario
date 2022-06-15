@@ -569,11 +569,11 @@ void _use_partner_ability(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (!partnerActionStatus->inputDisabled) {
-        partnerActionStatus->stickX = gGameStatusPtr->stickX[gGameStatusPtr->unk_81];
-        partnerActionStatus->stickY = gGameStatusPtr->stickY[gGameStatusPtr->unk_81];
-        partnerActionStatus->currentButtons = gGameStatusPtr->currentButtons[gGameStatusPtr->unk_81];
-        partnerActionStatus->pressedButtons = gGameStatusPtr->pressedButtons[gGameStatusPtr->unk_81];
-        partnerActionStatus->heldButtons = gGameStatusPtr->heldButtons[gGameStatusPtr->unk_81];
+        partnerActionStatus->stickX = gGameStatusPtr->stickX[gGameStatusPtr->multiplayerEnabled];
+        partnerActionStatus->stickY = gGameStatusPtr->stickY[gGameStatusPtr->multiplayerEnabled];
+        partnerActionStatus->currentButtons = gGameStatusPtr->currentButtons[gGameStatusPtr->multiplayerEnabled];
+        partnerActionStatus->pressedButtons = gGameStatusPtr->pressedButtons[gGameStatusPtr->multiplayerEnabled];
+        partnerActionStatus->heldButtons = gGameStatusPtr->heldButtons[gGameStatusPtr->multiplayerEnabled];
     } else {
         partnerActionStatus->stickX = 0;
         partnerActionStatus->stickY = 0;
@@ -899,8 +899,9 @@ s32 partner_use_ability(void) {
 
     if (!is_starting_conversation() &&
         wPartner != NULL &&
-        (wPartner->canUseAbility == NULL || wPartner->canUseAbility(wPartnerNpc))) {
-        if ((gGameStatusPtr->unk_81 != 0) && (actionStatus->currentButtons & BUTTON_B)) {
+        (wPartner->canUseAbility == NULL || wPartner->canUseAbility(wPartnerNpc)))
+    {
+        if ((gGameStatusPtr->multiplayerEnabled != 0) && (actionStatus->currentButtons & BUTTON_B)) {
             sfx_play_sound(SOUND_MENU_ERROR);
         } else if (D_8010CFD8 != 0) {
             D_8010CFE0 = 1;
@@ -1137,7 +1138,7 @@ void partner_walking_update_motion(Npc* partner) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PartnerActionStatus* actionStatus = &gPartnerActionStatus;
 
-    if (gGameStatusPtr->unk_81 == 0 || playerStatus->flags & (PLAYER_STATUS_FLAGS_INPUT_DISABLED | PLAYER_STATUS_FLAGS_1000)
+    if (gGameStatusPtr->multiplayerEnabled == 0 || playerStatus->flags & (PLAYER_STATUS_FLAGS_INPUT_DISABLED | PLAYER_STATUS_FLAGS_1000)
         || actionStatus->inputDisabled != 0 || actionStatus->partnerAction_unk_2 != 0) {
         if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_800)) {
             partner_walking_follow_player(partner);
@@ -1242,7 +1243,7 @@ void partner_flying_update_motion(Npc* partner) {
     f32 var_f0;
     f32 var_f2;
 
-    if (gGameStatusPtr->unk_81 == 0 ||
+    if (gGameStatusPtr->multiplayerEnabled == 0 ||
         (playerStatus->flags & (PLAYER_STATUS_FLAGS_INPUT_DISABLED | PLAYER_STATUS_FLAGS_1000)) ||
         partnerActionStatus->inputDisabled ||
         partnerActionStatus->partnerAction_unk_2 != 0)

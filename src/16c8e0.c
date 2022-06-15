@@ -251,7 +251,7 @@ void btl_update(void) {
     s32 cond;
 
     if (battleStatus->inputBitmask != -1) {
-        if (battleStatus->flags1 & BS_FLAGS1_80000 && gGameStatusPtr->unk_81 != 0) {
+        if ((battleStatus->flags1 & BS_FLAGS1_80000) && gGameStatusPtr->multiplayerEnabled != 0) {
             s32 inputBitmask = battleStatus->inputBitmask;
 
             battleStatus->currentButtonsDown = gGameStatusPtr->currentButtons[1] & inputBitmask;
