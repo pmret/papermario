@@ -812,6 +812,12 @@ enum SoundType {
     SOUND_TYPE_ALTERNATING          = 3
 };
 
+enum SoundIDBits {
+    SOUND_ID_10000                  = 0x00010000,
+    SOUND_ID_LOWER                  = 0x000023FF,
+    SOUND_ID_MID                    = 0x00000C00,
+};
+
 typedef enum MusicError {
     MUSIC_ERROR_NONE                = 0,
     MUSIC_ERROR_11                  = 11,

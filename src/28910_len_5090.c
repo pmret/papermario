@@ -474,17 +474,17 @@ void snd_BGMCmd_F6_TrackVolumeFade(BGMPlayer* player, BGMPlayerTrack* track) {
 void snd_BGMCmd_EA_SubTrackPan(BGMPlayer* player, BGMPlayerTrack* track) {
     track->subTrackPan = player->seqCmdArgs.u8[0] & 0x7F;
     track->unk_57 = 0;
-    track->panChanged = 1;
+    track->panChanged = TRUE;
 }
 
 void snd_BGMCmd_EB_SubTrackReverb(BGMPlayer* player, BGMPlayerTrack* track) {
     track->subTrackReverb = player->seqCmdArgs.u8[0] & 0x7F;
-    track->reverbChanged = 1;
+    track->reverbChanged = TRUE;
 }
 
 void snd_BGMCmd_EC_SegTrackVolume(BGMPlayer* player, BGMPlayerTrack* track) {
     track->segTrackVolume = player->seqCmdArgs.u8[0] & 0x7F;
-    track->volumeChanged = 1;
+    track->volumeChanged = TRUE;
 }
 
 void snd_BGMCmd_ED_SubTrackCoarseTune(BGMPlayer* player, BGMPlayerTrack* track) {
@@ -497,7 +497,7 @@ void snd_BGMCmd_EE_SubTrackFineTune(BGMPlayer* player, BGMPlayerTrack* track) {
 
 void snd_BGMCmd_EF_SegTrackTune(BGMPlayer* player, BGMPlayerTrack* track) {
     track->segTrackTune = player->seqCmdArgs.u16[0];
-    track->tuneChanged = 1;
+    track->tuneChanged = TRUE;
 }
 
 void snd_BGMCmd_F0_TrackTremolo(BGMPlayer* player, BGMPlayerTrack* track) {
@@ -555,13 +555,64 @@ INCLUDE_ASM(void, "28910_len_5090", snd_BGMCmd_FF, BGMPlayer* player, BGMPlayerT
 void snd_BGMCmd_NOP(BGMPlayer* player, BGMPlayerTrack* track) {
 }
 
-INCLUDE_ASM(s32, "28910_len_5090", func_80050568);
+u8 func_80050568(BGMPlayer* player, u8 arg1, u8 arg2) {
+    s32 temp_v0 = player->unk_50;
+    s32 a = (temp_v0 >> 7);
+    s32 b = (temp_v0 >> 2);
+    s32 c = (a + b) & 1;
+    s32 d = (temp_v0 >> 8) & 0x3F;
+    s32 e = (temp_v0 << 4) & 0xC0;
+    s32 f = d + e;
+    s32 g = arg1;
+    s32 retVal;
+    
+    if (c != 0) {
+        retVal = g + ((arg2 * f) >> 8);
+    } else {
+        retVal = g - ((arg2 * f) >> 8);
+    }
+    if (retVal < 0) {
+        retVal = 0;
+    } else if (retVal >= 0x80) {
+        retVal = 0x7F;
+    }
+    return retVal;
+}
 
-INCLUDE_ASM(s32, "28910_len_5090", func_800505E4);
+s16 func_800505E4(s32 arg0, s32 arg1, u8 arg2) {
+    s32 a = (arg0 >> 4);
+    s32 b = (arg0 >> 1);
+    s32 c = (a + b) & 1;
+    s32 d = (arg0 >> 6) & 0xF;
+    s32 e = (arg0 << 2) & 0xF0;
+    s32 f = d + e;
+    s32 retVal;
 
-INCLUDE_ASM(s32, "28910_len_5090", func_80050654);
+    if (c != 0) {
+        s32 g = arg2;
+        s32 h = 5 * f;
+        retVal = arg1 + ((g * h) >> 8);
+    } else {
+        s32 g = arg2;
+        s32 h = 5 * f;
+        retVal = arg1 - ((g * h) >> 8);
+    }
+    return retVal;
+}
 
-INCLUDE_ASM(s32, "28910_len_5090", func_8005068C);
+u8 func_80050654(s32 arg0, u8 arg1, u8 arg2) {
+    s32 a = (arg0 >> 8) & 0x1F; // bitmask 0x1F00
+    s32 b = arg0 & 0xE0;
+    s32 c = a + b;
+    return (arg1 * (0x8000 - arg2 * (c)));
+}
+
+u8 func_8005068C(s32 arg0, u8 arg1, u8 arg2) {
+    s32 a = (arg0 >> 7) & 7; // bitmask 380
+    s32 b = (arg0 << 3) & 0xF8; // bitmask 1F
+    s32 c = a + b;
+    return (arg1 * (0x8000 - (arg2 * c)));
+}
 
 INCLUDE_ASM(s32, "28910_len_5090", func_800506C8, s32 arg0, s32 arg1);
 

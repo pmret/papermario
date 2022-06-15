@@ -27,6 +27,9 @@ void snd_SEFCmd_16(SoundManager* manager, SoundPlayer* player);
 void snd_SEFCmd_17(SoundManager* manager, SoundPlayer* player);
 void snd_SEFCmd_18(SoundManager* manager, SoundPlayer* player);
 
+void snd_set_player_modifiers(SoundPlayer* player, SoundSFXEntry* sfxEntry);
+void func_800538C4(UnkAl48* arg0, s32 arg1);
+
 void func_8004B440(SoundManager* manager, u8 arg1, u8 arg2, SndGlobals* arg3, u8 arg4) {
     u32 i;
     s32 c = 0x6A25E;
@@ -222,7 +225,7 @@ void func_8004C0E4(SoundManager* manager, SoundPlayer* player, s8* readPos, Soun
         player->loopIterCount = 0;
         player->unk_8E = 1;
         player->unk_90 = 0;
-        player->currentSoundID = sfxEntry->soundID & 0x23FF;
+        player->currentSoundID = sfxEntry->soundID & SOUND_ID_LOWER;
         player->unk_98 = arg4;
         player->unk_99 = arg5;
         player->unk_18 = 0;
@@ -265,12 +268,12 @@ void func_8004C0E4(SoundManager* manager, SoundPlayer* player, s8* readPos, Soun
 }
 
 void snd_set_bits_C00(SoundManager* manager, u32 soundID) {
-    s32 soundUpper = (soundID & 0xC00) >> 0xA;
+    s32 soundUpper = (soundID & SOUND_ID_MID) >> 0xA;
     s32 i;
     
     for(i = 0; i < ARRAY_COUNT(manager->unk_16C); i++) {
         SoundPlayer* player = &manager->unk_16C[i];
-        if (player->currentSoundID == (soundID & 0x23FF)) {
+        if (player->currentSoundID == (soundID & SOUND_ID_LOWER)) {
             player->soundC00 = soundUpper;
         }
     }
@@ -281,7 +284,7 @@ void func_8004C2A4(SoundManager* manager, u32 soundID) {
     
     for(i = 0; i < ARRAY_COUNT(manager->unk_16C); i++) {
         SoundPlayer* player = &manager->unk_16C[i];
-        if (player->currentSoundID == (soundID & 0x23FF)) {
+        if (player->currentSoundID == (soundID & SOUND_ID_LOWER)) {
             player->sefDataReadPos = &D_80078464;
             player->unk_80 = 0;
             player->sfxParamsFlags = 1;
@@ -311,7 +314,7 @@ void func_8004C300(SoundManager* manager, u32 soundID) {
 }
 
 void snd_set_modifiers(SoundManager* manager, SoundSFXEntry* sfxEntry) {
-    s32 soundID = sfxEntry->soundID & 0x23FF;
+    s32 soundID = sfxEntry->soundID & SOUND_ID_LOWER;
     s32 i;
     
     for(i = 0; i < ARRAY_COUNT(manager->unk_16C); i++) {
