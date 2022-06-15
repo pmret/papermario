@@ -1,6 +1,8 @@
 #include "common.h"
 #include "audio.h"
 
+extern s8 D_80078464;
+
 void snd_SEFCmd_00_SetVolume(SoundManager* manager, SoundPlayer* player);
 void snd_SEFCmd_01_SetPan(SoundManager* manager, SoundPlayer* player);
 void snd_SEFCmd_02_SetInstrument(SoundManager* manager, SoundPlayer* player);
@@ -202,18 +204,144 @@ void func_8004BA54(SoundManager* manager, s32 arg1) {
 
 INCLUDE_ASM(s32, "26840_len_20d0", func_8004BA74);
 
-INCLUDE_ASM(s32, "26840_len_20d0", func_8004C0E4);
+void func_8004C0E4(SoundManager* manager, SoundPlayer* player, s8* readPos, SoundSFXEntry* sfxEntry, s32 arg4, s32 arg5) {
+    if (manager->unk_C0 == 0) {
+        player->sefDataReadPos = readPos;
+        player->sefReadStart = readPos;
+        player->sfxInstrumentRef = manager->soundData->defaultInstrument;
+        player->sfxPan = 0x40;
+        player->sfxVolume = 0x7FFF;
+        player->unk_5E = 0x7FFF;
+        player->reverb = 0;
+        player->instrumentIndex = 0;
+        player->unk_9E = 0;
+        player->unk_9F = 0x7F;
+        player->unk_92 = 0;
+        player->unk_94 = 0;
+        player->loopStartPos = NULL;
+        player->loopIterCount = 0;
+        player->unk_8E = 1;
+        player->unk_90 = 0;
+        player->currentSoundID = sfxEntry->soundID & 0x23FF;
+        player->unk_98 = arg4;
+        player->unk_99 = arg5;
+        player->unk_18 = 0;
+        player->changed.all = 0;
+        player->unk_A0 = 0;
+        player->unk_A1 = 0;
+        player->unk_A2 = 0;
+        player->unk_A3 = 0;
+        player->volumeLerp.current = 0x7FFFFFFF;
+        player->volumeLerp.goal = 0;
+        player->volumeLerp.step = 0;
+        player->volumeLerp.time = 0;
+        player->tuneLerp.current = 0;
+        player->tuneLerp.goal = 0;
+        player->tuneLerp.step = 0;
+        player->tuneLerp.time = 0;
+        player->unk_80 = 0;
+        player->unk_84 = 0;
+        player->soundC00 = 0;
+        player->sfxParamsFlags = *player->sefDataReadPos++;
+        switch (player->sfxParamsFlags & 3) {
+            case 0:
+                player->unk_A9 = 1;
+                break;
+            case 1:
+                player->unk_A9 = 1;
+                break;
+            case 2:
+                player->sfxParamsFlags &= 0xFC;
+                player->unk_A9 = 1;
+                player->locatorB = player->sefDataReadPos[0];
+                player->locatorC = player->sefDataReadPos[1];
+                player->locatorD = ((u8)player->sefDataReadPos[2] >> 1) | 3;
+                player->unk_7E = player->sefDataReadPos[2] & 7;
+                player->sefDataReadPos = &player->locatorB;
+                break;
+        }
+        snd_set_player_modifiers(player, sfxEntry);
+    }
+}
 
-INCLUDE_ASM(s32, "26840_len_20d0", func_8004C268);
+void snd_set_bits_C00(SoundManager* manager, u32 soundID) {
+    s32 soundUpper = (soundID & 0xC00) >> 0xA;
+    s32 i;
+    
+    for(i = 0; i < ARRAY_COUNT(manager->unk_16C); i++) {
+        SoundPlayer* player = &manager->unk_16C[i];
+        if (player->currentSoundID == (soundID & 0x23FF)) {
+            player->soundC00 = soundUpper;
+        }
+    }
+}
 
-INCLUDE_ASM(s32, "26840_len_20d0", func_8004C2A4);
+void func_8004C2A4(SoundManager* manager, u32 soundID) {
+    s32 i;
+    
+    for(i = 0; i < ARRAY_COUNT(manager->unk_16C); i++) {
+        SoundPlayer* player = &manager->unk_16C[i];
+        if (player->currentSoundID == (soundID & 0x23FF)) {
+            player->sefDataReadPos = &D_80078464;
+            player->unk_80 = 0;
+            player->sfxParamsFlags = 1;
+            player->unk_A9 = 0;
+            player->unk_8E = 1;
+            player->unk_98 = 0;
+            player->unk_99 = 0;
+        }
+    }
+}
 
-INCLUDE_ASM(s32, "26840_len_20d0", func_8004C300);
+void func_8004C300(SoundManager* manager, u32 soundID) {
+    s32 i;
+    
+    for(i = 0; i < ARRAY_COUNT(manager->unk_16C); i++) {
+        SoundPlayer* player = &manager->unk_16C[i];
+        if (soundID == player->unk_99) {
+            player->sefDataReadPos = &D_80078464;
+            player->unk_80 = 0;
+            player->sfxParamsFlags = 1;
+            player->unk_A9 = 0;
+            player->unk_8E = 1;
+            player->unk_98 = 0;
+            player->unk_99 = 0;
+        }
+    }
+}
 
-INCLUDE_ASM(void, "26840_len_20d0", snd_set_modifiers, SoundManager* manager, SoundSFXEntry* sfxEntry);
+void snd_set_modifiers(SoundManager* manager, SoundSFXEntry* sfxEntry) {
+    s32 soundID = sfxEntry->soundID & 0x23FF;
+    s32 i;
+    
+    for(i = 0; i < ARRAY_COUNT(manager->unk_16C); i++) {
+        SoundPlayer* player = &manager->unk_16C[i];
+        if (player->currentSoundID == soundID) {
+            snd_set_player_modifiers(player, sfxEntry);
+        }
+    }
+}
 
-void snd_set_player_modifiers(SoundManager* manager, SoundSFXEntry* sfxEntry);
-INCLUDE_ASM(void, "26840_len_20d0", snd_set_player_modifiers, SoundManager* manager, SoundSFXEntry* sfxEntry);
+void snd_set_player_modifiers(SoundPlayer* player, SoundSFXEntry* sfxEntry) {
+    if (player->sfxParamsFlags & 4) {
+        player->masterVolume = 0;
+    } else {
+        player->masterVolume = sfxEntry->volume;
+        player->changed.volume = TRUE;
+    }
+    if (player->sfxParamsFlags & 8) {
+        player->masterPan = 0;
+    } else {
+        player->masterPan = sfxEntry->pan;
+        player->changed.pan = TRUE;
+    }
+    if (player->sfxParamsFlags & 0x10) {
+        player->masterPitchShift = 0;
+    } else {
+        player->masterPitchShift = sfxEntry->pitchShift;
+        player->changed.tune = TRUE;
+    }
+}
 
 void func_8004C578(SoundManager*, SoundPlayer*, UnkAl48*, u32);
 void func_8004C884(SoundManager*, SoundPlayer*, UnkAl48*, u32);
@@ -279,7 +407,7 @@ void snd_SEFCmd_00_SetVolume(SoundManager* manager, SoundPlayer* player) {
     if (player->sfxVolume != 0) {
         player->sfxVolume = player->sfxVolume << 8 | 0xFF;
     }
-    player->changedVolume = TRUE;
+    player->changed.volume = TRUE;
 }
 
 void snd_SEFCmd_01_SetPan(SoundManager* manager, SoundPlayer* player) {
@@ -287,7 +415,7 @@ void snd_SEFCmd_01_SetPan(SoundManager* manager, SoundPlayer* player) {
     s32 sfxPan = buf[0];
     player->sefDataReadPos = &buf[1];
 
-    player->changedPan = TRUE;
+    player->changed.pan = TRUE;
     player->sfxPan = sfxPan;
 }
 
@@ -310,7 +438,7 @@ void snd_SEFCmd_03_SetReverb(SoundManager* manager, SoundPlayer* player) {
         reverb = manager->unk_8D;
     }
     player->reverb = reverb;
-    player->changedReverb = TRUE;
+    player->changed.reverb = TRUE;
 }
 
 INCLUDE_ASM(void, "26840_len_20d0", snd_SEFCmd_04, SoundManager* manager, SoundPlayer* player);
@@ -372,7 +500,7 @@ void snd_SEFCmd_0C(SoundManager* manager, SoundPlayer* player) {
         vol = (vol << 0x18) | 0xFFFFFF;
     }
     player->volumeLerp.current = vol;
-    player->changedVolume = 1;
+    player->changed.volume = 1;
 }
 
 void snd_SEFCmd_0D(SoundManager* manager, SoundPlayer* player) {

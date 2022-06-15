@@ -174,6 +174,18 @@ typedef struct SoundLerp {
     /* 0xA */ s16 time;
 } SoundLerp; // size = 0xC
 
+typedef struct SoundPlayChange {
+    union {
+        u32 all;
+        struct {
+            u8 tune;
+            u8 volume;
+            u8 pan;
+            u8 reverb;
+        };
+    };
+} SoundPlayChange;
+
 typedef struct SoundPlayer {
     /* 0x00 */ s8* sefDataReadPos;
     /* 0x04 */ char pad4[0xC];
@@ -183,10 +195,7 @@ typedef struct SoundPlayer {
     /* 0x1C */ Instrument* sfxInstrumentRef;
     /* 0x20 */ Instrument sfxInstrument;
     /* 0x50 */ s8* sefReadStart;
-    /* 0x54 */ s8 changedTune;
-    /* 0x55 */ u8 changedVolume;
-    /* 0x56 */ u8 changedPan;
-    /* 0x57 */ u8 changedReverb;
+    /* 0x54 */ SoundPlayChange changed;
     /* 0x58 */ f32 actualSampleRate;
     /* 0x5C */ s16 sfxVolume;
     /* 0x5E */ s16 unk_5E;
@@ -212,7 +221,7 @@ typedef struct SoundPlayer {
     /* 0x92 */ u16 unk_92;
     /* 0x94 */ u8 unk_94;
     /* 0x95 */ char unk_05;
-    /* 0x96 */ s16 currentSoundID;
+    /* 0x96 */ u16 currentSoundID;
     /* 0x98 */ u8 unk_98;
     /* 0x99 */ u8 unk_99;
     /* 0x9A */ u8 sfxParamsFlags;
@@ -221,14 +230,15 @@ typedef struct SoundPlayer {
     /* 0x9D */ u8 instrumentIndex; // ?
     /* 0x9E */ u8 unk_9E;
     /* 0x9F */ u8 unk_9F;
-    /* 0xA0 */ char unk_A0[0x1];
+    /* 0xA0 */ u8 unk_A0;
     /* 0xA1 */ s8 unk_A1;
     /* 0xA2 */ s8 unk_A2;
     /* 0xA3 */ s8 unk_A3;
     /* 0xA4 */ s16 masterPitchShift;
     /* 0xA6 */ s16 masterVolume;
     /* 0xA8 */ s8 masterPan;
-    /* 0xA9 */ char unk_A9[0x3];
+    /* 0xA8 */ s8 unk_A9;
+    /* 0xA9 */ char unk_AA[0x2];
 } SoundPlayer; // size = 0xAC
 
 typedef struct SoundSefHeader {
@@ -263,7 +273,7 @@ typedef struct SoundManager {
     /* 0x0BD */ u8 sfxPlayerSelector;
     /* 0x0BE */ u8 unk_BE;
     /* 0x0BF */ u8 unk_BF;
-    /* 0x0C0 */ s8 unk_C0;
+    /* 0x0C0 */ u8 unk_C0;
     /* 0x0C1 */ char unk_C1[0x1];
     /* 0x0C2 */ SoundSFXEntry unk_C2[16];
     /* 0x162 */ s8 unk_162;
