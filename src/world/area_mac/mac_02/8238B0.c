@@ -1,3 +1,23 @@
 #include "mac_02.h"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_02/8238B0", func_802405F0_8238B0);
+ApiStatus func_802405F0_8238B0(Evt* script, s32 isInitialCall) {
+    Npc* npc;
+    s32 i;
+
+    func_8011B950(71, -1, 1, 1);
+    set_background_color_blend(0, 0, 0, 255);
+    gCameras->bgColor[0] = 0;
+    gCameras->bgColor[1] = 0;
+    gCameras->bgColor[2] = 0;
+
+    for (i = 0; i < MAX_NPCS; i++) {
+        npc = get_npc_by_index(i);
+        if (npc != NULL) {
+            if (npc->flags != 0 && npc->npcID != NPC_PARTNER) {
+                npc->flags |= NPC_FLAG_NO_DROPS;
+            }
+        }
+    }
+
+    return ApiStatus_DONE2;
+}
