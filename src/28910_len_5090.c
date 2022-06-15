@@ -614,7 +614,32 @@ u8 func_8005068C(s32 arg0, u8 arg1, u8 arg2) {
     return (arg1 * (0x8000 - (arg2 * c)));
 }
 
-INCLUDE_ASM(s32, "28910_len_5090", func_800506C8, s32 arg0, s32 arg1);
+void func_800506C8(s32 songName, u32 arg1) {
+    BGMPlayer* player;
+    BGMPlayerTrack* track;
+    s32 changed = FALSE;
+    u8 lowArg1 = arg1 & 0xFF;
+    s32 i;
+    
+    if (songName != 0) {
+        player = snd_get_player_with_song_name(songName);
+        if ((player != NULL) && (player->unk_16C != arg1)) {
+            player->unk_16C = arg1;
+            if (player->unk_170 != lowArg1) {
+                player->unk_170 = arg1;
+                changed = TRUE;
+            }
+            player->unk_171 = (arg1 >> 0x18) & 0x7F;
+            for (i = 0; i < ARRAY_COUNT(player->unk_25C); i++) {
+                track = &player->unk_25C[i];
+                if (changed) {
+                    track->unk_4D = 1;
+                }
+                track->unk_4E = 1;
+            }
+        }
+    }
+}
 
 void func_80050770(BGMPlayer* player, f32 arg1) {
     if (arg1 > 2.0) {

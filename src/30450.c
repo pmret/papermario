@@ -690,16 +690,16 @@ s32 func_8005600C(s32 arg0, s32 arg1) {
     return func_80055F58(arg0, arg1, 0x7F);
 }
 
-s32 func_80056028(s32 arg0, u8 arg1) {
-    return func_800506C8(arg0, arg1);
+void func_80056028(s32 arg0, u8 arg1) {
+    func_800506C8(arg0, arg1);
 }
 
-s32 func_80056044(s32 arg0, u8 arg1) {
-    return func_800506C8(arg0, arg1 | 0x57000000);
+void func_80056044(s32 arg0, u8 arg1) {
+    func_800506C8(arg0, arg1 | 0x57000000);
 }
 
-s32 func_80056068(s32 arg0, u8 arg1) {
-    return func_800506C8(arg0, arg1 | 0x7F000000);
+void func_80056068(s32 arg0, u8 arg1) {
+    func_800506C8(arg0, arg1 | 0x7F000000);
 }
 
 void func_8005608C(s32* arg0, s32* arg1) {
