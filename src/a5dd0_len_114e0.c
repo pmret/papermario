@@ -986,10 +986,10 @@ extern ModelCustomGfxList bModelSpecialDls;
 
 extern ModelCustomGfxBuilderList wCustomModelGfxBuilders;
 extern ModelCustomGfxBuilderList bCustomModelGfxBuilders;
-extern ModelLocalVertexCopy** D_80152190;
-extern ModelLocalVertexCopy** D_801521D0;
+extern ModelLocalVertexCopyList wModelLocalVtxBuffers;
+extern ModelLocalVertexCopyList bModelLocalVtxBuffers;
+extern ModelLocalVertexCopyList* gCurrentModelLocalVtxBuffers;
 
-extern ModelLocalVertexCopy** gCurrentModelLocalVtxBuffers;
 extern ModelNode* D_80152214;
 extern ModelNode* D_80152218;
 extern ModelTreeInfoList D_80152220;
@@ -1033,7 +1033,6 @@ void func_80110F10(void);
 s32 entity_get_collision_flags(Entity* entity);
 void entity_free_static_data(EntityBlueprint* data);
 void update_entity_shadow_position(Entity* entity);
-s32 entity_raycast_down(f32* x, f32* y, f32* z, f32* hitYaw, f32* hitPitch, f32* hitLength);
 void func_80117D00(Model* model);
 void appendGfx_model_group(Model* model);
 void render_transform_group_node(ModelNode* node);
@@ -1295,7 +1294,9 @@ void func_8010FE44(void* arg0) {
     func_8010FD98(arg0, D_8014AFB0);
 }
 
-void entity_model_set_shadow_color(s32 alpha) {
+void entity_model_set_shadow_color(void* data) {
+    s32 alpha = (s32)data;
+
     gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, 0, PRIMITIVE, 0, TEXEL0, 0, 0, 0, 0, 0, TEXEL0, 0, PRIMITIVE, 0);
     gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0x00, 0x00, 0x00, alpha);
 }
@@ -1629,7 +1630,62 @@ s32 entity_get_collision_flags(Entity* entity) {
     return entityFlags;
 }
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", entity_interacts_with_current_partner);
+s32 entity_interacts_with_current_partner(s32 entityIdx) {
+    s32 ret = FALSE;
+    u32 entityType = get_entity_type(entityIdx);
+    s32 partnerID = get_current_partner_id();
+    Entity* entity;
+
+    switch (partnerID) {
+        case PARTNER_BOMBETTE:
+            switch (entityType) {
+                default:
+                    return FALSE;
+                case ENTITY_TYPE_BLUE_SWITCH:
+                case ENTITY_TYPE_RED_SWITCH:
+                case ENTITY_TYPE_MULTI_TRIGGER_BLOCK:
+                case ENTITY_TYPE_BRICK_BLOCK:
+                case ENTITY_TYPE_MULTI_COIN_BRICK:
+                case ENTITY_TYPE_YELLOW_BLOCK:
+                case ENTITY_TYPE_SINGLE_TRIGGER_BLOCK:
+                case ENTITY_TYPE_HIDDEN_YELLOW_BLOCK:
+                case ENTITY_TYPE_HIDDEN_RED_BLOCK:
+                case ENTITY_TYPE_RED_BLOCK:
+                case ENTITY_TYPE_HAMMER1_BLOCK:
+                case ENTITY_TYPE_HAMMER1_BLOCK_TINY:
+                case ENTITY_TYPE_SUPER_BLOCK:
+                case ENTITY_TYPE_BOMBABLE_ROCK:
+                    entity = get_entity_by_index(entityIdx);
+                    entity->flags |= ENTITY_FLAGS_BLOCK_BEING_HIT;
+                    ret = TRUE;
+            }
+            break;
+        case PARTNER_KOOPER:
+             switch (entityType) {
+                default:
+                    return FALSE;
+                case ENTITY_TYPE_BLUE_SWITCH:
+                case ENTITY_TYPE_RED_SWITCH:
+                case ENTITY_TYPE_MULTI_TRIGGER_BLOCK:
+                case ENTITY_TYPE_BRICK_BLOCK:
+                case ENTITY_TYPE_MULTI_COIN_BRICK:
+                case ENTITY_TYPE_YELLOW_BLOCK:
+                case ENTITY_TYPE_SINGLE_TRIGGER_BLOCK:
+                case ENTITY_TYPE_HIDDEN_YELLOW_BLOCK:
+                case ENTITY_TYPE_HIDDEN_RED_BLOCK:
+                case ENTITY_TYPE_RED_BLOCK:
+                case ENTITY_TYPE_HEALING_BLOCK:
+                case ENTITY_TYPE_1C:
+                case ENTITY_TYPE_SAVE_POINT:
+                case ENTITY_TYPE_SUPER_BLOCK:
+                    entity = get_entity_by_index(entityIdx);
+                    entity->flags |= ENTITY_FLAGS_BLOCK_BEING_HIT;
+                    ret = TRUE;
+            }
+            break;
+    }
+    return ret;
+}
 
 s32 test_player_entity_aabb(Entity* entity) {
     f32 yTemp = entity->position.y - (gPlayerStatus.position.y + gPlayerStatus.colliderHeight);
@@ -2506,7 +2562,7 @@ void clear_model_data(void) {
         gCurrentCustomModelGfxPtr = &wModelSpecialDls;
         gCurrentCustomModelGfxBuildersPtr = &wCustomModelGfxBuilders;
         gCurrentModelTreeRoot = &D_80152214;
-        gCurrentModelLocalVtxBuffers = &D_80152190;
+        gCurrentModelLocalVtxBuffers = &wModelLocalVtxBuffers;
         mdl_currentModelTreeNodeInfo = &D_80152220;
         D_801512F0 = &wBgRenderType;
         mdl_bgMultiplyColorA = 0;
@@ -2520,7 +2576,7 @@ void clear_model_data(void) {
         gCurrentCustomModelGfxPtr = &bModelSpecialDls;
         gCurrentCustomModelGfxBuildersPtr = &bCustomModelGfxBuilders;
         gCurrentModelTreeRoot = &D_80152218;
-        gCurrentModelLocalVtxBuffers = &D_801521D0;
+        gCurrentModelLocalVtxBuffers = &bModelLocalVtxBuffers;
         mdl_currentModelTreeNodeInfo = &D_80152A20;
         D_801512F0 = &bBgRenderType;
         gCurrentFogSettings = &bFogSettings;
@@ -2571,7 +2627,7 @@ void init_model_data(void) {
         gCurrentCustomModelGfxPtr = &wModelSpecialDls;
         gCurrentCustomModelGfxBuildersPtr = &wCustomModelGfxBuilders;
         gCurrentModelTreeRoot = &D_80152214;
-        gCurrentModelLocalVtxBuffers = &D_80152190;
+        gCurrentModelLocalVtxBuffers = &wModelLocalVtxBuffers;
         mdl_currentModelTreeNodeInfo = &D_80152220;
         D_801512F0 = &wBgRenderType;
         gCurrentFogSettings = &wFogSettings;
@@ -2581,7 +2637,7 @@ void init_model_data(void) {
         gCurrentCustomModelGfxPtr = &bModelSpecialDls;
         gCurrentCustomModelGfxBuildersPtr = &bCustomModelGfxBuilders;
         gCurrentModelTreeRoot = &D_80152218;
-        gCurrentModelLocalVtxBuffers = &D_801521D0;
+        gCurrentModelLocalVtxBuffers = &bModelLocalVtxBuffers;
         mdl_currentModelTreeNodeInfo = &D_80152A20;
         D_801512F0 = &bBgRenderType;
         gCurrentFogSettings = &bFogSettings;
@@ -2615,6 +2671,7 @@ void func_80116674(void) {
 
     for (i = 0; i < ARRAY_COUNT(*gCurrentModels); i++) {
         Model* m = (*gCurrentModels)[i];
+        do {} while (0);
     }
 }
 #else
@@ -3583,7 +3640,7 @@ void mdl_local_gfx_copy_vertices(u8* from, s32 num, u8* to) {
 INCLUDE_ASM(s32, "a5dd0_len_114e0", mdl_make_local_vertex_copy);
 
 void mdl_get_copied_vertices(s32 copyIndex, Vtx** firstVertex, Vtx** copiedVertices, s32* numCopied) {
-    ModelLocalVertexCopy* mlvc = gCurrentModelLocalVtxBuffers[copyIndex];
+    ModelLocalVertexCopy* mlvc = (*gCurrentModelLocalVtxBuffers)[copyIndex];
     s32 selector = mlvc->selector;
 
     *firstVertex = mlvc->minVertexAddr;
@@ -3592,7 +3649,7 @@ void mdl_get_copied_vertices(s32 copyIndex, Vtx** firstVertex, Vtx** copiedVerti
 }
 
 Gfx* mdl_get_copied_gfx(s32 copyIndex) {
-    ModelLocalVertexCopy* mlvc = gCurrentModelLocalVtxBuffers[copyIndex];
+    ModelLocalVertexCopy* mlvc = (*gCurrentModelLocalVtxBuffers)[copyIndex];
     s32 selector = mlvc->selector;
     Gfx* gfxCopy = mlvc->gfxCopy[selector];
 

@@ -6,7 +6,6 @@ Bytecode* evt_skip_else(Evt* script);
 Bytecode* evt_goto_end_case(Evt* script);
 Bytecode* evt_goto_next_case(Evt* script);
 Bytecode* evt_goto_end_loop(Evt* script);
-s32 evt_get_variable_index(Evt* script, s32 var);
 
 // BSS
 extern char evtDebugPrintBuffer[];
