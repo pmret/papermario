@@ -1778,7 +1778,7 @@ INCLUDE_ASM(s32, "a5dd0_len_114e0", entity_anim_make_vertex_pointers);
 s32 is_entity_data_loaded(Entity* entity, EntityBlueprint* entityData, s32* loadedStart, s32* loadedEnd);
 INCLUDE_ASM(s32, "a5dd0_len_114e0", is_entity_data_loaded);
 
-void load_simple_entity_data(Entity* entity, EntityBlueprint* entityData) {
+void load_simple_entity_data(Entity* entity, EntityBlueprint* entityData, s32 listIndex) {
     s32 loadedStart;
     s32 loadedEnd;
     s32 entitySize;
@@ -1835,11 +1835,10 @@ s32 func_80111790(void) {
 
 INCLUDE_ASM(void, "a5dd0_len_114e0", entity_free_static_data, EntityBlueprint* data);
 
-// close, but va_args is hard
+// matches with this sig, but that breaks other usages of this func.
 #ifdef NON_EQUIVALENT
-s32 create_entity(unsigned int n_args, ...) {
+s32 create_entity(EntityBlueprint* bp, ...) {
     va_list ap;
-    EntityBlueprint* bp;
     EntityBlueprint** bpPtr;
     f32 x;
     f32 y;
@@ -1850,12 +1849,13 @@ s32 create_entity(unsigned int n_args, ...) {
     Entity* entity;
     s32* a;
 
-    va_start(ap, n_args);
+    va_start(ap, bp);
+    bpPtr = &bp;
+    *bpPtr = bp;
 
     load_area_specific_entity_data();
 
-    bp = va_arg(ap, Entity*);
-    bpPtr = &bp;
+
     x = va_arg(ap, s32);
     y = va_arg(ap, s32);
     z = va_arg(ap, s32);
@@ -1865,15 +1865,15 @@ s32 create_entity(unsigned int n_args, ...) {
 
     *a-- = 0;
     *a-- = 0;
-    *a-- = 0;
+    *a = 0;
 
-    for (i = 0; i < 4; i++) {
+    for (listIndex = 3; listIndex > 0; listIndex--) {
         s32 arg = va_arg(ap, s32);
 
-        CreateEntityVarArgBuffer[i] = arg;
         if (arg == 0x80000000) {
             break;
         }
+        *a++ = arg;
     }
 
     va_end(ap);
@@ -1929,7 +1929,7 @@ s32 create_entity(unsigned int n_args, ...) {
 
     if (!(bp->flags & 8)) {
         if (bp->dmaStart != 0) {
-            load_simple_entity_data(entity, bp);
+            load_simple_entity_data(entity, bp, listIndex);
         }
         if (bp->renderCommandList != NULL) {
             entity->virtualModelIndex = load_entity_model(bp->renderCommandList);
@@ -1939,22 +1939,22 @@ s32 create_entity(unsigned int n_args, ...) {
         load_split_entity_data(entity, bp, listIndex);
     }
 
-    if (bp->entityType != 1 && (entity->flags & (0x200 | 0x100))) {
+    if (bp->entityType != 1 && (entity->flags & (ENTITY_FLAGS_SET_SHADOW_FLAG200 | ENTITY_FLAGS_100))) {
         create_entity_shadow(entity, x, y, z);
     }
 
     switch (bp->entityType) {
-        case 7:
-        case 8:
-        case 46:
-        case 47:
-        case 49:
+        case ENTITY_TYPE_BLUE_SWITCH:
+        case ENTITY_TYPE_RED_SWITCH:
+        case ENTITY_TYPE_SIMPLE_SPRING:
+        case ENTITY_TYPE_SCRIPT_SPRING:
+        case ENTITY_TYPE_STAR_BOX_LAUCHER:
             entity->flags |= ENTITY_FLAGS_4000;
             break;
     }
 
-    if ((*bpPtr)->fpInit != NULL) {
-        (*bpPtr)->fpInit(entity);
+    if (bp->fpInit != NULL) {
+        bp->fpInit(entity);
     }
 
     update_entity_transform_matrix(entity);
