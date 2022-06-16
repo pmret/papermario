@@ -866,14 +866,19 @@ segments:
     - [0x109660, c, entity/WoodenCrate]
     - [0x10A230, c, entity/BlueWarpPipe]
     - [0x10A8D0, c, entity/Signpost]
-    - [0x10A9F0, data]
+    - [0x10A9F0, .data, entity/BlockData1]
+    - [0x10B1B0, .data, entity/BlockData2]
+    - [0x10B2C0, .data, entity/BlockData3]
+    - [0x10B4C0, .data, entity/104730]
+    - [0x10B610, .data, entity/BlockData5]
+    #- [0x10A9F0, data]
     #- [0x10A9F0, i4,      shadow/square, 16, 16]
     #- [0x10AA70, i4,      shadow/circle, 16, 16]
-    - [0x10AAF0, data]
+    #- [0x10AAF0, data]
     #- [0x10AB70, i4,      shadow/10AB70, 32, 32]
     #- [0x10AD70, i4,      shadow/10AD70, 32, 32]
-    - [0x10AF70, .data, entity/104730]
-    - [0x10B610, data]
+    #- [0x10B610, .data, entity/104730]
+    - [0x10BB90, data, 10B610]
     - [0x10C880]
   - type: code
     start: 0x10CC10
@@ -12071,12 +12076,20 @@ segments:
     - [0xE31380, data]
     - [0xE314C0]
   - [0xE31530, bin] # unk data
+  - [0xE31A30, bin] # unk data
+  - [0xE31F30, bin] # unk data
   - [0xE32420, bin] # unk data
   - [0xE35670, bin] # unk data
   - [0xE38890, bin] # unk data
   - [0xE3B870, bin] # unk data
+  - [0xE3DA60, bin] # unk data
+  - [0xE3DDB0, bin] # unk data
   - [0xE3E260, bin] # unk data
   - [0xE42240, bin] # unk data
+  - [0xE42740, bin] # unk data
+  - [0xE431F0, bin] # unk data
+  - [0xE43B20, bin] # unk data
+  - [0xE44800, bin] # unk data
   - [0xE4B2E0, bin] # unk data
   - [0xE4E7F0, bin] # unk data
   - [0xE62370, bin] # unk data
