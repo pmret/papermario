@@ -787,7 +787,7 @@ void draw_item_entities(void) {
             rtPtr->distance = 0;
 
             retTask = queue_render_task(rtPtr);
-            retTask->renderMode |= RENDER_MODE_2;
+            retTask->renderMode |= RENDER_TASK_FLAG_2;
         }
 
         do {} while (0); // required to match

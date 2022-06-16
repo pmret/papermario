@@ -104,7 +104,7 @@ BSS s16 D_80153376;
 BSS s8 D_80153378[0x8];
 BSS s8 D_80153380[0x20];
 BSS s8 mdl_renderTaskLists[0xC];
-BSS s32 mdl_renderTaskMode;
+BSS s32 mdl_renderTaskQueueIdx;
 BSS s8 mdl_renderTaskCount[0x10];
 BSS s8 D_801533C0[0x300];
 BSS s8 D_801536C0[0x300];

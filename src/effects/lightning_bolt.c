@@ -36,7 +36,7 @@ void lightning_bolt_render(EffectInstance *effect) {
 
     renderTaskPointer->renderMode = RENDER_MODE_2D;
     retTask = shim_queue_render_task(renderTaskPointer);
-    retTask->renderMode |= RENDER_MODE_2;
+    retTask->renderMode |= RENDER_TASK_FLAG_2;
 }
 
 void func_E00BC36C(void) {

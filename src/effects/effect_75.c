@@ -51,7 +51,7 @@ void fx_75_render(EffectInstance* effect) {
     renderTaskPtr->renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;
 
     retTask = shim_queue_render_task(renderTaskPtr);
-    retTask->renderMode |= RENDER_MODE_2;
+    retTask->renderMode |= RENDER_TASK_FLAG_2;
 }
 
 void func_E00EA664(void) {

@@ -939,7 +939,56 @@ Gfx D_8014C160[] = {
     gsSPEndDisplayList(),
 };
 
-s32 D_8014C188[] = { 0xFFFE7960, 0x000F4240, 0x000F4240, 0x000F4240, 0x00000000, 0x000F4240, 0x000F4240, 0x000F4240, 0x00000000, 0x000F4240, 0x000F4240, 0x000F4240, 0x00000000, 0x000F4240, 0x000F4240, 0x000F4240, 0x00000000, 0x007A1200, 0x007A1200, 0x007A1200, 0x00000000, 0x007A1200, 0x007270E0, 0x007270E0, 0x007270E0, 0x00000000, 0x006ACFC0, 0x006ACFC0, 0x006ACFC0, 0x006ACFC0, 0x00632EA0, 0x00632EA0, 0x00632EA0, 0x00000000, 0x005B8D80, 0x005B8D80, 0x005B8D80, 0x00000000, 0x0053EC60, 0x0053EC60, 0x0053EC60, 0x007A1200, 0x003D0900, 0x0040D990, 0x0044AA20, 0x0044AA20, 0x007A1200, 0x000AAE60, };  // render mode -> distance map?
+s32 mdl_renderTaskBasePriorities[RENDER_MODE_COUNT] = {
+    [RENDER_MODE_SURF_SOLID_AA_ZB_LAYER0]   = -100000,
+    [RENDER_MODE_SURFACE_OPA]               = 1000000,
+    [RENDER_MODE_2]                         = 1000000,
+    [RENDER_MODE_SURFACE_OPA_NO_AA]         = 1000000,
+    [RENDER_MODE_SURFACE_OPA_NO_ZB]         =       0,
+    [RENDER_MODE_DECAL_OPA]                 = 1000000,
+    [RENDER_MODE_6]                         = 1000000,
+    [RENDER_MODE_DECAL_OPA_NO_AA]           = 1000000,
+    [RENDER_MODE_8]                         =       0,
+    [RENDER_MODE_INTERSECTING_OPA]          = 1000000,
+    [RENDER_MODE_A]                         = 1000000,
+    [RENDER_MODE_B]                         = 1000000,
+    [RENDER_MODE_C]                         =       0,
+    [RENDER_MODE_ALPHATEST]                 = 1000000,
+    [RENDER_MODE_E]                         = 1000000,
+    [RENDER_MODE_ALPHATEST_ONESIDED]        = 1000000,
+    [RENDER_MODE_ALPHATEST_NO_ZB]           =       0,
+    [RENDER_MODE_SURFACE_XLU_LAYER1]        = 8000000,
+    [RENDER_MODE_12]                        = 8000000,
+    [RENDER_MODE_SURFACE_XLU_NO_AA]         = 8000000,
+    [RENDER_MODE_SURFACE_XLU_NO_ZB]         =       0,
+    [RENDER_MODE_SURFXLU_ZB_ZUPD]           = 8000000,
+    [RENDER_MODE_SURFACE_XLU_LAYER2]        = 7500000,
+    [RENDER_MODE_17]                        = 7500000,
+    [RENDER_MODE_18]                        = 7500000,
+    [RENDER_MODE_19]                        =       0,
+    [RENDER_MODE_DECAL_XLU]                 = 7000000,
+    [RENDER_MODE_1B]                        = 7000000,
+    [RENDER_MODE_DECAL_XLU_NOAA]            = 7000000,
+    [RENDER_MODE_1D]                        = 7000000,
+    [RENDER_MODE_1E]                        = 6500000,
+    [RENDER_MODE_1F]                        = 6500000,
+    [RENDER_MODE_SHADOW]                    = 6500000,
+    [RENDER_MODE_21]                        =       0,
+    [RENDER_MODE_SURFACE_XLU_LAYER3]        = 6000000,
+    [RENDER_MODE_23]                        = 6000000,
+    [RENDER_MODE_24]                        = 6000000,
+    [RENDER_MODE_25]                        =       0,
+    [RENDER_MODE_INTERSECTING_XLU]          = 5500000,
+    [RENDER_MODE_27]                        = 5500000,
+    [RENDER_MODE_28]                        = 5500000,
+    [RENDER_MODE_SURFXLU_AA_ZB_ZUPD]        = 8000000,
+    [RENDER_MODE_2A]                        = 4000000,
+    [RENDER_MODE_2B]                        = 4250000,
+    [RENDER_MODE_2C]                        = 4500000,
+    [RENDER_MODE_2D]                        = 4500000,
+    [RENDER_MODE_CLOUD]                     = 8000000,
+    [RENDER_MODE_CLOUD_NO_ZB]               =  700000,
+};
 
 s8 D_8014C248[] = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, };
 
@@ -1012,7 +1061,7 @@ extern u16 D_80153374;
 extern u16 D_80153376;
 extern s16 D_8015336E;
 extern RenderTask* mdl_renderTaskLists[3];
-extern s32 mdl_renderTaskMode;
+extern s32 mdl_renderTaskQueueIdx;
 extern s32 mdl_renderTaskCount; // num render task entries?
 
 extern TextureHandle mdl_textureHandles[128];
@@ -3669,7 +3718,7 @@ void clear_render_tasks(void) {
         mdl_renderTaskLists[i] = mdl_clearRenderTasks[i];
     }
 
-    mdl_renderTaskMode = 0;
+    mdl_renderTaskQueueIdx = 0;
     mdl_renderTaskCount = 0;
 }
 
@@ -3680,27 +3729,140 @@ void clear_render_tasks_alt(void) {
         mdl_renderTaskLists[i] = mdl_clearRenderTasks[i];
     }
 
-    mdl_renderTaskMode = 0;
+    mdl_renderTaskQueueIdx = 0;
     mdl_renderTaskCount = 0;
 }
 
 RenderTask* queue_render_task(RenderTask* task) {
-    RenderTask* ret = mdl_renderTaskLists[mdl_renderTaskMode];
+    RenderTask* ret = mdl_renderTaskLists[mdl_renderTaskQueueIdx];
 
-    ASSERT(mdl_renderTaskCount < 0x100);
+    ASSERT(mdl_renderTaskCount < ARRAY_COUNT(*mdl_clearRenderTasks));
 
     ret = &ret[mdl_renderTaskCount++];
 
-    ret->renderMode = 1;
-    if (task->renderMode == 0x2D) {
-        ret->renderMode = 0x21;
+    ret->renderMode = RENDER_TASK_FLAG_ENABLED;
+    if (task->renderMode == RENDER_MODE_2D) {
+        ret->renderMode |= RENDER_TASK_FLAG_20;
     }
 
     ret->appendGfxArg = task->appendGfxArg;
     ret->appendGfx = task->appendGfx;
-    ret->distance = D_8014C188[task->renderMode] - task->distance;
+    ret->distance = mdl_renderTaskBasePriorities[task->renderMode] - task->distance;
 
     return ret;
 }
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", execute_render_tasks);
+void execute_render_tasks(void) {
+    s32 i, j, taskCount;
+    s32 sorted[ARRAY_COUNT(*mdl_clearRenderTasks)];
+    RenderTask* taskList;
+    RenderTask* task;
+    RenderTask* task2;
+    Matrix4f mtxFlipY;
+    void (*appendGfx)(void*);
+
+    if (mdl_renderTaskCount == 0) {
+        return;
+    }
+
+    for (i = taskCount = 0; i < mdl_renderTaskCount; i++) {
+        sorted[taskCount++] = i;
+    }
+
+    // sort in ascending order
+    taskList = mdl_renderTaskLists[mdl_renderTaskQueueIdx];
+    for (i = 0; i < taskCount - 1; i++) {
+        for (j = i + 1; j < taskCount; j++) {
+            s32 t1 = sorted[i];
+            s32 t2 = sorted[j];
+            task = &taskList[t1];
+            task2 = &taskList[t2];
+            if (task->distance > task2->distance) {
+                sorted[i] = t2;
+                sorted[j] = t1;
+            }
+        }
+    }
+
+    // tasks with dist >= 3M sort in descending order
+    taskList = mdl_renderTaskLists[mdl_renderTaskQueueIdx];
+    for (i = 0; i < taskCount - 1; i++) {
+        task = &taskList[sorted[i]];
+        if (task->distance >= 3000000) {
+            for (j = i + 1; j < taskCount; j++) {
+                s32 t1 = sorted[i];
+                s32 t2 = sorted[j];
+                task = &taskList[t1];
+                task2 = &taskList[t2];
+                if (task->distance < task2->distance) {
+                    sorted[i] = t2;
+                    sorted[j] = t1;
+                }
+            }
+        }
+    }
+
+    // tasks with dist <= 800k sort in descending order
+    taskList = mdl_renderTaskLists[mdl_renderTaskQueueIdx];
+    for (i = 0; i < taskCount - 1; i++) {
+        task = &taskList[sorted[i]];
+        if (task->distance > 800000) {
+            break;
+        }
+        for (j = i + 1; j < taskCount; j++) {
+            s32 t1 = sorted[i];
+            s32 t2 = sorted[j];
+            task = &taskList[t1];
+            task2 = &taskList[t2];
+            if (task2->distance > 800000) {
+                break;
+            }
+            if (task->distance < task2->distance) {
+                sorted[i] = t2;
+                sorted[j] = t1;
+            }
+        }
+    }
+
+    D_8014B7F0[0] = taskCount;
+    taskList = mdl_renderTaskLists[mdl_renderTaskQueueIdx];
+    if (gOverrideFlags & GLOBAL_OVERRIDES_80) {
+        Mtx* dispMtx;
+        Gfx* savedGfxPos = NULL;
+
+        guScaleF(mtxFlipY, 1.0f, -1.0f, 1.0f);
+        guMtxF2L(mtxFlipY, &gDisplayContext->matrixStack[gMatrixListPos]);
+        dispMtx = &gDisplayContext->matrixStack[gMatrixListPos++];
+        for (i = 0; i < taskCount; i++) {
+            task = &taskList[sorted[i]];
+            appendGfx = task->appendGfx;
+
+            if (task->renderMode & RENDER_TASK_FLAG_2) {
+                savedGfxPos = gMasterGfxPos++;
+            }
+
+            appendGfx(task->appendGfxArg);
+
+            if (task->renderMode & RENDER_TASK_FLAG_2) {
+                gSPEndDisplayList(gMasterGfxPos++);
+                gSPBranchList(savedGfxPos, gMasterGfxPos);
+                gSPDisplayList(gMasterGfxPos++, savedGfxPos + 1);
+                gSPMatrix(gMasterGfxPos++, dispMtx, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_PROJECTION);
+                gSPDisplayList(gMasterGfxPos++, savedGfxPos + 1);
+                gSPMatrix(gMasterGfxPos++, &gDisplayContext->camPerspMatrix[gCurrentCamID], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
+            }
+        }
+    } else {
+        for (i = 0; i < taskCount; i++) {
+            task = &taskList[sorted[i]];
+            appendGfx = task->appendGfx;
+            appendGfx(task->appendGfxArg);
+        }
+    }
+
+    mdl_renderTaskQueueIdx++;
+    if (mdl_renderTaskQueueIdx > 2) {
+        mdl_renderTaskQueueIdx = 0;
+    }
+    mdl_renderTaskCount = 0;
+}
