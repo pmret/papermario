@@ -79,7 +79,6 @@ EvtScript BtlBringPartnerOut = {
 
 
 extern s32 D_8029DA30;
-extern s8 D_8029DA33;
 extern s32 D_8029DA34;
 extern s32 D_8029DA40;
 extern s32 D_8029DA44;
@@ -972,7 +971,7 @@ void btl_restore_world_cameras(void) {
     }
 
     if (gBattleStatus.flags2 & 0x40) {
-        playerData->currentPartner = D_8029DA33;
+        playerData->currentPartner = D_8029DA30;
     }
 }
 

@@ -322,14 +322,12 @@ INCLUDE_ASM(s32, "17D6A0", func_8024FB3C);
 void func_80250818(void);
 INCLUDE_ASM(s32, "17D6A0", func_80250818);
 
-// missing some moves
-#ifdef NON_MATCHING
 void btl_show_message_popup(PopupMessage* popup) {
-    s32 messageID;
     s32 numLines;
     s32 posX;
     s32 posY = 80;
     s32 width;
+    s32 msgWidth;
     s32 height;
 
     switch (popup->messageIndex) {
@@ -380,10 +378,13 @@ void btl_show_message_popup(PopupMessage* popup) {
         case 83:
         case 84:
             if (popup->unk_17 != 0) {
+                s32 messageID;
+
                 popup->unk_17 = 0;
                 messageID = bMessages[popup->messageIndex];
-                width = get_msg_width(messageID, 0) + 30;
-                posX = 160 - (width / 2);
+                msgWidth = get_msg_width(messageID, 0) + 30;
+                posX = 160 - (msgWidth / 2);
+                width = msgWidth;
                 numLines = get_msg_lines(messageID) - 1;
                 height = bMsgHeights[numLines];
                 set_window_properties(9, posX, posY, width, height, 0, func_80250818, popup, -1);
@@ -399,8 +400,9 @@ void btl_show_message_popup(PopupMessage* popup) {
         case 79:
             if (popup->unk_17 != 0) {
                 popup->unk_17 = 0;
-                width = get_msg_width(bMessages[popup->messageIndex], 0) + 55;
-                posX = 160 - (width / 2);
+                msgWidth = get_msg_width(bMessages[popup->messageIndex], 0) + 55;
+                posX = 160 - (msgWidth / 2);
+                width = msgWidth;
                 height = 40;
                 set_window_properties(9, posX, posY, width, height, 0, func_80250818, popup, -1);
                 set_window_update(9, 1);
@@ -417,11 +419,14 @@ void btl_show_message_popup(PopupMessage* popup) {
         case 33:
         case 34:
             if (popup->unk_17 != 0) {
+                s32 messageID;
+
                 popup->unk_17 = 0;
                 messageID = bMessages[popup->messageIndex];
                 set_message_value(D_8029F640, 0);
-                width = get_msg_width(messageID, 0) + 31;
-                posX = 160 - (width / 2);
+                msgWidth = get_msg_width(messageID, 0) + 31;
+                posX = 160 - (msgWidth / 2);
+                width = msgWidth;
                 numLines = get_msg_lines(messageID) - 1;
                 height = bMsgHeights[numLines];
                 set_window_properties(9, posX, posY, width, height, 0, func_80250818, popup, -1);
@@ -430,11 +435,14 @@ void btl_show_message_popup(PopupMessage* popup) {
             break;
         case 81:
             if (popup->unk_17 != 0) {
+                s32 messageID;
+
                 popup->unk_17 = 0;
                 messageID = bMessages[popup->messageIndex];
                 set_message_msg(bActorMessages[D_8029F640], 0);
-                width = get_msg_width(messageID, 0) + 31;
-                posX = 160 - (width / 2);
+                msgWidth = get_msg_width(messageID, 0) + 31;
+                posX = 160 - (msgWidth / 2);
+                width = msgWidth;
                 numLines = get_msg_lines(messageID) - 1;
                 height = bMsgHeights[numLines];
                 set_window_properties(9, posX, posY, width, height, 0, func_80250818, popup, -1);
@@ -463,11 +471,14 @@ void btl_show_message_popup(PopupMessage* popup) {
         case 65:
         case 66:
             if (popup->unk_17 != 0) {
+                s32 messageID;
+
                 popup->unk_17 = 0;
                 messageID = bMessages[popup->messageIndex];
-                width = get_msg_width(messageID, 0) + 31;
-                posX = 160 - (width / 2);
+                msgWidth = get_msg_width(messageID, 0) + 31;
+                posX = 160 - (msgWidth / 2);
                 posY = 192;
+                width = msgWidth;
                 numLines = get_msg_lines(messageID) - 1;
                 height = bMsgHeights[numLines];
                 if (popup->messageIndex == 0x3B) {
@@ -488,9 +499,6 @@ void btl_show_message_popup(PopupMessage* popup) {
             break;
     }
 }
-#else
-INCLUDE_ASM(s32, "17D6A0", btl_show_message_popup);
-#endif
 
 ApiStatus ShowMessageBox(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
