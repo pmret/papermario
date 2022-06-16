@@ -163,8 +163,8 @@ void func_8004E158(BGMPlayer* player, s32 arg1, s32 arg2, SndGlobals* arg3) {
     player->masterTempo = 0x3CF0;
     player->masterVolume = 0x7F000000;
     player->unk_22B = 1;
-    player->unk_14.s32 = 0;
-    player->unk_18.s32 = 0;
+    player->unk_14 = 0;
+    player->unk_18 = 0;
     player->songName = 0;
     player->fadeSongName = 0;
     player->unk_58 = 0;
@@ -273,10 +273,10 @@ s32 func_8004E4B8(BGMPlayer* player) {
     u16 hasMore = TRUE;
     s32 retVal = FALSE;
 
-    player->unk_50.s32 = player->unk_50.u16[1] + player->unk_18.u16[1] + player->unk_14.u16[1];
-    player->unk_54.s32 = player->unk_54.u16[1] +
-        ((player->unk_18.s32 << 4) & 0xFFFF) +
-        ((player->unk_14.s32 >> 4) & 0xFFFF);
+    player->unk_50 = (u16)player->unk_50 + (u16)player->unk_18 + (u16)player->unk_14;
+    player->unk_54 = (u16)player->unk_54 +
+        ((player->unk_18 << 4) & 0xFFFF) +
+        ((player->unk_14 >> 4) & 0xFFFF);
     do {
         switch (player->unk_221) {
         case 0:
@@ -611,7 +611,7 @@ void snd_BGMCmd_NOP(BGMPlayer* player, BGMPlayerTrack* track) {
 }
 
 u8 func_80050568(BGMPlayer* player, u8 arg1, u8 arg2) {
-    s32 temp_v0 = player->unk_50.s32;
+    s32 temp_v0 = player->unk_50;
     s32 a = (temp_v0 >> 7);
     s32 b = (temp_v0 >> 2);
     s32 c = (a + b) & 1;

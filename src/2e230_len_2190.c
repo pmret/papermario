@@ -211,7 +211,7 @@ void snd_update_sequence_players(void) {
             snd_update_bgm_fade(bgmPlayer1);
         }
         if (bgmPlayer1->songName != 0) {
-            bgmPlayer1->unk_18.s32++;
+            bgmPlayer1->unk_18++;
         }
 
         bgmPlayer1->unk_10 -= bgmPlayer1->unkFrequency;
@@ -235,7 +235,7 @@ void snd_update_sequence_players(void) {
                 snd_update_bgm_fade(bgmPlayer2);
             }
             if (bgmPlayer2->songName != 0) {
-                bgmPlayer2->unk_18.s32++;
+                bgmPlayer2->unk_18++;
             }
 
             bgmPlayer2->unk_10 -= bgmPlayer2->unkFrequency;

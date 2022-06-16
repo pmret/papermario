@@ -556,8 +556,8 @@ typedef struct BGMPlayer {
     /* 0x008 */ s32 unkFrequency; //?
     /* 0x00C */ s32 unk_0C;
     /* 0x010 */ s32 unk_10;
-    /* 0x014 */ Q32 unk_14;
-    /* 0x018 */ Q32 unk_18;
+    /* 0x014 */ s32 unk_14;
+    /* 0x018 */ s32 unk_18;
     /* 0x01C */ s32 songName;
     /* 0x020 */ s32 fadeSongName;
     /* 0x024 */ s32 bgmFileIndex;
@@ -565,8 +565,8 @@ typedef struct BGMPlayer {
     /* 0x02C */ Fade fadeInfo;
     /* 0x048 */ s32 unk_48;
     /* 0x04C */ u8 unk_4C[4];
-    /* 0x050 */ Q32 unk_50;
-    /* 0x054 */ Q32 unk_54;
+    /* 0x050 */ s32 unk_50;
+    /* 0x054 */ s32 unk_54;
     /* 0x058 */ s16 unk_58;
     /* 0x05A */ s16 unk_5A;
     /* 0x05C */ s16 unk_5C;
