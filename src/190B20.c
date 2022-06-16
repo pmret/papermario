@@ -1053,7 +1053,7 @@ s32* D_8028358C[] = {
     (s32*)D_8028358C, (s32*)D_8028358C, 0
 };
 
-s16 D_802835D0[] = { 28, 40 };
+s16 bMsgHeights[] = { 28, 40 }; // keyed by number of lines in the message (1 or 2)
 s16 D_802835D4[] = { 0, -2 };
 s16 D_802835D8[] = { 0, -12 };
 

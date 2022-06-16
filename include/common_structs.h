@@ -1753,7 +1753,7 @@ typedef struct DecorationTable {
     /* 0x765 */ s8 unk_765;
     /* 0x766 */ s8 unk_766;
     /* 0x767 */ s8 unk_767;
-    /* 0x768 */ s8 unk_768;
+    /* 0x768 */ u8 unk_768;
     /* 0x769 */ char unk_769[3];
     /* 0x76C */ s16 unk_76C[16];
     /* 0x78C */ char unk_78C[76];
@@ -2363,10 +2363,22 @@ typedef struct ActionCommandStatus {
 
 typedef struct Message {
     /* 0x00 */ s32 unk_00;
-    /* 0x04 */ char unk_04[0x1C];
+    /* 0x04 */ s32 unk_04;
+    /* 0x08 */ f32 unk_08;
+    /* 0x0C */ f32 unk_0C;
+    /* 0x10 */ f32 unk_10;
+    /* 0x14 */ f32 unk_14;
+    /* 0x18 */ f32 unk_18;
+    /* 0x1C */ f32 unk_1C;
     /* 0x20 */ s32 unk_20;
     /* 0x24 */ s32 unk_24;
-    /* 0x28 */ char unk_28[0x1C];
+    /* 0x28 */ f32 unk_28;
+    /* 0x2C */ f32 unk_2C;
+    /* 0x30 */ f32 unk_30;
+    /* 0x34 */ f32 unk_34;
+    /* 0x38 */ f32 unk_38;
+    /* 0x3C */ f32 unk_3C;
+    /* 0x40 */ f32 unk_40;
     /* 0x44 */ s32 unk_44;
     /* 0x48 */ char unk_48[0x4];
 } Message; // size = 0x4C

@@ -9,15 +9,16 @@ extern u16 D_802840DC[];
 extern u8 D_80284104[];
 extern u8 D_80284120[];
 
+void update_player_actor_shadow(void);
 void func_80255FE0(s32, void*);
 void func_802571F0(s32, Actor*);
-void update_player_actor_shadow(void);
+void func_80259494(ActorPart*);
 void func_8025950C(ActorPart*, s32, Matrix4f);
 void func_802596C0(ActorPart*, s32, Matrix4f);
 void func_802597B0(ActorPart*, s32, Matrix4f);
 void func_8025995C(ActorPart*, s32, Matrix4f);
-void func_8025C918(void);
-void func_8025CD40(void);
+void func_8025C918(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx);
+void func_8025CD40(s32, ActorPart*);
 
 void func_80259A48(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4);
 void func_80259AAC(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4);
@@ -857,7 +858,32 @@ INCLUDE_ASM(s32, "182B30", func_80259494);
 
 INCLUDE_ASM(s32, "182B30", func_8025950C);
 
-INCLUDE_ASM(s32, "182B30", func_802596C0);
+void func_802596C0(ActorPart* part, s32 yaw, Matrix4f mtx) {
+    DecorationTable* temp_s2;
+    s32 opacity;
+    s32 idMask;
+
+    opacity = 255;
+    temp_s2 = part->decorationTable;
+    idMask = 0;
+
+    if (part->opacity < 255) {
+        idMask = 0x80000000;
+        opacity = part->opacity;
+    }
+
+    if (part->flags & ACTOR_PART_FLAG_100) {
+        idMask = 0x80000000;
+        opacity = (opacity * 120) / 255;
+    }
+
+    if (temp_s2->unk_768 != 0) {
+        func_80259494(part);
+        spr_draw_npc_sprite(part->unk_84 | 0x20000000 | idMask, yaw, opacity, temp_s2->unk_76C, mtx);
+    } else {
+        spr_draw_npc_sprite(part->unk_84 | 0x20000000 | idMask, yaw, opacity, temp_s2->unk_6D4, mtx);
+    }
+}
 
 INCLUDE_ASM(s32, "182B30", func_802597B0);
 
@@ -1824,15 +1850,15 @@ INCLUDE_ASM(s32, "182B30", func_8025BAA0);
 
 INCLUDE_ASM(s32, "182B30", func_8025C120);
 
-s32 func_8025C840(s32 arg0, ActorPart* arg1) {
+s32 func_8025C840(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx) {
 
-    if (!(arg1->flags & 2)) {
-        switch (arg1->decorationTable->unk_750) {
+    if (!(part->flags & 2)) {
+        switch (part->decorationTable->unk_750) {
             case 0:
-                func_8025C8A0(arg0, arg1);
+                func_8025C8A0(arg0, part);
                 return 0;
             case 11:
-                func_8025C918();
+                func_8025C918(arg0, part, yaw, mtx);
                 break;
         }
     }
@@ -1852,16 +1878,15 @@ void func_8025C8A0(s32 arg0, ActorPart* arg1) {
 
 INCLUDE_ASM(s32, "182B30", func_8025C918);
 
-s32 func_8025CCC8(s32 arg0, ActorPart* arg1) {
-
-    if (!(arg1->flags & 2)) {
-        switch (arg1->decorationTable->unk_764) {
+s32 func_8025CCC8(s32 arg0, ActorPart* part) {
+    if (!(part->flags & ACTOR_PART_FLAG_2)) {
+        switch (part->decorationTable->unk_764) {
             case 0:
-                func_8025CD28(arg0, arg1);
+                func_8025CD28(arg0, part);
                 return 0;
             case 1:
-                func_8025CD40();
-                break;
+                func_8025CD40(arg0, part);
+                return 0;
         }
     }
     return 0;

@@ -54,9 +54,9 @@ glabel btl_show_message_popup
 /* 17F828 80250F48 0280302D */  daddu     $a2, $s4, $zero
 /* 17F82C 80250F4C 00021040 */  sll       $v0, $v0, 1
 /* 17F830 80250F50 0240382D */  daddu     $a3, $s2, $zero
-/* 17F834 80250F54 3C088028 */  lui       $t0, %hi(D_802835D0)
+/* 17F834 80250F54 3C088028 */  lui       $t0, %hi(bMsgHeights)
 /* 17F838 80250F58 01024021 */  addu      $t0, $t0, $v0
-/* 17F83C 80250F5C 850835D0 */  lh        $t0, %lo(D_802835D0)($t0)
+/* 17F83C 80250F5C 850835D0 */  lh        $t0, %lo(bMsgHeights)($t0)
 /* 17F840 80250F60 3C028025 */  lui       $v0, %hi(func_80250818)
 /* 17F844 80250F64 24420818 */  addiu     $v0, $v0, %lo(func_80250818)
 /* 17F848 80250F68 AFA20018 */  sw        $v0, 0x18($sp)
@@ -134,9 +134,9 @@ glabel btl_show_message_popup
 /* 17F960 80251080 0280302D */  daddu     $a2, $s4, $zero
 /* 17F964 80251084 00021040 */  sll       $v0, $v0, 1
 /* 17F968 80251088 0240382D */  daddu     $a3, $s2, $zero
-/* 17F96C 8025108C 3C088028 */  lui       $t0, %hi(D_802835D0)
+/* 17F96C 8025108C 3C088028 */  lui       $t0, %hi(bMsgHeights)
 /* 17F970 80251090 01024021 */  addu      $t0, $t0, $v0
-/* 17F974 80251094 850835D0 */  lh        $t0, %lo(D_802835D0)($t0)
+/* 17F974 80251094 850835D0 */  lh        $t0, %lo(bMsgHeights)($t0)
 /* 17F978 80251098 3C028025 */  lui       $v0, %hi(func_80250818)
 /* 17F97C 8025109C 24420818 */  addiu     $v0, $v0, %lo(func_80250818)
 /* 17F980 802510A0 AFA20018 */  sw        $v0, 0x18($sp)
@@ -185,9 +185,9 @@ glabel btl_show_message_popup
 /* 17FA28 80251148 0280302D */  daddu     $a2, $s4, $zero
 /* 17FA2C 8025114C 00021040 */  sll       $v0, $v0, 1
 /* 17FA30 80251150 0240382D */  daddu     $a3, $s2, $zero
-/* 17FA34 80251154 3C088028 */  lui       $t0, %hi(D_802835D0)
+/* 17FA34 80251154 3C088028 */  lui       $t0, %hi(bMsgHeights)
 /* 17FA38 80251158 01024021 */  addu      $t0, $t0, $v0
-/* 17FA3C 8025115C 850835D0 */  lh        $t0, %lo(D_802835D0)($t0)
+/* 17FA3C 8025115C 850835D0 */  lh        $t0, %lo(bMsgHeights)($t0)
 /* 17FA40 80251160 3C028025 */  lui       $v0, %hi(func_80250818)
 /* 17FA44 80251164 24420818 */  addiu     $v0, $v0, %lo(func_80250818)
 /* 17FA48 80251168 AFA20018 */  sw        $v0, 0x18($sp)
@@ -226,9 +226,9 @@ glabel btl_show_message_popup
 /* 17FAC8 802511E8 00021840 */  sll       $v1, $v0, 1
 /* 17FACC 802511EC 2410003B */  addiu     $s0, $zero, 0x3b
 /* 17FAD0 802511F0 86620012 */  lh        $v0, 0x12($s3)
-/* 17FAD4 802511F4 3C088028 */  lui       $t0, %hi(D_802835D0)
+/* 17FAD4 802511F4 3C088028 */  lui       $t0, %hi(bMsgHeights)
 /* 17FAD8 802511F8 01034021 */  addu      $t0, $t0, $v1
-/* 17FADC 802511FC 850835D0 */  lh        $t0, %lo(D_802835D0)($t0)
+/* 17FADC 802511FC 850835D0 */  lh        $t0, %lo(bMsgHeights)($t0)
 /* 17FAE0 80251200 14500005 */  bne       $v0, $s0, .L80251218
 /* 17FAE4 80251204 24040009 */   addiu    $a0, $zero, 9
 /* 17FAE8 80251208 24140078 */  addiu     $s4, $zero, 0x78
