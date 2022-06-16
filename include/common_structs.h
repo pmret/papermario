@@ -632,8 +632,7 @@ typedef struct Entity {
     /* 0x20 */ EntityCallback updateMatrixOverride;
     /* 0x24 */ Evt* boundScript;
     /* 0x28 */ EvtScript* boundScriptBytecode;
-    /* 0x2C */ s32* savedReadPos;
-    /* 0x30 */ char unk_30[0x8];
+    /* 0x2C */ s32* savedReadPos[3];
     /* 0x38 */ EntityBlueprint* blueprint;
     /* 0x3C */ UNK_PTR renderSetupFunc; // pointer to draw func(?)
     /* 0x40 */ union {

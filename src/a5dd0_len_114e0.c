@@ -1171,7 +1171,7 @@ void update_entities(void) {
                     if (entity->scriptReadPos != NULL) {
                         if (entity->hasEntityScript) {
                             entity->hasEntityScript--;
-                            if (!(entity->hasEntityScript)) {
+                            if (entity->hasEntityScript == 0) {
                                 while (step_entity_commandlist(entity));
                             }
                         }
@@ -1246,15 +1246,13 @@ void update_shadows(void) {
 void set_entity_commandlist(Entity* entity, s32* entityScript) {
     entity->scriptReadPos = entityScript;
     entity->hasEntityScript = TRUE;
-    entity->savedReadPos = entity->scriptReadPos;
+    entity->savedReadPos[0] = entity->scriptReadPos;
 }
 
-// Ordering issues with the savedReadPos cases (4 and 5)
-#ifdef NON_EQUIVALENT
 s32 step_entity_commandlist(Entity* entity) {
     s32* args = entity->scriptReadPos;
     s32 ret;
-    s32 a1;
+    s32 labelId;
     s32 (*tempfunc)(Entity*);
 
     switch (*args++) {
@@ -1267,7 +1265,7 @@ s32 step_entity_commandlist(Entity* entity) {
         case 1:
             entity->scriptReadPos = *args;
             entity->hasEntityScript = 1;
-            entity->savedReadPos = entity->scriptReadPos;
+            entity->savedReadPos[0] = entity->scriptReadPos;
             ret = TRUE;
             break;
         case 2:
@@ -1283,12 +1281,12 @@ s32 step_entity_commandlist(Entity* entity) {
             ret = FALSE;
             break;
         case 4:
-            entity->scriptReadPos = entity->savedReadPos[*args++];
+            entity->scriptReadPos = entity->savedReadPos[*args];
             ret = TRUE;
             break;
         case 5:
-            a1 = *args++;
-            entity->savedReadPos[a1] = args;
+            labelId = *args++;
+            entity->savedReadPos[labelId] = args;
             entity->scriptReadPos = args;
             ret = TRUE;
             break;
@@ -1322,9 +1320,6 @@ s32 step_entity_commandlist(Entity* entity) {
     }
     return ret;
 }
-#else
-INCLUDE_ASM(s32, "a5dd0_len_114e0", step_entity_commandlist, Entity* entity);
-#endif
 
 void exec_entity_commandlist(Entity* entity) {
     while (step_entity_commandlist(entity));
