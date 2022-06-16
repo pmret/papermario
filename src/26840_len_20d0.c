@@ -2,6 +2,7 @@
 #include "audio.h"
 
 extern s8 D_80078464;
+extern InstrumentEffect* D_800783C0[25];
 
 void snd_SEFCmd_00_SetVolume(SoundManager* manager, SoundPlayer* player);
 void snd_SEFCmd_01_SetPan(SoundManager* manager, SoundPlayer* player);
@@ -235,13 +236,13 @@ void func_8004C0E4(SoundManager* manager, SoundPlayer* player, s8* readPos, Soun
         player->unk_A2 = 0;
         player->unk_A3 = 0;
         player->volumeLerp.current = 0x7FFFFFFF;
-        player->volumeLerp.goal = 0;
-        player->volumeLerp.step = 0;
         player->volumeLerp.time = 0;
+        player->volumeLerp.step = 0;
+        player->volumeLerp.goal = 0;
         player->tuneLerp.current = 0;
-        player->tuneLerp.goal = 0;
-        player->tuneLerp.step = 0;
         player->tuneLerp.time = 0;
+        player->tuneLerp.step = 0;
+        player->tuneLerp.goal = 0;
         player->unk_80 = 0;
         player->unk_84 = 0;
         player->soundC00 = 0;
@@ -444,7 +445,39 @@ void snd_SEFCmd_03_SetReverb(SoundManager* manager, SoundPlayer* player) {
     player->changed.reverb = TRUE;
 }
 
-INCLUDE_ASM(void, "26840_len_20d0", snd_SEFCmd_04, SoundManager* manager, SoundPlayer* player);
+void snd_SEFCmd_04(SoundManager* manager, SoundPlayer* player) {
+    Instrument* temp_a0;
+    InstrumentEffect* temp_v0_2;
+
+    u8* buf = player->sefDataReadPos;
+    u8 temp_v1 = buf[0];
+    player->sefDataReadPos = &buf[1];
+   
+    player->unk_9E = temp_v1 & 0x7F;
+    temp_a0 = player->sfxInstrumentRef;
+    
+    player->sfxInstrument.wavOffset = temp_a0->wavOffset;
+    player->sfxInstrument.wavLength = temp_a0->wavLength;
+    player->sfxInstrument.loopPredictorOffset = temp_a0->loopPredictorOffset;
+    player->sfxInstrument.loopStart = temp_a0->loopStart;
+    player->sfxInstrument.loopEnd = temp_a0->loopEnd;
+    player->sfxInstrument.loopCount = temp_a0->loopCount;
+    player->sfxInstrument.predictorOffset = temp_a0->predictorOffset;
+    player->sfxInstrument.unk_1C = temp_a0->unk_1C;
+    player->sfxInstrument.unk_1E = temp_a0->unk_1E;
+    player->sfxInstrument.sampleRate = temp_a0->sampleRate;
+    player->sfxInstrument.skipLoopPredictor = temp_a0->skipLoopPredictor;
+    player->sfxInstrument.unk_25 = temp_a0->unk_25;
+    
+    player->sfxInstrument.unkOffset = D_800783C0[player->unk_9E];
+    player->sfxInstrumentRef = &player->sfxInstrument;
+    
+    temp_v0_2 = player->sfxInstrument.unkOffset;
+    if (temp_v0_2 != NULL && temp_v0_2->count) {
+        player->unk10 = (s8*)(temp_v0_2->unk_04[0].unkOffset1 + (s32)temp_v0_2);
+        player->unk14 = (s8*)(temp_v0_2->unk_04[0].unkOffset2 + (s32)temp_v0_2);
+    }
+}
 
 void snd_SEFCmd_05(SoundManager* manager, SoundPlayer* player) {
     //TODO buffer access different from other commands
@@ -469,7 +502,22 @@ void snd_SEFCmd_07(SoundManager* manager, SoundPlayer* player) {
     }
 }
 
-INCLUDE_ASM(void, "26840_len_20d0", snd_SEFCmd_08, SoundManager* manager, SoundPlayer* player);
+void snd_SEFCmd_08(SoundManager* manager, SoundPlayer* player) {
+    u8* buf = player->sefDataReadPos;
+    s32 newValueH = buf[0];
+    s32 newValueL = buf[1];
+    s16 newValue = (buf[2] & 0x7F) * 100;
+    s16 time = newValueL + (newValueH << 8);
+    player->sefDataReadPos = &buf[3];
+    
+    if (time <= 0) {
+        time = 1;
+    }
+
+    player->tuneLerp.time = time;
+    player->tuneLerp.goal = newValue;    
+    player->tuneLerp.step = ((newValue << 0x10) - player->tuneLerp.current) / time;
+}
 
 void snd_SEFCmd_09_StartLoop(SoundManager* manager, SoundPlayer* player) {
     u8* buf = player->sefDataReadPos;
@@ -508,21 +556,22 @@ void snd_SEFCmd_0C(SoundManager* manager, SoundPlayer* player) {
 
 void snd_SEFCmd_0D(SoundManager* manager, SoundPlayer* player) {
     u8* buf = player->sefDataReadPos;
-    s32 volH = buf[0];
-    s32 volL = buf[1];
-    s32 time = buf[2];
-    s16 vol = volL + (volH << 8);
+    s32 newValueH = buf[0];
+    s32 newValueL = buf[1];
+    s32 newValue = buf[2];
+    s16 time = newValueL + (newValueH << 8);
     player->sefDataReadPos = &buf[3];
     
-    if (time != 0) {
-        time = (time << 8) | 0xFF;
+    if (newValue != 0) {
+        newValue = (newValue << 8) | 0xFF;
     }
-    if ((vol << 0x10) <= 0) {
-        vol = 1;
+    if (time <= 0) {
+        time = 1;
     }
-    player->volumeLerp.goal = vol;
-    player->volumeLerp.time = time;
-    player->volumeLerp.step = ((time << 0x10) - player->volumeLerp.current) / vol;
+
+    player->volumeLerp.time = time;    
+    player->volumeLerp.goal = newValue;
+    player->volumeLerp.step = ((newValue << 0x10) - player->volumeLerp.current) / time;
 }
 
 void snd_SEFCmd_0E(SoundManager* manager, SoundPlayer* player) {

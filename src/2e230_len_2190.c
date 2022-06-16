@@ -371,7 +371,7 @@ f32 snd_tune_param_to_timescale(s32 arg0) {
 INCLUDE_ASM(s32, "2e230_len_2190", snd_tune_param_to_timescale);
 #endif
 
-void snd_initialize_bgm_fade(Fade* fade, s32 time, s32 startValue, s16 endValue) {
+void snd_initialize_bgm_fade(Fade* fade, s32 time, s32 startValue, s32 endValue) {
     fade->currentVolume.s32 = startValue * 0x10000;
     fade->endVolume = endValue;
 
@@ -454,9 +454,10 @@ void func_80053BA8(Fade* arg0) {
     }
 }
 
+//TODO cleanup and documentation
 Instrument* func_80053BE8(SndGlobals* arg0, u32 arg1, u32 arg2, s32** arg3) {
     Instrument* instrument = (*arg0->instrumentGroups[(arg1 & 0x70) >> 4])[arg2];
-    UnkAl4Plus* temp_a0 = instrument->unkOffset;
+    InstrumentEffect* temp_a0 = instrument->unkOffset;
     u32 temp_a1 = arg1 % 4;
 
     if (temp_a1 < temp_a0->count) {
@@ -509,7 +510,7 @@ void snd_get_sequence_player(u32 playerIndex, BGMPlayer** outPlayer) {
     }
 }
 
-s32 snd_load_song_files(u32 arg0, UnkAlTrack* arg1, BGMPlayer* arg2) {
+s32 snd_load_song_files(u32 arg0, BGMHeader* arg1, BGMPlayer* arg2) {
     SBNFileEntry fileEntry;
     SBNFileEntry fileEntry2;
     SBNFileEntry* bkFileEntry;
@@ -522,7 +523,7 @@ s32 snd_load_song_files(u32 arg0, UnkAlTrack* arg1, BGMPlayer* arg2) {
     u32 offset;
     s32 ret;
     BGMPlayer* arg2_copy ;
-    UnkAlTrack* arg1_copy;
+    BGMHeader* arg1_copy;
     s32 cond;
 
     soundData = D_8009A5C0;
@@ -563,9 +564,9 @@ s32 snd_load_song_files(u32 arg0, UnkAlTrack* arg1, BGMPlayer* arg2) {
         }
         bgmFileIndex = songEntry->bgmFileIndex;
         arg2_copy->songID = arg0;
-        arg2_copy->unk_64 = arg1;
+        arg2_copy->bgmFile = arg1;
         arg2_copy->bgmFileIndex = bgmFileIndex;
-        return arg1_copy->unk_08;
+        return arg1_copy->name;
     } else {
         return 151;
     }

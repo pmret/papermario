@@ -6,6 +6,8 @@
 
 #define ALIGN16_(val) (((val) + 0xF) & 0xFFF0)
 
+#define BGM_SAMPLE_RATE 156250
+
 struct BGMPlayer;
 struct SndGlobals;
 struct UnkAl48;
@@ -143,6 +145,17 @@ typedef struct SoundSFXEntry {
     /* 0x9 */ char unk_9[0x1];
 } SoundSFXEntry; // size = 0xA
 
+typedef struct InstrumentEffectSub {
+    /* 0x00 */ u16 unkOffset1;
+    /* 0x02 */ u16 unkOffset2;
+} InstrumentEffectSub; // size = 0x4;
+
+typedef struct InstrumentEffect {
+    /* 0x00 */ u8 count;
+    /* 0x01 */ char unk_01[3];
+    /* 0x04 */ struct InstrumentEffectSub unk_04[1]; // variable size
+} InstrumentEffect;
+
 typedef struct Instrument {
     /* 0x00 */ UNK_PTR wavOffset;
     /* 0x04 */ s32 wavLength;
@@ -170,8 +183,9 @@ typedef Instrument* InstrumentGroup[16];
 typedef struct SoundLerp {
     /* 0x0 */ s32 current;
     /* 0x4 */ s32 step;
-    /* 0x8 */ s16 goal;
     /* 0xA */ s16 time;
+    /* 0x8 */ s16 goal;
+
 } SoundLerp; // size = 0xC
 
 typedef struct SoundPlayChange {
@@ -189,8 +203,8 @@ typedef struct SoundPlayChange {
 typedef struct SoundPlayer {
     /* 0x00 */ s8* sefDataReadPos;
     /* 0x04 */ char pad4[0xC];
-    /* 0x10 */ s32* unk10;
-    /* 0x14 */ char pad14[4];
+    /* 0x10 */ s8* unk10;
+    /* 0x14 */ s8* unk14;
     /* 0x18 */ s32 unk_18;
     /* 0x1C */ Instrument* sfxInstrumentRef;
     /* 0x20 */ Instrument sfxInstrument;
@@ -240,12 +254,6 @@ typedef struct SoundPlayer {
     /* 0xA8 */ s8 unk_A9;
     /* 0xA9 */ char unk_AA[0x2];
 } SoundPlayer; // size = 0xAC
-
-typedef struct SoundSefHeader {
-    /* 0x00 */ char unk_00[0x10];
-    /* 0x10 */ s16 groupOffsets[8];
-    /* 0x20 */ char unk_20[0x2];
-} SoundSefHeader; // size = 0x22
 
 typedef struct SoundManager {
     /* 0x000 */ struct SndGlobals* soundData;
@@ -330,6 +338,30 @@ typedef struct UnkAl48 { // Track?
     /* 0x45 */ u8 unk_45;
     /* 0x46 */ char unk_46[2];
 } UnkAl48; // size = 0x48
+
+typedef struct BGMFileInfo {
+    /* 0x10 */ u8 numSegments;
+    /* 0x11 */ char pad_11[3];
+    /* 0x14 */ u16 segments[4];
+    /* 0x1C */ u16 drums;
+    /* 0x1E */ u16 drumCount;
+    /* 0x20 */ u16 instruments;
+    /* 0x22 */ u16 instrumentCount;
+} BGMFileInfo; // size = 0x14
+
+typedef struct BGMHeader {
+    /* 0x00 */ s32 signature; // 'BGM '
+    /* 0x04 */ s32 size; // including header
+    /* 0x08 */ s32 name;
+    /* 0x0C */ char pad_C[4];
+    /* 0x10 */ BGMFileInfo info;
+} BGMHeader; // size = 0x24
+
+typedef struct BGMDrumInfo {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ s32 unk_04;
+    /* 0x08 */ s32 unk_08;
+} BGMDrumInfo;
 
 typedef struct SBNHeader {
     /* 0x00 */ s32 signature; // 'SBN '
@@ -570,15 +602,16 @@ typedef struct BGMPlayer {
     /* 0x058 */ s16 unk_58;
     /* 0x05A */ s16 unk_5A;
     /* 0x05C */ s16 unk_5C;
-    /* 0x05E */ char unk_5E[0x6];
-    /* 0x064 */ struct UnkAlTrack* unk_64;
-    /* 0x068 */ s32* unk_68;
-    /* 0x06C */ s32 unk_6C;
+    /* 0x05E */ char pad5E[2];
+    /* 0x060 */ u32 curSegmentID;
+    /* 0x064 */ struct BGMHeader* bgmFile;
+    /* 0x068 */ s32* segmentReadPos;
+    /* 0x06C */ s32* segmentsInfo;
     /* 0x070 */ s32 unk_70;
     /* 0x074 */ s32 unk_74;
-    /* 0x078 */ s32 unk_78;
-    /* 0x07C */ s32 unk_7C;
-    /* 0x080 */ char unk_80[0x30];
+    /* 0x078 */ BGMDrumInfo* drumsInfo;
+    /* 0x07C */ s32 instrumentsInfo;
+    /* 0x080 */ BGMDrumInfo* drums[12];
     /* 0x0B0 */ s32 masterTempo;
     /* 0x0B4 */ s32 masterTempoFadeDelta;
     /* 0x0B8 */ s32 masterTempoFadeTempo;
@@ -698,22 +731,6 @@ typedef struct ALConfig {
     /* 0x14 */ ALHeap* heap;
 } ALConfig; // size = 0x18;
 
-typedef struct UnkAl4PlusSub {
-    /* 0x00 */ u16 unkOffset1;
-    /* 0x02 */ u16 unkOffset2;
-} UnkAl4PlusSub; // size = 0x4;
-
-typedef struct UnkAl4Plus {
-    /* 0x00 */ u8 count;
-    /* 0x01 */ char unk_01[3];
-    /* 0x04 */ struct UnkAl4PlusSub unk_04[1]; // variable size
-} UnkAl4Plus;
-
-typedef struct UnkAlTrack {
-    /* 0x00 */ s32 unk_00;
-    /* 0x04 */ s32 unk_04;
-    /* 0x08 */ s32 unk_08;
-} UnkAlTrack;
 
 extern u8 D_80078181;
 extern s32 D_80078190;
@@ -829,7 +846,7 @@ void snd_reset_instrument(Instrument*);
 void func_80053370(UnkAlC*);
 void func_800533A8(InstrumentCFG*);
 void func_80053654(SndGlobals*);
-void snd_initialize_bgm_fade(Fade*, s32, s32, s16);
+void snd_initialize_bgm_fade(Fade*, s32, s32, s32);
 void snd_clear_bgm_fade(Fade*);
 void func_80053A28(Fade*);
 void func_80053A98(u8, u16, s32);

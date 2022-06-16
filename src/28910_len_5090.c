@@ -1,6 +1,7 @@
 #include "audio.h"
 
 extern s32 D_80078554;
+extern u8 D_80078510[8];
 
 INCLUDE_ASM(void, "28910_len_5090", func_8004D510, BGMPlayer* arg0);
 
@@ -22,7 +23,94 @@ BGMPlayer* snd_get_player_with_song_name(s32 songString) {
 INCLUDE_ASM(BGMPlayer*, "28910_len_5090", snd_get_player_with_song_name, s32 songString);
 #endif
 
-INCLUDE_ASM(s32, "28910_len_5090", snd_dispatch_bgm_player_event);
+s32 snd_dispatch_bgm_player_event(SongUpdateEvent* event) {
+    BGMPlayer* player;
+    BGMFileInfo* fileInfo;
+    s32 songName;
+    s32 variation;
+    s32 duration;
+    s32 volume0;
+    s32 volume1;
+    s32 error;
+    u32 i;
+
+    error = MUSIC_ERROR_NONE;
+    songName = event->songName;
+    variation = event->variation;
+    if (songName != 0) {
+        player = snd_get_player_with_song_name(songName);
+        if (player != NULL) {
+            fileInfo = &player->bgmFile->info;
+            duration = event->duration;
+            if (duration != 0) {
+                if (duration > 10000) {
+                    duration = 10000;
+                } else if (duration < 250) {
+                    duration = 250;
+                }
+            }
+            volume0 = event->startVolume;
+            if (volume0 >= 0x80) {
+                volume0 = 0x7F;
+            }
+            if (volume0 != 0) {
+                volume0 = (volume0 << 8) | 0xFF;
+            }
+            volume1 = event->finalVolume;
+            if (volume1 >= 0x80) {
+                volume1 = 0x7F;
+            }
+            if (volume1 != 0) {
+                volume1 = (volume1 << 8) | 0xFF;
+            } else {
+                volume1 = 0x7FFF;
+            }
+                    
+            snd_initialize_bgm_fade(&player->fadeInfo, duration, volume0, volume1);
+            player->fadeInfo.unk_18 = 0x7FFF;
+            player->fadeInfo.unk_1A = 1;
+            func_8004E880(player, BGM_SAMPLE_RATE, D_80078510[fileInfo->numSegments & 7]);
+            
+            if (variation < 0 || variation >= 4 || fileInfo->segments[variation] == 0) {
+                variation = 0;
+            }
+            player->curSegmentID = variation;
+            
+            player->segmentsInfo = (s32*)(4 * fileInfo->segments[variation] + (s32)player->bgmFile);
+            player->segmentReadPos = player->segmentsInfo;
+            
+            if (fileInfo->drums != 0) {
+                player->drumsInfo = (BGMDrumInfo*)(4 * fileInfo->drums + (s32)player->bgmFile);
+                player->bgmDrumCount = fileInfo->drumCount;
+                
+                for(i = 0; i < player->bgmDrumCount; i++) {
+                    BGMDrumInfo* drum = &player->drumsInfo[i];
+                    player->drums[i] = drum;
+                }
+                for(; i < ARRAY_COUNT(player->drums); i++) {
+                    player->drums[i] = player->drums[0];
+                }
+            } else {
+                player->drumsInfo = 0;
+                player->bgmDrumCount = 0;
+            }
+            if (fileInfo->instruments != 0) {
+                player->instrumentsInfo = 4 * fileInfo->instruments + (s32)player->bgmFile;
+                player->bgmInstrumentCount = fileInfo->instrumentCount;
+            } else {
+                player->instrumentsInfo = 0;
+                player->bgmInstrumentCount = 0;
+            }
+            player->songName = songName;
+            snd_initialize_bgm_player(player);
+        } else {
+            error = MUSIC_ERROR_2;
+        }
+    } else {
+        error = MUSIC_ERROR_3;
+    }
+    return error;
+}
 
 MusicError func_8004DA0C(s32 songName) {
     BGMPlayer* player;
@@ -169,8 +257,8 @@ void func_8004E158(BGMPlayer* player, s32 arg1, s32 arg2, SndGlobals* arg3) {
     player->fadeSongName = 0;
     player->unk_58 = 0;
     player->unk_5A = 0;
-    player->unk_68 = 0;
-    player->unk_6C = 0;
+    player->segmentReadPos = 0;
+    player->segmentsInfo = 0;
     player->unk_70 = 0;
     player->masterTempoFadeTime = 0;
     player->masterTempoFadeTempo = 0;
@@ -349,7 +437,7 @@ void func_8004E904(BGMPlayer* player) {
     player->masterTempoFadeDelta = 0;
     player->masterTempoFadeTime = 0;
     while (continueReading) {
-        cmd = *player->unk_68++;
+        cmd = *player->segmentReadPos++;
         if (cmd == 0) {
             player->unk_221 = 4;
             continueReading = FALSE;
@@ -596,7 +684,7 @@ void snd_BGMCmd_FD(BGMPlayer* player, BGMPlayerTrack* track) {
 }
 
 void snd_BGMCmd_FE(BGMPlayer* player, BGMPlayerTrack* track) {
-    s32 temp = player->seqCmdArgs.u16[0] + (s32)player->unk_64;
+    s32 temp = player->seqCmdArgs.u16[0] + (s32)player->bgmFile;
 
     track->unk_3E = player->seqCmdArgs.u8[2];
     track->unk_04 = track->bgmReadPos;
