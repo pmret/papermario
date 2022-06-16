@@ -544,14 +544,20 @@ typedef struct UnkAl24 {
     /* 0x17 */ u8 unk_17;
 } UnkAl24; // size = 0x18;
 
+typedef union Q32 {
+    u8 u8[4];
+    u16 u16[2];
+    s32 s32;
+} Q32;
+
 typedef struct BGMPlayer {
-    /* 0x000 */ SndGlobals* data;
+    /* 0x000 */ SndGlobals* globals;
     /* 0x004 */ SoundManager* soundManager;
     /* 0x008 */ s32 unkFrequency; //?
     /* 0x00C */ s32 unk_0C;
     /* 0x010 */ s32 unk_10;
-    /* 0x014 */ s32 unk_14;
-    /* 0x018 */ s32 unk_18;
+    /* 0x014 */ Q32 unk_14;
+    /* 0x018 */ Q32 unk_18;
     /* 0x01C */ s32 songName;
     /* 0x020 */ s32 fadeSongName;
     /* 0x024 */ s32 bgmFileIndex;
@@ -559,8 +565,8 @@ typedef struct BGMPlayer {
     /* 0x02C */ Fade fadeInfo;
     /* 0x048 */ s32 unk_48;
     /* 0x04C */ u8 unk_4C[4];
-    /* 0x050 */ s32 unk_50;
-    /* 0x054 */ char pad54[4];
+    /* 0x050 */ Q32 unk_50;
+    /* 0x054 */ Q32 unk_54;
     /* 0x058 */ s16 unk_58;
     /* 0x05A */ s16 unk_5A;
     /* 0x05C */ s16 unk_5C;
@@ -636,12 +642,6 @@ typedef struct BGMPlayer {
     /* 0x25C */ BGMPlayerTrack unk_25C[16];
     /* 0x85C */ UnkAl24 unk_85C[24];
 } BGMPlayer; // size = 0xA9C
-
-typedef union Q32 {
-    u8 u8[4];
-    u16 u16[2];
-    s32 s32;
-} Q32;
 
 typedef struct UnkAl8 {
     /* 0x00 */ Q32 unk_00;
@@ -764,7 +764,7 @@ s16 func_8004C444(SoundManager*);
 
 void func_8004D510(BGMPlayer*);
 BGMPlayer* snd_get_player_with_song_name(s32);
-s32 func_8004DA0C(UNK_TYPE);
+MusicError func_8004DA0C(UNK_TYPE);
 void func_8004DAA8(BGMPlayer*);
 s32 func_8004DB28(BGMPlayer*);
 void func_8004DC80(s32);
@@ -773,7 +773,7 @@ void func_8004E158(BGMPlayer*, s32, s32, SndGlobals*);
 void func_8004E344(BGMPlayer*, u8*);
 void snd_update_bgm_fade(BGMPlayer*);
 void func_8004E444(BGMPlayer*);
-s16 func_8004E4B8(BGMPlayer*);
+s32 func_8004E4B8(BGMPlayer*);
 void func_8004E880(BGMPlayer*, s32, s32);
 void snd_BGMCmd_E0_MasterTempo(BGMPlayer*, BGMPlayerTrack*);
 s32 snd_bpm_to_tempo(BGMPlayer*, u32);

@@ -69,7 +69,7 @@ void bgm_reset_volume(void) {
 }
 
 void bgm_update_volume();
-s32 func_800559C4(s32);
+MusicError func_800559C4(s32);
 s32 func_800559FC(s32);
 s32 func_80055AF0(s32);
 s32 func_80055B28(s32);
@@ -87,7 +87,7 @@ void bgm_update_music_settings(void) {
     s16 flag4 = MUSIC_SETTINGS_FLAGS_4;
     s32 flags;
     
-    for(i; i < 2; i++, music++) {
+    for (i; i < 2; i++, music++) {
         switch (music->state) {
         case 0:
             break;
@@ -95,11 +95,11 @@ void bgm_update_music_settings(void) {
             if (music->flags & MUSIC_SETTINGS_FLAGS_1) {
                 if (music->fadeOutTime < 250) {
                     if (!(music->flags & MUSIC_SETTINGS_FLAGS_4)) {
-                        if (func_800559C4(music->songName) == 0) {
+                        if (func_800559C4(music->songName) == MUSIC_ERROR_NONE) {
                             music->state = state2;
                         }
                     } else {
-                        if (func_80055AF0(music->songName) == 0) {
+                        if (func_80055AF0(music->songName) == MUSIC_ERROR_NONE) {
                            music->state = state2;
                         }
                     }

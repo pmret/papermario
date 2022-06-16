@@ -388,8 +388,8 @@ MusicError snd_start_song_variation(s32 songName, s32 variation) {
     return error;
 }
 
-s32 func_800559C4(UNK_TYPE arg0) {
-    return func_8004DA0C(arg0);
+MusicError func_800559C4(s32 songName) {
+    return func_8004DA0C(songName);
 }
 
 void func_800559E0(void) {

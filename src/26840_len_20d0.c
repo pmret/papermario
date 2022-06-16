@@ -271,7 +271,7 @@ void snd_set_bits_C00(SoundManager* manager, u32 soundID) {
     s32 soundUpper = (soundID & SOUND_ID_MID) >> 0xA;
     s32 i;
     
-    for(i = 0; i < ARRAY_COUNT(manager->unk_16C); i++) {
+    for (i = 0; i < ARRAY_COUNT(manager->unk_16C); i++) {
         SoundPlayer* player = &manager->unk_16C[i];
         if (player->currentSoundID == (soundID & SOUND_ID_LOWER)) {
             player->soundC00 = soundUpper;
@@ -282,7 +282,7 @@ void snd_set_bits_C00(SoundManager* manager, u32 soundID) {
 void func_8004C2A4(SoundManager* manager, u32 soundID) {
     s32 i;
     
-    for(i = 0; i < ARRAY_COUNT(manager->unk_16C); i++) {
+    for (i = 0; i < ARRAY_COUNT(manager->unk_16C); i++) {
         SoundPlayer* player = &manager->unk_16C[i];
         if (player->currentSoundID == (soundID & SOUND_ID_LOWER)) {
             player->sefDataReadPos = &D_80078464;
@@ -299,7 +299,7 @@ void func_8004C2A4(SoundManager* manager, u32 soundID) {
 void func_8004C300(SoundManager* manager, u32 soundID) {
     s32 i;
     
-    for(i = 0; i < ARRAY_COUNT(manager->unk_16C); i++) {
+    for (i = 0; i < ARRAY_COUNT(manager->unk_16C); i++) {
         SoundPlayer* player = &manager->unk_16C[i];
         if (soundID == player->unk_99) {
             player->sefDataReadPos = &D_80078464;
@@ -317,7 +317,7 @@ void snd_set_modifiers(SoundManager* manager, SoundSFXEntry* sfxEntry) {
     s32 soundID = sfxEntry->soundID & SOUND_ID_LOWER;
     s32 i;
     
-    for(i = 0; i < ARRAY_COUNT(manager->unk_16C); i++) {
+    for (i = 0; i < ARRAY_COUNT(manager->unk_16C); i++) {
         SoundPlayer* player = &manager->unk_16C[i];
         if (player->currentSoundID == soundID) {
             snd_set_player_modifiers(player, sfxEntry);
@@ -612,7 +612,7 @@ void snd_SEFCmd_17(SoundManager* manager, SoundPlayer* player) {
     u8* buf = player->sefDataReadPos;
     u32 i;
     
-    for(i = 0; i < 4; i++) {
+    for (i = 0; i < 4; i++) {
         if ((u16) manager->unk_A0[i].x == 0) {
             manager->unk_A0[i].x = buf[1] + (buf[0] << 8);
             manager->unk_A0[i].y = buf[3] + (buf[2] << 8);
