@@ -233,10 +233,15 @@ extern UNK_TYPE D_00000094;
 extern UNK_TYPE D_00000094_2; // two symbols resolve to the same addr. Required for matching
 extern EntityBlueprint Entity_InertRedBlock;
 extern EntityBlueprint Entity_InertYellowBlock;
-extern UNK_TYPE D_802EA310;
+extern s32 D_802EA310[];
 extern EntityBlueprint Entity_HitGroundedYellowBlock;
 extern EntityBlueprint Entity_HitFloatingYellowBlock;
 extern EntityBlueprint Entity_HitRedBlock;
+extern EntityBlueprint D_802EAE30;
+extern EntityBlueprint D_802EAB04;
+extern EntityBlueprint D_802EAED4;
+extern s32 D_802EAE7C[];
+extern EntityBlueprint D_802EAF80;
 
 extern UNK_TYPE D_0A000328;
 extern UNK_TYPE D_0A000380;
@@ -269,7 +274,6 @@ extern s32 gCurrentDisplayContextIndex;
 
 extern UNK_TYPE D_0A004350;
 extern UNK_TYPE D_0A0026F0;
-extern u32* D_802EAE7C;
 
 extern s32 D_80291FA8[];
 extern s32 D_80291FD0[];

@@ -4056,7 +4056,7 @@ void execute_render_tasks(void) {
         }
     }
 
-    D_8014B7F0[0] = taskCount;
+    D_8014B7F0 = taskCount;
     taskList = mdl_renderTaskLists[mdl_renderTaskQueueIdx];
     if (gOverrideFlags & GLOBAL_OVERRIDES_80) {
         Mtx* dispMtx;

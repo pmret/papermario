@@ -68,7 +68,7 @@ void entity_ItemBlock_check_if_inactive(Entity* entity) {
             bp = &Entity_InertRedBlock;
         }
         create_entity(bp, entity->position.x, entity->position.y, entity->position.z, entity->rotation.y, MAKE_ENTITY_END);
-        set_entity_commandlist(entity, &D_802EA310);
+        set_entity_commandlist(entity, D_802EA310);
     } else {
         exec_entity_commandlist(entity);
     }

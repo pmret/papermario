@@ -1993,7 +1993,7 @@ EvtScript N(makeEntities) = {
             EVT_END_IF
         EVT_END_IF
     EVT_END_IF
-    EVT_CALL(MakeEntity, 0x802EAF80, 430, 0, -120, 0, 2, EVT_PTR(N(8024D2B0)), 1939, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, &D_802EAF80, 430, 0, -120, 0, 2, EVT_PTR(N(8024D2B0)), 1939, MAKE_ENTITY_END)
     EVT_RETURN
     EVT_END
 };
