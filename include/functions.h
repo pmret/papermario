@@ -60,7 +60,7 @@ void intro_logos_update_fade(void);
 
 u32 get_entity_type(s32 arg0);
 Entity* get_entity_by_index(s32 index);
-s32 create_entity(EntityBlueprint*, s32, s32, s32, s32, ...);
+s32 create_entity(EntityBlueprint* bp, s32 x, s32 y, s32 z, s32 rotY, ...);
 void entity_shattering_idle(Entity* entity);
 void func_802666E4(Actor* actor, f32 x, f32 y, f32 z, s32 damage);
 
@@ -252,6 +252,7 @@ s32 evt_get_variable(Evt* script, Bytecode var);
 s32 evt_set_variable(Evt* script, Bytecode var, s32 value);
 f32 evt_get_float_variable(Evt* script, Bytecode var);
 f32 evt_set_float_variable(Evt* script, Bytecode var, f32 value);
+s32 evt_get_variable_index(Evt* script, s32 var);
 void set_script_timescale(Evt* script, f32 timescale);
 f32 sin_deg(f32 x);
 f32 cos_deg(f32 x);
@@ -381,6 +382,7 @@ void func_80266EE8(Actor* actor, s32 arg1);
 
 void btl_set_popup_duration(s32 duration);
 void switch_to_partner(s32 arg0);
+s8 get_current_partner_id(void);
 
 void delete_trigger(Trigger* toDelete);
 void kill_script_by_ID(s32 id);
@@ -1003,6 +1005,7 @@ s32 check_conversation_trigger(void);
 
 void clear_player_status(void);
 void clear_entity_models(void);
+void bind_entity_model_setupGfx(s32 idx, s32 setupGfxCallbackArg0, void (*fpSetupGfxCallback)(void*));
 void clear_animator_list(void);
 void clear_model_data(void);
 void clear_sprite_shading_data(void);

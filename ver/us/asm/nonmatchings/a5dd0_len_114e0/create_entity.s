@@ -25,8 +25,8 @@ glabel create_entity
 /* A7FF8 801118F8 0C044305 */  jal       load_area_specific_entity_data
 /* A7FFC 801118FC AFA40040 */   sw       $a0, 0x40($sp)
 /* A8000 80111900 27A40054 */  addiu     $a0, $sp, 0x54
-/* A8004 80111904 3C038016 */  lui       $v1, %hi(CreateEntityVarArgBuffer2)
-/* A8008 80111908 2463C7D8 */  addiu     $v1, $v1, %lo(CreateEntityVarArgBuffer2)
+/* A8004 80111904 3C038016 */  lui       $v1, %hi(CreateEntityVarArgBuffer + 0x8)
+/* A8008 80111908 2463C7D8 */  addiu     $v1, $v1, %lo(CreateEntityVarArgBuffer + 0x8)
 /* A800C 8011190C C7B60044 */  lwc1      $f22, 0x44($sp)
 /* A8010 80111910 4680B5A0 */  cvt.s.w   $f22, $f22
 /* A8014 80111914 C7B80048 */  lwc1      $f24, 0x48($sp)

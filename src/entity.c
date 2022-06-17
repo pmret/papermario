@@ -782,10 +782,10 @@ void clear_entity_model_flags(s32 idx, s32 newFlags) {
     }
 }
 
-void bind_entity_model_setupGfx(s32 idx, s32 setupGfxCallbackArg0, UNK_FUN_PTR(fpSetupGfxCallback)) {
+void bind_entity_model_setupGfx(s32 idx, s32 setupGfxCallbackArg0, void (*fpSetupGfxCallback)(void*)) {
     EntityModel* entityModel = (*gCurrentEntityModelList)[idx & ~BATTLE_ENTITY_ID_MASK];
 
-    entityModel->fpSetupGfxCallback = (void (*)(void*))fpSetupGfxCallback;
+    entityModel->fpSetupGfxCallback = fpSetupGfxCallback;
     entityModel->setupGfxCallbackArg0 = (void*)setupGfxCallbackArg0;
 }
 

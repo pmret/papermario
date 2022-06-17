@@ -19,7 +19,7 @@ void func_80260A60(void) {
     BattleStatus* battleStatus = &gBattleStatus;
     ActorPart* actorPart = &battleStatus->playerActor->partsTable[0];
 
-    if (battleStatus->flags2 & 0x40) {
+    if (battleStatus->flags2 & BS_FLAGS2_40) {
         actorPart->idleAnimations = bPeachIdleAnims;
         set_animation(0, 0, 0xA0002);
     } else if (!battleStatus->outtaSightActive) {
@@ -49,7 +49,7 @@ ApiStatus activate_defend_command(Evt* script, s32 isInitialCall) {
     ActorPart* actorPart = &gBattleStatus.playerActor->partsTable[0];
 
     deduct_current_move_fp();
-    gBattleStatus.flags1 |= 0x400000;
+    gBattleStatus.flags1 |= BS_FLAGS1_PLAYER_DEFENDING;
     actorPart->idleAnimations = bMarioDefendAnims;
     set_animation(0, 0, 0x10014);
     return ApiStatus_DONE2;
@@ -71,7 +71,7 @@ ApiStatus func_80260B70(Evt* script, s32 isInitialCall) {
 INCLUDE_ASM(s32, "18F340", func_80260BF4);
 
 ApiStatus func_80260DB8(Evt* script, s32 isInitialCall) {
-    gBattleStatus.flags1 |= 0x40000;
+    gBattleStatus.flags1 |= BS_FLAGS1_40000;
     return ApiStatus_DONE2;
 }
 
@@ -98,9 +98,9 @@ ApiStatus func_80260E38(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus func_80260E5C(Evt* script, s32 isInitialCall) {
-    gBattleStatus.flags1 &= ~0x8000;
-    gBattleStatus.flags1 &= ~0x2000;
-    gBattleStatus.flags1 &= ~0x4000;
+    gBattleStatus.flags1 &= ~BS_FLAGS1_8000;
+    gBattleStatus.flags1 &= ~BS_FLAGS1_2000;
+    gBattleStatus.flags1 &= ~BS_FLAGS1_4000;
     return ApiStatus_DONE2;
 }
 
@@ -188,13 +188,13 @@ ApiStatus func_80261164(Evt* script, s32 isInitialCall) {
 
 ApiStatus ConsumeLifeShroom(Evt *script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
-    ItemData* item = &gItemTable[0x95];
+    ItemData* item = &gItemTable[ITEM_LIFE_SHROOM];
 
     playerData->curHP += item->potencyA;
     if (playerData->curMaxHP < playerData->curHP) {
         playerData->curHP = playerData->curMaxHP;
     }
-    playerData->invItems[find_item(0x95)] = ITEM_NONE;
+    playerData->invItems[find_item(ITEM_LIFE_SHROOM)] = ITEM_NONE;
     sort_items();
     script->varTable[3] = item->potencyA;
 
@@ -217,7 +217,7 @@ ApiStatus RestorePreDefeatState(Evt* script, s32 isInitialCall) {
             battleStatus->rushFlags |= RUSH_FLAG_MEGA;
         }
 
-        if (playerData->curHP <= 5 && is_ability_active(ABILITY_POWER_RUSH) && 
+        if (playerData->curHP <= 5 && is_ability_active(ABILITY_POWER_RUSH) &&
             !(battleStatus->rushFlags & RUSH_FLAG_MEGA)) {
             gBattleStatus.flags2 |= BS_FLAGS2_8000000;
             battleStatus->rushFlags |= RUSH_FLAG_POWER;
@@ -485,7 +485,51 @@ ApiStatus func_80261DD4(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "18F340", func_80261DF4);
+ApiStatus func_80261DF4(Evt* script, s32 isInitialCall) {
+    ItemEntity* item = get_item_entity(script->varTable[10]);
+
+    if (isInitialCall) {
+        script->functionTemp[0] = 0;
+        script->functionTemp[1] = 0;
+    }
+
+    switch (script->functionTemp[1]) {
+        case 0:
+            script->functionTemp[0]--;
+            item->position.y += script->functionTemp[0];
+            if (item->position.y < 0.0f) {
+                item->position.y = 0.0f;
+                script->functionTemp[0] = 8;
+                script->functionTemp[1] = 1;
+            }
+            break;
+        case 1:
+            script->functionTemp[0]--;
+            item->position.y += script->functionTemp[0];
+            item->position.x += 1.5;
+            if (item->position.y < 0.0f) {
+                item->position.y = 0.0f;
+                script->functionTemp[0] = 4;
+                script->functionTemp[1] = 2;
+            }
+            break;
+        case 2:
+            script->functionTemp[0]--;
+            item->position.y += script->functionTemp[0];
+            item->position.x += 1.2;
+            if (item->position.y < 0.0f) {
+                item->position.y = 0.0f;
+                script->functionTemp[1] = 3;
+            }
+            break;
+        case 3:
+            D_8029FBB0[0] = 20;
+            D_8029FBB0[1] = 20;
+            D_8029FBB0[2] = 20;
+            return ApiStatus_DONE2;
+    }
+    return ApiStatus_BLOCK;
+}
 
 ApiStatus func_80261FB4(Evt* script, s32 isInitialCall) {
     ItemEntity* item = get_item_entity(script->varTable[10]);

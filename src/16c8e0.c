@@ -79,7 +79,6 @@ EvtScript BtlBringPartnerOut = {
 
 
 extern s32 D_8029DA30;
-extern s8 D_8029DA33;
 extern s32 D_8029DA34;
 extern s32 D_8029DA40;
 extern s32 D_8029DA44;
@@ -251,7 +250,7 @@ void btl_update(void) {
     s32 cond;
 
     if (battleStatus->inputBitmask != -1) {
-        if (battleStatus->flags1 & BS_FLAGS1_80000 && gGameStatusPtr->unk_81 != 0) {
+        if ((battleStatus->flags1 & BS_FLAGS1_80000) && gGameStatusPtr->multiplayerEnabled != 0) {
             s32 inputBitmask = battleStatus->inputBitmask;
 
             battleStatus->currentButtonsDown = gGameStatusPtr->currentButtons[1] & inputBitmask;
@@ -972,7 +971,7 @@ void btl_restore_world_cameras(void) {
     }
 
     if (gBattleStatus.flags2 & 0x40) {
-        playerData->currentPartner = D_8029DA33;
+        playerData->currentPartner = D_8029DA30;
     }
 }
 
@@ -1027,7 +1026,7 @@ void btl_delete_actor(Actor* actor) {
     remove_effect(actor->debuffEffect);
 
     if (actor->unk_200 != NULL) {
-        actor->unk_200[3][9] = 0;
+        ((AttackResultTextFXData*)actor->unk_200->data)->unk_24 = 0;
     }
 
     battleStatus = &gBattleStatus;
@@ -1070,7 +1069,7 @@ void btl_delete_player_actor(Actor* player) {
     remove_effect(player->debuffEffect);
 
     if (player->unk_200 != NULL) {
-        player->unk_200[3][9] = 0;
+        ((AttackResultTextFXData*)player->unk_200->data)->unk_24 = 0;
     }
 
     heap_free(movement);
