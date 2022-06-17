@@ -95,7 +95,7 @@ s32 snd_dispatch_bgm_player_event(SongUpdateEvent* event) {
                 player->bgmDrumCount = 0;
             }
             if (fileInfo->instruments != 0) {
-                player->instrumentsInfo = 4 * fileInfo->instruments + (s32)player->bgmFile;
+                player->instrumentsInfo = (BGMInstrumentInfo*)(4 * fileInfo->instruments + (s32)player->bgmFile);
                 player->bgmInstrumentCount = fileInfo->instrumentCount;
             } else {
                 player->instrumentsInfo = 0;
@@ -478,7 +478,21 @@ INCLUDE_ASM(s32, "28910_len_5090", func_8004EA34);
 
 INCLUDE_ASM(s32, "28910_len_5090", func_8004EAD4);
 
-INCLUDE_ASM(s32, "28910_len_5090", func_8004EC04);
+void func_8004EC04(BGMPlayer* player) {
+    s32 i;
+
+    player->unk_220 = 0;
+    player->songName = 0;
+    player->fadeSongName = 0;
+    player->unk_58 = 0;
+    player->unk_5A = 0;
+    for (i = 0; i < 16; i++) {
+        player->unk_25C[i].bgmReadPos = 0;
+    }
+    func_80050900(player);
+    player->unk_221 = 0;
+    player->unkFrequency = BGM_SAMPLE_RATE;
+}
 
 INCLUDE_ASM(s32, "28910_len_5090", func_8004EC68);
 
@@ -524,7 +538,7 @@ void snd_BGMCmd_E1_MasterVolume(BGMPlayer* player, BGMPlayerTrack* track) {
     player->masterVolumeFadeVolume = 0;
     player->masterVolumeFadeDelta = 0;
     player->unk_21A = 1;
-    track->volumeChanged = 1;
+    track->changed.volume = TRUE;
 }
 
 void snd_BGMCmd_E2_MasterTranspose(BGMPlayer* player, BGMPlayerTrack* track) {
@@ -592,7 +606,7 @@ void snd_BGMCmd_E9_SubTrackVolume(BGMPlayer* arg0, BGMPlayerTrack* track) {
     }
 
     track->subTrackVolume = volume;
-    track->volumeChanged = TRUE;
+    track->changed.volume = TRUE;
 }
 
 void snd_BGMCmd_F6_TrackVolumeFade(BGMPlayer* player, BGMPlayerTrack* track) {
@@ -617,17 +631,17 @@ void snd_BGMCmd_F6_TrackVolumeFade(BGMPlayer* player, BGMPlayerTrack* track) {
 void snd_BGMCmd_EA_SubTrackPan(BGMPlayer* player, BGMPlayerTrack* track) {
     track->subTrackPan = player->seqCmdArgs.u8[0] & 0x7F;
     track->unk_57 = 0;
-    track->panChanged = TRUE;
+    track->changed.pan = TRUE;
 }
 
 void snd_BGMCmd_EB_SubTrackReverb(BGMPlayer* player, BGMPlayerTrack* track) {
     track->subTrackReverb = player->seqCmdArgs.u8[0] & 0x7F;
-    track->reverbChanged = TRUE;
+    track->changed.reverb = TRUE;
 }
 
 void snd_BGMCmd_EC_SegTrackVolume(BGMPlayer* player, BGMPlayerTrack* track) {
     track->segTrackVolume = player->seqCmdArgs.u8[0] & 0x7F;
-    track->volumeChanged = TRUE;
+    track->changed.volume = TRUE;
 }
 
 void snd_BGMCmd_ED_SubTrackCoarseTune(BGMPlayer* player, BGMPlayerTrack* track) {
@@ -640,7 +654,7 @@ void snd_BGMCmd_EE_SubTrackFineTune(BGMPlayer* player, BGMPlayerTrack* track) {
 
 void snd_BGMCmd_EF_SegTrackTune(BGMPlayer* player, BGMPlayerTrack* track) {
     track->segTrackTune = player->seqCmdArgs.u16[0];
-    track->tuneChanged = TRUE;
+    track->changed.tune = TRUE;
 }
 
 void snd_BGMCmd_F0_TrackTremolo(BGMPlayer* player, BGMPlayerTrack* track) {
@@ -666,7 +680,43 @@ void snd_BGMCmd_F4(BGMPlayer* player, BGMPlayerTrack* track) {
     track->unk_57 = player->seqCmdArgs.u8[1] & 0x7F;
 }
 
-INCLUDE_ASM(void, "28910_len_5090", snd_BGMCmd_F5_TrackVoice, BGMPlayer* player, BGMPlayerTrack* track);
+void snd_BGMCmd_F5_TrackVoice(BGMPlayer* player, BGMPlayerTrack* track) {
+    BGMInstrumentInfo* instrument;
+    s32 var_s0;
+    u32 voiceIndex;
+    u32 temp_a2;
+    u32 a;
+
+    voiceIndex = player->seqCmdArgs.u8[0];
+    if (voiceIndex < 0x80) {
+        if (voiceIndex < player->bgmInstrumentCount) {
+            instrument = &player->instrumentsInfo[voiceIndex];
+        } else {
+            instrument = &player->globals->defaultPRGEntry;
+        }
+    } else {
+        voiceIndex -= 0x80;
+        if (voiceIndex < 0x40) {
+            instrument = &player->globals->dataPRG[voiceIndex];
+        } else {
+            instrument = &player->globals->defaultPRGEntry;
+        }
+    }
+    a = instrument->unk_00;
+    temp_a2 = (u8)instrument->unk_00;
+    var_s0 = instrument->unk_02 & 0x7F;
+    track->unk_44 = (u16) temp_a2;
+    track->unk_0C = func_80053BE8(player->globals, a >> 8, temp_a2, track->unk_10);
+    if (var_s0 != 0) {
+        var_s0 <<= 0x18;
+    }
+    track->subTrackVolume = var_s0;
+    track->subTrackPan = instrument->pan & 0x7F;
+    track->subTrackReverb = instrument->reverb & 0x7F;
+    track->subTrackCoarseTune = instrument->coarseTune * 0x64;
+    track->subTrackFineTune = instrument->fineTune;
+    track->changed.all |= 0x10101;
+}
 
 void snd_BGMCmd_F7_SubTrackReverbType(BGMPlayer* player, BGMPlayerTrack* track) {
     u8 temp_v0 = player->seqCmdArgs.u8[0];

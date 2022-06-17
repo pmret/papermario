@@ -536,34 +536,34 @@ s32 snd_set_song_variation(s32 songName, s32 variation) {
     return func_80050970(&s);
 }
 
-s32 func_80055CE8(s32 songName, s32* arg1, BGMPlayer** player);
-// We need to figure out what currentTrackData is a list of
-#ifdef NON_EQUIVALENT
-s32 func_80055CE8(s32 songName, s32* arg1, BGMPlayer** player) {
-    SndGlobals* temp_a3 = D_8009A5C0;
-    s32 ret = 0;
+MusicError func_80055CE8(s32 songName, s32** outTrackData, BGMPlayer** outPlayer) {
+    SndGlobals* globals = D_8009A5C0;
+    s32* trackData;
+    s32 error;
 
-    if (songName == temp_a3->currentTrackData[0][2]) {
-        *arg1 = temp_a3->currentTrackData[0];
-        *player = D_8009A664;
-    } else if (songName == temp_a3->currentTrackData[1][2]) {
-        *arg1 = temp_a3->currentTrackData[1];
-        *player = D_8009A5FC;
+    error = MUSIC_ERROR_NONE;
+    trackData = globals->currentTrackData[0];
+    if (songName == trackData[2]) {
+        *outPlayer = D_8009A664;
+        *outTrackData = trackData;
     } else {
-        ret = 1;
+        trackData = globals->currentTrackData[1];
+        if (songName == trackData[2]) {
+            *outPlayer = D_8009A5FC;
+            *outTrackData = trackData;
+        } else {
+            error = MUSIC_ERROR_1;
+        }
     }
-    return ret;
+    return error;
 }
-#else
-INCLUDE_ASM(s32, "30450", func_80055CE8, s32 songName, s32* arg1, BGMPlayer** player);
-#endif
 
 MusicError func_80055D38(s32 songName, f32 arg1) {
-    s32 error;
-    s32 unkArg1;
     BGMPlayer* bgmPlayer;
+    s32 trackData;
+    s32 error;
 
-    error = func_80055CE8(songName, &unkArg1, &bgmPlayer);
+    error = func_80055CE8(songName, &trackData, &bgmPlayer);
 
     if (error == MUSIC_ERROR_NONE) {
         func_80050770(bgmPlayer, arg1);
@@ -573,11 +573,11 @@ MusicError func_80055D38(s32 songName, f32 arg1) {
 }
 
 MusicError func_80055D8C(s32 songName, s32 arg1) {
-    s32 error;
-    s32 unkArg1;
     BGMPlayer* bgmPlayer;
+    s32 trackData;
+    s32 error;
 
-    error = func_80055CE8(songName, &unkArg1, &bgmPlayer);
+    error = func_80055CE8(songName, &trackData, &bgmPlayer);
 
     if (error == MUSIC_ERROR_NONE) {
         func_80050818(bgmPlayer, arg1);
@@ -587,11 +587,11 @@ MusicError func_80055D8C(s32 songName, s32 arg1) {
 }
 
 MusicError func_80055DDC(s32 songName, s32 arg1) {
-    s32 error;
-    s32 unkArg1;
     BGMPlayer* bgmPlayer;
+    s32 trackData;
+    s32 error;
 
-    error = func_80055CE8(songName, &unkArg1, &bgmPlayer);
+    error = func_80055CE8(songName, &trackData, &bgmPlayer);
 
     if (error == MUSIC_ERROR_NONE) {
         s32* temp_v0 = func_80055EB4(arg1);
@@ -607,11 +607,11 @@ MusicError func_80055DDC(s32 songName, s32 arg1) {
 }
 
 MusicError func_80055E48(s32 songName, s32 arg1) {
-    s32 error;
-    s32 unkArg1;
     BGMPlayer* bgmPlayer;
+    s32 trackData;
+    s32 error;
 
-    error = func_80055CE8(songName, &unkArg1, &bgmPlayer);
+    error = func_80055CE8(songName, &trackData, &bgmPlayer);
 
     if (error == MUSIC_ERROR_NONE) {
         s32* temp_v0 = func_80055EB4(arg1);
@@ -713,9 +713,28 @@ void func_800560A8(void) {
     D_8009A5C0->unk_9C = 1;
 }
 
-INCLUDE_ASM(s32, "30450", func_800560BC);
+void func_800560BC(s32 arg0, s32 arg1, s32 arg2) {
+    SndGlobals* globals = D_8009A5C0;
 
-INCLUDE_ASM(void, "30450", func_8005610C, void);
+    if (globals->unk_98 < 16) {
+        *globals->unk_90++ = ((arg0 << 0x1C) + ((arg1 & 0xF) << 0x18) + arg2);
+        globals->unk_98++;
+    }
+}
+
+void func_8005610C(void) {
+    SndGlobals* globals = D_8009A5C0;
+    s32* buf = globals->unk_94;
+    s32 i = 15;
+    
+    do {
+        *buf++ = 0;
+    } while(i-- != 0);
+
+    globals->unk_98 = 0;
+    globals->unk_9C = 0;
+    globals->unk_90 = globals->unk_94;
+}
 
 void func_80056144(UnkFuncAl arg0, s32 arg1) {
     D_8009A5C0->unk_A4[arg1] = arg0;

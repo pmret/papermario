@@ -1,7 +1,7 @@
 #include "common.h"
 #include "audio.h"
 
-extern s8 D_80078464;
+extern s8 gBlankSEFData[12];
 extern InstrumentEffect* D_800783C0[25];
 
 void snd_SEFCmd_00_SetVolume(SoundManager* manager, SoundPlayer* player);
@@ -286,7 +286,7 @@ void func_8004C2A4(SoundManager* manager, u32 soundID) {
     for (i = 0; i < ARRAY_COUNT(manager->unk_16C); i++) {
         SoundPlayer* player = &manager->unk_16C[i];
         if (player->currentSoundID == (soundID & SOUND_ID_LOWER)) {
-            player->sefDataReadPos = &D_80078464;
+            player->sefDataReadPos = &gBlankSEFData;
             player->unk_80 = 0;
             player->sfxParamsFlags = 1;
             player->unk_A9 = 0;
@@ -303,7 +303,7 @@ void func_8004C300(SoundManager* manager, u32 soundID) {
     for (i = 0; i < ARRAY_COUNT(manager->unk_16C); i++) {
         SoundPlayer* player = &manager->unk_16C[i];
         if (soundID == player->unk_99) {
-            player->sefDataReadPos = &D_80078464;
+            player->sefDataReadPos = &gBlankSEFData;
             player->unk_80 = 0;
             player->sfxParamsFlags = 1;
             player->unk_A9 = 0;
@@ -386,6 +386,15 @@ s16 func_8004C444(SoundManager* manager) {
     return 0;
 }
 
+s32 func_8004D428(s32, s32, s32);                   /* extern */
+void func_80053888(UnkAl48*, s32);                     /* extern */
+void snd_SEFCmd_00_SetVolume(SoundManager*, SoundPlayer*); /* extern */
+void snd_SEFCmd_01_SetPan(SoundManager*, SoundPlayer*); /* extern */
+void snd_SEFCmd_02_SetInstrument(SoundManager*, SoundPlayer*); /* extern */
+void snd_SEFCmd_03_SetReverb(SoundManager*, SoundPlayer*); /* extern */
+s16 snd_get_scaled_volume(SoundManager*, SoundPlayer*); /* extern */
+f32 snd_tune_param_to_timescale(s32);               /* extern */
+
 INCLUDE_ASM(s32, "26840_len_20d0", func_8004C578);
 
 s16 snd_get_scaled_volume(SoundManager* manager, SoundPlayer* player) {
@@ -402,9 +411,44 @@ s16 snd_get_scaled_volume(SoundManager* manager, SoundPlayer* player) {
 
 INCLUDE_ASM(s32, "26840_len_20d0", func_8004C884);
 
-INCLUDE_ASM(s32, "26840_len_20d0", snd_set_voice_volume);
+void snd_set_voice_volume(UnkAl48* voice, SoundManager* manager, SoundPlayer* player) {
+    s32 x = ((((manager->unk_B8
+        * player->sfxVolume) >> 0xF)
+        * player->unk_9F) >> 7)
+        * (player->volumeLerp.current >> 0x10) >> 0xF;
+    
+    if (player->sfxParamsFlags & 4 || player->masterVolume == 0) {
+        voice->unk_40 = x;
+    } else {
+        voice->unk_40 = (x * player->masterVolume) >> 0xF;
+    }
+}
 
-INCLUDE_ASM(s32, "26840_len_20d0", func_8004CDF8);
+u8 func_8004CDF8(s32 arg0, s32 arg1, s32 arg2) {
+
+    s32 retVal;
+    s32 cond;
+    s32 a, b, c;
+
+    arg1 = arg1 & 0xFF;
+    cond = ((arg0 >> 5) + (arg0 >> 3)) & 1;
+    
+    a = (arg0 >> 8) & 0x1F;
+    b = (arg0 << 3) & 0xE0;
+    c = a + b;
+    
+    if (cond != 0) {
+        retVal = arg1 + (((arg2 & 0xFF) * c) >> 8);
+    } else {
+        retVal = arg1 - (((arg2 & 0xFF) * c) >> 8);
+    }
+    if (retVal < 0) {
+        retVal = 0;
+    } else if (retVal > 0x7F) {
+        retVal = 0x7F;
+    }
+    return retVal;
+}
 
 void snd_SEFCmd_00_SetVolume(SoundManager* manager, SoundPlayer* player) {
     player->sfxVolume = *(u8*)player->sefDataReadPos++;
@@ -678,8 +722,43 @@ void snd_SEFCmd_18(SoundManager* manager, SoundPlayer* player) {
     }
 }
 
-INCLUDE_ASM(s32, "26840_len_20d0", func_8004D428);
+s32 func_8004D428(s32 arg0, s32 arg1, s32 arg2) {
+    s32 a = (arg0 >> 7) & 0xF;
+    s32 b = (arg0 << 3) & 0xF0;
+    s32 c = (a + b);
+    s32 d = (arg0 >> 5);
+    s32 e = (arg0 >> 2);
+    s32 f;
 
-INCLUDE_ASM(s32, "26840_len_20d0", func_8004D484);
+    if ((d + e) & 1) {
+        f = c * 5;
+        return arg2 + ((arg1 * f) >> 8);
+    } else {
+        f = c * 5;
+        return arg2 - ((arg1 * f) >> 8);
+    }
+}
 
-INCLUDE_ASM(s32, "26840_len_20d0", func_8004D4BC);
+u8 func_8004D484(s32 arg0, s32 arg1, s32 arg2) {
+    s32 a = (arg0 & 0xCC) >> 2;
+    s32 b = (arg0 & 0x13) << 2;
+    s32 c = a + b;
+    
+    return (arg2 * (0x8000 - (arg1 * c)) >> 0xF);
+}
+
+
+void func_8004D4BC(SoundManager* manager) {
+    s32 i;
+
+    for (i = 0; i < ARRAY_COUNT(manager->unk_16C); i++) {
+        SoundPlayer* temp_v0 = &manager->unk_16C[i];
+        temp_v0->sefDataReadPos = &gBlankSEFData;
+        temp_v0->unk_80 = 0;
+        temp_v0->sfxParamsFlags = 1;
+        temp_v0->unk_A9 = 0;
+        temp_v0->unk_8E = 1;
+        temp_v0->unk_98 = 0;
+        temp_v0->unk_99 = 0;
+    }
+}

@@ -820,6 +820,7 @@ enum SoundIDBits {
 
 typedef enum MusicError {
     MUSIC_ERROR_NONE                = 0,
+    MUSIC_ERROR_1                   = 1,
     MUSIC_ERROR_2                   = 2, // player not found for songName
     MUSIC_ERROR_3                   = 3, // songName is NULL
     MUSIC_ERROR_4                   = 4, // duration out of bounds: (250,10000)

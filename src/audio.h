@@ -54,15 +54,6 @@ typedef struct Fade {
     /* 0x1A */ s16 unk_1A;
 } Fade; // size = 0x10
 
-typedef struct InstrumentCFG { // maybe same as UnkAlC?
-    /* 0x00 */ s16 unk_00;
-    /* 0x02 */ u8 unk_02;
-    /* 0x03 */ s8 unk_03;
-    /* 0x04 */ s8 unk_04;
-    /* 0x05 */ s8 unk_05;
-    /* 0x06 */ s8 unk_06;
-} InstrumentCFG;
-
 typedef struct UnkLen18 {
     /* 0x00 */ u16 unk_00;
     /* 0x02 */ char unk_02[0x2];
@@ -165,7 +156,7 @@ typedef struct Instrument {
     /* 0x14 */ s32 loopCount;
     /* 0x18 */ UNK_PTR predictorOffset;
     /* 0x1C */ s16 unk_1C;
-    /* 0x1E */ s16 unk_1E;
+    /* 0x1E */ u16 unk_1E;
     /* 0x20 */ f32 sampleRate;
     /* 0x24 */ s8 skipLoopPredictor;
     /* 0x25 */ s8 unk_25;
@@ -175,7 +166,7 @@ typedef struct Instrument {
     /* 0x29 */ s8 unk_29;
     /* 0x2A */ s8 unk_2A;
     /* 0x2B */ s8 unk_2B;
-    /* 0x2C */ UNK_PTR unkOffset;
+    /* 0x2C */ InstrumentEffect* unkOffset;
 } Instrument; // size = 0x30;
 
 typedef Instrument* InstrumentGroup[16];
@@ -250,8 +241,8 @@ typedef struct SoundPlayer {
     /* 0xA3 */ s8 unk_A3;
     /* 0xA4 */ s16 masterPitchShift;
     /* 0xA6 */ s16 masterVolume;
-    /* 0xA8 */ s8 masterPan;
-    /* 0xA8 */ s8 unk_A9;
+    /* 0xA8 */ u8 masterPan;
+    /* 0xA8 */ u8 unk_A9;
     /* 0xA9 */ char unk_AA[0x2];
 } SoundPlayer; // size = 0xAC
 
@@ -361,7 +352,18 @@ typedef struct BGMDrumInfo {
     /* 0x00 */ s32 unk_00;
     /* 0x04 */ s32 unk_04;
     /* 0x08 */ s32 unk_08;
-} BGMDrumInfo;
+} BGMDrumInfo; // size = 0xC
+
+//TODO -- could be same as UnkAlC?
+typedef struct BGMInstrumentInfo {
+    /* 0x00 */ u16 unk_00;
+    /* 0x02 */ u8 unk_02;
+    /* 0x03 */ s8 pan;
+    /* 0x04 */ s8 reverb;
+    /* 0x05 */ s8 coarseTune;
+    /* 0x06 */ s8 fineTune;
+    /* 0x07 */ char pad_7[1];
+} BGMInstrumentInfo; // size = 0x8
 
 typedef struct SBNHeader {
     /* 0x00 */ s32 signature; // 'SBN '
@@ -470,7 +472,7 @@ typedef struct SndGlobals {
     /* 0x0000 */ f32 actualFrequency;
     /* 0x0004 */ Instrument* defaultInstrument;
     /* 0x0008 */ UnkAlC unk_08;
-    /* 0x0014 */ InstrumentCFG defaultPRGEntry;
+    /* 0x0014 */ BGMInstrumentInfo defaultPRGEntry;
     /* 0x001C */ s32 baseRomOffset;
     /* 0x0020 */ SBNFileEntry* sbnFileList;
     /* 0x0024 */ s32 fileListLength;
@@ -486,7 +488,7 @@ typedef struct SndGlobals {
     /* 0x0052 */ u8 unk_52;
     /* 0x0053 */ u8 unk_53;
     /* 0x0054 */ PEREntry* dataPER;
-    /* 0x0058 */ InstrumentCFG* dataPRG;
+    /* 0x0058 */ BGMInstrumentInfo* dataPRG;
     /* 0x005C */ s32* currentTrackData[4];
     /* 0x006C */ UnkAl19E0Sub3 unk_6C[1];
     /* 0x0074 */ char unk_74[0x8];
@@ -495,7 +497,7 @@ typedef struct SndGlobals {
     /* 0x0084 */ s32 unkFadeTime;
     /* 0x0088 */ s32 unkFadeStart;
     /* 0x008C */ s32 unkFadeEnd;
-    /* 0x0090 */ s32 unk_90;
+    /* 0x0090 */ s32* unk_90;
     /* 0x0094 */ s32* unk_94;
     /* 0x0098 */ u32 unk_98;
     /* 0x009C */ s32 unk_9C;
@@ -535,10 +537,7 @@ typedef struct BGMPlayerTrack {
     /* 0x3A */ s16 trackTremoloAmount;
     /* 0x3C */ char unk_3C[0x2];
     /* 0x3E */ s16 unk_3E;
-    /* 0x40 */ s8 tuneChanged;  //TODO may be a SoundPlayChange here
-    /* 0x41 */ s8 volumeChanged;
-    /* 0x42 */ s8 panChanged;
-    /* 0x43 */ s8 reverbChanged;
+    /* 0x40 */ SoundPlayChange changed;
     /* 0x44 */ u16 unk_44;
     /* 0x46 */ u16 subTrackCoarseTune;
     /* 0x48 */ u8 subTrackFineTune;
@@ -610,7 +609,7 @@ typedef struct BGMPlayer {
     /* 0x070 */ s32 unk_70;
     /* 0x074 */ s32 unk_74;
     /* 0x078 */ BGMDrumInfo* drumsInfo;
-    /* 0x07C */ s32 instrumentsInfo;
+    /* 0x07C */ BGMInstrumentInfo* instrumentsInfo;
     /* 0x080 */ BGMDrumInfo* drums[12];
     /* 0x0B0 */ s32 masterTempo;
     /* 0x0B4 */ s32 masterTempoFadeDelta;
@@ -844,7 +843,7 @@ void func_80052BF8(UnkAl48*, s32*);
 
 void snd_reset_instrument(Instrument*);
 void func_80053370(UnkAlC*);
-void func_800533A8(InstrumentCFG*);
+void func_800533A8(BGMInstrumentInfo*);
 void func_80053654(SndGlobals*);
 void snd_initialize_bgm_fade(Fade*, s32, s32, s32);
 void snd_clear_bgm_fade(Fade*);

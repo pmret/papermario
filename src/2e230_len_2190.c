@@ -169,13 +169,13 @@ void func_80053370(UnkAlC* arg0) {
     arg0->unk_0A = 0;
 }
 
-void func_800533A8(InstrumentCFG* arg0) {
+void func_800533A8(BGMInstrumentInfo* arg0) {
     arg0->unk_00 = 8208;
     arg0->unk_02 = 0x7F;
-    arg0->unk_03 = 64;
-    arg0->unk_04 = 0;
-    arg0->unk_05 = 0;
-    arg0->unk_06 = 0;
+    arg0->pan = 64;
+    arg0->reverb = 0;
+    arg0->coarseTune = 0;
+    arg0->fineTune = 0;
 }
 
 
@@ -471,19 +471,19 @@ Instrument* func_80053BE8(SndGlobals* arg0, u32 arg1, u32 arg2, s32** arg3) {
 }
 
 void snd_get_sequence_player_and_track(u32 playerIndex, s32** outCurrentTrackData, BGMPlayer** outPlayer) {
-    SndGlobals* temp_v1 = D_8009A5C0;
+    SndGlobals* globals = D_8009A5C0;
 
     switch (playerIndex) {
         case 0:
-            *outCurrentTrackData = temp_v1->currentTrackData[0];
+            *outCurrentTrackData = globals->currentTrackData[0];
             *outPlayer = D_8009A664;
             break;
         case 1:
-            *outCurrentTrackData = temp_v1->currentTrackData[1];
+            *outCurrentTrackData = globals->currentTrackData[1];
             *outPlayer = D_8009A5FC;
             break;
         case 2:
-            *outCurrentTrackData = temp_v1->currentTrackData[0];
+            *outCurrentTrackData = globals->currentTrackData[0];
             *outPlayer = D_8009A664;
             break;
         default:
@@ -801,12 +801,12 @@ void snd_load_PRG(SndGlobals* arg0, s32 romAddr) {
         size = 0x200;
     }
     snd_read_rom(dataRomAddr, arg0->dataPRG, size);
-    numItems = size / sizeof(InstrumentCFG);
+    numItems = size / sizeof(BGMInstrumentInfo);
     numItemsLeft = 0x40 - numItems;
     if (numItemsLeft > 0) {
         end = &arg0->dataPRG[numItems];
-        snd_copy_words(&arg0->defaultPRGEntry, end, sizeof(InstrumentCFG));
-        snd_copy_words(end, end + sizeof(InstrumentCFG), numItemsLeft * sizeof(InstrumentCFG) - sizeof(InstrumentCFG));
+        snd_copy_words(&arg0->defaultPRGEntry, end, sizeof(BGMInstrumentInfo));
+        snd_copy_words(end, end + sizeof(BGMInstrumentInfo), numItemsLeft * sizeof(BGMInstrumentInfo) - sizeof(BGMInstrumentInfo));
     }
 }
 
@@ -943,14 +943,14 @@ void snd_swizzle_BK_instruments(s32 bkFileOffset, SoundBank* bank, InstrumentGro
                 if (instrument->wavOffset != 0) {
                     instrument->wavOffset += bkFileOffset;
                 }
-                if (instrument->loopPredictorOffset != 0) {
+                if (instrument->loopPredictorOffset != NULL) {
                     instrument->loopPredictorOffset += (s32)bank;
                 }
-                if (instrument->predictorOffset != 0) {
+                if (instrument->predictorOffset != NULL) {
                     instrument->predictorOffset += (s32)bank;
                 }
-                if (instrument->unkOffset != 0) {
-                    instrument->unkOffset += (s32)bank;
+                if (instrument->unkOffset != NULL) {
+                    instrument->unkOffset = (s32)instrument->unkOffset + (s32)bank;
                 }
                 instrument->unk_25 = arg4;
                 instrument->sampleRate = *((s32*)(&instrument->sampleRate)) / freq; // what is happening here?
