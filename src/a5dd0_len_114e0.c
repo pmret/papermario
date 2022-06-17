@@ -1858,7 +1858,6 @@ s32 create_entity(EntityBlueprint* bp, ...) {
 
     load_area_specific_entity_data();
 
-
     x = va_arg(ap, s32);
     y = va_arg(ap, s32);
     z = va_arg(ap, s32);
@@ -1873,7 +1872,7 @@ s32 create_entity(EntityBlueprint* bp, ...) {
     for (listIndex = 3; listIndex > 0; listIndex--) {
         s32 arg = va_arg(ap, s32);
 
-        if (arg == 0x80000000) {
+        if (arg == MAKE_ENTITY_END) {
             break;
         }
         *a++ = arg;
