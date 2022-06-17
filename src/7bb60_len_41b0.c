@@ -836,7 +836,32 @@ void collision_check_player_overlaps(void) {
     }
 }
 
-INCLUDE_ASM(s32, "7bb60_len_41b0", phys_should_player_be_sliding);
+s32 phys_should_player_be_sliding(void) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    Shadow* shadow = get_shadow_by_index(playerStatus->shadowID);
+    s32 ret = FALSE;
+
+    if (gGameStatusPtr->areaID == AREA_IWA) {
+        f32 temp_f0 = shadow->rotation.z + 180.0;
+
+        if (temp_f0 != 0.0f) {
+            ret = TRUE;
+            switch (gGameStatusPtr->mapID) {
+                case 0:
+                    if (fabsf(temp_f0) < 20.0f) {
+                        ret = FALSE;
+                    }
+                    break;
+                case 1:
+                    if (playerStatus->position.x >= -300.0f && playerStatus->position.x <= -140.0f) {
+                        ret = FALSE;
+                    }
+                    break;
+            }
+        }
+    }
+    return ret;
+}
 
 s32 phys_is_on_sloped_ground(void) {
     Shadow* playerShadow = get_shadow_by_index(gPlayerStatus.shadowID);
