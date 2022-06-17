@@ -129,18 +129,18 @@ glabel func_80238BCC_6F1CAC
 /* 6F1E8C 80238DAC AE020084 */  sw        $v0, 0x84($s0)
 /* 6F1E90 80238DB0 90820136 */  lbu       $v0, 0x136($a0)
 /* 6F1E94 80238DB4 00021080 */  sll       $v0, $v0, 2
-/* 6F1E98 80238DB8 3C038028 */  lui       $v1, %hi(D_80282EE9)
+/* 6F1E98 80238DB8 3C038028 */  lui       $v1, %hi(bActorOffsets + 0x1)
 /* 6F1E9C 80238DBC 00621821 */  addu      $v1, $v1, $v0
-/* 6F1EA0 80238DC0 80632EE9 */  lb        $v1, %lo(D_80282EE9)($v1)
+/* 6F1EA0 80238DC0 80632EE9 */  lb        $v1, %lo(bActorOffsets + 0x1)($v1)
 /* 6F1EA4 80238DC4 8E020088 */  lw        $v0, 0x88($s0)
 /* 6F1EA8 80238DC8 00431021 */  addu      $v0, $v0, $v1
 /* 6F1EAC 80238DCC AE020088 */  sw        $v0, 0x88($s0)
 /* 6F1EB0 80238DD0 90820136 */  lbu       $v0, 0x136($a0)
 /* 6F1EB4 80238DD4 8E030090 */  lw        $v1, 0x90($s0)
 /* 6F1EB8 80238DD8 00021080 */  sll       $v0, $v0, 2
-/* 6F1EBC 80238DDC 3C048028 */  lui       $a0, %hi(D_80282EEA)
+/* 6F1EBC 80238DDC 3C048028 */  lui       $a0, %hi(bActorOffsets + 0x2)
 /* 6F1EC0 80238DE0 00822021 */  addu      $a0, $a0, $v0
-/* 6F1EC4 80238DE4 80842EEA */  lb        $a0, %lo(D_80282EEA)($a0)
+/* 6F1EC4 80238DE4 80842EEA */  lb        $a0, %lo(bActorOffsets + 0x2)($a0)
 /* 6F1EC8 80238DE8 00641821 */  addu      $v1, $v1, $a0
 /* 6F1ECC 80238DEC AE030090 */  sw        $v1, 0x90($s0)
 /* 6F1ED0 80238DF0 8FBF0014 */  lw        $ra, 0x14($sp)

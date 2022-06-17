@@ -2,8 +2,6 @@
 #include "npc.h"
 #include "model.h"
 
-void func_8011B950(u16, s32, s32, s32);
-
 ApiStatus N(UnkFunc27)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 testS2 = evt_get_variable(script, *args++);

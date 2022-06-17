@@ -1,6 +1,7 @@
 #include "common.h"
 #include "model.h"
 #include "ld_addrs.h"
+#include "stdlib/stdarg.h"
 
 typedef struct GameMode {
     /* 0x00 */ u16 flags;
@@ -434,7 +435,10 @@ Matrix4s mdl_RDPIdentity = {
 
 s32 D_8014B7A8[] = { 0x00000006, 0x00000000, 0x00000005, 0x00020000, 0x00000004, 0x00030000, 0x00000003, 0x00038000, 0x00000002, 0x0003C000, 0x00000001, 0x0003E000, 0x00000000, 0x0003F000, 0x00000000, 0x0003F800, 0x00000000, 0x00000000, };
 
-s32 D_8014B7F0[] = { 0x00000000, 0x00000000, };
+s32 D_8014B7F0 = 0;
+
+// padding?
+s32 D_8014B7F4 = 0;
 
 Gfx D_8014B7F8[] = {
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
@@ -1035,10 +1039,10 @@ extern ModelCustomGfxList bModelSpecialDls;
 
 extern ModelCustomGfxBuilderList wCustomModelGfxBuilders;
 extern ModelCustomGfxBuilderList bCustomModelGfxBuilders;
-extern ModelLocalVertexCopy** D_80152190;
-extern ModelLocalVertexCopy** D_801521D0;
+extern ModelLocalVertexCopyList wModelLocalVtxBuffers;
+extern ModelLocalVertexCopyList bModelLocalVtxBuffers;
+extern ModelLocalVertexCopyList* gCurrentModelLocalVtxBuffers;
 
-extern ModelLocalVertexCopy** gCurrentModelLocalVtxBuffers;
 extern ModelNode* D_80152214;
 extern ModelNode* D_80152218;
 extern ModelTreeInfoList D_80152220;
@@ -1056,10 +1060,11 @@ extern s32 texPannerAuxU[MAX_TEX_PANNERS];
 extern s32 texPannerAuxV[MAX_TEX_PANNERS];
 extern u32 mdl_nextTextureAddress;
 extern u16 mdl_currentTransformGroupChildIndex;
+extern u16 D_80153226;
 extern ModelNode* D_80153370;
 extern u16 D_80153374;
 extern u16 D_80153376;
-extern s16 D_8015336E;
+extern u16 D_8015336E;
 extern RenderTask* mdl_renderTaskLists[3];
 extern s32 mdl_renderTaskQueueIdx;
 extern s32 mdl_renderTaskCount; // num render task entries?
@@ -1081,8 +1086,8 @@ void _delete_shadow(s32 shadowIndex);
 void func_80110F10(void);
 s32 entity_get_collision_flags(Entity* entity);
 void entity_free_static_data(EntityBlueprint* data);
+s32 create_entity_shadow(Entity* entity, f32 x, f32 y, f32 z);
 void update_entity_shadow_position(Entity* entity);
-s32 entity_raycast_down(f32* x, f32* y, f32* z, f32* hitYaw, f32* hitPitch, f32* hitLength);
 void func_80117D00(Model* model);
 void appendGfx_model_group(Model* model);
 void render_transform_group_node(ModelNode* node);
@@ -1339,7 +1344,9 @@ void func_8010FE44(void* arg0) {
     func_8010FD98(arg0, D_8014AFB0);
 }
 
-void entity_model_set_shadow_color(s32 alpha) {
+void entity_model_set_shadow_color(void* data) {
+    s32 alpha = (s32)data;
+
     gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, 0, PRIMITIVE, 0, TEXEL0, 0, 0, 0, 0, 0, TEXEL0, 0, PRIMITIVE, 0);
     gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0x00, 0x00, 0x00, alpha);
 }
@@ -1673,7 +1680,62 @@ s32 entity_get_collision_flags(Entity* entity) {
     return entityFlags;
 }
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", entity_interacts_with_current_partner);
+s32 entity_interacts_with_current_partner(s32 entityIdx) {
+    s32 ret = FALSE;
+    u32 entityType = get_entity_type(entityIdx);
+    s32 partnerID = get_current_partner_id();
+    Entity* entity;
+
+    switch (partnerID) {
+        case PARTNER_BOMBETTE:
+            switch (entityType) {
+                default:
+                    return FALSE;
+                case ENTITY_TYPE_BLUE_SWITCH:
+                case ENTITY_TYPE_RED_SWITCH:
+                case ENTITY_TYPE_MULTI_TRIGGER_BLOCK:
+                case ENTITY_TYPE_BRICK_BLOCK:
+                case ENTITY_TYPE_MULTI_COIN_BRICK:
+                case ENTITY_TYPE_YELLOW_BLOCK:
+                case ENTITY_TYPE_SINGLE_TRIGGER_BLOCK:
+                case ENTITY_TYPE_HIDDEN_YELLOW_BLOCK:
+                case ENTITY_TYPE_HIDDEN_RED_BLOCK:
+                case ENTITY_TYPE_RED_BLOCK:
+                case ENTITY_TYPE_HAMMER1_BLOCK:
+                case ENTITY_TYPE_HAMMER1_BLOCK_TINY:
+                case ENTITY_TYPE_SUPER_BLOCK:
+                case ENTITY_TYPE_BOMBABLE_ROCK:
+                    entity = get_entity_by_index(entityIdx);
+                    entity->flags |= ENTITY_FLAGS_BLOCK_BEING_HIT;
+                    ret = TRUE;
+            }
+            break;
+        case PARTNER_KOOPER:
+             switch (entityType) {
+                default:
+                    return FALSE;
+                case ENTITY_TYPE_BLUE_SWITCH:
+                case ENTITY_TYPE_RED_SWITCH:
+                case ENTITY_TYPE_MULTI_TRIGGER_BLOCK:
+                case ENTITY_TYPE_BRICK_BLOCK:
+                case ENTITY_TYPE_MULTI_COIN_BRICK:
+                case ENTITY_TYPE_YELLOW_BLOCK:
+                case ENTITY_TYPE_SINGLE_TRIGGER_BLOCK:
+                case ENTITY_TYPE_HIDDEN_YELLOW_BLOCK:
+                case ENTITY_TYPE_HIDDEN_RED_BLOCK:
+                case ENTITY_TYPE_RED_BLOCK:
+                case ENTITY_TYPE_HEALING_BLOCK:
+                case ENTITY_TYPE_1C:
+                case ENTITY_TYPE_SAVE_POINT:
+                case ENTITY_TYPE_SUPER_BLOCK:
+                    entity = get_entity_by_index(entityIdx);
+                    entity->flags |= ENTITY_FLAGS_BLOCK_BEING_HIT;
+                    ret = TRUE;
+            }
+            break;
+    }
+    return ret;
+}
 
 s32 test_player_entity_aabb(Entity* entity) {
     f32 yTemp = entity->position.y - (gPlayerStatus.position.y + gPlayerStatus.colliderHeight);
@@ -1763,7 +1825,7 @@ INCLUDE_ASM(s32, "a5dd0_len_114e0", entity_anim_make_vertex_pointers);
 s32 is_entity_data_loaded(Entity* entity, EntityBlueprint* entityData, s32* loadedStart, s32* loadedEnd);
 INCLUDE_ASM(s32, "a5dd0_len_114e0", is_entity_data_loaded);
 
-void load_simple_entity_data(Entity* entity, EntityBlueprint* entityData) {
+void load_simple_entity_data(Entity* entity, EntityBlueprint* entityData, s32 listIndex) {
     s32 loadedStart;
     s32 loadedEnd;
     s32 entitySize;
@@ -1820,8 +1882,134 @@ s32 func_80111790(void) {
 
 INCLUDE_ASM(void, "a5dd0_len_114e0", entity_free_static_data, EntityBlueprint* data);
 
+// matches with this sig, but that breaks other usages of this func.
+#ifdef NON_EQUIVALENT
+s32 create_entity(EntityBlueprint* bp, ...) {
+    va_list ap;
+    EntityBlueprint** bpPtr;
+    f32 x;
+    f32 y;
+    f32 z;
+    f32 rotY;
+    s32 i;
+    s32 listIndex;
+    Entity* entity;
+    s32* a;
+
+    va_start(ap, bp);
+    bpPtr = &bp;
+    *bpPtr = bp;
+
+    load_area_specific_entity_data();
+
+    x = va_arg(ap, s32);
+    y = va_arg(ap, s32);
+    z = va_arg(ap, s32);
+    rotY = va_arg(ap, s32);
+
+    a = &CreateEntityVarArgBuffer[3];
+
+    *a-- = 0;
+    *a-- = 0;
+    *a = 0;
+
+    for (listIndex = 3; listIndex > 0; listIndex--) {
+        s32 arg = va_arg(ap, s32);
+
+        if (arg == MAKE_ENTITY_END) {
+            break;
+        }
+        *a++ = arg;
+    }
+
+    va_end(ap);
+
+    for (listIndex = 0; listIndex < ARRAY_COUNT(*gCurrentEntityListPtr); listIndex++) {
+        if ((*gCurrentEntityListPtr)[listIndex] == NULL) {
+            break;
+        }
+    }
+
+    if (listIndex >= 30) {
+        return -1;
+    }
+
+    (*gCurrentEntityListPtr)[listIndex] = entity = heap_malloc(sizeof(*entity));
+    mem_clear(entity, sizeof(*entity));
+    entity->dataBuf.any = NULL;
+    if (bp->typeDataSize != 0) {
+        entity->dataBuf.any = heap_malloc(bp->typeDataSize);
+        mem_clear(entity->dataBuf.any, bp->typeDataSize);
+    }
+    entity->type = bp->entityType;
+    entity->listIndex = listIndex;
+    entity->boundScript = NULL;
+    entity->updateMatrixOverride = NULL;
+    entity->blueprint = bp;
+    entity->scriptReadPos = bp->updateEntityScript;
+    entity->hasEntityScript = entity->scriptReadPos != NULL;
+    entity->savedReadPos = bp->updateEntityScript;
+    entity->updateScriptCallback = NULL;
+    entity->flags = bp->flags | 0x80000000;
+    entity->collisionFlags = 0;
+    entity->unk_07 = 0;
+    entity->renderSetupFunc = NULL;
+    entity->position.x = x;
+    entity->position.y = y;
+    entity->position.z = z;
+    entity->rotation.x = 0.0f;
+    entity->rotation.y = rotY;
+    entity->rotation.z = 0.0f;
+    entity->scale.x = 1.0f;
+    entity->scale.y = 1.0f;
+    entity->scale.z = 1.0f;
+    entity->aabb.x = bp->aabbSize[0];
+    entity->aabb.y = bp->aabbSize[1];
+    entity->aabb.z = bp->aabbSize[2];
+    entity->unk_05 = 1;
+    entity->unk_08 = -1;
+    entity->alpha = -1;
+    entity->virtualModelIndex = -1;
+    entity->shadowIndex = -1;
+    entity->vertexData = NULL;
+
+    if (!(bp->flags & 8)) {
+        if (bp->dmaStart != 0) {
+            load_simple_entity_data(entity, bp, listIndex);
+        }
+        if (bp->renderCommandList != NULL) {
+            entity->virtualModelIndex = load_entity_model(bp->renderCommandList);
+            exec_entity_model_commandlist(entity->virtualModelIndex);
+        }
+    } else {
+        load_split_entity_data(entity, bp, listIndex);
+    }
+
+    if (bp->entityType != 1 && (entity->flags & (ENTITY_FLAGS_SET_SHADOW_FLAG200 | ENTITY_FLAGS_100))) {
+        create_entity_shadow(entity, x, y, z);
+    }
+
+    switch (bp->entityType) {
+        case ENTITY_TYPE_BLUE_SWITCH:
+        case ENTITY_TYPE_RED_SWITCH:
+        case ENTITY_TYPE_SIMPLE_SPRING:
+        case ENTITY_TYPE_SCRIPT_SPRING:
+        case ENTITY_TYPE_STAR_BOX_LAUCHER:
+            entity->flags |= ENTITY_FLAGS_4000;
+            break;
+    }
+
+    if (bp->fpInit != NULL) {
+        bp->fpInit(entity);
+    }
+
+    update_entity_transform_matrix(entity);
+    return entity->listIndex;
+}
+#else
 INCLUDE_ASM(s32, "a5dd0_len_114e0", create_entity, EntityBlueprint* data, s32 x, s32 y, s32 z, s32 arg4,
             ...);
+#endif
 
 s32 create_shadow_from_data(ShadowBlueprint* data, f32 x, f32 y, f32 z) {
     Shadow* shadow;
@@ -2550,7 +2738,7 @@ void clear_model_data(void) {
         gCurrentCustomModelGfxPtr = &wModelSpecialDls;
         gCurrentCustomModelGfxBuildersPtr = &wCustomModelGfxBuilders;
         gCurrentModelTreeRoot = &D_80152214;
-        gCurrentModelLocalVtxBuffers = &D_80152190;
+        gCurrentModelLocalVtxBuffers = &wModelLocalVtxBuffers;
         mdl_currentModelTreeNodeInfo = &D_80152220;
         D_801512F0 = &wBgRenderType;
         mdl_bgMultiplyColorA = 0;
@@ -2564,7 +2752,7 @@ void clear_model_data(void) {
         gCurrentCustomModelGfxPtr = &bModelSpecialDls;
         gCurrentCustomModelGfxBuildersPtr = &bCustomModelGfxBuilders;
         gCurrentModelTreeRoot = &D_80152218;
-        gCurrentModelLocalVtxBuffers = &D_801521D0;
+        gCurrentModelLocalVtxBuffers = &bModelLocalVtxBuffers;
         mdl_currentModelTreeNodeInfo = &D_80152A20;
         D_801512F0 = &bBgRenderType;
         gCurrentFogSettings = &bFogSettings;
@@ -2615,7 +2803,7 @@ void init_model_data(void) {
         gCurrentCustomModelGfxPtr = &wModelSpecialDls;
         gCurrentCustomModelGfxBuildersPtr = &wCustomModelGfxBuilders;
         gCurrentModelTreeRoot = &D_80152214;
-        gCurrentModelLocalVtxBuffers = &D_80152190;
+        gCurrentModelLocalVtxBuffers = &wModelLocalVtxBuffers;
         mdl_currentModelTreeNodeInfo = &D_80152220;
         D_801512F0 = &wBgRenderType;
         gCurrentFogSettings = &wFogSettings;
@@ -2625,7 +2813,7 @@ void init_model_data(void) {
         gCurrentCustomModelGfxPtr = &bModelSpecialDls;
         gCurrentCustomModelGfxBuildersPtr = &bCustomModelGfxBuilders;
         gCurrentModelTreeRoot = &D_80152218;
-        gCurrentModelLocalVtxBuffers = &D_801521D0;
+        gCurrentModelLocalVtxBuffers = &bModelLocalVtxBuffers;
         mdl_currentModelTreeNodeInfo = &D_80152A20;
         D_801512F0 = &bBgRenderType;
         gCurrentFogSettings = &bFogSettings;
@@ -2659,6 +2847,7 @@ void func_80116674(void) {
 
     for (i = 0; i < ARRAY_COUNT(*gCurrentModels); i++) {
         Model* m = (*gCurrentModels)[i];
+        do {} while (0);
     }
 }
 #else
@@ -3226,8 +3415,56 @@ ModelTransformGroup* get_transform_group(s32 index) {
     return (*gCurrentTransformGroups)[index];
 }
 
-void func_8011B1D8(ModelNode*);
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011B1D8);
+void func_8011B1D8(ModelNode* node) {
+    ModelNode* childNode;
+    ModelNodeProperty* prop;
+    s32 numChildren;
+    s32 i;
+    u16 childCount;
+
+    if (node->type == 2) {
+        D_80153376 = D_80153226;
+        return;
+    }
+
+    if (node->type == 5) {
+        prop = get_model_property(node, MODEL_PROP_KEY_GROUP_TYPE);
+        if (prop != NULL && prop->data.s != 0) {
+            mdl_treeIterPos += mdl_get_child_count(node);
+            D_80153376 = mdl_treeIterPos;
+            return;
+        }
+    }
+
+    if (node->groupData != NULL) {
+        numChildren = node->groupData->numChildren;
+        if (numChildren != 0) {
+            for (i = 0; i < numChildren; i++) {
+                childNode = node->groupData->childList[i];
+                childCount = mdl_treeIterPos;
+                if (childNode->type == 5) {
+                    prop = get_model_property(childNode, MODEL_PROP_KEY_GROUP_TYPE);
+                    if (prop != NULL && prop->data.s != 0) {
+                        childCount += mdl_get_child_count(childNode);
+                    }
+                }
+                func_8011B1D8(childNode);
+
+                if (D_80153370 != NULL) {
+                    break;
+                }
+
+                if (D_8015336E == mdl_treeIterPos) {
+                    D_80153370 = childNode;
+                    D_80153374 = childCount;
+                    break;
+                }
+
+                mdl_treeIterPos++;
+            }
+        }
+    }
+}
 
 void make_transform_group(u16 modelID) {
     mdl_treeIterPos = 0;
@@ -3627,7 +3864,7 @@ void mdl_local_gfx_copy_vertices(u8* from, s32 num, u8* to) {
 INCLUDE_ASM(s32, "a5dd0_len_114e0", mdl_make_local_vertex_copy);
 
 void mdl_get_copied_vertices(s32 copyIndex, Vtx** firstVertex, Vtx** copiedVertices, s32* numCopied) {
-    ModelLocalVertexCopy* mlvc = gCurrentModelLocalVtxBuffers[copyIndex];
+    ModelLocalVertexCopy* mlvc = (*gCurrentModelLocalVtxBuffers)[copyIndex];
     s32 selector = mlvc->selector;
 
     *firstVertex = mlvc->minVertexAddr;
@@ -3636,7 +3873,7 @@ void mdl_get_copied_vertices(s32 copyIndex, Vtx** firstVertex, Vtx** copiedVerti
 }
 
 Gfx* mdl_get_copied_gfx(s32 copyIndex) {
-    ModelLocalVertexCopy* mlvc = gCurrentModelLocalVtxBuffers[copyIndex];
+    ModelLocalVertexCopy* mlvc = (*gCurrentModelLocalVtxBuffers)[copyIndex];
     s32 selector = mlvc->selector;
     Gfx* gfxCopy = mlvc->gfxCopy[selector];
 

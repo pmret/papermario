@@ -569,11 +569,11 @@ void _use_partner_ability(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (!partnerActionStatus->inputDisabled) {
-        partnerActionStatus->stickX = gGameStatusPtr->stickX[gGameStatusPtr->unk_81];
-        partnerActionStatus->stickY = gGameStatusPtr->stickY[gGameStatusPtr->unk_81];
-        partnerActionStatus->currentButtons = gGameStatusPtr->currentButtons[gGameStatusPtr->unk_81];
-        partnerActionStatus->pressedButtons = gGameStatusPtr->pressedButtons[gGameStatusPtr->unk_81];
-        partnerActionStatus->heldButtons = gGameStatusPtr->heldButtons[gGameStatusPtr->unk_81];
+        partnerActionStatus->stickX = gGameStatusPtr->stickX[gGameStatusPtr->multiplayerEnabled];
+        partnerActionStatus->stickY = gGameStatusPtr->stickY[gGameStatusPtr->multiplayerEnabled];
+        partnerActionStatus->currentButtons = gGameStatusPtr->currentButtons[gGameStatusPtr->multiplayerEnabled];
+        partnerActionStatus->pressedButtons = gGameStatusPtr->pressedButtons[gGameStatusPtr->multiplayerEnabled];
+        partnerActionStatus->heldButtons = gGameStatusPtr->heldButtons[gGameStatusPtr->multiplayerEnabled];
     } else {
         partnerActionStatus->stickX = 0;
         partnerActionStatus->stickY = 0;
@@ -899,8 +899,9 @@ s32 partner_use_ability(void) {
 
     if (!is_starting_conversation() &&
         wPartner != NULL &&
-        (wPartner->canUseAbility == NULL || wPartner->canUseAbility(wPartnerNpc))) {
-        if ((gGameStatusPtr->unk_81 != 0) && (actionStatus->currentButtons & BUTTON_B)) {
+        (wPartner->canUseAbility == NULL || wPartner->canUseAbility(wPartnerNpc)))
+    {
+        if ((gGameStatusPtr->multiplayerEnabled != 0) && (actionStatus->currentButtons & BUTTON_B)) {
             sfx_play_sound(SOUND_MENU_ERROR);
         } else if (D_8010CFD8 != 0) {
             D_8010CFE0 = 1;
@@ -1137,7 +1138,7 @@ void partner_walking_update_motion(Npc* partner) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PartnerActionStatus* actionStatus = &gPartnerActionStatus;
 
-    if (gGameStatusPtr->unk_81 == 0 || playerStatus->flags & (PLAYER_STATUS_FLAGS_INPUT_DISABLED | PLAYER_STATUS_FLAGS_1000)
+    if (gGameStatusPtr->multiplayerEnabled == 0 || playerStatus->flags & (PLAYER_STATUS_FLAGS_INPUT_DISABLED | PLAYER_STATUS_FLAGS_1000)
         || actionStatus->inputDisabled != 0 || actionStatus->partnerAction_unk_2 != 0) {
         if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_800)) {
             partner_walking_follow_player(partner);
@@ -1242,7 +1243,7 @@ void partner_flying_update_motion(Npc* partner) {
     f32 var_f0;
     f32 var_f2;
 
-    if (gGameStatusPtr->unk_81 == 0 ||
+    if (gGameStatusPtr->multiplayerEnabled == 0 ||
         (playerStatus->flags & (PLAYER_STATUS_FLAGS_INPUT_DISABLED | PLAYER_STATUS_FLAGS_1000)) ||
         partnerActionStatus->inputDisabled ||
         partnerActionStatus->partnerAction_unk_2 != 0)
@@ -1403,127 +1404,6 @@ s32 partner_init_get_out(Npc* npc) {
 }
 
 INCLUDE_ASM(s32, "world/partners", partner_get_out);
-// s32 partner_get_out(Npc* npc) {
-//     PlayerStatus* playerStatus = &gPlayerStatus;
-//     Camera* camera = &gCameras[gCurrentCameraID];
-//     f32 sp20;
-//     f32 sp24;
-//     f32 sp28;
-//     f32 sp2C;
-//     f32 temp_f0_2;
-//     f32 temp_f12;
-//     f32 temp_f14;
-//     f32 temp_f2;
-//     f32 duration;
-//     f32 x, y, z;
-
-//     switch (D_8010CFC8) {
-//         case 0:
-//             if (clamp_angle(playerStatus->spriteFacingAngle) < 180.0f) {
-//                 npc->yaw = clamp_angle(camera->currentYaw + 90.0f);
-//             } else {
-//                 npc->yaw = clamp_angle(camera->currentYaw - 90.0f);
-//             }
-//             npc->moveToPos.x = playerStatus->position.x;
-//             npc->moveToPos.y = playerStatus->position.y;
-//             if (wPartner->isFlying) {
-//                 npc->moveToPos.y = playerStatus->position.y;
-//             }
-//             npc->moveToPos.z = playerStatus->position.z;
-//             add_vec2D_polar(&npc->moveToPos.x, &npc->moveToPos.z, playerStatus->colliderDiameter, npc->yaw);
-//             x = npc->moveToPos.x;
-//             y = npc->moveToPos.y;
-//             z = npc->moveToPos.z;
-//             if (!wPartner->isFlying) {
-//                 sp20 = x;
-//                 sp28 = y + npc->collisionHeight;
-//                 sp24 = z;
-//                 add_vec2D_polar(&sp20, &sp24, 2.0f, gCameras[gCurrentCameraID].currentYaw);
-
-//                 sp2C = 1000.0f;
-
-//                 if (((npc_raycast_down_around(0x10000, &sp20, &sp28, &sp24, &sp2C, npc->yaw, npc->collisionRadius) == 0)) || ((u32) (get_collider_type_by_id(D_8010C978) - 2) < 2U) || (sp2C > 100.0f))
-//                 {
-//                     x = playerStatus->position.x;
-//                     y = playerStatus->position.y;
-//                     z = playerStatus->position.z;
-//                     add_vec2D_polar(&sp20, &sp24, 2.0f, gCameras[gCurrentCameraID].currentYaw);
-//                 }
-//             }
-//             temp_f12 = playerStatus->position.x;
-//             npc->pos.x = playerStatus->position.x;
-//             temp_f2 = playerStatus->position.y + (playerStatus->colliderHeight / 2);
-//             npc->pos.y = temp_f2;
-//             temp_f14 = playerStatus->position.z;
-//             sp20 = temp_f12;
-//             sp28 = temp_f2;
-//             npc->moveSpeed = 4.0f;
-//             npc->jumpScale = 1.2f;
-//             npc->pos.z = temp_f14;
-//             sp24 = temp_f14;
-//             npc->planarFlyDist = dist2D(temp_f12, temp_f14, x, z);
-//             npc->yaw = atan2(temp_f12, temp_f14, x, z);
-//             npc->duration = npc->planarFlyDist / npc->moveSpeed;
-//             if (npc->duration < 10) {
-//                 npc->duration = 10;
-//                 npc->moveSpeed = npc->planarFlyDist / 10.0f;
-//             }
-//             npc->jumpVelocity = (y - sp28 + ((npc->jumpScale * npc->duration) * npc->duration * 0.5f)) / npc->duration;
-//             D_8010CFC8 = 1;
-//             sp28 = y - sp28;
-//             npc->currentAnim.w = gPartnerAnimations[D_8010CFD8].anims[2];
-//             break;
-//         case 1:
-//             if (npc->jumpVelocity < 0.0f && func_800397E8(npc, fabsf(npc->jumpVelocity))) {
-//                 D_8010CFC8 = 2;
-//                 return 0;
-//             }
-//             npc->jumpVelocity -= npc->jumpScale;
-//             npc->pos.y += npc->jumpVelocity;
-//             if (npc->jumpVelocity <= 0.0f) {
-//                 npc->currentAnim.w = gPartnerAnimations[D_8010CFD8].anims[3];
-//             }
-//             npc_move_heading(npc, npc->moveSpeed, npc->yaw);
-//             npc_do_world_collision(npc);
-//             duration = npc->duration;
-//             if (duration > 10.0f) {
-//                 duration = 10.0f;
-//             }
-//             npc->duration--;
-//             temp_f0_2 = (10.0f - duration) / 10.0f;
-//             npc->scale.x = temp_f0_2;
-//             npc->scale.y = temp_f0_2;
-//             npc->scale.z = temp_f0_2;
-//             if (npc->duration < 0) {
-//                 D_8010CFC8 = 2;
-//             }
-//             break;
-//         case 2:
-//             npc->pos.y = npc->moveToPos.y;
-//             npc->jumpVelocity = 0.0f;
-//             npc->moveToPos.x = npc->pos.x;
-//             npc->moveToPos.z = npc->pos.z;
-//             npc->scale.x = 1.0f;
-//             npc->scale.y = 1.0f;
-//             npc->scale.z = 1.0f;
-//             npc->moveToPos.y = npc->pos.y;
-//             npc->pos.y = playerStatus->position.y;
-//             if (wPartner->isFlying) {
-//                 npc->pos.y = playerStatus->position.y;
-//             }
-//             partner_clear_player_tracking(npc);
-//             npc->pos.x = npc->moveToPos.x;
-//             npc->pos.y = npc->moveToPos.y;
-//             npc->pos.z = npc->moveToPos.z;
-//             if (npc->flags & NPC_FLAG_1000) {
-//                 if (!wPartner->isFlying) {
-//                     func_8003D660(npc, 2);
-//                 }
-//             }
-//             return TRUE;
-//     }
-//     return FALSE;
-// }
 
 void func_800EF300(void) {
     D_8010CFC8 = 40;
