@@ -1053,7 +1053,7 @@ s32* D_8028358C[] = {
     (s32*)D_8028358C, (s32*)D_8028358C, 0
 };
 
-s16 D_802835D0[] = { 28, 40 };
+s16 bMsgHeights[] = { 28, 40 }; // keyed by number of lines in the message (1 or 2)
 s16 D_802835D4[] = { 0, -2 };
 s16 D_802835D8[] = { 0, -12 };
 
@@ -3055,7 +3055,82 @@ void func_802666E4(Actor* actor, f32 x, f32 y, f32 z, s32 damage) {
     } while (0); // required to match
 }
 
+// Weird float load issue at the top
+#ifdef NON_MATCHING
+void func_802667F0(s32 arg0, Actor* actor, f32 x, f32 y, f32 z) {
+    Actor* player = gBattleStatus.playerActor;
+    s32 type;
+
+    if (actor->unk_200 == NULL) {
+        type = 0;
+        switch (arg0) {
+            case 0:
+                type = 0;
+                actor->unk_204 = 1;
+                break;
+            case 1:
+                type = 4;
+                actor->unk_204 = 0;
+                break;
+            case 2:
+                type = 3;
+                actor->unk_204 = 0;
+                break;
+            case 3:
+                type = 2;
+                actor->unk_204 = 2;
+                break;
+            case 4:
+                type = 0;
+                actor->unk_204 = 0;
+                break;
+            case 5:
+                type = player->unk_204;
+                player->unk_204++;
+                if (player->unk_204 > 2) {
+                    player->unk_204 = 2;
+                }
+                break;
+        }
+        actor->unk_200 = fx_attack_result_text(type, x, y, z - 10.0f, 12.0f, 90);
+        actor->unk_205 = 80;
+    } else {
+        ((AttackResultTextFXData*)actor->unk_200->data)->unk_18 = 0;
+        type = actor->unk_204;
+        switch (arg0) {
+            case 0:
+                actor->unk_204++;
+                if (actor->unk_204 > 2) {
+                    actor->unk_204 = 2;
+                }
+                break;
+            case 1:
+                type = 4;
+                break;
+            case 2:
+                type = 3;
+                break;
+            case 3:
+                type = 2;
+                break;
+            case 4:
+                type = 0;
+                break;
+            case 5:
+                type = player->unk_204;
+                player->unk_204++;
+                if (player->unk_204 > 2) {
+                    player->unk_204 = 2;
+                }
+                break;
+        }
+        actor->unk_200 = fx_attack_result_text(type, x, y, z - 10.0f, 12.0f, 90);
+        actor->unk_205 = 80;
+    }
+}
+#else
 INCLUDE_ASM(void, "190B20", func_802667F0, s32 arg0, Actor* arg1, f32 arg2, f32 arg3, f32 arg4);
+#endif
 
 void func_80266970(Actor* target) {
     target->unk_204 = 0;
@@ -3071,12 +3146,12 @@ void func_80266978(void) {
         if (actor != NULL) {
             if (actor->unk_205 == 0x3C) {
                 if (actor->unk_200 != 0) {
-                    actor->unk_200[3][9] = 0;
+                    ((AttackResultTextFXData*)actor->unk_200->data)->unk_24 = 0;
                 }
             }
             if (actor->unk_205 == 5) {
                 if (actor->unk_200 != 0) {
-                    actor->unk_200[3][6] = 0;
+                    ((AttackResultTextFXData*)actor->unk_200->data)->unk_18 = 0;
                     actor->unk_200 = NULL;
                 }
             }
@@ -3090,12 +3165,12 @@ void func_80266978(void) {
     if (actor != NULL) {
         if (actor->unk_205 == 60) {
             if (actor->unk_200 != NULL) {
-                actor->unk_200[3][9] = 0;
+                ((AttackResultTextFXData*)actor->unk_200->data)->unk_24 = 0;
             }
         }
         if (actor->unk_205 == 5) {
             if (actor->unk_200 != NULL) {
-                actor->unk_200[3][6] = 0;
+                ((AttackResultTextFXData*)actor->unk_200->data)->unk_18 = 0;
                 actor->unk_200 = NULL;
             }
         }
@@ -3108,12 +3183,12 @@ void func_80266978(void) {
     if (actor != NULL) {
         if (actor->unk_205 == 60) {
             if (actor->unk_200 != NULL) {
-                actor->unk_200[3][9] = 0;
+                ((AttackResultTextFXData*)actor->unk_200->data)->unk_24 = 0;
             }
         }
         if (actor->unk_205 == 5) {
             if (actor->unk_200 != NULL) {
-                actor->unk_200[3][6] = 0;
+                ((AttackResultTextFXData*)actor->unk_200->data)->unk_18 = 0;
                 actor->unk_200 = NULL;
             }
         }

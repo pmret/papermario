@@ -46,10 +46,11 @@ INCLUDE_ASM(s32, "battle/area_kpa2/6A2B50", func_8021CCFC_6A3EFC);
 
 #include "common/CanPlayerLoseAction.inc.c"
 
-INCLUDE_ASM(s32, "battle/area_kpa2/6A2B50", func_8021CF54_6A4154);
+#include "common/UnkFireBreathFXFunc.inc.c"
 
 INCLUDE_ASM(s32, "battle/area_kpa2/6A2B50", func_8021CFC0_6A41C0);
 
+//#include "common/UnkLightningFXFunc.inc.c"
 INCLUDE_ASM(s32, "battle/area_kpa2/6A2B50", func_8021D290_6A4490);
 
 // const char* D_80234880_6BBA80 = "kpa_bt01_hit";

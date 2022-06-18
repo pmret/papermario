@@ -600,8 +600,8 @@ typedef struct SimpleSpringData {
 typedef s32 (*EntityCallback)(struct Entity*);
 
 typedef struct EntityBlueprint {
-    /* 0x00 */ s16 flags;
-    /* 0x02 */ s16 typeDataSize;
+    /* 0x00 */ u16 flags;
+    /* 0x02 */ u16 typeDataSize;
     /* 0x04 */ UNK_PTR renderCommandList;
     /* 0x08 */ UNK_PTR modelAnimationNodes;
     /* 0x0C */ EntityCallback(fpInit);
@@ -610,16 +610,16 @@ typedef struct EntityBlueprint {
     /* 0x18 */ s32 dmaStart;
     /* 0x1C */ s32 dmaEnd;
     /* 0x20 */ u8 entityType;
-    /* 0x21 */ char aabbSize[3];
+    /* 0x21 */ u8 aabbSize[3];
 } EntityBlueprint; // size = 0x24
 
 typedef struct Entity {
     /* 0x00 */ s32 flags;
     /* 0x04 */ u8 listIndex;
-    /* 0x05 */ char unk_05;
+    /* 0x05 */ s8 unk_05;
     /* 0x06 */ u8 collisionFlags;
     /* 0x07 */ s8 unk_07;
-    /* 0x08 */ char unk_08;
+    /* 0x08 */ u8 unk_08;
     /* 0x09 */ u8 hasEntityScript;
     /* 0x0A */ u8 type;
     /* 0x0B */ u8 alpha;
@@ -1443,18 +1443,12 @@ typedef struct ShopSellPriceData {
 } ShopSellPriceData; // size = 0xC
 
 typedef struct GameStatus {
-    /* 0x000 */ u32 currentButtons[2];
-    /* 0x008 */ char unk_08[8];
-    /* 0x010 */ u32 pressedButtons[2]; /* bits = 1 for frame of button press */
-    /* 0x018 */ char unk_18[8];
-    /* 0x020 */ u32 heldButtons[2]; /* bits = 1 every 4th frame during hold */
-    /* 0x028 */ char unk_28[8];
-    /* 0x030 */ u32 prevButtons; /* from previous frame */
-    /* 0x034 */ char unk_34[12];
-    /* 0x040 */ s8 stickX[2]; /* with deadzone */
-    /* 0x042 */ char unk_42[2];
-    /* 0x044 */ s8 stickY[2]; /* with deadzone */
-    /* 0x046 */ char unk_46[2];
+    /* 0x000 */ u32 currentButtons[4];
+    /* 0x010 */ u32 pressedButtons[4]; /* bits = 1 for frame of button press */
+    /* 0x020 */ u32 heldButtons[4]; /* bits = 1 every 4th frame during hold */
+    /* 0x030 */ u32 prevButtons[4]; /* from previous frame */
+    /* 0x040 */ s8 stickX[4]; /* with deadzone */
+    /* 0x044 */ s8 stickY[4]; /* with deadzone */
     /* 0x048 */ s16 unk_48[4];
     /* 0x050 */ s16 unk_50[4];
     /* 0x058 */ s16 unk_58;
@@ -1482,7 +1476,7 @@ typedef struct GameStatus {
     /* 0x07E */ u8 peachFlags; /* (1 = isPeach, 2 = isTransformed, 4 = hasUmbrella) */
     /* 0x07F */ s8 peachDisguise; /* (1 = koopatrol, 2 = hammer bros, 3 = clubba) */
     /* 0x080 */ u8 peachCookingIngredient; ///< @see enum CookingIngredient
-    /* 0x081 */ s8 unk_81;
+    /* 0x081 */ s8 multiplayerEnabled;
     /* 0x082 */ s8 unk_82;
     /* 0x083 */ s8 unk_83;
     /* 0x084 */ s8 playerSpriteSet;
@@ -1759,7 +1753,7 @@ typedef struct DecorationTable {
     /* 0x765 */ s8 unk_765;
     /* 0x766 */ s8 unk_766;
     /* 0x767 */ s8 unk_767;
-    /* 0x768 */ s8 unk_768;
+    /* 0x768 */ u8 unk_768;
     /* 0x769 */ char unk_769[3];
     /* 0x76C */ s16 unk_76C[16];
     /* 0x78C */ char unk_78C[76];
@@ -1934,7 +1928,7 @@ typedef struct Actor {
     /* 0x1FA */ s16 hpChangeCounter;
     /* 0x1FC */ u16 damageCounter;
     /* 0x1FE */ char unk_1FE[2];
-    /* 0x200 */ s32** unk_200; // Probably a struct but not sure what yet
+    /* 0x200 */ struct EffectInstance* unk_200; // fx_attack_result_text
     /* 0x204 */ s8 unk_204;
     /* 0x205 */ s8 unk_205;
     /* 0x206 */ s8 unk_206;
@@ -2369,10 +2363,22 @@ typedef struct ActionCommandStatus {
 
 typedef struct Message {
     /* 0x00 */ s32 unk_00;
-    /* 0x04 */ char unk_04[0x1C];
+    /* 0x04 */ s32 unk_04;
+    /* 0x08 */ f32 unk_08;
+    /* 0x0C */ f32 unk_0C;
+    /* 0x10 */ f32 unk_10;
+    /* 0x14 */ f32 unk_14;
+    /* 0x18 */ f32 unk_18;
+    /* 0x1C */ f32 unk_1C;
     /* 0x20 */ s32 unk_20;
     /* 0x24 */ s32 unk_24;
-    /* 0x28 */ char unk_28[0x1C];
+    /* 0x28 */ f32 unk_28;
+    /* 0x2C */ f32 unk_2C;
+    /* 0x30 */ f32 unk_30;
+    /* 0x34 */ f32 unk_34;
+    /* 0x38 */ f32 unk_38;
+    /* 0x3C */ f32 unk_3C;
+    /* 0x40 */ f32 unk_40;
     /* 0x44 */ s32 unk_44;
     /* 0x48 */ char unk_48[0x4];
 } Message; // size = 0x4C

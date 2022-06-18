@@ -805,6 +805,13 @@ typedef struct BulbGlowFXData {
     /* 0x14 */ s32 unk_14;
 } BulbGlowFXData; // size = ?
 
+typedef struct Effect75FXData {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ f32 unk_04;
+    /* 0x08 */ f32 unk_08;
+    /* 0x0C */ f32 unk_0C;
+} Effect75FXData; // size = ?
+
 // fx_quizmo_stage
 typedef struct EffectDataQuizStage {
    /* 0x00 */ char unk_00[0x4];

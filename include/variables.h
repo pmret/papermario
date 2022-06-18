@@ -102,7 +102,7 @@ extern MessagePrintState* SaveBlockResultPrinter;
 extern s32 D_802E99DC;
 
 extern Entity* SwitchToLink;
-extern s32 CreateEntityVarArgBuffer[3]; // not size 3
+extern s32 CreateEntityVarArgBuffer[4];
 
 extern f32 DefaultMoveSpeeds[4];
 
