@@ -36,13 +36,13 @@ ApiStatus func_80238EDC_6F1FBC(Evt* script, s32 isInitialCall);
 
 ApiStatus N(func_80238000_6F10E0)(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
-    Actor* partnerActor = battleStatus->partnerActor;
-    f32 posX = partnerActor->currentPos.x;
-    f32 posY = partnerActor->currentPos.y;
-    f32 posZ = partnerActor->currentPos.z;
-    f32 goalX = partnerActor->state.goalPos.x;
-    f32 goalY = partnerActor->state.goalPos.y;
-    f32 goalZ = partnerActor->state.goalPos.z;
+    Actor* partner = battleStatus->partnerActor;
+    f32 posX = partner->currentPos.x;
+    f32 posY = partner->currentPos.y;
+    f32 posZ = partner->currentPos.z;
+    f32 goalX = partner->state.goalPos.x;
+    f32 goalY = partner->state.goalPos.y;
+    f32 goalZ = partner->state.goalPos.z;
 
     script->varTable[0] = (dist3D(posX, posY, posZ, goalX, goalY, goalZ) * 15.0f) / 100.0f;
 
@@ -78,40 +78,40 @@ INCLUDE_ASM(s32, "battle/partner/goombario", func_8023817C_6F125C);
 
 ApiStatus N(func_80238A20_6F1B00)(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
-    Actor* partnerActor = gBattleStatus.partnerActor;
-    Vec3f* pos = &partnerActor->state.currentPos;
+    Actor* partner = gBattleStatus.partnerActor;
+    Vec3f* pos = &partner->state.currentPos;
 
     if (isInitialCall) {
         script->functionTemp[0] = 0;
     }
 
     if (script->functionTemp[0] == 0) {
-        partnerActor->state.currentPos.x = partnerActor->currentPos.x;
-        partnerActor->state.currentPos.y = partnerActor->currentPos.y;
-        partnerActor->state.currentPos.z = partnerActor->currentPos.z;
+        partner->state.currentPos.x = partner->currentPos.x;
+        partner->state.currentPos.y = partner->currentPos.y;
+        partner->state.currentPos.z = partner->currentPos.z;
         script->functionTemp[0] = 1;
     }
 
-    if (partnerActor->state.velocity > 0.0f) {
-        set_animation(0x100, 0, partnerActor->state.animJumpRise);
+    if (partner->state.velocity > 0.0f) {
+        set_animation(0x100, 0, partner->state.animJumpRise);
     }
 
-    if (partnerActor->state.velocity < 0.0f) {
-        set_animation(0x100, 0, partnerActor->state.animJumpFall);
+    if (partner->state.velocity < 0.0f) {
+        set_animation(0x100, 0, partner->state.animJumpFall);
     }
 
-    partnerActor->state.currentPos.y = (partnerActor->state.currentPos.y + partnerActor->state.velocity);
-    partnerActor->state.velocity = (partnerActor->state.velocity - partnerActor->state.acceleration);
-    add_xz_vec3f(pos, partnerActor->state.speed, partnerActor->state.angle);
-    partnerActor->currentPos.x = partnerActor->state.currentPos.x;
-    partnerActor->currentPos.y = partnerActor->state.currentPos.y;
-    partnerActor->currentPos.z = partnerActor->state.currentPos.z;
+    partner->state.currentPos.y = (partner->state.currentPos.y + partner->state.velocity);
+    partner->state.velocity = (partner->state.velocity - partner->state.acceleration);
+    add_xz_vec3f(pos, partner->state.speed, partner->state.angle);
+    partner->currentPos.x = partner->state.currentPos.x;
+    partner->currentPos.y = partner->state.currentPos.y;
+    partner->currentPos.z = partner->state.currentPos.z;
 
-    if (partnerActor->currentPos.y < 10.0f) {
-        partnerActor->currentPos.y = 10.0f;
+    if (partner->currentPos.y < 10.0f) {
+        partner->currentPos.y = 10.0f;
 
-        play_movement_dust_effects(2, partnerActor->currentPos.x, partnerActor->currentPos.y, partnerActor->currentPos.z,
-                                   partnerActor->yaw);
+        play_movement_dust_effects(2, partner->currentPos.x, partner->currentPos.y, partner->currentPos.z,
+                                   partner->yaw);
         sfx_play_sound(SOUND_SOFT_LAND);
 
         return ApiStatus_DONE1;
@@ -122,9 +122,9 @@ ApiStatus N(func_80238A20_6F1B00)(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_80238B60_6F1C40(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
-    Actor* partnerActor = battleStatus->partnerActor;
-    Actor* targetActor = get_actor(partnerActor->targetActorID);
-    s32* tattle = &bActorTattles[targetActor->actorType];
+    Actor* partner = battleStatus->partnerActor;
+    Actor* target = get_actor(partner->targetActorID);
+    s32* tattle = &bActorTattles[target->actorType];
 
     script->varTable[0] = *tattle;
 
@@ -132,13 +132,41 @@ ApiStatus func_80238B60_6F1C40(Evt* script, s32 isInitialCall) {
         script->varTable[0] = bActorTattles[0];
     }
 
-    save_tattle_flags(targetActor->actorType);
+    save_tattle_flags(target->actorType);
 
     return ApiStatus_DONE2;
 }
 
 
-INCLUDE_ASM(s32, "battle/partner/goombario", func_80238BCC_6F1CAC);
+ApiStatus func_80238BCC_6F1CAC(Evt* script, s32 isInitalCall) {
+    Actor* target = get_actor(gBattleStatus.partnerActor->targetActorID);
+    s32 xSize;
+
+    if ((target->flags & ACTOR_FLAG_HP_OFFSET_BELOW) == 0) {
+        script->varTable[1] = script->varTable[1] + (((target->size.y / 3) & 0xFF) * target->scalingFactor);
+        script->varTable[1] += ((target->size.y / 4) * target->scalingFactor);
+    } else {
+        script->varTable[1] = script->varTable[1] - (((target->size.y / 3) & 0xFF) * target->scalingFactor);
+        script->varTable[1] -= ((target->size.y / 4) * target->scalingFactor);
+    }
+
+    if (target->flags & ACTOR_FLAG_8000) {
+        script->varTable[1] -= (target->size.y / 2) * target->scalingFactor;
+    }
+
+    xSize = target->size.y * target->scalingFactor;
+    if (xSize < target->size.x) {
+        xSize = target->size.x;
+    }
+
+    script->varTable[3] = xSize + 76;
+    script->varTable[0] += bActorOffsets[target->actorType].tattleCam.x;
+    script->varTable[1] += bActorOffsets[target->actorType].tattleCam.y;
+    script->varTable[3] += bActorOffsets[target->actorType].tattleCam.z;
+
+    return ApiStatus_DONE2;
+}
+
 
 ApiStatus func_80238E04_6F1EE4(Evt* script, s32 isInitialCall) {
     D_8023CDA0 = fx_tattle_window(0, 206, 144, 0, 1.0f, 0);
@@ -157,23 +185,23 @@ ApiStatus func_80238E48_6F1F28(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_80238E74_6F1F54(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
-    Actor* partnerActor = battleStatus->partnerActor;
+    Actor* partner = battleStatus->partnerActor;
 
     script->varTable[0] = FALSE;
 
     switch (battleStatus->selectedMoveID) {
         case 134:
-            if (partnerActor->isGlowing >= 99) {
+            if (partner->isGlowing >= 99) {
                 script->varTable[0] = TRUE;
             }
             break;
         case 135:
-            if (partnerActor->isGlowing >= 99) {
+            if (partner->isGlowing >= 99) {
                 script->varTable[0] = TRUE;
             }
             break;
         case 136:
-            if (partnerActor->isGlowing >= 99) {
+            if (partner->isGlowing >= 99) {
                 script->varTable[0] = TRUE;
             }
             break;
@@ -182,7 +210,51 @@ ApiStatus func_80238E74_6F1F54(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "battle/partner/goombario", func_80238EDC_6F1FBC);
+ApiStatus func_80238EDC_6F1FBC(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    BattleStatus* battleStatus = &gBattleStatus;
+    Actor* partner = battleStatus->partnerActor;
+    s32 boostAmount;
+    s32 x, y, z;
+
+    D_8023CDA4 = 0;
+    if (partner->isGlowing > 0) {
+        D_8023CDA4 = 1;
+    }
+
+    boostAmount = 0;
+    switch (battleStatus->selectedMoveID) {
+        case MOVE_TATTLE:
+            partner->isGlowing += 2;
+            boostAmount = 1;
+            if (partner->isGlowing >= 99) {
+                partner->isGlowing = 99;
+            }
+            break;
+        case MOVE_CHARGE:
+            partner->isGlowing += 2;
+            boostAmount = 1;
+            if (partner->isGlowing >= 99) {
+                partner->isGlowing = 99;
+            }
+            break;
+        case MOVE_MULTIBONK:
+            partner->isGlowing += 2;
+            boostAmount = 1;
+            if (partner->isGlowing >= 99) {
+                partner->isGlowing = 99;
+            }
+            break;
+    }
+
+    x = evt_get_variable(script, *args++);
+    y = evt_get_variable(script, *args++);
+    z = evt_get_variable(script, *args++);
+    fx_stat_change(boostAmount, x, y, z, 1.0f, 60);
+
+    gBattleStatus.flags1 |= BS_FLAGS1_40000000;
+    return ApiStatus_DONE2;
+}
 
 ApiStatus N(StopGlowing)(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
@@ -194,15 +266,15 @@ ApiStatus N(StopGlowing)(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus N(StopGlowingAndGet)(Evt* script, s32 isInitialCall) {
-    Actor* partnerActor = gBattleStatus.partnerActor;
+    Actor* partner = gBattleStatus.partnerActor;
 
-    if (!(gBattleStatus.flags1 & 0x40000000)) {
-        partnerActor->isGlowing = FALSE;
+    if (!(gBattleStatus.flags1 & BS_FLAGS1_40000000)) {
+        partner->isGlowing = FALSE;
     }
 
-    script->varTable[0] = partnerActor->isGlowing;
-    partnerActor->isGlowing = FALSE;
-    gBattleStatus.flags1 &= ~0x40000000;
+    script->varTable[0] = partner->isGlowing;
+    partner->isGlowing = FALSE;
+    gBattleStatus.flags1 &= ~BS_FLAGS1_40000000;
 
     return ApiStatus_DONE2;
 }
