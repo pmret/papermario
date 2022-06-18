@@ -1,7 +1,7 @@
 #ifndef HUD_ELEMENT_H
 #define HUD_ELEMENT_H
 
-#include "common.h"
+#include "common_structs.h"
 #include "icon_offsets.h"
 
 #define HUD_ELEMENT_BATTLE_ID_MASK 0x800

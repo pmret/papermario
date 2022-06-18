@@ -1,6 +1,9 @@
 #include "common.h"
 #include "hud_element.h"
 
+extern s16 D_8010CD10;
+extern s16 D_8010CD12;
+
 extern s32 TimesHudScript;
 extern s32 DigitHudScripts[10];
 
