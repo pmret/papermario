@@ -67,7 +67,7 @@ void entity_ItemBlock_check_if_inactive(Entity* entity) {
         } else {
             bp = &Entity_InertRedBlock;
         }
-        create_entity(bp, entity->position.x, entity->position.y, entity->position.z, entity->rotation.y, MAKE_ENTITY_END);
+        create_entity(bp, (s32)entity->position.x, (s32)entity->position.y, (s32)entity->position.z, (s32)entity->rotation.y, MAKE_ENTITY_END);
         set_entity_commandlist(entity, D_802EA310);
     } else {
         exec_entity_commandlist(entity);
@@ -94,7 +94,7 @@ void entity_ItemBlock_replace_with_inactive(Entity* entity) {
     }
 
     // this child entity is the inert block
-    childEntityIndex = create_entity(bp, entity->position.x, entity->position.y, entity->position.z, entity->rotation.y, MAKE_ENTITY_END);
+    childEntityIndex = create_entity(bp, (s32)entity->position.x, (s32)entity->position.y, (s32)entity->position.z, (s32)entity->rotation.y, MAKE_ENTITY_END);
     childEntity = get_entity_by_index(childEntityIndex);
     childEntity->flags |= ENTITY_FLAGS_HIDDEN;
 
@@ -120,7 +120,7 @@ void entity_ItemBlock_replace_with_inactive(Entity* entity) {
     }
 
     // child entity is now the animated block which appears before it turns inert
-    childEntity = get_entity_by_index(create_entity(bp, entity->position.x, entity->position.y, entity->position.z, entity->rotation.y, MAKE_ENTITY_END));
+    childEntity = get_entity_by_index(create_entity(bp, (s32)entity->position.x, (s32)entity->position.y, (s32)entity->position.z, (s32)entity->rotation.y, MAKE_ENTITY_END));
     childEntity->alpha = entity->alpha;
     if ((entity->flags & ENTITY_FLAGS_HIDDEN) || (entity->alpha < 0xFF)) {
         childEntity->alpha = 0x20;

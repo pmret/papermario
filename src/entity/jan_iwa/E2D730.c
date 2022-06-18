@@ -121,7 +121,7 @@ void func_802BB6E0_E2E010(Entity* entity) {
     s32 entityIndex;
 
     get_animator_by_index(entity->virtualModelIndex)->renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;
-    entityIndex = create_entity(&D_802BC7D0_E2F100, entity->position.x, entity->position.y, entity->position.z, 0, MAKE_ENTITY_END);
+    entityIndex = create_entity(&D_802BC7D0_E2F100, (s32)entity->position.x, (s32)entity->position.y, (s32)entity->position.z, 0, MAKE_ENTITY_END);
     data->unk_04.index = entityIndex;
     newEntity = get_entity_by_index(entityIndex);
     data = (structE2D730*)newEntity->dataBuf.unk;

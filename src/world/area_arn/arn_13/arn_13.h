@@ -7,7 +7,7 @@
 
 #define NAMESPACE arn_13
 
-extern s32 D_802EAFDC;
+extern s32 Entity_SignPost;
 
 extern EvtScript N(main);
 extern EvtScript N(80240060);

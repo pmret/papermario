@@ -99,7 +99,6 @@ extern s32 SaveBlockTutorialPrinterClosed;
 extern s32 SaveBlockResultPrinterClosed;
 extern MessagePrintState* SaveBlockTutorialPrinter;
 extern MessagePrintState* SaveBlockResultPrinter;
-extern s32 D_802E99DC;
 
 extern Entity* SwitchToLink;
 extern s32 CreateEntityVarArgBuffer[4];

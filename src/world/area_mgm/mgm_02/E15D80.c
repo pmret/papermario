@@ -37,7 +37,7 @@ extern s32 D_80248600[NUM_PANELS]; //TODO set name: mgm_02_PanelModelsAssigned
 extern s32 mgm_02_PeachPanelImg;
 extern s32 mgm_02_PeachPanelPal;
 
-extern EntityBlueprint D_802EAFDC; // SIGNPOST
+extern EntityBlueprint Entity_SignPost; // SIGNPOST
 extern EvtScript D_80242A3C_E187BC; // EVT_ReadSign
 
 typedef enum SmashGameBoxCotent {
@@ -235,7 +235,7 @@ ApiStatus N(DestroySignpost)(Evt* script, s32 isInitialCall) {
 
 ApiStatus N(CreateSignpost)(void) {
     SmashGameData* data = get_enemy(SCOREKEEPER_ENEMY_IDX)->varTablePtr[SMASH_DATA_VAR_IDX];
-    s32 entityIndex = create_entity(&D_802EAFDC, 355, 20, -180, 0, 0, 0, 0, MAKE_ENTITY_END);
+    s32 entityIndex = create_entity(&Entity_SignPost, 355, 20, -180, 0, 0, 0, 0, MAKE_ENTITY_END);
     data->signpostEntity = entityIndex;
     get_entity_by_index(entityIndex)->boundScriptBytecode = &D_80242A3C_E187BC;
 

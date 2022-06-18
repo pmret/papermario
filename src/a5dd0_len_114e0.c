@@ -1882,8 +1882,6 @@ s32 func_80111790(void) {
 
 INCLUDE_ASM(void, "a5dd0_len_114e0", entity_free_static_data, EntityBlueprint* data);
 
-// matches with this sig, but that breaks other usages of this func.
-#ifdef NON_EQUIVALENT
 s32 create_entity(EntityBlueprint* bp, ...) {
     va_list ap;
     EntityBlueprint** bpPtr;
@@ -1897,6 +1895,7 @@ s32 create_entity(EntityBlueprint* bp, ...) {
     s32* a;
 
     va_start(ap, bp);
+    // needed to match
     bpPtr = &bp;
     *bpPtr = bp;
 
@@ -1907,7 +1906,7 @@ s32 create_entity(EntityBlueprint* bp, ...) {
     z = va_arg(ap, s32);
     rotY = va_arg(ap, s32);
 
-    a = &CreateEntityVarArgBuffer[3];
+    a = &CreateEntityVarArgBuffer[2];
 
     *a-- = 0;
     *a-- = 0;
@@ -1930,7 +1929,7 @@ s32 create_entity(EntityBlueprint* bp, ...) {
         }
     }
 
-    if (listIndex >= 30) {
+    if (listIndex >= MAX_ENTITIES) {
         return -1;
     }
 
@@ -1948,7 +1947,7 @@ s32 create_entity(EntityBlueprint* bp, ...) {
     entity->blueprint = bp;
     entity->scriptReadPos = bp->updateEntityScript;
     entity->hasEntityScript = entity->scriptReadPos != NULL;
-    entity->savedReadPos = bp->updateEntityScript;
+    entity->savedReadPos[0] = bp->updateEntityScript;
     entity->updateScriptCallback = NULL;
     entity->flags = bp->flags | 0x80000000;
     entity->collisionFlags = 0;
@@ -1973,7 +1972,7 @@ s32 create_entity(EntityBlueprint* bp, ...) {
     entity->shadowIndex = -1;
     entity->vertexData = NULL;
 
-    if (!(bp->flags & 8)) {
+    if (!(bp->flags & ENTITY_FLAGS_HAS_ANIMATED_MODEL)) {
         if (bp->dmaStart != 0) {
             load_simple_entity_data(entity, bp, listIndex);
         }
@@ -1985,7 +1984,7 @@ s32 create_entity(EntityBlueprint* bp, ...) {
         load_split_entity_data(entity, bp, listIndex);
     }
 
-    if (bp->entityType != 1 && (entity->flags & (ENTITY_FLAGS_SET_SHADOW_FLAG200 | ENTITY_FLAGS_100))) {
+    if (bp->entityType != ENTITY_TYPE_SHADOW && (entity->flags & (ENTITY_FLAGS_SET_SHADOW_FLAG200 | ENTITY_FLAGS_100))) {
         create_entity_shadow(entity, x, y, z);
     }
 
@@ -2006,10 +2005,6 @@ s32 create_entity(EntityBlueprint* bp, ...) {
     update_entity_transform_matrix(entity);
     return entity->listIndex;
 }
-#else
-INCLUDE_ASM(s32, "a5dd0_len_114e0", create_entity, EntityBlueprint* data, s32 x, s32 y, s32 z, s32 arg4,
-            ...);
-#endif
 
 s32 create_shadow_from_data(ShadowBlueprint* data, f32 x, f32 y, f32 z) {
     Shadow* shadow;

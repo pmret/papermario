@@ -1,5 +1,18 @@
 #include "common.h"
 
+void entity_Shadow_init(Shadow* shadow) {
+    shadow->scale.x = 0.1f;
+    shadow->scale.y = 0.1f;
+    shadow->scale.z = 0.1f;
+}
+
+s32 entity_can_collide_with_jumping_player(Entity* entity) {
+    if ((entity->collisionFlags & 4) && (gPlayerStatus.flags & 2)) {
+        return TRUE;
+    }
+    return FALSE;
+}
+
 s32 D_802E9170[] = {
     0x00000000, 0x00000000, 0x01111111, 0x11111111, 0x01333333, 0x33333333, 0x01355555, 0x55555555, 0x01357777, 0x77777777, 0x01357999, 0x99999999, 0x013579BB, 0xBBBBBBBB, 0x013579BD, 0xDDDDDDDD, 0x013579BD, 0xFFFFFFFF, 0x013579BD, 0xFFFFFFFF, 0x013579BD, 0xFFFFFFFF, 0x013579BD, 0xFFFFFFFF, 0x013579BD, 0xFFFFFFFF, 0x013579BD, 0xFFFFFFFF, 0x013579BD, 0xFFFFFFFF, 0x013579BD, 0xFFFFFFFF
 };

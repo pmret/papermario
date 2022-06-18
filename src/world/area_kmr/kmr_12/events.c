@@ -219,7 +219,7 @@ EvtScript N(ReadEastSign) = {
 };
 
 EvtScript N(MakeEntities) = {
-    EVT_CALL(MakeEntity, EVT_ADDR(D_802EAFDC), 436, 0, -42, 0, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, EVT_ADDR(Entity_SignPost), 436, 0, -42, 0, MAKE_ENTITY_END)
     EVT_CALL(AssignScript, EVT_ADDR(N(ReadEastSign)))
     EVT_RETURN
     EVT_END

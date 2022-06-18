@@ -55,14 +55,14 @@ s32 D_802E9B94[7] = {
 };
 
 EntityBlueprint Entity_RedSwitch = {
-    0xA000, 0x002C, &D_802E9B78, {0, 0, 0, 0}, entity_base_switch_init,    &D_802E9A40, NULL, E62AC0_ROM_START, E62AC0_ROM_END, ENTITY_TYPE_RED_SWITCH, {0x16, 0x17, 0x16}
+    0xA000, 0x002C, &D_802E9B78, {0, 0, 0, 0}, entity_base_switch_init,    D_802E9A40, NULL, E62AC0_ROM_START, E62AC0_ROM_END, ENTITY_TYPE_RED_SWITCH, {0x16, 0x17, 0x16}
 };
 EntityBlueprint Entity_BlueSwitch = {
-    0xAA04, 0x002C, &D_802E9B40, {0, 0, 0, 0}, entity_BlueSwitch_init,     &D_802E9AC4, NULL, E639C0_ROM_START, E639C0_ROM_END, ENTITY_TYPE_BLUE_SWITCH, {0x16, 0x17, 0x16}
+    0xAA04, 0x002C, &D_802E9B40, {0, 0, 0, 0}, entity_BlueSwitch_init,     D_802E9AC4, NULL, E639C0_ROM_START, E639C0_ROM_END, ENTITY_TYPE_BLUE_SWITCH, {0x16, 0x17, 0x16}
 };
 EntityBlueprint Entity_HugeBlueSwitch = {
-    0xAA04, 0x002C, &D_802E9B5C, {0, 0, 0, 0}, entity_HugeBlueSwitch_init, &D_802E9A88, NULL, E639C0_ROM_START, E639C0_ROM_END, ENTITY_TYPE_HUGE_BLUE_SWITCH, {0x42, 0x4B, 0x42}
+    0xAA04, 0x002C, &D_802E9B5C, {0, 0, 0, 0}, entity_HugeBlueSwitch_init, D_802E9A88, NULL, E639C0_ROM_START, E639C0_ROM_END, ENTITY_TYPE_HUGE_BLUE_SWITCH, {0x42, 0x4B, 0x42}
 };
 EntityBlueprint Entity_GreenStompSwitch = {
-    0xC000, 0x002C, &D_802E9B94, {0, 0, 0, 0}, entity_base_switch_init,    &D_802E9B00, NULL, E62370_ROM_START, E62370_ROM_END, ENTITY_TYPE_GREEN_STOMP_SWITCH, {0x32, 0x0F, 0x32}
+    0xC000, 0x002C, &D_802E9B94, {0, 0, 0, 0}, entity_base_switch_init,    D_802E9B00, NULL, E62370_ROM_START, E62370_ROM_END, ENTITY_TYPE_GREEN_STOMP_SWITCH, {0x32, 0x0F, 0x32}
 };

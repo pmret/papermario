@@ -36,7 +36,7 @@ void entity_upgrade_block_check_if_inactive(Entity* entity) {
         Entity* childEntity;
         SuperBlockContentData* childData;
 
-        parentData->childEntityIndex = create_entity(&Entity_SuperBlockContent, entity->position.x, entity->position.y, entity->position.z, 0.0f, MAKE_ENTITY_END);
+        parentData->childEntityIndex = create_entity(&Entity_SuperBlockContent, (s32)entity->position.x, (s32)entity->position.y, (s32)entity->position.z, 0, MAKE_ENTITY_END);
         childEntity = get_entity_by_index(parentData->childEntityIndex);
         childData = childEntity->dataBuf.superBlockContent;
         childData->parentEntityIndex = entity->listIndex;

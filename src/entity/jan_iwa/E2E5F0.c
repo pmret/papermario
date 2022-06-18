@@ -78,7 +78,7 @@ void func_802BC17C_E2EAAC(Entity* entity) {
 }
 
 s32 func_802BC1D0_E2EB00(Entity* entity, EntityBlueprint* EntityBlueprint) {
-    return create_entity(EntityBlueprint, entity->position.x, entity->position.y, entity->position.z, entity->rotation.y);
+    return create_entity(EntityBlueprint, (s32)entity->position.x, (s32)entity->position.y, (s32)entity->position.z, (s32)entity->rotation.y);
 }
 
 void func_802BC220_E2EB50(Entity* entity) {

@@ -1,20 +1,9 @@
 #include "common.h"
 #include "fio.h"
 
+extern s32 D_802E99DC[];
+
 void entity_SaveBlock_setupGfx();
-
-void entity_Shadow_init(Shadow* shadow) {
-    shadow->scale.x = 0.1f;
-    shadow->scale.y = 0.1f;
-    shadow->scale.z = 0.1f;
-}
-
-s32 entity_can_collide_with_jumping_player(Entity* entity) {
-    if ((entity->collisionFlags & 4) && (gPlayerStatus.flags & 2)) {
-        return TRUE;
-    }
-    return FALSE;
-}
 
 INCLUDE_ASM(s32, "entity/SaveBlock", entity_SaveBlock_setupGfx);
 
@@ -83,7 +72,7 @@ void entity_SaveBlock_wait_for_close_result(Entity* entity) {
 void entity_SaveBlock_wait_for_close_choice(Entity* entity) {
     if (SaveBlockTutorialPrinterClosed) {
         if (SaveBlockTutorialPrinter->currentOption == 1) {
-            set_entity_commandlist(entity, &D_802E99DC);
+            set_entity_commandlist(entity, D_802E99DC);
         } else {
             exec_entity_commandlist(entity);
         }

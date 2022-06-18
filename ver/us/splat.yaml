@@ -853,7 +853,8 @@ segments:
     start: 0x102610
     vram: 0x802E0D90
     subsegments:
-    - [0x102610, c, entity/SaveBlock]
+    - [0x102610, c, entity/Shadow]
+    - [0x102660, c, entity/SaveBlock]
     - [0x102C80, c, entity/Switch]
     - [0x103CD0, c, entity/103CD0]
     - [0x104730, c, entity/104730]
@@ -866,7 +867,7 @@ segments:
     - [0x109660, c, entity/WoodenCrate]
     - [0x10A230, c, entity/BlueWarpPipe]
     - [0x10A8D0, c, entity/Signpost]
-    - [0x10A9F0, .data, entity/BlockData1]
+    - [0x10A9F0, .data, entity/Shadow]
     - [0x10B1B0, .data, entity/BlockData2]
     - [0x10B2C0, .data, entity/BlockData3]
     - [0x10B4C0, .data, entity/104730]
