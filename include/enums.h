@@ -824,6 +824,8 @@ typedef enum MusicError {
     MUSIC_ERROR_2                   = 2, // player not found for songName
     MUSIC_ERROR_3                   = 3, // songName is NULL
     MUSIC_ERROR_4                   = 4, // duration out of bounds: (250,10000)
+    MUSIC_ERROR_6                   = 6,
+    MUSIC_ERROR_7                   = 7,
     MUSIC_ERROR_11                  = 11,
 } MusicError;
 

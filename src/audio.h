@@ -8,6 +8,11 @@
 
 #define BGM_SAMPLE_RATE 156250
 
+#define BGM_MIN_FADE_DURATION 250
+#define BGM_MAX_FADE_DURATION 10000
+
+#define BGM_MAX_VOLUME 127
+
 struct BGMPlayer;
 struct SndGlobals;
 struct UnkAl48;
@@ -458,8 +463,8 @@ typedef struct UnkAl19E0Sub2 {
 
 typedef struct UnkAl19E0Sub3 {
     /* 0x00 */ struct BGMPlayer* unk_0;
-    /* 0x04 */ s8 unk_4;
-    /* 0x05 */ s8 unk_5;
+    /* 0x04 */ u8 unk_4;
+    /* 0x05 */ u8 unk_5;
 } UnkAl19E0Sub3;
 
 typedef struct SoundBank {
@@ -491,7 +496,8 @@ typedef struct SndGlobals {
     /* 0x0058 */ BGMInstrumentInfo* dataPRG;
     /* 0x005C */ s32* currentTrackData[4];
     /* 0x006C */ UnkAl19E0Sub3 unk_6C[1];
-    /* 0x0074 */ char unk_74[0x8];
+    /* 0x0074 */ struct BGMPlayer* unk_74;
+    /* 0x0078 */ struct BGMPlayer* unk_78;
     /* 0x007C */ s32 unkSongName;
     /* 0x0080 */ s32 unk_80;
     /* 0x0084 */ s32 unkFadeTime;
@@ -521,7 +527,7 @@ typedef struct SndGlobals {
 typedef struct BGMPlayerTrack {
     /* 0x00 */ u32 bgmReadPos;
     /* 0x04 */ u32 unk_04;
-    /* 0x08 */ char unk_08[0x4];
+    /* 0x08 */ u32 prevReadPos; //? see snd_BGMCmd_FC_Jump
     /* 0x0C */ Instrument* unk_0C;
     /* 0x10 */ s32* unk_10[2];
     /* 0x18 */ s32 subTrackVolume;
@@ -549,10 +555,10 @@ typedef struct BGMPlayerTrack {
     /* 0x4E */ u8 unk_4E;
     /* 0x4F */ u8 unk_4F;
     /* 0x50 */ u8 unk_50;
-    /* 0x51 */ char unk_51[0x1];
+    /* 0x51 */ u8 unk_51;
     /* 0x52 */ u8 unk_52;
     /* 0x53 */ u8 unk_53;
-    /* 0x54 */ char unk_54[0x1];
+    /* 0x54 */ u8 unk_54;
     /* 0x55 */ s8 trackTremoloSpeed;
     /* 0x56 */ s8 trackTremoloTime;
     /* 0x57 */ s8 unk_57;
@@ -630,7 +636,7 @@ typedef struct BGMPlayer {
     /* 0x168 */ s32 unk_168;
     /* 0x16C */ s32 unk_16C;
     /* 0x170 */ u8 unk_170;
-    /* 0x171 */ s8 unk_171;
+    /* 0x171 */ u8 unk_171;
     /* 0x172 */ char unk_172[0x2];
     /* 0x174 */ s16 unk_174[8][9];
     /* 0x204 */ s32* unk_204;
@@ -642,7 +648,7 @@ typedef struct BGMPlayer {
     /* 0x211 */ s8 unk_211;
     /* 0x212 */ s8 unk_212[8];
     /* 0x21A */ u8 unk_21A;
-    /* 0x21B */ char unk_21B[0x1];
+    /* 0x21B */ u8 unk_21B;
     /* 0x21C */ u8 bgmDrumCount;
     /* 0x21D */ u8 bgmInstrumentCount;
     /* 0x21E */ s8 unk_21E;
@@ -783,7 +789,7 @@ BGMPlayer* snd_get_player_with_song_name(s32);
 MusicError func_8004DA0C(UNK_TYPE);
 void func_8004DAA8(BGMPlayer*);
 s32 func_8004DB28(BGMPlayer*);
-void func_8004DC80(s32);
+MusicError func_8004DC80(s32);
 void func_8004DFD4(SndGlobals*);
 void func_8004E158(BGMPlayer*, s32, s32, SndGlobals*);
 void func_8004E344(BGMPlayer*, u8*);

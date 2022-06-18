@@ -328,4 +328,13 @@ void alCopy(void* src, void* dst, s32 size) {
     }
 }
 
-INCLUDE_ASM(s32, "31650", func_80058004);
+s16 func_80058004(s16 arg0, s32 arg1, s16 arg2, u16 arg3) {
+    s32 c;
+    arg1 = arg1 >> 3;
+    if (arg1 == 0) {
+        return arg0;
+    }
+    c = arg3 * arg1;
+    c = c >> 0x10;
+    return arg0 + (c + arg2 * arg1);
+}

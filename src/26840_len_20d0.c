@@ -395,7 +395,94 @@ void snd_SEFCmd_03_SetReverb(SoundManager*, SoundPlayer*); /* extern */
 s16 snd_get_scaled_volume(SoundManager*, SoundPlayer*); /* extern */
 f32 snd_tune_param_to_timescale(s32);               /* extern */
 
-INCLUDE_ASM(s32, "26840_len_20d0", func_8004C578);
+void func_8004C578(SoundManager* manager, SoundPlayer* player, UnkAl48* ARG2, u32 ARG3) {
+    s16 volume;
+    s32 tune;
+    s32 pan;
+    s32 a;
+    s32 b;
+
+    switch(player->unk_A9) {
+        case 0:
+            if (ARG2->unk_45 != manager->unk_BC) {
+                player->sefDataReadPos = NULL;
+                player->currentSoundID = 0;
+                player->unk_98 = 0;
+            } else {
+                if (!(player->sfxParamsFlags & 0x10)) {
+                    player->actualSampleRate = snd_tune_param_to_timescale(
+                        ((player->tuneLerp.current >> 0x10) - player->sfxInstrumentRef->unk_1E) + player->masterPitchShift) * player->sfxInstrumentRef->sampleRate;
+                    if (ARG2->unk_04 != player->actualSampleRate) {
+                        ARG2->unk_43 |= 8;
+                        ARG2->unk_04 = player->actualSampleRate;
+                    }
+                }
+                
+                if (!(player->sfxParamsFlags & 8) && player->masterPan != 0) {
+                    pan = player->masterPan;
+                } else {
+                    pan = player->sfxPan;
+                }
+                if (ARG2->unk_0E != pan) {
+                    ARG2->unk_0E = pan;
+                    ARG2->unk_43 |= 0x10;
+                 }
+                
+                volume = snd_get_scaled_volume(manager, player);
+                if (ARG2->unk_40 != volume) {
+                    ARG2->unk_40 = volume;
+                    ARG2->unk_3D |= 0x20;
+                }
+            }
+            break;
+        case 1:
+            snd_SEFCmd_02_SetInstrument(manager, player);
+            snd_SEFCmd_00_SetVolume(manager, player);
+            snd_SEFCmd_01_SetPan(manager, player);
+            snd_SEFCmd_03_SetReverb(manager, player);
+            a = (*player->sefDataReadPos++ & 0x7F);
+            b = (*player->sefDataReadPos & 0xF) << 3;
+            tune = a * 100;
+            player->unk_A1 = b;
+            if ((u32)player->unk_A1 != 0) {
+                player->tuneLerp.current = func_8004D428(manager->unk_60, (u8)player->unk_A1, tune) << 0x10;
+            } else {
+                player->tuneLerp.current = tune << 0x10;
+            }
+            if (player->sfxParamsFlags & 0x10) {
+                tune = (player->tuneLerp.current >> 0x10) - player->sfxInstrumentRef->unk_1E;
+            } else {
+                tune = ((player->tuneLerp.current >> 0x10) - player->sfxInstrumentRef->unk_1E) + player->masterPitchShift;
+            }
+            player->actualSampleRate = snd_tune_param_to_timescale(tune) * player->sfxInstrumentRef->sampleRate;
+            if (ARG2->unk_45 <= manager->unk_BC) {
+                func_80053888(ARG2, ARG3 & 0xFF);
+                if (!(player->sfxParamsFlags & 8) && player->masterPan != 0) {
+                    ARG2->unk_0E = player->masterPan;
+                } else {
+                    ARG2->unk_0E = player->sfxPan;
+                }
+    
+                ARG2->unk_0F = player->reverb;
+                ARG2->unk_40 = snd_get_scaled_volume(manager, player);
+                ARG2->unk_14 = (s32) player->unk10;
+                ARG2->unk_18 = (s32) player->unk14;
+                ARG2->unk_00 = (s32) player->sfxInstrumentRef;
+                ARG2->unk_04 = player->actualSampleRate;
+                ARG2->unk_43 = 2;
+                ARG2->unk_45 = manager->unk_BC;
+                ARG2->unk_44 = ARG2->unk_45;
+                ARG2->unk_10 = manager->unk_BE;
+            }
+            player->unk_A9 = 0;
+            break;
+        default:
+            player->sefDataReadPos = NULL;
+            player->currentSoundID = 0;
+            player->unk_98 = 0;
+            break;
+    }
+}
 
 s16 snd_get_scaled_volume(SoundManager* manager, SoundPlayer* player) {
     s32 outVolume;
