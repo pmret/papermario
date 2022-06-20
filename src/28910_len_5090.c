@@ -768,8 +768,6 @@ void func_8004E904(BGMPlayer* player) {
     }
 }
 
-//TODO problems around the i-- line
-#ifdef NONEQUIVALENT
 void func_8004EA34(BGMPlayer* player, u32 cmd) {
     s32 a = cmd & 0x1F;
     s32 b = (cmd >> 5) & 0x7F;
@@ -785,26 +783,25 @@ void func_8004EA34(BGMPlayer* player, u32 cmd) {
                     if (i > 0) {
                         i--;
                     }
+                } else {
+                    player->segmentReadPos = player->unk_D8[a];
                 }
             } else {
-                player->segmentReadPos = &player->unk_D8[a];
+                player->segmentReadPos = player->unk_D8[a];
             }
         } else if (i < 4) {
             i++;
             player->unk_158[i] = player->segmentReadPos;
             player->unk_168.u8[i] = b;
-            player->segmentReadPos = &player->unk_D8[a];
+            player->segmentReadPos = player->unk_D8[a];
         }
     } else {
         player->unk_158[i] = player->segmentReadPos;
         player->unk_168.u8[i] = b;
-        player->segmentReadPos = &player->unk_D8[a];
+        player->segmentReadPos = player->unk_D8[a];
     }
     player->unk_210 = i;
 }
-#else
-INCLUDE_ASM(s32, "28910_len_5090", func_8004EA34);
-#endif
 
 INCLUDE_ASM(s32, "28910_len_5090", func_8004EAD4);
 

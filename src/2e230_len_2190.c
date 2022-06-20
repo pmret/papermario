@@ -358,7 +358,7 @@ void func_800538C4(UnkAl48* arg0, s32 arg1) { // type may be wrong but it seems 
     func_800576EC(arg1, 0, 0xB8);
 }
 
-//extern f32 AlTuneScaling[416];
+// array offsets into AlTuneScaling
 #define TUNE_SCALING_ARR_AMPLIFY_FINE 0
 #define TUNE_SCALING_ARR_AMPLIFY_COARSE 128
 #define TUNE_SCALING_ARR_ATTENUATE_FINE 160

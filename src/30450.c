@@ -631,28 +631,28 @@ s32* func_80055EB4(s32 arg0) {
 
     switch (arg0) {
         case 0:
-            ret = &D_80078DB8;
+            ret = D_80078DB8;
             break;
         case 1:
-            ret = &D_80078DC4;
+            ret = D_80078DC4;
             break;
         case 2:
-            ret = &D_80078DCC;
+            ret = D_80078DCC;
             break;
         case 3:
-            ret = &D_80078DD0;
+            ret = D_80078DD0;
             break;
         case 4:
-            ret = &D_80078DDC;
+            ret = D_80078DDC;
             break;
         case 5:
-            ret = &D_80078DF8;
+            ret = D_80078DF8;
             break;
         case 6:
-            ret = &D_80078E14;
+            ret = D_80078E14;
             break;
         case 7:
-            ret = &D_80078E30;
+            ret = D_80078E30;
             break;
     }
 

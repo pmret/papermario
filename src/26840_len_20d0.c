@@ -32,6 +32,7 @@ void snd_SEFCmd_18(SoundManager* manager, SoundPlayer* player);
 
 void snd_set_player_modifiers(SoundPlayer* player, SoundSFXEntry* sfxEntry);
 void func_800538C4(UnkAl48* arg0, s32 arg1);
+f32 snd_tune_param_to_timescale(s32);
 
 void func_8004B440(SoundManager* manager, u8 arg1, u8 arg2, SndGlobals* arg3, u8 arg4) {
     u32 i;
@@ -387,15 +388,6 @@ s16 func_8004C444(SoundManager* manager) {
     }
     return 0;
 }
-
-s32 func_8004D428(s32, s32, s32);                   /* extern */
-void func_80053888(UnkAl48*, s32);                     /* extern */
-void snd_SEFCmd_00_SetVolume(SoundManager*, SoundPlayer*); /* extern */
-void snd_SEFCmd_01_SetPan(SoundManager*, SoundPlayer*); /* extern */
-void snd_SEFCmd_02_SetInstrument(SoundManager*, SoundPlayer*); /* extern */
-void snd_SEFCmd_03_SetReverb(SoundManager*, SoundPlayer*); /* extern */
-s16 snd_get_scaled_volume(SoundManager*, SoundPlayer*); /* extern */
-f32 snd_tune_param_to_timescale(s32);               /* extern */
 
 void func_8004C578(SoundManager* manager, SoundPlayer* player, UnkAl48* ARG2, u32 ARG3) {
     s16 volume;

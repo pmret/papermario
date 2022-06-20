@@ -655,7 +655,7 @@ typedef struct BGMPlayer {
     /* 0x0CC */ s32 masterVolumeFadeTime;
     /* 0x0D0 */ f32 unk_D0;
     /* 0x0D4 */ SeqArgs seqCmdArgs;
-    /* 0x0D8 */ s32* unk_D8[32];
+    /* 0x0D8 */ s32* unk_D8[32]; // labels?
     /* 0x158 */ s32* unk_158[4];
     /* 0x168 */ Q32 unk_168;
     /* 0x16C */ s32 unk_16C;
