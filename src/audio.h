@@ -602,11 +602,14 @@ typedef struct BGMPlayerTrack {
 } BGMPlayerTrack; // size = 0x60;
 
 typedef struct UnkAl24 {
-    /* 0x00 */ char unk_00[0x8];
+    /* 0x00 */ s32 unk_00;
+    /* 0x00 */ f32 unk_04;
     /* 0x08 */ u16 unk_08;
     /* 0x0A */ u16 unk_0A;
     /* 0x0C */ s32 unk_0C;
-    /* 0x10 */ char unk_10[0x4];
+    /* 0x10 */ u16 unk_10;
+    /* 0x12 */ u8 unk_12;
+    /* 0x12 */ char unk_13[0x1];
     /* 0x14 */ u16 unk_14;
     /* 0x16 */ u8 unk_16;
     /* 0x17 */ u8 unk_17;
@@ -652,8 +655,7 @@ typedef struct BGMPlayer {
     /* 0x0CC */ s32 masterVolumeFadeTime;
     /* 0x0D0 */ f32 unk_D0;
     /* 0x0D4 */ SeqArgs seqCmdArgs;
-    /* 0x0D8 */ s32* unk_D8;
-    /* 0x0DC */ char padDC[0x7C];
+    /* 0x0D8 */ s32* unk_D8[32];
     /* 0x158 */ s32* unk_158[4];
     /* 0x168 */ Q32 unk_168;
     /* 0x16C */ s32 unk_16C;
@@ -673,14 +675,14 @@ typedef struct BGMPlayer {
     /* 0x21B */ u8 unk_21B;
     /* 0x21C */ u8 bgmDrumCount;
     /* 0x21D */ u8 bgmInstrumentCount;
-    /* 0x21E */ s8 unk_21E;
+    /* 0x21E */ u8 unk_21E;
     /* 0x21F */ char unk_21F[0x1];
     /* 0x220 */ u8 unk_220;
     /* 0x221 */ u8 unk_221;
     /* 0x222 */ u8 unk_222;
     /* 0x223 */ u8 unk_223;
-    /* 0x224 */ u8 unk_224[3];
-    /* 0x227 */ char unk_227[0x3];
+    /* 0x224 */ u8 unk_224[4];
+    /* 0x227 */ char unk_228[0x2];
     /* 0x22A */ u8 unk_22A;
     /* 0x22B */ u8 unk_22B;
     /* 0x22C */ u8 unk_22C;

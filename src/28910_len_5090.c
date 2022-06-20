@@ -581,7 +581,119 @@ s32 func_8004E4B8(BGMPlayer* player) {
     return retVal;
 }
 
-INCLUDE_ASM(s32, "28910_len_5090", snd_initialize_bgm_player, BGMPlayer* player);
+void snd_initialize_bgm_player(BGMPlayer* player) {
+    s32* buf;
+    s32 cmd;
+    s32 keepReading;
+    s32 i;
+
+    for(i = 0; i < ARRAY_COUNT(player->unk_25C); i++) {
+        BGMPlayerTrack* track = &player->unk_25C[i];
+        track->unk_0C = -1;
+        track->subTrackVolume = 0x7FFF0000;
+        track->subTrackPan = 0x40;
+        track->subTrackReverb = 0;
+        track->unk_44 = 0;
+        track->subTrackCoarseTune = 0;
+        track->subTrackFineTune = 0;
+        track->segTrackVolume = 0x7F;
+        track->unk_4C = 0;
+        track->unk2C = 0x7FFF0000;
+        track->unk_04 = 0;
+        track->prevReadPos = 0;
+        track->unk_3E = 0;
+        track->segTrackTune = 0;
+        track->trackTremoloTime = 0;
+        track->trackTremoloAmount = 0;
+        track->trackTremoloSpeed = 0;
+        track->subTrackVolumeFadeDelta = 0;
+        track->subTrackVolumeFadeVolume = 0;
+        track->subTrackVolumeFadeTime = 0;
+        track->unk30 = 0;
+        track->unk34 = 0;
+        track->unk36 = 0;
+        track->unk_4D = 0;
+        track->unk_4E = 0;
+        track->unk_4F = 0;
+        track->unk_50 = 0;
+        track->unk_51 = 0;
+        track->unk_54 = 0;
+        track->unk_57 = 0;
+        track->unk_58 = 0;
+        track->unk_59 = 0;
+        track->unk_5A = 0;
+        track->subtrackReverbType = player->unk_235;
+        track->unk_5C = i;
+    }
+
+    for(i = 0; i < ARRAY_COUNT(player->unk_85C); i++) {
+        UnkAl24* temp_v0_2 = &player->unk_85C[i];
+        temp_v0_2->unk_00 = -1;
+        temp_v0_2->unk_04 = 2.0f;
+        temp_v0_2->unk_14 = 0;
+        temp_v0_2->unk_16 = 0;
+        temp_v0_2->unk_0C = 0;
+        temp_v0_2->unk_12 = 0;
+    }
+    func_80050900(player);
+    player->unk_D0 = 128.0f; // set to 1.0 later om...
+    player->masterTempo = 15600;
+    player->masterTempoBPM = 156;
+    player->unk_21E = 0x80;
+    player->masterVolume = 0x7F000000;
+    player->fadeSongName = 0;
+    player->unk_74 = 0;
+    player->masterTempoFadeTempo = 0;
+    player->masterTranspose = 0;
+    player->unk_20E = 0;
+    player->masterVolumeFadeTime = 0;
+    player->masterVolumeFadeVolume = 0;
+    player->masterVolumeFadeDelta = 0;
+    player->unk_16C = 0;
+    player->unk_170 = 0;
+    player->unk_171 = 0;
+    player->unk_158[3] = 0;
+    player->unk_158[2] = 0;
+    player->unk_158[1] = 0;
+    player->unk_158[0] = 0;
+    player->unk_168.s32 = 0;
+    player->unk_210 = 0;
+    player->unk_222 = 0;
+    player->unk_223 = 0;
+    player->unk_204 = NULL;
+    player->unk_232 = 0;
+    player->unk_233 = 1;
+    player->unk_211 = 0;
+    player->unk_D0 = 1.0f;
+
+    for(i = 0; i < 8; i++) {
+        func_8004E844(player, i);
+    }
+
+    for(i = 0; i < ARRAY_COUNT(player->unk_224); i++) {
+        player->unk_224[i] = 0;
+    }
+
+    player->unk_220 = 0;
+    player->unk_18 = 0;
+    for(i = 0; i < ARRAY_COUNT(player->unk_D8); i++) {
+        player->unk_D8[i] = player->segmentReadPos;
+    }
+
+    // find labels?
+    buf = player->segmentReadPos;
+    keepReading = TRUE;
+    while (keepReading) {
+        cmd = *buf++;
+        if (cmd == 0) {
+            keepReading = FALSE;
+        } else if ((cmd & 0xF0000000) == 0x30000000) {
+            player->unk_D8[cmd & 0x1F] = buf;
+        }
+    }
+    
+    player->unk_221 = 2;
+}
 
 void func_8004E844(BGMPlayer* player, s32 arg1) {
     s32 i;
