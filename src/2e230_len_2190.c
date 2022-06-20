@@ -4,7 +4,7 @@
 extern u16 D_80078530[];
 extern s32 D_8007854C[2];
 extern u8 D_80078580[];
-extern f32 D_80078730[];
+extern f32 AlTuneScaling[];
 
 void func_80052E30(u8 index) {
     UnkAl48* temp = &D_8009A5C0->unk_1320[index];
@@ -358,18 +358,22 @@ void func_800538C4(UnkAl48* arg0, s32 arg1) { // type may be wrong but it seems 
     func_800576EC(arg1, 0, 0xB8);
 }
 
-#ifdef NON_EQUIVALENT
+//extern f32 AlTuneScaling[416];
+#define TUNE_SCALING_ARR_AMPLIFY_FINE 0
+#define TUNE_SCALING_ARR_AMPLIFY_COARSE 128
+#define TUNE_SCALING_ARR_ATTENUATE_FINE 160
+#define TUNE_SCALING_ARR_ATTENUATE_COARSE 288
+
 f32 snd_tune_param_to_timescale(s32 arg0) {
     if (arg0 >= 0) {
-        return D_80078730[(u32)arg0 & 0x7F] * D_80078730[128 + (((u32)arg0 >> 7) & 0x1F)];
+        return AlTuneScaling[(arg0 & 0x7F) + TUNE_SCALING_ARR_AMPLIFY_FINE]
+            * AlTuneScaling[((arg0 & 0xF80) >> 7) + TUNE_SCALING_ARR_AMPLIFY_COARSE];
     } else {
         arg0 = -arg0;
-        return D_80078730[160 + ((u32)arg0 & 0x7F)] * D_80078730[288 + (((u32)arg0 >> 7) & 0x7F)];
+        return AlTuneScaling[(arg0 & 0x7F) + TUNE_SCALING_ARR_ATTENUATE_FINE]
+            * AlTuneScaling[((arg0 & 0x3F80) >> 7) + TUNE_SCALING_ARR_ATTENUATE_COARSE];
     }
 }
-#else
-INCLUDE_ASM(s32, "2e230_len_2190", snd_tune_param_to_timescale);
-#endif
 
 void snd_initialize_bgm_fade(Fade* fade, s32 time, s32 startValue, s32 endValue) {
     fade->currentVolume.s32 = startValue * 0x10000;
@@ -928,8 +932,7 @@ s32 snd_load_BK_to_bank(s32 bkFileOffset, SoundBank* bank, s32 bankIndex, s32 ba
 INCLUDE_ASM(s32, "2e230_len_2190", snd_load_BK_to_bank, s32 bkFileOffset, SoundBank* bank, s32 bankIndex, s32 arg3);
 #endif
 
-void snd_swizzle_BK_instruments(s32 bkFileOffset, SoundBank* bank, InstrumentGroup instruments, u32 instrumentCount,
-                                u8 arg4) {
+void snd_swizzle_BK_instruments(s32 bkFileOffset, SoundBank* bank, InstrumentGroup instruments, u32 instrumentCount, u8 arg4) {
     SoundBank* sb = bank;
     Instrument* defaultInstrument = D_8009A5C0->defaultInstrument;
     f32 freq = D_8009A5C0->actualFrequency;

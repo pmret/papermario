@@ -2,6 +2,8 @@
 #include "audio.h"
 #include "nu/nualsgi.h"
 
+s16 func_80058004(s16 arg0, s32 arg1, s16 arg2, u16 arg3);
+
 UnkAl0* D_80078E50 = NULL;
 UnkAl0* D_80078E54 = NULL;
 s8 D_80078E58 = 0;
@@ -194,15 +196,156 @@ void func_80057344(u8 arg0, f32 arg1) {
     al7C->unk_3C = arg1;
 }
 
-INCLUDE_ASM(void, "31650", func_8005736C, u8 arg0, s16 arg1, s32 arg2, u8 arg3, u8 arg4);
+void func_8005736C(u8 arg0, s16 arg1, s32 arg2, u8 arg3, u8 arg4) {
+    UnkAl7C* temp_s0 = &D_80078E54->unk_1C[arg0];
+    UnkStruct80057874* temp_s1 = (UnkStruct80057874*)&temp_s0->unk_48;
+    
+    if (temp_s0->unk_64 >= temp_s0->unk_68) {
+        temp_s0->unk_64 = temp_s0->unk_68;
+        if (D_80078181 == 0) {
+            temp_s0->unk_50 = (temp_s0->unk_4E * AlCosineBlend[64]) >> 0xF;
+            temp_s0->unk_52 = (temp_s0->unk_4E * AlCosineBlend[64]) >> 0xF;
+        } else {
+            temp_s0->unk_50 = (temp_s0->unk_4E * AlCosineBlend[temp_s0->unk_4C]) >> 0xF;
+            temp_s0->unk_52 = (temp_s0->unk_4E * AlCosineBlend[0x7F - temp_s0->unk_4C]) >> 0xF;
+        }
+    } else {
+        temp_s0->unk_50 = func_80058004(temp_s0->unk_50, temp_s0->unk_64, temp_s0->unk_5A, temp_s0->unk_58);
+        temp_s0->unk_52 = func_80058004(temp_s0->unk_52, temp_s0->unk_64, temp_s0->unk_60, temp_s0->unk_5E);
+    }
+    if (temp_s1->unk_08 == 0) {
+        temp_s1->unk_08 = 1;
+    }
+    if (temp_s1->unk_0A == 0) {
+        temp_s1->unk_0A = 1;
+    }
+    
+    temp_s1->unk_1C = 0;
+    temp_s1->unk_20 = arg2;
+    temp_s1->unk_04 = arg3;
+    temp_s1->unk_06 = SQ(arg1) >> 0xF;
+    temp_s1->unk_0C = AlCosineBlend[arg4];
+    temp_s1->unk_0E = AlCosineBlend[0x7F - arg4];
+    temp_s1->unk_24 = 1;
+}
 
-INCLUDE_ASM(void, "31650", func_80057548, u8 arg0, u8 arg1, u8 arg2);
+void func_80057548(u8 arg0, u8 arg1, u8 arg2) {
+    UnkAl7C* temp_s0 = &D_80078E54->unk_1C[arg0];
+    UnkStruct80057874* temp_s1 = (UnkStruct80057874*)&temp_s0->unk_48;
 
-INCLUDE_ASM(void, "31650", func_800576EC, u8 arg0, s32 arg1, s32 arg2);
+    if (temp_s0->unk_64 >= temp_s0->unk_68) {
+        temp_s0->unk_64 = temp_s0->unk_68;
+        if (D_80078181 == 0) {
+            temp_s0->unk_50 = (temp_s0->unk_4E * AlCosineBlend[64]) >> 0xF;
+            temp_s0->unk_52 = (temp_s0->unk_4E * AlCosineBlend[64]) >> 0xF;
+        } else {
+            temp_s0->unk_50 = (temp_s0->unk_4E * AlCosineBlend[temp_s0->unk_4C]) >> 0xF;
+            temp_s0->unk_52 = (temp_s0->unk_4E * AlCosineBlend[0x7F - temp_s0->unk_4C]) >> 0xF;
+        }
+    } else {
+        temp_s0->unk_50 = func_80058004(temp_s0->unk_50, temp_s0->unk_64, temp_s0->unk_5A, temp_s0->unk_58);
+        temp_s0->unk_52 = func_80058004(temp_s0->unk_52, temp_s0->unk_64, temp_s0->unk_60, temp_s0->unk_5E);
+    }
+    if (temp_s1->unk_08 == 0) {
+        temp_s1->unk_08 = 1;
+    }
+    if (temp_s1->unk_0A == 0) {
+        temp_s1->unk_0A = 1;
+    }
 
-INCLUDE_ASM(s32, "31650", func_80057874);
+    temp_s1->unk_04 = arg1;
+    temp_s1->unk_0C = AlCosineBlend[arg2];
+    temp_s1->unk_0E = AlCosineBlend[0x7F - arg2];
+    temp_s1->unk_24 = 1;
+}
 
-INCLUDE_ASM(s32, "31650", func_800579D8);
+void func_800576EC(u8 arg0, s16 arg1, s32 arg2) {
+    UnkAl7C* temp_s0 = &D_80078E54->unk_1C[arg0];
+    UnkStruct80057874* temp_s1 = (UnkStruct80057874*)&temp_s0->unk_48;
+
+    if (temp_s0->unk_64 >= temp_s0->unk_68) {
+        temp_s0->unk_64 = temp_s0->unk_68;
+        if (D_80078181 == 0) {
+            temp_s0->unk_50 = (temp_s0->unk_4E * AlCosineBlend[64]) >> 0xF;
+            temp_s0->unk_52 = (temp_s0->unk_4E * AlCosineBlend[64]) >> 0xF;
+        } else {
+            temp_s0->unk_50 = (temp_s0->unk_4E * AlCosineBlend[temp_s0->unk_4C]) >> 0xF;
+            temp_s0->unk_52 = (temp_s0->unk_4E * AlCosineBlend[0x7F - temp_s0->unk_4C]) >> 0xF;
+        }
+    } else {
+        temp_s0->unk_50 = func_80058004(temp_s0->unk_50, temp_s0->unk_64, temp_s0->unk_5A, temp_s0->unk_58);
+        temp_s0->unk_52 = func_80058004(temp_s0->unk_52, temp_s0->unk_64, temp_s0->unk_60, temp_s0->unk_5E);
+    }
+    if (temp_s1->unk_08 == 0) {
+        temp_s1->unk_08 = 1;
+    }
+    if (temp_s1->unk_0A == 0) {
+        temp_s1->unk_0A = 1;
+        
+    }
+
+    temp_s1->unk_06 = SQ(arg1) >> 0xF;
+    temp_s1->unk_1C = 0;
+    temp_s1->unk_20 = arg2;
+    temp_s1->unk_24 = 1;
+}
+
+void func_80057874(u8 arg0, u8 arg1) {
+    UnkAl7C* temp_s0 = &D_80078E54->unk_1C[arg0];
+    UnkStruct80057874* temp_s1 = (UnkStruct80057874*)&temp_s0->unk_48;
+
+    if (temp_s0->unk_64 >= temp_s0->unk_68) {
+        temp_s0->unk_64 = temp_s0->unk_68;
+        if (D_80078181 == 0) {
+            temp_s0->unk_50 = (temp_s0->unk_4E * AlCosineBlend[64]) >> 0xF;
+            temp_s0->unk_52 = (temp_s0->unk_4E * AlCosineBlend[64]) >> 0xF;
+        } else {
+            temp_s0->unk_50 = (temp_s0->unk_4E * AlCosineBlend[temp_s0->unk_4C]) >> 0xF;
+            temp_s0->unk_52 = (temp_s0->unk_4E * AlCosineBlend[127 - temp_s0->unk_4C]) >> 0xF;
+        }
+    } else {
+        temp_s0->unk_50 = func_80058004(temp_s0->unk_50, temp_s0->unk_64, temp_s0->unk_5A, temp_s0->unk_58);
+        temp_s0->unk_52 = func_80058004(temp_s0->unk_52, temp_s0->unk_64, temp_s0->unk_60, temp_s0->unk_5E);
+    }
+    if (temp_s1->unk_08 == 0) {
+        temp_s1->unk_08 = 1;
+    }
+    if (temp_s1->unk_0A == 0) {
+        temp_s1->unk_0A = 1;
+    }
+
+    temp_s1->unk_04 = arg1;
+    temp_s1->unk_24 = 1;
+}
+
+void func_800579D8(u8 arg0, u8 arg1) {
+    UnkAl7C* temp_s0 = &D_80078E54->unk_1C[arg0];
+    UnkStruct80057874* temp_s1 = (UnkStruct80057874*)&temp_s0->unk_48;
+
+    if (temp_s0->unk_64 >= temp_s0->unk_68) {
+        temp_s0->unk_64 = temp_s0->unk_68;
+        if (D_80078181 == 0) {
+            temp_s0->unk_50 = ((temp_s0->unk_4E * AlCosineBlend[64]) >> 0xF);
+            temp_s0->unk_52 = (temp_s0->unk_4E * AlCosineBlend[64]) >> 0xF;
+        } else {
+            temp_s0->unk_50 = ((temp_s0->unk_4E * AlCosineBlend[temp_s0->unk_4C]) >> 0xF);
+            temp_s0->unk_52 = (temp_s0->unk_4E * AlCosineBlend[0x7F - temp_s0->unk_4C]) >> 0xF;
+        }
+    } else {
+        temp_s0->unk_50 = func_80058004(temp_s0->unk_50, temp_s0->unk_64, temp_s0->unk_5A, temp_s0->unk_58);
+        temp_s0->unk_52 = func_80058004(temp_s0->unk_52, temp_s0->unk_64, temp_s0->unk_60, temp_s0->unk_5E);
+    }
+    if (temp_s1->unk_08 == 0) {
+        temp_s1->unk_08 = 1;
+    }
+    if (temp_s1->unk_0A == 0) {
+        temp_s1->unk_0A = 1;
+    }
+
+    temp_s1->unk_0C = AlCosineBlend[arg1];
+    temp_s1->unk_0E = AlCosineBlend[0x7F - arg1];
+    temp_s1->unk_24 = 1;
+}
 
 s32 func_80057B64(u8 arg0) {
     UnkAl7C* al7C = &D_80078E54->unk_1C[arg0];
@@ -240,8 +383,6 @@ s16 func_80057C2C(u8 arg0) {
     return al7C->unk_56;
 }
 
-// TODO causes ROM to shift
-#ifdef NONMATCHING
 s32 func_80057C54(s32 arg0) {
     UnkAl7C* temp_v1;
     u32 retVal;
@@ -249,7 +390,7 @@ s32 func_80057C54(s32 arg0) {
     temp_v1 = &D_80078E54->unk_1C[arg0 & 0xFF];
     if (temp_v1->unk_64 >= temp_v1->unk_68) {
         if (D_80078181 == 0) {
-            retVal = ((temp_v1->unk_4E * AlCosineBlend[64]) * 2) >> 0x10;
+            retVal = (temp_v1->unk_4E * AlCosineBlend[64] * 2) >> 0x10;
         } else {
             retVal = (temp_v1->unk_4E * AlCosineBlend[temp_v1->unk_4C] * 2) >> 0x10;
         }
@@ -275,11 +416,6 @@ s32 func_80057D0C(s32 arg0) {
     }
     return retVal;
 }
-#else
-INCLUDE_ASM(s32, "31650", func_80057C54);
-
-INCLUDE_ASM(s32, "31650", func_80057D0C);
-#endif
 
 void func_80057DC8(s32 arg0) {
     if (arg0 < 2) {

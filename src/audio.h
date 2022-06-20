@@ -758,7 +758,23 @@ typedef struct ALConfig {
     /* 0x14 */ ALHeap* heap;
 } ALConfig; // size = 0x18;
 
-extern u8 D_80078181;
+typedef struct UnkStruct80057874 {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ s16 unk_04;
+    /* 0x06 */ s16 unk_06;
+    /* 0x08 */ s16 unk_08;
+    /* 0x0A */ s16 unk_0A;
+    /* 0x0C */ s16 unk_0C;
+    /* 0x0E */ s16 unk_0E;
+    /* 0x10 */ s32 unk_10;
+    /* 0x14 */ s32 unk_14;
+    /* 0x18 */ s32 unk_18;
+    /* 0x1C */ s32 unk_1C;
+    /* 0x20 */ s32 unk_20;
+    /* 0x24 */ s32 unk_24;
+} UnkStruct80057874; // size unk
+
+extern volatile u8 D_80078181;
 extern s32 D_80078190;
 extern s32 D_800781D0;
 extern s32 D_80078290;
@@ -910,7 +926,7 @@ void func_80057224(u8, Instrument*);
 void func_80057344(u8, f32);
 void func_8005736C(u8, s16, s32, u8, u8);
 void func_80057548(u8, u8, u8);
-void func_800576EC(u8, s32, s32);
+void func_800576EC(u8, s16, s32);
 void func_80057DC8(s32);
 void func_80057E08(u8);
 void func_80057E5C(u8);
@@ -925,8 +941,8 @@ void snd_load_PRG(SndGlobals*, s32);
 void snd_read_rom(s32, void*, u32);
 void snd_copy_words(void*, void*, s32);
 
-void func_80058E84(s32*, u8, ALHeap*);
-void func_8005904C(s32*, u8);
+void func_80058E84(UnkAlLen14*, u8, ALHeap*);
+void func_8005904C(UnkAlLen14*, u8);
 #undef alHeapAlloc
 void* alHeapAlloc(ALHeap *heap, s32 arg1, s32 size);
 
