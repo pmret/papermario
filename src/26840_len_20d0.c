@@ -1,6 +1,8 @@
 #include "common.h"
 #include "audio.h"
 
+extern s32* D_8007F1F8[1]; // points to 80078290
+
 extern s8 gBlankSEFData[12];
 extern InstrumentEffect* D_800783C0[25];
 
@@ -78,7 +80,7 @@ void func_8004B440(SoundManager* manager, u8 arg1, u8 arg2, SndGlobals* arg3, u8
     }
 
     for (i = 0; i < ARRAY_COUNT(manager->unk_90); i++) {
-        manager->unk_90[i] = 0;
+        manager->unk_90[i].s32 = 0;
     }
 
     for (i = 0; i < ARRAY_COUNT(manager->unk_A0); i++) {

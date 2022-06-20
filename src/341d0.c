@@ -1,4 +1,5 @@
 #include "common.h"
+#include "audio.h"
 
 s32 D_8007EFE0[] = {
     0x00000003, 0x0000000B, 0x00000000, 0x00000009, 0x00002666, 0xFFFFD99A, 0x00000000, 0x00000000, 0x00000000,
@@ -80,7 +81,41 @@ INCLUDE_ASM(s32, "341d0", func_8005904C);
 
 INCLUDE_ASM(s32, "341d0", func_80059310);
 
-INCLUDE_ASM(s32, "341d0", func_800598A0);
+s32 func_800598A0(UnkAlLen14* arg0, s16 arg1, s16 arg2, s32 arg3) {
+    s16* temp_v0;
+
+    switch (arg2) {
+    case 0:
+        arg0->unk_0C[arg1].unk_00 = arg3 & ~7;
+        break;
+    case 1:
+        arg0->unk_0C[arg1].unk_04 = arg3 & ~7;
+        break;
+    case 3:
+        arg0->unk_0C[arg1].unk_08 = arg3;
+        break;
+    case 2:
+        arg0->unk_0C[arg1].unk_0A = arg3;
+        break;
+    case 4:
+        arg0->unk_0C[arg1].unk_0C = arg3;
+        break;
+    case 5:
+        arg0->unk_0C[arg1].unk_10 = (2.0 * (arg3 / 1000.0f)) / D_80078E50->frequency;
+        break;
+    case 6:
+        arg0->unk_0C[arg1].unk_1C = ((f32)arg3 / 173123.404906676) * (arg0->unk_0C[arg1].unk_04 - arg0->unk_0C[arg1].unk_00);
+        break;
+    case 7:
+        temp_v0 = arg0->unk_0C[arg1].unk_20;
+        if (temp_v0 != 0) {
+            *temp_v0 = arg3;
+            func_80058DD0(arg0->unk_0C[arg1].unk_20);
+        }
+        break;
+    }
+    return 0;
+}
 
 INCLUDE_ASM(s32, "341d0", func_80059AB8);
 

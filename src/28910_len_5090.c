@@ -2,6 +2,7 @@
 
 extern s32 D_80078554;
 extern u8 D_80078510[8];
+extern u8 D_80078558[40];
 
 INCLUDE_ASM(void, "28910_len_5090", func_8004D510, BGMPlayer* arg0);
 
@@ -354,7 +355,37 @@ MusicError func_8004DE2C(SongUpdateEvent* update) {
     return error;
 }
 
-INCLUDE_ASM(void, "28910_len_5090", func_8004DFD4, SndGlobals* arg0);
+void func_8004DFD4(SndGlobals* globals) {
+    BGMPlayer* player;
+    BGMPlayerTrack* track;
+    UnkAl24* unkTemp;
+    u32 i;
+    u32 j;
+    s32 k;
+    
+    player = globals->unk_74;
+    snd_copy_words(globals->unk_78, player, sizeof(*player));
+    if (globals->unkSongName == player->songName) {
+        for (i = 0; i < ARRAY_COUNT(player->unk_25C); i++) {
+            track = &player->unk_25C[i];
+            if (track->bgmReadPos != NULL) {
+                for (j = track->unk_52; j < track->unk_53; j++) {
+                    unkTemp = &player->unk_85C[j];
+                    unkTemp->unk_0C = 0;
+                }
+            }
+        }
+        for (k = 0; k < ARRAY_COUNT(player->unk_4C); k++) {
+            if (player->unk_4C[k] != 0xFF) {
+                player->seqCmdArgs.u8[0] = player->unk_4C[k];
+                player->seqCmdArgs.u8[1] = player->unk_224[k];
+                snd_BGMCmd_E6_MasterEffect(player, track);
+            }
+        };
+        snd_initialize_bgm_fade(&player->fadeInfo, globals->unkFadeTime, globals->unkFadeStart, globals->unkFadeEnd);
+    }
+    globals->unk_80 = 0;
+}
 
 s32 func_8004E0F4(SongUpdateEvent* update) {
     BGMPlayer* player;
@@ -406,7 +437,7 @@ void func_8004E158(BGMPlayer* player, s32 arg1, s32 arg2, SndGlobals* arg3) {
     player->unk_221 = 0;
     player->unk_234 = arg1;
     player->unk_235 = arg2;
-    player->unk_168 = 0;
+    player->unk_168.s32 = 0;
     player->unk_222 = 0;
     player->unk_223 = 0;
     player->unk_22A = 0;
@@ -452,7 +483,26 @@ void func_8004E158(BGMPlayer* player, s32 arg1, s32 arg2, SndGlobals* arg3) {
     func_80055110(player);
 }
 
-INCLUDE_ASM(s32, "28910_len_5090", func_8004E344);
+void func_8004E344(BGMPlayer* arg0, u8* arg1) {
+    s32 i;
+    s32 j;
+    
+    for (i = 0; i < 4; i++) {
+        s8 b = *arg1++;
+        
+        if (b < 0) {
+            break;
+        }
+        arg0->unk_4C[i] = b;
+    }
+
+    j = 4 - i;
+    if (j > 0) {
+        while (j-- != 0) {
+            arg0->unk_4C[i++] = 0xFF;
+        }
+    }
+}
 
 void snd_update_bgm_fade(BGMPlayer* player) {
     player->fadeInfo.fadeTime--;
@@ -606,7 +656,43 @@ void func_8004E904(BGMPlayer* player) {
     }
 }
 
+//TODO problems around the i-- line
+#ifdef NONEQUIVALENT
+void func_8004EA34(BGMPlayer* player, u32 cmd) {
+    s32 a = cmd & 0x1F;
+    s32 b = (cmd >> 5) & 0x7F;
+    u32 i;
+    
+    i = player->unk_210;
+    if (player->unk_158[i] != NULL) {
+        if (player->unk_158[i] == player->segmentReadPos) {
+            if (player->unk_168.u8[i] != 0) {
+                player->unk_168.u8[i]--;
+                if ((player->unk_168.u8[i]) == 0) {
+                    player->unk_158[i] = NULL;
+                    if (i > 0) {
+                        i--;
+                    }
+                }
+            } else {
+                player->segmentReadPos = &player->unk_D8[a];
+            }
+        } else if (i < 4) {
+            i++;
+            player->unk_158[i] = player->segmentReadPos;
+            player->unk_168.u8[i] = b;
+            player->segmentReadPos = &player->unk_D8[a];
+        }
+    } else {
+        player->unk_158[i] = player->segmentReadPos;
+        player->unk_168.u8[i] = b;
+        player->segmentReadPos = &player->unk_D8[a];
+    }
+    player->unk_210 = i;
+}
+#else
 INCLUDE_ASM(s32, "28910_len_5090", func_8004EA34);
+#endif
 
 INCLUDE_ASM(s32, "28910_len_5090", func_8004EAD4);
 
@@ -910,7 +996,103 @@ void snd_BGMCmd_FC_Jump(BGMPlayer* player, BGMPlayerTrack* arg1) {
     arg1->subtrackReverbType = player->unk_235;
 }
 
-INCLUDE_ASM(void, "28910_len_5090", snd_BGMCmd_FF, BGMPlayer* player, BGMPlayerTrack* track);
+void snd_BGMCmd_FF(BGMPlayer* player, BGMPlayerTrack* track) {
+    u32 i;
+    u32 j;
+    u8 temp_a1;
+    u8 temp_a3;
+    
+    u32 arg0 = player->seqCmdArgs.u8[0];
+    u32 arg1 = player->seqCmdArgs.u8[1];
+    u32 arg2 = player->seqCmdArgs.u8[2];
+    
+    switch (arg0) {
+        case 1:
+            if ((arg1 < ARRAY_COUNT(player->unk_4C)) && ((s8)player->unk_4C[arg1] >= 0)) {
+                player->globals->unk_51 = player->unk_4C[arg1];
+                if (arg2 != 0) {
+                    temp_a3 = arg2 & 0xF;
+                    temp_a1 = ((arg2 >> 4) & 1) + 1;
+                    if ((player->globals->unk_52 != temp_a3) || (player->globals->unk_53 != temp_a1)) {
+                        player->globals->unk_52 = temp_a3;
+                        player->globals->unk_53 = temp_a1;
+                        player->globals->unk_50 = 1;
+                    }
+                } else {
+                    if (player->globals->unk_53 != 0) {
+                        player->globals->unk_53 = 0;
+                        player->globals->unk_50 = 1;
+                    }
+                }
+            }
+            break;
+        case 2:
+            if (arg1 - 1 < 8) {
+                player->unk_211 = arg1;
+                func_8004E844(player, arg1 - 1);
+            } else {
+                player->unk_211 = 0;
+            }
+            break;
+        case 3:
+            i = player->unk_211;
+            if (i - 1 < 8) {
+                i = i - 1; // needed to match
+                j = player->unk_212[i];
+                if (j < 8) {
+                    if (arg1 >= 40) {
+                        player->unk_174[i][j] = (arg1 << 8) + arg2;
+                    } else {
+                        player->unk_174[i][j] = (D_80078558[arg1] << 8) + arg2;
+                    }
+                    player->unk_212[i] = j + 1;
+                }
+            }
+            break;
+        case 4:
+            if (arg1 < 9) {
+                track->unk_4C = arg1;
+            } else {
+                track->unk_4C = 0;
+            }
+            break;
+        case 5:
+            if (player->soundManager != NULL) {
+                for (i = 0; i < ARRAY_COUNT(player->soundManager->unk_90); i++) {
+                    if ((player->soundManager->unk_90[i].u8[0]) == 0) {
+                        player->soundManager->unk_90[i].u8[0] = arg1;
+                        player->soundManager->unk_90[i].u8[3]= (((player->fadeInfo.currentVolume.u16 * player->fadeInfo.unk_10.u16) + 0x7FFF) >> 0x17);
+                        break;
+                    }
+                }
+            }
+            break;
+        case 6:
+            if (arg1 == 0) {
+                if (track->unk_4E != 0) {
+                    track->unk_4E = 0;
+                    for (i = 0; i < 16; i++) {
+                        BGMPlayerTrack* otherTrack = &player->unk_25C[i];
+                        if (player->unk_171 == 0x7F) {
+                            if (otherTrack->unk_4F != 0) {
+                                otherTrack->unk_4E = 0;
+                                func_80050888(player, otherTrack, otherTrack->unk_4F, 0x48);
+                            }
+                        } else {
+                            if (otherTrack->unk_50 != 0) {
+                                otherTrack->unk_4E = 0;
+                                func_80050888(player, otherTrack, otherTrack->unk_50, 0x48);
+                            }
+                        }
+                    }
+                }
+            } else {
+                track->unk_4F = arg1;
+                track->unk_50 = arg2;
+            }
+            break;
+    }
+}
 
 void snd_BGMCmd_NOP(BGMPlayer* player, BGMPlayerTrack* track) {
 }

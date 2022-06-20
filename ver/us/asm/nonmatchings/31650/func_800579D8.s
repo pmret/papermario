@@ -26,8 +26,8 @@ glabel func_800579D8
 /* 32E2C 80057A2C 90420000 */  lbu       $v0, ($v0)
 /* 32E30 80057A30 1440000E */  bnez      $v0, .L80057A6C
 /* 32E34 80057A34 AE030064 */   sw       $v1, 0x64($s0)
-/* 32E38 80057A38 3C048008 */  lui       $a0, %hi(D_80078E60)
-/* 32E3C 80057A3C 24848E60 */  addiu     $a0, $a0, %lo(D_80078E60)
+/* 32E38 80057A38 3C048008 */  lui       $a0, %hi(AlCosineBlend)
+/* 32E3C 80057A3C 24848E60 */  addiu     $a0, $a0, %lo(AlCosineBlend)
 /* 32E40 80057A40 8603004E */  lh        $v1, 0x4e($s0)
 /* 32E44 80057A44 84820080 */  lh        $v0, 0x80($a0)
 /* 32E48 80057A48 00620018 */  mult      $v1, $v0
@@ -43,9 +43,9 @@ glabel func_800579D8
 /* 32E6C 80057A6C 8602004C */  lh        $v0, 0x4c($s0)
 /* 32E70 80057A70 8603004E */  lh        $v1, 0x4e($s0)
 /* 32E74 80057A74 00021040 */  sll       $v0, $v0, 1
-/* 32E78 80057A78 3C018008 */  lui       $at, %hi(D_80078E60)
+/* 32E78 80057A78 3C018008 */  lui       $at, %hi(AlCosineBlend)
 /* 32E7C 80057A7C 00220821 */  addu      $at, $at, $v0
-/* 32E80 80057A80 84228E60 */  lh        $v0, %lo(D_80078E60)($at)
+/* 32E80 80057A80 84228E60 */  lh        $v0, %lo(AlCosineBlend)($at)
 /* 32E84 80057A84 00620018 */  mult      $v1, $v0
 /* 32E88 80057A88 8603004C */  lh        $v1, 0x4c($s0)
 /* 32E8C 80057A8C 00004012 */  mflo      $t0
@@ -55,9 +55,9 @@ glabel func_800579D8
 /* 32E9C 80057A9C 00431023 */  subu      $v0, $v0, $v1
 /* 32EA0 80057AA0 00021040 */  sll       $v0, $v0, 1
 /* 32EA4 80057AA4 8603004E */  lh        $v1, 0x4e($s0)
-/* 32EA8 80057AA8 3C018008 */  lui       $at, %hi(D_80078E60)
+/* 32EA8 80057AA8 3C018008 */  lui       $at, %hi(AlCosineBlend)
 /* 32EAC 80057AAC 00220821 */  addu      $at, $at, $v0
-/* 32EB0 80057AB0 84228E60 */  lh        $v0, %lo(D_80078E60)($at)
+/* 32EB0 80057AB0 84228E60 */  lh        $v0, %lo(AlCosineBlend)($at)
 /* 32EB4 80057AB4 00620018 */  mult      $v1, $v0
 /* 32EB8 80057AB8 00004012 */  mflo      $t0
 /* 32EBC 80057ABC 08015EBB */  j         .L80057AEC
@@ -87,16 +87,16 @@ glabel func_800579D8
 /* 32F10 80057B10 A622000A */  sh        $v0, 0xa($s1)
 .L80057B14:
 /* 32F14 80057B14 00031040 */  sll       $v0, $v1, 1
-/* 32F18 80057B18 3C018008 */  lui       $at, %hi(D_80078E60)
+/* 32F18 80057B18 3C018008 */  lui       $at, %hi(AlCosineBlend)
 /* 32F1C 80057B1C 00220821 */  addu      $at, $at, $v0
-/* 32F20 80057B20 94228E60 */  lhu       $v0, %lo(D_80078E60)($at)
+/* 32F20 80057B20 94228E60 */  lhu       $v0, %lo(AlCosineBlend)($at)
 /* 32F24 80057B24 A622000C */  sh        $v0, 0xc($s1)
 /* 32F28 80057B28 2402007F */  addiu     $v0, $zero, 0x7f
 /* 32F2C 80057B2C 00431023 */  subu      $v0, $v0, $v1
 /* 32F30 80057B30 00021040 */  sll       $v0, $v0, 1
-/* 32F34 80057B34 3C038008 */  lui       $v1, %hi(D_80078E60)
+/* 32F34 80057B34 3C038008 */  lui       $v1, %hi(AlCosineBlend)
 /* 32F38 80057B38 00621821 */  addu      $v1, $v1, $v0
-/* 32F3C 80057B3C 94638E60 */  lhu       $v1, %lo(D_80078E60)($v1)
+/* 32F3C 80057B3C 94638E60 */  lhu       $v1, %lo(AlCosineBlend)($v1)
 /* 32F40 80057B40 24020001 */  addiu     $v0, $zero, 1
 /* 32F44 80057B44 AE220024 */  sw        $v0, 0x24($s1)
 /* 32F48 80057B48 A623000E */  sh        $v1, 0xe($s1)

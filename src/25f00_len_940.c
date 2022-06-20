@@ -8,7 +8,7 @@ NUAuPreNMIFunc nuAuPreNMIFunc = NULL;
 s32 nuAuDmaNext = 0;
 u32 nuAuFrameCounter = 0;
 u8 nuAuTaskStop = NU_AU_TASK_RUN;
-u8 D_80078181 = 1;
+u8 volatile D_80078181 = 1;
 
 //bss
 extern Acmd* D_800A3510[3];

@@ -23,8 +23,8 @@ glabel func_80057C54
 /* 3309C 80057C9C 14400008 */  bnez      $v0, .L80057CC0
 /* 330A0 80057CA0 00000000 */   nop
 /* 330A4 80057CA4 8463004E */  lh        $v1, 0x4e($v1)
-/* 330A8 80057CA8 3C028008 */  lui       $v0, %hi(D_80078EE0)
-/* 330AC 80057CAC 84428EE0 */  lh        $v0, %lo(D_80078EE0)($v0)
+/* 330A8 80057CA8 3C028008 */  lui       $v0, %hi(AlCosineBlend+0x80)
+/* 330AC 80057CAC 84428EE0 */  lh        $v0, %lo(AlCosineBlend+0x80)($v0)
 /* 330B0 80057CB0 00620018 */  mult      $v1, $v0
 /* 330B4 80057CB4 00004012 */  mflo      $t0
 /* 330B8 80057CB8 08015F3F */  j         .L80057CFC
@@ -33,9 +33,9 @@ glabel func_80057C54
 /* 330C0 80057CC0 8462004C */  lh        $v0, 0x4c($v1)
 /* 330C4 80057CC4 8463004E */  lh        $v1, 0x4e($v1)
 /* 330C8 80057CC8 00021040 */  sll       $v0, $v0, 1
-/* 330CC 80057CCC 3C018008 */  lui       $at, %hi(D_80078E60)
+/* 330CC 80057CCC 3C018008 */  lui       $at, %hi(AlCosineBlend)
 /* 330D0 80057CD0 00220821 */  addu      $at, $at, $v0
-/* 330D4 80057CD4 84228E60 */  lh        $v0, %lo(D_80078E60)($at)
+/* 330D4 80057CD4 84228E60 */  lh        $v0, %lo(AlCosineBlend)($at)
 /* 330D8 80057CD8 00620018 */  mult      $v1, $v0
 /* 330DC 80057CDC 00004012 */  mflo      $t0
 /* 330E0 80057CE0 08015F3F */  j         .L80057CFC

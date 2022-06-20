@@ -7,12 +7,26 @@ UnkAl0* D_80078E54 = NULL;
 s8 D_80078E58 = 0;
 s16 D_80078E5A = 0x7FFF;
 s8 D_80078E5C = 0;
-s32 D_80078E60[] = { 0x7FFF7FFC, 0x7FF57FE8, 0x7FD77FC0, 0x7FA57F84, 0x7F5F7F34, 0x7F057ED0, 0x7E977E58, 0x7E157DCD,
-                     0x7D7F7D2D, 0x7CD67C7A, 0x7C1A7BB4, 0x7B497ADA, 0x7A6679ED, 0x796F78ED, 0x786677DA, 0x774976B4, 0x761A757B,
-                     0x74D87430, 0x738472D3, 0x721E7164, 0x70A66FE3, 0x6F1C6E51, 0x6D816CAD, 0x6BD56AF9, 0x6A186933, 0x684A675D,
-                     0x666C6577, 0x647E6381, 0x6280617C, 0x60735F67, 0x5E575D43, 0x5C2C5B11,
-                   };
 
+// values for cosine from 0 to pi/2 multiplied by 32767
+s16 AlCosineBlend[] = { 
+    32767, 32764, 32757, 32744, 32727, 32704, 32677, 32644,
+    32607, 32564, 32517, 32464, 32407, 32344, 32277, 32205,
+    32127, 32045, 31958, 31866, 31770, 31668, 31561, 31450,
+    31334, 31213, 31087, 30957, 30822, 30682, 30537, 30388,
+    30234, 30075, 29912, 29744, 29572, 29395, 29214, 29028,
+    28838, 28643, 28444, 28241, 28033, 27821, 27605, 27385,
+    27160, 26931, 26698, 26461, 26220, 25975, 25726, 25473,
+    25216, 24956, 24691, 24423, 24151, 23875, 23596, 23313,
+    23026, 22736, 22442, 22145, 21845, 21541, 21234, 20924,
+    20610, 20294, 19974, 19651, 19325, 18997, 18665, 18331,
+    17993, 17653, 17310, 16965, 16617, 16266, 15913, 15558,
+    15200, 14840, 14477, 14113, 13746, 13377, 13006, 12633,
+    12258, 11881, 11503, 11122, 10740, 10357,  9971,  9584,
+     9196,  8806,  8415,  8023,  7630,  7235,  6839,  6442,
+     6044,  5646,  5246,  4845,  4444,  4042,  3640,  3237,
+     2833,  2429,  2025,  1620,  1216,   810,   405,     0
+    };
 
 void func_80056250(UnkAl0* globals, ALConfig* config) {
     s32 i;
@@ -70,15 +84,15 @@ void func_80056250(UnkAl0* globals, ALConfig* config) {
         al7C->unk_78 = 0;
         al7C->unk_79 = i;
     }
-    D_80078E54->unk_20 = alHeapAlloc(heap, config->unk_04, sizeof(UnkLen18));
+    D_80078E54->unk_20 = alHeapAlloc(heap, config->unk_04, sizeof(*D_80078E54->unk_20));
     for (i = 0; i < config->unk_04; i++) {
-        UnkLen18* temp = &D_80078E54->unk_20[i];
+        UnkAlLen18* temp = &D_80078E54->unk_20[i];
         temp->unk_10 = 0;
         temp->unk_14 = 0;
         temp->unk_00 = 0x7FFF;
         temp->unk_0C = 0;
-        temp->unk_04 = alHeapAlloc(heap, 1, 0x14);
-        temp->unk_08 = alHeapAlloc(heap, 1, 0x14);
+        temp->unk_04 = alHeapAlloc(heap, 1, sizeof(*temp->unk_04));
+        temp->unk_08 = alHeapAlloc(heap, 1, sizeof(*temp->unk_08));
         func_80058E84(temp->unk_04, temp->unk_0C, heap);
         func_80058E84(temp->unk_08, temp->unk_0C, heap);
     }
@@ -129,26 +143,31 @@ INCLUDE_ASM(s32, "31650", func_80056D5C);
 #endif
 
 void func_80056D78(u8 arg0, u16 arg1) {
-    UnkLen18* temp = &D_80078E54->unk_20[arg0];
+    UnkAlLen18* temp = &D_80078E54->unk_20[arg0];
 
     temp->unk_00 = arg1 & 0x7FFF;
 }
 
 u16 func_80056DA4(u8 arg0, u16 arg1) {
-    UnkLen18* temp = &D_80078E54->unk_20[arg0];
+    UnkAlLen18* temp = &D_80078E54->unk_20[arg0];
 
     return temp->unk_00;
 }
 
 void func_80056DCC(u8 arg0, u8 arg1) {
-    UnkLen18* temp = &D_80078E54->unk_20[arg0];
+    UnkAlLen18* temp = &D_80078E54->unk_20[arg0];
 
     temp->unk_0C = arg1;
     func_8005904C(temp->unk_04, arg1);
     func_8005904C(temp->unk_08, arg1);
 }
 
-INCLUDE_ASM(s32, "31650", func_80056E34);
+void func_80056E34(s32 arg0, s16 arg1, s16 arg2, s32 arg3) {
+    UnkAlLen18* temp_s0 = &D_80078E54->unk_20[arg0 & 0xFF];
+    
+    func_800598A0(temp_s0->unk_04, arg1, arg2, arg3);
+    func_800598A0(temp_s0->unk_08, arg1, arg2, arg3);
+}
 
 void func_80056EC0(u8 arg0, s8 arg1) {
     UnkAl7C* al7C = &D_80078E54->unk_1C[arg0];
@@ -221,9 +240,46 @@ s16 func_80057C2C(u8 arg0) {
     return al7C->unk_56;
 }
 
+// TODO causes ROM to shift
+#ifdef NONMATCHING
+s32 func_80057C54(s32 arg0) {
+    UnkAl7C* temp_v1;
+    u32 retVal;
+    
+    temp_v1 = &D_80078E54->unk_1C[arg0 & 0xFF];
+    if (temp_v1->unk_64 >= temp_v1->unk_68) {
+        if (D_80078181 == 0) {
+            retVal = ((temp_v1->unk_4E * AlCosineBlend[64]) * 2) >> 0x10;
+        } else {
+            retVal = (temp_v1->unk_4E * AlCosineBlend[temp_v1->unk_4C] * 2) >> 0x10;
+        }
+    } else {
+        retVal = func_80058004(temp_v1->unk_50, temp_v1->unk_64, temp_v1->unk_5A, temp_v1->unk_58);
+    }
+    return retVal;
+}
+
+s32 func_80057D0C(s32 arg0) {
+    UnkAl7C* temp_v1;
+    u32 retVal;
+    
+    temp_v1 = &D_80078E54->unk_1C[arg0 & 0xFF];
+    if (temp_v1->unk_64 >= temp_v1->unk_68) {
+        if (D_80078181 == 0) {
+            retVal = (temp_v1->unk_4E * AlCosineBlend[64] * 2) >> 0x10;
+        } else {
+            retVal = ((temp_v1->unk_4E * AlCosineBlend[0x7F - temp_v1->unk_4C]) * 2) >> 0x10;
+        }
+    } else {
+        retVal = func_80058004(temp_v1->unk_50, temp_v1->unk_64, temp_v1->unk_5A, temp_v1->unk_58);
+    }
+    return retVal;
+}
+#else
 INCLUDE_ASM(s32, "31650", func_80057C54);
 
 INCLUDE_ASM(s32, "31650", func_80057D0C);
+#endif
 
 void func_80057DC8(s32 arg0) {
     if (arg0 < 2) {
@@ -274,7 +330,7 @@ void func_80057EB0(void) {
 }
 
 void func_80057ED0(s16 arg0) {
-    s32* phi_a1 = (s32*)D_800A3FE0;
+    s32* phi_a1 = (s32*)D_800A3FE0; 
     s32* phi_v1 = (s32*)D_800A3FE4;
     s32 i;
 
