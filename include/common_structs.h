@@ -599,6 +599,11 @@ typedef struct SimpleSpringData {
 
 typedef s32 (*EntityCallback)(struct Entity*);
 
+typedef struct DmaEntry {
+    s32 start;
+    s32 end;
+} DmaEntry;
+
 typedef struct EntityBlueprint {
     /* 0x00 */ u16 flags;
     /* 0x02 */ u16 typeDataSize;
@@ -607,8 +612,11 @@ typedef struct EntityBlueprint {
     /* 0x0C */ EntityCallback(fpInit);
     /* 0x10 */ UNK_PTR updateEntityScript;
     /* 0x14 */ EntityCallback fpHandleCollision;
-    /* 0x18 */ s32 dmaStart;
-    /* 0x1C */ s32 dmaEnd;
+    /* 0x18 */ union {
+                DmaEntry dma;
+                DmaEntry* dmaList;
+               };
+    /* 0x1C */ //s32 dmaEnd;
     /* 0x20 */ u8 entityType;
     /* 0x21 */ u8 aabbSize[3];
 } EntityBlueprint; // size = 0x24

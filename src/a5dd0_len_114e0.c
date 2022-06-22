@@ -22,6 +22,8 @@ typedef struct Fog {
     /* 0x18 */ s32 endDistance;
 } Fog; // size = 0x1C
 
+extern s32 D_801516FC;
+
 extern Gfx D_8014B7F8[];
 extern Gfx D_8014B820[];
 extern Gfx D_8014B848[];
@@ -943,6 +945,7 @@ Gfx D_8014C160[] = {
     gsSPEndDisplayList(),
 };
 
+/*
 s32 mdl_renderTaskBasePriorities[RENDER_MODE_COUNT] = {
     [RENDER_MODE_SURF_SOLID_AA_ZB_LAYER0]   = -100000,
     [RENDER_MODE_SURFACE_OPA]               = 1000000,
@@ -992,6 +995,58 @@ s32 mdl_renderTaskBasePriorities[RENDER_MODE_COUNT] = {
     [RENDER_MODE_2D]                        = 4500000,
     [RENDER_MODE_CLOUD]                     = 8000000,
     [RENDER_MODE_CLOUD_NO_ZB]               =  700000,
+};
+*/
+
+s32 mdl_renderTaskBasePriorities[RENDER_MODE_COUNT] = {
+-100000,
+1000000,
+1000000,
+1000000,
+      0,
+1000000,
+1000000,
+1000000,
+      0,
+1000000,
+1000000,
+1000000,
+      0,
+1000000,
+1000000,
+1000000,
+      0,
+8000000,
+8000000,
+8000000,
+      0,
+8000000,
+7500000,
+7500000,
+7500000,
+      0,
+7000000,
+7000000,
+7000000,
+7000000,
+6500000,
+6500000,
+6500000,
+      0,
+6000000,
+6000000,
+6000000,
+      0,
+5500000,
+5500000,
+5500000,
+8000000,
+4000000,
+4250000,
+4500000,
+4500000,
+8000000,
+ 700000,
 };
 
 s8 D_8014C248[] = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, };
@@ -1067,7 +1122,7 @@ extern u16 D_80153376;
 extern u16 D_8015336E;
 extern RenderTask* mdl_renderTaskLists[3];
 extern s32 mdl_renderTaskQueueIdx;
-extern s32 mdl_renderTaskCount; // num render task entries?
+extern s32 mdl_renderTaskCount;
 
 extern TextureHandle mdl_textureHandles[128];
 extern RenderTask mdl_clearRenderTasks[3][0x100];
@@ -1795,7 +1850,61 @@ void load_area_specific_entity_data(void) {
     }
 }
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", clear_entity_data);
+extern s32 D_80151304;
+extern s32 D_80151344;
+
+void clear_entity_data(s32 arg0) {
+    s32 i;
+
+    D_801516FC = 1;
+    D_801512C0 = 0;
+    D_80151324 = 0;
+    D_80151330 = 0;
+    D_80151304 = 0;
+
+    if (!gGameStatusPtr->isBattle) {
+        gEntityHideMode = 0;
+    }
+
+    D_8015132C = 0;
+    D_8015A578.unk_01 = 0;
+    D_8015A578.unk_02 = 0;
+    if (!arg0) {
+        D_80151344 = 0;
+    }
+    D_8014AFB0 = 0xFF;
+
+    if (!gGameStatusPtr->isBattle) {
+        wEntityBlueprintSize = 0;
+        for (i = 0; i < 30; i++) {
+            wEntityBlueprint[i] = NULL;
+        }
+    } else {
+        bEntityBlueprintSize = 0;
+        for (i = 0; i < 4; i++) {
+            bEntityBlueprint[i] = NULL;
+        }
+    }
+
+    if (!gGameStatusPtr->isBattle) {
+        D_80151300 = 0x80250000;
+        gEntityHeapBase = 0x80267FF0;
+    } else {
+        D_80151300 = &D_801A7000;
+        gEntityHeapBase = D_80151300 + 0x3000;
+    }
+
+    gCurrentEntityListPtr = get_entity_list();
+    gCurrentShadowListPtr = get_shadow_list();
+
+    for (i = 0; i < 30; i++) {
+        (*gCurrentEntityListPtr)[i] = NULL;
+    }
+
+    for (i = 0; i < 60; i++) {
+        (*gCurrentShadowListPtr)[i] = NULL;
+    }
+}
 
 void func_80110E58(void) {
     if (!gGameStatusPtr->isBattle) {
@@ -1817,13 +1926,153 @@ void func_80110E58(void) {
     D_80151324 = 0;
 }
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_80110F10);
+void func_80110F10(void) {
+    s32 i;
+    s32 s3 = 0;
+    s32 temp1;
+    s32 temp2;
+    s32 vertexData;
+    s32 animData;
 
-void entity_anim_make_vertex_pointers(EntityBlueprint* entityData, void* baseAddr, Vtx* baseVtx);
-INCLUDE_ASM(s32, "a5dd0_len_114e0", entity_anim_make_vertex_pointers);
+    for (i = 0; i < 30; i++) {
+        EntityBlueprint* bp = wEntityBlueprint[i];
+        if (bp == NULL) {
+            break;
+        }
 
-s32 is_entity_data_loaded(Entity* entity, EntityBlueprint* entityData, s32* loadedStart, s32* loadedEnd);
-INCLUDE_ASM(s32, "a5dd0_len_114e0", is_entity_data_loaded);
+        if (!(bp->flags & ENTITY_FLAGS_HAS_ANIMATED_MODEL)) {
+            s32 temp4;
+            temp2 = ((bp->dma.end - bp->dma.start) >> 2);
+            temp4 = gEntityHeapBase - s3 * 4 - temp2 * 4;
+            animData = bp->dma.end; // TODO find better match
+            s3 += (u32)dma_copy(bp->dma.start, animData, temp4) >> 2;
+        } else {
+            DmaEntry* dmaList = bp->dmaList;
+
+            if (bp->entityType == ENTITY_TYPE_RESET_MUNCHLESIA) {
+                vertexData = D_80151300;
+                temp1 = (u32)dma_copy(dmaList[0].start, dmaList[0].end, vertexData) >> 2;
+                dma_copy(dmaList[1].start, dmaList[1].end, D_80151300 + temp1 * 4) >> 2;
+                entity_anim_make_vertex_pointers(bp, D_80151300 + temp1 * 4, vertexData);
+            } else {
+                s32 temp5;
+                s32 q;
+
+                temp2 = ((dmaList[0].end - dmaList[0].start) >> 2);
+                q = gEntityHeapBase - s3 * 4;
+                vertexData = q - temp2 * 4;
+                s3 += (u32)dma_copy(dmaList[0].start, dmaList[0].end, vertexData) >> 2;
+
+                temp2 = ((dmaList[1].end - dmaList[1].start) >> 2);
+                q = gEntityHeapBase - s3 * 4;
+                animData = q - temp2 * 4;
+                s3 += (u32)dma_copy(dmaList[1].start, dmaList[1].end, animData) >> 2;
+
+                entity_anim_make_vertex_pointers(bp, animData, vertexData);
+            }
+        }
+    }
+}
+
+void entity_anim_make_vertex_pointers(EntityBlueprint* entityData, void* baseAddr, Vtx* baseVtx) {
+    StaticAnimatorNode* node;
+    s32* ptr = (s32)baseAddr + (s32)entityData->modelAnimationNodes;
+
+    while (TRUE) {
+        if (*ptr == -1) {
+            *ptr = 0;
+            return;
+        }
+        node = (s32)baseAddr + ((*ptr) & 0xFFFF);
+        *ptr++ = node;
+
+        if (node->displayList != -1) {
+            node->displayList = (s32)baseVtx + ((s32)(node->displayList) & 0xFFFF);
+        } else {
+            node->displayList = NULL;
+        }
+
+        if (node->sibling != -1) {
+            node->sibling = (s32)baseAddr + ((s32)(node->sibling) & 0xFFFF);
+        } else {
+            node->sibling = NULL;
+        }
+
+        if (node->child != -1) {
+            node->child = (s32)baseAddr + ((s32)(node->child) & 0xFFFF);
+        } else {
+            node->child = NULL;
+        }
+
+        if (node->vtxList != -1) {
+            node->vtxList = (s32)baseVtx + ((s32)(node->vtxList) & 0xFFFFF);
+        } else {
+            node->vtxList = NULL;
+        }
+    }
+}
+
+s32 is_entity_data_loaded(Entity* entity, EntityBlueprint* entityData, s32* loadedStart, s32* loadedEnd) {
+    EntityBlueprint** blueprints;
+    s32 i;
+    s32 ret;
+    s32 size;
+    DmaEntry* entDmaList;
+
+    *loadedStart = 0;
+    *loadedEnd = 0;
+    ret = FALSE;
+
+    if (!gGameStatusPtr->isBattle) {
+        blueprints = wEntityBlueprint;
+    } else {
+        blueprints = bEntityBlueprint;
+    }
+
+    for (i = 0; i < MAX_ENTITIES; i++, blueprints++) {
+        EntityBlueprint* bp = *blueprints;
+        if (bp == NULL) {
+            blueprints[0] = entityData;
+            blueprints[1] = NULL;
+            ret = TRUE;
+            if (entityData->flags & ENTITY_FLAGS_HAS_ANIMATED_MODEL) {
+                s32 size;
+                entDmaList = entityData->dmaList;
+                size = (entDmaList[0].end - entDmaList[0].start) >> 2;
+                *loadedEnd = *loadedStart + size;
+            }
+            break;
+        } else {
+            DmaEntry* bpDmaList = bp->dmaList;
+            do {} while (0); // TODO find better match
+            entDmaList = entityData->dmaList;
+            if (bpDmaList == entDmaList) {
+                if (entityData->flags & ENTITY_FLAGS_HAS_ANIMATED_MODEL) {
+                    s32 size = (bpDmaList[0].end - bpDmaList[0].start) >> 2;
+                    *loadedEnd = *loadedStart + size;
+                }
+                break;
+            } else if (bp == entityData) {
+                if (bp->flags & ENTITY_FLAGS_HAS_ANIMATED_MODEL) {
+                    s32 size = (entDmaList[0].end - entDmaList[0].start) >> 2;
+                    *loadedEnd = *loadedStart + size;
+                }
+                break;
+            } else {
+                if (bp->flags & ENTITY_FLAGS_HAS_ANIMATED_MODEL) {
+                    s32 size = (bpDmaList[0].end - bpDmaList[0].start) >> 2;
+                    *loadedEnd = *loadedStart = *loadedStart + size;
+                    size = (bpDmaList[1].end - bpDmaList[1].start) >> 2;;
+                    *loadedStart = *loadedStart + size;
+                } else {
+                    *loadedStart += (bp->dma.end - bp->dma.start) >> 2;
+                }
+            }
+        }
+    }
+
+    return ret;
+}
 
 void load_simple_entity_data(Entity* entity, EntityBlueprint* entityData, s32 listIndex) {
     s32 loadedStart;
@@ -1832,7 +2081,7 @@ void load_simple_entity_data(Entity* entity, EntityBlueprint* entityData, s32 li
     u32 temp;
     s32 sizeTemp;
 
-    entity->vertexSegment = 10;
+    entity->vertexSegment = 0xA;
     if (!gGameStatusPtr->isBattle) {
         sizeTemp = wEntityBlueprintSize;
     } else {
@@ -1840,18 +2089,18 @@ void load_simple_entity_data(Entity* entity, EntityBlueprint* entityData, s32 li
     }
 
     if (is_entity_data_loaded(entity, entityData, &loadedStart, &loadedEnd)) {
-        if (sizeTemp + ((entityData->dmaEnd - entityData->dmaStart) >> 2) >= 0x5FFDU) {
+        if (sizeTemp + ((entityData->dma.end - entityData->dma.start) >> 2) > 0x5FFCU) {
             get_entity_type(entity->listIndex);
             get_entity_type(entity->listIndex);
             PANIC();
         }
-        entitySize = (entityData->dmaEnd - entityData->dmaStart) >> 2;
-        entity->vertexData = (gEntityHeapBase - (sizeTemp * 4)) - (entitySize * 4);
-        temp = dma_copy(entityData->dmaStart, entityData->dmaEnd, entity->vertexData);
+        entitySize = (entityData->dma.end - entityData->dma.start) >> 2;
+        entity->vertexData = gEntityHeapBase - sizeTemp * 4 - entitySize * 4;
+        temp = dma_copy(entityData->dma.start, entityData->dma.end, entity->vertexData);
         sizeTemp += temp / 4;
         get_entity_type(entity->listIndex);
     } else {
-        entitySize = (entityData->dmaEnd - entityData->dmaStart) >> 2;
+        entitySize = (entityData->dma.end - entityData->dma.start) >> 2;
         entity->vertexData = (gEntityHeapBase - (loadedStart * 4)) - (entitySize * 4);
         get_entity_type(entity->listIndex);
     }
@@ -1863,16 +2112,118 @@ void load_simple_entity_data(Entity* entity, EntityBlueprint* entityData, s32 li
     }
 }
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", load_split_entity_data);
+void load_split_entity_data(Entity* entity, EntityBlueprint* entityData, s32 listIndex) {
+    s32 s5 = FALSE;
+    s32 s2;
+    s32 loadedStart, loadedEnd;
+    s32 s0;
+    s32 v0, v00;
+    s32 renderCommandList;
+    s32 s22;
+    s32 s00;
+    s32 specialSize;
+    s32 dma1size;
+    s32 dma2size_1;
+    s32 dma2size_2;
+    s32 totalLoaded;
+    s32 totalLoadedBytes;
 
-s32 func_80111790(void) {
+    if (entityData->flags & ENTITY_FLAGS_HAS_ANIMATED_MODEL) {
+        DmaEntry* dmaList = entityData->dmaList;
+        entity->vertexSegment = 0xA;
+
+        switch (entityData->entityType) {
+            case ENTITY_TYPE_RESET_MUNCHLESIA:
+            case ENTITY_TYPE_MUNCHLESIA_ENVELOP:
+            case ENTITY_TYPE_MUNCHLESIA_CHEWING:
+            case ENTITY_TYPE_MUNCHLESIA_RESET1:
+                specialSize = 0x1000;
+                break;
+            case ENTITY_TYPE_MUNCHLESIA_GRAB:
+            case ENTITY_TYPE_MUNCHLESIA_BEGIN_CHEW:
+            case ENTITY_TYPE_MUNCHLESIA_SPIT_OUT:
+            case ENTITY_TYPE_MUNCHLESIA_RESET2:
+                specialSize = 0x2BC0;
+                break;
+            default:
+                specialSize = 0;
+                break;
+        }
+
+        if (specialSize != 0) {
+            if (entityData->entityType == ENTITY_TYPE_RESET_MUNCHLESIA) {
+                is_entity_data_loaded(entity, entityData, &loadedStart, &loadedEnd);
+            }
+            specialSize -= 0x1000;
+            dma1size = (u32)dma_copy(dmaList[0].start, dmaList[0].end, D_80151300 + specialSize * 4) / 4;
+            entity->vertexData = D_80151300 + specialSize * 4;
+            dma_copy(dmaList[1].start, dmaList[1].end, D_80151300 + specialSize * 4 + dma1size * 4);
+            s0 = D_80151300 + specialSize * 4 + dma1size * 4;
+            s5 = TRUE;
+        } else if (is_entity_data_loaded(entity, entityData, &loadedStart, &loadedEnd)) {
+            if (!gGameStatusPtr->isBattle) {
+                totalLoaded = wEntityBlueprintSize;
+            } else {
+                totalLoaded = bEntityBlueprintSize;
+            }
+
+            if ((totalLoaded + ((dmaList[0].end - dmaList[0].start) >> 2)) > 0x5FFCU) {
+                get_entity_type(entity->listIndex);
+                PANIC();
+            }
+
+            if ((totalLoaded + ((dmaList[1].end - dmaList[1].start) >> 2)) > 0x5FFCU) {
+                get_entity_type(entity->listIndex);
+                PANIC();
+            }
+
+            dma2size_1 = (u32)dma_copy(dmaList[0].start, dmaList[0].end, dmaList[0].start + ((gEntityHeapBase - totalLoaded * 4 - dmaList[0].end) >> 2) * 4) >> 2;
+            entity->vertexData = gEntityHeapBase - totalLoaded * 4 - dma2size_1 * 4;
+            totalLoaded += dma2size_1;
+
+            dma2size_2 = (u32)dma_copy(dmaList[1].start, dmaList[1].end, dmaList[1].start + ((gEntityHeapBase - totalLoaded * 4 - dmaList[1].end) >> 2) * 4) >> 2;
+            s0 = gEntityHeapBase - totalLoaded * 4 - dma2size_2 * 4;
+            totalLoaded += dma2size_2;
+            get_entity_type(entity->listIndex);
+
+            if (!gGameStatusPtr->isBattle) {
+                wEntityBlueprintSize = totalLoaded;
+            } else {
+                bEntityBlueprintSize = totalLoaded;
+            }
+            s5 = TRUE;
+        } else {
+            u32 temp = (dmaList[0].end - dmaList[0].start) >> 2;
+            entity->vertexData = gEntityHeapBase - loadedStart * 4 - temp * 4;
+            temp = (dmaList[1].end - dmaList[1].start) >> 2;
+            s0 = gEntityHeapBase - loadedEnd * 4 - temp * 4;
+            get_entity_type(entity->listIndex);
+        }
+    } else {
+        entity->virtualModelIndex = create_model_animator(entityData->renderCommandList);
+        load_model_animator_tree(entity->virtualModelIndex, entityData->modelAnimationNodes);
+        update_model_animator(entity->virtualModelIndex);
+        return;
+    }
+    renderCommandList = entityData->renderCommandList;
+    s22 = s0 + (s32)entityData->modelAnimationNodes;
+    if (s5) {
+        entity_anim_make_vertex_pointers(entityData, s0, entity->vertexData);
+    }
+    entity->virtualModelIndex = create_mesh_animator(renderCommandList, s0);
+    load_mesh_animator_tree(entity->virtualModelIndex, s22);
+    update_model_animator(entity->virtualModelIndex);
+    entity->flags |= ENTITY_FLAGS_HAS_ANIMATED_MODEL;
+}
+
+s32 func_80111790(EntityBlueprint* data) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(*gCurrentEntityListPtr); i++) {
         Entity* entity = (*gCurrentEntityListPtr)[i];
 
-        if (entity != NULL && entity->blueprint->dmaStart != NULL) {
-            if (entity->blueprint->dmaStart == entity->blueprint) {
+        if (entity != NULL && entity->blueprint->dma.start != NULL) {
+            if (entity->blueprint->dma.start == entity->blueprint) {
                 return TRUE;
             }
         }
@@ -1880,7 +2231,40 @@ s32 func_80111790(void) {
     return FALSE;
 }
 
-INCLUDE_ASM(void, "a5dd0_len_114e0", entity_free_static_data, EntityBlueprint* data);
+//INCLUDE_ASM(void, "a5dd0_len_114e0", entity_free_static_data, EntityBlueprint* data);
+void entity_free_static_data(EntityBlueprint* data) {
+    s32 i;
+    s32 size;
+    EntityBlueprint* bp;
+
+    for (i = 0; i < 30; i++) {
+        bp = wEntityBlueprint[i];
+        if (bp == NULL) {
+            break;
+        }
+    }
+
+    if (i < 30) {
+        bp = wEntityBlueprint[i - 1];
+        if (bp == data) {
+            if (bp->flags & ENTITY_FLAGS_HAS_ANIMATED_MODEL) {
+                DmaEntry* dmaList = bp->dmaList;
+                size = ((dmaList[0].end - dmaList[0].start) >> 2);
+                size += ((dmaList[1].end - dmaList[1].start) >> 2);
+                if (!func_80111790(bp)) {
+                    wEntityBlueprint[i - 1] = NULL;
+                    wEntityBlueprintSize -= size;
+                }
+            } else {
+                size = (bp->dma.end - bp->dma.start) >> 2;
+                if (!func_80111790(bp)) {
+                    wEntityBlueprint[i - 1] = NULL;
+                    wEntityBlueprintSize -= size;
+                }
+            }
+        }
+    }
+}
 
 s32 create_entity(EntityBlueprint* bp, ...) {
     va_list ap;
@@ -1973,7 +2357,7 @@ s32 create_entity(EntityBlueprint* bp, ...) {
     entity->vertexData = NULL;
 
     if (!(bp->flags & ENTITY_FLAGS_HAS_ANIMATED_MODEL)) {
-        if (bp->dmaStart != 0) {
+        if (bp->dma.start != 0) {
             load_simple_entity_data(entity, bp, listIndex);
         }
         if (bp->renderCommandList != NULL) {
