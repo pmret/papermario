@@ -190,7 +190,7 @@ s32 player_raycast_down(f32* x, f32* y, f32* z, f32* length) {
     if (entityID >= 0) {
         entity = get_entity_by_index(entityID);
         if (entity->alpha < 255) {
-            entity->unk_07 = 4;
+            entity->collisionTimer = 4;
             entity->flags |= ENTITY_FLAGS_CONTINUOUS_COLLISION;
         } else {
             ret = entityID | COLLISION_WITH_ENTITY_BIT;
@@ -420,7 +420,7 @@ s32 player_raycast_general(s32 mode, f32 startX, f32 startY, f32 startZ, f32 dir
     if (entityID >= 0) {
         entity = get_entity_by_index(entityID);
         if (entity->alpha < 255) {
-            entity->unk_07 = 0;
+            entity->collisionTimer = 0;
             entity->flags |= ENTITY_FLAGS_CONTINUOUS_COLLISION;
         } else {
             ret = entityID | COLLISION_WITH_ENTITY_BIT;

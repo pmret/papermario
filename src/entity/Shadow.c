@@ -1,4 +1,5 @@
 #include "common.h"
+#include "entity_script.h"
 
 void entity_Shadow_init(Shadow* shadow) {
     shadow->scale.x = 0.1f;

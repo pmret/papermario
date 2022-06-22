@@ -626,9 +626,9 @@ typedef struct Entity {
     /* 0x04 */ u8 listIndex;
     /* 0x05 */ s8 unk_05;
     /* 0x06 */ u8 collisionFlags;
-    /* 0x07 */ s8 unk_07;
+    /* 0x07 */ s8 collisionTimer;
     /* 0x08 */ u8 unk_08;
-    /* 0x09 */ u8 hasEntityScript;
+    /* 0x09 */ u8 scriptDelay;
     /* 0x0A */ u8 type;
     /* 0x0B */ u8 alpha;
     /* 0x0C */ Vec3s aabb;

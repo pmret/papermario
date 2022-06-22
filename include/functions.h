@@ -30,7 +30,7 @@ void* _heap_malloc_tail(HeapNode* head, u32 size);
 u32 _heap_free(HeapNode* heapNodeList, void* addrToFree);
 void* _heap_realloc(HeapNode* heapNodeList, void* addr, u32 newSize);
 HeapNode* _heap_create(HeapNode* addr, u32 size);
-s32 dma_copy(Addr romStart, Addr romEnd, void* vramDest);
+u32 dma_copy(Addr romStart, Addr romEnd, void* vramDest);
 f32 rand_float(void);
 void copy_matrix(Matrix4f src, Matrix4f dest);
 

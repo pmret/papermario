@@ -868,7 +868,7 @@ segments:
     - [0x10A230, c, entity/BlueWarpPipe]
     - [0x10A8D0, c, entity/Signpost]
     - [0x10A9F0, .data, entity/Shadow]
-    - [0x10B1B0, .data, entity/BlockData2]
+    - [0x10B1B0, .data, entity/SaveBlock]
     - [0x10B2C0, .data, entity/BlockData3]
     - [0x10B4C0, .data, entity/104730]
     - [0x10B610, .data, entity/BlockData5]

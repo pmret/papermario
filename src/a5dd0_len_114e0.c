@@ -2,6 +2,7 @@
 #include "model.h"
 #include "ld_addrs.h"
 #include "stdlib/stdarg.h"
+#include "entity_script.h"
 
 typedef struct GameMode {
     /* 0x00 */ u16 flags;
@@ -945,7 +946,6 @@ Gfx D_8014C160[] = {
     gsSPEndDisplayList(),
 };
 
-/*
 s32 mdl_renderTaskBasePriorities[RENDER_MODE_COUNT] = {
     [RENDER_MODE_SURF_SOLID_AA_ZB_LAYER0]   = -100000,
     [RENDER_MODE_SURFACE_OPA]               = 1000000,
@@ -996,58 +996,7 @@ s32 mdl_renderTaskBasePriorities[RENDER_MODE_COUNT] = {
     [RENDER_MODE_CLOUD]                     = 8000000,
     [RENDER_MODE_CLOUD_NO_ZB]               =  700000,
 };
-*/
 
-s32 mdl_renderTaskBasePriorities[RENDER_MODE_COUNT] = {
--100000,
-1000000,
-1000000,
-1000000,
-      0,
-1000000,
-1000000,
-1000000,
-      0,
-1000000,
-1000000,
-1000000,
-      0,
-1000000,
-1000000,
-1000000,
-      0,
-8000000,
-8000000,
-8000000,
-      0,
-8000000,
-7500000,
-7500000,
-7500000,
-      0,
-7000000,
-7000000,
-7000000,
-7000000,
-6500000,
-6500000,
-6500000,
-      0,
-6000000,
-6000000,
-6000000,
-      0,
-5500000,
-5500000,
-5500000,
-8000000,
-4000000,
-4250000,
-4500000,
-4500000,
-8000000,
- 700000,
-};
 
 s8 D_8014C248[] = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, };
 
@@ -1055,7 +1004,7 @@ s8 D_8014C248[] = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, };
 extern s32 B_801512B0[2];
 extern ModelCustomGfxBuilderList* gCurrentCustomModelGfxBuildersPtr;
 extern s32 D_801512BC;
-extern s32 D_801512C0;
+extern s32 entity_numEntities;
 extern s32 gEntityHeapBase;
 extern s32 gHudElementCacheTableRaster;
 extern ModelList* gCurrentModels;
@@ -1068,10 +1017,10 @@ extern s32 gLastCreatedEntityIndex;
 extern s8 B_801512F0[0x410];
 extern GameMode gMainGameState[2]; // TODO rename
 
-extern s32 D_80151300;
-extern s32 D_80151324;
+extern s32 gEntityHeapBottom;
+extern s32 entity_numShadows;
 extern s32 D_8015132C;
-extern s32 D_80151330;
+extern s32 entity_updateCounter;
 
 extern s32 wEntityBlueprintSize;
 extern s32 bEntityBlueprintSize;
@@ -1154,14 +1103,14 @@ void update_entities(void) {
     s32 i;
 
     D_801512BC = 0;
-    D_801512C0 = 0;
-    D_80151330++;
+    entity_numEntities = 0;
+    entity_updateCounter++;
 
     for (i = 0; i < MAX_ENTITIES; i++) {
         Entity* entity = get_entity_by_index(i);
 
         if (entity != NULL) {
-            D_801512C0++;
+            entity_numEntities++;
 
             if (!(entity->flags & ENTITY_FLAGS_SKIP_UPDATE)) {
                 if (entity->flags & ENTITY_FLAGS_BOUND_SCRIPT_DIRTY) {
@@ -1193,26 +1142,26 @@ void update_entities(void) {
                     }
                 }
 
-                if (entity->unk_07 == 0) {
+                if (entity->collisionTimer == 0) {
                     entity->collisionFlags = entity_get_collision_flags(entity);
 
                     if (entity->collisionFlags) {
-                        EntityCallback entityCallback = entity->blueprint->fpHandleCollision;
+                        EntityCallback handleCollision = entity->blueprint->fpHandleCollision;
 
-                        if (entityCallback != NULL && entityCallback(entity) != 0) {
-                            entity->unk_07 = 0xA;
+                        if (handleCollision != NULL && handleCollision(entity) != 0) {
+                            entity->collisionTimer = 10;
                             entity->flags |= ENTITY_FLAGS_DETECTED_COLLISION;
                         }
                     }
                 } else {
-                    entity->unk_07--;
+                    entity->collisionTimer--;
                     if (entity->flags & ENTITY_FLAGS_CONTINUOUS_COLLISION) {
-                        if (entity->unk_07 == 0) {
+                        if (entity->collisionTimer == 0) {
                             entity->flags &= ~(ENTITY_FLAGS_SKIP_UPDATE_INVERSE_ROTATION_MATRIX | ENTITY_FLAGS_CONTINUOUS_COLLISION);
                         } else {
                             entity->flags |= ENTITY_FLAGS_SKIP_UPDATE_INVERSE_ROTATION_MATRIX;
                         }
-                    } else if (entity->unk_07 == 0) {
+                    } else if (entity->collisionTimer == 0) {
                         entity->flags &= ~ENTITY_FLAGS_DETECTED_COLLISION;
                         entity->flags &= ~ENTITY_FLAGS_BLOCK_BEING_HIT;
                         entity->collisionFlags = 0;
@@ -1229,9 +1178,9 @@ void update_entities(void) {
                     }
 
                     if (entity->scriptReadPos != NULL) {
-                        if (entity->hasEntityScript) {
-                            entity->hasEntityScript--;
-                            if (entity->hasEntityScript == 0) {
+                        if (entity->scriptDelay != 0) {
+                            entity->scriptDelay--;
+                            if (entity->scriptDelay == 0) {
                                 while (step_entity_commandlist(entity));
                             }
                         }
@@ -1274,13 +1223,13 @@ void update_entities(void) {
 void update_shadows(void) {
     s32 i;
 
-    D_80151324 = 0;
+    entity_numShadows = 0;
 
     for (i = 0; i < MAX_SHADOWS; i++) {
         Shadow* shadow = get_shadow_by_index(i);
 
         if (shadow != NULL) {
-            D_80151324++;
+            entity_numShadows++;
 
             if (!(shadow->flags & SHADOW_FLAGS_40000000)) {
                 if (shadow->flags & SHADOW_FLAGS_ALIGNED_TO_CAMERA) {
@@ -1305,7 +1254,7 @@ void update_shadows(void) {
 
 void set_entity_commandlist(Entity* entity, s32* entityScript) {
     entity->scriptReadPos = entityScript;
-    entity->hasEntityScript = TRUE;
+    entity->scriptDelay = TRUE;
     entity->savedReadPos[0] = entity->scriptReadPos;
 }
 
@@ -1316,58 +1265,58 @@ s32 step_entity_commandlist(Entity* entity) {
     s32 (*tempfunc)(Entity*);
 
     switch (*args++) {
-        case 0:
-            entity->hasEntityScript = -1;
+        case ENTITY_SCRIPT_OP_End:
+            entity->scriptDelay = -1;
             entity->updateScriptCallback = NULL;
             entity->scriptReadPos = NULL;
             ret = FALSE;
             break;
-        case 1:
+        case ENTITY_SCRIPT_OP_Jump:
             entity->scriptReadPos = *args;
-            entity->hasEntityScript = 1;
+            entity->scriptDelay = 1;
             entity->savedReadPos[0] = entity->scriptReadPos;
             ret = TRUE;
             break;
-        case 2:
+        case ENTITY_SCRIPT_OP_Call:
             tempfunc = *args++;
             entity->scriptReadPos = args;
             (tempfunc)(entity);
             ret = TRUE;
             break;
-        case 3:
-            entity->hasEntityScript = *args++;
+        case ENTITY_SCRIPT_OP_SetCallback:
+            entity->scriptDelay = *args++;
             entity->updateScriptCallback = (s32 (*)(Entity*)) *args++;
             entity->scriptReadPos = args++;
             ret = FALSE;
             break;
-        case 4:
+        case ENTITY_SCRIPT_OP_Goto:
             entity->scriptReadPos = entity->savedReadPos[*args];
             ret = TRUE;
             break;
-        case 5:
+        case ENTITY_SCRIPT_OP_Label:
             labelId = *args++;
             entity->savedReadPos[labelId] = args;
             entity->scriptReadPos = args;
             ret = TRUE;
             break;
-        case 6:
+        case ENTITY_SCRIPT_OP_RestartBoundScript:
             if (entity->boundScriptBytecode != NULL) {
                 entity->flags |= ENTITY_FLAGS_BOUND_SCRIPT_DIRTY;
             }
             entity->scriptReadPos = args++;
             ret = TRUE;
             break;
-        case 7:
+        case ENTITY_SCRIPT_OP_SetFlags:
             entity->flags |= *args++;
             entity->scriptReadPos = args++;
             ret = TRUE;
             break;
-        case 8:
+        case ENTITY_SCRIPT_OP_ClearFlags:
             entity->flags &= ~*args++;
             entity->scriptReadPos = args++;
             ret = TRUE;
             break;
-        case 9:
+        case ENTITY_SCRIPT_OP_PlaySound:
             sfx_play_sound(*args++);
             entity->scriptReadPos = args++;
             ret = TRUE;
@@ -1826,7 +1775,7 @@ void entity_set_render_script(Entity* entity, u32* commandList) {
 }
 
 void func_80110BF8(Entity* entity) {
-    entity->unk_07 = 0;
+    entity->collisionTimer = 0;
     entity->flags &= ~ENTITY_FLAGS_DETECTED_COLLISION;
 }
 
@@ -1857,9 +1806,9 @@ void clear_entity_data(s32 arg0) {
     s32 i;
 
     D_801516FC = 1;
-    D_801512C0 = 0;
-    D_80151324 = 0;
-    D_80151330 = 0;
+    entity_numEntities = 0;
+    entity_numShadows = 0;
+    entity_updateCounter = 0;
     D_80151304 = 0;
 
     if (!gGameStatusPtr->isBattle) {
@@ -1887,11 +1836,11 @@ void clear_entity_data(s32 arg0) {
     }
 
     if (!gGameStatusPtr->isBattle) {
-        D_80151300 = 0x80250000;
+        gEntityHeapBottom = 0x80250000;
         gEntityHeapBase = 0x80267FF0;
     } else {
-        D_80151300 = &D_801A7000;
-        gEntityHeapBase = D_80151300 + 0x3000;
+        gEntityHeapBottom = &D_801A7000;
+        gEntityHeapBase = gEntityHeapBottom + 0x3000;
     }
 
     gCurrentEntityListPtr = get_entity_list();
@@ -1908,7 +1857,7 @@ void clear_entity_data(s32 arg0) {
 
 void func_80110E58(void) {
     if (!gGameStatusPtr->isBattle) {
-        D_80151300 = 0x80250000;
+        gEntityHeapBottom = 0x80250000;
         gEntityHeapBase = 0x80267FF0;
         func_80110F10();
     } else {
@@ -1917,20 +1866,20 @@ void func_80110E58(void) {
         for (i = 0; i < 4; i++) {
             bEntityBlueprint[i] = 0;
         }
-        D_80151300 = &D_801A7000;
-        gEntityHeapBase = D_80151300 + 0x3000;
+        gEntityHeapBottom = &D_801A7000;
+        gEntityHeapBase = gEntityHeapBottom + 0x3000;
     }
     gCurrentEntityListPtr = get_entity_list();
     gCurrentShadowListPtr = get_shadow_list();
-    D_801512C0 = 0;
-    D_80151324 = 0;
+    entity_numEntities = 0;
+    entity_numShadows = 0;
 }
 
 void func_80110F10(void) {
     s32 i;
-    s32 s3 = 0;
+    s32 totalSize = 0;
     s32 temp1;
-    s32 temp2;
+    s32 dataLength;
     s32 vertexData;
     s32 animData;
 
@@ -1942,31 +1891,31 @@ void func_80110F10(void) {
 
         if (!(bp->flags & ENTITY_FLAGS_HAS_ANIMATED_MODEL)) {
             s32 temp4;
-            temp2 = ((bp->dma.end - bp->dma.start) >> 2);
-            temp4 = gEntityHeapBase - s3 * 4 - temp2 * 4;
+            dataLength = ((bp->dma.end - bp->dma.start) >> 2);
+            temp4 = gEntityHeapBase - totalSize * 4 - dataLength * 4;
             animData = bp->dma.end; // TODO find better match
-            s3 += (u32)dma_copy(bp->dma.start, animData, temp4) >> 2;
+            totalSize += dma_copy(bp->dma.start, animData, temp4) >> 2;
         } else {
             DmaEntry* dmaList = bp->dmaList;
 
             if (bp->entityType == ENTITY_TYPE_RESET_MUNCHLESIA) {
-                vertexData = D_80151300;
-                temp1 = (u32)dma_copy(dmaList[0].start, dmaList[0].end, vertexData) >> 2;
-                dma_copy(dmaList[1].start, dmaList[1].end, D_80151300 + temp1 * 4) >> 2;
-                entity_anim_make_vertex_pointers(bp, D_80151300 + temp1 * 4, vertexData);
+                vertexData = gEntityHeapBottom;
+                temp1 = dma_copy(dmaList[0].start, dmaList[0].end, vertexData) >> 2;
+                dma_copy(dmaList[1].start, dmaList[1].end, gEntityHeapBottom + temp1 * 4) >> 2;
+                entity_anim_make_vertex_pointers(bp, gEntityHeapBottom + temp1 * 4, vertexData);
             } else {
                 s32 temp5;
                 s32 q;
 
-                temp2 = ((dmaList[0].end - dmaList[0].start) >> 2);
-                q = gEntityHeapBase - s3 * 4;
-                vertexData = q - temp2 * 4;
-                s3 += (u32)dma_copy(dmaList[0].start, dmaList[0].end, vertexData) >> 2;
+                dataLength = ((dmaList[0].end - dmaList[0].start) >> 2);
+                q = gEntityHeapBase - totalSize * 4;
+                vertexData = q - dataLength * 4;
+                totalSize += dma_copy(dmaList[0].start, dmaList[0].end, vertexData) >> 2;
 
-                temp2 = ((dmaList[1].end - dmaList[1].start) >> 2);
-                q = gEntityHeapBase - s3 * 4;
-                animData = q - temp2 * 4;
-                s3 += (u32)dma_copy(dmaList[1].start, dmaList[1].end, animData) >> 2;
+                dataLength = ((dmaList[1].end - dmaList[1].start) >> 2);
+                q = gEntityHeapBase - totalSize * 4;
+                animData = q - dataLength * 4;
+                totalSize += dma_copy(dmaList[1].start, dmaList[1].end, animData) >> 2;
 
                 entity_anim_make_vertex_pointers(bp, animData, vertexData);
             }
@@ -2155,10 +2104,10 @@ void load_split_entity_data(Entity* entity, EntityBlueprint* entityData, s32 lis
                 is_entity_data_loaded(entity, entityData, &loadedStart, &loadedEnd);
             }
             specialSize -= 0x1000;
-            dma1size = (u32)dma_copy(dmaList[0].start, dmaList[0].end, D_80151300 + specialSize * 4) / 4;
-            entity->vertexData = D_80151300 + specialSize * 4;
-            dma_copy(dmaList[1].start, dmaList[1].end, D_80151300 + specialSize * 4 + dma1size * 4);
-            s0 = D_80151300 + specialSize * 4 + dma1size * 4;
+            dma1size = dma_copy(dmaList[0].start, dmaList[0].end, gEntityHeapBottom + specialSize * 4) / 4;
+            entity->vertexData = gEntityHeapBottom + specialSize * 4;
+            dma_copy(dmaList[1].start, dmaList[1].end, gEntityHeapBottom + specialSize * 4 + dma1size * 4);
+            s0 = gEntityHeapBottom + specialSize * 4 + dma1size * 4;
             s5 = TRUE;
         } else if (is_entity_data_loaded(entity, entityData, &loadedStart, &loadedEnd)) {
             if (!gGameStatusPtr->isBattle) {
@@ -2177,11 +2126,11 @@ void load_split_entity_data(Entity* entity, EntityBlueprint* entityData, s32 lis
                 PANIC();
             }
 
-            dma2size_1 = (u32)dma_copy(dmaList[0].start, dmaList[0].end, dmaList[0].start + ((gEntityHeapBase - totalLoaded * 4 - dmaList[0].end) >> 2) * 4) >> 2;
+            dma2size_1 = dma_copy(dmaList[0].start, dmaList[0].end, dmaList[0].start + ((gEntityHeapBase - totalLoaded * 4 - dmaList[0].end) >> 2) * 4) >> 2;
             entity->vertexData = gEntityHeapBase - totalLoaded * 4 - dma2size_1 * 4;
             totalLoaded += dma2size_1;
 
-            dma2size_2 = (u32)dma_copy(dmaList[1].start, dmaList[1].end, dmaList[1].start + ((gEntityHeapBase - totalLoaded * 4 - dmaList[1].end) >> 2) * 4) >> 2;
+            dma2size_2 = dma_copy(dmaList[1].start, dmaList[1].end, dmaList[1].start + ((gEntityHeapBase - totalLoaded * 4 - dmaList[1].end) >> 2) * 4) >> 2;
             s0 = gEntityHeapBase - totalLoaded * 4 - dma2size_2 * 4;
             totalLoaded += dma2size_2;
             get_entity_type(entity->listIndex);
@@ -2231,7 +2180,6 @@ s32 func_80111790(EntityBlueprint* data) {
     return FALSE;
 }
 
-//INCLUDE_ASM(void, "a5dd0_len_114e0", entity_free_static_data, EntityBlueprint* data);
 void entity_free_static_data(EntityBlueprint* data) {
     s32 i;
     s32 size;
@@ -2330,12 +2278,12 @@ s32 create_entity(EntityBlueprint* bp, ...) {
     entity->updateMatrixOverride = NULL;
     entity->blueprint = bp;
     entity->scriptReadPos = bp->updateEntityScript;
-    entity->hasEntityScript = entity->scriptReadPos != NULL;
+    entity->scriptDelay = entity->scriptReadPos != NULL;
     entity->savedReadPos[0] = bp->updateEntityScript;
     entity->updateScriptCallback = NULL;
     entity->flags = bp->flags | 0x80000000;
     entity->collisionFlags = 0;
-    entity->unk_07 = 0;
+    entity->collisionTimer = 0;
     entity->renderSetupFunc = NULL;
     entity->position.x = x;
     entity->position.y = y;
