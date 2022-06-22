@@ -26198,7 +26198,6 @@ flo_14_pad_2BF4 = 0x80242BF4; // type:data
 D_80242C00 = 0x80242C00; // type:data
 flo_08_pad_2EA8 = 0x80242EA8; // type:data
 D_80242FB0 = 0x80242FB0; // type:data
-D_80243090 = 0x80243090; // type:data
 dgb_03_pad_30D8 = 0x802430D8; // type:data
 flo_11_pad_30EC = 0x802430EC; // type:data
 D_80243178 = 0x80243178; // type:data
