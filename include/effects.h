@@ -980,7 +980,7 @@ void fx_big_snowflakes(s32, f32, f32, f32);
 EffectInstance* fx_debuff(s32, f32, f32, f32);
 void fx_green_impact(s32, f32, f32, f32, f32);
 EffectInstance* fx_radial_shimmer(s32, f32, f32, f32, f32, s32);
-EffectInstance* fx_ending_decals(s32, f32, f32, f32, f32, s32*);
+EffectInstance* fx_ending_decals(s32, f32, f32, f32, f32, EffectInstance**);
 EffectInstance* fx_light_rays(s32, f32, f32, f32, f32, s32*);
 EffectInstance* fx_lightning(s32, f32, f32, f32, f32, f32);
 EffectInstance* fx_fire_breath(s32, f32, f32, f32, f32, f32, f32, s32, s32, s32);

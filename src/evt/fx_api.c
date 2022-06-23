@@ -41,11 +41,11 @@ ApiStatus func_802D7690(Evt* script, s32 isInitialCall) {
     s32 duration = evt_get_variable(script, *args++);
     f32 offsetX, offsetY, offsetZ;
     f32 sinA, cosA;
-    
+
     if (isInitialCall) {
         script->functionTemp[0] = 0;
     }
-    
+
     offsetX = rand_int(10) - 5;
     offsetZ = rand_int(10) - 5;
     offsetY = -2.0f - ((SQ(offsetX) + SQ(offsetZ)) / 5.0f);
@@ -80,7 +80,7 @@ ApiStatus ShowEmote(Evt* script, s32 isInitialCall) {
     Npc* npc;
     s32 emoteHandle;
     f32 x, y, z, r;
-    
+
     switch (emoterType) {
         case EMOTER_PLAYER:
             // show emote from player
@@ -220,12 +220,12 @@ ApiStatus ShowSweat(Evt* script) {
 
     Npc* npc;
     f32 x, y, z, r;
-    
+
     switch (emoterType) {
         case EMOTER_PLAYER:
             x = gPlayerStatus.position.x;
             y = gPlayerStatus.position.y + (gPlayerStatus.colliderHeight * 2) / 3;
-            z = gPlayerStatus.position.z;    
+            z = gPlayerStatus.position.z;
             r = gPlayerStatus.colliderHeight / 3;
             break;
         case EMOTER_NPC:
@@ -245,7 +245,7 @@ ApiStatus ShowSweat(Evt* script) {
             r = radius;
             break;
     }
-    
+
     fx_sweat(type, x, y, z, r, pitch, duration);
     return ApiStatus_DONE2;
 }
@@ -253,7 +253,7 @@ ApiStatus ShowSweat(Evt* script) {
 ApiStatus ShowSleepBubble(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 npcID = evt_get_variable(script, *args++);
-    s32 type = evt_get_variable(script, *args++); 
+    s32 type = evt_get_variable(script, *args++);
     f32 pitch = evt_get_float_variable(script, *args++);
     s32 emoterType = evt_get_variable(script, *args++);
     f32 posX = evt_get_float_variable(script, *args++);
@@ -264,8 +264,8 @@ ApiStatus ShowSleepBubble(Evt* script, s32 isInitialCall) {
 
     Npc* npc;
     f32 x, y, z, r;
-    s32 effectHandle;
-    
+    EffectInstance* effectHandle;
+
     switch (emoterType) {
         case EMOTER_PLAYER:
             x = gPlayerStatus.position.x;
@@ -292,7 +292,7 @@ ApiStatus ShowSleepBubble(Evt* script, s32 isInitialCall) {
     }
 
     fx_sleep_bubble(type, x, y, z, r, pitch, &effectHandle);
-    evt_set_variable(script, outVar, effectHandle);
+    evt_set_variable(script, outVar, (s32)effectHandle);
     return ApiStatus_DONE2;
 }
 
