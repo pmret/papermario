@@ -183,6 +183,7 @@ s32 dispatch_damage_event_actor_0(Actor* actor, s32 damageAmount, s32 event);
 // Text
 MessagePrintState* msg_get_printer_for_msg(s32 msgID, s32* a1);
 void msg_printer_set_origin_pos(MessagePrintState* msgPrintState, s32 x, s32 y);
+s32 msg_printer_load_msg(s32 msgID, MessagePrintState* printer);
 
 void get_screen_coords(s32 camID, f32 x, f32 y, f32 z, s32* screenX, s32* screenY, s32* screenZ);
 

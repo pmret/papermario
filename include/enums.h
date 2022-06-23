@@ -558,6 +558,7 @@ enum SoundIDs {
     SOUND_14F                       = 0x0000014F,
     SOUND_150                       = 0x00000150,
     SOUND_151                       = 0x00000151,
+    SOUND_152                       = 0x00000152,
     SOUND_SEARCH_BUSH               = 0x00000153,
     SOUND_158                       = 0x00000158,
     SOUND_162                       = 0x00000162,

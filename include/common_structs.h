@@ -448,6 +448,20 @@ typedef struct SwitchData {
     /* 0x188 */ f32 fragmentPosZ[24];
 } SwitchData;
 
+typedef struct RealSwitchData {
+    /* 0x000 */ f32 fallVelocity;
+    /* 0x004 */ f32 deltaScaleX;
+    /* 0x008 */ f32 deltaScaleY;
+    /* 0x00C */ char unk_0C[4];
+    /* 0x010 */ s8 animStateScaleX;
+    /* 0x011 */ s8 animStateScaleY;
+    /* 0x014 */ Vec3f baseScale;
+    /* 0x020 */ u16 areaFlagIndex;
+    /* 0x022 */ s16 greenMotionTimer;
+    /* 0x024 */ s16 scaleAnimTimer;
+    /* 0x028 */ struct Entity* linkedSwitch;
+} RealSwitchData; // size = 0x2C
+
 // from 104940_len_dc0, size unknown
 // appears to belong to the hammer blocks(?)
 typedef struct BlockData {
@@ -609,14 +623,13 @@ typedef struct EntityBlueprint {
     /* 0x02 */ u16 typeDataSize;
     /* 0x04 */ UNK_PTR renderCommandList;
     /* 0x08 */ UNK_PTR modelAnimationNodes;
-    /* 0x0C */ EntityCallback(fpInit);
+    /* 0x0C */ void (*fpInit)(struct Entity*);
     /* 0x10 */ UNK_PTR updateEntityScript;
     /* 0x14 */ EntityCallback fpHandleCollision;
     /* 0x18 */ union {
                 DmaEntry dma;
                 DmaEntry* dmaList;
                };
-    /* 0x1C */ //s32 dmaEnd;
     /* 0x20 */ u8 entityType;
     /* 0x21 */ u8 aabbSize[3];
 } EntityBlueprint; // size = 0x24

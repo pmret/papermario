@@ -1,14 +1,19 @@
 #include "common.h"
 #include "effects.h"
+#include "ld_addrs.h"
+#include "entity_script.h"
 
 #define REFLECTED_SWITCH_HIDDEN 1
 #define REFLECTED_SWITCH_LINKED 2
 
-void entity_shattering_init_pieces(Entity* entity, void* arg1, void* arg2);
+extern Gfx Entity_RedSwitch_Render[];
+extern Gfx D_0A000740[];
+extern Gfx D_0A000EE8[];
+extern Gfx D_0A000EF8[];
 
 void entity_GreenStompSwitch_idle(Entity* entity) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    SwitchData* data = entity->dataBuf.swtch;
+    RealSwitchData* data = entity->dataBuf.swtch;
 
     if (entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_FLOOR) {
         if ((playerStatus->actionState == ACTION_STATE_GROUND_POUND)
@@ -20,7 +25,7 @@ void entity_GreenStompSwitch_idle(Entity* entity) {
 }
 
 void entity_GreenStompSwitch_retract(Entity* entity) {
-    SwitchData* data = entity->dataBuf.swtch;
+    RealSwitchData* data = entity->dataBuf.swtch;
     u16 curTime = data->greenMotionTimer--;
 
     if (curTime != 0) {
@@ -33,7 +38,7 @@ void entity_GreenStompSwitch_retract(Entity* entity) {
 }
 
 void entity_GreenStompSwitch_extend(Entity* entity) {
-    SwitchData* data = entity->dataBuf.swtch;
+    RealSwitchData* data = entity->dataBuf.swtch;
     u16 curTime = data->greenMotionTimer--;
 
     if (curTime != 0) {
@@ -45,7 +50,7 @@ void entity_GreenStompSwitch_extend(Entity* entity) {
 }
 
 void entity_switch_fall_down(Entity* entity) {
-    SwitchData* data = entity->dataBuf.swtch;
+    RealSwitchData* data = entity->dataBuf.swtch;
     f32 hitDepth = 10.0f;
     f32 x = entity->position.x;
     f32 y = entity->position.y;
@@ -79,7 +84,7 @@ void entity_HugeBlueSwitch_idle(Entity* entity) {
 }
 
 void entity_small_switch_idle(Entity* entity) {
-    SwitchData* data = entity->dataBuf.swtch;
+    RealSwitchData* data = entity->dataBuf.swtch;
     PlayerStatus* playerStatus = &gPlayerStatus;
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
 
@@ -109,8 +114,8 @@ void entity_small_switch_idle(Entity* entity) {
         return;
     }
 
-    if (!(entity->collisionFlags & 1)) {
-        if (!(entity->collisionFlags & 0x80)) {
+    if (!(entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_FLOOR)) {
+        if (!(entity->collisionFlags & ENTITY_COLLISION_BLOCK_HIT)) {
             return;
         }
     }
@@ -125,25 +130,25 @@ void entity_small_switch_idle(Entity* entity) {
 }
 
 void entity_RedSwitch_wait_and_reset(Entity* entity) {
-    if (!(entity->collisionFlags & 1)) {
+    if (!(entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_FLOOR)) {
         exec_entity_commandlist(entity);
     }
 }
 
 void entity_base_switch_anim_init(Entity* entity) {
-    SwitchData* temp = entity->dataBuf.swtch;
+    RealSwitchData* data = entity->dataBuf.swtch;
 
-    temp->fallVelocity = 1.0f;
-    temp->deltaScaleX = 0.1f;
-    temp->deltaScaleY = -0.1f;
-    temp->animStateScaleX = 0;
-    temp->animStateScaleY = 0;
+    data->fallVelocity = 1.0f;
+    data->deltaScaleX = 0.1f;
+    data->deltaScaleY = -0.1f;
+    data->animStateScaleX = 0;
+    data->animStateScaleY = 0;
 }
 
 s32 entity_RedSwitch_animate_scale(Entity* entity) {
     f32 temp_f4;
     f32 temp_f6;
-    SwitchData* data = entity->dataBuf.swtch;
+    RealSwitchData* data = entity->dataBuf.swtch;
     f32 phi_f4;
     s32 phi_s2 = 0;
 
@@ -310,7 +315,7 @@ s32 entity_RedSwitch_animate_scale(Entity* entity) {
 }
 
 void entity_base_switch_start_bound_script(Entity* entity) {
-    SwitchData* data = entity->dataBuf.swtch;
+    RealSwitchData* data = entity->dataBuf.swtch;
     set_area_flag(data->areaFlagIndex);
     entity_start_script(entity);
 }
@@ -318,7 +323,7 @@ void entity_base_switch_start_bound_script(Entity* entity) {
 void entity_base_switch_animate_scale(Entity* entity) {
     f32 temp_f4;
     f32 scaleChange;
-    SwitchData* data = entity->dataBuf.swtch;
+    RealSwitchData* data = entity->dataBuf.swtch;
     f32 phi_f4;
     s32 phi_s2 = 0;
 
@@ -456,7 +461,7 @@ void entity_base_switch_animate_scale(Entity* entity) {
 
 void entity_base_switch_init(Entity* entity) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    SwitchData* data = entity->dataBuf.swtch;
+    RealSwitchData* data = entity->dataBuf.swtch;
 
     playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_1000000;
     data->baseScale.x = 1.0f;
@@ -465,7 +470,7 @@ void entity_base_switch_init(Entity* entity) {
 }
 
 void entity_BlueSwitch_init(Entity* entity) {
-    SwitchData* data = entity->dataBuf.swtch;
+    RealSwitchData* data = entity->dataBuf.swtch;
 
     entity_base_switch_init(entity);
     if (CreateEntityVarArgBuffer[0] == REFLECTED_SWITCH_LINKED) {
@@ -485,7 +490,7 @@ void entity_BlueSwitch_init(Entity* entity) {
 }
 
 void entity_HugeBlueSwitch_init(Entity* entity) {
-    SwitchData* data;
+    RealSwitchData* data;
 
     entity_base_switch_init(entity);
     data = entity->dataBuf.swtch;
@@ -496,3 +501,120 @@ void entity_HugeBlueSwitch_init(Entity* entity) {
     data->baseScale.y = 3.0f;
     data->baseScale.z = 3.0f;
 }
+
+EntityScript D_802E9A40 = {
+    es_SetCallback(entity_small_switch_idle, 0)
+    es_PlaySound(SOUND_152)
+    es_Call(entity_base_switch_start_bound_script)
+    es_Call(entity_base_switch_anim_init)
+    es_SetCallback(entity_RedSwitch_animate_scale, 0)
+    es_SetCallback(entity_RedSwitch_wait_and_reset, 0)
+    es_Restart
+    es_End
+};
+
+EntityScript D_802E9A88 = {
+    es_SetCallback(entity_HugeBlueSwitch_idle, 0)
+    es_PlaySound(SOUND_152)
+    es_Call(entity_base_switch_start_bound_script)
+    es_Call(entity_base_switch_anim_init)
+    es_SetCallback(entity_base_switch_animate_scale, 0)
+    es_SetFlags(ENTITY_FLAGS_PENDING_INSTANCE_DELETE)
+    es_End
+};
+
+EntityScript D_802E9AC4 = {
+    es_SetCallback(entity_small_switch_idle, 0)
+    es_PlaySound(SOUND_152)
+    es_Call(entity_base_switch_start_bound_script)
+    es_Call(entity_base_switch_anim_init)
+    es_SetCallback(entity_base_switch_animate_scale, 0)
+    es_SetFlags(ENTITY_FLAGS_PENDING_INSTANCE_DELETE)
+    es_End
+};
+
+EntityScript D_802E9B00 = {
+    es_SetCallback(entity_GreenStompSwitch_idle, 0)
+    es_SetCallback(entity_GreenStompSwitch_retract, 0)
+    es_PlaySound(SOUND_152)
+    es_SetCallback(NULL, 128)
+    es_SetCallback(entity_GreenStompSwitch_extend, 0)
+    es_Restart
+};
+
+EntityModelScript D_802E9B40 = {
+    ems_SetRenderMode(RENDER_MODE_SURFACE_XLU_LAYER1)
+    ems_Draw(D_0A000EF8, 60)
+    ems_Restart
+    ems_End
+};
+
+EntityModelScript D_802E9B5C = {
+    ems_SetRenderMode(RENDER_MODE_SURFACE_XLU_LAYER1)
+    ems_Draw(D_0A000EF8, 60)
+    ems_Restart
+    ems_End
+};
+
+EntityModelScript D_802E9B78 = {
+    ems_SetRenderMode(RENDER_MODE_SURFACE_XLU_LAYER1)
+    ems_Draw(Entity_RedSwitch_Render, 60)
+    ems_Restart
+    ems_End
+};
+
+EntityModelScript D_802E9B94 = {
+    ems_SetRenderMode(RENDER_MODE_SURFACE_OPA)
+    ems_Draw(D_0A000740, 60)
+    ems_Restart
+    ems_End
+};
+
+EntityBlueprint Entity_RedSwitch = {
+    .flags = ENTITY_FLAGS_8000 | ENTITY_FLAGS_ALWAYS_FACE_CAMERA,
+    .typeDataSize = sizeof(RealSwitchData),
+    .renderCommandList = D_802E9B78,
+    .modelAnimationNodes = 0,
+    .fpInit = entity_base_switch_init,
+    .updateEntityScript = D_802E9A40,
+    .fpHandleCollision = NULL,
+    {{ (s32)entity_model_RedSwitch_ROM_START, (s32)entity_model_RedSwitch_ROM_END }},
+    .entityType = ENTITY_TYPE_RED_SWITCH,
+    .aabbSize = {22, 23, 22}
+};
+EntityBlueprint Entity_BlueSwitch = {
+    .flags = ENTITY_FLAGS_8000 | ENTITY_FLAGS_ALWAYS_FACE_CAMERA | ENTITY_FLAGS_SQUARE_SHADOW | ENTITY_FLAGS_SET_SHADOW_FLAG200 | ENTITY_FLAGS_HAS_DYNAMIC_SHADOW,
+    .typeDataSize = sizeof(RealSwitchData),
+    .renderCommandList = D_802E9B40,
+    .modelAnimationNodes = 0,
+    .fpInit = entity_BlueSwitch_init,
+    .updateEntityScript = D_802E9AC4,
+    .fpHandleCollision = NULL,
+    {{ (s32)E639C0_ROM_START, (s32)E639C0_ROM_END }},
+    .entityType = ENTITY_TYPE_BLUE_SWITCH,
+    .aabbSize = {22, 23, 22}
+};
+EntityBlueprint Entity_HugeBlueSwitch = {
+    .flags = ENTITY_FLAGS_8000 | ENTITY_FLAGS_ALWAYS_FACE_CAMERA | ENTITY_FLAGS_SQUARE_SHADOW | ENTITY_FLAGS_SET_SHADOW_FLAG200 | ENTITY_FLAGS_HAS_DYNAMIC_SHADOW,
+    .typeDataSize = sizeof(RealSwitchData),
+    .renderCommandList = D_802E9B5C,
+    .modelAnimationNodes = 0,
+    .fpInit = entity_HugeBlueSwitch_init,
+    .updateEntityScript = D_802E9A88,
+    .fpHandleCollision = NULL,
+    {{ (s32)E639C0_ROM_START, (s32)E639C0_ROM_END }},
+    .entityType = ENTITY_TYPE_HUGE_BLUE_SWITCH,
+    .aabbSize = {66, 75, 66}
+};
+EntityBlueprint Entity_GreenStompSwitch = {
+    .flags = ENTITY_FLAGS_8000 | ENTITY_FLAGS_4000,
+    .typeDataSize = sizeof(RealSwitchData),
+    .renderCommandList = D_802E9B94,
+    .modelAnimationNodes = 0,
+    .fpInit = entity_base_switch_init,
+    .updateEntityScript = D_802E9B00,
+    .fpHandleCollision = NULL,
+    {{ (s32)E62370_ROM_START, (s32)E62370_ROM_END }},
+    .entityType = ENTITY_TYPE_GREEN_STOMP_SWITCH,
+    .aabbSize = {50, 15, 50}
+};

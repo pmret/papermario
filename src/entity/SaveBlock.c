@@ -3,12 +3,12 @@
 #include "ld_addrs.h"
 #include "entity_script.h"
 
-extern s32 D_802E99DC[];
+extern Mtx Entity_SaveBlock_Mtx;
+extern Gfx Entity_SaveBlock_RenderContent[];
+extern Gfx Entity_SaveBlock_RenderBlock[];
+extern Gfx Entity_SaveBlock_Stub[];
 
-extern s32 D_0A003260;
-extern Gfx D_0A0034E0[];
-extern s32 D_0A0034F0;
-extern UNK_TYPE D_0A003508;
+extern s32 D_802E99DC[];
 
 void entity_SaveBlock_setupGfx(s32 index) {
     Gfx* gfxPos = gMasterGfxPos;
@@ -16,12 +16,11 @@ void entity_SaveBlock_setupGfx(s32 index) {
     SaveBlockData* blockData = entity->dataBuf.saveBlock;
     Matrix4f sp18;
     Matrix4f sp58;
-    u16 s4;
-    s32 s2;
-    u16 v0;
+    s32 mtxOffset;
+    Gfx* dlist;
 
-    s4 = (s32)(&D_0A003260);
-    guMtxL2F(sp18, (Mtx*)((s32)entity->vertexData + s4));
+    mtxOffset = (u16)(&Entity_SaveBlock_Mtx);
+    guMtxL2F(sp18, (Mtx*)((s32)entity->vertexData + mtxOffset));
     sp18[3][1] += 12.5f;
     guRotateF(sp58, blockData->angle, 0.0f, 1.0f, 0.0f);
     guMtxCatF(sp58, sp18, sp58);
@@ -31,12 +30,11 @@ void entity_SaveBlock_setupGfx(s32 index) {
     gDPSetRenderMode(gfxPos++, G_RM_ZB_CLD_SURF, G_RM_ZB_CLD_SURF2);
     gDPSetCombineLERP(gfxPos++, 0, 0, 0, TEXEL0, PRIMITIVE, 0, TEXEL0, 0, 0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0);
     gDPSetPrimColor(gfxPos++, 0, 0, 0, 0, 0, 128);
-    gSPDisplayList(gfxPos++, D_0A0034E0);
+    gSPDisplayList(gfxPos++, Entity_SaveBlock_RenderContent);
     gSPPopMatrix(gfxPos++, G_MTX_MODELVIEW);
 
-    v0 = (s32)(&D_0A0034F0);
-    s2 = (s32)entity->vertexData + v0;
-    guMtxL2F(sp58, (Mtx*)((s32)entity->vertexData + s4));
+    dlist = (Gfx*)((s32)entity->vertexData + (u16)Entity_SaveBlock_RenderBlock);
+    guMtxL2F(sp58, (Mtx*)((s32)entity->vertexData + mtxOffset));
     sp58[3][1] += 12.5f;
     gDPPipeSync(gfxPos++);
     guMtxF2L(sp58, &gDisplayContext->matrixStack[gMatrixListPos]);
@@ -45,7 +43,7 @@ void entity_SaveBlock_setupGfx(s32 index) {
     gDPSetRenderMode(gfxPos++, G_RM_AA_XLU_SURF | Z_CMP, G_RM_AA_XLU_SURF2 | Z_CMP);
     gDPSetCombineLERP(gfxPos++, 0, 0, 0, TEXEL0, PRIMITIVE, 0, TEXEL0, 0, 0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0);
     gDPSetPrimColor(gfxPos++, 0, 0, 0, 0, 0, 128);
-    gSPDisplayList(gfxPos++, s2);
+    gSPDisplayList(gfxPos++, dlist);
     gSPPopMatrix(gfxPos++, G_MTX_MODELVIEW);
 
     gMasterGfxPos = gfxPos;
@@ -132,7 +130,7 @@ void entity_SaveBlock_init(Entity* entity) {
     data->angle = 8;
 }
 
-EntityScript D_802E9930 = {
+EntityScript Entity_SaveBlock_Script = {
     es_SetCallback(entity_SaveBlock_idle, 0)
     es_PlaySound(SOUND_HIT_BLOCK)
     es_Call(entity_SaveBlock_pause_game)
@@ -152,16 +150,29 @@ EntityScript D_802E9930 = {
     es_Restart
     es_End
 };
-s32 D_802E99DC[8] = {
-    0x00000002,(s32)entity_SaveBlock_resume_game, 0x00000003, 0x00000002, 0x00000000,
-    0x00000001, (s32)D_802E9930, 0x00000000,
+EntityScript D_802E99DC = {
+    es_Call(entity_SaveBlock_resume_game)
+    es_SetCallback(NULL, 2)
+    es_Jump(Entity_SaveBlock_Script)
+    es_End
 };
 
-s32 D_802E99FC[7] = {
-    0x00000004, 0x00000022, 0x00000001, 0x0000003C,
-    &D_0A003508, 0x00000002, 0x00000000,
+EntityModelScript Entity_SaveBlock_RenderScript = {
+    ems_SetRenderMode(RENDER_MODE_SURFACE_XLU_LAYER3)
+    ems_Draw(Entity_SaveBlock_Stub, 60)
+    ems_Restart
+    ems_End
 };
 
 EntityBlueprint Entity_SavePoint = {
-    0x4200, 0x0020, &D_802E99FC, {0, 0, 0, 0}, entity_SaveBlock_init, D_802E9930, entity_block_handle_collision, E4B2E0_ROM_START, E4B2E0_ROM_END, ENTITY_TYPE_SAVE_POINT, { 25, 25, 25 }
+    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200,
+    .typeDataSize = 0x20,
+    .renderCommandList = Entity_SaveBlock_RenderScript,
+    .modelAnimationNodes = 0,
+    .fpInit = entity_SaveBlock_init,
+    .updateEntityScript = Entity_SaveBlock_Script,
+    .fpHandleCollision = entity_block_handle_collision,
+    {{ (s32)entity_model_SaveBlock_ROM_START, (s32)entity_model_SaveBlock_ROM_END }},
+    .entityType = ENTITY_TYPE_SAVE_POINT,
+    .aabbSize = { 25, 25, 25 }
 };

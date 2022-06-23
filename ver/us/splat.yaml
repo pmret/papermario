@@ -869,7 +869,7 @@ segments:
     - [0x10A8D0, c, entity/Signpost]
     - [0x10A9F0, .data, entity/Shadow]
     - [0x10B1B0, .data, entity/SaveBlock]
-    - [0x10B2C0, .data, entity/BlockData3]
+    - [0x10B2C0, .data, entity/Switch]
     - [0x10B4C0, .data, entity/104730]
     - [0x10B610, .data, entity/BlockData5]
     - [0x10BB90, .data, entity/BlockData6]
@@ -12106,7 +12106,25 @@ segments:
   - [0xE49E40, bin] # unk data
   - [0xE4A6A0, bin] # unk data
   - [0xE4AA80, bin] # unk data
-  - [0xE4B2E0, bin] # unk data
+  - name: entity_model_SaveBlock
+    dir: entity/model
+    type: code
+    start: 0xE4B2E0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE4B2E0, c, SaveBlock]
+    - start: 0xE4B2E0
+      type: .data
+      name: SaveBlock
+      subsegments:
+      - [0xE4B2E0]
+      - [0xE4BBE0, rgba16, SaveBlock_star, 32, 32]
+      - [0xE4C3E0]
+      - [0xE4C450, rgba32, SaveBlock_face, 32, 32]
+      - [0xE4D450]
+      - [0xE4D4C8, rgba16, SaveBlock_letterS, 64, 32]
+      - [0xE4E4C8]
   - [0xE4E7F0, bin] # unk data
   - [0xE51640, bin] # unk data
   - [0xE55A40, bin] # unk data
@@ -12116,7 +12134,24 @@ segments:
   - [0xE59480, bin] # unk data
   - [0xE59F00, bin] # unk data
   - [0xE62370, bin] # unk data
-  - [0xE62AC0, bin] # unk data
+  - name: entity_model_RedSwitch
+    dir: entity/model
+    type: code
+    start: 0xE62AC0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE62AC0, c, RedSwitch]
+    - start: 0xE62AC0
+      type: .data
+      name: RedSwitch
+      subsegments:
+      - [0xE62AC0]
+      - [0xE63090, ci8, RedSwitch_tex, 16, 16]
+      - [0xE63190, palette, RedSwitch_tex]
+      - [0xE63390]
+      - [0xE63438, ia4, RedSwitch_exclamationMark, 16, 32]
+      - [0xE63538]
   - [0xE639C0, bin] # unk data
   - [0xE648D0, bin] # unk data
   - [0xE657A0, bin] # unk data
