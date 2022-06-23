@@ -7,9 +7,8 @@
 #define REFLECTED_SWITCH_LINKED 2
 
 extern Gfx Entity_RedSwitch_Render[];
-extern Gfx D_0A000740[];
-extern Gfx D_0A000EE8[];
-extern Gfx D_0A000EF8[];
+extern Gfx Entity_BlueSwitch_Render[];
+extern Gfx Entity_GreenStompSwitch_Render[];
 
 void entity_GreenStompSwitch_idle(Entity* entity) {
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -502,7 +501,7 @@ void entity_HugeBlueSwitch_init(Entity* entity) {
     data->baseScale.z = 3.0f;
 }
 
-EntityScript D_802E9A40 = {
+EntityScript Entity_RedSwitch_Script = {
     es_SetCallback(entity_small_switch_idle, 0)
     es_PlaySound(SOUND_152)
     es_Call(entity_base_switch_start_bound_script)
@@ -513,7 +512,7 @@ EntityScript D_802E9A40 = {
     es_End
 };
 
-EntityScript D_802E9A88 = {
+EntityScript Entity_HugeBlueSwitch_Script = {
     es_SetCallback(entity_HugeBlueSwitch_idle, 0)
     es_PlaySound(SOUND_152)
     es_Call(entity_base_switch_start_bound_script)
@@ -523,7 +522,7 @@ EntityScript D_802E9A88 = {
     es_End
 };
 
-EntityScript D_802E9AC4 = {
+EntityScript Entity_BlueSwitch_Script = {
     es_SetCallback(entity_small_switch_idle, 0)
     es_PlaySound(SOUND_152)
     es_Call(entity_base_switch_start_bound_script)
@@ -533,7 +532,7 @@ EntityScript D_802E9AC4 = {
     es_End
 };
 
-EntityScript D_802E9B00 = {
+EntityScript Entity_GreenStompSwitch_Script = {
     es_SetCallback(entity_GreenStompSwitch_idle, 0)
     es_SetCallback(entity_GreenStompSwitch_retract, 0)
     es_PlaySound(SOUND_152)
@@ -542,30 +541,30 @@ EntityScript D_802E9B00 = {
     es_Restart
 };
 
-EntityModelScript D_802E9B40 = {
+EntityModelScript Entity_BlueSwitch_RenderScript = {
     ems_SetRenderMode(RENDER_MODE_SURFACE_XLU_LAYER1)
-    ems_Draw(D_0A000EF8, 60)
+    ems_Draw(Entity_BlueSwitch_Render, 60)
     ems_Restart
     ems_End
 };
 
-EntityModelScript D_802E9B5C = {
+EntityModelScript Entity_HugeBlueSwitch_RenderScript = {
     ems_SetRenderMode(RENDER_MODE_SURFACE_XLU_LAYER1)
-    ems_Draw(D_0A000EF8, 60)
+    ems_Draw(Entity_BlueSwitch_Render, 60)
     ems_Restart
     ems_End
 };
 
-EntityModelScript D_802E9B78 = {
+EntityModelScript Entity_RedSwitch_RenderScript = {
     ems_SetRenderMode(RENDER_MODE_SURFACE_XLU_LAYER1)
     ems_Draw(Entity_RedSwitch_Render, 60)
     ems_Restart
     ems_End
 };
 
-EntityModelScript D_802E9B94 = {
+EntityModelScript Entity_GreenStompSwitch_RenderScript = {
     ems_SetRenderMode(RENDER_MODE_SURFACE_OPA)
-    ems_Draw(D_0A000740, 60)
+    ems_Draw(Entity_GreenStompSwitch_Render, 60)
     ems_Restart
     ems_End
 };
@@ -573,10 +572,10 @@ EntityModelScript D_802E9B94 = {
 EntityBlueprint Entity_RedSwitch = {
     .flags = ENTITY_FLAGS_8000 | ENTITY_FLAGS_ALWAYS_FACE_CAMERA,
     .typeDataSize = sizeof(RealSwitchData),
-    .renderCommandList = D_802E9B78,
+    .renderCommandList = Entity_RedSwitch_RenderScript,
     .modelAnimationNodes = 0,
     .fpInit = entity_base_switch_init,
-    .updateEntityScript = D_802E9A40,
+    .updateEntityScript = Entity_RedSwitch_Script,
     .fpHandleCollision = NULL,
     {{ (s32)entity_model_RedSwitch_ROM_START, (s32)entity_model_RedSwitch_ROM_END }},
     .entityType = ENTITY_TYPE_RED_SWITCH,
@@ -585,36 +584,36 @@ EntityBlueprint Entity_RedSwitch = {
 EntityBlueprint Entity_BlueSwitch = {
     .flags = ENTITY_FLAGS_8000 | ENTITY_FLAGS_ALWAYS_FACE_CAMERA | ENTITY_FLAGS_SQUARE_SHADOW | ENTITY_FLAGS_SET_SHADOW_FLAG200 | ENTITY_FLAGS_HAS_DYNAMIC_SHADOW,
     .typeDataSize = sizeof(RealSwitchData),
-    .renderCommandList = D_802E9B40,
+    .renderCommandList = Entity_BlueSwitch_RenderScript,
     .modelAnimationNodes = 0,
     .fpInit = entity_BlueSwitch_init,
-    .updateEntityScript = D_802E9AC4,
+    .updateEntityScript = Entity_BlueSwitch_Script,
     .fpHandleCollision = NULL,
-    {{ (s32)E639C0_ROM_START, (s32)E639C0_ROM_END }},
+    {{ (s32)entity_model_BlueSwitch_ROM_START, (s32)entity_model_BlueSwitch_ROM_END }},
     .entityType = ENTITY_TYPE_BLUE_SWITCH,
     .aabbSize = {22, 23, 22}
 };
 EntityBlueprint Entity_HugeBlueSwitch = {
     .flags = ENTITY_FLAGS_8000 | ENTITY_FLAGS_ALWAYS_FACE_CAMERA | ENTITY_FLAGS_SQUARE_SHADOW | ENTITY_FLAGS_SET_SHADOW_FLAG200 | ENTITY_FLAGS_HAS_DYNAMIC_SHADOW,
     .typeDataSize = sizeof(RealSwitchData),
-    .renderCommandList = D_802E9B5C,
+    .renderCommandList = Entity_HugeBlueSwitch_RenderScript,
     .modelAnimationNodes = 0,
     .fpInit = entity_HugeBlueSwitch_init,
-    .updateEntityScript = D_802E9A88,
+    .updateEntityScript = Entity_HugeBlueSwitch_Script,
     .fpHandleCollision = NULL,
-    {{ (s32)E639C0_ROM_START, (s32)E639C0_ROM_END }},
+    {{ (s32)entity_model_BlueSwitch_ROM_START, (s32)entity_model_BlueSwitch_ROM_END }},
     .entityType = ENTITY_TYPE_HUGE_BLUE_SWITCH,
     .aabbSize = {66, 75, 66}
 };
 EntityBlueprint Entity_GreenStompSwitch = {
     .flags = ENTITY_FLAGS_8000 | ENTITY_FLAGS_4000,
     .typeDataSize = sizeof(RealSwitchData),
-    .renderCommandList = D_802E9B94,
+    .renderCommandList = Entity_GreenStompSwitch_RenderScript,
     .modelAnimationNodes = 0,
     .fpInit = entity_base_switch_init,
-    .updateEntityScript = D_802E9B00,
+    .updateEntityScript = Entity_GreenStompSwitch_Script,
     .fpHandleCollision = NULL,
-    {{ (s32)E62370_ROM_START, (s32)E62370_ROM_END }},
+    {{ (s32)entity_model_GreenStompSwitch_ROM_START, (s32)entity_model_GreenStompSwitch_ROM_END }},
     .entityType = ENTITY_TYPE_GREEN_STOMP_SWITCH,
     .aabbSize = {50, 15, 50}
 };

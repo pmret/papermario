@@ -12133,7 +12133,25 @@ segments:
   - [0xE58CD0, bin] # unk data
   - [0xE59480, bin] # unk data
   - [0xE59F00, bin] # unk data
-  - [0xE62370, bin] # unk data
+  - name: entity_model_GreenStompSwitch
+    dir: entity/model
+    type: code
+    start: 0xE62370
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE62370, c, GreenStompSwitch]
+    - start: 0xE62370
+      type: .data
+      name: GreenStompSwitch
+      subsegments:
+      - [0xE62370]
+      - [0xE625F0, ci4, GreenStompSwitch_tex, 16, 16]
+      - [0xE62670, palette, GreenStompSwitch_tex]
+      - [0xE62690]
+      - [0xE62748, ci4, GreenStompSwitch_exclamationMark, 16, 32]
+      - [0xE62848, palette, GreenStompSwitch_exclamationMark]
+      - [0xE62868]
   - name: entity_model_RedSwitch
     dir: entity/model
     type: code
@@ -12152,7 +12170,24 @@ segments:
       - [0xE63390]
       - [0xE63438, ia4, RedSwitch_exclamationMark, 16, 32]
       - [0xE63538]
-  - [0xE639C0, bin] # unk data
+  - name: entity_model_BlueSwitch
+    dir: entity/model
+    type: code
+    start: 0xE639C0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE639C0, c, BlueSwitch]
+    - start: 0xE639C0
+      type: .data
+      name: BlueSwitch
+      subsegments:
+      - [0xE639C0]
+      - [0xE63F90, ci8, BlueSwitch_tex, 16, 16]
+      - [0xE64090, palette, BlueSwitch_tex]
+      - [0xE64290]
+      - [0xE64338, ia4, BlueSwitch_exclamationMark, 16, 32]
+      - [0xE64438]
   - [0xE648D0, bin] # unk data
   - [0xE657A0, bin] # unk data
   - type: code
