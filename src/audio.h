@@ -212,7 +212,6 @@ typedef struct SoundLerp {
     /* 0x4 */ s32 step;
     /* 0xA */ s16 time;
     /* 0x8 */ s16 goal;
-
 } SoundLerp; // size = 0xC
 
 typedef struct SoundPlayChange {
@@ -460,21 +459,21 @@ typedef struct SBNFileEntry {
 } SBNFileEntry; // size = 0x8
 
 typedef struct BKHeader {
-    /* 0x00 */ u16 unk_00;
+    /* 0x00 */ u16 signature; // 'BK'
     /* 0x02 */ char unk_02[2];
-    /* 0x04 */ s32 unk_04;
-    /* 0x08 */ char unk_08[4];
-    /* 0x0C */ u16 unk_0C;
+    /* 0x04 */ s32 size;
+    /* 0x08 */ s32 name;
+    /* 0x0C */ u16 format; // 'CR'
     /* 0x0E */ char unk_0E[2];
     /* 0x10 */ char unk_10[2];
-    /* 0x12 */ u16 unk_12[0x10];
-    /* 0x32 */ u16 unk_32;
-    /* 0x34 */ u16 unk_34;
-    /* 0x36 */ u16 unk_36;
-    /* 0x38 */ u16 unk_38;
-    /* 0x3A */ u16 unk_3A;
-    /* 0x3C */ u16 unk_3C;
-    /* 0x3E */ u16 unk_3E;
+    /* 0x12 */ u16 instruments[16];
+    /* 0x32 */ u16 instrumetsSize;
+    /* 0x34 */ u16 unkStartA;
+    /* 0x36 */ u16 unkSizeA;
+    /* 0x38 */ u16 predictorsStart;
+    /* 0x3A */ u16 predictorsSize;
+    /* 0x3C */ u16 unkStartB;
+    /* 0x3E */ u16 unkSizeB;
 } BKHeader; // size = 0x40
 
 typedef struct InitSongEntry {
@@ -505,7 +504,7 @@ typedef struct SoundBank {
 } SoundBank; // size = 0x840
 
 typedef struct SndGlobals {
-    /* 0x0000 */ f32 actualFrequency;
+    /* 0x0000 */ f32 outputRate;
     /* 0x0004 */ Instrument* defaultInstrument;
     /* 0x0008 */ UnkAlC unk_08;
     /* 0x0014 */ BGMInstrumentInfo defaultPRGEntry;
@@ -754,7 +753,7 @@ typedef struct UnkAl834 {
 typedef struct ALConfig {
     /* 0x00 */ s32 unk_00;
     /* 0x04 */ s32 unk_04;
-    /* 0x08 */ s32 frequency;
+    /* 0x08 */ s32 outputRate;
     /* 0x0C */ u8 unk_0C;
     /* 0x10 */ void* dmaNew;
     /* 0x14 */ ALHeap* heap;
@@ -946,6 +945,6 @@ void snd_copy_words(void*, void*, s32);
 void func_80058E84(UnkAlLen14*, u8, ALHeap*);
 void func_8005904C(UnkAlLen14*, u8);
 #undef alHeapAlloc
-void* alHeapAlloc(ALHeap *heap, s32 arg1, s32 size);
+void* alHeapAlloc(ALHeap* heap, s32 arg1, s32 size);
 
 #endif

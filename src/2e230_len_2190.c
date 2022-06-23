@@ -13,7 +13,7 @@ void func_80052E30(u8 index) {
     temp->unk_45 = 0;
 }
 
-void snd_load_audio_data(s32 frequency) {
+void snd_load_audio_data(s32 outputRate) {
     SndGlobals* temp4;
     s32* temp_v0_2;
     ALHeap* alHeap;
@@ -50,7 +50,7 @@ void snd_load_audio_data(s32 frequency) {
     temp4->dataPER = alHeapAlloc(alHeap, 1, 6 * sizeof(PEREntry));
     temp4->dataPRG = alHeapAlloc(alHeap, 1, 0x200);
     temp4->unk_94 = alHeapAlloc(alHeap, 1, 0x40);
-    temp4->actualFrequency = frequency;
+    temp4->outputRate = outputRate;
     snd_reset_instrument(temp4->defaultInstrument);
     func_80053370(&temp4->unk_08);
     func_800533A8(&temp4->defaultPRGEntry);
@@ -935,7 +935,7 @@ INCLUDE_ASM(s32, "2e230_len_2190", snd_load_BK_to_bank, s32 bkFileOffset, SoundB
 void snd_swizzle_BK_instruments(s32 bkFileOffset, SoundBank* bank, InstrumentGroup instruments, u32 instrumentCount, u8 arg4) {
     SoundBank* sb = bank;
     Instrument* defaultInstrument = D_8009A5C0->defaultInstrument;
-    f32 freq = D_8009A5C0->actualFrequency;
+    f32 freq = D_8009A5C0->outputRate;
     s32 i;
 
     if (sb->swizzled == 0) {

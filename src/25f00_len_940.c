@@ -14,8 +14,8 @@ u8 volatile D_80078181 = 1;
 extern Acmd* D_800A3510[3];
 extern NUScTask D_800A3520[3];
 extern u8* D_800A3628[3];
-extern s32 D_800A3634;
-extern s32 D_800A3638;
+extern s32 AlFrameSize;
+extern s32 AlMinFrameSize;
 extern OSMesgQueue nuAuDmaMesgQ;
 extern OSMesg nuAuDmaMesgBuf[50];
 extern OSIoMesg nuAuDmaIOMesgBuf[];
@@ -24,7 +24,7 @@ extern NUDMABuffer nuAuDmaBufList[50];
 extern u8 D_800B91A0[];
 extern u64 rspbootUcodeBuffer[];
 extern OSMesgQueue D_800DA444;
-extern s32 D_800DAAB8;
+extern s32 AlNumFields;
 extern u64 n_aspMain_text_bin[];
 extern u64 n_aspMain_data_bin[];
 extern u8 D_801AA000[0x56000];
@@ -35,9 +35,11 @@ void func_80056250(u8*, ALConfig*);
 void nuAuMgr(void*);
 void snd_load_audio_data(s32 frequency);
 
+#define	AUDIO_SAMPLES	184
+
 void create_audio_system(void) {
     u32 i;
-    u32 freq, freq2;
+    u32 outputRate, frameSize;
     ALConfig config;
 
     nuAuTaskStop = NU_AU_TASK_RUN;
@@ -45,14 +47,14 @@ void create_audio_system(void) {
     alHeapInit(&nuAuHeap, D_801AA000, 0x56000);
     config.unk_00 = 24;
     config.unk_04 = 4;
-    freq = osAiSetFrequency(32000);
-    freq2 = (D_800DAAB8 * freq + 59) / 60;
-    config.frequency = freq;
+    outputRate = osAiSetFrequency(32000);
+    frameSize = (AlNumFields * outputRate + 59) / 60;
+    config.outputRate = outputRate;
     config.unk_0C = 0;
     config.heap = &nuAuHeap;
     config.dmaNew = nuAuDmaNew;
-    D_800A3634 = (freq2 / 184 + 1) * 184; // NU_AU_AUDIO_SAMPLES ?
-    D_800A3638 = D_800A3634 - 184;
+    AlFrameSize = ((frameSize / AUDIO_SAMPLES) + 1) * AUDIO_SAMPLES; // NU_AU_AUDIO_SAMPLES ?
+    AlMinFrameSize = AlFrameSize - AUDIO_SAMPLES;
 
     for (i = 0; i < ARRAY_COUNT(D_800A3510); i++) {
         D_800A3510[i] = alHeapAlloc(config.heap, 1, 0x4000);
@@ -76,7 +78,7 @@ void create_audio_system(void) {
     }
 
     for (i = 0; i < ARRAY_COUNT(D_800A3628); i++) {
-        D_800A3628[i] = alHeapAlloc(config.heap, 1, D_800A3634 * 4);
+        D_800A3628[i] = alHeapAlloc(config.heap, 1, AlFrameSize * 4);
     }
 
     nuAuDmaBufList[0].node.next = nuAuDmaBufList[0].node.prev = NULL;
@@ -89,7 +91,7 @@ void create_audio_system(void) {
     osCreateMesgQueue(&nuAuDmaMesgQ, nuAuDmaMesgBuf, 50);
     nuAuPreNMIFunc = func_8004B328;
     func_80056250(D_800B91A0, &config);
-    snd_load_audio_data(config.frequency);
+    snd_load_audio_data(config.outputRate);
     osCreateThread(&nuAuMgrThread, NU_MAIN_THREAD_ID, nuAuMgr, NULL, &D_800A3510, NU_AU_MGR_THREAD_PRI); //why main thread?
     osStartThread(&nuAuMgrThread);
 }
@@ -156,11 +158,11 @@ void nuAuMgr(void* arg) {
                     cmdListBuf = D_800A3510[cmdListIndex];
                     bufferPtr = D_800A3628[bufferIndex];
                 }
-                if (sampleSize < 184 || cond) {
-                    samples = D_800A3634;
+                if (sampleSize < AUDIO_SAMPLES || cond) {
+                    samples = AlFrameSize;
                     cond = FALSE;
                 } else {
-                    samples = D_800A3638;
+                    samples = AlMinFrameSize;
                     cond = TRUE;
                 }
                 cmdListAfter_ptr = alAudioFrame(cmdListBuf, &cmdList_len, (s16*)osVirtualToPhysical(bufferPtr), samples);

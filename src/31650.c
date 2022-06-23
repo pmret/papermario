@@ -42,7 +42,7 @@ void func_80056250(UnkAl0* globals, ALConfig* config) {
     globals->unk_10 = config->unk_04;
     globals->unk_00 = 0;
     globals->unk_04 = 0;
-    globals->frequency = config->frequency;
+    globals->frequency = config->outputRate;
     globals->dmaNew = config->dmaNew;
 
     D_80078E50 = globals;
@@ -164,8 +164,8 @@ void func_80056DCC(u8 arg0, u8 arg1) {
     func_8005904C(temp->unk_08, arg1);
 }
 
-void func_80056E34(s32 arg0, s16 arg1, s16 arg2, s32 arg3) {
-    UnkAlLen18* temp_s0 = &D_80078E54->unk_20[arg0 & 0xFF];
+void func_80056E34(u8 arg0, s16 arg1, s16 arg2, s32 arg3) {
+    UnkAlLen18* temp_s0 = &D_80078E54->unk_20[arg0];
     
     func_800598A0(temp_s0->unk_04, arg1, arg2, arg3);
     func_800598A0(temp_s0->unk_08, arg1, arg2, arg3);
