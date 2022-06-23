@@ -9,4 +9,11 @@ ApiStatus N(func_80240350_A54CA0)(Evt* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_12/A54CA0", func_8024037C_A54CCC);
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_12/A54CA0", func_80240444_A54D94);
+ApiStatus N(IsPartnerLakilester)(Evt* script, s32 isInitialCall) {
+    if (gPartnerActionStatus.actingPartner == PARTNER_LAKILESTER) {
+        script->varTable[9] = TRUE;
+    } else {
+        script->varTable[9] = FALSE;
+    }
+    return ApiStatus_DONE2;
+}
