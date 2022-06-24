@@ -60,7 +60,7 @@ void entity_shattering_block_init(Entity* entity) {
     void* a1 = NULL;
 
     //TODO must be HAMMER BLOCK TYPE!
-    entity->dataBuf.swtch->unk_38 = entity->position.y;
+    entity->dataBuf.shatteringBlock->originalPosY = entity->position.y;
     type = get_entity_type((u8)entity->listIndex);
 
     if (type == ENTITY_TYPE_HAMMER1_BLOCK_TINY ||

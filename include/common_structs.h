@@ -411,12 +411,6 @@ struct Entity;
 
 // BEGIN ENTITY-SPECIFIC STRUCTS
 
-typedef struct struct802E2BA4 {
-    /* 0x00 */ char unk_00[2];
-    /* 0x02 */ u16 unk_02[24][2];
-} struct802E2BA4;
-
-// from 102c80, size unknown.
 typedef struct SwitchData {
     /* 0x000 */ f32 fallVelocity;
     /* 0x004 */ f32 deltaScaleX;
@@ -428,42 +422,31 @@ typedef struct SwitchData {
     /* 0x020 */ u16 areaFlagIndex;
     /* 0x022 */ s16 greenMotionTimer;
     /* 0x024 */ s16 scaleAnimTimer;
-    /* 0x028 */ struct Entity* linkedSwitch; /* a hidden switch can be linked to a visible one and automatically trigger it on hit */
-    /* 0x02C */ char unk_2C[8];
-    /* 0x034 */ struct802E2BA4* unk_34;
-    /* 0x038 */ f32 unk_38;
-    /* 0x03C */ union {
-        /*       */     s16 s;
-        /*       */     s8 b[2];
-    } unk_3C;
-    /* 0x03E */ char unk_3E[0x4D];
-    /* 0x08B */ u8 fragmentRotX[24]; // scaled to map [0,255] -> [0,360]
-    /* 0x0A3 */ char unk_A3; // padding?
-    /* 0x0A4 */ u8 fragmentRotY[24]; // scaled to map [0,255] -> [0,360]
-    /* 0x0BC */ char unk_BC[4];
-    /* 0x0C0 */ f32 fragmentPosX[24];
-    /* 0x120 */ char unk_120[4];
-    /* 0x124 */ f32 fragmentPosY[24];
-    /* 0x184 */ char unk_184[4];
-    /* 0x188 */ f32 fragmentPosZ[24];
-} SwitchData;
-
-typedef struct RealSwitchData {
-    /* 0x000 */ f32 fallVelocity;
-    /* 0x004 */ f32 deltaScaleX;
-    /* 0x008 */ f32 deltaScaleY;
-    /* 0x00C */ char unk_0C[4];
-    /* 0x010 */ s8 animStateScaleX;
-    /* 0x011 */ s8 animStateScaleY;
-    /* 0x014 */ Vec3f baseScale;
-    /* 0x020 */ u16 areaFlagIndex;
-    /* 0x022 */ s16 greenMotionTimer;
-    /* 0x024 */ s16 scaleAnimTimer;
     /* 0x028 */ struct Entity* linkedSwitch;
-} RealSwitchData; // size = 0x2C
+} SwitchData; // size = 0x2C
 
-// from 104940_len_dc0, size unknown
-// appears to belong to the hammer blocks(?)
+typedef struct struct802E2BA4 {
+    /* 0x00 */ char unk_00[2];
+    /* 0x02 */ u16 unk_02[24][2];
+} struct802E2BA4;
+
+typedef struct ShatteringBlockData {
+    /* 0x000 */ u16 fragmentFlags[25];
+    /* 0x034 */ Gfx** fragmentDisplayLists;
+    /* 0x038 */ f32 originalPosY;
+    /* 0x03C */ s16 alpha;
+    /* 0x03E */ s16 fadeOutCounter;
+    /* 0x040 */ s8 fragmentRebounds[25];
+    /* 0x059 */ s8 fragmentRotSpeed[25];
+    /* 0x072 */ u8 fragmentMoveAngle[25]; // scaled to map [0,255] -> [0,360]
+    /* 0x08B */ u8 fragmentRotX[25]; // scaled to map [0,255] -> [0,360]
+    /* 0x0A4 */ u8 fragmentRotY[25]; // scaled to map [0,255] -> [0,360]
+    /* 0x0C0 */ f32 fragmentPosX[25];
+    /* 0x124 */ f32 fragmentPosY[25];
+    /* 0x188 */ f32 fragmentPosZ[25];
+    /* 0x1EC */ f32 fragmentFallSpeed[25];
+} ShatteringBlockData; // size = 0x250
+
 typedef struct BlockData {
     /* 0x000 */ u8 parentEntityIndex; // for block entities spawned by other block entities
     /* 0x001 */ char unk_01[2];
@@ -658,10 +641,11 @@ typedef struct Entity {
     /* 0x3C */ UNK_PTR renderSetupFunc; // pointer to draw func(?)
     /* 0x40 */ union {
         s32* any;
+        SaveBlockData* saveBlock;
         SwitchData* swtch;
+        ShatteringBlockData* shatteringBlock;
         BlockData* block;
         ItemBlockData* itemBlock;
-        SaveBlockData* saveBlock;
         WoodenCrateData* crate;
         ChestData* chest;
         BlueWarpPipeData* bluePipe;
