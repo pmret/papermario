@@ -544,7 +544,7 @@ typedef struct SndGlobals {
     /* 0x0094 */ s32* unk_94;
     /* 0x0098 */ u32 unk_98;
     /* 0x009C */ s32 unk_9C;
-    /* 0x00A0 */ s32* dataSEF;
+    /* 0x00A0 */ SEFHeader* dataSEF;
     /* 0x00A4 */ UnkFuncAl unk_A4[2];
     /* 0x00AC */ InstrumentGroup instrumentGroupX[1];
     /* 0x00EC */ InstrumentGroup instrumentGroup3[16];

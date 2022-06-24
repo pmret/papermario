@@ -4,6 +4,10 @@ extern s32 D_80078554;
 extern u8 D_80078510[8];
 extern u8 D_80078558[40];
 
+BGMPlayer* func_80053F64(s32);
+void func_8004EA34(BGMPlayer*, u32);
+void func_80050900(BGMPlayer*);
+
 INCLUDE_ASM(void, "audio/28910_len_5090", func_8004D510, BGMPlayer* arg0);
 
 // Return values are being pushed into v0 in the wrong place
@@ -189,7 +193,7 @@ MusicError func_8004DB4C(SongUpdateEvent* s) {
                             player->fadeInfo.endVolume = volume;
                             player->fadeInfo.fadeTime = (duration * 1000) / 5750;
                             player->fadeInfo.fadeStep = (s32) ((volume << 0x10) - player->fadeInfo.currentVolume.u32) / player->fadeInfo.fadeTime;
-                            player->fadeInfo.fpFadeCallback = (void (*)()) s->variation;
+                            player->fadeInfo.fpFadeCallback = (void (*)()) s->variation; //TODO seems wrong
                             if (s->unk14 == 1) {
                                 player->fadeSongName = songName;
                             }
