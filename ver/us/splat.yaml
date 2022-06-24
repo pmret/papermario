@@ -870,7 +870,8 @@ segments:
     - [0x10A9F0, .data, entity/Shadow]
     - [0x10B1B0, .data, entity/SaveBlock]
     - [0x10B2C0, .data, entity/Switch]
-    - [0x10B4C0, .data, entity/104730]
+    - [0x10B4C0, .data, entity/ShatteringBlock_common]
+    - [0x10B4F0, .data, entity/104730]
     - [0x10B610, .data, entity/BlockData5]
     - [0x10BB90, .data, entity/BlockData6]
     - [0x10BF10, .data, entity/BlockData7]
@@ -12087,15 +12088,73 @@ segments:
   - [0xE31530, bin] # unk data
   - [0xE31A30, bin] # unk data
   - [0xE31F30, bin] # unk data
-  - [0xE32420, bin] # unk data
-  - [0xE35670, bin] # unk data
-  - [0xE38890, bin] # unk data
+  - name: entity_model_ShatteringHammer1Block
+    dir: entity/model
+    type: code
+    start: 0xE32420
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE32420, c, ShatteringHammer1Block]
+    - start: 0xE32420
+      type: .data
+      name: ShatteringHammer1Block
+      subsegments:
+      - [0xE32420]
+      - [0xE33480, ci8, ShatteringHammer1Block_texture, 16, 32]
+      - [0xE33680, palette, ShatteringHammer1Block_texture]
+      - [0xE33880]
+  - name: entity_model_ShatteringHammer2Block
+    dir: entity/model
+    type: code
+    start: 0xE35670
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE35670, c, ShatteringHammer2Block]
+    - start: 0xE35670
+      type: .data
+      name: ShatteringHammer2Block
+      subsegments:
+      - [0xE35670]
+      - [0xE366D0, rgba16, ShatteringHammer2Block_texture, 16, 32]
+      - [0xE36AD0]
+  - name: entity_model_ShatteringHammer3Block
+    dir: entity/model
+    type: code
+    start: 0xE38890
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE38890, c, ShatteringHammer3Block]
+    - start: 0xE38890
+      type: .data
+      name: ShatteringHammer3Block
+      subsegments:
+      - [0xE38890]
+      - [0xE398E0, ci4, ShatteringHammer3Block_texture, 16, 32]
+      - [0xE399E0, palette, ShatteringHammer3Block_texture]
+      - [0xE39A00]
   - [0xE3B870, bin] # unk data
   - [0xE3C320, bin] # unk data
   - [0xE3CDD0, bin] # unk data
   - [0xE3DA60, bin] # unk data
   - [0xE3DDB0, bin] # unk data
-  - [0xE3E260, bin] # unk data
+  - name: entity_model_ShatteringBrickBlock
+    dir: entity/model
+    type: code
+    start: 0xE3E260
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE3E260, c, ShatteringBrickBlock]
+    - start: 0xE3E260
+      type: .data
+      name: ShatteringBrickBlock
+      subsegments:
+      - [0xE3E260]
+      - [0xE3FD00, rgba16, ShatteringBrickBlock_texture, 32, 32]
+      - [0xE40500]
   - [0xE42240, bin] # unk data
   - [0xE42740, bin] # unk data
   - [0xE431F0, bin] # unk data
