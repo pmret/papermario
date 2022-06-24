@@ -27,15 +27,13 @@ extern OSMesgQueue D_800DA444;
 extern s32 AlNumFields;
 extern u64 n_aspMain_text_bin[];
 extern u64 n_aspMain_data_bin[];
-extern u8 D_801AA000[0x56000];
+extern u8 D_801AA000[AUDIO_HEAP_SIZE];
 
 s32 nuAuDmaCallBack(s32 addr, s32 len, void* state, u8 arg3);
 void func_8004B328(NUScMsg, u32);
 void func_80056250(u8*, ALConfig*);
 void nuAuMgr(void*);
 void snd_load_audio_data(s32 frequency);
-
-#define	AUDIO_SAMPLES	184
 
 void create_audio_system(void) {
     u32 i;
@@ -44,7 +42,7 @@ void create_audio_system(void) {
 
     nuAuTaskStop = NU_AU_TASK_RUN;
     nuAuPreNMI = 0;
-    alHeapInit(&nuAuHeap, D_801AA000, 0x56000);
+    alHeapInit(&nuAuHeap, D_801AA000, AUDIO_HEAP_SIZE);
     config.unk_00 = 24;
     config.unk_04 = 4;
     outputRate = osAiSetFrequency(32000);
@@ -53,7 +51,7 @@ void create_audio_system(void) {
     config.unk_0C = 0;
     config.heap = &nuAuHeap;
     config.dmaNew = nuAuDmaNew;
-    AlFrameSize = ((frameSize / AUDIO_SAMPLES) + 1) * AUDIO_SAMPLES; // NU_AU_AUDIO_SAMPLES ?
+    AlFrameSize = ((frameSize / AUDIO_SAMPLES) + 1) * AUDIO_SAMPLES;
     AlMinFrameSize = AlFrameSize - AUDIO_SAMPLES;
 
     for (i = 0; i < ARRAY_COUNT(D_800A3510); i++) {
@@ -331,7 +329,7 @@ void func_8004B328(NUScMsg mesg_type, u32 frameCounter) {
     }
 }
 #else
-INCLUDE_ASM(s32, "25f00_len_940", func_8004B328);
+INCLUDE_ASM(s32, "audio/25f00_len_940", func_8004B328);
 #endif
 
 void alLink(ALLink* element, ALLink* after) {

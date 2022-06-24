@@ -79,7 +79,7 @@ void func_80050D50(UnkAl1E4* arg0) {
         arg0->unk_2A = arg0->unk_38 >> 0x18;
     }
 
-    if (temp_a1 >= 250 && temp_a1 <= 10000) {
+    if (temp_a1 >= BGM_MIN_FADE_DURATION && temp_a1 <= BGM_MAX_FADE_DURATION) {
         arg0->unk_38 = arg0->unk_2A << 0x18;
         arg0->unk_42 = arg0->unk_2B;
         arg0->unk_40 = (u32)(temp_a1 * 10) / 115;
@@ -114,7 +114,7 @@ void func_80050E84(s32 arg0, s32 arg1) {
         if (arg1 != 0) {
             temp_v1->unk_28 = arg1;
         } else {
-            temp_v1->unk_28 = 0xFA;
+            temp_v1->unk_28 = BGM_MIN_FADE_DURATION;
         }
         temp_v1->unk_2A = 0;
         temp_v1->unk_2B = 0x7F;
@@ -184,7 +184,7 @@ s32 func_80051050(s32 arg0) {
     return var_a0;
 }
 
-INCLUDE_ASM(s32, "2BF90", func_800510A4);
+INCLUDE_ASM(s32, "audio/2BF90", func_800510A4);
 
 void func_800511BC(UnkAl834* arg0) {
     u32 i;
@@ -193,7 +193,7 @@ void func_800511BC(UnkAl834* arg0) {
     for (i = 0; i < ARRAY_COUNT(arg0->unk_7B4); i++) {
         UnkAl8* temp = &arg0->unk_7B4[i];
 
-        if ((temp->unk_00.u8[3] == 1) && (arg0->unk_00->unk_1320[i].unk_45 != arg0->unk_22)) {
+        if ((temp->unk_00.u8[3] == 1) && (arg0->unk_00->voices[i].unk_45 != arg0->unk_22)) {
             temp->unk_00.s32 = 0;
         }
     }
@@ -236,14 +236,14 @@ void func_800511BC(UnkAl834* arg0) {
     arg0->unk_21 = 0;
 }
 
-INCLUDE_ASM(void, "2BF90", func_80051334, UnkAl834* arg0, UnkAl1E4* arg1);
+INCLUDE_ASM(void, "audio/2BF90", func_80051334, UnkAl834* arg0, UnkAl1E4* arg1);
 
-INCLUDE_ASM(void, "2BF90", func_80051434, UnkAl834* arg0, UnkAl1E4* arg1);
+INCLUDE_ASM(void, "audio/2BF90", func_80051434, UnkAl834* arg0, UnkAl1E4* arg1);
 
-INCLUDE_ASM(s32, "2BF90", func_800521D0);
+INCLUDE_ASM(s32, "audio/2BF90", func_800521D0);
 
-INCLUDE_ASM(void, "2BF90", func_800521E8, UnkAl834* arg0, UnkAl1E4* arg1);
+INCLUDE_ASM(void, "audio/2BF90", func_800521E8, UnkAl834* arg0, UnkAl1E4* arg1);
 
-INCLUDE_ASM(void, "2BF90", func_800522A8, UnkAl834* arg0, UnkAl1E4* arg1);
+INCLUDE_ASM(void, "audio/2BF90", func_800522A8, UnkAl834* arg0, UnkAl1E4* arg1);
 
-INCLUDE_ASM(void, "2BF90", func_8005232C, UnkAl834* arg0, UnkAl1E4* arg1);
+INCLUDE_ASM(void, "audio/2BF90", func_8005232C, UnkAl834* arg0, UnkAl1E4* arg1);

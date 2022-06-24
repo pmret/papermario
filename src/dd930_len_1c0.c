@@ -30,20 +30,20 @@ void reset_ambient_sounds(void) {
 
 void update_ambient_sounds(void) {
     AmbientSoundSettings* ambientSoundState = &AmbientSoundData;
+    s32 error;
 
     switch (ambientSoundState->fadeState) {
         case AMBIENT_SOUND_IDLE:
             break;
         case AMBIENT_SOUND_FADE_OUT:
             if (ambientSoundState->flags & 1) {
-                s32 phi_v0;
                 if (ambientSoundState->fadeTime < 250) {
-                    phi_v0 = snd_ambient_quick_fade_out(0, ambientSoundState->fadeTime);
+                    error = snd_ambient_quick_fade_out(0, ambientSoundState->fadeTime);
                 } else {
-                    phi_v0 = snd_ambient_slow_fade_out(0, ambientSoundState->fadeTime);
+                    error = snd_ambient_slow_fade_out(0, ambientSoundState->fadeTime);
                 }
 
-                if (phi_v0 != 0) {
+                if (error != MUSIC_ERROR_NONE) {
                     return;
                 }
             }
@@ -51,7 +51,7 @@ void update_ambient_sounds(void) {
             break;
         case AMBIENT_SOUND_FADE_IN:
             if (ambientSoundState->flags & 1) {
-                if (snd_ambient_800555E4(0) != 0) {
+                if (snd_ambient_800555E4(0) != MUSIC_ERROR_NONE) {
                     return;
                 }
                 ambientSoundState->flags &= ~1;
@@ -59,7 +59,7 @@ void update_ambient_sounds(void) {
             if (ambientSoundState->soundID < 0) {
                 ambientSoundState->fadeState = AMBIENT_SOUND_IDLE;
             } else if (snd_ambient_80055448(ambientSoundState->soundID) == 0) {
-                if (snd_ambient_80055464(0, 0) == 0) {
+                if (snd_ambient_80055464(0, 0) == MUSIC_ERROR_NONE) {
                     ambientSoundState->fadeState = AMBIENT_SOUND_IDLE;
                     ambientSoundState->flags |= 1;
                 }

@@ -7,72 +7,72 @@ extern u8 D_80078580[];
 extern f32 AlTuneScaling[];
 
 void func_80052E30(u8 index) {
-    UnkAl48* temp = &D_8009A5C0->unk_1320[index];
+    AlUnkVoice* temp = &gSoundGlobals->voices[index];
 
     temp->unk_1C = 0;
     temp->unk_45 = 0;
 }
 
 void snd_load_audio_data(s32 outputRate) {
-    SndGlobals* temp4;
-    s32* temp_v0_2;
+    SndGlobals* globals;
+    s32* dummyTrackData;
     ALHeap* alHeap;
     u32 i;
     SBNFileEntry fileEntry;
     u8 temp6[4];
-    UnkAl48* temp5;
+    AlUnkVoice* temp5;
 
     alHeap = D_80078E54->heap;
-    D_8009A5C0 = alHeapAlloc(alHeap, 1, 0x19E0);
+    gSoundGlobals = alHeapAlloc(alHeap, 1, sizeof(*gSoundGlobals));
 
-    D_8009A664 = alHeapAlloc(alHeap, 1, sizeof(BGMPlayer));
-    D_8009A5FC = alHeapAlloc(alHeap, 1, sizeof(BGMPlayer));
-    D_8009A5CC = alHeapAlloc(alHeap, 1, sizeof(BGMPlayer));
-    D_8009A640 = alHeapAlloc(alHeap, 1, 0x6CC);
-    D_8009A628 = alHeapAlloc(alHeap, 1, 0x834);
-    D_8009A664->soundManager = D_8009A640;
-    D_8009A628->unk_00 = D_8009A5C0;
+    gBGMPlayerA = alHeapAlloc(alHeap, 1, sizeof(*gBGMPlayerA));
+    gBGMPlayerB = alHeapAlloc(alHeap, 1, sizeof(*gBGMPlayerB));
+    gBGMPlayerC = alHeapAlloc(alHeap, 1, sizeof(*gBGMPlayerC));
+    gSoundManager = alHeapAlloc(alHeap, 1, sizeof(*gSoundManager));
+    D_8009A628 = alHeapAlloc(alHeap, 1, sizeof(*D_8009A628));
+    gBGMPlayerA->soundManager = gSoundManager;
+    D_8009A628->unk_00 = gSoundGlobals;
 
 
-    temp4 = D_8009A5C0;
-    temp_v0_2 = alHeapAlloc(alHeap, 1, 0x8000);
-    temp4->currentTrackData[0] = &temp_v0_2[0];
-    temp4->currentTrackData[1] = &temp_v0_2[0x1400];
-    temp4->currentTrackData[2] = &temp_v0_2[0x1C00];
-    temp4->currentTrackData[3] = &temp_v0_2[0x1400];
+    globals = gSoundGlobals;
+    dummyTrackData = alHeapAlloc(alHeap, 1, 0x8000);
+    globals->currentTrackData[0] = &dummyTrackData[0];
+    globals->currentTrackData[1] = &dummyTrackData[0x1400];
+    globals->currentTrackData[2] = &dummyTrackData[0x1C00];
+    globals->currentTrackData[3] = &dummyTrackData[0x1400];
 
     for (i = 0; i < 1; i++) {
-        temp4->unk_6C[i].unk_0 = alHeapAlloc(alHeap, 1, sizeof(BGMPlayer));
+        globals->unk_6C[i].unk_0 = alHeapAlloc(alHeap, 1, sizeof(BGMPlayer));
     }
 
-    temp4->dataSEF = alHeapAlloc(alHeap, 1, 0x5200);
-    temp4->defaultInstrument = alHeapAlloc(alHeap, 1, sizeof(Instrument));
-    temp4->dataPER = alHeapAlloc(alHeap, 1, 6 * sizeof(PEREntry));
-    temp4->dataPRG = alHeapAlloc(alHeap, 1, 0x200);
-    temp4->unk_94 = alHeapAlloc(alHeap, 1, 0x40);
-    temp4->outputRate = outputRate;
-    snd_reset_instrument(temp4->defaultInstrument);
-    func_80053370(&temp4->unk_08);
-    func_800533A8(&temp4->defaultPRGEntry);
+    globals->dataSEF = alHeapAlloc(alHeap, 1, 0x5200);
+    globals->defaultInstrument = alHeapAlloc(alHeap, 1, sizeof(Instrument));
+    globals->dataPER = alHeapAlloc(alHeap, 1, 6 * sizeof(PEREntry));
+    globals->dataPRG = alHeapAlloc(alHeap, 1, 0x200);
+    globals->unk_94 = alHeapAlloc(alHeap, 1, 0x40);
+    globals->outputRate = outputRate;
+    snd_reset_instrument(globals->defaultInstrument);
+    func_80053370(&globals->unk_08);
+    func_800533A8(&globals->defaultPRGEntry);
     func_8005610C();
 
-    temp4->unk_A4[0] = NULL;
-    temp4->unk_A4[1] = NULL;
+    globals->unk_A4[0] = NULL;
+    globals->unk_A4[1] = NULL;
 
     for (i = 0; i < 1; i++) {
-        temp4->unk_6C[i].unk_4 = 0;
-        temp4->unk_6C[i].unk_5 = 0;
+        globals->unk_6C[i].unk_4 = 0;
+        globals->unk_6C[i].unk_5 = 0;
     }
 
     for (i = 0; i < 4; i++) {
-        temp4->unk_40[i].unk_00 = 0;
-        temp4->unk_40[i].unk_01 = 0;
+        globals->unk_40[i].unk_00 = 0;
+        globals->unk_40[i].unk_01 = 0;
     }
 
     for (i = 0; i < 24; i++) {
         func_80056EC0(i, 0);
-        func_80057224(i, temp4->defaultInstrument);
-        temp5 = &temp4->unk_1320[i];
+        func_80057224(i, globals->defaultInstrument);
+        temp5 = &globals->voices[i];
         temp5->unk_00 = 0;
         temp5->unk_04 = 0;
         temp5->unk_0C = -1;
@@ -85,51 +85,51 @@ void snd_load_audio_data(s32 outputRate) {
         temp5->unk_45 = 0;
     }
 
-    snd_load_INIT(temp4, 0xF00000, alHeap);
+    snd_load_INIT(globals, 0xF00000, alHeap);
 
     for (i = 0; i < 3; i++) {
-        temp4->banks[i] = alHeapAlloc(alHeap, 1, 0x840);
+        globals->banks[i] = alHeapAlloc(alHeap, 1, 0x840);
     }
 
-    func_8004E158(D_8009A664, 1, 0, temp4);
+    func_8004E158(gBGMPlayerA, 1, 0, globals);
     temp6[0] = 0;
     temp6[1] = 3;
     temp6[2] = 0xff;
     temp6[3] = 0xff;
-    func_8004E344(D_8009A664, temp6);
-    func_8004E158(D_8009A5FC, 2, 2, temp4);
+    func_8004E344(gBGMPlayerA, temp6);
+    func_8004E158(gBGMPlayerB, 2, 2, globals);
     temp6[0] = 2;
     temp6[1] = 0xff;
     temp6[2] = 0xff;
     temp6[3] = 0xff;
-    func_8004E344(D_8009A5FC, temp6);
-    func_8004B440(D_8009A640, 4, 1, temp4, 0x10);
-    func_80050B90(D_8009A628, 6, 1, temp4);
-    func_80052614(temp4);
-    snd_load_BK_headers(temp4, alHeap);
-    if (snd_fetch_SBN_file(temp4->mseqFileList->unk_0, 0x20, &fileEntry) == 0) {
-        snd_read_rom(fileEntry.offset, temp4->dataSEF, fileEntry.data & 0xFFFFFF);
+    func_8004E344(gBGMPlayerB, temp6);
+    func_8004B440(gSoundManager, 4, 1, globals, 0x10);
+    func_80050B90(D_8009A628, 6, 1, globals);
+    func_80052614(globals);
+    snd_load_BK_headers(globals, alHeap);
+    if (snd_fetch_SBN_file(globals->mseqFileList->unk_0, 0x20, &fileEntry) == 0) {
+        snd_read_rom(fileEntry.offset, globals->dataSEF, fileEntry.data & 0xFFFFFF);
     }
-    snd_load_sfx_groups_from_SEF(D_8009A640);
-    if (snd_fetch_SBN_file(temp4->mseqFileList[1].unk_0, 0x40, &fileEntry) == 0) {
-        snd_load_PER(temp4, fileEntry.offset);
+    snd_load_sfx_groups_from_SEF(gSoundManager);
+    if (snd_fetch_SBN_file(globals->mseqFileList[1].unk_0, 0x40, &fileEntry) == 0) {
+        snd_load_PER(globals, fileEntry.offset);
     }
-    if (snd_fetch_SBN_file(temp4->mseqFileList[2].unk_0, 0x40, &fileEntry) == 0) {
-        snd_load_PRG(temp4, fileEntry.offset);
+    if (snd_fetch_SBN_file(globals->mseqFileList[2].unk_0, 0x40, &fileEntry) == 0) {
+        snd_load_PRG(globals, fileEntry.offset);
     }
 
-    temp4->instrumentGroups[0] = temp4->instrumentGroup1;
-    temp4->instrumentGroups[1] = temp4->instrumentGroup2;
-    temp4->instrumentGroups[2] = temp4->instrumentGroupX;
-    temp4->instrumentGroups[3] = temp4->instrumentGroup3;
-    temp4->instrumentGroups[4] = temp4->instrumentGroup4;
-    temp4->instrumentGroups[5] = temp4->instrumentGroup5;
-    temp4->instrumentGroups[6] = temp4->instrumentGroup6;
-    temp4->instrumentGroups[7] = temp4->instrumentGroup1;
-    temp4->unk_53 = 0;
-    temp4->unk_52 = 0;
-    temp4->unk_51 = 0;
-    temp4->unk_50 = 0;
+    globals->instrumentGroups[0] = globals->instrumentGroup1;
+    globals->instrumentGroups[1] = globals->instrumentGroup2;
+    globals->instrumentGroups[2] = globals->instrumentGroupX;
+    globals->instrumentGroups[3] = globals->instrumentGroup3;
+    globals->instrumentGroups[4] = globals->instrumentGroup4;
+    globals->instrumentGroups[5] = globals->instrumentGroup5;
+    globals->instrumentGroups[6] = globals->instrumentGroup6;
+    globals->instrumentGroups[7] = globals->instrumentGroup1;
+    globals->unk_53 = 0;
+    globals->unk_52 = 0;
+    globals->unk_51 = 0;
+    globals->unk_50 = 0;
 
     func_80057ED0(0);
     func_80055050(alHeap);
@@ -180,8 +180,8 @@ void func_800533A8(BGMInstrumentInfo* arg0) {
 
 
 void snd_update_sequence_players(void) {
-    SndGlobals* temp_s2 = D_8009A5C0;
-    SoundManager* manager = D_8009A640;
+    SndGlobals* temp_s2 = gSoundGlobals;
+    SoundManager* manager = gSoundManager;
     UnkAl834* temp_s0 = D_8009A628;
     BGMPlayer* bgmPlayer1;
     BGMPlayer* bgmPlayer2;
@@ -206,7 +206,7 @@ void snd_update_sequence_players(void) {
     }
 
     if (!D_80078DB0) {
-        bgmPlayer1 = D_8009A5FC;
+        bgmPlayer1 = gBGMPlayerB;
         if (bgmPlayer1->fadeInfo.fadeTime != 0) {
             snd_update_bgm_fade(bgmPlayer1);
         }
@@ -223,7 +223,7 @@ void snd_update_sequence_players(void) {
             if (temp_s2->unk_80 != 0) {
                 func_8004DFD4(temp_s2);
             }
-            bgmPlayer2 = D_8009A664;
+            bgmPlayer2 = gBGMPlayerA;
             if (bgmPlayer2->fadeInfo.unk_1A != 0) {
                 func_80053BA8(&bgmPlayer2->fadeInfo);
                 if (bgmPlayer2->fadeInfo.fadeTime == 0) {
@@ -249,9 +249,9 @@ void snd_update_sequence_players(void) {
 }
 
 void func_800535C0(void) {
-    SndGlobals* temp_s1 = D_8009A5C0;
-    BGMPlayer* player = D_8009A664;
-    SoundManager* manager = D_8009A640;
+    SndGlobals* temp_s1 = gSoundGlobals;
+    BGMPlayer* player = gBGMPlayerA;
+    SoundManager* manager = gSoundManager;
 
     if (temp_s1->unk_9C != 0) {
         func_8005610C();
@@ -263,8 +263,8 @@ void func_800535C0(void) {
     }
 
     func_8004D510(player);
-    player = D_8009A5FC;
-    func_8004D510(D_8009A5FC);
+    player = gBGMPlayerB;
+    func_8004D510(gBGMPlayerB);
     func_8004B748(manager);
 }
 
@@ -312,8 +312,8 @@ void func_80053654(SndGlobals* arg0) {
         arg0->unk_40[3].unk_01 = 0;
     }
 
-    for (i = 0; i < ARRAY_COUNT(arg0->unk_1320); i++) {
-        UnkAl48* it = &arg0->unk_1320[i];
+    for (i = 0; i < ARRAY_COUNT(arg0->voices); i++) {
+        AlUnkVoice* it = &arg0->voices[i];
         u8 unk_43 = it->unk_43;
 
         if (it->unk_42 != 0) {
@@ -342,7 +342,7 @@ void func_80053654(SndGlobals* arg0) {
     }
 }
 
-void func_80053888(UnkAl48* arg0, s32 arg1) { // type may be wrong but it seems good
+void func_80053888(AlUnkVoice* arg0, s32 arg1) { // type may be wrong but it seems good
     if (arg0->unk_45 != 0) {
         arg0->unk_1C = 0;
         arg0->unk_42 = 1;
@@ -351,7 +351,7 @@ void func_80053888(UnkAl48* arg0, s32 arg1) { // type may be wrong but it seems 
     }
 }
 
-void func_800538C4(UnkAl48* arg0, s32 arg1) { // type may be wrong but it seems good
+void func_800538C4(AlUnkVoice* arg0, s32 arg1) { // type may be wrong but it seems good
     arg0->unk_1C = 0;
     arg0->unk_42 = 1;
     arg0->unk_43 = 0;
@@ -475,20 +475,20 @@ Instrument* func_80053BE8(SndGlobals* arg0, u32 arg1, u32 arg2, s32** arg3) {
 }
 
 void snd_get_sequence_player_and_track(u32 playerIndex, s32** outCurrentTrackData, BGMPlayer** outPlayer) {
-    SndGlobals* globals = D_8009A5C0;
+    SndGlobals* globals = gSoundGlobals;
 
     switch (playerIndex) {
         case 0:
             *outCurrentTrackData = globals->currentTrackData[0];
-            *outPlayer = D_8009A664;
+            *outPlayer = gBGMPlayerA;
             break;
         case 1:
             *outCurrentTrackData = globals->currentTrackData[1];
-            *outPlayer = D_8009A5FC;
+            *outPlayer = gBGMPlayerB;
             break;
         case 2:
             *outCurrentTrackData = globals->currentTrackData[0];
-            *outPlayer = D_8009A664;
+            *outPlayer = gBGMPlayerA;
             break;
         default:
             *outCurrentTrackData = NULL;
@@ -500,13 +500,13 @@ void snd_get_sequence_player_and_track(u32 playerIndex, s32** outCurrentTrackDat
 void snd_get_sequence_player(u32 playerIndex, BGMPlayer** outPlayer) {
     switch (playerIndex) {
         case 0:
-            *outPlayer = D_8009A664;
+            *outPlayer = gBGMPlayerA;
             break;
         case 1:
-            *outPlayer = D_8009A5FC;
+            *outPlayer = gBGMPlayerB;
             break;
         case 2:
-            *outPlayer = D_8009A664;
+            *outPlayer = gBGMPlayerA;
             break;
         default:
             *outPlayer = NULL;
@@ -530,7 +530,7 @@ s32 snd_load_song_files(u32 arg0, BGMHeader* arg1, BGMPlayer* arg2) {
     BGMHeader* arg1_copy;
     s32 cond;
 
-    soundData = D_8009A5C0;
+    soundData = gSoundGlobals;
 
     // needed to match
     cond = arg0 < soundData->songListLength;
@@ -588,7 +588,7 @@ s32 func_80053E58(s32 arg0, u8* arg1) {
     u32 offset;
     u16 bkFileIndex;
 
-    soundData = D_8009A5C0;
+    soundData = gSoundGlobals;
     temp_s1 = &soundData->songList[arg0];
     ret =  snd_fetch_SBN_file(temp_s1[0].bgmFileIndex, 0x10, &sp18);
     if (ret == 0) {
@@ -619,7 +619,7 @@ s32 func_80053E58(s32 arg0, u8* arg1) {
 
 BGMPlayer* func_80053F64(s32 arg0) {
     if (arg0 == 0) {
-        return D_8009A5C0->unk_6C[0].unk_0;
+        return gSoundGlobals->unk_6C[0].unk_0;
     }
     return NULL;
 }
@@ -631,7 +631,7 @@ s32 func_80053F80(u32 arg0) {
     UnkAl834* temp_s2;
     s32* trackData;
 
-    soundData = D_8009A5C0;
+    soundData = gSoundGlobals;
     temp_s2 = D_8009A628;
     if (arg0 < 16) {
         if (temp_s2->unk_24[0].unk_20 == 0 && snd_fetch_SBN_file(soundData->mseqFileList[D_80078580[arg0]].unk_0, 0x40, &fileEntry) == 0) {
@@ -684,11 +684,11 @@ s32 func_80053F80(u32 arg0) {
 BGMPlayer* func_80054248(u8 arg0) {
     switch (arg0) {
         case 1:
-            return D_8009A664;
+            return gBGMPlayerA;
         case 2:
-            return D_8009A5FC;
+            return gBGMPlayerB;
         case 4:
-            return D_8009A640; // TODO: why return pointer to SoundManager?
+            return gSoundManager; // TODO: why return pointer to SoundManager?
         default:
             return NULL;
     }
@@ -748,7 +748,7 @@ void snd_load_INIT(SndGlobals* arg0, s32 romAddr, ALHeap* heap) {
 
 s32 snd_fetch_SBN_file(u32 fileIdx, s32 format, SBNFileEntry* arg2) {
     SBNFileEntry fileEntry;
-    SndGlobals* temp = D_8009A5C0;
+    SndGlobals* temp = gSoundGlobals;
     u32 data;
     s32 ret = 0;
 
@@ -815,11 +815,11 @@ void snd_load_PRG(SndGlobals* arg0, s32 romAddr) {
 }
 
 
-INCLUDE_ASM(s32, "2e230_len_2190", snd_load_BGM);
+INCLUDE_ASM(s32, "audio/2e230_len_2190", snd_load_BGM);
 
 InstrumentGroup* snd_get_BK_instruments(s32 bankGroup, u32 bankIndex) {
     InstrumentGroup* ret = NULL;
-    SndGlobals* temp = D_8009A5C0;
+    SndGlobals* temp = gSoundGlobals;
 
     // TODO fake match - this multiplying the bankIndex by 16 and then dividing it right after is dumb
     bankIndex *= 16;
@@ -929,13 +929,13 @@ s32 snd_load_BK_to_bank(s32 bkFileOffset, SoundBank* bank, s32 bankIndex, s32 ba
     return bank;
 }
 #else
-INCLUDE_ASM(s32, "2e230_len_2190", snd_load_BK_to_bank, s32 bkFileOffset, SoundBank* bank, s32 bankIndex, s32 arg3);
+INCLUDE_ASM(s32, "audio/2e230_len_2190", snd_load_BK_to_bank, s32 bkFileOffset, SoundBank* bank, s32 bankIndex, s32 arg3);
 #endif
 
 void snd_swizzle_BK_instruments(s32 bkFileOffset, SoundBank* bank, InstrumentGroup instruments, u32 instrumentCount, u8 arg4) {
     SoundBank* sb = bank;
-    Instrument* defaultInstrument = D_8009A5C0->defaultInstrument;
-    f32 freq = D_8009A5C0->outputRate;
+    Instrument* defaultInstrument = gSoundGlobals->defaultInstrument;
+    f32 freq = gSoundGlobals->outputRate;
     s32 i;
 
     if (sb->swizzled == 0) {
@@ -965,16 +965,16 @@ void snd_swizzle_BK_instruments(s32 bkFileOffset, SoundBank* bank, InstrumentGro
     }
 }
 
-INCLUDE_ASM(s32, "2e230_len_2190", func_80054AA0);
+INCLUDE_ASM(s32, "audio/2e230_len_2190", func_80054AA0);
 
 s32 snd_load_BK(s32 bkFileOffset, s32 bankIndex) {
-    snd_load_BK_to_bank(bkFileOffset, D_8009A5C0->banks[bankIndex], bankIndex, 1);
+    snd_load_BK_to_bank(bkFileOffset, gSoundGlobals->banks[bankIndex], bankIndex, 1);
     return 0;
 }
 
 void func_80054C84(s32 bankIndex, s32 bankGroup) {
     u32 i;
-    Instrument* instrument = D_8009A5C0->defaultInstrument;
+    Instrument* instrument = gSoundGlobals->defaultInstrument;
     InstrumentGroup* group =  snd_get_BK_instruments(bankGroup, bankIndex);
     Instrument** ptr = *group;
     if (group != NULL) {
@@ -990,34 +990,34 @@ void func_80054CE0(s32 arg0, s32 arg1) {
     if (arg1 < 9U) {
         temp_s0 = D_80078530[arg1];
         if (arg0 & 1) {
-            D_8009A664->unk_48 = temp_s0;
-            func_80053AC8(&D_8009A664->fadeInfo);
-            D_8009A5FC->unk_48 = temp_s0;
-            func_80053AC8(&D_8009A5FC->fadeInfo);
+            gBGMPlayerA->unk_48 = temp_s0;
+            func_80053AC8(&gBGMPlayerA->fadeInfo);
+            gBGMPlayerB->unk_48 = temp_s0;
+            func_80053AC8(&gBGMPlayerB->fadeInfo);
         }
         if (arg0 & 0x10) {
-            D_8009A640->unk_5C = temp_s0;
-            func_80053AC8(&D_8009A640->unk_40);
+            gSoundManager->unk_5C = temp_s0;
+            func_80053AC8(&gSoundManager->unk_40);
         }
     }
 }
 
 s32 func_80054D74(s32 arg0, s32 arg1) {
     if (arg0 & 0x10) {
-        return func_8004B9E4(D_8009A640, arg1);
+        return func_8004B9E4(gSoundManager, arg1);
     }
     return 0;
 }
 
 void func_80054DA8(u32 arg0) {
     if (arg0 % 2 == 1) {
-        if (D_8009A5C0->unk_130C == 0) {
-            D_8009A5C0->unk_130C = 2;
+        if (gSoundGlobals->unk_130C == 0) {
+            gSoundGlobals->unk_130C = 2;
         }
     } else {
-        if (D_8009A5C0->unk_130C != 0) {
-            D_8009A5C0->unk_50 = 1;
-            D_8009A5C0->unk_130C = 0;
+        if (gSoundGlobals->unk_130C != 0) {
+            gSoundGlobals->unk_50 = 1;
+            gSoundGlobals->unk_130C = 0;
         }
     }
 }

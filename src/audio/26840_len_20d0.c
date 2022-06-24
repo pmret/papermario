@@ -31,7 +31,7 @@ void snd_SEFCmd_17(SoundManager* manager, SoundPlayer* player);
 void snd_SEFCmd_18(SoundManager* manager, SoundPlayer* player);
 
 void snd_set_player_modifiers(SoundPlayer* player, SoundSFXEntry* sfxEntry);
-void func_800538C4(UnkAl48* arg0, s32 arg1);
+void func_800538C4(AlUnkVoice* arg0, s32 arg1);
 f32 snd_tune_param_to_timescale(s32);
 
 void func_8004B440(SoundManager* manager, u8 arg1, u8 arg2, SndGlobals* arg3, u8 arg4) {
@@ -179,7 +179,7 @@ void snd_enqueue_sfx_event(SoundManager* manager, s32 soundID, s16 volume, s16 p
     }
 }
 
-INCLUDE_ASM(void, "26840_len_20d0", func_8004B748, SoundManager* manager);
+INCLUDE_ASM(void, "audio/26840_len_20d0", func_8004B748, SoundManager* manager);
 
 s32 func_8004B9E4(SoundManager* manager, s32 arg1) {
     s32 a1 = (u8) arg1;
@@ -209,7 +209,7 @@ void func_8004BA54(SoundManager* manager, s32 arg1) {
     }
 }
 
-INCLUDE_ASM(s32, "26840_len_20d0", func_8004BA74);
+INCLUDE_ASM(s32, "audio/26840_len_20d0", func_8004BA74);
 
 void func_8004C0E4(SoundManager* manager, SoundPlayer* player, s8* readPos, SoundSFXEntry* sfxEntry, s32 arg4, s32 arg5) {
     if (manager->unk_C0 == 0) {
@@ -350,46 +350,46 @@ void snd_set_player_modifiers(SoundPlayer* player, SoundSFXEntry* sfxEntry) {
     }
 }
 
-void func_8004C578(SoundManager*, SoundPlayer*, UnkAl48*, u32);
-void func_8004C884(SoundManager*, SoundPlayer*, UnkAl48*, u32);
+void func_8004C578(SoundManager*, SoundPlayer*, AlUnkVoice*, u32);
+void func_8004C884(SoundManager*, SoundPlayer*, AlUnkVoice*, u32);
 
 s16 func_8004C444(SoundManager* manager) {
     u32 phi_a3 = manager->sfxPlayerSelector;
     u16 temp = manager->unk_60;
     u16 playCounter = manager->playCounter;
-    SoundPlayer* temp_a1;
-    UnkAl48* temp_a2;
+    SoundPlayer* sndPlayer;
+    AlUnkVoice* temp_a2;
     u8 i;
 
     manager->unk_60 = temp + playCounter;
 
     for (i = phi_a3, phi_a3 += 8; i < (u8)phi_a3; i++){
-        temp_a1 = &manager->unk_16C[i - manager->sfxPlayerSelector];
-        if (temp_a1->sefDataReadPos != 0) {
-            manager->unk_04 = temp_a2 = &manager->soundData->unk_1320[i];
-            if (manager->unk_04->unk_45 <= manager->unk_BC) {
+        sndPlayer = &manager->unk_16C[i - manager->sfxPlayerSelector];
+        if (sndPlayer->sefDataReadPos != 0) {
+            manager->currentVoice = temp_a2 = &manager->soundData->voices[i];
+            if (manager->currentVoice->unk_45 <= manager->unk_BC) {
                 manager->unk_BF = i;
-                switch (temp_a1->sfxParamsFlags & 3) {
+                switch (sndPlayer->sfxParamsFlags & 3) {
                     case 0:
-                        func_8004C578(manager, temp_a1, temp_a2, i);
+                        func_8004C578(manager, sndPlayer, temp_a2, i);
                         break;
                     case 1:
-                        func_8004C884(manager, temp_a1, temp_a2, i);
+                        func_8004C884(manager, sndPlayer, temp_a2, i);
                         break;
                     case 2: // Yes, this is needed.
                         break;
                 }
             } else {
-                temp_a1->sefDataReadPos = NULL;
-                temp_a1->currentSoundID = 0;
-                temp_a1->unk_98 = 0;
+                sndPlayer->sefDataReadPos = NULL;
+                sndPlayer->currentSoundID = 0;
+                sndPlayer->unk_98 = 0;
             }
         }
     }
     return 0;
 }
 
-void func_8004C578(SoundManager* manager, SoundPlayer* player, UnkAl48* ARG2, u32 ARG3) {
+void func_8004C578(SoundManager* manager, SoundPlayer* player, AlUnkVoice* ARG2, u32 ARG3) {
     s16 volume;
     s32 tune;
     s32 pan;
@@ -490,9 +490,9 @@ s16 snd_get_scaled_volume(SoundManager* manager, SoundPlayer* player) {
     return outVolume;
 }
 
-INCLUDE_ASM(s32, "26840_len_20d0", func_8004C884);
+INCLUDE_ASM(s32, "audio/26840_len_20d0", func_8004C884);
 
-void snd_set_voice_volume(UnkAl48* voice, SoundManager* manager, SoundPlayer* player) {
+void snd_set_voice_volume(AlUnkVoice* voice, SoundManager* manager, SoundPlayer* player) {
     s32 x = ((((manager->unk_B8
         * player->sfxVolume) >> 0xF)
         * player->unk_9F) >> 7)
@@ -506,7 +506,6 @@ void snd_set_voice_volume(UnkAl48* voice, SoundManager* manager, SoundPlayer* pl
 }
 
 u8 func_8004CDF8(s32 arg0, s32 arg1, s32 arg2) {
-
     s32 retVal;
     s32 cond;
     s32 a, b, c;
@@ -621,7 +620,7 @@ void snd_SEFCmd_06(SoundManager* manager, SoundPlayer* player) {
 }
 
 void snd_SEFCmd_07(SoundManager* manager, SoundPlayer* player) {
-    if (manager->unk_04->unk_45 == manager->unk_BC) {
+    if (manager->currentVoice->unk_45 == manager->unk_BC) {
         player->unk_8E = 2;
         player->sefDataReadPos--;
     }
@@ -725,7 +724,7 @@ void snd_SEFCmd_0E(SoundManager* manager, SoundPlayer* player) {
 }
 
 void snd_SEFCmd_0F(SoundManager* manager, SoundPlayer* player) {
-    UnkAl48* temp_a2 = manager->unk_04;
+    AlUnkVoice* temp_a2 = manager->currentVoice;
     if (temp_a2->unk_45 == manager->unk_BC) {
         func_800538C4(temp_a2, manager->unk_BF);
     }

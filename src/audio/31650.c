@@ -4,8 +4,8 @@
 
 s16 func_80058004(s16 arg0, s32 arg1, s16 arg2, u16 arg3);
 
-UnkAl0* D_80078E50 = NULL;
-UnkAl0* D_80078E54 = NULL;
+AlUnkAlpha* D_80078E50 = NULL;
+AlUnkAlpha* D_80078E54 = NULL;
 s8 D_80078E58 = 0;
 s16 D_80078E5A = 0x7FFF;
 s8 D_80078E5C = 0;
@@ -30,7 +30,7 @@ s16 AlCosineBlend[] = {
      2833,  2429,  2025,  1620,  1216,   810,   405,     0
     };
 
-void func_80056250(UnkAl0* globals, ALConfig* config) {
+void func_80056250(AlUnkAlpha* globals, ALConfig* config) {
     s32 i;
     ALHeap* heap = config->heap;
 
@@ -50,53 +50,53 @@ void func_80056250(UnkAl0* globals, ALConfig* config) {
     D_80078E58 = 0;
     D_80078E5A = 0x7FFF;
     D_80078E5C = 1;
-    D_80078E54->unk_1C = alHeapAlloc(heap, config->unk_00, sizeof(UnkAl7C));
+    D_80078E54->al_unk_beta = alHeapAlloc(heap, config->unk_00, sizeof(*D_80078E54->al_unk_beta));
 
     for (i = 0; i < config->unk_00; i++) {
-        UnkAl7C* al7C = &D_80078E54->unk_1C[i];
-        al7C->unk_04 = alHeapAlloc(heap, 1, 0x20);
-        al7C->unk_08 = alHeapAlloc(heap, 1, 0x20);
-        al7C->dmaProc = ((ALDMAproc (*)(NUDMAState**))(D_80078E54->dmaNew))(&al7C->dmaState);
-        al7C->unk_2C = 0;
-        al7C->unk_30 = 1;
-        al7C->unk_34 = 0;
-        al7C->unk_38 = alHeapAlloc(heap, 1, 0x20);
-        al7C->unk_40 = 0;
-        al7C->unk_44 = 1;
-        al7C->unk_3C = 1.0f;
-        al7C->unk_48 = alHeapAlloc(heap, 1, 0x50);
-        al7C->unk_6C = 1;
-        al7C->unk_70 = 0;
-        al7C->unk_4E = 1;
-        al7C->unk_5C = 1;
-        al7C->unk_62 = 1;
-        al7C->unk_50 = 1;
-        al7C->unk_52 = 1;
-        al7C->unk_54 = 0;
-        al7C->unk_56 = 0;
-        al7C->unk_5A = 1;
-        al7C->unk_58 = 0;
-        al7C->unk_60 = 1;
-        al7C->unk_5E = 0;
-        al7C->unk_64 = 0;
-        al7C->unk_68 = 0;
-        al7C->unk_4C = 64;
-        al7C->unk_74 = 0;
-        al7C->unk_00 = 0;
-        al7C->unk_78 = 0;
-        al7C->unk_79 = i;
+        AlUnkBeta* beta = &D_80078E54->al_unk_beta[i];
+        beta->unk_04 = alHeapAlloc(heap, 1, 0x20);
+        beta->unk_08 = alHeapAlloc(heap, 1, 0x20);
+        beta->dmaProc = ((ALDMAproc (*)(NUDMAState**))(D_80078E54->dmaNew))(&beta->dmaState);
+        beta->unk_2C = 0;
+        beta->unk_30 = 1;
+        beta->unk_34 = 0;
+        beta->unk_38 = alHeapAlloc(heap, 1, 0x20);
+        beta->unk_40 = 0;
+        beta->unk_44 = 1;
+        beta->unk_3C = 1.0f;
+        beta->unk_48 = alHeapAlloc(heap, 1, 0x50);
+        beta->unk_6C = 1;
+        beta->unk_70 = 0;
+        beta->unk_4E = 1;
+        beta->unk_5C = 1;
+        beta->unk_62 = 1;
+        beta->unk_50 = 1;
+        beta->unk_52 = 1;
+        beta->unk_54 = 0;
+        beta->unk_56 = 0;
+        beta->unk_5A = 1;
+        beta->unk_58 = 0;
+        beta->unk_60 = 1;
+        beta->unk_5E = 0;
+        beta->unk_64 = 0;
+        beta->unk_68 = 0;
+        beta->unk_4C = 64;
+        beta->unk_74 = 0;
+        beta->unk_00 = 0;
+        beta->unk_78 = 0;
+        beta->unk_79 = i;
     }
-    D_80078E54->unk_20 = alHeapAlloc(heap, config->unk_04, sizeof(*D_80078E54->unk_20));
+    D_80078E54->al_unk_gamma = alHeapAlloc(heap, config->unk_04, sizeof(*D_80078E54->al_unk_gamma));
     for (i = 0; i < config->unk_04; i++) {
-        UnkAlLen18* temp = &D_80078E54->unk_20[i];
+        AlUnkGamma* temp = &D_80078E54->al_unk_gamma[i];
         temp->unk_10 = 0;
         temp->unk_14 = 0;
         temp->unk_00 = 0x7FFF;
         temp->unk_0C = 0;
-        temp->unk_04 = alHeapAlloc(heap, 1, sizeof(*temp->unk_04));
-        temp->unk_08 = alHeapAlloc(heap, 1, sizeof(*temp->unk_08));
-        func_80058E84(temp->unk_04, temp->unk_0C, heap);
-        func_80058E84(temp->unk_08, temp->unk_0C, heap);
+        temp->unk_delta_4 = alHeapAlloc(heap, 1, sizeof(*temp->unk_delta_4));
+        temp->unk_delta_8 = alHeapAlloc(heap, 1, sizeof(*temp->unk_delta_8));
+        func_80058E84(temp->unk_delta_4, temp->unk_0C, heap);
+        func_80058E84(temp->unk_delta_8, temp->unk_0C, heap);
     }
 
 
@@ -121,7 +121,7 @@ void func_800565A4(void) {
     }
 }
 
-INCLUDE_ASM(Acmd*, "31650", alAudioFrame, Acmd* cmdList, s32* cmdLen, s16* outBuf, s32 outLen);
+INCLUDE_ASM(Acmd*, "audio/31650", alAudioFrame, Acmd* cmdList, s32* cmdLen, s16* outBuf, s32 outLen);
 
 void func_80056D34(void) {
     D_80078E58 = 1;
@@ -135,69 +135,65 @@ s16 func_80056D50(void) {
     return D_80078E5A;
 }
 
-#ifdef NON_MATCHING
-void func_80056D5C(s8 arg0) {
+void func_80056D5C(u8 arg0) {
     D_80078181 = arg0;
     D_80078E5C = 1;
 }
-#else
-INCLUDE_ASM(s32, "31650", func_80056D5C);
-#endif
 
 void func_80056D78(u8 arg0, u16 arg1) {
-    UnkAlLen18* temp = &D_80078E54->unk_20[arg0];
+    AlUnkGamma* gamma = &D_80078E54->al_unk_gamma[arg0];
 
-    temp->unk_00 = arg1 & 0x7FFF;
+    gamma->unk_00 = arg1 & 0x7FFF;
 }
 
 u16 func_80056DA4(u8 arg0, u16 arg1) {
-    UnkAlLen18* temp = &D_80078E54->unk_20[arg0];
+    AlUnkGamma* gamma = &D_80078E54->al_unk_gamma[arg0];
 
-    return temp->unk_00;
+    return gamma->unk_00;
 }
 
 void func_80056DCC(u8 arg0, u8 arg1) {
-    UnkAlLen18* temp = &D_80078E54->unk_20[arg0];
+    AlUnkGamma* gamma = &D_80078E54->al_unk_gamma[arg0];
 
-    temp->unk_0C = arg1;
-    func_8005904C(temp->unk_04, arg1);
-    func_8005904C(temp->unk_08, arg1);
+    gamma->unk_0C = arg1;
+    func_8005904C(gamma->unk_delta_4, arg1);
+    func_8005904C(gamma->unk_delta_8, arg1);
 }
 
 void func_80056E34(u8 arg0, s16 arg1, s16 arg2, s32 arg3) {
-    UnkAlLen18* temp_s0 = &D_80078E54->unk_20[arg0];
+    AlUnkGamma* gamma = &D_80078E54->al_unk_gamma[arg0];
     
-    func_800598A0(temp_s0->unk_04, arg1, arg2, arg3);
-    func_800598A0(temp_s0->unk_08, arg1, arg2, arg3);
+    func_800598A0(gamma->unk_delta_4, arg1, arg2, arg3);
+    func_800598A0(gamma->unk_delta_8, arg1, arg2, arg3);
 }
 
 void func_80056EC0(u8 arg0, s8 arg1) {
-    UnkAl7C* al7C = &D_80078E54->unk_1C[arg0];
+    AlUnkBeta* beta = &D_80078E54->al_unk_beta[arg0];
 
-    al7C->unk_78 = arg1;
+    beta->unk_78 = arg1;
 }
 
-INCLUDE_ASM(void, "31650", func_80056EE8, u8 arg0);
+INCLUDE_ASM(void, "audio/31650", func_80056EE8, u8 arg0);
 
 void func_80056F78(u8 arg0) {
-    UnkAl7C* al7C = &D_80078E54->unk_1C[arg0];
+    AlUnkBeta* beta = &D_80078E54->al_unk_beta[arg0];
 
-    al7C->unk_70 = 1;
+    beta->unk_70 = 1;
 }
 
-INCLUDE_ASM(void, "31650", func_80056FA4, u8 arg0, u8 arg1, s32 arg2, f32 arg3, s16 arg4, u8 arg5, u8 arg6,
+INCLUDE_ASM(void, "audio/31650", func_80056FA4, u8 arg0, u8 arg1, s32 arg2, f32 arg3, s16 arg4, u8 arg5, u8 arg6,
             s32 arg7);
 
-INCLUDE_ASM(void, "31650", func_80057224, u8 arg0, Instrument* arg1);
+INCLUDE_ASM(void, "audio/31650", func_80057224, u8 arg0, Instrument* arg1);
 
 void func_80057344(u8 arg0, f32 arg1) {
-    UnkAl7C* al7C = &D_80078E54->unk_1C[arg0];
+    AlUnkBeta* beta = &D_80078E54->al_unk_beta[arg0];
 
-    al7C->unk_3C = arg1;
+    beta->unk_3C = arg1;
 }
 
 void func_8005736C(u8 arg0, s16 arg1, s32 arg2, u8 arg3, u8 arg4) {
-    UnkAl7C* temp_s0 = &D_80078E54->unk_1C[arg0];
+    AlUnkBeta* temp_s0 = &D_80078E54->al_unk_beta[arg0];
     UnkStruct80057874* temp_s1 = (UnkStruct80057874*)&temp_s0->unk_48;
     
     if (temp_s0->unk_64 >= temp_s0->unk_68) {
@@ -230,7 +226,7 @@ void func_8005736C(u8 arg0, s16 arg1, s32 arg2, u8 arg3, u8 arg4) {
 }
 
 void func_80057548(u8 arg0, u8 arg1, u8 arg2) {
-    UnkAl7C* temp_s0 = &D_80078E54->unk_1C[arg0];
+    AlUnkBeta* temp_s0 = &D_80078E54->al_unk_beta[arg0];
     UnkStruct80057874* temp_s1 = (UnkStruct80057874*)&temp_s0->unk_48;
 
     if (temp_s0->unk_64 >= temp_s0->unk_68) {
@@ -260,7 +256,7 @@ void func_80057548(u8 arg0, u8 arg1, u8 arg2) {
 }
 
 void func_800576EC(u8 arg0, s16 arg1, s32 arg2) {
-    UnkAl7C* temp_s0 = &D_80078E54->unk_1C[arg0];
+    AlUnkBeta* temp_s0 = &D_80078E54->al_unk_beta[arg0];
     UnkStruct80057874* temp_s1 = (UnkStruct80057874*)&temp_s0->unk_48;
 
     if (temp_s0->unk_64 >= temp_s0->unk_68) {
@@ -291,7 +287,7 @@ void func_800576EC(u8 arg0, s16 arg1, s32 arg2) {
 }
 
 void func_80057874(u8 arg0, u8 arg1) {
-    UnkAl7C* temp_s0 = &D_80078E54->unk_1C[arg0];
+    AlUnkBeta* temp_s0 = &D_80078E54->al_unk_beta[arg0];
     UnkStruct80057874* temp_s1 = (UnkStruct80057874*)&temp_s0->unk_48;
 
     if (temp_s0->unk_64 >= temp_s0->unk_68) {
@@ -319,7 +315,7 @@ void func_80057874(u8 arg0, u8 arg1) {
 }
 
 void func_800579D8(u8 arg0, u8 arg1) {
-    UnkAl7C* temp_s0 = &D_80078E54->unk_1C[arg0];
+    AlUnkBeta* temp_s0 = &D_80078E54->al_unk_beta[arg0];
     UnkStruct80057874* temp_s1 = (UnkStruct80057874*)&temp_s0->unk_48;
 
     if (temp_s0->unk_64 >= temp_s0->unk_68) {
@@ -348,46 +344,46 @@ void func_800579D8(u8 arg0, u8 arg1) {
 }
 
 s32 func_80057B64(u8 arg0) {
-    UnkAl7C* al7C = &D_80078E54->unk_1C[arg0];
+    AlUnkBeta* al7C = &D_80078E54->al_unk_beta[arg0];
 
     return al7C->unk_70;
 }
 
 s32 func_80057B8C(u8 arg0) {
-    UnkAl7C* al7C = &D_80078E54->unk_1C[arg0];
+    AlUnkBeta* al7C = &D_80078E54->al_unk_beta[arg0];
 
     return al7C->unk_78;
 }
 
 f32 func_80057BB4(u8 arg0) {
-    UnkAl7C* al7C = &D_80078E54->unk_1C[arg0];
+    AlUnkBeta* al7C = &D_80078E54->al_unk_beta[arg0];
 
     return al7C->unk_3C;
 }
 
 u8 func_80057BDC(u8 arg0) {
-    UnkAl7C* al7C = &D_80078E54->unk_1C[arg0];
+    AlUnkBeta* al7C = &D_80078E54->al_unk_beta[arg0];
 
     return al7C->unk_4C_s.unk_4D;
 }
 
 s16 func_80057C04(u8 arg0) {
-    UnkAl7C* al7C = &D_80078E54->unk_1C[arg0];
+    AlUnkBeta* al7C = &D_80078E54->al_unk_beta[arg0];
 
     return al7C->unk_54;
 }
 
 s16 func_80057C2C(u8 arg0) {
-    UnkAl7C* al7C = &D_80078E54->unk_1C[arg0];
+    AlUnkBeta* al7C = &D_80078E54->al_unk_beta[arg0];
 
     return al7C->unk_56;
 }
 
 s32 func_80057C54(s32 arg0) {
-    UnkAl7C* temp_v1;
+    AlUnkBeta* temp_v1;
     u32 retVal;
     
-    temp_v1 = &D_80078E54->unk_1C[arg0 & 0xFF];
+    temp_v1 = &D_80078E54->al_unk_beta[arg0 & 0xFF];
     if (temp_v1->unk_64 >= temp_v1->unk_68) {
         if (D_80078181 == 0) {
             retVal = (temp_v1->unk_4E * AlCosineBlend[64] * 2) >> 0x10;
@@ -401,10 +397,10 @@ s32 func_80057C54(s32 arg0) {
 }
 
 s32 func_80057D0C(s32 arg0) {
-    UnkAl7C* temp_v1;
+    AlUnkBeta* temp_v1;
     u32 retVal;
     
-    temp_v1 = &D_80078E54->unk_1C[arg0 & 0xFF];
+    temp_v1 = &D_80078E54->al_unk_beta[arg0 & 0xFF];
     if (temp_v1->unk_64 >= temp_v1->unk_68) {
         if (D_80078181 == 0) {
             retVal = (temp_v1->unk_4E * AlCosineBlend[64] * 2) >> 0x10;

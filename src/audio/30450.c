@@ -64,9 +64,9 @@ void func_8005513C(u32 arg0) {
 
     if (playerSwitch != 0) {
         if (playerSwitch == 1) {
-            player = D_8009A664;
+            player = gBGMPlayerA;
         } else if (playerSwitch == 2) {
-            player = D_8009A5FC;
+            player = gBGMPlayerB;
         }
 
         if (player != NULL) {
@@ -97,7 +97,7 @@ void func_8005513C(u32 arg0) {
 }
 
 void snd_start_sound(s32 soundID, u8 volume, u8 pan) {
-    SoundManager* soundManager = D_8009A640;
+    SoundManager* soundManager = gSoundManager;
     s16 vol = volume * 256;
 
     if (vol != 0) {
@@ -112,7 +112,7 @@ void snd_start_sound(s32 soundID, u8 volume, u8 pan) {
 }
 
 void snd_start_sound_with_shift(s32 soundID, u8 volume, u8 pan, s16 pitchShift) {
-    SoundManager* soundManager = D_8009A640;
+    SoundManager* soundManager = gSoundManager;
     s16 vol = volume * 256;
 
     if (vol != 0) {
@@ -133,7 +133,7 @@ void snd_start_sound_with_shift(s32 soundID, u8 volume, u8 pan, s16 pitchShift) 
 }
 
 void snd_adjust_sound(s32 soundID, u8 volume, u8 pan) {
-    SoundManager* soundManager = D_8009A640;
+    SoundManager* soundManager = gSoundManager;
     s16 vol = volume * 256;
 
     if (vol != 0) {
@@ -148,7 +148,7 @@ void snd_adjust_sound(s32 soundID, u8 volume, u8 pan) {
 }
 
 void snd_adjust_sound_with_shift(s32 soundID, u8 volume, u8 pan, s16 pitchShift) {
-    SoundManager* soundManager = D_8009A640;
+    SoundManager* soundManager = gSoundManager;
     s16 a1temp = volume * 256;
 
     if (a1temp != 0) {
@@ -169,17 +169,17 @@ void snd_adjust_sound_with_shift(s32 soundID, u8 volume, u8 pan, s16 pitchShift)
 }
 
 void snd_stop_sound(s32 soundID) {
-    SoundManager* soundManager = D_8009A640;
+    SoundManager* soundManager = gSoundManager;
 
     snd_enqueue_sfx_event(soundManager, soundID | 0x8000, 0, 0, 0);
 }
 
 void func_800553F4(void) {
-    D_8009A640->unk_168 = 1;
+    gSoundManager->unk_168 = 1;
 }
 
 void snd_start_sound_raw(s32 soundID, s16 volume, s16 pitchShift, s32 pan) {
-    SoundManager* soundManager = D_8009A640;
+    SoundManager* soundManager = gSoundManager;
 
     snd_enqueue_sfx_event(soundManager, soundID, volume, pitchShift, pan);
 }
@@ -537,19 +537,19 @@ s32 snd_set_song_variation(s32 songName, s32 variation) {
 }
 
 MusicError func_80055CE8(s32 songName, s32** outTrackData, BGMPlayer** outPlayer) {
-    SndGlobals* globals = D_8009A5C0;
+    SndGlobals* globals = gSoundGlobals;
     s32* trackData;
     s32 error;
 
     error = MUSIC_ERROR_NONE;
     trackData = globals->currentTrackData[0];
     if (songName == trackData[2]) {
-        *outPlayer = D_8009A664;
+        *outPlayer = gBGMPlayerA;
         *outTrackData = trackData;
     } else {
         trackData = globals->currentTrackData[1];
         if (songName == trackData[2]) {
-            *outPlayer = D_8009A5FC;
+            *outPlayer = gBGMPlayerB;
             *outTrackData = trackData;
         } else {
             error = MUSIC_ERROR_1;
@@ -703,18 +703,18 @@ void func_80056068(s32 arg0, u8 arg1) {
 }
 
 void func_8005608C(s32* arg0, s32* arg1) {
-    SndGlobals* temp_v0 = D_8009A5C0;
+    SndGlobals* temp_v0 = gSoundGlobals;
 
     *arg0 = temp_v0->unk_94;
     *arg1 = temp_v0->unk_98;
 }
 
 void func_800560A8(void) {
-    D_8009A5C0->unk_9C = 1;
+    gSoundGlobals->unk_9C = 1;
 }
 
 void func_800560BC(s32 arg0, s32 arg1, s32 arg2) {
-    SndGlobals* globals = D_8009A5C0;
+    SndGlobals* globals = gSoundGlobals;
 
     if (globals->unk_98 < 16) {
         *globals->unk_90++ = ((arg0 << 0x1C) + ((arg1 & 0xF) << 0x18) + arg2);
@@ -723,7 +723,7 @@ void func_800560BC(s32 arg0, s32 arg1, s32 arg2) {
 }
 
 void func_8005610C(void) {
-    SndGlobals* globals = D_8009A5C0;
+    SndGlobals* globals = gSoundGlobals;
     s32* buf = globals->unk_94;
     s32 i = 15;
     
@@ -737,7 +737,7 @@ void func_8005610C(void) {
 }
 
 void func_80056144(UnkFuncAl arg0, s32 arg1) {
-    D_8009A5C0->unk_A4[arg1] = arg0;
+    gSoundGlobals->unk_A4[arg1] = arg0;
 }
 
 void audio_set_stereo(void) {
@@ -763,9 +763,9 @@ void func_800561E4(s32 arg0) {
 }
 
 void func_80056204(void) {
-    func_8004BA54(D_8009A640, 0);
+    func_8004BA54(gSoundManager, 0);
 }
 
 void func_80056228(void) {
-    func_8004BA54(D_8009A640, 1);
+    func_8004BA54(gSoundManager, 1);
 }
