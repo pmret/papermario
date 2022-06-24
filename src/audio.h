@@ -316,7 +316,7 @@ typedef struct SoundManager {
     /* 0x0BF */ u8 unk_BF;
     /* 0x0C0 */ u8 unk_C0;
     /* 0x0C1 */ char unk_C1[0x1];
-    /* 0x0C2 */ SoundSFXEntry unk_C2[16];
+    /* 0x0C2 */ SoundSFXEntry soundQueue[16];
     /* 0x162 */ s8 unk_162;
     /* 0x163 */ u8 sfxQueuePosOffset;
     /* 0x164 */ u8 sfxQueueNextPos;

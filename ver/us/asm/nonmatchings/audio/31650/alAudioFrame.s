@@ -24,7 +24,7 @@ glabel alAudioFrame
 /* 31A0C 8005660C 08015B40 */  j         .L80056D00
 /* 31A10 80056610 ACA00000 */   sw       $zero, ($a1)
 .L80056614:
-/* 31A14 80056614 0C014D70 */  jal       func_800535C0
+/* 31A14 80056614 0C014D70 */  jal       snd_update_sound_effects
 /* 31A18 80056618 00000000 */   nop
 /* 31A1C 8005661C 3C028008 */  lui       $v0, %hi(D_80078E5C)
 /* 31A20 80056620 90428E5C */  lbu       $v0, %lo(D_80078E5C)($v0)

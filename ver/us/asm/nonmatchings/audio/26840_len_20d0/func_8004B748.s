@@ -136,7 +136,7 @@ glabel func_8004B748
 /* 26D20 8004B920 30628000 */   andi     $v0, $v1, 0x8000
 /* 26D24 8004B924 10400005 */  beqz      $v0, .L8004B93C
 /* 26D28 8004B928 3065FFFF */   andi     $a1, $v1, 0xffff
-/* 26D2C 8004B92C 0C0130A9 */  jal       func_8004C2A4
+/* 26D2C 8004B92C 0C0130A9 */  jal       _snd_stop_sound_by_id
 /* 26D30 8004B930 0280202D */   daddu    $a0, $s4, $zero
 /* 26D34 8004B934 08012E64 */  j         .L8004B990
 /* 26D38 8004B938 A6000000 */   sh       $zero, ($s0)

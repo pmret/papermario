@@ -301,7 +301,7 @@ glabel func_8004BA74
 /* 2728C 8004BE8C 2603FFFF */   addiu    $v1, $s0, -1
 .L8004BE90:
 /* 27290 8004BE90 96E50000 */  lhu       $a1, ($s7)
-/* 27294 8004BE94 0C0130A9 */  jal       func_8004C2A4
+/* 27294 8004BE94 0C0130A9 */  jal       _snd_stop_sound_by_id
 /* 27298 8004BE98 0280202D */   daddu    $a0, $s4, $zero
 /* 2729C 8004BE9C 2603FFFF */  addiu     $v1, $s0, -1
 .L8004BEA0:

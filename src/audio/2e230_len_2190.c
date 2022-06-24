@@ -248,23 +248,25 @@ void snd_update_sequence_players(void) {
     func_80052660(temp_s2);
 }
 
-void func_800535C0(void) {
-    SndGlobals* temp_s1 = gSoundGlobals;
+void snd_update_sound_effects(void) {
+    SndGlobals* globals = gSoundGlobals;
     BGMPlayer* player = gBGMPlayerA;
     SoundManager* manager = gSoundManager;
 
-    if (temp_s1->unk_9C != 0) {
+    if (globals->unk_9C != 0) {
         func_8005610C();
     }
 
-    D_8009A5E8 = temp_s1->unk_A4[0];
+    D_8009A5E8 = globals->unk_A4[0];
     if (D_8009A5E8 != NULL) {
         D_8009A5E8();
     }
 
     func_8004D510(player);
+
     player = gBGMPlayerB;
-    func_8004D510(gBGMPlayerB);
+    func_8004D510(player);
+
     func_8004B748(manager);
 }
 
@@ -313,32 +315,32 @@ void func_80053654(SndGlobals* arg0) {
     }
 
     for (i = 0; i < ARRAY_COUNT(arg0->voices); i++) {
-        AlUnkVoice* it = &arg0->voices[i];
-        u8 unk_43 = it->unk_43;
+        AlUnkVoice* voice = &arg0->voices[i];
+        u8 unk_43 = voice->unk_43;
 
-        if (it->unk_42 != 0) {
+        if (voice->unk_42 != 0) {
             func_80056EE8(i);
-            it->unk_42 = 0;
-            it->unk_1C = 0;
-            it->unk_45 = 0;
+            voice->unk_42 = 0;
+            voice->unk_1C = 0;
+            voice->unk_45 = 0;
         }
 
         if (unk_43 & 2) {
-            func_80052BF8(it, &it->unk_14);
-            func_80056FA4(i, it->unk_10, it->unk_00, it->unk_04, it->unk_0C, it->unk_0E, it->unk_0F, it->unk_08);
-            it->unk_45 = it->unk_44;
+            func_80052BF8(voice, &voice->unk_14);
+            func_80056FA4(i, voice->unk_10, voice->unk_00, voice->unk_04, voice->unk_0C, voice->unk_0E, voice->unk_0F, voice->unk_08);
+            voice->unk_45 = voice->unk_44;
         } else {
             if (unk_43 & 8) {
-                func_80057344(i, it->unk_04);
+                func_80057344(i, voice->unk_04);
             }
 
             if (unk_43 & 4) {
-                func_8005736C(i, it->unk_0C, it->unk_08, it->unk_0E, it->unk_0F);
+                func_8005736C(i, voice->unk_0C, voice->unk_08, voice->unk_0E, voice->unk_0F);
             } else if (unk_43 & 0x10) {
-                func_80057548(i, it->unk_0E, it->unk_0F);
+                func_80057548(i, voice->unk_0E, voice->unk_0F);
             }
         }
-        it->unk_43 = 0;
+        voice->unk_43 = 0;
     }
 }
 

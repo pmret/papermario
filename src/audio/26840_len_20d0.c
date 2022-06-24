@@ -139,12 +139,12 @@ void snd_load_sfx_groups_from_SEF(SoundManager* sndMgr) {
 void snd_clear_sfx_queue(SoundManager* manager) {
     s32 i;
 
-    for (i = 0; i < ARRAY_COUNT(manager->unk_C2); i++) {
-        manager->unk_C2[i].soundID = 0;
-        manager->unk_C2[i].upperSoundID = 0;
-        manager->unk_C2[i].volume = 0;
-        manager->unk_C2[i].pitchShift = 0;
-        manager->unk_C2[i].pan = 0;
+    for (i = 0; i < ARRAY_COUNT(manager->soundQueue); i++) {
+        manager->soundQueue[i].soundID = 0;
+        manager->soundQueue[i].upperSoundID = 0;
+        manager->soundQueue[i].volume = 0;
+        manager->soundQueue[i].pitchShift = 0;
+        manager->soundQueue[i].pan = 0;
     }
 
     manager->unk_165 = 0;
@@ -164,11 +164,11 @@ void snd_enqueue_sfx_event(SoundManager* manager, s32 soundID, s16 volume, s16 p
     if (queueAmt < 16) {
         u32 queueNextPos = queuePos;
 
-        manager->unk_C2[queueNextPos].soundID = soundID & 0xBFFF;
-        manager->unk_C2[queueNextPos].upperSoundID = (((u32) soundID >> 0x10) & 0x3FF);
-        manager->unk_C2[queueNextPos].volume = volume;
-        manager->unk_C2[queueNextPos].pitchShift = pitchShift;
-        manager->unk_C2[queueNextPos].pan = pan;
+        manager->soundQueue[queueNextPos].soundID = soundID & 0xBFFF;
+        manager->soundQueue[queueNextPos].upperSoundID = (((u32) soundID >> 0x10) & 0x3FF);
+        manager->soundQueue[queueNextPos].volume = volume;
+        manager->soundQueue[queueNextPos].pitchShift = pitchShift;
+        manager->soundQueue[queueNextPos].pan = pan;
 
         queueNextPos++;
         if (queueNextPos >= 16) {
@@ -283,7 +283,7 @@ void snd_set_bits_C00(SoundManager* manager, u32 soundID) {
     }
 }
 
-void func_8004C2A4(SoundManager* manager, u32 soundID) {
+void _snd_stop_sound_by_id(SoundManager* manager, u32 soundID) {
     s32 i;
     
     for (i = 0; i < ARRAY_COUNT(manager->unk_16C); i++) {

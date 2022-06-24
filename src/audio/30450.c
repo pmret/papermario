@@ -98,7 +98,7 @@ void func_8005513C(u32 arg0) {
 
 void snd_start_sound(s32 soundID, u8 volume, u8 pan) {
     SoundManager* soundManager = gSoundManager;
-    s16 vol = volume * 256;
+    s16 vol = volume << 8;
 
     if (vol != 0) {
         vol |= 0xFF;
@@ -113,7 +113,7 @@ void snd_start_sound(s32 soundID, u8 volume, u8 pan) {
 
 void snd_start_sound_with_shift(s32 soundID, u8 volume, u8 pan, s16 pitchShift) {
     SoundManager* soundManager = gSoundManager;
-    s16 vol = volume * 256;
+    s16 vol = volume << 8;
 
     if (vol != 0) {
         vol |= 0xFF;
@@ -123,10 +123,10 @@ void snd_start_sound_with_shift(s32 soundID, u8 volume, u8 pan, s16 pitchShift) 
         pan = 0x7F;
     }
 
-    if (pitchShift > 0x960) {
-        pitchShift = 0x960;
-    } else if (pitchShift < -0x960) {
-        pitchShift = -0x960;
+    if (pitchShift > 2400) {
+        pitchShift = 2400;
+    } else if (pitchShift < -2400) {
+        pitchShift = -2400;
     }
 
     snd_enqueue_sfx_event(soundManager, soundID, vol, pitchShift, pan);
@@ -134,7 +134,7 @@ void snd_start_sound_with_shift(s32 soundID, u8 volume, u8 pan, s16 pitchShift) 
 
 void snd_adjust_sound(s32 soundID, u8 volume, u8 pan) {
     SoundManager* soundManager = gSoundManager;
-    s16 vol = volume * 256;
+    s16 vol = volume << 8;
 
     if (vol != 0) {
         vol |= 0xFF;
@@ -149,23 +149,23 @@ void snd_adjust_sound(s32 soundID, u8 volume, u8 pan) {
 
 void snd_adjust_sound_with_shift(s32 soundID, u8 volume, u8 pan, s16 pitchShift) {
     SoundManager* soundManager = gSoundManager;
-    s16 a1temp = volume * 256;
+    s16 vol = volume << 8;
 
-    if (a1temp != 0) {
-        a1temp |= 0xFF;
+    if (vol != 0) {
+        vol |= 0xFF;
     }
 
     if (pan > 0x7F) {
         pan = 0x7F;
     }
 
-    if (pitchShift > 0x960) {
-        pitchShift = 0x960;
-    } else if (pitchShift < -0x960) {
-        pitchShift = -0x960;
+    if (pitchShift > 2400) {
+        pitchShift = 2400;
+    } else if (pitchShift < -2400) {
+        pitchShift = -2400;
     }
 
-    snd_enqueue_sfx_event(soundManager, soundID | 0x1000, a1temp, pitchShift, pan);
+    snd_enqueue_sfx_event(soundManager, soundID | 0x1000, vol, pitchShift, pan);
 }
 
 void snd_stop_sound(s32 soundID) {
@@ -298,47 +298,47 @@ void func_80055760(s32 arg0) {
 s32 func_800557CC(s32 arg0) {
     u32 i;
     s32 lim = 4;
-    s32 phi_v1;
+    s32 error;
 
     for (i = 0; i < lim; i++) {
         if (i == D_80078DB6) {
-            phi_v1 = snd_ambient_slow_fade_out(i, arg0);
+            error = snd_ambient_slow_fade_out(i, arg0);
         } else {
-            phi_v1 = snd_ambient_quick_fade_out(i);
+            error = snd_ambient_quick_fade_out(i);
         }
 
-        if (phi_v1 != 0) {
+        if (error != 0) {
             break;
         }
     }
-    return phi_v1;
+    return error;
 }
 
 s32 func_80055848(s32 arg0) {
     s32 lim = 4;
-    s32 phi_v1 = 0;
+    s32 error = 0;
 
     if (arg0 != D_80078DB6) {
         u32 i;
 
         for (i = 0; i < lim; i++) {
             if (i == arg0) {
-                phi_v1 = func_80055718(arg0);
+                error = func_80055718(arg0);
             } else {
-                phi_v1 = func_800556D0(i);
+                error = func_800556D0(i);
             }
 
-            if (phi_v1 != 0) {
+            if (error != 0) {
                 break;
             }
         }
 
-        if (phi_v1 == 0) {
+        if (error == 0) {
             D_80078DB6 = arg0;
         }
     }
 
-    return phi_v1;
+    return error;
 }
 
 s32 snd_load_song(s32 songID, s32 playerIndex) {
@@ -350,7 +350,7 @@ s32 snd_load_song(s32 songID, s32 playerIndex) {
     if (currentTrackData != NULL) {
         return snd_load_song_files(songID, currentTrackData, songPlayer);
     } else {
-        return 3;
+        return MUSIC_ERROR_3;
     }
 }
 
