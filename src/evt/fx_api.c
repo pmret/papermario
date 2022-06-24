@@ -55,7 +55,8 @@ ApiStatus func_802D7690(Evt* script, s32 isInitialCall) {
         posX + ((sinA * magnitude * script->functionTemp[0]) / duration) + offsetX,
         posY + 15.5f + offsetY,
         posZ + ((-cosA * magnitude * script->functionTemp[0]) / duration) + offsetZ,
-        0.0f);
+        0.0f
+    );
 
     script->functionTemp[0]++;
     if (script->functionTemp[0] < duration) {
@@ -296,13 +297,12 @@ ApiStatus ShowSleepBubble(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-//TODO rename after field is identified
-ApiStatus SetSleepBubbleUnk1C(Evt* script, s32 isInitialCall) {
+ApiStatus SetSleepBubbleTimeLeft(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* effect = (EffectInstance*)evt_get_variable(script, *args++);
     s32 value = evt_get_variable(script, *args++);
 
-    ((s32*)(effect->data))[7] = value; // offset 0x1C in SleepBubbleFX data
+    ((SleepBubbleFXData*)(effect->data))->timeLeft = value;
     return ApiStatus_DONE2;
 }
 
@@ -481,7 +481,7 @@ ApiStatus PlayEffect(Evt* script, s32 isInitialCall) {
             fx_sweat(iVar1, fVar2, fVar3, fVar4, fVar5, fVar6, iVar7);
             break;
         case EFFECT_SLEEP_BUBBLE:
-            fx_sleep_bubble(iVar1, fVar2, fVar3, fVar4, fVar5, fVar6, &sp38);
+            fx_sleep_bubble(iVar1, fVar2, fVar3, fVar4, fVar5, fVar6, (EffectInstance**)&sp38);
             evt_set_variable(script, a7, sp38);
             break;
         case EFFECT_WINDY_LEAVES:
@@ -517,7 +517,7 @@ ApiStatus PlayEffect(Evt* script, s32 isInitialCall) {
             fx_radial_shimmer(iVar1, fVar2, fVar3, fVar4, fVar5, iVar6);
             break;
         case EFFECT_ENDING_DECALS:
-            fx_ending_decals(iVar1, fVar2, fVar3, fVar4, fVar5, &sp34);
+            fx_ending_decals(iVar1, fVar2, fVar3, fVar4, fVar5, (EffectInstance**)&sp34);
             evt_set_variable(script, a6, sp34);
             break;
         case EFFECT_LIGHT_RAYS:
