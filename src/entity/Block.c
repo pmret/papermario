@@ -1,6 +1,16 @@
 #include "common.h"
 #include "effects.h"
 #include "ld_addrs.h"
+#include "entity_script.h"
+
+extern Gfx Entity_InertYellowBlock_Render[];
+extern Gfx Entity_InertRedBlock_Render[];
+extern Gfx Entity_BrickBlock_Render[];
+extern Gfx Entity_Hammer1Block_Render[];
+extern Gfx Entity_Hammer2Block_Render[];
+extern Gfx Entity_Hammer3Block_Render[];
+extern Gfx Entity_PushBlock_Render[];
+extern Gfx Entity_PowBlock_Render[];
 
 extern s32 D_802E9E54[];
 extern s32 D_802E9E80[];
@@ -294,7 +304,7 @@ void entity_MulticoinBlock_check_if_inactive(Entity* entity) {
 }
 
 s32 entity_block_handle_collision(Entity* entity) {
-    s32 bVar2;
+    s32 breakBlock;
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (entity->alpha == 0 && (entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_FLOOR)) {
@@ -324,14 +334,14 @@ s32 entity_block_handle_collision(Entity* entity) {
         return TRUE;
     }
 
-    bVar2 = FALSE;
+    breakBlock = FALSE;
     if (entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_FLOOR) {
         if (playerStatus->actionState == ACTION_STATE_SPIN_JUMP || playerStatus->actionState == ACTION_STATE_ULTRA_JUMP) {
             return FALSE;
         }
 
         if (playerStatus->actionState == ACTION_STATE_GROUND_POUND || playerStatus->actionState == ACTION_STATE_ULTRA_POUND) {
-            bVar2 = TRUE;
+            breakBlock = TRUE;
         } else {
             return TRUE;
         }
@@ -356,32 +366,32 @@ s32 entity_block_handle_collision(Entity* entity) {
             break;
         case ENTITY_TYPE_HAMMER1_BLOCK:
         case ENTITY_TYPE_HAMMER1_BLOCK_TINY:
-            if (bVar2) {
+            if (breakBlock) {
                 if (gPlayerData.bootsLevel < 1) {
-                    bVar2 = FALSE;
+                    breakBlock = FALSE;
                 }
             } else {
                 if (gPlayerData.hammerLevel > -1) {
-                    bVar2 = TRUE;
+                    breakBlock = TRUE;
                 }
             }
-            if (!bVar2) {
-                return 1;
+            if (!breakBlock) {
+                return TRUE;
             }
             set_entity_commandlist(entity, D_802E9E80);
             sfx_play_sound_at_position(SOUND_14F, 0, entity->position.x, entity->position.y, entity->position.z);
             break;
         case ENTITY_TYPE_HAMMER2_BLOCK:
         case ENTITY_TYPE_HAMMER2_BLOCK_TINY:
-            if (bVar2) {
+            if (breakBlock) {
                 if (gPlayerData.bootsLevel < 2) {
-                    bVar2 = FALSE;
+                    breakBlock = FALSE;
                 }
             } else if (gPlayerData.hammerLevel > 0) {
-                bVar2 = TRUE;
+                breakBlock = TRUE;
             }
-            if (!bVar2) {
-                return 1;
+            if (!breakBlock) {
+                return TRUE;
             }
             set_entity_commandlist(entity, D_802E9E80);
             sfx_play_sound_at_position(SOUND_150, 0, entity->position.x, entity->position.y, entity->position.z);
@@ -389,7 +399,7 @@ s32 entity_block_handle_collision(Entity* entity) {
         case ENTITY_TYPE_HAMMER3_BLOCK:
         case ENTITY_TYPE_HAMMER3_BLOCK_TINY:
             if (gPlayerData.hammerLevel < 2) {
-                return 1;
+                return TRUE;
             }
             set_entity_commandlist(entity, D_802E9E80);
             sfx_play_sound_at_position(SOUND_151, 0, entity->position.x, entity->position.y, entity->position.z);
@@ -430,109 +440,198 @@ s32 entity_init_HammerBlock_small(Entity* entity) {
     entity->scale.z = 0.5f;
 }
 
-s32 D_802E9D90[] = {
-    0x00000003, 0x00000000, entity_base_block_idle, 0x00000009, 0x0000014E, 0x00000002, entity_block_hit_init_scale, 0x00000003, 0x00000006, entity_block_hit_animate_scale, 0x00000002, entity_start_script, 0x00000004, 0x00000000, 0x00000000
+EntityScript D_802E9D90 = {
+    es_SetCallback(entity_base_block_idle, 0)
+    es_PlaySound(SOUND_HIT_BLOCK)
+    es_Call(entity_block_hit_init_scale)
+    es_SetCallback(entity_block_hit_animate_scale, 6)
+    es_Call(entity_start_script)
+    es_Restart
+    es_End
 };
-s32 D_802E9DCC[] = {
-    0x00000003, 0x00000000, entity_base_block_idle, 0x00000002, entity_start_script, 0x00000004, 0x00000000, 0x00000000, 0x00000003, 0x00000000, entity_base_block_idle, 0x00000009, 0x0000014E, 0x00000004, 0x00000000, 0x00000000
+EntityScript D_802E9DCC = {
+    es_SetCallback(entity_base_block_idle, 0)
+    es_Call(entity_start_script)
+    es_Restart
+    es_End
 };
-s32 D_802E9E0C[] = {
-    0x00000003, 0x00000000, entity_base_block_idle, 0x00000009, 0x0000014E, 0x00000002, entity_inactive_block_hit_init, 0x00000002, entity_start_script, 0x00000003, 0x00000000, entity_inactive_block_hit_anim, 0x00000003, 0x00000000, entity_inactive_block_recoil_anim, 0x00000004, 0x00000000, 0x00000000
+EntityScript D_802E9DEC = {
+    es_SetCallback(entity_base_block_idle, 0)
+    es_PlaySound(SOUND_HIT_BLOCK)
+    es_Restart
+    es_End
 };
-s32 D_802E9E54[] = {
-    0x00000002, entity_inactive_block_hit_init, 0x00000003, 0x00000000, entity_inactive_block_hit_anim, 0x00000003, 0x00000000, entity_inactive_block_recoil_anim, 0x00000001, D_802E9E0C, 0x00000000
+EntityScript Entity_InertBlock_Script = {
+    es_SetCallback(entity_base_block_idle, 0)
+    es_PlaySound(SOUND_HIT_BLOCK)
+    es_Call(entity_inactive_block_hit_init)
+    es_Call(entity_start_script)
+    es_SetCallback(entity_inactive_block_hit_anim, 0)
+    es_SetCallback(entity_inactive_block_recoil_anim, 0)
+    es_Restart
+    es_End
 };
-s32 D_802E9E80[] = {
-    0x00000006, 0x00000007, 0x00000001, 0x00000007, 0x00000020, 0x00000002, entity_breakable_block_create_shattering_entity, 0x00000003, 0x00000001, 0x00000000, 0x00000007, 0x20000000, 0x00000000
+EntityScript D_802E9E54 = {
+    es_Call(entity_inactive_block_hit_init)
+    es_SetCallback(entity_inactive_block_hit_anim, 0)
+    es_SetCallback(entity_inactive_block_recoil_anim, 0)
+    es_Jump(Entity_InertBlock_Script)
+    es_End
 };
-s32 D_802E9EB4[] = {
-    0x00000003, 0x00000000, entity_BrickBlock_idle, 0x00000002, entity_start_script, 0x00000007, 0x00000001, 0x00000007, 0x00000020, 0x00000002, entity_breakable_block_create_shattering_entity, 0x00000009, 0x0000014E, 0x00000003, 0x00000002, 0x00000000, 0x00000007, 0x20000000, 0x00000000
+EntityScript D_802E9E80 = {
+    es_RestartBoundScript
+    es_SetFlags(ENTITY_FLAGS_HIDDEN)
+    es_SetFlags(ENTITY_FLAGS_SKIP_UPDATE_INVERSE_ROTATION_MATRIX)
+    es_Call(entity_breakable_block_create_shattering_entity)
+    es_SetCallback(NULL, 1)
+    es_SetFlags(ENTITY_FLAGS_PENDING_INSTANCE_DELETE)
+    es_End
 };
-s32 D_802E9F00[] = {
-    0x00000003, 0x00000000, entity_base_block_idle, 0x00000009, 0x0000014E, 0x00000002, entity_start_script, 0x00000004, 0x00000000, 0x00000000
+EntityScript D_802E9EB4 = {
+    es_SetCallback(entity_BrickBlock_idle, 0)
+    es_Call(entity_start_script)
+    es_SetFlags(ENTITY_FLAGS_HIDDEN)
+    es_SetFlags(ENTITY_FLAGS_SKIP_UPDATE_INVERSE_ROTATION_MATRIX)
+    es_Call(entity_breakable_block_create_shattering_entity)
+    es_PlaySound(SOUND_HIT_BLOCK)
+    es_SetCallback(NULL, 2)
+    es_SetFlags(ENTITY_FLAGS_PENDING_INSTANCE_DELETE)
+    es_End
 };
-s32 D_802E9F28[] = {
-    0x00000002, entity_MulticoinBlock_check_if_inactive, 0x00000005, 0x00000001, 0x00000003, 0x00000000, entity_MulticoinBlock_idle, 0x00000009, 0x0000014E, 0x00000002, entity_MulticoinBlock_spawn_coin, 0x00000002, entity_inactive_block_hit_init, 0x00000003, 0x00000000, entity_inactive_block_hit_anim, 0x00000003, 0x00000000, entity_inactive_block_recoil_anim, 0x00000004, 0x00000001, 0x00000000
+EntityScript D_802E9F00 = {
+    es_SetCallback(entity_base_block_idle, 0)
+    es_PlaySound(SOUND_HIT_BLOCK)
+    es_Call(entity_start_script)
+    es_Restart
+    es_End
 };
-s32 D_802E9F80[] = {
-    0x00000004, 0x00000001, 0x00000001, 0x0000003C, 0x0A0004E0, 0x00000002, 0x00000000
+EntityScript Entity_MulticoinBlock_Script = {
+    es_Call(entity_MulticoinBlock_check_if_inactive)
+    es_Label(1)
+        es_SetCallback(entity_MulticoinBlock_idle, 0)
+        es_PlaySound(SOUND_HIT_BLOCK)
+        es_Call(entity_MulticoinBlock_spawn_coin)
+        es_Call(entity_inactive_block_hit_init)
+        es_SetCallback(entity_inactive_block_hit_anim, 0)
+        es_SetCallback(entity_inactive_block_recoil_anim, 0)
+    es_Goto(1)
+    es_End
 };
-s32 D_802E9F9C[] = {
-    0x00000004, 0x00000001, 0x00000001, 0x0000003C, 0x0A000A90, 0x00000002, 0x00000000
+
+EntityModelScript Entity_InertYellowBlock_RenderScript = {
+    ems_SetRenderMode(RENDER_MODE_SURFACE_OPA)
+    ems_Draw(Entity_InertYellowBlock_Render, 60)
+    ems_Restart
+    ems_End
 };
-s32 D_802E9FB8[] = {
-    0x00000004, 0x00000001, 0x00000001, 0x0000003C, 0x0A0004A0, 0x00000002, 0x00000000
+
+EntityModelScript Entity_InertRedBlock_RenderScript = {
+    ems_SetRenderMode(RENDER_MODE_SURFACE_OPA)
+    ems_Draw(Entity_InertRedBlock_Render, 60)
+    ems_Restart
+    ems_End
 };
-s32 D_802E9FD4[] = {
-    0x00000004, 0x00000001, 0x00000001, 0x0000003C, 0x0A0004F0, 0x00000002, 0x00000000
+
+EntityModelScript Entity_MulticoinBrick_RenderScript = {
+    ems_SetRenderMode(RENDER_MODE_SURFACE_OPA)
+    ems_Draw(Entity_BrickBlock_Render, 60)
+    ems_Restart
+    ems_End
 };
-s32 D_802E9FF0[] = {
-    0x00000004, 0x00000001, 0x00000001, 0x0000003C, 0x0A0004F0, 0x00000002, 0x00000000
+
+EntityModelScript Entity_Hammer1Block_RenderScript = {
+    ems_SetRenderMode(RENDER_MODE_SURFACE_OPA)
+    ems_Draw(Entity_Hammer1Block_Render, 60)
+    ems_Restart
+    ems_End
 };
-s32 D_802EA00C[] = {
-    0x00000004, 0x00000001, 0x00000001, 0x0000003C, 0x0A0004E0, 0x00000002, 0x00000000
+
+EntityModelScript Entity_Hammer2Block_RenderScript = {
+    ems_SetRenderMode(RENDER_MODE_SURFACE_OPA)
+    ems_Draw(Entity_Hammer2Block_Render, 60)
+    ems_Restart
+    ems_End
 };
-s32 D_802EA028[] = {
-    0x00000004, 0x00000001, 0x00000001, 0x0000003C, 0x0A000338, 0x00000002, 0x00000000
+
+EntityModelScript Entity_Hammer3Block_RenderScript = {
+    ems_SetRenderMode(RENDER_MODE_SURFACE_OPA)
+    ems_Draw(Entity_Hammer3Block_Render, 60)
+    ems_Restart
+    ems_End
 };
-s32 D_802EA044[] = {
-    0x00000004, 0x00000001, 0x00000001, 0x0000003C, 0x0A0004A0, 0x00000002, 0x00000000
+
+EntityModelScript Entity_PushBlock_RenderScript = {
+    ems_SetRenderMode(RENDER_MODE_SURFACE_OPA)
+    ems_Draw(Entity_PushBlock_Render, 60)
+    ems_Restart
+    ems_End
 };
-s32 D_802EA060[] = {
-    0x00000004, 0x00000001, 0x00000001, 0x0000003C, 0x0A000CC8, 0x00000002, 0x00000000
+
+EntityModelScript Entity_BrickBlock_RenderScript = {
+    ems_SetRenderMode(RENDER_MODE_SURFACE_OPA)
+    ems_Draw(Entity_BrickBlock_Render, 60)
+    ems_Restart
+    ems_End
+};
+
+EntityModelScript Entity_PowBlock_RenderScript = {
+    ems_SetRenderMode(RENDER_MODE_SURFACE_OPA)
+    ems_Draw(Entity_PowBlock_Render, 60)
+    ems_Restart
+    ems_End
 };
 
 EntityBlueprint Entity_InertYellowBlock = {
-    0x4200, 0x0020, D_802E9F80, 0, entity_init_Hammer1Block_normal, D_802E9E0C, entity_block_handle_collision, E42240_ROM_START, E42240_ROM_END, ENTITY_TYPE_MULTI_TRIGGER_BLOCK, { 25, 25, 25 }
+    0x4200, 0x0020, Entity_InertYellowBlock_RenderScript, 0, entity_init_Hammer1Block_normal, Entity_InertBlock_Script, entity_block_handle_collision, entity_model_InertYellowBlock_ROM_START, entity_model_InertYellowBlock_ROM_END, ENTITY_TYPE_MULTI_TRIGGER_BLOCK, { 25, 25, 25 }
 };
 EntityBlueprint Entity_InertRedBlock = {
-    0x4200, 0x0020, D_802E9F9C, 0, entity_init_Hammer1Block_normal, D_802E9E0C, entity_block_handle_collision, E42740_ROM_START, E42740_ROM_END, ENTITY_TYPE_INACTIVE_BLOCK, { 25, 25, 25 }
+    0x4200, 0x0020, Entity_InertRedBlock_RenderScript, 0, entity_init_Hammer1Block_normal, Entity_InertBlock_Script, entity_block_handle_collision, entity_model_InertRedBlock_ROM_START, entity_model_InertRedBlock_ROM_END, ENTITY_TYPE_INACTIVE_BLOCK, { 25, 25, 25 }
 };
-EntityBlueprint D_802EA0C4 = {
-    0x4280, 0x0020, D_802EA044, 0, entity_base_block_init, D_802E9EB4, entity_block_handle_collision, E3DDB0_ROM_START, E3DDB0_ROM_END, ENTITY_TYPE_BRICK_BLOCK, { 25, 25, 25 }
+EntityBlueprint Entity_BrickBlock = {
+    0x4280, 0x0020, Entity_BrickBlock_RenderScript, 0, entity_base_block_init, D_802E9EB4, entity_block_handle_collision, entity_model_BrickBlock_ROM_START, entity_model_BrickBlock_ROM_END, ENTITY_TYPE_BRICK_BLOCK, { 25, 25, 25 }
 };
-EntityBlueprint Entity_D_802EA0E8 = {
-    0x4200, 0x0020, D_802E9FB8, 0x00000000, entity_MulticoinBlock_init, D_802E9F28, entity_block_handle_collision, E3DDB0_ROM_START, E3DDB0_ROM_END, ENTITY_TYPE_MULTI_COIN_BRICK, { 25, 25, 25 }
+EntityBlueprint Entity_MulticoinBlock = {
+    0x4200, 0x0020, Entity_MulticoinBrick_RenderScript, 0, entity_MulticoinBlock_init, Entity_MulticoinBlock_Script, entity_block_handle_collision, entity_model_BrickBlock_ROM_START, entity_model_BrickBlock_ROM_END, ENTITY_TYPE_MULTI_COIN_BRICK, { 25, 25, 25 }
 };
-EntityBlueprint Entity_D_802EA10C = {
-    0x4280, 0x0020, D_802E9FD4, 0x00000000, entity_init_Hammer1Block_normal, D_802E9F00, entity_block_handle_collision, E31530_ROM_START, E31530_ROM_END, ENTITY_TYPE_HAMMER1_BLOCK, { 50, 50, 50 }
+EntityBlueprint Entity_Hammer1Block = {
+    0x4280, 0x0020, Entity_Hammer1Block_RenderScript, 0, entity_init_Hammer1Block_normal, D_802E9F00, entity_block_handle_collision, entity_model_Hammer1Block_ROM_START, entity_model_Hammer1Block_ROM_END, ENTITY_TYPE_HAMMER1_BLOCK, { 50, 50, 50 }
 };
-EntityBlueprint Entity_D_802EA130 = {
-    0x4280, 0x0020, D_802E9FD4, 0x00000000, entity_init_Hammer1Block_normal, D_802E9F00, entity_block_handle_collision, E31530_ROM_START, E31530_ROM_END, ENTITY_TYPE_HAMMER1_BLOCK, { 100, 50, 50 }
+EntityBlueprint Entity_Hammer1Block_WideHitbox = {
+    0x4280, 0x0020, Entity_Hammer1Block_RenderScript, 0, entity_init_Hammer1Block_normal, D_802E9F00, entity_block_handle_collision, entity_model_Hammer1Block_ROM_START, entity_model_Hammer1Block_ROM_END, ENTITY_TYPE_HAMMER1_BLOCK, { 100, 50, 50 }
 };
-EntityBlueprint Entity_D_802EA154 = {
-    0x4280, 0x0020, D_802E9FD4, 0x00000000, entity_init_Hammer1Block_normal, D_802E9F00, entity_block_handle_collision, E31530_ROM_START, E31530_ROM_END, ENTITY_TYPE_HAMMER1_BLOCK, { 50, 50, 100 }
+EntityBlueprint Entity_Hammer1Block_TallHitbox = {
+    0x4280, 0x0020, Entity_Hammer1Block_RenderScript, 0, entity_init_Hammer1Block_normal, D_802E9F00, entity_block_handle_collision, entity_model_Hammer1Block_ROM_START, entity_model_Hammer1Block_ROM_END, ENTITY_TYPE_HAMMER1_BLOCK, { 50, 50, 100 }
 };
-EntityBlueprint Entity_D_802EA178 = {
-    0x4280, 0x0020, D_802E9FD4, 0x00000000, entity_init_HammerBlock_small, D_802E9DCC, entity_block_handle_collision, E31530_ROM_START, E31530_ROM_END, ENTITY_TYPE_HAMMER1_BLOCK_TINY, { 25, 25, 25 }
+EntityBlueprint Entity_Hammer1BlockTiny = {
+    0x4280, 0x0020, Entity_Hammer1Block_RenderScript, 0, entity_init_HammerBlock_small, D_802E9DCC, entity_block_handle_collision, entity_model_Hammer1Block_ROM_START, entity_model_Hammer1Block_ROM_END, ENTITY_TYPE_HAMMER1_BLOCK_TINY, { 25, 25, 25 }
 };
-EntityBlueprint Entity_D_802EA19C = {
-    0x4280, 0x0020, D_802E9FF0, 0x00000000, entity_base_block_init, D_802E9DCC, entity_block_handle_collision, E31A30_ROM_START, E31A30_ROM_END, ENTITY_TYPE_HAMMER2_BLOCK, { 50, 50, 50 }
+EntityBlueprint Entity_Hammer2Block = {
+    0x4280, 0x0020, Entity_Hammer2Block_RenderScript, 0, entity_base_block_init, D_802E9DCC, entity_block_handle_collision, entity_model_Hammer2Block_ROM_START, entity_model_Hammer2Block_ROM_END, ENTITY_TYPE_HAMMER2_BLOCK, { 50, 50, 50 }
 };
-EntityBlueprint D_802EA1C0 = {
-    0x4280, 0x0020, D_802E9FF0, 0x00000000, entity_base_block_init, D_802E9DCC, entity_block_handle_collision, E31A30_ROM_START, E31A30_ROM_END, ENTITY_TYPE_HAMMER2_BLOCK, { 100, 50, 50 }
+EntityBlueprint Entity_Hammer2Block_WideHitbox = {
+    0x4280, 0x0020, Entity_Hammer2Block_RenderScript, 0, entity_base_block_init, D_802E9DCC, entity_block_handle_collision, entity_model_Hammer2Block_ROM_START, entity_model_Hammer2Block_ROM_END, ENTITY_TYPE_HAMMER2_BLOCK, { 100, 50, 50 }
 };
-EntityBlueprint D_802EA1E4 = {
-    0x4280, 0x0020, D_802E9FF0, 0x00000000, entity_base_block_init, D_802E9DCC, entity_block_handle_collision, E31A30_ROM_START, E31A30_ROM_END, ENTITY_TYPE_HAMMER2_BLOCK, { 50, 50, 100 }
+EntityBlueprint Entity_Hammer2Block_TallHitbox = {
+    0x4280, 0x0020, Entity_Hammer2Block_RenderScript, 0, entity_base_block_init, D_802E9DCC, entity_block_handle_collision, entity_model_Hammer2Block_ROM_START, entity_model_Hammer2Block_ROM_END, ENTITY_TYPE_HAMMER2_BLOCK, { 50, 50, 100 }
 };
-EntityBlueprint D_802EA208 = {
-    0x4280, 0x0020, D_802E9FF0, 0x00000000, entity_init_HammerBlock_small, D_802E9DCC, entity_block_handle_collision, E31A30_ROM_START, E31A30_ROM_END, ENTITY_TYPE_HAMMER2_BLOCK_TINY, { 25, 25, 25 }
+EntityBlueprint Entity_Hammer2BlockTiny = {
+    0x4280, 0x0020, Entity_Hammer2Block_RenderScript, 0, entity_init_HammerBlock_small, D_802E9DCC, entity_block_handle_collision, entity_model_Hammer2Block_ROM_START, entity_model_Hammer2Block_ROM_END, ENTITY_TYPE_HAMMER2_BLOCK_TINY, { 25, 25, 25 }
 };
-EntityBlueprint D_802EA22C = {
-    0x4280, 0x0020, D_802EA00C, 0x00000000, entity_base_block_init, D_802E9DCC, entity_block_handle_collision, E31F30_ROM_START, E31F30_ROM_END, ENTITY_TYPE_HAMMER3_BLOCK, { 50, 50, 50 }
+EntityBlueprint Entity_Hammer3Block = {
+    0x4280, 0x0020, Entity_Hammer3Block_RenderScript, 0, entity_base_block_init, D_802E9DCC, entity_block_handle_collision, entity_model_Hammer3Block_ROM_START, entity_model_Hammer3Block_ROM_END, ENTITY_TYPE_HAMMER3_BLOCK, { 50, 50, 50 }
 };
-EntityBlueprint D_802EA250 = {
-    0x4280, 0x0020, D_802EA00C, 0x00000000, entity_base_block_init, D_802E9DCC, entity_block_handle_collision, E31F30_ROM_START, E31F30_ROM_END, ENTITY_TYPE_HAMMER3_BLOCK, { 100, 50, 50 }
+EntityBlueprint Entity_Hammer3Block_WideHitbox = {
+    0x4280, 0x0020, Entity_Hammer3Block_RenderScript, 0, entity_base_block_init, D_802E9DCC, entity_block_handle_collision, entity_model_Hammer3Block_ROM_START, entity_model_Hammer3Block_ROM_END, ENTITY_TYPE_HAMMER3_BLOCK, { 100, 50, 50 }
 };
-EntityBlueprint D_802EA274 = {
-    0x4280, 0x0020, D_802EA00C, 0x00000000, entity_base_block_init, D_802E9DCC, entity_block_handle_collision, E31F30_ROM_START, E31F30_ROM_END, ENTITY_TYPE_HAMMER3_BLOCK, { 50, 50, 100 }
+EntityBlueprint Entity_Hammer3Block_TallHitbox = {
+    0x4280, 0x0020, Entity_Hammer3Block_RenderScript, 0, entity_base_block_init, D_802E9DCC, entity_block_handle_collision, entity_model_Hammer3Block_ROM_START, entity_model_Hammer3Block_ROM_END, ENTITY_TYPE_HAMMER3_BLOCK, { 50, 50, 100 }
 };
-EntityBlueprint D_802EA298 = {
-    0x4280, 0x0020, D_802EA00C, 0x00000000, entity_init_HammerBlock_small, D_802E9DCC, entity_block_handle_collision, E31F30_ROM_START, E31F30_ROM_END, ENTITY_TYPE_HAMMER3_BLOCK_TINY, { 25, 25, 25 }
+EntityBlueprint Entity_Hammer3BlockTiny = {
+    0x4280, 0x0020, Entity_Hammer3Block_RenderScript, 0, entity_init_HammerBlock_small, D_802E9DCC, entity_block_handle_collision, entity_model_Hammer3Block_ROM_START, entity_model_Hammer3Block_ROM_END, ENTITY_TYPE_HAMMER3_BLOCK_TINY, { 25, 25, 25 }
 };
-EntityBlueprint D_802EA2BC = {
-    0x4000, 0x0020, D_802EA028, 0x00000000, entity_base_block_init, D_802E9DCC, entity_block_handle_collision, E3DA60_ROM_START, E3DA60_ROM_END, ENTITY_TYPE_PUSH_BLOCK, { 25, 25, 25 }
+EntityBlueprint Entity_PushBlock = {
+    0x4000, 0x0020, Entity_PushBlock_RenderScript, 0, entity_base_block_init, D_802E9DCC, entity_block_handle_collision, entity_model_PushBlock_ROM_START, entity_model_PushBlock_ROM_END, ENTITY_TYPE_PUSH_BLOCK, { 25, 25, 25 }
 };
-EntityBlueprint Entity_D_802EA2E0 = {
-    0x4000, 0x0020, D_802EA060, 0x00000000, entity_base_block_init, D_802E9D90, entity_block_handle_collision, E43B20_ROM_START, E43B20_ROM_END, ENTITY_TYPE_POW_BLOCK, { 30, 25, 25 },
+EntityBlueprint Entity_PowBlock = {
+    0x4000, 0x0020, Entity_PowBlock_RenderScript, 0, entity_base_block_init, D_802E9D90, entity_block_handle_collision, entity_model_PowBlock_ROM_START, entity_model_PowBlock_ROM_END, ENTITY_TYPE_POW_BLOCK, { 30, 25, 25 },
 };

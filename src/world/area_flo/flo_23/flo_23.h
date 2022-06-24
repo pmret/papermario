@@ -6,7 +6,7 @@
 
 #define NAMESPACE flo_23
 
-extern s32 D_802EA0C4;
+extern s32 Entity_BrickBlock;
 
 ApiStatus N(AddPlayerHandsOffset)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_80240000_CEE260)(Evt* script, s32 isInitialCall);

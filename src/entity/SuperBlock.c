@@ -3,6 +3,8 @@
 
 extern EntityBlueprint Entity_SuperBlockContent;
 
+extern UNK_TYPE D_0A000380;
+
 void entity_SuperBlockContent_setupGfx();
 
 f32 entity_SuperBlockContent_get_previous_yaw(SuperBlockContentData* data, s32 lagTime) {

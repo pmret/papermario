@@ -12085,9 +12085,54 @@ segments:
     - [0xE307C0, c, E307C0]
     - [0xE31380, data]
     - [0xE314C0]
-  - [0xE31530, bin] # unk data
-  - [0xE31A30, bin] # unk data
-  - [0xE31F30, bin] # unk data
+  - name: entity_model_Hammer1Block
+    dir: entity/model
+    type: code
+    start: 0xE31530
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE31530, c, Hammer1Block]
+    - start: 0xE31530
+      type: .data
+      name: Hammer1Block
+      subsegments:
+      - [0xE31530]
+      - [0xE317B0, ci4, Hammer1Block_face, 16, 32]
+      - [0xE318B0, palette, Hammer1Block_face]
+      - [0xE318D0]
+  - name: entity_model_Hammer2Block
+    dir: entity/model
+    type: code
+    start: 0xE31A30
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE31A30, c, Hammer2Block]
+    - start: 0xE31A30
+      type: .data
+      name: Hammer2Block
+      subsegments:
+      - [0xE31A30]
+      - [0xE31CB0, ci4, Hammer2Block_face, 16, 32]
+      - [0xE31DB0, palette, Hammer2Block_face]
+      - [0xE31DD0]
+  - name: entity_model_Hammer3Block
+    dir: entity/model
+    type: code
+    start: 0xE31F30
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE31F30, c, Hammer3Block]
+    - start: 0xE31F30
+      type: .data
+      name: Hammer3Block
+      subsegments:
+      - [0xE31F30]
+      - [0xE321B0, ci4, Hammer3Block_face, 16, 32]
+      - [0xE322B0, palette, Hammer3Block_face]
+      - [0xE322D0]
   - name: entity_model_ShatteringHammer1Block
     dir: entity/model
     type: code
@@ -12138,8 +12183,38 @@ segments:
   - [0xE3B870, bin] # unk data
   - [0xE3C320, bin] # unk data
   - [0xE3CDD0, bin] # unk data
-  - [0xE3DA60, bin] # unk data
-  - [0xE3DDB0, bin] # unk data
+  - name: entity_model_PushBlock
+    dir: entity/model
+    type: code
+    start: 0xE3DA60
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE3DA60, c, PushBlock]
+    - start: 0xE3DA60
+      type: .data
+      name: PushBlock
+      subsegments:
+      - [0xE3DA60]
+      - [0xE3DB80, ci4, PushBlock_face, 16, 16]
+      - [0xE3DC00, palette, PushBlock_face]
+      - [0xE3DC20]
+  - name: entity_model_BrickBlock
+    dir: entity/model
+    type: code
+    start: 0xE3DDB0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE3DDB0, c, BrickBlock]
+    - start: 0xE3DDB0
+      type: .data
+      name: BrickBlock
+      subsegments:
+      - [0xE3DDB0]
+      - [0xE3DEF0, ci4, BrickBlock_face, 32, 32]
+      - [0xE3E0F0, palette, BrickBlock_face]
+      - [0xE3E110]
   - name: entity_model_ShatteringBrickBlock
     dir: entity/model
     type: code
@@ -12155,10 +12230,54 @@ segments:
       - [0xE3E260]
       - [0xE3FD00, rgba16, ShatteringBrickBlock_texture, 32, 32]
       - [0xE40500]
-  - [0xE42240, bin] # unk data
-  - [0xE42740, bin] # unk data
+  - name: entity_model_InertYellowBlock
+    dir: entity/model
+    type: code
+    start: 0xE42240
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE42240, c, InertYellowBlock]
+    - start: 0xE42240
+      type: .data
+      name: InertYellowBlock
+      subsegments:
+      - [0xE42240]
+      - [0xE423C0, ci4, InertYellowBlock_face, 32, 32]
+      - [0xE425C0, palette, InertYellowBlock_face]
+      - [0xE425E0]
+  - name: entity_model_InertRedBlock
+    dir: entity/model
+    type: code
+    start: 0xE42740
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE42740, c, InertRedBlock]
+    - start: 0xE42740
+      type: .data
+      name: InertRedBlock
+      subsegments:
+      - [0xE42740]
+      - [0xE428C0, rgba16, InertRedBlock_face, 32, 32]
+      - [0xE430C0]
   - [0xE431F0, bin] # unk data
-  - [0xE43B20, bin] # unk data
+  - name: entity_model_PowBlock
+    dir: entity/model
+    type: code
+    start: 0xE43B20
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE43B20, c, PowBlock]
+    - start: 0xE43B20
+      type: .data
+      name: PowBlock
+      subsegments:
+      - [0xE43B20]
+      - [0xE43C20, ci8, PowBlock_face, 64, 32]
+      - [0xE44420, palette, PowBlock_face]
+      - [0xE44620]
   - [0xE44800, bin] # unk data
   - [0xE45110, bin] # unk data
   - [0xE459F0, bin] # unk data
