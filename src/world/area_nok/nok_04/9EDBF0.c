@@ -206,7 +206,7 @@ ApiStatus func_802406C4_9EE2B4(Evt* script, s32 isInitialCall) {
     script2 = start_script(phi_a0, EVT_PRIORITY_1, 0);
     script->varTable[temp_s1_2 + 6] = script2->id;
 
-    switch(temp_s1_2) {
+    switch (temp_s1_2) {
         case 0:
             script2->varTable[0] = 0x4C;
             break;

@@ -42,14 +42,14 @@ void snd_load_audio_data(s32 outputRate) {
     globals->currentTrackData[3] = &dummyTrackData[0x1400];
 
     for (i = 0; i < 1; i++) {
-        globals->unk_6C[i].unk_0 = alHeapAlloc(alHeap, 1, sizeof(BGMPlayer));
+        globals->unk_globals_6C[i].bgmPlayer = alHeapAlloc(alHeap, 1, sizeof(BGMPlayer));
     }
 
     globals->dataSEF = alHeapAlloc(alHeap, 1, 0x5200);
     globals->defaultInstrument = alHeapAlloc(alHeap, 1, sizeof(Instrument));
     globals->dataPER = alHeapAlloc(alHeap, 1, 6 * sizeof(PEREntry));
     globals->dataPRG = alHeapAlloc(alHeap, 1, 0x200);
-    globals->unk_94 = alHeapAlloc(alHeap, 1, 0x40);
+    globals->unk_arr_94 = alHeapAlloc(alHeap, 1, 0x40);
     globals->outputRate = outputRate;
     snd_reset_instrument(globals->defaultInstrument);
     func_80053370(&globals->unk_08);
@@ -60,13 +60,13 @@ void snd_load_audio_data(s32 outputRate) {
     globals->unk_A4[1] = NULL;
 
     for (i = 0; i < 1; i++) {
-        globals->unk_6C[i].unk_4 = 0;
-        globals->unk_6C[i].unk_5 = 0;
+        globals->unk_globals_6C[i].unk_4 = 0;
+        globals->unk_globals_6C[i].unk_5 = 0;
     }
 
     for (i = 0; i < 4; i++) {
-        globals->unk_40[i].unk_00 = 0;
-        globals->unk_40[i].unk_01 = 0;
+        globals->unk_globals_40[i].unk_00 = 0;
+        globals->unk_globals_40[i].unk_01 = FALSE;
     }
 
     for (i = 0; i < 24; i++) {
@@ -107,14 +107,14 @@ void snd_load_audio_data(s32 outputRate) {
     func_80050B90(D_8009A628, 6, 1, globals);
     func_80052614(globals);
     snd_load_BK_headers(globals, alHeap);
-    if (snd_fetch_SBN_file(globals->mseqFileList->unk_0, 0x20, &fileEntry) == 0) {
+    if (snd_fetch_SBN_file(globals->mseqFileList[0], 0x20, &fileEntry) == 0) {
         snd_read_rom(fileEntry.offset, globals->dataSEF, fileEntry.data & 0xFFFFFF);
     }
     snd_load_sfx_groups_from_SEF(gSoundManager);
-    if (snd_fetch_SBN_file(globals->mseqFileList[1].unk_0, 0x40, &fileEntry) == 0) {
+    if (snd_fetch_SBN_file(globals->mseqFileList[1], 0x40, &fileEntry) == 0) {
         snd_load_PER(globals, fileEntry.offset);
     }
-    if (snd_fetch_SBN_file(globals->mseqFileList[2].unk_0, 0x40, &fileEntry) == 0) {
+    if (snd_fetch_SBN_file(globals->mseqFileList[2], 0x40, &fileEntry) == 0) {
         snd_load_PRG(globals, fileEntry.offset);
     }
 
@@ -157,7 +157,7 @@ void snd_reset_instrument(Instrument* instrument) {
     instrument->sampleRate = 0.5f;
 }
 
-void func_80053370(UnkAlC* arg0) {
+void func_80053370(AlUnkMu* arg0) {
     arg0->unk_00 = 8208;
     arg0->unk_02 = 4800;
     arg0->unk_04 = 0x7F;
@@ -181,28 +181,28 @@ void func_800533A8(BGMInstrumentInfo* arg0) {
 
 void snd_update_sequence_players(void) {
     SndGlobals* temp_s2 = gSoundGlobals;
-    SoundManager* manager = gSoundManager;
-    UnkAl834* temp_s0 = D_8009A628;
+    SoundManager* sfxManager = gSoundManager;
+    AmbientSoundManager* ambManager = D_8009A628;
     BGMPlayer* bgmPlayer1;
     BGMPlayer* bgmPlayer2;
 
     func_80053654(temp_s2);
 
-    temp_s0->unk_0C -= temp_s0->unk_04;
-    if (temp_s0->unk_0C <= 0) {
-        temp_s0->unk_0C += temp_s0->unk_08;
-        func_800511BC(temp_s0);
+    ambManager->nextUpdateCounter -= ambManager->nextUpdateStep;
+    if (ambManager->nextUpdateCounter <= 0) {
+        ambManager->nextUpdateCounter += ambManager->nextUpdateInterval;
+        snd_ambient_manager_update(ambManager);
     }
 
-    if (manager->unk_40.fadeTime != 0) {
-        func_80053A28(&manager->unk_40);
-        func_80053A98(manager->unk_BE, manager->unk_40.currentVolume.u16, manager->unk_5C);
+    if (sfxManager->unk_40.fadeTime != 0) {
+        func_80053A28(&sfxManager->unk_40);
+        func_80053A98(sfxManager->unk_BE, sfxManager->unk_40.currentVolume.u16, sfxManager->unk_5C);
     }
 
-    manager->unkCounter -= manager->unkCounterStep;
-    if (manager->unkCounter <= 0) {
-        manager->unkCounter += manager->unkCounterMax;
-        manager->unk_BA = func_8004C444(manager);
+    sfxManager->nextUpdateCounter -= sfxManager->nextUpdateStep;
+    if (sfxManager->nextUpdateCounter <= 0) {
+        sfxManager->nextUpdateCounter += sfxManager->nextUpdateInterval;
+        sfxManager->unk_BA = snd_sound_manager_update(sfxManager);
     }
 
     if (!D_80078DB0) {
@@ -224,7 +224,7 @@ void snd_update_sequence_players(void) {
                 func_8004DFD4(temp_s2);
             }
             bgmPlayer2 = gBGMPlayerA;
-            if (bgmPlayer2->fadeInfo.unk_1A != 0) {
+            if (bgmPlayer2->fadeInfo.volScaleTime != 0) {
                 func_80053BA8(&bgmPlayer2->fadeInfo);
                 if (bgmPlayer2->fadeInfo.fadeTime == 0) {
                     func_8004E444(bgmPlayer2);
@@ -248,7 +248,7 @@ void snd_update_sequence_players(void) {
     func_80052660(temp_s2);
 }
 
-void snd_update_sound_effects(void) {
+void snd_add_sfx_output(void) {
     SndGlobals* globals = gSoundGlobals;
     BGMPlayer* player = gBGMPlayerA;
     SoundManager* manager = gSoundManager;
@@ -297,21 +297,21 @@ void func_80053654(SndGlobals* arg0) {
         }
     }
 
-    if (arg0->unk_40[0].unk_01 != 0) {
-        func_80056DCC(0, arg0->unk_40[0].unk_00);
-        arg0->unk_40[0].unk_01 = 0;
+    if (arg0->unk_globals_40[0].unk_01) {
+        func_80056DCC(0, arg0->unk_globals_40[0].unk_00);
+        arg0->unk_globals_40[0].unk_01 = FALSE;
     }
-    if (arg0->unk_40[1].unk_01 != 0) {
-        func_80056DCC(1, arg0->unk_40[1].unk_00);
-        arg0->unk_40[1].unk_01 = 0;
+    if (arg0->unk_globals_40[1].unk_01) {
+        func_80056DCC(1, arg0->unk_globals_40[1].unk_00);
+        arg0->unk_globals_40[1].unk_01 = FALSE;
 
-    } if (arg0->unk_40[2].unk_01 != 0) {
-        func_80056DCC(2, arg0->unk_40[2].unk_00);
-        arg0->unk_40[2].unk_01 = 0;
+    } if (arg0->unk_globals_40[2].unk_01) {
+        func_80056DCC(2, arg0->unk_globals_40[2].unk_00);
+        arg0->unk_globals_40[2].unk_01 = FALSE;
     }
-    if (arg0->unk_40[3].unk_01 != 0) {
-        func_80056DCC(3, arg0->unk_40[3].unk_00);
-        arg0->unk_40[3].unk_01 = 0;
+    if (arg0->unk_globals_40[3].unk_01) {
+        func_80056DCC(3, arg0->unk_globals_40[3].unk_00);
+        arg0->unk_globals_40[3].unk_01 = FALSE;
     }
 
     for (i = 0; i < ARRAY_COUNT(arg0->voices); i++) {
@@ -349,15 +349,15 @@ void func_80053888(AlUnkVoice* arg0, s32 arg1) { // type may be wrong but it see
         arg0->unk_1C = 0;
         arg0->unk_42 = 1;
         arg0->unk_43 = 0;
-        func_800576EC(arg1, 0, 0xB8);
+        func_800576EC(arg1, 0, AUDIO_SAMPLES);
     }
 }
 
-void func_800538C4(AlUnkVoice* arg0, s32 arg1) { // type may be wrong but it seems good
+void func_800538C4(AlUnkVoice* arg0, u8 arg1) { // type may be wrong but it seems good
     arg0->unk_1C = 0;
     arg0->unk_42 = 1;
     arg0->unk_43 = 0;
-    func_800576EC(arg1, 0, 0xB8);
+    func_800576EC(arg1, 0, AUDIO_SAMPLES);
 }
 
 // array offsets into AlTuneScaling
@@ -379,7 +379,7 @@ f32 snd_tune_param_to_timescale(s32 arg0) {
 
 void snd_initialize_bgm_fade(Fade* fade, s32 time, s32 startValue, s32 endValue) {
     fade->currentVolume.s32 = startValue * 0x10000;
-    fade->endVolume = endValue;
+    fade->targetVolume = endValue;
 
     if (time != 0) {
         fade->fadeTime = (time * 1000) / 5750;
@@ -389,26 +389,26 @@ void snd_initialize_bgm_fade(Fade* fade, s32 time, s32 startValue, s32 endValue)
         fade->fadeStep = 0;
     }
 
-    fade->fpFadeCallback = NULL;
+    fade->onCompleteCallback = NULL;
 }
 
 void snd_clear_bgm_fade(Fade* fade) {
     fade->fadeTime = 0;
     fade->fadeStep = 0;
-    fade->fpFadeCallback = NULL;
+    fade->onCompleteCallback = NULL;
 }
 
-void func_80053A28(Fade* arg0) {
-    arg0->fadeTime--;
+void func_80053A28(Fade* fade) {
+    fade->fadeTime--;
 
-    if ((arg0->fadeTime << 0x10) != 0) {
-        arg0->currentVolume.s32 += arg0->fadeStep;
+    if ((fade->fadeTime << 0x10) != 0) {
+        fade->currentVolume.s32 += fade->fadeStep;
     } else {
-        arg0->currentVolume.s32 = arg0->endVolume << 0x10;
-        if (arg0->fpFadeCallback != 0) {
-            arg0->fpFadeCallback();
-            arg0->fadeStep = 0;
-            arg0->fpFadeCallback = NULL;
+        fade->currentVolume.s32 = fade->targetVolume << 0x10;
+        if (fade->onCompleteCallback != NULL) {
+            fade->onCompleteCallback();
+            fade->fadeStep = 0;
+            fade->onCompleteCallback = NULL;
         }
     }
 }
@@ -421,42 +421,42 @@ void func_80053AC8(Fade* fade) {
     if (fade->fadeTime == 0) {
         fade->fadeTime = 1;
         fade->fadeStep = 0;
-        fade->endVolume = fade->currentVolume.u16;
+        fade->targetVolume = fade->currentVolume.u16;
     }
 }
 
-void func_80053AEC(Fade* fade, s16 arg1) {
-    fade->unk_10.s32 = arg1 << 16;
-    fade->unk_18 = arg1;
-    fade->unk_1A = 0;
-    fade->unk_14 = 0;
+void snd_set_fade_vol_scale(Fade* fade, s16 value) {
+    fade->volScale.s32 = value << 16;
+    fade->targetVolScale = value;
+    fade->volScaleTime = 0;
+    fade->volScaleStep = 0;
 }
 
-void func_80053B04(UnkAl1* arg0, u32 arg1, s16 arg2) {
-    s16 temp_a0;
-    s32 temp_v1;
+void func_80053B04(Fade* fade, u32 arg1, s16 target) {
+    s16 time;
+    s32 delta;
 
     if (arg1 >= 250 && arg1 <= 100000) {
-        temp_a0 = (s32)(arg1 * 1000) / 5750;
-        temp_v1 = (arg2 << 16) - arg0->unk_10.s32;
+        time = (s32)(arg1 * 1000) / 5750;
+        delta = (target << 16) - fade->volScale.s32;
 
-        arg0->unk_18 = arg2;
-        arg0->unk_1A = temp_a0;
-        arg0->unk_14 = temp_v1 / temp_a0;
+        fade->targetVolScale = target;
+        fade->volScaleTime = time;
+        fade->volScaleStep = delta / time;
     } else {
-        arg0->unk_1A = 0;
-        arg0->unk_14 = 0;
+        fade->volScaleTime = 0;
+        fade->volScaleStep = 0;
     }
 }
 
-void func_80053BA8(Fade* arg0) {
-    arg0->unk_1A--;
+void func_80053BA8(Fade* fade) {
+    fade->volScaleTime--;
 
-    if (arg0->unk_1A != 0) {
-        arg0->unk_10.s32 += arg0->unk_14;
+    if (fade->volScaleTime != 0) {
+        fade->volScale.s32 += fade->volScaleStep;
     } else {
-        arg0->unk_14 = 0;
-        arg0->unk_10.s32 = arg0->unk_18 << 16;
+        fade->volScaleStep = 0;
+        fade->volScale.s32 = fade->targetVolScale << 16;
     }
 }
 
@@ -621,7 +621,7 @@ s32 func_80053E58(s32 arg0, u8* arg1) {
 
 BGMPlayer* func_80053F64(s32 arg0) {
     if (arg0 == 0) {
-        return gSoundGlobals->unk_6C[0].unk_0;
+        return gSoundGlobals->unk_globals_6C[0].bgmPlayer;
     }
     return NULL;
 }
@@ -630,13 +630,13 @@ s32 func_80053F80(u32 arg0) {
     u32 i;
     SBNFileEntry fileEntry;
     SndGlobals* soundData;
-    UnkAl834* temp_s2;
+    AmbientSoundManager* temp_s2;
     s32* trackData;
 
     soundData = gSoundGlobals;
     temp_s2 = D_8009A628;
     if (arg0 < 16) {
-        if (temp_s2->unk_24[0].unk_20 == 0 && snd_fetch_SBN_file(soundData->mseqFileList[D_80078580[arg0]].unk_0, 0x40, &fileEntry) == 0) {
+        if (temp_s2->unk_24[0].unk_20 == 0 && snd_fetch_SBN_file(soundData->mseqFileList[D_80078580[arg0]], 0x40, &fileEntry) == 0) {
             snd_read_rom(fileEntry.offset, soundData->currentTrackData[2], fileEntry.data & 0xFFFFFF);
             temp_s2->unk_10[0] = soundData->currentTrackData[2];
             for (i = 1; i < 4; i++) {
@@ -651,28 +651,28 @@ s32 func_80053F80(u32 arg0) {
         }
 
         trackData = soundData->currentTrackData[3];
-        if (snd_fetch_SBN_file(soundData->mseqFileList[D_80078580[arg0]].unk_0, 0x40, &fileEntry) == 0) {
+        if (snd_fetch_SBN_file(soundData->mseqFileList[D_80078580[arg0]], 0x40, &fileEntry) == 0) {
             snd_read_rom(fileEntry.offset, trackData, fileEntry.data & 0xFFFFFF);
             temp_s2->unk_10[0] = trackData;
 
             trackData = (s32*)((u32)trackData + ((fileEntry.data + 0x40) & 0xFFFFFF));
-            if (snd_fetch_SBN_file(soundData->mseqFileList[D_80078580[arg0 + 1]].unk_0, 0x40, &fileEntry) == 0) {
+            if (snd_fetch_SBN_file(soundData->mseqFileList[D_80078580[arg0 + 1]], 0x40, &fileEntry) == 0) {
                 snd_read_rom(fileEntry.offset, trackData, fileEntry.data & 0xFFFFFF);
                 temp_s2->unk_10[1] = trackData;
 
                 trackData = (s32*)((u32)trackData + ((fileEntry.data + 0x40) & 0xFFFFFF));
-                if (snd_fetch_SBN_file(soundData->mseqFileList[D_80078580[arg0 + 2]].unk_0, 0x40, &fileEntry) == 0) {
+                if (snd_fetch_SBN_file(soundData->mseqFileList[D_80078580[arg0 + 2]], 0x40, &fileEntry) == 0) {
 
                     snd_read_rom(fileEntry.offset, trackData, fileEntry.data & 0xFFFFFF);
                     temp_s2->unk_10[2] = trackData;
 
                     trackData = (s32*)((u32)trackData + ((fileEntry.data + 0x40) & 0xFFFFFF));
-                    if (snd_fetch_SBN_file(soundData->mseqFileList[D_80078580[arg0 + 3]].unk_0, 0x40, &fileEntry) == 0) {
+                    if (snd_fetch_SBN_file(soundData->mseqFileList[D_80078580[arg0 + 3]], 0x40, &fileEntry) == 0) {
                         snd_read_rom(fileEntry.offset, trackData, fileEntry.data & 0xFFFFFF);
                         temp_s2->unk_10[3] = trackData;
 
                         temp_s2->unk_20 = 4;
-                        if (snd_fetch_SBN_file(soundData->mseqFileList[D_80078580[arg0 + 4]].unk_0, 0x30, &fileEntry) == 0) {
+                        if (snd_fetch_SBN_file(soundData->mseqFileList[D_80078580[arg0 + 4]], 0x30, &fileEntry) == 0) {
                             snd_load_BK(fileEntry.offset, 2);
                         }
                     }
@@ -787,8 +787,8 @@ void snd_load_PER(SndGlobals* arg0, s32 romAddr) {
     numItemsLeft = 6 - numItems;
     if (numItemsLeft > 0) {
         end = &arg0->dataPER[numItems];
-        snd_copy_words(&arg0->unk_08, end, sizeof(UnkAlC));
-        snd_copy_words(end, end + sizeof(UnkAlC), numItemsLeft * sizeof(PEREntry) - sizeof(UnkAlC));
+        snd_copy_words(&arg0->unk_08, end, sizeof(AlUnkMu));
+        snd_copy_words(end, end + sizeof(AlUnkMu), numItemsLeft * sizeof(PEREntry) - sizeof(AlUnkMu));
     }
 }
 

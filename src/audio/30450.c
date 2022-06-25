@@ -702,10 +702,10 @@ void func_80056068(s32 arg0, u8 arg1) {
     func_800506C8(arg0, arg1 | 0x7F000000);
 }
 
-void func_8005608C(s32* arg0, s32* arg1) {
+void func_8005608C(u32** arg0, s32* arg1) {
     SndGlobals* temp_v0 = gSoundGlobals;
 
-    *arg0 = temp_v0->unk_94;
+    *arg0 = temp_v0->unk_arr_94;
     *arg1 = temp_v0->unk_98;
 }
 
@@ -724,7 +724,7 @@ void func_800560BC(s32 arg0, s32 arg1, s32 arg2) {
 
 void func_8005610C(void) {
     SndGlobals* globals = gSoundGlobals;
-    s32* buf = globals->unk_94;
+    s32* buf = globals->unk_arr_94;
     s32 i = 15;
     
     do {
@@ -733,7 +733,7 @@ void func_8005610C(void) {
 
     globals->unk_98 = 0;
     globals->unk_9C = 0;
-    globals->unk_90 = globals->unk_94;
+    globals->unk_90 = globals->unk_arr_94;
 }
 
 void func_80056144(UnkFuncAl arg0, s32 arg1) {

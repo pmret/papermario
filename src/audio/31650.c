@@ -194,7 +194,7 @@ void func_80057344(u8 arg0, f32 arg1) {
 
 void func_8005736C(u8 arg0, s16 arg1, s32 arg2, u8 arg3, u8 arg4) {
     AlUnkBeta* temp_s0 = &D_80078E54->al_unk_beta[arg0];
-    UnkStruct80057874* temp_s1 = (UnkStruct80057874*)&temp_s0->unk_48;
+    AlUnkEta* temp_s1 = (AlUnkEta*)&temp_s0->unk_48;
     
     if (temp_s0->unk_64 >= temp_s0->unk_68) {
         temp_s0->unk_64 = temp_s0->unk_68;
@@ -227,7 +227,7 @@ void func_8005736C(u8 arg0, s16 arg1, s32 arg2, u8 arg3, u8 arg4) {
 
 void func_80057548(u8 arg0, u8 arg1, u8 arg2) {
     AlUnkBeta* temp_s0 = &D_80078E54->al_unk_beta[arg0];
-    UnkStruct80057874* temp_s1 = (UnkStruct80057874*)&temp_s0->unk_48;
+    AlUnkEta* temp_s1 = (AlUnkEta*)&temp_s0->unk_48;
 
     if (temp_s0->unk_64 >= temp_s0->unk_68) {
         temp_s0->unk_64 = temp_s0->unk_68;
@@ -257,7 +257,7 @@ void func_80057548(u8 arg0, u8 arg1, u8 arg2) {
 
 void func_800576EC(u8 arg0, s16 arg1, s32 arg2) {
     AlUnkBeta* temp_s0 = &D_80078E54->al_unk_beta[arg0];
-    UnkStruct80057874* temp_s1 = (UnkStruct80057874*)&temp_s0->unk_48;
+    AlUnkEta* temp_s1 = (AlUnkEta*)&temp_s0->unk_48;
 
     if (temp_s0->unk_64 >= temp_s0->unk_68) {
         temp_s0->unk_64 = temp_s0->unk_68;
@@ -288,7 +288,7 @@ void func_800576EC(u8 arg0, s16 arg1, s32 arg2) {
 
 void func_80057874(u8 arg0, u8 arg1) {
     AlUnkBeta* temp_s0 = &D_80078E54->al_unk_beta[arg0];
-    UnkStruct80057874* temp_s1 = (UnkStruct80057874*)&temp_s0->unk_48;
+    AlUnkEta* temp_s1 = (AlUnkEta*)&temp_s0->unk_48;
 
     if (temp_s0->unk_64 >= temp_s0->unk_68) {
         temp_s0->unk_64 = temp_s0->unk_68;
@@ -316,7 +316,7 @@ void func_80057874(u8 arg0, u8 arg1) {
 
 void func_800579D8(u8 arg0, u8 arg1) {
     AlUnkBeta* temp_s0 = &D_80078E54->al_unk_beta[arg0];
-    UnkStruct80057874* temp_s1 = (UnkStruct80057874*)&temp_s0->unk_48;
+    AlUnkEta* temp_s1 = (AlUnkEta*)&temp_s0->unk_48;
 
     if (temp_s0->unk_64 >= temp_s0->unk_68) {
         temp_s0->unk_64 = temp_s0->unk_68;

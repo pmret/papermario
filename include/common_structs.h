@@ -2482,6 +2482,6 @@ typedef struct SongUpdateEvent {
     /* 0x14 */ s32 unk14;
     /* 0x18 */ s32 unk18;
     /* 0x1C */ s32 unk1C; // may be fake
-} SongUpdateEvent;
+} SongUpdateEvent; // size = 0x1C or 0x20
 
 #endif

@@ -486,7 +486,7 @@ void sfx_play_sound_with_params(s32 soundID, u8 volume, u8 pan, s16 pitchShift) 
     if (soundID & SOUND_TYPE_SPECIAL) {
         s32 soundIndex = soundID & 0xFF;
         s32 soundType = ((u32)soundID >> 0x1C) & 7;
-        switch(soundType) {
+        switch (soundType) {
             case SOUND_TYPE_LOOPING:
                 sfx_play_sound_looping(LoopingSounds[soundIndex], volume, pan, pitchShift);
                 return;

@@ -31,7 +31,7 @@ void snd_SEFCmd_17(SoundManager* manager, SoundPlayer* player);
 void snd_SEFCmd_18(SoundManager* manager, SoundPlayer* player);
 
 void snd_set_player_modifiers(SoundPlayer* player, SoundSFXEntry* sfxEntry);
-void func_800538C4(AlUnkVoice* arg0, s32 arg1);
+void func_800538C4(AlUnkVoice* arg0, u8 arg1);
 f32 snd_tune_param_to_timescale(s32);
 
 void func_8004B440(SoundManager* manager, u8 arg1, u8 arg2, SndGlobals* arg3, u8 arg4) {
@@ -39,8 +39,8 @@ void func_8004B440(SoundManager* manager, u8 arg1, u8 arg2, SndGlobals* arg3, u8
     s32 c = 0x6A25E;
 
     manager->soundData = arg3;
-    manager->unkCounterStep = 312500;
-    manager->unkCounterMax = manager->unkCounter = c;
+    manager->nextUpdateStep = 312500;
+    manager->nextUpdateInterval = manager->nextUpdateCounter = c;
     manager->unk_BC = arg1;
     manager->unk_BE = arg2;
 
@@ -188,8 +188,8 @@ s32 func_8004B9E4(SoundManager* manager, s32 arg1) {
         if (a1 < 8) {
             if (manager->unk_8C != a1) {
                 manager->unk_8C = a1;
-                manager->soundData->unk_40[1].unk_00 = 6;
-                manager->soundData->unk_40[1].unk_01 = 1;
+                manager->soundData->unk_globals_40[1].unk_00 = 6;
+                manager->soundData->unk_globals_40[1].unk_01 = TRUE;
                 D_8007F1F8[0] = manager->unk_64[a1];
             }
             manager->unk_8D = manager->unk_84[a1];
@@ -353,28 +353,29 @@ void snd_set_player_modifiers(SoundPlayer* player, SoundSFXEntry* sfxEntry) {
 void func_8004C578(SoundManager*, SoundPlayer*, AlUnkVoice*, u32);
 void func_8004C884(SoundManager*, SoundPlayer*, AlUnkVoice*, u32);
 
-s16 func_8004C444(SoundManager* manager) {
-    u32 phi_a3 = manager->sfxPlayerSelector;
-    u16 temp = manager->unk_60;
-    u16 playCounter = manager->playCounter;
+s16 snd_sound_manager_update(SoundManager* manager) {
     SoundPlayer* sndPlayer;
-    AlUnkVoice* temp_a2;
+    AlUnkVoice* voice;
+    u32 start;
+    u8 end;
     u8 i;
 
-    manager->unk_60 = temp + playCounter;
-
-    for (i = phi_a3, phi_a3 += 8; i < (u8)phi_a3; i++){
+    manager->unk_60 = (u16)manager->unk_60 + (u16)manager->playCounter;
+    
+    start = manager->sfxPlayerSelector;
+    for (i = start, end = start + 8; i < end; i++) {
         sndPlayer = &manager->unk_16C[i - manager->sfxPlayerSelector];
         if (sndPlayer->sefDataReadPos != 0) {
-            manager->currentVoice = temp_a2 = &manager->soundData->voices[i];
-            if (manager->currentVoice->unk_45 <= manager->unk_BC) {
+            voice = &manager->soundData->voices[i];
+            manager->currentVoice = voice;
+            if (voice->unk_45 <= manager->unk_BC) {
                 manager->unk_BF = i;
                 switch (sndPlayer->sfxParamsFlags & 3) {
                     case 0:
-                        func_8004C578(manager, sndPlayer, temp_a2, i);
+                        func_8004C578(manager, sndPlayer, voice, i);
                         break;
                     case 1:
-                        func_8004C884(manager, sndPlayer, temp_a2, i);
+                        func_8004C884(manager, sndPlayer, voice, i);
                         break;
                     case 2: // Yes, this is needed.
                         break;
@@ -396,7 +397,7 @@ void func_8004C578(SoundManager* manager, SoundPlayer* player, AlUnkVoice* ARG2,
     s32 a;
     s32 b;
 
-    switch(player->unk_A9) {
+    switch (player->unk_A9) {
         case 0:
             if (ARG2->unk_45 != manager->unk_BC) {
                 player->sefDataReadPos = NULL;
@@ -707,7 +708,7 @@ void snd_SEFCmd_0E(SoundManager* manager, SoundPlayer* player) {
     
     pos += (s32)data;
     player->unk_84 = (s32)type;
-    switch(type) {
+    switch (type) {
         case 1:
             player->unk_80 = pos;
             break;

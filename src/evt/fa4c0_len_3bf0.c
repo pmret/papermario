@@ -2,31 +2,71 @@
 #include "pause/pause_common.h"
 #include "hud_element.h"
 
+typedef struct UnkSndEvtData {
+    s32 unk_00;
+    EvtScript* unk_04[4];
+} UnkSndEvtData;
+
 extern EvtScript D_802D9D34;
-extern s32* D_802DB7D0;
-extern s32 D_802DB7D8[10];
-extern s32 D_802DB800[10];
+extern UnkSndEvtData* D_802DB7D0;
+extern Evt* UnkSoundEvtScripts[10];
+extern s32 UnkSoundEvtIDs[10];
 s32 func_802D5B10();
 
 s32 D_802D9D30 = 0;
 
-EvtScript D_802D9D34 = {
+static EvtScript D_802D9D34 = {
     EVT_CALL(func_802D5B10)
     EVT_RETURN
     EVT_END
 };
 
-INCLUDE_ASM(s32, "evt/fa4c0_len_3bf0", func_802D5B10);
+static s32 func_802D5B10(Evt* script, s32 isInitialCall) {
+    u32* list;
+    u32 count;
+    UnkSndEvtData* cur;
+    EvtScript* newSource;
+    Evt* newEvt;
+    s32 i, j, k;
 
-ApiStatus func_802D5C70(Evt* script) {
+    func_8005608C(&list, &count);
+    
+    for (i = 0; i < count; i++, list++) {
+        cur = D_802DB7D0;
+        j = (*list & 0xFF0000) >> 0x10;
+        k = *list & 0xFF;
+        while (cur->unk_00 != -1) {
+            if (cur->unk_00 == j) {
+                break;
+            }
+            cur++;
+        }
+        if (cur != NULL) {
+            newSource = cur->unk_04[k];
+            if (UnkSoundEvtScripts[j] != NULL) {
+                kill_script_by_ID(UnkSoundEvtIDs[j]);
+            }
+            if (newSource != NULL) {
+                newEvt = start_script(newSource, 1, 0);
+                UnkSoundEvtScripts[j] = newEvt;
+                UnkSoundEvtIDs[j] = newEvt->id;
+            }
+        }
+    }
+    func_800560A8();
+    D_802D9D30++;
+    return 0;
+}
+
+ApiStatus func_802D5C70(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 i;
 
     D_802DB7D0 = evt_get_variable(script, *args++);
 
-    for (i = 0; i < ARRAY_COUNT(D_802DB7D8); i++) {
-        D_802DB7D8[i] = 0;
-        D_802DB800[i] = 0;
+    for (i = 0; i < ARRAY_COUNT(UnkSoundEvtScripts); i++) {
+        UnkSoundEvtScripts[i] = 0;
+        UnkSoundEvtIDs[i] = 0;
     }
 
     start_script(&D_802D9D34, EVT_PRIORITY_1, 0);
@@ -227,11 +267,11 @@ ApiStatus PlaySoundAtF(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
+// TODO: probably a split here (sound_api, item_api)
+
 INCLUDE_ASM(ApiStatus, "evt/fa4c0_len_3bf0", ShowKeyChoicePopup, Evt* script, s32 isInitialCall);
 
 INCLUDE_ASM(ApiStatus, "evt/fa4c0_len_3bf0", ShowConsumableChoicePopup, Evt* script, s32 isInitialCall);
-
-// TODO: probably a split here (sound_api, item_api)
 
 ApiStatus RemoveKeyItemAt(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
