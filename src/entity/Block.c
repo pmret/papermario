@@ -12,8 +12,8 @@ extern Gfx Entity_Hammer3Block_Render[];
 extern Gfx Entity_PushBlock_Render[];
 extern Gfx Entity_PowBlock_Render[];
 
-extern s32 D_802E9E54[];
-extern s32 D_802E9E80[];
+extern EntityScript Entity_CreatedInertBlock_Script;
+extern EntityScript Entity_BreakingBlock_Script;
 
 void entity_BrickBlock_idle(Entity* entity);
 void entity_breakable_block_create_shattering_entity(Entity* entity);
@@ -78,8 +78,7 @@ void entity_block_hit_animate_scale(Entity* entity) {
 void entity_base_block_update_slow_sinking(Entity* entity) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     BlockData* data = entity->dataBuf.block;
-    f32 f2, f4, temp;
-    f32 f2x, f4x, tempx;
+    f32 deltaY;
 
     if (entity->alpha < 255) {
         entity->flags &= ~ENTITY_FLAGS_200000;
@@ -93,19 +92,19 @@ void entity_base_block_update_slow_sinking(Entity* entity) {
         }
 
         if (entity->position.y < data->initialY - 25.0f) {
-            temp = (entity->position.y - data->initialY + 50.0f) * 0.125f;
+            deltaY = (entity->position.y - data->initialY + 50.0f) * 0.125f;
         } else {
-            temp = (data->initialY - entity->position.y) * 0.125f;
+            deltaY = (data->initialY - entity->position.y) * 0.125f;
         }
 
-        if (temp > 1.2) {
-            temp = 1.2f;
+        if (deltaY > 1.2) {
+            deltaY = 1.2f;
         }
-        if (temp < 0.3) {
-            temp = 0.3f;
+        if (deltaY < 0.3) {
+            deltaY = 0.3f;
         }
 
-        entity->position.y += temp;
+        entity->position.y += deltaY;
 
         if (data->initialY < entity->position.y) {
             entity->position.y = data->initialY;
@@ -145,19 +144,19 @@ void entity_base_block_update_slow_sinking(Entity* entity) {
         }
 
         if (entity->position.y < data->initialY - 25.0f) {
-            temp = (entity->position.y - data->initialY + 50.0f) * 0.125f;
+            deltaY = (entity->position.y - data->initialY + 50.0f) * 0.125f;
         } else {
-            temp = (data->initialY - entity->position.y) * 0.125f;
+            deltaY = (data->initialY - entity->position.y) * 0.125f;
         }
 
-        if (temp > 1.2) {
-            temp = 1.2f;
+        if (deltaY > 1.2) {
+            deltaY = 1.2f;
         }
-        if (temp < 0.3) {
-            temp = 0.3f;
+        if (deltaY < 0.3) {
+            deltaY = 0.3f;
         }
 
-        entity->position.y -= temp;
+        entity->position.y -= deltaY;
 
         if (entity->position.y < data->initialY - 50.0f) {
             entity->position.y = data->initialY - 50.0f;
@@ -258,7 +257,7 @@ void entity_MulticoinBlock_spawn_coin(Entity* entity) {
     if ((data->coinsLeft == 0) || (data->timeLeft == 0)) {
         data->empty = TRUE;
         set_entity_commandlist(get_entity_by_index(create_entity(&Entity_InertYellowBlock,
-            (s32)entity->position.x, (s32)entity->position.y, (s32)entity->position.z, (s32)entity->rotation.y, MAKE_ENTITY_END)), D_802E9E54);
+            (s32)entity->position.x, (s32)entity->position.y, (s32)entity->position.z, (s32)entity->rotation.y, MAKE_ENTITY_END)), Entity_CreatedInertBlock_Script);
         entity->flags |= (ENTITY_FLAGS_SKIP_UPDATE_INVERSE_ROTATION_MATRIX | ENTITY_FLAGS_PENDING_INSTANCE_DELETE);
     }
 }
@@ -378,7 +377,7 @@ s32 entity_block_handle_collision(Entity* entity) {
             if (!breakBlock) {
                 return TRUE;
             }
-            set_entity_commandlist(entity, D_802E9E80);
+            set_entity_commandlist(entity, Entity_BreakingBlock_Script);
             sfx_play_sound_at_position(SOUND_14F, 0, entity->position.x, entity->position.y, entity->position.z);
             break;
         case ENTITY_TYPE_HAMMER2_BLOCK:
@@ -393,7 +392,7 @@ s32 entity_block_handle_collision(Entity* entity) {
             if (!breakBlock) {
                 return TRUE;
             }
-            set_entity_commandlist(entity, D_802E9E80);
+            set_entity_commandlist(entity, Entity_BreakingBlock_Script);
             sfx_play_sound_at_position(SOUND_150, 0, entity->position.x, entity->position.y, entity->position.z);
             break;
         case ENTITY_TYPE_HAMMER3_BLOCK:
@@ -401,7 +400,7 @@ s32 entity_block_handle_collision(Entity* entity) {
             if (gPlayerData.hammerLevel < 2) {
                 return TRUE;
             }
-            set_entity_commandlist(entity, D_802E9E80);
+            set_entity_commandlist(entity, Entity_BreakingBlock_Script);
             sfx_play_sound_at_position(SOUND_151, 0, entity->position.x, entity->position.y, entity->position.z);
             break;
         case ENTITY_TYPE_MULTI_TRIGGER_BLOCK:
@@ -428,7 +427,7 @@ void entity_init_Hammer1Block_normal(Entity* entity) {
     entity->renderSetupFunc = entity_base_block_setupGfx;
 }
 
-s32 entity_init_HammerBlock_small(Entity* entity) {
+void entity_init_HammerBlock_small(Entity* entity) {
     BlockData* data = entity->dataBuf.block;
 
     data->itemEntityIndex = -1;
@@ -440,7 +439,7 @@ s32 entity_init_HammerBlock_small(Entity* entity) {
     entity->scale.z = 0.5f;
 }
 
-EntityScript D_802E9D90 = {
+EntityScript Entity_PowBlock_Script = {
     es_SetCallback(entity_base_block_idle, 0)
     es_PlaySound(SOUND_HIT_BLOCK)
     es_Call(entity_block_hit_init_scale)
@@ -449,7 +448,7 @@ EntityScript D_802E9D90 = {
     es_Restart
     es_End
 };
-EntityScript D_802E9DCC = {
+EntityScript Entity_BaseBlock_Script = {
     es_SetCallback(entity_base_block_idle, 0)
     es_Call(entity_start_script)
     es_Restart
@@ -471,14 +470,14 @@ EntityScript Entity_InertBlock_Script = {
     es_Restart
     es_End
 };
-EntityScript D_802E9E54 = {
+EntityScript Entity_CreatedInertBlock_Script = {
     es_Call(entity_inactive_block_hit_init)
     es_SetCallback(entity_inactive_block_hit_anim, 0)
     es_SetCallback(entity_inactive_block_recoil_anim, 0)
     es_Jump(Entity_InertBlock_Script)
     es_End
 };
-EntityScript D_802E9E80 = {
+EntityScript Entity_BreakingBlock_Script = {
     es_RestartBoundScript
     es_SetFlags(ENTITY_FLAGS_HIDDEN)
     es_SetFlags(ENTITY_FLAGS_SKIP_UPDATE_INVERSE_ROTATION_MATRIX)
@@ -487,7 +486,7 @@ EntityScript D_802E9E80 = {
     es_SetFlags(ENTITY_FLAGS_PENDING_INSTANCE_DELETE)
     es_End
 };
-EntityScript D_802E9EB4 = {
+EntityScript Entity_BrickBlock_Script = {
     es_SetCallback(entity_BrickBlock_idle, 0)
     es_Call(entity_start_script)
     es_SetFlags(ENTITY_FLAGS_HIDDEN)
@@ -498,7 +497,7 @@ EntityScript D_802E9EB4 = {
     es_SetFlags(ENTITY_FLAGS_PENDING_INSTANCE_DELETE)
     es_End
 };
-EntityScript D_802E9F00 = {
+EntityScript Entity_Hammer1Block_Script = {
     es_SetCallback(entity_base_block_idle, 0)
     es_PlaySound(SOUND_HIT_BLOCK)
     es_Call(entity_start_script)
@@ -582,56 +581,235 @@ EntityModelScript Entity_PowBlock_RenderScript = {
 };
 
 EntityBlueprint Entity_InertYellowBlock = {
-    0x4200, 0x0020, Entity_InertYellowBlock_RenderScript, 0, entity_init_Hammer1Block_normal, Entity_InertBlock_Script, entity_block_handle_collision, entity_model_InertYellowBlock_ROM_START, entity_model_InertYellowBlock_ROM_END, ENTITY_TYPE_MULTI_TRIGGER_BLOCK, { 25, 25, 25 }
+    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200,
+    .typeDataSize = sizeof(BlockData),
+    .renderCommandList = Entity_InertYellowBlock_RenderScript,
+    .modelAnimationNodes = 0,
+    .fpInit = entity_init_Hammer1Block_normal,
+    .updateEntityScript = Entity_InertBlock_Script,
+    .fpHandleCollision = entity_block_handle_collision,
+    {{ (s32)entity_model_InertYellowBlock_ROM_START, (s32)entity_model_InertYellowBlock_ROM_END }},
+    .entityType = ENTITY_TYPE_MULTI_TRIGGER_BLOCK,
+    .aabbSize = { 25, 25, 25 }
 };
+
 EntityBlueprint Entity_InertRedBlock = {
-    0x4200, 0x0020, Entity_InertRedBlock_RenderScript, 0, entity_init_Hammer1Block_normal, Entity_InertBlock_Script, entity_block_handle_collision, entity_model_InertRedBlock_ROM_START, entity_model_InertRedBlock_ROM_END, ENTITY_TYPE_INACTIVE_BLOCK, { 25, 25, 25 }
+    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200,
+    .typeDataSize = sizeof(BlockData),
+    .renderCommandList = Entity_InertRedBlock_RenderScript,
+    .modelAnimationNodes = 0,
+    .fpInit = entity_init_Hammer1Block_normal,
+    .updateEntityScript = Entity_InertBlock_Script,
+    .fpHandleCollision = entity_block_handle_collision,
+    {{ (s32)entity_model_InertRedBlock_ROM_START, (s32)entity_model_InertRedBlock_ROM_END }},
+    .entityType = ENTITY_TYPE_INACTIVE_BLOCK,
+    .aabbSize = { 25, 25, 25 }
 };
+
 EntityBlueprint Entity_BrickBlock = {
-    0x4280, 0x0020, Entity_BrickBlock_RenderScript, 0, entity_base_block_init, D_802E9EB4, entity_block_handle_collision, entity_model_BrickBlock_ROM_START, entity_model_BrickBlock_ROM_END, ENTITY_TYPE_BRICK_BLOCK, { 25, 25, 25 }
+    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200 | ENTITY_FLAGS_80,
+    .typeDataSize = sizeof(BlockData),
+    .renderCommandList = Entity_BrickBlock_RenderScript,
+    .modelAnimationNodes = 0,
+    .fpInit = entity_base_block_init,
+    .updateEntityScript = Entity_BrickBlock_Script,
+    .fpHandleCollision = entity_block_handle_collision,
+    {{ (s32)entity_model_BrickBlock_ROM_START, (s32)entity_model_BrickBlock_ROM_END }},
+    .entityType = ENTITY_TYPE_BRICK_BLOCK,
+    .aabbSize = { 25, 25, 25 }
 };
+
 EntityBlueprint Entity_MulticoinBlock = {
-    0x4200, 0x0020, Entity_MulticoinBrick_RenderScript, 0, entity_MulticoinBlock_init, Entity_MulticoinBlock_Script, entity_block_handle_collision, entity_model_BrickBlock_ROM_START, entity_model_BrickBlock_ROM_END, ENTITY_TYPE_MULTI_COIN_BRICK, { 25, 25, 25 }
+    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200,
+    .typeDataSize = sizeof(BlockData),
+    .renderCommandList = Entity_MulticoinBrick_RenderScript,
+    .modelAnimationNodes = 0,
+    .fpInit = entity_MulticoinBlock_init,
+    .updateEntityScript = Entity_MulticoinBlock_Script,
+    .fpHandleCollision = entity_block_handle_collision,
+    {{ (s32)entity_model_BrickBlock_ROM_START, (s32)entity_model_BrickBlock_ROM_END }},
+    .entityType = ENTITY_TYPE_MULTI_COIN_BRICK,
+    .aabbSize = { 25, 25, 25 }
 };
+
 EntityBlueprint Entity_Hammer1Block = {
-    0x4280, 0x0020, Entity_Hammer1Block_RenderScript, 0, entity_init_Hammer1Block_normal, D_802E9F00, entity_block_handle_collision, entity_model_Hammer1Block_ROM_START, entity_model_Hammer1Block_ROM_END, ENTITY_TYPE_HAMMER1_BLOCK, { 50, 50, 50 }
+    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200 | ENTITY_FLAGS_80,
+    .typeDataSize = sizeof(BlockData),
+    .renderCommandList = Entity_Hammer1Block_RenderScript,
+    .modelAnimationNodes = 0,
+    .fpInit = entity_init_Hammer1Block_normal,
+    .updateEntityScript = Entity_Hammer1Block_Script,
+    .fpHandleCollision = entity_block_handle_collision,
+    {{ (s32)entity_model_Hammer1Block_ROM_START, (s32)entity_model_Hammer1Block_ROM_END }},
+    .entityType = ENTITY_TYPE_HAMMER1_BLOCK,
+    .aabbSize = { 50, 50, 50 }
 };
+
 EntityBlueprint Entity_Hammer1Block_WideHitbox = {
-    0x4280, 0x0020, Entity_Hammer1Block_RenderScript, 0, entity_init_Hammer1Block_normal, D_802E9F00, entity_block_handle_collision, entity_model_Hammer1Block_ROM_START, entity_model_Hammer1Block_ROM_END, ENTITY_TYPE_HAMMER1_BLOCK, { 100, 50, 50 }
+    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200 | ENTITY_FLAGS_80,
+    .typeDataSize = sizeof(BlockData),
+    .renderCommandList = Entity_Hammer1Block_RenderScript,
+    .modelAnimationNodes = 0,
+    .fpInit = entity_init_Hammer1Block_normal,
+    .updateEntityScript = Entity_Hammer1Block_Script,
+    .fpHandleCollision = entity_block_handle_collision,
+    {{ (s32)entity_model_Hammer1Block_ROM_START, (s32)entity_model_Hammer1Block_ROM_END }},
+    .entityType = ENTITY_TYPE_HAMMER1_BLOCK,
+    .aabbSize = { 100, 50, 50 }
 };
+
 EntityBlueprint Entity_Hammer1Block_TallHitbox = {
-    0x4280, 0x0020, Entity_Hammer1Block_RenderScript, 0, entity_init_Hammer1Block_normal, D_802E9F00, entity_block_handle_collision, entity_model_Hammer1Block_ROM_START, entity_model_Hammer1Block_ROM_END, ENTITY_TYPE_HAMMER1_BLOCK, { 50, 50, 100 }
+    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200 | ENTITY_FLAGS_80,
+    .typeDataSize = sizeof(BlockData),
+    .renderCommandList = Entity_Hammer1Block_RenderScript,
+    .modelAnimationNodes = 0,
+    .fpInit = entity_init_Hammer1Block_normal,
+    .updateEntityScript = Entity_Hammer1Block_Script,
+    .fpHandleCollision = entity_block_handle_collision,
+    {{ (s32)entity_model_Hammer1Block_ROM_START, (s32)entity_model_Hammer1Block_ROM_END }},
+    .entityType = ENTITY_TYPE_HAMMER1_BLOCK,
+    .aabbSize = { 50, 50, 100 }
 };
+
 EntityBlueprint Entity_Hammer1BlockTiny = {
-    0x4280, 0x0020, Entity_Hammer1Block_RenderScript, 0, entity_init_HammerBlock_small, D_802E9DCC, entity_block_handle_collision, entity_model_Hammer1Block_ROM_START, entity_model_Hammer1Block_ROM_END, ENTITY_TYPE_HAMMER1_BLOCK_TINY, { 25, 25, 25 }
+    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200 | ENTITY_FLAGS_80,
+    .typeDataSize = sizeof(BlockData),
+    .renderCommandList = Entity_Hammer1Block_RenderScript,
+    .modelAnimationNodes = 0,
+    .fpInit = entity_init_HammerBlock_small,
+    .updateEntityScript = Entity_BaseBlock_Script,
+    .fpHandleCollision = entity_block_handle_collision,
+    {{ (s32)entity_model_Hammer1Block_ROM_START, (s32)entity_model_Hammer1Block_ROM_END }},
+    .entityType = ENTITY_TYPE_HAMMER1_BLOCK_TINY,
+    .aabbSize = { 25, 25, 25 }
 };
+
 EntityBlueprint Entity_Hammer2Block = {
-    0x4280, 0x0020, Entity_Hammer2Block_RenderScript, 0, entity_base_block_init, D_802E9DCC, entity_block_handle_collision, entity_model_Hammer2Block_ROM_START, entity_model_Hammer2Block_ROM_END, ENTITY_TYPE_HAMMER2_BLOCK, { 50, 50, 50 }
+    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200 | ENTITY_FLAGS_80,
+    .typeDataSize = sizeof(BlockData),
+    .renderCommandList = Entity_Hammer2Block_RenderScript,
+    .modelAnimationNodes = 0,
+    .fpInit = entity_base_block_init,
+    .updateEntityScript = Entity_BaseBlock_Script,
+    .fpHandleCollision = entity_block_handle_collision,
+    {{ (s32)entity_model_Hammer2Block_ROM_START, (s32)entity_model_Hammer2Block_ROM_END }},
+    .entityType = ENTITY_TYPE_HAMMER2_BLOCK,
+    .aabbSize = { 50, 50, 50 }
 };
+
 EntityBlueprint Entity_Hammer2Block_WideHitbox = {
-    0x4280, 0x0020, Entity_Hammer2Block_RenderScript, 0, entity_base_block_init, D_802E9DCC, entity_block_handle_collision, entity_model_Hammer2Block_ROM_START, entity_model_Hammer2Block_ROM_END, ENTITY_TYPE_HAMMER2_BLOCK, { 100, 50, 50 }
+    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200 | ENTITY_FLAGS_80,
+    .typeDataSize = sizeof(BlockData),
+    .renderCommandList = Entity_Hammer2Block_RenderScript,
+    .modelAnimationNodes = 0,
+    .fpInit = entity_base_block_init,
+    .updateEntityScript = Entity_BaseBlock_Script,
+    .fpHandleCollision = entity_block_handle_collision,
+    {{ (s32)entity_model_Hammer2Block_ROM_START, (s32)entity_model_Hammer2Block_ROM_END }},
+    .entityType = ENTITY_TYPE_HAMMER2_BLOCK,
+    .aabbSize = { 100, 50, 50 }
 };
+
 EntityBlueprint Entity_Hammer2Block_TallHitbox = {
-    0x4280, 0x0020, Entity_Hammer2Block_RenderScript, 0, entity_base_block_init, D_802E9DCC, entity_block_handle_collision, entity_model_Hammer2Block_ROM_START, entity_model_Hammer2Block_ROM_END, ENTITY_TYPE_HAMMER2_BLOCK, { 50, 50, 100 }
+    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200 | ENTITY_FLAGS_80,
+    .typeDataSize = sizeof(BlockData),
+    .renderCommandList = Entity_Hammer2Block_RenderScript,
+    .modelAnimationNodes = 0,
+    .fpInit = entity_base_block_init,
+    .updateEntityScript = Entity_BaseBlock_Script,
+    .fpHandleCollision = entity_block_handle_collision,
+    {{ (s32)entity_model_Hammer2Block_ROM_START, (s32)entity_model_Hammer2Block_ROM_END }},
+    .entityType = ENTITY_TYPE_HAMMER2_BLOCK,
+    .aabbSize = { 50, 50, 100 }
 };
+
 EntityBlueprint Entity_Hammer2BlockTiny = {
-    0x4280, 0x0020, Entity_Hammer2Block_RenderScript, 0, entity_init_HammerBlock_small, D_802E9DCC, entity_block_handle_collision, entity_model_Hammer2Block_ROM_START, entity_model_Hammer2Block_ROM_END, ENTITY_TYPE_HAMMER2_BLOCK_TINY, { 25, 25, 25 }
+    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200 | ENTITY_FLAGS_80,
+    .typeDataSize = sizeof(BlockData),
+    .renderCommandList = Entity_Hammer2Block_RenderScript,
+    .modelAnimationNodes = 0,
+    .fpInit = entity_init_HammerBlock_small,
+    .updateEntityScript = Entity_BaseBlock_Script,
+    .fpHandleCollision = entity_block_handle_collision,
+    {{ (s32)entity_model_Hammer2Block_ROM_START, (s32)entity_model_Hammer2Block_ROM_END }},
+    .entityType = ENTITY_TYPE_HAMMER2_BLOCK_TINY,
+    .aabbSize = { 25, 25, 25 }
 };
+
 EntityBlueprint Entity_Hammer3Block = {
-    0x4280, 0x0020, Entity_Hammer3Block_RenderScript, 0, entity_base_block_init, D_802E9DCC, entity_block_handle_collision, entity_model_Hammer3Block_ROM_START, entity_model_Hammer3Block_ROM_END, ENTITY_TYPE_HAMMER3_BLOCK, { 50, 50, 50 }
+    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200 | ENTITY_FLAGS_80,
+    .typeDataSize = sizeof(BlockData),
+    .renderCommandList = Entity_Hammer3Block_RenderScript,
+    .modelAnimationNodes = 0,
+    .fpInit = entity_base_block_init,
+    .updateEntityScript = Entity_BaseBlock_Script,
+    .fpHandleCollision = entity_block_handle_collision,
+    {{ (s32)entity_model_Hammer3Block_ROM_START, (s32)entity_model_Hammer3Block_ROM_END }},
+    .entityType = ENTITY_TYPE_HAMMER3_BLOCK,
+    .aabbSize = { 50, 50, 50 }
 };
+
 EntityBlueprint Entity_Hammer3Block_WideHitbox = {
-    0x4280, 0x0020, Entity_Hammer3Block_RenderScript, 0, entity_base_block_init, D_802E9DCC, entity_block_handle_collision, entity_model_Hammer3Block_ROM_START, entity_model_Hammer3Block_ROM_END, ENTITY_TYPE_HAMMER3_BLOCK, { 100, 50, 50 }
+    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200 | ENTITY_FLAGS_80,
+    .typeDataSize = sizeof(BlockData),
+    .renderCommandList = Entity_Hammer3Block_RenderScript,
+    .modelAnimationNodes = 0,
+    .fpInit = entity_base_block_init,
+    .updateEntityScript = Entity_BaseBlock_Script,
+    .fpHandleCollision = entity_block_handle_collision,
+    {{ (s32)entity_model_Hammer3Block_ROM_START, (s32)entity_model_Hammer3Block_ROM_END }},
+    .entityType = ENTITY_TYPE_HAMMER3_BLOCK,
+    .aabbSize = { 100, 50, 50 }
 };
+
 EntityBlueprint Entity_Hammer3Block_TallHitbox = {
-    0x4280, 0x0020, Entity_Hammer3Block_RenderScript, 0, entity_base_block_init, D_802E9DCC, entity_block_handle_collision, entity_model_Hammer3Block_ROM_START, entity_model_Hammer3Block_ROM_END, ENTITY_TYPE_HAMMER3_BLOCK, { 50, 50, 100 }
+    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200 | ENTITY_FLAGS_80,
+    .typeDataSize = sizeof(BlockData),
+    .renderCommandList = Entity_Hammer3Block_RenderScript,
+    .modelAnimationNodes = 0,
+    .fpInit = entity_base_block_init,
+    .updateEntityScript = Entity_BaseBlock_Script,
+    .fpHandleCollision = entity_block_handle_collision,
+    {{ (s32)entity_model_Hammer3Block_ROM_START, (s32)entity_model_Hammer3Block_ROM_END }},
+    .entityType = ENTITY_TYPE_HAMMER3_BLOCK,
+    .aabbSize = { 50, 50, 100 }
 };
+
 EntityBlueprint Entity_Hammer3BlockTiny = {
-    0x4280, 0x0020, Entity_Hammer3Block_RenderScript, 0, entity_init_HammerBlock_small, D_802E9DCC, entity_block_handle_collision, entity_model_Hammer3Block_ROM_START, entity_model_Hammer3Block_ROM_END, ENTITY_TYPE_HAMMER3_BLOCK_TINY, { 25, 25, 25 }
+    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200 | ENTITY_FLAGS_80,
+    .typeDataSize = sizeof(BlockData),
+    .renderCommandList = Entity_Hammer3Block_RenderScript,
+    .modelAnimationNodes = 0,
+    .fpInit = entity_init_HammerBlock_small,
+    .updateEntityScript = Entity_BaseBlock_Script,
+    .fpHandleCollision = entity_block_handle_collision,
+    {{ (s32)entity_model_Hammer3Block_ROM_START, (s32)entity_model_Hammer3Block_ROM_END }},
+    .entityType = ENTITY_TYPE_HAMMER3_BLOCK_TINY,
+    .aabbSize = { 25, 25, 25 }
 };
+
 EntityBlueprint Entity_PushBlock = {
-    0x4000, 0x0020, Entity_PushBlock_RenderScript, 0, entity_base_block_init, D_802E9DCC, entity_block_handle_collision, entity_model_PushBlock_ROM_START, entity_model_PushBlock_ROM_END, ENTITY_TYPE_PUSH_BLOCK, { 25, 25, 25 }
+    .flags = ENTITY_FLAGS_4000,
+    .typeDataSize = sizeof(BlockData),
+    .renderCommandList = Entity_PushBlock_RenderScript,
+    .modelAnimationNodes = 0,
+    .fpInit = entity_base_block_init,
+    .updateEntityScript = Entity_BaseBlock_Script,
+    .fpHandleCollision = entity_block_handle_collision,
+    {{ (s32)entity_model_PushBlock_ROM_START, (s32)entity_model_PushBlock_ROM_END }},
+    .entityType = ENTITY_TYPE_PUSH_BLOCK,
+    .aabbSize = { 25, 25, 25 }
 };
+
 EntityBlueprint Entity_PowBlock = {
-    0x4000, 0x0020, Entity_PowBlock_RenderScript, 0, entity_base_block_init, D_802E9D90, entity_block_handle_collision, entity_model_PowBlock_ROM_START, entity_model_PowBlock_ROM_END, ENTITY_TYPE_POW_BLOCK, { 30, 25, 25 },
+    .flags = ENTITY_FLAGS_4000,
+    .typeDataSize = sizeof(BlockData),
+    .renderCommandList = Entity_PowBlock_RenderScript,
+    .modelAnimationNodes = 0,
+    .fpInit = entity_base_block_init,
+    .updateEntityScript = Entity_PowBlock_Script,
+    .fpHandleCollision = entity_block_handle_collision,
+    {{ (s32)entity_model_PowBlock_ROM_START, (s32)entity_model_PowBlock_ROM_END }},
+    .entityType = ENTITY_TYPE_POW_BLOCK,
+    .aabbSize = { 30, 25, 25 },
 };

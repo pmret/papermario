@@ -411,6 +411,12 @@ struct Entity;
 
 // BEGIN ENTITY-SPECIFIC STRUCTS
 
+typedef struct SaveBlockData {
+    /* 0x000 */ char unk_0[4];
+    /* 0x004 */ s16 angle;
+    /* 0x006 */ char unk_6[0x1A];
+} SaveBlockData; // size = 0x20
+
 typedef struct SwitchData {
     /* 0x000 */ f32 fallVelocity;
     /* 0x004 */ f32 deltaScaleX;
@@ -424,11 +430,6 @@ typedef struct SwitchData {
     /* 0x024 */ s16 scaleAnimTimer;
     /* 0x028 */ struct Entity* linkedSwitch;
 } SwitchData; // size = 0x2C
-
-typedef struct struct802E2BA4 {
-    /* 0x00 */ char unk_00[2];
-    /* 0x02 */ u16 unk_02[24][2];
-} struct802E2BA4;
 
 typedef struct ShatteringBlockData {
     /* 0x000 */ u16 fragmentFlags[25];
@@ -461,10 +462,8 @@ typedef struct BlockData {
     /* 0x012 */ s16 childEntityIndex; // for block entities that spawn other block entities
     /* 0x014 */ f32 initialY;
     /* 0x018 */ f32 recoilInterpPhase;
-    /* 0x01C */ char unk_1C[0x10C];
-    /* 0x128 */ UNK_PTR unk_128;
-    /* 0x12C */ UNK_PTR unk_12C;
-} BlockData;
+    /* 0x01C */ char unk_1C[0x4];
+} BlockData; // size = 0x20
 
 typedef struct ItemBlockData {
     /* 0x00 */ u16 unk_00;
@@ -474,11 +473,6 @@ typedef struct ItemBlockData {
     /* 0x10 */ s16 itemID;
     /* 0x12 */ s16 childEntityIndex; // for block entities that spawn other block entities
 } ItemBlockData;
-
-typedef struct SaveBlockData {
-    /* 0x000 */ char unk_0[4];
-    /* 0x004 */ s16 angle;
-} SaveBlockData;
 
 // size unknown
 typedef struct SuperBlockContentData {

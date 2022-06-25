@@ -166,7 +166,7 @@ EntityModelScript Entity_SaveBlock_RenderScript = {
 
 EntityBlueprint Entity_SavePoint = {
     .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200,
-    .typeDataSize = 0x20,
+    .typeDataSize = sizeof(SaveBlockData),
     .renderCommandList = Entity_SaveBlock_RenderScript,
     .modelAnimationNodes = 0,
     .fpInit = entity_SaveBlock_init,
