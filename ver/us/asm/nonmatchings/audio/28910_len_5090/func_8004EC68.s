@@ -817,11 +817,11 @@ glabel func_8004EC68
 .L8004F7F4:
 /* 2ABF4 8004F7F4 2442FF20 */  addiu     $v0, $v0, -0xe0
 /* 2ABF8 8004F7F8 00021080 */  sll       $v0, $v0, 2
-/* 2ABFC 8004F7FC 3C018008 */  lui       $at, %hi(D_80078470)
+/* 2ABFC 8004F7FC 3C018008 */  lui       $at, %hi(SeqCmdHandlers)
 /* 2AC00 8004F800 00220821 */  addu      $at, $at, $v0
-/* 2AC04 8004F804 8C228470 */  lw        $v0, %lo(D_80078470)($at)
-/* 2AC08 8004F808 3C01800A */  lui       $at, %hi(D_800A3FD0)
-/* 2AC0C 8004F80C AC223FD0 */  sw        $v0, %lo(D_800A3FD0)($at)
+/* 2AC04 8004F804 8C228470 */  lw        $v0, %lo(SeqCmdHandlers)($at)
+/* 2AC08 8004F808 3C01800A */  lui       $at, %hi(CurrentSeqCmdHandler)
+/* 2AC0C 8004F80C AC223FD0 */  sw        $v0, %lo(CurrentSeqCmdHandler)($at)
 /* 2AC10 8004F810 0040F809 */  jalr      $v0
 /* 2AC14 8004F814 0200282D */   daddu    $a1, $s0, $zero
 .L8004F818:

@@ -25,8 +25,8 @@ glabel func_80050BA0
 /* 2BFF0 80050BF0 03E00008 */  jr        $ra
 /* 2BFF4 80050BF4 A0600024 */   sb       $zero, 0x24($v1)
 .L80050BF8:
-/* 2BFF8 80050BF8 3C028008 */  lui       $v0, %hi(D_800784F0)
-/* 2BFFC 80050BFC 244284F0 */  addiu     $v0, $v0, %lo(D_800784F0)
+/* 2BFF8 80050BF8 3C028008 */  lui       $v0, %hi(SeqCmdArgCounts)
+/* 2BFFC 80050BFC 244284F0 */  addiu     $v0, $v0, %lo(SeqCmdArgCounts)
 /* 2C000 80050C00 AC620008 */  sw        $v0, 8($v1)
 /* 2C004 80050C04 24020001 */  addiu     $v0, $zero, 1
 /* 2C008 80050C08 AC620018 */  sw        $v0, 0x18($v1)

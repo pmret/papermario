@@ -41,10 +41,10 @@ dlabel D_80078410
 dlabel gBlankSEFData
 .word 0x00000000, 0x00000000, 0x00000000
 
-dlabel D_80078470
+dlabel SeqCmdHandlers
 .word snd_BGMCmd_E0_MasterTempo, snd_BGMCmd_E1_MasterVolume, snd_BGMCmd_E2_MasterTranspose, snd_BGMCmd_E3, snd_BGMCmd_E4_MasterTempoFade, snd_BGMCmd_E5_MasterVolumeFade, snd_BGMCmd_E6_MasterEffect, snd_BGMCmd_NOP, snd_BGMCmd_E8_TrackOverridePatch, snd_BGMCmd_E9_SubTrackVolume, snd_BGMCmd_EA_SubTrackPan, snd_BGMCmd_EB_SubTrackReverb, snd_BGMCmd_EC_SegTrackVolume, snd_BGMCmd_ED_SubTrackCoarseTune, snd_BGMCmd_EE_SubTrackFineTune, snd_BGMCmd_EF_SegTrackTune, snd_BGMCmd_F0_TrackTremolo, snd_BGMCmd_F1_TrackTremoloSpeed, snd_BGMCmd_F2_TrackTremoloTime, snd_BGMCmd_F3_TrackTremoloStop, snd_BGMCmd_F4, snd_BGMCmd_F5_TrackVoice, snd_BGMCmd_F6_TrackVolumeFade, snd_BGMCmd_F7_SubTrackReverbType, snd_BGMCmd_NOP, snd_BGMCmd_NOP, snd_BGMCmd_NOP, snd_BGMCmd_NOP, snd_BGMCmd_FC_Jump, snd_BGMCmd_FD, snd_BGMCmd_FE, snd_BGMCmd_FF
 
-dlabel D_800784F0
+dlabel SeqCmdArgCounts
 .byte 2, 1, 1, 1, 4, 3, 2, 0, 2, 1, 1, 1, 1, 1, 1, 2, 3, 1, 1, 0, 2, 1, 3, 1, 0, 0, 0, 0, 3, 3, 3, 3
 
 dlabel D_80078510

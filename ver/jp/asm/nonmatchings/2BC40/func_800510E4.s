@@ -57,8 +57,8 @@ glabel func_800510E4
 /* 2C5AC 800511AC AEA20038 */   sw       $v0, 0x38($s5)
 /* 2C5B0 800511B0 1470000D */  bne       $v1, $s0, .L800511E8
 /* 2C5B4 800511B4 24020002 */   addiu    $v0, $zero, 2
-/* 2C5B8 800511B8 3C028008 */  lui       $v0, %hi(D_800784F0)
-/* 2C5BC 800511BC 244284F0 */  addiu     $v0, $v0, %lo(D_800784F0)
+/* 2C5B8 800511B8 3C028008 */  lui       $v0, %hi(SeqCmdArgCounts)
+/* 2C5BC 800511BC 244284F0 */  addiu     $v0, $v0, %lo(SeqCmdArgCounts)
 /* 2C5C0 800511C0 AEA20008 */  sw        $v0, 8($s5)
 /* 2C5C4 800511C4 0801447E */  j         .L800511F8
 /* 2C5C8 800511C8 AEA30018 */   sw       $v1, 0x18($s5)

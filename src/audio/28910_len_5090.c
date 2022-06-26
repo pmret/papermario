@@ -826,10 +826,10 @@ void func_8004EC04(BGMPlayer* player) {
     player->unkFrequency = BGM_SAMPLE_RATE;
 }
 
-extern s32 (*D_800A3FD0)(BGMPlayer*, void*);
+extern s32 (*CurrentSeqCmdHandler)(BGMPlayer*, BGMPlayerTrack*);
 extern u8 D_80078410[];
-extern s32 (*D_80078470[])(BGMPlayer*, void*);
-extern s8 D_800784F0[];
+extern s32 (*SeqCmdHandlers[])(BGMPlayer*, BGMPlayerTrack*);
+extern s8 SeqCmdArgCounts[];
 
 INCLUDE_ASM(s32, "audio/28910_len_5090", func_8004EC68);
 /*
@@ -1271,8 +1271,8 @@ block_104:
                                 }
                             }
 
-                            D_800A3FD0 = D_80078470[temp_a3 - 0xE0];
-                            D_800A3FD0(player, track);
+                            CurrentSeqCmdHandler = SeqCmdHandlers[temp_a3 - 0xE0];
+                            CurrentSeqCmdHandler(player, track);
                         }
 
                         if (track->unk_28 == 0) {
