@@ -9,6 +9,7 @@
 #define AUDIO_HEAP_SIZE 0x56000
  // NU_AU_AUDIO_SAMPLES ?
 #define	AUDIO_SAMPLES	184
+#define AUDIO_COMMAND_LIST_BUFFER_SIZE 0x4000
 
 #define SND_MAX_VOLUME_8  0x7F // 127
 #define SND_MAX_VOLUME_16 0x7FFF
@@ -725,12 +726,21 @@ typedef struct AlUnkIota {
     /* 0x07 */ u8 unk_07;
 } AlUnkIota; // size = 0x8
 
+typedef struct AlUnkMSEQData {
+    u8 unk_00;
+    u8 unk_01;
+    s16 unk_02;
+    s16 unk_04;
+    u16 unk_06;
+} AlUnkMSEQData;
+
 typedef struct MSEQHeader {
     /* 0x00 */ s32 signature; // 'MSEQ '
     /* 0x04 */ s32 size; // including header
     /* 0x08 */ s32 name;
     /* 0x0C */ u8 unk_0C;
-    /* 0x0D */ char pad_D[3];
+    /* 0x0D */ u8 unkCount;
+    /* 0x0E */ u16 unkOffset;
     /* 0x10 */ u16 dataStart;
 } MSEQHeader; // size variable
 
@@ -740,10 +750,12 @@ typedef struct AlUnkXi {
     /* 0x08 */ s32 unk_08;
     /* 0x0C */ s32 unk_0C;
     /* 0x10 */ s32 unk_10;
-    /* 0x14 */ s32 unk_14;
+    /* 0x14 */ s16 unk_14;
+    /* 0x16 */ s16 unk_16;
     /* 0x18 */ s32 unk_18;
     /* 0x1C */ s32 unk_1C;
-    /* 0x20 */ s32 unk_20;
+    /* 0x20 */ s16 unk_20;
+    /* 0x22 */ s16 unk_22;
     /* 0x24 */ s8 unk_24;
 } AlUnkXi; // size = 0x28
 
