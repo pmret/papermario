@@ -12416,7 +12416,7 @@ segments:
   - [0xFAD8F0, bin, bgm/SMW_Remix_2F]
   - [0xFADE70, bin, bgm/New_Partner_82] # BGM end
   - [0xFAE860, bin] # sfx
-  - [0x1943000, bin] # duplicate of 0x1E00000
+  - [0x1943000, bin] # this for a bit (including future segs?): duplicate of 0x1E00000
   - [0x1983000, bin]
   - [0x19E09A8, Yay0] # TODO shiftability - figure out what these are and if they have any pointers in them
   - [0x19E1390, Yay0]

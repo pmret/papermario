@@ -247,7 +247,7 @@ void spr_set_anim_timescale(f32 timescale) {
 
 void spr_load_player_sprite(s32 spriteIndex) {
     s32 ind = spriteIndex - 1;
-    SpriteAnimData* playerSprite = spr_load_sprite(ind, 1, 0);
+    SpriteAnimData* playerSprite = spr_load_sprite(ind, TRUE, FALSE);
 
     spr_playerSprites[ind] = playerSprite;
     if (spr_playerMaxComponents < playerSprite->maxComponents) {
@@ -337,7 +337,7 @@ void func_802DDEE4(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s
     if (spr_playerCurrentAnimInfo[arg0].componentList != NULL) {
         componentListIt = spr_playerCurrentAnimInfo[arg0].componentList;
         i = 0;
-        
+
         while (*componentListIt != (SpriteComponent*)-1) {
             component = *componentListIt;
             if (arg1 == -1 || i == arg1) {
@@ -365,7 +365,7 @@ u16** spr_get_player_palettes(s32 spriteIndex) {
     if (sprites == NULL) {
         return NULL;
     }
-    
+
     return sprites->palettesOffset;
 }
 

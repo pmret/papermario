@@ -12,16 +12,16 @@ void filemenu_draw_contents_copy_arrow(
     s32 opacity, s32 darkening
 );
 
-extern s32 D_80241ECC;
+extern HudScript D_80241ECC;
 extern MenuPanel D_8024A098;
 extern MenuPanel D_8024A114;
 extern MenuPanel D_8024A158;
 extern MenuPanel D_8024A1D8;
-extern s32 D_8024BA60;
-extern s32 D_8024BA98;
+extern WindowStyle D_8024BA60;
+extern WindowStyle D_8024BA98;
 extern s32 D_8024C088;
 
-s32* D_80249B80[] = { &D_80241ECC };
+HudScript* D_80249B80[] = { &D_80241ECC };
 MenuPanel* filemenu_menus[4] = { &D_8024A098, &D_8024A114, &D_8024A158, &D_8024A1D8 };
 s32 D_80249B94 = SCREEN_WIDTH / 2;
 s32 D_80249B98 = -SCREEN_HEIGHT / 2;
@@ -56,12 +56,57 @@ Vp D_80249D60 = {
     }
 };
 f32 D_80249D70[15] = { 7.0f, 12.5f, 13.0f, 14.5f, 14.0f, 13.0f, 11.5f, 9.5f, 7.5f, 5.5f, 3.5f, 2.0f, 1.0f, 0.5f, 0.0f };
-s32 D_80249DAC[] = { 0x2C000010, 0x00180120, 0x00C00000, 0x00000000, 0x00000000, 0xFF000000, 0x00000001, 0x40000000, };
-s32** D_80249DCC = &D_8024BA60;
-s32 D_80249DD0[] = { 0x18000000, 0x00000120, 0x00C00000, filemenu_draw_contents_copy_arrow, 0x00000000,
-                     0x2C000000, 0x00000001, 0x00000000, &D_8024BA98, 0x17000000, 0x00000140, 0x00F00000,
-                     filemenu_draw_cursor, 0x00000000, 0xFF000000, 0x00000001, 0x00000000, &D_8024BA98, 0x00000000,
-                     0x00000000, };
+
+MenuWindowBP D_80249DAC[3] = {
+    {
+        .windowID = 0x2C,
+        .pos = {
+            .x = 16,
+            .y = 24,
+        },
+        .width = 288,
+        .height = 192,
+        .priority = 0,
+        .fpDrawContents = NULL,
+        .tab = NULL,
+        .parentID = -1,
+        .fpUpdate = { 1 },
+        .extraFlags = 0x40,
+        .style = { &D_8024BA60 },
+    },
+    {
+        .windowID = 0x18,
+        .pos = {
+            .x = 0,
+            .y = 0,
+        },
+        .width = 0x120,
+        .height = 0xC0,
+        .priority = 0,
+        .fpDrawContents = filemenu_draw_contents_copy_arrow,
+        .tab = NULL,
+        .parentID = 0x2C,
+        .fpUpdate = { 1} ,
+        .extraFlags = 0x00,
+        .style = { &D_8024BA98 },
+    },
+    {
+        .windowID = 0x17,
+        .pos = {
+            .x = 0,
+            .y = 0,
+        },
+        .width = 0x140,
+        .height = 0xF0,
+        .priority = 0,
+        .fpDrawContents = filemenu_draw_cursor,
+        .tab = NULL,
+        .parentID = -1,
+        .fpUpdate = { 1 },
+        .extraFlags = 0x00,
+        .style = { &D_8024BA98 },
+    },
+};
 
 extern Gfx D_8024B600[];
 extern Gfx D_8024B6F0[];
@@ -100,9 +145,9 @@ void filemenu_set_selected(MenuPanel* menu, s32 col, s32 row) {
                                     (menu->numCols * menu->row) + menu->col];
 }
 
-void filemenu_set_cursor_alpha(s32 arg0) {
-    filemenu_cursorGoalAlpha = arg0;
-    filemenu_cursorGoalAlpha2 = arg0;
+void filemenu_set_cursor_alpha(s32 alpha) {
+    filemenu_cursorGoalAlpha = alpha;
+    filemenu_cursorGoalAlpha2 = alpha;
 }
 
 void filemenu_set_cursor_goal_pos(s32 windowID, s32 posX, s32 posY) {
@@ -238,7 +283,7 @@ void filemenu_update(void) {
     }
 
     // TODO clean up bad match
-    menuIt = &filemenu_menus;
+    menuIt = filemenu_menus;
     for (i = 0; i < ARRAY_COUNT(filemenu_menus); i++, menuIt++) {
         menu = *menuIt;
         if (menu->initialized && menu->fpUpdate != NULL) {
@@ -812,11 +857,10 @@ void filemenu_draw_contents_copy_arrow(MenuPanel* menu, s32 baseX, s32 baseY, s3
     }
 }
 
-// some reordering at the end
-#ifdef NON_MATCHING
+// TODO bad match, look into
 void filemenu_init(s32 arg0) {
+    MenuPanel** panelIt;
     MenuPanel* menu;
-    u32 temp_a2;
     s32 i;
 
     dma_copy(ui_images_ROM_START, ui_images_ROM_END, ui_images_VRAM);
@@ -825,14 +869,15 @@ void filemenu_init(s32 arg0) {
         hud_element_set_flags(filemenu_cursorHudElemID[i], HUD_ELEMENT_FLAGS_DROP_SHADOW | HUD_ELEMENT_FLAGS_80);
     }
 
-    D_8024C088 = filemenu_cursorHudElemID[1];
-    if (arg0 == 0) {
-        *D_80249DCC = NULL;
+    D_8024C088 = filemenu_cursorHudElemID[0];
+    if (!arg0) {
+        D_80249DAC[0].style.customStyle->background.imgData = NULL; // ???
     }
-    setup_pause_menu_tab(D_80249DAC, 3);
+    setup_pause_menu_tab(D_80249DAC, ARRAY_COUNT(D_80249DAC));
     menu = filemenu_menus[0];
     filemenu_8024C098 = 0;
-    if (arg0 == 0) {
+
+    if (!arg0) {
         menu->page = 0;
     } else {
         menu->page = 2;
@@ -859,16 +904,14 @@ void filemenu_init(s32 arg0) {
 
     filemenu_set_selected(menu, (gGameStatusPtr->saveSlot & 1) * 2, gGameStatusPtr->saveSlot >> 1);
 
-    for (i = 0; i < ARRAY_COUNT(filemenu_menus); i++) {
-        if (filemenu_menus[i]->fpInit != NULL) {
-            filemenu_menus[i]->fpInit(filemenu_menus[i]);
+    panelIt = filemenu_menus;
+    for (i = 0; i < ARRAY_COUNT(filemenu_menus); i++, panelIt++) {
+        if ((*panelIt)->fpInit != NULL) {
+            (*panelIt)->fpInit((*panelIt));
         }
     }
     update_window_hierarchy(0x17, 0x40);
 }
-#else
-INCLUDE_ASM(void, "163400", filemenu_init);
-#endif
 
 // TODO bad match, look into
 void filemenu_cleanup(void) {
