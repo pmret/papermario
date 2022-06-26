@@ -12,7 +12,6 @@ typedef struct UnkSpr10 {
     /* 0x0C */ void* unk_0C;
 } UnkSpr10;
 
-
 extern s32 D_802E004C;
 extern s32 D_802E0050[];
 extern s32 D_802E0C10;
