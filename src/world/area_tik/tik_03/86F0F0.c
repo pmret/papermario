@@ -1,10 +1,9 @@
 #include "tik_03.h"
+#include "world/partners.h"
 
 #include "world/common/UnkPosFunc2.inc.c"
 
-void partner_set_goal_pos(s32, s32);
 extern s32 D_80242EBC_8719BC;
-extern Npc* wPartnerNpc;
 extern s32 D_80242930_871430[4];
 
 ApiStatus func_80240960_86F460(Evt* script, s32 isInitialCall) {

@@ -794,37 +794,36 @@ s32 calc_enemy_damage_target(Actor* attacker) {
     return hitResult;
 }
 
-// part before the first conditional needs work
+// missing one move
 #ifdef NON_EQUIVALENT
 s32 dispatch_damage_event_actor(Actor* actor, s32 damageAmount, s32 originalEvent, s32 stopMotion) {
     BattleStatus* battleStatus = &gBattleStatus;
-    ActorMovementWalk* walk;
-    s32 dispatchEvent;
-
-    u16 temp_v1;
+    ActorState* state;
+    s32 dispatchEvent = originalEvent;
+    s32 currentAttackDamage;
+    s32 hpChangeCounter;
 
     battleStatus->currentAttackDamage = damageAmount;
-    temp_v1 = actor->hpChangeCounter + battleStatus->currentAttackDamage;
-    actor->hpChangeCounter += temp_v1;
-    actor->damageCounter += temp_v1;
+    currentAttackDamage = battleStatus->currentAttackDamage;
+
+    actor->hpChangeCounter += currentAttackDamage;
+    hpChangeCounter = actor->hpChangeCounter;
+    actor->damageCounter += hpChangeCounter;
+    actor->hpChangeCounter -= hpChangeCounter;
     battleStatus->lastAttackDamage = 0;
-    actor->hpChangeCounter -= temp_v1;
-    actor->currentHP -= temp_v1;
-
-    dispatchEvent = originalEvent;
-
-    walk = &actor->walk;
+    do { } while (0);
+    actor->currentHP -= hpChangeCounter;
+    state = &actor->state;
     if (actor->currentHP <= 0) {
+        dispatchEvent = EVENT_DEATH;
         battleStatus->lastAttackDamage += actor->currentHP;
         actor->currentHP = 0;
-    dispatchEvent = EVENT_DEATH;
     }
-
-    battleStatus->lastAttackDamage += temp_v1;
+    battleStatus->lastAttackDamage += currentAttackDamage;
     actor->lastDamageTaken = battleStatus->lastAttackDamage;
     battleStatus->unk_19A = 0;
 
-    if (battleStatus->flags1 & 0x20) {
+    if (battleStatus->flags1 & BS_FLAGS1_SP_EVT_ACTIVE) {
         if (dispatchEvent == EVENT_HIT_COMBO) {
             dispatchEvent = EVENT_HIT;
         }
@@ -832,7 +831,6 @@ s32 dispatch_damage_event_actor(Actor* actor, s32 damageAmount, s32 originalEven
             dispatchEvent = EVENT_IMMUNE;
         }
     }
-
     if (dispatchEvent == EVENT_DEATH) {
         if (originalEvent == EVENT_SPIN_SMASH_LAUNCH_HIT) {
             dispatchEvent = EVENT_SPIN_SMASH_LAUNCH_DEATH;
@@ -843,20 +841,18 @@ s32 dispatch_damage_event_actor(Actor* actor, s32 damageAmount, s32 originalEven
     }
 
     if (stopMotion == 0) {
-        s32 targetActorID = actor->targetActorID; // why?
+        s32 oldTargetActorID = actor->targetActorID;
 
         if (func_80263230(actor, actor) != 0) {
-            show_damage_popup(actor->targetData[0].pos.x, actor->targetData[0].pos.y, actor->targetData[0].pos.z,
-                              battleStatus->lastAttackDamage, 0);
-            func_802666E4(actor, actor->targetData[0].pos.x, actor->targetData[0].pos.y, actor->targetData[0].pos.z,
-                          battleStatus->lastAttackDamage);
-            actor->targetActorID = targetActorID;
+            show_damage_popup(actor->targetData[0].pos.x, actor->targetData[0].pos.y, actor->targetData[0].pos.z, battleStatus->lastAttackDamage, 0);
+            func_802666E4(actor, actor->targetData[0].pos.x, actor->targetData[0].pos.y, actor->targetData[0].pos.z, battleStatus->lastAttackDamage);
+            actor->targetActorID = oldTargetActorID;
         } else {
-            actor->targetActorID = targetActorID;
+            actor->targetActorID = oldTargetActorID;
         }
     } else {
-        show_damage_popup(walk->goalPos.x, walk->goalPos.y, walk->goalPos.z, battleStatus->lastAttackDamage, 0);
-        func_802666E4(actor, walk->goalPos.x, walk->goalPos.y, walk->goalPos.z, battleStatus->lastAttackDamage);
+        show_damage_popup(state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage, 0);
+        func_802666E4(actor, state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage);
     }
 
     if (battleStatus->lastAttackDamage > 0) {

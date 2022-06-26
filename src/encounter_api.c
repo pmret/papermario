@@ -650,7 +650,7 @@ ApiStatus GetNpcVar(Evt* script, s32 isInitialCall) {
     Enemy* npc = script->owner1.enemy;
     s32 npcID = evt_get_variable(script, *args++);
     s32 varIdx = evt_get_variable(script, *args++);
-    s32 var3 = *args;
+    s32 var3 = *args++;
 
     if (npcID == NPC_SELF) {
         npcID = npc->npcID;
