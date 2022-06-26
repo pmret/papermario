@@ -11,6 +11,9 @@ extern EffectInstance* N(Quizmo_AudienceEffect);
 extern EffectInstance* N(Quizmo_VannaTEffect);
 extern s32 D_80248778_82BA38;
 extern s32 D_8024877C_82BA3C;
+extern s32 D_8024EA10;
+extern s32 D_8024EA14;
+
 #include "world/common/atomic/Quizmo.inc.c"
 
 #include "world/common/GetNpcCollisionHeight.inc.c"
@@ -69,11 +72,37 @@ INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_80242DBC_82607C);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_80242F60_826220);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_80243040_826300);
+ApiStatus func_80243040_826300(Evt* script, s32 isInitialCall) {
+    Bytecode args = *script->ptrReadPos;
 
-INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_80243088_826348);
+    evt_set_variable(script, args++, get_item_count());
 
-INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_802430D0_826390);
+    return ApiStatus_DONE2;
+}
+
+ApiStatus func_80243088_826348(Evt* script, s32 isInitialCall) {
+    Bytecode args = *script->ptrReadPos;
+
+    evt_set_variable(script, args++, get_item_empty_count());
+
+    return ApiStatus_DONE2;
+}
+
+ApiStatus func_802430D0_826390(Evt* script, s32 isInitialCall) {
+    s32 i = 90;
+    s32* ptr = &D_8024EA10;
+    s32 val = 218;
+
+    while (i >= 0) {
+        *ptr-- = val;
+        val--;
+        i--;
+    }
+
+    D_8024EA14 = 0;
+
+    return ApiStatus_DONE2;
+}
 
 extern s32 N(LetterDelivery_SavedNpcAnim);
 #include "world/common/LetterDelivery.inc.c"

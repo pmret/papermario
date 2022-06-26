@@ -69,6 +69,8 @@ typedef struct ModelLocalVertexCopy {
     /* 0x18 */ s32 selector;
 } ModelLocalVertexCopy; // size = 0x1C
 
+typedef ModelLocalVertexCopy* ModelLocalVertexCopyList[0];
+
 typedef struct ModelTreeInfo {
     /* 0x00 */ u8 modelIndex;
     /* 0x01 */ u8 treeDepth;
