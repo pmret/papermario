@@ -273,7 +273,33 @@ void snd_ambient_manager_update(AmbientSoundManager* arg0) {
     arg0->unk_21 = 0;
 }
 
-INCLUDE_ASM(void, "audio/2BF90", func_80051334, AmbientSoundManager* arg0, AlUnkLambda* arg1);
+void func_80051334(AmbientSoundManager* manager, AlUnkLambda* lambda) {
+    MSEQHeader* header;
+    AlUnkMSEQData* var_a0;
+    AlUnkXi* xi;
+    s32 offset;
+    s32 count;
+    s32 lim;
+
+    header = lambda->unk_00;
+    count = header->unkCount;
+    if (count != 0 && header->unkOffset != 0) {
+        var_a0 = (AlUnkMSEQData*)((s32)header + header->unkOffset);
+        while (count--) {
+            xi = &lambda->unk_44[var_a0->unk_00];
+            if (var_a0->unk_01 == 0) {
+                xi->unk_14 = var_a0->unk_02;
+                xi->unk_10 = (var_a0->unk_04 << 0x10) / var_a0->unk_02;
+                xi->unk_16 = var_a0->unk_06;
+            } else if (var_a0->unk_01 == 1) {
+                xi->unk_20 = var_a0->unk_02;
+                xi->unk_1C = (var_a0->unk_04 << 0x10) / var_a0->unk_02;
+                xi->unk_22 = var_a0->unk_06;
+            }
+            var_a0++;
+        }
+    }
+}
 
 INCLUDE_ASM(void, "audio/2BF90", func_80051434, AmbientSoundManager* arg0, AlUnkLambda* arg1);
 

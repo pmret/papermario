@@ -11,7 +11,7 @@ u8 nuAuTaskStop = NU_AU_TASK_RUN;
 u8 volatile D_80078181 = 1;
 
 //bss
-extern Acmd* D_800A3510[3];
+extern Acmd* AlCmdListBuffers[3];
 extern NUScTask D_800A3520[3];
 extern u8* D_800A3628[3];
 extern s32 AlFrameSize;
@@ -54,8 +54,8 @@ void create_audio_system(void) {
     AlFrameSize = ((frameSize / AUDIO_SAMPLES) + 1) * AUDIO_SAMPLES;
     AlMinFrameSize = AlFrameSize - AUDIO_SAMPLES;
 
-    for (i = 0; i < ARRAY_COUNT(D_800A3510); i++) {
-        D_800A3510[i] = alHeapAlloc(config.heap, 1, 0x4000);
+    for (i = 0; i < ARRAY_COUNT(AlCmdListBuffers); i++) {
+        AlCmdListBuffers[i] = alHeapAlloc(config.heap, 1, AUDIO_COMMAND_LIST_BUFFER_SIZE);
     }
 
     for (i = 0; i < ARRAY_COUNT(D_800A3520); i++) {
@@ -90,7 +90,7 @@ void create_audio_system(void) {
     nuAuPreNMIFunc = func_8004B328;
     func_80056250(D_800B91A0, &config);
     snd_load_audio_data(config.outputRate);
-    osCreateThread(&nuAuMgrThread, NU_MAIN_THREAD_ID, nuAuMgr, NULL, &D_800A3510, NU_AU_MGR_THREAD_PRI); //why main thread?
+    osCreateThread(&nuAuMgrThread, NU_MAIN_THREAD_ID, nuAuMgr, NULL, &AlCmdListBuffers, NU_AU_MGR_THREAD_PRI); //why main thread?
     osStartThread(&nuAuMgrThread);
 }
 
@@ -126,7 +126,7 @@ void nuAuMgr(void* arg) {
     cmdListIndex = 0;
     bufferIndex = 0;
     samples = 0;
-    cmdListBuf = D_800A3510[0];
+    cmdListBuf = AlCmdListBuffers[0];
     bufferPtr = D_800A3628[0];
     while (TRUE) {
         osRecvMesg(&auMesgQ, (OSMesg*)&mesg_type, OS_MESG_BLOCK);
@@ -153,7 +153,7 @@ void nuAuMgr(void* arg) {
                 sampleSize = osAiGetLength() >> 2;
                 if (cmdList_len != 0 && nuAuTaskStop == NU_AU_TASK_RUN) {
                     osAiSetNextBuffer(bufferPtr, samples * 4);
-                    cmdListBuf = D_800A3510[cmdListIndex];
+                    cmdListBuf = AlCmdListBuffers[cmdListIndex];
                     bufferPtr = D_800A3628[bufferIndex];
                 }
                 if (sampleSize < AUDIO_SAMPLES || cond) {
@@ -301,6 +301,7 @@ void nuAuCleanDMABuffers(void) {
 
 // Nop issue
 // try again when bss is figured out up until this file
+// rename: default_nuAuPreNMIFunc
 #ifdef NON_MATCHING
 void func_8004B328(NUScMsg mesg_type, u32 frameCounter) {
     s16 temp;
