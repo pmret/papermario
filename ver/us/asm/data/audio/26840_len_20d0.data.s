@@ -36,13 +36,16 @@ dlabel D_80078400
 .word snd_SEFCmd_00_SetVolume, snd_SEFCmd_01_SetPan, snd_SEFCmd_02_SetInstrument, snd_SEFCmd_03_SetReverb
 
 dlabel D_80078410
-.byte 0x80, 0x04, 0xCF, 0x3C, 0x80, 0x04, 0xD0, 0x0C, 0x80, 0x04, 0xD0, 0x38, 0x80, 0x04, 0xD0, 0x50, 0x80, 0x04, 0xD0, 0x7C, 0x80, 0x04, 0xD1, 0x14, 0x80, 0x04, 0xD1, 0x30, 0x80, 0x04, 0xD1, 0x5C, 0x80, 0x04, 0xD1, 0x80, 0x80, 0x04, 0xD1, 0xB4, 0x80, 0x04, 0xD2, 0x3C, 0x80, 0x04, 0xD2, 0xB0, 0x80, 0x04, 0xD2, 0xE4, 0x80, 0x04, 0xD3, 0x10, 0x80, 0x04, 0xD3, 0x1C, 0x80, 0x04, 0xD3, 0x24, 0x80, 0x04, 0xD3, 0x3C, 0x80, 0x04, 0xD3, 0x54, 0x80, 0x04, 0xD3, 0x6C, 0x80, 0x04, 0xD3, 0xA0, 0x80, 0x04, 0xD3, 0xF8
+.word snd_SEFCmd_04, snd_SEFCmd_05, snd_SEFCmd_06, snd_SEFCmd_07, snd_SEFCmd_08, snd_SEFCmd_09_StartLoop, snd_SEFCmd_0A_EndLoop, snd_SEFCmd_0B, snd_SEFCmd_0C, snd_SEFCmd_0D, snd_SEFCmd_0E, snd_SEFCmd_0F, snd_SEFCmd_10_Jump, snd_SEFCmd_11_Restart, snd_SEFCmd_12_NOP, snd_SEFCmd_SetUnkA1, snd_SEFCmd_SetUnkA2, snd_SEFCmd_SetUnkA3, snd_SEFCmd_16, snd_SEFCmd_17, snd_SEFCmd_18
 
 dlabel gBlankSEFData
 .word 0x00000000, 0x00000000, 0x00000000
 
 dlabel D_80078470
-.word snd_BGMCmd_E0_MasterTempo, snd_BGMCmd_E1_MasterVolume, snd_BGMCmd_E2_MasterTranspose, snd_BGMCmd_E3, snd_BGMCmd_E4_MasterTempoFade, snd_BGMCmd_E5_MasterVolumeFade, snd_BGMCmd_E6_MasterEffect, snd_BGMCmd_NOP, snd_BGMCmd_E8_TrackOverridePatch, snd_BGMCmd_E9_SubTrackVolume, snd_BGMCmd_EA_SubTrackPan, snd_BGMCmd_EB_SubTrackReverb, snd_BGMCmd_EC_SegTrackVolume, snd_BGMCmd_ED_SubTrackCoarseTune, snd_BGMCmd_EE_SubTrackFineTune, snd_BGMCmd_EF_SegTrackTune, snd_BGMCmd_F0_TrackTremolo, snd_BGMCmd_F1_TrackTremoloSpeed, snd_BGMCmd_F2_TrackTremoloTime, snd_BGMCmd_F3_TrackTremoloStop, snd_BGMCmd_F4, snd_BGMCmd_F5_TrackVoice, snd_BGMCmd_F6_TrackVolumeFade, snd_BGMCmd_F7_SubTrackReverbType, snd_BGMCmd_NOP, snd_BGMCmd_NOP, snd_BGMCmd_NOP, snd_BGMCmd_NOP, snd_BGMCmd_FC_Jump, snd_BGMCmd_FD, snd_BGMCmd_FE, snd_BGMCmd_FF, 0x02010101, 0x04030200, 0x02010101, 0x01010102, 0x03010100, 0x02010301, 0x00000000, 0x03030303
+.word snd_BGMCmd_E0_MasterTempo, snd_BGMCmd_E1_MasterVolume, snd_BGMCmd_E2_MasterTranspose, snd_BGMCmd_E3, snd_BGMCmd_E4_MasterTempoFade, snd_BGMCmd_E5_MasterVolumeFade, snd_BGMCmd_E6_MasterEffect, snd_BGMCmd_NOP, snd_BGMCmd_E8_TrackOverridePatch, snd_BGMCmd_E9_SubTrackVolume, snd_BGMCmd_EA_SubTrackPan, snd_BGMCmd_EB_SubTrackReverb, snd_BGMCmd_EC_SegTrackVolume, snd_BGMCmd_ED_SubTrackCoarseTune, snd_BGMCmd_EE_SubTrackFineTune, snd_BGMCmd_EF_SegTrackTune, snd_BGMCmd_F0_TrackTremolo, snd_BGMCmd_F1_TrackTremoloSpeed, snd_BGMCmd_F2_TrackTremoloTime, snd_BGMCmd_F3_TrackTremoloStop, snd_BGMCmd_F4, snd_BGMCmd_F5_TrackVoice, snd_BGMCmd_F6_TrackVolumeFade, snd_BGMCmd_F7_SubTrackReverbType, snd_BGMCmd_NOP, snd_BGMCmd_NOP, snd_BGMCmd_NOP, snd_BGMCmd_NOP, snd_BGMCmd_FC_Jump, snd_BGMCmd_FD, snd_BGMCmd_FE, snd_BGMCmd_FF
+
+dlabel D_800784F0
+.byte 2, 1, 1, 1, 4, 3, 2, 0, 2, 1, 1, 1, 1, 1, 1, 2, 3, 1, 1, 0, 2, 1, 3, 1, 0, 0, 0, 0, 3, 3, 3, 3
 
 dlabel D_80078510
 .byte 0x30, 0x18, 0x20, 0x28, 0x30, 0x38, 0x40, 0x30, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00

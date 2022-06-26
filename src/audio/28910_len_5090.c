@@ -71,24 +71,24 @@ s32 snd_dispatch_bgm_player_event(SongUpdateEvent* event) {
             } else {
                 volume1 = 0x7FFF;
             }
-                    
+
             snd_initialize_bgm_fade(&player->fadeInfo, duration, volume0, volume1);
             player->fadeInfo.targetVolScale = 0x7FFF;
             player->fadeInfo.volScaleTime = 1;
             func_8004E880(player, BGM_SAMPLE_RATE, D_80078510[fileInfo->numSegments & 7]);
-            
+
             if (variation < 0 || variation >= 4 || fileInfo->segments[variation] == 0) {
                 variation = 0;
             }
             player->curSegmentID = variation;
-            
+
             player->segmentsInfo = (s32*)(4 * fileInfo->segments[variation] + (s32)player->bgmFile);
             player->segmentReadPos = player->segmentsInfo;
-            
+
             if (fileInfo->drums != 0) {
                 player->drumsInfo = (BGMDrumInfo*)(4 * fileInfo->drums + (s32)player->bgmFile);
                 player->bgmDrumCount = fileInfo->drumCount;
-                
+
                 for (i = 0; i < player->bgmDrumCount; i++) {
                     BGMDrumInfo* drum = &player->drumsInfo[i];
                     player->drums[i] = drum;
@@ -193,7 +193,7 @@ MusicError func_8004DB4C(SongUpdateEvent* s) {
                         if (player->unk_220 == 0) {
                             player->fadeInfo.targetVolume = volume;
                             player->fadeInfo.fadeTime = (duration * 1000) / 5750;
-                            player->fadeInfo.fadeStep = (s32) ((volume << 0x10) - player->fadeInfo.currentVolume.s32) / player->fadeInfo.fadeTime;
+                            player->fadeInfo.fadeStep = ((volume << 0x10) - player->fadeInfo.currentVolume.s32) / player->fadeInfo.fadeTime;
                             player->fadeInfo.onCompleteCallback = (void (*)()) s->variation; //TODO seems wrong
                             if (s->unk14 == 1) {
                                 player->fadeSongName = songName;
@@ -236,7 +236,7 @@ MusicError func_8004DCB8(SongUpdateEvent* update, s32 clearChanged) {
     songName = update->songName;
     variation = update->variation;
     error = MUSIC_ERROR_NONE;
-    
+
     if (songName != 0) {
         playerA = snd_get_player_with_song_name(songName);
         if (playerA != NULL) {
@@ -295,7 +295,7 @@ MusicError func_8004DE2C(SongUpdateEvent* update) {
     songName = update->songName;
     variation = update->variation;
     error = MUSIC_ERROR_NONE;
-    
+
     if (songName != 0) {
         if (update->unk14 == 0) {
             playerA = func_80053F64(variation);
@@ -367,7 +367,7 @@ void func_8004DFD4(SndGlobals* globals) {
     u32 i;
     u32 j;
     s32 k;
-    
+
     player = globals->unk_74;
     snd_copy_words(globals->unk_78, player, sizeof(*player));
     if (globals->unkSongName == player->songName) {
@@ -491,10 +491,10 @@ void func_8004E158(BGMPlayer* player, s32 arg1, s32 arg2, SndGlobals* arg3) {
 void func_8004E344(BGMPlayer* arg0, u8* arg1) {
     s32 i;
     s32 j;
-    
+
     for (i = 0; i < 4; i++) {
         s8 b = *arg1++;
-        
+
         if (b < 0) {
             break;
         }
@@ -696,7 +696,7 @@ void snd_initialize_bgm_player(BGMPlayer* player) {
             player->unk_D8[cmd & 0x1F] = buf;
         }
     }
-    
+
     player->unk_221 = 2;
 }
 
@@ -704,7 +704,7 @@ void func_8004E844(BGMPlayer* player, s32 arg1) {
     s32 i;
     u16* temp = player->unk_174[arg1];
     player->unk_212[arg1] = 0;
-   
+
     for (i = 0; i < 9; i++) {
         *temp++ = 0xFF00;
     }
@@ -719,7 +719,7 @@ void func_8004E880(BGMPlayer* player, s32 sampleRate, s32 divisor) {
         A = 500000;
     } else if (A < 80000) {
         A = 80000;
-    }    
+    }
     if (A < sampleRate) {
         sampleRate = A;
     }
@@ -777,7 +777,7 @@ void func_8004EA34(BGMPlayer* player, u32 cmd) {
     s32 a = cmd & 0x1F;
     s32 b = (cmd >> 5) & 0x7F;
     u32 i;
-    
+
     i = player->unk_210;
     if (player->unk_158[i] != NULL) {
         if (player->unk_158[i] == player->segmentReadPos) {
@@ -826,7 +826,548 @@ void func_8004EC04(BGMPlayer* player) {
     player->unkFrequency = BGM_SAMPLE_RATE;
 }
 
+extern s32 (*D_800A3FD0)(BGMPlayer*, void*);
+extern u8 D_80078410[];
+extern s32 (*D_80078470[])(BGMPlayer*, void*);
+extern s8 D_800784F0[];
+
 INCLUDE_ASM(s32, "audio/28910_len_5090", func_8004EC68);
+/*
+void func_8004EC68(BGMPlayer* player) {
+    s32 cond2;
+    s32 sp26;
+    u8 sp1F;
+    u8 cond;
+    AlUnkVoice* voice;
+    BGMDrumInfo* drumInfo;
+    Instrument* instrument;
+    BGMPlayerTrack* track;
+    AlUnkTheta* alUnkTheta;
+    s32 temp_a1_2;
+    s32 var_a0;
+    s32 temp_a0_6;
+    s32 temp_v1_9;
+    s32 var_a1_4;
+    s32 var_a1_5;
+    s32 var_a1_6;
+
+    s32 var_a3;
+    s32 var_s1;
+    s32 cond3;
+    s32 var_v0_11;
+    s32 var_v0_7;
+    s32 var_v0_9;
+    u16 temp_a2_2;
+    u8 temp_a2_4;
+    u32 temp_v1;
+    u32 var_v1;
+    u32 var_v1_2;
+    s32 temp_a0;
+    u8 temp_a0_2;
+    s32 temp_a1_3;
+    s32 temp_a3;
+    u8 temp_fp;
+    s32 temp_s7;
+    s32 temp_v0_31;
+    s32 temp_v1_2;
+    s32 temp_v1_3;
+    u8 temp_v1_4;
+    u8 temp_v1_5;
+
+    s32 temp_v1_7;
+    u32 var_a1;
+    u8 var_a1_3;
+    s32 var_s6;
+
+    s32 tempamt;
+
+    u32 i;
+    u8 j;
+
+    // var_s2 = saved_reg_s2;
+    // var_s3 = saved_reg_s3;
+    // var_s5 = saved_reg_s5;
+
+    cond2 = FALSE;
+    cond = FALSE;
+    if (player->masterTempoFadeTime != 0) {
+        player->masterTempoFadeTime--;
+        if (player->masterTempoFadeTime == 0) {
+            player->masterTempo = player->masterTempoFadeTempo;
+            player->masterTempoFadeTempo = 0;
+            player->masterTempoFadeDelta = 0;
+        } else {
+            player->masterTempo += player->masterTempoFadeDelta;
+        }
+        player->unkFrequency = player->masterTempo * 10;
+    }
+
+    if (player->masterVolumeFadeTime != 0) {
+        player->masterVolumeFadeTime--;
+        if (player->masterVolumeFadeTime == 0) {
+            player->masterVolume = player->masterVolumeFadeVolume;
+            player->masterVolumeFadeVolume = 0;
+            player->masterVolumeFadeDelta = 0;
+        } else {
+            player->masterVolume += player->masterVolumeFadeDelta;
+        }
+        cond2 = TRUE;
+    }
+
+    player->unk_21A = 0;
+    if (player->unk_204 != NULL) {
+        tempamt = 0x30;
+        var_s1 = 0xF;
+        if (player->unk_232 != 0) {
+loop_13:
+            temp_s7 = *player->unk_204++;
+            if (temp_s7 != 0) {
+                track = &player->tracks[temp_s7];
+                player->seqCmdArgs.u16[0] = tempamt;
+                player->seqCmdArgs.u8[2] = temp_s7;
+                if (track->bgmReadPos != NULL) {
+                    snd_BGMCmd_F6_TrackVolumeFade(player, track);
+                }
+                var_s1--;
+                if (var_s1 == 0) {
+                    player->unk_204 = NULL;
+                } else {
+                    goto loop_13;
+                }
+            } else {
+                player->unk_204 = NULL;
+            }
+        } else {
+loop_19:
+            temp_s7 = *player->unk_204++;
+            if (temp_s7 != 0) {
+                track = &player->tracks[temp_s7];
+                player->seqCmdArgs.u16[0] = tempamt;
+                player->seqCmdArgs.u8[2] = 0;
+                player->unk_204++;
+                if (track->bgmReadPos != 0) {
+                    snd_BGMCmd_F6_TrackVolumeFade(player, track);
+                }
+                var_s1--;
+                if (var_s1 != 0) {
+                    goto loop_19;
+                }
+            }
+            player->unk_204 = NULL;
+        }
+        player->unk_232 = 0;
+    }
+
+
+    for (i = 0; i < ARRAY_COUNT(player->tracks); i++) {
+        track = &player->tracks[i];
+        if (track->bgmReadPos != NULL) {
+            track->changed.tune = FALSE;
+            if (!cond2) {
+                if (player->unk_21A == 0) {
+                    track->changed.volume = FALSE;
+                } else {
+                    track->changed.volume = TRUE;
+                }
+            } else {
+                track->changed.volume = TRUE;
+            }
+
+            if (track->subTrackVolumeFadeTime != 0) {
+                track->subTrackVolumeFadeTime--;
+                if (track->subTrackVolumeFadeTime == 0) {
+                    track->subTrackVolume = track->subTrackVolumeFadeVolume;
+                } else {
+                    track->subTrackVolume += track->subTrackVolumeFadeDelta;
+                }
+                track->changed.volume = TRUE;
+            }
+
+            if (track->unk36 != 0) {
+                track->unk36--;
+                if (track->unk36 == 0) {
+                    track->unk2C = track->unk34 << 0x10;
+                } else {
+                    track->unk2C += track->unk30;
+                }
+                track->changed.volume = TRUE;
+            }
+
+            track->unk_28--;
+            if (track->unk_28 <= 0) {
+                sp1F = track->unk_52;
+
+                while (track->unk_28 == 0) {
+                    temp_a3 = *track->bgmReadPos++;
+                    if (track->unk_3E != 0) {
+                        track->unk_3E--;
+                        if (track->unk_3E == 0) {
+                            track->bgmReadPos = track->unk_04;
+                        }
+                    }
+
+                    temp_v1 = temp_a3 & 0xFF;
+                    if (temp_a3 >= 0) {
+                        if (temp_v1 == 0) {
+                            if (track->prevReadPos != NULL) {
+                                track->bgmReadPos = track->prevReadPos;
+                                track->prevReadPos = NULL;
+                                continue;
+                            }
+                            cond = TRUE;
+                        } else {
+                            if (temp_v1 < 120) {
+                                track->unk_28 = temp_v1;
+                            } else {
+                                temp_v1_2 = *track->bgmReadPos++;
+                                track->unk_28 = (((temp_a3 & 7) << 8) + temp_v1_2 + 120);
+                                if (track->unk_3E != 0) {
+                                    track->unk_3E--;
+                                    if (track->unk_3E == 0) {
+                                        track->bgmReadPos = track->unk_04;
+                                    }
+                                }
+                            }
+                            continue;
+                        }
+                    } else {
+                        if (temp_v1 < 212) {
+                            temp_fp = *track->bgmReadPos++;
+                            sp26 = temp_a3 & 0x7F & 0xFF;
+                            if (track->unk_3E != 0) {
+                                track->unk_3E--;
+                                if (track->unk_3E == 0) {
+                                    track->bgmReadPos = track->unk_04;
+                                }
+                            }
+                            var_s6 = *track->bgmReadPos++;
+                            if (track->unk_3E != 0) {
+                                track->unk_3E--;
+                                if (track->unk_3E == 0) {
+                                    track->bgmReadPos = track->unk_04;
+                                }
+                            }
+
+                            if (!(var_s6 < 0xC0)) {
+                                temp_v1_3 = *track->bgmReadPos++;
+                                var_s6 = ((var_s6 & 0x3F) << 8) + temp_v1_3 + 0xC0;
+                                if (track->unk_3E != 0) {
+                                    track->unk_3E--;
+                                    if (track->unk_3E == 0) {
+                                        track->bgmReadPos = track->unk_04;
+                                    }
+                                }
+                            }
+                            cond3 = FALSE;
+                            if (track->unk_5A == 0) {
+                                for (j = sp1F; j < track->unk_53; j++) {
+                                    voice = &player->globals->voices[j];
+                                    if (voice->unk_45 == 0) {
+                                        cond3 = TRUE;
+                                        break;
+                                    }
+                                }
+
+                                if (!cond3) {
+                                    if (track->unk_54 >= 5) {
+                                        j = track->unk_52;
+                                        temp_v1_4 = track->unk_53;
+                                        var_a1 = j & 0xFF;
+                                        if (var_a1 < temp_v1_4) {
+loop_83:
+                                            voice = &player->globals->voices[var_a1];
+                                            if (voice->unk_45 >= player->unk_234) {
+                                                j++;
+                                                var_a1 = j & 0xFF;
+                                                if (var_a1 < temp_v1_4) {
+                                                    goto loop_83;
+                                                }
+                                            } else {
+                                                func_800538C4(voice, var_a1);
+                                                cond3 = TRUE;
+                                            }
+                                        }
+
+                                        if (!cond3) {
+                                            for (j = track->unk_52; j < track->unk_53; j++) {
+                                                voice = &player->globals->voices[j];
+                                                if (voice->unk_45 == player->unk_234) {
+                                                    alUnkTheta = &player->unk_85C[j];
+                                                    if (alUnkTheta->unk_0C == 0) {
+                                                        func_800538C4(voice, j);
+                                                        cond3 = TRUE;
+                                                        break;
+                                                    }
+                                                }
+                                            }
+
+                                            if (!cond3) {
+                                                var_a1_3 = track->unk_52;
+                                                temp_a0_2 = track->unk_53;
+                                                var_v1_2 = var_a1_3 & 0xFF;
+                                                var_a3 = 0xFFFF;
+                                                if (var_v1_2 < temp_a0_2) {
+                                                    do {
+                                                        voice = &player->globals->voices[var_v1_2];
+                                                        if (voice->unk_45 == player->unk_234) {
+                                                            alUnkTheta = &player->unk_85C[var_v1_2];
+                                                            if (alUnkTheta->unk_17 == 0) {
+                                                                if (var_a3 > alUnkTheta->unk_0C) {
+                                                                    var_a3 = alUnkTheta->unk_0C;
+                                                                    j = var_a1_3;
+                                                                    cond3 = TRUE;
+                                                                }
+                                                            }
+                                                        }
+                                                        var_a1_3++;
+                                                        var_v1_2 = var_a1_3 & 0xFF;
+                                                    } while (var_v1_2 < temp_a0_2);
+                                                }
+
+                                                if (cond3) {
+                                                    alUnkTheta->unk_0C = 0;
+                                                    func_800538C4(voice, j);
+                                                }
+                                            } else {
+                                                goto block_104;
+                                            }
+                                        } else {
+                                            goto block_104;
+                                        }
+                                    } else {
+                                        j = track->unk_52;
+                                        voice = &player->globals->voices[j];
+                                        alUnkTheta = &player->unk_85C[j];
+                                        alUnkTheta->unk_0C = 0;
+                                        if (voice->unk_45 <= player->unk_234) {
+                                            func_800538C4(voice, j);
+                                            cond3 = TRUE;
+                                        }
+                                    }
+                                } else {
+                                    goto block_104;
+                                }
+                            }
+
+                            if (cond3) {
+block_104:
+                                alUnkTheta = &player->unk_85C[j];
+                                alUnkTheta->unk_12 = 0;
+                                if (temp_fp & 0xFF) {
+                                    alUnkTheta->unk_16 = (temp_fp + 1);
+                                } else {
+                                    alUnkTheta->unk_16 = 0;
+                                }
+                                alUnkTheta->unk_0C = var_s6;
+                                if (track->unk_58 != 0) {
+                                    if (sp26 < 0x48) {
+                                        drumInfo = player->globals->dataPER + (sp26 * 0xC);
+                                    } else {
+                                        drumInfo = player->drums[sp26 - 0x48];
+                                    }
+                                    temp_a2_2 = drumInfo->unk_00;
+                                    alUnkTheta->unk_00 = func_80053BE8(player->globals, temp_a2_2 >> 8, temp_a2_2 & 0xFF, (s32** ) &voice->unk_14);
+                                    if (drumInfo->unk_08.u8[0] != 0) {
+                                        alUnkTheta->unk_08 = alUnkTheta->unk_16 * (u8) func_80050654(player->unk_50, drumInfo->unk_04.u8[0], drumInfo->unk_08.u8[0]);
+                                    } else {
+                                        alUnkTheta->unk_08 = (alUnkTheta->unk_16 * drumInfo->unk_04.u8[0]);
+                                    }
+                                    voice->unk_40 = (((((player->masterVolume >> 0x15) * (track->subTrackVolume >> 0x15) * (track->unk2C >> 0x15)) >> 0x14) * (track->segTrackVolume * alUnkTheta->unk_08)) >> 0x10);
+                                    alUnkTheta->unk_0A = ((s8) track->subTrackFineTune + (drumInfo->unk_00 + track->subTrackCoarseTune)) - alUnkTheta->unk_00->unk_1E;
+                                    var_a1_4 = alUnkTheta->unk_0A + track->segTrackTune + player->unk_20E;
+                                    if (drumInfo->unk_04.u8[3] != 0) {
+                                        var_a1_4 = func_800505E4(player->unk_50, var_a1_4, drumInfo->unk_04.s32);
+                                        alUnkTheta->unk_14 = var_a1_4;
+                                    }
+                                    alUnkTheta->unk_04 = (snd_tune_param_to_timescale(var_a1_4) * alUnkTheta->unk_00->unk_20);
+
+                                    if (drumInfo->unk_08.u8[1] != 0) {
+                                        voice->unk_0E = func_80050568(player, drumInfo->unk_04.u8[1], drumInfo->unk_08.u8[1]);
+                                    } else {
+                                        voice->unk_0E = drumInfo->unk_04.u8[1];
+                                    }
+
+                                    if (drumInfo->unk_08.u8[2] != 0) {
+                                        voice->unk_0F = func_8005068C(player->unk_50, drumInfo->unk_04.u8[2], drumInfo->unk_08.u8[2]);
+                                    } else {
+                                        voice->unk_0F = drumInfo->unk_04.u8[2];
+                                    }
+                                } else {
+                                    alUnkTheta->unk_08 = ((((player->masterVolume >> 0x15) * (track->subTrackVolume >> 0x15) * (track->unk2C >> 0x15)) >> 0x14) * (track->segTrackVolume * alUnkTheta->unk_16)) >> 9;
+                                    voice->unk_40 = alUnkTheta->unk_08;
+                                    alUnkTheta->unk_00 = instrument = track->unk_0C;
+                                    temp_a1_2 = player->masterTranspose + (track->subTrackCoarseTune + (sp26 * 100));
+                                    alUnkTheta->unk_0A = ((s8) track->subTrackFineTune + temp_a1_2) - instrument->unk_1E;
+                                    alUnkTheta->unk_04 = snd_tune_param_to_timescale(alUnkTheta->unk_0A + track->segTrackTune + player->unk_20E) * track->unk_0C->sampleRate;
+
+                                    if (track->unk_57 != 0) {
+                                        voice->unk_0E = func_80050568(player, track->subTrackPan, track->unk_57);
+                                    } else {
+                                        voice->unk_0E = track->subTrackPan;
+                                    }
+
+                                    voice->unk_0F = track->subTrackReverb;
+                                    //temp_v0_31 = player->unk_4C[track]; // track
+                                    if (temp_v0_31 != 0) {
+                                        voice->unk_14 = player + ((temp_v0_31 * 0x12) + 0x162);
+                                    } else {
+                                        voice->unk_14 = track->unk_10[0];
+                                    }
+                                    voice->unk_18 = track->unk_10[1];
+                                }
+                                voice->unk_00 = alUnkTheta->unk_00;
+                                voice->unk_04 = alUnkTheta->unk_04;
+                                voice->unk_10 = track->subtrackReverbType;
+                                if (alUnkTheta->unk_0C >= 2) {
+                                    alUnkTheta->unk_17 = 1;
+                                    alUnkTheta->unk_12 = track->trackTremoloTime;
+                                    alUnkTheta->unk_13 = 0;
+                                    alUnkTheta->unk_10 = track->trackTremoloAmount;
+                                    voice->unk_43 = 2;
+                                    voice->unk_45 = player->unk_234;
+                                    voice->unk_44 = voice->unk_45;
+                                }
+                            }
+
+                        } else {
+                            temp_a1_3 = D_80078410[temp_v1];
+                            if (temp_a1_3 != 0) {
+                                player->seqCmdArgs.u8[0] = *track->bgmReadPos++;
+                                if (track->unk_3E != 0) {
+                                    track->unk_3E--;
+                                    if (track->unk_3E == 0) {
+                                        track->bgmReadPos = track->unk_04;
+                                    }
+                                }
+
+                                if (temp_a1_3 >= 2) {
+                                    player->seqCmdArgs.u8[1] = *track->bgmReadPos++;
+                                    if (track->unk_3E != 0) {
+                                        track->unk_3E--;
+                                        if (track->unk_3E == 0) {
+                                            track->bgmReadPos = track->unk_04;
+                                        }
+                                    }
+
+                                    if (temp_a1_3 >= 3) {
+                                        player->seqCmdArgs.u8[2] = *track->bgmReadPos++;
+                                        if (track->unk_3E != 0) {
+                                            track->unk_3E--;
+                                            if (track->unk_3E == 0) {
+                                                track->bgmReadPos = track->unk_04;
+                                            }
+                                        }
+
+                                        if (temp_a1_3 >= 4) {
+                                            player->seqCmdArgs.u8[3] = *track->bgmReadPos++;
+                                            if (track->unk_3E != 0) {
+                                                track->unk_3E--;
+                                                if (track->unk_3E == 0) {
+                                                    track->bgmReadPos = track->unk_04;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            D_800A3FD0 = D_80078470[temp_a3 - 0xE0];
+                            D_800A3FD0(player, track);
+                        }
+
+                        if (track->unk_28 == 0) {
+                            continue;
+                        }
+                    }
+                    break;
+                }
+            }
+
+            for (j = track->unk_52; j < track->unk_53; j++) {
+                if (track->unk_5A == 0) {
+                    voice = &player->globals->voices[j];
+                    if (voice->unk_45 == player->unk_234) {
+                        alUnkTheta = &player->unk_85C[j];
+                        if (alUnkTheta->unk_17 == 0) {
+                            if (alUnkTheta->unk_0C > 0) {
+                                alUnkTheta->unk_0C--;
+                                if (alUnkTheta->unk_0C == 0) {
+                                    voice->unk_3D |= 0x10;
+                                }
+                            }
+
+                            if (track->unk_58 != 0) {
+                                if (track->changed.tune || (player->unk_20E != 0)) {
+                                    alUnkTheta->unk_04 = snd_tune_param_to_timescale(alUnkTheta->unk_0A + alUnkTheta->unk_14 + track->segTrackTune + player->unk_20E) * alUnkTheta->unk_00->unk_20;
+                                    if (voice->unk_04 != alUnkTheta->unk_04) {
+                                        voice->unk_04 = alUnkTheta->unk_04;
+                                        voice->unk_43 |= 8;
+                                    }
+                                }
+                                if (track->changed.volume) {
+                                    voice->unk_40 = (((((player->masterVolume >> 0x15) * (track->subTrackVolume >> 0x15) * (track->unk2C >> 0x15)) >> 0x14) * (track->segTrackVolume * alUnkTheta->unk_08)) >> 0x10);
+                                    voice->unk_3D |= 0x20;
+                                }
+                            } else {
+                                if (alUnkTheta->unk_12 != 0) {
+                                    if (alUnkTheta->unk_10 != 0) {
+                                        alUnkTheta->unk_10--;
+                                    } else {
+                                        temp_v1_7 = alUnkTheta->unk_13 + track->trackTremoloSpeed;
+                                        temp_a0_6 = (temp_v1_7 * 4) + 3;
+                                        temp_a2_4 = (u32) (temp_v1_7 & 0xFF) >> 6;
+                                        alUnkTheta->unk_13 = temp_v1_7;
+                                        if (temp_a2_4 == 1 || temp_a2_4 == 3) {
+                                            var_a1_5 = (~temp_a0_6 & 0xFF) + 1;
+                                        } else {
+                                            var_a1_5 = temp_a0_6 & 0xFF;
+                                        }
+                                        var_a1_6 = (var_a1_5 * track->trackTremoloTime) >> 8;
+                                        if (temp_a2_4 == 2 || temp_a2_4 == 3) {
+                                            var_a1_6 = -var_a1_6;
+                                        }
+                                        var_a0 = var_a1_6 + (alUnkTheta->unk_0A + track->segTrackTune + player->unk_20E);
+                                        alUnkTheta->unk_04 = snd_tune_param_to_timescale(var_a0) * alUnkTheta->unk_00->unk_20;
+                                        if (voice->unk_04 != alUnkTheta->unk_04) {
+                                            voice->unk_04 = alUnkTheta->unk_04;
+                                            voice->unk_43 |= 8;
+                                        }
+                                    }
+                                } else if (track->changed.tune || (player->unk_20E != 0)) {
+                                    var_a0 = alUnkTheta->unk_0A + track->segTrackTune + player->unk_20E;
+                                    alUnkTheta->unk_04 = snd_tune_param_to_timescale(var_a0) * alUnkTheta->unk_00->unk_20;
+                                    if (voice->unk_04 != alUnkTheta->unk_04) {
+                                        voice->unk_04 = alUnkTheta->unk_04;
+                                        voice->unk_43 |= 8;
+                                    }
+                                }
+
+                                if (track->changed.volume) {
+                                    temp_v1_9 = ((((player->masterVolume >> 0x15) * (track->subTrackVolume >> 0x15) * (track->unk2C >> 0x15)) >> 0x14) * (track->segTrackVolume * alUnkTheta->unk_16)) >> 9;
+                                    alUnkTheta->unk_08 = temp_v1_9;
+                                    voice->unk_40 = alUnkTheta->unk_08;
+                                    voice->unk_3D |= 0x20;
+                                    voice->unk_0E = track->subTrackPan;
+                                    voice->unk_0F = track->subTrackReverb;
+                                } else if (track->changed.pan || track->changed.reverb) {
+                                    voice->unk_0E = track->subTrackPan;
+                                    voice->unk_0F = track->subTrackReverb;
+                                    voice->unk_43 |= 0x10;
+                                }
+                            }
+                        }
+                        alUnkTheta->unk_17 = 0;
+                    }
+                }
+            }
+        }
+    }
+
+    if (cond) {
+        player->unk_221 = 2;
+    }
+}
+*/
 
 static const f32 padding[] = {0.0f}; // at least after func_8004E4B8
 
@@ -1115,11 +1656,11 @@ void snd_BGMCmd_FF(BGMPlayer* player, BGMPlayerTrack* track) {
     u32 j;
     u8 temp_a1;
     u8 temp_a3;
-    
+
     u32 arg0 = player->seqCmdArgs.u8[0];
     u32 arg1 = player->seqCmdArgs.u8[1];
     u32 arg2 = player->seqCmdArgs.u8[2];
-    
+
     switch (arg0) {
         case 1:
             if ((arg1 < ARRAY_COUNT(player->unk_4C)) && ((s8)player->unk_4C[arg1] >= 0)) {
@@ -1221,7 +1762,7 @@ u8 func_80050568(BGMPlayer* player, u8 arg1, u8 arg2) {
     s32 f = d + e;
     s32 g = arg1;
     s32 retVal;
-    
+
     if (c != 0) {
         retVal = g + ((arg2 * f) >> 8);
     } else {
@@ -1276,7 +1817,7 @@ void func_800506C8(s32 songName, u32 arg1) {
     s32 changed = FALSE;
     u8 lowArg1 = arg1 & 0xFF;
     s32 i;
-    
+
     if (songName != 0) {
         player = snd_get_player_with_song_name(songName);
         if ((player != NULL) && (player->unk_16C != arg1)) {
@@ -1358,14 +1899,14 @@ void func_80050888(BGMPlayer* player, BGMPlayerTrack* track, s32 target, s32 dur
 void func_80050900(BGMPlayer* player) {
     AlUnkVoice* temp_a0;
     u8 i;
-    
+
     for (i = 0; i < ARRAY_COUNT(player->globals->voices); i++) {
         temp_a0 = &player->globals->voices[i];
         if (temp_a0->unk_45 == player->unk_234) {
             func_800538C4(temp_a0, i);
         }
     }
-} 
+}
 
 MusicError func_80050970(SongUpdateEvent* arg0) {
     BGMPlayer* player;

@@ -404,8 +404,8 @@ typedef struct BGMHeader {
 
 typedef struct BGMDrumInfo {
     /* 0x00 */ s32 unk_00;
-    /* 0x04 */ s32 unk_04;
-    /* 0x08 */ s32 unk_08;
+    /* 0x04 */ Q32 unk_04;
+    /* 0x08 */ Q32 unk_08;
 } BGMDrumInfo; // size = 0xC
 
 //TODO -- could be same as AlUnkMu?
@@ -570,7 +570,7 @@ typedef struct SndGlobals {
 } SndGlobals; // size = 0x19E0
 
 typedef struct BGMPlayerTrack {
-    /* 0x00 */ u32 bgmReadPos;
+    /* 0x00 */ u8* bgmReadPos;
     /* 0x04 */ u32 unk_04;
     /* 0x08 */ u32 prevReadPos; //? see snd_BGMCmd_FC_Jump
     /* 0x0C */ Instrument* unk_0C;
@@ -584,7 +584,7 @@ typedef struct BGMPlayerTrack {
     /* 0x30 */ s32 unk30;
     /* 0x34 */ s16 unk34;
     /* 0x36 */ s16 unk36;
-    /* 0x38 */ u16 segTrackTune;
+    /* 0x38 */ s16 segTrackTune;
     /* 0x3A */ s16 trackTremoloAmount;
     /* 0x3C */ char unk_3C[0x2];
     /* 0x3E */ s16 unk_3E;
@@ -592,7 +592,7 @@ typedef struct BGMPlayerTrack {
     /* 0x44 */ u16 unk_44;
     /* 0x46 */ u16 subTrackCoarseTune;
     /* 0x48 */ u8 subTrackFineTune;
-    /* 0x49 */ u8 segTrackVolume;
+    /* 0x49 */ s8 segTrackVolume;
     /* 0x4A */ u8 subTrackPan;
     /* 0x4B */ u8 subTrackReverb;
     /* 0x4C */ u8 unk_4C;
@@ -605,8 +605,8 @@ typedef struct BGMPlayerTrack {
     /* 0x53 */ u8 unk_53;
     /* 0x54 */ u8 unk_54;
     /* 0x55 */ s8 trackTremoloSpeed;
-    /* 0x56 */ s8 trackTremoloTime;
-    /* 0x57 */ s8 unk_57;
+    /* 0x56 */ u8 trackTremoloTime;
+    /* 0x57 */ u8 unk_57;
     /* 0x58 */ u8 unk_58;
     /* 0x59 */ u8 unk_59;
     /* 0x5A */ u8 unk_5A;
@@ -615,16 +615,22 @@ typedef struct BGMPlayerTrack {
     /* 0x5D */ char unk_5D[0x3];
 } BGMPlayerTrack; // size = 0x60;
 
+typedef struct AlUnkPineapple {
+    /* 0x00 */ char unk_00[0x1E];
+    /* 0x1E */ u16 unk_1E;
+    /* 0x20 */ s32 unk_20;
+} AlUnkPineapple; // size = 0x??
+
 typedef struct AlUnkTheta {
-    /* 0x00 */ s32 unk_00;
+    /* 0x00 */ AlUnkPineapple* unk_00;
     /* 0x00 */ f32 unk_04;
-    /* 0x08 */ u16 unk_08;
-    /* 0x0A */ u16 unk_0A;
+    /* 0x08 */ s16 unk_08;
+    /* 0x0A */ s16 unk_0A;
     /* 0x0C */ s32 unk_0C;
     /* 0x10 */ u16 unk_10;
     /* 0x12 */ u8 unk_12;
-    /* 0x12 */ char unk_13[0x1];
-    /* 0x14 */ u16 unk_14;
+    /* 0x12 */ u8 unk_13;
+    /* 0x14 */ s16 unk_14;
     /* 0x16 */ u8 unk_16;
     /* 0x17 */ u8 unk_17;
 } AlUnkTheta; // size = 0x18;
@@ -677,7 +683,7 @@ typedef struct BGMPlayer {
     /* 0x171 */ u8 unk_171;
     /* 0x172 */ char unk_172[0x2];
     /* 0x174 */ s16 unk_174[8][9];
-    /* 0x204 */ s32* unk_204;
+    /* 0x204 */ u8* unk_204;
     /* 0x208 */ u16 masterTempoBPM;
     /* 0x20A */ u16 bgmKhz;
     /* 0x20C */ s16 masterTranspose;
@@ -967,6 +973,8 @@ void snd_load_PER(SndGlobals*, s32);
 void snd_load_PRG(SndGlobals*, s32);
 void snd_read_rom(s32, void*, u32);
 void snd_copy_words(void*, void*, s32);
+
+f32 snd_tune_param_to_timescale(s32);
 
 #undef alHeapAlloc
 void* alHeapAlloc(ALHeap* heap, s32 arg1, s32 size);
