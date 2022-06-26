@@ -22,7 +22,6 @@ extern s32 D_8024EA14;
 
 // needs data migration, matching otherwise
 #ifdef NON_MATCHING
-extern s32 D_80248778_82BA38;
 s32 D_8024877C_82BA3C = 0;
 
 ApiStatus func_80242A80_825D40(Evt* script, s32 isInitialCall) {
