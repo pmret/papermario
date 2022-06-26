@@ -142,7 +142,7 @@ ApiStatus func_80238BCC_6F1CAC(Evt* script, s32 isInitalCall) {
     Actor* target = get_actor(gBattleStatus.partnerActor->targetActorID);
     s32 xSize;
 
-    if ((target->flags & ACTOR_FLAG_HP_OFFSET_BELOW) == 0) {
+    if (!(target->flags & ACTOR_FLAG_HP_OFFSET_BELOW)) {
         script->varTable[1] = script->varTable[1] + (((target->size.y / 3) & 0xFF) * target->scalingFactor);
         script->varTable[1] += ((target->size.y / 4) * target->scalingFactor);
     } else {

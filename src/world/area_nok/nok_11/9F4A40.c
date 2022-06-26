@@ -9,7 +9,17 @@ static char* N(exit_str_1) = "nok_12";
 
 #include "common/foliage.inc.c"
 
-INCLUDE_ASM(s32, "world/area_nok/nok_11/9F4A40", func_80241F08_9F6948);
+ApiStatus func_80241F08_9F6948(Evt* script, s32 isInitialCall) {
+    PlayerData* playerData = &gPlayerData;
+
+    if (playerData->coins >= 100) {
+        script->varTable[0] = FALSE;
+    } else {
+        script->varTable[0] = TRUE;
+    }
+
+    return ApiStatus_DONE2;
+}
 
 ApiStatus func_80241F30_9F6970(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
