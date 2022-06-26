@@ -1713,10 +1713,10 @@ void snd_BGMCmd_FF(BGMPlayer* player, BGMPlayerTrack* track) {
             break;
         case 5:
             if (player->soundManager != NULL) {
-                for (i = 0; i < ARRAY_COUNT(player->soundManager->unk_90); i++) {
-                    if ((player->soundManager->unk_90[i].u8[0]) == 0) {
-                        player->soundManager->unk_90[i].u8[0] = arg1;
-                        player->soundManager->unk_90[i].u8[3]= (((player->fadeInfo.currentVolume.u16 * player->fadeInfo.volScale.u16) + 0x7FFF) >> 0x17);
+                for (i = 0; i < ARRAY_COUNT(player->soundManager->unk_snd_90); i++) {
+                    if ((player->soundManager->unk_snd_90[i].unk_0) == 0) {
+                        player->soundManager->unk_snd_90[i].unk_0 = arg1;
+                        player->soundManager->unk_snd_90[i].volume= (((player->fadeInfo.currentVolume.u16 * player->fadeInfo.volScale.u16) + 0x7FFF) >> 0x17);
                         break;
                     }
                 }

@@ -301,6 +301,24 @@ typedef struct SoundPlayer {
     /* 0xA9 */ char unk_AA[0x2];
 } SoundPlayer; // size = 0xAC
 
+typedef struct SoundManager90 {
+    union {
+        s32 s32;
+        struct {
+            u8 unk_0;
+            u8 unk_1;
+            u8 unk_2;
+            u8 volume;
+        };
+    };
+} SoundManager90; // len = 4
+
+typedef struct SoundManagerA0 {
+    u16 unk_00;
+    u16 unk_02;
+    u16 unk_04;
+} SoundManagerA0; // len = 6
+
 typedef struct SoundManager {
     /* 0x000 */ struct SndGlobals* soundData;
     /* 0x004 */ struct AlUnkVoice* currentVoice;
@@ -319,8 +337,8 @@ typedef struct SoundManager {
     /* 0x08C */ u8 unk_8C;
     /* 0x08D */ s8 unk_8D;
     /* 0x08E */ char unk_8E[0x2];
-    /* 0x090 */ Q32 unk_90[4];
-    /* 0x0A0 */ Vec3s unk_A0[4];
+    /* 0x090 */ SoundManager90 unk_snd_90[4];
+    /* 0x0A0 */ SoundManagerA0 unk_snd_A0[4];
     /* 0x0B8 */ u16 unk_B8;
     /* 0x0BA */ s16 unk_BA;
     /* 0x0BC */ u8 unk_BC;

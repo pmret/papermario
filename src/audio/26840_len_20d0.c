@@ -80,12 +80,12 @@ void func_8004B440(SoundManager* manager, u8 arg1, u8 arg2, SndGlobals* arg3, u8
         sub->unk_7F = 0;
     }
 
-    for (i = 0; i < ARRAY_COUNT(manager->unk_90); i++) {
-        manager->unk_90[i].s32 = 0;
+    for (i = 0; i < ARRAY_COUNT(manager->unk_snd_90); i++) {
+        manager->unk_snd_90[i].s32 = 0;
     }
 
-    for (i = 0; i < ARRAY_COUNT(manager->unk_A0); i++) {
-        manager->unk_A0[i].x = 0;
+    for (i = 0; i < ARRAY_COUNT(manager->unk_snd_A0); i++) {
+        manager->unk_snd_A0[i].unk_00 = 0;
     }
 
     manager->unk_168 = 0;
@@ -787,9 +787,9 @@ void snd_SEFCmd_17(SoundManager* manager, SoundPlayer* player) {
     u32 i;
     
     for (i = 0; i < 4; i++) {
-        if ((u16) manager->unk_A0[i].x == 0) {
-            manager->unk_A0[i].x = buf[1] + (buf[0] << 8);
-            manager->unk_A0[i].y = buf[3] + (buf[2] << 8);
+        if (manager->unk_snd_A0[i].unk_00 == 0) {
+            manager->unk_snd_A0[i].unk_00 = buf[1] + (buf[0] << 8);
+            manager->unk_snd_A0[i].unk_02 = buf[3] + (buf[2] << 8);
             break;
         }    
     }
