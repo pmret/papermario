@@ -1,9 +1,7 @@
 #include "arn_08.h"
 #include "sprite/npc/tubbas_heart.h"
 #include "sprite/npc/yakkey.h"
-
-extern Npc* wPartnerNpc;
-void partner_set_goal_pos(s32, s32);
+#include "world/partners.h"
 
 enum {
     NPC_TUBBAS_HEART,

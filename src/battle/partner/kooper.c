@@ -59,8 +59,57 @@ ApiStatus func_80238000_6F5E80(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus func_80238114_6F5F94(Evt* script, s32 isInitialCall);
-INCLUDE_ASM(s32, "battle/partner/kooper", func_80238114_6F5F94);
+ApiStatus func_80238114_6F5F94(Evt* script, s32 isInitialCall) {
+    SelectableTarget* target;
+    Actor* actor = gBattleStatus.partnerActor;
+    Actor* targetActor;
+    ActorPart* targetActorPart;
+    f32 x;
+    f32 targetX;
+    s32 i;
+
+    if (isInitialCall) {
+        script->functionTemp[0] = 0;
+        actor->selectedTargetIndex = 0;
+    }
+
+    if (script->functionTemp[0] == 0) {
+        for (i = 0; i < actor->targetListLength; i++) {
+            x = actor->currentPos.x;
+            target = &actor->targetData[actor->targetIndexList[i]];
+            targetX = target->pos.x;
+            targetActor = get_actor(target->actorID);
+
+            if (targetActor != NULL) {
+                targetActorPart = get_actor_part(targetActor, target->partID);
+
+                if (targetActor->transStatus == 0) {
+                    if (!(targetActorPart->eventFlags & 0x20)) {
+                        if (x > targetX) {
+                            targetActor->yaw += 33;
+                        } else {
+                            targetActor->yaw = 0;
+                        }
+
+                        targetActor->yaw = clamp_angle(targetActor->yaw);
+                    }
+                }
+            }
+        }
+
+        if (actor->state.varTable[0] != 0) {
+            for (i = 0; i < actor->targetListLength; i++) {
+                target = &actor->targetData[actor->targetIndexList[i]];
+                targetActor = get_actor(target->actorID);
+                if (targetActor) {
+                    targetActor->yaw = 0.0f;
+                }
+            }
+            return ApiStatus_DONE2;
+        }
+    }
+    return ApiStatus_BLOCK;
+}
 
 ApiStatus N(AverageTargetDizzyChance)(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
