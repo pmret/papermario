@@ -33,10 +33,7 @@ dlabel D_800783C0
 .word D_80078378, D_80078390, D_80078390, D_80078390, D_80078390, D_80078390, D_80078390, D_80078390, D_80078390, D_80078390, D_80078390, D_80078390, D_80078390, D_80078390, D_80078390, D_80078390
 
 dlabel D_80078400
-.word snd_SEFCmd_00_SetVolume, snd_SEFCmd_01_SetPan, snd_SEFCmd_02_SetInstrument, snd_SEFCmd_03_SetReverb
-
-dlabel D_80078410
-.word snd_SEFCmd_04, snd_SEFCmd_05, snd_SEFCmd_06, snd_SEFCmd_07, snd_SEFCmd_08, snd_SEFCmd_09_StartLoop, snd_SEFCmd_0A_EndLoop, snd_SEFCmd_0B, snd_SEFCmd_0C, snd_SEFCmd_0D, snd_SEFCmd_0E, snd_SEFCmd_0F, snd_SEFCmd_10_Jump, snd_SEFCmd_11_Restart, snd_SEFCmd_12_NOP, snd_SEFCmd_SetUnkA1, snd_SEFCmd_SetUnkA2, snd_SEFCmd_SetUnkA3, snd_SEFCmd_16, snd_SEFCmd_17, snd_SEFCmd_18
+.word snd_SEFCmd_00_SetVolume, snd_SEFCmd_01_SetPan, snd_SEFCmd_02_SetInstrument, snd_SEFCmd_03_SetReverb, snd_SEFCmd_04, snd_SEFCmd_05, snd_SEFCmd_06, snd_SEFCmd_07, snd_SEFCmd_08, snd_SEFCmd_09_StartLoop, snd_SEFCmd_0A_EndLoop, snd_SEFCmd_0B, snd_SEFCmd_0C, snd_SEFCmd_0D, snd_SEFCmd_0E, snd_SEFCmd_0F, snd_SEFCmd_10_Jump, snd_SEFCmd_11_Restart, snd_SEFCmd_12_NOP, snd_SEFCmd_SetUnkA1, snd_SEFCmd_SetUnkA2, snd_SEFCmd_SetUnkA3, snd_SEFCmd_16, snd_SEFCmd_17, snd_SEFCmd_18
 
 dlabel gBlankSEFData
 .word 0x00000000, 0x00000000, 0x00000000

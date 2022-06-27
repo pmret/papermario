@@ -17,7 +17,7 @@ BSS char D_8009A5C4[0x4];
 BSS s32 __osBaseCounter;
 BSS s32 gBGMPlayerC;
 BSS s32 D_8009A5D0;
-BSS s32 CurrentSEFCmdHandler;
+BSS void (*CurrentSefCmdHandler)(void*, void*); // SoundManager*, SoundPlayer*
 BSS s32 timeFreezeMode;
 BSS s32 nuGfxZBuffer;
 BSS u32 nuContDataLockKey;

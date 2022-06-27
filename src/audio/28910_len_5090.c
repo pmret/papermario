@@ -826,9 +826,9 @@ void func_8004EC04(BGMPlayer* player) {
     player->unkFrequency = BGM_SAMPLE_RATE;
 }
 
-extern s32 (*CurrentSeqCmdHandler)(BGMPlayer*, BGMPlayerTrack*);
-extern u8 D_80078410[];
-extern s32 (*SeqCmdHandlers[])(BGMPlayer*, BGMPlayerTrack*);
+extern void (*CurrentSeqCmdHandler)(BGMPlayer*, BGMPlayerTrack*);
+extern void (*SefCmdHandlers[])(SoundManager*, SoundPlayer*);
+extern void (*SeqCmdHandlers[])(BGMPlayer*, BGMPlayerTrack*);
 extern s8 SeqCmdArgCounts[];
 
 INCLUDE_ASM(s32, "audio/28910_len_5090", func_8004EC68);
@@ -1230,7 +1230,7 @@ block_104:
                             }
 
                         } else {
-                            temp_a1_3 = D_80078410[temp_v1];
+                            temp_a1_3 = SefCmdHandlers[temp_v1];
                             if (temp_a1_3 != 0) {
                                 player->seqCmdArgs.u8[0] = *track->bgmReadPos++;
                                 if (track->unk_3E != 0) {
@@ -1713,10 +1713,10 @@ void snd_BGMCmd_FF(BGMPlayer* player, BGMPlayerTrack* track) {
             break;
         case 5:
             if (player->soundManager != NULL) {
-                for (i = 0; i < ARRAY_COUNT(player->soundManager->unk_snd_90); i++) {
-                    if ((player->soundManager->unk_snd_90[i].unk_0) == 0) {
-                        player->soundManager->unk_snd_90[i].unk_0 = arg1;
-                        player->soundManager->unk_snd_90[i].volume= (((player->fadeInfo.currentVolume.u16 * player->fadeInfo.volScale.u16) + 0x7FFF) >> 0x17);
+                for (i = 0; i < ARRAY_COUNT(player->soundManager->unk_90); i++) {
+                    if ((player->soundManager->unk_90[i].unk_0) == 0) {
+                        player->soundManager->unk_90[i].unk_0 = arg1;
+                        player->soundManager->unk_90[i].volume= (((player->fadeInfo.currentVolume.u16 * player->fadeInfo.volScale.u16) + 0x7FFF) >> 0x17);
                         break;
                     }
                 }

@@ -184,7 +184,7 @@ typedef struct AlUnkAlpha {
 } AlUnkAlpha;
 
 typedef struct SoundSFXEntry {
-    /* 0x0 */ s16 soundID;
+    /* 0x0 */ u16 soundID;
     /* 0x2 */ s16 upperSoundID;
     /* 0x4 */ s16 volume;
     /* 0x6 */ s16 pitchShift;
@@ -303,21 +303,21 @@ typedef struct SoundPlayer {
 
 typedef struct SoundManager90 {
     union {
-        s32 s32;
+    /* 0x0 */ s32 s32;
         struct {
-            u8 unk_0;
-            u8 unk_1;
-            u8 unk_2;
-            u8 volume;
+    /* 0x0 */ u8 unk_0;
+    /* 0x1 */ u8 unk_1;
+    /* 0x2 */ u8 unk_2;
+    /* 0x3 */ u8 volume;
         };
     };
-} SoundManager90; // len = 4
+} SoundManager90; // size = 4
 
 typedef struct SoundManagerA0 {
-    u16 unk_00;
-    u16 unk_02;
-    u16 unk_04;
-} SoundManagerA0; // len = 6
+    /* 0x0 */ u16 unk_00;
+    /* 0x2 */ u16 unk_02;
+    /* 0x4 */ u16 unk_04;
+} SoundManagerA0; // size = 6
 
 typedef struct SoundManager {
     /* 0x000 */ struct SndGlobals* soundData;
@@ -337,8 +337,8 @@ typedef struct SoundManager {
     /* 0x08C */ u8 unk_8C;
     /* 0x08D */ s8 unk_8D;
     /* 0x08E */ char unk_8E[0x2];
-    /* 0x090 */ SoundManager90 unk_snd_90[4];
-    /* 0x0A0 */ SoundManagerA0 unk_snd_A0[4];
+    /* 0x090 */ SoundManager90 unk_90[4];
+    /* 0x0A0 */ SoundManagerA0 unk_A0[4];
     /* 0x0B8 */ u16 unk_B8;
     /* 0x0BA */ s16 unk_BA;
     /* 0x0BC */ u8 unk_BC;
