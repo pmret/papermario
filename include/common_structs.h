@@ -2380,11 +2380,11 @@ typedef struct Message {
     /* 0x3C */ f32 unk_3C;
     /* 0x40 */ f32 unk_40;
     /* 0x44 */ s32 unk_44;
-    /* 0x48 */ char unk_48[0x4];
+    /* 0x48 */ f32 unk_48;
 } Message; // size = 0x4C
 
 struct PopupMessage;
-typedef void (*PopupMessageCallback)(struct PopupMessage* popup);
+typedef void (*PopupMessageCallback)(void* popup);
 typedef struct PopupMessage {
     /* 0x00 */ s32 unk_00;
     /* 0x04 */ PopupMessageCallback updateFunc;

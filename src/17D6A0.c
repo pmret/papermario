@@ -2,6 +2,7 @@
 #include "effects.h"
 #include "message_ids.h"
 #include "battle/battle.h"
+#include "hud_element.h"
 
 s32 D_80280FC0[] = {
     0x000A005A, 0x00000032, 0x0003000B, 0x00000032, 0x0001002D, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
@@ -1081,15 +1082,60 @@ s32 bActorMessages[] = {
 };
 PopupMessage* D_802838F8 = NULL;
 
+// BSS
+extern s16 D_80159E7E;
+
 extern PopupMessage popupMessages[32];
-extern s16 D_8029F64C;
 extern s16 D_8029F640;
+extern s16 D_8029F642;
+extern s16 D_8029F644;
+extern s16 D_8029F646;
+extern s16 D_8029F648;
 extern s16 D_8029F64A;
+extern s16 D_8029F64C;
 extern s16 D_8029F64E;
 extern s16 D_8029F650;
 
-void func_8024FB3C(PopupMessage* popup);
-void btl_show_message_popup(PopupMessage* popup);
+extern HudScript HES_AButton;
+extern HudScript HES_AButtonDown;
+extern HudScript HES_AimReticle;
+extern HudScript HES_AimTarget;
+extern HudScript HES_BButton;
+extern HudScript HES_CDownButton;
+extern HudScript HES_CLeftButton;
+extern HudScript HES_CRightButton;
+extern HudScript HES_CUpButton;
+extern HudScript HES_Item_Boots1;
+extern HudScript HES_Item_Boots2;
+extern HudScript HES_Item_Boots3;
+extern HudScript HES_Item_Hammer1;
+extern HudScript HES_Item_Hammer2;
+extern HudScript HES_Item_Hammer3;
+extern HudScript HES_Item_Items;
+extern HudScript HES_MashAButton;
+extern HudScript HES_MashBButton1;
+extern HudScript HES_MashBButton2;
+extern HudScript HES_MashCDownButton1;
+extern HudScript HES_MashCLeftButton;
+extern HudScript HES_MashCRightButton1;
+extern HudScript HES_MashCUpButton;
+extern HudScript HES_PressAButton;
+extern HudScript HES_PressBButton;
+extern HudScript HES_PressCDownButton;
+extern HudScript HES_RotateStickCW;
+extern HudScript HES_StickBackAndForth;
+extern HudScript HES_StickMashLeft;
+extern HudScript HES_StickNeutral;
+extern HudScript HES_StickTapLeft;
+extern HudScript HES_StickTapRight;
+extern HudScript HES_TimingBlink;
+extern HudScript HES_TimingReady;
+
+void func_8024F394(void* data);
+void func_8024F5AC(void* data);
+void func_8024F768(void* data);
+void func_8024FB3C(void* popup);
+void btl_show_message_popup(void* popup);
 
 void func_8024EDC0(void) {
     s32 i;
@@ -1169,7 +1215,104 @@ void free_popup(PopupMessage* popup) {
     popup->active = FALSE;
 }
 
-INCLUDE_ASM(s32, "17D6A0", func_8024EFE0);
+void func_8024EFE0(f32 x, f32 y, f32 z, s32 numMessages, s32 arg4, s32 arg5) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    PopupMessage* popup;
+    Message* message;
+    void** sp10;
+    f32 var_f20;
+    f32 var_f22;
+    f32* f1;
+    f32* f2;
+    f32* f3;
+    s32 arg5mod8;
+    s32 iMod8;
+    s32 sign;
+    s32 cond;
+    s32 one;
+    s32 two;
+    s32 i;
+
+    var_f22 = 1.0f;
+    cond = FALSE;
+    var_f20 = 1.0f;
+    if (numMessages < 1) {
+        numMessages = 1;
+        cond = TRUE;
+        var_f22 = 0.4f;
+        var_f20 = 0.7f;
+    }
+
+    if (battleStatus->flags1 & (0x200 | 0x40)) {
+        var_f22 *= 2.0;
+    }
+
+    popup = btl_create_popup();
+    if (popup != NULL) {
+        sign = 1;
+        if (arg5 < 0) {
+            arg5 = -arg5;
+            sign = -1;
+        }
+
+        while (TRUE) {
+            if (arg5 > 5) {
+                arg5 -= 5;
+            } else {
+                break;
+            }
+        }
+
+        battleStatus->unk_90 = 0;
+        popup->updateFunc = func_8024F394;
+        popup->unk_08 = func_8024F5AC;
+        popup->unk_00 = 0;
+        popup->drawFunc = NULL;
+        popup->messageIndex = 1;
+        popup->active |= 0x10;
+        message = popup->message = heap_malloc(numMessages * sizeof(*popup->message));
+        ASSERT (popup->message != NULL);
+
+        for (i = 0; i < numMessages; i++, message++) {
+            sp10 = &D_80283744[numMessages];
+            message->unk_00 = 1;
+            message->unk_04 = load_entity_model(*sp10);
+            set_entity_model_flags(message->unk_04, 0x20);
+            bind_entity_model_setupGfx(message->unk_04, message, func_8024F768);
+            message->unk_38 = x;
+            message->unk_3C = y;
+            message->unk_40 = z;
+            arg5mod8 = arg5 % 8;
+            arg5++;
+
+            one = 1;
+            two = 2;
+
+            f1 = &D_802835DC[arg5mod8 * 3];
+            f2 = &D_802835DC[arg5mod8 * 3 + one];
+            f3 = &D_802835DC[arg5mod8 * 3 + two];
+            message->unk_14 = 2.0 * *f1 * sign * var_f20;
+            message->unk_18 = 2.0 * *f2 * var_f20;
+            message->unk_1C = 2.0 * *f3 * var_f20;
+            message->unk_08 = *f1 * sign * var_f20;
+            message->unk_0C = *f2 * var_f20;
+            message->unk_10 = *f3 * var_f20;
+
+            iMod8 = (i % 8);
+            message->unk_34 = D_80283690[iMod8 * 3] * var_f22;
+            message->unk_28 = 0;
+            message->unk_2C = sign * 107;
+            message->unk_30 = clamp_angle(180.0f - gCameras[CAM_BATTLE].currentYaw);
+            message->unk_20 = 14;
+            message->unk_24 = arg4;
+            message->unk_44 = 240;
+            if (cond) {
+                message->unk_44 = 10;
+            }
+            message->unk_48 = 255.0f;
+        }
+    }
+}
 
 void func_8024F394(void* data) {
     PopupMessage* popup = data;
@@ -1329,7 +1472,7 @@ void btl_show_battle_message(s32 messageIndex, s32 duration) {
         popup->message = NULL;
         D_8029F640 = 0;
         D_802838F8 = popup;
-        D_8029F64A = 0;
+        D_8029F64A = FALSE;
         D_8029F64C = 0;
         D_8029F64E = 0;
         D_8029F650 = 0;
@@ -1351,7 +1494,7 @@ void btl_show_variable_battle_message(s32 messageIndex, s32 duration, s32 varVal
         popup->message = NULL;
         D_8029F640 = varValue;
         D_802838F8 = popup;
-        D_8029F64A = 0;
+        D_8029F64A = FALSE;
         D_8029F64C = 0;
         D_8029F64E = 0;
         D_8029F650 = 0;
@@ -1365,7 +1508,7 @@ s32 btl_is_popup_displayed(void) {
 void btl_set_popup_duration(s32 duration) {
     PopupMessage* popup = D_802838F8;
 
-    if (D_8029F64A != NULL && popup != NULL) {
+    if (D_8029F64A && popup != NULL) {
         popup->duration = duration;
     }
 }
@@ -1386,12 +1529,771 @@ void close_action_command_instruction_popup(void) {
     }
 }
 
-INCLUDE_ASM(s32, "17D6A0", func_8024FB3C);
+void func_8024FB3C(void* data) {
+    PopupMessage* popup = data;
+    BattleStatus* battleStatus = &gBattleStatus;
+    s32 cond = FALSE;
 
-void func_80250818(void);
-INCLUDE_ASM(s32, "17D6A0", func_80250818);
+    s32 temp_a0;
 
-void btl_show_message_popup(PopupMessage* popup) {
+    switch (popup->messageIndex) {
+        case 0x0:
+        case 0x1:
+        case 0x2:
+        case 0x3:
+        case 0x4:
+        case 0x5:
+        case 0x6:
+        case 0x7:
+        case 0x8:
+        case 0x9:
+        case 0xA:
+        case 0xB:
+        case 0xC:
+        case 0xD:
+        case 0xE:
+        case 0xF:
+        case 0x10:
+        case 0x11:
+        case 0x12:
+        case 0x13:
+        case 0x14:
+        case 0x15:
+        case 0x16:
+        case 0x17:
+        case 0x18:
+        case 0x19:
+        case 0x1A:
+        case 0x1B:
+        case 0x1C:
+        case 0x1D:
+        case 0x1E:
+        case 0x1F:
+        case 0x20:
+        case 0x21:
+        case 0x22:
+        case 0x23:
+        case 0x24:
+        case 0x25:
+        case 0x26:
+        case 0x27:
+        case 0x28:
+        case 0x29:
+        case 0x2A:
+        case 0x2B:
+        case 0x2C:
+        case 0x2D:
+        case 0x50:
+        case 0x51:
+        case 0x52:
+        case 0x53:
+        case 0x54:
+            switch (popup->unk_16) {
+                default:
+                    break;
+                case 0:
+                    popup->unk_16 = 1;
+                    break;
+                case 1:
+                    popup->unk_16 = 2;
+                    break;
+                case 2:
+                    if (battleStatus->currentButtonsPressed & 0xC000) {
+                        popup->duration = 0;
+                    }
+
+                    if (popup->duration != 0) {
+                        popup->duration--;
+                    } else {
+                        popup->unk_16 = 3;
+                    }
+                    break;
+                case 4:
+                    cond = TRUE;
+                    break;
+                case 3:
+                    popup->unk_16 = 4;
+                    break;
+            }
+            break;
+        case 0x2E:
+        case 0x2F:
+        case 0x30:
+        case 0x31:
+        case 0x32:
+        case 0x33:
+        case 0x34:
+        case 0x35:
+        case 0x36:
+        case 0x37:
+        case 0x38:
+        case 0x39:
+        case 0x3A:
+        case 0x3B:
+        case 0x3C:
+        case 0x3D:
+        case 0x3E:
+        case 0x3F:
+        case 0x40:
+        case 0x41:
+        case 0x42:
+            temp_a0 = battleStatus->unk_83;
+            D_8029F64A = TRUE;
+            if (temp_a0 == 0) {
+                D_8029F64A = FALSE;
+                cond = TRUE;
+                break;
+            }
+
+            switch (popup->unk_16) {
+                case 0:
+                    gBattleStatus.flags1 |= 0x4000;
+                    gBattleStatus.flags1 &= ~0x10000;
+                    switch (popup->messageIndex) {
+                        case 50:
+                            D_8029F642 = hud_element_create(&HES_StickNeutral);
+                            hud_element_set_flags(D_8029F642, 0x8080);
+                            hud_element_set_render_pos(D_8029F642, -100, -100);
+                            break;
+                        case 47:
+                            D_8029F642 = hud_element_create(&HES_StickNeutral);
+                            hud_element_set_flags(D_8029F642, 0x8080);
+                            hud_element_set_render_pos(D_8029F642, -100, -100);
+
+                            D_8029F644 = hud_element_create(&HES_TimingReady);
+                            hud_element_set_flags(D_8029F644, 0x80);
+                            hud_element_set_render_pos(D_8029F644, -100, -100);
+                            break;
+                        case 51:
+                            D_8029F642 = hud_element_create(&HES_StickNeutral);
+                            hud_element_set_flags(D_8029F642, 0x8080);
+                            hud_element_set_render_pos(D_8029F642, -100, -100);
+
+                            D_8029F644 = hud_element_create(&HES_AimTarget);
+                            hud_element_set_flags(D_8029F644, 0x8080);
+                            hud_element_set_render_pos(D_8029F644, -100, -100);
+                            hud_element_create_transform_B(D_8029F644);
+                            break;
+                        case 52:
+                            D_8029F642 = hud_element_create(&HES_CUpButton);
+                            hud_element_set_flags(D_8029F642, 0x8080);
+                            hud_element_set_render_pos(D_8029F642, -100, -100);
+
+                            D_8029F644 = hud_element_create(&HES_CDownButton);
+                            hud_element_set_flags(D_8029F644, 0x80);
+                            hud_element_set_render_pos(D_8029F644, -100, -100);
+
+                            D_8029F646 = hud_element_create(&HES_CLeftButton);
+                            hud_element_set_flags(D_8029F646, 0x80);
+                            hud_element_set_render_pos(D_8029F646, -100, -100);
+
+                            D_8029F648 = hud_element_create(&HES_CRightButton);
+                            hud_element_set_flags(D_8029F648, 0x80);
+                            hud_element_set_render_pos(D_8029F648, -100, -100);
+                            break;
+                        case 53:
+                            D_8029F642 = hud_element_create(&HES_StickNeutral);
+                            hud_element_set_flags(D_8029F642, 0x8080);
+                            hud_element_set_render_pos(D_8029F642, -100, -100);
+                            break;
+                        case 54:
+                            D_8029F642 = hud_element_create(&HES_AButton);
+                            hud_element_set_flags(D_8029F642, 0x8080);
+                            hud_element_set_render_pos(D_8029F642, -100, -100);
+
+                            D_8029F644 = hud_element_create(&HES_BButton);
+                            hud_element_set_flags(D_8029F644, 0x8080);
+                            hud_element_set_render_pos(D_8029F644, -100, -100);
+
+                            D_8029F646 = hud_element_create(&HES_CDownButton);
+                            hud_element_set_flags(D_8029F646, 0x8080);
+                            hud_element_set_render_pos(D_8029F646, -100, -100);
+                            break;
+                        case 55:
+                            D_8029F642 = hud_element_create(&HES_StickNeutral);
+                            hud_element_set_flags(D_8029F642, 0x8080);
+                            hud_element_set_render_pos(D_8029F642, -100, -100);
+                            break;
+                        case 56:
+                            D_8029F642 = hud_element_create(&HES_TimingReady);
+                            hud_element_set_flags(D_8029F642, 0x80);
+                            hud_element_set_render_pos(D_8029F642, -100, -100);
+
+                            D_8029F644 = hud_element_create(&HES_AButton);
+                            hud_element_set_flags(D_8029F644, 0x8080);
+                            hud_element_set_render_pos(D_8029F644, -100, -100);
+                            break;
+                        case 57:
+                            D_8029F642 = hud_element_create(&HES_AButton);
+                            hud_element_set_flags(D_8029F642, 0x8080);
+                            hud_element_set_render_pos(D_8029F642, -100, -100);
+                            D_8029F644 = hud_element_create(&HES_BButton);
+                            hud_element_set_flags(D_8029F642, 0x8080);
+                            hud_element_set_render_pos(D_8029F642, -100, -100);
+                            break;
+                        case 58:
+                            D_8029F642 = hud_element_create(&HES_AButton);
+                            hud_element_set_flags(D_8029F642, 0x8080);
+                            hud_element_set_render_pos(D_8029F642, -100, -100);
+
+                            D_8029F644 = hud_element_create(&HES_BButton);
+                            hud_element_set_flags(D_8029F644, 0x8080);
+                            hud_element_set_render_pos(D_8029F644, -100, -100);
+                            break;
+                        case 61:
+                            D_8029F642 = hud_element_create(&HES_TimingReady);
+                            hud_element_set_flags(D_8029F642, 0x80);
+                            hud_element_set_render_pos(D_8029F642, -100, -100);
+
+                            D_8029F644 = hud_element_create(&HES_AButtonDown);
+                            hud_element_set_flags(D_8029F644, 0x8080);
+                            hud_element_set_render_pos(D_8029F644, -100, -100);
+                            break;
+                        case 62:
+                            D_8029F642 = hud_element_create(&HES_StickNeutral);
+                            hud_element_set_flags(D_8029F642, 0x8080);
+                            hud_element_set_render_pos(D_8029F642, -100, -100);
+
+                            D_8029F644 = hud_element_create(&HES_AimTarget);
+                            hud_element_set_flags(D_8029F644, 0x8080);
+                            hud_element_set_render_pos(D_8029F644, -100, -100);
+                            hud_element_create_transform_B(D_8029F644);
+
+                            D_8029F646 = hud_element_create(&HES_AimReticle);
+                            hud_element_set_flags(D_8029F646, 0x8080);
+                            hud_element_set_render_pos(D_8029F646, -100, -100);
+                            hud_element_create_transform_B(D_8029F646);
+                            break;
+                        case 64:
+                        case 65:
+                            D_8029F642 = hud_element_create(&HES_AButton);
+                            hud_element_set_flags(D_8029F642, 0x8080);
+                            hud_element_set_render_pos(D_8029F642, -100, -100);
+                            // fallthrough
+                        case 46:
+                        case 48:
+                        case 49:
+                        case 59:
+                        case 60:
+                        case 63:
+                        case 66:
+                            D_8029F642 = hud_element_create(&HES_AButton);
+                            hud_element_set_flags(D_8029F642, 0x8080);
+                            hud_element_set_render_pos(D_8029F642, -100, -100);
+                            break;
+                    }
+                    popup->unk_16 = 1;
+                    break;
+                case 1:
+                    if (gBattleStatus.flags1 & 0x10000) {
+                        gBattleStatus.flags1 &= ~0x4000;
+                        set_window_update(9, 7);
+                        popup->duration = 0;
+                        popup->unk_16 = 2;
+                    } else if (!(gBattleStatus.flags1 & 0x4000) && (temp_a0 != 2)) {
+                        set_window_update(9, 7);
+                        switch (popup->messageIndex) {
+                            case 49:
+                                hud_element_set_script(D_8029F642, &HES_MashAButton);
+                                break;
+                            case 50:
+                                hud_element_set_script(D_8029F642, &HES_StickMashLeft);
+                                break;
+                            case 47:
+                                hud_element_set_script(D_8029F642, &HES_StickTapLeft);
+                                hud_element_set_script(D_8029F644, &HES_TimingBlink);
+                                break;
+                            case 51:
+                                hud_element_set_script(D_8029F642, &HES_StickTapLeft);
+                                hud_element_set_script(D_8029F644, &HES_AimTarget);
+                                break;
+                            case 52:
+                                hud_element_set_script(D_8029F642, &HES_MashCUpButton);
+                                hud_element_set_script(D_8029F644, &HES_MashCDownButton1);
+                                hud_element_set_script(D_8029F646, &HES_MashCLeftButton);
+                                hud_element_set_script(D_8029F648, &HES_MashCRightButton1);
+                                break;
+                            case 53:
+                                hud_element_set_script(D_8029F642, &HES_StickBackAndForth);
+                                break;
+                            case 54:
+                                hud_element_set_script(D_8029F642, &HES_PressAButton);
+                                hud_element_set_script(D_8029F644, &HES_PressBButton);
+                                hud_element_set_script(D_8029F646, &HES_PressCDownButton);
+                                break;
+                            case 55:
+                                hud_element_set_script(D_8029F642, &HES_RotateStickCW);
+                                break;
+                            case 56:
+                                hud_element_set_script(D_8029F642, &HES_TimingBlink);
+                                hud_element_set_script(D_8029F644, &HES_MashAButton);
+                                break;
+                            case 57:
+                                hud_element_set_script(D_8029F642, &HES_MashAButton);
+                                hud_element_set_script(D_8029F644, &HES_MashBButton2);
+                                break;
+                            case 58:
+                                hud_element_set_script(D_8029F642, &HES_MashAButton);
+                                hud_element_set_script(D_8029F644, &HES_MashBButton1);
+                                break;
+                            case 59:
+                                hud_element_set_script(D_8029F642, &HES_MashAButton);
+                                break;
+                            case 61:
+                                hud_element_set_script(D_8029F642, &HES_TimingBlink);
+                                hud_element_set_script(D_8029F644, &HES_PressAButton);
+                                break;
+                            case 62:
+                                hud_element_set_script(D_8029F642, &HES_StickTapRight);
+                                break;
+                            case 63:
+                                hud_element_set_script(D_8029F642, &HES_MashAButton);
+                                break;
+                            case 64:
+                            case 65:
+                                hud_element_set_script(D_8029F642, &HES_PressAButton);
+                                /* fallthrough */
+                            case 46:
+                            case 48:
+                            case 60:
+                            case 66:
+                                hud_element_set_script(D_8029F642, &HES_PressAButton);
+                                break;
+                        }
+                        if (popup->duration != -1) {
+                            popup->duration = 30;
+                        }
+                        popup->unk_16 = 2;
+                        break;
+                    }
+                    break;
+                case 2:
+                    if ((temp_a0 != popup->unk_16) || (gBattleStatus.flags1 & 0x10000)) {
+                        s16* duration;
+
+                        if (D_8029F64E < 192) {
+                            if (D_8029F64C == 0) {
+                                D_8029F64E += 10;
+                                if (D_8029F64E > 192) {
+                                    D_8029F64E = 192;
+                                }
+                            } else {
+                                break;
+                            }
+                        }
+
+                        D_80159E7E = D_8029F64E + D_8029F650;
+
+                        duration = &popup->duration; // TODO required to match
+                        if (*duration != -1) {
+                            if (popup->duration != 0) {
+                                popup->duration--;
+                            } else {
+                                switch (popup->messageIndex) {
+                                    case 46:
+                                    case 48:
+                                    case 49:
+                                    case 50:
+                                    case 53:
+                                    case 55:
+                                    case 59:
+                                    case 60:
+                                    case 63:
+                                    case 64:
+                                    case 65:
+                                    case 66:
+                                        hud_element_free(D_8029F642);
+                                        break;
+                                    case 47:
+                                    case 51:
+                                    case 56:
+                                    case 57:
+                                    case 58:
+                                    case 61:
+                                        hud_element_free(D_8029F642);
+                                        hud_element_free(D_8029F644);
+                                        break;
+                                    case 54:
+                                    case 62:
+                                        hud_element_free(D_8029F642);
+                                        hud_element_free(D_8029F644);
+                                        hud_element_free(D_8029F646);
+                                        break;
+                                    case 52:
+                                        hud_element_free(D_8029F642);
+                                        hud_element_free(D_8029F644);
+                                        hud_element_free(D_8029F646);
+                                        hud_element_free(D_8029F648);
+                                        break;
+                                }
+                                D_8029F64A = FALSE;
+                                cond = TRUE;
+                            }
+                        }
+                    }
+                    break;
+            }
+            break;
+        case 0x43:
+        case 0x44:
+        case 0x45:
+        case 0x46:
+        case 0x47:
+        case 0x48:
+            switch (popup->unk_16) {
+                default:
+                    break;
+                case 0:
+                    popup->unk_16 = 1;
+                    break;
+                case 1:
+                    popup->unk_16 = 2;
+                    break;
+                case 2:
+                    if (battleStatus->currentButtonsPressed & 0xC000) {
+                        popup->duration = 0;
+                    }
+
+                    if (popup->duration != 0) {
+                        popup->duration--;
+                    } else {
+                        popup->unk_16 = 3;
+                    }
+                    break;
+                case 3:
+                    popup->unk_16 = 4;
+                    break;
+                case 4:
+                    cond = TRUE;
+                    break;
+            }
+            break;
+        case 0x49:
+        case 0x4A:
+        case 0x4B:
+        case 0x4C:
+        case 0x4D:
+        case 0x4E:
+        case 0x4F:
+            switch (popup->unk_16) {
+                case 0:
+                    switch (popup->messageIndex) {
+                        case 73:
+                            D_8029F642 = hud_element_create(&HES_Item_Hammer1);
+                            hud_element_set_flags(D_8029F642, 0x80);
+                            hud_element_set_render_pos(D_8029F642, -100, -100);
+                            break;
+                        case 74:
+                            D_8029F642 = hud_element_create(&HES_Item_Hammer2);
+                            hud_element_set_flags(D_8029F642, 0x80);
+                            hud_element_set_render_pos(D_8029F642, -100, -100);
+                            break;
+                        case 75:
+                            D_8029F642 = hud_element_create(&HES_Item_Hammer3);
+                            hud_element_set_flags(D_8029F642, 0x80);
+                            hud_element_set_render_pos(D_8029F642, -100, -100);
+                            break;
+                        case 76:
+                            D_8029F642 = hud_element_create(&HES_Item_Boots1);
+                            hud_element_set_flags(D_8029F642, 0x80);
+                            hud_element_set_render_pos(D_8029F642, -100, -100);
+                            break;
+                        case 77:
+                            D_8029F642 = hud_element_create(&HES_Item_Boots2);
+                            hud_element_set_flags(D_8029F642, 0x80);
+                            hud_element_set_render_pos(D_8029F642, -100, -100);
+                            break;
+                        case 78:
+                            D_8029F642 = hud_element_create(&HES_Item_Boots3);
+                            hud_element_set_flags(D_8029F642, 0x80);
+                            hud_element_set_render_pos(D_8029F642, -100, -100);
+                            break;
+                        case 79:
+                            D_8029F642 = hud_element_create(&HES_Item_Items);
+                            hud_element_set_flags(D_8029F642, 0x80);
+                            hud_element_set_render_pos(D_8029F642, -100, -100);
+                            break;
+                    }
+                    popup->unk_16 = 1;
+                    break;
+                case 1:
+                    if (popup->duration != 0) {
+                        popup->duration--;
+                        break;
+                    }
+                    cond = TRUE;
+                    hud_element_free(D_8029F642);
+                    break;
+            }
+            break;
+    }
+    if (cond) {
+        set_window_update(9, 2);
+        D_802838F8 = NULL;
+        free_popup(popup);
+    }
+}
+
+void func_80250818(void* data, s32 x, s32 y) {
+    PopupMessage* popup = data;
+    s32 messageID;
+    s32 msgLinesIdx;
+    s32 opacity;
+
+    x += 15;
+    y += 6;
+
+    switch (popup->messageIndex) {
+        case 0x0:
+        case 0x1:
+        case 0x2:
+        case 0x3:
+        case 0x8:
+        case 0x9:
+        case 0xA:
+        case 0xB:
+        case 0xC:
+        case 0xD:
+        case 0xE:
+        case 0xF:
+        case 0x10:
+        case 0x11:
+        case 0x12:
+        case 0x13:
+        case 0x14:
+        case 0x15:
+        case 0x16:
+        case 0x17:
+        case 0x18:
+        case 0x19:
+        case 0x1A:
+        case 0x1B:
+        case 0x1C:
+        case 0x23:
+        case 0x24:
+        case 0x25:
+        case 0x26:
+        case 0x27:
+        case 0x28:
+        case 0x29:
+        case 0x2A:
+        case 0x2B:
+        case 0x2C:
+        case 0x2D:
+        case 0x43:
+        case 0x44:
+        case 0x45:
+        case 0x46:
+        case 0x47:
+        case 0x48:
+        case 0x50:
+        case 0x52:
+        case 0x53:
+        case 0x54:
+            messageID = bMessages[popup->messageIndex];
+            msgLinesIdx = get_msg_lines(messageID) - 1;
+            draw_msg(messageID, x, y + D_802835D4[msgLinesIdx], 255, 0xF, 0);
+            break;
+        case 0x4:
+        case 0x5:
+        case 0x6:
+        case 0x7:
+        case 0x1D:
+        case 0x1E:
+        case 0x1F:
+        case 0x20:
+        case 0x21:
+        case 0x22:
+            messageID = bMessages[popup->messageIndex];
+            msgLinesIdx = get_msg_lines(messageID) - 1;
+            y += D_802835D4[msgLinesIdx];
+            set_message_value(D_8029F640, 0);
+            draw_msg(messageID, x, y, 255, 0xF, 0);
+            break;
+        case 0x51:
+            messageID = bMessages[popup->messageIndex];
+            msgLinesIdx = get_msg_lines(messageID) - 1;
+            y += D_802835D4[msgLinesIdx];
+            set_message_msg(bActorMessages[D_8029F640], 0);
+            draw_msg(messageID, x, y, 255, 0xF, 0);
+            break;
+        case 0x49:
+        case 0x4A:
+        case 0x4B:
+        case 0x4C:
+        case 0x4D:
+        case 0x4E:
+        case 0x4F:
+            messageID = bMessages[popup->messageIndex];
+            draw_msg(messageID, x + 0x1D, y + 6, 255, 0xF, 0);
+            hud_element_set_render_pos(D_8029F642, x + 13, y + 14);
+            hud_element_draw_clipped(D_8029F642);
+            break;
+        case 0x2E:
+        case 0x2F:
+        case 0x30:
+        case 0x31:
+        case 0x32:
+        case 0x33:
+        case 0x34:
+        case 0x35:
+        case 0x36:
+        case 0x37:
+        case 0x38:
+        case 0x39:
+        case 0x3A:
+        case 0x3B:
+        case 0x3C:
+        case 0x3D:
+        case 0x3E:
+        case 0x3F:
+        case 0x40:
+        case 0x41:
+        case 0x42:
+            opacity = 255;
+            if (popup->unk_16 < 2) {
+                opacity = 160;
+            }
+            if (popup->messageIndex == 0x3B) {
+                opacity = 255;
+            }
+
+            x -= 11;
+            y -= 6;
+            messageID = bMessages[popup->messageIndex];
+            msgLinesIdx = get_msg_lines(messageID) - 1;
+            y += D_802835D4[msgLinesIdx];
+            draw_msg(messageID, x + 11, y + 6, opacity, 0xF, 0);
+
+            switch (popup->messageIndex) {
+                case 46:
+                    hud_element_set_render_pos(D_8029F642, x + 65, y + 14);
+                    hud_element_set_scale(D_8029F642, 0.5f);
+                    hud_element_set_alpha(D_8029F642, opacity);
+                    hud_element_draw_clipped(D_8029F642);
+                    break;
+                case 47:
+                    hud_element_set_render_pos(D_8029F642, x + 55, y + 14);
+                    hud_element_set_scale(D_8029F642, 0.6f);
+                    hud_element_set_alpha(D_8029F642, opacity);
+                    hud_element_draw_clipped(D_8029F642);
+
+                    hud_element_set_render_pos(D_8029F644, x + 73, y + 31);
+                    hud_element_set_alpha(D_8029F644, opacity);
+                    hud_element_draw_clipped(D_8029F644);
+                    break;
+                case 48:
+                    hud_element_set_render_pos(D_8029F642, x + 64, y + 14);
+                    hud_element_set_scale(D_8029F642, 0.5f);
+                    hud_element_set_alpha(D_8029F642, opacity);
+                    hud_element_draw_clipped(D_8029F642);
+                    break;
+                case 49:
+                    hud_element_set_render_pos(D_8029F642, x + 67, y + 14);
+                    hud_element_set_scale(D_8029F642, 0.5f);
+                    hud_element_set_alpha(D_8029F642, opacity);
+                    hud_element_draw_clipped(D_8029F642);
+                    break;
+                case 50:
+                    hud_element_set_render_pos(D_8029F642, x + 56, y + 14);
+                    hud_element_set_scale(D_8029F642, 0.6f);
+                    hud_element_set_alpha(D_8029F642, opacity);
+                    hud_element_draw_clipped(D_8029F642);
+                    break;
+                case 51:
+                    hud_element_set_render_pos(D_8029F642, x + 65, y + 13);
+                    hud_element_set_scale(D_8029F642, 0.6f);
+                    hud_element_set_alpha(D_8029F642, opacity);
+                    hud_element_draw_clipped(D_8029F642);
+
+                    hud_element_set_render_pos(D_8029F644, x + 146, y + 32);
+                    hud_element_set_scale(D_8029F644, 0.8f);
+                    hud_element_set_alpha(D_8029F644, opacity);
+                    func_80144218(D_8029F644);
+                    break;
+                case 54:
+                    hud_element_set_render_pos(D_8029F642, x + 86, y + 13);
+                    hud_element_set_scale(D_8029F642, 0.5f);
+                    hud_element_set_alpha(D_8029F642, opacity);
+                    hud_element_draw_clipped(D_8029F642);
+
+                    hud_element_set_render_pos(D_8029F644, x + 64, y + 13);
+                    hud_element_set_scale(D_8029F644, 0.5f);
+                    hud_element_set_alpha(D_8029F644, opacity);
+                    hud_element_draw_clipped(D_8029F644);
+
+                    hud_element_set_render_pos(D_8029F646, x + 108, y + 13);
+                    hud_element_set_scale(D_8029F646, 0.5f);
+                    hud_element_set_alpha(D_8029F646, opacity);
+                    hud_element_draw_clipped(D_8029F646);
+                    break;
+                case 56:
+                    hud_element_set_render_pos(D_8029F642, x + 105, y + 13);
+                    hud_element_set_alpha(D_8029F642, opacity);
+                    hud_element_draw_clipped(D_8029F642);
+
+                    hud_element_set_render_pos(D_8029F644, x + 65, y + 14);
+                    hud_element_set_scale(D_8029F644, 0.5f);
+                    hud_element_set_alpha(D_8029F644, opacity);
+                    hud_element_draw_clipped(D_8029F644);
+                    break;
+                case 58:
+                    hud_element_set_render_pos(D_8029F642, x + 63, y + 14);
+                    hud_element_set_scale(D_8029F642, 0.5f);
+                    hud_element_set_alpha(D_8029F642, opacity);
+                    hud_element_draw_clipped(D_8029F642);
+
+                    hud_element_set_render_pos(D_8029F644, x + 84, y + 14);
+                    hud_element_set_scale(D_8029F644, 0.5f);
+                    hud_element_set_alpha(D_8029F644, opacity);
+                    hud_element_draw_clipped(D_8029F644);
+                    break;
+                case 60:
+                    hud_element_set_render_pos(D_8029F642, x + 124, y + 14);
+                    hud_element_set_scale(D_8029F642, 0.5f);
+                    hud_element_set_alpha(D_8029F642, opacity);
+                    hud_element_draw_clipped(D_8029F642);
+                    break;
+                case 61:
+                    hud_element_set_render_pos(D_8029F642, x + 56, y + 31);
+                    hud_element_set_alpha(D_8029F642, opacity);
+                    hud_element_draw_clipped(D_8029F642);
+
+                    hud_element_set_render_pos(D_8029F644, x + 53, y + 14);
+                    hud_element_set_scale(D_8029F644, 0.5f);
+                    hud_element_set_alpha(D_8029F644, opacity);
+                    hud_element_draw_clipped(D_8029F644);
+                    break;
+                case 62:
+                    hud_element_set_render_pos(D_8029F642, x + 107, y + 13);
+                    hud_element_set_scale(D_8029F642, 0.6f);
+                    hud_element_set_alpha(D_8029F642, opacity);
+                    hud_element_draw_clipped(D_8029F642);
+
+                    hud_element_set_render_pos(D_8029F644, x + 210, y + 15);
+                    hud_element_set_scale(D_8029F644, 0.8f);
+                    hud_element_set_alpha(D_8029F644, opacity);
+                    func_80144218(D_8029F644);
+
+                    hud_element_set_render_pos(D_8029F646, x + 56, y + 15);
+                    hud_element_set_scale(D_8029F646, 0.8f);
+                    hud_element_set_alpha(D_8029F646, opacity);
+                    func_80144218(D_8029F646);
+                    break;
+                case 64:
+                case 65:
+                    hud_element_set_render_pos(D_8029F642, x + 64, y + 13);
+                    hud_element_set_scale(D_8029F642, 0.5f);
+                    hud_element_set_alpha(D_8029F642, opacity);
+                    hud_element_draw_clipped(D_8029F642);
+                    break;
+            }
+            break;
+    }
+}
+
+void btl_show_message_popup(void* data) {
+    PopupMessage* popup = data;
     s32 numLines;
     s32 posX;
     s32 posY = 80;
