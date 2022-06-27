@@ -296,6 +296,6 @@ Gfx Entity_SaveBlock_RenderBlock[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx Entity_SaveBlock_Stub[] = {
+Gfx Entity_SaveBlock_RenderNone[] = {
     gsSPEndDisplayList(),
 };

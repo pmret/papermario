@@ -280,11 +280,11 @@ EvtScript N(makeEntities) = {
         EVT_CALL(MakeEntity, EVT_PTR(Entity_Hammer2Block), 230, 0, 310, 15, MAKE_ENTITY_END)
         EVT_CALL(AssignScript, EVT_PTR(N(802414A8)))
     EVT_END_IF
-    EVT_CALL(MakeEntity, EVT_PTR(Entity_D_802EA588), 230, 60, 310, 15, 151, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, EVT_PTR(Entity_HiddenYellowBlock), 230, 60, 310, 15, 151, MAKE_ENTITY_END)
     EVT_CALL(AssignBlockFlag, EVT_SAVE_FLAG(52))
     EVT_CALL(MakeEntity, EVT_PTR(Entity_BrickBlock), 230, 50, -160, 15, MAKE_ENTITY_END)
     EVT_CALL(MakeEntity, EVT_PTR(Entity_BrickBlock), 165, 0, 380, 20, MAKE_ENTITY_END)
-    EVT_CALL(MakeEntity, EVT_PTR(Entity_D_802EA564), -170, 0, 370, 43, 343, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, EVT_PTR(Entity_YellowBlock), -170, 0, 370, 43, 343, MAKE_ENTITY_END)
     EVT_CALL(AssignBlockFlag, EVT_SAVE_FLAG(50))
     EVT_CALL(MakeEntity, EVT_PTR(Entity_D_802EAA54), 345, 75, -250, 0, 100, MAKE_ENTITY_END)
     EVT_CALL(MakeItemEntity, ITEM_COIN, 345, 205, -250, 17, EVT_SAVE_FLAG(56))

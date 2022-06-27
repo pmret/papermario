@@ -1173,7 +1173,7 @@ f32 func_800E5348(void) {
     return clamp_angle(temp_f0 - 90.0f + gCameras[gCurrentCameraID].currentYaw);
 }
 
-void player_get_camera_facing_angle(void) {
+f32 player_get_camera_facing_angle(void) {
     f32 angle = 0.0f;
 
     if (gPlayerStatus.spriteFacingAngle >= 90.0f && gPlayerStatus.spriteFacingAngle < 270.0f) {
@@ -1182,7 +1182,7 @@ void player_get_camera_facing_angle(void) {
 
     angle = angle + gCameras[CAM_DEFAULT].currentYaw + 90.0f;
 
-    clamp_angle(angle);
+    return clamp_angle(angle);
 }
 
 void phys_save_ground_pos(void) {

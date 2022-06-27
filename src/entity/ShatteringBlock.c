@@ -17,12 +17,7 @@ extern EntityScript Entity_ShatteringBlock_Script;
 void entity_shattering_init_pieces(Entity* entity, Gfx** dlists, Mtx* matrices);
 void entity_shattering_block_init(Entity* entity);
 
-EntityModelScript Entity_ShatteringBlock_RenderScript = {
-    ems_SetRenderMode(RENDER_MODE_SURFACE_XLU_LAYER1)
-    ems_Draw(D_802E9828, 60)
-    ems_Restart
-    ems_End
-};
+EntityModelScript Entity_ShatteringBlock_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(D_802E9828, RENDER_MODE_SURFACE_XLU_LAYER1);
 
 EntityBlueprint Entity_ShatteringHammer1Block = {
     .flags = 0,

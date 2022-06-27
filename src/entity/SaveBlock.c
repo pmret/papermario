@@ -6,9 +6,9 @@
 extern Mtx Entity_SaveBlock_Mtx;
 extern Gfx Entity_SaveBlock_RenderContent[];
 extern Gfx Entity_SaveBlock_RenderBlock[];
-extern Gfx Entity_SaveBlock_Stub[];
+extern Gfx Entity_SaveBlock_RenderNone[];
 
-extern s32 D_802E99DC[];
+extern s32 Entity_SaveBlock_ScriptResume[];
 
 void entity_SaveBlock_setupGfx(s32 index) {
     Gfx* gfxPos = gMasterGfxPos;
@@ -114,7 +114,7 @@ void entity_SaveBlock_wait_for_close_result(Entity* entity) {
 void entity_SaveBlock_wait_for_close_choice(Entity* entity) {
     if (SaveBlockTutorialPrinterClosed) {
         if (SaveBlockTutorialPrinter->currentOption == 1) {
-            set_entity_commandlist(entity, D_802E99DC);
+            set_entity_commandlist(entity, Entity_SaveBlock_ScriptResume);
         } else {
             exec_entity_commandlist(entity);
         }
@@ -150,19 +150,14 @@ EntityScript Entity_SaveBlock_Script = {
     es_Restart
     es_End
 };
-EntityScript D_802E99DC = {
+EntityScript Entity_SaveBlock_ScriptResume = {
     es_Call(entity_SaveBlock_resume_game)
     es_SetCallback(NULL, 2)
     es_Jump(Entity_SaveBlock_Script)
     es_End
 };
 
-EntityModelScript Entity_SaveBlock_RenderScript = {
-    ems_SetRenderMode(RENDER_MODE_SURFACE_XLU_LAYER3)
-    ems_Draw(Entity_SaveBlock_Stub, 60)
-    ems_Restart
-    ems_End
-};
+EntityModelScript Entity_SaveBlock_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(Entity_SaveBlock_RenderNone, RENDER_MODE_SURFACE_XLU_LAYER3);
 
 EntityBlueprint Entity_SavePoint = {
     .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200,

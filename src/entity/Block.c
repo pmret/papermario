@@ -517,68 +517,23 @@ EntityScript Entity_MulticoinBlock_Script = {
     es_End
 };
 
-EntityModelScript Entity_InertYellowBlock_RenderScript = {
-    ems_SetRenderMode(RENDER_MODE_SURFACE_OPA)
-    ems_Draw(Entity_InertYellowBlock_Render, 60)
-    ems_Restart
-    ems_End
-};
+EntityModelScript Entity_InertYellowBlock_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(Entity_InertYellowBlock_Render, RENDER_MODE_SURFACE_OPA);
 
-EntityModelScript Entity_InertRedBlock_RenderScript = {
-    ems_SetRenderMode(RENDER_MODE_SURFACE_OPA)
-    ems_Draw(Entity_InertRedBlock_Render, 60)
-    ems_Restart
-    ems_End
-};
+EntityModelScript Entity_InertRedBlock_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(Entity_InertRedBlock_Render, RENDER_MODE_SURFACE_OPA);
 
-EntityModelScript Entity_MulticoinBrick_RenderScript = {
-    ems_SetRenderMode(RENDER_MODE_SURFACE_OPA)
-    ems_Draw(Entity_BrickBlock_Render, 60)
-    ems_Restart
-    ems_End
-};
+EntityModelScript Entity_MulticoinBrick_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(Entity_BrickBlock_Render, RENDER_MODE_SURFACE_OPA);
 
-EntityModelScript Entity_Hammer1Block_RenderScript = {
-    ems_SetRenderMode(RENDER_MODE_SURFACE_OPA)
-    ems_Draw(Entity_Hammer1Block_Render, 60)
-    ems_Restart
-    ems_End
-};
+EntityModelScript Entity_Hammer1Block_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(Entity_Hammer1Block_Render, RENDER_MODE_SURFACE_OPA);
 
-EntityModelScript Entity_Hammer2Block_RenderScript = {
-    ems_SetRenderMode(RENDER_MODE_SURFACE_OPA)
-    ems_Draw(Entity_Hammer2Block_Render, 60)
-    ems_Restart
-    ems_End
-};
+EntityModelScript Entity_Hammer2Block_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(Entity_Hammer2Block_Render, RENDER_MODE_SURFACE_OPA);
 
-EntityModelScript Entity_Hammer3Block_RenderScript = {
-    ems_SetRenderMode(RENDER_MODE_SURFACE_OPA)
-    ems_Draw(Entity_Hammer3Block_Render, 60)
-    ems_Restart
-    ems_End
-};
+EntityModelScript Entity_Hammer3Block_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(Entity_Hammer3Block_Render, RENDER_MODE_SURFACE_OPA);
 
-EntityModelScript Entity_PushBlock_RenderScript = {
-    ems_SetRenderMode(RENDER_MODE_SURFACE_OPA)
-    ems_Draw(Entity_PushBlock_Render, 60)
-    ems_Restart
-    ems_End
-};
+EntityModelScript Entity_PushBlock_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(Entity_PushBlock_Render, RENDER_MODE_SURFACE_OPA);
 
-EntityModelScript Entity_BrickBlock_RenderScript = {
-    ems_SetRenderMode(RENDER_MODE_SURFACE_OPA)
-    ems_Draw(Entity_BrickBlock_Render, 60)
-    ems_Restart
-    ems_End
-};
+EntityModelScript Entity_BrickBlock_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(Entity_BrickBlock_Render, RENDER_MODE_SURFACE_OPA);
 
-EntityModelScript Entity_PowBlock_RenderScript = {
-    ems_SetRenderMode(RENDER_MODE_SURFACE_OPA)
-    ems_Draw(Entity_PowBlock_Render, 60)
-    ems_Restart
-    ems_End
-};
+EntityModelScript Entity_PowBlock_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(Entity_PowBlock_Render, RENDER_MODE_SURFACE_OPA);
 
 EntityBlueprint Entity_InertYellowBlock = {
     .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200,

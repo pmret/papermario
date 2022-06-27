@@ -1,5 +1,23 @@
 #include "common.h"
 #include "effects.h"
+#include "ld_addrs.h"
+#include "animation_script.h"
+#include "entity_script.h"
+
+extern Gfx Entity_YellowBlock_Render[];
+extern Gfx Entity_RedBlock_Render[];
+extern AnimScript Entity_HitYellowBlock_AnimationHit;
+extern AnimScript Entity_HitYellowBlock_AnimationIdle;
+extern StaticAnimatorNode* Entity_HitYellowBlock_Mesh[];
+extern AnimScript Entity_HitFloatingYellowBlock_AnimationIdle;
+extern StaticAnimatorNode* Entity_HitFloatingYellowBlock_Mesh[];
+extern AnimScript Entity_HitRedBlock_AnimationHit;
+extern StaticAnimatorNode* Entity_HitRedBlock_Mesh[];
+
+f32 player_get_camera_facing_angle(void);
+void entity_inactive_block_hit_init(Entity*);
+void entity_inactive_block_hit_anim(Entity*);
+void entity_inactive_block_recoil_anim(Entity*);
 
 void entity_ItemBlock_idle(Entity* entity) {
     entity_base_block_idle(entity);
@@ -23,9 +41,34 @@ void entity_HiddenItemBlock_idle(Entity* entity) {
     }
 }
 
-INCLUDE_ASM(s32, "entity/ItemBlock", entity_HitItemBlock_appear);
+void entity_HitItemBlock_appear(Entity* entity) {
+    if (entity->alpha < 255) {
+        entity->alpha += (entity->alpha == 0 ? 31 : 32);
+    }
+}
 
-INCLUDE_ASM(void, "entity/ItemBlock", entity_ItemBlock_spawn_item, Entity* entity);
+void entity_ItemBlock_spawn_item(Entity* entity) {
+    ItemBlockData* data = entity->dataBuf.itemBlock;
+    s32 facingAngle;
+
+    if (data->itemID == 0 || (entity->flags & ENTITY_FLAGS_100000)) {
+        return;
+    }
+
+    facingAngle = player_get_camera_facing_angle();
+    entity->flags |= ENTITY_FLAGS_100000;
+
+    if (data->itemID == ITEM_COIN) {
+        make_item_entity(ITEM_COIN, entity->position.x, entity->position.y + 28.0, entity->position.z,
+                         ITEM_SPAWN_MODE_ITEM_BLOCK_COIN, 0, facingAngle, data->gameFlagIndex);
+    } else {
+        facingAngle += 360;
+        make_item_entity(data->itemID, entity->position.x, entity->position.y + 20.0, entity->position.z,
+                         (gItemTable[data->itemID].typeFlags & ITEM_TYPE_FLAG_BADGE) ? ITEM_SPAWN_MODE_ITEM_BLOCK_BADGE : ITEM_SPAWN_MODE_ITEM_BLOCK_ITEM,
+                         0, facingAngle, data->gameFlagIndex);
+    }
+
+}
 
 void entity_TriggerBlock_start_bound_script_2(Entity* entity) {
     entity_start_script(entity);
@@ -39,9 +82,9 @@ void entity_HitItemBlock_play_anim(Entity* entity) {
     s32 entityType = get_entity_type(entity->listIndex);
 
     if (entityType == ENTITY_TYPE_HIDDEN_RED_BLOCK || entityType == ENTITY_TYPE_RED_BLOCK) {
-        play_model_animation(entity->virtualModelIndex, &D_00000094);
+        play_model_animation(entity->virtualModelIndex, Entity_HitRedBlock_AnimationHit);
     } else {
-        play_model_animation(entity->virtualModelIndex, &D_00000094_2);
+        play_model_animation(entity->virtualModelIndex, Entity_HitYellowBlock_AnimationHit);
     }
 }
 
@@ -122,8 +165,8 @@ void entity_ItemBlock_replace_with_inactive(Entity* entity) {
     // child entity is now the animated block which appears before it turns inert
     childEntity = get_entity_by_index(create_entity(bp, (s32)entity->position.x, (s32)entity->position.y, (s32)entity->position.z, (s32)entity->rotation.y, MAKE_ENTITY_END));
     childEntity->alpha = entity->alpha;
-    if ((entity->flags & ENTITY_FLAGS_HIDDEN) || (entity->alpha < 0xFF)) {
-        childEntity->alpha = 0x20;
+    if ((entity->flags & ENTITY_FLAGS_HIDDEN) || (entity->alpha < 255)) {
+        childEntity->alpha = 32;
     }
 
     if (entity->flags & ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE2) {
@@ -162,7 +205,7 @@ void entity_TriggerBlock_disable_player_input(void) {
     disable_player_input();
     gPlayerStatus.currentSpeed = 0.0f;
     gPlayerStatus.flags |= PLAYER_STATUS_FLAGS_800000;
-    set_action_state(8);
+    set_action_state(ACTION_STATE_FALLING);
     gravity_use_fall_parms();
 }
 
@@ -212,3 +255,181 @@ void entity_ItemlessBlock_init(Entity* entity) {
     animator->renderMode = 0x11;
     animator->flags |= 0x10000;
 }
+
+EntityScript D_802EA310 = {
+    es_SetCallback(NULL, 2)
+    es_SetFlags(ENTITY_FLAGS_PENDING_INSTANCE_DELETE)
+    es_End
+};
+
+EntityScript Entity_ItemBlock_Script = {
+    es_Call(entity_ItemBlock_check_if_inactive)
+    es_SetCallback(NULL, 0)
+    es_SetCallback(entity_ItemBlock_idle, 0)
+    es_PlaySound(SOUND_HIT_BLOCK)
+    es_Call(entity_ItemBlock_spawn_item)
+    es_Call(entity_ItemBlock_replace_with_inactive)
+    es_SetCallback(NULL, 1)
+    es_SetFlags(ENTITY_FLAGS_HIDDEN)
+    es_SetCallback(NULL, 2)
+    es_SetFlags(ENTITY_FLAGS_PENDING_INSTANCE_DELETE)
+    es_End
+};
+EntityScript Entity_HiddenItemBlock_Script = {
+    es_Call(entity_ItemBlock_check_if_inactive)
+    es_SetCallback(NULL, 0)
+    es_SetCallback(entity_HiddenItemBlock_idle, 0)
+    es_PlaySound(SOUND_HIT_BLOCK)
+    es_Call(entity_ItemBlock_spawn_item)
+    es_Call(entity_ItemBlock_replace_with_inactive)
+    es_SetCallback(NULL, 1)
+    es_SetFlags(ENTITY_FLAGS_HIDDEN)
+    es_SetCallback(NULL, 2)
+    es_SetFlags(ENTITY_FLAGS_PENDING_INSTANCE_DELETE)
+    es_End
+};
+EntityScript D_802EA3F0 = {
+    es_SetCallback(NULL, 1)
+    es_Call(entity_HitItemBlock_play_anim)
+    es_SetCallback(entity_HitItemBlock_appear, 10)
+    es_Call(entity_HitItemBlock_hide)
+    es_Call(entity_HitItemBlock_show_inactive)
+    es_SetCallback(NULL, 1)
+    es_SetFlags(ENTITY_FLAGS_HIDDEN)
+    es_SetFlags(ENTITY_FLAGS_PENDING_FULL_DELETE)
+    es_End
+};
+EntityScript D_802EA440 = {
+    es_SetCallback(entity_ItemBlock_idle, 0)
+    es_Call(entity_TriggerBlock_disable_player_input)
+    es_PlaySound(SOUND_HIT_BLOCK)
+    es_Call(entity_TriggerBlock_play_vanish_effect)
+    es_Call(entity_inactive_block_hit_init)
+    es_SetCallback(entity_inactive_block_hit_anim, 0)
+    es_SetCallback(entity_inactive_block_recoil_anim, 0)
+    es_Call(entity_TriggerBlock_start_bound_script)
+    es_Call(entity_TriggerBlock_enable_player_input)
+    es_SetFlags(ENTITY_FLAGS_HIDDEN)
+    es_SetFlags(ENTITY_FLAGS_SKIP_UPDATE_INVERSE_ROTATION_MATRIX)
+    es_Call(entity_TriggerBlock_start_bound_script_2)
+    es_SetCallback(NULL, 2)
+    es_SetFlags(ENTITY_FLAGS_PENDING_FULL_DELETE)
+    es_End
+};
+
+s32 D_802EA4C4[] = {
+    entity_model_HitYellowBlock_gfx_ROM_START, entity_model_HitYellowBlock_gfx_ROM_END,
+    entity_model_HitYellowBlock_anim_ROM_START, entity_model_HitYellowBlock_anim_ROM_END
+};
+s32 D_802EA4D4[] = {
+    entity_model_HitFloatingYellowBlock_gfx_ROM_START, entity_model_HitFloatingYellowBlock_gfx_ROM_END,
+    entity_model_HitFloatingYellowBlock_anim_ROM_START, entity_model_HitFloatingYellowBlock_anim_ROM_END
+};
+s32 D_802EA4E4[] = {
+    entity_model_HitRedBlock_gfx_ROM_START, entity_model_HitRedBlock_gfx_ROM_END,
+    entity_model_HitRedBlock_anim_ROM_START, entity_model_HitRedBlock_anim_ROM_END
+};
+EntityModelScript D_802EA4F4 = STANDARD_ENTITY_MODEL_SCRIPT(Entity_YellowBlock_Render, RENDER_MODE_SURFACE_OPA);
+
+EntityModelScript D_802EA510 = STANDARD_ENTITY_MODEL_SCRIPT(Entity_YellowBlock_Render, RENDER_MODE_SURFACE_XLU_LAYER2);
+
+EntityModelScript D_802EA52C = STANDARD_ENTITY_MODEL_SCRIPT(Entity_RedBlock_Render, RENDER_MODE_SURFACE_OPA);
+
+EntityModelScript D_802EA548 = STANDARD_ENTITY_MODEL_SCRIPT(Entity_RedBlock_Render, RENDER_MODE_SURFACE_XLU_LAYER2);
+
+EntityBlueprint Entity_YellowBlock = {
+    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200,
+    .typeDataSize = sizeof(ItemBlockData),
+    .renderCommandList = D_802EA4F4,
+    .modelAnimationNodes = 0x00000000,
+    .fpInit = entity_ItemBlock_init,
+    .updateEntityScript = Entity_ItemBlock_Script,
+    .fpHandleCollision = entity_block_handle_collision,
+    entity_model_YellowBlock_ROM_START, entity_model_YellowBlock_ROM_END,
+    .entityType = ENTITY_TYPE_YELLOW_BLOCK,
+    .aabbSize = { 25, 25, 25 }
+};
+EntityBlueprint Entity_HiddenYellowBlock = {
+    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200,
+    .typeDataSize = sizeof(ItemBlockData),
+    .renderCommandList = D_802EA510,
+    .modelAnimationNodes = 0x00000000,
+    .fpInit = entity_HiddenItemBlock_init,
+    .updateEntityScript = Entity_HiddenItemBlock_Script,
+    .fpHandleCollision = entity_block_handle_collision,
+    entity_model_YellowBlock_ROM_START, entity_model_YellowBlock_ROM_END,
+    .entityType = ENTITY_TYPE_HIDDEN_YELLOW_BLOCK,
+    .aabbSize = { 25, 25, 25 }
+};
+EntityBlueprint Entity_RedBlock = {
+    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200,
+    .typeDataSize = sizeof(ItemBlockData),
+    .renderCommandList = D_802EA52C,
+    .modelAnimationNodes = 0x00000000,
+    .fpInit = entity_ItemBlock_init,
+    .updateEntityScript = Entity_ItemBlock_Script,
+    .fpHandleCollision = entity_block_handle_collision,
+    entity_model_RedBlock_ROM_START, entity_model_RedBlock_ROM_END,
+    .entityType = ENTITY_TYPE_RED_BLOCK,
+    .aabbSize = { 25, 25, 25 }
+};
+EntityBlueprint Entity_HiddenRedBlock = {
+    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200,
+    .typeDataSize = sizeof(ItemBlockData),
+    .renderCommandList = D_802EA548,
+    .modelAnimationNodes = 0x00000000,
+    .fpInit = entity_HiddenItemBlock_init,
+    .updateEntityScript = Entity_HiddenItemBlock_Script,
+    .fpHandleCollision = entity_block_handle_collision,
+    entity_model_RedBlock_ROM_START, entity_model_RedBlock_ROM_END,
+    .entityType = ENTITY_TYPE_HIDDEN_RED_BLOCK,
+    .aabbSize = { 25, 25, 25 }
+};
+EntityBlueprint Entity_D_802EA5F4 = {
+    .flags = ENTITY_FLAGS_8000 | ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200 | ENTITY_FLAGS_HAS_ANIMATED_MODEL,
+    .typeDataSize = sizeof(ItemBlockData),
+    .renderCommandList = Entity_HitYellowBlock_AnimationIdle,
+    .modelAnimationNodes = Entity_HitYellowBlock_Mesh,
+    .fpInit = entity_ItemlessBlock_init,
+    .updateEntityScript = D_802EA440,
+    .fpHandleCollision = entity_block_handle_collision,
+    D_802EA4C4, 0x00000000,
+    .entityType = ENTITY_TYPE_SINGLE_TRIGGER_BLOCK,
+    .aabbSize = { 25, 25, 25 }
+};
+EntityBlueprint Entity_HitGroundedYellowBlock = {
+    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200 | ENTITY_FLAGS_HAS_ANIMATED_MODEL,
+    .typeDataSize = sizeof(ItemBlockData),
+    .renderCommandList = Entity_HitYellowBlock_AnimationIdle,
+    .modelAnimationNodes = Entity_HitYellowBlock_Mesh,
+    .fpInit = entity_ItemlessBlock_init,
+    .updateEntityScript = D_802EA3F0,
+    .fpHandleCollision = 0x00000000,
+    D_802EA4C4, 0x00000000,
+    .entityType = ENTITY_TYPE_YELLOW_BLOCK,
+    .aabbSize = { 25, 25, 25 }
+};
+EntityBlueprint Entity_HitFloatingYellowBlock = {
+    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200 | ENTITY_FLAGS_HAS_ANIMATED_MODEL,
+    .typeDataSize = sizeof(ItemBlockData),
+    .renderCommandList = Entity_HitFloatingYellowBlock_AnimationIdle,
+    .modelAnimationNodes = Entity_HitFloatingYellowBlock_Mesh,
+    .fpInit = entity_ItemlessBlock_init,
+    .updateEntityScript = D_802EA3F0,
+    .fpHandleCollision = 0x00000000,
+    D_802EA4D4, 0x00000000,
+    .entityType = ENTITY_TYPE_YELLOW_BLOCK,
+    .aabbSize = { 25, 25, 25 }
+};
+EntityBlueprint Entity_HitRedBlock = {
+    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200 | ENTITY_FLAGS_HAS_ANIMATED_MODEL,
+    .typeDataSize = sizeof(ItemBlockData),
+    .renderCommandList = Entity_HitRedBlock_AnimationHit,
+    .modelAnimationNodes = Entity_HitRedBlock_Mesh,
+    .fpInit = entity_ItemlessBlock_init,
+    .updateEntityScript = D_802EA3F0,
+    .fpHandleCollision = 0x00000000,
+    D_802EA4E4, 0x00000000,
+    .entityType = ENTITY_TYPE_RED_BLOCK,
+    .aabbSize = { 25, 25, 25 }
+};

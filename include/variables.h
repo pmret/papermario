@@ -324,16 +324,16 @@ extern EntityBlueprint Entity_ShatteringHammer2BlockTiny;
 extern EntityBlueprint Entity_ShatteringHammer3BlockTiny;
 extern EntityBlueprint Entity_ShatteringBrickBlock;
 extern EntityBlueprint Entity_PowBlock;
-extern EntityBlueprint Entity_D_802EA564;
+extern EntityBlueprint Entity_YellowBlock;
 extern EntityBlueprint Entity_MulticoinBlock;
 extern EntityBlueprint Entity_Hammer1Block;
 extern EntityBlueprint Entity_Hammer1Block_WideHitbox;
 extern EntityBlueprint Entity_Hammer1Block_TallHitbox;
 extern EntityBlueprint Entity_Hammer1BlockTiny;
 extern EntityBlueprint Entity_Hammer2Block;
-extern EntityBlueprint Entity_D_802EA588;
-extern EntityBlueprint Entity_D_802EA5AC;
-extern EntityBlueprint Entity_D_802EA5D0; //unused
+extern EntityBlueprint Entity_HiddenYellowBlock;
+extern EntityBlueprint Entity_RedBlock;
+extern EntityBlueprint Entity_HiddenRedBlock; //unused
 extern EntityBlueprint Entity_D_802EA798; //unused
 extern EntityBlueprint Entity_HeartBlock; //unused
 extern EntityBlueprint Entity_D_802EAA30;

@@ -541,33 +541,13 @@ EntityScript Entity_GreenStompSwitch_Script = {
     es_Restart
 };
 
-EntityModelScript Entity_BlueSwitch_RenderScript = {
-    ems_SetRenderMode(RENDER_MODE_SURFACE_XLU_LAYER1)
-    ems_Draw(Entity_BlueSwitch_Render, 60)
-    ems_Restart
-    ems_End
-};
+EntityModelScript Entity_BlueSwitch_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(Entity_BlueSwitch_Render, RENDER_MODE_SURFACE_XLU_LAYER1);
 
-EntityModelScript Entity_HugeBlueSwitch_RenderScript = {
-    ems_SetRenderMode(RENDER_MODE_SURFACE_XLU_LAYER1)
-    ems_Draw(Entity_BlueSwitch_Render, 60)
-    ems_Restart
-    ems_End
-};
+EntityModelScript Entity_HugeBlueSwitch_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(Entity_BlueSwitch_Render, RENDER_MODE_SURFACE_XLU_LAYER1);
 
-EntityModelScript Entity_RedSwitch_RenderScript = {
-    ems_SetRenderMode(RENDER_MODE_SURFACE_XLU_LAYER1)
-    ems_Draw(Entity_RedSwitch_Render, 60)
-    ems_Restart
-    ems_End
-};
+EntityModelScript Entity_RedSwitch_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(Entity_RedSwitch_Render, RENDER_MODE_SURFACE_XLU_LAYER1);
 
-EntityModelScript Entity_GreenStompSwitch_RenderScript = {
-    ems_SetRenderMode(RENDER_MODE_SURFACE_OPA)
-    ems_Draw(Entity_GreenStompSwitch_Render, 60)
-    ems_Restart
-    ems_End
-};
+EntityModelScript Entity_GreenStompSwitch_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(Entity_GreenStompSwitch_Render, RENDER_MODE_SURFACE_OPA);
 
 EntityBlueprint Entity_RedSwitch = {
     .flags = ENTITY_FLAGS_8000 | ENTITY_FLAGS_ALWAYS_FACE_CAMERA,

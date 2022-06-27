@@ -472,7 +472,8 @@ typedef struct ItemBlockData {
     /* 0x0C */ char unk_C[4];
     /* 0x10 */ s16 itemID;
     /* 0x12 */ s16 childEntityIndex; // for block entities that spawn other block entities
-} ItemBlockData;
+    /* 0x14 */ char unk_14[0xC];
+} ItemBlockData; // size = 0x20
 
 // size unknown
 typedef struct SuperBlockContentData {

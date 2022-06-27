@@ -873,7 +873,7 @@ segments:
     - [0x10B4C0, .data, entity/ShatteringBlock_common]
     - [0x10B4F0, .data, entity/ShatteringBlock]
     - [0x10B610, .data, entity/Block]
-    - [0x10BB90, .data, entity/BlockData6]
+    - [0x10BB90, .data, entity/ItemBlock]
     - [0x10BF10, .data, entity/BlockData7]
     - [0x10C090, .data, entity/BlockData8]
     - [0x10C220, .data, entity/BlockData9]
@@ -12180,8 +12180,36 @@ segments:
       - [0xE398E0, ci4, ShatteringHammer3Block_texture, 16, 32]
       - [0xE399E0, palette, ShatteringHammer3Block_texture]
       - [0xE39A00]
-  - [0xE3B870, bin] # unk data
-  - [0xE3C320, bin] # unk data
+  - name: entity_model_YellowBlock
+    dir: entity/model
+    type: code
+    start: 0xE3B870
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE3B870, c, YellowBlock]
+    - start: 0xE3B870
+      type: .data
+      name: YellowBlock
+      subsegments:
+      - [0xE3B870]
+      - [0xE3B9F0, rgba16, YellowBlock_face, 32, 32]
+      - [0xE3C1F0]
+  - name: entity_model_RedBlock
+    dir: entity/model
+    type: code
+    start: 0xE3C320
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE3C320, c, RedBlock]
+    - start: 0xE3C320
+      type: .data
+      name: RedBlock
+      subsegments:
+      - [0xE3C320]
+      - [0xE3C4A0, rgba16, RedBlock_face, 32, 32]
+      - [0xE3CCA0]
   - [0xE3CDD0, bin] # unk data
   - name: entity_model_PushBlock
     dir: entity/model
@@ -12280,7 +12308,72 @@ segments:
       - [0xE44620]
   - [0xE44800, bin] # unk data
   - [0xE45110, bin] # unk data
-  - [0xE459F0, bin] # unk data
+  - name: entity_model_HitYellowBlock_gfx
+    dir: entity/model
+    type: code
+    start: 0xE459F0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE459F0, c, HitYellowBlock_gfx]
+    - start: 0xE459F0
+      type: .data
+      name: HitYellowBlock_gfx
+      subsegments:
+      - [0xE459F0]
+      - [0xE45E10, rgba16, HitYellowBlock_face1, 32, 32]
+      - [0xE46610, rgba16, HitYellowBlock_face2, 32, 32]
+  - name: entity_model_HitYellowBlock_anim
+    dir: entity/model
+    type: code
+    start: 0xE46E10
+    vram: 0x00000000
+    subsegments:
+    - [0xE46E10, c, HitYellowBlock_anim]
+  - name: entity_model_HitFloatingYellowBlock_gfx
+    dir: entity/model
+    type: code
+    start: 0xE470B0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE470B0, c, HitFloatingYellowBlock_gfx]
+    - start: 0xE470B0
+      type: .data
+      name: HitFloatingYellowBlock_gfx
+      subsegments:
+      - [0xE470B0]
+      - [0xE474F0, rgba16, HitFloatingYellowBlock_face1, 32, 32]
+      - [0xE47CF0, rgba16, HitFloatingYellowBlock_face2, 32, 32]
+  - name: entity_model_HitFloatingYellowBlock_anim
+    dir: entity/model
+    type: code
+    start: 0xE484F0
+    vram: 0x00000000
+    subsegments:
+    - [0xE484F0, c, HitFloatingYellowBlock_anim]
+  - name: entity_model_HitRedBlock_gfx
+    dir: entity/model
+    type: code
+    start: 0xE48780
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE48780, c, HitRedBlock_gfx]
+    - start: 0xE48780
+      type: .data
+      name: HitRedBlock_gfx
+      subsegments:
+      - [0xE48780]
+      - [0xE48BE0, rgba16, HitRedBlock_face1, 32, 32]
+      - [0xE493E0, rgba16, HitRedBlock_face2, 32, 32]
+  - name: entity_model_HitRedBlock_anim
+    dir: entity/model
+    type: code
+    start: 0xE49BE0
+    vram: 0x00000000
+    subsegments:
+    - [0xE49BE0, c, HitRedBlock_anim]
   - [0xE49E40, bin] # unk data
   - [0xE4A6A0, bin] # unk data
   - [0xE4AA80, bin] # unk data

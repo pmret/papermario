@@ -47,3 +47,11 @@ enum {
 #define ems_SetFlags(flags) ENTITY_MODEL_SCRIPT_OP_SetFlags, flags,
 #define ems_ClearFlags(flags) ENTITY_MODEL_SCRIPT_OP_ClearFlags, flags,
 #define ems_DrawImage(raster, palette, width, height, holdTime) ENTITY_MODEL_SCRIPT_OP_DrawImage, holdTime, (s32)raster, (s32)palette, width, height,
+
+#define STANDARD_ENTITY_MODEL_SCRIPT(gfx, renderMode) \
+    { \
+        ems_SetRenderMode(renderMode) \
+        ems_Draw(gfx, 60) \
+        ems_Restart \
+        ems_End \
+    }
