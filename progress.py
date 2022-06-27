@@ -168,7 +168,7 @@ def main(args):
             else:
                 s = "s"
 
-            print(f"This local build matches {funcs_delta} function{s} (+{ ratio_delta:.2f}%) over latest `{args.version}`.")
+            print(f"This local build matches {funcs_delta} function{s} (+{ ratio_delta:.2f}%) over latest '{args.version}'.")
 
 
 if __name__ == "__main__":
