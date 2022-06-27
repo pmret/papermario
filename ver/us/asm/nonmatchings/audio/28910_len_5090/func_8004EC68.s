@@ -731,9 +731,9 @@ glabel func_8004EC68
 /* 2AABC 8004F6BC 08013E06 */  j         .L8004F818
 /* 2AAC0 8004F6C0 A2420044 */   sb       $v0, 0x44($s2)
 .L8004F6C4:
-/* 2AAC4 8004F6C4 3C058008 */  lui       $a1, %hi(D_80078400+0x10)
+/* 2AAC4 8004F6C4 3C058008 */  lui       $a1, %hi(SefCmdHandlers+0x10)
 /* 2AAC8 8004F6C8 00A32821 */  addu      $a1, $a1, $v1
-/* 2AACC 8004F6CC 90A58410 */  lbu       $a1, %lo(D_80078400+0x10)($a1)
+/* 2AACC 8004F6CC 90A58410 */  lbu       $a1, %lo(SefCmdHandlers+0x10)($a1)
 /* 2AAD0 8004F6D0 10A00047 */  beqz      $a1, .L8004F7F0
 /* 2AAD4 8004F6D4 0280202D */   daddu    $a0, $s4, $zero
 /* 2AAD8 8004F6D8 8E020000 */  lw        $v0, ($s0)

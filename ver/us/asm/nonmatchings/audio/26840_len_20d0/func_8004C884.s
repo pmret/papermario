@@ -51,8 +51,8 @@ glabel func_8004C884
 /* 27D30 8004C930 3042FFFF */  andi      $v0, $v0, 0xffff
 /* 27D34 8004C934 14400090 */  bnez      $v0, .L8004CB78
 /* 27D38 8004C938 00000000 */   nop
-/* 27D3C 8004C93C 3C158008 */  lui       $s5, %hi(D_80078400)
-/* 27D40 8004C940 26B58400 */  addiu     $s5, $s5, %lo(D_80078400)
+/* 27D3C 8004C93C 3C158008 */  lui       $s5, %hi(SefCmdHandlers)
+/* 27D40 8004C940 26B58400 */  addiu     $s5, $s5, %lo(SefCmdHandlers)
 .L8004C944:
 /* 27D44 8004C944 8E040000 */  lw        $a0, ($s0)
 /* 27D48 8004C948 90860000 */  lbu       $a2, ($a0)
