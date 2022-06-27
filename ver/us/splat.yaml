@@ -1152,7 +1152,8 @@ segments:
     - [0x1AF230, c]
     - [0x1AF2D0, .data, 16c8e0]
     - [0x1AF5C0, .data, battle_cam]
-    - [0x1AF8A0, .data, 190B20]
+    - [0x1B2050, .data, 17D6A0]
+    #- [0x1AF8A0, .data, 190B20]
     - [0x1B21E0, data, 1AF2D0] # begins with image?
     - start: 0x1B7CE0
       type: .data
