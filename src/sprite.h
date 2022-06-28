@@ -161,7 +161,7 @@ s32 func_802DDA84(void);
 
 s32 spr_update_player_sprite(s32 arg0, s32 arg1, f32 arg2);
 
-s32 spr_draw_player_sprite(s32 arg0, s32 yaw, s32 arg2, s16** paletteList, Matrix4f mtx);
+s32 spr_draw_player_sprite(s32 spriteInstanceID, s32 yaw, s32 arg2, s16** paletteList, Matrix4f mtx);
 
 s32 func_802DDEC4(s32 arg0);
 
