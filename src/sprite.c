@@ -125,11 +125,11 @@ void spr_clear_quad_cache(void) {
 INCLUDE_ASM(s32, "sprite", spr_appendGfx_component_flat);
 
 void spr_appendGfx_component(
-    SpriteRasterCacheEntry* cache, 
-    f32 dx, f32 dy, f32 dz, 
-    f32 rotX, f32 rotY, f32 rotZ, 
-    f32 scaleX, f32 scaleY, f32 scaleZ, 
-    s32 opacity, void* palette, Matrix4f mtx) 
+    SpriteRasterCacheEntry* cache,
+    f32 dx, f32 dy, f32 dz,
+    f32 rotX, f32 rotY, f32 rotZ,
+    f32 scaleX, f32 scaleY, f32 scaleZ,
+    s32 opacity, void* palette, Matrix4f mtx)
 {
     Matrix4f sp20;
     Matrix4f sp60;
@@ -162,7 +162,7 @@ void spr_appendGfx_component(
     }
 
     guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
-    gSPMatrix(gMasterGfxPos++, VIRTUAL_TO_PHYSICAL(&gDisplayContext->matrixStack[gMatrixListPos++]), 
+    gSPMatrix(gMasterGfxPos++, VIRTUAL_TO_PHYSICAL(&gDisplayContext->matrixStack[gMatrixListPos++]),
               G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
     if (D_80151328->flags & 1) {
@@ -261,8 +261,8 @@ s32 spr_sign_extend_16bit(u16 val) {
 
 INCLUDE_ASM(s32, "sprite", spr_component_update_commands);
 
-void spr_component_update_finish(SpriteComponent* comp, SpriteComponent** compList, 
-                                 SpriteRasterCacheEntry** rasterCacheEntry, s32 overridePalette) 
+void spr_component_update_finish(SpriteComponent* comp, SpriteComponent** compList,
+                                 SpriteRasterCacheEntry** rasterCacheEntry, s32 overridePalette)
 {
     SpriteComponent* listComp;
     SpriteRasterCacheEntry* cache;
@@ -271,7 +271,7 @@ void spr_component_update_finish(SpriteComponent* comp, SpriteComponent** compLi
         comp->compPos.x = comp->posOffset.x;
         comp->compPos.y = comp->posOffset.y;
         comp->compPos.z = comp->posOffset.z;
-        
+
         if ((comp->unk_04 & 0xF00) == 0x100) {
             listComp = compList[comp->unk_04 & 0xFF];
             comp->compPos.x += listComp->compPos.x;
