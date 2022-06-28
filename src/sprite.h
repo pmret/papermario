@@ -35,7 +35,7 @@ typedef struct SpriteRasterCacheEntry {
     /* 0x00 */ void* image;
     /* 0x04 */ u8 width;
     /* 0x05 */ u8 height;
-    /* 0x06 */ u8 palette;
+    /* 0x06 */ s8 palette;
     /* 0x07 */ s8 quadCacheIndex;
 } SpriteRasterCacheEntry; // size = 0x8
 
@@ -69,7 +69,7 @@ typedef struct PlayerSpriteSet {
 
 /// Sprite data header.
 typedef struct SpriteAnimData {
-    /* 0x00 */ s32** rastersOffset;
+    /* 0x00 */ SpriteRasterCacheEntry** rastersOffset;
     /* 0x04 */ u16** palettesOffset;
     /* 0x08 */ s32 maxComponents;
     /* 0x0C */ s32 colorVariations;
@@ -130,12 +130,12 @@ s32 spr_sign_extend_16bit(u16 val);
 
 void spr_component_update_commands(SpriteComponent* comp, SpriteAnimComponent* anim);
 
-void spr_component_update_finish(
-    SpriteComponent* comp,
-    SpriteComponent** compList,
-    SpriteRasterCacheEntry* rasterCacheEntry,
-    s32 overridePalette
-);
+// void spr_component_update_finish(
+//     SpriteComponent* comp,
+//     SpriteComponent** compList,
+//     SpriteRasterCacheEntry* rasterCacheEntry,
+//     s32 overridePalette
+// );
 
 // TODO: anim possibly should be SpriteComponentAnim*
 void spr_init_component_anim_state(SpriteComponent* comp, s16*** anim);

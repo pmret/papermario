@@ -91,9 +91,9 @@ PlayerSpriteSet spr_playerSpriteSets[] = {
 
 void spr_init_quad_cache(void) {
     s32 i;
-    D_802DFE44 = _heap_malloc(&gSpriteHeapPtr, 22 * 4 * sizeof(*D_802DFE44));
+    D_802DFE44 = _heap_malloc(&gSpriteHeapPtr, ARRAY_COUNT(D_802DFE48) * 4 * sizeof(*D_802DFE44));
 
-    for (i = 0; i < 22; i++) {
+    for (i = 0; i < ARRAY_COUNT(D_802DFE48); i++) {
         D_802DFE48[i] = -1;
     }
 }
@@ -109,7 +109,18 @@ INCLUDE_ASM(s32, "sprite", spr_make_quad_for_size);
 
 INCLUDE_ASM(s32, "sprite", spr_get_quad_for_size);
 
-INCLUDE_ASM(s32, "sprite", spr_clear_quad_cache);
+void spr_clear_quad_cache(void) {
+    s32 i;
+
+    for (i = 0; i < ARRAY_COUNT(D_802DFE48); i++) {
+        if (D_802DFE48[i] != -1) {
+            D_802DFE48[i]--;
+            if (!(D_802DFE48[i] & 0xFFFF)) {
+                D_802DFE48[i] = -1;
+            }
+        }
+    }
+}
 
 INCLUDE_ASM(s32, "sprite", spr_appendGfx_component_flat);
 
@@ -250,41 +261,35 @@ s32 spr_sign_extend_16bit(u16 val) {
 
 INCLUDE_ASM(s32, "sprite", spr_component_update_commands);
 
-#ifdef NON_EQUIVALENT
-
-void spr_component_update_finish(SpriteComponent* comp, SpriteComponent** compList, s32 arg2, s32 palette) {
-    s32 temp_t0;
-    s32 temp_v0_2;
-    s8 temp_v0_3;
-    SpriteComponent* temp_v0;
+void spr_component_update_finish(SpriteComponent* comp, SpriteComponent** compList, 
+                                 SpriteRasterCacheEntry** rasterCacheEntry, s32 overridePalette) 
+{
+    SpriteComponent* listComp;
+    SpriteRasterCacheEntry* cache;
 
     if (comp->initialized) {
-        temp_t0 = comp->unk_04;
         comp->compPos.x = comp->posOffset.x;
         comp->compPos.y = comp->posOffset.y;
         comp->compPos.z = comp->posOffset.z;
-        if ((temp_t0 & 0xF00) == 0x100) {
-            temp_v0 = compList[temp_t0 & 0xFF];
-            comp->compPos.x = comp->posOffset.x + temp_v0->compPos.x;
-            comp->compPos.y = comp->posOffset.y + temp_v0->compPos.y;
-            comp->compPos.z = comp->posOffset.z + temp_v0->compPos.z;
+        
+        if ((comp->unk_04 & 0xF00) == 0x100) {
+            listComp = compList[comp->unk_04 & 0xFF];
+            comp->compPos.x += listComp->compPos.x;
+            comp->compPos.y += listComp->compPos.y;
+            comp->compPos.z += listComp->compPos.z;
         }
-        temp_v0_2 = comp->currentRaster;
-        if ((temp_v0_2 != -1) && (comp->currentRaster == -1)) {
-            temp_v0_3 = (*((temp_v0_2 * 4) + arg2))->unk6;
-            comp->unk18 = (s32) temp_v0_3;
-            if ((palette != 0) && (temp_v0_3 == 0)) {
-                comp->unk18 = palette;
+
+        if (comp->currentRaster != -1) {
+            cache = rasterCacheEntry[comp->currentRaster];
+            if (comp->currentPalette == -1) {
+                comp->currentPalette = cache->palette;
+                if (overridePalette != 0 && comp->currentPalette == 0) {
+                    comp->currentPalette = overridePalette;
+                }
             }
         }
     }
 }
-
-#else
-
-INCLUDE_ASM(s32, "sprite", spr_component_update_finish);
-
-#endif
 
 INCLUDE_ASM(s32, "sprite", spr_component_update);
 
@@ -447,7 +452,24 @@ void func_802DDFF8(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s
     func_802DDEE4(0, -1, arg1, arg2, arg3, arg4, arg5, arg6);
 }
 
-INCLUDE_ASM(s32, "sprite", spr_get_player_raster_info);
+void* spr_get_player_raster(s32 rasterIndex, s32 playerSpriteID);
+
+void spr_get_player_raster_info(SpriteRasterInfo* out, s32 playerSpriteID, s32 rasterIndex) {
+    SpriteAnimData* sprite;
+    SpriteRasterCacheEntry* cache;
+    u16** paletteOffsetCopy;
+
+    playerSpriteID--;
+    sprite = spr_playerSprites[playerSpriteID];
+    if (sprite != NULL) {
+        paletteOffsetCopy = sprite->palettesOffset;
+        cache = sprite->rastersOffset[rasterIndex];
+        out->width = cache->width;
+        out->height = cache->height;
+        out->defaultPal = paletteOffsetCopy[cache->palette];
+        out->raster = spr_get_player_raster(rasterIndex, playerSpriteID);
+    }
+}
 
 u16** spr_get_player_palettes(s32 spriteIndex) {
     SpriteAnimData* sprites = spr_playerSprites[spriteIndex - 1];
@@ -488,28 +510,20 @@ s32 func_802DE894(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s3
 
 INCLUDE_ASM(s32, "sprite", func_802DE8DC);
 
-typedef struct UnkSpriteStruct {
-    /* 0x00 */ s32* unk_00;
-    /* 0x04 */ u8 width;
-    /* 0x05 */ u8 height;
-    /* 0x06 */ s8 unk_06;
-    /* 0x07 */ u8 unk_07;
-} UnkSpriteStruct;
-
 s32 spr_get_npc_raster_info(SpriteRasterInfo* out, s32 npcSpriteID, s32 rasterIndex) {
     SpriteAnimData* sprite = spr_npcSprites[npcSpriteID];
-    UnkSpriteStruct* temp_v1;
+    SpriteRasterCacheEntry* cache;
     u16** paletteOffsetCopy;
     s32 newVar;
 
     if (sprite != NULL) {
         paletteOffsetCopy = sprite->palettesOffset;
-        temp_v1 = (UnkSpriteStruct*)sprite->rastersOffset[rasterIndex];
-        out->raster = temp_v1->unk_00;
-        out->width = temp_v1->width;
+        cache = sprite->rastersOffset[rasterIndex];
+        out->raster = cache->image;
+        out->width = cache->width;
         newVar = npcSpriteID;
-        out->height = temp_v1->height;
-        out->defaultPal = paletteOffsetCopy[temp_v1->unk_06];
+        out->height = cache->height;
+        out->defaultPal = paletteOffsetCopy[cache->palette];
         return TRUE;
     }
     return FALSE;
