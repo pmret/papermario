@@ -77,7 +77,7 @@ void snd_load_audio_data(s32 outputRate) {
         temp5->unk_04 = 0;
         temp5->unk_0C = -1;
         temp5->unk_0E = 0xFF;
-        temp5->unk_0F = 0xFF;
+        temp5->reverb = 0xFF;
         temp5->unk_10 = 0;
         temp5->unk_42 = 0;
         temp5->unk_43 = 0;
@@ -140,7 +140,7 @@ void snd_reset_instrument(Instrument* instrument) {
     instrument->wavLength = 190;
     instrument->predictorOffset = &D_80078190;
     instrument->unk_1C = 64;
-    instrument->unk_1E = 4800;
+    instrument->detune = 4800;
     instrument->loopPredictorOffset = 0;
     instrument->loopStart = 0;
     instrument->loopEnd = 0;
@@ -327,7 +327,7 @@ void func_80053654(SndGlobals* arg0) {
 
         if (unk_43 & 2) {
             func_80052BF8(voice, &voice->unk_14);
-            func_80056FA4(i, voice->unk_10, voice->unk_00, voice->unk_04, voice->unk_0C, voice->unk_0E, voice->unk_0F, voice->unk_08);
+            func_80056FA4(i, voice->unk_10, voice->unk_00, voice->unk_04, voice->unk_0C, voice->unk_0E, voice->reverb, voice->unk_08);
             voice->unk_45 = voice->unk_44;
         } else {
             if (unk_43 & 8) {
@@ -335,16 +335,16 @@ void func_80053654(SndGlobals* arg0) {
             }
 
             if (unk_43 & 4) {
-                func_8005736C(i, voice->unk_0C, voice->unk_08, voice->unk_0E, voice->unk_0F);
+                func_8005736C(i, voice->unk_0C, voice->unk_08, voice->unk_0E, voice->reverb);
             } else if (unk_43 & 0x10) {
-                func_80057548(i, voice->unk_0E, voice->unk_0F);
+                func_80057548(i, voice->unk_0E, voice->reverb);
             }
         }
         voice->unk_43 = 0;
     }
 }
 
-void func_80053888(AlUnkVoice* arg0, s32 arg1) { // type may be wrong but it seems good
+void func_80053888(AlUnkVoice* arg0, u8 arg1) {
     if (arg0->unk_45 != 0) {
         arg0->unk_1C = 0;
         arg0->unk_42 = 1;
@@ -353,7 +353,7 @@ void func_80053888(AlUnkVoice* arg0, s32 arg1) { // type may be wrong but it see
     }
 }
 
-void func_800538C4(AlUnkVoice* arg0, u8 arg1) { // type may be wrong but it seems good
+void func_800538C4(AlUnkVoice* arg0, u8 arg1) {
     arg0->unk_1C = 0;
     arg0->unk_42 = 1;
     arg0->unk_43 = 0;

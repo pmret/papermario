@@ -212,7 +212,7 @@ typedef struct Instrument {
     /* 0x14 */ s32 loopCount;
     /* 0x18 */ UNK_PTR predictorOffset;
     /* 0x1C */ s16 unk_1C;
-    /* 0x1E */ u16 unk_1E;
+    /* 0x1E */ u16 detune;
     /* 0x20 */ f32 sampleRate;
     /* 0x24 */ s8 skipLoopPredictor;
     /* 0x25 */ s8 unk_25;
@@ -271,15 +271,15 @@ typedef struct SoundPlayer {
     /* 0x7F */ u8 unk_7F;
     /* 0x80 */ s32 unk_80;
     /* 0x84 */ s8 unk_84;
-    /* 0x85 */ s8 soundC00;
+    /* 0x85 */ u8 soundC00;
     /* 0x86 */ char unk_86[0x2];
     /* 0x88 */ s8* loopStartPos;
     /* 0x8C */ s8 loopIterCount;
     /* 0x8D */ char unk_8D;
     /* 0x8E */ u16 unk_8E;
     /* 0x90 */ u16 unk_90;
-    /* 0x92 */ u16 unk_92;
-    /* 0x94 */ u8 unk_94;
+    /* 0x92 */ s16 unk_92;
+    /* 0x94 */ s8 unk_94;
     /* 0x95 */ char unk_05;
     /* 0x96 */ u16 currentSoundID;
     /* 0x98 */ u8 unk_98;
@@ -291,8 +291,8 @@ typedef struct SoundPlayer {
     /* 0x9E */ u8 unk_9E;
     /* 0x9F */ u8 unk_9F;
     /* 0xA0 */ u8 unk_A0;
-    /* 0xA1 */ s8 unk_A1;
-    /* 0xA2 */ s8 unk_A2;
+    /* 0xA1 */ u8 unk_A1;
+    /* 0xA2 */ u8 unk_A2;
     /* 0xA3 */ s8 unk_A3;
     /* 0xA4 */ s16 masterPitchShift;
     /* 0xA6 */ s16 masterVolume;
@@ -375,7 +375,7 @@ typedef struct AlUnkVoice { // Track?
     /* 0x08 */ s32 unk_08;
     /* 0x0C */ s16 unk_0C;
     /* 0x0E */ u8 unk_0E;
-    /* 0x0F */ u8 unk_0F;
+    /* 0x0F */ u8 reverb;
     /* 0x10 */ u8 unk_10;
     /* 0x11 */ char unk_11[0x3];
     /* 0x14 */ u8* unk_14; // ultimately from bgm_player->unk_10 ?
