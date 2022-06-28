@@ -1,6 +1,9 @@
 #include "common.h"
 #include "hud_element.h"
 
+extern s16 D_8010CD10;
+extern s16 D_8010CD12;
+
 extern s32 TimesHudScript;
 extern s32 DigitHudScripts[10];
 
@@ -447,6 +450,7 @@ INCLUDE_ASM(s32, "80850_len_3060", status_menu_draw_number);
 
 INCLUDE_ASM(s32, "80850_len_3060", status_menu_draw_stat);
 
+void update_status_menu(void);
 INCLUDE_ASM(s32, "80850_len_3060", update_status_menu);
 
 void coin_counter_draw_content(UNK_TYPE arg0, s32 posX, s32 posY) {

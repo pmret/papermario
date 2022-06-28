@@ -2,6 +2,8 @@
 #include "partners.h"
 #include "macros.h"
 
+extern s32 D_8010CD20;
+
 // BSS
 BSS s32 D_8010CD34;
 BSS PlayerPathElement gPlayerMoveHistory[40];

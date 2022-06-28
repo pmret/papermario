@@ -266,6 +266,8 @@ s32 sign(s32 value);
 s32 func_80055448(s32);
 s32 func_80055464(s32, s32);
 s32 func_80055618(s32, s32);
+s32 func_800557CC(s32);
+s32 func_80055848(s32);
 s32 func_800E0208(void);
 
 s32 battle_heap_create(void);
@@ -645,6 +647,8 @@ s32 find_item(s32);
 
 void enable_background_wave(void);
 
+void func_80035DF0(s16);
+
 // State funcs
 void state_init_startup(void);
 void state_step_startup(void);
@@ -810,6 +814,7 @@ void sfx_adjust_env_sound_params(s32 soundID, u8 volume, u8 pan, s16 pitchShift)
 void sfx_stop_sound(s32 soundID);
 
 void partner_disable_input(void);
+void partner_set_goal_pos(s32 x, s32 z);
 void func_80268798(s32, s32, s32, s32);
 void func_8026880C(s32, s32, s32);
 void func_802687E4(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
