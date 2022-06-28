@@ -345,7 +345,7 @@ EntityBlueprint Entity_YellowBlock = {
     .fpInit = entity_ItemBlock_init,
     .updateEntityScript = Entity_ItemBlock_Script,
     .fpHandleCollision = entity_block_handle_collision,
-    entity_model_YellowBlock_ROM_START, entity_model_YellowBlock_ROM_END,
+    {{ entity_model_YellowBlock_ROM_START, entity_model_YellowBlock_ROM_END }},
     .entityType = ENTITY_TYPE_YELLOW_BLOCK,
     .aabbSize = { 25, 25, 25 }
 };
@@ -357,7 +357,7 @@ EntityBlueprint Entity_HiddenYellowBlock = {
     .fpInit = entity_HiddenItemBlock_init,
     .updateEntityScript = Entity_HiddenItemBlock_Script,
     .fpHandleCollision = entity_block_handle_collision,
-    entity_model_YellowBlock_ROM_START, entity_model_YellowBlock_ROM_END,
+    {{ entity_model_YellowBlock_ROM_START, entity_model_YellowBlock_ROM_END }},
     .entityType = ENTITY_TYPE_HIDDEN_YELLOW_BLOCK,
     .aabbSize = { 25, 25, 25 }
 };
@@ -369,7 +369,7 @@ EntityBlueprint Entity_RedBlock = {
     .fpInit = entity_ItemBlock_init,
     .updateEntityScript = Entity_ItemBlock_Script,
     .fpHandleCollision = entity_block_handle_collision,
-    entity_model_RedBlock_ROM_START, entity_model_RedBlock_ROM_END,
+    {{ entity_model_RedBlock_ROM_START, entity_model_RedBlock_ROM_END }},
     .entityType = ENTITY_TYPE_RED_BLOCK,
     .aabbSize = { 25, 25, 25 }
 };
@@ -381,7 +381,7 @@ EntityBlueprint Entity_HiddenRedBlock = {
     .fpInit = entity_HiddenItemBlock_init,
     .updateEntityScript = Entity_HiddenItemBlock_Script,
     .fpHandleCollision = entity_block_handle_collision,
-    entity_model_RedBlock_ROM_START, entity_model_RedBlock_ROM_END,
+    {{ entity_model_RedBlock_ROM_START, entity_model_RedBlock_ROM_END }},
     .entityType = ENTITY_TYPE_HIDDEN_RED_BLOCK,
     .aabbSize = { 25, 25, 25 }
 };
@@ -393,7 +393,7 @@ EntityBlueprint Entity_D_802EA5F4 = {
     .fpInit = entity_ItemlessBlock_init,
     .updateEntityScript = D_802EA440,
     .fpHandleCollision = entity_block_handle_collision,
-    D_802EA4C4, 0x00000000,
+    {{ D_802EA4C4, 0x00000000 }},
     .entityType = ENTITY_TYPE_SINGLE_TRIGGER_BLOCK,
     .aabbSize = { 25, 25, 25 }
 };
@@ -405,7 +405,7 @@ EntityBlueprint Entity_HitGroundedYellowBlock = {
     .fpInit = entity_ItemlessBlock_init,
     .updateEntityScript = D_802EA3F0,
     .fpHandleCollision = 0x00000000,
-    D_802EA4C4, 0x00000000,
+    {{ D_802EA4C4, 0x00000000 }},
     .entityType = ENTITY_TYPE_YELLOW_BLOCK,
     .aabbSize = { 25, 25, 25 }
 };
@@ -417,7 +417,7 @@ EntityBlueprint Entity_HitFloatingYellowBlock = {
     .fpInit = entity_ItemlessBlock_init,
     .updateEntityScript = D_802EA3F0,
     .fpHandleCollision = 0x00000000,
-    D_802EA4D4, 0x00000000,
+    {{ D_802EA4D4, 0x00000000 }},
     .entityType = ENTITY_TYPE_YELLOW_BLOCK,
     .aabbSize = { 25, 25, 25 }
 };
@@ -429,7 +429,7 @@ EntityBlueprint Entity_HitRedBlock = {
     .fpInit = entity_ItemlessBlock_init,
     .updateEntityScript = D_802EA3F0,
     .fpHandleCollision = 0x00000000,
-    D_802EA4E4, 0x00000000,
+    {{ D_802EA4E4, 0x00000000 }},
     .entityType = ENTITY_TYPE_RED_BLOCK,
     .aabbSize = { 25, 25, 25 }
 };

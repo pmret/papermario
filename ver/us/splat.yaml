@@ -874,7 +874,7 @@ segments:
     - [0x10B4F0, .data, entity/ShatteringBlock]
     - [0x10B610, .data, entity/Block]
     - [0x10BB90, .data, entity/ItemBlock]
-    - [0x10BF10, .data, entity/BlockData7]
+    - [0x10BF10, .data, entity/HeartBlock]
     - [0x10C090, .data, entity/BlockData8]
     - [0x10C220, .data, entity/BlockData9]
     - [0x10C300, .data, entity/BlockDataA]
@@ -12289,7 +12289,21 @@ segments:
       - [0xE42740]
       - [0xE428C0, rgba16, InertRedBlock_face, 32, 32]
       - [0xE430C0]
-  - [0xE431F0, bin] # unk data
+  - name: entity_model_HeartBlock
+    dir: entity/model
+    type: code
+    start: 0xE431F0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE431F0, c, HeartBlock]
+    - start: 0xE431F0
+      type: .data
+      name: HeartBlock
+      subsegments:
+      - [0xE431F0]
+      - [0xE435B0, rgba16, HeartBlock_face, 16, 32]
+      - [0xE439B0]
   - name: entity_model_PowBlock
     dir: entity/model
     type: code
@@ -12374,7 +12388,24 @@ segments:
     vram: 0x00000000
     subsegments:
     - [0xE49BE0, c, HitRedBlock_anim]
-  - [0xE49E40, bin] # unk data
+  - name: entity_model_HeartBlockContent
+    dir: entity/model
+    type: code
+    start: 0xE49E40
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE49E40, c, HeartBlockContent]
+    - start: 0xE49E40
+      type: .data
+      name: HeartBlockContent
+      subsegments:
+      - [0xE49E40]
+      #- [0xE49E40, ci4, HeartBlockContent_img1, 32, 32]
+      #- [0xE4A040, ci4, HeartBlockContent_img2, 32, 32]
+      #- [0xE4A240, ci4, HeartBlockContent_img3, 32, 32]
+      #- [0xE4A440, palette, HeartBlockContent_pal] # this palette is common for all images above
+      #- [0xE4A460]
   - [0xE4A6A0, bin] # unk data
   - [0xE4AA80, bin] # unk data
   - name: entity_model_SaveBlock

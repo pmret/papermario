@@ -1,11 +1,20 @@
 #include "common.h"
 #include "effects.h"
+#include "ld_addrs.h"
+#include "entity_script.h"
 
-extern u32* D_802EA728;
-extern u32* D_802EA760;
-extern EntityBlueprint Entity_HeartBlockContent;
 extern u32 HeartBlockPrinterClosed;
-extern s32 D_802EA744; //
+
+extern EntityModelScript Entity_HeartBlockContent_RenderScriptIdle;
+extern EntityModelScript Entity_HeartBlockContent_RenderScriptAfterHit;
+extern EntityModelScript Entity_HeartBlockContent_RenderScriptHit;
+
+extern EntityBlueprint Entity_HeartBlockContent;
+
+extern Gfx Entity_HeartBlock_Render[];
+extern Gfx Entity_HeartBlockContent_RenderHeartSleeping[];
+extern Gfx Entity_HeartBlockContent_RenderHeartAwake[];
+extern Gfx Entity_HeartBlockContent_RenderHeartHappy[];
 
 f32 entity_HeartBlockContent_get_previous_yaw(HeartBlockContentData* data, s32 lagTime) {
     s32 bufIdx = data->yawBufferPos - lagTime;
@@ -15,10 +24,56 @@ f32 entity_HeartBlockContent_get_previous_yaw(HeartBlockContentData* data, s32 l
     return data->yawBuffer[bufIdx];
 }
 
-INCLUDE_ASM(s32, "entity/HeartBlock", entity_HeartBlockContent__setupGfx);
+void entity_HeartBlockContent__setupGfx(s32 entityIndex, Gfx* arg1) {
+    Entity* entity = get_entity_by_index(entityIndex);
+    HeartBlockContentData* data = entity->dataBuf.heartBlockContent;
+    Gfx* gfxPos = gMasterGfxPos;
+    s32 alpha;
+    Matrix4f sp18;
+    Gfx* dlist;
+
+    dlist = (Gfx*)((s32)entity->vertexData + (u16)arg1);
+
+    gDPSetCombineLERP(gfxPos++, 0, 0, 0, TEXEL0, PRIMITIVE, 0, TEXEL0, 0, 0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0);
+    gDPSetPrimColor(gfxPos++, 0, 0, 0, 0, 0, entity->alpha);
+
+    alpha = 92;
+    if (entity->alpha < alpha) {
+        alpha = entity->alpha;
+    }
+
+    guRotateF(sp18, entity_HeartBlockContent_get_previous_yaw(data, 2), 0.0f, 1.0f, 0.0f);
+    guMtxF2L(sp18, &data->unk_58);
+    gDisplayContext->matrixStack[gMatrixListPos] = data->unk_58;
+    gSPMatrix(gfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gDPSetRenderMode(gfxPos++, AA_EN | Z_CMP | IM_RD | CVG_DST_SAVE | ZMODE_OPA | FORCE_BL | GBL_c1(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_1MA), AA_EN | Z_CMP | IM_RD | CVG_DST_SAVE | ZMODE_OPA | FORCE_BL | GBL_c2(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_1MA));
+    gSPDisplayList(gfxPos++, dlist);
+    gDPPipeSync(gfxPos++);
+    gDPSetCombineLERP(gfxPos++, 0, 0, 0, TEXEL0, PRIMITIVE, 0, TEXEL0, 0, 0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0);
+    gDPSetPrimColor(gfxPos++, 0, 0, 0, 0, 0, alpha);
+    gSPPopMatrix(gfxPos++, G_MTX_MODELVIEW);
+
+    alpha = 72;
+    if (entity->alpha < alpha) {
+        alpha = entity->alpha;
+    }
+
+    guRotateF(sp18, entity_HeartBlockContent_get_previous_yaw(data, 3), 0.0f, 1.0f, 0.0f);
+    guMtxF2L(sp18, &data->unk_98);
+    gDisplayContext->matrixStack[gMatrixListPos] = data->unk_98;
+    gSPMatrix(gfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gDPSetRenderMode(gfxPos++, AA_EN | Z_CMP | IM_RD | CVG_DST_SAVE | ZMODE_OPA | FORCE_BL | GBL_c1(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_1MA), AA_EN | Z_CMP | IM_RD | CVG_DST_SAVE | ZMODE_OPA | FORCE_BL | GBL_c2(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_1MA));
+    gSPDisplayList(gfxPos++, dlist);
+    gDPPipeSync(gfxPos++);
+    gDPSetCombineLERP(gfxPos++, 0, 0, 0, TEXEL0, PRIMITIVE, 0, TEXEL0, 0, 0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0);
+    gDPSetPrimColor(gfxPos++, 0, 0, 0, 0, 0, alpha);
+    gSPPopMatrix(gfxPos++, G_MTX_MODELVIEW);
+
+    gMasterGfxPos = gfxPos;
+}
 
 void entity_HeartBlockContent_setupGfx(s32 entityIndex) {
-    entity_HeartBlockContent__setupGfx(entityIndex, &D_0A000808);
+    entity_HeartBlockContent__setupGfx(entityIndex, Entity_HeartBlockContent_RenderHeartHappy);
 }
 
 void entity_HeartBlockContent_set_initial_pos(Entity* entity) {
@@ -32,13 +87,13 @@ void entity_HeartBlockContent_set_initial_pos(Entity* entity) {
 
 void entity_HeartBlockContent__reset(Entity* entity) {
     HeartBlockContentData* data;
-    Entity* someEntity;
+    Entity* blockEntity;
 
     entity->renderSetupFunc = entity_HeartBlockContent_setupGfx;
     entity->alpha = 255;
     data = entity->dataBuf.heartBlockContent;
     entity->flags |= ENTITY_FLAGS_ALWAYS_FACE_CAMERA;
-    someEntity = get_entity_by_index(data->parentEntityIndex);
+    blockEntity = get_entity_by_index(data->parentEntityIndex);
 
     if (data->unk_09 == 0) {
         data->unk_09 = 1;
@@ -108,10 +163,10 @@ void entity_HeartBlockContent_anim_idle(Entity* entity, s32 arg1) {
     }
 }
 
-void func_802E4DE0(Entity* entity) {
-    HeartBlockContentData* temp = entity->dataBuf.heartBlockContent;
+void entity_HeartBlockContent_reset_data(Entity* entity) {
+    HeartBlockContentData* data = entity->dataBuf.heartBlockContent;
 
-    temp->state = 0;
+    data->state = 0;
     entity->scale.x = 1.0f;
     entity->scale.y = 1.0f;
     entity->scale.z = 1.0f;
@@ -137,7 +192,7 @@ void entity_HeartBlockContent__anim_heal(Entity* entity, s32 arg1) {
                 data->state++;
                 entity->flags &= ~ENTITY_FLAGS_ALWAYS_FACE_CAMERA;
                 data->rotationRate = -10.0f;
-                entity_set_render_script(entity, &D_802EA744);
+                entity_set_render_script(entity, Entity_HeartBlockContent_RenderScriptHit);
                 entity->renderSetupFunc = &entity_HeartBlockContent_setupGfx;
             }
             break;
@@ -233,7 +288,51 @@ void entity_HeartBlock_idle(Entity* entity) {
     entity_base_block_idle(entity);
 }
 
-INCLUDE_ASM(s32, "entity/HeartBlock", entity_HeartBlockContent_anim_beating);
+void entity_HeartBlockContent_anim_beating(Entity* entity) {
+    HeartBlockContentData* data = entity->dataBuf.heartBlockContent;
+
+    entity_HeartBlockContent_set_initial_pos(entity);
+
+    if (entity->scale.x < 1.0) {
+        return;
+    }
+
+    switch (data->heartbeatTimer) {
+        case 0:
+            entity->scale.x += 0.1;
+            data->heartbeatTimer++;
+            break;
+        case 1:
+            entity->scale.x -= 0.02;
+            if (entity->scale.x <= 1.0) {
+                entity->scale.x = 1.0f;
+                data->heartbeatTimer++;
+            }
+            break;
+        case 2:
+        case 3:
+        case 4:
+        case 5:
+        case 6:
+        case 7:
+        case 8:
+        case 9:
+        case 10:
+        case 11:
+        case 12:
+        case 13:
+        case 14:
+        case 15:
+        case 16:
+            data->heartbeatTimer++;
+            break;
+        default:
+            data->heartbeatTimer = 0;
+            break;
+    }
+
+    entity->scale.y = entity->scale.x;
+}
 
 void entity_HeartBlockContent_init(Entity* entity) {
     entity_HeartBlockContent_set_initial_pos(entity);
@@ -241,7 +340,7 @@ void entity_HeartBlockContent_init(Entity* entity) {
 
 void entity_HeartBlockContent_reset(Entity* entity) {
     entity_HeartBlockContent__reset(entity);
-    entity_set_render_script(entity, (u32*)&D_802EA728);
+    entity_set_render_script(entity, Entity_HeartBlockContent_RenderScriptIdle);
 }
 
 void entity_HeartBlockContent_idle(Entity* entity) {
@@ -254,11 +353,11 @@ void entity_HeartBlockContent_anim_heal(Entity* entity) {
 }
 
 void entity_HeartBlock_change_render_script(Entity* entity) {
-    entity_set_render_script(entity, (u32*)&D_802EA760);
+    entity_set_render_script(entity, Entity_HeartBlockContent_RenderScriptAfterHit);
 }
 
 void entity_HeartBlock_show_tutorial_message(Entity* entity) {
-    if ((!gPlayerData.partners[1].enabled) && get_global_flag(EVT_SAVE_FLAG(96)) == 0) {
+    if ((!gPlayerData.partners[PARTNER_GOOMBARIO].enabled) && get_global_flag(EVT_SAVE_FLAG(96)) == 0) {
         HeartBlockPrinterClosed = FALSE;
         msg_get_printer_for_msg(0x1D0001, &HeartBlockPrinterClosed);
         set_time_freeze_mode(TIME_FREEZE_PARTIAL);
@@ -299,3 +398,74 @@ s8 entity_HeartBlock_create_child_entity(Entity* entity, EntityBlueprint* bp) {
 void entity_HeartBlock_init(Entity* entity) {
     entity_HeartBlock_create_child_entity(entity, &Entity_HeartBlockContent);
 }
+
+extern EntityScript Entity_InertBlock_Script;
+
+EntityScript Entity_HeartBlockContent_Script = {
+    es_Call(entity_HeartBlockContent_reset)
+    es_SetCallback(entity_HeartBlockContent_idle, 0)
+    es_Call(entity_HeartBlockContent_reset_data)
+    es_Call(entity_HeartBlock_change_render_script)
+    es_SetCallback(entity_HeartBlockContent_anim_heal, 0)
+    es_Call(entity_HeartBlock_show_tutorial_message)
+    es_SetCallback(entity_HeartBlock_wait_for_close_tutorial, 0)
+    es_SetCallback(NULL, 60)
+    es_Restart
+    es_End
+};
+EntityScript Entity_HeartBlock_Script = {
+    es_SetCallback(entity_HeartBlock_idle, 0)
+    es_PlaySound(SOUND_HIT_BLOCK)
+    es_Call(entity_start_script)
+    es_Call(entity_block_hit_init_scale)
+    es_SetCallback(entity_block_hit_animate_scale, 6)
+    es_Restart
+    es_End
+};
+
+EntityModelScript Entity_HeartBlockContent_RenderScriptIdle = STANDARD_ENTITY_MODEL_SCRIPT(Entity_HeartBlockContent_RenderHeartSleeping, RENDER_MODE_ALPHATEST);
+
+EntityModelScript Entity_HeartBlockContent_RenderScriptHit = STANDARD_ENTITY_MODEL_SCRIPT(Entity_HeartBlockContent_RenderHeartAwake, RENDER_MODE_SURFACE_XLU_LAYER2);
+
+EntityModelScript Entity_HeartBlockContent_RenderScriptAfterHit = STANDARD_ENTITY_MODEL_SCRIPT(Entity_HeartBlockContent_RenderHeartHappy, RENDER_MODE_SURFACE_XLU_LAYER2);
+
+EntityModelScript Entity_HeartBlock_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(Entity_HeartBlock_Render, RENDER_MODE_SURFACE_XLU_LAYER3);
+
+EntityBlueprint Entity_HeartBlockFrame = {
+    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200,
+    .typeDataSize = sizeof(BlockData),
+    .renderCommandList = Entity_HeartBlock_RenderScript,
+    .modelAnimationNodes = 0x00000000,
+    .fpInit = entity_base_block_init,
+    .updateEntityScript = Entity_InertBlock_Script,
+    .fpHandleCollision = entity_block_handle_collision,
+    {{ entity_model_HeartBlock_ROM_START, entity_model_HeartBlock_ROM_END }},
+    .entityType = ENTITY_TYPE_HEALING_BLOCK_FRAME,
+    .aabbSize = { 25, 25, 25 }
+};
+
+EntityBlueprint Entity_HeartBlockContent = {
+    .flags = ENTITY_FLAGS_SKIP_UPDATE_INVERSE_ROTATION_MATRIX,
+    .typeDataSize = sizeof(HeartBlockContentData),
+    .renderCommandList = Entity_HeartBlockContent_RenderScriptIdle,
+    .modelAnimationNodes = 0x00000000,
+    .fpInit = entity_HeartBlockContent_init,
+    .updateEntityScript = Entity_HeartBlockContent_Script,
+    .fpHandleCollision = NULL,
+    {{ entity_model_HeartBlockContent_ROM_START, entity_model_HeartBlockContent_ROM_END }},
+    .entityType = ENTITY_TYPE_HEALING_BLOCK_CONTENT,
+    .aabbSize = { 18, 6, 18 }
+};
+
+EntityBlueprint Entity_HeartBlock = {
+    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200,
+    .typeDataSize = sizeof(BlockData),
+    .renderCommandList = Entity_HeartBlock_RenderScript,
+    .modelAnimationNodes = 0x00000000,
+    .fpInit = entity_HeartBlock_init,
+    .updateEntityScript = Entity_HeartBlock_Script,
+    .fpHandleCollision = entity_block_handle_collision,
+    {{ entity_model_HeartBlock_ROM_START, entity_model_HeartBlock_ROM_END }},
+    .entityType = ENTITY_TYPE_HEALING_BLOCK,
+    .aabbSize = { 25, 25, 25 }
+};

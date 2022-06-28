@@ -511,7 +511,7 @@ typedef struct HeartBlockContentData {
     /* 0x002 */ s8 sparkleTimer;
     /* 0x003 */ s8 sparkleTrailTimer;
     /* 0x004 */ f32 sparkleTrailPosY;
-    /* 0x008 */ char heartbeatTimer;
+    /* 0x008 */ u8 heartbeatTimer;
     /* 0x009 */ u8 unk_09;
     /* 0x00A */ u8 sparkleEffectType;
     /* 0x00B */ char unk_0B; // padding?
@@ -526,13 +526,9 @@ typedef struct HeartBlockContentData {
     /* 0x028 */ f32 yawBuffer[10];
     /* 0x050 */ f32 unk_50;
     /* 0x054 */ f32 rotationRate;
-    /* 0x058 */ char unk_58[0x78];
-    /* 0x0D0 */ u16 yawBufferPosX;
-    /* 0x0D4 */ f32 yawBufferX[20];
-    /* 0x124 */ s32 unk_124;
-    /* 0x128 */ s32* unk_128;
-    /* 0x12C */ s32* unk_12C;
-} HeartBlockContentData;
+    /* 0x058 */ Mtx unk_58;
+    /* 0x098 */ Mtx unk_98;
+} HeartBlockContentData; // size = 0xD8
 
 typedef struct WoodenCrateData {
     /* 0x000 */ s32 itemID;
