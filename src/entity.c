@@ -397,7 +397,7 @@ void appendGfx_entity_model(EntityModel* model) {
         foldImage.height = imageData->height;
         foldImage.xOffset = -imageData->width / 2;
         foldImage.yOffset = imageData->height / 2;
-        foldImage.unk_10 = 255;
+        foldImage.opacity = 255;
         guMtxL2F(foldMtx, &model->transform);
         fold_appendGfx_component(0, &foldImage, 0, foldMtx);
     }
@@ -706,7 +706,7 @@ void draw_entity_model_E(s32 modelIdx, Mtx* transformMtx) {
         foldImage.height = imageData->height;
         foldImage.xOffset = -imageData->width / 2;
         foldImage.yOffset = imageData->height / 2;
-        foldImage.unk_10 = 255;
+        foldImage.opacity = 255;
         guMtxL2F(foldMtx, &model->transform);
         fold_appendGfx_component(0, &foldImage, 0, foldMtx);
     }

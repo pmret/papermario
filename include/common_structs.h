@@ -2453,7 +2453,7 @@ typedef struct FoldImageRecPart {
     /* 0x0A */ u16 height;
     /* 0x0C */ s16 xOffset;
     /* 0x0E */ s16 yOffset;
-    /* 0x10 */ u8 unk_10; // alpha?
+    /* 0x10 */ u8 opacity; // alpha?
     /* 0x11 */ char unk_11[0x7];
 } FoldImageRecPart; // size = 0x18
 

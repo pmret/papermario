@@ -1,5 +1,9 @@
 #include "sprite.h"
 
+extern union {
+    s32 s32;
+    u8 b[4];
+} D_802DF540;
 extern s32 D_802DF590[];
 extern s32 D_802DFA58[];
 extern s32 spr_allocateBtlComponentsOnWorldHeap;
@@ -9,7 +13,7 @@ extern SpriteAnimData* spr_npcSprites[0xEA];
 extern PlayerCurrentAnimInfo spr_playerCurrentAnimInfo[3];
 extern SpriteInstance D_802DFA48[51];
 extern u8 spr_npcSpriteInstanceCount[];
-extern s32** D_802DFE44;
+extern Vtx* D_802DFE44;
 extern s32 D_802DFE48[22];
 void spr_init_player_raster_cache(s32 cacheSize, s32 maxRasterSize);
 
@@ -87,14 +91,19 @@ PlayerSpriteSet spr_playerSpriteSets[] = {
 
 void spr_init_quad_cache(void) {
     s32 i;
-    D_802DFE44 = _heap_malloc(&gSpriteHeapPtr, 0x580);
+    D_802DFE44 = _heap_malloc(&gSpriteHeapPtr, 22 * 4 * sizeof(*D_802DFE44));
 
     for (i = 0; i < 22; i++) {
         D_802DFE48[i] = -1;
     }
 }
 
-INCLUDE_ASM(s32, "sprite", spr_get_cached_quad);
+Vtx* spr_get_cached_quad(s32 quadIndex) {
+    s32* temp_v1 = &D_802DFE48[quadIndex];
+
+    *temp_v1 |= 0x1F;
+    return &D_802DFE44[quadIndex * 4];
+}
 
 INCLUDE_ASM(s32, "sprite", spr_make_quad_for_size);
 
@@ -104,7 +113,87 @@ INCLUDE_ASM(s32, "sprite", spr_clear_quad_cache);
 
 INCLUDE_ASM(s32, "sprite", spr_appendGfx_component_flat);
 
-INCLUDE_ASM(s32, "sprite", spr_appendGfx_component);
+void spr_appendGfx_component(
+    SpriteRasterCacheEntry* cache, 
+    f32 dx, f32 dy, f32 dz, 
+    f32 rotX, f32 rotY, f32 rotZ, 
+    f32 scaleX, f32 scaleY, f32 scaleZ, 
+    s32 opacity, void* palette, Matrix4f mtx) 
+{
+    Matrix4f sp20;
+    Matrix4f sp60;
+    FoldImageRecPart spA0;
+    s32 quadIndex;
+    Vtx* quadVtx;
+    u32 temp_v1;
+    s32 width;
+    s32 height;
+
+    guTranslateF(sp60, dx, dy, dz);
+    guMtxCatF(sp60, mtx, sp20);
+
+    if (rotY != 0.0f) {
+        guRotateF(sp60, rotY, 0.0f, 1.0f, 0.0f);
+        guMtxCatF(sp60, sp20, sp20);
+    }
+    if (rotZ != 0.0f) {
+        guRotateF(sp60, rotZ, 0.0f, 0.0f, 1.0f);
+        guMtxCatF(sp60, sp20, sp20);
+    }
+    if (rotX != 0.0f) {
+        guRotateF(sp60, rotX, 1.0f, 0.0f, 0.0f);
+        guMtxCatF(sp60, sp20, sp20);
+    }
+
+    if (scaleX != 1.0f || scaleY != 1.0f || scaleZ != 1.0f) {
+        guScaleF(sp60, scaleX, scaleY, scaleZ);
+        guMtxCatF(sp60, sp20, sp20);
+    }
+
+    guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+    gSPMatrix(gMasterGfxPos++, VIRTUAL_TO_PHYSICAL(&gDisplayContext->matrixStack[gMatrixListPos++]), 
+              G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+
+    if (D_80151328->flags & 1) {
+        if ((u8) opacity == 255) {
+            gSPDisplayList(gMasterGfxPos++, D_802DF460);
+        } else {
+            gSPDisplayList(gMasterGfxPos++, D_802DF490);
+        }
+    } else {
+        if ((u8) opacity == 255) {
+            gSPDisplayList(gMasterGfxPos++, D_802DF3F0);
+        } else {
+            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, (u8) opacity);
+            gSPDisplayList(gMasterGfxPos++, D_802DF428);
+        }
+    }
+
+    width = cache->width;
+    height = cache->height;
+    quadIndex = cache->quadCacheIndex;
+    quadVtx = NULL;
+    if (!(D_802DF540.s32 & (0x80000000 | 0x40000000 | 0x20000000 | 0x10000000))) {
+        quadVtx = spr_get_quad_for_size(&quadIndex, width, height);
+        cache->quadCacheIndex = quadIndex;
+    }
+
+    if (quadVtx != NULL) {
+        spr_appendGfx_component_flat(quadVtx, cache->image, palette, width, height, rotY, sp20, (u8) opacity);
+    } else {
+        spA0.raster = cache->image;
+        spA0.palette = palette;
+        spA0.width = width;
+        spA0.height = height;
+        spA0.xOffset = -(width / 2);
+        spA0.yOffset = height;
+        spA0.opacity = opacity;
+        if (fold_appendGfx_component(D_802DF540.b[3], &spA0, 0x80000, sp20) == 1) {
+            D_802DF540.s32 &= ~(0x80000000 | 0x40000000 | 0x20000000 | 0x10000000);
+        }
+    }
+    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+}
 
 void spr_transform_point(s32 rotX, s32 rotY, s32 rotZ, f32 inX, f32 inY, f32 inZ, f32* outX, f32* outY, f32* outZ) {
     if (rotX == 0 && rotY == 0 && rotZ == 0) {

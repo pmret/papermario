@@ -36,7 +36,7 @@ typedef struct SpriteRasterCacheEntry {
     /* 0x04 */ u8 width;
     /* 0x05 */ u8 height;
     /* 0x06 */ u8 palette;
-    /* 0x07 */ u8 quadCacheIndex;
+    /* 0x07 */ s8 quadCacheIndex;
 } SpriteRasterCacheEntry; // size = 0x8
 
 typedef struct SpriteHeader {
@@ -87,7 +87,7 @@ extern PlayerSpriteSet spr_playerSpriteSets[7];
 
 void spr_init_quad_cache(void);
 
-Vtx* spr_get_cached_quad(s32* quadIndex);
+Vtx* spr_get_cached_quad(s32 quadIndex);
 
 void spr_make_quad_for_size(Vtx* quad, s32 width, s32 height);
 
@@ -99,18 +99,17 @@ void spr_appendGfx_component_flat(
     Vtx* vertices,
     void* raster, void* palette,
     s32 width, s32 height,
-    s32 arg5,
+    f32 arg5,
     Matrix4f mtx,
     s32 alpha
 );
 
 void spr_appendGfx_component(
-    Vtx* vertices,
-    void* raster, void* palette,
-    s32 width, s32 height,
-    s32 arg5,
-    Matrix4f mtx,
-    s32 alpha
+    SpriteRasterCacheEntry* cache, 
+    f32 dx, f32 dy, f32 dz, 
+    f32 rotX, f32 rotY, f32 rotZ, 
+    f32 scaleX, f32 scaleY, f32 scaleZ, 
+    s32 opacity, void* palette, Matrix4f mtx
 );
 
 void spr_transform_point(s32 rotX, s32 rotY, s32 rotZ, f32 inX, f32 inY, f32 inZ, f32* outX, f32* outY, f32* outZ);
