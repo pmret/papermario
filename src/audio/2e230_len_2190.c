@@ -52,7 +52,7 @@ void snd_load_audio_data(s32 outputRate) {
     globals->unk_arr_94 = alHeapAlloc(alHeap, 1, 0x40);
     globals->outputRate = outputRate;
     snd_reset_instrument(globals->defaultInstrument);
-    func_80053370(&globals->unk_08);
+    func_80053370(&globals->defaultDrumEntry);
     func_800533A8(&globals->defaultPRGEntry);
     func_8005610C();
 
@@ -157,7 +157,7 @@ void snd_reset_instrument(Instrument* instrument) {
     instrument->sampleRate = 0.5f;
 }
 
-void func_80053370(AlUnkMu* arg0) {
+void func_80053370(BGMDrumInfo* arg0) {
     arg0->unk_00 = 8208;
     arg0->unk_02 = 4800;
     arg0->unk_04 = 0x7F;
@@ -773,7 +773,7 @@ s32 snd_fetch_SBN_file(u32 fileIdx, s32 format, SBNFileEntry* arg2) {
     return ret;
 }
 
-void snd_load_PER(SndGlobals* arg0, s32 romAddr) {
+void snd_load_PER(SndGlobals* globals, s32 romAddr) {
     PERHeader header;
     u32 size;
     s32 numItemsLeft;
@@ -782,13 +782,13 @@ void snd_load_PER(SndGlobals* arg0, s32 romAddr) {
 
     snd_read_rom(romAddr, &header, sizeof(PERHeader));
     size = header.size - sizeof(PERHeader);
-    snd_read_rom(romAddr + sizeof(PERHeader), arg0->dataPER, size);
+    snd_read_rom(romAddr + sizeof(PERHeader), globals->dataPER, size);
     numItems = size / sizeof(PEREntry);
     numItemsLeft = 6 - numItems;
     if (numItemsLeft > 0) {
-        end = &arg0->dataPER[numItems];
-        snd_copy_words(&arg0->unk_08, end, sizeof(AlUnkMu));
-        snd_copy_words(end, end + sizeof(AlUnkMu), numItemsLeft * sizeof(PEREntry) - sizeof(AlUnkMu));
+        end = &globals->dataPER[numItems];
+        snd_copy_words(&globals->defaultDrumEntry, end, sizeof(BGMDrumInfo));
+        snd_copy_words(end, end + sizeof(BGMDrumInfo), numItemsLeft * sizeof(PEREntry) - sizeof(BGMDrumInfo));
     }
 }
 

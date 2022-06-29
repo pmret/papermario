@@ -357,19 +357,7 @@ typedef struct SoundManager {
     /* 0x16C */ SoundPlayer unk_16C[8];
 } SoundManager; // size = 0x6CC
 
-typedef struct AlUnkMu {
-    /* 0x0 */ s16 unk_00;
-    /* 0x2 */ s16 unk_02;
-    /* 0x4 */ s8 unk_04;
-    /* 0x5 */ s8 unk_05;
-    /* 0x6 */ s8 unk_06;
-    /* 0x7 */ s8 unk_07;
-    /* 0x8 */ s8 unk_08;
-    /* 0x9 */ s8 unk_09;
-    /* 0xA */ s8 unk_0A;
-} AlUnkMu;
-
-typedef struct AlUnkVoice { // Track?
+typedef struct AlUnkVoice {
     /* 0x00 */ Instrument* ins;
     /* 0x04 */ f32 sampleRate;
     /* 0x08 */ s32 unk_08;
@@ -378,7 +366,7 @@ typedef struct AlUnkVoice { // Track?
     /* 0x0F */ u8 reverb;
     /* 0x10 */ u8 unk_10;
     /* 0x11 */ char unk_11[0x3];
-    /* 0x14 */ u8* unk_14; // ultimately from bgm_player->unk_10 ?
+    /* 0x14 */ s32* unk_14; // ultimately from bgm_player->unk_10 ?
     /* 0x18 */ s32* unk_18; // ultimately from bgm_player->unk_14 ?
     /* 0x1C */ u8* unk_1C;
     /* 0x20 */ s32 unk_20;
@@ -422,12 +410,18 @@ typedef struct BGMHeader {
 } BGMHeader; // size = 0x24
 
 typedef struct BGMDrumInfo {
-    /* 0x00 */ Q32 unk_00;
-    /* 0x04 */ Q32 unk_04;
-    /* 0x08 */ Q32 unk_08;
+    /* 0x0 */ s16 unk_00;
+    /* 0x2 */ s16 unk_02;
+    /* 0x4 */ u8 unk_04;
+    /* 0x5 */ s8 unk_05;
+    /* 0x6 */ s8 unk_06;
+    /* 0x7 */ u8 unk_07;
+    /* 0x8 */ u8 unk_08;
+    /* 0x9 */ u8 unk_09;
+    /* 0xA */ u8 unk_0A;
+    /* 0xB */ char pad_B[1];
 } BGMDrumInfo; // size = 0xC
 
-//TODO -- could be same as AlUnkMu?
 typedef struct BGMInstrumentInfo {
     /* 0x00 */ u16 unk_00;
     /* 0x02 */ u8 unk_02;
@@ -488,7 +482,7 @@ typedef struct PERHeader {
 } PERHeader; // size = 0x10
 
 typedef struct PEREntry {
-    /* 0x00 */ char unk_00[0x90];
+    /* 0x00 */ BGMDrumInfo drums[12];
 } PEREntry; // size = 0x90;
 
 typedef struct SBNFileEntry {
@@ -540,7 +534,7 @@ typedef struct SndGlobalsSub6C {
 typedef struct SndGlobals {
     /* 0x0000 */ f32 outputRate;
     /* 0x0004 */ Instrument* defaultInstrument;
-    /* 0x0008 */ AlUnkMu unk_08;
+    /* 0x0008 */ BGMDrumInfo defaultDrumEntry;
     /* 0x0014 */ BGMInstrumentInfo defaultPRGEntry;
     /* 0x001C */ s32 baseRomOffset;
     /* 0x0020 */ SBNFileEntry* sbnFileList;
@@ -941,7 +935,7 @@ void func_80052B44(AlUnkVoice*);
 void func_80052BF8(AlUnkVoice*, s32*);
 
 void snd_reset_instrument(Instrument*);
-void func_80053370(AlUnkMu*);
+void func_80053370(BGMDrumInfo*);
 void func_800533A8(BGMInstrumentInfo*);
 void func_80053654(SndGlobals*);
 void snd_initialize_bgm_fade(Fade*, s32, s32, s32);
