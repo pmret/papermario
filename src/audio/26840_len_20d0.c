@@ -185,7 +185,114 @@ void snd_enqueue_sfx_event(SoundManager* manager, s32 soundID, s16 volume, s16 p
     }
 }
 
+//TODO reference to D_8007836A saved too soon
+#ifdef NONMATCHING
+typedef struct AlUnk_8007836A {
+    /* 0x00 */ s16 soundID;
+    /* 0x02 */ u16 unk_02;
+    /* 0x04 */ u8 unk_04;
+    /* 0x05 */ char unk_05[0x1];
+} AlUnk_8007836A;
+
+extern AlUnk_8007836A D_8007836A[2];
+
+void func_8004B748(SoundManager* manager) {
+    SoundSFXEntry newEntry;
+    SoundSFXEntry* sfxEntry;
+    u32 k;
+    s32 count;
+    u32 pos;
+    u32 i;
+    u32 j;
+    s32 x;
+    
+    manager->playCounter++;
+    if (manager->unk_168 != 0) {
+        func_8004D4BC(manager);
+        manager->unk_168 = 0;
+    }
+
+    for (i = 0; i < ARRAY_COUNT(manager->unk_90); i++) {
+        k = manager->unk_90[i].unk_0;
+        if (k == 0) {
+            // do nothing
+        } else if (k < 2) {
+            x = D_8007836A[k].unk_02;
+            if (x != 0) {
+                for (j = 0; j < ARRAY_COUNT(manager->unk_16C); j++) {
+                    if (x == manager->unk_16C[j].currentSoundID) {
+                        newEntry.soundID = D_8007836A[k].soundID;
+                        newEntry.upperSoundID = 0;
+                        newEntry.pitchShift = 0;
+                        if ((D_8007836A[k].unk_04 & 1) && (manager->unk_90[i].volume != 0)) {
+                            newEntry.volume = (manager->unk_90[i].volume << 8) + 0xFF;
+                        } else {
+                            newEntry.volume = 0;
+                        }
+                        newEntry.pan = 0;
+                        func_8004BA74(manager, &newEntry, NULL);
+                        break;
+                    }
+                }
+            } else {
+                newEntry.soundID = D_8007836A[k].soundID;
+                newEntry.upperSoundID = 0;
+                newEntry.volume = 0;
+                newEntry.pitchShift = 0;
+                newEntry.pan = 0;
+                func_8004BA74(manager, &newEntry, NULL);
+            }
+        }
+        manager->unk_90[i].s32 = 0;
+    }
+    
+    for (i = 0; i < ARRAY_COUNT(manager->unk_A0); i++) {
+        if (manager->unk_A0[i].unk_00 != 0) {
+            newEntry.soundID = 1;
+            newEntry.upperSoundID = 0;
+            newEntry.volume = 0;
+            newEntry.pitchShift = 0;
+            newEntry.pan = 0;
+            func_8004BA74(manager, &newEntry, &manager->unk_A0[i]);
+        }
+        manager->unk_A0[i].unk_00 = 0;
+    }
+    
+    count = manager->sfxQueueNextPos - manager->sfxQueuePosOffset;
+    if (count < 0) {
+        count += ARRAY_COUNT(manager->soundQueue);
+    }
+    pos = manager->sfxQueuePosOffset;
+    if (count > 0 && count < ARRAY_COUNT(manager->soundQueue)) {
+        for (i = 0; i < count; i++) {
+            sfxEntry = &manager->soundQueue[pos];
+            if (sfxEntry->soundID & 0x23FF) {
+                if (sfxEntry->soundID & 0x8000) {
+                    _snd_stop_sound_by_id(manager, sfxEntry->soundID);
+                } else if (!(sfxEntry->soundID & 0x1C00)) {
+                    func_8004BA74(manager, sfxEntry, NULL);
+                } else {
+                    if (sfxEntry->soundID & 0xC00) {
+                        snd_set_bits_C00(manager, sfxEntry->soundID);
+                    }
+                    if (sfxEntry->soundID & 0x1000) {
+                        snd_set_modifiers(manager, sfxEntry);
+                    }
+                }
+            }
+            sfxEntry->soundID = 0;
+            
+            pos++;
+            if (pos >= ARRAY_COUNT(manager->soundQueue)) {
+                pos = 0;
+            }
+        }
+        manager->sfxQueuePosOffset = manager->sfxQueueNextPos;
+    }
+}
+#else
 INCLUDE_ASM(void, "audio/26840_len_20d0", func_8004B748, SoundManager* manager);
+#endif
 
 s32 func_8004B9E4(SoundManager* manager, s32 arg1) {
     s32 a1 = (u8) arg1;
@@ -413,9 +520,9 @@ void func_8004C578(SoundManager* manager, SoundPlayer* player, AlUnkVoice* arg2,
                 if (!(player->sfxParamsFlags & 0x10)) {
                     player->actualSampleRate = snd_tune_param_to_timescale(
                         ((player->tuneLerp.current >> 0x10) - player->sfxInstrumentRef->detune) + player->masterPitchShift) * player->sfxInstrumentRef->sampleRate;
-                    if (arg2->unk_04 != player->actualSampleRate) {
-                        arg2->unk_43 |= 8;
-                        arg2->unk_04 = player->actualSampleRate;
+                    if (arg2->sampleRate != player->actualSampleRate) {
+                        arg2->unk_flags_43 |= 8;
+                        arg2->sampleRate = player->actualSampleRate;
                     }
                 }
                 
@@ -424,9 +531,9 @@ void func_8004C578(SoundManager* manager, SoundPlayer* player, AlUnkVoice* arg2,
                 } else {
                     pan = player->sfxPan;
                 }
-                if (arg2->unk_0E != pan) {
-                    arg2->unk_0E = pan;
-                    arg2->unk_43 |= 0x10;
+                if (arg2->pan != pan) {
+                    arg2->pan = pan;
+                    arg2->unk_flags_43 |= 0x10;
                  }
                 
                 volume = snd_get_scaled_volume(manager, player);
@@ -459,18 +566,18 @@ void func_8004C578(SoundManager* manager, SoundPlayer* player, AlUnkVoice* arg2,
             if (arg2->unk_45 <= manager->unk_BC) {
                 func_80053888(arg2, arg3);
                 if (!(player->sfxParamsFlags & 8) && player->masterPan != 0) {
-                    arg2->unk_0E = player->masterPan;
+                    arg2->pan = player->masterPan;
                 } else {
-                    arg2->unk_0E = player->sfxPan;
+                    arg2->pan = player->sfxPan;
                 }
     
                 arg2->reverb = player->reverb;
                 arg2->unk_40 = snd_get_scaled_volume(manager, player);
                 arg2->unk_14 = player->unk10;
                 arg2->unk_18 = player->unk14;
-                arg2->unk_00 = player->sfxInstrumentRef;
-                arg2->unk_04 = player->actualSampleRate;
-                arg2->unk_43 = 2;
+                arg2->ins = player->sfxInstrumentRef;
+                arg2->sampleRate = player->actualSampleRate;
+                arg2->unk_flags_43 = 2;
                 arg2->unk_45 = manager->unk_BC;
                 arg2->unk_44 = arg2->unk_45;
                 arg2->unk_10 = manager->unk_BE;
@@ -499,7 +606,7 @@ s16 snd_get_scaled_volume(SoundManager* manager, SoundPlayer* player) {
 
 void func_8004C884(SoundManager* manager, SoundPlayer* player, AlUnkVoice* arg2, u8 arg3) {
     s32 var_v0_3;
-    s32 var_v0_7;
+    s32 pitchShift;
     s32 temp_a0;
     u8 opcode;
     u32 var_a1;
@@ -572,9 +679,9 @@ void func_8004C884(SoundManager* manager, SoundPlayer* player, AlUnkVoice* arg2,
             if (arg2->unk_45 <= manager->unk_BC) {
                 func_80053888(arg2, arg3);
                 if ((player->sfxParamsFlags & 8) || (player->masterPan == 0)) {
-                    arg2->unk_0E = player->sfxPan;
+                    arg2->pan = player->sfxPan;
                 } else {
-                    arg2->unk_0E = player->masterPan;
+                    arg2->pan = player->masterPan;
                 }
                 
                 arg2->reverb = player->reverb;
@@ -585,11 +692,11 @@ void func_8004C884(SoundManager* manager, SoundPlayer* player, AlUnkVoice* arg2,
                 }
                 arg2->unk_14 = (u8*) var_v0_3;
                 arg2->unk_18 = (s32*) player->unk14;
-                arg2->unk_00 = (s32) player->sfxInstrumentRef;
+                arg2->ins = (s32) player->sfxInstrumentRef;
                 arg2->unk_10 = manager->unk_BE;
                 
                 arg2->unk_45 = manager->unk_BC;
-                arg2->unk_43 = 2;
+                arg2->unk_flags_43 = 2;
                 var_s3 = TRUE;
                 arg2->unk_44 = manager->unk_BC;
                 player->changed.tune = 1;
@@ -629,11 +736,11 @@ void func_8004C884(SoundManager* manager, SoundPlayer* player, AlUnkVoice* arg2,
         }
         if (player->changed.pan || player->changed.reverb) {
             if ((player->sfxParamsFlags & 8) || (player->masterPan == 0)) {
-                arg2->unk_0E = player->sfxPan;
+                arg2->pan = player->sfxPan;
             } else {
-                arg2->unk_0E = player->masterPan;
+                arg2->pan = player->masterPan;
             }
-            arg2->unk_43 |= 0x10;
+            arg2->unk_flags_43 |= 0x10;
             arg2->reverb = player->reverb;
         }
     }
@@ -642,19 +749,19 @@ void func_8004C884(SoundManager* manager, SoundPlayer* player, AlUnkVoice* arg2,
         arg2->unk_3D |= 0x20;
     }
     if (player->changed.tune) {
-        f32 temp_f2;
+        f32 adjustedSampleRate;
         if (player->sfxParamsFlags & 0x10) {
-            var_v0_7 = (player->unk_92 + (s16)(player->tuneLerp.current >> 0x10)) - player->sfxInstrumentRef->detune;
-            temp_f2 = snd_tune_param_to_timescale(var_v0_7 + player->unk_94) * player->sfxInstrumentRef->sampleRate;
-            player->actualSampleRate = temp_f2;
+            pitchShift = (player->unk_92 + (s16)(player->tuneLerp.current >> 0x10)) - player->sfxInstrumentRef->detune;
+            adjustedSampleRate = snd_tune_param_to_timescale(pitchShift + player->unk_94) * player->sfxInstrumentRef->sampleRate;
+            player->actualSampleRate = adjustedSampleRate;
         } else {
-            var_v0_7 = ((player->unk_92 + (s16)(player->tuneLerp.current >> 0x10)) - player->sfxInstrumentRef->detune) + player->unk_94;
-            temp_f2 = snd_tune_param_to_timescale(var_v0_7 + player->masterPitchShift) * player->sfxInstrumentRef->sampleRate;
-            player->actualSampleRate = temp_f2;
+            pitchShift = ((player->unk_92 + (s16)(player->tuneLerp.current >> 0x10)) - player->sfxInstrumentRef->detune) + player->unk_94;
+            adjustedSampleRate = snd_tune_param_to_timescale(pitchShift + player->masterPitchShift) * player->sfxInstrumentRef->sampleRate;
+            player->actualSampleRate = adjustedSampleRate;
         }
-        if ((arg2->unk_45 == manager->unk_BC) && (arg2->unk_04 != temp_f2)) {
-            arg2->unk_43 |= 8;
-            arg2->unk_04 = player->actualSampleRate;
+        if ((arg2->unk_45 == manager->unk_BC) && (arg2->sampleRate != adjustedSampleRate)) {
+            arg2->unk_flags_43 |= 8;
+            arg2->sampleRate = player->actualSampleRate;
         }
     }
     player->changed.all = 0;

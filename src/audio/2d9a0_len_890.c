@@ -42,7 +42,7 @@ void func_80052B44(AlUnkVoice* arg0) {
     arg0->unk_0C = temp_lo >> 7;
     arg0->unk_08 = func_80052BC0(arg0->unk_28);
     arg0->unk_3D &= ~0x2;
-    arg0->unk_43 |= 0x4;
+    arg0->unk_flags_43 |= 0x4;
 }
 
 s32 func_80052BC0(s32 arg0) {

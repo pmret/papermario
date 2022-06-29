@@ -370,11 +370,11 @@ typedef struct AlUnkMu {
 } AlUnkMu;
 
 typedef struct AlUnkVoice { // Track?
-    /* 0x00 */ s32 unk_00; // pointer to something
-    /* 0x04 */ f32 unk_04;
+    /* 0x00 */ Instrument* ins;
+    /* 0x04 */ f32 sampleRate;
     /* 0x08 */ s32 unk_08;
     /* 0x0C */ s16 unk_0C;
-    /* 0x0E */ u8 unk_0E;
+    /* 0x0E */ u8 pan;
     /* 0x0F */ u8 reverb;
     /* 0x10 */ u8 unk_10;
     /* 0x11 */ char unk_11[0x3];
@@ -397,7 +397,7 @@ typedef struct AlUnkVoice { // Track?
     /* 0x3F */ u8 unk_3F;
     /* 0x40 */ s16 unk_40;
     /* 0x42 */ u8 unk_42;
-    /* 0x43 */ u8 unk_43;
+    /* 0x43 */ u8 unk_flags_43;
     /* 0x44 */ s8 unk_44;
     /* 0x45 */ u8 unk_45;
     /* 0x46 */ char unk_46[2];
@@ -422,7 +422,7 @@ typedef struct BGMHeader {
 } BGMHeader; // size = 0x24
 
 typedef struct BGMDrumInfo {
-    /* 0x00 */ s32 unk_00;
+    /* 0x00 */ Q32 unk_00;
     /* 0x04 */ Q32 unk_04;
     /* 0x08 */ Q32 unk_08;
 } BGMDrumInfo; // size = 0xC
@@ -590,8 +590,8 @@ typedef struct SndGlobals {
 
 typedef struct BGMPlayerTrack {
     /* 0x00 */ u8* bgmReadPos;
-    /* 0x04 */ u32 unk_04;
-    /* 0x08 */ u32 prevReadPos; //? see snd_BGMCmd_FC_Jump
+    /* 0x04 */ u8* unk_04;
+    /* 0x08 */ u8* prevReadPos; //? see snd_BGMCmd_FC_Jump
     /* 0x0C */ Instrument* unk_0C;
     /* 0x10 */ s32* unk_10[2];
     /* 0x18 */ s32 subTrackVolume;
@@ -623,7 +623,7 @@ typedef struct BGMPlayerTrack {
     /* 0x52 */ u8 unk_52;
     /* 0x53 */ u8 unk_53;
     /* 0x54 */ u8 unk_54;
-    /* 0x55 */ s8 trackTremoloSpeed;
+    /* 0x55 */ u8 trackTremoloSpeed;
     /* 0x56 */ u8 trackTremoloTime;
     /* 0x57 */ u8 unk_57;
     /* 0x58 */ u8 unk_58;
@@ -634,14 +634,8 @@ typedef struct BGMPlayerTrack {
     /* 0x5D */ char unk_5D[0x3];
 } BGMPlayerTrack; // size = 0x60;
 
-typedef struct AlUnkPineapple {
-    /* 0x00 */ char unk_00[0x1E];
-    /* 0x1E */ u16 unk_1E;
-    /* 0x20 */ s32 unk_20;
-} AlUnkPineapple; // size = 0x??
-
 typedef struct AlUnkTheta {
-    /* 0x00 */ AlUnkPineapple* unk_00;
+    /* 0x00 */ Instrument* ins;
     /* 0x00 */ f32 unk_04;
     /* 0x08 */ s16 unk_08;
     /* 0x0A */ s16 unk_0A;
@@ -984,7 +978,7 @@ void func_80056D78(u8, u16);
 void func_80056DCC(u8, u8);
 void func_80056EC0(u8, s8);
 void func_80056EE8(u8);
-void func_80056FA4(u8, u8, s32, f32, s16, u8, u8, s32);
+void func_80056FA4(u8, u8, Instrument*, f32, s16, u8, u8, s32);
 void func_80057224(u8, Instrument*);
 void func_80057344(u8, f32);
 void func_8005736C(u8, s16, s32, u8, u8);

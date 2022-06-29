@@ -73,14 +73,14 @@ void snd_load_audio_data(s32 outputRate) {
         func_80056EC0(i, 0);
         func_80057224(i, globals->defaultInstrument);
         temp5 = &globals->voices[i];
-        temp5->unk_00 = 0;
-        temp5->unk_04 = 0;
+        temp5->ins = NULL;
+        temp5->sampleRate = 0;
         temp5->unk_0C = -1;
-        temp5->unk_0E = 0xFF;
+        temp5->pan = 0xFF;
         temp5->reverb = 0xFF;
         temp5->unk_10 = 0;
         temp5->unk_42 = 0;
-        temp5->unk_43 = 0;
+        temp5->unk_flags_43 = 0;
         temp5->unk_44 = 0;
         temp5->unk_45 = 0;
     }
@@ -316,7 +316,7 @@ void func_80053654(SndGlobals* arg0) {
 
     for (i = 0; i < ARRAY_COUNT(arg0->voices); i++) {
         AlUnkVoice* voice = &arg0->voices[i];
-        u8 unk_43 = voice->unk_43;
+        u8 unk_flags = voice->unk_flags_43;
 
         if (voice->unk_42 != 0) {
             func_80056EE8(i);
@@ -325,22 +325,22 @@ void func_80053654(SndGlobals* arg0) {
             voice->unk_45 = 0;
         }
 
-        if (unk_43 & 2) {
+        if (unk_flags & 2) {
             func_80052BF8(voice, &voice->unk_14);
-            func_80056FA4(i, voice->unk_10, voice->unk_00, voice->unk_04, voice->unk_0C, voice->unk_0E, voice->reverb, voice->unk_08);
+            func_80056FA4(i, voice->unk_10, voice->ins, voice->sampleRate, voice->unk_0C, voice->pan, voice->reverb, voice->unk_08);
             voice->unk_45 = voice->unk_44;
         } else {
-            if (unk_43 & 8) {
-                func_80057344(i, voice->unk_04);
+            if (unk_flags & 8) {
+                func_80057344(i, voice->sampleRate);
             }
 
-            if (unk_43 & 4) {
-                func_8005736C(i, voice->unk_0C, voice->unk_08, voice->unk_0E, voice->reverb);
-            } else if (unk_43 & 0x10) {
-                func_80057548(i, voice->unk_0E, voice->reverb);
+            if (unk_flags & 4) {
+                func_8005736C(i, voice->unk_0C, voice->unk_08, voice->pan, voice->reverb);
+            } else if (unk_flags & 0x10) {
+                func_80057548(i, voice->pan, voice->reverb);
             }
         }
-        voice->unk_43 = 0;
+        voice->unk_flags_43 = 0;
     }
 }
 
@@ -348,7 +348,7 @@ void func_80053888(AlUnkVoice* arg0, u8 arg1) {
     if (arg0->unk_45 != 0) {
         arg0->unk_1C = 0;
         arg0->unk_42 = 1;
-        arg0->unk_43 = 0;
+        arg0->unk_flags_43 = 0;
         func_800576EC(arg1, 0, AUDIO_SAMPLES);
     }
 }
@@ -356,7 +356,7 @@ void func_80053888(AlUnkVoice* arg0, u8 arg1) {
 void func_800538C4(AlUnkVoice* arg0, u8 arg1) {
     arg0->unk_1C = 0;
     arg0->unk_42 = 1;
-    arg0->unk_43 = 0;
+    arg0->unk_flags_43 = 0;
     func_800576EC(arg1, 0, AUDIO_SAMPLES);
 }
 

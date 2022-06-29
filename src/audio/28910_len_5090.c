@@ -633,7 +633,7 @@ void snd_initialize_bgm_player(BGMPlayer* player) {
 
     for (i = 0; i < ARRAY_COUNT(player->unk_85C); i++) {
         AlUnkTheta* temp_v0_2 = &player->unk_85C[i];
-        temp_v0_2->unk_00 = -1;
+        temp_v0_2->ins = -1;
         temp_v0_2->unk_04 = 2.0f;
         temp_v0_2->unk_14 = 0;
         temp_v0_2->unk_16 = 0;
