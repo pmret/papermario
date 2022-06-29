@@ -878,7 +878,7 @@ segments:
     - [0x10BF10, .data, entity/HeartBlock]
     - [0x10C090, .data, entity/SuperBlock]
     - [0x10C220, .data, entity/SimpleSpring]
-    - [0x10C300, .data, entity/BlockDataA]
+    - [0x10C300, .data, entity/HiddenPanel]
     - [0x10C3B0, .data, entity/BlockDataB]
     - [0x10C6E0, .data, entity/BlockDataC]
     - [0x10C780, .data, entity/BlockDataD]

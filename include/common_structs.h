@@ -574,7 +574,30 @@ typedef struct BlueWarpPipeData {
 
 typedef struct SimpleSpringData {
     /* 0x00 */ s32 launchVelocity;
-} SimpleSpringData;
+} SimpleSpringData; // size = 0x04
+
+typedef struct HiddenPanelData {
+    /* 0x00 */ s8 unk_00;
+    /* 0x01 */ s8 unk_01;
+    /* 0x02 */ s8 unk_02;
+    /* 0x03 */ s8 unk_03;
+    /* 0x04 */ s8 unk_04;
+    /* 0x05 */ s8 unk_05;
+    /* 0x06 */ u16 unk_06;
+    /* 0x08 */ s32 unk_08;
+    /* 0x0C */ s32 unk_0C;
+    /* 0x10 */ s32 unk_10;
+    /* 0x14 */ s32 unk_14;
+    /* 0x18 */ Vec3i unk_18;
+    /* 0x24 */ f32 unk_24;
+    /* 0x28 */ f32 unk_28;
+    /* 0x2C */ f32 unk_2C;
+    /* 0x30 */ f32 unk_30;
+    /* 0x34 */ Matrix4f unk_34;
+    /* 0x74 */ u16 unk_74;
+    /* 0x76 */ char unk_76[0x2];
+    /* 0x78 */ s32* unk_78;
+}   HiddenPanelData; // size = 0x7C
 
 // END ENTITY-SPECIFIC STRUCTS
 
@@ -636,6 +659,7 @@ typedef struct Entity {
         HeartBlockContentData* heartBlockContent;
         SuperBlockContentData* superBlockContent;
         SimpleSpringData* simpleSpring;
+        HiddenPanelData* hiddenPanel;
         s32* unk;
     } dataBuf;
     /* 0x44 */ Vec3s* vertexData;
@@ -2387,9 +2411,9 @@ typedef struct PopupMessage {
 } PopupMessage; // size = 0x1C
 
 typedef struct Struct8015A578 {
-    /* 0x00 */ u8 unk_00;
+    /* 0x00 */ s8 unk_00;
     /* 0x01 */ u8 unk_01;
-    /* 0x02 */ u8 unk_02;
+    /* 0x02 */ s8 unk_02;
     /* 0x03 */ u8 unk_03[5];
     /* 0x08 */ f32 unk_08;
     /* 0x0C */ char unk_0C[0x4];
