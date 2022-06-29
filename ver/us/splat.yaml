@@ -863,6 +863,7 @@ segments:
     - [0x105F90, c, entity/HeartBlock]
     - [0x106EF0, c, entity/SuperBlock]
     - [0x107830, c, entity/SimpleSpring]
+    - [0x107A30, c, entity/HiddenPanel]
     - [0x1086A0, c, entity/Chest]
     - [0x109660, c, entity/WoodenCrate]
     - [0x10A230, c, entity/BlueWarpPipe]
@@ -876,7 +877,7 @@ segments:
     - [0x10BB90, .data, entity/ItemBlock]
     - [0x10BF10, .data, entity/HeartBlock]
     - [0x10C090, .data, entity/SuperBlock]
-    - [0x10C220, .data, entity/BlockData9]
+    - [0x10C220, .data, entity/SimpleSpring]
     - [0x10C300, .data, entity/BlockDataA]
     - [0x10C3B0, .data, entity/BlockDataB]
     - [0x10C6E0, .data, entity/BlockDataC]
@@ -12556,7 +12557,64 @@ segments:
       - [0xE64338, ia4, BlueSwitch_exclamationMark, 16, 32]
       - [0xE64438]
   - [0xE648D0, bin] # unk data
-  - [0xE657A0, bin] # unk data
+  - name: entity_model_ScriptSpring_gfx
+    dir: entity/model
+    type: code
+    start: 0xE657A0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE657A0, c, ScriptSpring_gfx]
+    - start: 0xE657A0
+      type: .data
+      name: ScriptSpring_gfx
+      subsegments:
+      - [0xE657A0]
+      - [0xE66000, ci8, ScriptSpring_tex1, 16, 16]
+      - [0xE66100, palette, ScriptSpring_tex1]
+      - [0xE66300]
+      - [0xE663A8, ci8, ScriptSpring_tex2, 16, 16]
+      - [0xE664A8, palette, ScriptSpring_tex2]
+      - [0xE666A8]
+      - [0xE66750, ci8, ScriptSpring_star, 32, 32]
+      - [0xE66B50, palette, ScriptSpring_star]
+      - [0xE66D50]
+  - name: entity_model_ScriptSpring_anim
+    dir: entity/model
+    type: code
+    start: 0xE67120
+    vram: 0x00000000
+    subsegments:
+    - [0xE67120, c, ScriptSpring_anim]
+  - name: entity_model_SimpleSpring_gfx
+    dir: entity/model
+    type: code
+    start: 0xE68580
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE68580, c, SimpleSpring_gfx]
+    - start: 0xE68580
+      type: .data
+      name: SimpleSpring_gfx
+      subsegments:
+      - [0xE68580]
+      - [0xE68D60, ci8, SimpleSpring_tex1, 16, 16]
+      - [0xE68E60, palette, SimpleSpring_tex1]
+      - [0xE69060]
+      - [0xE69108, rgba16, SimpleSpring_tex2, 16, 16]
+      - [0xE69308]
+      - [0xE69380, ci8, SimpleSpring_star, 32, 32]
+      - [0xE69780, palette, SimpleSpring_star]
+      - [0xE69980]
+  - name: entity_model_SimpleSpring_anim
+    dir: entity/model
+    type: code
+    start: 0xE69D50
+    vram: 0x00000000
+    subsegments:
+    - [0xE69D50, c, SimpleSpring_anim]
+  - [0xE6B1B0, bin] # unk data
   - type: code
     start: 0xEA0900
     vram: 0x80240000

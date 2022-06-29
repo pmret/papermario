@@ -332,8 +332,8 @@ extern EntityBlueprint Entity_RedBlock;
 extern EntityBlueprint Entity_HiddenRedBlock; //unused
 extern EntityBlueprint Entity_D_802EA798; //unused
 extern EntityBlueprint Entity_HeartBlock; //unused
-extern EntityBlueprint Entity_D_802EAA30;
-extern EntityBlueprint Entity_D_802EAA54;
+extern EntityBlueprint Entity_ScriptSpring;
+extern EntityBlueprint Entity_SimpleSpring;
 extern EntityBlueprint Entity_D_802EA910;
 
 

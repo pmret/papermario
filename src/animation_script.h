@@ -39,6 +39,7 @@ enum {
 #define as_SetRotation(node, x, y, z) AS_SET_ROTATION, node, AS_F(x), AS_F(y), AS_F(z),
 #define as_SetPos(node, x, y, z) AS_SET_POS, node, x, y, z,
 #define as_SetScale(node, x, y, z) AS_SET_SCALE, node, AS_F(x), AS_F(y), AS_F(z),
+#define as_DisableMirroring AS_OP_19,
 
 // used in entity models
 #define ANIM_NULL (void*)(0xFFFFFFFF)

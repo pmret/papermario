@@ -459,7 +459,7 @@ EvtScript N(makeEntities) = {
     EVT_CALL(AssignBlockFlag, EVT_SAVE_FLAG(1409))
     EVT_CALL(MakeEntity, EVT_PTR(Entity_HiddenYellowBlock), 25, 60, 0, 0, 343, MAKE_ENTITY_END)
     EVT_CALL(AssignBlockFlag, EVT_SAVE_FLAG(1408))
-    EVT_CALL(MakeEntity, EVT_PTR(Entity_D_802EAA54), -50, 0, 0, 90, 60, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, EVT_PTR(Entity_SimpleSpring), -50, 0, 0, 90, 60, MAKE_ENTITY_END)
     EVT_RETURN
     EVT_END
 };
