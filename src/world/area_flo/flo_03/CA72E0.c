@@ -1206,7 +1206,7 @@ EvtScript N(80244ED0) = {
 };
 
 EvtScript N(makeEntities) = {
-    EVT_CALL(MakeEntity, &D_802EAB04, -175, 0, 150, 0, 8, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, &Entity_HiddenPanel, -175, 0, 150, 0, 8, MAKE_ENTITY_END)
     EVT_CALL(AssignPanelFlag, EVT_SAVE_FLAG(1404))
     EVT_RETURN
     EVT_END

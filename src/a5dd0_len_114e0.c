@@ -1217,7 +1217,7 @@ void update_entities(void) {
     }
 
     update_shadows();
-    D_8015A578.unk_00 = 0;
+    D_8015A578.unk_00 = FALSE;
 }
 
 void update_shadows(void) {
@@ -1817,7 +1817,7 @@ void clear_entity_data(s32 arg0) {
 
     D_8015132C = 0;
     D_8015A578.unk_01 = 0;
-    D_8015A578.unk_02 = 0;
+    D_8015A578.unk_02 = FALSE;
     if (!arg0) {
         D_80151344 = 0;
     }

@@ -233,7 +233,7 @@ extern EntityBlueprint Entity_HitGroundedYellowBlock;
 extern EntityBlueprint Entity_HitFloatingYellowBlock;
 extern EntityBlueprint Entity_HitRedBlock;
 extern EntityBlueprint D_802EAE30;
-extern EntityBlueprint D_802EAB04;
+extern EntityBlueprint Entity_HiddenPanel;
 extern EntityBlueprint D_802EAED4;
 extern s32 D_802EAE7C[];
 extern EntityBlueprint D_802EAF80;

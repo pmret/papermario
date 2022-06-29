@@ -546,9 +546,9 @@ typedef struct ChestData {
     /* 0x00 */ u16 gameFlagIndex;
     /* 0x02 */ s16 giveItemTimer;
     /* 0x04 */ u8 state;
-    /* 0x04 */ s8 unk_05;
+    /* 0x05 */ u8 unk_05;
     /* 0x06 */ s8 postLidAnimDelay;
-    /* 0x07 */ u8 unk_07;
+    /* 0x07 */ s8 unk_07;
     /* 0x08 */ f32 lidAngle;
     /* 0x0C */ f32 lidAnimInterpPhase;
     /* 0x10 */ s32 itemID;
@@ -577,26 +577,26 @@ typedef struct SimpleSpringData {
 } SimpleSpringData; // size = 0x04
 
 typedef struct HiddenPanelData {
-    /* 0x00 */ s8 unk_00;
-    /* 0x01 */ s8 unk_01;
+    /* 0x00 */ s8 state;
+    /* 0x01 */ s8 timer;
     /* 0x02 */ s8 unk_02;
-    /* 0x03 */ s8 unk_03;
+    /* 0x03 */ s8 needSpawnItem;
     /* 0x04 */ s8 unk_04;
     /* 0x05 */ s8 unk_05;
-    /* 0x06 */ u16 unk_06;
-    /* 0x08 */ s32 unk_08;
-    /* 0x0C */ s32 unk_0C;
-    /* 0x10 */ s32 unk_10;
-    /* 0x14 */ s32 unk_14;
-    /* 0x18 */ Vec3i unk_18;
-    /* 0x24 */ f32 unk_24;
-    /* 0x28 */ f32 unk_28;
-    /* 0x2C */ f32 unk_2C;
-    /* 0x30 */ f32 unk_30;
-    /* 0x34 */ Matrix4f unk_34;
-    /* 0x74 */ u16 unk_74;
+    /* 0x06 */ u16 pickupVar;
+    /* 0x08 */ s32 standingNpcIndex;
+    /* 0x0C */ s32 npcFlags;
+    /* 0x10 */ s32 itemID;
+    /* 0x14 */ s32 spawnedItemIndex;
+    /* 0x18 */ Vec3i spawnedItemPos;
+    /* 0x24 */ f32 initialY;
+    /* 0x28 */ f32 riseVelocity;
+    /* 0x2C */ f32 riseInterpPhase;
+    /* 0x30 */ f32 rotationSpeed;
+    /* 0x34 */ Matrix4f entityMatrix;
+    /* 0x74 */ u16 modelID;
     /* 0x76 */ char unk_76[0x2];
-    /* 0x78 */ s32* unk_78;
+    /* 0x78 */ Gfx* renderDList;
 }   HiddenPanelData; // size = 0x7C
 
 // END ENTITY-SPECIFIC STRUCTS

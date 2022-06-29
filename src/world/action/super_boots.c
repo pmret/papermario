@@ -126,7 +126,7 @@ void func_802B6000_E26DE0(void) {
                         sfx_play_sound_at_player(SOUND_149, 0);
                         start_rumble(0x80, 0x19);
                         tempStruct = &D_8015A578;
-                        tempStruct->unk_00 = 1;
+                        tempStruct->unk_00 = TRUE;
                         tempStruct->unk_08 = playerStatus->position.y;
                         playerStatus->flags |= 0x400;
                     }

@@ -12496,7 +12496,13 @@ segments:
   - [0xE4E7F0, bin] # unk data
   - [0xE51640, bin] # unk data
   - [0xE55A40, bin] # unk data
-  - [0xE56BA0, bin] # unk data
+  - name: entity_model_HiddenPanel
+    dir: entity/model
+    type: code
+    start: 0xE56BA0
+    vram: 0x0A000000
+    subsegments:
+    - [0xE56BA0, c, HiddenPanel]
   - [0xE56E60, bin] # unk data
   - [0xE58CD0, bin] # unk data
   - [0xE59480, bin] # unk data

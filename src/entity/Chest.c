@@ -8,6 +8,7 @@ void entity_Chest_open(Entity* entity);
 extern s32 D_802EAD7C;
 // requires data migration
 #ifdef NON_MATCHING
+/*
 extern Script D_802EAB30;
 extern Script D_802EAC40;
 extern Script D_802EAC84;
@@ -28,7 +29,7 @@ void entity_Chest_adjust_camera(void) {
     if (script != NULL) {
         start_script(script, 10, 32);
     }
-}
+}*/
 #else
 INCLUDE_ASM(s32, "entity/Chest", entity_Chest_adjust_camera);
 #endif
@@ -85,7 +86,62 @@ void entity_Chest_begin_opening(Entity* entity) {
     sfx_play_sound(467);
 }
 
-INCLUDE_ASM(s32, "entity/Chest", entity_Chest_open);
+void entity_Chest_open(Entity* entity) {
+    ChestData* data = entity->dataBuf.chest;
+    f32 temp;
+
+    switch (data->unk_05) {
+        case 0:
+            data->postLidAnimDelay--;
+            data->lidAngle -= 1.0f;
+            if (data->lidAngle < -2.0f) {
+                data->lidAngle = -2.0f;
+            }
+
+            if (data->postLidAnimDelay == 0) {
+                data->postLidAnimDelay = 8;
+                data->unk_05++;
+            }
+            break;
+        case 1:
+            data->postLidAnimDelay--;
+            if (data->postLidAnimDelay == 0) {
+                data->lidAnimInterpPhase = 0.0f;
+                data->unk_05++;
+            }
+            break;
+        case 2:
+            data->lidAnimInterpPhase += 4.0f;
+            if (data->lidAnimInterpPhase >= 180.0f) {
+                data->unk_05++;
+            }
+            temp = sin_rad(data->lidAnimInterpPhase * TAU / 360.0f) * 3.0f;
+            data->lidAngle -= temp;
+            break;
+        case 3:
+            data->lidAnimInterpPhase += 1.0f;
+            if (data->lidAnimInterpPhase >= 190.0f) {
+                data->postLidAnimDelay = 10;
+                data->unk_05++;
+            }
+            temp = sin_rad(data->lidAnimInterpPhase * TAU / 360.0f) * 2.0f;
+            data->lidAngle -= temp;
+            break;
+        case 4:
+            data->postLidAnimDelay--;
+            if (data->postLidAnimDelay == 0) {
+                if (data->unk_07 != 0) {
+                    exec_entity_commandlist(entity);
+                } else {
+                    data->unk_05++;
+                }
+            }
+            break;
+        case 5:
+            break;
+
+    }
+}
 
 void entity_Chest_close(Entity* entity) {
     ChestData* data = entity->dataBuf.chest;
