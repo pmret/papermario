@@ -13,7 +13,7 @@ typedef struct SpriteComponent {
     /* 0x18 */ s32 currentPalette;
     /* 0x1C */ Vec3f posOffset;
     /* 0x28 */ Vec3f compPos;
-    /* 0x34 */ Vec3f rotation;
+    /* 0x34 */ Vec3i rotation;
     /* 0x40 */ Vec3f scale;
     /* 0x4C */ s32 unk_4C;
 } SpriteComponent; // size = 0x50
@@ -44,7 +44,7 @@ typedef struct SpriteHeader {
     /* 0x04 */ s16** paletteList;
     /* 0x08 */ s32 maxComponents;
     /* 0x0C */ s32 colorVariants;
-    /* 0x10 */ SpriteAnimComponent* animListStart;
+    /* 0x10 */ SpriteAnimComponent** animListStart;
 } SpriteHeader; // size = 0x14
 
 typedef struct SpriteInstance {
@@ -74,6 +74,11 @@ typedef struct SpriteAnimData {
     /* 0x08 */ s32 maxComponents;
     /* 0x0C */ s32 colorVariations;
 } SpriteAnimData; // size = 0x10
+
+typedef struct UnkSpriteThing {
+    /* 0x00 */ char unk_00[0x6];
+    /* 0x06 */ Vec3s unk_06;
+} UnkSpriteThing; // size = ??
 
 typedef struct Quad {
     Vtx v[4];
@@ -106,6 +111,8 @@ s32 func_802DDEC4(s32 arg0);
 void func_802DDEE4(s32, s32, s32, s32, s32, s32, s32, s32);
 
 void func_802DDFF8(s32, s32, s32, s32, s32, s32, s32);
+
+void* spr_get_player_raster(s32 rasterIndex, s32 playerSpriteID);
 
 void spr_get_player_raster_info(SpriteRasterInfo* out, s32 playerSpriteID, s32 rasterIndex);
 

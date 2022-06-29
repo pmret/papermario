@@ -1,10 +1,11 @@
 #include "sprite.h"
 
 extern s32 spr_allocateBtlComponentsOnWorldHeap;
-extern union {
-    s32 s32;
-    u8 b[4];
-} D_802DF540;
+// extern union {
+//     s32 s32;
+//     u8 b[4];
+// } D_802DF540;
+extern s32 D_802DF540;
 extern SpriteAnimData* spr_playerSprites[13];
 extern s32 D_802DF57C;
 extern s32 spr_playerMaxComponents;
@@ -16,6 +17,7 @@ extern SpriteInstance D_802DFA48[51];
 
 extern Quad* D_802DFE44;
 extern s32 D_802DFE48[22];
+extern s32 D_802DFEA0[3];
 extern s32 D_802DFEAC;
 
 void spr_init_player_raster_cache(s32 cacheSize, s32 maxRasterSize);
@@ -260,7 +262,7 @@ void spr_appendGfx_component(
     height = cache->height;
     quadIndex = cache->quadCacheIndex;
     quad = NULL;
-    if (!(D_802DF540.s32 & (0x80000000 | 0x40000000 | 0x20000000 | 0x10000000))) {
+    if (!(D_802DF540 & (0x80000000 | 0x40000000 | 0x20000000 | 0x10000000))) {
         quad = spr_get_quad_for_size(&quadIndex, width, height);
         cache->quadCacheIndex = quadIndex;
     }
@@ -275,8 +277,8 @@ void spr_appendGfx_component(
         spA0.xOffset = -(width / 2);
         spA0.yOffset = height;
         spA0.opacity = opacity;
-        if (fold_appendGfx_component(D_802DF540.b[3], &spA0, 0x80000, sp20) == 1) {
-            D_802DF540.s32 &= ~(0x80000000 | 0x40000000 | 0x20000000 | 0x10000000);
+        if (fold_appendGfx_component((u8) (u16) D_802DF540, &spA0, 0x80000, sp20) == 1) { // todo bitfield?
+            D_802DF540 &= ~(0x80000000 | 0x40000000 | 0x20000000 | 0x10000000);
         }
     }
     gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
@@ -313,7 +315,53 @@ void spr_transform_point(s32 rotX, s32 rotY, s32 rotZ, f32 inX, f32 inY, f32 inZ
     }
 }
 
-INCLUDE_ASM(s32, "sprite", spr_draw_component);
+// void spr_draw_component(s32, SpriteComponent*, SpriteComponent*, SpriteRasterCacheEntry**, s16**, f32, Matrix4f);
+// INCLUDE_ASM(s32, "sprite", spr_draw_component);
+void spr_draw_component(s32 opacity, SpriteComponent* component, UnkSpriteThing* arg2, SpriteRasterCacheEntry** cache, s16** arg4, f32 arg5, Matrix4f mtx) {
+    f32 dx;
+    f32 dy;
+    f32 dz;
+    SpriteRasterCacheEntry* cacheEntry;
+    s32 paletteIdx;
+    void* pal;
+    f32 rotX;
+    f32 rotY;
+    f32 rotZ;
+    f32 inX;
+    f32 inY;
+    f32 inZ;
+
+    if (component->initialized && component->currentRaster != -1) {
+        rotX = D_802DFEA0[0];
+        rotY = D_802DFEA0[1];
+        rotZ = D_802DFEA0[2];
+        inX = component->compPos.x + arg2->unk_06.x;
+        inY = component->compPos.y + arg2->unk_06.y;
+        inZ = component->compPos.z + arg2->unk_06.z;
+
+        spr_transform_point(rotX, rotY, rotZ, inX, inY, inZ * arg5, &dx, &dy, &dz);
+        cacheEntry = cache[component->currentRaster];
+        paletteIdx = component->currentPalette;
+        if (opacity & 0x08000000) {
+            cacheEntry->image = spr_get_player_raster(component->currentRaster & 0xFFF, D_802DF57C);
+        }
+        D_802DF540 = component->unk_4C;
+        pal = arg4[paletteIdx];
+
+        spr_appendGfx_component(
+            cacheEntry,
+            dx, dy, dz,
+            rotX + component->rotation.x,
+            rotY + component->rotation.y,
+            rotZ + component->rotation.z,
+            component->scale.x,
+            component->scale.y,
+            component->scale.z,
+            opacity, pal, mtx
+        );
+        component->unk_4C = D_802DF540;
+    }
+}
 
 s32 spr_sign_extend_12bit(u16 val) {
     s32 temp = val & 0xFFF;
@@ -548,8 +596,6 @@ void func_802DDFF8(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s
     func_802DDEE4(0, -1, arg1, arg2, arg3, arg4, arg5, arg6);
 }
 
-void* spr_get_player_raster(s32 rasterIndex, s32 playerSpriteID);
-
 void spr_get_player_raster_info(SpriteRasterInfo* out, s32 playerSpriteID, s32 rasterIndex) {
     SpriteAnimData* sprite;
     SpriteRasterCacheEntry* cache;
@@ -586,7 +632,44 @@ s32 func_802DE5C8(s32 arg0) {
     return D_802DFA48[arg0].unk_10;
 }
 
-INCLUDE_ASM(s32, "sprite", spr_free_sprite);
+s32 spr_free_sprite(s32 spriteInstanceID) {
+    SpriteInstance* sprite = &D_802DFA48[spriteInstanceID];
+    s32 spriteIndex = sprite->spriteIndex;
+    SpriteHeader* spriteData;
+    SpriteComponent** comps;
+
+    if (spriteIndex == 0 || spriteIndex >= ARRAY_COUNT(spr_npcSprites)) {
+        return spriteInstanceID;
+    }
+
+    spr_npcSpriteInstanceCount[spriteIndex]--;
+    spriteData = sprite->spriteData;
+
+    comps = sprite->componentList;
+    while ((s32) *comps != -1) {
+        func_8013A854((u8) (*comps)->unk_4C);
+        comps++;
+    }
+
+    comps = D_802DFA48[spriteInstanceID].componentList;
+
+    if (spr_npcSpriteInstanceCount[spriteIndex] == 0) {
+        spr_npcSprites[spriteIndex] = NULL;
+        _heap_free(&gSpriteHeapPtr, spriteData);
+    }
+
+    if (spr_allocateBtlComponentsOnWorldHeap) {
+        _heap_free(&heap_generalHead, comps);
+    } else {
+        _heap_free(&gSpriteHeapPtr, comps);
+    }
+
+    D_802DFA48[spriteInstanceID].spriteIndex = 0;
+    D_802DFA48[spriteInstanceID].componentList = NULL;
+    D_802DFA48[spriteInstanceID].spriteData = NULL;
+    D_802DFA48[spriteInstanceID].currentAnimID = -1;
+    return 0;
+}
 
 s32 func_802DE748(s32 arg0, s32 arg1) {
     SpriteComponent** componentList = D_802DFA48[arg0].componentList;
