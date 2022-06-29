@@ -13,15 +13,19 @@ extern SpriteAnimData* spr_npcSprites[0xEA];
 extern PlayerCurrentAnimInfo spr_playerCurrentAnimInfo[3];
 extern SpriteInstance D_802DFA48[51];
 extern u8 spr_npcSpriteInstanceCount[];
-extern Vtx* D_802DFE44;
+extern Quad* D_802DFE44;
 extern s32 D_802DFE48[22];
+extern s32 D_802DFEAC;
+
 void spr_init_player_raster_cache(s32 cacheSize, s32 maxRasterSize);
 
-Vtx spr_defaultQuad[] = {
+Quad spr_defaultQuad = {
+    {
     {{{ -16, 56, 0 }, FALSE, {    0,    0 }, { 240, 240, 240, 255 }}},
     {{{  16, 56, 0 }, FALSE, { 1024,    0 }, { 120, 120, 120, 255 }}},
     {{{  16,  0, 0 }, FALSE, { 1024, 1792 }, {   0,   0,   0, 255 }}},
     {{{ -16,  0, 0 }, FALSE, {    0, 1792 }, { 120, 120, 120, 255 }}},
+    }
 };
 
 Vp D_802DF3D0 = {{
@@ -89,25 +93,96 @@ PlayerSpriteSet spr_playerSpriteSets[] = {
     /* Peach */ {  6, 0x900, 0x00003C00 },
 };
 
+void spr_appendGfx_component_flat(
+    Quad* vertices,
+    void* raster, void* palette,
+    s32 width, s32 height,
+    f32 arg5,
+    Matrix4f mtx,
+    s32 alpha
+);
+
 void spr_init_quad_cache(void) {
     s32 i;
-    D_802DFE44 = _heap_malloc(&gSpriteHeapPtr, ARRAY_COUNT(D_802DFE48) * 4 * sizeof(*D_802DFE44));
+
+    D_802DFE44 = _heap_malloc(&gSpriteHeapPtr, ARRAY_COUNT(D_802DFE48) * sizeof(*D_802DFE44));
 
     for (i = 0; i < ARRAY_COUNT(D_802DFE48); i++) {
         D_802DFE48[i] = -1;
     }
 }
 
-Vtx* spr_get_cached_quad(s32 quadIndex) {
+Quad* spr_get_cached_quad(s32 quadIndex) {
     s32* temp_v1 = &D_802DFE48[quadIndex];
 
     *temp_v1 |= 0x1F;
-    return &D_802DFE44[quadIndex * 4];
+    return &D_802DFE44[quadIndex];
 }
 
-INCLUDE_ASM(s32, "sprite", spr_make_quad_for_size);
+void spr_make_quad_for_size(Quad* quad, s32 width, s32 height) {
+    Vtx* vtx = &quad->v[0];
+    s32 w = width; // required to match
 
-INCLUDE_ASM(s32, "sprite", spr_get_quad_for_size);
+    *quad = spr_defaultQuad;
+
+    vtx->v.ob[0] = -w / 2;
+    vtx->v.ob[1] = height;
+    vtx->v.tc[0] = 0x2000;
+    vtx->v.tc[1] = 0x2000;
+
+    vtx++;
+    vtx->v.ob[0] = w / 2;
+    vtx->v.ob[1] = height;
+    vtx->v.tc[0] = (w + 256) * 32;
+    vtx->v.tc[1] = 0x2000;
+
+    vtx++;
+    vtx->v.tc[0] = (w + 256) * 32;
+    vtx->v.ob[0] = w / 2;
+    vtx->v.tc[1] = (height + 256) * 32;
+
+    vtx++;
+    vtx->v.ob[0] = -w / 2;
+    vtx->v.tc[0] = 0x2000;
+    vtx->v.tc[1] = (height + 256) * 32;
+}
+
+Quad* spr_get_quad_for_size(s32* quadIndex, s32 width, s32 height) {
+    Quad* quad;
+    s32 qi;
+    s32 widthHeight;
+    s32 i;
+
+    if ((width * height) / 2 <= 0x800) {
+        widthHeight = (width << 0x18) + (height << 0x10);
+        qi = *quadIndex;
+        if (qi != -1 && (widthHeight == (D_802DFE48[qi] & 0xFFFF0000))) {
+            return spr_get_cached_quad(qi);
+        }
+
+        for (i = 0; i < ARRAY_COUNT(D_802DFE48); i++) {
+            if (widthHeight == (D_802DFE48[i] & 0xFFFF0000)) {
+                *quadIndex = i;
+                return spr_get_cached_quad(i);
+            }
+        }
+
+        for (i = 0; i < ARRAY_COUNT(D_802DFE48); i++) {
+            if (D_802DFE48[i] == -1) {
+                break;
+            }
+        }
+
+        if (i != ARRAY_COUNT(D_802DFE48)) {
+            *quadIndex = i;
+            D_802DFE48[i] = widthHeight;
+            quad = spr_get_cached_quad(i);
+            spr_make_quad_for_size(quad, width, height);
+            return quad;
+        }
+    }
+    return NULL;
+}
 
 void spr_clear_quad_cache(void) {
     s32 i;
@@ -135,7 +210,7 @@ void spr_appendGfx_component(
     Matrix4f sp60;
     FoldImageRecPart spA0;
     s32 quadIndex;
-    Vtx* quadVtx;
+    Quad* quad;
     u32 temp_v1;
     s32 width;
     s32 height;
@@ -183,14 +258,14 @@ void spr_appendGfx_component(
     width = cache->width;
     height = cache->height;
     quadIndex = cache->quadCacheIndex;
-    quadVtx = NULL;
+    quad = NULL;
     if (!(D_802DF540.s32 & (0x80000000 | 0x40000000 | 0x20000000 | 0x10000000))) {
-        quadVtx = spr_get_quad_for_size(&quadIndex, width, height);
+        quad = spr_get_quad_for_size(&quadIndex, width, height);
         cache->quadCacheIndex = quadIndex;
     }
 
-    if (quadVtx != NULL) {
-        spr_appendGfx_component_flat(quadVtx, cache->image, palette, width, height, rotY, sp20, (u8) opacity);
+    if (quad != NULL) {
+        spr_appendGfx_component_flat(quad, cache->image, palette, width, height, rotY, sp20, (u8) opacity);
     } else {
         spA0.raster = cache->image;
         spA0.palette = palette;
@@ -259,6 +334,7 @@ s32 spr_sign_extend_16bit(u16 val) {
     }
 }
 
+void spr_component_update_commands(SpriteComponent* comp, SpriteAnimComponent* animComponent);
 INCLUDE_ASM(s32, "sprite", spr_component_update_commands);
 
 void spr_component_update_finish(SpriteComponent* comp, SpriteComponent** compList,
@@ -291,7 +367,26 @@ void spr_component_update_finish(SpriteComponent* comp, SpriteComponent** compLi
     }
 }
 
-INCLUDE_ASM(s32, "sprite", spr_component_update);
+s32 spr_component_update(s32 arg0, SpriteComponent** compList, SpriteAnimComponent** arg2, SpriteRasterCacheEntry** rasterCache, s32 overridePalette) {
+    SpriteComponent** compListIt;
+
+    D_802DFEAC = arg0;
+
+    compListIt = compList;
+    while ((s32) *compListIt != -1) {
+        spr_component_update_commands(*compListIt++, *arg2);
+        if ((s32) *arg2 != -1) {
+            arg2++;
+        }
+    }
+
+    compListIt = compList;
+    while ((s32) *compListIt != -1) {
+        spr_component_update_finish(*compListIt++, compList, rasterCache, overridePalette);
+    }
+
+    return D_802DFEAC;
+}
 
 void spr_init_component_anim_state(SpriteComponent* comp, s16*** anim) {
     if (anim == (s16***)-1) {

@@ -75,7 +75,11 @@ typedef struct SpriteAnimData {
     /* 0x0C */ s32 colorVariations;
 } SpriteAnimData; // size = 0x10
 
-extern Vtx spr_defaultQuad[4];
+typedef struct Quad {
+    Vtx v[4];
+} Quad; // size = 0x40
+
+extern Quad spr_defaultQuad;
 extern Vp D_802DF3D0;
 extern Vp D_802DF3E0;
 extern Gfx D_802DF3F0[];
@@ -85,69 +89,6 @@ extern Gfx D_802DF490[];
 extern f32 spr_animUpdateTimeScale;
 extern PlayerSpriteSet spr_playerSpriteSets[7];
 
-void spr_init_quad_cache(void);
-
-Vtx* spr_get_cached_quad(s32 quadIndex);
-
-void spr_make_quad_for_size(Vtx* quad, s32 width, s32 height);
-
-Vtx* spr_get_quad_for_size(s32* quadIndex, s32 width, s32 height);
-
-void spr_clear_quad_cache(void);
-
-void spr_appendGfx_component_flat(
-    Vtx* vertices,
-    void* raster, void* palette,
-    s32 width, s32 height,
-    f32 arg5,
-    Matrix4f mtx,
-    s32 alpha
-);
-
-void spr_appendGfx_component(
-    SpriteRasterCacheEntry* cache, 
-    f32 dx, f32 dy, f32 dz, 
-    f32 rotX, f32 rotY, f32 rotZ, 
-    f32 scaleX, f32 scaleY, f32 scaleZ, 
-    s32 opacity, void* palette, Matrix4f mtx
-);
-
-void spr_transform_point(s32 rotX, s32 rotY, s32 rotZ, f32 inX, f32 inY, f32 inZ, f32* outX, f32* outY, f32* outZ);
-
-void spr_draw_component(
-    SpriteRasterCacheEntry* raster,
-    f32 dx, f32 dy, f32 dz,
-    f32 rotX, f32 rotY, f32 rotZ,
-    f32 scaleX, f32 scaleY, f32 scaleZ,
-    s32 opacity,
-    void* palette,
-    Matrix4f mtx
-);
-
-s32 spr_sign_extend_12bit(u16 val);
-
-s32 spr_sign_extend_16bit(u16 val);
-
-void spr_component_update_commands(SpriteComponent* comp, SpriteAnimComponent* anim);
-
-// void spr_component_update_finish(
-//     SpriteComponent* comp,
-//     SpriteComponent** compList,
-//     SpriteRasterCacheEntry* rasterCacheEntry,
-//     s32 overridePalette
-// );
-
-// TODO: anim possibly should be SpriteComponentAnim*
-void spr_init_component_anim_state(SpriteComponent* comp, s16*** anim);
-
-void spr_init_anim_state(SpriteComponent** compList, s16** cmdList);
-
-void spr_set_anim_timescale(f32 timeScale);
-
-void spr_load_player_sprite(s32 spriteIndex);
-
-SpriteAnimData* spr_load_sprite(s32, s32, s32);
-
 void fold_init(void);
 
 void spr_init_sprites(s32 playerSpriteSet);
@@ -155,8 +96,6 @@ void spr_init_sprites(s32 playerSpriteSet);
 void spr_render_init(void);
 
 void spr_update_player_raster_cache(void);
-
-s32 func_802DDA84(void);
 
 s32 spr_update_player_sprite(s32 arg0, s32 arg1, f32 arg2);
 
@@ -198,5 +137,7 @@ u16** spr_get_npc_palettes(s32 npcSpriteID);
 s32 spr_get_npc_color_variations(s32 npcSpriteID);
 
 void render_shaded_sprite(Matrix4f mtx, s32 uls, s32 ult, s32 lrs, s32 lrt, s32 alpha, s32);
+
+SpriteAnimData* spr_load_sprite(s32 idx, s32 arg1, s32 arg2);
 
 #endif
