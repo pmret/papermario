@@ -1,18 +1,19 @@
 #include "sprite.h"
 
+extern s32 spr_allocateBtlComponentsOnWorldHeap;
 extern union {
     s32 s32;
     u8 b[4];
 } D_802DF540;
-extern s32 D_802DF590[];
-extern s32 D_802DFA58[];
-extern s32 spr_allocateBtlComponentsOnWorldHeap;
 extern SpriteAnimData* spr_playerSprites[13];
+extern s32 D_802DF57C;
 extern s32 spr_playerMaxComponents;
-extern SpriteAnimData* spr_npcSprites[0xEA];
 extern PlayerCurrentAnimInfo spr_playerCurrentAnimInfo[3];
-extern SpriteInstance D_802DFA48[51];
+extern SpriteAnimData* spr_npcSprites[0xEA];
+
 extern u8 spr_npcSpriteInstanceCount[];
+extern SpriteInstance D_802DFA48[51];
+
 extern Quad* D_802DFE44;
 extern s32 D_802DFE48[22];
 extern s32 D_802DFEAC;
@@ -515,7 +516,7 @@ INCLUDE_ASM(void, "sprite", spr_update_player_sprite, s32 arg0, s32 arg1, f32 ar
 INCLUDE_ASM(void, "sprite", spr_draw_player_sprite, s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 
 s32 func_802DDEC4(s32 arg0) {
-    return D_802DF590[arg0 * 3]; // The struct of D_802DF590 is probably 0xC in size with this taking the first field.
+    return spr_playerCurrentAnimInfo[arg0].unk_08;
 }
 
 void func_802DDEE4(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7) {
@@ -582,7 +583,7 @@ INCLUDE_ASM(s32, "sprite", spr_update_sprite, s32 arg0, s32 arg1, f32 arg2);
 INCLUDE_ASM(void, "sprite", spr_draw_npc_sprite, s32 arg0, s32 arg1, s32 arg2, s32 arg3, Matrix4f* arg4);
 
 s32 func_802DE5C8(s32 arg0) {
-    return D_802DFA58[arg0 * 5]; // The struct of D_802DFA58 is probably 0x14 in size with this taking the first field.
+    return D_802DFA48[arg0].unk_10;
 }
 
 INCLUDE_ASM(s32, "sprite", spr_free_sprite);

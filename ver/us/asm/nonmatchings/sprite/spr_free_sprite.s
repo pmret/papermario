@@ -52,9 +52,9 @@ glabel spr_free_sprite
 /* 101784 802DE694 3C03802E */  lui       $v1, %hi(spr_npcSpriteInstanceCount)
 /* 101788 802DE698 00711821 */  addu      $v1, $v1, $s1
 /* 10178C 802DE69C 9063F958 */  lbu       $v1, %lo(spr_npcSpriteInstanceCount)($v1)
-/* 101790 802DE6A0 3C10802E */  lui       $s0, %hi(D_802DFA4C)
+/* 101790 802DE6A0 3C10802E */  lui       $s0, %hi(D_802DFA48 + 0x4)
 /* 101794 802DE6A4 02028021 */  addu      $s0, $s0, $v0
-/* 101798 802DE6A8 8E10FA4C */  lw        $s0, %lo(D_802DFA4C)($s0)
+/* 101798 802DE6A8 8E10FA4C */  lw        $s0, %lo(D_802DFA48 + 0x4)($s0)
 /* 10179C 802DE6AC 14600008 */  bnez      $v1, .L802DE6D0
 /* 1017A0 802DE6B0 00111080 */   sll      $v0, $s1, 2
 /* 1017A4 802DE6B4 3C01802E */  lui       $at, %hi(spr_npcSprites)

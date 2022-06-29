@@ -86,9 +86,9 @@ glabel spr_load_npc_sprite
 /* 101308 802DE218 00121080 */  sll       $v0, $s2, 2
 /* 10130C 802DE21C 00521021 */  addu      $v0, $v0, $s2
 /* 101310 802DE220 00021080 */  sll       $v0, $v0, 2
-/* 101314 802DE224 3C01802E */  lui       $at, %hi(D_802DFA4C)
+/* 101314 802DE224 3C01802E */  lui       $at, %hi(D_802DFA48 + 0x4)
 /* 101318 802DE228 00220821 */  addu      $at, $at, $v0
-/* 10131C 802DE22C AC31FA4C */  sw        $s1, %lo(D_802DFA4C)($at)
+/* 10131C 802DE22C AC31FA4C */  sw        $s1, %lo(D_802DFA48 + 0x4)($at)
 /* 101320 802DE230 8E230000 */  lw        $v1, ($s1)
 /* 101324 802DE234 2402FFFF */  addiu     $v0, $zero, -1
 /* 101328 802DE238 10620009 */  beq       $v1, $v0, .L802DE260

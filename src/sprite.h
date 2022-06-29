@@ -50,7 +50,7 @@ typedef struct SpriteHeader {
 typedef struct SpriteInstance {
     /* 0x00 */ s32 spriteIndex;
     /* 0x04 */ SpriteComponent** componentList;
-    /* 0x08 */ s32 spriteData;
+    /* 0x08 */ SpriteHeader* spriteData;
     /* 0x0C */ s32 currentAnimID;
     /* 0x10 */ s32 unk_10;
 } SpriteInstance; // size = 0x14
