@@ -56,7 +56,7 @@ ApiStatus func_80242B0C_825DCC(Evt* script, s32 isInitialCall) {
         D_8024E570[i] = 0;
     } else {
         for (i = 0; i < 112; i++) {
-          D_8024E570[i] = i + 16;
+            D_8024E570[i] = i + 16;
             D_8024E570[112] = 0;
         }
     }
