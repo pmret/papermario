@@ -3,18 +3,17 @@
 
 #define NAMESPACE b_area_kgr_kgr_01
 
-ApiStatus func_80218560_56E800(Evt* script, s32 isInitialCall);
-INCLUDE_ASM(s32, "battle/area_kgr/56E800", func_80218560_56E800);
+#include "common/UnkFloatFunc005.inc.c"
 
 EvtScript N(8021C330) = {
     EVT_SET(LW(10), LW(0))
     EVT_LABEL(0)
-    EVT_CALL(func_80218560_56E800, 0)
+    EVT_CALL(N(UnkFloatFunc005), 0)
     EVT_CALL(TranslateModel, LW(10), LW(0), LW(1), LW(2))
     EVT_CALL(RotateModel, LW(10), -20, 0, 0, 1)
     EVT_WAIT_FRAMES(1)
     EVT_LOOP(0)
-        EVT_CALL(func_80218560_56E800, 1)
+        EVT_CALL(N(UnkFloatFunc005), 1)
         EVT_CALL(TranslateModel, LW(10), LW(0), LW(1), LW(2))
         EVT_CALL(RotateModel, LW(10), -20, 0, 0, 1)
         EVT_WAIT_FRAMES(1)
@@ -35,7 +34,7 @@ EvtScript N(8021C330) = {
     EVT_CALL(RotateModel, LW(10), -20, 0, 0, 1)
     EVT_WAIT_FRAMES(5)
     EVT_LOOP(0)
-        EVT_CALL(func_80218560_56E800, 2)
+        EVT_CALL(N(UnkFloatFunc005), 2)
         EVT_CALL(TranslateModel, LW(10), LW(0), LW(1), LW(2))
         EVT_CALL(RotateModel, LW(10), -20, 0, 0, 1)
         EVT_WAIT_FRAMES(1)
@@ -54,12 +53,12 @@ EvtScript N(8021C330) = {
     EVT_IF_NE(LW(0), 0)
         EVT_GOTO(0)
     EVT_END_IF
-    EVT_CALL(func_80218560_56E800, 3)
+    EVT_CALL(N(UnkFloatFunc005), 3)
     EVT_CALL(TranslateModel, LW(10), LW(0), LW(1), LW(2))
     EVT_CALL(RotateModel, LW(10), -20, 0, 0, 1)
     EVT_WAIT_FRAMES(1)
     EVT_LOOP(0)
-        EVT_CALL(func_80218560_56E800, 1)
+        EVT_CALL(N(UnkFloatFunc005), 1)
         EVT_CALL(TranslateModel, LW(10), LW(0), LW(1), LW(2))
         EVT_CALL(RotateModel, LW(10), -20, 0, 0, 1)
         EVT_WAIT_FRAMES(1)
@@ -80,7 +79,7 @@ EvtScript N(8021C330) = {
     EVT_CALL(RotateModel, LW(10), -20, 0, 0, 1)
     EVT_WAIT_FRAMES(5)
     EVT_LOOP(0)
-        EVT_CALL(func_80218560_56E800, 2)
+        EVT_CALL(N(UnkFloatFunc005), 2)
         EVT_CALL(TranslateModel, LW(10), LW(0), LW(1), LW(2))
         EVT_CALL(RotateModel, LW(10), -20, 0, 0, 1)
         EVT_WAIT_FRAMES(1)
