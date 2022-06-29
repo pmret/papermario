@@ -329,18 +329,18 @@ s32 D_802EA4E4[] = {
     entity_model_HitRedBlock_gfx_ROM_START, entity_model_HitRedBlock_gfx_ROM_END,
     entity_model_HitRedBlock_anim_ROM_START, entity_model_HitRedBlock_anim_ROM_END
 };
-EntityModelScript D_802EA4F4 = STANDARD_ENTITY_MODEL_SCRIPT(Entity_YellowBlock_Render, RENDER_MODE_SURFACE_OPA);
+EntityModelScript Entity_YellowBlock_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(Entity_YellowBlock_Render, RENDER_MODE_SURFACE_OPA);
 
-EntityModelScript D_802EA510 = STANDARD_ENTITY_MODEL_SCRIPT(Entity_YellowBlock_Render, RENDER_MODE_SURFACE_XLU_LAYER2);
+EntityModelScript Entity_HiddenYellowBlock_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(Entity_YellowBlock_Render, RENDER_MODE_SURFACE_XLU_LAYER2);
 
-EntityModelScript D_802EA52C = STANDARD_ENTITY_MODEL_SCRIPT(Entity_RedBlock_Render, RENDER_MODE_SURFACE_OPA);
+EntityModelScript Entity_RedBlock_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(Entity_RedBlock_Render, RENDER_MODE_SURFACE_OPA);
 
-EntityModelScript D_802EA548 = STANDARD_ENTITY_MODEL_SCRIPT(Entity_RedBlock_Render, RENDER_MODE_SURFACE_XLU_LAYER2);
+EntityModelScript Entity_HiddenRedBlock_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(Entity_RedBlock_Render, RENDER_MODE_SURFACE_XLU_LAYER2);
 
 EntityBlueprint Entity_YellowBlock = {
     .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200,
     .typeDataSize = sizeof(ItemBlockData),
-    .renderCommandList = D_802EA4F4,
+    .renderCommandList = Entity_YellowBlock_RenderScript,
     .modelAnimationNodes = 0x00000000,
     .fpInit = entity_ItemBlock_init,
     .updateEntityScript = Entity_ItemBlock_Script,
@@ -352,7 +352,7 @@ EntityBlueprint Entity_YellowBlock = {
 EntityBlueprint Entity_HiddenYellowBlock = {
     .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200,
     .typeDataSize = sizeof(ItemBlockData),
-    .renderCommandList = D_802EA510,
+    .renderCommandList = Entity_HiddenYellowBlock_RenderScript,
     .modelAnimationNodes = 0x00000000,
     .fpInit = entity_HiddenItemBlock_init,
     .updateEntityScript = Entity_HiddenItemBlock_Script,
@@ -364,7 +364,7 @@ EntityBlueprint Entity_HiddenYellowBlock = {
 EntityBlueprint Entity_RedBlock = {
     .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200,
     .typeDataSize = sizeof(ItemBlockData),
-    .renderCommandList = D_802EA52C,
+    .renderCommandList = Entity_RedBlock_RenderScript,
     .modelAnimationNodes = 0x00000000,
     .fpInit = entity_ItemBlock_init,
     .updateEntityScript = Entity_ItemBlock_Script,
@@ -376,7 +376,7 @@ EntityBlueprint Entity_RedBlock = {
 EntityBlueprint Entity_HiddenRedBlock = {
     .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200,
     .typeDataSize = sizeof(ItemBlockData),
-    .renderCommandList = D_802EA548,
+    .renderCommandList = Entity_HiddenRedBlock_RenderScript,
     .modelAnimationNodes = 0x00000000,
     .fpInit = entity_HiddenItemBlock_init,
     .updateEntityScript = Entity_HiddenItemBlock_Script,

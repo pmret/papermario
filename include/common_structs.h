@@ -479,30 +479,23 @@ typedef struct ItemBlockData {
 typedef struct SuperBlockContentData {
     /* 0x000 */ u8 parentEntityIndex; // for block entities spawned by other block entities
     /* 0x001 */ u8 unk_01;
-    /* 0x002 */ s8 unk_02;
+    /* 0x002 */ s8 effectTimer;
     /* 0x003 */ s8 unk_03;
     /* 0x004 */ f32 unk_04;
-    /* 0x008 */ char unk_08;
-    /* 0x009 */ u8 unk_09;
-    /* 0x00A */ u8 unk_0A;
+    /* 0x008 */ u8 paletteTimer;
+    /* 0x009 */ u8 paletteArrOffset;
+    /* 0x00A */ u8 isHidden;
     /* 0x00B */ char unk_0B; // padding?
     /* 0x00C */ s32 unk_0C;
-    /* 0x010 */ s32 unk_10;
-    /* 0x014 */ f32 unk_14;
-    /* 0x018 */ f32 unk_18;
-    /* 0x01C */ f32 unk_1C;
-    /* 0x020 */ f32 unk_20;
-    /* 0x024 */ u16 unk_24;
-    /* 0x024 */ s16 unk_26;
-    /* 0x028 */ f32 unk_28[0xB];
-    /* 0x054 */ f32 unk_54;
-    /* 0x058 */ char unk_58[0x78];
+    /* 0x010 */ Mtx unk_10;
+    /* 0x050 */ Mtx unk_50;
+    /* 0x090 */ Mtx unk_90;
     /* 0x0D0 */ u16 yawBufferPos;
     /* 0x0D4 */ f32 yawBuffer[20];
     /* 0x124 */ s32 unk_124;
-    /* 0x128 */ s32* unk_128;
-    /* 0x12C */ s32* unk_12C;
-} SuperBlockContentData;
+    /* 0x128 */ Gfx* unk_128;
+    /* 0x12C */ Gfx* unk_12C;
+} SuperBlockContentData; // size = 0x130
 
 // size unknown
 typedef struct HeartBlockContentData {

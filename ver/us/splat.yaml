@@ -875,7 +875,7 @@ segments:
     - [0x10B610, .data, entity/Block]
     - [0x10BB90, .data, entity/ItemBlock]
     - [0x10BF10, .data, entity/HeartBlock]
-    - [0x10C090, .data, entity/BlockData8]
+    - [0x10C090, .data, entity/SuperBlock]
     - [0x10C220, .data, entity/BlockData9]
     - [0x10C300, .data, entity/BlockDataA]
     - [0x10C3B0, .data, entity/BlockDataB]
@@ -12321,8 +12321,38 @@ segments:
       - [0xE43C20, ci8, PowBlock_face, 64, 32]
       - [0xE44420, palette, PowBlock_face]
       - [0xE44620]
-  - [0xE44800, bin] # unk data
-  - [0xE45110, bin] # unk data
+  - name: entity_model_SuperBlock
+    dir: entity/model
+    type: code
+    start: 0xE44800
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE44800, c, SuperBlock]
+    - start: 0xE44800
+      type: .data
+      name: SuperBlock
+      subsegments:
+      - [0xE44800]
+      - [0xE44C80, ci4, SuperBlock_tex, 16, 32]
+      - [0xE44D80, palette, SuperBlock_tex]
+      - [0xE44DA0]
+  - name: entity_model_UltraBlock
+    dir: entity/model
+    type: code
+    start: 0xE45110
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE45110, c, UltraBlock]
+    - start: 0xE45110
+      type: .data
+      name: UltraBlock
+      subsegments:
+      - [0xE45110]
+      - [0xE45590, ci4, UltraBlock_tex, 16, 32]
+      - [0xE45690, palette, UltraBlock_tex]
+      - [0xE456B0]
   - name: entity_model_HitYellowBlock_gfx
     dir: entity/model
     type: code
@@ -12407,8 +12437,42 @@ segments:
       #- [0xE4A240, ci4, HeartBlockContent_img3, 32, 32]
       #- [0xE4A440, palette, HeartBlockContent_pal] # this palette is common for all images above
       #- [0xE4A460]
-  - [0xE4A6A0, bin] # unk data
-  - [0xE4AA80, bin] # unk data
+  - name: entity_model_SuperBlockContent
+    dir: entity/model
+    type: code
+    start: 0xE4A6A0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE4A6A0, c, SuperBlockContent]
+    - start: 0xE4A6A0
+      type: .data
+      name: SuperBlockContent
+      subsegments:
+      - [0xE4A6A0, ci4, SuperBlockContent, 32, 32]
+      - [0xE4A8A0, palette, SuperBlockContent]
+      - [0xE4A8C0, palette, SuperBlockContent.pal2]
+      - [0xE4A8E0, palette, SuperBlockContent.pal3]
+      - [0xE4A900, palette, SuperBlockContent.pal4]
+      - [0xE4A920]
+  - name: entity_model_UltraBlockContent
+    dir: entity/model
+    type: code
+    start: 0xE4AA80
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE4AA80, c, UltraBlockContent]
+    - start: 0xE4AA80
+      type: .data
+      name: UltraBlockContent
+      subsegments:
+      - [0xE4AA80]
+      #- [0xE4AA80, ci4, UltraBlockContent_img1, 32, 32]
+      #- [0xE4AC80, ci4, UltraBlockContent_img2, 32, 32]
+      #- [0xE4AE80, ci4, UltraBlockContent_img3, 32, 32]
+      #- [0xE4B080, palette, UltraBlockContent_pal] # this palette is common for all images above
+      #- [0xE4B0A0]
   - name: entity_model_SaveBlock
     dir: entity/model
     type: code
