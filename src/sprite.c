@@ -1,10 +1,6 @@
 #include "sprite.h"
 
 extern s32 spr_allocateBtlComponentsOnWorldHeap;
-// extern union {
-//     s32 s32;
-//     u8 b[4];
-// } D_802DF540;
 extern s32 D_802DF540;
 extern SpriteAnimData* spr_playerSprites[13];
 extern s32 D_802DF57C;
@@ -315,8 +311,6 @@ void spr_transform_point(s32 rotX, s32 rotY, s32 rotZ, f32 inX, f32 inY, f32 inZ
     }
 }
 
-// void spr_draw_component(s32, SpriteComponent*, SpriteComponent*, SpriteRasterCacheEntry**, s16**, f32, Matrix4f);
-// INCLUDE_ASM(s32, "sprite", spr_draw_component);
 void spr_draw_component(s32 opacity, SpriteComponent* component, UnkSpriteThing* arg2, SpriteRasterCacheEntry** cache, s16** arg4, f32 arg5, Matrix4f mtx) {
     f32 dx;
     f32 dy;
@@ -518,7 +512,7 @@ void spr_init_sprites(s32 playerSpriteSet) {
 
     for (i = 1; i < 0xE; i++) {
         if ((flags >> i) & 1) {
-            spr_load_player_sprite(i); // spr_load_player_sprite
+            spr_load_player_sprite(i);
         }
     }
 
@@ -547,7 +541,7 @@ void spr_init_sprites(s32 playerSpriteSet) {
         sprite->unk_10 = 0;
     }
 
-    spr_init_quad_cache(); // spr_init_quad_cache
+    spr_init_quad_cache();
 }
 
 void spr_render_init(void) {
