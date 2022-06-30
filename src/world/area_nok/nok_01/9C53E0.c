@@ -103,7 +103,7 @@ ApiStatus func_802427C0_9C7BA0(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     evt_get_variable(script, *args++);
-    func_80055448(16);
+    snd_ambient_80055448(16);
     func_80055760(4);
     func_8005566C(0, 250, 1);
     return ApiStatus_DONE2;
