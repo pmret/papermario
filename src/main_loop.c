@@ -13,16 +13,24 @@ GameStatus* gGameStatusPtr = &gGameStatus;
 s16 D_800741A0 = 0;
 s16 D_800741A2 = 0;
 s32 D_800741A4 = 0;
-s32 D_800741A8[] = { 0x00010000, 0x00000000, 0x00000001, 0x00000000, 0x00000000, 0x00010000, 0x00000000, 0x00000001,
-                     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-                     0x00000000, 0x00000000,
-                   };
+s32 D_800741A8[] = {
+    0x00010000, 0x00000000, 0x00000001, 0x00000000,
+    0x00000000, 0x00010000, 0x00000000, 0x00000001,
+    0x00000000, 0x00000000, 0x00000000, 0x00000000,
+    0x00000000, 0x00000000, 0x00000000, 0x00000000,
+    0x00000000, 0x00000000,
+};
 u16 gMatrixListPos = 0;
 u16 D_800741F2 = 0;
 s32 gCurrentDisplayContextIndex = 0;
 s32 D_800741F8 = 0;
 s32 D_800741FC = 0;
-s32 D_80074200[] = { 0x028001E0, 0x01FF0000, 0x028001E0, 0x01FF0000 };
+Vp D_80074200 = {
+    .vp = {
+        .vscale = {640, 480, 511, 0},
+        .vtrans = {640, 480, 511, 0},
+    }
+};
 
 Gfx D_80074210[] = {
     gsDPSetRenderMode(G_RM_OPA_SURF, G_RM_OPA_SURF2),
@@ -468,9 +476,9 @@ void gfx_draw_background(void) {
             gGameStatusPtr->backgroundFlags |= 0x30;
             // fall through
         case 0x30:
-            D_800741F8 += 0x10;
-            if (D_800741F8 > 0x80) {
-                D_800741F8 = 0x80;
+            D_800741F8 += 16;
+            if (D_800741F8 > 128) {
+                D_800741F8 = 128;
             }
 
             gDPPipeSync(gMasterGfxPos++);
@@ -486,7 +494,7 @@ void gfx_draw_background(void) {
             gDPSetRenderMode(gMasterGfxPos++, G_RM_OPA_SURF, G_RM_OPA_SURF2);
             gDPSetCombineLERP(gMasterGfxPos++, PRIMITIVE, TEXEL0, PRIMITIVE_ALPHA, TEXEL0, 0, 0, 0, 1, PRIMITIVE,
                               TEXEL1, PRIMITIVE_ALPHA, TEXEL1, 0, 0, 0, 1);
-            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0x28, 0x28, 0x28, D_800741F8);
+            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 40, 40, 40, D_800741F8);
             gDPSetTextureFilter(gMasterGfxPos++, G_TF_POINT);
 
             for (i = 0; i < 40; i++) {

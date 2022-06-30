@@ -17,8 +17,8 @@ extern MenuPanel D_8024A098;
 extern MenuPanel D_8024A114;
 extern MenuPanel D_8024A158;
 extern MenuPanel D_8024A1D8;
-extern WindowStyle D_8024BA60;
-extern WindowStyle D_8024BA98;
+extern WindowStyleCustom D_8024BA60;
+extern WindowStyleCustom D_8024BA98;
 extern s32 D_8024C088;
 
 HudScript* D_80249B80[] = { &D_80241ECC };
@@ -72,7 +72,7 @@ MenuWindowBP D_80249DAC[3] = {
         .parentID = -1,
         .fpUpdate = { 1 },
         .extraFlags = 0x40,
-        .style = { &D_8024BA60 },
+        .style = { .customStyle = &D_8024BA60 },
     },
     {
         .windowID = 0x18,
@@ -88,7 +88,7 @@ MenuWindowBP D_80249DAC[3] = {
         .parentID = 0x2C,
         .fpUpdate = { 1} ,
         .extraFlags = 0x00,
-        .style = { &D_8024BA98 },
+        .style = { .customStyle = &D_8024BA98 },
     },
     {
         .windowID = 0x17,
@@ -104,7 +104,7 @@ MenuWindowBP D_80249DAC[3] = {
         .parentID = -1,
         .fpUpdate = { 1 },
         .extraFlags = 0x00,
-        .style = { &D_8024BA98 },
+        .style = { .customStyle = &D_8024BA98 },
     },
 };
 

@@ -1093,7 +1093,9 @@ void draw_digit(u32 img, s32 charset, s32 posX, s32 posY) {
 
 INCLUDE_ASM(void, "msg", draw_number, s32 value, s32 x, s32 y, s32 arg3, s32 palette, s32 opacity, s32 style);
 
-void drawbox_message_delegate(MessagePrintState* printer) {
+void drawbox_message_delegate(void* data) {
+    MessagePrintState* printer = data;
+
     appendGfx_message(printer, 0, 0, 0, 0, 4, 0);
 }
 
