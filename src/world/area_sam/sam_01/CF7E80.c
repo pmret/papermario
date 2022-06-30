@@ -28,7 +28,7 @@ extern s32 N(LetterDelivery_SavedNpcAnim);
 
 #include "common/GetItemEntityPosition.inc.c"
 
-INCLUDE_ASM(s32, "world/area_sam/sam_01/CF7E80", func_80241B20_CF9690);
+#include "world/common/UnkTrigFunc001.inc.c"
 
 #define NAMESPACE dup_sam_01
 #include "world/common/StashVars.inc.c"

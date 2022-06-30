@@ -1,6 +1,7 @@
 #include "common.h"
 #include "effects.h"
 
+extern f32 D_8023D1E0;
 extern s32 D_8023D2C8;
 extern s32 D_8023D330;
 extern s32 D_8023D334;
@@ -49,7 +50,32 @@ ApiStatus func_80238C14_70C924(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "battle/partner/lakilester", func_80238C58_70C968);
+ApiStatus func_80238C58_70C968(Evt* script, s32 isInitialCall) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    Actor* actor = battleStatus->playerActor;
+    EffectInstanceData* effectData; // TODO remove this struct and replace it with the effect-specific one
+
+    if (isInitialCall) {
+        script->functionTemp[0] = 0;
+    }
+
+    switch (script->functionTemp[0]) {
+        case 0:
+            D_8023D1E0 = 0.1f;
+            fx_ending_decals(0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z, 0.1f, &battleStatus->cloudNineEffect);
+            script->functionTemp[0] = 1;
+            break;
+        case 1:
+            if (D_8023D1E0 >= 1.0) {
+                return ApiStatus_DONE2;
+            }
+            effectData = battleStatus->cloudNineEffect->data;
+            effectData->rotation.x += 0.2;
+            D_8023D1E0 += 0.2;
+            break;
+    }
+    return ApiStatus_BLOCK;
+}
 
 ApiStatus func_80238D48_70CA58(Evt* script, s32 isInitialCall) {
     if (gBattleStatus.cloudNineTurnsLeft < script->varTable[10]) {

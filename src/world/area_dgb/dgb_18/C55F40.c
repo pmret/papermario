@@ -334,7 +334,7 @@ EvtScript N(idle_80241654) = {
             EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_2038, 0)
             EVT_CALL(RandInt, 10, EVT_VAR(1))
             EVT_ADD(EVT_VAR(1), 10)
-            EVT_CALL(SetSleepBubbleUnk1C, EVT_VAR(0), EVT_VAR(1))
+            EVT_CALL(SetSleepBubbleTimeLeft, EVT_VAR(0), EVT_VAR(1))
             EVT_WAIT_FRAMES(30)
         EVT_END_LOOP
     EVT_END_THREAD
@@ -377,7 +377,7 @@ EvtScript N(idle_80242494) = {
             EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_2038, 0)
             EVT_CALL(RandInt, 10, EVT_VAR(1))
             EVT_ADD(EVT_VAR(1), 10)
-            EVT_CALL(SetSleepBubbleUnk1C, EVT_VAR(0), EVT_VAR(1))
+            EVT_CALL(SetSleepBubbleTimeLeft, EVT_VAR(0), EVT_VAR(1))
             EVT_WAIT_FRAMES(30)
         EVT_END_LOOP
     EVT_END_THREAD
@@ -390,7 +390,7 @@ EvtScript N(npcAI_802426B0) = {
     EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_2039, 0)
     EVT_CALL(ShowSleepBubble, 0, 0, 50, 2, 552, 111, 128, 30, EVT_VAR(0))
     EVT_WAIT_FRAMES(360)
-    EVT_CALL(SetSleepBubbleUnk1C, EVT_VAR(0), 20)
+    EVT_CALL(SetSleepBubbleTimeLeft, EVT_VAR(0), 20)
     EVT_CALL(SetNpcVar, -1, 1, 2)
     EVT_WAIT_FRAMES(20)
     EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_2F1, 0)

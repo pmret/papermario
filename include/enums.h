@@ -2150,6 +2150,7 @@ enum PlayerStatusFlags {
     PLAYER_STATUS_FLAGS_FLYING                           = 0x00000008,
     PLAYER_STATUS_FLAGS_10                               = 0x00000010,
     PLAYER_STATUS_FLAGS_20                               = 0x00000020,
+    PLAYER_STATUS_FLAGS_40                               = 0x00000040,
     PLAYER_STATUS_FLAGS_80                               = 0x00000080,
     PLAYER_STATUS_FLAGS_100                              = 0x00000100,
     PLAYER_STATUS_FLAGS_200                              = 0x00000200,

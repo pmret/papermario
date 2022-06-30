@@ -37,7 +37,14 @@ ApiStatus PostChapter4StatUpdate(Evt* script, s32 isInitialCall) {
 
 #include "world/common/GetFloorCollider.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_802419AC_84457C);
+ApiStatus N(IsPartnerBow)(Evt* script, s32 isInitialCall) {
+    if (gPartnerActionStatus.actingPartner == PARTNER_BOW) {
+        script->varTable[0] = TRUE;
+    } else {
+        script->varTable[0] = FALSE;
+    }
+    return ApiStatus_DONE2;
+}
 
 #include "world/common/GetPlayerCoins.inc.c"
 
