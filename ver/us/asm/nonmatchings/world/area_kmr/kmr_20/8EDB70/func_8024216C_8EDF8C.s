@@ -6,7 +6,7 @@ glabel func_8024216C_8EDF8C
 /* 8EDF90 80242170 0000202D */  daddu     $a0, $zero, $zero
 /* 8EDF94 80242174 240503E8 */  addiu     $a1, $zero, 0x3e8
 /* 8EDF98 80242178 AFBF0010 */  sw        $ra, 0x10($sp)
-/* 8EDF9C 8024217C 0C01559B */  jal       func_8005566C
+/* 8EDF9C 8024217C 0C01559B */  jal       snd_ambient_8005566C
 /* 8EDFA0 80242180 2406007F */   addiu    $a2, $zero, 0x7f
 /* 8EDFA4 80242184 8FBF0010 */  lw        $ra, 0x10($sp)
 /* 8EDFA8 80242188 24020002 */  addiu     $v0, $zero, 2

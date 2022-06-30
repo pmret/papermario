@@ -240,7 +240,7 @@ void snd_ambient_800555E4(s32 arg0) {
     }
 }
 
-s32 func_80055618(s32 arg0, s32 arg1) {
+s32 snd_ambient_80055618(s32 arg0, s32 arg1) {
     s32 ret = func_80050C30(arg0);
 
     if (ret == 0) {
@@ -250,7 +250,7 @@ s32 func_80055618(s32 arg0, s32 arg1) {
     return ret;
 }
 
-s32 func_8005566C(s32 arg0, s32 arg1, s32 arg2) {
+s32 snd_ambient_8005566C(s32 arg0, s32 arg1, s32 arg2) {
     s32 ret = func_80050C30(arg0);
 
     if (ret == 0) {
@@ -260,7 +260,7 @@ s32 func_8005566C(s32 arg0, s32 arg1, s32 arg2) {
     return ret;
 }
 
-s32 func_800556D0(s32 arg0) {
+s32 snd_ambient_800556D0(s32 arg0) {
     s32 ret = func_80050C30(arg0);
 
     if (ret == 0) {
@@ -270,7 +270,7 @@ s32 func_800556D0(s32 arg0) {
     return ret;
 }
 
-s32 func_80055718(s32 arg0) {
+s32 snd_ambient_80055718(s32 arg0) {
     s32 ret  = func_80050C30(arg0);
 
     if (ret == 0) {
@@ -280,7 +280,7 @@ s32 func_80055718(s32 arg0) {
     return ret;
 }
 
-void func_80055760(s32 arg0) {
+void snd_ambient_80055760(s32 arg0) {
     u32 i;
     s32 lim = 4;
 
@@ -292,10 +292,10 @@ void func_80055760(s32 arg0) {
         }
     }
 
-    func_80055848(arg0);
+    snd_ambient_80055848(arg0);
 }
 
-s32 func_800557CC(s32 arg0) {
+s32 snd_ambient_800557CC(s32 arg0) {
     u32 i;
     s32 lim = 4;
     s32 error;
@@ -314,7 +314,7 @@ s32 func_800557CC(s32 arg0) {
     return error;
 }
 
-s32 func_80055848(s32 arg0) {
+s32 snd_ambient_80055848(s32 arg0) {
     s32 lim = 4;
     s32 error = 0;
 
@@ -323,9 +323,9 @@ s32 func_80055848(s32 arg0) {
 
         for (i = 0; i < lim; i++) {
             if (i == arg0) {
-                error = func_80055718(arg0);
+                error = snd_ambient_80055718(arg0);
             } else {
-                error = func_800556D0(i);
+                error = snd_ambient_800556D0(i);
             }
 
             if (error != 0) {
