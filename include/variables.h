@@ -234,8 +234,8 @@ extern EntityBlueprint Entity_HitFloatingYellowBlock;
 extern EntityBlueprint Entity_HitRedBlock;
 extern EntityBlueprint Entity_Chest;
 extern EntityBlueprint Entity_HiddenPanel;
-extern EntityBlueprint D_802EAED4;
-extern s32 D_802EAE7C[];
+extern EntityBlueprint Entity_WoodenCrate;
+extern s32 Entity_WoodenCrate_RenderShatteredScript[];
 extern EntityBlueprint D_802EAF80;
 
 extern UNK_TYPE D_0A000328;

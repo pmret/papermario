@@ -880,7 +880,7 @@ segments:
     - [0x10C220, .data, entity/SimpleSpring]
     - [0x10C300, .data, entity/HiddenPanel]
     - [0x10C3B0, .data, entity/Chest]
-    - [0x10C6E0, .data, entity/BlockDataC]
+    - [0x10C6E0, .data, entity/WoodenCrate]
     - [0x10C780, .data, entity/BlockDataD]
     - [0x10C830, .data, entity/BlockDataE]
     #- [0x10A9F0, data]
@@ -12494,7 +12494,25 @@ segments:
       - [0xE4D4C8, rgba16, SaveBlock_letterS, 64, 32]
       - [0xE4E4C8]
   - [0xE4E7F0, bin] # unk data
-  - [0xE51640, bin] # unk data
+  - name: entity_model_WoodenCrate
+    dir: entity/model
+    type: code
+    start: 0xE51640
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE51640, c, WoodenCrate]
+    - start: 0xE51640
+      type: .data
+      name: WoodenCrate
+      subsegments:
+      - [0xE51640]
+      - [0xE52BA0, ci4, WoodenCrate_img1, 64, 64]
+      - [0xE533A0, palette, WoodenCrate_img1]
+      - [0xE533C0]
+      - [0xE53468, ci4, WoodenCrate_img2, 64, 64]
+      - [0xE53C68, palette, WoodenCrate_img2]
+      - [0xE53C88]
   - [0xE55A40, bin] # unk data
   - name: entity_model_HiddenPanel
     dir: entity/model

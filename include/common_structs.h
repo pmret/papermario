@@ -527,19 +527,19 @@ typedef struct WoodenCrateData {
     /* 0x000 */ s32 itemID;
     /* 0x004 */ u16 globalFlagIndex;
     /* 0x006 */ u8  unk_06[2];
-    /* 0x008 */ u8* fragmentsGfx; //TODO type when more WoodenCrate.c is done
+    /* 0x008 */ Gfx** fragmentsGfx;
     /* 0x00C */ f32 basePosY;
-    /* 0x010 */ u8 fragmentScale[36];
-    /* 0x034 */ s8 fragmentMoveAngle[36]; // X,Z plane -- scaled to map [0,255] -> [0,360]
+    /* 0x010 */ s8 fragmentRebounds[36];
+    /* 0x034 */ u8 fragmentMoveAngle[36]; // X,Z plane -- scaled to map [0,255] -> [0,360], also used as fragment alpha
     /* 0x058 */ u8 fragmentRotX[36]; // scaled to map [0,255] -> [0,360]
     /* 0x07C */ u8 fragmentRotY[36]; // scaled to map [0,255] -> [0,360]
-    /* 0x0A0 */ u8 fragmentLateralSpeed[36];
-    /* 0x0C4 */ f32 fragmentFallSpeed[36];
+    /* 0x0A0 */ u8 fragmentLateralSpeed[36]; // scaled to map [0,255] -> [0,25.5]
+    /* 0x0C4 */ f32 fragmentRotationSpeed[36];
     /* 0x154 */ f32 fragmentPosX[36];
     /* 0x1E4 */ f32 fragmentPosY[36];
     /* 0x274 */ f32 fragmentPosZ[36];
-    /* 0x304 */ f32 unk_304[36];
-} WoodenCrateData;
+    /* 0x304 */ f32 fragmentFallSpeed[36];
+} WoodenCrateData; // size = 0x394
 
 // size unknown
 typedef struct ChestData {
