@@ -879,7 +879,7 @@ segments:
     - [0x10C090, .data, entity/SuperBlock]
     - [0x10C220, .data, entity/SimpleSpring]
     - [0x10C300, .data, entity/HiddenPanel]
-    - [0x10C3B0, .data, entity/BlockDataB]
+    - [0x10C3B0, .data, entity/Chest]
     - [0x10C6E0, .data, entity/BlockDataC]
     - [0x10C780, .data, entity/BlockDataD]
     - [0x10C830, .data, entity/BlockDataE]
@@ -12562,7 +12562,27 @@ segments:
       - [0xE64290]
       - [0xE64338, ia4, BlueSwitch_exclamationMark, 16, 32]
       - [0xE64438]
-  - [0xE648D0, bin] # unk data
+  - name: entity_model_Chest
+    dir: entity/model
+    type: code
+    start: 0xE648D0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE648D0, c, Chest]
+    - start: 0xE648D0
+      type: .data
+      name: Chest
+      subsegments:
+      - [0xE648D0]
+      - [0xE64CE0, rgba16, Chest_tex1, 16, 32]
+      - [0xE650E0]
+      - [0xE65168, ci4, Chest_tex2, 16, 32]
+      - [0xE65268, palette, Chest_tex2]
+      - [0xE65288]
+      - [0xE65340, ci4, Chest_lock, 16, 32]
+      - [0xE65440, palette, Chest_lock]
+      - [0xE65460]
   - name: entity_model_ScriptSpring_gfx
     dir: entity/model
     type: code

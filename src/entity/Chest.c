@@ -1,21 +1,64 @@
 #include "common.h"
 #include "effects.h"
+#include "ld_addrs.h"
+#include "entity_script.h"
 
-void entity_Chest_open(Entity* entity);
+extern EntityScript Entity_Chest_ScriptOpened;
 
-#define CHEST_POST_ANIM_DELAY_TIME  10
+extern Gfx Entity_Chest_RenderBox[];
+extern Gfx Entity_Chest_RenderLid[];
+extern Mtx Entity_Chest_lidMtx;
 
-extern s32 D_802EAD7C;
-// requires data migration
-#ifdef NON_MATCHING
-/*
-extern Script D_802EAB30;
-extern Script D_802EAC40;
-extern Script D_802EAC84;
+EvtScript D_802EAB30 = {
+    EVT_THREAD
+        EVT_CALL(GetPlayerPos, LW(0), LW(1), LW(2))
+        EVT_CALL(UseSettingsFrom, 0, -195, -358, -555)
+        EVT_CALL(SetPanTarget, 0, LW(0), LW(1), LW(2))
+        EVT_CALL(SetCamDistance, 0, EVT_FLOAT(290.0))
+        EVT_CALL(SetCamPitch, 0, EVT_FLOAT(20.0), EVT_FLOAT(-10.0))
+        EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(8.0))
+        EVT_CALL(PanToTarget, 0, 0, 1)
+        EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
+    EVT_END_THREAD
+    EVT_RETURN
+    EVT_END
+};
 
-void entity_Chest_adjust_camera(void) {
-    Areas areaID;
-    Script* script;
+EvtScript D_802EAC0C = {
+    EVT_THREAD
+        EVT_CALL(ResetCam, 0, 3)
+    EVT_END_THREAD
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript D_802EAC40 = {
+    EVT_THREAD
+        EVT_CALL(AdjustCam, 0, EVT_FLOAT(8.0), 0, EVT_FLOAT(300.0), EVT_FLOAT(17.5), EVT_FLOAT(-9.5))
+    EVT_END_THREAD
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript D_802EAC84 = {
+    EVT_THREAD
+        EVT_CALL(AdjustCam, 0, EVT_FLOAT(8.0), 0, EVT_FLOAT(210.0), EVT_FLOAT(21.0), EVT_FLOAT(-16.0))
+    EVT_END_THREAD
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript D_802EACC8 = {
+    EVT_THREAD
+        EVT_CALL(ResetCam, 0, 3)
+    EVT_END_THREAD
+    EVT_RETURN
+    EVT_END
+};
+
+void entity_Chest_adjust_camera(Entity* entity) {
+    s16 areaID;
+    EvtScript* script;
 
     areaID = gGameStatusPtr->areaID;
     script = NULL;
@@ -27,18 +70,42 @@ void entity_Chest_adjust_camera(void) {
         script = &D_802EAC84;
     }
     if (script != NULL) {
-        start_script(script, 10, 32);
+        start_script(script, EVT_PRIORITY_A, EVT_FLAG_20);
     }
-}*/
-#else
-INCLUDE_ASM(s32, "entity/Chest", entity_Chest_adjust_camera);
-#endif
+}
 
-// requires data migration
-INCLUDE_ASM(s32, "entity/Chest", entity_Chest_reset_camera);
+void entity_Chest_reset_camera(Entity* entity) {
+    s16 areaID;
+    EvtScript* script;
 
-s32 entity_Chest_setupGfx(void);
-INCLUDE_ASM(s32, "entity/Chest", entity_Chest_setupGfx);
+    areaID = gGameStatusPtr->areaID;
+    script = NULL;
+    if (areaID == AREA_ISK) {
+        script = &D_802EAC0C;
+    } else {
+        script = &D_802EACC8;
+    }
+    start_script(script, EVT_PRIORITY_A, EVT_FLAG_20);
+}
+
+void entity_Chest_setupGfx(s32 entityIndex) {
+    Gfx* gfxPos = gMasterGfxPos;
+    Entity* entity = get_entity_by_index(entityIndex);
+    ChestData* data = entity->dataBuf.chest;
+    Matrix4f sp18;
+    Matrix4f sp58;
+    Gfx* gfx;
+
+    guRotateF(sp58, data->lidAngle, 1.0f, 0.0f, 0.0f);
+    guMtxL2F(sp18, (Mtx*)((s32)entity->vertexData + (u16)(&Entity_Chest_lidMtx)));
+    guMtxCatF(sp58, sp18, sp18);
+    guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+    gSPMatrix(gfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gfx = (Gfx*)((s32)entity->vertexData + (u16)Entity_Chest_RenderLid);
+    gSPDisplayList(gfxPos++, gfx);
+    gSPPopMatrix(gfxPos++, G_MTX_MODELVIEW);
+    gMasterGfxPos = gfxPos;
+}
 
 void entity_Chest_check_opened(Entity* entity) {
     ChestData* data = entity->dataBuf.chest;
@@ -46,7 +113,7 @@ void entity_Chest_check_opened(Entity* entity) {
         entity->flags |= ENTITY_FLAGS_4000;
         data->itemID = -1;
         data->lidAngle = -28.7f;
-        set_entity_commandlist(entity, &D_802EAD7C);
+        set_entity_commandlist(entity, Entity_Chest_ScriptOpened);
     }
 }
 
@@ -79,7 +146,7 @@ void entity_Chest_idle(Entity* entity) {
 
 void entity_Chest_begin_opening(Entity* entity) {
     ChestData* data = entity->dataBuf.chest;
-    data->postLidAnimDelay = CHEST_POST_ANIM_DELAY_TIME;
+    data->postLidAnimDelay = 10;
     data->lidAngle = 0.0f;
     data->unk_05 = 0;
     data->giveItemTimer = 40;
@@ -165,7 +232,7 @@ void entity_Chest_close(Entity* entity) {
             data->lidAnimInterpPhase += 1.0f;
             if (data->lidAnimInterpPhase >= 185.0f) {
                 data->lidAnimInterpPhase = 185.0f;
-                data->postLidAnimDelay = CHEST_POST_ANIM_DELAY_TIME;
+                data->postLidAnimDelay = 10;
                 data->state++;
             }
             delta = 2.0f * sin_rad(data->lidAnimInterpPhase * TAU / 360.0f);
@@ -183,7 +250,14 @@ void entity_Chest_close(Entity* entity) {
     }
 }
 
-INCLUDE_ASM(s32, "entity/Chest", entity_GiantChest_hide_effect);
+void entity_GiantChest_hide_effect(Entity* entity) {
+    ChestData* chest = entity->dataBuf.chest;
+    EffectInstance* effect = chest->gotItemEffect;
+
+    if (effect != NULL) {
+        ((GotItemOutlineFXData*)effect->data)->unk_14 = 10;
+    }
+}
 
 void entity_GiantChest_open(Entity* entity) {
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -354,7 +428,7 @@ void entity_Chest_clear_item_id(Entity* entity) {
 
 void entity_Chest_readargs(Entity* entity) {
     ChestData* data = entity->dataBuf.chest;
-    data->itemID = *CreateEntityVarArgBuffer;
+    data->itemID = CreateEntityVarArgBuffer[0];
     data->gameFlagIndex = 0xFFFF;
 }
 
@@ -372,3 +446,64 @@ void entity_Chest_init(Entity* entity) {
     entity->scale.y = 0.56f;
     entity->scale.z = 0.56f;
 }
+
+EntityScript Entity_GiantChest_Script = {
+    es_Call(entity_Chest_check_opened)
+    es_SetCallback(entity_Chest_idle, 0)
+    es_Call(entity_Chest_adjust_camera)
+    es_Call(entity_GiantChest_give_equipment)
+    es_Call(entity_Chest_begin_opening)
+    es_SetCallback(entity_GiantChest_open, 0)
+    es_Call(entity_Chest_start_bound_script)
+    es_SetCallback(entity_GiantChest_await_got_item, 0)
+    es_Call(entity_GiantChest_hide_effect)
+    es_Call(entity_Chest_reset_camera)
+    es_SetCallback(entity_Chest_close, 0)
+    es_SetCallback(NULL, 0)
+    es_Restart
+    es_End
+};
+
+EntityScript Entity_Chest_ScriptOpened = {
+    es_SetCallback(NULL, 0)
+    es_End
+};
+EntityScript Entity_Chest_Script = {
+    es_Call(entity_Chest_check_opened)
+    es_SetCallback(entity_Chest_idle, 0)
+    es_Call(entity_Chest_begin_opening)
+    es_Call(entity_Chest_start_bound_script)
+    es_Call(entity_Chest_clear_item_id)
+    es_SetCallback(entity_Chest_open, 0)
+    es_Call(entity_Chest_enable_player_input)
+    es_SetCallback(entity_Chest_close, 0)
+    es_SetCallback(NULL, 0)
+    es_Restart
+    es_End
+};
+EntityModelScript Entity_Chest_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(Entity_Chest_RenderBox, RENDER_MODE_SURFACE_OPA);
+
+EntityBlueprint Entity_GiantChest = {
+    .flags = ENTITY_FLAGS_4000,
+    .typeDataSize = sizeof(ChestData),
+    .renderCommandList = Entity_Chest_RenderScript,
+    .modelAnimationNodes = 0x00000000,
+    .fpInit = entity_GiantChest_init,
+    .updateEntityScript = Entity_GiantChest_Script,
+    .fpHandleCollision = NULL,
+    {{ entity_model_Chest_ROM_START, entity_model_Chest_ROM_END }},
+    .entityType = ENTITY_TYPE_CHEST,
+    .aabbSize = { 50, 45, 46 }
+};
+EntityBlueprint Entity_Chest = {
+    .flags = ENTITY_FLAGS_8000 | ENTITY_FLAGS_4000,
+    .typeDataSize = sizeof(ChestData),
+    .renderCommandList = Entity_Chest_RenderScript,
+    .modelAnimationNodes = 0x00000000,
+    .fpInit = entity_Chest_init,
+    .updateEntityScript = Entity_Chest_Script,
+    .fpHandleCollision = NULL,
+    {{ entity_model_Chest_ROM_START, entity_model_Chest_ROM_END }},
+    .entityType = ENTITY_TYPE_CHEST,
+    .aabbSize = { 28, 26, 23 }
+};

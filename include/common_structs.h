@@ -560,7 +560,7 @@ typedef struct ChestData {
     /* 0x30 */ s8 unk_30;
     /* 0x31 */ char unk_31[3];
     /* 0x34 */ struct EffectInstance* gotItemEffect;
-} ChestData;
+} ChestData; // size = 0x38
 
 typedef struct BlueWarpPipeData {
     /* 0x00 */ s32 unk_00; // proably flags
