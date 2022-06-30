@@ -570,7 +570,7 @@ typedef struct BlueWarpPipeData {
     /* 0x10 */ EvtScript* onEnterPipeEvt;
     /* 0x14 */ s32 flagIndex;
     /* 0x18 */ f32 finalPosY;
-} BlueWarpPipeData;
+} BlueWarpPipeData; // size = 0x1C
 
 typedef struct SimpleSpringData {
     /* 0x00 */ s32 launchVelocity;

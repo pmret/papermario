@@ -236,7 +236,7 @@ extern EntityBlueprint Entity_Chest;
 extern EntityBlueprint Entity_HiddenPanel;
 extern EntityBlueprint Entity_WoodenCrate;
 extern s32 Entity_WoodenCrate_RenderShatteredScript[];
-extern EntityBlueprint D_802EAF80;
+extern EntityBlueprint Entity_BlueWarpPipe;
 
 extern UNK_TYPE D_0A000328;
 extern UNK_TYPE D_0A000750;

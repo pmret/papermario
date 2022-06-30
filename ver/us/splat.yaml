@@ -881,7 +881,7 @@ segments:
     - [0x10C300, .data, entity/HiddenPanel]
     - [0x10C3B0, .data, entity/Chest]
     - [0x10C6E0, .data, entity/WoodenCrate]
-    - [0x10C780, .data, entity/BlockDataD]
+    - [0x10C780, .data, entity/BlueWarpPipe]
     - [0x10C830, .data, entity/BlockDataE]
     #- [0x10A9F0, data]
     #- [0x10A9F0, i4,      shadow/square, 16, 16]
@@ -12522,7 +12522,25 @@ segments:
     subsegments:
     - [0xE56BA0, c, HiddenPanel]
   - [0xE56E60, bin] # unk data
-  - [0xE58CD0, bin] # unk data
+  - name: entity_model_BlueWarpPipe
+    dir: entity/model
+    type: code
+    start: 0xE58CD0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE58CD0, c, BlueWarpPipe]
+    - start: 0xE58CD0
+      type: .data
+      name: BlueWarpPipe
+      subsegments:
+      - [0xE58CD0]
+      - [0xE58FF0, ci4, BlueWarpPipe_texBase, 16, 16]
+      - [0xE59070, palette, BlueWarpPipe_texBase]
+      - [0xE59090]
+      - [0xE59140, ci4, BlueWarpPipe_texPipe, 32, 16]
+      - [0xE59240, palette, BlueWarpPipe_texPipe]
+      - [0xE59260]
   - [0xE59480, bin] # unk data
   - [0xE59F00, bin] # unk data
   - name: entity_model_GreenStompSwitch
