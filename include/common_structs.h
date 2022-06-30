@@ -599,6 +599,10 @@ typedef struct HiddenPanelData {
     /* 0x78 */ Gfx* renderDList;
 }   HiddenPanelData; // size = 0x7C
 
+typedef struct SignPostData {
+    /* 0x00 */ char unk_00[8];
+} SignPostData; // size = 0x08
+
 // END ENTITY-SPECIFIC STRUCTS
 
 typedef s32 (*EntityCallback)(struct Entity*);
@@ -660,6 +664,7 @@ typedef struct Entity {
         SuperBlockContentData* superBlockContent;
         SimpleSpringData* simpleSpring;
         HiddenPanelData* hiddenPanel;
+        SignPostData* signPost;
         s32* unk;
     } dataBuf;
     /* 0x44 */ Vec3s* vertexData;

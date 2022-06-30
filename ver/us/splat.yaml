@@ -882,7 +882,7 @@ segments:
     - [0x10C3B0, .data, entity/Chest]
     - [0x10C6E0, .data, entity/WoodenCrate]
     - [0x10C780, .data, entity/BlueWarpPipe]
-    - [0x10C830, .data, entity/BlockDataE]
+    - [0x10C830, .data, entity/Signpost]
     #- [0x10A9F0, data]
     #- [0x10A9F0, i4,      shadow/square, 16, 16]
     #- [0x10AA70, i4,      shadow/circle, 16, 16]
@@ -12541,7 +12541,22 @@ segments:
       - [0xE59140, ci4, BlueWarpPipe_texPipe, 32, 16]
       - [0xE59240, palette, BlueWarpPipe_texPipe]
       - [0xE59260]
-  - [0xE59480, bin] # unk data
+  - name: entity_model_SignPost
+    dir: entity/model
+    type: code
+    start: 0xE59480
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE59480, c, SignPost]
+    - start: 0xE59480
+      type: .data
+      name: SignPost
+      subsegments:
+      - [0xE59480]
+      - [0xE59A00, ci4, SignPost, 32, 32]
+      - [0xE59C00, palette, SignPost]
+      - [0xE59C20]
   - [0xE59F00, bin] # unk data
   - name: entity_model_GreenStompSwitch
     dir: entity/model
