@@ -48,12 +48,12 @@ void snd_load_audio_data(s32 outputRate) {
     globals->dataSEF = alHeapAlloc(alHeap, 1, 0x5200);
     globals->defaultInstrument = alHeapAlloc(alHeap, 1, sizeof(Instrument));
     globals->dataPER = alHeapAlloc(alHeap, 1, 6 * sizeof(PEREntry));
-    globals->dataPRG = alHeapAlloc(alHeap, 1, 0x200);
+    globals->dataPRG = alHeapAlloc(alHeap, 1, 64 * sizeof(BGMInstrumentInfo));
     globals->unk_arr_94 = alHeapAlloc(alHeap, 1, 0x40);
     globals->outputRate = outputRate;
     snd_reset_instrument(globals->defaultInstrument);
-    func_80053370(&globals->defaultDrumEntry);
-    func_800533A8(&globals->defaultPRGEntry);
+    snd_reset_drum_entry(&globals->defaultDrumEntry);
+    snd_reset_instrument_entry(&globals->defaultPRGEntry);
     func_8005610C();
 
     globals->unk_A4[0] = NULL;
@@ -157,7 +157,7 @@ void snd_reset_instrument(Instrument* instrument) {
     instrument->sampleRate = 0.5f;
 }
 
-void func_80053370(BGMDrumInfo* arg0) {
+void snd_reset_drum_entry(BGMDrumInfo* arg0) {
     arg0->unk_00 = 8208;
     arg0->unk_02 = 4800;
     arg0->unk_04 = 0x7F;
@@ -169,7 +169,7 @@ void func_80053370(BGMDrumInfo* arg0) {
     arg0->unk_0A = 0;
 }
 
-void func_800533A8(BGMInstrumentInfo* arg0) {
+void snd_reset_instrument_entry(BGMInstrumentInfo* arg0) {
     arg0->unk_00 = 8208;
     arg0->unk_02 = 0x7F;
     arg0->pan = 64;
@@ -177,7 +177,6 @@ void func_800533A8(BGMInstrumentInfo* arg0) {
     arg0->coarseTune = 0;
     arg0->fineTune = 0;
 }
-
 
 void snd_update_sequence_players(void) {
     SndGlobals* temp_s2 = gSoundGlobals;
@@ -815,7 +814,6 @@ void snd_load_PRG(SndGlobals* arg0, s32 romAddr) {
         snd_copy_words(end, end + sizeof(BGMInstrumentInfo), numItemsLeft * sizeof(BGMInstrumentInfo) - sizeof(BGMInstrumentInfo));
     }
 }
-
 
 INCLUDE_ASM(s32, "audio/2e230_len_2190", snd_load_BGM);
 

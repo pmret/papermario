@@ -592,7 +592,8 @@ typedef struct BGMPlayerTrack {
     /* 0x1C */ s32 subTrackVolumeFadeDelta;
     /* 0x20 */ s32 subTrackVolumeFadeVolume;
     /* 0x24 */ s32 subTrackVolumeFadeTime;
-    /* 0x28 */ s32 unk_28;
+    /* 0x28 */ s32 delayTime;
+    //TODO Fade struct?
     /* 0x2C */ s32 unk2C;
     /* 0x30 */ s32 unk30;
     /* 0x34 */ s16 unk34;
@@ -604,7 +605,7 @@ typedef struct BGMPlayerTrack {
     /* 0x40 */ SoundPlayChange changed;
     /* 0x44 */ u16 unk_44;
     /* 0x46 */ u16 subTrackCoarseTune;
-    /* 0x48 */ u8 subTrackFineTune;
+    /* 0x48 */ s8 subTrackFineTune;
     /* 0x49 */ s8 segTrackVolume;
     /* 0x4A */ u8 subTrackPan;
     /* 0x4B */ u8 subTrackReverb;
@@ -614,13 +615,13 @@ typedef struct BGMPlayerTrack {
     /* 0x4F */ u8 unk_4F;
     /* 0x50 */ u8 unk_50;
     /* 0x51 */ u8 unk_51;
-    /* 0x52 */ u8 unk_52;
-    /* 0x53 */ u8 unk_53;
+    /* 0x52 */ u8 unk_52; // voice idx start
+    /* 0x53 */ u8 unk_53; // voice idx end
     /* 0x54 */ u8 unk_54;
     /* 0x55 */ u8 trackTremoloSpeed;
     /* 0x56 */ u8 trackTremoloTime;
     /* 0x57 */ u8 unk_57;
-    /* 0x58 */ u8 unk_58;
+    /* 0x58 */ u8 isDrumTrack;
     /* 0x59 */ u8 unk_59;
     /* 0x5A */ u8 unk_5A;
     /* 0x5B */ s8 subtrackReverbType;
@@ -633,12 +634,12 @@ typedef struct AlUnkTheta {
     /* 0x00 */ f32 unk_04;
     /* 0x08 */ s16 unk_08;
     /* 0x0A */ s16 unk_0A;
-    /* 0x0C */ s32 unk_0C;
+    /* 0x0C */ s32 noteLength;
     /* 0x10 */ u16 unk_10;
     /* 0x12 */ u8 unk_12;
     /* 0x12 */ u8 unk_13;
     /* 0x14 */ s16 unk_14;
-    /* 0x16 */ u8 unk_16;
+    /* 0x16 */ u8 noteVelocity;
     /* 0x17 */ u8 unk_17;
 } AlUnkTheta; // size = 0x18;
 
@@ -659,7 +660,7 @@ typedef struct BGMPlayer {
     /* 0x04C */ u8 unk_4C[4];
     /* 0x050 */ s32 unk_50;
     /* 0x054 */ s32 unk_54;
-    /* 0x058 */ s16 unk_58;
+    /* 0x058 */ u16 unk_58;
     /* 0x05A */ s16 unk_5A;
     /* 0x05C */ s16 unk_5C;
     /* 0x05E */ char pad5E[2];
@@ -693,12 +694,12 @@ typedef struct BGMPlayer {
     /* 0x204 */ u8* unk_204;
     /* 0x208 */ u16 masterTempoBPM;
     /* 0x20A */ u16 bgmKhz;
-    /* 0x20C */ s16 masterTranspose;
+    /* 0x20C */ u16 masterTranspose;
     /* 0x20E */ s16 unk_20E;
     /* 0x210 */ u8 unk_210;
     /* 0x211 */ u8 unk_211;
     /* 0x212 */ u8 unk_212[8];
-    /* 0x21A */ u8 unk_21A;
+    /* 0x21A */ s8 unk_21A;
     /* 0x21B */ u8 unk_21B;
     /* 0x21C */ u8 bgmDrumCount;
     /* 0x21D */ u8 bgmInstrumentCount;
@@ -719,13 +720,13 @@ typedef struct BGMPlayer {
     /* 0x230 */ u8 unk_230;
     /* 0x231 */ u8 unk_231;
     /* 0x232 */ u8 unk_232;
-    /* 0x233 */ s8 unk_233;
+    /* 0x233 */ u8 unk_233;
     /* 0x234 */ u8 unk_234;
     /* 0x235 */ u8 unk_235;
     /* 0x236 */ char unk_236[0x2];
     /* 0x238 */ s32 unk_238[8];
     /* 0x258 */ u8 unk_258;
-    /* 0x259 */ s8 unk_259;
+    /* 0x259 */ u8 unk_259;
     /* 0x25A */ u8 unk_25A;
     /* 0x25B */ u8 unk_25B;
     /* 0x25C */ BGMPlayerTrack tracks[16];
@@ -935,8 +936,8 @@ void func_80052B44(AlUnkVoice*);
 void func_80052BF8(AlUnkVoice*, s32*);
 
 void snd_reset_instrument(Instrument*);
-void func_80053370(BGMDrumInfo*);
-void func_800533A8(BGMInstrumentInfo*);
+void snd_reset_drum_entry(BGMDrumInfo*);
+void snd_reset_instrument_entry(BGMInstrumentInfo*);
 void func_80053654(SndGlobals*);
 void snd_initialize_bgm_fade(Fade*, s32, s32, s32);
 void snd_clear_bgm_fade(Fade*);

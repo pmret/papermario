@@ -9,7 +9,116 @@ void func_8004EA34(BGMPlayer*, u32);
 void func_80050900(BGMPlayer*);
 void func_800538C4(AlUnkVoice*, u8);
 
-INCLUDE_ASM(void, "audio/28910_len_5090", func_8004D510, BGMPlayer* arg0);
+extern void (*CurrentSeqCmdHandler)(BGMPlayer*, BGMPlayerTrack*);
+extern void (*SefCmdHandlers[])(SoundManager*, SoundPlayer*);
+extern void (*SeqCmdHandlers[])(BGMPlayer*, BGMPlayerTrack*);
+extern u8 SeqCmdArgCounts[];
+s16 func_800505E4(s32 arg0, s32 arg1, u8 arg2);
+u8 func_80050654(s32 arg0, u8 arg1, u8 arg2);
+u8 func_8005068C(s32 arg0, u8 arg1, u8 arg2);
+void snd_BGMCmd_F6_TrackVolumeFade(BGMPlayer *, BGMPlayerTrack *);
+u8 func_80050568(BGMPlayer *player, u8 arg1, u8 arg2);
+
+void func_8004D510(BGMPlayer* player) {
+    BGMHeader* bgmFile;
+    BGMFileInfo* bgmData;
+    s32 unkType;
+    u32 segmentID;
+    s32 segmentOffset;
+    u32 value;
+    s32 delta;
+    u8 var_a1;
+    u8 pos;
+    u32 i;
+    
+    segmentID = 0;
+    unkType = -1;
+    player->unk_14++;
+    
+    if (player->unk_258 != 0) {
+        if (player->unk_258 < ARRAY_COUNT(player->unk_238)) {
+            pos = player->unk_259;
+            for (var_a1 = 0; var_a1 < player->unk_258; var_a1++) {
+                value = player->unk_238[pos];
+                if (value != 0) {
+                    if (value < 16) {
+                        unkType = value & 3;
+                        segmentID = value >> 2;
+                    }
+                    pos++;
+                    if (pos >= ARRAY_COUNT(player->unk_238)) {
+                        pos = 0;
+                    }
+                }
+            }
+            delta = player->unk_25A - player->unk_259;
+            if (delta < 0) {
+                delta += ARRAY_COUNT(player->unk_238);
+            }
+            player->unk_258 -= delta;
+            player->unk_259 = player->unk_25A;
+        } else {
+            player->unk_258 = 0;
+        }
+        if (unkType != -1) {
+            if (unkType != 0) {
+                if (unkType != player->unk_58) {
+                    player->unk_58 = unkType & 0xFF;
+                    player->unk_5A = unkType & 0xFF;
+                    player->unk_221 = 3;
+                    player->unkFrequency = 156250;
+                    if (unkType == 2) {
+                        bgmFile = (BGMHeader*) player->globals->currentTrackData[1];
+                    } else {
+                        bgmFile = (BGMHeader*) player->globals->currentTrackData[0];
+                    }
+                    player->bgmFile = (BGMHeader*) bgmFile;
+                    bgmData = &bgmFile->info;
+                    func_8004E880(player, 156250, D_80078510[((u8*)player->unk_74)[0] & 7]); //TODO revise unk_74 typing
+                    
+                    segmentOffset = bgmData->segments[segmentID];
+                    if (segmentOffset == 0) {
+                        segmentOffset = bgmData->segments[0];
+                    }
+                    player->segmentsInfo = (s32*)((segmentOffset * 4) + (s32)bgmFile);
+                    player->segmentReadPos = (s32*)((segmentOffset * 4) + (s32)bgmFile);
+                    
+                    if (bgmData->drums != 0) {
+                        player->drumsInfo = (BGMDrumInfo*)((bgmData->drums * 4) + (s32)player->bgmFile);
+                        player->bgmDrumCount = bgmData->drumCount;
+                        for (i = 0; i < player->bgmDrumCount; i++) {
+                            BGMDrumInfo* drum = &player->drumsInfo[i];
+                            player->drums[i] = drum;
+                        }
+                        for (; i < 12; i++) {
+                            player->drums[i] = player->drums[0];
+                        }
+                    } else {
+                        player->drumsInfo = NULL;
+                        player->bgmDrumCount = 0;
+                    }
+                    
+                    if (bgmData->instruments != 0) {
+                        player->instrumentsInfo = (BGMInstrumentInfo*)((bgmData->instruments * 4) + (s32)player->bgmFile);
+                        player->bgmInstrumentCount = bgmData->instrumentCount;
+                        return;
+                    }
+                    player->instrumentsInfo = NULL;
+                    player->bgmInstrumentCount = 0;
+                }
+            } else {
+                if (player->unk_58 != 0) {
+                    player->unk_221 = 4;
+                    player->unk_10 = 1;
+                    player->unkFrequency = 1;
+                } else {
+                    func_8004DAA8(player);
+                }
+            }
+        }
+    }
+}
+
 
 // Return values are being pushed into v0 in the wrong place
 // May depend on data decomp
@@ -376,7 +485,7 @@ void func_8004DFD4(SndGlobals* globals) {
             if (track->bgmReadPos != NULL) {
                 for (j = track->unk_52; j < track->unk_53; j++) {
                     unkTemp = &player->unk_85C[j];
-                    unkTemp->unk_0C = 0;
+                    unkTemp->noteLength = 0;
                 }
             }
         }
@@ -458,13 +567,13 @@ void func_8004E158(BGMPlayer* player, s32 arg1, s32 arg2, SndGlobals* arg3) {
         BGMPlayerTrack* temp = &player->tracks[i];
 
         temp->subTrackVolume = 0;
-        temp->unk_28 = 0;
+        temp->delayTime = 0;
         temp->subTrackCoarseTune = 0;
         temp->subTrackFineTune = 0;
         temp->subTrackPan = 0;
         temp->subTrackReverb = 0;
         temp->unk_44 = 0;
-        temp->unk_58 = 0;
+        temp->isDrumTrack = FALSE;
         temp->segTrackVolume = 0x7F;
         temp->unk_4C = 0;
 
@@ -478,9 +587,9 @@ void func_8004E158(BGMPlayer* player, s32 arg1, s32 arg2, SndGlobals* arg3) {
 
         temp->unk_08 = 0;
         temp->unk_0A = 0;
-        temp->unk_0C = 0;
+        temp->noteLength = 0;
         temp->unk_14 = 0;
-        temp->unk_16 = 0;
+        temp->noteVelocity = 0;
         temp->unk_17 = 0;
     }
 
@@ -624,7 +733,7 @@ void snd_initialize_bgm_player(BGMPlayer* player) {
         track->unk_51 = 0;
         track->unk_54 = 0;
         track->unk_57 = 0;
-        track->unk_58 = 0;
+        track->isDrumTrack = FALSE;
         track->unk_59 = 0;
         track->unk_5A = 0;
         track->subtrackReverbType = player->unk_235;
@@ -636,8 +745,8 @@ void snd_initialize_bgm_player(BGMPlayer* player) {
         temp_v0_2->ins = -1;
         temp_v0_2->unk_04 = 2.0f;
         temp_v0_2->unk_14 = 0;
-        temp_v0_2->unk_16 = 0;
-        temp_v0_2->unk_0C = 0;
+        temp_v0_2->noteVelocity = 0;
+        temp_v0_2->noteLength = 0;
         temp_v0_2->unk_12 = 0;
     }
     func_80050900(player);
@@ -826,548 +935,430 @@ void func_8004EC04(BGMPlayer* player) {
     player->unkFrequency = BGM_SAMPLE_RATE;
 }
 
-extern void (*CurrentSeqCmdHandler)(BGMPlayer*, BGMPlayerTrack*);
-extern void (*SefCmdHandlers[])(SoundManager*, SoundPlayer*);
-extern void (*SeqCmdHandlers[])(BGMPlayer*, BGMPlayerTrack*);
-extern s8 SeqCmdArgCounts[];
+#define POST_BGM_READ() \
+if (track->unk_3E != 0) {\
+    track->unk_3E--;\
+    if (track->unk_3E == 0) {\
+        track->bgmReadPos = track->unk_04;\
+    }\
+}
 
-INCLUDE_ASM(s32, "audio/28910_len_5090", func_8004EC68);
-/*
-void func_8004EC68(BGMPlayer* player) {
-    s32 cond2;
-    s32 sp26;
-    u8 sp1F;
-    u8 cond;
-    AlUnkVoice* voice;
-    BGMDrumInfo* drumInfo;
-    Instrument* instrument;
-    BGMPlayerTrack* track;
-    AlUnkTheta* alUnkTheta;
-    s32 temp_a1_2;
-    s32 var_a0;
-    s32 temp_a0_6;
-    s32 temp_v1_9;
-    s32 var_a1_4;
-    s32 var_a1_5;
-    s32 var_a1_6;
-
-    s32 var_a3;
-    s32 var_s1;
-    s32 cond3;
-    s32 var_v0_11;
-    s32 var_v0_7;
-    s32 var_v0_9;
-    u16 temp_a2_2;
-    u8 temp_a2_4;
-    u32 temp_v1;
-    u32 var_v1;
-    u32 var_v1_2;
-    s32 temp_a0;
-    u8 temp_a0_2;
-    s32 temp_a1_3;
-    s32 temp_a3;
-    u8 temp_fp;
-    s32 temp_s7;
-    s32 temp_v0_31;
-    s32 temp_v1_2;
-    s32 temp_v1_3;
-    u8 temp_v1_4;
-    u8 temp_v1_5;
-
-    s32 temp_v1_7;
-    u32 var_a1;
-    u8 var_a1_3;
-    s32 var_s6;
-
-    s32 tempamt;
-
-    u32 i;
-    u8 j;
-
-    // var_s2 = saved_reg_s2;
-    // var_s3 = saved_reg_s3;
-    // var_s5 = saved_reg_s5;
-
-    cond2 = FALSE;
-    cond = FALSE;
-    if (player->masterTempoFadeTime != 0) {
-        player->masterTempoFadeTime--;
-        if (player->masterTempoFadeTime == 0) {
-            player->masterTempo = player->masterTempoFadeTempo;
-            player->masterTempoFadeTempo = 0;
-            player->masterTempoFadeDelta = 0;
-        } else {
-            player->masterTempo += player->masterTempoFadeDelta;
-        }
-        player->unkFrequency = player->masterTempo * 10;
-    }
-
-    if (player->masterVolumeFadeTime != 0) {
-        player->masterVolumeFadeTime--;
-        if (player->masterVolumeFadeTime == 0) {
-            player->masterVolume = player->masterVolumeFadeVolume;
-            player->masterVolumeFadeVolume = 0;
-            player->masterVolumeFadeDelta = 0;
-        } else {
-            player->masterVolume += player->masterVolumeFadeDelta;
-        }
-        cond2 = TRUE;
-    }
-
-    player->unk_21A = 0;
-    if (player->unk_204 != NULL) {
-        tempamt = 0x30;
-        var_s1 = 0xF;
-        if (player->unk_232 != 0) {
-loop_13:
-            temp_s7 = *player->unk_204++;
-            if (temp_s7 != 0) {
-                track = &player->tracks[temp_s7];
-                player->seqCmdArgs.u16[0] = tempamt;
-                player->seqCmdArgs.u8[2] = temp_s7;
-                if (track->bgmReadPos != NULL) {
-                    snd_BGMCmd_F6_TrackVolumeFade(player, track);
+void func_8004EC68(BGMPlayer *player) {
+	s32 bVolumeFading;    // SP + 10
+	u8 sp1F;              // SP + 1F
+    s16 notePitch;        // SP + 26
+	u8 cond;              // SP + 28 
+    
+	AlUnkVoice* voice;
+	BGMDrumInfo* drumInfo;
+	BGMPlayerTrack* track;
+	AlUnkTheta* alUnkTheta;
+	s32 var_a0;
+	s32 temp;
+	s32 var_a1_5;
+	s32 bAcquiredVoiceIdx;
+	u8 opcode;
+	u8 noteVelocity;
+	s32 noteLength;
+	u32 i;
+	u8 voiceIdx;
+    s32 temp2;
+	bVolumeFading = FALSE;
+	cond = FALSE;
+    
+	if (player->masterTempoFadeTime != 0) {
+		player->masterTempoFadeTime--;
+		if (player->masterTempoFadeTime == 0) {
+			player->masterTempo = player->masterTempoFadeTempo;
+			player->masterTempoFadeTempo = 0;
+			player->masterTempoFadeDelta = 0;
+		} else {
+			player->masterTempo += player->masterTempoFadeDelta;
+		}
+		player->unkFrequency = player->masterTempo * 10;
+	}
+	if (player->masterVolumeFadeTime != 0) {
+		player->masterVolumeFadeTime--;
+		if (player->masterVolumeFadeTime == 0) {
+			player->masterVolume = player->masterVolumeFadeVolume;
+			player->masterVolumeFadeVolume = 0;
+			player->masterVolumeFadeDelta = 0;
+		} else {
+			player->masterVolume += player->masterVolumeFadeDelta;
+		}
+		bVolumeFading = TRUE;
+	}
+	player->unk_21A = FALSE;
+	if (player->unk_204 != 0) {		
+		if (player->unk_232 != 0) {
+            s32 counter = 16;
+            while (counter-- != 0) {
+			    i = *player->unk_204++;
+    			if (i == 0) {
+                    break;
                 }
-                var_s1--;
-                if (var_s1 == 0) {
-                    player->unk_204 = NULL;
-                } else {
-                    goto loop_13;
-                }
-            } else {
-                player->unk_204 = NULL;
-            }
-        } else {
-loop_19:
-            temp_s7 = *player->unk_204++;
-            if (temp_s7 != 0) {
-                track = &player->tracks[temp_s7];
-                player->seqCmdArgs.u16[0] = tempamt;
-                player->seqCmdArgs.u8[2] = 0;
-                player->unk_204++;
+                track = &player->tracks[i - 1];
+                player->seqCmdArgs.u16[0] = 0x30;                
+                player->seqCmdArgs.u8[2] = *(player->unk_204++);
                 if (track->bgmReadPos != 0) {
                     snd_BGMCmd_F6_TrackVolumeFade(player, track);
                 }
-                var_s1--;
-                if (var_s1 != 0) {
-                    goto loop_19;
-                }
             }
-            player->unk_204 = NULL;
-        }
-        player->unk_232 = 0;
-    }
-
-
-    for (i = 0; i < ARRAY_COUNT(player->tracks); i++) {
-        track = &player->tracks[i];
-        if (track->bgmReadPos != NULL) {
-            track->changed.tune = FALSE;
-            if (!cond2) {
-                if (player->unk_21A == 0) {
-                    track->changed.volume = FALSE;
-                } else {
-                    track->changed.volume = TRUE;
+		}
+		else {
+            s32 counter = 16;
+            while (counter-- != 0) {
+			    i = *player->unk_204++;
+                if (i == 0) {
+                    break;
                 }
-            } else {
-                track->changed.volume = TRUE;
-            }
+				track = &player->tracks[i - 1];
+				player->seqCmdArgs.u16[0] = 0x30;
+				player->unk_204++; // ignore arg
+                player->seqCmdArgs.u8[2] = 0;
+				if (track->bgmReadPos != 0) {
+					snd_BGMCmd_F6_TrackVolumeFade(player, track);
+				}
+			}
+		}
+        player->unk_204 = 0;
+		player->unk_232 = 0;
+	}
+	for (i = 0; i < ARRAY_COUNT(player->tracks); i++) {
+		track = &player->tracks[i];
+		if (track->bgmReadPos != 0) {
+			track->changed.all = 0;
+			if (bVolumeFading || player->unk_21A) {
+				track->changed.volume = 1;
+			} else {
+				track->changed.volume = 0;
+			}
+			if (track->subTrackVolumeFadeTime != 0) {
+				track->subTrackVolumeFadeTime--;
+				if (track->subTrackVolumeFadeTime == 0) {
+					track->subTrackVolume = track->subTrackVolumeFadeVolume;
+				} else {
+					track->subTrackVolume += track->subTrackVolumeFadeDelta;
+				}
+				track->changed.volume = 1;
+			}
+			if (track->unk36 != 0) {
+				track->unk36--;
+				if (track->unk36 == 0) {
+					track->unk2C = track->unk34 << 0x10;
+				} else {
+					track->unk2C += track->unk30;
+				}
+				track->changed.volume = 1;
+			}
+			track->delayTime--;
+			if (track->delayTime <= 0) {
+				sp1F = track->unk_52;
+				while (track->delayTime == 0) {
+					opcode = *(track->bgmReadPos++);
+					POST_BGM_READ();
 
-            if (track->subTrackVolumeFadeTime != 0) {
-                track->subTrackVolumeFadeTime--;
-                if (track->subTrackVolumeFadeTime == 0) {
-                    track->subTrackVolume = track->subTrackVolumeFadeVolume;
-                } else {
-                    track->subTrackVolume += track->subTrackVolumeFadeDelta;
-                }
-                track->changed.volume = TRUE;
-            }
-
-            if (track->unk36 != 0) {
-                track->unk36--;
-                if (track->unk36 == 0) {
-                    track->unk2C = track->unk34 << 0x10;
-                } else {
-                    track->unk2C += track->unk30;
-                }
-                track->changed.volume = TRUE;
-            }
-
-            track->unk_28--;
-            if (track->unk_28 <= 0) {
-                sp1F = track->unk_52;
-
-                while (track->unk_28 == 0) {
-                    temp_a3 = *track->bgmReadPos++;
-                    if (track->unk_3E != 0) {
-                        track->unk_3E--;
-                        if (track->unk_3E == 0) {
-                            track->bgmReadPos = track->unk_04;
-                        }
-                    }
-
-                    temp_v1 = temp_a3 & 0xFF;
-                    if (temp_a3 >= 0) {
-                        if (temp_v1 == 0) {
-                            if (track->prevReadPos != NULL) {
+                    if (opcode < 0x80) {
+                        if (opcode == 0) {
+                            if (track->prevReadPos != 0) {
                                 track->bgmReadPos = track->prevReadPos;
-                                track->prevReadPos = NULL;
-                                continue;
-                            }
-                            cond = TRUE;
-                        } else {
-                            if (temp_v1 < 120) {
-                                track->unk_28 = temp_v1;
+                                track->prevReadPos = 0;
                             } else {
-                                temp_v1_2 = *track->bgmReadPos++;
-                                track->unk_28 = (((temp_a3 & 7) << 8) + temp_v1_2 + 120);
-                                if (track->unk_3E != 0) {
-                                    track->unk_3E--;
-                                    if (track->unk_3E == 0) {
-                                        track->bgmReadPos = track->unk_04;
-                                    }
-                                }
+                                cond = TRUE;
+                                break;
                             }
-                            continue;
+                        } else {
+                            if (opcode >= 0x78) {
+                                // long delay
+                                track->delayTime = (((opcode & 7) << 8) + *(track->bgmReadPos++)) + 0x78;
+                                POST_BGM_READ();
+        						
+                            } else {
+                                // delay
+                                track->delayTime = opcode;
+                            }
                         }
-                    } else {
-                        if (temp_v1 < 212) {
-                            temp_fp = *track->bgmReadPos++;
-                            sp26 = temp_a3 & 0x7F & 0xFF;
-                            if (track->unk_3E != 0) {
-                                track->unk_3E--;
-                                if (track->unk_3E == 0) {
-                                    track->bgmReadPos = track->unk_04;
-                                }
+					} else {
+                        // note
+                        if (opcode < 0xD4) {
+                            notePitch = (opcode & 0x7F);
+                            noteVelocity = *(track->bgmReadPos++);
+                            POST_BGM_READ();
+                            noteLength = *(track->bgmReadPos++);
+                            POST_BGM_READ();
+                            if (!(noteLength < 0xC0)) {
+                                noteLength = (((u8)noteLength & ~0xC0) << 8) + *(track->bgmReadPos++) + 0xC0;
+                                POST_BGM_READ();
                             }
-                            var_s6 = *track->bgmReadPos++;
-                            if (track->unk_3E != 0) {
-                                track->unk_3E--;
-                                if (track->unk_3E == 0) {
-                                    track->bgmReadPos = track->unk_04;
-                                }
-                            }
-
-                            if (!(var_s6 < 0xC0)) {
-                                temp_v1_3 = *track->bgmReadPos++;
-                                var_s6 = ((var_s6 & 0x3F) << 8) + temp_v1_3 + 0xC0;
-                                if (track->unk_3E != 0) {
-                                    track->unk_3E--;
-                                    if (track->unk_3E == 0) {
-                                        track->bgmReadPos = track->unk_04;
-                                    }
-                                }
-                            }
-                            cond3 = FALSE;
+                            bAcquiredVoiceIdx = FALSE;
                             if (track->unk_5A == 0) {
-                                for (j = sp1F; j < track->unk_53; j++) {
-                                    voice = &player->globals->voices[j];
+                                for (voiceIdx = sp1F; voiceIdx < track->unk_53; voiceIdx++) {
+                                    voice = &player->globals->voices[voiceIdx];
+                                    sp1F++;
                                     if (voice->unk_45 == 0) {
-                                        cond3 = TRUE;
+                                        bAcquiredVoiceIdx = TRUE;
                                         break;
                                     }
                                 }
-
-                                if (!cond3) {
+    
+                                if (!bAcquiredVoiceIdx) {
                                     if (track->unk_54 >= 5) {
-                                        j = track->unk_52;
-                                        temp_v1_4 = track->unk_53;
-                                        var_a1 = j & 0xFF;
-                                        if (var_a1 < temp_v1_4) {
-loop_83:
-                                            voice = &player->globals->voices[var_a1];
-                                            if (voice->unk_45 >= player->unk_234) {
-                                                j++;
-                                                var_a1 = j & 0xFF;
-                                                if (var_a1 < temp_v1_4) {
-                                                    goto loop_83;
-                                                }
-                                            } else {
-                                                func_800538C4(voice, var_a1);
-                                                cond3 = TRUE;
+                                        for(voiceIdx = track->unk_52; voiceIdx < track->unk_53; voiceIdx++) {
+                                            voice = &player->globals->voices[voiceIdx];
+                                            if (voice->unk_45 < player->unk_234) {
+                                                func_800538C4(voice, voiceIdx);
+                                                bAcquiredVoiceIdx = TRUE;
+                                                break;
                                             }
                                         }
-
-                                        if (!cond3) {
-                                            for (j = track->unk_52; j < track->unk_53; j++) {
-                                                voice = &player->globals->voices[j];
+                                        if (!bAcquiredVoiceIdx) {
+                                            for (voiceIdx = track->unk_52; voiceIdx < track->unk_53; voiceIdx++) {
+                                                voice = &player->globals->voices[voiceIdx];
                                                 if (voice->unk_45 == player->unk_234) {
-                                                    alUnkTheta = &player->unk_85C[j];
-                                                    if (alUnkTheta->unk_0C == 0) {
-                                                        func_800538C4(voice, j);
-                                                        cond3 = TRUE;
+                                                    alUnkTheta = &player->unk_85C[voiceIdx];
+                                                    if (alUnkTheta->noteLength == 0) {
+                                                        func_800538C4(voice, voiceIdx);
+                                                        bAcquiredVoiceIdx = TRUE;
                                                         break;
                                                     }
                                                 }
                                             }
-
-                                            if (!cond3) {
-                                                var_a1_3 = track->unk_52;
-                                                temp_a0_2 = track->unk_53;
-                                                var_v1_2 = var_a1_3 & 0xFF;
-                                                var_a3 = 0xFFFF;
-                                                if (var_v1_2 < temp_a0_2) {
-                                                    do {
-                                                        voice = &player->globals->voices[var_v1_2];
-                                                        if (voice->unk_45 == player->unk_234) {
-                                                            alUnkTheta = &player->unk_85C[var_v1_2];
-                                                            if (alUnkTheta->unk_17 == 0) {
-                                                                if (var_a3 > alUnkTheta->unk_0C) {
-                                                                    var_a3 = alUnkTheta->unk_0C;
-                                                                    j = var_a1_3;
-                                                                    cond3 = TRUE;
-                                                                }
-                                                            }
-                                                        }
-                                                        var_a1_3++;
-                                                        var_v1_2 = var_a1_3 & 0xFF;
-                                                    } while (var_v1_2 < temp_a0_2);
-                                                }
-
-                                                if (cond3) {
-                                                    alUnkTheta->unk_0C = 0;
-                                                    func_800538C4(voice, j);
-                                                }
-                                            } else {
-                                                goto block_104;
-                                            }
-                                        } else {
-                                            goto block_104;
                                         }
+    
+                                        if (!bAcquiredVoiceIdx) {
+                                            s32 shortestLength = 0xFFFF;
+                                            u8 voice_it;
+                                            AlUnkVoice* curVoice;
+                                            AlUnkTheta* curTheta;
+                                            for (voice_it = track->unk_52; voice_it < track->unk_53; voice_it++) {
+                                                curVoice = &player->globals->voices[voice_it];
+                                                if (curVoice->unk_45 == player->unk_234) {
+                                                    curTheta = &player->unk_85C[voice_it];
+                                                    if (curTheta->unk_17 == 0 && curTheta->noteLength < shortestLength) {
+                                                        shortestLength = curTheta->noteLength;
+                                                        voice = curVoice;
+                                                        alUnkTheta = curTheta;
+                                                        voiceIdx = voice_it;
+                                                        bAcquiredVoiceIdx = TRUE;
+                                                    }
+                                                }
+                                            }
+                                            if (bAcquiredVoiceIdx) {
+                                                alUnkTheta->noteLength = 0;
+                                                func_800538C4(voice, voiceIdx);
+                                            }
+                                        }
+                                        
                                     } else {
-                                        j = track->unk_52;
-                                        voice = &player->globals->voices[j];
-                                        alUnkTheta = &player->unk_85C[j];
-                                        alUnkTheta->unk_0C = 0;
+                                        voiceIdx = track->unk_52;
+                                        voice = &player->globals->voices[voiceIdx];
+                                        alUnkTheta = &player->unk_85C[voiceIdx];
+                                        alUnkTheta->noteLength = 0;
                                         if (voice->unk_45 <= player->unk_234) {
-                                            func_800538C4(voice, j);
-                                            cond3 = TRUE;
+                                            func_800538C4(voice, voiceIdx);
+                                            bAcquiredVoiceIdx = TRUE;
                                         }
                                     }
-                                } else {
-                                    goto block_104;
                                 }
                             }
-
-                            if (cond3) {
-block_104:
-                                alUnkTheta = &player->unk_85C[j];
+                            if (bAcquiredVoiceIdx) {
+                                alUnkTheta = &player->unk_85C[voiceIdx];
                                 alUnkTheta->unk_12 = 0;
-                                if (temp_fp & 0xFF) {
-                                    alUnkTheta->unk_16 = (temp_fp + 1);
+                                if (noteVelocity > 0) {
+                                    alUnkTheta->noteVelocity = noteVelocity + 1;
                                 } else {
-                                    alUnkTheta->unk_16 = 0;
+                                    alUnkTheta->noteVelocity = 0;
                                 }
-                                alUnkTheta->unk_0C = var_s6;
-                                if (track->unk_58 != 0) {
-                                    if (sp26 < 0x48) {
-                                        drumInfo = player->globals->dataPER + (sp26 * 0xC);
+                                alUnkTheta->noteLength = noteLength;
+                                if (track->isDrumTrack) {
+                                    if (notePitch < 72) { // = 6 * 12
+                                        drumInfo = &player->globals->dataPER->drums[notePitch];
                                     } else {
-                                        drumInfo = player->drums[sp26 - 0x48];
+                                        drumInfo = player->drums[notePitch - 72]; // = 6 * 12
                                     }
-                                    temp_a2_2 = drumInfo->unk_00;
-                                    alUnkTheta->unk_00 = func_80053BE8(player->globals, temp_a2_2 >> 8, temp_a2_2 & 0xFF, (s32** ) &voice->unk_14);
-                                    if (drumInfo->unk_08.u8[0] != 0) {
-                                        alUnkTheta->unk_08 = alUnkTheta->unk_16 * (u8) func_80050654(player->unk_50, drumInfo->unk_04.u8[0], drumInfo->unk_08.u8[0]);
+                                    alUnkTheta->ins = func_80053BE8(player->globals, (u16)drumInfo->unk_00 >> 8, (u16)drumInfo->unk_00 & 0xFF, &voice->unk_14);
+                                    if (drumInfo->unk_08 != 0) {
+                                        alUnkTheta->unk_08 = alUnkTheta->noteVelocity * func_80050654(player->unk_50, drumInfo->unk_04, drumInfo->unk_08);
                                     } else {
-                                        alUnkTheta->unk_08 = (alUnkTheta->unk_16 * drumInfo->unk_04.u8[0]);
+                                        alUnkTheta->unk_08 = alUnkTheta->noteVelocity * drumInfo->unk_04;
                                     }
-                                    voice->unk_40 = (((((player->masterVolume >> 0x15) * (track->subTrackVolume >> 0x15) * (track->unk2C >> 0x15)) >> 0x14) * (track->segTrackVolume * alUnkTheta->unk_08)) >> 0x10);
-                                    alUnkTheta->unk_0A = ((s8) track->subTrackFineTune + (drumInfo->unk_00 + track->subTrackCoarseTune)) - alUnkTheta->unk_00->unk_1E;
-                                    var_a1_4 = alUnkTheta->unk_0A + track->segTrackTune + player->unk_20E;
-                                    if (drumInfo->unk_04.u8[3] != 0) {
-                                        var_a1_4 = func_800505E4(player->unk_50, var_a1_4, drumInfo->unk_04.s32);
-                                        alUnkTheta->unk_14 = var_a1_4;
+                                    voice->unk_40 = (((((player->masterVolume >> 0x15) * (track->subTrackVolume >> 0x15)) * (track->unk2C >> 0x15)) >> 0x14) * (track->segTrackVolume * alUnkTheta->unk_08)) >> 0x10;
+                                    alUnkTheta->unk_0A = (((s8) track->subTrackFineTune) + (drumInfo->unk_02 + track->subTrackCoarseTune)) - alUnkTheta->ins->detune;
+                                    temp = (alUnkTheta->unk_0A + track->segTrackTune) + player->unk_20E;                             
+                                    if (drumInfo->unk_07 != 0) {
+                                        alUnkTheta->unk_14 = func_800505E4(player->unk_50, temp, drumInfo->unk_07);
+                                        temp = alUnkTheta->unk_14;
                                     }
-                                    alUnkTheta->unk_04 = (snd_tune_param_to_timescale(var_a1_4) * alUnkTheta->unk_00->unk_20);
-
-                                    if (drumInfo->unk_08.u8[1] != 0) {
-                                        voice->unk_0E = func_80050568(player, drumInfo->unk_04.u8[1], drumInfo->unk_08.u8[1]);
+                                    alUnkTheta->unk_04 = snd_tune_param_to_timescale(temp) * alUnkTheta->ins->sampleRate;
+                                    if (drumInfo->unk_09 != 0) {
+                                        voice->pan = func_80050568(player, drumInfo->unk_05, drumInfo->unk_09);
                                     } else {
-                                        voice->unk_0E = drumInfo->unk_04.u8[1];
+                                        voice->pan = drumInfo->unk_05;
                                     }
-
-                                    if (drumInfo->unk_08.u8[2] != 0) {
-                                        voice->unk_0F = func_8005068C(player->unk_50, drumInfo->unk_04.u8[2], drumInfo->unk_08.u8[2]);
+                                    if (drumInfo->unk_0A != 0) {
+                                        voice->reverb = func_8005068C(player->unk_50, drumInfo->unk_06, drumInfo->unk_0A);
                                     } else {
-                                        voice->unk_0F = drumInfo->unk_04.u8[2];
+                                        voice->reverb = drumInfo->unk_06;
                                     }
                                 } else {
-                                    alUnkTheta->unk_08 = ((((player->masterVolume >> 0x15) * (track->subTrackVolume >> 0x15) * (track->unk2C >> 0x15)) >> 0x14) * (track->segTrackVolume * alUnkTheta->unk_16)) >> 9;
+                                    alUnkTheta->unk_08 = (((((player->masterVolume >> 0x15) * (track->subTrackVolume >> 0x15)) * (track->unk2C >> 0x15)) >> 0x14) * (track->segTrackVolume * alUnkTheta->noteVelocity)) >> 9;
                                     voice->unk_40 = alUnkTheta->unk_08;
-                                    alUnkTheta->unk_00 = instrument = track->unk_0C;
-                                    temp_a1_2 = player->masterTranspose + (track->subTrackCoarseTune + (sp26 * 100));
-                                    alUnkTheta->unk_0A = ((s8) track->subTrackFineTune + temp_a1_2) - instrument->unk_1E;
-                                    alUnkTheta->unk_04 = snd_tune_param_to_timescale(alUnkTheta->unk_0A + track->segTrackTune + player->unk_20E) * track->unk_0C->sampleRate;
-
+                                    alUnkTheta->ins = track->unk_0C;
+                                    alUnkTheta->unk_0A = 
+                                        (notePitch * 100) 
+                                        + track->subTrackCoarseTune
+                                        + player->masterTranspose
+                                        + track->subTrackFineTune 
+                                        - alUnkTheta->ins->detune;
+                                    alUnkTheta->unk_04 = snd_tune_param_to_timescale((alUnkTheta->unk_0A + track->segTrackTune) + player->unk_20E) * track->unk_0C->sampleRate;
+                                    
                                     if (track->unk_57 != 0) {
-                                        voice->unk_0E = func_80050568(player, track->subTrackPan, track->unk_57);
+                                        voice->pan = func_80050568(player, track->subTrackPan, track->unk_57);
                                     } else {
-                                        voice->unk_0E = track->subTrackPan;
+                                        voice->pan = track->subTrackPan;
                                     }
-
-                                    voice->unk_0F = track->subTrackReverb;
-                                    //temp_v0_31 = player->unk_4C[track]; // track
-                                    if (temp_v0_31 != 0) {
-                                        voice->unk_14 = player + ((temp_v0_31 * 0x12) + 0x162);
+                                    voice->reverb = track->subTrackReverb;
+    
+                                    if (track->unk_4C != 0) {
+                                        voice->unk_14 = (s32*)player->unk_174[track->unk_4C - 1]; //TODO ???
                                     } else {
                                         voice->unk_14 = track->unk_10[0];
                                     }
                                     voice->unk_18 = track->unk_10[1];
                                 }
-                                voice->unk_00 = alUnkTheta->unk_00;
-                                voice->unk_04 = alUnkTheta->unk_04;
+                                voice->ins = alUnkTheta->ins;
+                                voice->sampleRate = alUnkTheta->unk_04;
                                 voice->unk_10 = track->subtrackReverbType;
-                                if (alUnkTheta->unk_0C >= 2) {
+                                if (alUnkTheta->noteLength >= 2) {
                                     alUnkTheta->unk_17 = 1;
                                     alUnkTheta->unk_12 = track->trackTremoloTime;
                                     alUnkTheta->unk_13 = 0;
                                     alUnkTheta->unk_10 = track->trackTremoloAmount;
-                                    voice->unk_43 = 2;
+                                    voice->unk_flags_43 = 2;
                                     voice->unk_45 = player->unk_234;
                                     voice->unk_44 = voice->unk_45;
                                 }
                             }
-
                         } else {
-                            temp_a1_3 = SefCmdHandlers[temp_v1];
-                            if (temp_a1_3 != 0) {
-                                player->seqCmdArgs.u8[0] = *track->bgmReadPos++;
-                                if (track->unk_3E != 0) {
-                                    track->unk_3E--;
-                                    if (track->unk_3E == 0) {
-                                        track->bgmReadPos = track->unk_04;
-                                    }
-                                }
-
-                                if (temp_a1_3 >= 2) {
-                                    player->seqCmdArgs.u8[1] = *track->bgmReadPos++;
-                                    if (track->unk_3E != 0) {
-                                        track->unk_3E--;
-                                        if (track->unk_3E == 0) {
-                                            track->bgmReadPos = track->unk_04;
-                                        }
-                                    }
-
-                                    if (temp_a1_3 >= 3) {
-                                        player->seqCmdArgs.u8[2] = *track->bgmReadPos++;
-                                        if (track->unk_3E != 0) {
-                                            track->unk_3E--;
-                                            if (track->unk_3E == 0) {
-                                                track->bgmReadPos = track->unk_04;
-                                            }
-                                        }
-
-                                        if (temp_a1_3 >= 4) {
-                                            player->seqCmdArgs.u8[3] = *track->bgmReadPos++;
-                                            if (track->unk_3E != 0) {
-                                                track->unk_3E--;
-                                                if (track->unk_3E == 0) {
-                                                    track->bgmReadPos = track->unk_04;
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
+                            //TODO variable is nargs, but temp is required to match
+                            temp = SeqCmdArgCounts[opcode - 0xE0];
+                            if (temp != 0) {
+                                player->seqCmdArgs.u8[0] = *(track->bgmReadPos++);
+                                POST_BGM_READ();
+                            } else {
+                                goto bgm_args_done;
                             }
-
-                            CurrentSeqCmdHandler = SeqCmdHandlers[temp_a3 - 0xE0];
+                            if (temp > 1) {
+                                player->seqCmdArgs.u8[1] = *(track->bgmReadPos++);
+                                POST_BGM_READ();
+                            } else {
+                                goto bgm_args_done;
+                            }
+                            if (temp > 2) {
+                                player->seqCmdArgs.u8[2] = *(track->bgmReadPos++);
+                                POST_BGM_READ();
+                            } else {
+                                goto bgm_args_done;
+                            }
+                            if (temp > 3) {
+                                player->seqCmdArgs.u8[3] = *(track->bgmReadPos++);
+                                POST_BGM_READ();
+                            }
+                            bgm_args_done:
+                            CurrentSeqCmdHandler = SeqCmdHandlers[opcode - 0xE0];
                             CurrentSeqCmdHandler(player, track);
                         }
-
-                        if (track->unk_28 == 0) {
-                            continue;
-                        }
                     }
-                    break;
-                }
-            }
+				} // end while
+			}
+            
+			for (voiceIdx = track->unk_52; voiceIdx < track->unk_53; voiceIdx++) {
+				if (track->unk_5A == 0) {
+					voice = &player->globals->voices[voiceIdx];
+					if (voice->unk_45 == player->unk_234) {
+						alUnkTheta = &player->unk_85C[voiceIdx];
+						if (alUnkTheta->unk_17 == 0) {
+							if (alUnkTheta->noteLength > 0) {
+								alUnkTheta->noteLength--;
+								if (alUnkTheta->noteLength == 0) {
+									voice->unk_3D |= 0x10;
+								}
+							}
+							if (track->isDrumTrack) {
+								if (track->changed.tune || (player->unk_20E != 0)) {
+									alUnkTheta->unk_04 = snd_tune_param_to_timescale(((alUnkTheta->unk_0A + alUnkTheta->unk_14) + track->segTrackTune) + player->unk_20E) * alUnkTheta->ins->sampleRate;
+									if (voice->sampleRate != alUnkTheta->unk_04) {
+										voice->sampleRate = alUnkTheta->unk_04;
+										voice->unk_flags_43 |= 8;
+									}
+								}
+								if (track->changed.volume) {
+									voice->unk_40 = (((((player->masterVolume >> 0x15) * (track->subTrackVolume >> 0x15)) * (track->unk2C >> 0x15)) >> 0x14) * (track->segTrackVolume * alUnkTheta->unk_08)) >> 0x10;
+									voice->unk_3D |= 0x20;
+								}
+							} else {
+								if (alUnkTheta->unk_12 != 0) {
+									if (alUnkTheta->unk_10 != 0) {
+										alUnkTheta->unk_10--;
+									} else {
+                                        u8 temp_a0_6;
+                                        u8 temp_a2_4;
+                                        alUnkTheta->unk_13 += track->trackTremoloSpeed;
+                                        opcode = (alUnkTheta->unk_13 << 2) + 3;
+                                        temp_a2_4 = alUnkTheta->unk_13 >> 6;
+                                        
+										if ((temp_a2_4 == 1) || (temp_a2_4 == 3)) {
+											u8 temp2 = ~opcode;
+                                            var_a1_5 = temp2 + 1;
+										} else {
+											var_a1_5 = opcode;
+										}
+                                        
+										var_a1_5 = (var_a1_5 * track->trackTremoloTime) >> 8;
 
-            for (j = track->unk_52; j < track->unk_53; j++) {
-                if (track->unk_5A == 0) {
-                    voice = &player->globals->voices[j];
-                    if (voice->unk_45 == player->unk_234) {
-                        alUnkTheta = &player->unk_85C[j];
-                        if (alUnkTheta->unk_17 == 0) {
-                            if (alUnkTheta->unk_0C > 0) {
-                                alUnkTheta->unk_0C--;
-                                if (alUnkTheta->unk_0C == 0) {
-                                    voice->unk_3D |= 0x10;
-                                }
-                            }
+										if ((temp_a2_4 == 2) || (temp_a2_4 == 3)) {
+											var_a1_5 = -var_a1_5;
+										}
+					
+										alUnkTheta->unk_04 = snd_tune_param_to_timescale(var_a1_5 + ((alUnkTheta->unk_0A + track->segTrackTune) + player->unk_20E)) * alUnkTheta->ins->sampleRate;
+										if (voice->sampleRate != alUnkTheta->unk_04) {
+											voice->sampleRate = alUnkTheta->unk_04;
+											voice->unk_flags_43 |= 8;
+										}
+									}
+								} else if (track->changed.tune || (player->unk_20E != 0)) {
 
-                            if (track->unk_58 != 0) {
-                                if (track->changed.tune || (player->unk_20E != 0)) {
-                                    alUnkTheta->unk_04 = snd_tune_param_to_timescale(alUnkTheta->unk_0A + alUnkTheta->unk_14 + track->segTrackTune + player->unk_20E) * alUnkTheta->unk_00->unk_20;
-                                    if (voice->unk_04 != alUnkTheta->unk_04) {
-                                        voice->unk_04 = alUnkTheta->unk_04;
-                                        voice->unk_43 |= 8;
-                                    }
-                                }
-                                if (track->changed.volume) {
-                                    voice->unk_40 = (((((player->masterVolume >> 0x15) * (track->subTrackVolume >> 0x15) * (track->unk2C >> 0x15)) >> 0x14) * (track->segTrackVolume * alUnkTheta->unk_08)) >> 0x10);
-                                    voice->unk_3D |= 0x20;
-                                }
-                            } else {
-                                if (alUnkTheta->unk_12 != 0) {
-                                    if (alUnkTheta->unk_10 != 0) {
-                                        alUnkTheta->unk_10--;
-                                    } else {
-                                        temp_v1_7 = alUnkTheta->unk_13 + track->trackTremoloSpeed;
-                                        temp_a0_6 = (temp_v1_7 * 4) + 3;
-                                        temp_a2_4 = (u32) (temp_v1_7 & 0xFF) >> 6;
-                                        alUnkTheta->unk_13 = temp_v1_7;
-                                        if (temp_a2_4 == 1 || temp_a2_4 == 3) {
-                                            var_a1_5 = (~temp_a0_6 & 0xFF) + 1;
-                                        } else {
-                                            var_a1_5 = temp_a0_6 & 0xFF;
-                                        }
-                                        var_a1_6 = (var_a1_5 * track->trackTremoloTime) >> 8;
-                                        if (temp_a2_4 == 2 || temp_a2_4 == 3) {
-                                            var_a1_6 = -var_a1_6;
-                                        }
-                                        var_a0 = var_a1_6 + (alUnkTheta->unk_0A + track->segTrackTune + player->unk_20E);
-                                        alUnkTheta->unk_04 = snd_tune_param_to_timescale(var_a0) * alUnkTheta->unk_00->unk_20;
-                                        if (voice->unk_04 != alUnkTheta->unk_04) {
-                                            voice->unk_04 = alUnkTheta->unk_04;
-                                            voice->unk_43 |= 8;
-                                        }
-                                    }
-                                } else if (track->changed.tune || (player->unk_20E != 0)) {
-                                    var_a0 = alUnkTheta->unk_0A + track->segTrackTune + player->unk_20E;
-                                    alUnkTheta->unk_04 = snd_tune_param_to_timescale(var_a0) * alUnkTheta->unk_00->unk_20;
-                                    if (voice->unk_04 != alUnkTheta->unk_04) {
-                                        voice->unk_04 = alUnkTheta->unk_04;
-                                        voice->unk_43 |= 8;
-                                    }
-                                }
+									alUnkTheta->unk_04 = snd_tune_param_to_timescale((alUnkTheta->unk_0A + track->segTrackTune) + player->unk_20E) * alUnkTheta->ins->sampleRate;
+									if (voice->sampleRate != alUnkTheta->unk_04) {
+										voice->sampleRate = alUnkTheta->unk_04;
+										voice->unk_flags_43 |= 8;
+									}
+								}
+								if (track->changed.volume) {
+                                    s32 tempVolume = ((player->masterVolume >> 0x15) * (track->subTrackVolume >> 0x15) * (track->unk2C >> 0x15)) >> 0x14;
+									alUnkTheta->unk_08 = (tempVolume * (track->segTrackVolume * alUnkTheta->noteVelocity)) >> 9;
+									voice->unk_40 = alUnkTheta->unk_08;
+									voice->unk_3D |= 0x20;
+									voice->pan = track->subTrackPan;
+									voice->reverb = track->subTrackReverb;
+								} else if (track->changed.pan || track->changed.reverb) {
+									voice->pan = track->subTrackPan;
+									voice->reverb = track->subTrackReverb;
+									voice->unk_flags_43 |= 0x10;
+								}
+							}
+						}
+						alUnkTheta->unk_17 = 0;
+					}
+				}
+			}
+		}
+	}
 
-                                if (track->changed.volume) {
-                                    temp_v1_9 = ((((player->masterVolume >> 0x15) * (track->subTrackVolume >> 0x15) * (track->unk2C >> 0x15)) >> 0x14) * (track->segTrackVolume * alUnkTheta->unk_16)) >> 9;
-                                    alUnkTheta->unk_08 = temp_v1_9;
-                                    voice->unk_40 = alUnkTheta->unk_08;
-                                    voice->unk_3D |= 0x20;
-                                    voice->unk_0E = track->subTrackPan;
-                                    voice->unk_0F = track->subTrackReverb;
-                                } else if (track->changed.pan || track->changed.reverb) {
-                                    voice->unk_0E = track->subTrackPan;
-                                    voice->unk_0F = track->subTrackReverb;
-                                    voice->unk_43 |= 0x10;
-                                }
-                            }
-                        }
-                        alUnkTheta->unk_17 = 0;
-                    }
-                }
-            }
-        }
-    }
-
-    if (cond) {
-        player->unk_221 = 2;
-    }
+	if (cond) {
+		player->unk_221 = 2;
+	}
 }
-*/
 
 static const f32 padding[] = {0.0f}; // at least after func_8004E4B8
 
@@ -1626,7 +1617,7 @@ void snd_BGMCmd_FC_Jump(BGMPlayer* player, BGMPlayerTrack* arg1) {
     }
     arg1->prevReadPos = arg1->bgmReadPos;
     arg1->bgmReadPos = (var_a1[0] << 8) + var_a1[1] + (s32)player->bgmFile;
-    arg1->unk_58 = var_a1[2];
+    arg1->isDrumTrack = var_a1[2];
     if (arg1->unk_4D != 0) {
         arg1->unk_4D = 0;
         arg1->unk2C = 0;
