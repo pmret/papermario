@@ -473,6 +473,13 @@ void set_entity_fog_dist(s32 start, s32 end);
 void set_entity_fog_color(s32 r, s32 g, s32 b, s32 a);
 
 struct ModelTransformGroup* get_transform_group(s32 index);
+void make_transform_group(u16 modelID);
+void enable_transform_group(u16 modelID);
+void disable_transform_group(u16 modelID);
+void set_map_transition_effect(s32);
+
+void set_tex_panner(struct Model* model, s32 texPannerID);
+void set_custom_gfx(s32 customGfxIndex, Gfx* pre, Gfx* post);
 
 s32 make_item_entity(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pickupDelay, s32 facingAngleSign,
                      s32 pickupVar);
