@@ -812,12 +812,12 @@ void msg_printer_set_origin_pos(MessagePrintState* msgPrintState, s32 x, s32 y) 
 }
 
 s32 cancel_message(MessagePrintState* msgPrintState) {
-    if ((msgPrintState->stateFlags & MSG_STATE_FLAG_2) == 0) {
-        return 0;
+    if (!(msgPrintState->stateFlags & MSG_STATE_FLAG_2)) {
+        return FALSE;
     }
 
     msgPrintState->stateFlags |= MSG_STATE_FLAG_1;
-    return 1;
+    return TRUE;
 }
 
 void set_message_images(MessageImageData* images) {

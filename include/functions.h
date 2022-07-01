@@ -182,6 +182,7 @@ s32 dispatch_damage_event_actor_0(Actor* actor, s32 damageAmount, s32 event);
 
 // Text
 MessagePrintState* msg_get_printer_for_msg(s32 msgID, s32* a1);
+s32 msg_printer_load_msg(s32 msgID, MessagePrintState* printer);
 void msg_printer_set_origin_pos(MessagePrintState* msgPrintState, s32 x, s32 y);
 
 void get_screen_coords(s32 camID, f32 x, f32 y, f32 z, s32* screenX, s32* screenY, s32* screenZ);
@@ -427,6 +428,10 @@ void partner_set_tether_distance(f32);
 
 void btl_delete_player_actor(Actor* player);
 
+s32 cancel_message(MessagePrintState* msgPrintState);
+
+void set_message_images(MessageImageData* images);
+
 void kill_all_scripts(void);
 s32 does_script_exist(s32 id);
 s32 does_script_exist_by_ref(Evt* script);
@@ -435,6 +440,7 @@ Evt* start_script_in_group(EvtScript* source, u8 priority, u8 initialState, u8 g
 f32 get_player_normal_yaw(void);
 void set_standard_shadow_scale(Shadow* shadow, f32 scale);
 void set_npc_shadow_scale(Shadow* shadow, f32 height, f32 npcRadius);
+void set_npc_animation(Npc* npc, u32 animID);
 void set_peach_shadow_scale(Shadow* shadow, f32 scale);
 s32 is_block_on_ground(Entity* block);
 void set_animation(s32 actorID, s32, s32 animationIndex);
