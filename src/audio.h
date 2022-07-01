@@ -22,6 +22,16 @@
 
 #define BGM_MAX_VOLUME 127
 
+#define BGM_SEGMENT_LABEL 3
+
+typedef enum BGMPlayerState {
+    BGM_PLAY_STATE_0                = 0,    // INITIALIZED
+    BGM_PLAY_STATE_1                = 1,    // PLAYING
+    BGM_PLAY_STATE_2                = 2,    // BGM LOADED (blocks)
+    BGM_PLAY_STATE_3                = 3,    // ???
+    BGM_PLAY_STATE_4                = 4,    // DONE? (blocks)
+} BGMPlayerState;
+
 typedef union Q32 {
     u8 u8[4];
     u16 u16[2];
@@ -33,14 +43,6 @@ struct SndGlobals;
 struct AlUnkVoice;
 
 typedef void (*UnkFuncAl)(void);
-
-typedef union UnkField {
-    u8 u8;
-    u16 u16;
-    u32 u32;
-    s8 s8;
-    s32 s32;
-} UnkField;
 
 typedef union SeqArgs {
     u8 u8[4];
@@ -101,8 +103,8 @@ typedef struct AlUnkGamma {
     /* 0x08 */ AlUnkDelta* unk_delta_8;
     /* 0x0C */ u8 unk_0C;
     /* 0x0D */ char unk_0D[0x3];
-    /* 0x10 */ s32* unk_10;
-    /* 0x14 */ s32* unk_14;
+    /* 0x10 */ struct AlUnkBeta* unk_beta_10;
+    /* 0x14 */ struct AlUnkBeta* unk_beta_14;
 } AlUnkGamma; // size = 0x18
 
 typedef struct AlUnkEta {
@@ -122,7 +124,7 @@ typedef struct AlUnkEta {
 } AlUnkEta; // size unk
 
 typedef struct AlUnkBeta {
-    /* 0x00 */ s32 unk_00;
+    /* 0x00 */ struct AlUnkBeta* next;
     /* 0x04 */ s32* unk_04; // struct size = 0x20
     /* 0x08 */ s32* unk_08; // struct size = 0x20
     /* 0x0C */ char unk_0C[0x8];
@@ -683,7 +685,7 @@ typedef struct BGMPlayer {
     /* 0x0CC */ s32 masterVolumeFadeTime;
     /* 0x0D0 */ f32 unk_D0;
     /* 0x0D4 */ SeqArgs seqCmdArgs;
-    /* 0x0D8 */ s32* unk_D8[32]; // labels?
+    /* 0x0D8 */ s32* segmentJumpLabels[32];
     /* 0x158 */ s32* unk_158[4];
     /* 0x168 */ Q32 unk_168;
     /* 0x16C */ s32 unk_16C;
@@ -693,7 +695,7 @@ typedef struct BGMPlayer {
     /* 0x174 */ s16 unk_174[8][9];
     /* 0x204 */ u8* unk_204;
     /* 0x208 */ u16 masterTempoBPM;
-    /* 0x20A */ u16 bgmKhz;
+    /* 0x20A */ u16 bgmKhz; // maxTempo?
     /* 0x20C */ u16 masterTranspose;
     /* 0x20E */ s16 unk_20E;
     /* 0x210 */ u8 unk_210;
@@ -706,7 +708,7 @@ typedef struct BGMPlayer {
     /* 0x21E */ u8 unk_21E;
     /* 0x21F */ char unk_21F[0x1];
     /* 0x220 */ u8 unk_220;
-    /* 0x221 */ u8 unk_221;
+    /* 0x221 */ u8 masterState;
     /* 0x222 */ u8 unk_222;
     /* 0x223 */ u8 unk_223;
     /* 0x224 */ u8 unk_224[4];
@@ -840,9 +842,9 @@ extern u16 D_80078DB6;
 
 extern AlUnkAlpha* D_80078E50;
 extern AlUnkAlpha* D_80078E54;
-extern s8 D_80078E58;
-extern s16 D_80078E5A;
-extern s8 D_80078E5C;
+extern u8 D_80078E58;
+extern u16 D_80078E5A;
+extern u8 D_80078E5C;
 
 extern SndGlobals* gSoundGlobals;
 extern BGMPlayer* gBGMPlayerC;
@@ -857,7 +859,7 @@ extern u16 D_800A0F50;
 extern s16* D_800A3FE0;
 extern s16* D_800A3FE4;
 extern s32 D_800A3FE8;
-extern s8 D_800A3FEC;
+extern u8 D_800A3FEC;
 extern s16 D_800A3FEE;
 extern s32 D_800A3FF0;
 

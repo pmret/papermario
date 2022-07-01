@@ -230,24 +230,24 @@ void entity_GiantChest_give_equipment(Entity* entity) {
     s32 flag;
 
     switch (data->itemID) {
-    	case ITEM_JUMP:
-    	    gPlayerData.bootsLevel = 0;
-    	    break;
-    	case ITEM_SPIN_JUMP:
-    	    gPlayerData.bootsLevel = 1;
-    	    break;
-    	case ITEM_TORNADO_JUMP:
-    	    gPlayerData.bootsLevel = 2;
-    	    break;
-    	case ITEM_HAMMER:
-    	    gPlayerData.hammerLevel = 0;
-    	    break;
-    	case ITEM_SUPER_HAMMER:
-    	    gPlayerData.hammerLevel = 1;
-    	    break;
-    	case ITEM_ULTRA_HAMMER:
-    	    gPlayerData.hammerLevel = 2;
-    	    break;
+        case ITEM_JUMP:
+            gPlayerData.bootsLevel = 0;
+            break;
+        case ITEM_SPIN_JUMP:
+            gPlayerData.bootsLevel = 1;
+            break;
+        case ITEM_TORNADO_JUMP:
+            gPlayerData.bootsLevel = 2;
+            break;
+        case ITEM_HAMMER:
+            gPlayerData.hammerLevel = 0;
+            break;
+        case ITEM_SUPER_HAMMER:
+            gPlayerData.hammerLevel = 1;
+            break;
+        case ITEM_ULTRA_HAMMER:
+            gPlayerData.hammerLevel = 2;
+            break;
     }
 
     if (data->itemID != 0) {

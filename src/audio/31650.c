@@ -2,13 +2,36 @@
 #include "audio.h"
 #include "nu/nualsgi.h"
 
+extern void snd_add_sfx_output(void);
+extern void snd_update_sequence_players(void);
+extern Acmd* func_80058050(AlUnkBeta*, Acmd*);
+extern Acmd* func_80059310(AlUnkDelta*, Acmd*, s32, s32);
+
+void func_80057874(u8 arg0, u8 arg1);
 s16 func_80058004(s16 arg0, s32 arg1, s16 arg2, u16 arg3);
 
 AlUnkAlpha* D_80078E50 = NULL;
 AlUnkAlpha* D_80078E54 = NULL;
-s8 D_80078E58 = 0;
-s16 D_80078E5A = 0x7FFF;
-s8 D_80078E5C = 0;
+u8 D_80078E58 = FALSE;
+u16 D_80078E5A = 0x7FFF;
+u8 D_80078E5C = FALSE;
+
+#define aLoadBufferSize(pkt,s,u,b) { \
+    Acmd *_a = (Acmd *)pkt; \
+    _a->words.w0 = _SHIFTL(A_LOADBUFF, 24, 8) | _SHIFTL(s, 12, 12) | _SHIFTL(u, 0, 12); \
+    _a->words.w1 = (unsigned int)(b); \
+    }
+
+#define aSaveBufferSize(pkt,s,u,b) { \
+    Acmd *_a = (Acmd *)pkt; \
+    _a->words.w0 = _SHIFTL(A_SAVEBUFF, 24, 8) | _SHIFTL(s, 12, 12) | _SHIFTL(u, 0, 12); \
+    _a->words.w1 = (unsigned int)(b); \
+    }
+
+#define aInterleavePart(pkt) { \
+    Acmd *_a = (Acmd *)pkt; \
+    _a->words.w0 = _SHIFTL(A_INTERLEAVE, 24, 8); \
+    }
 
 // values for cosine from 0 to pi/2 multiplied by 32767
 s16 AlCosineBlend[] = { 
@@ -47,9 +70,9 @@ void func_80056250(AlUnkAlpha* globals, ALConfig* config) {
 
     D_80078E50 = globals;
     D_80078E54 = globals;
-    D_80078E58 = 0;
+    D_80078E58 = FALSE;
     D_80078E5A = 0x7FFF;
-    D_80078E5C = 1;
+    D_80078E5C = TRUE;
     D_80078E54->al_unk_beta = alHeapAlloc(heap, config->unk_00, sizeof(*D_80078E54->al_unk_beta));
 
     for (i = 0; i < config->unk_00; i++) {
@@ -82,15 +105,15 @@ void func_80056250(AlUnkAlpha* globals, ALConfig* config) {
         beta->unk_68 = 0;
         beta->unk_4C = 64;
         beta->unk_74 = 0;
-        beta->unk_00 = 0;
+        beta->next = NULL;
         beta->unk_78 = 0;
         beta->unk_79 = i;
     }
     D_80078E54->al_unk_gamma = alHeapAlloc(heap, config->unk_04, sizeof(*D_80078E54->al_unk_gamma));
     for (i = 0; i < config->unk_04; i++) {
         AlUnkGamma* temp = &D_80078E54->al_unk_gamma[i];
-        temp->unk_10 = 0;
-        temp->unk_14 = 0;
+        temp->unk_beta_10 = 0;
+        temp->unk_beta_14 = 0;
         temp->unk_00 = 0x7FFF;
         temp->unk_0C = 0;
         temp->unk_delta_4 = alHeapAlloc(heap, 1, sizeof(*temp->unk_delta_4));
@@ -121,10 +144,137 @@ void func_800565A4(void) {
     }
 }
 
-INCLUDE_ASM(Acmd*, "audio/31650", alAudioFrame, Acmd* cmdList, s32* cmdLen, s16* outBuf, s32 outLen);
+Acmd* alAudioFrame(Acmd* cmdList, s32* cmdLen, s16* outBuf, s32 outLen) {
+    Acmd* cmdListPos;
+    AlUnkGamma* gamma1;
+    AlUnkBeta* beta1;
+    AlUnkBeta* beta2;
+    AlUnkGamma* gamma3;
+    
+    s16* sp10;
+    u16 sp1E;
+    s16 var_v0;
+
+    s32 i;
+    s32 var_s7;
+    
+    cmdListPos = cmdList;
+    sp10 = outBuf;
+    if (D_80078E50 == NULL) {
+        *cmdLen = 0;
+    } else {
+        snd_add_sfx_output();
+        if (D_80078E5C) {
+            for (i = 0; i < D_80078E54->unk_0C; i++) {
+                beta2 = &D_80078E54->al_unk_beta[i];
+                if (beta2->unk_70 == 1) {
+                    func_80057874(i, beta2->unk_4C_s.unk_4D); //TODO
+                }
+            }
+            D_80078E5C = FALSE;
+        }
+        if (outLen > 0) {
+            do {
+                snd_update_sequence_players();
+                for (i = 0; i < D_80078E54->unk_0C; i++) {
+                    beta2 = &D_80078E54->al_unk_beta[i];
+
+                    if ((beta2->unk_78 != 0xFF) && (beta2->unk_78 < D_80078E54->unk_10)) {
+                        gamma3 = &D_80078E54->al_unk_gamma[beta2->unk_78];
+                        if (gamma3->unk_beta_14 != NULL) {
+                            gamma3->unk_beta_14->next = beta2;
+                        } else {
+                            gamma3->unk_beta_10 = beta2;
+                        }
+                        gamma3->unk_beta_14 = beta2;
+                    }
+                }
+                var_s7 = 1;
+                for (i = 0; i < D_80078E54->unk_10; i++) {
+                    gamma3 = &D_80078E54->al_unk_gamma[i];
+                    if (gamma3->unk_beta_10 != NULL) {
+                        aClearBuffer(cmdListPos++, 0x04E0, 0x5C0);
+                        if (gamma3->unk_beta_10 != NULL) {
+                            AlUnkBeta* curBeta;
+                            AlUnkBeta* nextBeta;
+                            do {
+                                cmdListPos = func_80058050(gamma3->unk_beta_10, cmdListPos);
+                                curBeta = gamma3->unk_beta_10;
+                                nextBeta = curBeta->next;
+                                curBeta->next = NULL;
+                                gamma3->unk_beta_10 = nextBeta;
+                            } while (nextBeta != 0);
+                            gamma3->unk_beta_14 = 0;
+                        }
+                        if (gamma3->unk_0C != 0) {
+                            cmdListPos = func_80059310(gamma3->unk_delta_8, func_80059310(gamma3->unk_delta_4, cmdListPos, 0x7C0, 0), 0x930, 0);
+                        }
+                        if (i == D_800A3FEC) {
+                            var_v0 = -1;
+                            switch (D_800A3FEE) {
+                                case 1:
+                                    var_v0 = 0x4E0;
+                                    sp1E = 0x7C0;
+                                    break;
+                                case 2:
+                                    var_v0 = 0x650;
+                                    sp1E = 0x930;
+                                    break;
+                            }
+                            if (var_v0 != -1) {
+                                aSaveBufferSize(cmdListPos++, 0x170, var_v0, osVirtualToPhysical(D_800A3FE0 + (D_800A3FE8 % D_800A3FF0) * 184));
+                                aLoadBufferSize(cmdListPos++, 0x170, var_v0, osVirtualToPhysical(D_800A3FE0 + ((D_800A3FE8 + 1) % D_800A3FF0) * 184));
+                                aSaveBufferSize(cmdListPos++, 0x170, sp1E, osVirtualToPhysical(D_800A3FE4 + (D_800A3FE8 % D_800A3FF0) * 184));                                
+                                aLoadBufferSize(cmdListPos++, 0x170, sp1E, osVirtualToPhysical(D_800A3FE4 + ((D_800A3FE8 + 1) % D_800A3FF0) * 184));
+                                
+                            }
+                        }
+                        if (var_s7) {
+                            aClearBuffer(cmdListPos++, 0, 0x2E0);
+                        } else {
+                            aLoadBufferSize(cmdListPos++, 0x2E0, 0, osVirtualToPhysical(D_80078E54->unk_28));
+                        }
+                        aMix(cmdListPos++, 0, gamma3->unk_00, 0x7C0, 0);
+                        aMix(cmdListPos++, 0, gamma3->unk_00, 0x930, 0x170);
+                        aSaveBufferSize(cmdListPos++, 0x2E0, 0, osVirtualToPhysical(D_80078E54->unk_28));
+                        if (var_s7) {
+                            aClearBuffer(cmdListPos++, 0, 0x2E0);
+                            var_s7 = FALSE;
+                        } else {
+                            aLoadBufferSize(cmdListPos++, 0x2E0, 0, osVirtualToPhysical(D_80078E54->unk_24));
+                        }
+                        aMix(cmdListPos++, 0, gamma3->unk_00, 0x04E0, 0);
+                        aMix(cmdListPos++, 0, gamma3->unk_00, 0x0650, 0x0170);
+                        aSaveBufferSize(cmdListPos++, 0x2E0, 0, osVirtualToPhysical(D_80078E54->unk_24));
+                    }
+                }
+                aDMEMMove(cmdListPos++, 0, 0x4E0, 0x2E0);
+                aLoadBufferSize(cmdListPos++, 0x2E0, 0x07C0, osVirtualToPhysical(D_80078E54->unk_28));
+                aMix(cmdListPos++, 0, 0x7FFF, 0x7C0, 0x4E0);
+                aMix(cmdListPos++, 0, 0x7FFF, 0x930, 0x650);
+                if (D_80078E58) {
+                    u16 temp;
+                    aDMEMMove(cmdListPos++, 0x4E0, 0, 0x2E0);
+                    aClearBuffer(cmdListPos++, 0x4E0, 0x2E0);
+                    temp = D_80078E5A;
+                    aMix(cmdListPos++, 0, temp, 0, 0x4E0);
+                    aMix(cmdListPos++, 0, temp, 0x170, 0x650);
+                }
+                outLen -= 184;
+                aInterleavePart(cmdListPos++);
+                aSaveBufferSize(cmdListPos++, 0x2E0, 0, sp10);
+                sp10 += 184 * 2;
+                D_800A3FE8++;
+                D_80078E54->unk_00 += 184;
+            } while (outLen > 0);
+        }
+        *cmdLen = (cmdListPos - cmdList);
+    }
+    return cmdListPos;
+}
 
 void func_80056D34(void) {
-    D_80078E58 = 1;
+    D_80078E58 = TRUE;
 }
 
 void func_80056D44(s16 arg0) {
@@ -137,7 +287,7 @@ s16 func_80056D50(void) {
 
 void func_80056D5C(u8 arg0) {
     D_80078181 = arg0;
-    D_80078E5C = 1;
+    D_80078E5C = TRUE;
 }
 
 void func_80056D78(u8 arg0, u16 arg1) {
