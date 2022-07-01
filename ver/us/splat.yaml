@@ -218,7 +218,7 @@ segments:
     - [0x42DE0, c, os/guMtxXFML, gcc_272 -O3]
     - [0x42E70, c, os/guMtxXFMF, gcc_272 -O3]
     - [0x42F20, c, os/guRotate, gcc_272 -O3]
-    - [0x43200, c, os/43200_len_7c0]
+    - [0x43200, c, os/motor]
     - [0x43590, c, os/pfsallocatefile, gcc_272 -O3]
     - [0x439C0, c, os/pfsdeletefile, gcc_272 -O3]
     - [0x43BE0, c, os/pfsreadwritefile, gcc_272 -O3]
@@ -4769,6 +4769,9 @@ segments:
     - [0x557F90, c]
     - [0x5580C0, c]
     - [0x558190, data]
+    - [0x56DF50, .rodata, 5573E0]
+    - [0x56DF90, rodata]
+    - [0x56E070]
   - dir: battle/area_kgr
     type: code
     start: 0x56E2A0

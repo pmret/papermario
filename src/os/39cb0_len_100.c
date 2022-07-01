@@ -10,7 +10,7 @@ extern u64 nuScStack[NU_SC_STACK_SIZE / sizeof(u64)];
 BSS void (*nuIdleFunc)(void);
 
 void nuBoot(void) {
-    osInitialize(); // osInitialize
+    osInitialize();
     osCreateThread(&D_800A4270, NU_IDLE_THREAD_ID, boot_idle, NULL, &nuScStack, 10);
     osStartThread(&D_800A4270);
 }
