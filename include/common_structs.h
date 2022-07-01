@@ -603,6 +603,19 @@ typedef struct SignPostData {
     /* 0x00 */ char unk_00[8];
 } SignPostData; // size = 0x08
 
+typedef struct PadlockData {
+    /* 0x00 */ f32 unk_00;
+    /* 0x04 */ f32 shacklePos;
+    /* 0x08 */ f32 fallSpeed;
+    /* 0x0C */ f32 rotationSpeed;
+    /* 0x10 */ u8 blinkCounter;
+    /* 0x11 */ s8 timer;
+    /* 0x12 */ s8 state;
+    /* 0x13 */ char unk_13;
+    /* 0x14 */ Mtx* unk_14;
+    /* 0x18 */ Gfx* unk_18;
+} PadlockData; // size = 0x1C
+
 // END ENTITY-SPECIFIC STRUCTS
 
 typedef s32 (*EntityCallback)(struct Entity*);
@@ -665,6 +678,7 @@ typedef struct Entity {
         SimpleSpringData* simpleSpring;
         HiddenPanelData* hiddenPanel;
         SignPostData* signPost;
+        PadlockData* padlock;
         s32* unk;
     } dataBuf;
     /* 0x44 */ Vec3s* vertexData;

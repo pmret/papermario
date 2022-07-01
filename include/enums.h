@@ -604,6 +604,8 @@ enum SoundIDs {
     SOUND_25C                       = 0x0000025C,
     SOUND_25D                       = 0x0000025D,
     SOUND_262                       = 0x00000262,
+    SOUND_269                       = 0x00000269,
+    SOUND_26A                       = 0x0000026A,
     SOUND_281                       = 0x00000281,
     SOUND_282                       = 0x00000282,
     SOUND_283                       = 0x00000283,

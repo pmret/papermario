@@ -12064,7 +12064,8 @@ segments:
     - [0xE2B530, c, E2B530]
     - [0xE2BE40, c, E2BE40]
     - [0xE2C930, c]
-    - [0xE2D410, data]
+    - [0xE2D410, .data, E2B530]
+    - [0xE2D530, data, E2D410]
     - [0xE2D680]
   - type: code
     dir: entity/jan_iwa
@@ -12558,6 +12559,31 @@ segments:
       - [0xE59C00, palette, SignPost]
       - [0xE59C20]
   - [0xE59F00, bin] # unk data
+  - name: entity_model_Padlock
+    dir: entity/model
+    type: code
+    start: 0xE5AB50
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE5AB50, c, Padlock]
+    - start: 0xE5AB50
+      type: .data
+      name: Padlock
+      subsegments:
+      - [0xE5AB50]
+      - [0xE5B250, ci8, Padlock_tex1, 32, 32]
+      - [0xE5B650, palette, Padlock_tex1]
+      - [0xE5B850]
+      - [0xE5B8F8, ci8, Padlock_keyhole, 32, 64]
+      - [0xE5C0F8, palette, Padlock_keyhole]
+      - [0xE5C2F8]
+      - [0xE5C3A0, ci8, Padlock_tex2, 32, 32]
+      - [0xE5C7A0, palette, Padlock_tex2]
+      - [0xE5C9A0]
+  - [0xE5CD80, bin] # unk data
+  - [0xE5E730, bin] # unk data
+  - [0xE60550, bin] # unk data
   - name: entity_model_GreenStompSwitch
     dir: entity/model
     type: code
