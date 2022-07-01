@@ -322,7 +322,7 @@ typedef struct Trigger {
     /*      */     f32 varTableF[3];
     /*      */     void* varTablePtr[3];
     /*      */ };
-    /* 0x28 */ s32 itemList;
+    /* 0x28 */ s32* itemList;
     /* 0x2C */ s32 unk_tr_2C; // related to Goombario somehow, custom tattle perhaps?
     /* 0x30 */ u8 hasPlayerInteractPrompt;
     /* 0x31 */ char unk_31[3];

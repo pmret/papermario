@@ -508,7 +508,9 @@ s32 bgm_set_song(s32 playerIndex, s32 songID, s32 variation, s32 fadeOutTime, s1
 void bgm_set_battle_song(s32, s32);
 void bgm_push_battle_song(void);
 void func_801497FC(s32 arg0);
+s32 func_8014A964(s32 playerIndex, s32 songID, s32 variation, s32 fadeInTime, s16 arg4, s16 arg5);
 s32 func_8014AA54(s32 playerIndex, s32 arg1, s16 arg2);
+s32 func_8014AB0C(s32 playerIndex, s16 arg1);
 
 void basic_window_update(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, f32* scaleX, f32* scaleY,
                    f32* rotX, f32* rotY, f32* rotZ, s32* darkening, s32* opacity);
@@ -581,6 +583,15 @@ void bgm_reset_sequence_players(void);
 void reset_ambient_sounds(void);
 void sfx_clear_sounds(void);
 void poll_rumble(void);
+void bgm_pop_song(void);
+void bgm_push_song(s32 songID, s32 variation);
+void bgm_pop_battle_song(void);
+s32 play_ambient_sounds(s32 fadeInTime, s32 fadeOutTime);
+s32 get_fortress_key_count(void);
+s32 subtract_fortress_keys(s32 amt);
+s32 add_star_points(s32 amt);
+s32 add_star_pieces(s32 amt);
+s32 make_item_entity_at_player(s32 itemID, s32 arg1, s32 pickupMsgFlags);
 
 void set_action_state(s32 actionState);
 s32 get_collider_type_by_id(s32 colliderID);
