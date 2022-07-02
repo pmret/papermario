@@ -1,6 +1,6 @@
 #include "common.h"
 
-Vtx Entity_Padlock_vtxBody[] = {
+Vtx Entity_PadlockRedFace_vtxBody[] = {
     {{{     8,     0,    -5 }, 0, {  -344,    78 }, { 116, 116, 116, 255 }}},
     {{{     8,     0,     5 }, 0, {  -209,   -64 }, { 116, 116, 116, 255 }}},
     {{{    -8,     0,     5 }, 0, {  -209,   -64 }, { 116, 116, 116, 255 }}},
@@ -94,21 +94,21 @@ Vtx Entity_Padlock_vtxBody[] = {
     {{{    13,    25,     5 }, 0, {   146,   273 }, { 138, 138, 138, 255 }}},
     {{{    13,    25,    -5 }, 0, {    11,   415 }, { 138, 138, 138, 255 }}},
 };
-Vtx Entity_Padlock_vtxFace[] = {
-    {{{    -7,     2,     5 }, 0, {   532, -1084 }, { 255, 255, 255, 255 }}},
-    {{{     7,     2,     5 }, 0, {  1336, -1084 }, { 255, 255, 255, 255 }}},
-    {{{    10,     6,     5 }, 0, {  1566,  -854 }, { 255, 255, 255, 255 }}},
-    {{{    10,    15,     5 }, 0, {  1566,  -301 }, { 255, 255, 255, 255 }}},
-    {{{   -10,    15,     5 }, 0, {   301,  -301 }, { 255, 255, 255, 255 }}},
-    {{{   -10,     6,     5 }, 0, {   301,  -854 }, { 255, 255, 255, 255 }}},
+Vtx Entity_PadlockRedFace_vtxFace[] = {
+    {{{    -7,     2,     5 }, 0, {   532, -1084 }, { 161,   0,   0, 255 }}},
+    {{{     7,     2,     5 }, 0, {  1336, -1084 }, { 161,   0,   0, 255 }}},
+    {{{    10,     6,     5 }, 0, {  1566,  -854 }, { 161,   0,   0, 255 }}},
+    {{{    10,    15,     5 }, 0, {  1566,  -301 }, { 161,   0,   0, 255 }}},
+    {{{   -10,    15,     5 }, 0, {   301,  -301 }, { 161,   0,   0, 255 }}},
+    {{{   -10,     6,     5 }, 0, {   301,  -854 }, { 161,   0,   0, 255 }}},
 };
-Vtx Entity_Padlock_vtxKeyhole[] = {
+Vtx Entity_PadlockRedFace_vtxKeyhole[] = {
     {{{    -5,     2,     5 }, 0, {     0,     0 }, { 255, 255, 255, 255 }}},
     {{{     7,     2,     5 }, 0, {  2048,     0 }, { 255, 255, 255, 255 }}},
     {{{     7,    15,     5 }, 0, {  2048,  2048 }, { 255, 255, 255, 255 }}},
     {{{    -5,    15,     5 }, 0, {     0,  2048 }, { 255, 255, 255, 255 }}},
 };
-Vtx Entity_Padlock_vtxShackle[] = {
+Vtx Entity_PadlockRedFace_vtxShackle[] = {
     {{{    -8,     0,     0 }, 0, {     0,     0 }, { 255, 255, 255, 255 }}},
     {{{    -8,     0,     0 }, 0, {     0,     0 }, {  88,  88,  88, 255 }}},
     {{{     8,     0,     0 }, 0, {     0,     0 }, {  88,  88,  88, 255 }}},
@@ -121,52 +121,50 @@ Vtx Entity_Padlock_vtxShackle[] = {
     {{{    -8,     2,     0 }, 0, {     0,     0 }, {  52,  52,  52, 255 }}},
 };
 
-#include "entity/model/Padlock_face.png.inc.c"
-#include "entity/model/Padlock_face.pal.inc.c"
-Gfx Entity_Padlock_LoadTextureFace[] = {
-    gsDPSetTextureLUT(G_TT_RGBA16),
-    gsDPLoadTLUT_pal256(D_0A000B00_E5B650),
+#include "entity/model/PadlockRedFace_face.png.inc.c"
+Gfx Entity_PadlockRedFace_LoadTextureFace[] = {
+    gsDPSetTextureLUT(G_TT_NONE),
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
     gsDPSetCombineMode(G_CC_MODULATEIA, G_CC_MODULATEIA),
     gsDPSetTextureDetail(G_TD_CLAMP),
     gsDPSetTextureLOD(G_TL_TILE),
-    gsDPLoadTextureBlock(D_0A000700_E5B250, G_IM_FMT_CI, G_IM_SIZ_8b, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD),
+    gsDPLoadTextureBlock_4b(D_0A000700_E5EE30, G_IM_FMT_I, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD),
     gsDPSetTexturePersp(G_TP_PERSP),
     gsDPSetTextureFilter(G_TF_BILERP),
     gsSPEndDisplayList(),
 };
 
-#include "entity/model/Padlock_keyhole.png.inc.c"
-#include "entity/model/Padlock_keyhole.pal.inc.c"
-Gfx Entity_Padlock_LoadTextureKeyhole[] = {
+#include "entity/model/PadlockRedFace_keyhole.png.inc.c"
+#include "entity/model/PadlockRedFace_keyhole.pal.inc.c"
+Gfx Entity_PadlockRedFace_LoadTextureKeyhole[] = {
     gsDPSetTextureLUT(G_TT_RGBA16),
-    gsDPLoadTLUT_pal256(D_0A0015A8_E5C0F8),
+    gsDPLoadTLUT_pal256(D_0A001178_E5F8A8),
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
     gsDPSetCombineMode(G_CC_MODULATEIA, G_CC_MODULATEIA),
     gsDPSetTextureDetail(G_TD_CLAMP),
     gsDPSetTextureLOD(G_TL_TILE),
-    gsDPLoadTextureBlock(D_0A000DA8_E5B8F8, G_IM_FMT_CI, G_IM_SIZ_8b, 32, 64, 0, G_TX_MIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_WRAP, 5, 6, G_TX_NOLOD, G_TX_NOLOD),
+    gsDPLoadTextureBlock(D_0A000978_E5F0A8, G_IM_FMT_CI, G_IM_SIZ_8b, 32, 64, 0, G_TX_MIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_WRAP, 5, 6, G_TX_NOLOD, G_TX_NOLOD),
     gsDPSetTexturePersp(G_TP_PERSP),
     gsDPSetTextureFilter(G_TF_BILERP),
     gsSPEndDisplayList(),
 };
 
-#include "entity/model/Padlock_body.png.inc.c"
-#include "entity/model/Padlock_body.pal.inc.c"
-Gfx Entity_Padlock_LoadTextureBody[] = {
+#include "entity/model/PadlockRedFace_body.png.inc.c"
+#include "entity/model/PadlockRedFace_body.pal.inc.c"
+Gfx Entity_PadlockRedFace_LoadTextureBody[] = {
     gsDPSetTextureLUT(G_TT_RGBA16),
-    gsDPLoadTLUT_pal256(D_0A001C50_E5C7A0),
+    gsDPLoadTLUT_pal256(D_0A001820_E5FF50),
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
     gsDPSetCombineMode(G_CC_MODULATEIA, G_CC_MODULATEIA),
     gsDPSetTextureDetail(G_TD_CLAMP),
     gsDPSetTextureLOD(G_TL_TILE),
-    gsDPLoadTextureBlock(D_0A001850_E5C3A0, G_IM_FMT_CI, G_IM_SIZ_8b, 32, 32, 0, G_TX_MIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD),
+    gsDPLoadTextureBlock(D_0A001420_E5FB50, G_IM_FMT_CI, G_IM_SIZ_8b, 32, 32, 0, G_TX_MIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD),
     gsDPSetTexturePersp(G_TP_PERSP),
     gsDPSetTextureFilter(G_TF_BILERP),
     gsSPEndDisplayList(),
 };
 
-Mtx Entity_Padlock_mtxShackle = {
+Mtx Entity_PadlockRedFace_mtxShackle = {
     .m = {
         { 0x00010000, 0x00000000,
           0x00000001, 0x00000000 },
@@ -179,15 +177,15 @@ Mtx Entity_Padlock_mtxShackle = {
     }
 };
 
-Gfx Entity_Padlock_RenderShackleMain[] = {
+Gfx Entity_PadlockRedFace_RenderShackleMain[] = {
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
     gsDPSetCombineMode(G_CC_SHADE, G_CC_SHADE),
     gsSPTexture(0x0080, 0x0080, 0, G_TX_RENDERTILE, G_OFF),
-    gsSPClearGeometryMode(G_CULL_BACK | G_LIGHTING),
-    gsSPSetGeometryMode(G_SHADING_SMOOTH),
-    gsSPVertex(Entity_Padlock_vtxShackle, 10, 0),
+    gsSPClearGeometryMode(G_LIGHTING),
+    gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
+    gsSPVertex(Entity_PadlockRedFace_vtxShackle, 10, 0),
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
     gsSP2Triangles(1, 4, 5, 0, 1, 5, 2, 0),
     gsSP2Triangles(6, 0, 3, 0, 6, 3, 7, 0),
@@ -195,44 +193,44 @@ Gfx Entity_Padlock_RenderShackleMain[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx Entity_Padlock_RenderShackle[] = {
-    gsSPDisplayList(Entity_Padlock_RenderShackleMain),
+Gfx Entity_PadlockRedFace_RenderShackle[] = {
+    gsSPDisplayList(Entity_PadlockRedFace_RenderShackleMain),
     gsSPEndDisplayList(),
 };
 
-Gfx Entity_Padlock_RenderKeyhole[] = {
+Gfx Entity_PadlockRedFace_RenderKeyhole[] = {
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_XLU_DECAL, G_RM_AA_ZB_XLU_DECAL2),
-    gsSPDisplayList(Entity_Padlock_LoadTextureKeyhole),
+    gsSPDisplayList(Entity_PadlockRedFace_LoadTextureKeyhole),
     gsSPClearGeometryMode(G_LIGHTING | G_SHADING_SMOOTH),
     gsSPSetGeometryMode(G_CULL_BACK),
-    gsSPVertex(Entity_Padlock_vtxKeyhole, 4, 0),
+    gsSPVertex(Entity_PadlockRedFace_vtxKeyhole, 4, 0),
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
     gsSPEndDisplayList(),
 };
 
-Gfx Entity_Padlock_RenderFace[] = {
+Gfx Entity_PadlockRedFace_RenderFace[] = {
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(Entity_Padlock_LoadTextureFace),
+    gsSPDisplayList(Entity_PadlockRedFace_LoadTextureFace),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
-    gsSPVertex(Entity_Padlock_vtxFace, 6, 0),
+    gsSPVertex(Entity_PadlockRedFace_vtxFace, 6, 0),
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
     gsSP2Triangles(0, 3, 4, 0, 0, 4, 5, 0),
     gsSPEndDisplayList(),
 };
 
-Gfx Entity_Padlock_RenderBody[] = {
+Gfx Entity_PadlockRedFace_RenderBody[] = {
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(Entity_Padlock_LoadTextureBody),
+    gsSPDisplayList(Entity_PadlockRedFace_LoadTextureBody),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
-    gsSPVertex(&Entity_Padlock_vtxBody[0], 32, 0),
+    gsSPVertex(Entity_PadlockRedFace_vtxBody, 32, 0),
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
     gsSP2Triangles(3, 2, 4, 0, 3, 4, 5, 0),
     gsSP2Triangles(6, 7, 8, 0, 6, 8, 9, 0),
@@ -243,12 +241,12 @@ Gfx Entity_Padlock_RenderBody[] = {
     gsSP2Triangles(14, 21, 22, 0, 14, 22, 23, 0),
     gsSP2Triangles(24, 25, 26, 0, 24, 26, 27, 0),
     gsSP2Triangles(24, 27, 28, 0, 24, 28, 29, 0),
-    gsSPVertex(&Entity_Padlock_vtxBody[1], 1, 1),
-    gsSPVertex(&Entity_Padlock_vtxBody[17], 1, 2),
-    gsSPVertex(&Entity_Padlock_vtxBody[23], 1, 3),
-    gsSPVertex(&Entity_Padlock_vtxBody[27], 2, 4),
-    gsSPVertex(&Entity_Padlock_vtxBody[30], 11, 6),
-    gsSPVertex(&Entity_Padlock_vtxBody[54], 13, 17),
+    gsSPVertex(&Entity_PadlockRedFace_vtxBody[1], 1, 1),
+    gsSPVertex(&Entity_PadlockRedFace_vtxBody[17], 1, 2),
+    gsSPVertex(&Entity_PadlockRedFace_vtxBody[23], 1, 3),
+    gsSPVertex(&Entity_PadlockRedFace_vtxBody[27], 2, 4),
+    gsSPVertex(&Entity_PadlockRedFace_vtxBody[30], 11, 6),
+    gsSPVertex(&Entity_PadlockRedFace_vtxBody[54], 13, 17),
     gsSP2Triangles(4, 6, 7, 0, 4, 7, 8, 0),
     gsSP2Triangles(7, 9, 10, 0, 7, 10, 17, 0),
     gsSP2Triangles(10, 14, 18, 0, 10, 18, 19, 0),
@@ -260,13 +258,13 @@ Gfx Entity_Padlock_RenderBody[] = {
     gsSP2Triangles(14, 27, 15, 0, 14, 15, 18, 0),
     gsSP2Triangles(15, 28, 5, 0, 15, 5, 19, 0),
     gsSP2Triangles(16, 13, 29, 0, 16, 29, 3, 0),
-    gsSPVertex(&Entity_Padlock_vtxBody[6], 1, 0),
-    gsSPVertex(&Entity_Padlock_vtxBody[9], 1, 1),
-    gsSPVertex(&Entity_Padlock_vtxBody[19], 4, 2),
-    gsSPVertex(&Entity_Padlock_vtxBody[24], 3, 6),
-    gsSPVertex(&Entity_Padlock_vtxBody[29], 1, 9),
-    gsSPVertex(&Entity_Padlock_vtxBody[41], 9, 10),
-    gsSPVertex(&Entity_Padlock_vtxBody[67], 13, 19),
+    gsSPVertex(&Entity_PadlockRedFace_vtxBody[6], 1, 0),
+    gsSPVertex(&Entity_PadlockRedFace_vtxBody[9], 1, 1),
+    gsSPVertex(&Entity_PadlockRedFace_vtxBody[19], 4, 2),
+    gsSPVertex(&Entity_PadlockRedFace_vtxBody[24], 3, 6),
+    gsSPVertex(&Entity_PadlockRedFace_vtxBody[29], 1, 9),
+    gsSPVertex(&Entity_PadlockRedFace_vtxBody[41], 9, 10),
+    gsSPVertex(&Entity_PadlockRedFace_vtxBody[67], 13, 19),
     gsSP2Triangles(10, 19, 11, 0, 10, 11, 20, 0),
     gsSP2Triangles(11, 17, 21, 0, 11, 21, 20, 0),
     gsSP2Triangles(12, 22, 0, 0, 12, 0, 1, 0),
@@ -276,8 +274,8 @@ Gfx Entity_Padlock_RenderBody[] = {
     gsSP2Triangles(7, 16, 26, 0, 7, 26, 8, 0),
     gsSP2Triangles(17, 27, 28, 0, 17, 28, 21, 0),
     gsSP2Triangles(18, 29, 30, 0, 18, 30, 31, 0),
-    gsSPVertex(&Entity_Padlock_vtxBody[50], 4, 0),
-    gsSPVertex(&Entity_Padlock_vtxBody[80], 12, 4),
+    gsSPVertex(&Entity_PadlockRedFace_vtxBody[50], 4, 0),
+    gsSPVertex(&Entity_PadlockRedFace_vtxBody[80], 12, 4),
     gsSP2Triangles(0, 4, 5, 0, 0, 5, 6, 0),
     gsSP2Triangles(1, 7, 8, 0, 1, 8, 9, 0),
     gsSP2Triangles(2, 10, 11, 0, 2, 11, 12, 0),
@@ -285,9 +283,15 @@ Gfx Entity_Padlock_RenderBody[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx Entity_Padlock_Render[] = {
-    gsSPDisplayList(Entity_Padlock_RenderBody),
-    gsSPDisplayList(Entity_Padlock_RenderFace),
-    gsSPDisplayList(Entity_Padlock_RenderKeyhole),
+Gfx Entity_PadlockRedFace_RenderMain[] = {
+    gsSPDisplayList(Entity_PadlockRedFace_RenderBody),
+    gsSPDisplayList(Entity_PadlockRedFace_RenderFace),
+    gsSPDisplayList(Entity_PadlockRedFace_RenderKeyhole),
+    gsSPEndDisplayList(),
+};
+
+Gfx Entity_PadlockRedFace_Render[] = {
+    gsSPDisplayList(Entity_PadlockRedFace_RenderMain),
+    gsSPDisplayList(Entity_PadlockRedFace_RenderShackle),
     gsSPEndDisplayList(),
 };

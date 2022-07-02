@@ -604,7 +604,7 @@ typedef struct SignPostData {
 } SignPostData; // size = 0x08
 
 typedef struct PadlockData {
-    /* 0x00 */ f32 unk_00;
+    /* 0x00 */ f32 pushSpeed;
     /* 0x04 */ f32 shacklePos;
     /* 0x08 */ f32 fallSpeed;
     /* 0x0C */ f32 rotationSpeed;
@@ -612,9 +612,24 @@ typedef struct PadlockData {
     /* 0x11 */ s8 timer;
     /* 0x12 */ s8 state;
     /* 0x13 */ char unk_13;
-    /* 0x14 */ Mtx* unk_14;
-    /* 0x18 */ Gfx* unk_18;
+    /* 0x14 */ Mtx* shackleMtx;
+    /* 0x18 */ Gfx* shackleGfx;
 } PadlockData; // size = 0x1C
+
+typedef struct BoardedFloorData {
+    /* 0x000 */ Gfx** fragmentsGfx;
+    /* 0x004 */ f32 inititalY;
+    /* 0x008 */ s8 fragmentRebounds[13];
+    /* 0x015 */ u8 fragmentMoveAngle[13];
+    /* 0x022 */ u8 fragmentRotX[13];
+    /* 0x02F */ u8 fragmentRotY[13];
+    /* 0x03C */ u8 fragmentLateralSpeed[13];
+    /* 0x04C */ f32 fragmentRotationSpeed[13];
+    /* 0x080 */ f32 fragmentPosX[13];
+    /* 0x0B4 */ f32 fragmentPosY[13];
+    /* 0x0E8 */ f32 fragmentPosZ[13];
+    /* 0x11C */ f32 fragmentFallSpeed[13];
+} BoardedFloorData; // size = 0x150
 
 // END ENTITY-SPECIFIC STRUCTS
 
@@ -679,6 +694,7 @@ typedef struct Entity {
         HiddenPanelData* hiddenPanel;
         SignPostData* signPost;
         PadlockData* padlock;
+        BoardedFloorData* boardedFloor;
         s32* unk;
     } dataBuf;
     /* 0x44 */ Vec3s* vertexData;

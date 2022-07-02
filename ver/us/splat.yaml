@@ -12061,11 +12061,12 @@ segments:
     vram: 0x802BAE00
     overlay: True
     subsegments:
-    - [0xE2B530, c, E2B530]
-    - [0xE2BE40, c, E2BE40]
+    - [0xE2B530, c, Padlock]
+    - [0xE2BE40, c, BoardedFloor]
     - [0xE2C930, c]
-    - [0xE2D410, .data, E2B530]
-    - [0xE2D530, data, E2D410]
+    - [0xE2D410, .data, Padlock]
+    - [0xE2D530, .data, BoardedFloor]
+    - [0xE2D5E0, data, E2D410]
     - [0xE2D680]
   - type: code
     dir: entity/jan_iwa
@@ -12494,7 +12495,21 @@ segments:
       - [0xE4D450]
       - [0xE4D4C8, rgba16, SaveBlock_letterS, 64, 32]
       - [0xE4E4C8]
-  - [0xE4E7F0, bin] # unk data
+  - name: entity_model_BoardedFloor
+    dir: entity/model
+    type: code
+    start: 0xE4E7F0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE4E7F0, c, BoardedFloor]
+    - start: 0xE4E7F0
+      type: .data
+      name: BoardedFloor
+      subsegments:
+      - [0xE4E7F0]
+      - [0xE4FBF0, rgba16, BoardedFloor, 64, 32]
+      - [0xE50BF0]
   - name: entity_model_WoodenCrate
     dir: entity/model
     type: code
@@ -12572,18 +12587,76 @@ segments:
       name: Padlock
       subsegments:
       - [0xE5AB50]
-      - [0xE5B250, ci8, Padlock_tex1, 32, 32]
-      - [0xE5B650, palette, Padlock_tex1]
+      - [0xE5B250, ci8, Padlock_face, 32, 32]
+      - [0xE5B650, palette, Padlock_face]
       - [0xE5B850]
       - [0xE5B8F8, ci8, Padlock_keyhole, 32, 64]
       - [0xE5C0F8, palette, Padlock_keyhole]
       - [0xE5C2F8]
-      - [0xE5C3A0, ci8, Padlock_tex2, 32, 32]
-      - [0xE5C7A0, palette, Padlock_tex2]
+      - [0xE5C3A0, ci8, Padlock_body, 32, 32]
+      - [0xE5C7A0, palette, Padlock_body]
       - [0xE5C9A0]
-  - [0xE5CD80, bin] # unk data
-  - [0xE5E730, bin] # unk data
-  - [0xE60550, bin] # unk data
+  - name: entity_model_PadlockRedFrame
+    dir: entity/model
+    type: code
+    start: 0xE5CD80
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE5CD80, c, PadlockRedFrame]
+    - start: 0xE5CD80
+      type: .data
+      name: PadlockRedFrame
+      subsegments:
+      - [0xE5CD80]
+      - [0xE5D2C0, ci8, PadlockRedFrame_keyhole, 32, 64]
+      - [0xE5DAC0, palette, PadlockRedFrame_keyhole]
+      - [0xE5DCC0]
+      - [0xE5DD68, ci8, PadlockRedFrame_face, 32, 32]
+      - [0xE5E168, palette, PadlockRedFrame_face]
+      - [0xE5E368]
+  - name: entity_model_PadlockRedFace
+    dir: entity/model
+    type: code
+    start: 0xE5E730
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE5E730, c, PadlockRedFace]
+    - start: 0xE5E730
+      type: .data
+      name: PadlockRedFace
+      subsegments:
+      - [0xE5E730]
+      - [0xE5EE30, i4, PadlockRedFace_face, 32, 32]
+      - [0xE5F030]
+      - [0xE5F0A8, ci8, PadlockRedFace_keyhole, 32, 64]
+      - [0xE5F8A8, palette, PadlockRedFace_keyhole]
+      - [0xE5FAA8]
+      - [0xE5FB50, ci8, PadlockRedFace_body, 32, 32]
+      - [0xE5FF50, palette, PadlockRedFace_body]
+      - [0xE60150]
+  - name: entity_model_PadlockBlueFace
+    dir: entity/model
+    type: code
+    start: 0xE60550
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE60550, c, PadlockBlueFace]
+    - start: 0xE60550
+      type: .data
+      name: PadlockBlueFace
+      subsegments:
+      - [0xE60550]
+      - [0xE60C50, i4, PadlockBlueFace_face, 32, 32]
+      - [0xE60E50]
+      - [0xE60EC8, ci8, PadlockBlueFace_keyhole, 32, 64]
+      - [0xE616C8, palette, PadlockBlueFace_keyhole]
+      - [0xE618C8]
+      - [0xE61970, ci8, PadlockBlueFace_body, 32, 32]
+      - [0xE61D70, palette, PadlockBlueFace_body]
+      - [0xE61F70]
   - name: entity_model_GreenStompSwitch
     dir: entity/model
     type: code

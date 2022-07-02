@@ -2,7 +2,12 @@
 #include "sprite.h"
 
 extern EntityBlueprint D_802BC7D0_E2F100;
-extern f32 D_802BCE20;
+BSS f32 D_802BCE20;
+BSS f32 D_802BCE24[3]; // probably unused
+BSS u16 D_802BCE30;
+BSS u16 D_802BCE32;
+BSS u16 D_802BCE34;
+
 // size unknown
 typedef struct structE2D730 {
     /* 0x00 */ u8 unk_00;
@@ -24,9 +29,7 @@ typedef struct structE2D730 {
 s32 func_802BAE00_E2D730(void);
 INCLUDE_ASM(s32, "entity/jan_iwa/E2D730", func_802BAE00_E2D730);
 
-extern u16 D_802BCE30;
-extern u16 D_802BCE32;
-extern u16 D_802BCE34;
+
 
 void func_802BB000_E2D930(Entity* entity) {
     structE2D730* data = (structE2D730*)entity->dataBuf.unk;
