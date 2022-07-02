@@ -154,11 +154,11 @@ void snd_reset_instrument(Instrument* instrument) {
     instrument->unk_29 = 0;
     instrument->unk_2A = 0;
     instrument->unk_2B = 0;
-    instrument->sampleRate = 0.5f;
+    instrument->playbackRate = 0.5f;
 }
 
 void snd_reset_drum_entry(BGMDrumInfo* arg0) {
-    arg0->unk_00 = 8208;
+    arg0->bankPatch = 8208;
     arg0->unk_02 = 4800;
     arg0->unk_04 = 0x7F;
     arg0->unk_05 = 64;
@@ -170,8 +170,8 @@ void snd_reset_drum_entry(BGMDrumInfo* arg0) {
 }
 
 void snd_reset_instrument_entry(BGMInstrumentInfo* arg0) {
-    arg0->unk_00 = 8208;
-    arg0->unk_02 = 0x7F;
+    arg0->bankPatch = 0x2010;
+    arg0->volume = 0x7F;
     arg0->pan = 64;
     arg0->reverb = 0;
     arg0->coarseTune = 0;
@@ -460,10 +460,10 @@ void func_80053BA8(Fade* fade) {
 }
 
 //TODO cleanup and documentation
-Instrument* func_80053BE8(SndGlobals* arg0, u32 arg1, u32 arg2, s32** arg3) {
-    Instrument* instrument = (*arg0->instrumentGroups[(arg1 & 0x70) >> 4])[arg2];
+Instrument* func_80053BE8(SndGlobals* globals, u32 bank, u32 patch, s32** arg3) {
+    Instrument* instrument = (*globals->instrumentGroups[(bank & 0x70) >> 4])[patch];
     InstrumentEffect* temp_a0 = instrument->unkOffset;
-    u32 temp_a1 = arg1 % 4;
+    u32 temp_a1 = bank % 4;
 
     if (temp_a1 < temp_a0->count) {
         arg3[0] = (s32*)(temp_a0->unk_04[temp_a1].unkOffset1 + (s32)temp_a0);
@@ -956,7 +956,7 @@ void snd_swizzle_BK_instruments(s32 bkFileOffset, SoundBank* bank, InstrumentGro
                     instrument->unkOffset = (s32)instrument->unkOffset + (s32)bank;
                 }
                 instrument->unk_25 = arg4;
-                instrument->sampleRate = *((s32*)(&instrument->sampleRate)) / freq; // what is happening here?
+                instrument->playbackRate = *((s32*)(&instrument->playbackRate)) / freq; // what is happening here?
             } else {
                 instruments[i] = defaultInstrument;
             }

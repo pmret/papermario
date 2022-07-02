@@ -4,6 +4,11 @@
 #include "nu/nualsgi.h"
 #include "common.h"
 
+// temporary to keep track of unk portions of alUnk structs (not just unk fields)
+typedef s8  UNK_TYPE_08;
+typedef s16 UNK_TYPE_16;
+typedef s32 UNK_TYPE_32;
+
 #define ALIGN16_(val) (((val) + 0xF) & 0xFFF0)
 
 #define AUDIO_HEAP_SIZE 0x56000
@@ -24,6 +29,8 @@
 
 #define BGM_SEGMENT_LABEL 3
 
+typedef u32 SegData;
+
 typedef enum BGMPlayerState {
     BGM_PLAY_STATE_0                = 0,    // INITIALIZED
     BGM_PLAY_STATE_1                = 1,    // PLAYING
@@ -31,6 +38,13 @@ typedef enum BGMPlayerState {
     BGM_PLAY_STATE_3                = 3,    // ???
     BGM_PLAY_STATE_4                = 4,    // DONE? (blocks)
 } BGMPlayerState;
+
+typedef enum SegmentControlCommands {
+    BGM_SEGMENT_END                 = 0,
+    BGM_SEGMENT_SUBSEG              = 1,
+    BGM_SEGMENT_START_LOOP          = 3,
+    BGM_SEGMENT_END_LOOP            = 5,
+} SegmentControlCommands;
 
 typedef union Q32 {
     u8 u8[4];
@@ -45,10 +59,100 @@ struct AlUnkVoice;
 typedef void (*UnkFuncAl)(void);
 
 typedef union SeqArgs {
-    u8 u8[4];
-    s8 s8[4];
-    u16 u16[2];
-    u32 u32;
+    u8 raw[4];
+    struct { // cmd E0
+        u16 value;
+    } MasterTempo;
+    struct { // cmd E1
+        u8 value;
+    } MasterVolume;
+    struct { // cmd E2
+        u8 cent;
+    } MasterPitchShift;
+    struct { // cmd E3
+        u8 bank;
+    } UnkCmdE3;
+    struct { // cmd E4
+        u16 time;
+        u16 value;
+    } MasterTempoFade;
+    struct { // cmd E5
+        u16 time;
+        u8 value;
+    } MasterVolumeFade;
+    struct { // cmd E6
+        u8 index;
+        u8 value;
+    } MasterEffect;
+    // command E7 unused
+    struct { // cmd E8
+        u8 bank;
+        u8 patch;
+    } TrackOverridePatch;
+    struct { // cmd E9
+        u8 value;
+    } SubTrackVolume;
+    struct { // cmd EA
+        u8 value;
+    } SubTrackPan;
+    struct { // cmd EB
+        u8 value;
+    } SubTrackReverb;
+    struct { // cmd EC
+        u8 value;
+    } SegTrackVolume;
+    struct { // cmd ED
+        u8 cent;
+    } SubTrackCoarseTune;
+    struct { // cmd EE
+        u8 value;
+    } SubTrackFineTune;
+    struct { // cmd EF
+        u16 value;
+    } SegTrackTune;
+    struct { // cmd F0
+        u8 amount;
+        u8 speed;
+        u8 time;
+    } TrackTremolo;
+    struct { // cmd F1
+        u8 value;
+    } TrackTremoloSpeed;
+    struct { // cmd F2
+        u8 time;
+    } TrackTremoloTime;
+    // no args for F3 (TrackTremoloStop)
+    struct { // cmd F4
+        u8 pan0;
+        u8 pan1;
+    } UnkCmdF4;
+    struct { // cmd F5
+        u8 index;
+    } SetTrackVoice;
+    struct { // cmd F6
+        u16 time;
+        u8 value;
+    } TrackVolumeFade;
+    struct { // cmd F7
+        u8 index;
+    } SubTrackReverbType;
+    // commands F8-FB unused
+    struct { // cmd FC
+        u16 unk_00;
+        u8 unk_02;
+    } Jump;
+    struct { // cmd FD
+        u32 unk_00;
+    } UnkCmdFD;
+    struct { // cmd FE
+        u16 offset;
+        u8 unk_02;
+    } UnkCmdFE;
+    struct { // cmd FF
+        u8 bank;
+        u8 patch;
+        u8 unk_02;
+    } UnkCmdFF;
 } SeqArgs;
 
 typedef union VolumeField {
@@ -77,7 +181,7 @@ typedef struct AlUnkEpsilon {
     /* 0x0C */ s16 unk_0C;
     /* 0x0C */ s16 unk_0E;
     /* 0x10 */ f32 unk_10;
-    /* 0x14 */ s32 unk_14;
+    /* 0x14 */ f32 unk_14;
     /* 0x18 */ s32 unk_18;
     /* 0x1C */ f32 unk_1C;
     /* 0x20 */ s16* unk_20;
@@ -107,6 +211,17 @@ typedef struct AlUnkGamma {
     /* 0x14 */ struct AlUnkBeta* unk_beta_14;
 } AlUnkGamma; // size = 0x18
 
+typedef struct AlUnkSigma {
+    /* 0x00 */ UNK_TYPE_32 unk_00;
+    /* 0x04 */ f32 unk_04;
+    /* 0x08 */ UNK_TYPE_32 unk_08;
+    /* 0x0C */ UNK_TYPE_32 unk_0C;
+    /* 0x10 */ UNK_TYPE_32 unk_10;
+    /* 0x14 */ UNK_TYPE_32 unk_14;
+    /* 0x18 */ UNK_TYPE_32 unk_18;
+    /* 0x1C */ UNK_TYPE_32 unk_1C;
+} AlUnkSigma; // size = 0x20
+
 typedef struct AlUnkEta {
     /* 0x00 */ s32 unk_00;
     /* 0x04 */ s16 unk_04;
@@ -121,15 +236,52 @@ typedef struct AlUnkEta {
     /* 0x1C */ s32 unk_1C;
     /* 0x20 */ s32 unk_20;
     /* 0x24 */ s32 unk_24;
-} AlUnkEta; // size unk
+    /* 0x28 */ UNK_TYPE_32 unk_28;
+    /* 0x2C */ UNK_TYPE_32 unk_2C;
+    /* 0x30 */ UNK_TYPE_32 unk_30;
+    /* 0x34 */ UNK_TYPE_32 unk_34;
+    /* 0x38 */ UNK_TYPE_32 unk_38;
+    /* 0x3C */ UNK_TYPE_32 unk_3C;
+    /* 0x40 */ UNK_TYPE_32 unk_40;
+    /* 0x44 */ UNK_TYPE_32 unk_44;
+    /* 0x48 */ UNK_TYPE_32 unk_48;
+    /* 0x4C */ UNK_TYPE_32 unk_4C;
+} AlUnkEta; // size = 0x50
+
+typedef struct AlUnkTau {
+    /* 0x00 */ UNK_TYPE_32 unk_00; // same as beta->unk_34
+    /* 0x04 */ u32 unk_04;
+    /* 0x08 */ struct AlUnkZeta* unk_zeta_08;
+    /* 0x0C */ UNK_TYPE_32 unk_0C;
+    /* 0x10 */ UNK_TYPE_32 unk_10;
+    /* 0x14 */ s32 unk_14;
+    /* 0x18 */ UNK_TYPE_32 unk_18;
+    /* 0x1C */ u16 unk_1C;
+    /* 0x1E */ u16 unk_1E;
+    /* 0x20 */ UNK_TYPE_32 unk_20;
+    /* 0x24 */ u8 unk_24;
+    /* 0x25 */ u8 unk_25;
+} AlUnkTau; // size = unk -- could be another beta!
+
+typedef struct AlUnkZeta {
+    /* 0x00 */ UNK_TYPE_32 unk_00;
+    /* 0x04 */ UNK_TYPE_32 unk_04;
+    /* 0x08 */ UNK_TYPE_32 unk_08;
+    /* 0x0C */ UNK_TYPE_32 unk_0C;
+    /* 0x10 */ UNK_TYPE_32 unk_10;
+    /* 0x14 */ AlUnkTau* unk_tau_14; // could be another beta!
+    /* 0x18 */ UNK_TYPE_32 unk_18;
+    /* 0x1C */ UNK_TYPE_32 unk_1C;
+} AlUnkZeta; // size = 0x20
 
 typedef struct AlUnkBeta {
     /* 0x00 */ struct AlUnkBeta* next;
-    /* 0x04 */ s32* unk_04; // struct size = 0x20
-    /* 0x08 */ s32* unk_08; // struct size = 0x20
-    /* 0x0C */ char unk_0C[0x8];
+    /* 0x04 */ AlUnkZeta* unk_zeta_04;
+    /* 0x08 */ AlUnkZeta* unk_zeta_08;
+    /* 0x0C */ u32 unk_0C;
+    /* 0x10 */ u32 unk_10;
     /* 0x14 */ s32* unk_14;
-    /* 0x18 */ s32* unk_18;
+    /* 0x18 */ struct Instrument* instrument;
     /* 0x1C */ s32 unk_1C;
     /* 0x20 */ ALDMAproc dmaProc;
     /* 0x24 */ NUDMAState* dmaState;
@@ -137,18 +289,12 @@ typedef struct AlUnkBeta {
     /* 0x2C */ s32 unk_2C;
     /* 0x30 */ s32 unk_30;
     /* 0x34 */ s32 unk_34;
-    /* 0x38 */ s32* unk_38; // struct size = 0x20
+    /* 0x38 */ AlUnkSigma* unk_sigma_38; // struct size = 0x20
     /* 0x3C */ f32 unk_3C;
     /* 0x40 */ s32 unk_40;
     /* 0x44 */ s32 unk_44;
-    /* 0x48 */ s32* unk_48; // struct size = 0x50 -- could be AlUnkEta?
-    /* 0x4C */ union {
-                    s16 unk_4C;
-                    struct {
-                        u8 unk_4C;
-                        u8 unk_4D;
-                    } unk_4C_s;
-               };
+    /* 0x48 */ AlUnkEta* unk_eta_48;
+    /* 0x4C */ s16 unk_4C;
     /* 0x4E */ s16 unk_4E;
     /* 0x50 */ s16 unk_50;
     /* 0x52 */ s16 unk_52;
@@ -179,8 +325,8 @@ typedef struct AlUnkAlpha {
     /* 0x10 */ s32 unk_10;
     /* 0x14 */ void* dmaNew; // pointer to nuAuDmaNew
     /* 0x18 */ ALHeap* heap;
-    /* 0x1C */ AlUnkBeta* al_unk_beta; // pointer to list of UnkAl7C
-    /* 0x20 */ AlUnkGamma* al_unk_gamma; // amt unknown
+    /* 0x1C */ AlUnkBeta* al_unk_beta;
+    /* 0x20 */ AlUnkGamma* al_unk_gamma;
     /* 0x24 */ s32* unk_24; // struct size = 0x170
     /* 0x28 */ s32* unk_28; // struct size = 0x170
 } AlUnkAlpha;
@@ -215,7 +361,7 @@ typedef struct Instrument {
     /* 0x18 */ UNK_PTR predictorOffset;
     /* 0x1C */ s16 unk_1C;
     /* 0x1E */ u16 detune;
-    /* 0x20 */ f32 sampleRate;
+    /* 0x20 */ f32 playbackRate;
     /* 0x24 */ s8 skipLoopPredictor;
     /* 0x25 */ s8 unk_25;
     /* 0x26 */ s8 unk_26;
@@ -412,7 +558,7 @@ typedef struct BGMHeader {
 } BGMHeader; // size = 0x24
 
 typedef struct BGMDrumInfo {
-    /* 0x0 */ s16 unk_00;
+    /* 0x0 */ s16 bankPatch;
     /* 0x2 */ s16 unk_02;
     /* 0x4 */ u8 unk_04;
     /* 0x5 */ s8 unk_05;
@@ -425,8 +571,8 @@ typedef struct BGMDrumInfo {
 } BGMDrumInfo; // size = 0xC
 
 typedef struct BGMInstrumentInfo {
-    /* 0x00 */ u16 unk_00;
-    /* 0x02 */ u8 unk_02;
+    /* 0x00 */ u16 bankPatch; // upper = bank, lower = patch
+    /* 0x02 */ u8 volume;
     /* 0x03 */ s8 pan;
     /* 0x04 */ s8 reverb;
     /* 0x05 */ s8 coarseTune;
@@ -659,7 +805,7 @@ typedef struct BGMPlayer {
     /* 0x028 */ s32 songID;
     /* 0x02C */ Fade fadeInfo;
     /* 0x048 */ s32 unk_48;
-    /* 0x04C */ u8 unk_4C[4];
+    /* 0x04C */ u8 effectIndices[4];
     /* 0x050 */ s32 unk_50;
     /* 0x054 */ s32 unk_54;
     /* 0x058 */ u16 unk_58;
@@ -668,8 +814,8 @@ typedef struct BGMPlayer {
     /* 0x05E */ char pad5E[2];
     /* 0x060 */ u32 curSegmentID;
     /* 0x064 */ struct BGMHeader* bgmFile;
-    /* 0x068 */ s32* segmentReadPos;
-    /* 0x06C */ s32* segmentsInfo;
+    /* 0x068 */ SegData* segmentReadPos;
+    /* 0x06C */ SegData* segmentStartPos;
     /* 0x070 */ s32 unk_70;
     /* 0x074 */ s32 unk_74;
     /* 0x078 */ BGMDrumInfo* drumsInfo;
@@ -685,8 +831,8 @@ typedef struct BGMPlayer {
     /* 0x0CC */ s32 masterVolumeFadeTime;
     /* 0x0D0 */ f32 unk_D0;
     /* 0x0D4 */ SeqArgs seqCmdArgs;
-    /* 0x0D8 */ s32* segmentJumpLabels[32];
-    /* 0x158 */ s32* unk_158[4];
+    /* 0x0D8 */ SegData* segmentJumpLabels[32];
+    /* 0x158 */ SegData* unk_158[4];
     /* 0x168 */ Q32 unk_168;
     /* 0x16C */ s32 unk_16C;
     /* 0x170 */ u8 unk_170;
@@ -711,7 +857,7 @@ typedef struct BGMPlayer {
     /* 0x221 */ u8 masterState;
     /* 0x222 */ u8 unk_222;
     /* 0x223 */ u8 unk_223;
-    /* 0x224 */ u8 unk_224[4];
+    /* 0x224 */ u8 effectValues[4];
     /* 0x227 */ char unk_228[0x2];
     /* 0x22A */ u8 unk_22A;
     /* 0x22B */ u8 unk_22B;
@@ -724,7 +870,7 @@ typedef struct BGMPlayer {
     /* 0x232 */ u8 unk_232;
     /* 0x233 */ u8 unk_233;
     /* 0x234 */ u8 unk_234;
-    /* 0x235 */ u8 unk_235;
+    /* 0x235 */ u8 defaultReverbType;
     /* 0x236 */ char unk_236[0x2];
     /* 0x238 */ s32 unk_238[8];
     /* 0x258 */ u8 unk_258;
@@ -804,7 +950,7 @@ typedef struct AlUnkLambda {
     /* 0x1D4 */ s8 unk_1D4[16];
 } AlUnkLambda; // size = 0x1E4
 
-//TODO possibly AmbientSoundManager
+//TODO possibly StreamingSoundManager
 typedef struct AmbientSoundManager {
     /* 0x000 */ SndGlobals* unk_00;
     /* 0x004 */ s32 nextUpdateStep;
@@ -820,10 +966,11 @@ typedef struct AmbientSoundManager {
 } AmbientSoundManager;
 
 typedef struct ALConfig {
-    /* 0x00 */ s32 unk_00;
-    /* 0x04 */ s32 unk_04;
+    /* 0x00 */ s32 unk_num_beta;
+    /* 0x04 */ s32 unk_num_gamma;
     /* 0x08 */ s32 outputRate;
     /* 0x0C */ u8 unk_0C;
+    /* 0x0D */ char unk_0D[3];
     /* 0x10 */ void* dmaNew;
     /* 0x14 */ ALHeap* heap;
 } ALConfig; // size = 0x18;
@@ -876,7 +1023,7 @@ s16 snd_sound_manager_update(SoundManager*);
 
 void func_8004D510(BGMPlayer*);
 BGMPlayer* snd_get_player_with_song_name(s32);
-MusicError func_8004DA0C(UNK_TYPE);
+MusicError func_8004DA0C(UNK_TYPE_32);
 void func_8004DAA8(BGMPlayer*);
 s32 func_8004DB28(BGMPlayer*);
 MusicError func_8004DC80(s32);
@@ -890,7 +1037,7 @@ void func_8004E880(BGMPlayer*, s32, s32);
 void snd_BGMCmd_E0_MasterTempo(BGMPlayer*, BGMPlayerTrack*);
 s32 snd_bpm_to_tempo(BGMPlayer*, u32);
 void snd_BGMCmd_E1_MasterVolume(BGMPlayer*, BGMPlayerTrack*);
-void snd_BGMCmd_E2_MasterTranspose(BGMPlayer*, BGMPlayerTrack*);
+void snd_BGMCmd_E2_MasterPitchShift(BGMPlayer*, BGMPlayerTrack*);
 void snd_BGMCmd_E3(BGMPlayer*, BGMPlayerTrack*);
 void snd_BGMCmd_E6_MasterEffect(BGMPlayer*, BGMPlayerTrack*);
 void snd_BGMCmd_E4_MasterTempoFade(BGMPlayer*, BGMPlayerTrack*);
@@ -953,8 +1100,6 @@ void func_80054CE0(s32, s32);
 
 void func_80055050(ALHeap*);
 void func_80055110(BGMPlayer*);
-s32 func_80055FF0(s32, s32);
-s32 func_8005600C(s32, s32);
 void func_80056028(s32, u8);
 void func_80056044(s32, u8);
 void func_8005608C(u32**, s32*);
@@ -996,6 +1141,8 @@ void snd_read_rom(s32, void*, u32);
 void snd_copy_words(void*, void*, s32);
 
 f32 snd_tune_param_to_timescale(s32);
+
+void func_8005083C(BGMPlayer* player, s32 trackIdx, s16 arg2, u8 arg3);
 
 #undef alHeapAlloc
 void* alHeapAlloc(ALHeap* heap, s32 arg1, s32 size);

@@ -148,4 +148,23 @@ s32 func_800598A0(AlUnkDelta* arg0, s16 arg1, s16 arg2, s32 arg3) {
 
 INCLUDE_ASM(s32, "audio/341d0", func_80059AB8);
 
+// revisit when AlUnkEpsilon is better understood
+#ifdef NONMATCHING
+f32 func_80059BD4(AlUnkEpsilon* arg0, s32 arg1) {
+    f32 var_f2;
+
+    arg0->unk_14 = arg0->unk_14 + (arg0->unk_10 * arg1);
+    if (arg0->unk_14 > 2.0) {
+        arg0->unk_14 = (f32) (arg0->unk_14 - 4.0);
+    } else {
+        arg0->unk_14 = arg0->unk_14;
+    }
+    var_f2 = arg0->unk_14;
+    if (var_f2 < 0.0f) {
+        var_f2 = -var_f2;
+    }
+    return arg0->unk_1C * (f32)(var_f2 - 1.0);
+}
+#else
 INCLUDE_ASM(s32, "audio/341d0", func_80059BD4);
+#endif

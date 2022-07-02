@@ -519,7 +519,7 @@ void func_8004C578(SoundManager* manager, SoundPlayer* player, AlUnkVoice* arg2,
             } else {
                 if (!(player->sfxParamsFlags & 0x10)) {
                     player->actualSampleRate = snd_tune_param_to_timescale(
-                        ((player->tuneLerp.current >> 0x10) - player->sfxInstrumentRef->detune) + player->masterPitchShift) * player->sfxInstrumentRef->sampleRate;
+                        ((player->tuneLerp.current >> 0x10) - player->sfxInstrumentRef->detune) + player->masterPitchShift) * player->sfxInstrumentRef->playbackRate;
                     if (arg2->sampleRate != player->actualSampleRate) {
                         arg2->unk_flags_43 |= 8;
                         arg2->sampleRate = player->actualSampleRate;
@@ -562,7 +562,7 @@ void func_8004C578(SoundManager* manager, SoundPlayer* player, AlUnkVoice* arg2,
             } else {
                 tune = ((player->tuneLerp.current >> 0x10) - player->sfxInstrumentRef->detune) + player->masterPitchShift;
             }
-            player->actualSampleRate = snd_tune_param_to_timescale(tune) * player->sfxInstrumentRef->sampleRate;
+            player->actualSampleRate = snd_tune_param_to_timescale(tune) * player->sfxInstrumentRef->playbackRate;
             if (arg2->unk_45 <= manager->unk_BC) {
                 func_80053888(arg2, arg3);
                 if (!(player->sfxParamsFlags & 8) && player->masterPan != 0) {
@@ -752,11 +752,11 @@ void func_8004C884(SoundManager* manager, SoundPlayer* player, AlUnkVoice* arg2,
         f32 adjustedSampleRate;
         if (player->sfxParamsFlags & 0x10) {
             pitchShift = (player->unk_92 + (s16)(player->tuneLerp.current >> 0x10)) - player->sfxInstrumentRef->detune;
-            adjustedSampleRate = snd_tune_param_to_timescale(pitchShift + player->unk_94) * player->sfxInstrumentRef->sampleRate;
+            adjustedSampleRate = snd_tune_param_to_timescale(pitchShift + player->unk_94) * player->sfxInstrumentRef->playbackRate;
             player->actualSampleRate = adjustedSampleRate;
         } else {
             pitchShift = ((player->unk_92 + (s16)(player->tuneLerp.current >> 0x10)) - player->sfxInstrumentRef->detune) + player->unk_94;
-            adjustedSampleRate = snd_tune_param_to_timescale(pitchShift + player->masterPitchShift) * player->sfxInstrumentRef->sampleRate;
+            adjustedSampleRate = snd_tune_param_to_timescale(pitchShift + player->masterPitchShift) * player->sfxInstrumentRef->playbackRate;
             player->actualSampleRate = adjustedSampleRate;
         }
         if ((arg2->unk_45 == manager->unk_BC) && (arg2->sampleRate != adjustedSampleRate)) {
@@ -824,12 +824,12 @@ void snd_SEFCmd_01_SetPan(SoundManager* manager, SoundPlayer* player) {
 
 void snd_SEFCmd_02_SetInstrument(SoundManager* manager, SoundPlayer* player) {
     u8* buf = player->sefDataReadPos;
-    s32 temp_a1 = buf[0];
-    s32 temp_a2 = buf[1];
+    s32 bank = buf[0];
+    s32 patch = buf[1];
     player->sefDataReadPos = &buf[2];
     
-    player->instrumentIndex = temp_a2;
-    player->sfxInstrumentRef = func_80053BE8(manager->soundData, temp_a1, temp_a2, &player->unk10);
+    player->instrumentIndex = patch;
+    player->sfxInstrumentRef = func_80053BE8(manager->soundData, bank, patch, &player->unk10);
 }
 
 void snd_SEFCmd_03_SetReverb(SoundManager* manager, SoundPlayer* player) {
@@ -864,7 +864,7 @@ void snd_SEFCmd_04(SoundManager* manager, SoundPlayer* player) {
     player->sfxInstrument.predictorOffset = temp_a0->predictorOffset;
     player->sfxInstrument.unk_1C = temp_a0->unk_1C;
     player->sfxInstrument.detune = temp_a0->detune;
-    player->sfxInstrument.sampleRate = temp_a0->sampleRate;
+    player->sfxInstrument.playbackRate = temp_a0->playbackRate;
     player->sfxInstrument.skipLoopPredictor = temp_a0->skipLoopPredictor;
     player->sfxInstrument.unk_25 = temp_a0->unk_25;
     

@@ -662,32 +662,32 @@ s32* func_80055EB4(s32 arg0) {
 
 static const f32 padding[] = {0.0f};
 
-s32 func_80055F58(s32 arg0, u32 arg1, u32 arg2) {
-    s32* subroutine_arg4;
-    s32* subroutine_arg5;
-    s32 temp_s2 = func_80055CE8(arg0, &subroutine_arg4, &subroutine_arg5);
+MusicError func_80055F58(s32 arg0, u32 arg1, u32 arg2) {
+    BGMPlayer* player;
+    s32* trackData;
+    s32 error = func_80055CE8(arg0, &trackData, &player);
 
-    if (temp_s2 == 0) {
+    if (error == MUSIC_ERROR_NONE) {
         if (arg2 > 0x7F) {
             arg2 = 0x7F;
         }
         if (arg1 > 0xF) {
             arg1 = 0xF;
         }
-        func_8005083C(subroutine_arg5, arg1, 0x60, (u8)arg2); // todo remove cast when func is defined
+        func_8005083C(player, arg1, 0x60, arg2);
     }
-    return temp_s2;
+    return error;
 }
 
-s32 func_80055FD4(s32 arg0, s32 arg1) {
+MusicError func_80055FD4(s32 arg0, s32 arg1) {
     return func_80055F58(arg0, arg1, 0);
 }
 
-s32 func_80055FF0(s32 arg0, s32 arg1) {
+MusicError func_80055FF0(s32 arg0, s32 arg1) {
     return func_80055F58(arg0, arg1, 0x3F);
 }
 
-s32 func_8005600C(s32 arg0, s32 arg1) {
+MusicError func_8005600C(s32 arg0, s32 arg1) {
     return func_80055F58(arg0, arg1, 0x7F);
 }
 
