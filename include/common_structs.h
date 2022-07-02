@@ -722,6 +722,14 @@ typedef struct MusicSettings {
     /* 0x2C */ s32 savedSongName;
 } MusicSettings; // size = 0x30
 
+typedef struct MusicProximityTrigger {
+    /* 0x00 */ Vec2XZf pos;
+    /* 0x08 */ f32 innerDist;
+    /* 0x0C */ f32 outerDist;
+    /* 0x10 */ s32 unk;
+    /* 0x14 */ s32 manualActivationFlag;
+} MusicProximityTrigger; // size = 0x18
+
 typedef struct UiStatus {
     /* 0x00 */ s32 hpIconIndices[2];
     /* 0x08 */ s32 fpIconIndices[2];

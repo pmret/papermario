@@ -106,4 +106,4 @@ ApiStatus func_802430D0_826390(Evt* script, s32 isInitialCall) {
 extern s32 N(LetterDelivery_SavedNpcAnim);
 #include "world/common/LetterDelivery.inc.c"
 
-#include "world/common/UnkMusicFunc.inc.c"
+#include "world/common/atomic/MonitorMusicProximityTrigger.inc.c"

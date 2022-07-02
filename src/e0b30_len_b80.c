@@ -260,7 +260,7 @@ s32 func_8014A964(s32 playerIndex, s32 songID, s32 variation, s32 fadeInTime, s1
     return 1;
 }
 
-s32 func_8014AA54(s32 playerIndex, s32 arg1, s16 arg2) {
+s32 bgm_adjust_proximity(s32 playerIndex, s32 trackMask, s16 state) {
     MusicSettings* musicSetting = &gMusicSettings[playerIndex];
 
     if (!(musicSetting->flags & MUSIC_SETTINGS_FLAGS_1)) {
@@ -271,15 +271,15 @@ s32 func_8014AA54(s32 playerIndex, s32 arg1, s16 arg2) {
         return FALSE;
     }
 
-    switch (arg2) {
-        case 0:
-            func_80056028(musicSetting->songName, arg1);
+    switch (state) {
+        case MUSIC_PROXIMITY_FAR:
+            bgm_set_proximity_mix_far(musicSetting->songName, trackMask);
             break;
-        case 1:
-            func_80056044(musicSetting->songName, arg1);
+        case MUSIC_PROXIMITY_NEAR:
+            bgm_set_proximity_mix_near(musicSetting->songName, trackMask);
             break;
-        case 2:
-            func_80056068(musicSetting->songName, arg1);
+        case MUSIC_PROXIMITY_FULL:
+            bgm_set_proximity_mix_full(musicSetting->songName, trackMask);
             break;
     }
     return TRUE;

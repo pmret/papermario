@@ -691,16 +691,16 @@ MusicError func_8005600C(s32 arg0, s32 arg1) {
     return func_80055F58(arg0, arg1, 0x7F);
 }
 
-void func_80056028(s32 arg0, u8 arg1) {
-    func_800506C8(arg0, arg1);
+void bgm_set_proximity_mix_far(s32 songName, u8 mix) {
+    snd_set_bgm_proximity_mix(songName, mix);
 }
 
-void func_80056044(s32 arg0, u8 arg1) {
-    func_800506C8(arg0, arg1 | 0x57000000);
+void bgm_set_proximity_mix_near(s32 songName, u8 mix) {
+    snd_set_bgm_proximity_mix(songName, mix | 0x57000000);
 }
 
-void func_80056068(s32 arg0, u8 arg1) {
-    func_800506C8(arg0, arg1 | 0x7F000000);
+void bgm_set_proximity_mix_full(s32 songName, u8 mix) {
+    snd_set_bgm_proximity_mix(songName, mix | 0x7F000000);
 }
 
 void func_8005608C(u32** arg0, s32* arg1) {

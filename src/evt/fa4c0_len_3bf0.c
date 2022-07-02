@@ -129,7 +129,7 @@ ApiStatus func_802D5F28(Evt* script, s32 isInitialCall) {
     s32 param1 = evt_get_variable(script, *args++);
     s32 param2 = evt_get_variable(script, *args++);
 
-    func_8014AA54(playerIndex, param1, param2);
+    bgm_adjust_proximity(playerIndex, param1, param2);
     return ApiStatus_DONE2;
 }
 

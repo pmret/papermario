@@ -829,6 +829,12 @@ typedef enum MusicError {
     MUSIC_ERROR_11                  = 11,
 } MusicError;
 
+enum {
+    MUSIC_PROXIMITY_FAR,
+    MUSIC_PROXIMITY_NEAR,
+    MUSIC_PROXIMITY_FULL
+};
+
 enum Cams {
     CAM_DEFAULT      = 0,
     CAM_BATTLE       = 1,

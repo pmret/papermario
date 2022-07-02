@@ -837,9 +837,9 @@ typedef struct BGMPlayer {
     /* 0x0D8 */ SegData* segLoopStartLabels[32];
     /* 0x158 */ SegData* segActiveLoopEndPos[4];
     /* 0x168 */ Q32 unk_168; // might be u8 loopCounters[4]?
-    /* 0x16C */ s32 unk_16C;
-    /* 0x170 */ u8 unk_170;
-    /* 0x171 */ u8 unk_171;
+    /* 0x16C */ s32 proxMixValue;
+    /* 0x170 */ u8 proxMixID;
+    /* 0x171 */ u8 proxMixVolume;
     /* 0x172 */ char unk_172[0x2];
     /* 0x174 */ s16 unk_174[8][9];
     /* 0x204 */ u8* unk_204;
@@ -1069,8 +1069,8 @@ void snd_BGMCmd_NOP(BGMPlayer*, BGMPlayerTrack*);
 void func_80050770(BGMPlayer*, f32);
 void func_80050818(BGMPlayer*, s32);
 void func_8005087C(BGMPlayer*, s32*, s32);
-void func_80056068(s32, u8);
-void func_800506C8(s32, u32);
+void bgm_set_proximity_mix_full(s32, u8);
+void snd_set_bgm_proximity_mix(s32, u32);
 void func_80050B90(AmbientSoundManager*, s8, s8, SndGlobals*);
 s32 func_80050C30(u32);
 void func_80050D50(AlUnkLambda*);
@@ -1103,8 +1103,8 @@ void func_80054CE0(s32, s32);
 
 void func_80055050(ALHeap*);
 void func_80055110(BGMPlayer*);
-void func_80056028(s32, u8);
-void func_80056044(s32, u8);
+void bgm_set_proximity_mix_far(s32, u8);
+void bgm_set_proximity_mix_near(s32, u8);
 void func_8005608C(u32**, s32*);
 void func_800560A8(void);
 void func_8005610C(void);

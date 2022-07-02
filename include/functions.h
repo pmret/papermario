@@ -508,7 +508,7 @@ s32 bgm_set_song(s32 playerIndex, s32 songID, s32 variation, s32 fadeOutTime, s1
 void bgm_set_battle_song(s32, s32);
 void bgm_push_battle_song(void);
 void func_801497FC(s32 arg0);
-s32 func_8014AA54(s32 playerIndex, s32 arg1, s16 arg2);
+s32 bgm_adjust_proximity(s32 playerIndex, s32 arg1, s16 arg2);
 
 void basic_window_update(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, f32* scaleX, f32* scaleY,
                    f32* rotX, f32* rotY, f32* rotZ, s32* darkening, s32* opacity);

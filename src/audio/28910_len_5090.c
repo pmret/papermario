@@ -764,9 +764,9 @@ void snd_initialize_bgm_player(BGMPlayer* player) {
     player->masterVolumeFadeTime = 0;
     player->masterVolumeFadeVolume = 0;
     player->masterVolumeFadeDelta = 0;
-    player->unk_16C = 0;
-    player->unk_170 = 0;
-    player->unk_171 = 0;
+    player->proxMixValue = 0;
+    player->proxMixID = 0;
+    player->proxMixVolume = 0;
     player->segActiveLoopEndPos[3] = NULL;
     player->segActiveLoopEndPos[2] = NULL;
     player->segActiveLoopEndPos[1] = NULL;
@@ -1614,8 +1614,8 @@ void snd_BGMCmd_FC_Jump(BGMPlayer* player, BGMPlayerTrack* track) {
     u8* var_a1;
 
     var_a1 = (u8*)(player->seqCmdArgs.Jump.unk_00 + (s32)player->bgmFile);
-    if (player->unk_170 < player->seqCmdArgs.Jump.unk_02) {
-        var_a1 += player->unk_170 * 3;
+    if (player->proxMixID < player->seqCmdArgs.Jump.unk_02) {
+        var_a1 += player->proxMixID * 3;
     }
     track->prevReadPos = track->bgmReadPos;
     track->bgmReadPos = (var_a1[0] << 8) + var_a1[1] + (s32)player->bgmFile;
@@ -1632,7 +1632,7 @@ void snd_BGMCmd_FC_Jump(BGMPlayer* player, BGMPlayerTrack* track) {
     }
     if (track->unk_4E != 0) {
         track->unk_4E = 0;
-        func_80050888(player, track, player->unk_171, 0x90);
+        func_80050888(player, track, player->proxMixVolume, 0x90);
     }
     track->subTrackCoarseTune = 0;
     track->subTrackFineTune = 0;
@@ -1721,7 +1721,7 @@ void snd_BGMCmd_FF(BGMPlayer* player, BGMPlayerTrack* track) {
                     track->unk_4E = 0;
                     for (i = 0; i < 16; i++) {
                         BGMPlayerTrack* otherTrack = &player->tracks[i];
-                        if (player->unk_171 == 0x7F) {
+                        if (player->proxMixVolume == 0x7F) {
                             if (otherTrack->unk_4F != 0) {
                                 otherTrack->unk_4E = 0;
                                 func_80050888(player, otherTrack, otherTrack->unk_4F, 0x48);
@@ -1804,22 +1804,22 @@ u8 func_8005068C(s32 arg0, u8 arg1, u8 arg2) {
     return (arg1 * (0x8000 - (arg2 * c)));
 }
 
-void func_800506C8(s32 songName, u32 arg1) {
+void snd_set_bgm_proximity_mix(s32 songName, u32 mix) {
     BGMPlayer* player;
     BGMPlayerTrack* track;
     s32 changed = FALSE;
-    u8 lowArg1 = arg1 & 0xFF;
+    u8 mixID = mix & 0xFF;
     s32 i;
 
     if (songName != 0) {
         player = snd_get_player_with_song_name(songName);
-        if ((player != NULL) && (player->unk_16C != arg1)) {
-            player->unk_16C = arg1;
-            if (player->unk_170 != lowArg1) {
-                player->unk_170 = arg1;
+        if ((player != NULL) && (player->proxMixValue != mix)) {
+            player->proxMixValue = mix;
+            if (player->proxMixID != mixID) {
+                player->proxMixID = mixID;
                 changed = TRUE;
             }
-            player->unk_171 = (arg1 >> 0x18) & 0x7F;
+            player->proxMixVolume = (mix >> 0x18) & 0x7F;
             for (i = 0; i < ARRAY_COUNT(player->tracks); i++) {
                 track = &player->tracks[i];
                 if (changed) {
