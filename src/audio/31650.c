@@ -2,13 +2,13 @@
 #include "audio.h"
 #include "nu/nualsgi.h"
 
-extern void snd_add_sfx_output(void);
-extern void snd_update_sequence_players(void);
-extern Acmd* func_80058050(AlUnkBeta*, Acmd*);
-extern Acmd* func_80059310(AlUnkDelta*, Acmd*, s32, s32);
-
 void func_80057874(u8 arg0, u8 arg1);
 s16 func_80058004(s16 arg0, s32 arg1, s16 arg2, u16 arg3);
+
+void snd_add_sfx_output(void);
+void snd_update_sequence_players(void);
+Acmd* func_80058050(AlUnkBeta*, Acmd*);
+Acmd* func_80059310(AlUnkDelta*, Acmd*, s32, s32);
 
 AlUnkAlpha* D_80078E50 = NULL;
 AlUnkAlpha* D_80078E54 = NULL;

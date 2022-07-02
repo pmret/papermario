@@ -11,7 +11,7 @@
 ApiStatus N(MonitorMusicProximityTrigger)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     MusicProximityTrigger* trigger;
-    s32 cond = 0;
+    s32 cond = FALSE;
     f32 dist;
 
     if (isInitialCall) {
