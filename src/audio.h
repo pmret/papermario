@@ -886,7 +886,8 @@ typedef struct BGMPlayer {
 
 typedef struct AlUnkIota {
     /* 0x00 */ Q32 unk_00;
-    /* 0x04 */ char unk_04[0x3];
+    /* 0x04 */ char unk_04[0x2];
+    /* 0x06 */ u8 unk_06;
     /* 0x07 */ u8 unk_07;
 } AlUnkIota; // size = 0x8
 
