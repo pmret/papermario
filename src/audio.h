@@ -43,7 +43,10 @@ typedef enum SegmentControlCommands {
     BGM_SEGMENT_END                 = 0,
     BGM_SEGMENT_SUBSEG              = 1,
     BGM_SEGMENT_START_LOOP          = 3,
+    BGM_SEGMENT_HALT                = 4,
     BGM_SEGMENT_END_LOOP            = 5,
+    BGM_SEGMENT_6                   = 6,
+    BGM_SEGMENT_7                   = 7
 } SegmentControlCommands;
 
 typedef union Q32 {
@@ -361,7 +364,7 @@ typedef struct Instrument {
     /* 0x18 */ UNK_PTR predictorOffset;
     /* 0x1C */ s16 unk_1C;
     /* 0x1E */ u16 detune;
-    /* 0x20 */ f32 playbackRate;
+    /* 0x20 */ f32 pitchRatio;
     /* 0x24 */ s8 skipLoopPredictor;
     /* 0x25 */ s8 unk_25;
     /* 0x26 */ s8 unk_26;
@@ -507,12 +510,12 @@ typedef struct SoundManager {
 
 typedef struct AlUnkVoice {
     /* 0x00 */ Instrument* ins;
-    /* 0x04 */ f32 sampleRate;
+    /* 0x04 */ f32 pitchRatio;
     /* 0x08 */ s32 unk_08;
     /* 0x0C */ s16 unk_0C;
     /* 0x0E */ u8 pan;
     /* 0x0F */ u8 reverb;
-    /* 0x10 */ u8 unk_10;
+    /* 0x10 */ u8 reverbType;
     /* 0x11 */ char unk_11[0x3];
     /* 0x14 */ s32* unk_14; // ultimately from bgm_player->unk_10 ?
     /* 0x18 */ s32* unk_18; // ultimately from bgm_player->unk_14 ?
@@ -734,7 +737,7 @@ typedef struct BGMPlayerTrack {
     /* 0x00 */ u8* bgmReadPos;
     /* 0x04 */ u8* unk_04;
     /* 0x08 */ u8* prevReadPos; //? see snd_BGMCmd_FC_Jump
-    /* 0x0C */ Instrument* unk_0C;
+    /* 0x0C */ Instrument* instrument;
     /* 0x10 */ s32* unk_10[2];
     /* 0x18 */ s32 subTrackVolume;
     /* 0x1C */ s32 subTrackVolumeFadeDelta;
@@ -751,7 +754,7 @@ typedef struct BGMPlayerTrack {
     /* 0x3C */ char unk_3C[0x2];
     /* 0x3E */ s16 unk_3E;
     /* 0x40 */ SoundPlayChange changed;
-    /* 0x44 */ u16 unk_44;
+    /* 0x44 */ u16 patch;
     /* 0x46 */ u16 subTrackCoarseTune;
     /* 0x48 */ s8 subTrackFineTune;
     /* 0x49 */ s8 segTrackVolume;
@@ -777,19 +780,19 @@ typedef struct BGMPlayerTrack {
     /* 0x5D */ char unk_5D[0x3];
 } BGMPlayerTrack; // size = 0x60;
 
-typedef struct AlUnkTheta {
+typedef struct SeqNote {
     /* 0x00 */ Instrument* ins;
-    /* 0x00 */ f32 unk_04;
+    /* 0x00 */ f32 pitchRatio;
     /* 0x08 */ s16 unk_08;
-    /* 0x0A */ s16 unk_0A;
+    /* 0x0A */ s16 adjustedPitch;
     /* 0x0C */ s32 noteLength;
-    /* 0x10 */ u16 unk_10;
-    /* 0x12 */ u8 unk_12;
+    /* 0x10 */ u16 tremoloAmount;
+    /* 0x12 */ u8 tremoloTime;
     /* 0x12 */ u8 unk_13;
     /* 0x14 */ s16 unk_14;
     /* 0x16 */ u8 noteVelocity;
-    /* 0x17 */ u8 unk_17;
-} AlUnkTheta; // size = 0x18;
+    /* 0x17 */ u8 unk_note_17;
+} SeqNote; // size = 0x18;
 
 typedef struct BGMPlayer {
     /* 0x000 */ SndGlobals* globals;
@@ -831,9 +834,9 @@ typedef struct BGMPlayer {
     /* 0x0CC */ s32 masterVolumeFadeTime;
     /* 0x0D0 */ f32 unk_D0;
     /* 0x0D4 */ SeqArgs seqCmdArgs;
-    /* 0x0D8 */ SegData* segmentJumpLabels[32];
-    /* 0x158 */ SegData* unk_158[4];
-    /* 0x168 */ Q32 unk_168;
+    /* 0x0D8 */ SegData* segLoopStartLabels[32];
+    /* 0x158 */ SegData* segActiveLoopEndPos[4];
+    /* 0x168 */ Q32 unk_168; // might be u8 loopCounters[4]?
     /* 0x16C */ s32 unk_16C;
     /* 0x170 */ u8 unk_170;
     /* 0x171 */ u8 unk_171;
@@ -841,13 +844,13 @@ typedef struct BGMPlayer {
     /* 0x174 */ s16 unk_174[8][9];
     /* 0x204 */ u8* unk_204;
     /* 0x208 */ u16 masterTempoBPM;
-    /* 0x20A */ u16 bgmKhz; // maxTempo?
-    /* 0x20C */ u16 masterTranspose;
+    /* 0x20A */ u16 maxTempo;
+    /* 0x20C */ u16 masterPitchShift;
     /* 0x20E */ s16 unk_20E;
-    /* 0x210 */ u8 unk_210;
+    /* 0x210 */ u8 segLoopDepth;
     /* 0x211 */ u8 unk_211;
     /* 0x212 */ u8 unk_212[8];
-    /* 0x21A */ s8 unk_21A;
+    /* 0x21A */ s8 volumeChanged;
     /* 0x21B */ u8 unk_21B;
     /* 0x21C */ u8 bgmDrumCount;
     /* 0x21D */ u8 bgmInstrumentCount;
@@ -878,7 +881,7 @@ typedef struct BGMPlayer {
     /* 0x25A */ u8 unk_25A;
     /* 0x25B */ u8 unk_25B;
     /* 0x25C */ BGMPlayerTrack tracks[16];
-    /* 0x85C */ AlUnkTheta unk_85C[24];
+    /* 0x85C */ SeqNote notes[24];
 } BGMPlayer; // size = 0xA9C
 
 typedef struct AlUnkIota {
@@ -1023,7 +1026,7 @@ s16 snd_sound_manager_update(SoundManager*);
 
 void func_8004D510(BGMPlayer*);
 BGMPlayer* snd_get_player_with_song_name(s32);
-MusicError func_8004DA0C(UNK_TYPE_32);
+MusicError func_8004DA0C(s32);
 void func_8004DAA8(BGMPlayer*);
 s32 func_8004DB28(BGMPlayer*);
 MusicError func_8004DC80(s32);
@@ -1140,7 +1143,7 @@ void snd_load_PRG(SndGlobals*, s32);
 void snd_read_rom(s32, void*, u32);
 void snd_copy_words(void*, void*, s32);
 
-f32 snd_tune_param_to_timescale(s32);
+f32 snd_compute_pitch_ratio(s32);
 
 void func_8005083C(BGMPlayer* player, s32 trackIdx, s16 arg2, u8 arg3);
 

@@ -74,11 +74,11 @@ void snd_load_audio_data(s32 outputRate) {
         func_80057224(i, globals->defaultInstrument);
         temp5 = &globals->voices[i];
         temp5->ins = NULL;
-        temp5->sampleRate = 0;
+        temp5->pitchRatio = 0;
         temp5->unk_0C = -1;
         temp5->pan = 0xFF;
         temp5->reverb = 0xFF;
-        temp5->unk_10 = 0;
+        temp5->reverbType = 0;
         temp5->unk_42 = 0;
         temp5->unk_flags_43 = 0;
         temp5->unk_44 = 0;
@@ -154,7 +154,7 @@ void snd_reset_instrument(Instrument* instrument) {
     instrument->unk_29 = 0;
     instrument->unk_2A = 0;
     instrument->unk_2B = 0;
-    instrument->playbackRate = 0.5f;
+    instrument->pitchRatio = 0.5f;
 }
 
 void snd_reset_drum_entry(BGMDrumInfo* arg0) {
@@ -326,11 +326,11 @@ void func_80053654(SndGlobals* arg0) {
 
         if (unk_flags & 2) {
             func_80052BF8(voice, &voice->unk_14);
-            func_80056FA4(i, voice->unk_10, voice->ins, voice->sampleRate, voice->unk_0C, voice->pan, voice->reverb, voice->unk_08);
+            func_80056FA4(i, voice->reverbType, voice->ins, voice->pitchRatio, voice->unk_0C, voice->pan, voice->reverb, voice->unk_08);
             voice->unk_45 = voice->unk_44;
         } else {
             if (unk_flags & 8) {
-                func_80057344(i, voice->sampleRate);
+                func_80057344(i, voice->pitchRatio);
             }
 
             if (unk_flags & 4) {
@@ -365,7 +365,7 @@ void func_800538C4(AlUnkVoice* arg0, u8 arg1) {
 #define TUNE_SCALING_ARR_ATTENUATE_FINE 160
 #define TUNE_SCALING_ARR_ATTENUATE_COARSE 288
 
-f32 snd_tune_param_to_timescale(s32 arg0) {
+f32 snd_compute_pitch_ratio(s32 arg0) {
     if (arg0 >= 0) {
         return AlTuneScaling[(arg0 & 0x7F) + TUNE_SCALING_ARR_AMPLIFY_FINE]
             * AlTuneScaling[((arg0 & 0xF80) >> 7) + TUNE_SCALING_ARR_AMPLIFY_COARSE];
@@ -956,7 +956,7 @@ void snd_swizzle_BK_instruments(s32 bkFileOffset, SoundBank* bank, InstrumentGro
                     instrument->unkOffset = (s32)instrument->unkOffset + (s32)bank;
                 }
                 instrument->unk_25 = arg4;
-                instrument->playbackRate = *((s32*)(&instrument->playbackRate)) / freq; // what is happening here?
+                instrument->pitchRatio = *((s32*)(&instrument->pitchRatio)) / freq; // what is happening here?
             } else {
                 instruments[i] = defaultInstrument;
             }
