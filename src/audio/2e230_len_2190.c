@@ -876,25 +876,25 @@ s32 snd_load_BK_to_bank(s32 bkFileOffset, SoundBank* bank, s32 bankIndex, s32 ba
     do {
         switch (s3) {
             case EN_11:
-                if (header->unk_00 == 0x424B /* BK */ && header->unk_04 != 0) {
+                if (header->signature == 0x424B /* BK */ && header->size != 0) {
                     s3 = EN_21;
                 } else {
                     s2 = FALSE;
                 }
                 break;
             case EN_21:
-                if (header->unk_0C == 0x4352) { // CR
+                if (header->format == 0x4352) { // CR
                     s3 = EN_101;
-                } else if (header->unk_0C == 0x4452) { // DR
+                } else if (header->format == 0x4452) { // DR
                     s3 = EN_201;
-                } else if (header->unk_0C == 0x5352) { // SR
+                } else if (header->format == 0x5352) { // SR
                     s3 = EN_301;
                 } else {
                     s2 = FALSE;
                 }
                 break;
             case EN_101:
-                size = ALIGN16_(header->unk_32) + ALIGN16_(header->unk_36) + ALIGN16_(header->unk_3A) + ALIGN16_(header->unk_3E) + 0x40;
+                size = ALIGN16_(header->instrumetsSize) + ALIGN16_(header->unkSizeA) + ALIGN16_(header->predictorsSize) + ALIGN16_(header->unkSizeB) + sizeof(BKHeader);
                 if (bank == NULL) {
                     bank = alHeapAlloc(heap, 1, size);
                 }
@@ -902,8 +902,8 @@ s32 snd_load_BK_to_bank(s32 bkFileOffset, SoundBank* bank, s32 bankIndex, s32 ba
                 group = snd_get_BK_instruments(bankGroup, bankIndex);
                 a2 = 0;
                 for (i = 0; i < ARRAY_COUNT(*group); i++) {
-                    if (header->unk_12[i] != 0) {
-                        (*group)[i] = (s32)bank + header->unk_12[i];
+                    if (header->instruments[i] != 0) {
+                        (*group)[i] = (s32)bank + header->instruments[i];
                         a2++;
                     } else {
                         (*group)[i] = NULL;
