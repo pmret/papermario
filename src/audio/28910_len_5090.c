@@ -4,20 +4,33 @@ extern s32 D_80078554;
 extern u8 D_80078510[8];
 extern u8 D_80078558[40];
 
-BGMPlayer* func_80053F64(s32);
-void func_8004EA34(BGMPlayer*, u32);
-void func_80050900(BGMPlayer*);
-void func_800538C4(AlUnkVoice*, u8);
-
 extern void (*CurrentSeqCmdHandler)(BGMPlayer*, BGMPlayerTrack*);
 extern void (*SefCmdHandlers[])(SoundManager*, SoundPlayer*);
 extern void (*SeqCmdHandlers[])(BGMPlayer*, BGMPlayerTrack*);
 extern u8 SeqCmdArgCounts[];
+
+MusicError func_8004DCB8(SongUpdateEvent* update, s32 clearChanged);
+void snd_initialize_bgm_player(BGMPlayer* player);
+void func_8004E844(BGMPlayer* player, s32 arg1);
+void snd_bgm_state_2(BGMPlayer* player);
+void func_8004EA34(BGMPlayer*, u32);
+void func_8004EAD4(BGMPlayer*, u32);
+void snd_bgm_state_4(BGMPlayer* player);
+void func_8004EC68(BGMPlayer *player);
 s16 func_800505E4(s32 arg0, s32 arg1, u8 arg2);
 u8 func_80050654(s32 arg0, u8 arg1, u8 arg2);
 u8 func_8005068C(s32 arg0, u8 arg1, u8 arg2);
 void snd_BGMCmd_F6_TrackVolumeFade(BGMPlayer *, BGMPlayerTrack *);
 u8 func_80050568(BGMPlayer *player, u8 arg1, u8 arg2);
+void func_80050888(BGMPlayer* player, BGMPlayerTrack* track, s32 target, s32 duration);
+void func_80050900(BGMPlayer*);
+void func_800538C4(AlUnkVoice*, u8);
+
+void func_80053B04(Fade* fade, u32 arg1, s32 target);
+s32 func_80053E58(s32, u8*);
+BGMPlayer* func_80053F64(s32);
+BGMPlayer* func_80054248(u8);
+void func_800560BC(s32, s32, s32);
 
 void func_8004D510(BGMPlayer* player) {
     BGMHeader* bgmFile;
@@ -30,11 +43,11 @@ void func_8004D510(BGMPlayer* player) {
     u8 var_a1;
     u8 pos;
     u32 i;
-    
+
     segmentID = 0;
     unkType = -1;
     player->unk_14++;
-    
+
     if (player->unk_258 != 0) {
         if (player->unk_258 < ARRAY_COUNT(player->unk_238)) {
             pos = player->unk_259;
@@ -75,14 +88,14 @@ void func_8004D510(BGMPlayer* player) {
                     player->bgmFile = (BGMHeader*) bgmFile;
                     bgmData = &bgmFile->info;
                     func_8004E880(player, BGM_SAMPLE_RATE, D_80078510[((u8*)player->unk_74)[0] & 7]); //TODO revise unk_74 typing
-                    
+
                     segmentOffset = bgmData->segments[segmentID];
                     if (segmentOffset == 0) {
                         segmentOffset = bgmData->segments[0];
                     }
                     player->segmentStartPos = (SegData*)((segmentOffset * 4) + (s32)bgmFile);
                     player->segmentReadPos = (SegData*)((segmentOffset * 4) + (s32)bgmFile);
-                    
+
                     if (bgmData->drums != 0) {
                         player->drumsInfo = (BGMDrumInfo*)((bgmData->drums * 4) + (s32)player->bgmFile);
                         player->bgmDrumCount = bgmData->drumCount;
@@ -97,7 +110,7 @@ void func_8004D510(BGMPlayer* player) {
                         player->drumsInfo = NULL;
                         player->bgmDrumCount = 0;
                     }
-                    
+
                     if (bgmData->instruments != 0) {
                         player->instrumentsInfo = (BGMInstrumentInfo*)((bgmData->instruments * 4) + (s32)player->bgmFile);
                         player->bgmInstrumentCount = bgmData->instrumentCount;
@@ -324,6 +337,7 @@ MusicError func_8004DB4C(SongUpdateEvent* s) {
 
 MusicError func_8004DC80(s32 songName) {
     SongUpdateEvent s;
+
     s.songName = songName;
     s.duration = 0;
     s.startVolume = 0;
@@ -749,7 +763,7 @@ void snd_initialize_bgm_player(BGMPlayer* player) {
         note->noteLength = 0;
         note->tremoloTime = 0;
     }
-    
+
     func_80050900(player);
     player->unk_D0 = 128.0f; // set to 1.0 later om...
     player->masterTempo = BGM_DEFAULT_TEMPO;
@@ -950,8 +964,8 @@ void func_8004EC68(BGMPlayer *player) {
     s32 bVolumeFading;    // SP + 10
     u8 sp1F;              // SP + 1F
     s16 notePitch;        // SP + 26
-    u8 bFinished;         // SP + 28 
-    
+    u8 bFinished;         // SP + 28
+
     AlUnkVoice* voice;
     BGMDrumInfo* drumInfo;
     BGMPlayerTrack* track;
@@ -968,7 +982,7 @@ void func_8004EC68(BGMPlayer *player) {
     s32 temp2;
     bVolumeFading = FALSE;
     bFinished = FALSE;
-    
+
     if (player->masterTempoFadeTime != 0) {
         player->masterTempoFadeTime--;
         if (player->masterTempoFadeTime == 0) {
@@ -992,7 +1006,7 @@ void func_8004EC68(BGMPlayer *player) {
         bVolumeFading = TRUE;
     }
     player->volumeChanged = FALSE;
-    if (player->unk_204 != 0) {        
+    if (player->unk_204 != 0) {
         if (player->unk_232 != 0) {
             s32 counter = 16;
             while (counter-- != 0) {
@@ -1001,7 +1015,7 @@ void func_8004EC68(BGMPlayer *player) {
                     break;
                 }
                 track = &player->tracks[i - 1];
-                player->seqCmdArgs.TrackVolumeFade.time = 48;                
+                player->seqCmdArgs.TrackVolumeFade.time = 48;
                 player->seqCmdArgs.TrackVolumeFade.value = *(player->unk_204++);
                 if (track->bgmReadPos != 0) {
                     snd_BGMCmd_F6_TrackVolumeFade(player, track);
@@ -1075,7 +1089,7 @@ void func_8004EC68(BGMPlayer *player) {
                                 // long delay
                                 track->delayTime = (((opcode & 7) << 8) + *(track->bgmReadPos++)) + 0x78;
                                 POST_BGM_READ();
-                                
+
                             } else {
                                 // delay
                                 track->delayTime = opcode;
@@ -1103,7 +1117,7 @@ void func_8004EC68(BGMPlayer *player) {
                                         break;
                                     }
                                 }
-    
+
                                 if (!bAcquiredVoiceIdx) {
                                     if (track->unk_54 >= 5) {
                                         for(voiceIdx = track->unk_52; voiceIdx < track->unk_53; voiceIdx++) {
@@ -1127,7 +1141,7 @@ void func_8004EC68(BGMPlayer *player) {
                                                 }
                                             }
                                         }
-    
+
                                         if (!bAcquiredVoiceIdx) {
                                             s32 shortestLength = 0xFFFF;
                                             u8 voice_it;
@@ -1151,7 +1165,7 @@ void func_8004EC68(BGMPlayer *player) {
                                                 func_800538C4(voice, voiceIdx);
                                             }
                                         }
-                                        
+
                                     } else {
                                         voiceIdx = track->unk_52;
                                         voice = &player->globals->voices[voiceIdx];
@@ -1187,7 +1201,7 @@ void func_8004EC68(BGMPlayer *player) {
                                     }
                                     voice->unk_40 = (((((player->masterVolume >> 0x15) * (track->subTrackVolume >> 0x15)) * (track->unk2C >> 0x15)) >> 0x14) * (track->segTrackVolume * note->unk_08)) >> 0x10;
                                     note->adjustedPitch = (((s8) track->subTrackFineTune) + (drumInfo->unk_02 + track->subTrackCoarseTune)) - note->ins->detune;
-                                    temp = (note->adjustedPitch + track->segTrackTune) + player->unk_20E;                             
+                                    temp = (note->adjustedPitch + track->segTrackTune) + player->unk_20E;
                                     if (drumInfo->unk_07 != 0) {
                                         note->unk_14 = func_800505E4(player->unk_50, temp, drumInfo->unk_07);
                                         temp = note->unk_14;
@@ -1207,21 +1221,21 @@ void func_8004EC68(BGMPlayer *player) {
                                     note->unk_08 = (((((player->masterVolume >> 0x15) * (track->subTrackVolume >> 0x15)) * (track->unk2C >> 0x15)) >> 0x14) * (track->segTrackVolume * note->noteVelocity)) >> 9;
                                     voice->unk_40 = note->unk_08;
                                     note->ins = track->instrument;
-                                    note->adjustedPitch = 
-                                        (notePitch * 100) 
+                                    note->adjustedPitch =
+                                        (notePitch * 100)
                                         + track->subTrackCoarseTune
                                         + player->masterPitchShift
-                                        + track->subTrackFineTune 
+                                        + track->subTrackFineTune
                                         - note->ins->detune;
                                     note->pitchRatio = snd_compute_pitch_ratio((note->adjustedPitch + track->segTrackTune) + player->unk_20E) * track->instrument->pitchRatio;
-                                    
+
                                     if (track->unk_57 != 0) {
                                         voice->pan = func_80050568(player, track->subTrackPan, track->unk_57);
                                     } else {
                                         voice->pan = track->subTrackPan;
                                     }
                                     voice->reverb = track->subTrackReverb;
-    
+
                                     if (track->unk_4C != 0) {
                                         voice->unk_14 = (s32*)player->unk_174[track->unk_4C - 1]; //TODO ???
                                     } else {
@@ -1274,7 +1288,7 @@ void func_8004EC68(BGMPlayer *player) {
                     }
                 } // end while
             }
-            
+
             for (voiceIdx = track->unk_52; voiceIdx < track->unk_53; voiceIdx++) {
                 if (track->unk_5A == 0) {
                     voice = &player->globals->voices[voiceIdx];
@@ -1309,20 +1323,20 @@ void func_8004EC68(BGMPlayer *player) {
                                         note->unk_13 += track->trackTremoloSpeed;
                                         opcode = (note->unk_13 << 2) + 3;
                                         temp_a2_4 = note->unk_13 >> 6;
-                                        
+
                                         if ((temp_a2_4 == 1) || (temp_a2_4 == 3)) {
                                             u8 temp2 = ~opcode;
                                             var_a1_5 = temp2 + 1;
                                         } else {
                                             var_a1_5 = opcode;
                                         }
-                                        
+
                                         var_a1_5 = (var_a1_5 * track->trackTremoloTime) >> 8;
 
                                         if ((temp_a2_4 == 2) || (temp_a2_4 == 3)) {
                                             var_a1_5 = -var_a1_5;
                                         }
-                    
+
                                         note->pitchRatio = snd_compute_pitch_ratio(var_a1_5 + ((note->adjustedPitch + track->segTrackTune) + player->unk_20E)) * note->ins->pitchRatio;
                                         if (voice->pitchRatio != note->pitchRatio) {
                                             voice->pitchRatio = note->pitchRatio;

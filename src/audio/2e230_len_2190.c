@@ -431,7 +431,7 @@ void snd_set_fade_vol_scale(Fade* fade, s16 value) {
     fade->volScaleStep = 0;
 }
 
-void func_80053B04(Fade* fade, u32 arg1, s16 target) {
+void func_80053B04(Fade* fade, u32 arg1, s32 target) {
     s16 time;
     s32 delta;
 
@@ -947,13 +947,13 @@ void snd_swizzle_BK_instruments(s32 bkFileOffset, SoundBank* bank, InstrumentGro
                     instrument->wavOffset += bkFileOffset;
                 }
                 if (instrument->loopPredictorOffset != NULL) {
-                    instrument->loopPredictorOffset += (s32)bank;
+                    instrument->loopPredictorOffset += (s32) bank;
                 }
                 if (instrument->predictorOffset != NULL) {
-                    instrument->predictorOffset += (s32)bank;
+                    instrument->predictorOffset += (s32) bank;
                 }
                 if (instrument->unkOffset != NULL) {
-                    instrument->unkOffset = (s32)instrument->unkOffset + (s32)bank;
+                    instrument->unkOffset = (s32) instrument->unkOffset + (s32) bank;
                 }
                 instrument->unk_25 = arg4;
                 instrument->pitchRatio = *((s32*)(&instrument->pitchRatio)) / freq; // what is happening here?

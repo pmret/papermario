@@ -351,7 +351,7 @@ typedef struct InstrumentEffectSub {
 typedef struct InstrumentEffect {
     /* 0x00 */ u8 count;
     /* 0x01 */ char unk_01[3];
-    /* 0x04 */ struct InstrumentEffectSub unk_04[1]; // variable size
+    /* 0x04 */ InstrumentEffectSub unk_04[1]; // variable size
 } InstrumentEffect;
 
 typedef struct Instrument {
