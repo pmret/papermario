@@ -631,6 +631,21 @@ typedef struct BoardedFloorData {
     /* 0x11C */ f32 fragmentFallSpeed[13];
 } BoardedFloorData; // size = 0x150
 
+typedef struct BombableRockData {
+    /* 0x00 */ Gfx** fragmentsGfx;
+    /* 0x04 */ f32 inititalY;
+    /* 0x08 */ s8 fragmentRebounds[6];
+    /* 0x0E */ u8 fragmentMoveAngle[6];
+    /* 0x14 */ u8 fragmentRotX[6];
+    /* 0x1A */ u8 fragmentRotY[6];
+    /* 0x20 */ u8 fragmentLateralSpeed[6];
+    /* 0x28 */ f32 fragmentRotationSpeed[6];
+    /* 0x40 */ f32 fragmentPosX[6];
+    /* 0x58 */ f32 fragmentPosY[6];
+    /* 0x70 */ f32 fragmentPosZ[6];
+    /* 0x88 */ f32 fragmentFallSpeed[6];
+} BombableRockData; // size = 0xA0
+
 // END ENTITY-SPECIFIC STRUCTS
 
 typedef s32 (*EntityCallback)(struct Entity*);
@@ -695,6 +710,7 @@ typedef struct Entity {
         SignPostData* signPost;
         PadlockData* padlock;
         BoardedFloorData* boardedFloor;
+        BombableRockData* bombableRock;
         s32* unk;
     } dataBuf;
     /* 0x44 */ Vec3s* vertexData;

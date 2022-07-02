@@ -12063,10 +12063,10 @@ segments:
     subsegments:
     - [0xE2B530, c, Padlock]
     - [0xE2BE40, c, BoardedFloor]
-    - [0xE2C930, c]
+    - [0xE2C930, c, E2C930]
     - [0xE2D410, .data, Padlock]
     - [0xE2D530, .data, BoardedFloor]
-    - [0xE2D5E0, data, E2D410]
+    - [0xE2D5E0, .data, E2C930]
     - [0xE2D680]
   - type: code
     dir: entity/jan_iwa
@@ -12791,6 +12791,23 @@ segments:
     subsegments:
     - [0xE69D50, c, SimpleSpring_anim]
   - [0xE6B1B0, bin] # unk data
+  - name: entity_model_BombableRock
+    dir: entity/model
+    type: code
+    start: 0xE9D650
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE9D650, c, BombableRock]
+    - start: 0xE9D650
+      type: .data
+      name: BombableRock
+      subsegments:
+      - [0xE9D650]
+      - [0xE9DE90, ci4, BombableRock, 64, 64]
+      - [0xE9E690, palette, BombableRock]
+      - [0xE9E6B0]
+  - [0xE9ECD0, bin] # unk data
   - type: code
     start: 0xEA0900
     vram: 0x80240000
