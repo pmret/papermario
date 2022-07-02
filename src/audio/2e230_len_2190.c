@@ -1068,7 +1068,7 @@ void snd_memset(s8* dst, s32 size, u8 value) {
             *(u32*)dst = intValue;
             dst += 4;
         }
-        
+
         count = size & 3;
         if (count != 0) {
             while (count--) {

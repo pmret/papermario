@@ -321,6 +321,7 @@ segments:
     - [0x53590, data, audio/26840_len_20d0]
     - [0x541B0, .data, audio/30450]
     - [0x54250, .data, audio/31650]
+    - [0x54260, .data, audio/33450]
     - [0x54360, data]
     - [0x5A3E0, .data, audio/341d0]
     - [0x5A610, .data, effects]

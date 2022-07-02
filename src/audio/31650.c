@@ -33,25 +33,7 @@ u8 D_80078E5C = FALSE;
     _a->words.w0 = _SHIFTL(A_INTERLEAVE, 24, 8); \
     }
 
-// values for cosine from 0 to pi/2 multiplied by 32767
-s16 AlCosineBlend[128] = { 
-    32767, 32764, 32757, 32744, 32727, 32704, 32677, 32644,
-    32607, 32564, 32517, 32464, 32407, 32344, 32277, 32205,
-    32127, 32045, 31958, 31866, 31770, 31668, 31561, 31450,
-    31334, 31213, 31087, 30957, 30822, 30682, 30537, 30388,
-    30234, 30075, 29912, 29744, 29572, 29395, 29214, 29028,
-    28838, 28643, 28444, 28241, 28033, 27821, 27605, 27385,
-    27160, 26931, 26698, 26461, 26220, 25975, 25726, 25473,
-    25216, 24956, 24691, 24423, 24151, 23875, 23596, 23313,
-    23026, 22736, 22442, 22145, 21845, 21541, 21234, 20924,
-    20610, 20294, 19974, 19651, 19325, 18997, 18665, 18331,
-    17993, 17653, 17310, 16965, 16617, 16266, 15913, 15558,
-    15200, 14840, 14477, 14113, 13746, 13377, 13006, 12633,
-    12258, 11881, 11503, 11122, 10740, 10357,  9971,  9584,
-     9196,  8806,  8415,  8023,  7630,  7235,  6839,  6442,
-     6044,  5646,  5246,  4845,  4444,  4042,  3640,  3237,
-     2833,  2429,  2025,  1620,  1216,   810,   405,     0
-    };
+extern s16 AlCosineBlend[128];
 
 #define AL_COS_MID_IDX 64
 #define AL_COS_MAX_IDX 127
@@ -155,14 +137,14 @@ Acmd* alAudioFrame(Acmd* cmdList, s32* cmdLen, s16* outBuf, s32 outLen) {
     AlUnkBeta* beta1;
     AlUnkBeta* beta2;
     AlUnkGamma* gamma3;
-    
+
     s16* sp10;
     u16 offset2;
     s16 offset1;
 
     s32 i;
     s32 var_s7;
-    
+
     cmdListPos = cmdList;
     sp10 = outBuf;
     if (D_80078E50 == NULL) {
@@ -227,9 +209,9 @@ Acmd* alAudioFrame(Acmd* cmdList, s32* cmdLen, s16* outBuf, s32 outLen) {
                             if (offset1 != -1) {
                                 aSaveBufferSize(cmdListPos++, 2 * AUDIO_SAMPLES, offset1, osVirtualToPhysical(D_800A3FE0 + (D_800A3FE8 % D_800A3FF0) * AUDIO_SAMPLES));
                                 aLoadBufferSize(cmdListPos++, 2 * AUDIO_SAMPLES, offset1, osVirtualToPhysical(D_800A3FE0 + ((D_800A3FE8 + 1) % D_800A3FF0) * AUDIO_SAMPLES));
-                                aSaveBufferSize(cmdListPos++, 2 * AUDIO_SAMPLES, offset2, osVirtualToPhysical(D_800A3FE4 + (D_800A3FE8 % D_800A3FF0) * AUDIO_SAMPLES));                                
+                                aSaveBufferSize(cmdListPos++, 2 * AUDIO_SAMPLES, offset2, osVirtualToPhysical(D_800A3FE4 + (D_800A3FE8 % D_800A3FF0) * AUDIO_SAMPLES));
                                 aLoadBufferSize(cmdListPos++, 2 * AUDIO_SAMPLES, offset2, osVirtualToPhysical(D_800A3FE4 + ((D_800A3FE8 + 1) % D_800A3FF0) * AUDIO_SAMPLES));
-                                
+
                             }
                         }
                         if (var_s7) {
@@ -315,7 +297,7 @@ void func_80056DCC(u8 arg0, u8 arg1) {
 
 void func_80056E34(u8 arg0, s16 arg1, s16 arg2, s32 arg3) {
     AlUnkGamma* gamma = &D_80078E54->al_unk_gamma[arg0];
-    
+
     func_800598A0(gamma->unk_delta_4, arg1, arg2, arg3);
     func_800598A0(gamma->unk_delta_8, arg1, arg2, arg3);
 }
@@ -358,19 +340,19 @@ void func_80056F78(u8 arg0) {
     beta->unk_70 = 1;
 }
 
-#ifdef NONMATCHING
+//#ifdef NONMATCHING
 void func_80056FA4(u8 index, u8 arg1, Instrument* instrument, f32 arg3, s16 arg4, u8 arg5, u8 arg6, s32 arg7) {
     AlUnkBeta* beta = &D_80078E54->al_unk_beta[index];
     AlUnkZeta* zeta = &beta->unk_zeta_04;
-    AlUnkEta* pi = &beta->unk_48;
-    AlUnkSigma* sigma = &beta->unk_38;
-    
+    AlUnkEta* pi = &beta->unk_eta_48;
+    AlUnkSigma* sigma = &beta->unk_sigma_38;
+
     beta->unk_78 = arg1;
     beta->instrument = instrument;
-    
+
     beta->unk_34 = zeta->unk_tau_14->unk_00;
     beta->unk_28 = 0;
-    
+
     switch (zeta->unk_tau_14->unk_24) {
         case 0:
             zeta->unk_tau_14->unk_04 = (zeta->unk_tau_14->unk_04 / 9) * 9;
@@ -398,7 +380,7 @@ void func_80056FA4(u8 index, u8 arg1, Instrument* instrument, f32 arg3, s16 arg4
             }
             break;
     }
-    
+
     pi->unk_28 = 1;
     pi->unk_24 = 1;
     pi->unk_1C = 0;
@@ -421,18 +403,18 @@ void func_80056FA4(u8 index, u8 arg1, Instrument* instrument, f32 arg3, s16 arg4
     }
     sigma->unk_04 = arg3;
 }
-#else
-INCLUDE_ASM(void, "audio/31650", func_80056FA4, u8 arg0, u8 arg1, s32 arg2, f32 arg3, s16 arg4, u8 arg5, u8 arg6, s32 arg7);
-#endif
+// #else
+// INCLUDE_ASM(void, "audio/31650", func_80056FA4, u8 arg0, u8 arg1, s32 arg2, f32 arg3, s16 arg4, u8 arg5, u8 arg6, s32 arg7);
+// #endif
 
 void func_80057224(u8 index, Instrument* instrument) {
     AlUnkBeta* beta = &D_80078E54->al_unk_beta[index];
     AlUnkZeta* zeta = &beta->unk_zeta_04;
-    
+
     beta->instrument = instrument;
     beta->unk_34 = zeta->unk_tau_14->unk_00;
     beta->unk_28 = 0;
-    
+
     switch (zeta->unk_tau_14->unk_24) {
         case 0:
             zeta->unk_tau_14->unk_04 = (zeta->unk_tau_14->unk_04 / 9) * 9;
@@ -472,7 +454,7 @@ void func_80057344(u8 arg0, f32 arg1) {
 void func_8005736C(u8 arg0, s16 arg1, s32 arg2, u8 arg3, u8 arg4) {
     AlUnkBeta* beta = &D_80078E54->al_unk_beta[arg0];
     AlUnkEta* eta = &beta->unk_eta_48;
-    
+
     if (beta->unk_64 >= beta->unk_68) {
         beta->unk_64 = beta->unk_68;
         if (D_80078181 == 0) {
@@ -492,7 +474,7 @@ void func_8005736C(u8 arg0, s16 arg1, s32 arg2, u8 arg3, u8 arg4) {
     if (eta->unk_0A == 0) {
         eta->unk_0A = 1;
     }
-    
+
     eta->unk_1C = 0;
     eta->unk_20 = arg2;
     eta->unk_04 = arg3;
@@ -554,7 +536,7 @@ void func_800576EC(u8 arg0, s16 arg1, s32 arg2) {
     }
     if (temp_s1->unk_0A == 0) {
         temp_s1->unk_0A = 1;
-        
+
     }
 
     temp_s1->unk_06 = SQ(arg1) >> 0xF;
@@ -659,7 +641,7 @@ s16 func_80057C2C(u8 arg0) {
 s32 func_80057C54(s32 arg0) {
     AlUnkBeta* temp_v1;
     u32 retVal;
-    
+
     temp_v1 = &D_80078E54->al_unk_beta[arg0 & 0xFF];
     if (temp_v1->unk_64 >= temp_v1->unk_68) {
         if (D_80078181 == 0) {
@@ -676,7 +658,7 @@ s32 func_80057C54(s32 arg0) {
 s32 func_80057D0C(s32 arg0) {
     AlUnkBeta* temp_v1;
     u32 retVal;
-    
+
     temp_v1 = &D_80078E54->al_unk_beta[arg0 & 0xFF];
     if (temp_v1->unk_64 >= temp_v1->unk_68) {
         if (D_80078181 == 0) {
@@ -739,7 +721,7 @@ void func_80057EB0(void) {
 }
 
 void func_80057ED0(s16 arg0) {
-    s32* phi_a1 = (s32*)D_800A3FE0; 
+    s32* phi_a1 = (s32*)D_800A3FE0;
     s32* phi_v1 = (s32*)D_800A3FE4;
     s32 i;
 
