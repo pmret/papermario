@@ -152,8 +152,8 @@ typedef union SeqArgs {
         u8 unk_02;
     } UnkCmdFE;
     struct { // cmd FF
-        u8 bank;
-        u8 patch;
+        u8 unk_00;
+        u8 unk_01;
         u8 unk_02;
     } UnkCmdFF;
 } SeqArgs;

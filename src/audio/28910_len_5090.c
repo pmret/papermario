@@ -1650,8 +1650,8 @@ void snd_BGMCmd_FF(BGMPlayer* player, BGMPlayerTrack* track) {
     u8 temp_a1;
     u8 temp_a3;
 
-    u32 arg0 = player->seqCmdArgs.UnkCmdFF.bank;
-    u32 arg1 = player->seqCmdArgs.UnkCmdFF.patch;
+    u32 arg0 = player->seqCmdArgs.UnkCmdFF.unk_00;
+    u32 arg1 = player->seqCmdArgs.UnkCmdFF.unk_01;
     u32 arg2 = player->seqCmdArgs.UnkCmdFF.unk_02;
 
     switch (arg0) {
@@ -1709,7 +1709,7 @@ void snd_BGMCmd_FF(BGMPlayer* player, BGMPlayerTrack* track) {
                 for (i = 0; i < ARRAY_COUNT(player->soundManager->unk_90); i++) {
                     if ((player->soundManager->unk_90[i].unk_0) == 0) {
                         player->soundManager->unk_90[i].unk_0 = arg1;
-                        player->soundManager->unk_90[i].volume= (((player->fadeInfo.currentVolume.u16 * player->fadeInfo.volScale.u16) + 0x7FFF) >> 0x17);
+                        player->soundManager->unk_90[i].volume = ((player->fadeInfo.currentVolume.u16 * player->fadeInfo.volScale.u16) + 0x7FFF) >> 0x17;
                         break;
                     }
                 }
@@ -1724,12 +1724,12 @@ void snd_BGMCmd_FF(BGMPlayer* player, BGMPlayerTrack* track) {
                         if (player->proxMixVolume == 0x7F) {
                             if (otherTrack->unk_4F != 0) {
                                 otherTrack->unk_4E = 0;
-                                func_80050888(player, otherTrack, otherTrack->unk_4F, 0x48);
+                                func_80050888(player, otherTrack, otherTrack->unk_4F, 72);
                             }
                         } else {
                             if (otherTrack->unk_50 != 0) {
                                 otherTrack->unk_4E = 0;
-                                func_80050888(player, otherTrack, otherTrack->unk_50, 0x48);
+                                func_80050888(player, otherTrack, otherTrack->unk_50, 72);
                             }
                         }
                     }
