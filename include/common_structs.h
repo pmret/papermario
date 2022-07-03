@@ -646,6 +646,32 @@ typedef struct BombableRockData {
     /* 0x88 */ f32 fragmentFallSpeed[6];
 } BombableRockData; // size = 0xA0
 
+typedef struct TweesterData {
+    /* 0x00 */ s8 unk_00;
+    /* 0x01 */ s8 faceAnimState;
+    /* 0x02 */ s8 faceAnimTimer;
+    /* 0x03 */ s8 faceAnimTexOffset;
+    /* 0x04 */ f32 rotationSpeed;
+    /* 0x08 */ f32 innerWhirlRotY;
+    /* 0x0C */ f32 outerWhirlRotY;
+    /* 0x10 */ Mtx mtxInnerWhirl;
+    /* 0x50 */ Mtx mtxOuterWhirl;
+    /* 0x90 */ s16 innerWhirlTexOffsetX;
+    /* 0x92 */ s16 innerWhirlTexOffsetY;
+    /* 0x94 */ s16 outerWhirlTexOffsetX;
+    /* 0x96 */ s16 outerWhirlTexOffsetY;
+    /* 0x98 */ s16 frameCounter;
+    /* 0x9C */ s32* currentPath;
+    /* 0xA0 */ s32** paths;
+    /* 0xA4 */ s16 targetX;
+    /* 0xA6 */ s16 targetY;
+    /* 0xA8 */ s16 targetZ;
+    /* 0xAA */ s16 pathOffset;
+    /* 0xAC */ char unk_AC[12];
+    /* 0xB8 */ f32 yaw;
+    /* 0xBC */ char unk_BC[4];
+} TweesterData; // size = 0xC0;
+
 // END ENTITY-SPECIFIC STRUCTS
 
 typedef s32 (*EntityCallback)(struct Entity*);
@@ -711,6 +737,7 @@ typedef struct Entity {
         PadlockData* padlock;
         BoardedFloorData* boardedFloor;
         BombableRockData* bombableRock;
+        TweesterData* tweester;
         s32* unk;
     } dataBuf;
     /* 0x44 */ Vec3s* vertexData;

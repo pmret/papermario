@@ -12063,10 +12063,10 @@ segments:
     subsegments:
     - [0xE2B530, c, Padlock]
     - [0xE2BE40, c, BoardedFloor]
-    - [0xE2C930, c, E2C930]
+    - [0xE2C930, c, BombableRock]
     - [0xE2D410, .data, Padlock]
     - [0xE2D530, .data, BoardedFloor]
-    - [0xE2D5E0, .data, E2C930]
+    - [0xE2D5E0, .data, BombableRock]
     - [0xE2D680]
   - type: code
     dir: entity/jan_iwa
@@ -12087,7 +12087,8 @@ segments:
     subsegments:
     - [0xE2F750, c, E2F750]
     - [0xE307C0, c, E307C0]
-    - [0xE31380, data]
+    - [0xE31380, .data, E2F750]
+    - [0xE313F0, data, E31380]
     - [0xE314C0]
   - name: entity_model_Hammer1Block
     dir: entity/model
@@ -12537,7 +12538,25 @@ segments:
     vram: 0x0A000000
     subsegments:
     - [0xE56BA0, c, HiddenPanel]
-  - [0xE56E60, bin] # unk data
+  - name: entity_model_Tweester
+    dir: entity/model
+    type: code
+    start: 0xE56E60
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE56E60, c, Tweester]
+    - start: 0xE56E60
+      type: .data
+      name: Tweester
+      subsegments:
+      - [0xE56E60]
+      - [0xE57A50, i8, Tweester_img1, 32, 32]
+      - [0xE57E50, i8, Tweester_img2, 32, 32]
+      - [0xE58250]
+      - [0xE58300, ci4, Tweester_img3, 64, 32]
+      - [0xE58700, palette, Tweester_img3]
+      - [0xE58720]
   - name: entity_model_BlueWarpPipe
     dir: entity/model
     type: code
