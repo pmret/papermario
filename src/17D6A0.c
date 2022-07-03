@@ -4,16 +4,12 @@
 #include "battle/battle.h"
 #include "hud_element.h"
 
-s32 D_80280FC0[] = {
-    0x000A005A, 0x00000032, 0x0003000B, 0x00000032, 0x0001002D, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000032,
-    0x00010031, 0x00000032, 0x00010031, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000032, 0x00010032, 0x00000032,
-    0x00010032, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000032, 0x0003000A, 0x00000032, 0x0003000A, 0x00000000,
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00000050, 0x0003000A, 0x00000014, 0x0003000B, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
+s16 D_80280FC0[] = {
+    10, 90, 0, 50, 3, 11, 0, 50, 1, 45, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 50,
+    1, 49, 0, 50, 1, 49, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 50, 1, 50, 0, 50, 1,
+    50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 50, 3, 10, 0, 50, 3, 10, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 80, 3, 10, 0, 20, 3, 11, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 };
 
 s32 bActorNames[ACTOR_TYPE_COUNT] = {
@@ -1243,7 +1239,7 @@ void func_8024EFE0(f32 x, f32 y, f32 z, s32 numMessages, s32 arg4, s32 arg5) {
         var_f20 = 0.7f;
     }
 
-    if (battleStatus->flags1 & (0x200 | 0x40)) {
+    if (battleStatus->flags1 & (BS_FLAGS1_200 | BS_FLAGS1_40)) {
         var_f22 *= 2.0;
     }
 
@@ -1598,7 +1594,7 @@ void func_8024FB3C(void* data) {
                     popup->unk_16 = 2;
                     break;
                 case 2:
-                    if (battleStatus->currentButtonsPressed & 0xC000) {
+                    if (battleStatus->currentButtonsPressed & (BUTTON_A | BUTTON_B)) {
                         popup->duration = 0;
                     }
 
@@ -1647,127 +1643,127 @@ void func_8024FB3C(void* data) {
 
             switch (popup->unk_16) {
                 case 0:
-                    gBattleStatus.flags1 |= 0x4000;
-                    gBattleStatus.flags1 &= ~0x10000;
+                    gBattleStatus.flags1 |= BS_FLAGS1_4000;
+                    gBattleStatus.flags1 &= ~BS_FLAGS1_10000;
                     switch (popup->messageIndex) {
                         case 50:
                             D_8029F642 = hud_element_create(&HES_StickNeutral);
-                            hud_element_set_flags(D_8029F642, 0x8080);
+                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
                             break;
                         case 47:
                             D_8029F642 = hud_element_create(&HES_StickNeutral);
-                            hud_element_set_flags(D_8029F642, 0x8080);
+                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
 
                             D_8029F644 = hud_element_create(&HES_TimingReady);
-                            hud_element_set_flags(D_8029F644, 0x80);
+                            hud_element_set_flags(D_8029F644, HUD_ELEMENT_FLAGS_80);
                             hud_element_set_render_pos(D_8029F644, -100, -100);
                             break;
                         case 51:
                             D_8029F642 = hud_element_create(&HES_StickNeutral);
-                            hud_element_set_flags(D_8029F642, 0x8080);
+                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
 
                             D_8029F644 = hud_element_create(&HES_AimTarget);
-                            hud_element_set_flags(D_8029F644, 0x8080);
+                            hud_element_set_flags(D_8029F644, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
                             hud_element_set_render_pos(D_8029F644, -100, -100);
                             hud_element_create_transform_B(D_8029F644);
                             break;
                         case 52:
                             D_8029F642 = hud_element_create(&HES_CUpButton);
-                            hud_element_set_flags(D_8029F642, 0x8080);
+                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
 
                             D_8029F644 = hud_element_create(&HES_CDownButton);
-                            hud_element_set_flags(D_8029F644, 0x80);
+                            hud_element_set_flags(D_8029F644, HUD_ELEMENT_FLAGS_80);
                             hud_element_set_render_pos(D_8029F644, -100, -100);
 
                             D_8029F646 = hud_element_create(&HES_CLeftButton);
-                            hud_element_set_flags(D_8029F646, 0x80);
+                            hud_element_set_flags(D_8029F646, HUD_ELEMENT_FLAGS_80);
                             hud_element_set_render_pos(D_8029F646, -100, -100);
 
                             D_8029F648 = hud_element_create(&HES_CRightButton);
-                            hud_element_set_flags(D_8029F648, 0x80);
+                            hud_element_set_flags(D_8029F648, HUD_ELEMENT_FLAGS_80);
                             hud_element_set_render_pos(D_8029F648, -100, -100);
                             break;
                         case 53:
                             D_8029F642 = hud_element_create(&HES_StickNeutral);
-                            hud_element_set_flags(D_8029F642, 0x8080);
+                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
                             break;
                         case 54:
                             D_8029F642 = hud_element_create(&HES_AButton);
-                            hud_element_set_flags(D_8029F642, 0x8080);
+                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
 
                             D_8029F644 = hud_element_create(&HES_BButton);
-                            hud_element_set_flags(D_8029F644, 0x8080);
+                            hud_element_set_flags(D_8029F644, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
                             hud_element_set_render_pos(D_8029F644, -100, -100);
 
                             D_8029F646 = hud_element_create(&HES_CDownButton);
-                            hud_element_set_flags(D_8029F646, 0x8080);
+                            hud_element_set_flags(D_8029F646, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
                             hud_element_set_render_pos(D_8029F646, -100, -100);
                             break;
                         case 55:
                             D_8029F642 = hud_element_create(&HES_StickNeutral);
-                            hud_element_set_flags(D_8029F642, 0x8080);
+                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
                             break;
                         case 56:
                             D_8029F642 = hud_element_create(&HES_TimingReady);
-                            hud_element_set_flags(D_8029F642, 0x80);
+                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
 
                             D_8029F644 = hud_element_create(&HES_AButton);
-                            hud_element_set_flags(D_8029F644, 0x8080);
+                            hud_element_set_flags(D_8029F644, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
                             hud_element_set_render_pos(D_8029F644, -100, -100);
                             break;
                         case 57:
                             D_8029F642 = hud_element_create(&HES_AButton);
-                            hud_element_set_flags(D_8029F642, 0x8080);
+                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
                             D_8029F644 = hud_element_create(&HES_BButton);
-                            hud_element_set_flags(D_8029F642, 0x8080);
+                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
                             break;
                         case 58:
                             D_8029F642 = hud_element_create(&HES_AButton);
-                            hud_element_set_flags(D_8029F642, 0x8080);
+                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
 
                             D_8029F644 = hud_element_create(&HES_BButton);
-                            hud_element_set_flags(D_8029F644, 0x8080);
+                            hud_element_set_flags(D_8029F644, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
                             hud_element_set_render_pos(D_8029F644, -100, -100);
                             break;
                         case 61:
                             D_8029F642 = hud_element_create(&HES_TimingReady);
-                            hud_element_set_flags(D_8029F642, 0x80);
+                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
 
                             D_8029F644 = hud_element_create(&HES_AButtonDown);
-                            hud_element_set_flags(D_8029F644, 0x8080);
+                            hud_element_set_flags(D_8029F644, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
                             hud_element_set_render_pos(D_8029F644, -100, -100);
                             break;
                         case 62:
                             D_8029F642 = hud_element_create(&HES_StickNeutral);
-                            hud_element_set_flags(D_8029F642, 0x8080);
+                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
 
                             D_8029F644 = hud_element_create(&HES_AimTarget);
-                            hud_element_set_flags(D_8029F644, 0x8080);
+                            hud_element_set_flags(D_8029F644, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
                             hud_element_set_render_pos(D_8029F644, -100, -100);
                             hud_element_create_transform_B(D_8029F644);
 
                             D_8029F646 = hud_element_create(&HES_AimReticle);
-                            hud_element_set_flags(D_8029F646, 0x8080);
+                            hud_element_set_flags(D_8029F646, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
                             hud_element_set_render_pos(D_8029F646, -100, -100);
                             hud_element_create_transform_B(D_8029F646);
                             break;
                         case 64:
                         case 65:
                             D_8029F642 = hud_element_create(&HES_AButton);
-                            hud_element_set_flags(D_8029F642, 0x8080);
+                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
                             // fallthrough
                         case 46:
@@ -1778,19 +1774,19 @@ void func_8024FB3C(void* data) {
                         case 63:
                         case 66:
                             D_8029F642 = hud_element_create(&HES_AButton);
-                            hud_element_set_flags(D_8029F642, 0x8080);
+                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
                             break;
                     }
                     popup->unk_16 = 1;
                     break;
                 case 1:
-                    if (gBattleStatus.flags1 & 0x10000) {
-                        gBattleStatus.flags1 &= ~0x4000;
+                    if (gBattleStatus.flags1 & BS_FLAGS1_10000) {
+                        gBattleStatus.flags1 &= ~BS_FLAGS1_4000;
                         set_window_update(9, 7);
                         popup->duration = 0;
                         popup->unk_16 = 2;
-                    } else if (!(gBattleStatus.flags1 & 0x4000) && (temp_a0 != 2)) {
+                    } else if (!(gBattleStatus.flags1 & BS_FLAGS1_4000) && (temp_a0 != 2)) {
                         set_window_update(9, 7);
                         switch (popup->messageIndex) {
                             case 49:
@@ -1868,7 +1864,7 @@ void func_8024FB3C(void* data) {
                     }
                     break;
                 case 2:
-                    if ((temp_a0 != popup->unk_16) || (gBattleStatus.flags1 & 0x10000)) {
+                    if ((temp_a0 != popup->unk_16) || (gBattleStatus.flags1 & BS_FLAGS1_10000)) {
                         s16* duration;
 
                         if (D_8029F64E < 192) {
@@ -1950,7 +1946,7 @@ void func_8024FB3C(void* data) {
                     popup->unk_16 = 2;
                     break;
                 case 2:
-                    if (battleStatus->currentButtonsPressed & 0xC000) {
+                    if (battleStatus->currentButtonsPressed & (BUTTON_A | BUTTON_B)) {
                         popup->duration = 0;
                     }
 
@@ -1980,37 +1976,37 @@ void func_8024FB3C(void* data) {
                     switch (popup->messageIndex) {
                         case 73:
                             D_8029F642 = hud_element_create(&HES_Item_Hammer1);
-                            hud_element_set_flags(D_8029F642, 0x80);
+                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
                             break;
                         case 74:
                             D_8029F642 = hud_element_create(&HES_Item_Hammer2);
-                            hud_element_set_flags(D_8029F642, 0x80);
+                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
                             break;
                         case 75:
                             D_8029F642 = hud_element_create(&HES_Item_Hammer3);
-                            hud_element_set_flags(D_8029F642, 0x80);
+                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
                             break;
                         case 76:
                             D_8029F642 = hud_element_create(&HES_Item_Boots1);
-                            hud_element_set_flags(D_8029F642, 0x80);
+                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
                             break;
                         case 77:
                             D_8029F642 = hud_element_create(&HES_Item_Boots2);
-                            hud_element_set_flags(D_8029F642, 0x80);
+                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
                             break;
                         case 78:
                             D_8029F642 = hud_element_create(&HES_Item_Boots3);
-                            hud_element_set_flags(D_8029F642, 0x80);
+                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
                             break;
                         case 79:
                             D_8029F642 = hud_element_create(&HES_Item_Items);
-                            hud_element_set_flags(D_8029F642, 0x80);
+                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAGS_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
                             break;
                     }
@@ -2538,7 +2534,7 @@ void func_80251474(Actor* actor) {
             s32 f1 = (part->size.x + (part->size.x / 4)) * actor->scalingFactor;
             s32 f2 = (part->size.y - 2) * actor->scalingFactor;
 
-            if (actor->flags & 0x8000) {
+            if (actor->flags & ACTOR_FLAG_8000) {
                 y -= actor->size.y / 2;
             }
 

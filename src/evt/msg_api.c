@@ -1,5 +1,8 @@
 #include "common.h"
 
+extern s32 D_802DAE50;
+extern s32 D_802DAE54;
+
 ApiStatus _show_message(Evt* script, s32 isInitialCall, s32 arg2);
 
 ApiStatus SpeakToPlayer(Evt* script, s32 isInitialCall) {
@@ -17,10 +20,6 @@ ApiStatus ContinueSpeech(Evt* script, s32 isInitialCall) {
 ApiStatus SpeakToNpc(Evt* script, s32 isInitialCall) {
     return _show_message(script, isInitialCall, 3);
 }
-
-//INCLUDE_ASM(ApiStatus, "evt/msg_api", _show_message, Evt* script, s32 isInitialCall, s32 arg2);
-extern s32 D_802DAE50;
-extern s32 D_802DAE54;
 
 s32 _show_message(Evt* script, s32 isInitialCall, s32 arg2) {
     PlayerStatus* playerStatus = &gPlayerStatus;
