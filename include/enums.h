@@ -748,6 +748,7 @@ enum SoundIDs {
     SOUND_BOMB_BLAST                = 0x00002076,
     SOUND_JUMP_2081                 = 0x00002081,
     SOUND_JUMP_8BIT_MARIO           = 0x00002082,
+    SOUND_2085                      = 0x00002085,
     SOUND_2086                      = 0x00002086,
     SOUND_208C                      = 0x0000208C,
     SOUND_208D                      = 0x0000208D,

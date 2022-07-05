@@ -12085,10 +12085,10 @@ segments:
     vram: 0x802BAE00
     overlay: True
     subsegments:
-    - [0xE2F750, c, E2F750]
-    - [0xE307C0, c, E307C0]
-    - [0xE31380, .data, E2F750]
-    - [0xE313F0, data, E31380]
+    - [0xE2F750, c, Tweester]
+    - [0xE307C0, c, StarBoxLauncher]
+    - [0xE31380, .data, Tweester]
+    - [0xE313F0, .data, StarBoxLauncher]
     - [0xE314C0]
   - name: entity_model_Hammer1Block
     dir: entity/model
@@ -12530,7 +12530,27 @@ segments:
       - [0xE53468, ci4, WoodenCrate_img2, 64, 64]
       - [0xE53C68, palette, WoodenCrate_img2]
       - [0xE53C88]
-  - [0xE55A40, bin] # unk data
+  - name: entity_model_StarBoxLauncher
+    dir: entity/model
+    type: code
+    start: 0xE55A40
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE55A40, c, StarBoxLauncher]
+    - start: 0xE55A40
+      type: .data
+      name: StarBoxLauncher
+      subsegments:
+      - [0xE55A40]
+      - [0xE55CD0, rgba16, StarBoxLauncher_link, 16, 16]
+      - [0xE55ED0]
+      - [0xE55F48, ci4, StarBoxLauncher_face, 128, 32]
+      - [0xE56748, palette, StarBoxLauncher_face]
+      - [0xE56768]
+      - [0xE56810, ci4, StarBoxLauncher_box, 16, 32]
+      - [0xE56910, palette, StarBoxLauncher_box]
+      - [0xE56930]
   - name: entity_model_HiddenPanel
     dir: entity/model
     type: code

@@ -672,6 +672,22 @@ typedef struct TweesterData {
     /* 0xBC */ char unk_BC[4];
 } TweesterData; // size = 0xC0;
 
+typedef struct StarBoxLauncherData {
+    /* 0x00 */ s8 state;
+    /* 0x01 */ s8 timer;
+    /* 0x02 */ s8 flags;
+    /* 0x03 */ s8 faceDataIndex;
+    /* 0x04 */ s8 faceAnimTimer;
+    /* 0x05 */ s8 faceTexOffset;
+    /* 0x08 */ f32 basePosX;
+    /* 0x0C */ f32 basePosZ;
+    /* 0x10 */ f32 basePosY;
+    /* 0x14 */ f32 riseSpeedPhase;
+    /* 0x18 */ f32 riseVelocity;
+    /* 0x1C */ f32 rotationZPhase;
+    /* 0x20 */ f32 maxRotationZ;
+} StarBoxLauncherData; // size = 0x24
+
 // END ENTITY-SPECIFIC STRUCTS
 
 typedef s32 (*EntityCallback)(struct Entity*);
@@ -738,6 +754,7 @@ typedef struct Entity {
         BoardedFloorData* boardedFloor;
         BombableRockData* bombableRock;
         TweesterData* tweester;
+        StarBoxLauncherData* starBoxLauncher;
         s32* unk;
     } dataBuf;
     /* 0x44 */ Vec3s* vertexData;
