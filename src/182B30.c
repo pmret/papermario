@@ -1909,7 +1909,7 @@ void func_8025CEC8(ActorPart* actor) {
     
     if (!(actor->flags & 2)) {
         decorationTable = actor->decorationTable;
-        for (i = 0; i < 2; i++) {
+        for (i = 0; i < ARRAY_COUNT(decorationTable->decorationType); i++) {
             switch (decorationTable->decorationType[i]) {
                 case 0:
                     func_8025D150(actor, i);
