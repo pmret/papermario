@@ -1903,49 +1903,49 @@ void func_8025CD28(s32 arg0, ActorPart* arg1) {
 
 INCLUDE_ASM(s32, "182B30", func_8025CD40);
 
-void func_8025CEC8(ActorPart* actor) {
+void func_8025CEC8(ActorPart* actorPart) {
     DecorationTable* decorationTable;
     s32 i;
     
-    if (!(actor->flags & 2)) {
-        decorationTable = actor->decorationTable;
+    if (!(actorPart->flags & 2)) {
+        decorationTable = actorPart->decorationTable;
         for (i = 0; i < ARRAY_COUNT(decorationTable->decorationType); i++) {
             switch (decorationTable->decorationType[i]) {
                 case 0:
-                    func_8025D150(actor, i);
+                    func_8025D150(actorPart, i);
                     break;
                 case 1:
-                    func_8025D160(actor, i);
+                    func_8025D160(actorPart, i);
                     break;
                 case 2:
-                    func_8025D2B0(actor, i);
+                    func_8025D2B0(actorPart, i);
                     break;
                 case 3:
-                    func_8025D3CC(actor, i);
+                    func_8025D3CC(actorPart, i);
                     break;
                 case 4:
-                    func_8025D4C8(actor, i);
+                    func_8025D4C8(actorPart, i);
                     break;
                 case 5:
-                    func_8025D640(actor, i);
+                    func_8025D640(actorPart, i);
                     break;
                 case 6:
-                    func_8025D71C(actor, i);
+                    func_8025D71C(actorPart, i);
                     break;
                 case 7:
-                    func_8025D830(actor, i);
+                    func_8025D830(actorPart, i);
                     break;
                 case 8:
-                    func_8025D90C(actor, i);
+                    func_8025D90C(actorPart, i);
                     break;
                 case 9:
-                    func_8025DA68(actor, i);
+                    func_8025DA68(actorPart, i);
                     break;
                 case 10:
-                    func_8025DBD0(actor, i);
+                    func_8025DBD0(actorPart, i);
                     break;
                 case 11:
-                    func_8025DD60(actor, i);
+                    func_8025DD60(actorPart, i);
                     break;
             }
         }
