@@ -20,6 +20,19 @@ void func_8025995C(ActorPart*, s32, Matrix4f);
 void func_8025C918(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx);
 void func_8025CD40(s32, ActorPart*);
 
+void func_8025D150(ActorPart*, s32);
+void func_8025D160(ActorPart*, s32);
+void func_8025D2B0(ActorPart*, s32);
+void func_8025D3CC(ActorPart*, s32);
+void func_8025D4C8(ActorPart*, s32);
+void func_8025D640(ActorPart*, s32);
+void func_8025D71C(ActorPart*, s32);
+void func_8025D830(ActorPart*, s32);
+void func_8025D90C(ActorPart*, s32);
+void func_8025DA68(ActorPart*, s32);
+void func_8025DBD0(ActorPart*, s32);
+void func_8025DD60(ActorPart*, s32);
+
 void func_80259A48(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4);
 void func_80259AAC(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4);
 void func_80259D9C(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4);
@@ -1998,7 +2011,7 @@ void _remove_part_decoration(ActorPart* part, s32 decorationIndex) {
     decorationTable->decorationType[decorationIndex] = 0;
 }
 
-void func_8025D150(void) {
+void func_8025D150(ActorPart* actorPart, s32 i) {
 }
 
 void func_8025D158(ActorPart* part, s32 decorationIndex) {
