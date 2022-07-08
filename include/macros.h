@@ -64,6 +64,11 @@
 #define SCREEN_WIDTH 320
 #define SCREEN_HEIGHT 240
 
+// Size of tmem in bytes (4kB)
+#define TMEM_SIZE 0x1000
+// Height of tiles to use when copying fullscreen images (6)
+#define SCREEN_COPY_TILE_HEIGHT ((TMEM_SIZE) / ((SCREEN_WIDTH) * (2)))
+
 // Alternative to libultra's M_PI: non-float version; more digits cause issues
 #define PI      3.141592f
 #define PI_D    3.141592
@@ -80,6 +85,7 @@
 #define COLLISION_ONLY_ENTITIES 0x100000
 
 #define PACK_FILL_COLOR(r, g, b, a) (GPACK_RGBA5551(r, g, b, a) << 0x10) | GPACK_RGBA5551(r, g, b, a)
+#define PACK_FILL_DEPTH(z,dz) (GPACK_ZDZ(z, dz) << 0x10) | GPACK_ZDZ(z, dz)
 
 #define SQ(x) ((x)*(x))
 #define CUBE(x) (x*x*x)

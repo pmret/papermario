@@ -20,7 +20,7 @@ s32 D_800741A8[] = { 0x00010000, 0x00000000, 0x00000001, 0x00000000, 0x00000000,
 u16 gMatrixListPos = 0;
 u16 D_800741F2 = 0;
 s32 gCurrentDisplayContextIndex = 0;
-s32 D_800741F8 = 0;
+s32 gPauseBackgroundFade = 0;
 s32 D_800741FC = 0;
 s32 D_80074200[] = { 0x028001E0, 0x01FF0000, 0x028001E0, 0x01FF0000 };
 
@@ -430,6 +430,12 @@ void func_80027BAC(s32 arg0, s32 arg1) {
     }
 }
 
+// Logic for the drawing the scene background. In normal operation, it draws the regular background.
+// While opening pause menu, it does the following:
+//  * Extracts coverage from the current framebuffer and saves it to nuGfxCfb[1] on the first frame.
+//  * Copies the current framebuffer to the depth buffer to save it and applies a filter on the
+//    saved framebuffer based on the saved coverage values one frame later.
+//  * Draws the saved framebuffer to the current framebuffer while the pause screen is opened, fading it in over time.
 void gfx_draw_background(void) {
     Camera* camera;
     s32 bgFlags;
@@ -439,7 +445,7 @@ void gfx_draw_background(void) {
     s32 backgroundMaxY;
     s32 viewportStartX;
     s32 i;
-    s32 a = 0x18;
+    s32 a = SCREEN_COPY_TILE_HEIGHT << 2;
 
     gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 
@@ -448,11 +454,12 @@ void gfx_draw_background(void) {
 
     switch (bgFlags) {
         case 0x10:
+            // Save coverage to nunGfxCfb[1] using the VISCVG render mode
             gDPPipeSync(gMasterGfxPos++);
             gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, nuGfxCfb[1]);
             gDPSetCycleType(gMasterGfxPos++, G_CYC_1CYCLE);
             gDPSetBlendColor(gMasterGfxPos++, 0x80, 0x80, 0x80, 0xFF);
-            gDPSetPrimDepth(gMasterGfxPos++, -1, -1);
+            gDPSetPrimDepth(gMasterGfxPos++, 0xFFFF, 0xFFFF);
             gDPSetDepthSource(gMasterGfxPos++, G_ZS_PRIM);
             gDPSetRenderMode(gMasterGfxPos++, G_RM_VISCVG, G_RM_VISCVG2);
             gDPFillRectangle(gMasterGfxPos++, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -462,15 +469,17 @@ void gfx_draw_background(void) {
             gGameStatusPtr->backgroundFlags |= 0x20;
             break;
         case 0x20:
+            // Save the framebuffer into the depth buffer and run a filter on it based on the saved coverage values
             gfx_transfer_frame_to_depth(nuGfxCfb[0], nuGfxCfb[1], nuGfxZBuffer); // applies filters to the framebuffer
-            D_800741F8 = 0;
+            gPauseBackgroundFade = 0;
             gGameStatusPtr->backgroundFlags &= ~0xF0;
             gGameStatusPtr->backgroundFlags |= 0x30;
             // fall through
         case 0x30:
-            D_800741F8 += 0x10;
-            if (D_800741F8 > 0x80) {
-                D_800741F8 = 0x80;
+            // Draw the saved framebuffer to the background, fading in at a rate of 0x10 opacity per frame until reaching 0x80 opacity
+            gPauseBackgroundFade += 0x10;
+            if (gPauseBackgroundFade > 0x80) {
+                gPauseBackgroundFade = 0x80;
             }
 
             gDPPipeSync(gMasterGfxPos++);
@@ -478,37 +487,48 @@ void gfx_draw_background(void) {
             gDPSetCycleType(gMasterGfxPos++, G_CYC_FILL);
             gDPSetRenderMode(gMasterGfxPos++, G_RM_NOOP, G_RM_NOOP2);
             gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, nuGfxCfb_ptr);
-            gDPSetFillColor(gMasterGfxPos++, 0x00010001);
+            gDPSetFillColor(gMasterGfxPos++, PACK_FILL_COLOR(0, 0, 0, 1));
             gDPFillRectangle(gMasterGfxPos++, 0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1);
             gDPSetCycleType(gMasterGfxPos++, G_CYC_1CYCLE);
             gDPSetTexturePersp(gMasterGfxPos++, G_TP_NONE);
             gDPSetTextureLUT(gMasterGfxPos++, G_TT_NONE);
             gDPSetRenderMode(gMasterGfxPos++, G_RM_OPA_SURF, G_RM_OPA_SURF2);
+            // @bug In 1-cycle mode, the two combiner cycles should be identical. Using Texel1 here in the second cycle,
+            // which is the actual cycle of the combiner used on hardware in 1-cycle mode, actually samples the next
+            // pixel's texel value instead of the current pixel's. This results in a one-pixel offset.
             gDPSetCombineLERP(gMasterGfxPos++, PRIMITIVE, TEXEL0, PRIMITIVE_ALPHA, TEXEL0, 0, 0, 0, 1, PRIMITIVE,
                               TEXEL1, PRIMITIVE_ALPHA, TEXEL1, 0, 0, 0, 1);
-            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0x28, 0x28, 0x28, D_800741F8);
+            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0x28, 0x28, 0x28, gPauseBackgroundFade);
             gDPSetTextureFilter(gMasterGfxPos++, G_TF_POINT);
 
             for (i = 0; i < 40; i++) {
-                gDPLoadTextureTile(gMasterGfxPos++, nuGfxZBuffer + (i * 0x780), G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH,
-                                   SCREEN_HEIGHT, 0, 0, SCREEN_WIDTH - 1, 5, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                gDPLoadTextureTile(gMasterGfxPos++, nuGfxZBuffer + (i * SCREEN_WIDTH * SCREEN_COPY_TILE_HEIGHT), G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH,
+                                   SCREEN_HEIGHT, 0, 0, SCREEN_WIDTH - 1, SCREEN_COPY_TILE_HEIGHT - 1, 0, G_TX_NOMIRROR | G_TX_WRAP,
                                    G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
-                gSPTextureRectangle(gMasterGfxPos++, 0, i * a, 0x0500, a + (i * 0x18), G_TX_RENDERTILE,
-                                    -0x0020, 0, 0x0400, 0x0400);
+                // @bug Due to the previous issue with the incorrect second cycle combiner, the devs added a 1-pixel offset to texture coordinates
+                // in this texrect to compensate for the combiner error.
+                gSPTextureRectangle(gMasterGfxPos++,
+                                    // ulx, uly, lrx, lry
+                                    0 << 2, i * a, SCREEN_WIDTH << 2, a + (i * (SCREEN_COPY_TILE_HEIGHT << 2)),
+                                    // tile
+                                    G_TX_RENDERTILE,
+                                    // s, t, dsdx, dtdy
+                                    -1 << 5, 0 << 5, 1 << 10, 1 << 10);
                 gDPPipeSync(gMasterGfxPos++);
             }
             break;
         default:
+            // Draw the scene's background as normal
             if (gOverrideFlags & GLOBAL_OVERRIDES_8) {
                 gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, osVirtualToPhysical(nuGfxCfb_ptr));
                 return;
             }
 
-            gDPSetDepthImage(gMasterGfxPos++, OS_PHYSICAL_TO_K0(nuGfxZBuffer)); // TODO: or OS_K0_TO_PHYSICAL
+            gDPSetDepthImage(gMasterGfxPos++, OS_K0_TO_PHYSICAL(nuGfxZBuffer));
             gDPSetCycleType(gMasterGfxPos++, G_CYC_FILL);
             gDPSetRenderMode(gMasterGfxPos++, G_RM_NOOP, G_RM_NOOP2);
-            gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, OS_PHYSICAL_TO_K0(nuGfxZBuffer));
-            gDPSetFillColor(gMasterGfxPos++, 0xFFFCFFFC);
+            gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, OS_K0_TO_PHYSICAL(nuGfxZBuffer));
+            gDPSetFillColor(gMasterGfxPos++, PACK_FILL_DEPTH(G_MAXFBZ, 0));
             gDPFillRectangle(gMasterGfxPos++, 0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1);
             gDPPipeSync(gMasterGfxPos++);
             gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, osVirtualToPhysical(nuGfxCfb_ptr));
@@ -577,7 +597,7 @@ void gfx_draw_background(void) {
             gDPPipeSync(gMasterGfxPos++);
             gDPSetCycleType(gMasterGfxPos++, G_CYC_FILL);
             gDPSetRenderMode(gMasterGfxPos++, G_RM_NOOP, G_RM_NOOP2);
-            gDPSetFillColor(gMasterGfxPos++, 0x00010001);
+            gDPSetFillColor(gMasterGfxPos++, PACK_FILL_COLOR(0, 0, 0, 1));
             gDPPipeSync(gMasterGfxPos++);
 
             if (backgroundMinY > 0) {
