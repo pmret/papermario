@@ -322,7 +322,7 @@ typedef struct Trigger {
     /*      */     f32 varTableF[3];
     /*      */     void* varTablePtr[3];
     /*      */ };
-    /* 0x28 */ s32 itemList;
+    /* 0x28 */ s32* itemList;
     /* 0x2C */ s32 unk_tr_2C; // related to Goombario somehow, custom tattle perhaps?
     /* 0x30 */ u8 hasPlayerInteractPrompt;
     /* 0x31 */ char unk_31[3];
@@ -1744,7 +1744,7 @@ typedef struct DecorationTable {
     /* 0x6CD */ s8 numPalettes;
     /* 0x6CE */ char unk_6CE[2];
     /* 0x6D0 */ u16** palettes;
-    /* 0x6D4 */ u16* unk_6D4[27];
+    /* 0x6D4 */ s16* unk_6D4[27];
     /* 0x740 */ s16 unk_740;
     /* 0x742 */ s16 unk_742;
     /* 0x744 */ s16 unk_744;
@@ -1763,8 +1763,8 @@ typedef struct DecorationTable {
     /* 0x767 */ s8 unk_767;
     /* 0x768 */ u8 unk_768;
     /* 0x769 */ char unk_769[3];
-    /* 0x76C */ s16 unk_76C[16];
-    /* 0x78C */ char unk_78C[76];
+    /* 0x76C */ s16* unk_76C[16];
+    /* 0x78C */ char unk_7AC[0x2C];
     /* 0x7D8 */ s8 unk_7D8;
     /* 0x7D9 */ s8 unk_7D9;
     /* 0x7DA */ char unk_7DA;
@@ -2388,11 +2388,11 @@ typedef struct Message {
     /* 0x3C */ f32 unk_3C;
     /* 0x40 */ f32 unk_40;
     /* 0x44 */ s32 unk_44;
-    /* 0x48 */ char unk_48[0x4];
+    /* 0x48 */ f32 unk_48;
 } Message; // size = 0x4C
 
 struct PopupMessage;
-typedef void (*PopupMessageCallback)(struct PopupMessage* popup);
+typedef void (*PopupMessageCallback)(void* popup);
 typedef struct PopupMessage {
     /* 0x00 */ s32 unk_00;
     /* 0x04 */ PopupMessageCallback updateFunc;
@@ -2461,7 +2461,7 @@ typedef struct FoldImageRecPart {
     /* 0x0A */ u16 height;
     /* 0x0C */ s16 xOffset;
     /* 0x0E */ s16 yOffset;
-    /* 0x10 */ u8 unk_10; // alpha?
+    /* 0x10 */ u8 opacity; // alpha?
     /* 0x11 */ char unk_11[0x7];
 } FoldImageRecPart; // size = 0x18
 

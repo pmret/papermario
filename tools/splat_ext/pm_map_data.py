@@ -1,3 +1,5 @@
+import os
+from pathlib import Path
 from segtypes.n64.segment import N64Segment
 from segtypes.n64.ia8 import N64SegIa8
 from segtypes.n64.rgba32 import N64SegRgba32
@@ -7,6 +9,9 @@ from util.color import unpack_color
 from util.iter import iter_in_groups
 from util import options
 import png
+import yaml as yaml_loader
+
+script_dir = Path(os.path.dirname(os.path.realpath(__file__)))
 
 def decode_null_terminated_ascii(data):
     length = 0
@@ -70,7 +75,8 @@ class N64SegPm_map_data(N64Segment):
             yaml=yaml,
         )
 
-        self.files = yaml["files"]
+        with open(script_dir / "map_data.yaml") as f:
+            self.files = yaml_loader.load(f.read(), Loader=yaml_loader.SafeLoader)
 
     def split(self, rom_bytes):
         fs_dir = options.get_asset_path() / self.dir / self.name

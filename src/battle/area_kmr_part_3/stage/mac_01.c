@@ -3,18 +3,17 @@
 
 #define NAMESPACE b_area_kmr_part_3_mac_01
 
-ApiStatus func_80219D60_4491A0(Evt* script, s32 isInitialCall);
-INCLUDE_ASM(s32, "battle/area_kmr_part_3/448E80", func_80219D60_4491A0);
+#include "common/UnkFloatFunc005.inc.c"
 
 EvtScript N(80233AF0) = {
     EVT_SET(LW(10), LW(0))
     EVT_LABEL(0)
-    EVT_CALL(func_80219D60_4491A0, 0)
+    EVT_CALL(N(UnkFloatFunc005), 0)
     EVT_CALL(TranslateModel, LW(10), LW(0), LW(1), LW(2))
     EVT_CALL(RotateModel, LW(10), -20, 0, 0, 1)
     EVT_WAIT_FRAMES(1)
     EVT_LOOP(0)
-        EVT_CALL(func_80219D60_4491A0, 1)
+        EVT_CALL(N(UnkFloatFunc005), 1)
         EVT_CALL(TranslateModel, LW(10), LW(0), LW(1), LW(2))
         EVT_CALL(RotateModel, LW(10), -20, 0, 0, 1)
         EVT_WAIT_FRAMES(1)
@@ -35,7 +34,7 @@ EvtScript N(80233AF0) = {
     EVT_CALL(RotateModel, LW(10), -20, 0, 0, 1)
     EVT_WAIT_FRAMES(5)
     EVT_LOOP(0)
-        EVT_CALL(func_80219D60_4491A0, 2)
+        EVT_CALL(N(UnkFloatFunc005), 2)
         EVT_CALL(TranslateModel, LW(10), LW(0), LW(1), LW(2))
         EVT_CALL(RotateModel, LW(10), -20, 0, 0, 1)
         EVT_WAIT_FRAMES(1)
@@ -54,12 +53,12 @@ EvtScript N(80233AF0) = {
     EVT_IF_NE(LW(0), 0)
         EVT_GOTO(0)
     EVT_END_IF
-    EVT_CALL(func_80219D60_4491A0, 3)
+    EVT_CALL(N(UnkFloatFunc005), 3)
     EVT_CALL(TranslateModel, LW(10), LW(0), LW(1), LW(2))
     EVT_CALL(RotateModel, LW(10), -20, 0, 0, 1)
     EVT_WAIT_FRAMES(1)
     EVT_LOOP(0)
-        EVT_CALL(func_80219D60_4491A0, 1)
+        EVT_CALL(N(UnkFloatFunc005), 1)
         EVT_CALL(TranslateModel, LW(10), LW(0), LW(1), LW(2))
         EVT_CALL(RotateModel, LW(10), -20, 0, 0, 1)
         EVT_WAIT_FRAMES(1)
@@ -80,7 +79,7 @@ EvtScript N(80233AF0) = {
     EVT_CALL(RotateModel, LW(10), -20, 0, 0, 1)
     EVT_WAIT_FRAMES(5)
     EVT_LOOP(0)
-        EVT_CALL(func_80219D60_4491A0, 2)
+        EVT_CALL(N(UnkFloatFunc005), 2)
         EVT_CALL(TranslateModel, LW(10), LW(0), LW(1), LW(2))
         EVT_CALL(RotateModel, LW(10), -20, 0, 0, 1)
         EVT_WAIT_FRAMES(1)

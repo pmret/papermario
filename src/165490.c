@@ -6,7 +6,7 @@
 
 extern HudScript* filemenu_hudElemScripts[14];
 extern MenuWindowBP filemenu_windowBPs[14];
-
+extern WindowStyleCustom D_8024BDA8[];
 extern s8 D_8024C090;
 
 void filemenu_draw_contents_title(
@@ -799,7 +799,56 @@ void filemenu_main_handle_input(MenuPanel* menu) {
     }
 }
 
-INCLUDE_ASM(s32, "165490", filemenu_main_update);
+void filemenu_main_update(MenuPanel* menu) {
+    gWindowStyles[56].customStyle = &D_8024BDA8[0];
+    gWindowStyles[57].customStyle = &D_8024BDA8[0];
+    gWindowStyles[58].customStyle = &D_8024BDA8[0];
+    gWindowStyles[59].customStyle = &D_8024BDA8[0];
+    gWindowStyles[60].customStyle = &D_8024BDA8[2];
+    gWindowStyles[61].customStyle = &D_8024BDA8[2];
+    gWindowStyles[62].customStyle = &D_8024BDA8[2];
+    gWindowStyles[63].customStyle = &D_8024BDA8[2];
+
+    switch (menu->selected) {
+        case 0:
+            gWindowStyles[56].customStyle = &D_8024BDA8[1];
+            gWindowStyles[60].customStyle = &D_8024BDA8[3];
+            break;
+        case 1:
+            gWindowStyles[57].customStyle = &D_8024BDA8[1];
+            gWindowStyles[61].customStyle = &D_8024BDA8[3];
+            break;
+        case 2:
+            gWindowStyles[58].customStyle = &D_8024BDA8[1];
+            gWindowStyles[62].customStyle = &D_8024BDA8[3];
+            break;
+        case 3:
+            gWindowStyles[59].customStyle = &D_8024BDA8[1];
+            gWindowStyles[63].customStyle = &D_8024BDA8[3];
+            break;
+    }
+
+    if (filemenu_menus[0]->page == 4) {
+        switch (filemenu_loadedFileIdx) {
+            case 0:
+                gWindowStyles[56].customStyle = &D_8024BDA8[1];
+                gWindowStyles[60].customStyle = &D_8024BDA8[3];
+                return;
+            case 1:
+                gWindowStyles[57].customStyle = &D_8024BDA8[1];
+                gWindowStyles[61].customStyle = &D_8024BDA8[3];
+                return;
+            case 2:
+                gWindowStyles[58].customStyle = &D_8024BDA8[1];
+                gWindowStyles[62].customStyle = &D_8024BDA8[3];
+                return;
+            case 3:
+                gWindowStyles[59].customStyle = &D_8024BDA8[1];
+                gWindowStyles[63].customStyle = &D_8024BDA8[3];
+                return;
+        }
+    }
+}
 
 void filemenu_main_cleanup(void) {
     s32 i;

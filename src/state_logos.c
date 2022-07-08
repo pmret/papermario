@@ -96,7 +96,7 @@ void state_init_logos(void) {
     clear_effect_data();
     gOverrideFlags |= GLOBAL_OVERRIDES_DISABLE_RENDER_WORLD;
     intro_logos_update_fade();
-    gGameStatusPtr->backgroundFlags = FALSE;
+    gGameStatusPtr->backgroundFlags = 0;
 }
 
 void state_step_logos(void) {

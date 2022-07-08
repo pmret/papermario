@@ -110,12 +110,12 @@ extern HudScript HES_Peril;
 extern HudScript HES_Danger;
 
 
-void update_merlee_message(PopupMessage* popup);
-void draw_merlee_message(PopupMessage* popup);
+void update_merlee_message(void* popup);
+void draw_merlee_message(void* popup);
 void func_80045BC8(void);
 void init_all_status_icons(void);
-void update_all_status_icons(PopupMessage* popup);
-void draw_all_status_icons(PopupMessage* popup);
+void update_all_status_icons(void* popup);
+void draw_all_status_icons(void* popup);
 
 void func_80045AC0(void) {
     s32 i;
@@ -213,7 +213,8 @@ void show_merlee_message(s16 messageIndex, s16 duration) {
     }
 }
 
-void update_merlee_message(PopupMessage* popup) {
+void update_merlee_message(void* data) {
+    PopupMessage* popup = data;
     s32 closeMessage = FALSE;
 
     switch (popup->unk_16) {
@@ -259,7 +260,8 @@ void draw_merlee_message_string(PopupMessage* popup, s32 posX, s32 posY) {
     draw_msg(messageID, posX, posY, 255, 15, 0);
 }
 
-void draw_merlee_message(PopupMessage* popup) {
+void draw_merlee_message(void* data) {
+    PopupMessage* popup = data;
     s32 messageID;
     s32 xPos;
     s32 width;
@@ -284,10 +286,10 @@ void init_all_status_icons(void) {
     PopupMessage* popup = get_current_merlee_message();
 
     if (popup != NULL) {
-        popup->updateFunc = &update_all_status_icons;
+        popup->updateFunc = update_all_status_icons;
         popup->unk_00 = 0;
         popup->unk_08 = NULL;
-        popup->drawFunc = &draw_all_status_icons;
+        popup->drawFunc = draw_all_status_icons;
         popup->message = general_heap_malloc(64 * sizeof(HudStatusIcon));
         icons = D_800A0F44 = (HudStatusIcon*)(popup->message);
         ASSERT(icons != NULL);
@@ -297,7 +299,8 @@ void init_all_status_icons(void) {
     }
 }
 
-void update_all_status_icons(PopupMessage* popup) {
+void update_all_status_icons(void* data) {
+    PopupMessage* popup = data;
     HudStatusIcon* icon;
     int i;
     s32 elementID;
@@ -525,7 +528,8 @@ void update_all_status_icons(PopupMessage* popup) {
     }
 }
 
-void draw_all_status_icons(PopupMessage* popup) {
+void draw_all_status_icons(void* data) {
+    PopupMessage* popup = data;
     HudStatusIcon* icon;
     s32 elementId;
     f32 x, y, z;

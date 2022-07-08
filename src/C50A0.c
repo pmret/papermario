@@ -244,7 +244,7 @@ void draw_coin_sparkles(ItemEntity* itemEntity) {
     foldImage.height = itemEntity->sparkleHeight;
     foldImage.xOffset = -itemEntity->sparkleWidth / 2;
     foldImage.yOffset = itemEntity->sparkleHeight / 2;
-    foldImage.unk_10 = 255;
+    foldImage.opacity = 255;
     fold_appendGfx_component(0, &foldImage, 0, spD8);
 
     gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);

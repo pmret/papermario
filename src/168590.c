@@ -127,6 +127,7 @@ void filemenu_draw_contents_file_create_header(MenuPanel* menu, s32 baseX, s32 b
     }
 }
 
+void filemenu_draw_contents_choose_name(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
 INCLUDE_ASM(s32, "168590", filemenu_draw_contents_choose_name);
 
 void filemenu_choose_name_init(MenuPanel* menu) {

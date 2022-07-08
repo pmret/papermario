@@ -601,7 +601,7 @@ s32 fold_appendGfx_component(s32 idx, FoldImageRecPart* image, u32 flagBits, Mat
     FoldState* state = &(*D_80156954)[idx];
     s32 ret = 0;
 
-    if (image->unk_10 == 0) {
+    if (image->opacity == 0) {
         return 0;
     }
 
@@ -615,7 +615,7 @@ s32 fold_appendGfx_component(s32 idx, FoldImageRecPart* image, u32 flagBits, Mat
     fold_currentImage->yOffset =  image->yOffset;
     fold_currentImage->unk_18 = 0;
     fold_currentImage->unk_1E = 0;
-    fold_currentImage->alphaMultiplier = image->unk_10;
+    fold_currentImage->alphaMultiplier = image->opacity;
 
     if ((u32)idx >= 90) {
         return 0;
