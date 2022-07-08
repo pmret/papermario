@@ -1243,7 +1243,7 @@ void func_8004EC68(BGMPlayer *player) {
                                     }
                                     voice->unk_18 = track->unk_10[1];
                                 }
-                                voice->ins = note->ins;
+                                voice->instrument = note->ins;
                                 voice->pitchRatio = note->pitchRatio;
                                 voice->reverbType = track->subtrackReverbType;
                                 if (note->noteLength >= 2) {

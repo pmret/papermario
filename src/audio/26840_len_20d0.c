@@ -575,7 +575,7 @@ void func_8004C578(SoundManager* manager, SoundPlayer* player, AlUnkVoice* arg2,
                 arg2->unk_40 = snd_get_scaled_volume(manager, player);
                 arg2->unk_14 = player->unk10;
                 arg2->unk_18 = player->unk14;
-                arg2->ins = player->sfxInstrumentRef;
+                arg2->instrument = player->sfxInstrumentRef;
                 arg2->pitchRatio = player->actualSampleRate;
                 arg2->unk_flags_43 = 2;
                 arg2->unk_45 = manager->unk_BC;
@@ -692,7 +692,7 @@ void func_8004C884(SoundManager* manager, SoundPlayer* player, AlUnkVoice* arg2,
                 }
                 arg2->unk_14 = (u8*) var_v0_3;
                 arg2->unk_18 = (s32*) player->unk14;
-                arg2->ins = (s32) player->sfxInstrumentRef;
+                arg2->instrument = (s32) player->sfxInstrumentRef;
                 arg2->reverbType = manager->unk_BE;
                 
                 arg2->unk_45 = manager->unk_BC;
@@ -856,7 +856,7 @@ void snd_SEFCmd_04(SoundManager* manager, SoundPlayer* player) {
     temp_a0 = player->sfxInstrumentRef;
     
     player->sfxInstrument.wavOffset = temp_a0->wavOffset;
-    player->sfxInstrument.wavLength = temp_a0->wavLength;
+    player->sfxInstrument.wavDataLength = temp_a0->wavDataLength;
     player->sfxInstrument.loopPredictorOffset = temp_a0->loopPredictorOffset;
     player->sfxInstrument.loopStart = temp_a0->loopStart;
     player->sfxInstrument.loopEnd = temp_a0->loopEnd;

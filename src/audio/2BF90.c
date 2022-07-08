@@ -5,16 +5,16 @@ extern s32 D_80078520;
 void func_800538C4(AlUnkVoice*, u8);
 
 void func_80050B90(AmbientSoundManager* arg0, s8 arg1, s8 arg2, SndGlobals* arg3) {
-    AlUnkLambda* temp_v0;
+    AlUnkLambda* lambda;
     s32 i;
 
     snd_memset(arg0, sizeof(*arg0), 0);
 
     for (i = 0; i < ARRAY_COUNT(arg0->unk_24); i++) {
-        temp_v0 = &arg0->unk_24[i];
-        temp_v0->unk_14 = i;
-        temp_v0->unk_18 = 1;
-        temp_v0->unk_38 = 0x7F000000;
+        lambda = &arg0->unk_24[i];
+        lambda->unk_14.u8[0] = i;
+        lambda->unk_18 = 1;
+        lambda->unk_38 = 0x7F000000;
     }
 
     arg0->unk_00 = arg3;
@@ -22,7 +22,7 @@ void func_80050B90(AmbientSoundManager* arg0, s8 arg1, s8 arg2, SndGlobals* arg3
     arg0->nextUpdateCounter = 2;
     arg0->nextUpdateInterval = 2;
     arg0->unk_22 = arg1;
-    arg0->unk_23 = arg2;
+    arg0->defaultReverbType = arg2;
 }
 
 
@@ -84,8 +84,8 @@ void func_80050D50(AlUnkLambda* arg0) {
     if (temp_a1 >= SND_MIN_DURATION && temp_a1 <= SND_MAX_DURATION) {
         arg0->unk_38 = arg0->unk_2A << 0x18;
         arg0->unk_42 = arg0->volume;
-        arg0->unk_40 = (u32)(temp_a1 * 10) / 115;
-        arg0->unk_3C = ((arg0->volume - arg0->unk_2A) << 0x18) / (arg0->unk_40 & 0xFFFF);
+        arg0->unk_lam_40 = (u32)(temp_a1 * 10) / 115;
+        arg0->unk_3C = ((arg0->volume - arg0->unk_2A) << 0x18) / ((s16)arg0->unk_lam_40 & 0xFFFF);
     }
 
     arg0->time = 0;
@@ -188,7 +188,7 @@ s32 func_80051050(s32 arg0) {
 
 void func_800510A4(AmbientSoundManager* arg0, MSEQHeader* mseq, s32 index) {
     AlUnkLambda* lambda;
-    AlUnkXi* temp_v1;
+    AlUnkXi* xi;
     u8* readPos;
     s32 i;
 
@@ -197,7 +197,7 @@ void func_800510A4(AmbientSoundManager* arg0, MSEQHeader* mseq, s32 index) {
 
     lambda->unk_00 = mseq;
     readPos = (u8*)((s32)mseq + mseq->dataStart);
-    lambda->unk_14 = index;
+    lambda->unk_14.u8[0] = index;
     lambda->unk_08 = readPos;
     lambda->unk_10 = readPos;
     lambda->unk_0C = readPos;
@@ -214,10 +214,10 @@ void func_800510A4(AmbientSoundManager* arg0, MSEQHeader* mseq, s32 index) {
         lambda->unk_34 = 24;
     }
     for (i = 0; i < 10; i++) {
-        temp_v1 = &lambda->unk_44[i];
-        temp_v1->unk_00 = arg0->unk_00->defaultInstrument;
-        temp_v1->unk_18 = 0x7FFFFFFF;
-        temp_v1->unk_24 = 0x40;
+        xi = &lambda->unk_44[i];
+        xi->instrument = arg0->unk_00->defaultInstrument;
+        xi->unk_18.full = 0x7FFFFFFF;
+        xi->pan = 0x40;
 
     }
     lambda->unk_43 = 1;
@@ -315,7 +315,7 @@ void func_800521E8(AmbientSoundManager* arg0, AlUnkLambda* arg1) {
 
     for (i = arg1->unk_30; i < arg1->unk_34; i++) {
         temp_s1 = &arg0->unk_7B4[i - arg1->unk_30].unk_00;
-        if (*temp_s1->u8 == arg1->unk_14) {
+        if (*temp_s1->u8 == arg1->unk_14.u8[0]) {
             voice = &arg0->unk_00->voices[i];
             if (voice->unk_45 == arg0->unk_22) {
                 func_800538C4(voice, i);
@@ -325,28 +325,84 @@ void func_800521E8(AmbientSoundManager* arg0, AlUnkLambda* arg1) {
     }
 }
 
-void func_800522A8(AmbientSoundManager* arg0, AlUnkLambda* arg1) {
-    s32 j;
-    u32 i;
-    s8* var_a2;
-    AlUnkIota* iota;
+void func_800522A8(AmbientSoundManager* arg0, AlUnkLambda* lambda) {
+    AlUnkOmega* omega = &lambda->unk_1D4;
+    u32 k = 0;
+    s32 i;
+    
+    for (i = lambda->unk_30; i < lambda->unk_34; i++) {
+        AlUnkIota* iota = &arg0->unk_7B4[i - lambda->unk_30];
 
-    j = arg1->unk_30;
-    var_a2 = arg1->unk_1D4;
-    for (i = 0; j < arg1->unk_34; j++) {
-        iota = &arg0->unk_7B4[j - arg1->unk_30];
         if (iota->unk_07 == 0) {
             continue;
         }
-        var_a2[0] = iota->unk_00.u8[1];
-        var_a2[1] = iota->unk_00.u8[2];
-        var_a2[2] = iota->unk_06;
-        var_a2 += 4;
-        i += 1;
-        if (i >= 4) {
+
+        omega->unk_00 = iota->unk_00.u8[1];
+        omega->unk_01 = iota->unk_00.u8[2];
+        omega->unk_02 = iota->unk_06;
+
+        omega++;
+        k++;
+        if(k >= 4) {
             break;
         }
     }
 }
 
-INCLUDE_ASM(void, "audio/2BF90", func_8005232C, AmbientSoundManager* arg0, AlUnkLambda* arg1);
+void func_8005232C(AmbientSoundManager* manager, AlUnkLambda* lambda) {
+    SndGlobals* globals;
+    AlUnkVoice* voice;
+    AlUnkOmega* omega;
+    AlUnkIota* iota;
+    AlUnkXi* xi;
+    s32 i;
+    u32 var_s5;
+        
+    globals = manager->unk_00;
+    if (lambda->unk_25 == 0) {
+        for (var_s5 = 0; var_s5 < 4; var_s5++) {
+            omega = &lambda->unk_1D4[var_s5];
+            if (omega->unk_01 != 0) {
+                xi = &lambda->unk_44[omega->unk_00];
+
+                for (i = lambda->unk_30; i < lambda->unk_34; i++) {
+                    voice = &globals->voices[i];
+                    if (voice->unk_45 == 0) {
+                        break;
+                    }
+                }
+
+                if (i >= lambda->unk_34) {
+                    for (i = lambda->unk_30; i < lambda->unk_34; i++) {
+                        voice = &globals->voices[i];
+                        if (voice->unk_45 < manager->unk_22) {
+                            func_800538C4(voice, i & 0xFF);
+                            break;
+                        }
+                    }
+                }
+                
+                if (i < lambda->unk_34) {
+                    iota = &manager->unk_7B4[i - lambda->unk_30];
+                    iota->unk_00.s32 = lambda->unk_14.s32 + (omega->unk_00 << 0x10) + (omega->unk_01 << 8);
+                    iota->unk_04 = ((omega->unk_01 & 0x7F) * 100) - xi->instrument->detune;
+                    iota->unk_06 = omega->unk_02 & 0x7F;
+                    voice->unk_40 = ((lambda->unk_38 >> 0x18) * xi->unk_18.half * iota->unk_06) >> 0xE;
+                    voice->pitchRatio = snd_compute_pitch_ratio(iota->unk_04 + xi->unk_0C) * xi->instrument->pitchRatio;
+                    voice->pan = xi->pan;
+                    voice->reverb = xi->reverb;
+                    voice->instrument = xi->instrument;
+                    voice->reverbType = manager->defaultReverbType;
+                    voice->unk_14 = xi->unk_04;
+                    voice->unk_18 = xi->unk_08;
+                    voice->unk_flags_43 = 2;
+                    voice->unk_45 = manager->unk_22;
+                    voice->unk_44 = voice->unk_45;
+                }
+            }
+            omega->unk_00 = 0;
+            omega->unk_01 = 0;
+            omega->unk_02 = 0;
+        }
+    }
+}

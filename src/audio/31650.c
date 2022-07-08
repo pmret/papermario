@@ -63,33 +63,33 @@ void func_80056250(AlUnkAlpha* globals, ALConfig* config) {
 
     for (i = 0; i < config->unk_num_beta; i++) {
         AlUnkBeta* beta = &D_80078E54->al_unk_beta[i];
-        beta->unk_zeta_04 = alHeapAlloc(heap, 1, sizeof(*beta->unk_zeta_04));
-        beta->unk_zeta_08 = alHeapAlloc(heap, 1, sizeof(*beta->unk_zeta_08));
-        beta->dmaProc = ((ALDMAproc (*)(NUDMAState**))(D_80078E54->dmaNew))(&beta->dmaState);
-        beta->unk_2C = 0;
-        beta->unk_30 = 1;
-        beta->unk_34 = 0;
-        beta->unk_sigma_38 = alHeapAlloc(heap, 1, sizeof(*beta->unk_sigma_38));
-        beta->unk_40 = 0;
-        beta->unk_44 = 1;
-        beta->unk_3C = 1.0f;
-        beta->unk_eta_48 = alHeapAlloc(heap, 1, sizeof(*beta->unk_eta_48));
-        beta->unk_6C = 1;
-        beta->unk_70 = 0;
-        beta->unk_4E = 1;
-        beta->unk_5C = 1;
-        beta->unk_62 = 1;
-        beta->unk_50 = 1;
-        beta->unk_52 = 1;
-        beta->unk_54 = 0;
-        beta->unk_56 = 0;
-        beta->unk_5A = 1;
-        beta->unk_58 = 0;
-        beta->unk_60 = 1;
-        beta->unk_5E = 0;
-        beta->unk_64 = 0;
-        beta->unk_68 = 0;
-        beta->unk_4C = 64;
+        beta->sub04.unk_zeta_04 = alHeapAlloc(heap, 1, sizeof(*beta->sub04.unk_zeta_04));
+        beta->sub04.loopPredictor = alHeapAlloc(heap, 1, sizeof(*beta->sub04.loopPredictor));
+        beta->sub04.dmaProc = ((ALDMAproc (*)(NUDMAState**))(D_80078E54->dmaNew))(&beta->sub04.dmaState);
+        beta->sub04.unk_2C = 0;
+        beta->sub04.unk_30 = 1;
+        beta->sub04.wavTable = 0;
+        beta->sub38.unk_sigma_38 = alHeapAlloc(heap, 1, sizeof(*beta->sub38.unk_sigma_38));
+        beta->sub38.unk_40 = 0;
+        beta->sub38.unk_44 = 1;
+        beta->sub38.unk_3C = 1.0f;
+        beta->sub48.unk_eta_48 = alHeapAlloc(heap, 1, sizeof(*beta->sub48.unk_eta_48));
+        beta->sub48.unk_24 = 1;
+        beta->sub48.unk_28 = 0;
+        beta->sub48.unk_06 = 1;
+        beta->sub48.unk_14 = 1;
+        beta->sub48.unk_1A = 1;
+        beta->sub48.unk_08 = 1;
+        beta->sub48.unk_0A = 1;
+        beta->sub48.unk_0C = 0;
+        beta->sub48.unk_0E = 0;
+        beta->sub48.unk_12 = 1;
+        beta->sub48.unk_10 = 0;
+        beta->sub48.unk_18 = 1;
+        beta->sub48.unk_16 = 0;
+        beta->sub48.unk_1C = 0;
+        beta->sub48.unk_20 = 0;
+        beta->sub48.unk_04 = 64;
         beta->unk_74 = 0;
         beta->next = NULL;
         beta->unk_78 = 0;
@@ -99,15 +99,15 @@ void func_80056250(AlUnkAlpha* globals, ALConfig* config) {
     D_80078E54->al_unk_gamma = alHeapAlloc(heap, config->unk_num_gamma, sizeof(*D_80078E54->al_unk_gamma));
 
     for (i = 0; i < config->unk_num_gamma; i++) {
-        AlUnkGamma* temp = &D_80078E54->al_unk_gamma[i];
-        temp->unk_beta_10 = 0;
-        temp->unk_beta_14 = 0;
-        temp->unk_00 = 0x7FFF;
-        temp->unk_0C = 0;
-        temp->unk_delta_4 = alHeapAlloc(heap, 1, sizeof(*temp->unk_delta_4));
-        temp->unk_delta_8 = alHeapAlloc(heap, 1, sizeof(*temp->unk_delta_8));
-        func_80058E84(temp->unk_delta_4, temp->unk_0C, heap);
-        func_80058E84(temp->unk_delta_8, temp->unk_0C, heap);
+        AlUnkGamma* gamma = &D_80078E54->al_unk_gamma[i];
+        gamma->unk_beta_10 = NULL;
+        gamma->unk_beta_14 = NULL;
+        gamma->unk_00 = 0x7FFF;
+        gamma->unk_0C = 0;
+        gamma->unk_delta_4 = alHeapAlloc(heap, 1, sizeof(*gamma->unk_delta_4));
+        gamma->unk_delta_8 = alHeapAlloc(heap, 1, sizeof(*gamma->unk_delta_8));
+        func_80058E84(gamma->unk_delta_4, gamma->unk_0C, heap);
+        func_80058E84(gamma->unk_delta_8, gamma->unk_0C, heap);
     }
 
     D_80078E54->unk_24 = alHeapAlloc(heap, 2 * AUDIO_SAMPLES, 2);
@@ -154,8 +154,8 @@ Acmd* alAudioFrame(Acmd* cmdList, s32* cmdLen, s16* outBuf, s32 outLen) {
         if (D_80078E5C) {
             for (i = 0; i < D_80078E54->unk_0C; i++) {
                 beta2 = &D_80078E54->al_unk_beta[i];
-                if (beta2->unk_70 == 1) {
-                    func_80057874(i, (u8)beta2->unk_4C); //TODO cleanup
+                if (beta2->sub48.unk_28 == 1) {
+                    func_80057874(i, beta2->sub48.unk_04);
                 }
             }
             D_80078E5C = FALSE;
@@ -310,364 +310,358 @@ void func_80056EC0(u8 arg0, s8 arg1) {
 
 void func_80056EE8(u8 arg0) {
     AlUnkBeta* beta = &D_80078E54->al_unk_beta[arg0];
-    AlUnkZeta* zeta = &beta->unk_zeta_04; // TODO seems wrong!
+    AlBetaSub04* zeta = &beta->sub04;
 
-    beta->unk_70 = 0;
-    beta->unk_6C = 1;
-    beta->unk_4E = 1;
-    beta->unk_40 = 0;
-    beta->unk_44 = 1;
-    beta->unk_2C = 0;
-    beta->unk_30 = 1;
-    beta->unk_28 = 0;
-    if (beta->instrument != NULL) {
-        beta->unk_34 = zeta->unk_tau_14->unk_00;
-        if (zeta->unk_tau_14->unk_24 == 0) {
-            if (zeta->unk_tau_14->unk_10 != 0){
-                beta->unk_14 = zeta->unk_tau_14->unk_14;
+    beta->sub48.unk_28 = 0;
+    beta->sub48.unk_24 = 1;
+    beta->sub48.unk_06 = 1;
+    beta->sub38.unk_40 = 0;
+    beta->sub38.unk_44 = 1;
+    beta->sub04.unk_2C = 0;
+    beta->sub04.unk_30 = 1;
+    beta->sub04.unk_28 = 0;
+    if (beta->sub04.instrument != NULL) {
+        beta->sub04.wavTable = zeta->instrument->wavOffset;
+        if (zeta->instrument->skipLoopPredictor == 0) {
+            if (zeta->instrument->loopEnd != 0){
+                beta->sub04.loopCount = zeta->instrument->loopCount;
             }
-        } else if (zeta->unk_tau_14->unk_24 == 1) {
-            if (zeta->unk_tau_14->unk_10 != 0){
-                beta->unk_14 = zeta->unk_tau_14->unk_14;
+        } else if (zeta->instrument->skipLoopPredictor == 1) {
+            if (zeta->instrument->loopEnd != 0){
+                beta->sub04.loopCount = zeta->instrument->loopCount;
             }
         }
     }
 }
 
-void func_80056F78(u8 arg0) {
-    AlUnkBeta* beta = &D_80078E54->al_unk_beta[arg0];
+void func_80056F78(u8 index) {
+    AlUnkBeta* beta = (AlUnkBeta*)&D_80078E54->al_unk_beta[index];
 
-    beta->unk_70 = 1;
+    beta->sub48.unk_28 = 1;
 }
 
-//#ifdef NONMATCHING
 void func_80056FA4(u8 index, u8 arg1, Instrument* instrument, f32 arg3, s16 arg4, u8 arg5, u8 arg6, s32 arg7) {
     AlUnkBeta* beta = &D_80078E54->al_unk_beta[index];
-    AlUnkZeta* zeta = &beta->unk_zeta_04;
-    AlUnkEta* pi = &beta->unk_eta_48;
-    AlUnkSigma* sigma = &beta->unk_sigma_38;
+    AlBetaSub04* sub04 = &beta->sub04;
+    AlBetaSub48* sub48 = &beta->sub48;
+    AlBetaSub38* sub38 = &beta->sub38;
 
     beta->unk_78 = arg1;
-    beta->instrument = instrument;
+    sub04->instrument = instrument;
 
-    beta->unk_34 = zeta->unk_tau_14->unk_00;
-    beta->unk_28 = 0;
+    beta->sub04.wavTable = sub04->instrument->wavOffset;
+    beta->sub04.unk_28 = 0;
 
-    switch (zeta->unk_tau_14->unk_24) {
+    switch (sub04->instrument->skipLoopPredictor) {
         case 0:
-            zeta->unk_tau_14->unk_04 = (zeta->unk_tau_14->unk_04 / 9) * 9;
-            beta->unk_1C = zeta->unk_tau_14->unk_1C;
-            if (zeta->unk_tau_14->unk_10 == 0) {
-                beta->unk_14 = NULL;
-                beta->unk_10 = 0;
-                beta->unk_0C = 0;
+            sub04->instrument->wavDataLength = (sub04->instrument->wavDataLength / 9) * 9;
+            beta->sub04.unk_1C = sub04->instrument->unk_1C;
+            if (sub04->instrument->loopEnd == 0) {
+                sub04->loopCount = 0;
+                sub04->loopEnd = 0;
+                sub04->loopStart = 0;
             } else {
-                beta->unk_0C = zeta->unk_tau_14->unk_0C;
-                beta->unk_10 = zeta->unk_tau_14->unk_10;
-                beta->unk_14 = zeta->unk_tau_14->unk_14;
-                alCopy(zeta->unk_tau_14->unk_zeta_08, beta->unk_zeta_08, sizeof(AlUnkZeta));
+                sub04->loopStart = sub04->instrument->loopStart;
+                sub04->loopEnd = sub04->instrument->loopEnd;
+                sub04->loopCount = sub04->instrument->loopCount;
+                alCopy(sub04->instrument->loopPredictorOffset, sub04->loopPredictor, sizeof(AlUnkZeta));
             }
             break;
         case 1:
-            if (zeta->unk_tau_14->unk_10 != 0) {
-                beta->unk_0C = zeta->unk_tau_14->unk_0C;
-                beta->unk_10 = zeta->unk_tau_14->unk_10;
-                beta->unk_14 = zeta->unk_tau_14->unk_14;
+            if (sub04->instrument->loopEnd != 0) {
+                sub04->loopStart = sub04->instrument->loopStart;
+                sub04->loopEnd = sub04->instrument->loopEnd;
+                sub04->loopCount = sub04->instrument->loopCount;
             } else {
-                beta->unk_14 = NULL;
-                beta->unk_10 = 0;
-                beta->unk_0C = 0;
+                sub04->loopCount = 0;
+                sub04->loopEnd = 0;
+                sub04->loopStart = 0;
             }
             break;
     }
 
-    pi->unk_28 = 1;
-    pi->unk_24 = 1;
-    pi->unk_1C = 0;
-    pi->unk_20 = arg7;
-    pi->unk_04 = arg5;
-    pi->unk_06 = SQ(arg4) >> 0xF;
-    pi->unk_0C = (AlCosineBlend[arg6]);
-    pi->unk_0E = (AlCosineBlend[AL_COS_MAX_IDX - arg6]);
-    if (pi->unk_20 != 0) {
-        pi->unk_08 = 1;
-        pi->unk_0A = 1;
+    sub48->unk_28 = 1;
+    sub48->unk_24 = 1;
+    sub48->unk_1C = 0;
+    sub48->unk_20 = arg7;
+    sub48->unk_04 = arg5;
+    sub48->unk_06 = SQ(arg4) >> 0xF;
+    sub48->unk_0C = (AlCosineBlend[arg6]);
+    sub48->unk_0E = (AlCosineBlend[AL_COS_MAX_IDX - arg6]);
+    if (sub48->unk_20 != 0) {
+        sub48->unk_08 = 1;
+        sub48->unk_0A = 1;
     } else {
         if (D_80078181 == 0) {
-            pi->unk_08 = (pi->unk_06 * AlCosineBlend[AL_COS_MID_IDX]) >> 0xF;
-            pi->unk_0A = (pi->unk_06 * AlCosineBlend[AL_COS_MID_IDX]) >> 0xF;
+            sub48->unk_08 = (sub48->unk_06 * AlCosineBlend[AL_COS_MID_IDX]) >> 0xF;
+            sub48->unk_0A = (sub48->unk_06 * AlCosineBlend[AL_COS_MID_IDX]) >> 0xF;
         } else {
-            pi->unk_08 = (pi->unk_06 * AlCosineBlend[pi->unk_04]) >> 0xF;
-            pi->unk_0A = (pi->unk_06 * AlCosineBlend[AL_COS_MAX_IDX - pi->unk_04]) >> 0xF;
+            sub48->unk_08 = (sub48->unk_06 * AlCosineBlend[sub48->unk_04]) >> 0xF;
+            sub48->unk_0A = (sub48->unk_06 * AlCosineBlend[AL_COS_MAX_IDX - sub48->unk_04]) >> 0xF;
         }
     }
-    sigma->unk_04 = arg3;
+    sub38->unk_3C = arg3;
 }
-// #else
-// INCLUDE_ASM(void, "audio/31650", func_80056FA4, u8 arg0, u8 arg1, s32 arg2, f32 arg3, s16 arg4, u8 arg5, u8 arg6, s32 arg7);
-// #endif
 
 void func_80057224(u8 index, Instrument* instrument) {
     AlUnkBeta* beta = &D_80078E54->al_unk_beta[index];
-    AlUnkZeta* zeta = &beta->unk_zeta_04;
+    AlBetaSub04* zeta = &beta->sub04;
 
-    beta->instrument = instrument;
-    beta->unk_34 = zeta->unk_tau_14->unk_00;
-    beta->unk_28 = 0;
+    beta->sub04.instrument = instrument;
+    beta->sub04.wavTable = zeta->instrument->wavOffset;
+    beta->sub04.unk_28 = 0;
 
-    switch (zeta->unk_tau_14->unk_24) {
+    switch (zeta->instrument->skipLoopPredictor) {
         case 0:
-            zeta->unk_tau_14->unk_04 = (zeta->unk_tau_14->unk_04 / 9) * 9;
-            beta->unk_1C = zeta->unk_tau_14->unk_1C;
-            if (zeta->unk_tau_14->unk_10 == 0) {
-                beta->unk_14 = NULL;
-                beta->unk_10 = 0;
-                beta->unk_0C = 0;
+            zeta->instrument->wavDataLength = (zeta->instrument->wavDataLength / 9) * 9;
+            beta->sub04.unk_1C = zeta->instrument->unk_1C;
+            if (zeta->instrument->loopEnd == 0) {
+                beta->sub04.loopCount = 0;
+                beta->sub04.loopEnd = 0;
+                beta->sub04.loopStart = 0;
             } else {
-                beta->unk_0C = zeta->unk_tau_14->unk_0C;
-                beta->unk_10 = zeta->unk_tau_14->unk_10;
-                beta->unk_14 = zeta->unk_tau_14->unk_14;
-                alCopy(zeta->unk_tau_14->unk_zeta_08, beta->unk_zeta_08, sizeof(AlUnkZeta));
+                beta->sub04.loopStart = zeta->instrument->loopStart;
+                beta->sub04.loopEnd = zeta->instrument->loopEnd;
+                beta->sub04.loopCount = zeta->instrument->loopCount;
+                alCopy(zeta->instrument->loopPredictorOffset, beta->sub04.loopPredictor, sizeof(AlUnkZeta));
             }
             break;
         case 1:
-            if (zeta->unk_tau_14->unk_10 != 0) {
-                beta->unk_0C = zeta->unk_tau_14->unk_0C;
-                beta->unk_10 = zeta->unk_tau_14->unk_10;
-                beta->unk_14 = zeta->unk_tau_14->unk_14;
+            if (zeta->instrument->loopEnd != 0) {
+                beta->sub04.loopStart = zeta->instrument->loopStart;
+                beta->sub04.loopEnd = zeta->instrument->loopEnd;
+                beta->sub04.loopCount = zeta->instrument->loopCount;
             } else {
-                beta->unk_14 = NULL;
-                beta->unk_10 = 0;
-                beta->unk_0C = 0;
+                beta->sub04.loopCount = 0;
+                beta->sub04.loopEnd = 0;
+                beta->sub04.loopStart = 0;
             }
             break;
     }
 }
-
 
 void func_80057344(u8 arg0, f32 arg1) {
     AlUnkBeta* beta = &D_80078E54->al_unk_beta[arg0];
 
-    beta->unk_3C = arg1;
+    beta->sub38.unk_3C = arg1;
 }
 
 void func_8005736C(u8 arg0, s16 arg1, s32 arg2, u8 arg3, u8 arg4) {
     AlUnkBeta* beta = &D_80078E54->al_unk_beta[arg0];
-    AlUnkEta* eta = &beta->unk_eta_48;
+    AlBetaSub48* sub48 = &beta->sub48;
 
-    if (beta->unk_64 >= beta->unk_68) {
-        beta->unk_64 = beta->unk_68;
+    if (sub48->unk_1C >= sub48->unk_20) {
+        sub48->unk_1C = sub48->unk_20;
         if (D_80078181 == 0) {
-            beta->unk_50 = (beta->unk_4E * AlCosineBlend[AL_COS_MID_IDX]) >> 0xF;
-            beta->unk_52 = (beta->unk_4E * AlCosineBlend[AL_COS_MID_IDX]) >> 0xF;
+            sub48->unk_08 = (sub48->unk_06 * AlCosineBlend[AL_COS_MID_IDX]) >> 0xF;
+            sub48->unk_0A = (sub48->unk_06 * AlCosineBlend[AL_COS_MID_IDX]) >> 0xF;
         } else {
-            beta->unk_50 = (beta->unk_4E * AlCosineBlend[beta->unk_4C]) >> 0xF;
-            beta->unk_52 = (beta->unk_4E * AlCosineBlend[AL_COS_MAX_IDX - beta->unk_4C]) >> 0xF;
+            sub48->unk_08 = (sub48->unk_06 * AlCosineBlend[sub48->unk_04]) >> 0xF;
+            sub48->unk_0A = (sub48->unk_06 * AlCosineBlend[AL_COS_MAX_IDX - sub48->unk_04]) >> 0xF;
         }
     } else {
-        beta->unk_50 = func_80058004(beta->unk_50, beta->unk_64, beta->unk_5A, beta->unk_58);
-        beta->unk_52 = func_80058004(beta->unk_52, beta->unk_64, beta->unk_60, beta->unk_5E);
+        sub48->unk_08 = func_80058004(sub48->unk_08, sub48->unk_1C, sub48->unk_12, sub48->unk_10);
+        sub48->unk_0A = func_80058004(sub48->unk_0A, sub48->unk_1C, sub48->unk_18, sub48->unk_16);
     }
-    if (eta->unk_08 == 0) {
-        eta->unk_08 = 1;
+    if (sub48->unk_08 == 0) {
+        sub48->unk_08 = 1;
     }
-    if (eta->unk_0A == 0) {
-        eta->unk_0A = 1;
+    if (sub48->unk_0A == 0) {
+        sub48->unk_0A = 1;
     }
 
-    eta->unk_1C = 0;
-    eta->unk_20 = arg2;
-    eta->unk_04 = arg3;
-    eta->unk_06 = SQ(arg1) >> 0xF;
-    eta->unk_0C = AlCosineBlend[arg4];
-    eta->unk_0E = AlCosineBlend[AL_COS_MAX_IDX - arg4];
-    eta->unk_24 = 1;
+    sub48->unk_1C = 0;
+    sub48->unk_20 = arg2;
+    sub48->unk_04 = arg3;
+    sub48->unk_06 = SQ(arg1) >> 0xF;
+    sub48->unk_0C = AlCosineBlend[arg4];
+    sub48->unk_0E = AlCosineBlend[AL_COS_MAX_IDX - arg4];
+    sub48->unk_24 = 1;
 }
 
 void func_80057548(u8 arg0, u8 arg1, u8 arg2) {
-    AlUnkBeta* temp_s0 = &D_80078E54->al_unk_beta[arg0];
-    AlUnkEta* temp_s1 = &temp_s0->unk_eta_48;
+    AlUnkBeta* beta = &D_80078E54->al_unk_beta[arg0];
+    AlBetaSub48* sub48 = &beta->sub48;
 
-    if (temp_s0->unk_64 >= temp_s0->unk_68) {
-        temp_s0->unk_64 = temp_s0->unk_68;
+    if (sub48->unk_1C >= sub48->unk_20) {
+        sub48->unk_1C = sub48->unk_20;
         if (D_80078181 == 0) {
-            temp_s0->unk_50 = (temp_s0->unk_4E * AlCosineBlend[AL_COS_MID_IDX]) >> 0xF;
-            temp_s0->unk_52 = (temp_s0->unk_4E * AlCosineBlend[AL_COS_MID_IDX]) >> 0xF;
+            sub48->unk_08 = (sub48->unk_06 * AlCosineBlend[AL_COS_MID_IDX]) >> 0xF;
+            sub48->unk_0A = (sub48->unk_06 * AlCosineBlend[AL_COS_MID_IDX]) >> 0xF;
         } else {
-            temp_s0->unk_50 = (temp_s0->unk_4E * AlCosineBlend[temp_s0->unk_4C]) >> 0xF;
-            temp_s0->unk_52 = (temp_s0->unk_4E * AlCosineBlend[AL_COS_MAX_IDX - temp_s0->unk_4C]) >> 0xF;
+            sub48->unk_08 = (sub48->unk_06 * AlCosineBlend[sub48->unk_04]) >> 0xF;
+            sub48->unk_0A = (sub48->unk_06 * AlCosineBlend[AL_COS_MAX_IDX - sub48->unk_04]) >> 0xF;
         }
     } else {
-        temp_s0->unk_50 = func_80058004(temp_s0->unk_50, temp_s0->unk_64, temp_s0->unk_5A, temp_s0->unk_58);
-        temp_s0->unk_52 = func_80058004(temp_s0->unk_52, temp_s0->unk_64, temp_s0->unk_60, temp_s0->unk_5E);
+        sub48->unk_08 = func_80058004(sub48->unk_08, sub48->unk_1C, sub48->unk_12, sub48->unk_10);
+        sub48->unk_0A = func_80058004(sub48->unk_0A, sub48->unk_1C, sub48->unk_18, sub48->unk_16);
     }
-    if (temp_s1->unk_08 == 0) {
-        temp_s1->unk_08 = 1;
+    if (sub48->unk_08 == 0) {
+        sub48->unk_08 = 1;
     }
-    if (temp_s1->unk_0A == 0) {
-        temp_s1->unk_0A = 1;
+    if (sub48->unk_0A == 0) {
+        sub48->unk_0A = 1;
     }
 
-    temp_s1->unk_04 = arg1;
-    temp_s1->unk_0C = AlCosineBlend[arg2];
-    temp_s1->unk_0E = AlCosineBlend[AL_COS_MAX_IDX - arg2];
-    temp_s1->unk_24 = 1;
+    sub48->unk_04 = arg1;
+    sub48->unk_0C = AlCosineBlend[arg2];
+    sub48->unk_0E = AlCosineBlend[AL_COS_MAX_IDX - arg2];
+    sub48->unk_24 = 1;
 }
 
 void func_800576EC(u8 arg0, s16 arg1, s32 arg2) {
-    AlUnkBeta* temp_s0 = &D_80078E54->al_unk_beta[arg0];
-    AlUnkEta* temp_s1 = &temp_s0->unk_eta_48;
+    AlUnkBeta* beta = &D_80078E54->al_unk_beta[arg0];
+    AlBetaSub48* sub48 = &beta->sub48;
 
-    if (temp_s0->unk_64 >= temp_s0->unk_68) {
-        temp_s0->unk_64 = temp_s0->unk_68;
+    if (sub48->unk_1C >= sub48->unk_20) {
+        sub48->unk_1C = sub48->unk_20;
         if (D_80078181 == 0) {
-            temp_s0->unk_50 = (temp_s0->unk_4E * AlCosineBlend[AL_COS_MID_IDX]) >> 0xF;
-            temp_s0->unk_52 = (temp_s0->unk_4E * AlCosineBlend[AL_COS_MID_IDX]) >> 0xF;
+            sub48->unk_08 = (sub48->unk_06 * AlCosineBlend[AL_COS_MID_IDX]) >> 0xF;
+            sub48->unk_0A = (sub48->unk_06 * AlCosineBlend[AL_COS_MID_IDX]) >> 0xF;
         } else {
-            temp_s0->unk_50 = (temp_s0->unk_4E * AlCosineBlend[temp_s0->unk_4C]) >> 0xF;
-            temp_s0->unk_52 = (temp_s0->unk_4E * AlCosineBlend[AL_COS_MAX_IDX - temp_s0->unk_4C]) >> 0xF;
+            sub48->unk_08 = (sub48->unk_06 * AlCosineBlend[sub48->unk_04]) >> 0xF;
+            sub48->unk_0A = (sub48->unk_06 * AlCosineBlend[AL_COS_MAX_IDX - sub48->unk_04]) >> 0xF;
         }
     } else {
-        temp_s0->unk_50 = func_80058004(temp_s0->unk_50, temp_s0->unk_64, temp_s0->unk_5A, temp_s0->unk_58);
-        temp_s0->unk_52 = func_80058004(temp_s0->unk_52, temp_s0->unk_64, temp_s0->unk_60, temp_s0->unk_5E);
+        sub48->unk_08 = func_80058004(sub48->unk_08, sub48->unk_1C, sub48->unk_12, sub48->unk_10);
+        sub48->unk_0A = func_80058004(sub48->unk_0A, sub48->unk_1C, sub48->unk_18, sub48->unk_16);
     }
-    if (temp_s1->unk_08 == 0) {
-        temp_s1->unk_08 = 1;
+    if (sub48->unk_08 == 0) {
+        sub48->unk_08 = 1;
     }
-    if (temp_s1->unk_0A == 0) {
-        temp_s1->unk_0A = 1;
+    if (sub48->unk_0A == 0) {
+        sub48->unk_0A = 1;
+    }
 
-    }
-
-    temp_s1->unk_06 = SQ(arg1) >> 0xF;
-    temp_s1->unk_1C = 0;
-    temp_s1->unk_20 = arg2;
-    temp_s1->unk_24 = 1;
+    sub48->unk_06 = SQ(arg1) >> 0xF;
+    sub48->unk_1C = 0;
+    sub48->unk_20 = arg2;
+    sub48->unk_24 = 1;
 }
 
-void func_80057874(u8 arg0, u8 arg1) {
-    AlUnkBeta* temp_s0 = &D_80078E54->al_unk_beta[arg0];
-    AlUnkEta* temp_s1 = &temp_s0->unk_eta_48;
+void func_80057874(u8 index, u8 arg1) {
+    AlUnkBeta* beta = &D_80078E54->al_unk_beta[index];
+    AlBetaSub48* sub48 = &beta->sub48;
 
-    if (temp_s0->unk_64 >= temp_s0->unk_68) {
-        temp_s0->unk_64 = temp_s0->unk_68;
+    if (sub48->unk_1C >= sub48->unk_20) {
+        sub48->unk_1C = sub48->unk_20;
         if (D_80078181 == 0) {
-            temp_s0->unk_50 = (temp_s0->unk_4E * AlCosineBlend[AL_COS_MID_IDX]) >> 0xF;
-            temp_s0->unk_52 = (temp_s0->unk_4E * AlCosineBlend[AL_COS_MID_IDX]) >> 0xF;
+            sub48->unk_08 = (sub48->unk_06 * AlCosineBlend[AL_COS_MID_IDX]) >> 0xF;
+            sub48->unk_0A = (sub48->unk_06 * AlCosineBlend[AL_COS_MID_IDX]) >> 0xF;
         } else {
-            temp_s0->unk_50 = (temp_s0->unk_4E * AlCosineBlend[temp_s0->unk_4C]) >> 0xF;
-            temp_s0->unk_52 = (temp_s0->unk_4E * AlCosineBlend[AL_COS_MAX_IDX - temp_s0->unk_4C]) >> 0xF;
+            sub48->unk_08 = (sub48->unk_06 * AlCosineBlend[sub48->unk_04]) >> 0xF;
+            sub48->unk_0A = (sub48->unk_06 * AlCosineBlend[AL_COS_MAX_IDX - sub48->unk_04]) >> 0xF;
         }
     } else {
-        temp_s0->unk_50 = func_80058004(temp_s0->unk_50, temp_s0->unk_64, temp_s0->unk_5A, temp_s0->unk_58);
-        temp_s0->unk_52 = func_80058004(temp_s0->unk_52, temp_s0->unk_64, temp_s0->unk_60, temp_s0->unk_5E);
+        sub48->unk_08 = func_80058004(sub48->unk_08, sub48->unk_1C, sub48->unk_12, sub48->unk_10);
+        sub48->unk_0A = func_80058004(sub48->unk_0A, sub48->unk_1C, sub48->unk_18, sub48->unk_16);
     }
-    if (temp_s1->unk_08 == 0) {
-        temp_s1->unk_08 = 1;
+    if (sub48->unk_08 == 0) {
+        sub48->unk_08 = 1;
     }
-    if (temp_s1->unk_0A == 0) {
-        temp_s1->unk_0A = 1;
+    if (sub48->unk_0A == 0) {
+        sub48->unk_0A = 1;
     }
 
-    temp_s1->unk_04 = arg1;
-    temp_s1->unk_24 = 1;
+    sub48->unk_04 = arg1;
+    sub48->unk_24 = 1;
 }
 
 void func_800579D8(u8 arg0, u8 arg1) {
-    AlUnkBeta* temp_s0 = &D_80078E54->al_unk_beta[arg0];
-    AlUnkEta* temp_s1 = &temp_s0->unk_eta_48;
+    AlUnkBeta* beta = &D_80078E54->al_unk_beta[arg0];
+    AlBetaSub48* sub48 = &beta->sub48;
 
-    if (temp_s0->unk_64 >= temp_s0->unk_68) {
-        temp_s0->unk_64 = temp_s0->unk_68;
+    if (sub48->unk_1C >= sub48->unk_20) {
+        sub48->unk_1C = sub48->unk_20;
         if (D_80078181 == 0) {
-            temp_s0->unk_50 = ((temp_s0->unk_4E * AlCosineBlend[AL_COS_MID_IDX]) >> 0xF);
-            temp_s0->unk_52 = (temp_s0->unk_4E * AlCosineBlend[AL_COS_MID_IDX]) >> 0xF;
+            sub48->unk_08 = (sub48->unk_06 * AlCosineBlend[AL_COS_MID_IDX]) >> 0xF;
+            sub48->unk_0A = (sub48->unk_06 * AlCosineBlend[AL_COS_MID_IDX]) >> 0xF;
         } else {
-            temp_s0->unk_50 = ((temp_s0->unk_4E * AlCosineBlend[temp_s0->unk_4C]) >> 0xF);
-            temp_s0->unk_52 = (temp_s0->unk_4E * AlCosineBlend[AL_COS_MAX_IDX - temp_s0->unk_4C]) >> 0xF;
+            sub48->unk_08 = (sub48->unk_06 * AlCosineBlend[sub48->unk_04]) >> 0xF;
+            sub48->unk_0A = (sub48->unk_06 * AlCosineBlend[AL_COS_MAX_IDX - sub48->unk_04]) >> 0xF;
         }
     } else {
-        temp_s0->unk_50 = func_80058004(temp_s0->unk_50, temp_s0->unk_64, temp_s0->unk_5A, temp_s0->unk_58);
-        temp_s0->unk_52 = func_80058004(temp_s0->unk_52, temp_s0->unk_64, temp_s0->unk_60, temp_s0->unk_5E);
+        sub48->unk_08 = func_80058004(sub48->unk_08, sub48->unk_1C, sub48->unk_12, sub48->unk_10);
+        sub48->unk_0A = func_80058004(sub48->unk_0A, sub48->unk_1C, sub48->unk_18, sub48->unk_16);
     }
-    if (temp_s1->unk_08 == 0) {
-        temp_s1->unk_08 = 1;
+    if (sub48->unk_08 == 0) {
+        sub48->unk_08 = 1;
     }
-    if (temp_s1->unk_0A == 0) {
-        temp_s1->unk_0A = 1;
+    if (sub48->unk_0A == 0) {
+        sub48->unk_0A = 1;
     }
 
-    temp_s1->unk_0C = AlCosineBlend[arg1];
-    temp_s1->unk_0E = AlCosineBlend[AL_COS_MAX_IDX - arg1];
-    temp_s1->unk_24 = 1;
+    sub48->unk_0C = AlCosineBlend[arg1];
+    sub48->unk_0E = AlCosineBlend[AL_COS_MAX_IDX - arg1];
+    sub48->unk_24 = 1;
 }
 
 s32 func_80057B64(u8 arg0) {
-    AlUnkBeta* al7C = &D_80078E54->al_unk_beta[arg0];
+    AlUnkBeta* beta = &D_80078E54->al_unk_beta[arg0];
 
-    return al7C->unk_70;
+    return beta->sub48.unk_28;
 }
 
 s32 func_80057B8C(u8 arg0) {
-    AlUnkBeta* al7C = &D_80078E54->al_unk_beta[arg0];
+    AlUnkBeta* beta =  &D_80078E54->al_unk_beta[arg0];
 
-    return al7C->unk_78;
+    return beta->unk_78;
 }
 
 f32 func_80057BB4(u8 arg0) {
-    AlUnkBeta* al7C = &D_80078E54->al_unk_beta[arg0];
+    AlUnkBeta* beta =  &D_80078E54->al_unk_beta[arg0];
 
-    return al7C->unk_3C;
+    return beta->sub38.unk_3C;
 }
 
 u8 func_80057BDC(u8 arg0) {
-    AlUnkBeta* al7C = &D_80078E54->al_unk_beta[arg0];
+    AlUnkBeta* beta =  &D_80078E54->al_unk_beta[arg0];
 
-    return (u8)al7C->unk_4C;
+    return beta->sub48.unk_04;
 }
 
 s16 func_80057C04(u8 arg0) {
-    AlUnkBeta* al7C = &D_80078E54->al_unk_beta[arg0];
+    AlUnkBeta* beta =  &D_80078E54->al_unk_beta[arg0];
 
-    return al7C->unk_54;
+    return beta->sub48.unk_0C;
 }
 
 s16 func_80057C2C(u8 arg0) {
-    AlUnkBeta* al7C = &D_80078E54->al_unk_beta[arg0];
+    AlUnkBeta* beta =  &D_80078E54->al_unk_beta[arg0];
 
-    return al7C->unk_56;
+    return beta->sub48.unk_0E;
 }
 
-s32 func_80057C54(s32 arg0) {
-    AlUnkBeta* temp_v1;
+s32 func_80057C54(u8 arg0) {
+    AlUnkBeta* beta = &D_80078E54->al_unk_beta[arg0];
+    AlBetaSub48* sub48 = &beta->sub48;
     u32 retVal;
 
-    temp_v1 = &D_80078E54->al_unk_beta[arg0 & 0xFF];
-    if (temp_v1->unk_64 >= temp_v1->unk_68) {
+    if (sub48->unk_1C >= sub48->unk_20) {
         if (D_80078181 == 0) {
-            retVal = (temp_v1->unk_4E * AlCosineBlend[AL_COS_MID_IDX] * 2) >> 0x10;
+            retVal = (sub48->unk_06 * AlCosineBlend[AL_COS_MID_IDX] * 2) >> 0x10;
         } else {
-            retVal = (temp_v1->unk_4E * AlCosineBlend[temp_v1->unk_4C] * 2) >> 0x10;
+            retVal = (sub48->unk_06 * AlCosineBlend[sub48->unk_04] * 2) >> 0x10;
         }
     } else {
-        retVal = func_80058004(temp_v1->unk_50, temp_v1->unk_64, temp_v1->unk_5A, temp_v1->unk_58);
+        retVal = func_80058004(sub48->unk_08, sub48->unk_1C, sub48->unk_12, sub48->unk_10);
     }
     return retVal;
 }
 
-s32 func_80057D0C(s32 arg0) {
-    AlUnkBeta* temp_v1;
+s32 func_80057D0C(u8 arg0) {
+    AlUnkBeta* beta = &D_80078E54->al_unk_beta[arg0];
+    AlBetaSub48* sub48 = &beta->sub48;
     u32 retVal;
 
-    temp_v1 = &D_80078E54->al_unk_beta[arg0 & 0xFF];
-    if (temp_v1->unk_64 >= temp_v1->unk_68) {
+    if (sub48->unk_1C >= sub48->unk_20) {
         if (D_80078181 == 0) {
-            retVal = (temp_v1->unk_4E * AlCosineBlend[AL_COS_MID_IDX] * 2) >> 0x10;
+            retVal = (sub48->unk_06 * AlCosineBlend[AL_COS_MID_IDX] * 2) >> 0x10;
         } else {
-            retVal = ((temp_v1->unk_4E * AlCosineBlend[AL_COS_MAX_IDX - temp_v1->unk_4C]) * 2) >> 0x10;
+            retVal = (sub48->unk_06 * AlCosineBlend[AL_COS_MAX_IDX - sub48->unk_04] * 2) >> 0x10;
         }
     } else {
-        retVal = func_80058004(temp_v1->unk_50, temp_v1->unk_64, temp_v1->unk_5A, temp_v1->unk_58);
+        retVal = func_80058004(sub48->unk_08, sub48->unk_1C, sub48->unk_12, sub48->unk_10);
     }
     return retVal;
 }

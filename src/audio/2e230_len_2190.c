@@ -73,7 +73,7 @@ void snd_load_audio_data(s32 outputRate) {
         func_80056EC0(i, 0);
         func_80057224(i, globals->defaultInstrument);
         temp5 = &globals->voices[i];
-        temp5->ins = NULL;
+        temp5->instrument = NULL;
         temp5->pitchRatio = 0;
         temp5->unk_0C = -1;
         temp5->pan = 0xFF;
@@ -137,7 +137,7 @@ void snd_load_audio_data(s32 outputRate) {
 
 void snd_reset_instrument(Instrument* instrument) {
     instrument->wavOffset = &D_800781D0;
-    instrument->wavLength = 190;
+    instrument->wavDataLength = 190;
     instrument->predictorOffset = &D_80078190;
     instrument->unk_1C = 64;
     instrument->detune = 4800;
@@ -326,7 +326,7 @@ void func_80053654(SndGlobals* arg0) {
 
         if (unk_flags & 2) {
             func_80052BF8(voice, &voice->unk_14);
-            func_80056FA4(i, voice->reverbType, voice->ins, voice->pitchRatio, voice->unk_0C, voice->pan, voice->reverb, voice->unk_08);
+            func_80056FA4(i, voice->reverbType, voice->instrument, voice->pitchRatio, voice->unk_0C, voice->pan, voice->reverb, voice->unk_08);
             voice->unk_45 = voice->unk_44;
         } else {
             if (unk_flags & 8) {
@@ -965,7 +965,84 @@ void snd_swizzle_BK_instruments(s32 bkFileOffset, SoundBank* bank, InstrumentGro
     }
 }
 
+#ifdef NONMATCHING
+enum ReadState {
+    BK_READ_DONE            = 0,
+    BK_READ_FETCH_HEADER    = 11,
+    BK_READ_FETCH_DATA      = 21,
+    BK_READ_SWIZZLE         = 31,
+};
+
+#define AL_HEADER_SIG_BK 0x424B
+#define AL_HEADER_SIG_CR 0x4352
+
+s32* func_80054AA0(s32* bkFileOffset, void* vaddr, s32 bankIndex, s32 bankGroup) {
+    ALHeap* heap = D_80078E54->heap;
+    BKHeader localHeader;
+    BKHeader* header = &localHeader;
+    Instrument** instrumentGroup;
+    Instrument* instruments;
+    u32 instrCount;
+    u32 readState;
+    s32 keepReading;
+    void* fileData = vaddr;
+    u32 i;
+
+    fileData = vaddr;
+    readState = BK_READ_FETCH_HEADER;
+    keepReading = TRUE;
+    
+    while (keepReading) {
+        switch (readState) {
+            case BK_READ_DONE:
+                keepReading = FALSE;
+                break;
+            case BK_READ_FETCH_HEADER:
+                snd_read_rom(*bkFileOffset, &localHeader, 0x40U); 
+                if ((header->signature == AL_HEADER_SIG_BK) && (header->size != 0) && (header->format == AL_HEADER_SIG_CR)) {
+                    readState = BK_READ_FETCH_DATA;
+                } else {
+                    keepReading = FALSE;
+                }
+                break;
+            case BK_READ_FETCH_DATA:
+                if (vaddr == NULL) {
+                    fileData = alHeapAlloc(heap, 1, header->size);
+                }
+                snd_read_rom(*bkFileOffset, fileData, header->size);
+                
+                instrCount = 0;
+                instrumentGroup = (Instrument**)snd_get_BK_instruments(bankGroup, bankIndex);
+                
+                for(i = 0; i < 16; i++) {
+                    if(header->instruments[i] != 0) {
+                        instrumentGroup[i] = header->instruments[i] + fileData;
+                        instrCount++;
+                    } else {
+                        instrumentGroup[i] = NULL;
+                    }
+                }
+                
+                if (instrCount != 0) {
+                    readState = BK_READ_SWIZZLE;
+                } else {
+                    keepReading = FALSE;
+                }
+                break;
+            case BK_READ_SWIZZLE:
+                snd_swizzle_BK_instruments(fileData, fileData, instrumentGroup, 0x10U, 0);
+                readState = BK_READ_DONE;
+                break;
+            default:
+                keepReading = FALSE;
+                break;
+        }
+    }
+    return fileData;
+}
+#else
 INCLUDE_ASM(s32, "audio/2e230_len_2190", func_80054AA0);
+#endif
 
 s32 snd_load_BK(s32 bkFileOffset, s32 bankIndex) {
     snd_load_BK_to_bank(bkFileOffset, gSoundGlobals->banks[bankIndex], bankIndex, 1);
