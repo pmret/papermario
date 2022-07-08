@@ -1,53 +1,66 @@
 #include "common.h"
 #include "entity_script.h"
+#include "ld_addrs.h"
 
-typedef struct structE2EDE0 {
-    /* 0x00 */ s32 unk_00;
-    /* 0x04 */ f32 unk_04;
-    /* 0x08 */ f32 unk_08;
-    /* 0x0C */ f32 unk_0C;
-    /* 0x10 */ f32 unk_10;
-    /* 0x14 */ f32 unk_14;
-    /* 0x18 */ f32 unk_18;
-} structE2EDE0;
+extern Gfx Entity_ArrowSign_Render[];
+extern Gfx Entity_ArrowSign_RenderRotatedSign[];
+extern Mtx Entity_ArrowSign_mtxSign;
 
-s32 func_802BC4B0_E2EDE0(void);
-INCLUDE_ASM(s32, "entity/jan_iwa/E2EDE0", func_802BC4B0_E2EDE0);
+s32 entity_ArrowSign_setupGfx(s32 entityIndex) {
+    Gfx* gfxPos = gMasterGfxPos;
+    Entity* entity = get_entity_by_index(entityIndex);
+    ArrowSignData* data = entity->dataBuf.arrowSign;
+    Matrix4f sp18;
+    Matrix4f sp58;
+    Gfx* gfx;
 
-void func_802BC628_E2EF58(void) {
+    guMtxL2F(sp18, (Mtx*)((s32)entity->vertexData + (u16)&Entity_ArrowSign_mtxSign));
+    guRotateF(sp58, clamp_angle(data->angle - 90.0f), 0.0f, 0.0f, 1.0f);
+    guMtxCatF(sp58, sp18, sp18);
+    guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+    gSPMatrix(gfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gfx = (Gfx*)((s32)entity->vertexData + (u16)Entity_ArrowSign_RenderRotatedSign);
+    gSPDisplayList(gfxPos++, gfx);
+    gSPPopMatrix(gfxPos++, G_MTX_MODELVIEW);
+    gMasterGfxPos = gfxPos;
 }
 
-void func_802BC630_E2EF60(Entity* entity) {
-    f32 temp_f0 = CreateEntityVarArgBuffer[0];
-    structE2EDE0* data = (structE2EDE0*)entity->dataBuf.unk;
-
-    data->unk_04 = temp_f0;
-    data->unk_08 = temp_f0;
-    entity->renderSetupFunc = func_802BC4B0_E2EDE0;
+void entity_ArrowSign_idle(void) {
 }
 
-void func_802BC658_E2EF88(Entity* entity) {
-    if (!(gPlayerStatus.animFlags & 1) && (entity->collisionFlags & 8)) {
+void entity_ArrowSign_init(Entity* entity) {
+    f32 angle = CreateEntityVarArgBuffer[0];
+    ArrowSignData* data = entity->dataBuf.arrowSign;
+
+    data->angle = angle;
+    data->unk_08 = angle;
+    entity->renderSetupFunc = entity_ArrowSign_setupGfx;
+}
+
+void entity_ArrowSign_handle_collision(Entity* entity) {
+    if (!(gPlayerStatus.animFlags & PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT) &&
+        (entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_WALL)) {
         entity_start_script(entity);
     }
 }
 
-EntityScript D_802BCD70_E2F6A0 = {
-    es_SetCallback(func_802BC628_E2EF58, 0)
+EntityScript Entity_ArrowSign_Script = {
+    es_SetCallback(entity_ArrowSign_idle, 0)
     es_End
 };
 
-EntityModelScript D_802BCD80_E2F6B0 = STANDARD_ENTITY_MODEL_SCRIPT(0x0A000C40, RENDER_MODE_SURFACE_OPA);
+EntityModelScript Entity_ArrowSign_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(Entity_ArrowSign_Render, RENDER_MODE_SURFACE_OPA);
 
 EntityBlueprint D_802BCD9C_E2F6CC = {
     .flags = ENTITY_FLAGS_SQUARE_SHADOW | ENTITY_FLAGS_400 | ENTITY_FLAGS_SET_SHADOW_FLAG200,
-    .typeDataSize = 0x10,
-    .renderCommandList = D_802BCD80_E2F6B0,
+    .typeDataSize = sizeof(ArrowSignData),
+    .renderCommandList = Entity_ArrowSign_RenderScript,
     .modelAnimationNodes = 0,
-    .fpInit = func_802BC630_E2EF60,
-    .updateEntityScript = D_802BCD70_E2F6A0,
-    .fpHandleCollision = func_802BC658_E2EF88,
-    {{ 0x00E59F00, 0x00E5AB50 }},
+    .fpInit = entity_ArrowSign_init,
+    .updateEntityScript = Entity_ArrowSign_Script,
+    .fpHandleCollision = entity_ArrowSign_handle_collision,
+    {{ entity_model_ArrowSign_ROM_START, entity_model_ArrowSign_ROM_END }},
     .entityType = ENTITY_TYPE_RED_ARROW_SIGNS,
     .aabbSize = { 18, 50, 10 }
 };

@@ -12614,7 +12614,22 @@ segments:
       - [0xE59A00, ci4, SignPost, 32, 32]
       - [0xE59C00, palette, SignPost]
       - [0xE59C20]
-  - [0xE59F00, bin] # unk data
+  - name: entity_model_ArrowSign
+    dir: entity/model
+    type: code
+    start: 0xE59F00
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE59F00, c, ArrowSign]
+    - start: 0xE59F00
+      type: .data
+      name: ArrowSign
+      subsegments:
+      - [0xE59F00]
+      - [0xE59F80, ci8, ArrowSign, 64, 32]
+      - [0xE5A780, palette, ArrowSign]
+      - [0xE5A980]
   - name: entity_model_Padlock
     dir: entity/model
     type: code

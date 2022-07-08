@@ -718,6 +718,13 @@ typedef struct SpinningFlowerData {
     /* 0x30 */ Mtx unk_30;
 } SpinningFlowerData; // size = 0x70
 
+typedef struct ArrowSignData {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ f32 angle;
+    /* 0x08 */ f32 unk_08;
+    /* 0x0C */ f32 unk_0C;
+} ArrowSignData; // size = 0x10
+
 // END ENTITY-SPECIFIC STRUCTS
 
 typedef s32 (*EntityCallback)(struct Entity*);
@@ -788,6 +795,7 @@ typedef struct Entity {
         CymbalPlantData* cymbalPlant;
         PinkFlowerData* pinkFlower;
         SpinningFlowerData* spinningFlower;
+        ArrowSignData* arrowSign;
         s32* unk;
     } dataBuf;
     /* 0x44 */ Vec3s* vertexData;
