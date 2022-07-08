@@ -1151,7 +1151,7 @@ s32 add_coins(s32 amt) {
     return playerData->coins;
 }
 
-s8 add_star_points(s32 amt) {
+s32 add_star_points(s32 amt) {
     PlayerData* playerData = &gPlayerData;
     s8 newSP = playerData->starPoints + amt;
 
@@ -1169,7 +1169,7 @@ s8 add_star_points(s32 amt) {
     return gPlayerData.starPoints;
 }
 
-u8 add_star_pieces(s32 amt) {
+s32 add_star_pieces(s32 amt) {
     PlayerData* playerData = &gPlayerData;
     s32 newSP = playerData->starPieces;
 
@@ -1295,7 +1295,7 @@ s8 add_fortress_keys(s32 amt) {
     return gPlayerData.fortressKeyCount;
 }
 
-s8 subtract_fortress_keys(s8 amt) {
+s32 subtract_fortress_keys(s32 amt) {
     PlayerData* playerData = &gPlayerData;
 
     playerData->fortressKeyCount -= amt;
@@ -1306,6 +1306,6 @@ s8 subtract_fortress_keys(s8 amt) {
     return playerData->fortressKeyCount;
 }
 
-s8 get_fortress_key_count(void) {
+s32 get_fortress_key_count(void) {
     return gPlayerData.fortressKeyCount;
 }

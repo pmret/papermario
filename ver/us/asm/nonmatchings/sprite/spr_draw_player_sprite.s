@@ -18,9 +18,9 @@ glabel spr_draw_player_sprite
 /* 100D64 802DDC74 AFB10024 */  sw        $s1, 0x24($sp)
 /* 100D68 802DDC78 AFB00020 */  sw        $s0, 0x20($sp)
 /* 100D6C 802DDC7C F7B40048 */  sdc1      $f20, 0x48($sp)
-/* 100D70 802DDC80 3C09802E */  lui       $t1, %hi(D_802DF58C)
+/* 100D70 802DDC80 3C09802E */  lui       $t1, %hi(spr_playerCurrentAnimInfo + 0x4)
 /* 100D74 802DDC84 01224821 */  addu      $t1, $t1, $v0
-/* 100D78 802DDC88 8D29F58C */  lw        $t1, %lo(D_802DF58C)($t1)
+/* 100D78 802DDC88 8D29F58C */  lw        $t1, %lo(spr_playerCurrentAnimInfo + 0x4)($t1)
 /* 100D7C 802DDC8C 8FB70060 */  lw        $s7, 0x60($sp)
 /* 100D80 802DDC90 11230080 */  beq       $t1, $v1, .L802DDE94
 /* 100D84 802DDC94 0000102D */   daddu    $v0, $zero, $zero

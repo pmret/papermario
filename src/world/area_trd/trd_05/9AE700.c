@@ -79,7 +79,7 @@ void func_80240020_9AE720(void) {
     recPart.height = sp30.height;
     recPart.xOffset = -(sp30.width / 2);
     recPart.yOffset = (sp30.height / 2);
-    recPart.unk_10 = 255;
+    recPart.opacity = 255;
     fold_appendGfx_component(unkTrd->foldStateID, &recPart, 0, sp40);
 
     gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);

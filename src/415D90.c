@@ -431,9 +431,9 @@ void btl_draw_menu_wheel(void) {
                     hud_element_set_alpha(id, (opacity * 180) / 255);
                     hud_element_set_scale(id, 1.2f);
                     if (!cond) {
-                        hud_element_set_flags(id, 2);
+                        hud_element_set_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     } else {
-                        hud_element_clear_flags(id, 2);
+                        hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     }
                     func_80144238(id);
                 }

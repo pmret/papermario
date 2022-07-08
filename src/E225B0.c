@@ -83,7 +83,7 @@ void func_802B7000_E225B0(void) {
         foldImage.height = 56;
         foldImage.xOffset = -28;
         foldImage.yOffset = 46;
-        foldImage.unk_10 = 255;
+        foldImage.opacity = 255;
 
         fold_appendGfx_component(0, &foldImage, 0, matrix2);
         gSPPopMatrix(gMasterGfxPos++, 0);

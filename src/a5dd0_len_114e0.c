@@ -3975,7 +3975,7 @@ void get_world_fog_color(s32* r, s32* g, s32* b, s32* a) {
     *a = gCurrentFogSettings->a;
 }
 
-void set_tex_panner(Model* model, s8 texPannerID) {
+void set_tex_panner(Model* model, s32 texPannerID) {
     model->texPannerID = texPannerID;
 }
 
