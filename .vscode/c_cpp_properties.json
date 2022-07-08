@@ -25,7 +25,8 @@
                 "VERSION_US"
             ],
             "cStandard": "c89",
-            "cppStandard": "c++17"
+            "cppStandard": "c++17",
+            "intelliSenseMode": "gcc-x86"
         }
     ]
 }
