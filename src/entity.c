@@ -397,7 +397,7 @@ void appendGfx_entity_model(EntityModel* model) {
         foldImage.height = imageData->height;
         foldImage.xOffset = -imageData->width / 2;
         foldImage.yOffset = imageData->height / 2;
-        foldImage.unk_10 = 255;
+        foldImage.opacity = 255;
         guMtxL2F(foldMtx, &model->transform);
         fold_appendGfx_component(0, &foldImage, 0, foldMtx);
     }
@@ -706,7 +706,7 @@ void draw_entity_model_E(s32 modelIdx, Mtx* transformMtx) {
         foldImage.height = imageData->height;
         foldImage.xOffset = -imageData->width / 2;
         foldImage.yOffset = imageData->height / 2;
-        foldImage.unk_10 = 255;
+        foldImage.opacity = 255;
         guMtxL2F(foldMtx, &model->transform);
         fold_appendGfx_component(0, &foldImage, 0, foldMtx);
     }
@@ -782,11 +782,11 @@ void clear_entity_model_flags(s32 idx, s32 newFlags) {
     }
 }
 
-void bind_entity_model_setupGfx(s32 idx, s32 setupGfxCallbackArg0, void (*fpSetupGfxCallback)(void*)) {
+void bind_entity_model_setupGfx(s32 idx, void* setupGfxCallbackArg0, void (*fpSetupGfxCallback)(void*)) {
     EntityModel* entityModel = (*gCurrentEntityModelList)[idx & ~BATTLE_ENTITY_ID_MASK];
 
     entityModel->fpSetupGfxCallback = fpSetupGfxCallback;
-    entityModel->setupGfxCallbackArg0 = (void*)setupGfxCallbackArg0;
+    entityModel->setupGfxCallbackArg0 = setupGfxCallbackArg0;
 }
 
 void func_80122F8C(s32 idx, s32 newFlags) {

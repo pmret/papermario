@@ -1,5 +1,6 @@
 #include "common.h"
 #include "model.h"
+#include "evt.h"
 
 typedef struct LavaReset {
     /* 0x00 */ s32 colliderID;
@@ -238,11 +239,11 @@ ApiStatus SetTexPanOffset(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetCustomGfx(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 var1 = evt_get_variable(script, *args++);
-    s32 var2 = evt_get_variable(script, *args++);
-    s32 var3 = evt_get_variable(script, *args++);
+    s32 idx = evt_get_variable(script, *args++);
+    Gfx* pre = (Gfx*) evt_get_variable(script, *args++);
+    Gfx* post = (Gfx*) evt_get_variable(script, *args++);
 
-    set_custom_gfx(var1, var2, var3);
+    set_custom_gfx(idx, pre, post);
     return ApiStatus_DONE2;
 }
 
@@ -278,7 +279,65 @@ ApiStatus SetModelFlags(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "evt/map_api", apply_transform_to_children);
+void apply_transform_to_children(ApiStatus (*apiFunc)(Evt*, s32), Evt* script) {
+    Evt localEvt;
+    ModelTreeInfo* parentModelInfo;
+    ModelTreeInfo* childModelInfo;
+    s32 parentModelID;
+    s32 originalArg;
+    s32* argsPtr;
+    s32 modelIndex;
+    s32 firstChild;
+    s32 lastChild;
+    s32 i;
+
+    firstChild = -1;
+    parentModelID = evt_get_variable(script, *script->ptrReadPos);
+    modelIndex = (*mdl_currentModelTreeNodeInfo)[parentModelID].modelIndex;
+    lastChild = -1;
+
+    if (modelIndex < 0xFF) {
+        firstChild = lastChild = modelIndex;
+    } else {
+        s32 treeDepth = (*mdl_currentModelTreeNodeInfo)[parentModelID].treeDepth;
+
+        // check all models with a lowerID in the tree
+        for (i = parentModelID - 1; i >= 0; i--) {
+            childModelInfo = &(*mdl_currentModelTreeNodeInfo)[i];
+
+            if (treeDepth < childModelInfo->treeDepth) {
+                s32 childModelIndex = childModelInfo->modelIndex;
+
+                if (childModelIndex < 0xFF) {
+                    if (lastChild == -1) {
+                        lastChild = childModelIndex;
+                    }
+                    firstChild = childModelIndex;
+                }
+            } else {
+                // if node is no longer deeper than parent, we've exhausted the children
+                break;
+            }
+        }
+    }
+
+    // copy the input script into a local one we will modify
+    localEvt = *script;
+
+    argsPtr = localEvt.ptrReadPos;
+    originalArg = *argsPtr;
+
+    for (i = firstChild; i <= lastChild; i++) {
+        Model* model = (*gCurrentModels)[i];
+
+        localEvt.ptrReadPos = argsPtr;
+        *argsPtr = model->modelID;
+
+        apiFunc(&localEvt, TRUE);
+    }
+
+    *argsPtr = originalArg;
+}
 
 ApiStatus MakeTransformGroup(Evt* script, s32 isInitialCall) {
     make_transform_group((u16)evt_get_variable(script, *script->ptrReadPos));

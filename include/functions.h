@@ -182,6 +182,7 @@ s32 dispatch_damage_event_actor_0(Actor* actor, s32 damageAmount, s32 event);
 
 // Text
 MessagePrintState* msg_get_printer_for_msg(s32 msgID, s32* a1);
+s32 msg_printer_load_msg(s32 msgID, MessagePrintState* printer);
 void msg_printer_set_origin_pos(MessagePrintState* msgPrintState, s32 x, s32 y);
 
 void get_screen_coords(s32 camID, f32 x, f32 y, f32 z, s32* screenX, s32* screenY, s32* screenZ);
@@ -201,7 +202,7 @@ Npc* peach_make_disguise_npc(s32 peachDisguise);
 void peach_set_disguise_anim(s32);
 
 s32 draw_box(s32 flags, WindowStyle windowStyle, s32 posX, s32 posY, s32 posZ, s32 width, s32 height, u8 opacity,
-              u8 darkening, f32 scaleX, f32 scaleY, f32 rotX, f32 rotY, f32 rotZ, void (*fpDrawContents)(s32),
+              u8 darkening, f32 scaleX, f32 scaleY, f32 rotX, f32 rotY, f32 rotZ, void (*fpDrawContents)(void*),
               void* drawContentsArg0, Matrix4f rotScaleMtx, s32 translateX, s32 translateY, f32 (*outMtx)[4]);
 s32 get_msg_width(s32 msgID, u16 charset);
 
@@ -427,6 +428,10 @@ void partner_set_tether_distance(f32);
 
 void btl_delete_player_actor(Actor* player);
 
+s32 cancel_message(MessagePrintState* msgPrintState);
+
+void set_message_images(MessageImageData* images);
+
 void kill_all_scripts(void);
 s32 does_script_exist(s32 id);
 s32 does_script_exist_by_ref(Evt* script);
@@ -435,6 +440,7 @@ Evt* start_script_in_group(EvtScript* source, u8 priority, u8 initialState, u8 g
 f32 get_player_normal_yaw(void);
 void set_standard_shadow_scale(Shadow* shadow, f32 scale);
 void set_npc_shadow_scale(Shadow* shadow, f32 height, f32 npcRadius);
+void set_npc_animation(Npc* npc, u32 animID);
 void set_peach_shadow_scale(Shadow* shadow, f32 scale);
 s32 is_block_on_ground(Entity* block);
 void set_animation(s32 actorID, s32, s32 animationIndex);
@@ -467,6 +473,13 @@ void set_entity_fog_dist(s32 start, s32 end);
 void set_entity_fog_color(s32 r, s32 g, s32 b, s32 a);
 
 struct ModelTransformGroup* get_transform_group(s32 index);
+void make_transform_group(u16 modelID);
+void enable_transform_group(u16 modelID);
+void disable_transform_group(u16 modelID);
+void set_map_transition_effect(s32);
+
+void set_tex_panner(struct Model* model, s32 texPannerID);
+void set_custom_gfx(s32 customGfxIndex, Gfx* pre, Gfx* post);
 
 s32 make_item_entity(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pickupDelay, s32 facingAngleSign,
                      s32 pickupVar);
@@ -508,7 +521,9 @@ s32 bgm_set_song(s32 playerIndex, s32 songID, s32 variation, s32 fadeOutTime, s1
 void bgm_set_battle_song(s32, s32);
 void bgm_push_battle_song(void);
 void func_801497FC(s32 arg0);
+s32 func_8014A964(s32 playerIndex, s32 songID, s32 variation, s32 fadeInTime, s16 arg4, s16 arg5);
 s32 func_8014AA54(s32 playerIndex, s32 arg1, s16 arg2);
+s32 func_8014AB0C(s32 playerIndex, s16 arg1);
 
 void basic_window_update(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, f32* scaleX, f32* scaleY,
                    f32* rotX, f32* rotY, f32* rotZ, s32* darkening, s32* opacity);
@@ -581,6 +596,15 @@ void bgm_reset_sequence_players(void);
 void reset_ambient_sounds(void);
 void sfx_clear_sounds(void);
 void poll_rumble(void);
+void bgm_pop_song(void);
+void bgm_push_song(s32 songID, s32 variation);
+void bgm_pop_battle_song(void);
+s32 play_ambient_sounds(s32 fadeInTime, s32 fadeOutTime);
+s32 get_fortress_key_count(void);
+s32 subtract_fortress_keys(s32 amt);
+s32 add_star_points(s32 amt);
+s32 add_star_pieces(s32 amt);
+s32 make_item_entity_at_player(s32 itemID, s32 arg1, s32 pickupMsgFlags);
 
 void set_action_state(s32 actionState);
 s32 get_collider_type_by_id(s32 colliderID);
@@ -1010,7 +1034,7 @@ s32 check_conversation_trigger(void);
 
 void clear_player_status(void);
 void clear_entity_models(void);
-void bind_entity_model_setupGfx(s32 idx, s32 setupGfxCallbackArg0, void (*fpSetupGfxCallback)(void*));
+void bind_entity_model_setupGfx(s32 idx, void* setupGfxCallbackArg0, void (*fpSetupGfxCallback)(void*));
 void clear_animator_list(void);
 void clear_model_data(void);
 void clear_sprite_shading_data(void);

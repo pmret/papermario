@@ -859,12 +859,12 @@ INCLUDE_ASM(s32, "182B30", func_80259494);
 INCLUDE_ASM(s32, "182B30", func_8025950C);
 
 void func_802596C0(ActorPart* part, s32 yaw, Matrix4f mtx) {
-    DecorationTable* temp_s2;
+    DecorationTable* decorationTable = part->decorationTable;
     s32 opacity;
     s32 idMask;
 
     opacity = 255;
-    temp_s2 = part->decorationTable;
+
     idMask = 0;
 
     if (part->opacity < 255) {
@@ -877,17 +877,40 @@ void func_802596C0(ActorPart* part, s32 yaw, Matrix4f mtx) {
         opacity = (opacity * 120) / 255;
     }
 
-    if (temp_s2->unk_768 != 0) {
+    if (decorationTable->unk_768 != 0) {
         func_80259494(part);
-        spr_draw_npc_sprite(part->unk_84 | 0x20000000 | idMask, yaw, opacity, temp_s2->unk_76C, mtx);
+        spr_draw_npc_sprite(part->unk_84 | 0x20000000 | idMask, yaw, opacity, decorationTable->unk_76C, mtx);
     } else {
-        spr_draw_npc_sprite(part->unk_84 | 0x20000000 | idMask, yaw, opacity, temp_s2->unk_6D4, mtx);
+        spr_draw_npc_sprite(part->unk_84 | 0x20000000 | idMask, yaw, opacity, decorationTable->unk_6D4, mtx);
     }
 }
 
 INCLUDE_ASM(s32, "182B30", func_802597B0);
 
-INCLUDE_ASM(s32, "182B30", func_8025995C);
+void func_8025995C(ActorPart* part, s32 yaw, Matrix4f mtx) {
+    DecorationTable* decorationTable = part->decorationTable;
+    s32 partOpacity = part->opacity;
+    s32 opacity = 255;
+    s32 idMask = 0;
+
+    if (partOpacity < 0xFF) {
+        idMask = 0x80000000;
+        opacity = partOpacity;
+    }
+    if (part->flags & 0x100) {
+        idMask = 0x80000000;
+        opacity = (opacity * 120) / 255;
+    }
+
+    if (decorationTable->unk_768 != 0) {
+        func_80259494(part);
+        idMask |= 0x20000000;
+        spr_draw_player_sprite(idMask, yaw, opacity, decorationTable->unk_76C, mtx);
+    } else {
+        idMask |= 0x20000000;
+        spr_draw_player_sprite(idMask, yaw, opacity, decorationTable->unk_6D4, mtx);
+    }
+}
 
 void func_80259A48(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
     DecorationTable* decorationTable = part->decorationTable;
@@ -1851,7 +1874,6 @@ INCLUDE_ASM(s32, "182B30", func_8025BAA0);
 INCLUDE_ASM(s32, "182B30", func_8025C120);
 
 s32 func_8025C840(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx) {
-
     if (!(part->flags & 2)) {
         switch (part->decorationTable->unk_750) {
             case 0:

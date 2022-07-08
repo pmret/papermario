@@ -197,6 +197,7 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
     with Path("tools/permuter_settings.toml").open("w") as f:
         f.write(f"compiler_command = \"{cc} {CPPFLAGS.replace('$version', 'us')} {cflags} -DPERMUTER -fforce-addr\"\n")
         f.write(f"assembler_command = \"{cross}as -EB -march=vr4300 -mtune=vr4300 -Iinclude\"\n")
+        f.write(f"compiler_type = \"gcc\"\n")
         f.write(
 """
 [preserve_macros]
