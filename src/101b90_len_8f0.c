@@ -19,7 +19,7 @@ extern s32 D_802E0C20[];
 extern s32 D_802E0C58;
 extern s32 D_802E0C5C;
 extern s32 D_802E0C60[];
-extern UnkSpr10 D_802E0C70[];
+extern UnkSpr10 D_802E0C70[18];
 
 INCLUDE_ASM(s32, "101b90_len_8f0", spr_swizzle_anim_offsets);
 
@@ -37,7 +37,7 @@ void spr_init_player_raster_cache(s32 cacheSize, s32 maxRasterSize) {
     D_802E0C60[2] += SPRITE_ROM_START;
     var_a1 = _heap_malloc(&gSpriteHeapPtr, maxRasterSize * cacheSize);
 
-    for (i = 0; i < 0x12; i++) {
+    for (i = 0; i < ARRAY_COUNT(D_802E0C70); i++) {
         D_802E0C70[i].unk_0C = var_a1;
         var_a1 += D_802E0C5C;
         D_802E0C70[i].unk_00 = 0;
