@@ -17,6 +17,9 @@ extern EntityModelScript D_802E9830;
 extern AnimScript Entity_BellbellPlant_AnimationIdle;
 extern AnimScript Entity_BellbellPlant_AnimationUse;
 extern StaticAnimatorNode* Entity_BellbellPlant_Mesh[];
+extern AnimScript D_00000340_E6E610;
+extern AnimScript D_00000064_E6E334;
+extern StaticAnimatorNode* D_00000058_E6E328[];
 
 // size unknown
 typedef struct structE2E5F0 {
@@ -28,6 +31,10 @@ typedef struct structE2E5F0 {
     /* 0x18 */ f32 unk_18;
 } structE2E5F0;
 
+typedef struct TrumpetPlantData {
+    /* 0x0 */ s32 numCoins;
+} TrumpetPlantData; // size = 0x4
+
 void entity_BellbellPlant_idle(Entity* entity) {
     if ((gPlayerStatus.animFlags & PLAYER_STATUS_ANIM_FLAGS_INTERACT_PROMPT_AVAILABLE) &&
         (entity->collisionFlags & (ENTITY_COLLISION_PLAYER_HAMMER | ENTITY_COLLISION_PLAYER_TOUCH_WALL))) {
@@ -36,20 +43,46 @@ void entity_BellbellPlant_idle(Entity* entity) {
     }
 }
 
-INCLUDE_ASM(s32, "entity/jan_iwa/E2E5F0", func_802BBD1C_E2E64C);
-void func_802BBD1C_E2E64C(Entity*);
+void entity_TrumpetPlant_idle(Entity* entity) {
+    if ((gPlayerStatus.animFlags & PLAYER_STATUS_ANIM_FLAGS_INTERACT_PROMPT_AVAILABLE) &&
+        (entity->collisionFlags & (ENTITY_COLLISION_PLAYER_HAMMER | ENTITY_COLLISION_PLAYER_TOUCH_WALL))) {
+        exec_entity_commandlist(entity);
+        play_model_animation(entity->virtualModelIndex, D_00000064_E6E334);
+    }
+}
 
-void func_802BBD78_E2E6A8(Entity* entity) {
+void entity_TrumpetPlant_create_effect(Entity* entity) {
     f32 xOffset, zOffset, angle;
 
-    angle = (clamp_angle(entity->rotation.y) * TAU) / 360.0f;
-    xOffset = cos_rad(angle) * -26.0;
-    zOffset = sin_rad(angle) * 6.0;
+    angle = clamp_angle(entity->rotation.y) * TAU / 360.0f;
+    xOffset = -26.0 * cos_rad(angle);
+    zOffset = 6.0 * sin_rad(angle);
     fx_stars_burst(0, entity->position.x + xOffset, entity->position.y + 62.0f, entity->position.z + zOffset, clamp_angle(entity->rotation.y - 90.0), 54.0f, 2);
 }
 
-INCLUDE_ASM(s32, "entity/jan_iwa/E2E5F0", func_802BBE8C_E2E7BC);
-void func_802BBE8C_E2E7BC(Entity*);
+void entity_TrumpetPlant_spawn_coin(Entity* entity) {
+    TrumpetPlantData* data = entity->dataBuf.any;
+
+    entity_TrumpetPlant_create_effect(entity);
+    if (data->numCoins < 3) {
+        f32 xOffset, zOffset, angle;
+
+        angle = clamp_angle(entity->rotation.y) * TAU / 360.0f;
+        xOffset = -26.0 * cos_rad(angle);
+        zOffset = 6.0 * sin_rad(angle);
+
+        if (rand_int(32) > 16) {
+            f32 facingAngle = entity->rotation.y - 110.0f + (data->numCoins % 3) * 30;
+            data->numCoins++;
+            make_item_entity(ITEM_COIN,
+                             entity->position.x + xOffset,
+                             entity->position.y + 62.0f,
+                             entity->position.z + zOffset,
+                             ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS, 0,
+                             facingAngle, 0);
+        }
+    }
+}
 
 void func_802BC00C_E2E93C(Entity* entity) {
     make_item_entity_nodelay(ITEM_COIN, entity->position.x, entity->position.y + 30.0f, entity->position.z, 0x13, 0);
@@ -173,22 +206,22 @@ EntityScript Entity_BellbellPlant_Script = {
     es_End
 };
 
-EntityScript D_802BC85C_E2F18C = {
-    es_SetCallback(func_802BBD1C_E2E64C, 0)
+EntityScript Entity_TrumpetPlant_Script = {
+    es_SetCallback(entity_TrumpetPlant_idle, 0)
     es_ClearFlags(ENTITY_FLAGS_SHOWS_INSPECT_PROMPT)
     es_PlaySound(SOUND_F3)
     es_SetCallback(NULL, 15)
-    es_Call(func_802BBD78_E2E6A8)
+    es_Call(entity_TrumpetPlant_create_effect)
     es_SetCallback(NULL, 3)
-    es_Call(func_802BBD78_E2E6A8)
+    es_Call(entity_TrumpetPlant_create_effect)
     es_SetCallback(NULL, 2)
-    es_Call(func_802BBE8C_E2E7BC)
+    es_Call(entity_TrumpetPlant_spawn_coin)
     es_SetCallback(NULL, 3)
-    es_Call(func_802BBD78_E2E6A8)
+    es_Call(entity_TrumpetPlant_create_effect)
     es_SetCallback(NULL, 2)
-    es_Call(func_802BBD78_E2E6A8)
+    es_Call(entity_TrumpetPlant_create_effect)
     es_SetCallback(NULL, 3)
-    es_Call(func_802BBD78_E2E6A8)
+    es_Call(entity_TrumpetPlant_create_effect)
     es_SetCallback(NULL, 32)
     es_SetFlags(ENTITY_FLAGS_SHOWS_INSPECT_PROMPT)
     es_Restart
@@ -332,10 +365,10 @@ EntityBlueprint D_802BCBD8_E2F508 = {
 EntityBlueprint D_802BCBFC_E2F52C = {
     .flags = ENTITY_FLAGS_SHOWS_INSPECT_PROMPT | ENTITY_FLAGS_HAS_ANIMATED_MODEL,
     .typeDataSize = 4,
-    .renderCommandList = 0x340,
-    .modelAnimationNodes = 0x58,
+    .renderCommandList = D_00000340_E6E610,
+    .modelAnimationNodes = D_00000058_E6E328,
     .fpInit = NULL,
-    .updateEntityScript = D_802BC85C_E2F18C,
+    .updateEntityScript = Entity_TrumpetPlant_Script,
     .fpHandleCollision = NULL,
     {{ D_802BCBC8_E2F4F8, 0 }},
     .entityType = ENTITY_TYPE_TRUMPET_PLANT,

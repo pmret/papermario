@@ -12870,7 +12870,28 @@ segments:
     vram: 0x00000000
     subsegments:
     - [0xE6C440, c, BellbellPlant_anim]
-  - [0xE6D390, bin] # unk data
+  - name: entity_model_TrumpetPlant_gfx
+    dir: entity/model
+    type: code
+    start: 0xE6D390
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE6D390, c, TrumpetPlant_gfx]
+    - start: 0xE6D390
+      type: .data
+      name: TrumpetPlant_gfx
+      subsegments:
+      - [0xE6D390]
+      - [0xE6E0D0, rgba16, TrumpetPlant, 16, 16]
+  - name: entity_model_TrumpetPlant_anim
+    dir: entity/model
+    type: code
+    start: 0xE6E2D0
+    vram: 0x00000000
+    subsegments:
+    - [0xE6E2D0, c, TrumpetPlant_anim]
+  - [0xE6E660, bin] # unk data
   - name: entity_model_CymbalPlant_anim
     dir: entity/model
     type: code
