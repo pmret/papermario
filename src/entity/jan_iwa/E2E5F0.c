@@ -1,6 +1,7 @@
 #include "common.h"
 #include "effects.h"
 #include "entity_script.h"
+#include "animation_script.h"
 
 extern EntityBlueprint D_802BCC44_E2F574;
 extern EntityBlueprint D_802BCC68_E2F598;
@@ -13,6 +14,10 @@ extern EntityBlueprint D_802BCD40_E2F670;
 
 extern EntityModelScript D_802E9830;
 
+extern AnimScript Entity_BellbellPlant_AnimationIdle;
+extern AnimScript Entity_BellbellPlant_AnimationUse;
+extern StaticAnimatorNode* Entity_BellbellPlant_Mesh[];
+
 // size unknown
 typedef struct structE2E5F0 {
     /* 0x00 */ s32 unk_00;
@@ -23,8 +28,13 @@ typedef struct structE2E5F0 {
     /* 0x18 */ f32 unk_18;
 } structE2E5F0;
 
-INCLUDE_ASM(s32, "entity/jan_iwa/E2E5F0", func_802BBCC0_E2E5F0);
-void func_802BBCC0_E2E5F0(Entity*);
+void entity_BellbellPlant_idle(Entity* entity) {
+    if ((gPlayerStatus.animFlags & PLAYER_STATUS_ANIM_FLAGS_INTERACT_PROMPT_AVAILABLE) &&
+        (entity->collisionFlags & (ENTITY_COLLISION_PLAYER_HAMMER | ENTITY_COLLISION_PLAYER_TOUCH_WALL))) {
+        exec_entity_commandlist(entity);
+        play_model_animation(entity->virtualModelIndex, Entity_BellbellPlant_AnimationUse);
+    }
+}
 
 INCLUDE_ASM(s32, "entity/jan_iwa/E2E5F0", func_802BBD1C_E2E64C);
 void func_802BBD1C_E2E64C(Entity*);
@@ -153,8 +163,8 @@ void func_802BC3E4_E2ED14(Entity* entity) {
     }
 }
 
-EntityScript D_802BC820_E2F150 = {
-    es_SetCallback(func_802BBCC0_E2E5F0, 0)
+EntityScript Entity_BellbellPlant_Script = {
+    es_SetCallback(entity_BellbellPlant_idle, 0)
     es_ClearFlags(ENTITY_FLAGS_SHOWS_INSPECT_PROMPT)
     es_PlaySound(SOUND_F1)
     es_SetCallback(NULL, 60)
@@ -285,34 +295,34 @@ s32 D_802BCB58_E2F488[] = {
 };
 
 s32 D_802BCB68_E2F498[] = {
-0x00E7B0E0, 0x00E811D0, 0x00E811D0, 0x00E815F0
+    0x00E7B0E0, 0x00E811D0, 0x00E811D0, 0x00E815F0
 };
 s32 D_802BCB78_E2F4A8[] = {
-0x00E815F0, 0x00E88030, 0x00E88030, 0x00E884A0
+    0x00E815F0, 0x00E88030, 0x00E88030, 0x00E884A0
 };
 s32 D_802BCB88_E2F4B8[] = {
-0x00E884A0, 0x00E8A410, 0x00E8A410, 0x00E8A9E0
+    0x00E884A0, 0x00E8A410, 0x00E8A410, 0x00E8A9E0
 };
 s32 D_802BCB98_E2F4C8[] = {
-0x00E8A9E0, 0x00E91420, 0x00E91420, 0x00E91890
+    0x00E8A9E0, 0x00E91420, 0x00E91420, 0x00E91890
 };
 s32 D_802BCBA8_E2F4D8[] = {
-0x00E91890, 0x00E982D0, 0x00E982D0, 0x00E98740
+    0x00E91890, 0x00E982D0, 0x00E982D0, 0x00E98740
 };
 s32 D_802BCBB8_E2F4E8[] = {
-0x00E6B1B0, 0x00E6C440, 0x00E6C440, 0x00E6D390
+    0x00E6B1B0, 0x00E6C440, 0x00E6C440, 0x00E6D390
 };
 s32 D_802BCBC8_E2F4F8[] = {
-0x00E6D390, 0x00E6E2D0, 0x00E6E2D0, 0x00E6E660,
+    0x00E6D390, 0x00E6E2D0, 0x00E6E2D0, 0x00E6E660,
 };
 
 EntityBlueprint D_802BCBD8_E2F508 = {
     .flags = ENTITY_FLAGS_SHOWS_INSPECT_PROMPT | ENTITY_FLAGS_SQUARE_SHADOW | ENTITY_FLAGS_400 | ENTITY_FLAGS_SET_SHADOW_FLAG200 | ENTITY_FLAGS_HAS_ANIMATED_MODEL,
     .typeDataSize = 0,
-    .renderCommandList = 0xEA4,
-    .modelAnimationNodes = 0xDC,
+    .renderCommandList = Entity_BellbellPlant_AnimationIdle,
+    .modelAnimationNodes = Entity_BellbellPlant_Mesh,
     .fpInit = NULL,
-    .updateEntityScript = D_802BC820_E2F150,
+    .updateEntityScript = Entity_BellbellPlant_Script,
     .fpHandleCollision = NULL,
     {{ D_802BCBB8_E2F4E8, 0 }},
     .entityType = ENTITY_TYPE_BELLBELL_PLANT,

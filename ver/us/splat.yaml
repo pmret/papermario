@@ -12079,10 +12079,10 @@ segments:
     subsegments:
     - [0xE2D730, c]
     - [0xE2E5F0, c]
-    - [0xE2EDE0, c]
+    - [0xE2EDE0, c, ArrowSign]
     - [0xE2EFD0, .data, E2D730]
     - [0xE2F150, .data, E2E5F0]
-    - [0xE2F6A0, .data, E2EDE0]
+    - [0xE2F6A0, .data, ArrowSign]
     - [0xE2F6F0]
   - type: code
     dir: entity/sbk_omo
@@ -12849,7 +12849,28 @@ segments:
     vram: 0x00000000
     subsegments:
     - [0xE69D50, c, SimpleSpring_anim]
-  - [0xE6B1B0, bin] # unk data
+  - name: entity_model_BellbellPlant_gfx
+    dir: entity/model
+    type: code
+    start: 0xE6B1B0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE6B1B0, c, BellbellPlant_gfx]
+    - start: 0xE6B1B0
+      type: .data
+      name: BellbellPlant_gfx
+      subsegments:
+      - [0xE6B1B0]
+      - [0xE6C240, rgba16, BellbellPlant, 16, 16]
+  - name: entity_model_BellbellPlant_anim
+    dir: entity/model
+    type: code
+    start: 0xE6C440
+    vram: 0x00000000
+    subsegments:
+    - [0xE6C440, c, BellbellPlant_anim]
+  - [0xE6D390, bin] # unk data
   - name: entity_model_CymbalPlant_anim
     dir: entity/model
     type: code
