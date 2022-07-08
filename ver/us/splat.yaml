@@ -12077,7 +12077,9 @@ segments:
     - [0xE2D730, c]
     - [0xE2E5F0, c]
     - [0xE2EDE0, c]
-    - [0xE2EFD0, data]
+    - [0xE2EFD0, .data, E2D730]
+    - [0xE2F150, .data, E2E5F0]
+    - [0xE2F6A0, .data, E2EDE0]
     - [0xE2F6F0]
   - type: code
     dir: entity/sbk_omo
@@ -12830,6 +12832,69 @@ segments:
     subsegments:
     - [0xE69D50, c, SimpleSpring_anim]
   - [0xE6B1B0, bin] # unk data
+  - name: entity_model_CymbalPlant_anim
+    dir: entity/model
+    type: code
+    start: 0xE98740
+    vram: 0x00000000
+    subsegments:
+    - [0xE98740, c, CymbalPlant_anim]
+  - name: entity_model_CymbalPlant_gfx
+    dir: entity/model
+    type: code
+    start: 0xE992F0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE992F0, c, CymbalPlant_gfx]
+    - start: 0xE992F0
+      type: .data
+      name: CymbalPlant_gfx
+      subsegments:
+      - [0xE992F0, ci4, CymbalPlant, 64, 64]
+      - [0xE99AF0, palette, CymbalPlant]
+      - [0xE99B10]
+  - name: entity_model_PinkFlower_anim
+    dir: entity/model
+    type: code
+    start: 0xE9A990
+    vram: 0x00000000
+    subsegments:
+    - [0xE9A990, c, PinkFlower_anim]
+  - name: entity_model_PinkFlower_gfx
+    dir: entity/model
+    type: code
+    start: 0xE9B500
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE9B500, c, PinkFlower_gfx]
+    - start: 0xE9B500
+      type: .data
+      name: PinkFlower_gfx
+      subsegments:
+      - [0xE9B500]
+      - [0xE9BAB0, ia16, PinkFlower_light, 16, 16]
+      - [0xE9BCB0]
+      - [0xE9BD20, rgba16, PinkFlower_tex, 16, 64]
+      - [0xE9C520]
+  - name: entity_model_SpinningFlower
+    dir: entity/model
+    type: code
+    start: 0xE9C900
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE9C900, c, SpinningFlower]
+    - start: 0xE9C900
+      type: .data
+      name: SpinningFlower
+      subsegments:
+      - [0xE9C900]
+      - [0xE9CA80, ia4, SpinningFlower_img1, 16, 32]
+      - [0xE9CB80]
+      - [0xE9CBF8, rgba16, SpinningFlower_petal, 32, 32]
+      - [0xE9D3F8]
   - name: entity_model_BombableRock
     dir: entity/model
     type: code

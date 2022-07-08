@@ -688,6 +688,36 @@ typedef struct StarBoxLauncherData {
     /* 0x20 */ f32 maxRotationZ;
 } StarBoxLauncherData; // size = 0x24
 
+typedef struct CymbalPlantData {
+    /* 0x0 */ u8 state;
+    /* 0x1 */ s8 unk_01;
+    /* 0x2 */ s16 timer;
+    /* 0x4 */ f32 angle;
+    /* 0x8 */ f32 dist;
+} CymbalPlantData; // size = 0xC
+
+typedef struct PinkFlowerData {
+    /* 0x0 */ u16 state;
+    /* 0x2 */ u16 timer;
+    /* 0x4 */ u16 linkedEntityIndex;
+    /* 0x8 */ f32 initialRotY;
+} PinkFlowerData; // size = 0xC
+
+// size unknown
+typedef struct SpinningFlowerData {
+    /* 0x00 */ s16 unk_00;
+    /* 0x02 */ s8 unk_02;
+    /* 0x04 */ Vec3f rotation;
+    /* 0x10 */ s32 unk_10;
+    /* 0x14 */ f32 unk_14;
+    /* 0x18 */ s32 unk_18;
+    /* 0x1C */ char unk_1C[0x0C];
+    /* 0x28 */ s16 unk_28;
+    /* 0x2A */ s16 unk_2A;
+    /* 0x2C */ s16 unk_2C;
+    /* 0x30 */ Mtx unk_30;
+} SpinningFlowerData; // size = 0x70
+
 // END ENTITY-SPECIFIC STRUCTS
 
 typedef s32 (*EntityCallback)(struct Entity*);
@@ -755,6 +785,9 @@ typedef struct Entity {
         BombableRockData* bombableRock;
         TweesterData* tweester;
         StarBoxLauncherData* starBoxLauncher;
+        CymbalPlantData* cymbalPlant;
+        PinkFlowerData* pinkFlower;
+        SpinningFlowerData* spinningFlower;
         s32* unk;
     } dataBuf;
     /* 0x44 */ Vec3s* vertexData;

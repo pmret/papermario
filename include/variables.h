@@ -241,7 +241,6 @@ extern EntityBlueprint Entity_BlueWarpPipe;
 
 extern UNK_TYPE D_0A000328;
 extern UNK_TYPE D_0A000750;
-extern UNK_TYPE D_0A000800;
 extern UNK_TYPE D_0A000808;
 
 // Scripts

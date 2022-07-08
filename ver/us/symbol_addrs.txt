@@ -25819,7 +25819,6 @@ D_09003800 = 0x9003800; // type:data
 D_0A000328 = 0xA000328; // type:data
 D_0A000740 = 0xA000740; // type:data
 D_0A000750 = 0xA000750; // type:data
-D_0A000800 = 0xA000800; // type:data
 D_0A000808 = 0xA000808; // type:data
 D_0A000EE8 = 0xA000EE8; // type:data
 D_0A000EF8 = 0xA000EF8; // type:data
