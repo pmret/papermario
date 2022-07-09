@@ -73,6 +73,7 @@ UnkEpsilonConfig* D_8007F200 = &D_8007F1D0;
 
 UnkEpsilonConfig* D_8007F204 = &D_8007F1D0;
 
+// init_lpfilter
 void func_80058DD0(AlUnkPhi* phi) {
     f64 attenuation;
     s16 timeConstant;
@@ -147,19 +148,21 @@ void func_80059008(AlUnkKappa* kappa, s16 arg1, s16 arg2, s16 arg3) {
 // AlUnkDelta from D_80078E54
 INCLUDE_ASM(s32, "audio/341d0", func_8005904C);
 
+// alFxPull
 // AlUnkDelta from D_80078E54
 INCLUDE_ASM(s32, "audio/341d0", func_80059310);
 
+// alFxParamHdl
 s32 func_800598A0(AlUnkDelta* delta, s16 index, s16 mode, s32 value) {
     s16* temp_v0;
     s32 diff;
 
     switch (mode) {
     case 0:
-        delta->unk_eps_0C[index].unk_00 = value & ~7;
+        delta->unk_eps_0C[index].unk_00 = value & 0xFFFFFFF8;
         break;
     case 1:
-        delta->unk_eps_0C[index].unk_04 = value & ~7;
+        delta->unk_eps_0C[index].unk_04 = value & 0xFFFFFFF8;
         break;
     case 3:
         delta->unk_eps_0C[index].unk_08 = value;
@@ -188,7 +191,23 @@ s32 func_800598A0(AlUnkDelta* delta, s16 index, s16 mode, s32 value) {
     return 0;
 }
 
-INCLUDE_ASM(s32, "audio/341d0", func_80059AB8);
+// from libultra reverb.c
+Acmd* _saveBuffer(AlUnkDelta* delta, s16* old_pos, s32 buff, s32 count, Acmd* cmdBufPos) {
+    Acmd *ptr = cmdBufPos;
+    s16* new_pos = old_pos + count;
+    s16* delay_end = &delta->unk_00[delta->unk_08];
+
+    if (delay_end < new_pos) {
+        s32 before_end = (delay_end - old_pos);
+        s32 after_end = (new_pos - delay_end);
+        n_aLoadBuffer(ptr++, before_end<<1, buff, osVirtualToPhysical(old_pos));
+        n_aLoadBuffer(ptr++, after_end<<1, buff + (before_end<<1), osVirtualToPhysical(delta->unk_00));
+    } else {
+        n_aLoadBuffer(ptr++, count<<1, buff, osVirtualToPhysical(old_pos));
+    }
+
+    return ptr;
+}
 
 f32 func_80059BD4(AlUnkEpsilon* eps, s32 arg1) {
     f32* floatPtr = &eps->unk_14;

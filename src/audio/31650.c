@@ -3,11 +3,11 @@
 #include "nu/nualsgi.h"
 
 void func_80057874(u8 arg0, u8 arg1);
-s16 func_80058004(s16 arg0, s32 arg1, s16 arg2, u16 arg3);
+s16 _getVol(s16 arg0, s32 arg1, s16 arg2, u16 arg3);
 
 void snd_add_sfx_output(void);
 void snd_update_sequence_players(void);
-Acmd* func_80058050(AlUnkBeta*, Acmd*);
+Acmd* func_80058050(AuPVoice*, Acmd*);
 Acmd* func_80059310(AlUnkDelta*, Acmd*, s32, s32);
 
 AlUnkAlpha* D_80078E50 = NULL;
@@ -33,7 +33,7 @@ u8 D_80078E5C = FALSE;
     _a->words.w0 = _SHIFTL(A_INTERLEAVE, 24, 8); \
     }
 
-extern s16 AlCosineBlend[128];
+extern s16 AuEqPower[128];
 
 #define AL_COS_MID_IDX 64
 #define AL_COS_MAX_IDX 127
@@ -46,7 +46,7 @@ void func_80056250(AlUnkAlpha* globals, ALConfig* config) {
         return;
     }
 
-    globals->unk_0C = config->unk_num_beta;
+    globals->num_pvoice = config->unk_num_beta;
     globals->unk_10 = config->unk_num_gamma;
     globals->unk_00 = 0;
     globals->unk_04 = 0;
@@ -59,41 +59,42 @@ void func_80056250(AlUnkAlpha* globals, ALConfig* config) {
     D_80078E5A = 0x7FFF;
     D_80078E5C = TRUE;
 
-    D_80078E54->al_unk_beta = alHeapAlloc(heap, config->unk_num_beta, sizeof(*D_80078E54->al_unk_beta));
+    D_80078E54->pvoices = alHeapAlloc(heap, config->unk_num_beta, sizeof(*D_80078E54->pvoices));
 
+    // this is inlined alN_PVoiceNew
     for (i = 0; i < config->unk_num_beta; i++) {
-        AlUnkBeta* beta = &D_80078E54->al_unk_beta[i];
-        beta->sub04.unk_zeta_04 = alHeapAlloc(heap, 1, sizeof(*beta->sub04.unk_zeta_04));
-        beta->sub04.loopPredictor = alHeapAlloc(heap, 1, sizeof(*beta->sub04.loopPredictor));
-        beta->sub04.dmaProc = ((ALDMAproc (*)(NUDMAState**))(D_80078E54->dmaNew))(&beta->sub04.dmaState);
-        beta->sub04.unk_2C = 0;
-        beta->sub04.unk_30 = 1;
-        beta->sub04.wavTable = 0;
-        beta->sub38.unk_sigma_38 = alHeapAlloc(heap, 1, sizeof(*beta->sub38.unk_sigma_38));
-        beta->sub38.unk_40 = 0;
-        beta->sub38.unk_44 = 1;
-        beta->sub38.unk_3C = 1.0f;
-        beta->sub48.unk_eta_48 = alHeapAlloc(heap, 1, sizeof(*beta->sub48.unk_eta_48));
-        beta->sub48.unk_24 = 1;
-        beta->sub48.unk_28 = 0;
-        beta->sub48.unk_06 = 1;
-        beta->sub48.unk_14 = 1;
-        beta->sub48.unk_1A = 1;
-        beta->sub48.unk_08 = 1;
-        beta->sub48.unk_0A = 1;
-        beta->sub48.unk_0C = 0;
-        beta->sub48.unk_0E = 0;
-        beta->sub48.unk_12 = 1;
-        beta->sub48.unk_10 = 0;
-        beta->sub48.unk_18 = 1;
-        beta->sub48.unk_16 = 0;
-        beta->sub48.unk_1C = 0;
-        beta->sub48.unk_20 = 0;
-        beta->sub48.unk_04 = 64;
-        beta->unk_74 = 0;
-        beta->next = NULL;
-        beta->unk_78 = 0;
-        beta->unk_79 = i;
+        AuPVoice* voice = &D_80078E54->pvoices[i];
+        voice->loadFilter.dc_state = alHeapAlloc(heap, 1, sizeof(*voice->loadFilter.dc_state));
+        voice->loadFilter.dc_lstate = alHeapAlloc(heap, 1, sizeof(*voice->loadFilter.dc_lstate));
+        voice->loadFilter.dc_dmaFunc = ((ALDMAproc (*)(NUDMAState**))(D_80078E54->dmaNew))(&voice->loadFilter.dc_dmaState);
+        voice->loadFilter.unk_2C = 0;
+        voice->loadFilter.unk_30 = 1;
+        voice->loadFilter.wavTable = 0;
+        voice->resampler.rs_state = alHeapAlloc(heap, 1, sizeof(*voice->resampler.rs_state));
+        voice->resampler.unk_40 = 0;
+        voice->resampler.unk_44 = 1;
+        voice->resampler.rs_ratio = 1.0f;
+        voice->envMixer.em_state = alHeapAlloc(heap, 1, sizeof(*voice->envMixer.em_state));
+        voice->envMixer.em_first = 1;
+        voice->envMixer.em_motion = 0;
+        voice->envMixer.em_volume = 1;
+        voice->envMixer.em_ltgt = 1;
+        voice->envMixer.em_rtgt = 1;
+        voice->envMixer.em_cvolL = 1;
+        voice->envMixer.em_cvolR = 1;
+        voice->envMixer.em_dryamt = 0;
+        voice->envMixer.em_wetamt = 0;
+        voice->envMixer.em_lratm = 1;
+        voice->envMixer.em_lratl = 0;
+        voice->envMixer.em_rratm = 1;
+        voice->envMixer.em_rratl = 0;
+        voice->envMixer.em_delta = 0;
+        voice->envMixer.em_segEnd = 0;
+        voice->envMixer.em_pan = 64;
+        voice->unk_74 = 0;
+        voice->next = NULL;
+        voice->unk_78 = 0;
+        voice->unk_79 = i;
     }
 
     D_80078E54->al_unk_gamma = alHeapAlloc(heap, config->unk_num_gamma, sizeof(*D_80078E54->al_unk_gamma));
@@ -134,13 +135,13 @@ void func_800565A4(void) {
 Acmd* alAudioFrame(Acmd* cmdList, s32* cmdLen, s16* outBuf, s32 outLen) {
     Acmd* cmdListPos;
     AlUnkGamma* gamma1;
-    AlUnkBeta* beta1;
-    AlUnkBeta* beta2;
+    AuPVoice* beta1;
+    AuPVoice* pvoice;
     AlUnkGamma* gamma3;
 
     s16* sp10;
-    u16 offset2;
-    s16 offset1;
+    u16 auxOut;
+    s16 mainOut;
 
     s32 i;
     s32 var_s7;
@@ -152,10 +153,10 @@ Acmd* alAudioFrame(Acmd* cmdList, s32* cmdLen, s16* outBuf, s32 outLen) {
     } else {
         snd_add_sfx_output();
         if (D_80078E5C) {
-            for (i = 0; i < D_80078E54->unk_0C; i++) {
-                beta2 = &D_80078E54->al_unk_beta[i];
-                if (beta2->sub48.unk_28 == 1) {
-                    func_80057874(i, beta2->sub48.unk_04);
+            for (i = 0; i < D_80078E54->num_pvoice; i++) {
+                pvoice = &D_80078E54->pvoices[i];
+                if (pvoice->envMixer.em_motion == 1) {
+                    func_80057874(i, pvoice->envMixer.em_pan);
                 }
             }
             D_80078E5C = FALSE;
@@ -163,26 +164,26 @@ Acmd* alAudioFrame(Acmd* cmdList, s32* cmdLen, s16* outBuf, s32 outLen) {
         if (outLen > 0) {
             do {
                 snd_update_sequence_players();
-                for (i = 0; i < D_80078E54->unk_0C; i++) {
-                    beta2 = &D_80078E54->al_unk_beta[i];
+                for (i = 0; i < D_80078E54->num_pvoice; i++) {
+                    pvoice = &D_80078E54->pvoices[i];
 
-                    if ((beta2->unk_78 != 0xFF) && (beta2->unk_78 < D_80078E54->unk_10)) {
-                        gamma3 = &D_80078E54->al_unk_gamma[beta2->unk_78];
+                    if ((pvoice->unk_78 != 0xFF) && (pvoice->unk_78 < D_80078E54->unk_10)) {
+                        gamma3 = &D_80078E54->al_unk_gamma[pvoice->unk_78];
                         if (gamma3->unk_beta_14 != NULL) {
-                            gamma3->unk_beta_14->next = beta2;
+                            gamma3->unk_beta_14->next = pvoice;
                         } else {
-                            gamma3->unk_beta_10 = beta2;
+                            gamma3->unk_beta_10 = pvoice;
                         }
-                        gamma3->unk_beta_14 = beta2;
+                        gamma3->unk_beta_14 = pvoice;
                     }
                 }
                 var_s7 = 1;
                 for (i = 0; i < D_80078E54->unk_10; i++) {
                     gamma3 = &D_80078E54->al_unk_gamma[i];
                     if (gamma3->unk_beta_10 != NULL) {
-                        aClearBuffer(cmdListPos++, 0x4E0, 8 * AUDIO_SAMPLES);
+                        aClearBuffer(cmdListPos++, N_AL_MAIN_L_OUT, 8 * AUDIO_SAMPLES);
                         if (gamma3->unk_beta_10 != NULL) {
-                            AlUnkBeta* next;
+                            AuPVoice* next;
                             do {
                                 cmdListPos = func_80058050(gamma3->unk_beta_10, cmdListPos);
                                 next = gamma3->unk_beta_10->next;
@@ -192,25 +193,25 @@ Acmd* alAudioFrame(Acmd* cmdList, s32* cmdLen, s16* outBuf, s32 outLen) {
                             gamma3->unk_beta_14 = 0;
                         }
                         if (gamma3->unk_0C != 0) {
-                            cmdListPos = func_80059310(gamma3->unk_delta_8, func_80059310(gamma3->unk_delta_4, cmdListPos, 0x7C0, 0), 0x930, 0);
+                            cmdListPos = func_80059310(gamma3->unk_delta_8, func_80059310(gamma3->unk_delta_4, cmdListPos, N_AL_AUX_L_OUT, 0), N_AL_AUX_R_OUT, 0);
                         }
                         if (i == D_800A3FEC) {
-                            offset1 = -1;
+                            mainOut = -1;
                             switch (D_800A3FEE) {
                                 case 1:
-                                    offset1 = 0x4E0;
-                                    offset2 = 0x7C0;
+                                    mainOut = N_AL_MAIN_L_OUT;
+                                    auxOut = N_AL_AUX_L_OUT;
                                     break;
                                 case 2:
-                                    offset1 = 0x650;
-                                    offset2 = 0x930;
+                                    mainOut = N_AL_MAIN_R_OUT;
+                                    auxOut = N_AL_AUX_R_OUT;
                                     break;
                             }
-                            if (offset1 != -1) {
-                                aSaveBufferSize(cmdListPos++, 2 * AUDIO_SAMPLES, offset1, osVirtualToPhysical(D_800A3FE0 + (D_800A3FE8 % D_800A3FF0) * AUDIO_SAMPLES));
-                                aLoadBufferSize(cmdListPos++, 2 * AUDIO_SAMPLES, offset1, osVirtualToPhysical(D_800A3FE0 + ((D_800A3FE8 + 1) % D_800A3FF0) * AUDIO_SAMPLES));
-                                aSaveBufferSize(cmdListPos++, 2 * AUDIO_SAMPLES, offset2, osVirtualToPhysical(D_800A3FE4 + (D_800A3FE8 % D_800A3FF0) * AUDIO_SAMPLES));
-                                aLoadBufferSize(cmdListPos++, 2 * AUDIO_SAMPLES, offset2, osVirtualToPhysical(D_800A3FE4 + ((D_800A3FE8 + 1) % D_800A3FF0) * AUDIO_SAMPLES));
+                            if (mainOut != -1) {
+                                aSaveBufferSize(cmdListPos++, 2 * AUDIO_SAMPLES, mainOut, osVirtualToPhysical(D_800A3FE0 + (D_800A3FE8 % D_800A3FF0) * AUDIO_SAMPLES));
+                                aLoadBufferSize(cmdListPos++, 2 * AUDIO_SAMPLES, mainOut, osVirtualToPhysical(D_800A3FE0 + ((D_800A3FE8 + 1) % D_800A3FF0) * AUDIO_SAMPLES));
+                                aSaveBufferSize(cmdListPos++, 2 * AUDIO_SAMPLES, auxOut, osVirtualToPhysical(D_800A3FE4 + (D_800A3FE8 % D_800A3FF0) * AUDIO_SAMPLES));
+                                aLoadBufferSize(cmdListPos++, 2 * AUDIO_SAMPLES, auxOut, osVirtualToPhysical(D_800A3FE4 + ((D_800A3FE8 + 1) % D_800A3FF0) * AUDIO_SAMPLES));
 
                             }
                         }
@@ -219,8 +220,8 @@ Acmd* alAudioFrame(Acmd* cmdList, s32* cmdLen, s16* outBuf, s32 outLen) {
                         } else {
                             aLoadBufferSize(cmdListPos++, 4 * AUDIO_SAMPLES, 0, osVirtualToPhysical(D_80078E54->unk_28));
                         }
-                        aMix(cmdListPos++, 0, gamma3->unk_00, 0x7C0, 0);
-                        aMix(cmdListPos++, 0, gamma3->unk_00, 0x930, 2 * AUDIO_SAMPLES);
+                        aMix(cmdListPos++, 0, gamma3->unk_00, N_AL_AUX_L_OUT, 0);
+                        aMix(cmdListPos++, 0, gamma3->unk_00, N_AL_AUX_R_OUT, 2 * AUDIO_SAMPLES);
                         aSaveBufferSize(cmdListPos++, 4 * AUDIO_SAMPLES, 0, osVirtualToPhysical(D_80078E54->unk_28));
                         if (var_s7) {
                             aClearBuffer(cmdListPos++, 0, 4 * AUDIO_SAMPLES);
@@ -228,22 +229,22 @@ Acmd* alAudioFrame(Acmd* cmdList, s32* cmdLen, s16* outBuf, s32 outLen) {
                         } else {
                             aLoadBufferSize(cmdListPos++, 4 * AUDIO_SAMPLES, 0, osVirtualToPhysical(D_80078E54->unk_24));
                         }
-                        aMix(cmdListPos++, 0, gamma3->unk_00, 0x4E0, 0);
-                        aMix(cmdListPos++, 0, gamma3->unk_00, 0x650, 2 * AUDIO_SAMPLES);
+                        aMix(cmdListPos++, 0, gamma3->unk_00, N_AL_MAIN_L_OUT, 0);
+                        aMix(cmdListPos++, 0, gamma3->unk_00, N_AL_MAIN_R_OUT, 2 * AUDIO_SAMPLES);
                         aSaveBufferSize(cmdListPos++, 4 * AUDIO_SAMPLES, 0, osVirtualToPhysical(D_80078E54->unk_24));
                     }
                 }
-                aDMEMMove(cmdListPos++, 0, 0x4E0, 4 * AUDIO_SAMPLES);
-                aLoadBufferSize(cmdListPos++, 4 * AUDIO_SAMPLES, 0x7C0, osVirtualToPhysical(D_80078E54->unk_28));
-                aMix(cmdListPos++, 0, 0x7FFF, 0x7C0, 0x4E0);
-                aMix(cmdListPos++, 0, 0x7FFF, 0x930, 0x650);
+                aDMEMMove(cmdListPos++, 0, N_AL_MAIN_L_OUT, 4 * AUDIO_SAMPLES);
+                aLoadBufferSize(cmdListPos++, 4 * AUDIO_SAMPLES, N_AL_AUX_L_OUT, osVirtualToPhysical(D_80078E54->unk_28));
+                aMix(cmdListPos++, 0, 0x7FFF, N_AL_AUX_L_OUT, N_AL_MAIN_L_OUT);
+                aMix(cmdListPos++, 0, 0x7FFF, N_AL_AUX_R_OUT, N_AL_MAIN_R_OUT);
                 if (D_80078E58) {
                     u16 temp;
-                    aDMEMMove(cmdListPos++, 0x4E0, 0, 4 * AUDIO_SAMPLES);
-                    aClearBuffer(cmdListPos++, 0x4E0, 4 * AUDIO_SAMPLES);
+                    aDMEMMove(cmdListPos++, N_AL_MAIN_L_OUT, 0, 4 * AUDIO_SAMPLES);
+                    aClearBuffer(cmdListPos++, N_AL_MAIN_L_OUT, 4 * AUDIO_SAMPLES);
                     temp = D_80078E5A;
-                    aMix(cmdListPos++, 0, temp, 0, 0x4E0);
-                    aMix(cmdListPos++, 0, temp, 2 * AUDIO_SAMPLES, 0x650);
+                    aMix(cmdListPos++, 0, temp, 0, N_AL_MAIN_L_OUT);
+                    aMix(cmdListPos++, 0, temp, 2 * AUDIO_SAMPLES, N_AL_MAIN_R_OUT);
                 }
                 outLen -= AUDIO_SAMPLES;
                 aInterleavePart(cmdListPos++);
@@ -303,365 +304,365 @@ void func_80056E34(u8 arg0, s16 arg1, s16 arg2, s32 arg3) {
 }
 
 void func_80056EC0(u8 arg0, s8 arg1) {
-    AlUnkBeta* beta = &D_80078E54->al_unk_beta[arg0];
+    AuPVoice* beta = &D_80078E54->pvoices[arg0];
 
     beta->unk_78 = arg1;
 }
 
 void func_80056EE8(u8 arg0) {
-    AlUnkBeta* beta = &D_80078E54->al_unk_beta[arg0];
-    AlBetaSub04* zeta = &beta->sub04;
+    AuPVoice* beta = &D_80078E54->pvoices[arg0];
+    AuLoadFilter* zeta = &beta->loadFilter;
 
-    beta->sub48.unk_28 = 0;
-    beta->sub48.unk_24 = 1;
-    beta->sub48.unk_06 = 1;
-    beta->sub38.unk_40 = 0;
-    beta->sub38.unk_44 = 1;
-    beta->sub04.unk_2C = 0;
-    beta->sub04.unk_30 = 1;
-    beta->sub04.unk_28 = 0;
-    if (beta->sub04.instrument != NULL) {
-        beta->sub04.wavTable = zeta->instrument->wavOffset;
+    beta->envMixer.em_motion = 0;
+    beta->envMixer.em_first = 1;
+    beta->envMixer.em_volume = 1;
+    beta->resampler.unk_40 = 0;
+    beta->resampler.unk_44 = 1;
+    beta->loadFilter.unk_2C = 0;
+    beta->loadFilter.unk_30 = 1;
+    beta->loadFilter.unk_28 = 0;
+    if (beta->loadFilter.instrument != NULL) {
+        beta->loadFilter.wavTable = zeta->instrument->wavOffset;
         if (zeta->instrument->skipLoopPredictor == 0) {
             if (zeta->instrument->loopEnd != 0){
-                beta->sub04.loopCount = zeta->instrument->loopCount;
+                beta->loadFilter.dc_loopCount = zeta->instrument->loopCount;
             }
         } else if (zeta->instrument->skipLoopPredictor == 1) {
             if (zeta->instrument->loopEnd != 0){
-                beta->sub04.loopCount = zeta->instrument->loopCount;
+                beta->loadFilter.dc_loopCount = zeta->instrument->loopCount;
             }
         }
     }
 }
 
 void func_80056F78(u8 index) {
-    AlUnkBeta* beta = (AlUnkBeta*)&D_80078E54->al_unk_beta[index];
+    AuPVoice* beta = (AuPVoice*)&D_80078E54->pvoices[index];
 
-    beta->sub48.unk_28 = 1;
+    beta->envMixer.em_motion = 1;
 }
 
 void func_80056FA4(u8 index, u8 arg1, Instrument* instrument, f32 arg3, s16 arg4, u8 arg5, u8 arg6, s32 arg7) {
-    AlUnkBeta* beta = &D_80078E54->al_unk_beta[index];
-    AlBetaSub04* sub04 = &beta->sub04;
-    AlBetaSub48* sub48 = &beta->sub48;
-    AlBetaSub38* sub38 = &beta->sub38;
+    AuPVoice* beta = &D_80078E54->pvoices[index];
+    AuLoadFilter* sub04 = &beta->loadFilter;
+    AuEnvMixer* sub48 = &beta->envMixer;
+    AuResampler* sub38 = &beta->resampler;
 
     beta->unk_78 = arg1;
     sub04->instrument = instrument;
 
-    beta->sub04.wavTable = sub04->instrument->wavOffset;
-    beta->sub04.unk_28 = 0;
+    beta->loadFilter.wavTable = sub04->instrument->wavOffset;
+    beta->loadFilter.unk_28 = 0;
 
     switch (sub04->instrument->skipLoopPredictor) {
         case 0:
             sub04->instrument->wavDataLength = (sub04->instrument->wavDataLength / 9) * 9;
-            beta->sub04.unk_1C = sub04->instrument->unk_1C;
+            beta->loadFilter.dc_bookSize = sub04->instrument->unk_1C;
             if (sub04->instrument->loopEnd == 0) {
-                sub04->loopCount = 0;
-                sub04->loopEnd = 0;
-                sub04->loopStart = 0;
+                sub04->dc_loopCount = 0;
+                sub04->dc_loopEnd = 0;
+                sub04->dc_loopStart = 0;
             } else {
-                sub04->loopStart = sub04->instrument->loopStart;
-                sub04->loopEnd = sub04->instrument->loopEnd;
-                sub04->loopCount = sub04->instrument->loopCount;
-                alCopy(sub04->instrument->loopPredictorOffset, sub04->loopPredictor, sizeof(AlUnkZeta));
+                sub04->dc_loopStart = sub04->instrument->loopStart;
+                sub04->dc_loopEnd = sub04->instrument->loopEnd;
+                sub04->dc_loopCount = sub04->instrument->loopCount;
+                alCopy(sub04->instrument->loopPredictorOffset, sub04->dc_lstate, sizeof(AlUnkZeta));
             }
             break;
         case 1:
             if (sub04->instrument->loopEnd != 0) {
-                sub04->loopStart = sub04->instrument->loopStart;
-                sub04->loopEnd = sub04->instrument->loopEnd;
-                sub04->loopCount = sub04->instrument->loopCount;
+                sub04->dc_loopStart = sub04->instrument->loopStart;
+                sub04->dc_loopEnd = sub04->instrument->loopEnd;
+                sub04->dc_loopCount = sub04->instrument->loopCount;
             } else {
-                sub04->loopCount = 0;
-                sub04->loopEnd = 0;
-                sub04->loopStart = 0;
+                sub04->dc_loopCount = 0;
+                sub04->dc_loopEnd = 0;
+                sub04->dc_loopStart = 0;
             }
             break;
     }
 
-    sub48->unk_28 = 1;
-    sub48->unk_24 = 1;
-    sub48->unk_1C = 0;
-    sub48->unk_20 = arg7;
-    sub48->unk_04 = arg5;
-    sub48->unk_06 = SQ(arg4) >> 0xF;
-    sub48->unk_0C = (AlCosineBlend[arg6]);
-    sub48->unk_0E = (AlCosineBlend[AL_COS_MAX_IDX - arg6]);
-    if (sub48->unk_20 != 0) {
-        sub48->unk_08 = 1;
-        sub48->unk_0A = 1;
+    sub48->em_motion = 1;
+    sub48->em_first = 1;
+    sub48->em_delta = 0;
+    sub48->em_segEnd = arg7;
+    sub48->em_pan = arg5;
+    sub48->em_volume = SQ(arg4) >> 0xF;
+    sub48->em_dryamt = (AuEqPower[arg6]);
+    sub48->em_wetamt = (AuEqPower[AL_COS_MAX_IDX - arg6]);
+    if (sub48->em_segEnd != 0) {
+        sub48->em_cvolL = 1;
+        sub48->em_cvolR = 1;
     } else {
         if (D_80078181 == 0) {
-            sub48->unk_08 = (sub48->unk_06 * AlCosineBlend[AL_COS_MID_IDX]) >> 0xF;
-            sub48->unk_0A = (sub48->unk_06 * AlCosineBlend[AL_COS_MID_IDX]) >> 0xF;
+            sub48->em_cvolL = (sub48->em_volume * AuEqPower[AL_COS_MID_IDX]) >> 0xF;
+            sub48->em_cvolR = (sub48->em_volume * AuEqPower[AL_COS_MID_IDX]) >> 0xF;
         } else {
-            sub48->unk_08 = (sub48->unk_06 * AlCosineBlend[sub48->unk_04]) >> 0xF;
-            sub48->unk_0A = (sub48->unk_06 * AlCosineBlend[AL_COS_MAX_IDX - sub48->unk_04]) >> 0xF;
+            sub48->em_cvolL = (sub48->em_volume * AuEqPower[sub48->em_pan]) >> 0xF;
+            sub48->em_cvolR = (sub48->em_volume * AuEqPower[AL_COS_MAX_IDX - sub48->em_pan]) >> 0xF;
         }
     }
-    sub38->unk_3C = arg3;
+    sub38->rs_ratio = arg3;
 }
 
-void func_80057224(u8 index, Instrument* instrument) {
-    AlUnkBeta* beta = &D_80078E54->al_unk_beta[index];
-    AlBetaSub04* zeta = &beta->sub04;
+void func_80057224(u8 voiceIdx, Instrument* instrument) {
+    AuPVoice* pvoice = &D_80078E54->pvoices[voiceIdx];
+    AuLoadFilter* filter = &pvoice->loadFilter;
 
-    beta->sub04.instrument = instrument;
-    beta->sub04.wavTable = zeta->instrument->wavOffset;
-    beta->sub04.unk_28 = 0;
+    pvoice->loadFilter.instrument = instrument;
+    pvoice->loadFilter.wavTable = filter->instrument->wavOffset;
+    pvoice->loadFilter.unk_28 = 0;
 
-    switch (zeta->instrument->skipLoopPredictor) {
+    switch (filter->instrument->skipLoopPredictor) {
         case 0:
-            zeta->instrument->wavDataLength = (zeta->instrument->wavDataLength / 9) * 9;
-            beta->sub04.unk_1C = zeta->instrument->unk_1C;
-            if (zeta->instrument->loopEnd == 0) {
-                beta->sub04.loopCount = 0;
-                beta->sub04.loopEnd = 0;
-                beta->sub04.loopStart = 0;
+            filter->instrument->wavDataLength = (filter->instrument->wavDataLength / 9) * 9;
+            pvoice->loadFilter.dc_bookSize = filter->instrument->unk_1C;
+            if (filter->instrument->loopEnd == 0) {
+                pvoice->loadFilter.dc_loopCount = 0;
+                pvoice->loadFilter.dc_loopEnd = 0;
+                pvoice->loadFilter.dc_loopStart = 0;
             } else {
-                beta->sub04.loopStart = zeta->instrument->loopStart;
-                beta->sub04.loopEnd = zeta->instrument->loopEnd;
-                beta->sub04.loopCount = zeta->instrument->loopCount;
-                alCopy(zeta->instrument->loopPredictorOffset, beta->sub04.loopPredictor, sizeof(AlUnkZeta));
+                pvoice->loadFilter.dc_loopStart = filter->instrument->loopStart;
+                pvoice->loadFilter.dc_loopEnd = filter->instrument->loopEnd;
+                pvoice->loadFilter.dc_loopCount = filter->instrument->loopCount;
+                alCopy(filter->instrument->loopPredictorOffset, pvoice->loadFilter.dc_lstate, sizeof(AlUnkZeta));
             }
             break;
         case 1:
-            if (zeta->instrument->loopEnd != 0) {
-                beta->sub04.loopStart = zeta->instrument->loopStart;
-                beta->sub04.loopEnd = zeta->instrument->loopEnd;
-                beta->sub04.loopCount = zeta->instrument->loopCount;
+            if (filter->instrument->loopEnd != 0) {
+                pvoice->loadFilter.dc_loopStart = filter->instrument->loopStart;
+                pvoice->loadFilter.dc_loopEnd = filter->instrument->loopEnd;
+                pvoice->loadFilter.dc_loopCount = filter->instrument->loopCount;
             } else {
-                beta->sub04.loopCount = 0;
-                beta->sub04.loopEnd = 0;
-                beta->sub04.loopStart = 0;
+                pvoice->loadFilter.dc_loopCount = 0;
+                pvoice->loadFilter.dc_loopEnd = 0;
+                pvoice->loadFilter.dc_loopStart = 0;
             }
             break;
     }
 }
 
-void func_80057344(u8 arg0, f32 arg1) {
-    AlUnkBeta* beta = &D_80078E54->al_unk_beta[arg0];
+void func_80057344(u8 voiceIdx, f32 arg1) {
+    AuPVoice* pvoice = &D_80078E54->pvoices[voiceIdx];
 
-    beta->sub38.unk_3C = arg1;
+    pvoice->resampler.rs_ratio = arg1;
 }
 
-void func_8005736C(u8 arg0, s16 arg1, s32 arg2, u8 arg3, u8 arg4) {
-    AlUnkBeta* beta = &D_80078E54->al_unk_beta[arg0];
-    AlBetaSub48* sub48 = &beta->sub48;
+void func_8005736C(u8 voiceIdx, s16 volume, s32 arg2, u8 arg3, u8 arg4) {
+    AuPVoice* pvoice = &D_80078E54->pvoices[voiceIdx];
+    AuEnvMixer* envMixer = &pvoice->envMixer;
 
-    if (sub48->unk_1C >= sub48->unk_20) {
-        sub48->unk_1C = sub48->unk_20;
+    if (envMixer->em_delta >= envMixer->em_segEnd) {
+        envMixer->em_delta = envMixer->em_segEnd;
         if (D_80078181 == 0) {
-            sub48->unk_08 = (sub48->unk_06 * AlCosineBlend[AL_COS_MID_IDX]) >> 0xF;
-            sub48->unk_0A = (sub48->unk_06 * AlCosineBlend[AL_COS_MID_IDX]) >> 0xF;
+            envMixer->em_cvolL = (envMixer->em_volume * AuEqPower[AL_COS_MID_IDX]) >> 0xF;
+            envMixer->em_cvolR = (envMixer->em_volume * AuEqPower[AL_COS_MID_IDX]) >> 0xF;
         } else {
-            sub48->unk_08 = (sub48->unk_06 * AlCosineBlend[sub48->unk_04]) >> 0xF;
-            sub48->unk_0A = (sub48->unk_06 * AlCosineBlend[AL_COS_MAX_IDX - sub48->unk_04]) >> 0xF;
+            envMixer->em_cvolL = (envMixer->em_volume * AuEqPower[envMixer->em_pan]) >> 0xF;
+            envMixer->em_cvolR = (envMixer->em_volume * AuEqPower[AL_COS_MAX_IDX - envMixer->em_pan]) >> 0xF;
         }
     } else {
-        sub48->unk_08 = func_80058004(sub48->unk_08, sub48->unk_1C, sub48->unk_12, sub48->unk_10);
-        sub48->unk_0A = func_80058004(sub48->unk_0A, sub48->unk_1C, sub48->unk_18, sub48->unk_16);
+        envMixer->em_cvolL = _getVol(envMixer->em_cvolL, envMixer->em_delta, envMixer->em_lratm, envMixer->em_lratl);
+        envMixer->em_cvolR = _getVol(envMixer->em_cvolR, envMixer->em_delta, envMixer->em_rratm, envMixer->em_rratl);
     }
-    if (sub48->unk_08 == 0) {
-        sub48->unk_08 = 1;
+    if (envMixer->em_cvolL == 0) {
+        envMixer->em_cvolL = 1;
     }
-    if (sub48->unk_0A == 0) {
-        sub48->unk_0A = 1;
+    if (envMixer->em_cvolR == 0) {
+        envMixer->em_cvolR = 1;
     }
 
-    sub48->unk_1C = 0;
-    sub48->unk_20 = arg2;
-    sub48->unk_04 = arg3;
-    sub48->unk_06 = SQ(arg1) >> 0xF;
-    sub48->unk_0C = AlCosineBlend[arg4];
-    sub48->unk_0E = AlCosineBlend[AL_COS_MAX_IDX - arg4];
-    sub48->unk_24 = 1;
+    envMixer->em_delta = 0;
+    envMixer->em_segEnd = arg2;
+    envMixer->em_pan = arg3;
+    envMixer->em_volume = SQ(volume) >> 0xF;
+    envMixer->em_dryamt = AuEqPower[arg4];
+    envMixer->em_wetamt = AuEqPower[AL_COS_MAX_IDX - arg4];
+    envMixer->em_first = 1;
 }
 
-void func_80057548(u8 arg0, u8 arg1, u8 arg2) {
-    AlUnkBeta* beta = &D_80078E54->al_unk_beta[arg0];
-    AlBetaSub48* sub48 = &beta->sub48;
+void func_80057548(u8 voiceIdx, u8 arg1, u8 arg2) {
+    AuPVoice* pvoice = &D_80078E54->pvoices[voiceIdx];
+    AuEnvMixer* envMixer = &pvoice->envMixer;
 
-    if (sub48->unk_1C >= sub48->unk_20) {
-        sub48->unk_1C = sub48->unk_20;
+    if (envMixer->em_delta >= envMixer->em_segEnd) {
+        envMixer->em_delta = envMixer->em_segEnd;
         if (D_80078181 == 0) {
-            sub48->unk_08 = (sub48->unk_06 * AlCosineBlend[AL_COS_MID_IDX]) >> 0xF;
-            sub48->unk_0A = (sub48->unk_06 * AlCosineBlend[AL_COS_MID_IDX]) >> 0xF;
+            envMixer->em_cvolL = (envMixer->em_volume * AuEqPower[AL_COS_MID_IDX]) >> 0xF;
+            envMixer->em_cvolR = (envMixer->em_volume * AuEqPower[AL_COS_MID_IDX]) >> 0xF;
         } else {
-            sub48->unk_08 = (sub48->unk_06 * AlCosineBlend[sub48->unk_04]) >> 0xF;
-            sub48->unk_0A = (sub48->unk_06 * AlCosineBlend[AL_COS_MAX_IDX - sub48->unk_04]) >> 0xF;
+            envMixer->em_cvolL = (envMixer->em_volume * AuEqPower[envMixer->em_pan]) >> 0xF;
+            envMixer->em_cvolR = (envMixer->em_volume * AuEqPower[AL_COS_MAX_IDX - envMixer->em_pan]) >> 0xF;
         }
     } else {
-        sub48->unk_08 = func_80058004(sub48->unk_08, sub48->unk_1C, sub48->unk_12, sub48->unk_10);
-        sub48->unk_0A = func_80058004(sub48->unk_0A, sub48->unk_1C, sub48->unk_18, sub48->unk_16);
+        envMixer->em_cvolL = _getVol(envMixer->em_cvolL, envMixer->em_delta, envMixer->em_lratm, envMixer->em_lratl);
+        envMixer->em_cvolR = _getVol(envMixer->em_cvolR, envMixer->em_delta, envMixer->em_rratm, envMixer->em_rratl);
     }
-    if (sub48->unk_08 == 0) {
-        sub48->unk_08 = 1;
+    if (envMixer->em_cvolL == 0) {
+        envMixer->em_cvolL = 1;
     }
-    if (sub48->unk_0A == 0) {
-        sub48->unk_0A = 1;
+    if (envMixer->em_cvolR == 0) {
+        envMixer->em_cvolR = 1;
     }
 
-    sub48->unk_04 = arg1;
-    sub48->unk_0C = AlCosineBlend[arg2];
-    sub48->unk_0E = AlCosineBlend[AL_COS_MAX_IDX - arg2];
-    sub48->unk_24 = 1;
+    envMixer->em_pan = arg1;
+    envMixer->em_dryamt = AuEqPower[arg2];
+    envMixer->em_wetamt = AuEqPower[AL_COS_MAX_IDX - arg2];
+    envMixer->em_first = 1;
 }
 
-void func_800576EC(u8 arg0, s16 arg1, s32 arg2) {
-    AlUnkBeta* beta = &D_80078E54->al_unk_beta[arg0];
-    AlBetaSub48* sub48 = &beta->sub48;
+void func_800576EC(u8 voiceIdx, s16 arg1, s32 arg2) {
+    AuPVoice* pvoice = &D_80078E54->pvoices[voiceIdx];
+    AuEnvMixer* envMixer = &pvoice->envMixer;
 
-    if (sub48->unk_1C >= sub48->unk_20) {
-        sub48->unk_1C = sub48->unk_20;
+    if (envMixer->em_delta >= envMixer->em_segEnd) {
+        envMixer->em_delta = envMixer->em_segEnd;
         if (D_80078181 == 0) {
-            sub48->unk_08 = (sub48->unk_06 * AlCosineBlend[AL_COS_MID_IDX]) >> 0xF;
-            sub48->unk_0A = (sub48->unk_06 * AlCosineBlend[AL_COS_MID_IDX]) >> 0xF;
+            envMixer->em_cvolL = (envMixer->em_volume * AuEqPower[AL_COS_MID_IDX]) >> 0xF;
+            envMixer->em_cvolR = (envMixer->em_volume * AuEqPower[AL_COS_MID_IDX]) >> 0xF;
         } else {
-            sub48->unk_08 = (sub48->unk_06 * AlCosineBlend[sub48->unk_04]) >> 0xF;
-            sub48->unk_0A = (sub48->unk_06 * AlCosineBlend[AL_COS_MAX_IDX - sub48->unk_04]) >> 0xF;
+            envMixer->em_cvolL = (envMixer->em_volume * AuEqPower[envMixer->em_pan]) >> 0xF;
+            envMixer->em_cvolR = (envMixer->em_volume * AuEqPower[AL_COS_MAX_IDX - envMixer->em_pan]) >> 0xF;
         }
     } else {
-        sub48->unk_08 = func_80058004(sub48->unk_08, sub48->unk_1C, sub48->unk_12, sub48->unk_10);
-        sub48->unk_0A = func_80058004(sub48->unk_0A, sub48->unk_1C, sub48->unk_18, sub48->unk_16);
+        envMixer->em_cvolL = _getVol(envMixer->em_cvolL, envMixer->em_delta, envMixer->em_lratm, envMixer->em_lratl);
+        envMixer->em_cvolR = _getVol(envMixer->em_cvolR, envMixer->em_delta, envMixer->em_rratm, envMixer->em_rratl);
     }
-    if (sub48->unk_08 == 0) {
-        sub48->unk_08 = 1;
+    if (envMixer->em_cvolL == 0) {
+        envMixer->em_cvolL = 1;
     }
-    if (sub48->unk_0A == 0) {
-        sub48->unk_0A = 1;
+    if (envMixer->em_cvolR == 0) {
+        envMixer->em_cvolR = 1;
     }
 
-    sub48->unk_06 = SQ(arg1) >> 0xF;
-    sub48->unk_1C = 0;
-    sub48->unk_20 = arg2;
-    sub48->unk_24 = 1;
+    envMixer->em_volume = SQ(arg1) >> 0xF;
+    envMixer->em_delta = 0;
+    envMixer->em_segEnd = arg2;
+    envMixer->em_first = 1;
 }
 
-void func_80057874(u8 index, u8 arg1) {
-    AlUnkBeta* beta = &D_80078E54->al_unk_beta[index];
-    AlBetaSub48* sub48 = &beta->sub48;
+void func_80057874(u8 voiceIdx, u8 pan) {
+    AuPVoice* pvoice = &D_80078E54->pvoices[voiceIdx];
+    AuEnvMixer* envMixer = &pvoice->envMixer;
 
-    if (sub48->unk_1C >= sub48->unk_20) {
-        sub48->unk_1C = sub48->unk_20;
+    if (envMixer->em_delta >= envMixer->em_segEnd) {
+        envMixer->em_delta = envMixer->em_segEnd;
         if (D_80078181 == 0) {
-            sub48->unk_08 = (sub48->unk_06 * AlCosineBlend[AL_COS_MID_IDX]) >> 0xF;
-            sub48->unk_0A = (sub48->unk_06 * AlCosineBlend[AL_COS_MID_IDX]) >> 0xF;
+            envMixer->em_cvolL = (envMixer->em_volume * AuEqPower[AL_COS_MID_IDX]) >> 0xF;
+            envMixer->em_cvolR = (envMixer->em_volume * AuEqPower[AL_COS_MID_IDX]) >> 0xF;
         } else {
-            sub48->unk_08 = (sub48->unk_06 * AlCosineBlend[sub48->unk_04]) >> 0xF;
-            sub48->unk_0A = (sub48->unk_06 * AlCosineBlend[AL_COS_MAX_IDX - sub48->unk_04]) >> 0xF;
+            envMixer->em_cvolL = (envMixer->em_volume * AuEqPower[envMixer->em_pan]) >> 0xF;
+            envMixer->em_cvolR = (envMixer->em_volume * AuEqPower[AL_COS_MAX_IDX - envMixer->em_pan]) >> 0xF;
         }
     } else {
-        sub48->unk_08 = func_80058004(sub48->unk_08, sub48->unk_1C, sub48->unk_12, sub48->unk_10);
-        sub48->unk_0A = func_80058004(sub48->unk_0A, sub48->unk_1C, sub48->unk_18, sub48->unk_16);
+        envMixer->em_cvolL = _getVol(envMixer->em_cvolL, envMixer->em_delta, envMixer->em_lratm, envMixer->em_lratl);
+        envMixer->em_cvolR = _getVol(envMixer->em_cvolR, envMixer->em_delta, envMixer->em_rratm, envMixer->em_rratl);
     }
-    if (sub48->unk_08 == 0) {
-        sub48->unk_08 = 1;
+    if (envMixer->em_cvolL == 0) {
+        envMixer->em_cvolL = 1;
     }
-    if (sub48->unk_0A == 0) {
-        sub48->unk_0A = 1;
+    if (envMixer->em_cvolR == 0) {
+        envMixer->em_cvolR = 1;
     }
 
-    sub48->unk_04 = arg1;
-    sub48->unk_24 = 1;
+    envMixer->em_pan = pan;
+    envMixer->em_first = 1;
 }
 
-void func_800579D8(u8 arg0, u8 arg1) {
-    AlUnkBeta* beta = &D_80078E54->al_unk_beta[arg0];
-    AlBetaSub48* sub48 = &beta->sub48;
+void func_800579D8(u8 voiceIdx, u8 dryAmt) {
+    AuPVoice* pvoice = &D_80078E54->pvoices[voiceIdx];
+    AuEnvMixer* envMixer = &pvoice->envMixer;
 
-    if (sub48->unk_1C >= sub48->unk_20) {
-        sub48->unk_1C = sub48->unk_20;
+    if (envMixer->em_delta >= envMixer->em_segEnd) {
+        envMixer->em_delta = envMixer->em_segEnd;
         if (D_80078181 == 0) {
-            sub48->unk_08 = (sub48->unk_06 * AlCosineBlend[AL_COS_MID_IDX]) >> 0xF;
-            sub48->unk_0A = (sub48->unk_06 * AlCosineBlend[AL_COS_MID_IDX]) >> 0xF;
+            envMixer->em_cvolL = (envMixer->em_volume * AuEqPower[AL_COS_MID_IDX]) >> 0xF;
+            envMixer->em_cvolR = (envMixer->em_volume * AuEqPower[AL_COS_MID_IDX]) >> 0xF;
         } else {
-            sub48->unk_08 = (sub48->unk_06 * AlCosineBlend[sub48->unk_04]) >> 0xF;
-            sub48->unk_0A = (sub48->unk_06 * AlCosineBlend[AL_COS_MAX_IDX - sub48->unk_04]) >> 0xF;
+            envMixer->em_cvolL = (envMixer->em_volume * AuEqPower[envMixer->em_pan]) >> 0xF;
+            envMixer->em_cvolR = (envMixer->em_volume * AuEqPower[AL_COS_MAX_IDX - envMixer->em_pan]) >> 0xF;
         }
     } else {
-        sub48->unk_08 = func_80058004(sub48->unk_08, sub48->unk_1C, sub48->unk_12, sub48->unk_10);
-        sub48->unk_0A = func_80058004(sub48->unk_0A, sub48->unk_1C, sub48->unk_18, sub48->unk_16);
+        envMixer->em_cvolL = _getVol(envMixer->em_cvolL, envMixer->em_delta, envMixer->em_lratm, envMixer->em_lratl);
+        envMixer->em_cvolR = _getVol(envMixer->em_cvolR, envMixer->em_delta, envMixer->em_rratm, envMixer->em_rratl);
     }
-    if (sub48->unk_08 == 0) {
-        sub48->unk_08 = 1;
+    if (envMixer->em_cvolL == 0) {
+        envMixer->em_cvolL = 1;
     }
-    if (sub48->unk_0A == 0) {
-        sub48->unk_0A = 1;
+    if (envMixer->em_cvolR == 0) {
+        envMixer->em_cvolR = 1;
     }
 
-    sub48->unk_0C = AlCosineBlend[arg1];
-    sub48->unk_0E = AlCosineBlend[AL_COS_MAX_IDX - arg1];
-    sub48->unk_24 = 1;
+    envMixer->em_dryamt = AuEqPower[dryAmt];
+    envMixer->em_wetamt = AuEqPower[AL_COS_MAX_IDX - dryAmt];
+    envMixer->em_first = 1;
 }
 
-s32 func_80057B64(u8 arg0) {
-    AlUnkBeta* beta = &D_80078E54->al_unk_beta[arg0];
+s32 func_80057B64(u8 voiceIdx) {
+    AuPVoice* pvoice = &D_80078E54->pvoices[voiceIdx];
 
-    return beta->sub48.unk_28;
+    return pvoice->envMixer.em_motion;
 }
 
-s32 func_80057B8C(u8 arg0) {
-    AlUnkBeta* beta =  &D_80078E54->al_unk_beta[arg0];
+s32 func_80057B8C(u8 voiceIdx) {
+    AuPVoice* pvoice =  &D_80078E54->pvoices[voiceIdx];
 
-    return beta->unk_78;
+    return pvoice->unk_78;
 }
 
-f32 func_80057BB4(u8 arg0) {
-    AlUnkBeta* beta =  &D_80078E54->al_unk_beta[arg0];
+f32 func_80057BB4(u8 voiceIdx) {
+    AuPVoice* pvoice =  &D_80078E54->pvoices[voiceIdx];
 
-    return beta->sub38.unk_3C;
+    return pvoice->resampler.rs_ratio;
 }
 
-u8 func_80057BDC(u8 arg0) {
-    AlUnkBeta* beta =  &D_80078E54->al_unk_beta[arg0];
+u8 func_80057BDC(u8 voiceIdx) {
+    AuPVoice* pvoice =  &D_80078E54->pvoices[voiceIdx];
 
-    return beta->sub48.unk_04;
+    return pvoice->envMixer.em_pan;
 }
 
-s16 func_80057C04(u8 arg0) {
-    AlUnkBeta* beta =  &D_80078E54->al_unk_beta[arg0];
+s16 func_80057C04(u8 voiceIdx) {
+    AuPVoice* pvoice =  &D_80078E54->pvoices[voiceIdx];
 
-    return beta->sub48.unk_0C;
+    return pvoice->envMixer.em_dryamt;
 }
 
-s16 func_80057C2C(u8 arg0) {
-    AlUnkBeta* beta =  &D_80078E54->al_unk_beta[arg0];
+s16 func_80057C2C(u8 voiceIdx) {
+    AuPVoice* beta =  &D_80078E54->pvoices[voiceIdx];
 
-    return beta->sub48.unk_0E;
+    return beta->envMixer.em_wetamt;
 }
 
-s32 func_80057C54(u8 arg0) {
-    AlUnkBeta* beta = &D_80078E54->al_unk_beta[arg0];
-    AlBetaSub48* sub48 = &beta->sub48;
+s32 func_80057C54(u8 voiceIdx) {
+    AuPVoice* pvoice = &D_80078E54->pvoices[voiceIdx];
+    AuEnvMixer* sub48 = &pvoice->envMixer;
     u32 retVal;
 
-    if (sub48->unk_1C >= sub48->unk_20) {
+    if (sub48->em_delta >= sub48->em_segEnd) {
         if (D_80078181 == 0) {
-            retVal = (sub48->unk_06 * AlCosineBlend[AL_COS_MID_IDX] * 2) >> 0x10;
+            retVal = (sub48->em_volume * AuEqPower[AL_COS_MID_IDX] * 2) >> 0x10;
         } else {
-            retVal = (sub48->unk_06 * AlCosineBlend[sub48->unk_04] * 2) >> 0x10;
+            retVal = (sub48->em_volume * AuEqPower[sub48->em_pan] * 2) >> 0x10;
         }
     } else {
-        retVal = func_80058004(sub48->unk_08, sub48->unk_1C, sub48->unk_12, sub48->unk_10);
+        retVal = _getVol(sub48->em_cvolL, sub48->em_delta, sub48->em_lratm, sub48->em_lratl);
     }
     return retVal;
 }
 
-s32 func_80057D0C(u8 arg0) {
-    AlUnkBeta* beta = &D_80078E54->al_unk_beta[arg0];
-    AlBetaSub48* sub48 = &beta->sub48;
+s32 func_80057D0C(u8 voiceIdx) {
+    AuPVoice* pvoice = &D_80078E54->pvoices[voiceIdx];
+    AuEnvMixer* sub48 = &pvoice->envMixer;
     u32 retVal;
 
-    if (sub48->unk_1C >= sub48->unk_20) {
+    if (sub48->em_delta >= sub48->em_segEnd) {
         if (D_80078181 == 0) {
-            retVal = (sub48->unk_06 * AlCosineBlend[AL_COS_MID_IDX] * 2) >> 0x10;
+            retVal = (sub48->em_volume * AuEqPower[AL_COS_MID_IDX] * 2) >> 0x10;
         } else {
-            retVal = (sub48->unk_06 * AlCosineBlend[AL_COS_MAX_IDX - sub48->unk_04] * 2) >> 0x10;
+            retVal = (sub48->em_volume * AuEqPower[AL_COS_MAX_IDX - sub48->em_pan] * 2) >> 0x10;
         }
     } else {
-        retVal = func_80058004(sub48->unk_08, sub48->unk_1C, sub48->unk_12, sub48->unk_10);
+        retVal = _getVol(sub48->em_cvolL, sub48->em_delta, sub48->em_lratm, sub48->em_lratl);
     }
     return retVal;
 }
@@ -769,13 +770,14 @@ void alCopy(void* src, void* dst, s32 size) {
     }
 }
 
-s16 func_80058004(s16 arg0, s32 arg1, s16 arg2, u16 arg3) {
-    s32 c;
-    arg1 = arg1 >> 3;
-    if (arg1 == 0) {
-        return arg0;
+static s16 _getVol(s16 ivol, s32 samples, s16 ratem, u16 ratel) {
+    s32 tmpl;
+    samples = samples >> 3;
+    if (samples == 0) {
+        return ivol;
     }
-    c = arg3 * arg1;
-    c = c >> 0x10;
-    return arg0 + (c + arg2 * arg1);
+    tmpl = ratel * samples;
+    tmpl = tmpl >> 16;
+    tmpl += ratem * samples;
+    return ivol + tmpl;
 }

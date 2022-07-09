@@ -10,6 +10,21 @@ typedef s16 UNK_TYPE_16;
 typedef s32 UNK_TYPE_32;
 typedef void* UNK_TYPE_PTR;
 
+#define SAMPLES               184
+#define SAMPLE184(delta)      (((delta) + (SAMPLES / 2)) / SAMPLES) * SAMPLES
+#define FIXED_SAMPLE          SAMPLES
+
+#define N_AL_DECODER_IN	        0
+#define	N_AL_RESAMPLER_OUT	0
+#define N_AL_TEMP_0	        0
+#define	N_AL_DECODER_OUT        368
+#define	N_AL_TEMP_1	        368
+#define	N_AL_TEMP_2	        736
+#define	N_AL_MAIN_L_OUT	        1248
+#define	N_AL_MAIN_R_OUT	        1616
+#define	N_AL_AUX_L_OUT	        1984
+#define	N_AL_AUX_R_OUT	        2352
+
 #define ALIGN16_(val) (((val) + 0xF) & 0xFFF0)
 
 #define AUDIO_HEAP_SIZE 0x56000
@@ -195,7 +210,7 @@ typedef struct AlUnkRho {
 } AlUnkRho; // size = 0x20
 
 typedef struct AlUnkPsi {
-    /* 0x00 */ AlUnkRho* unk_rho_00;
+    /* 0x00 */ AlUnkRho* unk_rho_00; // [RESAMPLE_STATE* state]
     /* 0x04 */ UNK_TYPE_32 unk__04;
     /* 0x08 */ s32 unk_08;
     /* 0x0C */ s32 unk_0C;
@@ -208,43 +223,53 @@ typedef struct AlUnkPi {
     /* 0x0C */ UNK_TYPE_32 unk_0C;
 } AlUnkPi; // size = 0x8
 
+// [ALDelay]
 typedef struct AlUnkEpsilon {
-    /* 0x00 */ u32 unk_00; // start
-    /* 0x04 */ u32 unk_04; // end
-    /* 0x08 */ s16 unk_08;
-    /* 0x0A */ s16 unk_0A;
-    /* 0x0C */ s16 unk_0C;
-    /* 0x0C */ UNK_TYPE_16 unk__0E;
-    /* 0x10 */ f32 unk_10;
-    /* 0x14 */ f32 unk_14;
-    /* 0x18 */ UNK_TYPE_32 unk__18;
-    /* 0x1C */ f32 unk_1C;
-    /* 0x20 */ struct AlUnkPhi* unk_phi_20;
-    /* 0x24 */ struct AlUnkPhi* unk_phi_24;
-    /* 0x28 */ struct AlUnkChi* unk_chi_28;
-    /* 0x2C */ struct AlUnkPsi* unk_psi_2C;
+    /* 0x00 */ u32 unk_00; // start [input]
+    /* 0x04 */ u32 unk_04; // end [output]
+    /* 0x08 */ s16 unk_08; // [ffcoef]
+    /* 0x0A */ s16 unk_0A; // [fbcoef]
+    /* 0x0C */ s16 unk_0C; // [gain] 
+    /* 0x0E */ UNK_TYPE_16 unk__0E; // pad?
+    /* 0x10 */ f32 unk_10; // [rsinc]
+    /* 0x14 */ f32 unk_14; // [rsval]
+    /* 0x18 */ UNK_TYPE_32 unk__18; // [rsdelta]
+    /* 0x1C */ f32 unk_1C; // [rsgain]
+    /* 0x20 */ struct AlUnkPhi* unk_phi_20; // [ALLowPass] ?
+    /* 0x24 */ struct AlUnkPhi* unk_phi_24; // [ALLowPass] ?
+    /* 0x28 */ struct AlUnkChi* unk_chi_28; // [ALResampler] ?
+    /* 0x2C */ struct AlUnkPsi* unk_psi_2C; // [ALResampler] ?
 } AlUnkEpsilon; // size = 0x30
 
+// [ALFx]
 typedef struct AlUnkDelta {
-    /* 0x00 */ s32* unk_00;
-    /* 0x04 */ UNK_TYPE_PTR unk_04;
-    /* 0x08 */ s32 unk_08;
-    /* 0x0C */ AlUnkEpsilon* unk_eps_0C; // array of 4 AlUnkEpsilon
-    /* 0x10 */ u8 unk_10; // active AlUnkEpsilon count in array
+    /* 0x00 */ s16* unk_00; // [base]
+    /* 0x04 */ UNK_TYPE_PTR unk_04; // [s16* input]
+    /* 0x08 */ s32 unk_08; // [length]
+    /* 0x0C */ AlUnkEpsilon* unk_eps_0C; // array of 4 AlUnkEpsilon -- [ALDelay* delay]
+    /* 0x10 */ u8 unk_10; // active AlUnkEpsilon count in array -- [section_count]
 } AlUnkDelta; // size = 0x14
 
+// POLEF_STATE
 typedef struct AlUnkChi {
     /* 0x00 */ UNK_TYPE_32 unk__00;
     /* 0x04 */ UNK_TYPE_32 unk__04;
 } AlUnkChi; // size = 0x8
 
+// [ALLowPass]
 typedef struct AlUnkPhi {
-    /* 0x00 */ s16 unk_00;
-    /* 0x02 */ s16 unk_02; // could be u16
+    /* 0x00 */ s16 unk_00; // [fc]
+    /* 0x02 */ s16 unk_02; // could be u16 [fgain]
     /* 0x04 */ char unk_04[4];
     /* 0x08 */ s16 arr[16];
-    /* 0x28 */ AlUnkChi* unk_chi_28;
-    /* 0x2C */ s32 unk_2C;
+    /*
+                union {
+                    s16		fccoef[16];
+                    s64             force_aligned;
+                } fcvec;
+    */
+    /* 0x28 */ AlUnkChi* unk_chi_28; // [POLEF_STATE* fstate]
+    /* 0x2C */ s32 unk_2C; // [first]
 } AlUnkPhi; // size = 0x30
 
 typedef struct AlUnkKappa {
@@ -264,8 +289,8 @@ typedef struct AlUnkGamma {
     /* 0x08 */ AlUnkDelta* unk_delta_8;
     /* 0x0C */ u8 unk_0C;
     /* 0x0D */ char unk_0D[0x3];
-    /* 0x10 */ struct AlUnkBeta* unk_beta_10;
-    /* 0x14 */ struct AlUnkBeta* unk_beta_14;
+    /* 0x10 */ struct AuPVoice* unk_beta_10;
+    /* 0x14 */ struct AuPVoice* unk_beta_14;
 } AlUnkGamma; // size = 0x18
 
 typedef struct AlUnkSigma {
@@ -278,32 +303,6 @@ typedef struct AlUnkSigma {
     /* 0x18 */ UNK_TYPE_32 unk__18;
     /* 0x1C */ UNK_TYPE_32 unk__1C;
 } AlUnkSigma; // size = 0x20
-
-typedef struct AlUnkEta {
-    /* 0x00 */ s32 unk_00;
-    /* 0x04 */ s16 unk_04;
-    /* 0x06 */ s16 unk_06;
-    /* 0x08 */ s16 unk_08;
-    /* 0x0A */ s16 unk_0A;
-    /* 0x0C */ s16 unk_0C;
-    /* 0x0E */ s16 unk_0E;
-    /* 0x10 */ s32 unk_10;
-    /* 0x14 */ s32 unk_14;
-    /* 0x18 */ s32 unk_18;
-    /* 0x1C */ s32 unk_1C;
-    /* 0x20 */ s32 unk_20;
-    /* 0x24 */ s32 unk_24;
-    /* 0x28 */ UNK_TYPE_32 unk_28;
-    /* 0x2C */ UNK_TYPE_32 unk_2C;
-    /* 0x30 */ UNK_TYPE_32 unk_30;
-    /* 0x34 */ UNK_TYPE_32 unk_34;
-    /* 0x38 */ UNK_TYPE_32 unk_38;
-    /* 0x3C */ UNK_TYPE_32 unk_3C;
-    /* 0x40 */ UNK_TYPE_32 unk_40;
-    /* 0x44 */ UNK_TYPE_32 unk_44;
-    /* 0x48 */ UNK_TYPE_32 unk_48;
-    /* 0x4C */ UNK_TYPE_32 unk_4C;
-} AlUnkEta; // size = 0x50
 
 typedef struct AlUnkTau {
     /* 0x00 */ UNK_TYPE_32 unk_00; // same as beta->unk_34
@@ -331,70 +330,73 @@ typedef struct AlUnkZeta {
     /* 0x1C */ UNK_TYPE_32 unk_1C;
 } AlUnkZeta; // size = 0x20
 
-typedef struct AlBetaSub04 {
-    /* 0x04 */ AlUnkZeta* unk_zeta_04;
-    /* 0x08 */ AlUnkZeta* loopPredictor;
-    /* 0x0C */ u32 loopStart;
-    /* 0x10 */ u32 loopEnd;
-    /* 0x14 */ s32 loopCount;
+// [ALLoadFilter]
+typedef struct AuLoadFilter {
+    /* 0x04 */ ADPCM_STATE* dc_state;
+    /* 0x08 */ ADPCM_STATE* dc_lstate;
+    /* 0x0C */ ALRawLoop dc_loop;
     /* 0x18 */ struct Instrument* instrument;
-    /* 0x1C */ s32 unk_1C;
-    /* 0x20 */ s32 (*dmaProc)(s32 addr, s32 len, void* state, u8 unk); // ALDMAproc with extra arg
-    /* 0x24 */ NUDMAState* dmaState;
+    /* 0x1C */ s32 dc_bookSize;
+    /* 0x20 */ s32 (*dc_dmaFunc)(s32 addr, s32 len, void* state, u8 unk); // ALDMAproc with extra arg
+    /* 0x24 */ NUDMAState* dc_dmaState;
     /* 0x28 */ s32 unk_28;
     /* 0x2C */ s32 unk_2C;
     /* 0x30 */ s32 unk_30;
     /* 0x34 */ s32 wavTable;
-} AlBetaSub04;
+} AuLoadFilter;
 
-typedef struct AlBetaSub38 {
-    /* 0x38 */ AlUnkSigma* unk_sigma_38; // struct size = 0x20
-    /* 0x3C */ f32 unk_3C;
+// [ALResampler]
+typedef struct AuResampler {
+    /* 0x38 */ RESAMPLE_STATE* rs_state; // struct size = 0x20
+    /* 0x3C */ f32 rs_ratio;
     /* 0x40 */ s32 unk_40;
     /* 0x44 */ s32 unk_44;
-} AlBetaSub38;
+} AuResampler;
 
-typedef struct AlBetaSub48 {
-    /* 0x38 */ AlUnkEta* unk_eta_48; // struct size = 0x50
-    /* 0x4C */ s16 unk_04;
-    /* 0x4E */ s16 unk_06;
-    /* 0x50 */ s16 unk_08;
-    /* 0x52 */ s16 unk_0A;
-    /* 0x54 */ s16 unk_0C;
-    /* 0x56 */ s16 unk_0E;
-    /* 0x58 */ s16 unk_10;
-    /* 0x5A */ s16 unk_12;
-    /* 0x5C */ s16 unk_14;
-    /* 0x5E */ s16 unk_16;
-    /* 0x60 */ s16 unk_18;
-    /* 0x62 */ s16 unk_1A;
-    /* 0x64 */ s32 unk_1C;
-    /* 0x68 */ s32 unk_20;
-    /* 0x6C */ s32 unk_24;
-    /* 0x70 */ s32 unk_28;
-} AlBetaSub48;
+// [ALEnvMixer]
+typedef struct AuEnvMixer {
+    /* 0x38 */ ENVMIX_STATE* em_state; // struct size = 0x50
+    /* 0x4C */ s16 em_pan;
+    /* 0x4E */ s16 em_volume;
+    /* 0x50 */ s16 em_cvolL;
+    /* 0x52 */ s16 em_cvolR;
+    /* 0x54 */ s16 em_dryamt;
+    /* 0x56 */ s16 em_wetamt;
+    /* 0x58 */ s16 em_lratl;
+    /* 0x5A */ s16 em_lratm;
+    /* 0x5C */ s16 em_ltgt;
+    /* 0x5E */ s16 em_rratl;
+    /* 0x60 */ s16 em_rratm;
+    /* 0x62 */ s16 em_rtgt;
+    /* 0x64 */ s32 em_delta;
+    /* 0x68 */ s32 em_segEnd;
+    /* 0x6C */ s32 em_first;
+    /* 0x70 */ s32 em_motion;
+} AuEnvMixer;
 
-typedef struct AlUnkBeta {
-    /* 0x00 */ struct AlUnkBeta* next;
-    /* 0x04 */ AlBetaSub04 sub04;
-    /* 0x38 */ AlBetaSub38 sub38;
-    /* 0x48 */ AlBetaSub48 sub48;
+// [N_PVoice]
+typedef struct AuPVoice {
+    /* 0x00 */ struct AuPVoice* next;
+    /* 0x04 */ AuLoadFilter loadFilter;
+    /* 0x38 */ AuResampler resampler;
+    /* 0x48 */ AuEnvMixer envMixer;
     /* 0x74 */ s16 unk_74;
     /* 0x76 */ s16 unk_76;
     /* 0x78 */ u8 unk_78;
     /* 0x79 */ u8 unk_79;
     /* 0x7A */ u8 unk_7A[2];
-} AlUnkBeta;
+} AuPVoice;
 
+// [N_ALSynth]
 typedef struct AlUnkAlpha {
-    /* 0x00 */ s32 unk_00;
+    /* 0x00 */ s32 unk_00; // [curSamples] ?
     /* 0x04 */ s32 unk_04;
-    /* 0x08 */ s32 frequency;
-    /* 0x0C */ s32 unk_0C;
+    /* 0x08 */ s32 frequency; // [outputRate] ?
+    /* 0x0C */ s32 num_pvoice;
     /* 0x10 */ s32 unk_10;
     /* 0x14 */ void* dmaNew; // pointer to nuAuDmaNew
     /* 0x18 */ ALHeap* heap;
-    /* 0x1C */ AlUnkBeta* al_unk_beta;
+    /* 0x1C */ AuPVoice* pvoices; // [ALParam_s* paramList] ?
     /* 0x20 */ AlUnkGamma* al_unk_gamma;
     /* 0x24 */ s32* unk_24; // struct size = 0x170
     /* 0x28 */ s32* unk_28; // struct size = 0x170
