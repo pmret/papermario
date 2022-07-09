@@ -1,27 +1,27 @@
 #include "common.h"
 #include "animation_script.h"
 
-extern Vtx Entity_MunchlesiaGrab_vtx[];
-extern Gfx Entity_MunchlesiaGrab_Render[];
+extern Vtx Entity_MunchlesiaEnvelop_vtx[];
+extern Gfx Entity_MunchlesiaEnvelop_Render[];
 
-AnimScript Entity_MunchlesiaGrab_Animation = {
+AnimScript Entity_MunchlesiaEnvelop_Animation = {
     as_SetRotation(1, 0.0, 0.0, 0.0)
     as_SetPos(1, 0, 0, 0)
     as_SetScale(1, 1.0, 1.0, 1.0)
     as_SetRotation(2, 0.0, 0.0, 0.0)
-    as_SetPos(2, 0, 4, 0)
+    as_SetPos(2, 0, 0, 0)
     as_SetScale(2, 1.0, 1.0, 1.0)
     as_SetRotation(3, 0.0, 0.0, 0.0)
-    as_SetPos(3, 0, 3, 0)
+    as_SetPos(3, 0, 0, 0)
     as_SetScale(3, 1.0, 1.0, 1.0)
     as_SetRotation(4, 0.0, 0.0, 0.0)
-    as_SetPos(4, 0, 2, 0)
+    as_SetPos(4, 0, 0, 0)
     as_SetScale(4, 1.0, 1.0, 1.0)
     as_SetRotation(5, 0.0, 0.0, 0.0)
-    as_SetPos(5, 0, 2, 0)
+    as_SetPos(5, 0, 0, 0)
     as_SetScale(5, 1.0, 1.0, 1.0)
     as_SetRotation(6, 0.0, 0.0, 0.0)
-    as_SetPos(6, 0, 1, 0)
+    as_SetPos(6, 0, 0, 0)
     as_SetScale(6, 1.0, 1.0, 1.0)
     as_SetRotation(7, 0.0, 0.0, 0.0)
     as_SetPos(7, 0, 0, 0)
@@ -139,82 +139,77 @@ AnimScript Entity_MunchlesiaGrab_Animation = {
     as_End
 };
 
-StaticAnimatorNode Entity_MunchlesiaGrab_Node8 = {
-    .displayList = Entity_MunchlesiaGrab_Render,
+StaticAnimatorNode Entity_MunchlesiaEnvelop_Node8 = {
+    .displayList = Entity_MunchlesiaEnvelop_Render,
     .sibling = ANIM_NULL,
     .child = ANIM_NULL,
     .vertexStartOffset = 399 * 6,
-    .vtxList = Entity_MunchlesiaGrab_vtx,
+    .vtxList = Entity_MunchlesiaEnvelop_vtx,
 };
 
-StaticAnimatorNode Entity_MunchlesiaGrab_Node7 = {
-    .displayList = Entity_MunchlesiaGrab_Render,
-    .sibling = &Entity_MunchlesiaGrab_Node8,
+StaticAnimatorNode Entity_MunchlesiaEnvelop_Node7 = {
+    .displayList = Entity_MunchlesiaEnvelop_Render,
+    .sibling = &Entity_MunchlesiaEnvelop_Node8,
     .child = ANIM_NULL,
     .vertexStartOffset = 399 * 5,
-    .vtxList = Entity_MunchlesiaGrab_vtx,
+    .vtxList = Entity_MunchlesiaEnvelop_vtx,
 };
 
-StaticAnimatorNode Entity_MunchlesiaGrab_Node6 = {
-    .displayList = Entity_MunchlesiaGrab_Render,
-    .pos = { 0.0f, 1.0f, 0.0f },
-    .sibling = &Entity_MunchlesiaGrab_Node7,
+StaticAnimatorNode Entity_MunchlesiaEnvelop_Node6 = {
+    .displayList = Entity_MunchlesiaEnvelop_Render,
+    .sibling = &Entity_MunchlesiaEnvelop_Node7,
     .child = ANIM_NULL,
     .vertexStartOffset = 399 * 4,
-    .vtxList = Entity_MunchlesiaGrab_vtx,
+    .vtxList = Entity_MunchlesiaEnvelop_vtx,
 };
 
-StaticAnimatorNode Entity_MunchlesiaGrab_Node5 = {
-    .displayList = Entity_MunchlesiaGrab_Render,
-    .pos = { 0.0f, 2.0f, 0.0f },
-    .sibling = &Entity_MunchlesiaGrab_Node6,
+StaticAnimatorNode Entity_MunchlesiaEnvelop_Node5 = {
+    .displayList = Entity_MunchlesiaEnvelop_Render,
+    .sibling = &Entity_MunchlesiaEnvelop_Node6,
     .child = ANIM_NULL,
     .vertexStartOffset = 399 * 3,
-    .vtxList = Entity_MunchlesiaGrab_vtx,
+    .vtxList = Entity_MunchlesiaEnvelop_vtx,
 };
 
-StaticAnimatorNode Entity_MunchlesiaGrab_Node4 = {
-    .displayList = Entity_MunchlesiaGrab_Render,
-    .pos = { 0.0f, 2.0f, 0.0f },
-    .sibling = &Entity_MunchlesiaGrab_Node5,
+StaticAnimatorNode Entity_MunchlesiaEnvelop_Node4 = {
+    .displayList = Entity_MunchlesiaEnvelop_Render,
+    .sibling = &Entity_MunchlesiaEnvelop_Node5,
     .child = ANIM_NULL,
     .vertexStartOffset = 399 * 2,
-    .vtxList = Entity_MunchlesiaGrab_vtx,
+    .vtxList = Entity_MunchlesiaEnvelop_vtx,
 };
 
-StaticAnimatorNode Entity_MunchlesiaGrab_Node3 = {
-    .displayList = Entity_MunchlesiaGrab_Render,
-    .pos = { 0.0f, 3.0f, 0.0f },
-    .sibling = &Entity_MunchlesiaGrab_Node4,
+StaticAnimatorNode Entity_MunchlesiaEnvelop_Node3 = {
+    .displayList = Entity_MunchlesiaEnvelop_Render,
+    .sibling = &Entity_MunchlesiaEnvelop_Node4,
     .child = ANIM_NULL,
     .vertexStartOffset = 399,
-    .vtxList = Entity_MunchlesiaGrab_vtx,
+    .vtxList = Entity_MunchlesiaEnvelop_vtx,
 };
 
-StaticAnimatorNode Entity_MunchlesiaGrab_Node2 = {
-    .displayList = Entity_MunchlesiaGrab_Render,
-    .pos = { 0.0f, 4.0f, 0.0f },
-    .sibling = &Entity_MunchlesiaGrab_Node3,
+StaticAnimatorNode Entity_MunchlesiaEnvelop_Node2 = {
+    .displayList = Entity_MunchlesiaEnvelop_Render,
+    .sibling = &Entity_MunchlesiaEnvelop_Node3,
     .child = ANIM_NULL,
-    .vtxList = Entity_MunchlesiaGrab_vtx,
+    .vtxList = Entity_MunchlesiaEnvelop_vtx,
 };
 
-StaticAnimatorNode Entity_MunchlesiaGrab_Node1 = {
+StaticAnimatorNode Entity_MunchlesiaEnvelop_Node1 = {
     .displayList = ANIM_NULL,
     .sibling = ANIM_NULL,
-    .child = &Entity_MunchlesiaGrab_Node2,
+    .child = &Entity_MunchlesiaEnvelop_Node2,
     .vertexStartOffset = (s32)ANIM_NULL,
     .vtxList = ANIM_NULL,
 };
 
-StaticAnimatorNode* Entity_MunchlesiaGrab_Mesh[] = {
-    &Entity_MunchlesiaGrab_Node1,
-    &Entity_MunchlesiaGrab_Node2,
-    &Entity_MunchlesiaGrab_Node3,
-    &Entity_MunchlesiaGrab_Node4,
-    &Entity_MunchlesiaGrab_Node5,
-    &Entity_MunchlesiaGrab_Node6,
-    &Entity_MunchlesiaGrab_Node7,
-    &Entity_MunchlesiaGrab_Node8,
+StaticAnimatorNode* Entity_MunchlesiaEnvelop_Mesh[] = {
+    &Entity_MunchlesiaEnvelop_Node1,
+    &Entity_MunchlesiaEnvelop_Node2,
+    &Entity_MunchlesiaEnvelop_Node3,
+    &Entity_MunchlesiaEnvelop_Node4,
+    &Entity_MunchlesiaEnvelop_Node5,
+    &Entity_MunchlesiaEnvelop_Node6,
+    &Entity_MunchlesiaEnvelop_Node7,
+    &Entity_MunchlesiaEnvelop_Node8,
     ANIM_NULL,
 };

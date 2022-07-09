@@ -12933,7 +12933,111 @@ segments:
     vram: 0x00000000
     subsegments:
     - [0xE7ACC0, c, MunchlesiaGrab_anim]
-  - [0xE7B0E0, bin] # unk data
+  - name: entity_model_MunchlesiaEnvelop_gfx
+    dir: entity/model
+    type: code
+    start: 0xE7B0E0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE7B0E0, c, MunchlesiaEnvelop_gfx]
+    - start: 0xE7B0E0
+      type: .data
+      name: MunchlesiaEnvelop_gfx
+      subsegments:
+      - [0xE7B0E0]
+      - [0xE80FC8, rgba16, MunchlesiaEnvelop, 16, 16]
+  - name: entity_model_MunchlesiaEnvelop_anim
+    dir: entity/model
+    type: code
+    start: 0xE811D0
+    vram: 0x00000000
+    subsegments:
+    - [0xE811D0, c, MunchlesiaEnvelop_anim]
+  - name: entity_model_MunchlesiaBeginChew_gfx
+    dir: entity/model
+    type: code
+    start: 0xE815F0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE815F0, c, MunchlesiaBeginChew_gfx]
+    - start: 0xE815F0
+      type: .data
+      name: MunchlesiaBeginChew_gfx
+      subsegments:
+      - [0xE815F0]
+      - [0xE87E30, rgba16, MunchlesiaBeginChew, 16, 16]
+  - name: entity_model_MunchlesiaBeginChew_anim
+    dir: entity/model
+    type: code
+    start: 0xE88030
+    vram: 0x00000000
+    subsegments:
+    - [0xE88030, c, MunchlesiaBeginChew_anim]
+  - name: entity_model_MunchlesiaChewing_gfx
+    dir: entity/model
+    type: code
+    start: 0xE884A0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE884A0, c, MunchlesiaChewing_gfx]
+    - start: 0xE884A0
+      type: .data
+      name: MunchlesiaChewing_gfx
+      subsegments:
+      - [0xE884A0]
+      - [0xE8A210, rgba16, MunchlesiaChewing, 16, 16]
+  - name: entity_model_MunchlesiaChewing_anim
+    dir: entity/model
+    type: code
+    start: 0xE8A410
+    vram: 0x00000000
+    subsegments:
+    - [0xE8A410, c, MunchlesiaChewing_anim]
+  - name: entity_model_MunchlesiaSpitOut_gfx
+    dir: entity/model
+    type: code
+    start: 0xE8A9E0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE8A9E0, c, MunchlesiaSpitOut_gfx]
+    - start: 0xE8A9E0
+      type: .data
+      name: MunchlesiaSpitOut_gfx
+      subsegments:
+      - [0xE8A9E0]
+      - [0xE91220, rgba16, MunchlesiaSpitOut, 16, 16]
+  - name: entity_model_MunchlesiaSpitOut_anim
+    dir: entity/model
+    type: code
+    start: 0xE91420
+    vram: 0x00000000
+    subsegments:
+    - [0xE91420, c, MunchlesiaSpitOut_anim]
+  - name: entity_model_MunchlesiaReset1_gfx
+    dir: entity/model
+    type: code
+    start: 0xE91890
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE91890, c, MunchlesiaReset1_gfx]
+    - start: 0xE91890
+      type: .data
+      name: MunchlesiaReset1_gfx
+      subsegments:
+      - [0xE91890]
+      - [0xE980D0, rgba16, MunchlesiaReset1, 16, 16]
+  - name: entity_model_MunchlesiaReset1_anim
+    dir: entity/model
+    type: code
+    start: 0xE982D0
+    vram: 0x00000000
+    subsegments:
+    - [0xE982D0, c, MunchlesiaReset1_anim]
   - name: entity_model_CymbalPlant_anim
     dir: entity/model
     type: code
