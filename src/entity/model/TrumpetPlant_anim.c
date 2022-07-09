@@ -1,30 +1,30 @@
 #include "common.h"
 #include "animation_script.h"
 
-extern Gfx D_0A000C60_E6DFF0[];
-extern Gfx D_0A0009B0_E6DD40[];
+extern Gfx Entity_TrumpetPlant_RenderNode1[];
+extern Gfx Entity_TrumpetPlant_RenderNode2[];
 
-StaticAnimatorNode D_00000000_E6E2D0 = {
-    .displayList = D_0A0009B0_E6DD40,
+StaticAnimatorNode Entity_TrumpetPlant_Node2 = {
+    .displayList = Entity_TrumpetPlant_RenderNode2,
     .rot = { 0, 0, 5461 },
     .pos = { 0.0f, 15.0f, 0.0f },
     .sibling = ANIM_NULL,
     .child = ANIM_NULL,
 };
 
-StaticAnimatorNode D_0000002C_E6E2FC = {
-    .displayList = D_0A000C60_E6DFF0,
+StaticAnimatorNode Entity_TrumpetPlant_Node1 = {
+    .displayList = Entity_TrumpetPlant_RenderNode1,
     .sibling = ANIM_NULL,
-    .child = &D_00000000_E6E2D0,
+    .child = &Entity_TrumpetPlant_Node2,
 };
 
-StaticAnimatorNode* D_00000058_E6E328[] = {
-    &D_0000002C_E6E2FC,
-    &D_00000000_E6E2D0,
+StaticAnimatorNode* Entity_TrumpetPlant_Mesh[] = {
+    &Entity_TrumpetPlant_Node1,
+    &Entity_TrumpetPlant_Node2,
     ANIM_NULL,
 };
 
-AnimScript D_00000064_E6E334 = {
+AnimScript Entity_TrumpetPlant_AnimationUse = {
     as_DisableMirroring
     as_SetRotation(1, 0.0, 0.0, 0.0)
     as_SetPos(1, 0, 0, 0)
@@ -131,7 +131,7 @@ AnimScript D_00000064_E6E334 = {
     as_End
 };
 
-AnimScript D_00000340_E6E610 = {
+AnimScript Entity_TrumpetPlant_AnimationIdle = {
     as_DisableMirroring
     as_SetRotation(1, 0.0, 0.0, 0.0)
     as_SetPos(1, 0, 0, 0)

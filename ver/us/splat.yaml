@@ -12891,7 +12891,49 @@ segments:
     vram: 0x00000000
     subsegments:
     - [0xE6E2D0, c, TrumpetPlant_anim]
-  - [0xE6E660, bin] # unk data
+  - name: entity_model_MunchlesiaReset_gfx
+    dir: entity/model
+    type: code
+    start: 0xE6E660
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE6E660, c, MunchlesiaReset_gfx]
+    - start: 0xE6E660
+      type: .data
+      name: MunchlesiaReset_gfx
+      subsegments:
+      - [0xE6E660]
+      - [0xE74548, rgba16, MunchlesiaReset, 16, 16]
+  - name: entity_model_MunchlesiaReset_anim
+    dir: entity/model
+    type: code
+    start: 0xE74750
+    vram: 0x00000000
+    subsegments:
+    - [0xE74750, c, MunchlesiaReset_anim]
+  - name: entity_model_MunchlesiaGrab_gfx
+    dir: entity/model
+    type: code
+    start: 0xE74BD0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE74BD0, c, MunchlesiaGrab_gfx]
+    - start: 0xE74BD0
+      type: .data
+      name: MunchlesiaGrab_gfx
+      subsegments:
+      - [0xE74BD0]
+      - [0xE7AAB8, rgba16, MunchlesiaGrab, 16, 16]
+  - name: entity_model_MunchlesiaGrab_anim
+    dir: entity/model
+    type: code
+    start: 0xE7ACC0
+    vram: 0x00000000
+    subsegments:
+    - [0xE7ACC0, c, MunchlesiaGrab_anim]
+  - [0xE7B0E0, bin] # unk data
   - name: entity_model_CymbalPlant_anim
     dir: entity/model
     type: code

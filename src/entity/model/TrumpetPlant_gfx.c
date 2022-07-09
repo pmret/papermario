@@ -160,7 +160,7 @@ Vtx D_0A000000_E6D390[] = {
     {{{   -11,    30,     0 }, 0, {     0,     0 }, { 185, 160,   0, 255 }}},
 };
 
-Gfx D_0A0009B0_E6DD40[] = {
+Gfx Entity_TrumpetPlant_RenderNode2[] = {
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
     gsDPPipeSync(),
     gsDPSetCombineMode(G_CC_MODULATEIA, G_CC_MODULATEIA),
@@ -243,7 +243,7 @@ Gfx D_0A0009B0_E6DD40[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_0A000C60_E6DFF0[] = {
+Gfx Entity_TrumpetPlant_RenderNode1[] = {
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
     gsDPPipeSync(),
     gsDPSetCombineMode(G_CC_MODULATEIA, G_CC_MODULATEIA),

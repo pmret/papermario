@@ -45,14 +45,14 @@ Gfx D_802E96F0[] = {
 Gfx D_802E9738[] = {
     gsSPDisplayList(D_802E96F0),
     gsDPSetTextureLUT(G_TT_NONE),
-    gsDPLoadTextureTile_4b(D_802E9170, G_IM_FMT_I, 16, 0, 0, 0, 15, 15, 0, G_TX_MIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD),
+    gsDPLoadTextureTile_4b(D_802E9170, G_IM_FMT_I, 16, 16, 0, 0, 15, 15, 0, G_TX_MIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD),
     gsSPEndDisplayList(),
 };
 
 Gfx D_802E9788[] = {
     gsSPDisplayList(D_802E96F0),
     gsDPSetTextureLUT(G_TT_NONE),
-    gsDPLoadTextureTile_4b(D_802E91F0, G_IM_FMT_I, 16, 0, 0, 0, 15, 15, 0, G_TX_MIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD),
+    gsDPLoadTextureTile_4b(D_802E91F0, G_IM_FMT_I, 16, 16, 0, 0, 15, 15, 0, G_TX_MIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD),
     gsSPEndDisplayList(),
 };
 
