@@ -20,6 +20,19 @@ void func_8025995C(ActorPart*, s32, Matrix4f);
 void func_8025C918(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx);
 void func_8025CD40(s32, ActorPart*);
 
+void func_8025D150(ActorPart*, s32);
+void func_8025D160(ActorPart*, s32);
+void func_8025D2B0(ActorPart*, s32);
+void func_8025D3CC(ActorPart*, s32);
+void func_8025D4C8(ActorPart*, s32);
+void func_8025D640(ActorPart*, s32);
+void func_8025D71C(ActorPart*, s32);
+void func_8025D830(ActorPart*, s32);
+void func_8025D90C(ActorPart*, s32);
+void func_8025DA68(ActorPart*, s32);
+void func_8025DBD0(ActorPart*, s32);
+void func_8025DD60(ActorPart*, s32);
+
 void func_80259A48(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4);
 void func_80259AAC(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4);
 void func_80259D9C(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4);
@@ -1925,7 +1938,55 @@ void func_8025CD28(s32 arg0, ActorPart* arg1) {
 
 INCLUDE_ASM(s32, "182B30", func_8025CD40);
 
-INCLUDE_ASM(s32, "182B30", func_8025CEC8);
+void func_8025CEC8(ActorPart* actorPart) {
+    DecorationTable* decorationTable;
+    s32 i;
+    
+    if (!(actorPart->flags & 2)) {
+        decorationTable = actorPart->decorationTable;
+        for (i = 0; i < ARRAY_COUNT(decorationTable->decorationType); i++) {
+            switch (decorationTable->decorationType[i]) {
+                case 0:
+                    func_8025D150(actorPart, i);
+                    break;
+                case 1:
+                    func_8025D160(actorPart, i);
+                    break;
+                case 2:
+                    func_8025D2B0(actorPart, i);
+                    break;
+                case 3:
+                    func_8025D3CC(actorPart, i);
+                    break;
+                case 4:
+                    func_8025D4C8(actorPart, i);
+                    break;
+                case 5:
+                    func_8025D640(actorPart, i);
+                    break;
+                case 6:
+                    func_8025D71C(actorPart, i);
+                    break;
+                case 7:
+                    func_8025D830(actorPart, i);
+                    break;
+                case 8:
+                    func_8025D90C(actorPart, i);
+                    break;
+                case 9:
+                    func_8025DA68(actorPart, i);
+                    break;
+                case 10:
+                    func_8025DBD0(actorPart, i);
+                    break;
+                case 11:
+                    func_8025DD60(actorPart, i);
+                    break;
+            }
+        }
+    }
+}
+
 
 void _remove_part_decoration(ActorPart* part, s32 decorationIndex) {
     DecorationTable* decorationTable = part->decorationTable;
@@ -1972,7 +2033,7 @@ void _remove_part_decoration(ActorPart* part, s32 decorationIndex) {
     decorationTable->decorationType[decorationIndex] = 0;
 }
 
-void func_8025D150(void) {
+void func_8025D150(ActorPart* actorPart, s32 i) {
 }
 
 void func_8025D158(ActorPart* part, s32 decorationIndex) {
