@@ -7,7 +7,7 @@ typedef struct UnkEpsilonConfig {
     s32 data[0]; // variable size
 } UnkEpsilonConfig;
 
-UnkEpsilonConfig D_8007EFE0 = {
+UnkEpsilonConfig SMALLROOM_PARAMS_N = {
     .count = 3,
     .unk = 11,
     .data = {
@@ -73,50 +73,49 @@ UnkEpsilonConfig* D_8007F200 = &D_8007F1D0;
 
 UnkEpsilonConfig* D_8007F204 = &D_8007F1D0;
 
-// init_lpfilter
-void func_80058DD0(AlUnkPhi* phi) {
+void _init_lpfilter(AuLowPass* lp) {
     f64 attenuation;
     s16 timeConstant;
     u32 temp;
     s32 i;
 
-    phi->unk_2C = 1;
-    temp = phi->unk_00;
+    lp->first = 1;
+    temp = lp->fc;
     timeConstant = temp;
     timeConstant = timeConstant >> 1;
-    phi->unk_02 = 16384 - timeConstant;
+    lp->fgain = 16384 - timeConstant;
 
     for (i = 0; i < 8; i++) {
-        phi->arr[i] = 0;
+        lp->fccoef[i] = 0;
     }
 
-    phi->arr[8] = timeConstant;
+    lp->fccoef[8] = timeConstant;
     
     // ith value is 16384.0 * (timeConstant / 16384.0)^(i-7)
     // ex: i = 9 --> timeConstant^2 / 16384.0
     attenuation = (timeConstant / 16384.0);
     for (i = 9; i < 16; i++) {
         attenuation *= (timeConstant / 16384.0);
-        phi->arr[i] = attenuation * 16384.0;
+        lp->fccoef[i] = attenuation * 16384.0;
     }
 }
 
 // initialize delta at 801C9060, with eps_0C at 801C90A0
-// definately AlUnkDelta, evidenced by call to func_8005904C
-void func_80058E84(AlUnkDelta* delta, u8 arg1, ALHeap* heap) {
-    AlUnkEpsilon* eps;
+// definately AuFX, evidenced by call to func_8005904C
+void func_80058E84(AuFX* delta, u8 arg1, ALHeap* heap) {
+    AuDelay* eps;
     u16 i;
 
-    // allocate space for 4 AlUnkEpsilon
-    delta->unk_eps_0C = alHeapAlloc(heap, 4, sizeof(AlUnkEpsilon));
-    delta->unk_00 = alHeapAlloc(heap, 0xA10, 2);
+    // allocate space for 4 AuDelay
+    delta->delays = alHeapAlloc(heap, 4, sizeof(AuDelay));
+    delta->base = alHeapAlloc(heap, 0xA10, 2);
     
     for (i = 0; i < 4; i++) {
-        eps = &delta->unk_eps_0C[i];
-        eps->unk_psi_2C = alHeapAlloc(heap, 1, sizeof(AlUnkPsi));
-        eps->unk_psi_2C->unk_rho_00 = alHeapAlloc(heap, 1, sizeof(AlUnkRho));
-        eps->unk_phi_24 = alHeapAlloc(heap, 1, sizeof(AlUnkPhi));
-        eps->unk_phi_24->unk_chi_28 = alHeapAlloc(heap, 1, sizeof(AlUnkChi));
+        eps = &delta->delays[i];
+        eps->unk_psi_2C = alHeapAlloc(heap, 1, sizeof(AuResampler));
+        eps->unk_psi_2C->rs_state = alHeapAlloc(heap, 1, sizeof(RESAMPLE_STATE));
+        eps->lowpass_24 = alHeapAlloc(heap, 1, sizeof(AuLowPass));
+        eps->lowpass_24->fstate = alHeapAlloc(heap, 1, sizeof(POLEF_STATE));
     }
     
     func_8005904C(delta, arg1);
@@ -125,8 +124,8 @@ void func_80058E84(AlUnkDelta* delta, u8 arg1, ALHeap* heap) {
 // no known calls to this function
 void func_80058F88(AlUnkKappa* kappa, ALHeap* heap) {
     kappa->unk_00 = alHeapAlloc(heap, 0x1420, 2);
-    kappa->unk_phi_10 = alHeapAlloc(heap, 1, sizeof(AlUnkPhi));
-    kappa->unk_phi_10->unk_chi_28 = alHeapAlloc(heap, 1, sizeof(AlUnkChi));
+    kappa->unk_phi_10 = alHeapAlloc(heap, 1, sizeof(AuLowPass));
+    kappa->unk_phi_10->fstate = alHeapAlloc(heap, 1, sizeof(POLEF_STATE));
     func_80059008(kappa, 0, 0, 0x5000);
 }
 
@@ -137,54 +136,55 @@ void func_80059008(AlUnkKappa* kappa, s16 arg1, s16 arg2, s16 arg3) {
 
     if (arg3 != 0) {
         kappa->unk_phi_0C = kappa->unk_phi_10;
-        kappa->unk_phi_0C->unk_00 = arg3;
-        func_80058DD0(kappa->unk_phi_0C);
+        kappa->unk_phi_0C->fc = arg3;
+        _init_lpfilter(kappa->unk_phi_0C);
         return;
     }
 
     kappa->unk_phi_0C = NULL;
 }
 
-// AlUnkDelta from D_80078E54
+// n_alFxNew
+// AuFX from gSynDriver
 INCLUDE_ASM(s32, "audio/341d0", func_8005904C);
 
 // alFxPull
-// AlUnkDelta from D_80078E54
+// AuFX from gSynDriver
 INCLUDE_ASM(s32, "audio/341d0", func_80059310);
 
 // alFxParamHdl
-s32 func_800598A0(AlUnkDelta* delta, s16 index, s16 mode, s32 value) {
+s32 func_800598A0(AuFX* delta, s16 index, s16 mode, s32 value) {
     s16* temp_v0;
     s32 diff;
 
     switch (mode) {
     case 0:
-        delta->unk_eps_0C[index].unk_00 = value & 0xFFFFFFF8;
+        delta->delays[index].input = value & 0xFFFFFFF8;
         break;
     case 1:
-        delta->unk_eps_0C[index].unk_04 = value & 0xFFFFFFF8;
+        delta->delays[index].output = value & 0xFFFFFFF8;
         break;
     case 3:
-        delta->unk_eps_0C[index].unk_08 = value;
+        delta->delays[index].ffcoef = value;
         break;
     case 2:
-        delta->unk_eps_0C[index].unk_0A = value;
+        delta->delays[index].fbcoef = value;
         break;
     case 4:
-        delta->unk_eps_0C[index].unk_0C = value;
+        delta->delays[index].unk_0C = value;
         break;
     case 5:
-        delta->unk_eps_0C[index].unk_10 = (2.0 * (value / 1000.0f)) / D_80078E50->frequency;
+        delta->delays[index].rsinc = (2.0 * (value / 1000.0f)) / D_80078E50->outputRate;
         break;
     case 6:
-        delta->unk_eps_0C[index].unk_1C = ((f32)value / 173123.404906676)
-            * (delta->unk_eps_0C[index].unk_04 - delta->unk_eps_0C[index].unk_00);
+        delta->delays[index].rsgain = ((f32)value / 173123.404906676)
+            * (delta->delays[index].output - delta->delays[index].input);
         break;
     case 7:
-        temp_v0 = delta->unk_eps_0C[index].unk_phi_20;
+        temp_v0 = delta->delays[index].lowpass_20;
         if (temp_v0 != 0) {
             *temp_v0 = value;
-            func_80058DD0(delta->unk_eps_0C[index].unk_phi_20);
+            _init_lpfilter(delta->delays[index].lowpass_20);
         }
         break;
     }
@@ -192,16 +192,16 @@ s32 func_800598A0(AlUnkDelta* delta, s16 index, s16 mode, s32 value) {
 }
 
 // from libultra reverb.c
-Acmd* _saveBuffer(AlUnkDelta* delta, s16* old_pos, s32 buff, s32 count, Acmd* cmdBufPos) {
+Acmd* _saveBuffer(AuFX* delta, s16* old_pos, s32 buff, s32 count, Acmd* cmdBufPos) {
     Acmd *ptr = cmdBufPos;
     s16* new_pos = old_pos + count;
-    s16* delay_end = &delta->unk_00[delta->unk_08];
+    s16* delay_end = &delta->base[delta->length];
 
     if (delay_end < new_pos) {
         s32 before_end = (delay_end - old_pos);
         s32 after_end = (new_pos - delay_end);
         n_aLoadBuffer(ptr++, before_end<<1, buff, osVirtualToPhysical(old_pos));
-        n_aLoadBuffer(ptr++, after_end<<1, buff + (before_end<<1), osVirtualToPhysical(delta->unk_00));
+        n_aLoadBuffer(ptr++, after_end<<1, buff + (before_end<<1), osVirtualToPhysical(delta->base));
     } else {
         n_aLoadBuffer(ptr++, count<<1, buff, osVirtualToPhysical(old_pos));
     }
@@ -209,26 +209,26 @@ Acmd* _saveBuffer(AlUnkDelta* delta, s16* old_pos, s32 buff, s32 count, Acmd* cm
     return ptr;
 }
 
-f32 func_80059BD4(AlUnkEpsilon* eps, s32 arg1) {
-    f32* floatPtr = &eps->unk_14;
+f32 func_80059BD4(AuDelay* eps, s32 arg1) {
+    f32* floatPtr = &eps->rsval;
     f32 temp;
     f32 result;
    
-    eps->unk_14 = eps->unk_14 + (eps->unk_10 * arg1);
+    eps->rsval = eps->rsval + (eps->rsinc * arg1);
     
-    if (eps->unk_14 > 2.0) {
-        temp = eps->unk_14 - 4.0;
+    if (eps->rsval > 2.0) {
+        temp = eps->rsval - 4.0;
     } else {
-        temp = eps->unk_14;
+        temp = eps->rsval;
     }
     *floatPtr = temp;
     
-    result = eps->unk_14;
+    result = eps->rsval;
     if (result < 0.0f) {
         result = -result;
     }
 
     result = result - 1.0;
     
-    return eps->unk_1C * result;
+    return eps->rsgain * result;
 }

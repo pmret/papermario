@@ -23,7 +23,7 @@ s16 AuEqPower[128] = {
 };
 
 Acmd* _decodeChunk(Acmd* cmdBufPos, AuLoadFilter* arg1, s32 count, s32 size, s16 arg4, s16 arg5, s32 flags);
-s16 func_80058C6C(f64 arg0, f64 arg1, s32 arg4, u16* arg5);
+static s16 _getRate(f64 arg0, f64 arg1, s32 arg4, u16* arg5);
 
 // n_alAdpcmPull
 INCLUDE_ASM(s32, "audio/33450", func_80058050);
@@ -34,7 +34,7 @@ Acmd* _decodeChunk(Acmd* cmdBufPos, AuLoadFilter* arg1, s32 tsam, s32 nbytes, s1
     s32 paddedSize;
     
     if (nbytes > 0) {
-        endAddr = arg1->dc_dmaFunc(arg1->wavTable, nbytes, arg1->dc_dmaState, arg1->instrument->unk_25); // ALDMAproc has an extra arg added
+        endAddr = arg1->dc_dmaFunc(arg1->dc_memin, nbytes, arg1->dc_dmaState, arg1->dc_table->unk_25); // ALDMAproc has an extra arg added
         endAlign = endAddr & 7;
         nbytes += endAlign;
         paddedSize = nbytes + 8 - (nbytes & 7);
@@ -43,17 +43,17 @@ Acmd* _decodeChunk(Acmd* cmdBufPos, AuLoadFilter* arg1, s32 tsam, s32 nbytes, s1
         endAlign = 0;
     }
     
-    if (flags & 2) {
-        aSetLoop(cmdBufPos++, (s32) arg1->dc_lstate & 0x1FFFFFFF);
+    if (flags & A_LOOP) {
+        aSetLoop(cmdBufPos++, K0_TO_PHYS(arg1->dc_lstate));
     }
 
     n_aADPCMdec(cmdBufPos++, arg1->dc_state, flags, tsam << 1, endAlign, output);
     
-    arg1->unk_30 = 0;
+    arg1->dc_first = 0;
     return cmdBufPos;
 }
 
-s16 func_80058C6C(f64 arg0, f64 arg1, s32 arg4, u16* arg5) {
+static s16 _getRate(f64 vol, f64 tgt, s32 count, u16* ratel) {
     f64 inv;
     f64 a;
     f64 b;
@@ -61,25 +61,25 @@ s16 func_80058C6C(f64 arg0, f64 arg1, s32 arg4, u16* arg5) {
     s16 a_int;
     s16 b_int;
 
-    if (arg4 == 0) {
-        if (arg1 >= arg0) {
-            *arg5 = 0xFFFF;
+    if (count == 0) {
+        if (tgt >= vol) {
+            *ratel = 0xFFFF;
             return 0x7FFF;
         } else {
-            *arg5 = 0;
+            *ratel = 0;
             return 0;
         }
     }
-    inv = (1.0 / arg4);
+    inv = (1.0 / count);
     
-    if (arg1 < 1.0) {
-        arg1 = 1.0;
+    if (tgt < 1.0) {
+        tgt = 1.0;
     }
-    if (arg0 <= 0.0) {
-        arg0 = 1.0;
+    if (vol <= 0.0) {
+        vol = 1.0;
     }
 
-    a = (arg1 - arg0) * inv * 8.0;
+    a = (tgt - vol) * inv * 8.0;
     a_int = a;
     c_int = (a_int - 1);
     
@@ -87,6 +87,6 @@ s16 func_80058C6C(f64 arg0, f64 arg1, s32 arg4, u16* arg5) {
     b_int = b;
     c_int += b_int;
     
-    *arg5 = (b - b_int) * 0xFFFF;
+    *ratel = (b - b_int) * 0xFFFF;
     return c_int;
 }

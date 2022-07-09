@@ -22,7 +22,7 @@ void snd_load_audio_data(s32 outputRate) {
     u8 temp6[4];
     AlUnkVoice* temp5;
 
-    alHeap = D_80078E54->heap;
+    alHeap = gSynDriver->heap;
     gSoundGlobals = alHeapAlloc(alHeap, 1, sizeof(*gSoundGlobals));
 
     gBGMPlayerA = alHeapAlloc(alHeap, 1, sizeof(*gBGMPlayerA));
@@ -136,7 +136,7 @@ void snd_load_audio_data(s32 outputRate) {
 }
 
 void snd_reset_instrument(Instrument* instrument) {
-    instrument->wavOffset = &D_800781D0;
+    instrument->base = &D_800781D0;
     instrument->wavDataLength = 190;
     instrument->predictorOffset = &D_80078190;
     instrument->unk_1C = 64;
@@ -145,7 +145,7 @@ void snd_reset_instrument(Instrument* instrument) {
     instrument->loopStart = 0;
     instrument->loopEnd = 0;
     instrument->loopCount = 0;
-    instrument->skipLoopPredictor = 0;
+    instrument->type = 0;
     instrument->unk_25 = 0;
     instrument->unkOffset = &D_80078544;
     instrument->unk_26 = 0;
@@ -859,7 +859,7 @@ enum BKParseState {
     EN_301 = 301,
 };
 s32 snd_load_BK_to_bank(s32 bkFileOffset, SoundBank* bank, s32 bankIndex, s32 bankGroup) {
-    ALHeap* heap = D_80078E54->heap;
+    ALHeap* heap = gSynDriver->heap;
     BKHeader bkHeader;
     BKHeader* header = &bkHeader;
     u16 s3;
@@ -943,8 +943,8 @@ void snd_swizzle_BK_instruments(s32 bkFileOffset, SoundBank* bank, InstrumentGro
             Instrument* instrument = instruments[i];
 
             if (instrument != NULL) {
-                if (instrument->wavOffset != 0) {
-                    instrument->wavOffset += bkFileOffset;
+                if (instrument->base != 0) {
+                    instrument->base += bkFileOffset;
                 }
                 if (instrument->loopPredictorOffset != NULL) {
                     instrument->loopPredictorOffset += (s32) bank;
@@ -977,7 +977,7 @@ enum ReadState {
 #define AL_HEADER_SIG_CR 0x4352
 
 s32* func_80054AA0(s32* bkFileOffset, void* vaddr, s32 bankIndex, s32 bankGroup) {
-    ALHeap* heap = D_80078E54->heap;
+    ALHeap* heap = gSynDriver->heap;
     BKHeader localHeader;
     BKHeader* header = &localHeader;
     Instrument** instrumentGroup;

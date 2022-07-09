@@ -43,7 +43,7 @@ void create_audio_system(void) {
     nuAuTaskStop = NU_AU_TASK_RUN;
     nuAuPreNMI = 0;
     alHeapInit(&nuAuHeap, D_801AA000, AUDIO_HEAP_SIZE);
-    config.unk_num_beta = 24;
+    config.num_pvoice = 24;
     config.unk_num_gamma = 4;
     outputRate = osAiSetFrequency(32000);
     frameSize = (AlNumFields * outputRate + 59) / 60;

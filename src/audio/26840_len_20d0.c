@@ -855,7 +855,7 @@ void snd_SEFCmd_04(SoundManager* manager, SoundPlayer* player) {
     player->unk_9E = temp_v1 & 0x7F;
     temp_a0 = player->sfxInstrumentRef;
     
-    player->sfxInstrument.wavOffset = temp_a0->wavOffset;
+    player->sfxInstrument.base = temp_a0->base;
     player->sfxInstrument.wavDataLength = temp_a0->wavDataLength;
     player->sfxInstrument.loopPredictorOffset = temp_a0->loopPredictorOffset;
     player->sfxInstrument.loopStart = temp_a0->loopStart;
@@ -865,7 +865,7 @@ void snd_SEFCmd_04(SoundManager* manager, SoundPlayer* player) {
     player->sfxInstrument.unk_1C = temp_a0->unk_1C;
     player->sfxInstrument.detune = temp_a0->detune;
     player->sfxInstrument.pitchRatio = temp_a0->pitchRatio;
-    player->sfxInstrument.skipLoopPredictor = temp_a0->skipLoopPredictor;
+    player->sfxInstrument.type = temp_a0->type;
     player->sfxInstrument.unk_25 = temp_a0->unk_25;
     
     player->sfxInstrument.unkOffset = D_800783C0[player->unk_9E];
