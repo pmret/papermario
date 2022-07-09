@@ -12220,7 +12220,24 @@ segments:
       - [0xE3C320]
       - [0xE3C4A0, rgba16, RedBlock_face, 32, 32]
       - [0xE3CCA0]
-  - [0xE3CDD0, bin] # unk data
+  - name: entity_model_UnusedBlock
+    dir: entity/model
+    type: code
+    start: 0xE3CDD0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0xE3CDD0, c, UnusedBlock]
+    - start: 0xE3CDD0
+      type: .data
+      name: UnusedBlock
+      subsegments:
+      - [0xE3CDD0]
+      - [0xE3D190, rgba16, UnusedBlock_img1, 16, 32]
+      - [0xE3D590]
+      - [0xE3D618, ci4, UnusedBlock_img2, 16, 32]
+      - [0xE3D718, palette, UnusedBlock_img2]
+      - [0xE3D738]
   - name: entity_model_PushBlock
     dir: entity/model
     type: code
