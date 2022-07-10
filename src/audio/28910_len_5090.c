@@ -533,7 +533,7 @@ s32 func_8004E0F4(SongUpdateEvent* update) {
     return error;
 }
 
-void func_8004E158(BGMPlayer* player, s32 arg1, s32 arg2, AuGlobals* arg3) {
+void bgm_player_init(BGMPlayer* player, s32 arg1, s32 arg2, AuGlobals* arg3) {
     s16 i;
 
     player->globals = arg3;
@@ -611,23 +611,23 @@ void func_8004E158(BGMPlayer* player, s32 arg1, s32 arg2, AuGlobals* arg3) {
     func_80055110(player);
 }
 
-void func_8004E344(BGMPlayer* arg0, u8* arg1) {
+void bgm_set_effect_indices(BGMPlayer* player, u8* list) {
     s32 i;
-    s32 j;
+    s32 remaining;
 
-    for (i = 0; i < 4; i++) {
-        s8 b = *arg1++;
+    for (i = 0; i < ARRAY_COUNT(player->effectIndices); i++) {
+        s8 idx = *list++;
 
-        if (b < 0) {
+        if (idx < 0) {
             break;
         }
-        arg0->effectIndices[i] = b;
+        player->effectIndices[i] = idx;
     }
 
-    j = 4 - i;
-    if (j > 0) {
-        while (j-- != 0) {
-            arg0->effectIndices[i++] = 0xFF;
+    remaining = ARRAY_COUNT(player->effectIndices) - i;
+    if (remaining > 0) {
+        while (remaining-- != 0) {
+            player->effectIndices[i++] = -1;
         }
     }
 }

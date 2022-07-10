@@ -50,8 +50,8 @@ void func_8004B440(SoundManager* manager, u8 arg1, u8 arg2, AuGlobals* arg3, u8 
     manager->unk_BC = arg1;
     manager->unk_BE = arg2;
 
-    if (arg4 > 0x10) {
-        manager->sfxPlayerSelector = 0x10;
+    if (arg4 > 16) {
+        manager->sfxPlayerSelector = 16;
     } else {
         manager->sfxPlayerSelector = arg4;
     }

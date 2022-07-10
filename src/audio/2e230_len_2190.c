@@ -19,7 +19,7 @@ void snd_load_audio_data(s32 outputRate) {
     ALHeap* alHeap;
     u32 i;
     SBNFileEntry fileEntry;
-    u8 temp6[4];
+    u8 effects[4];
     AlUnkVoice* temp5;
 
     alHeap = gSynDriverPtr->heap;
@@ -91,18 +91,20 @@ void snd_load_audio_data(s32 outputRate) {
         globals->banks[i] = alHeapAlloc(alHeap, 1, 0x840);
     }
 
-    func_8004E158(gBGMPlayerA, 1, 0, globals);
-    temp6[0] = 0;
-    temp6[1] = 3;
-    temp6[2] = 0xff;
-    temp6[3] = 0xff;
-    func_8004E344(gBGMPlayerA, temp6);
-    func_8004E158(gBGMPlayerB, 2, 2, globals);
-    temp6[0] = 2;
-    temp6[1] = 0xff;
-    temp6[2] = 0xff;
-    temp6[3] = 0xff;
-    func_8004E344(gBGMPlayerB, temp6);
+    bgm_player_init(gBGMPlayerA, 1, 0, globals);
+    effects[0] = 0;
+    effects[1] = 3;
+    effects[2] = -1;
+    effects[3] = -1;
+    bgm_set_effect_indices(gBGMPlayerA, effects);
+
+    bgm_player_init(gBGMPlayerB, 2, 2, globals);
+    effects[0] = 2;
+    effects[1] = -1;
+    effects[2] = -1;
+    effects[3] = -1;
+    bgm_set_effect_indices(gBGMPlayerB, effects);
+
     func_8004B440(gSoundManager, 4, 1, globals, 0x10);
     func_80050B90(D_8009A628, 6, 1, globals);
     func_80052614(globals);
