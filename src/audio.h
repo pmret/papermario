@@ -261,10 +261,10 @@ typedef struct AlUnkGamma {
     /* 0x02 */ char unk_02[0x2];
     /* 0x04 */ AuFX* fxL;
     /* 0x08 */ AuFX* fxR;
-    /* 0x0C */ u8 unk_0C;
+    /* 0x0C */ u8 currentEffectID;
     /* 0x0D */ char unk_0D[0x3];
-    /* 0x10 */ struct AuPVoice* unk_beta_10;
-    /* 0x14 */ struct AuPVoice* unk_beta_14;
+    /* 0x10 */ struct AuPVoice* pvoice_10;
+    /* 0x14 */ struct AuPVoice* pvoice_14;
 } AlUnkGamma; // size = 0x18
 
 // based on ALLoadFilter
@@ -518,9 +518,9 @@ typedef struct AlUnkVoice {
     /* 0x00 */ Instrument* instrument;
     /* 0x04 */ f32 pitchRatio;
     /* 0x08 */ s32 unk_08;
-    /* 0x0C */ s16 unk_0C;
+    /* 0x0C */ s16 unk_0C; // some volume?
     /* 0x0E */ u8 pan;
-    /* 0x0F */ u8 reverb;
+    /* 0x0F */ u8 reverb; // amt
     /* 0x10 */ u8 reverbType;
     /* 0x11 */ char unk_11[0x3];
     /* 0x14 */ s32* unk_14; // ultimately from bgm_player->unk_10 ?
@@ -876,14 +876,7 @@ typedef struct BGMPlayer {
     /* 0x223 */ u8 unk_223;
     /* 0x224 */ u8 effectValues[4];
     /* 0x227 */ char unk_228[0x2];
-    /* 0x22A */ u8 unk_22A;
-    /* 0x22B */ u8 unk_22B;
-    /* 0x22C */ u8 unk_22C;
-    /* 0x22D */ u8 unk_22D;
-    /* 0x22E */ u8 unk_22E;
-    /* 0x22F */ u8 unk_22F;
-    /* 0x230 */ u8 unk_230;
-    /* 0x231 */ u8 unk_231;
+    /* 0x22A */ u8 unk_22A[8];
     /* 0x232 */ u8 unk_232;
     /* 0x233 */ u8 unk_233;
     /* 0x234 */ u8 unk_234;
@@ -1150,7 +1143,7 @@ void func_80056EC0(u8, s8);
 void au_pvoice_reset_filter(u8);
 void au_pvoice_set_filter(u8, u8, Instrument*, f32, s16, u8, u8, s32);
 void au_pvoice_set_filter_wavetable(u8, Instrument*);
-void func_80057344(u8, f32);
+void au_pvoice_set_pitch_ratio(u8, f32);
 void func_8005736C(u8, s16, s32, u8, u8);
 void func_80057548(u8, u8, u8);
 void func_800576EC(u8, s16, s32);

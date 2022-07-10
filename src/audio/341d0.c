@@ -1,3 +1,5 @@
+//TODO rename file to reverb.c
+
 #include "common.h"
 #include "audio.h"
 
@@ -15,6 +17,12 @@
 */
 #define CONVERT 173123.404906676
 
+/*
+ * WARNING: THE FOLLOWING CONSTANT MUST BE KEPT IN SYNC
+ * WITH SCALING IN MICROCODE!!!
+ */
+#define	SCALE 16384
+
 #define ms *(((s32)((f32)44.1))&~0x7)
 
 s32 SMALL_ROOM_PARAMS[] = {
@@ -23,7 +31,7 @@ s32 SMALL_ROOM_PARAMS[] = {
     /*                                      chorus  chorus   filter
     input  output  fbcoef  ffcoef   gain     rate   depth     coef  */
         0,       9,  9830,  -9830,      0,      0,      0,      0,
-        3,       7,  3276,  -3276,  16383,      0,      0,      0,
+        3,       7,  3276,  -3276, 0x3FFF,      0,      0,      0,
         0,      10,  5000,      0,      0,      0,      0, 0x5000
 };
 
@@ -87,7 +95,7 @@ s32* AU_FX_CUSTOM_PARAMS[] = {
     NULL_PARAMS, NULL_PARAMS, NULL_PARAMS, NULL_PARAMS
 };
 
-void _init_lpfilter(AuLowPass* lp) {
+static void _init_lpfilter(AuLowPass* lp) {
     f64 attenuation;
     s16 timeConstant;
     u32 temp;
@@ -97,7 +105,7 @@ void _init_lpfilter(AuLowPass* lp) {
     temp = lp->fc;
     timeConstant = temp;
     timeConstant = timeConstant >> 1;
-    lp->fgain = 16384 - timeConstant;
+    lp->fgain = SCALE - timeConstant;
 
     for (i = 0; i < 8; i++) {
         lp->fccoef[i] = 0;
@@ -105,16 +113,15 @@ void _init_lpfilter(AuLowPass* lp) {
 
     lp->fccoef[8] = timeConstant;
     
-    // ith value is 16384.0 * (timeConstant / 16384.0)^(i-7)
-    // ex: i = 9 --> timeConstant^2 / 16384.0
-    attenuation = (timeConstant / 16384.0);
+    // ith value is 16384 * (timeConstant / 16384)^(i-7)
+    // ex: i = 9 --> timeConstant^2 / 16384
+    attenuation = ((f64)timeConstant / SCALE);
     for (i = 9; i < 16; i++) {
-        attenuation *= (timeConstant / 16384.0);
-        lp->fccoef[i] = attenuation * 16384.0;
+        attenuation *= ((f64)timeConstant /SCALE);
+        lp->fccoef[i] = attenuation * SCALE;
     }
 }
 
-// initialize delta at 801C9060, with eps_0C at 801C90A0
 // definately AuFX, evidenced by call to func_8005904C
 // this is n_alFxNew
 void func_80058E84(AuFX* fx, u8 mode, ALHeap* heap) {
@@ -138,7 +145,7 @@ void func_80058E84(AuFX* fx, u8 mode, ALHeap* heap) {
 
 // no known calls to this function
 void func_80058F88(AlUnkKappa* kappa, ALHeap* heap) {
-    kappa->unk_00 = alHeapAlloc(heap, 0x1420, 2);
+    kappa->unk_00 = alHeapAlloc(heap, 0x1420, sizeof(s16));
     kappa->lowpass_10 = alHeapAlloc(heap, 1, sizeof(AuLowPass));
     kappa->lowpass_10->fstate = alHeapAlloc(heap, 1, sizeof(POLEF_STATE));
     func_80059008(kappa, 0, 0, 0x5000);
@@ -292,16 +299,16 @@ s32 au_fx_param_hdl(AuFX* fx, s16 index, s16 paramID, s32 value) {
     return 0;
 }
 
-Acmd* _saveBuffer(AuFX* delta, s16* oldPos, s32 buff, s32 count, Acmd* cmdBufPos) {
+static Acmd* _saveBuffer(AuFX* fx, s16* oldPos, s32 buff, s32 count, Acmd* cmdBufPos) {
     Acmd *ptr = cmdBufPos;
     s16* newPos = oldPos + count;
-    s16* delayEnd = &delta->base[delta->length];
+    s16* delayEnd = &fx->base[fx->length];
 
     if (delayEnd < newPos) {
         s32 before = delayEnd - oldPos;
         s32 after = newPos - delayEnd;
         n_aLoadBuffer(ptr++, before<<1, buff, osVirtualToPhysical(oldPos));
-        n_aLoadBuffer(ptr++, after<<1, buff + (before<<1), osVirtualToPhysical(delta->base));
+        n_aLoadBuffer(ptr++, after<<1, buff + (before<<1), osVirtualToPhysical(fx->base));
     } else {
         n_aLoadBuffer(ptr++, count<<1, buff, osVirtualToPhysical(oldPos));
     }
@@ -311,19 +318,12 @@ Acmd* _saveBuffer(AuFX* delta, s16* oldPos, s32 buff, s32 count, Acmd* cmdBufPos
 
 // updates rsval, producing a triangle wave between ±1
 // time delta specified in samples
-f32 func_80059BD4(AuDelay* delay, s32 rsdelta) {
-    f32* rsval = &delay->rsval;
-    f32 newVal;
+//TODO rename to _updateTriWaveModulation
+static f32 func_80059BD4(AuDelay* delay, s32 rsdelta) {
     f32 result;
    
     delay->rsval += delay->rsinc * rsdelta;
-    
-    if (delay->rsval > 2.0) {
-        newVal = delay->rsval - 4.0;
-    } else {
-        newVal = delay->rsval;
-    }
-    *rsval = newVal;
+    delay->rsval = (delay->rsval > 2.0) ? delay->rsval - 4.0 : delay->rsval;
     
     result = delay->rsval;
     if (result < 0.0f) {

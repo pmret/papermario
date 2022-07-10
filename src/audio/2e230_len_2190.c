@@ -330,7 +330,7 @@ void func_80053654(AuGlobals* globals) {
             voice->unk_45 = voice->unk_44;
         } else {
             if (unk_flags & 8) {
-                func_80057344(i, voice->pitchRatio);
+                au_pvoice_set_pitch_ratio(i, voice->pitchRatio);
             }
 
             if (unk_flags & 4) {

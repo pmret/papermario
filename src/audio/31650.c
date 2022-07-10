@@ -84,14 +84,14 @@ void func_80056250(AuSynDriver* driver, ALConfig* config) {
 
     for (i = 0; i < config->unk_num_gamma; i++) {
         AlUnkGamma* gamma = &gSynDriver->al_unk_gamma[i];
-        gamma->unk_beta_10 = NULL;
-        gamma->unk_beta_14 = NULL;
+        gamma->pvoice_10 = NULL;
+        gamma->pvoice_14 = NULL;
         gamma->unk_00 = 0x7FFF;
-        gamma->unk_0C = 0;
+        gamma->currentEffectID = 0;
         gamma->fxL = alHeapAlloc(heap, 1, sizeof(*gamma->fxL));
         gamma->fxR = alHeapAlloc(heap, 1, sizeof(*gamma->fxR));
-        func_80058E84(gamma->fxL, gamma->unk_0C, heap);
-        func_80058E84(gamma->fxR, gamma->unk_0C, heap);
+        func_80058E84(gamma->fxL, gamma->currentEffectID, heap);
+        func_80058E84(gamma->fxR, gamma->currentEffectID, heap);
     }
 
     gSynDriver->unk_drvr_24 = alHeapAlloc(heap, 2 * AUDIO_SAMPLES, 2);
@@ -117,19 +117,18 @@ void func_800565A4(void) {
 
 Acmd* alAudioFrame(Acmd* cmdList, s32* cmdLen, s16* outBuf, s32 outLen) {
     Acmd* cmdListPos;
-    AuPVoice* beta1;
     AuPVoice* pvoice;
     AlUnkGamma* gamma;
 
-    s16* sp10;
-    u16 auxOut;
+    s16* bufPos;
+    s16 auxOut;
     s16 mainOut;
 
     s32 i;
     s32 var_s7;
 
     cmdListPos = cmdList;
-    sp10 = outBuf;
+    bufPos = outBuf;
     if (D_80078E50 == NULL) {
         *cmdLen = 0;
     } else {
@@ -143,99 +142,97 @@ Acmd* alAudioFrame(Acmd* cmdList, s32* cmdLen, s16* outBuf, s32 outLen) {
             }
             D_80078E5C = FALSE;
         }
-        if (outLen > 0) {
-            do {
-                snd_update_sequence_players();
-                for (i = 0; i < gSynDriver->num_pvoice; i++) {
-                    pvoice = &gSynDriver->pvoices[i];
+        while (outLen > 0) {
+            snd_update_sequence_players();
+            for (i = 0; i < gSynDriver->num_pvoice; i++) {
+                pvoice = &gSynDriver->pvoices[i];
 
-                    if ((pvoice->gammaID != 0xFF) && (pvoice->gammaID < gSynDriver->unk_num_gamma)) {
-                        gamma = &gSynDriver->al_unk_gamma[pvoice->gammaID];
-                        if (gamma->unk_beta_14 != NULL) {
-                            gamma->unk_beta_14->next = pvoice;
-                        } else {
-                            gamma->unk_beta_10 = pvoice;
-                        }
-                        gamma->unk_beta_14 = pvoice;
+                if ((pvoice->gammaID != 0xFF) && (pvoice->gammaID < gSynDriver->unk_num_gamma)) {
+                    gamma = &gSynDriver->al_unk_gamma[pvoice->gammaID];
+                    if (gamma->pvoice_14 != NULL) {
+                        gamma->pvoice_14->next = pvoice;
+                    } else {
+                        gamma->pvoice_10 = pvoice;
                     }
+                    gamma->pvoice_14 = pvoice;
                 }
-                var_s7 = 1;
-                for (i = 0; i < gSynDriver->unk_num_gamma; i++) {
-                    gamma = &gSynDriver->al_unk_gamma[i];
-                    if (gamma->unk_beta_10 != NULL) {
-                        aClearBuffer(cmdListPos++, N_AL_MAIN_L_OUT, 8 * AUDIO_SAMPLES);
-                        if (gamma->unk_beta_10 != NULL) {
-                            AuPVoice* next;
-                            do {
-                                cmdListPos = func_80058050(gamma->unk_beta_10, cmdListPos);
-                                next = gamma->unk_beta_10->next;
-                                gamma->unk_beta_10->next = NULL;
-                                gamma->unk_beta_10 = next;
-                            } while (next != 0);
-                            gamma->unk_beta_14 = 0;
+            }
+            var_s7 = 1;
+            for (i = 0; i < gSynDriver->unk_num_gamma; i++) {
+                gamma = &gSynDriver->al_unk_gamma[i];
+                if (gamma->pvoice_10 != NULL) {
+                    aClearBuffer(cmdListPos++, N_AL_MAIN_L_OUT, 8 * AUDIO_SAMPLES);
+                    if (gamma->pvoice_10 != NULL) {
+                        AuPVoice* next;
+                        do {
+                            cmdListPos = func_80058050(gamma->pvoice_10, cmdListPos);
+                            next = gamma->pvoice_10->next;
+                            gamma->pvoice_10->next = NULL;
+                            gamma->pvoice_10 = next;
+                        } while (next != 0);
+                        gamma->pvoice_14 = 0;
+                    }
+                    if (gamma->currentEffectID != 0) {
+                        cmdListPos = func_80059310(gamma->fxL, cmdListPos, N_AL_AUX_L_OUT, 0);
+                        cmdListPos = func_80059310(gamma->fxR, cmdListPos, N_AL_AUX_R_OUT, 0);
+                    }
+                    if (i == D_800A3FEC) {
+                        mainOut = -1;
+                        switch (D_800A3FEE) {
+                            case 1:
+                                mainOut = N_AL_MAIN_L_OUT;
+                                auxOut = N_AL_AUX_L_OUT;
+                                break;
+                            case 2:
+                                mainOut = N_AL_MAIN_R_OUT;
+                                auxOut = N_AL_AUX_R_OUT;
+                                break;
                         }
-                        if (gamma->unk_0C != 0) {
-                            cmdListPos = func_80059310(gamma->fxL, cmdListPos, N_AL_AUX_L_OUT, 0);
-                            cmdListPos = func_80059310(gamma->fxR, cmdListPos, N_AL_AUX_R_OUT, 0);
-                        }
-                        if (i == D_800A3FEC) {
-                            mainOut = -1;
-                            switch (D_800A3FEE) {
-                                case 1:
-                                    mainOut = N_AL_MAIN_L_OUT;
-                                    auxOut = N_AL_AUX_L_OUT;
-                                    break;
-                                case 2:
-                                    mainOut = N_AL_MAIN_R_OUT;
-                                    auxOut = N_AL_AUX_R_OUT;
-                                    break;
-                            }
-                            if (mainOut != -1) {
-                                aSaveBufferSize(cmdListPos++, 2 * AUDIO_SAMPLES, mainOut, osVirtualToPhysical(D_800A3FE0 + (D_800A3FE8 % D_800A3FF0) * AUDIO_SAMPLES));
-                                aLoadBufferSize(cmdListPos++, 2 * AUDIO_SAMPLES, mainOut, osVirtualToPhysical(D_800A3FE0 + ((D_800A3FE8 + 1) % D_800A3FF0) * AUDIO_SAMPLES));
-                                aSaveBufferSize(cmdListPos++, 2 * AUDIO_SAMPLES, auxOut, osVirtualToPhysical(D_800A3FE4 + (D_800A3FE8 % D_800A3FF0) * AUDIO_SAMPLES));
-                                aLoadBufferSize(cmdListPos++, 2 * AUDIO_SAMPLES, auxOut, osVirtualToPhysical(D_800A3FE4 + ((D_800A3FE8 + 1) % D_800A3FF0) * AUDIO_SAMPLES));
+                        if (mainOut != -1) {
+                            aSaveBufferSize(cmdListPos++, 2 * AUDIO_SAMPLES, mainOut, osVirtualToPhysical(D_800A3FE0 + (D_800A3FE8 % D_800A3FF0) * AUDIO_SAMPLES));
+                            aLoadBufferSize(cmdListPos++, 2 * AUDIO_SAMPLES, mainOut, osVirtualToPhysical(D_800A3FE0 + ((D_800A3FE8 + 1) % D_800A3FF0) * AUDIO_SAMPLES));
+                            aSaveBufferSize(cmdListPos++, 2 * AUDIO_SAMPLES, auxOut, osVirtualToPhysical(D_800A3FE4 + (D_800A3FE8 % D_800A3FF0) * AUDIO_SAMPLES));
+                            aLoadBufferSize(cmdListPos++, 2 * AUDIO_SAMPLES, auxOut, osVirtualToPhysical(D_800A3FE4 + ((D_800A3FE8 + 1) % D_800A3FF0) * AUDIO_SAMPLES));
 
-                            }
                         }
-                        if (var_s7) {
-                            aClearBuffer(cmdListPos++, 0, 4 * AUDIO_SAMPLES);
-                        } else {
-                            aLoadBufferSize(cmdListPos++, 4 * AUDIO_SAMPLES, 0, osVirtualToPhysical(gSynDriver->unk_drvr_28));
-                        }
-                        aMix(cmdListPos++, 0, gamma->unk_00, N_AL_AUX_L_OUT, 0);
-                        aMix(cmdListPos++, 0, gamma->unk_00, N_AL_AUX_R_OUT, 2 * AUDIO_SAMPLES);
-                        aSaveBufferSize(cmdListPos++, 4 * AUDIO_SAMPLES, 0, osVirtualToPhysical(gSynDriver->unk_drvr_28));
-                        if (var_s7) {
-                            aClearBuffer(cmdListPos++, 0, 4 * AUDIO_SAMPLES);
-                            var_s7 = FALSE;
-                        } else {
-                            aLoadBufferSize(cmdListPos++, 4 * AUDIO_SAMPLES, 0, osVirtualToPhysical(gSynDriver->unk_drvr_24));
-                        }
-                        aMix(cmdListPos++, 0, gamma->unk_00, N_AL_MAIN_L_OUT, 0);
-                        aMix(cmdListPos++, 0, gamma->unk_00, N_AL_MAIN_R_OUT, 2 * AUDIO_SAMPLES);
-                        aSaveBufferSize(cmdListPos++, 4 * AUDIO_SAMPLES, 0, osVirtualToPhysical(gSynDriver->unk_drvr_24));
                     }
+                    if (var_s7) {
+                        aClearBuffer(cmdListPos++, 0, 4 * AUDIO_SAMPLES);
+                    } else {
+                        aLoadBufferSize(cmdListPos++, 4 * AUDIO_SAMPLES, 0, osVirtualToPhysical(gSynDriver->unk_drvr_28));
+                    }
+                    aMix(cmdListPos++, 0, gamma->unk_00, N_AL_AUX_L_OUT, 0);
+                    aMix(cmdListPos++, 0, gamma->unk_00, N_AL_AUX_R_OUT, 2 * AUDIO_SAMPLES);
+                    aSaveBufferSize(cmdListPos++, 4 * AUDIO_SAMPLES, 0, osVirtualToPhysical(gSynDriver->unk_drvr_28));
+                    if (var_s7) {
+                        aClearBuffer(cmdListPos++, 0, 4 * AUDIO_SAMPLES);
+                        var_s7 = FALSE;
+                    } else {
+                        aLoadBufferSize(cmdListPos++, 4 * AUDIO_SAMPLES, 0, osVirtualToPhysical(gSynDriver->unk_drvr_24));
+                    }
+                    aMix(cmdListPos++, 0, gamma->unk_00, N_AL_MAIN_L_OUT, 0);
+                    aMix(cmdListPos++, 0, gamma->unk_00, N_AL_MAIN_R_OUT, 2 * AUDIO_SAMPLES);
+                    aSaveBufferSize(cmdListPos++, 4 * AUDIO_SAMPLES, 0, osVirtualToPhysical(gSynDriver->unk_drvr_24));
                 }
-                aDMEMMove(cmdListPos++, 0, N_AL_MAIN_L_OUT, 4 * AUDIO_SAMPLES);
-                aLoadBufferSize(cmdListPos++, 4 * AUDIO_SAMPLES, N_AL_AUX_L_OUT, osVirtualToPhysical(gSynDriver->unk_drvr_28));
-                aMix(cmdListPos++, 0, 0x7FFF, N_AL_AUX_L_OUT, N_AL_MAIN_L_OUT);
-                aMix(cmdListPos++, 0, 0x7FFF, N_AL_AUX_R_OUT, N_AL_MAIN_R_OUT);
-                if (D_80078E58) {
-                    u16 temp;
-                    aDMEMMove(cmdListPos++, N_AL_MAIN_L_OUT, 0, 4 * AUDIO_SAMPLES);
-                    aClearBuffer(cmdListPos++, N_AL_MAIN_L_OUT, 4 * AUDIO_SAMPLES);
-                    temp = D_80078E5A;
-                    aMix(cmdListPos++, 0, temp, 0, N_AL_MAIN_L_OUT);
-                    aMix(cmdListPos++, 0, temp, 2 * AUDIO_SAMPLES, N_AL_MAIN_R_OUT);
-                }
-                outLen -= AUDIO_SAMPLES;
-                aInterleavePart(cmdListPos++);
-                aSaveBufferSize(cmdListPos++, 4 * AUDIO_SAMPLES, 0, sp10);
-                sp10 += 2 * AUDIO_SAMPLES;
-                D_800A3FE8++;
-                gSynDriver->curSamples += AUDIO_SAMPLES;
-            } while (outLen > 0);
+            }
+            aDMEMMove(cmdListPos++, 0, N_AL_MAIN_L_OUT, 4 * AUDIO_SAMPLES);
+            aLoadBufferSize(cmdListPos++, 4 * AUDIO_SAMPLES, N_AL_AUX_L_OUT, osVirtualToPhysical(gSynDriver->unk_drvr_28));
+            aMix(cmdListPos++, 0, 0x7FFF, N_AL_AUX_L_OUT, N_AL_MAIN_L_OUT);
+            aMix(cmdListPos++, 0, 0x7FFF, N_AL_AUX_R_OUT, N_AL_MAIN_R_OUT);
+            if (D_80078E58) {
+                u16 temp;
+                aDMEMMove(cmdListPos++, N_AL_MAIN_L_OUT, 0, 4 * AUDIO_SAMPLES);
+                aClearBuffer(cmdListPos++, N_AL_MAIN_L_OUT, 4 * AUDIO_SAMPLES);
+                temp = D_80078E5A;
+                aMix(cmdListPos++, 0, temp, 0, N_AL_MAIN_L_OUT);
+                aMix(cmdListPos++, 0, temp, 2 * AUDIO_SAMPLES, N_AL_MAIN_R_OUT);
+            }
+            outLen -= AUDIO_SAMPLES;
+            aInterleavePart(cmdListPos++);
+            aSaveBufferSize(cmdListPos++, 4 * AUDIO_SAMPLES, 0, bufPos);
+            bufPos += 2 * AUDIO_SAMPLES;
+            D_800A3FE8++;
+            gSynDriver->curSamples += AUDIO_SAMPLES;
         }
         *cmdLen = (cmdListPos - cmdList);
     }
@@ -271,12 +268,12 @@ u16 func_80056DA4(u8 arg0, u16 arg1) {
     return gamma->unk_00;
 }
 
-void func_80056DCC(u8 arg0, u8 arg1) {
+void func_80056DCC(u8 arg0, u8 effectID) {
     AlUnkGamma* gamma = &gSynDriver->al_unk_gamma[arg0];
 
-    gamma->unk_0C = arg1;
-    func_8005904C(gamma->fxL, arg1);
-    func_8005904C(gamma->fxR, arg1);
+    gamma->currentEffectID = effectID;
+    func_8005904C(gamma->fxL, effectID);
+    func_8005904C(gamma->fxR, effectID);
 }
 
 void func_80056E34(u8 arg0, s16 arg1, s16 arg2, s32 arg3) {
@@ -287,9 +284,9 @@ void func_80056E34(u8 arg0, s16 arg1, s16 arg2, s32 arg3) {
 }
 
 void func_80056EC0(u8 arg0, s8 arg1) {
-    AuPVoice* beta = &gSynDriver->pvoices[arg0];
+    AuPVoice* pvoice = &gSynDriver->pvoices[arg0];
 
-    beta->gammaID = arg1;
+    pvoice->gammaID = arg1;
 }
 
 // n_alLoadParam case AL_FILTER_RESET
@@ -320,21 +317,23 @@ void au_pvoice_reset_filter(u8 voiceIdx) {
 }
 
 void func_80056F78(u8 index) {
-    AuPVoice* beta = (AuPVoice*)&gSynDriver->pvoices[index];
+    AuPVoice* pvoice = (AuPVoice*)&gSynDriver->pvoices[index];
 
-    beta->envMixer.em_motion = 1;
+    pvoice->envMixer.em_motion = 1;
 }
 
 #define ADPCMFBYTES      9
 
 // n_alLoadParam case AL_FILTER_SET_WAVETABLE
-void au_pvoice_set_filter(u8 index, u8 arg1, Instrument* table, f32 arg3, s16 arg4, u8 arg5, u8 arg6, s32 arg7) {
+void au_pvoice_set_filter(u8 index, u8 reverbType, Instrument* table, f32 pitchRatio, s16 arg4, u8 pan, u8 reverb, s32 arg7) {
     AuPVoice* pvoice = &gSynDriver->pvoices[index];
     AuLoadFilter* filter = &pvoice->loadFilter;
     AuEnvMixer* envMixer = &pvoice->envMixer;
     AuResampler* resampler = &pvoice->resampler;
 
-    pvoice->gammaID = arg1;
+//au_pvoice_set_filter(i, voice->reverbType, voice->instrument, voice->pitchRatio, voice->unk_0C, voice->pan, voice->reverb, voice->unk_08);
+
+    pvoice->gammaID = reverbType;
     filter->dc_table = table;
 
     pvoice->loadFilter.dc_memin = filter->dc_table->base;
@@ -372,10 +371,10 @@ void au_pvoice_set_filter(u8 index, u8 arg1, Instrument* table, f32 arg3, s16 ar
     envMixer->em_first = 1;
     envMixer->em_delta = 0;
     envMixer->em_segEnd = arg7;
-    envMixer->em_pan = arg5;
+    envMixer->em_pan = pan;
     envMixer->em_volume = SQ(arg4) >> 0xF;
-    envMixer->em_dryamt = AuEqPower[arg6];
-    envMixer->em_wetamt = AuEqPower[AU_EQPOW_MAX_IDX - arg6];
+    envMixer->em_dryamt = AuEqPower[reverb];
+    envMixer->em_wetamt = AuEqPower[AU_EQPOW_MAX_IDX - reverb];
     if (envMixer->em_segEnd != 0) {
         envMixer->em_cvolL = 1;
         envMixer->em_cvolR = 1;
@@ -388,7 +387,7 @@ void au_pvoice_set_filter(u8 index, u8 arg1, Instrument* table, f32 arg3, s16 ar
             envMixer->em_cvolR = (envMixer->em_volume * AuEqPower[AU_EQPOW_MAX_IDX - envMixer->em_pan]) >> 0xF;
         }
     }
-    resampler->rs_ratio = arg3;
+    resampler->rs_ratio = pitchRatio;
 }
 
 void au_pvoice_set_filter_wavetable(u8 voiceIdx, Instrument* table) {
@@ -428,10 +427,10 @@ void au_pvoice_set_filter_wavetable(u8 voiceIdx, Instrument* table) {
     }
 }
 
-void func_80057344(u8 voiceIdx, f32 arg1) {
+void au_pvoice_set_pitch_ratio(u8 voiceIdx, f32 pitchRatio) {
     AuPVoice* pvoice = &gSynDriver->pvoices[voiceIdx];
 
-    pvoice->resampler.rs_ratio = arg1;
+    pvoice->resampler.rs_ratio = pitchRatio;
 }
 
 void func_8005736C(u8 voiceIdx, s16 volume, s32 arg2, u8 arg3, u8 arg4) {
@@ -615,9 +614,9 @@ s16 func_80057C04(u8 voiceIdx) {
 }
 
 s16 func_80057C2C(u8 voiceIdx) {
-    AuPVoice* beta =  &gSynDriver->pvoices[voiceIdx];
+    AuPVoice* pvoice =  &gSynDriver->pvoices[voiceIdx];
 
-    return beta->envMixer.em_wetamt;
+    return pvoice->envMixer.em_wetamt;
 }
 
 s32 func_80057C54(u8 voiceIdx) {

@@ -541,7 +541,6 @@ void func_8004E158(BGMPlayer* player, s32 arg1, s32 arg2, AuGlobals* arg3) {
     player->unk_48 = 0x8000;
     player->masterTempo = BGM_DEFAULT_TEMPO;
     player->masterVolume = 0x7F000000;
-    player->unk_22B = 1;
     player->unk_14 = 0;
     player->unk_18 = 0;
     player->songName = 0;
@@ -568,14 +567,15 @@ void func_8004E158(BGMPlayer* player, s32 arg1, s32 arg2, AuGlobals* arg3) {
     player->unk_168.s32 = 0;
     player->unk_222 = 0;
     player->unk_223 = 0;
-    player->unk_22A = 0;
-    player->unk_22C = 0;
     player->unk_D0 = 1.0f;
-    player->unk_22D = 0;
-    player->unk_22F = 2;
-    player->unk_230 = 3;
-    player->unk_22E = 0;
-    player->unk_231 = 4;
+    player->unk_22A[0] = 0;
+    player->unk_22A[1] = 1;
+    player->unk_22A[2] = 0;
+    player->unk_22A[3] = 0;
+    player->unk_22A[4] = 0;
+    player->unk_22A[5] = 2;
+    player->unk_22A[6] = 3;
+    player->unk_22A[7] = 4;
 
     for (i = 0; i < ARRAY_COUNT(player->tracks); i++) {
         BGMPlayerTrack* temp = &player->tracks[i];
@@ -1119,7 +1119,7 @@ void func_8004EC68(BGMPlayer *player) {
                                 }
 
                                 if (!bAcquiredVoiceIdx) {
-                                    if (track->unk_54 >= 5) {
+                                    if (track->unk_54 >= 5) { // 5 = AL_DEFAULT_PRIORITY?
                                         for(voiceIdx = track->unk_52; voiceIdx < track->unk_53; voiceIdx++) {
                                             voice = &player->globals->voices[voiceIdx];
                                             if (voice->unk_45 < player->unk_234) {
