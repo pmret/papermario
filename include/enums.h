@@ -650,6 +650,7 @@ enum SoundIDs {
     SOUND_32E                       = 0x0000032E,
     SOUND_32F                       = 0x0000032F,
     SOUND_349                       = 0x00000349,
+    SOUND_34A                       = 0x0000034A,
     SOUND_34E                       = 0x0000034E,
     SOUND_359                       = 0x00000359,
     SOUND_35D                       = 0x0000035D,

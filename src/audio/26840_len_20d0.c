@@ -1,17 +1,6 @@
 #include "common.h"
 #include "audio.h"
 
-extern s32* AU_FX_CUSTOM_PARAMS[0]; // points to 80078290
-
-extern s8 gBlankSEFData[12];
-extern InstrumentEffect* D_800783C0[25];
-
-extern void (*SefCmdHandlers[])(SoundManager*, SoundPlayer*);
-extern void (*CurrentSeqCmdHandler)(BGMPlayer*, BGMPlayerTrack*);
-extern void (*CurrentSefCmdHandler)(SoundManager*, SoundPlayer*);
-extern void (*SeqCmdHandlers[])(BGMPlayer*, BGMPlayerTrack*);
-extern s8 SeqCmdArgCounts[];
-
 void snd_SEFCmd_00_SetVolume(SoundManager* manager, SoundPlayer* player);
 void snd_SEFCmd_01_SetPan(SoundManager* manager, SoundPlayer* player);
 void snd_SEFCmd_02_SetInstrument(SoundManager* manager, SoundPlayer* player);
@@ -29,12 +18,282 @@ void snd_SEFCmd_0D(SoundManager* manager, SoundPlayer* player);
 void snd_SEFCmd_0E(SoundManager* manager, SoundPlayer* player);
 void snd_SEFCmd_0F(SoundManager* manager, SoundPlayer* player);
 void snd_SEFCmd_10_Jump(SoundManager* manager, SoundPlayer* player);
+void snd_SEFCmd_11_Restart(SoundManager* manager, SoundPlayer* player);
+void snd_SEFCmd_12_NOP(SoundManager* manager, SoundPlayer* player);
 void snd_SEFCmd_SetUnkA1(SoundManager* manager, SoundPlayer* player);
 void snd_SEFCmd_SetUnkA2(SoundManager* manager, SoundPlayer* player);
 void snd_SEFCmd_SetUnkA3(SoundManager* manager, SoundPlayer* player);
 void snd_SEFCmd_16(SoundManager* manager, SoundPlayer* player);
 void snd_SEFCmd_17(SoundManager* manager, SoundPlayer* player);
 void snd_SEFCmd_18(SoundManager* manager, SoundPlayer* player);
+
+s32 D_80078190[] = {
+    0xF8030125, 0x07D0FDBC, 0xF8860355, 0x06FCFBAB, 0xFEDAF82D, 0x0245077D, 0xFCA9F901, 0x0456065D, 0xFC33FBB2, 0xFCEFFE94, 0xFFD80080, 0x00A4007D, 0x090E0673, 0x02FF0053, 0xFEF2FEA7, 0xFEF9FF7B
+};
+
+s32 D_800781D0[] = {
+    0xB1011110, 0x00FFFE34, 0xBB90E21E, 0x00FB10EF, 0xF2D180C4, 0xB3B1D3CF, 0xD1FDFE80, 0x1D2D3D3B, 0x2C3BFC1D, 0x80DEF0D0, 0xD3D2B3D1, 0xF480A203, 0xD00DA9EA, 0xCB729041, 0x4E1D2D0C, 0x1E102F90, 0xF21203F0, 0xC2D1D4F3, 0x80B0A1BF, 0xD21E1270, 0x4D804C39, 0x2C7E306D, 0xB9CF90E1, 0xF2F3F2E1, 0xE21622C1, 0xE728F4F0, 0x211010FF, 0xA1ED9F2F, 0xF561333C, 0xD0A1DAC2, 0xFF144122, 0x2DEFA1FA, 0xE10E2330, 0x320EF091, 0x9AF2CF55, 0x1361EE1C, 0x919D0FD2, 0x52064DE1, 0x0991D01B, 0x152E36FD, 0x12CB8122, 0xBC65F073, 0xCE3FAE71, 0x4E9370F5, 0x6ED21BD1, 0x610A5D00, 0x00000000, 0x00000000
+};
+
+// copy of SMALL_ROOM_PARAMS
+s32 CUSTOM_SMALL_ROOM_PARAMS[] = {
+    /* sections	   length */
+        3,             11,
+    /*                                      chorus  chorus   filter
+    input  output  fbcoef  ffcoef   gain     rate   depth     coef  */
+        0,      9,   9830,  -9830,      0,      0,      0,      0,
+        3,      7,   3276,  -3276, 0x3FFF,      0,      0,      0,
+        0,     10,   5000,      0,      0,      0,      0, 0x5000
+};
+
+// modified ECHO_PARAMS -- length and output changed
+s32 CUSTOM_ECHO_PARAMS_1[] = {
+    /* sections	   length */
+        1,             11,
+    /*                                      chorus  chorus   filter
+    input  output  fbcoef  ffcoef   gain     rate   depth     coef  */
+        0,     10,  20000,      0, 0x7FFF,      0,      0, 0x7FFF
+};
+
+// modified ECHO_PARAMS -- length and output changed
+s32 CUSTOM_ECHO_PARAMS_2[] = {
+    /* sections	   length */
+        1,             13,
+    /*                                      chorus  chorus   filter
+    input  output  fbcoef  ffcoef   gain     rate   depth     coef  */
+        0,     12,  20000,      0, 0x7FFF,      0,      0, 0x7FFF
+};
+
+// modified ECHO_PARAMS -- length and output changed
+s32 CUSTOM_ECHO_PARAMS_3[] = {
+    /* sections	   length */
+        1,             14,
+    /*                                      chorus  chorus   filter
+    input  output  fbcoef  ffcoef   gain     rate   depth     coef  */
+        0,     13,  20000,      0, 0x7FFF,      0,      0, 0x7FFF
+};
+
+AlUnkGemini D_80078370[] = {
+    {
+    .sound1 = SOUND_34A,
+    .sound2 = SOUND_349,
+    .flags = 1
+    }
+};
+
+//TODO type: InstrumentEffect
+s32 D_80078378[] = {
+    0x01000000, 0x00080012, 0x3C7F2D7F, 0x2B5F1D00, 0xFF002700, 0xFF000000
+};
+
+//TODO type: InstrumentEffect
+s32 D_80078390[] = {
+    0x01000000, 0x0008001A, 0x3C7F237F, 0x3C3F2A1F, 0x2A0F2A07, 0x2A033600, 0xFF003600, 0xFF000000, 0x34337F26, 0x3F1600FF, 0x343B7F3B, 0x3FFF0000
+};
+
+InstrumentEffect* D_800783C0[] = {
+    (InstrumentEffect*) &D_80078378,
+    (InstrumentEffect*) &D_80078390,
+    (InstrumentEffect*) &D_80078390,
+    (InstrumentEffect*) &D_80078390,
+    (InstrumentEffect*) &D_80078390,
+    (InstrumentEffect*) &D_80078390,
+    (InstrumentEffect*) &D_80078390,
+    (InstrumentEffect*) &D_80078390,
+    (InstrumentEffect*) &D_80078390,
+    (InstrumentEffect*) &D_80078390,
+    (InstrumentEffect*) &D_80078390,
+    (InstrumentEffect*) &D_80078390,
+    (InstrumentEffect*) &D_80078390,
+    (InstrumentEffect*) &D_80078390,
+    (InstrumentEffect*) &D_80078390,
+    (InstrumentEffect*) &D_80078390
+};
+
+void (*SefCmdHandlers[])(SoundManager*, SoundPlayer*) = {
+	snd_SEFCmd_00_SetVolume,
+	snd_SEFCmd_01_SetPan,
+	snd_SEFCmd_02_SetInstrument,
+	snd_SEFCmd_03_SetReverb,
+	snd_SEFCmd_04,
+	snd_SEFCmd_05,
+	snd_SEFCmd_06,
+	snd_SEFCmd_07,
+	snd_SEFCmd_08,
+	snd_SEFCmd_09_StartLoop,
+	snd_SEFCmd_0A_EndLoop,
+	snd_SEFCmd_0B,
+	snd_SEFCmd_0C,
+	snd_SEFCmd_0D,
+	snd_SEFCmd_0E,
+	snd_SEFCmd_0F,
+	snd_SEFCmd_10_Jump,
+	snd_SEFCmd_11_Restart,
+	snd_SEFCmd_12_NOP,
+	snd_SEFCmd_SetUnkA1,
+	snd_SEFCmd_SetUnkA2,
+	snd_SEFCmd_SetUnkA3,
+	snd_SEFCmd_16,
+	snd_SEFCmd_17,
+	snd_SEFCmd_18
+};
+
+s8 gBlankSEFData[] = {
+    0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00
+};
+
+void (*SeqCmdHandlers[])(BGMPlayer*, BGMPlayerTrack*) = {
+	snd_BGMCmd_E0_MasterTempo,
+	snd_BGMCmd_E1_MasterVolume,
+	snd_BGMCmd_E2_MasterPitchShift,
+	snd_BGMCmd_E3,
+	snd_BGMCmd_E4_MasterTempoFade,
+	snd_BGMCmd_E5_MasterVolumeFade,
+	snd_BGMCmd_E6_MasterEffect,
+	snd_BGMCmd_NOP,
+	snd_BGMCmd_E8_TrackOverridePatch,
+	snd_BGMCmd_E9_SubTrackVolume,
+	snd_BGMCmd_EA_SubTrackPan,
+	snd_BGMCmd_EB_SubTrackReverb,
+	snd_BGMCmd_EC_SegTrackVolume,
+	snd_BGMCmd_ED_SubTrackCoarseTune,
+	snd_BGMCmd_EE_SubTrackFineTune,
+	snd_BGMCmd_EF_SegTrackTune,
+	snd_BGMCmd_F0_TrackTremolo,
+	snd_BGMCmd_F1_TrackTremoloSpeed,
+	snd_BGMCmd_F2_TrackTremoloTime,
+	snd_BGMCmd_F3_TrackTremoloStop,
+	snd_BGMCmd_F4,
+	snd_BGMCmd_F5_TrackVoice,
+	snd_BGMCmd_F6_TrackVolumeFade,
+	snd_BGMCmd_F7_SubTrackReverbType,
+	snd_BGMCmd_NOP,
+	snd_BGMCmd_NOP,
+	snd_BGMCmd_NOP,
+	snd_BGMCmd_NOP,
+	snd_BGMCmd_FC_Jump,
+	snd_BGMCmd_FD,
+	snd_BGMCmd_FE,
+	snd_BGMCmd_FF,
+};
+
+s8 SeqCmdArgCounts[] = {
+	2, 1, 1, 1, 4, 3, 2, 0, 2, 1, 1, 1, 1, 1, 1, 2, 3, 1, 1, 0, 2, 1, 3, 1, 0, 0, 0, 0, 3, 3, 3, 3
+};
+
+s8 D_80078510[] = {
+    0x30, 0x18, 0x20, 0x28, 0x30, 0x38, 0x40, 0x30, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+};
+
+s32 D_80078520[] = {
+    0x00000000, 0x00000000, 0x00000000, 0x00000000
+};
+
+s16 D_80078530[] = {
+    0x0000, 0x0200, 0x0800, 0x1200, 0x2000, 0x3200, 0x4800, 0x6200, 0x8000, 0x0000
+};
+
+s32 D_80078544[] = {
+    0x01000000, 0x0008000C
+};
+
+s32 D_8007854C[] = {
+    0x3D7FFF00, 0x3400FF00
+};
+
+s32 D_80078554[] = {
+    0x5C00FF00
+};
+
+s8 D_80078558[] = {
+    0x5E, 0x5D, 0x5C, 0x5B, 0x5A, 0x58, 0x56, 0x53, 0x51, 0x4F, 0x4A, 0x45, 0x40, 0x3B, 0x37, 0x35, 0x33, 0x31, 0x2F, 0x2D, 0x2B, 0x29, 0x27, 0x26, 0x25, 0x23, 0x21, 0x20, 0x1F, 0x1E, 0x1D, 0x1C, 0x1B, 0x1A, 0x19, 0x18, 0x17, 0x16, 0x15, 0x14
+};
+
+u8 D_80078580[] = {
+    0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+};
+
+s32 D_800785A0[] = {
+    0x0393756C, 0x034736DE, 0x02FAE1DA, 0x02AEA34C, 0x02624E48, 0x0215F944, 0x01C9BAB6, 0x01A39034,
+    0x017D65B2, 0x015751A6, 0x01312724, 0x0121E2F0, 0x01129EBC, 0x01035A88, 0x00F41654, 0x00E4D220,
+    0x00D58DEC, 0x00C649B8, 0x00B70584, 0x00A7D7C6, 0x00989392, 0x00894F5E, 0x007A0B2A, 0x006AC6F6,
+    0x005B82C2, 0x004C3E8E, 0x00449C74, 0x003CFA5A, 0x00355840, 0x002DB626, 0x0029F054, 0x0026140C,
+    0x00224E3A, 0x001E71F2, 0x001CF41C, 0x001B7646, 0x0019E1FA, 0x00186424, 0x0016CFD8, 0x00155202,
+    0x0013D42C, 0x00123FE0, 0x0010C20A, 0x000F2DBE, 0x000E7A0E, 0x000DAFE8, 0x000CE5C2, 0x000C3212,
+    0x000B67EC, 0x000A9DC6, 0x0009EA16, 0x00091FF0, 0x000855CA, 0x00078BA4, 0x0006D7F4, 0x00060DCE,
+    0x0005B3F6, 0x000543A8, 0x0004E9D0, 0x00048FF8, 0x0004630C, 0x00043620, 0x00040934, 0x0003F2BE,
+    0x0003C5D2, 0x000398E6, 0x00038270, 0x00035584, 0x00032898, 0x0002FBAC, 0x0002E536, 0x0002B84A,
+    0x00028B5E, 0x00025E72, 0x000247FC, 0x00021B10, 0x0001EE24, 0x0001C138, 0x0001AAC2, 0x00017DD6,
+    0x00016760, 0x00013A74, 0x00010D88, 0x0000F712, 0x0000E09C, 0x0000CA26, 0x0000B3B0, 0x00009D3A,
+    0x000086C4, 0x0000704E, 0x000059D8, 0x00004362, 0x00002CEC, 0x00001676, 0x00000000, 0x00000000,
+    0x00000000, 0x00000000, 0x00000000, 0x00000000
+};
+
+f32 AlTuneScaling[] = {
+    // TUNE_SCALING_ARR_AMPLIFY_FINE
+    1.00000000f, 1.00057781f, 1.00115597f, 1.00173450f, 1.00231326f, 1.00289237f, 1.00347185f, 1.00405169f, 
+    1.00463188f, 1.00521231f, 1.00579309f, 1.00637424f, 1.00695574f, 1.00753760f, 1.00811982f, 1.00870228f, 
+    1.00928509f, 1.00986826f, 1.01045179f, 1.01103568f, 1.01161981f, 1.01220429f, 1.01278913f, 1.01337433f, 
+    1.01395988f, 1.01454580f, 1.01513207f, 1.01571858f, 1.01630545f, 1.01689267f, 1.01748025f, 1.01806819f, 
+    1.01865649f, 1.01924503f, 1.01983392f, 1.02042317f, 1.02101278f, 1.02160275f, 1.02219307f, 1.02278376f, 
+    1.02337468f, 1.02396595f, 1.02455759f, 1.02514958f, 1.02574193f, 1.02633464f, 1.02692771f, 1.02752113f, 
+    1.02811480f, 1.02870882f, 1.02930319f, 1.02989793f, 1.03049302f, 1.03108847f, 1.03168428f, 1.03228045f, 
+    1.03287685f, 1.03347361f, 1.03407073f, 1.03466821f, 1.03526604f, 1.03586423f, 1.03646278f, 1.03706169f, 
+    1.03766096f, 1.03826058f, 1.03886044f, 1.03946066f, 1.04006124f, 1.04066217f, 1.04126346f, 1.04186511f, 
+    1.04246712f, 1.04306948f, 1.04367220f, 1.04427528f, 1.04487872f, 1.04548252f, 1.04608655f, 1.04669094f, 
+    1.04729569f, 1.04790080f, 1.04850626f, 1.04911208f, 1.04971826f, 1.05032480f, 1.05093169f, 1.05153894f, 
+    1.05214655f, 1.05275452f, 1.05336285f, 1.05397153f, 1.05458057f, 1.05518997f, 1.05579972f, 1.05640972f, 
+    1.05702007f, 1.05763078f, 1.05824184f, 1.05885327f, 1.05946505f, 1.06007719f, 1.06068969f, 1.06130254f, 
+    1.06191576f, 1.06252933f, 1.06314325f, 1.06375754f, 1.06437218f, 1.06498718f, 1.06560254f, 1.06621826f, 
+    1.06683433f, 1.06745076f, 1.06806755f, 1.06868470f, 1.06930220f, 1.06992006f, 1.07053828f, 1.07115686f, 
+    1.07177579f, 1.07239509f, 1.07301474f, 1.07363474f, 1.07425511f, 1.07487583f, 1.07549691f, 1.07611835f, 
+    // TUNE_SCALING_ARR_AMPLIFY_COARSE
+    1.00000000f, 1.07674015f, 1.15936935f, 1.24833953f, 1.34413731f, 1.44728661f, 1.55835164f, 1.67793977f, 
+    1.80670512f, 1.94535196f, 2.09463859f, 2.25538135f, 2.42845964f, 2.61482000f, 2.81548166f, 3.03154206f, 
+    3.26418304f, 3.51467681f, 3.78439355f, 4.07480860f, 4.38750982f, 4.72420788f, 5.08674431f, 5.47710180f, 
+    5.89741516f, 6.34998369f, 6.83728218f, 7.36197615f, 7.92693520f, 8.53524971f, 9.19024563f, 9.89550686f, 
+    // TUNE_SCALING_ARR_ATTENUATE_FINE
+    1.00000000f, 0.99942255f, 0.99884546f, 0.99826866f, 0.99769223f, 0.99711609f, 0.99654031f, 0.99596488f, 
+    0.99538976f, 0.99481499f, 0.99424052f, 0.99366641f, 0.99309260f, 0.99251914f, 0.99194598f, 0.99137318f, 
+    0.99080074f, 0.99022859f, 0.98965681f, 0.98908532f, 0.98851418f, 0.98794335f, 0.98737288f, 0.98680270f, 
+    0.98623288f, 0.98566335f, 0.98509419f, 0.98452532f, 0.98395681f, 0.98338860f, 0.98282075f, 0.98225319f, 
+    0.98168600f, 0.98111910f, 0.98055255f, 0.97998631f, 0.97942042f, 0.97885484f, 0.97828960f, 0.97772467f, 
+    0.97716010f, 0.97659582f, 0.97603190f, 0.97546828f, 0.97490501f, 0.97434205f, 0.97377944f, 0.97321713f, 
+    0.97265512f, 0.97209346f, 0.97153211f, 0.97097111f, 0.97041041f, 0.96985006f, 0.96929002f, 0.96873033f, 
+    0.96817094f, 0.96761185f, 0.96705312f, 0.96649468f, 0.96593660f, 0.96537882f, 0.96482134f, 0.96426421f, 
+    0.96370739f, 0.96315092f, 0.96259475f, 0.96203887f, 0.96148336f, 0.96092814f, 0.96037328f, 0.95981872f, 
+    0.95926446f, 0.95871055f, 0.95815694f, 0.95760363f, 0.95705068f, 0.95649803f, 0.95594567f, 0.95539367f, 
+    0.95484197f, 0.95429057f, 0.95373952f, 0.95318878f, 0.95263839f, 0.95208830f, 0.95153850f, 0.95098901f, 
+    0.95043987f, 0.94989103f, 0.94934249f, 0.94879431f, 0.94824642f, 0.94769883f, 0.94715160f, 0.94660467f, 
+    0.94605803f, 0.94551176f, 0.94496578f, 0.94442010f, 0.94387472f, 0.94332969f, 0.94278497f, 0.94224054f, 
+    0.94169647f, 0.94115269f, 0.94060922f, 0.94006604f, 0.93952322f, 0.93898070f, 0.93843848f, 0.93789655f, 
+    0.93735498f, 0.93681371f, 0.93627274f, 0.93573207f, 0.93519175f, 0.93465173f, 0.93411201f, 0.93357259f, 
+    0.93303353f, 0.93249476f, 0.93195629f, 0.93141812f, 0.93088025f, 0.93034273f, 0.92980552f, 0.92926860f, 
+    // TUNE_SCALING_ARR_ATTENUATE_COARSE
+    1.00000000f, 0.92873198f, 0.86254311f, 0.80107135f, 0.74398059f, 0.69095856f, 0.64171529f, 0.59598154f, 
+    0.55350709f, 0.51405972f, 0.47742370f, 0.44339865f, 0.41179851f, 0.38245043f, 0.35519394f, 0.32987997f, 
+    0.30637008f, 0.28453568f, 0.26425737f, 0.24542427f, 0.22793336f, 0.21168900f, 0.19660234f, 0.18259089f, 
+    0.16957800f, 0.15749252f, 0.14626834f, 0.13584408f, 0.12616274f, 0.11717137f, 0.10882080f, 0.10106535f, 
+    0.09386262f, 0.08717322f, 0.08096056f, 0.07519066f, 0.06983197f, 0.06485518f, 0.06023308f, 0.05594039f, 
+    0.05195362f, 0.04825099f, 0.04481224f, 0.04161856f, 0.03865249f, 0.03589780f, 0.03333944f, 0.03096340f, 
+    0.02875670f, 0.02670727f, 0.02480390f, 0.02303617f, 0.02139443f, 0.01986969f, 0.01845361f, 0.01713846f, 
+    0.01591704f, 0.01478266f, 0.01372913f, 0.01275068f, 0.01184197f, 0.01099801f, 0.01021421f, 0.00948626f, 
+    0.00881019f, 0.00818231f, 0.00759917f, 0.00705759f, 0.00655461f, 0.00608748f, 0.00565364f, 0.00525071f, 
+    0.00487650f, 0.00452897f, 0.00420620f, 0.00390643f, 0.00362802f, 0.00336946f, 0.00312933f, 0.00290631f, 
+    0.00269918f, 0.00250681f, 0.00232816f, 0.00216224f, 0.00200814f, 0.00186502f, 0.00173211f, 0.00160866f, 
+    0.00149402f, 0.00138754f, 0.00128865f, 0.00119681f, 0.00111152f, 0.00103230f, 0.00095873f, 0.00089041f, 
+    0.00082695f, 0.00076801f, 0.00071328f, 0.00066244f, 0.00061523f, 0.00057139f, 0.00053067f, 0.00049285f, 
+    0.00045772f, 0.00042510f, 0.00039480f, 0.00036667f, 0.00034054f, 0.00031627f, 0.00029373f, 0.00027279f, 
+    0.00025335f, 0.00023530f, 0.00021853f, 0.00020295f, 0.00018849f, 0.00017506f, 0.00016258f, 0.00015099f, 
+    0.00014023f, 0.00013024f, 0.00012096f, 0.00011234f, 0.00010433f, 0.00009689f, 0.00008999f, 0.00008358f
+};
+
+extern s32* AU_FX_CUSTOM_PARAMS[0]; // points to 80078290
+
+extern void (*CurrentSeqCmdHandler)(BGMPlayer*, BGMPlayerTrack*);
+extern void (*CurrentSefCmdHandler)(SoundManager*, SoundPlayer*);
 
 void snd_set_player_modifiers(SoundPlayer* player, SoundSFXEntry* sfxEntry);
 void func_800538C4(AlUnkVoice* arg0, u8 arg1);
@@ -101,14 +360,14 @@ void func_8004B440(SoundManager* manager, u8 arg1, u8 arg2, AuGlobals* arg3, u8 
     func_80053A98(manager->unk_BE, manager->unk_40.currentVolume.u16, manager->unk_5C);
     manager->unk_8C = 0xFF;
 
-    manager->customReverbParams[0] = &D_80078290;
-    manager->customReverbParams[1] = &D_800782F8;
-    manager->customReverbParams[2] = &D_80078320;
-    manager->customReverbParams[3] = &D_80078348;
-    manager->customReverbParams[4] = &D_80078348;
-    manager->customReverbParams[5] = &D_80078348;
-    manager->customReverbParams[6] = &D_80078348;
-    manager->customReverbParams[7] = &D_80078348;
+    manager->customReverbParams[0] = CUSTOM_SMALL_ROOM_PARAMS;
+    manager->customReverbParams[1] = CUSTOM_ECHO_PARAMS_1;
+    manager->customReverbParams[2] = CUSTOM_ECHO_PARAMS_2;
+    manager->customReverbParams[3] = CUSTOM_ECHO_PARAMS_3;
+    manager->customReverbParams[4] = CUSTOM_ECHO_PARAMS_3;
+    manager->customReverbParams[5] = CUSTOM_ECHO_PARAMS_3;
+    manager->customReverbParams[6] = CUSTOM_ECHO_PARAMS_3;
+    manager->customReverbParams[7] = CUSTOM_ECHO_PARAMS_3;
 
     manager->unk_84[0] = 0x10;
     manager->unk_84[1] = 0x20;
@@ -185,17 +444,8 @@ void snd_enqueue_sfx_event(SoundManager* manager, s32 soundID, s16 volume, s16 p
     }
 }
 
-//TODO reference to D_8007836A saved too soon
+//TODO reference to D_80078370 saved too soon
 #ifdef NON_MATCHING
-typedef struct AlUnk_8007836A {
-    /* 0x00 */ s16 soundID;
-    /* 0x02 */ u16 unk_02;
-    /* 0x04 */ u8 unk_04;
-    /* 0x05 */ char unk_05[0x1];
-} AlUnk_8007836A;
-
-extern AlUnk_8007836A D_8007836A[2];
-
 void func_8004B748(SoundManager* manager) {
     SoundSFXEntry newEntry;
     SoundSFXEntry* sfxEntry;
@@ -204,7 +454,6 @@ void func_8004B748(SoundManager* manager) {
     u32 pos;
     u32 i;
     u32 j;
-    s32 x;
     
     manager->playCounter++;
     if (manager->unk_168 != 0) {
@@ -217,14 +466,15 @@ void func_8004B748(SoundManager* manager) {
         if (k == 0) {
             // do nothing
         } else if (k < 2) {
-            x = D_8007836A[k].unk_02;
-            if (x != 0) {
+            AlUnkGemini* unkData = &D_80078370[k-1];
+            u16 sound2 = unkData->sound2;
+            if (sound2 != 0) {
                 for (j = 0; j < ARRAY_COUNT(manager->unk_16C); j++) {
-                    if (x == manager->unk_16C[j].currentSoundID) {
-                        newEntry.soundID = D_8007836A[k].soundID;
+                    if (sound2 == manager->unk_16C[j].currentSoundID) {
+                        newEntry.soundID = unkData->sound1;
                         newEntry.upperSoundID = 0;
                         newEntry.pitchShift = 0;
-                        if ((D_8007836A[k].unk_04 & 1) && (manager->unk_90[i].volume != 0)) {
+                        if ((unkData->flags & 1) && (manager->unk_90[i].volume != 0)) {
                             newEntry.volume = (manager->unk_90[i].volume << 8) + 0xFF;
                         } else {
                             newEntry.volume = 0;
@@ -235,7 +485,7 @@ void func_8004B748(SoundManager* manager) {
                     }
                 }
             } else {
-                newEntry.soundID = D_8007836A[k].soundID;
+                newEntry.soundID = unkData->sound1;
                 newEntry.upperSoundID = 0;
                 newEntry.volume = 0;
                 newEntry.pitchShift = 0;

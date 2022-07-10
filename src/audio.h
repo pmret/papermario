@@ -986,6 +986,12 @@ typedef struct AmbientSoundManager {
     /* 0x7B4 */ AlUnkIota unk_7B4[16];
 } AmbientSoundManager;
 
+typedef struct AlUnkGemini {
+    /* 0x00 */ u16 sound1;
+    /* 0x02 */ u16 sound2;
+    /* 0x04 */ u8 flags;
+} AlUnkGemini; // size = 0x5
+
 typedef struct ALConfig {
     /* 0x00 */ s32 num_pvoice;
     /* 0x04 */ s32 unk_num_gamma;
@@ -997,14 +1003,15 @@ typedef struct ALConfig {
 } ALConfig; // size = 0x18;
 
 extern volatile u8 D_80078181;
-extern s32 D_80078190;
-extern s32 D_800781D0;
-extern s32 D_80078290;
-extern s32 D_800782F8;
-extern s32 D_80078348;
-extern s32 D_80078320;
-extern s32 D_80078544;
-extern s32 D_800785A0;
+extern s32 D_80078190[];
+extern s32 D_800781D0[];
+extern s32 CUSTOM_SMALL_ROOM_PARAMS[];
+extern s32 CUSTOM_ECHO_PARAMS_1[];
+extern s32 CUSTOM_ECHO_PARAMS_3[];
+extern s32 CUSTOM_ECHO_PARAMS_2[];
+extern s32 D_80078544[];
+extern u8 D_80078580[];
+extern s32 D_800785A0[];
 extern s32 D_80078DB0;
 extern u16 D_80078DB6;
 

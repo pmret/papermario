@@ -1,5 +1,3 @@
-//TODO rename file to reverb.c
-
 #include "common.h"
 #include "audio.h"
 
@@ -52,18 +50,18 @@ s32 D_8007F0C0[] = {
         4,             17,
     /*                                      chorus  chorus   filter
     input  output  fbcoef  ffcoef   gain     rate   depth     coef  */
-        0,      11,  9830,  -9830,      0,      0,      0,      0,
-        4,       9,  3276,  -3276, 0x3FFF,      0,      0,      0,
-       11,      15,  3276,  -3276, 0x3FFF,      0,      0,      0,
-        0,      16,  8000,      0,      0,      0,      0, 0x5000
+        0,     11,   9830,  -9830,      0,      0,      0,      0,
+        4,      9,   3276,  -3276, 0x3FFF,      0,      0,      0,
+       11,     15,   3276,  -3276, 0x3FFF,      0,      0,      0,
+        0,     16,   8000,      0,      0,      0,      0, 0x5000
 };
 
 s32 ECHO_PARAMS[] = {
     /* sections	   length */
-        1,              14,
+        1,             14,
     /*                                      chorus  chorus   filter
     input  output  fbcoef  ffcoef   gain     rate   depth     coef  */
-        0,      13, 20000,      0, 0x7FFF,      0,      0, 0x7FFF
+        0,     13,  20000,      0, 0x7FFF,      0,      0, 0x7FFF
 };
 
 s32 CHORUS_PARAMS[] = {
@@ -71,7 +69,7 @@ s32 CHORUS_PARAMS[] = {
         1,              3,
     /*                                      chorus  chorus   filter
     input  output  fbcoef  ffcoef   gain     rate   depth     coef  */
-        0,       1, 16384,      0, 0x7FFF,   7600,    700,      0
+        0,      1,  16384,      0, 0x7FFF,   7600,    700,      0
 };
 
 s32 FLANGE_PARAMS[] = {
@@ -79,7 +77,7 @@ s32 FLANGE_PARAMS[] = {
         1,              3,
     /*                                      chorus  chorus   filter
     input  output  fbcoef  ffcoef   gain     rate   depth     coef  */
-        0,       1,     0, 0x5FFF, 0x7FFF,    380,    500,      0
+        0,      1,      0, 0x5FFF, 0x7FFF,    380,    500,      0
 };
 
 s32 NULL_PARAMS[] = {
@@ -87,7 +85,7 @@ s32 NULL_PARAMS[] = {
         0,              0,
     /*                                      chorus  chorus   filter
     input  output  fbcoef  ffcoef   gain     rate   depth     coef  */
-        0,       0,     0,      0,      0,      0,      0,      0
+        0,      0,      0,      0,      0,      0,      0,      0
 };
 
 // up to four custom effects can be defined and installed here at runtime
@@ -254,7 +252,7 @@ void func_8005904C(AuFX* fx, u8 effect) {
 
 // alFxPull
 // AuFX from gSynDriverPtr
-INCLUDE_ASM(s32, "audio/341d0", func_80059310);
+INCLUDE_ASM(s32, "audio/reverb", func_80059310);
 
 #define INPUT_PARAM         0
 #define OUTPUT_PARAM        1

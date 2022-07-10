@@ -70,7 +70,7 @@ void func_80052660(AuGlobals* globals) {
             }
             voice->unk_3A = var_a0;
             
-            voice->unk_28 = (&D_800785A0)[voice->unk_3B];
+            voice->unk_28 = D_800785A0[voice->unk_3B];
             voice->unk_24 = voice->unk_28;
             if (voice->unk_flags_3D & 0x20) {
                 voice->unk_flags_3D &= 0xDF;
@@ -115,7 +115,7 @@ void func_80052660(AuGlobals* globals) {
                         voice->unk_3B = func_80052CFC(voice);
                         voice->unk_39 = voice->unk_3A;
                         voice->unk_3A = (*voice->unk_1C++) & 0x7F;
-                        voice->unk_28 = (&D_800785A0)[voice->unk_3B];
+                        voice->unk_28 = D_800785A0[voice->unk_3B];
                         voice->unk_24 = voice->unk_28;
                         if (voice->unk_24 != 0) {
                             voice->unk_2C = ((f32) voice->unk_3A - (f32) voice->unk_39) / (f32) voice->unk_24;
@@ -186,7 +186,7 @@ void func_80052BF8(AlUnkVoice* voice, s32* arg1) {
     voice->unk_39 = 0;
     voice->unk_3A = *voice->unk_1C++;
     voice->unk_3B = x;
-    voice->unk_24 = (&D_800785A0)[x];
+    voice->unk_24 = D_800785A0[x];
     voice->unk_28 = voice->unk_24;
     
     voice->unk_0C = (voice->unk_3A * voice->unk_40 * voice->unk_30) >> 14;

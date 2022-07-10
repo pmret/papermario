@@ -81,7 +81,7 @@ s32 snd_start_song_variation(u32, s32);
 
 //TODO refactor out constants
 void bgm_update_music_settings(void) {
-    MusicSettings* music = &gMusicSettings[0];
+    MusicSettings* music = &gMusicSettings;
     s32 i = 0;
     s16 state2 = 2;
     s16 flag4 = MUSIC_SETTINGS_FLAGS_4;
@@ -359,7 +359,7 @@ void bgm_update_volume(void) {
 }
 
 s32 func_8014AD40(void) {
-    MusicSettings* settings = &gMusicSettings[0];
+    MusicSettings* settings = &gMusicSettings;
     s32 i;
 
     for (i = 0; i < 2; i++, settings++) {
@@ -375,7 +375,7 @@ s32 func_8014AD40(void) {
 }
 
 void bgm_pop_song(void) {
-    MusicSettings* musicSetting = &gMusicSettings[0];
+    MusicSettings* musicSetting = &gMusicSettings;
 
     if (gGameStatusPtr->demoState == 0) {
         musicSetting->flags |= MUSIC_SETTINGS_FLAGS_8;
@@ -384,7 +384,7 @@ void bgm_pop_song(void) {
 }
 
 void bgm_push_song(s32 songID, s32 variation) {
-    MusicSettings* musicSetting = &gMusicSettings[0];
+    MusicSettings* musicSetting = &gMusicSettings;
 
     if (gGameStatusPtr->demoState == 0) {
         musicSetting->savedSongID = musicSetting->songID;
@@ -396,7 +396,7 @@ void bgm_push_song(s32 songID, s32 variation) {
 }
 
 void bgm_pop_battle_song(void) {
-    MusicSettings* musicSetting = &gMusicSettings[0];
+    MusicSettings* musicSetting = &gMusicSettings;
 
     if (gGameStatusPtr->demoState == 0) {
         if (gOverrideFlags & GLOBAL_OVERRIDES_20000) {
@@ -410,7 +410,7 @@ void bgm_pop_battle_song(void) {
 }
 
 void bgm_push_battle_song(void) {
-    MusicSettings* musicSetting = &gMusicSettings[0];
+    MusicSettings* musicSetting = &gMusicSettings;
 
     if (gGameStatusPtr->demoState == 0 && !(gOverrideFlags & GLOBAL_OVERRIDES_20000)) {
         snd_ambient_8005553C(0, 250);
@@ -423,7 +423,7 @@ void bgm_push_battle_song(void) {
 }
 
 void bgm_set_battle_song(s32 songID, s32 variation) {
-    MusicSettings* musicSetting = &gMusicSettings[0];
+    MusicSettings* musicSetting = &gMusicSettings;
 
     musicSetting->battleSongID = songID;
     musicSetting->battleVariation = variation;

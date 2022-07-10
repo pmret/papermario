@@ -3,7 +3,6 @@
 // data
 extern u16 D_80078530[];
 extern s32 D_8007854C[2];
-extern u8 D_80078580[];
 extern f32 AlTuneScaling[];
 
 void func_80052E30(u8 index) {
