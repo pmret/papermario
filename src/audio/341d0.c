@@ -1,77 +1,91 @@
 #include "common.h"
 #include "audio.h"
 
-typedef struct UnkEpsilonConfig {
-    s32 count;
-    s32 unk;
-    s32 data[0]; // variable size
-} UnkEpsilonConfig;
+/*
+* the following constant is derived from:
+*
+*      ratio = 2^(cents/1200)
+*
+* and therefore for hundredths of a cent
+*                     x
+*      ln(ratio) = ---------------
+*              (120,000)/ln(2)
+* where
+*      120,000/ln(2) = 173123.40...
+*/
+#define CONVERT 173123.404906676
 
-UnkEpsilonConfig SMALLROOM_PARAMS_N = {
-    .count = 3,
-    .unk = 11,
-    .data = {
-    0x00000000, 0x00000009, 0x00002666, 0xFFFFD99A, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 
-    0x00000003, 0x00000007, 0x00000CCC, 0xFFFFF334, 0x00003FFF, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x0000000A, 0x00001388, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00005000 }
+#define ms *(((s32)((f32)44.1))&~0x7)
+
+s32 SMALL_ROOM_PARAMS[] = {
+    /* sections	   length */
+        3,             11,
+    /*                                      chorus  chorus   filter
+    input  output  fbcoef  ffcoef   gain     rate   depth     coef  */
+        0,       9,  9830,  -9830,      0,      0,      0,      0,
+        3,       7,  3276,  -3276,  16383,      0,      0,      0,
+        0,      10,  5000,      0,      0,      0,      0, 0x5000
 };
 
-UnkEpsilonConfig D_8007F048 = {
-    .count = 4,
-    .unk = 14,
-    .data = {
-    0x00000000, 0x00000009, 0x00002666, 0xFFFFD99A, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000002, 0x00000006, 0x00000CCC, 0xFFFFF334, 0x00003FFF, 0x00000000, 0x00000000, 0x00000000,
-    0x00000009, 0x0000000C, 0x00000CCC, 0xFFFFF334, 0x00003FFF, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x0000000D, 0x00001770, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00005000 }
+s32 BIG_ROOM_PARAMS[] = {
+    /* sections	   length */
+        4,             14,
+    /*                                      chorus  chorus   filter
+    input  output  fbcoef  ffcoef   gain     rate   depth     coef  */
+        0,       9,  9830,  -9830,      0,      0,      0,      0,
+        2,       6,  3276,  -3276, 0x3FFF,      0,      0,      0,
+        9,      12,  3276,  -3276, 0x3FFF,      0,      0,      0,
+        0,      13,  6000,      0,      0,      0,      0,  0x5000
 };
 
 // unused
-UnkEpsilonConfig D_8007F0C0 = {
-    .count = 4,
-    .unk = 17,
-    .data = {
-    0x00000000, 0x0000000B, 0x00002666, 0xFFFFD99A, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000004, 0x00000009, 0x00000CCC, 0xFFFFF334, 0x00003FFF, 0x00000000, 0x00000000, 0x00000000, 
-    0x0000000B, 0x0000000F, 0x00000CCC, 0xFFFFF334, 0x00003FFF, 0x00000000, 0x00000000, 0x00000000, 
-    0x00000000, 0x00000010, 0x00001F40, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00005000 }
+s32 D_8007F0C0[] = {
+    /* sections	   length */
+        4,             17,
+    /*                                      chorus  chorus   filter
+    input  output  fbcoef  ffcoef   gain     rate   depth     coef  */
+        0,      11,  9830,  -9830,      0,      0,      0,      0,
+        4,       9,  3276,  -3276, 0x3FFF,      0,      0,      0,
+       11,      15,  3276,  -3276, 0x3FFF,      0,      0,      0,
+        0,      16,  8000,      0,      0,      0,      0, 0x5000
 };
 
-UnkEpsilonConfig D_8007F158 = {
-    .count = 1,
-    .unk = 14,
-    .data = {
-    0x00000000, 0x0000000D, 0x00004E20, 0x00000000, 0x00007FFF, 0x00000000, 0x00000000, 0x00007FFF }
+s32 ECHO_PARAMS[] = {
+    /* sections	   length */
+        1,              14,
+    /*                                      chorus  chorus   filter
+    input  output  fbcoef  ffcoef   gain     rate   depth     coef  */
+        0,      13, 20000,      0, 0x7FFF,      0,      0, 0x7FFF
 };
 
-UnkEpsilonConfig D_8007F180 = {
-    .count = 1,
-    .unk = 3,
-    .data = {
-    0x00000000, 0x00000001, 0x00004000, 0x00000000, 0x00007FFF, 0x00001DB0, 0x000002BC, 0x00000000 }
+s32 CHORUS_PARAMS[] = {
+    /* sections	   length */
+        1,              3,
+    /*                                      chorus  chorus   filter
+    input  output  fbcoef  ffcoef   gain     rate   depth     coef  */
+        0,       1, 16384,      0, 0x7FFF,   7600,    700,      0
 };
 
-UnkEpsilonConfig D_8007F1A8 = {
-    .count = 1,
-    .unk = 3,
-    .data = {
-    0x00000000, 0x00000001, 0x00000000, 0x00005FFF, 0x00007FFF, 0x0000017C, 0x000001F4, 0x00000000 }
+s32 FLANGE_PARAMS[] = {
+    /* sections	   length */
+        1,              3,
+    /*                                      chorus  chorus   filter
+    input  output  fbcoef  ffcoef   gain     rate   depth     coef  */
+        0,       1,     0, 0x5FFF, 0x7FFF,    380,    500,      0
 };
 
-UnkEpsilonConfig D_8007F1D0 = {
-    .count = 0,
-    .unk = 0,
-    .data = {
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000 }
+s32 NULL_PARAMS[] = {
+    /* sections	   length */
+        0,              0,
+    /*                                      chorus  chorus   filter
+    input  output  fbcoef  ffcoef   gain     rate   depth     coef  */
+        0,       0,     0,      0,      0,      0,      0,      0
 };
 
-UnkEpsilonConfig* D_8007F1F8 = &D_8007F1D0;
-
-UnkEpsilonConfig* D_8007F1FC = &D_8007F1D0;
-
-UnkEpsilonConfig* D_8007F200 = &D_8007F1D0;
-
-UnkEpsilonConfig* D_8007F204 = &D_8007F1D0;
+// up to four custom effects can be defined and installed here at runtime
+s32* AU_FX_CUSTOM_PARAMS[] = {
+    NULL_PARAMS, NULL_PARAMS, NULL_PARAMS, NULL_PARAMS
+};
 
 void _init_lpfilter(AuLowPass* lp) {
     f64 attenuation;
@@ -102,133 +116,221 @@ void _init_lpfilter(AuLowPass* lp) {
 
 // initialize delta at 801C9060, with eps_0C at 801C90A0
 // definately AuFX, evidenced by call to func_8005904C
-void func_80058E84(AuFX* delta, u8 arg1, ALHeap* heap) {
-    AuDelay* eps;
+// this is n_alFxNew
+void func_80058E84(AuFX* fx, u8 mode, ALHeap* heap) {
+    AuDelay* delay;
     u16 i;
 
     // allocate space for 4 AuDelay
-    delta->delays = alHeapAlloc(heap, 4, sizeof(AuDelay));
-    delta->base = alHeapAlloc(heap, 0xA10, 2);
+    fx->delays = alHeapAlloc(heap, AU_FX_DELAY_COUNT, sizeof(AuDelay));
+    fx->base = alHeapAlloc(heap, AU_FX_LENGTH, sizeof(s16));
     
-    for (i = 0; i < 4; i++) {
-        eps = &delta->delays[i];
-        eps->unk_psi_2C = alHeapAlloc(heap, 1, sizeof(AuResampler));
-        eps->unk_psi_2C->rs_state = alHeapAlloc(heap, 1, sizeof(RESAMPLE_STATE));
-        eps->lowpass_24 = alHeapAlloc(heap, 1, sizeof(AuLowPass));
-        eps->lowpass_24->fstate = alHeapAlloc(heap, 1, sizeof(POLEF_STATE));
+    for (i = 0; i < AU_FX_DELAY_COUNT; i++) {
+        delay = &fx->delays[i];
+        delay->resampler_2C = alHeapAlloc(heap, 1, sizeof(AuResampler));
+        delay->resampler_2C->rs_state = alHeapAlloc(heap, 1, sizeof(RESAMPLE_STATE));
+        delay->lowpass_24 = alHeapAlloc(heap, 1, sizeof(AuLowPass));
+        delay->lowpass_24->fstate = alHeapAlloc(heap, 1, sizeof(POLEF_STATE));
     }
     
-    func_8005904C(delta, arg1);
+    func_8005904C(fx, mode);
 }
 
 // no known calls to this function
 void func_80058F88(AlUnkKappa* kappa, ALHeap* heap) {
     kappa->unk_00 = alHeapAlloc(heap, 0x1420, 2);
-    kappa->unk_phi_10 = alHeapAlloc(heap, 1, sizeof(AuLowPass));
-    kappa->unk_phi_10->fstate = alHeapAlloc(heap, 1, sizeof(POLEF_STATE));
+    kappa->lowpass_10 = alHeapAlloc(heap, 1, sizeof(AuLowPass));
+    kappa->lowpass_10->fstate = alHeapAlloc(heap, 1, sizeof(POLEF_STATE));
     func_80059008(kappa, 0, 0, 0x5000);
 }
 
 // no known entry point to this function, called only by func_80058F88
-void func_80059008(AlUnkKappa* kappa, s16 arg1, s16 arg2, s16 arg3) {
+void func_80059008(AlUnkKappa* kappa, s16 arg1, s16 arg2, s16 fc) {
     kappa->unk_06 = arg1;
     kappa->unk_08 = arg2;
 
-    if (arg3 != 0) {
-        kappa->unk_phi_0C = kappa->unk_phi_10;
-        kappa->unk_phi_0C->fc = arg3;
-        _init_lpfilter(kappa->unk_phi_0C);
+    if (fc != 0) {
+        kappa->lowpass_0C = kappa->lowpass_10;
+        kappa->lowpass_0C->fc = fc;
+        _init_lpfilter(kappa->lowpass_0C);
         return;
     }
 
-    kappa->unk_phi_0C = NULL;
+    kappa->lowpass_0C = NULL;
 }
 
-// n_alFxNew
+// part of n_alFxNew, extracted to allow reseting fx without reallocating
 // AuFX from gSynDriver
-INCLUDE_ASM(s32, "audio/341d0", func_8005904C);
+void func_8005904C(AuFX* fx, u8 effect) {
+    s32* params;
+    s32* clr;
+    s32 i, j;
+    clr = (s32*)fx->base;
+    
+    switch (effect) {
+        case AL_FX_SMALLROOM:
+            params = SMALL_ROOM_PARAMS;
+            break;
+        case AL_FX_BIGROOM:
+            params = BIG_ROOM_PARAMS;
+            break;
+        case AL_FX_ECHO:
+            params = ECHO_PARAMS;
+            break;
+        case AL_FX_CHORUS:
+            params = CHORUS_PARAMS;
+            break;
+        case AL_FX_FLANGE:
+            params = FLANGE_PARAMS;
+            break;
+        case 6:
+            params = AU_FX_CUSTOM_PARAMS[0];
+            break;
+        case 7:
+            params = AU_FX_CUSTOM_PARAMS[1];
+            break;
+        case 8:
+            params = AU_FX_CUSTOM_PARAMS[2];
+            break;
+        case 9:
+            params = AU_FX_CUSTOM_PARAMS[3];
+            break;
+        case 10:
+            params = BIG_ROOM_PARAMS;
+            break;
+        default:
+            params = NULL_PARAMS;
+            break;
+    }
+
+    j = 0;
+    fx->delayCount = params[j++];
+    fx->length = params[j++] * AUDIO_SAMPLES;
+    fx->input = fx->base;
+
+    for (i = 0; i < AU_FX_LENGTH/2; i++) {
+        *clr++ = 0;
+    }
+    
+    for (i = 0; i < fx->delayCount; i++) {
+        AuDelay* delay = &fx->delays[i];
+        delay->input  = params[j++] * AUDIO_SAMPLES;
+        delay->output = params[j++] * AUDIO_SAMPLES;
+        delay->fbcoef = (u16) params[j++];
+        delay->ffcoef = (u16) params[j++];
+        delay->gain   = (u16) params[j++];
+ 
+        if (params[j]) {
+            delay->rsinc = (2.0 * (params[j++] / 1000.0f)) / D_80078E50->outputRate;
+            delay->rsgain = ((f32)params[j++] / CONVERT) * (delay->output - delay->input);
+            delay->rsval = 1.0f;
+            delay->rsdelta = 0.0f;
+            delay->resampler_28 = delay->resampler_2C;
+            delay->resampler_2C->delta = 0.0;
+            delay->resampler_28->first = 1;
+        } else {
+            delay->resampler_28 = NULL;
+            j++;
+            j++;
+        }
+        
+        if (params[j]) {
+            delay->lowpass_20 = delay->lowpass_24;
+            delay->lowpass_20->fc = params[j++];
+            _init_lpfilter(delay->lowpass_20);
+        } else {
+            delay->lowpass_20 = NULL;
+            j++;
+        }
+    }
+}
 
 // alFxPull
 // AuFX from gSynDriver
 INCLUDE_ASM(s32, "audio/341d0", func_80059310);
 
-// alFxParamHdl
-s32 func_800598A0(AuFX* delta, s16 index, s16 mode, s32 value) {
-    s16* temp_v0;
-    s32 diff;
+#define INPUT_PARAM         0
+#define OUTPUT_PARAM        1
+#define FBCOEF_PARAM        2
+#define FFCOEF_PARAM        3
+#define GAIN_PARAM          4
+#define CHORUSRATE_PARAM    5
+#define CHORUSDEPTH_PARAM   6
+#define LPFILT_PARAM        7
 
-    switch (mode) {
-    case 0:
-        delta->delays[index].input = value & 0xFFFFFFF8;
+// based on alFxParamHdl
+s32 au_fx_param_hdl(AuFX* fx, s16 index, s16 paramID, s32 value) {
+    switch (paramID) {
+    case INPUT_PARAM:
+        fx->delays[index].input = value & 0xFFFFFFF8;
         break;
-    case 1:
-        delta->delays[index].output = value & 0xFFFFFFF8;
+    case OUTPUT_PARAM:
+        fx->delays[index].output = value & 0xFFFFFFF8;
         break;
-    case 3:
-        delta->delays[index].ffcoef = value;
+    case FFCOEF_PARAM:
+        fx->delays[index].ffcoef = value;
         break;
-    case 2:
-        delta->delays[index].fbcoef = value;
+    case FBCOEF_PARAM:
+        fx->delays[index].fbcoef = value;
         break;
-    case 4:
-        delta->delays[index].unk_0C = value;
+    case GAIN_PARAM:
+        fx->delays[index].gain = value;
         break;
-    case 5:
-        delta->delays[index].rsinc = (2.0 * (value / 1000.0f)) / D_80078E50->outputRate;
+    case CHORUSRATE_PARAM:
+        fx->delays[index].rsinc = (2.0 * (value / 1000.0f)) / D_80078E50->outputRate;
         break;
-    case 6:
-        delta->delays[index].rsgain = ((f32)value / 173123.404906676)
-            * (delta->delays[index].output - delta->delays[index].input);
+    case CHORUSDEPTH_PARAM:
+        fx->delays[index].rsgain = ((f32)value / CONVERT) * (fx->delays[index].output - fx->delays[index].input);
         break;
-    case 7:
-        temp_v0 = delta->delays[index].lowpass_20;
-        if (temp_v0 != 0) {
-            *temp_v0 = value;
-            _init_lpfilter(delta->delays[index].lowpass_20);
+    case LPFILT_PARAM:
+        if (fx->delays[index].lowpass_20) {
+            fx->delays[index].lowpass_20->fc = value;
+            _init_lpfilter(fx->delays[index].lowpass_20);
         }
         break;
     }
     return 0;
 }
 
-// from libultra reverb.c
-Acmd* _saveBuffer(AuFX* delta, s16* old_pos, s32 buff, s32 count, Acmd* cmdBufPos) {
+Acmd* _saveBuffer(AuFX* delta, s16* oldPos, s32 buff, s32 count, Acmd* cmdBufPos) {
     Acmd *ptr = cmdBufPos;
-    s16* new_pos = old_pos + count;
-    s16* delay_end = &delta->base[delta->length];
+    s16* newPos = oldPos + count;
+    s16* delayEnd = &delta->base[delta->length];
 
-    if (delay_end < new_pos) {
-        s32 before_end = (delay_end - old_pos);
-        s32 after_end = (new_pos - delay_end);
-        n_aLoadBuffer(ptr++, before_end<<1, buff, osVirtualToPhysical(old_pos));
-        n_aLoadBuffer(ptr++, after_end<<1, buff + (before_end<<1), osVirtualToPhysical(delta->base));
+    if (delayEnd < newPos) {
+        s32 before = delayEnd - oldPos;
+        s32 after = newPos - delayEnd;
+        n_aLoadBuffer(ptr++, before<<1, buff, osVirtualToPhysical(oldPos));
+        n_aLoadBuffer(ptr++, after<<1, buff + (before<<1), osVirtualToPhysical(delta->base));
     } else {
-        n_aLoadBuffer(ptr++, count<<1, buff, osVirtualToPhysical(old_pos));
+        n_aLoadBuffer(ptr++, count<<1, buff, osVirtualToPhysical(oldPos));
     }
 
     return ptr;
 }
 
-f32 func_80059BD4(AuDelay* eps, s32 arg1) {
-    f32* floatPtr = &eps->rsval;
-    f32 temp;
+// updates rsval, producing a triangle wave between ±1
+// time delta specified in samples
+f32 func_80059BD4(AuDelay* delay, s32 rsdelta) {
+    f32* rsval = &delay->rsval;
+    f32 newVal;
     f32 result;
    
-    eps->rsval = eps->rsval + (eps->rsinc * arg1);
+    delay->rsval += delay->rsinc * rsdelta;
     
-    if (eps->rsval > 2.0) {
-        temp = eps->rsval - 4.0;
+    if (delay->rsval > 2.0) {
+        newVal = delay->rsval - 4.0;
     } else {
-        temp = eps->rsval;
+        newVal = delay->rsval;
     }
-    *floatPtr = temp;
+    *rsval = newVal;
     
-    result = eps->rsval;
+    result = delay->rsval;
     if (result < 0.0f) {
         result = -result;
     }
 
     result = result - 1.0;
     
-    return eps->rsgain * result;
+    return delay->rsgain * result;
 }

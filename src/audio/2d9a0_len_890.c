@@ -3,14 +3,14 @@
 
 u8 func_80052CFC(AlUnkVoice* voice);
 
-void func_800525A0(SndGlobals* arg0) {
+void func_800525A0(AuGlobals* globals) {
     s32 i;
 
-    for (i = 0; i < ARRAY_COUNT(arg0->voices); i++) {
-        AlUnkVoice* temp = &arg0->voices[i];
+    for (i = 0; i < ARRAY_COUNT(globals->voices); i++) {
+        AlUnkVoice* temp = &globals->voices[i];
 
         if (temp->unk_42 != 0) {
-            func_80056EE8(i);
+            au_pvoice_reset_filter(i);
             temp->unk_42 = 0;
             temp->unk_1C = NULL;
             temp->unk_45 = 0;
@@ -18,11 +18,11 @@ void func_800525A0(SndGlobals* arg0) {
     }
 }
 
-void func_80052614(SndGlobals* arg0) {
+void func_80052614(AuGlobals* globals) {
     s32 i;
 
-    for (i = 0; i < ARRAY_COUNT(arg0->voices); i++) {
-        AlUnkVoice* temp = &arg0->voices[i];
+    for (i = 0; i < ARRAY_COUNT(globals->voices); i++) {
+        AlUnkVoice* temp = &globals->voices[i];
 
         temp->unk_1C = 0;
         temp->unk_20 = 0;
@@ -36,7 +36,7 @@ void func_80052614(SndGlobals* arg0) {
     }
 }
 
-void func_80052660(SndGlobals* globals) {
+void func_80052660(AuGlobals* globals) {
     AlUnkVoice* voice;
     s8 var_a0;
     s16 unkTemp;

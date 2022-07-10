@@ -1,7 +1,7 @@
 #include "common.h"
 #include "audio.h"
 
-extern s32* D_8007F1F8[1]; // points to 80078290
+extern s32* AU_FX_CUSTOM_PARAMS[0]; // points to 80078290
 
 extern s8 gBlankSEFData[12];
 extern InstrumentEffect* D_800783C0[25];
@@ -40,7 +40,7 @@ void snd_set_player_modifiers(SoundPlayer* player, SoundSFXEntry* sfxEntry);
 void func_800538C4(AlUnkVoice* arg0, u8 arg1);
 f32 snd_compute_pitch_ratio(s32);
 
-void func_8004B440(SoundManager* manager, u8 arg1, u8 arg2, SndGlobals* arg3, u8 arg4) {
+void func_8004B440(SoundManager* manager, u8 arg1, u8 arg2, AuGlobals* arg3, u8 arg4) {
     u32 i;
     s32 c = 0x6A25E;
 
@@ -186,7 +186,7 @@ void snd_enqueue_sfx_event(SoundManager* manager, s32 soundID, s16 volume, s16 p
 }
 
 //TODO reference to D_8007836A saved too soon
-#ifdef NONMATCHING
+#ifdef NON_MATCHING
 typedef struct AlUnk_8007836A {
     /* 0x00 */ s16 soundID;
     /* 0x02 */ u16 unk_02;
@@ -295,17 +295,17 @@ INCLUDE_ASM(void, "audio/26840_len_20d0", func_8004B748, SoundManager* manager);
 #endif
 
 s32 func_8004B9E4(SoundManager* manager, s32 arg1) {
-    s32 a1 = (u8) arg1;
+    s32 effectIdx = (u8) arg1;
 
-    if (a1 != 0xF0) {
-        if (a1 < 8) {
-            if (manager->unk_8C != a1) {
-                manager->unk_8C = a1;
+    if (effectIdx != 0xF0) {
+        if (effectIdx < 8) {
+            if (manager->unk_8C != effectIdx) {
+                manager->unk_8C = effectIdx;
                 manager->soundData->unk_globals_40[1].unk_00 = 6;
                 manager->soundData->unk_globals_40[1].unk_01 = TRUE;
-                D_8007F1F8[0] = manager->unk_64[a1];
+                AU_FX_CUSTOM_PARAMS[0] = manager->unk_64[effectIdx];
             }
-            manager->unk_8D = manager->unk_84[a1];
+            manager->unk_8D = manager->unk_84[effectIdx];
         } else {
             manager->unk_8C = 0xFF;
             manager->unk_8D = 0;
@@ -845,7 +845,7 @@ void snd_SEFCmd_03_SetReverb(SoundManager* manager, SoundPlayer* player) {
 }
 
 void snd_SEFCmd_04(SoundManager* manager, SoundPlayer* player) {
-    Instrument* temp_a0;
+    Instrument* other;
     InstrumentEffect* temp_v0_2;
 
     u8* buf = player->sefDataReadPos;
@@ -853,20 +853,20 @@ void snd_SEFCmd_04(SoundManager* manager, SoundPlayer* player) {
     player->sefDataReadPos = &buf[1];
    
     player->unk_9E = temp_v1 & 0x7F;
-    temp_a0 = player->sfxInstrumentRef;
+    other = player->sfxInstrumentRef;
     
-    player->sfxInstrument.base = temp_a0->base;
-    player->sfxInstrument.wavDataLength = temp_a0->wavDataLength;
-    player->sfxInstrument.loopPredictorOffset = temp_a0->loopPredictorOffset;
-    player->sfxInstrument.loopStart = temp_a0->loopStart;
-    player->sfxInstrument.loopEnd = temp_a0->loopEnd;
-    player->sfxInstrument.loopCount = temp_a0->loopCount;
-    player->sfxInstrument.predictorOffset = temp_a0->predictorOffset;
-    player->sfxInstrument.unk_1C = temp_a0->unk_1C;
-    player->sfxInstrument.detune = temp_a0->detune;
-    player->sfxInstrument.pitchRatio = temp_a0->pitchRatio;
-    player->sfxInstrument.type = temp_a0->type;
-    player->sfxInstrument.unk_25 = temp_a0->unk_25;
+    player->sfxInstrument.base = other->base;
+    player->sfxInstrument.wavDataLength = other->wavDataLength;
+    player->sfxInstrument.loopPredictorOffset = other->loopPredictorOffset;
+    player->sfxInstrument.loopStart = other->loopStart;
+    player->sfxInstrument.loopEnd = other->loopEnd;
+    player->sfxInstrument.loopCount = other->loopCount;
+    player->sfxInstrument.predictorOffset = other->predictorOffset;
+    player->sfxInstrument.unk_1C = other->unk_1C;
+    player->sfxInstrument.detune = other->detune;
+    player->sfxInstrument.pitchRatio = other->pitchRatio;
+    player->sfxInstrument.type = other->type;
+    player->sfxInstrument.unk_25 = other->unk_25;
     
     player->sfxInstrument.unkOffset = D_800783C0[player->unk_9E];
     player->sfxInstrumentRef = &player->sfxInstrument;

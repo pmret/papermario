@@ -14,7 +14,7 @@ void func_80052E30(u8 index) {
 }
 
 void snd_load_audio_data(s32 outputRate) {
-    SndGlobals* globals;
+    AuGlobals* globals;
     s32* dummyTrackData;
     ALHeap* alHeap;
     u32 i;
@@ -69,9 +69,9 @@ void snd_load_audio_data(s32 outputRate) {
         globals->unk_globals_40[i].unk_01 = FALSE;
     }
 
-    for (i = 0; i < 24; i++) {
+    for (i = 0; i < ARRAY_COUNT(globals->voices); i++) {
         func_80056EC0(i, 0);
-        func_80057224(i, globals->defaultInstrument);
+        au_pvoice_set_filter_wavetable(i, globals->defaultInstrument);
         temp5 = &globals->voices[i];
         temp5->instrument = NULL;
         temp5->pitchRatio = 0;
@@ -179,7 +179,7 @@ void snd_reset_instrument_entry(BGMInstrumentInfo* arg0) {
 }
 
 void snd_update_sequence_players(void) {
-    SndGlobals* temp_s2 = gSoundGlobals;
+    AuGlobals* temp_s2 = gSoundGlobals;
     SoundManager* sfxManager = gSoundManager;
     AmbientSoundManager* ambManager = D_8009A628;
     BGMPlayer* bgmPlayer1;
@@ -248,7 +248,7 @@ void snd_update_sequence_players(void) {
 }
 
 void snd_add_sfx_output(void) {
-    SndGlobals* globals = gSoundGlobals;
+    AuGlobals* globals = gSoundGlobals;
     BGMPlayer* player = gBGMPlayerA;
     SoundManager* manager = gSoundManager;
 
@@ -269,56 +269,56 @@ void snd_add_sfx_output(void) {
     func_8004B748(manager);
 }
 
-void func_80053654(SndGlobals* arg0) {
+void func_80053654(AuGlobals* globals) {
     u32 i;
 
-    if (arg0->unk_130C == 2) {
-        arg0->unk_130C = 1;
+    if (globals->unk_130C == 2) {
+        globals->unk_130C = 1;
         func_80057EB0();
     }
 
-    if ((arg0->unk_50 != 0) && (arg0->unk_130C == 0)) {
-        switch (arg0->unk_53) {
+    if ((globals->unk_50 != 0) && (globals->unk_130C == 0)) {
+        switch (globals->unk_53) {
             case 1:
-                func_80057DC8(arg0->unk_52);
-                func_80057E08(arg0->unk_51);
-                arg0->unk_50 = 0;
+                func_80057DC8(globals->unk_52);
+                func_80057E08(globals->unk_51);
+                globals->unk_50 = 0;
                 break;
             case 2:
-                func_80057DC8(arg0->unk_52);
-                func_80057E5C(arg0->unk_51);
-                arg0->unk_50 = 0;
+                func_80057DC8(globals->unk_52);
+                func_80057E5C(globals->unk_51);
+                globals->unk_50 = 0;
                 break;
             default:
                 func_80057EB0();
-                arg0->unk_50 = 0;
+                globals->unk_50 = 0;
                 break;
         }
     }
 
-    if (arg0->unk_globals_40[0].unk_01) {
-        func_80056DCC(0, arg0->unk_globals_40[0].unk_00);
-        arg0->unk_globals_40[0].unk_01 = FALSE;
+    if (globals->unk_globals_40[0].unk_01) {
+        func_80056DCC(0, globals->unk_globals_40[0].unk_00);
+        globals->unk_globals_40[0].unk_01 = FALSE;
     }
-    if (arg0->unk_globals_40[1].unk_01) {
-        func_80056DCC(1, arg0->unk_globals_40[1].unk_00);
-        arg0->unk_globals_40[1].unk_01 = FALSE;
+    if (globals->unk_globals_40[1].unk_01) {
+        func_80056DCC(1, globals->unk_globals_40[1].unk_00);
+        globals->unk_globals_40[1].unk_01 = FALSE;
 
-    } if (arg0->unk_globals_40[2].unk_01) {
-        func_80056DCC(2, arg0->unk_globals_40[2].unk_00);
-        arg0->unk_globals_40[2].unk_01 = FALSE;
+    } if (globals->unk_globals_40[2].unk_01) {
+        func_80056DCC(2, globals->unk_globals_40[2].unk_00);
+        globals->unk_globals_40[2].unk_01 = FALSE;
     }
-    if (arg0->unk_globals_40[3].unk_01) {
-        func_80056DCC(3, arg0->unk_globals_40[3].unk_00);
-        arg0->unk_globals_40[3].unk_01 = FALSE;
+    if (globals->unk_globals_40[3].unk_01) {
+        func_80056DCC(3, globals->unk_globals_40[3].unk_00);
+        globals->unk_globals_40[3].unk_01 = FALSE;
     }
 
-    for (i = 0; i < ARRAY_COUNT(arg0->voices); i++) {
-        AlUnkVoice* voice = &arg0->voices[i];
+    for (i = 0; i < ARRAY_COUNT(globals->voices); i++) {
+        AlUnkVoice* voice = &globals->voices[i];
         u8 unk_flags = voice->unk_flags_43;
 
         if (voice->unk_42 != 0) {
-            func_80056EE8(i);
+            au_pvoice_reset_filter(i);
             voice->unk_42 = 0;
             voice->unk_1C = 0;
             voice->unk_45 = 0;
@@ -326,7 +326,7 @@ void func_80053654(SndGlobals* arg0) {
 
         if (unk_flags & 2) {
             func_80052BF8(voice, &voice->unk_14);
-            func_80056FA4(i, voice->reverbType, voice->instrument, voice->pitchRatio, voice->unk_0C, voice->pan, voice->reverb, voice->unk_08);
+            au_pvoice_set_filter(i, voice->reverbType, voice->instrument, voice->pitchRatio, voice->unk_0C, voice->pan, voice->reverb, voice->unk_08);
             voice->unk_45 = voice->unk_44;
         } else {
             if (unk_flags & 8) {
@@ -460,7 +460,7 @@ void func_80053BA8(Fade* fade) {
 }
 
 //TODO cleanup and documentation
-Instrument* func_80053BE8(SndGlobals* globals, u32 bank, u32 patch, s32** arg3) {
+Instrument* func_80053BE8(AuGlobals* globals, u32 bank, u32 patch, s32** arg3) {
     Instrument* instrument = (*globals->instrumentGroups[(bank & 0x70) >> 4])[patch];
     InstrumentEffect* temp_a0 = instrument->unkOffset;
     u32 temp_a1 = bank % 4;
@@ -476,7 +476,7 @@ Instrument* func_80053BE8(SndGlobals* globals, u32 bank, u32 patch, s32** arg3) 
 }
 
 void snd_get_sequence_player_and_track(u32 playerIndex, s32** outCurrentTrackData, BGMPlayer** outPlayer) {
-    SndGlobals* globals = gSoundGlobals;
+    AuGlobals* globals = gSoundGlobals;
 
     switch (playerIndex) {
         case 0:
@@ -519,7 +519,7 @@ s32 snd_load_song_files(u32 arg0, BGMHeader* arg1, BGMPlayer* arg2) {
     SBNFileEntry fileEntry;
     SBNFileEntry fileEntry2;
     SBNFileEntry* bkFileEntry;
-    SndGlobals* soundData;
+    AuGlobals* soundData;
     InitSongEntry* songEntry;
     s32 i;
     u16 bkFileIndex;
@@ -581,7 +581,7 @@ s32 func_80053E58(s32 arg0, u8* arg1) {
     SBNFileEntry fileEntry;
     SBNFileEntry sp18;
     SBNFileEntry* bkFileEntry;
-    SndGlobals* soundData;
+    AuGlobals* soundData;
     InitSongEntry* temp_s1;
     s32 i;
     s32 ret;
@@ -628,7 +628,7 @@ BGMPlayer* func_80053F64(s32 arg0) {
 s32 func_80053F80(u32 arg0) {
     u32 i;
     SBNFileEntry fileEntry;
-    SndGlobals* soundData;
+    AuGlobals* soundData;
     AmbientSoundManager* temp_s2;
     s32* trackData;
 
@@ -695,7 +695,7 @@ BGMPlayer* func_80054248(u8 arg0) {
     }
 }
 
-void snd_load_INIT(SndGlobals* arg0, s32 romAddr, ALHeap* heap) {
+void snd_load_INIT(AuGlobals* arg0, s32 romAddr, ALHeap* heap) {
     SBNHeader sbnHeader;
     INITHeader initHeader;
     SBNFileEntry* entry;
@@ -749,7 +749,7 @@ void snd_load_INIT(SndGlobals* arg0, s32 romAddr, ALHeap* heap) {
 
 s32 snd_fetch_SBN_file(u32 fileIdx, s32 format, SBNFileEntry* arg2) {
     SBNFileEntry fileEntry;
-    SndGlobals* temp = gSoundGlobals;
+    AuGlobals* temp = gSoundGlobals;
     u32 data;
     s32 ret = 0;
 
@@ -772,7 +772,7 @@ s32 snd_fetch_SBN_file(u32 fileIdx, s32 format, SBNFileEntry* arg2) {
     return ret;
 }
 
-void snd_load_PER(SndGlobals* globals, s32 romAddr) {
+void snd_load_PER(AuGlobals* globals, s32 romAddr) {
     PERHeader header;
     u32 size;
     s32 numItemsLeft;
@@ -791,7 +791,7 @@ void snd_load_PER(SndGlobals* globals, s32 romAddr) {
     }
 }
 
-void snd_load_PRG(SndGlobals* arg0, s32 romAddr) {
+void snd_load_PRG(AuGlobals* arg0, s32 romAddr) {
     PERHeader header;
     u32 size;
     s32 numItemsLeft;
@@ -819,7 +819,7 @@ INCLUDE_ASM(s32, "audio/2e230_len_2190", snd_load_BGM);
 
 InstrumentGroup* snd_get_BK_instruments(s32 bankGroup, u32 bankIndex) {
     InstrumentGroup* ret = NULL;
-    SndGlobals* temp = gSoundGlobals;
+    AuGlobals* temp = gSoundGlobals;
 
     // TODO fake match - this multiplying the bankIndex by 16 and then dividing it right after is dumb
     bankIndex *= 16;
@@ -965,7 +965,7 @@ void snd_swizzle_BK_instruments(s32 bkFileOffset, SoundBank* bank, InstrumentGro
     }
 }
 
-#ifdef NONMATCHING
+#ifdef NON_MATCHING
 enum ReadState {
     BK_READ_DONE            = 0,
     BK_READ_FETCH_HEADER    = 11,

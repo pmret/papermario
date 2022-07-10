@@ -7,7 +7,7 @@ typedef struct BufferEntry {
     /* 0x3 */ u8 unk_3;
 } BufferEntry; // size = 4
 
-void snd_load_BK_headers(SndGlobals* soundData, ALHeap* arg1) {
+void snd_load_BK_headers(AuGlobals* soundData, ALHeap* arg1) {
     SBNFileEntry fileEntry;
     BufferEntry buffer[80];
     s32 i;

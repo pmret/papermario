@@ -4,7 +4,7 @@ extern s32 D_80078520;
 
 void func_800538C4(AlUnkVoice*, u8);
 
-void func_80050B90(AmbientSoundManager* arg0, s8 arg1, s8 arg2, SndGlobals* arg3) {
+void func_80050B90(AmbientSoundManager* arg0, s8 arg1, s8 arg2, AuGlobals* arg3) {
     AlUnkLambda* lambda;
     s32 i;
 
@@ -350,40 +350,39 @@ void func_800522A8(AmbientSoundManager* arg0, AlUnkLambda* lambda) {
 }
 
 void func_8005232C(AmbientSoundManager* manager, AlUnkLambda* lambda) {
-    SndGlobals* globals;
+    AuGlobals* globals;
     AlUnkVoice* voice;
     AlUnkOmega* omega;
     AlUnkIota* iota;
     AlUnkXi* xi;
-    s32 i;
-    u32 var_s5;
+    u32 i, j;
         
     globals = manager->unk_00;
     if (lambda->unk_25 == 0) {
-        for (var_s5 = 0; var_s5 < 4; var_s5++) {
-            omega = &lambda->unk_1D4[var_s5];
+        for (i = 0; i < 4; i++) {
+            omega = &lambda->unk_1D4[i];
             if (omega->unk_01 != 0) {
                 xi = &lambda->unk_44[omega->unk_00];
 
-                for (i = lambda->unk_30; i < lambda->unk_34; i++) {
-                    voice = &globals->voices[i];
+                for (j = lambda->unk_30; j < lambda->unk_34; j++) {
+                    voice = &globals->voices[j];
                     if (voice->unk_45 == 0) {
                         break;
                     }
                 }
 
-                if (i >= lambda->unk_34) {
-                    for (i = lambda->unk_30; i < lambda->unk_34; i++) {
-                        voice = &globals->voices[i];
+                if (j >= lambda->unk_34) {
+                    for (j = lambda->unk_30; j < lambda->unk_34; j++) {
+                        voice = &globals->voices[j];
                         if (voice->unk_45 < manager->unk_22) {
-                            func_800538C4(voice, i & 0xFF);
+                            func_800538C4(voice, j & 0xFF);
                             break;
                         }
                     }
                 }
                 
-                if (i < lambda->unk_34) {
-                    iota = &manager->unk_7B4[i - lambda->unk_30];
+                if (j < lambda->unk_34) {
+                    iota = &manager->unk_7B4[j - lambda->unk_30];
                     iota->unk_00.s32 = lambda->unk_14.s32 + (omega->unk_00 << 0x10) + (omega->unk_01 << 8);
                     iota->unk_04 = ((omega->unk_01 & 0x7F) * 100) - xi->instrument->detune;
                     iota->unk_06 = omega->unk_02 & 0x7F;

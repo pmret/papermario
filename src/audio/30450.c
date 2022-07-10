@@ -538,7 +538,7 @@ s32 snd_set_song_variation(s32 songName, s32 variation) {
 }
 
 MusicError func_80055CE8(s32 songName, s32** outTrackData, BGMPlayer** outPlayer) {
-    SndGlobals* globals = gSoundGlobals;
+    AuGlobals* globals = gSoundGlobals;
     s32* trackData;
     s32 error;
 
@@ -704,7 +704,7 @@ void bgm_set_proximity_mix_full(s32 songName, u8 mix) {
 }
 
 void func_8005608C(u32** arg0, s32* arg1) {
-    SndGlobals* temp_v0 = gSoundGlobals;
+    AuGlobals* temp_v0 = gSoundGlobals;
 
     *arg0 = temp_v0->unk_arr_94;
     *arg1 = temp_v0->unk_98;
@@ -715,7 +715,7 @@ void func_800560A8(void) {
 }
 
 void func_800560BC(s32 arg0, s32 arg1, s32 arg2) {
-    SndGlobals* globals = gSoundGlobals;
+    AuGlobals* globals = gSoundGlobals;
 
     if (globals->unk_98 < 16) {
         *globals->unk_90++ = ((arg0 << 0x1C) + ((arg1 & 0xF) << 0x18) + arg2);
@@ -724,7 +724,7 @@ void func_800560BC(s32 arg0, s32 arg1, s32 arg2) {
 }
 
 void func_8005610C(void) {
-    SndGlobals* globals = gSoundGlobals;
+    AuGlobals* globals = gSoundGlobals;
     s32* buf = globals->unk_arr_94;
     s32 i = 15;
     

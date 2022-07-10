@@ -483,7 +483,7 @@ MusicError func_8004DE2C(SongUpdateEvent* update) {
     return error;
 }
 
-void func_8004DFD4(SndGlobals* globals) {
+void func_8004DFD4(AuGlobals* globals) {
     BGMPlayer* player;
     BGMPlayerTrack* track;
     SeqNote* note;
@@ -533,7 +533,7 @@ s32 func_8004E0F4(SongUpdateEvent* update) {
     return error;
 }
 
-void func_8004E158(BGMPlayer* player, s32 arg1, s32 arg2, SndGlobals* arg3) {
+void func_8004E158(BGMPlayer* player, s32 arg1, s32 arg2, AuGlobals* arg3) {
     s16 i;
 
     player->globals = arg3;
