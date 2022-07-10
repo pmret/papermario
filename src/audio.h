@@ -489,7 +489,7 @@ typedef struct SoundManager {
     /* 0x040 */ struct Fade unk_40;
     /* 0x05C */ s32 unk_5C;
     /* 0x060 */ s32 unk_60;
-    /* 0x064 */ s32* unk_64[8];
+    /* 0x064 */ s32* customReverbParams[8];
     /* 0x084 */ s8 unk_84[8];
     /* 0x08C */ u8 unk_8C;
     /* 0x08D */ s8 unk_8D;
@@ -537,7 +537,7 @@ typedef struct AlUnkVoice {
     /* 0x3A */ u8 unk_3A;
     /* 0x3B */ u8 unk_3B;
     /* 0x3C */ u8 unk_3C;
-    /* 0x3D */ u8 unk_3D;
+    /* 0x3D */ u8 unk_flags_3D;
     /* 0x3E */ u8 unk_3E;
     /* 0x3F */ u8 unk_3F;
     /* 0x40 */ s16 unk_40;
@@ -1008,8 +1008,8 @@ extern s32 D_800785A0;
 extern s32 D_80078DB0;
 extern u16 D_80078DB6;
 
-extern AuSynDriver* D_80078E50;
-extern AuSynDriver* gSynDriver;
+extern AuSynDriver* gActiveSynDriverPtr;
+extern AuSynDriver* gSynDriverPtr;
 extern u8 D_80078E58;
 extern u16 D_80078E5A;
 extern u8 D_80078E5C;

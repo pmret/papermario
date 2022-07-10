@@ -30,7 +30,7 @@ void func_80052614(AuGlobals* globals) {
         temp->unk_28 = 0;
         temp->unk_3B = 0;
         temp->unk_3C = 0;
-        temp->unk_3D = 0;
+        temp->unk_flags_3D = 0;
         temp->unk_3E = 0;
         temp->unk_3F = 0x80;
     }
@@ -47,13 +47,13 @@ void func_80052660(AuGlobals* globals) {
         if (voice->unk_1C == NULL) {
             continue;
         }
-        if (voice->unk_3D & 2) {
+        if (voice->unk_flags_3D & 2) {
             func_80052B44(voice);
             continue;
         }
-        if (voice->unk_3D & 0x10) {
-            voice->unk_3D &= 0xEF;
-            voice->unk_3D |= 1;
+        if (voice->unk_flags_3D & 0x10) {
+            voice->unk_flags_3D &= 0xEF;
+            voice->unk_flags_3D |= 1;
             voice->unk_1C = voice->unk_18;
             if (voice->unk_28 > 5750) {
                 voice->unk_39 = voice->unk_39 + (s32) (voice->unk_2C * (f32) (voice->unk_24 - voice->unk_28));
@@ -72,11 +72,11 @@ void func_80052660(AuGlobals* globals) {
             
             voice->unk_28 = (&D_800785A0)[voice->unk_3B];
             voice->unk_24 = voice->unk_28;
-            if (voice->unk_3D & 0x20) {
-                voice->unk_3D &= 0xDF;
+            if (voice->unk_flags_3D & 0x20) {
+                voice->unk_flags_3D &= 0xDF;
                 if (voice->unk_28 > 5750) {
                     voice->unk_28 -= 5750;
-                    voice->unk_3D |= 2;
+                    voice->unk_flags_3D |= 2;
                     unkTemp = voice->unk_39 + (s32) (voice->unk_2C * (voice->unk_24 - voice->unk_28));
                 } else {
                     unkTemp = voice->unk_3A;
@@ -90,8 +90,8 @@ void func_80052660(AuGlobals* globals) {
             voice->unk_flags_43 |= 4;
         } else {
             if (voice->unk_28 == -1) {
-                if (voice->unk_3D & 0x20) {
-                    voice->unk_3D &= 0xDF;
+                if (voice->unk_flags_3D & 0x20) {
+                    voice->unk_flags_3D &= 0xDF;
                     voice->unk_0C = (((voice->unk_39 * voice->unk_40 * voice->unk_3F) >> 0xE) * voice->unk_30) >> 7;
                     voice->unk_flags_43 |= 4;
                 }
@@ -99,8 +99,8 @@ void func_80052660(AuGlobals* globals) {
                 voice->unk_28 -= 5750;
                 if (voice->unk_28 <= 0) {
                     if (*voice->unk_1C == 0xFF) {
-                        if (voice->unk_3D & 1) {
-                            voice->unk_3D = 0;
+                        if (voice->unk_flags_3D & 1) {
+                            voice->unk_flags_3D = 0;
                             voice->unk_1C = NULL;
                             voice->unk_42 = 1;
                         } else {
@@ -122,11 +122,11 @@ void func_80052660(AuGlobals* globals) {
                         } else {
                             voice->unk_2C = 0.0f;
                         }
-                        if (voice->unk_3D & 0x20) {
-                            voice->unk_3D &= 0xDF;
+                        if (voice->unk_flags_3D & 0x20) {
+                            voice->unk_flags_3D &= 0xDF;
                             if (voice->unk_28 > 5750) {
                                 voice->unk_28 -= 5750;
-                                voice->unk_3D |= 2;
+                                voice->unk_flags_3D |= 2;
                                 unkTemp = voice->unk_39 + (s32) (voice->unk_2C * (voice->unk_24 - voice->unk_28));
                             } else {
                                 unkTemp = voice->unk_3A;
@@ -140,11 +140,11 @@ void func_80052660(AuGlobals* globals) {
                         voice->unk_flags_43 |= 4;
                     }
                 } else {
-                    if (voice->unk_3D & 0x20) {
-                        voice->unk_3D &= 0xDF;
+                    if (voice->unk_flags_3D & 0x20) {
+                        voice->unk_flags_3D &= 0xDF;
                         if (voice->unk_28 > 5750) {
                             voice->unk_28 -= 5750;
-                            voice->unk_3D |= 2;
+                            voice->unk_flags_3D |= 2;
                             unkTemp = voice->unk_39 + (s32) (voice->unk_2C * (voice->unk_24 - voice->unk_28));
                         } else {
                             unkTemp = voice->unk_3A;
@@ -164,7 +164,7 @@ void func_80052B44(AlUnkVoice* arg0) {
 
     arg0->unk_0C = temp_lo >> 7;
     arg0->unk_08 = func_80052BC0(arg0->unk_28);
-    arg0->unk_3D &= ~0x2;
+    arg0->unk_flags_3D &= ~0x2;
     arg0->unk_flags_43 |= 0x4;
 }
 
@@ -182,7 +182,7 @@ void func_80052BF8(AlUnkVoice* voice, s32* arg1) {
     voice->unk_34 = 0;
     
     x = func_80052CFC(voice);
-    voice->unk_3D = 0;
+    voice->unk_flags_3D = 0;
     voice->unk_39 = 0;
     voice->unk_3A = *voice->unk_1C++;
     voice->unk_3B = x;
@@ -203,5 +203,5 @@ void func_80052BF8(AlUnkVoice* voice, s32* arg1) {
 INCLUDE_ASM(u8, "audio/2d9a0_len_890", func_80052CFC, AlUnkVoice* arg0);
 
 void func_80052E18(AlUnkVoice* arg0) {
-    arg0->unk_3D |= 0x20;
+    arg0->unk_flags_3D |= 0x20;
 }

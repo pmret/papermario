@@ -22,7 +22,7 @@ void snd_load_audio_data(s32 outputRate) {
     u8 temp6[4];
     AlUnkVoice* temp5;
 
-    alHeap = gSynDriver->heap;
+    alHeap = gSynDriverPtr->heap;
     gSoundGlobals = alHeapAlloc(alHeap, 1, sizeof(*gSoundGlobals));
 
     gBGMPlayerA = alHeapAlloc(alHeap, 1, sizeof(*gBGMPlayerA));
@@ -859,7 +859,7 @@ enum BKParseState {
     EN_301 = 301,
 };
 s32 snd_load_BK_to_bank(s32 bkFileOffset, SoundBank* bank, s32 bankIndex, s32 bankGroup) {
-    ALHeap* heap = gSynDriver->heap;
+    ALHeap* heap = gSynDriverPtr->heap;
     BKHeader bkHeader;
     BKHeader* header = &bkHeader;
     u16 s3;
@@ -977,7 +977,7 @@ enum ReadState {
 #define AL_HEADER_SIG_CR 0x4352
 
 s32* func_80054AA0(s32* bkFileOffset, void* vaddr, s32 bankIndex, s32 bankGroup) {
-    ALHeap* heap = gSynDriver->heap;
+    ALHeap* heap = gSynDriverPtr->heap;
     BKHeader localHeader;
     BKHeader* header = &localHeader;
     Instrument** instrumentGroup;

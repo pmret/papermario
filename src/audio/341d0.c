@@ -167,7 +167,7 @@ void func_80059008(AlUnkKappa* kappa, s16 arg1, s16 arg2, s16 fc) {
 }
 
 // part of n_alFxNew, extracted to allow reseting fx without reallocating
-// AuFX from gSynDriver
+// AuFX from gSynDriverPtr
 void func_8005904C(AuFX* fx, u8 effect) {
     s32* params;
     s32* clr;
@@ -228,7 +228,7 @@ void func_8005904C(AuFX* fx, u8 effect) {
         delay->gain   = (u16) params[j++];
  
         if (params[j]) {
-            delay->rsinc = (2.0 * (params[j++] / 1000.0f)) / D_80078E50->outputRate;
+            delay->rsinc = (2.0 * (params[j++] / 1000.0f)) / gActiveSynDriverPtr->outputRate;
             delay->rsgain = ((f32)params[j++] / CONVERT) * (delay->output - delay->input);
             delay->rsval = 1.0f;
             delay->rsdelta = 0.0f;
@@ -253,7 +253,7 @@ void func_8005904C(AuFX* fx, u8 effect) {
 }
 
 // alFxPull
-// AuFX from gSynDriver
+// AuFX from gSynDriverPtr
 INCLUDE_ASM(s32, "audio/341d0", func_80059310);
 
 #define INPUT_PARAM         0
@@ -284,7 +284,7 @@ s32 au_fx_param_hdl(AuFX* fx, s16 index, s16 paramID, s32 value) {
         fx->delays[index].gain = value;
         break;
     case CHORUSRATE_PARAM:
-        fx->delays[index].rsinc = (2.0 * (value / 1000.0f)) / D_80078E50->outputRate;
+        fx->delays[index].rsinc = (2.0 * (value / 1000.0f)) / gActiveSynDriverPtr->outputRate;
         break;
     case CHORUSDEPTH_PARAM:
         fx->delays[index].rsgain = ((f32)value / CONVERT) * (fx->delays[index].output - fx->delays[index].input);

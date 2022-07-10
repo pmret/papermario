@@ -1298,7 +1298,7 @@ void func_8004EC68(BGMPlayer *player) {
                             if (note->noteLength > 0) {
                                 note->noteLength--;
                                 if (note->noteLength == 0) {
-                                    voice->unk_3D |= 0x10;
+                                    voice->unk_flags_3D |= 0x10;
                                 }
                             }
                             if (track->isDrumTrack) {
@@ -1311,7 +1311,7 @@ void func_8004EC68(BGMPlayer *player) {
                                 }
                                 if (track->changed.volume) {
                                     voice->unk_40 = (((((player->masterVolume >> 0x15) * (track->subTrackVolume >> 0x15)) * (track->unk2C >> 0x15)) >> 0x14) * (track->segTrackVolume * note->unk_08)) >> 0x10;
-                                    voice->unk_3D |= 0x20;
+                                    voice->unk_flags_3D |= 0x20;
                                 }
                             } else {
                                 if (note->tremoloTime != 0) {
@@ -1355,7 +1355,7 @@ void func_8004EC68(BGMPlayer *player) {
                                     s32 tempVolume = ((player->masterVolume >> 0x15) * (track->subTrackVolume >> 0x15) * (track->unk2C >> 0x15)) >> 0x14;
                                     note->unk_08 = (tempVolume * (track->segTrackVolume * note->noteVelocity)) >> 9;
                                     voice->unk_40 = note->unk_08;
-                                    voice->unk_3D |= 0x20;
+                                    voice->unk_flags_3D |= 0x20;
                                     voice->pan = track->subTrackPan;
                                     voice->reverb = track->subTrackReverb;
                                 } else if (track->changed.pan || track->changed.reverb) {
@@ -1944,7 +1944,7 @@ MusicError func_80050970(SongUpdateEvent* arg0) {
                                     voice = &player->globals->voices[j];
                                     if (voice->unk_45 == player->unk_234) {
                                         voice->unk_18 = &D_80078554;
-                                        voice->unk_3D |= 0x10;
+                                        voice->unk_flags_3D |= 0x10;
                                     }
                                 }
                                 oldVolume = trackA->subTrackVolume >> 24;
@@ -1962,7 +1962,7 @@ MusicError func_80050970(SongUpdateEvent* arg0) {
                                     voice = &player->globals->voices[j];
                                     if (voice->unk_45 == player->unk_234) {
                                         voice->unk_18 = &D_80078554;
-                                        voice->unk_3D |= 0x10;
+                                        voice->unk_flags_3D |= 0x10;
                                     }
                                 }
                                 oldVolume = trackB->subTrackVolume >> 24;

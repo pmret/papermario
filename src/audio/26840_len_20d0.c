@@ -101,14 +101,14 @@ void func_8004B440(SoundManager* manager, u8 arg1, u8 arg2, AuGlobals* arg3, u8 
     func_80053A98(manager->unk_BE, manager->unk_40.currentVolume.u16, manager->unk_5C);
     manager->unk_8C = 0xFF;
 
-    manager->unk_64[0] = &D_80078290;
-    manager->unk_64[1] = &D_800782F8;
-    manager->unk_64[2] = &D_80078320;
-    manager->unk_64[3] = &D_80078348;
-    manager->unk_64[4] = &D_80078348;
-    manager->unk_64[5] = &D_80078348;
-    manager->unk_64[6] = &D_80078348;
-    manager->unk_64[7] = &D_80078348;
+    manager->customReverbParams[0] = &D_80078290;
+    manager->customReverbParams[1] = &D_800782F8;
+    manager->customReverbParams[2] = &D_80078320;
+    manager->customReverbParams[3] = &D_80078348;
+    manager->customReverbParams[4] = &D_80078348;
+    manager->customReverbParams[5] = &D_80078348;
+    manager->customReverbParams[6] = &D_80078348;
+    manager->customReverbParams[7] = &D_80078348;
 
     manager->unk_84[0] = 0x10;
     manager->unk_84[1] = 0x20;
@@ -303,7 +303,7 @@ s32 func_8004B9E4(SoundManager* manager, s32 arg1) {
                 manager->unk_8C = effectIdx;
                 manager->soundData->unk_globals_40[1].unk_00 = 6;
                 manager->soundData->unk_globals_40[1].unk_01 = TRUE;
-                AU_FX_CUSTOM_PARAMS[0] = manager->unk_64[effectIdx];
+                AU_FX_CUSTOM_PARAMS[0] = manager->customReverbParams[effectIdx];
             }
             manager->unk_8D = manager->unk_84[effectIdx];
         } else {
@@ -539,7 +539,7 @@ void func_8004C578(SoundManager* manager, SoundPlayer* player, AlUnkVoice* arg2,
                 volume = snd_get_scaled_volume(manager, player);
                 if (arg2->unk_40 != volume) {
                     arg2->unk_40 = volume;
-                    arg2->unk_3D |= 0x20;
+                    arg2->unk_flags_3D |= 0x20;
                 }
             }
             break;
@@ -722,7 +722,7 @@ void func_8004C884(SoundManager* manager, SoundPlayer* player, AlUnkVoice* arg2,
         if (player->unk_90 != 0) {
             player->unk_90--;
             if ((player->unk_90 == 0) && (arg2->unk_45 == manager->unk_BC)) {
-                arg2->unk_3D |= 0x10;
+                arg2->unk_flags_3D |= 0x10;
             }
         }
         if (player->tuneLerp.time != 0) {
@@ -746,7 +746,7 @@ void func_8004C884(SoundManager* manager, SoundPlayer* player, AlUnkVoice* arg2,
     }
     if (player->changed.volume && (arg2->unk_45 == manager->unk_BC)) {
         snd_set_voice_volume(arg2, manager, player);
-        arg2->unk_3D |= 0x20;
+        arg2->unk_flags_3D |= 0x20;
     }
     if (player->changed.tune) {
         f32 adjustedSampleRate;

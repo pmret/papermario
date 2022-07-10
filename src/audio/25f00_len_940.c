@@ -21,7 +21,7 @@ extern OSMesg nuAuDmaMesgBuf[50];
 extern OSIoMesg nuAuDmaIOMesgBuf[];
 extern NUDMABuffer* D_800A3BD4;
 extern NUDMABuffer nuAuDmaBufList[50];
-extern u8 D_800B91A0[];
+extern AuSynDriver auSynDriver;
 extern u64 rspbootUcodeBuffer[];
 extern OSMesgQueue D_800DA444;
 extern s32 AlNumFields;
@@ -31,7 +31,7 @@ extern u8 D_801AA000[AUDIO_HEAP_SIZE];
 
 s32 nuAuDmaCallBack(s32 addr, s32 len, void* state, u8 arg3);
 void func_8004B328(NUScMsg, u32);
-void func_80056250(u8*, ALConfig*);
+void au_driver_init(u8*, ALConfig*);
 void nuAuMgr(void*);
 void snd_load_audio_data(s32 frequency);
 
@@ -88,7 +88,7 @@ void create_audio_system(void) {
 
     osCreateMesgQueue(&nuAuDmaMesgQ, nuAuDmaMesgBuf, 50);
     nuAuPreNMIFunc = func_8004B328;
-    func_80056250(D_800B91A0, &config);
+    au_driver_init(&auSynDriver, &config);
     snd_load_audio_data(config.outputRate);
     osCreateThread(&nuAuMgrThread, NU_MAIN_THREAD_ID, nuAuMgr, NULL, &AlCmdListBuffers, NU_AU_MGR_THREAD_PRI); //why main thread?
     osStartThread(&nuAuMgrThread);

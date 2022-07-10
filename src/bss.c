@@ -315,7 +315,7 @@ BSS s8 D_800B451F;
 BSS s8 D_800B4520[0x2070];
 BSS s8 D_800B6590[0x2000];
 BSS u8 nuYieldBuf[0xC10];
-BSS s8 D_800B91A0[0x30];
+BSS s8 auSynDriver[0x30]; // type: AuSynDriver
 BSS s8 D_800B91D0[0x20000];
 BSS s8 gZoneCollisionData[0x10];
 BSS s8 wMapHitName[0x18];
