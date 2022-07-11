@@ -212,9 +212,12 @@ void func_80050900(BGMPlayer* player);
 MusicError func_80050970(SongUpdateEvent* arg0);
 
 // 30450.c
+/*
 void func_80055050(ALHeap* heap);
 void func_80055068(u32 arg0);
+*/
 void func_80055110(BGMPlayer* player);
+/*
 void func_8005513C(u32 arg0);
 void snd_start_sound(s32 soundID, u8 volume, u8 pan);
 void snd_start_sound_with_shift(s32 soundID, u8 volume, u8 pan, s16 pitchShift);
@@ -225,15 +228,15 @@ void func_800553F4(void);
 void snd_start_sound_raw(s32 soundID, s16 volume, s16 pitchShift, s32 pan);
 s32 snd_ambient_80055448(s32 arg0);
 s32 snd_ambient_80055464(s32 arg0, s32 arg1);
-s32 snd_ambient_quick_fade_out(s32 arg0);
-s32 snd_ambient_slow_fade_out(s32 arg0, s32 arg1);
-s32 snd_ambient_8005553C(s32 arg0, s32 arg1);
-s32 snd_ambient_80055590(s32 arg0, s32 arg1);
-void snd_ambient_800555E4(s32 arg0);
-s32 snd_ambient_80055618(s32 arg0, s32 arg1);
-s32 snd_ambient_8005566C(s32 arg0, s32 arg1, s32 arg2);
-s32 snd_ambient_800556D0(s32 arg0);
-s32 snd_ambient_80055718(s32 arg0);
+MusicError snd_ambient_quick_fade_out(s32 arg0);
+MusicError snd_ambient_slow_fade_out(s32 arg0, s32 arg1);
+MusicError snd_ambient_8005553C(s32 arg0, s32 arg1);
+MusicError snd_ambient_80055590(s32 arg0, s32 arg1);
+MusicError snd_ambient_800555E4(s32 arg0);
+MusicError snd_ambient_80055618(s32 arg0, s32 arg1);
+MusicError snd_ambient_8005566C(s32 arg0, s32 arg1, s32 arg2);
+MusicError snd_ambient_800556D0(s32 arg0);
+MusicError snd_ambient_80055718(s32 arg0);
 void snd_ambient_80055760(s32 arg0);
 s32 snd_ambient_800557CC(s32 arg0);
 s32 snd_ambient_80055848(s32 arg0);
@@ -242,20 +245,22 @@ MusicError snd_start_song(s32 songName);
 MusicError snd_start_song_variation(s32 songName, s32 variation);
 MusicError func_800559C4(s32 songName);
 void func_800559E0(void);
-s32 func_800559FC(s32 songName);
+MusicError func_800559FC(s32 songName);
 MusicError snd_set_song_variation_fade(s32 songName, s32 variation, s32 fadeInTime, s32 startVolume, s32 endVolume);
 MusicError snd_set_song_fade(s32 songName, s32 fadeInTime, s32 startVolume, s32 endVolume);
 MusicError snd_set_song_variation_fade_time(s32 songName, s32 fadeTime, s32 variation);
-void func_80055AF0(s32 songName);
-void func_80055B28(s32 songName);
-void func_80055B80(s32 songName);
-void func_80055BB8(s32 songName, s32 fadeTime);
-void func_80055BF0(s32 songName);
-void func_80055C2C(s32 songName);
-void func_80055C64(s32 songName);
-void func_80055C94(s32 songName);
-s32 snd_set_song_variation(s32 songName, s32 variation);
+MusicError func_80055AF0(s32 songName);
+MusicError func_80055B28(s32 songName);
+MusicError func_80055B80(s32 songName);
+MusicError func_80055BB8(s32 songName, s32 fadeTime);
+MusicError func_80055BF0(s32 songName);
+MusicError func_80055C2C(s32 songName);
+MusicError func_80055C64(s32 songName);
+MusicError func_80055C94(s32 songName);
+MusicError snd_set_song_variation(s32 songName, s32 variation);
+*/
 MusicError func_80055CE8(s32 songName, s32** outTrackData, BGMPlayer** outPlayer);
+/*
 MusicError func_80055D38(s32 songName, f32 arg1);
 MusicError func_80055D8C(s32 songName, s32 arg1);
 MusicError func_80055DDC(s32 songName, s32 arg1);
@@ -265,14 +270,16 @@ MusicError func_80055F58(s32 arg0, u32 arg1, u32 arg2);
 MusicError func_80055FD4(s32 arg0, s32 arg1);
 MusicError func_80055FF0(s32 arg0, s32 arg1);
 MusicError func_8005600C(s32 arg0, s32 arg1);
-void bgm_set_proximity_mix_far(s32 songName, u8 mix);
-void bgm_set_proximity_mix_near(s32 songName, u8 mix);
-void bgm_set_proximity_mix_full(s32 songName, u8 mix);
+void bgm_set_proximity_mix_far(s32 songName, s32 mix);
+void bgm_set_proximity_mix_near(s32 songName, s32 mix);
+void bgm_set_proximity_mix_full(s32 songName, s32 mix);
 void func_8005608C(u32** arg0, s32* arg1);
 void func_800560A8(void);
 void func_800560BC(s32 arg0, s32 arg1, s32 arg2);
 void func_8005610C(void);
+*/
 void func_80056144(UnkFuncAl arg0, s32 arg1);
+/*
 void audio_set_stereo(void);
 void audio_set_mono(void);
 void func_800561A4(s32 arg0);
@@ -280,6 +287,7 @@ void func_800561C4(s32 arg0);
 void func_800561E4(s32 arg0);
 void func_80056204(void);
 void func_80056228(void);
+*/
 
 // 31650.c
 void au_driver_init(AuSynDriver* driver, ALConfig* config);
@@ -317,8 +325,10 @@ void func_80057E08(u8 arg0);
 void func_80057E5C(u8 arg0);
 void func_80057EB0(void);
 void func_80057ED0(s16 arg0);
-void alHeapInit(ALHeap* hp, u8* base, s32 len);
-void alCopy(void* src, void* dst, s32 size);
+//void alHeapInit(ALHeap* hp, u8* base, s32 len);
+//void alCopy(void* src, void* dst, s32 size);
+#undef alHeapAlloc
+void* alHeapAlloc(ALHeap* heap, s32 arg1, s32 size);
 
 // 33450.c
 Acmd* func_80058050(AuPVoice* pvoice, Acmd* cmdBufPos);
@@ -332,6 +342,7 @@ void func_8005904C(AuFX* fx, u8 effect);
 s32 au_fx_param_hdl(AuFX* fx, s16 index, s16 paramID, s32 value);
 
 // sfx.c
+/*
 void sfx_reset_door_sounds(void);
 void sfx_clear_sounds(void);
 void sfx_clear_env_sounds(s16 playSounds);
@@ -339,7 +350,9 @@ void sfx_update_looping_sound_params(void);
 void func_801497FC(s32 arg0);
 s32 func_80149828(void);
 void sfx_stop_env_sounds(void);
+*/
 SoundInstance* sfx_get_env_sound_instance(s32 soundID);
+/*
 void sfx_play_sound_looping(s32 soundId, u8 volume, u8 pan, s16 pitchShift);
 void sfx_register_looping_sound_at_position(s32 soundID, s32 flags, f32 x, f32 y, f32 z);
 s32 sfx_adjust_env_sound_pos(s32 soundID, s32 sourceFlags, f32 x, f32 y, f32 z);
@@ -355,3 +368,4 @@ void sfx_get_spatialized_sound_params(f32 x, f32 y, f32 z, s16* volume, s16* pan
 void sfx_compute_spatialized_sound_params_0(f32 x, f32 y, f32 z, s16* volume, s16* pan);
 void sfx_compute_spatialized_sound_params_1(f32 x, f32 y, f32 z, s16* volume, s16* pan);
 void sfx_compute_spatialized_sound_params_2(f32 x, f32 y, f32 z, s16* volume, s16* pan, s32 flags);
+*/

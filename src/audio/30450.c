@@ -194,7 +194,7 @@ s32 snd_ambient_80055464(s32 arg0, s32 arg1) {
     }
 }
 
-s32 snd_ambient_quick_fade_out(s32 arg0) {
+MusicError snd_ambient_quick_fade_out(s32 arg0) {
     s32 ret = func_80050C30(arg0);
 
     if (ret == 0) {
@@ -204,7 +204,7 @@ s32 snd_ambient_quick_fade_out(s32 arg0) {
     return ret;
 }
 
-s32 snd_ambient_slow_fade_out(s32 arg0, s32 arg1) {
+MusicError snd_ambient_slow_fade_out(s32 arg0, s32 arg1) {
     s32 ret = func_80050C30(arg0);
 
     if (ret == 0) {
@@ -215,7 +215,7 @@ s32 snd_ambient_slow_fade_out(s32 arg0, s32 arg1) {
 }
 
 // clears ambient sounds?
-s32 snd_ambient_8005553C(s32 arg0, s32 arg1) {
+MusicError snd_ambient_8005553C(s32 arg0, s32 arg1) {
     s32 ret = func_80050C30(arg0);
 
     if (ret == 0) {
@@ -225,7 +225,7 @@ s32 snd_ambient_8005553C(s32 arg0, s32 arg1) {
     return ret;
 }
 
-s32 snd_ambient_80055590(s32 arg0, s32 arg1) {
+MusicError snd_ambient_80055590(s32 arg0, s32 arg1) {
     s32 ret = func_80050C30(arg0);
 
     if (ret == 0) {
@@ -235,14 +235,17 @@ s32 snd_ambient_80055590(s32 arg0, s32 arg1) {
     return ret;
 }
 
-void snd_ambient_800555E4(s32 arg0) {
-    
-    if (func_80050C30(arg0) == 0) {
-        func_80051050(arg0);
+MusicError snd_ambient_800555E4(s32 arg0) {
+    s32 ret = func_80050C30(arg0);
+
+    if (ret != 0) {
+        return ret;
     }
+
+    return func_80051050(arg0);;
 }
 
-s32 snd_ambient_80055618(s32 arg0, s32 arg1) {
+MusicError snd_ambient_80055618(s32 arg0, s32 arg1) {
     s32 ret = func_80050C30(arg0);
 
     if (ret == 0) {
@@ -252,7 +255,7 @@ s32 snd_ambient_80055618(s32 arg0, s32 arg1) {
     return ret;
 }
 
-s32 snd_ambient_8005566C(s32 arg0, s32 arg1, s32 arg2) {
+MusicError snd_ambient_8005566C(s32 arg0, s32 arg1, s32 arg2) {
     s32 ret = func_80050C30(arg0);
 
     if (ret == 0) {
@@ -262,7 +265,7 @@ s32 snd_ambient_8005566C(s32 arg0, s32 arg1, s32 arg2) {
     return ret;
 }
 
-s32 snd_ambient_800556D0(s32 arg0) {
+MusicError snd_ambient_800556D0(s32 arg0) {
     s32 ret = func_80050C30(arg0);
 
     if (ret == 0) {
@@ -272,7 +275,7 @@ s32 snd_ambient_800556D0(s32 arg0) {
     return ret;
 }
 
-s32 snd_ambient_80055718(s32 arg0) {
+MusicError snd_ambient_80055718(s32 arg0) {
     s32 ret  = func_80050C30(arg0);
 
     if (ret == 0) {
@@ -398,7 +401,7 @@ void func_800559E0(void) {
     func_8004DA74();
 }
 
-s32 func_800559FC(s32 songName) {
+MusicError func_800559FC(s32 songName) {
     return snd_is_song_playing(songName);
 }
 
@@ -447,7 +450,7 @@ MusicError snd_set_song_variation_fade_time(s32 songName, s32 fadeTime, s32 vari
     return func_8004DB4C(&s);
 }
 
-void func_80055AF0(s32 songName) {
+MusicError func_80055AF0(s32 songName) {
     SongUpdateEvent s;
     s.songName = songName;
     s.duration = 0;
@@ -455,11 +458,13 @@ void func_80055AF0(s32 songName) {
     s.finalVolume = 0;
     s.variation = 0;
     s.unk14 = 0;
-    func_8004DCB8(&s, 0);
+    return func_8004DCB8(&s, 0);
 }
 
-void func_80055B28(s32 songName) {
+MusicError func_80055B28(s32 songName) {
+    MusicError error;
     SongUpdateEvent s;
+
     D_80078DB0 = TRUE;
     s.songName = songName;
     s.duration = 2000;
@@ -467,11 +472,13 @@ void func_80055B28(s32 songName) {
     s.finalVolume = 127;
     s.variation = 0;
     s.unk14 = 0;
-    func_8004DE2C(&s);
+    error = func_8004DE2C(&s);
     D_80078DB0 = FALSE;
+
+    return error;
 }
 
-void func_80055B80(s32 songName) {
+MusicError func_80055B80(s32 songName) {
     SongUpdateEvent s;
     s.songName = songName;
     s.duration = 0;
@@ -479,10 +486,10 @@ void func_80055B80(s32 songName) {
     s.finalVolume = 0;
     s.variation = 0;
     s.unk14 = 0;
-    func_8004DCB8(&s, 1);
+    return func_8004DCB8(&s, 1);
 }
 
-void func_80055BB8(s32 songName, s32 fadeTime) {
+MusicError func_80055BB8(s32 songName, s32 fadeTime) {
     SongUpdateEvent s;
     s.songName = songName;
     s.duration = fadeTime;
@@ -490,10 +497,10 @@ void func_80055BB8(s32 songName, s32 fadeTime) {
     s.finalVolume = 0;
     s.variation = 0;
     s.unk14 = 1;
-    func_8004DB4C(&s);
+    return func_8004DB4C(&s);
 }
 
-void func_80055BF0(s32 songName) {
+MusicError func_80055BF0(s32 songName) {
     SongUpdateEvent s;
     s.songName = songName;
     s.duration = 0;
@@ -501,10 +508,10 @@ void func_80055BF0(s32 songName) {
     s.finalVolume = 0;
     s.variation = 0;
     s.unk14 = 1;
-    func_8004DCB8(&s, 0);
+    return func_8004DCB8(&s, 0);
 }
 
-void func_80055C2C(s32 songName) {
+MusicError func_80055C2C(s32 songName) {
     SongUpdateEvent s;
     s.songName = songName;
     s.duration = 0;
@@ -512,26 +519,26 @@ void func_80055C2C(s32 songName) {
     s.finalVolume = 0;
     s.variation = 0;
     s.unk14 = 1;
-    func_8004DE2C(&s);
+    return func_8004DE2C(&s);
 }
 
-void func_80055C64(s32 songName) {
+MusicError func_80055C64(s32 songName) {
     SongUpdateEvent s;
     s.songName = songName;
     s.duration = 500;
     s.finalVolume = 0x2000;
-    func_8004E0F4(&s);
+    return func_8004E0F4(&s);
 }
 
-void func_80055C94(s32 songName) {
+MusicError func_80055C94(s32 songName) {
     SongUpdateEvent s;
     s.songName = songName;
     s.duration = 500;
     s.finalVolume = 0x7FFF;
-    func_8004E0F4(&s);
+    return func_8004E0F4(&s);
 }
 
-s32 snd_set_song_variation(s32 songName, s32 variation) {
+MusicError snd_set_song_variation(s32 songName, s32 variation) {
     SongUpdateEvent s;
     s.songName = songName;
     s.variation = variation;
@@ -692,16 +699,16 @@ MusicError func_8005600C(s32 arg0, s32 arg1) {
     return func_80055F58(arg0, arg1, 0x7F);
 }
 
-void bgm_set_proximity_mix_far(s32 songName, u8 mix) {
-    snd_set_bgm_proximity_mix(songName, mix);
+void bgm_set_proximity_mix_far(s32 songName, s32 mix) {
+    snd_set_bgm_proximity_mix(songName, (u8)mix);
 }
 
-void bgm_set_proximity_mix_near(s32 songName, u8 mix) {
-    snd_set_bgm_proximity_mix(songName, mix | 0x57000000);
+void bgm_set_proximity_mix_near(s32 songName, s32 mix) {
+    snd_set_bgm_proximity_mix(songName, (u8)mix | 0x57000000);
 }
 
-void bgm_set_proximity_mix_full(s32 songName, u8 mix) {
-    snd_set_bgm_proximity_mix(songName, mix | 0x7F000000);
+void bgm_set_proximity_mix_full(s32 songName, s32 mix) {
+    snd_set_bgm_proximity_mix(songName, (u8)mix | 0x7F000000);
 }
 
 void func_8005608C(u32** arg0, s32* arg1) {

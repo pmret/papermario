@@ -1,6 +1,9 @@
 #include "common.h"
 #include "npc.h"
 
+void bgm_update_volume();
+void bgm_set_target_volume(s16 volume);
+
 MusicSettings D_8014F6F0 = {
     .flags = 0,
     .state = 0,
@@ -28,8 +31,6 @@ s32 gSongsUsingVariationFlag[] = {
 };
 
 s16 gNextVolumeUpdateTimer = 0;
-
-void bgm_set_target_volume(s16 volume);
 
 /// If the given song ID is present in gSongsUsingVariationFlag, returns the current
 /// map's `songVariation & 1` value. Otherwise, returns -1.
@@ -68,17 +69,6 @@ void bgm_reset_volume(void) {
     gMusicMaxVolume = 8;
 }
 
-void bgm_update_volume();
-MusicError func_800559C4(s32);
-s32 func_800559FC(s32);
-s32 func_80055AF0(s32);
-s32 func_80055B28(s32);
-s32 func_80055BB8(s32, s32);
-u32 snd_load_song(s32, s32);
-s32 snd_set_song_variation_fade(s32, s32, s32, s32, s32);
-s32 snd_set_song_variation_fade_time(s32, s32, s32);
-s32 snd_start_song_variation(u32, s32);
-
 //TODO refactor out constants
 void bgm_update_music_settings(void) {
     MusicSettings* music = &gMusicSettings;
@@ -108,7 +98,7 @@ void bgm_update_music_settings(void) {
                         music->state = state2;
                     }
                 } else {
-                    if (func_80055BB8(music->songName, 250) == 0) {
+                    if (func_80055BB8(music->songName, 250) == MUSIC_ERROR_NONE) {
                         music->state = state2;
                     }
                 }
@@ -124,7 +114,7 @@ void bgm_update_music_settings(void) {
             flags = music->flags;
             music->flags &= ~flag4;
             if (flags & 1) {
-                if (func_800559FC(music->songName) == 0) {
+                if (func_800559FC(music->songName) == MUSIC_ERROR_NONE) {
                     music->flags &= ~MUSIC_SETTINGS_FLAGS_1;
                     music->state = 3;
                 }

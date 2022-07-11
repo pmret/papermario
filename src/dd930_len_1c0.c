@@ -39,7 +39,7 @@ void update_ambient_sounds(void) {
         case AMBIENT_SOUND_FADE_OUT:
             if (ambientSoundState->flags & 1) {
                 if (ambientSoundState->fadeTime < 250) {
-                    error = snd_ambient_quick_fade_out(0, ambientSoundState->fadeTime);
+                    error = snd_ambient_quick_fade_out(0);
                 } else {
                     error = snd_ambient_slow_fade_out(0, ambientSoundState->fadeTime);
                 }
@@ -73,7 +73,7 @@ s32 play_ambient_sounds(s32 soundID, s32 fadeTime) {
     AmbientSoundSettings* state = &AmbientSoundData;
 
     if (!gGameStatusPtr->musicEnabled) {
-        snd_ambient_quick_fade_out(state->soundID, fadeTime);
+        snd_ambient_quick_fade_out(state->soundID);
         state->flags &= ~1;
         return 1;
     }

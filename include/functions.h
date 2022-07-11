@@ -509,19 +509,16 @@ f32 dist3D(f32 ax, f32 ay, f32 az, f32 bx, f32 by, f32 bz);
 void add_vec2D_polar(f32* x, f32* y, f32 r, f32 theta);
 
 //TODO -- remove these and use audio/public.h instead
-s32 sfx_adjust_env_sound_pos(s32 soundID, s32 arg1, f32 arg2, f32 arg3, f32 arg4);
-void sfx_play_sound(s32 soundID);
-void sfx_play_sound_at_position(s32 soundID, s32 value2, f32 posX, f32 posY, f32 posZ);
-void sfx_play_sound_at_player(s32 soundID, s32 arg0);
-void sfx_play_sound_at_npc(s32 soundID, s32 arg1, s32 npcID);
+
 s32 bgm_set_song(s32 playerIndex, s32 songID, s32 variation, s32 fadeOutTime, s16 volume);
 void bgm_set_battle_song(s32, s32);
 void bgm_push_battle_song(void);
-void func_801497FC(s32 arg0);
 s32 bgm_adjust_proximity(s32 playerIndex, s32 arg1, s16 arg2);
 s32 func_8014A964(s32 playerIndex, s32 songID, s32 variation, s32 fadeInTime, s16 arg4, s16 arg5);
 s32 func_8014AA54(s32 playerIndex, s32 arg1, s16 arg2);
 MusicError func_8014AB0C(s32 playerIndex, s16 arg1);
+
+#include "audio/public.h"
 
 void basic_window_update(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, f32* scaleX, f32* scaleY,
                    f32* rotX, f32* rotY, f32* rotZ, s32* darkening, s32* opacity);
@@ -572,9 +569,7 @@ void update_entities(void);
 void func_80138198(void);
 void bgm_update_music_settings(void);
 void update_ambient_sounds(void);
-void sfx_update_looping_sound_params(void);
 void update_windows(void);
-void sfx_stop_env_sounds(void);
 void player_render_interact_prompts(void);
 void func_802C3EE4(void);
 void render_screen_overlay_backUI(void);
@@ -592,7 +587,6 @@ void func_80028838(void);
 void clear_screen_overlays(void);
 void bgm_reset_sequence_players(void);
 void reset_ambient_sounds(void);
-void sfx_clear_sounds(void);
 void poll_rumble(void);
 void bgm_pop_song(void);
 void bgm_push_song(s32 songID, s32 variation);
@@ -615,8 +609,6 @@ void open_status_menu_long(void);
 void suspend_all_group(s32 groupFlags);
 void kill_script(Evt* instanceToKill);
 void exec_entity_commandlist(Entity* entity);
-
-void sfx_reset_door_sounds(void);
 
 void show_start_recovery_shimmer(f32 x, f32 y, f32 z, s32 arg3);
 void show_recovery_shimmer(f32 x, f32 y, f32 z, s32 arg3);
@@ -778,8 +770,6 @@ s32 fold_appendGfx_component(s32, FoldImageRecPart*, u32, Matrix4f);
 s32 func_8013A704(s32);
 void free_generic_entity(s32);
 
-void sfx_get_spatialized_sound_params(f32 arg0, f32 arg1, f32 arg2, s16* arg3, s16* arg4, s32 arg5);
-void sfx_play_sound_with_params(s32 arg0, u8 arg1, u8 arg2, s16 arg3);
 s32 ai_check_fwd_collisions(Npc* npc, f32 arg1, f32* arg2, f32* arg3, f32* arg4, f32* arg5);
 void basic_ai_loiter_init(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory);
 void PatrolAI_LoiterInit(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory);
@@ -820,7 +810,6 @@ void func_800EF3E4(void);
 void func_80268858(void);
 void func_80269118(void);
 s32 func_80268224(s32);
-void func_80149A6C(s32, s32);
 void func_800EF300(void);
 void enable_player_shadow(void);
 s32 get_msg_lines(s32 messageID);
