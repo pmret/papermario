@@ -1117,7 +1117,7 @@ void snd_read_rom(s32 romAddr, void* buffer, u32 size) {
     }
 }
 
-void snd_memset(s8* dst, s32 size, u8 value) {
+void snd_memset(void* dst, s32 size, u8 value) {
     s32 count;
     s32 intValue;
 
@@ -1127,7 +1127,7 @@ void snd_memset(s8* dst, s32 size, u8 value) {
 
     if (size < 1024) {
         while (size--) {
-            *dst++ = value;
+            *(u8*)dst++ = value;
         }
     } else {
         count = (u32)dst & 0x3;
@@ -1135,7 +1135,7 @@ void snd_memset(s8* dst, s32 size, u8 value) {
             count = 4 - count;
             size -= count;
             while (count--) {
-                *dst++ = value;
+                *(u8*)dst++ = value;
             }
         }
 
@@ -1150,7 +1150,7 @@ void snd_memset(s8* dst, s32 size, u8 value) {
         count = size & 3;
         if (count != 0) {
             while (count--) {
-                *dst++ = value;
+                *(u8*)dst++ = value;
             }
         }
     }

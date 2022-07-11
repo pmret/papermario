@@ -515,8 +515,6 @@ void bgm_set_battle_song(s32, s32);
 void bgm_push_battle_song(void);
 s32 bgm_adjust_proximity(s32 playerIndex, s32 arg1, s16 arg2);
 s32 func_8014A964(s32 playerIndex, s32 songID, s32 variation, s32 fadeInTime, s16 arg4, s16 arg5);
-s32 func_8014AA54(s32 playerIndex, s32 arg1, s16 arg2);
-MusicError func_8014AB0C(s32 playerIndex, s16 arg1);
 
 #include "audio/public.h"
 

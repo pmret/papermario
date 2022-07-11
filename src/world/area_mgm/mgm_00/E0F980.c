@@ -1,6 +1,5 @@
 #include "mgm_00.h"
 
-void snd_start_sound(s32 soundID, u8 volume, u8 pan);
 void msg_draw_frame(s32 posX, s32 posY, s32 sizeX, s32 sizeY, s32 style, s32 palette, s32 fading, s32 bgAlpha, s32 frameAlpha);
 
 extern Gfx D_80243C50_E123F0[];

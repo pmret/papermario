@@ -73,7 +73,7 @@ void func_80054CE0(s32 arg0, u32 idx);
 s32 func_80054D74(s32 arg0, s32 arg1);
 void func_80054DA8(u32 arg0);
 void snd_read_rom(s32 romAddr, void* buffer, u32 size);
-void snd_memset(s8* dst, s32 size, u8 value);
+void snd_memset(void* dst, s32 size, u8 value);
 void snd_bcopy(s8* src, s8* dest, s32 size);
 void snd_copy_words(void* src, void* dst, s32 size);
 

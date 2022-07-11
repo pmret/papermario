@@ -2,8 +2,6 @@
 
 extern s32 D_80078520;
 
-void func_800538C4(AlUnkVoice*, u8);
-
 void func_80050B90(AmbientSoundManager* arg0, s8 arg1, s8 arg2, AuGlobals* arg3) {
     AlUnkLambda* lambda;
     s32 i;
