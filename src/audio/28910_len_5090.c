@@ -536,8 +536,8 @@ void bgm_player_init(BGMPlayer* player, s32 arg1, s32 arg2, AuGlobals* arg3) {
     player->masterPitchShift = 0;
     player->unk_20E = 0;
     player->unk_220 = 0;
-    player->unk_204 = 0;
-    player->unk_232 = 0;
+    player->trackFadeConfig = NULL;
+    player->bFadeConfigSetsVolume = FALSE;
     player->masterState = BGM_PLAY_STATE_0;
     player->unk_234 = arg1;
     player->defaultReverbType = arg2;
@@ -694,7 +694,7 @@ void snd_initialize_bgm_player(BGMPlayer* player) {
 
     for (i = 0; i < ARRAY_COUNT(player->tracks); i++) {
         BGMPlayerTrack* track = &player->tracks[i];
-        track->instrument = -1;
+        track->instrument = NO_INSTRUMENT;
         track->subTrackVolume = 0x7FFF0000;
         track->subTrackPan = 0x40;
         track->subTrackReverb = 0;
@@ -733,7 +733,7 @@ void snd_initialize_bgm_player(BGMPlayer* player) {
 
     for (i = 0; i < ARRAY_COUNT(player->notes); i++) {
         SeqNote* note = &player->notes[i];
-        note->ins = -1;
+        note->ins = NO_INSTRUMENT;
         note->pitchRatio = 2.0f;
         note->unk_14 = 0;
         note->noteVelocity = 0;
@@ -766,8 +766,8 @@ void snd_initialize_bgm_player(BGMPlayer* player) {
     player->segLoopDepth = 0;
     player->unk_222 = 0;
     player->unk_223 = 0;
-    player->unk_204 = NULL;
-    player->unk_232 = 0;
+    player->trackFadeConfig = NULL;
+    player->bFadeConfigSetsVolume = FALSE;
     player->unk_233 = 1;
     player->unk_211 = 0;
     player->unk_D0 = 1.0f;
@@ -983,40 +983,42 @@ void func_8004EC68(BGMPlayer *player) {
         bVolumeFading = TRUE;
     }
     player->volumeChanged = FALSE;
-    if (player->unk_204 != 0) {
-        if (player->unk_232 != 0) {
-            s32 counter = 16;
-            while (counter-- != 0) {
-                i = *player->unk_204++;
+    if (player->trackFadeConfig != NULL) {
+        if (player->bFadeConfigSetsVolume) {
+            // setting track volumes
+            s32 lenLimit = 16;
+            while (lenLimit-- != 0) {
+                i = *player->trackFadeConfig++;
                 if (i == 0) {
                     break;
                 }
                 track = &player->tracks[i - 1];
                 player->seqCmdArgs.TrackVolumeFade.time = 48;
-                player->seqCmdArgs.TrackVolumeFade.value = *(player->unk_204++);
+                player->seqCmdArgs.TrackVolumeFade.value = *(player->trackFadeConfig++);
                 if (track->bgmReadPos != 0) {
                     snd_BGMCmd_F6_TrackVolumeFade(player, track);
                 }
             }
         }
         else {
-            s32 counter = 16;
-            while (counter-- != 0) {
-                i = *player->unk_204++;
+            // clearing track volumes
+            s32 lenLimit = 16;
+            while (lenLimit-- != 0) {
+                i = *player->trackFadeConfig++;
                 if (i == 0) {
                     break;
                 }
                 track = &player->tracks[i - 1];
                 player->seqCmdArgs.TrackVolumeFade.time = 48;
-                player->unk_204++; // ignore arg
+                player->trackFadeConfig++; // ignore arg
                 player->seqCmdArgs.TrackVolumeFade.value = 0;
                 if (track->bgmReadPos != 0) {
                     snd_BGMCmd_F6_TrackVolumeFade(player, track);
                 }
             }
         }
-        player->unk_204 = 0;
-        player->unk_232 = 0;
+        player->trackFadeConfig = NULL;
+        player->bFadeConfigSetsVolume = FALSE;
     }
     for (i = 0; i < ARRAY_COUNT(player->tracks); i++) {
         track = &player->tracks[i];
@@ -1592,30 +1594,29 @@ void snd_BGMCmd_FD(BGMPlayer* player, BGMPlayerTrack* track) {
 }
 
 void snd_BGMCmd_FE(BGMPlayer* player, BGMPlayerTrack* track) {
-    s32 temp = player->seqCmdArgs.UnkCmdFE.offset + (s32)player->bgmFile;
+    AuFilePos readPos = (AuFilePos)(player->seqCmdArgs.UnkCmdFE.offset + (s32)player->bgmFile);
 
     track->unk_3E = player->seqCmdArgs.UnkCmdFE.unk_02;
     track->unk_04 = track->bgmReadPos;
-    track->bgmReadPos = temp;
+    track->bgmReadPos = readPos;
 }
 
 void snd_BGMCmd_FC_Jump(BGMPlayer* player, BGMPlayerTrack* track) {
-    AlUnkVoice* temp_a0;
+    AuFilePos args;
     u32 i;
-    u8* var_a1;
 
-    var_a1 = (u8*)(player->seqCmdArgs.Jump.unk_00 + (s32)player->bgmFile);
+    args = (AuFilePos)(player->seqCmdArgs.Jump.unk_00 + (s32)player->bgmFile);
     if (player->proxMixID < player->seqCmdArgs.Jump.unk_02) {
-        var_a1 += player->proxMixID * 3;
+        args += player->proxMixID * 3;
     }
     track->prevReadPos = track->bgmReadPos;
-    track->bgmReadPos = (var_a1[0] << 8) + var_a1[1] + (s32)player->bgmFile;
-    track->isDrumTrack = var_a1[2];
+    track->bgmReadPos = (AuFilePos)((args[0] << 8) + args[1] + (s32)player->bgmFile);
+    track->isDrumTrack = args[2];
     if (track->unk_4D != 0) {
         track->unk_4D = 0;
         track->unk2C = 0;
         for (i = track->unk_52; i < track->unk_53; i++) {
-            temp_a0 = &player->globals->voices[i];
+            AlUnkVoice* temp_a0 = &player->globals->voices[i];
             if ((temp_a0->unk_45 == player->unk_234) && (temp_a0->unk_1C != 0)) {
                 func_800538C4(temp_a0, i);
             }
@@ -1857,9 +1858,9 @@ void func_8005083C(BGMPlayer* player, s32 trackIdx, s16 arg2, u8 arg3) {
     }
 }
 
-void func_8005087C(BGMPlayer* player, s32* arg1, s32 arg2) {
-    player->unk_204 = arg1;
-    player->unk_232 = arg2;
+void func_8005087C(BGMPlayer* player, u8* arg1, s32 arg2) {
+    player->trackFadeConfig = arg1;
+    player->bFadeConfigSetsVolume = arg2;
 }
 
 void func_80050888(BGMPlayer* player, BGMPlayerTrack* track, s32 target, s32 duration) {

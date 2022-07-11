@@ -361,13 +361,13 @@ void snd_load_sfx_groups_from_SEF(SoundManager* sndMgr) {
     
     for (i = 0; i < sections; i++) {
         if (sefData->sections[i] != 0) {
-            sndMgr->normalSounds[i] = sefData->sections[i] + (s32)sefData;
+            sndMgr->normalSounds[i] = (s32*)(sefData->sections[i] + (s32)sefData);
         }
     }
 
     if (sefData->hasExtraSection == 1) {
         if (sefData->section2000 != 0) {
-            sndMgr->soundsWithBit2000 = sefData->section2000 + (s32)sefData;
+            sndMgr->soundsWithBit2000 = (s32*)(sefData->section2000 + (s32)sefData);
         }
     }
 }
@@ -623,7 +623,7 @@ void _snd_stop_sound_by_id(SoundManager* manager, u32 soundID) {
     for (i = 0; i < ARRAY_COUNT(manager->unk_16C); i++) {
         SoundPlayer* player = &manager->unk_16C[i];
         if (player->currentSoundID == (soundID & SOUND_ID_LOWER)) {
-            player->sefDataReadPos = &gBlankSEFData;
+            player->sefDataReadPos = gBlankSEFData;
             player->unk_80 = 0;
             player->sfxParamsFlags = 1;
             player->unk_A9 = 0;
@@ -640,7 +640,7 @@ void func_8004C300(SoundManager* manager, u32 soundID) {
     for (i = 0; i < ARRAY_COUNT(manager->unk_16C); i++) {
         SoundPlayer* player = &manager->unk_16C[i];
         if (soundID == player->unk_99) {
-            player->sefDataReadPos = &gBlankSEFData;
+            player->sefDataReadPos = gBlankSEFData;
             player->unk_80 = 0;
             player->sfxParamsFlags = 1;
             player->unk_A9 = 0;
@@ -912,7 +912,7 @@ void func_8004C884(SoundManager* manager, SoundPlayer* player, AlUnkVoice* arg2,
                     arg2->unk_14.unk_04 = player->unk_10.unk_04;
                 }
 
-                arg2->instrument = (s32) player->sfxInstrumentRef;
+                arg2->instrument = player->sfxInstrumentRef;
                 arg2->reverbType = manager->unk_BE;
                 
                 arg2->unk_45 = manager->unk_BC;
@@ -1093,17 +1093,13 @@ void snd_SEFCmd_04(SoundManager* manager, SoundPlayer* player) {
     
     temp_v0_2 = player->sfxInstrument.unkOffset;
     if (temp_v0_2 != NULL && temp_v0_2->count != 0) {
-        player->unk_10.unk_00 = (temp_v0_2->unk_04[0].unkOffset1 + (s32)temp_v0_2);
-        player->unk_10.unk_04 = (temp_v0_2->unk_04[0].unkOffset2 + (s32)temp_v0_2);
+        player->unk_10.unk_00 = (s32*)(temp_v0_2->unk_04[0].unkOffset1 + (s32)temp_v0_2);
+        player->unk_10.unk_04 = (s32*)(temp_v0_2->unk_04[0].unkOffset2 + (s32)temp_v0_2);
     }
 }
 
 void snd_SEFCmd_05(SoundManager* manager, SoundPlayer* player) {
-    //TODO buffer access different from other commands
-    u32 temp_v1 = *player->sefDataReadPos;
-    player->sefDataReadPos++;
-
-    player->unk_92 = temp_v1 * 100;
+    player->unk_92 = (*player->sefDataReadPos++) * 100;
 }
 
 void snd_SEFCmd_06(SoundManager* manager, SoundPlayer* player) {
@@ -1228,7 +1224,7 @@ void snd_SEFCmd_0F(SoundManager* manager, SoundPlayer* player) {
 void snd_SEFCmd_10_Jump(SoundManager* manager, SoundPlayer* player) {
     u8* buf = player->sefDataReadPos;
     player->sefReadStart = &buf[2];
-    player->sefDataReadPos = ((buf[0] << 8) + buf[1]) + (s32)manager->sefData;
+    player->sefDataReadPos = (s8*)(((buf[0] << 8) + buf[1]) + (s32)manager->sefData);
 }
 
 void snd_SEFCmd_11_Restart(SoundManager* manager, SoundPlayer* player) {
@@ -1263,7 +1259,6 @@ void snd_SEFCmd_SetUnkA3(SoundManager* manager, SoundPlayer* player) {
 }
 
 void snd_SEFCmd_16(SoundManager* manager, SoundPlayer* player) {
-    s8* data = manager->sefData;
     u8* buf = player->sefDataReadPos;
     s32 offset = (buf[0] << 8) + buf[1];
 

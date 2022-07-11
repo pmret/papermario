@@ -10,6 +10,10 @@ typedef s16 UNK_TYPE_16;
 typedef s32 UNK_TYPE_32;
 typedef void* UNK_TYPE_PTR;
 
+typedef u8* AuFilePos;
+
+#define NO_INSTRUMENT ((Instrument*) -1)
+
 #define AU_FX_DELAY_COUNT     4
 #define AU_FX_LENGTH          0xA10
 
@@ -369,7 +373,7 @@ typedef struct InstrumentEffect {
 typedef struct Instrument {
     /* 0x00 */ u8* base;
     /* 0x04 */ u32 wavDataLength;
-    /* 0x08 */ s32 loopPredictorOffset;
+    /* 0x08 */ UNK_PTR loopPredictorOffset;
     /* 0x0C */ s32 loopStart;
     /* 0x10 */ s32 loopEnd;
     /* 0x14 */ s32 loopCount;
@@ -484,7 +488,7 @@ typedef struct SoundManagerA0 {
 typedef struct SoundManager {
     /* 0x000 */ struct AuGlobals* soundData;
     /* 0x004 */ struct AlUnkVoice* currentVoice;
-    /* 0x008 */ s32* sefData;
+    /* 0x008 */ struct SEFHeader* sefData;
     /* 0x00C */ s32* normalSounds[8];
     /* 0x02C */ s32* soundsWithBit2000;
     /* 0x030 */ s32 playCounter; //?
@@ -768,9 +772,9 @@ typedef struct AuGlobals {
 } AuGlobals; // size = 0x19E0
 
 typedef struct BGMPlayerTrack {
-    /* 0x00 */ u8* bgmReadPos;
+    /* 0x00 */ AuFilePos bgmReadPos;
     /* 0x04 */ u8* unk_04;
-    /* 0x08 */ u8* prevReadPos; //? see snd_BGMCmd_FC_Jump
+    /* 0x08 */ AuFilePos prevReadPos;
     /* 0x0C */ Instrument* instrument;
     /* 0x10 */ AlUnkInstrumentData unk_10;
     /* 0x18 */ s32 subTrackVolume;
@@ -876,7 +880,7 @@ typedef struct BGMPlayer {
     /* 0x171 */ u8 proxMixVolume;
     /* 0x172 */ char unk_172[0x2];
     /* 0x174 */ s16 unk_174[8][9];
-    /* 0x204 */ u8* unk_204;
+    /* 0x204 */ u8* trackFadeConfig;
     /* 0x208 */ u16 masterTempoBPM;
     /* 0x20A */ u16 maxTempo;
     /* 0x20C */ u16 masterPitchShift;
@@ -897,7 +901,7 @@ typedef struct BGMPlayer {
     /* 0x224 */ u8 effectValues[4];
     /* 0x227 */ char unk_228[0x2];
     /* 0x22A */ u8 unk_22A[8];
-    /* 0x232 */ u8 unk_232;
+    /* 0x232 */ u8 bFadeConfigSetsVolume;
     /* 0x233 */ u8 unk_233;
     /* 0x234 */ u8 unk_234;
     /* 0x235 */ u8 defaultReverbType;

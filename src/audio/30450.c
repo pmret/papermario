@@ -5,7 +5,10 @@ s32 D_80078DB0 = FALSE;
 u16 D_80078DB4 = 0;
 u16 D_80078DB6 = 0;
 
-// chunks of data, not sure what
+// lists of data:
+//  u8 trackIdx
+//  u8 volume?
+// repeated until idx = 0
 s32 D_80078DB8[] = { 0x025E0350, 0x04640554, 0x00000000, };
 s32 D_80078DC4[] = { 0x0264036E, 0x045A0000, };
 s32 D_80078DCC[] = { 0x025F0000, };
@@ -603,10 +606,10 @@ MusicError func_80055DDC(s32 songName, s32 arg1) {
     error = func_80055CE8(songName, &trackData, &bgmPlayer);
 
     if (error == MUSIC_ERROR_NONE) {
-        s32* temp_v0 = func_80055EB4(arg1);
+        s8* temp_v0 = func_80055EB4(arg1);
 
         if (temp_v0 != NULL) {
-            func_8005087C(bgmPlayer, temp_v0, 1);
+            func_8005087C(bgmPlayer, temp_v0, TRUE);
         } else {
             error = MUSIC_ERROR_11;
         }
@@ -623,10 +626,10 @@ MusicError func_80055E48(s32 songName, s32 arg1) {
     error = func_80055CE8(songName, &trackData, &bgmPlayer);
 
     if (error == MUSIC_ERROR_NONE) {
-        s32* temp_v0 = func_80055EB4(arg1);
+        s8* temp_v0 = func_80055EB4(arg1);
 
         if (temp_v0 != NULL) {
-            func_8005087C(bgmPlayer, temp_v0, 0);
+            func_8005087C(bgmPlayer, temp_v0, FALSE);
         } else {
             error = MUSIC_ERROR_11;
         }
