@@ -1,7 +1,7 @@
 #include "common.h"
 #include "effects.h"
 #include "ld_addrs.h"
-#include "entity_script.h"
+#include "entity.h"
 
 extern EntityBlueprint Entity_SuperBlockContent;
 
@@ -100,13 +100,13 @@ unsigned char* Entity_SuperBlock_Palettes[] = {
     D_0A000260_E4A900
 };
 
-s8 D_802EA870[] = {
+s8 Entity_SuperBlock_PalData[] = {
     20, 0,
     2,  1,
     2,  2,
     20, 3,
-    2, 2,
-    1, 2,
+    2,  2,
+    1,  2,
     -1, -1,
 };
 
@@ -119,23 +119,22 @@ void entity_SuperBlockContent_setupGfx(s32 entityIndex) {
     s32 alpha;
     Matrix4f sp18;
 
-
     if (data->paletteTimer == 0) {
         s32 temp = data->paletteArrOffset;
         temp += 2;
-        if (D_802EA870[temp] > 0) {
-            data->paletteTimer = D_802EA870[temp];
+        if (Entity_SuperBlock_PalData[temp] > 0) {
+            data->paletteTimer = Entity_SuperBlock_PalData[temp];
             data->paletteArrOffset = temp;
         } else {
-            data->paletteTimer = D_802EA870[0];
+            data->paletteTimer = Entity_SuperBlock_PalData[0];
             data->paletteArrOffset = 0;
         }
     } else {
         data->paletteTimer--;
     }
 
-    palette = (u8*)((s32)entity->vertexData + (u16)(Entity_SuperBlock_Palettes[D_802EA870[data->paletteArrOffset + 1]]));
-    dlist = data->unk_12C;
+    palette = ENTITY_ADDR(entity, u8*, Entity_SuperBlock_Palettes[Entity_SuperBlock_PalData[data->paletteArrOffset + 1]]);
+    dlist = data->gfx2;
 
     gDPPipeSync(gfxPos++);
     guRotateF(sp18, entity_SuperBlockContent_get_previous_yaw(data, 1), 0.0f, 1.0f, 0.0f);
@@ -210,20 +209,20 @@ void entity_SuperBlockContent_idle(Entity* entity) {
 void entity_init_SuperBlockContent(Entity* entity) {
     SuperBlockContentData* data = entity->dataBuf.superBlockContent;
 
-    data->unk_128 = Entity_SuperBlockContent_Render;
-    data->unk_12C = Entity_SuperBlockContent_Render2;
+    data->gfx1 = Entity_SuperBlockContent_Render;
+    data->gfx2 = Entity_SuperBlockContent_Render2;
     entity->renderSetupFunc = entity_SuperBlockContent_setupGfx;
 }
 
 void entity_init_UltraBlockContent(Entity* entity) {
     SuperBlockContentData* data = entity->dataBuf.superBlockContent;
 
-    data->unk_128 = Entity_UltraBlockContent_Render;
-    data->unk_12C = Entity_UltraBlockContent_Render2;
+    data->gfx1 = Entity_UltraBlockContent_Render;
+    data->gfx2 = Entity_UltraBlockContent_Render2;
     entity->renderSetupFunc = entity_SuperBlockContent_setupGfx;
 }
 
-extern Gfx D_802E9828[];
+extern Gfx Entity_RenderNone[];
 
 EntityScript Entity_SuperBlockContent_Script = {
     es_SetCallback(entity_SuperBlockContent_idle, 0)
@@ -235,58 +234,58 @@ EntityScript Entity_UltraBlockContent_Script = {
 };
 
 EntityModelScript Entity_SuperBlock_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(Entity_SuperBlock_Render, RENDER_MODE_ALPHATEST);
-
-EntityModelScript Entity_SuperBlockContent_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(D_802E9828, RENDER_MODE_SURFACE_XLU_LAYER2);
-
+EntityModelScript Entity_SuperBlockContent_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(Entity_RenderNone, RENDER_MODE_SURFACE_XLU_LAYER2);
 EntityModelScript Entity_UltraBlock_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(Entity_UltraBlock_Render, RENDER_MODE_ALPHATEST);
-
-EntityModelScript Entity_UltraBlockContent_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(D_802E9828, RENDER_MODE_SURFACE_XLU_LAYER2);
+EntityModelScript Entity_UltraBlockContent_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(Entity_RenderNone, RENDER_MODE_SURFACE_XLU_LAYER2);
 
 EntityBlueprint Entity_SuperBlock = {
     .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200,
     .typeDataSize = sizeof(BlockData),
     .renderCommandList = Entity_SuperBlock_RenderScript,
-    .modelAnimationNodes = 0x00000000,
+    .modelAnimationNodes = 0,
     .fpInit = entity_SuperBlock_init,
     .updateEntityScript = Entity_SuperBlock_Script,
     .fpHandleCollision = entity_block_handle_collision,
-    {{ entity_model_SuperBlock_ROM_START, entity_model_SuperBlock_ROM_END }},
+    { .dma = ENTITY_ROM(SuperBlock) },
     .entityType = ENTITY_TYPE_SUPER_BLOCK,
     .aabbSize = { 25, 25, 25 }
 };
+
 EntityBlueprint Entity_SuperBlockContent = {
     .flags = ENTITY_FLAGS_SKIP_UPDATE_INVERSE_ROTATION_MATRIX,
     .typeDataSize = sizeof(SuperBlockContentData),
     .renderCommandList = Entity_SuperBlockContent_RenderScript,
-    .modelAnimationNodes = 0x00000000,
+    .modelAnimationNodes = 0,
     .fpInit = entity_init_SuperBlockContent,
     .updateEntityScript = Entity_SuperBlockContent_Script,
-    .fpHandleCollision = 0x00000000,
-    {{ entity_model_SuperBlockContent_ROM_START, entity_model_SuperBlockContent_ROM_END }},
+    .fpHandleCollision = NULL,
+    { .dma = ENTITY_ROM(SuperBlockContent) },
     .entityType = ENTITY_TYPE_SUPER_BLOCK_HIT_EFFECT,
     .aabbSize = { 18, 6, 18 }
 };
+
 EntityBlueprint Entity_UltraBlock = {
     .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200,
     .typeDataSize = sizeof(BlockData),
     .renderCommandList = Entity_UltraBlock_RenderScript,
-    .modelAnimationNodes = 0x00000000,
+    .modelAnimationNodes = 0,
     .fpInit = entity_UltraBlock_init,
     .updateEntityScript = Entity_SuperBlock_Script,
     .fpHandleCollision = entity_block_handle_collision,
-    {{ entity_model_UltraBlock_ROM_START, entity_model_UltraBlock_ROM_END }},
+    { .dma = ENTITY_ROM(UltraBlock) },
     .entityType = ENTITY_TYPE_ULTRA_BLOCK,
     .aabbSize = { 25, 25, 25 }
 };
+
 EntityBlueprint Entity_UltraBlockContent = {
     .flags = ENTITY_FLAGS_SKIP_UPDATE_INVERSE_ROTATION_MATRIX,
     .typeDataSize = sizeof(SuperBlockContentData),
     .renderCommandList = Entity_UltraBlockContent_RenderScript,
-    .modelAnimationNodes = 0x00000000,
+    .modelAnimationNodes = 0,
     .fpInit = entity_init_UltraBlockContent,
     .updateEntityScript = Entity_UltraBlockContent_Script,
-    .fpHandleCollision = 0x00000000,
-    {{ entity_model_UltraBlockContent_ROM_START, entity_model_UltraBlockContent_ROM_END }},
+    .fpHandleCollision = NULL,
+    { .dma = ENTITY_ROM(UltraBlockContent) },
     .entityType = ENTITY_TYPE_ULTRA_BLOCK_HIT_EFFECT,
     .aabbSize = { 18, 6, 18 }
 };

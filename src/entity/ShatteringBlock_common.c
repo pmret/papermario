@@ -1,5 +1,5 @@
 #include "common.h"
-#include "entity_script.h"
+#include "entity.h"
 
 void entity_shattering_setupGfx(s32 entityIndex);
 
@@ -16,7 +16,7 @@ void entity_shattering_init_pieces(Entity* entity, Gfx** dlists, Mtx* matrices) 
     s32 rotSpeed;
     f32 fallSpeed;
 
-    data->fragmentDisplayLists = (Gfx**)((s32)entity->vertexData + (u16)(dlists));
+    data->fragmentDisplayLists = ENTITY_ADDR(entity, Gfx**, dlists);
     entity->renderSetupFunc = entity_shattering_setupGfx;
     entity->alpha = 255;
     entity->position.y = data->originalPosY;
@@ -31,9 +31,7 @@ void entity_shattering_init_pieces(Entity* entity, Gfx** dlists, Mtx* matrices) 
     data->alpha = 255;
 
     for (i = 0; i < 24; i++) {
-        s32 mtxOffset = (u16)(matrices++);
-        do {} while (0);
-        guMtxL2F(mtxFragment, (Mtx*)((s32)entity->vertexData + mtxOffset));
+        guMtxL2F(mtxFragment, ENTITY_ADDR(entity, Mtx*, matrices++));
         guMtxCatF(mtxTrans, mtxFragment, mtxFragment);
         data->fragmentPosX[i] = mtxFragment[3][0];
         data->fragmentPosY[i] = mtxFragment[3][1];
@@ -191,7 +189,7 @@ void entity_shattering_setupGfx(s32 entityIndex) {
         guMtxF2L(mtx, &gDisplayContext->matrixStack[gMatrixListPos]);
 
         gSPMatrix(gfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-        fragmentDlist = (Gfx*)((s32)entity->vertexData + (u16)(*gfx++));
+        fragmentDlist = ENTITY_ADDR(entity, Gfx*, *gfx++);
         gSPDisplayList(gfxPos++, fragmentDlist);
         gSPPopMatrix(gfxPos++, G_MTX_MODELVIEW);
     }

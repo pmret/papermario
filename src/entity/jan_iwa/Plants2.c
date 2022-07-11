@@ -1,19 +1,19 @@
 #include "common.h"
 #include "effects.h"
-#include "entity_script.h"
+#include "entity.h"
 #include "animation_script.h"
 #include "ld_addrs.h"
 
-extern EntityBlueprint D_802BCC44_E2F574;
-extern EntityBlueprint D_802BCC68_E2F598;
-extern EntityBlueprint D_802BCC8C_E2F5BC;
-extern EntityBlueprint D_802BCCB0_E2F5E0;
-extern EntityBlueprint D_802BCCD4_E2F604;
-extern EntityBlueprint D_802BCCF8_E2F628;
-extern EntityBlueprint D_802BCD1C_E2F64C;
-extern EntityBlueprint D_802BCD40_E2F670;
+extern EntityBlueprint Entity_MunchlesiaReset;
+extern EntityBlueprint Entity_MunchlesiaGrab;
+extern EntityBlueprint Entity_MunchlesiaEnvelop;
+extern EntityBlueprint Entity_MunchlesiaBeginChew;
+extern EntityBlueprint Entity_MunchlesiaChewing;
+extern EntityBlueprint Entity_MunchlesiaSpitOut;
+extern EntityBlueprint Entity_MunchlesiaReset1;
+extern EntityBlueprint Entity_MunchlesiaReset2;
 
-extern EntityModelScript D_802E9830;
+extern EntityModelScript Entity_RenderNone_Script;
 
 extern AnimScript Entity_BellbellPlant_AnimationIdle;
 extern AnimScript Entity_BellbellPlant_AnimationUse;
@@ -36,20 +36,6 @@ extern AnimScript Entity_MunchlesiaSpitOut_Animation;
 extern StaticAnimatorNode* Entity_MunchlesiaSpitOut_Mesh[];
 extern AnimScript Entity_MunchlesiaReset1_Animation;
 extern StaticAnimatorNode* Entity_MunchlesiaReset1_Mesh[];
-
-// size unknown
-typedef struct structE2E5F0 {
-    /* 0x00 */ s32 unk_00;
-    /* 0x04 */ s8 unk_04[0x8];
-    /* 0x0C */ f32 unk_0C;
-    /* 0x10 */ f32 unk_10;
-    /* 0x14 */ f32 unk_14;
-    /* 0x18 */ f32 unk_18;
-} structE2E5F0;
-
-typedef struct TrumpetPlantData {
-    /* 0x0 */ s32 numCoins;
-} TrumpetPlantData; // size = 0x4
 
 void entity_BellbellPlant_idle(Entity* entity) {
     if ((gPlayerStatus.animFlags & PLAYER_STATUS_ANIM_FLAGS_INTERACT_PROMPT_AVAILABLE) &&
@@ -77,7 +63,7 @@ void entity_TrumpetPlant_create_effect(Entity* entity) {
 }
 
 void entity_TrumpetPlant_spawn_coin(Entity* entity) {
-    TrumpetPlantData* data = entity->dataBuf.any;
+    TrumpetPlantData* data = entity->dataBuf.trumpetPlant;
 
     entity_TrumpetPlant_create_effect(entity);
     if (data->numCoins < 3) {
@@ -124,13 +110,13 @@ void func_802BC0B8_E2E9E8(Entity* entity) {
 }
 
 void func_802BC0F0_E2EA20(Entity* entity) {
-    structE2E5F0* data = (structE2E5F0*)entity->dataBuf.unk;
+    MunchlesiaData* data = entity->dataBuf.munchlesia;
     data->unk_18 = fabs(dist2D(entity->position.x, entity->position.z, gPlayerStatus.position.x, gPlayerStatus.position.z) * 0.25);
     data->unk_14 = atan2(gPlayerStatus.position.x, gPlayerStatus.position.z, entity->position.x, entity->position.z);
 }
 
 void func_802BC17C_E2EAAC(Entity* entity) {
-    structE2E5F0* data = (structE2E5F0*)entity->dataBuf.unk;
+    MunchlesiaData* data = entity->dataBuf.munchlesia;
 
     gCameras[CAM_DEFAULT].targetPos.x = gPlayerStatus.position.x;
     gCameras[CAM_DEFAULT].targetPos.y = gPlayerStatus.position.y;
@@ -143,22 +129,22 @@ s32 entity_Munchlesia_create_child(Entity* entity, EntityBlueprint* EntityBluepr
 }
 
 void func_802BC220_E2EB50(Entity* entity) {
-    structE2E5F0* data = (structE2E5F0*)entity->dataBuf.unk;
-    data->unk_00 = entity_Munchlesia_create_child(entity, &D_802BCC44_E2F574);
+    MunchlesiaData* data = entity->dataBuf.munchlesia;
+    data->unk_00 = entity_Munchlesia_create_child(entity, &Entity_MunchlesiaReset);
 }
 
 void func_802BC250_E2EB80(Entity* entity) {
-    entity_Munchlesia_create_child(entity, &D_802BCC68_E2F598);
+    entity_Munchlesia_create_child(entity, &Entity_MunchlesiaGrab);
 }
 
 void func_802BC274_E2EBA4(Entity* entity) {
     subtract_hp(1);
-    entity_Munchlesia_create_child(entity, &D_802BCC8C_E2F5BC);
+    entity_Munchlesia_create_child(entity, &Entity_MunchlesiaEnvelop);
     set_action_state(ACTION_STATE_USE_SPRING);
 }
 
 void func_802BC2B4_E2EBE4(Entity* entity) {
-    entity_Munchlesia_create_child(entity, &D_802BCCB0_E2F5E0);
+    entity_Munchlesia_create_child(entity, &Entity_MunchlesiaBeginChew);
     gPlayerStatus.prevActionState = 0;
     gPlayerStatus.actionState = 0;
     gPlayerStatus.flags &= ~PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
@@ -166,20 +152,20 @@ void func_802BC2B4_E2EBE4(Entity* entity) {
 }
 
 void func_802BC308_E2EC38(Entity* entity) {
-    entity_Munchlesia_create_child(entity, &D_802BCCD4_E2F604);
+    entity_Munchlesia_create_child(entity, &Entity_MunchlesiaChewing);
 }
 
 void func_802BC32C_E2EC5C(Entity* entity) {
-    entity_Munchlesia_create_child(entity, &D_802BCCF8_E2F628);
+    entity_Munchlesia_create_child(entity, &Entity_MunchlesiaSpitOut);
     enable_partner_ai();
 }
 
 void entity_Munchlesia_create_child_reset1(Entity* entity) {
-    entity_Munchlesia_create_child(entity, &D_802BCD1C_E2F64C);
+    entity_Munchlesia_create_child(entity, &Entity_MunchlesiaReset1);
 }
 
 void entity_Munchlesia_create_child_reset2(Entity* entity) {
-    entity_Munchlesia_create_child(entity, &D_802BCD40_E2F670);
+    entity_Munchlesia_create_child(entity, &Entity_MunchlesiaReset2);
 }
 
 void func_802BC3A0_E2ECD0(void) {
@@ -189,13 +175,13 @@ void func_802BC3A0_E2ECD0(void) {
 }
 
 void entity_MunchlesiaChewing_init(Entity* entity) {
-    structE2E5F0* data = (structE2E5F0*)entity->dataBuf.unk;
+    MunchlesiaData* data = entity->dataBuf.munchlesia;
     data->unk_0C = gPlayerStatus.position.y;
     data->unk_10 = 0;
 }
 
 void func_802BC3E4_E2ED14(Entity* entity) {
-    structE2E5F0* data = (structE2E5F0*)entity->dataBuf.unk;
+    MunchlesiaData* data = entity->dataBuf.munchlesia;
     gPlayerStatus.position.y = data->unk_0C + (sin_rad((data->unk_10 * TAU) / 360.0f) * 3.0f);
 
     data->unk_10 += 24.0f;
@@ -330,44 +316,17 @@ EntityScript Entity_MunchlesiaReset2_Script = {
     es_End
 };
 
-s32 Entity_MunchlesiaReset_dma[] = {
-    entity_model_MunchlesiaReset_gfx_ROM_START, entity_model_MunchlesiaReset_gfx_ROM_END,
-    entity_model_MunchlesiaReset_anim_ROM_START, entity_model_MunchlesiaReset_anim_ROM_END
-};
-s32 Entity_MunchlesiaGrab_dma[] = {
-    entity_model_MunchlesiaGrab_gfx_ROM_START, entity_model_MunchlesiaGrab_gfx_ROM_END,
-    entity_model_MunchlesiaGrab_anim_ROM_START, entity_model_MunchlesiaGrab_anim_ROM_END
-};
-s32 Entity_MunchlesiaEnvelop_dma[] = {
-    entity_model_MunchlesiaEnvelop_gfx_ROM_START, entity_model_MunchlesiaEnvelop_gfx_ROM_END,
-    entity_model_MunchlesiaEnvelop_anim_ROM_START, entity_model_MunchlesiaEnvelop_anim_ROM_END
-};
-s32 Entity_MunchlesiaBeginChew_dma[] = {
-    entity_model_MunchlesiaBeginChew_gfx_ROM_START, entity_model_MunchlesiaBeginChew_gfx_ROM_END,
-    entity_model_MunchlesiaBeginChew_anim_ROM_START, entity_model_MunchlesiaBeginChew_anim_ROM_END
-};
-s32 Entity_MunchlesiaChewing_dma[] = {
-    entity_model_MunchlesiaChewing_gfx_ROM_START, entity_model_MunchlesiaChewing_gfx_ROM_END,
-    entity_model_MunchlesiaChewing_anim_ROM_START, entity_model_MunchlesiaChewing_anim_ROM_END
-};
-s32 Entity_MunchlesiaSpitOut_dma[] = {
-    entity_model_MunchlesiaSpitOut_gfx_ROM_START, entity_model_MunchlesiaSpitOut_gfx_ROM_END,
-    entity_model_MunchlesiaSpitOut_anim_ROM_START, entity_model_MunchlesiaSpitOut_anim_ROM_END
-};
-s32 Entity_MunchlesiaReset1_dma[] = {
-    entity_model_MunchlesiaReset1_gfx_ROM_START, entity_model_MunchlesiaReset1_gfx_ROM_END,
-    entity_model_MunchlesiaReset1_anim_ROM_START, entity_model_MunchlesiaReset1_anim_ROM_END
-};
-s32 Entity_BellbellPlant_dma[] = {
-    entity_model_BellbellPlant_gfx_ROM_START, entity_model_BellbellPlant_gfx_ROM_END,
-    entity_model_BellbellPlant_anim_ROM_START, entity_model_BellbellPlant_anim_ROM_END
-};
-s32 Entity_TrumpetPlant_dma[] = {
-    entity_model_TrumpetPlant_gfx_ROM_START, entity_model_TrumpetPlant_gfx_ROM_END,
-    entity_model_TrumpetPlant_anim_ROM_START, entity_model_TrumpetPlant_anim_ROM_END
-};
+DmaEntry Entity_MunchlesiaReset_dma[] = { ENTITY_ROM(MunchlesiaReset_gfx), ENTITY_ROM(MunchlesiaReset_anim) };
+DmaEntry Entity_MunchlesiaGrab_dma[] = { ENTITY_ROM(MunchlesiaGrab_gfx), ENTITY_ROM(MunchlesiaGrab_anim) };
+DmaEntry Entity_MunchlesiaEnvelop_dma[] = { ENTITY_ROM(MunchlesiaEnvelop_gfx), ENTITY_ROM(MunchlesiaEnvelop_anim) };
+DmaEntry Entity_MunchlesiaBeginChew_dma[] = { ENTITY_ROM(MunchlesiaBeginChew_gfx), ENTITY_ROM(MunchlesiaBeginChew_anim) };
+DmaEntry Entity_MunchlesiaChewing_dma[] = { ENTITY_ROM(MunchlesiaChewing_gfx), ENTITY_ROM(MunchlesiaChewing_anim) };
+DmaEntry Entity_MunchlesiaSpitOut_dma[] = { ENTITY_ROM(MunchlesiaSpitOut_gfx), ENTITY_ROM(MunchlesiaSpitOut_anim) };
+DmaEntry Entity_MunchlesiaReset1_dma[] = { ENTITY_ROM(MunchlesiaReset1_gfx), ENTITY_ROM(MunchlesiaReset1_anim) };
+DmaEntry Entity_BellbellPlant_dma[] = { ENTITY_ROM(BellbellPlant_gfx), ENTITY_ROM(BellbellPlant_anim) };
+DmaEntry Entity_TrumpetPlant_dma[] = { ENTITY_ROM(TrumpetPlant_gfx), ENTITY_ROM(TrumpetPlant_anim) };
 
-EntityBlueprint D_802BCBD8_E2F508 = {
+EntityBlueprint Entity_BellbellPlant = {
     .flags = ENTITY_FLAGS_SHOWS_INSPECT_PROMPT | ENTITY_FLAGS_SQUARE_SHADOW | ENTITY_FLAGS_400 | ENTITY_FLAGS_SET_SHADOW_FLAG200 | ENTITY_FLAGS_HAS_ANIMATED_MODEL,
     .typeDataSize = 0,
     .renderCommandList = Entity_BellbellPlant_AnimationIdle,
@@ -375,137 +334,137 @@ EntityBlueprint D_802BCBD8_E2F508 = {
     .fpInit = NULL,
     .updateEntityScript = Entity_BellbellPlant_Script,
     .fpHandleCollision = NULL,
-    {{ Entity_BellbellPlant_dma, 0 }},
+    { .dmaList = Entity_BellbellPlant_dma },
     .entityType = ENTITY_TYPE_BELLBELL_PLANT,
     .aabbSize = { 30, 40, 30 }
 };
 
-EntityBlueprint D_802BCBFC_E2F52C = {
+EntityBlueprint Entity_TrumpetPlant = {
     .flags = ENTITY_FLAGS_SHOWS_INSPECT_PROMPT | ENTITY_FLAGS_HAS_ANIMATED_MODEL,
-    .typeDataSize = 4,
+    .typeDataSize = sizeof(TrumpetPlantData),
     .renderCommandList = Entity_TrumpetPlant_AnimationIdle,
     .modelAnimationNodes = Entity_TrumpetPlant_Mesh,
     .fpInit = NULL,
     .updateEntityScript = Entity_TrumpetPlant_Script,
     .fpHandleCollision = NULL,
-    {{ Entity_TrumpetPlant_dma, 0 }},
+    { .dmaList = Entity_TrumpetPlant_dma },
     .entityType = ENTITY_TYPE_TRUMPET_PLANT,
     .aabbSize = { 30, 40, 30 }
 };
 
-EntityBlueprint D_802BCC20_E2F550 = {
+EntityBlueprint Entity_Munchlesia = {
     .flags = ENTITY_FLAGS_SQUARE_SHADOW | ENTITY_FLAGS_400 | ENTITY_FLAGS_SET_SHADOW_FLAG200,
-    .typeDataSize = 0x1C,
-    .renderCommandList = D_802E9830,
+    .typeDataSize = sizeof(MunchlesiaData),
+    .renderCommandList = Entity_RenderNone_Script,
     .modelAnimationNodes = 0,
     .fpInit = entity_Munchlesia_init,
     .updateEntityScript = Entity_Munchlesia_Script,
     .fpHandleCollision = NULL,
-    {{ 0, 0 }},
+    { .dmaList = NULL },
     .entityType = ENTITY_TYPE_MUNCHLESIA,
     .aabbSize = { 45, 20, 45 }
 };
 
-EntityBlueprint D_802BCC44_E2F574 = {
+EntityBlueprint Entity_MunchlesiaReset = {
     .flags = ENTITY_FLAGS_SKIP_UPDATE_INVERSE_ROTATION_MATRIX | ENTITY_FLAGS_HAS_ANIMATED_MODEL,
-    .typeDataSize = 0x1C,
+    .typeDataSize = sizeof(MunchlesiaData),
     .renderCommandList = Entity_MunchlesiaReset_AnimationIdle,
     .modelAnimationNodes = Entity_MunchlesiaReset_Mesh,
     .fpInit = NULL,
     .updateEntityScript = Entity_MunchlesiaReset_Script,
     .fpHandleCollision = NULL,
-    {{ Entity_MunchlesiaReset_dma, 0 }},
+    { .dmaList = Entity_MunchlesiaReset_dma },
     .entityType = ENTITY_TYPE_RESET_MUNCHLESIA,
     .aabbSize = { 40, 20, 40 }
 };
 
-EntityBlueprint D_802BCC68_E2F598 = {
+EntityBlueprint Entity_MunchlesiaGrab = {
     .flags = ENTITY_FLAGS_SKIP_UPDATE_INVERSE_ROTATION_MATRIX | ENTITY_FLAGS_HAS_ANIMATED_MODEL,
-    .typeDataSize = 0x1C,
+    .typeDataSize = sizeof(MunchlesiaData),
     .renderCommandList = Entity_MunchlesiaGrab_Animation,
     .modelAnimationNodes = Entity_MunchlesiaGrab_Mesh,
     .fpInit = NULL,
     .updateEntityScript = Entity_MunchlesiaGrab_Script,
     .fpHandleCollision = NULL,
-    {{ Entity_MunchlesiaGrab_dma, 0 }},
+    { .dmaList = Entity_MunchlesiaGrab_dma },
     .entityType = ENTITY_TYPE_MUNCHLESIA_GRAB,
     .aabbSize = { 40, 20, 40 }
 };
 
-EntityBlueprint D_802BCC8C_E2F5BC = {
+EntityBlueprint Entity_MunchlesiaEnvelop = {
     .flags = ENTITY_FLAGS_SKIP_UPDATE_INVERSE_ROTATION_MATRIX | ENTITY_FLAGS_HAS_ANIMATED_MODEL,
-    .typeDataSize = 0x1C,
+    .typeDataSize = sizeof(MunchlesiaData),
     .renderCommandList = Entity_MunchlesiaEnvelop_Animation,
     .modelAnimationNodes = Entity_MunchlesiaEnvelop_Mesh,
     .fpInit = NULL,
     .updateEntityScript = Entity_MunchlesiaEnvelop_Script,
     .fpHandleCollision = NULL,
-    {{ Entity_MunchlesiaEnvelop_dma, 0 }},
+    { .dmaList = Entity_MunchlesiaEnvelop_dma },
     .entityType = ENTITY_TYPE_MUNCHLESIA_ENVELOP,
     .aabbSize = { 40, 20, 40 }
 };
 
-EntityBlueprint D_802BCCB0_E2F5E0 = {
+EntityBlueprint Entity_MunchlesiaBeginChew = {
     .flags = ENTITY_FLAGS_SKIP_UPDATE_INVERSE_ROTATION_MATRIX | ENTITY_FLAGS_HAS_ANIMATED_MODEL,
-    .typeDataSize = 0x1C,
+    .typeDataSize = sizeof(MunchlesiaData),
     .renderCommandList = Entity_MunchlesiaBeginChew_Animation,
     .modelAnimationNodes = Entity_MunchlesiaBeginChew_Mesh,
     .fpInit = NULL,
     .updateEntityScript = Entity_MunchlesiaBeginChew_Script,
     .fpHandleCollision = NULL,
-    {{ Entity_MunchlesiaBeginChew_dma, 0 }},
+    { .dmaList = Entity_MunchlesiaBeginChew_dma },
     .entityType = ENTITY_TYPE_MUNCHLESIA_BEGIN_CHEW,
     .aabbSize = { 40, 20, 40 }
 };
 
-EntityBlueprint D_802BCCD4_E2F604 = {
+EntityBlueprint Entity_MunchlesiaChewing = {
     .flags = ENTITY_FLAGS_SKIP_UPDATE_INVERSE_ROTATION_MATRIX | ENTITY_FLAGS_HAS_ANIMATED_MODEL,
-    .typeDataSize = 0x1C,
+    .typeDataSize = sizeof(MunchlesiaData),
     .renderCommandList = Entity_MunchlesiaChewing_Animation,
     .modelAnimationNodes = Entity_MunchlesiaChewing_Mesh,
     .fpInit = entity_MunchlesiaChewing_init,
     .updateEntityScript = Entity_MunchlesiaChewing_Script,
     .fpHandleCollision = NULL,
-    {{ Entity_MunchlesiaChewing_dma, 0 }},
+    { .dmaList = Entity_MunchlesiaChewing_dma },
     .entityType = ENTITY_TYPE_MUNCHLESIA_CHEWING,
     .aabbSize = { 40, 20, 40 }
 };
 
-EntityBlueprint D_802BCCF8_E2F628 = {
+EntityBlueprint Entity_MunchlesiaSpitOut = {
     .flags = ENTITY_FLAGS_SKIP_UPDATE_INVERSE_ROTATION_MATRIX | ENTITY_FLAGS_HAS_ANIMATED_MODEL,
-    .typeDataSize = 0x1C,
+    .typeDataSize = sizeof(MunchlesiaData),
     .renderCommandList = Entity_MunchlesiaSpitOut_Animation,
     .modelAnimationNodes = Entity_MunchlesiaSpitOut_Mesh,
     .fpInit = NULL,
     .updateEntityScript = Entity_MunchlesiaSpitOut_Script,
     .fpHandleCollision = NULL,
-    {{ Entity_MunchlesiaSpitOut_dma, 0 }},
+    { .dmaList = Entity_MunchlesiaSpitOut_dma },
     .entityType = ENTITY_TYPE_MUNCHLESIA_SPIT_OUT,
     .aabbSize = { 40, 20, 40 }
 };
 
-EntityBlueprint D_802BCD1C_E2F64C = {
+EntityBlueprint Entity_MunchlesiaReset1 = {
     .flags = ENTITY_FLAGS_SKIP_UPDATE_INVERSE_ROTATION_MATRIX | ENTITY_FLAGS_HAS_ANIMATED_MODEL,
-    .typeDataSize = 0x1C,
+    .typeDataSize = sizeof(MunchlesiaData),
     .renderCommandList = Entity_MunchlesiaReset1_Animation,
     .modelAnimationNodes = Entity_MunchlesiaReset1_Mesh,
     .fpInit = NULL,
     .updateEntityScript = Entity_MunchlesiaReset1_Script,
     .fpHandleCollision = NULL,
-    {{ Entity_MunchlesiaReset1_dma, 0 }},
+    { .dmaList = Entity_MunchlesiaReset1_dma },
     .entityType = ENTITY_TYPE_MUNCHLESIA_RESET1,
     .aabbSize = { 40, 20, 40 }
 };
 
-EntityBlueprint D_802BCD40_E2F670 = {
+EntityBlueprint Entity_MunchlesiaReset2 = {
     .flags = ENTITY_FLAGS_SKIP_UPDATE_INVERSE_ROTATION_MATRIX | ENTITY_FLAGS_HAS_ANIMATED_MODEL,
-    .typeDataSize = 0x1C,
+    .typeDataSize = sizeof(MunchlesiaData),
     .renderCommandList = Entity_MunchlesiaReset_AnimationIdle,
     .modelAnimationNodes = Entity_MunchlesiaReset_Mesh,
     .fpInit = NULL,
     .updateEntityScript = Entity_MunchlesiaReset2_Script,
     .fpHandleCollision = NULL,
-    {{ Entity_MunchlesiaReset_dma, 0 }},
+    { .dmaList = Entity_MunchlesiaReset_dma },
     .entityType = ENTITY_TYPE_MUNCHLESIA_RESET2,
     .aabbSize = { 40, 20, 40 }
 };

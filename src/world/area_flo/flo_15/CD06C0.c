@@ -1,5 +1,6 @@
 #include "flo_15.h"
 #include "message_ids.h"
+#include "entity.h"
 #include "sprite/npc/sun.h"
 
 enum {
@@ -357,7 +358,7 @@ EvtScript N(802412E0) = {
 
 EvtScript N(makeEntities) = {
     EVT_IF_EQ(EVT_SAVE_FLAG(1401), 0)
-        EVT_CALL(MakeEntity, 0x802BCF00, -180, 0, -18, 0, MAKE_ENTITY_END)
+        EVT_CALL(MakeEntity, EVT_PTR(Entity_BombableRock), -180, 0, -18, 0, MAKE_ENTITY_END)
         EVT_CALL(AssignScript, EVT_PTR(N(802412E0)))
     EVT_END_IF
     EVT_RETURN

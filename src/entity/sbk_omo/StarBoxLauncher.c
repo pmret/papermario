@@ -1,6 +1,6 @@
 #include "common.h"
 #include "effects.h"
-#include "entity_script.h"
+#include "entity.h"
 #include "ld_addrs.h"
 
 extern Gfx Entity_StarBoxLauncher_RenderBottom[];
@@ -41,7 +41,7 @@ void entity_StarBoxLauncher_setupGfx(s32 entityIndex) {
     guMtxCatF(sp50, sp10, sp50);
     guMtxF2L(sp50, &gDisplayContext->matrixStack[gMatrixListPos]);
     gSPMatrix(gfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    gSPDisplayList(gfxPos++, (Gfx*)((s32)entity->vertexData + (u16)Entity_StarBoxLauncher_RenderBottom));
+    gSPDisplayList(gfxPos++, ENTITY_ADDR(entity, Gfx*, Entity_StarBoxLauncher_RenderBottom));
     gSPPopMatrix(gfxPos++, G_MTX_MODELVIEW);
 
     gDPPipeSync(gfxPos++);
@@ -247,7 +247,7 @@ void entity_StarBoxLauncher_init(Entity* entity) {
 
 
 
-EntityScript D_802BCAC4_E31414 = {
+EntityScript Entity_StarBoxLauncher_Script = {
     es_SetCallback(entity_StarBoxLauncher_check_launch, 0)
     es_SetCallback(entity_StarBoxLauncher_shake_box, 4)
     es_Call(entity_StarBoxLauncher_restore_pos)
@@ -260,17 +260,17 @@ EntityScript D_802BCAC4_E31414 = {
     es_End
 };
 
-EntityModelScript D_802BCB28_E31478 = STANDARD_ENTITY_MODEL_SCRIPT(Entity_StarBoxLauncher_RenderTop, RENDER_MODE_SURFACE_OPA);
+EntityModelScript Entity_StarBoxLauncher_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(Entity_StarBoxLauncher_RenderTop, RENDER_MODE_SURFACE_OPA);
 
-EntityBlueprint D_802BCB44_E31494 = {
+EntityBlueprint Entity_StarBoxLauncher = {
     .flags = ENTITY_FLAGS_8000,
     .typeDataSize = sizeof(StarBoxLauncherData),
-    .renderCommandList = D_802BCB28_E31478,
+    .renderCommandList = Entity_StarBoxLauncher_RenderScript,
     .modelAnimationNodes = 0,
     .fpInit = entity_StarBoxLauncher_init,
-    .updateEntityScript = D_802BCAC4_E31414,
+    .updateEntityScript = Entity_StarBoxLauncher_Script,
     .fpHandleCollision = NULL,
-    {{ entity_model_StarBoxLauncher_ROM_START, entity_model_StarBoxLauncher_ROM_END }},
+    { .dma = ENTITY_ROM(StarBoxLauncher) },
     .entityType = ENTITY_TYPE_STAR_BOX_LAUCHER,
     .aabbSize = { 35, 35, 35 }
 };

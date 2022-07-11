@@ -1,7 +1,7 @@
 #include "common.h"
 #include "fio.h"
 #include "ld_addrs.h"
-#include "entity_script.h"
+#include "entity.h"
 
 extern Mtx Entity_SaveBlock_Mtx;
 extern Gfx Entity_SaveBlock_RenderContent[];
@@ -16,11 +16,9 @@ void entity_SaveBlock_setupGfx(s32 index) {
     SaveBlockData* blockData = entity->dataBuf.saveBlock;
     Matrix4f sp18;
     Matrix4f sp58;
-    s32 mtxOffset;
     Gfx* dlist;
 
-    mtxOffset = (u16)(&Entity_SaveBlock_Mtx);
-    guMtxL2F(sp18, (Mtx*)((s32)entity->vertexData + mtxOffset));
+    guMtxL2F(sp18, ENTITY_ADDR(entity, Mtx*, &Entity_SaveBlock_Mtx));
     sp18[3][1] += 12.5f;
     guRotateF(sp58, blockData->angle, 0.0f, 1.0f, 0.0f);
     guMtxCatF(sp58, sp18, sp58);
@@ -33,8 +31,8 @@ void entity_SaveBlock_setupGfx(s32 index) {
     gSPDisplayList(gfxPos++, Entity_SaveBlock_RenderContent);
     gSPPopMatrix(gfxPos++, G_MTX_MODELVIEW);
 
-    dlist = (Gfx*)((s32)entity->vertexData + (u16)Entity_SaveBlock_RenderBlock);
-    guMtxL2F(sp58, (Mtx*)((s32)entity->vertexData + mtxOffset));
+    dlist = ENTITY_ADDR(entity, Gfx*, Entity_SaveBlock_RenderBlock);
+    guMtxL2F(sp58, ENTITY_ADDR(entity, Mtx*, &Entity_SaveBlock_Mtx));
     sp58[3][1] += 12.5f;
     gDPPipeSync(gfxPos++);
     guMtxF2L(sp58, &gDisplayContext->matrixStack[gMatrixListPos]);
@@ -167,7 +165,7 @@ EntityBlueprint Entity_SavePoint = {
     .fpInit = entity_SaveBlock_init,
     .updateEntityScript = Entity_SaveBlock_Script,
     .fpHandleCollision = entity_block_handle_collision,
-    {{ (s32)entity_model_SaveBlock_ROM_START, (s32)entity_model_SaveBlock_ROM_END }},
+    { .dma = ENTITY_ROM(SaveBlock) },
     .entityType = ENTITY_TYPE_SAVE_POINT,
     .aabbSize = { 25, 25, 25 }
 };

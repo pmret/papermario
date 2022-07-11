@@ -1,7 +1,7 @@
 #include "common.h"
 #include "effects.h"
 #include "ld_addrs.h"
-#include "entity_script.h"
+#include "entity.h"
 
 extern EntityScript Entity_Chest_ScriptOpened;
 
@@ -9,7 +9,7 @@ extern Gfx Entity_Chest_RenderBox[];
 extern Gfx Entity_Chest_RenderLid[];
 extern Mtx Entity_Chest_lidMtx;
 
-EvtScript D_802EAB30 = {
+EvtScript Entity_Chest_AdjustCam_ISK = {
     EVT_THREAD
         EVT_CALL(GetPlayerPos, LW(0), LW(1), LW(2))
         EVT_CALL(UseSettingsFrom, 0, -195, -358, -555)
@@ -24,7 +24,7 @@ EvtScript D_802EAB30 = {
     EVT_END
 };
 
-EvtScript D_802EAC0C = {
+EvtScript Entity_Chest_ResetCam_ISK = {
     EVT_THREAD
         EVT_CALL(ResetCam, 0, 3)
     EVT_END_THREAD
@@ -32,7 +32,7 @@ EvtScript D_802EAC0C = {
     EVT_END
 };
 
-EvtScript D_802EAC40 = {
+EvtScript Entity_Chest_AdjustCam_TIK = {
     EVT_THREAD
         EVT_CALL(AdjustCam, 0, EVT_FLOAT(8.0), 0, EVT_FLOAT(300.0), EVT_FLOAT(17.5), EVT_FLOAT(-9.5))
     EVT_END_THREAD
@@ -40,7 +40,7 @@ EvtScript D_802EAC40 = {
     EVT_END
 };
 
-EvtScript D_802EAC84 = {
+EvtScript Entity_Chest_AdjustCam_KZN = {
     EVT_THREAD
         EVT_CALL(AdjustCam, 0, EVT_FLOAT(8.0), 0, EVT_FLOAT(210.0), EVT_FLOAT(21.0), EVT_FLOAT(-16.0))
     EVT_END_THREAD
@@ -48,7 +48,7 @@ EvtScript D_802EAC84 = {
     EVT_END
 };
 
-EvtScript D_802EACC8 = {
+EvtScript Entity_Chest_ResetCam_Default = {
     EVT_THREAD
         EVT_CALL(ResetCam, 0, 3)
     EVT_END_THREAD
@@ -63,11 +63,11 @@ void entity_Chest_adjust_camera(Entity* entity) {
     areaID = gGameStatusPtr->areaID;
     script = NULL;
     if (areaID == AREA_ISK) {
-        script = &D_802EAB30;
+        script = &Entity_Chest_AdjustCam_ISK;
     } else if (areaID == AREA_TIK) {
-        script = &D_802EAC40;
+        script = &Entity_Chest_AdjustCam_TIK;
     } else if (areaID == AREA_KZN) {
-        script = &D_802EAC84;
+        script = &Entity_Chest_AdjustCam_KZN;
     }
     if (script != NULL) {
         start_script(script, EVT_PRIORITY_A, EVT_FLAG_20);
@@ -81,9 +81,9 @@ void entity_Chest_reset_camera(Entity* entity) {
     areaID = gGameStatusPtr->areaID;
     script = NULL;
     if (areaID == AREA_ISK) {
-        script = &D_802EAC0C;
+        script = &Entity_Chest_ResetCam_ISK;
     } else {
-        script = &D_802EACC8;
+        script = &Entity_Chest_ResetCam_Default;
     }
     start_script(script, EVT_PRIORITY_A, EVT_FLAG_20);
 }
@@ -97,11 +97,11 @@ void entity_Chest_setupGfx(s32 entityIndex) {
     Gfx* gfx;
 
     guRotateF(sp58, data->lidAngle, 1.0f, 0.0f, 0.0f);
-    guMtxL2F(sp18, (Mtx*)((s32)entity->vertexData + (u16)(&Entity_Chest_lidMtx)));
+    guMtxL2F(sp18, ENTITY_ADDR(entity, Mtx*, &Entity_Chest_lidMtx));
     guMtxCatF(sp58, sp18, sp18);
     guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
     gSPMatrix(gfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-    gfx = (Gfx*)((s32)entity->vertexData + (u16)Entity_Chest_RenderLid);
+    gfx = ENTITY_ADDR(entity, Gfx*, Entity_Chest_RenderLid);
     gSPDisplayList(gfxPos++, gfx);
     gSPPopMatrix(gfxPos++, G_MTX_MODELVIEW);
     gMasterGfxPos = gfxPos;
@@ -148,7 +148,7 @@ void entity_Chest_begin_opening(Entity* entity) {
     ChestData* data = entity->dataBuf.chest;
     data->postLidAnimDelay = 10;
     data->lidAngle = 0.0f;
-    data->unk_05 = 0;
+    data->openState = 0;
     data->giveItemTimer = 40;
     sfx_play_sound(467);
 }
@@ -157,7 +157,7 @@ void entity_Chest_open(Entity* entity) {
     ChestData* data = entity->dataBuf.chest;
     f32 temp;
 
-    switch (data->unk_05) {
+    switch (data->openState) {
         case 0:
             data->postLidAnimDelay--;
             data->lidAngle -= 1.0f;
@@ -167,20 +167,20 @@ void entity_Chest_open(Entity* entity) {
 
             if (data->postLidAnimDelay == 0) {
                 data->postLidAnimDelay = 8;
-                data->unk_05++;
+                data->openState++;
             }
             break;
         case 1:
             data->postLidAnimDelay--;
             if (data->postLidAnimDelay == 0) {
                 data->lidAnimInterpPhase = 0.0f;
-                data->unk_05++;
+                data->openState++;
             }
             break;
         case 2:
             data->lidAnimInterpPhase += 4.0f;
             if (data->lidAnimInterpPhase >= 180.0f) {
-                data->unk_05++;
+                data->openState++;
             }
             temp = sin_rad(data->lidAnimInterpPhase * TAU / 360.0f) * 3.0f;
             data->lidAngle -= temp;
@@ -189,7 +189,7 @@ void entity_Chest_open(Entity* entity) {
             data->lidAnimInterpPhase += 1.0f;
             if (data->lidAnimInterpPhase >= 190.0f) {
                 data->postLidAnimDelay = 10;
-                data->unk_05++;
+                data->openState++;
             }
             temp = sin_rad(data->lidAnimInterpPhase * TAU / 360.0f) * 2.0f;
             data->lidAngle -= temp;
@@ -200,7 +200,7 @@ void entity_Chest_open(Entity* entity) {
                 if (data->unk_07 != 0) {
                     exec_entity_commandlist(entity);
                 } else {
-                    data->unk_05++;
+                    data->openState++;
                 }
             }
             break;
@@ -487,11 +487,11 @@ EntityBlueprint Entity_GiantChest = {
     .flags = ENTITY_FLAGS_4000,
     .typeDataSize = sizeof(ChestData),
     .renderCommandList = Entity_Chest_RenderScript,
-    .modelAnimationNodes = 0x00000000,
+    .modelAnimationNodes = 0,
     .fpInit = entity_GiantChest_init,
     .updateEntityScript = Entity_GiantChest_Script,
     .fpHandleCollision = NULL,
-    {{ entity_model_Chest_ROM_START, entity_model_Chest_ROM_END }},
+    { .dma = ENTITY_ROM(Chest) },
     .entityType = ENTITY_TYPE_CHEST,
     .aabbSize = { 50, 45, 46 }
 };
@@ -499,11 +499,11 @@ EntityBlueprint Entity_Chest = {
     .flags = ENTITY_FLAGS_8000 | ENTITY_FLAGS_4000,
     .typeDataSize = sizeof(ChestData),
     .renderCommandList = Entity_Chest_RenderScript,
-    .modelAnimationNodes = 0x00000000,
+    .modelAnimationNodes = 0,
     .fpInit = entity_Chest_init,
     .updateEntityScript = Entity_Chest_Script,
     .fpHandleCollision = NULL,
-    {{ entity_model_Chest_ROM_START, entity_model_Chest_ROM_END }},
+    { .dma = ENTITY_ROM(Chest) },
     .entityType = ENTITY_TYPE_CHEST,
     .aabbSize = { 28, 26, 23 }
 };

@@ -3,6 +3,7 @@
 #include "sprite/npc/gate_flower.h"
 #include "sprite/npc/spiny.h"
 #include "effects.h"
+#include "entity.h"
 
 enum {
     NPC_SPINY0,

@@ -1,5 +1,6 @@
 #include "flo_24.h"
 #include "message_ids.h"
+#include "entity.h"
 
 EntryList N(entryList) = {
     { -455.0f, 0.0f, 0.0f,  90.0f },

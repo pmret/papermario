@@ -1,14 +1,7 @@
 #include "common.h"
-#include "entity_script.h"
+#include "entity.h"
 #include "effects.h"
 #include "ld_addrs.h"
-
-extern Gfx D_0A001FA0[];
-extern Gfx D_0A001EF8[];
-extern Gfx D_0A001690[];
-extern Gfx D_0A001840[];
-extern Gfx D_0A001AC8[];
-extern Gfx D_0A001B70[];
 
 extern Gfx Entity_Padlock_Render[];
 extern Gfx Entity_Padlock_RenderShackle[];
@@ -201,7 +194,7 @@ void entity_Padlock_init(Entity* entity) {
 
     entity->renderSetupFunc = entity_Padlock_setupGfx;
     data = entity->dataBuf.padlock;
-    data->shackleMtx = (Mtx*)((s32)entity->vertexData + (u16)&Entity_Padlock_mtxShackle);
+    data->shackleMtx = ENTITY_ADDR(entity, Mtx*, &Entity_Padlock_mtxShackle);
     data->shackleGfx = Entity_Padlock_RenderShackle;
 }
 
@@ -210,7 +203,7 @@ void entity_PadlockRedFrame_init(Entity* entity) {
 
     entity->renderSetupFunc = entity_Padlock_setupGfx;
     data = entity->dataBuf.padlock;
-    data->shackleMtx = (Mtx*)((s32)entity->vertexData + (u16)&Entity_PadlockRedFrame_mtxShackle);
+    data->shackleMtx = ENTITY_ADDR(entity, Mtx*, &Entity_PadlockRedFrame_mtxShackle);
     data->shackleGfx = Entity_PadlockRedFrame_RenderShackle;
 }
 
@@ -219,7 +212,7 @@ void entity_PadlockRedFace_init(Entity* entity) {
 
     entity->renderSetupFunc = entity_Padlock_setupGfx;
     data = entity->dataBuf.padlock;
-    data->shackleMtx = (Mtx*)((s32)entity->vertexData + (u16)&Entity_PadlockRedFace_mtxShackle);
+    data->shackleMtx = ENTITY_ADDR(entity, Mtx*, &Entity_PadlockRedFace_mtxShackle);
     data->shackleGfx = Entity_PadlockRedFace_RenderShackle;
 }
 
@@ -228,72 +221,69 @@ void entity_PadlockBlueFace_init(Entity* entity) {
 
     entity->renderSetupFunc = entity_Padlock_setupGfx;
     data = entity->dataBuf.padlock;
-    data->shackleMtx = (Mtx*)((s32)entity->vertexData + (u16)&Entity_PadlockBlueFace_mtxShackle);
+    data->shackleMtx = ENTITY_ADDR(entity, Mtx*, &Entity_PadlockBlueFace_mtxShackle);
     data->shackleGfx = Entity_PadlockBlueFace_RenderShackle;
 }
 
-EntityScript D_802BCCE0_E2D410 = {
+EntityScript Entity_Padlock_Script = {
     es_SetCallback(entity_Padlock_idle, 0)
     es_SetFlags(ENTITY_FLAGS_PENDING_INSTANCE_DELETE)
     es_End
 };
 
-EntityModelScript D_802BCCF8_E2D428 = STANDARD_ENTITY_MODEL_SCRIPT(Entity_Padlock_Render, RENDER_MODE_SURFACE_OPA);
+EntityModelScript Entity_Padlock_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(Entity_Padlock_Render, RENDER_MODE_SURFACE_OPA);
+EntityModelScript Entity_PadlockRedFrame_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(Entity_PadlockRedFrame_Render, RENDER_MODE_SURFACE_OPA);
+EntityModelScript Entity_PadlockRedFace_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(Entity_PadlockRedFace_Render, RENDER_MODE_SURFACE_OPA);
+EntityModelScript Entity_PadlockBlueFace_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(Entity_PadlockBlueFace_Render, RENDER_MODE_SURFACE_OPA);
 
-EntityModelScript D_802BCD14_E2D444 = STANDARD_ENTITY_MODEL_SCRIPT(Entity_PadlockRedFrame_Render, RENDER_MODE_SURFACE_OPA);
-
-EntityModelScript D_802BCD30_E2D460 = STANDARD_ENTITY_MODEL_SCRIPT(Entity_PadlockRedFace_Render, RENDER_MODE_SURFACE_OPA);
-
-EntityModelScript D_802BCD4C_E2D47C = STANDARD_ENTITY_MODEL_SCRIPT(Entity_PadlockBlueFace_Render, RENDER_MODE_SURFACE_OPA);
-
-EntityBlueprint D_802BCD68_E2D498 = {
+EntityBlueprint Entity_Padlock = {
     .flags = ENTITY_FLAGS_SHOWS_INSPECT_PROMPT | ENTITY_FLAGS_400 | ENTITY_FLAGS_100,
-    .typeDataSize = 0x1C,
-    .renderCommandList = D_802BCCF8_E2D428,
-    .modelAnimationNodes = 0x00000000,
+    .typeDataSize = sizeof(PadlockData),
+    .renderCommandList = Entity_Padlock_RenderScript,
+    .modelAnimationNodes = 0,
     .fpInit = entity_Padlock_init,
-    .updateEntityScript = D_802BCCE0_E2D410,
+    .updateEntityScript = Entity_Padlock_Script,
     .fpHandleCollision = NULL,
-    {{ entity_model_Padlock_ROM_START, entity_model_Padlock_ROM_END }},
+    { .dma = ENTITY_ROM(Padlock) },
     .entityType = ENTITY_TYPE_PADLOCK,
     .aabbSize = { 30, 175, 10 }
 };
 
-EntityBlueprint D_802BCD8C_E2D4BC = {
+EntityBlueprint Entity_PadlockRedFrame = {
     .flags = ENTITY_FLAGS_SHOWS_INSPECT_PROMPT | ENTITY_FLAGS_400 | ENTITY_FLAGS_100,
-    .typeDataSize = 0x1C,
-    .renderCommandList = D_802BCD14_E2D444,
-    .modelAnimationNodes = 0x00000000,
+    .typeDataSize = sizeof(PadlockData),
+    .renderCommandList = Entity_PadlockRedFrame_RenderScript,
+    .modelAnimationNodes = 0,
     .fpInit = entity_PadlockRedFrame_init,
-    .updateEntityScript = D_802BCCE0_E2D410,
+    .updateEntityScript = Entity_Padlock_Script,
     .fpHandleCollision = NULL,
-    {{ entity_model_PadlockRedFrame_ROM_START, entity_model_PadlockRedFrame_ROM_END }},
+    { .dma = ENTITY_ROM(PadlockRedFrame) },
     .entityType = ENTITY_TYPE_PADLOCK_RED_FRAME,
     .aabbSize = { 30, 175, 10 }
 };
 
-EntityBlueprint D_802BCDB0_E2D4E0 = {
+EntityBlueprint Entity_PadlockRedFace = {
     .flags = ENTITY_FLAGS_SHOWS_INSPECT_PROMPT | ENTITY_FLAGS_400 | ENTITY_FLAGS_100,
-    .typeDataSize = 0x1C,
-    .renderCommandList = D_802BCD30_E2D460,
-    .modelAnimationNodes = 0x00000000,
+    .typeDataSize = sizeof(PadlockData),
+    .renderCommandList = Entity_PadlockRedFace_RenderScript,
+    .modelAnimationNodes = 0,
     .fpInit = entity_PadlockRedFace_init,
-    .updateEntityScript = D_802BCCE0_E2D410,
+    .updateEntityScript = Entity_Padlock_Script,
     .fpHandleCollision = NULL,
-    {{ entity_model_PadlockRedFace_ROM_START, entity_model_PadlockRedFace_ROM_END }},
+    { .dma = ENTITY_ROM(PadlockRedFace) },
     .entityType = ENTITY_TYPE_PADLOCK_RED_FACE,
     .aabbSize = { 30, 175, 10 }
  };
 
-EntityBlueprint D_802BCDD4_E2D504 = {
+EntityBlueprint Entity_PadlockBlueFace = {
     .flags = ENTITY_FLAGS_SHOWS_INSPECT_PROMPT | ENTITY_FLAGS_400 | ENTITY_FLAGS_100,
-    .typeDataSize = 0x1C,
-    .renderCommandList = D_802BCD4C_E2D47C,
-    .modelAnimationNodes = 0x00000000,
+    .typeDataSize = sizeof(PadlockData),
+    .renderCommandList = Entity_PadlockBlueFace_RenderScript,
+    .modelAnimationNodes = 0,
     .fpInit = entity_PadlockBlueFace_init,
-    .updateEntityScript = D_802BCCE0_E2D410,
+    .updateEntityScript = Entity_Padlock_Script,
     .fpHandleCollision = NULL,
-    {{ entity_model_PadlockBlueFace_ROM_START, entity_model_PadlockBlueFace_ROM_END }},
+    { .dma = ENTITY_ROM(PadlockBlueFace) },
     .entityType = ENTITY_TYPE_PADLOCK_BLUE_FACE,
     .aabbSize = { 30, 175, 10 }
 };

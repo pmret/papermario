@@ -1,6 +1,6 @@
 #include "kmr_03.h"
 #include "sprite/npc/goompa.h"
-#include "variables.h"
+#include "entity.h"
 
 enum {
     NPC_GOOMPA,

@@ -1,5 +1,5 @@
 #include "common.h"
-#include "entity_script.h"
+#include "entity.h"
 #include "ld_addrs.h"
 
 u8 Entity_Tweester_FaceAnimationData[] = {
@@ -29,13 +29,13 @@ void entity_Tweester_render_inner_whirl(s32 entityIndex) {
     Matrix4f sp58;
     Gfx* gfx;
 
-    guMtxL2F(sp18, (Mtx*)((s32)entity->vertexData + (u16)&Entity_Tweester_mtxInnerWhirl));
+    guMtxL2F(sp18, ENTITY_ADDR(entity, Mtx*, &Entity_Tweester_mtxInnerWhirl));
     guRotateF(sp58, data->innerWhirlRotY, 0.0f, 1.0f, 0.0f);
     guMtxCatF(sp58, sp18, sp18);
     guMtxF2L(sp18, &data->mtxInnerWhirl);
     gDisplayContext->matrixStack[gMatrixListPos] = data->mtxInnerWhirl;
     gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-    gfx = (Gfx*)((s32)entity->vertexData + (u16)Entity_Tweester_RenderInnerWhirl);
+    gfx = ENTITY_ADDR(entity, Gfx*, Entity_Tweester_RenderInnerWhirl);
     gSPDisplayList(gMasterGfxPos++, gfx);
     gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
 }
@@ -47,13 +47,13 @@ void entity_Tweester_render_outer_whirl(s32 entityIndex) {
     Matrix4f sp58;
     Gfx* gfx;
 
-    guMtxL2F(sp18, (Mtx*)((s32)entity->vertexData + (u16)&Entity_Tweester_mtxOuterWhirl));
+    guMtxL2F(sp18, ENTITY_ADDR(entity, Mtx*, &Entity_Tweester_mtxOuterWhirl));
     guRotateF(sp58, data->outerWhirlRotY, 0.0f, 1.0f, 0.0f);
     guMtxCatF(sp58, sp18, sp18);
     guMtxF2L(sp18, &data->mtxOuterWhirl);
     gDisplayContext->matrixStack[gMatrixListPos] = data->mtxOuterWhirl;
     gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-    gfx = (Gfx*)((s32)entity->vertexData + (u16)Entity_Tweester_RenderOuterWhirl);
+    gfx = ENTITY_ADDR(entity, Gfx*, Entity_Tweester_RenderOuterWhirl);
     gSPDisplayList(gMasterGfxPos++, gfx);
     gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
 }
@@ -153,7 +153,7 @@ void entity_Tweester_select_target_point(Entity* entity) {
     paths = data->paths;
 
     if (pathOffset == 0) {
-        for (i = 0; *paths != -1; paths++, i++) {
+        for (i = 0; (s32)*paths != -1; paths++, i++) {
         }
         j = rand_int(i * 10 - 1) / 10;
         paths = data->paths;
@@ -297,7 +297,7 @@ void entity_Tweester_anim_scale(Entity* entity) {
 void entity_Tweester_init(Entity* entity) {
     TweesterData* data = entity->dataBuf.tweester;
 
-    data->paths = CreateEntityVarArgBuffer[0];
+    data->paths = (s32**)CreateEntityVarArgBuffer[0];
     entity_Tweester_select_target_point(entity);
     data->faceAnimTexOffset = 0;
     entity->renderSetupFunc = entity_Tweester_setupGfx;
@@ -314,7 +314,7 @@ EntityScript Entity_Tweester_Script ={
 
 EntityModelScript Entity_Tweester_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(Entity_Tweester_Render, RENDER_MODE_SURFACE_XLU_LAYER1);
 
-EntityBlueprint D_802BCA74_E313C4 = {
+EntityBlueprint Entity_Tweester = {
     .flags = ENTITY_FLAGS_SKIP_UPDATE_INVERSE_ROTATION_MATRIX,
     .typeDataSize = sizeof(TweesterData),
     .renderCommandList = Entity_Tweester_RenderScript,
@@ -322,7 +322,7 @@ EntityBlueprint D_802BCA74_E313C4 = {
     .fpInit = entity_Tweester_init,
     .updateEntityScript = Entity_Tweester_Script,
     .fpHandleCollision = NULL,
-    {{ entity_model_Tweester_ROM_START, entity_model_Tweester_ROM_END }},
+    { .dma = ENTITY_ROM(Tweester) },
     .entityType = ENTITY_TYPE_TWEESTER,
     .aabbSize = { 50, 70, 50 }
 };

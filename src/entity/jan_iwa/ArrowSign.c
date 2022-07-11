@@ -1,5 +1,5 @@
 #include "common.h"
-#include "entity_script.h"
+#include "entity.h"
 #include "ld_addrs.h"
 
 extern Gfx Entity_ArrowSign_Render[];
@@ -14,13 +14,13 @@ s32 entity_ArrowSign_setupGfx(s32 entityIndex) {
     Matrix4f sp58;
     Gfx* gfx;
 
-    guMtxL2F(sp18, (Mtx*)((s32)entity->vertexData + (u16)&Entity_ArrowSign_mtxSign));
+    guMtxL2F(sp18, ENTITY_ADDR(entity, Mtx*, &Entity_ArrowSign_mtxSign));
     guRotateF(sp58, clamp_angle(data->angle - 90.0f), 0.0f, 0.0f, 1.0f);
     guMtxCatF(sp58, sp18, sp18);
     guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-    gfx = (Gfx*)((s32)entity->vertexData + (u16)Entity_ArrowSign_RenderRotatedSign);
+    gfx = ENTITY_ADDR(entity, Gfx*, Entity_ArrowSign_RenderRotatedSign);
     gSPDisplayList(gfxPos++, gfx);
     gSPPopMatrix(gfxPos++, G_MTX_MODELVIEW);
     gMasterGfxPos = gfxPos;
@@ -38,7 +38,7 @@ void entity_ArrowSign_init(Entity* entity) {
     entity->renderSetupFunc = entity_ArrowSign_setupGfx;
 }
 
-void entity_ArrowSign_handle_collision(Entity* entity) {
+s32 entity_ArrowSign_handle_collision(Entity* entity) {
     if (!(gPlayerStatus.animFlags & PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT) &&
         (entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_WALL)) {
         entity_start_script(entity);
@@ -52,7 +52,7 @@ EntityScript Entity_ArrowSign_Script = {
 
 EntityModelScript Entity_ArrowSign_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(Entity_ArrowSign_Render, RENDER_MODE_SURFACE_OPA);
 
-EntityBlueprint D_802BCD9C_E2F6CC = {
+EntityBlueprint Entity_ArrowSign = {
     .flags = ENTITY_FLAGS_SQUARE_SHADOW | ENTITY_FLAGS_400 | ENTITY_FLAGS_SET_SHADOW_FLAG200,
     .typeDataSize = sizeof(ArrowSignData),
     .renderCommandList = Entity_ArrowSign_RenderScript,
@@ -60,7 +60,7 @@ EntityBlueprint D_802BCD9C_E2F6CC = {
     .fpInit = entity_ArrowSign_init,
     .updateEntityScript = Entity_ArrowSign_Script,
     .fpHandleCollision = entity_ArrowSign_handle_collision,
-    {{ entity_model_ArrowSign_ROM_START, entity_model_ArrowSign_ROM_END }},
+    { .dma = ENTITY_ROM(ArrowSign) },
     .entityType = ENTITY_TYPE_RED_ARROW_SIGNS,
     .aabbSize = { 18, 50, 10 }
 };

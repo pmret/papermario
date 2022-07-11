@@ -976,7 +976,7 @@ void fx_smoke_ring(s32, f32, f32, f32);
 void fx_damage_stars(s32, f32, f32, f32, f32, f32, f32, s32);
 void fx_explosion(s32, f32, f32, f32);
 EffectInstance* fx_lens_flare(s32, f32, f32, f32, s32);
-EffectInstance* fx_got_item_outline(s32, f32, f32, f32, f32, s32*);
+EffectInstance* fx_got_item_outline(s32, f32, f32, f32, f32, EffectInstance**);
 EffectInstance* fx_spiky_white_aura(s32, f32, f32, f32, s32);
 void fx_smoke_impact(s32, f32, f32, f32, f32, s32, f32, s32);
 EffectInstance* fx_damage_indicator(s32, f32, f32, f32, f32, f32, s32, EffectInstance**);

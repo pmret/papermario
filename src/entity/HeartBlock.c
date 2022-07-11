@@ -1,7 +1,7 @@
 #include "common.h"
 #include "effects.h"
 #include "ld_addrs.h"
-#include "entity_script.h"
+#include "entity.h"
 
 extern u32 HeartBlockPrinterClosed;
 
@@ -32,7 +32,7 @@ void entity_HeartBlockContent__setupGfx(s32 entityIndex, Gfx* arg1) {
     Matrix4f sp18;
     Gfx* dlist;
 
-    dlist = (Gfx*)((s32)entity->vertexData + (u16)arg1);
+    dlist = ENTITY_ADDR(entity, Gfx*, arg1);
 
     gDPSetCombineLERP(gfxPos++, 0, 0, 0, TEXEL0, PRIMITIVE, 0, TEXEL0, 0, 0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0);
     gDPSetPrimColor(gfxPos++, 0, 0, 0, 0, 0, entity->alpha);
@@ -424,22 +424,19 @@ EntityScript Entity_HeartBlock_Script = {
 };
 
 EntityModelScript Entity_HeartBlockContent_RenderScriptIdle = STANDARD_ENTITY_MODEL_SCRIPT(Entity_HeartBlockContent_RenderHeartSleeping, RENDER_MODE_ALPHATEST);
-
 EntityModelScript Entity_HeartBlockContent_RenderScriptHit = STANDARD_ENTITY_MODEL_SCRIPT(Entity_HeartBlockContent_RenderHeartAwake, RENDER_MODE_SURFACE_XLU_LAYER2);
-
 EntityModelScript Entity_HeartBlockContent_RenderScriptAfterHit = STANDARD_ENTITY_MODEL_SCRIPT(Entity_HeartBlockContent_RenderHeartHappy, RENDER_MODE_SURFACE_XLU_LAYER2);
-
 EntityModelScript Entity_HeartBlock_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(Entity_HeartBlock_Render, RENDER_MODE_SURFACE_XLU_LAYER3);
 
 EntityBlueprint Entity_HeartBlockFrame = {
     .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200,
     .typeDataSize = sizeof(BlockData),
     .renderCommandList = Entity_HeartBlock_RenderScript,
-    .modelAnimationNodes = 0x00000000,
+    .modelAnimationNodes = 0,
     .fpInit = entity_base_block_init,
     .updateEntityScript = Entity_InertBlock_Script,
     .fpHandleCollision = entity_block_handle_collision,
-    {{ entity_model_HeartBlock_ROM_START, entity_model_HeartBlock_ROM_END }},
+    { .dma = ENTITY_ROM(HeartBlock) },
     .entityType = ENTITY_TYPE_HEALING_BLOCK_FRAME,
     .aabbSize = { 25, 25, 25 }
 };
@@ -448,11 +445,11 @@ EntityBlueprint Entity_HeartBlockContent = {
     .flags = ENTITY_FLAGS_SKIP_UPDATE_INVERSE_ROTATION_MATRIX,
     .typeDataSize = sizeof(HeartBlockContentData),
     .renderCommandList = Entity_HeartBlockContent_RenderScriptIdle,
-    .modelAnimationNodes = 0x00000000,
+    .modelAnimationNodes = 0,
     .fpInit = entity_HeartBlockContent_init,
     .updateEntityScript = Entity_HeartBlockContent_Script,
     .fpHandleCollision = NULL,
-    {{ entity_model_HeartBlockContent_ROM_START, entity_model_HeartBlockContent_ROM_END }},
+    { .dma = ENTITY_ROM(HeartBlockContent) },
     .entityType = ENTITY_TYPE_HEALING_BLOCK_CONTENT,
     .aabbSize = { 18, 6, 18 }
 };
@@ -461,11 +458,11 @@ EntityBlueprint Entity_HeartBlock = {
     .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200,
     .typeDataSize = sizeof(BlockData),
     .renderCommandList = Entity_HeartBlock_RenderScript,
-    .modelAnimationNodes = 0x00000000,
+    .modelAnimationNodes = 0,
     .fpInit = entity_HeartBlock_init,
     .updateEntityScript = Entity_HeartBlock_Script,
     .fpHandleCollision = entity_block_handle_collision,
-    {{ entity_model_HeartBlock_ROM_START, entity_model_HeartBlock_ROM_END }},
+    { .dma = ENTITY_ROM(HeartBlock) },
     .entityType = ENTITY_TYPE_HEALING_BLOCK,
     .aabbSize = { 25, 25, 25 }
 };

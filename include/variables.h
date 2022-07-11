@@ -88,9 +88,6 @@ extern MessagePrintState* gCurrentPrintContext;
 extern s32 D_802DB264;
 extern MessagePrintState* D_802DB268;
 
-extern ShadowBlueprint CircularShadowA;
-extern ShadowBlueprint CircularShadowB;
-extern ShadowBlueprint SquareShadow;
 extern s32 SaveBlockTutorialPrinterClosed;
 extern s32 SaveBlockResultPrinterClosed;
 extern MessagePrintState* SaveBlockTutorialPrinter;
@@ -225,23 +222,9 @@ extern u32 D_80078174;
 extern u8 D_800A0963;
 
 extern struct EffectInstance* TriggerBlockVanishEffect;
-extern UNK_TYPE D_00000094;
-extern UNK_TYPE D_00000094_2; // two symbols resolve to the same addr. Required for matching
-extern EntityBlueprint Entity_InertRedBlock;
-extern EntityBlueprint Entity_InertYellowBlock;
 extern s32 D_802EA310[];
-extern EntityBlueprint Entity_HitGroundedYellowBlock;
-extern EntityBlueprint Entity_HitFloatingYellowBlock;
-extern EntityBlueprint Entity_HitRedBlock;
-extern EntityBlueprint Entity_Chest;
-extern EntityBlueprint Entity_HiddenPanel;
-extern EntityBlueprint Entity_WoodenCrate;
 extern s32 Entity_WoodenCrate_RenderShatteredScript[];
-extern EntityBlueprint Entity_BlueWarpPipe;
 
-extern UNK_TYPE D_0A000328;
-extern UNK_TYPE D_0A000750;
-extern UNK_TYPE D_0A000808;
 
 // Scripts
 extern EvtScript SCRIPT_NpcDefeat;
@@ -265,9 +248,6 @@ extern DisplayContext* gDisplayContext;
 extern Gfx* gMasterGfxPos;
 extern u16 gMatrixListPos;
 extern s32 gCurrentDisplayContextIndex;
-
-extern UNK_TYPE D_0A004350;
-extern UNK_TYPE D_0A0026F0;
 
 extern s32 D_80291FA8[];
 extern s32 D_80291FD0[];
@@ -305,37 +285,6 @@ extern HeapNode heap_battleHead;
 extern u32 bMarioIdleAnims[];
 extern s32 bMarioDefendAnims[];
 extern s32 bPeachIdleAnims[];
-
-// TODO: name these entity symbols
-extern EntityBlueprint Entity_SavePoint; // entitySaveBlock
-extern EntityBlueprint Entity_RedSwitch;
-extern EntityBlueprint Entity_BlueSwitch; // entityBlueSwitch
-extern EntityBlueprint Entity_HugeBlueSwitch; // entityHugeBlueSwitch
-extern EntityBlueprint Entity_GreenStompSwitch;
-extern EntityBlueprint Entity_ShatteringHammer1Block;
-extern EntityBlueprint Entity_ShatteringHammer2Block;
-extern EntityBlueprint Entity_ShatteringHammer3Block;
-extern EntityBlueprint Entity_ShatteringHammer1BlockTiny;
-extern EntityBlueprint Entity_ShatteringHammer2BlockTiny;
-extern EntityBlueprint Entity_ShatteringHammer3BlockTiny;
-extern EntityBlueprint Entity_ShatteringBrickBlock;
-extern EntityBlueprint Entity_PowBlock;
-extern EntityBlueprint Entity_YellowBlock;
-extern EntityBlueprint Entity_MulticoinBlock;
-extern EntityBlueprint Entity_Hammer1Block;
-extern EntityBlueprint Entity_Hammer1Block_WideHitbox;
-extern EntityBlueprint Entity_Hammer1Block_TallHitbox;
-extern EntityBlueprint Entity_Hammer1BlockTiny;
-extern EntityBlueprint Entity_Hammer2Block;
-extern EntityBlueprint Entity_HiddenYellowBlock;
-extern EntityBlueprint Entity_RedBlock;
-extern EntityBlueprint Entity_HiddenRedBlock; //unused
-extern EntityBlueprint Entity_D_802EA798; //unused
-extern EntityBlueprint Entity_HeartBlock; //unused
-extern EntityBlueprint Entity_ScriptSpring;
-extern EntityBlueprint Entity_SimpleSpring;
-extern EntityBlueprint Entity_D_802EA910;
-
 
 extern s32 D_802EBFF0[];
 extern s32 D_802EC010[];

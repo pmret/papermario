@@ -1,4 +1,5 @@
 #include "dgb_06.h"
+#include "entity.h"
 #include "sprite/npc/boo.h"
 #include "message_ids.h"
 

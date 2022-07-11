@@ -2,7 +2,6 @@
 #include "../partners.h"
 #include "npc.h"
 
-extern Entity* TweesterTouchingPlayer;
 extern struct TweesterPhysics* PlayerTweesterPhysics;
 
 void func_802B6000_E2A340(void) {

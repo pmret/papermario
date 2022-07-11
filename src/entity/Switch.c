@@ -1,7 +1,7 @@
 #include "common.h"
 #include "effects.h"
 #include "ld_addrs.h"
-#include "entity_script.h"
+#include "entity.h"
 
 #define REFLECTED_SWITCH_HIDDEN 1
 #define REFLECTED_SWITCH_LINKED 2
@@ -145,18 +145,16 @@ void entity_base_switch_anim_init(Entity* entity) {
 }
 
 s32 entity_RedSwitch_animate_scale(Entity* entity) {
-    f32 temp_f4;
+    f32 phi_f4;
     f32 temp_f6;
     SwitchData* data = entity->dataBuf.swtch;
-    f32 phi_f4;
     s32 phi_s2 = 0;
 
     switch (data->animStateScaleX) {
         case 0:
             temp_f6 = data->baseScale.z * 0.3;
-            temp_f4 = ((data->baseScale.x + temp_f6) - entity->scale.x) / 4.0;
-            phi_f4 = temp_f4;
-            if (temp_f4 < 0.01) {
+            phi_f4 = ((data->baseScale.x + temp_f6) - entity->scale.x) / 4.0;
+            if (phi_f4 < 0.01) {
                 phi_f4 = 0.01f;
             }
             data->deltaScaleX += phi_f4;
@@ -168,9 +166,8 @@ s32 entity_RedSwitch_animate_scale(Entity* entity) {
             break;
         case 1:
             temp_f6 = data->baseScale.z * -0.2;
-            temp_f4 = ((data->baseScale.x + temp_f6) - entity->scale.x) / 6.0;
-            phi_f4 = temp_f4;
-            if (temp_f4 > -0.01) {
+            phi_f4 = ((data->baseScale.x + temp_f6) - entity->scale.x) / 6.0;
+            if (phi_f4 > -0.01) {
                 phi_f4 = -0.01f;
             }
             data->deltaScaleX += phi_f4;
@@ -182,9 +179,8 @@ s32 entity_RedSwitch_animate_scale(Entity* entity) {
             break;
         case 2:
             temp_f6 = data->baseScale.z * 0.15;
-            temp_f4 = ((data->baseScale.x + temp_f6) - entity->scale.x) / 4.0;
-            phi_f4 = temp_f4;
-            if (temp_f4 < 0.01) {
+            phi_f4 = ((data->baseScale.x + temp_f6) - entity->scale.x) / 4.0;
+            if (phi_f4 < 0.01) {
                 phi_f4 = 0.01f;
             }
             data->deltaScaleX += phi_f4;
@@ -196,9 +192,8 @@ s32 entity_RedSwitch_animate_scale(Entity* entity) {
             break;
         case 3:
             temp_f6 = data->baseScale.z * -0.1;
-            temp_f4 = ((data->baseScale.x + temp_f6) - entity->scale.x) / 6.0;
-            phi_f4 = temp_f4;
-            if (temp_f4 > -0.01) {
+            phi_f4 = ((data->baseScale.x + temp_f6) - entity->scale.x) / 6.0;
+            if (phi_f4 > -0.01) {
                 phi_f4 = -0.01f;
             }
             data->deltaScaleX += phi_f4;
@@ -209,9 +204,8 @@ s32 entity_RedSwitch_animate_scale(Entity* entity) {
             }
             break;
         case 4:
-            temp_f4 = (data->baseScale.x - entity->scale.x) / 4.0;
-            phi_f4 = temp_f4;
-            if (temp_f4 < 0.01) {
+            phi_f4 = (data->baseScale.x - entity->scale.x) / 4.0;
+            if (phi_f4 < 0.01) {
                 phi_f4 = 0.01f;
             }
             data->deltaScaleX += phi_f4;
@@ -232,9 +226,8 @@ s32 entity_RedSwitch_animate_scale(Entity* entity) {
     switch (data->animStateScaleY) {
         case 0:
             temp_f6 = data->baseScale.z * -0.5;
-            temp_f4 = ((data->baseScale.y + temp_f6) - entity->scale.y) / 5.0;
-            phi_f4 = temp_f4;
-            if (temp_f4 > -0.01) {
+            phi_f4 = ((data->baseScale.y + temp_f6) - entity->scale.y) / 5.0;
+            if (phi_f4 > -0.01) {
                 phi_f4 = -0.01f;
             }
             data->deltaScaleY += phi_f4;
@@ -246,9 +239,8 @@ s32 entity_RedSwitch_animate_scale(Entity* entity) {
             break;
         case 1:
             temp_f6 = data->baseScale.z * 0.1;
-            temp_f4 = ((data->baseScale.y + temp_f6) - entity->scale.y) / 10.0;
-            phi_f4 = temp_f4;
-            if (temp_f4 < 0.01) {
+            phi_f4 = ((data->baseScale.y + temp_f6) - entity->scale.y) / 10.0;
+            if (phi_f4 < 0.01) {
                 phi_f4 = 0.01f;
             }
             data->deltaScaleY += phi_f4;
@@ -260,9 +252,8 @@ s32 entity_RedSwitch_animate_scale(Entity* entity) {
             break;
         case 2:
             temp_f6 = data->baseScale.z * -0.3;
-            temp_f4 = ((data->baseScale.y + temp_f6) - entity->scale.y) / 5.0;
-            phi_f4 = temp_f4;
-            if (temp_f4 > -0.01) {
+            phi_f4 = ((data->baseScale.y + temp_f6) - entity->scale.y) / 5.0;
+            if (phi_f4 > -0.01) {
                 phi_f4 = -0.01f;
             }
             data->deltaScaleY += phi_f4;
@@ -274,9 +265,8 @@ s32 entity_RedSwitch_animate_scale(Entity* entity) {
             break;
         case 3:
             temp_f6 = data->baseScale.z * 0.0;
-            temp_f4 = ((data->baseScale.y + temp_f6) - entity->scale.y) / 10.0;
-            phi_f4 = temp_f4;
-            if (temp_f4 < 0.01) {
+            phi_f4 = ((data->baseScale.y + temp_f6) - entity->scale.y) / 10.0;
+            if (phi_f4 < 0.01) {
                 phi_f4 = 0.01f;
             }
             data->deltaScaleY += phi_f4;
@@ -287,9 +277,8 @@ s32 entity_RedSwitch_animate_scale(Entity* entity) {
             }
             break;
         case 4:
-            temp_f4 = (data->baseScale.y - entity->scale.y) / 5.0;
-            phi_f4 = temp_f4;
-            if (temp_f4 > -0.01) {
+            phi_f4 = (data->baseScale.y - entity->scale.y) / 5.0;
+            if (phi_f4 > -0.01) {
                 phi_f4 = -0.01f;
             }
             data->deltaScaleY += phi_f4;
@@ -320,18 +309,16 @@ void entity_base_switch_start_bound_script(Entity* entity) {
 }
 
 void entity_base_switch_animate_scale(Entity* entity) {
-    f32 temp_f4;
+    f32 phi_f4;
     f32 scaleChange;
     SwitchData* data = entity->dataBuf.swtch;
-    f32 phi_f4;
     s32 phi_s2 = 0;
 
     switch (data->animStateScaleX) {
         case 0:
             scaleChange = data->baseScale.z * 0.3;
-            temp_f4 = ((data->baseScale.x + scaleChange) - entity->scale.x) / 4.0;
-            phi_f4 = temp_f4;
-            if (temp_f4 < 0.01) {
+            phi_f4 = ((data->baseScale.x + scaleChange) - entity->scale.x) / 4.0;
+            if (phi_f4 < 0.01) {
                 phi_f4 = 0.01f;
             }
             data->deltaScaleX += phi_f4;
@@ -341,12 +328,10 @@ void entity_base_switch_animate_scale(Entity* entity) {
                 data->animStateScaleX++;
             }
             break;
-
         case 1:
             scaleChange = (data->baseScale.z * -0.2);
-            temp_f4 = ((data->baseScale.x + scaleChange) - entity->scale.x) / 6.0;
-            phi_f4 = temp_f4;
-            if (temp_f4 > -0.01) {
+            phi_f4 = ((data->baseScale.x + scaleChange) - entity->scale.x) / 6.0;
+            if (phi_f4 > -0.01) {
                 phi_f4 = -0.01f;
             }
             data->deltaScaleX += phi_f4;
@@ -356,12 +341,10 @@ void entity_base_switch_animate_scale(Entity* entity) {
                 data->animStateScaleX++;
             }
             break;
-
         case 2:
             scaleChange = data->baseScale.z * 0.15;
-            temp_f4 = ((data->baseScale.x + scaleChange) - entity->scale.x) / 4.0;
-            phi_f4 = temp_f4;
-            if (temp_f4 < 0.01) {
+            phi_f4 = ((data->baseScale.x + scaleChange) - entity->scale.x) / 4.0;
+            if (phi_f4 < 0.01) {
                 phi_f4 = 0.01f;
             }
             data->deltaScaleX += phi_f4;
@@ -371,12 +354,10 @@ void entity_base_switch_animate_scale(Entity* entity) {
                 data->animStateScaleX++;
             }
             break;
-
         case 3:
             scaleChange = data->baseScale.z * -0.1;
-            temp_f4 = ((data->baseScale.x + scaleChange) - entity->scale.x) / 6.0;
-            phi_f4 = temp_f4;
-            if (temp_f4 > -0.01) {
+            phi_f4 = ((data->baseScale.x + scaleChange) - entity->scale.x) / 6.0;
+            if (phi_f4 > -0.01) {
                 phi_f4 = -0.01f;
             }
             data->deltaScaleX += phi_f4;
@@ -386,7 +367,6 @@ void entity_base_switch_animate_scale(Entity* entity) {
                 data->animStateScaleX++;
             }
             break;
-
         case 4:
             phi_s2++;
             break;
@@ -397,9 +377,8 @@ void entity_base_switch_animate_scale(Entity* entity) {
     switch (data->animStateScaleY) {
         case 0:
             scaleChange = data->baseScale.z * -0.5;
-            temp_f4 = ((data->baseScale.y + scaleChange) - entity->scale.y) / 5.0;
-            phi_f4 = temp_f4;
-            if (temp_f4 > -0.01) {
+            phi_f4 = ((data->baseScale.y + scaleChange) - entity->scale.y) / 5.0;
+            if (phi_f4 > -0.01) {
                 phi_f4 = -0.01f;
             }
             data->deltaScaleY += phi_f4;
@@ -409,12 +388,10 @@ void entity_base_switch_animate_scale(Entity* entity) {
                 data->animStateScaleY++;
             }
             break;
-
         case 1:
             scaleChange = data->baseScale.z * 0.1;
-            temp_f4 = ((data->baseScale.y + scaleChange) - entity->scale.y) / 10.0;
-            phi_f4 = temp_f4;
-            if (temp_f4 < 0.01) {
+            phi_f4 = ((data->baseScale.y + scaleChange) - entity->scale.y) / 10.0;
+            if (phi_f4 < 0.01) {
                 phi_f4 = 0.01f;
             }
             data->deltaScaleY += phi_f4;
@@ -424,12 +401,10 @@ void entity_base_switch_animate_scale(Entity* entity) {
                 data->animStateScaleY++;
             }
             break;
-
         case 2:
             scaleChange = data->baseScale.z * -0.3;
-            temp_f4 = ((data->baseScale.y + scaleChange) - entity->scale.y) / 5.0;
-            phi_f4 = temp_f4;
-            if (temp_f4 > -0.01) {
+            phi_f4 = ((data->baseScale.y + scaleChange) - entity->scale.y) / 5.0;
+            if (phi_f4 > -0.01) {
                 phi_f4 = -0.01f;
             }
             data->deltaScaleY += phi_f4;
@@ -439,7 +414,6 @@ void entity_base_switch_animate_scale(Entity* entity) {
                 data->animStateScaleY++;
             }
             break;
-
         case 3:
             phi_s2++;
             break;
@@ -557,10 +531,11 @@ EntityBlueprint Entity_RedSwitch = {
     .fpInit = entity_base_switch_init,
     .updateEntityScript = Entity_RedSwitch_Script,
     .fpHandleCollision = NULL,
-    {{ (s32)entity_model_RedSwitch_ROM_START, (s32)entity_model_RedSwitch_ROM_END }},
+    { .dma = ENTITY_ROM(RedSwitch) },
     .entityType = ENTITY_TYPE_RED_SWITCH,
     .aabbSize = {22, 23, 22}
 };
+
 EntityBlueprint Entity_BlueSwitch = {
     .flags = ENTITY_FLAGS_8000 | ENTITY_FLAGS_ALWAYS_FACE_CAMERA | ENTITY_FLAGS_SQUARE_SHADOW | ENTITY_FLAGS_SET_SHADOW_FLAG200 | ENTITY_FLAGS_HAS_DYNAMIC_SHADOW,
     .typeDataSize = sizeof(SwitchData),
@@ -569,10 +544,11 @@ EntityBlueprint Entity_BlueSwitch = {
     .fpInit = entity_BlueSwitch_init,
     .updateEntityScript = Entity_BlueSwitch_Script,
     .fpHandleCollision = NULL,
-    {{ (s32)entity_model_BlueSwitch_ROM_START, (s32)entity_model_BlueSwitch_ROM_END }},
+    { .dma = ENTITY_ROM(BlueSwitch) },
     .entityType = ENTITY_TYPE_BLUE_SWITCH,
     .aabbSize = {22, 23, 22}
 };
+
 EntityBlueprint Entity_HugeBlueSwitch = {
     .flags = ENTITY_FLAGS_8000 | ENTITY_FLAGS_ALWAYS_FACE_CAMERA | ENTITY_FLAGS_SQUARE_SHADOW | ENTITY_FLAGS_SET_SHADOW_FLAG200 | ENTITY_FLAGS_HAS_DYNAMIC_SHADOW,
     .typeDataSize = sizeof(SwitchData),
@@ -581,10 +557,11 @@ EntityBlueprint Entity_HugeBlueSwitch = {
     .fpInit = entity_HugeBlueSwitch_init,
     .updateEntityScript = Entity_HugeBlueSwitch_Script,
     .fpHandleCollision = NULL,
-    {{ (s32)entity_model_BlueSwitch_ROM_START, (s32)entity_model_BlueSwitch_ROM_END }},
+    { .dma = ENTITY_ROM(BlueSwitch) },
     .entityType = ENTITY_TYPE_HUGE_BLUE_SWITCH,
     .aabbSize = {66, 75, 66}
 };
+
 EntityBlueprint Entity_GreenStompSwitch = {
     .flags = ENTITY_FLAGS_8000 | ENTITY_FLAGS_4000,
     .typeDataSize = sizeof(SwitchData),
@@ -593,7 +570,7 @@ EntityBlueprint Entity_GreenStompSwitch = {
     .fpInit = entity_base_switch_init,
     .updateEntityScript = Entity_GreenStompSwitch_Script,
     .fpHandleCollision = NULL,
-    {{ (s32)entity_model_GreenStompSwitch_ROM_START, (s32)entity_model_GreenStompSwitch_ROM_END }},
+    { .dma = ENTITY_ROM(GreenStompSwitch) },
     .entityType = ENTITY_TYPE_GREEN_STOMP_SWITCH,
     .aabbSize = {50, 15, 50}
 };

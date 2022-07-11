@@ -1,9 +1,9 @@
 #include "common.h"
 #include "npc.h"
 #include "ld_addrs.h"
-#include "entity_script.h"
+#include "entity.h"
 
-extern Gfx D_802E9828[];
+extern Gfx Entity_RenderNone[];
 extern Gfx Entity_WoodenCrate_Render[];
 extern Gfx* Entity_WoodenCrate_FragmentsRender[];
 extern Mtx Entity_WoodenCrate_FragmentsMatrices[];
@@ -17,15 +17,14 @@ void entity_WoodenCrate_init_fragments(Entity* entity, Gfx** dlists, Mtx* matric
     s32 i;
     s32 rotationSpeed;
 
-    data->fragmentsGfx = (Gfx**)((s32)entity->vertexData + (u16)(dlists));
+    data->fragmentsGfx = ENTITY_ADDR(entity, Gfx**, dlists);
     entity->renderSetupFunc = entity_WoodenCrate_setupGfx;
     entity->alpha = 255;
     entity->position.y = data->basePosY;
     guTranslateF(mtxTrans, entity->position.x, entity->position.y, entity->position.z);
 
     for (i = 0; i < 35; i++) {
-        s32 mtxOffset = (u16)(matrices++);
-        guMtxL2F(mtxFragment, (Mtx*)((s32)entity->vertexData + mtxOffset));
+        guMtxL2F(mtxFragment, ENTITY_ADDR(entity, Mtx*, matrices++));
         guMtxCatF(mtxTrans, mtxFragment, mtxFragment);
         data->fragmentPosX[i] = mtxFragment[3][0];
         data->fragmentPosY[i] = mtxFragment[3][1];
@@ -208,7 +207,7 @@ void entity_WoodenCrate_setupGfx(s32 entityIndex) {
         guMtxF2L(mtx, &gDisplayContext->matrixStack[gMatrixListPos]);
 
         gSPMatrix(gfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-        fragmentDlist = (Gfx*)((s32)entity->vertexData + (u16)(*gfx++));
+        fragmentDlist = ENTITY_ADDR(entity, Gfx*, *gfx++);
         gSPDisplayList(gfxPos++, fragmentDlist);
         gSPPopMatrix(gfxPos++, G_MTX_MODELVIEW);
     }
@@ -230,7 +229,7 @@ s32 entity_WoodenCrate_idle(Entity* entity) {
 
     if (shouldBreak) {
         entity_WoodenCrate_reset_fragments(entity);
-        entity_set_render_script(entity, &Entity_WoodenCrate_RenderShatteredScript);
+        entity_set_render_script(entity, Entity_WoodenCrate_RenderShatteredScript);
         entity_start_script(entity);
         exec_entity_commandlist(entity);
         sfx_play_sound(SOUND_20AE);
@@ -245,7 +244,6 @@ void entity_WoodenCrate_shatter(Entity* entity, f32 arg1) {
     if (data->itemID != -1) {
         s32 flag = FALSE;
 
-        // can't do || here, or gcc realizes it can reuse the temp->unk_04 load
         if (data->globalFlagIndex == 0xFFFF) {
             flag = TRUE;
         } else if (!get_global_flag(data->globalFlagIndex)) {
@@ -260,8 +258,7 @@ void entity_WoodenCrate_shatter(Entity* entity, f32 arg1) {
 }
 
 EntityModelScript Entity_WoodenCrate_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(Entity_WoodenCrate_Render, RENDER_MODE_SURFACE_OPA);
-
-EntityModelScript Entity_WoodenCrate_RenderShatteredScript = STANDARD_ENTITY_MODEL_SCRIPT(D_802E9828, RENDER_MODE_SURFACE_XLU_LAYER1);
+EntityModelScript Entity_WoodenCrate_RenderShatteredScript = STANDARD_ENTITY_MODEL_SCRIPT(Entity_RenderNone, RENDER_MODE_SURFACE_XLU_LAYER1);
 
 EntityScript Entity_WoodenCrate_Script = {
     es_SetCallback(entity_WoodenCrate_idle, 0)
@@ -277,11 +274,11 @@ EntityBlueprint Entity_WoodenCrate = {
     .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200,
     .typeDataSize = sizeof(WoodenCrateData),
     .renderCommandList = Entity_WoodenCrate_RenderScript,
-    .modelAnimationNodes = 0x00000000,
+    .modelAnimationNodes = 0,
     .fpInit = entity_WoodenCrate_init,
     .updateEntityScript = Entity_WoodenCrate_Script,
     .fpHandleCollision = NULL,
-    {{ entity_model_WoodenCrate_ROM_START, entity_model_WoodenCrate_ROM_END }},
+    { .dma = ENTITY_ROM(WoodenCrate) },
     .entityType = ENTITY_TYPE_WOODEN_CRATE,
     .aabbSize = { 35, 30, 35 }
 };

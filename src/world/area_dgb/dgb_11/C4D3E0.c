@@ -1,7 +1,8 @@
 #include "dgb_11.h"
+#include "entity.h"
 #include "message_ids.h"
 
-extern s32 D_000001E4;
+extern s16 Entity_ScriptSpring_AnimLaunch[];
 
 EntryList N(entryList) = {
     { 450.0f,   0.0f,  -40.0f,   0.0f },
@@ -221,7 +222,7 @@ ApiStatus N(func_80240000_C4D3E0)(Evt* script, s32 isInitialCall) {
         return ApiStatus_BLOCK;
     }
 
-    play_model_animation(entity->virtualModelIndex, &D_000001E4);
+    play_model_animation(entity->virtualModelIndex, Entity_ScriptSpring_AnimLaunch);
 
     return ApiStatus_DONE2;
 }

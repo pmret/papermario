@@ -2,7 +2,7 @@
 #include "npc.h"
 #include "sprite.h"
 #include "ld_addrs.h"
-#include "entity_script.h"
+#include "entity.h"
 
 extern Gfx Entity_BlueWarpPipe_RenderPipe[];
 extern Gfx Entity_BlueWarpPipe_RenderBase[];
@@ -160,7 +160,7 @@ void entity_BlueWarpPipe_setupGfx(s32 entityIndex) {
     gMasterGfxPos = gfxPos;
 }
 
-f32 entity_init_BlueWarpPipe(Entity* entity) {
+void entity_init_BlueWarpPipe(Entity* entity) {
     BlueWarpPipeData* data;
     s32 entryID = CreateEntityVarArgBuffer[0];
     EvtScript* enterPipeEvt = (EvtScript*)CreateEntityVarArgBuffer[1];
@@ -197,11 +197,11 @@ EntityBlueprint Entity_BlueWarpPipe = {
     .flags = 0,
     .typeDataSize = sizeof(BlueWarpPipeData),
     .renderCommandList = Entity_BlueWarpPipe_RenderScript,
-    .modelAnimationNodes = 0x00000000,
+    .modelAnimationNodes = 0,
     .fpInit = entity_init_BlueWarpPipe,
     .updateEntityScript = Entity_BlueWarpPipe_Script,
-    .fpHandleCollision = 0x00000000,
-    {{ entity_model_BlueWarpPipe_ROM_START, entity_model_BlueWarpPipe_ROM_END }},
+    .fpHandleCollision = NULL,
+    { .dma = ENTITY_ROM(BlueWarpPipe) },
     .entityType = ENTITY_TYPE_BLUE_WARP_PIPE,
     .aabbSize = { 40, 50, 40}
 };

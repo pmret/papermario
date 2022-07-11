@@ -868,7 +868,17 @@ segments:
     - [0x109660, c, entity/WoodenCrate]
     - [0x10A230, c, entity/BlueWarpPipe]
     - [0x10A8D0, c, entity/Signpost]
-    - [0x10A9F0, .data, entity/Shadow]
+    - start: 0x10A9F0
+      type: .data
+      name: entity/Shadow
+      subsegments:
+      - [0x10A9F0, i4, entity/shadow/square, 16, 16]
+      - [0x10AA70, i4, entity/shadow/circle, 16, 16]
+      - [0x10AAF0, vtx, entity/vtx/shadow1]
+      - [0x10AB30, vtx, entity/vtx/shadow2]
+      - [0x10AB70, i4, entity/shadow/square_big, 32, 32]
+      - [0x10AD70, i4, entity/shadow/circle_big, 32, 32]
+      - [0x10AF70]
     - [0x10B1B0, .data, entity/SaveBlock]
     - [0x10B2C0, .data, entity/Switch]
     - [0x10B4C0, .data, entity/ShatteringBlock_common]
@@ -883,13 +893,6 @@ segments:
     - [0x10C6E0, .data, entity/WoodenCrate]
     - [0x10C780, .data, entity/BlueWarpPipe]
     - [0x10C830, .data, entity/Signpost]
-    #- [0x10A9F0, data]
-    #- [0x10A9F0, i4,      shadow/square, 16, 16]
-    #- [0x10AA70, i4,      shadow/circle, 16, 16]
-    #- [0x10AAF0, data]
-    #- [0x10AB70, i4,      shadow/10AB70, 32, 32]
-    #- [0x10AD70, i4,      shadow/10AD70, 32, 32]
-    #- [0x10B610, .data, entity/104730]
     - [0x10C880]
   - type: code
     start: 0x10CC10
@@ -12077,11 +12080,11 @@ segments:
     vram: 0x802BAE00
     overlay: True
     subsegments:
-    - [0xE2D730, c]
-    - [0xE2E5F0, c]
+    - [0xE2D730, c, Plants1]
+    - [0xE2E5F0, c, Plants2]
     - [0xE2EDE0, c, ArrowSign]
-    - [0xE2EFD0, .data, E2D730]
-    - [0xE2F150, .data, E2E5F0]
+    - [0xE2EFD0, .data, Plants1]
+    - [0xE2F150, .data, Plants2]
     - [0xE2F6A0, .data, ArrowSign]
     - [0xE2F6F0]
   - type: code
@@ -12618,21 +12621,21 @@ segments:
       - [0xE59140, ci4, BlueWarpPipe_texPipe, 32, 16]
       - [0xE59240, palette, BlueWarpPipe_texPipe]
       - [0xE59260]
-  - name: entity_model_SignPost
+  - name: entity_model_Signpost
     dir: entity/model
     type: code
     start: 0xE59480
     vram: 0x0A000000
     symbol_name_format: $VRAM_$ROM
     subsegments:
-    - [0xE59480, c, SignPost]
+    - [0xE59480, c, Signpost]
     - start: 0xE59480
       type: .data
-      name: SignPost
+      name: Signpost
       subsegments:
       - [0xE59480]
-      - [0xE59A00, ci4, SignPost, 32, 32]
-      - [0xE59C00, palette, SignPost]
+      - [0xE59A00, ci4, Signpost, 32, 32]
+      - [0xE59C00, palette, Signpost]
       - [0xE59C20]
   - name: entity_model_ArrowSign
     dir: entity/model

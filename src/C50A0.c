@@ -261,7 +261,7 @@ void item_entity_disable_shadow(ItemEntity* itemEntity) {
     itemEntity->flags |= ITEM_ENTITY_FLAGS_40;
     if (itemEntity->shadowIndex >= 0) {
         shadow = get_shadow_by_index(itemEntity->shadowIndex);
-        shadow->flags |= SHADOW_FLAGS_HIDDEN;
+        shadow->flags |= ENTITY_FLAGS_HIDDEN;
     }
 }
 
@@ -271,7 +271,7 @@ void item_entity_enable_shadow(ItemEntity* itemEntity) {
     itemEntity->flags &= ~ITEM_ENTITY_FLAGS_40;
     if (itemEntity->shadowIndex >= 0) {
         shadow = get_shadow_by_index(itemEntity->shadowIndex);
-        shadow->flags &= ~SHADOW_FLAGS_HIDDEN;
+        shadow->flags &= ~ENTITY_FLAGS_HIDDEN;
     }
 }
 
@@ -541,7 +541,7 @@ s32 make_item_entity(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pic
             shadow = get_shadow_by_index(itemEntity->shadowIndex);
 
             if (itemEntity->spawnType == ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS) {
-                shadow->flags |= SHADOW_FLAGS_HIDDEN;
+                shadow->flags |= ENTITY_FLAGS_HIDDEN;
             }
 
             x = itemEntity->position.x;

@@ -1,11 +1,11 @@
 #include "common.h"
 #include "ld_addrs.h"
-#include "entity_script.h"
+#include "entity.h"
 
 s32 entity_HiddenPanel_is_item_on_top(Entity*);
 void entity_HiddenPanel_flip_over(Entity*);
 
-void mdl_project_tex_coords(s32 modelID, Gfx* destGfx, Matrix4f* destMtx, Vtx* destVertices);
+void mdl_project_tex_coords(s32 modelID, Gfx* destGfx, Matrix4f destMtx, void* destVertices);
 s32 npc_find_standing_on_entity(s32 entityIndex);
 
 extern s32 Entity_HiddenPanel_RenderScript2[];
@@ -28,7 +28,7 @@ void entity_HiddenPanel_setupGfx(s32 entityIndex) {
         guMtxCatF(sp50, sp10, sp50);
         guMtxF2L(sp50, &gDisplayContext->matrixStack[gMatrixListPos]);
         gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-        gSPDisplayList(gMasterGfxPos++, (Gfx*)((s32)entity->vertexData + (u16)Entity_HiddenPanel_RenderBottomDark));
+        gSPDisplayList(gMasterGfxPos++, ENTITY_ADDR(entity, Gfx*, Entity_HiddenPanel_RenderBottomDark));
         gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
     }
     mdl_project_tex_coords(data->modelID, data->renderDList, data->entityMatrix, entity->vertexData);
@@ -323,7 +323,7 @@ void entity_HiddenPanel_init(Entity* entity) {
     } else {
         dlist = Entity_HiddenPanel_RenderTop;
     }
-    data->renderDList = (s32*)((s32)entity->vertexData + (u16)dlist);
+    data->renderDList = ENTITY_ADDR(entity, Gfx*, dlist);
 
     mdl_project_tex_coords(data->modelID, data->renderDList, data->entityMatrix, entity->vertexData);
     D_8015A578.unk_01++;
@@ -359,11 +359,11 @@ EntityBlueprint Entity_HiddenPanel = {
     .flags = ENTITY_FLAGS_HIDDEN,
     .typeDataSize = sizeof(HiddenPanelData),
     .renderCommandList = Entity_HiddenPanel_RenderScript,
-    .modelAnimationNodes = 0x00000000,
+    .modelAnimationNodes = 0,
     .fpInit = entity_HiddenPanel_init,
     .updateEntityScript = Entity_HiddenPanel_Script,
     .fpHandleCollision = NULL,
-    {{ entity_model_HiddenPanel_ROM_START, entity_model_HiddenPanel_ROM_END }},
+    { .dma = ENTITY_ROM(HiddenPanel) },
     .entityType = ENTITY_TYPE_HIDDEN_PANEL,
     .aabbSize = { 60, 0, 60 }
 };

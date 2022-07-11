@@ -1,5 +1,6 @@
 #include "flo_17.h"
 #include "message_ids.h"
+#include "entity.h"
 #include "sprite/npc/lakitu.h"
 #include "sprite/npc/spiny.h"
 

@@ -965,7 +965,7 @@ s32 test_ray_entities(f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f3
     for (i = 0; i < MAX_ENTITIES; i++) {
         entity = get_entity_by_index(i);
 
-        if (entity == NULL || (entity->flags & 0x40000020)) {
+        if (entity == NULL || (entity->flags & (ENTITY_FLAGS_SKIP_UPDATE | ENTITY_FLAGS_SKIP_UPDATE_INVERSE_ROTATION_MATRIX))) {
             continue;
         }
 

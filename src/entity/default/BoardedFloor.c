@@ -1,7 +1,8 @@
 #include "common.h"
-#include "entity_script.h"
+#include "ld_addrs.h"
+#include "entity.h"
 
-extern Gfx D_802E9828[];
+extern Gfx Entity_RenderNone[];
 extern Gfx* Entity_BoardedFloor_FragmentsRender[];
 extern Mtx Entity_BoardedFloor_FragmentMatrices[];
 
@@ -14,15 +15,14 @@ void Entity_BoardedFloor_init_fragments(Entity* entity, Gfx** dlists, Mtx* matri
     s32 i;
     s32 rotationSpeed;
 
-    data->fragmentsGfx = (Gfx**)((s32)entity->vertexData + (u16)(dlists));
+    data->fragmentsGfx = ENTITY_ADDR(entity, Gfx**, dlists);
     entity->renderSetupFunc = Entity_BoardedFloor_setupGfx;
     entity->alpha = 255;
     entity->position.y = data->inititalY;
     guTranslateF(mtxTrans, entity->position.x, entity->position.y, entity->position.z);
 
     for (i = 0; i < 12; i++) {
-        s32 mtxOffset = (u16)(matrices++);
-        guMtxL2F(mtxFragment, (Mtx*)((s32)entity->vertexData + mtxOffset));
+        guMtxL2F(mtxFragment, ENTITY_ADDR(entity, Mtx*, matrices++));
         guMtxCatF(mtxTrans, mtxFragment, mtxFragment);
         data->fragmentPosX[i] = mtxFragment[3][0];
         data->fragmentPosY[i] = mtxFragment[3][1];
@@ -195,7 +195,7 @@ void Entity_BoardedFloor_setupGfx(s32 entityIndex) {
         guMtxF2L(mtx, &gDisplayContext->matrixStack[gMatrixListPos]);
 
         gSPMatrix(gfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-        fragmentDlist = (Gfx*)((s32)entity->vertexData + (u16)(*gfx++));
+        fragmentDlist = ENTITY_ADDR(entity, Gfx*, *gfx++);
         gSPDisplayList(gfxPos++, fragmentDlist);
         gSPPopMatrix(gfxPos++, G_MTX_MODELVIEW);
     }
@@ -215,9 +215,8 @@ void Entity_BoardedFloor_idle(Entity* entity) {
     }
 }
 
-EntityModelScript Entity_BoardedFloor_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(D_802E9828, RENDER_MODE_SURFACE_OPA);
-
-EntityModelScript Entity_BoardedFloor_RenderScriptShattered = STANDARD_ENTITY_MODEL_SCRIPT(D_802E9828, RENDER_MODE_SURFACE_XLU_LAYER1);
+EntityModelScript Entity_BoardedFloor_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(Entity_RenderNone, RENDER_MODE_SURFACE_OPA);
+EntityModelScript Entity_BoardedFloor_RenderScriptShattered = STANDARD_ENTITY_MODEL_SCRIPT(Entity_RenderNone, RENDER_MODE_SURFACE_XLU_LAYER1);
 
 void Entity_BoardedFloor_shatter(Entity* entity) {
     BoardedFloorData* data = entity->dataBuf.boardedFloor;
@@ -229,8 +228,6 @@ void Entity_BoardedFloor_shatter(Entity* entity) {
 
     entity_set_render_script(entity, Entity_BoardedFloor_RenderScriptShattered);
 }
-
-
 
 EntityScript Entity_BoardedFloor_Script = {
     es_ClearFlags(ENTITY_FLAGS_SKIP_UPDATE_INVERSE_ROTATION_MATRIX)
@@ -244,15 +241,15 @@ EntityScript Entity_BoardedFloor_Script = {
     es_End
 };
 
-EntityBlueprint D_802BCE84_E2D5B4 = {
+EntityBlueprint Entity_BoardedFloor = {
     .flags = 0,
-    .typeDataSize = 0x150,
+    .typeDataSize = sizeof(BoardedFloorData),
     .renderCommandList = Entity_BoardedFloor_RenderScript,
     .modelAnimationNodes = 0,
     .fpInit = Entity_BoardedFloor_init,
     .updateEntityScript = Entity_BoardedFloor_Script,
     .fpHandleCollision = NULL,
-    {{ 0x00E4E7F0, 0x00E51640 }},
+    { .dma = ENTITY_ROM(BoardedFloor) },
     .entityType = ENTITY_TYPE_BOARDED_FLOOR,
     .aabbSize = { 60, 5, 60 }
 };

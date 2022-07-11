@@ -137,7 +137,7 @@ Gfx D_0A000D30_E9D630[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_0A000D40_E9D640[] = {
+Gfx Entity_SpinningFlower_Render[] = {
     gsSPDisplayList(D_0A000D30_E9D630),
     gsSPEndDisplayList(),
 };

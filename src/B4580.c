@@ -1008,11 +1008,11 @@ void clear_animator_flags(s32 index, s32 bits) {
     animator->flags &= ~bits;
 }
 
-void play_model_animation(s32 index, s32 animPos) {
+void play_model_animation(s32 index, s16* animPos) {
     ModelAnimator* animator = (*gCurrentAnimMeshListPtr)[index & ~0x800];
 
     if (animator->animationBuffer != NULL) {
-        animPos = (animPos & 0xFFFFFF) + (s32)animator->animationBuffer; // TODO: array access?
+        animPos = ((s32)animPos & 0xFFFFFF) + (s32)animator->animationBuffer; // TODO: array access?
     }
     animator->animReadPos = (s16*)animPos;
     animator->savedReadPos = (s16*)animPos;

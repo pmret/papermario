@@ -1,5 +1,6 @@
 #include "flo_03.h"
 #include "message_ids.h"
+#include "entity.h"
 #include "sprite/npc/dayzee.h"
 #include "sprite/npc/monty_mole.h"
 #include "sprite/npc/petunia.h"

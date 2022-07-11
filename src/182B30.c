@@ -576,7 +576,7 @@ void update_actor_shadow(s32 arg0, Actor* actor) {
 
     if (actor != NULL) {
         shadow = get_shadow_by_index(actor->shadow.id);
-        shadow->flags |= SHADOW_FLAGS_HIDDEN;
+        shadow->flags |= ENTITY_FLAGS_HIDDEN;
         if (!(actor->flags & ACTOR_FLAG_DISABLED)) {
             if (actor->flags & ACTOR_FLAG_10000000) {
                 if (arg0 == 0) {
@@ -626,7 +626,7 @@ void update_actor_shadow(s32 arg0, Actor* actor) {
 
                     if (!(actorPart->flags & ACTOR_PART_FLAG_4)) {
                         shadow = get_shadow_by_index(actorPart->shadowIndex);
-                        shadow->flags &= ~SHADOW_FLAGS_HIDDEN;
+                        shadow->flags &= ~ENTITY_FLAGS_HIDDEN;
                         x1 = actorPart->currentPos.x;
                         if (!(actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW)) {
                             y1 = actorPart->currentPos.y + 12.0;
@@ -639,7 +639,7 @@ void update_actor_shadow(s32 arg0, Actor* actor) {
                         npc_raycast_down_sides(0, &x1, &y1, &z1, &dist);
 
                         if (200.0f < dist) {
-                            shadow->flags |= SHADOW_FLAGS_HIDDEN;
+                            shadow->flags |= ENTITY_FLAGS_HIDDEN;
                         }
                         shadow->position.x = x1;
                         shadow->position.y = y1;
@@ -672,7 +672,7 @@ void update_actor_shadow(s32 arg0, Actor* actor) {
             npc_raycast_down_sides(0, &x1, &y1, &z1, &dist);
 
             if (200.0f < dist) {
-                shadow->flags |= SHADOW_FLAGS_HIDDEN;
+                shadow->flags |= ENTITY_FLAGS_HIDDEN;
             }
             shadow->position.x = x1;
             shadow->position.y = y1;
@@ -738,7 +738,7 @@ void update_player_actor_shadow(void) {
     }
 
     shadow = get_shadow_by_index(player->shadow.id);
-    shadow->flags &= ~SHADOW_FLAGS_HIDDEN;
+    shadow->flags &= ~ENTITY_FLAGS_HIDDEN;
 
     if (!battleStatus->outtaSightActive) {
         shadow->alpha = 128;
@@ -753,7 +753,7 @@ void update_player_actor_shadow(void) {
     npc_raycast_down_sides(0, &x, &y, &z, &distance);
 
     if (distance > 200.0f) {
-        shadow->flags |= SHADOW_FLAGS_HIDDEN;
+        shadow->flags |= ENTITY_FLAGS_HIDDEN;
     }
     shadow->position.x = x;
     shadow->position.y = y;

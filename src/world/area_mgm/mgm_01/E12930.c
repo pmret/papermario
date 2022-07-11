@@ -1,6 +1,7 @@
 #include "mgm_01.h"
 #include "hud_element.h"
 #include "effects.h"
+#include "entity.h"
 
 void delete_entity(s32 entityIndex);
 void set_message_images(MessageImageData* images);
@@ -66,8 +67,6 @@ typedef struct JumpGameData {
     /* 0x048 */ s32 breakHistory[NUM_BLOCKS];
     /* 0x074 */ JumpGamePanel panels[NUM_BLOCKS];
 } JumpGameData; /* size = 0x468 */
-
-extern EntityBlueprint Entity_BrickBlock;
 
 extern s32 MessagePlural;
 extern s32 MessageSingular;

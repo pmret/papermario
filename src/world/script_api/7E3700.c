@@ -1,8 +1,8 @@
 #include "common.h"
+#include "entity.h"
 
 extern PushBlockGrid* D_802DBC88[]; //TODO determine length
 extern EvtScript D_80285674_7E64F4;
-extern EntityBlueprint Entity_PushBlock;
 
 #define BLOCK_GRID_SIZE 25
 

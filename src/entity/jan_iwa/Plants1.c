@@ -1,24 +1,25 @@
 #include "common.h"
 #include "sprite.h"
-#include "entity_script.h"
+#include "entity.h"
 #include "animation_script.h"
 #include "ld_addrs.h"
 
-extern Gfx D_802E9828[];
+extern Gfx Entity_RenderNone[];
 extern AnimScript Entity_CymbalPlant_AnimationIdle;
 extern AnimScript Entity_CymbalPlant_AnimationGrab;
 extern AnimScript Entity_PinkFlower_AnimationLightUp;
 extern StaticAnimatorNode* Entity_CymbalPlant_Mesh[];
-extern EntityBlueprint D_802BC7D0_E2F100;
+extern EntityBlueprint Entity_PinkFlowerLight;
 extern StaticAnimatorNode* Entity_PinkFlower_Mesh[];
 extern AnimScript Entity_PinkFlower_AnimationIdle;
 extern Mtx D_0A001098_E9C598;
 extern Gfx D_0A0013B8_E9C8B8[];
-extern Mtx D_0A000B70;
-extern Gfx D_0A000D18[];
+extern Mtx D_0A000B70_E9D470;
+extern Gfx D_0A000D18_E9D618[];
+extern Gfx Entity_SpinningFlower_Render[];
 
 BSS f32 D_802BCE20;
-BSS f32 D_802BCE24[3]; // probably unused
+BSS f32 D_802BCE24[3]; // unused
 BSS u16 D_802BCE30;
 BSS u16 D_802BCE32;
 BSS u16 D_802BCE34;
@@ -32,7 +33,7 @@ s32 entity_SpinningFlower_setupGfx(s32 entityIndex) {
     Matrix4f sp98;
     Gfx* gfx;
 
-    guMtxL2F(sp18, (Mtx*)((s32)entity->vertexData + (u16)&D_0A000B70));
+    guMtxL2F(sp18, ENTITY_ADDR(entity, Mtx*, &D_0A000B70_E9D470));
     guRotateF(sp58, data->rotation.x, 1.0f, 0.0f, 0.0f);
     guRotateF(sp98, data->rotation.z, 0.0f, 0.0f, 1.0f);
     guMtxCatF(sp58, sp98, sp98);
@@ -42,7 +43,7 @@ s32 entity_SpinningFlower_setupGfx(s32 entityIndex) {
     guMtxF2L(sp18, &data->unk_30);
     gDisplayContext->matrixStack[gMatrixListPos] = data->unk_30;
     gSPMatrix(gfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-    gfx = (Gfx*)((s32)entity->vertexData + (u16)D_0A000D18);
+    gfx = ENTITY_ADDR(entity, Gfx*, D_0A000D18_E9D618);
     gSPDisplayList(gfxPos++, gfx);
     gSPPopMatrix(gfxPos++, G_MTX_MODELVIEW);
     gMasterGfxPos = gfxPos;
@@ -155,7 +156,7 @@ s32 entity_PinkFlowerLight_setupGfx(s32 entityIndex) {
     guRotateF(sp58, entity->rotation.y, 0.0f, 1.0f, 0.0f);
     guScaleF(sp18, entity->scale.x, entity->scale.x, entity->scale.x);
     guMtxCatF(sp18, sp58, sp58);
-    guMtxL2F(sp18, (Mtx*)((s32)entity->vertexData + (u16)&D_0A001098_E9C598));
+    guMtxL2F(sp18, ENTITY_ADDR(entity, Mtx*, &D_0A001098_E9C598));
     sin_cos_rad((gCameras[CAM_DEFAULT].currentYaw + 180.0f) * TAU / 360.0f, &sinAngle, &cosAngle);
     sp18[3][1] += 10.0f;
     sp18[3][2] -= 10.0f;
@@ -197,7 +198,7 @@ void entity_PinkFlower_init(Entity* entity) {
     s32 entityIndex;
 
     get_animator_by_index(entity->virtualModelIndex)->renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;
-    entityIndex = create_entity(&D_802BC7D0_E2F100, (s32)entity->position.x, (s32)entity->position.y, (s32)entity->position.z, 0, MAKE_ENTITY_END);
+    entityIndex = create_entity(&Entity_PinkFlowerLight, (s32)entity->position.x, (s32)entity->position.y, (s32)entity->position.z, 0, MAKE_ENTITY_END);
     data->linkedEntityIndex = entityIndex;
     newEntity = get_entity_by_index(entityIndex);
     data = newEntity->dataBuf.pinkFlower;
@@ -364,73 +365,65 @@ EntityScript Entity_PinkFlowerLight_Script = {
     es_End
 };
 
-EntityScript D_802BC720_E2F050 = {
+EntityScript Entity_CymbalPlant_Update = {
     es_SetCallback(entity_CymbalPlant_idle, 0)
     es_End
 };
 
-EntityModelScript Entity_PinkFlowerLight_Render = STANDARD_ENTITY_MODEL_SCRIPT(D_802E9828, RENDER_MODE_SURFACE_XLU_LAYER2);
+EntityModelScript Entity_PinkFlowerLight_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(Entity_RenderNone, RENDER_MODE_SURFACE_XLU_LAYER2);
+EntityModelScript Entity_SpinningFlower_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(Entity_SpinningFlower_Render, RENDER_MODE_SURFACE_XLU_LAYER1);
 
-EntityModelScript Entity_SpinningFlower_Render = STANDARD_ENTITY_MODEL_SCRIPT(0x0A000D40, RENDER_MODE_SURFACE_XLU_LAYER1);
+DmaEntry Entity_CymbalPlant_dma[] = { ENTITY_ROM(CymbalPlant_gfx), ENTITY_ROM(CymbalPlant_anim) };
+DmaEntry Entity_PinkFlower_dma[] = { ENTITY_ROM(PinkFlower_gfx), ENTITY_ROM(PinkFlower_anim) };
 
-DmaEntry D_802BC768_E2F098[] = {
-    { entity_model_CymbalPlant_gfx_ROM_START, entity_model_CymbalPlant_gfx_ROM_END },
-    { entity_model_CymbalPlant_anim_ROM_START, entity_model_CymbalPlant_anim_ROM_END }
-};
-
-DmaEntry D_802BC778_E2F0A8[] = {
-    { 0x00E9B500, 0x00E9C900 },
-    { 0x00E9A990, 0x00E9B500 }
-};
-
-EntityBlueprint D_802BC788_E2F0B8 = {
+EntityBlueprint Entity_CymbalPlant = {
     .flags = ENTITY_FLAGS_SQUARE_SHADOW | ENTITY_FLAGS_400 | ENTITY_FLAGS_SET_SHADOW_FLAG200 | ENTITY_FLAGS_HAS_ANIMATED_MODEL,
-    .typeDataSize = 0xC,
+    .typeDataSize = sizeof(CymbalPlantData),
     .renderCommandList = Entity_CymbalPlant_AnimationIdle,
     .modelAnimationNodes = Entity_CymbalPlant_Mesh,
     .fpInit = NULL,
-    .updateEntityScript = D_802BC720_E2F050,
+    .updateEntityScript = Entity_CymbalPlant_Update,
     .fpHandleCollision = NULL,
-    {{ D_802BC768_E2F098, 0 }},
+    { .dmaList = Entity_CymbalPlant_dma },
     .entityType = ENTITY_TYPE_CYMBAL_PLANT,
     .aabbSize = { 103, 30, 24 }
 };
 
-EntityBlueprint D_802BC7AC_E2F0DC = {
+EntityBlueprint Entity_PinkFlower = {
     .flags = ENTITY_FLAGS_SHOWS_INSPECT_PROMPT | ENTITY_FLAGS_SQUARE_SHADOW | ENTITY_FLAGS_400 | ENTITY_FLAGS_SET_SHADOW_FLAG200 | ENTITY_FLAGS_HAS_ANIMATED_MODEL,
-    .typeDataSize = 0xC,
+    .typeDataSize = sizeof(PinkFlowerData),
     .renderCommandList = Entity_PinkFlower_AnimationIdle,
     .modelAnimationNodes = Entity_PinkFlower_Mesh,
     .fpInit = entity_PinkFlower_init,
     .updateEntityScript = Entity_PinkFlower_Script,
     .fpHandleCollision = NULL,
-    {{ D_802BC778_E2F0A8, 0 }},
+    { .dmaList = Entity_PinkFlower_dma },
     .entityType = ENTITY_TYPE_PINK_FLOWER,
     .aabbSize = { 44, 100, 25 }
 };
 
-EntityBlueprint D_802BC7D0_E2F100 = {
+EntityBlueprint Entity_PinkFlowerLight = {
     .flags = ENTITY_FLAGS_SHOWS_INSPECT_PROMPT | ENTITY_FLAGS_SKIP_UPDATE_INVERSE_ROTATION_MATRIX,
-    .typeDataSize = 0xC,
-    .renderCommandList = Entity_PinkFlowerLight_Render,
+    .typeDataSize = sizeof(PinkFlowerData),
+    .renderCommandList = Entity_PinkFlowerLight_RenderScript,
     .modelAnimationNodes = 0,
     .fpInit = entity_PinkFlowerLight_init,
     .updateEntityScript = Entity_PinkFlowerLight_Script,
     .fpHandleCollision = NULL,
-    {{ 0x00E9B500, 0x00E9C900 }},
+    { .dma = ENTITY_ROM(PinkFlower_gfx) },
     .entityType = ENTITY_TYPE_PINK_FLOWER,
     .aabbSize = { 44, 100, 25 }
 };
 
-EntityBlueprint D_802BC7F4_E2F124 = {
+EntityBlueprint Entity_SpinningFlower = {
     .flags = 0,
-    .typeDataSize = 0x70,
-    .renderCommandList = Entity_SpinningFlower_Render,
+    .typeDataSize = sizeof(SpinningFlowerData),
+    .renderCommandList = Entity_SpinningFlower_RenderScript,
     .modelAnimationNodes = 0,
     .fpInit = entity_SpinningFlower_init,
     .updateEntityScript = Entity_SpinningFlower_Script,
     .fpHandleCollision = NULL,
-    {{ 0x00E9C900, 0x00E9D650 }},
+    { .dma = ENTITY_ROM(SpinningFlower) },
     .entityType = ENTITY_TYPE_SPINNING_FLOWER,
     .aabbSize = { 45, 22, 42 }
 };

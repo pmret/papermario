@@ -457,25 +457,14 @@ typedef struct BlockData {
     /* 0x008 */ char unk_08[2];
     /* 0x00A */ u16 gameFlagIndex;
     /* 0x00C */ char unk_0C[2];
-    /* 0x00E */ s16 unk_0E;
-    /* 0x010 */ s16 itemEntityIndex; // for spawned item entities
+    /* 0x00E */ s16 sinkingTimer;
+    /* 0x010 */ s16 item; // for spawned item entities
     /* 0x012 */ s16 childEntityIndex; // for block entities that spawn other block entities
     /* 0x014 */ f32 initialY;
     /* 0x018 */ f32 recoilInterpPhase;
     /* 0x01C */ char unk_1C[0x4];
 } BlockData; // size = 0x20
 
-typedef struct ItemBlockData {
-    /* 0x00 */ u16 unk_00;
-    /* 0x02 */ char unk_02[8];
-    /* 0x0A */ u16 gameFlagIndex;
-    /* 0x0C */ char unk_C[4];
-    /* 0x10 */ s16 itemID;
-    /* 0x12 */ s16 childEntityIndex; // for block entities that spawn other block entities
-    /* 0x14 */ char unk_14[0xC];
-} ItemBlockData; // size = 0x20
-
-// size unknown
 typedef struct SuperBlockContentData {
     /* 0x000 */ u8 parentEntityIndex; // for block entities spawned by other block entities
     /* 0x001 */ u8 unk_01;
@@ -493,8 +482,8 @@ typedef struct SuperBlockContentData {
     /* 0x0D0 */ u16 yawBufferPos;
     /* 0x0D4 */ f32 yawBuffer[20];
     /* 0x124 */ s32 unk_124;
-    /* 0x128 */ Gfx* unk_128;
-    /* 0x12C */ Gfx* unk_12C;
+    /* 0x128 */ Gfx* gfx1;
+    /* 0x12C */ Gfx* gfx2;
 } SuperBlockContentData; // size = 0x130
 
 // size unknown
@@ -546,7 +535,7 @@ typedef struct ChestData {
     /* 0x00 */ u16 gameFlagIndex;
     /* 0x02 */ s16 giveItemTimer;
     /* 0x04 */ u8 state;
-    /* 0x05 */ u8 unk_05;
+    /* 0x05 */ u8 openState;
     /* 0x06 */ s8 postLidAnimDelay;
     /* 0x07 */ s8 unk_07;
     /* 0x08 */ f32 lidAngle;
@@ -599,9 +588,9 @@ typedef struct HiddenPanelData {
     /* 0x78 */ Gfx* renderDList;
 }   HiddenPanelData; // size = 0x7C
 
-typedef struct SignPostData {
+typedef struct SignpostData {
     /* 0x00 */ char unk_00[8];
-} SignPostData; // size = 0x08
+} SignpostData; // size = 0x08
 
 typedef struct PadlockData {
     /* 0x00 */ f32 pushSpeed;
@@ -718,6 +707,19 @@ typedef struct SpinningFlowerData {
     /* 0x30 */ Mtx unk_30;
 } SpinningFlowerData; // size = 0x70
 
+typedef struct TrumpetPlantData {
+    /* 0x0 */ s32 numCoins;
+} TrumpetPlantData; // size = 0x4
+
+typedef struct MunchlesiaData {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ s8 unk_04[0x8];
+    /* 0x0C */ f32 unk_0C;
+    /* 0x10 */ f32 unk_10;
+    /* 0x14 */ f32 unk_14;
+    /* 0x18 */ f32 unk_18;
+} MunchlesiaData; // size = 0x1C
+
 typedef struct ArrowSignData {
     /* 0x00 */ s32 unk_00;
     /* 0x04 */ f32 angle;
@@ -730,8 +732,8 @@ typedef struct ArrowSignData {
 typedef s32 (*EntityCallback)(struct Entity*);
 
 typedef struct DmaEntry {
-    s32 start;
-    s32 end;
+    void* start;
+    void* end;
 } DmaEntry;
 
 typedef struct EntityBlueprint {
@@ -778,7 +780,6 @@ typedef struct Entity {
         SwitchData* swtch;
         ShatteringBlockData* shatteringBlock;
         BlockData* block;
-        ItemBlockData* itemBlock;
         WoodenCrateData* crate;
         ChestData* chest;
         BlueWarpPipeData* bluePipe;
@@ -786,7 +787,7 @@ typedef struct Entity {
         SuperBlockContentData* superBlockContent;
         SimpleSpringData* simpleSpring;
         HiddenPanelData* hiddenPanel;
-        SignPostData* signPost;
+        SignpostData* signPost;
         PadlockData* padlock;
         BoardedFloorData* boardedFloor;
         BombableRockData* bombableRock;
@@ -795,10 +796,12 @@ typedef struct Entity {
         CymbalPlantData* cymbalPlant;
         PinkFlowerData* pinkFlower;
         SpinningFlowerData* spinningFlower;
+        TrumpetPlantData* trumpetPlant;
+        MunchlesiaData* munchlesia;
         ArrowSignData* arrowSign;
         s32* unk;
     } dataBuf;
-    /* 0x44 */ Vec3s* vertexData;
+    /* 0x44 */ void* vertexData;
     /* 0x48 */ Vec3f position;
     /* 0x54 */ Vec3f scale;
     /* 0x60 */ Vec3f rotation;
@@ -813,7 +816,7 @@ typedef Entity* EntityList[MAX_ENTITIES];
 
 struct Shadow;
 
-typedef s32 (*ShadowCallback)(struct Shadow*);
+typedef void (*ShadowCallback)(struct Shadow*);
 
 // same as EntityBlueprint
 typedef struct ShadowBlueprint {

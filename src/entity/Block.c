@@ -1,7 +1,7 @@
 #include "common.h"
 #include "effects.h"
 #include "ld_addrs.h"
-#include "entity_script.h"
+#include "entity.h"
 
 extern Gfx Entity_InertYellowBlock_Render[];
 extern Gfx Entity_InertRedBlock_Render[];
@@ -14,6 +14,14 @@ extern Gfx Entity_PowBlock_Render[];
 
 extern EntityScript Entity_CreatedInertBlock_Script;
 extern EntityScript Entity_BreakingBlock_Script;
+
+extern EntityBlueprint Entity_ShatteringHammer1Block;
+extern EntityBlueprint Entity_ShatteringHammer2Block;
+extern EntityBlueprint Entity_ShatteringHammer3Block;
+extern EntityBlueprint Entity_ShatteringHammer1BlockTiny;
+extern EntityBlueprint Entity_ShatteringHammer2BlockTiny;
+extern EntityBlueprint Entity_ShatteringHammer3BlockTiny;
+extern EntityBlueprint Entity_ShatteringBrickBlock;
 
 void entity_BrickBlock_idle(Entity* entity);
 void entity_breakable_block_create_shattering_entity(Entity* entity);
@@ -85,9 +93,9 @@ void entity_base_block_update_slow_sinking(Entity* entity) {
         return;
     }
 
-    if (!(data->unk_0E & 0x8000)) {
-        if (data->unk_0E < 150) {
-            data->unk_0E++;
+    if (!(data->sinkingTimer & 0x8000)) {
+        if (data->sinkingTimer < 150) {
+            data->sinkingTimer++;
             return;
         }
 
@@ -108,7 +116,7 @@ void entity_base_block_update_slow_sinking(Entity* entity) {
 
         if (data->initialY < entity->position.y) {
             entity->position.y = data->initialY;
-            data->unk_0E = -1;
+            data->sinkingTimer = -1;
             entity->flags &= ~ENTITY_FLAGS_200000;
         }
     } else {
@@ -120,11 +128,11 @@ void entity_base_block_update_slow_sinking(Entity* entity) {
 
                     if (entity->position.y - temp2 <= playerStatus->colliderHeight + 1) {
                         entity->position.y = playerStatus->colliderHeight + 1;
-                        data->unk_0E = 1;
+                        data->sinkingTimer = 1;
                     }
                 }
             } else {
-                data->unk_0E = 1;
+                data->sinkingTimer = 1;
                 return;
             }
             do {} while (0); // needed to match
@@ -133,13 +141,13 @@ void entity_base_block_update_slow_sinking(Entity* entity) {
             if (shadow != NULL) {
                 if (entity->position.y <= shadow->position.y) {
                     entity->position.y = shadow->position.y;
-                    data->unk_0E = 1;
+                    data->sinkingTimer = 1;
                 }
             }
         }
 
         if (entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_CEILING) {
-            data->unk_0E = 1;
+            data->sinkingTimer = 1;
             return;
         }
 
@@ -160,7 +168,7 @@ void entity_base_block_update_slow_sinking(Entity* entity) {
 
         if (entity->position.y < data->initialY - 50.0f) {
             entity->position.y = data->initialY - 50.0f;
-            data->unk_0E = 1;
+            data->sinkingTimer = 1;
         }
     }
 }
@@ -173,8 +181,8 @@ s32 entity_base_block_idle(Entity* entity) {
         if (entity->flags & ENTITY_FLAGS_200000) {
             ret = 1;
             entity_base_block_update_slow_sinking(entity);
-            if (data->itemEntityIndex != -1) {
-                ItemEntity* itemEntity = get_item_entity(data->itemEntityIndex);
+            if (data->item != -1) {
+                ItemEntity* itemEntity = get_item_entity(data->item);
                 itemEntity->position.y = entity->position.y + 4.0f;
             }
         }
@@ -186,9 +194,9 @@ s32 entity_base_block_idle(Entity* entity) {
 void entity_base_block_init(Entity* entity) {
     BlockData* data = entity->dataBuf.block;
 
-    data->itemEntityIndex = -1;
+    data->item = -1;
     data->initialY = entity->position.y;
-    data->unk_0E = -1;
+    data->sinkingTimer = -1;
     entity->flags &= ~ENTITY_FLAGS_200000;
 }
 
@@ -430,9 +438,9 @@ void entity_init_Hammer1Block_normal(Entity* entity) {
 void entity_init_HammerBlock_small(Entity* entity) {
     BlockData* data = entity->dataBuf.block;
 
-    data->itemEntityIndex = -1;
+    data->item = -1;
     data->initialY = entity->position.y;
-    data->unk_0E = -1;
+    data->sinkingTimer = -1;
     entity->flags &= ~ENTITY_FLAGS_200000;
     entity->scale.x = 0.5f;
     entity->scale.y = 0.5f;
@@ -543,7 +551,7 @@ EntityBlueprint Entity_InertYellowBlock = {
     .fpInit = entity_init_Hammer1Block_normal,
     .updateEntityScript = Entity_InertBlock_Script,
     .fpHandleCollision = entity_block_handle_collision,
-    {{ (s32)entity_model_InertYellowBlock_ROM_START, (s32)entity_model_InertYellowBlock_ROM_END }},
+    { .dma = ENTITY_ROM(InertYellowBlock) },
     .entityType = ENTITY_TYPE_MULTI_TRIGGER_BLOCK,
     .aabbSize = { 25, 25, 25 }
 };
@@ -556,7 +564,7 @@ EntityBlueprint Entity_InertRedBlock = {
     .fpInit = entity_init_Hammer1Block_normal,
     .updateEntityScript = Entity_InertBlock_Script,
     .fpHandleCollision = entity_block_handle_collision,
-    {{ (s32)entity_model_InertRedBlock_ROM_START, (s32)entity_model_InertRedBlock_ROM_END }},
+    { .dma = ENTITY_ROM(InertRedBlock) },
     .entityType = ENTITY_TYPE_INACTIVE_BLOCK,
     .aabbSize = { 25, 25, 25 }
 };
@@ -569,7 +577,7 @@ EntityBlueprint Entity_BrickBlock = {
     .fpInit = entity_base_block_init,
     .updateEntityScript = Entity_BrickBlock_Script,
     .fpHandleCollision = entity_block_handle_collision,
-    {{ (s32)entity_model_BrickBlock_ROM_START, (s32)entity_model_BrickBlock_ROM_END }},
+    { .dma = ENTITY_ROM(BrickBlock) },
     .entityType = ENTITY_TYPE_BRICK_BLOCK,
     .aabbSize = { 25, 25, 25 }
 };
@@ -582,7 +590,7 @@ EntityBlueprint Entity_MulticoinBlock = {
     .fpInit = entity_MulticoinBlock_init,
     .updateEntityScript = Entity_MulticoinBlock_Script,
     .fpHandleCollision = entity_block_handle_collision,
-    {{ (s32)entity_model_BrickBlock_ROM_START, (s32)entity_model_BrickBlock_ROM_END }},
+    { .dma = ENTITY_ROM(BrickBlock) },
     .entityType = ENTITY_TYPE_MULTI_COIN_BRICK,
     .aabbSize = { 25, 25, 25 }
 };
@@ -595,7 +603,7 @@ EntityBlueprint Entity_Hammer1Block = {
     .fpInit = entity_init_Hammer1Block_normal,
     .updateEntityScript = Entity_Hammer1Block_Script,
     .fpHandleCollision = entity_block_handle_collision,
-    {{ (s32)entity_model_Hammer1Block_ROM_START, (s32)entity_model_Hammer1Block_ROM_END }},
+    { .dma = ENTITY_ROM(Hammer1Block) },
     .entityType = ENTITY_TYPE_HAMMER1_BLOCK,
     .aabbSize = { 50, 50, 50 }
 };
@@ -608,7 +616,7 @@ EntityBlueprint Entity_Hammer1Block_WideHitbox = {
     .fpInit = entity_init_Hammer1Block_normal,
     .updateEntityScript = Entity_Hammer1Block_Script,
     .fpHandleCollision = entity_block_handle_collision,
-    {{ (s32)entity_model_Hammer1Block_ROM_START, (s32)entity_model_Hammer1Block_ROM_END }},
+    { .dma = ENTITY_ROM(Hammer1Block) },
     .entityType = ENTITY_TYPE_HAMMER1_BLOCK,
     .aabbSize = { 100, 50, 50 }
 };
@@ -621,7 +629,7 @@ EntityBlueprint Entity_Hammer1Block_TallHitbox = {
     .fpInit = entity_init_Hammer1Block_normal,
     .updateEntityScript = Entity_Hammer1Block_Script,
     .fpHandleCollision = entity_block_handle_collision,
-    {{ (s32)entity_model_Hammer1Block_ROM_START, (s32)entity_model_Hammer1Block_ROM_END }},
+    { .dma = ENTITY_ROM(Hammer1Block) },
     .entityType = ENTITY_TYPE_HAMMER1_BLOCK,
     .aabbSize = { 50, 50, 100 }
 };
@@ -634,7 +642,7 @@ EntityBlueprint Entity_Hammer1BlockTiny = {
     .fpInit = entity_init_HammerBlock_small,
     .updateEntityScript = Entity_BaseBlock_Script,
     .fpHandleCollision = entity_block_handle_collision,
-    {{ (s32)entity_model_Hammer1Block_ROM_START, (s32)entity_model_Hammer1Block_ROM_END }},
+    { .dma = ENTITY_ROM(Hammer1Block) },
     .entityType = ENTITY_TYPE_HAMMER1_BLOCK_TINY,
     .aabbSize = { 25, 25, 25 }
 };
@@ -647,7 +655,7 @@ EntityBlueprint Entity_Hammer2Block = {
     .fpInit = entity_base_block_init,
     .updateEntityScript = Entity_BaseBlock_Script,
     .fpHandleCollision = entity_block_handle_collision,
-    {{ (s32)entity_model_Hammer2Block_ROM_START, (s32)entity_model_Hammer2Block_ROM_END }},
+    { .dma = ENTITY_ROM(Hammer2Block) },
     .entityType = ENTITY_TYPE_HAMMER2_BLOCK,
     .aabbSize = { 50, 50, 50 }
 };
@@ -660,7 +668,7 @@ EntityBlueprint Entity_Hammer2Block_WideHitbox = {
     .fpInit = entity_base_block_init,
     .updateEntityScript = Entity_BaseBlock_Script,
     .fpHandleCollision = entity_block_handle_collision,
-    {{ (s32)entity_model_Hammer2Block_ROM_START, (s32)entity_model_Hammer2Block_ROM_END }},
+    { .dma = ENTITY_ROM(Hammer2Block) },
     .entityType = ENTITY_TYPE_HAMMER2_BLOCK,
     .aabbSize = { 100, 50, 50 }
 };
@@ -673,7 +681,7 @@ EntityBlueprint Entity_Hammer2Block_TallHitbox = {
     .fpInit = entity_base_block_init,
     .updateEntityScript = Entity_BaseBlock_Script,
     .fpHandleCollision = entity_block_handle_collision,
-    {{ (s32)entity_model_Hammer2Block_ROM_START, (s32)entity_model_Hammer2Block_ROM_END }},
+    { .dma = ENTITY_ROM(Hammer2Block) },
     .entityType = ENTITY_TYPE_HAMMER2_BLOCK,
     .aabbSize = { 50, 50, 100 }
 };
@@ -686,7 +694,7 @@ EntityBlueprint Entity_Hammer2BlockTiny = {
     .fpInit = entity_init_HammerBlock_small,
     .updateEntityScript = Entity_BaseBlock_Script,
     .fpHandleCollision = entity_block_handle_collision,
-    {{ (s32)entity_model_Hammer2Block_ROM_START, (s32)entity_model_Hammer2Block_ROM_END }},
+    { .dma = ENTITY_ROM(Hammer2Block) },
     .entityType = ENTITY_TYPE_HAMMER2_BLOCK_TINY,
     .aabbSize = { 25, 25, 25 }
 };
@@ -699,7 +707,7 @@ EntityBlueprint Entity_Hammer3Block = {
     .fpInit = entity_base_block_init,
     .updateEntityScript = Entity_BaseBlock_Script,
     .fpHandleCollision = entity_block_handle_collision,
-    {{ (s32)entity_model_Hammer3Block_ROM_START, (s32)entity_model_Hammer3Block_ROM_END }},
+    { .dma = ENTITY_ROM(Hammer3Block) },
     .entityType = ENTITY_TYPE_HAMMER3_BLOCK,
     .aabbSize = { 50, 50, 50 }
 };
@@ -712,7 +720,7 @@ EntityBlueprint Entity_Hammer3Block_WideHitbox = {
     .fpInit = entity_base_block_init,
     .updateEntityScript = Entity_BaseBlock_Script,
     .fpHandleCollision = entity_block_handle_collision,
-    {{ (s32)entity_model_Hammer3Block_ROM_START, (s32)entity_model_Hammer3Block_ROM_END }},
+    { .dma = ENTITY_ROM(Hammer3Block) },
     .entityType = ENTITY_TYPE_HAMMER3_BLOCK,
     .aabbSize = { 100, 50, 50 }
 };
@@ -725,7 +733,7 @@ EntityBlueprint Entity_Hammer3Block_TallHitbox = {
     .fpInit = entity_base_block_init,
     .updateEntityScript = Entity_BaseBlock_Script,
     .fpHandleCollision = entity_block_handle_collision,
-    {{ (s32)entity_model_Hammer3Block_ROM_START, (s32)entity_model_Hammer3Block_ROM_END }},
+    { .dma = ENTITY_ROM(Hammer3Block) },
     .entityType = ENTITY_TYPE_HAMMER3_BLOCK,
     .aabbSize = { 50, 50, 100 }
 };
@@ -738,7 +746,7 @@ EntityBlueprint Entity_Hammer3BlockTiny = {
     .fpInit = entity_init_HammerBlock_small,
     .updateEntityScript = Entity_BaseBlock_Script,
     .fpHandleCollision = entity_block_handle_collision,
-    {{ (s32)entity_model_Hammer3Block_ROM_START, (s32)entity_model_Hammer3Block_ROM_END }},
+    { .dma = ENTITY_ROM(Hammer3Block) },
     .entityType = ENTITY_TYPE_HAMMER3_BLOCK_TINY,
     .aabbSize = { 25, 25, 25 }
 };
@@ -751,7 +759,7 @@ EntityBlueprint Entity_PushBlock = {
     .fpInit = entity_base_block_init,
     .updateEntityScript = Entity_BaseBlock_Script,
     .fpHandleCollision = entity_block_handle_collision,
-    {{ (s32)entity_model_PushBlock_ROM_START, (s32)entity_model_PushBlock_ROM_END }},
+    { .dma = ENTITY_ROM(PushBlock) },
     .entityType = ENTITY_TYPE_PUSH_BLOCK,
     .aabbSize = { 25, 25, 25 }
 };
@@ -764,7 +772,7 @@ EntityBlueprint Entity_PowBlock = {
     .fpInit = entity_base_block_init,
     .updateEntityScript = Entity_PowBlock_Script,
     .fpHandleCollision = entity_block_handle_collision,
-    {{ (s32)entity_model_PowBlock_ROM_START, (s32)entity_model_PowBlock_ROM_END }},
+    { .dma = ENTITY_ROM(PowBlock) },
     .entityType = ENTITY_TYPE_POW_BLOCK,
     .aabbSize = { 30, 25, 25 },
 };

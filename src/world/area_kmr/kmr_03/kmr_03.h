@@ -17,5 +17,3 @@ extern EvtScript N(80242340);
 extern EvtScript N(802406C0);
 extern EvtScript N(main);
 extern EvtScript N(makeEntities);
-
-extern s32 Entity_BrickBlock;

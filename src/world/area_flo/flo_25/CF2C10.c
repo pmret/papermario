@@ -1,5 +1,6 @@
 #include "flo_25.h"
 #include "message_ids.h"
+#include "entity.h"
 #include "sprite/npc/bzzap.h"
 #include "sprite/npc/gate_flower.h"
 #include "sprite/npc/tuff_puff.h"

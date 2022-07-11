@@ -150,8 +150,8 @@ ApiStatus N(Quizmo_HideWorld)(Evt* script, s32 isInitialCall) {
         for (i = 0; i < MAX_ITEM_ENTITIES; i++) {
             ItemEntity* itemEntity = get_item_entity(i);
 
-            if (itemEntity != NULL && itemEntity->flags & ENTITY_FLAGS_SKIP_UPDATE_TRANSFORM_MATRIX) {
-                itemEntity->flags |= ENTITY_FLAGS_8000000;
+            if (itemEntity != NULL && itemEntity->flags & ITEM_ENTITY_FLAGS_10) {
+                itemEntity->flags |= ITEM_ENTITY_FLAGS_8000000;
             }
         }
 

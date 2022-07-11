@@ -1,8 +1,8 @@
 #include "common.h"
 #include "ld_addrs.h"
-#include "entity_script.h"
+#include "entity.h"
 
-extern Gfx Entity_SignPost_Render[];
+extern Gfx Entity_Signpost_Render[];
 
 void entity_Signpost_idle(Entity* entity) {
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -20,22 +20,22 @@ void entity_Signpost_idle(Entity* entity) {
     }
 }
 
-EntityScript Entity_SignPost_Script = {
+EntityScript Entity_Signpost_Script = {
     es_SetCallback(entity_Signpost_idle, 0)
     es_End
 };
 
-EntityModelScript Entity_SignPost_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(Entity_SignPost_Render, RENDER_MODE_SURFACE_OPA);
+EntityModelScript Entity_Signpost_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(Entity_Signpost_Render, RENDER_MODE_SURFACE_OPA);
 
-EntityBlueprint Entity_SignPost = {
+EntityBlueprint Entity_Signpost = {
     .flags = ENTITY_FLAGS_SQUARE_SHADOW | ENTITY_FLAGS_400 | ENTITY_FLAGS_SET_SHADOW_FLAG200,
-    .typeDataSize = sizeof(SignPostData),
-    .renderCommandList = Entity_SignPost_RenderScript,
+    .typeDataSize = sizeof(SignpostData),
+    .renderCommandList = Entity_Signpost_RenderScript,
     .modelAnimationNodes = 0x00000000,
     .fpInit = NULL,
-    .updateEntityScript = Entity_SignPost_Script,
+    .updateEntityScript = Entity_Signpost_Script,
     .fpHandleCollision = NULL,
-    {{ entity_model_SignPost_ROM_START, entity_model_SignPost_ROM_END }},
+    {{ entity_model_Signpost_ROM_START, entity_model_Signpost_ROM_END }},
     .entityType = ENTITY_TYPE_SIGNPOST,
     .aabbSize = { 40, 50, 20 }
 };

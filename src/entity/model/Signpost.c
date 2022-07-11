@@ -1,6 +1,6 @@
 #include "common.h"
 
-Vtx Entity_SignPost_vtxPost[] = {
+Vtx Entity_Signpost_vtxPole[] = {
     {{{    -2,     0,     0 }, 0, {   461,  -167 }, { 197, 182, 159, 255 }}},
     {{{    -2,     0,    -5 }, 0, {   461,  -167 }, { 197, 182, 159, 255 }}},
     {{{     3,     0,    -5 }, 0, {   589,  -167 }, { 197, 182, 159, 255 }}},
@@ -20,7 +20,7 @@ Vtx Entity_SignPost_vtxPost[] = {
     {{{     3,     0,     0 }, 0, {   413,     9 }, { 197, 182, 159, 255 }}},
     {{{     3,    35,     0 }, 0, {   411,   277 }, { 197, 182, 159, 255 }}},
 };
-Vtx Entity_SignPost_vtxSign[] = {
+Vtx Entity_Signpost_vtxSign[] = {
     {{{    -2,    49,     5 }, 0, {   461,  1049 }, { 255, 255, 255, 255 }}},
     {{{   -20,    50,     5 }, 0, {     0,  1049 }, { 255, 255, 255, 255 }}},
     {{{   -20,    40,     5 }, 0, {     0,   799 }, { 255, 255, 255, 255 }}},
@@ -93,9 +93,9 @@ Vtx Entity_SignPost_vtxSign[] = {
     {{{    19,    30,     0 }, 0, {   998,   128 }, { 255, 255, 255, 255 }}},
 };
 
-#include "entity/model/SignPost.png.inc.c"
-#include "entity/model/SignPost.pal.inc.c"
-Gfx Entity_SignPost_LoadTexture[] = {
+#include "entity/model/Signpost.png.inc.c"
+#include "entity/model/Signpost.pal.inc.c"
+Gfx Entity_Signpost_LoadTexture[] = {
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
     gsDPPipeSync(),
     gsDPSetTextureDetail(G_TD_CLAMP),
@@ -109,12 +109,12 @@ Gfx Entity_SignPost_LoadTexture[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx Entity_SignPost_RenderSign[] = {
+Gfx Entity_Signpost_RenderSign[] = {
     gsDPPipeSync(),
-    gsSPDisplayList(Entity_SignPost_LoadTexture),
+    gsSPDisplayList(Entity_Signpost_LoadTexture),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
-    gsSPVertex(Entity_SignPost_vtxSign, 31, 0),
+    gsSPVertex(Entity_Signpost_vtxSign, 31, 0),
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
     gsSP2Triangles(2, 1, 4, 0, 2, 4, 5, 0),
     gsSP2Triangles(4, 1, 0, 0, 4, 0, 6, 0),
@@ -128,11 +128,11 @@ Gfx Entity_SignPost_RenderSign[] = {
     gsSP2Triangles(20, 23, 24, 0, 20, 24, 25, 0),
     gsSP2Triangles(24, 23, 22, 0, 24, 22, 26, 0),
     gsSP2Triangles(27, 28, 29, 0, 27, 29, 30, 0),
-    gsSPVertex(&Entity_SignPost_vtxSign[7], 2, 0),
-    gsSPVertex(&Entity_SignPost_vtxSign[13], 1, 2),
-    gsSPVertex(&Entity_SignPost_vtxSign[16], 1, 3),
-    gsSPVertex(&Entity_SignPost_vtxSign[19], 1, 4),
-    gsSPVertex(&Entity_SignPost_vtxSign[31], 9, 5),
+    gsSPVertex(&Entity_Signpost_vtxSign[7], 2, 0),
+    gsSPVertex(&Entity_Signpost_vtxSign[13], 1, 2),
+    gsSPVertex(&Entity_Signpost_vtxSign[16], 1, 3),
+    gsSPVertex(&Entity_Signpost_vtxSign[19], 1, 4),
+    gsSPVertex(&Entity_Signpost_vtxSign[31], 9, 5),
     gsSP2Triangles(1, 0, 5, 0, 1, 5, 9, 0),
     gsSP2Triangles(2, 6, 10, 0, 2, 10, 4, 0),
     gsSP2Triangles(6, 11, 8, 0, 6, 8, 10, 0),
@@ -140,15 +140,15 @@ Gfx Entity_SignPost_RenderSign[] = {
     gsSP2Triangles(7, 11, 6, 0, 7, 6, 12, 0),
     gsSP2Triangles(8, 11, 7, 0, 8, 7, 13, 0),
     gsSPClearGeometryMode(G_SHADING_SMOOTH),
-    gsSPVertex(&Entity_SignPost_vtxSign[40], 4, 0),
+    gsSPVertex(&Entity_Signpost_vtxSign[40], 4, 0),
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
     gsSPSetGeometryMode(G_SHADING_SMOOTH),
-    gsSPVertex(Entity_SignPost_vtxSign, 1, 0),
-    gsSPVertex(&Entity_SignPost_vtxSign[6], 1, 1),
-    gsSPVertex(&Entity_SignPost_vtxSign[20], 1, 2),
-    gsSPVertex(&Entity_SignPost_vtxSign[25], 1, 3),
-    gsSPVertex(&Entity_SignPost_vtxSign[27], 2, 4),
-    gsSPVertex(&Entity_SignPost_vtxSign[44], 14, 6),
+    gsSPVertex(Entity_Signpost_vtxSign, 1, 0),
+    gsSPVertex(&Entity_Signpost_vtxSign[6], 1, 1),
+    gsSPVertex(&Entity_Signpost_vtxSign[20], 1, 2),
+    gsSPVertex(&Entity_Signpost_vtxSign[25], 1, 3),
+    gsSPVertex(&Entity_Signpost_vtxSign[27], 2, 4),
+    gsSPVertex(&Entity_Signpost_vtxSign[44], 14, 6),
     gsSP2Triangles(0, 2, 3, 0, 0, 3, 1, 0),
     gsSP2Triangles(6, 4, 7, 0, 6, 7, 8, 0),
     gsSP2Triangles(6, 8, 9, 0, 6, 9, 10, 0),
@@ -157,19 +157,19 @@ Gfx Entity_SignPost_RenderSign[] = {
     gsSP2Triangles(5, 15, 16, 0, 5, 16, 17, 0),
     gsSP2Triangles(5, 17, 18, 0, 5, 18, 19, 0),
     gsSPClearGeometryMode(G_SHADING_SMOOTH),
-    gsSPVertex(&Entity_SignPost_vtxSign[58], 12, 0),
+    gsSPVertex(&Entity_Signpost_vtxSign[58], 12, 0),
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
     gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
     gsSP2Triangles(8, 9, 10, 0, 8, 10, 11, 0),
     gsSPEndDisplayList(),
 };
 
-Gfx Entity_SignPost_RenderPost[] = {
+Gfx Entity_Signpost_RenderPole[] = {
     gsDPPipeSync(),
-    gsSPDisplayList(Entity_SignPost_LoadTexture),
+    gsSPDisplayList(Entity_Signpost_LoadTexture),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
-    gsSPVertex(Entity_SignPost_vtxPost, 18, 0),
+    gsSPVertex(Entity_Signpost_vtxPole, 18, 0),
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
     gsSP2Triangles(0, 3, 4, 0, 0, 4, 5, 0),
     gsSP2Triangles(6, 7, 8, 0, 6, 8, 9, 0),
@@ -179,13 +179,13 @@ Gfx Entity_SignPost_RenderPost[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx Entity_SignPost_RenderMain[] = {
-    gsSPDisplayList(Entity_SignPost_RenderPost),
-    gsSPDisplayList(Entity_SignPost_RenderSign),
+Gfx Entity_Signpost_RenderMain[] = {
+    gsSPDisplayList(Entity_Signpost_RenderPole),
+    gsSPDisplayList(Entity_Signpost_RenderSign),
     gsSPEndDisplayList(),
 };
 
-Gfx Entity_SignPost_Render[] = {
-    gsSPDisplayList(Entity_SignPost_RenderMain),
+Gfx Entity_Signpost_Render[] = {
+    gsSPDisplayList(Entity_Signpost_RenderMain),
     gsSPEndDisplayList(),
 };

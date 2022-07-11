@@ -2,6 +2,7 @@
 #include "effects.h"
 #include "script_api/battle.h"
 #include "message_ids.h"
+#include "entity.h"
 #include "sprite/npc/artist_toad.h"
 #include "sprite/npc/chuck_quizmo.h"
 #include "sprite/npc/dryite.h"

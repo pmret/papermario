@@ -297,7 +297,7 @@ void clear_virtual_entity_list(void);
 void reset_model_animators(void);
 void init_virtual_entity_list(void);
 void init_model_animators(void);
-void play_model_animation(s32, s32);
+void play_model_animation(s32, s16*);
 s32 heap_free(void* ptr);
 
 void btl_state_update_normal_start(void);

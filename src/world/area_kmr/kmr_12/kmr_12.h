@@ -17,5 +17,3 @@ extern EvtScript N(PlayMusic);
 extern EvtScript N(MakeEntities);
 extern EvtScript N(ReadWestSign);
 extern NpcGroupList N(npcGroupList);
-
-extern s32 Entity_SignPost;

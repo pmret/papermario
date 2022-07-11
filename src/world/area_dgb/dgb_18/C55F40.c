@@ -1,5 +1,6 @@
 #include "dgb_18.h"
 #include "message_ids.h"
+#include "entity.h"
 #include "sprite/npc/world_bombette.h"
 #include "sprite/npc/world_bow.h"
 #include "sprite/npc/world_goombario.h"

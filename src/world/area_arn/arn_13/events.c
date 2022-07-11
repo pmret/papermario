@@ -1,4 +1,5 @@
 #include "arn_13.h"
+#include "entity.h"
 #include "sprite/npc/goomba.h"
 #include "sprite/npc/tubbas_heart.h"
 
@@ -259,7 +260,7 @@ EvtScript N(80240BF0) = {
 };
 
 EvtScript N(makeEntities) = {
-    EVT_CALL(MakeEntity, EVT_PTR(Entity_SignPost), 200, 0, -40, 0, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, EVT_PTR(Entity_Signpost), 200, 0, -40, 0, MAKE_ENTITY_END)
     EVT_CALL(AssignScript, EVT_PTR(N(80240BF0)))
     EVT_RETURN
     EVT_END

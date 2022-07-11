@@ -2,7 +2,7 @@
 #include "model.h"
 #include "ld_addrs.h"
 #include "stdlib/stdarg.h"
-#include "entity_script.h"
+#include "entity.h"
 
 typedef struct GameMode {
     /* 0x00 */ u16 flags;
@@ -1231,20 +1231,20 @@ void update_shadows(void) {
         if (shadow != NULL) {
             entity_numShadows++;
 
-            if (!(shadow->flags & SHADOW_FLAGS_40000000)) {
-                if (shadow->flags & SHADOW_FLAGS_ALIGNED_TO_CAMERA) {
+            if (!(shadow->flags & ENTITY_FLAGS_SKIP_UPDATE)) {
+                if (shadow->flags & ENTITY_FLAGS_ALWAYS_FACE_CAMERA) {
                     shadow->rotation.y = -gCameras[gCurrentCameraID].currentYaw;
                 }
 
                 update_shadow_transform_matrix(shadow);
 
-                if (shadow->flags & SHADOW_FLAGS_COMPLEX_MODEL) {
+                if (shadow->flags & ENTITY_FLAGS_HAS_ANIMATED_MODEL) {
                     update_model_animator(shadow->entityModelID);
                 } else {
                     exec_entity_model_commandlist(shadow->entityModelID);
                 }
 
-                if (shadow->flags & SHADOW_FLAGS_READY_TO_DELETE) {
+                if (shadow->flags & ENTITY_FLAGS_PENDING_INSTANCE_DELETE) {
                     _delete_shadow(shadow->listIndex);
                 }
             }
@@ -1438,14 +1438,14 @@ void render_shadows(void) {
         Shadow* shadow = get_shadow_by_index(i);
 
         if (shadow != NULL) {
-            if (shadow->flags & SHADOW_FLAGS_HIDDEN) {
-                if (shadow->flags & SHADOW_FLAGS_FADING_AWAY) {
+            if (shadow->flags & ENTITY_FLAGS_HIDDEN) {
+                if (shadow->flags & ENTITY_FLAGS_FADING_AWAY) {
                     shadow->alpha -= 20;
                     if (shadow->alpha <= 20) {
-                        shadow->flags |= SHADOW_FLAGS_READY_TO_DELETE;
+                        shadow->flags |= ENTITY_FLAGS_PENDING_INSTANCE_DELETE;
                     }
                 }
-            } else if (shadow->flags & SHADOW_FLAGS_COMPLEX_MODEL) {
+            } else if (shadow->flags & ENTITY_FLAGS_HAS_ANIMATED_MODEL) {
                 if (shadow->vertexArray == NULL) {
                     render_animated_model(shadow->entityModelID, &shadow->transformMatrix);
                 } else {
@@ -1455,10 +1455,10 @@ void render_shadows(void) {
                                   shadow->vertexArray);
                 }
             } else {
-                if (shadow->flags & SHADOW_FLAGS_FADING_AWAY) {
+                if (shadow->flags & ENTITY_FLAGS_FADING_AWAY) {
                     shadow->alpha -= 20;
                     if (shadow->alpha <= 20) {
-                        shadow->flags |=  SHADOW_FLAGS_READY_TO_DELETE;
+                        shadow->flags |=  ENTITY_FLAGS_PENDING_INSTANCE_DELETE;
                     }
                 }
 
@@ -1601,7 +1601,7 @@ void delete_entity(s32 entityIndex) {
     if (entity->shadowIndex >= 0) {
         Shadow* shadow = get_shadow_by_index(entity->shadowIndex);
 
-        shadow->flags |= SHADOW_FLAGS_FADING_AWAY;
+        shadow->flags |= ENTITY_FLAGS_FADING_AWAY;
     }
 
     heap_free((*gCurrentEntityListPtr)[entityIndex]);
@@ -1626,7 +1626,7 @@ void delete_entity_and_unload_data(s32 entityIndex) {
     if (entity->shadowIndex >= 0) {
         Shadow* shadow = get_shadow_by_index(entity->shadowIndex);
 
-        shadow->flags |= SHADOW_FLAGS_FADING_AWAY;
+        shadow->flags |= ENTITY_FLAGS_FADING_AWAY;
     }
 
     heap_free((*gCurrentEntityListPtr)[entityIndex]);
@@ -2126,11 +2126,11 @@ void load_split_entity_data(Entity* entity, EntityBlueprint* entityData, s32 lis
                 PANIC();
             }
 
-            dma2size_1 = dma_copy(dmaList[0].start, dmaList[0].end, dmaList[0].start + ((gEntityHeapBase - totalLoaded * 4 - dmaList[0].end) >> 2) * 4) >> 2;
+            dma2size_1 = dma_copy(dmaList[0].start, dmaList[0].end, dmaList[0].start + ((gEntityHeapBase - totalLoaded * 4 - (s32)dmaList[0].end) >> 2) * 4) >> 2;
             entity->vertexData = gEntityHeapBase - totalLoaded * 4 - dma2size_1 * 4;
             totalLoaded += dma2size_1;
 
-            dma2size_2 = dma_copy(dmaList[1].start, dmaList[1].end, dmaList[1].start + ((gEntityHeapBase - totalLoaded * 4 - dmaList[1].end) >> 2) * 4) >> 2;
+            dma2size_2 = dma_copy(dmaList[1].start, dmaList[1].end, dmaList[1].start + ((gEntityHeapBase - totalLoaded * 4 - (s32)dmaList[1].end) >> 2) * 4) >> 2;
             s0 = gEntityHeapBase - totalLoaded * 4 - dma2size_2 * 4;
             totalLoaded += dma2size_2;
             get_entity_type(entity->listIndex);
@@ -2281,7 +2281,7 @@ s32 create_entity(EntityBlueprint* bp, ...) {
     entity->scriptDelay = entity->scriptReadPos != NULL;
     entity->savedReadPos[0] = bp->updateEntityScript;
     entity->updateScriptCallback = NULL;
-    entity->flags = bp->flags | 0x80000000;
+    entity->flags = bp->flags | ENTITY_FLAGS_CREATED;
     entity->collisionFlags = 0;
     entity->collisionTimer = 0;
     entity->renderSetupFunc = NULL;
@@ -2354,7 +2354,7 @@ s32 create_shadow_from_data(ShadowBlueprint* data, f32 x, f32 y, f32 z) {
     (*gCurrentShadowListPtr)[i] = shadow;
     mem_clear(shadow, sizeof(*shadow));
     shadow->listIndex = i;
-    shadow->flags = data->flags | SHADOW_FLAGS_80000000;
+    shadow->flags = data->flags | ENTITY_FLAGS_CREATED;
     shadow->alpha = 0x80;
     shadow->unk_06 = 0x80;
     shadow->position.x = x;
@@ -2365,7 +2365,7 @@ s32 create_shadow_from_data(ShadowBlueprint* data, f32 x, f32 y, f32 z) {
     shadow->scale.z = 1.0f;
 
     if (data->animModelNode != NULL) {
-        shadow->flags |= SHADOW_FLAGS_COMPLEX_MODEL;
+        shadow->flags |= ENTITY_FLAGS_HAS_ANIMATED_MODEL;
         shadow->entityModelID = create_model_animator(data->renderCommandList);
         load_model_animator_tree(shadow->entityModelID, data->animModelNode);
     } else {
@@ -2446,7 +2446,7 @@ ApiStatus UseDynamicShadow(Evt* script, s32 isInitialCall) {
 
         entity->flags |= ENTITY_FLAGS_HAS_DYNAMIC_SHADOW;
         shadow = get_shadow_by_index(entity->shadowIndex);
-        shadow->flags |= SHADOW_FLAGS_POSITION_DIRTY;
+        shadow->flags |= ENTITY_FLAGS_400000;
     } else {
         entity->flags &= ~ENTITY_FLAGS_HAS_DYNAMIC_SHADOW;
     }
@@ -2617,7 +2617,7 @@ void update_entity_shadow_position(Entity* entity) {
         } else {
             u8 alphaTemp;
 
-            if (shadow->flags & SHADOW_FLAGS_800000) {
+            if (shadow->flags & ENTITY_FLAGS_800000) {
                 alphaTemp = 160;
             } else {
                 alphaTemp = 128;
@@ -2626,8 +2626,8 @@ void update_entity_shadow_position(Entity* entity) {
         }
 
         if (!(entity->flags & ENTITY_FLAGS_HAS_DYNAMIC_SHADOW)) {
-            if (shadow->flags & SHADOW_FLAGS_POSITION_DIRTY) {
-                shadow->flags &= ~SHADOW_FLAGS_POSITION_DIRTY;
+            if (shadow->flags & ENTITY_FLAGS_400000) {
+                shadow->flags &= ~ENTITY_FLAGS_400000;
             } else {
                 return;
             }
@@ -2643,7 +2643,7 @@ void update_entity_shadow_position(Entity* entity) {
 
         origHitLength = hitLength;
 
-        if (shadow->flags & SHADOW_FLAGS_200) {
+        if (shadow->flags & ENTITY_FLAGS_SET_SHADOW_FLAG200) {
             hitLength = 212.5f;
             shadow->scale.x = entity->aabb.x / hitLength;
             shadow->scale.z = entity->aabb.z / hitLength;
@@ -2662,15 +2662,15 @@ void update_entity_shadow_position(Entity* entity) {
         shadow->rotation.y = entity->rotation.y;
 
         if (entity->position.y < rayY) {
-            shadow->flags |= SHADOW_FLAGS_40000000;
+            shadow->flags |= ENTITY_FLAGS_SKIP_UPDATE;
             entity->position.y = rayY + 10.0f;
         } else {
-            shadow->flags &= ~SHADOW_FLAGS_40000000;
+            shadow->flags &= ~ENTITY_FLAGS_SKIP_UPDATE;
         }
 
-        shadow->flags = (shadow->flags & ~SHADOW_FLAGS_HIDDEN) | ((u16)entity->flags & ENTITY_FLAGS_HIDDEN);
+        shadow->flags = (shadow->flags & ~ENTITY_FLAGS_HIDDEN) | ((u16)entity->flags & ENTITY_FLAGS_HIDDEN);
         if (!(entity->flags & ENTITY_FLAGS_400) && origHitLength == 0.0f) {
-            shadow->flags |= SHADOW_FLAGS_HIDDEN;
+            shadow->flags |= ENTITY_FLAGS_HIDDEN;
         }
     } else {
         entity->shadowPosY = 0.0f;
@@ -4212,7 +4212,7 @@ Gfx* mdl_get_copied_gfx(s32 copyIndex) {
     return gfxCopy;
 }
 
-void mdl_project_tex_coords(s32 modelID, Gfx* destGfx, Matrix4f* destMtx, Vtx* destVertices);
+void mdl_project_tex_coords(s32 modelID, Gfx* destGfx, Matrix4f destMtx, void* destVertices);
 INCLUDE_ASM(s32, "a5dd0_len_114e0", mdl_project_tex_coords);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011C80C);

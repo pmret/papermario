@@ -2,12 +2,14 @@
 #include "script_api/common.h"
 #include "message_ids.h"
 #include "effects.h"
+#include "entity.h"
 #include "sprite/npc/bubulb.h"
 #include "sprite/npc/lakilulu.h"
 #include "sprite/npc/tolielup.h"
 #include "sprite/npc/world_klevar.h"
 #include "sprite/npc/world_lakilester.h"
 #include "sprite/npc/world_parakarry.h"
+
 
 enum {
     NPC_BUBULB0,

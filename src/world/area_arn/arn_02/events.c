@@ -2,6 +2,7 @@
 #include "sprite/npc/cleft.h"
 #include "sprite/npc/goomba.h"
 #include "effects.h"
+#include "entity.h"
 
 EvtScript N(exitWalk_802410F0) = EXIT_WALK_SCRIPT(60,  0, "arn_05",  1);
 

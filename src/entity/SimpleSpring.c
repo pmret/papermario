@@ -1,5 +1,5 @@
 #include "common.h"
-#include "entity_script.h"
+#include "entity.h"
 #include "animation_script.h"
 #include "ld_addrs.h"
 
@@ -70,6 +70,7 @@ EntityScript Entity_ScriptSpring_Script = {
     es_Restart
     es_End
 };
+
 EntityScript Entity_SimpleSpring_Script = {
     es_SetCallback(entity_SimpleSpring_idle, 0)
     es_SetCallback(NULL, 2)
@@ -80,14 +81,11 @@ EntityScript Entity_SimpleSpring_Script = {
     es_Restart
     es_End
 };
-s32 D_802EAA10[] = {
-    entity_model_ScriptSpring_gfx_ROM_START, entity_model_ScriptSpring_gfx_ROM_END,
-    entity_model_ScriptSpring_anim_ROM_START, entity_model_ScriptSpring_anim_ROM_END,
-};
-s32 D_802EAA20[] = {
-    entity_model_SimpleSpring_gfx_ROM_START, entity_model_SimpleSpring_gfx_ROM_END,
-    entity_model_SimpleSpring_anim_ROM_START, entity_model_SimpleSpring_anim_ROM_END,
-};
+
+DmaEntry Entity_ScriptSpring_dma[] = { ENTITY_ROM(ScriptSpring_gfx), ENTITY_ROM(ScriptSpring_anim) };
+
+DmaEntry Entity_SimpleSpring_dma[] = { ENTITY_ROM(SimpleSpring_gfx), ENTITY_ROM(SimpleSpring_anim) };
+
 EntityBlueprint Entity_ScriptSpring = {
     .flags = ENTITY_FLAGS_ALWAYS_FACE_CAMERA | ENTITY_FLAGS_HAS_ANIMATED_MODEL,
     .typeDataSize = 0,
@@ -96,10 +94,11 @@ EntityBlueprint Entity_ScriptSpring = {
     .fpInit = entity_ScriptSpring_init,
     .updateEntityScript = Entity_ScriptSpring_Script,
     .fpHandleCollision = NULL,
-    {{ D_802EAA10, 0x00000000 }},
+    { .dmaList = Entity_ScriptSpring_dma },
     .entityType = ENTITY_TYPE_SCRIPT_SPRING,
     .aabbSize = {40, 25, 40}
 };
+
 EntityBlueprint Entity_SimpleSpring = {
     .flags = ENTITY_FLAGS_ALWAYS_FACE_CAMERA | ENTITY_FLAGS_HAS_ANIMATED_MODEL,
     .typeDataSize = sizeof(SimpleSpringData),
@@ -108,7 +107,7 @@ EntityBlueprint Entity_SimpleSpring = {
     .fpInit = entity_SimpleSpring_init,
     .updateEntityScript = Entity_SimpleSpring_Script,
     .fpHandleCollision = NULL,
-    {{ D_802EAA20, 0x00000000 }},
+    { .dmaList = Entity_SimpleSpring_dma },
     .entityType = ENTITY_TYPE_SIMPLE_SPRING,
     .aabbSize = {40, 25, 40}
 };

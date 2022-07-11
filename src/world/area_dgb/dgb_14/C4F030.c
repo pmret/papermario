@@ -1,5 +1,6 @@
 #include "dgb_14.h"
 #include "message_ids.h"
+#include "entity.h"
 
 EntryList N(entryList) = {
     { 575.0f, 0.0f, 180.0f, 270.0f },

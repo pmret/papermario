@@ -1,8 +1,9 @@
 #include "common.h"
 #include "effects.h"
-#include "entity_script.h"
+#include "entity.h"
+#include "ld_addrs.h"
 
-extern Gfx D_802E9828[];
+extern Gfx Entity_RenderNone[];
 extern Gfx* Entity_BombableRock_FragmentsRender[];
 extern Mtx Entity_BombableRock_FragmentMatrices[];
 
@@ -17,15 +18,14 @@ void entity_BombableRock_init_fragments(Entity* entity, Gfx** dlists, Mtx* matri
     s32 moveAngle = 0;
     s32 lateralSpeed = 0;
 
-    data->fragmentsGfx = (Gfx**)((s32)entity->vertexData + (u16)(dlists));
+    data->fragmentsGfx = ENTITY_ADDR(entity, Gfx**, dlists);
     entity->renderSetupFunc = entity_BombableRock_setupGfx;
     entity->alpha = 255;
     entity->position.y = data->inititalY;
     guTranslateF(mtxTrans, entity->position.x, entity->position.y, entity->position.z);
 
     for (i = 0; i < 5; i++) {
-        s32 mtxOffset = (u16)(matrices++);
-        guMtxL2F(mtxFragment, (Mtx*)((s32)entity->vertexData + mtxOffset));
+        guMtxL2F(mtxFragment, ENTITY_ADDR(entity, Mtx*, matrices++));
         guMtxCatF(mtxTrans, mtxFragment, mtxFragment);
         data->fragmentPosX[i] = mtxFragment[3][0];
         data->fragmentPosY[i] = mtxFragment[3][1];
@@ -220,7 +220,7 @@ void entity_BombableRock_setupGfx(s32 entityIndex) {
         guMtxF2L(mtx, &gDisplayContext->matrixStack[gMatrixListPos]);
 
         gSPMatrix(gfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-        fragmentDlist = (Gfx*)((s32)entity->vertexData + (u16)(*gfx++));
+        fragmentDlist = ENTITY_ADDR(entity, Gfx*, *gfx++);
         gSPDisplayList(gfxPos++, fragmentDlist);
         gSPPopMatrix(gfxPos++, G_MTX_MODELVIEW);
     }
@@ -236,9 +236,9 @@ void entity_BombableRock_idle(Entity* entity) {
     }
 }
 
-EntityModelScript D_802BCEB0_E2D5E0 = STANDARD_ENTITY_MODEL_SCRIPT(D_802E9828, RENDER_MODE_SURFACE_XLU_LAYER1);
+EntityModelScript Entity_BombableRock_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(Entity_RenderNone, RENDER_MODE_SURFACE_XLU_LAYER1);
 
-EntityScript D_802BCECC_E2D5FC = {
+EntityScript Entity_BombableRock_Script = {
     es_SetCallback(entity_BombableRock_idle, 0)
     es_SetFlags(ENTITY_FLAGS_SKIP_UPDATE_INVERSE_ROTATION_MATRIX)
     es_SetCallback(entity_BombableRock_update_fragments, 0)
@@ -247,28 +247,28 @@ EntityScript D_802BCECC_E2D5FC = {
     es_End
 };
 
-EntityBlueprint zdfgsdfzxcvzxc = {
+EntityBlueprint Entity_BombableRock = {
     .flags = 0,
-    .typeDataSize = 0xA0,
-    .renderCommandList = D_802BCEB0_E2D5E0,
+    .typeDataSize = sizeof(BombableRockData),
+    .renderCommandList = Entity_BombableRock_RenderScript,
     .modelAnimationNodes = 0,
     .fpInit = entity_BombableRock_init,
-    .updateEntityScript = D_802BCECC_E2D5FC,
+    .updateEntityScript = Entity_BombableRock_Script,
     .fpHandleCollision = NULL,
-    {{ 0x00E9D650, 0x00E9ECD0 }},
+    { .dma = ENTITY_ROM(BombableRock) },
     .entityType = ENTITY_TYPE_BOMBABLE_ROCK,
     .aabbSize = { 50, 50, 50 }
 };
 
-EntityBlueprint zdfgsdfzxcvzxc2 = {
+EntityBlueprint Entity_BombableRock2 = {
     .flags = 0,
-    .typeDataSize = 0xA0,
-    .renderCommandList = D_802BCEB0_E2D5E0,
+    .typeDataSize = sizeof(BombableRockData),
+    .renderCommandList = Entity_BombableRock_RenderScript,
     .modelAnimationNodes = 0,
     .fpInit = entity_BombableRock_init,
-    .updateEntityScript = D_802BCECC_E2D5FC,
+    .updateEntityScript = Entity_BombableRock_Script,
     .fpHandleCollision = NULL,
-    {{ 0x00E9D650, 0x00E9ECD0 }},
+    { .dma = ENTITY_ROM(BombableRock) },
     .entityType = ENTITY_TYPE_BOMBABLE_ROCK,
     .aabbSize = { 50, 50, 100 }
 };
