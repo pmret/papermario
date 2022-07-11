@@ -265,7 +265,7 @@ MusicError func_80055D38(s32 songName, f32 arg1);
 MusicError func_80055D8C(s32 songName, s32 arg1);
 MusicError func_80055DDC(s32 songName, s32 arg1);
 MusicError func_80055E48(s32 songName, s32 arg1);
-s32* func_80055EB4(s32 arg0);
+u8* func_80055EB4(s32 arg0);
 MusicError func_80055F58(s32 arg0, u32 arg1, u32 arg2);
 MusicError func_80055FD4(s32 arg0, s32 arg1);
 MusicError func_80055FF0(s32 arg0, s32 arg1);

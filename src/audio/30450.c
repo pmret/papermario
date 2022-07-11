@@ -9,14 +9,90 @@ u16 D_80078DB6 = 0;
 //  u8 trackIdx
 //  u8 volume?
 // repeated until idx = 0
-s32 D_80078DB8[] = { 0x025E0350, 0x04640554, 0x00000000, };
-s32 D_80078DC4[] = { 0x0264036E, 0x045A0000, };
-s32 D_80078DCC[] = { 0x025F0000, };
-s32 D_80078DD0[] = { 0x0546065A, 0x075A0864, 0x00000000, };
-s32 D_80078DDC[] = { 0x05000600, 0x07000800, 0x09000A00, 0x0B000C00, 0x0D000E00, 0x0F001000, 0x00000000, };
-s32 D_80078DF8[] = { 0x05640666, 0x0758086E, 0x09000A00, 0x0B000C00, 0x0D000E00, 0x0F001000, 0x00000000, };
-s32 D_80078E14[] = { 0x05640666, 0x0758086E, 0x097E0A58, 0x0B640C00, 0x0D000E00, 0x0F001000, 0x00000000, };
-s32 D_80078E30[] = { 0x05640666, 0x0758086E, 0x097E0A58, 0x0B640C64, 0x0D6A0E64, 0x0F64106E, 0x00000000, 0x00000000, };
+u8 D_80078DB8[] = {
+    2, 94,
+    3, 80,
+    4, 100,
+    5, 84,
+    0
+};
+u8 D_80078DC4[] = {
+    2, 100,
+    3, 110,
+    4, 90,
+    0
+};
+u8 D_80078DCC[] = {
+    2, 95,
+    0
+};
+u8 D_80078DD0[] = { 
+    5, 70,
+    6, 90,
+    7, 90,
+    8, 100,
+    0
+};
+u8 D_80078DDC[] = { 
+    5, 0,
+    6, 0,
+    7, 0,
+    8, 0,
+    9, 0,
+    10, 0,
+    11, 0,
+    12, 0,
+    13, 0,
+    14, 0,
+    15, 0,
+    16, 0,
+    0
+};
+u8 D_80078DF8[] = {
+    5, 100,
+    6, 102,
+    7, 88,
+    8, 110,
+    9, 0,
+    10, 0,
+    11, 0,
+    12, 0,
+    13, 0,
+    14, 0,
+    15, 0,
+    16, 0,
+    0
+};
+u8 D_80078E14[] = {
+    5, 100,
+    6, 102,
+    7, 88,
+    8, 110,
+    9, 126,
+    10, 88,
+    11, 100,
+    12, 0,
+    13, 0,
+    14, 0,
+    15, 0,
+    16, 0,
+    0
+};
+u8 D_80078E30[] = {
+    5, 100,
+    6, 102,
+    7, 88,
+    8, 110,
+    9, 126,
+    10, 88,
+    11, 100,
+    12, 100,
+    13, 106,
+    14, 100,
+    15, 100,
+    16, 110,
+    0
+};
 
 void func_80055050(ALHeap* heap) {
     D_80078DB4 = 1;
@@ -572,7 +648,7 @@ MusicError func_80055CE8(s32 songName, s32** outTrackData, BGMPlayer** outPlayer
 
 MusicError func_80055D38(s32 songName, f32 arg1) {
     BGMPlayer* bgmPlayer;
-    s32 trackData;
+    s32* trackData;
     s32 error;
 
     error = func_80055CE8(songName, &trackData, &bgmPlayer);
@@ -586,7 +662,7 @@ MusicError func_80055D38(s32 songName, f32 arg1) {
 
 MusicError func_80055D8C(s32 songName, s32 arg1) {
     BGMPlayer* bgmPlayer;
-    s32 trackData;
+    s32* trackData;
     s32 error;
 
     error = func_80055CE8(songName, &trackData, &bgmPlayer);
@@ -600,13 +676,13 @@ MusicError func_80055D8C(s32 songName, s32 arg1) {
 
 MusicError func_80055DDC(s32 songName, s32 arg1) {
     BGMPlayer* bgmPlayer;
-    s32 trackData;
+    s32* trackData;
     s32 error;
 
     error = func_80055CE8(songName, &trackData, &bgmPlayer);
 
     if (error == MUSIC_ERROR_NONE) {
-        s8* temp_v0 = func_80055EB4(arg1);
+        u8* temp_v0 = func_80055EB4(arg1);
 
         if (temp_v0 != NULL) {
             func_8005087C(bgmPlayer, temp_v0, TRUE);
@@ -620,13 +696,13 @@ MusicError func_80055DDC(s32 songName, s32 arg1) {
 
 MusicError func_80055E48(s32 songName, s32 arg1) {
     BGMPlayer* bgmPlayer;
-    s32 trackData;
+    s32* trackData;
     s32 error;
 
     error = func_80055CE8(songName, &trackData, &bgmPlayer);
 
     if (error == MUSIC_ERROR_NONE) {
-        s8* temp_v0 = func_80055EB4(arg1);
+        u8* temp_v0 = func_80055EB4(arg1);
 
         if (temp_v0 != NULL) {
             func_8005087C(bgmPlayer, temp_v0, FALSE);
@@ -638,8 +714,8 @@ MusicError func_80055E48(s32 songName, s32 arg1) {
     return error;
 }
 
-s32* func_80055EB4(s32 arg0) {
-    s32* ret = NULL;
+u8* func_80055EB4(s32 arg0) {
+    u8* ret = NULL;
 
     switch (arg0) {
         case 0:
