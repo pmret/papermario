@@ -164,8 +164,7 @@ void func_80059008(AlUnkKappa* kappa, s16 arg1, s16 arg2, s16 fc) {
     kappa->lowpass_0C = NULL;
 }
 
-// part of n_alFxNew, extracted to allow reseting fx without reallocating
-// AuFX from gSynDriverPtr
+// part of n_alFxNew, extracted to allow reseting fx without reallocating AuFX
 void func_8005904C(AuFX* fx, u8 effect) {
     s32* params;
     s32* clr;

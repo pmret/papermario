@@ -141,7 +141,7 @@ void snd_reset_instrument(Instrument* instrument) {
     instrument->wavDataLength = 190;
     instrument->predictorOffset = &D_80078190;
     instrument->unk_1C = 64;
-    instrument->detune = 4800;
+    instrument->keyBase = 4800; // middle C?
     instrument->loopPredictorOffset = 0;
     instrument->loopStart = 0;
     instrument->loopEnd = 0;
@@ -160,14 +160,14 @@ void snd_reset_instrument(Instrument* instrument) {
 
 void snd_reset_drum_entry(BGMDrumInfo* arg0) {
     arg0->bankPatch = 8208;
-    arg0->unk_02 = 4800;
-    arg0->unk_04 = 0x7F;
-    arg0->unk_05 = 64;
+    arg0->keyBase = 4800; // middle C?
+    arg0->volume = 0x7F;
+    arg0->pan = 64;
     arg0->unk_06 = 0;
     arg0->unk_07 = 0;
     arg0->unk_08 = 0;
     arg0->unk_09 = 0;
-    arg0->unk_0A = 0;
+    arg0->unk_drum_0A = 0;
 }
 
 void snd_reset_instrument_entry(BGMInstrumentInfo* arg0) {
@@ -194,9 +194,9 @@ void snd_update_sequence_players(void) {
         snd_ambient_manager_update(ambManager);
     }
 
-    if (sfxManager->unk_40.fadeTime != 0) {
-        func_80053A28(&sfxManager->unk_40);
-        func_80053A98(sfxManager->unk_BE, sfxManager->unk_40.currentVolume.u16, sfxManager->unk_5C);
+    if (sfxManager->fadeInfo.fadeTime != 0) {
+        func_80053A28(&sfxManager->fadeInfo);
+        func_80053A98(sfxManager->unk_BE, sfxManager->fadeInfo.currentVolume.u16, sfxManager->unk_5C);
     }
 
     sfxManager->nextUpdateCounter -= sfxManager->nextUpdateStep;
@@ -464,11 +464,11 @@ void func_80053BA8(Fade* fade) {
 Instrument* func_80053BE8(AuGlobals* globals, u32 bank, u32 patch, s32** arg3) {
     Instrument* instrument = (*globals->instrumentGroups[(bank & 0x70) >> 4])[patch];
     InstrumentEffect* temp_a0 = instrument->unkOffset;
-    u32 temp_a1 = bank % 4;
+    u32 sampleIdx = bank & 3;
 
-    if (temp_a1 < temp_a0->count) {
-        arg3[0] = (s32*)(temp_a0->unk_04[temp_a1].unkOffset1 + (s32)temp_a0);
-        arg3[1] = (s32*)(temp_a0->unk_04[temp_a1].unkOffset2 + (s32)temp_a0);
+    if (sampleIdx < temp_a0->count) {
+        arg3[0] = (s32*)(temp_a0->unk_04[sampleIdx].unkOffset1 + (s32)temp_a0);
+        arg3[1] = (s32*)(temp_a0->unk_04[sampleIdx].unkOffset2 + (s32)temp_a0);
     } else {
         arg3[0] = &D_8007854C[0];
         arg3[1] = &D_8007854C[1];
@@ -1062,11 +1062,11 @@ void func_80054C84(s32 bankIndex, s32 bankGroup) {
     }
 }
 
-void func_80054CE0(s32 arg0, s32 arg1) {
+void func_80054CE0(s32 arg0, u32 idx) {
     s32 temp_s0;
 
-    if (arg1 < 9U) {
-        temp_s0 = D_80078530[arg1];
+    if (idx < 9) {
+        temp_s0 = D_80078530[idx];
         if (arg0 & 1) {
             gBGMPlayerA->unk_48 = temp_s0;
             func_80053AC8(&gBGMPlayerA->fadeInfo);
@@ -1075,7 +1075,7 @@ void func_80054CE0(s32 arg0, s32 arg1) {
         }
         if (arg0 & 0x10) {
             gSoundManager->unk_5C = temp_s0;
-            func_80053AC8(&gSoundManager->unk_40);
+            func_80053AC8(&gSoundManager->fadeInfo);
         }
     }
 }

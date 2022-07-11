@@ -384,7 +384,7 @@ void func_8005232C(AmbientSoundManager* manager, AlUnkLambda* lambda) {
                 if (j < lambda->unk_34) {
                     iota = &manager->unk_7B4[j - lambda->unk_30];
                     iota->unk_00.s32 = lambda->unk_14.s32 + (omega->unk_00 << 0x10) + (omega->unk_01 << 8);
-                    iota->unk_04 = ((omega->unk_01 & 0x7F) * 100) - xi->instrument->detune;
+                    iota->unk_04 = ((omega->unk_01 & 0x7F) * 100) - xi->instrument->keyBase;
                     iota->unk_06 = omega->unk_02 & 0x7F;
                     voice->unk_40 = ((lambda->unk_38 >> 0x18) * xi->unk_18.half * iota->unk_06) >> 0xE;
                     voice->pitchRatio = snd_compute_pitch_ratio(iota->unk_04 + xi->unk_0C) * xi->instrument->pitchRatio;

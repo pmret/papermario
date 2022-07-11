@@ -1,7 +1,7 @@
 #include "audio.h"
 
 extern s32 D_80078554;
-extern u8 D_80078510[8];
+extern u8 BgmDivisors[8];
 extern u8 D_80078558[40];
 
 extern void (*CurrentSeqCmdHandler)(BGMPlayer*, BGMPlayerTrack*);
@@ -87,7 +87,7 @@ void func_8004D510(BGMPlayer* player) {
                     }
                     player->bgmFile = (BGMHeader*) bgmFile;
                     bgmData = &bgmFile->info;
-                    func_8004E880(player, BGM_SAMPLE_RATE, D_80078510[((u8*)player->unk_74)[0] & 7]); //TODO revise unk_74 typing
+                    func_8004E880(player, BGM_SAMPLE_RATE, BgmDivisors[((u8*)player->unk_74)[0] & 7]); //TODO revise unk_74 typing
 
                     segmentOffset = bgmData->segments[segmentID];
                     if (segmentOffset == 0) {
@@ -197,7 +197,7 @@ s32 snd_dispatch_bgm_player_event(SongUpdateEvent* event) {
             snd_initialize_bgm_fade(&player->fadeInfo, duration, volume0, volume1);
             player->fadeInfo.targetVolScale = 0x7FFF;
             player->fadeInfo.volScaleTime = 1;
-            func_8004E880(player, BGM_SAMPLE_RATE, D_80078510[fileInfo->numSegments & 7]);
+            func_8004E880(player, BGM_SAMPLE_RATE, BgmDivisors[fileInfo->numSegments & 7]);
 
             if (variation < 0 || variation >= 4 || fileInfo->segments[variation] == 0) {
                 variation = 0;
@@ -1043,7 +1043,7 @@ void func_8004EC68(BGMPlayer *player) {
     }
     for (i = 0; i < ARRAY_COUNT(player->tracks); i++) {
         track = &player->tracks[i];
-        if (track->bgmReadPos != 0) {
+        if (track->bgmReadPos != NULL) {
             track->changed.all = 0;
             if (bVolumeFading || player->volumeChanged) {
                 track->changed.volume = 1;
@@ -1195,12 +1195,12 @@ void func_8004EC68(BGMPlayer *player) {
                                     }
                                     note->ins = func_80053BE8(player->globals, (u16)drumInfo->bankPatch >> 8, (u16)drumInfo->bankPatch & 0xFF, &voice->unk_14);
                                     if (drumInfo->unk_08 != 0) {
-                                        note->unk_08 = note->noteVelocity * func_80050654(player->unk_50, drumInfo->unk_04, drumInfo->unk_08);
+                                        note->unk_08 = note->noteVelocity * func_80050654(player->unk_50, drumInfo->volume, drumInfo->unk_08);
                                     } else {
-                                        note->unk_08 = note->noteVelocity * drumInfo->unk_04;
+                                        note->unk_08 = note->noteVelocity * drumInfo->volume;
                                     }
                                     voice->unk_40 = (((((player->masterVolume >> 0x15) * (track->subTrackVolume >> 0x15)) * (track->unk2C >> 0x15)) >> 0x14) * (track->segTrackVolume * note->unk_08)) >> 0x10;
-                                    note->adjustedPitch = (((s8) track->subTrackFineTune) + (drumInfo->unk_02 + track->subTrackCoarseTune)) - note->ins->detune;
+                                    note->adjustedPitch = (((s8) track->subTrackFineTune) + (drumInfo->keyBase + track->subTrackCoarseTune)) - note->ins->keyBase;
                                     temp = (note->adjustedPitch + track->segTrackTune) + player->unk_20E;
                                     if (drumInfo->unk_07 != 0) {
                                         note->unk_14 = func_800505E4(player->unk_50, temp, drumInfo->unk_07);
@@ -1208,12 +1208,12 @@ void func_8004EC68(BGMPlayer *player) {
                                     }
                                     note->pitchRatio = snd_compute_pitch_ratio(temp) * note->ins->pitchRatio;
                                     if (drumInfo->unk_09 != 0) {
-                                        voice->pan = func_80050568(player, drumInfo->unk_05, drumInfo->unk_09);
+                                        voice->pan = func_80050568(player, drumInfo->pan, drumInfo->unk_09);
                                     } else {
-                                        voice->pan = drumInfo->unk_05;
+                                        voice->pan = drumInfo->pan;
                                     }
-                                    if (drumInfo->unk_0A != 0) {
-                                        voice->reverb = func_8005068C(player->unk_50, drumInfo->unk_06, drumInfo->unk_0A);
+                                    if (drumInfo->unk_drum_0A != 0) {
+                                        voice->reverb = func_8005068C(player->unk_50, drumInfo->unk_06, drumInfo->unk_drum_0A);
                                     } else {
                                         voice->reverb = drumInfo->unk_06;
                                     }
@@ -1226,7 +1226,7 @@ void func_8004EC68(BGMPlayer *player) {
                                         + track->subTrackCoarseTune
                                         + player->masterPitchShift
                                         + track->subTrackFineTune
-                                        - note->ins->detune;
+                                        - note->ins->keyBase;
                                     note->pitchRatio = snd_compute_pitch_ratio((note->adjustedPitch + track->segTrackTune) + player->unk_20E) * track->instrument->pitchRatio;
 
                                     if (track->unk_57 != 0) {
@@ -1601,9 +1601,9 @@ void snd_BGMCmd_F5_TrackVoice(BGMPlayer* player, BGMPlayerTrack* track) {
 
 void snd_BGMCmd_F7_SubTrackReverbType(BGMPlayer* player, BGMPlayerTrack* track) {
     u8 index = player->seqCmdArgs.SubTrackReverbType.index;
-    u8 type = player->effectIndices[index];
+    s8 type = player->effectIndices[index];
 
-    if ((index < 4) && ((s8)type >= 0)) {
+    if ((index < 4) && (type >= 0)) {
         track->subtrackReverbType = type;
     } else {
         track->subtrackReverbType = player->defaultReverbType;
@@ -1804,11 +1804,11 @@ s16 func_800505E4(s32 arg0, s32 arg1, u8 arg2) {
     return retVal;
 }
 
-u8 func_80050654(s32 arg0, u8 arg1, u8 arg2) {
+u8 func_80050654(s32 arg0, u8 volume, u8 arg2) {
     s32 a = (arg0 >> 8) & 0x1F; // bitmask 0x1F00
     s32 b = arg0 & 0xE0;
     s32 c = a + b;
-    return (arg1 * (0x8000 - arg2 * (c)));
+    return (volume * (0x8000 - arg2 * (c)));
 }
 
 u8 func_8005068C(s32 arg0, u8 arg1, u8 arg2) {

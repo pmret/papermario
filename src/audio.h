@@ -188,6 +188,7 @@ typedef union VolumeField {
     s32 s32;
 } VolumeField;
 
+// envelope related?
 typedef struct Fade {
     /* 0x0 */ VolumeField currentVolume;
     /* 0x4 */ s32 fadeStep;
@@ -369,7 +370,7 @@ typedef struct Instrument {
     /* 0x14 */ s32 loopCount;
     /* 0x18 */ UNK_PTR predictorOffset;
     /* 0x1C */ u16 unk_1C;
-    /* 0x1E */ u16 detune;
+    /* 0x1E */ u16 keyBase;
     /* 0x20 */ f32 pitchRatio;
     /* 0x24 */ u8 type;
     /* 0x25 */ u8 unk_25;
@@ -413,7 +414,7 @@ typedef struct SoundPlayer {
     /* 0x20 */ Instrument sfxInstrument;
     /* 0x50 */ s8* sefReadStart;
     /* 0x54 */ SoundPlayChange changed;
-    /* 0x58 */ f32 actualSampleRate;
+    /* 0x58 */ f32 pitchRatio;
     /* 0x5C */ s16 sfxVolume;
     /* 0x5E */ s16 unk_5E;
     /* 0x60 */ SoundLerp tuneLerp;
@@ -486,13 +487,13 @@ typedef struct SoundManager {
     /* 0x034 */ s32 nextUpdateStep;
     /* 0x038 */ s32 nextUpdateInterval;
     /* 0x03C */ s32 nextUpdateCounter;
-    /* 0x040 */ struct Fade unk_40;
+    /* 0x040 */ struct Fade fadeInfo;
     /* 0x05C */ s32 unk_5C;
     /* 0x060 */ s32 unk_60;
     /* 0x064 */ s32* customReverbParams[8];
     /* 0x084 */ s8 unk_84[8];
     /* 0x08C */ u8 unk_8C;
-    /* 0x08D */ s8 unk_8D;
+    /* 0x08D */ s8 defaultReverbAmt;
     /* 0x08E */ char unk_8E[0x2];
     /* 0x090 */ SoundManager90 unk_90[4];
     /* 0x0A0 */ SoundManagerA0 unk_A0[4];
@@ -568,14 +569,14 @@ typedef struct BGMHeader {
 
 typedef struct BGMDrumInfo {
     /* 0x0 */ s16 bankPatch;
-    /* 0x2 */ s16 unk_02;
-    /* 0x4 */ u8 unk_04;
-    /* 0x5 */ s8 unk_05;
+    /* 0x2 */ s16 keyBase;
+    /* 0x4 */ u8 volume;
+    /* 0x5 */ s8 pan;
     /* 0x6 */ s8 unk_06;
     /* 0x7 */ u8 unk_07;
     /* 0x8 */ u8 unk_08;
-    /* 0x9 */ u8 unk_09;
-    /* 0xA */ u8 unk_0A;
+    /* 0x9 */ u8 unk_09; // pan?
+    /* 0xA */ u8 unk_drum_0A; // reverb?
     /* 0xB */ char pad_B[1];
 } BGMDrumInfo; // size = 0xC
 
@@ -1124,7 +1125,7 @@ void snd_set_fade_vol_scale(Fade*, s16);
 void func_80053BA8(Fade*);
 Instrument* func_80053BE8(AuGlobals*, u32, u32, s32**);
 s32 snd_load_BK(s32, s32);
-void func_80054CE0(s32, s32);
+void func_80054CE0(s32, u32);
 
 void func_80055050(ALHeap*);
 void func_80055110(BGMPlayer*);
