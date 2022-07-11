@@ -1,3 +1,11 @@
+#ifndef _AUDIO_PUBLIC_H_
+#define _AUDIO_PUBLIC_H_
+
+// 30450.c
+void func_80055050(ALHeap* heap);
+void func_80055068(u32 arg0);
+//void func_80055110(BGMPlayer* player);
+void func_8005513C(u32 arg0);
 void snd_start_sound(s32 soundID, u8 volume, u8 pan);
 void snd_start_sound_with_shift(s32 soundID, u8 volume, u8 pan, s16 pitchShift);
 void snd_adjust_sound(s32 soundID, u8 volume, u8 pan);
@@ -37,6 +45,7 @@ void func_80055C2C(s32 songName);
 void func_80055C64(s32 songName);
 void func_80055C94(s32 songName);
 s32 snd_set_song_variation(s32 songName, s32 variation);
+//MusicError func_80055CE8(s32 songName, s32** outTrackData, BGMPlayer** outPlayer);
 MusicError func_80055D38(s32 songName, f32 arg1);
 MusicError func_80055D8C(s32 songName, s32 arg1);
 MusicError func_80055DDC(s32 songName, s32 arg1);
@@ -49,6 +58,11 @@ MusicError func_8005600C(s32 arg0, s32 arg1);
 void bgm_set_proximity_mix_far(s32 songName, u8 mix);
 void bgm_set_proximity_mix_near(s32 songName, u8 mix);
 void bgm_set_proximity_mix_full(s32 songName, u8 mix);
+void func_8005608C(u32** arg0, s32* arg1);
+void func_800560A8(void);
+void func_800560BC(s32 arg0, s32 arg1, s32 arg2);
+void func_8005610C(void);
+//void func_80056144(UnkFuncAl arg0, s32 arg1);
 void audio_set_stereo(void);
 void audio_set_mono(void);
 void func_800561A4(s32 arg0);
@@ -81,3 +95,5 @@ void sfx_get_spatialized_sound_params(f32 x, f32 y, f32 z, s16* volume, s16* pan
 void sfx_compute_spatialized_sound_params_0(f32 x, f32 y, f32 z, s16* volume, s16* pan);
 void sfx_compute_spatialized_sound_params_1(f32 x, f32 y, f32 z, s16* volume, s16* pan);
 void sfx_compute_spatialized_sound_params_2(f32 x, f32 y, f32 z, s16* volume, s16* pan, s32 flags);
+
+#endif

@@ -1057,18 +1057,7 @@ extern u8 D_800A3FEC;
 extern s16 D_800A3FEE;
 extern s32 D_800A3FF0;
 
-#include "audio/2BF90.h"
-#include "audio/2d9a0_len_890.h"
-#include "audio/2e230_len_2190.h"
-#include "audio/25f00_len_940.h"
-#include "audio/303c0_len_3e10.h"
-#include "audio/26840_len_20d0.h"
-#include "audio/28910_len_5090.h"
-#include "audio/30450.h"
-#include "audio/31650.h"
-#include "audio/33450.h"
-#include "audio/reverb.h"
-#include "audio/sfx.h"
+#include "audio/private.h"
 // func_80058050
 
 /*
