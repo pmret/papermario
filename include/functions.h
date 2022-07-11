@@ -263,11 +263,7 @@ s32 round(f32);
 f32 atan2(f32 startX, f32 startZ, f32 endX, f32 endZ);
 f32 clamp_angle(f32 theta);
 s32 sign(s32 value);
-s32 snd_ambient_80055448(s32);
-s32 snd_ambient_80055464(s32, s32);
-s32 snd_ambient_80055618(s32, s32);
-s32 snd_ambient_800557CC(s32);
-s32 snd_ambient_80055848(s32);
+
 s32 func_800E0208(void);
 
 s32 battle_heap_create(void);
@@ -830,12 +826,6 @@ s32 get_msg_lines(s32 messageID);
 void set_window_properties(s32 panelID, s32 posX, s32 posY, s32 width, s32 height, u8, void* drawContents, void* drawContentsArg, s8 parent);
 void set_window_update(s32 panelID, s32);
 void set_windows_visible(s32 groupIdx);
-void snd_stop_sound(s32 soundID);
-void snd_start_sound_with_shift(s32 soundID, u8 volume, u8 pan, s16 pitchShift);
-void snd_adjust_sound_with_shift(s32 soundID, u8 volume, u8 pan, s16 pitchShift);
-
-void sfx_adjust_env_sound_params(s32 soundID, u8 volume, u8 pan, s16 pitchShift);
-void sfx_stop_sound(s32 soundID);
 
 void partner_disable_input(void);
 void partner_set_goal_pos(s32 x, s32 z);

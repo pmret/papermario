@@ -1,8 +1,6 @@
 #include "common.h"
 #include "audio.h"
 
-u8 func_80052CFC(AlUnkVoice* voice);
-
 void func_800525A0(AuGlobals* globals) {
     s32 i;
 
@@ -54,7 +52,7 @@ void func_80052660(AuGlobals* globals) {
         if (voice->unk_flags_3D & 0x10) {
             voice->unk_flags_3D &= 0xEF;
             voice->unk_flags_3D |= 1;
-            voice->unk_1C = voice->unk_18;
+            voice->unk_1C = (u8*)voice->unk_14.unk_04;
             if (voice->unk_28 > 5750) {
                 voice->unk_39 = voice->unk_39 + (s32) (voice->unk_2C * (f32) (voice->unk_24 - voice->unk_28));
             } else {
@@ -172,12 +170,12 @@ s32 func_80052BC0(s32 arg0) {
     return (arg0 / 5750) * AUDIO_SAMPLES;
 }
 
-void func_80052BF8(AlUnkVoice* voice, s32* arg1) {
+void func_80052BF8(AlUnkVoice* voice, AlUnkInstrumentData* arg1) {
     s32 x;
     
-    voice->unk_14 = (u8*)arg1[0];
-    voice->unk_1C = voice->unk_14;
-    voice->unk_18 = arg1[1];
+    voice->unk_14.unk_00 = arg1->unk_00;
+    voice->unk_1C = voice->unk_14.unk_00;
+    voice->unk_14.unk_04 = arg1->unk_04;
     voice->unk_30 = 0x80;
     voice->unk_34 = 0;
     

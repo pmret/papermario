@@ -461,17 +461,17 @@ void func_80053BA8(Fade* fade) {
 }
 
 //TODO cleanup and documentation
-Instrument* func_80053BE8(AuGlobals* globals, u32 bank, u32 patch, s32** arg3) {
+Instrument* func_80053BE8(AuGlobals* globals, u32 bank, u32 patch, AlUnkInstrumentData* arg3) {
     Instrument* instrument = (*globals->instrumentGroups[(bank & 0x70) >> 4])[patch];
     InstrumentEffect* temp_a0 = instrument->unkOffset;
     u32 sampleIdx = bank & 3;
 
     if (sampleIdx < temp_a0->count) {
-        arg3[0] = (s32*)(temp_a0->unk_04[sampleIdx].unkOffset1 + (s32)temp_a0);
-        arg3[1] = (s32*)(temp_a0->unk_04[sampleIdx].unkOffset2 + (s32)temp_a0);
+        arg3->unk_00 = (s32*)(temp_a0->unk_04[sampleIdx].unkOffset1 + (s32)temp_a0);
+        arg3->unk_04 = (s32*)(temp_a0->unk_04[sampleIdx].unkOffset2 + (s32)temp_a0);
     } else {
-        arg3[0] = &D_8007854C[0];
-        arg3[1] = &D_8007854C[1];
+        arg3->unk_00 = &D_8007854C[0];
+        arg3->unk_04 = &D_8007854C[1];
     }
     return instrument;
 }

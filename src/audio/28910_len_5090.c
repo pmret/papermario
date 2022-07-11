@@ -9,29 +9,6 @@ extern void (*SefCmdHandlers[])(SoundManager*, SoundPlayer*);
 extern void (*SeqCmdHandlers[])(BGMPlayer*, BGMPlayerTrack*);
 extern u8 SeqCmdArgCounts[];
 
-MusicError func_8004DCB8(SongUpdateEvent* update, s32 clearChanged);
-void snd_initialize_bgm_player(BGMPlayer* player);
-void func_8004E844(BGMPlayer* player, s32 arg1);
-void snd_bgm_state_2(BGMPlayer* player);
-void func_8004EA34(BGMPlayer*, u32);
-void func_8004EAD4(BGMPlayer*, u32);
-void snd_bgm_state_4(BGMPlayer* player);
-void func_8004EC68(BGMPlayer *player);
-s16 func_800505E4(s32 arg0, s32 arg1, u8 arg2);
-u8 func_80050654(s32 arg0, u8 arg1, u8 arg2);
-u8 func_8005068C(s32 arg0, u8 arg1, u8 arg2);
-void snd_BGMCmd_F6_TrackVolumeFade(BGMPlayer *, BGMPlayerTrack *);
-u8 func_80050568(BGMPlayer *player, u8 arg1, u8 arg2);
-void func_80050888(BGMPlayer* player, BGMPlayerTrack* track, s32 target, s32 duration);
-void func_80050900(BGMPlayer*);
-void func_800538C4(AlUnkVoice*, u8);
-
-void func_80053B04(Fade* fade, u32 arg1, s32 target);
-s32 func_80053E58(s32, u8*);
-BGMPlayer* func_80053F64(s32);
-BGMPlayer* func_80054248(u8);
-void func_800560BC(s32, s32, s32);
-
 void func_8004D510(BGMPlayer* player) {
     BGMHeader* bgmFile;
     BGMFileInfo* bgmData;
@@ -1237,11 +1214,11 @@ void func_8004EC68(BGMPlayer *player) {
                                     voice->reverb = track->subTrackReverb;
 
                                     if (track->unk_4C != 0) {
-                                        voice->unk_14 = (s32*)player->unk_174[track->unk_4C - 1]; //TODO ???
+                                        voice->unk_14.unk_00 = (s32*)player->unk_174[track->unk_4C - 1]; //TODO ???
                                     } else {
-                                        voice->unk_14 = track->unk_10[0];
+                                        voice->unk_14.unk_00 = track->unk_10.unk_00;
                                     }
-                                    voice->unk_18 = track->unk_10[1];
+                                    voice->unk_14.unk_04 = track->unk_10.unk_04;
                                 }
                                 voice->instrument = note->ins;
                                 voice->pitchRatio = note->pitchRatio;
@@ -1476,7 +1453,7 @@ void snd_BGMCmd_E5_MasterVolumeFade(BGMPlayer* player, BGMPlayerTrack* track) {
 
 void snd_BGMCmd_E8_TrackOverridePatch(BGMPlayer* player, BGMPlayerTrack* track) {
     track->patch = player->seqCmdArgs.TrackOverridePatch.patch;
-    track->instrument = func_80053BE8(player->globals, player->seqCmdArgs.TrackOverridePatch.bank, track->patch, track->unk_10);
+    track->instrument = func_80053BE8(player->globals, player->seqCmdArgs.TrackOverridePatch.bank, track->patch, &track->unk_10);
 }
 
 void snd_BGMCmd_E9_SubTrackVolume(BGMPlayer* arg0, BGMPlayerTrack* track) {
@@ -1587,7 +1564,7 @@ void snd_BGMCmd_F5_TrackVoice(BGMPlayer* player, BGMPlayerTrack* track) {
     patch = (u8)instrument->bankPatch;
     volume = instrument->volume & 0x7F;
     track->patch = patch;
-    track->instrument = func_80053BE8(player->globals, bank, patch, track->unk_10);
+    track->instrument = func_80053BE8(player->globals, bank, patch, &track->unk_10);
     if (volume != 0) {
         volume <<= 0x18;
     }
@@ -1943,7 +1920,7 @@ MusicError func_80050970(SongUpdateEvent* arg0) {
                                 for (j = trackB->unk_52; j < trackB->unk_53; j++) {
                                     voice = &player->globals->voices[j];
                                     if (voice->unk_45 == player->unk_234) {
-                                        voice->unk_18 = &D_80078554;
+                                        voice->unk_14.unk_04 = &D_80078554;
                                         voice->unk_flags_3D |= 0x10;
                                     }
                                 }
@@ -1961,7 +1938,7 @@ MusicError func_80050970(SongUpdateEvent* arg0) {
                                 for (j = trackA->unk_52; j < trackA->unk_53; j++) {
                                     voice = &player->globals->voices[j];
                                     if (voice->unk_45 == player->unk_234) {
-                                        voice->unk_18 = &D_80078554;
+                                        voice->unk_14.unk_04 = &D_80078554;
                                         voice->unk_flags_3D |= 0x10;
                                     }
                                 }

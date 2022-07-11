@@ -1,6 +1,10 @@
 #include "common.h"
 #include "audio.h"
 
+static void _init_lpfilter(AuLowPass* lp);
+static Acmd* _saveBuffer(AuFX* fx, s16* oldPos, s32 buff, s32 count, Acmd* cmdBufPos);
+static f32 func_80059BD4(AuDelay* delay, s32 rsdelta);
+
 /*
 * the following constant is derived from:
 *

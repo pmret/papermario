@@ -2,13 +2,7 @@
 #include "audio.h"
 #include "nu/nualsgi.h"
 
-void func_80057874(u8 arg0, u8 arg1);
 static s16 _getVol(s16 arg0, s32 arg1, s16 arg2, u16 arg3);
-
-void snd_add_sfx_output(void);
-void snd_update_sequence_players(void);
-Acmd* func_80058050(AuPVoice*, Acmd*);
-Acmd* func_80059310(AuFX*, Acmd*, s32, s32);
 
 AuSynDriver* gActiveSynDriverPtr = NULL;
 AuSynDriver* gSynDriverPtr = NULL;

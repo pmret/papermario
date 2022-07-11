@@ -34,7 +34,7 @@ s32 func_80050C30(u32 arg0) {
     }
 }
 
-void func_80050C54(s32 arg0, s8 arg1) {
+void func_80050C54(s32 arg0, s32 arg1) {
     D_8009A628->unk_21 = arg1;
 }
 
@@ -392,8 +392,8 @@ void func_8005232C(AmbientSoundManager* manager, AlUnkLambda* lambda) {
                     voice->reverb = xi->reverb;
                     voice->instrument = xi->instrument;
                     voice->reverbType = manager->defaultReverbType;
-                    voice->unk_14 = xi->unk_04;
-                    voice->unk_18 = xi->unk_08;
+                    voice->unk_14.unk_00 = xi->unk_04.unk_00;
+                    voice->unk_14.unk_04 = xi->unk_04.unk_04;
                     voice->unk_flags_43 = 2;
                     voice->unk_45 = manager->unk_22;
                     voice->unk_44 = voice->unk_45;

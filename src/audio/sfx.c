@@ -3,22 +3,6 @@
 
 #define MAX_SOUND_INSTANCES 10
 
-typedef struct SoundInstance {
-    /* 0x00 */ s32 flags;
-    /* 0x04 */ s32 soundID;
-    /* 0x08 */ s32 sourceFlags;
-    /* 0x0C */ u8 volume;
-    /* 0x0D */ u8 pan;
-    /* 0x0E */ s16 pitchShift;
-    /* 0x10 */ Vec3f position;
-} SoundInstance; // size = 0x1C
-
-typedef struct AlternatingSoundSet {
-    /* 0x00 */ s32* sounds;
-    /* 0x04 */ s16 soundCount;
-    /* 0x06 */ s16 currentIndex;
-} AlternatingSoundSet; // size = 0x08
-
 // sound IDs
 s32 LoopingSounds[] = {
     0x00000287, 0x000002A8, 0x00000054, 0x00000056, 0x00000024, 0x00000027, 0x00000021, 0x00000022, 0x00000349,
@@ -225,9 +209,6 @@ extern SoundInstance D_801598A0[MAX_SOUND_INSTANCES];
 extern SoundInstance D_801599B8[MAX_SOUND_INSTANCES];
 extern SoundInstance* D_80159AD0;
 extern s32 D_80159AD4;
-
-void sfx_compute_spatialized_sound_params_0(f32 x, f32 y, f32 z, s16* volume, s16* pan);
-void sfx_compute_spatialized_sound_params_1(f32 x, f32 y, f32 z, s16* volume, s16* pan);
 
 void sfx_compute_spatialized_sound_params_2(f32 x, f32 y, f32 z, s16* volume, s16* pan, s32 flags) {
     s32 screenX, screenY, screenZ;

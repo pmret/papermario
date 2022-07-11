@@ -29,12 +29,6 @@ extern u64 n_aspMain_text_bin[];
 extern u64 n_aspMain_data_bin[];
 extern u8 D_801AA000[AUDIO_HEAP_SIZE];
 
-s32 nuAuDmaCallBack(s32 addr, s32 len, void* state, u8 arg3);
-void func_8004B328(NUScMsg, u32);
-void au_driver_init(u8*, ALConfig*);
-void nuAuMgr(void*);
-void snd_load_audio_data(s32 frequency);
-
 void create_audio_system(void) {
     u32 i;
     u32 outputRate, frameSize;

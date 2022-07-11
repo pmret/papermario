@@ -1,32 +1,6 @@
 #include "common.h"
 #include "audio.h"
 
-void snd_SEFCmd_00_SetVolume(SoundManager* manager, SoundPlayer* player);
-void snd_SEFCmd_01_SetPan(SoundManager* manager, SoundPlayer* player);
-void snd_SEFCmd_02_SetInstrument(SoundManager* manager, SoundPlayer* player);
-void snd_SEFCmd_03_SetReverb(SoundManager* manager, SoundPlayer* player);
-void snd_SEFCmd_04(SoundManager* manager, SoundPlayer* player);
-void snd_SEFCmd_05(SoundManager* manager, SoundPlayer* player);
-void snd_SEFCmd_06(SoundManager* manager, SoundPlayer* player);
-void snd_SEFCmd_07(SoundManager* manager, SoundPlayer* player);
-void snd_SEFCmd_08(SoundManager* manager, SoundPlayer* player);
-void snd_SEFCmd_09_StartLoop(SoundManager* manager, SoundPlayer* player);
-void snd_SEFCmd_0A_EndLoop(SoundManager* manager, SoundPlayer* player);
-void snd_SEFCmd_0B(SoundManager* manager, SoundPlayer* player);
-void snd_SEFCmd_0C(SoundManager* manager, SoundPlayer* player);
-void snd_SEFCmd_0D(SoundManager* manager, SoundPlayer* player);
-void snd_SEFCmd_0E(SoundManager* manager, SoundPlayer* player);
-void snd_SEFCmd_0F(SoundManager* manager, SoundPlayer* player);
-void snd_SEFCmd_10_Jump(SoundManager* manager, SoundPlayer* player);
-void snd_SEFCmd_11_Restart(SoundManager* manager, SoundPlayer* player);
-void snd_SEFCmd_12_NOP(SoundManager* manager, SoundPlayer* player);
-void snd_SEFCmd_SetUnkA1(SoundManager* manager, SoundPlayer* player);
-void snd_SEFCmd_SetUnkA2(SoundManager* manager, SoundPlayer* player);
-void snd_SEFCmd_SetUnkA3(SoundManager* manager, SoundPlayer* player);
-void snd_SEFCmd_16(SoundManager* manager, SoundPlayer* player);
-void snd_SEFCmd_17(SoundManager* manager, SoundPlayer* player);
-void snd_SEFCmd_18(SoundManager* manager, SoundPlayer* player);
-
 s32 D_80078190[] = {
     0xF8030125, 0x07D0FDBC, 0xF8860355, 0x06FCFBAB, 0xFEDAF82D, 0x0245077D, 0xFCA9F901, 0x0456065D, 0xFC33FBB2, 0xFCEFFE94, 0xFFD80080, 0x00A4007D, 0x090E0673, 0x02FF0053, 0xFEF2FEA7, 0xFEF9FF7B
 };
@@ -88,7 +62,8 @@ s32 D_80078378[] = {
 
 //TODO type: InstrumentEffect
 s32 D_80078390[] = {
-    0x01000000, 0x0008001A, 0x3C7F237F, 0x3C3F2A1F, 0x2A0F2A07, 0x2A033600, 0xFF003600, 0xFF000000, 0x34337F26, 0x3F1600FF, 0x343B7F3B, 0x3FFF0000
+    0x01000000, 0x0008001A, 0x3C7F237F, 0x3C3F2A1F, 0x2A0F2A07, 0x2A033600, 0xFF003600, 0xFF000000,
+    0x34337F26, 0x3F1600FF, 0x343B7F3B, 0x3FFF0000
 };
 
 InstrumentEffect* D_800783C0[] = {
@@ -294,10 +269,6 @@ extern s32* AU_FX_CUSTOM_PARAMS[0]; // points to 80078290
 
 extern void (*CurrentSeqCmdHandler)(BGMPlayer*, BGMPlayerTrack*);
 extern void (*CurrentSefCmdHandler)(SoundManager*, SoundPlayer*);
-
-void snd_set_player_modifiers(SoundPlayer* player, SoundSFXEntry* sfxEntry);
-void func_800538C4(AlUnkVoice* arg0, u8 arg1);
-f32 snd_compute_pitch_ratio(s32);
 
 void func_8004B440(SoundManager* manager, u8 arg1, u8 arg2, AuGlobals* arg3, u8 arg4) {
     u32 i;
@@ -713,9 +684,6 @@ void snd_set_player_modifiers(SoundPlayer* player, SoundSFXEntry* sfxEntry) {
     }
 }
 
-void func_8004C578(SoundManager*, SoundPlayer*, AlUnkVoice*, u8);
-void func_8004C884(SoundManager*, SoundPlayer*, AlUnkVoice*, u8);
-
 s16 snd_sound_manager_update(SoundManager* manager) {
     SoundPlayer* sndPlayer;
     AlUnkVoice* voice;
@@ -823,8 +791,8 @@ void func_8004C578(SoundManager* manager, SoundPlayer* player, AlUnkVoice* arg2,
     
                 arg2->reverb = player->reverb;
                 arg2->unk_40 = snd_get_scaled_volume(manager, player);
-                arg2->unk_14 = player->unk10;
-                arg2->unk_18 = player->unk14;
+                arg2->unk_14.unk_00 = player->unk_10.unk_00;
+                arg2->unk_14.unk_04 = player->unk_10.unk_04;
                 arg2->instrument = player->sfxInstrumentRef;
                 arg2->pitchRatio = player->pitchRatio;
                 arg2->unk_flags_43 = 2;
@@ -855,7 +823,7 @@ s16 snd_get_scaled_volume(SoundManager* manager, SoundPlayer* player) {
 }
 
 void func_8004C884(SoundManager* manager, SoundPlayer* player, AlUnkVoice* arg2, u8 arg3) {
-    s32 var_v0_3;
+    s32* var_v0_3;
     s32 pitchShift;
     s32 temp_a0;
     u8 opcode;
@@ -936,12 +904,14 @@ void func_8004C884(SoundManager* manager, SoundPlayer* player, AlUnkVoice* arg2,
                 
                 arg2->reverb = player->reverb;
                 snd_set_voice_volume(arg2, manager, player);
-                var_v0_3 = player->unk_18;
                 if (player->unk_18 == 0) {
-                    var_v0_3 = player->unk10;
+                    arg2->unk_14.unk_00 = player->unk_10.unk_00;
+                    arg2->unk_14.unk_04 = player->unk_10.unk_04;
+                } else {
+                    arg2->unk_14.unk_00 = player->unk_18;
+                    arg2->unk_14.unk_04 = player->unk_10.unk_04;
                 }
-                arg2->unk_14 = (u8*) var_v0_3;
-                arg2->unk_18 = (s32*) player->unk14;
+
                 arg2->instrument = (s32) player->sfxInstrumentRef;
                 arg2->reverbType = manager->unk_BE;
                 
@@ -1079,7 +1049,7 @@ void snd_SEFCmd_02_SetInstrument(SoundManager* manager, SoundPlayer* player) {
     player->sefDataReadPos = &buf[2];
     
     player->instrumentIndex = patch;
-    player->sfxInstrumentRef = func_80053BE8(manager->soundData, bank, patch, &player->unk10);
+    player->sfxInstrumentRef = func_80053BE8(manager->soundData, bank, patch, &player->unk_10);
 }
 
 void snd_SEFCmd_03_SetReverb(SoundManager* manager, SoundPlayer* player) {
@@ -1122,9 +1092,9 @@ void snd_SEFCmd_04(SoundManager* manager, SoundPlayer* player) {
     player->sfxInstrumentRef = &player->sfxInstrument;
     
     temp_v0_2 = player->sfxInstrument.unkOffset;
-    if (temp_v0_2 != NULL && temp_v0_2->count) {
-        player->unk10 = (s8*)(temp_v0_2->unk_04[0].unkOffset1 + (s32)temp_v0_2);
-        player->unk14 = (s8*)(temp_v0_2->unk_04[0].unkOffset2 + (s32)temp_v0_2);
+    if (temp_v0_2 != NULL && temp_v0_2->count != 0) {
+        player->unk_10.unk_00 = (temp_v0_2->unk_04[0].unkOffset1 + (s32)temp_v0_2);
+        player->unk_10.unk_04 = (temp_v0_2->unk_04[0].unkOffset2 + (s32)temp_v0_2);
     }
 }
 

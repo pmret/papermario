@@ -349,6 +349,11 @@ typedef struct SoundSFXEntry {
     /* 0x9 */ char unk_9[0x1];
 } SoundSFXEntry; // size = 0xA
 
+typedef struct AlUnkInstrumentData {
+    /* 0x00 */ s32* unk_00;
+    /* 0x04 */ s32* unk_04;
+} AlUnkInstrumentData; // size = 0x8
+
 typedef struct InstrumentEffectSub {
     /* 0x00 */ u16 unkOffset1;
     /* 0x02 */ u16 unkOffset2;
@@ -407,9 +412,8 @@ typedef struct SoundPlayChange {
 typedef struct SoundPlayer {
     /* 0x00 */ s8* sefDataReadPos;
     /* 0x04 */ char pad4[0xC];
-    /* 0x10 */ s8* unk10;
-    /* 0x14 */ s8* unk14;
-    /* 0x18 */ s32 unk_18;
+    /* 0x10 */ AlUnkInstrumentData unk_10;
+    /* 0x18 */ s32* unk_18;
     /* 0x1C */ Instrument* sfxInstrumentRef;
     /* 0x20 */ Instrument sfxInstrument;
     /* 0x50 */ s8* sefReadStart;
@@ -515,6 +519,22 @@ typedef struct SoundManager {
     /* 0x16C */ SoundPlayer unk_16C[8];
 } SoundManager; // size = 0x6CC
 
+typedef struct SoundInstance {
+    /* 0x00 */ s32 flags;
+    /* 0x04 */ s32 soundID;
+    /* 0x08 */ s32 sourceFlags;
+    /* 0x0C */ u8 volume;
+    /* 0x0D */ u8 pan;
+    /* 0x0E */ s16 pitchShift;
+    /* 0x10 */ Vec3f position;
+} SoundInstance; // size = 0x1C
+
+typedef struct AlternatingSoundSet {
+    /* 0x00 */ s32* sounds;
+    /* 0x04 */ s16 soundCount;
+    /* 0x06 */ s16 currentIndex;
+} AlternatingSoundSet; // size = 0x08
+
 typedef struct AlUnkVoice {
     /* 0x00 */ Instrument* instrument;
     /* 0x04 */ f32 pitchRatio;
@@ -524,8 +544,7 @@ typedef struct AlUnkVoice {
     /* 0x0F */ u8 reverb; // amt
     /* 0x10 */ u8 reverbType;
     /* 0x11 */ char unk_11[0x3];
-    /* 0x14 */ s32* unk_14; // ultimately from bgm_player->unk_10 ?
-    /* 0x18 */ s32* unk_18; // ultimately from bgm_player->unk_14 ? u8* ?
+    /* 0x14 */ AlUnkInstrumentData unk_14;
     /* 0x1C */ u8* unk_1C;
     /* 0x20 */ s32 unk_20;
     /* 0x24 */ s32 unk_24;
@@ -753,7 +772,7 @@ typedef struct BGMPlayerTrack {
     /* 0x04 */ u8* unk_04;
     /* 0x08 */ u8* prevReadPos; //? see snd_BGMCmd_FC_Jump
     /* 0x0C */ Instrument* instrument;
-    /* 0x10 */ s32* unk_10[2];
+    /* 0x10 */ AlUnkInstrumentData unk_10;
     /* 0x18 */ s32 subTrackVolume;
     /* 0x1C */ s32 subTrackVolumeFadeDelta;
     /* 0x20 */ s32 subTrackVolumeFadeVolume;
@@ -919,8 +938,7 @@ typedef struct MSEQHeader {
 
 typedef struct AlUnkXi {
     /* 0x00 */ Instrument* instrument;
-    /* 0x04 */ s32 unk_04;
-    /* 0x08 */ s32 unk_08;
+    /* 0x04 */ AlUnkInstrumentData unk_04;
     /* 0x0C */ s16 unk_0C;
     /* 0x0E */ s16 unk_0E;
     /* 0x10 */ s32 unk_10;
@@ -1039,17 +1057,21 @@ extern u8 D_800A3FEC;
 extern s16 D_800A3FEE;
 extern s32 D_800A3FF0;
 
-void snd_load_BK_headers(AuGlobals* arg0, ALHeap*);
+#include "audio/2BF90.h"
+#include "audio/2d9a0_len_890.h"
+#include "audio/2e230_len_2190.h"
+#include "audio/25f00_len_940.h"
+#include "audio/303c0_len_3e10.h"
+#include "audio/26840_len_20d0.h"
+#include "audio/28910_len_5090.h"
+#include "audio/30450.h"
+#include "audio/31650.h"
+#include "audio/33450.h"
+#include "audio/reverb.h"
+#include "audio/sfx.h"
+// func_80058050
 
-void func_8004B440(SoundManager*, u8, u8, AuGlobals*, u8);
-void snd_load_sfx_groups_from_SEF(SoundManager*);
-void snd_clear_sfx_queue(SoundManager*);
-void snd_enqueue_sfx_event(SoundManager*, s32, s16, s16, u8);
-void func_8004B748(SoundManager*);
-s32 func_8004B9E4(SoundManager*, s32);
-void func_8004BA54(SoundManager*, s32);
-s16 snd_sound_manager_update(SoundManager*);
-
+/*
 void func_8004D510(BGMPlayer*);
 BGMPlayer* snd_get_player_with_song_name(s32);
 MusicError func_8004DA0C(s32);
@@ -1097,21 +1119,11 @@ void func_80050818(BGMPlayer*, s32);
 void func_8005087C(BGMPlayer*, s32*, s32);
 void bgm_set_proximity_mix_full(s32, u8);
 void snd_set_bgm_proximity_mix(s32, u32);
-void func_80050B90(AmbientSoundManager*, s8, s8, AuGlobals*);
-s32 func_80050C30(u32);
-void func_80050D50(AlUnkLambda*);
-void snd_ambient_manager_update(AmbientSoundManager*);
-void func_80051334(AmbientSoundManager*, AlUnkLambda*);
-void func_80051434(AmbientSoundManager*, AlUnkLambda*);
-void func_800521E8(AmbientSoundManager*, AlUnkLambda*);
-void func_800522A8(AmbientSoundManager*, AlUnkLambda*);
-void func_8005232C(AmbientSoundManager*, AlUnkLambda*);
-
 void func_800525A0(AuGlobals*);
 void func_80052614(AuGlobals*);
 void func_80052660(AuGlobals*);
 void func_80052B44(AlUnkVoice*);
-void func_80052BF8(AlUnkVoice*, s32*);
+void func_80052BF8(AlUnkVoice*, AlUnkInstrumentData*);
 
 void snd_reset_instrument(Instrument*);
 void snd_reset_drum_entry(BGMDrumInfo*);
@@ -1123,7 +1135,7 @@ void func_80053A28(Fade*);
 void func_80053A98(u8, u16, s32);
 void snd_set_fade_vol_scale(Fade*, s16);
 void func_80053BA8(Fade*);
-Instrument* func_80053BE8(AuGlobals*, u32, u32, s32**);
+Instrument* func_80053BE8(AuGlobals*, u32, u32, AlUnkInstrumentData*);
 s32 snd_load_BK(s32, s32);
 void func_80054CE0(s32, u32);
 
@@ -1172,6 +1184,7 @@ void snd_copy_words(void*, void*, s32);
 f32 snd_compute_pitch_ratio(s32);
 
 void func_8005083C(BGMPlayer* player, s32 trackIdx, s16 arg2, u8 arg3);
+*/
 
 #undef alHeapAlloc
 void* alHeapAlloc(ALHeap* heap, s32 arg1, s32 size);

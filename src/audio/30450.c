@@ -236,6 +236,7 @@ s32 snd_ambient_80055590(s32 arg0, s32 arg1) {
 }
 
 void snd_ambient_800555E4(s32 arg0) {
+    
     if (func_80050C30(arg0) == 0) {
         func_80051050(arg0);
     }
@@ -397,8 +398,8 @@ void func_800559E0(void) {
     func_8004DA74();
 }
 
-s32 func_800559FC(void) {
-    return snd_is_song_playing();
+s32 func_800559FC(s32 songName) {
+    return snd_is_song_playing(songName);
 }
 
 MusicError snd_set_song_variation_fade(s32 songName, s32 variation, s32 fadeInTime, s32 startVolume, s32 endVolume) {
