@@ -44,7 +44,7 @@ void update_ambient_sounds(void) {
                     error = snd_ambient_slow_fade_out(0, ambientSoundState->fadeTime);
                 }
 
-                if (error != MUSIC_ERROR_NONE) {
+                if (error != AU_RESULT_OK) {
                     return;
                 }
             }
@@ -52,7 +52,7 @@ void update_ambient_sounds(void) {
             break;
         case AMBIENT_SOUND_FADE_IN:
             if (ambientSoundState->flags & 1) {
-                if (snd_ambient_800555E4(0) != MUSIC_ERROR_NONE) {
+                if (snd_ambient_800555E4(0) != AU_RESULT_OK) {
                     return;
                 }
                 ambientSoundState->flags &= ~1;
@@ -60,7 +60,7 @@ void update_ambient_sounds(void) {
             if (ambientSoundState->soundID < 0) {
                 ambientSoundState->fadeState = AMBIENT_SOUND_IDLE;
             } else if (snd_ambient_80055448(ambientSoundState->soundID) == 0) {
-                if (snd_ambient_80055464(0, 0) == MUSIC_ERROR_NONE) {
+                if (snd_ambient_80055464(0, 0) == AU_RESULT_OK) {
                     ambientSoundState->fadeState = AMBIENT_SOUND_IDLE;
                     ambientSoundState->flags |= 1;
                 }

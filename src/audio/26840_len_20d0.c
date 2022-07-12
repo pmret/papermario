@@ -1,12 +1,26 @@
 #include "common.h"
 #include "audio.h"
 
-s32 D_80078190[] = {
-    0xF8030125, 0x07D0FDBC, 0xF8860355, 0x06FCFBAB, 0xFEDAF82D, 0x0245077D, 0xFCA9F901, 0x0456065D, 0xFC33FBB2, 0xFCEFFE94, 0xFFD80080, 0x00A4007D, 0x090E0673, 0x02FF0053, 0xFEF2FEA7, 0xFEF9FF7B
+u16 DummyInstrumentPredictor[32] = {
+    0xF803, 0x0125, 0x07D0, 0xFDBC, 0xF886, 0x0355, 0x06FC, 0xFBAB,
+    0xFEDA, 0xF82D, 0x0245, 0x077D, 0xFCA9, 0xF901, 0x0456, 0x065D,
+    0xFC33, 0xFBB2, 0xFCEF, 0xFE94, 0xFFD8, 0x0080, 0x00A4, 0x007D,
+    0x090E, 0x0673, 0x02FF, 0x0053, 0xFEF2, 0xFEA7, 0xFEF9, 0xFF7B
 };
 
-s32 D_800781D0[] = {
-    0xB1011110, 0x00FFFE34, 0xBB90E21E, 0x00FB10EF, 0xF2D180C4, 0xB3B1D3CF, 0xD1FDFE80, 0x1D2D3D3B, 0x2C3BFC1D, 0x80DEF0D0, 0xD3D2B3D1, 0xF480A203, 0xD00DA9EA, 0xCB729041, 0x4E1D2D0C, 0x1E102F90, 0xF21203F0, 0xC2D1D4F3, 0x80B0A1BF, 0xD21E1270, 0x4D804C39, 0x2C7E306D, 0xB9CF90E1, 0xF2F3F2E1, 0xE21622C1, 0xE728F4F0, 0x211010FF, 0xA1ED9F2F, 0xF561333C, 0xD0A1DAC2, 0xFF144122, 0x2DEFA1FA, 0xE10E2330, 0x320EF091, 0x9AF2CF55, 0x1361EE1C, 0x919D0FD2, 0x52064DE1, 0x0991D01B, 0x152E36FD, 0x12CB8122, 0xBC65F073, 0xCE3FAE71, 0x4E9370F5, 0x6ED21BD1, 0x610A5D00, 0x00000000, 0x00000000
+u8 DummyInstrumentBase[190] = {
+    0xB1, 0x01, 0x11, 0x10, 0x00, 0xFF, 0xFE, 0x34, 0xBB, 0x90, 0xE2, 0x1E, 0x00, 0xFB, 0x10, 0xEF,
+    0xF2, 0xD1, 0x80, 0xC4, 0xB3, 0xB1, 0xD3, 0xCF, 0xD1, 0xFD, 0xFE, 0x80, 0x1D, 0x2D, 0x3D, 0x3B,
+    0x2C, 0x3B, 0xFC, 0x1D, 0x80, 0xDE, 0xF0, 0xD0, 0xD3, 0xD2, 0xB3, 0xD1, 0xF4, 0x80, 0xA2, 0x03,
+    0xD0, 0x0D, 0xA9, 0xEA, 0xCB, 0x72, 0x90, 0x41, 0x4E, 0x1D, 0x2D, 0x0C, 0x1E, 0x10, 0x2F, 0x90,
+    0xF2, 0x12, 0x03, 0xF0, 0xC2, 0xD1, 0xD4, 0xF3, 0x80, 0xB0, 0xA1, 0xBF, 0xD2, 0x1E, 0x12, 0x70,
+    0x4D, 0x80, 0x4C, 0x39, 0x2C, 0x7E, 0x30, 0x6D, 0xB9, 0xCF, 0x90, 0xE1, 0xF2, 0xF3, 0xF2, 0xE1,
+    0xE2, 0x16, 0x22, 0xC1, 0xE7, 0x28, 0xF4, 0xF0, 0x21, 0x10, 0x10, 0xFF, 0xA1, 0xED, 0x9F, 0x2F,
+    0xF5, 0x61, 0x33, 0x3C, 0xD0, 0xA1, 0xDA, 0xC2, 0xFF, 0x14, 0x41, 0x22, 0x2D, 0xEF, 0xA1, 0xFA,
+    0xE1, 0x0E, 0x23, 0x30, 0x32, 0x0E, 0xF0, 0x91, 0x9A, 0xF2, 0xCF, 0x55, 0x13, 0x61, 0xEE, 0x1C,
+    0x91, 0x9D, 0x0F, 0xD2, 0x52, 0x06, 0x4D, 0xE1, 0x09, 0x91, 0xD0, 0x1B, 0x15, 0x2E, 0x36, 0xFD,
+    0x12, 0xCB, 0x81, 0x22, 0xBC, 0x65, 0xF0, 0x73, 0xCE, 0x3F, 0xAE, 0x71, 0x4E, 0x93, 0x70, 0xF5,
+    0x6E, 0xD2, 0x1B, 0xD1, 0x61, 0x0A, 0x5D, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 };
 
 // copy of SMALL_ROOM_PARAMS
@@ -113,7 +127,7 @@ void (*SefCmdHandlers[])(SoundManager*, SoundPlayer*) = {
 	snd_SEFCmd_18
 };
 
-s8 gBlankSEFData[] = {
+u8 gBlankSEFData[] = {
     0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00
@@ -162,14 +176,18 @@ s8 BgmDivisors[] = {
     0x30, 0x18, 0x20, 0x28, 0x30, 0x38, 0x40, 0x30, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 };
 
-s32 D_80078520[] = {
-    0x00000000, 0x00000000, 0x00000000, 0x00000000
+u8 NullMseqData[] = {
+    0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00
 };
 
 s16 D_80078530[] = {
     0x0000, 0x0200, 0x0800, 0x1200, 0x2000, 0x3200, 0x4800, 0x6200, 0x8000, 0x0000
 };
 
+// InstrumentEffect
 s32 D_80078544[] = {
     0x01000000, 0x0008000C
 };
@@ -1026,7 +1044,7 @@ u8 func_8004CDF8(s32 arg0, s32 arg1, s32 arg2) {
 }
 
 void snd_SEFCmd_00_SetVolume(SoundManager* manager, SoundPlayer* player) {
-    player->sfxVolume = *(u8*)player->sefDataReadPos++;
+    player->sfxVolume = *player->sefDataReadPos++;
     if (player->sfxVolume != 0) {
         player->sfxVolume = player->sfxVolume << 8 | 0xFF;
     }
@@ -1034,7 +1052,7 @@ void snd_SEFCmd_00_SetVolume(SoundManager* manager, SoundPlayer* player) {
 }
 
 void snd_SEFCmd_01_SetPan(SoundManager* manager, SoundPlayer* player) {
-    u8* buf = player->sefDataReadPos;
+    AuFilePos buf = player->sefDataReadPos;
     s32 sfxPan = buf[0];
     player->sefDataReadPos = &buf[1];
 
@@ -1043,7 +1061,7 @@ void snd_SEFCmd_01_SetPan(SoundManager* manager, SoundPlayer* player) {
 }
 
 void snd_SEFCmd_02_SetInstrument(SoundManager* manager, SoundPlayer* player) {
-    u8* buf = player->sefDataReadPos;
+    AuFilePos buf = player->sefDataReadPos;
     s32 bank = buf[0];
     s32 patch = buf[1];
     player->sefDataReadPos = &buf[2];
@@ -1053,7 +1071,7 @@ void snd_SEFCmd_02_SetInstrument(SoundManager* manager, SoundPlayer* player) {
 }
 
 void snd_SEFCmd_03_SetReverb(SoundManager* manager, SoundPlayer* player) {
-    u8* buf = player->sefDataReadPos;
+    AuFilePos buf = player->sefDataReadPos;
     u8 reverb = buf[0];
     player->sefDataReadPos = &buf[1];
     
@@ -1068,7 +1086,7 @@ void snd_SEFCmd_04(SoundManager* manager, SoundPlayer* player) {
     Instrument* other;
     InstrumentEffect* temp_v0_2;
 
-    u8* buf = player->sefDataReadPos;
+    AuFilePos buf = player->sefDataReadPos;
     u8 temp_v1 = buf[0];
     player->sefDataReadPos = &buf[1];
    
@@ -1077,12 +1095,12 @@ void snd_SEFCmd_04(SoundManager* manager, SoundPlayer* player) {
     
     player->sfxInstrument.base = other->base;
     player->sfxInstrument.wavDataLength = other->wavDataLength;
-    player->sfxInstrument.loopPredictorOffset = other->loopPredictorOffset;
+    player->sfxInstrument.loopPredictor = other->loopPredictor;
     player->sfxInstrument.loopStart = other->loopStart;
     player->sfxInstrument.loopEnd = other->loopEnd;
     player->sfxInstrument.loopCount = other->loopCount;
-    player->sfxInstrument.predictorOffset = other->predictorOffset;
-    player->sfxInstrument.unk_1C = other->unk_1C;
+    player->sfxInstrument.predictor = other->predictor;
+    player->sfxInstrument.dc_bookSize = other->dc_bookSize;
     player->sfxInstrument.keyBase = other->keyBase;
     player->sfxInstrument.pitchRatio = other->pitchRatio;
     player->sfxInstrument.type = other->type;
@@ -1099,11 +1117,11 @@ void snd_SEFCmd_04(SoundManager* manager, SoundPlayer* player) {
 }
 
 void snd_SEFCmd_05(SoundManager* manager, SoundPlayer* player) {
-    player->unk_92 = (*player->sefDataReadPos++) * 100;
+    player->unk_92 = (*(s8*)player->sefDataReadPos++) * 100;
 }
 
 void snd_SEFCmd_06(SoundManager* manager, SoundPlayer* player) {
-    u8* buf = player->sefDataReadPos;
+    AuFilePos buf = player->sefDataReadPos;
     s32 unkTemp = buf[0];
     player->sefDataReadPos = &buf[1];
 
@@ -1118,7 +1136,7 @@ void snd_SEFCmd_07(SoundManager* manager, SoundPlayer* player) {
 }
 
 void snd_SEFCmd_08(SoundManager* manager, SoundPlayer* player) {
-    u8* buf = player->sefDataReadPos;
+    AuFilePos buf = player->sefDataReadPos;
     s32 newValueH = buf[0];
     s32 newValueL = buf[1];
     s16 newValue = (buf[2] & 0x7F) * 100;
@@ -1135,7 +1153,7 @@ void snd_SEFCmd_08(SoundManager* manager, SoundPlayer* player) {
 }
 
 void snd_SEFCmd_09_StartLoop(SoundManager* manager, SoundPlayer* player) {
-    u8* buf = player->sefDataReadPos;
+    AuFilePos buf = player->sefDataReadPos;
     s32 loopIterCount = buf[0];
     player->sefDataReadPos = &buf[1];
 
@@ -1144,8 +1162,8 @@ void snd_SEFCmd_09_StartLoop(SoundManager* manager, SoundPlayer* player) {
 }
 
 void snd_SEFCmd_0A_EndLoop(SoundManager* manager, SoundPlayer* player) {
-    //TODO logic is incorrect? fake match?
-    if (player->loopIterCount == 0U || (--player->loopIterCount & 0xFF) != 0) {
+    //TODO logic is incorrect?
+    if (player->loopIterCount == 0 || --player->loopIterCount != 0) {
         player->sefDataReadPos = player->loopStartPos;
     }
 }
@@ -1158,7 +1176,7 @@ void snd_SEFCmd_0B(SoundManager* manager, SoundPlayer* player) {
 }
 
 void snd_SEFCmd_0C(SoundManager* manager, SoundPlayer* player) {
-    u8* buf = player->sefDataReadPos;
+    AuFilePos buf = player->sefDataReadPos;
     s32 vol = buf[0];
     player->sefDataReadPos = &buf[1];
 
@@ -1170,7 +1188,7 @@ void snd_SEFCmd_0C(SoundManager* manager, SoundPlayer* player) {
 }
 
 void snd_SEFCmd_0D(SoundManager* manager, SoundPlayer* player) {
-    u8* buf = player->sefDataReadPos;
+    AuFilePos buf = player->sefDataReadPos;
     s32 newValueH = buf[0];
     s32 newValueL = buf[1];
     s32 newValue = buf[2];
@@ -1190,13 +1208,11 @@ void snd_SEFCmd_0D(SoundManager* manager, SoundPlayer* player) {
 }
 
 void snd_SEFCmd_0E(SoundManager* manager, SoundPlayer* player) {
-    s8* data = (s8*)manager->sefData;
-    u8* buf = player->sefDataReadPos;
-    s32 pos = (buf[1] << 8) + buf[2];
+    AuFilePos buf = player->sefDataReadPos;
+    s32 pos = ((buf[1] << 8) + buf[2]) + (s32)manager->sefData;
     u8 type = buf[0];
     player->sefDataReadPos = &buf[3];
     
-    pos += (s32)data;
     player->unk_84 = (s32)type;
     switch (type) {
         case 1:
@@ -1222,7 +1238,7 @@ void snd_SEFCmd_0F(SoundManager* manager, SoundPlayer* player) {
 }
 
 void snd_SEFCmd_10_Jump(SoundManager* manager, SoundPlayer* player) {
-    u8* buf = player->sefDataReadPos;
+    AuFilePos buf = player->sefDataReadPos;
     player->sefReadStart = &buf[2];
     player->sefDataReadPos = (s8*)(((buf[0] << 8) + buf[1]) + (s32)manager->sefData);
 }
@@ -1235,7 +1251,7 @@ void snd_SEFCmd_12_NOP(SoundManager* manager, SoundPlayer* player) {
 }
 
 void snd_SEFCmd_SetUnkA1(SoundManager* manager, SoundPlayer* player) {
-    u8* buf = player->sefDataReadPos;
+    AuFilePos buf = player->sefDataReadPos;
     s32 unkTemp = buf[0];
     player->sefDataReadPos = &buf[1];
 
@@ -1243,7 +1259,7 @@ void snd_SEFCmd_SetUnkA1(SoundManager* manager, SoundPlayer* player) {
 }
 
 void snd_SEFCmd_SetUnkA2(SoundManager* manager, SoundPlayer* player) {
-    u8* buf = player->sefDataReadPos;
+    AuFilePos buf = player->sefDataReadPos;
     s32 unkTemp = buf[0];
     player->sefDataReadPos = &buf[1];
 
@@ -1251,7 +1267,7 @@ void snd_SEFCmd_SetUnkA2(SoundManager* manager, SoundPlayer* player) {
 }
 
 void snd_SEFCmd_SetUnkA3(SoundManager* manager, SoundPlayer* player) {
-    u8* buf = player->sefDataReadPos;
+    AuFilePos buf = player->sefDataReadPos;
     s32 unkTemp = buf[0];
     player->sefDataReadPos = &buf[1];
 
@@ -1259,11 +1275,11 @@ void snd_SEFCmd_SetUnkA3(SoundManager* manager, SoundPlayer* player) {
 }
 
 void snd_SEFCmd_16(SoundManager* manager, SoundPlayer* player) {
-    u8* buf = player->sefDataReadPos;
+    AuFilePos buf = player->sefDataReadPos;
     s32 offset = (buf[0] << 8) + buf[1];
 
     if (offset != 0) {
-        player->unk_18 = offset + (s32)manager->sefData;
+        player->unk_18 = (s32*)(offset + (s32)manager->sefData);
     } else {
         player->unk_18 = NULL;
     }
@@ -1272,7 +1288,7 @@ void snd_SEFCmd_16(SoundManager* manager, SoundPlayer* player) {
 }
 
 void snd_SEFCmd_17(SoundManager* manager, SoundPlayer* player) {
-    u8* buf = player->sefDataReadPos;
+    AuFilePos buf = player->sefDataReadPos;
     u32 i;
     
     for (i = 0; i < 4; i++) {
@@ -1323,7 +1339,7 @@ void func_8004D4BC(SoundManager* manager) {
 
     for (i = 0; i < ARRAY_COUNT(manager->unk_16C); i++) {
         SoundPlayer* temp_v0 = &manager->unk_16C[i];
-        temp_v0->sefDataReadPos = &gBlankSEFData;
+        temp_v0->sefDataReadPos = gBlankSEFData;
         temp_v0->unk_80 = 0;
         temp_v0->sfxParamsFlags = 1;
         temp_v0->unk_A9 = 0;

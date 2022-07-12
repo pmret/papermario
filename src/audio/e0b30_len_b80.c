@@ -85,11 +85,11 @@ void bgm_update_music_settings(void) {
             if (music->flags & MUSIC_SETTINGS_FLAGS_1) {
                 if (music->fadeOutTime < 250) {
                     if (!(music->flags & MUSIC_SETTINGS_FLAGS_4)) {
-                        if (func_800559C4(music->songName) == MUSIC_ERROR_NONE) {
+                        if (func_800559C4(music->songName) == AU_RESULT_OK) {
                             music->state = state2;
                         }
                     } else {
-                        if (func_80055AF0(music->songName) == MUSIC_ERROR_NONE) {
+                        if (func_80055AF0(music->songName) == AU_RESULT_OK) {
                            music->state = state2;
                         }
                     }
@@ -98,7 +98,7 @@ void bgm_update_music_settings(void) {
                         music->state = state2;
                     }
                 } else {
-                    if (func_80055BB8(music->songName, 250) == MUSIC_ERROR_NONE) {
+                    if (func_80055BB8(music->songName, 250) == AU_RESULT_OK) {
                         music->state = state2;
                     }
                 }
@@ -114,7 +114,7 @@ void bgm_update_music_settings(void) {
             flags = music->flags;
             music->flags &= ~flag4;
             if (flags & 1) {
-                if (func_800559FC(music->songName) == MUSIC_ERROR_NONE) {
+                if (func_800559FC(music->songName) == AU_RESULT_OK) {
                     music->flags &= ~MUSIC_SETTINGS_FLAGS_1;
                     music->state = 3;
                 }
@@ -275,31 +275,31 @@ s32 bgm_adjust_proximity(s32 playerIndex, s32 trackMask, s16 state) {
     return TRUE;
 }
 
-MusicError func_8014AB0C(s32 playerIndex, s16 arg1) {
+AuResult func_8014AB0C(s32 playerIndex, s16 arg1) {
     MusicSettings* musicSetting = &gMusicSettings[playerIndex];
 
     if (!(musicSetting->flags & MUSIC_SETTINGS_FLAGS_1)) {
-        return MUSIC_ERROR_NONE;
+        return AU_RESULT_OK;
     }
 
     return func_80055DDC(musicSetting->songName, arg1);
 }
 
-MusicError func_8014AB60(s32 playerIndex, s16 arg1) {
+AuResult func_8014AB60(s32 playerIndex, s16 arg1) {
     MusicSettings* musicSetting = &gMusicSettings[playerIndex];
 
     if (!(musicSetting->flags & MUSIC_SETTINGS_FLAGS_1)) {
-        return MUSIC_ERROR_NONE;
+        return AU_RESULT_OK;
     }
 
     return func_80055E48(musicSetting->songName, arg1);
 }
 
-MusicError bgm_set_variation(s32 playerIndex, s16 arg1) {
+AuResult bgm_set_variation(s32 playerIndex, s16 arg1) {
     MusicSettings* musicSetting = &gMusicSettings[playerIndex];
 
     if (!(musicSetting->flags & MUSIC_SETTINGS_FLAGS_1)) {
-        return MUSIC_ERROR_NONE;
+        return AU_RESULT_OK;
     }
 
     return snd_set_song_variation(musicSetting->songName, arg1);

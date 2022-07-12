@@ -34,7 +34,7 @@ static Acmd* _decodeChunk(Acmd* cmdBufPos, AuLoadFilter* arg1, s32 tsam, s32 nby
     s32 paddedSize;
     
     if (nbytes > 0) {
-        endAddr = arg1->dc_dmaFunc(arg1->dc_memin, nbytes, arg1->dc_dmaState, arg1->dc_table->unk_25); // ALDMAproc has an extra arg added
+        endAddr = arg1->dc_dmaFunc(arg1->dc_memin, nbytes, arg1->dc_dmaState, arg1->instrument->unk_25); // ALDMAproc has an extra arg added
         endAlign = endAddr & 7;
         nbytes += endAlign;
         paddedSize = nbytes + 8 - (nbytes & 7);

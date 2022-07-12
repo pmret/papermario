@@ -819,16 +819,16 @@ enum SoundIDBits {
     SOUND_ID_MID                    = 0x00000C00,
 };
 
-typedef enum MusicError {
-    MUSIC_ERROR_NONE                = 0,
-    MUSIC_ERROR_1                   = 1,
-    MUSIC_ERROR_2                   = 2, // player not found for songName
-    MUSIC_ERROR_3                   = 3, // songName is NULL
-    MUSIC_ERROR_4                   = 4, // duration out of bounds: (250,10000)
-    MUSIC_ERROR_6                   = 6,
-    MUSIC_ERROR_7                   = 7,
-    MUSIC_ERROR_11                  = 11,
-} MusicError;
+typedef enum AuResult {
+    AU_RESULT_OK                    = 0,
+    AU_ERROR_1                      = 1,
+    AU_ERROR_SONG_NOT_PLAYING       = 2, // player not found for songName
+    AU_ERROR_NULL_SONG_NAME         = 3, // songName is NULL
+    AU_ERROR_4                      = 4, // duration out of bounds: (250,10000)
+    AU_ERROR_6                      = 6,
+    AU_ERROR_7                      = 7,
+    AU_ERROR_11                     = 11,
+} AuResult;
 
 enum {
     MUSIC_PROXIMITY_FAR,

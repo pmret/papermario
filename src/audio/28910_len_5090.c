@@ -56,7 +56,7 @@ void func_8004D510(BGMPlayer* player) {
                     player->unk_58 = unkType & 0xFF;
                     player->unk_5A = unkType & 0xFF;
                     player->masterState = BGM_PLAY_STATE_3;
-                    player->unkFrequency = BGM_SAMPLE_RATE;
+                    player->sampleRate = BGM_SAMPLE_RATE;
                     if (unkType == 2) {
                         bgmFile = (BGMHeader*) player->globals->currentTrackData[1];
                     } else {
@@ -100,7 +100,7 @@ void func_8004D510(BGMPlayer* player) {
                 if (player->unk_58 != 0) {
                     player->masterState = BGM_PLAY_STATE_4;
                     player->unk_10 = 1;
-                    player->unkFrequency = 1;
+                    player->sampleRate = 1;
                 } else {
                     func_8004DAA8(player);
                 }
@@ -139,7 +139,7 @@ s32 snd_dispatch_bgm_player_event(SongUpdateEvent* event) {
     s32 error;
     u32 i;
 
-    error = MUSIC_ERROR_NONE;
+    error = AU_RESULT_OK;
     songName = event->songName;
     variation = event->variation;
     if (songName != 0) {
@@ -209,17 +209,17 @@ s32 snd_dispatch_bgm_player_event(SongUpdateEvent* event) {
             player->songName = songName;
             snd_initialize_bgm_player(player);
         } else {
-            error = MUSIC_ERROR_2;
+            error = AU_ERROR_SONG_NOT_PLAYING;
         }
     } else {
-        error = MUSIC_ERROR_3;
+        error = AU_ERROR_NULL_SONG_NAME;
     }
     return error;
 }
 
-MusicError func_8004DA0C(s32 songName) {
+AuResult func_8004DA0C(s32 songName) {
     BGMPlayer* player;
-    s32 error = MUSIC_ERROR_NONE;
+    s32 error = AU_RESULT_OK;
 
     if (songName != 0) {
         player = snd_get_player_with_song_name(songName);
@@ -228,10 +228,10 @@ MusicError func_8004DA0C(s32 songName) {
                 func_8004DAA8(player);
             }
         } else {
-            error = MUSIC_ERROR_2;
+            error = AU_ERROR_SONG_NOT_PLAYING;
         }
     } else {
-        error = MUSIC_ERROR_3;
+        error = AU_ERROR_NULL_SONG_NAME;
     }
 
     return error;
@@ -246,24 +246,24 @@ void func_8004DAA8(BGMPlayer* player) {
     if (player->masterState != BGM_PLAY_STATE_0) {
         player->masterState = BGM_PLAY_STATE_4;
         player->unk_10 = 1;
-        player->unkFrequency = 1;
+        player->sampleRate = 1;
         snd_clear_bgm_fade(&player->fadeInfo);
     }
 }
 
-MusicError snd_is_song_playing(s32 songName) {
+AuResult snd_is_song_playing(s32 songName) {
     BGMPlayer* player;
-    s32 error = MUSIC_ERROR_NONE;
+    s32 error = AU_RESULT_OK;
 
     if (songName != 0) {
         player = snd_get_player_with_song_name(songName);
         if (player != NULL) {
             error = (songName == player->songName);
         } else {
-            error = MUSIC_ERROR_2;
+            error = AU_ERROR_SONG_NOT_PLAYING;
         }
     } else {
-        error = MUSIC_ERROR_3;
+        error = AU_ERROR_NULL_SONG_NAME;
     }
 
     return error;
@@ -277,12 +277,12 @@ s32 func_8004DB28(BGMPlayer* player) {
     }
 }
 
-MusicError func_8004DB4C(SongUpdateEvent* s) {
+AuResult func_8004DB4C(SongUpdateEvent* s) {
     BGMPlayer* player;
     u32 songName = s->songName;
     u32 duration = s->duration;
     s16 volume = s->finalVolume;
-    s32 error = MUSIC_ERROR_NONE;
+    s32 error = AU_RESULT_OK;
     if (songName != 0) {
         if (duration >= SND_MIN_DURATION && duration <= SND_MAX_DURATION) {
             player = snd_get_player_with_song_name(songName);
@@ -301,18 +301,18 @@ MusicError func_8004DB4C(SongUpdateEvent* s) {
                     }
                 }
             } else {
-                error = MUSIC_ERROR_2;
+                error = AU_ERROR_SONG_NOT_PLAYING;
             }
         } else {
-            error = MUSIC_ERROR_4;
+            error = AU_ERROR_4;
         }
     } else {
-        error = MUSIC_ERROR_3;
+        error = AU_ERROR_NULL_SONG_NAME;
     }
     return error;
 }
 
-MusicError func_8004DC80(s32 songName) {
+AuResult func_8004DC80(s32 songName) {
     SongUpdateEvent s;
 
     s.songName = songName;
@@ -324,7 +324,7 @@ MusicError func_8004DC80(s32 songName) {
     return func_8004DCB8(&s, 0);
 }
 
-MusicError func_8004DCB8(SongUpdateEvent* update, s32 clearChanged) {
+AuResult func_8004DCB8(SongUpdateEvent* update, s32 clearChanged) {
     BGMPlayer* playerA;
     BGMPlayer* playerB;
     s32 songName;
@@ -335,7 +335,7 @@ MusicError func_8004DCB8(SongUpdateEvent* update, s32 clearChanged) {
 
     songName = update->songName;
     variation = update->variation;
-    error = MUSIC_ERROR_NONE;
+    error = AU_RESULT_OK;
 
     if (songName != 0) {
         playerA = snd_get_player_with_song_name(songName);
@@ -363,7 +363,7 @@ MusicError func_8004DCB8(SongUpdateEvent* update, s32 clearChanged) {
                         }
                     }
                 } else {
-                    error = MUSIC_ERROR_4;
+                    error = AU_ERROR_4;
                 }
             } else {
                 if (songName == playerA->songName) {
@@ -374,15 +374,15 @@ MusicError func_8004DCB8(SongUpdateEvent* update, s32 clearChanged) {
                 }
             }
         } else {
-            error = MUSIC_ERROR_2;
+            error = AU_ERROR_SONG_NOT_PLAYING;
         }
     } else {
-        error = MUSIC_ERROR_3;
+        error = AU_ERROR_NULL_SONG_NAME;
     }
     return error;
 }
 
-MusicError func_8004DE2C(SongUpdateEvent* update) {
+AuResult func_8004DE2C(SongUpdateEvent* update) {
     BGMPlayer* playerA;
     BGMPlayer* playerB;
     s32 variation;
@@ -394,7 +394,7 @@ MusicError func_8004DE2C(SongUpdateEvent* update) {
 
     songName = update->songName;
     variation = update->variation;
-    error = MUSIC_ERROR_NONE;
+    error = AU_RESULT_OK;
 
     if (songName != 0) {
         if (update->unk14 == 0) {
@@ -436,13 +436,13 @@ MusicError func_8004DE2C(SongUpdateEvent* update) {
                         playerB->globals->unkFadeEnd = volume1;
                         playerB->globals->unk_80 = 1;
                     } else {
-                        error = MUSIC_ERROR_7;
+                        error = AU_ERROR_7;
                     }
                 } else {
-                    error = MUSIC_ERROR_6;
+                    error = AU_ERROR_6;
                 }
             } else {
-               error = MUSIC_ERROR_4;
+               error = AU_ERROR_4;
             }
         } else {
             playerB = snd_get_player_with_song_name(songName);
@@ -455,7 +455,7 @@ MusicError func_8004DE2C(SongUpdateEvent* update) {
             }
         }
     } else {
-        error = MUSIC_ERROR_3;
+        error = AU_ERROR_NULL_SONG_NAME;
     }
     return error;
 }
@@ -494,7 +494,7 @@ void func_8004DFD4(AuGlobals* globals) {
 
 s32 func_8004E0F4(SongUpdateEvent* update) {
     BGMPlayer* player;
-    s32 error = MUSIC_ERROR_NONE;
+    s32 error = AU_RESULT_OK;
 
     if (update->songName != 0) {
         player = snd_get_player_with_song_name(update->songName);
@@ -502,10 +502,10 @@ s32 func_8004E0F4(SongUpdateEvent* update) {
             func_80053B04(&player->fadeInfo, update->duration, update->finalVolume);
         }
         else {
-            error = MUSIC_ERROR_2;
+            error = AU_ERROR_SONG_NOT_PLAYING;
         }
     } else {
-        error = MUSIC_ERROR_3;
+        error = AU_ERROR_NULL_SONG_NAME;
     }
     return error;
 }
@@ -825,7 +825,7 @@ void func_8004E880(BGMPlayer* player, s32 sampleRate, s32 divisor) {
     if (A < sampleRate) {
         sampleRate = A;
     }
-    player->unkFrequency = sampleRate;
+    player->sampleRate = sampleRate;
     player->unk_0C = A;
     player->unk_10 = A;
     player->maxTempo = A / 1000;
@@ -926,7 +926,7 @@ void snd_bgm_state_4(BGMPlayer* player) {
     }
     func_80050900(player);
     player->masterState = BGM_PLAY_STATE_0;
-    player->unkFrequency = BGM_SAMPLE_RATE;
+    player->sampleRate = BGM_SAMPLE_RATE;
 }
 
 #define POST_BGM_READ() \
@@ -969,7 +969,7 @@ void func_8004EC68(BGMPlayer *player) {
         } else {
             player->masterTempo += player->masterTempoFadeDelta;
         }
-        player->unkFrequency = player->masterTempo * 10;
+        player->sampleRate = player->masterTempo * 10;
     }
     if (player->masterVolumeFadeTime != 0) {
         player->masterVolumeFadeTime--;
@@ -1365,7 +1365,7 @@ void snd_BGMCmd_E0_MasterTempo(BGMPlayer* player, BGMPlayerTrack* track) {
     player->masterTempoBPM = bpm;
     tempo = snd_bpm_to_tempo(player, bpm);
     player->masterTempo = tempo;
-    player->unkFrequency = tempo * 10;
+    player->sampleRate = tempo * 10;
     player->masterTempoFadeTime = 0;
     player->masterTempoFadeTempo = 0;
     player->masterTempoFadeDelta = 0;
@@ -1832,7 +1832,7 @@ void func_80050770(BGMPlayer* player, f32 arg1) {
 
     player->unk_D0 = arg1;
     player->masterTempo = snd_bpm_to_tempo(player, player->masterTempoBPM);
-    player->unkFrequency = player->masterTempo * 10;
+    player->sampleRate = player->masterTempo * 10;
     player->masterTempoFadeTime = 0;
     player->masterTempoFadeTempo = 0;
     player->masterTempoFadeDelta = 0;
@@ -1893,7 +1893,7 @@ void func_80050900(BGMPlayer* player) {
     }
 }
 
-MusicError func_80050970(SongUpdateEvent* arg0) {
+AuResult func_80050970(SongUpdateEvent* arg0) {
     BGMPlayer* player;
     BGMPlayerTrack* trackA;
     BGMPlayerTrack* trackB;
@@ -1904,7 +1904,7 @@ MusicError func_80050970(SongUpdateEvent* arg0) {
 
     s32 songName = arg0->songName;
     s32 variation = arg0->variation;
-    s32 error = MUSIC_ERROR_NONE;
+    s32 error = AU_RESULT_OK;
 
     if (songName != 0) {
         player = snd_get_player_with_song_name(songName);
@@ -1955,10 +1955,10 @@ MusicError func_80050970(SongUpdateEvent* arg0) {
                 }
             }
         } else {
-            error = MUSIC_ERROR_2;
+            error = AU_ERROR_SONG_NOT_PLAYING;
         }
     } else {
-        error = MUSIC_ERROR_3;
+        error = AU_ERROR_NULL_SONG_NAME;
     }
 
     return error;

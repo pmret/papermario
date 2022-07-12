@@ -28,9 +28,9 @@ void snd_load_audio_data(s32 outputRate) {
     gBGMPlayerB = alHeapAlloc(alHeap, 1, sizeof(*gBGMPlayerB));
     gBGMPlayerC = alHeapAlloc(alHeap, 1, sizeof(*gBGMPlayerC));
     gSoundManager = alHeapAlloc(alHeap, 1, sizeof(*gSoundManager));
-    D_8009A628 = alHeapAlloc(alHeap, 1, sizeof(*D_8009A628));
+    gAmbientSoundManager = alHeapAlloc(alHeap, 1, sizeof(*gAmbientSoundManager));
     gBGMPlayerA->soundManager = gSoundManager;
-    D_8009A628->unk_00 = gSoundGlobals;
+    gAmbientSoundManager->unk_00 = gSoundGlobals;
 
 
     globals = gSoundGlobals;
@@ -105,7 +105,7 @@ void snd_load_audio_data(s32 outputRate) {
     bgm_set_effect_indices(gBGMPlayerB, effects);
 
     func_8004B440(gSoundManager, 4, 1, globals, 0x10);
-    func_80050B90(D_8009A628, 6, 1, globals);
+    func_80050B90(gAmbientSoundManager, 6, 1, globals);
     func_80052614(globals);
     snd_load_BK_headers(globals, alHeap);
     if (snd_fetch_SBN_file(globals->mseqFileList[0], 0x20, &fileEntry) == 0) {
@@ -137,12 +137,12 @@ void snd_load_audio_data(s32 outputRate) {
 }
 
 void snd_reset_instrument(Instrument* instrument) {
-    instrument->base = &D_800781D0;
-    instrument->wavDataLength = 190;
-    instrument->predictorOffset = &D_80078190;
-    instrument->unk_1C = 64;
+    instrument->base = DummyInstrumentBase;
+    instrument->wavDataLength = sizeof(DummyInstrumentBase);
+    instrument->predictor = DummyInstrumentPredictor;
+    instrument->dc_bookSize = sizeof(DummyInstrumentPredictor);
     instrument->keyBase = 4800; // middle C?
-    instrument->loopPredictorOffset = 0;
+    instrument->loopPredictor = NULL;
     instrument->loopStart = 0;
     instrument->loopEnd = 0;
     instrument->loopCount = 0;
@@ -182,7 +182,7 @@ void snd_reset_instrument_entry(BGMInstrumentInfo* arg0) {
 void snd_update_sequence_players(void) {
     AuGlobals* temp_s2 = gSoundGlobals;
     SoundManager* sfxManager = gSoundManager;
-    AmbientSoundManager* ambManager = D_8009A628;
+    AmbientSoundManager* ambManager = gAmbientSoundManager;
     BGMPlayer* bgmPlayer1;
     BGMPlayer* bgmPlayer2;
 
@@ -214,7 +214,7 @@ void snd_update_sequence_players(void) {
             bgmPlayer1->unk_18++;
         }
 
-        bgmPlayer1->unk_10 -= bgmPlayer1->unkFrequency;
+        bgmPlayer1->unk_10 -= bgmPlayer1->sampleRate;
         if (bgmPlayer1->unk_10 <= 0) {
             bgmPlayer1->unk_10 += bgmPlayer1->unk_0C;
             bgmPlayer1->unk_5C = func_8004E4B8(bgmPlayer1);
@@ -238,7 +238,7 @@ void snd_update_sequence_players(void) {
                 bgmPlayer2->unk_18++;
             }
 
-            bgmPlayer2->unk_10 -= bgmPlayer2->unkFrequency;
+            bgmPlayer2->unk_10 -= bgmPlayer2->sampleRate;
             if (bgmPlayer2->unk_10 <= 0) {
                 bgmPlayer2->unk_10 += bgmPlayer2->unk_0C;
                 bgmPlayer2->unk_5C = func_8004E4B8(bgmPlayer2);
@@ -627,52 +627,52 @@ BGMPlayer* func_80053F64(s32 arg0) {
 }
 
 s32 func_80053F80(u32 arg0) {
-    u32 i;
+    AmbientSoundManager* manager;
     SBNFileEntry fileEntry;
-    AuGlobals* soundData;
-    AmbientSoundManager* temp_s2;
+    AuGlobals* globals;
     s32* trackData;
+    u32 i;
 
-    soundData = gSoundGlobals;
-    temp_s2 = D_8009A628;
+    globals = gSoundGlobals;
+    manager = gAmbientSoundManager;
     if (arg0 < 16) {
-        if (temp_s2->unk_24[0].unk_20 == 0 && snd_fetch_SBN_file(soundData->mseqFileList[D_80078580[arg0]], 0x40, &fileEntry) == 0) {
-            snd_read_rom(fileEntry.offset, soundData->currentTrackData[2], fileEntry.data & 0xFFFFFF);
-            temp_s2->unk_10[0] = soundData->currentTrackData[2];
+        if (manager->mseqLambda[0].unk_20 == 0 && snd_fetch_SBN_file(globals->mseqFileList[D_80078580[arg0]], 0x40, &fileEntry) == 0) {
+            snd_read_rom(fileEntry.offset, globals->currentTrackData[2], fileEntry.data & 0xFFFFFF);
+            manager->mseqFiles[0] = globals->currentTrackData[2];
             for (i = 1; i < 4; i++) {
-                temp_s2->unk_10[i] = NULL;
+                manager->mseqFiles[i] = NULL;
             }
-            temp_s2->unk_20 = 1;
+            manager->unk_20 = 1;
         }
-    } else if (arg0 == 16 && temp_s2->unk_24[0].unk_20 == 0 && temp_s2->unk_24[1].unk_20 == 0 && temp_s2->unk_24[2].unk_20 == 0) {
-        temp_s2->unk_20 = 0;
+    } else if (arg0 == 16 && manager->mseqLambda[0].unk_20 == 0 && manager->mseqLambda[1].unk_20 == 0 && manager->mseqLambda[2].unk_20 == 0) {
+        manager->unk_20 = 0;
         for (i = 0; i < 4; i++) {
-            temp_s2->unk_10[i] = NULL;
+            manager->mseqFiles[i] = NULL;
         }
 
-        trackData = soundData->currentTrackData[3];
-        if (snd_fetch_SBN_file(soundData->mseqFileList[D_80078580[arg0]], 0x40, &fileEntry) == 0) {
+        trackData = globals->currentTrackData[3];
+        if (snd_fetch_SBN_file(globals->mseqFileList[D_80078580[arg0]], 0x40, &fileEntry) == 0) {
             snd_read_rom(fileEntry.offset, trackData, fileEntry.data & 0xFFFFFF);
-            temp_s2->unk_10[0] = trackData;
+            manager->mseqFiles[0] = trackData;
 
             trackData = (s32*)((u32)trackData + ((fileEntry.data + 0x40) & 0xFFFFFF));
-            if (snd_fetch_SBN_file(soundData->mseqFileList[D_80078580[arg0 + 1]], 0x40, &fileEntry) == 0) {
+            if (snd_fetch_SBN_file(globals->mseqFileList[D_80078580[arg0 + 1]], 0x40, &fileEntry) == 0) {
                 snd_read_rom(fileEntry.offset, trackData, fileEntry.data & 0xFFFFFF);
-                temp_s2->unk_10[1] = trackData;
+                manager->mseqFiles[1] = trackData;
 
                 trackData = (s32*)((u32)trackData + ((fileEntry.data + 0x40) & 0xFFFFFF));
-                if (snd_fetch_SBN_file(soundData->mseqFileList[D_80078580[arg0 + 2]], 0x40, &fileEntry) == 0) {
+                if (snd_fetch_SBN_file(globals->mseqFileList[D_80078580[arg0 + 2]], 0x40, &fileEntry) == 0) {
 
                     snd_read_rom(fileEntry.offset, trackData, fileEntry.data & 0xFFFFFF);
-                    temp_s2->unk_10[2] = trackData;
+                    manager->mseqFiles[2] = trackData;
 
                     trackData = (s32*)((u32)trackData + ((fileEntry.data + 0x40) & 0xFFFFFF));
-                    if (snd_fetch_SBN_file(soundData->mseqFileList[D_80078580[arg0 + 3]], 0x40, &fileEntry) == 0) {
+                    if (snd_fetch_SBN_file(globals->mseqFileList[D_80078580[arg0 + 3]], 0x40, &fileEntry) == 0) {
                         snd_read_rom(fileEntry.offset, trackData, fileEntry.data & 0xFFFFFF);
-                        temp_s2->unk_10[3] = trackData;
+                        manager->mseqFiles[3] = trackData;
 
-                        temp_s2->unk_20 = 4;
-                        if (snd_fetch_SBN_file(soundData->mseqFileList[D_80078580[arg0 + 4]], 0x30, &fileEntry) == 0) {
+                        manager->unk_20 = 4;
+                        if (snd_fetch_SBN_file(globals->mseqFileList[D_80078580[arg0 + 4]], 0x30, &fileEntry) == 0) {
                             snd_load_BK(fileEntry.offset, 2);
                         }
                     }
@@ -690,7 +690,7 @@ BGMPlayer* func_80054248(u8 arg0) {
         case 2:
             return gBGMPlayerB;
         case 4:
-            return gSoundManager; // TODO: why return pointer to SoundManager?
+            return (BGMPlayer*)gSoundManager; // TODO: why return pointer to SoundManager?
         default:
             return NULL;
     }
@@ -934,8 +934,8 @@ INCLUDE_ASM(s32, "audio/2e230_len_2190", snd_load_BK_to_bank, s32 bkFileOffset, 
 #endif
 
 void snd_swizzle_BK_instruments(s32 bkFileOffset, SoundBank* bank, InstrumentGroup instruments, u32 instrumentCount, u8 arg4) {
-    SoundBank* sb = bank;
     Instrument* defaultInstrument = gSoundGlobals->defaultInstrument;
+    SoundBank* sb = bank;
     f32 freq = gSoundGlobals->outputRate;
     s32 i;
 
@@ -947,14 +947,14 @@ void snd_swizzle_BK_instruments(s32 bkFileOffset, SoundBank* bank, InstrumentGro
                 if (instrument->base != 0) {
                     instrument->base += bkFileOffset;
                 }
-                if (instrument->loopPredictorOffset != NULL) {
-                    instrument->loopPredictorOffset += (s32) bank;
+                if (instrument->loopPredictor != NULL) {
+                    instrument->loopPredictor += (s32) bank;
                 }
-                if (instrument->predictorOffset != NULL) {
-                    instrument->predictorOffset += (s32) bank;
+                if (instrument->predictor != NULL) {
+                    instrument->predictor = (u16*)((s32)instrument->predictor + (s32) bank);
                 }
                 if (instrument->unkOffset != NULL) {
-                    instrument->unkOffset = (s32) instrument->unkOffset + (s32) bank;
+                    instrument->unkOffset = (InstrumentEffect*)((s32) instrument->unkOffset + (s32) bank);
                 }
                 instrument->unk_25 = arg4;
                 instrument->pitchRatio = *((s32*)(&instrument->pitchRatio)) / freq; // what is happening here?

@@ -296,15 +296,15 @@ void au_pvoice_reset_filter(u8 voiceIdx) {
     filter->dc_lastsam = 0;
     filter->dc_first = 1;
     filter->dc_sample = 0;
-    if (filter->dc_table != NULL) {
-        filter->dc_memin = filter->dc_table->base;
-        if (filter->dc_table->type == 0) {
-            if (filter->dc_table->loopEnd != 0){
-                filter->dc_loop.count = filter->dc_table->loopCount;
+    if (filter->instrument != NULL) {
+        filter->dc_memin = filter->instrument->base;
+        if (filter->instrument->type == 0) {
+            if (filter->instrument->loopEnd != 0){
+                filter->dc_loop.count = filter->instrument->loopCount;
             }
-        } else if (filter->dc_table->type == 1) {
-            if (filter->dc_table->loopEnd != 0){
-                filter->dc_loop.count = filter->dc_table->loopCount;
+        } else if (filter->instrument->type == 1) {
+            if (filter->instrument->loopEnd != 0){
+                filter->dc_loop.count = filter->instrument->loopCount;
             }
         }
     }
@@ -319,40 +319,38 @@ void func_80056F78(u8 index) {
 #define ADPCMFBYTES      9
 
 // n_alLoadParam case AL_FILTER_SET_WAVETABLE
-void au_pvoice_set_filter(u8 index, u8 reverbType, Instrument* table, f32 pitchRatio, s16 arg4, u8 pan, u8 reverb, s32 arg7) {
+void au_pvoice_set_filter(u8 index, u8 reverbType, Instrument* instrument, f32 pitchRatio, s16 arg4, u8 pan, u8 reverb, s32 arg7) {
     AuPVoice* pvoice = &gSynDriverPtr->pvoices[index];
     AuLoadFilter* filter = &pvoice->loadFilter;
     AuEnvMixer* envMixer = &pvoice->envMixer;
     AuResampler* resampler = &pvoice->resampler;
 
-//au_pvoice_set_filter(i, voice->reverbType, voice->instrument, voice->pitchRatio, voice->unk_0C, voice->pan, voice->reverb, voice->unk_08);
-
     pvoice->gammaID = reverbType;
-    filter->dc_table = table;
+    filter->instrument = instrument;
 
-    pvoice->loadFilter.dc_memin = filter->dc_table->base;
+    pvoice->loadFilter.dc_memin = filter->instrument->base;
     pvoice->loadFilter.dc_sample = 0;
 
-    switch (filter->dc_table->type) {
+    switch (filter->instrument->type) {
         case AL_ADPCM_WAVE:
-            filter->dc_table->wavDataLength = (filter->dc_table->wavDataLength / ADPCMFBYTES) * ADPCMFBYTES;
-            pvoice->loadFilter.dc_bookSize = filter->dc_table->unk_1C;
-            if (filter->dc_table->loopEnd == 0) {
+            filter->instrument->wavDataLength = (filter->instrument->wavDataLength / ADPCMFBYTES) * ADPCMFBYTES;
+            pvoice->loadFilter.dc_bookSize = filter->instrument->dc_bookSize;
+            if (filter->instrument->loopEnd == 0) {
                 filter->dc_loop.count = 0;
                 filter->dc_loop.end = 0;
                 filter->dc_loop.start = 0;
             } else {
-                filter->dc_loop.start = filter->dc_table->loopStart;
-                filter->dc_loop.end = filter->dc_table->loopEnd;
-                filter->dc_loop.count = filter->dc_table->loopCount;
-                alCopy(filter->dc_table->loopPredictorOffset, filter->dc_lstate, sizeof(ADPCM_STATE));
+                filter->dc_loop.start = filter->instrument->loopStart;
+                filter->dc_loop.end = filter->instrument->loopEnd;
+                filter->dc_loop.count = filter->instrument->loopCount;
+                alCopy(filter->instrument->loopPredictor, filter->dc_lstate, sizeof(ADPCM_STATE));
             }
             break;
         case AL_RAW16_WAVE:
-            if (filter->dc_table->loopEnd != 0) {
-                filter->dc_loop.start = filter->dc_table->loopStart;
-                filter->dc_loop.end = filter->dc_table->loopEnd;
-                filter->dc_loop.count = filter->dc_table->loopCount;
+            if (filter->instrument->loopEnd != 0) {
+                filter->dc_loop.start = filter->instrument->loopStart;
+                filter->dc_loop.end = filter->instrument->loopEnd;
+                filter->dc_loop.count = filter->instrument->loopCount;
             } else {
                 filter->dc_loop.count = 0;
                 filter->dc_loop.end = 0;
@@ -384,34 +382,34 @@ void au_pvoice_set_filter(u8 index, u8 reverbType, Instrument* table, f32 pitchR
     resampler->rs_ratio = pitchRatio;
 }
 
-void au_pvoice_set_filter_wavetable(u8 voiceIdx, Instrument* table) {
+void au_pvoice_set_filter_wavetable(u8 voiceIdx, Instrument* instrument) {
     AuPVoice* pvoice = &gSynDriverPtr->pvoices[voiceIdx];
     AuLoadFilter* filter = &pvoice->loadFilter;
 
-    pvoice->loadFilter.dc_table = table;
-    pvoice->loadFilter.dc_memin = filter->dc_table->base;
+    pvoice->loadFilter.instrument = instrument;
+    pvoice->loadFilter.dc_memin = filter->instrument->base;
     pvoice->loadFilter.dc_sample = 0;
 
-    switch (filter->dc_table->type) {
+    switch (filter->instrument->type) {
         case 0:
-            filter->dc_table->wavDataLength = (filter->dc_table->wavDataLength / ADPCMFBYTES) * ADPCMFBYTES;
-            pvoice->loadFilter.dc_bookSize = filter->dc_table->unk_1C;
-            if (filter->dc_table->loopEnd == 0) {
+            filter->instrument->wavDataLength = (filter->instrument->wavDataLength / ADPCMFBYTES) * ADPCMFBYTES;
+            pvoice->loadFilter.dc_bookSize = filter->instrument->dc_bookSize;
+            if (filter->instrument->loopEnd == 0) {
                 pvoice->loadFilter.dc_loop.count = 0;
                 pvoice->loadFilter.dc_loop.end = 0;
                 pvoice->loadFilter.dc_loop.start = 0;
             } else {
-                pvoice->loadFilter.dc_loop.start = filter->dc_table->loopStart;
-                pvoice->loadFilter.dc_loop.end = filter->dc_table->loopEnd;
-                pvoice->loadFilter.dc_loop.count = filter->dc_table->loopCount;
-                alCopy(filter->dc_table->loopPredictorOffset, pvoice->loadFilter.dc_lstate, sizeof(ADPCM_STATE));
+                pvoice->loadFilter.dc_loop.start = filter->instrument->loopStart;
+                pvoice->loadFilter.dc_loop.end = filter->instrument->loopEnd;
+                pvoice->loadFilter.dc_loop.count = filter->instrument->loopCount;
+                alCopy(filter->instrument->loopPredictor, pvoice->loadFilter.dc_lstate, sizeof(ADPCM_STATE));
             }
             break;
         case 1:
-            if (filter->dc_table->loopEnd != 0) {
-                pvoice->loadFilter.dc_loop.start = filter->dc_table->loopStart;
-                pvoice->loadFilter.dc_loop.end = filter->dc_table->loopEnd;
-                pvoice->loadFilter.dc_loop.count = filter->dc_table->loopCount;
+            if (filter->instrument->loopEnd != 0) {
+                pvoice->loadFilter.dc_loop.start = filter->instrument->loopStart;
+                pvoice->loadFilter.dc_loop.end = filter->instrument->loopEnd;
+                pvoice->loadFilter.dc_loop.count = filter->instrument->loopCount;
             } else {
                 pvoice->loadFilter.dc_loop.count = 0;
                 pvoice->loadFilter.dc_loop.end = 0;

@@ -39,7 +39,7 @@ BSS u32 nuGfxTaskSpool;
 BSS u8 __osContLastCmd;
 BSS s32 D_8009A620;
 BSS char D_8009A624[0x4];
-BSS s32 D_8009A628;
+BSS s32 gAmbientSoundManager;
 BSS s32 __osTimerCounter;
 BSS s32 D_8009A630;
 BSS s16 gCurrentCamID;
