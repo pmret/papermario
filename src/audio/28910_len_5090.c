@@ -58,11 +58,11 @@ void func_8004D510(BGMPlayer* player) {
                     player->masterState = BGM_PLAY_STATE_3;
                     player->sampleRate = BGM_SAMPLE_RATE;
                     if (unkType == 2) {
-                        bgmFile = (BGMHeader*) player->globals->currentTrackData[1];
+                        bgmFile = player->globals->dataBGM[1];
                     } else {
-                        bgmFile = (BGMHeader*) player->globals->currentTrackData[0];
+                        bgmFile = player->globals->dataBGM[0];
                     }
-                    player->bgmFile = (BGMHeader*) bgmFile;
+                    player->bgmFile = bgmFile;
                     bgmData = &bgmFile->info;
                     func_8004E880(player, BGM_SAMPLE_RATE, BgmDivisors[((u8*)player->unk_74)[0] & 7]); //TODO revise unk_74 typing
 
@@ -70,11 +70,11 @@ void func_8004D510(BGMPlayer* player) {
                     if (segmentOffset == 0) {
                         segmentOffset = bgmData->segments[0];
                     }
-                    player->segmentStartPos = (SegData*)((segmentOffset * 4) + (s32)bgmFile);
-                    player->segmentReadPos = (SegData*)((segmentOffset * 4) + (s32)bgmFile);
+                    player->segmentStartPos = AU_FILE_RELATIVE(segmentOffset << 2, bgmFile);
+                    player->segmentReadPos = AU_FILE_RELATIVE(segmentOffset << 2, bgmFile);
 
                     if (bgmData->drums != 0) {
-                        player->drumsInfo = (BGMDrumInfo*)((bgmData->drums * 4) + (s32)player->bgmFile);
+                        player->drumsInfo = AU_FILE_RELATIVE(bgmData->drums << 2, player->bgmFile);
                         player->bgmDrumCount = bgmData->drumCount;
                         for (i = 0; i < player->bgmDrumCount; i++) {
                             BGMDrumInfo* drum = &player->drumsInfo[i];
@@ -89,7 +89,7 @@ void func_8004D510(BGMPlayer* player) {
                     }
 
                     if (bgmData->instruments != 0) {
-                        player->instrumentsInfo = (BGMInstrumentInfo*)((bgmData->instruments * 4) + (s32)player->bgmFile);
+                        player->instrumentsInfo = AU_FILE_RELATIVE(bgmData->instruments << 2, player->bgmFile);
                         player->bgmInstrumentCount = bgmData->instrumentCount;
                         return;
                     }
@@ -181,11 +181,11 @@ s32 snd_dispatch_bgm_player_event(SongUpdateEvent* event) {
             }
             player->curSegmentID = variation;
 
-            player->segmentStartPos = (SegData*)(4 * fileInfo->segments[variation] + (s32)player->bgmFile);
+            player->segmentStartPos = AU_FILE_RELATIVE(fileInfo->segments[variation] << 2, player->bgmFile);
             player->segmentReadPos = player->segmentStartPos;
 
             if (fileInfo->drums != 0) {
-                player->drumsInfo = (BGMDrumInfo*)(4 * fileInfo->drums + (s32)player->bgmFile);
+                player->drumsInfo = AU_FILE_RELATIVE(fileInfo->drums << 2, player->bgmFile);
                 player->bgmDrumCount = fileInfo->drumCount;
 
                 for (i = 0; i < player->bgmDrumCount; i++) {
@@ -196,14 +196,14 @@ s32 snd_dispatch_bgm_player_event(SongUpdateEvent* event) {
                     player->drums[i] = player->drums[0];
                 }
             } else {
-                player->drumsInfo = 0;
+                player->drumsInfo = NULL;
                 player->bgmDrumCount = 0;
             }
             if (fileInfo->instruments != 0) {
-                player->instrumentsInfo = (BGMInstrumentInfo*)(4 * fileInfo->instruments + (s32)player->bgmFile);
+                player->instrumentsInfo = AU_FILE_RELATIVE(fileInfo->instruments << 2, player->bgmFile);
                 player->bgmInstrumentCount = fileInfo->instrumentCount;
             } else {
-                player->instrumentsInfo = 0;
+                player->instrumentsInfo = NULL;
                 player->bgmInstrumentCount = 0;
             }
             player->songName = songName;
@@ -278,11 +278,13 @@ s32 func_8004DB28(BGMPlayer* player) {
 }
 
 AuResult func_8004DB4C(SongUpdateEvent* s) {
+    AuResult status;
     BGMPlayer* player;
     u32 songName = s->songName;
     u32 duration = s->duration;
     s16 volume = s->finalVolume;
-    s32 error = AU_RESULT_OK;
+
+    status = AU_RESULT_OK;
     if (songName != 0) {
         if (duration >= SND_MIN_DURATION && duration <= SND_MAX_DURATION) {
             player = snd_get_player_with_song_name(songName);
@@ -293,7 +295,7 @@ AuResult func_8004DB4C(SongUpdateEvent* s) {
                             player->fadeInfo.targetVolume = volume;
                             player->fadeInfo.fadeTime = (duration * 1000) / 5750;
                             player->fadeInfo.fadeStep = ((volume << 0x10) - player->fadeInfo.currentVolume.s32) / player->fadeInfo.fadeTime;
-                            player->fadeInfo.onCompleteCallback = (void (*)()) s->variation; //TODO seems wrong
+                            player->fadeInfo.onCompleteCallback = s->variation; //TODO seems wrong
                             if (s->unk14 == 1) {
                                 player->fadeSongName = songName;
                             }
@@ -301,15 +303,15 @@ AuResult func_8004DB4C(SongUpdateEvent* s) {
                     }
                 }
             } else {
-                error = AU_ERROR_SONG_NOT_PLAYING;
+                status = AU_ERROR_SONG_NOT_PLAYING;
             }
         } else {
-            error = AU_ERROR_4;
+            status = AU_ERROR_INVALID_SONG_DURATION;
         }
     } else {
-        error = AU_ERROR_NULL_SONG_NAME;
+        status = AU_ERROR_NULL_SONG_NAME;
     }
-    return error;
+    return status;
 }
 
 AuResult func_8004DC80(s32 songName) {
@@ -325,17 +327,17 @@ AuResult func_8004DC80(s32 songName) {
 }
 
 AuResult func_8004DCB8(SongUpdateEvent* update, s32 clearChanged) {
+    AuResult status;
     BGMPlayer* playerA;
     BGMPlayer* playerB;
     s32 songName;
     s32 variation;
     u32 i;
     u32 j;
-    s32 error;
 
     songName = update->songName;
     variation = update->variation;
-    error = AU_RESULT_OK;
+    status = AU_RESULT_OK;
 
     if (songName != 0) {
         playerA = snd_get_player_with_song_name(songName);
@@ -363,7 +365,7 @@ AuResult func_8004DCB8(SongUpdateEvent* update, s32 clearChanged) {
                         }
                     }
                 } else {
-                    error = AU_ERROR_4;
+                    status = AU_ERROR_INVALID_SONG_DURATION;
                 }
             } else {
                 if (songName == playerA->songName) {
@@ -374,15 +376,16 @@ AuResult func_8004DCB8(SongUpdateEvent* update, s32 clearChanged) {
                 }
             }
         } else {
-            error = AU_ERROR_SONG_NOT_PLAYING;
+            status = AU_ERROR_SONG_NOT_PLAYING;
         }
     } else {
-        error = AU_ERROR_NULL_SONG_NAME;
+        status = AU_ERROR_NULL_SONG_NAME;
     }
-    return error;
+    return status;
 }
 
 AuResult func_8004DE2C(SongUpdateEvent* update) {
+    AuResult status;
     BGMPlayer* playerA;
     BGMPlayer* playerB;
     s32 variation;
@@ -390,11 +393,10 @@ AuResult func_8004DE2C(SongUpdateEvent* update) {
     s32 volume0;
     s32 volume1;
     s32 duration;
-    s32 error;
 
     songName = update->songName;
     variation = update->variation;
-    error = AU_RESULT_OK;
+    status = AU_RESULT_OK;
 
     if (songName != 0) {
         if (update->unk14 == 0) {
@@ -403,7 +405,7 @@ AuResult func_8004DE2C(SongUpdateEvent* update) {
                 playerB = func_80054248(playerA->globals->unk_globals_6C[variation].unk_5);
                 if (playerB != NULL) {
                     if (func_8004DB28(playerB) == 0) {
-                        error = func_80053E58(playerA->songID, (u8*)playerA->bgmFile);
+                        status = func_80053E58(playerA->songID, playerA->bgmFile);
                         duration = update->duration;
                         if (duration != 0) {
                             if (duration > SND_MAX_DURATION) {
@@ -436,13 +438,13 @@ AuResult func_8004DE2C(SongUpdateEvent* update) {
                         playerB->globals->unkFadeEnd = volume1;
                         playerB->globals->unk_80 = 1;
                     } else {
-                        error = AU_ERROR_7;
+                        status = AU_ERROR_7;
                     }
                 } else {
-                    error = AU_ERROR_6;
+                    status = AU_ERROR_6;
                 }
             } else {
-               error = AU_ERROR_4;
+               status = AU_ERROR_INVALID_SONG_DURATION;
             }
         } else {
             playerB = snd_get_player_with_song_name(songName);
@@ -455,9 +457,9 @@ AuResult func_8004DE2C(SongUpdateEvent* update) {
             }
         }
     } else {
-        error = AU_ERROR_NULL_SONG_NAME;
+        status = AU_ERROR_NULL_SONG_NAME;
     }
-    return error;
+    return status;
 }
 
 void func_8004DFD4(AuGlobals* globals) {
@@ -536,7 +538,7 @@ void bgm_player_init(BGMPlayer* player, s32 arg1, s32 arg2, AuGlobals* arg3) {
     player->masterPitchShift = 0;
     player->unk_20E = 0;
     player->unk_220 = 0;
-    player->trackFadeConfig = NULL;
+    player->trackVolsConfig = NULL;
     player->bFadeConfigSetsVolume = FALSE;
     player->masterState = BGM_PLAY_STATE_0;
     player->unk_234 = arg1;
@@ -766,7 +768,7 @@ void snd_initialize_bgm_player(BGMPlayer* player) {
     player->segLoopDepth = 0;
     player->unk_222 = 0;
     player->unk_223 = 0;
-    player->trackFadeConfig = NULL;
+    player->trackVolsConfig = NULL;
     player->bFadeConfigSetsVolume = FALSE;
     player->unk_233 = 1;
     player->unk_211 = 0;
@@ -983,18 +985,18 @@ void func_8004EC68(BGMPlayer *player) {
         bVolumeFading = TRUE;
     }
     player->volumeChanged = FALSE;
-    if (player->trackFadeConfig != NULL) {
+    if (player->trackVolsConfig != NULL) {
         if (player->bFadeConfigSetsVolume) {
             // setting track volumes
             s32 lenLimit = 16;
             while (lenLimit-- != 0) {
-                i = *player->trackFadeConfig++;
+                i = *player->trackVolsConfig++;
                 if (i == 0) {
                     break;
                 }
                 track = &player->tracks[i - 1];
                 player->seqCmdArgs.TrackVolumeFade.time = 48;
-                player->seqCmdArgs.TrackVolumeFade.value = *(player->trackFadeConfig++);
+                player->seqCmdArgs.TrackVolumeFade.value = *(player->trackVolsConfig++);
                 if (track->bgmReadPos != 0) {
                     snd_BGMCmd_F6_TrackVolumeFade(player, track);
                 }
@@ -1004,20 +1006,20 @@ void func_8004EC68(BGMPlayer *player) {
             // clearing track volumes
             s32 lenLimit = 16;
             while (lenLimit-- != 0) {
-                i = *player->trackFadeConfig++;
+                i = *player->trackVolsConfig++;
                 if (i == 0) {
                     break;
                 }
                 track = &player->tracks[i - 1];
                 player->seqCmdArgs.TrackVolumeFade.time = 48;
-                player->trackFadeConfig++; // ignore arg
+                player->trackVolsConfig++; // ignore arg
                 player->seqCmdArgs.TrackVolumeFade.value = 0;
                 if (track->bgmReadPos != 0) {
                     snd_BGMCmd_F6_TrackVolumeFade(player, track);
                 }
             }
         }
-        player->trackFadeConfig = NULL;
+        player->trackVolsConfig = NULL;
         player->bFadeConfigSetsVolume = FALSE;
     }
     for (i = 0; i < ARRAY_COUNT(player->tracks); i++) {
@@ -1594,7 +1596,7 @@ void snd_BGMCmd_FD(BGMPlayer* player, BGMPlayerTrack* track) {
 }
 
 void snd_BGMCmd_FE(BGMPlayer* player, BGMPlayerTrack* track) {
-    AuFilePos readPos = (AuFilePos)(player->seqCmdArgs.UnkCmdFE.offset + (s32)player->bgmFile);
+    AuFilePos readPos = AU_FILE_RELATIVE(player->seqCmdArgs.UnkCmdFE.offset, player->bgmFile);
 
     track->unk_3E = player->seqCmdArgs.UnkCmdFE.unk_02;
     track->unk_04 = track->bgmReadPos;
@@ -1605,12 +1607,12 @@ void snd_BGMCmd_FC_Jump(BGMPlayer* player, BGMPlayerTrack* track) {
     AuFilePos args;
     u32 i;
 
-    args = (AuFilePos)(player->seqCmdArgs.Jump.unk_00 + (s32)player->bgmFile);
+    args = AU_FILE_RELATIVE(player->seqCmdArgs.Jump.unk_00, player->bgmFile);
     if (player->proxMixID < player->seqCmdArgs.Jump.unk_02) {
         args += player->proxMixID * 3;
     }
     track->prevReadPos = track->bgmReadPos;
-    track->bgmReadPos = (AuFilePos)((args[0] << 8) + args[1] + (s32)player->bgmFile);
+    track->bgmReadPos = AU_FILE_RELATIVE((args[0] << 8) + args[1], player->bgmFile);
     track->isDrumTrack = args[2];
     if (track->unk_4D != 0) {
         track->unk_4D = 0;
@@ -1848,19 +1850,19 @@ void func_80050818(BGMPlayer* player, s32 arg1) {
     player->unk_20E = arg1;
 }
 
-void func_8005083C(BGMPlayer* player, s32 trackIdx, s16 arg2, u8 arg3) {
+void au_bgm_change_track_volume(BGMPlayer* player, s32 trackIdx, s16 time, u8 volume) {
     BGMPlayerTrack* track = &player->tracks[trackIdx];
 
     if (track->bgmReadPos != 0) {
-        player->seqCmdArgs.TrackVolumeFade.time = arg2;
-        player->seqCmdArgs.TrackVolumeFade.value = arg3;
+        player->seqCmdArgs.TrackVolumeFade.time = time;
+        player->seqCmdArgs.TrackVolumeFade.value = volume;
         snd_BGMCmd_F6_TrackVolumeFade(player, track);
     }
 }
 
-void func_8005087C(BGMPlayer* player, u8* arg1, s32 arg2) {
-    player->trackFadeConfig = arg1;
-    player->bFadeConfigSetsVolume = arg2;
+void au_bgm_set_track_volumes(BGMPlayer* player, u8* trackVols, s32 mode) {
+    player->trackVolsConfig = trackVols;
+    player->bFadeConfigSetsVolume = mode;
 }
 
 void func_80050888(BGMPlayer* player, BGMPlayerTrack* track, s32 target, s32 duration) {
@@ -1893,7 +1895,7 @@ void func_80050900(BGMPlayer* player) {
     }
 }
 
-AuResult func_80050970(SongUpdateEvent* arg0) {
+AuResult func_80050970(SongUpdateEvent* update) {
     BGMPlayer* player;
     BGMPlayerTrack* trackA;
     BGMPlayerTrack* trackB;
@@ -1902,8 +1904,8 @@ AuResult func_80050970(SongUpdateEvent* arg0) {
     s32 j;
     s8 oldVolume;
 
-    s32 songName = arg0->songName;
-    s32 variation = arg0->variation;
+    s32 songName = update->songName;
+    s32 variation = update->variation;
     s32 error = AU_RESULT_OK;
 
     if (songName != 0) {

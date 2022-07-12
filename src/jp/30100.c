@@ -132,6 +132,6 @@ INCLUDE_ASM(s32, "30100", func_80055E74);
 
 INCLUDE_ASM(s32, "30100", func_80055E94);
 
-INCLUDE_ASM(s32, "30100", func_80055EB4);
+INCLUDE_ASM(s32, "30100", snd_song_get_track_volumes_set);
 
 INCLUDE_ASM(s32, "30100", func_80055ED8);

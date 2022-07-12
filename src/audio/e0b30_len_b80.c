@@ -250,7 +250,7 @@ s32 func_8014A964(s32 playerIndex, s32 songID, s32 variation, s32 fadeInTime, s1
     return 1;
 }
 
-s32 bgm_adjust_proximity(s32 playerIndex, s32 trackMask, s16 state) {
+s32 bgm_adjust_proximity(s32 playerIndex, s32 mix, s16 state) {
     MusicSettings* musicSetting = &gMusicSettings[playerIndex];
 
     if (!(musicSetting->flags & MUSIC_SETTINGS_FLAGS_1)) {
@@ -263,26 +263,26 @@ s32 bgm_adjust_proximity(s32 playerIndex, s32 trackMask, s16 state) {
 
     switch (state) {
         case MUSIC_PROXIMITY_FAR:
-            bgm_set_proximity_mix_far(musicSetting->songName, trackMask);
+            bgm_set_proximity_mix_far(musicSetting->songName, mix);
             break;
         case MUSIC_PROXIMITY_NEAR:
-            bgm_set_proximity_mix_near(musicSetting->songName, trackMask);
+            bgm_set_proximity_mix_near(musicSetting->songName, mix);
             break;
         case MUSIC_PROXIMITY_FULL:
-            bgm_set_proximity_mix_full(musicSetting->songName, trackMask);
+            bgm_set_proximity_mix_full(musicSetting->songName, mix);
             break;
     }
     return TRUE;
 }
 
-AuResult func_8014AB0C(s32 playerIndex, s16 arg1) {
+AuResult bgm_set_track_volumes(s32 playerIndex, s16 arg1) {
     MusicSettings* musicSetting = &gMusicSettings[playerIndex];
 
     if (!(musicSetting->flags & MUSIC_SETTINGS_FLAGS_1)) {
         return AU_RESULT_OK;
     }
 
-    return func_80055DDC(musicSetting->songName, arg1);
+    return snd_song_set_track_volumes(musicSetting->songName, arg1);
 }
 
 AuResult func_8014AB60(s32 playerIndex, s16 arg1) {
@@ -292,7 +292,7 @@ AuResult func_8014AB60(s32 playerIndex, s16 arg1) {
         return AU_RESULT_OK;
     }
 
-    return func_80055E48(musicSetting->songName, arg1);
+    return snd_song_clear_track_volumes(musicSetting->songName, arg1);
 }
 
 AuResult bgm_set_variation(s32 playerIndex, s16 arg1) {

@@ -13,7 +13,9 @@ extern Evt* UnkSoundEvtScripts[10];
 extern s32 UnkSoundEvtIDs[10];
 extern PopupMenu D_802DB830;
 
-ApiStatus func_802D5B10(Evt* script, s32 isInitialCall);
+AuResult bgm_set_track_volumes(s32 playerIndex, s16 arg1);
+
+static ApiStatus func_802D5B10(Evt* script, s32 isInitialCall);
 
 s32 D_802D9D30 = 0;
 
@@ -64,7 +66,7 @@ ApiStatus func_802D5C70(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 i;
 
-    D_802DB7D0 = (s32*) evt_get_variable(script, *args++);
+    D_802DB7D0 = (UnkSndEvtData*) evt_get_variable(script, *args++);
 
     for (i = 0; i < ARRAY_COUNT(UnkSoundEvtScripts); i++) {
         UnkSoundEvtScripts[i] = 0;
@@ -125,21 +127,21 @@ ApiStatus func_802D5EE0(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802D5F28(Evt* script, s32 isInitialCall) {
+ApiStatus AdjustMusicProximityMix(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 playerIndex = evt_get_variable(script, *args++);
-    s32 param1 = evt_get_variable(script, *args++);
-    s32 param2 = evt_get_variable(script, *args++);
+    s32 mix = evt_get_variable(script, *args++);
+    s32 state = evt_get_variable(script, *args++);
 
-    bgm_adjust_proximity(playerIndex, param1, param2);
+    bgm_adjust_proximity(playerIndex, mix, state);
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802D5FA4(Evt* script, s32 isInitialCall) {
+ApiStatus SetMusicTrackVolumes(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s16 param1 = evt_get_variable(script, *args++);
+    s16 trackLevelsID = evt_get_variable(script, *args++);
 
-    func_8014AB0C(0, param1);
+    bgm_set_track_volumes(0, trackLevelsID);
     return ApiStatus_DONE2;
 }
 

@@ -820,21 +820,45 @@ enum SoundIDBits {
 };
 
 typedef enum AuResult {
-    AU_RESULT_OK                    = 0,
-    AU_ERROR_1                      = 1,
-    AU_ERROR_SONG_NOT_PLAYING       = 2, // player not found for songName
-    AU_ERROR_NULL_SONG_NAME         = 3, // songName is NULL
-    AU_ERROR_4                      = 4, // duration out of bounds: (250,10000)
-    AU_ERROR_6                      = 6,
-    AU_ERROR_7                      = 7,
-    AU_ERROR_11                     = 11,
+    AU_RESULT_OK                        = 0,
+    AU_ERROR_1                          = 1,
+    AU_ERROR_SONG_NOT_PLAYING           = 2, // player not found for songName
+    AU_ERROR_NULL_SONG_NAME             = 3, // songName is NULL
+    AU_ERROR_INVALID_SONG_DURATION      = 4, // duration out of bounds: (250,10000)
+    AU_ERROR_6                          = 6,
+    AU_ERROR_7                          = 7,
+    AU_ERROR_11                         = 11,
+    AU_ERROR_SBN_INDEX_OUT_OF_RANGE     = 101,
+    AU_ERROR_SBN_FORMAT_MISMATCH        = 102,
+    AU_ERROR_151                        = 151,
+    AU_ERROR_201                        = 201
 } AuResult;
+
+typedef enum AuFileFormat {
+    AU_FMT_BGM              = 0x10,
+    AU_FMT_SEF              = 0x20,
+    AU_FMT_BK               = 0x30,
+    AU_FMT_PER              = 0x40,
+    AU_FMT_PRG              = 0x40,
+    AU_FMT_MSEQ             = 0x40
+} AuFileFormat;
 
 enum {
     MUSIC_PROXIMITY_FAR,
     MUSIC_PROXIMITY_NEAR,
     MUSIC_PROXIMITY_FULL
 };
+
+typedef enum MusicTrackVols {
+    TRACK_VOLS_0            = 0,
+    TRACK_VOLS_1            = 1,
+    TRACK_VOLS_2            = 2,
+    TRACK_VOLS_3            = 3,
+    TRACK_VOLS_KPA_OUTSIDE  = 4,
+    TRACK_VOLS_KPA_1        = 5,
+    TRACK_VOLS_KPA_2        = 6,
+    TRACK_VOLS_KPA_3        = 7
+} MusicTrackVols;
 
 enum Cams {
     CAM_DEFAULT      = 0,
@@ -1363,7 +1387,10 @@ enum AmbientSounds {
     AMBIENT_UNDER_SEA6         = 11,
     AMBIENT_BIRDS              = 12,
     AMBIENT_SEA                = 13,
-    AMBIENT_MUSIC              = 16,
+    AMBIENT_RADIO              = 16, // radio songs for nok
+    // the following 4 IDs are reserved for additional radio songs,
+    // and no more are expected to follow after that
+    // see: func_80053F80
 };
 
 enum EncounterOutcomes {

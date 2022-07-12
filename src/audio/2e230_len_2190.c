@@ -35,10 +35,10 @@ void snd_load_audio_data(s32 outputRate) {
 
     globals = gSoundGlobals;
     dummyTrackData = alHeapAlloc(alHeap, 1, 0x8000);
-    globals->currentTrackData[0] = &dummyTrackData[0];
-    globals->currentTrackData[1] = &dummyTrackData[0x1400];
-    globals->currentTrackData[2] = &dummyTrackData[0x1C00];
-    globals->currentTrackData[3] = &dummyTrackData[0x1400];
+    globals->dataBGM[0] = (BGMHeader*) &dummyTrackData[0];
+    globals->dataBGM[1] = (BGMHeader*) &dummyTrackData[0x1400];
+    globals->dataMSEQ[0] = (MSEQHeader*) &dummyTrackData[0x1C00];
+    globals->dataMSEQ[1] = (MSEQHeader*) &dummyTrackData[0x1400];
 
     for (i = 0; i < 1; i++) {
         globals->unk_globals_6C[i].bgmPlayer = alHeapAlloc(alHeap, 1, sizeof(BGMPlayer));
@@ -108,14 +108,14 @@ void snd_load_audio_data(s32 outputRate) {
     func_80050B90(gAmbientSoundManager, 6, 1, globals);
     func_80052614(globals);
     snd_load_BK_headers(globals, alHeap);
-    if (snd_fetch_SBN_file(globals->mseqFileList[0], 0x20, &fileEntry) == 0) {
+    if (snd_fetch_SBN_file(globals->mseqFileList[0], AU_FMT_SEF, &fileEntry) == AU_RESULT_OK) {
         snd_read_rom(fileEntry.offset, globals->dataSEF, fileEntry.data & 0xFFFFFF);
     }
     snd_load_sfx_groups_from_SEF(gSoundManager);
-    if (snd_fetch_SBN_file(globals->mseqFileList[1], 0x40, &fileEntry) == 0) {
+    if (snd_fetch_SBN_file(globals->mseqFileList[1], AU_FMT_PER, &fileEntry) == AU_RESULT_OK) {
         snd_load_PER(globals, fileEntry.offset);
     }
-    if (snd_fetch_SBN_file(globals->mseqFileList[2], 0x40, &fileEntry) == 0) {
+    if (snd_fetch_SBN_file(globals->mseqFileList[2], AU_FMT_PRG, &fileEntry) == AU_RESULT_OK) {
         snd_load_PRG(globals, fileEntry.offset);
     }
 
@@ -148,7 +148,7 @@ void snd_reset_instrument(Instrument* instrument) {
     instrument->loopCount = 0;
     instrument->type = 0;
     instrument->unk_25 = 0;
-    instrument->unkOffset = &D_80078544;
+    instrument->unkOffset = (InstrumentEffect*) &D_80078544; //TODO: fix type of data
     instrument->unk_26 = 0;
     instrument->unk_27 = 0;
     instrument->unk_28 = 0;
@@ -476,24 +476,24 @@ Instrument* func_80053BE8(AuGlobals* globals, u32 bank, u32 patch, AlUnkInstrume
     return instrument;
 }
 
-void snd_get_sequence_player_and_track(u32 playerIndex, s32** outCurrentTrackData, BGMPlayer** outPlayer) {
+void snd_get_sequence_player_and_file(u32 playerIndex, BGMHeader** outFile, BGMPlayer** outPlayer) {
     AuGlobals* globals = gSoundGlobals;
 
     switch (playerIndex) {
         case 0:
-            *outCurrentTrackData = globals->currentTrackData[0];
+            *outFile = globals->dataBGM[0];
             *outPlayer = gBGMPlayerA;
             break;
         case 1:
-            *outCurrentTrackData = globals->currentTrackData[1];
+            *outFile = globals->dataBGM[1];
             *outPlayer = gBGMPlayerB;
             break;
         case 2:
-            *outCurrentTrackData = globals->currentTrackData[0];
+            *outFile = globals->dataBGM[0];
             *outPlayer = gBGMPlayerA;
             break;
         default:
-            *outCurrentTrackData = NULL;
+            *outFile = NULL;
             *outPlayer = NULL;
             break;
     }
@@ -516,18 +516,18 @@ void snd_get_sequence_player(u32 playerIndex, BGMPlayer** outPlayer) {
     }
 }
 
-s32 snd_load_song_files(u32 arg0, BGMHeader* arg1, BGMPlayer* arg2) {
+AuResult snd_load_song_files(u32 arg0, BGMHeader* arg1, BGMPlayer* arg2) {
+    AuResult status;
     SBNFileEntry fileEntry;
     SBNFileEntry fileEntry2;
     SBNFileEntry* bkFileEntry;
     AuGlobals* soundData;
-    InitSongEntry* songEntry;
+    InitSongEntry* songInfo;
     s32 i;
     u16 bkFileIndex;
     s32 bgmFileIndex;
     u32 data;
     u32 offset;
-    s32 ret;
     BGMPlayer* arg2_copy ;
     BGMHeader* arg1_copy;
     s32 cond;
@@ -540,20 +540,20 @@ s32 snd_load_song_files(u32 arg0, BGMHeader* arg1, BGMPlayer* arg2) {
     arg1_copy = arg1;
 
     if (cond) {
-        songEntry = &soundData->songList[arg0];
-        ret = snd_fetch_SBN_file(songEntry->bgmFileIndex, 0x10, &fileEntry);
-        if (ret != 0) {
-            return ret;
+        songInfo = &soundData->songList[arg0];
+        status = snd_fetch_SBN_file(songInfo->bgmFileIndex, AU_FMT_BGM, &fileEntry);
+        if (status != AU_RESULT_OK) {
+            return status;
         }
 
         if (func_8004DB28(arg2_copy)) {
-            return 201;
+            return AU_ERROR_201;
         }
 
         snd_read_rom(fileEntry.offset, arg1_copy, fileEntry.data & 0xFFFFFF);
 
-        for (i = 0 ; i < 3; i++) {
-            bkFileIndex = songEntry->bkFileIndex[i];
+        for (i = 0 ; i < ARRAY_COUNT(songInfo->bkFileIndex); i++) {
+            bkFileIndex = songInfo->bkFileIndex[i];
             if (bkFileIndex != 0) {
                 bkFileEntry = &soundData->sbnFileList[bkFileIndex];
 
@@ -563,41 +563,41 @@ s32 snd_load_song_files(u32 arg0, BGMHeader* arg1, BGMPlayer* arg2) {
                 data = bkFileEntry->data;
                 fileEntry2.data = data;
 
-                if ((data >> 0x18) == 0x30) {
+                if ((data >> 0x18) == AU_FMT_BK) {
                     snd_load_BK(offset, i);
                 }
             }
         }
-        bgmFileIndex = songEntry->bgmFileIndex;
+        bgmFileIndex = songInfo->bgmFileIndex;
         arg2_copy->songID = arg0;
         arg2_copy->bgmFile = arg1;
         arg2_copy->bgmFileIndex = bgmFileIndex;
         return arg1_copy->name;
     } else {
-        return 151;
+        return AU_ERROR_151;
     }
 }
 
-s32 func_80053E58(s32 arg0, u8* arg1) {
+AuResult func_80053E58(s32 songID, BGMHeader* bgmFile) {
+    AuResult status;
     SBNFileEntry fileEntry;
-    SBNFileEntry sp18;
+    SBNFileEntry sbnEntry;
     SBNFileEntry* bkFileEntry;
     AuGlobals* soundData;
-    InitSongEntry* temp_s1;
+    InitSongEntry* songInfo;
     s32 i;
-    s32 ret;
     u32 data;
     u32 offset;
     u16 bkFileIndex;
 
     soundData = gSoundGlobals;
-    temp_s1 = &soundData->songList[arg0];
-    ret =  snd_fetch_SBN_file(temp_s1[0].bgmFileIndex, 0x10, &sp18);
-    if (ret == 0) {
-        snd_read_rom(sp18.offset, arg1, sp18.data & 0xFFFFFF);
+    songInfo = &soundData->songList[songID];
+    status =  snd_fetch_SBN_file(songInfo[0].bgmFileIndex, AU_FMT_BGM, &sbnEntry);
+    if (status == AU_RESULT_OK) {
+        snd_read_rom(sbnEntry.offset, bgmFile, sbnEntry.data & 0xFFFFFF);
 
-        for (i = 0 ; i < 3; i++) {
-            bkFileIndex = temp_s1->bkFileIndex[i];
+        for (i = 0 ; i < ARRAY_COUNT(songInfo->bkFileIndex); i++) {
+            bkFileIndex = songInfo->bkFileIndex[i];
             if (bkFileIndex != 0) {
                 bkFileEntry = &soundData->sbnFileList[bkFileIndex];
 
@@ -607,16 +607,16 @@ s32 func_80053E58(s32 arg0, u8* arg1) {
                 data = bkFileEntry->data;
                 fileEntry.data = data;
 
-                if ((data >> 0x18) == 0x30) {
+                if ((data >> 0x18) == AU_FMT_BK) {
                     snd_load_BK(offset, i);
                 } else {
-                    ret = 102;
+                    status = AU_ERROR_SBN_FORMAT_MISMATCH;
                 }
             }
         }
     }
 
-    return ret;
+    return status;
 }
 
 BGMPlayer* func_80053F64(s32 arg0) {
@@ -626,53 +626,57 @@ BGMPlayer* func_80053F64(s32 arg0) {
     return NULL;
 }
 
-s32 func_80053F80(u32 arg0) {
+#define SBN_LOOKUP(i,fmt,e) (snd_fetch_SBN_file(globals->mseqFileList[AmbientSoundIDtoMSEQFileIndex[i]], fmt, &e))
+
+AuResult func_80053F80(u32 ambSoundID) {
     AmbientSoundManager* manager;
     SBNFileEntry fileEntry;
     AuGlobals* globals;
-    s32* trackData;
+    MSEQHeader* mseqFile;
     u32 i;
 
     globals = gSoundGlobals;
     manager = gAmbientSoundManager;
-    if (arg0 < 16) {
-        if (manager->mseqLambda[0].unk_20 == 0 && snd_fetch_SBN_file(globals->mseqFileList[D_80078580[arg0]], 0x40, &fileEntry) == 0) {
-            snd_read_rom(fileEntry.offset, globals->currentTrackData[2], fileEntry.data & 0xFFFFFF);
-            manager->mseqFiles[0] = globals->currentTrackData[2];
-            for (i = 1; i < 4; i++) {
+    if (ambSoundID < 16) {
+        if (manager->mseqLambda[0].unk_20 == 0 && SBN_LOOKUP(ambSoundID, AU_FMT_MSEQ, fileEntry) == AU_RESULT_OK) {
+            snd_read_rom(fileEntry.offset, globals->dataMSEQ[0], fileEntry.data & 0xFFFFFF);
+            manager->mseqFiles[0] = globals->dataMSEQ[0];
+            for (i = 1; i < ARRAY_COUNT(manager->mseqFiles); i++) {
                 manager->mseqFiles[i] = NULL;
             }
             manager->unk_20 = 1;
         }
-    } else if (arg0 == 16 && manager->mseqLambda[0].unk_20 == 0 && manager->mseqLambda[1].unk_20 == 0 && manager->mseqLambda[2].unk_20 == 0) {
+    } else if (ambSoundID == AMBIENT_RADIO
+            && manager->mseqLambda[0].unk_20 == 0
+            && manager->mseqLambda[1].unk_20 == 0
+            && manager->mseqLambda[2].unk_20 == 0) {
         manager->unk_20 = 0;
-        for (i = 0; i < 4; i++) {
+        for (i = 0; i < ARRAY_COUNT(manager->mseqFiles); i++) {
             manager->mseqFiles[i] = NULL;
         }
 
-        trackData = globals->currentTrackData[3];
-        if (snd_fetch_SBN_file(globals->mseqFileList[D_80078580[arg0]], 0x40, &fileEntry) == 0) {
-            snd_read_rom(fileEntry.offset, trackData, fileEntry.data & 0xFFFFFF);
-            manager->mseqFiles[0] = trackData;
+        mseqFile = globals->dataMSEQ[1];
+        if (SBN_LOOKUP(ambSoundID, AU_FMT_MSEQ, fileEntry) == AU_RESULT_OK) {
+            snd_read_rom(fileEntry.offset, mseqFile, fileEntry.data & 0xFFFFFF);
+            manager->mseqFiles[0] = mseqFile;
 
-            trackData = (s32*)((u32)trackData + ((fileEntry.data + 0x40) & 0xFFFFFF));
-            if (snd_fetch_SBN_file(globals->mseqFileList[D_80078580[arg0 + 1]], 0x40, &fileEntry) == 0) {
-                snd_read_rom(fileEntry.offset, trackData, fileEntry.data & 0xFFFFFF);
-                manager->mseqFiles[1] = trackData;
+            mseqFile = AU_FILE_RELATIVE(mseqFile, (fileEntry.data + 0x40) & 0xFFFFFF);
+            if (SBN_LOOKUP(ambSoundID + 1, AU_FMT_MSEQ, fileEntry) == AU_RESULT_OK) {
+                snd_read_rom(fileEntry.offset, mseqFile, fileEntry.data & 0xFFFFFF);
+                manager->mseqFiles[1] = mseqFile;
 
-                trackData = (s32*)((u32)trackData + ((fileEntry.data + 0x40) & 0xFFFFFF));
-                if (snd_fetch_SBN_file(globals->mseqFileList[D_80078580[arg0 + 2]], 0x40, &fileEntry) == 0) {
+                mseqFile = AU_FILE_RELATIVE(mseqFile, (fileEntry.data + 0x40) & 0xFFFFFF);
+                if (SBN_LOOKUP(ambSoundID + 2, AU_FMT_MSEQ, fileEntry) == AU_RESULT_OK) {
+                    snd_read_rom(fileEntry.offset, mseqFile, fileEntry.data & 0xFFFFFF);
+                    manager->mseqFiles[2] = mseqFile;
 
-                    snd_read_rom(fileEntry.offset, trackData, fileEntry.data & 0xFFFFFF);
-                    manager->mseqFiles[2] = trackData;
-
-                    trackData = (s32*)((u32)trackData + ((fileEntry.data + 0x40) & 0xFFFFFF));
-                    if (snd_fetch_SBN_file(globals->mseqFileList[D_80078580[arg0 + 3]], 0x40, &fileEntry) == 0) {
-                        snd_read_rom(fileEntry.offset, trackData, fileEntry.data & 0xFFFFFF);
-                        manager->mseqFiles[3] = trackData;
+                    mseqFile = AU_FILE_RELATIVE(mseqFile, (fileEntry.data + 0x40) & 0xFFFFFF);
+                    if (SBN_LOOKUP(ambSoundID + 3, AU_FMT_MSEQ, fileEntry) == AU_RESULT_OK) {
+                        snd_read_rom(fileEntry.offset, mseqFile, fileEntry.data & 0xFFFFFF);
+                        manager->mseqFiles[3] = mseqFile;
 
                         manager->unk_20 = 4;
-                        if (snd_fetch_SBN_file(globals->mseqFileList[D_80078580[arg0 + 4]], 0x30, &fileEntry) == 0) {
+                        if (SBN_LOOKUP(ambSoundID + 4, AU_FMT_BK, fileEntry) == AU_RESULT_OK) {
                             snd_load_BK(fileEntry.offset, 2);
                         }
                     }
@@ -680,7 +684,8 @@ s32 func_80053F80(u32 arg0) {
             }
         }
     }
-    return 0;
+
+    return AU_RESULT_OK;
 }
 
 BGMPlayer* func_80054248(u8 arg0) {
@@ -748,29 +753,26 @@ void snd_load_INIT(AuGlobals* arg0, s32 romAddr, ALHeap* heap) {
     }
 }
 
-s32 snd_fetch_SBN_file(u32 fileIdx, s32 format, SBNFileEntry* arg2) {
+AuResult snd_fetch_SBN_file(u32 fileIdx, AuFileFormat format, SBNFileEntry* outEntry) {
     SBNFileEntry fileEntry;
-    AuGlobals* temp = gSoundGlobals;
-    u32 data;
-    s32 ret = 0;
+    s32 status = AU_RESULT_OK;
 
-    if (fileIdx < temp->fileListLength) {
-        SBNFileEntry* entry = &temp->sbnFileList[fileIdx];
-        s32 offset = (entry->offset & 0xFFFFFF) + temp->baseRomOffset;
+    if (fileIdx < gSoundGlobals->fileListLength) {
+        SBNFileEntry* entry = &gSoundGlobals->sbnFileList[fileIdx];
+        s32 offset = (entry->offset & 0xFFFFFF) + gSoundGlobals->baseRomOffset;
 
         fileEntry.offset = offset;
-        data = entry->data;
-        fileEntry.data = data;
-        if ((data >> 0x18) == format) {
-            arg2->offset = offset;
-            arg2->data = fileEntry.data;
+        fileEntry.data = entry->data;
+        if ((fileEntry.data >> 0x18) == format) {
+            outEntry->offset = offset;
+            outEntry->data = fileEntry.data;
         } else {
-            ret = 102;
+            status = AU_ERROR_SBN_FORMAT_MISMATCH;
         }
     } else {
-        ret = 101;
+        status = AU_ERROR_SBN_INDEX_OUT_OF_RANGE;
     }
-    return ret;
+    return status;
 }
 
 void snd_load_PER(AuGlobals* globals, s32 romAddr) {

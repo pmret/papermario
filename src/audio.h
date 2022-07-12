@@ -34,6 +34,7 @@ typedef u8* WaveData;
 #define	N_AL_AUX_R_OUT	        0x930
 
 #define ALIGN16_(val) (((val) + 0xF) & 0xFFF0)
+#define AU_FILE_RELATIVE(base,offset) ((void*)((s32)(base) + (s32)(offset)))
 
 #define AUDIO_HEAP_SIZE 0x56000
  // NU_AU_AUDIO_SAMPLES ?
@@ -743,7 +744,8 @@ typedef struct AuGlobals {
     /* 0x0053 */ u8 unk_53;
     /* 0x0054 */ PEREntry* dataPER;
     /* 0x0058 */ BGMInstrumentInfo* dataPRG;
-    /* 0x005C */ s32* currentTrackData[4];
+    /* 0x005C */ struct BGMHeader* dataBGM[2];
+    /* 0x0064 */ struct MSEQHeader* dataMSEQ[2];
     /* 0x006C */ SndGlobalsSub6C unk_globals_6C[1];
     /* 0x0074 */ struct BGMPlayer* unk_74;
     /* 0x0078 */ struct BGMPlayer* unk_78;
@@ -882,7 +884,7 @@ typedef struct BGMPlayer {
     /* 0x171 */ u8 proxMixVolume;
     /* 0x172 */ char unk_172[0x2];
     /* 0x174 */ s16 unk_174[8][9];
-    /* 0x204 */ u8* trackFadeConfig;
+    /* 0x204 */ u8* trackVolsConfig;
     /* 0x208 */ u16 masterTempoBPM;
     /* 0x20A */ u16 maxTempo;
     /* 0x20C */ u16 masterPitchShift;
@@ -1037,7 +1039,7 @@ extern s32 CUSTOM_ECHO_PARAMS_1[];
 extern s32 CUSTOM_ECHO_PARAMS_3[];
 extern s32 CUSTOM_ECHO_PARAMS_2[];
 extern s32 D_80078544[];
-extern u8 D_80078580[];
+extern u8 AmbientSoundIDtoMSEQFileIndex[];
 extern s32 D_800785A0[];
 extern s32 D_80078DB0;
 extern u16 D_80078DB6;
