@@ -303,7 +303,7 @@ void entity_HiddenPanel_init(Entity* entity) {
     data->spawnedItemIndex = -1;
 
     if (data->itemID == 0) {
-        data->itemID = 0x15C;
+        data->itemID = ITEM_STAR_PIECE;
     }
 
     guMtxIdentF(data->entityMatrix);
