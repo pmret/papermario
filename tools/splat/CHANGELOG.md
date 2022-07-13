@@ -1,5 +1,8 @@
 # splat Release Notes
 
+### 0.9.1
+* Fixed a bug in which local labels and jump table labels could replace raw words in data blobs during data disassembly
+
 ## 0.9.0: The Big Update
 ### Introducing [spimdisasm](https://github.com/Decompollaborate/spimdisasm)!
 * Thanks to [AngheloAlf](https://github.com/AngheloAlf), we now have a much better MIPS disassembler in splat! spimdisasm has much better hi/lo matching, much lower ram usage, and plenty of other goodies.
