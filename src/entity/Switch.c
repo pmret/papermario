@@ -114,7 +114,7 @@ void entity_small_switch_idle(Entity* entity) {
     }
 
     if (!(entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_FLOOR)) {
-        if (!(entity->collisionFlags & ENTITY_COLLISION_BLOCK_HIT)) {
+        if (!(entity->collisionFlags & ENTITY_COLLISION_PARTNER)) {
             return;
         }
     }
@@ -537,7 +537,7 @@ EntityBlueprint Entity_RedSwitch = {
 };
 
 EntityBlueprint Entity_BlueSwitch = {
-    .flags = ENTITY_FLAGS_8000 | ENTITY_FLAGS_ALWAYS_FACE_CAMERA | ENTITY_FLAGS_SQUARE_SHADOW | ENTITY_FLAGS_SET_SHADOW_FLAG200 | ENTITY_FLAGS_HAS_DYNAMIC_SHADOW,
+    .flags = ENTITY_FLAGS_8000 | ENTITY_FLAGS_ALWAYS_FACE_CAMERA | ENTITY_FLAGS_SQUARE_SHADOW | ENTITY_FLAGS_FIXED_SHADOW_SIZE | ENTITY_FLAGS_HAS_DYNAMIC_SHADOW,
     .typeDataSize = sizeof(SwitchData),
     .renderCommandList = Entity_BlueSwitch_RenderScript,
     .modelAnimationNodes = 0,
@@ -550,7 +550,7 @@ EntityBlueprint Entity_BlueSwitch = {
 };
 
 EntityBlueprint Entity_HugeBlueSwitch = {
-    .flags = ENTITY_FLAGS_8000 | ENTITY_FLAGS_ALWAYS_FACE_CAMERA | ENTITY_FLAGS_SQUARE_SHADOW | ENTITY_FLAGS_SET_SHADOW_FLAG200 | ENTITY_FLAGS_HAS_DYNAMIC_SHADOW,
+    .flags = ENTITY_FLAGS_8000 | ENTITY_FLAGS_ALWAYS_FACE_CAMERA | ENTITY_FLAGS_SQUARE_SHADOW | ENTITY_FLAGS_FIXED_SHADOW_SIZE | ENTITY_FLAGS_HAS_DYNAMIC_SHADOW,
     .typeDataSize = sizeof(SwitchData),
     .renderCommandList = Entity_HugeBlueSwitch_RenderScript,
     .modelAnimationNodes = 0,

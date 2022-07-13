@@ -156,7 +156,7 @@ void state_step_unpause(void) {
                         init_item_entity_list();
                         init_script_list();
                         init_npc_list();
-                        func_80110E58();
+                        init_entity_data();
                         init_trigger_list();
                         func_801497FC(D_800A0924);
                         bgm_reset_max_volume();

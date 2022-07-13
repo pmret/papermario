@@ -31,7 +31,7 @@ void entity_HiddenPanel_setupGfx(s32 entityIndex) {
         gSPDisplayList(gMasterGfxPos++, ENTITY_ADDR(entity, Gfx*, Entity_HiddenPanel_RenderBottomDark));
         gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
     }
-    mdl_project_tex_coords(data->modelID, data->renderDList, data->entityMatrix, entity->vertexData);
+    mdl_project_tex_coords(data->modelID, data->renderDList, data->entityMatrix, entity->gfxBaseAddr);
     mdl_draw_hidden_panel_surface(&gMasterGfxPos, data->modelID);
 }
 
@@ -44,7 +44,7 @@ void entity_HiddenPanel_set_ispy_notification(Entity* entity) {
 }
 
 void entity_HiddenPanel_hide(Entity* entity) {
-    entity->flags &= ~ENTITY_FLAGS_SKIP_UPDATE_INVERSE_ROTATION_MATRIX;
+    entity->flags &= ~ENTITY_FLAGS_DISABLE_COLLISION;
     entity->flags |= ENTITY_FLAGS_HIDDEN;
 }
 
@@ -86,7 +86,7 @@ void entity_HiddenPanel_idle(Entity* entity) {
                     data->riseVelocity = 0.5f;
                     exec_entity_commandlist(entity);
                 } else {
-                    entity->flags |= ENTITY_FLAGS_SKIP_UPDATE_INVERSE_ROTATION_MATRIX;
+                    entity->flags |= ENTITY_FLAGS_DISABLE_COLLISION;
                     if (distToPlayer > 60) {
                         data->riseVelocity = 0.5f;
                         exec_entity_commandlist(entity);
@@ -219,7 +219,7 @@ void entity_HiddenPanel_flip_over(Entity* entity) {
                 entity->position.y = data->initialY;
                 data->timer = 1;
                 data->state++;
-                entity->flags |= ENTITY_FLAGS_HIDDEN | ENTITY_FLAGS_SKIP_UPDATE_INVERSE_ROTATION_MATRIX;
+                entity->flags |= ENTITY_FLAGS_HIDDEN | ENTITY_FLAGS_DISABLE_COLLISION;
                 if (data->unk_02) {
                     enable_player_static_collisions();
                 }
@@ -234,7 +234,7 @@ void entity_HiddenPanel_flip_over(Entity* entity) {
                     set_time_freeze_mode(TIME_FREEZE_NORMAL);
                     gPlayerStatusPtr->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_800;
                 }
-                entity->flags &= ~ENTITY_FLAGS_SKIP_UPDATE_INVERSE_ROTATION_MATRIX;
+                entity->flags &= ~ENTITY_FLAGS_DISABLE_COLLISION;
                 if (data->standingNpcIndex >= 0) {
                     Npc* npc = get_npc_by_index(data->standingNpcIndex);
                     npc->flags &= ~(NPC_FLAG_GRAVITY | NPC_FLAG_ENABLE_HIT_SCRIPT);
@@ -325,7 +325,7 @@ void entity_HiddenPanel_init(Entity* entity) {
     }
     data->renderDList = ENTITY_ADDR(entity, Gfx*, dlist);
 
-    mdl_project_tex_coords(data->modelID, data->renderDList, data->entityMatrix, entity->vertexData);
+    mdl_project_tex_coords(data->modelID, data->renderDList, data->entityMatrix, entity->gfxBaseAddr);
     D_8015A578.unk_01++;
 }
 

@@ -670,7 +670,7 @@ void update_actor_shadow(s32 arg0, Actor* actor) {
 
             shadow = get_shadow_by_index(actor->shadow.id);
             if (!(actor->flags & ACTOR_FLAG_NO_SHADOW)) {
-                shadow->flags &= ~ACTOR_FLAG_DISABLED;
+                shadow->flags &= ~ENTITY_FLAGS_HIDDEN;
             }
 
             x1 = actor->currentPos.x + actor->headOffset.x;
@@ -1941,7 +1941,7 @@ INCLUDE_ASM(s32, "182B30", func_8025CD40);
 void func_8025CEC8(ActorPart* actorPart) {
     DecorationTable* decorationTable;
     s32 i;
-    
+
     if (!(actorPart->flags & 2)) {
         decorationTable = actorPart->decorationTable;
         for (i = 0; i < ARRAY_COUNT(decorationTable->decorationType); i++) {

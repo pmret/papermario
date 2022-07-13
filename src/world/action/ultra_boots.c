@@ -67,7 +67,7 @@ void func_802B6000_E26710(void) {
             if (sp10 >= 0 && collisionStatus->currentFloor & COLLISION_WITH_ENTITY_BIT ) {
                 entityType = get_entity_type(collisionStatus->currentFloor);
                 if (entityType == ENTITY_TYPE_BLUE_SWITCH || entityType == ENTITY_TYPE_RED_SWITCH) {
-                    get_entity_by_index(collisionStatus->currentFloor)->collisionFlags |= 1;
+                    get_entity_by_index(collisionStatus->currentFloor)->collisionFlags |= ENTITY_COLLISION_PLAYER_TOUCH_FLOOR;
                     disable_player_input();
                     playerStatus->fallState = 0xB;
                     break;

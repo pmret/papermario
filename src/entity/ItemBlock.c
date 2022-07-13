@@ -154,7 +154,7 @@ void entity_ItemBlock_replace_with_inactive(Entity* entity) {
     }
 
     shadow = get_shadow_by_index(childEntity->shadowIndex);
-    shadow->flags |= (ENTITY_FLAGS_400000 | ENTITY_FLAGS_HIDDEN);
+    shadow->flags |= (ENTITY_FLAGS_SHADOW_POS_DIRTY | ENTITY_FLAGS_HIDDEN);
     isBlockOnGround = is_block_on_ground(entity);
 
     parentEntityType = get_entity_type(entity->listIndex);
@@ -184,16 +184,16 @@ void entity_ItemBlock_replace_with_inactive(Entity* entity) {
         childEntity->flags |= ENTITY_FLAGS_HAS_DYNAMIC_SHADOW;
     }
 
-    entity->flags &= ~ENTITY_FLAGS_100;
+    entity->flags &= ~ENTITY_FLAGS_HAS_SHADOW;
     shadow = get_shadow_by_index(entity->shadowIndex);
     shadow->flags |= (ENTITY_FLAGS_FADING_AWAY | ENTITY_FLAGS_HIDDEN);
     shadow = get_shadow_by_index(childEntity->shadowIndex);
-    shadow->flags |= ENTITY_FLAGS_400000;
+    shadow->flags |= ENTITY_FLAGS_SHADOW_POS_DIRTY;
 }
 
 void entity_HitItemBlock_hide(Entity* entity) {
     entity->flags |= ENTITY_FLAGS_HIDDEN;
-    entity->flags &= ~ENTITY_FLAGS_100;
+    entity->flags &= ~ENTITY_FLAGS_HAS_SHADOW;
     get_shadow_by_index(entity->shadowIndex)->flags |= (ENTITY_FLAGS_HIDDEN | ENTITY_FLAGS_FADING_AWAY);
 }
 
@@ -314,7 +314,7 @@ EntityScript Entity_TriggerBlock_Script = {
     es_Call(entity_TriggerBlock_start_bound_script)
     es_Call(entity_TriggerBlock_enable_player_input)
     es_SetFlags(ENTITY_FLAGS_HIDDEN)
-    es_SetFlags(ENTITY_FLAGS_SKIP_UPDATE_INVERSE_ROTATION_MATRIX)
+    es_SetFlags(ENTITY_FLAGS_DISABLE_COLLISION)
     es_Call(entity_TriggerBlock_start_bound_script_2)
     es_SetCallback(NULL, 2)
     es_SetFlags(ENTITY_FLAGS_PENDING_FULL_DELETE)
@@ -331,7 +331,7 @@ EntityModelScript Entity_RedBlock_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(En
 EntityModelScript Entity_HiddenRedBlock_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(Entity_RedBlock_Render, RENDER_MODE_SURFACE_XLU_LAYER2);
 
 EntityBlueprint Entity_YellowBlock = {
-    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200,
+    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_FIXED_SHADOW_SIZE,
     .typeDataSize = sizeof(BlockData),
     .renderCommandList = Entity_YellowBlock_RenderScript,
     .modelAnimationNodes = 0,
@@ -344,7 +344,7 @@ EntityBlueprint Entity_YellowBlock = {
 };
 
 EntityBlueprint Entity_HiddenYellowBlock = {
-    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200,
+    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_FIXED_SHADOW_SIZE,
     .typeDataSize = sizeof(BlockData),
     .renderCommandList = Entity_HiddenYellowBlock_RenderScript,
     .modelAnimationNodes = 0,
@@ -357,7 +357,7 @@ EntityBlueprint Entity_HiddenYellowBlock = {
 };
 
 EntityBlueprint Entity_RedBlock = {
-    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200,
+    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_FIXED_SHADOW_SIZE,
     .typeDataSize = sizeof(BlockData),
     .renderCommandList = Entity_RedBlock_RenderScript,
     .modelAnimationNodes = 0,
@@ -370,7 +370,7 @@ EntityBlueprint Entity_RedBlock = {
 };
 
 EntityBlueprint Entity_HiddenRedBlock = {
-    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200,
+    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_FIXED_SHADOW_SIZE,
     .typeDataSize = sizeof(BlockData),
     .renderCommandList = Entity_HiddenRedBlock_RenderScript,
     .modelAnimationNodes = 0,
@@ -383,7 +383,7 @@ EntityBlueprint Entity_HiddenRedBlock = {
 };
 
 EntityBlueprint Entity_TriggerBlock = {
-    .flags = ENTITY_FLAGS_8000 | ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200 | ENTITY_FLAGS_HAS_ANIMATED_MODEL,
+    .flags = ENTITY_FLAGS_8000 | ENTITY_FLAGS_4000 | ENTITY_FLAGS_FIXED_SHADOW_SIZE | ENTITY_FLAGS_HAS_ANIMATED_MODEL,
     .typeDataSize = sizeof(BlockData),
     .renderCommandList = Entity_HitYellowBlock_AnimationIdle,
     .modelAnimationNodes = Entity_HitYellowBlock_Mesh,
@@ -396,7 +396,7 @@ EntityBlueprint Entity_TriggerBlock = {
 };
 
 EntityBlueprint Entity_HitGroundedYellowBlock = {
-    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200 | ENTITY_FLAGS_HAS_ANIMATED_MODEL,
+    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_FIXED_SHADOW_SIZE | ENTITY_FLAGS_HAS_ANIMATED_MODEL,
     .typeDataSize = sizeof(BlockData),
     .renderCommandList = Entity_HitYellowBlock_AnimationIdle,
     .modelAnimationNodes = Entity_HitYellowBlock_Mesh,
@@ -409,7 +409,7 @@ EntityBlueprint Entity_HitGroundedYellowBlock = {
 };
 
 EntityBlueprint Entity_HitFloatingYellowBlock = {
-    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200 | ENTITY_FLAGS_HAS_ANIMATED_MODEL,
+    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_FIXED_SHADOW_SIZE | ENTITY_FLAGS_HAS_ANIMATED_MODEL,
     .typeDataSize = sizeof(BlockData),
     .renderCommandList = Entity_HitFloatingYellowBlock_AnimationIdle,
     .modelAnimationNodes = Entity_HitFloatingYellowBlock_Mesh,
@@ -422,7 +422,7 @@ EntityBlueprint Entity_HitFloatingYellowBlock = {
 };
 
 EntityBlueprint Entity_HitRedBlock = {
-    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200 | ENTITY_FLAGS_HAS_ANIMATED_MODEL,
+    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_FIXED_SHADOW_SIZE | ENTITY_FLAGS_HAS_ANIMATED_MODEL,
     .typeDataSize = sizeof(BlockData),
     .renderCommandList = Entity_HitRedBlock_AnimationHit,
     .modelAnimationNodes = Entity_HitRedBlock_Mesh,

@@ -644,7 +644,7 @@ s32 make_item_entity_at_player(s32 itemID, s32 arg1, s32 pickupMsgFlags) {
 
     item->shadowIndex = create_shadow_type(0, item->position.x, item->position.y, item->position.z);
     shadow = get_shadow_by_index(item->shadowIndex);
-    shadow->flags |= 1;
+    shadow->flags |= ENTITY_FLAGS_HIDDEN;
 
     posX = item->position.x;
     posY = item->position.y + 12.0f;

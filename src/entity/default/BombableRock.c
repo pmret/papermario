@@ -229,7 +229,7 @@ void entity_BombableRock_setupGfx(s32 entityIndex) {
 }
 
 void entity_BombableRock_idle(Entity* entity) {
-    if (entity->collisionFlags & ENTITY_COLLISION_BLOCK_HIT) {
+    if (entity->collisionFlags & ENTITY_COLLISION_PARTNER) {
         entity_start_script(entity);
         exec_entity_commandlist(entity);
         fx_big_smoke_puff(entity->position.x, entity->position.y + 25.0f, entity->position.z);
@@ -240,7 +240,7 @@ EntityModelScript Entity_BombableRock_RenderScript = STANDARD_ENTITY_MODEL_SCRIP
 
 EntityScript Entity_BombableRock_Script = {
     es_SetCallback(entity_BombableRock_idle, 0)
-    es_SetFlags(ENTITY_FLAGS_SKIP_UPDATE_INVERSE_ROTATION_MATRIX)
+    es_SetFlags(ENTITY_FLAGS_DISABLE_COLLISION)
     es_SetCallback(entity_BombableRock_update_fragments, 0)
     es_SetFlags(ENTITY_FLAGS_HIDDEN)
     es_SetFlags(ENTITY_FLAGS_PENDING_INSTANCE_DELETE)

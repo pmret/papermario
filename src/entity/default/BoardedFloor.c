@@ -230,10 +230,10 @@ void Entity_BoardedFloor_shatter(Entity* entity) {
 }
 
 EntityScript Entity_BoardedFloor_Script = {
-    es_ClearFlags(ENTITY_FLAGS_SKIP_UPDATE_INVERSE_ROTATION_MATRIX)
+    es_ClearFlags(ENTITY_FLAGS_DISABLE_COLLISION)
     es_SetCallback(Entity_BoardedFloor_idle, 0)
     es_PlaySound(SOUND_2092)
-    es_SetFlags(ENTITY_FLAGS_SKIP_UPDATE_INVERSE_ROTATION_MATRIX)
+    es_SetFlags(ENTITY_FLAGS_DISABLE_COLLISION)
     es_Call(Entity_BoardedFloor_shatter)
     es_SetCallback(Entity_BoardedFloor_update_fragments, 0)
     es_SetFlags(ENTITY_FLAGS_HIDDEN)

@@ -6,7 +6,7 @@ extern Gfx Entity_ArrowSign_Render[];
 extern Gfx Entity_ArrowSign_RenderRotatedSign[];
 extern Mtx Entity_ArrowSign_mtxSign;
 
-s32 entity_ArrowSign_setupGfx(s32 entityIndex) {
+void entity_ArrowSign_setupGfx(s32 entityIndex) {
     Gfx* gfxPos = gMasterGfxPos;
     Entity* entity = get_entity_by_index(entityIndex);
     ArrowSignData* data = entity->dataBuf.arrowSign;
@@ -53,7 +53,7 @@ EntityScript Entity_ArrowSign_Script = {
 EntityModelScript Entity_ArrowSign_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(Entity_ArrowSign_Render, RENDER_MODE_SURFACE_OPA);
 
 EntityBlueprint Entity_ArrowSign = {
-    .flags = ENTITY_FLAGS_SQUARE_SHADOW | ENTITY_FLAGS_400 | ENTITY_FLAGS_SET_SHADOW_FLAG200,
+    .flags = ENTITY_FLAGS_SQUARE_SHADOW | ENTITY_FLAGS_400 | ENTITY_FLAGS_FIXED_SHADOW_SIZE,
     .typeDataSize = sizeof(ArrowSignData),
     .renderCommandList = Entity_ArrowSign_RenderScript,
     .modelAnimationNodes = 0,

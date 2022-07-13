@@ -102,7 +102,7 @@ EntityModelScript Entity_SquareShadow_Render = {
 };
 
 ShadowBlueprint CircularShadowA = {
-    .flags = ENTITY_FLAGS_SKIP_UPDATE_INVERSE_ROTATION_MATRIX,
+    .flags = ENTITY_FLAGS_DISABLE_COLLISION,
     .renderCommandList = Entity_CircularShadowA_Render,
     .animModelNode =  NULL,
     .onCreateCallback = entity_Shadow_init,
@@ -111,7 +111,7 @@ ShadowBlueprint CircularShadowA = {
 };
 
 ShadowBlueprint CircularShadowB = {
-    .flags = ENTITY_FLAGS_SKIP_UPDATE_INVERSE_ROTATION_MATRIX,
+    .flags = ENTITY_FLAGS_DISABLE_COLLISION,
     .renderCommandList = Entity_CircularShadowB_Render,
     .animModelNode =  NULL,
     .onCreateCallback = entity_Shadow_init,
@@ -120,7 +120,7 @@ ShadowBlueprint CircularShadowB = {
 };
 
 ShadowBlueprint SquareShadow = {
-    .flags = ENTITY_FLAGS_SKIP_UPDATE_INVERSE_ROTATION_MATRIX,
+    .flags = ENTITY_FLAGS_DISABLE_COLLISION,
     .renderCommandList = Entity_SquareShadow_Render,
     .animModelNode =  NULL,
     .onCreateCallback = entity_Shadow_init,

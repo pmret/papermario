@@ -59,20 +59,17 @@ enum {
         ems_End \
     }
 
-#define ENTITY_ADDR(entity, type, data) (type)((s32)(entity->vertexData) + ((s32)(data) & 0xFFFF))
+#define ENTITY_ADDR(entity, type, data) (type)((s32)(entity->gfxBaseAddr) + ((s32)(data) & 0xFFFF))
 #define ENTITY_ROM(name) { entity_model_##name##_ROM_START, entity_model_##name##_ROM_END }
 
 extern ShadowBlueprint CircularShadowA;
 extern ShadowBlueprint CircularShadowB;
 extern ShadowBlueprint SquareShadow;
-
 extern EntityBlueprint Entity_SavePoint;
-
 extern EntityBlueprint Entity_RedSwitch;
 extern EntityBlueprint Entity_BlueSwitch;
 extern EntityBlueprint Entity_HugeBlueSwitch;
 extern EntityBlueprint Entity_GreenStompSwitch;
-
 extern EntityBlueprint Entity_InertYellowBlock;
 extern EntityBlueprint Entity_InertRedBlock;
 extern EntityBlueprint Entity_BrickBlock;
@@ -90,53 +87,36 @@ extern EntityBlueprint Entity_Hammer3Block_TallHitbox;
 extern EntityBlueprint Entity_Hammer3BlockTiny;
 extern EntityBlueprint Entity_PushBlock;
 extern EntityBlueprint Entity_PowBlock;
-
 extern EntityBlueprint Entity_YellowBlock;
 extern EntityBlueprint Entity_HiddenYellowBlock;
 extern EntityBlueprint Entity_RedBlock;
 extern EntityBlueprint Entity_HiddenRedBlock;
 extern EntityBlueprint Entity_TriggerBlock;
-
 extern EntityBlueprint Entity_HeartBlock;
-
 extern EntityBlueprint Entity_SuperBlock;
-
 extern EntityBlueprint Entity_ScriptSpring;
 extern EntityBlueprint Entity_SimpleSpring;
-
 extern EntityBlueprint Entity_HiddenPanel;
-
 extern EntityBlueprint Entity_GiantChest;
 extern EntityBlueprint Entity_Chest;
-
 extern EntityBlueprint Entity_WoodenCrate;
-
 extern EntityBlueprint Entity_BlueWarpPipe;
-
 extern EntityBlueprint Entity_Signpost;
-
 extern EntityBlueprint Entity_Padlock;
 extern EntityBlueprint Entity_PadlockRedFrame;
 extern EntityBlueprint Entity_PadlockRedFace;
 extern EntityBlueprint Entity_PadlockBlueFace;
-
 extern EntityBlueprint Entity_BoardedFloor;
-
 extern EntityBlueprint Entity_BombableRock;
 extern EntityBlueprint Entity_BombableRock2;
-
 extern EntityBlueprint Entity_Tweester;
-
 extern EntityBlueprint Entity_StarBoxLauncher;
-
 extern EntityBlueprint Entity_CymbalPlant;
 extern EntityBlueprint Entity_PinkFlower;
 extern EntityBlueprint Entity_SpinningFlower;
-
 extern EntityBlueprint Entity_BellbellPlant;
 extern EntityBlueprint Entity_TrumpetPlant;
 extern EntityBlueprint Entity_Munchlesia;
-
 extern EntityBlueprint Entity_ArrowSign;
 
 #endif

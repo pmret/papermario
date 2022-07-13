@@ -24,7 +24,7 @@ BSS u16 D_802BCE30;
 BSS u16 D_802BCE32;
 BSS u16 D_802BCE34;
 
-s32 entity_SpinningFlower_setupGfx(s32 entityIndex) {
+void entity_SpinningFlower_setupGfx(s32 entityIndex) {
     Entity* entity = get_entity_by_index(entityIndex);
     SpinningFlowerData* data = entity->dataBuf.spinningFlower;
     Gfx* gfxPos = gMasterGfxPos;
@@ -53,9 +53,9 @@ void func_802BB000_E2D930(Entity* entity) {
     SpinningFlowerData* data = entity->dataBuf.spinningFlower;
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    if ((entity->collisionFlags & 1) && !is_picking_up_item()) {
+    if ((entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_FLOOR) && !is_picking_up_item()) {
         if (playerStatus->actionState == ACTION_STATE_RIDE) {
-            playerStatus->animFlags |= 4;
+            playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_4;
         } else if (playerStatus->actionState != ACTION_STATE_USE_SPINNING_FLOWER) {
             D_802BCE34 = data->unk_28;
             D_802BCE30 = data->unk_2A;
@@ -70,32 +70,32 @@ void func_802BB0A0_E2D9D0(Entity* entity) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     func_802BB000_E2D930(entity);
-    switch (data->unk_02) {
+    switch (data->state) {
         case 0:
             data->unk_18 = 0;
             data->unk_00 = 0;
-            data->unk_02 = 1;
+            data->state = 1;
             data->rotation.x = 0.0f;
             data->rotation.z = 0.0f;
             break;
         case 1:
             if (!(entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_FLOOR)) {
-                data->unk_14 += 0.02;
-                if (data->unk_14 > 2.0) {
-                    if (data->unk_14 > 2.0) {
-                        data->unk_14 -= 0.4;
+                data->spinSpeed += 0.02;
+                if (data->spinSpeed > 2.0) {
+                    if (data->spinSpeed > 2.0) {
+                        data->spinSpeed -= 0.4;
                     }
                 }
             } else {
-                data->unk_14 += 0.8;
-                if (data->unk_14 > 14.0f) {
-                    data->unk_14 = 14.0f;
+                data->spinSpeed += 0.8;
+                if (data->spinSpeed > 14.0f) {
+                    data->spinSpeed = 14.0f;
                 }
             }
             break;
     }
 
-    data->rotation.y = clamp_angle(data->rotation.y + data->unk_14);
+    data->rotation.y = clamp_angle(data->rotation.y + data->spinSpeed);
 
     if (!(entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_FLOOR) &&
         (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_SPINNING) &&
@@ -109,11 +109,11 @@ void func_802BB228_E2DB58(Entity* entity) {
     SpinningFlowerData* data = entity->dataBuf.spinningFlower;
 
     func_802BB000_E2D930(entity);
-    data->unk_14 += 2.0;
-    if (data->unk_14 > 40.0f) {
-        data->unk_14 = 40.0f;
+    data->spinSpeed += 2.0;
+    if (data->spinSpeed > 40.0f) {
+        data->spinSpeed = 40.0f;
     }
-    data->rotation.y = clamp_angle(data->rotation.y + data->unk_14);
+    data->rotation.y = clamp_angle(data->rotation.y + data->spinSpeed);
 }
 
 void entity_SpinningFlower_init(Entity* entity) {
@@ -132,7 +132,7 @@ void entity_SpinningFlower_init(Entity* entity) {
     data->unk_28 = x;
     data->unk_2A = y;
     data->unk_2C = z;
-    data->unk_02 = 0;
+    data->state = 0;
     entity->renderSetupFunc = entity_SpinningFlower_setupGfx;
 }
 
@@ -145,7 +145,7 @@ void func_802BB34C_E2DC7C(void) {
     func_80149A6C(0x391, 1);
 }
 
-s32 entity_PinkFlowerLight_setupGfx(s32 entityIndex) {
+void entity_PinkFlowerLight_setupGfx(s32 entityIndex) {
     Entity* entity = get_entity_by_index(entityIndex);
     PinkFlowerData* data = entity->dataBuf.pinkFlower;
     Gfx* gfxPos = gMasterGfxPos;
@@ -377,7 +377,7 @@ DmaEntry Entity_CymbalPlant_dma[] = { ENTITY_ROM(CymbalPlant_gfx), ENTITY_ROM(Cy
 DmaEntry Entity_PinkFlower_dma[] = { ENTITY_ROM(PinkFlower_gfx), ENTITY_ROM(PinkFlower_anim) };
 
 EntityBlueprint Entity_CymbalPlant = {
-    .flags = ENTITY_FLAGS_SQUARE_SHADOW | ENTITY_FLAGS_400 | ENTITY_FLAGS_SET_SHADOW_FLAG200 | ENTITY_FLAGS_HAS_ANIMATED_MODEL,
+    .flags = ENTITY_FLAGS_SQUARE_SHADOW | ENTITY_FLAGS_400 | ENTITY_FLAGS_FIXED_SHADOW_SIZE | ENTITY_FLAGS_HAS_ANIMATED_MODEL,
     .typeDataSize = sizeof(CymbalPlantData),
     .renderCommandList = Entity_CymbalPlant_AnimationIdle,
     .modelAnimationNodes = Entity_CymbalPlant_Mesh,
@@ -390,7 +390,7 @@ EntityBlueprint Entity_CymbalPlant = {
 };
 
 EntityBlueprint Entity_PinkFlower = {
-    .flags = ENTITY_FLAGS_SHOWS_INSPECT_PROMPT | ENTITY_FLAGS_SQUARE_SHADOW | ENTITY_FLAGS_400 | ENTITY_FLAGS_SET_SHADOW_FLAG200 | ENTITY_FLAGS_HAS_ANIMATED_MODEL,
+    .flags = ENTITY_FLAGS_SHOWS_INSPECT_PROMPT | ENTITY_FLAGS_SQUARE_SHADOW | ENTITY_FLAGS_400 | ENTITY_FLAGS_FIXED_SHADOW_SIZE | ENTITY_FLAGS_HAS_ANIMATED_MODEL,
     .typeDataSize = sizeof(PinkFlowerData),
     .renderCommandList = Entity_PinkFlower_AnimationIdle,
     .modelAnimationNodes = Entity_PinkFlower_Mesh,
@@ -403,7 +403,7 @@ EntityBlueprint Entity_PinkFlower = {
 };
 
 EntityBlueprint Entity_PinkFlowerLight = {
-    .flags = ENTITY_FLAGS_SHOWS_INSPECT_PROMPT | ENTITY_FLAGS_SKIP_UPDATE_INVERSE_ROTATION_MATRIX,
+    .flags = ENTITY_FLAGS_SHOWS_INSPECT_PROMPT | ENTITY_FLAGS_DISABLE_COLLISION,
     .typeDataSize = sizeof(PinkFlowerData),
     .renderCommandList = Entity_PinkFlowerLight_RenderScript,
     .modelAnimationNodes = 0,

@@ -219,7 +219,7 @@ s32 entity_WoodenCrate_idle(Entity* entity) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 shouldBreak = FALSE;
 
-    if (entity->collisionFlags & 1) {
+    if (entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_FLOOR) {
         if ((playerStatus->actionState == ACTION_STATE_GROUND_POUND)
             || (playerStatus->actionState == ACTION_STATE_ULTRA_POUND)) {
             set_action_state(ACTION_STATE_FALLING);
@@ -262,7 +262,7 @@ EntityModelScript Entity_WoodenCrate_RenderShatteredScript = STANDARD_ENTITY_MOD
 
 EntityScript Entity_WoodenCrate_Script = {
     es_SetCallback(entity_WoodenCrate_idle, 0)
-    es_SetFlags(ENTITY_FLAGS_SKIP_UPDATE_INVERSE_ROTATION_MATRIX)
+    es_SetFlags(ENTITY_FLAGS_DISABLE_COLLISION)
     es_Call(entity_WoodenCrate_shatter)
     es_SetCallback(entity_WoodenCrate_update_fragments, 0)
     es_SetFlags(ENTITY_FLAGS_HIDDEN)
@@ -271,7 +271,7 @@ EntityScript Entity_WoodenCrate_Script = {
 };
 
 EntityBlueprint Entity_WoodenCrate = {
-    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200,
+    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_FIXED_SHADOW_SIZE,
     .typeDataSize = sizeof(WoodenCrateData),
     .renderCommandList = Entity_WoodenCrate_RenderScript,
     .modelAnimationNodes = 0,

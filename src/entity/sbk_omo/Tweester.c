@@ -75,7 +75,7 @@ void entity_Tweester_render_face(s32 entityIndex) {
     gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, data->faceAnimTexOffset * 4, 0, (data->faceAnimTexOffset + 124) * 4, 31 * 4);
 }
 
-s32 entity_Tweester_setupGfx(s32 entityIndex) {
+void entity_Tweester_setupGfx(s32 entityIndex) {
     Entity* entity = get_entity_by_index(entityIndex);
     TweesterData* data = entity->dataBuf.tweester;
 
@@ -315,7 +315,7 @@ EntityScript Entity_Tweester_Script ={
 EntityModelScript Entity_Tweester_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(Entity_Tweester_Render, RENDER_MODE_SURFACE_XLU_LAYER1);
 
 EntityBlueprint Entity_Tweester = {
-    .flags = ENTITY_FLAGS_SKIP_UPDATE_INVERSE_ROTATION_MATRIX,
+    .flags = ENTITY_FLAGS_DISABLE_COLLISION,
     .typeDataSize = sizeof(TweesterData),
     .renderCommandList = Entity_Tweester_RenderScript,
     .modelAnimationNodes = 0,

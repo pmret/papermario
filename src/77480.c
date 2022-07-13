@@ -911,11 +911,11 @@ f32 get_xz_dist_to_player(f32 x, f32 z) {
 }
 
 void enable_player_shadow(void) {
-    get_shadow_by_index(gPlayerStatus.shadowID)->flags &= ~1;
+    get_shadow_by_index(gPlayerStatus.shadowID)->flags &= ~ENTITY_FLAGS_HIDDEN;
 }
 
 void disable_player_shadow(void) {
-    get_shadow_by_index(gPlayerStatus.shadowID)->flags |= 1;
+    get_shadow_by_index(gPlayerStatus.shadowID)->flags |= ENTITY_FLAGS_HIDDEN;
 }
 
 s32 disable_player_static_collisions(void) {

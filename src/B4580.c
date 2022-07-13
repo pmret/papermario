@@ -76,9 +76,9 @@ Vtx* animator_copy_vertices_to_buffer(ModelAnimator* animator, AnimatorNode* nod
     handle->ttl = 3;
     nodeVtxList = &node->fcData.vtxList[startIdx];
 
-    if (animator->vertexArray != NULL) {
+    if (animator->baseAddr != NULL) {
         i = ((s32)buffer & 0xFFFFFF); // needed to match
-        buffer = (Vec3s*)(i + (s32)animator->vertexArray);
+        buffer = (Vec3s*)(i + (s32)animator->baseAddr);
     }
 
     for (i = 0; i < vtxCount; i++) {
@@ -299,7 +299,7 @@ s32 create_model_animator(s16* animPos) {
 
     animator->savedReadPos = animPos;
     animator->animationBuffer = NULL;
-    animator->vertexArray = NULL;
+    animator->baseAddr = NULL;
     animator->fpRenderCallback = NULL;
     animator->rootNode = NULL;
     animator->nextUniqueID = 0;
@@ -314,7 +314,7 @@ s32 create_model_animator(s16* animPos) {
     return i;
 }
 
-s32 create_mesh_animator(s32 animPos, s16* animBuffer) {
+s32 create_mesh_animator(s16* animPos, s16* animBuffer) {
     ModelAnimator* animator;
     s32 i, j;
 
@@ -333,16 +333,16 @@ s32 create_mesh_animator(s32 animPos, s16* animBuffer) {
 
     animator->flags = MODEL_ANIMATOR_FLAGS_UPDATE_PENDING | MODEL_ANIMATOR_FLAGS_ENABLED | MODEL_ANIMATOR_FLAGS_CAM_2 | MODEL_ANIMATOR_FLAGS_CAM_1 | MODEL_ANIMATOR_FLAGS_CAM_0;
     animator->renderMode = RENDER_MODE_ALPHATEST;
-    animator->vertexArray = NULL;
+    animator->baseAddr = NULL;
     animator->fpRenderCallback = NULL;
     animator->rootNode = NULL;
     animator->nextUniqueID = 0;
     animator->animationBuffer = animBuffer;
     animator->nextUpdateTime = 1.0f;
     animator->timeScale = 1.0f;
-    animPos = (animPos & 0xFFFFFF) + (s32)animator->animationBuffer;
-    animator->animReadPos = (s16*)animPos;
-    animator->savedReadPos = (s16*)animPos;
+    animPos = (s16*)(((s32)animPos & 0xFFFFFF) + (s32)animator->animationBuffer);
+    animator->animReadPos = animPos;
+    animator->savedReadPos = animPos;
 
     for (j = 0; j < ARRAY_COUNT(animator->staticNodeIDs); j++) {
         animator->staticNodeIDs[j] = j + 1;
@@ -708,7 +708,7 @@ void render_animated_model(s32 animatorID, Mtx* rootTransform) {
             animator->flags & (1 << gCurrentCamID) && !(animator->flags & MODEL_ANIMATOR_FLAGS_HIDDEN))
         {
             animator->mtx = *rootTransform;
-            animator->vertexArray = NULL;
+            animator->baseAddr = NULL;
             rtPtr->appendGfxArg = animator;
             rtPtr->appendGfx = (void (*)(void*))appendGfx_animator;
             rtPtr->distance = 0;
@@ -718,7 +718,7 @@ void render_animated_model(s32 animatorID, Mtx* rootTransform) {
     }
 }
 
-void render_animated_model_with_vertices(s32 animatorID, Mtx* rootTransform, s32 vtxSegment, Vec3s* vertexArray) {
+void render_animated_model_with_vertices(s32 animatorID, Mtx* rootTransform, s32 segment, void* baseAddr) {
     RenderTask rt;
     RenderTask* rtPtr = &rt;
 
@@ -731,8 +731,8 @@ void render_animated_model_with_vertices(s32 animatorID, Mtx* rootTransform, s32
             animator->flags & (1 << gCurrentCamID) && !(animator->flags & MODEL_ANIMATOR_FLAGS_HIDDEN))
         {
             animator->mtx = *rootTransform;
-            gAnimVtxSegment = vtxSegment;
-            animator->vertexArray = vertexArray;
+            gAnimVtxSegment = segment;
+            animator->baseAddr = baseAddr;
             rtPtr->appendGfxArg = animator;
             rtPtr->appendGfx = (void (*)(void*))appendGfx_animator;
             rtPtr->distance = 0;
@@ -745,8 +745,8 @@ void render_animated_model_with_vertices(s32 animatorID, Mtx* rootTransform, s32
 void appendGfx_animator(ModelAnimator* animator) {
     Matrix4f sp10;
 
-    if (animator->vertexArray != NULL) {
-        gSPSegment(gMasterGfxPos++, gAnimVtxSegment, VIRTUAL_TO_PHYSICAL(animator->vertexArray));
+    if (animator->baseAddr != NULL) {
+        gSPSegment(gMasterGfxPos++, gAnimVtxSegment, VIRTUAL_TO_PHYSICAL(animator->baseAddr));
     }
 
     gDisplayContext->matrixStack[gMatrixListPos] = animator->mtx;

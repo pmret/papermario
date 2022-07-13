@@ -566,9 +566,9 @@ void update_npcs(void) {
                         Shadow* shadow = get_shadow_by_index(npc->shadowIndex);
                         EntityModel* entityModel = get_entity_model(shadow->entityModelID);
 
-                        entityModel->flags &= ~ENTITY_MODEL_FLAGS_200;
+                        entityModel->flags &= ~ENTITY_MODEL_FLAGS_REFLECT;
                         if (npc->flags & NPC_FLAG_REFLECT_WALL) {
-                            entityModel->flags |= ENTITY_MODEL_FLAGS_200;
+                            entityModel->flags |= ENTITY_MODEL_FLAGS_REFLECT;
                         }
 
                         x = npc->pos.x;

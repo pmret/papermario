@@ -84,6 +84,9 @@ void exec_entity_model_commandlist(s32 idx);
 s32 load_entity_model(s32* cmdList);
 RenderTask* queue_render_task(RenderTask* task);
 
+s32 create_mesh_animator(s16* animPos, s16* animBuffer);
+void load_mesh_animator_tree(s32 index, StaticAnimatorNode** tree);
+
 void setup_pause_menu_tab(MenuWindowBP* bpArray, s32 arraySize);
 
 s32 draw_ci_image_with_clipping(s32* raster, s32 width, s32 height, s32 fmt, s32 bitDepth, s32* palette, s16 posX,

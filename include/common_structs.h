@@ -695,10 +695,10 @@ typedef struct PinkFlowerData {
 // size unknown
 typedef struct SpinningFlowerData {
     /* 0x00 */ s16 unk_00;
-    /* 0x02 */ s8 unk_02;
+    /* 0x02 */ s8 state;
     /* 0x04 */ Vec3f rotation;
     /* 0x10 */ s32 unk_10;
-    /* 0x14 */ f32 unk_14;
+    /* 0x14 */ f32 spinSpeed;
     /* 0x18 */ s32 unk_18;
     /* 0x1C */ char unk_1C[0x0C];
     /* 0x28 */ s16 unk_28;
@@ -773,7 +773,7 @@ typedef struct Entity {
     /* 0x28 */ EvtScript* boundScriptBytecode;
     /* 0x2C */ s32* savedReadPos[3];
     /* 0x38 */ EntityBlueprint* blueprint;
-    /* 0x3C */ UNK_PTR renderSetupFunc; // pointer to draw func(?)
+    /* 0x3C */ void (*renderSetupFunc)(s32);
     /* 0x40 */ union {
         s32* any;
         SaveBlockData* saveBlock;
@@ -799,15 +799,14 @@ typedef struct Entity {
         TrumpetPlantData* trumpetPlant;
         MunchlesiaData* munchlesia;
         ArrowSignData* arrowSign;
-        s32* unk;
     } dataBuf;
-    /* 0x44 */ void* vertexData;
+    /* 0x44 */ void* gfxBaseAddr;
     /* 0x48 */ Vec3f position;
     /* 0x54 */ Vec3f scale;
     /* 0x60 */ Vec3f rotation;
     /* 0x6C */ f32 shadowPosY;
     /* 0x70 */ Matrix4f inverseTransformMatrix; /* world-to-local */
-    /* 0xB0 */ float effectiveSize;
+    /* 0xB0 */ f32 effectiveSize;
     /* 0xB4 */ char unk_B4[4];
     /* 0xB8 */ Mtx transformMatrix;
 } Entity; // size = 0xF8
@@ -1325,7 +1324,7 @@ typedef struct ModelAnimator {
     /* 0x090 */ f32 nextUpdateTime;
     /* 0x094 */ f32 timeScale;
     /* 0x098 */ Mtx mtx;
-    /* 0x0D8 */ Vec3s* vertexArray;
+    /* 0x0D8 */ void* baseAddr;
     /* 0x0DC */ s16* animationBuffer;
     /* 0x0E0 */ StaticAnimatorNode* staticNodes[0x7A];
     /* 0x2C8 */ StaticAnimatorNode** staticRoot;

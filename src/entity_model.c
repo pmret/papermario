@@ -368,7 +368,7 @@ void appendGfx_entity_model(EntityModel* model) {
         gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
         gDPPipeSync(gMasterGfxPos++);
 
-        if (!(model->flags & ENTITY_MODEL_FLAGS_200)) {
+        if (!(model->flags & ENTITY_MODEL_FLAGS_REFLECT)) {
             return;
         }
 
@@ -498,7 +498,7 @@ void draw_entity_model_C(s32 modelIdx, Mtx* transformMtx) {
                 if (!(model->flags & ENTITY_MODEL_FLAGS_100)) {
                     if (!(model->flags & ENTITY_MODEL_FLAGS_HIDDEN)) {
                         if (!(model->flags & ENTITY_MODEL_FLAGS_40) && (model->flags & (1 << gCurrentCamID))) {
-                            model->flags |= ENTITY_MODEL_FLAGS_200;
+                            model->flags |= ENTITY_MODEL_FLAGS_REFLECT;
                             model->transform = *transformMtx;
                             model->vertexArray = NULL;
                             rtPtr->renderMode = model->renderMode;
@@ -528,7 +528,7 @@ void draw_entity_model_D(s32 modelIdx, Mtx* transformMtx, s32 arg2, Vec3s* verte
                 if (!(model->flags & ENTITY_MODEL_FLAGS_100)) {
                     if (!(model->flags & ENTITY_MODEL_FLAGS_HIDDEN)) {
                         if (model->flags & (1 << gCurrentCamID)) {
-                            model->flags |= ENTITY_MODEL_FLAGS_200;
+                            model->flags |= ENTITY_MODEL_FLAGS_REFLECT;
                             model->transform = *transformMtx;
                             D_80154374 = arg2;
                             model->vertexArray = vertexArray;
@@ -677,7 +677,7 @@ void draw_entity_model_E(s32 modelIdx, Mtx* transformMtx) {
         gSPDisplayList(gMasterGfxPos++, model->gfx.displayList);
         gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
         gDPPipeSync(gMasterGfxPos++);
-        if (!(model->flags & ENTITY_MODEL_FLAGS_200)) {
+        if (!(model->flags & ENTITY_MODEL_FLAGS_REFLECT)) {
             return;
         }
 

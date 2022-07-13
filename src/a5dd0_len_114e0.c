@@ -1004,10 +1004,11 @@ s8 D_8014C248[] = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, };
 extern s32 B_801512B0[2];
 extern ModelCustomGfxBuilderList* gCurrentCustomModelGfxBuildersPtr;
 extern s32 D_801512BC;
+extern s32 D_80151304;
+extern s32 D_80151344;
 extern s32 entity_numEntities;
 extern s32 gEntityHeapBase;
 extern s32 gHudElementCacheTableRaster;
-extern ModelList* gCurrentModels;
 extern s32 gHudElementCacheTablePalette[4];
 extern ModelNode** gCurrentModelTreeRoot;
 extern ModelTransformGroupList* gCurrentTransformGroups;
@@ -1019,11 +1020,11 @@ extern GameMode gMainGameState[2]; // TODO rename
 
 extern s32 gEntityHeapBottom;
 extern s32 entity_numShadows;
-extern s32 D_8015132C;
+extern s32 entity_area_specific_data_is_loaded;
 extern s32 entity_updateCounter;
 
-extern s32 wEntityBlueprintSize;
-extern s32 bEntityBlueprintSize;
+extern s32 wEntityDataLoadedSize;
+extern s32 bEntityDataLoadedSize;
 
 extern EntityBlueprint* wEntityBlueprint[30];
 extern EntityBlueprint* bEntityBlueprint[4];
@@ -1080,6 +1081,7 @@ extern s32 D_801A7000; // todo ???
 
 void update_shadows(void);
 s32 step_entity_commandlist(Entity* entity);
+void entity_swizzle_anim_pointers(EntityBlueprint* entityData, void* baseAnim, void* baseGfx);
 void render_shadows(void);
 void update_entity_transform_matrix(Entity* entity);
 void update_shadow_transform_matrix(Shadow* shadow);
@@ -1087,7 +1089,7 @@ void update_entity_inverse_rotation_matrix(Entity* entity);
 void delete_entity(s32 entityIndex);
 void delete_entity_and_unload_data(s32 entityIndex);
 void _delete_shadow(s32 shadowIndex);
-void func_80110F10(void);
+void reload_world_entity_data(void);
 s32 entity_get_collision_flags(Entity* entity);
 void entity_free_static_data(EntityBlueprint* data);
 s32 create_entity_shadow(Entity* entity, f32 x, f32 y, f32 z);
@@ -1097,7 +1099,6 @@ void appendGfx_model_group(Model* model);
 void render_transform_group_node(ModelNode* node);
 void render_transform_group(ModelTransformGroup* group);
 void load_model_transforms(ModelNode* model, ModelNode* parent, Matrix4f mdlTxMtx, s32 treeDepth);
-void enable_transform_group(u16 modelID);
 
 void update_entities(void) {
     s32 i;
@@ -1157,13 +1158,13 @@ void update_entities(void) {
                     entity->collisionTimer--;
                     if (entity->flags & ENTITY_FLAGS_CONTINUOUS_COLLISION) {
                         if (entity->collisionTimer == 0) {
-                            entity->flags &= ~(ENTITY_FLAGS_SKIP_UPDATE_INVERSE_ROTATION_MATRIX | ENTITY_FLAGS_CONTINUOUS_COLLISION);
+                            entity->flags &= ~(ENTITY_FLAGS_DISABLE_COLLISION | ENTITY_FLAGS_CONTINUOUS_COLLISION);
                         } else {
-                            entity->flags |= ENTITY_FLAGS_SKIP_UPDATE_INVERSE_ROTATION_MATRIX;
+                            entity->flags |= ENTITY_FLAGS_DISABLE_COLLISION;
                         }
                     } else if (entity->collisionTimer == 0) {
                         entity->flags &= ~ENTITY_FLAGS_DETECTED_COLLISION;
-                        entity->flags &= ~ENTITY_FLAGS_BLOCK_BEING_HIT;
+                        entity->flags &= ~ENTITY_FLAGS_PARTNER_COLLISION;
                         entity->collisionFlags = 0;
                     }
                 }
@@ -1191,7 +1192,7 @@ void update_entities(void) {
                     update_entity_transform_matrix(entity);
                 }
 
-                if (!(entity->flags & ENTITY_FLAGS_SKIP_UPDATE_INVERSE_ROTATION_MATRIX)) {
+                if (!(entity->flags & ENTITY_FLAGS_DISABLE_COLLISION)) {
                     update_entity_inverse_rotation_matrix(entity);
                 }
 
@@ -1254,7 +1255,7 @@ void update_shadows(void) {
 
 void set_entity_commandlist(Entity* entity, s32* entityScript) {
     entity->scriptReadPos = entityScript;
-    entity->scriptDelay = TRUE;
+    entity->scriptDelay = 1;
     entity->savedReadPos[0] = entity->scriptReadPos;
 }
 
@@ -1262,7 +1263,7 @@ s32 step_entity_commandlist(Entity* entity) {
     s32* args = entity->scriptReadPos;
     s32 ret;
     s32 labelId;
-    s32 (*tempfunc)(Entity*);
+    void (*tempfunc)(Entity*);
 
     switch (*args++) {
         case ENTITY_SCRIPT_OP_End:
@@ -1272,13 +1273,13 @@ s32 step_entity_commandlist(Entity* entity) {
             ret = FALSE;
             break;
         case ENTITY_SCRIPT_OP_Jump:
-            entity->scriptReadPos = *args;
+            entity->scriptReadPos = (s32*)*args;
             entity->scriptDelay = 1;
             entity->savedReadPos[0] = entity->scriptReadPos;
             ret = TRUE;
             break;
         case ENTITY_SCRIPT_OP_Call:
-            tempfunc = *args++;
+            tempfunc = (void (*)(Entity*))(*args++);
             entity->scriptReadPos = args;
             (tempfunc)(entity);
             ret = TRUE;
@@ -1340,7 +1341,7 @@ void func_8010FD98(void* arg0, s32 alpha) {
         gDPSetCombineMode(gMasterGfxPos++, G_CC_MODULATEIA, G_CC_MODULATEIA);
     } else {
         gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, TEXEL0, PRIMITIVE, 0, TEXEL0, 0, 0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0);
-        gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0x00, 0x00, 0x00, alpha);
+        gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, alpha);
     }
 }
 
@@ -1352,7 +1353,7 @@ void entity_model_set_shadow_color(void* data) {
     s32 alpha = (s32)data;
 
     gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, 0, PRIMITIVE, 0, TEXEL0, 0, 0, 0, 0, 0, TEXEL0, 0, PRIMITIVE, 0);
-    gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0x00, 0x00, 0x00, alpha);
+    gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, alpha);
 }
 
 void render_entities(void) {
@@ -1394,13 +1395,13 @@ void render_entities(void) {
                         set_animator_render_callback(entity->virtualModelIndex, entity->listIndex, func_8010FE44);
                     }
 
-                    if (entity->vertexData == NULL) {
+                    if (entity->gfxBaseAddr == NULL) {
                         render_animated_model(entity->virtualModelIndex, &entity->transformMatrix);
                     } else {
                         render_animated_model_with_vertices(entity->virtualModelIndex,
                                       &entity->transformMatrix,
                                       entity->vertexSegment,
-                                      entity->vertexData);
+                                      entity->gfxBaseAddr);
                     }
                 } else {
                     if (D_8014AFB0 == 0xFF) {
@@ -1415,13 +1416,13 @@ void render_entities(void) {
                         bind_entity_model_setupGfx(entity->virtualModelIndex, entity->listIndex, func_8010FE44);
                     }
 
-                    if (entity->vertexData == NULL) {
+                    if (entity->gfxBaseAddr == NULL) {
                         draw_entity_model_A(entity->virtualModelIndex, &entity->transformMatrix);
                     } else {
                         draw_entity_model_B(entity->virtualModelIndex,
                                                &entity->transformMatrix,
                                                entity->vertexSegment,
-                                               entity->vertexData);
+                                               entity->gfxBaseAddr);
                     }
                 }
             }
@@ -1462,7 +1463,7 @@ void render_shadows(void) {
                     }
                 }
 
-                bind_entity_model_setupGfx(shadow->entityModelID, shadow->alpha, entity_model_set_shadow_color);
+                bind_entity_model_setupGfx(shadow->entityModelID, (void*)shadow->alpha, entity_model_set_shadow_color);
 
                 if (shadow->vertexArray == NULL) {
                     draw_entity_model_A(shadow->entityModelID, &shadow->transformMatrix);
@@ -1646,9 +1647,9 @@ s32 entity_get_collision_flags(Entity* entity) {
     s32 entityFlags = 0;
     u32 flag;
 
-    if (entity->flags & ENTITY_FLAGS_BLOCK_BEING_HIT) {
-        entityFlags = ENTITY_COLLISION_BLOCK_HIT;
-        entity->flags &= ~ENTITY_FLAGS_BLOCK_BEING_HIT;
+    if (entity->flags & ENTITY_FLAGS_PARTNER_COLLISION) {
+        entityFlags = ENTITY_COLLISION_PARTNER;
+        entity->flags &= ~ENTITY_FLAGS_PARTNER_COLLISION;
     }
 
     flag = gCollisionStatus.currentFloor;
@@ -1710,7 +1711,7 @@ s32 entity_interacts_with_current_partner(s32 entityIdx) {
                 case ENTITY_TYPE_SUPER_BLOCK:
                 case ENTITY_TYPE_BOMBABLE_ROCK:
                     entity = get_entity_by_index(entityIdx);
-                    entity->flags |= ENTITY_FLAGS_BLOCK_BEING_HIT;
+                    entity->flags |= ENTITY_FLAGS_PARTNER_COLLISION;
                     ret = TRUE;
             }
             break;
@@ -1733,7 +1734,7 @@ s32 entity_interacts_with_current_partner(s32 entityIdx) {
                 case ENTITY_TYPE_SAVE_POINT:
                 case ENTITY_TYPE_SUPER_BLOCK:
                     entity = get_entity_by_index(entityIdx);
-                    entity->flags |= ENTITY_FLAGS_BLOCK_BEING_HIT;
+                    entity->flags |= ENTITY_FLAGS_PARTNER_COLLISION;
                     ret = TRUE;
             }
             break;
@@ -1774,7 +1775,7 @@ void entity_set_render_script(Entity* entity, u32* commandList) {
     }
 }
 
-void func_80110BF8(Entity* entity) {
+void entity_reset_collision(Entity* entity) {
     entity->collisionTimer = 0;
     entity->flags &= ~ENTITY_FLAGS_DETECTED_COLLISION;
 }
@@ -1786,7 +1787,7 @@ void func_80110BF8(Entity* entity) {
 #endif
 
 void load_area_specific_entity_data(void) {
-    if (D_8015132C == 0) {
+    if (!entity_area_specific_data_is_loaded) {
         if (gGameStatusPtr->areaID == AREA_JAN || gGameStatusPtr->areaID == AREA_IWA) {
             dma_copy(entity_jan_iwa_ROM_START, entity_jan_iwa_ROM_END, (void*)AREA_SPECIFIC_ENTITY_VRAM);
         } else if (gGameStatusPtr->areaID == AREA_SBK || gGameStatusPtr->areaID == AREA_OMO) {
@@ -1795,12 +1796,9 @@ void load_area_specific_entity_data(void) {
             dma_copy(entity_default_ROM_START, entity_default_ROM_END, (void*)AREA_SPECIFIC_ENTITY_VRAM);
         }
 
-        D_8015132C = 1;
+        entity_area_specific_data_is_loaded = TRUE;
     }
 }
-
-extern s32 D_80151304;
-extern s32 D_80151344;
 
 void clear_entity_data(s32 arg0) {
     s32 i;
@@ -1815,7 +1813,7 @@ void clear_entity_data(s32 arg0) {
         gEntityHideMode = 0;
     }
 
-    D_8015132C = 0;
+    entity_area_specific_data_is_loaded = FALSE;
     D_8015A578.unk_01 = 0;
     D_8015A578.unk_02 = FALSE;
     if (!arg0) {
@@ -1824,12 +1822,12 @@ void clear_entity_data(s32 arg0) {
     D_8014AFB0 = 0xFF;
 
     if (!gGameStatusPtr->isBattle) {
-        wEntityBlueprintSize = 0;
-        for (i = 0; i < 30; i++) {
+        wEntityDataLoadedSize = 0;
+        for (i = 0; i < MAX_ENTITIES; i++) {
             wEntityBlueprint[i] = NULL;
         }
     } else {
-        bEntityBlueprintSize = 0;
+        bEntityDataLoadedSize = 0;
         for (i = 0; i < 4; i++) {
             bEntityBlueprint[i] = NULL;
         }
@@ -1839,34 +1837,34 @@ void clear_entity_data(s32 arg0) {
         gEntityHeapBottom = 0x80250000;
         gEntityHeapBase = 0x80267FF0;
     } else {
-        gEntityHeapBottom = &D_801A7000;
+        gEntityHeapBottom = (s32)&D_801A7000;
         gEntityHeapBase = gEntityHeapBottom + 0x3000;
     }
 
     gCurrentEntityListPtr = get_entity_list();
     gCurrentShadowListPtr = get_shadow_list();
 
-    for (i = 0; i < 30; i++) {
+    for (i = 0; i < MAX_ENTITIES; i++) {
         (*gCurrentEntityListPtr)[i] = NULL;
     }
 
-    for (i = 0; i < 60; i++) {
+    for (i = 0; i < MAX_SHADOWS; i++) {
         (*gCurrentShadowListPtr)[i] = NULL;
     }
 }
 
-void func_80110E58(void) {
+void init_entity_data(void) {
     if (!gGameStatusPtr->isBattle) {
         gEntityHeapBottom = 0x80250000;
         gEntityHeapBase = 0x80267FF0;
-        func_80110F10();
+        reload_world_entity_data();
     } else {
         s32 i;
 
         for (i = 0; i < 4; i++) {
             bEntityBlueprint[i] = 0;
         }
-        gEntityHeapBottom = &D_801A7000;
+        gEntityHeapBottom = (s32)&D_801A7000;
         gEntityHeapBase = gEntityHeapBottom + 0x3000;
     }
     gCurrentEntityListPtr = get_entity_list();
@@ -1875,93 +1873,94 @@ void func_80110E58(void) {
     entity_numShadows = 0;
 }
 
-void func_80110F10(void) {
+void reload_world_entity_data(void) {
     s32 i;
     s32 totalSize = 0;
     s32 temp1;
     s32 dataLength;
-    s32 vertexData;
-    s32 animData;
+    void* gfxData;
+    void* animData;
 
-    for (i = 0; i < 30; i++) {
+    for (i = 0; i < MAX_ENTITIES; i++) {
         EntityBlueprint* bp = wEntityBlueprint[i];
         if (bp == NULL) {
             break;
         }
 
         if (!(bp->flags & ENTITY_FLAGS_HAS_ANIMATED_MODEL)) {
-            s32 temp4;
+            void* gfxData;
+
             dataLength = ((bp->dma.end - bp->dma.start) >> 2);
-            temp4 = gEntityHeapBase - totalSize * 4 - dataLength * 4;
-            animData = bp->dma.end; // TODO find better match
-            totalSize += dma_copy(bp->dma.start, animData, temp4) >> 2;
+            gfxData = (void*)(gEntityHeapBase - totalSize * 4 - dataLength * 4);
+            totalSize += dma_copy(bp->dma.start, bp->dma.end, gfxData) >> 2;
         } else {
             DmaEntry* dmaList = bp->dmaList;
 
             if (bp->entityType == ENTITY_TYPE_RESET_MUNCHLESIA) {
-                vertexData = gEntityHeapBottom;
-                temp1 = dma_copy(dmaList[0].start, dmaList[0].end, vertexData) >> 2;
-                dma_copy(dmaList[1].start, dmaList[1].end, gEntityHeapBottom + temp1 * 4) >> 2;
-                entity_anim_make_vertex_pointers(bp, gEntityHeapBottom + temp1 * 4, vertexData);
+                gfxData = (void*)gEntityHeapBottom;
+                temp1 = dma_copy(dmaList[0].start, dmaList[0].end, gfxData) >> 2;
+                dma_copy(dmaList[1].start, dmaList[1].end, (void*)(gEntityHeapBottom + temp1 * 4)) >> 2;
+                animData = (void*)(gEntityHeapBottom + temp1 * 4);
+                entity_swizzle_anim_pointers(bp, animData, gfxData);
             } else {
                 s32 temp5;
                 s32 q;
 
                 dataLength = ((dmaList[0].end - dmaList[0].start) >> 2);
                 q = gEntityHeapBase - totalSize * 4;
-                vertexData = q - dataLength * 4;
-                totalSize += dma_copy(dmaList[0].start, dmaList[0].end, vertexData) >> 2;
+                gfxData = (void*)(q - dataLength * 4);
+                totalSize += dma_copy(dmaList[0].start, dmaList[0].end, gfxData) >> 2;
 
                 dataLength = ((dmaList[1].end - dmaList[1].start) >> 2);
                 q = gEntityHeapBase - totalSize * 4;
-                animData = q - dataLength * 4;
+                animData = (void*)(q - dataLength * 4);
                 totalSize += dma_copy(dmaList[1].start, dmaList[1].end, animData) >> 2;
 
-                entity_anim_make_vertex_pointers(bp, animData, vertexData);
+                entity_swizzle_anim_pointers(bp, animData, gfxData);
             }
         }
     }
 }
 
-void entity_anim_make_vertex_pointers(EntityBlueprint* entityData, void* baseAddr, Vtx* baseVtx) {
+void entity_swizzle_anim_pointers(EntityBlueprint* entityData, void* baseAnim, void* baseGfx) {
     StaticAnimatorNode* node;
-    s32* ptr = (s32)baseAddr + (s32)entityData->modelAnimationNodes;
+    s32* ptr = (s32*)((s32)baseAnim + (s32)entityData->modelAnimationNodes);
 
     while (TRUE) {
         if (*ptr == -1) {
             *ptr = 0;
             return;
         }
-        node = (s32)baseAddr + ((*ptr) & 0xFFFF);
-        *ptr++ = node;
+        node = (StaticAnimatorNode*)((s32)baseAnim + ((*ptr) & 0xFFFF));
+        *ptr++ = (s32)node;
 
-        if (node->displayList != -1) {
-            node->displayList = (s32)baseVtx + ((s32)(node->displayList) & 0xFFFF);
+        if ((s32)node->displayList != -1) {
+            node->displayList = (Gfx*)((s32)baseGfx + ((s32)(node->displayList) & 0xFFFF));
         } else {
             node->displayList = NULL;
         }
 
-        if (node->sibling != -1) {
-            node->sibling = (s32)baseAddr + ((s32)(node->sibling) & 0xFFFF);
+        if ((s32)node->sibling != -1) {
+            node->sibling = (StaticAnimatorNode*)((s32)baseAnim + ((s32)(node->sibling) & 0xFFFF));
         } else {
             node->sibling = NULL;
         }
 
-        if (node->child != -1) {
-            node->child = (s32)baseAddr + ((s32)(node->child) & 0xFFFF);
+        if ((s32)node->child != -1) {
+            node->child = (StaticAnimatorNode*)((s32)baseAnim + ((s32)(node->child) & 0xFFFF));
         } else {
             node->child = NULL;
         }
 
-        if (node->vtxList != -1) {
-            node->vtxList = (s32)baseVtx + ((s32)(node->vtxList) & 0xFFFFF);
+        if ((s32)node->vtxList != -1) {
+            node->vtxList = (Vtx*)((s32)baseGfx + ((s32)(node->vtxList) & 0xFFFFF));
         } else {
             node->vtxList = NULL;
         }
     }
 }
 
-s32 is_entity_data_loaded(Entity* entity, EntityBlueprint* entityData, s32* loadedStart, s32* loadedEnd) {
+s32 is_entity_data_loaded(Entity* entity, EntityBlueprint* blueprint, s32* loadedStart, s32* loadedEnd) {
     EntityBlueprint** blueprints;
     s32 i;
     s32 ret;
@@ -1981,12 +1980,12 @@ s32 is_entity_data_loaded(Entity* entity, EntityBlueprint* entityData, s32* load
     for (i = 0; i < MAX_ENTITIES; i++, blueprints++) {
         EntityBlueprint* bp = *blueprints;
         if (bp == NULL) {
-            blueprints[0] = entityData;
+            blueprints[0] = blueprint;
             blueprints[1] = NULL;
             ret = TRUE;
-            if (entityData->flags & ENTITY_FLAGS_HAS_ANIMATED_MODEL) {
+            if (blueprint->flags & ENTITY_FLAGS_HAS_ANIMATED_MODEL) {
                 s32 size;
-                entDmaList = entityData->dmaList;
+                entDmaList = blueprint->dmaList;
                 size = (entDmaList[0].end - entDmaList[0].start) >> 2;
                 *loadedEnd = *loadedStart + size;
             }
@@ -1994,14 +1993,14 @@ s32 is_entity_data_loaded(Entity* entity, EntityBlueprint* entityData, s32* load
         } else {
             DmaEntry* bpDmaList = bp->dmaList;
             do {} while (0); // TODO find better match
-            entDmaList = entityData->dmaList;
+            entDmaList = blueprint->dmaList;
             if (bpDmaList == entDmaList) {
-                if (entityData->flags & ENTITY_FLAGS_HAS_ANIMATED_MODEL) {
+                if (blueprint->flags & ENTITY_FLAGS_HAS_ANIMATED_MODEL) {
                     s32 size = (bpDmaList[0].end - bpDmaList[0].start) >> 2;
                     *loadedEnd = *loadedStart + size;
                 }
                 break;
-            } else if (bp == entityData) {
+            } else if (bp == blueprint) {
                 if (bp->flags & ENTITY_FLAGS_HAS_ANIMATED_MODEL) {
                     s32 size = (entDmaList[0].end - entDmaList[0].start) >> 2;
                     *loadedEnd = *loadedStart + size;
@@ -2023,52 +2022,51 @@ s32 is_entity_data_loaded(Entity* entity, EntityBlueprint* entityData, s32* load
     return ret;
 }
 
-void load_simple_entity_data(Entity* entity, EntityBlueprint* entityData, s32 listIndex) {
+void load_simple_entity_data(Entity* entity, EntityBlueprint* bp, s32 listIndex) {
     s32 loadedStart;
     s32 loadedEnd;
     s32 entitySize;
     u32 temp;
-    s32 sizeTemp;
+    s32 totalSize;
 
     entity->vertexSegment = 0xA;
     if (!gGameStatusPtr->isBattle) {
-        sizeTemp = wEntityBlueprintSize;
+        totalSize = wEntityDataLoadedSize;
     } else {
-        sizeTemp = bEntityBlueprintSize;
+        totalSize = bEntityDataLoadedSize;
     }
 
-    if (is_entity_data_loaded(entity, entityData, &loadedStart, &loadedEnd)) {
-        if (sizeTemp + ((entityData->dma.end - entityData->dma.start) >> 2) > 0x5FFCU) {
+    if (is_entity_data_loaded(entity, bp, &loadedStart, &loadedEnd)) {
+        if (totalSize + ((bp->dma.end - bp->dma.start) >> 2) > 0x5FFCU) {
             get_entity_type(entity->listIndex);
             get_entity_type(entity->listIndex);
             PANIC();
         }
-        entitySize = (entityData->dma.end - entityData->dma.start) >> 2;
-        entity->vertexData = gEntityHeapBase - sizeTemp * 4 - entitySize * 4;
-        temp = dma_copy(entityData->dma.start, entityData->dma.end, entity->vertexData);
-        sizeTemp += temp / 4;
+        entitySize = (bp->dma.end - bp->dma.start) >> 2;
+        entity->gfxBaseAddr = (void*)(gEntityHeapBase - totalSize * 4 - entitySize * 4);
+        totalSize += dma_copy(bp->dma.start, bp->dma.end, entity->gfxBaseAddr) >> 2;
         get_entity_type(entity->listIndex);
     } else {
-        entitySize = (entityData->dma.end - entityData->dma.start) >> 2;
-        entity->vertexData = (gEntityHeapBase - (loadedStart * 4)) - (entitySize * 4);
+        entitySize = (bp->dma.end - bp->dma.start) >> 2;
+        entity->gfxBaseAddr = (void*)(gEntityHeapBase - loadedStart * 4 - entitySize * 4);
         get_entity_type(entity->listIndex);
     }
 
     if (!gGameStatusPtr->isBattle) {
-        wEntityBlueprintSize = sizeTemp;
+        wEntityDataLoadedSize = totalSize;
     } else {
-        bEntityBlueprintSize = sizeTemp;
+        bEntityDataLoadedSize = totalSize;
     }
 }
 
 void load_split_entity_data(Entity* entity, EntityBlueprint* entityData, s32 listIndex) {
-    s32 s5 = FALSE;
+    s32 swizzlePointers = FALSE;
     s32 s2;
     s32 loadedStart, loadedEnd;
-    s32 s0;
+    void* animBaseAddr;
     s32 v0, v00;
-    s32 renderCommandList;
-    s32 s22;
+    s16* animationScript;
+    StaticAnimatorNode** animationNodes;
     s32 s00;
     s32 specialSize;
     s32 dma1size;
@@ -2104,16 +2102,17 @@ void load_split_entity_data(Entity* entity, EntityBlueprint* entityData, s32 lis
                 is_entity_data_loaded(entity, entityData, &loadedStart, &loadedEnd);
             }
             specialSize -= 0x1000;
-            dma1size = dma_copy(dmaList[0].start, dmaList[0].end, gEntityHeapBottom + specialSize * 4) / 4;
-            entity->vertexData = gEntityHeapBottom + specialSize * 4;
-            dma_copy(dmaList[1].start, dmaList[1].end, gEntityHeapBottom + specialSize * 4 + dma1size * 4);
-            s0 = gEntityHeapBottom + specialSize * 4 + dma1size * 4;
-            s5 = TRUE;
+
+            dma1size = dma_copy(dmaList[0].start, dmaList[0].end, (void*)(gEntityHeapBottom + specialSize * 4)) / 4;
+            entity->gfxBaseAddr = (void*)(gEntityHeapBottom + specialSize * 4);
+            dma_copy(dmaList[1].start, dmaList[1].end, (void*)(gEntityHeapBottom + specialSize * 4 + dma1size * 4));
+            animBaseAddr = (void*)(gEntityHeapBottom + specialSize * 4 + dma1size * 4);
+            swizzlePointers = TRUE;
         } else if (is_entity_data_loaded(entity, entityData, &loadedStart, &loadedEnd)) {
             if (!gGameStatusPtr->isBattle) {
-                totalLoaded = wEntityBlueprintSize;
+                totalLoaded = wEntityDataLoadedSize;
             } else {
-                totalLoaded = bEntityBlueprintSize;
+                totalLoaded = bEntityDataLoadedSize;
             }
 
             if ((totalLoaded + ((dmaList[0].end - dmaList[0].start) >> 2)) > 0x5FFCU) {
@@ -2127,25 +2126,25 @@ void load_split_entity_data(Entity* entity, EntityBlueprint* entityData, s32 lis
             }
 
             dma2size_1 = dma_copy(dmaList[0].start, dmaList[0].end, dmaList[0].start + ((gEntityHeapBase - totalLoaded * 4 - (s32)dmaList[0].end) >> 2) * 4) >> 2;
-            entity->vertexData = gEntityHeapBase - totalLoaded * 4 - dma2size_1 * 4;
+            entity->gfxBaseAddr = (void*)(gEntityHeapBase - totalLoaded * 4 - dma2size_1 * 4);
             totalLoaded += dma2size_1;
 
             dma2size_2 = dma_copy(dmaList[1].start, dmaList[1].end, dmaList[1].start + ((gEntityHeapBase - totalLoaded * 4 - (s32)dmaList[1].end) >> 2) * 4) >> 2;
-            s0 = gEntityHeapBase - totalLoaded * 4 - dma2size_2 * 4;
+            animBaseAddr = (void*)(gEntityHeapBase - totalLoaded * 4 - dma2size_2 * 4);
             totalLoaded += dma2size_2;
             get_entity_type(entity->listIndex);
 
             if (!gGameStatusPtr->isBattle) {
-                wEntityBlueprintSize = totalLoaded;
+                wEntityDataLoadedSize = totalLoaded;
             } else {
-                bEntityBlueprintSize = totalLoaded;
+                bEntityDataLoadedSize = totalLoaded;
             }
-            s5 = TRUE;
+            swizzlePointers = TRUE;
         } else {
             u32 temp = (dmaList[0].end - dmaList[0].start) >> 2;
-            entity->vertexData = gEntityHeapBase - loadedStart * 4 - temp * 4;
+            entity->gfxBaseAddr = (void*)(gEntityHeapBase - loadedStart * 4 - temp * 4);
             temp = (dmaList[1].end - dmaList[1].start) >> 2;
-            s0 = gEntityHeapBase - loadedEnd * 4 - temp * 4;
+            animBaseAddr = (void*)(gEntityHeapBase - loadedEnd * 4 - temp * 4);
             get_entity_type(entity->listIndex);
         }
     } else {
@@ -2154,13 +2153,13 @@ void load_split_entity_data(Entity* entity, EntityBlueprint* entityData, s32 lis
         update_model_animator(entity->virtualModelIndex);
         return;
     }
-    renderCommandList = entityData->renderCommandList;
-    s22 = s0 + (s32)entityData->modelAnimationNodes;
-    if (s5) {
-        entity_anim_make_vertex_pointers(entityData, s0, entity->vertexData);
+    animationScript = entityData->renderCommandList;
+    animationNodes = (StaticAnimatorNode**)((s32)animBaseAddr + (s32)entityData->modelAnimationNodes);
+    if (swizzlePointers) {
+        entity_swizzle_anim_pointers(entityData, animBaseAddr, entity->gfxBaseAddr);
     }
-    entity->virtualModelIndex = create_mesh_animator(renderCommandList, s0);
-    load_mesh_animator_tree(entity->virtualModelIndex, s22);
+    entity->virtualModelIndex = create_mesh_animator(animationScript, animBaseAddr);
+    load_mesh_animator_tree(entity->virtualModelIndex, animationNodes);
     update_model_animator(entity->virtualModelIndex);
     entity->flags |= ENTITY_FLAGS_HAS_ANIMATED_MODEL;
 }
@@ -2181,33 +2180,33 @@ s32 func_80111790(EntityBlueprint* data) {
 }
 
 void entity_free_static_data(EntityBlueprint* data) {
-    s32 i;
+    s32 freeSlot;
     s32 size;
     EntityBlueprint* bp;
 
-    for (i = 0; i < 30; i++) {
-        bp = wEntityBlueprint[i];
+    for (freeSlot = 0; freeSlot < MAX_ENTITIES; freeSlot++) {
+        bp = wEntityBlueprint[freeSlot];
         if (bp == NULL) {
             break;
         }
     }
 
-    if (i < 30) {
-        bp = wEntityBlueprint[i - 1];
+    if (freeSlot < MAX_ENTITIES) {
+        bp = wEntityBlueprint[freeSlot - 1];
         if (bp == data) {
             if (bp->flags & ENTITY_FLAGS_HAS_ANIMATED_MODEL) {
                 DmaEntry* dmaList = bp->dmaList;
                 size = ((dmaList[0].end - dmaList[0].start) >> 2);
                 size += ((dmaList[1].end - dmaList[1].start) >> 2);
                 if (!func_80111790(bp)) {
-                    wEntityBlueprint[i - 1] = NULL;
-                    wEntityBlueprintSize -= size;
+                    wEntityBlueprint[freeSlot - 1] = NULL;
+                    wEntityDataLoadedSize -= size;
                 }
             } else {
                 size = (bp->dma.end - bp->dma.start) >> 2;
                 if (!func_80111790(bp)) {
-                    wEntityBlueprint[i - 1] = NULL;
-                    wEntityBlueprintSize -= size;
+                    wEntityBlueprint[freeSlot - 1] = NULL;
+                    wEntityDataLoadedSize -= size;
                 }
             }
         }
@@ -2217,14 +2216,11 @@ void entity_free_static_data(EntityBlueprint* data) {
 s32 create_entity(EntityBlueprint* bp, ...) {
     va_list ap;
     EntityBlueprint** bpPtr;
-    f32 x;
-    f32 y;
-    f32 z;
+    f32 x, y, z;
     f32 rotY;
-    s32 i;
     s32 listIndex;
     Entity* entity;
-    s32* a;
+    s32* args;
 
     va_start(ap, bp);
     // needed to match
@@ -2238,11 +2234,11 @@ s32 create_entity(EntityBlueprint* bp, ...) {
     z = va_arg(ap, s32);
     rotY = va_arg(ap, s32);
 
-    a = &CreateEntityVarArgBuffer[2];
+    args = &CreateEntityVarArgBuffer[2];
 
-    *a-- = 0;
-    *a-- = 0;
-    *a = 0;
+    *args-- = 0;
+    *args-- = 0;
+    *args = 0;
 
     for (listIndex = 3; listIndex > 0; listIndex--) {
         s32 arg = va_arg(ap, s32);
@@ -2250,7 +2246,7 @@ s32 create_entity(EntityBlueprint* bp, ...) {
         if (arg == MAKE_ENTITY_END) {
             break;
         }
-        *a++ = arg;
+        *args++ = arg;
     }
 
     va_end(ap);
@@ -2278,7 +2274,7 @@ s32 create_entity(EntityBlueprint* bp, ...) {
     entity->updateMatrixOverride = NULL;
     entity->blueprint = bp;
     entity->scriptReadPos = bp->updateEntityScript;
-    entity->scriptDelay = entity->scriptReadPos != NULL;
+    entity->scriptDelay = entity->scriptReadPos != NULL ? 1 : 0;
     entity->savedReadPos[0] = bp->updateEntityScript;
     entity->updateScriptCallback = NULL;
     entity->flags = bp->flags | ENTITY_FLAGS_CREATED;
@@ -2299,10 +2295,10 @@ s32 create_entity(EntityBlueprint* bp, ...) {
     entity->aabb.z = bp->aabbSize[2];
     entity->unk_05 = 1;
     entity->unk_08 = -1;
-    entity->alpha = -1;
+    entity->alpha = 255;
     entity->virtualModelIndex = -1;
     entity->shadowIndex = -1;
-    entity->vertexData = NULL;
+    entity->gfxBaseAddr = NULL;
 
     if (!(bp->flags & ENTITY_FLAGS_HAS_ANIMATED_MODEL)) {
         if (bp->dma.start != 0) {
@@ -2316,7 +2312,7 @@ s32 create_entity(EntityBlueprint* bp, ...) {
         load_split_entity_data(entity, bp, listIndex);
     }
 
-    if (bp->entityType != ENTITY_TYPE_SHADOW && (entity->flags & (ENTITY_FLAGS_SET_SHADOW_FLAG200 | ENTITY_FLAGS_100))) {
+    if (bp->entityType != ENTITY_TYPE_SHADOW && (entity->flags & (ENTITY_FLAGS_FIXED_SHADOW_SIZE | ENTITY_FLAGS_HAS_SHADOW))) {
         create_entity_shadow(entity, x, y, z);
     }
 
@@ -2338,7 +2334,7 @@ s32 create_entity(EntityBlueprint* bp, ...) {
     return entity->listIndex;
 }
 
-s32 create_shadow_from_data(ShadowBlueprint* data, f32 x, f32 y, f32 z) {
+s32 create_shadow_from_data(ShadowBlueprint* bp, f32 x, f32 y, f32 z) {
     Shadow* shadow;
     s32 i;
 
@@ -2354,8 +2350,8 @@ s32 create_shadow_from_data(ShadowBlueprint* data, f32 x, f32 y, f32 z) {
     (*gCurrentShadowListPtr)[i] = shadow;
     mem_clear(shadow, sizeof(*shadow));
     shadow->listIndex = i;
-    shadow->flags = data->flags | ENTITY_FLAGS_CREATED;
-    shadow->alpha = 0x80;
+    shadow->flags = bp->flags | ENTITY_FLAGS_CREATED;
+    shadow->alpha = 128;
     shadow->unk_06 = 0x80;
     shadow->position.x = x;
     shadow->position.y = y;
@@ -2364,16 +2360,16 @@ s32 create_shadow_from_data(ShadowBlueprint* data, f32 x, f32 y, f32 z) {
     shadow->scale.y = 1.0f;
     shadow->scale.z = 1.0f;
 
-    if (data->animModelNode != NULL) {
+    if (bp->animModelNode != NULL) {
         shadow->flags |= ENTITY_FLAGS_HAS_ANIMATED_MODEL;
-        shadow->entityModelID = create_model_animator(data->renderCommandList);
-        load_model_animator_tree(shadow->entityModelID, data->animModelNode);
+        shadow->entityModelID = create_model_animator(bp->renderCommandList);
+        load_model_animator_tree(shadow->entityModelID, bp->animModelNode);
     } else {
-        shadow->entityModelID = load_entity_model(data->renderCommandList);
+        shadow->entityModelID = load_entity_model(bp->renderCommandList);
     }
 
-    if (data->onCreateCallback != NULL) {
-        data->onCreateCallback(shadow);
+    if (bp->onCreateCallback != NULL) {
+        bp->onCreateCallback(shadow);
     }
     update_shadow_transform_matrix(shadow);
     return shadow->listIndex;
@@ -2446,7 +2442,7 @@ ApiStatus UseDynamicShadow(Evt* script, s32 isInitialCall) {
 
         entity->flags |= ENTITY_FLAGS_HAS_DYNAMIC_SHADOW;
         shadow = get_shadow_by_index(entity->shadowIndex);
-        shadow->flags |= ENTITY_FLAGS_400000;
+        shadow->flags |= ENTITY_FLAGS_SHADOW_POS_DIRTY;
     } else {
         entity->flags &= ~ENTITY_FLAGS_HAS_DYNAMIC_SHADOW;
     }
@@ -2467,16 +2463,16 @@ ApiStatus AssignScript(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE1;
 }
 
-ApiStatus AssignAreaFlag(Evt* script, s32 isInitialCall) {
+ApiStatus AssignSwitchFlag(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     if (isInitialCall == TRUE) {
-        s32 temp_s0 = evt_get_variable(script, *args++);
+        s32 areaFlag = evt_get_variable(script, *args++);
         Entity* entity = get_entity_by_index(gLastCreatedEntityIndex);
+        SwitchData* data = entity->dataBuf.swtch;
 
-        // TODO find proper struct for the dataBuf
-        ((s16*)(entity->dataBuf.unk))[16] = temp_s0;
-        if (get_area_flag(temp_s0) != 0) {
+        data->areaFlagIndex = areaFlag;
+        if (get_area_flag(areaFlag) != 0) {
             entity->flags |= ENTITY_FLAGS_PENDING_INSTANCE_DELETE;
         }
         return ApiStatus_DONE2;
@@ -2517,10 +2513,9 @@ ApiStatus AssignPanelFlag(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     if (isInitialCall == TRUE) {
-        // TODO find proper struct for the dataBuf
-        s16* dataBuf = (s16*)get_entity_by_index(gLastCreatedEntityIndex)->dataBuf.unk;
+        HiddenPanelData* data = get_entity_by_index(gLastCreatedEntityIndex)->dataBuf.hiddenPanel;
 
-        dataBuf[3] = evt_get_variable_index(script, *args++);
+        data->pickupVar = evt_get_variable_index(script, *args++);
         return ApiStatus_DONE2;
     }
 
@@ -2531,10 +2526,9 @@ ApiStatus AssignCrateFlag(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     if (isInitialCall == TRUE) {
-        // TODO find proper struct for the dataBuf
-        s16* dataBuf = (s16*)get_entity_by_index(gLastCreatedEntityIndex)->dataBuf.unk;
+        WoodenCrateData* data = get_entity_by_index(gLastCreatedEntityIndex)->dataBuf.crate;
 
-        dataBuf[2] = evt_get_variable_index(script, *args++);
+        data->globalFlagIndex = evt_get_variable_index(script, *args++);
         return ApiStatus_DONE2;
     }
 
@@ -2546,8 +2540,8 @@ s32 create_entity_shadow(Entity* entity, f32 x, f32 y, f32 z) {
     s32 type;
     s16 shadowIndex;
 
-    if (staticFlags & 0x200) {
-        if (staticFlags & 0x800) {
+    if (staticFlags & ENTITY_FLAGS_FIXED_SHADOW_SIZE) {
+        if (staticFlags & ENTITY_FLAGS_SQUARE_SHADOW) {
             type = 2;
         } else {
             type = 3;
@@ -2559,38 +2553,38 @@ s32 create_entity_shadow(Entity* entity, f32 x, f32 y, f32 z) {
     shadowIndex = create_shadow_type(type, x, y, z);
     entity->shadowIndex = shadowIndex;
 
-    get_shadow_by_index(shadowIndex)->flags |= 0xC00000;
+    get_shadow_by_index(shadowIndex)->flags |= ENTITY_FLAGS_DARK_SHADOW | ENTITY_FLAGS_SHADOW_POS_DIRTY;
 
     return entity->shadowIndex;
 }
 
 s32 create_shadow_type(s32 type, f32 x, f32 y, f32 z) {
-    s32 setFlag200 = FALSE;
-    ShadowBlueprint* data = &CircularShadowA;
+    s32 isFixedSize = FALSE;
+    ShadowBlueprint* bp = &CircularShadowA;
     s32 shadowIndex;
 
     switch (type) {
         case 2:
-            setFlag200 = TRUE;
+            isFixedSize = TRUE;
         case 0:
-            data = &CircularShadowA;
+            bp = &CircularShadowA;
             break;
         case 3:
-            setFlag200 = TRUE;
+            isFixedSize = TRUE;
         case 1:
-            data = &SquareShadow;
+            bp = &SquareShadow;
             break;
         case 5:
-            setFlag200 = TRUE;
+            isFixedSize = TRUE;
         case 4:
-            data = &CircularShadowB;
+            bp = &CircularShadowB;
             break;
     }
 
-    shadowIndex = create_shadow_from_data(data, x, y, z);
+    shadowIndex = create_shadow_from_data(bp, x, y, z);
 
-    if (setFlag200) {
-        get_shadow_by_index(shadowIndex)->flags |= 0x200;
+    if (isFixedSize) {
+        get_shadow_by_index(shadowIndex)->flags |= ENTITY_FLAGS_FIXED_SHADOW_SIZE;
     }
 
     return shadowIndex;
@@ -2617,7 +2611,7 @@ void update_entity_shadow_position(Entity* entity) {
         } else {
             u8 alphaTemp;
 
-            if (shadow->flags & ENTITY_FLAGS_800000) {
+            if (shadow->flags & ENTITY_FLAGS_DARK_SHADOW) {
                 alphaTemp = 160;
             } else {
                 alphaTemp = 128;
@@ -2626,8 +2620,8 @@ void update_entity_shadow_position(Entity* entity) {
         }
 
         if (!(entity->flags & ENTITY_FLAGS_HAS_DYNAMIC_SHADOW)) {
-            if (shadow->flags & ENTITY_FLAGS_400000) {
-                shadow->flags &= ~ENTITY_FLAGS_400000;
+            if (shadow->flags & ENTITY_FLAGS_SHADOW_POS_DIRTY) {
+                shadow->flags &= ~ENTITY_FLAGS_SHADOW_POS_DIRTY;
             } else {
                 return;
             }
@@ -2643,7 +2637,7 @@ void update_entity_shadow_position(Entity* entity) {
 
         origHitLength = hitLength;
 
-        if (shadow->flags & ENTITY_FLAGS_SET_SHADOW_FLAG200) {
+        if (shadow->flags & ENTITY_FLAGS_FIXED_SHADOW_SIZE) {
             hitLength = 212.5f;
             shadow->scale.x = entity->aabb.x / hitLength;
             shadow->scale.z = entity->aabb.z / hitLength;
@@ -2692,7 +2686,7 @@ s32 entity_raycast_down(f32* x, f32* y, f32* z, f32* hitYaw, f32* hitPitch, f32*
     hitID = -1;
     ret = FALSE;
 
-    if ((entityID >= 0) && ((get_entity_type(entityID) != 0xC) || (hitNx == 0.0f && hitNz == 0.0f && hitNy == 1.0))) {
+    if ((entityID >= 0) && ((get_entity_type(entityID) != ENTITY_TYPE_PUSH_BLOCK) || (hitNx == 0.0f && hitNz == 0.0f && hitNy == 1.0))) {
         hitID = entityID | COLLISION_WITH_ENTITY_BIT;
     }
 

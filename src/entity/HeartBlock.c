@@ -429,7 +429,7 @@ EntityModelScript Entity_HeartBlockContent_RenderScriptAfterHit = STANDARD_ENTIT
 EntityModelScript Entity_HeartBlock_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(Entity_HeartBlock_Render, RENDER_MODE_SURFACE_XLU_LAYER3);
 
 EntityBlueprint Entity_HeartBlockFrame = {
-    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200,
+    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_FIXED_SHADOW_SIZE,
     .typeDataSize = sizeof(BlockData),
     .renderCommandList = Entity_HeartBlock_RenderScript,
     .modelAnimationNodes = 0,
@@ -442,7 +442,7 @@ EntityBlueprint Entity_HeartBlockFrame = {
 };
 
 EntityBlueprint Entity_HeartBlockContent = {
-    .flags = ENTITY_FLAGS_SKIP_UPDATE_INVERSE_ROTATION_MATRIX,
+    .flags = ENTITY_FLAGS_DISABLE_COLLISION,
     .typeDataSize = sizeof(HeartBlockContentData),
     .renderCommandList = Entity_HeartBlockContent_RenderScriptIdle,
     .modelAnimationNodes = 0,
@@ -455,7 +455,7 @@ EntityBlueprint Entity_HeartBlockContent = {
 };
 
 EntityBlueprint Entity_HeartBlock = {
-    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200,
+    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_FIXED_SHADOW_SIZE,
     .typeDataSize = sizeof(BlockData),
     .renderCommandList = Entity_HeartBlock_RenderScript,
     .modelAnimationNodes = 0,

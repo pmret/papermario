@@ -266,7 +266,7 @@ void entity_MulticoinBlock_spawn_coin(Entity* entity) {
         data->empty = TRUE;
         set_entity_commandlist(get_entity_by_index(create_entity(&Entity_InertYellowBlock,
             (s32)entity->position.x, (s32)entity->position.y, (s32)entity->position.z, (s32)entity->rotation.y, MAKE_ENTITY_END)), Entity_CreatedInertBlock_Script);
-        entity->flags |= (ENTITY_FLAGS_SKIP_UPDATE_INVERSE_ROTATION_MATRIX | ENTITY_FLAGS_PENDING_INSTANCE_DELETE);
+        entity->flags |= (ENTITY_FLAGS_DISABLE_COLLISION | ENTITY_FLAGS_PENDING_INSTANCE_DELETE);
     }
 }
 
@@ -287,7 +287,7 @@ void entity_MulticoinBlock_update_timer(Entity* entity) {
 void entity_MulticoinBlock_idle(Entity* entity) {
     BlockData* data = entity->dataBuf.block;
 
-    if (entity->collisionFlags & ENTITY_COLLISION_BLOCK_HIT) {
+    if (entity->collisionFlags & ENTITY_COLLISION_PARTNER) {
         exec_entity_commandlist(entity);
         return;
     }
@@ -295,7 +295,7 @@ void entity_MulticoinBlock_idle(Entity* entity) {
     entity_base_block_idle(entity);
     if (data->empty) {
         create_entity(&Entity_InertYellowBlock, (s32)entity->position.x, (s32)entity->position.y, (s32)entity->position.z, (s32)entity->rotation.y, MAKE_ENTITY_END);
-        entity->flags |= (ENTITY_FLAGS_SKIP_UPDATE_INVERSE_ROTATION_MATRIX | ENTITY_FLAGS_PENDING_INSTANCE_DELETE);
+        entity->flags |= (ENTITY_FLAGS_DISABLE_COLLISION | ENTITY_FLAGS_PENDING_INSTANCE_DELETE);
     }
 }
 
@@ -305,7 +305,7 @@ void entity_MulticoinBlock_check_if_inactive(Entity* entity) {
     if (data->gameFlagIndex != 0xFFFF) {
         if (get_global_flag(data->gameFlagIndex) != 0) {
             create_entity(&Entity_InertYellowBlock, (s32)entity->position.x, (s32)entity->position.y, (s32)entity->position.z, (s32)entity->rotation.y, MAKE_ENTITY_END);
-            entity->flags |= (ENTITY_FLAGS_SKIP_UPDATE_INVERSE_ROTATION_MATRIX | ENTITY_FLAGS_PENDING_INSTANCE_DELETE);
+            entity->flags |= (ENTITY_FLAGS_DISABLE_COLLISION | ENTITY_FLAGS_PENDING_INSTANCE_DELETE);
         }
     }
 }
@@ -336,7 +336,7 @@ s32 entity_block_handle_collision(Entity* entity) {
         }
         return TRUE;
     }
-    if (entity->collisionFlags & ENTITY_COLLISION_BLOCK_HIT) {
+    if (entity->collisionFlags & ENTITY_COLLISION_PARTNER) {
         exec_entity_commandlist(entity);
         return TRUE;
     }
@@ -488,7 +488,7 @@ EntityScript Entity_CreatedInertBlock_Script = {
 EntityScript Entity_BreakingBlock_Script = {
     es_RestartBoundScript
     es_SetFlags(ENTITY_FLAGS_HIDDEN)
-    es_SetFlags(ENTITY_FLAGS_SKIP_UPDATE_INVERSE_ROTATION_MATRIX)
+    es_SetFlags(ENTITY_FLAGS_DISABLE_COLLISION)
     es_Call(entity_breakable_block_create_shattering_entity)
     es_SetCallback(NULL, 1)
     es_SetFlags(ENTITY_FLAGS_PENDING_INSTANCE_DELETE)
@@ -498,7 +498,7 @@ EntityScript Entity_BrickBlock_Script = {
     es_SetCallback(entity_BrickBlock_idle, 0)
     es_Call(entity_start_script)
     es_SetFlags(ENTITY_FLAGS_HIDDEN)
-    es_SetFlags(ENTITY_FLAGS_SKIP_UPDATE_INVERSE_ROTATION_MATRIX)
+    es_SetFlags(ENTITY_FLAGS_DISABLE_COLLISION)
     es_Call(entity_breakable_block_create_shattering_entity)
     es_PlaySound(SOUND_HIT_BLOCK)
     es_SetCallback(NULL, 2)
@@ -544,7 +544,7 @@ EntityModelScript Entity_BrickBlock_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(
 EntityModelScript Entity_PowBlock_RenderScript = STANDARD_ENTITY_MODEL_SCRIPT(Entity_PowBlock_Render, RENDER_MODE_SURFACE_OPA);
 
 EntityBlueprint Entity_InertYellowBlock = {
-    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200,
+    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_FIXED_SHADOW_SIZE,
     .typeDataSize = sizeof(BlockData),
     .renderCommandList = Entity_InertYellowBlock_RenderScript,
     .modelAnimationNodes = 0,
@@ -557,7 +557,7 @@ EntityBlueprint Entity_InertYellowBlock = {
 };
 
 EntityBlueprint Entity_InertRedBlock = {
-    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200,
+    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_FIXED_SHADOW_SIZE,
     .typeDataSize = sizeof(BlockData),
     .renderCommandList = Entity_InertRedBlock_RenderScript,
     .modelAnimationNodes = 0,
@@ -570,7 +570,7 @@ EntityBlueprint Entity_InertRedBlock = {
 };
 
 EntityBlueprint Entity_BrickBlock = {
-    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200 | ENTITY_FLAGS_80,
+    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_FIXED_SHADOW_SIZE | ENTITY_FLAGS_80,
     .typeDataSize = sizeof(BlockData),
     .renderCommandList = Entity_BrickBlock_RenderScript,
     .modelAnimationNodes = 0,
@@ -583,7 +583,7 @@ EntityBlueprint Entity_BrickBlock = {
 };
 
 EntityBlueprint Entity_MulticoinBlock = {
-    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200,
+    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_FIXED_SHADOW_SIZE,
     .typeDataSize = sizeof(BlockData),
     .renderCommandList = Entity_MulticoinBrick_RenderScript,
     .modelAnimationNodes = 0,
@@ -596,7 +596,7 @@ EntityBlueprint Entity_MulticoinBlock = {
 };
 
 EntityBlueprint Entity_Hammer1Block = {
-    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200 | ENTITY_FLAGS_80,
+    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_FIXED_SHADOW_SIZE | ENTITY_FLAGS_80,
     .typeDataSize = sizeof(BlockData),
     .renderCommandList = Entity_Hammer1Block_RenderScript,
     .modelAnimationNodes = 0,
@@ -609,7 +609,7 @@ EntityBlueprint Entity_Hammer1Block = {
 };
 
 EntityBlueprint Entity_Hammer1Block_WideHitbox = {
-    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200 | ENTITY_FLAGS_80,
+    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_FIXED_SHADOW_SIZE | ENTITY_FLAGS_80,
     .typeDataSize = sizeof(BlockData),
     .renderCommandList = Entity_Hammer1Block_RenderScript,
     .modelAnimationNodes = 0,
@@ -622,7 +622,7 @@ EntityBlueprint Entity_Hammer1Block_WideHitbox = {
 };
 
 EntityBlueprint Entity_Hammer1Block_TallHitbox = {
-    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200 | ENTITY_FLAGS_80,
+    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_FIXED_SHADOW_SIZE | ENTITY_FLAGS_80,
     .typeDataSize = sizeof(BlockData),
     .renderCommandList = Entity_Hammer1Block_RenderScript,
     .modelAnimationNodes = 0,
@@ -635,7 +635,7 @@ EntityBlueprint Entity_Hammer1Block_TallHitbox = {
 };
 
 EntityBlueprint Entity_Hammer1BlockTiny = {
-    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200 | ENTITY_FLAGS_80,
+    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_FIXED_SHADOW_SIZE | ENTITY_FLAGS_80,
     .typeDataSize = sizeof(BlockData),
     .renderCommandList = Entity_Hammer1Block_RenderScript,
     .modelAnimationNodes = 0,
@@ -648,7 +648,7 @@ EntityBlueprint Entity_Hammer1BlockTiny = {
 };
 
 EntityBlueprint Entity_Hammer2Block = {
-    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200 | ENTITY_FLAGS_80,
+    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_FIXED_SHADOW_SIZE | ENTITY_FLAGS_80,
     .typeDataSize = sizeof(BlockData),
     .renderCommandList = Entity_Hammer2Block_RenderScript,
     .modelAnimationNodes = 0,
@@ -661,7 +661,7 @@ EntityBlueprint Entity_Hammer2Block = {
 };
 
 EntityBlueprint Entity_Hammer2Block_WideHitbox = {
-    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200 | ENTITY_FLAGS_80,
+    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_FIXED_SHADOW_SIZE | ENTITY_FLAGS_80,
     .typeDataSize = sizeof(BlockData),
     .renderCommandList = Entity_Hammer2Block_RenderScript,
     .modelAnimationNodes = 0,
@@ -674,7 +674,7 @@ EntityBlueprint Entity_Hammer2Block_WideHitbox = {
 };
 
 EntityBlueprint Entity_Hammer2Block_TallHitbox = {
-    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200 | ENTITY_FLAGS_80,
+    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_FIXED_SHADOW_SIZE | ENTITY_FLAGS_80,
     .typeDataSize = sizeof(BlockData),
     .renderCommandList = Entity_Hammer2Block_RenderScript,
     .modelAnimationNodes = 0,
@@ -687,7 +687,7 @@ EntityBlueprint Entity_Hammer2Block_TallHitbox = {
 };
 
 EntityBlueprint Entity_Hammer2BlockTiny = {
-    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200 | ENTITY_FLAGS_80,
+    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_FIXED_SHADOW_SIZE | ENTITY_FLAGS_80,
     .typeDataSize = sizeof(BlockData),
     .renderCommandList = Entity_Hammer2Block_RenderScript,
     .modelAnimationNodes = 0,
@@ -700,7 +700,7 @@ EntityBlueprint Entity_Hammer2BlockTiny = {
 };
 
 EntityBlueprint Entity_Hammer3Block = {
-    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200 | ENTITY_FLAGS_80,
+    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_FIXED_SHADOW_SIZE | ENTITY_FLAGS_80,
     .typeDataSize = sizeof(BlockData),
     .renderCommandList = Entity_Hammer3Block_RenderScript,
     .modelAnimationNodes = 0,
@@ -713,7 +713,7 @@ EntityBlueprint Entity_Hammer3Block = {
 };
 
 EntityBlueprint Entity_Hammer3Block_WideHitbox = {
-    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200 | ENTITY_FLAGS_80,
+    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_FIXED_SHADOW_SIZE | ENTITY_FLAGS_80,
     .typeDataSize = sizeof(BlockData),
     .renderCommandList = Entity_Hammer3Block_RenderScript,
     .modelAnimationNodes = 0,
@@ -726,7 +726,7 @@ EntityBlueprint Entity_Hammer3Block_WideHitbox = {
 };
 
 EntityBlueprint Entity_Hammer3Block_TallHitbox = {
-    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200 | ENTITY_FLAGS_80,
+    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_FIXED_SHADOW_SIZE | ENTITY_FLAGS_80,
     .typeDataSize = sizeof(BlockData),
     .renderCommandList = Entity_Hammer3Block_RenderScript,
     .modelAnimationNodes = 0,
@@ -739,7 +739,7 @@ EntityBlueprint Entity_Hammer3Block_TallHitbox = {
 };
 
 EntityBlueprint Entity_Hammer3BlockTiny = {
-    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_SET_SHADOW_FLAG200 | ENTITY_FLAGS_80,
+    .flags = ENTITY_FLAGS_4000 | ENTITY_FLAGS_FIXED_SHADOW_SIZE | ENTITY_FLAGS_80,
     .typeDataSize = sizeof(BlockData),
     .renderCommandList = Entity_Hammer3Block_RenderScript,
     .modelAnimationNodes = 0,
