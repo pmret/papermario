@@ -529,12 +529,12 @@ void bgm_player_init(BGMPlayer* player, s32 arg1, s32 arg2, AuGlobals* arg3) {
     player->segmentReadPos = NULL;
     player->segmentStartPos = NULL;
     player->unk_70 = 0;
-    player->masterTempoFadeTime = 0;
-    player->masterTempoFadeTempo = 0;
-    player->masterTempoFadeDelta = 0;
-    player->masterVolumeFadeTime = 0;
-    player->masterVolumeFadeVolume = 0;
-    player->masterVolumeFadeDelta = 0;
+    player->masterTempoTime = 0;
+    player->masterTempoTarget = 0;
+    player->masterTempoStep = 0;
+    player->masterVolumeTime = 0;
+    player->masterVolumeTarget = 0;
+    player->masterVolumeStep = 0;
     player->masterPitchShift = 0;
     player->unk_20E = 0;
     player->unk_220 = 0;
@@ -705,7 +705,7 @@ void snd_initialize_bgm_player(BGMPlayer* player) {
         track->subTrackFineTune = 0;
         track->segTrackVolume = 0x7F;
         track->unk_4C = 0;
-        track->unk2C = 0x7FFF0000;
+        track->unkVolume = 0x7FFF0000;
         track->unk_04 = 0;
         track->prevReadPos = 0;
         track->unk_3E = 0;
@@ -713,12 +713,12 @@ void snd_initialize_bgm_player(BGMPlayer* player) {
         track->trackTremoloTime = 0;
         track->trackTremoloAmount = 0;
         track->trackTremoloSpeed = 0;
-        track->subTrackVolumeFadeDelta = 0;
-        track->subTrackVolumeFadeVolume = 0;
-        track->subTrackVolumeFadeTime = 0;
-        track->unk30 = 0;
-        track->unk34 = 0;
-        track->unk36 = 0;
+        track->subTrackVolumeStep = 0;
+        track->subTrackVolumeTarget = 0;
+        track->subTrackVolumeTime = 0;
+        track->unkVolumeStep = 0;
+        track->unkVolumeTarget = 0;
+        track->unkVolumeTime = 0;
         track->unk_4D = 0;
         track->unk_4E = 0;
         track->unk_4F = 0;
@@ -751,12 +751,12 @@ void snd_initialize_bgm_player(BGMPlayer* player) {
     player->masterVolume = 0x7F000000;
     player->fadeSongName = 0;
     player->unk_74 = 0;
-    player->masterTempoFadeTempo = 0;
+    player->masterTempoTarget = 0;
     player->masterPitchShift = 0;
     player->unk_20E = 0;
-    player->masterVolumeFadeTime = 0;
-    player->masterVolumeFadeVolume = 0;
-    player->masterVolumeFadeDelta = 0;
+    player->masterVolumeTime = 0;
+    player->masterVolumeTarget = 0;
+    player->masterVolumeStep = 0;
     player->proxMixValue = 0;
     player->proxMixID = 0;
     player->proxMixVolume = 0;
@@ -838,8 +838,8 @@ void snd_bgm_state_2(BGMPlayer* player) {
     u16 continueReading = TRUE;
     u32 cmd;
 
-    player->masterTempoFadeDelta = 0;
-    player->masterTempoFadeTime = 0;
+    player->masterTempoStep = 0;
+    player->masterTempoTime = 0;
     while (continueReading) {
         cmd = *player->segmentReadPos++;
         if (cmd == BGM_SEGMENT_END) {
@@ -962,25 +962,25 @@ void func_8004EC68(BGMPlayer *player) {
     bVolumeFading = FALSE;
     bFinished = FALSE;
 
-    if (player->masterTempoFadeTime != 0) {
-        player->masterTempoFadeTime--;
-        if (player->masterTempoFadeTime == 0) {
-            player->masterTempo = player->masterTempoFadeTempo;
-            player->masterTempoFadeTempo = 0;
-            player->masterTempoFadeDelta = 0;
+    if (player->masterTempoTime != 0) {
+        player->masterTempoTime--;
+        if (player->masterTempoTime == 0) {
+            player->masterTempo = player->masterTempoTarget;
+            player->masterTempoTarget = 0;
+            player->masterTempoStep = 0;
         } else {
-            player->masterTempo += player->masterTempoFadeDelta;
+            player->masterTempo += player->masterTempoStep;
         }
         player->sampleRate = player->masterTempo * 10;
     }
-    if (player->masterVolumeFadeTime != 0) {
-        player->masterVolumeFadeTime--;
-        if (player->masterVolumeFadeTime == 0) {
-            player->masterVolume = player->masterVolumeFadeVolume;
-            player->masterVolumeFadeVolume = 0;
-            player->masterVolumeFadeDelta = 0;
+    if (player->masterVolumeTime != 0) {
+        player->masterVolumeTime--;
+        if (player->masterVolumeTime == 0) {
+            player->masterVolume = player->masterVolumeTarget;
+            player->masterVolumeTarget = 0;
+            player->masterVolumeStep = 0;
         } else {
-            player->masterVolume += player->masterVolumeFadeDelta;
+            player->masterVolume += player->masterVolumeStep;
         }
         bVolumeFading = TRUE;
     }
@@ -1031,21 +1031,21 @@ void func_8004EC68(BGMPlayer *player) {
             } else {
                 track->changed.volume = 0;
             }
-            if (track->subTrackVolumeFadeTime != 0) {
-                track->subTrackVolumeFadeTime--;
-                if (track->subTrackVolumeFadeTime == 0) {
-                    track->subTrackVolume = track->subTrackVolumeFadeVolume;
+            if (track->subTrackVolumeTime != 0) {
+                track->subTrackVolumeTime--;
+                if (track->subTrackVolumeTime == 0) {
+                    track->subTrackVolume = track->subTrackVolumeTarget;
                 } else {
-                    track->subTrackVolume += track->subTrackVolumeFadeDelta;
+                    track->subTrackVolume += track->subTrackVolumeStep;
                 }
                 track->changed.volume = 1;
             }
-            if (track->unk36 != 0) {
-                track->unk36--;
-                if (track->unk36 == 0) {
-                    track->unk2C = track->unk34 << 0x10;
+            if (track->unkVolumeTime != 0) {
+                track->unkVolumeTime--;
+                if (track->unkVolumeTime == 0) {
+                    track->unkVolume = track->unkVolumeTarget << 0x10;
                 } else {
-                    track->unk2C += track->unk30;
+                    track->unkVolume += track->unkVolumeStep;
                 }
                 track->changed.volume = 1;
             }
@@ -1180,8 +1180,14 @@ void func_8004EC68(BGMPlayer *player) {
                                     } else {
                                         note->unk_08 = note->noteVelocity * drumInfo->volume;
                                     }
-                                    voice->unk_40 = (((((player->masterVolume >> 0x15) * (track->subTrackVolume >> 0x15)) * (track->unk2C >> 0x15)) >> 0x14) * (track->segTrackVolume * note->unk_08)) >> 0x10;
-                                    note->adjustedPitch = (((s8) track->subTrackFineTune) + (drumInfo->keyBase + track->subTrackCoarseTune)) - note->ins->keyBase;
+                                    voice->adjustedVolume = ((
+                                        ((player->masterVolume >> 0x15) * (track->subTrackVolume >> 0x15) * (track->unkVolume >> 0x15)) >> 0x14)
+                                        * (track->segTrackVolume * note->unk_08)) >> 0x10;
+                                    note->adjustedPitch =
+                                        drumInfo->keyBase
+                                        + track->subTrackCoarseTune
+                                        + track->subTrackFineTune
+                                        - note->ins->keyBase;
                                     temp = (note->adjustedPitch + track->segTrackTune) + player->unk_20E;
                                     if (drumInfo->unk_07 != 0) {
                                         note->unk_14 = func_800505E4(player->unk_50, temp, drumInfo->unk_07);
@@ -1199,8 +1205,10 @@ void func_8004EC68(BGMPlayer *player) {
                                         voice->reverb = drumInfo->unk_06;
                                     }
                                 } else {
-                                    note->unk_08 = (((((player->masterVolume >> 0x15) * (track->subTrackVolume >> 0x15)) * (track->unk2C >> 0x15)) >> 0x14) * (track->segTrackVolume * note->noteVelocity)) >> 9;
-                                    voice->unk_40 = note->unk_08;
+                                    note->unk_08 = ((
+                                        ((player->masterVolume >> 0x15) * (track->subTrackVolume >> 0x15) * (track->unkVolume >> 0x15)) >> 0x14)
+                                        * (track->segTrackVolume * note->noteVelocity)) >> 9;
+                                    voice->adjustedVolume = note->unk_08;
                                     note->ins = track->instrument;
                                     note->adjustedPitch =
                                         (notePitch * 100)
@@ -1291,7 +1299,7 @@ void func_8004EC68(BGMPlayer *player) {
                                     }
                                 }
                                 if (track->changed.volume) {
-                                    voice->unk_40 = (((((player->masterVolume >> 0x15) * (track->subTrackVolume >> 0x15)) * (track->unk2C >> 0x15)) >> 0x14) * (track->segTrackVolume * note->unk_08)) >> 0x10;
+                                    voice->adjustedVolume = (((((player->masterVolume >> 0x15) * (track->subTrackVolume >> 0x15)) * (track->unkVolume >> 0x15)) >> 0x14) * (track->segTrackVolume * note->unk_08)) >> 0x10;
                                     voice->unk_flags_3D |= 0x20;
                                 }
                             } else {
@@ -1333,9 +1341,9 @@ void func_8004EC68(BGMPlayer *player) {
                                     }
                                 }
                                 if (track->changed.volume) {
-                                    s32 tempVolume = ((player->masterVolume >> 0x15) * (track->subTrackVolume >> 0x15) * (track->unk2C >> 0x15)) >> 0x14;
+                                    s32 tempVolume = ((player->masterVolume >> 0x15) * (track->subTrackVolume >> 0x15) * (track->unkVolume >> 0x15)) >> 0x14;
                                     note->unk_08 = (tempVolume * (track->segTrackVolume * note->noteVelocity)) >> 9;
-                                    voice->unk_40 = note->unk_08;
+                                    voice->adjustedVolume = note->unk_08;
                                     voice->unk_flags_3D |= 0x20;
                                     voice->pan = track->subTrackPan;
                                     voice->reverb = track->subTrackReverb;
@@ -1368,9 +1376,9 @@ void snd_BGMCmd_E0_MasterTempo(BGMPlayer* player, BGMPlayerTrack* track) {
     tempo = snd_bpm_to_tempo(player, bpm);
     player->masterTempo = tempo;
     player->sampleRate = tempo * 10;
-    player->masterTempoFadeTime = 0;
-    player->masterTempoFadeTempo = 0;
-    player->masterTempoFadeDelta = 0;
+    player->masterTempoTime = 0;
+    player->masterTempoTarget = 0;
+    player->masterTempoStep = 0;
 }
 
 s32 snd_bpm_to_tempo(BGMPlayer* player, u32 tempo) {
@@ -1396,9 +1404,9 @@ void snd_BGMCmd_E1_MasterVolume(BGMPlayer* player, BGMPlayerTrack* track) {
     }
 
     player->masterVolume = volume;
-    player->masterVolumeFadeTime = 0;
-    player->masterVolumeFadeVolume = 0;
-    player->masterVolumeFadeDelta = 0;
+    player->masterVolumeTime = 0;
+    player->masterVolumeTarget = 0;
+    player->masterVolumeStep = 0;
     player->volumeChanged = TRUE;
     track->changed.volume = TRUE;
 }
@@ -1433,9 +1441,9 @@ void snd_BGMCmd_E4_MasterTempoFade(BGMPlayer* player, BGMPlayerTrack* track) {
         time = 1;
     }
 
-    player->masterTempoFadeTime = time;
-    player->masterTempoFadeTempo = tempo;
-    player->masterTempoFadeDelta = (tempo - player->masterTempo) / time;
+    player->masterTempoTime = time;
+    player->masterTempoTarget = tempo;
+    player->masterTempoStep = (tempo - player->masterTempo) / time;
 }
 
 void snd_BGMCmd_E5_MasterVolumeFade(BGMPlayer* player, BGMPlayerTrack* track) {
@@ -1450,9 +1458,9 @@ void snd_BGMCmd_E5_MasterVolumeFade(BGMPlayer* player, BGMPlayerTrack* track) {
         time = 1;
     }
 
-    player->masterVolumeFadeTime = time;
-    player->masterVolumeFadeVolume = volume;
-    player->masterVolumeFadeDelta = (volume - player->masterVolume) / time;
+    player->masterVolumeTime = time;
+    player->masterVolumeTarget = volume;
+    player->masterVolumeStep = (volume - player->masterVolume) / time;
 }
 
 void snd_BGMCmd_E8_TrackOverridePatch(BGMPlayer* player, BGMPlayerTrack* track) {
@@ -1484,9 +1492,9 @@ void snd_BGMCmd_F6_TrackVolumeFade(BGMPlayer* player, BGMPlayerTrack* track) {
             time = 1;
         }
 
-        track->subTrackVolumeFadeTime = time;
-        track->subTrackVolumeFadeVolume = volume;
-        track->subTrackVolumeFadeDelta = (volume - track->subTrackVolume) / time;
+        track->subTrackVolumeTime = time;
+        track->subTrackVolumeTarget = volume;
+        track->subTrackVolumeStep = (volume - track->subTrackVolume) / time;
     }
 }
 
@@ -1616,7 +1624,7 @@ void snd_BGMCmd_FC_Jump(BGMPlayer* player, BGMPlayerTrack* track) {
     track->isDrumTrack = args[2];
     if (track->unk_4D != 0) {
         track->unk_4D = 0;
-        track->unk2C = 0;
+        track->unkVolume = 0;
         for (i = track->unk_52; i < track->unk_53; i++) {
             AlUnkVoice* temp_a0 = &player->globals->voices[i];
             if ((temp_a0->unk_45 == player->unk_234) && (temp_a0->unk_1C != 0)) {
@@ -1633,7 +1641,7 @@ void snd_BGMCmd_FC_Jump(BGMPlayer* player, BGMPlayerTrack* track) {
     track->unk_4C = 0;
     track->segTrackTune = 0;
     track->trackTremoloTime = 0;
-    track->subTrackVolumeFadeTime = 0;
+    track->subTrackVolumeTime = 0;
     track->unk_57 = 0;
     track->subtrackReverbType = player->defaultReverbType;
 }
@@ -1835,9 +1843,9 @@ void func_80050770(BGMPlayer* player, f32 arg1) {
     player->unk_D0 = arg1;
     player->masterTempo = snd_bpm_to_tempo(player, player->masterTempoBPM);
     player->sampleRate = player->masterTempo * 10;
-    player->masterTempoFadeTime = 0;
-    player->masterTempoFadeTempo = 0;
-    player->masterTempoFadeDelta = 0;
+    player->masterTempoTime = 0;
+    player->masterTempoTarget = 0;
+    player->masterTempoStep = 0;
 }
 
 void func_80050818(BGMPlayer* player, s32 arg1) {
@@ -1874,13 +1882,13 @@ void func_80050888(BGMPlayer* player, BGMPlayerTrack* track, s32 target, s32 dur
     } else if (duration > 1000) {
         duration = 1000;
     }
-    if (target == track->unk2C) {
-        track->unk36 = 0;
+    if (target == track->unkVolume) {
+        track->unkVolumeTime = 0;
         return;
     }
-    track->unk36 = duration;
-    track->unk34 = target;
-    track->unk30 = ((target << 0x10) - track->unk2C) / duration;
+    track->unkVolumeTime = duration;
+    track->unkVolumeTarget = target;
+    track->unkVolumeStep = ((target << 0x10) - track->unkVolume) / duration;
 }
 
 void func_80050900(BGMPlayer* player) {

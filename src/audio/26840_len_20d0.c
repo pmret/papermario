@@ -780,8 +780,8 @@ void func_8004C578(SoundManager* manager, SoundPlayer* player, AlUnkVoice* arg2,
                  }
                 
                 volume = snd_get_scaled_volume(manager, player);
-                if (arg2->unk_40 != volume) {
-                    arg2->unk_40 = volume;
+                if (arg2->adjustedVolume != volume) {
+                    arg2->adjustedVolume = volume;
                     arg2->unk_flags_3D |= 0x20;
                 }
             }
@@ -815,7 +815,7 @@ void func_8004C578(SoundManager* manager, SoundPlayer* player, AlUnkVoice* arg2,
                 }
     
                 arg2->reverb = player->reverb;
-                arg2->unk_40 = snd_get_scaled_volume(manager, player);
+                arg2->adjustedVolume = snd_get_scaled_volume(manager, player);
                 arg2->unk_14.unk_00 = player->unk_10.unk_00;
                 arg2->unk_14.unk_04 = player->unk_10.unk_04;
                 arg2->instrument = player->sfxInstrumentRef;
@@ -1019,9 +1019,9 @@ void snd_set_voice_volume(AlUnkVoice* voice, SoundManager* manager, SoundPlayer*
         * (player->volumeLerp.current >> 0x10) >> 0xF;
     
     if (player->sfxParamsFlags & 4 || player->masterVolume == 0) {
-        voice->unk_40 = x;
+        voice->adjustedVolume = x;
     } else {
-        voice->unk_40 = (x * player->masterVolume) >> 0xF;
+        voice->adjustedVolume = (x * player->masterVolume) >> 0xF;
     }
 }
 

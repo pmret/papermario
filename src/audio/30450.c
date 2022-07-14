@@ -829,8 +829,8 @@ void func_8005610C(void) {
     globals->unk_90 = globals->unk_arr_94;
 }
 
-void func_80056144(UnkFuncAl arg0, s32 arg1) {
-    gSoundGlobals->unk_A4[arg1] = arg0;
+void func_80056144(UnkFuncAl func, s32 index) {
+    gSoundGlobals->unk_A4[index] = func;
 }
 
 void audio_set_stereo(void) {
