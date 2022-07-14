@@ -660,17 +660,17 @@ AuResult func_80053F80(u32 ambSoundID) {
             snd_read_rom(fileEntry.offset, mseqFile, fileEntry.data & 0xFFFFFF);
             manager->mseqFiles[0] = mseqFile;
 
-            mseqFile = AU_FILE_RELATIVE((fileEntry.data + 0x40) & 0xFFFFFF, mseqFile);
+            mseqFile = AU_FILE_RELATIVE(mseqFile, (fileEntry.data + 0x40) & 0xFFFFFF);
             if (SBN_LOOKUP(ambSoundID + 1, AU_FMT_MSEQ, fileEntry) == AU_RESULT_OK) {
                 snd_read_rom(fileEntry.offset, mseqFile, fileEntry.data & 0xFFFFFF);
                 manager->mseqFiles[1] = mseqFile;
 
-                mseqFile = AU_FILE_RELATIVE((fileEntry.data + 0x40) & 0xFFFFFF, mseqFile);
+                mseqFile = AU_FILE_RELATIVE(mseqFile, (fileEntry.data + 0x40) & 0xFFFFFF);
                 if (SBN_LOOKUP(ambSoundID + 2, AU_FMT_MSEQ, fileEntry) == AU_RESULT_OK) {
                     snd_read_rom(fileEntry.offset, mseqFile, fileEntry.data & 0xFFFFFF);
                     manager->mseqFiles[2] = mseqFile;
 
-                    mseqFile = AU_FILE_RELATIVE((fileEntry.data + 0x40) & 0xFFFFFF, mseqFile);
+                    mseqFile = AU_FILE_RELATIVE(mseqFile, (fileEntry.data + 0x40) & 0xFFFFFF);
                     if (SBN_LOOKUP(ambSoundID + 3, AU_FMT_MSEQ, fileEntry) == AU_RESULT_OK) {
                         snd_read_rom(fileEntry.offset, mseqFile, fileEntry.data & 0xFFFFFF);
                         manager->mseqFiles[3] = mseqFile;
@@ -950,13 +950,13 @@ void snd_swizzle_BK_instruments(s32 bkFileOffset, SoundBank* bank, InstrumentGro
                     instrument->base += bkFileOffset;
                 }
                 if (instrument->loopPredictor != NULL) {
-                    instrument->loopPredictor = AU_FILE_RELATIVE(instrument->loopPredictor, bank);
+                    instrument->loopPredictor = AU_FILE_RELATIVE(bank, instrument->loopPredictor);
                 }
                 if (instrument->predictor != NULL) {
-                    instrument->predictor = AU_FILE_RELATIVE(instrument->predictor, bank);
+                    instrument->predictor = AU_FILE_RELATIVE(bank, instrument->predictor);
                 }
                 if (instrument->unkOffset != NULL) {
-                    instrument->unkOffset = AU_FILE_RELATIVE(instrument->unkOffset, bank);
+                    instrument->unkOffset = AU_FILE_RELATIVE(bank, instrument->unkOffset);
                 }
                 instrument->unk_25 = arg4;
                 instrument->pitchRatio = *((s32*)(&instrument->pitchRatio)) / outputRate; // what is happening here?

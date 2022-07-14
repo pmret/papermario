@@ -34,7 +34,7 @@ typedef u8* WaveData;
 #define	N_AL_AUX_R_OUT	        0x930
 
 #define ALIGN16_(val) (((val) + 0xF) & 0xFFF0)
-#define AU_FILE_RELATIVE(base,offset) ((void*)((s32)(base) + (s32)(offset)))
+#define AU_FILE_RELATIVE(base,offset) ((void*)((s32)(offset) + (s32)(base)))
 
 #define AUDIO_HEAP_SIZE 0x56000
  // NU_AU_AUDIO_SAMPLES ?

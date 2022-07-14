@@ -70,11 +70,11 @@ void func_8004D510(BGMPlayer* player) {
                     if (segmentOffset == 0) {
                         segmentOffset = bgmData->segments[0];
                     }
-                    player->segmentStartPos = AU_FILE_RELATIVE(segmentOffset << 2, bgmFile);
-                    player->segmentReadPos = AU_FILE_RELATIVE(segmentOffset << 2, bgmFile);
+                    player->segmentStartPos = AU_FILE_RELATIVE(bgmFile, segmentOffset << 2);
+                    player->segmentReadPos = AU_FILE_RELATIVE(bgmFile, segmentOffset << 2);
 
                     if (bgmData->drums != 0) {
-                        player->drumsInfo = AU_FILE_RELATIVE(bgmData->drums << 2, player->bgmFile);
+                        player->drumsInfo = AU_FILE_RELATIVE(player->bgmFile, bgmData->drums << 2);
                         player->bgmDrumCount = bgmData->drumCount;
                         for (i = 0; i < player->bgmDrumCount; i++) {
                             BGMDrumInfo* drum = &player->drumsInfo[i];
@@ -89,7 +89,7 @@ void func_8004D510(BGMPlayer* player) {
                     }
 
                     if (bgmData->instruments != 0) {
-                        player->instrumentsInfo = AU_FILE_RELATIVE(bgmData->instruments << 2, player->bgmFile);
+                        player->instrumentsInfo = AU_FILE_RELATIVE(player->bgmFile, bgmData->instruments << 2);
                         player->bgmInstrumentCount = bgmData->instrumentCount;
                         return;
                     }
@@ -181,11 +181,11 @@ s32 snd_dispatch_bgm_player_event(SongUpdateEvent* event) {
             }
             player->curSegmentID = variation;
 
-            player->segmentStartPos = AU_FILE_RELATIVE(fileInfo->segments[variation] << 2, player->bgmFile);
+            player->segmentStartPos = AU_FILE_RELATIVE(player->bgmFile, fileInfo->segments[variation] << 2);
             player->segmentReadPos = player->segmentStartPos;
 
             if (fileInfo->drums != 0) {
-                player->drumsInfo = AU_FILE_RELATIVE(fileInfo->drums << 2, player->bgmFile);
+                player->drumsInfo = AU_FILE_RELATIVE(player->bgmFile, fileInfo->drums << 2);
                 player->bgmDrumCount = fileInfo->drumCount;
 
                 for (i = 0; i < player->bgmDrumCount; i++) {
@@ -200,7 +200,7 @@ s32 snd_dispatch_bgm_player_event(SongUpdateEvent* event) {
                 player->bgmDrumCount = 0;
             }
             if (fileInfo->instruments != 0) {
-                player->instrumentsInfo = AU_FILE_RELATIVE(fileInfo->instruments << 2, player->bgmFile);
+                player->instrumentsInfo = AU_FILE_RELATIVE(player->bgmFile, fileInfo->instruments << 2);
                 player->bgmInstrumentCount = fileInfo->instrumentCount;
             } else {
                 player->instrumentsInfo = NULL;
@@ -1596,7 +1596,7 @@ void snd_BGMCmd_FD(BGMPlayer* player, BGMPlayerTrack* track) {
 }
 
 void snd_BGMCmd_FE(BGMPlayer* player, BGMPlayerTrack* track) {
-    AuFilePos readPos = AU_FILE_RELATIVE(player->seqCmdArgs.UnkCmdFE.offset, player->bgmFile);
+    AuFilePos readPos = AU_FILE_RELATIVE(player->bgmFile, player->seqCmdArgs.UnkCmdFE.offset);
 
     track->unk_3E = player->seqCmdArgs.UnkCmdFE.unk_02;
     track->unk_04 = track->bgmReadPos;
@@ -1607,12 +1607,12 @@ void snd_BGMCmd_FC_Jump(BGMPlayer* player, BGMPlayerTrack* track) {
     AuFilePos args;
     u32 i;
 
-    args = AU_FILE_RELATIVE(player->seqCmdArgs.Jump.unk_00, player->bgmFile);
+    args = AU_FILE_RELATIVE(player->bgmFile, player->seqCmdArgs.Jump.unk_00);
     if (player->proxMixID < player->seqCmdArgs.Jump.unk_02) {
         args += player->proxMixID * 3;
     }
     track->prevReadPos = track->bgmReadPos;
-    track->bgmReadPos = AU_FILE_RELATIVE((args[0] << 8) + args[1], player->bgmFile);
+    track->bgmReadPos = AU_FILE_RELATIVE(player->bgmFile, (args[0] << 8) + args[1]);
     track->isDrumTrack = args[2];
     if (track->unk_4D != 0) {
         track->unk_4D = 0;

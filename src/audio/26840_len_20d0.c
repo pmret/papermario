@@ -386,13 +386,13 @@ void snd_load_sfx_groups_from_SEF(SoundManager* sndMgr) {
     
     for (i = 0; i < sections; i++) {
         if (sefData->sections[i] != 0) {
-            sndMgr->normalSounds[i] = AU_FILE_RELATIVE(sefData->sections[i], sefData);
+            sndMgr->normalSounds[i] = AU_FILE_RELATIVE(sefData, sefData->sections[i]);
         }
     }
 
     if (sefData->hasExtraSection == 1) {
         if (sefData->section2000 != 0) {
-            sndMgr->soundsWithBit2000 = AU_FILE_RELATIVE(sefData->section2000, sefData);
+            sndMgr->soundsWithBit2000 = AU_FILE_RELATIVE(sefData, sefData->section2000);
         }
     }
 }
@@ -1216,7 +1216,7 @@ void snd_SEFCmd_0D(SoundManager* manager, SoundPlayer* player) {
 
 void snd_SEFCmd_0E(SoundManager* manager, SoundPlayer* player) {
     AuFilePos buf = player->sefDataReadPos;
-    AuFilePos pos = AU_FILE_RELATIVE((buf[1] << 8) + buf[2], manager->sefData);
+    AuFilePos pos = AU_FILE_RELATIVE(manager->sefData, (buf[1] << 8) + buf[2]);
     u8 type = buf[0];
     player->sefDataReadPos = &buf[3];
     
@@ -1247,7 +1247,7 @@ void snd_SEFCmd_0F(SoundManager* manager, SoundPlayer* player) {
 void snd_SEFCmd_10_Jump(SoundManager* manager, SoundPlayer* player) {
     AuFilePos buf = player->sefDataReadPos;
     player->sefReadStart = &buf[2];
-    player->sefDataReadPos = AU_FILE_RELATIVE((buf[0] << 8) + buf[1], manager->sefData);
+    player->sefDataReadPos = AU_FILE_RELATIVE(manager->sefData, (buf[0] << 8) + buf[1]);
 }
 
 void snd_SEFCmd_11_Restart(SoundManager* manager, SoundPlayer* player) {
@@ -1286,7 +1286,7 @@ void snd_SEFCmd_16(SoundManager* manager, SoundPlayer* player) {
     s32 offset = (buf[0] << 8) + buf[1];
 
     if (offset != 0) {
-        player->unk_18 = AU_FILE_RELATIVE(offset, manager->sefData);
+        player->unk_18 = AU_FILE_RELATIVE(manager->sefData, offset);
     } else {
         player->unk_18 = NULL;
     }
