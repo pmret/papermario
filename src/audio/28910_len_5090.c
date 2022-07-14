@@ -295,7 +295,7 @@ AuResult func_8004DB4C(SongUpdateEvent* s) {
                             player->fadeInfo.targetVolume = volume;
                             player->fadeInfo.fadeTime = (duration * 1000) / 5750;
                             player->fadeInfo.fadeStep = ((volume << 0x10) - player->fadeInfo.currentVolume.s32) / player->fadeInfo.fadeTime;
-                            player->fadeInfo.onCompleteCallback = s->variation; //TODO seems wrong
+                            player->fadeInfo.variation = s->variation;
                             if (s->unk14 == 1) {
                                 player->fadeSongName = songName;
                             }

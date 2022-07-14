@@ -660,17 +660,17 @@ AuResult func_80053F80(u32 ambSoundID) {
             snd_read_rom(fileEntry.offset, mseqFile, fileEntry.data & 0xFFFFFF);
             manager->mseqFiles[0] = mseqFile;
 
-            mseqFile = AU_FILE_RELATIVE(mseqFile, (fileEntry.data + 0x40) & 0xFFFFFF);
+            mseqFile = AU_FILE_RELATIVE((fileEntry.data + 0x40) & 0xFFFFFF, mseqFile);
             if (SBN_LOOKUP(ambSoundID + 1, AU_FMT_MSEQ, fileEntry) == AU_RESULT_OK) {
                 snd_read_rom(fileEntry.offset, mseqFile, fileEntry.data & 0xFFFFFF);
                 manager->mseqFiles[1] = mseqFile;
 
-                mseqFile = AU_FILE_RELATIVE(mseqFile, (fileEntry.data + 0x40) & 0xFFFFFF);
+                mseqFile = AU_FILE_RELATIVE((fileEntry.data + 0x40) & 0xFFFFFF, mseqFile);
                 if (SBN_LOOKUP(ambSoundID + 2, AU_FMT_MSEQ, fileEntry) == AU_RESULT_OK) {
                     snd_read_rom(fileEntry.offset, mseqFile, fileEntry.data & 0xFFFFFF);
                     manager->mseqFiles[2] = mseqFile;
 
-                    mseqFile = AU_FILE_RELATIVE(mseqFile, (fileEntry.data + 0x40) & 0xFFFFFF);
+                    mseqFile = AU_FILE_RELATIVE((fileEntry.data + 0x40) & 0xFFFFFF, mseqFile);
                     if (SBN_LOOKUP(ambSoundID + 3, AU_FMT_MSEQ, fileEntry) == AU_RESULT_OK) {
                         snd_read_rom(fileEntry.offset, mseqFile, fileEntry.data & 0xFFFFFF);
                         manager->mseqFiles[3] = mseqFile;
@@ -938,7 +938,7 @@ INCLUDE_ASM(s32, "audio/2e230_len_2190", snd_load_BK_to_bank, s32 bkFileOffset, 
 void snd_swizzle_BK_instruments(s32 bkFileOffset, SoundBank* bank, InstrumentGroup instruments, u32 instrumentCount, u8 arg4) {
     Instrument* defaultInstrument = gSoundGlobals->defaultInstrument;
     SoundBank* sb = bank;
-    f32 freq = gSoundGlobals->outputRate;
+    f32 outputRate = gSoundGlobals->outputRate;
     s32 i;
 
     if (sb->swizzled == 0) {
@@ -950,16 +950,16 @@ void snd_swizzle_BK_instruments(s32 bkFileOffset, SoundBank* bank, InstrumentGro
                     instrument->base += bkFileOffset;
                 }
                 if (instrument->loopPredictor != NULL) {
-                    instrument->loopPredictor += (s32) bank;
+                    instrument->loopPredictor = AU_FILE_RELATIVE(instrument->loopPredictor, bank);
                 }
                 if (instrument->predictor != NULL) {
-                    instrument->predictor = (u16*)((s32)instrument->predictor + (s32) bank);
+                    instrument->predictor = AU_FILE_RELATIVE(instrument->predictor, bank);
                 }
                 if (instrument->unkOffset != NULL) {
-                    instrument->unkOffset = (InstrumentEffect*)((s32) instrument->unkOffset + (s32) bank);
+                    instrument->unkOffset = AU_FILE_RELATIVE(instrument->unkOffset, bank);
                 }
                 instrument->unk_25 = arg4;
-                instrument->pitchRatio = *((s32*)(&instrument->pitchRatio)) / freq; // what is happening here?
+                instrument->pitchRatio = *((s32*)(&instrument->pitchRatio)) / outputRate; // what is happening here?
             } else {
                 instruments[i] = defaultInstrument;
             }
@@ -1091,11 +1091,11 @@ s32 func_80054D74(s32 arg0, s32 arg1) {
 
 void func_80054DA8(u32 arg0) {
     if (arg0 % 2 == 1) {
-        if (gSoundGlobals->unk_130C == 0) {
+        if (!gSoundGlobals->unk_130C) {
             gSoundGlobals->unk_130C = 2;
         }
     } else {
-        if (gSoundGlobals->unk_130C != 0) {
+        if (gSoundGlobals->unk_130C) {
             gSoundGlobals->unk_50 = 1;
             gSoundGlobals->unk_130C = 0;
         }

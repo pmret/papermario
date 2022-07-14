@@ -386,13 +386,13 @@ void snd_load_sfx_groups_from_SEF(SoundManager* sndMgr) {
     
     for (i = 0; i < sections; i++) {
         if (sefData->sections[i] != 0) {
-            sndMgr->normalSounds[i] = (s32*)(sefData->sections[i] + (s32)sefData);
+            sndMgr->normalSounds[i] = AU_FILE_RELATIVE(sefData->sections[i], sefData);
         }
     }
 
     if (sefData->hasExtraSection == 1) {
         if (sefData->section2000 != 0) {
-            sndMgr->soundsWithBit2000 = (s32*)(sefData->section2000 + (s32)sefData);
+            sndMgr->soundsWithBit2000 = AU_FILE_RELATIVE(sefData->section2000, sefData);
         }
     }
 }
@@ -605,7 +605,7 @@ void func_8004C0E4(SoundManager* manager, SoundPlayer* player, s8* readPos, Soun
         player->tuneLerp.time = 0;
         player->tuneLerp.step = 0;
         player->tuneLerp.goal = 0;
-        player->unk_80 = 0;
+        player->unk_80 = NULL;
         player->unk_84 = 0;
         player->soundC00 = 0;
         player->sfxParamsFlags = *player->sefDataReadPos++;
@@ -649,7 +649,7 @@ void _snd_stop_sound_by_id(SoundManager* manager, u32 soundID) {
         SoundPlayer* player = &manager->unk_16C[i];
         if (player->currentSoundID == (soundID & SOUND_ID_LOWER)) {
             player->sefDataReadPos = gBlankSEFData;
-            player->unk_80 = 0;
+            player->unk_80 = NULL;
             player->sfxParamsFlags = 1;
             player->unk_A9 = 0;
             player->unk_8E = 1;
@@ -666,7 +666,7 @@ void func_8004C300(SoundManager* manager, u32 soundID) {
         SoundPlayer* player = &manager->unk_16C[i];
         if (soundID == player->unk_99) {
             player->sefDataReadPos = gBlankSEFData;
-            player->unk_80 = 0;
+            player->unk_80 = NULL;
             player->sfxParamsFlags = 1;
             player->unk_A9 = 0;
             player->unk_8E = 1;
@@ -864,11 +864,11 @@ void func_8004C884(SoundManager* manager, SoundPlayer* player, AlUnkVoice* arg2,
         }
     }
 
-    if (player->unk_80 != 0) {
+    if (player->unk_80 != NULL) {
         temp_a0 = player->soundC00;
         if (temp_a0 == 1) {
-            player->sefDataReadPos = (s8*)player->unk_80;
-            player->unk_80 = 0;
+            player->sefDataReadPos = player->unk_80;
+            player->unk_80 = NULL;
             player->soundC00 = 0;
             player->unk_8E = temp_a0;
         }
@@ -1216,11 +1216,11 @@ void snd_SEFCmd_0D(SoundManager* manager, SoundPlayer* player) {
 
 void snd_SEFCmd_0E(SoundManager* manager, SoundPlayer* player) {
     AuFilePos buf = player->sefDataReadPos;
-    s32 pos = ((buf[1] << 8) + buf[2]) + (s32)manager->sefData;
+    AuFilePos pos = AU_FILE_RELATIVE((buf[1] << 8) + buf[2], manager->sefData);
     u8 type = buf[0];
     player->sefDataReadPos = &buf[3];
     
-    player->unk_84 = (s32)type;
+    player->unk_84 = type;
     switch (type) {
         case 1:
             player->unk_80 = pos;
@@ -1232,7 +1232,7 @@ void snd_SEFCmd_0E(SoundManager* manager, SoundPlayer* player) {
             player->unk_80 = pos;
             break;
         default:
-            player->unk_80 = 0;
+            player->unk_80 = NULL;
             break;
     }
 }
@@ -1247,7 +1247,7 @@ void snd_SEFCmd_0F(SoundManager* manager, SoundPlayer* player) {
 void snd_SEFCmd_10_Jump(SoundManager* manager, SoundPlayer* player) {
     AuFilePos buf = player->sefDataReadPos;
     player->sefReadStart = &buf[2];
-    player->sefDataReadPos = (s8*)(((buf[0] << 8) + buf[1]) + (s32)manager->sefData);
+    player->sefDataReadPos = AU_FILE_RELATIVE((buf[0] << 8) + buf[1], manager->sefData);
 }
 
 void snd_SEFCmd_11_Restart(SoundManager* manager, SoundPlayer* player) {
@@ -1286,7 +1286,7 @@ void snd_SEFCmd_16(SoundManager* manager, SoundPlayer* player) {
     s32 offset = (buf[0] << 8) + buf[1];
 
     if (offset != 0) {
-        player->unk_18 = (s32*)(offset + (s32)manager->sefData);
+        player->unk_18 = AU_FILE_RELATIVE(offset, manager->sefData);
     } else {
         player->unk_18 = NULL;
     }
@@ -1347,7 +1347,7 @@ void func_8004D4BC(SoundManager* manager) {
     for (i = 0; i < ARRAY_COUNT(manager->unk_16C); i++) {
         SoundPlayer* temp_v0 = &manager->unk_16C[i];
         temp_v0->sefDataReadPos = gBlankSEFData;
-        temp_v0->unk_80 = 0;
+        temp_v0->unk_80 = NULL;
         temp_v0->sfxParamsFlags = 1;
         temp_v0->unk_A9 = 0;
         temp_v0->unk_8E = 1;

@@ -46,7 +46,7 @@ void au_driver_init(AuSynDriver* driver, ALConfig* config) {
         voice->loadFilter.dc_dmaFunc = ((ALDMAproc (*)(NUDMAState**))(gSynDriverPtr->dmaNew))(&voice->loadFilter.dc_dmaState);
         voice->loadFilter.dc_lastsam = 0;
         voice->loadFilter.dc_first = 1;
-        voice->loadFilter.dc_memin = 0;
+        voice->loadFilter.dc_memin = NULL;
         voice->resampler.rs_state = alHeapAlloc(heap, 1, sizeof(*voice->resampler.rs_state));
         voice->resampler.delta = 0;
         voice->resampler.first = 1;

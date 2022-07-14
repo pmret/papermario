@@ -28,13 +28,13 @@ static s16 _getRate(f64 arg0, f64 arg1, s32 arg4, u16* arg5);
 // n_alAdpcmPull
 INCLUDE_ASM(s32, "audio/33450", func_80058050);
 
-static Acmd* _decodeChunk(Acmd* cmdBufPos, AuLoadFilter* arg1, s32 tsam, s32 nbytes, s16 output, s16 input, s32 flags) {
+static Acmd* _decodeChunk(Acmd* cmdBufPos, AuLoadFilter* filter, s32 tsam, s32 nbytes, s16 output, s16 input, s32 flags) {
     s32 endAddr;
     s32 endAlign;
     s32 paddedSize;
     
     if (nbytes > 0) {
-        endAddr = arg1->dc_dmaFunc(arg1->dc_memin, nbytes, arg1->dc_dmaState, arg1->instrument->unk_25); // ALDMAproc has an extra arg added
+        endAddr = filter->dc_dmaFunc(filter->dc_memin, nbytes, filter->dc_dmaState, filter->instrument->unk_25); // ALDMAproc has an extra arg added
         endAlign = endAddr & 7;
         nbytes += endAlign;
         paddedSize = nbytes + 8 - (nbytes & 7);
@@ -44,12 +44,12 @@ static Acmd* _decodeChunk(Acmd* cmdBufPos, AuLoadFilter* arg1, s32 tsam, s32 nby
     }
     
     if (flags & A_LOOP) {
-        aSetLoop(cmdBufPos++, K0_TO_PHYS(arg1->dc_lstate));
+        aSetLoop(cmdBufPos++, K0_TO_PHYS(filter->dc_lstate));
     }
 
-    n_aADPCMdec(cmdBufPos++, arg1->dc_state, flags, tsam << 1, endAlign, output);
+    n_aADPCMdec(cmdBufPos++, filter->dc_state, flags, tsam << 1, endAlign, output);
     
-    arg1->dc_first = 0;
+    filter->dc_first = 0;
     return cmdBufPos;
 }
 

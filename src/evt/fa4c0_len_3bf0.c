@@ -13,7 +13,7 @@ extern Evt* UnkSoundEvtScripts[10];
 extern s32 UnkSoundEvtIDs[10];
 extern PopupMenu D_802DB830;
 
-AuResult bgm_set_track_volumes(s32 playerIndex, s16 arg1);
+AuResult bgm_set_track_volumes(s32 playerIndex, s16 trackVolSet);
 
 static ApiStatus func_802D5B10(Evt* script, s32 isInitialCall);
 
@@ -139,9 +139,9 @@ ApiStatus AdjustMusicProximityMix(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetMusicTrackVolumes(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s16 trackLevelsID = evt_get_variable(script, *args++);
+    s16 trackVolSet = evt_get_variable(script, *args++);
 
-    bgm_set_track_volumes(0, trackLevelsID);
+    bgm_set_track_volumes(0, trackVolSet);
     return ApiStatus_DONE2;
 }
 

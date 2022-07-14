@@ -200,7 +200,10 @@ typedef struct Fade {
     /* 0x4 */ s32 fadeStep;
     /* 0x8 */ s16 targetVolume;
     /* 0xA */ s16 fadeTime;
+              union {
     /* 0xC */ UnkFuncAl onCompleteCallback;
+    /* 0xC */ s32 variation;
+              };
     // fields below are envelope?
     /* 0x10 */ VolumeField volScale;
     /* 0x14 */ s32 volScaleStep;
@@ -286,7 +289,7 @@ typedef struct AuLoadFilter {
     /* 0x28 */ s32 dc_sample;
     /* 0x2C */ s32 dc_lastsam;
     /* 0x30 */ s32 dc_first;
-    /* 0x34 */ s32 dc_memin;
+    /* 0x34 */ u8* dc_memin;
 } AuLoadFilter; // size = 0x34
 
 // based on ALResampler
@@ -422,7 +425,7 @@ typedef struct SoundPlayer {
     /* 0x18 */ s32* unk_18;
     /* 0x1C */ Instrument* sfxInstrumentRef;
     /* 0x20 */ Instrument sfxInstrument;
-    /* 0x50 */ s8* sefReadStart;
+    /* 0x50 */ AuFilePos sefReadStart;
     /* 0x54 */ SoundPlayChange changed;
     /* 0x58 */ f32 pitchRatio;
     /* 0x5C */ s16 sfxVolume;
@@ -437,7 +440,7 @@ typedef struct SoundPlayer {
     /* 0x7D */ u8 unk_7D;
     /* 0x7E */ u8 unk_7E;
     /* 0x7F */ u8 unk_7F;
-    /* 0x80 */ s32 unk_80;
+    /* 0x80 */ AuFilePos unk_80;
     /* 0x84 */ s8 unk_84;
     /* 0x85 */ u8 soundC00;
     /* 0x86 */ char unk_86[0x2];

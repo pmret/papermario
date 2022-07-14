@@ -275,24 +275,24 @@ s32 bgm_adjust_proximity(s32 playerIndex, s32 mix, s16 state) {
     return TRUE;
 }
 
-AuResult bgm_set_track_volumes(s32 playerIndex, s16 arg1) {
+AuResult bgm_set_track_volumes(s32 playerIndex, s16 trackVolSet) {
     MusicSettings* musicSetting = &gMusicSettings[playerIndex];
 
     if (!(musicSetting->flags & MUSIC_SETTINGS_FLAGS_1)) {
         return AU_RESULT_OK;
     }
 
-    return snd_song_set_track_volumes(musicSetting->songName, arg1);
+    return snd_song_set_track_volumes(musicSetting->songName, trackVolSet);
 }
 
-AuResult func_8014AB60(s32 playerIndex, s16 arg1) {
+AuResult bgm_clear_track_volumes(s32 playerIndex, s16 trackVolSet) {
     MusicSettings* musicSetting = &gMusicSettings[playerIndex];
 
     if (!(musicSetting->flags & MUSIC_SETTINGS_FLAGS_1)) {
         return AU_RESULT_OK;
     }
 
-    return snd_song_clear_track_volumes(musicSetting->songName, arg1);
+    return snd_song_clear_track_volumes(musicSetting->songName, trackVolSet);
 }
 
 AuResult bgm_set_variation(s32 playerIndex, s16 arg1) {
