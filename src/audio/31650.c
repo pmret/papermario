@@ -126,7 +126,7 @@ Acmd* alAudioFrame(Acmd* cmdList, s32* cmdLen, s16* outBuf, s32 outLen) {
     if (gActiveSynDriverPtr == NULL) {
         *cmdLen = 0;
     } else {
-        snd_add_sfx_output();
+        snd_update_players_main();
         if (D_80078E5C) {
             for (i = 0; i < gSynDriverPtr->num_pvoice; i++) {
                 pvoice = &gSynDriverPtr->pvoices[i];
@@ -137,7 +137,7 @@ Acmd* alAudioFrame(Acmd* cmdList, s32* cmdLen, s16* outBuf, s32 outLen) {
             D_80078E5C = FALSE;
         }
         while (outLen > 0) {
-            snd_update_sequence_players();
+            au_update_sequence_players();
             for (i = 0; i < gSynDriverPtr->num_pvoice; i++) {
                 pvoice = &gSynDriverPtr->pvoices[i];
 

@@ -22,7 +22,7 @@ BSS s32 timeFreezeMode;
 BSS s32 nuGfxZBuffer;
 BSS u32 nuContDataLockKey;
 BSS s32 __osViIntrCount;
-BSS s32 D_8009A5E8;
+BSS s32 BeginSoundUpdateCallback;
 BSS float D_8009A5EC;
 BSS u32 nuGfxCfbCounter;
 BSS s32 mdl_currentModelTreeNodeInfo;

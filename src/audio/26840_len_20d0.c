@@ -127,7 +127,7 @@ void (*SefCmdHandlers[])(SoundManager*, SoundPlayer*) = {
 	snd_SEFCmd_18
 };
 
-u8 gBlankSEFData[] = {
+u8 BlankSEFData[] = {
     0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00
@@ -163,20 +163,24 @@ void (*SeqCmdHandlers[])(BGMPlayer*, BGMPlayerTrack*) = {
 	snd_BGMCmd_NOP,
 	snd_BGMCmd_NOP,
 	snd_BGMCmd_FC_Jump,
-	snd_BGMCmd_FD,
-	snd_BGMCmd_FE,
+	snd_BGMCmd_FD_EventTrigger,
+	snd_BGMCmd_FE_Detour,
 	snd_BGMCmd_FF,
 };
 
 s8 SeqCmdArgCounts[] = {
-	2, 1, 1, 1, 4, 3, 2, 0, 2, 1, 1, 1, 1, 1, 1, 2, 3, 1, 1, 0, 2, 1, 3, 1, 0, 0, 0, 0, 3, 3, 3, 3
+	2, 1, 1, 1, 4, 3, 2, 0,
+    2, 1, 1, 1, 1, 1, 1, 2,
+    3, 1, 1, 0, 2, 1, 3, 1,
+    0, 0, 0, 0, 3, 3, 3, 3
 };
 
 s8 BgmDivisors[] = {
-    0x30, 0x18, 0x20, 0x28, 0x30, 0x38, 0x40, 0x30, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+    48, 24, 32, 40, 48, 56, 64, 48,
+     0,  0,  0,  0,  0,  0,  0,  0
 };
 
-u8 NullMseqData[] = {
+u8 BlankMseqData[] = {
     0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00,
@@ -301,7 +305,8 @@ void func_8004B440(SoundManager* manager, u8 arg1, u8 arg2, AuGlobals* arg3, u8 
 
     manager->soundData = arg3;
     manager->nextUpdateStep = 312500;
-    manager->nextUpdateInterval = manager->nextUpdateCounter = c;
+    manager->nextUpdateCounter = c;
+    manager->nextUpdateInterval = c;
     manager->unk_BC = arg1;
     manager->unk_BE = arg2;
 
@@ -319,7 +324,7 @@ void func_8004B440(SoundManager* manager, u8 arg1, u8 arg2, AuGlobals* arg3, u8 
     for (i = 0; i < ARRAY_COUNT(manager->unk_16C); i++) {
         SoundPlayer* sub = &manager->unk_16C[i];
 
-        sub->sefDataReadPos = 0;
+        sub->sefDataReadPos = NULL;
         sub->sfxVolume = 0;
         sub->unk_8E = 0;
         sub->unk_90 = 0;
@@ -414,7 +419,7 @@ void snd_clear_sfx_queue(SoundManager* manager) {
     manager->unk_162 = 0;
 }
 
-void snd_enqueue_sfx_event(SoundManager* manager, s32 soundID, s16 volume, s16 pitchShift, u8 pan) {
+void snd_enqueue_sfx_event(SoundManager* manager, u32 soundID, s16 volume, s16 pitchShift, u8 pan) {
     u32 queuePos = manager->sfxQueueNextPos;
     s32 queueAmt = manager->sfxQueueNextPos - manager->sfxQueuePosOffset;
 
@@ -426,7 +431,7 @@ void snd_enqueue_sfx_event(SoundManager* manager, s32 soundID, s16 volume, s16 p
         u32 queueNextPos = queuePos;
 
         manager->soundQueue[queueNextPos].soundID = soundID & 0xBFFF;
-        manager->soundQueue[queueNextPos].upperSoundID = (((u32) soundID >> 0x10) & 0x3FF);
+        manager->soundQueue[queueNextPos].upperSoundID = ((soundID >> 0x10) & 0x3FF);
         manager->soundQueue[queueNextPos].volume = volume;
         manager->soundQueue[queueNextPos].pitchShift = pitchShift;
         manager->soundQueue[queueNextPos].pan = pan;
@@ -440,14 +445,11 @@ void snd_enqueue_sfx_event(SoundManager* manager, s32 soundID, s16 volume, s16 p
     }
 }
 
-//TODO reference to D_80078370 saved too soon
-#ifdef NON_MATCHING
 void func_8004B748(SoundManager* manager) {
     SoundSFXEntry newEntry;
     SoundSFXEntry* sfxEntry;
     u32 k;
     s32 count;
-    u32 pos;
     u32 i;
     u32 j;
     
@@ -466,7 +468,7 @@ void func_8004B748(SoundManager* manager) {
             u16 sound2 = unkData->sound2;
             if (sound2 != 0) {
                 for (j = 0; j < ARRAY_COUNT(manager->unk_16C); j++) {
-                    if (sound2 == manager->unk_16C[j].currentSoundID) {
+                    if (manager->unk_16C[j].currentSoundID == sound2) {
                         newEntry.soundID = unkData->sound1;
                         newEntry.upperSoundID = 0;
                         newEntry.pitchShift = 0;
@@ -508,10 +510,10 @@ void func_8004B748(SoundManager* manager) {
     if (count < 0) {
         count += ARRAY_COUNT(manager->soundQueue);
     }
-    pos = manager->sfxQueuePosOffset;
+    j = manager->sfxQueuePosOffset;
     if (count > 0 && count < ARRAY_COUNT(manager->soundQueue)) {
         for (i = 0; i < count; i++) {
-            sfxEntry = &manager->soundQueue[pos];
+            sfxEntry = &manager->soundQueue[j];
             if (sfxEntry->soundID & 0x23FF) {
                 if (sfxEntry->soundID & 0x8000) {
                     _snd_stop_sound_by_id(manager, sfxEntry->soundID);
@@ -528,17 +530,14 @@ void func_8004B748(SoundManager* manager) {
             }
             sfxEntry->soundID = 0;
             
-            pos++;
-            if (pos >= ARRAY_COUNT(manager->soundQueue)) {
-                pos = 0;
+            j++;
+            if (j >= ARRAY_COUNT(manager->soundQueue)) {
+                j = 0;
             }
         }
         manager->sfxQueuePosOffset = manager->sfxQueueNextPos;
     }
 }
-#else
-INCLUDE_ASM(void, "audio/26840_len_20d0", func_8004B748, SoundManager* manager);
-#endif
 
 s32 func_8004B9E4(SoundManager* manager, s32 arg1) {
     s32 effectIdx = (u8) arg1;
@@ -648,7 +647,7 @@ void _snd_stop_sound_by_id(SoundManager* manager, u32 soundID) {
     for (i = 0; i < ARRAY_COUNT(manager->unk_16C); i++) {
         SoundPlayer* player = &manager->unk_16C[i];
         if (player->currentSoundID == (soundID & SOUND_ID_LOWER)) {
-            player->sefDataReadPos = gBlankSEFData;
+            player->sefDataReadPos = BlankSEFData;
             player->unk_80 = NULL;
             player->sfxParamsFlags = 1;
             player->unk_A9 = 0;
@@ -665,7 +664,7 @@ void func_8004C300(SoundManager* manager, u32 soundID) {
     for (i = 0; i < ARRAY_COUNT(manager->unk_16C); i++) {
         SoundPlayer* player = &manager->unk_16C[i];
         if (soundID == player->unk_99) {
-            player->sefDataReadPos = gBlankSEFData;
+            player->sefDataReadPos = BlankSEFData;
             player->unk_80 = NULL;
             player->sfxParamsFlags = 1;
             player->unk_A9 = 0;
@@ -721,7 +720,7 @@ s16 snd_sound_manager_update(SoundManager* manager) {
     start = manager->sfxPlayerSelector;
     for (i = start, end = start + 8; i < end; i++) {
         sndPlayer = &manager->unk_16C[i - manager->sfxPlayerSelector];
-        if (sndPlayer->sefDataReadPos != 0) {
+        if (sndPlayer->sefDataReadPos != NULL) {
             voice = &manager->soundData->voices[i];
             manager->currentVoice = voice;
             if (voice->unk_45 <= manager->unk_BC) {
@@ -1346,7 +1345,7 @@ void func_8004D4BC(SoundManager* manager) {
 
     for (i = 0; i < ARRAY_COUNT(manager->unk_16C); i++) {
         SoundPlayer* temp_v0 = &manager->unk_16C[i];
-        temp_v0->sefDataReadPos = gBlankSEFData;
+        temp_v0->sefDataReadPos = BlankSEFData;
         temp_v0->unk_80 = NULL;
         temp_v0->sfxParamsFlags = 1;
         temp_v0->unk_A9 = 0;

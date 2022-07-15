@@ -250,7 +250,7 @@ extern s16 gMusicMaxVolume;
 extern s16 gMusicCurrentVolume;
 extern s16 gMusicTargetVolume;
 extern MusicSettings gMusicSettings[4];
-extern MusicSettings D_8014F6F0;
+extern MusicSettings BlankMusicSettings;
 
 // OS
 extern OSThread D_800A4270; // idle thread, id 1

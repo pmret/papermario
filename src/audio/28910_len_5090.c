@@ -23,7 +23,7 @@ void func_8004D510(BGMPlayer* player) {
 
     segmentID = 0;
     unkType = -1;
-    player->unk_14++;
+    player->updateCounter++;
 
     if (player->unk_258 != 0) {
         if (player->unk_258 < ARRAY_COUNT(player->unk_238)) {
@@ -56,7 +56,7 @@ void func_8004D510(BGMPlayer* player) {
                     player->unk_58 = unkType & 0xFF;
                     player->unk_5A = unkType & 0xFF;
                     player->masterState = BGM_PLAY_STATE_3;
-                    player->sampleRate = BGM_SAMPLE_RATE;
+                    player->nextUpdateStep = BGM_SAMPLE_RATE;
                     if (unkType == 2) {
                         bgmFile = player->globals->dataBGM[1];
                     } else {
@@ -99,8 +99,8 @@ void func_8004D510(BGMPlayer* player) {
             } else {
                 if (player->unk_58 != 0) {
                     player->masterState = BGM_PLAY_STATE_4;
-                    player->unk_10 = 1;
-                    player->sampleRate = 1;
+                    player->nextUpdateCounter = 1;
+                    player->nextUpdateStep = 1;
                 } else {
                     func_8004DAA8(player);
                 }
@@ -109,17 +109,16 @@ void func_8004D510(BGMPlayer* player) {
     }
 }
 
-
 // Return values are being pushed into v0 in the wrong place
 // May depend on data decomp
 #ifdef NON_EQUIVALENT
 BGMPlayer* snd_get_player_with_song_name(s32 songString) {
-    SndGlobals* temp_v1 = gBGMPlayerA->data;
+    SndGlobals* globals = gBGMPlayerA->data;
 
-    if (songString == temp_v1->currentTrackData[0][2]) {
+    if (songString == globals->dataBGM[0]->name) {
         return gBGMPlayerA;
     }
-    if (songString == temp_v1->currentTrackData[1][2]) {
+    if (songString == globals->dataBGM[1]->name) {
         return gBGMPlayerB;
     }
     return NULL;
@@ -245,8 +244,8 @@ void func_8004DA74(void) {
 void func_8004DAA8(BGMPlayer* player) {
     if (player->masterState != BGM_PLAY_STATE_0) {
         player->masterState = BGM_PLAY_STATE_4;
-        player->unk_10 = 1;
-        player->sampleRate = 1;
+        player->nextUpdateCounter = 1;
+        player->nextUpdateStep = 1;
         snd_clear_bgm_fade(&player->fadeInfo);
     }
 }
@@ -356,7 +355,7 @@ AuResult func_8004DCB8(SongUpdateEvent* update, s32 clearChanged) {
                                 }
                             }
                         }
-                        playerA->globals->unk_globals_6C[variation].unk_5 = playerA->unk_234;
+                        playerA->globals->unk_globals_6C[variation].unk_5 = playerA->id;
                         playerA->globals->unk_globals_6C[variation].unk_4 = 1;
                         playerA->fadeSongName = 0;
                         snd_copy_words(playerA, playerB, sizeof(*playerA));
@@ -512,15 +511,15 @@ s32 func_8004E0F4(SongUpdateEvent* update) {
     return error;
 }
 
-void bgm_player_init(BGMPlayer* player, s32 arg1, s32 arg2, AuGlobals* arg3) {
+void bgm_player_init(BGMPlayer* player, s32 id, s32 reverbType, AuGlobals* globals) {
     s16 i;
 
-    player->globals = arg3;
+    player->globals = globals;
     func_8004E880(player, BGM_SAMPLE_RATE, 48);
     player->unk_48 = 0x8000;
     player->masterTempo = BGM_DEFAULT_TEMPO;
     player->masterVolume = 0x7F000000;
-    player->unk_14 = 0;
+    player->updateCounter = 0;
     player->unk_18 = 0;
     player->songName = 0;
     player->fadeSongName = 0;
@@ -528,7 +527,7 @@ void bgm_player_init(BGMPlayer* player, s32 arg1, s32 arg2, AuGlobals* arg3) {
     player->unk_5A = 0;
     player->segmentReadPos = NULL;
     player->segmentStartPos = NULL;
-    player->unk_70 = 0;
+    player->subSegmentStartPos = 0;
     player->masterTempoTime = 0;
     player->masterTempoTarget = 0;
     player->masterTempoStep = 0;
@@ -541,9 +540,9 @@ void bgm_player_init(BGMPlayer* player, s32 arg1, s32 arg2, AuGlobals* arg3) {
     player->trackVolsConfig = NULL;
     player->bFadeConfigSetsVolume = FALSE;
     player->masterState = BGM_PLAY_STATE_0;
-    player->unk_234 = arg1;
-    player->defaultReverbType = arg2;
-    player->unk_168.s32 = 0;
+    player->id = id;
+    player->defaultReverbType = reverbType;
+    *(s32*)player->segLoopCounters = 0;
     player->unk_222 = 0;
     player->unk_223 = 0;
     player->unk_D0 = 1.0f;
@@ -646,23 +645,23 @@ void func_8004E444(BGMPlayer* arg0) {
     }
 }
 
-s32 func_8004E4B8(BGMPlayer* player) {
+s32 bgm_player_update_main(BGMPlayer* player) {
     u16 hasMore = TRUE;
     s32 retVal = FALSE;
 
-    player->unk_50 = (u16)player->unk_50 + (u16)player->unk_18 + (u16)player->unk_14;
+    player->unk_50 = (u16)player->unk_50 + (u16)player->unk_18 + (u16)player->updateCounter;
     player->unk_54 = (u16)player->unk_54 +
         ((player->unk_18 << 4) & 0xFFFF) +
-        ((player->unk_14 >> 4) & 0xFFFF);
+        ((player->updateCounter >> 4) & 0xFFFF);
     do {
         switch (player->masterState) {
         case BGM_PLAY_STATE_0:
             hasMore = FALSE;
             break;
-        case BGM_PLAY_STATE_1:
+        case BGM_STATE_PLAYING:
             if (player->unk_220 == 0) {
                 func_8004EC68(player);
-                if (player->masterState == BGM_PLAY_STATE_1) {
+                if (player->masterState == BGM_STATE_PLAYING) {
                     hasMore = FALSE;
                 }
             } else {
@@ -706,9 +705,9 @@ void snd_initialize_bgm_player(BGMPlayer* player) {
         track->segTrackVolume = 0x7F;
         track->unk_4C = 0;
         track->unkVolume = 0x7FFF0000;
-        track->unk_04 = 0;
-        track->prevReadPos = 0;
-        track->unk_3E = 0;
+        track->savedPos = NULL;
+        track->prevReadPos = NULL;
+        track->detourLength = 0;
         track->segTrackTune = 0;
         track->trackTremoloTime = 0;
         track->trackTremoloAmount = 0;
@@ -724,13 +723,13 @@ void snd_initialize_bgm_player(BGMPlayer* player) {
         track->unk_4F = 0;
         track->unk_50 = 0;
         track->unk_51 = 0;
-        track->unk_54 = 0;
+        track->polyphonicIdx = 0;
         track->unk_57 = 0;
         track->isDrumTrack = FALSE;
-        track->unk_59 = 0;
+        track->parentTrackIdx = 0;
         track->unk_5A = 0;
         track->subtrackReverbType = player->defaultReverbType;
-        track->unk_5C = i;
+        track->index = i;
     }
 
     for (i = 0; i < ARRAY_COUNT(player->notes); i++) {
@@ -764,7 +763,7 @@ void snd_initialize_bgm_player(BGMPlayer* player) {
     player->segActiveLoopEndPos[2] = NULL;
     player->segActiveLoopEndPos[1] = NULL;
     player->segActiveLoopEndPos[0] = NULL;
-    player->unk_168.s32 = 0;
+    *(s32*)player->segLoopCounters = 0;
     player->segLoopDepth = 0;
     player->unk_222 = 0;
     player->unk_223 = 0;
@@ -827,9 +826,9 @@ void func_8004E880(BGMPlayer* player, s32 sampleRate, s32 divisor) {
     if (A < sampleRate) {
         sampleRate = A;
     }
-    player->sampleRate = sampleRate;
-    player->unk_0C = A;
-    player->unk_10 = A;
+    player->nextUpdateStep = sampleRate;
+    player->nextUpdateInterval = A;
+    player->nextUpdateCounter = A;
     player->maxTempo = A / 1000;
 }
 
@@ -848,26 +847,26 @@ void snd_bgm_state_2(BGMPlayer* player) {
         } else {
             switch (cmd >> 12) {
                 case BGM_SEGMENT_SUBSEG << 16:
-                    func_8004EAD4(player, cmd);
-                    player->masterState = BGM_PLAY_STATE_1;
+                    snd_bgm_segment_load_subsegment(player, cmd);
+                    player->masterState = BGM_STATE_PLAYING;
                     continueReading = FALSE;
                     break;
                 case BGM_SEGMENT_START_LOOP << 16:
                     break;
-                case BGM_SEGMENT_HALT << 16:
+                case BGM_SEGMENT_WAIT << 16:
                     continueReading = FALSE;
                     break;
                 case BGM_SEGMENT_END_LOOP << 16:
-                    func_8004EA34(player, cmd);
+                    snd_bgm_segment_end_loop(player, cmd);
                     break;
                 case BGM_SEGMENT_6 << 16:
                     if (!(player->unk_223 & 1)) {
-                        func_8004EA34(player, cmd);
+                        snd_bgm_segment_end_loop(player, cmd);
                     }
                     break;
                 case BGM_SEGMENT_7 << 16:
                     if (player->unk_223 & 1) {
-                        func_8004EA34(player, cmd);
+                        snd_bgm_segment_end_loop(player, cmd);
                     }
                     break;
                 default:
@@ -878,17 +877,17 @@ void snd_bgm_state_2(BGMPlayer* player) {
     }
 }
 
-void func_8004EA34(BGMPlayer* player, u32 cmd) {
+void snd_bgm_segment_end_loop(BGMPlayer* player, u32 cmd) {
     s32 labelIndex = cmd & 0x1F; // 01F (bits 0-4)
-    s32 iterCount = (cmd >> 5) & 0x7F;   // FE0 (bits 5-11)
+    s32 iterCount = (cmd >> 5) & 0x7F; // FE0 (bits 5-11)
     u32 depth;
 
     depth = player->segLoopDepth;
     if (player->segActiveLoopEndPos[depth] != NULL) {
         if (player->segActiveLoopEndPos[depth] == player->segmentReadPos) {
-            if (player->unk_168.u8[depth] != 0) {
-                player->unk_168.u8[depth]--;
-                if ((player->unk_168.u8[depth]) == 0) {
+            if (player->segLoopCounters[depth] != 0) {
+                player->segLoopCounters[depth]--;
+                if ((player->segLoopCounters[depth]) == 0) {
                     player->segActiveLoopEndPos[depth] = NULL;
                     if (depth > 0) {
                         depth--;
@@ -902,18 +901,79 @@ void func_8004EA34(BGMPlayer* player, u32 cmd) {
         } else if (depth < 4) {
             depth++;
             player->segActiveLoopEndPos[depth] = player->segmentReadPos;
-            player->unk_168.u8[depth] = iterCount;
+            player->segLoopCounters[depth] = iterCount;
             player->segmentReadPos = player->segLoopStartLabels[labelIndex];
         }
     } else {
         player->segActiveLoopEndPos[depth] = player->segmentReadPos;
-        player->unk_168.u8[depth] = iterCount;
+        player->segLoopCounters[depth] = iterCount;
         player->segmentReadPos = player->segLoopStartLabels[labelIndex];
     }
     player->segLoopDepth = depth;
 }
 
-INCLUDE_ASM(s32, "audio/28910_len_5090", func_8004EAD4);
+void snd_bgm_segment_load_subsegment(BGMPlayer* player, u32 cmd) {
+    BGMPlayerTrack* track;
+    u32 trackInfo;
+    s32* trackList;
+    u32 parentIdx;
+    s32 count;
+    s32 nextRelativePos;
+    s32 bUsesPolyphony;
+    s32 i;
+    
+    nextRelativePos = 0;
+    bUsesPolyphony = FALSE;
+    player->subSegmentStartPos = AU_FILE_RELATIVE(player->segmentStartPos, (cmd & 0xFFFF) << 2);
+    trackList = player->subSegmentStartPos;
+    for (i = 0; i < ARRAY_COUNT(player->tracks); i++) {
+        track = &player->tracks[i];
+        trackInfo = *trackList++;
+        track->bgmReadPos = trackInfo >> 0x10;
+        if (track->bgmReadPos != NULL) {
+            if ((trackInfo & 0x100) == 0) {
+                track->polyphonicIdx = (trackInfo & (0x7 << 0xD)) >> 0xD;
+                track->isDrumTrack = (trackInfo >> 7) & 1;
+                parentIdx = (trackInfo & (0xF << 9)) >> 9;
+                track->parentTrackIdx = 0;
+                if (parentIdx != 0) {
+                    BGMPlayerTrack* parentTrack = &player->tracks[parentIdx - 1];
+                    if ((parentIdx - 1) < i) {
+                        track->unk_51 = parentTrack->unk_51;
+                        track->unk_52 = parentTrack->unk_52;
+                        track->unk_53 = parentTrack->unk_53;
+                        
+                        track->bgmReadPos = (track->bgmReadPos + (s32)player->subSegmentStartPos);
+                        track->delayTime = 1;
+                        
+                        track->parentTrackIdx = parentIdx;
+                        if (player->unk_233 != 0) {
+                            track->unk_5A = 1;
+                        }
+                        bUsesPolyphony = TRUE;
+                    } else {
+                        track->bgmReadPos = NULL;
+                    }
+                } else {
+                    count = player->unk_22A[track->polyphonicIdx];
+                    track->unk_51 = count;
+                    track->unk_52 = nextRelativePos;
+                    nextRelativePos += count;
+                    track->unk_53 = nextRelativePos;
+                    
+                    track->bgmReadPos = (track->bgmReadPos + (s32)player->subSegmentStartPos);
+                    track->delayTime = 1;
+                }
+            } else {
+                track->bgmReadPos = NULL;
+            }
+        }
+    }
+    player->unk_21B = nextRelativePos; // last Voice?
+    if (bUsesPolyphony) {
+        player->unk_233 = 0;
+    }
+}
 
 void snd_bgm_state_4(BGMPlayer* player) {
     s32 i;
@@ -923,19 +983,19 @@ void snd_bgm_state_4(BGMPlayer* player) {
     player->fadeSongName = 0;
     player->unk_58 = 0;
     player->unk_5A = 0;
-    for (i = 0; i < 16; i++) {
-        player->tracks[i].bgmReadPos = 0;
+    for (i = 0; i < ARRAY_COUNT(player->tracks); i++) {
+        player->tracks[i].bgmReadPos = NULL;
     }
     func_80050900(player);
     player->masterState = BGM_PLAY_STATE_0;
-    player->sampleRate = BGM_SAMPLE_RATE;
+    player->nextUpdateStep = BGM_SAMPLE_RATE;
 }
 
 #define POST_BGM_READ() \
-if (track->unk_3E != 0) {\
-    track->unk_3E--;\
-    if (track->unk_3E == 0) {\
-        track->bgmReadPos = track->unk_04;\
+if (track->detourLength != 0) {\
+    track->detourLength--;\
+    if (track->detourLength == 0) {\
+        track->bgmReadPos = track->savedPos;\
     }\
 }
 
@@ -971,7 +1031,7 @@ void func_8004EC68(BGMPlayer *player) {
         } else {
             player->masterTempo += player->masterTempoStep;
         }
-        player->sampleRate = player->masterTempo * 10;
+        player->nextUpdateStep = player->masterTempo * 10;
     }
     if (player->masterVolumeTime != 0) {
         player->masterVolumeTime--;
@@ -1100,10 +1160,10 @@ void func_8004EC68(BGMPlayer *player) {
                                 }
 
                                 if (!bAcquiredVoiceIdx) {
-                                    if (track->unk_54 >= 5) { // 5 = AL_DEFAULT_PRIORITY?
+                                    if (track->polyphonicIdx >= 5) { // 5 = AL_DEFAULT_PRIORITY?
                                         for(voiceIdx = track->unk_52; voiceIdx < track->unk_53; voiceIdx++) {
                                             voice = &player->globals->voices[voiceIdx];
-                                            if (voice->unk_45 < player->unk_234) {
+                                            if (voice->unk_45 < player->id) {
                                                 func_800538C4(voice, voiceIdx);
                                                 bAcquiredVoiceIdx = TRUE;
                                                 break;
@@ -1112,7 +1172,7 @@ void func_8004EC68(BGMPlayer *player) {
                                         if (!bAcquiredVoiceIdx) {
                                             for (voiceIdx = track->unk_52; voiceIdx < track->unk_53; voiceIdx++) {
                                                 voice = &player->globals->voices[voiceIdx];
-                                                if (voice->unk_45 == player->unk_234) {
+                                                if (voice->unk_45 == player->id) {
                                                     note = &player->notes[voiceIdx];
                                                     if (note->noteLength == 0) {
                                                         func_800538C4(voice, voiceIdx);
@@ -1130,7 +1190,7 @@ void func_8004EC68(BGMPlayer *player) {
                                             SeqNote* curNote;
                                             for (voice_it = track->unk_52; voice_it < track->unk_53; voice_it++) {
                                                 curVoice = &player->globals->voices[voice_it];
-                                                if (curVoice->unk_45 == player->unk_234) {
+                                                if (curVoice->unk_45 == player->id) {
                                                     curNote = &player->notes[voice_it];
                                                     if (curNote->unk_note_17 == 0 && curNote->noteLength < shortestLength) {
                                                         shortestLength = curNote->noteLength;
@@ -1152,7 +1212,7 @@ void func_8004EC68(BGMPlayer *player) {
                                         voice = &player->globals->voices[voiceIdx];
                                         note = &player->notes[voiceIdx];
                                         note->noteLength = 0;
-                                        if (voice->unk_45 <= player->unk_234) {
+                                        if (voice->unk_45 <= player->id) {
                                             func_800538C4(voice, voiceIdx);
                                             bAcquiredVoiceIdx = TRUE;
                                         }
@@ -1241,7 +1301,7 @@ void func_8004EC68(BGMPlayer *player) {
                                     note->unk_13 = 0;
                                     note->tremoloAmount = track->trackTremoloAmount;
                                     voice->unk_flags_43 = 2;
-                                    voice->unk_45 = player->unk_234;
+                                    voice->unk_45 = player->id;
                                     voice->unk_44 = voice->unk_45;
                                 }
                             }
@@ -1281,7 +1341,7 @@ void func_8004EC68(BGMPlayer *player) {
             for (voiceIdx = track->unk_52; voiceIdx < track->unk_53; voiceIdx++) {
                 if (track->unk_5A == 0) {
                     voice = &player->globals->voices[voiceIdx];
-                    if (voice->unk_45 == player->unk_234) {
+                    if (voice->unk_45 == player->id) {
                         note = &player->notes[voiceIdx];
                         if (note->unk_note_17 == 0) {
                             if (note->noteLength > 0) {
@@ -1375,7 +1435,7 @@ void snd_BGMCmd_E0_MasterTempo(BGMPlayer* player, BGMPlayerTrack* track) {
     player->masterTempoBPM = bpm;
     tempo = snd_bpm_to_tempo(player, bpm);
     player->masterTempo = tempo;
-    player->sampleRate = tempo * 10;
+    player->nextUpdateStep = tempo * 10;
     player->masterTempoTime = 0;
     player->masterTempoTarget = 0;
     player->masterTempoStep = 0;
@@ -1599,42 +1659,47 @@ void snd_BGMCmd_F7_SubTrackReverbType(BGMPlayer* player, BGMPlayerTrack* track) 
     }
 }
 
-void snd_BGMCmd_FD(BGMPlayer* player, BGMPlayerTrack* track) {
-    func_800560BC(player->unk_234, track->unk_5C, player->seqCmdArgs.UnkCmdFD.unk_00 >> 8);
+void snd_BGMCmd_FD_EventTrigger(BGMPlayer* player, BGMPlayerTrack* track) {
+    bgm_trigger_music_event(player->id, track->index, player->seqCmdArgs.EventTrigger.unk_00 >> 8);
 }
 
-void snd_BGMCmd_FE(BGMPlayer* player, BGMPlayerTrack* track) {
-    AuFilePos readPos = AU_FILE_RELATIVE(player->bgmFile, player->seqCmdArgs.UnkCmdFE.offset);
+// jump to another part of the track and return after a specified read length
+void snd_BGMCmd_FE_Detour(BGMPlayer* player, BGMPlayerTrack* track) {
+    AuFilePos readPos = AU_FILE_RELATIVE(player->bgmFile, player->seqCmdArgs.Detour.offset);
 
-    track->unk_3E = player->seqCmdArgs.UnkCmdFE.unk_02;
-    track->unk_04 = track->bgmReadPos;
+    track->detourLength = player->seqCmdArgs.Detour.length;
+    track->savedPos = track->bgmReadPos;
     track->bgmReadPos = readPos;
 }
 
+// jump to another part of the track, switched by player->proxMixID
 void snd_BGMCmd_FC_Jump(BGMPlayer* player, BGMPlayerTrack* track) {
     AuFilePos args;
     u32 i;
 
+    // get jump table
     args = AU_FILE_RELATIVE(player->bgmFile, player->seqCmdArgs.Jump.unk_00);
     if (player->proxMixID < player->seqCmdArgs.Jump.unk_02) {
         args += player->proxMixID * 3;
     }
+    // read new position from jump table
     track->prevReadPos = track->bgmReadPos;
     track->bgmReadPos = AU_FILE_RELATIVE(player->bgmFile, (args[0] << 8) + args[1]);
     track->isDrumTrack = args[2];
+
     if (track->unk_4D != 0) {
         track->unk_4D = 0;
         track->unkVolume = 0;
         for (i = track->unk_52; i < track->unk_53; i++) {
-            AlUnkVoice* temp_a0 = &player->globals->voices[i];
-            if ((temp_a0->unk_45 == player->unk_234) && (temp_a0->unk_1C != 0)) {
-                func_800538C4(temp_a0, i);
+            AlUnkVoice* voice = &player->globals->voices[i];
+            if ((voice->unk_45 == player->id) && (voice->unk_1C != 0)) {
+                func_800538C4(voice, i);
             }
         }
     }
     if (track->unk_4E != 0) {
         track->unk_4E = 0;
-        func_80050888(player, track, player->proxMixVolume, 0x90);
+        func_80050888(player, track, player->proxMixVolume, 144);
     }
     track->subTrackCoarseTune = 0;
     track->subTrackFineTune = 0;
@@ -1747,21 +1812,21 @@ void snd_BGMCmd_FF(BGMPlayer* player, BGMPlayerTrack* track) {
 void snd_BGMCmd_NOP(BGMPlayer* player, BGMPlayerTrack* track) {
 }
 
-u8 func_80050568(BGMPlayer* player, u8 arg1, u8 arg2) {
+u8 func_80050568(BGMPlayer* player, u8 pan1, u8 pan2) {
     s32 temp_v0 = player->unk_50;
-    s32 a = (temp_v0 >> 7);
-    s32 b = (temp_v0 >> 2);
+    s32 a = (temp_v0 >> 7); // bits ...100 0000
+    s32 b = (temp_v0 >> 2); // bits ...100
     s32 c = (a + b) & 1;
-    s32 d = (temp_v0 >> 8) & 0x3F;
-    s32 e = (temp_v0 << 4) & 0xC0;
+    s32 d = (temp_v0 >> 8) & 0x3F; // bits 0011 1111 0000 0000 -> 0011 1111
+    s32 e = (temp_v0 << 4) & 0xC0; // bits 0000 0000 0000 1100 -> 1100 0000
     s32 f = d + e;
-    s32 g = arg1;
+    s32 g = pan1;
     s32 retPan;
 
     if (c != 0) {
-        retPan = g + ((arg2 * f) >> 8);
+        retPan = g + ((pan2 * f) >> 8);
     } else {
-        retPan = g - ((arg2 * f) >> 8);
+        retPan = g - ((pan2 * f) >> 8);
     }
     if (retPan < 0) {
         retPan = 0;
@@ -1842,7 +1907,7 @@ void func_80050770(BGMPlayer* player, f32 arg1) {
 
     player->unk_D0 = arg1;
     player->masterTempo = snd_bpm_to_tempo(player, player->masterTempoBPM);
-    player->sampleRate = player->masterTempo * 10;
+    player->nextUpdateStep = player->masterTempo * 10;
     player->masterTempoTime = 0;
     player->masterTempoTarget = 0;
     player->masterTempoStep = 0;
@@ -1897,7 +1962,7 @@ void func_80050900(BGMPlayer* player) {
 
     for (i = 0; i < ARRAY_COUNT(player->globals->voices); i++) {
         temp_a0 = &player->globals->voices[i];
-        if (temp_a0->unk_45 == player->unk_234) {
+        if (temp_a0->unk_45 == player->id) {
             func_800538C4(temp_a0, i);
         }
     }
@@ -1905,8 +1970,8 @@ void func_80050900(BGMPlayer* player) {
 
 AuResult func_80050970(SongUpdateEvent* update) {
     BGMPlayer* player;
-    BGMPlayerTrack* trackA;
-    BGMPlayerTrack* trackB;
+    BGMPlayerTrack* track;
+    BGMPlayerTrack* parentTrack;
     AlUnkVoice* voice;
     s32 i;
     s32 j;
@@ -1920,45 +1985,45 @@ AuResult func_80050970(SongUpdateEvent* update) {
         player = snd_get_player_with_song_name(songName);
         if (player != NULL) {
             for (i = 0; i < ARRAY_COUNT(player->tracks); i++) {
-                trackA = &player->tracks[i];
-                if (trackA->bgmReadPos != 0) {
-                    if (trackA->unk_59 != 0) {
-                        trackB = &player->tracks[trackA->unk_59 - 1];
+                track = &player->tracks[i];
+                if (track->bgmReadPos != NULL) {
+                    if (track->parentTrackIdx != 0) {
+                        parentTrack = &player->tracks[track->parentTrackIdx - 1];
                         if (variation != 0) {
-                            if (trackA->unk_5A != 0) {
-                                trackA->unk_5A = 0;
-                                trackB->unk_5A = 1;
-                                for (j = trackB->unk_52; j < trackB->unk_53; j++) {
+                            if (track->unk_5A != 0) {
+                                track->unk_5A = 0;
+                                parentTrack->unk_5A = 1;
+                                for (j = parentTrack->unk_52; j < parentTrack->unk_53; j++) {
                                     voice = &player->globals->voices[j];
-                                    if (voice->unk_45 == player->unk_234) {
+                                    if (voice->unk_45 == player->id) {
                                         voice->unk_14.unk_04 = &D_80078554;
                                         voice->unk_flags_3D |= 0x10;
                                     }
                                 }
-                                oldVolume = trackA->subTrackVolume >> 24;
-                                snd_BGMCmd_E9_SubTrackVolume(player, trackA);
+                                oldVolume = track->subTrackVolume >> 24;
+                                snd_BGMCmd_E9_SubTrackVolume(player, track);
                                 player->seqCmdArgs.raw[0] = 0;
                                 player->seqCmdArgs.TrackVolumeFade.time = 96;
                                 player->seqCmdArgs.TrackVolumeFade.value = oldVolume;
-                                snd_BGMCmd_F6_TrackVolumeFade(player, trackA);
+                                snd_BGMCmd_F6_TrackVolumeFade(player, track);
                             }
                         } else {
-                            if (trackA->unk_5A == 0) {
-                                trackA->unk_5A = 1;
-                                trackB->unk_5A = 0;
-                                for (j = trackA->unk_52; j < trackA->unk_53; j++) {
+                            if (track->unk_5A == 0) {
+                                track->unk_5A = 1;
+                                parentTrack->unk_5A = 0;
+                                for (j = track->unk_52; j < track->unk_53; j++) {
                                     voice = &player->globals->voices[j];
-                                    if (voice->unk_45 == player->unk_234) {
+                                    if (voice->unk_45 == player->id) {
                                         voice->unk_14.unk_04 = &D_80078554;
                                         voice->unk_flags_3D |= 0x10;
                                     }
                                 }
-                                oldVolume = trackB->subTrackVolume >> 24;
-                                snd_BGMCmd_E9_SubTrackVolume(player, trackB);
+                                oldVolume = parentTrack->subTrackVolume >> 24;
+                                snd_BGMCmd_E9_SubTrackVolume(player, parentTrack);
                                 player->seqCmdArgs.raw[0] = 0;
                                 player->seqCmdArgs.TrackVolumeFade.time = 96;
                                 player->seqCmdArgs.TrackVolumeFade.value = oldVolume;
-                                snd_BGMCmd_F6_TrackVolumeFade(player, trackB);
+                                snd_BGMCmd_F6_TrackVolumeFade(player, parentTrack);
                             }
                         }
                     }

@@ -4,13 +4,13 @@
 void bgm_update_volume(void);
 void bgm_set_target_volume(s16 volume);
 
-MusicSettings D_8014F6F0 = {
+MusicSettings BlankMusicSettings = {
     .flags = 0,
     .state = 0,
     .fadeOutTime = -1,
     .fadeInTime = 0,
-    .unk_0C = 0,
-    .unk_0E = 0,
+    .fadeStartVolume = 0,
+    .fadeEndVolume = 0,
     .songID = -1,
     .variation = -1,
     .songName = -1,
@@ -55,7 +55,7 @@ void bgm_reset_sequence_players(void) {
     s32 i;
 
     for (i = 0; i < 2; i++) {
-        gMusicSettings[i] = D_8014F6F0;
+        gMusicSettings[i] = BlankMusicSettings;
     }
 
     gMusicTargetVolume = 8;
@@ -136,7 +136,8 @@ void bgm_update_music_settings(void) {
                     music->songName = snd_load_song(music->songID, i);
                     if (music->songName > 0xFFFFU) {
                         if ((music->flags & MUSIC_SETTINGS_FLAGS_20)) {
-                            snd_set_song_variation_fade(music->songName, music->variation, music->fadeInTime, music->unk_0C, music->unk_0E);
+                            snd_set_song_variation_fade(music->songName, music->variation,
+                                music->fadeInTime, music->fadeStartVolume, music->fadeEndVolume);
                             music->flags &= ~MUSIC_SETTINGS_FLAGS_20;
                         } else {
                             bgm_set_target_volume(gMusicDefaultVolume);
@@ -217,7 +218,7 @@ s32 bgm_set_song(s32 playerIndex, s32 songID, s32 variation, s32 fadeOutTime, s1
     return _bgm_set_song(playerIndex, songID, variation, fadeOutTime, volume);
 }
 
-s32 func_8014A964(s32 playerIndex, s32 songID, s32 variation, s32 fadeInTime, s16 arg4, s16 arg5) {
+s32 func_8014A964(s32 playerIndex, s32 songID, s32 variation, s32 fadeInTime, s16 fadeStartVolume, s16 fadeEndVolume) {
     MusicSettings* musicSetting;
     s32 mapSongVariation;
 
@@ -239,8 +240,8 @@ s32 func_8014A964(s32 playerIndex, s32 songID, s32 variation, s32 fadeInTime, s1
     }
 
     musicSetting->fadeInTime = fadeInTime;
-    musicSetting->unk_0C = arg4;
-    musicSetting->unk_0E = arg5;
+    musicSetting->fadeStartVolume = fadeStartVolume;
+    musicSetting->fadeEndVolume = fadeEndVolume;
     musicSetting->songID = songID;
     musicSetting->variation = variation;
     musicSetting->flags |= MUSIC_SETTINGS_FLAGS_20;

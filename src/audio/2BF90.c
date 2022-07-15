@@ -1,28 +1,27 @@
 #include "audio.h"
 
-extern s8 NullMseqData;
+extern s8 BlankMseqData;
 
-void func_80050B90(AmbientSoundManager* arg0, s8 arg1, s8 arg2, AuGlobals* arg3) {
+void func_80050B90(AmbientSoundManager* manager, s8 arg1, s8 arg2, AuGlobals* globals) {
     AlUnkLambda* lambda;
     s32 i;
 
-    snd_memset(arg0, sizeof(*arg0), 0);
+    snd_memset(manager, sizeof(*manager), 0);
 
-    for (i = 0; i < ARRAY_COUNT(arg0->mseqLambda); i++) {
-        lambda = &arg0->mseqLambda[i];
+    for (i = 0; i < ARRAY_COUNT(manager->mseqLambda); i++) {
+        lambda = &manager->mseqLambda[i];
         lambda->unk_14.u8[0] = i;
         lambda->unk_18 = 1;
         lambda->unk_38 = 0x7F000000;
     }
 
-    arg0->unk_00 = arg3;
-    arg0->nextUpdateStep = 1;
-    arg0->nextUpdateCounter = 2;
-    arg0->nextUpdateInterval = 2;
-    arg0->unk_22 = arg1;
-    arg0->defaultReverbType = arg2;
+    manager->globals = globals;
+    manager->nextUpdateStep = 1;
+    manager->nextUpdateCounter = 2;
+    manager->nextUpdateInterval = 2;
+    manager->unk_22 = arg1;
+    manager->defaultReverbType = arg2;
 }
-
 
 s32 func_80050C30(u32 arg0) {
     if (gAmbientSoundManager->unk_20 <= arg0) {
@@ -53,7 +52,7 @@ s32 func_80050CA0(s32 arg0, s32 arg1) {
     s32 retVal = 0;
 
     if (mseq != NULL) {
-        if (lambda->unk_20 == 0) {
+        if (lambda->mseqName == 0) {
             func_800510A4(gAmbientSoundManager, mseq, arg0);
             if (arg1 != 0) {
                 lambda->time = arg1;
@@ -71,23 +70,23 @@ s32 func_80050CA0(s32 arg0, s32 arg1) {
     return retVal;
 }
 
-void func_80050D50(AlUnkLambda* arg0) {
-    u16 temp_a1 = arg0->time;
+void func_80050D50(AlUnkLambda* lambda) {
+    u16 time = lambda->time;
 
-    if (arg0->unk_2A == 0xFF) {
-        arg0->unk_2A = arg0->unk_38 >> 0x18;
+    if (lambda->unk_2A == 0xFF) {
+        lambda->unk_2A = lambda->unk_38 >> 0x18;
     }
 
-    if (temp_a1 >= SND_MIN_DURATION && temp_a1 <= SND_MAX_DURATION) {
-        arg0->unk_38 = arg0->unk_2A << 0x18;
-        arg0->unk_42 = arg0->volume;
-        arg0->unk_lam_40 = (u32)(temp_a1 * 10) / 115;
-        arg0->unk_3C = ((arg0->volume - arg0->unk_2A) << 0x18) / ((s16)arg0->unk_lam_40 & 0xFFFF);
+    if (time >= SND_MIN_DURATION && time <= SND_MAX_DURATION) {
+        lambda->unk_38 = lambda->unk_2A << 0x18;
+        lambda->unk_42 = lambda->volume;
+        lambda->unk_lam_40 = (u32)(time * 10) / 115;
+        lambda->unk_3C = ((lambda->volume - lambda->unk_2A) << 0x18) / ((s16)lambda->unk_lam_40 & 0xFFFF);
     }
 
-    arg0->time = 0;
-    arg0->unk_2A = 0;
-    arg0->volume = 0;
+    lambda->time = 0;
+    lambda->unk_2A = 0;
+    lambda->volume = 0;
 }
 
 void func_80050E18(s32 arg0, s32 arg1) {
@@ -127,11 +126,11 @@ void func_80050EF0(s32 arg0) {
     if ((temp_v1->mseqReadStart != 0) && (temp_v1->mseqReadPos != NULL)) {
         if (temp_v1->unk_24 != 0) {
             temp_v1->mseqReadPos = NULL;
-            temp_v1->unk_20 = 0;
+            temp_v1->mseqName = 0;
             temp_v1->unk_24 = 0;
             return;
         }
-        temp_v1->mseqReadPos = &NullMseqData;
+        temp_v1->mseqReadPos = &BlankMseqData;
         temp_v1->unk_18 = 1;
     }
 }
@@ -204,7 +203,7 @@ void func_800510A4(AmbientSoundManager* manager, MSEQHeader* mseqFile, s32 index
     lambda->unk_38 = 0x7F000000;
     lambda->unk_42 = 0x7F;
 
-    lambda->unk_20 = lambda->mseqFile->name;
+    lambda->mseqName = lambda->mseqFile->name;
     lambda->first_iota = lambda->mseqFile->first_iota;
     lambda->last_iota = lambda->first_iota + 16;
     if (lambda->last_iota > 24) {
@@ -212,7 +211,7 @@ void func_800510A4(AmbientSoundManager* manager, MSEQHeader* mseqFile, s32 index
     }
     for (i = 0; i < 10; i++) {
         xi = &lambda->unk_44[i];
-        xi->instrument = manager->unk_00->defaultInstrument;
+        xi->instrument = manager->globals->defaultInstrument;
         xi->unk_18.full = 0x7FFFFFFF;
         xi->pan = 0x40;
     }
@@ -226,7 +225,7 @@ void snd_ambient_manager_update(AmbientSoundManager* manager) {
     for (i = 0; i < ARRAY_COUNT(manager->unk_7B4); i++) {
         AlUnkIota* temp = &manager->unk_7B4[i];
 
-        if ((temp->unk_00.u8[3] == 1) && (manager->unk_00->voices[i].unk_45 != manager->unk_22)) {
+        if ((temp->unk_00.u8[3] == 1) && (manager->globals->voices[i].unk_45 != manager->unk_22)) {
             temp->unk_00.s32 = 0;
         }
     }
@@ -235,7 +234,7 @@ void snd_ambient_manager_update(AmbientSoundManager* manager) {
         AlUnkLambda* lambda = &manager->mseqLambda[j];
         s32 var;
 
-        if (lambda->mseqReadPos != 0) {
+        if (lambda->mseqReadPos != NULL) {
             if (manager->unk_21 != 0) {
                 func_80051334(manager, lambda);
             }
@@ -313,7 +312,7 @@ void func_800521E8(AmbientSoundManager* manager, AlUnkLambda* state) {
     for (i = state->first_iota; i < state->last_iota; i++) {
         temp_s1 = &manager->unk_7B4[i - state->first_iota].unk_00;
         if (*temp_s1->u8 == state->unk_14.u8[0]) {
-            voice = &manager->unk_00->voices[i];
+            voice = &manager->globals->voices[i];
             if (voice->unk_45 == manager->unk_22) {
                 func_800538C4(voice, i);
             }
@@ -354,7 +353,7 @@ void func_8005232C(AmbientSoundManager* manager, AlUnkLambda* lambda) {
     AlUnkXi* xi;
     u32 i, j;
         
-    globals = manager->unk_00;
+    globals = manager->globals;
     if (lambda->unk_25 == 0) {
         for (i = 0; i < 4; i++) {
             omega = &lambda->unk_1D4[i];

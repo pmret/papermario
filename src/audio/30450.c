@@ -795,42 +795,42 @@ void bgm_set_proximity_mix_full(s32 songName, s32 mix) {
     snd_set_bgm_proximity_mix(songName, (u8)mix | 0x7F000000);
 }
 
-void func_8005608C(u32** arg0, s32* arg1) {
+void bgm_poll_music_events(MusicEventTrigger** musicEvents, s32* count) {
     AuGlobals* globals = gSoundGlobals;
 
-    *arg0 = globals->unk_arr_94;
-    *arg1 = globals->unk_98;
+    *musicEvents = globals->musicEventQueue;
+    *count = globals->musicEventQueueCount;
 }
 
-void func_800560A8(void) {
-    gSoundGlobals->unk_9C = 1;
+void bgm_flush_music_events(void) {
+    gSoundGlobals->flushMusicEventQueue = TRUE;
 }
 
-void func_800560BC(s32 arg0, s32 arg1, s32 arg2) {
+void bgm_trigger_music_event(s32 playerID, s32 trackIndex, s32 eventIndex) {
     AuGlobals* globals = gSoundGlobals;
 
-    if (globals->unk_98 < 16) {
-        *globals->unk_90++ = ((arg0 << 0x1C) + ((arg1 & 0xF) << 0x18) + arg2);
-        globals->unk_98++;
+    if (globals->musicEventQueueCount < 16) {
+        *globals->musicEventQueuePos++ = ((playerID << 0x1C) + ((trackIndex & 0xF) << 0x18) + eventIndex);
+        globals->musicEventQueueCount++;
     }
 }
 
-void func_8005610C(void) {
+void bgm_clear_music_events(void) {
     AuGlobals* globals = gSoundGlobals;
-    s32* buf = globals->unk_arr_94;
+    s32* buf = globals->musicEventQueue;
     s32 i = 15;
     
     do {
         *buf++ = 0;
     } while(i-- != 0);
 
-    globals->unk_98 = 0;
-    globals->unk_9C = 0;
-    globals->unk_90 = globals->unk_arr_94;
+    globals->musicEventQueueCount = 0;
+    globals->flushMusicEventQueue = FALSE;
+    globals->musicEventQueuePos = globals->musicEventQueue;
 }
 
-void func_80056144(UnkFuncAl func, s32 index) {
-    gSoundGlobals->unk_A4[index] = func;
+void audio_register_callback(AuCallback func, s32 index) {
+    gSoundGlobals->audioThreadCallbacks[index] = func;
 }
 
 void audio_set_stereo(void) {

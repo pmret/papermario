@@ -3,77 +3,75 @@
 #include "hud_element.h"
 #include "world/partners.h"
 
-typedef struct UnkSndEvtData {
-    s32 unk_00;
-    EvtScript* unk_04[4];
-} UnkSndEvtData;
+AuResult bgm_set_track_volumes(s32 playerIndex, s16 trackVolSet);
+static ApiStatus PollMusicEvents(Evt* script, s32 isInitialCall);
 
-extern UnkSndEvtData* D_802DB7D0;
-extern Evt* UnkSoundEvtScripts[10];
-extern s32 UnkSoundEvtIDs[10];
+extern MusicEvent* MusicEventList;
+extern Evt* RunningMusicEvents[10];
+extern s32 RunningMusicEventIDs[10];
 extern PopupMenu D_802DB830;
 
-AuResult bgm_set_track_volumes(s32 playerIndex, s16 trackVolSet);
+s32 MusicEventPollCount = 0;
 
-static ApiStatus func_802D5B10(Evt* script, s32 isInitialCall);
-
-s32 D_802D9D30 = 0;
-
-static EvtScript D_802D9D34 = {
-    EVT_CALL(func_802D5B10)
+static EvtScript EVS_MusicEventMonitor = {
+    EVT_CALL(PollMusicEvents)
     EVT_RETURN
     EVT_END
 };
 
-static s32 func_802D5B10(Evt* script, s32 isInitialCall) {
-    u32* list;
+static s32 PollMusicEvents(Evt* script, s32 isInitialCall) {
+    MusicEventTrigger* list;
     u32 count;
-    UnkSndEvtData* cur;
+    MusicEvent* cur;
     EvtScript* newSource;
     Evt* newEvt;
-    s32 i, j, k;
+    s32 musicEventID, scriptSelector;
+    s32 i;
 
-    func_8005608C(&list, &count);
+    bgm_poll_music_events(&list, &count);
     
     for (i = 0; i < count; i++, list++) {
-        cur = D_802DB7D0;
-        j = (*list & 0xFF0000) >> 0x10;
-        k = *list & 0xFF;
-        while (cur->unk_00 != -1) {
-            if (cur->unk_00 == j) {
+        cur = MusicEventList;
+        musicEventID = (*list & 0xFF0000) >> 0x10;
+        scriptSelector = *list & 0xFF;
+        while (cur->musicEventID != -1) {
+            if (cur->musicEventID == musicEventID) {
                 break;
             }
             cur++;
         }
+        // bug? can cur ever be NULL here?
+        // condition should probably be if (cur->musicEventID != -1)
         if (cur != NULL) {
-            newSource = cur->unk_04[k];
-            if (UnkSoundEvtScripts[j] != NULL) {
-                kill_script_by_ID(UnkSoundEvtIDs[j]);
+            newSource = cur->scripts[scriptSelector];
+            if (RunningMusicEvents[musicEventID] != NULL) {
+                kill_script_by_ID(RunningMusicEventIDs[musicEventID]);
             }
             if (newSource != NULL) {
                 newEvt = start_script(newSource, 1, 0);
-                UnkSoundEvtScripts[j] = newEvt;
-                UnkSoundEvtIDs[j] = newEvt->id;
+                RunningMusicEvents[musicEventID] = newEvt;
+                RunningMusicEventIDs[musicEventID] = newEvt->id;
             }
         }
     }
-    func_800560A8();
-    D_802D9D30++;
-    return 0;
+    bgm_flush_music_events();
+    MusicEventPollCount++;
+    return ApiStatus_BLOCK;
 }
 
-ApiStatus func_802D5C70(Evt* script, s32 isInitialCall) {
+ApiStatus RegisterMusicEvents(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 i;
 
-    D_802DB7D0 = (UnkSndEvtData*) evt_get_variable(script, *args++);
+    // expects a list of MusicEvent, terminated by -1 0 0 0 0
+    MusicEventList = (MusicEvent*) evt_get_variable(script, *args++);
 
-    for (i = 0; i < ARRAY_COUNT(UnkSoundEvtScripts); i++) {
-        UnkSoundEvtScripts[i] = 0;
-        UnkSoundEvtIDs[i] = 0;
+    for (i = 0; i < ARRAY_COUNT(RunningMusicEvents); i++) {
+        RunningMusicEvents[i] = NULL;
+        RunningMusicEventIDs[i] = 0;
     }
 
-    start_script(&D_802D9D34, EVT_PRIORITY_1, 0);
+    start_script(&EVS_MusicEventMonitor, EVT_PRIORITY_1, 0);
     return ApiStatus_DONE2;
 }
 
@@ -109,10 +107,10 @@ ApiStatus FadeInMusic(Evt* script, s32 isInitialCall) {
     s32 songID = evt_get_variable(script, *args++);
     s32 variation = evt_get_variable(script, *args++);
     s32 fadeTime = evt_get_variable(script, *args++);
-    s16 var4 = evt_get_variable(script, *args++);
-    s16 var5 = evt_get_variable(script, *args++);
+    s16 fadeStartVolume = evt_get_variable(script, *args++);
+    s16 fadeEndVolume = evt_get_variable(script, *args++);
 
-    if (func_8014A964(musicPlayer, songID, variation, fadeTime, var4, var5)) { 
+    if (func_8014A964(musicPlayer, songID, variation, fadeTime, fadeStartVolume, fadeEndVolume)) { 
         return ApiStatus_DONE2;
     } else {
         return ApiStatus_BLOCK;
@@ -123,7 +121,7 @@ ApiStatus func_802D5EE0(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 playerIndex = evt_get_variable(script, *args++);
 
-    (&gMusicSettings[playerIndex])->flags |= MUSIC_SETTINGS_FLAGS_2;
+    gMusicSettings[playerIndex].flags |= MUSIC_SETTINGS_FLAGS_2;
     return ApiStatus_DONE2;
 }
 

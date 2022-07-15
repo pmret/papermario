@@ -58,7 +58,7 @@ typedef u32 SegData;
 
 typedef enum BGMPlayerState {
     BGM_PLAY_STATE_0                = 0,    // INITIALIZED
-    BGM_PLAY_STATE_1                = 1,    // PLAYING
+    BGM_STATE_PLAYING               = 1,    // PLAYING
     BGM_PLAY_STATE_2                = 2,    // BGM LOADED (blocks)
     BGM_PLAY_STATE_3                = 3,    // ???
     BGM_PLAY_STATE_4                = 4,    // DONE? (blocks)
@@ -68,7 +68,7 @@ typedef enum SegmentControlCommands {
     BGM_SEGMENT_END                 = 0,
     BGM_SEGMENT_SUBSEG              = 1,
     BGM_SEGMENT_START_LOOP          = 3,
-    BGM_SEGMENT_HALT                = 4,
+    BGM_SEGMENT_WAIT                = 4,
     BGM_SEGMENT_END_LOOP            = 5,
     BGM_SEGMENT_6                   = 6,
     BGM_SEGMENT_7                   = 7
@@ -90,7 +90,7 @@ struct BGMPlayer;
 struct AuGlobals;
 struct AlUnkVoice;
 
-typedef void (*UnkFuncAl)(void);
+typedef void (*AuCallback)(void);
 
 typedef union SeqArgs {
     u8 raw[4];
@@ -177,11 +177,11 @@ typedef union SeqArgs {
     } Jump;
     struct { // cmd FD
         u32 unk_00;
-    } UnkCmdFD;
+    } EventTrigger;
     struct { // cmd FE
         u16 offset;
-        u8 unk_02;
-    } UnkCmdFE;
+        u8 length;
+    } Detour;
     struct { // cmd FF
         u8 unk_00;
         u8 unk_01;
@@ -201,7 +201,7 @@ typedef struct Fade {
     /* 0x8 */ s16 targetVolume;
     /* 0xA */ s16 fadeTime;
               union {
-    /* 0xC */ UnkFuncAl onCompleteCallback;
+    /* 0xC */ AuCallback onCompleteCallback;
     /* 0xC */ s32 variation;
               };
     // fields below are envelope?
@@ -757,12 +757,12 @@ typedef struct AuGlobals {
     /* 0x0084 */ s32 unkFadeTime;
     /* 0x0088 */ s32 unkFadeStart;
     /* 0x008C */ s32 unkFadeEnd;
-    /* 0x0090 */ s32* unk_90;
-    /* 0x0094 */ s32* unk_arr_94; // contains 16 * 4 bytes
-    /* 0x0098 */ u32 unk_98;
-    /* 0x009C */ s32 unk_9C;
+    /* 0x0090 */ MusicEventTrigger* musicEventQueuePos;
+    /* 0x0094 */ MusicEventTrigger* musicEventQueue;
+    /* 0x0098 */ u32 musicEventQueueCount;
+    /* 0x009C */ s32 flushMusicEventQueue;
     /* 0x00A0 */ SEFHeader* dataSEF;
-    /* 0x00A4 */ UnkFuncAl unk_A4[2];
+    /* 0x00A4 */ AuCallback audioThreadCallbacks[2]; // 0 = on begin update, 1 = unimplemented
     /* 0x00AC */ InstrumentGroup instrumentGroupX[1];
     /* 0x00EC */ InstrumentGroup instrumentGroup3[16];
     /* 0x04EC */ InstrumentGroup instrumentGroup1[4];
@@ -780,7 +780,7 @@ typedef struct AuGlobals {
 
 typedef struct BGMPlayerTrack {
     /* 0x00 */ AuFilePos bgmReadPos;
-    /* 0x04 */ u8* unk_04;
+    /* 0x04 */ AuFilePos savedPos;
     /* 0x08 */ AuFilePos prevReadPos;
     /* 0x0C */ Instrument* instrument;
     /* 0x10 */ AlUnkInstrumentData unk_10;
@@ -797,7 +797,7 @@ typedef struct BGMPlayerTrack {
     /* 0x38 */ s16 segTrackTune;
     /* 0x3A */ s16 trackTremoloAmount;
     /* 0x3C */ char unk_3C[0x2];
-    /* 0x3E */ s16 unk_3E;
+    /* 0x3E */ s16 detourLength;
     /* 0x40 */ SoundPlayChange changed;
     /* 0x44 */ u16 patch;
     /* 0x46 */ u16 subTrackCoarseTune;
@@ -813,15 +813,15 @@ typedef struct BGMPlayerTrack {
     /* 0x51 */ u8 unk_51;
     /* 0x52 */ u8 unk_52; // voice idx start
     /* 0x53 */ u8 unk_53; // voice idx end
-    /* 0x54 */ u8 unk_54;
+    /* 0x54 */ u8 polyphonicIdx;
     /* 0x55 */ u8 trackTremoloSpeed;
     /* 0x56 */ u8 trackTremoloTime;
     /* 0x57 */ u8 unk_57;
     /* 0x58 */ u8 isDrumTrack;
-    /* 0x59 */ u8 unk_59;
+    /* 0x59 */ u8 parentTrackIdx;
     /* 0x5A */ u8 unk_5A;
     /* 0x5B */ s8 subtrackReverbType;
-    /* 0x5C */ u8 unk_5C;
+    /* 0x5C */ u8 index;
     /* 0x5D */ char unk_5D[0x3];
 } BGMPlayerTrack; // size = 0x60;
 
@@ -842,10 +842,10 @@ typedef struct SeqNote {
 typedef struct BGMPlayer {
     /* 0x000 */ AuGlobals* globals;
     /* 0x004 */ SoundManager* soundManager;
-    /* 0x008 */ s32 sampleRate; //?
-    /* 0x00C */ s32 unk_0C;
-    /* 0x010 */ s32 unk_10;
-    /* 0x014 */ s32 unk_14;
+    /* 0x008 */ s32 nextUpdateStep; //?
+    /* 0x00C */ s32 nextUpdateInterval;
+    /* 0x010 */ s32 nextUpdateCounter;
+    /* 0x014 */ s32 updateCounter;
     /* 0x018 */ s32 unk_18;
     /* 0x01C */ s32 songName;
     /* 0x020 */ s32 fadeSongName;
@@ -864,7 +864,7 @@ typedef struct BGMPlayer {
     /* 0x064 */ struct BGMHeader* bgmFile;
     /* 0x068 */ SegData* segmentReadPos;
     /* 0x06C */ SegData* segmentStartPos;
-    /* 0x070 */ s32 unk_70;
+    /* 0x070 */ s32 subSegmentStartPos;
     /* 0x074 */ s32 unk_74;
     /* 0x078 */ BGMDrumInfo* drumsInfo;
     /* 0x07C */ BGMInstrumentInfo* instrumentsInfo;
@@ -881,7 +881,7 @@ typedef struct BGMPlayer {
     /* 0x0D4 */ SeqArgs seqCmdArgs;
     /* 0x0D8 */ SegData* segLoopStartLabels[32];
     /* 0x158 */ SegData* segActiveLoopEndPos[4];
-    /* 0x168 */ Q32 unk_168; // might be u8 loopCounters[4]?
+    /* 0x168 */ u8 segLoopCounters[4];
     /* 0x16C */ s32 proxMixValue;
     /* 0x170 */ u8 proxMixID;
     /* 0x171 */ u8 proxMixVolume;
@@ -910,7 +910,7 @@ typedef struct BGMPlayer {
     /* 0x22A */ u8 unk_22A[8];
     /* 0x232 */ u8 bFadeConfigSetsVolume;
     /* 0x233 */ u8 unk_233;
-    /* 0x234 */ u8 unk_234;
+    /* 0x234 */ u8 id;
     /* 0x235 */ u8 defaultReverbType;
     /* 0x236 */ char unk_236[0x2];
     /* 0x238 */ s32 unk_238[8];
@@ -982,7 +982,7 @@ typedef struct AlUnkLambda {
     /* 0x014 */ Q32 unk_14;
     /* 0x018 */ s32 unk_18;
     /* 0x01C */ s32 unk_1C;
-    /* 0x020 */ s32 unk_20;
+    /* 0x020 */ s32 mseqName;
     /* 0x024 */ u8 unk_24;
     /* 0x025 */ u8 unk_25;
     /* 0x026 */ u8 unk_26;
@@ -1005,7 +1005,7 @@ typedef struct AlUnkLambda {
 //TODO AuStreamingManager ?
 // 801D57A0
 typedef struct AmbientSoundManager {
-    /* 0x000 */ AuGlobals* unk_00;
+    /* 0x000 */ AuGlobals* globals;
     /* 0x004 */ s32 nextUpdateStep;
     /* 0x008 */ s32 nextUpdateInterval;
     /* 0x00C */ s32 nextUpdateCounter;
@@ -1056,7 +1056,7 @@ extern u8 D_80078E5C;
 extern AuGlobals* gSoundGlobals;
 extern BGMPlayer* gBGMPlayerC;
 extern BGMPlayer* gBGMPlayerB;
-extern UnkFuncAl D_8009A5E8;
+extern AuCallback BeginSoundUpdateCallback;
 extern AmbientSoundManager* gAmbientSoundManager;
 extern SoundManager* gSoundManager;
 extern BGMPlayer* gBGMPlayerA;

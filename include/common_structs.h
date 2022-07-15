@@ -710,8 +710,8 @@ typedef struct MusicSettings {
     /* 0x02 */ s16 state;
     /* 0x04 */ s32 fadeOutTime;
     /* 0x08 */ s32 fadeInTime;
-    /* 0x0C */ s16 unk_0C;
-    /* 0x0E */ s16 unk_0E;
+    /* 0x0C */ s16 fadeStartVolume;
+    /* 0x0E */ s16 fadeEndVolume;
     /* 0x10 */ s32 songID;
     /* 0x14 */ s32 variation;
     /* 0x18 */ s32 songName;
@@ -2491,5 +2491,19 @@ typedef struct SongUpdateEvent {
     /* 0x18 */ s32 unk18;
     /* 0x1C */ s32 unk1C; // may be fake
 } SongUpdateEvent; // size = 0x1C or 0x20
+
+// unfortunately, cant use bitfield for this
+// format: ABCC00DD
+// A = playerID
+// B = trackIndex
+// C = musicEventID
+// D = scriptSelector
+typedef u32 MusicEventTrigger;
+
+// allows Evt scripts to be triggered by BGM commands
+typedef struct MusicEvent {
+    s32 musicEventID; // user-defined, events will respond to BGM Trigger commands with matching ID
+    EvtScript* scripts[4];
+} MusicEvent;
 
 #endif

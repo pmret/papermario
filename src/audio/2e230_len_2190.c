@@ -30,7 +30,7 @@ void snd_load_audio_data(s32 outputRate) {
     gSoundManager = alHeapAlloc(alHeap, 1, sizeof(*gSoundManager));
     gAmbientSoundManager = alHeapAlloc(alHeap, 1, sizeof(*gAmbientSoundManager));
     gBGMPlayerA->soundManager = gSoundManager;
-    gAmbientSoundManager->unk_00 = gSoundGlobals;
+    gAmbientSoundManager->globals = gSoundGlobals;
 
 
     globals = gSoundGlobals;
@@ -48,15 +48,15 @@ void snd_load_audio_data(s32 outputRate) {
     globals->defaultInstrument = alHeapAlloc(alHeap, 1, sizeof(Instrument));
     globals->dataPER = alHeapAlloc(alHeap, 1, 6 * sizeof(PEREntry));
     globals->dataPRG = alHeapAlloc(alHeap, 1, 64 * sizeof(BGMInstrumentInfo));
-    globals->unk_arr_94 = alHeapAlloc(alHeap, 1, 0x40);
+    globals->musicEventQueue = alHeapAlloc(alHeap, 1, 16 * sizeof(MusicEventTrigger));
     globals->outputRate = outputRate;
     snd_reset_instrument(globals->defaultInstrument);
-    snd_reset_drum_entry(&globals->defaultDrumEntry);
-    snd_reset_instrument_entry(&globals->defaultPRGEntry);
-    func_8005610C();
+    au_reset_drum_entry(&globals->defaultDrumEntry);
+    au_reset_instrument_entry(&globals->defaultPRGEntry);
+    bgm_clear_music_events();
 
-    globals->unk_A4[0] = NULL;
-    globals->unk_A4[1] = NULL;
+    globals->audioThreadCallbacks[0] = NULL;
+    globals->audioThreadCallbacks[1] = NULL;
 
     for (i = 0; i < 1; i++) {
         globals->unk_globals_6C[i].unk_4 = 0;
@@ -158,7 +158,7 @@ void snd_reset_instrument(Instrument* instrument) {
     instrument->pitchRatio = 0.5f;
 }
 
-void snd_reset_drum_entry(BGMDrumInfo* arg0) {
+void au_reset_drum_entry(BGMDrumInfo* arg0) {
     arg0->bankPatch = 8208;
     arg0->keyBase = 4800; // middle C?
     arg0->volume = 0x7F;
@@ -170,7 +170,7 @@ void snd_reset_drum_entry(BGMDrumInfo* arg0) {
     arg0->unk_drum_0A = 0;
 }
 
-void snd_reset_instrument_entry(BGMInstrumentInfo* arg0) {
+void au_reset_instrument_entry(BGMInstrumentInfo* arg0) {
     arg0->bankPatch = 0x2010;
     arg0->volume = 0x7F;
     arg0->pan = 64;
@@ -179,7 +179,7 @@ void snd_reset_instrument_entry(BGMInstrumentInfo* arg0) {
     arg0->fineTune = 0;
 }
 
-void snd_update_sequence_players(void) {
+void au_update_sequence_players(void) {
     AuGlobals* temp_s2 = gSoundGlobals;
     SoundManager* sfxManager = gSoundManager;
     AmbientSoundManager* ambManager = gAmbientSoundManager;
@@ -214,10 +214,10 @@ void snd_update_sequence_players(void) {
             bgmPlayer1->unk_18++;
         }
 
-        bgmPlayer1->unk_10 -= bgmPlayer1->sampleRate;
-        if (bgmPlayer1->unk_10 <= 0) {
-            bgmPlayer1->unk_10 += bgmPlayer1->unk_0C;
-            bgmPlayer1->unk_5C = func_8004E4B8(bgmPlayer1);
+        bgmPlayer1->nextUpdateCounter -= bgmPlayer1->nextUpdateStep;
+        if (bgmPlayer1->nextUpdateCounter <= 0) {
+            bgmPlayer1->nextUpdateCounter += bgmPlayer1->nextUpdateInterval;
+            bgmPlayer1->unk_5C = bgm_player_update_main(bgmPlayer1);
         }
         if (!D_80078DB0) {
             if (temp_s2->unk_80 != 0) {
@@ -238,28 +238,28 @@ void snd_update_sequence_players(void) {
                 bgmPlayer2->unk_18++;
             }
 
-            bgmPlayer2->unk_10 -= bgmPlayer2->sampleRate;
-            if (bgmPlayer2->unk_10 <= 0) {
-                bgmPlayer2->unk_10 += bgmPlayer2->unk_0C;
-                bgmPlayer2->unk_5C = func_8004E4B8(bgmPlayer2);
+            bgmPlayer2->nextUpdateCounter -= bgmPlayer2->nextUpdateStep;
+            if (bgmPlayer2->nextUpdateCounter <= 0) {
+                bgmPlayer2->nextUpdateCounter += bgmPlayer2->nextUpdateInterval;
+                bgmPlayer2->unk_5C = bgm_player_update_main(bgmPlayer2);
             }
         }
     }
     func_80052660(temp_s2);
 }
 
-void snd_add_sfx_output(void) {
+void snd_update_players_main(void) {
     AuGlobals* globals = gSoundGlobals;
     BGMPlayer* player = gBGMPlayerA;
     SoundManager* manager = gSoundManager;
 
-    if (globals->unk_9C != 0) {
-        func_8005610C();
+    if (globals->flushMusicEventQueue) {
+        bgm_clear_music_events();
     }
 
-    D_8009A5E8 = globals->unk_A4[0];
-    if (D_8009A5E8 != NULL) {
-        D_8009A5E8();
+    BeginSoundUpdateCallback = globals->audioThreadCallbacks[0];
+    if (BeginSoundUpdateCallback != NULL) {
+        BeginSoundUpdateCallback();
     }
 
     func_8004D510(player);
@@ -638,7 +638,7 @@ AuResult func_80053F80(u32 ambSoundID) {
     globals = gSoundGlobals;
     manager = gAmbientSoundManager;
     if (ambSoundID < 16) {
-        if (manager->mseqLambda[0].unk_20 == 0 && SBN_LOOKUP(ambSoundID, AU_FMT_MSEQ, fileEntry) == AU_RESULT_OK) {
+        if (manager->mseqLambda[0].mseqName == 0 && SBN_LOOKUP(ambSoundID, AU_FMT_MSEQ, fileEntry) == AU_RESULT_OK) {
             snd_read_rom(fileEntry.offset, globals->dataMSEQ[0], fileEntry.data & 0xFFFFFF);
             manager->mseqFiles[0] = globals->dataMSEQ[0];
             for (i = 1; i < ARRAY_COUNT(manager->mseqFiles); i++) {
@@ -647,9 +647,9 @@ AuResult func_80053F80(u32 ambSoundID) {
             manager->unk_20 = 1;
         }
     } else if (ambSoundID == AMBIENT_RADIO
-            && manager->mseqLambda[0].unk_20 == 0
-            && manager->mseqLambda[1].unk_20 == 0
-            && manager->mseqLambda[2].unk_20 == 0) {
+            && manager->mseqLambda[0].mseqName == 0
+            && manager->mseqLambda[1].mseqName == 0
+            && manager->mseqLambda[2].mseqName == 0) {
         manager->unk_20 = 0;
         for (i = 0; i < ARRAY_COUNT(manager->mseqFiles); i++) {
             manager->mseqFiles[i] = NULL;
