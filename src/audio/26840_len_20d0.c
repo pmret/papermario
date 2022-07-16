@@ -1,6 +1,9 @@
 #include "common.h"
 #include "audio.h"
 
+static s32 _au_sef_get_random_pitch(s32 arg0, s32 arg1, s32 arg2);
+static u8 _au_sef_get_random_vol(s32 arg0, s32 arg1, s32 arg2);
+
 u16 DummyInstrumentPredictor[32] = {
     0xF803, 0x0125, 0x07D0, 0xFDBC, 0xF886, 0x0355, 0x06FC, 0xFBAB,
     0xFEDA, 0xF82D, 0x0245, 0x077D, 0xFCA9, 0xF901, 0x0456, 0x065D,
@@ -319,22 +322,22 @@ void func_8004B440(SoundManager* manager, u8 arg1, u8 arg2, AuGlobals* arg3, u8 
     manager->unk_5C = 0x8000;
     manager->unk_B8 = 0x8000;
     manager->playCounter = 0;
-    manager->unk_60 = 0;
+    manager->randomValue = 0;
 
     for (i = 0; i < ARRAY_COUNT(manager->unk_16C); i++) {
         SoundPlayer* sub = &manager->unk_16C[i];
 
         sub->sefDataReadPos = NULL;
         sub->sfxVolume = 0;
-        sub->unk_8E = 0;
-        sub->unk_90 = 0;
+        sub->delay = 0;
+        sub->playLength = 0;
         sub->unk_92 = 0;
         sub->unk_94 = 0;
         sub->sfxPan = 0;
         sub->reverb = 0;
         sub->instrumentIndex = 0;
         sub->unk_9E = 0;
-        sub->unk_9F = 0;
+        sub->playVelocity = 0;
         sub->unk_99 = 0;
         sub->locatorB = 0;
         sub->locatorC = 0;
@@ -357,7 +360,7 @@ void func_8004B440(SoundManager* manager, u8 arg1, u8 arg2, AuGlobals* arg3, u8 
     manager->unk_168 = 0;
     func_8004BA54(manager, 0);
     snd_clear_sfx_queue(manager);
-    snd_initialize_bgm_fade(&manager->fadeInfo, 0, 0x7FFF, 0x7FFF);
+    au_bgm_initialize_fade(&manager->fadeInfo, 0, 0x7FFF, 0x7FFF);
     func_80053A98(manager->unk_BE, manager->fadeInfo.currentVolume.u16, manager->unk_5C);
     manager->unk_8C = 0xFF;
 
@@ -445,13 +448,11 @@ void snd_enqueue_sfx_event(SoundManager* manager, u32 soundID, s16 volume, s16 p
     }
 }
 
-void func_8004B748(SoundManager* manager) {
+void au_sef_update_main(SoundManager* manager) {
     SoundSFXEntry newEntry;
     SoundSFXEntry* sfxEntry;
-    u32 k;
+    u32 i, j, k;
     s32 count;
-    u32 i;
-    u32 j;
     
     manager->playCounter++;
     if (manager->unk_168 != 0) {
@@ -580,21 +581,21 @@ void func_8004C0E4(SoundManager* manager, SoundPlayer* player, s8* readPos, Soun
         player->reverb = 0;
         player->instrumentIndex = 0;
         player->unk_9E = 0;
-        player->unk_9F = 0x7F;
+        player->playVelocity = 0x7F;
         player->unk_92 = 0;
         player->unk_94 = 0;
         player->loopStartPos = NULL;
         player->loopIterCount = 0;
-        player->unk_8E = 1;
-        player->unk_90 = 0;
+        player->delay = 1;
+        player->playLength = 0;
         player->currentSoundID = sfxEntry->soundID & SOUND_ID_LOWER;
         player->unk_98 = arg4;
         player->unk_99 = arg5;
         player->unk_18 = 0;
         player->changed.all = 0;
         player->unk_A0 = 0;
-        player->unk_A1 = 0;
-        player->unk_A2 = 0;
+        player->randomPitch = 0;
+        player->randomVelocity = 0;
         player->unk_A3 = 0;
         player->volumeLerp.current = 0x7FFFFFFF;
         player->volumeLerp.time = 0;
@@ -651,7 +652,7 @@ void _snd_stop_sound_by_id(SoundManager* manager, u32 soundID) {
             player->unk_80 = NULL;
             player->sfxParamsFlags = 1;
             player->unk_A9 = 0;
-            player->unk_8E = 1;
+            player->delay = 1;
             player->unk_98 = 0;
             player->unk_99 = 0;
         }
@@ -668,7 +669,7 @@ void func_8004C300(SoundManager* manager, u32 soundID) {
             player->unk_80 = NULL;
             player->sfxParamsFlags = 1;
             player->unk_A9 = 0;
-            player->unk_8E = 1;
+            player->delay = 1;
             player->unk_98 = 0;
             player->unk_99 = 0;
         }
@@ -715,7 +716,8 @@ s16 snd_sound_manager_update(SoundManager* manager) {
     u8 end;
     u8 i;
 
-    manager->unk_60 = (u16)manager->unk_60 + (u16)manager->playCounter;
+    // update pseudorandom number with fast 'good enough' method
+    manager->randomValue = (u16)manager->randomValue + (u16)manager->playCounter;
     
     start = manager->sfxPlayerSelector;
     for (i = start, end = start + 8; i < end; i++) {
@@ -760,7 +762,7 @@ void func_8004C578(SoundManager* manager, SoundPlayer* player, AlUnkVoice* arg2,
                 player->unk_98 = 0;
             } else {
                 if (!(player->sfxParamsFlags & 0x10)) {
-                    player->pitchRatio = snd_compute_pitch_ratio(
+                    player->pitchRatio = au_compute_pitch_ratio(
                         ((player->tuneLerp.current >> 0x10) - player->sfxInstrumentRef->keyBase) + player->masterPitchShift) * player->sfxInstrumentRef->pitchRatio;
                     if (arg2->pitchRatio != player->pitchRatio) {
                         arg2->unk_flags_43 |= 8;
@@ -793,9 +795,9 @@ void func_8004C578(SoundManager* manager, SoundPlayer* player, AlUnkVoice* arg2,
             a = (*player->sefDataReadPos++ & 0x7F);
             b = (*player->sefDataReadPos & 0xF) << 3;
             tune = a * 100;
-            player->unk_A1 = b;
-            if (player->unk_A1 != 0) {
-                player->tuneLerp.current = func_8004D428(manager->unk_60, (u8)player->unk_A1, tune) << 0x10;
+            player->randomPitch = b;
+            if (player->randomPitch != 0) {
+                player->tuneLerp.current = _au_sef_get_random_pitch(manager->randomValue, player->randomPitch, tune) << 0x10;
             } else {
                 player->tuneLerp.current = tune << 0x10;
             }
@@ -804,7 +806,7 @@ void func_8004C578(SoundManager* manager, SoundPlayer* player, AlUnkVoice* arg2,
             } else {
                 tune = ((player->tuneLerp.current >> 0x10) - player->sfxInstrumentRef->keyBase) + player->masterPitchShift;
             }
-            player->pitchRatio = snd_compute_pitch_ratio(tune) * player->sfxInstrumentRef->pitchRatio;
+            player->pitchRatio = au_compute_pitch_ratio(tune) * player->sfxInstrumentRef->pitchRatio;
             if (arg2->unk_45 <= manager->unk_BC) {
                 func_80053888(arg2, arg3);
                 if (!(player->sfxParamsFlags & 8) && player->masterPan != 0) {
@@ -846,44 +848,43 @@ s16 snd_get_scaled_volume(SoundManager* manager, SoundPlayer* player) {
     return outVolume;
 }
 
-void func_8004C884(SoundManager* manager, SoundPlayer* player, AlUnkVoice* arg2, u8 arg3) {
+void func_8004C884(SoundManager* manager, SoundPlayer* player, AlUnkVoice* voice, u8 arg3) {
     s32* var_v0_3;
     s32 pitchShift;
     s32 temp_a0;
     u8 opcode;
-    u32 var_a1;
+    u32 playLength;
     s32 var_s3;
     void (**CmdHandlers)(SoundManager*, SoundPlayer*);
     
     var_s3 = FALSE;
     if (player->unk_A9 == 1) {
         player->unk_A9 = 0;
-        if (arg2->unk_45 == manager->unk_BC) {
-            func_800538C4(arg2, arg3);
+        if (voice->unk_45 == manager->unk_BC) {
+            func_800538C4(voice, arg3);
         }
     }
 
     if (player->unk_80 != NULL) {
-        temp_a0 = player->soundC00;
-        if (temp_a0 == 1) {
+        if (player->soundC00 == 1) {
             player->sefDataReadPos = player->unk_80;
             player->unk_80 = NULL;
             player->soundC00 = 0;
-            player->unk_8E = temp_a0;
+            player->delay = 1;
         }
     }
     if (player->soundC00 == 2) {
         player->changed.volume = 1;
         player->sfxVolume = player->unk_5E;
     }
-    player->unk_8E--;
-    while ((player->unk_8E) == 0) {
+    player->delay--;
+    while ((player->delay) == 0) {
         CmdHandlers = SefCmdHandlers;
         opcode = *player->sefDataReadPos++;
         if (opcode < 0x80) {
             if (opcode == 0) {
-                if (arg2->unk_45 == manager->unk_BC) {
-                    func_800538C4(arg2, arg3);
+                if (voice->unk_45 == manager->unk_BC) {
+                    func_800538C4(voice, arg3);
                 }
                 player->sefDataReadPos = NULL;
                 player->currentSoundID = 0;
@@ -892,57 +893,61 @@ void func_8004C884(SoundManager* manager, SoundPlayer* player, AlUnkVoice* arg2,
                 return;
             }
             if (opcode >= 0x78) {
-                player->unk_8E = (u8)(*player->sefDataReadPos++) + ((opcode & 7) << 8) + 0x78;
+                // long delay
+                player->delay = (u8)(*player->sefDataReadPos++) + ((opcode & 7) << 8) + 0x78;
             } else {
-                player->unk_8E = opcode;
+                // short delay
+                player->delay = opcode;
             }
         } else if (opcode < 0xD8) {
-            if (player->unk_A1 != 0) {
-                player->tuneLerp.current = func_8004D428(manager->unk_60, player->unk_A1, (opcode & 0x7F) * 100) << 0x10;
+            // play sound
+            // (opcode & 0x7F) = pitch
+            if (player->randomPitch != 0) {
+                player->tuneLerp.current = _au_sef_get_random_pitch(manager->randomValue, player->randomPitch, (opcode & 0x7F) * 100) << 0x10;
             } else {
                 player->tuneLerp.current = ((opcode & 0x7F) * 100) << 0x10;
             }
             
-            if (player->unk_A2 != 0) {
-                player->unk_9F = func_8004D484(manager->unk_60, player->unk_A2, player->sefDataReadPos[0] & 0x7F);
+            if (player->randomVelocity != 0) {
+                player->playVelocity = _au_sef_get_random_vol(manager->randomValue, player->randomVelocity, player->sefDataReadPos[0] & 0x7F);
             } else {
-                player->unk_9F = player->sefDataReadPos[0] & 0x7F;
+                player->playVelocity = player->sefDataReadPos[0] & 0x7F;
             }
             
-            var_a1 = (u8)player->sefDataReadPos[1];
-            if (var_a1 >= 0xC0) {
-                var_a1 = (u8)player->sefDataReadPos[2] + ((var_a1 & 0x3F) << 8) + 0xC0;
+            playLength = player->sefDataReadPos[1];
+            if (playLength >= 0xC0) {
+                playLength = player->sefDataReadPos[2] + ((playLength & 0x3F) << 8) + 0xC0;
                 player->sefDataReadPos += 3;
             } else {
                 player->sefDataReadPos += 2;
             }
-            player->unk_90 = var_a1;
+            player->playLength = playLength;
 
-            if (arg2->unk_45 <= manager->unk_BC) {
-                func_80053888(arg2, arg3);
+            if (voice->unk_45 <= manager->unk_BC) {
+                func_80053888(voice, arg3);
                 if ((player->sfxParamsFlags & 8) || (player->masterPan == 0)) {
-                    arg2->pan = player->sfxPan;
+                    voice->pan = player->sfxPan;
                 } else {
-                    arg2->pan = player->masterPan;
+                    voice->pan = player->masterPan;
                 }
                 
-                arg2->reverb = player->reverb;
-                snd_set_voice_volume(arg2, manager, player);
+                voice->reverb = player->reverb;
+                snd_set_voice_volume(voice, manager, player);
                 if (player->unk_18 == 0) {
-                    arg2->unk_14.unk_00 = player->unk_10.unk_00;
-                    arg2->unk_14.unk_04 = player->unk_10.unk_04;
+                    voice->unk_14.unk_00 = player->unk_10.unk_00;
+                    voice->unk_14.unk_04 = player->unk_10.unk_04;
                 } else {
-                    arg2->unk_14.unk_00 = player->unk_18;
-                    arg2->unk_14.unk_04 = player->unk_10.unk_04;
+                    voice->unk_14.unk_00 = player->unk_18;
+                    voice->unk_14.unk_04 = player->unk_10.unk_04;
                 }
 
-                arg2->instrument = player->sfxInstrumentRef;
-                arg2->reverbType = manager->unk_BE;
+                voice->instrument = player->sfxInstrumentRef;
+                voice->reverbType = manager->unk_BE;
                 
-                arg2->unk_45 = manager->unk_BC;
-                arg2->unk_flags_43 = 2;
+                voice->unk_45 = manager->unk_BC;
+                voice->unk_flags_43 = 2;
                 var_s3 = TRUE;
-                arg2->unk_44 = manager->unk_BC;
+                voice->unk_44 = manager->unk_BC;
                 player->changed.tune = 1;
             }
         } else {
@@ -963,10 +968,10 @@ void func_8004C884(SoundManager* manager, SoundPlayer* player, AlUnkVoice* arg2,
     }
     
     if (!var_s3) {
-        if (player->unk_90 != 0) {
-            player->unk_90--;
-            if ((player->unk_90 == 0) && (arg2->unk_45 == manager->unk_BC)) {
-                arg2->unk_flags_3D |= 0x10;
+        if (player->playLength != 0) {
+            player->playLength--;
+            if ((player->playLength == 0) && (voice->unk_45 == manager->unk_BC)) {
+                voice->unk_flags_3D |= 0x10;
             }
         }
         if (player->tuneLerp.time != 0) {
@@ -980,32 +985,32 @@ void func_8004C884(SoundManager* manager, SoundPlayer* player, AlUnkVoice* arg2,
         }
         if (player->changed.pan || player->changed.reverb) {
             if ((player->sfxParamsFlags & 8) || (player->masterPan == 0)) {
-                arg2->pan = player->sfxPan;
+                voice->pan = player->sfxPan;
             } else {
-                arg2->pan = player->masterPan;
+                voice->pan = player->masterPan;
             }
-            arg2->unk_flags_43 |= 0x10;
-            arg2->reverb = player->reverb;
+            voice->unk_flags_43 |= 0x10;
+            voice->reverb = player->reverb;
         }
     }
-    if (player->changed.volume && (arg2->unk_45 == manager->unk_BC)) {
-        snd_set_voice_volume(arg2, manager, player);
-        arg2->unk_flags_3D |= 0x20;
+    if (player->changed.volume && (voice->unk_45 == manager->unk_BC)) {
+        snd_set_voice_volume(voice, manager, player);
+        voice->unk_flags_3D |= 0x20;
     }
     if (player->changed.tune) {
         f32 adjustedSampleRate;
         if (player->sfxParamsFlags & 0x10) {
             pitchShift = (player->unk_92 + (s16)(player->tuneLerp.current >> 0x10)) - player->sfxInstrumentRef->keyBase;
-            adjustedSampleRate = snd_compute_pitch_ratio(pitchShift + player->unk_94) * player->sfxInstrumentRef->pitchRatio;
+            adjustedSampleRate = au_compute_pitch_ratio(pitchShift + player->unk_94) * player->sfxInstrumentRef->pitchRatio;
             player->pitchRatio = adjustedSampleRate;
         } else {
             pitchShift = ((player->unk_92 + (s16)(player->tuneLerp.current >> 0x10)) - player->sfxInstrumentRef->keyBase) + player->unk_94;
-            adjustedSampleRate = snd_compute_pitch_ratio(pitchShift + player->masterPitchShift) * player->sfxInstrumentRef->pitchRatio;
+            adjustedSampleRate = au_compute_pitch_ratio(pitchShift + player->masterPitchShift) * player->sfxInstrumentRef->pitchRatio;
             player->pitchRatio = adjustedSampleRate;
         }
-        if ((arg2->unk_45 == manager->unk_BC) && (arg2->pitchRatio != adjustedSampleRate)) {
-            arg2->unk_flags_43 |= 8;
-            arg2->pitchRatio = player->pitchRatio;
+        if ((voice->unk_45 == manager->unk_BC) && (voice->pitchRatio != adjustedSampleRate)) {
+            voice->unk_flags_43 |= 8;
+            voice->pitchRatio = player->pitchRatio;
         }
     }
     player->changed.all = 0;
@@ -1014,7 +1019,7 @@ void func_8004C884(SoundManager* manager, SoundPlayer* player, AlUnkVoice* arg2,
 void snd_set_voice_volume(AlUnkVoice* voice, SoundManager* manager, SoundPlayer* player) {
     s32 x = ((((manager->unk_B8
         * player->sfxVolume) >> 0xF)
-        * player->unk_9F) >> 7)
+        * player->playVelocity) >> 7)
         * (player->volumeLerp.current >> 0x10) >> 0xF;
     
     if (player->sfxParamsFlags & 4 || player->masterVolume == 0) {
@@ -1136,7 +1141,7 @@ void snd_SEFCmd_06(SoundManager* manager, SoundPlayer* player) {
 
 void snd_SEFCmd_07(SoundManager* manager, SoundPlayer* player) {
     if (manager->currentVoice->unk_45 == manager->unk_BC) {
-        player->unk_8E = 2;
+        player->delay = 2;
         player->sefDataReadPos--;
     }
 }
@@ -1175,8 +1180,8 @@ void snd_SEFCmd_0A_EndLoop(SoundManager* manager, SoundPlayer* player) {
 }
 
 void snd_SEFCmd_0B(SoundManager* manager, SoundPlayer* player) {
-    if (player->unk_90 != 0) {
-        player->unk_8E = 3;
+    if (player->playLength != 0) {
+        player->delay = 3;
         player->sefDataReadPos--;
     }
 }
@@ -1261,7 +1266,7 @@ void snd_SEFCmd_SetUnkA1(SoundManager* manager, SoundPlayer* player) {
     s32 unkTemp = buf[0];
     player->sefDataReadPos = &buf[1];
 
-    player->unk_A1 = unkTemp;
+    player->randomPitch = unkTemp;
 }
 
 void snd_SEFCmd_SetUnkA2(SoundManager* manager, SoundPlayer* player) {
@@ -1269,7 +1274,7 @@ void snd_SEFCmd_SetUnkA2(SoundManager* manager, SoundPlayer* player) {
     s32 unkTemp = buf[0];
     player->sefDataReadPos = &buf[1];
 
-    player->unk_A2 = unkTemp;
+    player->randomVelocity = unkTemp;
 }
 
 void snd_SEFCmd_SetUnkA3(SoundManager* manager, SoundPlayer* player) {
@@ -1314,31 +1319,38 @@ void snd_SEFCmd_18(SoundManager* manager, SoundPlayer* player) {
     }
 }
 
-s32 func_8004D428(s32 arg0, s32 arg1, s32 arg2) {
-    s32 a = (arg0 >> 7) & 0xF;
-    s32 b = (arg0 << 3) & 0xF0;
-    s32 c = (a + b);
-    s32 d = (arg0 >> 5);
-    s32 e = (arg0 >> 2);
-    s32 f;
+/*
+Uses bit masks:
+780 = 0111 1000 0000 -> 0000 1111
+01E = 0000 0001 1110 -> 1111 0000
+*/
+static s32 _au_sef_get_random_pitch(s32 seed, s32 amplitude, s32 pitch) {
+    s32 lo = (seed >> 7) & 0xF;  // bitmask 0x780
+    s32 hi = (seed << 3) & 0xF0; // bitmask 0x01E
+    s32 random = (lo + hi);
+    s32 tap5 = (seed >> 5);
+    s32 tap2 = (seed >> 2);
+    s32 parity = (tap5 + tap2) & 1;
 
-    if ((d + e) & 1) {
-        f = c * 5;
-        return arg2 + ((arg1 * f) >> 8);
+    if (parity) {
+        return pitch + ((amplitude * 5 * random) >> 8);
     } else {
-        f = c * 5;
-        return arg2 - ((arg1 * f) >> 8);
+        return pitch - ((amplitude * 5 * random) >> 8);
     }
 }
 
-u8 func_8004D484(s32 arg0, s32 arg1, s32 arg2) {
-    s32 a = (arg0 & 0xCC) >> 2;
-    s32 b = (arg0 & 0x13) << 2;
-    s32 c = a + b;
+/*
+Uses bit masks:
+CC = 1100 1100 -> 0011 0011
+13 = 0001 0011 -> 0100 1100
+*/
+static u8 _au_sef_get_random_vol(s32 seed, s32 amplitude, s32 volume) {
+    s32 lo = (seed & 0xCC) >> 2;
+    s32 hi = (seed & 0x13) << 2;
+    s32 random = lo + hi;
     
-    return (arg2 * (0x8000 - (arg1 * c)) >> 0xF);
+    return volume * (0x8000 - (amplitude * random)) >> 0xF;
 }
-
 
 void func_8004D4BC(SoundManager* manager) {
     s32 i;
@@ -1349,7 +1361,7 @@ void func_8004D4BC(SoundManager* manager) {
         temp_v0->unk_80 = NULL;
         temp_v0->sfxParamsFlags = 1;
         temp_v0->unk_A9 = 0;
-        temp_v0->unk_8E = 1;
+        temp_v0->delay = 1;
         temp_v0->unk_98 = 0;
         temp_v0->unk_99 = 0;
     }

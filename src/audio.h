@@ -176,7 +176,7 @@ typedef union SeqArgs {
         u8 unk_02;
     } Jump;
     struct { // cmd FD
-        u32 unk_00;
+        u32 eventInfo;
     } EventTrigger;
     struct { // cmd FE
         u16 offset;
@@ -330,7 +330,7 @@ typedef struct AuPVoice {
     /* 0x74 */ s16 unk_74;
     /* 0x76 */ s16 unk_76;
     /* 0x78 */ u8 gammaID; //?
-    /* 0x79 */ u8 unk_79;
+    /* 0x79 */ u8 index;
     /* 0x7A */ u8 unk_7A[2];
 } AuPVoice;
 
@@ -447,8 +447,8 @@ typedef struct SoundPlayer {
     /* 0x88 */ s8* loopStartPos;
     /* 0x8C */ u8 loopIterCount;
     /* 0x8D */ char unk_8D;
-    /* 0x8E */ u16 unk_8E;
-    /* 0x90 */ u16 unk_90;
+    /* 0x8E */ u16 delay;
+    /* 0x90 */ u16 playLength;
     /* 0x92 */ s16 unk_92;
     /* 0x94 */ s8 unk_94;
     /* 0x95 */ char unk_05;
@@ -460,10 +460,10 @@ typedef struct SoundPlayer {
     /* 0x9C */ u8 reverb;
     /* 0x9D */ u8 instrumentIndex; // ?
     /* 0x9E */ u8 unk_9E;
-    /* 0x9F */ u8 unk_9F;
+    /* 0x9F */ u8 playVelocity;
     /* 0xA0 */ u8 unk_A0;
-    /* 0xA1 */ u8 unk_A1;
-    /* 0xA2 */ u8 unk_A2;
+    /* 0xA1 */ u8 randomPitch;
+    /* 0xA2 */ u8 randomVelocity;
     /* 0xA3 */ s8 unk_A3;
     /* 0xA4 */ s16 masterPitchShift;
     /* 0xA6 */ s16 masterVolume;
@@ -502,7 +502,7 @@ typedef struct SoundManager {
     /* 0x03C */ s32 nextUpdateCounter;
     /* 0x040 */ struct Fade fadeInfo;
     /* 0x05C */ s32 unk_5C;
-    /* 0x060 */ s32 unk_60;
+    /* 0x060 */ s32 randomValue;
     /* 0x064 */ s32* customReverbParams[8];
     /* 0x084 */ s8 unk_84[8];
     /* 0x08C */ u8 unk_8C;
@@ -600,11 +600,11 @@ typedef struct BGMDrumInfo {
     /* 0x2 */ s16 keyBase;
     /* 0x4 */ u8 volume;
     /* 0x5 */ s8 pan;
-    /* 0x6 */ s8 unk_06;
-    /* 0x7 */ u8 unk_07;
-    /* 0x8 */ u8 unk_08;
-    /* 0x9 */ u8 unk_09; // pan?
-    /* 0xA */ u8 unk_drum_0A; // reverb?
+    /* 0x6 */ s8 reverb;
+    /* 0x7 */ u8 randTune;
+    /* 0x8 */ u8 randVolume;
+    /* 0x9 */ u8 randPan;
+    /* 0xA */ u8 randReverb;
     /* 0xB */ char pad_B[1];
 } BGMDrumInfo; // size = 0xC
 
@@ -828,7 +828,7 @@ typedef struct BGMPlayerTrack {
 typedef struct SeqNote {
     /* 0x00 */ Instrument* ins;
     /* 0x00 */ f32 pitchRatio;
-    /* 0x08 */ s16 unk_08;
+    /* 0x08 */ s16 volume;
     /* 0x0A */ s16 adjustedPitch;
     /* 0x0C */ s32 noteLength;
     /* 0x10 */ u16 tremoloAmount;
@@ -842,11 +842,11 @@ typedef struct SeqNote {
 typedef struct BGMPlayer {
     /* 0x000 */ AuGlobals* globals;
     /* 0x004 */ SoundManager* soundManager;
-    /* 0x008 */ s32 nextUpdateStep; //?
+    /* 0x008 */ s32 nextUpdateStep;
     /* 0x00C */ s32 nextUpdateInterval;
     /* 0x010 */ s32 nextUpdateCounter;
     /* 0x014 */ s32 updateCounter;
-    /* 0x018 */ s32 unk_18;
+    /* 0x018 */ s32 songPlayingCounter;
     /* 0x01C */ s32 songName;
     /* 0x020 */ s32 fadeSongName;
     /* 0x024 */ s32 bgmFileIndex;
@@ -854,8 +854,8 @@ typedef struct BGMPlayer {
     /* 0x02C */ Fade fadeInfo;
     /* 0x048 */ s32 unk_48;
     /* 0x04C */ u8 effectIndices[4];
-    /* 0x050 */ s32 unk_50;
-    /* 0x054 */ s32 unk_54;
+    /* 0x050 */ s32 randomValue1;
+    /* 0x054 */ s32 randomValue2;
     /* 0x058 */ u16 unk_58;
     /* 0x05A */ s16 unk_5A;
     /* 0x05C */ s16 unk_5C;
@@ -864,7 +864,7 @@ typedef struct BGMPlayer {
     /* 0x064 */ struct BGMHeader* bgmFile;
     /* 0x068 */ SegData* segmentReadPos;
     /* 0x06C */ SegData* segmentStartPos;
-    /* 0x070 */ s32 subSegmentStartPos;
+    /* 0x070 */ SegData* subSegmentStartPos;
     /* 0x074 */ s32 unk_74;
     /* 0x078 */ BGMDrumInfo* drumsInfo;
     /* 0x07C */ BGMInstrumentInfo* instrumentsInfo;
@@ -1044,7 +1044,7 @@ extern s32 CUSTOM_ECHO_PARAMS_2[];
 extern s32 D_80078544[];
 extern u8 AmbientSoundIDtoMSEQFileIndex[];
 extern s32 D_800785A0[];
-extern s32 D_80078DB0;
+extern s32 PreventBGMPlayerUpdate;
 extern u16 D_80078DB6;
 
 extern AuSynDriver* gActiveSynDriverPtr;

@@ -1,7 +1,7 @@
 #include "common.h"
 #include "audio.h"
 
-s32 D_80078DB0 = FALSE;
+s32 PreventBGMPlayerUpdate = FALSE;
 u16 D_80078DB4 = 0;
 u16 D_80078DB6 = 0;
 
@@ -100,7 +100,7 @@ u8 TrackVols_KPA_3[] = {
 
 void func_80055050(ALHeap* heap) {
     D_80078DB4 = 1;
-    D_80078DB0 = FALSE;
+    PreventBGMPlayerUpdate = FALSE;
 }
 
 void func_80055068(u32 arg0) {
@@ -116,7 +116,7 @@ void func_80055068(u32 arg0) {
                 snd_start_sound_with_shift(arg0 >> 4, 0, 0, 0);
                 break;
             case 1:
-                if (temp_v1 == temp_a0) {
+                if (temp_v1 == 1) {
                     s32 filename = snd_load_song((arg0 >> 4) & 0xFF, 0);
 
                     if (filename > ASCII_TO_U32('0', ' ', ' ', '\0')) {
@@ -447,7 +447,7 @@ AuResult snd_start_song(s32 songName) {
     AuResult status;
     SongUpdateEvent s;
 
-    D_80078DB0 = TRUE;
+    PreventBGMPlayerUpdate = TRUE;
     s.songName = songName;
     s.duration = 0;
     s.startVolume = 127;
@@ -455,7 +455,7 @@ AuResult snd_start_song(s32 songName) {
     s.variation = 0;
     s.unk14 = 0;
     status = snd_dispatch_bgm_player_event(&s);
-    D_80078DB0 = FALSE;
+    PreventBGMPlayerUpdate = FALSE;
 
     return status;
 }
@@ -464,7 +464,7 @@ AuResult snd_start_song_variation(s32 songName, s32 variation) {
     AuResult status;
     SongUpdateEvent s;
 
-    D_80078DB0 = TRUE;
+    PreventBGMPlayerUpdate = TRUE;
     s.songName = songName;
     s.duration = 0;
     s.startVolume = 127;
@@ -472,7 +472,7 @@ AuResult snd_start_song_variation(s32 songName, s32 variation) {
     s.variation = variation;
     s.unk14 = 0;
     status = snd_dispatch_bgm_player_event(&s);
-    D_80078DB0 = FALSE;
+    PreventBGMPlayerUpdate = FALSE;
 
     return status;
 }
@@ -493,7 +493,7 @@ AuResult snd_set_song_variation_fade(s32 songName, s32 variation, s32 fadeInTime
     AuResult status;
     SongUpdateEvent s;
 
-    D_80078DB0 = TRUE;
+    PreventBGMPlayerUpdate = TRUE;
     s.songName = songName;
     s.duration = fadeInTime;
     s.startVolume = startVolume;
@@ -501,7 +501,7 @@ AuResult snd_set_song_variation_fade(s32 songName, s32 variation, s32 fadeInTime
     s.variation = variation;
     s.unk14 = 0;
     status = snd_dispatch_bgm_player_event(&s);
-    D_80078DB0 = FALSE;
+    PreventBGMPlayerUpdate = FALSE;
 
     return status;
 }
@@ -510,7 +510,7 @@ AuResult snd_set_song_fade(s32 songName, s32 fadeInTime, s32 startVolume, s32 en
     AuResult status;
     SongUpdateEvent s;
 
-    D_80078DB0 = TRUE;
+    PreventBGMPlayerUpdate = TRUE;
     s.songName = songName;
     s.duration = fadeInTime;
     s.startVolume = startVolume;
@@ -518,7 +518,7 @@ AuResult snd_set_song_fade(s32 songName, s32 fadeInTime, s32 startVolume, s32 en
     s.variation = 0;
     s.unk14 = 0;
     status = snd_dispatch_bgm_player_event(&s);
-    D_80078DB0 = FALSE;
+    PreventBGMPlayerUpdate = FALSE;
 
     return status;
 }
@@ -549,7 +549,7 @@ AuResult func_80055B28(s32 songName) {
     AuResult status;
     SongUpdateEvent s;
 
-    D_80078DB0 = TRUE;
+    PreventBGMPlayerUpdate = TRUE;
     s.songName = songName;
     s.duration = 2000;
     s.startVolume = 1;
@@ -557,7 +557,7 @@ AuResult func_80055B28(s32 songName) {
     s.variation = 0;
     s.unk14 = 0;
     status = func_8004DE2C(&s);
-    D_80078DB0 = FALSE;
+    PreventBGMPlayerUpdate = FALSE;
 
     return status;
 }
@@ -806,11 +806,11 @@ void bgm_flush_music_events(void) {
     gSoundGlobals->flushMusicEventQueue = TRUE;
 }
 
-void bgm_trigger_music_event(s32 playerID, s32 trackIndex, s32 eventIndex) {
+void bgm_trigger_music_event(s32 playerID, s32 trackIndex, s32 eventInfo) {
     AuGlobals* globals = gSoundGlobals;
 
     if (globals->musicEventQueueCount < 16) {
-        *globals->musicEventQueuePos++ = ((playerID << 0x1C) + ((trackIndex & 0xF) << 0x18) + eventIndex);
+        *globals->musicEventQueuePos++ = ((playerID << 0x1C) + ((trackIndex & 0xF) << 0x18) + eventInfo);
         globals->musicEventQueueCount++;
     }
 }

@@ -12,7 +12,7 @@ void func_80052E30(u8 index) {
     temp->unk_45 = 0;
 }
 
-void snd_load_audio_data(s32 outputRate) {
+void au_engine_init(s32 outputRate) {
     AuGlobals* globals;
     s32* dummyTrackData;
     ALHeap* alHeap;
@@ -50,7 +50,7 @@ void snd_load_audio_data(s32 outputRate) {
     globals->dataPRG = alHeapAlloc(alHeap, 1, 64 * sizeof(BGMInstrumentInfo));
     globals->musicEventQueue = alHeapAlloc(alHeap, 1, 16 * sizeof(MusicEventTrigger));
     globals->outputRate = outputRate;
-    snd_reset_instrument(globals->defaultInstrument);
+    au_reset_instrument(globals->defaultInstrument);
     au_reset_drum_entry(&globals->defaultDrumEntry);
     au_reset_instrument_entry(&globals->defaultPRGEntry);
     bgm_clear_music_events();
@@ -136,7 +136,7 @@ void snd_load_audio_data(s32 outputRate) {
     func_80055050(alHeap);
 }
 
-void snd_reset_instrument(Instrument* instrument) {
+static void au_reset_instrument(Instrument* instrument) {
     instrument->base = DummyInstrumentBase;
     instrument->wavDataLength = sizeof(DummyInstrumentBase);
     instrument->predictor = DummyInstrumentPredictor;
@@ -158,19 +158,19 @@ void snd_reset_instrument(Instrument* instrument) {
     instrument->pitchRatio = 0.5f;
 }
 
-void au_reset_drum_entry(BGMDrumInfo* arg0) {
+static void au_reset_drum_entry(BGMDrumInfo* arg0) {
     arg0->bankPatch = 8208;
     arg0->keyBase = 4800; // middle C?
     arg0->volume = 0x7F;
     arg0->pan = 64;
-    arg0->unk_06 = 0;
-    arg0->unk_07 = 0;
-    arg0->unk_08 = 0;
-    arg0->unk_09 = 0;
-    arg0->unk_drum_0A = 0;
+    arg0->reverb = 0;
+    arg0->randTune = 0;
+    arg0->randVolume = 0;
+    arg0->randPan = 0;
+    arg0->randReverb = 0;
 }
 
-void au_reset_instrument_entry(BGMInstrumentInfo* arg0) {
+static void au_reset_instrument_entry(BGMInstrumentInfo* arg0) {
     arg0->bankPatch = 0x2010;
     arg0->volume = 0x7F;
     arg0->pan = 64;
@@ -179,14 +179,13 @@ void au_reset_instrument_entry(BGMInstrumentInfo* arg0) {
     arg0->fineTune = 0;
 }
 
-void au_update_sequence_players(void) {
-    AuGlobals* temp_s2 = gSoundGlobals;
+void au_update_clients_2(void) {
+    AuGlobals* globals = gSoundGlobals;
     SoundManager* sfxManager = gSoundManager;
     AmbientSoundManager* ambManager = gAmbientSoundManager;
-    BGMPlayer* bgmPlayer1;
-    BGMPlayer* bgmPlayer2;
+    BGMPlayer* bgmPlayer;
 
-    func_80053654(temp_s2);
+    func_80053654(globals);
 
     ambManager->nextUpdateCounter -= ambManager->nextUpdateStep;
     if (ambManager->nextUpdateCounter <= 0) {
@@ -195,7 +194,7 @@ void au_update_sequence_players(void) {
     }
 
     if (sfxManager->fadeInfo.fadeTime != 0) {
-        func_80053A28(&sfxManager->fadeInfo);
+        au_sef_fade_update(&sfxManager->fadeInfo);
         func_80053A98(sfxManager->unk_BE, sfxManager->fadeInfo.currentVolume.u16, sfxManager->unk_5C);
     }
 
@@ -205,50 +204,52 @@ void au_update_sequence_players(void) {
         sfxManager->unk_BA = snd_sound_manager_update(sfxManager);
     }
 
-    if (!D_80078DB0) {
-        bgmPlayer1 = gBGMPlayerB;
-        if (bgmPlayer1->fadeInfo.fadeTime != 0) {
-            snd_update_bgm_fade(bgmPlayer1);
+    // update gBGMPlayerB
+    if (!PreventBGMPlayerUpdate) {
+        bgmPlayer = gBGMPlayerB;
+        if (bgmPlayer->fadeInfo.fadeTime != 0) {
+            snd_update_bgm_fade(bgmPlayer);
         }
-        if (bgmPlayer1->songName != 0) {
-            bgmPlayer1->unk_18++;
+        if (bgmPlayer->songName != 0) {
+            bgmPlayer->songPlayingCounter++;
         }
 
-        bgmPlayer1->nextUpdateCounter -= bgmPlayer1->nextUpdateStep;
-        if (bgmPlayer1->nextUpdateCounter <= 0) {
-            bgmPlayer1->nextUpdateCounter += bgmPlayer1->nextUpdateInterval;
-            bgmPlayer1->unk_5C = bgm_player_update_main(bgmPlayer1);
-        }
-        if (!D_80078DB0) {
-            if (temp_s2->unk_80 != 0) {
-                func_8004DFD4(temp_s2);
-            }
-            bgmPlayer2 = gBGMPlayerA;
-            if (bgmPlayer2->fadeInfo.volScaleTime != 0) {
-                func_80053BA8(&bgmPlayer2->fadeInfo);
-                if (bgmPlayer2->fadeInfo.fadeTime == 0) {
-                    func_8004E444(bgmPlayer2);
-                } else {
-                    snd_update_bgm_fade(bgmPlayer2);
-                }
-            } else if (bgmPlayer2->fadeInfo.fadeTime != 0) {
-                snd_update_bgm_fade(bgmPlayer2);
-            }
-            if (bgmPlayer2->songName != 0) {
-                bgmPlayer2->unk_18++;
-            }
-
-            bgmPlayer2->nextUpdateCounter -= bgmPlayer2->nextUpdateStep;
-            if (bgmPlayer2->nextUpdateCounter <= 0) {
-                bgmPlayer2->nextUpdateCounter += bgmPlayer2->nextUpdateInterval;
-                bgmPlayer2->unk_5C = bgm_player_update_main(bgmPlayer2);
-            }
+        bgmPlayer->nextUpdateCounter -= bgmPlayer->nextUpdateStep;
+        if (bgmPlayer->nextUpdateCounter <= 0) {
+            bgmPlayer->nextUpdateCounter += bgmPlayer->nextUpdateInterval;
+            bgmPlayer->unk_5C = bgm_player_update_main(bgmPlayer);
         }
     }
-    func_80052660(temp_s2);
+    
+    if (!PreventBGMPlayerUpdate) {
+        if (globals->unk_80 != 0) {
+            func_8004DFD4(globals);
+        }
+        bgmPlayer = gBGMPlayerA;
+        if (bgmPlayer->fadeInfo.volScaleTime != 0) {
+            func_80053BA8(&bgmPlayer->fadeInfo);
+            if (bgmPlayer->fadeInfo.fadeTime == 0) {
+                func_8004E444(bgmPlayer);
+            } else {
+                snd_update_bgm_fade(bgmPlayer);
+            }
+        } else if (bgmPlayer->fadeInfo.fadeTime != 0) {
+            snd_update_bgm_fade(bgmPlayer);
+        }
+        if (bgmPlayer->songName != 0) {
+            bgmPlayer->songPlayingCounter++;
+        }
+
+        bgmPlayer->nextUpdateCounter -= bgmPlayer->nextUpdateStep;
+        if (bgmPlayer->nextUpdateCounter <= 0) {
+            bgmPlayer->nextUpdateCounter += bgmPlayer->nextUpdateInterval;
+            bgmPlayer->unk_5C = bgm_player_update_main(bgmPlayer);
+        }
+    }
+    func_80052660(globals);
 }
 
-void snd_update_players_main(void) {
+void au_update_players_main(void) {
     AuGlobals* globals = gSoundGlobals;
     BGMPlayer* player = gBGMPlayerA;
     SoundManager* manager = gSoundManager;
@@ -262,12 +263,12 @@ void snd_update_players_main(void) {
         BeginSoundUpdateCallback();
     }
 
-    func_8004D510(player);
+    au_bgm_update_main(player);
 
     player = gBGMPlayerB;
-    func_8004D510(player);
+    au_bgm_update_main(player);
 
-    func_8004B748(manager);
+    au_sef_update_main(manager);
 }
 
 void func_80053654(AuGlobals* globals) {
@@ -366,18 +367,18 @@ void func_800538C4(AlUnkVoice* arg0, u8 arg1) {
 #define TUNE_SCALING_ARR_ATTENUATE_FINE 160
 #define TUNE_SCALING_ARR_ATTENUATE_COARSE 288
 
-f32 snd_compute_pitch_ratio(s32 arg0) {
-    if (arg0 >= 0) {
-        return AlTuneScaling[(arg0 & 0x7F) + TUNE_SCALING_ARR_AMPLIFY_FINE]
-            * AlTuneScaling[((arg0 & 0xF80) >> 7) + TUNE_SCALING_ARR_AMPLIFY_COARSE];
+f32 au_compute_pitch_ratio(s32 pitch) {
+    if (pitch >= 0) {
+        return AlTuneScaling[(pitch & 0x7F) + TUNE_SCALING_ARR_AMPLIFY_FINE]
+            * AlTuneScaling[((pitch & 0xF80) >> 7) + TUNE_SCALING_ARR_AMPLIFY_COARSE];
     } else {
-        arg0 = -arg0;
-        return AlTuneScaling[(arg0 & 0x7F) + TUNE_SCALING_ARR_ATTENUATE_FINE]
-            * AlTuneScaling[((arg0 & 0x3F80) >> 7) + TUNE_SCALING_ARR_ATTENUATE_COARSE];
+        pitch = -pitch;
+        return AlTuneScaling[(pitch & 0x7F) + TUNE_SCALING_ARR_ATTENUATE_FINE]
+            * AlTuneScaling[((pitch & 0x3F80) >> 7) + TUNE_SCALING_ARR_ATTENUATE_COARSE];
     }
 }
 
-void snd_initialize_bgm_fade(Fade* fade, s32 time, s32 startValue, s32 endValue) {
+void au_bgm_initialize_fade(Fade* fade, s32 time, s32 startValue, s32 endValue) {
     fade->currentVolume.s32 = startValue * 0x10000;
     fade->targetVolume = endValue;
 
@@ -392,13 +393,13 @@ void snd_initialize_bgm_fade(Fade* fade, s32 time, s32 startValue, s32 endValue)
     fade->onCompleteCallback = NULL;
 }
 
-void snd_clear_bgm_fade(Fade* fade) {
+void au_bgm_clear_fade(Fade* fade) {
     fade->fadeTime = 0;
     fade->fadeStep = 0;
     fade->onCompleteCallback = NULL;
 }
 
-void func_80053A28(Fade* fade) {
+void au_sef_fade_update(Fade* fade) {
     fade->fadeTime--;
 
     if ((fade->fadeTime << 0x10) != 0) {

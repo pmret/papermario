@@ -25,7 +25,7 @@ s16 AuEqPower[128] = {
 static Acmd* _decodeChunk(Acmd* cmdBufPos, AuLoadFilter* arg1, s32 count, s32 size, s16 arg4, s16 arg5, s32 flags);
 static s16 _getRate(f64 arg0, f64 arg1, s32 arg4, u16* arg5);
 
-// n_alAdpcmPull
+// au_pull_voice -- based on n_alAdpcmPull
 INCLUDE_ASM(s32, "audio/33450", func_80058050);
 
 static Acmd* _decodeChunk(Acmd* cmdBufPos, AuLoadFilter* filter, s32 tsam, s32 nbytes, s16 output, s16 input, s32 flags) {

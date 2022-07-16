@@ -71,7 +71,7 @@ void au_driver_init(AuSynDriver* driver, ALConfig* config) {
         voice->unk_74 = 0;
         voice->next = NULL;
         voice->gammaID = 0;
-        voice->unk_79 = i;
+        voice->index = i;
     }
 
     gSynDriverPtr->al_unk_gamma = alHeapAlloc(heap, config->unk_num_gamma, sizeof(*gSynDriverPtr->al_unk_gamma));
@@ -119,14 +119,14 @@ Acmd* alAudioFrame(Acmd* cmdList, s32* cmdLen, s16* outBuf, s32 outLen) {
     s16 mainOut;
 
     s32 i;
-    s32 var_s7;
+    s32 var_s7 = FALSE;
 
     cmdListPos = cmdList;
     bufPos = outBuf;
     if (gActiveSynDriverPtr == NULL) {
         *cmdLen = 0;
     } else {
-        snd_update_players_main();
+        au_update_players_main();
         if (D_80078E5C) {
             for (i = 0; i < gSynDriverPtr->num_pvoice; i++) {
                 pvoice = &gSynDriverPtr->pvoices[i];
@@ -137,7 +137,7 @@ Acmd* alAudioFrame(Acmd* cmdList, s32* cmdLen, s16* outBuf, s32 outLen) {
             D_80078E5C = FALSE;
         }
         while (outLen > 0) {
-            au_update_sequence_players();
+            au_update_clients_2();
             for (i = 0; i < gSynDriverPtr->num_pvoice; i++) {
                 pvoice = &gSynDriverPtr->pvoices[i];
 
@@ -151,7 +151,7 @@ Acmd* alAudioFrame(Acmd* cmdList, s32* cmdLen, s16* outBuf, s32 outLen) {
                     gamma->pvoice_14 = pvoice;
                 }
             }
-            var_s7 = 1;
+            var_s7 = TRUE;
             for (i = 0; i < gSynDriverPtr->unk_num_gamma; i++) {
                 gamma = &gSynDriverPtr->al_unk_gamma[i];
                 if (gamma->pvoice_10 != NULL) {
@@ -163,7 +163,7 @@ Acmd* alAudioFrame(Acmd* cmdList, s32* cmdLen, s16* outBuf, s32 outLen) {
                             next = gamma->pvoice_10->next;
                             gamma->pvoice_10->next = NULL;
                             gamma->pvoice_10 = next;
-                        } while (next != 0);
+                        } while (next != NULL);
                         gamma->pvoice_14 = 0;
                     }
                     if (gamma->currentEffectID != 0) {

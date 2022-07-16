@@ -253,7 +253,7 @@ void func_8005904C(AuFX* fx, u8 effect) {
     }
 }
 
-// alFxPull
+// au_pull_fx -- based on alFxPull
 // AuFX from gSynDriverPtr
 INCLUDE_ASM(s32, "audio/reverb", func_80059310);
 

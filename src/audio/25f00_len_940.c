@@ -83,7 +83,7 @@ void create_audio_system(void) {
     osCreateMesgQueue(&nuAuDmaMesgQ, nuAuDmaMesgBuf, 50);
     nuAuPreNMIFunc = func_8004B328;
     au_driver_init(&auSynDriver, &config);
-    snd_load_audio_data(config.outputRate);
+    au_engine_init(config.outputRate);
     osCreateThread(&nuAuMgrThread, NU_MAIN_THREAD_ID, nuAuMgr, NULL, &AlCmdListBuffers, NU_AU_MGR_THREAD_PRI); //why main thread?
     osStartThread(&nuAuMgrThread);
 }

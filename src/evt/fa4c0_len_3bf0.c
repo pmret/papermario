@@ -21,17 +21,14 @@ static EvtScript EVS_MusicEventMonitor = {
 
 static s32 PollMusicEvents(Evt* script, s32 isInitialCall) {
     MusicEventTrigger* list;
-    u32 count;
-    MusicEvent* cur;
-    EvtScript* newSource;
-    Evt* newEvt;
     s32 musicEventID, scriptSelector;
+    u32 count;
     s32 i;
 
     bgm_poll_music_events(&list, &count);
     
     for (i = 0; i < count; i++, list++) {
-        cur = MusicEventList;
+        MusicEvent* cur = MusicEventList;
         musicEventID = (*list & 0xFF0000) >> 0x10;
         scriptSelector = *list & 0xFF;
         while (cur->musicEventID != -1) {
@@ -43,12 +40,12 @@ static s32 PollMusicEvents(Evt* script, s32 isInitialCall) {
         // bug? can cur ever be NULL here?
         // condition should probably be if (cur->musicEventID != -1)
         if (cur != NULL) {
-            newSource = cur->scripts[scriptSelector];
+            EvtScript* newSource = cur->scripts[scriptSelector];
             if (RunningMusicEvents[musicEventID] != NULL) {
                 kill_script_by_ID(RunningMusicEventIDs[musicEventID]);
             }
             if (newSource != NULL) {
-                newEvt = start_script(newSource, 1, 0);
+                Evt* newEvt = start_script(newSource, 1, 0);
                 RunningMusicEvents[musicEventID] = newEvt;
                 RunningMusicEventIDs[musicEventID] = newEvt->id;
             }

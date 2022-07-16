@@ -383,7 +383,7 @@ void func_8005232C(AmbientSoundManager* manager, AlUnkLambda* lambda) {
                     iota->unk_04 = ((omega->unk_01 & 0x7F) * 100) - xi->instrument->keyBase;
                     iota->unk_06 = omega->unk_02 & 0x7F;
                     voice->adjustedVolume = ((lambda->unk_38 >> 0x18) * xi->unk_18.half * iota->unk_06) >> 0xE;
-                    voice->pitchRatio = snd_compute_pitch_ratio(iota->unk_04 + xi->unk_0C) * xi->instrument->pitchRatio;
+                    voice->pitchRatio = au_compute_pitch_ratio(iota->unk_04 + xi->unk_0C) * xi->instrument->pitchRatio;
                     voice->pan = xi->pan;
                     voice->reverb = xi->reverb;
                     voice->instrument = xi->instrument;
