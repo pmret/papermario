@@ -81,11 +81,11 @@ void au_driver_init(AuSynDriver* driver, ALConfig* config) {
         gamma->pvoice_10 = NULL;
         gamma->pvoice_14 = NULL;
         gamma->unk_00 = 0x7FFF;
-        gamma->currentEffectID = 0;
+        gamma->currentEffectType = AU_FX_NONE;
         gamma->fxL = alHeapAlloc(heap, 1, sizeof(*gamma->fxL));
         gamma->fxR = alHeapAlloc(heap, 1, sizeof(*gamma->fxR));
-        func_80058E84(gamma->fxL, gamma->currentEffectID, heap);
-        func_80058E84(gamma->fxR, gamma->currentEffectID, heap);
+        func_80058E84(gamma->fxL, gamma->currentEffectType, heap);
+        func_80058E84(gamma->fxR, gamma->currentEffectType, heap);
     }
 
     gSynDriverPtr->unk_drvr_24 = alHeapAlloc(heap, 2 * AUDIO_SAMPLES, 2);
@@ -166,7 +166,7 @@ Acmd* alAudioFrame(Acmd* cmdList, s32* cmdLen, s16* outBuf, s32 outLen) {
                         } while (next != NULL);
                         gamma->pvoice_14 = 0;
                     }
-                    if (gamma->currentEffectID != 0) {
+                    if (gamma->currentEffectType != AU_FX_NONE) {
                         cmdListPos = func_80059310(gamma->fxL, cmdListPos, N_AL_AUX_L_OUT, 0);
                         cmdListPos = func_80059310(gamma->fxR, cmdListPos, N_AL_AUX_R_OUT, 0);
                     }
@@ -245,40 +245,40 @@ s16 func_80056D50(void) {
     return D_80078E5A;
 }
 
-void func_80056D5C(u8 arg0) {
-    D_80078181 = arg0;
+void func_80056D5C(u8 bStereoSound) {
+    AuSynUseStereo = bStereoSound;
     D_80078E5C = TRUE;
 }
 
-void func_80056D78(u8 arg0, u16 arg1) {
-    AlUnkGamma* gamma = &gSynDriverPtr->al_unk_gamma[arg0];
+void func_80056D78(u8 index, u16 arg1) {
+    AlUnkGamma* gamma = &gSynDriverPtr->al_unk_gamma[index];
 
     gamma->unk_00 = arg1 & 0x7FFF;
 }
 
-u16 func_80056DA4(u8 arg0, u16 arg1) {
-    AlUnkGamma* gamma = &gSynDriverPtr->al_unk_gamma[arg0];
+u16 func_80056DA4(u8 index, u16 arg1) {
+    AlUnkGamma* gamma = &gSynDriverPtr->al_unk_gamma[index];
 
     return gamma->unk_00;
 }
 
-void func_80056DCC(u8 arg0, u8 effectID) {
-    AlUnkGamma* gamma = &gSynDriverPtr->al_unk_gamma[arg0];
+void func_80056DCC(u8 index, u8 effectType) {
+    AlUnkGamma* gamma = &gSynDriverPtr->al_unk_gamma[index];
 
-    gamma->currentEffectID = effectID;
-    func_8005904C(gamma->fxL, effectID);
-    func_8005904C(gamma->fxR, effectID);
+    gamma->currentEffectType = effectType;
+    func_8005904C(gamma->fxL, effectType);
+    func_8005904C(gamma->fxR, effectType);
 }
 
-void func_80056E34(u8 arg0, s16 arg1, s16 arg2, s32 arg3) {
-    AlUnkGamma* gamma = &gSynDriverPtr->al_unk_gamma[arg0];
+void func_80056E34(u8 index, s16 delayIndex, s16 paramID, s32 value) {
+    AlUnkGamma* gamma = &gSynDriverPtr->al_unk_gamma[index];
 
-    au_fx_param_hdl(gamma->fxL, arg1, arg2, arg3);
-    au_fx_param_hdl(gamma->fxR, arg1, arg2, arg3);
+    au_fx_param_hdl(gamma->fxL, delayIndex, paramID, value);
+    au_fx_param_hdl(gamma->fxR, delayIndex, paramID, value);
 }
 
-void func_80056EC0(u8 arg0, s8 arg1) {
-    AuPVoice* pvoice = &gSynDriverPtr->pvoices[arg0];
+void func_80056EC0(u8 index, s8 arg1) {
+    AuPVoice* pvoice = &gSynDriverPtr->pvoices[index];
 
     pvoice->gammaID = arg1;
 }
@@ -371,7 +371,7 @@ void au_pvoice_set_filter(u8 index, u8 reverbType, Instrument* instrument, f32 p
         envMixer->em_cvolL = 1;
         envMixer->em_cvolR = 1;
     } else {
-        if (D_80078181 == 0) {
+        if (!AuSynUseStereo) {
             envMixer->em_cvolL = (envMixer->em_volume * AuEqPower[AU_EQPOW_MID_IDX]) >> 0xF;
             envMixer->em_cvolR = (envMixer->em_volume * AuEqPower[AU_EQPOW_MID_IDX]) >> 0xF;
         } else {
@@ -431,7 +431,7 @@ void func_8005736C(u8 voiceIdx, s16 volume, s32 arg2, u8 arg3, u8 arg4) {
 
     if (envMixer->em_delta >= envMixer->em_segEnd) {
         envMixer->em_delta = envMixer->em_segEnd;
-        if (D_80078181 == 0) {
+        if (!AuSynUseStereo) {
             envMixer->em_cvolL = (envMixer->em_volume * AuEqPower[AU_EQPOW_MID_IDX]) >> 0xF;
             envMixer->em_cvolR = (envMixer->em_volume * AuEqPower[AU_EQPOW_MID_IDX]) >> 0xF;
         } else {
@@ -464,7 +464,7 @@ void func_80057548(u8 voiceIdx, u8 arg1, u8 arg2) {
 
     if (envMixer->em_delta >= envMixer->em_segEnd) {
         envMixer->em_delta = envMixer->em_segEnd;
-        if (D_80078181 == 0) {
+        if (!AuSynUseStereo) {
             envMixer->em_cvolL = (envMixer->em_volume * AuEqPower[AU_EQPOW_MID_IDX]) >> 0xF;
             envMixer->em_cvolR = (envMixer->em_volume * AuEqPower[AU_EQPOW_MID_IDX]) >> 0xF;
         } else {
@@ -494,7 +494,7 @@ void func_800576EC(u8 voiceIdx, s16 arg1, s32 arg2) {
 
     if (envMixer->em_delta >= envMixer->em_segEnd) {
         envMixer->em_delta = envMixer->em_segEnd;
-        if (D_80078181 == 0) {
+        if (!AuSynUseStereo) {
             envMixer->em_cvolL = (envMixer->em_volume * AuEqPower[AU_EQPOW_MID_IDX]) >> 0xF;
             envMixer->em_cvolR = (envMixer->em_volume * AuEqPower[AU_EQPOW_MID_IDX]) >> 0xF;
         } else {
@@ -524,7 +524,7 @@ void func_80057874(u8 voiceIdx, u8 pan) {
 
     if (envMixer->em_delta >= envMixer->em_segEnd) {
         envMixer->em_delta = envMixer->em_segEnd;
-        if (D_80078181 == 0) {
+        if (!AuSynUseStereo) {
             envMixer->em_cvolL = (envMixer->em_volume * AuEqPower[AU_EQPOW_MID_IDX]) >> 0xF;
             envMixer->em_cvolR = (envMixer->em_volume * AuEqPower[AU_EQPOW_MID_IDX]) >> 0xF;
         } else {
@@ -552,7 +552,7 @@ void func_800579D8(u8 voiceIdx, u8 dryAmt) {
 
     if (envMixer->em_delta >= envMixer->em_segEnd) {
         envMixer->em_delta = envMixer->em_segEnd;
-        if (D_80078181 == 0) {
+        if (!AuSynUseStereo) {
             envMixer->em_cvolL = (envMixer->em_volume * AuEqPower[AU_EQPOW_MID_IDX]) >> 0xF;
             envMixer->em_cvolR = (envMixer->em_volume * AuEqPower[AU_EQPOW_MID_IDX]) >> 0xF;
         } else {
@@ -617,7 +617,7 @@ s32 func_80057C54(u8 voiceIdx) {
     u32 retVal;
 
     if (sub48->em_delta >= sub48->em_segEnd) {
-        if (D_80078181 == 0) {
+        if (!AuSynUseStereo) {
             retVal = (sub48->em_volume * AuEqPower[AU_EQPOW_MID_IDX] * 2) >> 0x10;
         } else {
             retVal = (sub48->em_volume * AuEqPower[sub48->em_pan] * 2) >> 0x10;
@@ -634,7 +634,7 @@ s32 func_80057D0C(u8 voiceIdx) {
     u32 retVal;
 
     if (sub48->em_delta >= sub48->em_segEnd) {
-        if (D_80078181 == 0) {
+        if (!AuSynUseStereo) {
             retVal = (sub48->em_volume * AuEqPower[AU_EQPOW_MID_IDX] * 2) >> 0x10;
         } else {
             retVal = (sub48->em_volume * AuEqPower[AU_EQPOW_MAX_IDX - sub48->em_pan] * 2) >> 0x10;

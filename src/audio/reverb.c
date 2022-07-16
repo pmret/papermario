@@ -126,7 +126,8 @@ static void _init_lpfilter(AuLowPass* lp) {
 
 // definately AuFX, evidenced by call to func_8005904C
 // this is n_alFxNew
-void func_80058E84(AuFX* fx, u8 mode, ALHeap* heap) {
+/// @param effectType from enum AuEffectType
+void func_80058E84(AuFX* fx, u8 effectType, ALHeap* heap) {
     AuDelay* delay;
     u16 i;
 
@@ -142,7 +143,7 @@ void func_80058E84(AuFX* fx, u8 mode, ALHeap* heap) {
         delay->lowpass_24->fstate = alHeapAlloc(heap, 1, sizeof(POLEF_STATE));
     }
     
-    func_8005904C(fx, mode);
+    func_8005904C(fx, effectType);
 }
 
 // no known calls to this function
@@ -169,41 +170,41 @@ void func_80059008(AlUnkKappa* kappa, s16 arg1, s16 arg2, s16 fc) {
 }
 
 // part of n_alFxNew, extracted to allow reseting fx without reallocating AuFX
-void func_8005904C(AuFX* fx, u8 effect) {
+void func_8005904C(AuFX* fx, u8 effectType) {
     s32* params;
     s32* clr;
     s32 i, j;
     clr = (s32*)fx->base;
     
-    switch (effect) {
-        case AL_FX_SMALLROOM:
+    switch (effectType) {
+        case AU_FX_SMALLROOM:
             params = SMALL_ROOM_PARAMS;
             break;
-        case AL_FX_BIGROOM:
+        case AU_FX_BIGROOM:
             params = BIG_ROOM_PARAMS;
             break;
-        case AL_FX_ECHO:
+        case AU_FX_ECHO:
             params = ECHO_PARAMS;
             break;
-        case AL_FX_CHORUS:
+        case AU_FX_CHORUS:
             params = CHORUS_PARAMS;
             break;
-        case AL_FX_FLANGE:
+        case AU_FX_FLANGE:
             params = FLANGE_PARAMS;
             break;
-        case 6:
+        case AU_FX_CUSTOM_0:
             params = AU_FX_CUSTOM_PARAMS[0];
             break;
-        case 7:
+        case AU_FX_CUSTOM_1:
             params = AU_FX_CUSTOM_PARAMS[1];
             break;
-        case 8:
+        case AU_FX_CUSTOM_2:
             params = AU_FX_CUSTOM_PARAMS[2];
             break;
-        case 9:
+        case AU_FX_CUSTOM_3:
             params = AU_FX_CUSTOM_PARAMS[3];
             break;
-        case 10:
+        case AU_FX_OTHER_BIGROOM:
             params = BIG_ROOM_PARAMS;
             break;
         default:

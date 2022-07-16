@@ -550,7 +550,7 @@ glabel func_80051434
 /* 2D014 80051C14 96060000 */  lhu       $a2, ($s0)
 /* 2D018 80051C18 26270014 */  addiu     $a3, $s1, 0x14
 /* 2D01C 80051C1C 00062A02 */  srl       $a1, $a2, 8
-/* 2D020 80051C20 0C014EFA */  jal       func_80053BE8
+/* 2D020 80051C20 0C014EFA */  jal       au_get_instrument
 /* 2D024 80051C24 30C600FF */   andi     $a2, $a2, 0xff
 /* 2D028 80051C28 AE220000 */  sw        $v0, ($s1)
 /* 2D02C 80051C2C 96030002 */  lhu       $v1, 2($s0)
@@ -795,7 +795,7 @@ glabel func_80051434
 /* 2D3A4 80051FA4 8FA80070 */  lw        $t0, 0x70($sp)
 /* 2D3A8 80051FA8 328600FF */  andi      $a2, $s4, 0xff
 /* 2D3AC 80051FAC 8D040000 */  lw        $a0, ($t0)
-/* 2D3B0 80051FB0 0C014EFA */  jal       func_80053BE8
+/* 2D3B0 80051FB0 0C014EFA */  jal       au_get_instrument
 /* 2D3B4 80051FB4 26670004 */   addiu    $a3, $s3, 4
 /* 2D3B8 80051FB8 0801482C */  j         .L800520B0
 /* 2D3BC 80051FBC AE620000 */   sw       $v0, ($s3)

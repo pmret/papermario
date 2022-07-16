@@ -56,6 +56,20 @@ typedef u8* WaveData;
 
 typedef u32 SegData;
 
+typedef enum AuEffectType {
+    AU_FX_NONE          = 0,
+    AU_FX_SMALLROOM     = 1,
+    AU_FX_BIGROOM       = 2,
+    AU_FX_CHORUS        = 3,
+    AU_FX_FLANGE        = 4,
+    AU_FX_ECHO          = 5,
+    AU_FX_CUSTOM_0      = 6,
+    AU_FX_CUSTOM_1      = 7,
+    AU_FX_CUSTOM_2      = 8,
+    AU_FX_CUSTOM_3      = 9,
+    AU_FX_OTHER_BIGROOM = 10
+} AuEffectType;
+
 typedef enum BGMPlayerState {
     BGM_PLAY_STATE_0                = 0,    // INITIALIZED
     BGM_STATE_PLAYING               = 1,    // PLAYING
@@ -271,7 +285,7 @@ typedef struct AlUnkGamma {
     /* 0x02 */ char unk_02[0x2];
     /* 0x04 */ AuFX* fxL;
     /* 0x08 */ AuFX* fxR;
-    /* 0x0C */ u8 currentEffectID;
+    /* 0x0C */ u8 currentEffectType;
     /* 0x0D */ char unk_0D[0x3];
     /* 0x10 */ struct AuPVoice* pvoice_10;
     /* 0x14 */ struct AuPVoice* pvoice_14;
@@ -491,7 +505,7 @@ typedef struct SoundManagerA0 {
 } SoundManagerA0; // size = 6
 
 typedef struct SoundManager {
-    /* 0x000 */ struct AuGlobals* soundData;
+    /* 0x000 */ struct AuGlobals* globals;
     /* 0x004 */ struct AlUnkVoice* currentVoice;
     /* 0x008 */ struct SEFHeader* sefData;
     /* 0x00C */ s32* normalSounds[8];
@@ -504,8 +518,8 @@ typedef struct SoundManager {
     /* 0x05C */ s32 unk_5C;
     /* 0x060 */ s32 randomValue;
     /* 0x064 */ s32* customReverbParams[8];
-    /* 0x084 */ s8 unk_84[8];
-    /* 0x08C */ u8 unk_8C;
+    /* 0x084 */ s8 customReverbAmounts[8];
+    /* 0x08C */ u8 lastCustomEffectIdx;
     /* 0x08D */ s8 defaultReverbAmt;
     /* 0x08E */ char unk_8E[0x2];
     /* 0x090 */ SoundManager90 unk_90[4];
@@ -525,7 +539,7 @@ typedef struct SoundManager {
     /* 0x165 */ s8 unk_165;
     /* 0x166 */ char unk_166[0x2];
     /* 0x168 */ s32 unk_168;
-    /* 0x16C */ SoundPlayer unk_16C[8];
+    /* 0x16C */ SoundPlayer players[8];
 } SoundManager; // size = 0x6CC
 
 typedef struct SoundInstance {
@@ -713,11 +727,11 @@ typedef struct SoundBank {
     /* 0x010 */ char unk_0F[0x831];
 } SoundBank; // size = 0x840
 
-typedef struct SndGlobalsSub40 {
-    /* 0x0 */ u8 unk_00;
-    /* 0x1 */ u8 unk_01;
+typedef struct AuEffectChange {
+    /* 0x0 */ u8 type;
+    /* 0x1 */ u8 changed;
     /* 0x2 */ char unk_02[2];
-} SndGlobalsSub40;
+} AuEffectChange;
 
 typedef struct SndGlobalsSub6C {
     /* 0x00 */ struct BGMPlayer* bgmPlayer;
@@ -740,7 +754,7 @@ typedef struct AuGlobals {
     /* 0x0034 */ s32 bkFileListOffset;
     /* 0x0038 */ s32 bkListLength;
     /* 0x003C */ u16* mseqFileList;
-    /* 0x0040 */ SndGlobalsSub40 unk_globals_40[4];
+    /* 0x0040 */ AuEffectChange effectChanges[4];
     /* 0x0050 */ u8 unk_50;
     /* 0x0051 */ u8 unk_51;
     /* 0x0052 */ u8 unk_52;
@@ -1034,7 +1048,7 @@ typedef struct ALConfig {
     /* 0x14 */ ALHeap* heap;
 } ALConfig; // size = 0x18;
 
-extern volatile u8 D_80078181;
+extern volatile u8 AuSynUseStereo;
 extern u16 DummyInstrumentPredictor[32];
 extern u8 DummyInstrumentBase[190];
 extern s32 CUSTOM_SMALL_ROOM_PARAMS[];

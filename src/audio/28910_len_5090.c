@@ -1238,7 +1238,7 @@ void func_8004EC68(BGMPlayer *player) {
                                     } else {
                                         drumInfo = player->drums[notePitch - 72]; // = 6 * 12
                                     }
-                                    note->ins = func_80053BE8(player->globals, (u16)drumInfo->bankPatch >> 8, (u16)drumInfo->bankPatch & 0xFF, &voice->unk_14);
+                                    note->ins = au_get_instrument(player->globals, (u16)drumInfo->bankPatch >> 8, (u16)drumInfo->bankPatch & 0xFF, &voice->unk_14);
                                     if (drumInfo->randVolume != 0) {
                                         note->volume = note->noteVelocity * _au_bgm_get_random_vol(player->randomValue1, drumInfo->volume, drumInfo->randVolume);
                                     } else {
@@ -1480,8 +1480,8 @@ void snd_BGMCmd_E2_MasterPitchShift(BGMPlayer* player, BGMPlayerTrack* track) {
 }
 
 void snd_BGMCmd_E3(BGMPlayer* player, BGMPlayerTrack* track) {
-    player->globals->unk_globals_40[player->defaultReverbType].unk_00 = player->seqCmdArgs.UnkCmdE3.bank;
-    player->globals->unk_globals_40[player->defaultReverbType].unk_01 = TRUE;
+    player->globals->effectChanges[player->defaultReverbType].type = player->seqCmdArgs.UnkCmdE3.bank;
+    player->globals->effectChanges[player->defaultReverbType].changed = TRUE;
 }
 
 void snd_BGMCmd_E6_MasterEffect(BGMPlayer* player, BGMPlayerTrack* track) {
@@ -1489,9 +1489,9 @@ void snd_BGMCmd_E6_MasterEffect(BGMPlayer* player, BGMPlayerTrack* track) {
     u32 temp_v1 = player->effectIndices[index];
 
     if ((index < 4) && (temp_v1 < 0x80)) {
-        if (player->globals->unk_globals_40[temp_v1].unk_00 != player->seqCmdArgs.MasterEffect.value) {
-            player->globals->unk_globals_40[temp_v1].unk_00 = player->seqCmdArgs.MasterEffect.value;
-            player->globals->unk_globals_40[temp_v1].unk_01 = TRUE;
+        if (player->globals->effectChanges[temp_v1].type != player->seqCmdArgs.MasterEffect.value) {
+            player->globals->effectChanges[temp_v1].type = player->seqCmdArgs.MasterEffect.value;
+            player->globals->effectChanges[temp_v1].changed = TRUE;
         }
         player->effectValues[index] = player->seqCmdArgs.MasterEffect.value;
     }
@@ -1529,7 +1529,7 @@ void snd_BGMCmd_E5_MasterVolumeFade(BGMPlayer* player, BGMPlayerTrack* track) {
 
 void snd_BGMCmd_E8_TrackOverridePatch(BGMPlayer* player, BGMPlayerTrack* track) {
     track->patch = player->seqCmdArgs.TrackOverridePatch.patch;
-    track->instrument = func_80053BE8(player->globals, player->seqCmdArgs.TrackOverridePatch.bank, track->patch, &track->unk_10);
+    track->instrument = au_get_instrument(player->globals, player->seqCmdArgs.TrackOverridePatch.bank, track->patch, &track->unk_10);
 }
 
 void snd_BGMCmd_E9_SubTrackVolume(BGMPlayer* arg0, BGMPlayerTrack* track) {
@@ -1640,7 +1640,7 @@ void snd_BGMCmd_F5_TrackVoice(BGMPlayer* player, BGMPlayerTrack* track) {
     patch = (u8)instrument->bankPatch;
     volume = instrument->volume & 0x7F;
     track->patch = patch;
-    track->instrument = func_80053BE8(player->globals, bank, patch, &track->unk_10);
+    track->instrument = au_get_instrument(player->globals, bank, patch, &track->unk_10);
     if (volume != 0) {
         volume <<= 0x18;
     }

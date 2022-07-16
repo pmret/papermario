@@ -1,6 +1,8 @@
 #include "common.h"
 #include "audio.h"
 
+static u8* snd_song_get_track_volumes_set(MusicTrackVols arg0);
+
 s32 PreventBGMPlayerUpdate = FALSE;
 u16 D_80078DB4 = 0;
 u16 D_80078DB6 = 0;
@@ -191,7 +193,7 @@ void snd_start_sound(s32 soundID, u8 volume, u8 pan) {
         pan = 0x7F;
     }
 
-    snd_enqueue_sfx_event(soundManager, soundID, vol, 0, pan);
+    au_sfx_enqueue_event(soundManager, soundID, vol, 0, pan);
 }
 
 void snd_start_sound_with_shift(s32 soundID, u8 volume, u8 pan, s16 pitchShift) {
@@ -212,7 +214,7 @@ void snd_start_sound_with_shift(s32 soundID, u8 volume, u8 pan, s16 pitchShift) 
         pitchShift = -2400;
     }
 
-    snd_enqueue_sfx_event(soundManager, soundID, vol, pitchShift, pan);
+    au_sfx_enqueue_event(soundManager, soundID, vol, pitchShift, pan);
 }
 
 void snd_adjust_sound(s32 soundID, u8 volume, u8 pan) {
@@ -227,7 +229,7 @@ void snd_adjust_sound(s32 soundID, u8 volume, u8 pan) {
         pan = 0x7F;
     }
 
-    snd_enqueue_sfx_event(soundManager, soundID | 0x1000, vol, 0, pan);
+    au_sfx_enqueue_event(soundManager, soundID | 0x1000, vol, 0, pan);
 }
 
 void snd_adjust_sound_with_shift(s32 soundID, u8 volume, u8 pan, s16 pitchShift) {
@@ -248,13 +250,13 @@ void snd_adjust_sound_with_shift(s32 soundID, u8 volume, u8 pan, s16 pitchShift)
         pitchShift = -2400;
     }
 
-    snd_enqueue_sfx_event(soundManager, soundID | 0x1000, vol, pitchShift, pan);
+    au_sfx_enqueue_event(soundManager, soundID | 0x1000, vol, pitchShift, pan);
 }
 
 void snd_stop_sound(s32 soundID) {
     SoundManager* soundManager = gSoundManager;
 
-    snd_enqueue_sfx_event(soundManager, soundID | 0x8000, 0, 0, 0);
+    au_sfx_enqueue_event(soundManager, soundID | 0x8000, 0, 0, 0);
 }
 
 void func_800553F4(void) {
@@ -264,7 +266,7 @@ void func_800553F4(void) {
 void snd_start_sound_raw(s32 soundID, s16 volume, s16 pitchShift, s32 pan) {
     SoundManager* soundManager = gSoundManager;
 
-    snd_enqueue_sfx_event(soundManager, soundID, volume, pitchShift, pan);
+    au_sfx_enqueue_event(soundManager, soundID, volume, pitchShift, pan);
 }
 
 AuResult snd_ambient_80055448(s32 ambSoundID) {
@@ -718,7 +720,7 @@ AuResult snd_song_clear_track_volumes(s32 songName, MusicTrackVols trackVolSet) 
     return status;
 }
 
-u8* snd_song_get_track_volumes_set(MusicTrackVols trackVolSet) {
+static u8* snd_song_get_track_volumes_set(MusicTrackVols trackVolSet) {
     u8* trackVols = NULL;
 
     switch (trackVolSet) {

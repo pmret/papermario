@@ -592,8 +592,8 @@ glabel func_80058050
 /* 33CB8 800588B8 8EE20024 */  lw        $v0, 0x24($s7)
 /* 33CBC 800588BC 10400069 */  beqz      $v0, .L80058A64
 /* 33CC0 800588C0 26D60008 */   addiu    $s6, $s6, 8
-/* 33CC4 800588C4 3C028008 */  lui       $v0, %hi(D_80078181)
-/* 33CC8 800588C8 24428181 */  addiu     $v0, $v0, %lo(D_80078181)
+/* 33CC4 800588C4 3C028008 */  lui       $v0, %hi(AuSynUseStereo)
+/* 33CC8 800588C8 24428181 */  addiu     $v0, $v0, %lo(AuSynUseStereo)
 /* 33CCC 800588CC 90420000 */  lbu       $v0, ($v0)
 /* 33CD0 800588D0 1440000C */  bnez      $v0, .L80058904
 /* 33CD4 800588D4 AEE00024 */   sw       $zero, 0x24($s7)

@@ -8,7 +8,7 @@ NUAuPreNMIFunc nuAuPreNMIFunc = NULL;
 s32 nuAuDmaNext = 0;
 u32 nuAuFrameCounter = 0;
 u8 nuAuTaskStop = NU_AU_TASK_RUN;
-u8 volatile D_80078181 = 1;
+u8 volatile AuSynUseStereo = TRUE;
 
 //bss
 extern Acmd* AlCmdListBuffers[3];
@@ -27,7 +27,7 @@ extern OSMesgQueue D_800DA444;
 extern s32 AlNumFields;
 extern u64 n_aspMain_text_bin[];
 extern u64 n_aspMain_data_bin[];
-extern u8 D_801AA000[AUDIO_HEAP_SIZE];
+extern u8 AuHeapBase[AUDIO_HEAP_SIZE];
 
 void create_audio_system(void) {
     u32 i;
@@ -36,7 +36,7 @@ void create_audio_system(void) {
 
     nuAuTaskStop = NU_AU_TASK_RUN;
     nuAuPreNMI = 0;
-    alHeapInit(&nuAuHeap, D_801AA000, AUDIO_HEAP_SIZE);
+    alHeapInit(&nuAuHeap, AuHeapBase, AUDIO_HEAP_SIZE);
     config.num_pvoice = 24;
     config.unk_num_gamma = 4;
     outputRate = osAiSetFrequency(32000);

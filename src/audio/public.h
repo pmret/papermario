@@ -50,7 +50,6 @@ AuResult func_80055D38(s32 songName, f32 arg1);
 AuResult func_80055D8C(s32 songName, s32 arg1);
 AuResult snd_song_set_track_volumes(s32 songName, MusicTrackVols arg1);
 AuResult snd_song_clear_track_volumes(s32 songName, MusicTrackVols arg1);
-u8* snd_song_get_track_volumes_set(MusicTrackVols arg0);
 AuResult snd_song_set_track_vol_mute(s32 arg0, s32 arg1);
 AuResult snd_song_set_track_vol_quiet(s32 arg0, s32 arg1);
 AuResult snd_song_set_track_vol_full(s32 arg0, s32 arg1);

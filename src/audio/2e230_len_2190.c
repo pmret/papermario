@@ -64,8 +64,8 @@ void au_engine_init(s32 outputRate) {
     }
 
     for (i = 0; i < 4; i++) {
-        globals->unk_globals_40[i].unk_00 = 0;
-        globals->unk_globals_40[i].unk_01 = FALSE;
+        globals->effectChanges[i].type = AU_FX_NONE;
+        globals->effectChanges[i].changed = FALSE;
     }
 
     for (i = 0; i < ARRAY_COUNT(globals->voices); i++) {
@@ -104,14 +104,14 @@ void au_engine_init(s32 outputRate) {
     effects[3] = -1;
     bgm_set_effect_indices(gBGMPlayerB, effects);
 
-    func_8004B440(gSoundManager, 4, 1, globals, 0x10);
+    au_sfx_init(gSoundManager, 4, 1, globals, 0x10);
     func_80050B90(gAmbientSoundManager, 6, 1, globals);
     func_80052614(globals);
     snd_load_BK_headers(globals, alHeap);
     if (snd_fetch_SBN_file(globals->mseqFileList[0], AU_FMT_SEF, &fileEntry) == AU_RESULT_OK) {
         snd_read_rom(fileEntry.offset, globals->dataSEF, fileEntry.data & 0xFFFFFF);
     }
-    snd_load_sfx_groups_from_SEF(gSoundManager);
+    au_sfx_load_groups_from_SEF(gSoundManager);
     if (snd_fetch_SBN_file(globals->mseqFileList[1], AU_FMT_PER, &fileEntry) == AU_RESULT_OK) {
         snd_load_PER(globals, fileEntry.offset);
     }
@@ -201,7 +201,7 @@ void au_update_clients_2(void) {
     sfxManager->nextUpdateCounter -= sfxManager->nextUpdateStep;
     if (sfxManager->nextUpdateCounter <= 0) {
         sfxManager->nextUpdateCounter += sfxManager->nextUpdateInterval;
-        sfxManager->unk_BA = snd_sound_manager_update(sfxManager);
+        sfxManager->unk_BA = au_sfx_manager_update(sfxManager);
     }
 
     // update gBGMPlayerB
@@ -268,7 +268,7 @@ void au_update_players_main(void) {
     player = gBGMPlayerB;
     au_bgm_update_main(player);
 
-    au_sef_update_main(manager);
+    au_sfx_update_main(manager);
 }
 
 void func_80053654(AuGlobals* globals) {
@@ -298,21 +298,21 @@ void func_80053654(AuGlobals* globals) {
         }
     }
 
-    if (globals->unk_globals_40[0].unk_01) {
-        func_80056DCC(0, globals->unk_globals_40[0].unk_00);
-        globals->unk_globals_40[0].unk_01 = FALSE;
+    if (globals->effectChanges[0].changed) {
+        func_80056DCC(0, globals->effectChanges[0].type);
+        globals->effectChanges[0].changed = FALSE;
     }
-    if (globals->unk_globals_40[1].unk_01) {
-        func_80056DCC(1, globals->unk_globals_40[1].unk_00);
-        globals->unk_globals_40[1].unk_01 = FALSE;
+    if (globals->effectChanges[1].changed) {
+        func_80056DCC(1, globals->effectChanges[1].type);
+        globals->effectChanges[1].changed = FALSE;
 
-    } if (globals->unk_globals_40[2].unk_01) {
-        func_80056DCC(2, globals->unk_globals_40[2].unk_00);
-        globals->unk_globals_40[2].unk_01 = FALSE;
+    } if (globals->effectChanges[2].changed) {
+        func_80056DCC(2, globals->effectChanges[2].type);
+        globals->effectChanges[2].changed = FALSE;
     }
-    if (globals->unk_globals_40[3].unk_01) {
-        func_80056DCC(3, globals->unk_globals_40[3].unk_00);
-        globals->unk_globals_40[3].unk_01 = FALSE;
+    if (globals->effectChanges[3].changed) {
+        func_80056DCC(3, globals->effectChanges[3].type);
+        globals->effectChanges[3].changed = FALSE;
     }
 
     for (i = 0; i < ARRAY_COUNT(globals->voices); i++) {
@@ -462,7 +462,7 @@ void func_80053BA8(Fade* fade) {
 }
 
 //TODO cleanup and documentation
-Instrument* func_80053BE8(AuGlobals* globals, u32 bank, u32 patch, AlUnkInstrumentData* arg3) {
+Instrument* au_get_instrument(AuGlobals* globals, u32 bank, u32 patch, AlUnkInstrumentData* arg3) {
     Instrument* instrument = (*globals->instrumentGroups[(bank & 0x70) >> 4])[patch];
     InstrumentEffect* temp_a0 = instrument->unkOffset;
     u32 sampleIdx = bank & 3;
@@ -1090,13 +1090,15 @@ s32 func_80054D74(s32 arg0, s32 arg1) {
     return 0;
 }
 
-void func_80054DA8(u32 arg0) {
-    if (arg0 % 2 == 1) {
-        if (!gSoundGlobals->unk_130C) {
+void func_80054DA8(u32 bMonoSound) {
+    if (bMonoSound % 2 == 1) {
+        // mono sound
+        if (gSoundGlobals->unk_130C == 0) {
             gSoundGlobals->unk_130C = 2;
         }
     } else {
-        if (gSoundGlobals->unk_130C) {
+        // stereo sound
+        if (gSoundGlobals->unk_130C != 0) {
             gSoundGlobals->unk_50 = 1;
             gSoundGlobals->unk_130C = 0;
         }
