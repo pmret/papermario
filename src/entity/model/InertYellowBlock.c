@@ -1,33 +1,7 @@
 #include "common.h"
 
-Vtx Entity_InertYellowBlock_vtxFaces[] = {
-    {{{   -13,     0,   -13 }, 0, {  1024,     0 }, { 255, 234, 151, 255 }}},
-    {{{   -13,    25,   -13 }, 0, {  1024,  1024 }, { 255, 234, 151, 255 }}},
-    {{{    13,    25,   -13 }, 0, {     0,  1024 }, { 255, 234, 151, 255 }}},
-    {{{    13,     0,   -13 }, 0, {     0,     0 }, { 255, 234, 151, 255 }}},
-    {{{    13,     0,   -13 }, 0, {  1024,     0 }, { 156, 133,  42, 255 }}},
-    {{{    13,    25,   -13 }, 0, {  1024,  1024 }, { 156, 133,  42, 255 }}},
-    {{{    13,    25,    13 }, 0, {     0,  1024 }, { 156, 133,  42, 255 }}},
-    {{{    13,     0,    13 }, 0, {     0,     0 }, { 156, 133,  42, 255 }}},
-    {{{    13,     0,    13 }, 0, {  1024,     0 }, { 255, 234, 151, 255 }}},
-    {{{    13,    25,    13 }, 0, {  1024,  1024 }, { 255, 234, 151, 255 }}},
-    {{{   -13,    25,    13 }, 0, {     0,  1024 }, { 255, 234, 151, 255 }}},
-    {{{   -13,     0,    13 }, 0, {     0,     0 }, { 255, 234, 151, 255 }}},
-    {{{   -13,     0,    13 }, 0, {  1024,     0 }, { 156, 133,  42, 255 }}},
-    {{{   -13,    25,    13 }, 0, {  1024,  1024 }, { 156, 133,  42, 255 }}},
-    {{{   -13,    25,   -13 }, 0, {     0,  1024 }, { 156, 133,  42, 255 }}},
-    {{{   -13,     0,   -13 }, 0, {     0,     0 }, { 156, 133,  42, 255 }}},
-};
-Vtx Entity_InertYellowBlock_vtxTopBottom[] = {
-    {{{   -13,    25,   -13 }, 0, {     0,     0 }, { 202, 186, 120, 255 }}},
-    {{{   -13,    25,    13 }, 0, {     0,     0 }, { 202, 186, 120, 255 }}},
-    {{{    13,    25,    13 }, 0, {     0,     0 }, { 202, 186, 120, 255 }}},
-    {{{    13,    25,   -13 }, 0, {     0,     0 }, { 202, 186, 120, 255 }}},
-    {{{    13,     0,   -13 }, 0, {     0,     0 }, {  68,  48,  18, 255 }}},
-    {{{    13,     0,    13 }, 0, {     0,     0 }, {  68,  48,  18, 255 }}},
-    {{{   -13,     0,    13 }, 0, {     0,     0 }, {  68,  48,  18, 255 }}},
-    {{{   -13,     0,   -13 }, 0, {     0,     0 }, {  68,  48,  18, 255 }}},
-};
+#include "entity/model/InertYellowBlock_1.vtx.inc.c"
+#include "entity/model/InertYellowBlock_2.vtx.inc.c"
 
 #include "entity/model/InertYellowBlock_face.png.inc.c"
 #include "entity/model/InertYellowBlock_face.pal.inc.c"
@@ -49,7 +23,7 @@ Gfx Entity_InertYellowBlock_RenderTopBottom[] = {
     gsSPTexture(0x0080, 0x0080, 0, G_TX_RENDERTILE, G_OFF),
     gsSPClearGeometryMode(G_LIGHTING | G_SHADING_SMOOTH),
     gsSPSetGeometryMode(G_CULL_BACK),
-    gsSPVertex(Entity_InertYellowBlock_vtxTopBottom, 8, 0),
+    gsSPVertex(D_0A000100_E42340, 8, 0),
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
     gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
     gsSPEndDisplayList(),
@@ -61,7 +35,7 @@ Gfx Entity_InertYellowBlock_RenderFaces[] = {
     gsSPDisplayList(Entity_InertYellowBlock_LoadTexture),
     gsSPClearGeometryMode(G_LIGHTING | G_SHADING_SMOOTH),
     gsSPSetGeometryMode(G_CULL_BACK),
-    gsSPVertex(Entity_InertYellowBlock_vtxFaces, 16, 0),
+    gsSPVertex(D_0A000000_E42240, 16, 0),
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
     gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
     gsSP2Triangles(8, 9, 10, 0, 8, 10, 11, 0),

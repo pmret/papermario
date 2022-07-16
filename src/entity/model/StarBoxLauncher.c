@@ -1,57 +1,9 @@
 #include "common.h"
 
-Vtx Entity_StarBoxLauncher_vtxBox[] = {
-    {{{    16,     0,   -17 }, 0, {    29,     0 }, { 129, 160, 167, 255 }}},
-    {{{    16,    25,   -17 }, 0, {    29,   731 }, {  82, 102, 107, 255 }}},
-    {{{    16,    25,    16 }, 0, {   995,   731 }, {  82, 102, 107, 255 }}},
-    {{{    16,     0,    16 }, 0, {   995,     0 }, { 129, 160, 167, 255 }}},
-    {{{   -17,     0,    16 }, 0, {   995,     0 }, { 129, 160, 167, 255 }}},
-    {{{   -17,    25,    16 }, 0, {   995,   731 }, {  82, 102, 107, 255 }}},
-    {{{   -17,    25,   -17 }, 0, {    29,   731 }, {  82, 102, 107, 255 }}},
-    {{{   -17,     0,   -17 }, 0, {    29,     0 }, { 129, 160, 167, 255 }}},
-    {{{   -17,    25,   -17 }, 0, {    29,   731 }, { 129, 160, 167, 255 }}},
-    {{{    16,    25,   -17 }, 0, {   995,   731 }, { 129, 160, 167, 255 }}},
-    {{{    16,     0,   -17 }, 0, {   995,     0 }, { 129, 160, 167, 255 }}},
-    {{{    16,     0,    16 }, 0, {   995,     0 }, { 255, 255, 255, 255 }}},
-    {{{    16,    25,    16 }, 0, {   995,   731 }, { 129, 160, 167, 255 }}},
-    {{{   -17,    25,    16 }, 0, {    29,   731 }, { 129, 160, 167, 255 }}},
-    {{{   -17,     0,    16 }, 0, {    29,     0 }, { 255, 255, 255, 255 }}},
-};
-
-Vtx Entity_StarBoxLauncher_vtxBoxCover[] = {
-    {{{   -18,    25,    18 }, 0, {  1024,   731 }, { 129, 160, 167, 255 }}},
-    {{{   -18,    35,    18 }, 0, {  1024,  1024 }, { 129, 160, 167, 255 }}},
-    {{{   -18,    35,   -18 }, 0, {     0,  1024 }, { 129, 160, 167, 255 }}},
-    {{{   -18,    25,   -18 }, 0, {     0,   731 }, { 129, 160, 167, 255 }}},
-    {{{    18,    35,   -18 }, 0, {  1024,  1024 }, { 129, 160, 167, 255 }}},
-    {{{    18,    25,   -18 }, 0, {  1024,   731 }, { 129, 160, 167, 255 }}},
-    {{{    18,    25,   -18 }, 0, {     0,   731 }, { 129, 160, 167, 255 }}},
-    {{{    18,    35,   -18 }, 0, {     0,  1024 }, { 129, 160, 167, 255 }}},
-    {{{    18,    35,    18 }, 0, {  1024,  1024 }, { 129, 160, 167, 255 }}},
-    {{{    18,    25,    18 }, 0, {  1024,   731 }, { 129, 160, 167, 255 }}},
-    {{{    18,    25,    18 }, 0, {  1024,   731 }, { 255, 255, 255, 255 }}},
-    {{{    18,    35,    18 }, 0, {  1024,  1024 }, { 255, 255, 255, 255 }}},
-    {{{   -18,    35,    18 }, 0, {     0,  1024 }, { 255, 255, 255, 255 }}},
-    {{{   -18,    25,    18 }, 0, {     0,   731 }, { 255, 255, 255, 255 }}},
-    {{{   -18,    35,   -18 }, 0, {     0,  1024 }, { 255, 255, 255, 255 }}},
-    {{{   -18,    35,    18 }, 0, {     0,     0 }, { 255, 255, 255, 255 }}},
-    {{{    18,    35,    18 }, 0, {  1024,     0 }, { 255, 255, 255, 255 }}},
-    {{{    18,    35,   -18 }, 0, {  1024,  1024 }, { 255, 255, 255, 255 }}},
-};
-
-Vtx Entity_StarBoxLauncher_vtxFace[] = {
-    {{{   -18,    -7,     0 }, 0, {     0,     0 }, { 255, 255, 255, 255 }}},
-    {{{    18,    -7,     0 }, 0, {  1024,     0 }, { 127, 158, 158, 255 }}},
-    {{{    18,    29,     0 }, 0, {  1024,  1024 }, { 255, 255, 255, 255 }}},
-    {{{   -18,    29,     0 }, 0, {     0,  1024 }, { 255, 255, 255, 255 }}},
-};
-
-Vtx Entity_StarBoxLauncher_vtxChain[] = {
-    {{{    -5,   -52,     0 }, 0, {     0,     0 }, { 255, 255, 255, 255 }}},
-    {{{     5,   -52,     0 }, 0, {   512,     0 }, { 127, 158, 158, 255 }}},
-    {{{     5,    -6,     0 }, 0, {   512,  2336 }, { 127, 158, 158, 255 }}},
-    {{{    -5,    -6,     0 }, 0, {     0,  2336 }, { 255, 255, 255, 255 }}},
-};
+#include "entity/model/StarBoxLauncher_1.vtx.inc.c"
+#include "entity/model/StarBoxLauncher_2.vtx.inc.c"
+#include "entity/model/StarBoxLauncher_3.vtx.inc.c"
+#include "entity/model/StarBoxLauncher_4.vtx.inc.c"
 
 #include "entity/model/StarBoxLauncher_link.png.inc.c"
 Gfx Entity_StarBoxLauncher_LoadTextureLink[] = {
@@ -116,7 +68,7 @@ Gfx Entity_StarBoxLauncher_RenderChain[] = {
     gsSPDisplayList(Entity_StarBoxLauncher_LoadTextureLink),
     gsSPClearGeometryMode(G_LIGHTING | G_SHADING_SMOOTH),
     gsSPSetGeometryMode(G_CULL_BACK),
-    gsSPVertex(Entity_StarBoxLauncher_vtxChain, 4, 0),
+    gsSPVertex(D_0A000250_E55C90, 4, 0),
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
     gsSPEndDisplayList(),
 };
@@ -127,7 +79,7 @@ Gfx Entity_StarBoxLauncher_RenderFace[] = {
     gsDPSetRenderMode(G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
-    gsSPVertex(Entity_StarBoxLauncher_vtxFace, 4, 0),
+    gsSPVertex(D_0A000210_E55C50, 4, 0),
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
     gsSPEndDisplayList(),
 };
@@ -139,7 +91,7 @@ Gfx Entity_StarBoxLauncher_RenderBoxCover[] = {
     gsSPDisplayList(Entity_StarBoxLauncher_LoadTextureBox),
     gsSPClearGeometryMode(G_CULL_BACK | G_LIGHTING),
     gsSPSetGeometryMode(G_SHADING_SMOOTH),
-    gsSPVertex(Entity_StarBoxLauncher_vtxBoxCover, 18, 0),
+    gsSPVertex(D_0A0000F0_E55B30, 18, 0),
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
     gsSP2Triangles(3, 2, 4, 0, 3, 4, 5, 0),
     gsSP2Triangles(6, 7, 8, 0, 6, 8, 9, 0),
@@ -162,7 +114,7 @@ Gfx Entity_StarBoxLauncher_RenderBox[] = {
     gsSPDisplayList(Entity_StarBoxLauncher_LoadTextureBox),
     gsSPClearGeometryMode(G_CULL_BACK | G_LIGHTING),
     gsSPSetGeometryMode(G_SHADING_SMOOTH),
-    gsSPVertex(Entity_StarBoxLauncher_vtxBox, 15, 0),
+    gsSPVertex(D_0A000000_E55A40, 15, 0),
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
     gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
     gsSP2Triangles(7, 8, 9, 0, 7, 9, 10, 0),

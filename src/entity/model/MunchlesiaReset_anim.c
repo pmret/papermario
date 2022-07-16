@@ -2,7 +2,7 @@
 #include "animation_script.h"
 
 extern Gfx Entity_MunchlesiaReset_Render[];
-extern Vtx Entity_MunchlesiaReset_vtx[];
+extern Vtx D_0A000000_E6E660[];
 
 AnimScript Entity_MunchlesiaReset_AnimationIdle = {
     as_SetRotation(1, 0.0, 0.0, 0.0)
@@ -159,7 +159,7 @@ StaticAnimatorNode Entity_MunchlesiaReset_Node8 = {
     .sibling = ANIM_NULL,
     .child = ANIM_NULL,
     .vertexStartOffset = 399 * 6,
-    .vtxList = Entity_MunchlesiaReset_vtx,
+    .vtxList = D_0A000000_E6E660,
 };
 
 StaticAnimatorNode Entity_MunchlesiaReset_Node7 = {
@@ -168,7 +168,7 @@ StaticAnimatorNode Entity_MunchlesiaReset_Node7 = {
     .sibling = &Entity_MunchlesiaReset_Node8,
     .child = ANIM_NULL,
     .vertexStartOffset = 399 * 5,
-    .vtxList = Entity_MunchlesiaReset_vtx,
+    .vtxList = D_0A000000_E6E660,
 };
 
 StaticAnimatorNode Entity_MunchlesiaReset_Node6 = {
@@ -177,7 +177,7 @@ StaticAnimatorNode Entity_MunchlesiaReset_Node6 = {
     .sibling = &Entity_MunchlesiaReset_Node7,
     .child = ANIM_NULL,
     .vertexStartOffset = 399 * 4,
-    .vtxList = Entity_MunchlesiaReset_vtx,
+    .vtxList = D_0A000000_E6E660,
 };
 
 StaticAnimatorNode Entity_MunchlesiaReset_Node5 = {
@@ -186,7 +186,7 @@ StaticAnimatorNode Entity_MunchlesiaReset_Node5 = {
     .sibling = &Entity_MunchlesiaReset_Node6,
     .child = ANIM_NULL,
     .vertexStartOffset = 399 * 3,
-    .vtxList = Entity_MunchlesiaReset_vtx,
+    .vtxList = D_0A000000_E6E660,
 };
 
 StaticAnimatorNode Entity_MunchlesiaReset_Node4 = {
@@ -195,7 +195,7 @@ StaticAnimatorNode Entity_MunchlesiaReset_Node4 = {
     .sibling = &Entity_MunchlesiaReset_Node5,
     .child = ANIM_NULL,
     .vertexStartOffset = 399 * 2,
-    .vtxList = Entity_MunchlesiaReset_vtx,
+    .vtxList = D_0A000000_E6E660,
 };
 
 StaticAnimatorNode Entity_MunchlesiaReset_Node3 = {
@@ -203,14 +203,14 @@ StaticAnimatorNode Entity_MunchlesiaReset_Node3 = {
     .sibling = &Entity_MunchlesiaReset_Node4,
     .child = ANIM_NULL,
     .vertexStartOffset = 399,
-    .vtxList = Entity_MunchlesiaReset_vtx,
+    .vtxList = D_0A000000_E6E660,
 };
 
 StaticAnimatorNode Entity_MunchlesiaReset_Node2 = {
     .displayList = Entity_MunchlesiaReset_Render,
     .sibling = &Entity_MunchlesiaReset_Node3,
     .child = ANIM_NULL,
-    .vtxList = Entity_MunchlesiaReset_vtx,
+    .vtxList = D_0A000000_E6E660,
 };
 
 StaticAnimatorNode Entity_MunchlesiaReset_Node1 = {

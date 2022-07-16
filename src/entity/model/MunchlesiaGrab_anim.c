@@ -1,7 +1,7 @@
 #include "common.h"
 #include "animation_script.h"
 
-extern Vtx Entity_MunchlesiaGrab_vtx[];
+extern Vtx D_0A000000_E74BD0[];
 extern Gfx Entity_MunchlesiaGrab_Render[];
 
 AnimScript Entity_MunchlesiaGrab_Animation = {
@@ -144,7 +144,7 @@ StaticAnimatorNode Entity_MunchlesiaGrab_Node8 = {
     .sibling = ANIM_NULL,
     .child = ANIM_NULL,
     .vertexStartOffset = 399 * 6,
-    .vtxList = Entity_MunchlesiaGrab_vtx,
+    .vtxList = D_0A000000_E74BD0,
 };
 
 StaticAnimatorNode Entity_MunchlesiaGrab_Node7 = {
@@ -152,7 +152,7 @@ StaticAnimatorNode Entity_MunchlesiaGrab_Node7 = {
     .sibling = &Entity_MunchlesiaGrab_Node8,
     .child = ANIM_NULL,
     .vertexStartOffset = 399 * 5,
-    .vtxList = Entity_MunchlesiaGrab_vtx,
+    .vtxList = D_0A000000_E74BD0,
 };
 
 StaticAnimatorNode Entity_MunchlesiaGrab_Node6 = {
@@ -161,7 +161,7 @@ StaticAnimatorNode Entity_MunchlesiaGrab_Node6 = {
     .sibling = &Entity_MunchlesiaGrab_Node7,
     .child = ANIM_NULL,
     .vertexStartOffset = 399 * 4,
-    .vtxList = Entity_MunchlesiaGrab_vtx,
+    .vtxList = D_0A000000_E74BD0,
 };
 
 StaticAnimatorNode Entity_MunchlesiaGrab_Node5 = {
@@ -170,7 +170,7 @@ StaticAnimatorNode Entity_MunchlesiaGrab_Node5 = {
     .sibling = &Entity_MunchlesiaGrab_Node6,
     .child = ANIM_NULL,
     .vertexStartOffset = 399 * 3,
-    .vtxList = Entity_MunchlesiaGrab_vtx,
+    .vtxList = D_0A000000_E74BD0,
 };
 
 StaticAnimatorNode Entity_MunchlesiaGrab_Node4 = {
@@ -179,7 +179,7 @@ StaticAnimatorNode Entity_MunchlesiaGrab_Node4 = {
     .sibling = &Entity_MunchlesiaGrab_Node5,
     .child = ANIM_NULL,
     .vertexStartOffset = 399 * 2,
-    .vtxList = Entity_MunchlesiaGrab_vtx,
+    .vtxList = D_0A000000_E74BD0,
 };
 
 StaticAnimatorNode Entity_MunchlesiaGrab_Node3 = {
@@ -188,7 +188,7 @@ StaticAnimatorNode Entity_MunchlesiaGrab_Node3 = {
     .sibling = &Entity_MunchlesiaGrab_Node4,
     .child = ANIM_NULL,
     .vertexStartOffset = 399,
-    .vtxList = Entity_MunchlesiaGrab_vtx,
+    .vtxList = D_0A000000_E74BD0,
 };
 
 StaticAnimatorNode Entity_MunchlesiaGrab_Node2 = {
@@ -196,7 +196,7 @@ StaticAnimatorNode Entity_MunchlesiaGrab_Node2 = {
     .pos = { 0.0f, 4.0f, 0.0f },
     .sibling = &Entity_MunchlesiaGrab_Node3,
     .child = ANIM_NULL,
-    .vtxList = Entity_MunchlesiaGrab_vtx,
+    .vtxList = D_0A000000_E74BD0,
 };
 
 StaticAnimatorNode Entity_MunchlesiaGrab_Node1 = {

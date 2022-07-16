@@ -1,23 +1,6 @@
 #include "common.h"
 
-Vtx Entity_PowBlock_vtx[] = {
-    {{{   -15,     0,   -13 }, 0, {   210,     0 }, { 244, 244, 244, 255 }}},
-    {{{   -15,    26,   -13 }, 0, {   210,  1024 }, { 244, 244, 244, 255 }}},
-    {{{    15,    26,   -13 }, 0, {  1785,  1024 }, { 244, 244, 244, 255 }}},
-    {{{    15,     0,   -13 }, 0, {  1785,     0 }, { 244, 244, 244, 255 }}},
-    {{{    15,     0,   -13 }, 0, {     0,     0 }, { 244, 244, 244, 255 }}},
-    {{{    15,    26,   -13 }, 0, {     0,  1024 }, { 244, 244, 244, 255 }}},
-    {{{    15,    26,    13 }, 0, {   171,  1024 }, { 244, 244, 244, 255 }}},
-    {{{    15,     0,    13 }, 0, {   171,     0 }, { 244, 244, 244, 255 }}},
-    {{{    15,     0,    13 }, 0, {  1785,     0 }, { 244, 244, 244, 255 }}},
-    {{{    15,    26,    13 }, 0, {  1785,  1024 }, { 244, 244, 244, 255 }}},
-    {{{   -15,    26,    13 }, 0, {   210,  1024 }, { 244, 244, 244, 255 }}},
-    {{{   -15,     0,    13 }, 0, {   210,     0 }, { 244, 244, 244, 255 }}},
-    {{{   -15,     0,    13 }, 0, {   171,     0 }, { 244, 244, 244, 255 }}},
-    {{{   -15,    26,    13 }, 0, {   171,  1024 }, { 244, 244, 244, 255 }}},
-    {{{   -15,    26,   -13 }, 0, {     0,  1024 }, { 244, 244, 244, 255 }}},
-    {{{   -15,     0,   -13 }, 0, {     0,     0 }, { 244, 244, 244, 255 }}},
-};
+#include "entity/model/PowBlock.vtx.inc.c"
 
 #include "entity/model/PowBlock_face.png.inc.c"
 #include "entity/model/PowBlock_face.pal.inc.c"
@@ -54,8 +37,8 @@ Gfx Entity_PowBlock_RenderTopBottom[] = {
     gsSPDisplayList(Entity_PowBlock_LoadTexture),
     gsSPClearGeometryMode(G_LIGHTING | G_SHADING_SMOOTH),
     gsSPSetGeometryMode(G_CULL_BACK),
-    gsSPVertex(&Entity_PowBlock_vtx[0], 4, 0),
-    gsSPVertex(&Entity_PowBlock_vtx[8], 4, 4),
+    gsSPVertex(D_0A000000_E43B20, 4, 0),
+    gsSPVertex(&D_0A000000_E43B20[8], 4, 4),
     gsSP2Triangles(3, 4, 7, 0, 3, 7, 0, 0),
     gsSP2Triangles(1, 6, 5, 0, 1, 5, 2, 0),
     gsSPEndDisplayList(),
@@ -68,7 +51,7 @@ Gfx Entity_PowBlock_RenderSides[] = {
     gsSPDisplayList(Entity_PowBlock_LoadTexture),
     gsSPClearGeometryMode(G_LIGHTING | G_SHADING_SMOOTH),
     gsSPSetGeometryMode(G_CULL_BACK),
-    gsSPVertex(&Entity_PowBlock_vtx[0], 16, 0),
+    gsSPVertex(D_0A000000_E43B20, 16, 0),
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
     gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
     gsSP2Triangles(8, 9, 10, 0, 8, 10, 11, 0),

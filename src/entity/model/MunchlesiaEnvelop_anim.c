@@ -1,7 +1,7 @@
 #include "common.h"
 #include "animation_script.h"
 
-extern Vtx Entity_MunchlesiaEnvelop_vtx[];
+extern Vtx D_0A000000_E7B0E0[];
 extern Gfx Entity_MunchlesiaEnvelop_Render[];
 
 AnimScript Entity_MunchlesiaEnvelop_Animation = {
@@ -144,7 +144,7 @@ StaticAnimatorNode Entity_MunchlesiaEnvelop_Node8 = {
     .sibling = ANIM_NULL,
     .child = ANIM_NULL,
     .vertexStartOffset = 399 * 6,
-    .vtxList = Entity_MunchlesiaEnvelop_vtx,
+    .vtxList = D_0A000000_E7B0E0,
 };
 
 StaticAnimatorNode Entity_MunchlesiaEnvelop_Node7 = {
@@ -152,7 +152,7 @@ StaticAnimatorNode Entity_MunchlesiaEnvelop_Node7 = {
     .sibling = &Entity_MunchlesiaEnvelop_Node8,
     .child = ANIM_NULL,
     .vertexStartOffset = 399 * 5,
-    .vtxList = Entity_MunchlesiaEnvelop_vtx,
+    .vtxList = D_0A000000_E7B0E0,
 };
 
 StaticAnimatorNode Entity_MunchlesiaEnvelop_Node6 = {
@@ -160,7 +160,7 @@ StaticAnimatorNode Entity_MunchlesiaEnvelop_Node6 = {
     .sibling = &Entity_MunchlesiaEnvelop_Node7,
     .child = ANIM_NULL,
     .vertexStartOffset = 399 * 4,
-    .vtxList = Entity_MunchlesiaEnvelop_vtx,
+    .vtxList = D_0A000000_E7B0E0,
 };
 
 StaticAnimatorNode Entity_MunchlesiaEnvelop_Node5 = {
@@ -168,7 +168,7 @@ StaticAnimatorNode Entity_MunchlesiaEnvelop_Node5 = {
     .sibling = &Entity_MunchlesiaEnvelop_Node6,
     .child = ANIM_NULL,
     .vertexStartOffset = 399 * 3,
-    .vtxList = Entity_MunchlesiaEnvelop_vtx,
+    .vtxList = D_0A000000_E7B0E0,
 };
 
 StaticAnimatorNode Entity_MunchlesiaEnvelop_Node4 = {
@@ -176,7 +176,7 @@ StaticAnimatorNode Entity_MunchlesiaEnvelop_Node4 = {
     .sibling = &Entity_MunchlesiaEnvelop_Node5,
     .child = ANIM_NULL,
     .vertexStartOffset = 399 * 2,
-    .vtxList = Entity_MunchlesiaEnvelop_vtx,
+    .vtxList = D_0A000000_E7B0E0,
 };
 
 StaticAnimatorNode Entity_MunchlesiaEnvelop_Node3 = {
@@ -184,14 +184,14 @@ StaticAnimatorNode Entity_MunchlesiaEnvelop_Node3 = {
     .sibling = &Entity_MunchlesiaEnvelop_Node4,
     .child = ANIM_NULL,
     .vertexStartOffset = 399,
-    .vtxList = Entity_MunchlesiaEnvelop_vtx,
+    .vtxList = D_0A000000_E7B0E0,
 };
 
 StaticAnimatorNode Entity_MunchlesiaEnvelop_Node2 = {
     .displayList = Entity_MunchlesiaEnvelop_Render,
     .sibling = &Entity_MunchlesiaEnvelop_Node3,
     .child = ANIM_NULL,
-    .vtxList = Entity_MunchlesiaEnvelop_vtx,
+    .vtxList = D_0A000000_E7B0E0,
 };
 
 StaticAnimatorNode Entity_MunchlesiaEnvelop_Node1 = {

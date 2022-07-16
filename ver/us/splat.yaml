@@ -12110,7 +12110,7 @@ segments:
       type: .data
       name: Hammer1Block
       subsegments:
-      - [0xE31530]
+      - [0xE31530, vtx, Hammer1Block]
       - [0xE317B0, ci4, Hammer1Block_face, 16, 32]
       - [0xE318B0, palette, Hammer1Block_face]
       - [0xE318D0]
@@ -12126,7 +12126,7 @@ segments:
       type: .data
       name: Hammer2Block
       subsegments:
-      - [0xE31A30]
+      - [0xE31A30, vtx, Hammer2Block]
       - [0xE31CB0, ci4, Hammer2Block_face, 16, 32]
       - [0xE31DB0, palette, Hammer2Block_face]
       - [0xE31DD0]
@@ -12142,7 +12142,7 @@ segments:
       type: .data
       name: Hammer3Block
       subsegments:
-      - [0xE31F30]
+      - [0xE31F30, vtx, Hammer3Block]
       - [0xE321B0, ci4, Hammer3Block_face, 16, 32]
       - [0xE322B0, palette, Hammer3Block_face]
       - [0xE322D0]
@@ -12158,7 +12158,7 @@ segments:
       type: .data
       name: ShatteringHammer1Block
       subsegments:
-      - [0xE32420]
+      - [0xE32420, vtx, ShatteringHammer1Block]
       - [0xE33480, ci8, ShatteringHammer1Block_texture, 16, 32]
       - [0xE33680, palette, ShatteringHammer1Block_texture]
       - [0xE33880]
@@ -12174,7 +12174,7 @@ segments:
       type: .data
       name: ShatteringHammer2Block
       subsegments:
-      - [0xE35670]
+      - [0xE35670, vtx, ShatteringHammer2Block]
       - [0xE366D0, rgba16, ShatteringHammer2Block_texture, 16, 32]
       - [0xE36AD0]
   - name: entity_model_ShatteringHammer3Block
@@ -12189,7 +12189,7 @@ segments:
       type: .data
       name: ShatteringHammer3Block
       subsegments:
-      - [0xE38890]
+      - [0xE38890, vtx, ShatteringHammer3Block]
       - [0xE398E0, ci4, ShatteringHammer3Block_texture, 16, 32]
       - [0xE399E0, palette, ShatteringHammer3Block_texture]
       - [0xE39A00]
@@ -12205,7 +12205,7 @@ segments:
       type: .data
       name: YellowBlock
       subsegments:
-      - [0xE3B870]
+      - [0xE3B870, vtx, YellowBlock]
       - [0xE3B9F0, rgba16, YellowBlock_face, 32, 32]
       - [0xE3C1F0]
   - name: entity_model_RedBlock
@@ -12220,7 +12220,7 @@ segments:
       type: .data
       name: RedBlock
       subsegments:
-      - [0xE3C320]
+      - [0xE3C320, vtx, RedBlock]
       - [0xE3C4A0, rgba16, RedBlock_face, 32, 32]
       - [0xE3CCA0]
   - name: entity_model_UnusedBlock
@@ -12235,7 +12235,7 @@ segments:
       type: .data
       name: UnusedBlock
       subsegments:
-      - [0xE3CDD0]
+      - [0xE3CDD0, vtx, UnusedBlock]
       - [0xE3D190, rgba16, UnusedBlock_img1, 16, 32]
       - [0xE3D590]
       - [0xE3D618, ci4, UnusedBlock_img2, 16, 32]
@@ -12253,7 +12253,7 @@ segments:
       type: .data
       name: PushBlock
       subsegments:
-      - [0xE3DA60]
+      - [0xE3DA60, vtx, PushBlock]
       - [0xE3DB80, ci4, PushBlock_face, 16, 16]
       - [0xE3DC00, palette, PushBlock_face]
       - [0xE3DC20]
@@ -12269,7 +12269,7 @@ segments:
       type: .data
       name: BrickBlock
       subsegments:
-      - [0xE3DDB0]
+      - [0xE3DDB0, vtx, BrickBlock]
       - [0xE3DEF0, ci4, BrickBlock_face, 32, 32]
       - [0xE3E0F0, palette, BrickBlock_face]
       - [0xE3E110]
@@ -12285,7 +12285,7 @@ segments:
       type: .data
       name: ShatteringBrickBlock
       subsegments:
-      - [0xE3E260]
+      - [0xE3E260, vtx, ShatteringBrickBlock]
       - [0xE3FD00, rgba16, ShatteringBrickBlock_texture, 32, 32]
       - [0xE40500]
   - name: entity_model_InertYellowBlock
@@ -12300,7 +12300,8 @@ segments:
       type: .data
       name: InertYellowBlock
       subsegments:
-      - [0xE42240]
+      - [0xE42240, vtx, InertYellowBlock_1]
+      - [0xE42340, vtx, InertYellowBlock_2]
       - [0xE423C0, ci4, InertYellowBlock_face, 32, 32]
       - [0xE425C0, palette, InertYellowBlock_face]
       - [0xE425E0]
@@ -12316,7 +12317,8 @@ segments:
       type: .data
       name: InertRedBlock
       subsegments:
-      - [0xE42740]
+      - [0xE42740, vtx, InertRedBlock_1]
+      - [0xE42840, vtx, InertRedBlock_2]
       - [0xE428C0, rgba16, InertRedBlock_face, 32, 32]
       - [0xE430C0]
   - name: entity_model_HeartBlock
@@ -12331,7 +12333,7 @@ segments:
       type: .data
       name: HeartBlock
       subsegments:
-      - [0xE431F0]
+      - [0xE431F0, vtx, HeartBlock]
       - [0xE435B0, rgba16, HeartBlock_face, 16, 32]
       - [0xE439B0]
   - name: entity_model_PowBlock
@@ -12346,7 +12348,7 @@ segments:
       type: .data
       name: PowBlock
       subsegments:
-      - [0xE43B20]
+      - [0xE43B20, vtx, PowBlock]
       - [0xE43C20, ci8, PowBlock_face, 64, 32]
       - [0xE44420, palette, PowBlock_face]
       - [0xE44620]
@@ -12362,7 +12364,7 @@ segments:
       type: .data
       name: SuperBlock
       subsegments:
-      - [0xE44800]
+      - [0xE44800, vtx, SuperBlock]
       - [0xE44C80, ci4, SuperBlock_tex, 16, 32]
       - [0xE44D80, palette, SuperBlock_tex]
       - [0xE44DA0]
@@ -12378,7 +12380,7 @@ segments:
       type: .data
       name: UltraBlock
       subsegments:
-      - [0xE45110]
+      - [0xE45110, vtx, UltraBlock]
       - [0xE45590, ci4, UltraBlock_tex, 16, 32]
       - [0xE45690, palette, UltraBlock_tex]
       - [0xE456B0]
@@ -12394,7 +12396,9 @@ segments:
       type: .data
       name: HitYellowBlock_gfx
       subsegments:
-      - [0xE459F0]
+      - [0xE459F0, vtx, HitYellowBlock_1]
+      - [0xE45B50, vtx, HitYellowBlock_2]
+      - [0xE45CB0]
       - [0xE45E10, rgba16, HitYellowBlock_face1, 32, 32]
       - [0xE46610, rgba16, HitYellowBlock_face2, 32, 32]
   - name: entity_model_HitYellowBlock_anim
@@ -12416,7 +12420,9 @@ segments:
       type: .data
       name: HitFloatingYellowBlock_gfx
       subsegments:
-      - [0xE470B0]
+      - [0xE470B0, vtx, HitFloatingYellowBlock_1]
+      - [0xE47210, vtx, HitFloatingYellowBlock_2]
+      - [0xE47390]
       - [0xE474F0, rgba16, HitFloatingYellowBlock_face1, 32, 32]
       - [0xE47CF0, rgba16, HitFloatingYellowBlock_face2, 32, 32]
   - name: entity_model_HitFloatingYellowBlock_anim
@@ -12438,7 +12444,9 @@ segments:
       type: .data
       name: HitRedBlock_gfx
       subsegments:
-      - [0xE48780]
+      - [0xE48780, vtx, HitRedBlock_1]
+      - [0xE488E0, vtx, HitRedBlock_2]
+      - [0xE48A40]
       - [0xE48BE0, rgba16, HitRedBlock_face1, 32, 32]
       - [0xE493E0, rgba16, HitRedBlock_face2, 32, 32]
   - name: entity_model_HitRedBlock_anim
@@ -12514,7 +12522,9 @@ segments:
       type: .data
       name: SaveBlock
       subsegments:
-      - [0xE4B2E0]
+      - [0xE4B2E0, vtx, SaveBlock_1]
+      - [0xE4B650, vtx, SaveBlock_2]
+      - [0xE4B9A0, vtx, SaveBlock_3]
       - [0xE4BBE0, rgba16, SaveBlock_star, 32, 32]
       - [0xE4C3E0]
       - [0xE4C450, rgba32, SaveBlock_face, 32, 32]
@@ -12533,7 +12543,18 @@ segments:
       type: .data
       name: BoardedFloor
       subsegments:
-      - [0xE4E7F0]
+      - [0xE4E7F0, vtx, BoardedFloor_1]
+      - [0xE4E9D0, vtx, BoardedFloor_2]
+      - [0xE4EBB0, vtx, BoardedFloor_3]
+      - [0xE4ED90, vtx, BoardedFloor_4]
+      - [0xE4EF70, vtx, BoardedFloor_5]
+      - [0xE4F0F0, vtx, BoardedFloor_6]
+      - [0xE4F270, vtx, BoardedFloor_7]
+      - [0xE4F470, vtx, BoardedFloor_8]
+      - [0xE4F670, vtx, BoardedFloor_9]
+      - [0xE4F7F0, vtx, BoardedFloor_A]
+      - [0xE4F970, vtx, BoardedFloor_B]
+      - [0xE4FA70, vtx, BoardedFloor_C]
       - [0xE4FBF0, rgba16, BoardedFloor, 64, 32]
       - [0xE50BF0]
   - name: entity_model_WoodenCrate
@@ -12548,7 +12569,7 @@ segments:
       type: .data
       name: WoodenCrate
       subsegments:
-      - [0xE51640]
+      - [0xE51640, vtx, WoodenCrate]
       - [0xE52BA0, ci4, WoodenCrate_img1, 64, 64]
       - [0xE533A0, palette, WoodenCrate_img1]
       - [0xE533C0]
@@ -12567,7 +12588,10 @@ segments:
       type: .data
       name: StarBoxLauncher
       subsegments:
-      - [0xE55A40]
+      - [0xE55A40, vtx, StarBoxLauncher_1]
+      - [0xE55B30, vtx, StarBoxLauncher_2]
+      - [0xE55C50, vtx, StarBoxLauncher_3]
+      - [0xE55C90, vtx, StarBoxLauncher_4]
       - [0xE55CD0, rgba16, StarBoxLauncher_link, 16, 16]
       - [0xE55ED0]
       - [0xE55F48, ci4, StarBoxLauncher_face, 128, 32]
@@ -12595,7 +12619,10 @@ segments:
       type: .data
       name: Tweester
       subsegments:
-      - [0xE56E60]
+      - [0xE56E60, vtx, Tweester_1]
+      - [0xE57270, vtx, Tweester_2]
+      - [0xE57680, vtx, Tweester_3]
+      - [0xE576C0, vtx, Tweester_4]
       - [0xE57A50, i8, Tweester_img1, 32, 32]
       - [0xE57E50, i8, Tweester_img2, 32, 32]
       - [0xE58250]
@@ -12614,7 +12641,9 @@ segments:
       type: .data
       name: BlueWarpPipe
       subsegments:
-      - [0xE58CD0]
+      - [0xE58CD0, vtx, BlueWarpPipe_1]
+      - [0xE58D30, vtx, BlueWarpPipe_2]
+      - [0xE58FB0, vtx, BlueWarpPipe_3]
       - [0xE58FF0, ci4, BlueWarpPipe_texBase, 16, 16]
       - [0xE59070, palette, BlueWarpPipe_texBase]
       - [0xE59090]
@@ -12633,7 +12662,8 @@ segments:
       type: .data
       name: Signpost
       subsegments:
-      - [0xE59480]
+      - [0xE59480, vtx, Signpost_1]
+      - [0xE595A0, vtx, Signpost_2]
       - [0xE59A00, ci4, Signpost, 32, 32]
       - [0xE59C00, palette, Signpost]
       - [0xE59C20]
@@ -12665,7 +12695,10 @@ segments:
       type: .data
       name: Padlock
       subsegments:
-      - [0xE5AB50]
+      - [0xE5AB50, vtx, Padlock_1]
+      - [0xE5B110, vtx, Padlock_2]
+      - [0xE5B170, vtx, Padlock_3]
+      - [0xE5B1B0, vtx, Padlock_4]
       - [0xE5B250, ci8, Padlock_face, 32, 32]
       - [0xE5B650, palette, Padlock_face]
       - [0xE5B850]
@@ -12687,7 +12720,10 @@ segments:
       type: .data
       name: PadlockRedFrame
       subsegments:
-      - [0xE5CD80]
+      - [0xE5CD80, vtx, PadlockRedFrame_1]
+      - [0xE5CF80, vtx, PadlockRedFrame_2]
+      - [0xE5CFC0, vtx, PadlockRedFrame_3]
+      - [0xE5D000, vtx, PadlockRedFrame_4]
       - [0xE5D2C0, ci8, PadlockRedFrame_keyhole, 32, 64]
       - [0xE5DAC0, palette, PadlockRedFrame_keyhole]
       - [0xE5DCC0]
@@ -12706,7 +12742,10 @@ segments:
       type: .data
       name: PadlockRedFace
       subsegments:
-      - [0xE5E730]
+      - [0xE5E730, vtx, PadlockRedFace_1]
+      - [0xE5ECF0, vtx, PadlockRedFace_2]
+      - [0xE5ED50, vtx, PadlockRedFace_3]
+      - [0xE5ED90, vtx, PadlockRedFace_4]
       - [0xE5EE30, i4, PadlockRedFace_face, 32, 32]
       - [0xE5F030]
       - [0xE5F0A8, ci8, PadlockRedFace_keyhole, 32, 64]
@@ -12727,7 +12766,10 @@ segments:
       type: .data
       name: PadlockBlueFace
       subsegments:
-      - [0xE60550]
+      - [0xE60550, vtx, PadlockBlueFace_1]
+      - [0xE60B10, vtx, PadlockBlueFace_2]
+      - [0xE60B70, vtx, PadlockBlueFace_3]
+      - [0xE60BB0, vtx, PadlockBlueFace_4]
       - [0xE60C50, i4, PadlockBlueFace_face, 32, 32]
       - [0xE60E50]
       - [0xE60EC8, ci8, PadlockBlueFace_keyhole, 32, 64]
@@ -12748,7 +12790,8 @@ segments:
       type: .data
       name: GreenStompSwitch
       subsegments:
-      - [0xE62370]
+      - [0xE62370, vtx, GreenStompSwitch_1]
+      - [0xE623F0, vtx, GreenStompSwitch_2]
       - [0xE625F0, ci4, GreenStompSwitch_tex, 16, 16]
       - [0xE62670, palette, GreenStompSwitch_tex]
       - [0xE62690]
@@ -12767,7 +12810,9 @@ segments:
       type: .data
       name: RedSwitch
       subsegments:
-      - [0xE62AC0]
+      - [0xE62AC0, vtx, RedSwitch_1]
+      - [0xE62E50, vtx, RedSwitch_2]
+      - [0xE62E90, vtx, RedSwitch_3]
       - [0xE63090, ci8, RedSwitch_tex, 16, 16]
       - [0xE63190, palette, RedSwitch_tex]
       - [0xE63390]
@@ -12785,7 +12830,10 @@ segments:
       type: .data
       name: BlueSwitch
       subsegments:
-      - [0xE639C0]
+      - [0xE639C0, vtx, BlueSwitch_1]
+      - [0xE63CC0, vtx, BlueSwitch_2]
+      - [0xE63D50, vtx, BlueSwitch_3]
+      - [0xE63D90, vtx, BlueSwitch_4]
       - [0xE63F90, ci8, BlueSwitch_tex, 16, 16]
       - [0xE64090, palette, BlueSwitch_tex]
       - [0xE64290]
@@ -12803,7 +12851,10 @@ segments:
       type: .data
       name: Chest
       subsegments:
-      - [0xE648D0]
+      - [0xE648D0, vtx, Chest_1]
+      - [0xE64A60, vtx, Chest_2]
+      - [0xE64AE0, vtx, Chest_3]
+      - [0xE64C60, vtx, Chest_4]
       - [0xE64CE0, rgba16, Chest_tex1, 16, 32]
       - [0xE650E0]
       - [0xE65168, ci4, Chest_tex2, 16, 32]
@@ -12824,7 +12875,13 @@ segments:
       type: .data
       name: ScriptSpring_gfx
       subsegments:
-      - [0xE657A0]
+      - [0xE657A0, vtx, ScriptSpring_1]
+      - [0xE65A20, vtx, ScriptSpring_2]
+      - [0xE65AA0, vtx, ScriptSpring_3]
+      - [0xE65B20, vtx, ScriptSpring_4]
+      - [0xE65BA0, vtx, ScriptSpring_5]
+      - [0xE65E20, vtx, ScriptSpring_6]
+      - [0xE65F80, vtx, ScriptSpring_7]
       - [0xE66000, ci8, ScriptSpring_tex1, 16, 16]
       - [0xE66100, palette, ScriptSpring_tex1]
       - [0xE66300]
@@ -12853,7 +12910,12 @@ segments:
       type: .data
       name: SimpleSpring_gfx
       subsegments:
-      - [0xE68580]
+      - [0xE68580, vtx, SimpleSpring_1]
+      - [0xE68800, vtx, SimpleSpring_2]
+      - [0xE68880, vtx, SimpleSpring_3]
+      - [0xE68900, vtx, SimpleSpring_4]
+      - [0xE68B80, vtx, SimpleSpring_5]
+      - [0xE68CE0, vtx, SimpleSpring_6]
       - [0xE68D60, ci8, SimpleSpring_tex1, 16, 16]
       - [0xE68E60, palette, SimpleSpring_tex1]
       - [0xE69060]
@@ -12881,7 +12943,12 @@ segments:
       type: .data
       name: BellbellPlant_gfx
       subsegments:
-      - [0xE6B1B0]
+      - [0xE6B1B0, vtx, BellbellPlant_1]
+      - [0xE6B540, vtx, BellbellPlant_2]
+      - [0xE6B7F0, vtx, BellbellPlant_3]
+      - [0xE6B8D0, vtx, BellbellPlant_4]
+      - [0xE6BBC0, vtx, BellbellPlant_5]
+      - [0xE6BCA0]
       - [0xE6C240, rgba16, BellbellPlant, 16, 16]
   - name: entity_model_BellbellPlant_anim
     dir: entity/model
@@ -12902,7 +12969,9 @@ segments:
       type: .data
       name: TrumpetPlant_gfx
       subsegments:
-      - [0xE6D390]
+      - [0xE6D390, vtx, TrumpetPlant_1]
+      - [0xE6D5D0, vtx, TrumpetPlant_2]
+      - [0xE6DD40]
       - [0xE6E0D0, rgba16, TrumpetPlant, 16, 16]
   - name: entity_model_TrumpetPlant_anim
     dir: entity/model
@@ -12923,7 +12992,8 @@ segments:
       type: .data
       name: MunchlesiaReset_gfx
       subsegments:
-      - [0xE6E660]
+      - [0xE6E660, vtx, MunchlesiaReset]
+      - [0xE6FF50]
       - [0xE74548, rgba16, MunchlesiaReset, 16, 16]
   - name: entity_model_MunchlesiaReset_anim
     dir: entity/model
@@ -12944,7 +13014,8 @@ segments:
       type: .data
       name: MunchlesiaGrab_gfx
       subsegments:
-      - [0xE74BD0]
+      - [0xE74BD0, vtx, MunchlesiaGrab]
+      - [0xE764C0]
       - [0xE7AAB8, rgba16, MunchlesiaGrab, 16, 16]
   - name: entity_model_MunchlesiaGrab_anim
     dir: entity/model
@@ -12965,7 +13036,8 @@ segments:
       type: .data
       name: MunchlesiaEnvelop_gfx
       subsegments:
-      - [0xE7B0E0]
+      - [0xE7B0E0, vtx, MunchlesiaEnvelop]
+      - [0xE7C9D0]
       - [0xE80FC8, rgba16, MunchlesiaEnvelop, 16, 16]
   - name: entity_model_MunchlesiaEnvelop_anim
     dir: entity/model
@@ -12986,7 +13058,8 @@ segments:
       type: .data
       name: MunchlesiaBeginChew_gfx
       subsegments:
-      - [0xE815F0]
+      - [0xE815F0, vtx, MunchlesiaBeginChew]
+      - [0xE82EE0]
       - [0xE87E30, rgba16, MunchlesiaBeginChew, 16, 16]
   - name: entity_model_MunchlesiaBeginChew_anim
     dir: entity/model
@@ -13007,7 +13080,8 @@ segments:
       type: .data
       name: MunchlesiaChewing_gfx
       subsegments:
-      - [0xE884A0]
+      - [0xE884A0, vtx, MunchlesiaChewing]
+      - [0xE89D90]
       - [0xE8A210, rgba16, MunchlesiaChewing, 16, 16]
   - name: entity_model_MunchlesiaChewing_anim
     dir: entity/model
@@ -13028,7 +13102,8 @@ segments:
       type: .data
       name: MunchlesiaSpitOut_gfx
       subsegments:
-      - [0xE8A9E0]
+      - [0xE8A9E0, vtx, MunchlesiaSpitOut]
+      - [0xE8C2D0]
       - [0xE91220, rgba16, MunchlesiaSpitOut, 16, 16]
   - name: entity_model_MunchlesiaSpitOut_anim
     dir: entity/model
@@ -13049,7 +13124,8 @@ segments:
       type: .data
       name: MunchlesiaReset1_gfx
       subsegments:
-      - [0xE91890]
+      - [0xE91890, vtx, MunchlesiaReset1]
+      - [0xE93180]
       - [0xE980D0, rgba16, MunchlesiaReset1, 16, 16]
   - name: entity_model_MunchlesiaReset1_anim
     dir: entity/model
@@ -13080,6 +13156,15 @@ segments:
       - [0xE992F0, ci4, CymbalPlant, 64, 64]
       - [0xE99AF0, palette, CymbalPlant]
       - [0xE99B10]
+      - [0xE99BB8, vtx, CymbalPlant_1]
+      - [0xE99C58, vtx, CymbalPlant_2]
+      - [0xE99CB8, vtx, CymbalPlant_3]
+      - [0xE99D58, vtx, CymbalPlant_4]
+      - [0xE99EA8, vtx, CymbalPlant_5]
+      - [0xE9A018, vtx, CymbalPlant_6]
+      - [0xE9A0A8, vtx, CymbalPlant_7]
+      - [0xE9A218, vtx, CymbalPlant_8]
+      - [0xE9A368]
   - name: entity_model_PinkFlower_anim
     dir: entity/model
     type: code
@@ -13099,7 +13184,11 @@ segments:
       type: .data
       name: PinkFlower_gfx
       subsegments:
-      - [0xE9B500]
+      - [0xE9B500, vtx, PinkFlower_1]
+      - [0xE9B540, vtx, PinkFlower_2]
+      - [0xE9B790, vtx, PinkFlower_3]
+      - [0xE9B8B0, vtx, PinkFlower_4]
+      - [0xE9B9B0, vtx, PinkFlower_5]
       - [0xE9BAB0, ia16, PinkFlower_light, 16, 16]
       - [0xE9BCB0]
       - [0xE9BD20, rgba16, PinkFlower_tex, 16, 64]
@@ -13116,7 +13205,10 @@ segments:
       type: .data
       name: SpinningFlower
       subsegments:
-      - [0xE9C900]
+      - [0xE9C900, vtx, SpinningFlower_1]
+      - [0xE9C950, vtx, SpinningFlower_2]
+      - [0xE9C9A0, vtx, SpinningFlower_3]
+      - [0xE9CA20, vtx, SpinningFlower_4]
       - [0xE9CA80, ia4, SpinningFlower_img1, 16, 32]
       - [0xE9CB80]
       - [0xE9CBF8, rgba16, SpinningFlower_petal, 32, 32]
@@ -13133,7 +13225,11 @@ segments:
       type: .data
       name: BombableRock
       subsegments:
-      - [0xE9D650]
+      - [0xE9D650, vtx, BombableRock_1]
+      - [0xE9D9D0, vtx, BombableRock_2]
+      - [0xE9DAF0, vtx, BombableRock_3]
+      - [0xE9DC50, vtx, BombableRock_4]
+      - [0xE9DD70, vtx, BombableRock_5]
       - [0xE9DE90, ci4, BombableRock, 64, 64]
       - [0xE9E690, palette, BombableRock]
       - [0xE9E6B0]

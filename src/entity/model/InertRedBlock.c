@@ -1,33 +1,7 @@
 #include "common.h"
 
-Vtx Entity_InertRedBlock_vtxFaces[] = {
-    {{{   -13,     0,   -13 }, 0, {  1024,     0 }, { 255, 255, 255, 255 }}},
-    {{{   -13,    25,   -13 }, 0, {  1024,  1024 }, { 255, 255, 255, 255 }}},
-    {{{    13,    25,   -13 }, 0, {     0,  1024 }, { 255, 255, 255, 255 }}},
-    {{{    13,     0,   -13 }, 0, {     0,     0 }, { 255, 255, 255, 255 }}},
-    {{{    13,     0,   -13 }, 0, {  1024,     0 }, { 158, 127, 127, 255 }}},
-    {{{    13,    25,   -13 }, 0, {  1024,  1024 }, { 158, 127, 127, 255 }}},
-    {{{    13,    25,    13 }, 0, {     0,  1024 }, { 158, 127, 127, 255 }}},
-    {{{    13,     0,    13 }, 0, {     0,     0 }, { 158, 127, 127, 255 }}},
-    {{{    13,     0,    13 }, 0, {  1024,     0 }, { 255, 255, 255, 255 }}},
-    {{{    13,    25,    13 }, 0, {  1024,  1024 }, { 255, 255, 255, 255 }}},
-    {{{   -13,    25,    13 }, 0, {     0,  1024 }, { 255, 255, 255, 255 }}},
-    {{{   -13,     0,    13 }, 0, {     0,     0 }, { 255, 255, 255, 255 }}},
-    {{{   -13,     0,    13 }, 0, {  1024,     0 }, { 158, 127, 127, 255 }}},
-    {{{   -13,    25,    13 }, 0, {  1024,  1024 }, { 158, 127, 127, 255 }}},
-    {{{   -13,    25,   -13 }, 0, {     0,  1024 }, { 158, 127, 127, 255 }}},
-    {{{   -13,     0,   -13 }, 0, {     0,     0 }, { 158, 127, 127, 255 }}},
-};
-Vtx Entity_InertRedBlock_vtxTopBottom[] = {
-    {{{   -13,    25,   -13 }, 0, {     0,  1024 }, { 192, 154, 154, 255 }}},
-    {{{   -13,    25,    13 }, 0, {     0,  1024 }, { 192, 154, 154, 255 }}},
-    {{{    13,    25,    13 }, 0, {  1024,  1024 }, { 192, 154, 154, 255 }}},
-    {{{    13,    25,   -13 }, 0, {  1024,  1024 }, { 192, 154, 154, 255 }}},
-    {{{    13,     0,   -13 }, 0, {  1024,     0 }, { 126, 101, 101, 255 }}},
-    {{{    13,     0,    13 }, 0, {  1024,     0 }, { 126, 101, 101, 255 }}},
-    {{{   -13,     0,    13 }, 0, {     0,     0 }, { 126, 101, 101, 255 }}},
-    {{{   -13,     0,   -13 }, 0, {     0,     0 }, { 126, 101, 101, 255 }}},
-};
+#include "entity/model/InertRedBlock_1.vtx.inc.c"
+#include "entity/model/InertRedBlock_2.vtx.inc.c"
 
 #include "entity/model/InertRedBlock_face.png.inc.c"
 Gfx Entity_InertRedBlock_LoadTexture[] = {
@@ -47,7 +21,7 @@ Gfx Entity_InertRedBlock_RenderTopBottom[] = {
     gsSPDisplayList(Entity_InertRedBlock_LoadTexture),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
-    gsSPVertex(Entity_InertRedBlock_vtxTopBottom, 8, 0),
+    gsSPVertex(D_0A000100_E42840, 8, 0),
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
     gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
     gsSPEndDisplayList(),
@@ -59,7 +33,7 @@ Gfx Entity_InertRedBlock_RenderFaces[] = {
     gsSPDisplayList(Entity_InertRedBlock_LoadTexture),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
-    gsSPVertex(Entity_InertRedBlock_vtxFaces, 16, 0),
+    gsSPVertex(D_0A000000_E42740, 16, 0),
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
     gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
     gsSP2Triangles(8, 9, 10, 0, 8, 10, 11, 0),

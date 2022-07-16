@@ -1,31 +1,6 @@
 #include "common.h"
 
-Vtx Entity_YellowBlock_vtx[] = {
-    {{{   -13,     0,   -13 }, 0, {  1024,  1024 }, { 255, 255, 255, 255 }}},
-    {{{   -13,    25,   -13 }, 0, {  1024,     0 }, { 255, 255, 255, 255 }}},
-    {{{    13,    25,   -13 }, 0, {     0,     0 }, { 255, 255, 255, 255 }}},
-    {{{    13,     0,   -13 }, 0, {     0,  1024 }, { 255, 255, 255, 255 }}},
-    {{{    13,     0,   -13 }, 0, {  1024,  1024 }, { 158, 127, 127, 255 }}},
-    {{{    13,    25,   -13 }, 0, {  1024,     0 }, { 158, 127, 127, 255 }}},
-    {{{    13,    25,    13 }, 0, {     0,     0 }, { 158, 127, 127, 255 }}},
-    {{{    13,     0,    13 }, 0, {     0,  1024 }, { 158, 127, 127, 255 }}},
-    {{{    13,     0,    13 }, 0, {  1024,  1024 }, { 255, 255, 255, 255 }}},
-    {{{    13,    25,    13 }, 0, {  1024,     0 }, { 255, 255, 255, 255 }}},
-    {{{   -13,    25,    13 }, 0, {     0,     0 }, { 255, 255, 255, 255 }}},
-    {{{   -13,     0,    13 }, 0, {     0,  1024 }, { 255, 255, 255, 255 }}},
-    {{{   -13,     0,    13 }, 0, {  1024,  1024 }, { 158, 127, 127, 255 }}},
-    {{{   -13,    25,    13 }, 0, {  1024,     0 }, { 158, 127, 127, 255 }}},
-    {{{   -13,    25,   -13 }, 0, {     0,     0 }, { 158, 127, 127, 255 }}},
-    {{{   -13,     0,   -13 }, 0, {     0,  1024 }, { 158, 127, 127, 255 }}},
-    {{{   -13,    25,   -13 }, 0, {     0,  1024 }, { 192, 154, 154, 255 }}},
-    {{{   -13,    25,    13 }, 0, {     0,  1024 }, { 192, 154, 154, 255 }}},
-    {{{    13,    25,    13 }, 0, {  1024,  1024 }, { 192, 154, 154, 255 }}},
-    {{{    13,    25,   -13 }, 0, {  1024,  1024 }, { 192, 154, 154, 255 }}},
-    {{{    13,     0,   -13 }, 0, {  1024,     0 }, { 126, 101, 101, 255 }}},
-    {{{    13,     0,    13 }, 0, {  1024,     0 }, { 126, 101, 101, 255 }}},
-    {{{   -13,     0,    13 }, 0, {     0,     0 }, { 126, 101, 101, 255 }}},
-    {{{   -13,     0,   -13 }, 0, {     0,     0 }, { 126, 101, 101, 255 }}},
-};
+#include "entity/model/YellowBlock.vtx.inc.c"
 
 #include "entity/model/YellowBlock_face.png.inc.c"
 Gfx Entity_YellowBlock_LoadTexture[] = {
@@ -45,7 +20,7 @@ Gfx Entity_YellowBlock_RenderTopBottom[] = {
     gsSPDisplayList(Entity_YellowBlock_LoadTexture),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
-    gsSPVertex(&Entity_YellowBlock_vtx[16], 8, 0),
+    gsSPVertex(&D_0A000000_E3B870[16], 8, 0),
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
     gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
     gsSPEndDisplayList(),
@@ -57,7 +32,7 @@ Gfx Entity_YellowBlock_RenderSides[] = {
     gsSPDisplayList(Entity_YellowBlock_LoadTexture),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
-    gsSPVertex(&Entity_YellowBlock_vtx[0], 16, 0),
+    gsSPVertex(&D_0A000000_E3B870[0], 16, 0),
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
     gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
     gsSP2Triangles(8, 9, 10, 0, 8, 10, 11, 0),

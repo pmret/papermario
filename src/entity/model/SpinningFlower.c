@@ -1,31 +1,9 @@
 #include "common.h"
 
-Vtx D_0A000000_E9C900[] = {
-    {{{    22,     3,    24 }, 0, {  2048, -1024 }, { 255, 255, 255, 255 }}},
-    {{{    22,    18,   -17 }, 0, {  2048,  1024 }, { 255, 255, 255, 255 }}},
-    {{{     0,     0,     0 }, 0, {  1024,     0 }, { 255, 255, 255, 255 }}},
-    {{{   -22,    18,   -17 }, 0, {     0,  1024 }, { 255, 255, 255, 255 }}},
-    {{{   -22,     3,    24 }, 0, {     0, -1024 }, { 255, 255, 255, 255 }}},
-    {{{   -22,     3,    24 }, 0, {     0, -1024 }, { 101, 101, 170, 255 }}},
-    {{{     0,     0,     0 }, 0, {  1024,     0 }, { 101, 101, 170, 255 }}},
-    {{{    22,     3,    24 }, 0, {  2048, -1024 }, { 101, 101, 170, 255 }}},
-    {{{   -22,    18,   -17 }, 0, {     0,  1024 }, { 101, 101, 170, 255 }}},
-    {{{    22,    18,   -17 }, 0, {  2048,  1024 }, { 101, 101, 170, 255 }}},
-    {{{    -1,     7,     0 }, 0, {     0,     0 }, {  82, 164,  27, 255 }}},
-    {{{    -3,     7,     0 }, 0, {     0,     0 }, {  82, 164,  27, 255 }}},
-    {{{    -1,     0,     0 }, 0, {     0,     0 }, {  46, 140,  23, 255 }}},
-    {{{     1,     0,     0 }, 0, {     0,     0 }, {  46, 140,  23, 255 }}},
-    {{{    -1,    14,     0 }, 0, {     0,     0 }, {  82, 164,  27, 255 }}},
-    {{{    -3,    14,     0 }, 0, {     0,     0 }, {  82, 164,  27, 255 }}},
-    {{{     1,    20,     0 }, 0, {     0,     0 }, {  46, 140,  23, 255 }}},
-    {{{    -1,    20,     0 }, 0, {     0,     0 }, {  46, 140,  23, 255 }}},
-    {{{     0,     0,   -10 }, 0, {   512,   512 }, {  82, 164,  27, 255 }}},
-    {{{   -25,    10,   -10 }, 0, {   512,     0 }, {  82, 164,  27, 255 }}},
-    {{{   -25,    10,    10 }, 0, {     0,     0 }, {  82, 164,  27, 255 }}},
-    {{{     0,     0,    10 }, 0, {     0,   512 }, {  82, 164,  27, 255 }}},
-    {{{    25,    10,    10 }, 0, {     0,  1024 }, {  82, 164,  27, 255 }}},
-    {{{    25,    10,   -10 }, 0, {   512,  1024 }, {  82, 164,  27, 255 }}},
-};
+#include "entity/model/SpinningFlower_1.vtx.inc.c"
+#include "entity/model/SpinningFlower_2.vtx.inc.c"
+#include "entity/model/SpinningFlower_3.vtx.inc.c"
+#include "entity/model/SpinningFlower_4.vtx.inc.c"
 
 #include "entity/model/SpinningFlower_img1.png.inc.c"
 Gfx D_0A000280_E9CB80[] = {
@@ -73,7 +51,7 @@ Gfx D_0A000BB0_E9D4B0[] = {
     gsSPDisplayList(D_0A000280_E9CB80),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
-    gsSPVertex(&D_0A000000_E9C900[18], 6, 0),
+    gsSPVertex(D_0A000120_E9CA20, 6, 0),
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
     gsSP2Triangles(4, 5, 0, 0, 4, 0, 3, 0),
     gsSPEndDisplayList(),
@@ -87,7 +65,7 @@ Gfx D_0A000C00_E9D500[] = {
     gsSPTexture(0x0080, 0x0080, 0, G_TX_RENDERTILE, G_OFF),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
-    gsSPVertex(&D_0A000000_E9C900[10], 8, 0),
+    gsSPVertex(D_0A0000A0_E9C9A0, 8, 0),
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
     gsSP2Triangles(4, 5, 1, 0, 4, 1, 0, 0),
     gsSP2Triangles(6, 7, 5, 0, 6, 5, 4, 0),
@@ -107,7 +85,7 @@ Gfx D_0A000C78_E9D578[] = {
     gsSPDisplayList(D_0A000AF8_E9D3F8),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
-    gsSPVertex(&D_0A000000_E9C900[5], 5, 0),
+    gsSPVertex(D_0A000050_E9C950, 5, 0),
     gsSP2Triangles(0, 1, 2, 0, 0, 3, 1, 0),
     gsSP2Triangles(1, 4, 2, 0, 1, 3, 4, 0),
     gsSPEndDisplayList(),
@@ -120,7 +98,7 @@ Gfx D_0A000CC8_E9D5C8[] = {
     gsSPDisplayList(D_0A000AF8_E9D3F8),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
-    gsSPVertex(&D_0A000000_E9C900[0], 5, 0),
+    gsSPVertex(D_0A000000_E9C900, 5, 0),
     gsSP2Triangles(0, 1, 2, 0, 1, 3, 2, 0),
     gsSP2Triangles(2, 3, 4, 0, 0, 2, 4, 0),
     gsSPEndDisplayList(),
