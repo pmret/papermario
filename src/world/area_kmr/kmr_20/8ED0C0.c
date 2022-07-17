@@ -2,8 +2,14 @@
 
 #include "world/common/atomic/ToadHouse.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8ED0C0", func_8024159C_8ED3BC);
+ApiStatus func_8024159C_8ED3BC(Evt* script, s32 isInitialCall) {
+    au_ambience_set_volume(0, 1000, 1);
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8ED0C0", func_802415C4_8ED3E4);
+ApiStatus func_802415C4_8ED3E4(Evt* script, s32 isInitialCall) {
+    au_ambience_set_volume(0, 1000, 0x3F);
+    return ApiStatus_DONE2;
+}
 
 #include "world/common/WaitForPlayerToLand.inc.c"

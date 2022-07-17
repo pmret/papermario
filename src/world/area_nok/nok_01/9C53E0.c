@@ -105,7 +105,7 @@ ApiStatus func_802427C0_9C7BA0(Evt* script, s32 isInitialCall) {
     evt_get_variable(script, *args++);
     snd_ambient_80055448(16);
     snd_ambient_80055760(4);
-    snd_ambient_8005566C(0, 250, 1);
+    au_ambience_set_volume(0, 250, 1);
     return ApiStatus_DONE2;
 }
 
@@ -123,7 +123,20 @@ ApiStatus func_802428B8_9C7C98(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
+// Requires BSS
+#ifdef NON_MATCHING
+ApiStatus func_802428D8_9C7CB8(Evt* script, s32 isInitialCall) {
+    static s16 D_80250810_9D5BF0[] = { 0, 2, 1, 4 };
+    
+    Bytecode* args = script->ptrReadPos;
+    s32 index = evt_get_variable(script, *args++);
+    
+    snd_ambient_80055848(D_80250810_9D5BF0[index]);
+    return ApiStatus_DONE2;
+}
+#else
 INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_802428D8_9C7CB8);
+#endif
 
 ApiStatus func_80242910_9C7CF0(Evt* script, s32 isInitialCall) {
     gPlayerData.tradeEventStartTime = gPlayerData.frameCounter;

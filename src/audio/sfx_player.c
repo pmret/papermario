@@ -185,6 +185,9 @@ u8 BlankSEFData[] = {
     0x00, 0x00, 0x00, 0x00
 };
 
+// --------------------------------------------
+// the following are only referenced in audio/28910_len_5090
+
 void (*SeqCmdHandlers[])(BGMPlayer*, BGMPlayerTrack*) = {
 	au_BGMCmd_E0_MasterTempo,
 	au_BGMCmd_E1_MasterVolume,
@@ -232,6 +235,9 @@ s8 BgmDivisors[] = {
      0,  0,  0,  0,  0,  0,  0,  0
 };
 
+// --------------------------------------------
+// the following are only referenced in audio/2BF90
+
 u8 BlankMseqData[] = {
     0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00,
@@ -239,8 +245,11 @@ u8 BlankMseqData[] = {
     0x00, 0x00, 0x00, 0x00
 };
 
+// --------------------------------------------
+// the following are only referenced in audio/2e230_len_2190
+
 s16 D_80078530[] = {
-    0x0000, 0x0200, 0x0800, 0x1200, 0x2000, 0x3200, 0x4800, 0x6200, 0x8000, 0x0000
+    0x0000, 0x0200, 0x0800, 0x1200, 0x2000, 0x3200, 0x4800, 0x6200, 0x8000
 };
 
 // InstrumentEffect
@@ -251,6 +260,9 @@ s32 D_80078544[] = {
 s32 D_8007854C[] = {
     0x3D7FFF00, 0x3400FF00
 };
+
+// --------------------------------------------
+// the following are only referenced in 28910_len_5090
 
 s32 D_80078554[] = {
     0x5C00FF00
@@ -264,12 +276,18 @@ s8 D_80078558[] = {
     0x1B, 0x1A, 0x19, 0x18, 0x17, 0x16, 0x15, 0x14
 };
 
+// --------------------------------------------
+// the following are only referenced in audio/2e230_len_2190
+
 u8 AmbientSoundIDtoMSEQFileIndex[] = {
     0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A,
     0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11, 0x12,
     0x13, 0x14, 0x15, 0x16, 0x17, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 };
+
+// --------------------------------------------
+// the following are only referenced in audio/2d9a0_len_890
 
 s32 D_800785A0[] = {
     0x0393756C, 0x034736DE, 0x02FAE1DA, 0x02AEA34C, 0x02624E48, 0x0215F944, 0x01C9BAB6, 0x01A39034,
@@ -286,6 +304,9 @@ s32 D_800785A0[] = {
     0x000086C4, 0x0000704E, 0x000059D8, 0x00004362, 0x00002CEC, 0x00001676, 0x00000000, 0x00000000,
     0x00000000, 0x00000000, 0x00000000, 0x00000000
 };
+
+// --------------------------------------------
+// the following are only referenced in audio/2e230_len_2190
 
 f32 AlTuneScaling[] = {
     // TUNE_SCALING_ARR_AMPLIFY_FINE
@@ -409,7 +430,7 @@ void au_sfx_init(SoundManager* manager, u8 arg1, u8 arg2, AuGlobals* globals, u8
     manager->unk_168 = 0;
     func_8004BA54(manager, 0);
     au_sfx_clear_queue(manager);
-    au_bgm_initialize_fade(&manager->fadeInfo, 0, 0x7FFF, 0x7FFF);
+    au_fade_init(&manager->fadeInfo, 0, 0x7FFF, 0x7FFF);
     func_80053A98(manager->unk_BE, manager->fadeInfo.currentVolume.u16, manager->unk_5C);
     manager->lastCustomEffectIdx = 0xFF;
 
@@ -864,7 +885,7 @@ static void au_sfx_update_mode_0(SoundManager* manager, SoundPlayer* player, AlU
                     arg2->pan = player->sfxPan;
                 }
     
-                arg2->reverb = player->reverb;
+                arg2->reverbAmt = player->reverb;
                 arg2->adjustedVolume = au_sfx_get_scaled_volume(manager, player);
                 arg2->unk_14.unk_00 = player->unk_10.unk_00;
                 arg2->unk_14.unk_04 = player->unk_10.unk_04;
@@ -978,7 +999,7 @@ static void au_sfx_update_mode_1(SoundManager* manager, SoundPlayer* player, AlU
                     voice->pan = player->masterPan;
                 }
                 
-                voice->reverb = player->reverb;
+                voice->reverbAmt = player->reverb;
                 snd_set_voice_volume(voice, manager, player);
                 if (player->unk_18 == 0) {
                     voice->unk_14.unk_00 = player->unk_10.unk_00;
@@ -1037,7 +1058,7 @@ static void au_sfx_update_mode_1(SoundManager* manager, SoundPlayer* player, AlU
                 voice->pan = player->masterPan;
             }
             voice->unk_flags_43 |= 0x10;
-            voice->reverb = player->reverb;
+            voice->reverbAmt = player->reverb;
         }
     }
     if (player->changed.volume && (voice->unk_45 == manager->unk_BC)) {

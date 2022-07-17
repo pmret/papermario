@@ -21,7 +21,7 @@ AuResult snd_ambient_8005553C(s32 arg0, s32 arg1);
 AuResult snd_ambient_80055590(s32 arg0, s32 arg1);
 AuResult snd_ambient_800555E4(s32 arg0);
 AuResult snd_ambient_80055618(s32 arg0, s32 arg1);
-AuResult snd_ambient_8005566C(s32 arg0, s32 arg1, s32 arg2);
+AuResult au_ambience_set_volume(s32 arg0, s32 arg1, s32 arg2);
 AuResult snd_ambient_800556D0(s32 arg0);
 AuResult snd_ambient_80055718(s32 arg0);
 void snd_ambient_80055760(s32 arg0);

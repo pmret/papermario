@@ -18,6 +18,8 @@ typedef u8* WaveData;
 #define AU_FX_DELAY_COUNT     4
 #define AU_FX_LENGTH          0xA10
 
+#define AU_5750               5750
+
 #define SAMPLES               184
 #define SAMPLE184(delta)      (((delta) + (SAMPLES / 2)) / SAMPLES) * SAMPLES
 #define FIXED_SAMPLE          SAMPLES
@@ -562,9 +564,9 @@ typedef struct AlUnkVoice {
     /* 0x00 */ Instrument* instrument;
     /* 0x04 */ f32 pitchRatio;
     /* 0x08 */ s32 unk_08;
-    /* 0x0C */ s16 unk_0C; // some volume?
+    /* 0x0C */ s16 volume;
     /* 0x0E */ u8 pan;
-    /* 0x0F */ u8 reverb; // amt
+    /* 0x0F */ u8 reverbAmt;
     /* 0x10 */ u8 reverbType;
     /* 0x11 */ char unk_11[0x3];
     /* 0x14 */ AlUnkInstrumentData unk_14;

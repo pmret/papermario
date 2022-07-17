@@ -332,21 +332,22 @@ AuResult snd_ambient_800555E4(s32 arg0) {
     return func_80051050(arg0);
 }
 
-AuResult snd_ambient_80055618(s32 arg0, s32 arg1) {
-    AuResult status = func_80050C30(arg0);
+//TODO au_ambience_mute? -- sets a flag which tells the manager to mute players
+AuResult snd_ambient_80055618(s32 index, s32 arg1) {
+    AuResult status = func_80050C30(index);
 
     if (status == AU_RESULT_OK) {
-        func_80050C54(arg0, arg1);
+        func_80050C54(index, arg1);
     }
 
     return status;
 }
 
-AuResult snd_ambient_8005566C(s32 arg0, s32 arg1, s32 arg2) {
-    AuResult status = func_80050C30(arg0);
+AuResult au_ambience_set_volume(s32 index, s32 time, s32 volume) {
+    AuResult status = func_80050C30(index);
 
     if (status == AU_RESULT_OK) {
-        func_80050FD0(arg0, arg1, arg2);
+        au_mseq_set_volume(index, time, volume);
     }
 
     return status;
@@ -436,10 +437,10 @@ AuResult snd_load_song(s32 songID, s32 playerIndex) {
     BGMHeader* bgmFile;
     BGMPlayer* player;
 
-    snd_get_sequence_player_and_file(playerIndex, &bgmFile, &player);
+    au_get_bgm_player_and_file(playerIndex, &bgmFile, &player);
 
     if (bgmFile != NULL) {
-        return snd_load_song_files(songID, bgmFile, player);
+        return au_load_song_files(songID, bgmFile, player);
     } else {
         return AU_ERROR_NULL_SONG_NAME;
     }
@@ -831,7 +832,7 @@ void bgm_clear_music_events(void) {
     globals->musicEventQueuePos = globals->musicEventQueue;
 }
 
-void audio_register_callback(AuCallback func, s32 index) {
+void au_register_callback(AuCallback func, s32 index) {
     gSoundGlobals->audioThreadCallbacks[index] = func;
 }
 
@@ -850,11 +851,11 @@ void func_800561A4(s32 arg0) {
 }
 
 void func_800561C4(s32 arg0) {
-    func_80054CE0(16, arg0);
+    func_80054CE0(0x10, arg0);
 }
 
 void func_800561E4(s32 arg0) {
-    func_80054D74(16, arg0);
+    func_80054D74(0x10, arg0);
 }
 
 void func_80056204(void) {

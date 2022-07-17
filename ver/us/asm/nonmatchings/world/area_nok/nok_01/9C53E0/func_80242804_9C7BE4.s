@@ -16,7 +16,7 @@ glabel func_80242804_9C7BE4
 /* 9C7C10 80242830 86040000 */   lh       $a0, ($s0)
 /* 9C7C14 80242834 240505DC */  addiu     $a1, $zero, 0x5dc
 /* 9C7C18 80242838 86040000 */  lh        $a0, ($s0)
-/* 9C7C1C 8024283C 0C01559B */  jal       snd_ambient_8005566C
+/* 9C7C1C 8024283C 0C01559B */  jal       au_ambience_set_volume
 /* 9C7C20 80242840 2406007F */   addiu    $a2, $zero, 0x7f
 /* 9C7C24 80242844 8FBF0014 */  lw        $ra, 0x14($sp)
 /* 9C7C28 80242848 8FB00010 */  lw        $s0, 0x10($sp)
