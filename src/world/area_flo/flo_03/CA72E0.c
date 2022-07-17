@@ -1,5 +1,6 @@
 #include "flo_03.h"
 #include "message_ids.h"
+#include "entity.h"
 #include "sprite/npc/dayzee.h"
 #include "sprite/npc/monty_mole.h"
 #include "sprite/npc/petunia.h"
@@ -1206,7 +1207,7 @@ EvtScript N(80244ED0) = {
 };
 
 EvtScript N(makeEntities) = {
-    EVT_CALL(MakeEntity, 0x802EAB04, -175, 0, 150, 0, 8, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, &Entity_HiddenPanel, -175, 0, 150, 0, 8, MAKE_ENTITY_END)
     EVT_CALL(AssignPanelFlag, EVT_SAVE_FLAG(1404))
     EVT_RETURN
     EVT_END

@@ -1,5 +1,6 @@
 #include "dgb_10.h"
 #include "message_ids.h"
+#include "entity.h"
 
 EntryList N(entryList) = {
     { 300.0f, 0.0f, -50.0f, 0.0f },
@@ -282,15 +283,15 @@ EvtScript N(80240F20) = {
 
 EvtScript N(makeEntities) = {
     EVT_IF_EQ(EVT_SAVE_FLAG(1052), 0)
-        EVT_CALL(MakeEntity, 0x802BCE84, 500, 0, -100, 0, MAKE_ENTITY_END)
+        EVT_CALL(MakeEntity, EVT_PTR(Entity_BoardedFloor), 500, 0, -100, 0, MAKE_ENTITY_END)
         EVT_CALL(AssignScript, EVT_PTR(N(80240EE0)))
     EVT_END_IF
     EVT_IF_EQ(EVT_SAVE_FLAG(1053), 0)
-        EVT_CALL(MakeEntity, 0x802BCE84, 500, 0, -250, 0, MAKE_ENTITY_END)
+        EVT_CALL(MakeEntity, EVT_PTR(Entity_BoardedFloor), 500, 0, -250, 0, MAKE_ENTITY_END)
         EVT_CALL(AssignScript, EVT_PTR(N(80240F00)))
     EVT_END_IF
     EVT_IF_EQ(EVT_SAVE_FLAG(1054), 0)
-        EVT_CALL(MakeEntity, 0x802BCE84, 375, 0, -250, 0, MAKE_ENTITY_END)
+        EVT_CALL(MakeEntity, EVT_PTR(Entity_BoardedFloor), 375, 0, -250, 0, MAKE_ENTITY_END)
         EVT_CALL(AssignScript, EVT_PTR(N(80240F20)))
     EVT_END_IF
     EVT_RETURN

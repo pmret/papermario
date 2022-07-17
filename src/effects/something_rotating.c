@@ -20,7 +20,7 @@ void something_rotating_render(EffectInstance* effect) {
     renderTask.renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;
 
     retTask = shim_queue_render_task(&renderTask);
-    retTask->renderMode |= RENDER_MODE_2;
+    retTask->renderMode |= RENDER_TASK_FLAG_2;
 }
 
 INCLUDE_ASM(s32, "effects/something_rotating", func_E01166E8);

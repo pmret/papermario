@@ -1,5 +1,6 @@
 #include "kmr_12.h"
 #include "message_ids.h"
+#include "entity.h"
 #include "sprite/npc/goomba.h"
 
 EvtScript N(ExitWest) = EXIT_WALK_SCRIPT(60, 0, "kmr_07", 1);
@@ -219,7 +220,7 @@ EvtScript N(ReadEastSign) = {
 };
 
 EvtScript N(MakeEntities) = {
-    EVT_CALL(MakeEntity, EVT_ADDR(D_802EAFDC), 436, 0, -42, 0, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, EVT_ADDR(Entity_Signpost), 436, 0, -42, 0, MAKE_ENTITY_END)
     EVT_CALL(AssignScript, EVT_ADDR(N(ReadEastSign)))
     EVT_RETURN
     EVT_END

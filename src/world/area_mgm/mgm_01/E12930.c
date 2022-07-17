@@ -1,6 +1,7 @@
 #include "mgm_01.h"
 #include "hud_element.h"
 #include "effects.h"
+#include "entity.h"
 
 void delete_entity(s32 entityIndex);
 void set_message_images(MessageImageData* images);
@@ -67,8 +68,6 @@ typedef struct JumpGameData {
     /* 0x074 */ JumpGamePanel panels[NUM_BLOCKS];
 } JumpGameData; /* size = 0x468 */
 
-extern EntityBlueprint D_802EA0C4;
-
 extern s32 MessagePlural;
 extern s32 MessageSingular;
 extern MessageImageData N(MsgImgs_Panels);
@@ -119,7 +118,7 @@ void N(draw_score_display) (void* renderData) {
             }
         }
     }
-    
+
     if (data->scoreWindowPosX < SCREEN_WIDTH + 1) {
         draw_box(0, 9, data->scoreWindowPosX, 28, 0, 72, 20, 255, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, NULL, NULL, NULL, SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
         hudElemID = data->hudElemID;
@@ -227,7 +226,7 @@ ApiStatus N(InitPanelEmergeFromBlock)(Evt* script, s32 isInitialCall) {
     data->panels[index].endPos.z = data->panels[index].curPos.z;
 
     data->panels[index].curAngle = 0;
-    
+
     data->panels[index].endScale = 2.0;
     data->panels[index].curScale = 1.0;
     data->panels[index].startScale = 1.0;
@@ -565,7 +564,7 @@ ApiStatus N(CreateBlockEntities)(Evt* script, s32 isInitialCall) {
                 data->type[indexA] = temp;
             }
         }
-        
+
         script->functionTemp[0] = 0;
         script->functionTemp[1] = 0;
     }
@@ -573,7 +572,7 @@ ApiStatus N(CreateBlockEntities)(Evt* script, s32 isInitialCall) {
     script->functionTemp[0]--;
     if (script->functionTemp[0] <= 0) {
         curBlockIdx = script->functionTemp[1];
-        entityIndex = create_entity(&D_802EA0C4,
+        entityIndex = create_entity(&Entity_BrickBlock,
             N(BlockPosX)[curBlockIdx],
             N(BlockPosY)[curBlockIdx],
             N(BlockPosZ)[curBlockIdx],

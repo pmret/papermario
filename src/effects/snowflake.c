@@ -114,7 +114,7 @@ void snowflake_render(EffectInstance* effect) {
     renderTaskPtr->renderMode = RENDER_MODE_2D;
 
     retTask = shim_queue_render_task(renderTaskPtr);
-    retTask->renderMode |= RENDER_MODE_2;
+    retTask->renderMode |= RENDER_TASK_FLAG_2;
 }
 
 void snowflake_appendGfx(void* effect) {

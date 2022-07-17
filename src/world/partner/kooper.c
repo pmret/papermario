@@ -51,7 +51,7 @@ s32 func_802BD17C_31B19C(Npc* kooper) {
     } else {
         D_802BEC6C = 1;
         gOverrideFlags |= GLOBAL_OVERRIDES_40;
-        set_item_entity_flags(D_802BEC68, ENTITY_FLAGS_200000);
+        set_item_entity_flags(D_802BEC68, ITEM_ENTITY_FLAGS_200000);
         return 1;
     }
 }

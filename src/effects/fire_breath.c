@@ -175,7 +175,7 @@ void fire_breath_render(EffectInstance* effect) {
 
     renderTaskPointer->renderMode = RENDER_MODE_2D;
     retTask = shim_queue_render_task(renderTaskPointer);
-    retTask->renderMode |= RENDER_MODE_2;
+    retTask->renderMode |= RENDER_TASK_FLAG_2;
 }
 
 void fire_breath_appendGfx(void* effect) {

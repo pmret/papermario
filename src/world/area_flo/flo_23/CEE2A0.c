@@ -3,6 +3,7 @@
 #include "sprite/npc/gate_flower.h"
 #include "sprite/npc/spiny.h"
 #include "effects.h"
+#include "entity.h"
 
 enum {
     NPC_SPINY0,
@@ -454,12 +455,12 @@ static s32 N(pad_2598)[] = {
 };
 
 EvtScript N(makeEntities) = {
-    EVT_CALL(MakeEntity, EVT_PTR(D_802EA0C4), 100, 60, 5, 0, MAKE_ENTITY_END)
-    EVT_CALL(MakeEntity, EVT_PTR(Entity_D_802EA588), 100, 145, 0, 0, 131, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, EVT_PTR(Entity_BrickBlock), 100, 60, 5, 0, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, EVT_PTR(Entity_HiddenYellowBlock), 100, 145, 0, 0, 131, MAKE_ENTITY_END)
     EVT_CALL(AssignBlockFlag, EVT_SAVE_FLAG(1409))
-    EVT_CALL(MakeEntity, EVT_PTR(Entity_D_802EA588), 25, 60, 0, 0, 343, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, EVT_PTR(Entity_HiddenYellowBlock), 25, 60, 0, 0, 343, MAKE_ENTITY_END)
     EVT_CALL(AssignBlockFlag, EVT_SAVE_FLAG(1408))
-    EVT_CALL(MakeEntity, EVT_PTR(Entity_D_802EAA54), -50, 0, 0, 90, 60, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, EVT_PTR(Entity_SimpleSpring), -50, 0, 0, 90, 60, MAKE_ENTITY_END)
     EVT_RETURN
     EVT_END
 };

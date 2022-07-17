@@ -1,7 +1,8 @@
 #include "arn_09.h"
+#include "entity.h"
 #include "sprite/npc/tubbas_heart.h"
 
-extern s32 D_000001E4;
+extern s16 Entity_ScriptSpring_AnimLaunch[];
 
 EvtScript N(80240140) = {
     EVT_SET_GROUP(EVT_GROUP_1B)
@@ -81,7 +82,7 @@ EvtScript N(802403A0) = {
 };
 
 EvtScript N(makeEntities) = {
-    EVT_CALL(MakeEntity, EVT_PTR(Entity_D_802EAA30), 0, 0, 0, 0, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, EVT_PTR(Entity_ScriptSpring), 0, 0, 0, 0, MAKE_ENTITY_END)
     EVT_CALL(AssignScript, EVT_PTR(N(802403A0)))
     EVT_RETURN
     EVT_END
@@ -201,6 +202,6 @@ ApiStatus N(func_80240000_BF6060)(Evt* script, s32 isInitialCall) {
         return ApiStatus_BLOCK;
     }
 
-    play_model_animation(entity->virtualModelIndex, &D_000001E4);
+    play_model_animation(entity->virtualModelIndex, Entity_ScriptSpring_AnimLaunch);
     return ApiStatus_DONE2;
 }

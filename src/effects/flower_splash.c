@@ -130,7 +130,7 @@ void flower_splash_render(EffectInstance* effect) {
     renderTask.renderMode = RENDER_MODE_28;
 
     retTask = shim_queue_render_task(&renderTask);
-    retTask->renderMode |= RENDER_MODE_2;
+    retTask->renderMode |= RENDER_TASK_FLAG_2;
 }
 
 void func_E00104F4(EffectInstance* effect) {

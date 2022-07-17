@@ -1,4 +1,5 @@
 #include "arn_07.h"
+#include "entity.h"
 #include "sprite/npc/world_tubba.h"
 #include "sprite/npc/paragoomba.h"
 #include "sprite/npc/world_skolar.h"
@@ -87,7 +88,7 @@ EvtScript N(80243B28) = {
 
 EvtScript N(makeEntities) = {
     EVT_IF_LT(EVT_SAVE_VAR(0), -24)
-        EVT_CALL(MakeEntity, 0x802BCD68, 10, 30, -155, 0, MAKE_ENTITY_END)
+        EVT_CALL(MakeEntity, EVT_PTR(Entity_Padlock), 10, 30, -155, 0, MAKE_ENTITY_END)
         EVT_CALL(AssignScript, EVT_PTR(N(80243B28)))
         EVT_SET(EVT_MAP_VAR(0), EVT_VAR(0))
     EVT_END_IF

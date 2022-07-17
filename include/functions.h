@@ -30,7 +30,7 @@ void* _heap_malloc_tail(HeapNode* head, u32 size);
 u32 _heap_free(HeapNode* heapNodeList, void* addrToFree);
 void* _heap_realloc(HeapNode* heapNodeList, void* addr, u32 newSize);
 HeapNode* _heap_create(HeapNode* addr, u32 size);
-s32 dma_copy(Addr romStart, Addr romEnd, void* vramDest);
+u32 dma_copy(Addr romStart, Addr romEnd, void* vramDest);
 f32 rand_float(void);
 void copy_matrix(Matrix4f src, Matrix4f dest);
 
@@ -60,7 +60,7 @@ void intro_logos_update_fade(void);
 
 u32 get_entity_type(s32 arg0);
 Entity* get_entity_by_index(s32 index);
-s32 create_entity(EntityBlueprint* bp, s32 x, s32 y, s32 z, s32 rotY, ...);
+s32 create_entity(EntityBlueprint* bp, ...);
 void entity_shattering_idle(Entity* entity);
 void func_802666E4(Actor* actor, f32 x, f32 y, f32 z, s32 damage);
 
@@ -83,6 +83,9 @@ void clear_entity_model_flags(s32 idx, s32 newFlags);
 void exec_entity_model_commandlist(s32 idx);
 s32 load_entity_model(s32* cmdList);
 RenderTask* queue_render_task(RenderTask* task);
+
+s32 create_mesh_animator(s16* animPos, s16* animBuffer);
+void load_mesh_animator_tree(s32 index, StaticAnimatorNode** tree);
 
 void setup_pause_menu_tab(MenuWindowBP* bpArray, s32 arraySize);
 
@@ -297,7 +300,7 @@ void clear_virtual_entity_list(void);
 void reset_model_animators(void);
 void init_virtual_entity_list(void);
 void init_model_animators(void);
-void play_model_animation(s32, s32);
+void play_model_animation(s32, s16*);
 s32 heap_free(void* ptr);
 
 void btl_state_update_normal_start(void);

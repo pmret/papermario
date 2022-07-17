@@ -566,9 +566,9 @@ void update_npcs(void) {
                         Shadow* shadow = get_shadow_by_index(npc->shadowIndex);
                         EntityModel* entityModel = get_entity_model(shadow->entityModelID);
 
-                        entityModel->flags &= ~ENTITY_MODEL_FLAGS_200;
+                        entityModel->flags &= ~ENTITY_MODEL_FLAGS_REFLECT;
                         if (npc->flags & NPC_FLAG_REFLECT_WALL) {
-                            entityModel->flags |= ENTITY_MODEL_FLAGS_200;
+                            entityModel->flags |= ENTITY_MODEL_FLAGS_REFLECT;
                         }
 
                         x = npc->pos.x;
@@ -919,7 +919,7 @@ void enable_npc_shadow(Npc* npc) {
 
     if (!(npc->flags & NPC_FLAG_HAS_SHADOW)) {
         shadow = get_shadow_by_index(npc->shadowIndex);
-        shadow->flags &= ~SHADOW_FLAGS_HIDDEN;
+        shadow->flags &= ~ENTITY_FLAGS_HIDDEN;
         npc->flags = npc->flags | (NPC_FLAG_DIRTY_SHADOW | NPC_FLAG_HAS_SHADOW);
     }
 }
@@ -929,7 +929,7 @@ void disable_npc_shadow(Npc* npc) {
 
     if (npc->flags & NPC_FLAG_HAS_SHADOW) {
         shadow = get_shadow_by_index(npc->shadowIndex);
-        shadow->flags |= SHADOW_FLAGS_HIDDEN;
+        shadow->flags |= ENTITY_FLAGS_HIDDEN;
         npc->flags &= ~NPC_FLAG_HAS_SHADOW;
         npc->flags &= ~NPC_FLAG_DIRTY_SHADOW;
     }

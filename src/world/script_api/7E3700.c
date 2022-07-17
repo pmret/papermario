@@ -1,8 +1,8 @@
 #include "common.h"
+#include "entity.h"
 
 extern PushBlockGrid* D_802DBC88[]; //TODO determine length
 extern EvtScript D_80285674_7E64F4;
-extern EntityBlueprint D_802EA2BC;
 
 #define BLOCK_GRID_SIZE 25
 
@@ -113,7 +113,7 @@ ApiStatus SetPushBlock(Evt* script, s32 isInitialCall) {
         s32 posX = blockGrid->centerPos[0] + (gridX * BLOCK_GRID_SIZE) + (BLOCK_GRID_SIZE / 2);
         s32 posY = blockGrid->centerPos[1];
         s32 posZ = blockGrid->centerPos[2] + (gridZ * BLOCK_GRID_SIZE) + (BLOCK_GRID_SIZE / 2);
-        blockEntityID = create_entity(&D_802EA2BC, posX, posY, posZ, 0, 0, 0, 0, MAKE_ENTITY_END);
+        blockEntityID = create_entity(&Entity_PushBlock, posX, posY, posZ, 0, 0, 0, 0, MAKE_ENTITY_END);
         bind_trigger_1(&D_80285674_7E64F4, TRIGGER_WALL_PUSH, blockEntityID + EVT_ENTITY_ID_BIT, (s32)blockGrid, blockEntityID, 3);
         script->varTable[0] = blockEntityID;
     }

@@ -3,6 +3,7 @@
 
 #include "common.h"
 #include "script_api/battle.h"
+#include "entity.h"
 
 #undef NAMESPACE
 #define NAMESPACE battle_item_pow_block

@@ -2,6 +2,7 @@
 #include "sprite/npc/tubbas_heart.h"
 #include "sprite/npc/yakkey.h"
 #include "world/partners.h"
+#include "entity.h"
 
 enum {
     NPC_TUBBAS_HEART,
@@ -434,7 +435,7 @@ static s32 N(pad_184C) = {
 
 EvtScript N(makeEntities) = {
     EVT_IF_LT(EVT_SAVE_VAR(0), -23)
-        EVT_CALL(MakeEntity, 0x802BCE84, 0, 30, 0, 0, MAKE_ENTITY_END)
+        EVT_CALL(MakeEntity, EVT_PTR(Entity_BoardedFloor), 0, 30, 0, 0, MAKE_ENTITY_END)
     EVT_END_IF
     EVT_RETURN
     EVT_END
