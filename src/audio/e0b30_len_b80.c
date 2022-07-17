@@ -85,7 +85,7 @@ void bgm_update_music_settings(void) {
             if (music->flags & MUSIC_SETTINGS_FLAGS_1) {
                 if (music->fadeOutTime < 250) {
                     if (!(music->flags & MUSIC_SETTINGS_FLAGS_4)) {
-                        if (func_800559C4(music->songName) == AU_RESULT_OK) {
+                        if (au_song_stop_by_name(music->songName) == AU_RESULT_OK) {
                             music->state = state2;
                         }
                     } else {
@@ -114,7 +114,7 @@ void bgm_update_music_settings(void) {
             flags = music->flags;
             music->flags &= ~flag4;
             if (flags & 1) {
-                if (func_800559FC(music->songName) == AU_RESULT_OK) {
+                if (au_song_is_playing(music->songName) == AU_RESULT_OK) {
                     music->flags &= ~MUSIC_SETTINGS_FLAGS_1;
                     music->state = 3;
                 }
@@ -180,7 +180,7 @@ s32 _bgm_set_song(s32 playerIndex, s32 songID, s32 variation, s32 fadeOutTime, s
     musicSetting = &gMusicSettings[playerIndex];
 
     if (!gGameStatusPtr->musicEnabled) {
-        func_800559C4(musicSetting->songName);
+        au_song_stop_by_name(musicSetting->songName);
         musicSetting->flags &= ~MUSIC_SETTINGS_FLAGS_1;
 
         return 1;
@@ -229,7 +229,7 @@ s32 func_8014A964(s32 playerIndex, s32 songID, s32 variation, s32 fadeInTime, s1
     musicSetting = &gMusicSettings[playerIndex];
 
     if (!gGameStatusPtr->musicEnabled) {
-        func_800559C4(musicSetting->songName);
+        au_song_stop_by_name(musicSetting->songName);
         musicSetting->flags &= ~MUSIC_SETTINGS_FLAGS_1;
         return 1;
     }
@@ -358,7 +358,7 @@ s32 func_8014AD40(void) {
             continue;
         }
 
-        if (func_800559FC(settings->songName)) {
+        if (au_song_is_playing(settings->songName)) {
             return TRUE;
         }
     }

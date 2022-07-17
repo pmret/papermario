@@ -456,7 +456,7 @@ AuResult snd_start_song(s32 songName) {
     s.finalVolume = 127;
     s.variation = 0;
     s.unk14 = 0;
-    status = snd_dispatch_bgm_player_event(&s);
+    status = au_bgm_dispatch_player_event(&s);
     PreventBGMPlayerUpdate = FALSE;
 
     return status;
@@ -473,22 +473,22 @@ AuResult snd_start_song_variation(s32 songName, s32 variation) {
     s.finalVolume = 127;
     s.variation = variation;
     s.unk14 = 0;
-    status = snd_dispatch_bgm_player_event(&s);
+    status = au_bgm_dispatch_player_event(&s);
     PreventBGMPlayerUpdate = FALSE;
 
     return status;
 }
 
-AuResult func_800559C4(s32 songName) {
-    return func_8004DA0C(songName);
+AuResult au_song_stop_by_name(s32 songName) {
+    return au_bgm_stop_song_with_name(songName);
 }
 
-void func_800559E0(void) {
-    func_8004DA74();
+void au_stop_songs(void) {
+    au_bgm_stop_all();
 }
 
-AuResult func_800559FC(s32 songName) {
-    return snd_is_song_playing(songName);
+AuResult au_song_is_playing(s32 songName) {
+    return au_bgm_is_song_playing(songName);
 }
 
 AuResult snd_set_song_variation_fade(s32 songName, s32 variation, s32 fadeInTime, s32 startVolume, s32 endVolume) {
@@ -502,7 +502,7 @@ AuResult snd_set_song_variation_fade(s32 songName, s32 variation, s32 fadeInTime
     s.finalVolume = endVolume;
     s.variation = variation;
     s.unk14 = 0;
-    status = snd_dispatch_bgm_player_event(&s);
+    status = au_bgm_dispatch_player_event(&s);
     PreventBGMPlayerUpdate = FALSE;
 
     return status;
@@ -519,7 +519,7 @@ AuResult snd_set_song_fade(s32 songName, s32 fadeInTime, s32 startVolume, s32 en
     s.finalVolume = endVolume;
     s.variation = 0;
     s.unk14 = 0;
-    status = snd_dispatch_bgm_player_event(&s);
+    status = au_bgm_dispatch_player_event(&s);
     PreventBGMPlayerUpdate = FALSE;
 
     return status;
@@ -786,15 +786,15 @@ AuResult snd_song_set_track_vol_full(s32 songName, s32 trackIdx) {
 }
 
 void bgm_set_proximity_mix_far(s32 songName, s32 mix) {
-    snd_set_bgm_proximity_mix(songName, (u8)mix);
+    au_bgm_set_proximity_mix(songName, (u8)mix);
 }
 
 void bgm_set_proximity_mix_near(s32 songName, s32 mix) {
-    snd_set_bgm_proximity_mix(songName, (u8)mix | 0x57000000);
+    au_bgm_set_proximity_mix(songName, (u8)mix | 0x57000000);
 }
 
 void bgm_set_proximity_mix_full(s32 songName, s32 mix) {
-    snd_set_bgm_proximity_mix(songName, (u8)mix | 0x7F000000);
+    au_bgm_set_proximity_mix(songName, (u8)mix | 0x7F000000);
 }
 
 void bgm_poll_music_events(MusicEventTrigger** musicEvents, s32* count) {

@@ -339,7 +339,7 @@ void func_800522A8(AmbientSoundManager* arg0, AlUnkLambda* lambda) {
 
         omega++;
         k++;
-        if(k >= 4) {
+        if (k >= 4) {
             break;
         }
     }

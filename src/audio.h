@@ -71,11 +71,11 @@ typedef enum AuEffectType {
 } AuEffectType;
 
 typedef enum BGMPlayerState {
-    BGM_PLAY_STATE_0                = 0,    // INITIALIZED
-    BGM_STATE_PLAYING               = 1,    // PLAYING
-    BGM_PLAY_STATE_2                = 2,    // BGM LOADED (blocks)
-    BGM_PLAY_STATE_3                = 3,    // ???
-    BGM_PLAY_STATE_4                = 4,    // DONE? (blocks)
+    BGM_PLAY_STATE_IDLE             = 0,
+    BGM_STATE_PLAY_SUBSEG           = 1,
+    BGM_PLAY_STATE_NEXT_SUBSEG      = 2,
+    BGM_PLAY_STATE_INIT             = 3,
+    BGM_PLAY_STATE_STOP             = 4
 } BGMPlayerState;
 
 typedef enum SegmentControlCommands {

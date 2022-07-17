@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel snd_get_player_with_song_name
+glabel au_bgm_get_player_with_song_name
 /* 28B94 8004D794 3C05800A */  lui       $a1, %hi(gBGMPlayerA)
 /* 28B98 8004D798 8CA5A664 */  lw        $a1, %lo(gBGMPlayerA)($a1)
 /* 28B9C 8004D79C 8CA30000 */  lw        $v1, ($a1)

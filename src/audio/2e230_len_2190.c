@@ -90,19 +90,19 @@ void au_engine_init(s32 outputRate) {
         globals->banks[i] = alHeapAlloc(alHeap, 1, 0x840);
     }
 
-    bgm_player_init(gBGMPlayerA, 1, 0, globals);
+    au_bgm_player_init(gBGMPlayerA, 1, 0, globals);
     effects[0] = 0;
     effects[1] = 3;
     effects[2] = -1;
     effects[3] = -1;
-    bgm_set_effect_indices(gBGMPlayerA, effects);
+    au_bgm_set_effect_indices(gBGMPlayerA, effects);
 
-    bgm_player_init(gBGMPlayerB, 2, 2, globals);
+    au_bgm_player_init(gBGMPlayerB, 2, 2, globals);
     effects[0] = 2;
     effects[1] = -1;
     effects[2] = -1;
     effects[3] = -1;
-    bgm_set_effect_indices(gBGMPlayerB, effects);
+    au_bgm_set_effect_indices(gBGMPlayerB, effects);
 
     au_sfx_init(gSoundManager, 4, 1, globals, 0x10);
     func_80050B90(gAmbientSoundManager, 6, 1, globals);
@@ -208,7 +208,7 @@ void au_update_clients_2(void) {
     if (!PreventBGMPlayerUpdate) {
         bgmPlayer = gBGMPlayerB;
         if (bgmPlayer->fadeInfo.fadeTime != 0) {
-            snd_update_bgm_fade(bgmPlayer);
+            au_bgm_update_fade(bgmPlayer);
         }
         if (bgmPlayer->songName != 0) {
             bgmPlayer->songPlayingCounter++;
@@ -217,7 +217,7 @@ void au_update_clients_2(void) {
         bgmPlayer->nextUpdateCounter -= bgmPlayer->nextUpdateStep;
         if (bgmPlayer->nextUpdateCounter <= 0) {
             bgmPlayer->nextUpdateCounter += bgmPlayer->nextUpdateInterval;
-            bgmPlayer->unk_5C = bgm_player_update_main(bgmPlayer);
+            bgmPlayer->unk_5C = au_bgm_player_update_main(bgmPlayer);
         }
     }
     
@@ -231,10 +231,10 @@ void au_update_clients_2(void) {
             if (bgmPlayer->fadeInfo.fadeTime == 0) {
                 func_8004E444(bgmPlayer);
             } else {
-                snd_update_bgm_fade(bgmPlayer);
+                au_bgm_update_fade(bgmPlayer);
             }
         } else if (bgmPlayer->fadeInfo.fadeTime != 0) {
-            snd_update_bgm_fade(bgmPlayer);
+            au_bgm_update_fade(bgmPlayer);
         }
         if (bgmPlayer->songName != 0) {
             bgmPlayer->songPlayingCounter++;
@@ -243,7 +243,7 @@ void au_update_clients_2(void) {
         bgmPlayer->nextUpdateCounter -= bgmPlayer->nextUpdateStep;
         if (bgmPlayer->nextUpdateCounter <= 0) {
             bgmPlayer->nextUpdateCounter += bgmPlayer->nextUpdateInterval;
-            bgmPlayer->unk_5C = bgm_player_update_main(bgmPlayer);
+            bgmPlayer->unk_5C = au_bgm_player_update_main(bgmPlayer);
         }
     }
     func_80052660(globals);
@@ -1018,8 +1018,8 @@ s32* func_80054AA0(s32* bkFileOffset, void* vaddr, s32 bankIndex, s32 bankGroup)
                 instrCount = 0;
                 instrumentGroup = (Instrument**)snd_get_BK_instruments(bankGroup, bankIndex);
                 
-                for(i = 0; i < 16; i++) {
-                    if(header->instruments[i] != 0) {
+                for (i = 0; i < 16; i++) {
+                    if (header->instruments[i] != 0) {
                         instrumentGroup[i] = header->instruments[i] + fileData;
                         instrCount++;
                     } else {
