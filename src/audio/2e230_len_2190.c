@@ -6,20 +6,19 @@ extern s32 D_8007854C[2];
 extern f32 AlTuneScaling[];
 
 void func_80052E30(u8 index) {
-    AlUnkVoice* temp = &gSoundGlobals->voices[index];
+    AlUnkVoice* voice = &gSoundGlobals->voices[index];
 
-    temp->unk_1C = 0;
-    temp->unk_45 = 0;
+    voice->unk_1C = NULL;
+    voice->priority = AU_PRIORITY_FREE;
 }
 
 void au_engine_init(s32 outputRate) {
     AuGlobals* globals;
-    s32* dummyTrackData;
     ALHeap* alHeap;
-    u32 i;
     SBNFileEntry fileEntry;
+    s32* dummyTrackData;
     u8 effects[4];
-    AlUnkVoice* temp5;
+    u32 i;
 
     alHeap = gSynDriverPtr->heap;
     gSoundGlobals = alHeapAlloc(alHeap, 1, sizeof(*gSoundGlobals));
@@ -28,9 +27,9 @@ void au_engine_init(s32 outputRate) {
     gBGMPlayerB = alHeapAlloc(alHeap, 1, sizeof(*gBGMPlayerB));
     gBGMPlayerC = alHeapAlloc(alHeap, 1, sizeof(*gBGMPlayerC));
     gSoundManager = alHeapAlloc(alHeap, 1, sizeof(*gSoundManager));
-    gAmbientSoundManager = alHeapAlloc(alHeap, 1, sizeof(*gAmbientSoundManager));
+    gAuAmbienceManager = alHeapAlloc(alHeap, 1, sizeof(*gAuAmbienceManager));
     gBGMPlayerA->soundManager = gSoundManager;
-    gAmbientSoundManager->globals = gSoundGlobals;
+    gAuAmbienceManager->globals = gSoundGlobals;
 
 
     globals = gSoundGlobals;
@@ -69,19 +68,20 @@ void au_engine_init(s32 outputRate) {
     }
 
     for (i = 0; i < ARRAY_COUNT(globals->voices); i++) {
+        AlUnkVoice* voice;
         func_80056EC0(i, 0);
         au_pvoice_set_filter_wavetable(i, globals->defaultInstrument);
-        temp5 = &globals->voices[i];
-        temp5->instrument = NULL;
-        temp5->pitchRatio = 0;
-        temp5->volume = -1;
-        temp5->pan = 0xFF;
-        temp5->reverbAmt = 0xFF;
-        temp5->reverbType = 0;
-        temp5->unk_42 = 0;
-        temp5->unk_flags_43 = 0;
-        temp5->unk_44 = 0;
-        temp5->unk_45 = 0;
+        voice = &globals->voices[i];
+        voice->instrument = NULL;
+        voice->pitchRatio = 0;
+        voice->volume = -1;
+        voice->pan = 0xFF;
+        voice->reverbAmt = 0xFF;
+        voice->reverbType = 0;
+        voice->unk_42 = 0;
+        voice->unk_flags_43 = 0;
+        voice->priorityCopy = AU_PRIORITY_FREE;
+        voice->priority = AU_PRIORITY_FREE;
     }
 
     au_load_INIT(globals, 0xF00000, alHeap);
@@ -90,24 +90,24 @@ void au_engine_init(s32 outputRate) {
         globals->banks[i] = alHeapAlloc(alHeap, 1, 0x840);
     }
 
-    au_bgm_player_init(gBGMPlayerA, 1, 0, globals);
+    au_bgm_player_init(gBGMPlayerA, AU_PRIORITY_BGM_PLAYER_MAIN, AU_FX_NONE, globals);
     effects[0] = 0;
     effects[1] = 3;
     effects[2] = -1;
     effects[3] = -1;
     au_bgm_set_effect_indices(gBGMPlayerA, effects);
 
-    au_bgm_player_init(gBGMPlayerB, 2, 2, globals);
+    au_bgm_player_init(gBGMPlayerB, AU_PRIORITY_BGM_PLAYER_AUX, AU_FX_BIGROOM, globals);
     effects[0] = 2;
     effects[1] = -1;
     effects[2] = -1;
     effects[3] = -1;
     au_bgm_set_effect_indices(gBGMPlayerB, effects);
 
-    au_sfx_init(gSoundManager, 4, 1, globals, 0x10);
-    func_80050B90(gAmbientSoundManager, 6, 1, globals);
+    au_sfx_init(gSoundManager, AU_PRIORITY_SFX_MANAGER, AU_FX_SMALLROOM, globals, 16);
+    au_mseq_manager_init(gAuAmbienceManager, AU_PRIORITY_MSEQ_MANAGER, AU_FX_SMALLROOM, globals);
     func_80052614(globals);
-    snd_load_BK_headers(globals, alHeap);
+    au_load_BK_headers(globals, alHeap);
     if (au_fetch_SBN_file(globals->mseqFileList[0], AU_FMT_SEF, &fileEntry) == AU_RESULT_OK) {
         au_read_rom(fileEntry.offset, globals->dataSEF, fileEntry.data & 0xFFFFFF);
     }
@@ -182,7 +182,7 @@ static void au_reset_instrument_entry(BGMInstrumentInfo* arg0) {
 void au_update_clients_2(void) {
     AuGlobals* globals = gSoundGlobals;
     SoundManager* sfxManager = gSoundManager;
-    AmbientSoundManager* ambManager = gAmbientSoundManager;
+    AuAmbienceManager* ambManager = gAuAmbienceManager;
     BGMPlayer* bgmPlayer;
 
     func_80053654(globals);
@@ -195,7 +195,7 @@ void au_update_clients_2(void) {
 
     if (sfxManager->fadeInfo.fadeTime != 0) {
         au_fade_update(&sfxManager->fadeInfo);
-        func_80053A98(sfxManager->unk_BE, sfxManager->fadeInfo.currentVolume.u16, sfxManager->unk_5C);
+        func_80053A98(sfxManager->defaultReverbType, sfxManager->fadeInfo.currentVolume.u16, sfxManager->unk_5C);
     }
 
     sfxManager->nextUpdateCounter -= sfxManager->nextUpdateStep;
@@ -317,27 +317,27 @@ void func_80053654(AuGlobals* globals) {
 
     for (i = 0; i < ARRAY_COUNT(globals->voices); i++) {
         AlUnkVoice* voice = &globals->voices[i];
-        u8 unk_flags = voice->unk_flags_43;
+        u8 voiceUpdateFlags = voice->unk_flags_43;
 
         if (voice->unk_42 != 0) {
             au_pvoice_reset_filter(i);
             voice->unk_42 = 0;
-            voice->unk_1C = 0;
-            voice->unk_45 = 0;
+            voice->unk_1C = NULL;
+            voice->priority = AU_PRIORITY_FREE;
         }
 
-        if (unk_flags & 2) {
+        if (voiceUpdateFlags & AU_VOICE_SYNC_FLAGS_ALL) {
             func_80052BF8(voice, &voice->unk_14);
             au_pvoice_set_filter(i, voice->reverbType, voice->instrument, voice->pitchRatio, voice->volume, voice->pan, voice->reverbAmt, voice->unk_08);
-            voice->unk_45 = voice->unk_44;
+            voice->priority = voice->priorityCopy;
         } else {
-            if (unk_flags & 8) {
+            if (voiceUpdateFlags & AU_VOICE_SYNC_FLAGS_PITCH) {
                 au_pvoice_set_pitch_ratio(i, voice->pitchRatio);
             }
 
-            if (unk_flags & 4) {
+            if (voiceUpdateFlags & AU_VOICE_SYNC_FLAGS_4) {
                 func_8005736C(i, voice->volume, voice->unk_08, voice->pan, voice->reverbAmt);
-            } else if (unk_flags & 0x10) {
+            } else if (voiceUpdateFlags & AU_VOICE_SYNC_FLAGS_10) {
                 func_80057548(i, voice->pan, voice->reverbAmt);
             }
         }
@@ -345,20 +345,21 @@ void func_80053654(AuGlobals* globals) {
     }
 }
 
-void func_80053888(AlUnkVoice* arg0, u8 arg1) {
-    if (arg0->unk_45 != 0) {
-        arg0->unk_1C = 0;
-        arg0->unk_42 = 1;
-        arg0->unk_flags_43 = 0;
-        func_800576EC(arg1, 0, AUDIO_SAMPLES);
+void func_80053888(AlUnkVoice* voice, u8 index) {
+    if (voice->priority != 0) {
+        voice->unk_1C = NULL;
+        voice->unk_42 = 1;
+        voice->unk_flags_43 = 0;
+        func_800576EC(index, 0, AUDIO_SAMPLES);
     }
 }
 
-void func_800538C4(AlUnkVoice* arg0, u8 arg1) {
-    arg0->unk_1C = 0;
-    arg0->unk_42 = 1;
-    arg0->unk_flags_43 = 0;
-    func_800576EC(arg1, 0, AUDIO_SAMPLES);
+// uncertain name
+void au_reset_voice(AlUnkVoice* voice, u8 index) {
+    voice->unk_1C = NULL;
+    voice->unk_42 = 1;
+    voice->unk_flags_43 = 0;
+    func_800576EC(index, 0, AUDIO_SAMPLES);
 }
 
 // array offsets into AlTuneScaling
@@ -630,16 +631,16 @@ BGMPlayer* func_80053F64(s32 arg0) {
 #define SBN_LOOKUP(i,fmt,e) (au_fetch_SBN_file(globals->mseqFileList[AmbientSoundIDtoMSEQFileIndex[i]], fmt, &e))
 
 AuResult func_80053F80(u32 ambSoundID) {
-    AmbientSoundManager* manager;
+    AuAmbienceManager* manager;
     SBNFileEntry fileEntry;
     AuGlobals* globals;
     MSEQHeader* mseqFile;
     u32 i;
 
     globals = gSoundGlobals;
-    manager = gAmbientSoundManager;
+    manager = gAuAmbienceManager;
     if (ambSoundID < 16) {
-        if (manager->mseqLambda[0].mseqName == 0 && SBN_LOOKUP(ambSoundID, AU_FMT_MSEQ, fileEntry) == AU_RESULT_OK) {
+        if (manager->mseqPlayers[0].mseqName == 0 && SBN_LOOKUP(ambSoundID, AU_FMT_MSEQ, fileEntry) == AU_RESULT_OK) {
             au_read_rom(fileEntry.offset, globals->dataMSEQ[0], fileEntry.data & 0xFFFFFF);
             manager->mseqFiles[0] = globals->dataMSEQ[0];
             for (i = 1; i < ARRAY_COUNT(manager->mseqFiles); i++) {
@@ -648,9 +649,9 @@ AuResult func_80053F80(u32 ambSoundID) {
             manager->unk_20 = 1;
         }
     } else if (ambSoundID == AMBIENT_RADIO
-            && manager->mseqLambda[0].mseqName == 0
-            && manager->mseqLambda[1].mseqName == 0
-            && manager->mseqLambda[2].mseqName == 0) {
+            && manager->mseqPlayers[0].mseqName == 0
+            && manager->mseqPlayers[1].mseqName == 0
+            && manager->mseqPlayers[2].mseqName == 0) {
         manager->unk_20 = 0;
         for (i = 0; i < ARRAY_COUNT(manager->mseqFiles); i++) {
             manager->mseqFiles[i] = NULL;

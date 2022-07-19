@@ -372,7 +372,7 @@ extern s32* AU_FX_CUSTOM_PARAMS[0]; // points to 80078290
 extern void (*CurrentSeqCmdHandler)(BGMPlayer*, BGMPlayerTrack*);
 extern void (*CurrentSefCmdHandler)(SoundManager*, SoundPlayer*);
 
-void au_sfx_init(SoundManager* manager, u8 arg1, u8 arg2, AuGlobals* globals, u8 arg4) {
+void au_sfx_init(SoundManager* manager, u8 priority, u8 reverbType, AuGlobals* globals, u8 arg4) {
     u32 i;
     s32 c = 0x6A25E;
 
@@ -380,8 +380,8 @@ void au_sfx_init(SoundManager* manager, u8 arg1, u8 arg2, AuGlobals* globals, u8
     manager->nextUpdateStep = 312500;
     manager->nextUpdateCounter = c;
     manager->nextUpdateInterval = c;
-    manager->unk_BC = arg1;
-    manager->unk_BE = arg2;
+    manager->priority = priority;
+    manager->defaultReverbType = reverbType;
 
     if (arg4 > 16) {
         manager->sfxPlayerSelector = 16;
@@ -431,7 +431,7 @@ void au_sfx_init(SoundManager* manager, u8 arg1, u8 arg2, AuGlobals* globals, u8
     func_8004BA54(manager, 0);
     au_sfx_clear_queue(manager);
     au_fade_init(&manager->fadeInfo, 0, 0x7FFF, 0x7FFF);
-    func_80053A98(manager->unk_BE, manager->fadeInfo.currentVolume.u16, manager->unk_5C);
+    func_80053A98(manager->defaultReverbType, manager->fadeInfo.currentVolume.u16, manager->unk_5C);
     manager->lastCustomEffectIdx = 0xFF;
 
     manager->customReverbParams[0] = CUSTOM_SMALL_ROOM_PARAMS;
@@ -795,7 +795,7 @@ s16 au_sfx_manager_update(SoundManager* manager) {
         if (sndPlayer->sefDataReadPos != NULL) {
             voice = &manager->globals->voices[i];
             manager->currentVoice = voice;
-            if (voice->unk_45 <= manager->unk_BC) {
+            if (voice->priority <= manager->priority) {
                 manager->unk_BF = i;
                 switch (sndPlayer->sfxParamsFlags & SFX_PARAM_FLAGS_MODE) {
                     case SFX_PARAM_MODE_0:
@@ -817,7 +817,7 @@ s16 au_sfx_manager_update(SoundManager* manager) {
     return 0;
 }
 
-static void au_sfx_update_mode_0(SoundManager* manager, SoundPlayer* player, AlUnkVoice* arg2, u8 arg3) {
+static void au_sfx_update_mode_0(SoundManager* manager, SoundPlayer* player, AlUnkVoice* voice, u8 index) {
     s16 volume;
     s32 tune;
     s32 pan;
@@ -826,7 +826,7 @@ static void au_sfx_update_mode_0(SoundManager* manager, SoundPlayer* player, AlU
 
     switch (player->unk_A9) {
         case 0:
-            if (arg2->unk_45 != manager->unk_BC) {
+            if (voice->priority != manager->priority) {
                 player->sefDataReadPos = NULL;
                 player->currentSoundID = 0;
                 player->unk_98 = 0;
@@ -834,9 +834,9 @@ static void au_sfx_update_mode_0(SoundManager* manager, SoundPlayer* player, AlU
                 if (!(player->sfxParamsFlags & SFX_PARAM_FLAG_PITCH)) {
                     player->pitchRatio = au_compute_pitch_ratio(
                         ((player->tuneLerp.current >> 0x10) - player->sfxInstrumentRef->keyBase) + player->masterPitchShift) * player->sfxInstrumentRef->pitchRatio;
-                    if (arg2->pitchRatio != player->pitchRatio) {
-                        arg2->unk_flags_43 |= 8;
-                        arg2->pitchRatio = player->pitchRatio;
+                    if (voice->pitchRatio != player->pitchRatio) {
+                        voice->unk_flags_43 |= AU_VOICE_SYNC_FLAGS_PITCH;
+                        voice->pitchRatio = player->pitchRatio;
                     }
                 }
                 
@@ -845,15 +845,15 @@ static void au_sfx_update_mode_0(SoundManager* manager, SoundPlayer* player, AlU
                 } else {
                     pan = player->sfxPan;
                 }
-                if (arg2->pan != pan) {
-                    arg2->pan = pan;
-                    arg2->unk_flags_43 |= 0x10;
+                if (voice->pan != pan) {
+                    voice->pan = pan;
+                    voice->unk_flags_43 |= AU_VOICE_SYNC_FLAGS_10;
                  }
                 
                 volume = au_sfx_get_scaled_volume(manager, player);
-                if (arg2->adjustedVolume != volume) {
-                    arg2->adjustedVolume = volume;
-                    arg2->unk_flags_3D |= 0x20;
+                if (voice->adjustedVolume != volume) {
+                    voice->adjustedVolume = volume;
+                    voice->unk_flags_3D |= AU_VOICE_3D_FLAGS_VOL_CHANGED;
                 }
             }
             break;
@@ -877,24 +877,24 @@ static void au_sfx_update_mode_0(SoundManager* manager, SoundPlayer* player, AlU
                 tune = ((player->tuneLerp.current >> 0x10) - player->sfxInstrumentRef->keyBase) + player->masterPitchShift;
             }
             player->pitchRatio = au_compute_pitch_ratio(tune) * player->sfxInstrumentRef->pitchRatio;
-            if (arg2->unk_45 <= manager->unk_BC) {
-                func_80053888(arg2, arg3);
+            if (voice->priority <= manager->priority) {
+                func_80053888(voice, index);
                 if (!(player->sfxParamsFlags & SFX_PARAM_FLAG_PAN) && player->masterPan != 0) {
-                    arg2->pan = player->masterPan;
+                    voice->pan = player->masterPan;
                 } else {
-                    arg2->pan = player->sfxPan;
+                    voice->pan = player->sfxPan;
                 }
     
-                arg2->reverbAmt = player->reverb;
-                arg2->adjustedVolume = au_sfx_get_scaled_volume(manager, player);
-                arg2->unk_14.unk_00 = player->unk_10.unk_00;
-                arg2->unk_14.unk_04 = player->unk_10.unk_04;
-                arg2->instrument = player->sfxInstrumentRef;
-                arg2->pitchRatio = player->pitchRatio;
-                arg2->unk_flags_43 = 2;
-                arg2->unk_45 = manager->unk_BC;
-                arg2->unk_44 = arg2->unk_45;
-                arg2->reverbType = manager->unk_BE;
+                voice->reverbAmt = player->reverb;
+                voice->adjustedVolume = au_sfx_get_scaled_volume(manager, player);
+                voice->unk_14.unk_00 = player->unk_10.unk_00;
+                voice->unk_14.unk_04 = player->unk_10.unk_04;
+                voice->instrument = player->sfxInstrumentRef;
+                voice->pitchRatio = player->pitchRatio;
+                voice->unk_flags_43 = AU_VOICE_SYNC_FLAGS_ALL;
+                voice->priority = manager->priority;
+                voice->priorityCopy = voice->priority;
+                voice->reverbType = manager->defaultReverbType;
             }
             player->unk_A9 = 0;
             break;
@@ -928,8 +928,8 @@ static void au_sfx_update_mode_1(SoundManager* manager, SoundPlayer* player, AlU
     var_s3 = FALSE;
     if (player->unk_A9 == 1) {
         player->unk_A9 = 0;
-        if (voice->unk_45 == manager->unk_BC) {
-            func_800538C4(voice, arg3);
+        if (voice->priority == manager->priority) {
+            au_reset_voice(voice, arg3);
         }
     }
 
@@ -951,8 +951,8 @@ static void au_sfx_update_mode_1(SoundManager* manager, SoundPlayer* player, AlU
         opcode = *player->sefDataReadPos++;
         if (opcode < 0x80) {
             if (opcode == 0) {
-                if (voice->unk_45 == manager->unk_BC) {
-                    func_800538C4(voice, arg3);
+                if (voice->priority == manager->priority) {
+                    au_reset_voice(voice, arg3);
                 }
                 player->sefDataReadPos = NULL;
                 player->currentSoundID = 0;
@@ -991,7 +991,7 @@ static void au_sfx_update_mode_1(SoundManager* manager, SoundPlayer* player, AlU
             }
             player->playLength = playLength;
 
-            if (voice->unk_45 <= manager->unk_BC) {
+            if (voice->priority <= manager->priority) {
                 func_80053888(voice, arg3);
                 if ((player->sfxParamsFlags & SFX_PARAM_FLAG_PAN) || (player->masterPan == 0)) {
                     voice->pan = player->sfxPan;
@@ -1010,12 +1010,12 @@ static void au_sfx_update_mode_1(SoundManager* manager, SoundPlayer* player, AlU
                 }
 
                 voice->instrument = player->sfxInstrumentRef;
-                voice->reverbType = manager->unk_BE;
+                voice->reverbType = manager->defaultReverbType;
                 
-                voice->unk_45 = manager->unk_BC;
-                voice->unk_flags_43 = 2;
+                voice->priority = manager->priority;
+                voice->unk_flags_43 = AU_VOICE_SYNC_FLAGS_ALL;
                 var_s3 = TRUE;
-                voice->unk_44 = manager->unk_BC;
+                voice->priorityCopy = manager->priority;
                 player->changed.tune = 1;
             }
         } else {
@@ -1038,8 +1038,8 @@ static void au_sfx_update_mode_1(SoundManager* manager, SoundPlayer* player, AlU
     if (!var_s3) {
         if (player->playLength != 0) {
             player->playLength--;
-            if ((player->playLength == 0) && (voice->unk_45 == manager->unk_BC)) {
-                voice->unk_flags_3D |= 0x10;
+            if ((player->playLength == 0) && (voice->priority == manager->priority)) {
+                voice->unk_flags_3D |= AU_VOICE_3D_FLAGS_10;
             }
         }
         if (player->tuneLerp.time != 0) {
@@ -1057,13 +1057,13 @@ static void au_sfx_update_mode_1(SoundManager* manager, SoundPlayer* player, AlU
             } else {
                 voice->pan = player->masterPan;
             }
-            voice->unk_flags_43 |= 0x10;
+            voice->unk_flags_43 |= AU_VOICE_SYNC_FLAGS_10;
             voice->reverbAmt = player->reverb;
         }
     }
-    if (player->changed.volume && (voice->unk_45 == manager->unk_BC)) {
+    if (player->changed.volume && (voice->priority == manager->priority)) {
         snd_set_voice_volume(voice, manager, player);
-        voice->unk_flags_3D |= 0x20;
+        voice->unk_flags_3D |= AU_VOICE_3D_FLAGS_VOL_CHANGED;
     }
     if (player->changed.tune) {
         f32 adjustedSampleRate;
@@ -1076,8 +1076,8 @@ static void au_sfx_update_mode_1(SoundManager* manager, SoundPlayer* player, AlU
             adjustedSampleRate = au_compute_pitch_ratio(pitchShift + player->masterPitchShift) * player->sfxInstrumentRef->pitchRatio;
             player->pitchRatio = adjustedSampleRate;
         }
-        if ((voice->unk_45 == manager->unk_BC) && (voice->pitchRatio != adjustedSampleRate)) {
-            voice->unk_flags_43 |= 8;
+        if ((voice->priority == manager->priority) && (voice->pitchRatio != adjustedSampleRate)) {
+            voice->unk_flags_43 |= AU_VOICE_SYNC_FLAGS_PITCH;
             voice->pitchRatio = player->pitchRatio;
         }
     }
@@ -1215,7 +1215,7 @@ static void au_SEFCmd_06(SoundManager* manager, SoundPlayer* player) {
 }
 
 static void au_SEFCmd_07(SoundManager* manager, SoundPlayer* player) {
-    if (manager->currentVoice->unk_45 == manager->unk_BC) {
+    if (manager->currentVoice->priority == manager->priority) {
         player->delay = 2;
         player->sefDataReadPos--;
     }
@@ -1318,8 +1318,8 @@ static void au_SEFCmd_0E(SoundManager* manager, SoundPlayer* player) {
 
 static void au_SEFCmd_0F(SoundManager* manager, SoundPlayer* player) {
     AlUnkVoice* voice = manager->currentVoice;
-    if (voice->unk_45 == manager->unk_BC) {
-        func_800538C4(voice, manager->unk_BF);
+    if (voice->priority == manager->priority) {
+        au_reset_voice(voice, manager->unk_BF);
     }
 }
 

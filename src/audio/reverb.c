@@ -25,7 +25,7 @@ static f32 func_80059BD4(AuDelay* delay, s32 rsdelta);
  */
 #define	SCALE 16384
 
-#define ms *(((s32)((f32)44.1))&~0x7)
+// #define ms *(((s32)((f32)44.1))&~0x7)
 
 s32 SMALL_ROOM_PARAMS[] = {
     /* sections	   length */
@@ -301,7 +301,8 @@ s32 au_fx_param_hdl(AuFX* fx, s16 index, s16 paramID, s32 value) {
     return 0;
 }
 
-static Acmd* _saveBuffer(AuFX* fx, s16* oldPos, s32 buff, s32 count, Acmd* cmdBufPos) {
+// TODO: _n_loadBuffer
+static Acmd* _saveBuffer(AuFX* fx, s16* oldPos, s32 buf, s32 count, Acmd* cmdBufPos) {
     Acmd *ptr = cmdBufPos;
     s16* newPos = oldPos + count;
     s16* delayEnd = &fx->base[fx->length];
@@ -309,10 +310,10 @@ static Acmd* _saveBuffer(AuFX* fx, s16* oldPos, s32 buff, s32 count, Acmd* cmdBu
     if (delayEnd < newPos) {
         s32 before = delayEnd - oldPos;
         s32 after = newPos - delayEnd;
-        n_aLoadBuffer(ptr++, before<<1, buff, osVirtualToPhysical(oldPos));
-        n_aLoadBuffer(ptr++, after<<1, buff + (before<<1), osVirtualToPhysical(fx->base));
+        n_aLoadBuffer(ptr++, before<<1, buf, osVirtualToPhysical(oldPos));
+        n_aLoadBuffer(ptr++, after<<1, buf + (before<<1), osVirtualToPhysical(fx->base));
     } else {
-        n_aLoadBuffer(ptr++, count<<1, buff, osVirtualToPhysical(oldPos));
+        n_aLoadBuffer(ptr++, count<<1, buf, osVirtualToPhysical(oldPos));
     }
 
     return ptr;

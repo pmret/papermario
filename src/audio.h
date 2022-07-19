@@ -58,6 +58,29 @@ typedef u8* WaveData;
 
 typedef u32 SegData;
 
+
+typedef enum AuPriority {
+    AU_PRIORITY_FREE            = 0,    
+    AU_PRIORITY_BGM_PLAYER_MAIN = 1,
+    AU_PRIORITY_BGM_PLAYER_AUX  = 2,
+    AU_PRIORITY_SFX_MANAGER     = 4,
+    AU_PRIORITY_MSEQ_MANAGER    = 6,
+} AuPriority;
+
+enum AuVoiceFlags3D {
+    AU_VOICE_3D_FLAGS_1                     = 0x01,
+    AU_VOICE_3D_FLAGS_HANDLED_VOL_CHANGE    = 0x02,
+    AU_VOICE_3D_FLAGS_10                    = 0x10,
+    AU_VOICE_3D_FLAGS_VOL_CHANGED           = 0x20,
+};
+
+enum AuVoiceFlags43 {
+    AU_VOICE_SYNC_FLAGS_ALL     = 0x02,
+    AU_VOICE_SYNC_FLAGS_4       = 0x04,
+    AU_VOICE_SYNC_FLAGS_PITCH   = 0x08,
+    AU_VOICE_SYNC_FLAGS_10      = 0x10,
+};
+
 typedef enum AuEffectType {
     AU_FX_NONE          = 0,
     AU_FX_SMALLROOM     = 1,
@@ -357,7 +380,7 @@ typedef struct AuSynDriver {
     /* 0x08 */ s32 outputRate;
     /* 0x0C */ s32 num_pvoice;
     /* 0x10 */ s32 unk_num_gamma;
-    /* 0x14 */ void* dmaNew; // pointer to nuAuDmaNew
+    /* 0x14 */ ALDMANew* dmaNew; // pointer to nuAuDmaNew
     /* 0x18 */ ALHeap* heap;
     /* 0x1C */ AuPVoice* pvoices;
     /* 0x20 */ AlUnkGamma* al_unk_gamma;
@@ -390,7 +413,7 @@ typedef struct InstrumentEffect {
     /* 0x04 */ InstrumentEffectSub unk_04[1]; // variable size
 } InstrumentEffect;
 
-// ???
+// partially ALWaveTable?
 typedef struct Instrument {
     /* 0x00 */ u8* base;
     /* 0x04 */ u32 wavDataLength;
@@ -528,9 +551,9 @@ typedef struct SoundManager {
     /* 0x0A0 */ SoundManagerA0 unk_A0[4];
     /* 0x0B8 */ u16 unk_B8;
     /* 0x0BA */ s16 unk_BA;
-    /* 0x0BC */ u8 unk_BC;
+    /* 0x0BC */ u8 priority;
     /* 0x0BD */ u8 sfxPlayerSelector;
-    /* 0x0BE */ u8 unk_BE;
+    /* 0x0BE */ u8 defaultReverbType;
     /* 0x0BF */ u8 unk_BF;
     /* 0x0C0 */ u8 unk_C0;
     /* 0x0C1 */ char unk_C1[0x1];
@@ -588,8 +611,8 @@ typedef struct AlUnkVoice {
     /* 0x40 */ s16 adjustedVolume;
     /* 0x42 */ u8 unk_42;
     /* 0x43 */ u8 unk_flags_43;
-    /* 0x44 */ s8 unk_44;
-    /* 0x45 */ u8 unk_45;
+    /* 0x44 */ s8 priorityCopy;
+    /* 0x45 */ u8 priority;
     /* 0x46 */ char unk_46[2];
 } AlUnkVoice; // size = 0x48
 
@@ -926,7 +949,7 @@ typedef struct BGMPlayer {
     /* 0x22A */ u8 unk_22A[8];
     /* 0x232 */ u8 bFadeConfigSetsVolume;
     /* 0x233 */ u8 unk_233;
-    /* 0x234 */ u8 id;
+    /* 0x234 */ u8 priority;
     /* 0x235 */ u8 defaultReverbType;
     /* 0x236 */ char unk_236[0x2];
     /* 0x238 */ s32 unk_238[8];
@@ -937,13 +960,6 @@ typedef struct BGMPlayer {
     /* 0x25C */ BGMPlayerTrack tracks[16];
     /* 0x85C */ SeqNote notes[24];
 } BGMPlayer; // size = 0xA9C
-
-typedef struct AlUnkIota {
-    /* 0x00 */ Q32 unk_00;
-    /* 0x04 */ s16 unk_04;
-    /* 0x06 */ s8 unk_06;
-    /* 0x07 */ u8 unk_07;
-} AlUnkIota; // size = 0x8
 
 typedef struct AlUnkMSEQData {
     u8 unk_00;
@@ -966,7 +982,7 @@ typedef struct MSEQHeader {
 typedef struct AlUnkXi {
     /* 0x00 */ Instrument* instrument;
     /* 0x04 */ AlUnkInstrumentData unk_04;
-    /* 0x0C */ s16 unk_0C;
+    /* 0x0C */ s16 pitch;
     /* 0x0E */ s16 unk_0E;
     /* 0x10 */ s32 unk_10;
     /* 0x14 */ s16 unk_14;
@@ -988,8 +1004,15 @@ typedef struct AlUnkOmega {
     s8 unk__03;
 } AlUnkOmega;
 
-//TODO AuStreamingState ?
-typedef struct AlUnkLambda {
+typedef struct AlUnkIota {
+    /* 0x00 */ Q32 unk_00;
+    /* 0x04 */ s16 pitch;
+    /* 0x06 */ s8 volume;
+    /* 0x07 */ u8 unk_07;
+} AlUnkIota; // size = 0x8
+
+//TODO AuStreamPlayer?
+typedef struct AuAmbPlayer {
     /* 0x000 */ MSEQHeader* mseqFile;
     /* 0x004 */ AuFilePos mseqReadStart;
     /* 0x008 */ AuFilePos mseqReadPos;
@@ -1000,27 +1023,27 @@ typedef struct AlUnkLambda {
     /* 0x01C */ s32 unk_1C;
     /* 0x020 */ s32 mseqName;
     /* 0x024 */ u8 unk_24;
-    /* 0x025 */ u8 unk_25;
+    /* 0x025 */ u8 playState;
     /* 0x026 */ u8 unk_26;
     /* 0x027 */ u8 unk_27;
     /* 0x028 */ u16 time;
     /* 0x02A */ u8 unk_2A;
     /* 0x02B */ u8 volume;
     /* 0x02C */ char unk_2C[4];
-    /* 0x030 */ s32 first_iota;
-    /* 0x034 */ u32 last_iota;
+    /* 0x030 */ s32 firstVoiceIdx;
+    /* 0x034 */ u32 lastVoiceIdx;
     /* 0x038 */ s32 unk_38;
-    /* 0x03C */ s32 unk_3C;
-    /* 0x040 */ u16 unk_lam_40;
+    /* 0x03C */ s32 volInterpStep;
+    /* 0x040 */ u16 volInterpTime;
     /* 0x042 */ u8 unk_42;
     /* 0x043 */ u8 unk_43;
     /* 0x044 */ AlUnkXi unk_44[10];
     /* 0x1D4 */ AlUnkOmega unk_1D4[4];
-} AlUnkLambda; // size = 0x1E4
+} AuAmbPlayer; // size = 0x1E4
 
 //TODO AuStreamingManager ?
 // 801D57A0
-typedef struct AmbientSoundManager {
+typedef struct AuAmbienceManager {
     /* 0x000 */ AuGlobals* globals;
     /* 0x004 */ s32 nextUpdateStep;
     /* 0x008 */ s32 nextUpdateInterval;
@@ -1028,11 +1051,11 @@ typedef struct AmbientSoundManager {
     /* 0x010 */ MSEQHeader* mseqFiles[4];
     /* 0x020 */ u8 unk_20;
     /* 0x021 */ u8 unk_21;
-    /* 0x022 */ u8 unk_22;
+    /* 0x022 */ u8 priority;
     /* 0x023 */ u8 defaultReverbType;
-    /* 0x024 */ AlUnkLambda mseqLambda[4];
-    /* 0x7B4 */ AlUnkIota unk_7B4[16];
-} AmbientSoundManager;
+    /* 0x024 */ AuAmbPlayer mseqPlayers[4];
+    /* 0x7B4 */ AlUnkIota mseqVoiceStates[16];
+} AuAmbienceManager;
 
 typedef struct AlUnkGemini {
     /* 0x00 */ u16 sound1;
@@ -1073,7 +1096,7 @@ extern AuGlobals* gSoundGlobals;
 extern BGMPlayer* gBGMPlayerC;
 extern BGMPlayer* gBGMPlayerB;
 extern AuCallback BeginSoundUpdateCallback;
-extern AmbientSoundManager* gAmbientSoundManager;
+extern AuAmbienceManager* gAuAmbienceManager;
 extern SoundManager* gSoundManager;
 extern BGMPlayer* gBGMPlayerA;
 

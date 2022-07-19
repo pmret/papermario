@@ -85,7 +85,7 @@ void bgm_update_music_settings(void) {
             if (music->flags & MUSIC_SETTINGS_FLAGS_1) {
                 if (music->fadeOutTime < 250) {
                     if (!(music->flags & MUSIC_SETTINGS_FLAGS_4)) {
-                        if (au_song_stop_by_name(music->songName) == AU_RESULT_OK) {
+                        if (au_song_stop(music->songName) == AU_RESULT_OK) {
                             music->state = state2;
                         }
                     } else {
@@ -133,7 +133,7 @@ void bgm_update_music_settings(void) {
                 if (music->songID < 0) {
                     music->state = 0;
                 } else {
-                    music->songName = snd_load_song(music->songID, i);
+                    music->songName = au_song_load(music->songID, i);
                     if (music->songName > 0xFFFFU) {
                         if ((music->flags & MUSIC_SETTINGS_FLAGS_20)) {
                             snd_set_song_variation_fade(music->songName, music->variation,
@@ -142,7 +142,7 @@ void bgm_update_music_settings(void) {
                         } else {
                             bgm_set_target_volume(gMusicDefaultVolume);
                         }
-                        if (snd_start_song_variation(music->songName, music->variation) == 0) {
+                        if (au_song_start_variation(music->songName, music->variation) == 0) {
                             music->flags |= MUSIC_SETTINGS_FLAGS_1;
                             music->state = 0;
                         }
@@ -180,7 +180,7 @@ s32 _bgm_set_song(s32 playerIndex, s32 songID, s32 variation, s32 fadeOutTime, s
     musicSetting = &gMusicSettings[playerIndex];
 
     if (!gGameStatusPtr->musicEnabled) {
-        au_song_stop_by_name(musicSetting->songName);
+        au_song_stop(musicSetting->songName);
         musicSetting->flags &= ~MUSIC_SETTINGS_FLAGS_1;
 
         return 1;
@@ -229,7 +229,7 @@ s32 func_8014A964(s32 playerIndex, s32 songID, s32 variation, s32 fadeInTime, s1
     musicSetting = &gMusicSettings[playerIndex];
 
     if (!gGameStatusPtr->musicEnabled) {
-        au_song_stop_by_name(musicSetting->songName);
+        au_song_stop(musicSetting->songName);
         musicSetting->flags &= ~MUSIC_SETTINGS_FLAGS_1;
         return 1;
     }

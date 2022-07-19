@@ -7,7 +7,7 @@ typedef struct BufferEntry {
     /* 0x3 */ u8 bankGroup;
 } BufferEntry; // size = 4
 
-void snd_load_BK_headers(AuGlobals* globals, ALHeap* heap) {
+void au_load_BK_headers(AuGlobals* globals, ALHeap* heap) {
     SBNFileEntry fileEntry;
     BufferEntry buffer[80];
     s32 i;

@@ -43,6 +43,7 @@ void au_driver_init(AuSynDriver* driver, ALConfig* config) {
         AuPVoice* voice = &gSynDriverPtr->pvoices[i];
         voice->loadFilter.dc_state = alHeapAlloc(heap, 1, sizeof(*voice->loadFilter.dc_state));
         voice->loadFilter.dc_lstate = alHeapAlloc(heap, 1, sizeof(*voice->loadFilter.dc_lstate));
+        // note: dmaNew has type ALDMANew (nuAuDmaNew), which returns a ALDMAproc (nuAuDmaCallBack)
         voice->loadFilter.dc_dmaFunc = ((ALDMAproc (*)(NUDMAState**))(gSynDriverPtr->dmaNew))(&voice->loadFilter.dc_dmaState);
         voice->loadFilter.dc_lastsam = 0;
         voice->loadFilter.dc_first = 1;
@@ -53,7 +54,7 @@ void au_driver_init(AuSynDriver* driver, ALConfig* config) {
         voice->resampler.rs_ratio = 1.0f;
         voice->envMixer.em_state = alHeapAlloc(heap, 1, sizeof(*voice->envMixer.em_state));
         voice->envMixer.em_first = 1;
-        voice->envMixer.em_motion = 0;
+        voice->envMixer.em_motion = AL_STOPPED;
         voice->envMixer.em_volume = 1;
         voice->envMixer.em_ltgt = 1;
         voice->envMixer.em_rtgt = 1;
@@ -130,7 +131,7 @@ Acmd* alAudioFrame(Acmd* cmdList, s32* cmdLen, s16* outBuf, s32 outLen) {
         if (D_80078E5C) {
             for (i = 0; i < gSynDriverPtr->num_pvoice; i++) {
                 pvoice = &gSynDriverPtr->pvoices[i];
-                if (pvoice->envMixer.em_motion == 1) {
+                if (pvoice->envMixer.em_motion == AL_PLAYING) {
                     func_80057874(i, pvoice->envMixer.em_pan);
                 }
             }
@@ -288,7 +289,7 @@ void au_pvoice_reset_filter(u8 voiceIdx) {
     AuPVoice* pvoice = &gSynDriverPtr->pvoices[voiceIdx];
     AuLoadFilter* filter = &pvoice->loadFilter;
 
-    pvoice->envMixer.em_motion = 0;
+    pvoice->envMixer.em_motion = AL_STOPPED;
     pvoice->envMixer.em_first = 1;
     pvoice->envMixer.em_volume = 1;
     pvoice->resampler.delta = 0;
@@ -310,10 +311,11 @@ void au_pvoice_reset_filter(u8 voiceIdx) {
     }
 }
 
-void func_80056F78(u8 index) {
+// n_alEnvmixerParam case AL_FILTER_START
+void au_pvoice_set_playing(u8 index) {
     AuPVoice* pvoice = (AuPVoice*)&gSynDriverPtr->pvoices[index];
 
-    pvoice->envMixer.em_motion = 1;
+    pvoice->envMixer.em_motion = AL_PLAYING;
 }
 
 #define ADPCMFBYTES      9
@@ -359,7 +361,7 @@ void au_pvoice_set_filter(u8 index, u8 reverbType, Instrument* instrument, f32 p
             break;
     }
 
-    envMixer->em_motion = 1;
+    envMixer->em_motion = AL_PLAYING;
     envMixer->em_first = 1;
     envMixer->em_delta = 0;
     envMixer->em_segEnd = arg7;
@@ -391,7 +393,7 @@ void au_pvoice_set_filter_wavetable(u8 voiceIdx, Instrument* instrument) {
     pvoice->loadFilter.dc_sample = 0;
 
     switch (filter->instrument->type) {
-        case 0:
+        case AL_ADPCM_WAVE:
             filter->instrument->wavDataLength = (filter->instrument->wavDataLength / ADPCMFBYTES) * ADPCMFBYTES;
             pvoice->loadFilter.dc_bookSize = filter->instrument->dc_bookSize;
             if (filter->instrument->loopEnd == 0) {
@@ -405,7 +407,7 @@ void au_pvoice_set_filter_wavetable(u8 voiceIdx, Instrument* instrument) {
                 alCopy(filter->instrument->loopPredictor, pvoice->loadFilter.dc_lstate, sizeof(ADPCM_STATE));
             }
             break;
-        case 1:
+        case AL_RAW16_WAVE:
             if (filter->instrument->loopEnd != 0) {
                 pvoice->loadFilter.dc_loop.start = filter->instrument->loopStart;
                 pvoice->loadFilter.dc_loop.end = filter->instrument->loopEnd;
@@ -425,7 +427,7 @@ void au_pvoice_set_pitch_ratio(u8 voiceIdx, f32 pitchRatio) {
     pvoice->resampler.rs_ratio = pitchRatio;
 }
 
-void func_8005736C(u8 voiceIdx, s16 volume, s32 arg2, u8 arg3, u8 arg4) {
+void func_8005736C(u8 voiceIdx, s16 volume, s32 arg2, u8 pan, u8 arg4) {
     AuPVoice* pvoice = &gSynDriverPtr->pvoices[voiceIdx];
     AuEnvMixer* envMixer = &pvoice->envMixer;
 
@@ -451,14 +453,14 @@ void func_8005736C(u8 voiceIdx, s16 volume, s32 arg2, u8 arg3, u8 arg4) {
 
     envMixer->em_delta = 0;
     envMixer->em_segEnd = arg2;
-    envMixer->em_pan = arg3;
+    envMixer->em_pan = pan;
     envMixer->em_volume = SQ(volume) >> 0xF;
     envMixer->em_dryamt = AuEqPower[arg4];
     envMixer->em_wetamt = AuEqPower[AU_EQPOW_MAX_IDX - arg4];
     envMixer->em_first = 1;
 }
 
-void func_80057548(u8 voiceIdx, u8 arg1, u8 arg2) {
+void func_80057548(u8 voiceIdx, u8 pan, u8 arg2) {
     AuPVoice* pvoice = &gSynDriverPtr->pvoices[voiceIdx];
     AuEnvMixer* envMixer = &pvoice->envMixer;
 
@@ -482,7 +484,7 @@ void func_80057548(u8 voiceIdx, u8 arg1, u8 arg2) {
         envMixer->em_cvolR = 1;
     }
 
-    envMixer->em_pan = arg1;
+    envMixer->em_pan = pan;
     envMixer->em_dryamt = AuEqPower[arg2];
     envMixer->em_wetamt = AuEqPower[AU_EQPOW_MAX_IDX - arg2];
     envMixer->em_first = 1;

@@ -1,24 +1,24 @@
 // 2BF90.c
-void func_80050B90(AmbientSoundManager* arg0, s8 arg1, s8 arg2, AuGlobals* arg3);
-s32 func_80050C30(u32 arg0);
+void au_mseq_manager_init(AuAmbienceManager* arg0, s8 arg1, s8 reverbType, AuGlobals* arg3);
+AuResult func_80050C30(u32 arg0);
 void func_80050C54(s32 arg0, s32 arg1);
-void func_80050C64(s32 arg0, s32 arg1);
-s32 func_80050CA0(s32 arg0, s32 arg1);
-void func_80050D50(AlUnkLambda* arg0);
-void func_80050E18(s32 arg0, s32 arg1);
-void func_80050E84(s32 arg0, s32 arg1);
-void func_80050EF0(s32 arg0);
-void func_80050F64(s32 arg0, s32 arg1);
+void au_mseq_set_disabled(s32 arg0, s32 arg1);
+AuResult func_80050CA0(s32 arg0, s32 arg1);
+void func_80050D50(AuAmbPlayer* arg0);
+void func_80050EF0_fade_out_unk(s32 arg0, s32 arg1);
+void func_80050EF0_fade_in_unk(s32 arg0, s32 arg1);
+void func_80050EF0_fade_out_quick(s32 arg0);
+void func_80050EF0_fade_out_slow(s32 arg0, s32 arg1);
 void au_mseq_set_volume(s32 arg0, s32 arg1, s32 arg2);
-s32 func_80051050(s32 arg0);
-void func_800510A4(AmbientSoundManager* arg0, MSEQHeader* mseq, s32 index);
-void snd_ambient_manager_update(AmbientSoundManager* arg0);
-void func_80051334(AmbientSoundManager* manager, AlUnkLambda* lambda);
-void func_80051434(AmbientSoundManager* manager, AlUnkLambda* lambda);
-s32 au_mseq_read_next(AlUnkLambda* arg0);
-void func_800521E8(AmbientSoundManager* arg0, AlUnkLambda* arg1);
-void func_800522A8(AmbientSoundManager* arg0, AlUnkLambda* lambda);
-void func_8005232C(AmbientSoundManager* manager, AlUnkLambda* lambda);
+AuResult func_80051050(s32 arg0);
+void func_800510A4(AuAmbienceManager* arg0, MSEQHeader* mseq, s32 index);
+void snd_ambient_manager_update(AuAmbienceManager* arg0);
+void func_80051334(AuAmbienceManager* manager, AuAmbPlayer* lambda);
+void func_80051434(AuAmbienceManager* manager, AuAmbPlayer* lambda);
+s32 au_mseq_read_next(AuAmbPlayer* arg0);
+void au_mseq_player_stop(AuAmbienceManager* arg0, AuAmbPlayer* arg1);
+void func_800522A8(AuAmbienceManager* arg0, AuAmbPlayer* lambda);
+void func_8005232C(AuAmbienceManager* manager, AuAmbPlayer* lambda);
 
 // 2d9a0_len_890.c
 void func_800525A0(AuGlobals* globals);
@@ -40,7 +40,7 @@ void au_update_clients_2(void);
 void au_update_players_main(void);
 void func_80053654(AuGlobals* globals);
 void func_80053888(AlUnkVoice* arg0, u8 arg1);
-void func_800538C4(AlUnkVoice* arg0, u8 arg1);
+void au_reset_voice(AlUnkVoice* arg0, u8 arg1);
 f32 au_compute_pitch_ratio(s32 arg0);
 void au_fade_init(Fade* fade, s32 time, s32 startValue, s32 endValue);
 void au_fade_clear(Fade* fade);
@@ -89,9 +89,9 @@ void func_8004B328(NUScMsg mesg_type, u32 frameCounter);
 //void alUnlink(ALLink* element);
 
 // 303c0_len_3e10.c
-void snd_load_BK_headers(AuGlobals* arg0, ALHeap*);
+void au_load_BK_headers(AuGlobals* arg0, ALHeap*);
 
-// 26840_len_20d0.c
+// sfx_player.c
 void au_sfx_init(SoundManager* manager, u8 arg1, u8 arg2, AuGlobals* arg3, u8 arg4);
 void au_sfx_load_groups_from_SEF(SoundManager* sndMgr);
 void au_sfx_clear_queue(SoundManager* manager);
@@ -106,7 +106,7 @@ s16 au_sfx_manager_update(SoundManager* manager);
 void au_bgm_update_main(BGMPlayer* player);
 BGMPlayer* au_bgm_get_player_with_song_name(s32 songString);
 AuResult au_bgm_dispatch_player_event(SongUpdateEvent* event);
-AuResult au_bgm_stop_song_with_name(s32 songName);
+AuResult au_bgm_stop_song(s32 songName);
 void au_bgm_stop_all(void);
 AuResult au_bgm_is_song_playing(s32 songName);
 s32 func_8004DB28(BGMPlayer* player);
@@ -190,15 +190,15 @@ AuResult snd_ambient_80055590(s32 arg0, s32 arg1);
 AuResult snd_ambient_800555E4(s32 arg0);
 AuResult snd_ambient_80055618(s32 arg0, s32 arg1);
 AuResult au_ambience_set_volume(s32 arg0, s32 arg1, s32 arg2);
-AuResult snd_ambient_800556D0(s32 arg0);
-AuResult snd_ambient_80055718(s32 arg0);
+AuResult au_ambience_disable(s32 arg0);
+AuResult au_ambience_enable(s32 arg0);
 void snd_ambient_80055760(s32 arg0);
 AuResult snd_ambient_800557CC(s32 arg0);
 AuResult snd_ambient_80055848(s32 arg0);
-AuResult snd_load_song(s32 songID, s32 playerIndex);
-AuResult snd_start_song(s32 songName);
-AuResult snd_start_song_variation(s32 songName, s32 variation);
-AuResult au_song_stop_by_name(s32 songName);
+AuResult au_song_load(s32 songID, s32 playerIndex);
+AuResult au_song_start(s32 songName);
+AuResult au_song_start_variation(s32 songName, s32 variation);
+AuResult au_song_stop(s32 songName);
 void au_stop_songs(void);
 AuResult au_song_is_playing(s32 songName);
 AuResult snd_set_song_variation_fade(s32 songName, s32 variation, s32 fadeInTime, s32 startVolume, s32 endVolume);
@@ -258,7 +258,7 @@ void func_80056DCC(u8 arg0, u8 effectID);
 void func_80056E34(u8 arg0, s16 arg1, s16 arg2, s32 arg3);
 void func_80056EC0(u8 arg0, s8 arg1);
 void au_pvoice_reset_filter(u8 voiceIdx);
-void func_80056F78(u8 index);
+void au_pvoice_set_playing(u8 index);
 void au_pvoice_set_filter(u8 index, u8 reverbType, Instrument* table, f32 pitchRatio, s16 arg4, u8 pan, u8 reverb, s32 arg7);
 void au_pvoice_set_filter_wavetable(u8 voiceIdx, Instrument* table);
 void au_pvoice_set_pitch_ratio(u8 voiceIdx, f32 pitchRatio);
@@ -293,7 +293,7 @@ void func_80058E84(AuFX* fx, u8 mode, ALHeap* heap);
 void func_80058F88(AlUnkKappa* kappa, ALHeap* heap);
 void func_80059008(AlUnkKappa* kappa, s16 arg1, s16 arg2, s16 fc);
 void func_8005904C(AuFX* fx, u8 effectType);
-Acmd* func_80059310(AuFX* fx, Acmd* cmdBusPos, s32, s32);
+Acmd* func_80059310(AuFX* fx, Acmd* cmdBusPos, s16, s16);
 s32 au_fx_param_hdl(AuFX* fx, s16 index, s16 paramID, s32 value);
 
 // sfx.c

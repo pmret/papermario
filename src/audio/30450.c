@@ -119,10 +119,10 @@ void func_80055068(u32 arg0) {
                 break;
             case 1:
                 if (temp_v1 == 1) {
-                    s32 filename = snd_load_song((arg0 >> 4) & 0xFF, 0);
+                    s32 filename = au_song_load((arg0 >> 4) & 0xFF, 0);
 
                     if (filename > ASCII_TO_U32('0', ' ', ' ', '\0')) {
-                        snd_start_song_variation(filename, (arg0 >> 0xC) & 3);
+                        au_song_start_variation(filename, (arg0 >> 0xC) & 3);
                     }
                 }
                 break;
@@ -286,7 +286,7 @@ AuResult snd_ambient_quick_fade_out(s32 arg0) {
     AuResult status = func_80050C30(arg0);
 
     if (status == AU_RESULT_OK) {
-        func_80050EF0(arg0);
+        func_80050EF0_fade_out_quick(arg0);
     }
 
     return status;
@@ -296,28 +296,29 @@ AuResult snd_ambient_slow_fade_out(s32 arg0, s32 arg1) {
     AuResult status = func_80050C30(arg0);
 
     if (status == AU_RESULT_OK) {
-        func_80050F64(arg0, arg1);
+        func_80050EF0_fade_out_slow(arg0, arg1);
     }
 
     return status;
 }
 
-// clears ambient sounds?
+// fade out sounds (kmr_00)
 AuResult snd_ambient_8005553C(s32 arg0, s32 arg1) {
     AuResult status = func_80050C30(arg0);
 
     if (status == AU_RESULT_OK) {
-        func_80050E18(arg0, arg1);
+        func_80050EF0_fade_out_unk(arg0, arg1);
     }
 
     return status;
 }
 
+// fade in sounds (kmr_00) -- restart?
 AuResult snd_ambient_80055590(s32 arg0, s32 arg1) {
     AuResult status = func_80050C30(arg0);
 
     if (status == AU_RESULT_OK) {
-        func_80050E84(arg0, arg1);
+        func_80050EF0_fade_in_unk(arg0, arg1);
     }
 
     return status;
@@ -332,7 +333,7 @@ AuResult snd_ambient_800555E4(s32 arg0) {
     return func_80051050(arg0);
 }
 
-//TODO au_ambience_mute? -- sets a flag which tells the manager to mute players
+//TODO au_ambience_disable? -- sets a flag which tells the manager to mute players
 AuResult snd_ambient_80055618(s32 index, s32 arg1) {
     AuResult status = func_80050C30(index);
 
@@ -353,21 +354,21 @@ AuResult au_ambience_set_volume(s32 index, s32 time, s32 volume) {
     return status;
 }
 
-AuResult snd_ambient_800556D0(s32 arg0) {
-    AuResult status = func_80050C30(arg0);
+AuResult au_ambience_disable(s32 index) {
+    AuResult status = func_80050C30(index);
 
     if (status == AU_RESULT_OK) {
-        func_80050C64(arg0, 1);
+        au_mseq_set_disabled(index, TRUE);
     }
 
     return status;
 }
 
-AuResult snd_ambient_80055718(s32 arg0) {
-    AuResult status  = func_80050C30(arg0);
+AuResult au_ambience_enable(s32 index) {
+    AuResult status  = func_80050C30(index);
 
     if (status == AU_RESULT_OK) {
-        func_80050C64(arg0, 0);
+        au_mseq_set_disabled(index, FALSE);
     }
 
     return status;
@@ -406,18 +407,19 @@ AuResult snd_ambient_800557CC(s32 arg0) {
     return status;
 }
 
-AuResult snd_ambient_80055848(s32 arg0) {
+// play only
+AuResult snd_ambient_80055848(s32 index) {
     AuResult status = AU_RESULT_OK;
     s32 lim = 4;
 
-    if (arg0 != D_80078DB6) {
+    if (index != D_80078DB6) {
         u32 i;
 
         for (i = 0; i < lim; i++) {
-            if (i == arg0) {
-                status = snd_ambient_80055718(arg0);
+            if (i == index) {
+                status = au_ambience_enable(index);
             } else {
-                status = snd_ambient_800556D0(i);
+                status = au_ambience_disable(i); // mute
             }
 
             if (status != AU_RESULT_OK) {
@@ -426,14 +428,14 @@ AuResult snd_ambient_80055848(s32 arg0) {
         }
 
         if (status == AU_RESULT_OK) {
-            D_80078DB6 = arg0;
+            D_80078DB6 = index;
         }
     }
 
     return status;
 }
 
-AuResult snd_load_song(s32 songID, s32 playerIndex) {
+AuResult au_song_load(s32 songID, s32 playerIndex) {
     BGMHeader* bgmFile;
     BGMPlayer* player;
 
@@ -446,7 +448,7 @@ AuResult snd_load_song(s32 songID, s32 playerIndex) {
     }
 }
 
-AuResult snd_start_song(s32 songName) {
+AuResult au_song_start(s32 songName) {
     AuResult status;
     SongUpdateEvent s;
 
@@ -463,7 +465,7 @@ AuResult snd_start_song(s32 songName) {
     return status;
 }
 
-AuResult snd_start_song_variation(s32 songName, s32 variation) {
+AuResult au_song_start_variation(s32 songName, s32 variation) {
     AuResult status;
     SongUpdateEvent s;
 
@@ -480,8 +482,8 @@ AuResult snd_start_song_variation(s32 songName, s32 variation) {
     return status;
 }
 
-AuResult au_song_stop_by_name(s32 songName) {
-    return au_bgm_stop_song_with_name(songName);
+AuResult au_song_stop(s32 songName) {
+    return au_bgm_stop_song(songName);
 }
 
 void au_stop_songs(void) {

@@ -2,14 +2,27 @@
 
 extern s8 BlankMseqData;
 
-void func_80050B90(AmbientSoundManager* manager, s8 arg1, s8 arg2, AuGlobals* globals) {
-    AlUnkLambda* lambda;
+enum LambdaState24 {
+    LAMBDA_24_0         = 0,
+    LAMBDA_24_1         = 1,
+    LAMBDA_24_2         = 2,
+    LAMBDA_24_3         = 3
+};
+
+enum MseqPlayState {
+    MSEQ_PLAYER_PLAYING     = 0,
+    MSEQ_PLAYER_STOPPED     = 1,
+    MSEQ_PLAYER_STOPPING    = 2
+};
+
+void au_mseq_manager_init(AuAmbienceManager* manager, s8 priority, s8 reverbType, AuGlobals* globals) {
+    AuAmbPlayer* lambda;
     s32 i;
 
     au_memset(manager, sizeof(*manager), 0);
 
-    for (i = 0; i < ARRAY_COUNT(manager->mseqLambda); i++) {
-        lambda = &manager->mseqLambda[i];
+    for (i = 0; i < ARRAY_COUNT(manager->mseqPlayers); i++) {
+        lambda = &manager->mseqPlayers[i];
         lambda->unk_14.u8[0] = i;
         lambda->unk_18 = 1;
         lambda->unk_38 = 0x7F000000;
@@ -19,58 +32,58 @@ void func_80050B90(AmbientSoundManager* manager, s8 arg1, s8 arg2, AuGlobals* gl
     manager->nextUpdateStep = 1;
     manager->nextUpdateCounter = 2;
     manager->nextUpdateInterval = 2;
-    manager->unk_22 = arg1;
-    manager->defaultReverbType = arg2;
+    manager->priority = priority;
+    manager->defaultReverbType = reverbType;
 }
 
-s32 func_80050C30(u32 arg0) {
-    if (gAmbientSoundManager->unk_20 <= arg0) {
-        return 3;
+AuResult func_80050C30(u32 arg0) {
+    if (gAuAmbienceManager->unk_20 <= arg0) {
+        return AU_AMBIENCE_ERROR_3;
     } else {
-        return 0;
+        return AU_RESULT_OK;
     }
 }
 
 void func_80050C54(s32 arg0, s32 arg1) {
-    gAmbientSoundManager->unk_21 = arg1;
+    gAuAmbienceManager->unk_21 = arg1;
 }
 
-void func_80050C64(s32 arg0, s32 arg1) {
-    AmbientSoundManager* A = gAmbientSoundManager;
-    AlUnkLambda* lambda = &A->mseqLambda[arg0];
+void au_mseq_set_disabled(s32 index, s32 disable) {
+    AuAmbienceManager* manager = gAuAmbienceManager;
+    AuAmbPlayer* ambPlayer = &manager->mseqPlayers[index];
 
-    if (arg1 == 0) {
-        lambda->unk_25 = 0;
+    if (!disable) {
+        ambPlayer->playState = MSEQ_PLAYER_PLAYING;
     } else {
-        lambda->unk_25 = 2;
+        ambPlayer->playState = MSEQ_PLAYER_STOPPING;
     }
 }
 
-s32 func_80050CA0(s32 arg0, s32 arg1) {
-    AlUnkLambda* lambda = &gAmbientSoundManager->mseqLambda[arg0];
-    MSEQHeader* mseq = gAmbientSoundManager->mseqFiles[arg0];
-    s32 retVal = 0;
+AuResult func_80050CA0(s32 index, s32 time) {
+    AuAmbPlayer* lambda = &gAuAmbienceManager->mseqPlayers[index];
+    MSEQHeader* mseq = gAuAmbienceManager->mseqFiles[index];
+    AuResult status = AU_RESULT_OK;
 
     if (mseq != NULL) {
         if (lambda->mseqName == 0) {
-            func_800510A4(gAmbientSoundManager, mseq, arg0);
-            if (arg1 != 0) {
-                lambda->time = arg1;
+            func_800510A4(gAuAmbienceManager, mseq, index);
+            if (time != 0) {
+                lambda->time = time;
                 lambda->unk_2A = 0;
                 lambda->volume = 0x7F;
                 lambda->unk_26 = 0;
                 func_80050D50(lambda);
             }
         } else {
-            retVal = 1;
+            status = AU_AMBIENCE_ERROR_1;
         }
     } else {
-        retVal = 2;
+        status = AU_AMBIENCE_ERROR_2;
     }
-    return retVal;
+    return status;
 }
 
-void func_80050D50(AlUnkLambda* lambda) {
+void func_80050D50(AuAmbPlayer* lambda) {
     u16 time = lambda->time;
 
     if (lambda->unk_2A == 0xFF) {
@@ -80,8 +93,8 @@ void func_80050D50(AlUnkLambda* lambda) {
     if (time >= SND_MIN_DURATION && time <= SND_MAX_DURATION) {
         lambda->unk_38 = lambda->unk_2A << 0x18;
         lambda->unk_42 = lambda->volume;
-        lambda->unk_lam_40 = (u32)(time * 10) / 115;
-        lambda->unk_3C = ((lambda->volume - lambda->unk_2A) << 0x18) / ((s16)lambda->unk_lam_40 & 0xFFFF);
+        lambda->volInterpTime = (u32)(time * 10) / 115;
+        lambda->volInterpStep = ((lambda->volume - lambda->unk_2A) << 0x18) / ((s16)lambda->volInterpTime & 0xFFFF);
     }
 
     lambda->time = 0;
@@ -89,69 +102,69 @@ void func_80050D50(AlUnkLambda* lambda) {
     lambda->volume = 0;
 }
 
-void func_80050E18(s32 arg0, s32 arg1) {
-    AlUnkLambda* temp_v1 = &gAmbientSoundManager->mseqLambda[arg0];
+void func_80050EF0_fade_out_unk(s32 index, s32 time) {
+    AuAmbPlayer* lambda = &gAuAmbienceManager->mseqPlayers[index];
 
-    if ((temp_v1->mseqReadStart != 0) && (temp_v1->mseqReadPos != NULL)) {
-        if (arg1 != 0) {
-            temp_v1->unk_2A = 0xFF;
-            temp_v1->time = arg1;
-            temp_v1->volume = 0;
-            temp_v1->unk_26 = 2;
+    if ((lambda->mseqReadStart != NULL) && (lambda->mseqReadPos != NULL)) {
+        if (time != 0) {
+            lambda->unk_2A = 0xFF;
+            lambda->time = time;
+            lambda->volume = 0;
+            lambda->unk_26 = 2;
             return;
         }
-        temp_v1->unk_24 = 3;
+        lambda->unk_24 = LAMBDA_24_3;
     }
 }
 
-void func_80050E84(s32 arg0, s32 arg1) {
-    AlUnkLambda* temp_v1 = &gAmbientSoundManager->mseqLambda[arg0];
+void func_80050EF0_fade_in_unk(s32 index, s32 time) {
+    AuAmbPlayer* lambda = &gAuAmbienceManager->mseqPlayers[index];
 
-    if ((temp_v1->mseqReadStart != 0) && (temp_v1->mseqReadPos != NULL)) {
-        temp_v1->unk_24 = 1;
-        if (arg1 != 0) {
-            temp_v1->time = arg1;
+    if ((lambda->mseqReadStart != NULL) && (lambda->mseqReadPos != NULL)) {
+        lambda->unk_24 = LAMBDA_24_1;
+        if (time != 0) {
+            lambda->time = time;
         } else {
-            temp_v1->time = SND_MIN_DURATION;
+            lambda->time = SND_MIN_DURATION;
         }
-        temp_v1->unk_2A = 0;
-        temp_v1->volume = SND_MAX_VOLUME_8;
-        temp_v1->unk_26 = 0;
+        lambda->unk_2A = 0;
+        lambda->volume = SND_MAX_VOLUME_8;
+        lambda->unk_26 = 0;
     }
 }
 
-void func_80050EF0(s32 arg0) {
-    AlUnkLambda* temp_v1 = &gAmbientSoundManager->mseqLambda[arg0];
+void func_80050EF0_fade_out_quick(s32 index) {
+    AuAmbPlayer* lambda = &gAuAmbienceManager->mseqPlayers[index];
 
-    if ((temp_v1->mseqReadStart != 0) && (temp_v1->mseqReadPos != NULL)) {
-        if (temp_v1->unk_24 != 0) {
-            temp_v1->mseqReadPos = NULL;
-            temp_v1->mseqName = 0;
-            temp_v1->unk_24 = 0;
+    if ((lambda->mseqReadStart != NULL) && (lambda->mseqReadPos != NULL)) {
+        if (lambda->unk_24 != LAMBDA_24_0) {
+            lambda->mseqReadPos = NULL;
+            lambda->mseqName = 0;
+            lambda->unk_24 = LAMBDA_24_0;
             return;
         }
-        temp_v1->mseqReadPos = &BlankMseqData;
-        temp_v1->unk_18 = 1;
+        lambda->mseqReadPos = &BlankMseqData;
+        lambda->unk_18 = 1;
     }
 }
 
-void func_80050F64(s32 arg0, s32 arg1) {
-    AlUnkLambda* temp_v1 = &gAmbientSoundManager->mseqLambda[arg0];
+void func_80050EF0_fade_out_slow(s32 index, s32 time) {
+    AuAmbPlayer* lambda = &gAuAmbienceManager->mseqPlayers[index];
 
-    if ((temp_v1->mseqReadStart != 0) && (temp_v1->mseqReadPos != 0)) {
-        if (arg1 != 0) {
-            temp_v1->time = arg1;
+    if ((lambda->mseqReadStart != NULL) && (lambda->mseqReadPos != NULL)) {
+        if (time != 0) {
+            lambda->time = time;
         } else {
-            temp_v1->time = SND_MIN_DURATION;
+            lambda->time = SND_MIN_DURATION;
         }
-        temp_v1->unk_2A = -1;
-        temp_v1->volume = 0;
-        temp_v1->unk_26 = 1;
+        lambda->unk_2A = -1;
+        lambda->volume = 0;
+        lambda->unk_26 = 1;
     }
 }
 
 void au_mseq_set_volume(s32 index, s32 time, s32 volume) {
-    AlUnkLambda* lambda = &gAmbientSoundManager->mseqLambda[index];
+    AuAmbPlayer* lambda = &gAuAmbienceManager->mseqPlayers[index];
     if ((lambda->mseqReadStart != 0) && (lambda->mseqReadPos != 0)) {
         if (volume <= 0) {
             volume = 1;
@@ -169,30 +182,30 @@ void au_mseq_set_volume(s32 index, s32 time, s32 volume) {
     }
 }
 
-s32 func_80051050(s32 arg0) {
-    AlUnkLambda* lambda = &gAmbientSoundManager->mseqLambda[arg0];
-    s32 var_a0 = 0;
+AuResult func_80051050(s32 arg0) {
+    AuAmbPlayer* lambda = &gAuAmbienceManager->mseqPlayers[arg0];
+    AuResult status = AU_RESULT_OK;
 
     if ((lambda->mseqReadStart != NULL) && (lambda->mseqReadPos != NULL)) {
-        var_a0 = 1;
-        if (lambda->unk_24 != 0) {
-            var_a0 = 2;
+        status = AU_AMBIENCE_ERROR_1;
+        if (lambda->unk_24 != LAMBDA_24_0) {
+            status = AU_AMBIENCE_ERROR_2;
         }
     }
-    return var_a0;
+    return status;
 }
 
-void func_800510A4(AmbientSoundManager* manager, MSEQHeader* mseqFile, s32 index) {
-    AlUnkLambda* lambda;
+void func_800510A4(AuAmbienceManager* manager, MSEQHeader* mseqFile, s32 index) {
+    AuAmbPlayer* lambda;
     AlUnkXi* xi;
     AuFilePos readPos;
     s32 i;
 
-    lambda = &manager->mseqLambda[index];
+    lambda = &manager->mseqPlayers[index];
     au_memset(lambda, sizeof(*lambda), 0);
 
     lambda->mseqFile = mseqFile;
-    readPos = (AuFilePos)((s32)mseqFile + mseqFile->dataStart);
+    readPos = AU_FILE_RELATIVE(mseqFile->dataStart, mseqFile);
     lambda->unk_14.u8[0] = index;
     lambda->mseqReadPos = readPos;
     lambda->unk_10 = readPos;
@@ -204,10 +217,10 @@ void func_800510A4(AmbientSoundManager* manager, MSEQHeader* mseqFile, s32 index
     lambda->unk_42 = 0x7F;
 
     lambda->mseqName = lambda->mseqFile->name;
-    lambda->first_iota = lambda->mseqFile->first_iota;
-    lambda->last_iota = lambda->first_iota + 16;
-    if (lambda->last_iota > 24) {
-        lambda->last_iota = 24;
+    lambda->firstVoiceIdx = lambda->mseqFile->first_iota;
+    lambda->lastVoiceIdx = lambda->firstVoiceIdx + 16;
+    if (lambda->lastVoiceIdx > 24) {
+        lambda->lastVoiceIdx = 24;
     }
     for (i = 0; i < 10; i++) {
         xi = &lambda->unk_44[i];
@@ -218,35 +231,36 @@ void func_800510A4(AmbientSoundManager* manager, MSEQHeader* mseqFile, s32 index
     lambda->unk_43 = 1;
 }
 
-void snd_ambient_manager_update(AmbientSoundManager* manager) {
+void snd_ambient_manager_update(AuAmbienceManager* manager) {
     u32 i;
     s32 j;
 
-    for (i = 0; i < ARRAY_COUNT(manager->unk_7B4); i++) {
-        AlUnkIota* temp = &manager->unk_7B4[i];
+    for (i = 0; i < ARRAY_COUNT(manager->mseqVoiceStates); i++) {
+        AlUnkIota* temp = &manager->mseqVoiceStates[i];
 
-        if ((temp->unk_00.u8[3] == 1) && (manager->globals->voices[i].unk_45 != manager->unk_22)) {
+        if ((temp->unk_00.u8[3] == 1) && (manager->globals->voices[i].priority != manager->priority)) {
             temp->unk_00.s32 = 0;
         }
     }
 
-    for (j = 0; j < ARRAY_COUNT(manager->mseqLambda); j++) {
-        AlUnkLambda* lambda = &manager->mseqLambda[j];
+    for (j = 0; j < ARRAY_COUNT(manager->mseqPlayers); j++) {
+        AuAmbPlayer* lambda = &manager->mseqPlayers[j];
         s32 var;
 
         if (lambda->mseqReadPos != NULL) {
             if (manager->unk_21) {
+                // not usually taken
                 func_80051334(manager, lambda);
             }
 
             var = lambda->unk_24;
-            if (var != 0) {
-                if (var == 3) {
-                    lambda->unk_24 = 2;
+            if (var != LAMBDA_24_0) {
+                if (var == LAMBDA_24_3) {
+                    lambda->unk_24 = LAMBDA_24_2;
                     func_800522A8(manager, lambda);
-                    func_800521E8(manager, lambda);
-                } else if (lambda->unk_24 == 1) {
-                    lambda->unk_24 = 0;
+                    au_mseq_player_stop(manager, lambda);
+                } else if (lambda->unk_24 == LAMBDA_24_1) {
+                    lambda->unk_24 = LAMBDA_24_0;
                     if (lambda->time != 0) {
                         func_80050D50(lambda);
                     }
@@ -256,9 +270,9 @@ void snd_ambient_manager_update(AmbientSoundManager* manager) {
                 if (lambda->time != 0) {
                     func_80050D50(lambda);
                 }
-                if (lambda->unk_25 == 2) {
-                    func_800521E8(manager, lambda);
-                    lambda->unk_25 = 1;
+                if (lambda->playState == MSEQ_PLAYER_STOPPING) {
+                    au_mseq_player_stop(manager, lambda);
+                    lambda->playState = MSEQ_PLAYER_STOPPED;
                 }
                 func_80051434(manager, lambda);
             }
@@ -268,18 +282,18 @@ void snd_ambient_manager_update(AmbientSoundManager* manager) {
     manager->unk_21 = FALSE;
 }
 
-void func_80051334(AmbientSoundManager* manager, AlUnkLambda* lambda) {
-    MSEQHeader* header;
+void func_80051334(AuAmbienceManager* manager, AuAmbPlayer* lambda) {
+    MSEQHeader* mseqFile;
     AlUnkMSEQData* var_a0;
     AlUnkXi* xi;
     s32 offset;
     s32 count;
     s32 lim;
 
-    header = lambda->mseqFile;
-    count = header->unkCount;
-    if (count != 0 && header->unkOffset != 0) {
-        var_a0 = (AlUnkMSEQData*)((s32)header + header->unkOffset);
+    mseqFile = lambda->mseqFile;
+    count = mseqFile->unkCount;
+    if (count != 0 && mseqFile->unkOffset != 0) {
+        var_a0 = AU_FILE_RELATIVE(mseqFile->unkOffset, mseqFile);
         while (count--) {
             xi = &lambda->unk_44[var_a0->unk_00];
             if (var_a0->unk_01 == 0) {
@@ -296,38 +310,38 @@ void func_80051334(AmbientSoundManager* manager, AlUnkLambda* lambda) {
     }
 }
 
-INCLUDE_ASM(void, "audio/2BF90", func_80051434, AmbientSoundManager* arg0, AlUnkLambda* arg1);
+INCLUDE_ASM(void, "audio/2BF90", func_80051434, AuAmbienceManager* arg0, AuAmbPlayer* arg1);
 
 // could return u8?
-s32 au_mseq_read_next(AlUnkLambda* state) {
+s32 au_mseq_read_next(AuAmbPlayer* state) {
     u8 value = *state->mseqReadPos++;
     return value;
 }
 
-void func_800521E8(AmbientSoundManager* manager, AlUnkLambda* state) {
+void au_mseq_player_stop(AuAmbienceManager* manager, AuAmbPlayer* lambda) {
     AlUnkVoice* voice;
     Q32* temp_s1;
     s32 i;
 
-    for (i = state->first_iota; i < state->last_iota; i++) {
-        temp_s1 = &manager->unk_7B4[i - state->first_iota].unk_00;
-        if (*temp_s1->u8 == state->unk_14.u8[0]) {
+    for (i = lambda->firstVoiceIdx; i < lambda->lastVoiceIdx; i++) {
+        temp_s1 = &manager->mseqVoiceStates[i - lambda->firstVoiceIdx].unk_00;
+        if (*temp_s1->u8 == lambda->unk_14.u8[0]) {
             voice = &manager->globals->voices[i];
-            if (voice->unk_45 == manager->unk_22) {
-                func_800538C4(voice, i);
+            if (voice->priority == manager->priority) {
+                au_reset_voice(voice, i);
             }
             temp_s1->s32 = 0;
         }
     }
 }
 
-void func_800522A8(AmbientSoundManager* arg0, AlUnkLambda* lambda) {
+void func_800522A8(AuAmbienceManager* arg0, AuAmbPlayer* lambda) {
     AlUnkOmega* omega = lambda->unk_1D4;
-    u32 k = 0;
+    u32 copied = 0;
     s32 i;
     
-    for (i = lambda->first_iota; i < lambda->last_iota; i++) {
-        AlUnkIota* iota = &arg0->unk_7B4[i - lambda->first_iota];
+    for (i = lambda->firstVoiceIdx; i < lambda->lastVoiceIdx; i++) {
+        AlUnkIota* iota = &arg0->mseqVoiceStates[i - lambda->firstVoiceIdx];
 
         if (iota->unk_07 == 0) {
             continue;
@@ -335,17 +349,17 @@ void func_800522A8(AmbientSoundManager* arg0, AlUnkLambda* lambda) {
 
         omega->unk_00 = iota->unk_00.u8[1];
         omega->unk_01 = iota->unk_00.u8[2];
-        omega->unk_02 = iota->unk_06;
+        omega->unk_02 = iota->volume;
 
         omega++;
-        k++;
-        if (k >= 4) {
+        copied++;
+        if (copied >= 4) {
             break;
         }
     }
 }
 
-void func_8005232C(AmbientSoundManager* manager, AlUnkLambda* lambda) {
+void func_8005232C(AuAmbienceManager* manager, AuAmbPlayer* lambda) {
     AuGlobals* globals;
     AlUnkVoice* voice;
     AlUnkOmega* omega;
@@ -354,45 +368,47 @@ void func_8005232C(AmbientSoundManager* manager, AlUnkLambda* lambda) {
     u32 i, j;
         
     globals = manager->globals;
-    if (lambda->unk_25 == 0) {
-        for (i = 0; i < 4; i++) {
+    if (lambda->playState == MSEQ_PLAYER_PLAYING) {
+        for (i = 0; i < ARRAY_COUNT(lambda->unk_1D4); i++) {
             omega = &lambda->unk_1D4[i];
             if (omega->unk_01 != 0) {
                 xi = &lambda->unk_44[omega->unk_00];
 
-                for (j = lambda->first_iota; j < lambda->last_iota; j++) {
+                // find first free voice
+                for (j = lambda->firstVoiceIdx; j < lambda->lastVoiceIdx; j++) {
                     voice = &globals->voices[j];
-                    if (voice->unk_45 == 0) {
+                    if (voice->priority == AU_PRIORITY_FREE) {
                         break;
                     }
                 }
 
-                if (j >= lambda->last_iota) {
-                    for (j = lambda->first_iota; j < lambda->last_iota; j++) {
+                // try stealing a voice with lower priority
+                if (j >= lambda->lastVoiceIdx) {
+                    for (j = lambda->firstVoiceIdx; j < lambda->lastVoiceIdx; j++) {
                         voice = &globals->voices[j];
-                        if (voice->unk_45 < manager->unk_22) {
-                            func_800538C4(voice, j & 0xFF);
+                        if (voice->priority < manager->priority) {
+                            au_reset_voice(voice, j);
                             break;
                         }
                     }
                 }
                 
-                if (j < lambda->last_iota) {
-                    iota = &manager->unk_7B4[j - lambda->first_iota];
+                if (j < lambda->lastVoiceIdx) {
+                    iota = &manager->mseqVoiceStates[j - lambda->firstVoiceIdx];
                     iota->unk_00.s32 = lambda->unk_14.s32 + (omega->unk_00 << 0x10) + (omega->unk_01 << 8);
-                    iota->unk_04 = ((omega->unk_01 & 0x7F) * 100) - xi->instrument->keyBase;
-                    iota->unk_06 = omega->unk_02 & 0x7F;
-                    voice->adjustedVolume = ((lambda->unk_38 >> 0x18) * xi->unk_18.half * iota->unk_06) >> 0xE;
-                    voice->pitchRatio = au_compute_pitch_ratio(iota->unk_04 + xi->unk_0C) * xi->instrument->pitchRatio;
+                    iota->pitch = ((omega->unk_01 & 0x7F) * 100) - xi->instrument->keyBase;
+                    iota->volume = omega->unk_02 & 0x7F;
+                    voice->adjustedVolume = ((lambda->unk_38 >> 0x18) * xi->unk_18.half * iota->volume) >> 0xE;
+                    voice->pitchRatio = au_compute_pitch_ratio(iota->pitch + xi->pitch) * xi->instrument->pitchRatio;
                     voice->pan = xi->pan;
                     voice->reverbAmt = xi->reverb;
                     voice->instrument = xi->instrument;
                     voice->reverbType = manager->defaultReverbType;
                     voice->unk_14.unk_00 = xi->unk_04.unk_00;
                     voice->unk_14.unk_04 = xi->unk_04.unk_04;
-                    voice->unk_flags_43 = 2;
-                    voice->unk_45 = manager->unk_22;
-                    voice->unk_44 = voice->unk_45;
+                    voice->unk_flags_43 = AU_VOICE_SYNC_FLAGS_ALL;
+                    voice->priority = manager->priority;
+                    voice->priorityCopy = voice->priority;
                 }
             }
             omega->unk_00 = 0;
