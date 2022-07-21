@@ -95,7 +95,7 @@ void func_802B6000_E26DE0(void) {
             if (sp10 >= 0) {
                 if (collisionStatus->currentFloor & COLLISION_WITH_ENTITY_BIT && (entityType = get_entity_type(collisionStatus->currentFloor),
                         entityType == ENTITY_TYPE_RED_SWITCH || entityType == ENTITY_TYPE_BLUE_SWITCH)) {
-                    get_entity_by_index(collisionStatus->currentFloor)->collisionFlags |= 1;
+                    get_entity_by_index(collisionStatus->currentFloor)->collisionFlags |= ENTITY_COLLISION_PLAYER_TOUCH_FLOOR;
                     playerStatus->fallState = 0xB;
                     playerStatus->flags &= ~0x8;
                     break;
@@ -126,7 +126,7 @@ void func_802B6000_E26DE0(void) {
                         sfx_play_sound_at_player(SOUND_149, 0);
                         start_rumble(0x80, 0x19);
                         tempStruct = &D_8015A578;
-                        tempStruct->unk_00 = 1;
+                        tempStruct->unk_00 = TRUE;
                         tempStruct->unk_08 = playerStatus->position.y;
                         playerStatus->flags |= 0x400;
                     }

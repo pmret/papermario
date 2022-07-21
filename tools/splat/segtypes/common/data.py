@@ -307,7 +307,7 @@ class CommonSegData(CommonSegCodeSubsegment, CommonSegGroup):
                         byte_str = f"0x{bits:X}"
             elif slen == 4 and bits >= 0x80000000:
                 sym = self.get_symbol(bits, reference=True)
-                if sym:
+                if sym and sym.type not in ["label", "jtbl"]:
                     byte_str = sym.name
                 else:
                     byte_str = "0x{0:0{1}X}".format(bits, 2 * slen)

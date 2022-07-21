@@ -1,5 +1,6 @@
 #include "dgb_18.h"
 #include "message_ids.h"
+#include "entity.h"
 #include "sprite/npc/world_bombette.h"
 #include "sprite/npc/world_bow.h"
 #include "sprite/npc/world_goombario.h"
@@ -693,7 +694,7 @@ EvtScript N(8024382C) = {
 };
 
 EvtScript N(makeEntities) = {
-    EVT_CALL(MakeEntity, 0x802EAE30, 845, 0, 145, -35, 0, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, &Entity_Chest, 845, 0, 145, -35, 0, MAKE_ENTITY_END)
     EVT_CALL(AssignChestFlag, EVT_SAVE_FLAG(1071))
     EVT_CALL(AssignScript, EVT_PTR(N(8024382C)))
     EVT_RETURN

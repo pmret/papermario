@@ -65,7 +65,7 @@ void sleep_bubble_update(EffectInstance* effect) {
         shim_remove_effect(effect);
         return;
     }
-    
+
     unk_20 = part->unk_20;
     timeLeft = part->timeLeft;
 
@@ -79,7 +79,7 @@ void sleep_bubble_update(EffectInstance* effect) {
 
     do {
         angle = i * 360.0f / 21.0f + 17.0f;
-        
+
         *xPtr = temp2 * shim_sin_deg(angle);
         *yPtr = -temp2 * shim_cos_deg(angle);
 
@@ -112,7 +112,7 @@ void sleep_bubble_render(EffectInstance* effect) {
     renderTask.renderMode = RENDER_MODE_2D;
 
     retTask = shim_queue_render_task(&renderTask);
-    retTask->renderMode |= RENDER_MODE_2;
+    retTask->renderMode |= RENDER_TASK_FLAG_2;
 }
 
 INCLUDE_ASM(s32, "effects/sleep_bubble", sleep_bubble_appendGfx);

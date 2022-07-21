@@ -2,6 +2,7 @@
 #include "effects.h"
 #include "script_api/battle.h"
 #include "message_ids.h"
+#include "entity.h"
 #include "sprite/npc/archeologist.h"
 #include "sprite/npc/chuck_quizmo.h"
 #include "sprite/npc/disguised_moustafa.h"
@@ -116,7 +117,7 @@ static s32 N(pad_3BC8)[] = {
 
 EvtScript N(makeEntities) = {
     EVT_CALL(MakeItemEntity, ITEM_LETTER08, -135, 160, -245, 17, EVT_SAVE_FLAG(757))
-    EVT_CALL(MakeEntity, 0x802EAB04, 180, 173, -200, 0, 32, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, &Entity_HiddenPanel, 180, 173, -200, 0, 32, MAKE_ENTITY_END)
     EVT_CALL(AssignPanelFlag, EVT_SAVE_FLAG(756))
     EVT_RETURN
     EVT_END

@@ -1,7 +1,8 @@
 #include "dgb_11.h"
+#include "entity.h"
 #include "message_ids.h"
 
-extern s32 D_000001E4;
+extern s16 Entity_ScriptSpring_AnimLaunch[];
 
 EntryList N(entryList) = {
     { 450.0f,   0.0f,  -40.0f,   0.0f },
@@ -207,7 +208,7 @@ EvtScript N(8024062C) = {
 
 EvtScript N(makeEntities) = {
     EVT_CALL(MakeItemEntity, ITEM_D_DOWN_JUMP, 250, 75, -100, 17, EVT_SAVE_FLAG(1055))
-    EVT_CALL(MakeEntity, EVT_PTR(Entity_D_802EAA30), 375, 0, -250, 0, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, EVT_PTR(Entity_ScriptSpring), 375, 0, -250, 0, MAKE_ENTITY_END)
     EVT_CALL(AssignScript, EVT_PTR(N(8024062C)))
     EVT_SET(EVT_MAP_VAR(0), EVT_VAR(0))
     EVT_RETURN
@@ -221,7 +222,7 @@ ApiStatus N(func_80240000_C4D3E0)(Evt* script, s32 isInitialCall) {
         return ApiStatus_BLOCK;
     }
 
-    play_model_animation(entity->virtualModelIndex, &D_000001E4);
+    play_model_animation(entity->virtualModelIndex, Entity_ScriptSpring_AnimLaunch);
 
     return ApiStatus_DONE2;
 }

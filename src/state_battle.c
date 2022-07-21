@@ -146,7 +146,7 @@ void state_step_end_battle(void) {
             init_item_entity_list();
             init_script_list();
             init_npc_list();
-            func_80110E58();
+            init_entity_data();
             init_trigger_list();
 
             if (gGameStatusPtr->demoFlags & 1) {

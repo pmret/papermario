@@ -20,6 +20,19 @@ void func_8025995C(ActorPart*, s32, Matrix4f);
 void func_8025C918(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx);
 void func_8025CD40(s32, ActorPart*);
 
+void func_8025D150(ActorPart*, s32);
+void func_8025D160(ActorPart*, s32);
+void func_8025D2B0(ActorPart*, s32);
+void func_8025D3CC(ActorPart*, s32);
+void func_8025D4C8(ActorPart*, s32);
+void func_8025D640(ActorPart*, s32);
+void func_8025D71C(ActorPart*, s32);
+void func_8025D830(ActorPart*, s32);
+void func_8025D90C(ActorPart*, s32);
+void func_8025DA68(ActorPart*, s32);
+void func_8025DBD0(ActorPart*, s32);
+void func_8025DD60(ActorPart*, s32);
+
 void func_80259A48(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4);
 void func_80259AAC(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4);
 void func_80259D9C(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4);
@@ -576,7 +589,7 @@ void update_actor_shadow(s32 arg0, Actor* actor) {
 
     if (actor != NULL) {
         shadow = get_shadow_by_index(actor->shadow.id);
-        shadow->flags |= SHADOW_FLAGS_HIDDEN;
+        shadow->flags |= ENTITY_FLAGS_HIDDEN;
         if (!(actor->flags & ACTOR_FLAG_DISABLED)) {
             if (actor->flags & ACTOR_FLAG_10000000) {
                 if (arg0 == 0) {
@@ -626,7 +639,7 @@ void update_actor_shadow(s32 arg0, Actor* actor) {
 
                     if (!(actorPart->flags & ACTOR_PART_FLAG_4)) {
                         shadow = get_shadow_by_index(actorPart->shadowIndex);
-                        shadow->flags &= ~SHADOW_FLAGS_HIDDEN;
+                        shadow->flags &= ~ENTITY_FLAGS_HIDDEN;
                         x1 = actorPart->currentPos.x;
                         if (!(actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW)) {
                             y1 = actorPart->currentPos.y + 12.0;
@@ -639,7 +652,7 @@ void update_actor_shadow(s32 arg0, Actor* actor) {
                         npc_raycast_down_sides(0, &x1, &y1, &z1, &dist);
 
                         if (200.0f < dist) {
-                            shadow->flags |= SHADOW_FLAGS_HIDDEN;
+                            shadow->flags |= ENTITY_FLAGS_HIDDEN;
                         }
                         shadow->position.x = x1;
                         shadow->position.y = y1;
@@ -657,7 +670,7 @@ void update_actor_shadow(s32 arg0, Actor* actor) {
 
             shadow = get_shadow_by_index(actor->shadow.id);
             if (!(actor->flags & ACTOR_FLAG_NO_SHADOW)) {
-                shadow->flags &= ~ACTOR_FLAG_DISABLED;
+                shadow->flags &= ~ENTITY_FLAGS_HIDDEN;
             }
 
             x1 = actor->currentPos.x + actor->headOffset.x;
@@ -672,7 +685,7 @@ void update_actor_shadow(s32 arg0, Actor* actor) {
             npc_raycast_down_sides(0, &x1, &y1, &z1, &dist);
 
             if (200.0f < dist) {
-                shadow->flags |= SHADOW_FLAGS_HIDDEN;
+                shadow->flags |= ENTITY_FLAGS_HIDDEN;
             }
             shadow->position.x = x1;
             shadow->position.y = y1;
@@ -738,7 +751,7 @@ void update_player_actor_shadow(void) {
     }
 
     shadow = get_shadow_by_index(player->shadow.id);
-    shadow->flags &= ~SHADOW_FLAGS_HIDDEN;
+    shadow->flags &= ~ENTITY_FLAGS_HIDDEN;
 
     if (!battleStatus->outtaSightActive) {
         shadow->alpha = 128;
@@ -753,7 +766,7 @@ void update_player_actor_shadow(void) {
     npc_raycast_down_sides(0, &x, &y, &z, &distance);
 
     if (distance > 200.0f) {
-        shadow->flags |= SHADOW_FLAGS_HIDDEN;
+        shadow->flags |= ENTITY_FLAGS_HIDDEN;
     }
     shadow->position.x = x;
     shadow->position.y = y;
@@ -1925,7 +1938,55 @@ void func_8025CD28(s32 arg0, ActorPart* arg1) {
 
 INCLUDE_ASM(s32, "182B30", func_8025CD40);
 
-INCLUDE_ASM(s32, "182B30", func_8025CEC8);
+void func_8025CEC8(ActorPart* actorPart) {
+    DecorationTable* decorationTable;
+    s32 i;
+
+    if (!(actorPart->flags & 2)) {
+        decorationTable = actorPart->decorationTable;
+        for (i = 0; i < ARRAY_COUNT(decorationTable->decorationType); i++) {
+            switch (decorationTable->decorationType[i]) {
+                case 0:
+                    func_8025D150(actorPart, i);
+                    break;
+                case 1:
+                    func_8025D160(actorPart, i);
+                    break;
+                case 2:
+                    func_8025D2B0(actorPart, i);
+                    break;
+                case 3:
+                    func_8025D3CC(actorPart, i);
+                    break;
+                case 4:
+                    func_8025D4C8(actorPart, i);
+                    break;
+                case 5:
+                    func_8025D640(actorPart, i);
+                    break;
+                case 6:
+                    func_8025D71C(actorPart, i);
+                    break;
+                case 7:
+                    func_8025D830(actorPart, i);
+                    break;
+                case 8:
+                    func_8025D90C(actorPart, i);
+                    break;
+                case 9:
+                    func_8025DA68(actorPart, i);
+                    break;
+                case 10:
+                    func_8025DBD0(actorPart, i);
+                    break;
+                case 11:
+                    func_8025DD60(actorPart, i);
+                    break;
+            }
+        }
+    }
+}
+
 
 void _remove_part_decoration(ActorPart* part, s32 decorationIndex) {
     DecorationTable* decorationTable = part->decorationTable;
@@ -1972,7 +2033,7 @@ void _remove_part_decoration(ActorPart* part, s32 decorationIndex) {
     decorationTable->decorationType[decorationIndex] = 0;
 }
 
-void func_8025D150(void) {
+void func_8025D150(ActorPart* actorPart, s32 i) {
 }
 
 void func_8025D158(ActorPart* part, s32 decorationIndex) {

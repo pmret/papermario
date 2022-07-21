@@ -1,5 +1,6 @@
 #include "flo_13.h"
 #include "message_ids.h"
+#include "entity.h"
 #include "sprite/npc/lakilulu.h"
 #include "sprite/npc/lakitu.h"
 #include "sprite/npc/spiny.h"
@@ -104,7 +105,7 @@ EvtScript N(makeEntities) = {
     EVT_CALL(MakeItemEntity, ITEM_MEGA_SMASH, -61, 60, -85, 17, EVT_SAVE_FLAG(1385))
     EVT_CALL(MakeItemEntity, ITEM_SHOOTING_STAR, 128, 0, 157, 17, EVT_SAVE_FLAG(1386))
     EVT_IF_EQ(EVT_SAVE_FLAG(1385), 0)
-        EVT_CALL(MakeEntity, 0x802BCF00, -160, 160, -90, 0, MAKE_ENTITY_END)
+        EVT_CALL(MakeEntity, EVT_PTR(Entity_BombableRock), -160, 160, -90, 0, MAKE_ENTITY_END)
         EVT_CALL(AssignScript, EVT_PTR(N(80243950)))
     EVT_ELSE
         EVT_CALL(ModifyColliderFlags, 0, 14, 0x7FFFFE00)

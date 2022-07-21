@@ -49,7 +49,7 @@ void music_note_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3) {
 
     effect = shim_create_effect_instance(bpPtr);
     effect->numParts = numParts;
-    
+
     part = effect->data = shim_general_heap_malloc(numParts * sizeof(*part));
 
     ASSERT(effect->data != NULL);
@@ -124,7 +124,7 @@ void music_note_render(EffectInstance* effect) {
     renderTask.renderMode = RENDER_MODE_2D;
 
     retTask = shim_queue_render_task(&renderTask);
-    retTask->renderMode |= RENDER_MODE_2;
+    retTask->renderMode |= RENDER_TASK_FLAG_2;
 }
 
 INCLUDE_ASM(s32, "effects/music_note", music_note_appendGfx);

@@ -1,6 +1,7 @@
 #include "dgb_15.h"
 #include "message_ids.h"
 #include "sprite/npc/world_tubba.h"
+#include "entity.h"
 
 enum {
     NPC_WORLD_TUBBA,
@@ -456,7 +457,7 @@ EvtScript N(80242C38) = {
 
 EvtScript N(makeEntities) = {
     EVT_IF_EQ(EVT_SAVE_FLAG(1066), 0)
-        EVT_CALL(MakeEntity, 0x802BCD68, 130, 8, 175, -80, MAKE_ENTITY_END)
+        EVT_CALL(MakeEntity, EVT_PTR(Entity_Padlock), 130, 8, 175, -80, MAKE_ENTITY_END)
         EVT_CALL(AssignScript, EVT_PTR(N(80242C38)))
         EVT_SET(EVT_MAP_VAR(0), EVT_VAR(0))
     EVT_END_IF

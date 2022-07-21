@@ -261,7 +261,7 @@ void item_entity_disable_shadow(ItemEntity* itemEntity) {
     itemEntity->flags |= ITEM_ENTITY_FLAGS_40;
     if (itemEntity->shadowIndex >= 0) {
         shadow = get_shadow_by_index(itemEntity->shadowIndex);
-        shadow->flags |= SHADOW_FLAGS_HIDDEN;
+        shadow->flags |= ENTITY_FLAGS_HIDDEN;
     }
 }
 
@@ -271,7 +271,7 @@ void item_entity_enable_shadow(ItemEntity* itemEntity) {
     itemEntity->flags &= ~ITEM_ENTITY_FLAGS_40;
     if (itemEntity->shadowIndex >= 0) {
         shadow = get_shadow_by_index(itemEntity->shadowIndex);
-        shadow->flags &= ~SHADOW_FLAGS_HIDDEN;
+        shadow->flags &= ~ENTITY_FLAGS_HIDDEN;
     }
 }
 
@@ -541,7 +541,7 @@ s32 make_item_entity(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pic
             shadow = get_shadow_by_index(itemEntity->shadowIndex);
 
             if (itemEntity->spawnType == ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS) {
-                shadow->flags |= SHADOW_FLAGS_HIDDEN;
+                shadow->flags |= ENTITY_FLAGS_HIDDEN;
             }
 
             x = itemEntity->position.x;
@@ -644,7 +644,7 @@ s32 make_item_entity_at_player(s32 itemID, s32 arg1, s32 pickupMsgFlags) {
 
     item->shadowIndex = create_shadow_type(0, item->position.x, item->position.y, item->position.z);
     shadow = get_shadow_by_index(item->shadowIndex);
-    shadow->flags |= 1;
+    shadow->flags |= ENTITY_FLAGS_HIDDEN;
 
     posX = item->position.x;
     posY = item->position.y + 12.0f;
@@ -787,7 +787,7 @@ void draw_item_entities(void) {
             rtPtr->distance = 0;
 
             retTask = queue_render_task(rtPtr);
-            retTask->renderMode |= RENDER_MODE_2;
+            retTask->renderMode |= RENDER_TASK_FLAG_2;
         }
 
         do {} while (0); // required to match

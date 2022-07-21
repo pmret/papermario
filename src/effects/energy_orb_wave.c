@@ -30,7 +30,7 @@ void energy_orb_wave_render(EffectInstance* effect) {
     }
 
     retTask = shim_queue_render_task(renderTaskPointer);
-    retTask->renderMode |= RENDER_MODE_2;
+    retTask->renderMode |= RENDER_TASK_FLAG_2;
 }
 
 void func_E00A4648(void) {
