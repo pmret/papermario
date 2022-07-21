@@ -743,9 +743,9 @@ ApiStatus DisablePulseStone(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (evt_get_variable(script, *script->ptrReadPos)) {
-        playerStatus->animFlags &= ~0x80;
+        playerStatus->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_USING_PULSE_STONE;
     } else {
-        playerStatus->animFlags |= 0x80;
+        playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_USING_PULSE_STONE;
     }
 
     return ApiStatus_DONE2;
@@ -753,7 +753,7 @@ ApiStatus DisablePulseStone(Evt* script, s32 isInitialCall) {
 
 ApiStatus GetCurrentPartner(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    Bytecode a0 = *args;
+    Bytecode outVar = *args++;
     PlayerData* playerData = &gPlayerData;
     s32 currentPartner = 0;
 
@@ -761,21 +761,21 @@ ApiStatus GetCurrentPartner(Evt* script, s32 isInitialCall) {
         currentPartner = playerData->currentPartner;
     }
 
-    evt_set_variable(script, a0, currentPartner);
+    evt_set_variable(script, outVar, currentPartner);
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_802D2B50(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    playerStatus->animFlags |= 8;
+    playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_8;
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_802D2B6C(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    playerStatus->animFlags |= 4;
+    playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_4;
     return ApiStatus_DONE2;
 }
 
@@ -786,11 +786,13 @@ ApiStatus Disable8bitMario(Evt* script, s32 isInitialCall) {
     if (evt_get_variable(script, *args)) {
         playerStatus->colliderHeight = 37;
         playerStatus->colliderDiameter = 26;
-        playerStatus->animFlags &= ~0x4000;
+        playerStatus->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_8BIT_MARIO;
     } else {
         playerStatus->colliderHeight = 19;
         playerStatus->colliderDiameter = 26;
-        playerStatus->animFlags |= 0x44004;
+        playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_8BIT_MARIO
+            | PLAYER_STATUS_ANIM_FLAGS_40000
+            | PLAYER_STATUS_ANIM_FLAGS_4;
     }
 
     return ApiStatus_DONE2;
@@ -848,13 +850,13 @@ void virtual_entity_render_quad(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4
     virtual_entity_appendGfx_quad(arg0, arg1, arg2, arg3, arg4, arg5, temp1, temp2);
 }
 
-void virtual_entity_move_polar(VirtualEntity* virtualEntity, f32 arg1, f32 arg2) {
-    f32 theta = (arg2 * TAU) / 360.0f;
+void virtual_entity_move_polar(VirtualEntity* virtualEntity, f32 magnitude, f32 angle) {
+    f32 theta = (angle * TAU) / 360.0f;
     f32 sinTheta = sin_rad(theta);
     f32 cosTheta = cos_rad(theta);
 
-    virtualEntity->pos.x += arg1 * sinTheta;
-    virtualEntity->pos.z += -arg1 * cosTheta;
+    virtualEntity->pos.x += magnitude * sinTheta;
+    virtualEntity->pos.z += -magnitude * cosTheta;
 }
 
 void virtual_entity_list_update(void) {
@@ -874,11 +876,11 @@ void virtual_entity_list_render_world(void) {
     Matrix4f xRot;
     Matrix4f yRot;
     Matrix4f zRot;
-    Matrix4f sp118;
-    Matrix4f sp158;
-    Matrix4f sp198;
+    Matrix4f rotation;
+    Matrix4f temp;
+    Matrix4f transform;
     Matrix4f scale;
-    Mtx sp218;
+    Mtx transformMtxL;
     VirtualEntity* virtualEntity;
     s32 i;
 
@@ -891,12 +893,12 @@ void virtual_entity_list_render_world(void) {
                 guRotateF(yRot, virtualEntity->rot.y, 0.0f, 1.0f, 0.0f);
                 guRotateF(zRot, virtualEntity->rot.z, 0.0f, 0.0f, 1.0f);
                 guScaleF(scale, virtualEntity->scale.x, virtualEntity->scale.y, virtualEntity->scale.z);
-                guMtxCatF(zRot, xRot, sp158);
-                guMtxCatF(sp158, yRot, sp118);
-                guMtxCatF(scale, sp118, sp158);
-                guMtxCatF(sp158, translation, sp198);
-                guMtxF2L(sp198, &sp218);
-                draw_entity_model_A(virtualEntity->entityModelIndex, &sp218);
+                guMtxCatF(zRot, xRot, temp);
+                guMtxCatF(temp, yRot, rotation);
+                guMtxCatF(scale, rotation, temp);
+                guMtxCatF(temp, translation, transform);
+                guMtxF2L(transform, &transformMtxL);
+                draw_entity_model_A(virtualEntity->entityModelIndex, &transformMtxL);
             }
         }
     }
@@ -907,11 +909,11 @@ void virtual_entity_list_render_UI(void) {
     Matrix4f xRot;
     Matrix4f yRot;
     Matrix4f zRot;
-    Matrix4f sp118;
-    Matrix4f sp158;
-    Matrix4f sp198;
+    Matrix4f rotation;
+    Matrix4f temp;
+    Matrix4f transform;
     Matrix4f scale;
-    Mtx sp218;
+    Mtx transformMtxL;
     VirtualEntity* virtualEntity;
     s32 i;
 
@@ -924,12 +926,12 @@ void virtual_entity_list_render_UI(void) {
                 guRotateF(yRot, virtualEntity->rot.y, 0.0f, 1.0f, 0.0f);
                 guRotateF(zRot, virtualEntity->rot.z, 0.0f, 0.0f, 1.0f);
                 guScaleF(scale, virtualEntity->scale.x, virtualEntity->scale.y, virtualEntity->scale.z);
-                guMtxCatF(zRot, xRot, sp158);
-                guMtxCatF(sp158, yRot, sp118);
-                guMtxCatF(scale, sp118, sp158);
-                guMtxCatF(sp158, translation, sp198);
-                guMtxF2L(sp198, &sp218);
-                draw_entity_model_E(virtualEntity->entityModelIndex, &sp218);
+                guMtxCatF(zRot, xRot, temp);
+                guMtxCatF(temp, yRot, rotation);
+                guMtxCatF(scale, rotation, temp);
+                guMtxCatF(temp, translation, transform);
+                guMtxF2L(transform, &transformMtxL);
+                draw_entity_model_E(virtualEntity->entityModelIndex, &transformMtxL);
             }
         }
     }
