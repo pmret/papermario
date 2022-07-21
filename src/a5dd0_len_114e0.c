@@ -4101,7 +4101,7 @@ void get_model_fog_color_parameters(u8* primR, u8* primG, u8* primB, u8* primA, 
     *fogEnd = mdl_renderModelFogEnd;
 }
 
-void set_model_env_color_parameters(u8 primR, u8 primG, u8 primB, u8 envR, s32 envG, s32 envB) {
+void set_model_env_color_parameters(u8 primR, u8 primG, u8 primB, u8 envR, u8 envG, u8 envB) {
     gRenderModelPrimR = primR;
     gRenderModelPrimG = primG;
     gRenderModelPrimB = primB;

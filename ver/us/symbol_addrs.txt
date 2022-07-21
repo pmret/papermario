@@ -26228,6 +26228,7 @@ D_802440F4 = 0x802440F4; // type:data
 D_802440F7 = 0x802440F7; // type:data
 D_802440F8 = 0x802440F8; // type:data
 D_802440FB = 0x802440FB; // type:data
+D_802440FC = 0x802440FC; // type:data
 dgb_08_pad_40FC = 0x802440FC; // type:data
 D_802440FF = 0x802440FF; // type:data
 D_80244100 = 0x80244100; // type:data
