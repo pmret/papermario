@@ -321,7 +321,7 @@ ApiStatus ShowKeyChoicePopup(Evt* script, s32 isInitialCall) {
                 script->varTable[0] = 0;
                 return ApiStatus_DONE1;
             }
-            menu->popupType = 0xC;
+            menu->popupType = POPUP_MENU_USEKEY;
             menu->numEntries = numEntries;
             menu->initialPos = 0;
             create_popup_menu(menu);
@@ -412,7 +412,7 @@ ApiStatus ShowConsumableChoicePopup(Evt* script, s32 isInitialCall) {
                 script->varTable[0] = 0;
                 return ApiStatus_DONE1;
             }
-            menu->popupType = 0xC;
+            menu->popupType = POPUP_MENU_USEKEY;
             menu->numEntries = numEntries;
             menu->initialPos = 0;
             create_popup_menu(menu);

@@ -1441,7 +1441,7 @@ typedef struct ShopItemLocation {
 typedef struct ShopItemData {
     /* 0x0 */ u32 itemID;
     /* 0x4 */ s32 price;
-    /* 0x8 */ s32 unk_08;
+    /* 0x8 */ s32 descMsg;
 } ShopItemData; // size = 0xC
 
 typedef struct ShopSellPriceData {

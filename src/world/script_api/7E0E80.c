@@ -750,7 +750,7 @@ void shop_draw_item_desc(s32 arg0, s32 posX, s32 posY) {
     Shop* shop = gGameStatusPtr->mapShop;
     ShopItemData* shopItem = &shop->staticInventory[shop->currentItemSlot];
 
-    draw_msg(shopItem->unk_08, posX + 8, posY, 255, 0xA, 0);
+    draw_msg(shopItem->descMsg, posX + 8, posY, 255, 0xA, 0);
 }
 
 extern void draw_shop_items(void);
