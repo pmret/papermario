@@ -695,7 +695,7 @@ s32 popup_menu_update(void) {
                 set_window_update(WINDOW_ID_21, WINDOW_UPDATE_HIDE);
             }
             width = get_msg_width(0x1D006B, 0) + 23;
-            set_window_properties(9, 160 - (width / 2), 0x50, width, 0x28, 0x14, func_800F4CF0, NULL, -1);
+            set_window_properties(WINDOW_ID_9, 160 - (width / 2), 0x50, width, 0x28, 0x14, func_800F4CF0, NULL, -1);
             set_window_update(WINDOW_ID_9, WINDOW_UPDATE_SHOW);
             D_8010D644 = 0x3C;
             D_8010D640 = 0x20;
@@ -772,7 +772,7 @@ s32 popup_menu_update(void) {
                 msgID = 0x1D0069;
             }
             width = get_msg_width(msgID, 0) + 23;
-            set_window_properties(0x15, 160 - (width / 2), 76, width, 32, 0x13, func_800F4C1C, NULL, -1);
+            set_window_properties(WINDOW_ID_21, 160 - (width / 2), 76, width, 32, 0x13, func_800F4C1C, NULL, -1);
             set_window_update(WINDOW_ID_21, WINDOW_UPDATE_SHOW);
             D_8010D6A0 = msg_get_printer_for_msg(0x1E001D, &D_8010D6A4);
             msg_printer_set_origin_pos(D_8010D6A0, 160, 0x90);

@@ -612,10 +612,10 @@ void _use_partner_ability(void) {
                     disable_player_input();
                     sfx_play_sound(SOUND_D);
                     kill_script_by_ID(wPartnerCurrentScriptID);
-                    wPartnerCurrentScript = start_script(wPartner->putAway, 0x14, 0x20);
+                    wPartnerCurrentScript = start_script(wPartner->putAway, EVT_PRIORITY_14, EVT_FLAG_20);
                     wPartnerCurrentScript->owner2.npc = wPartnerNpc;
                     wPartnerCurrentScriptID = wPartnerCurrentScript->id;
-                    wPartnerCurrentScript->groupFlags = 0xA;
+                    wPartnerCurrentScript->groupFlags = EVT_GROUP_08 | EVT_GROUP_02;
                     D_8010CD34 += 1;
                     set_time_freeze_mode(1);
                     break;
@@ -631,10 +631,10 @@ void _use_partner_ability(void) {
                     wPartner->init(wPartnerNpc);
                     D_8010CD34 += 1;
                 case 2:
-                    wPartnerCurrentScript = start_script(wPartner->takeOut, 0x14, 0x20);
+                    wPartnerCurrentScript = start_script(wPartner->takeOut, EVT_PRIORITY_14, EVT_FLAG_20);
                     wPartnerCurrentScript->owner2.npc = wPartnerNpc;
                     wPartnerCurrentScriptID = wPartnerCurrentScript->id;
-                    wPartnerCurrentScript->groupFlags = 0xA;
+                    wPartnerCurrentScript->groupFlags = EVT_GROUP_08 | EVT_GROUP_02;
                     D_8010CD34 += 1;
                     set_time_freeze_mode(1);
                     break;
@@ -642,10 +642,10 @@ void _use_partner_ability(void) {
                     if (does_script_exist(wPartnerCurrentScriptID)) {
                         break;
                     }
-                    wPartnerCurrentScript = start_script(wPartner->update, 0x14, 0x20);
+                    wPartnerCurrentScript = start_script(wPartner->update, EVT_PRIORITY_14, EVT_FLAG_20);
                     wPartnerCurrentScript->owner2.npc = wPartnerNpc;
                     wPartnerCurrentScriptID = wPartnerCurrentScript->id;
-                    wPartnerCurrentScript->groupFlags = 0xA;
+                    wPartnerCurrentScript->groupFlags = EVT_GROUP_08 | EVT_GROUP_02;
                     D_8010CD30 = 1;
                     enable_player_input();
                     set_time_freeze_mode(0);
@@ -675,10 +675,10 @@ void _use_partner_ability(void) {
                     D_8010CD34 += 1;
                     break;
                 case 3:
-                    wPartnerCurrentScript = start_script(wPartner->update, 0x14, 0x20);
+                    wPartnerCurrentScript = start_script(wPartner->update, EVT_PRIORITY_14, EVT_FLAG_20);
                     wPartnerCurrentScript->owner2.npc = wPartnerNpc;
                     wPartnerCurrentScriptID = wPartnerCurrentScript->id;
-                    wPartnerCurrentScript->groupFlags = 0xA;
+                    wPartnerCurrentScript->groupFlags = EVT_GROUP_08 | EVT_GROUP_02;
                     D_8010CD30 = 1;
                     break;
             }
@@ -689,10 +689,10 @@ void _use_partner_ability(void) {
                     disable_player_input();
                     sfx_play_sound(SOUND_D);
                     kill_script_by_ID(wPartnerCurrentScriptID);
-                    wPartnerCurrentScript = start_script(wPartner->putAway, 0x14, 0x20);
+                    wPartnerCurrentScript = start_script(wPartner->putAway, EVT_PRIORITY_14, EVT_FLAG_20);
                     wPartnerCurrentScript->owner2.npc = wPartnerNpc;
                     wPartnerCurrentScriptID = wPartnerCurrentScript->id;
-                    wPartnerCurrentScript->groupFlags = 0xA;
+                    wPartnerCurrentScript->groupFlags = EVT_GROUP_08 | EVT_GROUP_02;
                     D_8010CD34 += 1;
                     break;
                 case 1:
@@ -724,20 +724,20 @@ void _use_partner_ability(void) {
                     wPartner->init(wPartnerNpc);
                     D_8010CD34 += 1;
                 case 1:
-                    wPartnerCurrentScript = start_script(wPartner->takeOut, 0x14, 0x20);
+                    wPartnerCurrentScript = start_script(wPartner->takeOut, EVT_PRIORITY_14, EVT_FLAG_20);
                     wPartnerCurrentScript->owner2.npc = wPartnerNpc;
                     wPartnerCurrentScriptID = wPartnerCurrentScript->id;
-                    wPartnerCurrentScript->groupFlags = 0xA;
+                    wPartnerCurrentScript->groupFlags = EVT_GROUP_08 | EVT_GROUP_02;
                     D_8010CD34 += 1;
                     break;
                 case 2:
                     if (does_script_exist(wPartnerCurrentScriptID)) {
                         break;
                     }
-                    wPartnerCurrentScript = start_script(wPartner->update, 0x14, 0x20);
+                    wPartnerCurrentScript = start_script(wPartner->update, EVT_PRIORITY_14, EVT_FLAG_20);
                     wPartnerCurrentScript->owner2.npc = wPartnerNpc;
                     wPartnerCurrentScriptID = wPartnerCurrentScript->id;
-                    wPartnerCurrentScript->groupFlags = 0xA;
+                    wPartnerCurrentScript->groupFlags = EVT_GROUP_08 | EVT_GROUP_02;
                     D_8010CD30 = 1;
                     enable_player_input();
                     break;
@@ -761,10 +761,10 @@ void _use_partner_ability(void) {
                     D_8010CD34 += 1;
                     break;
                 case 1:
-                    wPartnerCurrentScript = start_script(wPartner->update, 0x14, 0x20);
+                    wPartnerCurrentScript = start_script(wPartner->update, EVT_PRIORITY_14, EVT_FLAG_20);
                     wPartnerCurrentScript->owner2.npc = wPartnerNpc;
                     wPartnerCurrentScriptID = wPartnerCurrentScript->id;
-                    wPartnerCurrentScript->groupFlags = 0xA;
+                    wPartnerCurrentScript->groupFlags = EVT_GROUP_08 | EVT_GROUP_02;
                     D_8010CD30 = 1;
                     wPartnerNpc->currentAnim.w = gPartnerAnimations[D_8010CFD8].anims[4];
                     enable_player_input();
@@ -775,20 +775,20 @@ void _use_partner_ability(void) {
             switch (D_8010CD34) {
                 case 0:
                     kill_script_by_ID(wPartnerCurrentScriptID);
-                    wPartnerCurrentScript = start_script(wPartner->useAbility, 0x14, 0x20);
+                    wPartnerCurrentScript = start_script(wPartner->useAbility, EVT_PRIORITY_14, EVT_FLAG_20);
                     wPartnerCurrentScript->owner2.npc = wPartnerNpc;
                     wPartnerCurrentScriptID = wPartnerCurrentScript->id;
-                    wPartnerCurrentScript->groupFlags = 0xA;
+                    wPartnerCurrentScript->groupFlags = EVT_GROUP_08 | EVT_GROUP_02;
                     D_8010CD34 += 1;
                     break;
                 case 1:
                     if (does_script_exist(wPartnerCurrentScriptID)) {
                         break;
                     }
-                    wPartnerCurrentScript = start_script(wPartner->update, 0x14, 0x20);
+                    wPartnerCurrentScript = start_script(wPartner->update, EVT_PRIORITY_14, EVT_FLAG_20);
                     wPartnerCurrentScript->owner2.npc = wPartnerNpc;
                     wPartnerCurrentScriptID = wPartnerCurrentScript->id;
-                    wPartnerCurrentScript->groupFlags = 0xA;
+                    wPartnerCurrentScript->groupFlags = EVT_GROUP_08 | EVT_GROUP_02;
                     D_8010CD30 = 1;
                     break;
             }
@@ -808,10 +808,10 @@ void _use_partner_ability(void) {
                         wSavedPartnerPosX = playerStatus->position.x;
                         wSavedPartnerPosY = playerStatus->position.y;
                         wSavedPartnerPosZ = playerStatus->position.z;
-                        wPartnerCurrentScript = start_script(wPartner->update, 0x14, 0x20);
+                        wPartnerCurrentScript = start_script(wPartner->update, EVT_PRIORITY_14, EVT_FLAG_20);
                         wPartnerCurrentScript->owner2.npc = wPartnerNpc;
                         wPartnerCurrentScriptID = wPartnerCurrentScript->id;
-                        wPartnerCurrentScript->groupFlags = 0xA;
+                        wPartnerCurrentScript->groupFlags = EVT_GROUP_08 | EVT_GROUP_02;
                     }
                     enable_player_input();
                     D_8010CD30 = 1;
@@ -1022,7 +1022,7 @@ void partner_handle_after_battle(void) {
         wPartnerCurrentScript = start_script(wPartner->update, EVT_PRIORITY_14, EVT_FLAG_20);
         wPartnerCurrentScript->owner2.npc = wPartnerNpc;
         wPartnerCurrentScriptID = wPartnerCurrentScript->id;
-        wPartnerCurrentScript->groupFlags = (EVT_GROUP_02 | EVT_GROUP_08);
+        wPartnerCurrentScript->groupFlags = EVT_GROUP_08 | EVT_GROUP_02;
 
         D_8010CFE8 = 1;
 
