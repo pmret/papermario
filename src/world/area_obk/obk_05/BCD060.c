@@ -10,7 +10,7 @@ static char* N(exit_str_1) = "obk_06";
 
 #include "world/common/SetCamera0MoveFlag1.inc.c"
 
-ApiStatus RetroJar_AwaitPlayerEntry(Evt* script, s32 isInitialCall) {
+ApiStatus N(RetroJar_AwaitPlayerEntry)(Evt* script, s32 isInitialCall) {
     if (gCollisionStatus.currentFloor == COLLIDER_o420) {
         return ApiStatus_DONE2;
     } else {
@@ -18,7 +18,7 @@ ApiStatus RetroJar_AwaitPlayerEntry(Evt* script, s32 isInitialCall) {
     }
 }
 
-ApiStatus RockingChair_UpdatePhysics(Evt* script, s32 isInitialCall) {
+ApiStatus N(RockingChair_UpdatePhysics)(Evt* script, s32 isInitialCall) {
     typedef struct RockingChairPhysics {
         /* 0x00 */ f32 angleDelta;
         /* 0x04 */ f32 angularAccel;

@@ -1,6 +1,8 @@
 #include "hos_05.h"
 
 void set_model_fog_color_parameters(u8 var2, u8 var3, u8 var4, u8 var5, u8 var6, u8 var7, u8 var8, s32 var9, s32 var10);
+void set_model_env_color_parameters(u8 primR, u8 primG, u8 primB, u8 envR, u8 envG, u8 envB);
+void get_model_env_color_parameters(u8* primR, u8* primG, u8* primB, u8* envR, u8* envG, u8* envB);
 
 ApiStatus func_80240880_A2AAC0(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -18,7 +20,48 @@ ApiStatus func_80240880_A2AAC0(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_802409C4_A2AC04);
+ApiStatus func_802409C4_A2AC04(Evt* script, s32 isInitialCall) {
+    Bytecode* args;
+    static u8 oldPrimR, oldPrimG, oldPrimB;
+    static u8 oldEnvR, oldEnvG, oldEnvB;
+    static s32 newPrimR, newPrimG, newPrimB;
+    static s32 newEnvR, newEnvG, newEnvB;
+    static s32 duration, time;
+
+    args = script->ptrReadPos;
+    if (isInitialCall) {
+        get_model_env_color_parameters(&oldPrimR, &oldPrimG, &oldPrimB, &oldEnvR, &oldEnvG, &oldEnvB);
+        newPrimR = evt_get_variable(script, *args++);
+        newPrimG = evt_get_variable(script, *args++);
+        newPrimB = evt_get_variable(script, *args++);
+        newEnvR = evt_get_variable(script, *args++);
+        newEnvG = evt_get_variable(script, *args++);
+        newEnvB = evt_get_variable(script, *args++);
+        duration = evt_get_variable(script, *args++);
+        time = 0;
+    }
+    
+    if (duration > 0) {
+        if(time >= duration) {
+            return ApiStatus_DONE2;
+        }
+        time++;
+        set_model_env_color_parameters(
+            (oldPrimR + ((newPrimR - oldPrimR) * time) / duration),
+            (oldPrimG + ((newPrimG - oldPrimG) * time) / duration),
+            (oldPrimB + ((newPrimB - oldPrimB) * time) / duration),
+            (oldEnvR  + ( (newEnvR - oldEnvR)  * time) / duration),
+            (oldEnvG  + ( (newEnvG - oldEnvG)  * time) / duration),
+            (oldEnvB  + ( (newEnvB - oldEnvB)  * time) / duration));
+        if (time >= duration) {
+            return ApiStatus_DONE2;
+        }
+    } else {
+        set_model_env_color_parameters(newPrimR, newPrimG, newPrimB, newEnvR, newEnvG, newEnvB);
+        return ApiStatus_DONE2;
+    }
+    return ApiStatus_BLOCK;
+}
 
 void func_80240D54_A2AF94(s32 camID, f32 fov) {
     Camera* camera = &gCameras[camID];

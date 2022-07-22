@@ -13,6 +13,8 @@ typedef ApiStatus(*ApiFunc)(struct Evt*, s32);
 
 typedef Bytecode EvtScript[0];
 
+typedef void NoArgCallback(void*);
+
 typedef struct {
     u8 r, g, b, a;
 } Color_RGBA8;

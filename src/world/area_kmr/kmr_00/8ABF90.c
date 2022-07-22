@@ -7,6 +7,7 @@ static char* N(exit_str_1) = "kmr_02\0";
 extern s16 D_80242D60_8AECF0[8];
 
 void set_model_env_color_parameters(u8 primR, u8 primG, u8 primB, u8 envR, u8 envG, u8 envB);
+void get_model_env_color_parameters(u8* primR, u8* primG, u8* primB, u8* envR, u8* envG, u8* envB);
 
 ApiStatus func_80240000_8ABF90(Evt* script, s32 isInitialCall) {
     Bytecode* args;
