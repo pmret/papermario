@@ -65,9 +65,4 @@ MapConfig* get_current_map_header(void);
 /// Zero-terminated.
 extern Area gAreas[29];
 
-/// Lists the songs that are forced to use the variation determined by `map.songVariation & 1`.
-/// @see bgm_get_map_default_variation
-extern s32 gSongsUsingVariationFlag[6];
-extern s16 gNextVolumeUpdateTimer;
-
 #endif

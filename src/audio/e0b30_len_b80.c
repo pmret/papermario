@@ -27,7 +27,9 @@ MusicSettings BlankMusicSettings = {
     .savedSongName = 0
 };
 
-s32 gSongsUsingVariationFlag[] = {
+/// Lists the songs that are forced to use the variation determined by `map.songVariation & 1`.
+/// @see bgm_get_map_default_variation
+s32 SongsUsingVariationFlag[] = {
     SONG_SPECIAL_BATTLE,
     SONG_TUBBA_BLUBBA_BATTLE,
     SONG_JR_TROOPA_BATTLE,
@@ -36,18 +38,18 @@ s32 gSongsUsingVariationFlag[] = {
     SONG_NEW_PARTNER,
 };
 
-s16 gNextVolumeUpdateTimer = 0;
+s16 NextVolumeUpdateTimer = 0;
 
-/// If the given song ID is present in gSongsUsingVariationFlag, returns the current
+/// If the given song ID is present in SongsUsingVariationFlag, returns the current
 /// map's `songVariation & 1` value. Otherwise, returns -1.
 ///
-/// @see gSongsUsingVariationFlag
+/// @see SongsUsingVariationFlag
 /// @returns -1: no override; 0: override to variation 0; 1 override to variation 1
 s32 bgm_get_map_default_variation(s32 songID) {
     u32 i;
 
-    for (i = 0; i < ARRAY_COUNT(gSongsUsingVariationFlag); i++) {
-        if (gSongsUsingVariationFlag[i] == songID) {
+    for (i = 0; i < ARRAY_COUNT(SongsUsingVariationFlag); i++) {
+        if (SongsUsingVariationFlag[i] == songID) {
             Map* map = &gAreas[gGameStatusPtr->areaID].maps[gGameStatusPtr->mapID];
 
             return map->unk_1C.bytes.songVariation & 1;
@@ -334,8 +336,8 @@ void bgm_set_target_volume(s16 volume) {
 void bgm_update_volume(void) {
     s16 toVolume;
 
-    if (gNextVolumeUpdateTimer != 0) {
-        gNextVolumeUpdateTimer--;
+    if (NextVolumeUpdateTimer != 0) {
+        NextVolumeUpdateTimer--;
         return;
     }
 
@@ -351,7 +353,7 @@ void bgm_update_volume(void) {
             MusicCurrentVolume++;
         }
         func_800561A4(MusicCurrentVolume);
-        gNextVolumeUpdateTimer = 3;
+        NextVolumeUpdateTimer = 3;
     }
 }
 
