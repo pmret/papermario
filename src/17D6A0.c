@@ -1528,7 +1528,7 @@ void close_action_command_instruction_popup(void) {
 void func_8024FB3C(void* data) {
     PopupMessage* popup = data;
     BattleStatus* battleStatus = &gBattleStatus;
-    s32 bDisposeWindow = FALSE;
+    s32 shouldDisposeWindow = FALSE;
 
     s32 temp_a0;
 
@@ -1605,7 +1605,7 @@ void func_8024FB3C(void* data) {
                     }
                     break;
                 case 4:
-                    bDisposeWindow = TRUE;
+                    shouldDisposeWindow = TRUE;
                     break;
                 case 3:
                     popup->unk_16 = 4;
@@ -1637,7 +1637,7 @@ void func_8024FB3C(void* data) {
             D_8029F64A = TRUE;
             if (temp_a0 == 0) {
                 D_8029F64A = FALSE;
-                bDisposeWindow = TRUE;
+                shouldDisposeWindow = TRUE;
                 break;
             }
 
@@ -1923,7 +1923,7 @@ void func_8024FB3C(void* data) {
                                         break;
                                 }
                                 D_8029F64A = FALSE;
-                                bDisposeWindow = TRUE;
+                                shouldDisposeWindow = TRUE;
                             }
                         }
                     }
@@ -1960,7 +1960,7 @@ void func_8024FB3C(void* data) {
                     popup->unk_16 = 4;
                     break;
                 case 4:
-                    bDisposeWindow = TRUE;
+                    shouldDisposeWindow = TRUE;
                     break;
             }
             break;
@@ -2017,13 +2017,13 @@ void func_8024FB3C(void* data) {
                         popup->duration--;
                         break;
                     }
-                    bDisposeWindow = TRUE;
+                    shouldDisposeWindow = TRUE;
                     hud_element_free(D_8029F642);
                     break;
             }
             break;
     }
-    if (bDisposeWindow) {
+    if (shouldDisposeWindow) {
         set_window_update(WINDOW_ID_9, WINDOW_UPDATE_HIDE);
         D_802838F8 = NULL;
         free_popup(popup);

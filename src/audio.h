@@ -2,6 +2,7 @@
 #define _AUDIO_H_
 #include "nu/nusys.h"
 #include "nu/nualsgi.h"
+#include "PR/n_abi.h"
 #include "common.h"
 
 // temporary to keep track of unk portions of alUnk structs (not just unk fields)
@@ -962,12 +963,12 @@ typedef struct BGMPlayer {
 } BGMPlayer; // size = 0xA9C
 
 typedef struct AlUnkMSEQData {
-    u8 unk_00;
-    u8 unk_01;
-    s16 unk_02;
-    s16 unk_04;
-    u16 unk_06;
-} AlUnkMSEQData;
+    /* 0x0 */ u8 unk_00;
+    /* 0x1 */ u8 unk_01;
+    /* 0x2 */ s16 unk_02;
+    /* 0x4 */ s16 unk_04;
+    /* 0x6 */ u16 unk_06;
+} AlUnkMSEQData; // size = 0x8
 
 typedef struct MSEQHeader {
     /* 0x00 */ s32 signature; // 'MSEQ '
@@ -998,11 +999,11 @@ typedef struct AlUnkXi {
 } AlUnkXi; // size = 0x28
 
 typedef struct AlUnkOmega {
-    u8 unk_00;
-    u8 unk_01;
-    s8 unk_02;
-    s8 unk__03;
-} AlUnkOmega;
+    /* 0x0 */ u8 unk_00;
+    /* 0x1 */ u8 unk_01;
+    /* 0x2 */ s8 unk_02;
+    /* 0x4 */ s8 unk__03;
+} AlUnkOmega; // size = 0x4
 
 typedef struct AlUnkIota {
     /* 0x00 */ Q32 unk_00;
@@ -1110,85 +1111,6 @@ extern s16 D_800A3FEE;
 extern s32 D_800A3FF0;
 
 #include "audio/private.h"
-
-#define	n_aADPCMdec(pkt, s, f, c, a, d)					\
-{									\
-	Acmd *_a = (Acmd *)pkt;						\
-									\
-	_a->words.w0 = (_SHIFTL(A_ADPCM, 24, 8) | _SHIFTL(s, 0, 24));   \
-	_a->words.w1 = (_SHIFTL(f, 28, 4) | _SHIFTL(c, 16, 12) |        \
-			_SHIFTL(a, 12, 4) | _SHIFTL(d, 0, 12));         \
-}
-
-#define n_aPoleFilter(pkt, f, g, t, s)					\
-{									\
-	Acmd *_a = (Acmd *)pkt;						\
-									\
-	_a->words.w0 = (_SHIFTL(A_POLEF, 24, 8) | _SHIFTL(f, 16, 8) |	\
-			_SHIFTL(g, 0, 16)); 				\
-	_a->words.w1 = (_SHIFTL(t, 24, 8) |                             \
-			_SHIFTL((unsigned int)(s), 0, 24));		\
-}
-
-#define n_aEnvMixer(pkt, f, t, s)						\
-{									\
-	Acmd *_a = (Acmd *)pkt;						\
-									\
-	_a->words.w0 = (_SHIFTL(A_ENVMIXER, 24, 8) | _SHIFTL(f, 16, 8) |\
-			_SHIFTL(t, 0, 16));                     	\
-	_a->words.w1 = (unsigned int)(s);				\
-}
-
-#define n_aInterleave(pkt)						\
-{									\
-	Acmd *_a = (Acmd *)pkt;						\
-									\
-	_a->words.w0 = _SHIFTL(A_INTERLEAVE, 24, 8);    		\
-}
-
-#define n_aLoadBuffer(pkt, c, d, s)						\
-{									\
-	Acmd *_a = (Acmd *)pkt;						\
-									\
-	_a->words.w0 = (_SHIFTL(A_LOADBUFF, 24, 8) | _SHIFTL(c, 12, 12)|\
-			_SHIFTL(d, 0, 12));                             \
-	_a->words.w1 = (unsigned int)(s);				\
-}
-
-#define n_aResample(pkt, s, f, p, i, o)					\
-{									\
-	Acmd *_a = (Acmd *)pkt;						\
-									\
-	_a->words.w0 = (_SHIFTL(A_RESAMPLE, 24, 8) | _SHIFTL(s, 0, 24));\
-	_a->words.w1 = (_SHIFTL(f, 30, 2) | _SHIFTL(p, 14, 16) |        \
-			_SHIFTL(i, 2, 12) | _SHIFTL(o, 0, 2));          \
-}
-
-#define n_aSaveBuffer(pkt, c, d, s)					\
-{									\
-	Acmd *_a = (Acmd *)pkt;						\
-									\
-	_a->words.w0 = (_SHIFTL(A_SAVEBUFF, 24, 8) | _SHIFTL(c, 12, 12)|\
-			_SHIFTL(d, 0, 12));                             \
-	_a->words.w1 = (unsigned int)(s);				\
-}
-
-#define n_aSetVolume(pkt, f, v, t, r)					\
-{									\
-	Acmd *_a = (Acmd *)pkt;						\
-									\
-	_a->words.w0 = (_SHIFTL(A_SETVOL, 24, 8) | _SHIFTL(f, 16, 8) |	\
-			_SHIFTL(v, 0, 16)); 				\
-	_a->words.w1 = _SHIFTL(t, 16, 16) | _SHIFTL(r, 0, 16);		\
-}
-
-#define n_aLoadADPCM(pkt, c, d)						\
-{									\
-	Acmd *_a = (Acmd *)pkt;						\
-									\
-	_a->words.w0 = _SHIFTL(A_LOADADPCM, 24, 8) | _SHIFTL(c, 0, 24);	\
-        _a->words.w1 = (unsigned int) d;                                \
-}
 
 #define aLoadBufferSize(pkt,s,u,b) { \
     Acmd *_a = (Acmd *)pkt; \

@@ -4,6 +4,12 @@
 void bgm_update_volume(void);
 void bgm_set_target_volume(s16 volume);
 
+// these are BSS
+extern s16 MusicDefaultVolume;
+extern s16 MusicMaxVolume;
+extern s16 MusicCurrentVolume;
+extern s16 MusicTargetVolume;
+
 MusicSettings BlankMusicSettings = {
     .flags = 0,
     .state = 0,
@@ -58,15 +64,15 @@ void bgm_reset_sequence_players(void) {
         gMusicSettings[i] = BlankMusicSettings;
     }
 
-    gMusicTargetVolume = 8;
-    gMusicMaxVolume = 8;
-    gMusicCurrentVolume = 8;
+    MusicTargetVolume = 8;
+    MusicMaxVolume = 8;
+    MusicCurrentVolume = 8;
     func_800561A4(8);
 }
 
 void bgm_reset_volume(void) {
-    gMusicTargetVolume = 8;
-    gMusicMaxVolume = 8;
+    MusicTargetVolume = 8;
+    MusicMaxVolume = 8;
 }
 
 //TODO refactor out constants
@@ -140,7 +146,7 @@ void bgm_update_music_settings(void) {
                                 music->fadeInTime, music->fadeStartVolume, music->fadeEndVolume);
                             music->flags &= ~MUSIC_SETTINGS_FLAGS_20;
                         } else {
-                            bgm_set_target_volume(gMusicDefaultVolume);
+                            bgm_set_target_volume(MusicDefaultVolume);
                         }
                         if (au_song_start_variation(music->songName, music->variation) == 0) {
                             music->flags |= MUSIC_SETTINGS_FLAGS_1;
@@ -202,7 +208,7 @@ s32 _bgm_set_song(s32 playerIndex, s32 songID, s32 variation, s32 fadeOutTime, s
         return 2;
     }
 
-    gMusicDefaultVolume = volume;
+    MusicDefaultVolume = volume;
     musicSetting->songID = songID;
     musicSetting->variation = variation;
     musicSetting->fadeOutTime = fadeOutTime;
@@ -314,15 +320,15 @@ s32 bgm_init_music_players(void) {
 }
 
 void bgm_quiet_max_volume(void) {
-    gMusicMaxVolume = 4;
+    MusicMaxVolume = 4;
 }
 
 void bgm_reset_max_volume(void) {
-    gMusicMaxVolume = 8;
+    MusicMaxVolume = 8;
 }
 
 void bgm_set_target_volume(s16 volume) {
-    gMusicTargetVolume = volume;
+    MusicTargetVolume = volume;
 }
 
 void bgm_update_volume(void) {
@@ -333,18 +339,18 @@ void bgm_update_volume(void) {
         return;
     }
 
-    toVolume = gMusicTargetVolume;
-    if (toVolume > gMusicMaxVolume) {
-        toVolume = gMusicMaxVolume;
+    toVolume = MusicTargetVolume;
+    if (toVolume > MusicMaxVolume) {
+        toVolume = MusicMaxVolume;
     }
 
-    if (gMusicCurrentVolume != toVolume) {
-        if (gMusicCurrentVolume >= toVolume) {
-            gMusicCurrentVolume--;
+    if (MusicCurrentVolume != toVolume) {
+        if (MusicCurrentVolume >= toVolume) {
+            MusicCurrentVolume--;
         } else {
-            gMusicCurrentVolume++;
+            MusicCurrentVolume++;
         }
-        func_800561A4(gMusicCurrentVolume);
+        func_800561A4(MusicCurrentVolume);
         gNextVolumeUpdateTimer = 3;
     }
 }
