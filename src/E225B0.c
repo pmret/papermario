@@ -161,7 +161,7 @@ void func_802B735C_E2290C(void) {
             }
 
             if (D_802B7C78_E23228->unk_18++ > 50) {
-                D_8015A578.unk_02 = FALSE;
+                gCurrentHiddenPanels.activateISpy = FALSE;
                 D_8010C93C = NULL;
                 playerStatus->animFlags &= ~0x100;
             }

@@ -12,23 +12,23 @@ extern s32 Entity_HiddenPanel_RenderScript2[];
 
 extern Gfx Entity_HiddenPanel_RenderTop[];
 extern Gfx Entity_HiddenPanel_RenderTop2[];
-extern Gfx Entity_HiddenPanel_RenderBottomDark[];
+extern Gfx Entity_HiddenPanel_RenderHole[];
 extern Gfx Entity_HiddenPanel_Render[];
 extern Gfx Entity_HiddenPanel_Render2[];
 
 void entity_HiddenPanel_setupGfx(s32 entityIndex) {
     Entity* entity = get_entity_by_index(entityIndex);
     HiddenPanelData* data = entity->dataBuf.hiddenPanel;
-    Matrix4f sp10;
-    Matrix4f sp50;
+    Matrix4f rotMtx;
+    Matrix4f tempMtx;
 
     if (entity->position.y != data->initialY) {
-        guMtxIdentF(sp10);
-        guTranslateF(sp50, entity->position.x, data->initialY + 1.0f, entity->position.z);
-        guMtxCatF(sp50, sp10, sp50);
-        guMtxF2L(sp50, &gDisplayContext->matrixStack[gMatrixListPos]);
+        guMtxIdentF(rotMtx);
+        guTranslateF(tempMtx, entity->position.x, data->initialY + 1.0f, entity->position.z);
+        guMtxCatF(tempMtx, rotMtx, tempMtx);
+        guMtxF2L(tempMtx, &gDisplayContext->matrixStack[gMatrixListPos]);
         gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-        gSPDisplayList(gMasterGfxPos++, ENTITY_ADDR(entity, Gfx*, Entity_HiddenPanel_RenderBottomDark));
+        gSPDisplayList(gMasterGfxPos++, ENTITY_ADDR(entity, Gfx*, Entity_HiddenPanel_RenderHole));
         gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
     }
     mdl_project_tex_coords(data->modelID, data->renderDList, data->entityMatrix, entity->gfxBaseAddr);
@@ -38,8 +38,8 @@ void entity_HiddenPanel_setupGfx(s32 entityIndex) {
 void entity_HiddenPanel_set_ispy_notification(Entity* entity) {
     HiddenPanelData* data = entity->dataBuf.hiddenPanel;
 
-    if (is_ability_active(ABILITY_I_SPY) && !get_global_flag(data->pickupVar) && !D_8015A578.unk_02) {
-        D_8015A578.unk_02 = TRUE;
+    if (is_ability_active(ABILITY_I_SPY) && !get_global_flag(data->pickupVar) && !gCurrentHiddenPanels.activateISpy) {
+        gCurrentHiddenPanels.activateISpy = TRUE;
     }
 }
 
@@ -64,7 +64,7 @@ void entity_HiddenPanel_idle(Entity* entity) {
     data->standingNpcIndex = -1;
     data->npcFlags = 0;
 
-    if (D_8015A578.unk_00 && fabs(D_8015A578.unk_08 - entity->position.y) <= 10.0) {
+    if (gCurrentHiddenPanels.tryFlipTrigger && fabs(gCurrentHiddenPanels.flipTriggerPosY - entity->position.y) <= 10.0) {
         data->state = 10;
         distToPlayer = get_xz_dist_to_player(entity->position.x, entity->position.z);
         if (distToPlayer <= 100) {
@@ -293,7 +293,7 @@ void entity_HiddenPanel_init(Entity* entity) {
     Matrix4f sp58;
     Gfx* dlist;
 
-    mem_clear(&D_8015A578, sizeof(D_8015A578));
+    mem_clear(&gCurrentHiddenPanels, sizeof(gCurrentHiddenPanels));
     entity->renderSetupFunc = entity_HiddenPanel_setupGfx;
     data->pickupVar = 0xFFFF;
     data->initialY = entity->position.y;
@@ -317,7 +317,7 @@ void entity_HiddenPanel_init(Entity* entity) {
     guScaleF(sp58, entity->scale.x, entity->scale.y, entity->scale.z);
     guMtxCatF(sp58, sp18, data->entityMatrix);
 
-    if (D_8015A578.unk_01 & 1) {
+    if (gCurrentHiddenPanels.panelsCount & 1) {
         dlist = Entity_HiddenPanel_RenderTop2;
         entity_set_render_script(entity, Entity_HiddenPanel_RenderScript2);
     } else {
@@ -326,7 +326,7 @@ void entity_HiddenPanel_init(Entity* entity) {
     data->renderDList = ENTITY_ADDR(entity, Gfx*, dlist);
 
     mdl_project_tex_coords(data->modelID, data->renderDList, data->entityMatrix, entity->gfxBaseAddr);
-    D_8015A578.unk_01++;
+    gCurrentHiddenPanels.panelsCount++;
 }
 
 EntityScript Entity_HiddenPanel_Script = {

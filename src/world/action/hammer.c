@@ -377,8 +377,8 @@ void func_802B6820_E256F0(void) {
         }
 
         if (HammerHit->hitID < 0 && gPlayerData.hammerLevel >= 2) {
-            D_8015A578.unk_00 = TRUE;
-            D_8015A578.unk_08 = playerStatus->position.y;
+            gCurrentHiddenPanels.tryFlipTrigger = TRUE;
+            gCurrentHiddenPanels.flipTriggerPosY = playerStatus->position.y;
         }
     }
 

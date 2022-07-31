@@ -1218,7 +1218,7 @@ void update_entities(void) {
     }
 
     update_shadows();
-    D_8015A578.unk_00 = FALSE;
+    gCurrentHiddenPanels.tryFlipTrigger = FALSE;
 }
 
 void update_shadows(void) {
@@ -1814,8 +1814,8 @@ void clear_entity_data(s32 arg0) {
     }
 
     entity_area_specific_data_is_loaded = FALSE;
-    D_8015A578.unk_01 = 0;
-    D_8015A578.unk_02 = FALSE;
+    gCurrentHiddenPanels.panelsCount = 0;
+    gCurrentHiddenPanels.activateISpy = FALSE;
     if (!arg0) {
         D_80151344 = 0;
     }

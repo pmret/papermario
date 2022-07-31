@@ -260,7 +260,7 @@ BSS char D_8015A2C0[0x10];
 BSS s8 D_8015A2D0[0xA0];
 BSS s8 D_8015A370[0x1E0];
 BSS s8 gCollisionStatus[0x28];
-BSS s16 D_8015A578;
+BSS s16 gCurrentHiddenPanels;
 BSS s16 D_8015A57A;
 BSS char D_8015A57C[0x14];
 BSS s8 mdl_textureHandles[0x2200];

@@ -80,7 +80,7 @@ extern s32 gEntityHideMode;
 extern s32 D_8010C92C;
 extern s32 D_8010C950;
 extern s32 D_801595A0;
-extern Struct8015A578 D_8015A578;
+extern HiddenPanelsData gCurrentHiddenPanels;
 
 extern BackgroundHeader gBackgroundImage;
 

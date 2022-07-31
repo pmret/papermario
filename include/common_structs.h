@@ -2261,14 +2261,14 @@ typedef struct PopupMessage {
     /* 0x18 */ Message* message;
 } PopupMessage; // size = 0x1C
 
-typedef struct Struct8015A578 {
-    /* 0x00 */ s8 unk_00;
-    /* 0x01 */ u8 unk_01;
-    /* 0x02 */ s8 unk_02;
-    /* 0x03 */ u8 unk_03[5];
-    /* 0x08 */ f32 unk_08;
+typedef struct HiddenPanelsData {
+    /* 0x00 */ s8 tryFlipTrigger;
+    /* 0x01 */ u8 panelsCount;
+    /* 0x02 */ s8 activateISpy;
+    /* 0x03 */ char unk_03[0x5];
+    /* 0x08 */ f32 flipTriggerPosY;
     /* 0x0C */ char unk_0C[0x4];
-} Struct8015A578; // size = 0x10
+} HiddenPanelsData; // size = 0x10
 
 typedef struct SpriteShadingLightSource {
     /* 0x00 */ s8 flags;

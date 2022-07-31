@@ -68,7 +68,7 @@ Gfx Entity_HiddenPanel_RenderBottom[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx Entity_HiddenPanel_RenderBottomDark[] = {
+Gfx Entity_HiddenPanel_RenderHole[] = {
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_OFF),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
