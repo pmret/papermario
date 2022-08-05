@@ -3763,9 +3763,24 @@ enum FoldStateFlags {
     FOLD_STATE_FLAG_8000              = 0x00008000,
     FOLD_STATE_FLAG_10000             = 0x00010000,
     FOLD_STATE_FLAG_20000             = 0x00020000,
+    FOLD_STATE_FLAG_40000             = 0x00040000,
     FOLD_STATE_FLAG_80000             = 0x00080000,
     FOLD_STATE_FLAG_100000            = 0x00100000,
 };
+
+typedef enum FoldType {
+    FOLD_TYPE_NONE                    = 0x0,
+    FOLD_TYPE_1                       = 0x1,
+    FOLD_TYPE_2                       = 0x2,
+    FOLD_TYPE_3                       = 0x3,
+    FOLD_TYPE_4                       = 0x4,
+    FOLD_TYPE_5                       = 0x5,
+    FOLD_TYPE_6                       = 0x6,
+    FOLD_TYPE_7                       = 0x7,
+    FOLD_TYPE_8                       = 0x8,
+    FOLD_TYPE_9                       = 0x9,
+    FOLD_TYPE_A                       = 0xA,
+} FoldType;
 
 enum MoveType {
     MOVE_TYPE_NONE          = 0,

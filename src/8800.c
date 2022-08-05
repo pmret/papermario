@@ -413,9 +413,9 @@ void set_cam_viewport(s16 id, s16 x, s16 y, s16 width, s16 height) {
     camera->vp.vp.vscale[2] = 0x1FF;
     camera->vp.vp.vscale[3] = 0;
 
-    camera->vp.vp.vtrans[0] = (((u16)camera->viewportStartX + (camera->viewportW / 2)) << 16) >> 14;
-    camera->vp.vp.vtrans[1] = ((u16)camera->viewportStartY + (camera->viewportH / 2));
-    camera->vp.vp.vtrans[1] = (camera->vp.vp.vtrans[1] << 16) >> 14; // needed to match
+    camera->vp.vp.vtrans[0] = 4 * (s16) ((u16) camera->viewportStartX + (camera->viewportW / 2));
+    camera->vp.vp.vtrans[1] = (s16) ((u16) camera->viewportStartY + (camera->viewportH / 2));
+    camera->vp.vp.vtrans[1] = 4 * camera->vp.vp.vtrans[1];
     camera->vp.vp.vtrans[2] = 0x1FF;
     camera->vp.vp.vtrans[3] = 0;
 
@@ -424,8 +424,8 @@ void set_cam_viewport(s16 id, s16 x, s16 y, s16 width, s16 height) {
     camera->vpAlt.vp.vscale[2] = 0x1FF;
     camera->vpAlt.vp.vscale[3] = 0;
 
-    camera->vpAlt.vp.vtrans[0] = gGameStatusPtr->unk_82 + ((((u16) camera->viewportStartX + (camera->viewportW / 2)) << 16) >> 14);
-    camera->vpAlt.vp.vtrans[1] = gGameStatusPtr->unk_83 + ((((u16) camera->viewportStartY + (camera->viewportH / 2)) << 16) >> 14);
+    camera->vpAlt.vp.vtrans[0] = gGameStatusPtr->unk_82 + 4 * (s16) ((u16) camera->viewportStartX + (camera->viewportW / 2));
+    camera->vpAlt.vp.vtrans[1] = gGameStatusPtr->unk_83 + 4 * (s16) ((u16) camera->viewportStartY + (camera->viewportH / 2));
     camera->vpAlt.vp.vtrans[2] = 0x200;
     camera->vpAlt.vp.vtrans[3] = 0;
 }

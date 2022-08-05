@@ -18,7 +18,7 @@ void func_802B6000_E26710(void) {
 
     if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
         playerStatus->flags &= ~PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
-        playerStatus->flags |= 0x2000A;
+        playerStatus->flags |= (PLAYER_STATUS_FLAGS_20000 | PLAYER_STATUS_FLAGS_FLYING | PLAYER_STATUS_FLAGS_JUMPING);
         phys_clear_spin_history();
         playerStatus->fallState = 0;
         playerStatus->currentSpeed = 0.0f;
@@ -76,12 +76,12 @@ void func_802B6000_E26710(void) {
             if (fallVelocity <= 0.0f) {
                 record_jump_apex();
                 playerStatus->currentStateTime = 3;
-                playerStatus->flags |= 4;
+                playerStatus->flags |= PLAYER_STATUS_FLAGS_FALLING;
                 playerStatus->fallState++;
                 sfx_play_sound_at_player(SOUND_TORNADO_JUMP, 0);
             }
             if (colliderBelow >= 0) {
-                playerStatus->flags &= ~0x00020008;
+                playerStatus->flags &= ~(PLAYER_STATUS_FLAGS_20000 | PLAYER_STATUS_FLAGS_FLYING);
                 set_action_state(ACTION_STATE_LAND);
             }
             break;
@@ -103,15 +103,15 @@ void func_802B6000_E26710(void) {
                 if (collisionStatus->currentFloor & COLLISION_WITH_ENTITY_BIT) {
                     entityType = get_entity_type(collisionStatus->currentFloor);
                     if (entityType == ENTITY_TYPE_SIMPLE_SPRING || entityType == ENTITY_TYPE_SCRIPT_SPRING) {
-                        playerStatus->flags &= ~0x00020008;
+                        playerStatus->flags &= ~(PLAYER_STATUS_FLAGS_20000 | PLAYER_STATUS_FLAGS_FLYING);
                         set_action_state(ACTION_STATE_LAND);
                         return;
                     } else if (entityType == ENTITY_TYPE_BLUE_SWITCH || entityType == ENTITY_TYPE_RED_SWITCH) {
-                        playerStatus->flags &= ~0x00020008;
+                        playerStatus->flags &= ~(PLAYER_STATUS_FLAGS_20000 | PLAYER_STATUS_FLAGS_FLYING);
                         phys_player_land();
                         exec_ShakeCam1(0, 0, 4);
                         sfx_play_sound_at_player(SOUND_14A, 0);
-                        start_rumble(0x100, 0x32);
+                        start_rumble(256, 50);
 
                         gCurrentHiddenPanels.tryFlipTrigger = TRUE;
                         gCurrentHiddenPanels.flipTriggerPosY = playerStatus->position.y;
@@ -123,13 +123,13 @@ void func_802B6000_E26710(void) {
                 colliderType = get_collider_type_by_id(colliderBelow);
                 if (colliderType == 3) {
                     playerStatus->unk_BF = 1;
-                    playerStatus->flags &= ~0x00020008;
+                    playerStatus->flags &= ~(PLAYER_STATUS_FLAGS_20000 | PLAYER_STATUS_FLAGS_FLYING);
                     set_action_state(ACTION_STATE_HIT_LAVA);
-                    playerStatus->flags |= 0x800;
+                    playerStatus->flags |= PLAYER_STATUS_FLAGS_800;
                     return;
                 } else if (colliderType == 2) {
                     set_action_state(ACTION_STATE_HIT_LAVA);
-                    playerStatus->flags &= ~0x00020008;
+                    playerStatus->flags &= ~(PLAYER_STATUS_FLAGS_20000 | PLAYER_STATUS_FLAGS_FLYING);
                     return;
                 }
                 playerStatus->currentStateTime = 8;
@@ -138,7 +138,7 @@ void func_802B6000_E26710(void) {
                 playerStatus->fallState++;
                 exec_ShakeCam1(0, 0, 4);
                 sfx_play_sound_at_player(SOUND_14A, 0);
-                start_rumble(0x100, 0x32);
+                start_rumble(256, 50);
 
                 gCurrentHiddenPanels.tryFlipTrigger = TRUE;
                 gCurrentHiddenPanels.flipTriggerPosY = playerStatus->position.y;
@@ -148,7 +148,7 @@ void func_802B6000_E26710(void) {
         case 3:
             if (--playerStatus->currentStateTime == 0) {
                 playerStatus->fallState++;
-                playerStatus->flags &= ~0x00020008;
+                playerStatus->flags &= ~(PLAYER_STATUS_FLAGS_20000 | PLAYER_STATUS_FLAGS_FLYING);
                 set_action_state(ACTION_STATE_LAND);
             }
             break;

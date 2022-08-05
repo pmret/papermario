@@ -76,7 +76,7 @@ void func_802B7000_E225B0(void) {
                 foldImage.palette = D_802B7BE0_E23190;
                 break;
         }
-        fold_update(0, 7, 0xFF, 0xFF, 0xFF, D_802B7C78_E23228->unk_28, 0);
+        fold_update(0, FOLD_TYPE_7, 0xFF, 0xFF, 0xFF, D_802B7C78_E23228->unk_28, 0);
 
         foldImage.raster = D_802B7580_E22B30;
         foldImage.width = 56;

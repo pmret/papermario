@@ -8,13 +8,13 @@ void entity_HiddenPanel_flip_over(Entity*);
 void mdl_project_tex_coords(s32 modelID, Gfx* destGfx, Matrix4f destMtx, void* destVertices);
 s32 npc_find_standing_on_entity(s32 entityIndex);
 
-extern s32 Entity_HiddenPanel_RenderScript2[];
+extern s32 ERS_AltHiddenPanel[];
 
-extern Gfx Entity_HiddenPanel_RenderTop[];
-extern Gfx Entity_HiddenPanel_RenderTop2[];
-extern Gfx Entity_HiddenPanel_RenderHole[];
-extern Gfx Entity_HiddenPanel_Render[];
-extern Gfx Entity_HiddenPanel_Render2[];
+extern Gfx Gfx_HiddenPanel_RenderTop[];
+extern Gfx Gfx_AltHiddenPanel_RenderTop[];
+extern Gfx Gfx_HiddenPanel_RenderHole[];
+extern Gfx Gfx_HiddenPanel_Render[];
+extern Gfx Gfx_HiddenPanel_Render2[];
 
 void entity_HiddenPanel_setupGfx(s32 entityIndex) {
     Entity* entity = get_entity_by_index(entityIndex);
@@ -28,7 +28,7 @@ void entity_HiddenPanel_setupGfx(s32 entityIndex) {
         guMtxCatF(tempMtx, rotMtx, tempMtx);
         guMtxF2L(tempMtx, &gDisplayContext->matrixStack[gMatrixListPos]);
         gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-        gSPDisplayList(gMasterGfxPos++, ENTITY_ADDR(entity, Gfx*, Entity_HiddenPanel_RenderHole));
+        gSPDisplayList(gMasterGfxPos++, ENTITY_ADDR(entity, Gfx*, Gfx_HiddenPanel_RenderHole));
         gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
     }
     mdl_project_tex_coords(data->modelID, data->renderDList, data->entityMatrix, entity->gfxBaseAddr);
@@ -318,10 +318,10 @@ void entity_HiddenPanel_init(Entity* entity) {
     guMtxCatF(sp58, sp18, data->entityMatrix);
 
     if (gCurrentHiddenPanels.panelsCount & 1) {
-        dlist = Entity_HiddenPanel_RenderTop2;
-        entity_set_render_script(entity, Entity_HiddenPanel_RenderScript2);
+        dlist = Gfx_AltHiddenPanel_RenderTop;
+        entity_set_render_script(entity, ERS_AltHiddenPanel);
     } else {
-        dlist = Entity_HiddenPanel_RenderTop;
+        dlist = Gfx_HiddenPanel_RenderTop;
     }
     data->renderDList = ENTITY_ADDR(entity, Gfx*, dlist);
 
@@ -339,18 +339,18 @@ EntityScript Entity_HiddenPanel_Script = {
     es_End
 };
 
-EntityModelScript Entity_HiddenPanel_RenderScript = {
+EntityModelScript ERS_HiddenPanel = {
     ems_SetRenderMode(RENDER_MODE_SURFACE_OPA)
     ems_SetFlags(ENTITY_MODEL_FLAGS_10000)
-    ems_Draw(Entity_HiddenPanel_Render, 60)
+    ems_Draw(Gfx_HiddenPanel_Render, 60)
     ems_Restart
     ems_End
 };
 
-EntityModelScript Entity_HiddenPanel_RenderScript2 = {
+EntityModelScript ERS_AltHiddenPanel = {
     ems_SetRenderMode(RENDER_MODE_SURFACE_OPA)
     ems_SetFlags(ENTITY_MODEL_FLAGS_10000)
-    ems_Draw(Entity_HiddenPanel_Render2, 60)
+    ems_Draw(Gfx_HiddenPanel_Render2, 60)
     ems_Restart
     ems_End
 };
@@ -358,7 +358,7 @@ EntityModelScript Entity_HiddenPanel_RenderScript2 = {
 EntityBlueprint Entity_HiddenPanel = {
     .flags = ENTITY_FLAGS_HIDDEN,
     .typeDataSize = sizeof(HiddenPanelData),
-    .renderCommandList = Entity_HiddenPanel_RenderScript,
+    .renderCommandList = ERS_HiddenPanel,
     .modelAnimationNodes = 0,
     .fpInit = entity_HiddenPanel_init,
     .updateEntityScript = Entity_HiddenPanel_Script,

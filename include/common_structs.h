@@ -15,6 +15,9 @@ typedef Bytecode EvtScript[0];
 
 typedef void NoArgCallback(void*);
 
+typedef u8*  IMG_PTR;
+typedef u16* PAL_PTR;
+
 typedef struct {
     u8 r, g, b, a;
 } Color_RGBA8;
@@ -918,6 +921,7 @@ typedef struct BattleStatus {
     /* 0x45C */ char unk_45C[4];
 } BattleStatus; // size = 0x460
 
+// alternative name: TileDescriptor
 typedef struct TextureHeader {
     /* 0x00 */ s8 name[32];
     /* 0x20 */ s16 auxW;
@@ -1247,11 +1251,11 @@ typedef struct MessageCharset {
 } MessageCharset; // size = 0xA;
 
 typedef struct MesasgeFontGlyphData {
-    /* 0x0 */ s8* raster;
-    /* 0x4 */ s16* palette;
-    /* 0x8 */ Vec2b texSize;
-    /* 0xA */ s8 charWidth;
-    /* 0xB */ s8 charHeight;
+    /* 0x0 */ IMG_PTR raster;
+    /* 0x4 */ PAL_PTR palette;
+    /* 0x8 */ Vec2bu texSize;
+    /* 0xA */ u8 charWidth;
+    /* 0xB */ u8 charHeight;
 } MesasgeFontGlyphData; // size = 0xC
 
 typedef struct MessageImageData {
@@ -2310,8 +2314,8 @@ typedef struct UnkStruct0 {
 } UnkStruct0;
 
 typedef struct FoldImageRecPart {
-    /* 0x00 */ s8* raster;
-    /* 0x04 */ s8* palette;
+    /* 0x00 */ IMG_PTR raster;
+    /* 0x04 */ PAL_PTR palette;
     /* 0x08 */ u16 width;
     /* 0x0A */ u16 height;
     /* 0x0C */ s16 xOffset;
@@ -2360,5 +2364,79 @@ typedef struct MusicEvent {
     s32 musicEventID; // user-defined, events will respond to BGM Trigger commands with matching ID
     EvtScript* scripts[4];
 } MusicEvent;
+
+typedef struct ParadeNpcInfo {
+    /* 0x00 */ u32 initialAnim;
+    /* 0x04 */ u32** animList;
+    /* 0x08 */ Vec3f pos;
+    /* 0x14 */ f32 yaw;
+} ParadeNpcInfo; // size = 0x18
+
+typedef struct CreditsEntry {
+    /* 0x00 */ s32 msgID;
+    /* 0x04 */ s32 posX;
+    /* 0x08 */ s32 posY;
+    /* 0x0C */ s32 highlight;
+    /* 0x10 */ s32 unk_10;
+    /* 0x14 */ s32 fadeInTime;
+    /* 0x18 */ s32 unk_18;
+    /* 0x1C */ s32 unk_1C;
+    /* 0x20 */ s32 holdTime;
+    /* 0x24 */ s32 unk_24;
+    /* 0x28 */ s32 fadeOutTime;
+    /* 0x2C */ s32 unk_2C;
+    /* 0x30 */ s32 next;
+    /* 0x34 */ s16 flags;
+    /* 0x36 */ char pad_36[2];
+} CreditsEntry; // size = 0x38
+
+typedef struct CreditsUnkAlpha {
+    /* 0x00 */ u8* message;
+    /* 0x04 */ s32 unk__04;
+    /* 0x08 */ s32 time;
+    /* 0x0C */ s32 unk_0C;
+    /* 0x10 */ s32 highlight;
+    /* 0x14 */ s32 msgWidth;
+    /* 0x18 */ s32 unk_18;
+    /* 0x1C */ s32 fadeInTime;
+    /* 0x20 */ s32 perCharDelay;
+    /* 0x24 */ s32 unk__24;
+    /* 0x28 */ s32 unk__28;
+    /* 0x2C */ s32 unk__2C;
+    /* 0x30 */ s32 unk__30;
+    /* 0x34 */ s32 unk__34;
+    /* 0x38 */ s32 holdTime;
+    /* 0x3C */ s32 unk__3C;
+    /* 0x40 */ s32 unk__40;
+    /* 0x44 */ s32 unk__44;
+    /* 0x48 */ s32 unk__48;
+    /* 0x4C */ s32 unk_4C;
+    /* 0x50 */ s32 fadeOutTime;
+    /* 0x54 */ s32 unk_54;
+    /* 0x58 */ s32 unk__58;
+    /* 0x5C */ s32 unk__5C;
+    /* 0x60 */ s32 unk__60;
+    /* 0x64 */ s32 unk__64;
+    /* 0x68 */ s32 posX;
+    /* 0x6C */ s32 posY;
+    /* 0x70 */ s16 flags;
+    /* 0x72 */ char unk_72[2];
+} CreditsUnkAlpha; // size = 0x74
+
+typedef struct CreditsGlyphInfo {
+    /* 0x00 */ s32 charIndex;
+    /* 0x04 */ s32 font;
+    /* 0x08 */ s32 variation;
+    /* 0x0C */ s32 palette;
+    /* 0x10 */ s32 posX;
+    /* 0x14 */ s32 posY;
+    /* 0x18 */ s32 fadeInTime;
+} CreditsGlyphInfo; // size = unk
+
+typedef struct CreditsUnkBeta {
+    u8 unk_00;
+    u8 unk_01;
+    s16 unk_02;
+} CreditsUnkBeta;
 
 #endif
