@@ -76,7 +76,7 @@ void func_802B7000_E225B0(void) {
                 foldImage.palette = D_802B7BE0_E23190;
                 break;
         }
-        fold_update(0, 7, 0xFF, 0xFF, 0xFF, D_802B7C78_E23228->unk_28, 0);
+        fold_update(0, FOLD_TYPE_7, 0xFF, 0xFF, 0xFF, D_802B7C78_E23228->unk_28, 0);
 
         foldImage.raster = D_802B7580_E22B30;
         foldImage.width = 56;
@@ -161,7 +161,7 @@ void func_802B735C_E2290C(void) {
             }
 
             if (D_802B7C78_E23228->unk_18++ > 50) {
-                D_8015A578.unk_02 = FALSE;
+                gCurrentHiddenPanels.activateISpy = FALSE;
                 D_8010C93C = NULL;
                 playerStatus->animFlags &= ~0x100;
             }

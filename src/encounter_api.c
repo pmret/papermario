@@ -323,7 +323,7 @@ ApiStatus BindNpcAI(Evt* script, s32 isInitialCall) {
     Evt* scriptTemp = script;
     ApiStatus ret = ApiStatus_DONE2;
     Evt* aiScript;
-    s32 phi_s1;
+    s32 groupFlags;
 
     if ((s32)enemy != NPC_SELF && (id == NPC_SELF || enemy->npcID == id)) {
         id = enemy->npcID;
@@ -345,9 +345,9 @@ ApiStatus BindNpcAI(Evt* script, s32 isInitialCall) {
     }
 
     if (enemy->flags & ENEMY_FLAGS_1) {
-        phi_s1 = 10;
+        groupFlags = EVT_GROUP_08 | EVT_GROUP_02;
     } else {
-        phi_s1 = 11;
+        groupFlags = EVT_GROUP_08 | EVT_GROUP_02 | EVT_GROUP_01;
     }
 
     if (enemy->aiScript != NULL) {
@@ -361,7 +361,7 @@ ApiStatus BindNpcAI(Evt* script, s32 isInitialCall) {
     enemy->aiScriptID = scriptTemp->id;
     scriptTemp->owner1.enemy = enemy;
     scriptTemp->owner2.npcID = id;
-    scriptTemp->groupFlags = phi_s1;
+    scriptTemp->groupFlags = groupFlags;
     return ret;
 }
 
@@ -395,9 +395,9 @@ ApiStatus RestartNpcAI(Evt* script, s32 isInitialCall) {
     npc = get_enemy(npcId);
 
     if (npc->flags & 1) {
-        groupFlags = 10;
+        groupFlags = EVT_GROUP_08 | EVT_GROUP_02;
     } else {
-        groupFlags = 11;
+        groupFlags = EVT_GROUP_08 | EVT_GROUP_02 | EVT_GROUP_01;
     }
 
     if (npc->aiScript != NULL) {
@@ -513,9 +513,9 @@ ApiStatus RestartNpcAux(Evt* script, s32 isInitialCall) {
     enemy = get_enemy(npcID);
 
     if (enemy->flags & 1) {
-        groupFlags = 10;
+        groupFlags = EVT_GROUP_08 | EVT_GROUP_02;
     } else {
-        groupFlags = 11;
+        groupFlags = EVT_GROUP_08 | EVT_GROUP_02 | EVT_GROUP_01;
     }
 
     if (enemy->auxScript != NULL) {

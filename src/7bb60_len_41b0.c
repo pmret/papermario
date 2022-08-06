@@ -473,11 +473,11 @@ f32 func_800E34D8(void) {
     return ret;
 }
 
-f32 player_check_collision_below(f32 arg0, s32* colliderID) {
+f32 player_check_collision_below(f32 offset, s32* colliderID) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     CollisionStatus* collisionStatus = &gCollisionStatus;
     f32 temp_f4 = playerStatus->colliderHeight * 0.5f;
-    f32 outLength = fabsf(arg0) + temp_f4;
+    f32 outLength = fabsf(offset) + temp_f4;
     f32 x = playerStatus->position.x;
     f32 y = playerStatus->position.y + temp_f4;
     f32 z = playerStatus->position.z;
@@ -486,10 +486,10 @@ f32 player_check_collision_below(f32 arg0, s32* colliderID) {
                                                               &sp38, &sp3C, &sp40, &sp44);
 
     if (hit < 0) {
-        if (arg0 >= 0.0f && collisionStatus->currentCeiling >= 0) {
+        if (offset >= 0.0f && collisionStatus->currentCeiling >= 0) {
             return playerStatus->position.y;
         }
-        y = playerStatus->position.y + arg0;
+        y = playerStatus->position.y + offset;
     } else {
         collisionStatus->currentFloor = hit;
         collisionStatus->lastTouchedFloor = -1;

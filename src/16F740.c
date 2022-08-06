@@ -236,7 +236,7 @@ void btl_state_update_begin_player_turn(void) {
                 gBattleState2 = BATTLE_STATE2_PLAYER_DEFEATED;
             } else {
                 battleStatus->battlePhase = 0xC;
-                script = start_script(partner->onTurnChanceScriptSource, 0xA, 0);
+                script = start_script(partner->onTurnChanceScriptSource, EVT_PRIORITY_A, 0);
                 partner->onTurnChangeScript = script;
                 gBattleState2 = BATTLE_STATE2_UNK_14;
                 partner->onTurnChangeID = script->id;
@@ -462,7 +462,7 @@ void btl_state_update_begin_player_turn(void) {
             if (battleStatus->hammerLossTurns >= 0) {
                 battleStatus->hammerLossTurns--;
                 if (battleStatus->hammerLossTurns == -1) {
-                    script = start_script(RegainAbility, 0xA, 0);
+                    script = start_script(RegainAbility, EVT_PRIORITY_A, 0);
                     player->takeTurnScript = script;
                     player->takeTurnID = script->id;
                     script->varTable[0] = 1;
@@ -477,7 +477,7 @@ void btl_state_update_begin_player_turn(void) {
             if (battleStatus->jumpLossTurns >= 0) {
                 battleStatus->jumpLossTurns--;
                 if (battleStatus->jumpLossTurns == -1) {
-                    script = start_script(RegainAbility, 0xA, 0);
+                    script = start_script(RegainAbility, EVT_PRIORITY_A, 0);
                     player->takeTurnScript = script;
                     player->takeTurnID = script->id;
                     script->varTable[0] = phi_s0_3;
@@ -491,7 +491,7 @@ void btl_state_update_begin_player_turn(void) {
             if (battleStatus->itemLossTurns >= 0) {
                 battleStatus->itemLossTurns--;
                 if (battleStatus->itemLossTurns == -1) {
-                    script = start_script(RegainAbility, 0xA, 0);
+                    script = start_script(RegainAbility, EVT_PRIORITY_A, 0);
                     player->takeTurnScript = script;
                     player->takeTurnID = script->id;
                     script->varTable[10] = 2;
@@ -651,7 +651,7 @@ block_27:
             Evt* script;
 
             battleStatus->battlePhase = 0xC;
-            script = start_script(partner->onTurnChanceScriptSource, 0xA, 0);
+            script = start_script(partner->onTurnChanceScriptSource, EVT_PRIORITY_A, 0);
             partner->onTurnChangeScript = script;
             partner->onTurnChangeID = script->id;
             script->owner1.actorID = ACTOR_PARTNER;
@@ -1037,7 +1037,7 @@ void btl_state_update_end_training_battle(void) {
                 Evt* script;
 
                 battleStatus->battlePhase = PHASE_ENEMY_BEGIN;
-                script = start_script(partner->onTurnChanceScriptSource, 0xA, 0);
+                script = start_script(partner->onTurnChanceScriptSource, EVT_PRIORITY_A, 0);
                 partner->onTurnChangeScript = script;
                 gBattleState2 = BATTLE_STATE2_UNK_C;
                 partner->onTurnChangeID = script->id;
@@ -1122,7 +1122,7 @@ void btl_state_update_end_battle(void) {
                 gBattleState2 = BATTLE_STATE2_UNK_4;
                 return;
             }
-            script = start_script(stage->postBattle, 0xA, 0);
+            script = start_script(stage->postBattle, EVT_PRIORITY_A, 0);
             battleStatus->controlScript = script;
             gBattleState2 = BATTLE_STATE2_UNK_3;
             battleStatus->controlScriptID = script->id;
@@ -1274,12 +1274,12 @@ void btl_state_update_run_away(void) {
                 player->state.varTable[0] = 100;
             }
             battleStatus->battlePhase = 3;
-            script = start_script(PlayerScriptDispatcher, 0xA, 0);
+            script = start_script(PlayerScriptDispatcher, EVT_PRIORITY_A, 0);
             player->takeTurnScript = script;
             player->takeTurnID = script->id;
             script->owner1.actorID = ACTOR_PLAYER;
             if (partner != NULL && partner->koStatus == 0) {
-                script = start_script(partner->takeTurnScriptSource, 0xA, 0);
+                script = start_script(partner->takeTurnScriptSource, EVT_PRIORITY_A, 0);
                 partner->takeTurnScript = script;
                 partner->takeTurnID = script->id;
                 script->owner1.actorID = ACTOR_PARTNER;
@@ -1353,12 +1353,12 @@ void btl_state_update_run_away(void) {
     switch (gBattleState2) {
         case BATTLE_STATE2_UNK_3:
             battleStatus->battlePhase = 7;
-            script = start_script(PlayerScriptDispatcher, 0xA, 0);
+            script = start_script(PlayerScriptDispatcher, EVT_PRIORITY_A, 0);
             player->takeTurnScript = script;
             player->takeTurnID = script->id;
             script->owner1.actorID = ACTOR_PLAYER;
             if (partner != NULL && partner->koStatus == 0) {
-                script = start_script(partner->takeTurnScriptSource, 0xA, 0);
+                script = start_script(partner->takeTurnScriptSource, EVT_PRIORITY_A, 0);
                 partner->takeTurnScript = script;
                 partner->takeTurnID = script->id;
                 script->owner1.actorID = ACTOR_PARTNER;
@@ -1981,7 +1981,7 @@ void btl_state_update_next_enemy(void) {
                 Evt* onTurnChanceScript;
 
                 battleStatus->battlePhase = PHASE_ENEMY_BEGIN;
-                onTurnChanceScript = start_script(enemy->onTurnChanceScriptSource, 0xA, 0);
+                onTurnChanceScript = start_script(enemy->onTurnChanceScriptSource, EVT_PRIORITY_A, 0);
                 enemy->onTurnChangeScript = onTurnChanceScript;
                 enemy->onTurnChangeID = onTurnChanceScript->id;
                 onTurnChanceScript->owner1.actorID = battleStatus->activeEnemyActorID;
@@ -2071,7 +2071,7 @@ void btl_state_update_partner_striking_first(void) {
             actor = get_actor(ACTOR_ENEMY0);
             if (actor->onHitScriptSource != NULL) {
                 actor->lastEventType = EVENT_BEGIN_FIRST_STRIKE;
-                script = start_script(actor->onHitScriptSource, 0xA, 0x20);
+                script = start_script(actor->onHitScriptSource, EVT_PRIORITY_A, EVT_FLAG_20);
                 actor->onHitScript = script;
                 actor->onHitID = script->id;
                 script->owner1.actorID = actor->actorID;
@@ -2094,7 +2094,7 @@ void btl_state_update_partner_striking_first(void) {
             btl_cam_target_actor(ACTOR_PARTNER);
             reset_actor_turn_info();
             battleStatus->battlePhase = PHASE_FIRST_STRIKE;
-            script = start_script(partner->takeTurnScriptSource, 0xA, 0);
+            script = start_script(partner->takeTurnScriptSource, EVT_PRIORITY_A, 0);
             partner->takeTurnScript = script;
             D_8029F248 = 3;
             gBattleState2 = BATTLE_STATE2_UNK_2;
@@ -2154,7 +2154,7 @@ void btl_state_update_partner_striking_first(void) {
                                         if (actor != NULL) {
                                             if (actor->onHitScriptSource != NULL) {
                                                 actor->lastEventType = EVENT_END_FIRST_STRIKE;
-                                                script = start_script(actor->onHitScriptSource, 0xA, 0x20);
+                                                script = start_script(actor->onHitScriptSource, EVT_PRIORITY_A, EVT_FLAG_20);
                                                 actor->onHitScript = script;
                                                 actor->onHitID = script->id;
                                                 script->owner1.actorID = actor->actorID;
@@ -2320,7 +2320,7 @@ void btl_state_update_enemy_striking_first(void) {
             enemy = battleStatus->currentTurnEnemy;
             reset_actor_turn_info();
             battleStatus->battlePhase = 1;
-            script = start_script(enemy->takeTurnScriptSource, 0xA, 0);
+            script = start_script(enemy->takeTurnScriptSource, EVT_PRIORITY_A, 0);
             enemy->takeTurnScript = script;
             D_8029F248 = 3;
             enemy->takeTurnID = script->id;
@@ -2455,7 +2455,7 @@ void btl_state_update_end_demo_battle(void) {
             if (stage->postBattle == NULL) {
                 gBattleState2 = BATTLE_STATE2_UNK_4;
             } else {
-                battleStatus->controlScript = start_script(stage->postBattle, 0xA, 0);
+                battleStatus->controlScript = start_script(stage->postBattle, EVT_PRIORITY_A, 0);
                 gBattleState2 = BATTLE_STATE2_UNK_3;
                 battleStatus->controlScriptID = battleStatus->controlScript->id;
             }

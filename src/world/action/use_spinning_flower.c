@@ -73,7 +73,7 @@ void func_802B60A4_E29514(void) {
             suggest_player_anim_clearUnkFlag(0x1002B);
         }
     }
-    switch(playerStatus->fallState) {
+    switch (playerStatus->fallState) {
         case 1:
             gOverrideFlags |= GLOBAL_OVERRIDES_40;
             if (++D_802B6EE4 >= 20.0f) {

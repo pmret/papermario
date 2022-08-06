@@ -1031,7 +1031,7 @@ extern EntityBlueprint* bEntityBlueprint[4];
 
 extern s32* D_801516F4;
 
-extern TileDescriptor gCurrentTileDescriptor;
+extern TextureHeader gCurrentTileDescriptor;
 
 extern ModelList wModelList;
 extern ModelList bModelList;
@@ -1063,7 +1063,7 @@ extern s32 texPannerMainU[MAX_TEX_PANNERS];
 extern s32 texPannerMainV[MAX_TEX_PANNERS];
 extern s32 texPannerAuxU[MAX_TEX_PANNERS];
 extern s32 texPannerAuxV[MAX_TEX_PANNERS];
-extern u32 mdl_nextTextureAddress;
+extern u8* mdl_nextTextureAddress;
 extern u16 mdl_currentTransformGroupChildIndex;
 extern u16 D_80153226;
 extern ModelNode* D_80153370;
@@ -1218,7 +1218,7 @@ void update_entities(void) {
     }
 
     update_shadows();
-    D_8015A578.unk_00 = FALSE;
+    gCurrentHiddenPanels.tryFlipTrigger = FALSE;
 }
 
 void update_shadows(void) {
@@ -1814,8 +1814,8 @@ void clear_entity_data(s32 arg0) {
     }
 
     entity_area_specific_data_is_loaded = FALSE;
-    D_8015A578.unk_01 = 0;
-    D_8015A578.unk_02 = FALSE;
+    gCurrentHiddenPanels.panelsCount = 0;
+    gCurrentHiddenPanels.activateISpy = FALSE;
     if (!arg0) {
         D_80151344 = 0;
     }
@@ -2970,7 +2970,35 @@ void state_render_frontUI(void) {
 void appendGfx_model(Model* model);
 INCLUDE_ASM(void, "a5dd0_len_114e0", appendGfx_model, Model*);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_80114B58);
+void func_80114B58(u32 romOffset, TextureHandle* handle, TextureHeader* header, s32 mainSize, s32 mainPalSize, s32 auxSize, s32 auxPalSize) {
+    handle->raster = (u32*) mdl_nextTextureAddress;
+    if (mainPalSize != 0) {
+        handle->palette = (u32*) (mdl_nextTextureAddress + mainSize);
+    } else {
+        handle->palette = NULL;
+    }
+    dma_copy((u8*) romOffset, (u8*) (romOffset + mainSize + mainPalSize), mdl_nextTextureAddress);
+    romOffset += mainSize + mainPalSize;
+    mdl_nextTextureAddress += mainSize + mainPalSize;
+    if (auxSize != 0) {
+        handle->auxRaster = (u32*) mdl_nextTextureAddress;
+        if (auxPalSize != 0) {
+            handle->auxPalette = (u32*) (mdl_nextTextureAddress + auxSize);
+        } else {
+            handle->auxPalette = NULL;
+        }
+        dma_copy((u8*) romOffset, (u8*) (romOffset + auxSize + auxPalSize), mdl_nextTextureAddress);
+        mdl_nextTextureAddress += auxSize + auxPalSize;
+    } else {
+        handle->auxPalette = NULL;
+        handle->auxRaster = NULL;
+    }
+    
+    handle->gfx = (Gfx*) mdl_nextTextureAddress;
+    memcpy(&handle->header, header, sizeof(*header));
+    func_801180E8(header, &mdl_nextTextureAddress, handle->raster, handle->palette, handle->auxRaster, handle->auxPalette, 0, 0, 0, 0);
+    gSPEndDisplayList(((Gfx*) mdl_nextTextureAddress)++);
+}
 
 void load_tile_header(char* textureName, s32 romOffset, s32 size);
 INCLUDE_ASM(s32, "a5dd0_len_114e0", load_tile_header);
@@ -4101,7 +4129,7 @@ void get_model_fog_color_parameters(u8* primR, u8* primG, u8* primB, u8* primA, 
     *fogEnd = mdl_renderModelFogEnd;
 }
 
-void set_model_env_color_parameters(u8 primR, u8 primG, u8 primB, u8 envR, s32 envG, s32 envB) {
+void set_model_env_color_parameters(u8 primR, u8 primG, u8 primB, u8 envR, u8 envG, u8 envB) {
     gRenderModelPrimR = primR;
     gRenderModelPrimG = primG;
     gRenderModelPrimB = primB;

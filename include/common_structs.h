@@ -13,6 +13,12 @@ typedef ApiStatus(*ApiFunc)(struct Evt*, s32);
 
 typedef Bytecode EvtScript[0];
 
+typedef void NoArgCallback(void*);
+
+#define MSG_PTR u8*
+#define IMG_PTR u8*
+#define PAL_PTR u16* 
+
 typedef struct {
     u8 r, g, b, a;
 } Color_RGBA8;
@@ -560,20 +566,28 @@ typedef DynamicEntity* DynamicEntityList[MAX_DYNAMIC_ENTITIES];
 
 typedef struct MusicSettings {
     /* 0x00 */ u16 flags;
-    /* 0x02 */ s16 unk_02;
+    /* 0x02 */ s16 state;
     /* 0x04 */ s32 fadeOutTime;
     /* 0x08 */ s32 fadeInTime;
-    /* 0x0C */ s16 unk_0C;
-    /* 0x0E */ s16 unk_0E;
+    /* 0x0C */ s16 fadeStartVolume;
+    /* 0x0E */ s16 fadeEndVolume;
     /* 0x10 */ s32 songID;
     /* 0x14 */ s32 variation;
     /* 0x18 */ s32 songName;
-    /* 0x1C */ s32 unk_1C;
-    /* 0x20 */ s32 unk_20;
-    /* 0x24 */ s32 unk_24;
-    /* 0x28 */ s32 unk_28;
-    /* 0x2C */ s32 unk_2C;
+    /* 0x1C */ s32 battleSongID;
+    /* 0x20 */ s32 battleVariation;
+    /* 0x24 */ s32 savedSongID;
+    /* 0x28 */ s32 savedVariation;
+    /* 0x2C */ s32 savedSongName;
 } MusicSettings; // size = 0x30
+
+typedef struct MusicProximityTrigger {
+    /* 0x00 */ Vec2XZf pos;
+    /* 0x08 */ f32 innerDist;
+    /* 0x0C */ f32 outerDist;
+    /* 0x10 */ s32 unk;
+    /* 0x14 */ s32 manualActivationFlag;
+} MusicProximityTrigger; // size = 0x18
 
 typedef struct UiStatus {
     /* 0x00 */ s32 hpIconIndices[2];
@@ -908,6 +922,7 @@ typedef struct BattleStatus {
     /* 0x45C */ char unk_45C[4];
 } BattleStatus; // size = 0x460
 
+// alternative name: TileDescriptor
 typedef struct TextureHeader {
     /* 0x00 */ s8 name[32];
     /* 0x20 */ s16 auxW;
@@ -1237,11 +1252,11 @@ typedef struct MessageCharset {
 } MessageCharset; // size = 0xA;
 
 typedef struct MesasgeFontGlyphData {
-    /* 0x0 */ s8* raster;
-    /* 0x4 */ s16* palette;
-    /* 0x8 */ Vec2b texSize;
-    /* 0xA */ s8 charWidth;
-    /* 0xB */ s8 charHeight;
+    /* 0x0 */ IMG_PTR raster;
+    /* 0x4 */ PAL_PTR palette;
+    /* 0x8 */ Vec2bu texSize;
+    /* 0xA */ u8 charWidth;
+    /* 0xB */ u8 charHeight;
 } MesasgeFontGlyphData; // size = 0xC
 
 typedef struct MessageImageData {
@@ -1286,7 +1301,7 @@ typedef struct ShopItemLocation {
 typedef struct ShopItemData {
     /* 0x0 */ u32 itemID;
     /* 0x4 */ s32 price;
-    /* 0x8 */ s32 unk_08;
+    /* 0x8 */ s32 descMsg;
 } ShopItemData; // size = 0xC
 
 typedef struct ShopSellPriceData {
@@ -2251,14 +2266,14 @@ typedef struct PopupMessage {
     /* 0x18 */ Message* message;
 } PopupMessage; // size = 0x1C
 
-typedef struct Struct8015A578 {
-    /* 0x00 */ s8 unk_00;
-    /* 0x01 */ u8 unk_01;
-    /* 0x02 */ s8 unk_02;
-    /* 0x03 */ u8 unk_03[5];
-    /* 0x08 */ f32 unk_08;
+typedef struct HiddenPanelsData {
+    /* 0x00 */ s8 tryFlipTrigger;
+    /* 0x01 */ u8 panelsCount;
+    /* 0x02 */ s8 activateISpy;
+    /* 0x03 */ char unk_03[0x5];
+    /* 0x08 */ f32 flipTriggerPosY;
     /* 0x0C */ char unk_0C[0x4];
-} Struct8015A578; // size = 0x10
+} HiddenPanelsData; // size = 0x10
 
 typedef struct SpriteShadingLightSource {
     /* 0x00 */ s8 flags;
@@ -2300,8 +2315,8 @@ typedef struct UnkStruct0 {
 } UnkStruct0;
 
 typedef struct FoldImageRecPart {
-    /* 0x00 */ s8* raster;
-    /* 0x04 */ s8* palette;
+    /* 0x00 */ IMG_PTR raster;
+    /* 0x04 */ PAL_PTR palette;
     /* 0x08 */ u16 width;
     /* 0x0A */ u16 height;
     /* 0x0C */ s16 xOffset;
@@ -2325,5 +2340,109 @@ typedef struct FoldImageRec {
     /* 0x20 */ char unk_20[0x4];
     /* 0x24 */ u8 alphaMultiplier;
 } FoldImageRec; // size = 0x25
+
+typedef struct SongUpdateEvent {
+    /* 0x00 */ s32 songName;
+    /* 0x04 */ s32 duration;
+    /* 0x08 */ s32 startVolume;
+    /* 0x0C */ s32 finalVolume;
+    /* 0x10 */ s32 variation;
+    /* 0x14 */ s32 unk14;
+    /* 0x18 */ s32 unk18;
+    /* 0x1C */ s32 unk1C; // may be fake
+} SongUpdateEvent; // size = 0x1C or 0x20
+
+// unfortunately, cant use bitfield for this
+// format: ABCC00DD
+// A = playerID
+// B = trackIndex
+// C = musicEventID
+// D = scriptSelector
+typedef u32 MusicEventTrigger;
+
+// allows Evt scripts to be triggered by BGM commands
+typedef struct MusicEvent {
+    s32 musicEventID; // user-defined, events will respond to BGM Trigger commands with matching ID
+    EvtScript* scripts[4];
+} MusicEvent;
+
+typedef struct ParadeNpcInfo {
+    /* 0x00 */ u32 initialAnim;
+    /* 0x04 */ u32** animList;
+    /* 0x08 */ Vec3f pos;
+    /* 0x14 */ f32 yaw;
+} ParadeNpcInfo; // size = 0x18
+
+typedef struct CreditsEntry {
+    /* 0x00 */ s32 msgID;
+    /* 0x04 */ s32 posX;
+    /* 0x08 */ s32 posY;
+    /* 0x0C */ s32 palette;
+    /* 0x10 */ s32 appearMode;
+    /* 0x14 */ s32 appearTime;
+    /* 0x18 */ s32 perCharDelayIn;
+    /* 0x1C */ s32 holdMode;
+    /* 0x20 */ s32 holdTime;
+    /* 0x24 */ s32 vanishMode;
+    /* 0x28 */ s32 vanishTime;
+    /* 0x2C */ s32 perCharDelayOut;
+    /* 0x30 */ s32 next;
+    /* 0x34 */ s16 flags;
+    /* 0x36 */ char pad_36[2];
+} CreditsEntry; // size = 0x38
+
+typedef struct CreditsLine {
+    /* 0x00 */ u8* message;
+    /* 0x04 */ s32 unk__04;
+    /* 0x08 */ s32 time;
+    /* 0x0C */ s32 state;
+    /* 0x10 */ s32 palette;
+    /* 0x14 */ s32 msgWidth;
+    /* 0x18 */ s32 appearMode;
+    /* 0x1C */ s32 appearTime;
+    /* 0x20 */ s32 perCharDelayIn;
+    /* 0x24 */ s32 unk__24;
+    /* 0x28 */ s32 unk__28;
+    /* 0x2C */ s32 unk__2C;
+    /* 0x30 */ s32 unk__30;
+    /* 0x34 */ s32 holdMode;
+    /* 0x38 */ s32 holdTime;
+    /* 0x3C */ s32 unk__3C;
+    /* 0x40 */ s32 unk__40;
+    /* 0x44 */ s32 unk__44;
+    /* 0x48 */ s32 unk__48;
+    /* 0x4C */ s32 vanishMode;
+    /* 0x50 */ s32 vanishTime;
+    /* 0x54 */ s32 perCharDelayOut;
+    /* 0x58 */ s32 unk__58;
+    /* 0x5C */ s32 unk__5C;
+    /* 0x60 */ s32 unk__60;
+    /* 0x64 */ s32 unk__64;
+    /* 0x68 */ s32 posX;
+    /* 0x6C */ s32 posY;
+    /* 0x70 */ s16 flags;
+    /* 0x72 */ char unk_72[2];
+} CreditsLine; // size = 0x74
+
+typedef struct CreditsChar {
+    /* 0x00 */ s32 charIndex;
+    /* 0x04 */ s32 font;
+    /* 0x08 */ s32 variation;
+    /* 0x0C */ s32 palette;
+    /* 0x10 */ s32 posX;
+    /* 0x14 */ s32 posY;
+    /* 0x18 */ s32 fadeInTime;
+} CreditsChar; // size = unk
+
+typedef struct CreditsData {
+    /* 0x00 */ u32 workerID;
+    /* 0x04 */ CreditsLine lines[32];
+} CreditsData; // size = 0x74
+
+typedef struct CreditsUnkBeta {
+    /* 0x00 */ u8 unk_00;
+    /* 0x01 */ u8 unk_01;
+    /* 0x02 */ s16 size;
+} CreditsUnkBeta; // size = 0x4
 
 #endif

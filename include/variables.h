@@ -74,13 +74,13 @@ extern s8 D_800A0900;
 extern f32 GravityParamsStartFall[];
 extern s16 D_800F7B80;
 extern u8* D_801512F0;
-extern s16 D_80151308;
+extern u16 D_80151308;
 extern s32 gEntityHideMode;
 
 extern s32 D_8010C92C;
 extern s32 D_8010C950;
 extern s32 D_801595A0;
-extern Struct8015A578 D_8015A578;
+extern HiddenPanelsData gCurrentHiddenPanels;
 
 extern BackgroundHeader gBackgroundImage;
 
@@ -176,7 +176,7 @@ extern f32 gCurtainFade;
 extern f32 gCurtainFadeGoal;
 extern UNK_FUN_PTR(gCurtainDrawCallback);
 
-extern s16 gCurrentDoorSoundsSet;
+extern u16 gCurrentDoorSoundsSet;
 
 extern s32 D_800D9620;
 extern UNK_TYPE D_800E92D8;
@@ -231,12 +231,7 @@ extern EvtScript SCRIPT_NpcDefeat;
 extern EvtScript ShakeCam1;
 extern EvtScript ShakeCamX;
 
-extern s16 gMusicUnkVolume;
-extern s16 gMusicUnkVolume2;
-extern s16 gMusicCurrentVolume;
-extern s16 gMusicTargetVolume;
 extern MusicSettings gMusicSettings[4];
-extern MusicSettings D_8014F6F0;
 
 // OS
 extern OSThread D_800A4270; // idle thread, id 1

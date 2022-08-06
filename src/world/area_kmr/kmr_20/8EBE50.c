@@ -4,9 +4,15 @@
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8EBE50", func_80240310_8EC130);
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8EBE50", func_80240330_8EC150);
+ApiStatus func_80240330_8EC150(Evt* script, s32 isInitialCall) {
+    au_ambience_set_volume(0, 1000, 0x3F);
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8EBE50", func_80240358_8EC178);
+ApiStatus func_80240358_8EC178(Evt* script, s32 isInitialCall) {
+    au_ambience_set_volume(0, 1000, 0x7F);
+    return ApiStatus_DONE2;
+}
 
 #include "common/foliage.inc.c"
 
@@ -22,4 +28,7 @@ INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8EBE50", func_80240B48_8EC968);
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8EBE50", func_80240B54_8EC974);
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8EBE50", func_80240DA4_8ECBC4);
+ApiStatus func_80240DA4_8ECBC4(Evt* script, s32 isInitialCall) {
+    au_ambience_set_volume(0, 1000, 1);
+    return ApiStatus_DONE2;
+}

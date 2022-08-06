@@ -1254,24 +1254,24 @@ void func_801363A0(ItemEntity* itemEntity) {
                 temp = 0;
             }
             if (gItemTable[itemEntity->itemID].typeFlags) {
-                set_window_properties(0xC, s1, s3 - 0x18 + temp, offsetY,
+                set_window_properties(WINDOW_ID_12, s1, s3 - 0x18 + temp, offsetY,
                                     temp2, 0, func_8013673C, itemEntity, -1);
             } else {
-                set_window_properties(0xC, s1, s3 - 0x18 + temp, offsetY,
+                set_window_properties(WINDOW_ID_12, s1, s3 - 0x18 + temp, offsetY,
                                     temp2, 0, func_8013673C, itemEntity, -1);
             }
             if (itemEntity->itemID != ITEM_STAR_PIECE && itemEntity->itemID != ITEM_COIN) {
-                set_window_properties(0x13, 0x14, 0xBA, 0x118, 0x20, NULL, func_80136A08, itemEntity, -1);
+                set_window_properties(WINDOW_ID_19, 0x14, 0xBA, 0x118, 0x20, NULL, func_80136A08, itemEntity, -1);
             }
             if (itemEntity->state != 2) {
                 offsetY = get_msg_width(MESSAGE_ID(0x1D, 0x060), 0) + 0x18;
-                set_window_properties(0x11, 160 - offsetY / 2, 0x24, offsetY, 40, NULL, func_801369D0, itemEntity, -1);
+                set_window_properties(WINDOW_ID_17, 160 - offsetY / 2, 0x24, offsetY, 40, NULL, func_801369D0, itemEntity, -1);
             }
             break;
         case 12:
             set_message_msg(itemData->nameMsg, 0);
             offsetY = get_msg_width(MESSAGE_ID(0x1D, 0x05F), 0) + 0x36;
-            set_window_properties(0xC, 160 - offsetY / 2, 0x4C, offsetY, 40, NULL, func_8013673C, itemEntity, -1);
+            set_window_properties(WINDOW_ID_12, 160 - offsetY / 2, 0x4C, offsetY, 40, NULL, func_8013673C, itemEntity, -1);
             break;
     }
 }

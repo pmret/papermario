@@ -26,22 +26,21 @@ void func_802B6000_E27510(void) {
 void func_802B6060_E27570(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     CollisionStatus* collisionStatus;
-    f32 sp50;
-    f32 sp4C;
-    s32 sp48;
-    f32 sp44;
-    f32 sp40;
-    f32 sp3C;
-    f32 sp38;
-    f32 sp34;
-    f32 sp30;
-    f32 sp2C;
-    f32 sp28;
+    f32 cosA;
+    f32 sinA;
+    s32 hitID;
+    f32 hitDirZ;
+    f32 hitDirX;
+    f32 hitRy;
+    f32 hitRx;
+    f32 depth;
+    f32 posZ;
+    f32 posY;
+    f32 posX;
     f32 tempCurrentSpeed;
-    u8 colliderTemp;
 
-    if (playerStatus->flags & (1 << 31)) {
-        playerStatus->flags &= ~0x80000000;
+    if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
+        playerStatus->flags &= ~PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
         playerStatus->fallState = 0;
         playerStatus->currentSpeed = 0.0f;
         playerStatus->animFlags |= 4;
@@ -56,13 +55,13 @@ void func_802B6060_E27570(void) {
         gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_FLAGS_1;
     }
     tempCurrentSpeed = playerStatus->currentSpeed;
-    sp28 = playerStatus->position.x;
-    sp2C = playerStatus->position.y;
-    sp30 = playerStatus->position.z;
-    sp48 = player_test_move_with_slipping(playerStatus, &sp28, &sp2C, &sp30, tempCurrentSpeed, playerStatus->heading);
-    playerStatus->position.x = sp28;
-    playerStatus->position.z = sp30;
-    playerStatus->position.y = sp2C;
+    posX = playerStatus->position.x;
+    posY = playerStatus->position.y;
+    posZ = playerStatus->position.z;
+    hitID = player_test_move_with_slipping(playerStatus, &posX, &posY, &posZ, tempCurrentSpeed, playerStatus->heading);
+    playerStatus->position.x = posX;
+    playerStatus->position.z = posZ;
+    playerStatus->position.y = posY;
 
     switch (playerStatus->fallState) {
         case 0:
@@ -74,20 +73,19 @@ void func_802B6060_E27570(void) {
             if (D_802B6788 <= playerStatus->currentSpeed) {
                 playerStatus->currentSpeed = D_802B6788;
             }
-            sp28 = playerStatus->position.x;
-            sp34 = 100.0f;
-            sp30 = playerStatus->position.z;
+            posX = playerStatus->position.x;
+            depth = 100.0f;
+            posZ = playerStatus->position.z;
             D_802B6794 = D_802B6798;
-            sp2C = playerStatus->position.y + (playerStatus->colliderHeight * 0.5f);
-            sp48 = player_raycast_below_cam_relative(playerStatus, &sp28, &sp2C, &sp30, &sp34, &sp38, &sp3C, &sp40, &sp44);
-            D_802B6798 = sp3C;
-            if (sp48 >= 0) {
+            posY = playerStatus->position.y + (playerStatus->colliderHeight * 0.5f);
+            hitID = player_raycast_below_cam_relative(playerStatus, &posX, &posY, &posZ, &depth, &hitRx, &hitRy, &hitDirX, &hitDirZ);
+            D_802B6798 = hitRy;
+            if (hitID >= 0) {
                 collisionStatus = &gCollisionStatus;
-                colliderTemp = get_collider_type_by_id(sp48);
-                if (colliderTemp == 5) {
-                    collisionStatus->currentFloor = sp48;
-                    playerStatus->position.y = sp2C;
-                    D_802B6790 = sp3C + 180.0f;
+                if ((u8)get_collider_type_by_id(hitID) == 5) {
+                    collisionStatus->currentFloor = hitID;
+                    playerStatus->position.y = posY;
+                    D_802B6790 = hitRy + 180.0f;
                     break;
                 }
                 if (!(fabs(D_802B6794 - D_802B6798) >= 50.0)) {
@@ -98,17 +96,17 @@ void func_802B6060_E27570(void) {
             } else {
                 playerStatus->fallState = 2;
             }
-            sin_cos_rad((D_802B6790 * TAU) / 360.0f, &sp4C, &sp50);
-            playerStatus->position.y += fabsf((sp4C / sp50) * playerStatus->currentSpeed);
+            sin_cos_rad((D_802B6790 * TAU) / 360.0f, &sinA, &cosA);
+            playerStatus->position.y += fabsf((sinA / cosA) * playerStatus->currentSpeed);
             snd_stop_sound(SOUND_167);
             break;
         case 1:
-            sp28 = playerStatus->position.x;
-            sp34 = 50.0f;
-            sp30 = playerStatus->position.z;
-            sp2C = playerStatus->position.y + (playerStatus->colliderHeight * 0.5f);
-            sp48 = player_raycast_below_cam_relative(playerStatus, &sp28, &sp2C, &sp30, &sp34, &sp38, &sp3C, &sp40, &sp44);
-            if (sp48 >= 0) {
+            posX = playerStatus->position.x;
+            depth = 50.0f;
+            posZ = playerStatus->position.z;
+            posY = playerStatus->position.y + (playerStatus->colliderHeight * 0.5f);
+            hitID = player_raycast_below_cam_relative(playerStatus, &posX, &posY, &posZ, &depth, &hitRx, &hitRy, &hitDirX, &hitDirZ);
+            if (hitID >= 0) {
                 tempCurrentSpeed = playerStatus->currentSpeed / 3.0f;
                 if (tempCurrentSpeed < 0.01) {
                     playerStatus->currentSpeed = 0.0f;
@@ -120,7 +118,7 @@ void func_802B6060_E27570(void) {
                     playerStatus->fallState = 6;
                     playerStatus->currentStateTime = 15;
                     playerStatus->currentSpeed = 0.0f;
-                    playerStatus->position.y = sp2C;
+                    playerStatus->position.y = posY;
                 }
                 break;
             }
@@ -144,8 +142,8 @@ void func_802B6060_E27570(void) {
             if (playerStatus->currentSpeed <= 0.0f) {
                 playerStatus->currentSpeed = 0.0f;
             }
-            playerStatus->position.y = player_check_collision_below(func_800E34D8(), &sp48);
-            if (sp48 >= 0) {
+            playerStatus->position.y = player_check_collision_below(func_800E34D8(), &hitID);
+            if (hitID >= 0) {
                 D_802B678C = -1;
                 suggest_player_anim_setUnkFlag(0x80003);
                 sfx_play_sound_at_player(SOUND_162, 0);
