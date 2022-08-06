@@ -56,9 +56,9 @@ EffectInstance* tattle_window_main(s32 arg0, f32 x, f32 y, f32 z, f32 arg4, s32 
 
     effect = shim_create_effect_instance(bpPtr);
     effect->numParts = numParts;
-    part = effect->data = shim_general_heap_malloc(numParts * sizeof(*part));
+    part = effect->data.tattleWindow = shim_general_heap_malloc(numParts * sizeof(*part));
 
-    ASSERT(effect->data != NULL);
+    ASSERT(effect->data.tattleWindow != NULL);
 
     part->unk_00 = arg0;
     part->unk_14 = 0;
@@ -88,7 +88,7 @@ void tattle_window_init(EffectInstance* effect) {
 void tattle_window_update(EffectInstance* effect) {
     s32 unk_10, unk_10_2;
     s32 old_unk_14;
-    TattleWindowFXData* part = effect->data;
+    TattleWindowFXData* part = effect->data.tattleWindow;
 
     if (effect->flags & 0x10) {
         effect->flags &= ~0x10;

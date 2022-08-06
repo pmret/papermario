@@ -23,9 +23,9 @@ ApiStatus AddEffectOffset(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* effect = (EffectInstance*) evt_get_variable(script, *args++);
 
-    ((EffectInstanceData*)effect->data)->pos.x += evt_get_variable(script, *args++);
-    ((EffectInstanceData*)effect->data)->pos.y += evt_get_variable(script, *args++);
-    ((EffectInstanceData*)effect->data)->pos.z += evt_get_variable(script, *args++);
+    effect->data.ambig->pos.x += evt_get_variable(script, *args++);
+    effect->data.ambig->pos.y += evt_get_variable(script, *args++);
+    effect->data.ambig->pos.z += evt_get_variable(script, *args++);
 
     return ApiStatus_DONE2;
 }

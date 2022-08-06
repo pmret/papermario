@@ -1260,7 +1260,7 @@ void npc_update_decoration_bowser_aura(Npc* npc, s32 idx) {
             return;
     }
 
-    instanceData = npc->decorations[idx]->data;
+    instanceData = npc->decorations[idx]->data.ambig;
     instanceData->pos.x = npc->pos.x;
     instanceData->pos.y = npc->pos.y;
     instanceData->pos.z = npc->pos.z;
@@ -1270,7 +1270,7 @@ void npc_update_decoration_bowser_aura(Npc* npc, s32 idx) {
 }
 
 void npc_remove_decoration_bowser_aura(Npc* npc, s32 idx) {
-    ((EffectInstanceData*)npc->decorations[idx]->data)->unk_2C = 5;
+    npc->decorations[idx]->data.ambig->unk_2C = 5;
 }
 
 void npc_update_decoration_sweat(Npc* npc, s32 idx) {
@@ -1312,7 +1312,7 @@ void npc_update_decoration_seeing_stars(Npc* npc, s32 idx) {
 
     }
 
-    instanceData = npc->decorations[idx]->data;
+    instanceData = npc->decorations[idx]->data.ambig;
     instanceData->pos.x = npc->pos.x;
     instanceData->pos.y = npc->pos.y + npc->collisionHeight;
     instanceData->pos.z = npc->pos.z;
@@ -1332,7 +1332,7 @@ void npc_update_decoration_glow_in_front(Npc* npc, s32 idx) {
             npc->decorationInitialised[idx] = 1;
             break;
         case 1:
-            instanceData = npc->decorations[idx]->data;
+            instanceData = npc->decorations[idx]->data.ambig;
             instanceData->pos.x = npc->pos.x;
             instanceData->pos.y = npc->pos.y + npc->collisionHeight * 0.5 * npc->scale.x;
             instanceData->pos.z = npc->pos.z;
@@ -1355,7 +1355,7 @@ void npc_update_decoration_glow_behind(Npc* npc, s32 idx) {
             npc->decorationInitialised[idx] = 1;
             break;
         case 1:
-            instanceData = npc->decorations[idx]->data;
+            instanceData = npc->decorations[idx]->data.ambig;
             instanceData->pos.x = npc->pos.x;
             instanceData->pos.y = npc->pos.y + npc->collisionHeight * 0.5;
             instanceData->pos.z = npc->pos.z - 5.0f;

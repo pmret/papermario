@@ -50,8 +50,8 @@ EffectInstance* disable_x_main(s32 type, f32 x, f32 y, f32 z, s32 arg4) {
     effect = shim_create_effect_instance(&bp);
     effect->numParts = numParts;
     data = shim_general_heap_malloc(numParts * sizeof(*data));
-    effect->data = data;
-    ASSERT(effect->data != NULL);
+    effect->data.disableX = data;
+    ASSERT(effect->data.disableX != NULL);
 
     data->type = type;
     data->scale = 1.0f;
@@ -102,7 +102,7 @@ void disable_x_init(EffectInstance* effect) {
 void disable_x_update(EffectInstance* effect) {
     static const f32 D_E0082D30[12] = { 5.0f, 4.0f, 4.0f, 3.0f, 2.0f, 1.0f, 0.7f, 1.2f, 1.0f, 0.0f, 0.0f, 0.0f };
 
-    DisableXFXData* data = effect->data;
+    DisableXFXData* data = effect->data.disableX;
     s32 unk_28;
     s32 unk_2C;
     f32 unk_34;
@@ -202,7 +202,7 @@ void disable_x_render(EffectInstance* effect) {
 }
 
 void func_E0082528(EffectInstance* effect) {
-    DisableXFXData* data = effect->data;
+    DisableXFXData* data = effect->data.disableX;
 
     if (data->unk_04 != 0) {
         func_E00828B4(effect);
@@ -254,7 +254,7 @@ void func_E00826C4(DisableXFXData* data) {
 }
 
 void func_E00828B4(EffectInstance* effect) {
-    DisableXFXData* data = effect->data;
+    DisableXFXData* data = effect->data.disableX;
     s32 type;
     s32 unk_38;
     s32 i;
@@ -283,7 +283,7 @@ void func_E00828B4(EffectInstance* effect) {
 }
 
 void func_E0082A84(EffectInstance* effect) {
-    DisableXFXData* data = effect->data;
+    DisableXFXData* data = effect->data.disableX;
     s32 unk_38;
     s32 i;
 

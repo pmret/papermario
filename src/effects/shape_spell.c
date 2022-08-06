@@ -39,9 +39,9 @@ EffectInstance* shape_spell_main(s32 isChild, f32 x, f32 y, f32 z, f32 arg4, f32
 
     effect = shim_create_effect_instance(bpPtr);
     effect->numParts = numParts;
-    part = effect->data = shim_general_heap_malloc(numParts * sizeof(*part));
+    part = effect->data.shapeSpell = shim_general_heap_malloc(numParts * sizeof(*part));
 
-    ASSERT(effect->data != NULL);
+    ASSERT(effect->data.shapeSpell != NULL);
 
     part->unk_2C = 0;
     part->isChild = isChild;
@@ -76,7 +76,7 @@ void shape_spell_init(EffectInstance* effect) {
 
 void shape_spell_update(EffectInstance* effect) {
     s32 flags = effect->flags;
-    ShapeSpellFXData* part = effect->data;
+    ShapeSpellFXData* part = effect->data.shapeSpell;
     s32 isChild;
 
     if (flags & 0x10) {
@@ -101,7 +101,7 @@ void shape_spell_update(EffectInstance* effect) {
             part->pos.y + part->unk_14,
             part->pos.z + part->unk_18,
             0.0f, 0.0f, 0.0f, 0x18
-        )->data;
+        )->data.shapeSpell;
         newPart->unk_28 = part->unk_28;
     }
 

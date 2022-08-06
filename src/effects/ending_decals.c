@@ -15,7 +15,7 @@ void ending_decals_init(void) {
 INCLUDE_ASM(s32, "effects/ending_decals", ending_decals_update);
 
 void ending_decals_render(EffectInstance* effect) {
-    EndingDecalsFXData* effect52 = effect->data;
+    EndingDecalsFXData* effect52 = effect->data.endingDecals;
     RenderTask renderTask;
     RenderTask* renderTaskPtr = &renderTask;
     RenderTask* retTask;

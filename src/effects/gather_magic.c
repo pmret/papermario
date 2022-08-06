@@ -23,8 +23,8 @@ EffectInstance* gather_magic_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 ar
     effect = shim_create_effect_instance(&bp);
     effect->numParts = numParts;
     data = shim_general_heap_malloc(numParts * sizeof(*data));
-    effect->data = data;
-    ASSERT(effect->data != NULL);
+    effect->data.gatherMagic = data;
+    ASSERT(effect->data.gatherMagic != NULL);
 
     data->unk_04 = arg0;
     data->unk_1C = 0;

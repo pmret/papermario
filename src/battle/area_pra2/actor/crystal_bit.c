@@ -230,16 +230,16 @@ ApiStatus UpdateCrystalBitEffect(Evt* script, s32 isInitialCall) {
     ActorPart* actorPart = get_actor_part(actor, 1);
     EffectInstance* effect = (EffectInstance*) evt_get_variable(script, *args);
 
-    ((MiscParticlesFXData*)effect->data)->scaleX = actorPart->scale.x * 24.0f;
-    ((MiscParticlesFXData*)effect->data)->scaleY = actorPart->scale.y * 24.0f;
+    effect->data.miscParticles->scaleX = actorPart->scale.x * 24.0f;
+    effect->data.miscParticles->scaleY = actorPart->scale.y * 24.0f;
     if (actorPart->flags & ACTOR_PART_FLAG_INVISIBLE) {
-        ((MiscParticlesFXData*)effect->data)->pos.x = actor->currentPos.x;
-        ((MiscParticlesFXData*)effect->data)->pos.y = -1000.0f;
-        ((MiscParticlesFXData*)effect->data)->pos.z = actor->currentPos.z;
+        effect->data.miscParticles->pos.x = actor->currentPos.x;
+        effect->data.miscParticles->pos.y = -1000.0f;
+        effect->data.miscParticles->pos.z = actor->currentPos.z;
     } else {
-        ((MiscParticlesFXData*)effect->data)->pos.x = actor->currentPos.x;
-        ((MiscParticlesFXData*)effect->data)->pos.y = actor->currentPos.y;
-        ((MiscParticlesFXData*)effect->data)->pos.z = actor->currentPos.z;
+        effect->data.miscParticles->pos.x = actor->currentPos.x;
+        effect->data.miscParticles->pos.y = actor->currentPos.y;
+        effect->data.miscParticles->pos.z = actor->currentPos.z;
     }
 
     return ApiStatus_BLOCK;

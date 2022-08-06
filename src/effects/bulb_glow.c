@@ -11,14 +11,14 @@ void bulb_glow_init(void) {
 INCLUDE_ASM(s32, "effects/bulb_glow", bulb_glow_update);
 
 void bulb_glow_render(EffectInstance* effect) {
-    BulbGlowFXData* effect60 = effect->data;
+    BulbGlowFXData* data = effect->data.bulbGlow;
     RenderTask renderTask;
     RenderTask* renderTaskPtr = &renderTask;
     RenderTask* retTask;
 
     renderTask.appendGfxArg = effect;
     renderTask.appendGfx = bulb_glow_appendGfx;
-    if (effect60->unk_00 == 5) {
+    if (data->unk_00 == 5) {
         renderTask.distance = 0;
         renderTaskPtr->renderMode = RENDER_MODE_SURFACE_OPA;
     } else {

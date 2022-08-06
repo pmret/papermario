@@ -608,13 +608,13 @@ void btl_state_update_begin_partner_turn(void) {
                 if (partner->koDuration > 0) {
                     // TODO: We believe these are DebuffFXData*,
                     // but unk_3C is a u8 for these and we need it to be an s32...
-                    ((s32*)(partner->debuffEffect->data))[15] = partner->koDuration;
+                    ((partner->debuffEffect->data.unk32))[15] = partner->koDuration;
                 } else {
                     partner->koStatus = 0;
                     dispatch_event_partner(EVENT_34);
                     // TODO: We believe these are DebuffFXData*,
                     // but unk_3C is a u8 for these and we need it to be an s32...
-                    ((s32*)(partner->debuffEffect->data))[15] = 0;
+                    ((partner->debuffEffect->data.unk32))[15] = 0;
                     gBattleStatus.flags2 |= BS_FLAGS2_8;
                 }
             }
@@ -823,7 +823,7 @@ void btl_state_update_victory(void) {
             player->transStatus = 0;
             player->koStatus = 0;
             player->koDuration = 0;
-            ((DisableXFXData*)player->debuffEffect->data)->unk_3C = 0;
+            player->debuffEffect->data.disableX->unk_3C = 0;
 
             if (partner != NULL) {
                 if (partner->koStatus == STATUS_DAZE) {
@@ -836,7 +836,7 @@ void btl_state_update_victory(void) {
                 partner->transStatus = 0;
                 partner->koStatus = 0;
                 partner->koDuration = 0;
-                ((DisableXFXData*)partner->debuffEffect->data)->unk_3C = 0;
+                partner->debuffEffect->data.disableX->unk_3C = 0;
             }
             break;
         case BATTLE_STATE2_PLAYER_DEFEATED:
@@ -993,7 +993,7 @@ void btl_state_update_end_training_battle(void) {
             player->transStatus = 0;
             player->koStatus = 0;
             player->koDuration = 0;
-            ((DisableXFXData*)player->debuffEffect->data)->unk_3C = 0;
+            player->debuffEffect->data.disableX->unk_3C = 0;
             if (partner != NULL) {
                 if (partner->koStatus == STATUS_DAZE) {
                     dispatch_event_partner(EVENT_34);
@@ -1005,7 +1005,7 @@ void btl_state_update_end_training_battle(void) {
                 partner->transStatus = 0;
                 partner->koStatus = 0;
                 partner->koDuration = 0;
-                ((DisableXFXData*)partner->debuffEffect->data)->unk_3C = 0;
+                partner->debuffEffect->data.disableX->unk_3C = 0;
             }
             break;
         case BATTLE_STATE2_PLAYER_DEFEATED:
@@ -1274,7 +1274,7 @@ void btl_state_update_run_away(void) {
                 player->state.varTable[0] = 100;
             }
             battleStatus->battlePhase = 3;
-            script = start_script(PlayerScriptDispatcher, EVT_PRIORITY_A, 0);
+            script = start_script(&PlayerScriptDispatcher, EVT_PRIORITY_A, 0);
             player->takeTurnScript = script;
             player->takeTurnID = script->id;
             script->owner1.actorID = ACTOR_PLAYER;
@@ -1353,7 +1353,7 @@ void btl_state_update_run_away(void) {
     switch (gBattleState2) {
         case BATTLE_STATE2_UNK_3:
             battleStatus->battlePhase = 7;
-            script = start_script(PlayerScriptDispatcher, EVT_PRIORITY_A, 0);
+            script = start_script(&PlayerScriptDispatcher, EVT_PRIORITY_A, 0);
             player->takeTurnScript = script;
             player->takeTurnID = script->id;
             script->owner1.actorID = ACTOR_PLAYER;
@@ -1410,7 +1410,7 @@ void btl_state_update_defeat(void) {
                 remove_status_debuff(player->hudElementDataIndex);
                 player->koStatus = 0;
                 player->koDuration = 0;
-                ((DisableXFXData*)player->debuffEffect->data)->unk_3C = 0;
+                player->debuffEffect->data.disableX->unk_3C = 0;
             }
 
             btl_cam_use_preset(BTL_CAM_PRESET_25);

@@ -391,23 +391,23 @@ EffectInstance* create_effect_instance(EffectBlueprint* effectBp) {
     return newEffectInst;
 }
 
-void remove_effect(EffectInstance* effectInstsance) {
+void remove_effect(EffectInstance* effectInstance) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(gEffectInstances); i++) {
-        if (gEffectInstances[i] == effectInstsance) {
+        if (gEffectInstances[i] == effectInstance) {
             break;
         }
     }
 
     ASSERT(i < ARRAY_COUNT(gEffectInstances));
 
-    if (effectInstsance->data == NULL) {
-        general_heap_free(effectInstsance);
+    if (effectInstance->data.any == NULL) {
+        general_heap_free(effectInstance);
         gEffectInstances[i] = NULL;
     } else {
-        general_heap_free(effectInstsance->data);
-        general_heap_free(effectInstsance);
+        general_heap_free(effectInstance->data.any);
+        general_heap_free(effectInstance);
         gEffectInstances[i] = NULL;
     }
 }
@@ -419,8 +419,8 @@ void remove_all_effects(void) {
         EffectInstance* effect = gEffectInstances[i];
 
         if (effect != NULL && effect->flags & 4) {
-            if (effect->data != NULL) {
-                general_heap_free(effect->data);
+            if (effect->data.any != NULL) {
+                general_heap_free(effect->data.any);
             }
             general_heap_free(effect);
             gEffectInstances[i] = NULL;

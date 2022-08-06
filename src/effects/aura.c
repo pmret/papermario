@@ -42,9 +42,9 @@ void aura_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, EffectInstance*
     effect = shim_create_effect_instance(bpPtr);
     effect->numParts = numParts;
 
-    part = effect->data = shim_general_heap_malloc(numParts * sizeof(*part));
+    part = effect->data.aura = shim_general_heap_malloc(numParts * sizeof(*part));
 
-    ASSERT(effect->data != NULL);
+    ASSERT(effect->data.aura != NULL);
 
     part->unk_64.s = 0;
 
@@ -161,7 +161,7 @@ void aura_update(EffectInstance* effect) {
     s32 unk_2C;
     s32 unk_30;
 
-    data = effect->data;
+    data = effect->data.aura;
     if (effect->flags & 0x10) {
         effect->flags &= ~0x10;
         data->unk_2C = 5;
@@ -266,7 +266,7 @@ void func_E0076854(void) {
 void aura_appendGfx(void* effect) {
     Matrix4f sp18, sp58, sp98;
     EffectInstance* eff = (EffectInstance*)effect;
-    AuraFXData* data = ((EffectInstance*)effect)->data;
+    AuraFXData* data = ((EffectInstance*)effect)->data.aura;
     s32 type = data->type;
     s32 primA = data->primA;
     s32 v1, v2;

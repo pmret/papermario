@@ -148,9 +148,9 @@ EffectInstance* stat_change_main(s32 arg0, f32 x, f32 y, f32 z, f32 scale, s32 t
 
     effect = shim_create_effect_instance(bpPtr);
     effect->numParts = numParts;
-    part = effect->data = shim_general_heap_malloc(numParts * sizeof(*part));
+    part = effect->data.statChange = shim_general_heap_malloc(numParts * sizeof(*part));
 
-    ASSERT(effect->data != NULL);
+    ASSERT(effect->data.statChange != NULL);
 
     part->unk_00 = arg0;
     part->pos.x = x;
@@ -177,7 +177,7 @@ void stat_change_init(EffectInstance* effect) {
 }
 
 void stat_change_update(EffectInstance* effect) {
-    StatChangeFXData* part = effect->data;
+    StatChangeFXData* part = effect->data.statChange;
     s32 old_unk18;
 
     part->timeLeft--;

@@ -14,14 +14,14 @@ ApiStatus func_80218BC4_6BC754(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* tattleEffect = (EffectInstance*) evt_get_variable(script, *args++);
 
-    ((TattleWindowFXData*) tattleEffect->data)->pos.y = -1000.0f;
+    tattleEffect->data.tattleWindow->pos.y = -1000.0f;
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_80218BFC_6BC78C(Evt* script, s32 isInitialCall) {
     EffectInstance* tattleEffect = (EffectInstance*) evt_get_variable(script, *script->ptrReadPos);
 
-    ((TattleWindowFXData*) tattleEffect->data)->pos.y = 144.0f;
+    tattleEffect->data.tattleWindow->pos.y = 144.0f;
     tattleEffect->flags |= EFFECT_INSTANCE_FLAGS_10;
     return ApiStatus_DONE2;
 }

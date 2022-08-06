@@ -311,9 +311,9 @@ ApiStatus N(SuperBlock_AnimateEnergyOrbs)(Evt* script, s32 isInitialCall) {
     }
 
     for (i = 0; i < SUPER_BLOCK_NUM_ORBS; i++) {
-        ((BlurFlameEffectData*)userData->orbEffects[i]->data)->position.x = userData->posX[i];
-        ((BlurFlameEffectData*)userData->orbEffects[i]->data)->position.y = userData->posY[i];
-        ((BlurFlameEffectData*)userData->orbEffects[i]->data)->position.z = userData->posZ[i];
+        ((BlurFlameEffectData*)userData->orbEffects[i]->data.unk32)->position.x = userData->posX[i];
+        ((BlurFlameEffectData*)userData->orbEffects[i]->data.unk32)->position.y = userData->posY[i];
+        ((BlurFlameEffectData*)userData->orbEffects[i]->data.unk32)->position.z = userData->posZ[i];
     }
 
     return ApiStatus_BLOCK;

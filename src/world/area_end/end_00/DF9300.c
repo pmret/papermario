@@ -9,6 +9,6 @@ ApiStatus func_80242AD4_DF94D4(Evt *script, s32 isInitialCall) {
     EffectInstance* effect = (EffectInstance*) evt_get_variable(script, *args++);
 
     // TODO figure out the correct effect data struct
-    ((s32*) effect->data)[1] = 1;
+    effect->data.unk32[1] = 1;
     return ApiStatus_DONE2;
 }

@@ -465,6 +465,33 @@ typedef struct EntityBlueprint {
     /* 0x21 */ u8 aabbSize[3];
 } EntityBlueprint; // size = 0x24
 
+typedef union {
+    s32* any;
+    struct SaveBlockData* saveBlock;
+    struct SwitchData* swtch;
+    struct ShatteringBlockData* shatteringBlock;
+    struct BlockData* block;
+    struct WoodenCrateData* crate;
+    struct ChestData* chest;
+    struct BlueWarpPipeData* bluePipe;
+    struct HeartBlockContentData* heartBlockContent;
+    struct SuperBlockContentData* superBlockContent;
+    struct SimpleSpringData* simpleSpring;
+    struct HiddenPanelData* hiddenPanel;
+    struct SignpostData* signPost;
+    struct PadlockData* padlock;
+    struct BoardedFloorData* boardedFloor;
+    struct BombableRockData* bombableRock;
+    struct TweesterData* tweester;
+    struct StarBoxLauncherData* starBoxLauncher;
+    struct CymbalPlantData* cymbalPlant;
+    struct PinkFlowerData* pinkFlower;
+    struct SpinningFlowerData* spinningFlower;
+    struct TrumpetPlantData* trumpetPlant;
+    struct MunchlesiaData* munchlesia;
+    struct ArrowSignData* arrowSign;    
+} EntityData;
+
 typedef struct Entity {
     /* 0x00 */ s32 flags;
     /* 0x04 */ u8 listIndex;
@@ -487,32 +514,7 @@ typedef struct Entity {
     /* 0x2C */ s32* savedReadPos[3];
     /* 0x38 */ EntityBlueprint* blueprint;
     /* 0x3C */ void (*renderSetupFunc)(s32);
-    /* 0x40 */ union {
-        s32* any;
-        struct SaveBlockData* saveBlock;
-        struct SwitchData* swtch;
-        struct ShatteringBlockData* shatteringBlock;
-        struct BlockData* block;
-        struct WoodenCrateData* crate;
-        struct ChestData* chest;
-        struct BlueWarpPipeData* bluePipe;
-        struct HeartBlockContentData* heartBlockContent;
-        struct SuperBlockContentData* superBlockContent;
-        struct SimpleSpringData* simpleSpring;
-        struct HiddenPanelData* hiddenPanel;
-        struct SignpostData* signPost;
-        struct PadlockData* padlock;
-        struct BoardedFloorData* boardedFloor;
-        struct BombableRockData* bombableRock;
-        struct TweesterData* tweester;
-        struct StarBoxLauncherData* starBoxLauncher;
-        struct CymbalPlantData* cymbalPlant;
-        struct PinkFlowerData* pinkFlower;
-        struct SpinningFlowerData* spinningFlower;
-        struct TrumpetPlantData* trumpetPlant;
-        struct MunchlesiaData* munchlesia;
-        struct ArrowSignData* arrowSign;
-    } dataBuf;
+    /* 0x40 */ EntityData dataBuf;
     /* 0x44 */ void* gfxBaseAddr;
     /* 0x48 */ Vec3f position;
     /* 0x54 */ Vec3f scale;

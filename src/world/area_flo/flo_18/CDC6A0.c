@@ -1752,12 +1752,12 @@ ApiStatus N(func_8024030C_CDC9AC)(Evt* script, s32 isInitialCall) {
 ApiStatus N(func_80240340_CDC9E0)(Evt* script, s32 isInitialCall) {
     EffectInstance* effect = (EffectInstance*) script->varTable[15];
 
-    ((LightningFXData*)effect->data)->unk_30 = 69;
-    ((LightningFXData*)effect->data)->unk_34 = 255;
-    ((LightningFXData*)effect->data)->unk_38 = 217;
-    ((LightningFXData*)effect->data)->unk_40 = 176;
-    ((LightningFXData*)effect->data)->unk_44 = 254;
-    ((LightningFXData*)effect->data)->unk_48 = 124;
+    effect->data.lightning->unk_30 = 69;
+    effect->data.lightning->unk_34 = 255;
+    effect->data.lightning->unk_38 = 217;
+    effect->data.lightning->unk_40 = 176;
+    effect->data.lightning->unk_44 = 254;
+    effect->data.lightning->unk_48 = 124;
     return ApiStatus_DONE2;
 }
 

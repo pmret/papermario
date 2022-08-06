@@ -138,26 +138,26 @@ ApiStatus MerleeUpdateFX(Evt* script, s32 isInitialCall) {
     script->functionTemp[1] += 10;
     script->functionTemp[1] = clamp_angle(script->functionTemp[1]);
 
-    effectInstanceData = D_800A0BA8->data;
+    effectInstanceData = D_800A0BA8->data.ambig;
     effectInstanceData->pos.x = merlee->pos.x;
     effectInstanceData->pos.y = merlee->pos.y + 16.0f;
     effectInstanceData->pos.z = merlee->pos.z;
 
-    effectInstanceData = D_800A0BAC->data;
+    effectInstanceData = D_800A0BAC->data.ambig;
     effectInstanceData->pos.x = merlee->pos.x;
     effectInstanceData->pos.y = merlee->pos.y + 16.0f;
     effectInstanceData->pos.z = merlee->pos.z + 5.0f;
 
     if (D_800A0BB8 == 2) {
-        ((EffectInstanceData*)D_800A0BA8->data)->unk_30 = 0.00001f;
-        ((EffectInstanceData*)D_800A0BAC->data)->unk_30 = 0.00001f;
+        D_800A0BA8->data.ambig->unk_30 = 0.00001f;
+        D_800A0BAC->data.ambig->unk_30 = 0.00001f;
         D_800A0BA8->flags |= EFFECT_INSTANCE_FLAGS_10;
         D_800A0BAC->flags |= EFFECT_INSTANCE_FLAGS_10;
         return ApiStatus_DONE1;
     }
 
     if (D_800A0BB8 == 1) {
-        effectInstanceData = D_800A0BA8->data;
+        effectInstanceData = D_800A0BA8->data.ambig;
         effectInstanceData->unk_30 += 0.35;
         if (effectInstanceData->unk_30 > 3.5) {
             effectInstanceData->unk_30 = 3.5f;
@@ -166,7 +166,7 @@ ApiStatus MerleeUpdateFX(Evt* script, s32 isInitialCall) {
         if (D_800A0BA0 != 0) {
             D_800A0BA0--;
         } else {
-            effectInstanceData = D_800A0BAC->data;
+            effectInstanceData = D_800A0BAC->data.ambig;
             effectInstanceData->unk_30 += 0.5;
             if (effectInstanceData->unk_30 > 5.0) {
                 D_800A0BB8 = 2;

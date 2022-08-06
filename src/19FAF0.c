@@ -18,36 +18,36 @@ ApiStatus func_80271258(Evt* script, s32 isInitialCall) {
 ApiStatus func_802712A0(Evt* script, s32 isInitialCall) {
     EffectInstance* debuffEffect = fx_debuff(2, script->varTable[0], script->varTable[1], script->varTable[2]);
 
-    ((DebuffFXData*)debuffEffect->data)->unk_38 = 200;
-    ((DebuffFXData*)debuffEffect->data)->unk_39 = 120;
-    ((DebuffFXData*)debuffEffect->data)->unk_3A = 0;
-    ((DebuffFXData*)debuffEffect->data)->unk_3B = 234;
-    ((DebuffFXData*)debuffEffect->data)->unk_3C = 193;
-    ((DebuffFXData*)debuffEffect->data)->unk_3D = 0;
+    debuffEffect->data.debuff->unk_38 = 200;
+    debuffEffect->data.debuff->unk_39 = 120;
+    debuffEffect->data.debuff->unk_3A = 0;
+    debuffEffect->data.debuff->unk_3B = 234;
+    debuffEffect->data.debuff->unk_3C = 193;
+    debuffEffect->data.debuff->unk_3D = 0;
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_80271328(Evt* script, s32 isInitialCall) {
     EffectInstance* debuffEffect = fx_debuff(2, script->varTable[0], script->varTable[1], script->varTable[2]);
 
-    ((DebuffFXData*)debuffEffect->data)->unk_38 = 60;
-    ((DebuffFXData*)debuffEffect->data)->unk_39 = 160;
-    ((DebuffFXData*)debuffEffect->data)->unk_3A = 0;
-    ((DebuffFXData*)debuffEffect->data)->unk_3B = 90;
-    ((DebuffFXData*)debuffEffect->data)->unk_3C = 240;
-    ((DebuffFXData*)debuffEffect->data)->unk_3D = 0;
+    debuffEffect->data.debuff->unk_38 = 60;
+    debuffEffect->data.debuff->unk_39 = 160;
+    debuffEffect->data.debuff->unk_3A = 0;
+    debuffEffect->data.debuff->unk_3B = 90;
+    debuffEffect->data.debuff->unk_3C = 240;
+    debuffEffect->data.debuff->unk_3D = 0;
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_802713B0(Evt* script, s32 isInitialCall) {
     EffectInstance* debuffEffect = fx_debuff(2, script->varTable[0], script->varTable[1], script->varTable[2]);
 
-    ((DebuffFXData*)debuffEffect->data)->unk_38 = 205;
-    ((DebuffFXData*)debuffEffect->data)->unk_39 = 0;
-    ((DebuffFXData*)debuffEffect->data)->unk_3A = 40;
-    ((DebuffFXData*)debuffEffect->data)->unk_3B = 205;
-    ((DebuffFXData*)debuffEffect->data)->unk_3C = 32;
-    ((DebuffFXData*)debuffEffect->data)->unk_3D = 242;
+    debuffEffect->data.debuff->unk_38 = 205;
+    debuffEffect->data.debuff->unk_39 = 0;
+    debuffEffect->data.debuff->unk_3A = 40;
+    debuffEffect->data.debuff->unk_3B = 205;
+    debuffEffect->data.debuff->unk_3C = 32;
+    debuffEffect->data.debuff->unk_3D = 242;
     return ApiStatus_DONE2;
 }
 

@@ -340,26 +340,26 @@ ApiStatus func_802616F4(Evt* script, s32 isInitialCall) {
     script->functionTemp[1] += 10;
     script->functionTemp[1] = clamp_angle(script->functionTemp[1]);
 
-    effectInstanceData = D_8029FB98->data;
+    effectInstanceData = D_8029FB98->data.ambig;
     effectInstanceData->pos.x = merlee->pos.x;
     effectInstanceData->pos.y = merlee->pos.y + 16.0f;
     effectInstanceData->pos.z = merlee->pos.z;
 
-    effectInstanceData = D_8029FB9C->data;
+    effectInstanceData = D_8029FB9C->data.ambig;
     effectInstanceData->pos.x = merlee->pos.x;
     effectInstanceData->pos.y = merlee->pos.y + 16.0f;
     effectInstanceData->pos.z = merlee->pos.z + 5.0f;
 
     if (D_8029FBA4 == 2) {
-        ((EffectInstanceData*)D_8029FB98->data)->unk_30 = 0.00001f;
-        ((EffectInstanceData*)D_8029FB9C->data)->unk_30 = 0.00001f;
+        D_8029FB98->data.ambig->unk_30 = 0.00001f;
+        D_8029FB9C->data.ambig->unk_30 = 0.00001f;
         D_8029FB98->flags |= 0x10;
         D_8029FB9C->flags |= 0x10;
         return ApiStatus_DONE1;
     }
 
     if (D_8029FBA4 == 1) {
-        effectInstanceData = D_8029FB98->data;
+        effectInstanceData = D_8029FB98->data.ambig;
         effectInstanceData->unk_30 += 0.35;
         if (effectInstanceData->unk_30 > 3.5) {
             effectInstanceData->unk_30 = 3.5f;
@@ -368,7 +368,7 @@ ApiStatus func_802616F4(Evt* script, s32 isInitialCall) {
         if (D_8029FB90 != 0) {
             D_8029FB90--;
         } else {
-            effectInstanceData = D_8029FB9C->data;
+            effectInstanceData = D_8029FB9C->data.ambig;
             effectInstanceData->unk_30 += 0.5;
             if (effectInstanceData->unk_30 > 5.0) {
                 D_8029FBA4 = 2;

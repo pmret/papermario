@@ -45,9 +45,9 @@ ApiStatus N(UnkWattEffectFunc1)(Evt* script, s32 isInitialCall) {
                         wattEffectData->effect2->flags |= EFFECT_INSTANCE_FLAGS_10;
                         wattEffectData->effect2 = NULL;
                     }
-                    ((StaticStatusFXData*)wattEffectData->effect1->data)->unk_04 = x;
-                    ((StaticStatusFXData*)wattEffectData->effect1->data)->unk_08 = y;
-                    ((StaticStatusFXData*)wattEffectData->effect1->data)->unk_0C = z;
+                    wattEffectData->effect1->data.staticStatus->unk_04 = x;
+                    wattEffectData->effect1->data.staticStatus->unk_08 = y;
+                    wattEffectData->effect1->data.staticStatus->unk_0C = z;
                     break;
                 case 1:
                     if (wattEffectData->effect1 != NULL) {
@@ -58,9 +58,9 @@ ApiStatus N(UnkWattEffectFunc1)(Evt* script, s32 isInitialCall) {
                         wattEffectData->effect2 = fx_static_status(1, x, y, z, (actor->debuff != STATUS_SHRINK) ? 1.0f : 0.4f, 5, 0);
 
                     }
-                    ((StaticStatusFXData*)wattEffectData->effect2->data)->unk_04 = x;
-                    ((StaticStatusFXData*)wattEffectData->effect2->data)->unk_08 = y;
-                    ((StaticStatusFXData*)wattEffectData->effect2->data)->unk_0C = z;
+                    wattEffectData->effect2->data.staticStatus->unk_04 = x;
+                    wattEffectData->effect2->data.staticStatus->unk_08 = y;
+                    wattEffectData->effect2->data.staticStatus->unk_0C = z;
                     break;
             }
         } else {

@@ -46,7 +46,7 @@ void big_smoke_puff_main(f32 x, f32 y, f32 z) {
     effect->numParts = numParts;
 
     data = shim_general_heap_malloc(effect->numParts * sizeof(*data));
-    effect->data = data;
+    effect->data.bigSmokePuff = data;
 
     ASSERT(data != NULL);
 
@@ -75,7 +75,7 @@ void big_smoke_puff_init(EffectInstance* effect) {
 }
 
 void big_smoke_puff_update(EffectInstance* effect) {
-    BigSmokePuffFXData* data = effect->data;
+    BigSmokePuffFXData* data = effect->data.bigSmokePuff;
     s32 cond = FALSE;
     s32 i;
 
@@ -121,7 +121,7 @@ void big_smoke_puff_render(EffectInstance* effect) {
 
 void big_smoke_puff_appendGfx(void* effect) {
     EffectInstance* eff = (EffectInstance*)effect;
-    BigSmokePuffFXData* data = ((EffectInstance*)effect)->data;
+    BigSmokePuffFXData* data = ((EffectInstance*)effect)->data.bigSmokePuff;
     Matrix4f mtx;
     s32 i;
 

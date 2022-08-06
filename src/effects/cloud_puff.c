@@ -27,8 +27,8 @@ void cloud_puff_main(f32 arg0, f32 arg1, f32 arg2, f32 arg3) {
     effect = shim_create_effect_instance(&bp);
     effect->numParts = numParts;
     part = shim_general_heap_malloc(numParts * sizeof(*part));
-    effect->data = part;
-    ASSERT(effect->data != NULL);
+    effect->data.cloudPuff = part;
+    ASSERT(effect->data.cloudPuff != NULL);
 
     shim_mem_clear(part, numParts * sizeof(*part));
 
@@ -60,7 +60,7 @@ void cloud_puff_init(EffectInstance* effect) {
 }
 
 void cloud_puff_update(EffectInstance* effect) {
-    CloudPuffFXData* part = (CloudPuffFXData*)effect->data;
+    CloudPuffFXData* part = effect->data.cloudPuff;
     s32 cond = FALSE;
     s32 i;
 
@@ -114,7 +114,7 @@ void cloud_puff_render(EffectInstance* effect) {
 
 void cloud_puff_appendGfx(void* effect) {
     EffectInstance* effectTemp = effect;
-    CloudPuffFXData* part = effectTemp->data;
+    CloudPuffFXData* part = effectTemp->data.cloudPuff;
     Matrix4f sp20;
     Matrix4f sp60;
     s32 i;

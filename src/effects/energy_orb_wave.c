@@ -15,7 +15,7 @@ void energy_orb_wave_init(void) {
 INCLUDE_ASM(s32, "effects/energy_orb_wave", energy_orb_wave_update);
 
 void energy_orb_wave_render(EffectInstance* effect) {
-    EnergyOrbWaveFXData* effect82 = effect->data;
+    EnergyOrbWaveFXData* effect82 = effect->data.energyOrbWave;
     RenderTask renderTask;
     RenderTask* retTask;
     RenderTask* renderTaskPointer = &renderTask;

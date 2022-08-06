@@ -25,7 +25,7 @@ s32 N(GetTattle)(void) {
 
 ApiStatus func_80240338_92A5E8(Evt* script, s32 isInitialCall) {
     EffectInstance* effect = (EffectInstance*)evt_get_variable(script, EVT_MAP_VAR(0));
-    ((EffectInstanceData*)effect->data)->unk_3C = 0;
+    effect->data.ambig->unk_3C = 0;
     return ApiStatus_DONE2;
 }
 

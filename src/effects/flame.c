@@ -24,7 +24,7 @@ void flame_init(void) {
 INCLUDE_ASM(s32, "effects/flame", flame_update);
 
 void flame_render(EffectInstance* effect) {
-    FlameFXData* effect32 = effect->data;
+    FlameFXData* data = effect->data.flame;
     RenderTask renderTask;
     RenderTask* renderTaskPtr = &renderTask;
     RenderTask* retTask;
@@ -34,7 +34,7 @@ void flame_render(EffectInstance* effect) {
     f32 outZ;
     f32 outS;
 
-    shim_transform_point(gCameras[gCurrentCameraID].perspectiveMatrix[0], effect32->unk_04, effect32->unk_08, effect32->unk_0C, 1.0f, &outX, &outY, &outZ, &outS);
+    shim_transform_point(gCameras[gCurrentCameraID].perspectiveMatrix[0], data->unk_04, data->unk_08, data->unk_0C, 1.0f, &outX, &outY, &outZ, &outS);
     
     outDist = outZ + 5000;
     if (outDist < 0) {

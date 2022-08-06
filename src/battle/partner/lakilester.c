@@ -69,7 +69,7 @@ ApiStatus func_80238C58_70C968(Evt* script, s32 isInitialCall) {
             if (D_8023D1E0 >= 1.0) {
                 return ApiStatus_DONE2;
             }
-            effectData = battleStatus->cloudNineEffect->data;
+            effectData = battleStatus->cloudNineEffect->data.ambig;
             effectData->rotation.x += 0.2;
             D_8023D1E0 += 0.2;
             break;

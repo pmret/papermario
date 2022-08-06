@@ -64,8 +64,8 @@ void flower_trail_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg
     effect->numParts = numParts;
 
     part = shim_general_heap_malloc(numParts * sizeof(*part));
-    effect->data = part;
-    ASSERT(effect->data != NULL);
+    effect->data.flowerTrail = part;
+    ASSERT(effect->data.flowerTrail != NULL);
 
     shim_mem_clear(part, numParts * sizeof(*part));
 
@@ -116,7 +116,7 @@ void flower_trail_init(EffectInstance* effect) {
 }
 
 void flower_trail_update(EffectInstance* effect) {
-    FlowerFXData* part = (FlowerFXData*)effect->data;
+    FlowerFXData* part = effect->data.flowerTrail;
     s32 cond = FALSE;
     s32 i;
 
@@ -157,7 +157,7 @@ void func_E0012548(EffectInstance* effect) {
 
 void flower_trail_appendGfx(void* effect) {
     EffectInstance* effectTemp = effect;
-    FlowerFXData* part = effectTemp->data;
+    FlowerFXData* part = effectTemp->data.flowerTrail;
     Gfx* dlist;
     s32 i;
 

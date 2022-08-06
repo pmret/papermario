@@ -63,8 +63,8 @@ EffectInstance* throw_spiny_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg
 
     effect = (EffectInstance*)shim_create_effect_instance(bpPtr);
     effect->numParts = numParts;
-    spinyObject = effect->data = shim_general_heap_malloc(numParts * sizeof(*spinyObject));
-    ASSERT(effect->data != NULL);
+    spinyObject = effect->data.throwSpiny = shim_general_heap_malloc(numParts * sizeof(*spinyObject));
+    ASSERT(effect->data.throwSpiny != NULL);
     spinyObject->unk_00 = arg0;
     spinyObject->lifeDuration = 0;
 
@@ -114,7 +114,7 @@ void throw_spiny_init(EffectInstance* effect) {
 }
 
 void throw_spiny_update(EffectInstance* effectInstance) {
-    ThrowSpinyFXData* spinyObject = effectInstance->data;
+    ThrowSpinyFXData* spinyObject = effectInstance->data.throwSpiny;
     u32 state;
     f32 gravity;
     s32 lifeDuration;
@@ -188,7 +188,7 @@ void throw_spiny_appendGfx(void* effect) {
     Matrix4f sp18;
     Matrix4f sp58;
     Camera* camera = &gCameras[gCurrentCameraID];
-    ThrowSpinyFXData* data = ((EffectInstance*)effect)->data;
+    ThrowSpinyFXData* data = ((EffectInstance*)effect)->data.throwSpiny;
     s32 temp_s5 = data->rgba;
     s32 temp_s6 = data->unk_00;
     f32 scale = data->unk_40 * SPRITE_PIXEL_SCALE;

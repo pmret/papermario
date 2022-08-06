@@ -392,7 +392,7 @@ void set_action_state(s32 actionState) {
     }
 
     if (playerStatus->unk_D8 != NULL) {
-        ((Effect46FXData*)playerStatus->unk_D8->data)->unk_24 = 10;
+        playerStatus->unk_D8->data.unk_46->unk_24 = 10;
         playerStatus->unk_D8 = NULL;
     }
 }

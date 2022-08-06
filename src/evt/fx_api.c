@@ -135,7 +135,7 @@ ApiStatus func_802D7B10(Evt* script, s32 isInitialCall) {
 ApiStatus func_802D7B44(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* effect = (EffectInstance*)evt_get_variable(script, *args++);
-    ((s32*)(effect->data))[5] = 10; // offset 0x14 in GotItemOutline effect data
+    ((s32*)(effect->data.unk32))[5] = 10; // offset 0x14 in GotItemOutline effect data
     return ApiStatus_DONE2;
 }
 
@@ -143,7 +143,7 @@ ApiStatus func_802D7B44(Evt* script, s32 isInitialCall) {
 ApiStatus func_802D7B74(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* effect = (EffectInstance*)evt_get_variable(script, *args++);
-    ((s32*)(effect->data))[12] = 5; // offset 0x30 in unknown effect data
+    ((s32*)(effect->data.unk32))[12] = 5; // offset 0x30 in unknown effect data
     return ApiStatus_DONE2;
 }
 
@@ -302,7 +302,7 @@ ApiStatus SetSleepBubbleTimeLeft(Evt* script, s32 isInitialCall) {
     EffectInstance* effect = (EffectInstance*)evt_get_variable(script, *args++);
     s32 value = evt_get_variable(script, *args++);
 
-    ((SleepBubbleFXData*)(effect->data))->timeLeft = value;
+    effect->data.sleepBubble->timeLeft = value;
     return ApiStatus_DONE2;
 }
 

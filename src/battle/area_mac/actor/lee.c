@@ -924,14 +924,14 @@ ApiStatus func_80218DF4_465284(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* tattleEffect = (EffectInstance*) evt_get_variable(script, *args++);
 
-    ((TattleWindowFXData*) tattleEffect->data)->pos.y = -1000.0f;
+    tattleEffect->data.tattleWindow->pos.y = -1000.0f;
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_80218E2C_4652BC(Evt* script, s32 isInitialCall) {
     EffectInstance* tattleEffect = (EffectInstance*) evt_get_variable(script, *script->ptrReadPos);
 
-    ((TattleWindowFXData*) tattleEffect->data)->pos.y = 144.0f;
+    tattleEffect->data.tattleWindow->pos.y = 144.0f;
     tattleEffect->flags |= EFFECT_INSTANCE_FLAGS_10;
     return ApiStatus_DONE2;
 }

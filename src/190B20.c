@@ -1676,7 +1676,7 @@ s32 inflict_status(Actor* target, s32 statusTypeKey, s32 duration) {
                     if (target->debuff != statusTypeKey) {
                         target->status = statusTypeKey;
                     }
-                    ((DisableXFXData*)target->debuffEffect->data)->unk_3C = 0;
+                    target->debuffEffect->data.disableX->unk_3C = 0;
                     target->debuff = statusTypeKey;
                     target->debuffDuration = duration;
                     if ((s8)duration > 9) {
@@ -1897,7 +1897,7 @@ void func_802664DC(f32 x, f32 y, f32 z, s32 attack, s32 a) {
     if (i > 0) {
         i = 0;
         // TODO use actual effect instance struct when we know what it is
-        ((s32*)gDamageCountEffects[i]->data)[12] = 5;
+        gDamageCountEffects[i]->data.unk32[12] = 5;
         gDamageCountEffects[i] = NULL;
     }
 
@@ -1923,7 +1923,7 @@ void show_damage_popup(f32 x, f32 y, f32 z, s32 attack, s32 a) {
     if (i > ARRAY_COUNT(gDamageCountEffects) - 1) {
         i = 0;
         // TODO use actual effect instance struct when we know what it is
-        ((s32*)gDamageCountEffects[i]->data)[12] = 5;
+        gDamageCountEffects[i]->data.unk32[12] = 5;
         gDamageCountEffects[i] = NULL;
     }
 
@@ -2070,12 +2070,12 @@ void func_80266978(void) {
         if (actor != NULL) {
             if (actor->unk_205 == 0x3C) {
                 if (actor->unk_200 != 0) {
-                    ((AttackResultTextFXData*)actor->unk_200->data)->unk_24 = 0;
+                    actor->unk_200->data.attackResultText->unk_24 = 0;
                 }
             }
             if (actor->unk_205 == 5) {
                 if (actor->unk_200 != 0) {
-                    ((AttackResultTextFXData*)actor->unk_200->data)->unk_18 = 0;
+                    actor->unk_200->data.attackResultText->unk_18 = 0;
                     actor->unk_200 = NULL;
                 }
             }
@@ -2089,12 +2089,12 @@ void func_80266978(void) {
     if (actor != NULL) {
         if (actor->unk_205 == 60) {
             if (actor->unk_200 != NULL) {
-                ((AttackResultTextFXData*)actor->unk_200->data)->unk_24 = 0;
+                actor->unk_200->data.attackResultText->unk_24 = 0;
             }
         }
         if (actor->unk_205 == 5) {
             if (actor->unk_200 != NULL) {
-                ((AttackResultTextFXData*)actor->unk_200->data)->unk_18 = 0;
+                actor->unk_200->data.attackResultText->unk_18 = 0;
                 actor->unk_200 = NULL;
             }
         }
@@ -2107,12 +2107,12 @@ void func_80266978(void) {
     if (actor != NULL) {
         if (actor->unk_205 == 60) {
             if (actor->unk_200 != NULL) {
-                ((AttackResultTextFXData*)actor->unk_200->data)->unk_24 = 0;
+                actor->unk_200->data.attackResultText->unk_24 = 0;
             }
         }
         if (actor->unk_205 == 5) {
             if (actor->unk_200 != NULL) {
-                ((AttackResultTextFXData*)actor->unk_200->data)->unk_18 = 0;
+                actor->unk_200->data.attackResultText->unk_18 = 0;
                 actor->unk_200 = NULL;
             }
         }
@@ -2524,7 +2524,7 @@ void btl_update_ko_status(void) {
     player->koDuration = player->debuffDuration;
     if (player->koDuration > 0) {
         player->koStatus = STATUS_DAZE;
-        ((DisableXFXData*)player->debuffEffect->data)->unk_3C = player->koDuration;
+        player->debuffEffect->data.disableX->unk_3C = player->koDuration;
 
         if (koDuration == 0) {
             sfx_play_sound(SOUND_2107);
@@ -2539,7 +2539,7 @@ void btl_update_ko_status(void) {
 
         if (partner->koDuration > 0) {
             partner->koStatus = STATUS_DAZE;
-            ((DisableXFXData*)partner->debuffEffect->data)->unk_3C = partner->koDuration;
+            partner->debuffEffect->data.disableX->unk_3C = partner->koDuration;
         }
     }
 
@@ -2550,7 +2550,7 @@ void btl_update_ko_status(void) {
             enemy->koDuration = enemy->debuffDuration;
             if (enemy->koDuration > 0) {
                 enemy->koStatus = STATUS_DAZE;
-                ((DisableXFXData*)enemy->debuffEffect->data)->unk_3C = enemy->koDuration;
+                enemy->debuffEffect->data.disableX->unk_3C = enemy->koDuration;
             }
         }
     }

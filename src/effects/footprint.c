@@ -38,9 +38,9 @@ void footprint_main(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, 
     effect = shim_create_effect_instance(&bp);
     effect->numParts = 1;
     part = shim_general_heap_malloc(numParts * sizeof(*part));
-    effect->data = part;
+    effect->data.footprint = part;
 
-    ASSERT(effect->data != NULL);
+    ASSERT(effect->data.footprint != NULL);
 
     shim_mem_clear(part, numParts * sizeof(*part));
 
@@ -75,7 +75,7 @@ void footprint_init(EffectInstance* effect) {
 }
 
 void footprint_update(EffectInstance* effect) {
-    FootprintFXData* part = (FootprintFXData*)effect->data;
+    FootprintFXData* part = effect->data.footprint;
     s32 cond = FALSE;
     s32 i;
 
@@ -116,7 +116,7 @@ void func_E00183BC(EffectInstance* effect) {
 
 void footprint_appendGfx(void* effect) {
     EffectInstance* effectTemp = effect;
-    FootprintFXData* part = effectTemp->data;
+    FootprintFXData* part = effectTemp->data.footprint;
     s32 i;
 
     gDPPipeSync(gMasterGfxPos++);

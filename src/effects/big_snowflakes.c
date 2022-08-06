@@ -16,7 +16,7 @@ void big_snowflakes_appendGfx(void* effect);
 void big_snowflakes_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3) {
     EffectBlueprint bp;
     EffectInstance* effect;
-    BigSnowflakeFXData* data;
+    BigSnowflakesFXData* data;
     s32 numParts = 9;
     s32 i;
 
@@ -31,7 +31,7 @@ void big_snowflakes_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3) {
     effect->numParts = numParts;
 
     data = shim_general_heap_malloc(effect->numParts * sizeof(*data));
-    effect->data = data;
+    effect->data.bigSnowflakes = data;
 
     ASSERT(data != NULL);
 
@@ -61,7 +61,7 @@ void big_snowflakes_init(EffectInstance* effect) {
 }
 
 void big_snowflakes_update(EffectInstance* effect) {
-    BigSnowflakeFXData* data = effect->data;
+    BigSnowflakesFXData* data = effect->data.bigSnowflakes;
     s32 unk_28;
     s32 i;
 
@@ -108,7 +108,7 @@ void big_snowflakes_render(EffectInstance* effect) {
 }
 
 void big_snowflakes_appendGfx(void* effect) {
-    BigSnowflakeFXData* data = ((EffectInstance*)effect)->data;
+    BigSnowflakesFXData* data = ((EffectInstance*)effect)->data.bigSnowflakes;
     Matrix4f sp18;
     Matrix4f sp58;
     Matrix4f sp98;
