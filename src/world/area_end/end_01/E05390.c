@@ -17,10 +17,11 @@ extern Mtx N(CreditsProjMatrices)[2];
 s32 msg_get_print_char_width(s32 character, s32 charset, s32 variation, f32 msgScale, s32 overrideCharWidth, u8 flags);
 void dma_load_msg(u32 msgID, void* dest);
 
-#include "world/common/atomic/Credits.inc.c"
+#include "world/common/atomic/Credits_1.inc.c"
 
-#ifdef NON_MATCHING
-void func_80241B44_E06EA4(CreditsLine* line) {
+// same as end_00_credits_update_line, but Font3Patterns and Font4Patterns are swapped...
+// might be able to fix this when data for this map is done?
+void N(credits_update_line)(CreditsLine* line) {
     CreditsChar creditsChar;
     CreditsChar* curChar = &creditsChar;
     CreditsUnkBeta* curPattern;
@@ -73,9 +74,9 @@ void func_80241B44_E06EA4(CreditsLine* line) {
             default:
                 msgWidth += msg_get_print_char_width(curMsgChar, curChar->font, curChar->variation, 1.0f, 0, 1) - 1;
                 if (curChar->font == MSG_FONT_TITLE || curChar->font == MSG_FONT_SUBTITLE) {
-                    curPattern = N(Font3Patterns);
+                    curPattern = N(Font4Patterns);
                     if (curChar->font == MSG_FONT_SUBTITLE) {
-                        curPattern = N(Font4Patterns);
+                        curPattern = N(Font3Patterns);
                     }
     
                     i = 0;
@@ -211,9 +212,9 @@ void func_80241B44_E06EA4(CreditsLine* line) {
 
                 posX += msg_get_print_char_width(curMsgChar, curChar->font, curChar->variation, 1.0f, 0, 1) - 1;
                 if (curChar->font == MSG_FONT_TITLE || curChar->font == MSG_FONT_SUBTITLE) {
-                    curPattern = N(Font3Patterns);
+                    curPattern = N(Font4Patterns);
                     if (curChar->font == MSG_FONT_SUBTITLE) {
-                        curPattern = N(Font4Patterns);
+                        curPattern = N(Font3Patterns);
                     }
 
                     i = 0;
@@ -250,131 +251,8 @@ void func_80241B44_E06EA4(CreditsLine* line) {
     }
     line->time++;
 }
-#else
-INCLUDE_ASM(s32, "world/area_end/end_01/E05390", func_80241B44_E06EA4);
-#endif
 
-void func_802421E8_E07548(void) {
-    Mtx* projMtx = &N(CreditsProjMatrices)[gCurrentDisplayContextIndex];
-    CreditsData* data = N(CreditsDataPtr);
-    s32 i;
-
-    gSPViewport(gMasterGfxPos++, &N(CreditsViewport));
-    guOrtho(projMtx, 0.0f, 320.0f, -240.0f, 0.0f, -100.0f, 100.0f, 1.0f);
-    gSPMatrix(gMasterGfxPos++, OS_PHYSICAL_TO_K0(projMtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
-    gDPPipeSync(gMasterGfxPos++);
-    gSPClearGeometryMode(gMasterGfxPos++, G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH);
-    gSPSetGeometryMode(gMasterGfxPos++, G_SHADE | G_SHADING_SMOOTH);
-
-    for (i = 0; i < ARRAY_COUNT(data->lines); i++) {
-        if (data->lines[i].flags & 1) {
-            func_80241B44_E06EA4(&data->lines[i]);
-        }
-    }
-}
-
-void N(credits_load_message)(CreditsEntry* entry) {
-    CreditsLine* line;
-    s32 maxLineChars;
-    s32 unkMsgProperty;
-    s32 i = 0;
-    
-    while (TRUE) {
-        if (!(N(CreditsDataPtr)->lines[i].flags & CREDITS_LINE_FLAG_1)) {
-            break;
-        }
-        if (++i == ARRAY_COUNT(N(CreditsDataPtr)->lines)) {
-            return;
-        }
-    }
-    
-    line = &N(CreditsDataPtr)->lines[i];
-    if (entry->msgID != NULL) {
-        if (entry->msgID >= 0) {
-            dma_load_msg(entry->msgID, N(CreditsMessageBuffers)[N(CreditsBufferIndex)]);
-            line->message = N(CreditsMessageBuffers)[N(CreditsBufferIndex)];
-            N(CreditsBufferIndex)++;
-            if (N(CreditsBufferIndex) >= ARRAY_COUNT(N(CreditsMessageBuffers))) {
-                N(CreditsBufferIndex) = 0;
-            }
-        } else {
-            line->message = (u8*) entry->msgID;
-        }
-        get_msg_properties((s32) line->message, NULL, NULL, &maxLineChars, NULL, NULL, &unkMsgProperty, 0);
-        line->posX            = entry->posX;
-        line->posY            = entry->posY;
-        line->palette         = entry->palette;
-        line->appearMode      = entry->appearMode;
-        line->appearTime      = entry->appearTime;
-        line->holdMode        = entry->holdMode;
-        line->holdTime        = entry->holdTime;
-        if (entry->perCharDelayIn != 0) {
-            line->holdTime = entry->holdTime - ((maxLineChars - 1) - unkMsgProperty) * entry->perCharDelayIn;
-            if (line->holdTime < 0) {
-                line->holdTime = 0;
-            }
-        }
-        line->vanishMode      = entry->vanishMode;
-        line->vanishTime      = entry->vanishTime;
-        line->perCharDelayIn  = entry->perCharDelayIn;
-        line->perCharDelayOut = entry->perCharDelayOut;
-        line->flags           = entry->flags | CREDITS_LINE_FLAG_1 | CREDITS_LINE_FLAG_2;
-    }
-}
-
-void func_80242510_E07870(void) {
-    s32 i;
-
-    N(CreditsDataPtr) = &N(CreditsData);
-    N(CreditsData).workerID = create_generic_entity_frontUI(NULL, func_802421E8_E07548);
-
-    for (i = 0; i < ARRAY_COUNT(N(CreditsData).lines); i++) {
-        N(CreditsData).lines[i].flags = 0;
-    }
-}
-
-ApiStatus func_80242568_E078C8(Evt* script, s32 isInitialCall) {
-    func_80242510_E07870();
-    load_font(1);
-    return ApiStatus_DONE2;
-}
-
-ApiStatus N(ShowCreditList)(Evt* script, s32 isInitialCall) {
-    CreditsEntry* creditList = (CreditsEntry*) evt_get_variable(script, *script->ptrReadPos);
-    
-    if (isInitialCall) {
-        script->varTable[0] = 0;
-        script->varTable[1] = -1;
-        script->varTable[2] = 0;
-    }
-    
-    switch (script->varTable[0]) {
-        case 0:
-            while (TRUE) {
-                if (creditList[script->varTable[2]].msgID != 0) {
-                    N(credits_load_message)(&creditList[script->varTable[2]]);
-                }
-                script->varTable[1] = creditList[script->varTable[2]].next;
-                script->varTable[2]++;
-                if (script->varTable[1] > 0) {
-                    break;
-                }
-                if (script->varTable[1] == -1) {
-                    return ApiStatus_DONE2;
-                }
-            }
-            script->varTable[0] = 1;
-            // fall through
-        case 1:
-            script->varTable[1]--;
-            if (script->varTable[1] <= 0) {
-                script->varTable[0] = 0;
-            }
-            break;
-    }
-
-    return ApiStatus_BLOCK;
-}
+#include "world/common/atomic/Credits_2.inc.c"
 
 ApiStatus func_80242690_E079F0(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
