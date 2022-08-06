@@ -392,7 +392,7 @@ Gfx D_8014B400[21][5] = {
     },
 };
 
-u32 mdl_textureBaseAddress = 0x8028E000;
+void* mdl_textureBaseAddress = 0x8028E000;
 
 u8 mdl_bgMultiplyColorA = 0;
 u8 mdl_bgMultiplyColorR = 0;
@@ -1063,7 +1063,7 @@ extern s32 texPannerMainU[MAX_TEX_PANNERS];
 extern s32 texPannerMainV[MAX_TEX_PANNERS];
 extern s32 texPannerAuxU[MAX_TEX_PANNERS];
 extern s32 texPannerAuxV[MAX_TEX_PANNERS];
-extern u8* mdl_nextTextureAddress;
+extern void* mdl_nextTextureAddress;
 extern u16 mdl_currentTransformGroupChildIndex;
 extern u16 D_80153226;
 extern ModelNode* D_80153370;
@@ -2971,9 +2971,9 @@ void appendGfx_model(Model* model);
 INCLUDE_ASM(void, "a5dd0_len_114e0", appendGfx_model, Model*);
 
 void func_80114B58(u32 romOffset, TextureHandle* handle, TextureHeader* header, s32 mainSize, s32 mainPalSize, s32 auxSize, s32 auxPalSize) {
-    handle->raster = (u32*) mdl_nextTextureAddress;
+    handle->raster = (IMG_PTR) mdl_nextTextureAddress;
     if (mainPalSize != 0) {
-        handle->palette = (u32*) (mdl_nextTextureAddress + mainSize);
+        handle->palette = (PAL_PTR) (mdl_nextTextureAddress + mainSize);
     } else {
         handle->palette = NULL;
     }
@@ -2981,9 +2981,9 @@ void func_80114B58(u32 romOffset, TextureHandle* handle, TextureHeader* header, 
     romOffset += mainSize + mainPalSize;
     mdl_nextTextureAddress += mainSize + mainPalSize;
     if (auxSize != 0) {
-        handle->auxRaster = (u32*) mdl_nextTextureAddress;
+        handle->auxRaster = (IMG_PTR) mdl_nextTextureAddress;
         if (auxPalSize != 0) {
-            handle->auxPalette = (u32*) (mdl_nextTextureAddress + auxSize);
+            handle->auxPalette = (PAL_PTR) (mdl_nextTextureAddress + auxSize);
         } else {
             handle->auxPalette = NULL;
         }

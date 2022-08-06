@@ -10,8 +10,8 @@
 
 // probably the same as FoldImageRecPart
 typedef struct UnknownMonstarStruct {
-    /* 0x00 */ u8* raster;
-    /* 0x04 */ u8* palette;
+    /* 0x00 */ IMG_PTR raster;
+    /* 0x04 */ PAL_PTR palette;
     /* 0x08 */ u16 width;
     /* 0x0A */ u16 height;
     /* 0x0C */ s32 unk_0C;

@@ -94,7 +94,7 @@ PlayerSpriteSet spr_playerSpriteSets[] = {
 
 void spr_appendGfx_component_flat(
     Quad* vertices,
-    void* raster, void* palette,
+    IMG_PTR raster, PAL_PTR palette,
     s32 width, s32 height,
     f32 arg5,
     Matrix4f mtx,

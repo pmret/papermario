@@ -89,7 +89,7 @@ void load_mesh_animator_tree(s32 index, StaticAnimatorNode** tree);
 
 void setup_pause_menu_tab(MenuWindowBP* bpArray, s32 arraySize);
 
-s32 draw_ci_image_with_clipping(s32* raster, s32 width, s32 height, s32 fmt, s32 bitDepth, s32* palette, s16 posX,
+s32 draw_ci_image_with_clipping(IMG_PTR raster, s32 width, s32 height, s32 fmt, s32 bitDepth, PAL_PTR palette, s16 posX,
                                 s16 posY, u16 clipULx, u16 clipULy, u16 clipLRx, u16 clipRLy, u8 opacity);
 
 void render_frame(s32 flag);

@@ -1,3 +1,11 @@
 #include "isk_09.h"
 
-INCLUDE_ASM(s32, "world/area_isk/isk_09/9867D0", func_802402F0_9867D0);
+ApiStatus func_802402F0_9867D0(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 colliderID = evt_get_variable(script, *args++);
+    if (gCollisionStatus.currentFloor != colliderID) {
+        return ApiStatus_DONE2;
+    } else {
+        return ApiStatus_BLOCK;
+    }
+}

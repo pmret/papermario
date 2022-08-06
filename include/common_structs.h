@@ -17,7 +17,11 @@ typedef void NoArgCallback(void*);
 
 #define MSG_PTR u8*
 #define IMG_PTR u8*
-#define PAL_PTR u16* 
+#define PAL_PTR u16*
+
+#define MSG_BIN u8
+#define IMG_BIN u8
+#define PAL_BIN u16
 
 typedef struct {
     u8 r, g, b, a;
@@ -197,7 +201,7 @@ typedef struct Npc {
     /* 0x0AC */ u8 alpha;
     /* 0x0AD */ u8 alpha2; ///< Multiplied with Npc::alpha
     /* 0x0AE */ char unk_AE[2];
-    /* 0x0B0 */ s32** extraAnimList;
+    /* 0x0B0 */ u32** extraAnimList;
     /* 0x0B4 */ s8 palSwapType; // 0..4 inclusive
     /* 0x0B5 */ s8 palSwapPrevType;
     /* 0x0B6 */ s8 dirtyPalettes;
@@ -208,7 +212,7 @@ typedef struct Npc {
     /* 0x0C0 */ s8 unk_C0;
     /* 0x0C1 */ s8 paletteCount;
     /* 0x0C2 */ char unk_C2[2];
-    /* 0x0C4 */ s32* spritePaletteList;
+    /* 0x0C4 */ PAL_PTR* spritePaletteList;
     /* 0x0C8 */ Palette16 localPaletteData[16];
     /* 0x2C8 */ Palette16* localPalettes[16];
     /* 0x308 */ s16 unk_308;
@@ -1104,8 +1108,8 @@ typedef struct ItemEntity {
     /* 0x40 */ s32* sparkleReadPos;
     /* 0x44 */ s32 sparkleUnk44;
     /* 0x48 */ s32* sparkleSavedPos;
-    /* 0x4C */ s8* sparkleRaster;
-    /* 0x50 */ s8* sparklePalette;
+    /* 0x4C */ IMG_PTR sparkleRaster;
+    /* 0x50 */ PAL_PTR sparklePalette;
     /* 0x54 */ s32 sparkleWidth;
     /* 0x58 */ s32 sparkleHeight;
 } ItemEntity; // size = 0x5C
@@ -1196,10 +1200,10 @@ typedef struct MessagePrintState {
     /* 0x53C */ u8 maxLinesPerPage;
     /* 0x53D */ char unk_53D[0x3];
     /* 0x540 */ f32 sizeScale;
-    /* 0x544 */ s32* letterBackgroundImg;
-    /* 0x548 */ s32* letterBackgroundPal;
-    /* 0x54C */ s32* letterContentImg;
-    /* 0x550 */ s32* letterContentPal;
+    /* 0x544 */ IMG_PTR letterBackgroundImg;
+    /* 0x548 */ PAL_PTR letterBackgroundPal;
+    /* 0x54C */ IMG_PTR letterContentImg;
+    /* 0x550 */ PAL_PTR letterContentPal;
     /* 0x554 */ char unk_554[0x4];
 } MessagePrintState; // size = 0x558
 
@@ -1235,7 +1239,7 @@ typedef struct MessageDrawState {
 } MessageDrawState; // size = 0x54
 
 typedef struct MessageCharData {
-    /* 0x0 */ s8* raster;
+    /* 0x0 */ IMG_PTR raster;
     /* 0x4 */ u8* charWidthTable;
     /* 0x8 */ u8 monospaceWidth;
     /* 0x9 */ u8 baseHeightOffset;
@@ -1260,8 +1264,8 @@ typedef struct MesasgeFontGlyphData {
 } MesasgeFontGlyphData; // size = 0xC
 
 typedef struct MessageImageData {
-    /* 0x00 */ s32* raster;
-    /* 0x04 */ s32* palette;
+    /* 0x00 */ IMG_PTR raster;
+    /* 0x04 */ PAL_PTR palette;
     /* 0x08 */ u16 width;
     /* 0x0A */ u16 height;
     /* 0x0C */ s32 format;
@@ -1269,7 +1273,7 @@ typedef struct MessageImageData {
 } MessageImageData; // size = 0x14
 
 typedef struct MessageNumber {
-    /* 0x00 */ s32* rasters;
+    /* 0x00 */ IMG_PTR rasters;
     /* 0x04 */ s8 texSize;
     /* 0x05 */ u8 texWidth;
     /* 0x06 */ u8 texHeight;
@@ -1603,7 +1607,7 @@ typedef struct DecorationTable {
     /* 0x6CC */ s8 unk_6CC;
     /* 0x6CD */ s8 numPalettes;
     /* 0x6CE */ char unk_6CE[2];
-    /* 0x6D0 */ u16** palettes;
+    /* 0x6D0 */ PAL_PTR* palettes;
     /* 0x6D4 */ s16* unk_6D4[27];
     /* 0x740 */ s16 unk_740;
     /* 0x742 */ s16 unk_742;
@@ -1845,8 +1849,8 @@ typedef struct Actor {
 } Actor; // size = 0x444
 
 typedef struct BackgroundHeader {
-    /* 0x00 */ void* raster;
-    /* 0x04 */ void* palette;
+    /* 0x00 */ IMG_PTR raster;
+    /* 0x04 */ PAL_PTR palette;
     /* 0x08 */ u16 startX;
     /* 0x0A */ u16 startY;
     /* 0x0C */ u16 width;
@@ -2149,8 +2153,8 @@ typedef struct PartnerActionStatus {
 } PartnerActionStatus; // size = 0x360
 
 typedef struct SpriteRasterInfo {
-    /* 0x00 */ void* raster;
-    /* 0x04 */ void* defaultPal;
+    /* 0x00 */ IMG_PTR raster;
+    /* 0x04 */ PAL_PTR defaultPal;
     /* 0x08 */ s32 width;
     /* 0x0C */ s32 height;
 } SpriteRasterInfo; // size = 0x10
@@ -2326,8 +2330,8 @@ typedef struct FoldImageRecPart {
 } FoldImageRecPart; // size = 0x18
 
 typedef struct FoldImageRec {
-    /* 0x00 */ s8* raster;
-    /* 0x04 */ s8* palette;
+    /* 0x00 */ IMG_PTR raster;
+    /* 0x04 */ PAL_PTR palette;
     /* 0x08 */ u16 width;
     /* 0x0A */ u16 height;
     /* 0x0C */ s16 xOffset;

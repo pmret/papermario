@@ -66,7 +66,7 @@ void npc_iter_no_op(void) {
     }
 }
 
-s32 _create_npc(NpcBlueprint* blueprint, s32** animList, s32 skipLoadingAnims) {
+s32 _create_npc(NpcBlueprint* blueprint, u32** animList, s32 skipLoadingAnims) {
     Npc* npc;
     s32 i;
     s32 j;
@@ -172,7 +172,7 @@ s32 _create_npc_basic(NpcBlueprint* blueprint) {
     return _create_npc(blueprint, NULL, FALSE);
 }
 
-s32 _create_npc_standard(NpcBlueprint* blueprint, s32** animList) {
+s32 _create_npc_standard(NpcBlueprint* blueprint, u32** animList) {
     _create_npc(blueprint, animList, FALSE);
 }
 
@@ -935,7 +935,7 @@ void disable_npc_shadow(Npc* npc) {
     }
 }
 
-void set_npc_sprite(Npc* npc, s32 anim, s32** extraAnimList) {
+void set_npc_sprite(Npc* npc, s32 anim, u32** extraAnimList) {
     ASSERT((npc->flags & NPC_FLAG_1000000) || spr_free_sprite(npc->spriteInstanceID) == 0);
 
     npc->extraAnimList = extraAnimList;

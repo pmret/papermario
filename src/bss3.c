@@ -95,7 +95,7 @@ BSS s8 texPannerMainU[0x40];
 BSS s8 texPannerMainV[0x40];
 BSS s8 texPannerAuxU[0x40];
 BSS s8 texPannerAuxV[0x40];
-BSS s32 mdl_nextTextureAddress;
+BSS void* mdl_nextTextureAddress;
 BSS s16 mdl_currentTransformGroupChildIndex;
 BSS s16 D_8015336E;
 BSS s32 D_80153370;

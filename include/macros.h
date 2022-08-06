@@ -75,7 +75,8 @@
 #define TAU     6.28318f
 #define PI_S    3.14159f // Shorter PI
 
-#define SPRITE_WORLD_SCALE 0.71428573f
+#define SPRITE_WORLD_SCALE   (5.0f/7.0f)
+#define SPRITE_WORLD_SCALE_D (5.0/7.0)
 
 #define BATTLE_ENTITY_ID_MASK 0x800
 
