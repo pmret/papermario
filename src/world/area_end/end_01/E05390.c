@@ -20,45 +20,45 @@ void dma_load_msg(u32 msgID, void* dest);
 #include "world/common/atomic/Credits.inc.c"
 
 #ifdef NON_MATCHING
-void func_80241B44_E06EA4(CreditsUnkAlpha* arg0) {
-    CreditsGlyphInfo glyph;
-    CreditsGlyphInfo* glyphPtr = &glyph;
+void func_80241B44_E06EA4(CreditsLine* line) {
+    CreditsChar creditsChar;
+    CreditsChar* curChar = &creditsChar;
     CreditsUnkBeta* curPattern;
     s32 msgHeight, msgWidth, msgMaxLineChars;
-    s32 bufEnd2;
+    s32 doneCurrentState;
     s32 readPos;
-    u8 thisChar;
-    u16 nextChar1, nextChar2;
+    u8 curMsgChar;
+    u16 nextMsgChar1, nextMsgChar2;
     u16 doneCalcLoop, doneDrawLoop;
     s32 drawCount;
     s32 posX;
     s32 i;
 
-    bufEnd2 = FALSE;
-    if (arg0->flags & CREDITS_LINE_FLAG_2) {
-        arg0->flags &= ~CREDITS_LINE_FLAG_2;
-        arg0->time = 0;
-        arg0->unk_0C = 0;
+    doneCurrentState = FALSE;
+    if (line->flags & CREDITS_LINE_FLAG_2) {
+        line->flags &= ~CREDITS_LINE_FLAG_2;
+        line->time = 0;
+        line->state = 0;
     }
     
-    get_msg_properties(arg0->message, &msgHeight, &msgWidth, &msgMaxLineChars, NULL, NULL, NULL, 0);
+    get_msg_properties(line->message, &msgHeight, &msgWidth, &msgMaxLineChars, NULL, NULL, NULL, 0);
     
-    glyphPtr->font = 0;
-    glyphPtr->variation = 0;
+    curChar->font = 0;
+    curChar->variation = 0;
 
     // calculate message width
     msgWidth = 1;
     readPos = 0;
     do {
-        thisChar = arg0->message[readPos++];
-        nextChar1 = arg0->message[readPos];
+        curMsgChar = line->message[readPos++];
+        nextMsgChar1 = line->message[readPos];
         doneCalcLoop = FALSE;
         
-        switch (thisChar) {
+        switch (curMsgChar) {
             case MSG_CHAR_READ_VARIANT0:
             case MSG_CHAR_READ_VARIANT1:
             case MSG_CHAR_READ_VARIANT2:
-                glyphPtr->variation = thisChar - MSG_CHAR_READ_VARIANT0;
+                curChar->variation = curMsgChar - MSG_CHAR_READ_VARIANT0;
                 break;
             case MSG_CHAR_READ_ENDL:
             case MSG_CHAR_READ_END:
@@ -66,142 +66,142 @@ void func_80241B44_E06EA4(CreditsUnkAlpha* arg0) {
                 break;
             case MSG_CHAR_READ_FUNCTION:
                 // only support function for selecting font
-                if (arg0->message[readPos++] == MSG_READ_FUNC_FONT) {
-                    glyphPtr->font = arg0->message[readPos++];
+                if (line->message[readPos++] == MSG_READ_FUNC_FONT) {
+                    curChar->font = line->message[readPos++];
                 }
                 break;
             default:
-                msgWidth += msg_get_print_char_width(thisChar, glyphPtr->font, glyphPtr->variation, 1.0f, 0, 1) - 1;
-                if (glyphPtr->font == MSG_FONT_TITLE || glyphPtr->font == MSG_FONT_SUBTITLE) {
+                msgWidth += msg_get_print_char_width(curMsgChar, curChar->font, curChar->variation, 1.0f, 0, 1) - 1;
+                if (curChar->font == MSG_FONT_TITLE || curChar->font == MSG_FONT_SUBTITLE) {
                     curPattern = N(Font3Patterns);
-                    if (glyphPtr->font == MSG_FONT_SUBTITLE) {
+                    if (curChar->font == MSG_FONT_SUBTITLE) {
                         curPattern = N(Font4Patterns);
                     }
     
                     i = 0;
     
-                    if (glyphPtr->font == MSG_FONT_SUBTITLE) {
-                        if (thisChar == MSG_CHAR_LPAREN || nextChar1 == MSG_CHAR_LPAREN) {
+                    if (curChar->font == MSG_FONT_SUBTITLE) {
+                        if (curMsgChar == MSG_CHAR_LPAREN || nextMsgChar1 == MSG_CHAR_LPAREN) {
                             msgWidth++;
                         }
                     }
                     
                     do {
-                        if (thisChar == curPattern[i].unk_00 && nextChar1 == curPattern[i].unk_01) {
-                            msgWidth += curPattern[i].unk_02;
+                        if (curMsgChar == curPattern[i].unk_00 && nextMsgChar1 == curPattern[i].unk_01) {
+                            msgWidth += curPattern[i].size;
                         }
                         i++;
-                    } while (curPattern[i].unk_02 != 0);
+                    } while (curPattern[i].size != 0);
                 }
                 break;
         }
     } while (!doneCalcLoop);
 
-    arg0->msgWidth = msgWidth;
-    if (arg0->flags & CREDITS_LINE_FLAG_CENTER) {
-        posX = arg0->posX - (((f32) msgWidth * 0.5) + 0.0);
+    line->msgWidth = msgWidth;
+    if (line->flags & CREDITS_LINE_FLAG_1) {
+        posX = line->posX - (((f32) msgWidth * 0.5) + 0.0);
     } else {
-        posX = arg0->posX;
+        posX = line->posX;
     }
 
-    glyphPtr->font = 0;
-    glyphPtr->variation = 0;
-    glyphPtr->palette = arg0->highlight;
+    curChar->font = 0;
+    curChar->variation = 0;
+    curChar->palette = line->palette;
     
     drawCount = 0;
     readPos = 0;
     do {
-        thisChar = arg0->message[readPos++];
-        nextChar2 = arg0->message[readPos];
+        curMsgChar = line->message[readPos++];
+        nextMsgChar2 = line->message[readPos];
         doneDrawLoop = FALSE;
         
-        switch (thisChar) {
+        switch (curMsgChar) {
             case MSG_CHAR_READ_VARIANT0:
             case MSG_CHAR_READ_VARIANT1:
             case MSG_CHAR_READ_VARIANT2:
-                glyphPtr->variation = thisChar - MSG_CHAR_READ_VARIANT0;
+                curChar->variation = curMsgChar - MSG_CHAR_READ_VARIANT0;
                 break;
             case MSG_CHAR_READ_ENDL:
             case MSG_CHAR_READ_END:
                 doneDrawLoop = TRUE;
                 break;
             case MSG_CHAR_READ_FUNCTION:
-                if (arg0->message[readPos++] == 0) {
-                    glyphPtr->font = arg0->message[readPos++];
+                if (line->message[readPos++] == 0) {
+                    curChar->font = line->message[readPos++];
                 }
                 break;
             default:
-                if (thisChar < MSG_CHAR_READ_ENDL) {
-                    glyphPtr->charIndex = thisChar;
-                    glyphPtr->posX = posX;
-                    glyphPtr->posY = arg0->posY;
+                if (curMsgChar < MSG_CHAR_READ_ENDL) {
+                    curChar->charIndex = curMsgChar;
+                    curChar->posX = posX;
+                    curChar->posY = line->posY;
                     
-                    switch (arg0->unk_0C) {
-                        case 0:
-                            glyphPtr->fadeInTime = arg0->time - (arg0->perCharDelay * drawCount);
-                            if (glyphPtr->fadeInTime >= 0) {
-                                if (arg0->fadeInTime < glyphPtr->fadeInTime) {
-                                    glyphPtr->fadeInTime = arg0->fadeInTime;
+                    switch (line->state) {
+                        case CREDITS_LINE_APPEARING:
+                            curChar->fadeInTime = line->time - (line->perCharDelayIn * drawCount);
+                            if (curChar->fadeInTime >= 0) {
+                                if (line->appearTime < curChar->fadeInTime) {
+                                    curChar->fadeInTime = line->appearTime;
                                 }
-                                if ((nextChar2 == MSG_CHAR_READ_END) && (glyphPtr->fadeInTime == arg0->fadeInTime)) {
-                                    bufEnd2 = TRUE;
+                                if ((nextMsgChar2 == MSG_CHAR_READ_END) && (curChar->fadeInTime == line->appearTime)) {
+                                    doneCurrentState = TRUE;
                                 }
-                                switch (arg0->unk_18) {
+                                switch (line->appearMode) {
                                     case 0:
-                                        N(CharAnim_FadeIn_5)(arg0, glyphPtr);
+                                        N(CharAnim_FadeIn_5)(line, curChar);
                                         break;
                                     case 1:
-                                        N(CharAnim_FadeIn_1)(arg0, glyphPtr);
+                                        N(CharAnim_FadeIn_1)(line, curChar);
                                         break;
                                     case 2:
-                                        N(CharAnim_FadeIn_2)(arg0, glyphPtr);
+                                        N(CharAnim_FadeIn_2)(line, curChar);
                                         break;
                                     case 3:
-                                        N(CharAnim_FadeIn_3)(arg0, glyphPtr);
+                                        N(CharAnim_FadeIn_3)(line, curChar);
                                         break;
                                     case 4:
-                                        N(CharAnim_FadeIn_4)(arg0, glyphPtr);
+                                        N(CharAnim_FadeIn_4)(line, curChar);
                                         break;
                                     case 5:
-                                        N(CharAnim_FadeIn_5)(arg0, glyphPtr);
+                                        N(CharAnim_FadeIn_5)(line, curChar);
                                         break;
                                 }
                             }
                             break;
                         
-                        case 1:
-                            if (nextChar2 == MSG_CHAR_READ_END) {
-                                if (arg0->time == arg0->holdTime) {
-                                    bufEnd2 = TRUE;
+                        case CREDITS_LINE_HOLDING:
+                            if (nextMsgChar2 == MSG_CHAR_READ_END) {
+                                if (line->time == line->holdTime) {
+                                    doneCurrentState = TRUE;
                                 }
                             }
-                            N(CharAnim_Hold)(arg0, glyphPtr);
+                            N(CharAnim_Hold)(line, curChar);
                             break;
 
-                        case 2:
-                            glyphPtr->fadeInTime = arg0->time - (arg0->unk_54 * drawCount);
-                            if (glyphPtr->fadeInTime < 0) {
-                                glyphPtr->fadeInTime = 0;
+                        case CREDITS_LINE_VANISHING:
+                            curChar->fadeInTime = line->time - (line->perCharDelayOut * drawCount);
+                            if (curChar->fadeInTime < 0) {
+                                curChar->fadeInTime = 0;
                             }
-                            if (glyphPtr->fadeInTime > arg0->fadeOutTime) {
-                                glyphPtr->fadeInTime = arg0->fadeOutTime;
+                            if (curChar->fadeInTime > line->vanishTime) {
+                                curChar->fadeInTime = line->vanishTime;
                             }
-                            if (nextChar2 == MSG_CHAR_READ_END && glyphPtr->fadeInTime == arg0->fadeOutTime) {
-                                bufEnd2 = TRUE;
+                            if (nextMsgChar2 == MSG_CHAR_READ_END && curChar->fadeInTime == line->vanishTime) {
+                                doneCurrentState = TRUE;
                             }
 
-                            switch (arg0->unk_4C) {
+                            switch (line->vanishMode) {
                                 case 0:
-                                    N(CharAnim_FadeOut_3)(arg0, glyphPtr);
+                                    N(CharAnim_FadeOut_3)(line, curChar);
                                     break;
                                 case 1:
-                                    N(CharAnim_FadeOut_1)(arg0, glyphPtr);
+                                    N(CharAnim_FadeOut_1)(line, curChar);
                                     break;
                                 case 2:
-                                    N(CharAnim_FadeOut_2)(arg0, glyphPtr);
+                                    N(CharAnim_FadeOut_2)(line, curChar);
                                     break;
                                 case 3:
-                                    N(CharAnim_FadeOut_3)(arg0, glyphPtr);
+                                    N(CharAnim_FadeOut_3)(line, curChar);
                                     break;
                             }
                             break;
@@ -209,46 +209,46 @@ void func_80241B44_E06EA4(CreditsUnkAlpha* arg0) {
                     drawCount++;
                 }
 
-                posX += msg_get_print_char_width(thisChar, glyphPtr->font, glyphPtr->variation, 1.0f, 0, 1) - 1;
-                if (glyphPtr->font == MSG_FONT_TITLE || glyphPtr->font == MSG_FONT_SUBTITLE) {
+                posX += msg_get_print_char_width(curMsgChar, curChar->font, curChar->variation, 1.0f, 0, 1) - 1;
+                if (curChar->font == MSG_FONT_TITLE || curChar->font == MSG_FONT_SUBTITLE) {
                     curPattern = N(Font3Patterns);
-                    if (glyphPtr->font == MSG_FONT_SUBTITLE) {
+                    if (curChar->font == MSG_FONT_SUBTITLE) {
                         curPattern = N(Font4Patterns);
                     }
 
                     i = 0;
 
-                    if (glyphPtr->font == MSG_FONT_SUBTITLE) {
-                        if (thisChar == MSG_CHAR_LPAREN || nextChar2 == MSG_CHAR_LPAREN) {
+                    if (curChar->font == MSG_FONT_SUBTITLE) {
+                        if (curMsgChar == MSG_CHAR_LPAREN || nextMsgChar2 == MSG_CHAR_LPAREN) {
                             posX++;
                         }
                     }
                     do {
-                        if (thisChar == curPattern[i].unk_00 && nextChar2 == curPattern[i].unk_01) {
-                            posX += curPattern[i].unk_02;
+                        if (curMsgChar == curPattern[i].unk_00 && nextMsgChar2 == curPattern[i].unk_01) {
+                            posX += curPattern[i].size;
                         }
                         i++;
-                    } while (curPattern[i].unk_02 != 0);
+                    } while (curPattern[i].size != 0);
                 }
                 break;
         }
     } while (!doneDrawLoop);
     
-    if ((arg0->unk_0C == 0) && bufEnd2) {
+    if ((line->state == CREDITS_LINE_APPEARING) && doneCurrentState) {
         s32 temp = 0;
-        get_msg_properties(arg0->message, NULL, NULL, &temp, NULL, NULL, NULL, 0);
-        arg0->time = 0;
-        arg0->unk_0C++;
-        if (arg0->holdTime <= 0) {
-            arg0->unk_0C++;
+        get_msg_properties(line->message, NULL, NULL, &temp, NULL, NULL, NULL, 0);
+        line->time = 0;
+        line->state++;
+        if (line->holdTime <= 0) {
+            line->state++;
         }
-    } else if ((arg0->unk_0C == 1) && bufEnd2) {
-        arg0->time = 0;
-        arg0->unk_0C++;
-    } else if ((arg0->unk_0C == 2) && bufEnd2) {
-        arg0->flags &= ~CREDITS_LINE_FLAG_CENTER;
+    } else if ((line->state == CREDITS_LINE_HOLDING) && doneCurrentState) {
+        line->time = 0;
+        line->state++;
+    } else if ((line->state == CREDITS_LINE_VANISHING) && doneCurrentState) {
+        line->flags &= ~CREDITS_LINE_FLAG_1;
     }
-    arg0->time++;
+    line->time++;
 }
 #else
 INCLUDE_ASM(s32, "world/area_end/end_01/E05390", func_80241B44_E06EA4);

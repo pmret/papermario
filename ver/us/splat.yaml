@@ -11811,7 +11811,6 @@ segments:
     - [0xE0B5F0, data]
     - [0xE0C0C0, data]
     - [0xE0D510, data]
-    - [0xE0E700, data]
     - [0xE0E740]
   - name: mgm_00
     dir: world/area_mgm/mgm_00
