@@ -7,24 +7,6 @@ enum ArrowType {
     ARROW_TYPE_DEF_UP = 2,
 };
 
-typedef struct StatChangeFXData {
-    /* 0x00 */ s32 unk_00;
-    /* 0x04 */ Vec3f pos;
-    /* 0x10 */ f32 scale;
-    /* 0x14 */ s32 timeLeft;
-    /* 0x18 */ s32 unk_18;
-    /* 0x1C */ s32 arrowType;
-    /* 0x20 */ s32 arrowValue;
-    /* 0x24 */ s32 unk_24;
-    /* 0x28 */ f32 scaleX;
-    /* 0x2C */ f32 scaleY;
-    /* 0x30 */ f32 unk_30;
-    /* 0x34 */ f32 unk_34;
-    /* 0x38 */ f32 unk_38;
-    /* 0x3C */ s32 unk_3C;
-    /* 0x40 */ s32 unk_40;
-} StatChangeFXData;
-
 typedef struct ExtraArrowDataEntry {
     u8 unk_00;
     u8 unk_01;

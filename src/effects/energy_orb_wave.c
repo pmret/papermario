@@ -1,10 +1,6 @@
 #include "common.h"
 #include "effects_internal.h"
 
-typedef struct EnergyOrbWaveFXData {
-    /* 0x00 */ s32 unk_00;
-} EnergyOrbWaveFXData; // size = ??
-
 void energy_orb_wave_appendGfx(void* effect);
 
 INCLUDE_ASM(s32, "effects/energy_orb_wave", energy_orb_wave_main);

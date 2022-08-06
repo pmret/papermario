@@ -1,21 +1,6 @@
 #include "common.h"
 #include "effects_internal.h"
 
-typedef struct ShapeSpellFXData {
-    /* 0x00 */ s32 isChild;
-    /* 0x04 */ Vec3f pos;
-    /* 0x10 */ f32 unk_10;
-    /* 0x14 */ f32 unk_14;
-    /* 0x18 */ f32 unk_18;
-    /* 0x1C */ f32 unk_1C;
-    /* 0x20 */ f32 unk_20;
-    /* 0x24 */ f32 unk_24;
-    /* 0x28 */ f32 unk_28;
-    /* 0x2C */ s32 unk_2C;
-    /* 0x30 */ s32 timeLeft;
-    /* 0x34 */ s32 unk_34;
-} ShapeSpellFXData; // size = 0x38
-
 s32 D_E0024CC0[] = { 0x00FFD01A, 0x09001128, 0x090011A0, 0x784DD0FE, 0x09001150, 0x090011C8, 0xF0FE4C6E, 0x09001178, 0x090011F0, 0x00000000, 0x00000000, 0x00000000 };
 
 void shape_spell_appendGfx(void* effect);
