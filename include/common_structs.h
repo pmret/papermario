@@ -15,8 +15,9 @@ typedef Bytecode EvtScript[0];
 
 typedef void NoArgCallback(void*);
 
-typedef u8*  IMG_PTR;
-typedef u16* PAL_PTR;
+#define MSG_PTR u8*
+#define IMG_PTR u8*
+#define PAL_PTR u16* 
 
 typedef struct {
     u8 r, g, b, a;
@@ -2376,43 +2377,43 @@ typedef struct CreditsEntry {
     /* 0x00 */ s32 msgID;
     /* 0x04 */ s32 posX;
     /* 0x08 */ s32 posY;
-    /* 0x0C */ s32 highlight;
-    /* 0x10 */ s32 unk_10;
-    /* 0x14 */ s32 fadeInTime;
-    /* 0x18 */ s32 unk_18;
-    /* 0x1C */ s32 unk_1C;
+    /* 0x0C */ s32 palette;
+    /* 0x10 */ s32 appearMode;
+    /* 0x14 */ s32 appearTime;
+    /* 0x18 */ s32 perCharDelayIn;
+    /* 0x1C */ s32 holdMode;
     /* 0x20 */ s32 holdTime;
-    /* 0x24 */ s32 unk_24;
-    /* 0x28 */ s32 fadeOutTime;
-    /* 0x2C */ s32 unk_2C;
+    /* 0x24 */ s32 vanishMode;
+    /* 0x28 */ s32 vanishTime;
+    /* 0x2C */ s32 perCharDelayOut;
     /* 0x30 */ s32 next;
     /* 0x34 */ s16 flags;
     /* 0x36 */ char pad_36[2];
 } CreditsEntry; // size = 0x38
 
-typedef struct CreditsUnkAlpha {
+typedef struct CreditsLine {
     /* 0x00 */ u8* message;
     /* 0x04 */ s32 unk__04;
     /* 0x08 */ s32 time;
-    /* 0x0C */ s32 unk_0C;
-    /* 0x10 */ s32 highlight;
+    /* 0x0C */ s32 state;
+    /* 0x10 */ s32 palette;
     /* 0x14 */ s32 msgWidth;
-    /* 0x18 */ s32 unk_18;
-    /* 0x1C */ s32 fadeInTime;
-    /* 0x20 */ s32 perCharDelay;
+    /* 0x18 */ s32 appearMode;
+    /* 0x1C */ s32 appearTime;
+    /* 0x20 */ s32 perCharDelayIn;
     /* 0x24 */ s32 unk__24;
     /* 0x28 */ s32 unk__28;
     /* 0x2C */ s32 unk__2C;
     /* 0x30 */ s32 unk__30;
-    /* 0x34 */ s32 unk__34;
+    /* 0x34 */ s32 holdMode;
     /* 0x38 */ s32 holdTime;
     /* 0x3C */ s32 unk__3C;
     /* 0x40 */ s32 unk__40;
     /* 0x44 */ s32 unk__44;
     /* 0x48 */ s32 unk__48;
-    /* 0x4C */ s32 unk_4C;
-    /* 0x50 */ s32 fadeOutTime;
-    /* 0x54 */ s32 unk_54;
+    /* 0x4C */ s32 vanishMode;
+    /* 0x50 */ s32 vanishTime;
+    /* 0x54 */ s32 perCharDelayOut;
     /* 0x58 */ s32 unk__58;
     /* 0x5C */ s32 unk__5C;
     /* 0x60 */ s32 unk__60;
@@ -2421,9 +2422,9 @@ typedef struct CreditsUnkAlpha {
     /* 0x6C */ s32 posY;
     /* 0x70 */ s16 flags;
     /* 0x72 */ char unk_72[2];
-} CreditsUnkAlpha; // size = 0x74
+} CreditsLine; // size = 0x74
 
-typedef struct CreditsGlyphInfo {
+typedef struct CreditsChar {
     /* 0x00 */ s32 charIndex;
     /* 0x04 */ s32 font;
     /* 0x08 */ s32 variation;
@@ -2431,12 +2432,17 @@ typedef struct CreditsGlyphInfo {
     /* 0x10 */ s32 posX;
     /* 0x14 */ s32 posY;
     /* 0x18 */ s32 fadeInTime;
-} CreditsGlyphInfo; // size = unk
+} CreditsChar; // size = unk
+
+typedef struct CreditsData {
+    /* 0x00 */ u32 workerID;
+    /* 0x04 */ CreditsLine lines[32];
+} CreditsData; // size = 0x74
 
 typedef struct CreditsUnkBeta {
-    u8 unk_00;
-    u8 unk_01;
-    s16 unk_02;
-} CreditsUnkBeta;
+    /* 0x00 */ u8 unk_00;
+    /* 0x01 */ u8 unk_01;
+    /* 0x02 */ s16 size;
+} CreditsUnkBeta; // size = 0x4
 
 #endif
