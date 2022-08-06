@@ -664,6 +664,17 @@ typedef struct EffectWhirlwindUnk {
     /* 0x30 */ f32 unk_30;
 } EffectWhirlwindUnk;
 
+typedef struct WattEffectData {
+    /* 0x00 */ s32 flags;
+    /* 0x04 */ s32 unk_04;
+    /* 0x08 */ s32 angle;
+    /* 0x0C */ s32 unk_0C;
+    /* 0x10 */ s32 unk_10;
+    /* 0x14 */ struct EffectInstance* effect1;
+    /* 0x18 */ struct EffectInstance* effect2;
+    /* 0x1C */ s32 debuff;
+} WattEffectData;
+
 typedef struct Effect6BFXData {
     /* 0x00 */ s32 unk_00;
     /* 0x04 */ Vec3f pos;
@@ -678,6 +689,22 @@ typedef struct Effect6BFXData {
     /* 0x3C */ s32 unk_3C;
     /* 0x40 */ char unk_40[0x4];
 } Effect6BFXData; // size = 0x44
+
+typedef struct TattleWindowFXData {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ Vec3f pos;
+    /* 0x10 */ s32 unk_10;
+    /* 0x14 */ s32 unk_14;
+    /* 0x18 */ f32 unk_18;
+    /* 0x1C */ f32 unk_1C;
+    /* 0x20 */ s32 unk_20;
+    /* 0x24 */ s32 unk_24;
+    /* 0x28 */ f32 unk_28;
+    /* 0x2C */ f32 unk_2C;
+    /* 0x30 */ f32 unk_30;
+    /* 0x34 */ u8 unk_34;
+    /* 0x35 */ u8 unk_35;
+} TattleWindowFXData; // size = 0x38
 
 typedef struct HuffPuffBreathFXData {
     /* 0x00 */ char unk_00[0x18];

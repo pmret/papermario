@@ -2296,28 +2296,6 @@ typedef struct SpriteShadingProfile {
     /* 0xAF */ s8 ambientPower; // ?
 } SpriteShadingProfile; // size = 0xB0
 
-typedef struct WattEffectData {
-    /* 0x00 */ s32 flags;
-    /* 0x04 */ s32 unk_04;
-    /* 0x08 */ s32 angle;
-    /* 0x0C */ s32 unk_0C;
-    /* 0x10 */ s32 unk_10;
-    /* 0x14 */ struct EffectInstance* effect1;
-    /* 0x18 */ struct EffectInstance* effect2;
-    /* 0x1C */ s32 debuff;
-} WattEffectData;
-
-typedef struct UnkStruct1 {
-    /* 0x00 */ char unk_00[8];
-    /* 0x08 */ f32 unk_08;
-} UnkStruct1;
-
-typedef struct UnkStruct0 {
-    /* 0x00 */ s32 flags;
-    /* 0x04 */ char unk_04[8];
-    /* 0x0C */ UnkStruct1* unk_0C;
-} UnkStruct0;
-
 typedef struct FoldImageRecPart {
     /* 0x00 */ IMG_PTR raster;
     /* 0x04 */ PAL_PTR palette;
@@ -2326,7 +2304,8 @@ typedef struct FoldImageRecPart {
     /* 0x0C */ s16 xOffset;
     /* 0x0E */ s16 yOffset;
     /* 0x10 */ u8 opacity; // alpha?
-    /* 0x11 */ char unk_11[0x7];
+    /* 0x11 */ char unk_11[3];
+    /* 0x14 */ Gfx* dlist;
 } FoldImageRecPart; // size = 0x18
 
 typedef struct FoldImageRec {

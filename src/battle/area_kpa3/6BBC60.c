@@ -12,17 +12,17 @@
 
 ApiStatus func_80218BC4_6BC754(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    UnkStruct0* unkStruct0 = (UnkStruct0*)evt_get_variable(script, *args++);
+    EffectInstance* tattleEffect = (EffectInstance*) evt_get_variable(script, *args++);
 
-    unkStruct0->unk_0C->unk_08 = -1000.0f;
+    ((TattleWindowFXData*) tattleEffect->data)->pos.y = -1000.0f;
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_80218BFC_6BC78C(Evt* script, s32 isInitialCall) {
-    UnkStruct0* unkStruct0 = (UnkStruct0*)evt_get_variable(script, *script->ptrReadPos);
+    EffectInstance* tattleEffect = (EffectInstance*) evt_get_variable(script, *script->ptrReadPos);
 
-    unkStruct0->unk_0C->unk_08 = 144.0f;
-    unkStruct0->flags |= 0x10;
+    ((TattleWindowFXData*) tattleEffect->data)->pos.y = 144.0f;
+    tattleEffect->flags |= EFFECT_INSTANCE_FLAGS_10;
     return ApiStatus_DONE2;
 }
 

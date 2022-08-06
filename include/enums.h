@@ -3780,6 +3780,13 @@ typedef enum FoldType {
     FOLD_TYPE_8                       = 0x8,
     FOLD_TYPE_9                       = 0x9,
     FOLD_TYPE_A                       = 0xA,
+    FOLD_TYPE_B                       = 0xB,
+    FOLD_TYPE_C                       = 0xC,
+    FOLD_TYPE_D                       = 0xD,
+    FOLD_TYPE_E                       = 0xE,
+    FOLD_TYPE_F                       = 0xF,
+    FOLD_TYPE_10                      = 0x10,
+    FOLD_TYPE_11                      = 0x11,
 } FoldType;
 
 enum MoveType {
