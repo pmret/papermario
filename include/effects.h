@@ -219,22 +219,21 @@ typedef struct WalkingDustFXData {
 // Used by both flower_splash and flower_trail
 typedef struct FlowerFXData {
     /* 0x00 */ s32 alive;
-    /* 0x04 */ u16 unk_04;
+    /* 0x04 */ u16 triggeredByNpc;
     /* 0x06 */ s16 timeLeft;
     /* 0x08 */ u8 primAlpha;
-    /* 0x09 */ s8 unk_09;
+    /* 0x09 */ s8 useAltColor;
     /* 0x0A */ char unk_0A[0x2];
     /* 0x0C */ Vec3f pos;
     /* 0x18 */ Vec3f scale;
     /* 0x24 */ Vec3f rot;
     /* 0x30 */ Mtx transformMtx;
-    /* 0x70 */ f32 rotVelocity;
-    /* 0x74 */ f32 linVelocity;
-    /* 0x78 */ f32 unk_78;
+    /* 0x70 */ f32 velocityScaleA;
+    /* 0x74 */ f32 velocityScaleB;
+    /* 0x78 */ f32 visibilityAmt;   // when this is zero, the flower can vanish. may have once controlled alpha.
     /* 0x7C */ f32 unk_7C;
-    /* 0x80 */ f32 unk_80[4];
-    /* 0x90 */ f32 unk_90;
-    /* 0x94 */ f32 unk_94;
+    /* 0x80 */ f32 integrator[4];
+    /* 0x90 */ Vec2XZf velocity;
 } FlowerFXData; // size = 0x98
 
 typedef struct CloudPuffFXData {
