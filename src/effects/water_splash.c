@@ -1,6 +1,14 @@
 #include "common.h"
 #include "effects_internal.h"
 
+extern Gfx D_09000268[];
+extern Gfx D_09000288[];
+extern Gfx D_090002A8[];
+
+Gfx* D_E00BEAF0[] = {
+    D_09000268, D_09000288, D_09000268, D_090002A8
+};
+
 void water_splash_appendGfx(void* effect);
 
 INCLUDE_ASM(s32, "effects/water_splash", water_splash_main);

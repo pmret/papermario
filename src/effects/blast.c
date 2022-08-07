@@ -6,6 +6,22 @@ void blast_init(EffectInstance* effect);
 void blast_update(EffectInstance* effect);
 void blast_render(EffectInstance* effect);
 
+extern Gfx D_09001300[];
+extern Gfx D_09001378[];
+extern Gfx D_090013F0[];
+extern Gfx D_09001468[];
+extern Gfx D_090014E0[];
+extern Gfx D_09001558[];
+extern Gfx D_090015D0[];
+extern Gfx D_09001648[];
+extern Gfx D_090016C0[];
+extern Gfx D_09001738[];
+extern Gfx D_090017B0[];
+
+Gfx* D_E007C510[] = {
+    D_09001378, D_090013F0, D_09001468, D_090014E0, D_09001558, D_090015D0, D_09001648, D_090016C0, D_09001738
+};
+
 void blast_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5) {
     EffectBlueprint bp;
     EffectBlueprint* bpPtr = &bp;
@@ -74,4 +90,50 @@ void blast_render(EffectInstance* effect) {
     retTask->renderMode |= RENDER_TASK_FLAG_2;
 }
 
+#ifdef NON_MATCHING
+void blast_appendGfx(void* effect) {
+    Matrix4f sp18, sp58, sp98;
+    Gfx* dlist;
+    Gfx* dlist2;
+    BlastFXData* data = ((EffectInstance*)effect)->data;
+    f32 temp_f2;
+    s32 temp_f4;
+    s32 alpha;
+
+    dlist = D_090017B0;
+    dlist2 = D_09001300;
+
+    temp_f4 = data->unk_20;
+    temp_f2 = temp_f4;
+    alpha = (temp_f2 - temp_f4) * 256.0f;
+
+    gDPPipeSync(gMasterGfxPos++);
+    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPDisplayList(gMasterGfxPos++, dlist2);
+    gSPDisplayList(gMasterGfxPos++, D_E007C510[temp_f4]);
+
+    shim_guTranslateF(sp18, data->pos.x, data->pos.y, data->pos.z);
+    shim_guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    shim_guMtxCatF(sp58, sp18, sp98);
+    shim_guScaleF(sp18, data->unk_10, data->unk_10, 1.0f);
+    shim_guMtxCatF(sp18, sp98, sp98);
+    shim_guRotateF(sp18, data->unk_24, 0.0f, 0.0f, 1.0f);
+    shim_guMtxCatF(sp18, sp98, sp98);
+    shim_guMtxF2L(sp98, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
+              G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    if (data->unk_20 > 4.0f) {
+        gDPSetPrimColor(gMasterGfxPos++, 0, 0, 255, 255, 255, 127);
+    } else {
+        gDPSetPrimColor(gMasterGfxPos++, 0, 0, 255, 255, 128, 127);
+    }
+
+    gDPSetEnvColor(gMasterGfxPos++, 255, 255, 139, alpha);
+
+    gSPDisplayList(gMasterGfxPos++, dlist);
+    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+}
+#else
 INCLUDE_ASM(s32, "effects/blast", blast_appendGfx);
+#endif
