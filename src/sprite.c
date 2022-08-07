@@ -702,7 +702,7 @@ s32 spr_get_npc_raster_info(SpriteRasterInfo* out, s32 npcSpriteID, s32 rasterIn
     return FALSE;
 }
 
-u16** spr_get_npc_palettes(s32 npcSpriteID) {
+PAL_PTR* spr_get_npc_palettes(s32 npcSpriteID) {
     SpriteAnimData* sprite = spr_npcSprites[npcSpriteID];
 
     if (sprite != NULL) {

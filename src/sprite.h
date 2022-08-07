@@ -70,7 +70,7 @@ typedef struct PlayerSpriteSet {
 /// Sprite data header.
 typedef struct SpriteAnimData {
     /* 0x00 */ SpriteRasterCacheEntry** rastersOffset;
-    /* 0x04 */ u16** palettesOffset;
+    /* 0x04 */ PAL_PTR* palettesOffset;
     /* 0x08 */ s32 maxComponents;
     /* 0x0C */ s32 colorVariations;
 } SpriteAnimData; // size = 0x10
