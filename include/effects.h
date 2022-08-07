@@ -802,8 +802,8 @@ typedef struct ButterflyFXData {
 } ButterflyFXData; // size = 0x48
 
 typedef struct BombetteBreakingFXData {
-    /* 0x00 */ s16 unk_00;
-    /* 0x02 */ s16 unk_02;
+    /* 0x00 */ s16 type;
+    /* 0x02 */ s16 treeIndex;
     /* 0x04 */ f32 unk_04;
     /* 0x08 */ Vec3f center;
     /* 0x14 */ Vec3f unk_14;

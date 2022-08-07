@@ -2,10 +2,10 @@
 #include "model.h"
 #include "effects_internal.h"
 
-void bombette_breaking_appendGfx(void* effect);
 void bombette_breaking_init(EffectInstance* effect);
 void bombette_breaking_update(EffectInstance* effect);
 void bombette_breaking_render(EffectInstance* effect);
+void bombette_breaking_appendGfx(void* effect);
 
 extern Gfx D_090018C0[];
 extern Gfx D_09001D00[];
@@ -21,44 +21,42 @@ void (*D_E0084E34)(u16, f32*, f32*, f32*, f32*, f32*, f32*) = get_model_center_a
 Model* (*D_E0084E38)(s32) = get_model_from_list_index;
 s32 (*D_E0084E3C)(s32) = get_model_list_index_from_tree_index;
 
-void func_E0084000(s32 modelID, f32* centerX, f32* centerY, f32* centerZ, f32* sizeX, f32* sizeY, f32* sizeZ) {
+void bombette_breaking_get_model_center_and_size(s32 modelID,
+                                                 f32* centerX, f32* centerY, f32* centerZ,
+                                                 f32* sizeX, f32* sizeY, f32* sizeZ)
+{
     D_E0084E34(modelID, centerX, centerY, centerZ, sizeX, sizeY, sizeZ);
 }
 
-Model* func_E008403C(s32 listIndex) {
+Model* bombette_breaking_get_model_from_list_index(s32 listIndex) {
     return D_E0084E38(listIndex);
 }
 
-s32 func_E0084060(s32 listIndex) {
+s32 bombette_breaking_get_model_list_index_from_tree_index(s32 listIndex) {
     return D_E0084E3C(listIndex);
 }
 
-INCLUDE_ASM(s32, "effects/bombette_breaking", bombette_breaking_main);
-/*EffectInstance* bombette_breaking_main(s32 arg0, s32 modelID, s32 arg2, f32 arg3, s32 arg4, s32 arg5) {
+EffectInstance* bombette_breaking_main(s32 type, s32 modelID, s32 treeIndex, f32 arg3, s32 arg4, s32 lifetime) {
     EffectBlueprint bp;
     EffectBlueprint* bpPtr = &bp;
     EffectInstance* effect;
     s32 numParts;
     BombetteBreakingFXData* data;
-
     f32 centerX, centerY, centerZ;
     f32 sizeX, sizeY, sizeZ;
     s32 xParts, yParts, zParts;
-    s32 xI, yI, zI;
+    s32 iX, iY, iZ;
+    f32 f20, f30, f40;
 
-    f32 f20, f30;
-    f64 f0, f2;
-
-    f64 temp_f0_6;
-
-    func_E0084000(modelID & 0xFFFF, &centerX, &centerY, &centerZ, &sizeX, &sizeY, &sizeZ);
+    bombette_breaking_get_model_center_and_size(modelID & 0xFFFF, &centerX, &centerY, &centerZ, &sizeX, &sizeY, &sizeZ);
 
     xParts = (sizeX * 0.0625f) + 1.0f;
     yParts = (sizeY * 0.0625f) + 1.0f;
     zParts = (sizeZ * 0.0625f) + 1.0f;
 
-    f30 = (s32)sizeY % 16;
     f20 = (s32)sizeX % 16;
+    f30 = (s32)sizeY % 16;
+    f40 = (s32)sizeZ % 16;
 
     bp.unk_00 = 0;
     bp.init = bombette_breaking_init;
@@ -69,6 +67,7 @@ INCLUDE_ASM(s32, "effects/bombette_breaking", bombette_breaking_main);
 
     f20 *= 0.5;
     f30 *= 0.5;
+    f40 *= 0.5;
 
     numParts = (xParts * yParts * zParts) + 1;
     effect = shim_create_effect_instance(bpPtr);
@@ -77,12 +76,12 @@ INCLUDE_ASM(s32, "effects/bombette_breaking", bombette_breaking_main);
     ASSERT(data != NULL);
 
     data->unk_04 = -sizeY * 0.5;
-    data->unk_44 = arg5;
+    data->lifetime = lifetime;
     data->unk_48 = 0;
-    data->unk_00 = arg0;
+    data->type = type;
     data->unk_38 = arg3;
-    data->unk_4C = 0xFF;
-    data->unk_02 = arg2;
+    data->alpha = 255;
+    data->treeIndex = treeIndex;
     data->unk_3C = 2.0f * arg3;
     data->center.x = centerX;
     data->center.y = centerY;
@@ -93,12 +92,12 @@ INCLUDE_ASM(s32, "effects/bombette_breaking", bombette_breaking_main);
     }
 
     data++;
-    for (xI = 0; xI < xParts; xI++) {
-        centerX = (f20 - (sizeX * 0.5)) + (xI * 16.0f);
-        for (yI = 0; yI < yParts; yI++) {
-            centerY = (f30 - (sizeY * 0.5)) + (yI * 16.0f);
-            for (zI = 0; zI < zParts; data++, zI++) {
-                centerZ = (f30 - (sizeZ * 0.5)) + (zI * 16.0f);
+    for (iX = 0; iX < xParts; iX++) {
+        centerX = f20 - (sizeX * 0.5) + (iX * 16.0f);
+        for (iY = 0; iY < yParts; iY++) {
+            centerY = f30 - (sizeY * 0.5) + (iY * 16.0f);
+            for (iZ = 0; iZ < zParts; iZ++) {
+                centerZ = f30 - (sizeZ * 0.5) + (iZ * 16.0f);
 
                 data->center.x = data->unk_14.x = centerX;
                 data->center.y = data->unk_14.y = centerY;
@@ -108,7 +107,7 @@ INCLUDE_ASM(s32, "effects/bombette_breaking", bombette_breaking_main);
                     if (xParts >= 2) {
                         data->unk_20.x = 2.0 * (centerX / (sizeX * 0.5));
                     } else {
-                        if (zI & 1) {
+                        if (iZ & 1) {
                             data->unk_20.x = 2.0f;
                         } else {
                             data->unk_20.x = -2.0f;
@@ -120,7 +119,7 @@ INCLUDE_ASM(s32, "effects/bombette_breaking", bombette_breaking_main);
                     if (zParts >= 2) {
                         data->unk_20.z = 2.0 * (centerZ / (sizeZ * 0.5));
                     } else {
-                        if (xI & 1) {
+                        if (iX & 1) {
                             data->unk_20.z = 2.0f;
                         } else {
                             data->unk_20.z = -2.0f;
@@ -129,40 +128,17 @@ INCLUDE_ASM(s32, "effects/bombette_breaking", bombette_breaking_main);
                 }
 
                 data->unk_20.y = centerY * 0.2;
-                f0 = centerZ * 0.2;
-
-                if (centerZ > centerX) {
-                    if (centerZ < 0.0f) {
-                        f2 = f0 + -1.0;
-                    } else if (centerZ > 0.0f) {
-                        f2 = f0 + 1.0;
-                    } else {
-                        f2 = f0 + 0.0;
-                    }
-                } else {
-                    f2 = f0 + 0.0;
-                }
-                data->unk_2C.x = f2;
+                data->unk_2C.x = centerZ * 0.2 + (centerX < centerZ ? (centerZ < 0 ? -1.0 : (centerZ > 0 ? 1.0 : 0.0)) : 0.0);
                 data->unk_2C.y = centerY * 0.2;
+                data->unk_2C.z = centerX * 0.2 + (centerZ < centerX ? (centerX < 0 ? -1.0 : (centerX > 0 ? 1.0 : 0.0)) : 0.0);
 
-                temp_f0_6 = centerX * 0.2;
-                if (centerZ < centerX) {
-                    if (centerX < 0.0f) {
-                        data->unk_2C.z = temp_f0_6 + -1.0;
-                    } else if (centerX > 0.0f) {
-                        data->unk_2C.z = temp_f0_6 + 1.0;
-                    } else {
-                        data->unk_2C.z = temp_f0_6 + 0.0;
-                    }
-                } else {
-                    data->unk_2C.z = temp_f0_6 + 0.0;
-                }
-                data->unk_4C = 0xFF;
+                data->alpha = 255;
+                data++;
             }
         }
     }
     return effect;
-}*/
+}
 
 void bombette_breaking_init(EffectInstance* effect) {
 }
@@ -230,12 +206,12 @@ void bombette_breaking_appendGfx(void* effect) {
     Matrix4f sp20;
     BombetteBreakingFXData* data = ((EffectInstance*)effect)->data;
     s32 lifetime = data->lifetime;
-    u16 unk_00 = data->unk_00;
-    Gfx* sp60 = D_E0084E10[unk_00];
-    Gfx* sp64 = D_E0084E28[unk_00];
+    u16 type = data->type;
+    Gfx* sp60 = D_E0084E10[type];
+    Gfx* sp64 = D_E0084E28[type];
     f32 unk_38 = data->unk_38;
     f32 unk_40 = data->unk_40;
-    s32 alpha = data->alpha;
+    s32 mainAlpha = data->alpha;
     s32 i;
 
     lifetime *= 4;
@@ -246,7 +222,7 @@ void bombette_breaking_appendGfx(void* effect) {
     shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
     gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
-    shim_mdl_draw_hidden_panel_surface(&gMasterGfxPos, data->unk_02);
+    shim_mdl_draw_hidden_panel_surface(&gMasterGfxPos, data->treeIndex);
 
     data++;
     for (i = 1; i < ((EffectInstance*)effect)->numParts; i++, data++) {
@@ -255,7 +231,7 @@ void bombette_breaking_appendGfx(void* effect) {
         shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
         gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
                   G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-        gSPDisplayList(gMasterGfxPos++, D_E0084E1C[unk_00]);
+        gSPDisplayList(gMasterGfxPos++, D_E0084E1C[type]);
         gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
     }
 
@@ -264,7 +240,7 @@ void bombette_breaking_appendGfx(void* effect) {
     data = ((EffectInstance*)effect)->data;
     data++;
     for (i = 1; i < ((EffectInstance*)effect)->numParts; i++, data++) {
-        gDPSetPrimColor(gMasterGfxPos++, 0, 0, 255, 255, 255, (data->alpha * alpha) / 255);
+        gDPSetPrimColor(gMasterGfxPos++, 0, 0, 255, 255, 255, (data->alpha * mainAlpha) / 255);
         shim_guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, unk_38,
                          data->center.x, data->center.y, data->center.z);
         shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
