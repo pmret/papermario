@@ -4,7 +4,7 @@ extern s32 D_8025B2A8;
 
 #include "world/common/atomic/Pipe.inc.c"
 
- func_80240310_8EC130(Evt* script, s32 isInitialCall) {
+ApiStatus func_80240310_8EC130(Evt* script, s32 isInitialCall) {
     set_map_transition_effect(4);
     return ApiStatus_DONE2;
 }
