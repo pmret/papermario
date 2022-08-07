@@ -174,14 +174,6 @@ ApiStatus N(SuperBlock_RadiateFaintEnergyFX)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-typedef struct BlurFlameEffectData {
-    s32 unk_00;
-    s32 unk_04;
-    s32 unk_08;
-    s32 unk_0C;
-    Vec3f position;
-} BlurFlameEffectData;
-
 typedef struct EnergyOrbSet {
     s32 scatterState;
     s32 gatherState;
@@ -216,8 +208,7 @@ ApiStatus N(SuperBlock_AnimateEnergyOrbs)(Evt* script, s32 isInitialCall) {
 
         for (i = 0; i < SUPER_BLOCK_NUM_ORBS; i++) {
             userData->orbEffects[i] = (EffectInstance*)fx_motion_blur_flame(0, userData->superBlock->position.x,
-                                                          userData->superBlock->position.y + 12.5f,
-                                                          userData->superBlock->position.z, 1.0f, -1);
+                userData->superBlock->position.y + 12.5f, userData->superBlock->position.z, 1.0f, -1);
             t1 = 0.0f;
             userData->posZ[i] = t1;
             userData->posY[i] = t1;
@@ -311,9 +302,9 @@ ApiStatus N(SuperBlock_AnimateEnergyOrbs)(Evt* script, s32 isInitialCall) {
     }
 
     for (i = 0; i < SUPER_BLOCK_NUM_ORBS; i++) {
-        ((BlurFlameEffectData*)userData->orbEffects[i]->data)->position.x = userData->posX[i];
-        ((BlurFlameEffectData*)userData->orbEffects[i]->data)->position.y = userData->posY[i];
-        ((BlurFlameEffectData*)userData->orbEffects[i]->data)->position.z = userData->posZ[i];
+        userData->orbEffects[i]->data.motionBlurFlame->position.x = userData->posX[i];
+        userData->orbEffects[i]->data.motionBlurFlame->position.y = userData->posY[i];
+        userData->orbEffects[i]->data.motionBlurFlame->position.z = userData->posZ[i];
     }
 
     return ApiStatus_BLOCK;

@@ -17,3 +17,24 @@ ApiStatus N(PlayFX3D)(Evt* script, s32 isInitialStatus) {
     script->varTable[0] = outVal;
     return ApiStatus_DONE2;
 }
+
+ApiStatus N(UpdatePosFX3D)(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    EffectInstance* effect = (EffectInstance*) evt_get_variable(script, *args++);
+    f32 x = evt_get_float_variable(script, *args++);
+    f32 y = evt_get_float_variable(script, *args++);
+    f32 z = evt_get_float_variable(script, *args++);
+    
+    effect->data.unk_3D->pos.x = x;
+    effect->data.unk_3D->pos.y = y;
+    effect->data.unk_3D->pos.z = z;
+    return ApiStatus_DONE2;
+}
+
+ApiStatus N(DisposeFX3D)(Evt *script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    EffectInstance* effect = (EffectInstance*) evt_get_variable(script, *args++);
+
+    effect->data.unk_3D->unk_04 = 1;
+    return ApiStatus_DONE2;
+}

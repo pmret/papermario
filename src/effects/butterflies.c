@@ -32,7 +32,7 @@ void butterflies_appendGfx(void* effect);
 EffectInstance* butterflies_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3) {
     EffectBlueprint bp;
     EffectInstance* effect;
-    ButterflyFXData* part;
+    ButterfliesFXData* part;
     s32 numParts = 1;
     s32 i;
 
@@ -45,8 +45,8 @@ EffectInstance* butterflies_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3) {
 
     effect = shim_create_effect_instance(&bp);
     effect->numParts = numParts;
-    part = effect->data = shim_general_heap_malloc(numParts * sizeof(*part));
-    ASSERT(effect->data != NULL);
+    part = effect->data.butterflies = shim_general_heap_malloc(numParts * sizeof(*part));
+    ASSERT(effect->data.butterflies != NULL);
 
     part->unk_04 = 1000;
     part->unk_00 = arg0;
@@ -69,7 +69,7 @@ void butterflies_init(EffectInstance* effect) {
 }
 
 void butterflies_update(EffectInstance* effect) {
-    ButterflyFXData* temp_s0;
+    ButterfliesFXData* temp_s0;
     f32 temp_f20;
     f32 temp_f20_2;
     f32 temp_f22;
@@ -82,7 +82,7 @@ void butterflies_update(EffectInstance* effect) {
     f32 var_f22;
     f32 var_f24;
 
-    temp_s0 = effect->data;
+    temp_s0 = effect->data.butterflies;
     if (effect->flags & 0x10) {
         effect->flags &= ~0x10;
         temp_s0->unk_04 = 900;
@@ -163,7 +163,7 @@ void butterflies_render(EffectInstance* effect) {
 
 void butterflies_appendGfx(void* effect) {
     EffectInstance* effectTemp = effect;
-    ButterflyFXData* data = effectTemp->data;
+    ButterfliesFXData* data = effectTemp->data.butterflies;
     Matrix4f sp18;
     Matrix4f sp58;
 

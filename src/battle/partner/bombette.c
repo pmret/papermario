@@ -560,7 +560,7 @@ EvtScript N(handleEvent_802387F0) = {
         EVT_CASE_EQ(EVENT_33)
             EVT_SET_CONST(LW(1), NPC_ANIM_battle_bombette_Palette_00_Anim_12)
             EVT_EXEC_WAIT(D_80296014)
-        EVT_CASE_EQ(EVENT_34)
+        EVT_CASE_EQ(EVENT_RECOVER_PARTNER)
             EVT_SET_CONST(LW(0), 1)
             EVT_SET_CONST(LW(1), NPC_ANIM_battle_bombette_Palette_00_Anim_4)
             EVT_SET_CONST(LW(2), NPC_ANIM_battle_bombette_Palette_00_Anim_8)

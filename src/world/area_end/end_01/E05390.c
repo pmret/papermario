@@ -15,6 +15,7 @@ extern u8 N(CreditsMessageBuffers)[23][256];
 extern Mtx N(CreditsProjMatrices)[2];
 
 s32 msg_get_print_char_width(s32 character, s32 charset, s32 variation, f32 msgScale, s32 overrideCharWidth, u8 flags);
+void msg_get_glyph(s32 font, s32 variation, s32 charIndex, s32 palette, MesasgeFontGlyphData* out);
 void dma_load_msg(u32 msgID, void* dest);
 
 #include "world/common/atomic/Credits_1.inc.c"
@@ -42,7 +43,7 @@ void N(credits_update_line)(CreditsLine* line) {
         line->state = 0;
     }
     
-    get_msg_properties(line->message, &msgHeight, &msgWidth, &msgMaxLineChars, NULL, NULL, NULL, 0);
+    get_msg_properties((s32) line->message, &msgHeight, &msgWidth, &msgMaxLineChars, NULL, NULL, NULL, 0);
     
     curChar->font = 0;
     curChar->variation = 0;
@@ -237,7 +238,7 @@ void N(credits_update_line)(CreditsLine* line) {
     
     if ((line->state == CREDITS_LINE_APPEARING) && doneCurrentState) {
         s32 temp = 0;
-        get_msg_properties(line->message, NULL, NULL, &temp, NULL, NULL, NULL, 0);
+        get_msg_properties((s32) line->message, NULL, NULL, &temp, NULL, NULL, NULL, 0);
         line->time = 0;
         line->state++;
         if (line->holdTime <= 0) {
@@ -283,7 +284,7 @@ ApiStatus func_80242754_E07AB4(Evt* script, s32 isInitialCall) {
     s32 heapSize = evt_get_variable(script, *args++);
     s32 outVar = *args++;
 
-    evt_set_variable(script, outVar, _heap_malloc(&gSpriteHeapPtr, heapSize));
+    evt_set_variable(script, outVar, (s32) _heap_malloc(&gSpriteHeapPtr, heapSize));
     return ApiStatus_DONE2;
 }
 
@@ -291,7 +292,7 @@ ApiStatus func_802427B4_E07B14(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 pointer = *args++;
 
-    _heap_free(&gSpriteHeapPtr, evt_get_variable(script, pointer));
+    _heap_free(&gSpriteHeapPtr, (void*) evt_get_variable(script, pointer));
     return ApiStatus_DONE2;
 }
 

@@ -177,7 +177,7 @@ ApiStatus func_80238E04_6F1EE4(Evt* script, s32 isInitialCall) {
 ApiStatus func_80238E48_6F1F28(Evt* script, s32 isInitialCall) {
     EffectInstance* effect = D_8023CDA0;
 
-    ((EffectInstanceData*)effect->data)->pos.y = 144.0f;
+    effect->data.tattleWindow->pos.y = 144.0f;
     effect->flags |= EFFECT_INSTANCE_FLAGS_10;
 
     return ApiStatus_DONE2;

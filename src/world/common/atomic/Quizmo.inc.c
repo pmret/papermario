@@ -233,7 +233,7 @@ ApiStatus N(Quizmo_UpdateRecords)(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus N(Quizmo_CreateStage)(Evt* script, s32 isInitialCall) {
-    EffectDataQuizStage* stageData;
+    QuizmoStageFXData* stageData;
 
     if (isInitialCall) {
         N(Quizmo_StageEffect) = fx_quizmo_stage(0,
@@ -250,7 +250,7 @@ ApiStatus N(Quizmo_CreateStage)(Evt* script, s32 isInitialCall) {
             evt_get_variable(script, EVT_ARRAY(3)),
             1.0f, 0);
 
-        stageData = N(Quizmo_StageEffect)->data;
+        stageData = N(Quizmo_StageEffect)->data.quizmoStage;
         stageData->microphoneRaiseAmt = 0;
         stageData->leftWallRaiseAmt = 0;
         stageData->rightWallRaiseAmt = 0;
@@ -258,7 +258,7 @@ ApiStatus N(Quizmo_CreateStage)(Evt* script, s32 isInitialCall) {
         stageData->rearWallRaiseAmt = 0;
     }
 
-    stageData = N(Quizmo_StageEffect)->data;
+    stageData = N(Quizmo_StageEffect)->data.quizmoStage;
 
     stageData->leftWallRaiseAmt += 10;
     stageData->podiumRaiseAmt += 10;
@@ -274,14 +274,14 @@ ApiStatus N(Quizmo_CreateStage)(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus N(Quizmo_DestroyEffects)(Evt* script, s32 isInitialCall) {
-    EffectDataQuizStage* stageData;
+    QuizmoStageFXData* stageData;
 
     if (isInitialCall) {
         N(Quizmo_AudienceEffect)->flags |= EFFECT_INSTANCE_FLAGS_10;
         N(Quizmo_VannaTEffect)->flags |= EFFECT_INSTANCE_FLAGS_10;
     }
 
-    stageData = N(Quizmo_StageEffect)->data;
+    stageData = N(Quizmo_StageEffect)->data.quizmoStage;
     stageData->microphoneRaiseAmt -= 10;
     stageData->leftWallRaiseAmt -= 10;
     stageData->rightWallRaiseAmt -= 10;
@@ -299,13 +299,13 @@ ApiStatus N(Quizmo_DestroyEffects)(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus N(Quizmo_SetStageLightsDelay)(Evt* script, s32 isInitialCall) {
-    ((EffectDataQuizStage*)N(Quizmo_StageEffect)->data)->lightScrollDelay = evt_get_variable(script, *script->ptrReadPos);
+    N(Quizmo_StageEffect)->data.quizmoStage->lightScrollDelay = evt_get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
 ApiStatus N(Quizmo_UnkStageEffectMode)(Evt* script, s32 isInitialCall) {
     s32 var = evt_get_variable(script, *script->ptrReadPos);
-    EffectDataQuizStage* stageData = N(Quizmo_StageEffect)->data;
+    QuizmoStageFXData* stageData = N(Quizmo_StageEffect)->data.quizmoStage;
 
     switch (var) {
         case 0:
@@ -326,17 +326,17 @@ ApiStatus N(Quizmo_UnkStageEffectMode)(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus N(Quizmo_SetVannaAnim_Idle)(Evt* script, s32 isInitialCall) {
-    ((EffectDataQuizVannaT*)N(Quizmo_VannaTEffect)->data)->anim = 0;
+    N(Quizmo_VannaTEffect)->data.quizmoAssistant->anim = 0;
     return ApiStatus_DONE2;
 }
 
 ApiStatus N(Quizmo_SetVannaAnim_Clap)(Evt* script, s32 isInitialCall) {
-    ((EffectDataQuizVannaT*)N(Quizmo_VannaTEffect)->data)->anim = 1;
+    N(Quizmo_VannaTEffect)->data.quizmoAssistant->anim = 1;
     return ApiStatus_DONE2;
 }
 
 ApiStatus N(Quizmo_SetVannaAnim_Wave)(Evt* script, s32 isInitialCall) {
-    ((EffectDataQuizVannaT*)N(Quizmo_VannaTEffect)->data)->anim = 2;
+    N(Quizmo_VannaTEffect)->data.quizmoAssistant->anim = 2;
     return ApiStatus_DONE2;
 }
 

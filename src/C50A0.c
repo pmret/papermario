@@ -46,7 +46,7 @@ void func_801356C4(ItemEntity*);
 void func_801356CC(ItemEntity*);
 void func_801356D4(ItemEntity*);
 void update_item_entity_temp(ItemEntity*);
-s32 draw_image_with_clipping(s32* raster, s32 width, s32 height, s32 fmt, s32 bitDepth, s16 posX, s16 posY, u16 clipULx,
+s32 draw_image_with_clipping(IMG_PTR raster, s32 width, s32 height, s32 fmt, s32 bitDepth, s16 posX, s16 posY, u16 clipULx,
                              u16 clipULy, u16 clipLRx, u16 clipRLy);
 void func_8013673C(ItemEntity* itemEntity, s32 posX, s32 posY);
 void func_801369D0(ItemEntity* itemEntity, s32 posX, s32 posY);
@@ -101,7 +101,7 @@ Lights1 D_8014C6C8 = gdSPDefLights1(255, 255, 255, 0, 0, 0, 0, 0, 0);
 s16 D_8014C6E0[] = { 32, 40 };
 s16 D_8014C6E4[] = { 8, 4 };
 
-s32 draw_ci_image_with_clipping(s32* raster, s32 width, s32 height, s32 fmt, s32 bitDepth, s32* palette, s16 posX,
+s32 draw_ci_image_with_clipping(IMG_PTR raster, s32 width, s32 height, s32 fmt, s32 bitDepth, PAL_PTR palette, s16 posX,
                                 s16 posY, u16 clipULx, u16 clipULy, u16 clipLRx, u16 clipRLy, u8 opacity) {
     s32 ret;
 
@@ -180,8 +180,8 @@ s32 sparkle_script_step(ItemEntity* itemEntity) {
             return TRUE;
         case SPARKLE_OP_SetCI:
             itemEntity->sparkleNextUpdate = *readPos++;
-            itemEntity->sparkleRaster = (s8*)*readPos++;
-            itemEntity->sparklePalette = (s8*)*readPos++;
+            itemEntity->sparkleRaster  = (IMG_PTR)*readPos++;
+            itemEntity->sparklePalette = (PAL_PTR)*readPos++;
             itemEntity->sparkleWidth = *readPos++;
             itemEntity->sparkleHeight = *readPos++;
             itemEntity->sparkleReadPos = readPos;

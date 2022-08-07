@@ -46,7 +46,7 @@ ApiStatus N(UpdateBulbGlow)(Evt* script, s32 isInitialCall) {
     s32 y = evt_get_variable(script, *args++);
     s32 z = evt_get_variable(script, *args++);
     s32 rotation = evt_get_variable(script, *args++);
-    BulbGlowFXData* effectData = ((EffectInstance*) evt_get_variable(script, *args++))->data;
+    BulbGlowFXData* effectData = ((EffectInstance*) evt_get_variable(script, *args++))->data.bulbGlow;
 
     effectData->pos.x = x;
     effectData->pos.y = y;

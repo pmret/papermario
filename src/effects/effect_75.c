@@ -15,7 +15,7 @@ void fx_75_init(void) {
 INCLUDE_ASM(s32, "effects/effect_75", fx_75_update);
 
 void fx_75_render(EffectInstance* effect) {
-    Effect75FXData* data = effect->data;
+    Effect75FXData* data = effect->data.unk_75;
     RenderTask renderTask;
     RenderTask* renderTaskPtr = &renderTask;
     RenderTask* retTask;

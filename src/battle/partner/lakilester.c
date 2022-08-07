@@ -53,7 +53,6 @@ ApiStatus func_80238C14_70C924(Evt* script, s32 isInitialCall) {
 ApiStatus func_80238C58_70C968(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* actor = battleStatus->playerActor;
-    EffectInstanceData* effectData; // TODO remove this struct and replace it with the effect-specific one
 
     if (isInitialCall) {
         script->functionTemp[0] = 0;
@@ -69,8 +68,7 @@ ApiStatus func_80238C58_70C968(Evt* script, s32 isInitialCall) {
             if (D_8023D1E0 >= 1.0) {
                 return ApiStatus_DONE2;
             }
-            effectData = battleStatus->cloudNineEffect->data;
-            effectData->rotation.x += 0.2;
+            battleStatus->cloudNineEffect->data.endingDecals->unk_10 += 0.2;
             D_8023D1E0 += 0.2;
             break;
     }

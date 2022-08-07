@@ -1,7 +1,7 @@
 #include "end_00.h"
 
 #ifdef NON_MATCHING
-ApiStatus func_80242AD4_DF94D4(Evt *script, s32 isInitialCall) {
+ApiStatus end_00_DisposeFX3D(Evt *script, s32 isInitialCall) {
     D_80249D60_E00760 = evt_get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }

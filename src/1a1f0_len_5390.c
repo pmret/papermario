@@ -11,8 +11,8 @@ extern s8 D_8009A654;
 extern s16 D_8009A668;
 extern s32 D_800A0BA0;
 extern f32 D_800A0BA4;
-extern EffectInstance* D_800A0BA8;
-extern EffectInstance* D_800A0BAC;
+extern EffectInstance* WorldMerleeOrbEffect;
+extern EffectInstance* WorldMerleeWaveEffect;
 
 s32 get_defeated(s32 mapID, s32 encounterID) {
     EncounterStatus* currentEncounter = &gCurrentEncounter;
@@ -45,14 +45,24 @@ ApiStatus ShowMerleeCoinMessage(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         show_merlee_message(0, 60);
     }
-    return (is_merlee_message_done() == 0) * ApiStatus_DONE2;
+
+    if (is_merlee_message_done()) {
+        return ApiStatus_BLOCK;
+    } else {
+        return ApiStatus_DONE2;
+    }
 }
 
 ApiStatus ShowMerleeRanOutMessage(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         show_merlee_message(1, 60);
     }
-    return (is_merlee_message_done() == 0) * ApiStatus_DONE2;
+
+    if (is_merlee_message_done()) {
+        return ApiStatus_BLOCK;
+    } else {
+        return ApiStatus_DONE2;
+    }
 }
 
 ApiStatus FadeBackgroundToBlack(Evt* script, s32 isInitialCall) {
@@ -65,12 +75,12 @@ ApiStatus FadeBackgroundToBlack(Evt* script, s32 isInitialCall) {
 
     set_background_color_blend(0, 0, 0, ((25 - script->functionTemp[0]) * 10) & 254);
     script->functionTemp[0]--;
-    do {} while (0);
 
     if (script->functionTemp[0] == 0) {
         return ApiStatus_DONE2;
+    } else {
+        return ApiStatus_BLOCK;
     }
-    return ApiStatus_BLOCK;
 }
 
 ApiStatus UnfadeBackgroundFromBlack(Evt* script, s32 isInitialCall) {
@@ -102,8 +112,9 @@ ApiStatus FadeInMerlee(Evt* script, s32 isInitialCall) {
     if ((u32)(npc->alpha & 0xFF) >= 0xFF) {
         npc->alpha = 0xFF;
         return ApiStatus_DONE1;
+    } else {
+        return ApiStatus_BLOCK;
     }
-    return ApiStatus_BLOCK;
 }
 
 ApiStatus FadeOutMerlee(Evt* script, s32 isInitialCall) {
@@ -113,21 +124,21 @@ ApiStatus FadeOutMerlee(Evt* script, s32 isInitialCall) {
     if (npc->alpha == 0) {
         npc->alpha = 0;
         return ApiStatus_DONE1;
+    } else {
+        return ApiStatus_BLOCK;
     }
-
-    return ApiStatus_BLOCK;
 }
 
-// same as func_802616F4 aside from syms
+// same as BattleMerleeUpdateFX aside from syms
 ApiStatus MerleeUpdateFX(Evt* script, s32 isInitialCall) {
     Npc* merlee = get_npc_unsafe(NPC_BTL_MERLEE);
-    EffectInstanceData* effectInstanceData;
+    EnergyOrbWaveFXData* effectData;
 
     if (isInitialCall) {
         script->functionTemp[1] = 0;
         D_800A0BA4 = merlee->pos.y;
-        D_800A0BA8 = fx_energy_orb_wave(0, merlee->pos.x, merlee->pos.y, merlee->pos.z, 0.4f, 0);
-        D_800A0BAC = fx_energy_orb_wave(3, merlee->pos.x, merlee->pos.y, merlee->pos.z, 0.00001f, 0);
+        WorldMerleeOrbEffect = fx_energy_orb_wave(0, merlee->pos.x, merlee->pos.y, merlee->pos.z, 0.4f, 0);
+        WorldMerleeWaveEffect = fx_energy_orb_wave(3, merlee->pos.x, merlee->pos.y, merlee->pos.z, 0.00001f, 0);
         D_800A0BB8 = 0;
         D_800A0BA0 = 12;
         sfx_play_sound(SOUND_2074);
@@ -138,37 +149,37 @@ ApiStatus MerleeUpdateFX(Evt* script, s32 isInitialCall) {
     script->functionTemp[1] += 10;
     script->functionTemp[1] = clamp_angle(script->functionTemp[1]);
 
-    effectInstanceData = D_800A0BA8->data;
-    effectInstanceData->pos.x = merlee->pos.x;
-    effectInstanceData->pos.y = merlee->pos.y + 16.0f;
-    effectInstanceData->pos.z = merlee->pos.z;
+    effectData = WorldMerleeOrbEffect->data.energyOrbWave;
+    effectData->pos.x = merlee->pos.x;
+    effectData->pos.y = merlee->pos.y + 16.0f;
+    effectData->pos.z = merlee->pos.z;
 
-    effectInstanceData = D_800A0BAC->data;
-    effectInstanceData->pos.x = merlee->pos.x;
-    effectInstanceData->pos.y = merlee->pos.y + 16.0f;
-    effectInstanceData->pos.z = merlee->pos.z + 5.0f;
+    effectData = WorldMerleeWaveEffect->data.energyOrbWave;
+    effectData->pos.x = merlee->pos.x;
+    effectData->pos.y = merlee->pos.y + 16.0f;
+    effectData->pos.z = merlee->pos.z + 5.0f;
 
     if (D_800A0BB8 == 2) {
-        ((EffectInstanceData*)D_800A0BA8->data)->unk_30 = 0.00001f;
-        ((EffectInstanceData*)D_800A0BAC->data)->unk_30 = 0.00001f;
-        D_800A0BA8->flags |= EFFECT_INSTANCE_FLAGS_10;
-        D_800A0BAC->flags |= EFFECT_INSTANCE_FLAGS_10;
+        WorldMerleeOrbEffect->data.energyOrbWave->scale = 0.00001f;
+        WorldMerleeWaveEffect->data.energyOrbWave->scale = 0.00001f;
+        WorldMerleeOrbEffect->flags |= EFFECT_INSTANCE_FLAGS_10;
+        WorldMerleeWaveEffect->flags |= EFFECT_INSTANCE_FLAGS_10;
         return ApiStatus_DONE1;
     }
 
     if (D_800A0BB8 == 1) {
-        effectInstanceData = D_800A0BA8->data;
-        effectInstanceData->unk_30 += 0.35;
-        if (effectInstanceData->unk_30 > 3.5) {
-            effectInstanceData->unk_30 = 3.5f;
+        effectData = WorldMerleeOrbEffect->data.energyOrbWave;
+        effectData->scale += 0.35;
+        if (effectData->scale > 3.5) {
+            effectData->scale = 3.5f;
         }
 
         if (D_800A0BA0 != 0) {
             D_800A0BA0--;
         } else {
-            effectInstanceData = D_800A0BAC->data;
-            effectInstanceData->unk_30 += 0.5;
-            if (effectInstanceData->unk_30 > 5.0) {
+            effectData = WorldMerleeWaveEffect->data.energyOrbWave;
+            effectData->scale += 0.5;
+            if (effectData->scale > 5.0) {
                 D_800A0BB8 = 2;
             }
         }

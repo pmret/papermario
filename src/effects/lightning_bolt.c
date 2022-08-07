@@ -21,7 +21,7 @@ f32 func_E00BC1D8(f32 arg0) {
 INCLUDE_ASM(s32, "effects/lightning_bolt", lightning_bolt_update);
 
 void lightning_bolt_render(EffectInstance *effect) {
-    LightningBoltFXData* effect94 = effect->data;
+    LightningBoltFXData* effect94 = effect->data.lightningBolt;
     RenderTask renderTask;
     RenderTask* retTask;
     RenderTask* renderTaskPointer = &renderTask;

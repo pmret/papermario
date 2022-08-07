@@ -38,12 +38,12 @@ ApiStatus N(func_802A12E0_72AA30)(Evt* script, s32 isInitialCall) {
 
     effect = fx_cold_breath(0, a, b, c, 1.0f, 30);
 
-    ((ColdBreathFXData*)effect->data)->unk_18 = 244;
-    ((ColdBreathFXData*)effect->data)->unk_1C = 244;
-    ((ColdBreathFXData*)effect->data)->unk_20 = 220;
-    ((ColdBreathFXData*)effect->data)->unk_28 = 210;
-    ((ColdBreathFXData*)effect->data)->unk_2C = 210;
-    ((ColdBreathFXData*)effect->data)->unk_30 = 190;
+    effect->data.coldBreath->unk_18 = 244;
+    effect->data.coldBreath->unk_1C = 244;
+    effect->data.coldBreath->unk_20 = 220;
+    effect->data.coldBreath->unk_28 = 210;
+    effect->data.coldBreath->unk_2C = 210;
+    effect->data.coldBreath->unk_30 = 190;
 
     return ApiStatus_DONE2;
 }

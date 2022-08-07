@@ -86,7 +86,7 @@ ApiStatus func_8023859C_70408C(Evt* script, s32 isInitialCall) {
     ThunderboltRingFXData* data;
 
     D_8023C1B4 = fx_thunderbolt_ring(0, var1, var2, var3, 1.0f, 10);
-    data = D_8023C1B4->data;
+    data = D_8023C1B4->data.thunderboltRing;
     data->unk_30 = 3;
 
     return ApiStatus_DONE2;
@@ -106,7 +106,7 @@ ApiStatus func_80238668_704158(Evt* script, s32 isInitialCall) {
 
     script->functionTemp[0]--;
     if (script->functionTemp[0] == 0) {
-        ((BulbGlowFXData*)D_8023C1B0->data)->unk_14 = 5;
+        D_8023C1B0->data.bulbGlow->unk_14 = 5;
         return ApiStatus_DONE2;
     }
 
@@ -142,7 +142,7 @@ ApiStatus func_80238B3C_70462C(Evt* script, s32 isInitialCall) {
     ThunderboltRingFXData* data;
 
     D_8023C1B4 = fx_thunderbolt_ring(0, var1, var2, var3, 1.0f, 60);
-    data = D_8023C1B4->data;
+    data = D_8023C1B4->data.thunderboltRing;
     data->unk_30 = 2;
 
     return ApiStatus_DONE2;

@@ -27,9 +27,9 @@ EffectInstance* fire_flower_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg
     effect = shim_create_effect_instance(&bp);
     effect->numParts = numParts;
     part = shim_general_heap_malloc(numParts * sizeof(*part));
-    effect->data = part;
+    effect->data.fireFlower = part;
 
-    ASSERT(effect->data != NULL);
+    ASSERT(effect->data.fireFlower != NULL);
 
     part->unk_04 = 0;
     part->unk_00 = arg0;

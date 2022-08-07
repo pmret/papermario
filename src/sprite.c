@@ -94,7 +94,7 @@ PlayerSpriteSet spr_playerSpriteSets[] = {
 
 void spr_appendGfx_component_flat(
     Quad* vertices,
-    void* raster, void* palette,
+    IMG_PTR raster, PAL_PTR palette,
     s32 width, s32 height,
     f32 arg5,
     Matrix4f mtx,
@@ -702,7 +702,7 @@ s32 spr_get_npc_raster_info(SpriteRasterInfo* out, s32 npcSpriteID, s32 rasterIn
     return FALSE;
 }
 
-u16** spr_get_npc_palettes(s32 npcSpriteID) {
+PAL_PTR* spr_get_npc_palettes(s32 npcSpriteID) {
     SpriteAnimData* sprite = spr_npcSprites[npcSpriteID];
 
     if (sprite != NULL) {

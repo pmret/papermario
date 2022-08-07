@@ -19,7 +19,3 @@ INCLUDE_ASM(s32, "world/area_mac/mac_05/855560", mac_05_unkVtxFunc001);
 #include "world/common/UnkPlayerPosFunc.inc.c"
 
 #include "world/common/PlayFX3D.inc.c"
-
-INCLUDE_ASM(s32, "world/area_mac/mac_05/855560", func_80243CD4_855E44);
-
-INCLUDE_ASM(s32, "world/area_mac/mac_05/855560", func_80243D78_855EE8);

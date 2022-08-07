@@ -62,8 +62,8 @@ void flower_splash_main(f32 arg0, f32 arg1, f32 arg2, f32 arg3) {
     effect->numParts = numParts;
 
     data = shim_general_heap_malloc(numParts * sizeof(*data));
-    effect->data = data;
-    ASSERT(effect->data != NULL);
+    effect->data.flowerSplash = data;
+    ASSERT(effect->data.flowerSplash != NULL);
 
     shim_mem_clear(data, numParts * sizeof(*data));
 
@@ -98,7 +98,7 @@ void flower_splash_init(EffectInstance* effect) {
 }
 
 void flower_splash_update(EffectInstance* effect) {
-    FlowerFXData* data = (FlowerFXData*)effect->data;
+    FlowerFXData* data = effect->data.flowerSplash;
     s32 cond = FALSE;
     s32 i;
 
@@ -139,7 +139,7 @@ void func_E00104F4(EffectInstance* effect) {
 
 void flower_splash_appendGfx(void* effect) {
     EffectInstance* effectTemp = effect;
-    FlowerFXData* data = effectTemp->data;
+    FlowerFXData* data = effectTemp->data.flowerSplash;
     s32 i;
 
     gDPPipeSync(gMasterGfxPos++);

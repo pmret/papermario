@@ -370,10 +370,10 @@ ApiStatus func_80218250_52B8F0(Evt* script, s32 isInitialCall) {
     for (i = 0; i < ARRAY_COUNT(bpArray); i++) {
         EffectInstance* effect = fx_ice_shard(bpArray[i].unk_00, bpArray[i].unk_04, bpArray[i].unk_08,
                                               bpArray[i].unk_0C, bpArray[i].unk_10, bpArray[i].unk_14);
-        ((IceShardFXData*)effect->data)->unk_4C = bpArray[i].unk_18;
-        ((IceShardFXData*)effect->data)->unk_50 = bpArray[i].unk_1C;
-        ((IceShardFXData*)effect->data)->unk_54 = bpArray[i].unk_20;
-        ((IceShardFXData*)effect->data)->unk_58 = bpArray[i].unk_24;
+        effect->data.iceShard->unk_4C = bpArray[i].unk_18;
+        effect->data.iceShard->unk_50 = bpArray[i].unk_1C;
+        effect->data.iceShard->unk_54 = bpArray[i].unk_20;
+        effect->data.iceShard->unk_58 = bpArray[i].unk_24;
     }
 
     return ApiStatus_DONE2;

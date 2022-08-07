@@ -1416,6 +1416,7 @@ enum EncounterOutcomes {
 };
 
 enum DecorationIDs {
+    DECORATION_0                             = 0x00000000,
     DECORATION_GOLDEN_FLAMES                 = 0x00000001,
     DECORATION_SWEAT                         = 0x00000002,
     DECORATION_SEEING_STARS                  = 0x00000003,
@@ -1424,6 +1425,8 @@ enum DecorationIDs {
     DECORATION_FIRE_SMOKE_TRAIL              = 0x00000006,
     DECORATION_WHIRLWIND                     = 0x00000007,
     DECORATION_STEAM_EMITTER                 = 0x00000008,
+    DECORATION_9                             = 0x00000009,
+    DECORATION_A                             = 0x0000000A,
     DECORATION_RADIAL_STAR_EMITTER           = 0x0000000B,
 };
 
@@ -1569,7 +1572,7 @@ enum Events {
     EVENT_RECOVER_STATUS              = 0x00000031,
     EVENT_32                          = 0x00000032,
     EVENT_33                          = 0x00000033,
-    EVENT_34                          = 0x00000034,
+    EVENT_RECOVER_PARTNER             = 0x00000034,
     EVENT_END_FIRST_STRIKE            = 0x00000035,
     EVENT_LUCKY                       = 0x00000037,
     EVENT_BEGIN_FIRST_STRIKE          = 0x00000038,
@@ -3780,6 +3783,13 @@ typedef enum FoldType {
     FOLD_TYPE_8                       = 0x8,
     FOLD_TYPE_9                       = 0x9,
     FOLD_TYPE_A                       = 0xA,
+    FOLD_TYPE_B                       = 0xB,
+    FOLD_TYPE_C                       = 0xC,
+    FOLD_TYPE_D                       = 0xD,
+    FOLD_TYPE_E                       = 0xE,
+    FOLD_TYPE_F                       = 0xF,
+    FOLD_TYPE_10                      = 0x10,
+    FOLD_TYPE_11                      = 0x11,
 } FoldType;
 
 enum MoveType {

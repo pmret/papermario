@@ -317,7 +317,7 @@ EvtScript N(handleEvent_802385E0) = {
         EVT_CASE_EQ(EVENT_33)
             EVT_SET_CONST(LW(1), NPC_ANIM_battle_kooper_Palette_00_Anim_11)
             EVT_EXEC_WAIT(D_80296014)
-        EVT_CASE_EQ(EVENT_34)
+        EVT_CASE_EQ(EVENT_RECOVER_PARTNER)
             EVT_SET_CONST(LW(0), 1)
             EVT_SET_CONST(LW(1), NPC_ANIM_battle_kooper_Palette_00_Anim_4)
             EVT_SET_CONST(LW(2), NPC_ANIM_battle_kooper_Palette_00_Anim_6)
