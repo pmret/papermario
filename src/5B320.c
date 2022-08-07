@@ -6,140 +6,140 @@
 #define STANDARD_ITEM_SCRIPT(icon) \
     { \
         is_SetIcon(60, icon) \
-		is_Restart \
-		is_End \
+        is_Restart \
+        is_End \
     }
 
 #define STANDARD_ITEM_HUD_SCRIPT(icon) \
     { \
-		hs_SetVisible \
-		hs_SetTileSize(HUD_ELEMENT_SIZE_32x32) \
-		hs_Loop \
-			hs_SetIcon(60, icon) \
-		hs_Restart \
-		hs_End \
+        hs_SetVisible \
+        hs_SetTileSize(HUD_ELEMENT_SIZE_32x32) \
+        hs_Loop \
+            hs_SetIcon(60, icon) \
+        hs_Restart \
+        hs_End \
     }
 
 HudScript HES_HandPointDownLoop = {
-	hs_SetVisible
-	hs_SetTileSize(HUD_ELEMENT_SIZE_24x24)
-	hs_Loop
-		hs_SetTexelOffset(0, -1)
-		hs_SetIcon(1, anim_hand_0)
-		hs_SetTexelOffset(0, -1)
-		hs_SetIcon(1, anim_hand_0)
-		hs_SetTexelOffset(0, -1)
-		hs_SetIcon(1, anim_hand_0)
-		hs_SetTexelOffset(0, -1)
-		hs_SetIcon(1, anim_hand_0)
-		hs_SetTexelOffset(2, -1)
-		hs_SetIcon(1, anim_hand_1)
-		hs_SetTexelOffset(2, -1)
-		hs_SetIcon(1, anim_hand_2)
-		hs_SetTexelOffset(2, -1)
-		hs_SetIcon(4, anim_hand_3)
-		hs_SetTexelOffset(2, 4)
-		hs_SetIcon(1, anim_hand_1)
-		hs_SetTexelOffset(0, 3)
-		hs_SetIcon(1, anim_hand_0)
-		hs_SetTexelOffset(0, -1)
-		hs_SetIcon(14, anim_hand_4)
-	hs_Restart
-	hs_End
+    hs_SetVisible
+    hs_SetTileSize(HUD_ELEMENT_SIZE_24x24)
+    hs_Loop
+        hs_SetTexelOffset(0, -1)
+        hs_SetIcon(1, anim_hand_0)
+        hs_SetTexelOffset(0, -1)
+        hs_SetIcon(1, anim_hand_0)
+        hs_SetTexelOffset(0, -1)
+        hs_SetIcon(1, anim_hand_0)
+        hs_SetTexelOffset(0, -1)
+        hs_SetIcon(1, anim_hand_0)
+        hs_SetTexelOffset(2, -1)
+        hs_SetIcon(1, anim_hand_1)
+        hs_SetTexelOffset(2, -1)
+        hs_SetIcon(1, anim_hand_2)
+        hs_SetTexelOffset(2, -1)
+        hs_SetIcon(4, anim_hand_3)
+        hs_SetTexelOffset(2, 4)
+        hs_SetIcon(1, anim_hand_1)
+        hs_SetTexelOffset(0, 3)
+        hs_SetIcon(1, anim_hand_0)
+        hs_SetTexelOffset(0, -1)
+        hs_SetIcon(14, anim_hand_4)
+    hs_Restart
+    hs_End
 };
 
 HudScript HES_HandPointDown = {
-	hs_SetVisible
-	hs_SetTileSize(HUD_ELEMENT_SIZE_24x24)
-	hs_SetTexelOffset(0, -1)
-	hs_SetIcon(1, anim_hand_0)
-	hs_SetTexelOffset(2, -1)
-	hs_SetIcon(1, anim_hand_1)
-	hs_SetTexelOffset(2, -1)
-	hs_SetIcon(1, anim_hand_2)
-	hs_SetTexelOffset(2, -1)
-	hs_SetIcon(4, anim_hand_3)
-	hs_SetTexelOffset(2, 4)
-	hs_SetIcon(1, anim_hand_1)
-	hs_SetTexelOffset(0, 3)
-	hs_SetIcon(1, anim_hand_0)
-	hs_SetTexelOffset(0, -1)
-	hs_SetIcon(2, anim_hand_4)
-	hs_SetTexelOffset(0, 3)
-	hs_Loop
-		hs_SetIcon(60, anim_hand_0)
-	hs_Restart
-	hs_End
+    hs_SetVisible
+    hs_SetTileSize(HUD_ELEMENT_SIZE_24x24)
+    hs_SetTexelOffset(0, -1)
+    hs_SetIcon(1, anim_hand_0)
+    hs_SetTexelOffset(2, -1)
+    hs_SetIcon(1, anim_hand_1)
+    hs_SetTexelOffset(2, -1)
+    hs_SetIcon(1, anim_hand_2)
+    hs_SetTexelOffset(2, -1)
+    hs_SetIcon(4, anim_hand_3)
+    hs_SetTexelOffset(2, 4)
+    hs_SetIcon(1, anim_hand_1)
+    hs_SetTexelOffset(0, 3)
+    hs_SetIcon(1, anim_hand_0)
+    hs_SetTexelOffset(0, -1)
+    hs_SetIcon(2, anim_hand_4)
+    hs_SetTexelOffset(0, 3)
+    hs_Loop
+        hs_SetIcon(60, anim_hand_0)
+    hs_Restart
+    hs_End
 };
 
 HudScript HES_HandPointDownHeld = {
-	hs_SetVisible
-	hs_SetTileSize(HUD_ELEMENT_SIZE_24x24)
-	hs_Loop
-		hs_SetIcon(60, anim_hand_0)
-	hs_Restart
-	hs_End
+    hs_SetVisible
+    hs_SetTileSize(HUD_ELEMENT_SIZE_24x24)
+    hs_Loop
+        hs_SetIcon(60, anim_hand_0)
+    hs_Restart
+    hs_End
 };
 
 HudScript HES_HandPointLeftLoop = {
-	hs_SetVisible
-	hs_SetTileSize(HUD_ELEMENT_SIZE_24x24)
-	hs_Loop
-		hs_SetTexelOffset(0, 0)
-		hs_SetIcon(1, anim_hand_5)
-		hs_SetTexelOffset(0, 0)
-		hs_SetIcon(1, anim_hand_5)
-		hs_SetTexelOffset(0, 0)
-		hs_SetIcon(1, anim_hand_5)
-		hs_SetTexelOffset(0, 0)
-		hs_SetIcon(1, anim_hand_5)
-		hs_SetTexelOffset(0, -1)
-		hs_SetIcon(1, anim_hand_6)
-		hs_SetTexelOffset(0, -1)
-		hs_SetIcon(1, anim_hand_7)
-		hs_SetTexelOffset(1, -3)
-		hs_SetIcon(4, anim_hand_8)
-		hs_SetTexelOffset(0, 4)
-		hs_SetIcon(1, anim_hand_6)
-		hs_SetTexelOffset(0, 4)
-		hs_SetIcon(1, anim_hand_5)
-		hs_SetTexelOffset(0, 1)
-		hs_SetIcon(14, anim_hand_9)
-	hs_Restart
-	hs_End
+    hs_SetVisible
+    hs_SetTileSize(HUD_ELEMENT_SIZE_24x24)
+    hs_Loop
+        hs_SetTexelOffset(0, 0)
+        hs_SetIcon(1, anim_hand_5)
+        hs_SetTexelOffset(0, 0)
+        hs_SetIcon(1, anim_hand_5)
+        hs_SetTexelOffset(0, 0)
+        hs_SetIcon(1, anim_hand_5)
+        hs_SetTexelOffset(0, 0)
+        hs_SetIcon(1, anim_hand_5)
+        hs_SetTexelOffset(0, -1)
+        hs_SetIcon(1, anim_hand_6)
+        hs_SetTexelOffset(0, -1)
+        hs_SetIcon(1, anim_hand_7)
+        hs_SetTexelOffset(1, -3)
+        hs_SetIcon(4, anim_hand_8)
+        hs_SetTexelOffset(0, 4)
+        hs_SetIcon(1, anim_hand_6)
+        hs_SetTexelOffset(0, 4)
+        hs_SetIcon(1, anim_hand_5)
+        hs_SetTexelOffset(0, 1)
+        hs_SetIcon(14, anim_hand_9)
+    hs_Restart
+    hs_End
 };
 
 HudScript HES_HandPointLeft = {
-	hs_SetVisible
-	hs_SetTileSize(HUD_ELEMENT_SIZE_24x24)
-	hs_SetTexelOffset(0, 0)
-	hs_SetIcon(1, anim_hand_5)
-	hs_SetTexelOffset(0, -1)
-	hs_SetIcon(1, anim_hand_6)
-	hs_SetTexelOffset(0, -1)
-	hs_SetIcon(1, anim_hand_7)
-	hs_SetTexelOffset(1, -3)
-	hs_SetIcon(4, anim_hand_8)
-	hs_SetTexelOffset(0, 4)
-	hs_SetIcon(1, anim_hand_6)
-	hs_SetTexelOffset(0, 4)
-	hs_SetIcon(1, anim_hand_5)
-	hs_SetTexelOffset(0, 1)
-	hs_SetIcon(2, anim_hand_9)
-	hs_SetTexelOffset(0, 4)
-	hs_Loop
-		hs_SetIcon(60, anim_hand_5)
-	hs_Restart
-	hs_End
+    hs_SetVisible
+    hs_SetTileSize(HUD_ELEMENT_SIZE_24x24)
+    hs_SetTexelOffset(0, 0)
+    hs_SetIcon(1, anim_hand_5)
+    hs_SetTexelOffset(0, -1)
+    hs_SetIcon(1, anim_hand_6)
+    hs_SetTexelOffset(0, -1)
+    hs_SetIcon(1, anim_hand_7)
+    hs_SetTexelOffset(1, -3)
+    hs_SetIcon(4, anim_hand_8)
+    hs_SetTexelOffset(0, 4)
+    hs_SetIcon(1, anim_hand_6)
+    hs_SetTexelOffset(0, 4)
+    hs_SetIcon(1, anim_hand_5)
+    hs_SetTexelOffset(0, 1)
+    hs_SetIcon(2, anim_hand_9)
+    hs_SetTexelOffset(0, 4)
+    hs_Loop
+        hs_SetIcon(60, anim_hand_5)
+    hs_Restart
+    hs_End
 };
 
 HudScript HES_HandPointLeftHeld = {
-	hs_SetVisible
-	hs_SetTileSize(HUD_ELEMENT_SIZE_24x24)
-	hs_Loop
-		hs_SetIcon(60, anim_hand_5)
-	hs_Restart
-	hs_End
+    hs_SetVisible
+    hs_SetTileSize(HUD_ELEMENT_SIZE_24x24)
+    hs_Loop
+        hs_SetIcon(60, anim_hand_5)
+    hs_Restart
+    hs_End
 };
 
 #include "item_hud_scripts.inc.c"
@@ -235,12 +235,12 @@ s32 pad_after_move_table[] = {
 };
 
 s32* gMessageBoxFrameParts[] = {
-	D_802EBFF0, D_802EC010, D_802EC030, D_802EC050,
-	D_802EC070, D_802EC090, D_802EC0B0, D_802EC0D0,
-	D_802EC0F0, D_802EC110, D_802EC130, D_802EC150,
-	D_802EC170, D_802EC190, D_802EC1B0, D_802EC1D0,
-	D_802EC1F0, D_802EC210, D_802EC230, D_802EC250,
-	D_802EC270, D_802EC290, D_802EC2B0, D_802EC2D0,
-	D_802EC2F0, D_802EC310, D_802EC330, D_802EC350,
-	D_802EC370, D_802EC390, D_802EC3B0, D_802EC3D0
+    D_802EBFF0, D_802EC010, D_802EC030, D_802EC050,
+    D_802EC070, D_802EC090, D_802EC0B0, D_802EC0D0,
+    D_802EC0F0, D_802EC110, D_802EC130, D_802EC150,
+    D_802EC170, D_802EC190, D_802EC1B0, D_802EC1D0,
+    D_802EC1F0, D_802EC210, D_802EC230, D_802EC250,
+    D_802EC270, D_802EC290, D_802EC2B0, D_802EC2D0,
+    D_802EC2F0, D_802EC310, D_802EC330, D_802EC350,
+    D_802EC370, D_802EC390, D_802EC3B0, D_802EC3D0
 };

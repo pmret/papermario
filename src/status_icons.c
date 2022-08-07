@@ -271,7 +271,7 @@ void draw_merlee_message(void* data) {
         messageID = D_80078168[popup->messageIndex];
         width = get_msg_width(messageID, 0) + 30;
         xPos = 160 - (width / 2);
-        set_window_properties(9, xPos, 80, width, D_80078160[get_msg_lines(messageID) - 1], 0, draw_merlee_message_string, popup, -1);
+        set_window_properties(WINDOW_ID_9, xPos, 80, width, D_80078160[get_msg_lines(messageID) - 1], 0, draw_merlee_message_string, popup, -1);
         set_window_update(WINDOW_ID_9, WINDOW_UPDATE_SHOW);
     }
 }

@@ -310,7 +310,6 @@ void hud_element_draw_rect(HudElement* hudElement, s16 texSizeX, s16 texSizeY, s
         baseY = tempY + 2;
     }
 
-
     flags1 = (hudElement->flags & HUD_ELEMENT_FLAGS_FMT_CI4);
     isFmtCI4 = flags1 != 0;
     flags1 = (hudElement->flags & HUD_ELEMENT_FLAGS_FMT_IA8);
@@ -320,8 +319,8 @@ void hud_element_draw_rect(HudElement* hudElement, s16 texSizeX, s16 texSizeY, s
     flags2 = (hudElement->flags & HUD_ELEMENT_FLAGS_FLIPY);
     flipY = flags2 != 0;
 
-    fmt = 0; // stays the same if (isFmtCI4 == FALSE && isFmtIA8 == FALSE)
-    if (isFmtCI4 == TRUE && isFmtIA8 == TRUE) {
+    fmt = 0;
+    if (isFmtCI4 == FALSE && isFmtIA8 == FALSE) {
         fmt = 0; // RGBA
     }
     if (isFmtCI4 == TRUE && isFmtIA8 == FALSE) {
@@ -1512,9 +1511,9 @@ void render_hud_element(HudElement* hudElement) {
         case 1:
             if (hudElement->flags & HUD_ELEMENT_FLAGS_NO_FOLD) {
                 if (hudElement->flags & HUD_ELEMENT_FLAGS_TRANSPARENT) {
-                    fold_update(0, 7, 255, 255, 255, hudElement->opacity, 0);
+                    fold_update(0, FOLD_TYPE_7, 255, 255, 255, hudElement->opacity, 0);
                 } else {
-                    fold_update(0, 0, 0, 0, 0, 0, 0);
+                    fold_update(0, FOLD_TYPE_NONE, 0, 0, 0, 0, 0);
                 }
             } else {
                 if (hudElement->flags & HUD_ELEMENT_FLAGS_TRANSPARENT) {

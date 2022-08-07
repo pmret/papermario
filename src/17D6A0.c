@@ -1528,7 +1528,7 @@ void close_action_command_instruction_popup(void) {
 void func_8024FB3C(void* data) {
     PopupMessage* popup = data;
     BattleStatus* battleStatus = &gBattleStatus;
-    s32 cond = FALSE;
+    s32 shouldDisposeWindow = FALSE;
 
     s32 temp_a0;
 
@@ -1605,7 +1605,7 @@ void func_8024FB3C(void* data) {
                     }
                     break;
                 case 4:
-                    cond = TRUE;
+                    shouldDisposeWindow = TRUE;
                     break;
                 case 3:
                     popup->unk_16 = 4;
@@ -1637,7 +1637,7 @@ void func_8024FB3C(void* data) {
             D_8029F64A = TRUE;
             if (temp_a0 == 0) {
                 D_8029F64A = FALSE;
-                cond = TRUE;
+                shouldDisposeWindow = TRUE;
                 break;
             }
 
@@ -1783,11 +1783,11 @@ void func_8024FB3C(void* data) {
                 case 1:
                     if (gBattleStatus.flags1 & BS_FLAGS1_10000) {
                         gBattleStatus.flags1 &= ~BS_FLAGS1_4000;
-                        set_window_update(9, 7);
+                        set_window_update(WINDOW_ID_9, WINDOW_UPDATE_SHOW_TRANSPARENT);
                         popup->duration = 0;
                         popup->unk_16 = 2;
                     } else if (!(gBattleStatus.flags1 & BS_FLAGS1_4000) && (temp_a0 != 2)) {
-                        set_window_update(9, 7);
+                        set_window_update(WINDOW_ID_9, WINDOW_UPDATE_SHOW_TRANSPARENT);
                         switch (popup->messageIndex) {
                             case 49:
                                 hud_element_set_script(D_8029F642, &HES_MashAButton);
@@ -1923,7 +1923,7 @@ void func_8024FB3C(void* data) {
                                         break;
                                 }
                                 D_8029F64A = FALSE;
-                                cond = TRUE;
+                                shouldDisposeWindow = TRUE;
                             }
                         }
                     }
@@ -1960,7 +1960,7 @@ void func_8024FB3C(void* data) {
                     popup->unk_16 = 4;
                     break;
                 case 4:
-                    cond = TRUE;
+                    shouldDisposeWindow = TRUE;
                     break;
             }
             break;
@@ -2017,14 +2017,14 @@ void func_8024FB3C(void* data) {
                         popup->duration--;
                         break;
                     }
-                    cond = TRUE;
+                    shouldDisposeWindow = TRUE;
                     hud_element_free(D_8029F642);
                     break;
             }
             break;
     }
-    if (cond) {
-        set_window_update(9, 2);
+    if (shouldDisposeWindow) {
+        set_window_update(WINDOW_ID_9, WINDOW_UPDATE_HIDE);
         D_802838F8 = NULL;
         free_popup(popup);
     }
@@ -2354,8 +2354,8 @@ void btl_show_message_popup(void* data) {
                 width = msgWidth;
                 numLines = get_msg_lines(messageID) - 1;
                 height = bMsgHeights[numLines];
-                set_window_properties(9, posX, posY, width, height, 0, func_80250818, popup, -1);
-                set_window_update(9, 1);
+                set_window_properties(WINDOW_ID_9, posX, posY, width, height, 0, func_80250818, popup, -1);
+                set_window_update(WINDOW_ID_9, WINDOW_UPDATE_SHOW);
             }
             break;
         case 73:
@@ -2371,8 +2371,8 @@ void btl_show_message_popup(void* data) {
                 posX = 160 - (msgWidth / 2);
                 width = msgWidth;
                 height = 40;
-                set_window_properties(9, posX, posY, width, height, 0, func_80250818, popup, -1);
-                set_window_update(9, 1);
+                set_window_properties(WINDOW_ID_9, posX, posY, width, height, 0, func_80250818, popup, -1);
+                set_window_update(WINDOW_ID_9, WINDOW_UPDATE_SHOW);
             }
             break;
         case 4:
@@ -2396,8 +2396,8 @@ void btl_show_message_popup(void* data) {
                 width = msgWidth;
                 numLines = get_msg_lines(messageID) - 1;
                 height = bMsgHeights[numLines];
-                set_window_properties(9, posX, posY, width, height, 0, func_80250818, popup, -1);
-                set_window_update(9, 1);
+                set_window_properties(WINDOW_ID_9, posX, posY, width, height, 0, func_80250818, popup, -1);
+                set_window_update(WINDOW_ID_9, WINDOW_UPDATE_SHOW);
             }
             break;
         case 81:
@@ -2412,8 +2412,8 @@ void btl_show_message_popup(void* data) {
                 width = msgWidth;
                 numLines = get_msg_lines(messageID) - 1;
                 height = bMsgHeights[numLines];
-                set_window_properties(9, posX, posY, width, height, 0, func_80250818, popup, -1);
-                set_window_update(9, 1);
+                set_window_properties(WINDOW_ID_9, posX, posY, width, height, 0, func_80250818, popup, -1);
+                set_window_update(WINDOW_ID_9, WINDOW_UPDATE_SHOW);
             }
             break;
         case 46:
@@ -2456,11 +2456,11 @@ void btl_show_message_popup(void* data) {
                 D_8029F650 = D_802835D8[numLines];
 
                 posY = D_8029F64E + D_8029F650;
-                set_window_properties(9, posX, posY, width, height, 0, func_80250818, popup, -1);
+                set_window_properties(WINDOW_ID_9, posX, posY, width, height, 0, func_80250818, popup, -1);
                 if (popup->messageIndex == 0x3B) {
-                    set_window_update(9, 1);
+                    set_window_update(WINDOW_ID_9, WINDOW_UPDATE_SHOW);
                 } else {
-                    set_window_update(9, 8);
+                    set_window_update(WINDOW_ID_9, WINDOW_UPDATE_SHOW_DARKENED);
                 }
             }
             break;

@@ -12,4 +12,7 @@ INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8ED5A0", func_80241C9C_8EDABC);
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8ED5A0", func_80241CF0_8EDB10);
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8ED5A0", func_80241D1C_8EDB3C);
+ApiStatus func_80241D1C_8EDB3C(Evt* script, s32 isInitialCall) {
+    au_ambience_set_volume(0, 1000, 0x3F);
+    return ApiStatus_DONE2;
+}

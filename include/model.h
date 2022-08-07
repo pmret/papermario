@@ -78,24 +78,9 @@ typedef struct ModelTreeInfo {
     /* 0x03 */ char unk_03;
 } ModelTreeInfo; // size = 0x04
 
-typedef struct TileDescriptor {
-    /* 0x00 */ s8 name[32];
-    /* 0x20 */ u16 auxW;
-    /* 0x22 */ u16 mainW;
-    /* 0x24 */ u16 auxH;
-    /* 0x26 */ u16 mainH;
-    /* 0x28 */ char unk_28;
-    /* 0x29 */ u8 extraTiles;
-    /* 0x2A */ u16 colorCombine;
-    /* 0x2C */ u8 bitDepth;
-    /* 0x2D */ u8 wrapH;
-    /* 0x2E */ u8 wrapV;
-    /* 0x2F */ u8 filtering;
-} TileDescriptor; // size = 0x30
-
 typedef struct TextureHandle {
     /* 0x00 */ Gfx* gfx;
-    /* 0x04 */ TileDescriptor desc;
+    /* 0x04 */ TextureHeader header;
     /* 0x34 */ s32* raster;
     /* 0x38 */ s32* palette;
     /* 0x3C */ s32* auxRaster;

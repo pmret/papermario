@@ -4,4 +4,7 @@
 #include "world/common/GetFloorCollider.inc.c"
 #define NAMESPACE kzn_22
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_22/C9A540", func_8024036C_C9A56C);
+ApiStatus func_8024036C_C9A56C(Evt* script, s32 isInitialCall) {
+    snd_ambient_80055618(0, 1);
+    return ApiStatus_DONE2;
+}

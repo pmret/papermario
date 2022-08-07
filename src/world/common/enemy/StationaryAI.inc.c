@@ -1,11 +1,11 @@
 // Used in:
-// - kmr_02	Toad
-// - kmr_07	GoombaBros
-// - kmr_11	GoombaBros/King
-// - sbk_30	(unused)
-// - trd_01	Bombomb <-- only real use case!
-// - nok_01	(unused)
-// - omo_02	(unused)
+// - kmr_02 Toad
+// - kmr_07 GoombaBros
+// - kmr_11 GoombaBros/King
+// - sbk_30 (unused)
+// - trd_01 Bombomb <-- only real use case!
+// - nok_01 (unused)
+// - omo_02 (unused)
 
 typedef struct StationaryAISettings {
     /* 0x00 */ f32 unk_00;

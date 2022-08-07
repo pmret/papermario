@@ -16,9 +16,28 @@ INCLUDE_ASM(s32, "world/area_hos/hos_06/A3A230", func_80241008_A3A4E8);
 
 #include "world/common/GetItemName.inc.c"
 
-INCLUDE_ASM(s32, "world/area_hos/hos_06/A3A230", func_802411BC_A3A69C);
+s32 func_802411BC_A3A69C(s32 badgeID) {
+    s32 i;
 
-INCLUDE_ASM(s32, "world/area_hos/hos_06/A3A230", func_802411F0_A3A6D0);
+    for (i = 0; i < ARRAY_COUNT(gPlayerData.badges); i++) {
+        if (gPlayerData.badges[i] == badgeID) {
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+ApiStatus func_802411F0_A3A6D0(Evt* script, s32 isInitialCall) {
+    u32 i;
+
+    for (i = 0; i < 79; i++) {
+        evt_set_variable(NULL, LSWF(3) + i, 0);
+    }
+    for (i = 0; i < 16; i++) {
+        evt_set_variable(NULL, LSWF(100) + i, 0);
+    }
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "world/area_hos/hos_06/A3A230", func_8024126C_A3A74C);
 

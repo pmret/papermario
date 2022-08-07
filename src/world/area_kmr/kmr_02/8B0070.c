@@ -70,7 +70,51 @@ INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_8024295C_8B29CC);
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80242BA8_8B2C18);
 
+// will match when preceding bss is worked out
+#ifdef NON_MATCHING
+s32 func_80242BC0_8B2C30(Evt* script, s32 isInitialCall) {
+    Bytecode* args;
+    
+    static u8 oldPrimR, oldPrimG, oldPrimB;
+    static u8 oldEnvR, oldEnvG, oldEnvB;
+    
+    s32 newEnvR, newEnvB, newEnvG;
+    s32 newPrimR, newPrimG, newPrimB;
+    s32 duration;
+
+    args = script->ptrReadPos;
+    newPrimR = evt_get_variable(script, *args++);
+    newPrimG = evt_get_variable(script, *args++);
+    newPrimB = evt_get_variable(script, *args++);
+    newEnvR = evt_get_variable(script, *args++);
+    newEnvG = evt_get_variable(script, *args++);
+    newEnvB = evt_get_variable(script, *args++);
+    duration = evt_get_variable(script, *args++);
+    if (isInitialCall) {
+        get_model_env_color_parameters(&oldPrimR, &oldPrimG, &oldPrimB, &oldEnvR, &oldEnvG, &oldEnvB);
+        script->functionTemp[0] = 0;
+    }
+    if (duration > 0) {
+        set_model_env_color_parameters(
+            oldPrimR + ((newPrimR - oldPrimR) * script->functionTemp[0]) / duration,
+            oldPrimG + ((newPrimG - oldPrimG) * script->functionTemp[0]) / duration,
+            oldPrimB + ((newPrimB - oldPrimB) * script->functionTemp[0]) / duration,
+            oldEnvR  + ( (newEnvR - oldEnvR) * script->functionTemp[0]) / duration,
+            oldEnvG  + ( (newEnvG - oldEnvG) * script->functionTemp[0]) / duration,
+            oldEnvB  + ( (newEnvB - oldEnvB) * script->functionTemp[0]) / duration);
+            script->functionTemp[0]++;
+        if (duration < script->functionTemp[0]) {
+            return 2;
+        }
+    } else {
+        set_model_env_color_parameters(newPrimR, newPrimG, newPrimB, newEnvR, newEnvG, newEnvB);
+        return 2;
+    }
+    return 0;
+}
+#else
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80242BC0_8B2C30);
+#endif
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80242F08_8B2F78);
 

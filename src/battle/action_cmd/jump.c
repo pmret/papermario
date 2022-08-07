@@ -191,13 +191,13 @@ void N(update)(void) {
 }
 
 void N(draw_hud_elements)(void) {
-	hud_element_draw_clipped(gActionCommandStatus.hudElements[0]);
-	if (!(gGameStatusPtr->demoFlags & 1)) {
-		hud_element_draw_clipped(gActionCommandStatus.hudElements[1]);
-	}
+    hud_element_draw_clipped(gActionCommandStatus.hudElements[0]);
+    if (!(gGameStatusPtr->demoFlags & 1)) {
+        hud_element_draw_clipped(gActionCommandStatus.hudElements[1]);
+    }
 }
 
 void N(free_hud_elements)(void) {
-	hud_element_free(gActionCommandStatus.hudElements[0]);
-	hud_element_free(gActionCommandStatus.hudElements[1]);
+    hud_element_free(gActionCommandStatus.hudElements[0]);
+    hud_element_free(gActionCommandStatus.hudElements[1]);
 }

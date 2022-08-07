@@ -4,7 +4,7 @@
 
 extern u8 D_80258407_818C87;
 
-#include "world/common/UnkMusicFunc.inc.c"
+#include "world/common/atomic/MonitorMusicProximityTrigger.inc.c"
 
 #include "world/common/enemy/PatrolNoAttackAI.inc.c"
 

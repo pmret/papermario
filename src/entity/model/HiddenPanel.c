@@ -37,7 +37,7 @@ Vtx D_0A000020_E56BA0[] = {
     {{{    30,     0,   -30 }, 0, {     0,     0 }, {  10,  10,  10, 128 }}},
 };
 
-Gfx Entity_HiddenPanel_RenderTop[] = {
+Gfx Gfx_HiddenPanel_RenderTop[] = {
     gsDPPipeSync(),
     gsSPClearGeometryMode(G_CULL_BOTH | G_LIGHTING),
     gsSPSetGeometryMode(G_ZBUFFER | G_SHADE | G_CULL_BACK),
@@ -46,7 +46,7 @@ Gfx Entity_HiddenPanel_RenderTop[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx Entity_HiddenPanel_RenderTop2[] = {
+Gfx Gfx_AltHiddenPanel_RenderTop[] = {
     gsDPPipeSync(),
     gsSPClearGeometryMode(G_CULL_BOTH | G_LIGHTING),
     gsSPSetGeometryMode(G_ZBUFFER | G_SHADE | G_CULL_BACK),
@@ -55,7 +55,7 @@ Gfx Entity_HiddenPanel_RenderTop2[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx Entity_HiddenPanel_RenderBottom[] = {
+Gfx Gfx_HiddenPanel_RenderBottom[] = {
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_OFF),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -68,7 +68,7 @@ Gfx Entity_HiddenPanel_RenderBottom[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx Entity_HiddenPanel_RenderBottomDark[] = {
+Gfx Gfx_HiddenPanel_RenderHole[] = {
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_OFF),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -81,16 +81,16 @@ Gfx Entity_HiddenPanel_RenderBottomDark[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx Entity_HiddenPanel_Render[] = {
+Gfx Gfx_HiddenPanel_Render[] = {
     gsDPPipeSync(),
-    gsSPDisplayList(Entity_HiddenPanel_RenderTop),
-    gsSPDisplayList(Entity_HiddenPanel_RenderBottom),
+    gsSPDisplayList(Gfx_HiddenPanel_RenderTop),
+    gsSPDisplayList(Gfx_HiddenPanel_RenderBottom),
     gsSPEndDisplayList(),
 };
 
-Gfx Entity_HiddenPanel_Render2[] = {
+Gfx Gfx_HiddenPanel_Render2[] = {
     gsDPPipeSync(),
-    gsSPDisplayList(Entity_HiddenPanel_RenderTop2),
-    gsSPDisplayList(Entity_HiddenPanel_RenderBottom),
+    gsSPDisplayList(Gfx_AltHiddenPanel_RenderTop),
+    gsSPDisplayList(Gfx_HiddenPanel_RenderBottom),
     gsSPEndDisplayList(),
 };

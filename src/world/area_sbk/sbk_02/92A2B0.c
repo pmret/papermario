@@ -10,15 +10,15 @@ static char* N(exit_str_5) = "";
 
 void get_model_env_color_parameters(u8* arg0, u8* arg1, u8* arg2, u8* arg3, u8* arg4, u8* arg5);
 
-s32 func_80240000_92A2B0(void) {
-    s32 phi;
+s32 N(GetTattle)(void) {
+    s32 msg;
 
     if (evt_get_variable(NULL, EVT_STORY_PROGRESS) > STORY_CH2_GOT_PULSE_STONE) {
-        phi = 0x190063;
+        msg = MESSAGE_ID(0x19, 0x63);
     } else {
-        phi = 0x190062;
+        msg = MESSAGE_ID(0x19, 0x62);
     }
-    return phi;
+    return msg;
 }
 
 #include "world/common/atomic/UnkFunc27.inc.c"

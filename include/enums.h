@@ -589,6 +589,7 @@ enum SoundIDs {
     SOUND_METAL_GATE_CLOSE          = 0x000001CA,
     SOUND_1CB                       = 0x000001CB,
     SOUND_1CC                       = 0x000001CC,
+    SOUND_CREAKY_ROCKING_CHAIR      = 0x000001D6,
     SOUND_1E2                       = 0x000001E2,
     SOUND_211                       = 0x00000211,
     SOUND_213                       = 0x00000213,
@@ -655,6 +656,7 @@ enum SoundIDs {
     SOUND_32E                       = 0x0000032E,
     SOUND_32F                       = 0x0000032F,
     SOUND_349                       = 0x00000349,
+    SOUND_34A                       = 0x0000034A,
     SOUND_34E                       = 0x0000034E,
     SOUND_359                       = 0x00000359,
     SOUND_35D                       = 0x0000035D,
@@ -810,6 +812,68 @@ enum SoundIDs {
     SOUND_B0000018                  = 0xB0000018,
     SOUND_B000001E                  = 0xB000001E,
 };
+
+enum SoundInstanceFlags {
+    SOUND_INSTANCE_FLAG_4           = 0x00000004,
+};
+
+enum SoundType {
+    SOUND_TYPE_SPECIAL              = 0x80000000,
+    SOUND_TYPE_LOOPING              = 0,
+    SOUND_TYPE_DOOR1                = 1,
+    SOUND_TYPE_DOOR2                = 2,
+    SOUND_TYPE_ALTERNATING          = 3
+};
+
+enum SoundIDBits {
+    SOUND_ID_10000                  = 0x00010000,
+    SOUND_ID_LOWER                  = 0x000023FF,
+    SOUND_ID_MID                    = 0x00000C00,
+};
+
+typedef enum AuResult {
+    AU_RESULT_OK                        = 0,
+    AU_ERROR_1                          = 1,
+    AU_AMBIENCE_ERROR_1                 = 1,
+    AU_ERROR_SONG_NOT_PLAYING           = 2, // player not found for songName
+    AU_AMBIENCE_ERROR_2                 = 2,
+    AU_ERROR_NULL_SONG_NAME             = 3, // songName is NULL
+    AU_AMBIENCE_ERROR_3                 = 3,
+    AU_ERROR_INVALID_SONG_DURATION      = 4, // duration out of bounds: (250,10000)
+    AU_ERROR_6                          = 6,
+    AU_ERROR_7                          = 7,
+    AU_ERROR_11                         = 11,
+    AU_ERROR_SBN_INDEX_OUT_OF_RANGE     = 101,
+    AU_ERROR_SBN_FORMAT_MISMATCH        = 102,
+    AU_ERROR_151                        = 151,
+    AU_ERROR_201                        = 201
+} AuResult;
+
+typedef enum AuFileFormat {
+    AU_FMT_BGM              = 0x10,
+    AU_FMT_SEF              = 0x20,
+    AU_FMT_BK               = 0x30,
+    AU_FMT_PER              = 0x40,
+    AU_FMT_PRG              = 0x40,
+    AU_FMT_MSEQ             = 0x40
+} AuFileFormat;
+
+enum {
+    MUSIC_PROXIMITY_FAR,
+    MUSIC_PROXIMITY_NEAR,
+    MUSIC_PROXIMITY_FULL
+};
+
+typedef enum MusicTrackVols {
+    TRACK_VOLS_0            = 0,
+    TRACK_VOLS_1            = 1,
+    TRACK_VOLS_2            = 2,
+    TRACK_VOLS_3            = 3,
+    TRACK_VOLS_KPA_OUTSIDE  = 4,
+    TRACK_VOLS_KPA_1        = 5,
+    TRACK_VOLS_KPA_2        = 6,
+    TRACK_VOLS_KPA_3        = 7
+} MusicTrackVols;
 
 enum Cams {
     CAM_DEFAULT      = 0,
@@ -1338,7 +1402,10 @@ enum AmbientSounds {
     AMBIENT_UNDER_SEA6         = 11,
     AMBIENT_BIRDS              = 12,
     AMBIENT_SEA                = 13,
-    AMBIENT_MUSIC              = 16,
+    AMBIENT_RADIO              = 16, // radio songs for nok
+    // the following 4 IDs are reserved for additional radio songs,
+    // and no more are expected to follow after that
+    // see: func_80053F80
 };
 
 enum EncounterOutcomes {
@@ -3696,9 +3763,24 @@ enum FoldStateFlags {
     FOLD_STATE_FLAG_8000              = 0x00008000,
     FOLD_STATE_FLAG_10000             = 0x00010000,
     FOLD_STATE_FLAG_20000             = 0x00020000,
+    FOLD_STATE_FLAG_40000             = 0x00040000,
     FOLD_STATE_FLAG_80000             = 0x00080000,
     FOLD_STATE_FLAG_100000            = 0x00100000,
 };
+
+typedef enum FoldType {
+    FOLD_TYPE_NONE                    = 0x0,
+    FOLD_TYPE_1                       = 0x1,
+    FOLD_TYPE_2                       = 0x2,
+    FOLD_TYPE_3                       = 0x3,
+    FOLD_TYPE_4                       = 0x4,
+    FOLD_TYPE_5                       = 0x5,
+    FOLD_TYPE_6                       = 0x6,
+    FOLD_TYPE_7                       = 0x7,
+    FOLD_TYPE_8                       = 0x8,
+    FOLD_TYPE_9                       = 0x9,
+    FOLD_TYPE_A                       = 0xA,
+} FoldType;
 
 enum MoveType {
     MOVE_TYPE_NONE          = 0,

@@ -10,15 +10,15 @@ void func_802B6000_E26710(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     CollisionStatus* collisionStatus = &gCollisionStatus;
     f32 temp_f0;
-    f32 temp_f20;
+    f32 fallVelocity;
     u8 colliderType;
     f32 phi_f4;
-    s32 sp10;
+    s32 colliderBelow;
     u32 entityType;
 
     if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
         playerStatus->flags &= ~PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
-        playerStatus->flags |= 0x2000A;
+        playerStatus->flags |= (PLAYER_STATUS_FLAGS_20000 | PLAYER_STATUS_FLAGS_FLYING | PLAYER_STATUS_FLAGS_JUMPING);
         phys_clear_spin_history();
         playerStatus->fallState = 0;
         playerStatus->currentSpeed = 0.0f;
@@ -62,9 +62,9 @@ void func_802B6000_E26710(void) {
 
     switch (playerStatus->fallState) {
         case 0:
-            temp_f20 = integrate_gravity();
-            playerStatus->position.y = player_check_collision_below(temp_f20, &sp10);
-            if (sp10 >= 0 && collisionStatus->currentFloor & COLLISION_WITH_ENTITY_BIT ) {
+            fallVelocity = integrate_gravity();
+            playerStatus->position.y = player_check_collision_below(fallVelocity, &colliderBelow);
+            if (colliderBelow >= 0 && collisionStatus->currentFloor & COLLISION_WITH_ENTITY_BIT ) {
                 entityType = get_entity_type(collisionStatus->currentFloor);
                 if (entityType == ENTITY_TYPE_BLUE_SWITCH || entityType == ENTITY_TYPE_RED_SWITCH) {
                     get_entity_by_index(collisionStatus->currentFloor)->collisionFlags |= ENTITY_COLLISION_PLAYER_TOUCH_FLOOR;
@@ -73,15 +73,15 @@ void func_802B6000_E26710(void) {
                     break;
                 }
             }
-            if (temp_f20 <= 0.0f) {
+            if (fallVelocity <= 0.0f) {
                 record_jump_apex();
                 playerStatus->currentStateTime = 3;
-                playerStatus->flags |= 4;
+                playerStatus->flags |= PLAYER_STATUS_FLAGS_FALLING;
                 playerStatus->fallState++;
                 sfx_play_sound_at_player(SOUND_TORNADO_JUMP, 0);
             }
-            if (sp10 >= 0) {
-                playerStatus->flags &= ~0x00020008;
+            if (colliderBelow >= 0) {
+                playerStatus->flags &= ~(PLAYER_STATUS_FLAGS_20000 | PLAYER_STATUS_FLAGS_FLYING);
                 set_action_state(ACTION_STATE_LAND);
             }
             break;
@@ -91,64 +91,64 @@ void func_802B6000_E26710(void) {
             }
             break;
         case 2:
-            temp_f20 = integrate_gravity();
-            playerStatus->position.y = player_check_collision_below(temp_f20, &sp10);
-            if (temp_f20 < -100.0f) {
+            fallVelocity = integrate_gravity();
+            playerStatus->position.y = player_check_collision_below(fallVelocity, &colliderBelow);
+            if (fallVelocity < -100.0f) {
                 playerStatus->gravityIntegrator[3] = 0.0f;
                 playerStatus->gravityIntegrator[2] = 0.0f;
                 playerStatus->gravityIntegrator[1] = 0.0f;
                 playerStatus->gravityIntegrator[0] = -100.0f;
             }
-            if (sp10 >= 0) {
+            if (colliderBelow >= 0) {
                 if (collisionStatus->currentFloor & COLLISION_WITH_ENTITY_BIT) {
                     entityType = get_entity_type(collisionStatus->currentFloor);
                     if (entityType == ENTITY_TYPE_SIMPLE_SPRING || entityType == ENTITY_TYPE_SCRIPT_SPRING) {
-                        playerStatus->flags &= ~0x00020008;
+                        playerStatus->flags &= ~(PLAYER_STATUS_FLAGS_20000 | PLAYER_STATUS_FLAGS_FLYING);
                         set_action_state(ACTION_STATE_LAND);
                         return;
                     } else if (entityType == ENTITY_TYPE_BLUE_SWITCH || entityType == ENTITY_TYPE_RED_SWITCH) {
-                        playerStatus->flags &= ~0x00020008;
+                        playerStatus->flags &= ~(PLAYER_STATUS_FLAGS_20000 | PLAYER_STATUS_FLAGS_FLYING);
                         phys_player_land();
                         exec_ShakeCam1(0, 0, 4);
                         sfx_play_sound_at_player(SOUND_14A, 0);
-                        start_rumble(0x100, 0x32);
+                        start_rumble(256, 50);
 
-                        D_8015A578.unk_00 = TRUE;
-                        D_8015A578.unk_08 = playerStatus->position.y;
-                        playerStatus->flags |= 0x400;
+                        gCurrentHiddenPanels.tryFlipTrigger = TRUE;
+                        gCurrentHiddenPanels.flipTriggerPosY = playerStatus->position.y;
+                        playerStatus->flags |= PLAYER_STATUS_FLAGS_400;
                         return;
                     }
                 }
 
-                colliderType = get_collider_type_by_id(sp10);
+                colliderType = get_collider_type_by_id(colliderBelow);
                 if (colliderType == 3) {
                     playerStatus->unk_BF = 1;
-                    playerStatus->flags &= ~0x00020008;
+                    playerStatus->flags &= ~(PLAYER_STATUS_FLAGS_20000 | PLAYER_STATUS_FLAGS_FLYING);
                     set_action_state(ACTION_STATE_HIT_LAVA);
-                    playerStatus->flags |= 0x800;
+                    playerStatus->flags |= PLAYER_STATUS_FLAGS_800;
                     return;
                 } else if (colliderType == 2) {
                     set_action_state(ACTION_STATE_HIT_LAVA);
-                    playerStatus->flags &= ~0x00020008;
+                    playerStatus->flags &= ~(PLAYER_STATUS_FLAGS_20000 | PLAYER_STATUS_FLAGS_FLYING);
                     return;
                 }
                 playerStatus->currentStateTime = 8;
                 playerStatus->timeInAir = 0;
-                playerStatus->actionState = 0x10;
+                playerStatus->actionState = ACTION_STATE_ULTRA_POUND;
                 playerStatus->fallState++;
                 exec_ShakeCam1(0, 0, 4);
                 sfx_play_sound_at_player(SOUND_14A, 0);
-                start_rumble(0x100, 0x32);
+                start_rumble(256, 50);
 
-                D_8015A578.unk_00 = TRUE;
-                D_8015A578.unk_08 = playerStatus->position.y;
-                playerStatus->flags |= 0x400;
+                gCurrentHiddenPanels.tryFlipTrigger = TRUE;
+                gCurrentHiddenPanels.flipTriggerPosY = playerStatus->position.y;
+                playerStatus->flags |= PLAYER_STATUS_FLAGS_400;
             }
             break;
         case 3:
             if (--playerStatus->currentStateTime == 0) {
                 playerStatus->fallState++;
-                playerStatus->flags &= ~0x00020008;
+                playerStatus->flags &= ~(PLAYER_STATUS_FLAGS_20000 | PLAYER_STATUS_FLAGS_FLYING);
                 set_action_state(ACTION_STATE_LAND);
             }
             break;
@@ -162,10 +162,10 @@ void func_802B6000_E26710(void) {
     }
 
     if (playerStatus->gravityIntegrator[0] < 0.0f) {
-        sp10 = func_802B65F8_E26D08();
-        if (sp10 >= 0) {
+        colliderBelow = func_802B65F8_E26D08();
+        if (colliderBelow >= 0) {
             collisionStatus->lastTouchedFloor = -1;
-            collisionStatus->currentFloor = sp10;
+            collisionStatus->currentFloor = colliderBelow;
         }
     }
 }
