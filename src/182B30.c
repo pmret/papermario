@@ -1946,40 +1946,40 @@ void func_8025CEC8(ActorPart* actorPart) {
         decorationTable = actorPart->decorationTable;
         for (i = 0; i < ARRAY_COUNT(decorationTable->decorationType); i++) {
             switch (decorationTable->decorationType[i]) {
-                case 0:
+                case DECORATION_0:
                     func_8025D150(actorPart, i);
                     break;
-                case 1:
+                case DECORATION_GOLDEN_FLAMES:
                     func_8025D160(actorPart, i);
                     break;
-                case 2:
+                case DECORATION_SWEAT:
                     func_8025D2B0(actorPart, i);
                     break;
-                case 3:
+                case DECORATION_SEEING_STARS:
                     func_8025D3CC(actorPart, i);
                     break;
-                case 4:
+                case DECORATION_RED_FLAMES:
                     func_8025D4C8(actorPart, i);
                     break;
-                case 5:
+                case DECORATION_GREY_SMOKE_TRAIL:
                     func_8025D640(actorPart, i);
                     break;
-                case 6:
+                case DECORATION_FIRE_SMOKE_TRAIL:
                     func_8025D71C(actorPart, i);
                     break;
-                case 7:
+                case DECORATION_WHIRLWIND:
                     func_8025D830(actorPart, i);
                     break;
-                case 8:
+                case DECORATION_STEAM_EMITTER:
                     func_8025D90C(actorPart, i);
                     break;
-                case 9:
+                case DECORATION_9:
                     func_8025DA68(actorPart, i);
                     break;
-                case 10:
+                case DECORATION_A:
                     func_8025DBD0(actorPart, i);
                     break;
-                case 11:
+                case DECORATION_RADIAL_STAR_EMITTER:
                     func_8025DD60(actorPart, i);
                     break;
             }
@@ -1987,45 +1987,44 @@ void func_8025CEC8(ActorPart* actorPart) {
     }
 }
 
-
 void _remove_part_decoration(ActorPart* part, s32 decorationIndex) {
     DecorationTable* decorationTable = part->decorationTable;
 
     switch (decorationTable->decorationType[decorationIndex]) {
-        case 0:
+        case DECORATION_0:
             func_8025D158(part, decorationIndex);
             break;
-        case 1:
+        case DECORATION_GOLDEN_FLAMES:
             func_8025D290(part, decorationIndex);
             break;
-        case 2:
+        case DECORATION_SWEAT:
             func_8025D3C4(part, decorationIndex);
             break;
-        case 3:
+        case DECORATION_SEEING_STARS:
             func_8025D4A0(part, decorationIndex);
             break;
-        case 4:
+        case DECORATION_RED_FLAMES:
             func_8025D620(part, decorationIndex);
             break;
-        case 5:
+        case DECORATION_GREY_SMOKE_TRAIL:
             func_8025D6FC(part, decorationIndex);
             break;
-        case 6:
+        case DECORATION_FIRE_SMOKE_TRAIL:
             func_8025D810(part, decorationIndex);
             break;
-        case 7:
+        case DECORATION_WHIRLWIND:
             func_8025D8EC(part, decorationIndex);
             break;
-        case 8:
+        case DECORATION_STEAM_EMITTER:
             func_8025DA60(part, decorationIndex);
             break;
-        case 9:
+        case DECORATION_9:
             func_8025DBC8(part, decorationIndex);
             break;
-        case 10:
+        case DECORATION_A:
             func_8025DD40(part, decorationIndex);
             break;
-        case 11:
+        case DECORATION_RADIAL_STAR_EMITTER:
             func_8025DE88(part, decorationIndex);
             break;
     }
@@ -2039,11 +2038,38 @@ void func_8025D150(ActorPart* actorPart, s32 i) {
 void func_8025D158(ActorPart* part, s32 decorationIndex) {
 }
 
+// float reg swapping
+#ifdef NON_MATCHING
+void func_8025D160(ActorPart* arg0, s32 arg1) {
+    DecorationTable* table = arg0->decorationTable;
+    EffectInstance* effect;
+    AuraFXData* data;
+    
+    switch (table->unk_8BC[arg1]) {
+        case 0:
+            fx_aura(3, arg0->currentPos.x, arg0->currentPos.y, arg0->currentPos.z, 0.4f, &table->unk_8B0[arg1]);
+            table->unk_8BC[arg1] = 1;
+            table->unk_8C6[arg1].unk00 = 0x28;
+            table->unk_8C6[arg1].unk02 = 0x28;
+            table->unk_8C6[arg1].unk04 = 0;
+            break;
+        case 1:
+            effect = table->unk_8B0[arg1];
+            data = effect->data.aura;
+            data->posA.x = arg0->currentPos.x + table->unk_8C6[arg1].unk04;
+            data->posA.y = arg0->currentPos.y;
+            data->posA.z = arg0->currentPos.z;
+            effect->data.aura->scale.x = table->unk_8C6[arg1].unk00 / 100.0f;
+            effect->data.aura->scale.y = table->unk_8C6[arg1].unk02 / 100.0f;
+            break;
+    }
+}
+#else
 INCLUDE_ASM(s32, "182B30", func_8025D160);
+#endif
 
 void func_8025D290(ActorPart* part, s32 decorationIndex) {
-    // TODO cast to appropriate struct data type once we know what it is
-    part->decorationTable->unk_8B0[decorationIndex]->data.unk32[11] = 5;
+    part->decorationTable->unk_8B0[decorationIndex]->data.aura->fadeTime = 5;
 }
 
 INCLUDE_ASM(s32, "182B30", func_8025D2B0);
@@ -2057,11 +2083,43 @@ void func_8025D4A0(ActorPart* part, s32 decorationIndex) {
     remove_effect(part->decorationTable->unk_8B0[decorationIndex]);
 }
 
+// float reg swapping
+#ifdef NON_MATCHING
+void func_8025D4C8(ActorPart* arg0, s32 arg1) {
+    DecorationTable* decor = arg0->decorationTable;
+    EffectInstance* effect;
+    AuraFXData* data;
+
+    switch (decor->unk_8BC[arg1]) {
+        case 0:
+            fx_aura(1, arg0->currentPos.x, arg0->currentPos.y, arg0->currentPos.z, 0.4f, &decor->unk_8B0[arg1]);
+            decor->unk_8BC[arg1] = 1;
+            decor->unk_8C6[arg1].unk00 = 0x28;
+            decor->unk_8C6[arg1].unk02 = 0x28;
+            decor->unk_8C6[arg1].unk04 = 0xFF;
+            decor->unk_8C6[arg1].unk06 = 0;
+            decor->unk_8C6[arg1].unk08 = 0xFF;
+            decor->unk_8C6[arg1].unk0A = 0;
+            decor->unk_8C6[arg1].unk0C = 0;
+            // fall through
+        case 1:
+            effect = decor->unk_8B0[arg1];
+            data = effect->data.aura;
+            data->posA.x = arg0->currentPos.x;
+            data->posA.y = arg0->currentPos.y;
+            data->posA.z = arg0->currentPos.z + decor->unk_8C6[arg1].unk06;
+            effect->data.aura->scale.x = decor->unk_8C6[arg1].unk00 / 100.0f;
+            effect->data.aura->scale.y = decor->unk_8C6[arg1].unk02 / 100.0f;
+            effect->data.aura->primA = decor->unk_8C6[arg1].unk04;
+            break;
+    }
+}
+#else
 INCLUDE_ASM(s32, "182B30", func_8025D4C8);
+#endif
 
 void func_8025D620(ActorPart* part, s32 decorationIndex) {
-    // TODO cast to appropriate struct data type once we know what it is
-    part->decorationTable->unk_8B0[decorationIndex]->data.unk32[11] = 5;
+    part->decorationTable->unk_8B0[decorationIndex]->data.aura->fadeTime = 5;
 }
 
 INCLUDE_ASM(s32, "182B30", func_8025D640);
@@ -2095,8 +2153,7 @@ void func_8025DBC8(ActorPart* part, s32 decorationIndex) {
 INCLUDE_ASM(s32, "182B30", func_8025DBD0);
 
 void func_8025DD40(ActorPart* part, s32 decorationIndex) {
-    // TODO cast to appropriate struct data type once we know what it is
-    part->decorationTable->unk_8B0[decorationIndex]->data.unk32[11] = 5;
+    part->decorationTable->unk_8B0[decorationIndex]->data.aura->fadeTime = 5;
 }
 
 INCLUDE_ASM(s32, "182B30", func_8025DD60);

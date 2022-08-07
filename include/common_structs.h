@@ -1610,7 +1610,7 @@ typedef struct DecorationTable {
     /* 0x6CD */ s8 numPalettes;
     /* 0x6CE */ char unk_6CE[2];
     /* 0x6D0 */ PAL_PTR* palettes;
-    /* 0x6D4 */ s16* unk_6D4[27];
+    /* 0x6D4 */ PAL_PTR unk_6D4[27];
     /* 0x740 */ s16 unk_740;
     /* 0x742 */ s16 unk_742;
     /* 0x744 */ s16 unk_744;
@@ -1629,7 +1629,7 @@ typedef struct DecorationTable {
     /* 0x767 */ s8 unk_767;
     /* 0x768 */ u8 unk_768;
     /* 0x769 */ char unk_769[3];
-    /* 0x76C */ s16* unk_76C[16];
+    /* 0x76C */ PAL_PTR unk_76C[16];
     /* 0x78C */ char unk_7AC[0x2C];
     /* 0x7D8 */ s8 unk_7D8;
     /* 0x7D9 */ s8 unk_7D9;
@@ -1649,7 +1649,7 @@ typedef struct DecorationTable {
     /* 0x8B0 */ struct EffectInstance* unk_8B0[2];
     /* 0x8B8 */ s8 decorationType[2];
     /* 0x8BA */ u8 unk_8BA[2];
-    /* 0x8BC */ u8 unk_8BC[2];
+    /* 0x8BC */ s8 unk_8BC[2];
     /* 0x8C0 */ s16 unk_8C0[4];
     /* 0x8C6 */ DecorationUnk unk_8C6[2];
 } DecorationTable; // size = 0x8E8

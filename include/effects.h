@@ -86,7 +86,7 @@ enum EffectID {
     EFFECT_QUIZMO_STAGE,
     EFFECT_RADIATING_ENERGY_ORB,
     EFFECT_QUIZMO_ANSWER, // unused
-    EFFECT_MOTION_BLUR_FLAME,
+    EFFECT_MOTION_BLUR_FLAME,   // three orbs emanating from super block during upgrading animation
     EFFECT_ENERGY_ORB_WAVE,
     EFFECT_MERLIN_HOUSE_STARS,
     EFFECT_QUIZMO_AUDIENCE, // unused
@@ -452,6 +452,8 @@ typedef struct LensFlareFXData {
 typedef struct GotItemOutlineFXData {
     /* 0x00 */ char unk_00[0x14];
     /* 0x14 */ s32 unk_14;
+    /* 0x18 */ char unk_18[0x18];
+    /* 0x30 */ s32 unk_30;
 } GotItemOutlineFXData; // size = ???
 
 typedef struct SpikyWhiteAuraFXData {
@@ -562,7 +564,9 @@ typedef struct SteamBurstFXData {
 } SteamBurstFXData; // size = unknown
 
 typedef struct StarsOrbitingFXData {
-    /* 0x00 */ char todo[0];
+    /* 0x00 */ char unk_00[0x4];
+    /* 0x04 */ Vec3f pos;
+    /* 0x10 */ char todo[0];
 } StarsOrbitingFXData; // size = unknown
 
 typedef struct BigSnowflakesFXData {
@@ -615,6 +619,9 @@ typedef struct RadialShimmerFXData {
 
 typedef struct EndingDecalsFXData {
     /* 0x00 */ s32 unk_00;
+    /* 0x04 */ char unk_04[0xC];
+    /* 0x10 */ f32 unk_10;
+    /* 0x14 */ char todo[0];
 } EndingDecalsFXData; // size = 0x??
 
 typedef struct LightRaysFXData {
@@ -672,16 +679,13 @@ typedef struct ShimmerWaveFXData {
 
 typedef struct AuraFXData {
     /* 0x00 */ s32 type;
-    /* 0x04 */ Vec3f pos;
-    /* 0x10 */ f32 unk_10;
-    /* 0x14 */ f32 unk_14;
-    /* 0x18 */ f32 unk_18;
-    /* 0x1C */ f32 unk_1C;
-    /* 0x20 */ f32 unk_20;
+    /* 0x04 */ Vec3f posA;
+    /* 0x10 */ Vec3f posB;
+    /* 0x1C */ Vec2f scale;
     /* 0x24 */ f32 unk_24;
     /* 0x28 */ s32 primA;
-    /* 0x2C */ s32 unk_2C;
-    /* 0x30 */ s32 unk_30;
+    /* 0x2C */ s32 fadeTime;
+    /* 0x30 */ s32 lifeTime;
     /* 0x34 */ f32 unk_34;
     /* 0x38 */ f32 unk_38;
     /* 0x3C */ f32 unk_3C;
@@ -694,10 +698,7 @@ typedef struct AuraFXData {
     /* 0x58 */ f32 unk_58;
     /* 0x5C */ f32 unk_5C;
     /* 0x60 */ f32 unk_60;
-               union {
-                   s32 s;
-                   f32 f;
-               } unk_64;
+    /* 0x64 */ f32 renderYaw;
     /* 0x68 */ u8 primR;
     /* 0x69 */ u8 primG;
     /* 0x6A */ u8 primB;
@@ -715,6 +716,9 @@ typedef struct BulbGlowFXData {
 } BulbGlowFXData; // size = ?
 
 typedef struct Effect3DFXData {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ s32 unk_04;
+    /* 0x08 */ Vec3f pos;
     /* 0x00 */ char todo[0];
 } Effect3DFXData; // size = unknown
 
@@ -843,7 +847,9 @@ typedef struct SmallGoldSparkleFXData {
 } SmallGoldSparkleFXData; // size = 0x24
 
 typedef struct FlashingBoxShockwaveFXData {
-    /* 0x00 */ char todo[0];
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ Vec3f pos;
+    /* 0x10 */ char todo[0];
 } FlashingBoxShockwaveFXData; // size = unknown
 
 typedef struct BalloonFXData {
@@ -861,6 +867,9 @@ typedef struct BalloonFXData {
 typedef struct FloatingRockFXData {
     /* 0x00 */ char unk_00[0xC];
     /* 0x0C */ f32 unk_0C;
+    /* 0x10 */ char unk_10[0x20];
+    /* 0x30 */ Vec3f unk_30;
+    /* 0x3C */ char todo[0];
 } FloatingRockFXData; // size = 0x??
 
 typedef struct ChompDropFXData {
@@ -894,12 +903,17 @@ typedef struct QuizmoAnswerFXData {
 } QuizmoAnswerFXData; // size = unknown
 
 typedef struct MotionBlurFlameFXData {
-    /* 0x00 */ char todo[0];
+    /* 0x00 */ char unk_00[0x10];
+    /* 0x10 */ Vec3f position;
+    /* 0x1C */ char todo[0];
 } MotionBlurFlameFXData; // size = unknown
 
 typedef struct EnergyOrbWaveFXData {
     /* 0x00 */ s32 unk_00;
-} EnergyOrbWaveFXData; // size = ??
+    /* 0x04 */ Vec3f pos;
+    /* 0x10 */ char unk_10[0x20];
+    /* 0x30 */ f32 scale;
+} EnergyOrbWaveFXData; // size = unknown
 
 typedef struct MerlinHouseStarsFXData {
     /* 0x00 */ char todo[0];
@@ -1072,7 +1086,11 @@ typedef struct Effect6AFXData {
 } Effect6AFXData; // size = unknown
 
 typedef struct EnergyInOutFXData {
-    /* 0x00 */ char todo[0];
+    /* 0x00 */ char unk_00[0x4];
+    /* 0x04 */ Vec3f pos;
+    /* 0x10 */ char unk_10[0x24];
+    /* 0x34 */ f32 scale;
+    /* 0x38 */ char todo[0];
 } EnergyInOutFXData; // size = unknown
 
 typedef struct Effect6BFXData {
@@ -1239,6 +1257,8 @@ typedef struct IcePillarFXData {
 } IcePillarFXData; // size = unknown
 
 typedef struct SunFXData {
+    /* 0x00 */ char unk_00[0x3C];
+    /* 0x3C */ s32 unk_3C; // set to zero to clear sunlight
     /* 0x00 */ char todo[0];
 } SunFXData; // size = unknown
 
@@ -1279,26 +1299,7 @@ typedef struct Effect86FXData {
     /* 0x34 */ f32 unk_34;
 } Effect86FXData; // size = 0x38
 
-//TODO: remove!
-typedef struct EffectInstanceData {
-    /* 0x00 */ s32 unk_00;
-    /* 0x04 */ Vec3f pos;
-    /* 0x10 */ Vec3f rotation;
-    /* 0x1C */ Vec3f scale;
-    /* 0x28 */ f32 unk_28;
-    /* 0x2C */ s32 unk_2C;
-    /* 0x30 */ f32 unk_30;
-    /* 0x34 */ f32 unk_34;
-    /* 0x38 */ f32 unk_38;
-    /* 0x3C */ s32 unk_3C;
-    /* 0x40 */ char unk_40[0x24];
-    /* 0x64 */ f32 unk_64;
-    /* 0x68 */ char unk_68[0x18];
-} EffectInstanceData; // size = 0x80
-
 typedef union {
-    struct EffectInstanceData*          ambig;  // TODO: remove!
-    s32* unk32;  // TODO: remove!
     s32* any;
     struct Effect00FXData*              unk_00;
     struct BigSmokePuffFXData*          bigSmokePuff;

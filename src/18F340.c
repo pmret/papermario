@@ -7,8 +7,8 @@ extern HudScript HES_HPDrain;
 
 extern s32 D_8029FB90;
 extern f32 D_8029FB94;
-extern EffectInstance* D_8029FB98;
-extern EffectInstance* D_8029FB9C;
+extern EffectInstance* BattleMerleeOrbEffect;
+extern EffectInstance* BattleMerleeWaveEffect;
 extern s32 D_8029FBA0;
 extern s16 D_8029FBA4;
 extern s32 D_8029FBA8;
@@ -242,7 +242,7 @@ ApiStatus func_802613A8(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802613BC(Evt* script, s32 isInitialCall) {
+ApiStatus PlayBattleMerleeGatherFX(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 var1 = evt_get_variable(script, *args++);
     s32 var2 = evt_get_variable(script, *args++);
@@ -252,7 +252,7 @@ ApiStatus func_802613BC(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80261478(Evt* script, s32 isInitialCall) {
+ApiStatus PlayBattleMerleeOrbFX(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 var1 = evt_get_variable(script, *args++);
     s32 var2 = evt_get_variable(script, *args++);
@@ -262,7 +262,7 @@ ApiStatus func_80261478(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80261530(Evt* script, s32 isInitialCall) {
+ApiStatus BattleMerleeFadeStageToBlack(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         mdl_set_all_fog_mode(1);
         *D_801512F0 = 1;
@@ -271,13 +271,16 @@ ApiStatus func_80261530(Evt* script, s32 isInitialCall) {
     }
 
     set_background_color_blend(0, 0, 0, ((25 - script->functionTemp[0]) * 10) & 0xFE);
-
     script->functionTemp[0]--;
-    do {} while(0); // TODO required to match
-    return (script->functionTemp[0] == 0) * ApiStatus_DONE2;
+
+    if (script->functionTemp[0] == 0) {
+        return ApiStatus_DONE2;
+    } else {
+        return ApiStatus_BLOCK;
+    }
 }
 
-ApiStatus func_802615C8(Evt* script, s32 isInitialCall) {
+ApiStatus BattleMerleeFadeStageFromBlack(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         script->functionTemp[0] = 25;
     }
@@ -293,7 +296,7 @@ ApiStatus func_802615C8(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus func_80261648(Evt* script, s32 isInitialCall) {
+ApiStatus BattleFadeInMerlee(Evt* script, s32 isInitialCall) {
     Npc* merlee = get_npc_unsafe(NPC_BTL_MERLEE);
 
     if (isInitialCall) {
@@ -310,7 +313,7 @@ ApiStatus func_80261648(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus func_802616B4(Evt* script, s32 isInitialCall) {
+ApiStatus BattleFadeOutMerlee(Evt* script, s32 isInitialCall) {
     Npc* merlee = get_npc_unsafe(NPC_BTL_MERLEE);
 
     merlee->alpha -= 17;
@@ -322,15 +325,15 @@ ApiStatus func_802616B4(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus func_802616F4(Evt* script, s32 isInitialCall) {
+ApiStatus BattleMerleeUpdateFX(Evt* script, s32 isInitialCall) {
     Npc* merlee = get_npc_unsafe(NPC_BTL_MERLEE);
-    EffectInstanceData* effectInstanceData;
+    EnergyOrbWaveFXData* data;
 
     if (isInitialCall) {
         script->functionTemp[1] = 0;
         D_8029FB94 = merlee->pos.y;
-        D_8029FB98 = fx_energy_orb_wave(0, merlee->pos.x, merlee->pos.y, merlee->pos.z, 0.4f, 0);
-        D_8029FB9C = fx_energy_orb_wave(3, merlee->pos.x, merlee->pos.y, merlee->pos.z, 0.00001f, 0);
+        BattleMerleeOrbEffect = fx_energy_orb_wave(0, merlee->pos.x, merlee->pos.y, merlee->pos.z, 0.4f, 0);
+        BattleMerleeWaveEffect = fx_energy_orb_wave(3, merlee->pos.x, merlee->pos.y, merlee->pos.z, 0.00001f, 0);
         D_8029FBA4 = 0;
         D_8029FB90 = 12;
         sfx_play_sound(SOUND_2074);
@@ -340,37 +343,37 @@ ApiStatus func_802616F4(Evt* script, s32 isInitialCall) {
     script->functionTemp[1] += 10;
     script->functionTemp[1] = clamp_angle(script->functionTemp[1]);
 
-    effectInstanceData = D_8029FB98->data.ambig;
-    effectInstanceData->pos.x = merlee->pos.x;
-    effectInstanceData->pos.y = merlee->pos.y + 16.0f;
-    effectInstanceData->pos.z = merlee->pos.z;
+    data = BattleMerleeOrbEffect->data.energyOrbWave;
+    data->pos.x = merlee->pos.x;
+    data->pos.y = merlee->pos.y + 16.0f;
+    data->pos.z = merlee->pos.z;
 
-    effectInstanceData = D_8029FB9C->data.ambig;
-    effectInstanceData->pos.x = merlee->pos.x;
-    effectInstanceData->pos.y = merlee->pos.y + 16.0f;
-    effectInstanceData->pos.z = merlee->pos.z + 5.0f;
+    data = BattleMerleeWaveEffect->data.energyOrbWave;
+    data->pos.x = merlee->pos.x;
+    data->pos.y = merlee->pos.y + 16.0f;
+    data->pos.z = merlee->pos.z + 5.0f;
 
     if (D_8029FBA4 == 2) {
-        D_8029FB98->data.ambig->unk_30 = 0.00001f;
-        D_8029FB9C->data.ambig->unk_30 = 0.00001f;
-        D_8029FB98->flags |= 0x10;
-        D_8029FB9C->flags |= 0x10;
+        BattleMerleeOrbEffect->data.energyOrbWave->scale = 0.00001f;
+        BattleMerleeWaveEffect->data.energyOrbWave->scale = 0.00001f;
+        BattleMerleeOrbEffect->flags |= 0x10;
+        BattleMerleeWaveEffect->flags |= 0x10;
         return ApiStatus_DONE1;
     }
 
     if (D_8029FBA4 == 1) {
-        effectInstanceData = D_8029FB98->data.ambig;
-        effectInstanceData->unk_30 += 0.35;
-        if (effectInstanceData->unk_30 > 3.5) {
-            effectInstanceData->unk_30 = 3.5f;
+        data = BattleMerleeOrbEffect->data.energyOrbWave;
+        data->scale += 0.35;
+        if (data->scale > 3.5) {
+            data->scale = 3.5f;
         }
 
         if (D_8029FB90 != 0) {
             D_8029FB90--;
         } else {
-            effectInstanceData = D_8029FB9C->data.ambig;
-            effectInstanceData->unk_30 += 0.5;
-            if (effectInstanceData->unk_30 > 5.0) {
+            data = BattleMerleeWaveEffect->data.energyOrbWave;
+            data->scale += 0.5;
+            if (data->scale > 5.0) {
                 D_8029FBA4 = 2;
             }
         }

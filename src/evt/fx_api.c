@@ -131,19 +131,20 @@ ApiStatus func_802D7B10(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-//TODO fix this!
 ApiStatus func_802D7B44(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* effect = (EffectInstance*)evt_get_variable(script, *args++);
-    ((s32*)(effect->data.unk32))[5] = 10; // offset 0x14 in GotItemOutline effect data
+
+    effect->data.gotItemOutline->unk_14 = 10;
     return ApiStatus_DONE2;
 }
 
-//TODO fix this!
 ApiStatus func_802D7B74(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* effect = (EffectInstance*)evt_get_variable(script, *args++);
-    ((s32*)(effect->data.unk32))[12] = 5; // offset 0x30 in unknown effect data
+
+    // function is never called, so the effect type is assumed
+    effect->data.gotItemOutline->unk_30 = 5;
     return ApiStatus_DONE2;
 }
 

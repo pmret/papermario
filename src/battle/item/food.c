@@ -34,7 +34,7 @@ ApiStatus N(func_802A12EC_7333BC)(Evt* script, s32 isInitialCall) {
         partner->debuffEffect->data.disableX->unk_3C = partner->koDuration;
     } else {
         partner->koStatus = 0;
-        dispatch_event_partner(EVENT_34);
+        dispatch_event_partner(EVENT_RECOVER_PARTNER);
         partner->debuffEffect->data.disableX->unk_3C = 0;
     }
 

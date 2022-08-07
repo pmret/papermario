@@ -123,7 +123,7 @@ EvtScript N(handleEvent_8023819C) = {
             EVT_SET_CONST(LW(1), NPC_ANIM_goompa_Palette_00_Anim_7)
             EVT_EXEC_WAIT(DoNormalHit)
         EVT_CASE_EQ(EVENT_33)
-        EVT_CASE_EQ(EVENT_34)
+        EVT_CASE_EQ(EVENT_RECOVER_PARTNER)
             EVT_SET_CONST(LW(0), 1)
             EVT_SET_CONST(LW(1), NPC_ANIM_goompa_Palette_00_Anim_1)
             EVT_SET_CONST(LW(2), NPC_ANIM_goompa_Palette_00_Anim_3)

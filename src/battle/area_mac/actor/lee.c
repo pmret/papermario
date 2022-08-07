@@ -2848,25 +2848,25 @@ EvtScript N(idle_80225B68) = {
 
 ApiStatus func_80219658_465AE8(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    WattEffectData* unkDuplighost = (WattEffectData*)get_actor(script->owner1.enemyID)->state.varTable[3];
+    WattEffectData* wattEffects = (WattEffectData*)get_actor(script->owner1.enemyID)->state.varTable[3];
 
-    unkDuplighost->unk_04 = evt_get_variable(script, *args++);
+    wattEffects->unk_04 = evt_get_variable(script, *args++);
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_802196A4_465B34(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    WattEffectData* unkDuplighost = (WattEffectData*)get_actor(script->owner1.enemyID)->state.varTable[3];
+    WattEffectData* wattEffects = (WattEffectData*)get_actor(script->owner1.enemyID)->state.varTable[3];
 
-    unkDuplighost->unk_0C = evt_get_variable(script, *args++);
+    wattEffects->unk_0C = evt_get_variable(script, *args++);
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_802196F0_465B80(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    WattEffectData* unkDuplighost = (WattEffectData*)get_actor(script->owner1.enemyID)->state.varTable[3];
+    WattEffectData* wattEffects = (WattEffectData*)get_actor(script->owner1.enemyID)->state.varTable[3];
 
-    unkDuplighost->unk_10 = evt_get_variable(script, *args++);
+    wattEffects->unk_10 = evt_get_variable(script, *args++);
     return ApiStatus_DONE2;
 }
 

@@ -1796,68 +1796,67 @@ s32 get_defense(Actor* actor, s32* defenseTable, s32 elementFlags) {
     s32 minDefense = 255;
 
     if (defenseTable != NULL) {
-        if (elementFlags & 2) {
+        if (elementFlags & DAMAGE_TYPE_FIRE) {
             defense = lookup_defense(defenseTable, ELEMENT_FIRE);
             if (defense < minDefense) {
                 minDefense = defense;
             }
         }
-        if (elementFlags & 4) {
+        if (elementFlags & DAMAGE_TYPE_WATER) {
             defense = lookup_defense(defenseTable, ELEMENT_WATER);
             if (defense < minDefense) {
                 minDefense = defense;
             }
         }
-        if (elementFlags & 8) {
+        if (elementFlags & DAMAGE_TYPE_ICE) {
             defense = lookup_defense(defenseTable, ELEMENT_ICE);
             if (defense < minDefense) {
                 minDefense = defense;
             }
         }
-        // ELEMENT_MYSTERY missing?
-        if (elementFlags & 0x10) {
+        if (elementFlags & DAMAGE_TYPE_MAGIC) {
             defense = lookup_defense(defenseTable, ELEMENT_MAGIC);
             if (defense < minDefense) {
                 minDefense = defense;
             }
         }
-        if (elementFlags & 0x40) {
+        if (elementFlags & DAMAGE_TYPE_SMASH) {
             defense = lookup_defense(defenseTable, ELEMENT_HAMMER);
             if (defense < minDefense) {
                 minDefense = defense;
             }
         }
-        if (elementFlags & 0x80) {
+        if (elementFlags & DAMAGE_TYPE_JUMP) {
             defense = lookup_defense(defenseTable, ELEMENT_JUMP);
             if (defense < minDefense) {
                 minDefense = defense;
             }
         }
-        if (elementFlags & 0x100) {
+        if (elementFlags & DAMAGE_TYPE_COSMIC) {
             defense = lookup_defense(defenseTable, ELEMENT_COSMIC);
             if (defense < minDefense) {
                 minDefense = defense;
             }
         }
-        if (elementFlags & 0x200) {
+        if (elementFlags & DAMAGE_TYPE_BLAST) {
             defense = lookup_defense(defenseTable, ELEMENT_BLAST);
             if (defense < minDefense) {
                 minDefense = defense;
             }
         }
-        if (elementFlags & 0x20) {
+        if (elementFlags & DAMAGE_TYPE_ELECTRIC) {
             defense = lookup_defense(defenseTable, ELEMENT_SHOCK);
             if (defense < minDefense) {
                 minDefense = defense;
             }
         }
-        if (elementFlags & 0x800) {
+        if (elementFlags & DAMAGE_TYPE_QUAKE) {
             defense = lookup_defense(defenseTable, ELEMENT_QUAKE);
             if (defense < minDefense) {
                 minDefense = defense;
             }
         }
-        if (elementFlags & 0x40000) {
+        if (elementFlags & DAMAGE_TYPE_THROW) {
             defense = lookup_defense(defenseTable, ELEMENT_THROW);
             if (defense < minDefense) {
                 minDefense = defense;
@@ -1873,7 +1872,7 @@ s32 get_defense(Actor* actor, s32* defenseTable, s32 elementFlags) {
         }
     }
 
-    if (elementFlags & 0x8000000) { // "ignore defense" flag
+    if (elementFlags & DAMAGE_TYPE_IGNORE_DEFENSE) {
         if (minDefense == 99) {
             // Immune
             minDefense = 999;
@@ -1896,8 +1895,7 @@ void func_802664DC(f32 x, f32 y, f32 z, s32 attack, s32 a) {
 
     if (i > 0) {
         i = 0;
-        // TODO use actual effect instance struct when we know what it is
-        gDamageCountEffects[i]->data.unk32[12] = 5;
+        gDamageCountEffects[i]->data.damageIndicator->effectDurationTimer = 5;
         gDamageCountEffects[i] = NULL;
     }
 
@@ -1922,8 +1920,7 @@ void show_damage_popup(f32 x, f32 y, f32 z, s32 attack, s32 a) {
 
     if (i > ARRAY_COUNT(gDamageCountEffects) - 1) {
         i = 0;
-        // TODO use actual effect instance struct when we know what it is
-        gDamageCountEffects[i]->data.unk32[12] = 5;
+        gDamageCountEffects[i]->data.damageIndicator->effectDurationTimer = 5;
         gDamageCountEffects[i] = NULL;
     }
 
@@ -1944,8 +1941,7 @@ void func_80266684(void) {
         if (gDamageCountEffects[i] != NULL) {
             gDamageCountTimers[i]--;
             if (gDamageCountTimers[i] == 0) {
-                // TODO use actual effect instance struct when we know what it is
-                ((s32**)gDamageCountEffects[i])[3][12] = 5;
+                gDamageCountEffects[i]->data.damageIndicator->effectDurationTimer = 5;
                 gDamageCountEffects[i] = NULL;
             }
         }

@@ -173,15 +173,16 @@ s32 D_8007FEB8[] = {
 };
 
 /// Used for unbound function points in effect structs.
-void stub_effect_delegate(EffectInstance* effectInst) {
+void stub_effect_delegate(EffectInstance* effect) {
 }
 
-void set_effect_pos_offset(EffectGraphics* effect, f32 x, f32 y, f32 z) {
-    EffectInstanceData* instanceData = effect->freeDelay;
 
-    instanceData->pos.x = x;
-    instanceData->pos.y = y;
-    instanceData->pos.z = z;
+void set_effect_pos_offset(EffectInstance* effect, f32 x, f32 y, f32 z) {
+    s32* data = effect->data.any;
+
+    ((f32*)data)[1] = x;
+    ((f32*)data)[2] = y;
+    ((f32*)data)[3] = z;
 }
 
 void clear_effect_data(void) {

@@ -1247,7 +1247,7 @@ void npc_remove_decoration_none(Npc* npc, s32 idx) {
 }
 
 void npc_update_decoration_bowser_aura(Npc* npc, s32 idx) {
-    EffectInstanceData* instanceData;
+    AuraFXData* data;
 
     switch (npc->decorationInitialised[idx]) {
         case 0:
@@ -1260,17 +1260,17 @@ void npc_update_decoration_bowser_aura(Npc* npc, s32 idx) {
             return;
     }
 
-    instanceData = npc->decorations[idx]->data.ambig;
-    instanceData->pos.x = npc->pos.x;
-    instanceData->pos.y = npc->pos.y;
-    instanceData->pos.z = npc->pos.z;
-    instanceData->scale.x = (npc->scale.x * npc->collisionRadius) * 0.01;
-    instanceData->scale.y = (npc->scale.y * npc->collisionHeight) * 0.01;
-    instanceData->unk_64 = npc->renderYaw;
+    data = npc->decorations[idx]->data.aura;
+    data->posA.x = npc->pos.x;
+    data->posA.y = npc->pos.y;
+    data->posA.z = npc->pos.z;
+    data->scale.x = (npc->scale.x * npc->collisionRadius) * 0.01;
+    data->scale.y = (npc->scale.y * npc->collisionHeight) * 0.01;
+    data->renderYaw = npc->renderYaw;
 }
 
 void npc_remove_decoration_bowser_aura(Npc* npc, s32 idx) {
-    npc->decorations[idx]->data.ambig->unk_2C = 5;
+    npc->decorations[idx]->data.aura->fadeTime = 5;
 }
 
 void npc_update_decoration_sweat(Npc* npc, s32 idx) {
@@ -1298,7 +1298,7 @@ void npc_remove_decoration_sweat(Npc* npc, s32 idx) {
 }
 
 void npc_update_decoration_seeing_stars(Npc* npc, s32 idx) {
-    EffectInstanceData* instanceData;
+    StarsOrbitingFXData* data;
 
     switch (npc->decorationInitialised[idx]) {
         case 0:
@@ -1312,10 +1312,10 @@ void npc_update_decoration_seeing_stars(Npc* npc, s32 idx) {
 
     }
 
-    instanceData = npc->decorations[idx]->data.ambig;
-    instanceData->pos.x = npc->pos.x;
-    instanceData->pos.y = npc->pos.y + npc->collisionHeight;
-    instanceData->pos.z = npc->pos.z;
+    data = npc->decorations[idx]->data.starsOrbiting;
+    data->pos.x = npc->pos.x;
+    data->pos.y = npc->pos.y + npc->collisionHeight;
+    data->pos.z = npc->pos.z;
 }
 
 void npc_remove_decoration_seeing_stars(Npc* npc, s32 idx) {
@@ -1323,20 +1323,19 @@ void npc_remove_decoration_seeing_stars(Npc* npc, s32 idx) {
 }
 
 void npc_update_decoration_glow_in_front(Npc* npc, s32 idx) {
-    EffectInstanceData* instanceData;
+    EnergyOrbWaveFXData* data;
 
     switch (npc->decorationInitialised[idx]) {
         case 0:
-            npc->decorations[idx] = fx_energy_orb_wave(2, npc->pos.x, npc->pos.y + npc->collisionHeight * 0.5, npc->pos.z,
-                                                  npc->scale.x * 0.8 + 0.2f, -1);
+            npc->decorations[idx] = fx_energy_orb_wave(2, npc->pos.x, npc->pos.y + npc->collisionHeight * 0.5, npc->pos.z, npc->scale.x * 0.8 + 0.2f, -1);
             npc->decorationInitialised[idx] = 1;
             break;
         case 1:
-            instanceData = npc->decorations[idx]->data.ambig;
-            instanceData->pos.x = npc->pos.x;
-            instanceData->pos.y = npc->pos.y + npc->collisionHeight * 0.5 * npc->scale.x;
-            instanceData->pos.z = npc->pos.z;
-            instanceData->unk_30 = npc->scale.x * 0.8 + 0.2f;
+            data = npc->decorations[idx]->data.energyOrbWave;
+            data->pos.x = npc->pos.x;
+            data->pos.y = npc->pos.y + npc->collisionHeight * 0.5 * npc->scale.x;
+            data->pos.z = npc->pos.z;
+            data->scale = npc->scale.x * 0.8 + 0.2f;
             break;
     }
 }
@@ -1346,20 +1345,19 @@ void npc_remove_decoration_glow_in_front(Npc* npc, s32 idx) {
 }
 
 void npc_update_decoration_glow_behind(Npc* npc, s32 idx) {
-    EffectInstanceData* instanceData;
+    EnergyOrbWaveFXData* data;
 
     switch (npc->decorationInitialised[idx]) {
         case 0:
-            npc->decorations[idx] = fx_energy_orb_wave(2, npc->pos.x, npc->pos.y + npc->collisionHeight * 0.5, npc->pos.z - 5.0f, 1.0f,
-                                                  0);
+            npc->decorations[idx] = fx_energy_orb_wave(2, npc->pos.x, npc->pos.y + npc->collisionHeight * 0.5, npc->pos.z - 5.0f, 1.0f, 0);
             npc->decorationInitialised[idx] = 1;
             break;
         case 1:
-            instanceData = npc->decorations[idx]->data.ambig;
-            instanceData->pos.x = npc->pos.x;
-            instanceData->pos.y = npc->pos.y + npc->collisionHeight * 0.5;
-            instanceData->pos.z = npc->pos.z - 5.0f;
-            instanceData->unk_30 = 1.0f;
+            data = npc->decorations[idx]->data.energyOrbWave;
+            data->pos.x = npc->pos.x;
+            data->pos.y = npc->pos.y + npc->collisionHeight * 0.5;
+            data->pos.z = npc->pos.z - 5.0f;
+            data->scale = 1.0f;
             break;
     }
 }
