@@ -2,6 +2,7 @@
 #include "sprite/npc/cleft.h"
 #include "sprite/npc/goomba.h"
 #include "effects.h"
+#include "entity.h"
 
 EvtScript N(exitWalk_802410F0) = EXIT_WALK_SCRIPT(60,  0, "arn_05",  1);
 
@@ -37,11 +38,11 @@ static s32 N(pad_12C4)[] = {
 EvtScript N(makeEntities) = {
     EVT_CALL(MakeItemEntity, ITEM_DIZZY_DIAL, -248, 193, 45, 17, EVT_SAVE_FLAG(1005))
     EVT_CALL(MakeItemEntity, ITEM_LETTER07, 536, 260, 227, 17, EVT_SAVE_FLAG(1006))
-    EVT_CALL(MakeEntity, EVT_PTR(Entity_D_802EA564), -350, 172, 170, 0, 343, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, EVT_PTR(Entity_YellowBlock), -350, 172, 170, 0, 343, MAKE_ENTITY_END)
     EVT_CALL(AssignBlockFlag, EVT_SAVE_FLAG(1002))
-    EVT_CALL(MakeEntity, EVT_PTR(Entity_D_802EA564), 225, 265, 30, 0, 343, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, EVT_PTR(Entity_YellowBlock), 225, 265, 30, 0, 343, MAKE_ENTITY_END)
     EVT_CALL(AssignBlockFlag, EVT_SAVE_FLAG(1003))
-    EVT_CALL(MakeEntity, EVT_PTR(Entity_D_802EA564), 275, 265, 150, 0, 151, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, EVT_PTR(Entity_YellowBlock), 275, 265, 150, 0, 151, MAKE_ENTITY_END)
     EVT_CALL(AssignBlockFlag, EVT_SAVE_FLAG(1004))
     EVT_RETURN
     EVT_END

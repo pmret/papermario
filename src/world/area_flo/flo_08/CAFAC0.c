@@ -3,6 +3,7 @@
 #include "sprite/npc/dayzee.h"
 #include "sprite/npc/gate_flower.h"
 #include "effects.h"
+#include "entity.h"
 
 enum {
     NPC_GATE_FLOWER,
@@ -50,7 +51,7 @@ EvtScript N(80241F40) = {
 #include "world/common/atomic/SuperBlockData.inc.c"
 
 EvtScript N(makeEntities) = {
-    EVT_CALL(MakeEntity, 0x802EA910, -780, 120, -110, 0, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, EVT_PTR(Entity_SuperBlock), -780, 120, -110, 0, MAKE_ENTITY_END)
     EVT_SETUP_SUPER_BLOCK(SUPER_BLOCK_MAPVAR, SUPER_BLOCK_GAMEFLAG)
     EVT_CALL(MakeItemEntity, ITEM_STAR_PIECE, 510, 0, -90, 17, EVT_SAVE_FLAG(1381))
     EVT_RETURN

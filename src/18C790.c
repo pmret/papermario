@@ -618,7 +618,7 @@ void btl_state_update_celebration(void) {
                 hud_element_set_tint(id, 128, 128, 128);
                 x = 20;
                 y = 186;
-                set_window_properties(8, 20, 186, 280, 32, 20, func_80260948, NULL, -1);
+                set_window_properties(WINDOW_ID_8, 20, 186, 280, 32, 20, func_80260948, NULL, -1);
                 set_window_update(WINDOW_ID_8, WINDOW_UPDATE_SHOW);
                 gBattleState2 = BATTLE_STATE2_UNK_8;
             }
@@ -769,7 +769,7 @@ void btl_state_update_celebration(void) {
             width = get_msg_width(0x1D00AB, 0) + 31;
             x = 160 - (width / 2);
             y = 80;
-            set_window_properties(9, x, y, width, 28, 10, func_80260A20, NULL, -1);
+            set_window_properties(WINDOW_ID_9, x, y, width, 28, 10, func_80260A20, NULL, -1);
             set_window_update(WINDOW_ID_9, WINDOW_UPDATE_SHOW);
             D_8029FB4C = 60;
             gBattleState2 = BATTLE_STATE2_UNK_10;

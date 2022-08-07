@@ -8,7 +8,7 @@ void func_802B6000_E26DE0(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     CollisionStatus* collisionStatus = &gCollisionStatus;
     Entity* entity;
-    Struct8015A578* tempStruct;
+    HiddenPanelsData* panels;
     s32 sp10;
     s32 tempCondition;
     f32 temp_f20;
@@ -95,21 +95,21 @@ void func_802B6000_E26DE0(void) {
             if (sp10 >= 0) {
                 if (collisionStatus->currentFloor & COLLISION_WITH_ENTITY_BIT && (entityType = get_entity_type(collisionStatus->currentFloor),
                         entityType == ENTITY_TYPE_RED_SWITCH || entityType == ENTITY_TYPE_BLUE_SWITCH)) {
-                    get_entity_by_index(collisionStatus->currentFloor)->collisionFlags |= 1;
+                    get_entity_by_index(collisionStatus->currentFloor)->collisionFlags |= ENTITY_COLLISION_PLAYER_TOUCH_FLOOR;
                     playerStatus->fallState = 0xB;
-                    playerStatus->flags &= ~0x8;
+                    playerStatus->flags &= ~PLAYER_STATUS_FLAGS_FLYING;
                     break;
                 } else {
                     colliderType = get_collider_type_by_id(sp10);
                     if (colliderType == 3) {
                         playerStatus->unk_BF = 1;
                         set_action_state(ACTION_STATE_HIT_LAVA);
-                        playerStatus->flags |= 0x800;
-                        playerStatus->flags &= ~0x8;
+                        playerStatus->flags |= PLAYER_STATUS_FLAGS_800;
+                        playerStatus->flags &= ~PLAYER_STATUS_FLAGS_FLYING;
                         return;
                     } else if (colliderType == 2) {
                             set_action_state(ACTION_STATE_HIT_LAVA);
-                            playerStatus->flags &= ~0x8;
+                            playerStatus->flags &= ~PLAYER_STATUS_FLAGS_FLYING;
                             return;
                     } else {
                         playerStatus->gravityIntegrator[1] = -3.4744f;
@@ -125,10 +125,10 @@ void func_802B6000_E26DE0(void) {
                         exec_ShakeCam1(0, 0, 4);
                         sfx_play_sound_at_player(SOUND_149, 0);
                         start_rumble(0x80, 0x19);
-                        tempStruct = &D_8015A578;
-                        tempStruct->unk_00 = 1;
-                        tempStruct->unk_08 = playerStatus->position.y;
-                        playerStatus->flags |= 0x400;
+                        panels = &gCurrentHiddenPanels;
+                        panels->tryFlipTrigger = TRUE;
+                        panels->flipTriggerPosY = playerStatus->position.y;
+                        playerStatus->flags |= PLAYER_STATUS_FLAGS_400;
                     }
                 }
             }

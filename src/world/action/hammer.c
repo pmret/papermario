@@ -314,7 +314,7 @@ void func_802B6820_E256F0(void) {
             collisionStatus->lastWallHammered = result;
             if (result >= 0) {
                 if (result & COLLISION_WITH_ENTITY_BIT) {
-                    get_entity_by_index(result)->unk_07 = 0;
+                    get_entity_by_index(result)->collisionTimer = 0;
                 }
             }
         }
@@ -345,7 +345,7 @@ void func_802B6820_E256F0(void) {
                 collisionStatus->lastWallHammered = result;
                 if (result >= 0) {
                     if (result & COLLISION_WITH_ENTITY_BIT) {
-                        get_entity_by_index(result)->unk_07 = 0;
+                        get_entity_by_index(result)->collisionTimer = 0;
                     }
                 }
             }
@@ -370,15 +370,15 @@ void func_802B6820_E256F0(void) {
         action_hammer_play_hit_fx(HammerHit->hitID);
 
         if (collisionStatus->lastWallHammered >= 0 && (collisionStatus->lastWallHammered & COLLISION_WITH_ENTITY_BIT)) {
-            get_entity_by_index(collisionStatus->lastWallHammered)->unk_07 = 0;
+            get_entity_by_index(collisionStatus->lastWallHammered)->collisionTimer = 0;
             playerStatus->flags |= PLAYER_STATUS_FLAGS_1000000;
         } else if (HammerHit->hitID < 0) {
             playerStatus->flags |= PLAYER_STATUS_FLAGS_1000000;
         }
 
         if (HammerHit->hitID < 0 && gPlayerData.hammerLevel >= 2) {
-            D_8015A578.unk_00 = 1;
-            D_8015A578.unk_08 = playerStatus->position.y;
+            gCurrentHiddenPanels.tryFlipTrigger = TRUE;
+            gCurrentHiddenPanels.flipTriggerPosY = playerStatus->position.y;
         }
     }
 

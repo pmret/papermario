@@ -3,6 +3,7 @@
 #include "world/partners.h"
 #include "sprite/npc/sentinel.h"
 #include "message_ids.h"
+#include "entity.h"
 
 enum {
     NPC_SENTINEL,
@@ -274,7 +275,7 @@ NpcGroupList N(npcGroupList_80243D18) = {
 #include "world/common/atomic/SuperBlockData.inc.c"
 
 EvtScript N(makeEntities) = {
-    EVT_CALL(MakeEntity, 0x802EA910, 500, -360, 110, 0, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, EVT_PTR(Entity_SuperBlock), 500, -360, 110, 0, MAKE_ENTITY_END)
     EVT_SETUP_SUPER_BLOCK(SUPER_BLOCK_MAPVAR, SUPER_BLOCK_GAMEFLAG)
     EVT_RETURN
     EVT_END

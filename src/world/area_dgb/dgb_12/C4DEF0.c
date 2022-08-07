@@ -1,6 +1,7 @@
 #include "dgb_12.h"
 #include "message_ids.h"
 #include "common.h"
+#include "entity.h"
 
 EntryList N(entryList) = {
     { -500.0f, 0.0f, -40.0f, 0.0f },
@@ -135,7 +136,7 @@ static s32 N(pad_868)[] = {
 #include "world/common/atomic/Chest.inc.c"
 
 EvtScript N(makeEntities) = {
-    EVT_CALL(MakeEntity, 0x802EAE30, -225, 0, -245, 0, 0, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, &Entity_Chest, -225, 0, -245, 0, 0, MAKE_ENTITY_END)
     EVT_CALL(AssignChestFlag, EVT_SAVE_FLAG(1057))
     EVT_CALL(AssignScript, EVT_PTR(N(EVS_Chest_Interact)))
     EVT_RETURN

@@ -1,6 +1,7 @@
 #include "dgb_05.h"
 #include "sprite/npc/world_clubba.h"
 #include "message_ids.h"
+#include "entity.h"
 
 enum {
     NPC_WORLD_CLUBBA0,
@@ -108,7 +109,7 @@ static s32 N(pad_1868)[] = {
 
 EvtScript N(makeEntities) = {
     EVT_IF_EQ(EVT_SAVE_FLAG(1047), 0)
-        EVT_CALL(MakeEntity, 0x802BCE84, 510, -210, 100, 0, MAKE_ENTITY_END)
+        EVT_CALL(MakeEntity, EVT_PTR(Entity_BoardedFloor), 510, -210, 100, 0, MAKE_ENTITY_END)
     EVT_END_IF
     EVT_RETURN
     EVT_END

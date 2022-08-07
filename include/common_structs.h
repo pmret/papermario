@@ -13,6 +13,12 @@ typedef ApiStatus(*ApiFunc)(struct Evt*, s32);
 
 typedef Bytecode EvtScript[0];
 
+typedef void NoArgCallback(void*);
+
+#define MSG_PTR u8*
+#define IMG_PTR u8*
+#define PAL_PTR u16* 
+
 typedef struct {
     u8 r, g, b, a;
 } Color_RGBA8;
@@ -408,207 +414,49 @@ typedef struct Evt {
 typedef Evt* ScriptList[MAX_SCRIPTS];
 
 struct Entity;
-
-// BEGIN ENTITY-SPECIFIC STRUCTS
-
-typedef struct struct802E2BA4 {
-    /* 0x00 */ char unk_00[2];
-    /* 0x02 */ u16 unk_02[24][2];
-} struct802E2BA4;
-
-// from 102c80, size unknown.
-typedef struct SwitchData {
-    /* 0x000 */ f32 fallVelocity;
-    /* 0x004 */ f32 deltaScaleX;
-    /* 0x008 */ f32 deltaScaleY;
-    /* 0x00C */ char unk_0C[4];
-    /* 0x010 */ s8 animStateScaleX;
-    /* 0x011 */ s8 animStateScaleY;
-    /* 0x014 */ Vec3f baseScale;
-    /* 0x020 */ u16 areaFlagIndex;
-    /* 0x022 */ s16 greenMotionTimer;
-    /* 0x024 */ s16 scaleAnimTimer;
-    /* 0x028 */ struct Entity* linkedSwitch; /* a hidden switch can be linked to a visible one and automatically trigger it on hit */
-    /* 0x02C */ char unk_2C[8];
-    /* 0x034 */ struct802E2BA4* unk_34;
-    /* 0x038 */ f32 unk_38;
-    /* 0x03C */ union {
-        /*       */     s16 s;
-        /*       */     s8 b[2];
-    } unk_3C;
-    /* 0x03E */ char unk_3E[0x4D];
-    /* 0x08B */ u8 fragmentRotX[24]; // scaled to map [0,255] -> [0,360]
-    /* 0x0A3 */ char unk_A3; // padding?
-    /* 0x0A4 */ u8 fragmentRotY[24]; // scaled to map [0,255] -> [0,360]
-    /* 0x0BC */ char unk_BC[4];
-    /* 0x0C0 */ f32 fragmentPosX[24];
-    /* 0x120 */ char unk_120[4];
-    /* 0x124 */ f32 fragmentPosY[24];
-    /* 0x184 */ char unk_184[4];
-    /* 0x188 */ f32 fragmentPosZ[24];
-} SwitchData;
-
-// from 104940_len_dc0, size unknown
-// appears to belong to the hammer blocks(?)
-typedef struct BlockData {
-    /* 0x000 */ u8 parentEntityIndex; // for block entities spawned by other block entities
-    /* 0x001 */ char unk_01[2];
-    /* 0x003 */ s8 empty;
-    /* 0x004 */ s16 coinsLeft;
-    /* 0x006 */ s16 timeLeft;
-    /* 0x008 */ char unk_08[2];
-    /* 0x00A */ u16 gameFlagIndex;
-    /* 0x00C */ char unk_0C[2];
-    /* 0x00E */ s16 unk_0E;
-    /* 0x010 */ s16 itemEntityIndex; // for spawned item entities
-    /* 0x012 */ s16 childEntityIndex; // for block entities that spawn other block entities
-    /* 0x014 */ f32 initialY;
-    /* 0x018 */ f32 recoilInterpPhase;
-    /* 0x01C */ char unk_1C[0x10C];
-    /* 0x128 */ UNK_PTR unk_128;
-    /* 0x12C */ UNK_PTR unk_12C;
-} BlockData;
-
-typedef struct ItemBlockData {
-    /* 0x00 */ u16 unk_00;
-    /* 0x02 */ char unk_02[8];
-    /* 0x0A */ u16 gameFlagIndex;
-    /* 0x0C */ char unk_C[4];
-    /* 0x10 */ s16 itemID;
-    /* 0x12 */ s16 childEntityIndex; // for block entities that spawn other block entities
-} ItemBlockData;
-
-typedef struct SaveBlockData {
-    /* 0x000 */ char unk_0[4];
-    /* 0x004 */ s16 angle;
-} SaveBlockData;
-
-// size unknown
-typedef struct SuperBlockContentData {
-    /* 0x000 */ u8 parentEntityIndex; // for block entities spawned by other block entities
-    /* 0x001 */ u8 unk_01;
-    /* 0x002 */ s8 unk_02;
-    /* 0x003 */ s8 unk_03;
-    /* 0x004 */ f32 unk_04;
-    /* 0x008 */ char unk_08;
-    /* 0x009 */ u8 unk_09;
-    /* 0x00A */ u8 unk_0A;
-    /* 0x00B */ char unk_0B; // padding?
-    /* 0x00C */ s32 unk_0C;
-    /* 0x010 */ s32 unk_10;
-    /* 0x014 */ f32 unk_14;
-    /* 0x018 */ f32 unk_18;
-    /* 0x01C */ f32 unk_1C;
-    /* 0x020 */ f32 unk_20;
-    /* 0x024 */ u16 unk_24;
-    /* 0x024 */ s16 unk_26;
-    /* 0x028 */ f32 unk_28[0xB];
-    /* 0x054 */ f32 unk_54;
-    /* 0x058 */ char unk_58[0x78];
-    /* 0x0D0 */ u16 yawBufferPos;
-    /* 0x0D4 */ f32 yawBuffer[20];
-    /* 0x124 */ s32 unk_124;
-    /* 0x128 */ s32* unk_128;
-    /* 0x12C */ s32* unk_12C;
-} SuperBlockContentData;
-
-// size unknown
-typedef struct HeartBlockContentData {
-    /* 0x000 */ u8 parentEntityIndex; // for block entities spawned by other block entities
-    /* 0x001 */ u8 state;
-    /* 0x002 */ s8 sparkleTimer;
-    /* 0x003 */ s8 sparkleTrailTimer;
-    /* 0x004 */ f32 sparkleTrailPosY;
-    /* 0x008 */ char heartbeatTimer;
-    /* 0x009 */ u8 unk_09;
-    /* 0x00A */ u8 sparkleEffectType;
-    /* 0x00B */ char unk_0B; // padding?
-    /* 0x00C */ s32 unk_0C;
-    /* 0x010 */ s32 unk_10;
-    /* 0x014 */ f32 riseVelocity;
-    /* 0x018 */ f32 sparkleTrailAngle;
-    /* 0x01C */ f32 sparkleTrailRadius;
-    /* 0x020 */ f32 bouncePhase;
-    /* 0x024 */ u16 yawBufferPos;
-    /* 0x024 */ s16 unk_26;
-    /* 0x028 */ f32 yawBuffer[10];
-    /* 0x050 */ f32 unk_50;
-    /* 0x054 */ f32 rotationRate;
-    /* 0x058 */ char unk_58[0x78];
-    /* 0x0D0 */ u16 yawBufferPosX;
-    /* 0x0D4 */ f32 yawBufferX[20];
-    /* 0x124 */ s32 unk_124;
-    /* 0x128 */ s32* unk_128;
-    /* 0x12C */ s32* unk_12C;
-} HeartBlockContentData;
-
-typedef struct WoodenCrateData {
-    /* 0x000 */ s32 itemID;
-    /* 0x004 */ u16 globalFlagIndex;
-    /* 0x006 */ u8  unk_06[2];
-    /* 0x008 */ u8* fragmentsGfx; //TODO type when more WoodenCrate.c is done
-    /* 0x00C */ f32 basePosY;
-    /* 0x010 */ u8 fragmentScale[36];
-    /* 0x034 */ s8 fragmentMoveAngle[36]; // X,Z plane -- scaled to map [0,255] -> [0,360]
-    /* 0x058 */ u8 fragmentRotX[36]; // scaled to map [0,255] -> [0,360]
-    /* 0x07C */ u8 fragmentRotY[36]; // scaled to map [0,255] -> [0,360]
-    /* 0x0A0 */ u8 fragmentLateralSpeed[36];
-    /* 0x0C4 */ f32 fragmentFallSpeed[36];
-    /* 0x154 */ f32 fragmentPosX[36];
-    /* 0x1E4 */ f32 fragmentPosY[36];
-    /* 0x274 */ f32 fragmentPosZ[36];
-    /* 0x304 */ f32 unk_304[36];
-} WoodenCrateData;
-
-// size unknown
-typedef struct ChestData {
-    /* 0x00 */ u16 gameFlagIndex;
-    /* 0x02 */ s16 giveItemTimer;
-    /* 0x04 */ u8 state;
-    /* 0x04 */ s8 unk_05;
-    /* 0x06 */ s8 postLidAnimDelay;
-    /* 0x07 */ u8 unk_07;
-    /* 0x08 */ f32 lidAngle;
-    /* 0x0C */ f32 lidAnimInterpPhase;
-    /* 0x10 */ s32 itemID;
-    /* 0x14 */ s32 itemEntityIndex;
-    /* 0x18 */ Vec3f itemEntityPos;
-    /* 0x24 */ f32 giveItemRadiusInterpPhase;
-    /* 0x28 */ f32 giveItemHeightInterpPhase;
-    /* 0x2C */ f32 itemVelY;
-    /* 0x30 */ s8 unk_30;
-    /* 0x31 */ char unk_31[3];
-    /* 0x34 */ struct EffectInstance* gotItemEffect;
-} ChestData;
-
-typedef struct BlueWarpPipeData {
-    /* 0x00 */ s32 unk_00; // proably flags
-    /* 0x04 */ s32 timer;
-    /* 0x08 */ s32 isRaised;
-    /* 0x0C */ s32 entryID;
-    /* 0x10 */ EvtScript* onEnterPipeEvt;
-    /* 0x14 */ s32 flagIndex;
-    /* 0x18 */ f32 finalPosY;
-} BlueWarpPipeData;
-
-typedef struct SimpleSpringData {
-    /* 0x00 */ s32 launchVelocity;
-} SimpleSpringData;
-
-// END ENTITY-SPECIFIC STRUCTS
+struct SaveBlockData;
+struct SwitchData;
+struct ShatteringBlockData;
+struct BlockData;
+struct WoodenCrateData;
+struct ChestData;
+struct BlueWarpPipeData;
+struct HeartBlockContentData;
+struct SuperBlockContentData;
+struct SimpleSpringData;
+struct HiddenPanelData;
+struct SignpostData;
+struct PadlockData;
+struct BoardedFloorData;
+struct BombableRockData;
+struct TweesterData;
+struct StarBoxLauncherData;
+struct CymbalPlantData;
+struct PinkFlowerData;
+struct SpinningFlowerData;
+struct TrumpetPlantData;
+struct MunchlesiaData;
+struct ArrowSignData;
 
 typedef s32 (*EntityCallback)(struct Entity*);
+
+typedef struct DmaEntry {
+    void* start;
+    void* end;
+} DmaEntry;
 
 typedef struct EntityBlueprint {
     /* 0x00 */ u16 flags;
     /* 0x02 */ u16 typeDataSize;
     /* 0x04 */ UNK_PTR renderCommandList;
     /* 0x08 */ UNK_PTR modelAnimationNodes;
-    /* 0x0C */ EntityCallback(fpInit);
+    /* 0x0C */ void (*fpInit)(struct Entity*);
     /* 0x10 */ UNK_PTR updateEntityScript;
     /* 0x14 */ EntityCallback fpHandleCollision;
-    /* 0x18 */ s32 dmaStart;
-    /* 0x1C */ s32 dmaEnd;
+    /* 0x18 */ union {
+                DmaEntry dma;
+                DmaEntry* dmaList;
+               };
     /* 0x20 */ u8 entityType;
     /* 0x21 */ u8 aabbSize[3];
 } EntityBlueprint; // size = 0x24
@@ -618,9 +466,9 @@ typedef struct Entity {
     /* 0x04 */ u8 listIndex;
     /* 0x05 */ s8 unk_05;
     /* 0x06 */ u8 collisionFlags;
-    /* 0x07 */ s8 unk_07;
+    /* 0x07 */ s8 collisionTimer;
     /* 0x08 */ u8 unk_08;
-    /* 0x09 */ u8 hasEntityScript;
+    /* 0x09 */ u8 scriptDelay;
     /* 0x0A */ u8 type;
     /* 0x0B */ u8 alpha;
     /* 0x0C */ Vec3s aabb;
@@ -632,31 +480,42 @@ typedef struct Entity {
     /* 0x20 */ EntityCallback updateMatrixOverride;
     /* 0x24 */ Evt* boundScript;
     /* 0x28 */ EvtScript* boundScriptBytecode;
-    /* 0x2C */ s32* savedReadPos;
-    /* 0x30 */ char unk_30[0x8];
+    /* 0x2C */ s32* savedReadPos[3];
     /* 0x38 */ EntityBlueprint* blueprint;
-    /* 0x3C */ UNK_PTR renderSetupFunc; // pointer to draw func(?)
+    /* 0x3C */ void (*renderSetupFunc)(s32);
     /* 0x40 */ union {
         s32* any;
-        SwitchData* swtch;
-        BlockData* block;
-        ItemBlockData* itemBlock;
-        SaveBlockData* saveBlock;
-        WoodenCrateData* crate;
-        ChestData* chest;
-        BlueWarpPipeData* bluePipe;
-        HeartBlockContentData* heartBlockContent;
-        SuperBlockContentData* superBlockContent;
-        SimpleSpringData* simpleSpring;
-        s32* unk;
+        struct SaveBlockData* saveBlock;
+        struct SwitchData* swtch;
+        struct ShatteringBlockData* shatteringBlock;
+        struct BlockData* block;
+        struct WoodenCrateData* crate;
+        struct ChestData* chest;
+        struct BlueWarpPipeData* bluePipe;
+        struct HeartBlockContentData* heartBlockContent;
+        struct SuperBlockContentData* superBlockContent;
+        struct SimpleSpringData* simpleSpring;
+        struct HiddenPanelData* hiddenPanel;
+        struct SignpostData* signPost;
+        struct PadlockData* padlock;
+        struct BoardedFloorData* boardedFloor;
+        struct BombableRockData* bombableRock;
+        struct TweesterData* tweester;
+        struct StarBoxLauncherData* starBoxLauncher;
+        struct CymbalPlantData* cymbalPlant;
+        struct PinkFlowerData* pinkFlower;
+        struct SpinningFlowerData* spinningFlower;
+        struct TrumpetPlantData* trumpetPlant;
+        struct MunchlesiaData* munchlesia;
+        struct ArrowSignData* arrowSign;
     } dataBuf;
-    /* 0x44 */ Vec3s* vertexData;
+    /* 0x44 */ void* gfxBaseAddr;
     /* 0x48 */ Vec3f position;
     /* 0x54 */ Vec3f scale;
     /* 0x60 */ Vec3f rotation;
     /* 0x6C */ f32 shadowPosY;
     /* 0x70 */ Matrix4f inverseTransformMatrix; /* world-to-local */
-    /* 0xB0 */ float effectiveSize;
+    /* 0xB0 */ f32 effectiveSize;
     /* 0xB4 */ char unk_B4[4];
     /* 0xB8 */ Mtx transformMatrix;
 } Entity; // size = 0xF8
@@ -665,7 +524,7 @@ typedef Entity* EntityList[MAX_ENTITIES];
 
 struct Shadow;
 
-typedef s32 (*ShadowCallback)(struct Shadow*);
+typedef void (*ShadowCallback)(struct Shadow*);
 
 // same as EntityBlueprint
 typedef struct ShadowBlueprint {
@@ -707,20 +566,28 @@ typedef DynamicEntity* DynamicEntityList[MAX_DYNAMIC_ENTITIES];
 
 typedef struct MusicSettings {
     /* 0x00 */ u16 flags;
-    /* 0x02 */ s16 unk_02;
+    /* 0x02 */ s16 state;
     /* 0x04 */ s32 fadeOutTime;
     /* 0x08 */ s32 fadeInTime;
-    /* 0x0C */ s16 unk_0C;
-    /* 0x0E */ s16 unk_0E;
+    /* 0x0C */ s16 fadeStartVolume;
+    /* 0x0E */ s16 fadeEndVolume;
     /* 0x10 */ s32 songID;
     /* 0x14 */ s32 variation;
     /* 0x18 */ s32 songName;
-    /* 0x1C */ s32 unk_1C;
-    /* 0x20 */ s32 unk_20;
-    /* 0x24 */ s32 unk_24;
-    /* 0x28 */ s32 unk_28;
-    /* 0x2C */ s32 unk_2C;
+    /* 0x1C */ s32 battleSongID;
+    /* 0x20 */ s32 battleVariation;
+    /* 0x24 */ s32 savedSongID;
+    /* 0x28 */ s32 savedVariation;
+    /* 0x2C */ s32 savedSongName;
 } MusicSettings; // size = 0x30
+
+typedef struct MusicProximityTrigger {
+    /* 0x00 */ Vec2XZf pos;
+    /* 0x08 */ f32 innerDist;
+    /* 0x0C */ f32 outerDist;
+    /* 0x10 */ s32 unk;
+    /* 0x14 */ s32 manualActivationFlag;
+} MusicProximityTrigger; // size = 0x18
 
 typedef struct UiStatus {
     /* 0x00 */ s32 hpIconIndices[2];
@@ -1055,6 +922,7 @@ typedef struct BattleStatus {
     /* 0x45C */ char unk_45C[4];
 } BattleStatus; // size = 0x460
 
+// alternative name: TileDescriptor
 typedef struct TextureHeader {
     /* 0x00 */ s8 name[32];
     /* 0x20 */ s16 auxW;
@@ -1174,7 +1042,7 @@ typedef struct ModelAnimator {
     /* 0x090 */ f32 nextUpdateTime;
     /* 0x094 */ f32 timeScale;
     /* 0x098 */ Mtx mtx;
-    /* 0x0D8 */ Vec3s* vertexArray;
+    /* 0x0D8 */ void* baseAddr;
     /* 0x0DC */ s16* animationBuffer;
     /* 0x0E0 */ StaticAnimatorNode* staticNodes[0x7A];
     /* 0x2C8 */ StaticAnimatorNode** staticRoot;
@@ -1384,11 +1252,11 @@ typedef struct MessageCharset {
 } MessageCharset; // size = 0xA;
 
 typedef struct MesasgeFontGlyphData {
-    /* 0x0 */ s8* raster;
-    /* 0x4 */ s16* palette;
-    /* 0x8 */ Vec2b texSize;
-    /* 0xA */ s8 charWidth;
-    /* 0xB */ s8 charHeight;
+    /* 0x0 */ IMG_PTR raster;
+    /* 0x4 */ PAL_PTR palette;
+    /* 0x8 */ Vec2bu texSize;
+    /* 0xA */ u8 charWidth;
+    /* 0xB */ u8 charHeight;
 } MesasgeFontGlyphData; // size = 0xC
 
 typedef struct MessageImageData {
@@ -1433,7 +1301,7 @@ typedef struct ShopItemLocation {
 typedef struct ShopItemData {
     /* 0x0 */ u32 itemID;
     /* 0x4 */ s32 price;
-    /* 0x8 */ s32 unk_08;
+    /* 0x8 */ s32 descMsg;
 } ShopItemData; // size = 0xC
 
 typedef struct ShopSellPriceData {
@@ -2398,14 +2266,14 @@ typedef struct PopupMessage {
     /* 0x18 */ Message* message;
 } PopupMessage; // size = 0x1C
 
-typedef struct Struct8015A578 {
-    /* 0x00 */ u8 unk_00;
-    /* 0x01 */ u8 unk_01;
-    /* 0x02 */ u8 unk_02;
-    /* 0x03 */ u8 unk_03[5];
-    /* 0x08 */ f32 unk_08;
+typedef struct HiddenPanelsData {
+    /* 0x00 */ s8 tryFlipTrigger;
+    /* 0x01 */ u8 panelsCount;
+    /* 0x02 */ s8 activateISpy;
+    /* 0x03 */ char unk_03[0x5];
+    /* 0x08 */ f32 flipTriggerPosY;
     /* 0x0C */ char unk_0C[0x4];
-} Struct8015A578; // size = 0x10
+} HiddenPanelsData; // size = 0x10
 
 typedef struct SpriteShadingLightSource {
     /* 0x00 */ s8 flags;
@@ -2447,8 +2315,8 @@ typedef struct UnkStruct0 {
 } UnkStruct0;
 
 typedef struct FoldImageRecPart {
-    /* 0x00 */ s8* raster;
-    /* 0x04 */ s8* palette;
+    /* 0x00 */ IMG_PTR raster;
+    /* 0x04 */ PAL_PTR palette;
     /* 0x08 */ u16 width;
     /* 0x0A */ u16 height;
     /* 0x0C */ s16 xOffset;
@@ -2472,5 +2340,109 @@ typedef struct FoldImageRec {
     /* 0x20 */ char unk_20[0x4];
     /* 0x24 */ u8 alphaMultiplier;
 } FoldImageRec; // size = 0x25
+
+typedef struct SongUpdateEvent {
+    /* 0x00 */ s32 songName;
+    /* 0x04 */ s32 duration;
+    /* 0x08 */ s32 startVolume;
+    /* 0x0C */ s32 finalVolume;
+    /* 0x10 */ s32 variation;
+    /* 0x14 */ s32 unk14;
+    /* 0x18 */ s32 unk18;
+    /* 0x1C */ s32 unk1C; // may be fake
+} SongUpdateEvent; // size = 0x1C or 0x20
+
+// unfortunately, cant use bitfield for this
+// format: ABCC00DD
+// A = playerID
+// B = trackIndex
+// C = musicEventID
+// D = scriptSelector
+typedef u32 MusicEventTrigger;
+
+// allows Evt scripts to be triggered by BGM commands
+typedef struct MusicEvent {
+    s32 musicEventID; // user-defined, events will respond to BGM Trigger commands with matching ID
+    EvtScript* scripts[4];
+} MusicEvent;
+
+typedef struct ParadeNpcInfo {
+    /* 0x00 */ u32 initialAnim;
+    /* 0x04 */ u32** animList;
+    /* 0x08 */ Vec3f pos;
+    /* 0x14 */ f32 yaw;
+} ParadeNpcInfo; // size = 0x18
+
+typedef struct CreditsEntry {
+    /* 0x00 */ s32 msgID;
+    /* 0x04 */ s32 posX;
+    /* 0x08 */ s32 posY;
+    /* 0x0C */ s32 palette;
+    /* 0x10 */ s32 appearMode;
+    /* 0x14 */ s32 appearTime;
+    /* 0x18 */ s32 perCharDelayIn;
+    /* 0x1C */ s32 holdMode;
+    /* 0x20 */ s32 holdTime;
+    /* 0x24 */ s32 vanishMode;
+    /* 0x28 */ s32 vanishTime;
+    /* 0x2C */ s32 perCharDelayOut;
+    /* 0x30 */ s32 next;
+    /* 0x34 */ s16 flags;
+    /* 0x36 */ char pad_36[2];
+} CreditsEntry; // size = 0x38
+
+typedef struct CreditsLine {
+    /* 0x00 */ u8* message;
+    /* 0x04 */ s32 unk__04;
+    /* 0x08 */ s32 time;
+    /* 0x0C */ s32 state;
+    /* 0x10 */ s32 palette;
+    /* 0x14 */ s32 msgWidth;
+    /* 0x18 */ s32 appearMode;
+    /* 0x1C */ s32 appearTime;
+    /* 0x20 */ s32 perCharDelayIn;
+    /* 0x24 */ s32 unk__24;
+    /* 0x28 */ s32 unk__28;
+    /* 0x2C */ s32 unk__2C;
+    /* 0x30 */ s32 unk__30;
+    /* 0x34 */ s32 holdMode;
+    /* 0x38 */ s32 holdTime;
+    /* 0x3C */ s32 unk__3C;
+    /* 0x40 */ s32 unk__40;
+    /* 0x44 */ s32 unk__44;
+    /* 0x48 */ s32 unk__48;
+    /* 0x4C */ s32 vanishMode;
+    /* 0x50 */ s32 vanishTime;
+    /* 0x54 */ s32 perCharDelayOut;
+    /* 0x58 */ s32 unk__58;
+    /* 0x5C */ s32 unk__5C;
+    /* 0x60 */ s32 unk__60;
+    /* 0x64 */ s32 unk__64;
+    /* 0x68 */ s32 posX;
+    /* 0x6C */ s32 posY;
+    /* 0x70 */ s16 flags;
+    /* 0x72 */ char unk_72[2];
+} CreditsLine; // size = 0x74
+
+typedef struct CreditsChar {
+    /* 0x00 */ s32 charIndex;
+    /* 0x04 */ s32 font;
+    /* 0x08 */ s32 variation;
+    /* 0x0C */ s32 palette;
+    /* 0x10 */ s32 posX;
+    /* 0x14 */ s32 posY;
+    /* 0x18 */ s32 fadeInTime;
+} CreditsChar; // size = unk
+
+typedef struct CreditsData {
+    /* 0x00 */ u32 workerID;
+    /* 0x04 */ CreditsLine lines[32];
+} CreditsData; // size = 0x74
+
+typedef struct CreditsUnkBeta {
+    /* 0x00 */ u8 unk_00;
+    /* 0x01 */ u8 unk_01;
+    /* 0x02 */ s16 size;
+} CreditsUnkBeta; // size = 0x4
 
 #endif

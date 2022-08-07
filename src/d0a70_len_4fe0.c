@@ -397,7 +397,7 @@ void fold_init_state(FoldState* state) {
     }
 }
 
-void fold_update(u32 idx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+void fold_update(u32 idx, FoldType arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
     FoldState* state = &(*D_80156954)[idx];
     s32 oldFlags;
     s32 t1;

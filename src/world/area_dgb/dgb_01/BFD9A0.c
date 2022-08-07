@@ -3,6 +3,7 @@
 #include "sprite/npc/world_tubba.h"
 #include "message_ids.h"
 #include "effects.h"
+#include "entity.h"
 #include "world/partners.h"
 
 EntryList N(entryList) = {
@@ -470,7 +471,7 @@ EvtScript N(80244C38) = {
 
 EvtScript N(makeEntities) = {
     EVT_IF_EQ(EVT_SAVE_FLAG(1040), 0)
-        EVT_CALL(MakeEntity, 0x802BCD68, 490, 8, 0, -80, MAKE_ENTITY_END)
+        EVT_CALL(MakeEntity, EVT_PTR(Entity_Padlock), 490, 8, 0, -80, MAKE_ENTITY_END)
         EVT_CALL(AssignScript, EVT_PTR(N(80244C38)))
         EVT_SET(EVT_MAP_VAR(0), EVT_VAR(0))
     EVT_END_IF

@@ -221,7 +221,7 @@ void func_800E24F8(void) {
                 break;
         }
     } else {
-        switch(gPlayerStatus.actionState) {
+        switch (gPlayerStatus.actionState) {
             case ACTION_STATE_WALK:
             case ACTION_STATE_RUN:
             case ACTION_STATE_JUMP:

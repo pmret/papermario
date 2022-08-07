@@ -78,8 +78,8 @@ EvtScript BtlBringPartnerOut = {
 };
 
 
-extern s32 D_8029DA30;
-extern s32 D_8029DA34;
+extern s32 bSavedPartner;
+extern s32 bSavedOverrideFlags;
 extern s32 D_8029DA40;
 extern s32 D_8029DA44;
 extern s32 D_8029DA48;
@@ -157,7 +157,7 @@ void initialize_battle(void) {
     gBattleStatus.flags1 = 0;
     gBattleStatus.flags2 = 0;
     gBattleStatus.flags1 = 0;
-    D_8029DA34 = gOverrideFlags;
+    bSavedOverrideFlags = gOverrideFlags;
     gOverrideFlags &= ~GLOBAL_OVERRIDES_80;
     gBattleStatus.inputBitmask = -1;
     gOverrideFlags &= ~GLOBAL_OVERRIDES_80;
@@ -225,7 +225,7 @@ void initialize_battle(void) {
         playerData->battlesCount++;
     }
 
-    D_8029DA30 = playerData->currentPartner;
+    bSavedPartner = playerData->currentPartner;
     if (gBattleStatus.flags2 & BS_FLAGS2_40) {
         playerData->currentPartner = PARTNER_TWINK;
     }
@@ -964,14 +964,14 @@ void btl_restore_world_cameras(void) {
     playerStatus->position.y = D_8029EFB4;
     playerStatus->position.z = D_8029EFB8;
 
-    if (D_8029DA34 & 0x80) {
+    if (bSavedOverrideFlags & GLOBAL_OVERRIDES_80) {
         gOverrideFlags |= GLOBAL_OVERRIDES_80;
     } else {
         gOverrideFlags &= ~GLOBAL_OVERRIDES_80;
     }
 
     if (gBattleStatus.flags2 & 0x40) {
-        playerData->currentPartner = D_8029DA30;
+        playerData->currentPartner = bSavedPartner;
     }
 }
 

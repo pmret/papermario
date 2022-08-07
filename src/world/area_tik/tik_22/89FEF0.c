@@ -4,10 +4,10 @@
 
 #include "world/common/atomic/Pipe.inc.c"
 
-s32 func_8014AB60(s32, s16);
+s32 bgm_clear_track_volumes(s32, s16);
 
 ApiStatus func_8024061C_8A04DC(Evt* script, s32 isInitialCall) {
-    func_8014AB60(0, 2);
+    bgm_clear_track_volumes(0, 2);
     return ApiStatus_DONE2;
 }
 

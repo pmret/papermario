@@ -1,5 +1,6 @@
 #include "flo_16.h"
 #include "message_ids.h"
+#include "entity.h"
 
 EntryList N(entryList) = {
     { -720.0f,   0.0f, 0.0f,  90.0f },
@@ -287,9 +288,9 @@ EvtScript N(80243E80) = {
 EvtScript N(makeEntities) = {
     EVT_SET(EVT_AREA_FLAG(39), 0)
     EVT_BIND_TRIGGER(N(80243E80), TRIGGER_FLOOR_TOUCH, 20, 1, 0)
-    EVT_CALL(MakeEntity, 0x802EA910, 350, 240, -100, 0, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, EVT_PTR(Entity_SuperBlock), 350, 240, -100, 0, MAKE_ENTITY_END)
     EVT_SETUP_SUPER_BLOCK(SUPER_BLOCK_MAPVAR, SUPER_BLOCK_GAMEFLAG)
-    EVT_CALL(MakeEntity, EVT_PTR(Entity_D_802EAA30), 472, 100, -100, 0, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, EVT_PTR(Entity_ScriptSpring), 472, 100, -100, 0, MAKE_ENTITY_END)
     EVT_CALL(AssignScript, EVT_PTR(N(80243DB0)))
     EVT_RETURN
     EVT_END

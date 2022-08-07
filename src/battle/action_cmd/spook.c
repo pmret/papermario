@@ -1,5 +1,6 @@
 #include "common.h"
 #include "hud_element.h"
+#include "audio/public.h"
 
 #define NAMESPACE action_command_spook
 

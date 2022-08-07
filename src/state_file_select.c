@@ -284,7 +284,7 @@ void state_step_exit_language_select(void) {
                     init_item_entity_list();
                     init_script_list();
                     init_npc_list();
-                    func_80110E58();
+                    init_entity_data();
                     init_trigger_list();
                     mapShape = load_asset_by_name(&wMapShapeName, &mapShapeSize);
                     decode_yay0(mapShape, &D_80210000);

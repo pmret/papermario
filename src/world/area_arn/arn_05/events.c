@@ -1,4 +1,5 @@
 #include "arn_05.h"
+#include "entity.h"
 #include "sprite/npc/boo.h"
 #include "sprite/npc/world_bow.h"
 #include "sprite/npc/world_tubba.h"

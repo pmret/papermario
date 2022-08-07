@@ -530,7 +530,7 @@ void show_coin_counter(void) {
     }
 
     if (uiStatus->unk_6C[0] == 0) {
-        set_window_properties(0x14, 32, 164, 64, 20, 0x15, coin_counter_draw_content, 0, -1);
+        set_window_properties(WINDOW_ID_20, 32, 164, 64, 20, 0x15, coin_counter_draw_content, 0, -1);
         set_window_update(WINDOW_ID_20, (s32)basic_window_update);
         index = hud_element_create(&HES_MenuTimes);
         uiStatus->iconIndex10 = index;

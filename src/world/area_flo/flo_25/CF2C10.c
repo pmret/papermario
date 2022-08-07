@@ -1,5 +1,6 @@
 #include "flo_25.h"
 #include "message_ids.h"
+#include "entity.h"
 #include "sprite/npc/bzzap.h"
 #include "sprite/npc/gate_flower.h"
 #include "sprite/npc/tuff_puff.h"
@@ -503,7 +504,7 @@ static s32 N(pad_3C8C) = {
 };
 
 EvtScript N(makeEntities) = {
-    EVT_CALL(MakeEntity, 0x802EAB04, -390, 0, 0, 0, 8, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, &Entity_HiddenPanel, -390, 0, 0, 0, 8, MAKE_ENTITY_END)
     EVT_CALL(AssignPanelFlag, EVT_SAVE_FLAG(1407))
     EVT_RETURN
     EVT_END

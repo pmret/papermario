@@ -29,7 +29,18 @@ enum {
 };
 
 #define _AS_ROUND(x) ((int) (x < 0 ? x - 0.5 : x + 0.5))
-
 #define AS_F(x) (_AS_ROUND((x) * 32767.0 / 180.0))
 
+#define as_End AS_END,
+#define as_Wait(time) AS_WAIT, time,
+#define as_EndLoop AS_END_LOOP,
+#define as_Restart AS_END_LOOP,
+#define as_Loop AS_LOOP,
+#define as_SetRotation(node, x, y, z) AS_SET_ROTATION, node, AS_F(x), AS_F(y), AS_F(z),
+#define as_SetPos(node, x, y, z) AS_SET_POS, node, x, y, z,
+#define as_SetScale(node, x, y, z) AS_SET_SCALE, node, AS_F(x), AS_F(y), AS_F(z),
+#define as_DisableMirroring AS_OP_19,
+
+// used in entity models
+#define ANIM_NULL (void*)(0xFFFFFFFF)
 #endif

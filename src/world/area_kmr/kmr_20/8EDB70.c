@@ -10,6 +10,12 @@ INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8EDB70", func_80242084_8EDEA4);
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8EDB70", func_802420EC_8EDF0C);
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8EDB70", func_80242144_8EDF64);
+ApiStatus func_80242144_8EDF64(Evt* script, s32 isInitialCall) {
+    au_ambience_set_volume(0, 1000, 0x3F);
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8EDB70", func_8024216C_8EDF8C);
+ApiStatus func_8024216C_8EDF8C(Evt* script, s32 isInitialCall) {
+    au_ambience_set_volume(0, 1000, 0x7F);
+    return ApiStatus_DONE2;
+}

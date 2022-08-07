@@ -1,4 +1,5 @@
 #include "dgb_00.h"
+#include "entity.h"
 #include "sprite/npc/boo.h"
 #include "sprite/npc/sentinel.h"
 #include "sprite/npc/world_bombette.h"
@@ -6,6 +7,7 @@
 #include "sprite/npc/world_goombario.h"
 #include "sprite/npc/world_kooper.h"
 #include "sprite/npc/world_parakarry.h"
+
 
 enum {
     NPC_BOO0,

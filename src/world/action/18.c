@@ -2,25 +2,25 @@
 #include "world/actions.h"
 
 s32 State18PeachAnims[] = {
-    0x000A0002,	// none
-    0x000A002B,	// cream
-    0x000A002D,	// strawberry
-    0x000A002F,	// butter
-    0x000A0031,	// cleanser
-    0x000A0033,	// water
-    0x000A0035,	// milk
-    0x000A0037,	// flour
-    0x000A0039,	// egg
-    0x000A003B,	// complete cake
-    0x000A003D,	// cake bowl
-    0x000A003F,	// cake mixed
-    0x000A0041,	// cake pan
-    0x000A0043,	// cake batter
-    0x000A0045,	// cake bare
-    0x000A0047,	// salt
-    0x000A0049,	// sugar
-    0x000A004B,	// cake with icing
-    0x000A004D,	// cake with berries
+    0x000A0002, // none
+    0x000A002B, // cream
+    0x000A002D, // strawberry
+    0x000A002F, // butter
+    0x000A0031, // cleanser
+    0x000A0033, // water
+    0x000A0035, // milk
+    0x000A0037, // flour
+    0x000A0039, // egg
+    0x000A003B, // complete cake
+    0x000A003D, // cake bowl
+    0x000A003F, // cake mixed
+    0x000A0041, // cake pan
+    0x000A0043, // cake batter
+    0x000A0045, // cake bare
+    0x000A0047, // salt
+    0x000A0049, // sugar
+    0x000A004B, // cake with icing
+    0x000A004D, // cake with berries
     0x00000000
 };
 

@@ -1,7 +1,7 @@
 #include "common.h"
 #include "filemenu.h"
 #include "hud_element.h"
-#include "audio.h"
+#include "audio/public.h"
 #include "fio.h"
 
 extern HudScript* filemenu_hudElemScripts[14];

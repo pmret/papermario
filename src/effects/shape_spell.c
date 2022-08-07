@@ -124,12 +124,12 @@ void shape_spell_render(EffectInstance* effect) {
     renderTask.renderMode = RENDER_MODE_2D;
 
     retTask = shim_queue_render_task(&renderTask);
-    retTask->renderMode |= RENDER_MODE_2;
+    retTask->renderMode |= RENDER_TASK_FLAG_2;
 }
 
 s32 func_E0024324(s32 arg0, s32 arg1) {
     s32 frameCounter = gGameStatusPtr->frameCounter * 32;
-    
+
     return (f32)((shim_sin_deg(frameCounter + arg1) * (255 - arg0) + (255 - arg0)) * 0.5 + arg0);
 }
 

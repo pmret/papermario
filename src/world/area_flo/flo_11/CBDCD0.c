@@ -1,6 +1,7 @@
 #include "flo_11.h"
 #include "message_ids.h"
 #include "sprite/npc/lakitu.h"
+#include "entity.h"
 
 enum {
     NPC_LAKITU0,
@@ -644,7 +645,7 @@ static s32 N(pad_30EC) = {
 };
 
 EvtScript N(makeEntities) = {
-    EVT_CALL(MakeEntity, EVT_PTR(Entity_D_802EA0E8), -220, 60, -75, 0, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, EVT_PTR(Entity_MulticoinBlock), -220, 60, -75, 0, MAKE_ENTITY_END)
     EVT_CALL(AssignBlockFlag, EVT_SAVE_FLAG(1384))
     EVT_RETURN
     EVT_END

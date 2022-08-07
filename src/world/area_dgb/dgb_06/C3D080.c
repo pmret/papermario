@@ -1,4 +1,5 @@
 #include "dgb_06.h"
+#include "entity.h"
 #include "sprite/npc/boo.h"
 #include "message_ids.h"
 
@@ -90,7 +91,7 @@ EvtScript N(main) = {
 #include "world/common/atomic/Chest.inc.c"
 
 EvtScript N(makeEntities) = {
-    EVT_CALL(MakeEntity, 0x802EAE30, -300, 50, -200, 0, 0, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, &Entity_Chest, -300, 50, -200, 0, 0, MAKE_ENTITY_END)
     EVT_CALL(AssignChestFlag, EVT_SAVE_FLAG(CHEST_FLAG))
     EVT_CALL(AssignScript, EVT_PTR(N(EVS_Chest_Interact)))
     EVT_CALL(MakeEntity, EVT_PTR(Entity_HeartBlock), -125, 60, 175, 0, MAKE_ENTITY_END)

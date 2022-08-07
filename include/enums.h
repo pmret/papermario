@@ -536,6 +536,8 @@ enum SoundIDs {
     SOUND_HIT_FIRE                  = 0x000000EA,
     SOUND_HIT_ICE                   = 0x000000EB,
     SOUND_F1                        = 0x000000F1,
+    SOUND_F3                        = 0x000000F3,
+    SOUND_F4                        = 0x000000F4,
     SOUND_FD                        = 0x000000FD,
     SOUND_FE                        = 0x000000FE,
     SOUND_108                       = 0x00000108,
@@ -558,6 +560,7 @@ enum SoundIDs {
     SOUND_14F                       = 0x0000014F,
     SOUND_150                       = 0x00000150,
     SOUND_151                       = 0x00000151,
+    SOUND_152                       = 0x00000152,
     SOUND_SEARCH_BUSH               = 0x00000153,
     SOUND_158                       = 0x00000158,
     SOUND_162                       = 0x00000162,
@@ -586,6 +589,7 @@ enum SoundIDs {
     SOUND_METAL_GATE_CLOSE          = 0x000001CA,
     SOUND_1CB                       = 0x000001CB,
     SOUND_1CC                       = 0x000001CC,
+    SOUND_CREAKY_ROCKING_CHAIR      = 0x000001D6,
     SOUND_1E2                       = 0x000001E2,
     SOUND_211                       = 0x00000211,
     SOUND_213                       = 0x00000213,
@@ -603,6 +607,8 @@ enum SoundIDs {
     SOUND_25C                       = 0x0000025C,
     SOUND_25D                       = 0x0000025D,
     SOUND_262                       = 0x00000262,
+    SOUND_269                       = 0x00000269,
+    SOUND_26A                       = 0x0000026A,
     SOUND_281                       = 0x00000281,
     SOUND_282                       = 0x00000282,
     SOUND_283                       = 0x00000283,
@@ -650,6 +656,7 @@ enum SoundIDs {
     SOUND_32E                       = 0x0000032E,
     SOUND_32F                       = 0x0000032F,
     SOUND_349                       = 0x00000349,
+    SOUND_34A                       = 0x0000034A,
     SOUND_34E                       = 0x0000034E,
     SOUND_359                       = 0x00000359,
     SOUND_35D                       = 0x0000035D,
@@ -673,6 +680,7 @@ enum SoundIDs {
     SOUND_HIT_PLAYER_SHOCK          = 0x0000037A,
     SOUND_HIT_SHOCK                 = 0x0000037B,
     SOUND_392                       = 0x00000392,
+    SOUND_393                       = 0x00000393,
     SOUND_GENERAL_WHISTLE           = 0x00000395,
     SOUND_3AB                       = 0x000003AB,
     SOUND_3AD                       = 0x000003AD,
@@ -745,14 +753,19 @@ enum SoundIDs {
     SOUND_BOMB_BLAST                = 0x00002076,
     SOUND_JUMP_2081                 = 0x00002081,
     SOUND_JUMP_8BIT_MARIO           = 0x00002082,
+    SOUND_2085                      = 0x00002085,
     SOUND_2086                      = 0x00002086,
     SOUND_208C                      = 0x0000208C,
     SOUND_208D                      = 0x0000208D,
     SOUND_208E                      = 0x0000208E,
     SOUND_208F                      = 0x0000208F,
+    SOUND_2092                      = 0x00002092,
     SOUND_2095                      = 0x00002095,
+    SOUND_209B                      = 0x0000209B,
     SOUND_20A3                      = 0x000020A3,
     SOUND_20A4                      = 0x000020A4,
+    SOUND_20AB                      = 0x000020AB,
+    SOUND_20AC                      = 0x000020AC,
     SOUND_20AE                      = 0x000020AE,
     SOUND_20B8                      = 0x000020B8,
     SOUND_20BA                      = 0x000020BA,
@@ -799,6 +812,68 @@ enum SoundIDs {
     SOUND_B0000018                  = 0xB0000018,
     SOUND_B000001E                  = 0xB000001E,
 };
+
+enum SoundInstanceFlags {
+    SOUND_INSTANCE_FLAG_4           = 0x00000004,
+};
+
+enum SoundType {
+    SOUND_TYPE_SPECIAL              = 0x80000000,
+    SOUND_TYPE_LOOPING              = 0,
+    SOUND_TYPE_DOOR1                = 1,
+    SOUND_TYPE_DOOR2                = 2,
+    SOUND_TYPE_ALTERNATING          = 3
+};
+
+enum SoundIDBits {
+    SOUND_ID_10000                  = 0x00010000,
+    SOUND_ID_LOWER                  = 0x000023FF,
+    SOUND_ID_MID                    = 0x00000C00,
+};
+
+typedef enum AuResult {
+    AU_RESULT_OK                        = 0,
+    AU_ERROR_1                          = 1,
+    AU_AMBIENCE_ERROR_1                 = 1,
+    AU_ERROR_SONG_NOT_PLAYING           = 2, // player not found for songName
+    AU_AMBIENCE_ERROR_2                 = 2,
+    AU_ERROR_NULL_SONG_NAME             = 3, // songName is NULL
+    AU_AMBIENCE_ERROR_3                 = 3,
+    AU_ERROR_INVALID_SONG_DURATION      = 4, // duration out of bounds: (250,10000)
+    AU_ERROR_6                          = 6,
+    AU_ERROR_7                          = 7,
+    AU_ERROR_11                         = 11,
+    AU_ERROR_SBN_INDEX_OUT_OF_RANGE     = 101,
+    AU_ERROR_SBN_FORMAT_MISMATCH        = 102,
+    AU_ERROR_151                        = 151,
+    AU_ERROR_201                        = 201
+} AuResult;
+
+typedef enum AuFileFormat {
+    AU_FMT_BGM              = 0x10,
+    AU_FMT_SEF              = 0x20,
+    AU_FMT_BK               = 0x30,
+    AU_FMT_PER              = 0x40,
+    AU_FMT_PRG              = 0x40,
+    AU_FMT_MSEQ             = 0x40
+} AuFileFormat;
+
+enum {
+    MUSIC_PROXIMITY_FAR,
+    MUSIC_PROXIMITY_NEAR,
+    MUSIC_PROXIMITY_FULL
+};
+
+typedef enum MusicTrackVols {
+    TRACK_VOLS_0            = 0,
+    TRACK_VOLS_1            = 1,
+    TRACK_VOLS_2            = 2,
+    TRACK_VOLS_3            = 3,
+    TRACK_VOLS_KPA_OUTSIDE  = 4,
+    TRACK_VOLS_KPA_1        = 5,
+    TRACK_VOLS_KPA_2        = 6,
+    TRACK_VOLS_KPA_3        = 7
+} MusicTrackVols;
 
 enum Cams {
     CAM_DEFAULT      = 0,
@@ -1327,7 +1402,10 @@ enum AmbientSounds {
     AMBIENT_UNDER_SEA6         = 11,
     AMBIENT_BIRDS              = 12,
     AMBIENT_SEA                = 13,
-    AMBIENT_MUSIC              = 16,
+    AMBIENT_RADIO              = 16, // radio songs for nok
+    // the following 4 IDs are reserved for additional radio songs,
+    // and no more are expected to follow after that
+    // see: func_80053F80
 };
 
 enum EncounterOutcomes {
@@ -1802,11 +1880,11 @@ enum EntityFlags {
     ENTITY_FLAGS_HAS_DYNAMIC_SHADOW                           = 0x00000004,
     ENTITY_FLAGS_HAS_ANIMATED_MODEL                           = 0x00000008,
     ENTITY_FLAGS_SKIP_UPDATE_TRANSFORM_MATRIX                 = 0x00000010,
-    ENTITY_FLAGS_SKIP_UPDATE_INVERSE_ROTATION_MATRIX          = 0x00000020,
+    ENTITY_FLAGS_DISABLE_COLLISION                            = 0x00000020,
     ENTITY_FLAGS_CONTINUOUS_COLLISION                         = 0x00000040,
     ENTITY_FLAGS_80                                           = 0x00000080,
-    ENTITY_FLAGS_100                                          = 0x00000100,
-    ENTITY_FLAGS_SET_SHADOW_FLAG200                           = 0x00000200,
+    ENTITY_FLAGS_HAS_SHADOW                                   = 0x00000100,
+    ENTITY_FLAGS_FIXED_SHADOW_SIZE                            = 0x00000200,
     ENTITY_FLAGS_400                                          = 0x00000400,
     ENTITY_FLAGS_SQUARE_SHADOW                                = 0x00000800,
     ENTITY_FLAGS_SHOWS_INSPECT_PROMPT                         = 0x00001000,
@@ -1814,18 +1892,18 @@ enum EntityFlags {
     ENTITY_FLAGS_4000                                         = 0x00004000,
     ENTITY_FLAGS_8000                                         = 0x00008000,
     ENTITY_FLAGS_DETECTED_COLLISION                           = 0x00010000,
-    ENTITY_FLAGS_BLOCK_BEING_HIT                              = 0x00020000,
+    ENTITY_FLAGS_PARTNER_COLLISION                            = 0x00020000,
     ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE2                     = 0x00040000,
     ENTITY_FLAGS_IGNORE_DISTANCE_CULLING                      = 0x00080000,
     ENTITY_FLAGS_100000                                       = 0x00100000,
     ENTITY_FLAGS_200000                                       = 0x00200000,
-    ENTITY_FLAGS_400000                                       = 0x00400000,
-    ENTITY_FLAGS_800000                                       = 0x00800000,
+    ENTITY_FLAGS_SHADOW_POS_DIRTY                             = 0x00400000,
+    ENTITY_FLAGS_DARK_SHADOW                                  = 0x00800000,
     ENTITY_FLAGS_BOUND_SCRIPT_DIRTY                           = 0x01000000,
     ENTITY_FLAGS_2000000                                      = 0x02000000,
     ENTITY_FLAGS_PENDING_FULL_DELETE                          = 0x04000000,
     ENTITY_FLAGS_8000000                                      = 0x08000000,
-    ENTITY_FLAGS_10000000                                     = 0x10000000,
+    ENTITY_FLAGS_FADING_AWAY                                  = 0x10000000,
     ENTITY_FLAGS_PENDING_INSTANCE_DELETE                      = 0x20000000,
     ENTITY_FLAGS_SKIP_UPDATE                                  = 0x40000000,
     ENTITY_FLAGS_CREATED                                      = 0x80000000,
@@ -1839,7 +1917,7 @@ enum EntityCollisionFlags {
     ENTITY_COLLISION_PLAYER_PUSHING_AGAINST                 = 0x00000010,
     ENTITY_COLLISION_FLAGS_20                               = 0x00000020,
     ENTITY_COLLISION_PLAYER_HAMMER                          = 0x00000040,
-    ENTITY_COLLISION_BLOCK_HIT                              = 0x00000080,
+    ENTITY_COLLISION_PARTNER                                = 0x00000080,
     ENTITY_COLLISION_PLAYER_LAST_FLOOR                      = 0x00000100
 };
 
@@ -2208,22 +2286,40 @@ enum RenderMode {
     RENDER_MODE_SURFACE_OPA_NO_AA                = 0x00000003,
     RENDER_MODE_SURFACE_OPA_NO_ZB                = 0x00000004,
     RENDER_MODE_DECAL_OPA                        = 0x00000005,
+    RENDER_MODE_6                                = 0x00000006,
     RENDER_MODE_DECAL_OPA_NO_AA                  = 0x00000007,
+    RENDER_MODE_8                                = 0x00000008,
     RENDER_MODE_INTERSECTING_OPA                 = 0x00000009,
+    RENDER_MODE_A                                = 0x0000000A,
+    RENDER_MODE_B                                = 0x0000000B,
+    RENDER_MODE_C                                = 0x0000000C,
     RENDER_MODE_ALPHATEST                        = 0x0000000D,
+    RENDER_MODE_E                                = 0x0000000E,
     RENDER_MODE_ALPHATEST_ONESIDED               = 0x0000000F,
     RENDER_MODE_ALPHATEST_NO_ZB                  = 0x00000010,
     RENDER_MODE_SURFACE_XLU_LAYER1               = 0x00000011,
+    RENDER_MODE_12                               = 0x00000012,
     RENDER_MODE_SURFACE_XLU_NO_AA                = 0x00000013,
     RENDER_MODE_SURFACE_XLU_NO_ZB                = 0x00000014,
     RENDER_MODE_SURFXLU_ZB_ZUPD                  = 0x00000015,
     RENDER_MODE_SURFACE_XLU_LAYER2               = 0x00000016,
+    RENDER_MODE_17                               = 0x00000017,
+    RENDER_MODE_18                               = 0x00000018,
+    RENDER_MODE_19                               = 0x00000019,
     RENDER_MODE_DECAL_XLU                        = 0x0000001A,
+    RENDER_MODE_1B                               = 0x0000001B,
     RENDER_MODE_DECAL_XLU_NOAA                   = 0x0000001C,
+    RENDER_MODE_1D                               = 0x0000001D,
     RENDER_MODE_1E                               = 0x0000001E,
+    RENDER_MODE_1F                               = 0x0000001F,
     RENDER_MODE_SHADOW                           = 0x00000020,
+    RENDER_MODE_21                               = 0x00000021,
     RENDER_MODE_SURFACE_XLU_LAYER3               = 0x00000022,
+    RENDER_MODE_23                               = 0x00000023,
+    RENDER_MODE_24                               = 0x00000024,
+    RENDER_MODE_25                               = 0x00000025,
     RENDER_MODE_INTERSECTING_XLU                 = 0x00000026,
+    RENDER_MODE_27                               = 0x00000027,
     RENDER_MODE_28                               = 0x00000028,
     RENDER_MODE_SURFXLU_AA_ZB_ZUPD               = 0x00000029,
     RENDER_MODE_2A                               = 0x0000002A,
@@ -2232,6 +2328,13 @@ enum RenderMode {
     RENDER_MODE_2D                               = 0x0000002D,
     RENDER_MODE_CLOUD                            = 0x0000002E,
     RENDER_MODE_CLOUD_NO_ZB                      = 0x0000002F,
+    RENDER_MODE_COUNT                            = 0x00000030,
+};
+
+enum RenderTaskFlags {
+    RENDER_TASK_FLAG_ENABLED    = 0x01,
+    RENDER_TASK_FLAG_2          = 0x02,
+    RENDER_TASK_FLAG_20         = 0x20,
 };
 
 enum ActorFlags {
@@ -3367,41 +3470,6 @@ enum ModelAnimatorFlags {
     MODEL_ANIMATOR_FLAGS_80000000          = 0x80000000,
 };
 
-enum ShadowFlags {
-    SHADOW_FLAGS_HIDDEN            = 0x00000001,
-    SHADOW_FLAGS_2                 = 0x00000002,
-    SHADOW_FLAGS_4                 = 0x00000004,
-    SHADOW_FLAGS_COMPLEX_MODEL     = 0x00000008,
-    SHADOW_FLAGS_10                = 0x00000010,
-    SHADOW_FLAGS_20                = 0x00000020,
-    SHADOW_FLAGS_40                = 0x00000040,
-    SHADOW_FLAGS_80                = 0x00000080,
-    SHADOW_FLAGS_100               = 0x00000100,
-    SHADOW_FLAGS_200               = 0x00000200,
-    SHADOW_FLAGS_400               = 0x00000400,
-    SHADOW_FLAGS_800               = 0x00000800,
-    SHADOW_FLAGS_1000              = 0x00001000,
-    SHADOW_FLAGS_ALIGNED_TO_CAMERA = 0x00002000,
-    SHADOW_FLAGS_4000              = 0x00004000,
-    SHADOW_FLAGS_8000              = 0x00008000,
-    SHADOW_FLAGS_10000             = 0x00010000,
-    SHADOW_FLAGS_20000             = 0x00020000,
-    SHADOW_FLAGS_40000             = 0x00040000,
-    SHADOW_FLAGS_80000             = 0x00080000,
-    SHADOW_FLAGS_100000            = 0x00100000,
-    SHADOW_FLAGS_200000            = 0x00200000,
-    SHADOW_FLAGS_POSITION_DIRTY    = 0x00400000,
-    SHADOW_FLAGS_800000            = 0x00800000,
-    SHADOW_FLAGS_1000000           = 0x01000000,
-    SHADOW_FLAGS_2000000           = 0x02000000,
-    SHADOW_FLAGS_4000000           = 0x04000000,
-    SHADOW_FLAGS_8000000           = 0x08000000,
-    SHADOW_FLAGS_FADING_AWAY       = 0x10000000,
-    SHADOW_FLAGS_READY_TO_DELETE   = 0x20000000,
-    SHADOW_FLAGS_40000000          = 0x40000000,
-    SHADOW_FLAGS_80000000          = 0x80000000,
-};
-
 enum ShopFlags {
     SHOP_FLAGS_0                 = 0x00000000,
     SHOP_FLAGS_1                 = 0x00000001,
@@ -3501,7 +3569,7 @@ enum EntityModelFlags {
     ENTITY_MODEL_FLAGS_40                = 0x00000040,
     ENTITY_MODEL_FLAGS_80                = 0x00000080,
     ENTITY_MODEL_FLAGS_100               = 0x00000100,
-    ENTITY_MODEL_FLAGS_200               = 0x00000200,
+    ENTITY_MODEL_FLAGS_REFLECT           = 0x00000200,
     ENTITY_MODEL_FLAGS_USE_IMAGE         = 0x00000400,
     ENTITY_MODEL_FLAGS_FOG_DISABLED      = 0x00000800,
     ENTITY_MODEL_FLAGS_1000              = 0x00001000,
@@ -3695,9 +3763,24 @@ enum FoldStateFlags {
     FOLD_STATE_FLAG_8000              = 0x00008000,
     FOLD_STATE_FLAG_10000             = 0x00010000,
     FOLD_STATE_FLAG_20000             = 0x00020000,
+    FOLD_STATE_FLAG_40000             = 0x00040000,
     FOLD_STATE_FLAG_80000             = 0x00080000,
     FOLD_STATE_FLAG_100000            = 0x00100000,
 };
+
+typedef enum FoldType {
+    FOLD_TYPE_NONE                    = 0x0,
+    FOLD_TYPE_1                       = 0x1,
+    FOLD_TYPE_2                       = 0x2,
+    FOLD_TYPE_3                       = 0x3,
+    FOLD_TYPE_4                       = 0x4,
+    FOLD_TYPE_5                       = 0x5,
+    FOLD_TYPE_6                       = 0x6,
+    FOLD_TYPE_7                       = 0x7,
+    FOLD_TYPE_8                       = 0x8,
+    FOLD_TYPE_9                       = 0x9,
+    FOLD_TYPE_A                       = 0xA,
+} FoldType;
 
 enum MoveType {
     MOVE_TYPE_NONE          = 0,

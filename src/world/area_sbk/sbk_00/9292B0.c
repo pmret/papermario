@@ -1,5 +1,6 @@
 #include "sbk_00.h"
 #include "sprite/npc/pokey.h"
+#include "entity.h"
 
 #include "world/common/SetNpcB5_3.inc.c"
 
@@ -117,9 +118,9 @@ static s32 N(pad_78C) = {
 };
 
 EvtScript N(makeEntities) = {
-    EVT_CALL(MakeEntity, EVT_PTR(Entity_D_802EA564), -230, 0, 155, 0, 152, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, EVT_PTR(Entity_YellowBlock), -230, 0, 155, 0, 152, MAKE_ENTITY_END)
     EVT_CALL(AssignBlockFlag, EVT_SAVE_FLAG(797))
-    EVT_CALL(MakeEntity, EVT_PTR(Entity_D_802EA564), 160, 0, 205, 0, 343, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, EVT_PTR(Entity_YellowBlock), 160, 0, 205, 0, 343, MAKE_ENTITY_END)
     EVT_CALL(AssignBlockFlag, EVT_SAVE_FLAG(798))
     EVT_RETURN
     EVT_END

@@ -55,7 +55,7 @@ void filemenu_info_handle_input(void) {
 
         filemenu_8024C098 = 0;
 
-        switch(menu->page) {
+        switch (menu->page) {
             case 1:
                 menu->page = 0;
                 set_window_update(WINDOW_ID_51, (s32)filemenu_update_show_options_left);
