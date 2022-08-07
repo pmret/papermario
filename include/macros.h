@@ -13,6 +13,7 @@
 #endif
 
 #define ALIGN16(val) (((val) + 0xF) & ~0xF)
+#define ALIGN8(val) (((val) + 0x7) & ~0x7)
 
 #define A(sym) NS(AREA, sym)
 #define N(sym) NS(NAMESPACE, sym)
