@@ -1987,7 +1987,7 @@ typedef struct SaveData {
 
 typedef struct Path {
     /* 0x00 */ s32 numVectors;
-    /* 0x04 */ f32* unk_04;
+    /* 0x04 */ f32* lengths;
     /* 0x08 */ Vec3f* staticVectorList;
     /* 0x0C */ Vec3f* vectors;
     /* 0x10 */ s32 timeElapsed;

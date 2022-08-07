@@ -218,30 +218,21 @@ typedef struct WalkingDustFXData {
 
 // Used by both flower_splash and flower_trail
 typedef struct FlowerFXData {
-    /* 0x00 */ s32 unk_00;
+    /* 0x00 */ s32 alive;
     /* 0x04 */ u16 unk_04;
-    /* 0x06 */ s16 unk_06;
+    /* 0x06 */ s16 timeLeft;
     /* 0x08 */ u8 primAlpha;
     /* 0x09 */ s8 unk_09;
     /* 0x0A */ char unk_0A[0x2];
-    /* 0x0C */ f32 unk_0C;
-    /* 0x10 */ f32 unk_10;
-    /* 0x14 */ f32 unk_14;
-    /* 0x18 */ f32 unk_18;
-    /* 0x1C */ f32 unk_1C;
-    /* 0x20 */ f32 unk_20;
-    /* 0x24 */ f32 unk_24;
-    /* 0x28 */ f32 unk_28;
-    /* 0x2C */ f32 unk_2C;
-    /* 0x30 */ Mtx unk_30;
-    /* 0x70 */ f32 unk_70;
-    /* 0x74 */ f32 unk_74;
+    /* 0x0C */ Vec3f pos;
+    /* 0x18 */ Vec3f scale;
+    /* 0x24 */ Vec3f rot;
+    /* 0x30 */ Mtx transformMtx;
+    /* 0x70 */ f32 rotVelocity;
+    /* 0x74 */ f32 linVelocity;
     /* 0x78 */ f32 unk_78;
     /* 0x7C */ f32 unk_7C;
-    /* 0x80 */ f32 unk_80;
-    /* 0x84 */ f32 unk_84;
-    /* 0x88 */ f32 unk_88;
-    /* 0x8C */ f32 unk_8C;
+    /* 0x80 */ f32 unk_80[4];
     /* 0x90 */ f32 unk_90;
     /* 0x94 */ f32 unk_94;
 } FlowerFXData; // size = 0x98
@@ -963,7 +954,9 @@ typedef struct StatChangeFXData {
 } StatChangeFXData;
 
 typedef struct SnakingStaticFXData {
-    /* 0x00 */ char todo[0];
+    /* 0x00 */ char unk_00[4];
+    /* 0x04 */ Vec3f pos;
+    /* 0x10 */ char todo[0];
 } SnakingStaticFXData; // size = unknown
 
 typedef struct ThunderboltRingFXData {
