@@ -23,12 +23,12 @@ static f32 func_80059BD4(AuDelay* delay, s32 rsdelta);
  * WARNING: THE FOLLOWING CONSTANT MUST BE KEPT IN SYNC
  * WITH SCALING IN MICROCODE!!!
  */
-#define	SCALE 16384
+#define SCALE 16384
 
 // #define ms *(((s32)((f32)44.1))&~0x7)
 
 s32 SMALL_ROOM_PARAMS[] = {
-    /* sections	   length */
+    /* sections    length */
         3,             11,
     /*                                      chorus  chorus   filter
     input  output  fbcoef  ffcoef   gain     rate   depth     coef  */
@@ -38,7 +38,7 @@ s32 SMALL_ROOM_PARAMS[] = {
 };
 
 s32 BIG_ROOM_PARAMS[] = {
-    /* sections	   length */
+    /* sections    length */
         4,             14,
     /*                                      chorus  chorus   filter
     input  output  fbcoef  ffcoef   gain     rate   depth     coef  */
@@ -50,7 +50,7 @@ s32 BIG_ROOM_PARAMS[] = {
 
 // unused
 s32 D_8007F0C0[] = {
-    /* sections	   length */
+    /* sections    length */
         4,             17,
     /*                                      chorus  chorus   filter
     input  output  fbcoef  ffcoef   gain     rate   depth     coef  */
@@ -61,7 +61,7 @@ s32 D_8007F0C0[] = {
 };
 
 s32 ECHO_PARAMS[] = {
-    /* sections	   length */
+    /* sections    length */
         1,             14,
     /*                                      chorus  chorus   filter
     input  output  fbcoef  ffcoef   gain     rate   depth     coef  */
@@ -69,7 +69,7 @@ s32 ECHO_PARAMS[] = {
 };
 
 s32 CHORUS_PARAMS[] = {
-    /* sections	   length */
+    /* sections    length */
         1,              3,
     /*                                      chorus  chorus   filter
     input  output  fbcoef  ffcoef   gain     rate   depth     coef  */
@@ -77,7 +77,7 @@ s32 CHORUS_PARAMS[] = {
 };
 
 s32 FLANGE_PARAMS[] = {
-    /* sections	   length */
+    /* sections    length */
         1,              3,
     /*                                      chorus  chorus   filter
     input  output  fbcoef  ffcoef   gain     rate   depth     coef  */
@@ -85,7 +85,7 @@ s32 FLANGE_PARAMS[] = {
 };
 
 s32 NULL_PARAMS[] = {
-    /* sections	   length */
+    /* sections    length */
         0,              0,
     /*                                      chorus  chorus   filter
     input  output  fbcoef  ffcoef   gain     rate   depth     coef  */
