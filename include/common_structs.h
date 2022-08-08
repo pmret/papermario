@@ -97,6 +97,13 @@ typedef struct Vec4f {
     /* 0x0C */ f32 yaw;
 } Vec4f; // size = 0x10
 
+typedef struct Color4f {
+    /* 0x00 */ f32 r;
+    /* 0x04 */ f32 g;
+    /* 0x08 */ f32 b;
+    /* 0x0C */ f32 a;
+} Color4f; // size = 0x10
+
 typedef f32 Matrix4f[4][4]; // size = 0x40
 
 typedef struct Matrix4s {
