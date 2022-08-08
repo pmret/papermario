@@ -342,9 +342,7 @@ typedef struct FloatingFlowerFXData {
 } FloatingFlowerFXData; // size = 0x48
 
 typedef struct SnowflakeFXData {
-    /* 0x00 */ f32 xPos;
-    /* 0x04 */ f32 yPos;
-    /* 0x08 */ f32 zPos;
+    /* 0x00 */ Vec3f pos;
     /* 0x0C */ f32 unk_0C;
     /* 0x10 */ f32 unk_10;
     /* 0x14 */ f32 unk_14;
@@ -1465,8 +1463,8 @@ typedef struct WattEffectData {
     /* 0x08 */ s32 angle;
     /* 0x0C */ s32 unk_0C;
     /* 0x10 */ s32 unk_10;
-    /* 0x14 */ struct EffectInstance* effect1;
-    /* 0x18 */ struct EffectInstance* effect2;
+    /* 0x14 */ EffectInstance* effect1;
+    /* 0x18 */ EffectInstance* effect2;
     /* 0x1C */ s32 debuff;
 } WattEffectData;
 
