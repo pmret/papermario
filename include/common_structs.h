@@ -149,6 +149,25 @@ typedef struct BlurBuffer {
     /* 0xA4 */ f32 z[20];
 } BlurBuffer; // size = 0xF4
 
+typedef struct NPCBlurUnk {
+    /* 0x00 */ struct Npc* unk_00;
+    /* 0x04 */ Vec3f offset;
+} NPCBlurUnk; // size = 0x10;
+
+typedef struct StoneChompBlur {
+    /* 0x00 */ s32 unk_00;  // fold component
+    /* 0x04 */ s32 workerID;
+    /* 0x08 */ s32 unk_08;  // sprite index
+    /* 0x0C */ s32 unk_0C;  // raster index
+    /* 0x10 */ Vec3f pos;
+    /* 0x1C */ Vec3f rot;
+    /* 0x28 */ Vec3f scale;
+    /* 0x34 */ f32 unk_34;  // render yaw?
+    /* 0x38 */ s32 unk_38;  // 
+    /* 0x3C */ f32 width;
+    /* 0x40 */ f32 height;
+} StoneChompBlur; // size: unknown
+
 typedef u16 Palette16[16]; // size = 0x20
 
 typedef struct Npc {
@@ -2030,7 +2049,7 @@ typedef struct MenuPanel {
 } MenuPanel; // size = 0x1C
 
 typedef struct WindowBackground {
-    /* 0x00 */ u8* imgData;
+    /* 0x00 */ IMG_PTR imgData;
     /* 0x04 */ s8 packedTileFormat; // upper = fmt, lower = depth; e.g., 31 = CI-8
     /* 0x05 */ s8 width;
     /* 0x06 */ s8 height;
@@ -2039,7 +2058,7 @@ typedef struct WindowBackground {
 } WindowBackground; // size = 0xC
 
 typedef struct WindowCorners {
-    /* 0x00 */ u8* imgData;
+    /* 0x00 */ IMG_PTR imgData;
     /* 0x04 */ s8 packedTileFormat; // upper = fmt, lower = depth; e.g., 31 = CI-8
     /* 0x05 */ Vec2b size1;
     /* 0x07 */ Vec2b size2;
