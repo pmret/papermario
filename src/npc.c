@@ -962,7 +962,7 @@ void enable_npc_blur(Npc* npc) {
         npc->flags |= NPC_FLAG_MOTION_BLUR;
 
         motionBlur = heap_malloc(sizeof(*motionBlur));
-        npc->blur.ring = motionBlur;
+        npc->blur.motion = motionBlur;
         ASSERT(motionBlur != NULL);
         motionBlur->unk_00 = 0;
         motionBlur->index = 0;
@@ -979,13 +979,13 @@ void disable_npc_blur(Npc* npc) {
     if (npc->flags & NPC_FLAG_MOTION_BLUR) {
         npc->flags &= ~NPC_FLAG_MOTION_BLUR;
 
-        heap_free(npc->blur.ring);
-        npc->blur.ring = NULL;
+        heap_free(npc->blur.motion);
+        npc->blur.motion = NULL;
     }
 }
 
 void update_npc_blur(Npc* npc) {
-    NpcMotionBlur* motionBlur = npc->blur.ring;
+    NpcMotionBlur* motionBlur = npc->blur.motion;
     s32 index = motionBlur->index;
 
     motionBlur->x[index] = npc->pos.x;

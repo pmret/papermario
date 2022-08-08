@@ -149,29 +149,15 @@ typedef struct NpcMotionBlur {
     /* 0xA4 */ f32 z[20];
 } NpcMotionBlur; // size = 0xF4
 
-typedef struct NpcSimpleBlur {
-    /* 0x00 */ struct Npc* unk_00;
+typedef struct NpcChompBlur {
+    /* 0x00 */ struct Npc* npc;
     /* 0x04 */ Vec3f offset;
-} NpcSimpleBlur; // size = 0x10;
+} NpcChompBlur; // size = 0x10;
 
 typedef struct NpcQuizmoBlur {
     /* 0x00 */ s32 flags;
     /* 0x04 */ char unk_04[0x4];
 } NpcQuizmoBlur; // size = 0x8;
-
-typedef struct NpcStoneChompBlur {
-    /* 0x00 */ s32 foldComponentID;
-    /* 0x04 */ s32 workerID;
-    /* 0x08 */ s32 spriteIndex;
-    /* 0x0C */ s32 rasterIndex;
-    /* 0x10 */ Vec3f pos;
-    /* 0x1C */ Vec3f rot;
-    /* 0x28 */ Vec3f scale;
-    /* 0x34 */ f32 renderYaw;
-    /* 0x38 */ s32 unk_38;
-    /* 0x3C */ f32 width;
-    /* 0x40 */ f32 height;
-} NpcStoneChompBlur; // size: unknown
 
 typedef u16 Palette16[16]; // size = 0x20
 
@@ -186,8 +172,8 @@ typedef struct Npc {
     /* 0x01C */ f32 jumpVelocity;
     /* 0x020 */ union {
                 void* any;
-                NpcMotionBlur* ring; ///< Null unless flag 0x100000 is set.
-                NpcSimpleBlur* fixed;
+                NpcMotionBlur* motion; ///< Null unless flag 0x100000 is set.
+                NpcChompBlur*  chomp;
                 NpcQuizmoBlur* quizmo;
                 } blur;
     /* 0x024 */ s32 spriteInstanceID;

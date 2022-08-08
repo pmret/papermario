@@ -607,7 +607,7 @@ void spr_get_player_raster_info(SpriteRasterInfo* out, s32 playerSpriteID, s32 r
     }
 }
 
-u16** spr_get_player_palettes(s32 spriteIndex) {
+PAL_PTR* spr_get_player_palettes(s32 spriteIndex) {
     SpriteAnimData* sprites = spr_playerSprites[spriteIndex - 1];
     if (sprites == NULL) {
         return NULL;
