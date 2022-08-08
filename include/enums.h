@@ -3780,7 +3780,7 @@ typedef enum FoldType {
     FOLD_TYPE_5                       = 0x5,
     FOLD_TYPE_6                       = 0x6,
     FOLD_TYPE_7                       = 0x7,
-    FOLD_TYPE_8                       = 0x8,
+    FOLD_TYPE_8                       = 0x8,    // color overlay?
     FOLD_TYPE_9                       = 0x9,
     FOLD_TYPE_A                       = 0xA,
     FOLD_TYPE_B                       = 0xB,
