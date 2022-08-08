@@ -70,7 +70,7 @@ typedef struct PlayerSpriteSet {
 /// Sprite data header.
 typedef struct SpriteAnimData {
     /* 0x00 */ SpriteRasterCacheEntry** rastersOffset;
-    /* 0x04 */ u16** palettesOffset;
+    /* 0x04 */ PAL_PTR* palettesOffset;
     /* 0x08 */ s32 maxComponents;
     /* 0x0C */ s32 colorVariations;
 } SpriteAnimData; // size = 0x10
@@ -104,7 +104,7 @@ void spr_update_player_raster_cache(void);
 
 s32 spr_update_player_sprite(s32 arg0, s32 arg1, f32 arg2);
 
-s32 spr_draw_player_sprite(s32 spriteInstanceID, s32 yaw, s32 arg2, s16** paletteList, Matrix4f mtx);
+s32 spr_draw_player_sprite(s32 spriteInstanceID, s32 yaw, s32 arg2, PAL_PTR* paletteList, Matrix4f mtx);
 
 s32 func_802DDEC4(s32 arg0);
 
@@ -119,11 +119,11 @@ void spr_get_player_raster_info(SpriteRasterInfo* out, s32 playerSpriteID, s32 r
 u16** spr_get_player_palettes(s32 spriteIndex);
 
 /// @param animID - Set MSB for tail allocation (i.e. `0x80XXYYZZ`)
-s32 spr_load_npc_sprite(s32 animID, s32* extraAnimList);
+s32 spr_load_npc_sprite(s32 animID, u32* extraAnimList);
 
 s32 spr_update_sprite(s32 spriteInstanceID, s32 animID, f32 timeScale);
 
-s32 spr_draw_npc_sprite(s32 spriteInstanceID, s32 yaw, s32 arg2, s16** paletteList, Matrix4f mtx);
+s32 spr_draw_npc_sprite(s32 spriteInstanceID, s32 yaw, s32 arg2, PAL_PTR* paletteList, Matrix4f mtx);
 
 s32 func_802DE5C8(s32 arg0);
 

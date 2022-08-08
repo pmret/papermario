@@ -50,7 +50,7 @@ EffectInstance* attack_result_text_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, 
     effect = shim_create_effect_instance(&bp);
     effect->numParts = numParts;
 
-    data = effect->data = shim_general_heap_malloc(effect->numParts * sizeof(*data));
+    data = effect->data.attackResultText = shim_general_heap_malloc(effect->numParts * sizeof(*data));
 
     ASSERT(data != NULL);
 
@@ -89,7 +89,7 @@ void attack_result_text_init(EffectInstance* effect) {
 }
 
 void attack_result_text_update(EffectInstance* effect) {
-    AttackResultTextFXData* data = effect->data;
+    AttackResultTextFXData* data = effect->data.attackResultText;
     s32 unk_00 = data->unk_00;
     s32 old_unk_1C;
     s32 unk_1C;

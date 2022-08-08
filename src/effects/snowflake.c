@@ -27,9 +27,9 @@ void snowflake_main(f32 arg0, f32 arg1, f32 arg2, s32 arg3, s32 arg4) {
 
     effect = shim_create_effect_instance(&bp);
     effect->numParts = 1;
-    part = effect->data = shim_general_heap_malloc(numParts * sizeof(*part));
+    part = effect->data.snowflake = shim_general_heap_malloc(numParts * sizeof(*part));
 
-    ASSERT(effect->data != NULL);
+    ASSERT(effect->data.snowflake != NULL);
 
     part->xPos = arg0;
     part->yPos = arg1;
@@ -58,7 +58,7 @@ void snowflake_init(EffectInstance* effect) {
 }
 
 void snowflake_update(EffectInstance* effect) {
-    SnowflakeFXData* data = effect->data;
+    SnowflakeFXData* data = effect->data.snowflake;
 
     data->unk_28--;
     if (data->unk_28 < 0) {
@@ -83,7 +83,7 @@ void snowflake_update(EffectInstance* effect) {
 
 void snowflake_render(EffectInstance* effect) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    SnowflakeFXData* effect14 = effect->data;
+    SnowflakeFXData* effect14 = effect->data.snowflake;
     RenderTask renderTask;
     RenderTask* renderTaskPtr = &renderTask;
     RenderTask* retTask;
@@ -120,7 +120,7 @@ void snowflake_render(EffectInstance* effect) {
 void snowflake_appendGfx(void* effect) {
     Matrix4f sp18, sp58, sp98, spD8, sp118;
     EffectInstance* effectTemp = effect;
-    SnowflakeFXData* part = effectTemp->data;
+    SnowflakeFXData* part = effectTemp->data.snowflake;
 
     gDPPipeSync(gMasterGfxPos++);
     gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effectTemp->graphics->data));

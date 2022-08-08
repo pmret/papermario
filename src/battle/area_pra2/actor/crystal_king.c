@@ -171,12 +171,12 @@ ApiStatus func_80218280_6609D0(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* effect = (EffectInstance*) evt_get_variable(script, *args);
 
-    ((HuffPuffBreathFXData*)effect->data)->unk_18 = 0xF8;
-    ((HuffPuffBreathFXData*)effect->data)->unk_1C = 0xF8;
-    ((HuffPuffBreathFXData*)effect->data)->unk_20 = 0xFF;
-    ((HuffPuffBreathFXData*)effect->data)->unk_28 = 0x80;
-    ((HuffPuffBreathFXData*)effect->data)->unk_2C = 0xE0;
-    ((HuffPuffBreathFXData*)effect->data)->unk_30 = 0xFF;
+    effect->data.huffPuffBreath->unk_18 = 0xF8;
+    effect->data.huffPuffBreath->unk_1C = 0xF8;
+    effect->data.huffPuffBreath->unk_20 = 0xFF;
+    effect->data.huffPuffBreath->unk_28 = 0x80;
+    effect->data.huffPuffBreath->unk_2C = 0xE0;
+    ((HuffPuffBreathFXData*)effect->data.huffPuffBreath)->unk_30 = 0xFF;
     return ApiStatus_DONE2;
 }
 
@@ -184,12 +184,12 @@ ApiStatus func_802182E4_660A34(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* effect = (EffectInstance*) evt_get_variable(script, *args);
 
-    ((LightningBoltFXData*)effect->data)->unk_30 = 0xFF;
-    ((LightningBoltFXData*)effect->data)->unk_34 = 0xFF;
-    ((LightningBoltFXData*)effect->data)->unk_38 = 0xFF;
-    ((LightningBoltFXData*)effect->data)->unk_40 = 0xC8;
-    ((LightningBoltFXData*)effect->data)->unk_44 = 0xF0;
-    ((LightningBoltFXData*)effect->data)->unk_48 = 0xFF;
+    effect->data.lightningBolt->unk_30 = 0xFF;
+    effect->data.lightningBolt->unk_34 = 0xFF;
+    effect->data.lightningBolt->unk_38 = 0xFF;
+    effect->data.lightningBolt->unk_40 = 0xC8;
+    effect->data.lightningBolt->unk_44 = 0xF0;
+    effect->data.lightningBolt->unk_48 = 0xFF;
     return ApiStatus_DONE2;
 }
 
@@ -197,12 +197,12 @@ ApiStatus func_80218344_660A94(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* effect = (EffectInstance*) evt_get_variable(script, *args++);
 
-    ((ColdBreathFXData*)effect->data)->unk_18 = 0xFF;
-    ((ColdBreathFXData*)effect->data)->unk_1C = 0xFF;
-    ((ColdBreathFXData*)effect->data)->unk_20 = 0xFF;
-    ((ColdBreathFXData*)effect->data)->unk_28 = 0xC8;
-    ((ColdBreathFXData*)effect->data)->unk_2C = 0xF0;
-    ((ColdBreathFXData*)effect->data)->unk_30 = 0xFF;
+    effect->data.coldBreath->unk_18 = 0xFF;
+    effect->data.coldBreath->unk_1C = 0xFF;
+    effect->data.coldBreath->unk_20 = 0xFF;
+    effect->data.coldBreath->unk_28 = 0xC8;
+    effect->data.coldBreath->unk_2C = 0xF0;
+    effect->data.coldBreath->unk_30 = 0xFF;
     return ApiStatus_DONE2;
 }
 

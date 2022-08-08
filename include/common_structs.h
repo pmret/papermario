@@ -17,7 +17,11 @@ typedef void NoArgCallback(void*);
 
 #define MSG_PTR u8*
 #define IMG_PTR u8*
-#define PAL_PTR u16* 
+#define PAL_PTR u16*
+
+#define MSG_BIN u8
+#define IMG_BIN u8
+#define PAL_BIN u16
 
 typedef struct {
     u8 r, g, b, a;
@@ -197,7 +201,7 @@ typedef struct Npc {
     /* 0x0AC */ u8 alpha;
     /* 0x0AD */ u8 alpha2; ///< Multiplied with Npc::alpha
     /* 0x0AE */ char unk_AE[2];
-    /* 0x0B0 */ s32** extraAnimList;
+    /* 0x0B0 */ u32** extraAnimList;
     /* 0x0B4 */ s8 palSwapType; // 0..4 inclusive
     /* 0x0B5 */ s8 palSwapPrevType;
     /* 0x0B6 */ s8 dirtyPalettes;
@@ -208,7 +212,7 @@ typedef struct Npc {
     /* 0x0C0 */ s8 unk_C0;
     /* 0x0C1 */ s8 paletteCount;
     /* 0x0C2 */ char unk_C2[2];
-    /* 0x0C4 */ s32* spritePaletteList;
+    /* 0x0C4 */ PAL_PTR* spritePaletteList;
     /* 0x0C8 */ Palette16 localPaletteData[16];
     /* 0x2C8 */ Palette16* localPalettes[16];
     /* 0x308 */ s16 unk_308;
@@ -461,6 +465,33 @@ typedef struct EntityBlueprint {
     /* 0x21 */ u8 aabbSize[3];
 } EntityBlueprint; // size = 0x24
 
+typedef union {
+    s32* any;
+    struct SaveBlockData* saveBlock;
+    struct SwitchData* swtch;
+    struct ShatteringBlockData* shatteringBlock;
+    struct BlockData* block;
+    struct WoodenCrateData* crate;
+    struct ChestData* chest;
+    struct BlueWarpPipeData* bluePipe;
+    struct HeartBlockContentData* heartBlockContent;
+    struct SuperBlockContentData* superBlockContent;
+    struct SimpleSpringData* simpleSpring;
+    struct HiddenPanelData* hiddenPanel;
+    struct SignpostData* signPost;
+    struct PadlockData* padlock;
+    struct BoardedFloorData* boardedFloor;
+    struct BombableRockData* bombableRock;
+    struct TweesterData* tweester;
+    struct StarBoxLauncherData* starBoxLauncher;
+    struct CymbalPlantData* cymbalPlant;
+    struct PinkFlowerData* pinkFlower;
+    struct SpinningFlowerData* spinningFlower;
+    struct TrumpetPlantData* trumpetPlant;
+    struct MunchlesiaData* munchlesia;
+    struct ArrowSignData* arrowSign;    
+} EntityData;
+
 typedef struct Entity {
     /* 0x00 */ s32 flags;
     /* 0x04 */ u8 listIndex;
@@ -483,32 +514,7 @@ typedef struct Entity {
     /* 0x2C */ s32* savedReadPos[3];
     /* 0x38 */ EntityBlueprint* blueprint;
     /* 0x3C */ void (*renderSetupFunc)(s32);
-    /* 0x40 */ union {
-        s32* any;
-        struct SaveBlockData* saveBlock;
-        struct SwitchData* swtch;
-        struct ShatteringBlockData* shatteringBlock;
-        struct BlockData* block;
-        struct WoodenCrateData* crate;
-        struct ChestData* chest;
-        struct BlueWarpPipeData* bluePipe;
-        struct HeartBlockContentData* heartBlockContent;
-        struct SuperBlockContentData* superBlockContent;
-        struct SimpleSpringData* simpleSpring;
-        struct HiddenPanelData* hiddenPanel;
-        struct SignpostData* signPost;
-        struct PadlockData* padlock;
-        struct BoardedFloorData* boardedFloor;
-        struct BombableRockData* bombableRock;
-        struct TweesterData* tweester;
-        struct StarBoxLauncherData* starBoxLauncher;
-        struct CymbalPlantData* cymbalPlant;
-        struct PinkFlowerData* pinkFlower;
-        struct SpinningFlowerData* spinningFlower;
-        struct TrumpetPlantData* trumpetPlant;
-        struct MunchlesiaData* munchlesia;
-        struct ArrowSignData* arrowSign;
-    } dataBuf;
+    /* 0x40 */ EntityData dataBuf;
     /* 0x44 */ void* gfxBaseAddr;
     /* 0x48 */ Vec3f position;
     /* 0x54 */ Vec3f scale;
@@ -1104,8 +1110,8 @@ typedef struct ItemEntity {
     /* 0x40 */ s32* sparkleReadPos;
     /* 0x44 */ s32 sparkleUnk44;
     /* 0x48 */ s32* sparkleSavedPos;
-    /* 0x4C */ s8* sparkleRaster;
-    /* 0x50 */ s8* sparklePalette;
+    /* 0x4C */ IMG_PTR sparkleRaster;
+    /* 0x50 */ PAL_PTR sparklePalette;
     /* 0x54 */ s32 sparkleWidth;
     /* 0x58 */ s32 sparkleHeight;
 } ItemEntity; // size = 0x5C
@@ -1196,10 +1202,10 @@ typedef struct MessagePrintState {
     /* 0x53C */ u8 maxLinesPerPage;
     /* 0x53D */ char unk_53D[0x3];
     /* 0x540 */ f32 sizeScale;
-    /* 0x544 */ s32* letterBackgroundImg;
-    /* 0x548 */ s32* letterBackgroundPal;
-    /* 0x54C */ s32* letterContentImg;
-    /* 0x550 */ s32* letterContentPal;
+    /* 0x544 */ IMG_PTR letterBackgroundImg;
+    /* 0x548 */ PAL_PTR letterBackgroundPal;
+    /* 0x54C */ IMG_PTR letterContentImg;
+    /* 0x550 */ PAL_PTR letterContentPal;
     /* 0x554 */ char unk_554[0x4];
 } MessagePrintState; // size = 0x558
 
@@ -1235,7 +1241,7 @@ typedef struct MessageDrawState {
 } MessageDrawState; // size = 0x54
 
 typedef struct MessageCharData {
-    /* 0x0 */ s8* raster;
+    /* 0x0 */ IMG_PTR raster;
     /* 0x4 */ u8* charWidthTable;
     /* 0x8 */ u8 monospaceWidth;
     /* 0x9 */ u8 baseHeightOffset;
@@ -1260,8 +1266,8 @@ typedef struct MesasgeFontGlyphData {
 } MesasgeFontGlyphData; // size = 0xC
 
 typedef struct MessageImageData {
-    /* 0x00 */ s32* raster;
-    /* 0x04 */ s32* palette;
+    /* 0x00 */ IMG_PTR raster;
+    /* 0x04 */ PAL_PTR palette;
     /* 0x08 */ u16 width;
     /* 0x0A */ u16 height;
     /* 0x0C */ s32 format;
@@ -1269,7 +1275,7 @@ typedef struct MessageImageData {
 } MessageImageData; // size = 0x14
 
 typedef struct MessageNumber {
-    /* 0x00 */ s32* rasters;
+    /* 0x00 */ IMG_PTR rasters;
     /* 0x04 */ s8 texSize;
     /* 0x05 */ u8 texWidth;
     /* 0x06 */ u8 texHeight;
@@ -1603,8 +1609,8 @@ typedef struct DecorationTable {
     /* 0x6CC */ s8 unk_6CC;
     /* 0x6CD */ s8 numPalettes;
     /* 0x6CE */ char unk_6CE[2];
-    /* 0x6D0 */ u16** palettes;
-    /* 0x6D4 */ s16* unk_6D4[27];
+    /* 0x6D0 */ PAL_PTR* palettes;
+    /* 0x6D4 */ PAL_PTR unk_6D4[27];
     /* 0x740 */ s16 unk_740;
     /* 0x742 */ s16 unk_742;
     /* 0x744 */ s16 unk_744;
@@ -1623,7 +1629,7 @@ typedef struct DecorationTable {
     /* 0x767 */ s8 unk_767;
     /* 0x768 */ u8 unk_768;
     /* 0x769 */ char unk_769[3];
-    /* 0x76C */ s16* unk_76C[16];
+    /* 0x76C */ PAL_PTR unk_76C[16];
     /* 0x78C */ char unk_7AC[0x2C];
     /* 0x7D8 */ s8 unk_7D8;
     /* 0x7D9 */ s8 unk_7D9;
@@ -1643,7 +1649,7 @@ typedef struct DecorationTable {
     /* 0x8B0 */ struct EffectInstance* unk_8B0[2];
     /* 0x8B8 */ s8 decorationType[2];
     /* 0x8BA */ u8 unk_8BA[2];
-    /* 0x8BC */ u8 unk_8BC[2];
+    /* 0x8BC */ s8 unk_8BC[2];
     /* 0x8C0 */ s16 unk_8C0[4];
     /* 0x8C6 */ DecorationUnk unk_8C6[2];
 } DecorationTable; // size = 0x8E8
@@ -1845,8 +1851,8 @@ typedef struct Actor {
 } Actor; // size = 0x444
 
 typedef struct BackgroundHeader {
-    /* 0x00 */ void* raster;
-    /* 0x04 */ void* palette;
+    /* 0x00 */ IMG_PTR raster;
+    /* 0x04 */ PAL_PTR palette;
     /* 0x08 */ u16 startX;
     /* 0x0A */ u16 startY;
     /* 0x0C */ u16 width;
@@ -2149,8 +2155,8 @@ typedef struct PartnerActionStatus {
 } PartnerActionStatus; // size = 0x360
 
 typedef struct SpriteRasterInfo {
-    /* 0x00 */ void* raster;
-    /* 0x04 */ void* defaultPal;
+    /* 0x00 */ IMG_PTR raster;
+    /* 0x04 */ PAL_PTR defaultPal;
     /* 0x08 */ s32 width;
     /* 0x0C */ s32 height;
 } SpriteRasterInfo; // size = 0x10
@@ -2292,28 +2298,6 @@ typedef struct SpriteShadingProfile {
     /* 0xAF */ s8 ambientPower; // ?
 } SpriteShadingProfile; // size = 0xB0
 
-typedef struct WattEffectData {
-    /* 0x00 */ s32 flags;
-    /* 0x04 */ s32 unk_04;
-    /* 0x08 */ s32 angle;
-    /* 0x0C */ s32 unk_0C;
-    /* 0x10 */ s32 unk_10;
-    /* 0x14 */ struct EffectInstance* effect1;
-    /* 0x18 */ struct EffectInstance* effect2;
-    /* 0x1C */ s32 debuff;
-} WattEffectData;
-
-typedef struct UnkStruct1 {
-    /* 0x00 */ char unk_00[8];
-    /* 0x08 */ f32 unk_08;
-} UnkStruct1;
-
-typedef struct UnkStruct0 {
-    /* 0x00 */ s32 flags;
-    /* 0x04 */ char unk_04[8];
-    /* 0x0C */ UnkStruct1* unk_0C;
-} UnkStruct0;
-
 typedef struct FoldImageRecPart {
     /* 0x00 */ IMG_PTR raster;
     /* 0x04 */ PAL_PTR palette;
@@ -2322,12 +2306,13 @@ typedef struct FoldImageRecPart {
     /* 0x0C */ s16 xOffset;
     /* 0x0E */ s16 yOffset;
     /* 0x10 */ u8 opacity; // alpha?
-    /* 0x11 */ char unk_11[0x7];
+    /* 0x11 */ char unk_11[3];
+    /* 0x14 */ Gfx* dlist;
 } FoldImageRecPart; // size = 0x18
 
 typedef struct FoldImageRec {
-    /* 0x00 */ s8* raster;
-    /* 0x04 */ s8* palette;
+    /* 0x00 */ IMG_PTR raster;
+    /* 0x04 */ PAL_PTR palette;
     /* 0x08 */ u16 width;
     /* 0x0A */ u16 height;
     /* 0x0C */ s16 xOffset;

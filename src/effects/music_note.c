@@ -18,20 +18,6 @@ Gfx* D_E004C660[] = { D_09001038, D_090010C0, D_09001148, D_090011D0, D_09001258
 
 s8 D_E004C67C[] = { 0xFE, 0xAC, 0xAC, 0xFE, 0xAC, 0xD5, 0xFE, 0xB4, 0x9A, 0xD5, 0xB4, 0xFE, 0xB4, 0xB4, 0xFE, 0xB4, 0xDD, 0xFE, 0xB4, 0xFE, 0xFE, 0xB4, 0xFE, 0xD5, 0xB4, 0xFE, 0xB4, 0xD5, 0xFE, 0xB4, 0xFE, 0xFE, 0xB4, 0xFE, 0xD5, 0xAC, };
 
-typedef struct MusicNoteFXData {
-    /* 0x00 */ s32 unk_00;
-    /* 0x04 */ Vec3f pos;
-    /* 0x10 */ f32 unk_10;
-    /* 0x14 */ s32 unk_14;
-    /* 0x18 */ s32 timeLeft;
-    /* 0x1C */ s32 unk_1C;
-    /* 0x20 */ s32 unk_20;
-    /* 0x24 */ f32 unk_24;
-    /* 0x28 */ f32 unk_28;
-    /* 0x2C */ f32 unk_2C;
-    /* 0x30 */ f32 unk_30;
-} MusicNoteFXData; // size = 0x34
-
 void music_note_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3) {
     EffectBlueprint bp;
     EffectBlueprint* bpPtr = &bp;
@@ -50,9 +36,9 @@ void music_note_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3) {
     effect = shim_create_effect_instance(bpPtr);
     effect->numParts = numParts;
 
-    part = effect->data = shim_general_heap_malloc(numParts * sizeof(*part));
+    part = effect->data.musicNote = shim_general_heap_malloc(numParts * sizeof(*part));
 
-    ASSERT(effect->data != NULL);
+    ASSERT(effect->data.musicNote != NULL);
 
     part->unk_00 = arg0;
     part->pos.x = arg1;
@@ -91,7 +77,7 @@ void music_note_init(EffectInstance* effect) {
 }
 
 void music_note_update(EffectInstance* effect) {
-    MusicNoteFXData* part = effect->data;
+    MusicNoteFXData* part = effect->data.musicNote;
     s32 timeLeft;
 
     part->timeLeft--;

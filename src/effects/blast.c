@@ -1,10 +1,11 @@
 #include "common.h"
 #include "effects_internal.h"
 
-void blast_appendGfx(void* effect);
+
 void blast_init(EffectInstance* effect);
 void blast_update(EffectInstance* effect);
 void blast_render(EffectInstance* effect);
+void blast_appendGfx(void* effect);
 
 extern Gfx D_09001300[];
 extern Gfx D_09001378[];
@@ -40,9 +41,9 @@ void blast_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5) {
     effect = shim_create_effect_instance(bpPtr);
     effect->numParts = numParts;
 
-    part = effect->data = shim_general_heap_malloc(numParts * sizeof(*part));
+    part = effect->data.blast = shim_general_heap_malloc(numParts * sizeof(*part));
 
-    ASSERT(effect->data != NULL);
+    ASSERT(effect->data.blast != NULL);
 
     shim_mem_clear(part, numParts * sizeof(*part));
 
@@ -64,7 +65,7 @@ void blast_init(EffectInstance* effect) {
 }
 
 void blast_update(EffectInstance* effect) {
-    BlastFXData* part = effect->data;
+    BlastFXData* part = effect->data.blast;
 
     part->unk_20 = part->unk_18++ * 9.0f / part->unk_1C;
     part->timeLeft--;

@@ -26,9 +26,9 @@ void cloud_trail_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3) {
     effect = shim_create_effect_instance(&bp);
     effect->numParts = 1;
     part = shim_general_heap_malloc(numParts * sizeof(*part));
-    effect->data = part;
+    effect->data.cloudTrail = part;
 
-    ASSERT(effect->data != NULL);
+    ASSERT(effect->data.cloudTrail != NULL);
 
     shim_mem_clear(part, numParts * sizeof(*part));
 
@@ -60,7 +60,7 @@ void cloud_trail_init(EffectInstance* effect) {
 }
 
 void cloud_trail_update(EffectInstance* effect) {
-    CloudTrailFXData* part = (CloudTrailFXData*)effect->data;
+    CloudTrailFXData* part = effect->data.cloudTrail;
     s32 cond = FALSE;
     s32 i;
 
@@ -115,7 +115,7 @@ void cloud_trail_render(EffectInstance* effect) {
 
 void cloud_trail_appendGfx(void* effect) {
     EffectInstance* effectTemp = effect;
-    CloudTrailFXData* part = effectTemp->data;
+    CloudTrailFXData* part = effectTemp->data.cloudTrail;
     Matrix4f sp20;
     Matrix4f sp60;
     s32 i;

@@ -40,9 +40,9 @@ EffectInstance* star_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 
 
     effect = shim_create_effect_instance(&bp);
     effect->numParts = 1;
-    part = effect->data = shim_general_heap_malloc(numParts * sizeof(*part));
+    part = effect->data.star = shim_general_heap_malloc(numParts * sizeof(*part));
 
-    ASSERT(effect->data != NULL);
+    ASSERT(effect->data.star != NULL);
     part->unk_00 = 1;
     part->unk_04 = arg1;
     part->unk_08 = arg2;
@@ -117,7 +117,7 @@ void star_init(EffectInstance* effect) {
 
 void star_update(EffectInstance* effect) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    StarFXData* data = effect->data;
+    StarFXData* data = effect->data.star;
     f32 x, y, z, length;
     f32 xTemp, yTemp, zTemp;
 
@@ -179,7 +179,7 @@ void star_update(EffectInstance* effect) {
 }
 
 void star_render(EffectInstance* effect) {
-    StarFXData* effect15 = effect->data;
+    StarFXData* effect15 = effect->data.star;
     RenderTask renderTask;
     RenderTask* renderTaskPtr = &renderTask;
     RenderTask* retTask;

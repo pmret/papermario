@@ -36,8 +36,8 @@ void walking_dust_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg
     effect->numParts = numParts;
 
     data = shim_general_heap_malloc(numParts * sizeof(*data));
-    effect->data = data;
-    ASSERT(effect->data != NULL);
+    effect->data.walkingDust = data;
+    ASSERT(effect->data.walkingDust != NULL);
 
     shim_mem_clear(data, numParts * sizeof(*data));
     data->unk_6C = arg0 == 2;
@@ -61,7 +61,7 @@ void walking_dust_init(EffectInstance* effect) {
 }
 
 void walking_dust_update(EffectInstance* effect) {
-    WalkingDustFXData* data = (WalkingDustFXData*)effect->data;
+    WalkingDustFXData* data = effect->data.walkingDust;
 
     data->unk_74 = D_E000E684[data->unk_6C][data->unk_70++];
 
@@ -94,7 +94,7 @@ void walking_dust_render(EffectInstance* effect) {
 
 void walking_dust_appendGfx(void* effect) {
     EffectInstance* effectTemp = effect;
-    WalkingDustFXData* data = effectTemp->data;
+    WalkingDustFXData* data = effectTemp->data.walkingDust;
     s32 temp_t3 = data->unk_04;
     s32 temp_t4 = data->unk_74;
     s32 cond = FALSE;

@@ -81,10 +81,10 @@ typedef struct ModelTreeInfo {
 typedef struct TextureHandle {
     /* 0x00 */ Gfx* gfx;
     /* 0x04 */ TextureHeader header;
-    /* 0x34 */ s32* raster;
-    /* 0x38 */ s32* palette;
-    /* 0x3C */ s32* auxRaster;
-    /* 0x40 */ s32* auxPalette;
+    /* 0x34 */ IMG_PTR raster;
+    /* 0x38 */ PAL_PTR palette;
+    /* 0x3C */ IMG_PTR auxRaster;
+    /* 0x40 */ PAL_PTR auxPalette;
 } TextureHandle; // size = 0x44
 
 typedef struct ModelBlueprint {

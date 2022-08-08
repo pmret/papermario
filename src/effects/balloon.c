@@ -31,7 +31,7 @@ EffectInstance* balloon_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s
     effect->numParts = numParts;
 
     data = shim_general_heap_malloc(numParts * sizeof(*data));
-    effect->data = data;
+    effect->data.balloon = data;
     part = data;
 
     ASSERT(data != NULL);
@@ -53,7 +53,7 @@ void balloon_init(EffectInstance* effect) {
 }
 
 void balloon_update(EffectInstance* effect) {
-    BalloonFXData* part = (BalloonFXData*)effect->data;
+    BalloonFXData* part = effect->data.balloon;
 
     part->unk_1C--;
     part->unk_20++;
@@ -86,7 +86,7 @@ void balloon_render(EffectInstance* effect) {
 void balloon_appendGfx(void* effect) {
     Matrix4f sp18;
     Matrix4f sp58;
-    BalloonFXData* data = ((EffectInstance*)effect)->data;
+    BalloonFXData* data = ((EffectInstance*)effect)->data.balloon;
     s32 idx = data->unk_00;
 
     gDPPipeSync(gMasterGfxPos++);

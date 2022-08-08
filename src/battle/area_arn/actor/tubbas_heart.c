@@ -151,10 +151,10 @@ ApiStatus func_80218680_4FF0D0(Evt* script, s32 isInitialCall) {
     s32 z = evt_get_variable(script, *args++);
     f32 scale = evt_get_float_variable(script, *args++);
 
-    ((Effect6BFXData*)effect->data)->pos.x = x;
-    ((Effect6BFXData*)effect->data)->pos.y = y;
-    ((Effect6BFXData*)effect->data)->pos.z = z;
-    ((Effect6BFXData*)effect->data)->scale = scale;
+    effect->data.energyInOut->pos.x = x;
+    effect->data.energyInOut->pos.y = y;
+    effect->data.energyInOut->pos.z = z;
+    effect->data.energyInOut->scale = scale;
 
     return ApiStatus_DONE2;
 }

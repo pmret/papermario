@@ -96,8 +96,8 @@ void damage_indicator_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32
     effect = shim_create_effect_instance(bpPtr);
     effect->numParts = numParts;
 
-    effect->data = part = shim_general_heap_malloc(numParts * sizeof(*part));
-    ASSERT(effect->data != NULL);
+    effect->data.damageIndicator = part = shim_general_heap_malloc(numParts * sizeof(*part));
+    ASSERT(effect->data.damageIndicator != NULL);
 
     part->unk_00 = arg0;
     part->unk_04.x = arg1;
@@ -133,7 +133,7 @@ void damage_indicator_update(EffectInstance* effect) {
     s32 temp_a2;
     s32 temp_t0;
     s32 duration;
-    DamageIndicatorFXData* part = effect->data;
+    DamageIndicatorFXData* part = effect->data.damageIndicator;
     f32 phi_f12;
     s32 i;
 

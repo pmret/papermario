@@ -7,22 +7,6 @@ void tattle_window_render(EffectInstance* effect);
 void func_E00D8264(EffectInstance* effect);
 void func_E00D8630(EffectInstance* effect);
 
-typedef struct TattleWindowFXData {
-    /* 0x00 */ s32 unk_00;
-    /* 0x04 */ Vec3f pos;
-    /* 0x10 */ s32 unk_10;
-    /* 0x14 */ s32 unk_14;
-    /* 0x18 */ f32 unk_18;
-    /* 0x1C */ f32 unk_1C;
-    /* 0x20 */ s32 unk_20;
-    /* 0x24 */ s32 unk_24;
-    /* 0x28 */ f32 unk_28;
-    /* 0x2C */ f32 unk_2C;
-    /* 0x30 */ f32 unk_30;
-    /* 0x34 */ u8 unk_34;
-    /* 0x35 */ u8 unk_35;
-} TattleWindowFXData; // size = 0x38
-
 typedef struct D_E00D8818_Entry {
     s16 unk_00;
     u8 unk_02;
@@ -72,9 +56,9 @@ EffectInstance* tattle_window_main(s32 arg0, f32 x, f32 y, f32 z, f32 arg4, s32 
 
     effect = shim_create_effect_instance(bpPtr);
     effect->numParts = numParts;
-    part = effect->data = shim_general_heap_malloc(numParts * sizeof(*part));
+    part = effect->data.tattleWindow = shim_general_heap_malloc(numParts * sizeof(*part));
 
-    ASSERT(effect->data != NULL);
+    ASSERT(effect->data.tattleWindow != NULL);
 
     part->unk_00 = arg0;
     part->unk_14 = 0;
@@ -104,7 +88,7 @@ void tattle_window_init(EffectInstance* effect) {
 void tattle_window_update(EffectInstance* effect) {
     s32 unk_10, unk_10_2;
     s32 old_unk_14;
-    TattleWindowFXData* part = effect->data;
+    TattleWindowFXData* part = effect->data.tattleWindow;
 
     if (effect->flags & 0x10) {
         effect->flags &= ~0x10;

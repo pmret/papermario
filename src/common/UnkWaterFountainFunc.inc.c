@@ -20,12 +20,12 @@ ApiStatus N(UnkWaterFountainFunc)(Evt* script, s32 isInitialCall) {
     temp_f20_2 = atan2(temp_f28, temp_f26, temp_f20, temp_f22 + 40.0f);
 
     effect = fx_water_fountain(0, temp_f20 - 10.0f, temp_f22 + 60.0f, temp_f24 + 20.0f, 2.5f, 40);
-    ((WaterFountainFXData*)effect->data)->unk_38 = temp_f20_2;
-    ((WaterFountainFXData*)effect->data)->unk_18 = 2;
-    ((WaterFountainFXData*)effect->data)->unk_1C = 2;
-    ((WaterFountainFXData*)effect->data)->unk_20 = 2;
-    ((WaterFountainFXData*)effect->data)->unk_28 = 80;
-    ((WaterFountainFXData*)effect->data)->unk_2C = 80;
-    ((WaterFountainFXData*)effect->data)->unk_30 = 80;
+    effect->data.waterFountain->unk_38 = temp_f20_2;
+    effect->data.waterFountain->unk_18 = 2;
+    effect->data.waterFountain->unk_1C = 2;
+    effect->data.waterFountain->unk_20 = 2;
+    effect->data.waterFountain->unk_28 = 80;
+    effect->data.waterFountain->unk_2C = 80;
+    effect->data.waterFountain->unk_30 = 80;
     return ApiStatus_DONE2;
 }

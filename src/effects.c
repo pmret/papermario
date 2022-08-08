@@ -173,15 +173,16 @@ s32 D_8007FEB8[] = {
 };
 
 /// Used for unbound function points in effect structs.
-void stub_effect_delegate(EffectInstance* effectInst) {
+void stub_effect_delegate(EffectInstance* effect) {
 }
 
-void set_effect_pos_offset(EffectGraphics* effect, f32 x, f32 y, f32 z) {
-    EffectInstanceData* instanceData = effect->freeDelay;
 
-    instanceData->pos.x = x;
-    instanceData->pos.y = y;
-    instanceData->pos.z = z;
+void set_effect_pos_offset(EffectInstance* effect, f32 x, f32 y, f32 z) {
+    s32* data = effect->data.any;
+
+    ((f32*)data)[1] = x;
+    ((f32*)data)[2] = y;
+    ((f32*)data)[3] = z;
 }
 
 void clear_effect_data(void) {
@@ -391,23 +392,23 @@ EffectInstance* create_effect_instance(EffectBlueprint* effectBp) {
     return newEffectInst;
 }
 
-void remove_effect(EffectInstance* effectInstsance) {
+void remove_effect(EffectInstance* effectInstance) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(gEffectInstances); i++) {
-        if (gEffectInstances[i] == effectInstsance) {
+        if (gEffectInstances[i] == effectInstance) {
             break;
         }
     }
 
     ASSERT(i < ARRAY_COUNT(gEffectInstances));
 
-    if (effectInstsance->data == NULL) {
-        general_heap_free(effectInstsance);
+    if (effectInstance->data.any == NULL) {
+        general_heap_free(effectInstance);
         gEffectInstances[i] = NULL;
     } else {
-        general_heap_free(effectInstsance->data);
-        general_heap_free(effectInstsance);
+        general_heap_free(effectInstance->data.any);
+        general_heap_free(effectInstance);
         gEffectInstances[i] = NULL;
     }
 }
@@ -419,8 +420,8 @@ void remove_all_effects(void) {
         EffectInstance* effect = gEffectInstances[i];
 
         if (effect != NULL && effect->flags & 4) {
-            if (effect->data != NULL) {
-                general_heap_free(effect->data);
+            if (effect->data.any != NULL) {
+                general_heap_free(effect->data.any);
             }
             general_heap_free(effect);
             gEffectInstances[i] = NULL;

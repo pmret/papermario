@@ -35,8 +35,8 @@ extern s32 mgm_02_BoxColliderIDs[NUM_BOXES];
 extern s32 mgm_02_PanelModelIDs[NUM_PANELS];
 extern s32 D_80248600[NUM_PANELS]; //TODO set name: mgm_02_PanelModelsAssigned
 
-extern s32 mgm_02_PeachPanelImg;
-extern s32 mgm_02_PeachPanelPal;
+extern IMG_BIN mgm_02_PeachPanelImg;
+extern PAL_BIN mgm_02_PeachPanelPal;
 
 extern EvtScript D_80242A3C_E187BC; // EVT_ReadSign
 

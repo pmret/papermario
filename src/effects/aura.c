@@ -19,7 +19,7 @@ Gfx* D_E0076EB0[] = { D_090023B0, D_090023B0, D_09002410, D_09002410 };
 Gfx* D_E0076EC0[] = { D_090023C8, D_090023C8, D_09002428, D_09002428 };
 Gfx* D_E0076ED0[] = { D_09002000, D_09002000, D_090020E8, D_090021D0 };
 
-void aura_appendGfx(void* effect);
+void aura_appendGfx(void* argEffect);
 void aura_init(EffectInstance* effect);
 void aura_update(EffectInstance* effect);
 void aura_render(EffectInstance* effect);
@@ -42,25 +42,25 @@ void aura_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, EffectInstance*
     effect = shim_create_effect_instance(bpPtr);
     effect->numParts = numParts;
 
-    part = effect->data = shim_general_heap_malloc(numParts * sizeof(*part));
+    part = effect->data.aura = shim_general_heap_malloc(numParts * sizeof(*part));
 
-    ASSERT(effect->data != NULL);
+    ASSERT(effect->data.aura != NULL);
 
-    part->unk_64.s = 0;
+    part->renderYaw = 0.0f;
 
-    zero = part->unk_64.f;
+    zero = 0.0f;
     part->unk_40 = zero;
     part->unk_34 = zero;
     part->unk_58 = zero;
     part->unk_4C = zero;
 
-    part->unk_2C = 100;
+    part->fadeTime = 100;
     part->type = arg0;
-    part->unk_30 = 0;
+    part->lifeTime = 0;
     part->primA = 0;
-    part->pos.x = arg1;
-    part->pos.y = arg2;
-    part->pos.z = arg3;
+    part->posA.x = arg1;
+    part->posA.y = arg2;
+    part->posA.z = arg3;
 
     switch (arg0) {
         case 0:
@@ -71,9 +71,9 @@ void aura_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, EffectInstance*
             part->envG = 247;
             part->engB = 155;
             part->engA = 0;
+            part->scale.x = arg4 * 2.0;
+            part->scale.y = arg4 * 0.6;
             part->unk_24 = arg4;
-            part->unk_20 = arg4 * 0.6;
-            part->unk_1C = arg4 * 2.0;
             part->unk_38 = -0.9f;
             part->unk_44 = 0.04f;
             part->unk_3C = 0.04f;
@@ -91,8 +91,8 @@ void aura_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, EffectInstance*
             part->envG = 0;
             part->engB = 0;
             part->engA = 0;
-            part->unk_1C = arg4;
-            part->unk_20 = arg4;
+            part->scale.x = arg4;
+            part->scale.y = arg4;
             part->unk_24 = arg4;
             part->unk_38 = zero;
             part->unk_50 = zero;
@@ -111,8 +111,8 @@ void aura_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, EffectInstance*
             part->engB = 255;
             part->envG = 0;
             part->engA = 81;
-            part->unk_1C = arg4;
-            part->unk_20 = arg4;
+            part->scale.x = arg4;
+            part->scale.y = arg4;
             part->unk_24 = arg4;
             part->unk_38 = zero;
             part->unk_50 = zero;
@@ -131,8 +131,8 @@ void aura_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, EffectInstance*
             part->engB = 255;
             part->envG = 0;
             part->engA = 63;
-            part->unk_1C = arg4;
-            part->unk_20 = arg4;
+            part->scale.x = arg4;
+            part->scale.y = arg4;
             part->unk_24 = arg4;
             part->unk_38 = 0.0f;
             part->unk_50 = 0.0f;
@@ -145,9 +145,9 @@ void aura_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, EffectInstance*
             break;
     }
 
-    part->unk_10 = part->pos.x;
-    part->unk_14 = part->pos.y;
-    part->unk_18 = part->pos.z;
+    part->posB.x = part->posA.x;
+    part->posB.y = part->posA.y;
+    part->posB.z = part->posA.z;
 
     *outEffect = effect;
 }
@@ -158,52 +158,52 @@ void aura_init(EffectInstance* effect) {
 void aura_update(EffectInstance* effect) {
     AuraFXData* data;
     s32 type;
-    s32 unk_2C;
-    s32 unk_30;
+    s32 fadeTime;
+    s32 lifeTime;
 
-    data = effect->data;
+    data = effect->data.aura;
     if (effect->flags & 0x10) {
         effect->flags &= ~0x10;
-        data->unk_2C = 5;
+        data->fadeTime = 5;
     }
 
-    data->unk_30++;
-    if (data->unk_30 > 324000) {
-        data->unk_30 = 256;
+    data->lifeTime++;
+    if (data->lifeTime > 90*60*60) {
+        data->lifeTime = 256;
     }
 
-    if (data->unk_2C <= 10) {
-        data->unk_2C--;
+    if (data->fadeTime <= 10) {
+        data->fadeTime--;
     }
 
-    if (data->unk_2C < 0) {
+    if (data->fadeTime < 0) {
         shim_remove_effect(effect);
         return;
     }
 
     type = data->type;
-    unk_2C = data->unk_2C;
-    unk_30 = data->unk_30;
+    fadeTime = data->fadeTime;
+    lifeTime = data->lifeTime;
 
     if (type < 2) {
-        if (unk_30 <= 10) {
+        if (lifeTime <= 10) {
             data->primA += (128 - data->primA) * 0.5;
         }
     } else {
-        if (unk_30 <= 10) {
-            data->primA = (unk_30 * 0xFF) / 10;
+        if (lifeTime <= 10) {
+            data->primA = (lifeTime * 0xFF) / 10;
         }
     }
 
-    if (unk_2C < 10) {
+    if (fadeTime < 10) {
         data->primA *= 0.5;
     }
 
     if (type == 0) {
         data->unk_38 += (data->unk_3C - data->unk_38) * 0.02;
         data->unk_44 += (data->unk_48 - data->unk_44) * 0.02;
-        data->unk_1C += (data->unk_24 - data->unk_1C) * 0.04;
-        data->unk_20 += (data->unk_24 - data->unk_20) * 0.04;
+        data->scale.x += (data->unk_24 - data->scale.x) * 0.04;
+        data->scale.y += (data->unk_24 - data->scale.y) * 0.04;
     } else {
         data->unk_38 += (data->unk_3C - data->unk_38) * 0.02;
         data->unk_44 += (data->unk_48 - data->unk_44) * 0.02;
@@ -239,9 +239,9 @@ void aura_update(EffectInstance* effect) {
         data->unk_58 -= 128.0f;
     }
 
-    data->unk_10 += (data->pos.x - data->unk_10) * 0.1;
-    data->unk_14 += (data->pos.y - data->unk_14) * 0.1;
-    data->unk_18 += (data->pos.z - data->unk_18) * 0.1;
+    data->posB.x += (data->posA.x - data->posB.x) * 0.1;
+    data->posB.y += (data->posA.y - data->posB.y) * 0.1;
+    data->posB.z += (data->posA.z - data->posB.z) * 0.1;
 }
 
 void aura_render(EffectInstance* effect) {
@@ -263,50 +263,50 @@ void func_E007684C(void) {
 void func_E0076854(void) {
 }
 
-void aura_appendGfx(void* effect) {
-    Matrix4f sp18, sp58, sp98;
-    EffectInstance* eff = (EffectInstance*)effect;
-    AuraFXData* data = ((EffectInstance*)effect)->data;
+void aura_appendGfx(void* argEffect) {
+    Matrix4f translateMtx, tempMtx, transformMtx;
+    EffectInstance* effect = argEffect;
+    AuraFXData* data = effect->data.aura;
     s32 type = data->type;
     s32 primA = data->primA;
     s32 v1, v2;
 
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effect->graphics->data));
     gSPDisplayList(gMasterGfxPos++, D_E0076ED0[type]);
 
-    shim_guTranslateF(sp18, data->unk_10, data->unk_14, data->unk_18);
+    shim_guTranslateF(translateMtx, data->posB.x, data->posB.y, data->posB.z);
     if (type == 2) {
-        shim_guRotateF(sp58, data->unk_64.f, 0.0f, 1.0f, 0.0f);
+        shim_guRotateF(tempMtx, data->renderYaw, 0.0f, 1.0f, 0.0f);
     } else {
-        shim_guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+        shim_guRotateF(tempMtx, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
     }
-    shim_guMtxCatF(sp58, sp18, sp98);
-    shim_guScaleF(sp58, data->unk_1C, data->unk_20, 1.0f);
-    shim_guMtxCatF(sp58, sp98, sp98);
+    shim_guMtxCatF(tempMtx, translateMtx, transformMtx);
+    shim_guScaleF(tempMtx, data->scale.x, data->scale.y, 1.0f);
+    shim_guMtxCatF(tempMtx, transformMtx, transformMtx);
     if (type == 0) {
-        shim_guTranslateF(sp58, (-(data->unk_1C - data->unk_24) / data->unk_24) * 10.0f, 0.0f, 0.0f);
-        shim_guMtxCatF(sp58, sp98, sp98);
+        shim_guTranslateF(tempMtx, (-(data->scale.x - data->unk_24) / data->unk_24) * 10.0f, 0.0f, 0.0f);
+        shim_guMtxCatF(tempMtx, transformMtx, transformMtx);
     }
-    shim_guMtxF2L(sp98, &gDisplayContext->matrixStack[gMatrixListPos]);
+    shim_guMtxF2L(transformMtx, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(gMasterGfxPos++, D_E0076EC0[type]);
     gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
 
-    shim_guTranslateF(sp18, data->pos.x, data->pos.y, data->pos.z);
+    shim_guTranslateF(translateMtx, data->posA.x, data->posA.y, data->posA.z);
     if (type == 2) {
-        shim_guRotateF(sp58, data->unk_64.f, 0.0f, 1.0f, 0.0f);
+        shim_guRotateF(tempMtx, data->renderYaw, 0.0f, 1.0f, 0.0f);
     } else {
-        shim_guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+        shim_guRotateF(tempMtx, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
     }
-    shim_guMtxCatF(sp58, sp18, sp98);
-    shim_guScaleF(sp58, data->unk_1C, data->unk_20, 1.0f);
-    shim_guMtxCatF(sp58, sp98, sp98);
+    shim_guMtxCatF(tempMtx, translateMtx, transformMtx);
+    shim_guScaleF(tempMtx, data->scale.x, data->scale.y, 1.0f);
+    shim_guMtxCatF(tempMtx, transformMtx, transformMtx);
     if (type == 0) {
-        shim_guTranslateF(sp58, (-(data->unk_1C - data->unk_24) / data->unk_24) * 10.0f, 0.0f, 0.0f);
-        shim_guMtxCatF(sp58, sp98, sp98);
+        shim_guTranslateF(tempMtx, (-(data->scale.x - data->unk_24) / data->unk_24) * 10.0f, 0.0f, 0.0f);
+        shim_guMtxCatF(tempMtx, transformMtx, transformMtx);
     }
-    shim_guMtxF2L(sp98, &gDisplayContext->matrixStack[gMatrixListPos]);
+    shim_guMtxF2L(transformMtx, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(gMasterGfxPos++, D_E0076EB0[type]);

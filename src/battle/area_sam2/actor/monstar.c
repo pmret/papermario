@@ -8,17 +8,6 @@
 
 #define NAMESPACE b_area_sam2_monstar
 
-// probably the same as FoldImageRecPart
-typedef struct UnknownMonstarStruct {
-    /* 0x00 */ u8* raster;
-    /* 0x04 */ u8* palette;
-    /* 0x08 */ u16 width;
-    /* 0x0A */ u16 height;
-    /* 0x0C */ s32 unk_0C;
-    /* 0x10 */ s32 unk_10;
-    /* 0x14 */ Gfx* dlist;
-} UnknownMonstarStruct; // size = 0x18;
-
 extern Gfx N(dlist)[];
 
 extern EvtScript N(init);
@@ -148,13 +137,14 @@ EvtScript N(init) = {
 #include "battle/area_sam2/actor/img.png.inc.c"
 #include "battle/area_sam2/actor/img.pal.inc.c"
 
-UnknownMonstarStruct D_8021A2B8_63F498 = {
+FoldImageRecPart D_8021A2B8_63F498 = {
     .raster = battle_area_sam2_actor_img_png,
     .palette = battle_area_sam2_actor_img_pal,
     .width = battle_area_sam2_actor_img_png_width,
     .height = battle_area_sam2_actor_img_png_height,
-    .unk_0C = -4,
-    .unk_10 = 0,
+    .xOffset = -1,
+    .yOffset = -4,
+    .opacity = 0,
     .dlist = N(dlist),
 };
 

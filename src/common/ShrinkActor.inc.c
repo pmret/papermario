@@ -14,7 +14,7 @@ ApiStatus N(ShrinkActor)(Evt* script, s32 isInitialCall) {
     EffectInstance* effect = fx_shape_spell(0, var1, (f32) var2 + 5.0, var3, var4, var5, var6, var7);
 
     if (actor->debuff == STATUS_SHRINK) {
-        ((FootprintFXData*)effect->data)->unk_28 = 0.4f;
+        effect->data.footprint->unk_28 = 0.4f;
     }
 
     return ApiStatus_DONE2;
