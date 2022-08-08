@@ -140,33 +140,38 @@ typedef struct HeapNode {
 } HeapNode; // size = 0x10
 
 /// Ring buffer of an NPC's position over the past 20 frames.
-typedef struct BlurBuffer {
+typedef struct NpcMotionBlur {
     /* 0x00 */ s8 unk_00;
     /* 0x01 */ s8 index; ///< Current blur ring buffer index
     /* 0x02 */ char unk_02[2]; // padding?
     /* 0x04 */ f32 x[20];
     /* 0x54 */ f32 y[20];
     /* 0xA4 */ f32 z[20];
-} BlurBuffer; // size = 0xF4
+} NpcMotionBlur; // size = 0xF4
 
-typedef struct NPCBlurUnk {
+typedef struct NpcSimpleBlur {
     /* 0x00 */ struct Npc* unk_00;
     /* 0x04 */ Vec3f offset;
-} NPCBlurUnk; // size = 0x10;
+} NpcSimpleBlur; // size = 0x10;
 
-typedef struct StoneChompBlur {
-    /* 0x00 */ s32 unk_00;  // fold component
+typedef struct NpcQuizmoBlur {
+    /* 0x00 */ s32 flags;
+    /* 0x04 */ char unk_04[0x4];
+} NpcQuizmoBlur; // size = 0x8;
+
+typedef struct NpcStoneChompBlur {
+    /* 0x00 */ s32 foldComponentID;
     /* 0x04 */ s32 workerID;
-    /* 0x08 */ s32 unk_08;  // sprite index
-    /* 0x0C */ s32 unk_0C;  // raster index
+    /* 0x08 */ s32 spriteIndex;
+    /* 0x0C */ s32 rasterIndex;
     /* 0x10 */ Vec3f pos;
     /* 0x1C */ Vec3f rot;
     /* 0x28 */ Vec3f scale;
-    /* 0x34 */ f32 unk_34;  // render yaw?
-    /* 0x38 */ s32 unk_38;  // 
+    /* 0x34 */ f32 renderYaw;
+    /* 0x38 */ s32 unk_38;
     /* 0x3C */ f32 width;
     /* 0x40 */ f32 height;
-} StoneChompBlur; // size: unknown
+} NpcStoneChompBlur; // size: unknown
 
 typedef u16 Palette16[16]; // size = 0x20
 
@@ -179,7 +184,12 @@ typedef struct Npc {
     /* 0x014 */ f32 jumpScale; /* also used for speech, temp1? */
     /* 0x018 */ f32 moveSpeed;
     /* 0x01C */ f32 jumpVelocity;
-    /* 0x020 */ struct BlurBuffer* blurBuf; ///< Null unless flag 0x100000 is set.
+    /* 0x020 */ union {
+                void* any;
+                NpcMotionBlur* ring; ///< Null unless flag 0x100000 is set.
+                NpcSimpleBlur* fixed;
+                NpcQuizmoBlur* quizmo;
+                } blur;
     /* 0x024 */ s32 spriteInstanceID;
     /* 0x028 */ union {
     /*       */     u16 h;

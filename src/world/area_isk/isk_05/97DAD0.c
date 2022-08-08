@@ -4,7 +4,7 @@
 static char* N(exit_str_0) = "isk_04";
 static char* N(exit_str_1) = "";
 
-extern StoneChompBlur N(ChompBlur);
+extern NpcStoneChompBlur N(ChompBlur);
 
 void func_80241610_97F0E0(void);
 
@@ -13,7 +13,7 @@ void func_80241610_97F0E0(void);
 #include "world/common/UnkFunc53.inc.c"
 
 ApiStatus func_802411F8_97ECC8(Evt* script, s32 isInitialCall) {
-    NPCBlurUnk* blurData;
+    NpcSimpleBlur* blurData;
     Npc* ownerNpc;
     Npc* childNpc;
     f32 posX, posY, posZ;
@@ -24,7 +24,7 @@ ApiStatus func_802411F8_97ECC8(Evt* script, s32 isInitialCall) {
 
     floorY = (f32) script->owner1.enemy->varTable[0];
     ownerNpc = get_npc_safe(script->owner2.npcID);
-    blurData = (NPCBlurUnk*) ownerNpc->blurBuf;
+    blurData = ownerNpc->blur.fixed;
     posX = ownerNpc->pos.x;
     posY = ownerNpc->pos.y + (ownerNpc->collisionHeight * 0.2f);
     posZ = ownerNpc->pos.z;
@@ -90,18 +90,18 @@ ApiStatus func_802411F8_97ECC8(Evt* script, s32 isInitialCall) {
 
 
 ApiStatus func_802415C0_97F090(Evt* script, s32 isInitialCall) {
-    NPCBlurUnk* var_s0 = (NPCBlurUnk*) get_npc_safe(script->owner2.npcID)->blurBuf;
+    NpcSimpleBlur* blurData = get_npc_safe(script->owner2.npcID)->blur.fixed;
     s32 i;
     
-    for (i = 0; i < 8; i++, var_s0++) {
-        free_npc(var_s0->unk_00);
+    for (i = 0; i < 8; i++, blurData++) {
+        free_npc(blurData->unk_00);
     }
 
     return ApiStatus_DONE2;
 }
 
 void func_80241610_97F0E0(void) {
-    StoneChompBlur* blurPtr = &N(ChompBlur);
+    NpcStoneChompBlur* blurPtr = &N(ChompBlur);
     Camera* cam = &gCameras[gCurrentCameraID];
     FoldImageRecPart foldImg;
     SpriteRasterInfo spriteRaster;
@@ -131,7 +131,7 @@ void func_80241610_97F0E0(void) {
     gDPSetAlphaCompare(gMasterGfxPos++, G_AC_NONE);
     
     guTranslateF(transformMtx, blurPtr->pos.x, blurPtr->pos.y, blurPtr->pos.z);
-    guRotateF(tempMtx, blurPtr->rot.y + gCameras[gCurrentCameraID].currentYaw + blurPtr->unk_34, 0.0f, 1.0f, 0.0f);
+    guRotateF(tempMtx, blurPtr->rot.y + gCameras[gCurrentCameraID].currentYaw + blurPtr->renderYaw, 0.0f, 1.0f, 0.0f);
     guMtxCatF(tempMtx, transformMtx, transformMtx);
     guRotateF(tempMtx, blurPtr->rot.z, 0.0f, 0.0f, 1.0f);
     guMtxCatF(tempMtx, transformMtx, transformMtx);
@@ -143,7 +143,7 @@ void func_80241610_97F0E0(void) {
     guMtxF2L(transformMtx, &gDisplayContext->matrixStack[gMatrixListPos]);
     gSPMatrix(gMasterGfxPos++, OS_PHYSICAL_TO_K0(&gDisplayContext->matrixStack[gMatrixListPos++]),
         G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    spr_get_npc_raster_info(&spriteRaster, blurPtr->unk_08, blurPtr->unk_0C);
+    spr_get_npc_raster_info(&spriteRaster, blurPtr->spriteIndex, blurPtr->rasterIndex);
 
     foldImg.raster  = spriteRaster.raster;
     foldImg.palette = spriteRaster.defaultPal;
@@ -153,18 +153,18 @@ void func_80241610_97F0E0(void) {
     foldImg.yOffset = (spriteRaster.height / 2);
     foldImg.opacity = 255;
     
-    fold_update(blurPtr->unk_00, FOLD_TYPE_7, 255, 255, 255, blurPtr->unk_38, 0);
-    fold_appendGfx_component(blurPtr->unk_00, &foldImg, 0, transformMtx);
+    fold_update(blurPtr->foldComponentID, FOLD_TYPE_7, 255, 255, 255, blurPtr->unk_38, 0);
+    fold_appendGfx_component(blurPtr->foldComponentID, &foldImg, 0, transformMtx);
     gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
 }
 
 ApiStatus func_80241B28_97F5F8(Evt* script, s32 isInitialCall) {
-    StoneChompBlur* blurPtr = &N(ChompBlur);
+    NpcStoneChompBlur* blurPtr = &N(ChompBlur);
     SpriteRasterInfo rasterInfo;
     Npc* npc = get_npc_unsafe(script->owner1.enemy->npcID);
     
-    blurPtr->unk_08 = 53; //TODO get spriteID for this constant
-    blurPtr->unk_0C = 0;
+    blurPtr->spriteIndex = 53; //TODO get spriteID for this constant
+    blurPtr->rasterIndex = 0;
     spr_get_npc_raster_info(&rasterInfo, 53, 0); //TODO get spriteID for this constant
     blurPtr->width = rasterInfo.width;
     blurPtr->height = rasterInfo.height;
@@ -177,16 +177,16 @@ ApiStatus func_80241B28_97F5F8(Evt* script, s32 isInitialCall) {
     blurPtr->scale.x = SPRITE_WORLD_SCALE;
     blurPtr->scale.y = SPRITE_WORLD_SCALE;
     blurPtr->scale.z = SPRITE_WORLD_SCALE;
-    blurPtr->unk_34 = 85.0f;
+    blurPtr->renderYaw = 85.0f;
     blurPtr->unk_38 = 0;
-    blurPtr->unk_00 = 0;
+    blurPtr->foldComponentID = 0;
     blurPtr->workerID = create_generic_entity_frontUI(NULL, func_80241610_97F0E0);
     
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_80241C34_97F704(Evt* script, s32 isInitialCall) {
-    StoneChompBlur* blurPtr = &N(ChompBlur);
+    NpcStoneChompBlur* blurPtr = &N(ChompBlur);
 
     free_generic_entity(blurPtr->workerID);
     return ApiStatus_DONE2;
@@ -197,7 +197,7 @@ ApiStatus func_80241C5C_97F72C(Evt* script, s32 isInitialCall) {
     s32 x = evt_get_float_variable(script, *args++);
     s32 y = evt_get_float_variable(script, *args++);
     s32 z = evt_get_float_variable(script, *args++);
-    StoneChompBlur* blurPtr = &N(ChompBlur);
+    NpcStoneChompBlur* blurPtr = &N(ChompBlur);
 
     blurPtr->pos.x = x;
     blurPtr->pos.y = y + (blurPtr->height * SPRITE_WORLD_SCALE_D * 0.5);
@@ -210,7 +210,7 @@ ApiStatus func_80241D44_97F814(Evt* script, s32 isInitialCall) {
     s32 x = evt_get_float_variable(script, *args++);
     s32 y = evt_get_float_variable(script, *args++);
     s32 z = evt_get_float_variable(script, *args++);
-    StoneChompBlur* blurPtr = &N(ChompBlur);
+    NpcStoneChompBlur* blurPtr = &N(ChompBlur);
 
     blurPtr->rot.x = x;
     blurPtr->rot.y = y;
@@ -220,7 +220,7 @@ ApiStatus func_80241D44_97F814(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_80241DF8_97F8C8(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    StoneChompBlur* blurPtr = &N(ChompBlur);
+    NpcStoneChompBlur* blurPtr = &N(ChompBlur);
 
     blurPtr->unk_38 = evt_get_variable(script, *args++);
     return ApiStatus_DONE2;
