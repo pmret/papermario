@@ -134,8 +134,8 @@ def handle_file(f_path):
         symbols.append((i + 4, l1.split()[1], l2))
 
     for symbol in reversed(symbols):
-        if symbol[2].startswith(".word"):
-            print("skipping" + symbol)
+        if symbol[2].startswith(".word") and not symbol[1].startswith("jtbl_"):
+            print("skipping" + str(symbol))
             continue
         migrated = handle_symbol(data_to_thing[effect], symbol)
 

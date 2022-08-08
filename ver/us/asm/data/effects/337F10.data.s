@@ -13,27 +13,3 @@ dlabel D_E0022D14
 
 dlabel D_E0022D1C
 .ascii "<Zdhjlm\0\0\0\0\0\0\0\0\0\0\0\0\0"
-
-dlabel D_E0022D30
-.word 0xE00221DC, 0xE0022318, 0xE0022318, 0xE00223EC, 0xE00223EC, 0x00000000
-
-dlabel D_E0022D48
-.double 0.05
-
-dlabel D_E0022D50
-.double 0.05
-
-dlabel D_E0022D58
-.double 0.01
-
-dlabel D_E0022D60
-.double 0.96
-
-dlabel D_E0022D68
-.double 0.1
-
-dlabel D_E0022D70
-.double -0.02
-
-dlabel D_E0022D78
-.double 0.9

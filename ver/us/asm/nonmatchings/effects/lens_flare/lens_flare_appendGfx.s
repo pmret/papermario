@@ -1,6 +1,8 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .text
+
 glabel lens_flare_appendGfx
 /* 344D20 E0034310 27BDFEE8 */  addiu     $sp, $sp, -0x118
 /* 344D24 E0034314 3C03DB06 */  lui       $v1, 0xdb06

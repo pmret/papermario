@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+dlabel D_E008AA78
+.double 0.3
+
+.section .text
+
 glabel snowfall_update
 /* 38CB2C E008A53C 27BDFFD0 */  addiu     $sp, $sp, -0x30
 /* 38CB30 E008A540 0080282D */  daddu     $a1, $a0, $zero

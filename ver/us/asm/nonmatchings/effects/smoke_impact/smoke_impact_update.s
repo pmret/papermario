@@ -1,6 +1,19 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+dlabel D_E003A820
+.double 0.1
+
+dlabel D_E003A828
+.double 0.04
+
+dlabel D_E003A830
+.double 0.9, 0.0
+
+.section .text
+
 glabel smoke_impact_update
 /* 34EE5C E003A1DC 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 34EE60 E003A1E0 AFBF0010 */  sw        $ra, 0x10($sp)

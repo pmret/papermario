@@ -1,6 +1,31 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+dlabel D_E0070D60
+.double 0.02
+
+dlabel D_E0070D68
+.double 0.04
+
+dlabel D_E0070D70
+.double 0.4
+
+dlabel D_E0070D78
+.double 0.1
+
+dlabel D_E0070D80
+.double 0.3
+
+dlabel D_E0070D88
+.double 0.2
+
+dlabel D_E0070D90
+.double 0.6, 0.0
+
+.section .text
+
 glabel shimmer_burst_update
 /* 3742A4 E00701F4 27BDFF98 */  addiu     $sp, $sp, -0x68
 /* 3742A8 E00701F8 AFB20028 */  sw        $s2, 0x28($sp)

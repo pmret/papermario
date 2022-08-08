@@ -1,6 +1,8 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .text
+
 glabel tubba_heart_attack_main
 /* 3D1690 E00CC000 27BDFF90 */  addiu     $sp, $sp, -0x70
 /* 3D1694 E00CC004 F7B40048 */  sdc1      $f20, 0x48($sp)

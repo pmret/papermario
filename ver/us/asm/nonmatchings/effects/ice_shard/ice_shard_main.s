@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+dlabel D_E01108C0
+.double 0.1
+
+.section .text
+
 glabel ice_shard_main
 /* 3F83F0 E0110000 27BDFFA8 */  addiu     $sp, $sp, -0x58
 /* 3F83F4 E0110004 F7B40040 */  sdc1      $f20, 0x40($sp)

@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+dlabel D_E00DA520
+.double 0.3, 0.0
+
+.section .text
+
 glabel shiny_flare_update
 /* 3D7344 E00DA104 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 3D7348 E00DA108 AFBF0010 */  sw        $ra, 0x10($sp)

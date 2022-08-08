@@ -1,6 +1,19 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+dlabel jtbl_E009AA60
+.word LE009A1AC_39675C, LE009A24C_3967FC, LE009A270_396820, LE009A28C_39683C, LE009A32C_3968DC, LE009A348_3968F8
+
+dlabel D_E009AA78
+.double 0.02
+
+dlabel D_E009AA80
+.double 0.05, 0.0
+
+.section .text
+
 glabel chomp_drop_update
 /* 3966F0 E009A140 27BDFFD0 */  addiu     $sp, $sp, -0x30
 /* 3966F4 E009A144 AFBF0020 */  sw        $ra, 0x20($sp)

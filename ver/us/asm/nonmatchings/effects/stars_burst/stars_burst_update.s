@@ -1,6 +1,16 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+dlabel D_E00427B0
+.double 0.8
+
+dlabel D_E00427B8
+.double 0.9
+
+.section .text
+
 glabel stars_burst_update
 /* 3549D4 E0042234 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 3549D8 E0042238 AFBF0010 */  sw        $ra, 0x10($sp)

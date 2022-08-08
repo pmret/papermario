@@ -1,6 +1,22 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+dlabel D_E00E0AC0
+.double 0.05
+
+dlabel D_E00E0AC8
+.double 0.04
+
+dlabel D_E00E0AD0
+.double 0.1
+
+dlabel D_E00E0AD8
+.double 0.3
+
+.section .text
+
 glabel embers_update
 /* 3DB638 E00E01D8 27BDFFA0 */  addiu     $sp, $sp, -0x60
 /* 3DB63C E00E01DC AFB20020 */  sw        $s2, 0x20($sp)

@@ -2788,7 +2788,7 @@ segments:
     vram: 0xE0028000
     subsegments:
     - [0x33CDF0, c, drop_leaves]
-    - [0x33D5D0, data]
+    - [0x33D5D0]
   - [0x33D610, bin] # drop_leaves, windy_leaves gfx
   - name: effect_dust
     dir: effects
@@ -2797,7 +2797,7 @@ segments:
     vram: 0xE002A000
     subsegments:
     - [0x33E8C0, c, dust]
-    - [0x33EFE0, data]
+    - [0x33EFE0]
   - [0x33F000, bin] # dust gfx
   - name: effect_shattering_stones
     dir: effects
@@ -2941,7 +2941,7 @@ segments:
     vram: 0xE003E000
     subsegments:
     - [0x352440, c, purple_ring]
-    - [0x352CB0, data]
+    - [0x352CB0]
   - [0x352CE0, bin] # purple_ring gfx
   - name: effect_flame
     dir: effects
@@ -3019,7 +3019,7 @@ segments:
     vram: 0xE0050000
     subsegments:
     - [0x35BFD0, c, sweat]
-    - [0x35C530, data]
+    - [0x35C530]
   - [0x35C550, bin] # sweat gfx
   - name: effect_sleep_bubble
     dir: effects
@@ -3037,7 +3037,7 @@ segments:
     vram: 0xE0056000
     subsegments:
     - [0x35DA00, c, windy_leaves]
-    - [0x35E8A0, data]
+    - [0x35E8A0]
   - name: effect_falling_leaves
     dir: effects
     type: code
@@ -3045,7 +3045,7 @@ segments:
     vram: 0xE0058000
     subsegments:
     - [0x35E920, c, falling_leaves]
-    - [0x35F0A0, data]
+    - [0x35F0A0]
   - [0x35F0E0, bin] # falling_leaves gfx
   - name: effect_stars_spread
     dir: effects
@@ -3054,7 +3054,7 @@ segments:
     vram: 0xE005A000
     subsegments:
     - [0x3602C0, c, stars_spread]
-    - [0x360A10, data]
+    - [0x360A10]
   - [0x360A30, bin] # stars_spread gfx
   - name: effect_steam_burst
     dir: effects
@@ -3196,7 +3196,7 @@ segments:
     vram: 0xE0072000
     subsegments:
     - [0x374E50, c, energy_shockwave]
-    - [0x375500, data]
+    - [0x375500]
   - [0x375510, bin] # energy_shockwave gfx
   - name: effect_shimmer_wave
     dir: effects
@@ -3231,7 +3231,7 @@ segments:
     vram: 0xE007A000
     subsegments:
     - [0x37C540, c, effect_3D]
-    - [0x37D140, data]
+    - [0x37D140]
   - [0x37D180, bin] # effect_3D gfx
   - name: effect_blast
     dir: effects
@@ -3426,7 +3426,7 @@ segments:
     vram: 0xE0094000
     subsegments:
     - [0x3928D0, c, flashing_box_shockwave]
-    - [0x393080, data]
+    - [0x393080]
   - [0x3930A0, bin] # flashing_box_shockwave gfx
   - name: effect_balloon
     dir: effects
@@ -3453,7 +3453,7 @@ segments:
     vram: 0xE009A000
     subsegments:
     - [0x3965B0, c, chomp_drop]
-    - [0x397010, data]
+    - [0x397010]
   - [0x397040, bin] # chomp_drop gfx
   - name: effect_quizmo_stage
     dir: effects
@@ -3752,7 +3752,7 @@ segments:
     vram: 0xE00CE000
     subsegments:
     - [0x3D2AC0, c, whirlwind]
-    - [0x3D3910, data]
+    - [0x3D3910]
   - [0x3D3930, bin] # whirlwind gfx
   - name: effect_red_impact
     dir: effects

@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+dlabel jtbl_E0066CE0
+.word LE006615C_36618C, LE006615C_36618C, LE0066198_3661C8, LE00661C0_3661F0, LE006620C_36623C, LE0066240_366270, LE006626C_36629C, LE00662A0_3662D0, LE00662DC_36630C, LE0066318_366348, LE0066348_366378, LE00663AC_3663DC, LE00663F8_366428, LE00663F8_366428, LE006642C_36645C, 0
+
+.section .text
+
 glabel radial_shimmer_main
 /* 366030 E0066000 27BDFFB0 */  addiu     $sp, $sp, -0x50
 /* 366034 E0066004 F7B40038 */  sdc1      $f20, 0x38($sp)

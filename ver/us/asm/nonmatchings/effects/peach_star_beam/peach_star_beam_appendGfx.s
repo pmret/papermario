@@ -1,6 +1,16 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+dlabel D_E010CA60
+.double 255.0
+
+dlabel D_E010CA68
+.double 0.4
+
+.section .text
+
 glabel peach_star_beam_appendGfx
 /* 3E585C E010C39C 27BDFF28 */  addiu     $sp, $sp, -0xd8
 /* 3E5860 E010C3A0 3C07DB06 */  lui       $a3, 0xdb06

@@ -1,6 +1,25 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+dlabel D_E00CCE70
+.double 0.01
+
+dlabel jtbl_E00CCE78
+.word LE00CC3D8_3D1A68, LE00CC448_3D1AD8, LE00CC53C_3D1BCC, LE00CC5E4_3D1C74, LE00CC614_3D1CA4, LE00CC790_3D1E20, LE00CC870_3D1F00, LE00CC920_3D1FB0, LE00CC920_3D1FB0, LE00CC920_3D1FB0, LE00CC920_3D1FB0, LE00CC920_3D1FB0, LE00CC920_3D1FB0, LE00CC920_3D1FB0, LE00CC920_3D1FB0, LE00CC920_3D1FB0, LE00CC920_3D1FB0, LE00CC920_3D1FB0, LE00CC920_3D1FB0, LE00CC920_3D1FB0, LE00CC4A4_3D1B34, 0
+
+dlabel D_E00CCED0
+.double 0.99
+
+dlabel D_E00CCED8
+.double -0.1
+
+dlabel D_E00CCEE0
+.double 0.9, 0.0
+
+.section .text
+
 glabel tubba_heart_attack_update
 /* 3D18E8 E00CC258 27BDFF10 */  addiu     $sp, $sp, -0xf0
 /* 3D18EC E00CC25C AFBF00BC */  sw        $ra, 0xbc($sp)

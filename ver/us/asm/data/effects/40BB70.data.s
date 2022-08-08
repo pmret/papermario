@@ -7,9 +7,3 @@ dlabel D_E0120780
 
 dlabel D_E0120794
 .word 0x09000898, 0x00000000, 0x00000000
-
-dlabel D_E01207A0
-.double 0.01
-
-dlabel D_E01207A8
-.double 0.05

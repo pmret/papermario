@@ -1,6 +1,31 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+dlabel D_E0058780
+.double 0.3
+
+dlabel D_E0058788
+.double 0.8
+
+dlabel D_E0058790
+.double 0.2
+
+dlabel D_E0058798
+.double 0.94
+
+dlabel D_E00587A0
+.double 0.05
+
+dlabel D_E00587A8
+.double 0.95
+
+dlabel D_E00587B0
+.double 0.92, 0.0
+
+.section .text
+
 glabel falling_leaves_update
 /* 35EAD4 E00581B4 27BDFFC8 */  addiu     $sp, $sp, -0x38
 /* 35EAD8 E00581B8 AFB3001C */  sw        $s3, 0x1c($sp)

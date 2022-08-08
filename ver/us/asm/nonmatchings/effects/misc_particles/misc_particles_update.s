@@ -1,6 +1,34 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+dlabel D_E00E4E20
+.double 0.05
+
+dlabel D_E00E4E28
+.double 0.04
+
+dlabel D_E00E4E30
+.double 0.2
+
+dlabel D_E00E4E38
+.double 0.6
+
+dlabel D_E00E4E40
+.double 0.1
+
+dlabel D_E00E4E48
+.double 0.2
+
+dlabel D_E00E4E50
+.double 0.6
+
+dlabel D_E00E4E58
+.double 0.01
+
+.section .text
+
 glabel misc_particles_update
 /* 3DE290 E00E4290 27BDFF80 */  addiu     $sp, $sp, -0x80
 /* 3DE294 E00E4294 AFB40038 */  sw        $s4, 0x38($sp)

@@ -1,6 +1,8 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .text
+
 glabel cold_breath_appendGfx
 /* 3D89C8 E00DE2A8 27BDFF38 */  addiu     $sp, $sp, -0xc8
 /* 3D89CC E00DE2AC 0080302D */  daddu     $a2, $a0, $zero

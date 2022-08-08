@@ -13,27 +13,3 @@ dlabel D_E008CB18
 
 dlabel D_E008CB1C
 .byte 0xFF, 0x40, 0xFF, 0x00
-
-dlabel D_E008CB20
-.double 1.2
-
-dlabel D_E008CB28
-.word 0xE008C180, 0xE008C1CC, 0xE008C180, 0xE008C1CC, 0xE008C180, 0xE008C1CC, 0xE008C180, 0xE008C1CC
-
-dlabel D_E008CB48
-.word 0xE008C34C, 0xE008C34C, 0xE008C354, 0xE008C354, 0xE008C35C, 0xE008C35C
-
-dlabel D_E008CB60
-.double 0.05
-
-dlabel D_E008CB68
-.double 0.3
-
-dlabel D_E008CB70
-.double 0.8
-
-dlabel D_E008CB78
-.double 0.1
-
-dlabel D_E008CB80
-.double 0.2, 0.0
