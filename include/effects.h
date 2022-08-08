@@ -776,8 +776,20 @@ typedef struct DisableXFXData {
 } DisableXFXData; // size = 0x48
 
 typedef struct BombetteBreakingFXData {
-    /* 0x00 */ char todo[0];
-} BombetteBreakingFXData; // size = unknown
+    /* 0x00 */ s16 type;
+    /* 0x02 */ s16 treeIndex;
+    /* 0x04 */ f32 unk_04;
+    /* 0x08 */ Vec3f center;
+    /* 0x14 */ Vec3f unk_14;
+    /* 0x20 */ Vec3f unk_20;
+    /* 0x2C */ Vec3f unk_2C;
+    /* 0x38 */ f32 unk_38;
+    /* 0x3C */ f32 unk_3C;
+    /* 0x40 */ f32 unk_40;
+    /* 0x44 */ s32 lifetime;
+    /* 0x48 */ s32 unk_48;
+    /* 0x4C */ s32 alpha;
+} BombetteBreakingFXData;
 
 typedef struct FireworkFXData {
     /* 0x00 */ char todo[0];
@@ -1206,22 +1218,6 @@ typedef struct PeachStarBeamFXData {
 typedef struct ChapterChangeFXData {
     /* 0x00 */ char todo[0];
 } ChapterChangeFXData; // size = unknown
-
-typedef struct BombetteBreakingFXData {
-    /* 0x00 */ s16 type;
-    /* 0x02 */ s16 treeIndex;
-    /* 0x04 */ f32 unk_04;
-    /* 0x08 */ Vec3f center;
-    /* 0x14 */ Vec3f unk_14;
-    /* 0x20 */ Vec3f unk_20;
-    /* 0x2C */ Vec3f unk_2C;
-    /* 0x38 */ f32 unk_38;
-    /* 0x3C */ f32 unk_3C;
-    /* 0x40 */ f32 unk_40;
-    /* 0x44 */ s32 lifetime;
-    /* 0x48 */ s32 unk_48;
-    /* 0x4C */ s32 alpha;
-} BombetteBreakingFXData;
 
 typedef struct IceShardFXData {
     /* 0x00 */ char unk_00[0x4C];

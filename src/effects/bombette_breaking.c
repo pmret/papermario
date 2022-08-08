@@ -72,7 +72,7 @@ EffectInstance* bombette_breaking_main(s32 type, s32 modelID, s32 treeIndex, f32
     numParts = (xParts * yParts * zParts) + 1;
     effect = shim_create_effect_instance(bpPtr);
     effect->numParts = numParts;
-    effect->data = data = shim_general_heap_malloc(numParts * sizeof(*data));
+    effect->data.bombetteBreaking = data = shim_general_heap_malloc(numParts * sizeof(*data));
     ASSERT(data != NULL);
 
     data->unk_04 = -sizeY * 0.5;
@@ -144,7 +144,7 @@ void bombette_breaking_init(EffectInstance* effect) {
 }
 
 void bombette_breaking_update(EffectInstance* effect) {
-    BombetteBreakingFXData* data = effect->data;
+    BombetteBreakingFXData* data = effect->data.bombetteBreaking;
     f32 unk_04;
     s32 i;
 
@@ -204,7 +204,7 @@ void bombette_breaking_render(EffectInstance* effect) {
 
 void bombette_breaking_appendGfx(void* effect) {
     Matrix4f sp20;
-    BombetteBreakingFXData* data = ((EffectInstance*)effect)->data;
+    BombetteBreakingFXData* data = ((EffectInstance*)effect)->data.bombetteBreaking;
     s32 lifetime = data->lifetime;
     u16 type = data->type;
     Gfx* sp60 = D_E0084E10[type];
@@ -237,7 +237,7 @@ void bombette_breaking_appendGfx(void* effect) {
 
     gSPDisplayList(gMasterGfxPos++, sp64);
 
-    data = ((EffectInstance*)effect)->data;
+    data = ((EffectInstance*)effect)->data.bombetteBreaking;
     data++;
     for (i = 1; i < ((EffectInstance*)effect)->numParts; i++, data++) {
         gDPSetPrimColor(gMasterGfxPos++, 0, 0, 255, 255, 255, (data->alpha * mainAlpha) / 255);
