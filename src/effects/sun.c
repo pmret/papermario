@@ -6,7 +6,7 @@ void sun_update(EffectInstance* effect);
 void sun_render(EffectInstance* effect);
 void sun_appendGfx(void* effect);
 
-EffectInstance* sun_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5) {
+EffectInstance* sun_main(s32 arg0, f32 offsetX, f32 offsetY, f32 offsetZ, f32 arg4, s32 duration) {
     EffectBlueprint sp10;
     EffectInstance* effect;
     SunFXData* data;
@@ -27,15 +27,15 @@ EffectInstance* sun_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 a
     ASSERT(data != NULL);
     
     data->unk_00 = arg0;
-    data->unk_14 = 0;
-    if (arg5 <= 0) {
-        data->unk_10 = 1000;
+    data->lifeTime = 0;
+    if (duration <= 0) {
+        data->timeLeft = 1000;
     } else {
-        data->unk_10 = arg5;
+        data->timeLeft = duration;
     }
-    data->unk_04.x = arg1;
-    data->unk_04.y = arg2;
-    data->unk_04.z = arg3;
+    data->unk_04.x = offsetX;
+    data->unk_04.y = offsetY;
+    data->unk_04.z = offsetZ;
     data->unk_34 = arg4;
     data->unk_18 = 255;
     data->unk_19 = 255;
@@ -45,11 +45,11 @@ EffectInstance* sun_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 a
     data->unk_1D = 255;
     data->unk_1E = 255;
 
-    for (i = 0; i < 5; i++) {
+    for (i = 0; i < ARRAY_COUNT(data->unk_20); i++) {
         data->unk_20[i] = 0.0f;
     }
-    data->unk_3C = 255;
-    data->unk_38 = 0;
+    data->targetAlpha = 255;
+    data->alpha = 0;
     
     return effect;
 }
