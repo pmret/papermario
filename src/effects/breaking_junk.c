@@ -16,7 +16,7 @@ Gfx* D_E01187B0[] = { D_090005A8, D_090005C8, D_090005E8, D_09000608 };
 
 Gfx* D_E01187C0[] = { D_09000400 };
 
-EffectInstance* breaking_junk_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5) {
+EffectInstance* breaking_junk_main(s32 arg0, f32 x, f32 y, f32 z, f32 scale, s32 time) {
     EffectBlueprint bp;
     EffectBlueprint* bpPtr = &bp;
     EffectInstance* effect;
@@ -41,21 +41,21 @@ EffectInstance* breaking_junk_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 a
 
     data->unk_00 = arg0;
     data->lifeTime = 0;
-    if (arg5 <= 0) {
+    if (time <= 0) {
         data->timeLeft = 1000;
     } else {
-        data->timeLeft = arg5;
+        data->timeLeft = time;
     }
     data->primA = 255;
 
     for (i = 0; i < effect->numParts; i++, data++) {
-        data->pos.x = arg1;
-        data->pos.y = arg2;
-        data->pos.z = arg3;
+        data->pos.x = x;
+        data->pos.y = y;
+        data->pos.z = z;
         data->vel.x = (shim_rand_int(10) - 5) * 0.5;
         data->vel.y = (shim_rand_int(5) + 1) * 0.8;
         data->vel.z = (shim_rand_int(10) - 5) * 0.5;
-        data->scale = arg4;
+        data->scale = scale;
         data->primR = data->envR = shim_rand_int(255);
         g = shim_rand_int(255 - data->envR);
         data->primG = data->envG = g;
