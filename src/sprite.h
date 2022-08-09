@@ -67,6 +67,13 @@ typedef struct PlayerSpriteSet {
     /* 0x08 */ s32 initiallyLoaded;
 } PlayerSpriteSet; // size = 0xC
 
+typedef struct PlayerSpriteCacheEntry {
+    /* 0x00 */ s32 lazyDeleteTime;
+    /* 0x04 */ s32 rasterIndex;
+    /* 0x08 */ s32 spriteIndex;
+    /* 0x0C */ IMG_PTR* raster;
+} PlayerSpriteCacheEntry; // size = 0x10
+
 /// Sprite data header.
 typedef struct SpriteAnimData {
     /* 0x00 */ SpriteRasterCacheEntry** rastersOffset;

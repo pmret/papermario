@@ -1170,7 +1170,12 @@ typedef struct StaticStatusFXData {
     /* 0x04 */ f32 unk_04;
     /* 0x08 */ f32 unk_08;
     /* 0x0C */ f32 unk_0C;
-} StaticStatusFXData; // size = ?
+    /* 0x10 */ char unk_10[0x10];
+    /* 0x20 */ s32 unk_20;
+    /* 0x24 */ s32 unk_24;
+    /* 0x28 */ s32 unk_28;
+    /* 0x2C */ char unk_2C[0x0C];
+} StaticStatusFXData; // size = 0x38
 
 typedef struct MovingCloudFXData {
     /* 0x00 */ char todo[0];
