@@ -4038,7 +4038,32 @@ segments:
     subsegments:
     - [0x403400, c, breaking_junk]
     - [0x403BB0]
-  - [0x403BF0, bin] # breaking_junk gfx
+  - name: effect_gfx_breaking_junk
+    dir: effects/gfx
+    type: code
+    start: 0x403BF0
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x403BF0, c, breaking_junk]
+    - start: 0x403BF0
+      type: .data
+      name: breaking_junk
+      subsegments:
+      - [0x403BF0, ia8, D_09000000_403BF0, 16, 16]
+      - [0x403CF0, ia8, D_09000100_403CF0, 16, 16]
+      - [0x403DF0, ia8, D_09000200_403DF0, 16, 16]
+      - [0x403EF0, ia8, D_09000300_403EF0, 16, 16]
+      - [0x403FF0, gfx, D_09000400_403FF0]
+      - [0x404098, vtx, D_090004A8_404098]
+      - [0x4040D8, vtx, D_090004E8_4040D8]
+      - [0x404118, vtx, D_09000528_404118]
+      - [0x404158, vtx, D_09000568_404158]
+      - [0x404198, gfx, D_090005A8_404198]
+      - [0x4041B8, gfx, D_090005C8_4041B8]
+      - [0x4041D8, gfx, D_090005E8_4041D8]
+      - [0x4041F8, gfx, D_09000608_4041F8]
+      - [0x404218]
   - name: effect_partner_buff
     dir: effects
     type: code

@@ -153,7 +153,7 @@ EffectTableEntry gEffectTable[] = {
     /* 0x7B */ FX_ENTRY(spirit_card, _3FA4B0),
     /* 0x7C */ FX_ENTRY(lil_oink, _3FF250),
     /* 0x7D */ FX_ENTRY(something_rotating, _3FA4B0),
-    /* 0x7E */ FX_ENTRY(breaking_junk, _403BF0),
+    /* 0x7E */ FX_ENTRY(breaking_junk, effect_gfx_breaking_junk),
     /* 0x7F */ FX_ENTRY(partner_buff, _404F40),
     /* 0x80 */ FX_ENTRY(quizmo_assistant, _407080),
     /* 0x81 */ FX_ENTRY(ice_pillar, _40A1C0),
