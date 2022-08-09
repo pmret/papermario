@@ -1144,9 +1144,7 @@ segments:
     - [0x169BE0, c]
     - [0x16A3E0, .data, 163400]
     - [0x16A680, data]
-    - [0x16C7D0, .rodata, 165490]
-    - [0x16C848, .rodata, 167570]
-    - [0x16C8C0, .rodata, 168590]
+    - [0x16C7D0]
   - type: code
     start: 0x16C8E0
     vram: 0x8023E000
@@ -1338,18 +1336,7 @@ segments:
     - [0x1C2FC0, .data, 1A5830]
     - [0x1C3000, .data, 1AF120]
     - [0x1CB0B0, .data, 1AF230]
-    - [0x1CB240, .rodata, 16c8e0]
-    - [0x1CB368, .rodata, 16F740]
-    - [0x1CB4E0, .rodata, battle_cam]
-    - [0x1CB670, .rodata, 17D6A0]
-    - [0x1CBC30, .rodata, 182B30]
-    - [0x1CBDD0, .rodata, 18C790]
-    - [0x1CBE70, .rodata, 18F340]
-    - [0x1CBE80, .rodata, 190B20]
-    - [0x1CBF80, .rodata, 196AA0]
-    - [0x1CC0A0, .rodata, actor_api]
-    - [0x1CC160, .rodata, 19FAF0]
-    - [0x1CC270, .rodata, 1A5830]
+    - [0x1CB240]
   - [0x1CC310, ci4,     icon/present, 32, 32]
   - [0x1CC510, palette, icon/present]
   - [0x1CC530, ci4,     icon/cake/finished_cake, 32, 32]
@@ -2515,7 +2502,7 @@ segments:
     subsegments:
     - [0x325AD0, c]
     - [0x325EE0, pm_effect_shims, effect_shims]
-    - [0x326160, .data, 325AD0]
+    - [0x326160]
   - name: effect_gfx_big_smoke_puff
     dir: effects/gfx
     type: code
@@ -2876,8 +2863,7 @@ segments:
     vram: 0xE003C000
     subsegments:
     - [0x34F4C0, c, damage_indicator]
-    - [0x350160, .data, damage_indicator]
-    - [0x350200, .rodata, damage_indicator]
+    - [0x350160]
   - name: effect_gfx_damage_indicator
     dir: effects/gfx
     type: code
@@ -5966,8 +5952,7 @@ segments:
     - [0x7E7A30, data]
     - [0x7E8470, data]
     - [0x7EA340, data]
-    - [0x7EAA50, .rodata, 7E73A0]
-    - [0x7EAD00, .rodata, 7E7850]
+    - [0x7EAA50]
   - name: mac_00
     dir: world/area_mac/mac_00
     type: code
@@ -6491,12 +6476,7 @@ segments:
     - [0x8C82B0, c]
     - [0x8C83A0, c]
     - [0x8C85E0, c]
-    - [0x8C85E0, .data, 8C7F90]
-    - [0x8C8680, .data, 8C8140]
-    - [0x8C88E0, .data, 8C82B0]
-    - [0x8C9780, .data, 8C83A0]
-    - [0x8CA2D0, .data, 8C85E0]
-    - [0x8CA8F0]
+    - [0x8C85E0]
   - name: kmr_04
     dir: world/area_kmr/kmr_04
     type: code
@@ -6603,9 +6583,7 @@ segments:
     subsegments:
     - [0x8EB360, c, header]
     - [0x8EB390, c, events]
-    - [0x8EB390, .data, header]
-    - [0x8EB420, .data, events]
-    - [0x8EBE10]
+    - [0x8EB390]
   - name: kmr_20
     dir: world/area_kmr/kmr_20
     type: code
@@ -6799,9 +6777,7 @@ segments:
     subsegments:
     - [0x929270, c]
     - [0x9292B0, c]
-    - [0x9292D0, .data, 929270]
-    - [0x929A00, .data, 9292B0]
-    - [0x929A80]
+    - [0x9292D0]
   - name: sbk_01
     dir: world/area_sbk/sbk_01
     type: code
@@ -6811,9 +6787,7 @@ segments:
     subsegments:
     - [0x929A90, c]
     - [0x929AD0, c]
-    - [0x929AF0, .data, 929A90]
-    - [0x929E00, .data, 929AD0]
-    - [0x92A290]
+    - [0x929AF0]
   - name: sbk_02
     dir: world/area_sbk/sbk_02
     type: code
@@ -7400,9 +7374,7 @@ segments:
     - [0x95B7E0,       c, 95B7E0]
     - [0x95E660,       c, 95E660]
     - [0x95E7A0,       c, 95E7A0]
-    - [0x95ECC0,   .data, 95B7E0]
-    - [0x9685C0,   .data, 95E7A0]
-    - [0x968FD0]
+    - [0x95ECC0]
   - name: dro_02
     dir: world/area_dro/dro_02
     type: code
@@ -10045,10 +10017,6 @@ segments:
     - [0xC08F70,    .data, data7]
     - [0xC08FF0,    .data, data]
     - [0xC20C70]
-    # rodata seemingly in 3 different parts:
-    # dgb_00-18, 1x 32767.0, 2 jump tables
-    # dgb_00, 2x 32767.0, jump table
-    # dgb_08 only
   - name: C20F40 # DMAd at the beginning of tubba blubba's castle (bridge cutscene)
     type: code
     dir: world/area_dgb
@@ -10358,8 +10326,7 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xC2EBA0,       c, C2EBA0]
-    - [0xC2FFD0,   .data, C2EBA0]
-    - [0xC31190]
+    - [0xC2FFD0]
   - name: dgb_03
     dir: world/area_dgb/dgb_03
     type: code
@@ -10369,8 +10336,7 @@ segments:
     subsegments:
     - [0xC314E0,       c, C314E0]
     - [0xC31730,       c, C31730]
-    - [0xC33CB0,   .data, C31730]
-    - [0xC35EA0]
+    - [0xC33CB0]
   - name: dgb_04
     dir: world/area_dgb/dgb_04
     type: code
@@ -10379,8 +10345,7 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xC36530,       c, C36530]
-    - [0xC39640,   .data, C36530]
-    - [0xC3A910]
+    - [0xC39640]
   - name: dgb_05
     dir: world/area_dgb/dgb_05
     type: code
@@ -10389,8 +10354,7 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xC3AA10,       c, C3AA10]
-    - [0xC3BEA0,   .data, C3AA10]
-    - [0xC3CD40]
+    - [0xC3BEA0]
   - name: dgb_06
     dir: world/area_dgb/dgb_06
     type: code
@@ -10399,8 +10363,7 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xC3D080,       c, C3D080]
-    - [0xC3D340,   .data, C3D080]
-    - [0xC3DBE0]
+    - [0xC3D340]
   - name: dgb_07
     dir: world/area_dgb/dgb_07
     type: code
@@ -10409,8 +10372,7 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xC3DBF0,       c, C3DBF0]
-    - [0xC3F020,   .data, C3DBF0]
-    - [0xC3FA70]
+    - [0xC3F020]
   - name: dgb_08
     dir: world/area_dgb/dgb_08
     type: code
@@ -10419,8 +10381,7 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xC3FDB0,       c, C3FDB0]
-    - [0xC43A40,   .data, C3FDB0]
-    - [0xC467A0]
+    - [0xC43A40]
   - name: dgb_09
     dir: world/area_dgb/dgb_09
     type: code
@@ -10429,8 +10390,7 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xC46BE0,       c, C46BE0]
-    - [0xC4A3E0,   .data, C46BE0]
-    - [0xC4BF50]
+    - [0xC4A3E0]
   - name: dgb_10
     dir: world/area_dgb/dgb_10
     type: code
@@ -10439,8 +10399,7 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xC4C390,       c, C4C390]
-    - [0xC4C580,   .data, C4C390]
-    - [0xC4D3D0]
+    - [0xC4C580]
   - name: dgb_11
     dir: world/area_dgb/dgb_11
     type: code
@@ -10449,8 +10408,7 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xC4D3E0,       c, C4D3E0]
-    - [0xC4D430,   .data, C4D3E0]
-    - [0xC4DEE0]
+    - [0xC4D430]
   - name: dgb_12
     dir: world/area_dgb/dgb_12
     type: code
@@ -10459,8 +10417,7 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xC4DEF0,       c, C4DEF0]
-    - [0xC4E1B0,   .data, C4DEF0]
-    - [0xC4E950]
+    - [0xC4E1B0]
   - name: dgb_13
     dir: world/area_dgb/dgb_13
     type: code
@@ -10469,8 +10426,7 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xC4E960, c, C4E960]
-    - [0xC4E960,   .data, C4E960]
-    - [0xC4F020]
+    - [0xC4E960]
   - name: dgb_14
     dir: world/area_dgb/dgb_14
     type: code
@@ -10479,8 +10435,7 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xC4F030, c, C4F030]
-    - [0xC4F030,   .data, C4F030]
-    - [0xC4F500]
+    - [0xC4F030]
   - name: dgb_15
     dir: world/area_dgb/dgb_15
     type: code
@@ -10490,8 +10445,7 @@ segments:
     subsegments:
     - [0xC4F510,       c, C4F510]
     - [0xC50CA0,       c, C50CA0]
-    - [0xC50D80,   .data, C4F510]
-    - [0xC521E0]
+    - [0xC50D80]
   - name: dgb_16
     dir: world/area_dgb/dgb_16
     type: code
@@ -10500,8 +10454,7 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xC52540,       c, C52540]
-    - [0xC53970,   .data, C52540]
-    - [0xC55720]
+    - [0xC53970]
   - name: dgb_17
     dir: world/area_dgb/dgb_17
     type: code
@@ -10510,8 +10463,7 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xC55A60,       c, C55A60]
-    - [0xC55A60,   .data, C55A60]
-    - [0xC55F30]
+    - [0xC55A60]
   - name: dgb_18
     dir: world/area_dgb/dgb_18
     type: code
@@ -10521,8 +10473,7 @@ segments:
     subsegments:
     - [0xC55F40,       c, C55F40]
     - [0xC56EF0,       c, C56EF0]
-    - [0xC571B0,   .data, C55F40]
-    - [0xC59810]
+    - [0xC571B0]
   - name: kzn_01
     dir: world/area_kzn/kzn_01
     type: code
@@ -10754,8 +10705,7 @@ segments:
     - [0xC9DF20,       c, C9DF20]
     - [0xC9DF60,       c, C9DF60]
     - [0xC9EE30,       c, C9EE30]
-    - [0xC9F300,   .data, C9DF60]
-    - [0xCA70A0]
+    - [0xC9F300]
   - name: flo_03
     dir: world/area_flo/flo_03
     type: code
@@ -10765,8 +10715,7 @@ segments:
     subsegments:
     - [0xCA72A0,       c, CA72A0]
     - [0xCA72E0,       c, CA72E0]
-    - [0xCA78D0,   .data, CA72E0]
-    - [0xCAC1D0]
+    - [0xCA78D0]
   - name: flo_07
     dir: world/area_flo/flo_07
     type: code
@@ -10776,8 +10725,7 @@ segments:
     subsegments:
     - [0xCAC1F0,       c, CAC1F0]
     - [0xCAC5D0,       c, CAC5D0]
-    - [0xCAC930,   .data, CAC5D0]
-    - [0xCAED20]
+    - [0xCAC930]
   - name: flo_08
     dir: world/area_flo/flo_08
     type: code
@@ -10789,8 +10737,7 @@ segments:
     - [0xCAFA80,       c, CAFA80]
     - [0xCAFAC0,       c, CAFAC0]
     - [0xCB0B80,       c, CB0B80]
-    - [0xCB0C20,   .data, CAFAC0]
-    - [0xCB4E60]
+    - [0xCB0C20]
   - name: flo_09
     dir: world/area_flo/flo_09
     type: code
@@ -10802,8 +10749,7 @@ segments:
     - [0xCB5040,       c, CB5040]
     - [0xCB50E0,       c, CB50E0]
     - [0xCB5320,       c, CB5320]
-    - [0xCB6820,   .data, CB50E0]
-    - [0xCB9190]
+    - [0xCB6820]
   - name: flo_10
     dir: world/area_flo/flo_10
     type: code
@@ -10816,9 +10762,7 @@ segments:
     - [0xCB9280,       c, CB9280]
     - [0xCB96B0,       c, CB96B0]
     - [0xCBA430,       c, CBA430]
-    - [0xCBA670,   .data, CB9280]
-    - [0xCBD290,   .data, CBA430]
-    - [0xCBDCB0]
+    - [0xCBA670]
   - name: flo_11
     dir: world/area_flo/flo_11
     type: code
