@@ -1,7 +1,6 @@
 #include "common.h"
 #include "effects_internal.h"
 
-
 void blast_init(EffectInstance* effect);
 void blast_update(EffectInstance* effect);
 void blast_render(EffectInstance* effect);

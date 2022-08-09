@@ -36,7 +36,7 @@ s32 bombette_breaking_get_model_list_index_from_tree_index(s32 listIndex) {
     return D_E0084E3C(listIndex);
 }
 
-EffectInstance* bombette_breaking_main(s32 type, s32 modelID, s32 treeIndex, f32 arg3, s32 arg4, s32 lifetime) {
+EffectInstance* bombette_breaking_main(s32 type, s32 modelID, s32 treeIndex, f32 arg3, s32 arg4, s32 time) {
     EffectBlueprint bp;
     EffectBlueprint* bpPtr = &bp;
     EffectInstance* effect;
@@ -76,7 +76,7 @@ EffectInstance* bombette_breaking_main(s32 type, s32 modelID, s32 treeIndex, f32
     ASSERT(data != NULL);
 
     data->unk_04 = -sizeY * 0.5;
-    data->lifetime = lifetime;
+    data->timeLeft = time;
     data->unk_48 = 0;
     data->type = type;
     data->unk_38 = arg3;
@@ -149,17 +149,17 @@ void bombette_breaking_update(EffectInstance* effect) {
     s32 i;
 
     data->unk_48++;
-    data->lifetime--;
+    data->timeLeft--;
 
-    if (data->lifetime < 0) {
+    if (data->timeLeft < 0) {
         shim_remove_effect(effect);
         return;
     }
 
     unk_04 = data->unk_04;
 
-    if (data->lifetime < 25.0f) {
-        data->alpha = data->lifetime * 10.0f;
+    if (data->timeLeft < 25.0f) {
+        data->alpha = data->timeLeft * 10.0f;
     }
     data->unk_38 += (data->unk_3C - data->unk_38) * 0.1;
 
@@ -205,7 +205,7 @@ void bombette_breaking_render(EffectInstance* effect) {
 void bombette_breaking_appendGfx(void* effect) {
     Matrix4f sp20;
     BombetteBreakingFXData* data = ((EffectInstance*)effect)->data.bombetteBreaking;
-    s32 lifetime = data->lifetime;
+    s32 timeLeft = data->timeLeft;
     u16 type = data->type;
     Gfx* sp60 = D_E0084E10[type];
     Gfx* sp64 = D_E0084E28[type];
@@ -214,7 +214,7 @@ void bombette_breaking_appendGfx(void* effect) {
     s32 mainAlpha = data->alpha;
     s32 i;
 
-    lifetime *= 4;
+    timeLeft *= 4;
 
     gDPPipeSync(gMasterGfxPos++);
     gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
@@ -226,7 +226,7 @@ void bombette_breaking_appendGfx(void* effect) {
 
     data++;
     for (i = 1; i < ((EffectInstance*)effect)->numParts; i++, data++) {
-        shim_guPositionF(sp20, lifetime + (130 * i), lifetime - (40 * i), lifetime + (80 * i), unk_40,
+        shim_guPositionF(sp20, timeLeft + (130 * i), timeLeft - (40 * i), timeLeft + (80 * i), unk_40,
                          data->unk_14.x, data->unk_14.y, data->unk_14.z);
         shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
         gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],

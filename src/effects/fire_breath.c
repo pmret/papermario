@@ -59,8 +59,8 @@ EffectInstance* fire_breath_main(
     }
 
     data->unk_30 = data->scale;
-    data->maxLifetime = lifetime;
-    data->lifetime = lifetime;
+    data->lifeTime = lifetime;
+    data->timeLeft = lifetime;
     data->spawnTimer = 0;
     data->alpha = 255;
     data->unk_5C = 0.0f;
@@ -93,30 +93,30 @@ void fire_breath_init(EffectInstance* effect) {
 
 void fire_breath_update(EffectInstance* effect) {
     FireBreathFXData* data = effect->data.fireBreath;
-    s32 maxLifetime;
-    s32 lifetime;
+    s32 lifeTime;
+    s32 timeLeft;
     s32 spawnTimer;
 
-    data->lifetime--;
+    data->timeLeft--;
     data->unk_5C = (data->spawnTimer * 4.0f) / 10.0f;
     data->spawnTimer++;
 
-    if (data->lifetime < 0) {
+    if (data->timeLeft < 0) {
         shim_remove_effect(effect);
         return;
     }
 
-    lifetime = data->lifetime;
-    maxLifetime = data->maxLifetime;
+    timeLeft = data->timeLeft;
+    lifeTime = data->lifeTime;
     spawnTimer = data->spawnTimer;
 
-    if (lifetime >= 6 && data->type == FIRE_BREATH_LARGE) {
+    if (timeLeft >= 6 && data->type == FIRE_BREATH_LARGE) {
         data->scale += (2.5 - data->scale) * 0.05;
     }
 
-    data->pos.x = data->initPos.x + (((data->endPos.x - data->initPos.x + data->unk_50.x) * spawnTimer) / maxLifetime);
-    data->pos.y = data->initPos.y + (((data->endPos.y - data->initPos.y + data->unk_50.y) * spawnTimer) / maxLifetime);
-    data->pos.z = data->initPos.z + (((data->endPos.z - data->initPos.z + data->unk_50.z) * spawnTimer) / maxLifetime);
+    data->pos.x = data->initPos.x + (((data->endPos.x - data->initPos.x + data->unk_50.x) * spawnTimer) / lifeTime);
+    data->pos.y = data->initPos.y + (((data->endPos.y - data->initPos.y + data->unk_50.y) * spawnTimer) / lifeTime);
+    data->pos.z = data->initPos.z + (((data->endPos.z - data->initPos.z + data->unk_50.z) * spawnTimer) / lifeTime);
 
     if (data->type == FIRE_BREATH_SMALL) {
         data->unk_60 += (f32) spawnTimer * 0.01;
@@ -129,7 +129,7 @@ void fire_breath_update(EffectInstance* effect) {
         shim_load_effect(EFFECT_FIRE_BREATH);
         spawned = fire_breath_main(
             data->type, data->initPos.x, data->initPos.y, data->initPos.z, data->endPos.x, data->endPos.y,
-            data->endPos.z, data->numChildren - 1, data->spawnDelay, maxLifetime
+            data->endPos.z, data->numChildren - 1, data->spawnDelay, lifeTime
         );
 
         spawned->data.fireBreath->primR = data->primR;
@@ -143,18 +143,18 @@ void fire_breath_update(EffectInstance* effect) {
         spawned->data.fireBreath->scaleChangeFactor = data->scaleChangeFactor;
     }
 
-    if (lifetime < 10 && data->type == FIRE_BREATH_LARGE) {
-        data->alpha = lifetime * 25;
+    if (timeLeft < 10 && data->type == FIRE_BREATH_LARGE) {
+        data->alpha = timeLeft * 25;
     }
 
     if (data->type == FIRE_BREATH_SMALL) {
         data->scale += (0.3 - data->scale) * 0.008;
-        data->alpha = (lifetime * 224) / maxLifetime;
+        data->alpha = (timeLeft * 224) / lifeTime;
     }
 
     if (data->type == FIRE_BREATH_TINY) {
         data->scale += (data->unk_34 - data->scale) * data->scaleChangeFactor;
-        data->alpha = (lifetime * 224) / maxLifetime;
+        data->alpha = (timeLeft * 224) / lifeTime;
     }
 }
 

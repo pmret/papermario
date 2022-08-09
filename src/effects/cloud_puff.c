@@ -45,7 +45,7 @@ void cloud_puff_main(f32 arg0, f32 arg1, f32 arg2, f32 arg3) {
         part->unk_24 = (shim_rand_int(10) * 0.03) + 1.0;
         part->unk_28 = (shim_rand_int(10) * 0.03) + 1.7;
         part->unk_2C = func_E0200000(60);
-        part->lifetime = 30;
+        part->timeLeft = 30;
         part->unk_34 = 0.5f;
         part->unk_38 = -0.02f;
         part->unk_3C = 0.00005f;
@@ -66,8 +66,8 @@ void cloud_puff_update(EffectInstance* effect) {
 
     for (i = 0; i < effect->numParts; i++, part++) {
         if (part->alive) {
-            part->lifetime--;
-            if (part->lifetime <= 0) {
+            part->timeLeft--;
+            if (part->timeLeft <= 0) {
                 part->alive = FALSE;
             } else {
                 cond = TRUE;
@@ -83,11 +83,11 @@ void cloud_puff_update(EffectInstance* effect) {
                 part->unk_10 += part->unk_34;
                 part->unk_28 *= 0.98;
 
-                if (part->lifetime < 10) {
+                if (part->timeLeft < 10) {
                     part->unk_28 *= 0.9;
                 }
 
-                if (part->lifetime < 15) {
+                if (part->timeLeft < 15) {
                     part->alpha -= 16;
                 }
             }

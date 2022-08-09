@@ -489,7 +489,7 @@ typedef union {
     struct SpinningFlowerData* spinningFlower;
     struct TrumpetPlantData* trumpetPlant;
     struct MunchlesiaData* munchlesia;
-    struct ArrowSignData* arrowSign;    
+    struct ArrowSignData* arrowSign;
 } EntityData;
 
 typedef struct Entity {

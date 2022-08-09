@@ -4037,7 +4037,7 @@ segments:
     vram: 0xE0118000
     subsegments:
     - [0x403400, c, breaking_junk]
-    - [0x403BB0, data]
+    - [0x403BB0]
   - [0x403BF0, bin] # breaking_junk gfx
   - name: effect_partner_buff
     dir: effects
