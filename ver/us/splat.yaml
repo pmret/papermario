@@ -9937,9 +9937,7 @@ segments:
     subsegments:
     - [0xBF6A00, c, header]
     - [0xBF6A00, c, events]
-    - [0xBF6A00,   .data, header]
-    - [0xBF6B00,   .data, events]
-    - [0xBF7670]
+    - [0xBF6A00]
   - name: arn_11
     dir: world/area_arn/arn_11
     type: code
@@ -9949,9 +9947,7 @@ segments:
     subsegments:
     - [0xBF7680, c, header]
     - [0xBF7680, c, events]
-    - [0xBF7680,   .data, header]
-    - [0xBF7770,   .data, events]
-    - [0xBF8780]
+    - [0xBF7680]
   - name: arn_12
     dir: world/area_arn/arn_12
     type: code
@@ -9961,9 +9957,7 @@ segments:
     subsegments:
     - [0xBF8790, c, header]
     - [0xBF8790, c, events]
-    - [0xBF8790,   .data, header]
-    - [0xBF8890,   .data, events]
-    - [0xBF9400]
+    - [0xBF8790]
   - name: arn_13
     dir: world/area_arn/arn_13
     type: code
@@ -9973,9 +9967,7 @@ segments:
     subsegments:
     - [0xBF9410, c, header]
     - [0xBF9410, c, events]
-    - [0xBF9410,   .data, header]
-    - [0xBF9510,   .data, events]
-    - [0xBFA090]
+    - [0xBF9410]
   - name: dgb_00
     dir: world/area_dgb/dgb_00
     type: code
@@ -9985,9 +9977,7 @@ segments:
     subsegments:
     - [0xBFA0A0,       c, BFA0A0]
     - [0xBFA100,       c, BFA100]
-    - [0xBFA150,   .data, BFA0A0]
-    - [0xBFA260,   .data, BFA100]
-    - [0xBFD840]
+    - [0xBFA150]
   - name: dgb_01
     dir: world/area_dgb/dgb_01
     type: code
@@ -10771,8 +10761,7 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xCBDCD0,       c, CBDCD0]
-    - [0xCBDFF0,   .data, CBDCD0]
-    - [0xCC0E10]
+    - [0xCBDFF0]
   - name: flo_12
     dir: world/area_flo/flo_12
     type: code
@@ -10782,8 +10771,7 @@ segments:
     subsegments:
     - [0xCC0E30,       c, CC0E30]
     - [0xCC0E70,       c, CC0E70]
-    - [0xCC1520,   .data, CC0E70]
-    - [0xCC3800]
+    - [0xCC1520]
   - name: flo_13
     dir: world/area_flo/flo_13
     type: code
@@ -10794,8 +10782,7 @@ segments:
     - [0xCC3810,       c, CC3810]
     - [0xCC3850,       c, CC3850]
     - [0xCC6DE0,       c, CC6DE0]
-    - [0xCC6E80,   .data, CC3850]
-    - [0xCCB230]
+    - [0xCC6E80]
   - name: flo_14
     dir: world/area_flo/flo_14
     type: code
@@ -10806,9 +10793,7 @@ segments:
     - [0xCCB310,       c, CCB310]
     - [0xCCBE20,       c, CCBE20]
     - [0xCCD670,       c, CCD670]
-    - [0xCCD6A0,   .data, CCB310]
-    - [0xCCF7D0,   .data, CCBE20]
-    - [0xCD0620]
+    - [0xCCD6A0]
   - name: flo_15
     dir: world/area_flo/flo_15
     type: code
@@ -10817,8 +10802,7 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xCD06C0,       c, CD06C0]
-    - [0xCD06C0,   .data, CD06C0]
-    - [0xCD1E20]
+    - [0xCD06C0]
   - name: flo_16
     dir: world/area_flo/flo_16
     type: code
@@ -10831,9 +10815,7 @@ segments:
     - [0xCD1F10,       c, CD1F10]
     - [0xCD2C80,       c, CD2C80]
     - [0xCD4770,       c, CD4770]
-    - [0xCD47A0,   .data, CD1F10]
-    - [0xCD5E40,   .data, CD2C80]
-    - [0xCD7210]
+    - [0xCD47A0]
   - name: flo_17
     dir: world/area_flo/flo_17
     type: code
@@ -10844,8 +10826,7 @@ segments:
     - [0xCD72E0,       c, CD72E0]
     - [0xCD7320,       c, CD7320]
     - [0xCD7350,       c, CD7350]
-    - [0xCDA500,   .data, CD7350]
-    - [0xCDC5D0]
+    - [0xCDA500]
   - name: flo_18
     dir: world/area_flo/flo_18
     type: code
@@ -10856,9 +10837,7 @@ segments:
     - [0xCDC6A0,       c, CDC6A0]
     - [0xCDCBD0,       c, CDCBD0]
     - [0xCDCC30,       c, CDCC30]
-    - [0xCDCE70,   .data, CDC6A0]
-    - [0xCE2D60,   .data, CDCC30]
-    - [0xCE36E0]
+    - [0xCDCE70]
   - name: flo_19
     dir: world/area_flo/flo_19
     type: code
@@ -10867,8 +10846,7 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xCE36F0,       c, CE36F0]
-    - [0xCE4030,   .data, CE36F0]
-    - [0xCE66F0]
+    - [0xCE4030]
   - name: flo_21
     dir: world/area_flo/flo_21
     type: code
@@ -10878,9 +10856,7 @@ segments:
     subsegments:
     - [0xCE6700,       c, CE6700]
     - [0xCE7240,       c, CE7240]
-    - [0xCE73F0,   .data, CE6700]
-    - [0xCE7440,   .data, CE7240]
-    - [0xCEC210]
+    - [0xCE73F0]
   - name: flo_22
     dir: world/area_flo/flo_22
     type: code
@@ -10891,9 +10867,7 @@ segments:
     - [0xCEC240,       c, CEC240]
     - [0xCEC280,       c, CEC280]
     - [0xCEC290,       c, CEC290]
-    - [0xCEC4D0,   .data, CEC240]
-    - [0xCED7E0,   .data, CEC290]
-    - [0xCEE250]
+    - [0xCEC4D0]
   - name: flo_23
     dir: world/area_flo/flo_23
     type: code
@@ -10903,8 +10877,7 @@ segments:
     subsegments:
     - [0xCEE260,       c, CEE260]
     - [0xCEE2A0,       c, CEE2A0]
-    - [0xCEEF30,   .data, CEE2A0]
-    - [0xCF08D0]
+    - [0xCEEF30]
   - name: flo_24
     dir: world/area_flo/flo_24
     type: code
@@ -10915,8 +10888,7 @@ segments:
     - [0xCF0940,       c, CF0940]
     - [0xCF0980,       c, CF0980]
     - [0xCF0BC0,       c, CF0BC0]
-    - [0xCF0ED0,   .data, CF0980]
-    - [0xCF2BB0]
+    - [0xCF0ED0]
   - name: flo_25
     dir: world/area_flo/flo_25
     type: code
@@ -10928,9 +10900,7 @@ segments:
     - [0xCF2C10,       c, CF2C10]
     - [0xCF4BC0,       c, CF4BC0]
     - [0xCF4E00,       c, CF4E00]
-    - [0xCF4EA0,   .data, CF2C10]
-    - [0xCF68B0,   .data, CF4BC0]
-    - [0xCF7AA0]
+    - [0xCF4EA0]
   - name: sam_01
     dir: world/area_sam/sam_01
     type: code
@@ -11877,7 +11847,7 @@ segments:
     overlay: True
     subsegments:
     - [0xE23260, c, idle]
-    - [0xE23690, .data, idle]
+    - [0xE23690]
   - type: code
     name: world_action_walk
     dir: world/action
@@ -11903,7 +11873,7 @@ segments:
     overlay: True
     subsegments:
     - [0xE245D0, c, 18]
-    - [0xE248D0, .data, 18]
+    - [0xE248D0]
   - type: code
     name: world_action_land
     dir: world/action
@@ -12039,10 +12009,7 @@ segments:
     - [0xE2B530, c, Padlock]
     - [0xE2BE40, c, BoardedFloor]
     - [0xE2C930, c, BombableRock]
-    - [0xE2D410, .data, Padlock]
-    - [0xE2D530, .data, BoardedFloor]
-    - [0xE2D5E0, .data, BombableRock]
-    - [0xE2D680]
+    - [0xE2D410]
   - type: code
     dir: entity/jan_iwa
     start: 0xE2D730
@@ -12052,10 +12019,7 @@ segments:
     - [0xE2D730, c, Plants1]
     - [0xE2E5F0, c, Plants2]
     - [0xE2EDE0, c, ArrowSign]
-    - [0xE2EFD0, .data, Plants1]
-    - [0xE2F150, .data, Plants2]
-    - [0xE2F6A0, .data, ArrowSign]
-    - [0xE2F6F0]
+    - [0xE2EFD0]
   - type: code
     dir: entity/sbk_omo
     start: 0xE2F750
@@ -12064,9 +12028,7 @@ segments:
     subsegments:
     - [0xE2F750, c, Tweester]
     - [0xE307C0, c, StarBoxLauncher]
-    - [0xE31380, .data, Tweester]
-    - [0xE313F0, .data, StarBoxLauncher]
-    - [0xE314C0]
+    - [0xE31380]
   - name: entity_model_Hammer1Block
     dir: entity/model
     type: code
