@@ -1054,7 +1054,10 @@ typedef struct ThrowSpinyFXData {
 } ThrowSpinyFXData; //sizeof 0x6C
 
 typedef struct Effect65FXData {
-    /* 0x00 */ char todo[0];
+    /* 0x00 */ char unk_00[0x34];
+    /* 0x34 */ f32 unk_34;
+    /* 0x38 */ Vec3f pos;
+    /* 0x44 */ char todo[0];
 } Effect65FXData; // size = unknown
 
 typedef struct TubbaHeartAttackFXData {
@@ -1062,7 +1065,9 @@ typedef struct TubbaHeartAttackFXData {
 } TubbaHeartAttackFXData; // size = unknown
 
 typedef struct WhirlwindFXData {
-    /* 0x00 */ char todo[0];
+    /* 0x00 */ char unk_00[0x4];
+    /* 0x04 */ Vec3f pos;
+    /* 0x10 */ char todo[0];
 } WhirlwindFXData; // size = unknown
 
 typedef struct RedImpactFXData {
@@ -1082,6 +1087,8 @@ typedef struct EnergyInOutFXData {
     /* 0x04 */ Vec3f pos;
     /* 0x10 */ char unk_10[0x24];
     /* 0x34 */ f32 scale;
+    /* 0x38 */ char unk_38[0xC];
+    /* 0x44 */ f32 unk_44;
     /* 0x38 */ char todo[0];
 } EnergyInOutFXData; // size = unknown
 

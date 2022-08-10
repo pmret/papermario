@@ -1129,7 +1129,7 @@ glabel func_80257DA4
 /* 1876A0 80258DC0 0200382D */  daddu     $a3, $s0, $zero
 /* 1876A4 80258DC4 0C09647B */  jal       func_802591EC
 /* 1876A8 80258DC8 AFA00010 */   sw       $zero, 0x10($sp)
-/* 1876AC 80258DCC 0C0973B2 */  jal       func_8025CEC8
+/* 1876AC 80258DCC 0C0973B2 */  jal       _add_part_decoration
 /* 1876B0 80258DD0 02E0202D */   daddu    $a0, $s7, $zero
 /* 1876B4 80258DD4 8FBF02C4 */  lw        $ra, 0x2c4($sp)
 /* 1876B8 80258DD8 8FBE02C0 */  lw        $fp, 0x2c0($sp)

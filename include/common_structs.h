@@ -1672,7 +1672,8 @@ typedef struct DecorationTable {
     /* 0x8B8 */ s8 decorationType[2];
     /* 0x8BA */ u8 unk_8BA[2];
     /* 0x8BC */ s8 unk_8BC[2];
-    /* 0x8C0 */ s16 unk_8C0[4];
+    /* 0x8BE */ s16 unk_8BE[2];
+    /* 0x8C2 */ char unk_8C0[4];
     /* 0x8C6 */ DecorationUnk unk_8C6[2];
 } DecorationTable; // size = 0x8E8
 
@@ -1824,7 +1825,7 @@ typedef struct Actor {
     /* 0x1FA */ s16 hpChangeCounter;
     /* 0x1FC */ u16 damageCounter;
     /* 0x1FE */ char unk_1FE[2];
-    /* 0x200 */ struct EffectInstance* unk_200; // fx_attack_result_text
+    /* 0x200 */ struct EffectInstance* attackResultEffect;
     /* 0x204 */ s8 unk_204;
     /* 0x205 */ s8 unk_205;
     /* 0x206 */ s8 unk_206;
