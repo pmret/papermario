@@ -20,7 +20,7 @@ from util.symbols import Symbol
 
 from intervaltree import Interval, IntervalTree
 
-VERSION = "0.9.0"
+VERSION = "0.9.2"
 
 parser = argparse.ArgumentParser(
     description="Split a rom given a rom, a config, and output directory"

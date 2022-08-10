@@ -3,16 +3,17 @@ from util import iter
 
 
 class N64SegIa16(N64SegIa4):
-    @staticmethod
-    def parse_image(data, width, height, flip_h=False, flip_v=False):
-        img = bytearray()
+    def split(self, rom_bytes):
+        path = self.out_path()
+        path.parent.mkdir(parents=True, exist_ok=True)
 
-        for x, y, i in iter.iter_image_indexes(width, height, 2, 1, flip_h, flip_v):
-            i1 = data[i]
-            a1 = data[i + 1]
-            img += bytes((i1, a1))
+        data = rom_bytes[self.rom_start : self.rom_end]
 
-        return img
+        w = self.__class__.get_writer(self.width, self.height)
+        with open(path, "wb") as f:
+            w.write_array(f, data)
+
+        self.log(f"Wrote {self.name} to {path}")
 
     def max_length(self):
         return self.width * self.height * 2
