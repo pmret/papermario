@@ -122,7 +122,7 @@ EffectTableEntry gEffectTable[] = {
     /* 0x5C */ FX_ENTRY(water_fountain, _3B8860),
     /* 0x5D */ FX_ENTRY(underwater, _3B9A70),
     /* 0x5E */ FX_ENTRY(lightning_bolt, _3BAEA0),
-    /* 0x5F */ FX_ENTRY(water_splash, _3BCA90),
+    /* 0x5F */ FX_ENTRY(water_splash, effect_gfx_water_splash),
     /* 0x60 */ FX_ENTRY(snowman_doll, _3BD9A0),
     /* 0x61 */ FX_ENTRY(fright_jar, _3C1BA0),
     /* 0x62 */ FX_ENTRY(stop_watch, _3CB890),

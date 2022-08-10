@@ -3674,7 +3674,27 @@ segments:
     subsegments:
     - [0x3BBF60, c, water_splash]
     - [0x3BCA50]
-  - [0x3BCA90, bin] # water_splash gfx
+  - name: effect_gfx_water_splash
+    dir: effects/gfx
+    type: code
+    start: 0x3BCA90
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x3BCA90, c, water_splash]
+    - start: 0x3BCA90
+      type: .data
+      name: water_splash
+      subsegments:
+      - [0x3BCA90, ia8, D_09000000_3BCA90, 16, 16]
+      - [0x3BCB90, gfx, D_09000100_3BCB90]
+      - [0x3BCC38, vtx, D_090001A8_3BCC38]
+      - [0x3BCC78, vtx, D_090001E8_3BCC78]
+      - [0x3BCCB8, vtx, D_09000228_3BCCB8]
+      - [0x3BCCF8, gfx, D_09000268_3BCCF8]
+      - [0x3BCD18, gfx, D_09000288_3BCD18]
+      - [0x3BCD38, gfx, D_090002A8_3BCD38]
+      - [0x3BCD58]
   - name: effect_snowman_doll
     dir: effects
     type: code
