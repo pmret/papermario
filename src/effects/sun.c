@@ -57,7 +57,68 @@ EffectInstance* sun_main(s32 arg0, f32 offsetX, f32 offsetY, f32 offsetZ, f32 ar
 void sun_init(EffectInstance* effect) {
 }
 
-INCLUDE_ASM(s32, "effects/sun", sun_update);
+f32 shim_sin_deg(f32);
+
+void sun_update(EffectInstance* effect) {
+    SunFXData* data = effect->data.sun;
+    s32 time;
+    s32 i;
+
+    if (effect->flags & 0x10) {
+        effect->flags &= ~0x10;
+        data->timeLeft = 16;
+    }
+    if (data->timeLeft < 1000) {
+        data->timeLeft--;
+    }
+    
+    data->lifeTime++;
+    if (data->lifeTime > 90*60*60) {
+        data->lifeTime = 256;
+    }
+    if (data->timeLeft < 0) {
+        shim_remove_effect(effect);
+        return;
+    }
+    
+    time = data->lifeTime;
+    if (data->timeLeft < 16) {
+        data->alpha -= 16;
+        if (data->alpha < 0) {
+            data->alpha = 0;
+        }
+    }
+    if (data->targetAlpha < 0) {
+        data->targetAlpha = 0;
+    } else if (data->targetAlpha > 255) {
+        data->targetAlpha = 255;
+    }
+    
+    if (data->alpha > data->targetAlpha) {
+        data->alpha -= 8;
+        if (data->alpha < data->targetAlpha) {
+            data->alpha = data->targetAlpha;
+        }
+    } else if (data->alpha < data->targetAlpha) {
+        data->alpha += 8;
+        if (data->targetAlpha < data->alpha) {
+            data->alpha = data->targetAlpha;
+        }
+    }
+
+    for (i = 0; i < 5; i++) {
+        data->unk_20[i] = -4.0
+            * ((shim_sin_deg((time * 2 + (20 * i))) * 0.01) + 0.05)
+            * shim_sin_deg(((f32) time * 0.25) + (20 * SQ(i)));
+
+        if (data->unk_20[i] < 0.0f) {
+            data->unk_20[i] += 256.0f;
+        }
+        if (data->unk_20[i] > 256.0f) {
+            data->unk_20[i] -= 256.0f;
+        }
+    }
+}
 
 void sun_render(EffectInstance* effect) {
     RenderTask renderTask;

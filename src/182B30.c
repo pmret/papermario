@@ -46,6 +46,8 @@ void func_8025B1A8(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4);
 void func_8025B5C0(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4, s32 arg5);
 void func_8025BAA0(s32 arg0, ActorPart* part, s32 yaw, s32 arg3, Matrix4f mtx, s32 arg5);
 void func_8025C120(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4);
+s32 func_8025C840(s32 arg0, ActorPart* part, s32 yaw, s32);
+s32 func_8025CCC8(s32 arg0, ActorPart* part, s32 yaw, s32); 
 
 s32 func_80254250(void) {
     s32 ret;
@@ -785,7 +787,55 @@ void update_player_actor_shadow(void) {
 
 INCLUDE_ASM(void, "182B30", func_80257DA4);
 
-INCLUDE_ASM(void, "182B30", func_80258E14);
+void func_80258E14(void* arg0) {
+    Matrix4f mtxRotX, mtxRotY, mtxRotZ, mtxRot, mtxScale;
+    Matrix4f mtxPivotOn, mtxPivotOff, mtxTranslate;
+    Matrix4f mtxTemp, mtxTransform, mtxMirror;
+    Actor* player = gBattleStatus.playerActor;
+    ActorPart* part = &player->partsTable[0];
+    f32 playerYaw;
+    f32 dx, dy, dz;
+
+    playerYaw = player->yaw;
+    dx = player->currentPos.x + player->headOffset.x;
+    dx += part->unkOffset[0];
+    dy = player->currentPos.y + player->headOffset.y;
+    dy += part->unkOffset[1];
+    dz = player->currentPos.z + player->headOffset.z - 5.0f;
+    part->yaw = playerYaw;
+    
+    guTranslateF(mtxTranslate, dx, dy, dz - 1.0f);
+    
+    guTranslateF(mtxPivotOn,
+        -player->rotationPivotOffset.x * player->scalingFactor,
+        -player->rotationPivotOffset.y * player->scalingFactor,
+        -player->rotationPivotOffset.z * player->scalingFactor);
+    guTranslateF(mtxPivotOff, 
+        player->rotationPivotOffset.x * player->scalingFactor,
+        player->rotationPivotOffset.y * player->scalingFactor,
+        player->rotationPivotOffset.z * player->scalingFactor);
+    
+    guRotateF(mtxRotX, player->rotation.x, 1.0f, 0.0f, 0.0f);
+    guRotateF(mtxRotY, player->rotation.y, 0.0f, 1.0f, 0.0f);
+    guRotateF(mtxRotZ, player->rotation.z, 0.0f, 0.0f, 1.0f);
+    guMtxCatF(mtxRotY, mtxRotX, mtxTemp);
+    guMtxCatF(mtxTemp, mtxRotZ, mtxRot);
+    guScaleF(mtxScale,
+        player->scale.x * SPRITE_WORLD_SCALE_D * player->scalingFactor,
+        player->scale.y * SPRITE_WORLD_SCALE_D * player->scalingFactor * part->verticalStretch,
+        player->scale.z * SPRITE_WORLD_SCALE_D);
+    mtx_mirror_y(mtxMirror);
+    
+    guMtxCatF(mtxScale, mtxPivotOn, mtxTemp);
+    guMtxCatF(mtxTemp, mtxRot, mtxTemp);
+    guMtxCatF(mtxTemp, mtxPivotOff, mtxTemp);
+    guMtxCatF(mtxTemp, mtxTranslate, mtxTransform);
+    guMtxCatF(mtxTransform, mtxMirror, mtxTransform);
+    
+    func_8025C840(0, part, clamp_angle(playerYaw + 180.0f), 1);
+    func_8025CCC8(0, part, clamp_angle(playerYaw + 180.0f), 1);
+    func_802591EC(0, part, clamp_angle(playerYaw + 180.0f), mtxTransform, 1);
+}
 
 s32 func_802591EC(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
     s32 opacity;
