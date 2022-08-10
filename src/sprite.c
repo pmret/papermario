@@ -92,15 +92,6 @@ PlayerSpriteSet spr_playerSpriteSets[] = {
     /* Peach */ {  6, 0x900, 0x00003C00 },
 };
 
-void spr_appendGfx_component_flat(
-    Quad* vertices,
-    IMG_PTR raster, PAL_PTR palette,
-    s32 width, s32 height,
-    f32 arg5,
-    Matrix4f mtx,
-    s32 alpha
-);
-
 void spr_init_quad_cache(void) {
     s32 i;
 
@@ -195,6 +186,16 @@ void spr_clear_quad_cache(void) {
         }
     }
 }
+
+void spr_appendGfx_component_flat(
+    Quad* vertices,
+    IMG_PTR raster, PAL_PTR palette,
+    s32 width, s32 height,
+    f32 arg5,
+    Matrix4f mtx,
+    s32 alpha
+);
+
 
 INCLUDE_ASM(s32, "sprite", spr_appendGfx_component_flat);
 
