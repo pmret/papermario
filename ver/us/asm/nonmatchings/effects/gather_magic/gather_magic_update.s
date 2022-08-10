@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+dlabel D_E008E8A0
+.double 0.2, 0.0
+
+.section .text
+
 glabel gather_magic_update
 /* 38F064 E008E204 27BDFFA8 */  addiu     $sp, $sp, -0x58
 /* 38F068 E008E208 AFB3001C */  sw        $s3, 0x1c($sp)

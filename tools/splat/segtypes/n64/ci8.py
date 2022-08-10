@@ -43,7 +43,15 @@ class N64SegCi8(N64SegRgba16):
         )
 
         self.palette: "Optional[Palette]" = None
-        self.palette_name = self.name
+
+        palette_name = self.name
+        if isinstance(yaml, dict):
+            if "palette" in yaml:
+                palette_name = yaml["palette"]
+        elif len(args) > 2:
+            palette_name = args[2]
+
+        self.palette_name = palette_name
 
     def split(self, rom_bytes):
         path = options.get_asset_path() / self.dir / (self.name + ".png")

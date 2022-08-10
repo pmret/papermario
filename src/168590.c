@@ -2,8 +2,20 @@
 #include "filemenu.h"
 #include "hud_element.h"
 
+typedef struct UnkStruct8015A370 {
+    /* 0x00 */ u8 unk_00;
+    /* 0x01 */ char unk_01[0x3];
+    /* 0x04 */ void (*unk_04)(s32);
+    /* 0x08 */ char unk_08[0x14];
+    /* 0x1C */ u8 unk_1C;
+} UnkStruct8015A370;
+
+extern UnkStruct8015A370 D_8015A370;
+
 extern MenuWindowBP D_8024A134[1];
 extern HudScript* D_8024A180[3];
+extern s32 D_8024A18C;
+extern s32 D_8024C108;
 extern MenuWindowBP D_8024A190[2];
 extern s32 D_8024A1B4;
 extern s8 D_8024C090;
@@ -128,7 +140,149 @@ void filemenu_draw_contents_file_create_header(MenuPanel* menu, s32 baseX, s32 b
 }
 
 void filemenu_draw_contents_choose_name(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
+
+#ifdef NON_MATCHING
+void filemenu_draw_contents_choose_name(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity,
+                                        s32 darkening)
+{
+    s32 sp18;
+    s32 menuPage;
+    s32 pageNotOne;
+    s32 page;
+    s32 temp_s2;
+    s32 new_var;
+
+    s32 gridData;
+    s32 xOffset;
+    s32 yOffset;
+    s32 color;
+    s32 flags;
+    s32 i;
+    s32 r;
+    s32 c;
+
+    s32 new_var2;
+
+    if ((D_8015A370.unk_00 & 8) && D_8015A370.unk_04 == func_80248170) {
+        sp18 = D_8015A370.unk_1C * 2;
+        menuPage = menu->page;
+        pageNotOne = menu->page != 1;
+        if (sp18 > 0x10) {
+            sp18 = 0x10;
+        }
+
+        for (r = 0; r < menu->numRows; r++) {
+            temp_s2 = (r * 15); // ???
+
+            for (i = 0; i < 2; i++) {
+                if (i == 0) {
+                    temp_s2 += 4;
+                    page = menuPage;
+                    gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE,
+                                  baseX,
+                                  baseY + temp_s2,
+                                  baseX + width,
+                                  baseY + temp_s2 + sp18);
+                } else {
+                    temp_s2 += 4;
+                    page = pageNotOne;
+                    gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE,
+                                  baseX,
+                                  baseY + temp_s2 + sp18,
+                                  baseX + width,
+                                  baseY + temp_s2 + 0x10);
+                }
+
+                for (c = 0; c < menu->numCols; c++) {
+                    gridData = menu->gridData[(page * menu->numCols * menu->numRows) + (menu->numCols * r) + c];
+                    if (gridData != 0xF7) {
+                        if (r == menu->col && c == menu->row) {
+                            flags = 8;
+                            color = 0;
+                        } else {
+                            flags = 0;
+                            color = 10;
+                        }
+                        xOffset = (c * 19) + 12;
+                        yOffset = (r * 17) + 5;
+                        if ((u32) (gridData - 0xA2) < 0x4EU) {
+                            if (gridData >= 0xC6) {
+                                hud_element_set_render_pos(D_8024C108, baseX + xOffset + 22, baseY + yOffset + 8);
+                                hud_element_draw_without_clipping(D_8024C108);
+                                flags = 0;
+                            }
+                        }
+                        if (gridData == 0xC6) {
+                            xOffset -= 1;
+                        }
+                        if (gridData == 0xC9) {
+                            xOffset += 5;
+                        }
+                        if (gridData == 0xCA) {
+                            xOffset += 8;
+                        }
+                        if (gridData == 0xC6 || gridData == 0xCA || gridData == 0xC9) {
+                            yOffset -= 1;
+                        }
+                        filemenu_draw_message((Message* ) gridData, baseX + xOffset, baseY + yOffset, 255, color, flags);
+                    }
+                }
+            }
+        }
+        gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, baseX, baseY, baseX + width, baseY + height);
+    } else {
+        for (r = 0; r < menu->numCols; r++) {
+            for (c = 0; c < menu->numRows; c++) {
+                gridData = menu->gridData[(menu->page * menu->numCols * menu->numRows) + (menu->numCols * c) + r];
+                if (gridData != 0xF7) {
+                    if (r == menu->col && c == menu->row) {
+                        flags = 8;
+                        color = 0;
+                    } else {
+                        flags = 0;
+                        color = 10;
+                    }
+                    xOffset = (r * 19) + 12;
+                    yOffset = (c * 17) + 5;
+
+                    new_var2 = gridData; // ???
+
+                    if ((u32) (gridData - 0xA2) < 0x4EU) {
+                        if (gridData >= 0xC6) {
+                            hud_element_set_render_pos(D_8024C108, baseX + xOffset + 22, baseY + yOffset + 8);
+                            hud_element_draw_without_clipping(D_8024C108);
+                            flags = 0;
+                        }
+                    }
+                    if (gridData == 0xC6) {
+                        xOffset -= 1;
+                    }
+                    if (gridData == 0xC9) {
+                        xOffset += 5;
+                    }
+                    if (gridData == 0xCA) {
+                        xOffset += 8;
+                    }
+                    if (gridData == 0xC6 || gridData == 0xCA || gridData == 0xC9) {
+                        yOffset -= 1;
+                    }
+                    filemenu_draw_message((Message* ) new_var2, baseX + xOffset, baseY + yOffset, 255, color, flags);
+                }
+            }
+        }
+    }
+
+    if (filemenu_8024C098 == 3) {
+        if (filemenu_heldButtons & (BUTTON_STICK_RIGHT | BUTTON_STICK_LEFT | BUTTON_STICK_DOWN | BUTTON_STICK_UP)) {
+            D_8024A18C = -4;
+        }
+        D_8024A18C += 1;
+        filemenu_set_cursor_goal_pos(0x31, baseX + 2 + (menu->col * 19), baseY + 13 + (menu->row * 17));
+    }
+}
+#else
 INCLUDE_ASM(s32, "168590", filemenu_draw_contents_choose_name);
+#endif
 
 void filemenu_choose_name_init(MenuPanel* menu) {
     s32 i;

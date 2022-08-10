@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+dlabel D_E0098530
+.double 0.8, 0.0
+
+.section .text
+
 glabel floating_rock_update
 /* 395D20 E0098170 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* 395D24 E0098174 AFBF0020 */  sw        $ra, 0x20($sp)

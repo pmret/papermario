@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+dlabel jtbl_E0114750
+.word LE0114150_3FEC30, LE0114148_3FEC28, LE01141B4_3FEC94, LE0114158_3FEC38, LE0114210_3FECF0, LE011426C_3FED4C, 0, 0
+
+.section .text
+
 glabel lil_oink_update
 /* 3FEBBC E01140DC 27BDFFD0 */  addiu     $sp, $sp, -0x30
 /* 3FEBC0 E01140E0 AFBF0028 */  sw        $ra, 0x28($sp)

@@ -1,6 +1,8 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .text
+
 glabel firework_main
 /* 389850 E0086000 27BDFF98 */  addiu     $sp, $sp, -0x68
 /* 389854 E0086004 AFB00028 */  sw        $s0, 0x28($sp)

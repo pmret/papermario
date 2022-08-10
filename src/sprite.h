@@ -32,7 +32,7 @@ typedef struct SpriteAnimComponent {
 
 // TODO: consider moving to 101b90_len_8f0 (sprite_cache)
 typedef struct SpriteRasterCacheEntry {
-    /* 0x00 */ void* image;
+    /* 0x00 */ IMG_PTR image;
     /* 0x04 */ u8 width;
     /* 0x05 */ u8 height;
     /* 0x06 */ s8 palette;
@@ -71,7 +71,7 @@ typedef struct PlayerSpriteCacheEntry {
     /* 0x00 */ s32 lazyDeleteTime;
     /* 0x04 */ s32 rasterIndex;
     /* 0x08 */ s32 spriteIndex;
-    /* 0x0C */ IMG_PTR* raster;
+    /* 0x0C */ IMG_PTR raster;
 } PlayerSpriteCacheEntry; // size = 0x10
 
 /// Sprite data header.

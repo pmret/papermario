@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+dlabel D_E0038A20
+.double 0.6
+
+.section .text
+
 glabel spiky_white_aura_main
 /* 34DD20 E0038000 27BDFF38 */  addiu     $sp, $sp, -0xc8
 /* 34DD24 E0038004 F7BE00C0 */  sdc1      $f30, 0xc0($sp)

@@ -7,6 +7,3 @@ dlabel D_E0048A00
 
 dlabel D_E0048A08
 .word 0x09001040, 0x09001040
-
-dlabel D_E0048A10
-.double 0.1, 0.0

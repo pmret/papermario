@@ -239,7 +239,7 @@ typedef struct FlowerFXData {
 typedef struct CloudPuffFXData {
     /* 0x00 */ s32 alive;
     /* 0x04 */ char unk_04[0x2];
-    /* 0x06 */ s16 lifetime;
+    /* 0x06 */ s16 timeLeft;
     /* 0x08 */ u8 alpha;
     /* 0x09 */ char unk_09[0x3];
     /* 0x0C */ f32 unk_0C;
@@ -332,9 +332,7 @@ typedef struct FloatingFlowerFXData {
 } FloatingFlowerFXData; // size = 0x48
 
 typedef struct SnowflakeFXData {
-    /* 0x00 */ f32 xPos;
-    /* 0x04 */ f32 yPos;
-    /* 0x08 */ f32 zPos;
+    /* 0x00 */ Vec3f pos;
     /* 0x0C */ f32 unk_0C;
     /* 0x10 */ f32 unk_10;
     /* 0x14 */ f32 unk_14;
@@ -641,8 +639,8 @@ typedef struct FireBreathFXData {
     /* 0x38 */ f32 scale;
     /* 0x3C */ f32 scaleChangeFactor;
     /* 0x40 */ s32 alpha;
-    /* 0x44 */ s32 maxLifetime;
-    /* 0x48 */ s32 lifetime;
+    /* 0x44 */ s32 lifeTime;
+    /* 0x48 */ s32 timeLeft;
     /* 0x4C */ s32 spawnTimer;
     /* 0x50 */ Vec3f unk_50;
     /* 0x5C */ f32 unk_5C;
@@ -766,8 +764,20 @@ typedef struct DisableXFXData {
 } DisableXFXData; // size = 0x48
 
 typedef struct BombetteBreakingFXData {
-    /* 0x00 */ char todo[0];
-} BombetteBreakingFXData; // size = unknown
+    /* 0x00 */ s16 type;
+    /* 0x02 */ s16 treeIndex;
+    /* 0x04 */ f32 unk_04;
+    /* 0x08 */ Vec3f center;
+    /* 0x14 */ Vec3f unk_14;
+    /* 0x20 */ Vec3f unk_20;
+    /* 0x2C */ Vec3f unk_2C;
+    /* 0x38 */ f32 unk_38;
+    /* 0x3C */ f32 unk_3C;
+    /* 0x40 */ f32 unk_40;
+    /* 0x44 */ s32 timeLeft;
+    /* 0x48 */ s32 unk_48;
+    /* 0x4C */ s32 alpha;
+} BombetteBreakingFXData;
 
 typedef struct FireworkFXData {
     /* 0x00 */ char todo[0];
@@ -1240,7 +1250,21 @@ typedef struct SomethingRotatingFXData {
 } SomethingRotatingFXData; // size = unknown
 
 typedef struct BreakingJunkFXData {
-    /* 0x00 */ char todo[0];
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ Vec3f pos;
+    /* 0x10 */ Vec3f vel;
+    /* 0x1C */ s32 timeLeft;
+    /* 0x20 */ s32 lifeTime;
+    /* 0x24 */ f32 scale;
+    /* 0x28 */ f32 rot;
+    /* 0x2C */ s16 primR;
+    /* 0x2E */ s16 primG;
+    /* 0x30 */ s16 primB;
+    /* 0x32 */ s16 primA;
+    /* 0x34 */ s16 envR;
+    /* 0x36 */ s16 envG;
+    /* 0x38 */ s16 envB;
+    /* 0x3A */ s16 envA;
 } BreakingJunkFXData; // size = unknown
 
 typedef struct PartnerBuffFXData {
@@ -1470,8 +1494,8 @@ typedef struct WattEffectData {
     /* 0x08 */ s32 angle;
     /* 0x0C */ s32 unk_0C;
     /* 0x10 */ s32 unk_10;
-    /* 0x14 */ struct EffectInstance* effect1;
-    /* 0x18 */ struct EffectInstance* effect2;
+    /* 0x14 */ EffectInstance* effect1;
+    /* 0x18 */ EffectInstance* effect2;
     /* 0x1C */ s32 debuff;
 } WattEffectData;
 

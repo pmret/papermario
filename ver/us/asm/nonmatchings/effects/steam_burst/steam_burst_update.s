@@ -1,6 +1,19 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+dlabel D_E005C710
+.double 0.1
+
+dlabel D_E005C718
+.double 0.04
+
+dlabel D_E005C720
+.double 0.9, 0.0
+
+.section .text
+
 glabel steam_burst_update
 /* 3610C0 E005C180 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 3610C4 E005C184 AFBF0010 */  sw        $ra, 0x10($sp)

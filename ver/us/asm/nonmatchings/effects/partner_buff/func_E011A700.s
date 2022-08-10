@@ -1,6 +1,8 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .text
+
 glabel func_E011A700
 /* 404920 E011A700 27BDFFB8 */  addiu     $sp, $sp, -0x48
 /* 404924 E011A704 0080302D */  daddu     $a2, $a0, $zero

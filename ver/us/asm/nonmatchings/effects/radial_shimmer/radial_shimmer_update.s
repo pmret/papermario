@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+dlabel D_E0066D20
+.double 0.7, 0.0
+
+.section .text
+
 glabel radial_shimmer_update
 /* 3664C8 E0066498 27BDFFB0 */  addiu     $sp, $sp, -0x50
 /* 3664CC E006649C AFB1003C */  sw        $s1, 0x3c($sp)

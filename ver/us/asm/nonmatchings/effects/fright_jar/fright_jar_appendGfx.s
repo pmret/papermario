@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+dlabel jtbl_E00C29A8
+.word LE00C27F0_3C19C0, LE00C2818_3C19E8, LE00C2830_3C1A00, LE00C2848_3C1A18, LE00C2860_3C1A30, LE00C2878_3C1A48, LE00C2890_3C1A60, LE00C28A8_3C1A78, LE00C28C0_3C1A90, LE00C28D8_3C1AA8
+
+.section .text
+
 glabel fright_jar_appendGfx
 /* 3C13EC E00C221C 27BDFF40 */  addiu     $sp, $sp, -0xc0
 /* 3C13F0 E00C2220 0080302D */  daddu     $a2, $a0, $zero

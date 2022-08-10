@@ -29,6 +29,7 @@ void shim_mem_clear(void* data, s32 numBytes);
 void shim_transform_point(Matrix4f mtx, f32 inX, f32 inY, f32 inZ, f32 inS, f32* outX, f32* outY, f32* outZ, f32* outS);
 s32 shim_npc_raycast_down_sides(s32, f32*, f32*, f32*, f32*);
 void shim_sfx_play_sound_at_position(s32 soundID, s32 value2, f32 posX, f32 posY, f32 posZ);
+void shim_mdl_draw_hidden_panel_surface(Gfx**, u16 treeIndex);
 
 // the actual signature is going to be wrong, but it doesn't matter
 // TODO remove when every effect's main is sorted out
@@ -94,7 +95,7 @@ void blast_main(s32, f32, f32, f32, f32, s32);
 EffectInstance* fire_flower_main(s32, f32, f32, f32, s32);
 FX_MAIN(recover_main);
 EffectInstance* disable_x_main(s32, f32, f32, f32, s32);
-FX_MAIN(bombette_breaking_main);
+EffectInstance* bombette_breaking_main(s32, s32, s32, f32, s32, s32);
 FX_MAIN(firework_main);
 FX_MAIN(confetti_main);
 FX_MAIN(snowfall_main);
@@ -152,7 +153,7 @@ FX_MAIN(ice_shard_main);
 FX_MAIN(spirit_card_main);
 FX_MAIN(lil_oink_main);
 FX_MAIN(something_rotating_main);
-FX_MAIN(breaking_junk_main);
+EffectInstance* breaking_junk_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
 FX_MAIN(partner_buff_main);
 FX_MAIN(quizmo_assistant_main);
 FX_MAIN(ice_pillar_main);

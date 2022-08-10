@@ -7,18 +7,3 @@ dlabel D_E0030E90
 
 dlabel D_E0030EB4
 .word 0x00000000, 0x00000000, 0x00000000
-
-dlabel D_E0030EC0
-.word 0xE00305D0, 0xE00305DC, 0xE00305F4, 0xE0030660, 0xE0030660, 0x00000000
-
-dlabel D_E0030ED8
-.double 0.94
-
-dlabel D_E0030EE0
-.double 0.8
-
-dlabel D_E0030EE8
-.double 0.6
-
-dlabel D_E0030EF0
-.double 0.7, 0.0

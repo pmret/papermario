@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+dlabel D_E00D0B40
+.double 0.3, 0.0
+
+.section .text
+
 glabel red_impact_appendGfx
 /* 3D42AC E00D048C 27BDFED8 */  addiu     $sp, $sp, -0x128
 /* 3D42B0 E00D0490 3C07DB06 */  lui       $a3, 0xdb06

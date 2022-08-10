@@ -1,6 +1,34 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+dlabel D_E004AE98
+.double 0.8
+
+dlabel D_E004AEA0
+.double 0.94
+
+dlabel D_E004AEA8
+.double 1.002
+
+dlabel D_E004AEB0
+.word 0xE004A4F8, 0xE004A4F8, 0xE004A51C, 0xE004A548, 0xE004A584, 0xE004A51C
+
+dlabel D_E004AEC8
+.double 0.8
+
+dlabel D_E004AED0
+.double 0.9
+
+dlabel D_E004AED8
+.double 0.99
+
+dlabel D_E004AEE0
+.double 0.95
+
+.section .text
+
 glabel shockwave_update
 /* 3587F0 E004A330 27BDFFA8 */  addiu     $sp, $sp, -0x58
 /* 3587F4 E004A334 AFB40020 */  sw        $s4, 0x20($sp)

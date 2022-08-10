@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+dlabel D_E0088DA0
+.double 0.98, 0.0
+
+.section .text
+
 glabel confetti_update
 /* 38B398 E00885A8 27BDFFC8 */  addiu     $sp, $sp, -0x38
 /* 38B39C E00885AC AFBF0028 */  sw        $ra, 0x28($sp)

@@ -1,5 +1,8 @@
 # splat Release Notes
 
+### 0.9.2
+* Added "palette" argument to ci4/ci8 segments so that segments' palettes can be manually specified
+
 ### 0.9.1
 * Fixed a bug in which local labels and jump table labels could replace raw words in data blobs during data disassembly
 
@@ -22,11 +25,11 @@ We plan to roll this out in phases. Currently, it only handles actual code disas
 
 ### Global options changes
 
-The new `symbol_name_format` option allows specification of how symbols will be named. This can be set as a global option and also changed per-segment. `symbol_norom_name_format` is used when the symbol does not have a rom address (BSS).
+The new `symbol_name_format` option allows specification of how symbols will be named. This can be set as a global option and also changed per-segment. `symbol_name_format_no_rom` is used when the symbol does not have a rom address (BSS).
 
  The following substitutions are allowed:
 
-`$ROM` - the rom address of the symbol, hex-formatted and padded to 6 characters (ABCF10, 000030, 123456) (note: only for `symbol_name_format`, usage in `symbol_norom_name_format` will cause an error)
+`$ROM` - the rom address of the symbol, hex-formatted and padded to 6 characters (ABCF10, 000030, 123456) (note: only for `symbol_name_format`, usage in `symbol_name_format_no_rom` will cause an error)
 
 `$VRAM` - the vram address of the symbol, hex-formatted and padded to 8 characters (00030010, 00020015, ABCDEF10)
 
@@ -34,14 +37,14 @@ The new `symbol_name_format` option allows specification of how symbols will be 
 
 The default values for these options are as follows
 
-`symbol_name_format` : `$VRAM_$ROM`
+`symbol_name_format` : `$VRAM`
 
-`symbol_noram_name_format` : `$VRAM_$SEG`
+`symbol_name_format_no_rom` : `$VRAM_$SEG`
 
 The appropriate prefix string will still automatically be applied depending on the type of the symbol: `D_` for data, `jtbl_` for jump tables, and `func_` for functions. This functionality may be customizable in the future.
 
 ----
-The `auto_all_section` option now should be a list of section names (`[".data", ".rodata", ".bss"]` by default) indicating the sections that should be linked from .o files built from source files (.c or asm/hasm .s files), when no subsegment explicitly indicates linking this type of section.
+The `auto_all_sections` option now should be a list of section names (`[".data", ".rodata", ".bss"]` by default) indicating the sections that should be linked from .o files built from source files (.c or asm/hasm .s files), when no subsegment explicitly indicates linking this type of section.
 
 For example, if any subsegment of a code segment is of segment type `data` or `.data`, the `.data` section from all `c`/`asm`/`hasm` subsegments will not be linked unless explicitly indicated with a relevant `.data` subsegment.
 

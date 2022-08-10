@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+dlabel D_E0048A10
+.double 0.1, 0.0
+
+.section .text
+
 glabel ring_blast_update
 /* 356AB0 E0048130 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 356AB4 E0048134 AFBF0010 */  sw        $ra, 0x10($sp)

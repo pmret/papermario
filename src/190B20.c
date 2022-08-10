@@ -220,7 +220,7 @@ s32 btl_are_all_enemies_defeated(void) {
 
 s32 btl_check_enemies_defeated(void) {
     if (btl_are_all_enemies_defeated()) {
-        btl_set_state(0x1A);
+        btl_set_state(BATTLE_STATE_VICTORY);
         return TRUE;
     }
     return FALSE;

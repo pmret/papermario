@@ -1,6 +1,22 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+dlabel D_E0116D90
+.double 51.43
+
+dlabel jtbl_E0116D98
+.word LE0116370_4029B0, LE0116380_4029C0, LE0116598_402BD8, LE01165A8_402BE8, LE0116634_402C74, 0
+
+dlabel D_E0116DB0
+.double 0.0039215686
+
+dlabel D_E0116DB8
+.double 0.01
+
+.section .text
+
 glabel something_rotating_update
 /* 4027CC E011618C 27BDFF88 */  addiu     $sp, $sp, -0x78
 /* 4027D0 E0116190 AFB40030 */  sw        $s4, 0x30($sp)
