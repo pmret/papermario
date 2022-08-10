@@ -27,7 +27,7 @@ typedef struct PlayerCurrentAnimInfo {
 typedef struct SpriteAnimComponent {
     /* 0x00 */ s16** cmdList;
     /* 0x04 */ s16 cmdListSize;
-    /* 0x08 */ Vec3s compOffset;
+    /* 0x06 */ Vec3s compOffset;
 } SpriteAnimComponent; // size = 0xC
 
 // TODO: consider moving to 101b90_len_8f0 (sprite_cache)
@@ -138,9 +138,9 @@ s32 spr_free_sprite(s32 spriteInstanceID);
 
 s32 func_802DE748(s32, s32); // TODO
 
-s32 func_802DE780(s32, s32, s32, s32, s32, s32, s32, s32);
+void func_802DE780(s32, s32, s32, s32, s32, s32, s32, s32);
 
-s32 func_802DE894(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+void func_802DE894(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
 
 //s32 func_802DE8DC(); // TODO
 
