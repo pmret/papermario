@@ -102,7 +102,7 @@ EffectTableEntry gEffectTable[] = {
     /* 0x48 */ FX_ENTRY(attack_result_text, _3903D0),
     /* 0x49 */ FX_ENTRY(small_gold_sparkle, effect_gfx_small_gold_sparkle),
     /* 0x4A */ FX_ENTRY(flashing_box_shockwave, _3930A0),
-    /* 0x4B */ FX_ENTRY(balloon, _394670),
+    /* 0x4B */ FX_ENTRY(balloon, effect_gfx_balloon),
     /* 0x4C */ FX_ENTRY(floating_rock, _3960F0),
     /* 0x4D */ FX_ENTRY(chomp_drop, _397040),
     /* 0x4E */ FX_ENTRY(quizmo_stage, _398BC0),

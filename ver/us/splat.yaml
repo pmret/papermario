@@ -3422,7 +3422,35 @@ segments:
     subsegments:
     - [0x394280, c, balloon]
     - [0x394660]
-  - [0x394670, bin] # balloon gfx
+  - name: effect_gfx_balloon
+    dir: effects/gfx
+    type: code
+    start: 0x394670
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x394670, c, balloon]
+    - start: 0x394670
+      type: .data
+      name: balloon
+      subsegments:
+      - [0x394670, ci4, D_09000000_394670, 32, 32]
+      - [0x394870, ci4, D_09000200_394870, 32, 32, D_09000000_394670]
+      - [0x394A70, palette, D_09000000_394670]
+      - [0x394A90] # padding
+      - [0x394C70, ci4, D_09000600_394C70, 32, 32]
+      - [0x394E70, ci4, D_09000800_394E70, 32, 32, D_09000600_394C70]
+      - [0x395070, palette, D_09000600_394C70]
+      - [0x395090] # padding
+      - [0x395270, ci4, D_09000C00_395270, 32, 32]
+      - [0x395470, ci4, D_09000E00_395470, 32, 32, D_09000C00_395270]
+      - [0x395670, palette, D_09000C00_395270]
+      - [0x395690] # padding
+      - [0x395870, vtx, D_09001200_395870]
+      - [0x3958F0, gfx, D_09001280_3958F0]
+      - [0x3959C8, gfx, D_09001358_3959C8]
+      - [0x395AA0, gfx, D_09001430_395AA0]
+      - [0x395B78, gfx, D_09001508_395B78]
   - name: effect_floating_rock
     dir: effects
     type: code
