@@ -77,7 +77,7 @@ u8 DummyInstrumentBase[190] = {
 
 // copy of SMALL_ROOM_PARAMS
 s32 CUSTOM_SMALL_ROOM_PARAMS[] = {
-    /* sections	   length */
+    /* sections    length */
         3,             11,
     /*                                      chorus  chorus   filter
     input  output  fbcoef  ffcoef   gain     rate   depth     coef  */
@@ -88,7 +88,7 @@ s32 CUSTOM_SMALL_ROOM_PARAMS[] = {
 
 // modified ECHO_PARAMS -- length and output changed
 s32 CUSTOM_ECHO_PARAMS_1[] = {
-    /* sections	   length */
+    /* sections    length */
         1,             11,
     /*                                      chorus  chorus   filter
     input  output  fbcoef  ffcoef   gain     rate   depth     coef  */
@@ -97,7 +97,7 @@ s32 CUSTOM_ECHO_PARAMS_1[] = {
 
 // modified ECHO_PARAMS -- length and output changed
 s32 CUSTOM_ECHO_PARAMS_2[] = {
-    /* sections	   length */
+    /* sections    length */
         1,             13,
     /*                                      chorus  chorus   filter
     input  output  fbcoef  ffcoef   gain     rate   depth     coef  */
@@ -106,7 +106,7 @@ s32 CUSTOM_ECHO_PARAMS_2[] = {
 
 // modified ECHO_PARAMS -- length and output changed
 s32 CUSTOM_ECHO_PARAMS_3[] = {
-    /* sections	   length */
+    /* sections    length */
         1,             14,
     /*                                      chorus  chorus   filter
     input  output  fbcoef  ffcoef   gain     rate   depth     coef  */
@@ -152,31 +152,31 @@ InstrumentEffect* D_800783C0[] = {
 };
 
 void (*SefCmdHandlers[])(SoundManager*, SoundPlayer*) = {
-	au_SEFCmd_00_SetVolume,
-	au_SEFCmd_01_SetPan,
-	au_SEFCmd_02_SetInstrument,
-	au_SEFCmd_03_SetReverb,
-	au_SEFCmd_04,
-	au_SEFCmd_05,
-	au_SEFCmd_06,
-	au_SEFCmd_07,
-	au_SEFCmd_08,
-	au_SEFCmd_09_StartLoop,
-	au_SEFCmd_0A_EndLoop,
-	au_SEFCmd_0B,
-	au_SEFCmd_0C,
-	au_SEFCmd_0D,
-	au_SEFCmd_0E,
-	au_SEFCmd_0F,
-	au_SEFCmd_10_Jump,
-	au_SEFCmd_11_Restart,
-	au_SEFCmd_12_NOP,
-	au_SEFCmd_SetRandomPitch,
-	au_SEFCmd_SetRandomVelocity,
-	au_SEFCmd_SetUnkA3,
-	au_SEFCmd_16,
-	au_SEFCmd_17,
-	au_SEFCmd_18
+    au_SEFCmd_00_SetVolume,
+    au_SEFCmd_01_SetPan,
+    au_SEFCmd_02_SetInstrument,
+    au_SEFCmd_03_SetReverb,
+    au_SEFCmd_04,
+    au_SEFCmd_05,
+    au_SEFCmd_06,
+    au_SEFCmd_07,
+    au_SEFCmd_08,
+    au_SEFCmd_09_StartLoop,
+    au_SEFCmd_0A_EndLoop,
+    au_SEFCmd_0B,
+    au_SEFCmd_0C,
+    au_SEFCmd_0D,
+    au_SEFCmd_0E,
+    au_SEFCmd_0F,
+    au_SEFCmd_10_Jump,
+    au_SEFCmd_11_Restart,
+    au_SEFCmd_12_NOP,
+    au_SEFCmd_SetRandomPitch,
+    au_SEFCmd_SetRandomVelocity,
+    au_SEFCmd_SetUnkA3,
+    au_SEFCmd_16,
+    au_SEFCmd_17,
+    au_SEFCmd_18
 };
 
 u8 BlankSEFData[] = {
@@ -189,42 +189,42 @@ u8 BlankSEFData[] = {
 // the following are only referenced in audio/28910_len_5090
 
 void (*SeqCmdHandlers[])(BGMPlayer*, BGMPlayerTrack*) = {
-	au_BGMCmd_E0_MasterTempo,
-	au_BGMCmd_E1_MasterVolume,
-	au_BGMCmd_E2_MasterPitchShift,
-	au_BGMCmd_E3,
-	au_BGMCmd_E4_MasterTempoFade,
-	au_BGMCmd_E5_MasterVolumeFade,
-	au_BGMCmd_E6_MasterEffect,
-	au_BGMCmd_NOP,
-	au_BGMCmd_E8_TrackOverridePatch,
-	au_BGMCmd_E9_SubTrackVolume,
-	au_BGMCmd_EA_SubTrackPan,
-	au_BGMCmd_EB_SubTrackReverb,
-	au_BGMCmd_EC_SegTrackVolume,
-	au_BGMCmd_ED_SubTrackCoarseTune,
-	au_BGMCmd_EE_SubTrackFineTune,
-	au_BGMCmd_EF_SegTrackTune,
-	au_BGMCmd_F0_TrackTremolo,
-	au_BGMCmd_F1_TrackTremoloSpeed,
-	au_BGMCmd_F2_TrackTremoloTime,
-	au_BGMCmd_F3_TrackTremoloStop,
-	au_BGMCmd_F4,
-	au_BGMCmd_F5_TrackVoice,
-	au_BGMCmd_F6_TrackVolumeFade,
-	au_BGMCmd_F7_SubTrackReverbType,
-	au_BGMCmd_NOP,
-	au_BGMCmd_NOP,
-	au_BGMCmd_NOP,
-	au_BGMCmd_NOP,
-	au_BGMCmd_FC_Jump,
-	au_BGMCmd_FD_EventTrigger,
-	au_BGMCmd_FE_Detour,
-	au_BGMCmd_FF,
+    au_BGMCmd_E0_MasterTempo,
+    au_BGMCmd_E1_MasterVolume,
+    au_BGMCmd_E2_MasterPitchShift,
+    au_BGMCmd_E3,
+    au_BGMCmd_E4_MasterTempoFade,
+    au_BGMCmd_E5_MasterVolumeFade,
+    au_BGMCmd_E6_MasterEffect,
+    au_BGMCmd_NOP,
+    au_BGMCmd_E8_TrackOverridePatch,
+    au_BGMCmd_E9_SubTrackVolume,
+    au_BGMCmd_EA_SubTrackPan,
+    au_BGMCmd_EB_SubTrackReverb,
+    au_BGMCmd_EC_SegTrackVolume,
+    au_BGMCmd_ED_SubTrackCoarseTune,
+    au_BGMCmd_EE_SubTrackFineTune,
+    au_BGMCmd_EF_SegTrackTune,
+    au_BGMCmd_F0_TrackTremolo,
+    au_BGMCmd_F1_TrackTremoloSpeed,
+    au_BGMCmd_F2_TrackTremoloTime,
+    au_BGMCmd_F3_TrackTremoloStop,
+    au_BGMCmd_F4,
+    au_BGMCmd_F5_TrackVoice,
+    au_BGMCmd_F6_TrackVolumeFade,
+    au_BGMCmd_F7_SubTrackReverbType,
+    au_BGMCmd_NOP,
+    au_BGMCmd_NOP,
+    au_BGMCmd_NOP,
+    au_BGMCmd_NOP,
+    au_BGMCmd_FC_Jump,
+    au_BGMCmd_FD_EventTrigger,
+    au_BGMCmd_FE_Detour,
+    au_BGMCmd_FF,
 };
 
 s8 SeqCmdArgCounts[] = {
-	2, 1, 1, 1, 4, 3, 2, 0,
+    2, 1, 1, 1, 4, 3, 2, 0,
     2, 1, 1, 1, 1, 1, 1, 2,
     3, 1, 1, 0, 2, 1, 3, 1,
     0, 0, 0, 0, 3, 3, 3, 3

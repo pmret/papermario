@@ -9,48 +9,48 @@ void flower_trail_update(EffectInstance* effect);
 void flower_trail_render(EffectInstance* effect);
 void flower_trail_appendGfx(void* effect);
 
-void func_E0012000(FlowerFXData* effect) {
-    Matrix4f sp18;
-    Matrix4f sp58;
+void flower_trail_update_part_transform(FlowerFXData* effect) {
+    Matrix4f transformMtx;
+    Matrix4f tempMtx;
 
-    shim_guRotateF(sp18, effect->unk_24, 1.0f, 0.0f, 0.0f);
-    shim_guRotateF(sp58, effect->unk_2C, 0.0f, 0.0f, 1.0f);
-    shim_guMtxCatF(sp58, sp18, sp18);
-    shim_guRotateF(sp58, effect->unk_28, 0.0f, 1.0f, 0.0f);
-    shim_guMtxCatF(sp18, sp58, sp18);
-    shim_guScaleF(sp58, effect->unk_18, effect->unk_1C, effect->unk_20);
-    shim_guMtxCatF(sp58, sp18, sp18);
-    shim_guTranslateF(sp58, effect->unk_0C, effect->unk_10, effect->unk_14);
-    shim_guMtxCatF(sp18, sp58, sp18);
-    shim_guMtxF2L(sp18, &effect->unk_30);
+    shim_guRotateF(transformMtx, effect->rot.x, 1.0f, 0.0f, 0.0f);
+    shim_guRotateF(tempMtx, effect->rot.z, 0.0f, 0.0f, 1.0f);
+    shim_guMtxCatF(tempMtx, transformMtx, transformMtx);
+    shim_guRotateF(tempMtx, effect->rot.y, 0.0f, 1.0f, 0.0f);
+    shim_guMtxCatF(transformMtx, tempMtx, transformMtx);
+    shim_guScaleF(tempMtx, effect->scale.x, effect->scale.y, effect->scale.z);
+    shim_guMtxCatF(tempMtx, transformMtx, transformMtx);
+    shim_guTranslateF(tempMtx, effect->pos.x, effect->pos.y, effect->pos.z);
+    shim_guMtxCatF(transformMtx, tempMtx, transformMtx);
+    shim_guMtxF2L(transformMtx, &effect->transformMtx);
 }
 
-void func_E0012104(FlowerFXData* effect) {
-    if (effect->unk_04 == 0 && effect->unk_78 != 0.0f && gPlayerStatus.actionState == ACTION_STATE_IDLE) {
-        effect->unk_06++;
+void flower_trail_update_part(FlowerFXData* effect) {
+    if (!effect->triggeredByNpc && effect->visibilityAmt != 0.0f && gPlayerStatus.actionState == ACTION_STATE_IDLE) {
+        effect->timeLeft++;
         return;
     }
 
     effect->primAlpha -= 12;
-    effect->unk_88 += effect->unk_8C;
-    effect->unk_84 += effect->unk_88;
-    effect->unk_80 += effect->unk_84;
-    effect->unk_2C += effect->unk_80 * effect->unk_70;
-    effect->unk_0C -= effect->unk_80 * effect->unk_74 * effect->unk_90;
-    effect->unk_14 -= effect->unk_80 * effect->unk_74 * effect->unk_94;
+    effect->integrator[2] += effect->integrator[3];
+    effect->integrator[1] += effect->integrator[2];
+    effect->integrator[0] += effect->integrator[1];
+    effect->rot.z += effect->integrator[0] * effect->velocityScaleA;
+    effect->pos.x -= effect->integrator[0] * effect->velocityScaleB * effect->velocity.x;
+    effect->pos.z -= effect->integrator[0] * effect->velocityScaleB * effect->velocity.z;
 
-    if (effect->unk_80 < 0.0f) {
-        effect->unk_78 = 0.0f;
+    if (effect->integrator[0] < 0.0f) {
+        effect->visibilityAmt = 0.0f;
     }
 }
 
-void flower_trail_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5) {
+void flower_trail_main(s32 triggeredByNpc, f32 posX, f32 posY, f32 posZ, f32 angle, f32 direction) {
     EffectBlueprint bp;
     EffectInstance* effect;
     FlowerFXData* part;
     s32 numParts = 1;
-    f32 angle;
-    f32 temp;
+    f32 partAngle;
+    f32 angleOffset;
     s32 i;
 
     bp.init = flower_trail_init;
@@ -63,52 +63,55 @@ void flower_trail_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg
     effect = shim_create_effect_instance(&bp);
     effect->numParts = numParts;
 
-    part = shim_general_heap_malloc(numParts * sizeof(*part));
-    effect->data.flowerTrail = part;
+    part = effect->data.flowerTrail = shim_general_heap_malloc(numParts * sizeof(*part));
     ASSERT(effect->data.flowerTrail != NULL);
 
     shim_mem_clear(part, numParts * sizeof(*part));
 
     for (i = 0; i < numParts; i++, part++) {
-        part->unk_00 = 1;
-        part->unk_04 = arg0;
+        part->alive = TRUE;
+        part->triggeredByNpc = triggeredByNpc;
         part->unk_7C = 0.0f;
-        part->unk_0C = arg1;
-        part->unk_10 = arg2;
-        part->unk_14 = arg3;
-        part->unk_18 = 1.0f;
-        part->unk_1C = 1.0f;
-        part->unk_20 = 1.0f;
+        
+        part->pos.x = posX;
+        part->pos.y = posY;
+        part->pos.z = posZ;
+
+        part->scale.x = 1.0f;
+        part->scale.y = 1.0f;
+        part->scale.z = 1.0f;
+
         part->primAlpha = 255;
-        part->unk_78 = 1.0f;
-        part->unk_74 = 5.4f;
 
-        if (arg5 != 0.0f) {
-            part->unk_70 = -10.0f;
+        part->visibilityAmt = 1.0f;
+        part->velocityScaleB = 5.4f;
+        if (direction != 0.0f) {
+            part->velocityScaleA = -10.0f;
         } else {
-            part->unk_70 = 10.0f;
+            part->velocityScaleA = 10.0f;
         }
 
-        part->unk_8C = 0;
-        part->unk_06 = 15;
-        part->unk_28 = arg4;
-        part->unk_24 = 0;
-        part->unk_2C = 0;
-        part->unk_80 = 0.5f;
-        part->unk_84 = -0.07f;
-        part->unk_88 = 0.003f;
-        part->unk_09 = (shim_rand_int(100) >> 4) & 1;
+        part->integrator[0] = 0.5f;
+        part->integrator[1] = -0.07f;
+        part->integrator[2] = 0.003f;
+        part->integrator[3] = 0;
 
-        if (arg5 != 0.0f) {
-            temp = -90.0f;
-            angle = shim_clamp_angle(arg4 + temp);
+        part->timeLeft = 15;
+        part->rot.y = angle;
+        part->rot.x = 0.0f;
+        part->rot.z = 0.0f;
+        part->useAltColor = (shim_rand_int(100) >> 4) & 1;
+
+        if (direction != 0.0f) {
+            angleOffset = -90.0f;
+            partAngle = shim_clamp_angle(angle + angleOffset);
         } else {
-            temp = 90.0f;
-            angle = shim_clamp_angle(arg4 + temp);
+            angleOffset = 90.0f;
+            partAngle = shim_clamp_angle(angle + angleOffset);
         }
 
-        part->unk_90 = shim_sin_deg(angle);
-        part->unk_94 = shim_cos_deg(angle);
+        part->velocity.x = shim_sin_deg(partAngle);
+        part->velocity.z = shim_cos_deg(partAngle);
     }
 }
 
@@ -117,62 +120,62 @@ void flower_trail_init(EffectInstance* effect) {
 
 void flower_trail_update(EffectInstance* effect) {
     FlowerFXData* part = effect->data.flowerTrail;
-    s32 cond = FALSE;
+    s32 anyAlive = FALSE;
     s32 i;
 
     for (i = 0; i < effect->numParts; i++, part++) {
-        if (part->unk_00 != 0) {
-            part->unk_06--;
-            if (part->unk_06 <= 0) {
-                part->unk_00 = 0;
+        if (part->alive) {
+            part->timeLeft--;
+            if (part->timeLeft <= 0) {
+                part->alive = FALSE;
             } else {
-                cond = TRUE;
-                func_E0012104(part);
-                func_E0012000(part);
+                anyAlive = TRUE;
+                flower_trail_update_part(part);
+                flower_trail_update_part_transform(part);
             }
         }
     }
 
-    if (!cond) {
+    if (!anyAlive) {
         shim_remove_effect(effect);
     }
 }
 
 void flower_trail_render(EffectInstance* effect) {
     RenderTask renderTask;
-    RenderTask* retTask;
+    RenderTask* queuedTaskPtr;
 
     renderTask.appendGfx = flower_trail_appendGfx;
     renderTask.appendGfxArg = effect;
     renderTask.distance = 0;
     renderTask.renderMode = RENDER_MODE_28;
 
-    retTask = shim_queue_render_task(&renderTask);
-    retTask->renderMode |= RENDER_TASK_FLAG_2;
+    queuedTaskPtr = shim_queue_render_task(&renderTask);
+    queuedTaskPtr->renderMode |= RENDER_TASK_FLAG_2;
 }
 
-void func_E0012548(EffectInstance* effect) {
+void flower_trail_dispose(EffectInstance* effect) {
     shim_remove_effect(effect);
 }
 
-void flower_trail_appendGfx(void* effect) {
-    EffectInstance* effectTemp = effect;
-    FlowerFXData* part = effectTemp->data.flowerTrail;
+void flower_trail_appendGfx(void* argEffect) {
+    EffectInstance* effect = argEffect;
+    FlowerFXData* part = effect->data.flowerTrail;
     Gfx* dlist;
     s32 i;
 
     gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effectTemp->graphics->data));
+    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effect->graphics->data));
 
-    for (i = 0; i < effectTemp->numParts; i++, part++) {
-        if (part->unk_00 != 0) {
-            if (part->unk_09 != 0) {
+    for (i = 0; i < effect->numParts; i++, part++) {
+        if (part->alive) {
+            if (part->useAltColor) {
                 dlist = D_09000E20_32DCE0;
             } else {
                 dlist = D_09000E38_32DCF8;
             }
 
-            gDisplayContext->matrixStack[gMatrixListPos] = part->unk_30;
+            gDisplayContext->matrixStack[gMatrixListPos] = part->transformMtx;
 
             gDPPipeSync(gMasterGfxPos++);
             gDPSetPrimColor(gMasterGfxPos++, 0, 0, 112, 96, 24, part->primAlpha);

@@ -919,7 +919,7 @@ void enable_actor_blur(Actor*);
 void func_80251474(Actor*);
 void func_8025C8A0(s32, ActorPart*);
 void func_8025CD28(s32, ActorPart*);
-void func_8025CEC8(ActorPart*);
+void _add_part_decoration(ActorPart*);
 void _remove_part_decoration(ActorPart* part, s32 decorationIndex);
 void func_8025D158(ActorPart*, s32);
 void func_8025D290(ActorPart*, s32);

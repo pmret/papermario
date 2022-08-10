@@ -67,6 +67,13 @@ typedef struct PlayerSpriteSet {
     /* 0x08 */ s32 initiallyLoaded;
 } PlayerSpriteSet; // size = 0xC
 
+typedef struct PlayerSpriteCacheEntry {
+    /* 0x00 */ s32 lazyDeleteTime;
+    /* 0x04 */ s32 rasterIndex;
+    /* 0x08 */ s32 spriteIndex;
+    /* 0x0C */ IMG_PTR* raster;
+} PlayerSpriteCacheEntry; // size = 0x10
+
 /// Sprite data header.
 typedef struct SpriteAnimData {
     /* 0x00 */ SpriteRasterCacheEntry** rastersOffset;
@@ -112,11 +119,11 @@ void func_802DDEE4(s32, s32, s32, s32, s32, s32, s32, s32);
 
 void func_802DDFF8(s32, s32, s32, s32, s32, s32, s32);
 
-void* spr_get_player_raster(s32 rasterIndex, s32 playerSpriteID);
+IMG_PTR spr_get_player_raster(s32 rasterIndex, s32 playerSpriteID);
 
 void spr_get_player_raster_info(SpriteRasterInfo* out, s32 playerSpriteID, s32 rasterIndex);
 
-u16** spr_get_player_palettes(s32 spriteIndex);
+PAL_PTR* spr_get_player_palettes(s32 spriteIndex);
 
 /// @param animID - Set MSB for tail allocation (i.e. `0x80XXYYZZ`)
 s32 spr_load_npc_sprite(s32 animID, u32* extraAnimList);
@@ -139,7 +146,7 @@ s32 func_802DE894(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s3
 
 s32 spr_get_npc_raster_info(SpriteRasterInfo* out, s32 npcSpriteID, s32 rasterIndex);
 
-u16** spr_get_npc_palettes(s32 npcSpriteID);
+PAL_PTR* spr_get_npc_palettes(s32 npcSpriteID);
 
 s32 spr_get_npc_color_variations(s32 npcSpriteID);
 

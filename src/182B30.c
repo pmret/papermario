@@ -8,6 +8,7 @@ extern u16 D_802840B4[];
 extern u16 D_802840DC[];
 extern u8 D_80284104[];
 extern u8 D_80284120[];
+extern s16 D_80284134[];
 
 void update_player_actor_shadow(void);
 void func_80255FE0(s32, void*);
@@ -17,7 +18,7 @@ void func_8025950C(ActorPart*, s32, Matrix4f);
 void func_802596C0(ActorPart*, s32, Matrix4f);
 void func_802597B0(ActorPart*, s32, Matrix4f);
 void func_8025995C(ActorPart*, s32, Matrix4f);
-void func_8025C918(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx);
+void func_8025C918(s32 arg0, ActorPart* part, s32 yaw, s32 arg3);
 void func_8025CD40(s32, ActorPart*);
 
 void func_8025D150(ActorPart*, s32);
@@ -1886,14 +1887,14 @@ INCLUDE_ASM(s32, "182B30", func_8025BAA0);
 
 INCLUDE_ASM(s32, "182B30", func_8025C120);
 
-s32 func_8025C840(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx) {
+s32 func_8025C840(s32 arg0, ActorPart* part, s32 yaw, s32 arg3) {
     if (!(part->flags & 2)) {
         switch (part->decorationTable->unk_750) {
             case 0:
                 func_8025C8A0(arg0, part);
                 return 0;
             case 11:
-                func_8025C918(arg0, part, yaw, mtx);
+                func_8025C918(arg0, part, yaw, arg3);
                 break;
         }
     }
@@ -1913,7 +1914,7 @@ void func_8025C8A0(s32 arg0, ActorPart* arg1) {
 
 INCLUDE_ASM(s32, "182B30", func_8025C918);
 
-s32 func_8025CCC8(s32 arg0, ActorPart* part) {
+s32 func_8025CCC8(s32 arg0, ActorPart* part, s32 yaw, s32 arg3) {
     if (!(part->flags & ACTOR_PART_FLAG_2)) {
         switch (part->decorationTable->unk_764) {
             case 0:
@@ -1938,7 +1939,7 @@ void func_8025CD28(s32 arg0, ActorPart* arg1) {
 
 INCLUDE_ASM(s32, "182B30", func_8025CD40);
 
-void func_8025CEC8(ActorPart* actorPart) {
+void _add_part_decoration(ActorPart* actorPart) {
     DecorationTable* decorationTable;
     s32 i;
 
@@ -2038,12 +2039,11 @@ void func_8025D150(ActorPart* actorPart, s32 i) {
 void func_8025D158(ActorPart* part, s32 decorationIndex) {
 }
 
-// float reg swapping
-#ifdef NON_MATCHING
 void func_8025D160(ActorPart* arg0, s32 arg1) {
     DecorationTable* table = arg0->decorationTable;
     EffectInstance* effect;
     AuraFXData* data;
+    f32 scale;
     
     switch (table->unk_8BC[arg1]) {
         case 0:
@@ -2059,104 +2059,300 @@ void func_8025D160(ActorPart* arg0, s32 arg1) {
             data->posA.x = arg0->currentPos.x + table->unk_8C6[arg1].unk04;
             data->posA.y = arg0->currentPos.y;
             data->posA.z = arg0->currentPos.z;
-            effect->data.aura->scale.x = table->unk_8C6[arg1].unk00 / 100.0f;
-            effect->data.aura->scale.y = table->unk_8C6[arg1].unk02 / 100.0f;
+            scale = table->unk_8C6[arg1].unk00;
+            scale /= 100.0f;
+            effect->data.aura->scale.x = scale;
+            scale = table->unk_8C6[arg1].unk02;
+            scale /= 100.0f;
+            effect->data.aura->scale.y = scale;
             break;
     }
 }
-#else
-INCLUDE_ASM(s32, "182B30", func_8025D160);
-#endif
 
 void func_8025D290(ActorPart* part, s32 decorationIndex) {
     part->decorationTable->unk_8B0[decorationIndex]->data.aura->fadeTime = 5;
 }
 
-INCLUDE_ASM(s32, "182B30", func_8025D2B0);
+void func_8025D2B0(ActorPart* part, s32 decorationIndex) {
+    DecorationTable* decor = part->decorationTable;
+    
+    switch (decor->unk_8BC[decorationIndex]) {
+        case 0:
+            if (part->yaw > 90.0f) {
+                fx_sweat(0, part->currentPos.x, part->currentPos.y + part->size.y, part->currentPos.z, 5.0f, 45.0f, 20);
+            } else {
+                fx_sweat(0, part->currentPos.x, part->currentPos.y + part->size.y, part->currentPos.z, 5.0f, -45.0f, 20);
+            }
+            decor->unk_8BE[decorationIndex] = 0xA;
+            decor->unk_8BC[decorationIndex] = 1;
+            break;
+        case 1:
+            if (decor->unk_8BE[decorationIndex] != 0) {
+                decor->unk_8BE[decorationIndex]--;
+            } else {
+                decor->unk_8BC[decorationIndex] = 0;
+            }
+            break;
+    }
+}
 
 void func_8025D3C4(ActorPart* part, s32 decorationIndex) {
 }
 
-INCLUDE_ASM(s32, "182B30", func_8025D3CC);
+void func_8025D3CC(ActorPart* part, s32 decorationIndex) {
+    DecorationTable* decor;
+    StarsOrbitingFXData* data;
+    s8 temp_v1;
+
+    decor = part->decorationTable;
+    switch (decor->unk_8BC[decorationIndex]) { 
+        case 0:
+            fx_stars_orbiting(0, part->currentPos.x, part->currentPos.y + part->size.y, part->currentPos.z,
+                20.0f, 3, &decor->unk_8B0[decorationIndex]);
+            decor->unk_8BC[decorationIndex] = 1;
+            break;
+        case 1:
+            data = decor->unk_8B0[decorationIndex]->data.starsOrbiting;
+            data->pos.x = part->currentPos.x;
+            data->pos.y = part->currentPos.y + part->size.y;
+            data->pos.z = part->currentPos.z;
+            break;
+    }
+}
 
 void func_8025D4A0(ActorPart* part, s32 decorationIndex) {
     remove_effect(part->decorationTable->unk_8B0[decorationIndex]);
 }
 
-// float reg swapping
-#ifdef NON_MATCHING
-void func_8025D4C8(ActorPart* arg0, s32 arg1) {
-    DecorationTable* decor = arg0->decorationTable;
+void func_8025D4C8(ActorPart* part, s32 decorationIndex) {
+    DecorationTable* decor = part->decorationTable;
     EffectInstance* effect;
     AuraFXData* data;
+    f32 scale;
 
-    switch (decor->unk_8BC[arg1]) {
+    switch (decor->unk_8BC[decorationIndex]) {
         case 0:
-            fx_aura(1, arg0->currentPos.x, arg0->currentPos.y, arg0->currentPos.z, 0.4f, &decor->unk_8B0[arg1]);
-            decor->unk_8BC[arg1] = 1;
-            decor->unk_8C6[arg1].unk00 = 0x28;
-            decor->unk_8C6[arg1].unk02 = 0x28;
-            decor->unk_8C6[arg1].unk04 = 0xFF;
-            decor->unk_8C6[arg1].unk06 = 0;
-            decor->unk_8C6[arg1].unk08 = 0xFF;
-            decor->unk_8C6[arg1].unk0A = 0;
-            decor->unk_8C6[arg1].unk0C = 0;
+            fx_aura(1, part->currentPos.x, part->currentPos.y, part->currentPos.z, 0.4f, &decor->unk_8B0[decorationIndex]);
+            decor->unk_8BC[decorationIndex] = 1;
+            decor->unk_8C6[decorationIndex].unk00 = 0x28;
+            decor->unk_8C6[decorationIndex].unk02 = 0x28;
+            decor->unk_8C6[decorationIndex].unk04 = 0xFF;
+            decor->unk_8C6[decorationIndex].unk06 = 0;
+            decor->unk_8C6[decorationIndex].unk08 = 0xFF;
+            decor->unk_8C6[decorationIndex].unk0A = 0;
+            decor->unk_8C6[decorationIndex].unk0C = 0;
             // fall through
         case 1:
-            effect = decor->unk_8B0[arg1];
+            effect = decor->unk_8B0[decorationIndex];
             data = effect->data.aura;
-            data->posA.x = arg0->currentPos.x;
-            data->posA.y = arg0->currentPos.y;
-            data->posA.z = arg0->currentPos.z + decor->unk_8C6[arg1].unk06;
-            effect->data.aura->scale.x = decor->unk_8C6[arg1].unk00 / 100.0f;
-            effect->data.aura->scale.y = decor->unk_8C6[arg1].unk02 / 100.0f;
-            effect->data.aura->primA = decor->unk_8C6[arg1].unk04;
+            data->posA.x = part->currentPos.x;
+            data->posA.y = part->currentPos.y;
+            data->posA.z = part->currentPos.z + decor->unk_8C6[decorationIndex].unk06;
+
+            scale = decor->unk_8C6[decorationIndex].unk00;
+            scale /= 100.0f;
+            effect->data.aura->scale.x = scale;
+            scale = decor->unk_8C6[decorationIndex].unk02;
+            scale /= 100.0f;
+            effect->data.aura->scale.y = scale;
+            effect->data.aura->primA = decor->unk_8C6[decorationIndex].unk04;
             break;
     }
 }
-#else
-INCLUDE_ASM(s32, "182B30", func_8025D4C8);
-#endif
 
 void func_8025D620(ActorPart* part, s32 decorationIndex) {
     part->decorationTable->unk_8B0[decorationIndex]->data.aura->fadeTime = 5;
 }
 
-INCLUDE_ASM(s32, "182B30", func_8025D640);
+void func_8025D640(ActorPart* part, s32 decorationIndex) {
+    DecorationTable* decor = part->decorationTable;
+    EffectInstance* effect;
+
+    switch (decor->unk_8BC[decorationIndex]) {
+        case 0:
+            decor->unk_8B0[decorationIndex] = fx_65(1, part->currentPos.x, part->currentPos.y, part->currentPos.z, 1.0f, 0);
+            decor->unk_8BC[decorationIndex] = 1;
+            break;
+        case 1:
+            effect = decor->unk_8B0[decorationIndex];
+            effect->data.unk_65->pos.x = part->currentPos.x;
+            effect->data.unk_65->pos.y = part->currentPos.y;
+            effect->data.unk_65->pos.z = part->currentPos.z;
+            break;
+    }
+}
 
 void func_8025D6FC(ActorPart* part, s32 decorationIndex) {
     part->decorationTable->unk_8B0[decorationIndex]->flags |= 0x10;
 }
 
-INCLUDE_ASM(s32, "182B30", func_8025D71C);
+void func_8025D71C(ActorPart* part, s32 decorationIndex) {
+    DecorationTable* decor = part->decorationTable;
+    EffectInstance* effect;
+
+    switch (decor->unk_8BC[decorationIndex]) {
+        case 0:
+            decor->unk_8B0[decorationIndex] = fx_65(2, part->currentPos.x, part->currentPos.y, part->currentPos.z, 1.0f, 0);
+            decor->unk_8C6[decorationIndex].unk00 = 1;
+            decor->unk_8BC[decorationIndex] = 1;
+            break;
+        case 1:
+            effect = decor->unk_8B0[decorationIndex];
+            effect->data.unk_65->pos.x = part->currentPos.x;
+            effect->data.unk_65->pos.y = part->currentPos.y;
+            effect->data.unk_65->pos.z = part->currentPos.z;
+            effect->data.unk_65->unk_34 = decor->unk_8C6[decorationIndex].unk00 / 100.0f;
+            break;
+    }
+}
 
 void func_8025D810(ActorPart* part, s32 decorationIndex) {
     part->decorationTable->unk_8B0[decorationIndex]->flags |= 0x10;
 }
 
-INCLUDE_ASM(s32, "182B30", func_8025D830);
+void func_8025D830(ActorPart* part, s32 decorationIndex) {
+    DecorationTable* decor = part->decorationTable;
+    EffectInstance* effect;
+    
+    switch (decor->unk_8BC[decorationIndex]) {
+        case 0:
+            decor->unk_8B0[decorationIndex] = fx_whirlwind(2, part->currentPos.x, part->currentPos.y, part->currentPos.z, 1.0f, 0);
+            decor->unk_8BC[decorationIndex] = 1;
+            break;
+        case 1:
+            effect = decor->unk_8B0[decorationIndex];
+            effect->data.whirlwind->pos.x = part->currentPos.x;
+            effect->data.whirlwind->pos.y = part->currentPos.y;
+            effect->data.whirlwind->pos.z = part->currentPos.z;
+            break;
+    }
+}
 
 void func_8025D8EC(ActorPart* part, s32 decorationIndex) {
     part->decorationTable->unk_8B0[decorationIndex]->flags |= 0x10;
 }
 
-INCLUDE_ASM(s32, "182B30", func_8025D90C);
+void func_8025D90C(ActorPart* part, s32 decorationIndex) {
+    DecorationTable* decor = part->decorationTable;
+    f32 angle, sinA, cosA;
+
+    switch (decor->unk_8BC[decorationIndex]) {
+        case 0:
+            decor->unk_8BE[decorationIndex] = 0;
+            decor->unk_8BC[decorationIndex] = 1;
+            // fall through
+        case 1:
+            decor->unk_8BE[decorationIndex]++;
+            if (decor->unk_8BE[decorationIndex] >= 4) {
+                decor->unk_8BE[decorationIndex] = 0U;
+                angle = (clamp_angle(-part->yaw) * TAU) / 360.0f;
+                sinA = sin_rad(angle);
+                cosA = cos_rad(angle);
+                fx_walking_dust(0,
+                    part->currentPos.x + (part->size.x * sinA * 0.2f),
+                    part->currentPos.y + 1.5f,
+                    part->currentPos.z + (part->size.x * cosA * 0.2f),
+                    sinA, cosA);
+            }
+            break;
+    }
+}
 
 void func_8025DA60(ActorPart* part, s32 decorationIndex) {
 }
 
-INCLUDE_ASM(s32, "182B30", func_8025DA68);
+void func_8025DA68(ActorPart* part, s32 decorationIndex) {
+    DecorationTable* decor = part->decorationTable;
+    f32 x, y, z;
+
+    if (D_80284134[decor->unk_8C6[decorationIndex].unk00] >= 0) {
+        switch (decor->unk_8BC[decorationIndex]) {
+            case 0:
+                decor->unk_8BE[decorationIndex] = 0;
+                decor->unk_8BC[decorationIndex] = 1;
+                /* fallthrough */
+            case 1:
+                x = part->currentPos.x;
+                y = part->currentPos.y + (part->size.y / 2);
+                z = part->currentPos.z - 5.0f;
+                // bug? perhaps this should be % 4?
+                if ((gGameStatusPtr->frameCounter / 4) == 0) {
+                    fx_sparkles(1, x, y, z, 10.0f);
+                }
+                decor->unk_8BE[decorationIndex]++;
+                if (D_80284134[decor->unk_8C6[decorationIndex].unk00] < decor->unk_8BE[decorationIndex]) {
+                    decor->unk_8BE[decorationIndex] = 0;
+                    fx_sparkles(1, x, y, z, 20.0f);
+                }
+                break;
+        }
+    }
+}
 
 void func_8025DBC8(ActorPart* part, s32 decorationIndex) {
 }
 
-INCLUDE_ASM(s32, "182B30", func_8025DBD0);
+void func_8025DBD0(ActorPart* part, s32 decorationIndex) {
+    DecorationTable* decor = part->decorationTable;
+    EffectInstance* effect;
+    AuraFXData* data;
+    f32 scale;
+
+    switch (decor->unk_8BC[decorationIndex]) {
+        case 0:
+            fx_aura(2, part->currentPos.x, part->currentPos.y, part->currentPos.z, 1.2f, &decor->unk_8B0[decorationIndex]);
+            decor->unk_8BC[decorationIndex] = 1;
+            decor->unk_8C6[decorationIndex].unk00 = 0x96;
+            decor->unk_8C6[decorationIndex].unk02 = 0x96;
+            decor->unk_8C6[decorationIndex].unk04 = 0xFF;
+            decor->unk_8C6[decorationIndex].unk06 = 0;
+            // fall through
+        case 1:
+            effect = decor->unk_8B0[decorationIndex];
+            data = effect->data.aura;
+            data->posA.x = part->currentPos.x;
+            data->posA.y = part->currentPos.y;
+            data->posA.z = part->currentPos.z + decor->unk_8C6[decorationIndex].unk06;
+
+            scale = decor->unk_8C6[decorationIndex].unk00;
+            scale /= 100.0f;
+            effect->data.aura->scale.x = scale;
+            scale = decor->unk_8C6[decorationIndex].unk02;
+            scale /= 100.0f;
+            effect->data.aura->scale.y = scale * (0.8 - 1e-16); // epsilon?
+            effect->data.aura->primA = decor->unk_8C6[decorationIndex].unk04;
+            effect->data.aura->renderYaw = part->yaw;
+            break;
+    }
+}
 
 void func_8025DD40(ActorPart* part, s32 decorationIndex) {
     part->decorationTable->unk_8B0[decorationIndex]->data.aura->fadeTime = 5;
 }
 
-INCLUDE_ASM(s32, "182B30", func_8025DD60);
+void func_8025DD60(ActorPart* part, s32 decorationIndex) {
+    DecorationTable* decor = part->decorationTable;
+    EnergyInOutFXData* data;
+    f32 scale;
+
+    switch (decor->unk_8BC[decorationIndex]) {
+        case 0:
+            decor->unk_8B0[decorationIndex] = fx_energy_in_out(4, part->currentPos.x, part->currentPos.y, part->currentPos.z, 1.2f, 0);
+            decor->unk_8BC[decorationIndex] = 1;
+            decor->unk_8C6[decorationIndex].unk00 = 0x78;
+            decor->unk_8C6[decorationIndex].unk02 = 0;
+            // fall through
+        case 1:
+            data = decor->unk_8B0[decorationIndex]->data.energyInOut;
+            scale = decor->unk_8C6[decorationIndex].unk00;
+            scale /= 100.0f;
+            data->unk_44 = scale;
+            data->pos.x = part->currentPos.x;
+            data->pos.y = (part->currentPos.y + (scale * 41.0f));
+            data->pos.z = (part->currentPos.z + decor->unk_8C6[decorationIndex].unk02);
+            break;
+    }
+}
 
 void func_8025DE88(ActorPart* part, s32 decorationIndex) {
     part->decorationTable->unk_8B0[decorationIndex]->flags |= 0x10;

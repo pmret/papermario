@@ -25,7 +25,7 @@ void fx_75_render(EffectInstance* effect) {
     f32 outZ;
     f32 outS;
 
-    shim_transform_point(gCameras[gCurrentCameraID].perspectiveMatrix[0], data->unk_04, data->unk_08, data->unk_0C, 1.0f, &outX, &outY, &outZ, &outS);
+    shim_transform_point(&gCameras[gCurrentCameraID].perspectiveMatrix[0], data->unk_04, data->unk_08, data->unk_0C, 1.0f, &outX, &outY, &outZ, &outS);
 
     outDist = outZ + 5000;
     if (outDist < 0) {

@@ -90,7 +90,7 @@ s32 _create_npc(NpcBlueprint* blueprint, u32** animList, s32 skipLoadingAnims) {
     npc->collisionRadius = 32;
     npc->collisionHeight = 64;
     npc->renderMode = 13;
-    npc->blurBuf = NULL;
+    npc->blur.any = NULL;
     npc->yaw = 0.0f;
     npc->jumpVelocity = 0.0f;
     npc->pos.x = 0.0f;
@@ -189,9 +189,9 @@ void free_npc_by_index(s32 listIndex) {
     npc = (*gCurrentNpcListPtr)[listIndex];
     if (npc != NULL) {
         if (npc->flags) {
-            if (npc->blurBuf != NULL) {
-                heap_free(npc->blurBuf);
-                npc->blurBuf = NULL;
+            if (npc->blur.any != NULL) {
+                heap_free(npc->blur.any);
+                npc->blur.any = NULL;
             }
 
             if (!(npc->flags & NPC_FLAG_NO_ANIMS_LOADED)) {
@@ -218,9 +218,9 @@ void free_npc_by_index(s32 listIndex) {
 void free_npc(Npc* npc) {
     s32 i;
 
-    if (npc->blurBuf != NULL) {
-        heap_free(npc->blurBuf);
-        npc->blurBuf = NULL;
+    if (npc->blur.any != NULL) {
+        heap_free(npc->blur.any);
+        npc->blur.any = NULL;
     }
 
     if (!(npc->flags & NPC_FLAG_NO_ANIMS_LOADED)) {
@@ -956,21 +956,21 @@ void set_npc_sprite(Npc* npc, s32 anim, u32** extraAnimList) {
 
 void enable_npc_blur(Npc* npc) {
     if (!(npc->flags & NPC_FLAG_MOTION_BLUR)) {
-        BlurBuffer* blurBuf;
+        NpcMotionBlur* motionBlur;
         s32 i;
 
         npc->flags |= NPC_FLAG_MOTION_BLUR;
 
-        blurBuf = heap_malloc(sizeof(*blurBuf));
-        npc->blurBuf = blurBuf;
-        ASSERT(blurBuf != NULL);
-        blurBuf->unk_00 = 0;
-        blurBuf->index = 0;
+        motionBlur = heap_malloc(sizeof(*motionBlur));
+        npc->blur.motion = motionBlur;
+        ASSERT(motionBlur != NULL);
+        motionBlur->unk_00 = 0;
+        motionBlur->index = 0;
 
-        for (i = 0; i < ARRAY_COUNT(blurBuf->x); i++) {
-            blurBuf->x[i] = npc->pos.x;
-            blurBuf->y[i] = npc->pos.y;
-            blurBuf->z[i] = npc->pos.z;
+        for (i = 0; i < ARRAY_COUNT(motionBlur->x); i++) {
+            motionBlur->x[i] = npc->pos.x;
+            motionBlur->y[i] = npc->pos.y;
+            motionBlur->z[i] = npc->pos.z;
         }
     }
 }
@@ -979,25 +979,25 @@ void disable_npc_blur(Npc* npc) {
     if (npc->flags & NPC_FLAG_MOTION_BLUR) {
         npc->flags &= ~NPC_FLAG_MOTION_BLUR;
 
-        heap_free(npc->blurBuf);
-        npc->blurBuf = NULL;
+        heap_free(npc->blur.motion);
+        npc->blur.motion = NULL;
     }
 }
 
 void update_npc_blur(Npc* npc) {
-    BlurBuffer* blurBuf = npc->blurBuf;
-    s32 index = blurBuf->index;
+    NpcMotionBlur* motionBlur = npc->blur.motion;
+    s32 index = motionBlur->index;
 
-    blurBuf->x[index] = npc->pos.x;
-    blurBuf->y[index] = npc->pos.y;
-    blurBuf->z[index] = npc->pos.z;
+    motionBlur->x[index] = npc->pos.x;
+    motionBlur->y[index] = npc->pos.y;
+    motionBlur->z[index] = npc->pos.z;
 
     index++;
     if (index >= 20) {
         index = 0;
     }
 
-    blurBuf->index = index;
+    motionBlur->index = index;
 }
 
 INCLUDE_ASM(void, "npc", appendGfx_npc_blur, Npc* npc);

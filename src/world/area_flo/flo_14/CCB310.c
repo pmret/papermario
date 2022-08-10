@@ -643,33 +643,26 @@ void N(func_80240504_CCB814)(void) {
 INCLUDE_ASM(void, "world/area_flo/flo_14/CCB310", flo_14_func_80240504_CCB814, void);
 #endif
 
-typedef struct {
-    /* 0x00 */s16 unk_00;
-    /* 0x02 */s16 unk_02;
-    /* 0x04 */s16 unk_04;
-    /* 0x06 */char unk_06[0xA];
-} N(UnkStruct); // size = 0x10
-
 void N(func_802407D4_CCBAE4)(void) {
     s32 i;
-    N(UnkStruct)* x;
-    N(UnkStruct)* y;
-    s32 z;
-    f32 temp_f20;
-    f32 temp_f0;
+    Vtx* verts;
+    Vtx* copied;
+    s32 numCopied;
+    f32 openedScale; // controls how open the flower is
+    f32 lengthScale; // controls longitudinal pulsing
 
-    mdl_get_copied_vertices(1, &x, &y, &z);
+    mdl_get_copied_vertices(1, &verts, &copied, &numCopied);
 
-    for (i = 0; i < z; i++) {
-        N(UnkStruct)* ptr1 = &x[i];
-        N(UnkStruct)* ptr2 = &y[i];
+    for (i = 0; i < numCopied; i++) {
+        Vtx* src = &verts[i];
+        Vtx* copy = &copied[i];
 
-        if (ptr1->unk_00 < 0x259) {
-            temp_f20 = (sin_rad((N(D_80243B18_CCEE28) / 180.0f) * 3.141592) * 0.3) + 0.7;
-            temp_f0 = 0.2 - (sin_rad((N(D_80243B18_CCEE28) / 180.0f) * 3.141592) * 0.2);
-            ptr2->unk_00 = ((ptr1->unk_00 - 0x268) * temp_f20) + 616.0f + (temp_f0 * -48.0f);
-            ptr2->unk_02 = ((ptr1->unk_02 - 0x2C) * temp_f20) + 44.0f + (temp_f0 * 25.0f);
-            ptr2->unk_04 = ((ptr1->unk_04 - 0x71) * temp_f20) + 113.0f + (temp_f0 * -87.0f);
+        if (src->v.ob[0] <= 600) {
+            openedScale = 0.7 + (sin_rad((N(D_80243B18_CCEE28) / 180.0f) * PI_D) * 0.3);
+            lengthScale = 0.2 - (sin_rad((N(D_80243B18_CCEE28) / 180.0f) * PI_D) * 0.2);
+            copy->v.ob[0] = ((src->v.ob[0] - 616) * openedScale) + 616.0f + (lengthScale * -48.0f);
+            copy->v.ob[1] = ((src->v.ob[1] -  44) * openedScale) +  44.0f + (lengthScale *  25.0f);
+            copy->v.ob[2] = ((src->v.ob[2] - 113) * openedScale) + 113.0f + (lengthScale * -87.0f);
         }
     }
 

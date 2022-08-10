@@ -362,8 +362,8 @@ glabel WattUseAbility
 /* 31D80C 802BDC9C 080AF73A */  j         .L802BDCE8
 /* 31D810 802BDCA0 24020001 */   addiu    $v0, $zero, 1
 .L802BDCA4:
-/* 31D814 802BDCA4 3C03802C */  lui       $v1, %hi(D_802BE310)
-/* 31D818 802BDCA8 8C63E310 */  lw        $v1, %lo(D_802BE310)($v1)
+/* 31D814 802BDCA4 3C03802C */  lui       $v1, %hi(WattStaticEffect)
+/* 31D818 802BDCA8 8C63E310 */  lw        $v1, %lo(WattStaticEffect)($v1)
 /* 31D81C 802BDCAC 1060000E */  beqz      $v1, .L802BDCE8
 /* 31D820 802BDCB0 0000102D */   daddu    $v0, $zero, $zero
 /* 31D824 802BDCB4 8C62000C */  lw        $v0, 0xc($v1)
