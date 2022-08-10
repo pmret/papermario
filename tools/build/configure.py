@@ -148,6 +148,11 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
         command=f"$python {BUILD_TOOLS}/bin_inc_c.py $in $out $c_name",
     )
 
+    ninja.rule("pal_inc_c",
+        description="pal_inc_c $out",
+        command=f"$python {BUILD_TOOLS}/pal_inc_c.py $in $out $c_name",
+    )
+
     ninja.rule("yay0",
         description="yay0 $in",
         command=f"{BUILD_TOOLS}/yay0/Yay0compress $in $out",
@@ -323,7 +328,7 @@ class Configure:
             for object_path in object_paths:
                 if object_path.suffixes[-1] == ".o":
                     built_objects.add(str(object_path))
-                elif object_path.suffixes[-1] == ".h" or task == "bin_inc_c":
+                elif object_path.suffixes[-1] == ".h" or task == "bin_inc_c" or task == "pal_inc_c":
                     generated_headers.append(str(object_path))
 
                 # don't rebuild objects if we've already seen all of them
@@ -430,7 +435,7 @@ class Configure:
                                 addr=seg.vram_start, in_segment=True, type="data", define=True
                             )
                             vars = {"c_name": c_sym.name}
-                            build(inc_dir / (seg.name + ".pal.inc.c"), [bin_path], "bin_inc_c", vars)
+                            build(inc_dir / (seg.name + ".pal.inc.c"), [bin_path], "pal_inc_c", vars)
             elif isinstance(seg, segtypes.common.bin.CommonSegBin):
                 build(entry.object_path, entry.src_paths, "bin")
             elif isinstance(seg, segtypes.n64.Yay0.N64SegYay0):

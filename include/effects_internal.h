@@ -157,7 +157,7 @@ EffectInstance* breaking_junk_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 a
 FX_MAIN(partner_buff_main);
 FX_MAIN(quizmo_assistant_main);
 FX_MAIN(ice_pillar_main);
-FX_MAIN(sun_main);
+EffectInstance* sun_main(s32, f32, f32, f32, f32, s32);
 FX_MAIN(star_spirits_energy_main);
 FX_MAIN(pink_sparkles_main);
 FX_MAIN(star_outline_main);

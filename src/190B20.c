@@ -833,7 +833,7 @@ void load_player_actor(void) {
     player->healthBarPosition.y = player->currentPos.y;
     player->healthBarPosition.z = player->currentPos.z;
     player->scalingFactor = 1.0f;
-    player->unk_200 = NULL;
+    player->attackResultEffect = NULL;
     player->unk_204 = 0;
     player->unk_205 = 0;
     player->unk_194 = 0;
@@ -1081,7 +1081,7 @@ void load_partner_actor(void) {
         partnerActor->healthBarPosition.y = partnerActor->homePos.y;
         partnerActor->healthBarPosition.z = partnerActor->homePos.z;
         partnerActor->scalingFactor = 1.0f;
-        partnerActor->unk_200 = NULL;
+        partnerActor->attackResultEffect = NULL;
         partnerActor->unk_204 = 0;
         partnerActor->unk_205 = 0;
         partnerActor->unk_194 = 0;
@@ -1331,7 +1331,7 @@ Actor* create_actor(Formation formation) {
     actor->unk_198.x = 0;
     actor->unk_198.y = 0;
     actor->unk_206 = 0;
-    actor->unk_200 = NULL;
+    actor->attackResultEffect = NULL;
     actor->unk_204 = 0;
     actor->unk_205 = 0;
 
@@ -2065,14 +2065,14 @@ void func_80266978(void) {
         actor = gBattleStatus.enemyActors[i];
         if (actor != NULL) {
             if (actor->unk_205 == 0x3C) {
-                if (actor->unk_200 != 0) {
-                    actor->unk_200->data.attackResultText->unk_24 = 0;
+                if (actor->attackResultEffect != 0) {
+                    actor->attackResultEffect->data.attackResultText->unk_24 = 0;
                 }
             }
             if (actor->unk_205 == 5) {
-                if (actor->unk_200 != 0) {
-                    actor->unk_200->data.attackResultText->unk_18 = 0;
-                    actor->unk_200 = NULL;
+                if (actor->attackResultEffect != 0) {
+                    actor->attackResultEffect->data.attackResultText->unk_18 = 0;
+                    actor->attackResultEffect = NULL;
                 }
             }
             if (actor->unk_205 > 0) {
@@ -2084,14 +2084,14 @@ void func_80266978(void) {
     actor = battleStatus->playerActor;
     if (actor != NULL) {
         if (actor->unk_205 == 60) {
-            if (actor->unk_200 != NULL) {
-                actor->unk_200->data.attackResultText->unk_24 = 0;
+            if (actor->attackResultEffect != NULL) {
+                actor->attackResultEffect->data.attackResultText->unk_24 = 0;
             }
         }
         if (actor->unk_205 == 5) {
-            if (actor->unk_200 != NULL) {
-                actor->unk_200->data.attackResultText->unk_18 = 0;
-                actor->unk_200 = NULL;
+            if (actor->attackResultEffect != NULL) {
+                actor->attackResultEffect->data.attackResultText->unk_18 = 0;
+                actor->attackResultEffect = NULL;
             }
         }
         if (actor->unk_205 > 0) {
@@ -2102,14 +2102,14 @@ void func_80266978(void) {
     actor = battleStatus->partnerActor;
     if (actor != NULL) {
         if (actor->unk_205 == 60) {
-            if (actor->unk_200 != NULL) {
-                actor->unk_200->data.attackResultText->unk_24 = 0;
+            if (actor->attackResultEffect != NULL) {
+                actor->attackResultEffect->data.attackResultText->unk_24 = 0;
             }
         }
         if (actor->unk_205 == 5) {
-            if (actor->unk_200 != NULL) {
-                actor->unk_200->data.attackResultText->unk_18 = 0;
-                actor->unk_200 = NULL;
+            if (actor->attackResultEffect != NULL) {
+                actor->attackResultEffect->data.attackResultText->unk_18 = 0;
+                actor->attackResultEffect = NULL;
             }
         }
         if (actor->unk_205 > 0) {
@@ -2375,7 +2375,7 @@ void add_part_decoration(ActorPart* part, s32 decorationIndex, s32 decorationTyp
         decorationTable->decorationType[decorationIndex] = decorationType;
         decorationTable->unk_8BA[decorationIndex] = 1;
         decorationTable->unk_8BC[decorationIndex] = 0;
-        func_8025CEC8(part);
+        _add_part_decoration(part);
     }
 }
 

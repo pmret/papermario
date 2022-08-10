@@ -111,8 +111,8 @@ ApiStatus N(Quizmo_RenderInit)(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(script->owner2.npcID);
 
     npc->onRender = N(Quizmo_NPC_OnRender);
-    npc->blurBuf = heap_malloc(8);
-    *((s32*)npc->blurBuf) = 0;
+    npc->blur.quizmo = heap_malloc(sizeof(*npc->blur.quizmo));
+    npc->blur.quizmo->flags = 0;
 
     return ApiStatus_DONE1;
 }
@@ -126,7 +126,7 @@ ApiStatus N(Quizmo_NPC_Aux_Impl)(Evt* script, s32 isInitialCall) {
 void N(Quizmo_NPC_OnRender)(Npc* npc) {
     Camera* camera = &gCameras[gCurrentCamID];
 
-    if (*((s32*)npc->blurBuf) & 1) {
+    if (npc->blur.quizmo->flags & 1) {
         clamp_angle(-camera->currentYaw);
     }
 }

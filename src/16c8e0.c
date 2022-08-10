@@ -1025,8 +1025,8 @@ void btl_delete_actor(Actor* actor) {
     remove_all_status_icons(actor->hudElementDataIndex);
     remove_effect(actor->debuffEffect);
 
-    if (actor->unk_200 != NULL) {
-        actor->unk_200->data.attackResultText->unk_24 = 0;
+    if (actor->attackResultEffect != NULL) {
+        actor->attackResultEffect->data.attackResultText->unk_24 = 0;
     }
 
     battleStatus = &gBattleStatus;
@@ -1068,8 +1068,8 @@ void btl_delete_player_actor(Actor* player) {
     remove_all_status_icons(player->hudElementDataIndex);
     remove_effect(player->debuffEffect);
 
-    if (player->unk_200 != NULL) {
-        player->unk_200->data.attackResultText->unk_24 = 0;
+    if (player->attackResultEffect != NULL) {
+        player->attackResultEffect->data.attackResultText->unk_24 = 0;
     }
 
     heap_free(movement);

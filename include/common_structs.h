@@ -97,6 +97,13 @@ typedef struct Vec4f {
     /* 0x0C */ f32 yaw;
 } Vec4f; // size = 0x10
 
+typedef struct Color4f {
+    /* 0x00 */ f32 r;
+    /* 0x04 */ f32 g;
+    /* 0x08 */ f32 b;
+    /* 0x0C */ f32 a;
+} Color4f; // size = 0x10
+
 typedef f32 Matrix4f[4][4]; // size = 0x40
 
 typedef struct Matrix4s {
@@ -140,14 +147,24 @@ typedef struct HeapNode {
 } HeapNode; // size = 0x10
 
 /// Ring buffer of an NPC's position over the past 20 frames.
-typedef struct BlurBuffer {
+typedef struct NpcMotionBlur {
     /* 0x00 */ s8 unk_00;
     /* 0x01 */ s8 index; ///< Current blur ring buffer index
     /* 0x02 */ char unk_02[2]; // padding?
     /* 0x04 */ f32 x[20];
     /* 0x54 */ f32 y[20];
     /* 0xA4 */ f32 z[20];
-} BlurBuffer; // size = 0xF4
+} NpcMotionBlur; // size = 0xF4
+
+typedef struct NpcChompBlur {
+    /* 0x00 */ struct Npc* npc;
+    /* 0x04 */ Vec3f offset;
+} NpcChompBlur; // size = 0x10;
+
+typedef struct NpcQuizmoBlur {
+    /* 0x00 */ s32 flags;
+    /* 0x04 */ char unk_04[0x4];
+} NpcQuizmoBlur; // size = 0x8;
 
 typedef u16 Palette16[16]; // size = 0x20
 
@@ -160,7 +177,12 @@ typedef struct Npc {
     /* 0x014 */ f32 jumpScale; /* also used for speech, temp1? */
     /* 0x018 */ f32 moveSpeed;
     /* 0x01C */ f32 jumpVelocity;
-    /* 0x020 */ struct BlurBuffer* blurBuf; ///< Null unless flag 0x100000 is set.
+    /* 0x020 */ union {
+                void* any;
+                NpcMotionBlur* motion; ///< Null unless flag 0x100000 is set.
+                NpcChompBlur*  chomp;
+                NpcQuizmoBlur* quizmo;
+                } blur;
     /* 0x024 */ s32 spriteInstanceID;
     /* 0x028 */ union {
     /*       */     u16 h;
@@ -1650,7 +1672,8 @@ typedef struct DecorationTable {
     /* 0x8B8 */ s8 decorationType[2];
     /* 0x8BA */ u8 unk_8BA[2];
     /* 0x8BC */ s8 unk_8BC[2];
-    /* 0x8C0 */ s16 unk_8C0[4];
+    /* 0x8BE */ s16 unk_8BE[2];
+    /* 0x8C2 */ char unk_8C0[4];
     /* 0x8C6 */ DecorationUnk unk_8C6[2];
 } DecorationTable; // size = 0x8E8
 
@@ -1802,7 +1825,7 @@ typedef struct Actor {
     /* 0x1FA */ s16 hpChangeCounter;
     /* 0x1FC */ u16 damageCounter;
     /* 0x1FE */ char unk_1FE[2];
-    /* 0x200 */ struct EffectInstance* unk_200; // fx_attack_result_text
+    /* 0x200 */ struct EffectInstance* attackResultEffect;
     /* 0x204 */ s8 unk_204;
     /* 0x205 */ s8 unk_205;
     /* 0x206 */ s8 unk_206;
@@ -1987,7 +2010,7 @@ typedef struct SaveData {
 
 typedef struct Path {
     /* 0x00 */ s32 numVectors;
-    /* 0x04 */ f32* unk_04;
+    /* 0x04 */ f32* lengths;
     /* 0x08 */ Vec3f* staticVectorList;
     /* 0x0C */ Vec3f* vectors;
     /* 0x10 */ s32 timeElapsed;
@@ -2030,7 +2053,7 @@ typedef struct MenuPanel {
 } MenuPanel; // size = 0x1C
 
 typedef struct WindowBackground {
-    /* 0x00 */ u8* imgData;
+    /* 0x00 */ IMG_PTR imgData;
     /* 0x04 */ s8 packedTileFormat; // upper = fmt, lower = depth; e.g., 31 = CI-8
     /* 0x05 */ s8 width;
     /* 0x06 */ s8 height;
@@ -2039,7 +2062,7 @@ typedef struct WindowBackground {
 } WindowBackground; // size = 0xC
 
 typedef struct WindowCorners {
-    /* 0x00 */ u8* imgData;
+    /* 0x00 */ IMG_PTR imgData;
     /* 0x04 */ s8 packedTileFormat; // upper = fmt, lower = depth; e.g., 31 = CI-8
     /* 0x05 */ Vec2b size1;
     /* 0x07 */ Vec2b size2;

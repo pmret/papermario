@@ -218,32 +218,22 @@ typedef struct WalkingDustFXData {
 
 // Used by both flower_splash and flower_trail
 typedef struct FlowerFXData {
-    /* 0x00 */ s32 unk_00;
-    /* 0x04 */ u16 unk_04;
-    /* 0x06 */ s16 unk_06;
+    /* 0x00 */ s32 alive;
+    /* 0x04 */ u16 triggeredByNpc;
+    /* 0x06 */ s16 timeLeft;
     /* 0x08 */ u8 primAlpha;
-    /* 0x09 */ s8 unk_09;
+    /* 0x09 */ s8 useAltColor;
     /* 0x0A */ char unk_0A[0x2];
-    /* 0x0C */ f32 unk_0C;
-    /* 0x10 */ f32 unk_10;
-    /* 0x14 */ f32 unk_14;
-    /* 0x18 */ f32 unk_18;
-    /* 0x1C */ f32 unk_1C;
-    /* 0x20 */ f32 unk_20;
-    /* 0x24 */ f32 unk_24;
-    /* 0x28 */ f32 unk_28;
-    /* 0x2C */ f32 unk_2C;
-    /* 0x30 */ Mtx unk_30;
-    /* 0x70 */ f32 unk_70;
-    /* 0x74 */ f32 unk_74;
-    /* 0x78 */ f32 unk_78;
+    /* 0x0C */ Vec3f pos;
+    /* 0x18 */ Vec3f scale;
+    /* 0x24 */ Vec3f rot;
+    /* 0x30 */ Mtx transformMtx;
+    /* 0x70 */ f32 velocityScaleA;
+    /* 0x74 */ f32 velocityScaleB;
+    /* 0x78 */ f32 visibilityAmt;   // when this is zero, the flower can vanish. may have once controlled alpha.
     /* 0x7C */ f32 unk_7C;
-    /* 0x80 */ f32 unk_80;
-    /* 0x84 */ f32 unk_84;
-    /* 0x88 */ f32 unk_88;
-    /* 0x8C */ f32 unk_8C;
-    /* 0x90 */ f32 unk_90;
-    /* 0x94 */ f32 unk_94;
+    /* 0x80 */ f32 integrator[4];
+    /* 0x90 */ Vec2XZf velocity;
 } FlowerFXData; // size = 0x98
 
 typedef struct CloudPuffFXData {
@@ -973,7 +963,9 @@ typedef struct StatChangeFXData {
 } StatChangeFXData;
 
 typedef struct SnakingStaticFXData {
-    /* 0x00 */ char todo[0];
+    /* 0x00 */ char unk_00[4];
+    /* 0x04 */ Vec3f pos;
+    /* 0x10 */ char todo[0];
 } SnakingStaticFXData; // size = unknown
 
 typedef struct ThunderboltRingFXData {
@@ -1072,7 +1064,10 @@ typedef struct ThrowSpinyFXData {
 } ThrowSpinyFXData; //sizeof 0x6C
 
 typedef struct Effect65FXData {
-    /* 0x00 */ char todo[0];
+    /* 0x00 */ char unk_00[0x34];
+    /* 0x34 */ f32 unk_34;
+    /* 0x38 */ Vec3f pos;
+    /* 0x44 */ char todo[0];
 } Effect65FXData; // size = unknown
 
 typedef struct TubbaHeartAttackFXData {
@@ -1080,7 +1075,9 @@ typedef struct TubbaHeartAttackFXData {
 } TubbaHeartAttackFXData; // size = unknown
 
 typedef struct WhirlwindFXData {
-    /* 0x00 */ char todo[0];
+    /* 0x00 */ char unk_00[0x4];
+    /* 0x04 */ Vec3f pos;
+    /* 0x10 */ char todo[0];
 } WhirlwindFXData; // size = unknown
 
 typedef struct RedImpactFXData {
@@ -1100,6 +1097,8 @@ typedef struct EnergyInOutFXData {
     /* 0x04 */ Vec3f pos;
     /* 0x10 */ char unk_10[0x24];
     /* 0x34 */ f32 scale;
+    /* 0x38 */ char unk_38[0xC];
+    /* 0x44 */ f32 unk_44;
     /* 0x38 */ char todo[0];
 } EnergyInOutFXData; // size = unknown
 
@@ -1188,7 +1187,12 @@ typedef struct StaticStatusFXData {
     /* 0x04 */ f32 unk_04;
     /* 0x08 */ f32 unk_08;
     /* 0x0C */ f32 unk_0C;
-} StaticStatusFXData; // size = ?
+    /* 0x10 */ char unk_10[0x10];
+    /* 0x20 */ s32 unk_20;
+    /* 0x24 */ s32 unk_24;
+    /* 0x28 */ s32 unk_28;
+    /* 0x2C */ char unk_2C[0x0C];
+} StaticStatusFXData; // size = 0x38
 
 typedef struct MovingCloudFXData {
     /* 0x00 */ char todo[0];
@@ -1281,10 +1285,23 @@ typedef struct IcePillarFXData {
 } IcePillarFXData; // size = unknown
 
 typedef struct SunFXData {
-    /* 0x00 */ char unk_00[0x3C];
-    /* 0x3C */ s32 unk_3C; // set to zero to clear sunlight
-    /* 0x00 */ char todo[0];
-} SunFXData; // size = unknown
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ Vec3f unk_04;
+    /* 0x10 */ s32 timeLeft;
+    /* 0x14 */ s32 lifeTime;
+    /* 0x18 */ u8 unk_18;
+    /* 0x19 */ u8 unk_19;
+    /* 0x1A */ u8 unk_1A;
+    /* 0x1B */ u8 unk_1B;
+    /* 0x1C */ u8 unk_1C;
+    /* 0x1D */ u8 unk_1D;
+    /* 0x1E */ u8 unk_1E;
+    /* 0x1F */ char unk_1F[0x1];
+    /* 0x20 */ f32 unk_20[5];
+    /* 0x34 */ f32 unk_34;
+    /* 0x38 */ s32 alpha;
+    /* 0x3C */ s32 targetAlpha;
+} SunFXData; // size = 0x40
 
 typedef struct StarSpiritsEnergyFXData {
     /* 0x00 */ char unk_00[0x8];

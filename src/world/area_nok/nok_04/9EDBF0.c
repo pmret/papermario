@@ -21,9 +21,7 @@ typedef struct Unk80241440_2 {
 } Unk80241440_2; //size = 0x44
 
 typedef struct Unk80241440 {
-    /* 0x00 */ f32 unk_00;
-    /* 0x04 */ f32 unk_04;
-    /* 0x08 */ f32 unk_08;
+    /* 0x00 */ Vec3f unk_00;
     /* 0x0C */ f32 unk_0C;
     /* 0x10 */ f32 unk_10;
     /* 0x14 */ f32 unk_14;
@@ -71,9 +69,9 @@ ApiStatus func_80240314_9EDF04(Evt* script, s32 isInitialCall) {
     s32 temp_s0_3 = evt_get_variable(script, *args++);
     f32 temp_f6 = evt_get_variable(script, *args++);
  
-    D_802413F8_9EEFE8.unk_00 = temp_s2;
-    D_802413F8_9EEFE8.unk_08 = temp_f6;
-    D_802413F8_9EEFE8.unk_04 = temp_s0_3 + 4.0f;
+    D_802413F8_9EEFE8.unk_00.x = temp_s2;
+    D_802413F8_9EEFE8.unk_00.y = temp_s0_3 + 4.0f;
+    D_802413F8_9EEFE8.unk_00.z = temp_f6;
     return ApiStatus_DONE2;
 }
 
@@ -117,9 +115,9 @@ ApiStatus func_802403C0_9EDFB0(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus func_802404D0_9EE0C0(Evt* script, s32 isInitialCall) {
-    D_802413F8_9EEFE8.unk_00 = 0;
-    D_802413F8_9EEFE8.unk_04 = 0;
-    D_802413F8_9EEFE8.unk_08 = 0;
+    D_802413F8_9EEFE8.unk_00.x = 0;
+    D_802413F8_9EEFE8.unk_00.y = 0;
+    D_802413F8_9EEFE8.unk_00.z = 0;
     D_802413F8_9EEFE8.unk_10 = 0;
     D_802413F8_9EEFE8.unk_0C = 0;
     D_802413F8_9EEFE8.unk_14 = 0;

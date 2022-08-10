@@ -7,30 +7,11 @@ void force_player_anim(s32 arg0);
 void func_802BE070_31DBE0(void);
 void partner_kill_ability_script(void);
 
-typedef struct unk_802BE310_C {
-    /* 0x00 */ s32 unk_00;
-    /* 0x04 */ f32 unk_04;
-    /* 0x08 */ f32 unk_08;
-    /* 0x0C */ f32 unk_0C;
-    /* 0x10 */ char unk_10[0x10];
-    /* 0x20 */ s32 unk_20;
-    /* 0x24 */ s32 unk_24;
-    /* 0x28 */ s32 unk_28;
-    /* 0x2C */ char unk_2C[0x0C];
-} unk_802BE310_C; // size = 0x38
-
-typedef struct unk_802BE310 {
-    /* 0x00 */ s32 unk_00;
-    /* 0x04 */ s32 unk_04;
-    /* 0x08 */ s32 unk_08;
-    /* 0x0C */ unk_802BE310_C* unk_0C;
-} unk_802BE310; //size = 0x10
-
 BSS s32 D_802BE300;
 BSS s32 D_802BE304;
 BSS s32 D_802BE308;
 BSS s32 D_802BE30C;
-BSS unk_802BE310* D_802BE310;
+BSS EffectInstance* WattStaticEffect;
 BSS s32 D_802BE314;
 BSS TweesterPhysics WattTweesterPhysics;
 
@@ -40,16 +21,16 @@ s32 D_802BE254_31DDC4 = 6;
 
 void func_802BD100_31CC70(Npc* npc) {
     if (!(npc->flags & NPC_FLAG_2)) {
-        if (D_802BE310 == NULL) {
-            D_802BE310 = (unk_802BE310*)fx_static_status(0, npc->pos.x, npc->pos.y + 13.0f, npc->pos.z, 0.9f, 5, 0);
+        if (WattStaticEffect == NULL) {
+            WattStaticEffect = fx_static_status(0, npc->pos.x, npc->pos.y + 13.0f, npc->pos.z, 0.9f, 5, 0);
         }
     }
 }
 
-s32 func_802BD180_31CCF0(void) {
-    if (D_802BE310 != NULL) {
-        D_802BE310->unk_0C->unk_28 = 1;
-        D_802BE310 = NULL;
+s32 world_watt_dispose_static_effect(void) {
+    if (WattStaticEffect != NULL) {
+        WattStaticEffect->data.staticStatus->unk_28 = 1;
+        WattStaticEffect = NULL;
         return 1;
     }
 }
@@ -64,7 +45,7 @@ void world_watt_init(Npc* npc) {
     D_802BE300 = 0;
     D_802BE30C = 0;
     D_802BE304 = 20;
-    D_802BE310 = NULL;
+    WattStaticEffect = NULL;
 }
 
 ApiStatus func_802BD27C_31CDEC(Evt* script, s32 isInitialCall) {
@@ -123,10 +104,10 @@ ApiStatus WattUpdate(Evt* script, s32 isInitialCall) {
                 watt->currentAnim.w = 0x60001;
             }
 
-            if (D_802BE310 != NULL) {
-                D_802BE310->unk_0C->unk_04 = watt->pos.x;
-                D_802BE310->unk_0C->unk_08 = watt->pos.y + 13.0f;
-                D_802BE310->unk_0C->unk_0C = watt->pos.z;
+            if (WattStaticEffect != NULL) {
+                WattStaticEffect->data.staticStatus->unk_04 = watt->pos.x;
+                WattStaticEffect->data.staticStatus->unk_08 = watt->pos.y + 13.0f;
+                WattStaticEffect->data.staticStatus->unk_0C = watt->pos.z;
             }
 
             return 0;
@@ -190,10 +171,10 @@ ApiStatus WattUpdate(Evt* script, s32 isInitialCall) {
                 break;
         }
 
-        if (D_802BE310 != 0) {
-            D_802BE310->unk_0C->unk_04 = watt->pos.x;
-            D_802BE310->unk_0C->unk_08 = watt->pos.y + 13.0f;
-            D_802BE310->unk_0C->unk_0C = watt->pos.z;
+        if (WattStaticEffect != 0) {
+            WattStaticEffect->data.staticStatus->unk_04 = watt->pos.x;
+            WattStaticEffect->data.staticStatus->unk_08 = watt->pos.y + 13.0f;
+            WattStaticEffect->data.staticStatus->unk_0C = watt->pos.z;
         }
     }
     return 0;
@@ -229,7 +210,7 @@ s32 WattPutAway(Evt* script, s32 isInitialCall) {
     Npc* watt = script->owner2.npc;
 
     if (isInitialCall) {
-        func_802BD180_31CCF0();
+        world_watt_dispose_static_effect();
         partner_init_put_away(watt);
         force_player_anim(0x10002);
         wattActionStatus->actingPartner = PARTNER_NONE;
@@ -260,7 +241,7 @@ void world_watt_pre_battle(Npc* watt) {
         partner_clear_player_tracking(watt);
     }
 
-    func_802BD180_31CCF0();
+    world_watt_dispose_static_effect();
 }
 
 void world_watt_post_battle(Npc* watt) {
@@ -286,7 +267,7 @@ ApiStatus func_802BDE88_31D9F8(Evt* script, s32 isInitialCall) {
         case 0:
             if (script->varTable[12] == 0) {
                 partner_kill_ability_script();
-                func_802BD180_31CCF0();
+                world_watt_dispose_static_effect();
             } else {
                 func_802BD100_31CC70(watt);
             }
