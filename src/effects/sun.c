@@ -6,47 +6,50 @@ void sun_update(EffectInstance* effect);
 void sun_render(EffectInstance* effect);
 void sun_appendGfx(void* effect);
 
-EffectInstance* sun_main(s32 arg0, f32 offsetX, f32 offsetY, f32 offsetZ, f32 arg4, s32 duration) {
-    EffectBlueprint sp10;
+Gfx* D_E0120780[] = { (Gfx*) 0x09000980, (Gfx*) 0x09000998, (Gfx*) 0x090009B0, (Gfx*) 0x090009C8, (Gfx*) 0x090009E0 };
+Gfx* D_E0120794[] = { (Gfx*) 0x09000898 };
+
+EffectInstance* sun_main(s32 shineFromRight, f32 offsetX, f32 offsetY, f32 offsetZ, f32 arg4, s32 duration) {
+    EffectBlueprint bp;
     EffectInstance* effect;
     SunFXData* data;
     s32 numParts = 1;
     s32 i;
 
-    sp10.init = sun_init;
-    sp10.update = sun_update;
-    sp10.renderWorld = sun_render;
-    sp10.unk_00 = 0;
-    sp10.unk_14 = NULL;
-    sp10.effectID = EFFECT_SUN;
+    bp.init = sun_init;
+    bp.update = sun_update;
+    bp.renderWorld = sun_render;
+    bp.unk_00 = 0;
+    bp.unk_14 = NULL;
+    bp.effectID = EFFECT_SUN;
     
-    effect = shim_create_effect_instance(&sp10);
+    effect = shim_create_effect_instance(&bp);
     effect->numParts = numParts;
     
     data = effect->data.sun = shim_general_heap_malloc(sizeof(*data));
     ASSERT(data != NULL);
     
-    data->unk_00 = arg0;
+    data->shineFromRight = shineFromRight;
     data->lifeTime = 0;
     if (duration <= 0) {
         data->timeLeft = 1000;
     } else {
         data->timeLeft = duration;
     }
-    data->unk_04.x = offsetX;
-    data->unk_04.y = offsetY;
-    data->unk_04.z = offsetZ;
+    data->pos.x = offsetX;
+    data->pos.y = offsetY;
+    data->pos.z = offsetZ;
     data->unk_34 = arg4;
-    data->unk_18 = 255;
-    data->unk_19 = 255;
-    data->unk_1A = 255;
-    data->unk_1B = 255;
-    data->unk_1C = 255;
-    data->unk_1D = 255;
-    data->unk_1E = 255;
+    data->primColor.r = 255;
+    data->primColor.g = 255;
+    data->primColor.b = 255;
+    data->envColor.r = 255;
+    data->envColor.g = 255;
+    data->envColor.b = 255;
+    data->envColor.a = 255;
 
-    for (i = 0; i < ARRAY_COUNT(data->unk_20); i++) {
-        data->unk_20[i] = 0.0f;
+    for (i = 0; i < ARRAY_COUNT(data->texScrollAmt); i++) {
+        data->texScrollAmt[i] = 0.0f;
     }
     data->targetAlpha = 255;
     data->alpha = 0;
@@ -57,15 +60,13 @@ EffectInstance* sun_main(s32 arg0, f32 offsetX, f32 offsetY, f32 offsetZ, f32 ar
 void sun_init(EffectInstance* effect) {
 }
 
-f32 shim_sin_deg(f32);
-
 void sun_update(EffectInstance* effect) {
     SunFXData* data = effect->data.sun;
     s32 time;
     s32 i;
 
-    if (effect->flags & 0x10) {
-        effect->flags &= ~0x10;
+    if (effect->flags & EFFECT_INSTANCE_FLAGS_10) {
+        effect->flags &= ~EFFECT_INSTANCE_FLAGS_10;
         data->timeLeft = 16;
     }
     if (data->timeLeft < 1000) {
@@ -107,15 +108,15 @@ void sun_update(EffectInstance* effect) {
     }
 
     for (i = 0; i < 5; i++) {
-        data->unk_20[i] = -4.0
+        data->texScrollAmt[i] -= 4.0
             * ((shim_sin_deg((time * 2 + (20 * i))) * 0.01) + 0.05)
-            * shim_sin_deg(((f32) time * 0.25) + (20 * SQ(i)));
+            * shim_sin_deg(((f32) time * 0.25) + (SQ(i) * 20));
 
-        if (data->unk_20[i] < 0.0f) {
-            data->unk_20[i] += 256.0f;
+        if (data->texScrollAmt[i] < 0.0f) {
+            data->texScrollAmt[i] += 256.0f;
         }
-        if (data->unk_20[i] > 256.0f) {
-            data->unk_20[i] -= 256.0f;
+        if (data->texScrollAmt[i] > 256.0f) {
+            data->texScrollAmt[i] -= 256.0f;
         }
     }
 }
@@ -133,4 +134,50 @@ void sun_render(EffectInstance* effect) {
     retTask->renderMode |= RENDER_TASK_FLAG_2;
 }
 
-INCLUDE_ASM(s32, "effects/sun", sun_appendGfx);
+void sun_appendGfx(void* argEffect) {
+    EffectInstance* effect = (EffectInstance*) argEffect;
+    SunFXData* data;
+    Matrix4f mtx;
+    Matrix4f mtxUnused;
+    s32 alpha;
+    s32 offsetS;
+    s32 fromRight;
+    s32 i;
+    
+    data = effect->data.sun;
+    alpha = data->alpha;
+    fromRight = data->shineFromRight;
+    
+    if (alpha != 0) {
+        gDPPipeSync(gMasterGfxPos++);
+        gSPSegment(gMasterGfxPos++, 0x9, VIRTUAL_TO_PHYSICAL(effect->graphics->data));
+        
+        if (!fromRight) {
+            shim_guOrthoF(mtx, -1600.0f, 1600.0f, -1200.0f, 1200.0f, -100.0f, 100.0f, 1.0f);
+        } else {
+            shim_guOrthoF(mtx, 1600.0f, -1600.0f, -1200.0f, 1200.0f, -100.0f, 100.0f, 1.0f);
+        }
+        
+        shim_guMtxF2L(mtx, &gDisplayContext->matrixStack[gMatrixListPos]);
+        gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
+            G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
+        shim_guTranslateF(mtx, 0.0f, 0.0f, 0.0f);
+        shim_guMtxF2L(mtx, &gDisplayContext->matrixStack[gMatrixListPos]);
+        gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
+            G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+        
+        gDPSetPrimColor(gMasterGfxPos++, 0, 0, data->primColor.r, data->primColor.g, data->primColor.b, alpha >> 1);
+        gDPSetEnvColor(gMasterGfxPos++, data->envColor.r, data->envColor.g, data->envColor.b, data->envColor.a);
+        gSPDisplayList(gMasterGfxPos++, D_E0120794[0]);
+
+        for (i = 0; i < ARRAY_COUNT(data->texScrollAmt); i++) {
+            offsetS = data->texScrollAmt[i] * 4.0f;
+            gDPSetTileSize(gMasterGfxPos++, 1, offsetS + (44 * i), 0, offsetS + (44 * i) + 252, 124);
+            gSPDisplayList(gMasterGfxPos++, D_E0120780[i]);
+        }
+        gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+        gSPMatrix(gMasterGfxPos++, &gDisplayContext->camPerspMatrix[gCurrentCameraID],
+            G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
+        gDPPipeSync(gMasterGfxPos++);
+    }
+}
