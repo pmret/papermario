@@ -10,7 +10,7 @@ ApiStatus CheckRideScriptForEnterExit(Evt* script, s32 isInitialCall) {
             script->varTable[10] = 0;
         } else {
             script->varTable[10] = 1;
-            script->varTable[11] = partner_get_ride_script();
+            script->varTablePtr[11] = partner_get_ride_script();
             script->varTable[13] = playerStatus->targetYaw;
         }
     }
@@ -63,7 +63,32 @@ ApiStatus SetPlayerPositionFromSaveData(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "world/script_api/7E4690", EnterPlayerPostPipe);
+ApiStatus EnterPlayerPostPipe(Evt* script, s32 isInitialCall) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    MapConfig* mapConfig = get_current_map_header();
+    ApiStatus ret = ApiStatus_BLOCK;
+
+    if (isInitialCall) {
+        playerStatus->position.x = (*mapConfig->entryList)[gGameStatusPtr->entryID].x;
+        playerStatus->position.z = (*mapConfig->entryList)[gGameStatusPtr->entryID].z;
+        script->varTable[2] = (*mapConfig->entryList)[gGameStatusPtr->entryID].y;
+        playerStatus->position.y = script->varTable[2] - 40;
+        playerStatus->flags |= PLAYER_STATUS_FLAGS_CAMERA_DOESNT_FOLLOW;
+    } else {
+        do {
+            playerStatus->position.y += 1.0f;
+            if (!(playerStatus->position.y < script->varTable[2])) {
+                playerStatus->position.y = script->varTable[2];
+                playerStatus->flags &= ~PLAYER_STATUS_FLAGS_CAMERA_DOESNT_FOLLOW;
+                ret = ApiStatus_DONE2;
+            }
+        } while (0); // todo required to match
+    }
+    gCameras[CAM_DEFAULT].targetPos.x = playerStatus->position.x;
+    gCameras[CAM_DEFAULT].targetPos.y = playerStatus->position.y;
+    gCameras[CAM_DEFAULT].targetPos.z = playerStatus->position.z;
+    return ret;
+}
 
 ApiStatus ShortenPartnerTetherDistance(Evt* script, s32 isInitialCall) {
     partner_set_tether_distance(20.0f);

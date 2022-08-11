@@ -410,6 +410,7 @@ s32 npc_test_move_simple_with_slipping(s32, f32*, f32*, f32*, f32, f32, f32, f32
 s32 npc_test_move_complex_with_slipping(s32, f32*, f32*, f32*, f32, f32, f32, f32);
 
 // Partner
+EvtScript* partner_get_ride_script(void);
 void partner_handle_before_battle(void);
 void partner_walking_update_player_tracking(Npc* partner);
 void partner_walking_update_motion(Npc* partner);
