@@ -5,11 +5,6 @@
 // todo consider symbol
 #define MSG_ROM_START 0x1B83000
 
-typedef struct UnkMsgStruct8 {
-    /* 0x00 */ s16 unk_00;
-    /* 0x02 */ char unk_02[0xE];
-} UnkMsgStruct8; // size = 0x16
-
 typedef MessageImageData* MessageImageDataList[1];
 
 extern IMG_BIN D_802EF0D0;

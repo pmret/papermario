@@ -93,7 +93,7 @@ void filemenu_yesno_draw_prompt_contents(MenuPanel* tab, s32 posX, s32 posY) {
             }
 
             xOffset = (147 - (i * 11)) / 2;
-            filemenu_draw_file_name(&filemenu_8024C110[0], i + 1, posX + xOffset, posY + 22, 0xFF, 0, 8, 0xB);
+            filemenu_draw_file_name(filemenu_8024C110, i + 1, posX + xOffset, posY + 22, 0xFF, 0, 8, 0xB);
             xOffset += (i + 1) * 11;
             filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_PERIOD_20), posX + xOffset, posY + 22, 0xFF, 0, 0);
             filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_OK), posX + 70, posY + 38, 0xFF, 0, 0);

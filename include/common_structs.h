@@ -1271,10 +1271,10 @@ typedef struct MessageCharData {
 } MessageCharData; // size = 0xC
 
 typedef struct MessageCharset {
-    /* 0x0 */ Vec2b texSize;
+    /* 0x0 */ Vec2bu texSize;
     /* 0x2 */ s8 unk_02;
     /* 0x3 */ u8 newLineY;
-    /* 0x4 */ s16 charRasterSize; // in bytes
+    /* 0x4 */ u16 charRasterSize; // in bytes
     /* 0x6 */ char unk_06[0x2];
     /* 0x8 */ MessageCharData* rasters;
 } MessageCharset; // size = 0xA;
@@ -1305,6 +1305,11 @@ typedef struct MessageNumber {
     /* 0x11 */ s8 fixedWidth;
     /* 0x12 */ char unk_12[0x2];
 } MessageNumber; // size = 0x14
+
+typedef struct UnkMsgStruct8 {
+    /* 0x00 */ s16 unk_00;
+    /* 0x02 */ char unk_02[0xE];
+} UnkMsgStruct8; // size = 0x16
 
 typedef struct ShopItemEntity {
     /* 0x00 */ s32 index;

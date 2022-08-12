@@ -225,7 +225,10 @@ void filemenu_draw_contents_file_title(
         draw_number(fileIdx + 1, baseX + 33, baseY + 1, 1, 0, 255, 2);
     } else {
         draw_number(fileIdx + 1, baseX + 33, baseY + 1, 1, 0, 255, 2);
-        filemenu_draw_file_name(gSaveSlotMetadata[fileIdx].filename, 8, baseX + 46, baseY + 1, 255, 0, 1, 9);
+        filemenu_draw_file_name(
+            gSaveSlotMetadata[fileIdx].filename,
+            ARRAY_COUNT(gSaveSlotMetadata[fileIdx].filename),
+            baseX + 46, baseY + 1, 255, 0, 1, 9);
     }
 }
 
