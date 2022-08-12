@@ -2184,9 +2184,9 @@ typedef struct SpriteRasterInfo {
     /* 0x0C */ s32 height;
 } SpriteRasterInfo; // size = 0x10
 
-typedef struct UnkFoldStruct {
+typedef struct UnkEntityStruct {
     /* 0x00 */ s32 foldID;
-    /* 0x04 */ char unk_04[0x4];
+    /* 0x04 */ s32 entityID;
     /* 0x08 */ s32 spriteIndex;
     /* 0x0C */ s32 rasterIndex;
     /* 0x10 */ Vec3f pos;
@@ -2194,7 +2194,7 @@ typedef struct UnkFoldStruct {
     /* 0x28 */ Vec3f scale;
     /* 0x34 */ f32 unk_34;
     /* 0x38 */ f32 unk_38;
-} UnkFoldStruct; // size = ??
+} UnkEntityStruct; // size = 0x3C
 
 typedef struct EntityModel {
     /* 0x00 */ s32 flags;

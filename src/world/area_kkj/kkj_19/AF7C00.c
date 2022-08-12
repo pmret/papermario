@@ -28,4 +28,17 @@ INCLUDE_ASM(s32, "world/area_kkj/kkj_19/AF7C00", func_80240C10_AF8560);
 
 INCLUDE_ASM(s32, "world/area_kkj/kkj_19/AF7C00", func_80240C4C_AF859C);
 
-INCLUDE_ASM(s32, "world/area_kkj/kkj_19/AF7C00", func_80240CB4_AF8604);
+ApiStatus func_80240CB4_AF8604(Evt* script, s32 isInitialCall) {
+    if (isInitialCall) {
+        script->functionTemp[1] = 255;
+    }
+
+    script->functionTemp[1] -= 16;
+    if (script->functionTemp[1] <= 0) {
+        script->functionTemp[1] = 0;
+        return ApiStatus_DONE2;
+    }
+
+    set_screen_overlay_params_front(0, script->functionTemp[1]);
+    return ApiStatus_BLOCK;
+}
