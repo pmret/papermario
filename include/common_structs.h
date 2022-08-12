@@ -2125,7 +2125,7 @@ typedef struct {
 
 typedef struct {
     /* 0x00000 */ LookAt lookAt;
-    /* 0x00020 */ char unk_20[0x10];
+    /* 0x00020 */ Hilite hilite;
     /* 0x00030 */ Mtx camPerspMatrix[8]; // could only be length 4, unsure
     /* 0x00230 */ Gfx mainGfx[0x2080];
     /* 0x10630 */ Gfx backgroundGfx[0x200]; // used by gfx_task_background
