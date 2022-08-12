@@ -138,7 +138,7 @@ typedef struct Shop {
     /* 0x008 */ s32 currentItemSlot;
     /* 0x00C */ s32 selectedStoreItemSlot;
     /* 0x010 */ ShopOwner* owner;
-    /* 0x014 */ ShopItemLocation* ItemDataPositions;
+    /* 0x014 */ ShopItemLocation* itemDataPositions;
     /* 0x018 */ ShopItemData* staticInventory;
     /* 0x01C */ ShopSellPriceData* staticPriceList;
     /* 0x020 */ s32 costIconID;

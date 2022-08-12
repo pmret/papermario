@@ -54,7 +54,7 @@ void func_80241610_97F0E0(void) {
     gDPSetTextureConvert(gMasterGfxPos++, G_TC_FILT);
     gDPSetCombineKey(gMasterGfxPos++, G_CK_NONE);
     gDPSetAlphaCompare(gMasterGfxPos++, G_AC_NONE);
-    
+
     guTranslateF(transformMtx, ambush->pos.x, ambush->pos.y, ambush->pos.z);
     guRotateF(tempMtx, ambush->rot.y + gCameras[gCurrentCameraID].currentYaw + ambush->renderYaw, 0.0f, 1.0f, 0.0f);
     guMtxCatF(tempMtx, transformMtx, transformMtx);
@@ -67,7 +67,7 @@ void func_80241610_97F0E0(void) {
     guMtxF2L(transformMtx, &gDisplayContext->matrixStack[gMatrixListPos]);
     gSPMatrix(gMasterGfxPos++, OS_PHYSICAL_TO_K0(&gDisplayContext->matrixStack[gMatrixListPos++]),
         G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    
+
     spr_get_npc_raster_info(&spriteRaster, ambush->spriteIndex, ambush->rasterIndex);
     foldImg.raster  = spriteRaster.raster;
     foldImg.palette = spriteRaster.defaultPal;
@@ -76,7 +76,7 @@ void func_80241610_97F0E0(void) {
     foldImg.xOffset = -(spriteRaster.width / 2);
     foldImg.yOffset = (spriteRaster.height / 2);
     foldImg.opacity = 255;
-    
+
     fold_update(ambush->foldID, FOLD_TYPE_7, 255, 255, 255, ambush->alpha, 0);
     fold_appendGfx_component(ambush->foldID, &foldImg, 0, transformMtx);
     gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
@@ -86,7 +86,7 @@ ApiStatus func_80241B28_97F5F8(Evt* script, s32 isInitialCall) {
     StoneChompAmbushIsk05* ambush = &N(ChompAmbush);
     SpriteRasterInfo rasterInfo;
     Npc* npc = get_npc_unsafe(script->owner1.enemy->npcID);
-    
+
     ambush->spriteIndex = 53; //TODO get spriteID for this constant
     ambush->rasterIndex = 0;
     spr_get_npc_raster_info(&rasterInfo, ambush->spriteIndex, ambush->rasterIndex);
