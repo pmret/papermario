@@ -17,7 +17,6 @@ extern HudScript* D_8024A180[3];
 extern s32 D_8024A18C;
 extern s32 D_8024C108;
 extern MenuWindowBP D_8024A190[2];
-extern s32 D_8024A1B4;
 extern s8 D_8024C090;
 extern s32 D_8024C100_C09980[3];
 extern u8 D_8024C117;

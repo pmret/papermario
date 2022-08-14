@@ -91,34 +91,37 @@ s32 filemenu_draw_char(s32 c, s32 x, s32 y, s32 flag1, s32 color, s32 flag2) {
     return 0;
 }
 
-// void filemenu_draw_message(u8* message, s32 x, s32 y, s32 alpha, s32 color, s32 flags);
+// issue with the second filemenu_draw_char arg order
+#ifdef NON_MATCHING
+void filemenu_draw_message(u8* message, s32 x, s32 y, s32 alpha, s32 color, u32 flags) {
+    s32 flag1 = flags & 1;
+    s32 flag2 = flags >> 3;
+
+    flag2 &= 1;
+    if (flag1 == 1) {
+        y -= 2;
+    }
+
+    if (message < 0x100) {
+        if (message - 0xA2 >= 0x4E) {
+            filemenu_draw_char(message, x, y, flag1, color, flag2);
+            return;
+        }
+        if ((s32) message >= 0xC6) {
+            message = D_8024B74C[(s32) message - 0xC6];
+        }
+    }
+
+    if ((s32) message < 0) {
+        filemenu_draw_char(0xF3, x, y, flag1, color, flag2);
+        while (*message != 0xFD) {
+            x += filemenu_draw_char(*message++, x, y, flag1, color, flag2);
+        }
+    }
+}
+#else
 INCLUDE_ASM(s32, "169BE0", filemenu_draw_message);
-// void filemenu_draw_message(u8* message, s32 x, s32 y, s32 alpha, s32 color, u32 flags) {
-//     s32 flag1 = flags & 1;
-//     s32 flag2 = flags >> 3;
-
-//     flag2 &= 1;
-//     if (flag1 == 1) {
-//         y -= 2;
-//     }
-
-//     if (message < 0x100) {
-//         if (message - 0xA2 >= 0x4E) {
-//             filemenu_draw_char(message, x, y, flag1, color, flag2);
-//             return;
-//         }
-//         if ((s32) message >= 0xC6) {
-//             message = D_8024B74C[(s32) message - 0xC6];
-//         }
-//     }
-
-//     if ((s32) message < 0) {
-//         filemenu_draw_char(0xF3, x, y, flag1, color, flag2);
-//         while (*message != 0xFD) {
-//             x += filemenu_draw_char(*message++, x, y, flag1, color, flag2);
-//         }
-//     }
-// }
+#endif
 
 // data migration
 #ifdef NON_MATCHING

@@ -635,7 +635,7 @@ void dispatch_event_player(s32);
 s32 btl_are_all_enemies_defeated(void);
 s32 btl_check_enemies_defeated(void);
 s32 btl_check_player_defeated(void);
-void btl_show_battle_message(s32, s32);
+void btl_show_battle_message(s32 messageIndex, s32 duration);
 void btl_update_ko_status(void);
 void reset_actor_turn_info(void);
 void btl_draw_prim_quad(u8 r, u8 g, u8 b, u8 a, u16 left, u16 top, u16 arg6, u16 arg7);

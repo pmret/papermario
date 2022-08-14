@@ -1849,7 +1849,7 @@ typedef struct Actor {
     /* 0x218 */ s8 transStatus; /* 0E = yes */
     /* 0x219 */ s8 transDuration;
     /* 0x21A */ char unk_21A[2];
-    /* 0x21C */ u8 status;
+    /* 0x21C */ s8 status;
     /* 0x21D */ s8 unk_21D;
     /* 0x21E */ s16 unk_21E;
     /* 0x220 */ s8 isGlowing; // not the case for goombario
