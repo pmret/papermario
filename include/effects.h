@@ -1281,7 +1281,11 @@ typedef struct QuizmoAssistantFXData {
 } QuizmoAssistantFXData; // size = 0x20
 
 typedef struct IcePillarFXData {
-    /* 0x00 */ char todo[0];
+    /* 0x00 */ char unk_00[0x4];
+    /* 0x04 */ Vec3f position;
+    /* 0x10 */ char unk_10[0x10];
+    /* 0x20 */ f32 unk_20;
+    /* 0x24 */ char todo[0];
 } IcePillarFXData; // size = unknown
 
 typedef struct SunFXData {

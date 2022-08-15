@@ -978,9 +978,7 @@ void load_player_actor(void) {
         }
     }
 
-    partMovement = heap_malloc(sizeof(*partMovement));
-    part->movement = partMovement;
-
+    partMovement = part->movement = heap_malloc(sizeof(*partMovement));
     ASSERT(partMovement != NULL);
 
     player->shadow.id = create_shadow_type(0, player->currentPos.x, player->currentPos.y, player->currentPos.z);
@@ -1280,8 +1278,8 @@ Actor* create_actor(Formation formation) {
         }
     }
 
-    battleStatus->enemyActors[i] = heap_malloc(sizeof(*actor));
-    actor = battleStatus->enemyActors[i];
+    actor = battleStatus->enemyActors[i] = heap_malloc(sizeof(*actor));
+    
     ASSERT(actor != NULL);
 
     actor->unk_134 = battleStatus->unk_93++;
@@ -1517,25 +1515,25 @@ Actor* create_actor(Formation formation) {
     return actor;
 }
 
-s32 func_80265CE8(u32* anim, s32 arg1) {
-    s32 ret;
+s32 func_80265CE8(AnimID* animations, s32 statusKey) {
+    AnimID foundAnim;
 
-    if (anim == 0) {
+    if (animations == NULL) {
         return 0;
     }
 
-    ret = 0;
-    while (*anim != NULL) {
-        if (*anim == 1) {
-            ret = anim[1];
+    foundAnim = 0;
+    while (animations[DICTIONARY_KEY] != NULL) {
+        if (animations[DICTIONARY_KEY] == STATUS_NORMAL) {
+            foundAnim = animations[DICTIONARY_VALUE];
         }
-        if (*anim == arg1) {
-            ret = anim[1];
+        if (animations[DICTIONARY_KEY] == statusKey) {
+            foundAnim = animations[DICTIONARY_VALUE];
             break;
         }
-        anim += 2;
+        animations += DICTIONARY_SIZE;
     }
-    return ret;
+    return foundAnim;
 }
 
 s32 func_80265D44(s32 animID) {
@@ -1756,15 +1754,15 @@ s32 inflict_status(Actor* target, s32 statusTypeKey, s32 duration) {
                 target->status = STATUS_DAZE;
             }
             return TRUE;
-        case STATUS_E:
+        case STATUS_TRANSPARENT:
             if (target->actorID != ACTOR_PARTNER) {
-                target->transStatus = STATUS_E;
+                target->transStatus = STATUS_TRANSPARENT;
                 target->transDuration = duration;
                 if ((s8)duration > 9) {
                     target->transDuration = 9;
                 }
-                target->status = STATUS_E;
-                create_status_transparent(target->hudElementDataIndex, STATUS_E);
+                target->status = STATUS_TRANSPARENT;
+                create_status_transparent(target->hudElementDataIndex, STATUS_TRANSPARENT);
             }
             return TRUE;
         case STATUS_END:
@@ -1981,7 +1979,7 @@ void func_802667F0(s32 arg0, Actor* actor, f32 x, f32 y, f32 z) {
     Actor* player = gBattleStatus.playerActor;
     s32 type;
 
-    if (actor->unk_200 == NULL) {
+    if (actor->attackResultEffect == NULL) {
         type = 0;
         switch (arg0) {
             case 0:
@@ -2012,10 +2010,10 @@ void func_802667F0(s32 arg0, Actor* actor, f32 x, f32 y, f32 z) {
                 }
                 break;
         }
-        actor->unk_200 = fx_attack_result_text(type, x, y, z - 10.0f, 12.0f, 90);
+        actor->attackResultEffect = fx_attack_result_text(type, x, y, z - 10.0f, 12.0f, 90);
         actor->unk_205 = 80;
     } else {
-        ((AttackResultTextFXData*)actor->unk_200->data)->unk_18 = 0;
+        actor->attackResultEffect->data.attackResultText->unk_18 = 0;
         type = actor->unk_204;
         switch (arg0) {
             case 0:
@@ -2044,7 +2042,7 @@ void func_802667F0(s32 arg0, Actor* actor, f32 x, f32 y, f32 z) {
                 }
                 break;
         }
-        actor->unk_200 = fx_attack_result_text(type, x, y, z - 10.0f, 12.0f, 90);
+        actor->attackResultEffect = fx_attack_result_text(type, x, y, z - 10.0f, 12.0f, 90);
         actor->unk_205 = 80;
     }
 }
@@ -2255,7 +2253,7 @@ void func_80266E40(Actor* actor) {
         DecorationTable* decorationTable = partIt->decorationTable;
 
         do {
-            if (!(partIt->flags & (ACTOR_PART_FLAG_100000 | ACTOR_PART_FLAG_INVISIBLE)) &&
+            if (!(partIt->flags & (ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION | ACTOR_PART_FLAG_INVISIBLE)) &&
                 (partIt->idleAnimations != NULL) &&
                 !(partIt->flags & ACTOR_PART_FLAG_2))
             {
@@ -2284,7 +2282,7 @@ void func_80266EE8(Actor* actor, s32 arg1) {
     ActorPart* partIt = &actor->partsTable[0];
 
     while (partIt != NULL) {
-        if (!(partIt->flags & (ACTOR_PART_FLAG_100000 | ACTOR_PART_FLAG_INVISIBLE)) &&
+        if (!(partIt->flags & (ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION | ACTOR_PART_FLAG_INVISIBLE)) &&
             (partIt->idleAnimations != NULL) &&
             !(partIt->flags & ACTOR_PART_FLAG_2))
         {
@@ -2307,7 +2305,7 @@ void func_80266F8C(Actor* actor) {
         DecorationTable* decorationTable = actorPart->decorationTable;
 
         do {
-            if (!(actorPart->flags & (ACTOR_PART_FLAG_100000 | ACTOR_PART_FLAG_INVISIBLE)) &&
+            if (!(actorPart->flags & (ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION | ACTOR_PART_FLAG_INVISIBLE)) &&
                 actorPart->idleAnimations != NULL &&
                 !(actorPart->flags & ACTOR_PART_FLAG_2))
             {
@@ -2334,7 +2332,7 @@ void func_80267018(Actor* actor, s32 arg1) {
     ActorPart* actorPart = &actor->partsTable[0];
 
     while (actorPart != NULL) {
-        if (!(actorPart->flags & (ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_100000)) &&
+        if (!(actorPart->flags & (ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION)) &&
             actorPart->decorationTable != NULL && !(actorPart->flags & ACTOR_PART_FLAG_2) &&
             actorPart->idleAnimations != NULL)
         {
@@ -2357,7 +2355,7 @@ void func_802670C8(Actor* actor) {
         DecorationTable* decorationTable = partIt->decorationTable;
 
         do {
-            if (!(partIt->flags & (ACTOR_PART_FLAG_100000 | ACTOR_PART_FLAG_INVISIBLE)) &&
+            if (!(partIt->flags & (ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION | ACTOR_PART_FLAG_INVISIBLE)) &&
                 (partIt->idleAnimations != NULL) &&
                 !(partIt->flags & ACTOR_PART_FLAG_2))
             {
@@ -2382,7 +2380,7 @@ void add_part_decoration(ActorPart* part, s32 decorationIndex, s32 decorationTyp
 void add_actor_decoration(Actor* actor, s32 decorationIndex, s32 decorationType) {
     ActorPart* part;
     for (part = actor->partsTable; part != NULL; part = part->nextPart) {
-        if (!(part->flags & (ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_100000)) && part->idleAnimations &&
+        if (!(part->flags & (ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION)) && part->idleAnimations &&
             !(part->flags & ACTOR_PART_FLAG_2))
         {
             add_part_decoration(part, decorationIndex, decorationType);
@@ -2398,7 +2396,7 @@ void remove_actor_decoration(Actor* actor, s32 decorationIndex) {
     ActorPart* part;
 
     for (part = actor->partsTable; part != NULL; part = part->nextPart) {
-        if (!(part->flags & (ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_100000)) && part->idleAnimations &&
+        if (!(part->flags & (ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION)) && part->idleAnimations &&
             !(part->flags & ACTOR_PART_FLAG_2))
         {
             remove_part_decoration(part, decorationIndex);

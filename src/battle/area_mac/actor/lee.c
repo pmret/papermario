@@ -3643,7 +3643,7 @@ ActorPartBlueprint N(partsTable_8022851C)[] = {
         .unk_1D = 0xF6,
     },
     {
-        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_100000,
+        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
         .index = 3,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },

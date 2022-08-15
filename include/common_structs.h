@@ -23,6 +23,8 @@ typedef void NoArgCallback(void*);
 #define IMG_BIN u8
 #define PAL_BIN u16
 
+typedef u32 AnimID;
+
 typedef struct {
     u8 r, g, b, a;
 } Color_RGBA8;
@@ -1644,7 +1646,11 @@ typedef struct DecorationTable {
     /* 0x750 */ s8 unk_750;
     /* 0x751 */ s8 unk_751;
     /* 0x752 */ s8 unk_752;
-    /* 0x753 */ char unk_753[17];
+    /* 0x753 */ char pad753[5];
+    /* 0x758 */ s16 unk758;
+    /* 0x75A */ s16 unk75A;
+    /* 0x75C */ s16 unk75C;
+    /* 0x75E */ char pad75E[6];
     /* 0x764 */ s8 unk_764;
     /* 0x765 */ s8 unk_765;
     /* 0x766 */ s8 unk_766;

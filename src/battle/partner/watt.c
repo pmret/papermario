@@ -120,7 +120,7 @@ ApiStatus func_80238784_704274(Evt* script, s32 isInitialCall) {
     ActorPart* targetActorPart = get_actor_part(targetActor, partnerActor->targetPartIndex);
     s32 statusChance = lookup_status_chance(targetActor->statusTable, 5);
 
-    if (targetActor->transStatus == 14) {
+    if (targetActor->transStatus == STATUS_TRANSPARENT) {
         statusChance = 0;
     }
     if (targetActorPart->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY) {
@@ -190,7 +190,7 @@ ApiStatus N(AverageTargetParalyzeChance)(Evt* script, s32 isInitialCall) {
         targetActorPart = get_actor_part(targetActor, partnerActor->targetData[i].partID);
         targetActorBlueprintBaseStatusChance = lookup_status_chance(targetActor->statusTable, STATUS_PARALYZE);
 
-        if (targetActor->transStatus == 14) {
+        if (targetActor->transStatus == STATUS_TRANSPARENT) {
             targetActorBlueprintBaseStatusChance = 0;
         }
 

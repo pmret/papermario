@@ -126,7 +126,7 @@ ApiStatus N(AverageTargetDizzyChance)(Evt* script, s32 isInitialCall) {
         targetActorPart = get_actor_part(targetActor, partnerActor->targetData[i].partID);
         targetActorBlueprintBaseStatusChance = lookup_status_chance(targetActor->statusTable, STATUS_DIZZY);
 
-        if (targetActor->transStatus == 14) {
+        if (targetActor->transStatus == STATUS_TRANSPARENT) {
             targetActorBlueprintBaseStatusChance = 0;
         }
 

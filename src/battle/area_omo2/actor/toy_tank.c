@@ -109,7 +109,7 @@ ActorPartBlueprint N(parts)[] = {
         .unk_1D = 0,
     },
     {
-        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_100000 | ACTOR_PART_FLAG_MULTI_TARGET,
+        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION | ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 2,
         .posOffset = { 0, 30, 0 },
         .targetOffset = { 0, 50 },
@@ -123,7 +123,7 @@ ActorPartBlueprint N(parts)[] = {
         .unk_20 = MSG_actor_general_guy_dup,
     },
     {
-        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_100000,
+        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
         .index = 3,
         .posOffset = { -5, 0, 0 },
         .targetOffset = { -10, 20 },
