@@ -1423,7 +1423,7 @@ typedef struct GameStatus {
     /* 0x150 */ s16 backgroundMaxY;
     /* 0x152 */ s16 backgroundXOffset; /* (used for parallax scroll) */
     /* 0x154 */ UNK_PTR backgroundRaster;
-    /* 0x158 */ UNK_PTR backgroundPalette;
+    /* 0x158 */ u16* backgroundPalette;
     /* 0x15C */ s16 unk_15C;
     /* 0x15E */ u16 unk_15E;
     /* 0x160 */ Vec3s savedPos;

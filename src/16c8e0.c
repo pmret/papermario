@@ -1,4 +1,5 @@
 #include "common.h"
+#include "nu/nusys.h"
 #include "hud_element.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
@@ -92,6 +93,9 @@ extern s32 D_8029EFBC;
 extern s32 D_8029EFC0[10];
 extern s32 D_8029EFE8[10];
 extern s32 D_8029F010[10];
+
+extern s16 D_8029F038[0x100];
+
 extern HudScript HES_HPBar;
 extern HudScript HES_Item_SmallStarPoint;
 extern HudScript HES_Item_StarPoint;

@@ -468,6 +468,8 @@ void set_aux_pan_v(s32 texPannerID, s32 value);
 void enable_world_fog(void);
 void set_world_fog_dist(s32 start, s32 end);
 void set_world_fog_color(s32 r, s32 g, s32 b, s32 a);
+s32 is_world_fog_enabled(void);
+void get_world_fog_color(s32* r, s32* g, s32* b, s32* a);
 void enable_entity_fog(void);
 void set_entity_fog_dist(s32 start, s32 end);
 void set_entity_fog_color(s32 r, s32 g, s32 b, s32 a);
