@@ -4163,6 +4163,7 @@ segments:
     vram: 0xE0120000
     subsegments:
     - [0x40B3F0, c, sun]
+    - [0x40BB70]
   - [0x40BBA0, bin] # sun gfx
   - name: effect_star_spirits_energy
     dir: effects
