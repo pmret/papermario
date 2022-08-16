@@ -297,7 +297,7 @@ typedef struct PlayerData {
     /* 0x296 */ s16 actionCommandSuccesses;
     /* 0x298 */ u16 hitsTaken;
     /* 0x29A */ u16 hitsBlocked;
-    /* 0x29C */ s16 playerFirstStrikes;
+    /* 0x29C */ u16 playerFirstStrikes;
     /* 0x29E */ s16 enemyFirstStrikes;
     /* 0x2A0 */ u16 powerBounces;
     /* 0x2A2 */ u16 battlesCount;
