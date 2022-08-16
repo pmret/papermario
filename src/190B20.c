@@ -972,8 +972,8 @@ void load_player_actor(void) {
         decorationTable->unk_7DB = 0;
         decorationTable->effectType = 0;
 
-        for (j = 0; j < ARRAY_COUNT(decorationTable->unk_8B0); j++) {
-            decorationTable->unk_8B0[j] = NULL;
+        for (j = 0; j < ARRAY_COUNT(decorationTable->effects); j++) {
+            decorationTable->effects[j] = NULL;
             decorationTable->decorationType[j] = 0;
         }
     }
@@ -1201,8 +1201,8 @@ void load_partner_actor(void) {
                 decorationTable->unk_7DB = 0;
                 decorationTable->effectType = 0;
 
-                for (j = 0; j < ARRAY_COUNT(decorationTable->unk_8B0); j++) {
-                    decorationTable->unk_8B0[j] = NULL;
+                for (j = 0; j < ARRAY_COUNT(decorationTable->effects); j++) {
+                    decorationTable->effects[j] = NULL;
                     decorationTable->decorationType[j] = 0;
                 }
             }
@@ -1463,8 +1463,8 @@ Actor* create_actor(Formation formation) {
             decorationTable->unk_7DB = 0;
             decorationTable->effectType = 0;
 
-            for (k = 0; k < ARRAY_COUNT(decorationTable->unk_8B0); k++) {
-                decorationTable->unk_8B0[k] = NULL;
+            for (k = 0; k < ARRAY_COUNT(decorationTable->effects); k++) {
+                decorationTable->effects[k] = NULL;
                 decorationTable->decorationType[k] = 0;
             }
 

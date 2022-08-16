@@ -9,8 +9,8 @@ ApiStatus N(func_802A123C_71C06C)(Evt* script, s32 isInitialCall) {
     s32 b = evt_get_variable(script, *args++);
     s32 c = evt_get_variable(script, *args++);
 
-    fx_sparkles(2, a, b, c, 30.0f);
-    fx_sparkles(2, a, b, c, 30.0f);
+    fx_sparkles(FX_SPARKLES_2, a, b, c, 30.0f);
+    fx_sparkles(FX_SPARKLES_2, a, b, c, 30.0f);
 
     return ApiStatus_DONE2;
 }

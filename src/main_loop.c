@@ -482,7 +482,7 @@ void gfx_draw_background(void) {
             gPauseBackgroundFade = 0;
             gGameStatusPtr->backgroundFlags &= ~0xF0;
             gGameStatusPtr->backgroundFlags |= 0x30;
-            // fall through
+            // fallthrough
         case 0x30:
             // Draw the saved framebuffer to the background, fading in at a rate of 16 opacity per frame until reaching 128 opacity
             gPauseBackgroundFade += 16;

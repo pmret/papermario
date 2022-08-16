@@ -390,6 +390,14 @@ typedef struct SparklesFXData {
     /* 0x00 */ char todo[0];
 } SparklesFXData; // size = unknown
 
+enum SparkesFXTypes {
+    FX_SPARKLES_0   = 0,
+    FX_SPARKLES_1   = 1,
+    FX_SPARKLES_2   = 2,
+    FX_SPARKLES_3   = 3,
+    FX_SPARKLES_4   = 4
+};
+
 typedef struct ShapeSpellFXData {
     /* 0x00 */ s32 isChild;
     /* 0x04 */ Vec3f pos;
