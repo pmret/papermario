@@ -2299,22 +2299,22 @@ void btl_state_update_enemy_move(void) {
                                         btl_cam_use_preset(BTL_CAM_PRESET_33);
 
                                         switch (player->status) {
-                                            case 4:
+                                            case STATUS_DIZZY:
                                                 messageIndex = 0xA;
                                                 break;
-                                            case 6:
+                                            case STATUS_SLEEP:
                                                 messageIndex = 0xB;
                                                 break;
-                                            case 7:
+                                            case STATUS_FROZEN:
                                                 messageIndex = 0xC;
                                                 break;
-                                            case 9:
+                                            case STATUS_POISON:
                                                 messageIndex = 0xD;
                                                 break;
-                                            case 10:
+                                            case STATUS_SHRINK:
                                                 messageIndex = 0xE;
                                                 break;
-                                            case 5:
+                                            case STATUS_PARALYZE:
                                                 messageIndex = 0xF;
                                                 break;
                                             default:
