@@ -347,9 +347,9 @@ ApiStatus func_80238CE0_700A60(Evt* script, s32 isInitialCall) {
     Actor* targetActor = get_actor(partnerActor->targetActorID);
     ActorPart* targetActorPart = get_actor_part(targetActor, partnerActor->targetPartIndex);
     s32 airLiftChance = targetActor->actorBlueprint->airLiftChance;
-    s32 temp = 100 - (targetActor->currentHP * 100) / targetActor->maxHP;
+    s32 hpPercentLost = 100 - (targetActor->currentHP * 100) / targetActor->maxHP;
 
-    if (targetActor->transStatus == 14) {
+    if (targetActor->transStatus == STATUS_TRANSPARENT) {
         airLiftChance = 0;
     }
 
@@ -358,7 +358,7 @@ ApiStatus func_80238CE0_700A60(Evt* script, s32 isInitialCall) {
     }
 
     if (airLiftChance > 0) {
-        airLiftChance = airLiftChance + ((airLiftChance * temp) / 100);
+        airLiftChance = airLiftChance + ((airLiftChance * hpPercentLost) / 100);
 
         if (airLiftChance > 100) {
             airLiftChance = 100;

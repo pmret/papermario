@@ -25,6 +25,7 @@ void shim_guRotateF(float mf[4][4], float a, float x, float y, float z);
 void shim_guTranslate(Mtx *m, float x, float y, float z);
 void shim_guTranslateF(float mf[4][4], float x, float y, float z);
 void shim_guPositionF(float mf[4][4], float r, float p, float h, float s, float x, float y, float z);
+void shim_guOrthoF(float mf[4][4], float l, float r, float b, float t, float n, float f, float scale);
 void shim_mem_clear(void* data, s32 numBytes);
 void shim_transform_point(Matrix4f mtx, f32 inX, f32 inY, f32 inZ, f32 inS, f32* outX, f32* outY, f32* outZ, f32* outS);
 s32 shim_npc_raycast_down_sides(s32, f32*, f32*, f32*, f32*);

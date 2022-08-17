@@ -167,7 +167,7 @@ ActorPartBlueprint N(parts)[] = {
         .unk_1D = 5,
     },
     {
-        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_100000 | ACTOR_PART_FLAG_20000000,
+        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION | ACTOR_PART_FLAG_20000000,
         .index = 5,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
@@ -180,7 +180,7 @@ ActorPartBlueprint N(parts)[] = {
         .unk_1D = 0,
     },
     {
-        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_100000 | ACTOR_PART_FLAG_20000000,
+        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION | ACTOR_PART_FLAG_20000000,
         .index = 6,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
@@ -193,7 +193,7 @@ ActorPartBlueprint N(parts)[] = {
         .unk_1D = 0,
     },
     {
-        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_100000 | ACTOR_PART_FLAG_20000000,
+        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION | ACTOR_PART_FLAG_20000000,
         .index = 7,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
@@ -206,7 +206,7 @@ ActorPartBlueprint N(parts)[] = {
         .unk_1D = 0,
     },
     {
-        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_100000 | ACTOR_PART_FLAG_20000000,
+        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION | ACTOR_PART_FLAG_20000000,
         .index = 8,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },

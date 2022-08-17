@@ -22,7 +22,7 @@ s32 calc_item_check_hit(void) {
         ASSERT(actorPart != NULL);
 
         if (!(actorPart->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY)) {
-            if (actor->transStatus == 0xE) {
+            if (actor->transStatus == STATUS_TRANSPARENT) {
                 return HIT_RESULT_MISS;
             }
             if (actor->stoneStatus == STATUS_STONE) {
@@ -107,7 +107,7 @@ s32 calc_item_damage_enemy(void) {
 
     if (!(battleStatus->currentAttackElement & DAMAGE_TYPE_REMOVE_BUFFS)) {
         if ((targetPart->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY) ||
-            ((target->transStatus == STATUS_E) || ((targetPart->eventFlags & ACTOR_EVENT_FLAG_800) && !(battleStatus->currentAttackElement & DAMAGE_TYPE_QUAKE))))
+            ((target->transStatus == STATUS_TRANSPARENT) || ((targetPart->eventFlags & ACTOR_EVENT_FLAG_800) && !(battleStatus->currentAttackElement & DAMAGE_TYPE_QUAKE))))
         {
             return 6;
         }

@@ -204,7 +204,7 @@ EvtScript N(8021D820) = {
         EVT_CASE_EQ(1)
             EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
             EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_8021D510)))
-            EVT_CALL(SetPartFlagBits, ACTOR_SELF, 2, ACTOR_PART_FLAG_100000, 0)
+            EVT_CALL(SetPartFlagBits, ACTOR_SELF, 2, ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION, 0)
             EVT_CALL(SummonEnemy, EVT_ADDR(N(specialFormation_8021D734)), 0)
             EVT_SET(LW(10), LW(0))
             EVT_CALL(GetPartOffset, ACTOR_SELF, 2, LW(1), LW(2), LW(3))
@@ -642,14 +642,14 @@ EvtScript N(takeTurn_8021E900) = {
                     EVT_MUL(LW(0), -1)
                     EVT_CALL(AddCoin, LW(0))
                     EVT_THREAD
-                        EVT_CALL(SetPartFlagBits, ACTOR_SELF, 2, ACTOR_PART_FLAG_100000, 1)
+                        EVT_CALL(SetPartFlagBits, ACTOR_SELF, 2, ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION, 1)
                         EVT_CALL(SetPartFlagBits, ACTOR_SELF, 2, ACTOR_PART_FLAG_INVISIBLE, 0)
                         EVT_CALL(GetActorPos, ACTOR_PLAYER, LW(0), LW(1), LW(2))
                         EVT_CALL(SetPartPos, ACTOR_SELF, 2, LW(0), LW(1), LW(2))
                         EVT_CALL(SetPartJumpGravity, ACTOR_SELF, 2, EVT_FLOAT(1.0))
                         EVT_ADD(LW(11), 30)
                         EVT_CALL(JumpPartTo, ACTOR_SELF, 2, LW(10), LW(11), LW(12), 22, 1)
-                        EVT_CALL(SetPartFlagBits, ACTOR_SELF, 2, ACTOR_PART_FLAG_100000, 0)
+                        EVT_CALL(SetPartFlagBits, ACTOR_SELF, 2, ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION, 0)
                     EVT_END_THREAD
                     EVT_THREAD
                         EVT_CALL(GetActorVar, ACTOR_SELF, 1, LW(0))

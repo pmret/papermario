@@ -87,7 +87,7 @@ void debuff_update(EffectInstance* effect) {
     s32 temp;
     s32 i;
 
-    data->unk_28 += 1;
+    data->unk_28++;
     data->unk_24--;
     if (data->unk_24 < 0) {
         shim_remove_effect(effect);

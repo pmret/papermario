@@ -62,7 +62,7 @@ ActorPartBlueprint N(partsTable_8022339C)[] = {
         .unk_1D = 0,
     },
     {
-        .flags = ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_100000,
+        .flags = ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
         .index = 2,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 10 },
@@ -74,7 +74,7 @@ ActorPartBlueprint N(partsTable_8022339C)[] = {
         .unk_1D = 0,
     },
     {
-        .flags = ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_100000,
+        .flags = ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
         .index = 3,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 10 },
@@ -86,7 +86,7 @@ ActorPartBlueprint N(partsTable_8022339C)[] = {
         .unk_1D = 0,
     },
     {
-        .flags = ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_100000,
+        .flags = ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
         .index = 4,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 10 },
@@ -98,7 +98,7 @@ ActorPartBlueprint N(partsTable_8022339C)[] = {
         .unk_1D = 0,
     },
     {
-        .flags = ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_100000,
+        .flags = ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
         .index = 5,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 10 },

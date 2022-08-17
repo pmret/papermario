@@ -160,7 +160,7 @@ ActorPartBlueprint N(partsTable_8021A748)[] = {
         .unk_1D = 0,
     },
     {
-        .flags = ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_100000,
+        .flags = ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
         .index = 8,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 10 },
@@ -172,7 +172,7 @@ ActorPartBlueprint N(partsTable_8021A748)[] = {
         .unk_1D = 0,
     },
     {
-        .flags = ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_100000,
+        .flags = ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
         .index = 9,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 10 },
@@ -406,7 +406,7 @@ EvtScript N(8021B0E4) = {
         EVT_SET_GROUP(EVT_GROUP_00)
         EVT_CALL(ShakeCam, 1, 0, 20, EVT_FLOAT(3.0))
     EVT_END_THREAD
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, 5, ACTOR_PART_FLAG_100000, 1)
+    EVT_CALL(SetPartFlagBits, ACTOR_SELF, 5, ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION, 1)
     EVT_CALL(GetPartPos, ACTOR_SELF, 5, LW(0), LW(1), LW(2))
     EVT_CALL(SetPartDispOffset, ACTOR_SELF, 5, 0, -60, 0)
     EVT_SET(LW(1), 60)
@@ -659,7 +659,7 @@ EvtScript N(8021BC88) = {
 
 EvtScript N(8021BD6C) = {
     EVT_USE_ARRAY(D_80235FC0)
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, 3, ACTOR_PART_FLAG_100000, 1)
+    EVT_CALL(SetPartFlagBits, ACTOR_SELF, 3, ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION, 1)
     EVT_CALL(GetPartPos, ACTOR_SELF, 3, LW(0), LW(1), LW(2))
     EVT_CALL(SetPartDispOffset, ACTOR_SELF, 3, 0, -30, 0)
     EVT_SET(LW(1), 30)
@@ -685,7 +685,7 @@ EvtScript N(8021BD6C) = {
 
 EvtScript N(8021BF14) = {
     EVT_USE_ARRAY(D_80235FC0)
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, 4, ACTOR_PART_FLAG_100000, 1)
+    EVT_CALL(SetPartFlagBits, ACTOR_SELF, 4, ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION, 1)
     EVT_CALL(GetPartPos, ACTOR_SELF, 4, LW(0), LW(1), LW(2))
     EVT_CALL(SetPartDispOffset, ACTOR_SELF, 4, 0, -24, 0)
     EVT_SET(LW(1), 24)
@@ -845,7 +845,7 @@ EvtScript N(8021C594) = {
 
 EvtScript N(8021C67C) = {
     EVT_USE_ARRAY(D_80235FC0)
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, 10, ACTOR_PART_FLAG_100000, 1)
+    EVT_CALL(SetPartFlagBits, ACTOR_SELF, 10, ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION, 1)
     EVT_CALL(GetPartPos, ACTOR_SELF, 10, LW(0), LW(1), LW(2))
     EVT_CALL(SetPartPos, ACTOR_SELF, 10, LW(0), LW(1), LW(2))
     EVT_THREAD
@@ -948,7 +948,7 @@ EvtScript N(8021CAE4) = {
 
 EvtScript N(8021CB98) = {
     EVT_USE_ARRAY(D_80235FC0)
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, 6, ACTOR_PART_FLAG_100000, 1)
+    EVT_CALL(SetPartFlagBits, ACTOR_SELF, 6, ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION, 1)
     EVT_CALL(GetPartPos, ACTOR_SELF, 6, LW(0), LW(1), LW(2))
     EVT_CALL(SetPartDispOffset, ACTOR_SELF, 6, 0, -60, 0)
     EVT_SET(LW(1), 60)
@@ -975,7 +975,7 @@ EvtScript N(8021CB98) = {
 
 EvtScript N(8021CD50) = {
     EVT_USE_ARRAY(D_80235FC0)
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, 11, ACTOR_PART_FLAG_100000, 1)
+    EVT_CALL(SetPartFlagBits, ACTOR_SELF, 11, ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION, 1)
     EVT_CALL(GetPartPos, ACTOR_SELF, 11, LW(0), LW(1), LW(2))
     EVT_CALL(SetPartDispOffset, ACTOR_SELF, 11, 0, -60, 0)
     EVT_SET(LW(1), 60)
@@ -1034,7 +1034,7 @@ EvtScript N(8021CF4C) = {
 
 EvtScript N(8021D054) = {
     EVT_USE_ARRAY(D_80235FC0)
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, 8, ACTOR_PART_FLAG_100000, 1)
+    EVT_CALL(SetPartFlagBits, ACTOR_SELF, 8, ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION, 1)
     EVT_CALL(GetPartPos, ACTOR_SELF, 8, LW(0), LW(1), LW(2))
     EVT_CALL(SetPartPos, ACTOR_SELF, 8, LW(0), LW(1), LW(2))
     EVT_THREAD
@@ -1058,7 +1058,7 @@ EvtScript N(8021D054) = {
 
 EvtScript N(8021D1CC) = {
     EVT_USE_ARRAY(D_80235FC0)
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, 9, ACTOR_PART_FLAG_100000, 1)
+    EVT_CALL(SetPartFlagBits, ACTOR_SELF, 9, ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION, 1)
     EVT_CALL(GetPartPos, ACTOR_SELF, 9, LW(0), LW(1), LW(2))
     EVT_CALL(SetPartPos, ACTOR_SELF, 9, LW(0), LW(1), LW(2))
     EVT_THREAD
@@ -1083,7 +1083,7 @@ EvtScript N(8021D1CC) = {
 
 EvtScript N(8021D350) = {
     EVT_USE_ARRAY(D_80235FC0)
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, 7, ACTOR_PART_FLAG_100000, 1)
+    EVT_CALL(SetPartFlagBits, ACTOR_SELF, 7, ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION, 1)
     EVT_CALL(GetPartPos, ACTOR_SELF, 7, LW(0), LW(1), LW(2))
     EVT_CALL(SetPartDispOffset, ACTOR_SELF, 7, 0, -30, 0)
     EVT_SET(LW(1), 30)
