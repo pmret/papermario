@@ -2481,7 +2481,7 @@ void btl_state_update_first_strike(void) {
             btl_cam_target_actor(0);
             reset_actor_turn_info();
             battleStatus->battlePhase = PHASE_FIRST_STRIKE;
-            script = start_script(PlayerScriptDispatcher, 0xA, 0);
+            script = start_script(&PlayerScriptDispatcher, 0xA, 0);
             player->takeTurnScript = script;
             D_8029F248 = 3;
             gBattleState2 = BATTLE_STATE2_UNK_2;
