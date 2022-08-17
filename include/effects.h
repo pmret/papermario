@@ -390,6 +390,14 @@ typedef struct SparklesFXData {
     /* 0x00 */ char todo[0];
 } SparklesFXData; // size = unknown
 
+enum SparkesFXTypes {
+    FX_SPARKLES_0   = 0,
+    FX_SPARKLES_1   = 1,
+    FX_SPARKLES_2   = 2,
+    FX_SPARKLES_3   = 3,
+    FX_SPARKLES_4   = 4
+};
+
 typedef struct ShapeSpellFXData {
     /* 0x00 */ s32 isChild;
     /* 0x04 */ Vec3f pos;
@@ -1281,23 +1289,22 @@ typedef struct QuizmoAssistantFXData {
 } QuizmoAssistantFXData; // size = 0x20
 
 typedef struct IcePillarFXData {
-    /* 0x00 */ char todo[0];
+    /* 0x00 */ char unk_00[0x4];
+    /* 0x04 */ Vec3f position;
+    /* 0x10 */ char unk_10[0x10];
+    /* 0x20 */ f32 unk_20;
+    /* 0x24 */ char todo[0];
 } IcePillarFXData; // size = unknown
 
 typedef struct SunFXData {
-    /* 0x00 */ s32 unk_00;
-    /* 0x04 */ Vec3f unk_04;
+    /* 0x00 */ s32 shineFromRight;
+    /* 0x04 */ Vec3f pos; // does nothing
     /* 0x10 */ s32 timeLeft;
     /* 0x14 */ s32 lifeTime;
-    /* 0x18 */ u8 unk_18;
-    /* 0x19 */ u8 unk_19;
-    /* 0x1A */ u8 unk_1A;
-    /* 0x1B */ u8 unk_1B;
-    /* 0x1C */ u8 unk_1C;
-    /* 0x1D */ u8 unk_1D;
-    /* 0x1E */ u8 unk_1E;
+    /* 0x18 */ Color_RGB8 primColor;
+    /* 0x1B */ Color_RGBA8 envColor;
     /* 0x1F */ char unk_1F[0x1];
-    /* 0x20 */ f32 unk_20[5];
+    /* 0x20 */ f32 texScrollAmt[5];
     /* 0x34 */ f32 unk_34;
     /* 0x38 */ s32 alpha;
     /* 0x3C */ s32 targetAlpha;

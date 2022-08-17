@@ -189,26 +189,26 @@ s32 calc_player_test_enemy(void) {
 
     target = get_actor(currentTargetID);
     if (target == NULL) {
-        return 0;
+        return HIT_RESULT_HIT;
     }
 
     part = get_actor_part(target, targetPart);
     ASSERT(part != NULL);
 
     if (part->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY) {
-        return 6;
-    } else if (target->transStatus == STATUS_E || ((part->eventFlags & ACTOR_EVENT_FLAG_800) &&
+        return HIT_RESULT_MISS;
+    } else if (target->transStatus == STATUS_TRANSPARENT || ((part->eventFlags & ACTOR_EVENT_FLAG_800) &&
                !(battleStatus->currentAttackElement & DAMAGE_TYPE_QUAKE)))
     {
-        return 6;
+        return HIT_RESULT_MISS;
     } else if (target->stoneStatus == STATUS_STONE) {
         sfx_play_sound_at_position(SOUND_IMMUNE, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
-        return 8;
+        return HIT_RESULT_IMMUNE;
     } else if ((battleStatus->currentAttackElement & DAMAGE_TYPE_JUMP) && (part->eventFlags & ACTOR_EVENT_FLAG_SPIKY_TOP) &&
                !player_team_is_ability_active(player, ABILITY_SPIKE_SHIELD))
     {
         sfx_play_sound_at_position(SOUND_108, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
-        return 4;
+        return HIT_RESULT_LANDED_ON_SPIKE;
     } else if (!(battleStatus->currentAttackElement & (DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_JUMP)) &&
                (part->eventFlags & ACTOR_EVENT_FLAG_SPIKY_FRONT) &&
                (!(battleStatus->currentAttackEventSuppression & 4) &&
@@ -217,12 +217,12 @@ s32 calc_player_test_enemy(void) {
         sfx_play_sound_at_position(SOUND_108, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
         dispatch_damage_event_player_1(1, EVENT_SPIKE_CONTACT);
         dispatch_event_actor(target, EVENT_SPIKE_TAUNT);
-        return -1;
+        return HIT_RESULT_TRIGGERED_EXPLODE;
     } else if (player->staticStatus != STATUS_STATIC && target->staticStatus == STATUS_STATIC) {
-        return 7;
+        return HIT_RESULT_HIT_STATIC;
     }
 
-    return 0;
+    return HIT_RESULT_HIT;
 }
 
 s32 calc_player_damage_enemy(void) {
@@ -243,6 +243,7 @@ s32 calc_player_damage_enemy(void) {
     s32 sp24;
     s32 isFireDamage;
     s32 isElectricDamage;
+    s32 isWaterDamage;
     s32 isIceDamage;
     s32 tempBinary;
     s32 wasStatusInflicted;
@@ -285,7 +286,7 @@ s32 calc_player_damage_enemy(void) {
             }
         }
 
-        if (targetPart->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY || (target->transStatus == STATUS_E ||
+        if (targetPart->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY || (target->transStatus == STATUS_TRANSPARENT ||
                 targetPart->eventFlags & ACTOR_EVENT_FLAG_800 && !(battleStatus->currentAttackElement & DAMAGE_TYPE_QUAKE))) {
             return 6;
         }
@@ -343,7 +344,7 @@ s32 calc_player_damage_enemy(void) {
         }
 
         if (battleStatus->currentAttackElement & DAMAGE_TYPE_FIRE) {
-            fx_ring_blast(0, state->goalPos.x, state->goalPos.y, state->goalPos.z * 5.0f, 1.0f, 0x18);
+            fx_ring_blast(0, state->goalPos.x, state->goalPos.y, state->goalPos.z * 5.0f, 1.0f, 24);
             isFireDamage = TRUE;
         }
 
@@ -353,7 +354,8 @@ s32 calc_player_damage_enemy(void) {
         }
 
         if (battleStatus->currentAttackElement & DAMAGE_TYPE_WATER) {
-            fx_water_splash(0, state->goalPos.x, state->goalPos.y, state->goalPos.z + 5.0f, 1.0f, 0x18);
+            fx_water_splash(0, state->goalPos.x, state->goalPos.y, state->goalPos.z + 5.0f, 1.0f, 24);
+            isWaterDamage = TRUE;
         }
 
         if (battleStatus->currentAttackElement & DAMAGE_TYPE_ICE) {
@@ -364,7 +366,7 @@ s32 calc_player_damage_enemy(void) {
         attackFxType = player_team_is_ability_active(player, ABILITY_ATTACK_FX);
 
         if (attackFxType) {
-            fx_breaking_junk(0, state->goalPos.x, state->goalPos.y, state->goalPos.z + 5.0f, 1.0f, 0x1E);
+            fx_breaking_junk(0, state->goalPos.x, state->goalPos.y, state->goalPos.z + 5.0f, 1.0f, 30);
 
             switch (attackFxType) {
                 case 1:
@@ -483,14 +485,14 @@ s32 calc_player_damage_enemy(void) {
 
         if (gBattleStatus.flags2 & BS_FLAGS2_8000000 && (gBattleStatus.flags1 & BS_FLAGS1_10 ||
                 battleStatus->currentAttackElement & DAMAGE_TYPE_JUMP)) {
-            if (battleStatus->rushFlags & 2) {
-                currentAttackDamage = currentAttackDamage + 2;
+            if (battleStatus->rushFlags & RUSH_FLAG_POWER) {
+                currentAttackDamage += 2;
             }
 
-            if (battleStatus->rushFlags & 1) {
-                currentAttackDamage = currentAttackDamage + 4;
+            if (battleStatus->rushFlags & RUSH_FLAG_MEGA) {
+                currentAttackDamage += 4;
             }
-            fx_radial_shimmer(9, state->goalPos.x, state->goalPos.y, state->goalPos.z, 0.5f, 0x14);
+            fx_radial_shimmer(9, state->goalPos.x, state->goalPos.y, state->goalPos.z, 0.5f, 20);
         }
 
         if (!(gBattleStatus.flags2 & BS_FLAGS2_1000000) && player_team_is_ability_active(player, ABILITY_ALL_OR_NOTHING)) {
@@ -635,7 +637,6 @@ s32 calc_player_damage_enemy(void) {
     } else if (dispatchEvent == EVENT_DEATH) {
         dispatchEvent = EVENT_HIT_COMBO;
     }
-
 
     if (gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE ||
         (func_80266E14(targetPart), gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE)) {    // TODO remove func_80266E14 from conditional

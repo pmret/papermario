@@ -7,7 +7,7 @@ ApiStatus N(func_802A123C_72DDAC)(Evt* script, s32 isInitialCall) {
     Actor* player = battleStatus->playerActor;
     ActorPart* part = player->partsTable;
 
-    inflict_status(player, STATUS_E, script->varTable[0]);
+    inflict_status(player, STATUS_TRANSPARENT, script->varTable[0]);
     player->status = 0;
     part->flags |= ACTOR_PART_FLAG_100;
 

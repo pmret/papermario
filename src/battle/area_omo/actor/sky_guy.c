@@ -162,7 +162,7 @@ ActorPartBlueprint N(partsTable_8022977C)[] = {
         .unk_1D = 0xF6,
     },
     {
-        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_2 | ACTOR_PART_FLAG_100000,
+        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_2 | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
         .index = 3,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 2, 50 },
@@ -176,7 +176,7 @@ ActorPartBlueprint N(partsTable_8022977C)[] = {
         .unk_20 = 0x29007E,
     },
     {
-        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_2 | ACTOR_PART_FLAG_2000 | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_100000,
+        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_2 | ACTOR_PART_FLAG_2000 | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
         .index = 4,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
@@ -189,7 +189,7 @@ ActorPartBlueprint N(partsTable_8022977C)[] = {
         .unk_1D = 0xF6,
     },
     {
-        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_2 | ACTOR_PART_FLAG_2000 | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_100000,
+        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_2 | ACTOR_PART_FLAG_2000 | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
         .index = 5,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
@@ -202,7 +202,7 @@ ActorPartBlueprint N(partsTable_8022977C)[] = {
         .unk_1D = 0xF6,
     },
     {
-        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_100000,
+        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
         .index = 6,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
@@ -248,9 +248,9 @@ EvtScript N(init_8022987C) = {
     EVT_CALL(SetPartPos, ACTOR_SELF, 3, LW(0), LW(1), LW(2))
     EVT_CALL(SetPartPos, ACTOR_SELF, 4, LW(0), LW(1), LW(2))
     EVT_CALL(SetPartPos, ACTOR_SELF, 5, LW(0), LW(1), LW(2))
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, 3, ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_100000, 0)
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, 4, ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_100000, 0)
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, 5, ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_100000, 0)
+    EVT_CALL(SetPartFlagBits, ACTOR_SELF, 3, ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION, 0)
+    EVT_CALL(SetPartFlagBits, ACTOR_SELF, 4, ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION, 0)
+    EVT_CALL(SetPartFlagBits, ACTOR_SELF, 5, ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION, 0)
     EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
     EVT_SUB(LW(1), 5)
     EVT_CALL(ForceHomePos, ACTOR_SELF, LW(0), LW(1), LW(2))
@@ -476,9 +476,9 @@ EvtScript N(handleEvent_8022A398) = {
             EVT_SET_CONST(LW(1), NPC_ANIM_sky_guy_Palette_00_Anim_1)
             EVT_EXEC_WAIT(DoRecover)
         EVT_CASE_EQ(EVENT_SCARE_AWAY)
-            EVT_CALL(SetPartFlagBits, ACTOR_SELF, 3, ACTOR_PART_FLAG_100000, 0)
-            EVT_CALL(SetPartFlagBits, ACTOR_SELF, 4, ACTOR_PART_FLAG_100000, 0)
-            EVT_CALL(SetPartFlagBits, ACTOR_SELF, 5, ACTOR_PART_FLAG_100000, 0)
+            EVT_CALL(SetPartFlagBits, ACTOR_SELF, 3, ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION, 0)
+            EVT_CALL(SetPartFlagBits, ACTOR_SELF, 4, ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION, 0)
+            EVT_CALL(SetPartFlagBits, ACTOR_SELF, 5, ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION, 0)
             EVT_CALL(SetAnimation, ACTOR_SELF, 3, NPC_ANIM_sky_guy_Palette_00_Anim_1F)
             EVT_CALL(SetAnimation, ACTOR_SELF, 4, NPC_ANIM_sky_guy_Palette_00_Anim_1E)
             EVT_CALL(SetAnimation, ACTOR_SELF, 5, NPC_ANIM_sky_guy_Palette_00_Anim_20)

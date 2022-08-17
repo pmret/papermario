@@ -579,7 +579,7 @@ ApiStatus N(CreateBlockEntities)(Evt* script, s32 isInitialCall) {
             0, 0, 0, 0, MAKE_ENTITY_END);
         data->panels[curBlockIdx].entityIndex = entityIndex;
         get_entity_by_index(entityIndex)->boundScriptBytecode = scriptArray[curBlockIdx];
-        fx_sparkles(3,
+        fx_sparkles(FX_SPARKLES_3,
             N(BlockPosX)[curBlockIdx],
             N(BlockPosY)[curBlockIdx] + 13,
             N(BlockPosZ)[curBlockIdx] + 5,

@@ -168,7 +168,7 @@ s32 calc_enemy_test_target(Actor* actor) {
 
     hitResult = HIT_RESULT_HIT;
     target2 = target;
-    if (targetPart->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY || battleStatus->outtaSightActive || target2->transStatus == STATUS_E) {
+    if (targetPart->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY || battleStatus->outtaSightActive || target2->transStatus == STATUS_TRANSPARENT) {
         if (!(battleStatus->currentAttackElement & DAMAGE_TYPE_MAGIC)) {
             hitResult = HIT_RESULT_MISS;
         }
@@ -285,7 +285,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
         return HIT_RESULT_MISS;
     }
 
-    if (target->transStatus == STATUS_E || targetPart->eventFlags & ACTOR_EVENT_FLAG_800 && !(battleStatus->currentAttackElement & DAMAGE_TYPE_QUAKE)) {
+    if (target->transStatus == STATUS_TRANSPARENT || targetPart->eventFlags & ACTOR_EVENT_FLAG_800 && !(battleStatus->currentAttackElement & DAMAGE_TYPE_QUAKE)) {
         return HIT_RESULT_MISS;
     }
 
@@ -781,7 +781,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
         )
         && !(battleStatus->currentAttackElement & DAMAGE_TYPE_NO_CONTACT)
         && !(battleStatus->currentAttackEventSuppression & 8)
-        && (attacker->transStatus != STATUS_E)
+        && (attacker->transStatus != STATUS_TRANSPARENT)
         && !has_enchanted_part(attacker)
     ) {
         // enum mismatch? shock vs explode :raised_eyebrow:

@@ -11,7 +11,8 @@ extern u8 D_80284120[];
 extern s16 D_80284134[];
 
 void update_player_actor_shadow(void);
-void func_80255FE0(s32, void*);
+void func_80255FE0(s32 isPartner, s32 actorIndex);
+
 void func_802571F0(s32, Actor*);
 void func_80259494(ActorPart*);
 void func_8025950C(ActorPart*, s32, Matrix4f);
@@ -19,7 +20,7 @@ void func_802596C0(ActorPart*, s32, Matrix4f);
 void func_802597B0(ActorPart*, s32, Matrix4f);
 void func_8025995C(ActorPart*, s32, Matrix4f);
 void func_8025C918(s32 arg0, ActorPart* part, s32 yaw, s32 arg3);
-void func_8025CD40(s32, ActorPart*);
+void func_8025CD40(s32 arg0, ActorPart* part, s32 yaw, s32 arg3);
 
 void func_8025D150(ActorPart*, s32);
 void func_8025D160(ActorPart*, s32);
@@ -46,8 +47,11 @@ void func_8025B1A8(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4);
 void func_8025B5C0(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4, s32 arg5);
 void func_8025BAA0(s32 arg0, ActorPart* part, s32 yaw, s32 arg3, Matrix4f mtx, s32 arg5);
 void func_8025C120(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4);
+s32 func_8025C840(s32 arg0, ActorPart* part, s32 yaw, s32);
+s32 func_8025CCC8(s32 arg0, ActorPart* part, s32 yaw, s32); 
+void func_8026709C(ActorPart* part);
 
-s32 func_80254250(void) {
+s32 func_80254250(ActorPart* part) {
     s32 ret;
 
     if (gBattleStatus.lastAttackDamage < 3) {
@@ -460,7 +464,7 @@ void func_802552EC(s32 arg0, Actor* actor) {
             continue;
         }
 
-        if (partTable->flags & ACTOR_PART_FLAG_100000) {
+        if (partTable->flags & ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION) {
             guScaleF(sp2D8, actor->scale.x * SPRITE_PIXEL_SCALE, actor->scale.y * SPRITE_PIXEL_SCALE, actor->scale.z * SPRITE_PIXEL_SCALE);
         }
 
@@ -538,7 +542,7 @@ void func_802552EC(s32 arg0, Actor* actor) {
             guMtxCatF(sp1D8, spD8, sp198);
             guMtxCatF(sp198, sp258, sp1D8);
 
-            if (!(partTable->flags & ACTOR_PART_FLAG_100000)) {
+            if (!(partTable->flags & ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION)) {
                 guMtxCatF(sp1D8, sp298, sp198);
             } else {
                 guMtxCatF(sp1D8, sp2D8, sp198);
@@ -619,7 +623,7 @@ void update_actor_shadow(s32 arg0, Actor* actor) {
                         actorPart->unk_8C = func_802DE5C8(actorPart->unk_84);
                     }
 
-                    if (!(actorPart->flags & ACTOR_PART_FLAG_100000)) {
+                    if (!(actorPart->flags & ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION)) {
                         x2 = x1 + actorPart->partOffset.x + actorPart->visualOffset.x;
                         if (!(actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW)) {
                             y2 = y1 + actorPart->partOffset.y + actorPart->visualOffset.y;
@@ -715,16 +719,169 @@ void update_hero_shadows(void) {
 void func_80255FD8(void) {
 }
 
+void create_status_chill_out(s32 iconID);
+void enable_status_2(s32 iconID);
+void enable_status_chill_out(s32 iconID);
+void enable_status_debuff(s16);
+void enable_status_transparent(s16);
+s32 func_80265CE8(u32*, s32);
+void func_80266DAC(Actor* actor, s32 arg1);
+void set_status_icons_offset(s32 iconID, s32 offsetY, s32 arg2);
+void set_status_icons_properties(s32 iconID, f32 x, f32 y, f32 z, s32 arg, s32 arg2, s32 radius, s32 offsetY);
+
 INCLUDE_ASM(s32, "182B30", func_80255FE0);
 
-INCLUDE_ASM(s32, "182B30", func_802571F0);
+void func_802571F0(s32 flipYaw, Actor* actor) {
+    Matrix4f mtxRotX, mtxRotY, mtxRotZ, mtxRotation, mtxScale;
+    Matrix4f mtxPivotOn, mtxPivotOff, mtxTranslate;
+    Matrix4f mtxTemp, mtxTransform, mtxMirror;
+    Matrix4f mtxActor, mtxPartScale;
+    ActorPart* part;
+    f32 actorPosX, actorPosY, actorPosZ;
+    f32 partPosX, partPosY, partPosZ;
+    f32 partYaw;
+    s32 numParts;
+    s32 i;
+
+    actorPosX = actor->currentPos.x + actor->headOffset.x;
+    if (!(actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW)) {
+        actorPosY = actor->currentPos.y + actor->headOffset.y;
+    } else {
+        actorPosY = actor->currentPos.y - actor->headOffset.y;
+    }
+    actorPosZ = actor->currentPos.z + actor->headOffset.z - 5.0f;
+    
+    if (!(actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW)) {
+        guTranslateF(mtxPivotOn, 
+            -actor->rotationPivotOffset.x * actor->scalingFactor,
+            -actor->rotationPivotOffset.y * actor->scalingFactor,
+            -actor->rotationPivotOffset.z * actor->scalingFactor);
+         guTranslateF(mtxPivotOff,
+             actor->rotationPivotOffset.x * actor->scalingFactor,
+             actor->rotationPivotOffset.y * actor->scalingFactor,
+             actor->rotationPivotOffset.z * actor->scalingFactor);
+    } else {
+        guTranslateF(mtxPivotOn,
+            -actor->rotationPivotOffset.x * actor->scalingFactor,
+             actor->rotationPivotOffset.y * actor->scalingFactor,
+            -actor->rotationPivotOffset.z * actor->scalingFactor);
+         guTranslateF(mtxPivotOff,
+             actor->rotationPivotOffset.x * actor->scalingFactor,
+             -actor->rotationPivotOffset.y * actor->scalingFactor,
+             actor->rotationPivotOffset.z * actor->scalingFactor);
+    }
+   
+    guRotateF(mtxRotX, actor->rotation.x, 1.0f, 0.0f, 0.0f);
+    guRotateF(mtxRotY, actor->rotation.y, 0.0f, 1.0f, 0.0f);
+    guRotateF(mtxRotZ, actor->rotation.z, 0.0f, 0.0f, 1.0f);
+    guMtxCatF(mtxRotY, mtxRotX, mtxTemp);
+    guMtxCatF(mtxTemp, mtxRotZ, mtxRotation);
+    
+    guScaleF(mtxScale, 
+        actor->scale.x * SPRITE_WORLD_SCALE_D * actor->scalingFactor,
+        actor->scale.y * SPRITE_WORLD_SCALE_D * actor->scalingFactor,
+        actor->scale.z * SPRITE_WORLD_SCALE_D);
+   
+    guMtxCatF(mtxPivotOn, mtxScale, mtxTemp);
+    guMtxCatF(mtxTemp, mtxRotation, mtxTransform);
+    guMtxCatF(mtxTransform, mtxPivotOff, mtxActor);
+
+    part = actor->partsTable;
+    numParts = actor->numParts;
+    for (i = 0; i < numParts; i++) {
+        // determine part position
+        if (!(part->flags & ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION)) {
+            partPosX = actorPosX + part->partOffset.x + part->visualOffset.x;
+            if (!(actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW)) {
+                partPosY = actorPosY + part->partOffset.y + part->visualOffset.y;
+            } else {
+                partPosY = actorPosY - part->partOffset.y - part->visualOffset.y;
+            }
+            partPosZ = actorPosZ + part->partOffset.z + part->visualOffset.z;
+            partYaw = part->yaw = actor->yaw;
+        } else {
+            partPosX = part->absolutePosition.x + part->visualOffset.x;
+            partPosY = part->absolutePosition.y + part->visualOffset.y;
+            partPosZ = part->absolutePosition.z + part->visualOffset.z;
+            guScaleF(mtxPartScale,
+                actor->scale.x * SPRITE_WORLD_SCALE_D,
+                actor->scale.y * SPRITE_WORLD_SCALE_D,
+                actor->scale.z * SPRITE_WORLD_SCALE_D);
+            partYaw = part->yaw;
+        }
+
+        if (part->flags & ACTOR_PART_FLAG_INVISIBLE) {
+            part = part->nextPart;
+            continue;
+        } 
+        if (part->idleAnimations == NULL) {
+            part = part->nextPart;
+            continue;
+        }
+
+        if (!(actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW)) {
+            guTranslateF(mtxPivotOn,
+                -part->rotationPivotOffset.x * actor->scalingFactor,
+                -part->rotationPivotOffset.y * actor->scalingFactor,
+                -part->rotationPivotOffset.z * actor->scalingFactor);
+            guTranslateF(mtxPivotOff,
+                 part->rotationPivotOffset.x * actor->scalingFactor,
+                 part->rotationPivotOffset.y * actor->scalingFactor,
+                 part->rotationPivotOffset.z * actor->scalingFactor);
+        } else {
+            guTranslateF(mtxPivotOn,
+                -part->rotationPivotOffset.x * actor->scalingFactor,
+                 part->rotationPivotOffset.y * actor->scalingFactor,
+                -part->rotationPivotOffset.z * actor->scalingFactor);
+            guTranslateF(mtxPivotOff,
+                 part->rotationPivotOffset.x * actor->scalingFactor,
+                -part->rotationPivotOffset.y * actor->scalingFactor,
+                 part->rotationPivotOffset.z * actor->scalingFactor);
+        }
+        guTranslateF(mtxTranslate,
+            partPosX + part->unkOffset[0],
+            partPosY + part->unkOffset[1],
+            partPosZ - 1.0f);
+        
+        guRotateF(mtxRotX, part->rotation.x, 1.0f, 0.0f, 0.0f);
+        guRotateF(mtxRotY, part->rotation.y, 0.0f, 1.0f, 0.0f);
+        guRotateF(mtxRotZ, part->rotation.z, 0.0f, 0.0f, 1.0f);
+        guMtxCatF(mtxRotY, mtxRotX, mtxTemp);
+        guMtxCatF(mtxTemp, mtxRotZ, mtxRotation);
+
+        guScaleF(mtxScale, part->scale.x, part->scale.y * part->verticalStretch, part->scale.z);
+        mtx_mirror_y(mtxMirror);
+        guMtxCatF(mtxScale, mtxPivotOn, mtxTemp);
+        guMtxCatF(mtxTemp, mtxRotation, mtxTransform);
+        guMtxCatF(mtxTransform, mtxPivotOff, mtxTemp);
+        if (!(part->flags & ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION)) {
+            guMtxCatF(mtxTemp, mtxActor, mtxTransform);
+        } else {
+            guMtxCatF(mtxTemp, mtxPartScale, mtxTransform);
+        }
+        guMtxCatF(mtxTransform, mtxTranslate, mtxTemp);
+        guMtxCatF(mtxTemp, mtxMirror, mtxTransform);
+
+        if (flipYaw == 0) {
+            func_8025C840(1, part, partYaw, 1);
+            func_8025CCC8(1, part, partYaw, 1);
+            func_802591EC(1, part, partYaw, mtxTransform, 1);
+        } else {
+            func_8025C840(1, part, clamp_angle(partYaw + 180.0f), 1);
+            func_8025CCC8(1, part, clamp_angle(partYaw + 180.0f), 1);
+            func_802591EC(1, part, clamp_angle(partYaw + 180.0f), mtxTransform, 1);
+        }
+
+        part = part->nextPart;
+    }
+}
 
 void func_80257B28(void* data) {
-    func_80255FE0(0, data);
+    func_80255FE0(0, (s32) data);
 }
 
 void func_80257B48(void* data) {
-    func_80255FE0(1, data);
+    func_80255FE0(1, (s32) data);
 }
 
 void func_80257B68(void* data) {
@@ -785,7 +942,54 @@ void update_player_actor_shadow(void) {
 
 INCLUDE_ASM(void, "182B30", func_80257DA4);
 
-INCLUDE_ASM(void, "182B30", func_80258E14);
+void func_80258E14(void* arg0) {
+    Matrix4f mtxRotX, mtxRotY, mtxRotZ, mtxRotation, mtxScale;
+    Matrix4f mtxPivotOn, mtxPivotOff, mtxTranslate;
+    Matrix4f mtxTemp, mtxTransform, mtxMirror;
+    Actor* player = gBattleStatus.playerActor;
+    ActorPart* part = &player->partsTable[0];
+    f32 playerYaw = player->yaw;
+    f32 dx, dy, dz;
+
+    dx = player->currentPos.x + player->headOffset.x;
+    dx += part->unkOffset[0];
+    dy = player->currentPos.y + player->headOffset.y;
+    dy += part->unkOffset[1];
+    dz = player->currentPos.z + player->headOffset.z - 5.0f;
+    part->yaw = playerYaw;
+    
+    guTranslateF(mtxTranslate, dx, dy, dz - 1.0f);
+    
+    guTranslateF(mtxPivotOn,
+        -player->rotationPivotOffset.x * player->scalingFactor,
+        -player->rotationPivotOffset.y * player->scalingFactor,
+        -player->rotationPivotOffset.z * player->scalingFactor);
+    guTranslateF(mtxPivotOff, 
+        player->rotationPivotOffset.x * player->scalingFactor,
+        player->rotationPivotOffset.y * player->scalingFactor,
+        player->rotationPivotOffset.z * player->scalingFactor);
+    
+    guRotateF(mtxRotX, player->rotation.x, 1.0f, 0.0f, 0.0f);
+    guRotateF(mtxRotY, player->rotation.y, 0.0f, 1.0f, 0.0f);
+    guRotateF(mtxRotZ, player->rotation.z, 0.0f, 0.0f, 1.0f);
+    guMtxCatF(mtxRotY, mtxRotX, mtxTemp);
+    guMtxCatF(mtxTemp, mtxRotZ, mtxRotation);
+    guScaleF(mtxScale,
+        player->scale.x * SPRITE_WORLD_SCALE_D * player->scalingFactor,
+        player->scale.y * SPRITE_WORLD_SCALE_D * player->scalingFactor * part->verticalStretch,
+        player->scale.z * SPRITE_WORLD_SCALE_D);
+    mtx_mirror_y(mtxMirror);
+    
+    guMtxCatF(mtxScale, mtxPivotOn, mtxTemp);
+    guMtxCatF(mtxTemp, mtxRotation, mtxTemp);
+    guMtxCatF(mtxTemp, mtxPivotOff, mtxTemp);
+    guMtxCatF(mtxTemp, mtxTranslate, mtxTransform);
+    guMtxCatF(mtxTransform, mtxMirror, mtxTransform);
+    
+    func_8025C840(0, part, clamp_angle(playerYaw + 180.0f), 1);
+    func_8025CCC8(0, part, clamp_angle(playerYaw + 180.0f), 1);
+    func_802591EC(0, part, clamp_angle(playerYaw + 180.0f), mtxTransform, 1);
+}
 
 s32 func_802591EC(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
     s32 opacity;
@@ -1812,6 +2016,8 @@ void func_8025BAA0(s32 arg0, ActorPart* part, s32 yaw, s32 arg3, Matrix4f mtx, s
                 r1 = (r + r1 * alpha) / 255;
                 g1 = (g * (255 - alpha) + g1 * alpha) / 255;
                 b1 = (b * (255 - alpha) + b1 * alpha) / 255;
+
+                 *palOut++ = ((r1 & 0xFF) << 11) | ((g1 & 0xFF) << 6) | ((b1 & 0xFF) << 1) | a;
             }
             if (alpha == 255) {
                 decorationTable->unk_6C2 = 2;
@@ -1891,7 +2097,7 @@ s32 func_8025C840(s32 arg0, ActorPart* part, s32 yaw, s32 arg3) {
     if (!(part->flags & 2)) {
         switch (part->decorationTable->unk_750) {
             case 0:
-                func_8025C8A0(arg0, part);
+                func_8025C8A0(arg0, part, yaw, arg3);
                 return 0;
             case 11:
                 func_8025C918(arg0, part, yaw, arg3);
@@ -1901,35 +2107,90 @@ s32 func_8025C840(s32 arg0, ActorPart* part, s32 yaw, s32 arg3) {
     return 0;
 }
 
-void func_8025C8A0(s32 arg0, ActorPart* arg1) {
-    if (arg1->decorationTable->unk_751 != 0) {
-        arg1->decorationTable->unk_751 = 0;
+void func_8025C8A0(s32 arg0, ActorPart* part, s32 yaw, s32 arg3) {
+    if (part->decorationTable->unk_751 != 0) {
+        part->decorationTable->unk_751 = 0;
         if (arg0 == 0) {
             func_802DDFF8(0, 0, 0, 0, 0, 0, 0);
         } else {
-            func_802DE894(arg1->unk_84, 0, 0, 0, 0, 0, 0);
+            func_802DE894(part->unk_84, 0, 0, 0, 0, 0, 0);
         }
     }
 }
 
-INCLUDE_ASM(s32, "182B30", func_8025C918);
+void func_8025C918(s32 arg0, ActorPart* part, s32 yaw, s32 arg3) {
+    DecorationTable* decor = part->decorationTable;
+    u8 rbuf[20];
+    u8 gbuf[20];
+    u8 bbuf[20];
+    s32 alpha;
+    s32 color;
+    s32 i;
+    s32 baseAngle;
+    
+    if (decor->unk_751 != 0) {
+        decor->unk_752 = -2;
+        decor->unk75A = 0;
+        decor->unk_751 = 0;
+        decor->unk758 = 0;
+        if (arg0 == 0) {
+            func_802DDFF8(0, 0x11, 0x14, 0, 0, 0xFF, 0);
+        } else {
+            func_802DE894(part->unk_84, 0x11, 0x14, 0, 0, 0xFF, 0);
+        }
+    }
+    
+    decor->unk75C += 7;
+    baseAngle = decor->unk75C;
+    
+    if (decor->unk75C >= 360) {
+        decor->unk75C = baseAngle - ((baseAngle / 360) * 360);
+    }
+    
+    for (i = 0; i < ARRAY_COUNT(rbuf); i++) {
+        rbuf[i] = (cosine(decor->unk75C + (25 * i)) + 1.0) * 112.0;
+        gbuf[i] = (cosine(decor->unk75C + (25 * i) + 45) + 1.0) * 112.0;
+        bbuf[i] = (cosine(decor->unk75C + (25 * i) + 90) + 1.0) * 112.0;
+    }
+    
+    alpha = 255;
+    if (part->opacity < 255) {
+        alpha = part->opacity;
+    }
+    if (part->flags & 0x100) {
+        alpha = (alpha * 120) / 255;
+    }
+    
+    for (i = 0; i < ARRAY_COUNT(rbuf); i++) {
+        color = (rbuf[i] << 0x18) | (gbuf[i] << 0x10) | (bbuf[i] << 8) | alpha;
+        if (arg0 == 0) {
+            func_802DDFF8(0, 0xC, i, color, 0, 0xFF, 0);
+        } else {
+            func_802DE894(part->unk_84, 0xC, i, color, 0, 0xFF, 0);
+        }
+    }
+    
+    if (arg3 == 0) {
+        decor->unk75A -= 1;
+    }
+}
 
 s32 func_8025CCC8(s32 arg0, ActorPart* part, s32 yaw, s32 arg3) {
     if (!(part->flags & ACTOR_PART_FLAG_2)) {
         switch (part->decorationTable->unk_764) {
             case 0:
-                func_8025CD28(arg0, part);
+                func_8025CD28(arg0, part, yaw, arg3);
                 return 0;
             case 1:
-                func_8025CD40(arg0, part);
+                func_8025CD40(arg0, part, yaw, arg3);
                 return 0;
         }
     }
     return 0;
 }
 
-void func_8025CD28(s32 arg0, ActorPart* arg1) {
-    DecorationTable* decorationTable = arg1->decorationTable;
+void func_8025CD28(s32 arg0, ActorPart* part, s32 yaw, s32 arg3) {
+    DecorationTable* decorationTable = part->decorationTable;
 
     if (decorationTable->unk_765 != 0) {
         decorationTable->unk_765 = 0;
@@ -1937,7 +2198,101 @@ void func_8025CD28(s32 arg0, ActorPart* arg1) {
     decorationTable->unk_768 = 0;
 }
 
-INCLUDE_ASM(s32, "182B30", func_8025CD40);
+void func_8025CD40(s32 arg0, ActorPart* part, s32 yaw, s32 arg3) {
+    DecorationTable* decor = part->decorationTable;
+    
+    if (decor->unk_765 != 0) {
+        switch (func_80254250(part)) {
+            case 0:
+                decor->unk_767 = 1;
+                decor->unk_766 = 0;
+                break;
+            case 1:
+                decor->unk_767 = 8;
+                decor->unk_766 = 1;
+                break;
+            case 2:
+            default:
+                decor->unk_767 = 0xE;
+                decor->unk_766 = 2;
+                break;
+        }
+        decor->unk_768 = 0;
+        decor->unk_765 = 0;
+    }
+    
+    if (decor->unk_766 == 3) {
+        decor->unk_768 = 0;
+        func_8026709C(part);
+    }
+
+    switch (decor->unk_766) {
+        case 0:
+            switch (decor->unk_767) {
+                case 0:
+                    decor->unk_768 = -1;
+                    decor->unk_766 = 3;
+                    break;
+                default:
+                    decor->unk_768 = 0;
+                    if (arg3 == 0) {
+                        decor->unk_767--;
+                    }
+                    break;
+            }
+            break;
+        case 1:
+           switch (decor->unk_767) {
+                case 1:
+                case 2:
+                case 5:
+                case 6:
+                    decor->unk_768 = -1;
+                    break;
+                case 3:
+                case 4:
+                case 7:
+                case 8:
+                    decor->unk_768 = 0;
+                    break;
+                case 0:
+                    decor->unk_766 = 3;
+                    break;
+            }
+            if (arg3 == 0) {
+                decor->unk_767--;
+            }
+            break;
+        case 2:
+           switch (decor->unk_767) {
+                case 1:
+                case 2:
+                case 5:
+                case 6:
+                case 9:
+                case 10:
+                case 13:
+                case 14:
+                    decor->unk_768 = 0;
+                    break;
+                case 3:
+                case 4:
+                case 7:
+                case 8:
+                case 11:
+                case 12:
+                    decor->unk_768 = -1;
+                    break;
+                case 0:
+                    decor->unk_766 = 3;
+                    break;
+            }
+            if (arg3 == 0) {
+                decor->unk_767--;
+            }
+            break;
+    }
+}
 
 void _add_part_decoration(ActorPart* actorPart) {
     DecorationTable* decorationTable;
@@ -2047,14 +2402,14 @@ void func_8025D160(ActorPart* arg0, s32 arg1) {
     
     switch (table->unk_8BC[arg1]) {
         case 0:
-            fx_aura(3, arg0->currentPos.x, arg0->currentPos.y, arg0->currentPos.z, 0.4f, &table->unk_8B0[arg1]);
+            fx_aura(3, arg0->currentPos.x, arg0->currentPos.y, arg0->currentPos.z, 0.4f, &table->effects[arg1]);
             table->unk_8BC[arg1] = 1;
             table->unk_8C6[arg1].unk00 = 0x28;
             table->unk_8C6[arg1].unk02 = 0x28;
             table->unk_8C6[arg1].unk04 = 0;
             break;
         case 1:
-            effect = table->unk_8B0[arg1];
+            effect = table->effects[arg1];
             data = effect->data.aura;
             data->posA.x = arg0->currentPos.x + table->unk_8C6[arg1].unk04;
             data->posA.y = arg0->currentPos.y;
@@ -2070,7 +2425,7 @@ void func_8025D160(ActorPart* arg0, s32 arg1) {
 }
 
 void func_8025D290(ActorPart* part, s32 decorationIndex) {
-    part->decorationTable->unk_8B0[decorationIndex]->data.aura->fadeTime = 5;
+    part->decorationTable->effects[decorationIndex]->data.aura->fadeTime = 5;
 }
 
 void func_8025D2B0(ActorPart* part, s32 decorationIndex) {
@@ -2108,11 +2463,11 @@ void func_8025D3CC(ActorPart* part, s32 decorationIndex) {
     switch (decor->unk_8BC[decorationIndex]) { 
         case 0:
             fx_stars_orbiting(0, part->currentPos.x, part->currentPos.y + part->size.y, part->currentPos.z,
-                20.0f, 3, &decor->unk_8B0[decorationIndex]);
+                20.0f, 3, &decor->effects[decorationIndex]);
             decor->unk_8BC[decorationIndex] = 1;
             break;
         case 1:
-            data = decor->unk_8B0[decorationIndex]->data.starsOrbiting;
+            data = decor->effects[decorationIndex]->data.starsOrbiting;
             data->pos.x = part->currentPos.x;
             data->pos.y = part->currentPos.y + part->size.y;
             data->pos.z = part->currentPos.z;
@@ -2121,7 +2476,7 @@ void func_8025D3CC(ActorPart* part, s32 decorationIndex) {
 }
 
 void func_8025D4A0(ActorPart* part, s32 decorationIndex) {
-    remove_effect(part->decorationTable->unk_8B0[decorationIndex]);
+    remove_effect(part->decorationTable->effects[decorationIndex]);
 }
 
 void func_8025D4C8(ActorPart* part, s32 decorationIndex) {
@@ -2132,18 +2487,18 @@ void func_8025D4C8(ActorPart* part, s32 decorationIndex) {
 
     switch (decor->unk_8BC[decorationIndex]) {
         case 0:
-            fx_aura(1, part->currentPos.x, part->currentPos.y, part->currentPos.z, 0.4f, &decor->unk_8B0[decorationIndex]);
+            fx_aura(1, part->currentPos.x, part->currentPos.y, part->currentPos.z, 0.4f, &decor->effects[decorationIndex]);
             decor->unk_8BC[decorationIndex] = 1;
-            decor->unk_8C6[decorationIndex].unk00 = 0x28;
-            decor->unk_8C6[decorationIndex].unk02 = 0x28;
-            decor->unk_8C6[decorationIndex].unk04 = 0xFF;
+            decor->unk_8C6[decorationIndex].unk00 = 40;
+            decor->unk_8C6[decorationIndex].unk02 = 40;
+            decor->unk_8C6[decorationIndex].unk04 = 255;
             decor->unk_8C6[decorationIndex].unk06 = 0;
-            decor->unk_8C6[decorationIndex].unk08 = 0xFF;
+            decor->unk_8C6[decorationIndex].unk08 = 255;
             decor->unk_8C6[decorationIndex].unk0A = 0;
             decor->unk_8C6[decorationIndex].unk0C = 0;
-            // fall through
+            // fallthrough
         case 1:
-            effect = decor->unk_8B0[decorationIndex];
+            effect = decor->effects[decorationIndex];
             data = effect->data.aura;
             data->posA.x = part->currentPos.x;
             data->posA.y = part->currentPos.y;
@@ -2161,7 +2516,7 @@ void func_8025D4C8(ActorPart* part, s32 decorationIndex) {
 }
 
 void func_8025D620(ActorPart* part, s32 decorationIndex) {
-    part->decorationTable->unk_8B0[decorationIndex]->data.aura->fadeTime = 5;
+    part->decorationTable->effects[decorationIndex]->data.aura->fadeTime = 5;
 }
 
 void func_8025D640(ActorPart* part, s32 decorationIndex) {
@@ -2170,11 +2525,11 @@ void func_8025D640(ActorPart* part, s32 decorationIndex) {
 
     switch (decor->unk_8BC[decorationIndex]) {
         case 0:
-            decor->unk_8B0[decorationIndex] = fx_65(1, part->currentPos.x, part->currentPos.y, part->currentPos.z, 1.0f, 0);
+            decor->effects[decorationIndex] = fx_65(1, part->currentPos.x, part->currentPos.y, part->currentPos.z, 1.0f, 0);
             decor->unk_8BC[decorationIndex] = 1;
             break;
         case 1:
-            effect = decor->unk_8B0[decorationIndex];
+            effect = decor->effects[decorationIndex];
             effect->data.unk_65->pos.x = part->currentPos.x;
             effect->data.unk_65->pos.y = part->currentPos.y;
             effect->data.unk_65->pos.z = part->currentPos.z;
@@ -2183,7 +2538,7 @@ void func_8025D640(ActorPart* part, s32 decorationIndex) {
 }
 
 void func_8025D6FC(ActorPart* part, s32 decorationIndex) {
-    part->decorationTable->unk_8B0[decorationIndex]->flags |= 0x10;
+    part->decorationTable->effects[decorationIndex]->flags |= 0x10;
 }
 
 void func_8025D71C(ActorPart* part, s32 decorationIndex) {
@@ -2192,12 +2547,12 @@ void func_8025D71C(ActorPart* part, s32 decorationIndex) {
 
     switch (decor->unk_8BC[decorationIndex]) {
         case 0:
-            decor->unk_8B0[decorationIndex] = fx_65(2, part->currentPos.x, part->currentPos.y, part->currentPos.z, 1.0f, 0);
+            decor->effects[decorationIndex] = fx_65(2, part->currentPos.x, part->currentPos.y, part->currentPos.z, 1.0f, 0);
             decor->unk_8C6[decorationIndex].unk00 = 1;
             decor->unk_8BC[decorationIndex] = 1;
             break;
         case 1:
-            effect = decor->unk_8B0[decorationIndex];
+            effect = decor->effects[decorationIndex];
             effect->data.unk_65->pos.x = part->currentPos.x;
             effect->data.unk_65->pos.y = part->currentPos.y;
             effect->data.unk_65->pos.z = part->currentPos.z;
@@ -2207,7 +2562,7 @@ void func_8025D71C(ActorPart* part, s32 decorationIndex) {
 }
 
 void func_8025D810(ActorPart* part, s32 decorationIndex) {
-    part->decorationTable->unk_8B0[decorationIndex]->flags |= 0x10;
+    part->decorationTable->effects[decorationIndex]->flags |= 0x10;
 }
 
 void func_8025D830(ActorPart* part, s32 decorationIndex) {
@@ -2216,11 +2571,11 @@ void func_8025D830(ActorPart* part, s32 decorationIndex) {
     
     switch (decor->unk_8BC[decorationIndex]) {
         case 0:
-            decor->unk_8B0[decorationIndex] = fx_whirlwind(2, part->currentPos.x, part->currentPos.y, part->currentPos.z, 1.0f, 0);
+            decor->effects[decorationIndex] = fx_whirlwind(2, part->currentPos.x, part->currentPos.y, part->currentPos.z, 1.0f, 0);
             decor->unk_8BC[decorationIndex] = 1;
             break;
         case 1:
-            effect = decor->unk_8B0[decorationIndex];
+            effect = decor->effects[decorationIndex];
             effect->data.whirlwind->pos.x = part->currentPos.x;
             effect->data.whirlwind->pos.y = part->currentPos.y;
             effect->data.whirlwind->pos.z = part->currentPos.z;
@@ -2229,7 +2584,7 @@ void func_8025D830(ActorPart* part, s32 decorationIndex) {
 }
 
 void func_8025D8EC(ActorPart* part, s32 decorationIndex) {
-    part->decorationTable->unk_8B0[decorationIndex]->flags |= 0x10;
+    part->decorationTable->effects[decorationIndex]->flags |= EFFECT_INSTANCE_FLAGS_10;
 }
 
 void func_8025D90C(ActorPart* part, s32 decorationIndex) {
@@ -2240,7 +2595,7 @@ void func_8025D90C(ActorPart* part, s32 decorationIndex) {
         case 0:
             decor->unk_8BE[decorationIndex] = 0;
             decor->unk_8BC[decorationIndex] = 1;
-            // fall through
+            // fallthrough
         case 1:
             decor->unk_8BE[decorationIndex]++;
             if (decor->unk_8BE[decorationIndex] >= 4) {
@@ -2270,19 +2625,19 @@ void func_8025DA68(ActorPart* part, s32 decorationIndex) {
             case 0:
                 decor->unk_8BE[decorationIndex] = 0;
                 decor->unk_8BC[decorationIndex] = 1;
-                /* fallthrough */
+                // fallthrough
             case 1:
                 x = part->currentPos.x;
                 y = part->currentPos.y + (part->size.y / 2);
                 z = part->currentPos.z - 5.0f;
                 // bug? perhaps this should be % 4?
                 if ((gGameStatusPtr->frameCounter / 4) == 0) {
-                    fx_sparkles(1, x, y, z, 10.0f);
+                    fx_sparkles(FX_SPARKLES_1, x, y, z, 10.0f);
                 }
                 decor->unk_8BE[decorationIndex]++;
                 if (D_80284134[decor->unk_8C6[decorationIndex].unk00] < decor->unk_8BE[decorationIndex]) {
                     decor->unk_8BE[decorationIndex] = 0;
-                    fx_sparkles(1, x, y, z, 20.0f);
+                    fx_sparkles(FX_SPARKLES_1, x, y, z, 20.0f);
                 }
                 break;
         }
@@ -2300,15 +2655,15 @@ void func_8025DBD0(ActorPart* part, s32 decorationIndex) {
 
     switch (decor->unk_8BC[decorationIndex]) {
         case 0:
-            fx_aura(2, part->currentPos.x, part->currentPos.y, part->currentPos.z, 1.2f, &decor->unk_8B0[decorationIndex]);
+            fx_aura(2, part->currentPos.x, part->currentPos.y, part->currentPos.z, 1.2f, &decor->effects[decorationIndex]);
             decor->unk_8BC[decorationIndex] = 1;
-            decor->unk_8C6[decorationIndex].unk00 = 0x96;
-            decor->unk_8C6[decorationIndex].unk02 = 0x96;
-            decor->unk_8C6[decorationIndex].unk04 = 0xFF;
+            decor->unk_8C6[decorationIndex].unk00 = 150;
+            decor->unk_8C6[decorationIndex].unk02 = 150;
+            decor->unk_8C6[decorationIndex].unk04 = 255;
             decor->unk_8C6[decorationIndex].unk06 = 0;
-            // fall through
+            // fallthrough
         case 1:
-            effect = decor->unk_8B0[decorationIndex];
+            effect = decor->effects[decorationIndex];
             data = effect->data.aura;
             data->posA.x = part->currentPos.x;
             data->posA.y = part->currentPos.y;
@@ -2327,7 +2682,7 @@ void func_8025DBD0(ActorPart* part, s32 decorationIndex) {
 }
 
 void func_8025DD40(ActorPart* part, s32 decorationIndex) {
-    part->decorationTable->unk_8B0[decorationIndex]->data.aura->fadeTime = 5;
+    part->decorationTable->effects[decorationIndex]->data.aura->fadeTime = 5;
 }
 
 void func_8025DD60(ActorPart* part, s32 decorationIndex) {
@@ -2337,13 +2692,13 @@ void func_8025DD60(ActorPart* part, s32 decorationIndex) {
 
     switch (decor->unk_8BC[decorationIndex]) {
         case 0:
-            decor->unk_8B0[decorationIndex] = fx_energy_in_out(4, part->currentPos.x, part->currentPos.y, part->currentPos.z, 1.2f, 0);
+            decor->effects[decorationIndex] = fx_energy_in_out(4, part->currentPos.x, part->currentPos.y, part->currentPos.z, 1.2f, 0);
             decor->unk_8BC[decorationIndex] = 1;
             decor->unk_8C6[decorationIndex].unk00 = 0x78;
             decor->unk_8C6[decorationIndex].unk02 = 0;
-            // fall through
+            // fallthrough
         case 1:
-            data = decor->unk_8B0[decorationIndex]->data.energyInOut;
+            data = decor->effects[decorationIndex]->data.energyInOut;
             scale = decor->unk_8C6[decorationIndex].unk00;
             scale /= 100.0f;
             data->unk_44 = scale;
@@ -2355,5 +2710,5 @@ void func_8025DD60(ActorPart* part, s32 decorationIndex) {
 }
 
 void func_8025DE88(ActorPart* part, s32 decorationIndex) {
-    part->decorationTable->unk_8B0[decorationIndex]->flags |= 0x10;
+    part->decorationTable->effects[decorationIndex]->flags |= 0x10;
 }

@@ -112,7 +112,7 @@ ApiStatus N(ShowCreditList)(Evt* script, s32 isInitialCall) {
                 }
             }
             script->varTable[0] = 1;
-            // fall through
+            // fallthrough
         case 1:
             script->varTable[1]--;
             if (script->varTable[1] <= 0) {

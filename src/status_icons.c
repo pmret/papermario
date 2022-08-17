@@ -54,7 +54,7 @@ typedef struct HudStatusIcon {
     /* 0x28 */ s32 status4Radius;
     /* 0x2C */ s32 status4OffsetY;
     /* 0x30 */ s32 offsetY;
-    /* 0x34 */ f32 unk_34;
+    /* 0x34 */ f32 offsetX;
     /* 0x38 */ HudComplexStatusIcon status1;
     /* 0x48 */ HudComplexStatusIcon status2;
     /* 0x58 */ HudComplexStatusIcon status3;
@@ -438,7 +438,7 @@ void update_all_status_icons(void* data) {
 
         if (icon->status3.activeTask == STATUS_ICON_TASK_LOAD) {
             switch (icon->status3.active) {
-                case STATUS_E:
+                case STATUS_TRANSPARENT:
                     elementID = icon->status3.activeElementID = hud_element_create(&HES_TransparentBegin);
                     break;
                 default:
@@ -456,7 +456,7 @@ void update_all_status_icons(void* data) {
                 break;
             case STATUS_ICON_TASK_LOAD:
                 switch (icon->status3.removing) {
-                    case STATUS_E:
+                    case STATUS_TRANSPARENT:
                         hud_element_set_script(icon->status3.removingElementID, &HES_TransparentEnd);
                         break;
                     default:
@@ -983,11 +983,11 @@ void set_status_icons_properties(s32 iconID, f32 x, f32 y, f32 z, s32 arg, s32 a
     icon->status4OffsetY = offsetY + 51;
 }
 
-void set_status_icons_offset(s32 iconID, s32 offsetY, f32 arg2) {
+void set_status_icons_offset(s32 iconID, s32 offsetY, f32 offsetX) {
     HudStatusIcon* statusIcon = &D_800A0F44[iconID];
 
     statusIcon->offsetY = offsetY;
-    statusIcon->unk_34 = arg2;
+    statusIcon->offsetX = offsetX;
 }
 
 void create_status_debuff(s32 iconID, s32 statusID) {

@@ -124,7 +124,7 @@ ActorPartBlueprint N(partsTable_8021BAD4)[] = {
         .unk_1D = 0xF1,
     },
     {
-        .flags = ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_100000 | ACTOR_PART_FLAG_40000000,
+        .flags = ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION | ACTOR_PART_FLAG_40000000,
         .index = 3,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
@@ -136,7 +136,7 @@ ActorPartBlueprint N(partsTable_8021BAD4)[] = {
         .unk_1C = 0,
     },
     {
-        .flags = ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_100000 | ACTOR_PART_FLAG_40000000,
+        .flags = ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION | ACTOR_PART_FLAG_40000000,
         .index = 4,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
@@ -148,7 +148,7 @@ ActorPartBlueprint N(partsTable_8021BAD4)[] = {
         .unk_1C = 0,
     },
     {
-        .flags = ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_100000 | ACTOR_PART_FLAG_40000000,
+        .flags = ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION | ACTOR_PART_FLAG_40000000,
         .index = 5,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
@@ -160,7 +160,7 @@ ActorPartBlueprint N(partsTable_8021BAD4)[] = {
         .unk_1C = 0,
     },
     {
-        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_100000,
+        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
         .index = 6,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
@@ -172,7 +172,7 @@ ActorPartBlueprint N(partsTable_8021BAD4)[] = {
         .unk_1C = 0,
     },
     {
-        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_100000,
+        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
         .index = 7,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
@@ -184,7 +184,7 @@ ActorPartBlueprint N(partsTable_8021BAD4)[] = {
         .unk_1C = 0,
     },
     {
-        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_100000,
+        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
         .index = 8,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
