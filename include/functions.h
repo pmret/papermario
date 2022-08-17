@@ -112,8 +112,8 @@ void func_80248170(s32 idx);
 void filemenu_set_selected(MenuPanel* menu, s32 col, s32 row);
 void filemenu_set_cursor_alpha(s32 arg0);
 void filemenu_set_cursor_goal_pos(s32 windowIndex, s32 posX, s32 posY);
-Message* filemenu_get_menu_message(s32 idx);
-void filemenu_draw_message(Message*, s32 posX, s32 posY, s32 alpha, s32 color, s32 flags);
+u8* filemenu_get_menu_message(s32 idx);
+void filemenu_draw_message(s8*, s32 posX, s32 posY, s32 alpha, s32 color, s32 flags);
 
 void gfx_task_background(void);
 
@@ -410,6 +410,7 @@ s32 npc_test_move_simple_with_slipping(s32, f32*, f32*, f32*, f32, f32, f32, f32
 s32 npc_test_move_complex_with_slipping(s32, f32*, f32*, f32*, f32, f32, f32, f32);
 
 // Partner
+EvtScript* partner_get_ride_script(void);
 void partner_handle_before_battle(void);
 void partner_walking_update_player_tracking(Npc* partner);
 void partner_walking_update_motion(Npc* partner);
@@ -467,6 +468,8 @@ void set_aux_pan_v(s32 texPannerID, s32 value);
 void enable_world_fog(void);
 void set_world_fog_dist(s32 start, s32 end);
 void set_world_fog_color(s32 r, s32 g, s32 b, s32 a);
+s32 is_world_fog_enabled(void);
+void get_world_fog_color(s32* r, s32* g, s32* b, s32* a);
 void enable_entity_fog(void);
 void set_entity_fog_dist(s32 start, s32 end);
 void set_entity_fog_color(s32 r, s32 g, s32 b, s32 a);
@@ -634,7 +637,7 @@ void dispatch_event_player(s32);
 s32 btl_are_all_enemies_defeated(void);
 s32 btl_check_enemies_defeated(void);
 s32 btl_check_player_defeated(void);
-void btl_show_battle_message(s32, s32);
+void btl_show_battle_message(s32 messageIndex, s32 duration);
 void btl_update_ko_status(void);
 void reset_actor_turn_info(void);
 void btl_draw_prim_quad(u8 r, u8 g, u8 b, u8 a, u16 left, u16 top, u16 arg6, u16 arg7);

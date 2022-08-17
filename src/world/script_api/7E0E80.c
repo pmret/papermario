@@ -831,13 +831,13 @@ INCLUDE_ASM(s32, "world/script_api/7E0E80", draw_shop_items);
 // This should be equivalent to the original code but there is some funny business with
 // the evt_get_variable's at the beginning that makes absolutely no sense.
 #ifdef NON_MATCHING
-s32 MakeShop(Evt* script, s32 isInitialCall) {
+ApiStatus MakeShop(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ShopItemLocation* ItemDataPositions = evt_get_variable(script, *args++);
-    ShopItemData* inventory = evt_get_variable(script, *args++);
-    ShopSellPriceData* prices = evt_get_variable(script, *args++);
-    s32 inventoryItemFlags = evt_get_variable(script, *args++);
-    Shop* shop = heap_malloc(sizeof(*shop));
+    ShopItemLocation* itemDataPositions;
+    ShopItemData* inventory;
+    s32 inventoryItemFlags;
+    ShopSellPriceData* prices;
+    Shop* shop;
     Model* model;
     s32 numShopItems;
     f32 centerX;
@@ -848,8 +848,15 @@ s32 MakeShop(Evt* script, s32 isInitialCall) {
     f32 sizeZ;
     s32 items;
 
+    itemDataPositions = evt_get_variable(script, *args++);
+    inventory = evt_get_variable(script, *args++);
+    prices = evt_get_variable(script, *args++);
+    inventoryItemFlags = evt_get_variable(script, *args++);
+
+    shop = heap_malloc(sizeof(*shop));
+
     gGameStatusPtr->mapShop = shop;
-    shop->ItemDataPositions = ItemDataPositions;
+    shop->itemDataPositions = itemDataPositions;
     shop->staticInventory = inventory;
     shop->staticPriceList = prices;
     shop->inventoryItemFlags = inventoryItemFlags;
@@ -879,21 +886,21 @@ s32 MakeShop(Evt* script, s32 isInitialCall) {
     }
 
     inventory = shop->staticInventory;
-    ItemDataPositions = shop->ItemDataPositions;
+    itemDataPositions = shop->itemDataPositions;
     numShopItems = 0;
     while (inventory->itemID != 0) {
-        get_model_center_and_size(ItemDataPositions->posModelID, &centerX, &centerY, &centerZ, &sizeX, &sizeY, &sizeZ);
+        get_model_center_and_size(itemDataPositions->posModelID, &centerX, &centerY, &centerZ, &sizeX, &sizeY, &sizeZ);
         centerY += 6;
         gGameStatusPtr->shopItemEntities[numShopItems].pos.x = centerX;
         gGameStatusPtr->shopItemEntities[numShopItems].pos.y = centerY;
         gGameStatusPtr->shopItemEntities[numShopItems].pos.z = centerZ;
-        model = get_model_from_list_index(get_model_list_index_from_tree_index(ItemDataPositions->posModelID));
+        model = get_model_from_list_index(get_model_list_index_from_tree_index(itemDataPositions->posModelID));
         model->flags |= MODEL_FLAGS_FLAG_4;
         gGameStatusPtr->shopItemEntities[numShopItems].index = make_item_entity_nodelay(inventory->itemID | shop->inventoryItemFlags, centerX, centerY, centerZ, 1, 0);
         set_item_entity_flags(gGameStatusPtr->shopItemEntities[numShopItems].index, 0x4000);
-        bind_trigger_1(D_80283F58_7E4DD8, 0x80, ItemDataPositions->triggerColliderID, numShopItems, 0, 3);
-        bind_trigger_1(D_80283F58_7E4DD8, 0x800, ItemDataPositions->triggerColliderID, numShopItems, 0, 3);
-        ItemDataPositions++;
+        bind_trigger_1(D_80283F58_7E4DD8, 0x80, itemDataPositions->triggerColliderID, numShopItems, 0, 3);
+        bind_trigger_1(D_80283F58_7E4DD8, 0x800, itemDataPositions->triggerColliderID, numShopItems, 0, 3);
+        itemDataPositions++;
         inventory++;
         numShopItems++;
     }
@@ -904,8 +911,8 @@ s32 MakeShop(Evt* script, s32 isInitialCall) {
     get_generic_entity(create_generic_entity_frontUI(NULL, draw_shop_items));
     set_window_properties(WINDOW_ID_10, 100, 66, 120, 28, 0, shop_draw_item_name, NULL, -1);
     set_window_properties(WINDOW_ID_11, 32, 184, 256, 32, 1, shop_draw_item_desc, NULL, -1);
-    gWindowStyles[10] = 9;
-    gWindowStyles[11] = 3;
+    gWindowStyles[10].defaultStyleID = 9;
+    gWindowStyles[11].defaultStyleID = 3;
     shop->currentItemSlot = 0;
     shop->selectedStoreItemSlot = 0;
     shop->flags = SHOP_FLAGS_0;

@@ -2399,7 +2399,7 @@ void func_8025D160(ActorPart* arg0, s32 arg1) {
     EffectInstance* effect;
     AuraFXData* data;
     f32 scale;
-    
+
     switch (table->unk_8BC[arg1]) {
         case 0:
             fx_aura(3, arg0->currentPos.x, arg0->currentPos.y, arg0->currentPos.z, 0.4f, &table->effects[arg1]);
@@ -2430,7 +2430,7 @@ void func_8025D290(ActorPart* part, s32 decorationIndex) {
 
 void func_8025D2B0(ActorPart* part, s32 decorationIndex) {
     DecorationTable* decor = part->decorationTable;
-    
+
     switch (decor->unk_8BC[decorationIndex]) {
         case 0:
             if (part->yaw > 90.0f) {
@@ -2460,7 +2460,7 @@ void func_8025D3CC(ActorPart* part, s32 decorationIndex) {
     s8 temp_v1;
 
     decor = part->decorationTable;
-    switch (decor->unk_8BC[decorationIndex]) { 
+    switch (decor->unk_8BC[decorationIndex]) {
         case 0:
             fx_stars_orbiting(0, part->currentPos.x, part->currentPos.y + part->size.y, part->currentPos.z,
                 20.0f, 3, &decor->effects[decorationIndex]);
@@ -2568,7 +2568,7 @@ void func_8025D810(ActorPart* part, s32 decorationIndex) {
 void func_8025D830(ActorPart* part, s32 decorationIndex) {
     DecorationTable* decor = part->decorationTable;
     EffectInstance* effect;
-    
+
     switch (decor->unk_8BC[decorationIndex]) {
         case 0:
             decor->effects[decorationIndex] = fx_whirlwind(2, part->currentPos.x, part->currentPos.y, part->currentPos.z, 1.0f, 0);

@@ -676,13 +676,81 @@ s32 func_802DE748(s32 arg0, s32 arg1) {
     return componentList[arg1]->unk_4C & 0xFF;
 }
 
-INCLUDE_ASM(s32, "sprite", func_802DE780);
+void func_802DE780(s32 spriteIdx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7) {
+    SpriteInstance* sprite = &D_802DFA48[spriteIdx];
+    SpriteComponent** componentList;
+    s32 i;
 
-s32 func_802DE894(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
-    return func_802DE780(arg0, -1, arg1, arg2, arg3, arg4, arg5, arg6);
+    if (sprite->componentList != NULL) {
+        componentList = sprite->componentList;
+        i = 0;
+
+        while ((s32) *componentList != -1) {
+            SpriteComponent* comp = *componentList;
+
+            if (arg1 == -1 || i == arg1) {
+                fold_update((u8)comp->unk_4C, arg2, arg3, arg4, arg5, arg6, arg7);
+                if (arg2 != FOLD_TYPE_NONE) {
+                    comp->unk_4C |= 0x10000000;
+                } else {
+                    comp->unk_4C &= ~0xF0000000;
+                }
+            }
+            componentList++;
+            i++;
+        }
+    }
 }
 
+void func_802DE894(s32 spriteIdx, s32 compListIdx, s32 foldType, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+    func_802DE780(spriteIdx, -1, compListIdx, foldType, arg3, arg4, arg5, arg6);
+}
+
+// animList issue
+#ifdef NON_MATCHING
+s32 func_802DE8DC(s32 spriteIdx, s32 compListIdx, s32* outX, s32* outY, s32* outZ) {
+    SpriteInstance* sprite = &D_802DFA48[spriteIdx];
+    SpriteAnimComponent** animList;
+    SpriteComponent** compList;
+    SpriteAnimComponent* anim;
+    SpriteComponent* comp;
+    u8 animID;
+    s32 i;
+
+    if (sprite->componentList == NULL) {
+        return spriteIdx * 20;
+    }
+
+    animID = sprite->currentAnimID;
+    if (animID == 0xFF) {
+        return 0xFF;
+    }
+
+    animList = sprite->spriteData[animID].animListStart;
+    compList = sprite->componentList;
+    i = 0;
+    while (*compList != (SpriteComponent*) -1) {
+        if (i == compListIdx) {
+            do {
+                anim = *animList;
+                comp = *compList;
+            } while (0); // TODO required to match
+            *outX = comp->compPos.x + anim->compOffset.x;
+            *outY = comp->compPos.y + anim->compOffset.y;
+            *outZ = comp->compPos.z + anim->compOffset.z;
+            return 0;
+        }
+        i++;
+        compList++;
+        if (*animList != (SpriteAnimComponent*) -1) {
+            animList++;
+        }
+    }
+    return -1;
+}
+#else
 INCLUDE_ASM(s32, "sprite", func_802DE8DC);
+#endif
 
 s32 spr_get_npc_raster_info(SpriteRasterInfo* out, s32 npcSpriteID, s32 rasterIndex) {
     SpriteAnimData* sprite = spr_npcSprites[npcSpriteID];

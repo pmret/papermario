@@ -299,7 +299,7 @@ typedef struct PlayerData {
     /* 0x296 */ s16 actionCommandSuccesses;
     /* 0x298 */ u16 hitsTaken;
     /* 0x29A */ u16 hitsBlocked;
-    /* 0x29C */ s16 playerFirstStrikes;
+    /* 0x29C */ u16 playerFirstStrikes;
     /* 0x29E */ s16 enemyFirstStrikes;
     /* 0x2A0 */ u16 powerBounces;
     /* 0x2A2 */ u16 battlesCount;
@@ -1273,10 +1273,10 @@ typedef struct MessageCharData {
 } MessageCharData; // size = 0xC
 
 typedef struct MessageCharset {
-    /* 0x0 */ Vec2b texSize;
+    /* 0x0 */ Vec2bu texSize;
     /* 0x2 */ s8 unk_02;
     /* 0x3 */ u8 newLineY;
-    /* 0x4 */ s16 charRasterSize; // in bytes
+    /* 0x4 */ u16 charRasterSize; // in bytes
     /* 0x6 */ char unk_06[0x2];
     /* 0x8 */ MessageCharData* rasters;
 } MessageCharset; // size = 0xA;
@@ -1307,6 +1307,11 @@ typedef struct MessageNumber {
     /* 0x11 */ s8 fixedWidth;
     /* 0x12 */ char unk_12[0x2];
 } MessageNumber; // size = 0x14
+
+typedef struct UnkMsgStruct8 {
+    /* 0x00 */ s16 unk_00;
+    /* 0x02 */ char unk_02[0xE];
+} UnkMsgStruct8; // size = 0x16
 
 typedef struct ShopItemEntity {
     /* 0x00 */ s32 index;
@@ -1420,7 +1425,7 @@ typedef struct GameStatus {
     /* 0x150 */ s16 backgroundMaxY;
     /* 0x152 */ s16 backgroundXOffset; /* (used for parallax scroll) */
     /* 0x154 */ UNK_PTR backgroundRaster;
-    /* 0x158 */ UNK_PTR backgroundPalette;
+    /* 0x158 */ u16* backgroundPalette;
     /* 0x15C */ s16 unk_15C;
     /* 0x15E */ u16 unk_15E;
     /* 0x160 */ Vec3s savedPos;
@@ -1850,7 +1855,7 @@ typedef struct Actor {
     /* 0x218 */ s8 transStatus; /* 0E = yes */
     /* 0x219 */ s8 transDuration;
     /* 0x21A */ char unk_21A[2];
-    /* 0x21C */ u8 status;
+    /* 0x21C */ s8 status;
     /* 0x21D */ s8 unk_21D;
     /* 0x21E */ s16 unk_21E;
     /* 0x220 */ s8 isGlowing; // not the case for goombario
@@ -2131,7 +2136,7 @@ typedef struct {
 
 typedef struct {
     /* 0x00000 */ LookAt lookAt;
-    /* 0x00020 */ char unk_20[0x10];
+    /* 0x00020 */ Hilite hilite;
     /* 0x00030 */ Mtx camPerspMatrix[8]; // could only be length 4, unsure
     /* 0x00230 */ Gfx mainGfx[0x2080];
     /* 0x10630 */ Gfx backgroundGfx[0x200]; // used by gfx_task_background
@@ -2189,6 +2194,18 @@ typedef struct SpriteRasterInfo {
     /* 0x08 */ s32 width;
     /* 0x0C */ s32 height;
 } SpriteRasterInfo; // size = 0x10
+
+typedef struct UnkEntityStruct {
+    /* 0x00 */ s32 foldID;
+    /* 0x04 */ s32 entityID;
+    /* 0x08 */ s32 spriteIndex;
+    /* 0x0C */ s32 rasterIndex;
+    /* 0x10 */ Vec3f pos;
+    /* 0x1C */ Vec3f rot;
+    /* 0x28 */ Vec3f scale;
+    /* 0x34 */ f32 unk_34;
+    /* 0x38 */ f32 unk_38;
+} UnkEntityStruct; // size = 0x3C
 
 typedef struct EntityModel {
     /* 0x00 */ s32 flags;

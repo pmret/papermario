@@ -1,6 +1,6 @@
 #include "obk_08.h"
 
-INCLUDE_ASM(s32, "world/area_obk/obk_08/BD3870", func_80240000_BD3870);
+#include "world/common/UnkFoldFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_obk/obk_08/BD3870", func_802403DC_BD3C4C);
 

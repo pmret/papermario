@@ -6,9 +6,9 @@ ApiStatus func_802405F0_8238B0(Evt* script, s32 isInitialCall) {
 
     func_8011B950(71, -1, 1, 1);
     set_background_color_blend(0, 0, 0, 255);
-    gCameras->bgColor[0] = 0;
-    gCameras->bgColor[1] = 0;
-    gCameras->bgColor[2] = 0;
+    gCameras[CAM_DEFAULT].bgColor[0] = 0;
+    gCameras[CAM_DEFAULT].bgColor[1] = 0;
+    gCameras[CAM_DEFAULT].bgColor[2] = 0;
 
     for (i = 0; i < MAX_NPCS; i++) {
         npc = get_npc_by_index(i);

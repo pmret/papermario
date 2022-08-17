@@ -2,6 +2,7 @@
 #include "entity.h"
 
 extern PushBlockGrid* D_802DBC88[]; //TODO determine length
+extern f32 D_80285640_7E64C0[];
 extern EvtScript D_80285674_7E64F4;
 
 #define BLOCK_GRID_SIZE 25
@@ -15,14 +16,60 @@ ApiStatus func_80282880(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "world/script_api/7E3700", func_802828DC);
+ApiStatus func_802828DC(Evt* script, s32 isInitialCall) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    Entity* entity = get_entity_by_index(script->varTable[11]);
+    f32 temp_f4;
+
+    if (isInitialCall) {
+        script->functionTemp[0] = 0;
+        script->varTable[0] = playerStatus->position.x;
+        script->varTable[1] = playerStatus->position.y;
+        script->varTable[2] = playerStatus->position.z;
+        script->varTable[3] = entity->position.x;
+        script->varTable[4] = entity->position.y;
+        script->varTable[5] = entity->position.z;
+        script->varTable[9] = entity->rotation.x;
+        script->varTable[12] = entity->rotation.z;
+    }
+
+    temp_f4 = D_80285640_7E64C0[script->functionTemp[0]];
+    playerStatus->position.x = script->varTable[0] + (script->varTable[6] * temp_f4 * 25.0f);
+    playerStatus->position.y = script->varTable[1] + (script->varTable[7] * temp_f4 * 25.0f);
+    playerStatus->position.z = script->varTable[2] + (script->varTable[8] * temp_f4 * 25.0f);
+    entity->position.x = script->varTable[3] + (script->varTable[6] * temp_f4 * 25.0f);
+    entity->position.y = script->varTable[4] + (script->varTable[7] * temp_f4 * 25.0f);
+    entity->position.z = script->varTable[5] + (script->varTable[8] * temp_f4 * 25.0f);
+
+    if (script->functionTemp[0] < 12) {
+        entity->rotation.z = script->varTable[12] + (script->varTable[6] * temp_f4 * -90.0f);
+        entity->rotation.x = script->varTable[9] + (script->varTable[8] * temp_f4 * 90.0f);
+        entity->position.y = entity->position.y + (sin_deg(temp_f4 * 90.0f) * 25.0f * 0.5);
+        entity->position.x = entity->position.x - (script->varTable[6] * sin_deg(temp_f4 * 90.0f) * 25.0f * 0.5);
+        entity->position.z = entity->position.z - (script->varTable[8] * sin_deg(temp_f4 * 90.0f) * 25.0f * 0.5);
+    } else {
+        entity->rotation.z = entity->rotation.x = 0.0f;
+    }
+
+    gCameras[CAM_DEFAULT].targetPos.x = playerStatus->position.x;
+    gCameras[CAM_DEFAULT].targetPos.y = playerStatus->position.y;
+    gCameras[CAM_DEFAULT].targetPos.z = playerStatus->position.z;
+
+    script->functionTemp[0]++;
+    if (script->functionTemp[0] == 13) {
+        return ApiStatus_DONE1;
+    }
+    return ApiStatus_BLOCK;
+}
 
 INCLUDE_ASM(s32, "world/script_api/7E3700", func_80282C40);
 
+ApiStatus func_80282E30(Evt* script, s32 isInitialCall);
 INCLUDE_ASM(s32, "world/script_api/7E3700", func_80282E30);
 
 INCLUDE_ASM(s32, "world/script_api/7E3700", func_80283080);
 
+ApiStatus func_80283174(Evt* script, s32 isInitialCall);
 INCLUDE_ASM(s32, "world/script_api/7E3700", func_80283174);
 
 ApiStatus CheckActionState(Evt* script, s32 isInitialCall) {

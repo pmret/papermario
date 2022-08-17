@@ -29,7 +29,7 @@ ApiStatus func_80240000_8ABF90(Evt* script, s32 isInitialCall) {
         duration = evt_get_variable(script, *args++);
         time = 0;
     }
-    
+
     if (duration > 0) {
         time++;
         set_model_env_color_parameters(
@@ -74,7 +74,7 @@ ApiStatus func_802404A0_8AC430(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_802404E8_8AC478(Evt* script, s32 isInitialCall) {
     s32 pitch = evt_get_variable(script, script->varTable[0]);
-    gCameras->controlSettings.boomPitch = pitch * 0.001f;
+    gCameras[CAM_DEFAULT].controlSettings.boomPitch = pitch * 0.001f;
     return ApiStatus_DONE2;
 }
 
@@ -109,7 +109,7 @@ ApiStatus func_802405F0_8AC580(Evt* script, s32 isInitialCall) {
         FUNC_STATE_2        = 2,
         FUNC_STATE_3        = 3
     };
-    
+
     Bytecode* args = script->ptrReadPos;
     ApiStatus retVal = ApiStatus_BLOCK;
     Npc* npc;

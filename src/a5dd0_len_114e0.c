@@ -2993,7 +2993,7 @@ void func_80114B58(u32 romOffset, TextureHandle* handle, TextureHeader* header, 
         handle->auxPalette = NULL;
         handle->auxRaster = NULL;
     }
-    
+
     handle->gfx = (Gfx*) mdl_nextTextureAddress;
     memcpy(&handle->header, header, sizeof(*header));
     func_801180E8(header, &mdl_nextTextureAddress, handle->raster, handle->palette, handle->auxRaster, handle->auxPalette, 0, 0, 0, 0);
