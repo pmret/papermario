@@ -138,19 +138,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", pause_tabs_draw_stats_805418);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", pause_tabs_draw_badges_805540);
 
-ApiStatus func_80244D68_8055E8(Evt* script, s32 isInitialCall) {
-    if (evt_get_variable(NULL, EVT_SAVE_FLAG(260)) == 0) {
-        set_item_entity_flags(gGameStatusPtr->shopItemEntities[0].index, 0x40);
-    }
-    if (evt_get_variable(NULL, EVT_SAVE_FLAG(261)) == 0) {
-        set_item_entity_flags(gGameStatusPtr->shopItemEntities[1].index, 0x40);
-    }
-    if (evt_get_variable(NULL, EVT_SAVE_FLAG(262)) == 0) {
-        set_item_entity_flags(gGameStatusPtr->shopItemEntities[2].index, 0x40);
-    }
-    return ApiStatus_DONE2;
-}
-
+#include "world/common/UnkMachiFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80244E10_805690);
 

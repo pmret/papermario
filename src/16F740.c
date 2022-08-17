@@ -2397,7 +2397,6 @@ void btl_state_update_enemy_move(void) {
 void btl_state_draw_enemy_move(void) {
 }
 
-//INCLUDE_ASM(s32, "16F740", btl_state_update_first_strike);
 void btl_state_update_first_strike(void) {
     PlayerData* playerData = &gPlayerData;
     BattleStatus* battleStatus = &gBattleStatus;
