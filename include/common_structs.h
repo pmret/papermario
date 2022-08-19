@@ -2269,7 +2269,7 @@ typedef struct ActionCommandStatus {
     /* 0x61 */ s8 unk_61;
     /* 0x62 */ s8 unk_62;
     /* 0x63 */ s8 unk_63;
-    /* 0x64 */ s16 unk_64;
+    /* 0x64 */ s16 easyVersion;
     /* 0x66 */ s16 unk_66;
     /* 0x68 */ s16 unk_68;
     /* 0x6A */ s16 unk_6A;

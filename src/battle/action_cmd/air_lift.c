@@ -76,7 +76,7 @@ ApiStatus func_802A9184_428BF4(Evt* script, s32 isInitialCall) {
     actionCommandStatus->unk_52 = evt_get_variable(script, *args++);
     actionCommandStatus->unk_50 = evt_get_variable(script, *args++);
     actionCommandStatus->unk_50 = func_80268224(actionCommandStatus->unk_50);
-    actionCommandStatus->unk_64 = evt_get_variable(script, *args++);
+    actionCommandStatus->easyVersion = evt_get_variable(script, *args++);
 
     actionCommandStatus->unk_60 = 0;
     battleStatus->actionSuccess = 0;

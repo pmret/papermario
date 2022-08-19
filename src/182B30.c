@@ -1922,26 +1922,27 @@ void func_8025B5C0(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4, s
     }
 }
 
-#ifdef NON_MATCHING
 void func_8025BAA0(s32 arg0, ActorPart* part, s32 yaw, s32 arg3, Matrix4f mtx, s32 arg5) {
     DecorationTable* decorationTable = part->decorationTable;
-    u16* t1;
-    u16* t2;
-    u16* palOut;
+    u16* color1;
+    u16* color2;
+    u16* blendColor;
     s32 i, j;
-    u8 alpha;
+    u8 blendAlpha;
+    u8 r2, g2, b2, a1;
+    u8 r1, g1, b1;
 
     if (decorationTable->unk_6C1 != 0) {
         if (arg0 == 0) {
             decorationTable->palettes = spr_get_player_palettes(part->currentAnimation >> 16);
             decorationTable->numPalettes = 0;
-            while (decorationTable->palettes[decorationTable->numPalettes] != -1) {
+            while (decorationTable->palettes[decorationTable->numPalettes] != (PAL_PTR) -1) {
                 decorationTable->numPalettes++;
             }
         } else {
             decorationTable->palettes = spr_get_npc_palettes(part->currentAnimation >> 16);
             decorationTable->numPalettes = 0;
-            while (decorationTable->palettes[decorationTable->numPalettes] != -1) {
+            while (decorationTable->palettes[decorationTable->numPalettes] != (PAL_PTR) -1) {
                 decorationTable->numPalettes++;
             }
         }
@@ -1955,12 +1956,12 @@ void func_8025BAA0(s32 arg0, ActorPart* part, s32 yaw, s32 arg3, Matrix4f mtx, s
         }
 
         for (i = 0; i < decorationTable->numPalettes; i++) {
-            t2 = decorationTable->palettes[i];
-            t1 = decorationTable->unk_00[i];
-            decorationTable->unk_6D4[i] = t1;
-            if (t2 != NULL) {
+            color2 = decorationTable->palettes[i];
+            color1 = decorationTable->unk_00[i];
+            decorationTable->unk_6D4[i] = color1;
+            if (color2 != NULL) {
                 for (j = 0; j < ARRAY_COUNT(decorationTable->unk_00[i]); j++) {
-                    *t1++ = *t2++;
+                    *color1++ = *color2++;
                 }
             }
         }
@@ -1989,7 +1990,7 @@ void func_8025BAA0(s32 arg0, ActorPart* part, s32 yaw, s32 arg3, Matrix4f mtx, s
             }
             decorationTable->unk_6CA = 0;
             decorationTable->unk_6C2 = 1;
-            /* fallthrough */
+            // fallthrough
         case 1:
             if (arg5 == 0) {
                 decorationTable->unk_6CA += 25600 / decorationTable->unk_746;
@@ -1997,29 +1998,29 @@ void func_8025BAA0(s32 arg0, ActorPart* part, s32 yaw, s32 arg3, Matrix4f mtx, s
                     decorationTable->unk_6CA = 25500;
                 }
             }
-            alpha = (s16)decorationTable->unk_6CA / 100;
-            t2 = decorationTable->palettes[decorationTable->unk_740];
-            t1 = decorationTable->palettes[decorationTable->unk_742];
-            palOut = decorationTable->unk_00[0];
-            decorationTable->unk_6D4[0] = palOut;
+            blendAlpha = (s16)decorationTable->unk_6CA / 100;
+            color2 = decorationTable->palettes[decorationTable->unk_740];
+            color1 = decorationTable->palettes[decorationTable->unk_742];
+            blendColor = decorationTable->unk_6D4[0] = decorationTable->unk_00[0];
 
-            for (j = 0; j < ARRAY_COUNT(decorationTable->unk_00[0]); t2++, t1++, j++) {
-                s32 r1 = (*t1 >> 11) & 0x1F;
-                s32 r = (*t2 >> 11) & 0x1F;
-                s32 g1 = (*t1 >> 6) & 0x1F;
-                s32 g = (*t2 >> 6) & 0x1F;
-                s32 b1 = (*t1 >> 1) & 0x1F;
-                s32 b = (*t2 >> 1) & 0x1F;
-                u8 a = *t1 & 1;
+            for (j = 0; j < ARRAY_COUNT(decorationTable->unk_00[0]); j++) {
+                r2 = (*color2 >> 11) & 0x1F;
+                g2 = (*color2 >> 6) & 0x1F;
+                b2 = (*color2 >> 1) & 0x1F;
+                r1 = (*color1 >> 11) & 0x1F;
+                g1 = (*color1 >> 6) & 0x1F;
+                b1 = (*color1 >> 1) & 0x1F;
+                a1 = *color1 & 1;   
+                color2++;
+                color1++;
 
-                r *= (255 - alpha);
-                r1 = (r + r1 * alpha) / 255;
-                g1 = (g * (255 - alpha) + g1 * alpha) / 255;
-                b1 = (b * (255 - alpha) + b1 * alpha) / 255;
+                r1 = (r2 * (255 - blendAlpha) + r1 * blendAlpha) / 255;
+                g1 = (g2 * (255 - blendAlpha) + g1 * blendAlpha) / 255;
+                b1 = (b2 * (255 - blendAlpha) + b1 * blendAlpha) / 255;
 
-                 *palOut++ = ((r1 & 0xFF) << 11) | ((g1 & 0xFF) << 6) | ((b1 & 0xFF) << 1) | a;
+                *blendColor++ = (r1 << 11) | (g1 << 6) | (b1 << 1) | a1;
             }
-            if (alpha == 255) {
+            if (blendAlpha == 255) {
                 decorationTable->unk_6C2 = 2;
                 decorationTable->unk_6C8 = decorationTable->unk_748;
             }
@@ -2036,7 +2037,7 @@ void func_8025BAA0(s32 arg0, ActorPart* part, s32 yaw, s32 arg3, Matrix4f mtx, s
             }
             decorationTable->unk_6CA = 0;
             decorationTable->unk_6C2 = 3;
-            /* fallthrough */
+            // fallthrough
         case 3:
             if (arg5 == 0) {
                 decorationTable->unk_6CA += 25600 / decorationTable->unk_74A;
@@ -2044,30 +2045,30 @@ void func_8025BAA0(s32 arg0, ActorPart* part, s32 yaw, s32 arg3, Matrix4f mtx, s
                     decorationTable->unk_6CA = 25500;
                 }
             }
-            alpha = (s16)decorationTable->unk_6CA / 100;
-            t2 = decorationTable->palettes[decorationTable->unk_742];
-            t1 = decorationTable->palettes[decorationTable->unk_740];
-            palOut = decorationTable->unk_00[0];
-            decorationTable->unk_6D4[0] = palOut;
+            blendAlpha = (s16)decorationTable->unk_6CA / 100;
+            color2 = decorationTable->palettes[decorationTable->unk_742];
+            color1 = decorationTable->palettes[decorationTable->unk_740];
+            blendColor = decorationTable->unk_00[0];
+            decorationTable->unk_6D4[0] = blendColor;
 
             for (j = 0; j < ARRAY_COUNT(decorationTable->unk_00[0]); j++) {
-                s32 r1 = (*t1 >> 11) & 0x1F;
-                s32 r = (*t2 >> 11) & 0x1F;
-                s32 g1 = (*t1 >> 6) & 0x1F;
-                s32 g = (*t2 >> 6) & 0x1F;
-                s32 b1 = (*t1 >> 1) & 0x1F;
-                s32 b = (*t2 >> 1) & 0x1F;
-                u8 a = *t1 & 1;
-                t2++;
-                t1++;
+                r2 = (*color2 >> 11) & 0x1F;
+                g2 = (*color2 >> 6) & 0x1F;
+                b2 = (*color2 >> 1) & 0x1F;
+                r1 = (*color1 >> 11) & 0x1F;
+                g1 = (*color1 >> 6) & 0x1F;
+                b1 = (*color1 >> 1) & 0x1F;
+                a1 = *color1 & 1;   
+                color2++;
+                color1++;
 
-                r1 = (r * (255 - alpha) + r1 * alpha) / 255;
-                g1 = (g * (255 - alpha) + g1 * alpha) / 255;
-                b1 = (b * (255 - alpha) + b1 * alpha) / 255;
+                r1 = (r2 * (255 - blendAlpha) + r1 * blendAlpha) / 255;
+                g1 = (g2 * (255 - blendAlpha) + g1 * blendAlpha) / 255;
+                b1 = (b2 * (255 - blendAlpha) + b1 * blendAlpha) / 255;
 
-                *palOut++ = ((r1 & 0xFF) << 11) | ((g1 & 0xFF) << 6) | ((b1 & 0xFF) << 1) | a;
+                *blendColor++ = ((r1) << 11) | ((g1) << 6) | ((b1) << 1) | a1;
             }
-            if (alpha == 255) {
+            if (blendAlpha == 255) {
                 decorationTable->unk_6C2 = 0;
                 decorationTable->unk_6C8 = decorationTable->unk_744;
             }
@@ -2087,9 +2088,6 @@ void func_8025BAA0(s32 arg0, ActorPart* part, s32 yaw, s32 arg3, Matrix4f mtx, s
             break;
     }
 }
-#else
-INCLUDE_ASM(s32, "182B30", func_8025BAA0);
-#endif
 
 INCLUDE_ASM(s32, "182B30", func_8025C120);
 

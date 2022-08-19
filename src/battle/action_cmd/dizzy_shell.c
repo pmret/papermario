@@ -109,7 +109,7 @@ void func_802A928C_4263FC(void) {
         case 11:
             btl_set_popup_duration(99);
             if (actionCommandStatus->unk_68 == 0) {
-                if (actionCommandStatus->unk_64 != 0) {
+                if (actionCommandStatus->easyVersion != 0) {
                     cutoff = actionCommandStatus->mashMeterCutoffs[actionCommandStatus->mashMeterIntervals];
 
                     actionCommandStatus->barFillLevel -= D_802A9800_426970[actionCommandStatus->barFillLevel / cutoff / 20];
@@ -126,7 +126,7 @@ void func_802A928C_4263FC(void) {
 
             if (battleStatus->currentButtonsPressed & A_BUTTON) {
                 s32 a = battleStatus->unk_434[actionCommandStatus->unk_50];
-                s32 b = actionCommandStatus->unk_64 * 850;
+                s32 b = actionCommandStatus->easyVersion * 850;
                 s32 temp_v1_2 = (a * b) / 10000;
 
                 if (temp_v1_2 != 0) {
@@ -156,7 +156,7 @@ void func_802A928C_4263FC(void) {
             }
 
             fillLevel = actionCommandStatus->barFillLevel;
-            if (actionCommandStatus->unk_64 == 0) {
+            if (actionCommandStatus->easyVersion == 0) {
                 fillLevel = 0;
             }
 
@@ -183,7 +183,7 @@ void func_802A928C_4263FC(void) {
             actionCommandStatus->state = 12;
             break;
         case 12:
-            if (actionCommandStatus->unk_64 == 0) {
+            if (actionCommandStatus->easyVersion == 0) {
                 actionCommandStatus->barFillLevel -= 100;
                 if (actionCommandStatus->barFillLevel < 0) {
                     actionCommandStatus->barFillLevel = 0;
