@@ -45,6 +45,9 @@
                       (panel)->numCols * (panel)->row + \
                       (panel)->col]
 
+#define IS_ID_BADGE(itemID) (itemID >= 0xE0 && itemID <= 0x154)
+#define IS_ID_ITEM(itemID) (itemID >= 0x10 && itemID <= 0xDA)
+
 #define MAX_MAPVARS 16
 #define MAX_MAPFLAGS 3
 

@@ -924,8 +924,8 @@ s32 test_item_player_collision(ItemEntity* item) {
 
     actionState = playerStatus->actionState;
 
-    if (item->flags & 0x100) {
-        item->flags &= ~0x100;
+    if (item->flags & ITEM_ENTITY_FLAGS_100) {
+        item->flags &= ~ITEM_ENTITY_FLAGS_100;
         return TRUE;
     }
 
@@ -937,7 +937,7 @@ s32 test_item_player_collision(ItemEntity* item) {
         return FALSE;
     }
 
-    if (item->flags & 0x200000) {
+    if (item->flags & ITEM_ENTITY_FLAGS_200000) {
         return FALSE;
     }
 
@@ -945,7 +945,7 @@ s32 test_item_player_collision(ItemEntity* item) {
         return FALSE;
     }
 
-    if (item->flags & 0x40) {
+    if (item->flags & ITEM_ENTITY_FLAGS_40) {
         return FALSE;
     }
 
@@ -1019,19 +1019,19 @@ s32 test_item_player_collision(ItemEntity* item) {
     }
 
     if (cond) {
-        if (item->flags & 0x80) {
+        if (item->flags & ITEM_ENTITY_FLAGS_80) {
             if (D_801565A6 != 0) {
                 D_801565A6--;
                 return FALSE;
             } else {
-                item->flags &= ~0x80;
+                item->flags &= ~ITEM_ENTITY_FLAGS_80;
             }
         }
         return TRUE;
     }
 
-    if (item->flags & 0x80) {
-        item->flags &= ~0x80;
+    if (item->flags & ITEM_ENTITY_FLAGS_80) {
+        item->flags &= ~ITEM_ENTITY_FLAGS_80;
     }
     return FALSE;
 }
@@ -1057,7 +1057,7 @@ s32 test_item_entity_position(f32 x, f32 y, f32 z, f32 dist) {
             continue;
         }
 
-        if (!item->flags) {
+        if (item->flags == 0) {
             continue;
         }
 
@@ -1134,7 +1134,450 @@ s32 get_current_item_entity_render_group(void) {
     return ItemEntityRenderGroup;
 }
 
-INCLUDE_ASM(s32, "C50A0", update_item_entity_collectable);
+void update_item_entity_collectable(ItemEntity* item) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    PlayerData* playerData = &gPlayerData;
+    ItemEntityPhysicsData* physData;
+    s32 camID;
+    s32 hit;
+    f32 outX, outY, outZ, outDepth;
+    f32 theta, sinAngle, cosAngle;
+    f32 temp;
+
+    if (!isPickingUpItem) {
+        if (item->pickupDelay != 0) {
+            item->pickupDelay--;
+            return;
+        }
+
+        if (item->spawnType == ITEM_SPAWN_MODE_TOSS_FADE1) {
+            camID = CAM_BATTLE;
+        } else {
+            camID = CAM_DEFAULT;
+        }
+
+        switch (item->state) {
+            case 0:
+                item_entity_enable_shadow(item);
+                physData = heap_malloc(sizeof(*physData));
+                item->physicsData = physData;
+                ASSERT(physData != NULL);
+
+                if (item->flags & ITEM_ENTITY_FLAGS_1000000) {
+                    physData->verticalVelocity = 16.0f;
+                    physData->gravity = 2.0f;
+                } else if (!(item->flags & ITEM_ENTITY_FLAGS_10000)) {
+                    physData->verticalVelocity = 12.0f;
+                    physData->gravity = 2.0f;
+                } else {
+                    physData->verticalVelocity = 14.0f;
+                    physData->gravity = 2.0f;
+                }
+
+                physData->unk_08 = 24.0f;
+                physData->constVelocity = 24.0f;
+                if (item->wsFaceAngle < 0) {
+                    if (IS_ID_ITEM(item->itemID)) {
+                        if (rand_int(10000) < 5000) {
+                            physData->moveAngle = clamp_angle(gCameras[camID].currentYaw + 105.0f + rand_int(30) - 15.0f);
+                        } else {
+                            physData->moveAngle = clamp_angle(gCameras[camID].currentYaw - 105.0f + rand_int(30) - 15.0f);
+                        }
+                        physData->verticalVelocity += 4.0f;
+                    } else {
+                        switch (item->itemID) {
+                            case ITEM_HEART:
+                                physData->moveAngle = clamp_angle(gCameras[camID].currentYaw + 90.0f + rand_int(120) - 60.0f);
+                                break;
+                            case ITEM_FLOWER_POINT:
+                                physData->moveAngle = clamp_angle(gCameras[camID].currentYaw - 90.0f + rand_int(120) + 60.0f);
+                                break;
+                            case ITEM_COIN:
+                                if (rand_int(10000) < 5000) {
+                                    physData->moveAngle = clamp_angle(gCameras[camID].currentYaw + 90.0f + rand_int(120) - 60.0f);
+                                } else {
+                                    physData->moveAngle = clamp_angle(gCameras[camID].currentYaw - 90.0f + rand_int(120) - 60.0f);
+                                }
+                                break;
+                            case ITEM_KOOPA_FORTRESS_KEY:
+                                if (rand_int(10000) >= 5000) {
+                                    physData->moveAngle = clamp_angle(gCameras[camID].currentYaw - 90.0f + rand_int(120) - 60.0f);
+                                } else {
+                                    physData->moveAngle = clamp_angle(gCameras[camID].currentYaw + 90.0f + rand_int(120) - 60.0f);
+                                }
+                                break;
+                            case ITEM_STAR_POINT:
+                                if (item->spawnType != ITEM_SPAWN_MODE_TOSS_FADE1) {
+                                    physData->moveAngle = clamp_angle(gCameras[camID].currentYaw - 90.0f + rand_int(120) - 60.0f);
+                                    break;
+                                }
+                                if (rand_int(10000) < 5000) {
+                                    physData->moveAngle = clamp_angle(gCameras[camID].currentYaw + 90.0f + rand_int(60) - 30.0f);
+                                } else {
+                                    physData->moveAngle = clamp_angle(gCameras[camID].currentYaw - 90.0f + rand_int(60) - 30.0f);
+                                }
+                                break;
+                            case ITEM_HEART_POINT:
+                                physData->moveAngle = clamp_angle(gCameras[camID].currentYaw + 90.0f + rand_int(120) - 60.0f);
+                                break;
+                            case ITEM_STAR_PIECE:
+                                if (rand_int(10000) < 5000) {
+                                    physData->moveAngle = clamp_angle(gCameras[camID].currentYaw + 90.0f + rand_int(60) - 30.0f);
+                                } else {
+                                    physData->moveAngle = clamp_angle(gCameras[camID].currentYaw - 90.0f + rand_int(60) - 30.0f);
+                                }
+                                break;
+                            case ITEM_HEART_PIECE:
+                                physData->moveAngle = clamp_angle(gCameras[camID].currentYaw + 90.0f + rand_int(120) - 60.0f);
+                                break;
+                            default:
+                                physData->moveAngle = 0.0f;
+                                break;
+                        }
+                    }
+
+                    if (!(item->flags & ITEM_ENTITY_FLAGS_1000000)) {
+                        temp = rand_int(2000);
+                        temp = (temp / 1000.0f) + 1.5;
+                        theta = (physData->moveAngle * TAU) / 360.0f;
+                        sinAngle = sin_rad(theta);
+                        cosAngle = cos_rad(theta);
+                        physData->velx = temp * sinAngle;
+                        physData->velz = -temp * cosAngle;
+                    } else {
+                        temp = rand_int(2000);
+                        temp = (temp / 1000.0f) + 2.0;
+                        theta = (physData->moveAngle * TAU) / 360.0f;
+                        sinAngle = sin_rad(theta);
+                        cosAngle = cos_rad(theta);
+                        physData->velx = temp * sinAngle;
+                        physData->velz = -temp * cosAngle;
+                    }
+                } else {
+                    physData->moveAngle = clamp_angle(item->wsFaceAngle);
+                    if (!(item->flags & ITEM_ENTITY_FLAGS_40000000)) {
+                        temp = ((item->wsFaceAngle / 360) * 0.6) + 1.5;
+                    } else {
+                        temp = 2.1f;
+                    }
+                    theta = physData->moveAngle * TAU / 360.0f;
+                    sinAngle = sin_rad(theta);
+                    cosAngle = cos_rad(theta);
+                    physData->velx = temp * sinAngle;
+                    physData->velz = -temp * cosAngle;
+                }
+
+                if (item->spawnType != ITEM_SPAWN_MODE_TOSS_FADE1) {
+                    physData->unk_1C = 180;
+                    physData->unk_20 = 0;
+                } else {
+                    if (!(item->flags & ITEM_ENTITY_FLAGS_400000)) {
+                        physData->unk_1C = 0x11;
+                    } else {
+                        physData->unk_1C = 0x14;
+                    }
+                    physData->unk_20 = 0;
+                    physData->verticalVelocity = 15.0f;
+                    physData->gravity = 1.6f;
+                }
+
+                if (item->spawnType == ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS) {
+                    physData->unk_1C = 60;
+                    physData->unk_20 = 0;
+                    physData->velx = 0.0f;
+                    physData->velz = 0.0f;
+                }
+
+                if (item->spawnType == ITEM_SPAWN_MODE_FALL_SPAWN_ALWAYS) {
+                    physData->verticalVelocity = 0.0f;
+                    physData->velx = 0.0f;
+                    physData->velz = 0.0f;
+                    physData->unk_20 = 1;
+                }
+
+                if (item->spawnType == ITEM_SPAWN_MODE_FIXED_SPAWN_ALWAYS) {
+                    physData->verticalVelocity = 0.0f;
+                    physData->velx = 0.0f;
+                    physData->velz = 0.0f;
+                    physData->unk_20 = 1;
+                }
+
+                if (item->flags & ITEM_ENTITY_FLAGS_800) {
+                    set_global_flag(item->boundVar);
+                }
+                item->state = 1;
+                break;
+            case 1:
+                physData = item->physicsData;
+                if (item->spawnType != ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS &&
+                    item->spawnType != ITEM_SPAWN_MODE_TOSS_FADE1 &&
+                    physData->unk_20 != 0 &&
+                    test_item_player_collision(item))
+                {
+                    item->state = 3;
+                    break;
+                }
+
+                if (!(item->flags & ITEM_ENTITY_FLAGS_NEVER_VANISH)) {
+                    if (!(gOverrideFlags & (GLOBAL_OVERRIDES_200 | GLOBAL_OVERRIDES_DISABLE_BATTLES))) {
+                        if (!(item->flags & ITEM_ENTITY_FLAGS_200000)) {
+                            physData->unk_1C--;
+                            if (physData->unk_1C < 0) {
+                                item->state = 2;
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                if (!(item->flags & ITEM_ENTITY_FLAGS_FIXED)) {
+                    if (!(item->flags & ITEM_ENTITY_FLAGS_200000)) {
+                        physData->verticalVelocity -= physData->gravity;
+                        if (physData->verticalVelocity < -16.0) {
+                            physData->verticalVelocity = -16.0f;
+                        }
+                        item->position.y += physData->verticalVelocity;
+                        item->position.x += physData->velx;
+                        item->position.z += physData->velz;
+                    }
+                }
+
+                if (item->spawnType == ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS &&
+                    physData->verticalVelocity <= 0.0f)
+                {
+                    item->state = 3;
+                    break;
+                }
+
+                if (!(item->flags & (ITEM_ENTITY_FLAGS_20000000 | ITEM_ENTITY_FLAGS_10000000)) &&
+                    item->spawnType != ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS &&
+                    item->spawnType != ITEM_SPAWN_MODE_TOSS_FADE1 &&
+                    physData->verticalVelocity > 0.0f)
+                {
+                    temp = physData->constVelocity;
+                    outX = item->position.x;
+                    outY = item->position.y;
+                    outZ = item->position.z;
+                    outDepth = temp + physData->verticalVelocity;
+
+                    if (physData->unk_20 == 0) {
+                        hit = npc_raycast_up(0x20000, &outX, &outY, &outZ, &outDepth);
+                    } else {
+                        hit = npc_raycast_up(0x20000, &outX, &outY, &outZ, &outDepth);
+                    }
+
+                    if (hit && outDepth < temp) {
+                        item->position.y = outY - temp;
+                        physData->verticalVelocity = 0.0f;
+                    }
+                }
+
+                if (!(item->flags & (ITEM_ENTITY_FLAGS_20000000 | ITEM_ENTITY_FLAGS_10000000)) &&
+                    item->spawnType != ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS &&
+                    item->spawnType != ITEM_SPAWN_MODE_TOSS_FADE1 &&
+                    (physData->velx != 0.0f || physData->velz != 0.0f))
+                {
+                    outX = item->position.x;
+                    outY = item->position.y;
+                    outZ = item->position.z;
+
+                    if (physData->unk_20 == 0) {
+                        hit = npc_test_move_complex_with_slipping(0x20000, &outX, &outY, &outZ, 0.0f, physData->moveAngle, physData->constVelocity, physData->unk_08);
+                    } else {
+                        hit = npc_test_move_simple_with_slipping(0x20000, &outX, &outY, &outZ, 0.0f, physData->moveAngle, physData->constVelocity, physData->unk_08);
+                    }
+
+                    if (hit) {
+                        item->position.x = outX;
+                        item->position.y = outY;
+                        item->position.z = outZ;
+                        physData->moveAngle = clamp_angle(physData->moveAngle + 180.0f);
+                        theta = physData->moveAngle * TAU / 360.0f;
+                        sinAngle = sin_rad(theta);
+                        cosAngle = cos_rad(theta);
+                        physData->velx = sinAngle * 2.0;
+                        physData->velz = cosAngle * -2.0;
+                    }
+                }
+
+                if (!(item->flags & ITEM_ENTITY_FLAGS_10000000) &&
+                    item->spawnType != ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS &&
+                    physData->verticalVelocity <= 0.0)
+                {
+                    physData->unk_20 = 1;
+                    if (item->spawnType != ITEM_SPAWN_MODE_TOSS_FADE1) {
+                        outX = item->position.x;
+                        outY = (item->position.y - physData->verticalVelocity) + 12.0f;
+                        outZ = item->position.z;
+                        outDepth = -physData->verticalVelocity + 12.0f;
+                        if (physData->unk_20 == 0) {
+                            hit = npc_raycast_down_sides(0x20000, &outX, &outY, &outZ, &outDepth);
+                        } else {
+                            hit = npc_raycast_down_around(0x20000, &outX, &outY, &outZ, &outDepth, 180.0f, 20.0f);
+                        }
+                    } else {
+                        outX = item->position.x;
+                        outY = (item->position.y - physData->verticalVelocity) + 12.0f;
+                        outZ = item->position.z;
+                        outDepth = -physData->verticalVelocity + 12.0f;
+                        if (outY < outDepth + 0.0f) {
+                            outY = 0.0f;
+                            hit = TRUE;
+                        } else {
+                            hit = FALSE;
+                        }
+                    }
+
+                    if (hit) {
+                        item->position.y = outY;
+                        physData->verticalVelocity = (-physData->verticalVelocity / 1.25);
+                        if (physData->verticalVelocity < 3.0) {
+                            physData->verticalVelocity = 0.0f;
+                            physData->velx = 0.0f;
+                            physData->velz = 0.0f;
+                            item->flags |= ITEM_ENTITY_FLAGS_20000000;
+                        } else {
+                            if (IS_ID_BADGE(item->itemID)) {
+                                sfx_play_sound_at_position(SOUND_21B, 0, item->position.x, item->position.y, item->position.z);
+                            } else if (IS_ID_ITEM(item->itemID)) {
+                                sfx_play_sound_at_position(SOUND_21A, 0, item->position.x, item->position.y, item->position.z);
+                            } else {
+                                switch (item->itemID) {
+                                    case ITEM_HEART:
+                                        sfx_play_sound_at_position(SOUND_214, 0, item->position.x, item->position.y, item->position.z);
+                                        break;
+                                    case ITEM_COIN:
+                                        sfx_play_sound_at_position(SOUND_212, 0, item->position.x, item->position.y, item->position.z);
+                                        break;
+                                    case ITEM_KOOPA_FORTRESS_KEY:
+                                        sfx_play_sound_at_position(SOUND_212, 0, item->position.x, item->position.y, item->position.z);
+                                        break;
+                                    case ITEM_HEART_PIECE:
+                                        sfx_play_sound_at_position(SOUND_214, 0, item->position.x, item->position.y, item->position.z);
+                                        break;
+                                    case ITEM_STAR_POINT:
+                                        sfx_play_sound_at_position(SOUND_212, 0, item->position.x, item->position.y, item->position.z);
+                                        break;
+                                    case ITEM_HEART_POINT:
+                                        sfx_play_sound_at_position(SOUND_214, 0, item->position.x, item->position.y, item->position.z);
+                                        break;
+                                    case ITEM_STAR_PIECE:
+                                        sfx_play_sound_at_position(SOUND_219, 0, item->position.x, item->position.y, item->position.z);
+                                        break;
+                                    case ITEM_FLOWER_POINT:
+                                        sfx_play_sound_at_position(SOUND_218, 0, item->position.x, item->position.y, item->position.z);
+                                        break;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if (item->position.y < -2000.0f) {
+                    item->state = 2;
+                }
+                break;
+        }
+
+        if (item->state == 2) {
+            remove_item_entity_by_reference(item);
+        }
+
+        if (item->state == 3) {
+            if (item->flags & ITEM_ENTITY_FLAGS_400) {
+                set_global_flag(item->boundVar);
+            }
+
+            fx_small_gold_sparkle(0, item->position.x, item->position.y + 16.0f, item->position.z, 1.0f, 0);
+
+            if (IS_ID_ITEM(item->itemID)) {
+                item->state = 0xA;
+            } else if (IS_ID_BADGE(item->itemID)) {
+                item->state = 0xA;
+            } else if (item->itemID == ITEM_STAR_PIECE) {
+                playerData->starPiecesCollected++;
+                item->state = 0xA;
+            } else {
+                if (item->spawnType == ITEM_SPAWN_MODE_TOSS_FADE1) {
+                    item->itemID = -1;
+                }
+
+                switch (item->itemID) {
+                    case ITEM_HEART:
+                        if (playerData->curHP < playerData->curMaxHP) {
+                            fx_recover(0, playerStatus->position.x, playerStatus->position.y + playerStatus->colliderHeight, playerStatus->position.z, 1);
+                            sfx_play_sound_at_position(SOUND_2056, 0, item->position.x, item->position.y, item->position.z);
+                        }
+                        playerData->curHP++;
+                        if (playerData->curHP > playerData->curMaxHP) {
+                            playerData->curHP = playerData->curMaxHP;
+                        }
+                        sfx_play_sound_at_position(SOUND_213, 0, item->position.x, item->position.y, item->position.z);
+                        fx_sparkles(4, playerStatus->position.x, playerStatus->position.y + playerStatus->colliderHeight, playerStatus->position.z, 30.0f);
+                        break;
+                    case ITEM_FLOWER_POINT:
+                        if (playerData->curFP < playerData->curMaxFP) {
+                            fx_recover(1, playerStatus->position.x, playerStatus->position.y + playerStatus->colliderHeight, playerStatus->position.z, 1);
+                            sfx_play_sound_at_position(SOUND_2056, 0, item->position.x, item->position.y, item->position.z);
+                        }
+                        playerData->curFP++;
+                        if (playerData->curFP > playerData->curMaxFP) {
+                            playerData->curFP = playerData->curMaxFP;
+                        }
+                        sfx_play_sound_at_position(SOUND_217, 0, item->position.x, item->position.y, item->position.z);
+                        fx_sparkles(4, playerStatus->position.x, playerStatus->position.y + playerStatus->colliderHeight, playerStatus->position.z, 30.0f);
+                        break;
+                    case ITEM_COIN:
+                        playerData->coins++;
+                        if (playerData->coins > 999) {
+                            playerData->coins = 999;
+                        }
+                        sfx_play_sound_at_position(SOUND_211, 0, item->position.x, item->position.y, item->position.z);
+                        playerData->totalCoinsEarned++;
+                        if (playerData->totalCoinsEarned > 99999) {
+                            playerData->totalCoinsEarned = 99999;
+                        }
+                        break;
+                    case ITEM_KOOPA_FORTRESS_KEY:
+                        playerData->fortressKeyCount = playerData->fortressKeyCount + 1;
+                        sfx_play_sound_at_position(SOUND_211, 0, item->position.x, item->position.y, item->position.z);
+                        break;
+                    case ITEM_STAR_POINT:
+                        playerData->starPoints++;
+                        if (playerData->starPoints > 100) {
+                            playerData->starPoints = 100;
+                        }
+                        sfx_play_sound_at_position(SOUND_211, 0, item->position.x, item->position.y, item->position.z);
+                        break;
+                    case ITEM_HEART_POINT:
+                        playerData->curHP = playerData->curMaxHP;
+                        playerData->curFP = playerData->curMaxFP;
+                        sfx_play_sound_at_position(SOUND_213, 0, item->position.x, item->position.y, item->position.z);
+                        break;
+                }
+                D_801565A8 = 0;
+                gOverrideFlags &= ~GLOBAL_OVERRIDES_40;
+                remove_item_entity_by_reference(item);
+            }
+        }
+
+        if (item->state == 4) {
+            if (!does_script_exist(D_80155D80)) {
+                D_801565A8 = 0;
+                remove_item_entity_by_reference(item);
+                resume_all_group(2);
+            }
+        }
+
+        if (item->state == 0xA) {
+            isPickingUpItem = TRUE;
+            item->spawnType = ITEM_SPAWN_AT_PLAYER;
+            item->state = 0;
+            D_801565A8 = 0;
+            gOverrideFlags |= GLOBAL_OVERRIDES_40;
+        }
+    }
+}
 
 void func_8013559C(ItemEntity* itemEntity) {
     if (itemEntity->state == 1) {
