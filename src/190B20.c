@@ -858,11 +858,11 @@ void load_player_actor(void) {
     player->stoneDuration = 0;
     player->koStatus = 0;
     player->koDuration = 0;
-    player->transStatus = 0;
-    player->transDuration = 0;
+    player->transparentStatus = 0;
+    player->transparentDuration = 0;
     player->isGlowing = 0;
     player->unk_21E = 0;
-    player->unk_21D = 0;
+    player->disableDismissTimer = 0;
     player->attackBoost = 0;
     player->defenseBoost = 0;
     player->chillOutAmount = 0;
@@ -877,8 +877,8 @@ void load_player_actor(void) {
     player->actorTypeData1b[0] = bActorSoundTable[player->actorType].delay[0];
     player->actorTypeData1b[1] = bActorSoundTable[player->actorType].delay[1];
 
-    for (i = 0; i < ARRAY_COUNT(player->unk_438); i++) {
-        player->unk_438[i] = 0;
+    for (i = 0; i < ARRAY_COUNT(player->loopingSoundID); i++) {
+        player->loopingSoundID[i] = 0;
     }
 
     part = heap_malloc(sizeof(*part));
@@ -984,7 +984,7 @@ void load_player_actor(void) {
     player->shadow.id = create_shadow_type(0, player->currentPos.x, player->currentPos.y, player->currentPos.z);
     player->shadowScale = player->size.x / 24.0;
     player->hudElementDataIndex = create_status_icon_set();
-    player->debuffEffect = fx_disable_x(0, -142.0f, 34.0f, 1.0f, 0);
+    player->disableEffect = fx_disable_x(0, -142.0f, 34.0f, 1.0f, 0);
     player->icePillarEffect = NULL;
 
     if (is_ability_active(ABILITY_ZAP_TAP)) {
@@ -1097,11 +1097,11 @@ void load_partner_actor(void) {
         partnerActor->stoneDuration = 0;
         partnerActor->koStatus = 0;
         partnerActor->koDuration = 0;
-        partnerActor->transStatus = 0;
-        partnerActor->transDuration = 0;
+        partnerActor->transparentStatus = 0;
+        partnerActor->transparentDuration = 0;
         partnerActor->isGlowing = 0;
         partnerActor->unk_21E = 0;
-        partnerActor->unk_21D = 0;
+        partnerActor->disableDismissTimer = 0;
         partnerActor->attackBoost = 0;
         partnerActor->defenseBoost = 0;
         partnerActor->chillOutAmount = 0;
@@ -1116,8 +1116,8 @@ void load_partner_actor(void) {
         partnerActor->actorTypeData1b[0] = bActorSoundTable[partnerActor->actorType].delay[0];
         partnerActor->actorTypeData1b[1] = bActorSoundTable[partnerActor->actorType].delay[1];
 
-        for (i2 = 0; i2 < ARRAY_COUNT(partnerActor->unk_438); i2++) {
-            partnerActor->unk_438[i2] = 0;
+        for (i2 = 0; i2 < ARRAY_COUNT(partnerActor->loopingSoundID); i2++) {
+            partnerActor->loopingSoundID[i2] = 0;
         }
 
         part = heap_malloc(sizeof(*part));
@@ -1238,7 +1238,7 @@ void load_partner_actor(void) {
         partnerActor->shadow.id = create_shadow_type(0, partnerActor->currentPos.x, partnerActor->currentPos.y, partnerActor->currentPos.z);
         partnerActor->shadowScale = partnerActor->size.x / 24.0;
         partnerActor->hudElementDataIndex = create_status_icon_set();
-        partnerActor->debuffEffect = fx_disable_x(0, -142.0f, 34.0f, 1.0f, 0);
+        partnerActor->disableEffect = fx_disable_x(0, -142.0f, 34.0f, 1.0f, 0);
         partnerActor->icePillarEffect = NULL;
 
         takeTurnScript = start_script(partnerActor->takeTurnScriptSource, EVT_PRIORITY_A, 0);
@@ -1349,11 +1349,11 @@ Actor* create_actor(Formation formation) {
     actor->stoneDuration = 0;
     actor->koStatus = 0;
     actor->koDuration = 0;
-    actor->transStatus = 0;
-    actor->transDuration = 0;
+    actor->transparentStatus = 0;
+    actor->transparentDuration = 0;
     actor->isGlowing = 0;
     actor->unk_21E = 0;
-    actor->unk_21D = 0;
+    actor->disableDismissTimer = 0;
     actor->attackBoost = 0;
     actor->defenseBoost = 0;
     actor->chillOutAmount = 0;
@@ -1368,8 +1368,8 @@ Actor* create_actor(Formation formation) {
     actor->actorTypeData1b[0] = bActorSoundTable[actor->actorType].delay[0];
     actor->actorTypeData1b[1] = bActorSoundTable[actor->actorType].delay[1];
 
-    for (i = 0; i < ARRAY_COUNT(actor->unk_438); i++) {
-        actor->unk_438[i] = 0;
+    for (i = 0; i < ARRAY_COUNT(actor->loopingSoundID); i++) {
+        actor->loopingSoundID[i] = 0;
     }
 
     actor->state.varTable[0] = formation->var0;
@@ -1509,7 +1509,7 @@ Actor* create_actor(Formation formation) {
     takeTurnScript->owner1.enemyID = actor->enemyIndex | 0x200;
     actor->shadow.id = create_shadow_type(0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z);
     actor->shadowScale = actor->size.x / 24.0;
-    actor->debuffEffect = fx_disable_x(0, -142.0f, 34.0f, 1.0f, 0);
+    actor->disableEffect = fx_disable_x(0, -142.0f, 34.0f, 1.0f, 0);
     actor->icePillarEffect = NULL;
     actor->hudElementDataIndex = create_status_icon_set();
     return actor;
@@ -1674,7 +1674,7 @@ s32 inflict_status(Actor* target, s32 statusTypeKey, s32 duration) {
                     if (target->debuff != statusTypeKey) {
                         target->status = statusTypeKey;
                     }
-                    target->debuffEffect->data.disableX->unk_3C = 0;
+                    target->disableEffect->data.disableX->unk_3C = 0;
                     target->debuff = statusTypeKey;
                     target->debuffDuration = duration;
                     if ((s8)duration > 9) {
@@ -1756,10 +1756,10 @@ s32 inflict_status(Actor* target, s32 statusTypeKey, s32 duration) {
             return TRUE;
         case STATUS_TRANSPARENT:
             if (target->actorID != ACTOR_PARTNER) {
-                target->transStatus = STATUS_TRANSPARENT;
-                target->transDuration = duration;
+                target->transparentStatus = STATUS_TRANSPARENT;
+                target->transparentDuration = duration;
                 if ((s8)duration > 9) {
-                    target->transDuration = 9;
+                    target->transparentDuration = 9;
                 }
                 target->status = STATUS_TRANSPARENT;
                 create_status_transparent(target->hudElementDataIndex, STATUS_TRANSPARENT);
@@ -2472,15 +2472,15 @@ void remove_player_buffs(s32 buffs) {
         player->staticStatus = 0;
         remove_status_static(player->hudElementDataIndex);
     }
-    if (buffs & 0x40 && (player->transStatus != 0)) {
-        player->transDuration = 0;
-        player->transStatus = 0;
+    if (buffs & 0x40 && (player->transparentStatus != 0)) {
+        player->transparentDuration = 0;
+        player->transparentStatus = 0;
         playerPartsTable->flags &= ~0x100;
         remove_status_transparent(player->hudElementDataIndex);
     }
     if (buffs & 0x200 && (battleStatus->waterBlockTurnsLeft != 0)) {
         battleStatus->waterBlockTurnsLeft = 0;
-        battleStatus->unk_43C->unk_0C->unk_10 = 0;
+        battleStatus->buffEffect->data.partnerBuff->unk_0C[FX_BUFF_DATA_WATER_BLOCK].turnsLeft = 0;
         battleStatus->waterBlockEffect->flags |= 0x10;
 
         fx_water_block(1, player->currentPos.x, player->currentPos.y + 18.0f, player->currentPos.z + 5.0f, 1.5f, 0xA);
@@ -2493,11 +2493,11 @@ void remove_player_buffs(s32 buffs) {
     }
     if (buffs & 0x100 && (battleStatus->turboChargeTurnsLeft != 0)) {
         battleStatus->turboChargeTurnsLeft = 0;
-        battleStatus->unk_43C->unk_0C->unk_24 = 0;
+        battleStatus->buffEffect->data.partnerBuff->unk_0C[FX_BUFF_DATA_TURBO_CHARGE].turnsLeft = 0;
     }
     if (buffs & 0x80 && (battleStatus->cloudNineTurnsLeft != 0)) {
         battleStatus->cloudNineTurnsLeft = 0;
-        battleStatus->unk_43C->unk_0C->unk_1A = 0;
+        battleStatus->buffEffect->data.partnerBuff->unk_0C[FX_BUFF_DATA_CLOUD_NINE].turnsLeft = 0;
         remove_effect(battleStatus->cloudNineEffect);
         battleStatus->cloudNineEffect = NULL;
     }
@@ -2518,7 +2518,7 @@ void btl_update_ko_status(void) {
     player->koDuration = player->debuffDuration;
     if (player->koDuration > 0) {
         player->koStatus = STATUS_DAZE;
-        player->debuffEffect->data.disableX->unk_3C = player->koDuration;
+        player->disableEffect->data.disableX->unk_3C = player->koDuration;
 
         if (koDuration == 0) {
             sfx_play_sound(SOUND_2107);
@@ -2533,7 +2533,7 @@ void btl_update_ko_status(void) {
 
         if (partner->koDuration > 0) {
             partner->koStatus = STATUS_DAZE;
-            partner->debuffEffect->data.disableX->unk_3C = partner->koDuration;
+            partner->disableEffect->data.disableX->unk_3C = partner->koDuration;
         }
     }
 
@@ -2544,7 +2544,7 @@ void btl_update_ko_status(void) {
             enemy->koDuration = enemy->debuffDuration;
             if (enemy->koDuration > 0) {
                 enemy->koStatus = STATUS_DAZE;
-                enemy->debuffEffect->data.disableX->unk_3C = enemy->koDuration;
+                enemy->disableEffect->data.disableX->unk_3C = enemy->koDuration;
             }
         }
     }

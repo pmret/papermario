@@ -198,7 +198,7 @@ void initialize_battle(void) {
     }
 
     create_generic_entity_world(NULL, func_8023ED5C);
-    func_8024EDC0();
+    btl_popup_messages_init();
     func_80268E88();
     set_windows_visible(WINDOW_GROUP_1);
     D_8029EFBC = hud_element_create(&HES_HPBar);
@@ -409,7 +409,7 @@ void btl_update(void) {
     func_80266684();
     func_80266978();
     func_80266B14();
-    func_8024EE48();
+    btl_popup_messages_update();
     update_actor_shadows();
 
     if (battleStatus->unk_432 != -2) {
@@ -608,7 +608,7 @@ void btl_draw_ui(void) {
                 break;
         }
     }
-    btl_draw_popup_messages();
+    btl_popup_messages_draw_ui();
     draw_status_ui();
 }
 
@@ -620,7 +620,7 @@ void func_8023ED5C(void) {
     s32 i;
 
     if (gBattleState != BATTLE_STATE_0) {
-        func_8024EEA8();
+        btl_popup_messages_draw_world_geometry();
         if (battleStatus->initBattleCallback != NULL) {
             battleStatus->initBattleCallback();
         }
@@ -633,14 +633,14 @@ void func_8023ED5C(void) {
 
                     if (actor != NULL && !(actor->flags & ACTOR_FLAG_DISABLED)) {
                         renderTaskPtr->appendGfxArg = (void*)i;
-                        renderTaskPtr->appendGfx = func_80257B28;
+                        renderTaskPtr->appendGfx = appendGfx_enemy_actor;
                         renderTaskPtr->distance = actor->currentPos.z;
                         renderTaskPtr->renderMode = actor->renderMode;
                         queue_render_task(renderTaskPtr);
 
-                        if (actor->flags & ACTOR_FLAG_10000000) {
+                        if (actor->flags & ACTOR_FLAG_BLUR_ENABLED) {
                             renderTaskPtr->appendGfxArg = actor;
-                            renderTaskPtr->appendGfx = func_8025595C;
+                            renderTaskPtr->appendGfx = appendGfx_enemy_actor_blur;
                             renderTaskPtr->distance = actor->currentPos.z;
                             renderTaskPtr->renderMode = RENDER_MODE_SURFACE_XLU_LAYER3;
                             queue_render_task(renderTaskPtr);
@@ -648,7 +648,7 @@ void func_8023ED5C(void) {
 
                         if (battleStatus->unk_92 & 1) {
                             renderTaskPtr->appendGfxArg = actor;
-                            renderTaskPtr->appendGfx = func_80257B68;
+                            renderTaskPtr->appendGfx = appendGfx_enemy_actor_decorations;
                             renderTaskPtr->distance = actor->currentPos.z;
                             renderTaskPtr->renderMode = actor->renderMode;
                             queue_render_task(renderTaskPtr);
@@ -659,14 +659,14 @@ void func_8023ED5C(void) {
                 actor = battleStatus->partnerActor;
                 if (actor != NULL && !(actor->flags & ACTOR_FLAG_DISABLED)) {
                     renderTaskPtr->appendGfxArg = NULL;
-                    renderTaskPtr->appendGfx = func_80257B48;
+                    renderTaskPtr->appendGfx = appendGfx_partner_actor;
                     renderTaskPtr->distance = actor->currentPos.z;
                     renderTaskPtr->renderMode = actor->renderMode;
                     queue_render_task(renderTaskPtr);
 
-                    if (actor->flags & ACTOR_FLAG_10000000) {
+                    if (actor->flags & ACTOR_FLAG_BLUR_ENABLED) {
                         renderTaskPtr->appendGfxArg = actor;
-                        renderTaskPtr->appendGfx = func_8025599C;
+                        renderTaskPtr->appendGfx = appendGfx_partner_actor_blur;
                         renderTaskPtr->distance = actor->currentPos.z;
                         renderTaskPtr->renderMode = RENDER_MODE_SURFACE_XLU_LAYER3;
                         queue_render_task(renderTaskPtr);
@@ -684,14 +684,14 @@ void func_8023ED5C(void) {
                 actor = battleStatus->playerActor;
                 if (actor != NULL && !(actor->flags & ACTOR_FLAG_DISABLED)) {
                     renderTaskPtr->appendGfxArg = NULL;
-                    renderTaskPtr->appendGfx = func_80257DA4;
+                    renderTaskPtr->appendGfx = appendGfx_player_actor;
                     renderTaskPtr->distance = actor->currentPos.z;
                     renderTaskPtr->renderMode = actor->renderMode;
                     queue_render_task(renderTaskPtr);
 
-                    if (actor->flags & ACTOR_FLAG_10000000) {
+                    if (actor->flags & ACTOR_FLAG_BLUR_ENABLED) {
                         renderTaskPtr->appendGfxArg = actor;
-                        renderTaskPtr->appendGfx = func_80254C50;
+                        renderTaskPtr->appendGfx = appendGfx_player_actor_blur;
                         renderTaskPtr->distance = actor->currentPos.z;
                         renderTaskPtr->renderMode = RENDER_MODE_SURFACE_XLU_LAYER3;
                         queue_render_task(renderTaskPtr);
@@ -1027,7 +1027,7 @@ void btl_delete_actor(Actor* actor) {
 
     delete_shadow(actor->shadow.id);
     remove_all_status_icons(actor->hudElementDataIndex);
-    remove_effect(actor->debuffEffect);
+    remove_effect(actor->disableEffect);
 
     if (actor->attackResultEffect != NULL) {
         actor->attackResultEffect->data.attackResultText->unk_24 = 0;
@@ -1070,7 +1070,7 @@ void btl_delete_player_actor(Actor* player) {
 
     delete_shadow(player->shadow.id);
     remove_all_status_icons(player->hudElementDataIndex);
-    remove_effect(player->debuffEffect);
+    remove_effect(player->disableEffect);
 
     if (player->attackResultEffect != NULL) {
         player->attackResultEffect->data.attackResultText->unk_24 = 0;

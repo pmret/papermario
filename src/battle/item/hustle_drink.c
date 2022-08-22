@@ -20,9 +20,9 @@ ApiStatus N(func_802A123C_72619C)(Evt* script, s32 isInitialCall) {
         player->stoneDuration = 0;
         player->stoneStatus = 0;
     }
-    if (player->transStatus != 0) {
-        player->transDuration = 0;
-        player->transStatus = 0;
+    if (player->transparentStatus != 0) {
+        player->transparentDuration = 0;
+        player->transparentStatus = 0;
     }
 
     return ApiStatus_DONE2;

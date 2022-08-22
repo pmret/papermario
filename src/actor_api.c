@@ -2816,7 +2816,7 @@ ApiStatus GetStatusFlags(Evt* script, s32 isInitialCall) {
             break;
     }
 
-    switch (actor->transStatus) {
+    switch (actor->transparentStatus) {
         case STATUS_END:
             break;
         case STATUS_TRANSPARENT:

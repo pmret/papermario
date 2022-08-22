@@ -349,7 +349,7 @@ ApiStatus func_80238CE0_700A60(Evt* script, s32 isInitialCall) {
     s32 airLiftChance = targetActor->actorBlueprint->airLiftChance;
     s32 hpPercentLost = 100 - (targetActor->currentHP * 100) / targetActor->maxHP;
 
-    if (targetActor->transStatus == STATUS_TRANSPARENT) {
+    if (targetActor->transparentStatus == STATUS_TRANSPARENT) {
         airLiftChance = 0;
     }
 

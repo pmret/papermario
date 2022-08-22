@@ -210,11 +210,11 @@ void btl_state_update_begin_turn(void) {
         battleStatus->merleeAttackBoost = 0;
         battleStatus->merleeDefenseBoost = 0;
         battleStatus->flags2 &= ~BS_FLAGS2_1000000;
-        player->unk_21D = 0;
+        player->disableDismissTimer = 0;
         player->flags |= ACTOR_FLAG_8000000 | ACTOR_FLAG_4000000;
         if (partner != NULL) {
             player->flags |= ACTOR_FLAG_8000000 | ACTOR_FLAG_4000000;
-            partner->unk_21D = 0;
+            partner->disableDismissTimer = 0;
         }
 
         if (battleStatus->hustleTurns != 0) {
@@ -422,7 +422,7 @@ void btl_state_update_begin_player_turn(void) {
         if (gBattleState2 == BATTLE_STATE2_PLAYER_DEFEATED && (battleStatus->unk_8C == 0)) {
             if (battleStatus->waterBlockTurnsLeft != 0) {
                 battleStatus->waterBlockTurnsLeft--;
-                battleStatus->unk_43C->unk_0C->unk_10 = battleStatus->waterBlockTurnsLeft;
+                battleStatus->buffEffect->data.partnerBuff->unk_0C[FX_BUFF_DATA_WATER_BLOCK].unk_04 = battleStatus->waterBlockTurnsLeft;
                 if (battleStatus->waterBlockTurnsLeft <= 0) {
                     battleStatus->waterBlockEffect->flags |= 0x10;
                     fx_water_block(1, player->currentPos.x, player->currentPos.y + 18.0f, player->currentPos.z + 5.0f, 1.5f, 10);
@@ -448,7 +448,7 @@ void btl_state_update_begin_player_turn(void) {
         case BATTLE_STATE2_UNK_B:
             if (battleStatus->cloudNineTurnsLeft != 0) {
                 battleStatus->cloudNineTurnsLeft--;
-                battleStatus->unk_43C->unk_0C->unk_1A = battleStatus->cloudNineTurnsLeft;
+                battleStatus->buffEffect->data.partnerBuff->unk_0C[FX_BUFF_DATA_CLOUD_NINE].unk_04 = battleStatus->cloudNineTurnsLeft;
 
                 if (battleStatus->cloudNineTurnsLeft <= 0) {
                     remove_effect(battleStatus->cloudNineEffect);
@@ -477,7 +477,7 @@ void btl_state_update_begin_player_turn(void) {
                     gBattleState2 = BATTLE_STATE2_UNK_15;
                 } else {
                     battleStatus->turboChargeTurnsLeft--;
-                    battleStatus->unk_43C->unk_0C->unk_24 = battleStatus->turboChargeTurnsLeft;
+                    battleStatus->buffEffect->data.partnerBuff->unk_0C[FX_BUFF_DATA_TURBO_CHARGE].unk_04 = battleStatus->turboChargeTurnsLeft;
                     if (battleStatus->turboChargeTurnsLeft <= 0) {
                         btl_show_battle_message(0x2B, 60);
                         gBattleState2 = BATTLE_STATE2_UNK_10;
@@ -593,11 +593,11 @@ void btl_state_update_begin_player_turn(void) {
                 player->koDuration = debuffDuration;
                 if ((s8) debuffDuration > 0) {
                     player->koStatus = 0xD;
-                    player->debuffEffect->data.disableX->unk_3C = player->koDuration;
+                    player->disableEffect->data.disableX->unk_3C = player->koDuration;
                 } else if (koDuration != (s8) debuffDuration) {
                     player->koStatus = 0;
                     player->koDuration = 0;
-                    player->debuffEffect->data.disableX->unk_3C = 0;
+                    player->disableEffect->data.disableX->unk_3C = 0;
                 }
             }
 
@@ -775,11 +775,11 @@ void btl_state_update_begin_partner_turn(void) {
                 D_8029F254 = 1;
                 D_8029F258 = 20;
                 if (partner->koDuration > 0) {
-                    partner->debuffEffect->data.disableX->unk_3C = partner->koDuration;
+                    partner->disableEffect->data.disableX->unk_3C = partner->koDuration;
                 } else {
                     partner->koStatus = 0;
                     dispatch_event_partner(EVENT_RECOVER_PARTNER);
-                    partner->debuffEffect->data.disableX->unk_3C = 0;
+                    partner->disableEffect->data.disableX->unk_3C = 0;
                     gBattleStatus.flags2 |= BS_FLAGS2_8;
                 }
             }
@@ -985,10 +985,10 @@ void btl_state_update_victory(void) {
             player->debuff = 0;
             player->staticStatus = 0;
             player->stoneStatus = 0;
-            player->transStatus = 0;
+            player->transparentStatus = 0;
             player->koStatus = 0;
             player->koDuration = 0;
-            player->debuffEffect->data.disableX->unk_3C = 0;
+            player->disableEffect->data.disableX->unk_3C = 0;
 
             if (partner != NULL) {
                 if (partner->koStatus == STATUS_DAZE) {
@@ -998,10 +998,10 @@ void btl_state_update_victory(void) {
                 partner->debuff = 0;
                 partner->staticStatus = 0;
                 partner->stoneStatus = 0;
-                partner->transStatus = 0;
+                partner->transparentStatus = 0;
                 partner->koStatus = 0;
                 partner->koDuration = 0;
-                partner->debuffEffect->data.disableX->unk_3C = 0;
+                partner->disableEffect->data.disableX->unk_3C = 0;
             }
             break;
         case BATTLE_STATE2_PLAYER_DEFEATED:
@@ -1155,10 +1155,10 @@ void btl_state_update_end_training_battle(void) {
             player->debuff = 0;
             player->staticStatus = 0;
             player->stoneStatus = 0;
-            player->transStatus = 0;
+            player->transparentStatus = 0;
             player->koStatus = 0;
             player->koDuration = 0;
-            player->debuffEffect->data.disableX->unk_3C = 0;
+            player->disableEffect->data.disableX->unk_3C = 0;
             if (partner != NULL) {
                 if (partner->koStatus == STATUS_DAZE) {
                     dispatch_event_partner(EVENT_RECOVER_PARTNER);
@@ -1167,10 +1167,10 @@ void btl_state_update_end_training_battle(void) {
                 partner->debuff = 0;
                 partner->staticStatus = 0;
                 partner->stoneStatus = 0;
-                partner->transStatus = 0;
+                partner->transparentStatus = 0;
                 partner->koStatus = 0;
                 partner->koDuration = 0;
-                partner->debuffEffect->data.disableX->unk_3C = 0;
+                partner->disableEffect->data.disableX->unk_3C = 0;
             }
             break;
         case BATTLE_STATE2_PLAYER_DEFEATED:
@@ -1575,7 +1575,7 @@ void btl_state_update_defeat(void) {
                 remove_status_debuff(player->hudElementDataIndex);
                 player->koStatus = 0;
                 player->koDuration = 0;
-                player->debuffEffect->data.disableX->unk_3C = 0;
+                player->disableEffect->data.disableX->unk_3C = 0;
             }
 
             btl_cam_use_preset(BTL_CAM_PRESET_25);
@@ -1911,7 +1911,7 @@ void btl_state_update_partner_move(void) {
                                     btl_cam_use_preset(BTL_CAM_PRESET_54);
                                     btl_show_battle_message(0x23, 60);
                                     partner->status = 0;
-                                    partner->unk_21D = 0;
+                                    partner->disableDismissTimer = 0;
                                     gBattleState2 = BATTLE_STATE2_UNK_B;
                                     partner->flags |= ACTOR_FLAG_8000000;
                                 } else {

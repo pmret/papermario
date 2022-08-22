@@ -197,7 +197,7 @@ s32 calc_player_test_enemy(void) {
 
     if (part->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY) {
         return HIT_RESULT_MISS;
-    } else if (target->transStatus == STATUS_TRANSPARENT || ((part->eventFlags & ACTOR_EVENT_FLAG_800) &&
+    } else if (target->transparentStatus == STATUS_TRANSPARENT || ((part->eventFlags & ACTOR_EVENT_FLAG_800) &&
                !(battleStatus->currentAttackElement & DAMAGE_TYPE_QUAKE)))
     {
         return HIT_RESULT_MISS;
@@ -286,7 +286,7 @@ s32 calc_player_damage_enemy(void) {
             }
         }
 
-        if (targetPart->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY || (target->transStatus == STATUS_TRANSPARENT ||
+        if (targetPart->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY || (target->transparentStatus == STATUS_TRANSPARENT ||
                 targetPart->eventFlags & ACTOR_EVENT_FLAG_800 && !(battleStatus->currentAttackElement & DAMAGE_TYPE_QUAKE))) {
             return 6;
         }

@@ -188,7 +188,7 @@ s32 calc_partner_damage_enemy(void) {
         dispatchEvent = EVENT_UNKNOWN_TRIGGER;
         sfx_play_sound_at_position(SOUND_IMMUNE, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     } else {
-        if (targetPart->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY || target->transStatus == STATUS_TRANSPARENT ||
+        if (targetPart->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY || target->transparentStatus == STATUS_TRANSPARENT ||
             targetPart->eventFlags & ACTOR_EVENT_FLAG_800 && !(battleStatus->currentAttackElement & DAMAGE_TYPE_QUAKE)) {
             return 6;
         }

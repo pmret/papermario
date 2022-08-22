@@ -2369,7 +2369,7 @@ enum ActorFlags {
     ACTOR_FLAG_NO_DMG_POPUP      = 0x02000000, ///< Hide damage popup.
     ACTOR_FLAG_4000000           = 0x04000000,
     ACTOR_FLAG_8000000           = 0x08000000,
-    ACTOR_FLAG_10000000          = 0x10000000,
+    ACTOR_FLAG_BLUR_ENABLED      = 0x10000000,
     ACTOR_FLAG_20000000          = 0x20000000,
     ACTOR_FLAG_40000000          = 0x40000000,
     ACTOR_FLAG_80000000          = 0x80000000,

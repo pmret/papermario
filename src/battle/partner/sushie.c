@@ -96,7 +96,7 @@ ApiStatus func_80238328_707FC8(Evt* script, s32 isInitialCall) {
     if (battleStatus->waterBlockTurnsLeft < var) {
         battleStatus->waterBlockTurnsLeft = var;
         battleStatus->waterBlockAmount = 1;
-        battleStatus->unk_43C->unk_0C->unk_10 = battleStatus->waterBlockTurnsLeft;
+        battleStatus->buffEffect->data.partnerBuff->unk_0C[FX_BUFF_DATA_WATER_BLOCK].turnsLeft = battleStatus->waterBlockTurnsLeft;
     }
 
     return ApiStatus_DONE2;
