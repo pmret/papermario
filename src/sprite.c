@@ -666,17 +666,17 @@ s32 spr_free_sprite(s32 spriteInstanceID) {
     return 0;
 }
 
-s32 func_802DE748(s32 arg0, s32 arg1) {
-    SpriteComponent** componentList = D_802DFA48[arg0].componentList;
+s32 func_802DE748(s32 spriteIdx, s32 compIdx) {
+    SpriteComponent** componentList = D_802DFA48[spriteIdx].componentList;
 
     if (componentList == NULL) {
         return -1;
     }
 
-    return componentList[arg1]->unk_4C & 0xFF;
+    return componentList[compIdx]->unk_4C & 0xFF;
 }
 
-void func_802DE780(s32 spriteIdx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7) {
+void func_802DE780(s32 spriteIdx, s32 compIdx, s32 foldType, s32 foldArg0, s32 foldArg1, s32 foldArg2, s32 foldArg3, s32 foldArg4) {
     SpriteInstance* sprite = &D_802DFA48[spriteIdx];
     SpriteComponent** componentList;
     s32 i;
@@ -688,9 +688,9 @@ void func_802DE780(s32 spriteIdx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 ar
         while ((s32) *componentList != -1) {
             SpriteComponent* comp = *componentList;
 
-            if (arg1 == -1 || i == arg1) {
-                fold_update((u8)comp->unk_4C, arg2, arg3, arg4, arg5, arg6, arg7);
-                if (arg2 != FOLD_TYPE_NONE) {
+            if (compIdx == -1 || i == compIdx) {
+                fold_update((u8)comp->unk_4C, foldType, foldArg0, foldArg1, foldArg2, foldArg3, foldArg4);
+                if (foldType != FOLD_TYPE_NONE) {
                     comp->unk_4C |= 0x10000000;
                 } else {
                     comp->unk_4C &= ~0xF0000000;
@@ -702,8 +702,8 @@ void func_802DE780(s32 spriteIdx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 ar
     }
 }
 
-void func_802DE894(s32 spriteIdx, s32 compListIdx, s32 foldType, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
-    func_802DE780(spriteIdx, -1, compListIdx, foldType, arg3, arg4, arg5, arg6);
+void func_802DE894(s32 spriteIdx, s32 foldType, s32 foldArg0, s32 foldArg1, s32 foldArg2, s32 foldArg3, s32 foldArg4) {
+    func_802DE780(spriteIdx, -1, foldType, foldArg0, foldArg1, foldArg2, foldArg3, foldArg4);
 }
 
 // animList issue

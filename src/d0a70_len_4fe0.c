@@ -424,7 +424,7 @@ void fold_update(u32 idx, FoldType type, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
             if (arg6 != 0) {
                 state->flags |= arg6;
             } else {
-                state->flags = state->flags; // required to match
+                state->flags |= arg6; // required to match
             }
             return;
         case FOLD_TYPE_1:

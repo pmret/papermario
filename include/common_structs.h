@@ -223,7 +223,7 @@ typedef struct Npc {
     /* 0x0AC */ u8 alpha;
     /* 0x0AD */ u8 alpha2; ///< Multiplied with Npc::alpha
     /* 0x0AE */ char unk_AE[2];
-    /* 0x0B0 */ u32** extraAnimList;
+    /* 0x0B0 */ AnimID** extraAnimList;
     /* 0x0B4 */ s8 palSwapType; // 0..4 inclusive
     /* 0x0B5 */ s8 palSwapPrevType;
     /* 0x0B6 */ s8 dirtyPalettes;
@@ -1611,6 +1611,8 @@ typedef struct DecorationUnk {
     /* 0x0E */ s16 unk0E;
 } DecorationUnk; // size = 0x10
 
+#define MAX_ACTOR_DECORATIONS 2
+
 typedef struct DecorationTable {
     /* 0x000 */ PAL_BIN copiedPalettes[54][16];
     /* 0x6C0 */ s8 unk_6C0;
@@ -1619,10 +1621,10 @@ typedef struct DecorationTable {
     /* 0x6C3 */ char unk_6C3[5];
     /* 0x6C8 */ s16 unk_6C8;
     /* 0x6CA */ s16 unk_6CA;
-    /* 0x6CC */ s8 unk_6CC;
-    /* 0x6CD */ s8 numPalettes;
+    /* 0x6CC */ s8 spriteColorVariations;
+    /* 0x6CD */ s8 numSpritePalettes;
     /* 0x6CE */ char unk_6CE[2];
-    /* 0x6D0 */ PAL_PTR* palettes;
+    /* 0x6D0 */ PAL_PTR* spritePalettes;
     /* 0x6D4 */ PAL_PTR unk_6D4[27];
     /* 0x740 */ s16 unk_740;
     /* 0x742 */ s16 unk_742;
@@ -1663,13 +1665,14 @@ typedef struct DecorationTable {
     /* 0x89C */ u8 rotZ[16];
     /* 0x8AC */ s8 effectType; /* 0 =  blur, 14 = none? */
     /* 0x8AD */ char unk_8AD[3];
-    /* 0x8B0 */ struct EffectInstance* effects[2];
-    /* 0x8B8 */ s8 decorationType[2];
-    /* 0x8BA */ u8 unk_8BA[2];
-    /* 0x8BC */ s8 unk_8BC[2];
-    /* 0x8BE */ s16 unk_8BE[2];
+    /* substruct for decorations? */
+    /* 0x8B0 */ struct EffectInstance* effect[MAX_ACTOR_DECORATIONS];
+    /* 0x8B8 */ s8 type[MAX_ACTOR_DECORATIONS];
+    /* 0x8BA */ u8 changed[MAX_ACTOR_DECORATIONS];
+    /* 0x8BC */ s8 state[MAX_ACTOR_DECORATIONS];
+    /* 0x8BE */ s16 stateResetTimer[MAX_ACTOR_DECORATIONS];
     /* 0x8C2 */ char unk_8C0[4];
-    /* 0x8C6 */ DecorationUnk unk_8C6[2];
+    /* 0x8C6 */ DecorationUnk unk_8C6[MAX_ACTOR_DECORATIONS];
 } DecorationTable; // size = 0x8E8
 
 typedef struct PlayerPathElement {

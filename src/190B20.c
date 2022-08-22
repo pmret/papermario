@@ -972,9 +972,9 @@ void load_player_actor(void) {
         decorationTable->unk_7DB = 0;
         decorationTable->effectType = 0;
 
-        for (j = 0; j < ARRAY_COUNT(decorationTable->effects); j++) {
-            decorationTable->effects[j] = NULL;
-            decorationTable->decorationType[j] = 0;
+        for (j = 0; j < ARRAY_COUNT(decorationTable->effect); j++) {
+            decorationTable->effect[j] = NULL;
+            decorationTable->type[j] = 0;
         }
     }
 
@@ -1201,9 +1201,9 @@ void load_partner_actor(void) {
                 decorationTable->unk_7DB = 0;
                 decorationTable->effectType = 0;
 
-                for (j = 0; j < ARRAY_COUNT(decorationTable->effects); j++) {
-                    decorationTable->effects[j] = NULL;
-                    decorationTable->decorationType[j] = 0;
+                for (j = 0; j < ARRAY_COUNT(decorationTable->effect); j++) {
+                    decorationTable->effect[j] = NULL;
+                    decorationTable->type[j] = 0;
                 }
             }
 
@@ -1463,9 +1463,9 @@ Actor* create_actor(Formation formation) {
             decorationTable->unk_7DB = 0;
             decorationTable->effectType = 0;
 
-            for (k = 0; k < ARRAY_COUNT(decorationTable->effects); k++) {
-                decorationTable->effects[k] = NULL;
-                decorationTable->decorationType[k] = 0;
+            for (k = 0; k < ARRAY_COUNT(decorationTable->effect); k++) {
+                decorationTable->effect[k] = NULL;
+                decorationTable->type[k] = 0;
             }
 
         }
@@ -2370,9 +2370,9 @@ void add_part_decoration(ActorPart* part, s32 decorationIndex, s32 decorationTyp
         DecorationTable* decorationTable = part->decorationTable;
 
         _remove_part_decoration(part, decorationIndex);
-        decorationTable->decorationType[decorationIndex] = decorationType;
-        decorationTable->unk_8BA[decorationIndex] = 1;
-        decorationTable->unk_8BC[decorationIndex] = 0;
+        decorationTable->type[decorationIndex] = decorationType;
+        decorationTable->changed[decorationIndex] = TRUE;
+        decorationTable->state[decorationIndex] = 0;
         _add_part_decoration(part);
     }
 }

@@ -1530,63 +1530,63 @@ void func_8003D3BC(Npc* npc) {
     s32 temp_s6 = npc->unk_A0;
     s32 temp_s3 = npc->unk_A2;
 
-    func_802DE894(npc->spriteInstanceID, 0, 0, 0, 0, 0, 0);
+    func_802DE894(npc->spriteInstanceID, FOLD_TYPE_NONE, 0, 0, 0, 0, 0);
 
     switch (temp_s4) {
-        case 0:
+        case FOLD_TYPE_NONE:
             npc->renderMode = 13;
-            func_802DE894(npc->spriteInstanceID, 0, 0, 0, 0, 0, temp_s3);
+            func_802DE894(npc->spriteInstanceID, FOLD_TYPE_NONE, 0, 0, 0, 0, temp_s3);
             break;
-        case 2:
-        case 3:
+        case FOLD_TYPE_2:
+        case FOLD_TYPE_3:
             npc->renderMode = 13;
             // fallthrough
-        case 1:
+        case FOLD_TYPE_1:
             func_802DE894(npc->spriteInstanceID, temp_s4, 0, 0, 0, 0, temp_s3);
             break;
-        case 4:
+        case FOLD_TYPE_4:
             npc->renderMode = 13;
-            func_802DE894(npc->spriteInstanceID, 4, temp_s0, temp_s5, temp_s2, 0, temp_s3);
+            func_802DE894(npc->spriteInstanceID, FOLD_TYPE_4, temp_s0, temp_s5, temp_s2, 0, temp_s3);
             break;
-        case 6:
+        case FOLD_TYPE_6:
             npc->renderMode = 13;
-            func_802DE894(npc->spriteInstanceID, 6, temp_s0, temp_s5, temp_s2, 255, temp_s3);
+            func_802DE894(npc->spriteInstanceID, FOLD_TYPE_6, temp_s0, temp_s5, temp_s2, 255, temp_s3);
             break;
-        case 7:
+        case FOLD_TYPE_7:
             npc->renderMode = 22;
-            func_802DE894(npc->spriteInstanceID, 7, 255, 255, 255, temp_s0, temp_s3);
+            func_802DE894(npc->spriteInstanceID, FOLD_TYPE_7, 255, 255, 255, temp_s0, temp_s3);
             break;
-        case 8:
+        case FOLD_TYPE_8:
             npc->renderMode = 22;
-            func_802DE894(npc->spriteInstanceID, 8, temp_s0, temp_s5, temp_s2, temp_s6, temp_s3);
+            func_802DE894(npc->spriteInstanceID, FOLD_TYPE_8, temp_s0, temp_s5, temp_s2, temp_s6, temp_s3);
             break;
-        case 9:
+        case FOLD_TYPE_9:
             npc->renderMode = 13;
-            func_802DE894(npc->spriteInstanceID, 9, temp_s0, temp_s5, temp_s2, 255, temp_s3);
+            func_802DE894(npc->spriteInstanceID, FOLD_TYPE_9, temp_s0, temp_s5, temp_s2, 255, temp_s3);
             break;
-        case 10:
+        case FOLD_TYPE_A:
             npc->renderMode = 22;
-            func_802DE894(npc->spriteInstanceID, 10, temp_s0, temp_s5, temp_s2, temp_s6, temp_s3);
+            func_802DE894(npc->spriteInstanceID, FOLD_TYPE_A, temp_s0, temp_s5, temp_s2, temp_s6, temp_s3);
             break;
-        case 5:
+        case FOLD_TYPE_5:
             npc->renderMode = 13;
-            func_802DE894(npc->spriteInstanceID, 5, temp_s0, temp_s5, temp_s2, 0, temp_s3);
+            func_802DE894(npc->spriteInstanceID, FOLD_TYPE_5, temp_s0, temp_s5, temp_s2, 0, temp_s3);
             break;
-        case 13:
+        case FOLD_TYPE_D:
             npc->renderMode = 22;
-            func_802DE894(npc->spriteInstanceID, 13, temp_s0, temp_s5, temp_s2, temp_s6, temp_s3);
+            func_802DE894(npc->spriteInstanceID, FOLD_TYPE_D, temp_s0, temp_s5, temp_s2, temp_s6, temp_s3);
             break;
-        case 14:
+        case FOLD_TYPE_E:
             npc->renderMode = 13;
-            func_802DE894(npc->spriteInstanceID, 14, temp_s0, temp_s5, temp_s2, 255, temp_s3);
+            func_802DE894(npc->spriteInstanceID, FOLD_TYPE_E, temp_s0, temp_s5, temp_s2, 255, temp_s3);
             break;
-        case 15:
+        case FOLD_TYPE_F:
             npc->renderMode = 13;
-            func_802DE894(npc->spriteInstanceID, 15, temp_s0, 255, 0, 255, temp_s3);
+            func_802DE894(npc->spriteInstanceID, FOLD_TYPE_F, temp_s0, 255, 0, 255, temp_s3);
             break;
-        case 16:
+        case FOLD_TYPE_10:
             npc->renderMode = 22;
-            func_802DE894(npc->spriteInstanceID, 15, temp_s0, temp_s5, 0, temp_s5, temp_s3);
+            func_802DE894(npc->spriteInstanceID, FOLD_TYPE_F, temp_s0, temp_s5, 0, temp_s5, temp_s3);
             break;
     }
 }

@@ -1511,17 +1511,17 @@ void func_802597B0(ActorPart* part, s32 yaw, Matrix4f mtx) {
     }
     
     if (decor->unk_768 != 0) {
-        decor->palettes = spr_get_player_palettes(part->currentAnimation >> 16);
-        decor->numPalettes = 0;
+        decor->spritePalettes = spr_get_player_palettes(part->currentAnimation >> 16);
+        decor->numSpritePalettes = 0;
         
-        while ((s32) decor->palettes[decor->numPalettes] != -1) {
-            decor->numPalettes++;
+        while ((s32) decor->spritePalettes[decor->numSpritePalettes] != -1) {
+            decor->numSpritePalettes++;
         }
         
-        for (i = 0; i < decor->numPalettes; i++) {
-            src = decor->palettes[i];
+        for (i = 0; i < decor->numSpritePalettes; i++) {
+            src = decor->spritePalettes[i];
             dest = decor->copiedPalettes[i];
-            if (decor->palettes[i] != NULL) {
+            if (decor->spritePalettes[i] != NULL) {
                 for (j = 0; j < 16; j++) {
                     *dest = *src;
                     dest++;
@@ -1529,7 +1529,7 @@ void func_802597B0(ActorPart* part, s32 yaw, Matrix4f mtx) {
                 }
             }
         }
-        for (i = 0; i < decor->numPalettes; i++) {
+        for (i = 0; i < decor->numSpritePalettes; i++) {
             decor->unk_6D4[i] = decor->copiedPalettes[i];
         }
         func_8025995C(part, yaw, mtx);
@@ -1584,24 +1584,24 @@ void func_80259AAC(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
 
     if (decorationTable->unk_6C1 != 0) {
         if (arg0 == 0) {
-            decorationTable->palettes = spr_get_player_palettes(part->currentAnimation >> 16);
-            decorationTable->numPalettes = 0;
-            while ((s32)decorationTable->palettes[decorationTable->numPalettes] != -1) {
-                decorationTable->numPalettes++;
+            decorationTable->spritePalettes = spr_get_player_palettes(part->currentAnimation >> 16);
+            decorationTable->numSpritePalettes = 0;
+            while ((s32)decorationTable->spritePalettes[decorationTable->numSpritePalettes] != -1) {
+                decorationTable->numSpritePalettes++;
             }
         } else {
-            decorationTable->palettes = spr_get_npc_palettes(part->currentAnimation >> 16);
-            decorationTable->numPalettes = 0;
-            while ((s32)decorationTable->palettes[decorationTable->numPalettes] != -1) {
-                decorationTable->numPalettes++;
+            decorationTable->spritePalettes = spr_get_npc_palettes(part->currentAnimation >> 16);
+            decorationTable->numSpritePalettes = 0;
+            while ((s32)decorationTable->spritePalettes[decorationTable->numSpritePalettes] != -1) {
+                decorationTable->numSpritePalettes++;
             }
         }
         decorationTable->unk_6C2 = 0;
         decorationTable->unk_6C1 = 0;
     }
 
-    for (i = 0; i < decorationTable->numPalettes; i++) {
-        u16* palIn = decorationTable->palettes[i];
+    for (i = 0; i < decorationTable->numSpritePalettes; i++) {
+        u16* palIn = decorationTable->spritePalettes[i];
         u16* palOut = decorationTable->copiedPalettes[i];
         decorationTable->unk_6D4[i] = palOut;
         if (palIn != NULL) {
@@ -1641,23 +1641,23 @@ void func_80259D9C(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
 
     if (decorationTable->unk_6C1 != 0) {
         if (arg0 == 0) {
-            decorationTable->palettes = spr_get_player_palettes(part->currentAnimation >> 16);
-            decorationTable->numPalettes = 0;
-            while ((s32)decorationTable->palettes[decorationTable->numPalettes] != -1) {
-                decorationTable->numPalettes++;
+            decorationTable->spritePalettes = spr_get_player_palettes(part->currentAnimation >> 16);
+            decorationTable->numSpritePalettes = 0;
+            while ((s32)decorationTable->spritePalettes[decorationTable->numSpritePalettes] != -1) {
+                decorationTable->numSpritePalettes++;
             }
-            decorationTable->unk_6CC = 6;
+            decorationTable->spriteColorVariations = 6;
         } else {
-            decorationTable->palettes = spr_get_npc_palettes(part->currentAnimation >> 16);
-            decorationTable->numPalettes = 0;
-            while ((s32)decorationTable->palettes[decorationTable->numPalettes] != -1) {
-                decorationTable->numPalettes++;
+            decorationTable->spritePalettes = spr_get_npc_palettes(part->currentAnimation >> 16);
+            decorationTable->numSpritePalettes = 0;
+            while ((s32)decorationTable->spritePalettes[decorationTable->numSpritePalettes] != -1) {
+                decorationTable->numSpritePalettes++;
             }
-            decorationTable->unk_6CC = spr_get_npc_color_variations(part->currentAnimation >> 16);
+            decorationTable->spriteColorVariations = spr_get_npc_color_variations(part->currentAnimation >> 16);
         }
 
-        for (i = 0; i < decorationTable->numPalettes; i++) {
-            palIn = decorationTable->palettes[i];
+        for (i = 0; i < decorationTable->numSpritePalettes; i++) {
+            palIn = decorationTable->spritePalettes[i];
             palOut = decorationTable->copiedPalettes[i];
             if (palIn != NULL) {
                 for (j = 0; j < ARRAY_COUNT(decorationTable->copiedPalettes[i]); j++) {
@@ -1686,8 +1686,8 @@ void func_80259D9C(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
     }
     switch (temp) {
         case 0:
-            for (i = 0; i < decorationTable->unk_6CC; i++) {
-                palIn = decorationTable->palettes[i];
+            for (i = 0; i < decorationTable->spriteColorVariations; i++) {
+                palIn = decorationTable->spritePalettes[i];
                 palOut = decorationTable->copiedPalettes[i];
                 if (palIn != NULL) {
                     for (j = 0; j < ARRAY_COUNT(decorationTable->copiedPalettes[i]); j++) {
@@ -1697,8 +1697,8 @@ void func_80259D9C(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
             }
             break;
         case 1:
-            for (i = 0; i < decorationTable->unk_6CC; i++) {
-                palIn = decorationTable->palettes[decorationTable->unk_6CC * 3 + i];
+            for (i = 0; i < decorationTable->spriteColorVariations; i++) {
+                palIn = decorationTable->spritePalettes[decorationTable->spriteColorVariations * 3 + i];
                 palOut = decorationTable->copiedPalettes[i];
                 if (palIn != NULL) {
                     for (j = 0; j < ARRAY_COUNT(decorationTable->copiedPalettes[i]); j++) {
@@ -1708,8 +1708,8 @@ void func_80259D9C(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
             }
             break;
         case 2:
-            for (i = 0; i < decorationTable->unk_6CC; i++) {
-                palIn = decorationTable->palettes[i];
+            for (i = 0; i < decorationTable->spriteColorVariations; i++) {
+                palIn = decorationTable->spritePalettes[i];
                 palOut = decorationTable->copiedPalettes[i];
                 if (palIn != NULL) {
                     for (j = 0; j < ARRAY_COUNT(decorationTable->copiedPalettes[i]); j++) {
@@ -1730,7 +1730,7 @@ void func_80259D9C(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
             break;
     }
 
-    for (i = 0; i < decorationTable->numPalettes; i++) {
+    for (i = 0; i < decorationTable->numSpritePalettes; i++) {
         decorationTable->unk_6D4[i] = decorationTable->copiedPalettes[i];
     }
 
@@ -1754,16 +1754,16 @@ void func_8025A2C4(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
 
     if (decorationTable->unk_6C1 != 0) {
         if (arg0 == 0) {
-            decorationTable->palettes = spr_get_player_palettes(part->currentAnimation >> 16);
-            decorationTable->numPalettes = 2;
-            while ((s32)decorationTable->palettes[decorationTable->numPalettes] != -1) {
-                decorationTable->numPalettes++;
+            decorationTable->spritePalettes = spr_get_player_palettes(part->currentAnimation >> 16);
+            decorationTable->numSpritePalettes = 2;
+            while ((s32)decorationTable->spritePalettes[decorationTable->numSpritePalettes] != -1) {
+                decorationTable->numSpritePalettes++;
             }
         } else {
-            decorationTable->palettes = spr_get_npc_palettes(part->currentAnimation >> 16);
-            decorationTable->numPalettes = 0;
-            while ((s32)decorationTable->palettes[decorationTable->numPalettes] != -1) {
-                decorationTable->numPalettes++;
+            decorationTable->spritePalettes = spr_get_npc_palettes(part->currentAnimation >> 16);
+            decorationTable->numSpritePalettes = 0;
+            while ((s32)decorationTable->spritePalettes[decorationTable->numSpritePalettes] != -1) {
+                decorationTable->numSpritePalettes++;
             }
         }
 
@@ -1773,8 +1773,8 @@ void func_8025A2C4(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
         decorationTable->unk_6C1 = 0;
     }
 
-    for (i = 0; i < decorationTable->numPalettes; i++) {
-        palIn = decorationTable->palettes[i];
+    for (i = 0; i < decorationTable->numSpritePalettes; i++) {
+        palIn = decorationTable->spritePalettes[i];
         palOut = decorationTable->copiedPalettes[i];
         decorationTable->unk_6D4[i] = palOut;
         if (palIn != NULL) {
@@ -1816,19 +1816,19 @@ void func_8025A50C(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
 
     if (decorationTable->unk_6C1 != 0) {
         if (arg0 == 0) {
-            decorationTable->palettes = spr_get_player_palettes(part->currentAnimation >> 16);
-            decorationTable->numPalettes = 0;
-            while ((s32)decorationTable->palettes[decorationTable->numPalettes] != -1) {
-                decorationTable->numPalettes++;
+            decorationTable->spritePalettes = spr_get_player_palettes(part->currentAnimation >> 16);
+            decorationTable->numSpritePalettes = 0;
+            while ((s32)decorationTable->spritePalettes[decorationTable->numSpritePalettes] != -1) {
+                decorationTable->numSpritePalettes++;
             }
-            decorationTable->unk_6CC = 6;
+            decorationTable->spriteColorVariations = SPR_PLAYER_COLOR_VARIATIONS;
         } else {
-            decorationTable->palettes = spr_get_npc_palettes(part->currentAnimation >> 16);
-            decorationTable->numPalettes = 0;
-            while ((s32)decorationTable->palettes[decorationTable->numPalettes] != -1) {
-                decorationTable->numPalettes++;
+            decorationTable->spritePalettes = spr_get_npc_palettes(part->currentAnimation >> 16);
+            decorationTable->numSpritePalettes = 0;
+            while ((s32)decorationTable->spritePalettes[decorationTable->numSpritePalettes] != -1) {
+                decorationTable->numSpritePalettes++;
             }
-            decorationTable->unk_6CC = spr_get_npc_color_variations(part->currentAnimation >> 16);
+            decorationTable->spriteColorVariations = spr_get_npc_color_variations(part->currentAnimation >> 16);
         }
 
         decorationTable->unk_6C2 = 0;
@@ -1836,8 +1836,8 @@ void func_8025A50C(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
         decorationTable->unk_6C1 = 0;
     }
 
-    for (i = 0; i < decorationTable->numPalettes; i++) {
-        palIn = decorationTable->palettes[i];
+    for (i = 0; i < decorationTable->numSpritePalettes; i++) {
+        palIn = decorationTable->spritePalettes[i];
         palOut = decorationTable->copiedPalettes[i];
         if (palIn != NULL) {
             for (j = 0; j < ARRAY_COUNT(decorationTable->copiedPalettes[i]); j++) {
@@ -1845,8 +1845,8 @@ void func_8025A50C(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
             }
         }
     }
-    for (i = 0; i < decorationTable->unk_6CC; i++) {
-        palIn = decorationTable->palettes[decorationTable->unk_6CC + i];
+    for (i = 0; i < decorationTable->spriteColorVariations; i++) {
+        palIn = decorationTable->spritePalettes[decorationTable->spriteColorVariations + i];
         palOut = decorationTable->copiedPalettes[i];
         if (palIn != NULL) {
             for (j = 0; j < ARRAY_COUNT(decorationTable->copiedPalettes[i]); j++) {
@@ -1855,7 +1855,7 @@ void func_8025A50C(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
         }
     }
 
-    for (i = 0; i < decorationTable->numPalettes; i++) {
+    for (i = 0; i < decorationTable->numSpritePalettes; i++) {
         decorationTable->unk_6D4[i] = decorationTable->copiedPalettes[i];
     }
 
@@ -1874,16 +1874,16 @@ void func_8025A74C(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
 
     if (decorationTable->unk_6C1 != 0) {
         if (arg0 == 0) {
-            decorationTable->palettes = spr_get_player_palettes(part->currentAnimation >> 16);
-            decorationTable->numPalettes = 0;
-            while ((s32)decorationTable->palettes[decorationTable->numPalettes] != -1) {
-                decorationTable->numPalettes++;
+            decorationTable->spritePalettes = spr_get_player_palettes(part->currentAnimation >> 16);
+            decorationTable->numSpritePalettes = 0;
+            while ((s32)decorationTable->spritePalettes[decorationTable->numSpritePalettes] != -1) {
+                decorationTable->numSpritePalettes++;
             }
         } else {
-            decorationTable->palettes = spr_get_npc_palettes(part->currentAnimation >> 16);
-            decorationTable->numPalettes = 0;
-            while ((s32)decorationTable->palettes[decorationTable->numPalettes] != -1) {
-                decorationTable->numPalettes++;
+            decorationTable->spritePalettes = spr_get_npc_palettes(part->currentAnimation >> 16);
+            decorationTable->numSpritePalettes = 0;
+            while ((s32)decorationTable->spritePalettes[decorationTable->numSpritePalettes] != -1) {
+                decorationTable->numSpritePalettes++;
             }
         }
 
@@ -1892,8 +1892,8 @@ void func_8025A74C(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
         decorationTable->unk_6CA = 10;
         decorationTable->unk_6C1 = 0;
     }
-    for (i = 0; i < decorationTable->numPalettes; i++) {
-        palIn = decorationTable->palettes[i];
+    for (i = 0; i < decorationTable->numSpritePalettes; i++) {
+        palIn = decorationTable->spritePalettes[i];
         palOut = decorationTable->copiedPalettes[i];
         if (palIn != NULL) {
             for (j = 0; j < ARRAY_COUNT(decorationTable->copiedPalettes[i]); j++) {
@@ -1903,16 +1903,16 @@ void func_8025A74C(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
                 u8 a = *palIn & 1;
                 palIn++;
                 r += 4;
-                if (r > 0x1F) {
-                    r = 0x1F;
+                if (r > 31) {
+                    r = 31;
                 }
                 g += 4;
-                if (g > 0x1F) {
-                    g = 0x1F;
+                if (g > 31) {
+                    g = 31;
                 }
                 b += 4;
-                if (b > 0x1F) {
-                    b = 0x1F;
+                if (b > 31) {
+                    b = 31;
                 }
 
                 *palOut++ = (r << 11) | (g << 6) | (b << 1) | a;
@@ -1920,7 +1920,7 @@ void func_8025A74C(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
         }
     }
 
-    for (i = 0; i < decorationTable->numPalettes; i++) {
+    for (i = 0; i < decorationTable->numSpritePalettes; i++) {
         decorationTable->unk_6D4[i] = decorationTable->copiedPalettes[i];
     }
 
@@ -1973,17 +1973,17 @@ void func_8025AA80(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
 
     if (decorationTable->unk_6C1 != 0) {
         if (arg0 == 0) {
-            decorationTable->palettes = spr_get_player_palettes(part->currentAnimation >> 16);
-            decorationTable->numPalettes = 0;
-            while ((s32)decorationTable->palettes[decorationTable->numPalettes] != -1) {
-                decorationTable->numPalettes++;
+            decorationTable->spritePalettes = spr_get_player_palettes(part->currentAnimation >> 16);
+            decorationTable->numSpritePalettes = 0;
+            while ((s32)decorationTable->spritePalettes[decorationTable->numSpritePalettes] != -1) {
+                decorationTable->numSpritePalettes++;
             }
             decorationTable->unk_6C2 = 0;
         } else {
-            decorationTable->palettes = spr_get_npc_palettes(part->currentAnimation >> 16);
-            decorationTable->numPalettes = 0;
-            while ((s32)decorationTable->palettes[decorationTable->numPalettes] != -1) {
-                decorationTable->numPalettes++;
+            decorationTable->spritePalettes = spr_get_npc_palettes(part->currentAnimation >> 16);
+            decorationTable->numSpritePalettes = 0;
+            while ((s32)decorationTable->spritePalettes[decorationTable->numSpritePalettes] != -1) {
+                decorationTable->numSpritePalettes++;
             }
             decorationTable->unk_6C2 = 0;
         }
@@ -1992,8 +1992,8 @@ void func_8025AA80(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
         decorationTable->unk_6C1 = 0;
     }
 
-    for (i = 0; i < decorationTable->numPalettes; i++) {
-        PAL_PTR palIn = decorationTable->palettes[i];
+    for (i = 0; i < decorationTable->numSpritePalettes; i++) {
+        PAL_PTR palIn = decorationTable->spritePalettes[i];
         PAL_PTR palOut = decorationTable->copiedPalettes[i];
         if (palIn != NULL) {
             for (j = 0; j < ARRAY_COUNT(decorationTable->copiedPalettes[i]); j++) {
@@ -2012,7 +2012,7 @@ void func_8025AA80(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
         }
     }
 
-    for (i = 0; i < decorationTable->numPalettes; i++) {
+    for (i = 0; i < decorationTable->numSpritePalettes; i++) {
         decorationTable->unk_6D4[i] = decorationTable->copiedPalettes[i];
     }
 
@@ -2032,23 +2032,23 @@ void func_8025AD90(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
 
     if (decorationTable->unk_6C1 != 0) {
         if (arg0 == 0) {
-            decorationTable->palettes = spr_get_player_palettes(part->currentAnimation >> 16);
-            decorationTable->numPalettes = 0;
-            while ((s32)decorationTable->palettes[decorationTable->numPalettes] != -1) {
-                decorationTable->numPalettes++;
+            decorationTable->spritePalettes = spr_get_player_palettes(part->currentAnimation >> 16);
+            decorationTable->numSpritePalettes = 0;
+            while ((s32)decorationTable->spritePalettes[decorationTable->numSpritePalettes] != -1) {
+                decorationTable->numSpritePalettes++;
             }
-            decorationTable->unk_6CC = 6;
+            decorationTable->spriteColorVariations = 6;
         } else {
-            decorationTable->palettes = spr_get_npc_palettes(part->currentAnimation >> 16);
-            decorationTable->numPalettes = 0;
-            while ((s32)decorationTable->palettes[decorationTable->numPalettes] != -1) {
-                decorationTable->numPalettes++;
+            decorationTable->spritePalettes = spr_get_npc_palettes(part->currentAnimation >> 16);
+            decorationTable->numSpritePalettes = 0;
+            while ((s32)decorationTable->spritePalettes[decorationTable->numSpritePalettes] != -1) {
+                decorationTable->numSpritePalettes++;
             }
-            decorationTable->unk_6CC = spr_get_npc_color_variations(part->currentAnimation >> 16);
+            decorationTable->spriteColorVariations = spr_get_npc_color_variations(part->currentAnimation >> 16);
         }
 
-        for (i = 0; i < decorationTable->numPalettes; i++) {
-            palIn = decorationTable->palettes[i];
+        for (i = 0; i < decorationTable->numSpritePalettes; i++) {
+            palIn = decorationTable->spritePalettes[i];
             palOut = decorationTable->copiedPalettes[i];
             if (palIn != NULL) {
                 for (j = 0; j < ARRAY_COUNT(decorationTable->copiedPalettes[i]); j++) {
@@ -2077,8 +2077,8 @@ void func_8025AD90(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
     }
     switch (temp) {
         case 0:
-            for (i = 0; i < decorationTable->unk_6CC; i++) {
-                palIn = decorationTable->palettes[i];
+            for (i = 0; i < decorationTable->spriteColorVariations; i++) {
+                palIn = decorationTable->spritePalettes[i];
                 palOut = decorationTable->copiedPalettes[i];
                 if (palIn != NULL) {
                     for (j = 0; j < ARRAY_COUNT(decorationTable->copiedPalettes[i]); j++) {
@@ -2088,8 +2088,8 @@ void func_8025AD90(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
             }
             break;
         case 1:
-            for (i = 0; i < decorationTable->unk_6CC; i++) {
-                palIn = decorationTable->palettes[decorationTable->unk_6CC * 5 + i];
+            for (i = 0; i < decorationTable->spriteColorVariations; i++) {
+                palIn = decorationTable->spritePalettes[decorationTable->spriteColorVariations * 5 + i];
                 palOut = decorationTable->copiedPalettes[i];
                 if (palIn != NULL) {
                     for (j = 0; j < ARRAY_COUNT(decorationTable->copiedPalettes[i]); j++) {
@@ -2099,8 +2099,8 @@ void func_8025AD90(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
             }
             break;
         case 2:
-            for (i = 0; i < decorationTable->unk_6CC; i++) {
-                palIn = decorationTable->palettes[decorationTable->unk_6CC * 6 + i];
+            for (i = 0; i < decorationTable->spriteColorVariations; i++) {
+                palIn = decorationTable->spritePalettes[decorationTable->spriteColorVariations * 6 + i];
                 palOut = decorationTable->copiedPalettes[i];
                 if (palIn != NULL) {
                     for (j = 0; j < ARRAY_COUNT(decorationTable->copiedPalettes[i]); j++) {
@@ -2111,7 +2111,7 @@ void func_8025AD90(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
             break;
     }
 
-    for (i = 0; i < decorationTable->numPalettes; i++) {
+    for (i = 0; i < decorationTable->numSpritePalettes; i++) {
         decorationTable->unk_6D4[i] = decorationTable->copiedPalettes[i];
     }
 
@@ -2135,23 +2135,23 @@ void func_8025B1A8(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
 
     if (decorationTable->unk_6C1 != 0) {
         if (arg0 == 0) {
-            decorationTable->palettes = spr_get_player_palettes(part->currentAnimation >> 16);
-            decorationTable->numPalettes = 0;
-            while ((s32)decorationTable->palettes[decorationTable->numPalettes] != -1) {
-                decorationTable->numPalettes++;
+            decorationTable->spritePalettes = spr_get_player_palettes(part->currentAnimation >> 16);
+            decorationTable->numSpritePalettes = 0;
+            while ((s32)decorationTable->spritePalettes[decorationTable->numSpritePalettes] != -1) {
+                decorationTable->numSpritePalettes++;
             }
-            decorationTable->unk_6CC = 6;
+            decorationTable->spriteColorVariations = 6;
         } else {
-            decorationTable->palettes = spr_get_npc_palettes(part->currentAnimation >> 16);
-            decorationTable->numPalettes = 0;
-            while ((s32)decorationTable->palettes[decorationTable->numPalettes] != -1) {
-                decorationTable->numPalettes++;
+            decorationTable->spritePalettes = spr_get_npc_palettes(part->currentAnimation >> 16);
+            decorationTable->numSpritePalettes = 0;
+            while ((s32)decorationTable->spritePalettes[decorationTable->numSpritePalettes] != -1) {
+                decorationTable->numSpritePalettes++;
             }
-            decorationTable->unk_6CC = spr_get_npc_color_variations(part->currentAnimation >> 16);
+            decorationTable->spriteColorVariations = spr_get_npc_color_variations(part->currentAnimation >> 16);
         }
 
-        for (i = 0; i < decorationTable->numPalettes; i++) {
-            palIn = decorationTable->palettes[i];
+        for (i = 0; i < decorationTable->numSpritePalettes; i++) {
+            palIn = decorationTable->spritePalettes[i];
             palOut = decorationTable->copiedPalettes[i];
             if (palIn != NULL) {
                 for (j = 0; j < ARRAY_COUNT(decorationTable->copiedPalettes[i]); j++) {
@@ -2180,8 +2180,8 @@ void func_8025B1A8(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
     }
     switch (temp) {
         case 0:
-            for (i = 0; i < decorationTable->unk_6CC; i++) {
-                palIn = decorationTable->palettes[i];
+            for (i = 0; i < decorationTable->spriteColorVariations; i++) {
+                palIn = decorationTable->spritePalettes[i];
                 palOut = decorationTable->copiedPalettes[i];
                 if (palIn != NULL) {
                     for (j = 0; j < ARRAY_COUNT(decorationTable->copiedPalettes[i]); j++) {
@@ -2191,8 +2191,8 @@ void func_8025B1A8(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
             }
             break;
         case 1:
-            for (i = 0; i < decorationTable->unk_6CC; i++) {
-                palIn = decorationTable->palettes[decorationTable->unk_6CC * 5 + i];
+            for (i = 0; i < decorationTable->spriteColorVariations; i++) {
+                palIn = decorationTable->spritePalettes[decorationTable->spriteColorVariations * 5 + i];
                 palOut = decorationTable->copiedPalettes[i];
                 if (palIn != NULL) {
                     for (j = 0; j < ARRAY_COUNT(decorationTable->copiedPalettes[i]); j++) {
@@ -2202,8 +2202,8 @@ void func_8025B1A8(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
             }
             break;
         case 2:
-            for (i = 0; i < decorationTable->unk_6CC; i++) {
-                palIn = decorationTable->palettes[decorationTable->unk_6CC * 6 + i];
+            for (i = 0; i < decorationTable->spriteColorVariations; i++) {
+                palIn = decorationTable->spritePalettes[decorationTable->spriteColorVariations * 6 + i];
                 palOut = decorationTable->copiedPalettes[i];
                 if (palIn != NULL) {
                     for (j = 0; j < ARRAY_COUNT(decorationTable->copiedPalettes[i]); j++) {
@@ -2214,7 +2214,7 @@ void func_8025B1A8(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
             break;
     }
 
-    for (i = 0; i < decorationTable->numPalettes; i++) {
+    for (i = 0; i < decorationTable->numSpritePalettes; i++) {
         decorationTable->unk_6D4[i] = decorationTable->copiedPalettes[i];
     }
 
@@ -2239,24 +2239,24 @@ void func_8025B5C0(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4, s
 
     if (decorationTable->unk_6C1 != 0) {
         if (arg0 == 0) {
-            decorationTable->palettes = spr_get_player_palettes(part->currentAnimation >> 16);
-            decorationTable->numPalettes = 0;
-            while ((s32)decorationTable->palettes[decorationTable->numPalettes] != -1) {
-                decorationTable->numPalettes++;
+            decorationTable->spritePalettes = spr_get_player_palettes(part->currentAnimation >> 16);
+            decorationTable->numSpritePalettes = 0;
+            while ((s32)decorationTable->spritePalettes[decorationTable->numSpritePalettes] != -1) {
+                decorationTable->numSpritePalettes++;
             }
 
             if (gBattleStatus.flags2 & BS_FLAGS2_40) {
-                decorationTable->unk_6CC = 4;
+                decorationTable->spriteColorVariations = 4;
             } else {
-                decorationTable->unk_6CC = 6;
+                decorationTable->spriteColorVariations = 6;
             }
         } else {
-            decorationTable->palettes = spr_get_npc_palettes(part->currentAnimation >> 16);
-            decorationTable->numPalettes = 0;
-            while ((s32)decorationTable->palettes[decorationTable->numPalettes] != -1) {
-                decorationTable->numPalettes++;
+            decorationTable->spritePalettes = spr_get_npc_palettes(part->currentAnimation >> 16);
+            decorationTable->numSpritePalettes = 0;
+            while ((s32)decorationTable->spritePalettes[decorationTable->numSpritePalettes] != -1) {
+                decorationTable->numSpritePalettes++;
             }
-            decorationTable->unk_6CC = spr_get_npc_color_variations(part->currentAnimation >> 16);
+            decorationTable->spriteColorVariations = spr_get_npc_color_variations(part->currentAnimation >> 16);
         }
 
         if (decorationTable->unk_6C1 == 1) {
@@ -2267,8 +2267,8 @@ void func_8025B5C0(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4, s
             decorationTable->unk_6CA = 255;
         }
 
-        for (i = 0; i < decorationTable->numPalettes; i++) {
-            palIn = decorationTable->palettes[i];
+        for (i = 0; i < decorationTable->numSpritePalettes; i++) {
+            palIn = decorationTable->spritePalettes[i];
             palIn2 = decorationTable->copiedPalettes[i];
             decorationTable->unk_6D4[i] = palIn2;
             if (palIn != NULL) {
@@ -2279,8 +2279,8 @@ void func_8025B5C0(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4, s
         }
 
         if (arg5) {
-            for (i = 0; i < decorationTable->unk_6CC; i++) {
-                palIn = decorationTable->palettes[decorationTable->unk_6CC + i];
+            for (i = 0; i < decorationTable->spriteColorVariations; i++) {
+                palIn = decorationTable->spritePalettes[decorationTable->spriteColorVariations + i];
                 palOut = decorationTable->copiedPalettes[i];
                 for (j = 0; j < ARRAY_COUNT(decorationTable->copiedPalettes[i]); j++) {
                     *palOut++ = *palIn++;
@@ -2305,13 +2305,13 @@ void func_8025B5C0(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4, s
                 }
             }
             alpha = decorationTable->unk_6CA / 100;
-            for (i = 0; i < decorationTable->unk_6CC; i++) {
+            for (i = 0; i < decorationTable->spriteColorVariations; i++) {
                 if (arg5 == 0) {
-                    palIn = decorationTable->palettes[i];
+                    palIn = decorationTable->spritePalettes[i];
                 } else {
-                    palIn = decorationTable->palettes[decorationTable->unk_6CC + i];
+                    palIn = decorationTable->spritePalettes[decorationTable->spriteColorVariations + i];
                 }
-                palIn2 = decorationTable->palettes[decorationTable->unk_6CC * 2 + i];
+                palIn2 = decorationTable->spritePalettes[decorationTable->spriteColorVariations * 2 + i];
                 palOut = decorationTable->copiedPalettes[i];
 
                 for (j = 0; j < ARRAY_COUNT(decorationTable->copiedPalettes[i]); j++) {
@@ -2338,7 +2338,7 @@ void func_8025B5C0(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4, s
         }
     }
 
-    for (i = 0; i < decorationTable->numPalettes; i++) {
+    for (i = 0; i < decorationTable->numSpritePalettes; i++) {
         decorationTable->unk_6D4[i] = decorationTable->copiedPalettes[i];
     }
 
@@ -2366,16 +2366,16 @@ void func_8025BAA0(s32 arg0, ActorPart* part, s32 yaw, s32 arg3, Matrix4f mtx, s
 
     if (decorationTable->unk_6C1 != 0) {
         if (arg0 == 0) {
-            decorationTable->palettes = spr_get_player_palettes(part->currentAnimation >> 16);
-            decorationTable->numPalettes = 0;
-            while ((s32)decorationTable->palettes[decorationTable->numPalettes] != -1) {
-                decorationTable->numPalettes++;
+            decorationTable->spritePalettes = spr_get_player_palettes(part->currentAnimation >> 16);
+            decorationTable->numSpritePalettes = 0;
+            while ((s32)decorationTable->spritePalettes[decorationTable->numSpritePalettes] != -1) {
+                decorationTable->numSpritePalettes++;
             }
         } else {
-            decorationTable->palettes = spr_get_npc_palettes(part->currentAnimation >> 16);
-            decorationTable->numPalettes = 0;
-            while ((s32)decorationTable->palettes[decorationTable->numPalettes] != -1) {
-                decorationTable->numPalettes++;
+            decorationTable->spritePalettes = spr_get_npc_palettes(part->currentAnimation >> 16);
+            decorationTable->numSpritePalettes = 0;
+            while ((s32)decorationTable->spritePalettes[decorationTable->numSpritePalettes] != -1) {
+                decorationTable->numSpritePalettes++;
             }
         }
 
@@ -2387,8 +2387,8 @@ void func_8025BAA0(s32 arg0, ActorPart* part, s32 yaw, s32 arg3, Matrix4f mtx, s
             decorationTable->unk_6CA = 255;
         }
 
-        for (i = 0; i < decorationTable->numPalettes; i++) {
-            color2 = decorationTable->palettes[i];
+        for (i = 0; i < decorationTable->numSpritePalettes; i++) {
+            color2 = decorationTable->spritePalettes[i];
             color1 = decorationTable->copiedPalettes[i];
             decorationTable->unk_6D4[i] = color1;
             if (color2 != NULL) {
@@ -2431,8 +2431,8 @@ void func_8025BAA0(s32 arg0, ActorPart* part, s32 yaw, s32 arg3, Matrix4f mtx, s
                 }
             }
             blendAlpha = decorationTable->unk_6CA / 100;
-            color2 = decorationTable->palettes[decorationTable->unk_740];
-            color1 = decorationTable->palettes[decorationTable->unk_742];
+            color2 = decorationTable->spritePalettes[decorationTable->unk_740];
+            color1 = decorationTable->spritePalettes[decorationTable->unk_742];
             blendColor = decorationTable->unk_6D4[0] = decorationTable->copiedPalettes[0];
 
             for (j = 0; j < ARRAY_COUNT(decorationTable->copiedPalettes[0]); j++) {
@@ -2478,8 +2478,8 @@ void func_8025BAA0(s32 arg0, ActorPart* part, s32 yaw, s32 arg3, Matrix4f mtx, s
                 }
             }
             blendAlpha = decorationTable->unk_6CA / 100;
-            color2 = decorationTable->palettes[decorationTable->unk_742];
-            color1 = decorationTable->palettes[decorationTable->unk_740];
+            color2 = decorationTable->spritePalettes[decorationTable->unk_742];
+            color1 = decorationTable->spritePalettes[decorationTable->unk_740];
             blendColor = decorationTable->copiedPalettes[0];
             decorationTable->unk_6D4[0] = blendColor;
 
@@ -2730,8 +2730,8 @@ void _add_part_decoration(ActorPart* actorPart) {
 
     if (!(actorPart->flags & 2)) {
         decorationTable = actorPart->decorationTable;
-        for (i = 0; i < ARRAY_COUNT(decorationTable->decorationType); i++) {
-            switch (decorationTable->decorationType[i]) {
+        for (i = 0; i < ARRAY_COUNT(decorationTable->type); i++) {
+            switch (decorationTable->type[i]) {
                 case DECORATION_0:
                     func_8025D150(actorPart, i);
                     break;
@@ -2776,7 +2776,7 @@ void _add_part_decoration(ActorPart* actorPart) {
 void _remove_part_decoration(ActorPart* part, s32 decorationIndex) {
     DecorationTable* decorationTable = part->decorationTable;
 
-    switch (decorationTable->decorationType[decorationIndex]) {
+    switch (decorationTable->type[decorationIndex]) {
         case DECORATION_0:
             func_8025D158(part, decorationIndex);
             break;
@@ -2815,7 +2815,7 @@ void _remove_part_decoration(ActorPart* part, s32 decorationIndex) {
             break;
     }
 
-    decorationTable->decorationType[decorationIndex] = 0;
+    decorationTable->type[decorationIndex] = 0;
 }
 
 void func_8025D150(ActorPart* actorPart, s32 i) {
@@ -2824,30 +2824,30 @@ void func_8025D150(ActorPart* actorPart, s32 i) {
 void func_8025D158(ActorPart* part, s32 decorationIndex) {
 }
 
-void func_8025D160(ActorPart* arg0, s32 arg1) {
+void func_8025D160(ActorPart* arg0, s32 index) {
     DecorationTable* table = arg0->decorationTable;
     EffectInstance* effect;
     AuraFXData* data;
     f32 scale;
 
-    switch (table->unk_8BC[arg1]) {
+    switch (table->state[index]) {
         case 0:
-            fx_aura(3, arg0->currentPos.x, arg0->currentPos.y, arg0->currentPos.z, 0.4f, &table->effects[arg1]);
-            table->unk_8BC[arg1] = 1;
-            table->unk_8C6[arg1].unk00 = 0x28;
-            table->unk_8C6[arg1].unk02 = 0x28;
-            table->unk_8C6[arg1].unk04 = 0;
+            fx_aura(3, arg0->currentPos.x, arg0->currentPos.y, arg0->currentPos.z, 0.4f, &table->effect[index]);
+            table->state[index] = 1;
+            table->unk_8C6[index].unk00 = 0x28;
+            table->unk_8C6[index].unk02 = 0x28;
+            table->unk_8C6[index].unk04 = 0;
             break;
         case 1:
-            effect = table->effects[arg1];
+            effect = table->effect[index];
             data = effect->data.aura;
-            data->posA.x = arg0->currentPos.x + table->unk_8C6[arg1].unk04;
+            data->posA.x = arg0->currentPos.x + table->unk_8C6[index].unk04;
             data->posA.y = arg0->currentPos.y;
             data->posA.z = arg0->currentPos.z;
-            scale = table->unk_8C6[arg1].unk00;
+            scale = table->unk_8C6[index].unk00;
             scale /= 100.0f;
             effect->data.aura->scale.x = scale;
-            scale = table->unk_8C6[arg1].unk02;
+            scale = table->unk_8C6[index].unk02;
             scale /= 100.0f;
             effect->data.aura->scale.y = scale;
             break;
@@ -2855,27 +2855,27 @@ void func_8025D160(ActorPart* arg0, s32 arg1) {
 }
 
 void func_8025D290(ActorPart* part, s32 decorationIndex) {
-    part->decorationTable->effects[decorationIndex]->data.aura->fadeTime = 5;
+    part->decorationTable->effect[decorationIndex]->data.aura->fadeTime = 5;
 }
 
 void func_8025D2B0(ActorPart* part, s32 decorationIndex) {
     DecorationTable* decor = part->decorationTable;
 
-    switch (decor->unk_8BC[decorationIndex]) {
+    switch (decor->state[decorationIndex]) {
         case 0:
             if (part->yaw > 90.0f) {
                 fx_sweat(0, part->currentPos.x, part->currentPos.y + part->size.y, part->currentPos.z, 5.0f, 45.0f, 20);
             } else {
                 fx_sweat(0, part->currentPos.x, part->currentPos.y + part->size.y, part->currentPos.z, 5.0f, -45.0f, 20);
             }
-            decor->unk_8BE[decorationIndex] = 0xA;
-            decor->unk_8BC[decorationIndex] = 1;
+            decor->stateResetTimer[decorationIndex] = 10;
+            decor->state[decorationIndex] = TRUE;
             break;
         case 1:
-            if (decor->unk_8BE[decorationIndex] != 0) {
-                decor->unk_8BE[decorationIndex]--;
+            if (decor->stateResetTimer[decorationIndex] != 0) {
+                decor->stateResetTimer[decorationIndex]--;
             } else {
-                decor->unk_8BC[decorationIndex] = 0;
+                decor->state[decorationIndex] = FALSE;
             }
             break;
     }
@@ -2890,14 +2890,14 @@ void func_8025D3CC(ActorPart* part, s32 decorationIndex) {
     s8 temp_v1;
 
     decor = part->decorationTable;
-    switch (decor->unk_8BC[decorationIndex]) {
+    switch (decor->state[decorationIndex]) {
         case 0:
             fx_stars_orbiting(0, part->currentPos.x, part->currentPos.y + part->size.y, part->currentPos.z,
-                20.0f, 3, &decor->effects[decorationIndex]);
-            decor->unk_8BC[decorationIndex] = 1;
+                20.0f, 3, &decor->effect[decorationIndex]);
+            decor->state[decorationIndex] = 1;
             break;
         case 1:
-            data = decor->effects[decorationIndex]->data.starsOrbiting;
+            data = decor->effect[decorationIndex]->data.starsOrbiting;
             data->pos.x = part->currentPos.x;
             data->pos.y = part->currentPos.y + part->size.y;
             data->pos.z = part->currentPos.z;
@@ -2906,7 +2906,7 @@ void func_8025D3CC(ActorPart* part, s32 decorationIndex) {
 }
 
 void func_8025D4A0(ActorPart* part, s32 decorationIndex) {
-    remove_effect(part->decorationTable->effects[decorationIndex]);
+    remove_effect(part->decorationTable->effect[decorationIndex]);
 }
 
 void func_8025D4C8(ActorPart* part, s32 decorationIndex) {
@@ -2915,10 +2915,10 @@ void func_8025D4C8(ActorPart* part, s32 decorationIndex) {
     AuraFXData* data;
     f32 scale;
 
-    switch (decor->unk_8BC[decorationIndex]) {
+    switch (decor->state[decorationIndex]) {
         case 0:
-            fx_aura(1, part->currentPos.x, part->currentPos.y, part->currentPos.z, 0.4f, &decor->effects[decorationIndex]);
-            decor->unk_8BC[decorationIndex] = 1;
+            fx_aura(1, part->currentPos.x, part->currentPos.y, part->currentPos.z, 0.4f, &decor->effect[decorationIndex]);
+            decor->state[decorationIndex] = 1;
             decor->unk_8C6[decorationIndex].unk00 = 40;
             decor->unk_8C6[decorationIndex].unk02 = 40;
             decor->unk_8C6[decorationIndex].unk04 = 255;
@@ -2928,7 +2928,7 @@ void func_8025D4C8(ActorPart* part, s32 decorationIndex) {
             decor->unk_8C6[decorationIndex].unk0C = 0;
             // fallthrough
         case 1:
-            effect = decor->effects[decorationIndex];
+            effect = decor->effect[decorationIndex];
             data = effect->data.aura;
             data->posA.x = part->currentPos.x;
             data->posA.y = part->currentPos.y;
@@ -2946,20 +2946,20 @@ void func_8025D4C8(ActorPart* part, s32 decorationIndex) {
 }
 
 void func_8025D620(ActorPart* part, s32 decorationIndex) {
-    part->decorationTable->effects[decorationIndex]->data.aura->fadeTime = 5;
+    part->decorationTable->effect[decorationIndex]->data.aura->fadeTime = 5;
 }
 
 void func_8025D640(ActorPart* part, s32 decorationIndex) {
     DecorationTable* decor = part->decorationTable;
     EffectInstance* effect;
 
-    switch (decor->unk_8BC[decorationIndex]) {
+    switch (decor->state[decorationIndex]) {
         case 0:
-            decor->effects[decorationIndex] = fx_65(1, part->currentPos.x, part->currentPos.y, part->currentPos.z, 1.0f, 0);
-            decor->unk_8BC[decorationIndex] = 1;
+            decor->effect[decorationIndex] = fx_65(1, part->currentPos.x, part->currentPos.y, part->currentPos.z, 1.0f, 0);
+            decor->state[decorationIndex] = 1;
             break;
         case 1:
-            effect = decor->effects[decorationIndex];
+            effect = decor->effect[decorationIndex];
             effect->data.unk_65->pos.x = part->currentPos.x;
             effect->data.unk_65->pos.y = part->currentPos.y;
             effect->data.unk_65->pos.z = part->currentPos.z;
@@ -2968,21 +2968,21 @@ void func_8025D640(ActorPart* part, s32 decorationIndex) {
 }
 
 void func_8025D6FC(ActorPart* part, s32 decorationIndex) {
-    part->decorationTable->effects[decorationIndex]->flags |= 0x10;
+    part->decorationTable->effect[decorationIndex]->flags |= 0x10;
 }
 
 void func_8025D71C(ActorPart* part, s32 decorationIndex) {
     DecorationTable* decor = part->decorationTable;
     EffectInstance* effect;
 
-    switch (decor->unk_8BC[decorationIndex]) {
+    switch (decor->state[decorationIndex]) {
         case 0:
-            decor->effects[decorationIndex] = fx_65(2, part->currentPos.x, part->currentPos.y, part->currentPos.z, 1.0f, 0);
+            decor->effect[decorationIndex] = fx_65(2, part->currentPos.x, part->currentPos.y, part->currentPos.z, 1.0f, 0);
             decor->unk_8C6[decorationIndex].unk00 = 1;
-            decor->unk_8BC[decorationIndex] = 1;
+            decor->state[decorationIndex] = 1;
             break;
         case 1:
-            effect = decor->effects[decorationIndex];
+            effect = decor->effect[decorationIndex];
             effect->data.unk_65->pos.x = part->currentPos.x;
             effect->data.unk_65->pos.y = part->currentPos.y;
             effect->data.unk_65->pos.z = part->currentPos.z;
@@ -2992,20 +2992,20 @@ void func_8025D71C(ActorPart* part, s32 decorationIndex) {
 }
 
 void func_8025D810(ActorPart* part, s32 decorationIndex) {
-    part->decorationTable->effects[decorationIndex]->flags |= 0x10;
+    part->decorationTable->effect[decorationIndex]->flags |= 0x10;
 }
 
 void func_8025D830(ActorPart* part, s32 decorationIndex) {
     DecorationTable* decor = part->decorationTable;
     EffectInstance* effect;
 
-    switch (decor->unk_8BC[decorationIndex]) {
+    switch (decor->state[decorationIndex]) {
         case 0:
-            decor->effects[decorationIndex] = fx_whirlwind(2, part->currentPos.x, part->currentPos.y, part->currentPos.z, 1.0f, 0);
-            decor->unk_8BC[decorationIndex] = 1;
+            decor->effect[decorationIndex] = fx_whirlwind(2, part->currentPos.x, part->currentPos.y, part->currentPos.z, 1.0f, 0);
+            decor->state[decorationIndex] = 1;
             break;
         case 1:
-            effect = decor->effects[decorationIndex];
+            effect = decor->effect[decorationIndex];
             effect->data.whirlwind->pos.x = part->currentPos.x;
             effect->data.whirlwind->pos.y = part->currentPos.y;
             effect->data.whirlwind->pos.z = part->currentPos.z;
@@ -3014,22 +3014,22 @@ void func_8025D830(ActorPart* part, s32 decorationIndex) {
 }
 
 void func_8025D8EC(ActorPart* part, s32 decorationIndex) {
-    part->decorationTable->effects[decorationIndex]->flags |= EFFECT_INSTANCE_FLAGS_10;
+    part->decorationTable->effect[decorationIndex]->flags |= EFFECT_INSTANCE_FLAGS_10;
 }
 
 void func_8025D90C(ActorPart* part, s32 decorationIndex) {
     DecorationTable* decor = part->decorationTable;
     f32 angle, sinA, cosA;
 
-    switch (decor->unk_8BC[decorationIndex]) {
+    switch (decor->state[decorationIndex]) {
         case 0:
-            decor->unk_8BE[decorationIndex] = 0;
-            decor->unk_8BC[decorationIndex] = 1;
+            decor->stateResetTimer[decorationIndex] = 0;
+            decor->state[decorationIndex] = 1;
             // fallthrough
         case 1:
-            decor->unk_8BE[decorationIndex]++;
-            if (decor->unk_8BE[decorationIndex] >= 4) {
-                decor->unk_8BE[decorationIndex] = 0U;
+            decor->stateResetTimer[decorationIndex]++;
+            if (decor->stateResetTimer[decorationIndex] >= 4) {
+                decor->stateResetTimer[decorationIndex] = 0;
                 angle = (clamp_angle(-part->yaw) * TAU) / 360.0f;
                 sinA = sin_rad(angle);
                 cosA = cos_rad(angle);
@@ -3051,10 +3051,10 @@ void func_8025DA68(ActorPart* part, s32 decorationIndex) {
     f32 x, y, z;
 
     if (D_80284134[decor->unk_8C6[decorationIndex].unk00] >= 0) {
-        switch (decor->unk_8BC[decorationIndex]) {
+        switch (decor->state[decorationIndex]) {
             case 0:
-                decor->unk_8BE[decorationIndex] = 0;
-                decor->unk_8BC[decorationIndex] = 1;
+                decor->stateResetTimer[decorationIndex] = 0;
+                decor->state[decorationIndex] = 1;
                 // fallthrough
             case 1:
                 x = part->currentPos.x;
@@ -3064,9 +3064,9 @@ void func_8025DA68(ActorPart* part, s32 decorationIndex) {
                 if ((gGameStatusPtr->frameCounter / 4) == 0) {
                     fx_sparkles(FX_SPARKLES_1, x, y, z, 10.0f);
                 }
-                decor->unk_8BE[decorationIndex]++;
-                if (D_80284134[decor->unk_8C6[decorationIndex].unk00] < decor->unk_8BE[decorationIndex]) {
-                    decor->unk_8BE[decorationIndex] = 0;
+                decor->stateResetTimer[decorationIndex]++;
+                if (D_80284134[decor->unk_8C6[decorationIndex].unk00] < decor->stateResetTimer[decorationIndex]) {
+                    decor->stateResetTimer[decorationIndex] = 0;
                     fx_sparkles(FX_SPARKLES_1, x, y, z, 20.0f);
                 }
                 break;
@@ -3083,17 +3083,17 @@ void func_8025DBD0(ActorPart* part, s32 decorationIndex) {
     AuraFXData* data;
     f32 scale;
 
-    switch (decor->unk_8BC[decorationIndex]) {
+    switch (decor->state[decorationIndex]) {
         case 0:
-            fx_aura(2, part->currentPos.x, part->currentPos.y, part->currentPos.z, 1.2f, &decor->effects[decorationIndex]);
-            decor->unk_8BC[decorationIndex] = 1;
+            fx_aura(2, part->currentPos.x, part->currentPos.y, part->currentPos.z, 1.2f, &decor->effect[decorationIndex]);
+            decor->state[decorationIndex] = 1;
             decor->unk_8C6[decorationIndex].unk00 = 150;
             decor->unk_8C6[decorationIndex].unk02 = 150;
             decor->unk_8C6[decorationIndex].unk04 = 255;
             decor->unk_8C6[decorationIndex].unk06 = 0;
             // fallthrough
         case 1:
-            effect = decor->effects[decorationIndex];
+            effect = decor->effect[decorationIndex];
             data = effect->data.aura;
             data->posA.x = part->currentPos.x;
             data->posA.y = part->currentPos.y;
@@ -3112,7 +3112,7 @@ void func_8025DBD0(ActorPart* part, s32 decorationIndex) {
 }
 
 void func_8025DD40(ActorPart* part, s32 decorationIndex) {
-    part->decorationTable->effects[decorationIndex]->data.aura->fadeTime = 5;
+    part->decorationTable->effect[decorationIndex]->data.aura->fadeTime = 5;
 }
 
 void func_8025DD60(ActorPart* part, s32 decorationIndex) {
@@ -3120,15 +3120,15 @@ void func_8025DD60(ActorPart* part, s32 decorationIndex) {
     EnergyInOutFXData* data;
     f32 scale;
 
-    switch (decor->unk_8BC[decorationIndex]) {
+    switch (decor->state[decorationIndex]) {
         case 0:
-            decor->effects[decorationIndex] = fx_energy_in_out(4, part->currentPos.x, part->currentPos.y, part->currentPos.z, 1.2f, 0);
-            decor->unk_8BC[decorationIndex] = 1;
+            decor->effect[decorationIndex] = fx_energy_in_out(4, part->currentPos.x, part->currentPos.y, part->currentPos.z, 1.2f, 0);
+            decor->state[decorationIndex] = 1;
             decor->unk_8C6[decorationIndex].unk00 = 0x78;
             decor->unk_8C6[decorationIndex].unk02 = 0;
             // fallthrough
         case 1:
-            data = decor->effects[decorationIndex]->data.energyInOut;
+            data = decor->effect[decorationIndex]->data.energyInOut;
             scale = decor->unk_8C6[decorationIndex].unk00;
             scale /= 100.0f;
             data->unk_44 = scale;
@@ -3140,5 +3140,5 @@ void func_8025DD60(ActorPart* part, s32 decorationIndex) {
 }
 
 void func_8025DE88(ActorPart* part, s32 decorationIndex) {
-    part->decorationTable->effects[decorationIndex]->flags |= 0x10;
+    part->decorationTable->effect[decorationIndex]->flags |= 0x10;
 }
