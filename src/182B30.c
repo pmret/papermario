@@ -1462,18 +1462,78 @@ s32 func_802591EC(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
     return 0;
 }
 
-INCLUDE_ASM(s32, "182B30", func_80259494);
+void func_80259494(ActorPart* part) {
+    DecorationTable* decor = part->decorationTable;
+    u16* src;
+    u16* dest;
+    s32 i, j;
+    
+    for (i = 0; i < decor->numSpritePalettes; i++) {
+        if (decor->unk_6D4[i] != NULL) {
+            src = decor->unk_6D4[i];
+            dest = decor->copiedPalettes[1][i];
 
-INCLUDE_ASM(s32, "182B30", func_8025950C);
+            for (j = 0; j < 0x10; j++) {
+                *dest = *src | 0xFFFE;
+                src++;
+                dest++;
+
+            }
+            decor->unk_76C[i] = decor->copiedPalettes[1][i];
+        }
+    }
+}
+
+void func_8025950C(ActorPart* part, s32 yaw, Matrix4f mtx) {
+    DecorationTable* decor = part->decorationTable;
+    s32 opacity = 255;
+    s32 idMask = 0;
+    s32 ii, jj;
+    u16* dest;
+    u16* src;
+    
+    if (part->opacity < 0xFF) {
+        idMask = 0x80000000;
+        opacity = part->opacity;
+    }
+    if (part->flags & 0x100) {
+        idMask = 0x80000000;
+        opacity = (opacity * 120) / 255;
+    }
+    
+    if (decor->unk_768 != 0) {
+        decor->spritePalettes = spr_get_npc_palettes(part->currentAnimation >> 0x10);
+        decor->numSpritePalettes = 0;
+        while ((s32) decor->spritePalettes[decor->numSpritePalettes] != -1) {
+            decor->numSpritePalettes++;
+        }
+        
+        for (ii = 0; ii < decor->numSpritePalettes; ii++) {
+            src = decor->spritePalettes[ii];
+            dest = decor->copiedPalettes[0][ii];
+            if (src != NULL) {
+                for (jj = 0; jj < 16; jj++) {
+                    *dest = *src;
+                    src++;
+                    dest++;
+                }
+            }
+        }
+        
+        for (ii = 0; ii < decor->numSpritePalettes; ii++) {
+            decor->unk_6D4[ii] = decor->copiedPalettes[0][ii];
+        }
+        
+        func_802596C0(part, yaw, mtx);
+    } else {
+        spr_draw_npc_sprite(part->unk_84 | idMask, yaw, opacity, NULL, mtx);
+    }
+}
 
 void func_802596C0(ActorPart* part, s32 yaw, Matrix4f mtx) {
     DecorationTable* decorationTable = part->decorationTable;
-    s32 opacity;
-    s32 idMask;
-
-    opacity = 255;
-
-    idMask = 0;
+    s32 opacity = 255;
+    s32 idMask = 0;
 
     if (part->opacity < 255) {
         idMask = 0x80000000;
@@ -1520,7 +1580,7 @@ void func_802597B0(ActorPart* part, s32 yaw, Matrix4f mtx) {
         
         for (i = 0; i < decor->numSpritePalettes; i++) {
             src = decor->spritePalettes[i];
-            dest = decor->copiedPalettes[i];
+            dest = decor->copiedPalettes[0][i];
             if (decor->spritePalettes[i] != NULL) {
                 for (j = 0; j < 16; j++) {
                     *dest = *src;
@@ -1530,7 +1590,7 @@ void func_802597B0(ActorPart* part, s32 yaw, Matrix4f mtx) {
             }
         }
         for (i = 0; i < decor->numSpritePalettes; i++) {
-            decor->unk_6D4[i] = decor->copiedPalettes[i];
+            decor->unk_6D4[i] = decor->copiedPalettes[0][i];
         }
         func_8025995C(part, yaw, mtx);
     } else {
@@ -1602,10 +1662,10 @@ void func_80259AAC(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
 
     for (i = 0; i < decorationTable->numSpritePalettes; i++) {
         u16* palIn = decorationTable->spritePalettes[i];
-        u16* palOut = decorationTable->copiedPalettes[i];
+        u16* palOut = decorationTable->copiedPalettes[0][i];
         decorationTable->unk_6D4[i] = palOut;
         if (palIn != NULL) {
-            for (j = 0; j < ARRAY_COUNT(decorationTable->copiedPalettes[i]); j++) {
+            for (j = 0; j < ARRAY_COUNT(decorationTable->copiedPalettes[0][i]); j++) {
                 u8 r = ((*palIn >> 11) & 0x1F);
                 u8 g = ((*palIn >> 6) & 0x1F);
                 u8 b = ((*palIn >> 1) & 0x1F);
@@ -1658,9 +1718,9 @@ void func_80259D9C(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
 
         for (i = 0; i < decorationTable->numSpritePalettes; i++) {
             palIn = decorationTable->spritePalettes[i];
-            palOut = decorationTable->copiedPalettes[i];
+            palOut = decorationTable->copiedPalettes[0][i];
             if (palIn != NULL) {
-                for (j = 0; j < ARRAY_COUNT(decorationTable->copiedPalettes[i]); j++) {
+                for (j = 0; j < ARRAY_COUNT(decorationTable->copiedPalettes[0][i]); j++) {
                     *palOut++ = *palIn++;
                 }
             }
@@ -1688,9 +1748,9 @@ void func_80259D9C(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
         case 0:
             for (i = 0; i < decorationTable->spriteColorVariations; i++) {
                 palIn = decorationTable->spritePalettes[i];
-                palOut = decorationTable->copiedPalettes[i];
+                palOut = decorationTable->copiedPalettes[0][i];
                 if (palIn != NULL) {
-                    for (j = 0; j < ARRAY_COUNT(decorationTable->copiedPalettes[i]); j++) {
+                    for (j = 0; j < ARRAY_COUNT(decorationTable->copiedPalettes[0][i]); j++) {
                         *palOut++ = *palIn++;
                     }
                 }
@@ -1699,9 +1759,9 @@ void func_80259D9C(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
         case 1:
             for (i = 0; i < decorationTable->spriteColorVariations; i++) {
                 palIn = decorationTable->spritePalettes[decorationTable->spriteColorVariations * 3 + i];
-                palOut = decorationTable->copiedPalettes[i];
+                palOut = decorationTable->copiedPalettes[0][i];
                 if (palIn != NULL) {
-                    for (j = 0; j < ARRAY_COUNT(decorationTable->copiedPalettes[i]); j++) {
+                    for (j = 0; j < ARRAY_COUNT(decorationTable->copiedPalettes[0][i]); j++) {
                         *palOut++ = *palIn++;
                     }
                 }
@@ -1710,9 +1770,9 @@ void func_80259D9C(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
         case 2:
             for (i = 0; i < decorationTable->spriteColorVariations; i++) {
                 palIn = decorationTable->spritePalettes[i];
-                palOut = decorationTable->copiedPalettes[i];
+                palOut = decorationTable->copiedPalettes[0][i];
                 if (palIn != NULL) {
-                    for (j = 0; j < ARRAY_COUNT(decorationTable->copiedPalettes[i]); j++) {
+                    for (j = 0; j < ARRAY_COUNT(decorationTable->copiedPalettes[0][i]); j++) {
                         u8 r = ((*palIn >> 11) & 0x1F);
                         u8 g = ((*palIn >> 6) & 0x1F);
                         u8 b = ((*palIn >> 1) & 0x1F);
@@ -1731,7 +1791,7 @@ void func_80259D9C(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
     }
 
     for (i = 0; i < decorationTable->numSpritePalettes; i++) {
-        decorationTable->unk_6D4[i] = decorationTable->copiedPalettes[i];
+        decorationTable->unk_6D4[i] = decorationTable->copiedPalettes[0][i];
     }
 
     if (arg0 == 0) {
@@ -1775,13 +1835,13 @@ void func_8025A2C4(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
 
     for (i = 0; i < decorationTable->numSpritePalettes; i++) {
         palIn = decorationTable->spritePalettes[i];
-        palOut = decorationTable->copiedPalettes[i];
+        palOut = decorationTable->copiedPalettes[0][i];
         decorationTable->unk_6D4[i] = palOut;
         if (palIn != NULL) {
-            for (j = 0; j < ARRAY_COUNT(decorationTable->copiedPalettes[i]); j++) {
-                u8 r = ((*palIn >> 12) & 0xF);
-                u8 g = ((*palIn >> 7) & 0xF);
-                u8 b = ((*palIn >> 2) & 0xF);
+            for (j = 0; j < ARRAY_COUNT(decorationTable->copiedPalettes[0][i]); j++) {
+                u8 r = ((*palIn >> 11) / 2) & 0xF;
+                u8 g = ((*palIn >>  6) / 2) & 0xF;
+                u8 b = ((*palIn >>  1) / 2) & 0xF;
                 u8 a = *palIn & 1;
                 palIn++;
                 *palOut++ = (r << 11) | (g << 6) | (b << 1) | a;
@@ -1838,25 +1898,25 @@ void func_8025A50C(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
 
     for (i = 0; i < decorationTable->numSpritePalettes; i++) {
         palIn = decorationTable->spritePalettes[i];
-        palOut = decorationTable->copiedPalettes[i];
+        palOut = decorationTable->copiedPalettes[0][i];
         if (palIn != NULL) {
-            for (j = 0; j < ARRAY_COUNT(decorationTable->copiedPalettes[i]); j++) {
+            for (j = 0; j < ARRAY_COUNT(decorationTable->copiedPalettes[0][i]); j++) {
                 *palOut++ = *palIn++;
             }
         }
     }
     for (i = 0; i < decorationTable->spriteColorVariations; i++) {
         palIn = decorationTable->spritePalettes[decorationTable->spriteColorVariations + i];
-        palOut = decorationTable->copiedPalettes[i];
+        palOut = decorationTable->copiedPalettes[0][i];
         if (palIn != NULL) {
-            for (j = 0; j < ARRAY_COUNT(decorationTable->copiedPalettes[i]); j++) {
+            for (j = 0; j < ARRAY_COUNT(decorationTable->copiedPalettes[0][i]); j++) {
                 *palOut++ = *palIn++;
             }
         }
     }
 
     for (i = 0; i < decorationTable->numSpritePalettes; i++) {
-        decorationTable->unk_6D4[i] = decorationTable->copiedPalettes[i];
+        decorationTable->unk_6D4[i] = decorationTable->copiedPalettes[0][i];
     }
 
     if (arg0 == 0) {
@@ -1894,9 +1954,9 @@ void func_8025A74C(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
     }
     for (i = 0; i < decorationTable->numSpritePalettes; i++) {
         palIn = decorationTable->spritePalettes[i];
-        palOut = decorationTable->copiedPalettes[i];
+        palOut = decorationTable->copiedPalettes[0][i];
         if (palIn != NULL) {
-            for (j = 0; j < ARRAY_COUNT(decorationTable->copiedPalettes[i]); j++) {
+            for (j = 0; j < ARRAY_COUNT(decorationTable->copiedPalettes[0][i]); j++) {
                 u8 r = ((*palIn >> 11) & 0x1F);
                 u8 g = ((*palIn >> 6) & 0x1F);
                 u8 b = ((*palIn >> 1) & 0x1F);
@@ -1921,7 +1981,7 @@ void func_8025A74C(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
     }
 
     for (i = 0; i < decorationTable->numSpritePalettes; i++) {
-        decorationTable->unk_6D4[i] = decorationTable->copiedPalettes[i];
+        decorationTable->unk_6D4[i] = decorationTable->copiedPalettes[0][i];
     }
 
     switch (decorationTable->unk_6C2) {
@@ -1994,9 +2054,9 @@ void func_8025AA80(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
 
     for (i = 0; i < decorationTable->numSpritePalettes; i++) {
         PAL_PTR palIn = decorationTable->spritePalettes[i];
-        PAL_PTR palOut = decorationTable->copiedPalettes[i];
+        PAL_PTR palOut = decorationTable->copiedPalettes[0][i];
         if (palIn != NULL) {
-            for (j = 0; j < ARRAY_COUNT(decorationTable->copiedPalettes[i]); j++) {
+            for (j = 0; j < ARRAY_COUNT(decorationTable->copiedPalettes[0][i]); j++) {
                 u8 r = ((*palIn >> 11) & 0x1F);
                 u8 g = ((*palIn >> 6) & 0x1F);
                 u8 b = ((*palIn >> 1) & 0x1F);
@@ -2013,7 +2073,7 @@ void func_8025AA80(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
     }
 
     for (i = 0; i < decorationTable->numSpritePalettes; i++) {
-        decorationTable->unk_6D4[i] = decorationTable->copiedPalettes[i];
+        decorationTable->unk_6D4[i] = decorationTable->copiedPalettes[0][i];
     }
 
     if (arg0 == 0) {
@@ -2049,9 +2109,9 @@ void func_8025AD90(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
 
         for (i = 0; i < decorationTable->numSpritePalettes; i++) {
             palIn = decorationTable->spritePalettes[i];
-            palOut = decorationTable->copiedPalettes[i];
+            palOut = decorationTable->copiedPalettes[0][i];
             if (palIn != NULL) {
-                for (j = 0; j < ARRAY_COUNT(decorationTable->copiedPalettes[i]); j++) {
+                for (j = 0; j < ARRAY_COUNT(decorationTable->copiedPalettes[0][i]); j++) {
                     *palOut++ = *palIn++;
                 }
             }
@@ -2079,9 +2139,9 @@ void func_8025AD90(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
         case 0:
             for (i = 0; i < decorationTable->spriteColorVariations; i++) {
                 palIn = decorationTable->spritePalettes[i];
-                palOut = decorationTable->copiedPalettes[i];
+                palOut = decorationTable->copiedPalettes[0][i];
                 if (palIn != NULL) {
-                    for (j = 0; j < ARRAY_COUNT(decorationTable->copiedPalettes[i]); j++) {
+                    for (j = 0; j < ARRAY_COUNT(decorationTable->copiedPalettes[0][i]); j++) {
                         *palOut++ = *palIn++;
                     }
                 }
@@ -2090,9 +2150,9 @@ void func_8025AD90(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
         case 1:
             for (i = 0; i < decorationTable->spriteColorVariations; i++) {
                 palIn = decorationTable->spritePalettes[decorationTable->spriteColorVariations * 5 + i];
-                palOut = decorationTable->copiedPalettes[i];
+                palOut = decorationTable->copiedPalettes[0][i];
                 if (palIn != NULL) {
-                    for (j = 0; j < ARRAY_COUNT(decorationTable->copiedPalettes[i]); j++) {
+                    for (j = 0; j < ARRAY_COUNT(decorationTable->copiedPalettes[0][i]); j++) {
                         *palOut++ = *palIn++;
                     }
                 }
@@ -2101,9 +2161,9 @@ void func_8025AD90(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
         case 2:
             for (i = 0; i < decorationTable->spriteColorVariations; i++) {
                 palIn = decorationTable->spritePalettes[decorationTable->spriteColorVariations * 6 + i];
-                palOut = decorationTable->copiedPalettes[i];
+                palOut = decorationTable->copiedPalettes[0][i];
                 if (palIn != NULL) {
-                    for (j = 0; j < ARRAY_COUNT(decorationTable->copiedPalettes[i]); j++) {
+                    for (j = 0; j < ARRAY_COUNT(decorationTable->copiedPalettes[0][i]); j++) {
                         *palOut++ = *palIn++;
                     }
                 }
@@ -2112,7 +2172,7 @@ void func_8025AD90(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
     }
 
     for (i = 0; i < decorationTable->numSpritePalettes; i++) {
-        decorationTable->unk_6D4[i] = decorationTable->copiedPalettes[i];
+        decorationTable->unk_6D4[i] = decorationTable->copiedPalettes[0][i];
     }
 
     if (arg0 == 0) {
@@ -2152,9 +2212,9 @@ void func_8025B1A8(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
 
         for (i = 0; i < decorationTable->numSpritePalettes; i++) {
             palIn = decorationTable->spritePalettes[i];
-            palOut = decorationTable->copiedPalettes[i];
+            palOut = decorationTable->copiedPalettes[0][i];
             if (palIn != NULL) {
-                for (j = 0; j < ARRAY_COUNT(decorationTable->copiedPalettes[i]); j++) {
+                for (j = 0; j < ARRAY_COUNT(decorationTable->copiedPalettes[0][i]); j++) {
                     *palOut++ = *palIn++;
                 }
             }
@@ -2182,9 +2242,9 @@ void func_8025B1A8(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
         case 0:
             for (i = 0; i < decorationTable->spriteColorVariations; i++) {
                 palIn = decorationTable->spritePalettes[i];
-                palOut = decorationTable->copiedPalettes[i];
+                palOut = decorationTable->copiedPalettes[0][i];
                 if (palIn != NULL) {
-                    for (j = 0; j < ARRAY_COUNT(decorationTable->copiedPalettes[i]); j++) {
+                    for (j = 0; j < ARRAY_COUNT(decorationTable->copiedPalettes[0][i]); j++) {
                         *palOut++ = *palIn++;
                     }
                 }
@@ -2193,9 +2253,9 @@ void func_8025B1A8(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
         case 1:
             for (i = 0; i < decorationTable->spriteColorVariations; i++) {
                 palIn = decorationTable->spritePalettes[decorationTable->spriteColorVariations * 5 + i];
-                palOut = decorationTable->copiedPalettes[i];
+                palOut = decorationTable->copiedPalettes[0][i];
                 if (palIn != NULL) {
-                    for (j = 0; j < ARRAY_COUNT(decorationTable->copiedPalettes[i]); j++) {
+                    for (j = 0; j < ARRAY_COUNT(decorationTable->copiedPalettes[0][i]); j++) {
                         *palOut++ = *palIn++;
                     }
                 }
@@ -2204,9 +2264,9 @@ void func_8025B1A8(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
         case 2:
             for (i = 0; i < decorationTable->spriteColorVariations; i++) {
                 palIn = decorationTable->spritePalettes[decorationTable->spriteColorVariations * 6 + i];
-                palOut = decorationTable->copiedPalettes[i];
+                palOut = decorationTable->copiedPalettes[0][i];
                 if (palIn != NULL) {
-                    for (j = 0; j < ARRAY_COUNT(decorationTable->copiedPalettes[i]); j++) {
+                    for (j = 0; j < ARRAY_COUNT(decorationTable->copiedPalettes[0][i]); j++) {
                         *palOut++ = *palIn++;
                     }
                 }
@@ -2215,7 +2275,7 @@ void func_8025B1A8(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
     }
 
     for (i = 0; i < decorationTable->numSpritePalettes; i++) {
-        decorationTable->unk_6D4[i] = decorationTable->copiedPalettes[i];
+        decorationTable->unk_6D4[i] = decorationTable->copiedPalettes[0][i];
     }
 
     if (arg0 == 0) {
@@ -2231,9 +2291,9 @@ void func_8025B1A8(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
 
 void func_8025B5C0(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4, s32 arg5) {
     DecorationTable* decorationTable = part->decorationTable;
-    u16* palIn;
-    u16* palIn2;
-    u16* palOut;
+    PAL_PTR color2;
+    PAL_PTR color1;
+    PAL_PTR palOut;
     s32 i, j;
     u8 alpha;
 
@@ -2268,22 +2328,22 @@ void func_8025B5C0(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4, s
         }
 
         for (i = 0; i < decorationTable->numSpritePalettes; i++) {
-            palIn = decorationTable->spritePalettes[i];
-            palIn2 = decorationTable->copiedPalettes[i];
-            decorationTable->unk_6D4[i] = palIn2;
-            if (palIn != NULL) {
-                for (j = 0; j < ARRAY_COUNT(decorationTable->copiedPalettes[i]); j++) {
-                    *palIn2++ = *palIn++;
+            color2 = decorationTable->spritePalettes[i];
+            color1 = decorationTable->copiedPalettes[0][i];
+            decorationTable->unk_6D4[i] = color1;
+            if (color2 != NULL) {
+                for (j = 0; j < ARRAY_COUNT(decorationTable->copiedPalettes[0][i]); j++) {
+                    *color1++ = *color2++;
                 }
             }
         }
 
         if (arg5) {
             for (i = 0; i < decorationTable->spriteColorVariations; i++) {
-                palIn = decorationTable->spritePalettes[decorationTable->spriteColorVariations + i];
-                palOut = decorationTable->copiedPalettes[i];
-                for (j = 0; j < ARRAY_COUNT(decorationTable->copiedPalettes[i]); j++) {
-                    *palOut++ = *palIn++;
+                color2 = decorationTable->spritePalettes[decorationTable->spriteColorVariations + i];
+                palOut = decorationTable->copiedPalettes[0][i];
+                for (j = 0; j < ARRAY_COUNT(decorationTable->copiedPalettes[0][i]); j++) {
+                    *palOut++ = *color2++;
                 }
             }
         }
@@ -2307,29 +2367,29 @@ void func_8025B5C0(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4, s
             alpha = decorationTable->unk_6CA / 100;
             for (i = 0; i < decorationTable->spriteColorVariations; i++) {
                 if (arg5 == 0) {
-                    palIn = decorationTable->spritePalettes[i];
+                    color2 = decorationTable->spritePalettes[i];
                 } else {
-                    palIn = decorationTable->spritePalettes[decorationTable->spriteColorVariations + i];
+                    color2 = decorationTable->spritePalettes[decorationTable->spriteColorVariations + i];
                 }
-                palIn2 = decorationTable->spritePalettes[decorationTable->spriteColorVariations * 2 + i];
-                palOut = decorationTable->copiedPalettes[i];
+                color1 = decorationTable->spritePalettes[decorationTable->spriteColorVariations * 2 + i];
+                palOut = decorationTable->copiedPalettes[0][i];
 
-                for (j = 0; j < ARRAY_COUNT(decorationTable->copiedPalettes[i]); j++) {
-                    u8 r = (*palIn >> 11) & 0x1F;
-                    u8 g = (*palIn >> 6) & 0x1F;
-                    u8 b = (*palIn >> 1) & 0x1F;
-                    u8 r1 = (*palIn2 >> 11) & 0x1F;
-                    u8 g1 = (*palIn2 >> 6) & 0x1F;
-                    u8 b1 = (*palIn2 >> 1) & 0x1F;
-                    u8 a = *palIn2 & 1;
-                    palIn++;
-                    palIn2++;
+                for (j = 0; j < ARRAY_COUNT(decorationTable->copiedPalettes[0][i]); j++) {
+                    u8 r2 = (*color2 >> 11) & 0x1F;
+                    u8 g2 = (*color2 >> 6) & 0x1F;
+                    u8 b2 = (*color2 >> 1) & 0x1F;
+                    u8 r1 = (*color1 >> 11) & 0x1F;
+                    u8 g1 = (*color1 >> 6) & 0x1F;
+                    u8 b1 = (*color1 >> 1) & 0x1F;
+                    u8 a1 = *color1 & 1;
+                    color2++;
+                    color1++;
 
-                    r = (r * (255 - alpha) + r1 * alpha) / 255;
-                    g = (g * (255 - alpha) + g1 * alpha) / 255;
-                    b = (b * (255 - alpha) + b1 * alpha) / 255;
+                    r2 = (r2 * (255 - alpha) + r1 * alpha) / 255;
+                    g2 = (g2 * (255 - alpha) + g1 * alpha) / 255;
+                    b2 = (b2 * (255 - alpha) + b1 * alpha) / 255;
 
-                    *palOut++ = (r << 11) | (g << 6) | (b << 1) | a;
+                    *palOut++ = (r2 << 11) | (g2 << 6) | (b2 << 1) | a1;
                 }
             }
             if (alpha == 255) {
@@ -2339,7 +2399,7 @@ void func_8025B5C0(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4, s
     }
 
     for (i = 0; i < decorationTable->numSpritePalettes; i++) {
-        decorationTable->unk_6D4[i] = decorationTable->copiedPalettes[i];
+        decorationTable->unk_6D4[i] = decorationTable->copiedPalettes[0][i];
     }
 
     switch (decorationTable->unk_6C2) {
@@ -2355,7 +2415,7 @@ void func_8025B5C0(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4, s
 }
 
 void func_8025BAA0(s32 arg0, ActorPart* part, s32 yaw, s32 arg3, Matrix4f mtx, s32 arg5) {
-    DecorationTable* decorationTable = part->decorationTable;
+    DecorationTable* decor = part->decorationTable;
     PAL_PTR color1;
     PAL_PTR color2;
     PAL_PTR blendColor;
@@ -2364,78 +2424,78 @@ void func_8025BAA0(s32 arg0, ActorPart* part, s32 yaw, s32 arg3, Matrix4f mtx, s
     u8 r2, g2, b2, a1;
     u8 r1, g1, b1;
 
-    if (decorationTable->unk_6C1 != 0) {
+    if (decor->unk_6C1 != 0) {
         if (arg0 == 0) {
-            decorationTable->spritePalettes = spr_get_player_palettes(part->currentAnimation >> 16);
-            decorationTable->numSpritePalettes = 0;
-            while ((s32)decorationTable->spritePalettes[decorationTable->numSpritePalettes] != -1) {
-                decorationTable->numSpritePalettes++;
+            decor->spritePalettes = spr_get_player_palettes(part->currentAnimation >> 16);
+            decor->numSpritePalettes = 0;
+            while ((s32)decor->spritePalettes[decor->numSpritePalettes] != -1) {
+                decor->numSpritePalettes++;
             }
         } else {
-            decorationTable->spritePalettes = spr_get_npc_palettes(part->currentAnimation >> 16);
-            decorationTable->numSpritePalettes = 0;
-            while ((s32)decorationTable->spritePalettes[decorationTable->numSpritePalettes] != -1) {
-                decorationTable->numSpritePalettes++;
+            decor->spritePalettes = spr_get_npc_palettes(part->currentAnimation >> 16);
+            decor->numSpritePalettes = 0;
+            while ((s32)decor->spritePalettes[decor->numSpritePalettes] != -1) {
+                decor->numSpritePalettes++;
             }
         }
 
-        if (decorationTable->unk_6C1 == 1) {
-            decorationTable->unk_6C2 = 0;
-            decorationTable->unk_6CA = 0;
+        if (decor->unk_6C1 == 1) {
+            decor->unk_6C2 = 0;
+            decor->unk_6CA = 0;
         } else {
-            decorationTable->unk_6C2 = 0;
-            decorationTable->unk_6CA = 255;
+            decor->unk_6C2 = 0;
+            decor->unk_6CA = 255;
         }
 
-        for (i = 0; i < decorationTable->numSpritePalettes; i++) {
-            color2 = decorationTable->spritePalettes[i];
-            color1 = decorationTable->copiedPalettes[i];
-            decorationTable->unk_6D4[i] = color1;
+        for (i = 0; i < decor->numSpritePalettes; i++) {
+            color2 = decor->spritePalettes[i];
+            color1 = decor->copiedPalettes[0][i];
+            decor->unk_6D4[i] = color1;
             if (color2 != NULL) {
-                for (j = 0; j < ARRAY_COUNT(decorationTable->copiedPalettes[i]); j++) {
+                for (j = 0; j < 16; j++) {
                     *color1++ = *color2++;
                 }
             }
         }
 
         if (arg3 == 0) {
-            decorationTable->unk_746 = decorationTable->unk_744;
-            decorationTable->unk_748 = decorationTable->unk_746;
-            decorationTable->unk_74A = decorationTable->unk_746;
-            decorationTable->unk_744 = 0;
+            decor->unk_746 = decor->unk_744;
+            decor->unk_748 = decor->unk_746;
+            decor->unk_74A = decor->unk_746;
+            decor->unk_744 = 0;
         }
 
-        decorationTable->unk_6C8 = decorationTable->unk_744;
-        decorationTable->unk_6CA = 0;
-        decorationTable->unk_6C2 = 0;
-        decorationTable->unk_6C1 = 0;
+        decor->unk_6C8 = decor->unk_744;
+        decor->unk_6CA = 0;
+        decor->unk_6C2 = 0;
+        decor->unk_6C1 = 0;
     }
 
-    switch (decorationTable->unk_6C2) {
+    switch (decor->unk_6C2) {
         case 0:
             if (arg5 != 0) {
                 break;
             }
-            if (decorationTable->unk_6C8 != 0) {
-                decorationTable->unk_6C8--;
+            if (decor->unk_6C8 != 0) {
+                decor->unk_6C8--;
                 break;
             }
-            decorationTable->unk_6CA = 0;
-            decorationTable->unk_6C2 = 1;
+            decor->unk_6CA = 0;
+            decor->unk_6C2 = 1;
             // fallthrough
         case 1:
             if (arg5 == 0) {
-                decorationTable->unk_6CA += 25600 / decorationTable->unk_746;
-                if (decorationTable->unk_6CA > 25500) {
-                    decorationTable->unk_6CA = 25500;
+                decor->unk_6CA += 25600 / decor->unk_746;
+                if (decor->unk_6CA > 25500) {
+                    decor->unk_6CA = 25500;
                 }
             }
-            blendAlpha = decorationTable->unk_6CA / 100;
-            color2 = decorationTable->spritePalettes[decorationTable->unk_740];
-            color1 = decorationTable->spritePalettes[decorationTable->unk_742];
-            blendColor = decorationTable->unk_6D4[0] = decorationTable->copiedPalettes[0];
+            blendAlpha = decor->unk_6CA / 100;
+            color2 = decor->spritePalettes[decor->unk_740];
+            color1 = decor->spritePalettes[decor->unk_742];
+            blendColor = decor->unk_6D4[0] = decor->copiedPalettes[0][0];
 
-            for (j = 0; j < ARRAY_COUNT(decorationTable->copiedPalettes[0]); j++) {
+            for (j = 0; j < 16; j++) {
                 r2 = (*color2 >> 11) & 0x1F;
                 g2 = (*color2 >> 6) & 0x1F;
                 b2 = (*color2 >> 1) & 0x1F;
@@ -2453,37 +2513,37 @@ void func_8025BAA0(s32 arg0, ActorPart* part, s32 yaw, s32 arg3, Matrix4f mtx, s
                 *blendColor++ = (r1 << 11) | (g1 << 6) | (b1 << 1) | a1;
             }
             if (blendAlpha == 255) {
-                decorationTable->unk_6C2 = 2;
-                decorationTable->unk_6C8 = decorationTable->unk_748;
+                decor->unk_6C2 = 2;
+                decor->unk_6C8 = decor->unk_748;
             }
             break;
     }
-    switch (decorationTable->unk_6C2) {
+    switch (decor->unk_6C2) {
         case 2:
             if (arg5 != 0) {
                 break;
             }
-            if (decorationTable->unk_6C8 != 0) {
-                decorationTable->unk_6C8--;
+            if (decor->unk_6C8 != 0) {
+                decor->unk_6C8--;
                 break;
             }
-            decorationTable->unk_6CA = 0;
-            decorationTable->unk_6C2 = 3;
+            decor->unk_6CA = 0;
+            decor->unk_6C2 = 3;
             // fallthrough
         case 3:
             if (arg5 == 0) {
-                decorationTable->unk_6CA += 25600 / decorationTable->unk_74A;
-                if (decorationTable->unk_6CA > 25500) {
-                    decorationTable->unk_6CA = 25500;
+                decor->unk_6CA += 25600 / decor->unk_74A;
+                if (decor->unk_6CA > 25500) {
+                    decor->unk_6CA = 25500;
                 }
             }
-            blendAlpha = decorationTable->unk_6CA / 100;
-            color2 = decorationTable->spritePalettes[decorationTable->unk_742];
-            color1 = decorationTable->spritePalettes[decorationTable->unk_740];
-            blendColor = decorationTable->copiedPalettes[0];
-            decorationTable->unk_6D4[0] = blendColor;
+            blendAlpha = decor->unk_6CA / 100;
+            color2 = decor->spritePalettes[decor->unk_742];
+            color1 = decor->spritePalettes[decor->unk_740];
+            blendColor = decor->copiedPalettes[0][0];
+            decor->unk_6D4[0] = blendColor;
 
-            for (j = 0; j < ARRAY_COUNT(decorationTable->copiedPalettes[0]); j++) {
+            for (j = 0; j < 16; j++) {
                 r2 = (*color2 >> 11) & 0x1F;
                 g2 = (*color2 >> 6) & 0x1F;
                 b2 = (*color2 >> 1) & 0x1F;
@@ -2501,13 +2561,13 @@ void func_8025BAA0(s32 arg0, ActorPart* part, s32 yaw, s32 arg3, Matrix4f mtx, s
                 *blendColor++ = ((r1) << 11) | ((g1) << 6) | ((b1) << 1) | a1;
             }
             if (blendAlpha == 255) {
-                decorationTable->unk_6C2 = 0;
-                decorationTable->unk_6C8 = decorationTable->unk_744;
+                decor->unk_6C2 = 0;
+                decor->unk_6C8 = decor->unk_744;
             }
             break;
     }
 
-    switch (decorationTable->unk_6C2) {
+    switch (decor->unk_6C2) {
         case 0:
         case 1:
         case 2:
@@ -2521,7 +2581,172 @@ void func_8025BAA0(s32 arg0, ActorPart* part, s32 yaw, s32 arg3, Matrix4f mtx, s
     }
 }
 
-INCLUDE_ASM(s32, "182B30", func_8025C120);
+void func_8025C120(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
+
+    DecorationTable* decor = part->decorationTable;
+    PAL_PTR color1;
+    PAL_PTR color2;
+    PAL_PTR blendColor;
+    s32 i, j;
+    u8 blendAlpha;
+    u8 r2, g2, b2, a1;
+    u8 r1, g1, b1;
+    
+    if (decor->unk_6C1 != 0) {
+        if (arg0 == 0) {
+            decor->spritePalettes = spr_get_player_palettes(part->currentAnimation >> 16);
+            decor->numSpritePalettes = 0;
+            while ((s32) decor->spritePalettes[decor->numSpritePalettes] != -1) {
+                decor->numSpritePalettes++;
+            }
+        } else {
+            decor->spritePalettes = spr_get_npc_palettes(part->currentAnimation >> 16);
+            decor->numSpritePalettes = 0;
+            while ((s32) decor->spritePalettes[decor->numSpritePalettes] != -1) {
+                decor->numSpritePalettes++;
+            }
+            decor->spriteColorVariations = spr_get_npc_color_variations(part->currentAnimation >> 16);
+        }
+        if (decor->unk_6C1 == 1) {
+            decor->unk_6C2 = 0;
+            decor->unk_6CA = 0;
+        } else {
+            decor->unk_6C2 = 0;
+            decor->unk_6CA = 255;
+        }
+        
+         for (i = 0; i < decor->numSpritePalettes; i++) {
+            color2 = decor->spritePalettes[i];
+            color1 = decor->copiedPalettes[0][i];
+            decor->unk_6D4[i] = color1;
+            if (color2 != NULL) {
+                for (j = 0; j < 16; j++) {
+                    *color1++ = *color2++;
+                }
+            }
+        }
+        
+        decor->unk_6C8 = decor->unk_744;
+        decor->unk_6CA = 0;
+        decor->unk_6C2 = 0;
+        decor->unk_6C1 = 0;
+    }
+    
+    switch (decor->unk_6C2) {
+        case 0:
+            if (arg4 != 0) {
+                break;
+            }
+            if (decor->unk_6C8 != 0) {
+                decor->unk_6C8--;
+                break;
+            }
+            decor->unk_6CA = 0;
+            decor->unk_6C2 = 1;
+            // fallthrough
+        case 1:
+            if (arg4 == 0) {
+                decor->unk_6CA += 0x6400 / decor->unk_746;
+                if (decor->unk_6CA > 25500) {
+                    decor->unk_6CA = 25500;
+                }
+            }
+            blendAlpha = decor->unk_6CA / 100;
+            for (i = 0; i < decor->spriteColorVariations; i++) {
+                color2 = decor->spritePalettes[decor->unk_740 * decor->spriteColorVariations + i];
+                color1 = decor->spritePalettes[decor->unk_742 * decor->spriteColorVariations + i];
+                blendColor = decor->copiedPalettes[0][i];
+                decor->unk_6D4[i] = blendColor;
+                
+                for (j = 0; j < 16; j++) {
+                    r2 = (*color2 >> 11) & 0x1F;
+                    g2 = (*color2 >> 6) & 0x1F;
+                    b2 = (*color2 >> 1) & 0x1F;
+                    r1 = (*color1 >> 11) & 0x1F;
+                    g1 = (*color1 >> 6) & 0x1F;
+                    b1 = (*color1 >> 1) & 0x1F;
+                    a1 = *color1 & 1;   
+                    color2++;
+                    color1++;
+    
+                    r1 = (r2 * (255 - blendAlpha) + r1 * blendAlpha) / 255;
+                    g1 = (g2 * (255 - blendAlpha) + g1 * blendAlpha) / 255;
+                    b1 = (b2 * (255 - blendAlpha) + b1 * blendAlpha) / 255;
+    
+                    *blendColor++ = (r1 << 11) | (g1 << 6) | (b1 << 1) | a1;
+                }
+            }
+            if (blendAlpha == 255) {
+                decor->unk_6C2 = 2;
+                decor->unk_6C8 = decor->unk_748;
+            }
+            break;
+    }
+
+    switch (decor->unk_6C2) {
+        case 2:
+            if (arg4 != 0) {
+                break;
+            }
+            if (decor->unk_6C8 != 0) {
+                decor->unk_6C8--;
+                break;
+            }
+            decor->unk_6CA = 0;
+            decor->unk_6C2 = 3;
+            // fallthrough
+        case 3:
+            if (arg4 == 0) {
+                decor->unk_6CA += 0x6400 / decor->unk_74A;
+                if (decor->unk_6CA > 25500) {
+                    decor->unk_6CA = 25500;
+                }
+            }
+            blendAlpha = decor->unk_6CA / 100;
+            for (i = 0; i < decor->spriteColorVariations; i++) {
+                color2 = decor->spritePalettes[decor->unk_740 * decor->spriteColorVariations + i];
+                color1 = decor->spritePalettes[decor->unk_742 * decor->spriteColorVariations + i];
+                blendColor = decor->copiedPalettes[0][i];
+                decor->unk_6D4[i] = blendColor;
+    
+                for (j = 0; j < 16; j++) {
+                    r2 = (*color2 >> 11) & 0x1F;
+                    g2 = (*color2 >> 6) & 0x1F;
+                    b2 = (*color2 >> 1) & 0x1F;
+                    r1 = (*color1 >> 11) & 0x1F;
+                    g1 = (*color1 >> 6) & 0x1F;
+                    b1 = (*color1 >> 1) & 0x1F;
+                    a1 = *color1 & 1;   
+                    color2++;
+                    color1++;
+    
+                    r1 = (r2 * (255 - blendAlpha) + r1 * blendAlpha) / 255;
+                    g1 = (g2 * (255 - blendAlpha) + g1 * blendAlpha) / 255;
+                    b1 = (b2 * (255 - blendAlpha) + b1 * blendAlpha) / 255;
+    
+                    *blendColor++ = ((r1) << 11) | ((g1) << 6) | ((b1) << 1) | a1;
+                }
+            }
+            if (blendAlpha == 255) {
+                decor->unk_6C2 = 0;
+                decor->unk_6C8 = decor->unk_744;
+            }
+            break;
+    }
+    
+    switch (decor->unk_6C2) {
+        case 0:
+        case 1:
+        case 2:
+        case 3:
+            if (arg0 == 0) {
+                func_8025995C(part, yaw, mtx);
+            } else {
+                func_802596C0(part, yaw, mtx);
+            }
+            break;
+    }
+}
 
 s32 func_8025C840(s32 arg0, ActorPart* part, s32 yaw, s32 arg3) {
     if (!(part->flags & 2)) {
