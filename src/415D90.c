@@ -83,6 +83,10 @@ extern HudScript HES_MoveBlueOrbDisabled;
 extern HudScript HES_MoveGreenOrbDisabled;
 extern HudScript HES_MoveRedOrbDisabled;
 
+extern HudScript HES_GreenArrowDown;
+extern HudScript HES_GreenArrowUp;
+extern HudScript HES_HandPointer;
+
 extern s32 D_802ACC60;
 extern s32 D_802ACC6C;
 extern s8 D_802AD000;
@@ -138,7 +142,7 @@ extern s32 battle_menu_hasSpiritsMenu;
 extern s32 battle_menu_moveOptionCount;
 extern s8 D_802AD604;
 extern s8 D_802AD605;
-extern u8 D_802AD606;
+extern s8 D_802AD606;
 extern s8 D_802AD607;
 extern s8 D_802AD608;
 extern s8 D_802AD609;
@@ -147,17 +151,23 @@ extern s8 D_802AD60B;
 extern s16 D_802AD60C;
 extern s16 D_802AD60E;
 extern s16 D_802AD610;
+extern s16 D_802AD612;
 extern s8 D_802AD614;
 extern s32 D_802AD618;
 extern s32 D_802AD61C;
 extern s32 D_802AD620;
 extern s32 D_802AD624;
 extern s32 D_802AD628[];
+extern s16 D_802AD63C;
+extern s16 D_802AD63E;
+extern HudScript* D_802AD640[];
 extern s32 D_802AD658[]; // msg IDs
 extern s32 D_802AD66C;
+extern u8 D_802AD66F;
 extern s8 D_802AD673;
 extern s32 D_802AD678[];
 extern s32 D_802AD690[];
+extern s32 D_802AD6A8[];
 extern s32 D_802AD6C0[];
 extern s32 D_802AD6D4;
 
@@ -273,6 +283,11 @@ s32 D_802AB738[] = {
     0x00000000, 0x001D0007, 0x001D0008, 0x001D0009, 0x001D000A, 0x001D000B, 0x001D000C, 0x001D000D, 0x001D000E,
     0x001D000F, 0x001D0010, 0x001D0011, 0x001D0012, 0x00000000
 };
+
+void func_802A5290(s32 arg0, s32 x, s32 y);
+void func_802A56F8(s32 arg0, s32 x, s32 y);
+void func_802A5738(s32 arg0, s32 x, s32 y);
+void func_802A57C8(s32 arg0, s32 x, s32 y);
 
 void func_802A1000(void) {
     D_802AD006 = 255;
@@ -865,7 +880,189 @@ void func_802A4A10(void) {
     D_802AD604 = 30;
 }
 
+// v0/v1 dumb
+#ifdef NON_MATCHING
+s32 func_802A4A54(void) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    s32 id;
+    s32 x;
+    s32 y;
+    s32 width;
+    s32 i;
+
+    switch (D_802AD604) {
+        case 0:
+            D_802AD63C = 20;
+            D_802AD63E = 68;
+            D_802AD60C = -D_802AD608 * 13;
+            D_802AD60E = (D_802AD605 - D_802AD608) * 13;
+
+            for (i = 0; i < D_802AD66C; i++) {
+                D_802AD628[i] = id = hud_element_create(D_802AD640[i]);
+                hud_element_set_scale(id, 0.45f);
+                hud_element_set_flags(id, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
+            }
+
+            D_802AD618 = id = hud_element_create(HES_AnimatedHandPointer);
+            hud_element_set_flags(id, HUD_ELEMENT_FLAGS_DROP_SHADOW | HUD_ELEMENT_FLAGS_80);
+            hud_element_set_render_pos(id, D_802AD63C, D_802AD63E);
+
+            D_802AD61C = id = hud_element_create(HES_GreenArrowUp);
+            hud_element_set_flags(id, HUD_ELEMENT_FLAGS_DROP_SHADOW | HUD_ELEMENT_FLAGS_80);
+            hud_element_set_render_pos(id, D_802AD63C + 39, D_802AD63E - 7);
+
+            D_802AD620 = id = hud_element_create(HES_GreenArrowDown);
+            hud_element_set_flags(id, HUD_ELEMENT_FLAGS_DROP_SHADOW | HUD_ELEMENT_FLAGS_80);
+            hud_element_set_render_pos(id, D_802AD63C + 39, D_802AD63E + 78);
+
+            D_802AD614 = 10;
+            x = D_802AD63C;
+            y = D_802AD63E;
+            set_window_properties(6, x, y, 144, (D_802AD60A * 13) + 26, 0, func_802A5290, NULL, -1);
+            set_window_properties(7, x + 18, y - 6, 108, 16, 1, func_802A56F8, NULL, -1);
+            x = 20;
+            y = 186;
+            set_window_properties(8, x, y, 280, 32, 0x14, func_802A5738, NULL, -1);
+            set_window_update(6, 1);
+            set_window_update(7, 1);
+            set_window_update(8, 1);
+            D_802AD604 = 1;
+            break;
+        case 1:
+            if (D_802AD607 == 0) {
+                D_802AD606 = D_802AD605;
+                if (battleStatus->currentButtonsHeld & BUTTON_STICK_UP) {
+                    if (D_802AD605 > 0) {
+                        D_802AD605--;
+                    } else if (battleStatus->currentButtonsPressed & BUTTON_STICK_UP) {
+                        D_802AD605--;
+                    }
+                }
+
+                if (battleStatus->currentButtonsHeld & BUTTON_STICK_DOWN) {
+                    if (D_802AD605 < D_802AD66C - 1) {
+                        D_802AD605++;
+                    } else if (battleStatus->currentButtonsPressed & BUTTON_STICK_DOWN) {
+                        D_802AD605++;
+                    }
+                }
+
+                if (D_802AD605 < 0) {
+                    D_802AD605 = D_802AD66F - 1;
+                }
+                if (D_802AD66C - 1 < D_802AD605) {
+                    D_802AD605 = 0;
+                }
+
+                if (D_802AD606 != D_802AD605) {
+                    hud_element_set_scale(D_802AD628[D_802AD606], 0.45f);
+                    sfx_play_sound(SOUND_MENU_CHANGE_SELECTION);
+                }
+
+                if (D_802AD605 < D_802AD608) {
+                    D_802AD608 = D_802AD605;
+                }
+                if (D_802AD605 >= D_802AD609) {
+                    D_802AD608 = D_802AD605 - ((u8) D_802AD60A - 1);
+                }
+                D_802AD609 = D_802AD608 + 6;
+                if (D_802AD609 > D_802AD66C) {
+                    D_802AD609 = D_802AD66C;
+                }
+
+                if (battleStatus->currentButtonsPressed & BUTTON_A) {
+                    if (D_802AD690[D_802AD605] == 1) {
+                        sfx_play_sound(SOUND_MENU_NEXT);
+                        D_802AD604 = -1;
+                    } else {
+                        sfx_play_sound(SOUND_MENU_ERROR);
+                        D_802AD604 = 40;
+                        D_802AD610 = D_802AD6A8[D_802AD605];
+                    }
+                    break;
+                }
+
+                if (battleStatus->currentButtonsPressed & BUTTON_B) {
+                    sfx_play_sound(SOUND_MENU_BACK);
+                    func_802A472C();
+                    D_802AD604 = -2;
+                }
+            }
+            break;
+        case -1:
+            for (i = 0; i < D_802AD66C; i++) {
+                hud_element_set_tint(D_802AD628[i], 160, 160, 160);
+            }
+            hud_element_set_tint(D_802AD618, 160, 160, 160);
+            hud_element_set_tint(D_802AD61C, 160, 160, 160);
+            hud_element_set_tint(D_802AD620, 160, 160, 160);
+            hud_element_set_script(D_802AD618, HES_HandPointer);
+            D_802AD614 = 13;
+            set_window_update(6, 4);
+            set_window_update(7, 4);
+            set_window_update(8, 2);
+            return D_802AD605 + 1;
+        case -2:
+            return 0xFF;
+        case 10:
+            set_window_update(6, 2);
+            set_window_update(7, 2);
+            set_window_update(8, 2);
+            D_802AD604 = 11;
+            return D_802AD605 + 1;
+        case 11:
+            return D_802AD605 + 1;
+        case 20:
+            set_window_update(6, 1);
+            set_window_update(7, 1);
+            set_window_update(8, 1);
+            D_802AD604 = 1;
+            return D_802AD605 + 1;
+        case 30:
+            set_window_update(6, 1);
+            set_window_update(7, 1);
+            set_window_update(8, 1);
+            D_802AD604 = -1;
+            break;
+        case 40:
+            D_802AD6D4 = -1;
+            D_802AD604 = 41;
+            return -1;
+        case 41:
+            set_window_update(6, 2);
+            set_window_update(7, 2);
+            set_window_update(8, 2);
+            if (D_802AD610 == 0) {
+                width = get_msg_width(0x1D00CB, 0);
+            set_window_properties(9, (SCREEN_WIDTH / 2) - ((width + 23) / 2), 80, width + 23, 28, 0x14, func_802A57C8, NULL, -1);
+            } else {
+                width = get_msg_width(0x1D00CC, 0);
+            set_window_properties(9, (SCREEN_WIDTH / 2) - ((width + 23) / 2), 80, width + 23, 28, 0x14, func_802A57C8, NULL, -1);
+            }
+            set_window_update(9, 1);
+            D_802AD612 = 60;
+            D_802AD604 = 42;
+            return -1;
+        case 42:
+            if (gGameStatusPtr->pressedButtons[0] & (BUTTON_A | BUTTON_B)) {
+                D_802AD612 = 0;
+            }
+            if (D_802AD612 != 0) {
+                D_802AD612--;
+                return -1;
+            }
+            set_window_update(9, 2);
+            set_window_update(6, 1);
+            set_window_update(7, 1);
+            set_window_update(8, 1);
+            D_802AD604 = 1;
+            break;
+    }
+    return 0;
+}
+#else
 INCLUDE_ASM(s32, "415D90", func_802A4A54);
+#endif
 
 // getting there but needs work
 #ifdef NON_EQUIVALENT
