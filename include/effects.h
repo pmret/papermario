@@ -1222,7 +1222,7 @@ typedef struct FireworkRocketFXData {
 } FireworkRocketFXData; // size = unknown
 
 typedef struct PeachStarBeamInner {
-    /* 0x00 */ s32 unk_00;
+    /* 0x00 */ s32 flags;
     /* 0x04 */ Vec3f unk_04;
     /* 0x10 */ Vec3f unk_10;
 } PeachStarBeamInner; // size = 0x1C

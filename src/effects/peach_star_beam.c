@@ -83,14 +83,13 @@ EffectInstance* peach_star_beam_main(s32 type, f32 x, f32 y, f32 z, f32 arg4, s3
         PeachStarBeamInner* part = &data->parts[i];
 
         if (type == 0 && i == 0) {
-            part->unk_00 = 0;
+            part->flags = 0;
         } else {
-            part->unk_00 = 1;
+            part->flags = 1;
         }
     }
     return effect;
 }
-
 
 void peach_star_beam_init(EffectInstance* effect) {
 }
@@ -140,7 +139,7 @@ void peach_star_beam_update(EffectInstance* effect) {
             part->unk_04.y = unk_50;
             part->unk_04.z = unk_54 + (unk_48 * shim_cos_deg(angle));
         }
-        if (!(part->unk_00 & 2)) {
+        if (!(part->flags & 2)) {
             part->unk_10.x = part->unk_04.x;
             part->unk_10.y = part->unk_04.y;
             part->unk_10.z = part->unk_04.z;
@@ -176,8 +175,8 @@ void peach_star_beam_appendGfx(void* effect) {
 
     for (i = 0; i < ARRAY_COUNT(data->parts); i++) {
         part = &data->parts[i];
-        if (part->unk_00 & 1) {
-            if (part->unk_00 & 2) {
+        if (part->flags & 1) {
+            if (part->flags & 2) {
                 partX = part->unk_10.x;
                 partY = part->unk_10.y;
                 partZ = part->unk_10.z;
@@ -220,8 +219,8 @@ void peach_star_beam_appendGfx(void* effect) {
     for (i = 0; i < ARRAY_COUNT(data->parts); i++) {
         part = &data->parts[i];
 
-        if (part->unk_00 & 1) {
-            if (part->unk_00 & 2) {
+        if (part->flags & 1) {
+            if (part->flags & 2) {
                 partX = part->unk_10.x;
                 partY = part->unk_10.y;
                 partZ = part->unk_10.z;
