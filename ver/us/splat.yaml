@@ -3920,7 +3920,7 @@ segments:
     vram: 0xE010C000
     subsegments:
     - [0x3E54C0, c, peach_star_beam]
-    - [0x3E5ED0, data]
+    - [0x3E5ED0]
   - [0x3E5F30, bin] # peach_star_beam gfx
   - name: effect_chapter_change
     dir: effects

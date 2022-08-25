@@ -143,6 +143,10 @@ extern SpriteShadingProfile* D_80151328;
 
 extern Window gWindows[64];
 
+extern struct EffectInstance* D_802A37F0;
+extern s32 D_802A37F8;
+extern s32 D_802A3818;
+extern s32 D_802A3834;
 extern s32 D_802A3838;
 
 extern s32 gGameState;

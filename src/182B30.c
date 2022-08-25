@@ -48,7 +48,7 @@ void func_8025B5C0(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4, s
 void func_8025BAA0(s32 arg0, ActorPart* part, s32 yaw, s32 arg3, Matrix4f mtx, s32 arg5);
 void func_8025C120(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4);
 s32 func_8025C840(s32 arg0, ActorPart* part, s32 yaw, s32);
-s32 func_8025CCC8(s32 arg0, ActorPart* part, s32 yaw, s32); 
+s32 func_8025CCC8(s32 arg0, ActorPart* part, s32 yaw, s32);
 void func_8026709C(ActorPart* part);
 
 s32 func_80254250(ActorPart* part) {
@@ -719,16 +719,6 @@ void update_hero_shadows(void) {
 void func_80255FD8(void) {
 }
 
-void create_status_chill_out(s32 iconID);
-void enable_status_2(s32 iconID);
-void enable_status_chill_out(s32 iconID);
-void enable_status_debuff(s16);
-void enable_status_transparent(s16);
-s32 func_80265CE8(u32*, s32);
-void func_80266DAC(Actor* actor, s32 arg1);
-void set_status_icons_offset(s32 iconID, s32 offsetY, s32 arg2);
-void set_status_icons_properties(s32 iconID, f32 x, f32 y, f32 z, s32 arg, s32 arg2, s32 radius, s32 offsetY);
-
 INCLUDE_ASM(s32, "182B30", func_80255FE0);
 
 void func_802571F0(s32 flipYaw, Actor* actor) {
@@ -750,9 +740,9 @@ void func_802571F0(s32 flipYaw, Actor* actor) {
         actorPosY = actor->currentPos.y - actor->headOffset.y;
     }
     actorPosZ = actor->currentPos.z + actor->headOffset.z - 5.0f;
-    
+
     if (!(actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW)) {
-        guTranslateF(mtxPivotOn, 
+        guTranslateF(mtxPivotOn,
             -actor->rotationPivotOffset.x * actor->scalingFactor,
             -actor->rotationPivotOffset.y * actor->scalingFactor,
             -actor->rotationPivotOffset.z * actor->scalingFactor);
@@ -770,18 +760,18 @@ void func_802571F0(s32 flipYaw, Actor* actor) {
              -actor->rotationPivotOffset.y * actor->scalingFactor,
              actor->rotationPivotOffset.z * actor->scalingFactor);
     }
-   
+
     guRotateF(mtxRotX, actor->rotation.x, 1.0f, 0.0f, 0.0f);
     guRotateF(mtxRotY, actor->rotation.y, 0.0f, 1.0f, 0.0f);
     guRotateF(mtxRotZ, actor->rotation.z, 0.0f, 0.0f, 1.0f);
     guMtxCatF(mtxRotY, mtxRotX, mtxTemp);
     guMtxCatF(mtxTemp, mtxRotZ, mtxRotation);
-    
-    guScaleF(mtxScale, 
+
+    guScaleF(mtxScale,
         actor->scale.x * SPRITE_WORLD_SCALE_D * actor->scalingFactor,
         actor->scale.y * SPRITE_WORLD_SCALE_D * actor->scalingFactor,
         actor->scale.z * SPRITE_WORLD_SCALE_D);
-   
+
     guMtxCatF(mtxPivotOn, mtxScale, mtxTemp);
     guMtxCatF(mtxTemp, mtxRotation, mtxTransform);
     guMtxCatF(mtxTransform, mtxPivotOff, mtxActor);
@@ -813,7 +803,7 @@ void func_802571F0(s32 flipYaw, Actor* actor) {
         if (part->flags & ACTOR_PART_FLAG_INVISIBLE) {
             part = part->nextPart;
             continue;
-        } 
+        }
         if (part->idleAnimations == NULL) {
             part = part->nextPart;
             continue;
@@ -842,7 +832,7 @@ void func_802571F0(s32 flipYaw, Actor* actor) {
             partPosX + part->unkOffset[0],
             partPosY + part->unkOffset[1],
             partPosZ - 1.0f);
-        
+
         guRotateF(mtxRotX, part->rotation.x, 1.0f, 0.0f, 0.0f);
         guRotateF(mtxRotY, part->rotation.y, 0.0f, 1.0f, 0.0f);
         guRotateF(mtxRotZ, part->rotation.z, 0.0f, 0.0f, 1.0f);
@@ -877,11 +867,11 @@ void func_802571F0(s32 flipYaw, Actor* actor) {
 }
 
 void func_80257B28(void* data) {
-    func_80255FE0(0, (s32) data);
+    func_80255FE0(FALSE, (s32) data);
 }
 
 void func_80257B48(void* data) {
-    func_80255FE0(1, (s32) data);
+    func_80255FE0(TRUE, (s32) data);
 }
 
 void func_80257B68(void* data) {
@@ -957,18 +947,18 @@ void func_80258E14(void* arg0) {
     dy += part->unkOffset[1];
     dz = player->currentPos.z + player->headOffset.z - 5.0f;
     part->yaw = playerYaw;
-    
+
     guTranslateF(mtxTranslate, dx, dy, dz - 1.0f);
-    
+
     guTranslateF(mtxPivotOn,
         -player->rotationPivotOffset.x * player->scalingFactor,
         -player->rotationPivotOffset.y * player->scalingFactor,
         -player->rotationPivotOffset.z * player->scalingFactor);
-    guTranslateF(mtxPivotOff, 
+    guTranslateF(mtxPivotOff,
         player->rotationPivotOffset.x * player->scalingFactor,
         player->rotationPivotOffset.y * player->scalingFactor,
         player->rotationPivotOffset.z * player->scalingFactor);
-    
+
     guRotateF(mtxRotX, player->rotation.x, 1.0f, 0.0f, 0.0f);
     guRotateF(mtxRotY, player->rotation.y, 0.0f, 1.0f, 0.0f);
     guRotateF(mtxRotZ, player->rotation.z, 0.0f, 0.0f, 1.0f);
@@ -979,13 +969,13 @@ void func_80258E14(void* arg0) {
         player->scale.y * SPRITE_WORLD_SCALE_D * player->scalingFactor * part->verticalStretch,
         player->scale.z * SPRITE_WORLD_SCALE_D);
     mtx_mirror_y(mtxMirror);
-    
+
     guMtxCatF(mtxScale, mtxPivotOn, mtxTemp);
     guMtxCatF(mtxTemp, mtxRotation, mtxTemp);
     guMtxCatF(mtxTemp, mtxPivotOff, mtxTemp);
     guMtxCatF(mtxTemp, mtxTranslate, mtxTransform);
     guMtxCatF(mtxTransform, mtxMirror, mtxTransform);
-    
+
     func_8025C840(0, part, clamp_angle(playerYaw + 180.0f), 1);
     func_8025CCC8(0, part, clamp_angle(playerYaw + 180.0f), 1);
     func_802591EC(0, part, clamp_angle(playerYaw + 180.0f), mtxTransform, 1);
@@ -2127,7 +2117,7 @@ void func_8025C918(s32 arg0, ActorPart* part, s32 yaw, s32 arg3) {
     s32 color;
     s32 i;
     s32 baseAngle;
-    
+
     if (decor->unk_751 != 0) {
         decor->unk_752 = -2;
         decor->unk75A = 0;
@@ -2139,20 +2129,20 @@ void func_8025C918(s32 arg0, ActorPart* part, s32 yaw, s32 arg3) {
             func_802DE894(part->unk_84, 0x11, 0x14, 0, 0, 0xFF, 0);
         }
     }
-    
+
     decor->unk75C += 7;
     baseAngle = decor->unk75C;
-    
+
     if (decor->unk75C >= 360) {
         decor->unk75C = baseAngle - ((baseAngle / 360) * 360);
     }
-    
+
     for (i = 0; i < ARRAY_COUNT(rbuf); i++) {
         rbuf[i] = (cosine(decor->unk75C + (25 * i)) + 1.0) * 112.0;
         gbuf[i] = (cosine(decor->unk75C + (25 * i) + 45) + 1.0) * 112.0;
         bbuf[i] = (cosine(decor->unk75C + (25 * i) + 90) + 1.0) * 112.0;
     }
-    
+
     alpha = 255;
     if (part->opacity < 255) {
         alpha = part->opacity;
@@ -2160,7 +2150,7 @@ void func_8025C918(s32 arg0, ActorPart* part, s32 yaw, s32 arg3) {
     if (part->flags & 0x100) {
         alpha = (alpha * 120) / 255;
     }
-    
+
     for (i = 0; i < ARRAY_COUNT(rbuf); i++) {
         color = (rbuf[i] << 0x18) | (gbuf[i] << 0x10) | (bbuf[i] << 8) | alpha;
         if (arg0 == 0) {
@@ -2169,7 +2159,7 @@ void func_8025C918(s32 arg0, ActorPart* part, s32 yaw, s32 arg3) {
             func_802DE894(part->unk_84, 0xC, i, color, 0, 0xFF, 0);
         }
     }
-    
+
     if (arg3 == 0) {
         decor->unk75A -= 1;
     }
@@ -2200,7 +2190,7 @@ void func_8025CD28(s32 arg0, ActorPart* part, s32 yaw, s32 arg3) {
 
 void func_8025CD40(s32 arg0, ActorPart* part, s32 yaw, s32 arg3) {
     DecorationTable* decor = part->decorationTable;
-    
+
     if (decor->unk_765 != 0) {
         switch (func_80254250(part)) {
             case 0:
@@ -2220,7 +2210,7 @@ void func_8025CD40(s32 arg0, ActorPart* part, s32 yaw, s32 arg3) {
         decor->unk_768 = 0;
         decor->unk_765 = 0;
     }
-    
+
     if (decor->unk_766 == 3) {
         decor->unk_768 = 0;
         func_8026709C(part);
