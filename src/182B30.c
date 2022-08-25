@@ -1331,7 +1331,427 @@ void update_player_actor_shadow(void) {
     }
 }
 
+#ifdef NON_EQUIVALENT
+void appendGfx_player_actor(void* arg0) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    PlayerData* playerData = &gPlayerData;
+    Matrix4f mtxRotX, mtxRotY, mtxRotZ, mtxRotation;
+    Matrix4f mtxScale;
+    Matrix4f mtxPivotOn, mtxPivotOff, mtxTranslate;
+    Matrix4f mtxTemp, mtxTransform;
+    
+    Actor* partner;
+    Actor* player;
+    ActorPart* playerParts;
+    EffectInstance* effect;
+    f32 playerPosX, playerPosY, playerPosZ, playerYaw;
+    f32 dx, dy, dz;
+    s32 cond1, cond2, cond3, cond4;
+    u32 lastAnim;
+
+    player = gBattleStatus.playerActor;
+    partner = gBattleStatus.partnerActor;
+    playerParts = player->partsTable;
+    
+    playerPosX = player->currentPos.x + player->headOffset.x;
+    playerPosY = player->currentPos.y + player->headOffset.y + player->unk_19A;
+    playerPosZ = player->currentPos.z + player->headOffset.z;
+
+    playerYaw = player->yaw;
+    playerParts->yaw = playerYaw;
+    
+    player->disableEffect->data.disableX->pos.x = playerPosX + ((player->actorBlueprint->statusIconOffset.x + player->unk_194) * player->scalingFactor);
+    player->disableEffect->data.disableX->pos.y = playerPosY + ((player->actorBlueprint->statusIconOffset.y + player->unk_195) * player->scalingFactor);
+    player->disableEffect->data.disableX->pos.z = playerPosZ;
+    
+    if (!(gBattleStatus.flags1 & 4) && (player->flags & 0x08000000)) {
+        if (player->disableDismissTimer != 0) {
+            player->disableDismissTimer--;
+            player->disableEffect->data.disableX->pos.y = -1000.0f;
+        } else {
+            player->disableEffect->data.disableX->scale = player->scalingFactor * 0.75;
+        }
+    } else {
+        player->disableEffect->data.disableX->pos.y = -1000.0f;
+        player->disableDismissTimer = 10;
+    }
+    if (battleStatus->waterBlockTurnsLeft != 0) {
+        if ((gBattleStatus.flags1 & 8) || (!(gBattleStatus.flags1 & 4) && (player->flags & 0x08000000))) {
+            effect = battleStatus->waterBlockEffect;
+            effect->data.waterBlock->pos.x = playerPosX;
+            effect->data.waterBlock->pos.y = playerPosY;
+            effect->data.waterBlock->pos.z = playerPosZ;
+        } else {
+            effect = battleStatus->waterBlockEffect;
+            effect->data.waterBlock->pos.x = playerPosX;
+            effect->data.waterBlock->pos.y = -1000.0f;
+            effect->data.waterBlock->pos.z = playerPosZ;
+        }
+    }
+    if (battleStatus->cloudNineTurnsLeft != 0) {
+        if ((gBattleStatus.flags1 & 8) || (!(gBattleStatus.flags1 & 4) && (player->flags & 0x08000000))) {
+            effect = battleStatus->cloudNineEffect;
+            effect->data.endingDecals->pos.x = playerPosX;
+            effect->data.endingDecals->pos.y = playerPosY;
+            effect->data.endingDecals->pos.z = playerPosZ;
+            effect->data.endingDecals->unk_10 = player->scalingFactor;
+        } else {
+            effect = battleStatus->cloudNineEffect;
+            effect->data.endingDecals->pos.x = playerPosX;
+            effect->data.endingDecals->pos.y = -1000.0f;
+            effect->data.endingDecals->pos.z = playerPosZ;
+        }
+    }
+    if (player->debuff == 7) {
+        effect = player->icePillarEffect;
+        if (player->icePillarEffect != NULL) {
+            if ((gBattleStatus.flags1 & 8) || (!(gBattleStatus.flags1 & 4) && (player->flags & 0x08000000))) {
+                effect->data.icePillar->pos.x = (f32) (playerPosX - 8.0f);
+                effect->data.icePillar->pos.y = playerPosY;
+                effect->data.icePillar->pos.z = playerPosZ;
+                effect->data.icePillar->unk_20 = player->size.y / 24.0;
+            } else {
+                effect->data.icePillar->pos.x = 0.0f;
+                effect->data.icePillar->pos.y = -1000.0f;
+                effect->data.icePillar->pos.z = 0.0f;
+            }
+        }
+    } else {
+        effect = player->icePillarEffect;
+        if (effect != NULL) {
+            effect->flags |= 0x10;
+            player->icePillarEffect = NULL;
+        }
+    }
+    if (!(gBattleStatus.flags2 & 0x10000) && !(gBattleStatus.flags1 & 4) && (player->flags & 0x08000000)) {
+        battleStatus->buffEffect->data.partnerBuff->unk_02 = 1;
+    } else {
+        battleStatus->buffEffect->data.partnerBuff->unk_02 = 0;
+    }
+    do {
+        if (player->debuff == 0xA) {
+            player->scalingFactor += ((0.4 - player->scalingFactor) / 6.0);
+        } else {
+            player->scalingFactor += ((1.0 - player->scalingFactor) / 6.0);
+        }
+    } while (0); // required to match
+    
+    if (player->flags & 0x08000000) {
+        if (battleStatus->hammerCharge > 0) {
+            create_status_icon_boost_hammer(player->hudElementDataIndex);
+            remove_status_icon_boost_jump(player->hudElementDataIndex);
+        } else {
+            remove_status_icon_boost_hammer(player->hudElementDataIndex);
+        }
+        if (battleStatus->jumpCharge > 0) {
+            create_status_icon_boost_jump(player->hudElementDataIndex);
+            remove_status_icon_boost_hammer(player->hudElementDataIndex);
+        } else {
+            remove_status_icon_boost_jump(player->hudElementDataIndex);
+        }
+    } else {
+        enable_status_icon_boost_jump(player->hudElementDataIndex);
+        enable_status_icon_boost_hammer(player->hudElementDataIndex);
+    }
+
+    if ((player->flags & 0x08000000) && !(gBattleStatus.flags2 & 0x40)) {
+        if (playerData->curHP > 1) {
+            remove_status_icon_peril(player->hudElementDataIndex);
+            if (playerData->curHP > 5) {
+                remove_status_icon_danger(player->hudElementDataIndex);
+            } else {
+                create_status_icon_danger(player->hudElementDataIndex);
+                remove_status_icon_peril(player->hudElementDataIndex);
+            }
+        } else {
+            create_status_icon_peril(player->hudElementDataIndex);
+            remove_status_icon_danger(player->hudElementDataIndex);
+        }
+    } else {
+        remove_status_icon_peril(player->hudElementDataIndex);
+        remove_status_icon_danger(player->hudElementDataIndex);
+    }
+    
+    if (player->transparentStatus == 0xE) {
+        playerParts->flags |= 0x100;
+    } else {
+        playerParts->flags &= ~0x100;
+    }
+  
+    do {
+        cond1 = FALSE;
+        cond2 = FALSE;
+        cond3 = FALSE;
+        cond4 = FALSE;
+        lastAnim = playerParts->currentAnimation;
+    } while (0); // required to match
+    
+    if (((((gBattleStatus.flags2 & 0xA) == 2) && (partner != NULL)) || (gBattleStatus.outtaSightActive > 0)) && !(player->flags & 0x20000000) && ((partner == NULL) || !(partner->flags & 0x200000))) {
+        if (!(gBattleStatus.flags2 & 0x100000)) {
+            if ((player->debuff != 3) && (player->debuff != 5) && (player->debuff != 7) && (player->debuff != 8)) {
+                if ((player->transparentStatus != 0xE) && (player->stoneStatus != 0xC) && ((gBattleStatus.outtaSightActive > 0) || (gBattleStatus.flags2 & 2))) {
+                    if (is_ability_active(0x15)) {
+                        playerParts->currentAnimation = func_80265D44(0x13);
+                    } else  if (player->debuff == 6) {
+                        playerParts->currentAnimation = func_80265D44(0x15);
+                    } else if (player->debuff == 4) {
+                        playerParts->currentAnimation = func_80265D44(0x18);
+                    } else {
+                        playerParts->currentAnimation = func_80265D44(0x12);
+                    }
+                    spr_update_player_sprite(0, (s32) playerParts->currentAnimation, playerParts->animationRate);
+                    cond1 = TRUE;
+                }
+            }
+            
+            if (player->debuff != 9) {
+                func_80266DAC(player, 0xC);
+            } else {
+                func_80266DAC(player, 0xD);
+            }
+            cond2 = TRUE;
+            
+            func_80266EE8(player, 0);
+            cond3 = TRUE;
+        }
+    }
+    if (player->stoneStatus == 0xC) {        
+        playerParts->currentAnimation = func_80265D44(0xC);
+        spr_update_player_sprite(0, playerParts->currentAnimation, playerParts->animationRate);
+        cond1 = TRUE;
+        
+        if (cond2 == 0) {
+            func_80266DAC(player, 0);
+        }
+        func_80266EE8(player, 0);
+        cond2 = 1;
+        enable_status_debuff(player->hudElementDataIndex);
+        cond3 = 1;
+        enable_status_2(player->hudElementDataIndex);
+        cond4 = 1;
+        
+        enable_status_transparent(player->hudElementDataIndex);
+        enable_status_chill_out(player->hudElementDataIndex);
+    }
+    
+    if ((player->flags & 0x04000000) && (cond1 == 0)) {
+        s32 temp = playerParts->currentAnimation;
+        if (temp == func_80265D44(0xC)) {
+            playerParts->currentAnimation = func_80265D44(1);
+        }
+    }
+    
+    if (is_ability_active(0x15) != 0) {
+        if (cond2 == 0) {
+            func_80266DAC(player, 8);
+        }
+        cond2 = 1;
+    }
+    if (player->debuff == 9) {
+        if (cond2 == 0) {
+            func_80266DAC(player, 6);
+        }
+        cond2 = 1;
+    }
+    if (player->debuff == 5) {
+        if (cond2 == 0) {
+            func_80266DAC(player, 7);
+        }
+        cond2 = 1;
+    }
+    if (player->staticStatus == 0xB) {
+        if (cond2 == 0) {
+            func_80266DAC(player, 4);
+        }
+        cond2 = 1;
+    }
+    if (battleStatus->turboChargeTurnsLeft != 0) {
+        if (cond3 == 0) {
+            func_80266EE8(player, 0xB);
+        }
+        cond3 = 1;
+    }
+    if (is_ability_active(0x13) != 0) {
+        if (cond2 == 0) {
+            func_80266DAC(player, 4);
+        }
+        cond2 = 1;
+    }
+    if (cond2 == 0) {
+        func_80266DAC(player, 0);
+    }
+    if (cond3 == 0) {
+        func_80266EE8(player, 0);
+    }
+    if (player->flags & 0x04000000) {
+        if (battleStatus->hustleTurns != 0) {
+            playerParts->currentAnimation = func_80265D44(0x19);
+            cond1 = 1;
+        } else if (cond1 == 0) {
+            s32 temp = func_80265D44(1);
+            do {
+                if (temp == func_80265D44(0x19)) {
+                    playerParts->currentAnimation = func_80265D44(1);
+                }
+            } while (0); // required to match
+        }
+
+        do {
+            if (player->debuff == 7) {
+                if (!cond1) {
+                    playerParts->currentAnimation = func_80265D44(7);
+                    cond1 = 1;
+                }
+            } else if (player->debuff != STATUS_SHRINK) {
+                if (player->debuff == 9) {
+                    if (!cond1) {
+                        playerParts->currentAnimation = func_80265D44(9);
+                        cond1 = 1;
+                    }
+                } else if (player->debuff == 4) {
+                    if (!cond1) {
+                        playerParts->currentAnimation = func_80265D44(4);
+                        cond1 = 1;
+                    }
+                } else if (player->debuff == 6) {
+                    if (!cond1) {
+                        playerParts->currentAnimation = func_80265D44(6);
+                        cond1 = 1;
+                    }
+                } else if (player->debuff == 5) {
+                    if (!cond1) {
+                        playerParts->currentAnimation = func_80265D44(5);
+                        cond1 = 1;
+                    }
+                 } else {
+                    if (player_team_is_ability_active(player, 0x15) != 0) {
+                        if (cond1 == 0) {
+                            playerParts->currentAnimation = func_80265D44(0x10);
+                            cond1 = 1;
+                        }
+                    }
+                }
+            }
+            if (is_ability_active(0x13) != 0) {
+                if (cond1 == 0) {
+                    playerParts->currentAnimation = func_80265D44(0xB);
+                    cond1 = 1;
+                }
+                player->staticStatus = 0xB;
+                player->staticDuration = 0x7F;
+            } else if ((player->staticStatus == (s8) 0xB) && (cond1 == 0)) {
+                playerParts->currentAnimation = func_80265D44(0xB);
+                cond1 = 1;
+            }
+            if ((player->transparentStatus == 0xE) || (playerParts->flags & 0x100)) {
+                if (cond1 == 0) {
+                    playerParts->currentAnimation = func_80265D44(0xE);
+                    cond1 = 1;
+                }
+                create_status_transparent((s32) player->hudElementDataIndex, 0xE);
+            }
+            if (cond1 == 0) {
+                playerParts->currentAnimation = func_80265D44(1);
+            }
+        } while(0); // needed to match
+    }
+    if (!(gBattleStatus.flags1 & 4) && (player->flags & 0x08000000)) {
+        if (cond4 == 0) {
+            do {
+                if (player->debuff == 0x9) {
+                    create_status_debuff(player->hudElementDataIndex, player->debuff);
+                } else if (player->debuff == 6) {
+                    create_status_debuff(player->hudElementDataIndex, player->debuff);
+                } else if (player->debuff == 5) {
+                    create_status_debuff(player->hudElementDataIndex, player->debuff);
+                } else if (player->debuff == 4) {
+                    create_status_debuff(player->hudElementDataIndex, player->debuff);
+                } else if (player->debuff == 10) {
+                    create_status_debuff(player->hudElementDataIndex, player->debuff);
+                } else if (player->debuff == 7) {
+                    create_status_debuff(player->hudElementDataIndex, player->debuff);
+                }
+            } while (0); // required to match
+            if ((cond4 == 0) && ((is_ability_active(0x13) != 0) || (player->staticStatus == 0xB))) {
+                create_status_static((s32) player->hudElementDataIndex, 0xB);
+            }
+        }
+        if ((player->transparentStatus == 0xE) || (playerParts->flags & 0x100)) {
+            create_status_transparent((s32) player->hudElementDataIndex, 0xE);
+        }
+    } else {
+        enable_status_debuff(player->hudElementDataIndex);
+        enable_status_2(player->hudElementDataIndex);
+        enable_status_transparent(player->hudElementDataIndex);
+        enable_status_chill_out(player->hudElementDataIndex);
+    }
+
+    if (player->debuff != 8) {
+        if (cond1 == 0) {
+            s32 temp = playerParts->currentAnimation;
+            if (temp == func_80265D44(8)) {
+                playerParts->currentAnimation = func_80265D44(1);
+            }
+        }
+    } else {
+        playerParts->currentAnimation = func_80265D44(8);
+        create_status_debuff(player->hudElementDataIndex, 8);
+    }
+
+    set_status_icons_properties(player->hudElementDataIndex,
+        playerPosX, playerPosY, playerPosZ,
+        player->actorBlueprint->statusIconOffset.x * player->scalingFactor,
+        player->actorBlueprint->statusIconOffset.y * player->scalingFactor,
+        player->actorBlueprint->statusMessageOffset.x * player->scalingFactor,
+        player->actorBlueprint->statusMessageOffset.y * player->scalingFactor);
+    set_status_icons_offset(player->hudElementDataIndex,
+        player->size.y * player->scalingFactor,
+        player->size.x * player->scalingFactor);
+
+    dx = playerPosX + playerParts->unkOffset[0];
+    dy = playerPosY + playerParts->unkOffset[1];
+    dz = playerPosZ;
+    playerParts->currentPos.x = dx;
+    playerParts->currentPos.y = dy;
+    playerParts->currentPos.z = dz;
+    guTranslateF(mtxTranslate, dx, dy, dz);
+
+    guTranslateF(mtxPivotOn,
+        -player->rotationPivotOffset.x * player->scalingFactor,
+        -player->rotationPivotOffset.y * player->scalingFactor,
+        -player->rotationPivotOffset.z * player->scalingFactor);
+    guTranslateF(mtxPivotOff,
+        player->rotationPivotOffset.x * player->scalingFactor,
+        player->rotationPivotOffset.y * player->scalingFactor,
+        player->rotationPivotOffset.z * player->scalingFactor);
+
+    guRotateF(mtxRotX, player->rotation.x, 1.0f, 0.0f, 0.0f);
+    guRotateF(mtxRotY, player->rotation.y, 0.0f, 1.0f, 0.0f);
+    guRotateF(mtxRotZ, player->rotation.z, 0.0f, 0.0f, 1.0f);
+    guMtxCatF(mtxRotY, mtxRotX, mtxTemp);
+    guMtxCatF(mtxTemp, mtxRotZ, mtxRotation);
+
+    guScaleF(mtxScale,
+        player->scale.x * SPRITE_WORLD_SCALE_D * player->scalingFactor,
+        player->scale.y * SPRITE_WORLD_SCALE_D * player->scalingFactor * playerParts->verticalStretch,
+        player->scale.z * SPRITE_WORLD_SCALE_D);
+
+    guMtxCatF(mtxScale, mtxPivotOn, mtxTemp);
+    guMtxCatF(mtxTemp, mtxRotation, mtxTransform);
+    guMtxCatF(mtxTransform, mtxPivotOff, mtxTemp);
+    guMtxCatF(mtxTemp, mtxTranslate, mtxTransform);
+
+    if (lastAnim != playerParts->currentAnimation) {
+        spr_update_player_sprite(0, playerParts->currentAnimation, playerParts->animationRate);
+    }
+    func_8025C840(0, playerParts, clamp_angle(playerYaw + 180.0f), 0);
+    func_8025CCC8(0, playerParts, clamp_angle(playerYaw + 180.0f), 0);
+    func_802591EC(0, playerParts, clamp_angle(playerYaw + 180.0f), mtxTransform, 0);
+    _add_part_decoration(playerParts);
+}
+#else
 INCLUDE_ASM(void, "182B30", appendGfx_player_actor);
+#endif
 
 void func_80258E14(void* arg0) {
     Matrix4f mtxRotX, mtxRotY, mtxRotZ, mtxRotation, mtxScale;
