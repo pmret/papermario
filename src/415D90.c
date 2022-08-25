@@ -1034,10 +1034,10 @@ s32 func_802A4A54(void) {
             set_window_update(8, 2);
             if (D_802AD610 == 0) {
                 width = get_msg_width(0x1D00CB, 0);
-            set_window_properties(9, (SCREEN_WIDTH / 2) - ((width + 23) / 2), 80, width + 23, 28, 0x14, func_802A57C8, NULL, -1);
+                set_window_properties(9, (SCREEN_WIDTH / 2) - ((width + 23) / 2), 80, width + 23, 28, 0x14, func_802A57C8, NULL, -1);
             } else {
                 width = get_msg_width(0x1D00CC, 0);
-            set_window_properties(9, (SCREEN_WIDTH / 2) - ((width + 23) / 2), 80, width + 23, 28, 0x14, func_802A57C8, NULL, -1);
+                set_window_properties(9, (SCREEN_WIDTH / 2) - ((width + 23) / 2), 80, width + 23, 28, 0x14, func_802A57C8, NULL, -1);
             }
             set_window_update(9, 1);
             D_802AD612 = 60;

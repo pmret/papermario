@@ -907,7 +907,6 @@ enum AuxCameraParams {
     AUX_CAM_ZOOM_PERCENT        = 8
 };
 
-#define LOOKUP_ITEM(itemID) gItemTable[itemID & ~0xF0000]
 enum ItemIDs {
     ITEM_NONE                         = 0x00000000,
     ITEM_JUMP                         = 0x00000001,
@@ -1276,6 +1275,8 @@ enum ItemIDs {
     ITEM_ITEMS_ICON                   = 0x0000016C,
 };
 
+#define LOOKUP_ITEM(itemID) gItemTable[itemID & ~0xF0000]
+
 #define ITEM_FIRST_KEY              ITEM_LUCKY_STAR
 #define ITEM_FIRST_VALID_KEY        ITEM_KOOPA_FORTRESS_KEY
 #define ITEM_LAST_KEY               ITEM_PRISON_KEY4
@@ -1284,6 +1285,9 @@ enum ItemIDs {
 #define ITEM_LAST_CONSUMABLE        ITEM_JELLY_SHROOM6
 #define ITEM_FIRST_BADGE            ITEM_SPIN_SMASH
 #define ITEM_LAST_BADGE             ITEM_ATTACK_FX_F5
+
+#define IS_ID_BADGE(itemID) (itemID >= ITEM_FIRST_BADGE && itemID <= ITEM_LAST_BADGE)
+#define IS_ID_ITEM(itemID) (itemID >= ITEM_FIRST_VALID_KEY && itemID <= ITEM_LAST_VALID_CONSUMABLE)
 
 enum ItemTypeFlags {
     ITEM_TYPE_FLAG_WORLD_USABLE         = 0x0001,
