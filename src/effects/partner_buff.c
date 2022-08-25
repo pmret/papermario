@@ -110,7 +110,6 @@ void partner_buff_update(EffectInstance* effect) {
                     buff->state = BUFF_STATE_FADE_IN_INIT;
                 }
                 break;
-
             case BUFF_STATE_DECREMENT_TURNS_INIT:
                 buff->stateTimer = 0;
                 buff->state = BUFF_STATE_DECREMENT_TURNS;
@@ -123,7 +122,6 @@ void partner_buff_update(EffectInstance* effect) {
                     buff->turnsDisplay--;
                 }
                 break;
-
             case BUFF_STATE_SET_TURNS_INIT:
                 buff->stateTimer = 0;
                 buff->state = BUFF_STATE_SET_TURNS;
@@ -136,7 +134,6 @@ void partner_buff_update(EffectInstance* effect) {
                     buff->turnsDisplay = buff->turnsLeft;
                 }
                 break;
-
             case BUFF_STATE_FADE_OUT:
                 buff->alpha -= 32;
                 if (buff->alpha < 0) {
@@ -144,7 +141,6 @@ void partner_buff_update(EffectInstance* effect) {
                     buff->state = BUFF_STATE_IDLE;
                 }
                 break;
-
             case BUFF_STATE_FADE_IN_INIT:
                 buff->state = BUFF_STATE_FADE_IN;
                 buff->turnsDisplay = buff->turnsLeft;
