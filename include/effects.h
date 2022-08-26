@@ -1223,9 +1223,36 @@ typedef struct FireworkRocketFXData {
     /* 0x00 */ char todo[0];
 } FireworkRocketFXData; // size = unknown
 
+typedef struct PeachStarBeamInner {
+    /* 0x00 */ s32 flags;
+    /* 0x04 */ Vec3f unk_04;
+    /* 0x10 */ Vec3f unk_10;
+} PeachStarBeamInner; // size = 0x1C
+
 typedef struct PeachStarBeamFXData {
-    /* 0x00 */ char todo[0];
-} PeachStarBeamFXData; // size = unknown
+    /* 0x00 */ s32 type;
+    /* 0x04 */ Vec3f pos;
+    /* 0x10 */ s32 timeLeft;
+    /* 0x14 */ s32 lifetime;
+    /* 0x18 */ s32 primR;
+    /* 0x1C */ s32 primG;
+    /* 0x20 */ s32 primB;
+    /* 0x24 */ s32 alpha;
+    /* 0x28 */ s32 envR;
+    /* 0x2C */ s32 envG;
+    /* 0x30 */ s32 envB;
+    /* 0x34 */ s32 envA;
+    /* 0x38 */ f32 unk_38;
+    /* 0x3C */ s32 unk_3C;
+    /* 0x40 */ f32 unk_40;
+    /* 0x44 */ f32 unk_44;
+    /* 0x48 */ f32 unk_48;
+    /* 0x4C */ f32 unk_4C;
+    /* 0x50 */ f32 unk_50;
+    /* 0x54 */ f32 unk_54;
+    /* 0x58 */ f32 unk_58;
+    /* 0x5C */ PeachStarBeamInner parts[8];
+} PeachStarBeamFXData; // size = 0x13C
 
 typedef struct ChapterChangeFXData {
     /* 0x00 */ char todo[0];

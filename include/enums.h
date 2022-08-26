@@ -592,9 +592,15 @@ enum SoundIDs {
     SOUND_CREAKY_ROCKING_CHAIR      = 0x000001D6,
     SOUND_1E2                       = 0x000001E2,
     SOUND_211                       = 0x00000211,
+    SOUND_212                       = 0x00000212,
     SOUND_213                       = 0x00000213,
     SOUND_214                       = 0x00000214,
     SOUND_215                       = 0x00000215,
+    SOUND_217                       = 0x00000217,
+    SOUND_218                       = 0x00000218,
+    SOUND_219                       = 0x00000219,
+    SOUND_21A                       = 0x0000021A,
+    SOUND_21B                       = 0x0000021B,
     SOUND_21C                       = 0x0000021C,
     SOUND_MENU_ERROR                = 0x0000021D,
     SOUND_231                       = 0x00000231,
@@ -726,6 +732,7 @@ enum SoundIDs {
     SOUND_2019                      = 0x00002019,
     SOUND_201B                      = 0x0000201B,
     SOUND_2020                      = 0x00002020,
+    SOUND_2056                      = 0x00002056,
     SOUND_202C                      = 0x0000202C,
     SOUND_202D                      = 0x0000202D,
     SOUND_202E                      = 0x0000202E,
@@ -900,7 +907,6 @@ enum AuxCameraParams {
     AUX_CAM_ZOOM_PERCENT        = 8
 };
 
-#define LOOKUP_ITEM(itemID) gItemTable[itemID & ~0xF0000]
 enum ItemIDs {
     ITEM_NONE                         = 0x00000000,
     ITEM_JUMP                         = 0x00000001,
@@ -1269,6 +1275,8 @@ enum ItemIDs {
     ITEM_ITEMS_ICON                   = 0x0000016C,
 };
 
+#define LOOKUP_ITEM(itemID) gItemTable[itemID & ~0xF0000]
+
 #define ITEM_FIRST_KEY              ITEM_LUCKY_STAR
 #define ITEM_FIRST_VALID_KEY        ITEM_KOOPA_FORTRESS_KEY
 #define ITEM_LAST_KEY               ITEM_PRISON_KEY4
@@ -1277,6 +1285,9 @@ enum ItemIDs {
 #define ITEM_LAST_CONSUMABLE        ITEM_JELLY_SHROOM6
 #define ITEM_FIRST_BADGE            ITEM_SPIN_SMASH
 #define ITEM_LAST_BADGE             ITEM_ATTACK_FX_F5
+
+#define IS_ID_BADGE(itemID) (itemID >= ITEM_FIRST_BADGE && itemID <= ITEM_LAST_BADGE)
+#define IS_ID_ITEM(itemID) (itemID >= ITEM_FIRST_VALID_KEY && itemID <= ITEM_LAST_VALID_CONSUMABLE)
 
 enum ItemTypeFlags {
     ITEM_TYPE_FLAG_WORLD_USABLE         = 0x0001,
@@ -1982,6 +1993,7 @@ enum ItemEntityFlags {
     ITEM_ENTITY_FLAGS_4000000       = 0x04000000,
     ITEM_ENTITY_FLAGS_8000000       = 0x08000000,
     ITEM_ENTITY_FLAGS_10000000      = 0x10000000,
+    ITEM_ENTITY_FLAGS_20000000      = 0x20000000,
     ITEM_ENTITY_FLAGS_40000000      = 0x40000000,
     ITEM_ENTITY_FLAGS_80000000      = 0x80000000,
 };

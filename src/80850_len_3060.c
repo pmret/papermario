@@ -17,6 +17,8 @@ extern HudScript HES_StatusStar1;
 extern HudScript HES_StatusTimes;
 extern HudScript HES_StatusSPShine;
 
+extern HudScript SlashHudScript;
+
 void clear_player_data(void) {
     PlayerData* playerData = &gPlayerData;
     s32 i;
@@ -448,7 +450,73 @@ void status_menu_draw_number(s32 iconID, s32 x, s32 y, s32 value, s32 numDigits)
 INCLUDE_ASM(s32, "80850_len_3060", status_menu_draw_number);
 #endif
 
+// close but some ordering / reg issues
+#ifdef NON_MATCHING
+void status_menu_draw_stat(s32 id, s32 x, s32 y, s32 arg3, s32 arg4) {
+    s8 digits[4];
+    s32 sp18;
+    s32 sp1C;
+    s32 cond;
+    s32 digit;
+    s32 numDigits;
+    s32 localX;
+    s32 localY;
+    s32 i;
+
+    numDigits = 2;
+
+    sp18 = x + 8;
+    sp1C = y + 8;
+    i = 0;
+    hud_element_set_script(id, SlashHudScript);
+    hud_element_set_render_pos(id, x + 22, y + 9);
+    hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
+    hud_element_draw_next(id);
+
+
+    for (; i < numDigits; i++) {
+        s32 num = arg3 % 10;
+
+        digits[numDigits - i - 1] = num;
+        arg3 /= 10;
+    }
+
+    localX = sp18;
+    localY = sp1C;
+    cond = FALSE;
+    for (i = 0; i < numDigits; i++) {
+        digit = digits[i];
+        if (digit != 0 || cond || i == numDigits - 1) {
+            cond = TRUE;
+            hud_element_set_script(id, DigitHudScripts[digit]);
+            hud_element_set_render_pos(id, localX + (i * 8), localY);
+            hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
+            hud_element_draw_next(id);
+        }
+    }
+
+    for (i = 0; i < numDigits; i++) {
+        digits[numDigits - i - 1] = arg4 % 10;
+        arg4 /= 10;
+    }
+
+    localX = sp18 + 26;
+    localY = sp1C;
+    cond = FALSE;
+    for (i = 0; i < numDigits; i++) {
+        digit = digits[i];
+        if (digit != 0 || cond || i == numDigits - 1) {
+            cond = TRUE;
+            hud_element_set_script(id, DigitHudScripts[digit]);
+            hud_element_set_render_pos(id, localX + (i * 8), localY);
+            hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
+            hud_element_draw_next(id);
+        }
+    }
+}
+#else
 INCLUDE_ASM(s32, "80850_len_3060", status_menu_draw_stat);
+#endif
 
 void update_status_menu(void);
 INCLUDE_ASM(s32, "80850_len_3060", update_status_menu);

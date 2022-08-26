@@ -48,7 +48,7 @@ void func_8025B5C0(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4, s
 void func_8025BAA0(s32 arg0, ActorPart* part, s32 yaw, s32 arg3, Matrix4f mtx, s32 arg5);
 void func_8025C120(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4);
 s32 func_8025C840(s32 arg0, ActorPart* part, s32 yaw, s32);
-s32 func_8025CCC8(s32 arg0, ActorPart* part, s32 yaw, s32); 
+s32 func_8025CCC8(s32 arg0, ActorPart* part, s32 yaw, s32);
 s32 func_80265D44(s32 animID);
 void func_8026709C(ActorPart* part);
 
@@ -747,11 +747,11 @@ void appendGfx_npc_actor(s32 isPartner, s32 actorIndex) {
         actorPosY = actor->currentPos.y - actor->headOffset.y + actor->unk_19A;
     }
     actorPosZ = actor->currentPos.z + actor->headOffset.z;
-    
+
     actor->disableEffect->data.disableX->pos.x = actorPosX + ((actor->actorBlueprint->statusIconOffset.x + actor->unk_194) * actor->scalingFactor);
     actor->disableEffect->data.disableX->pos.y = actorPosY + ((actor->actorBlueprint->statusIconOffset.y + actor->unk_195) * actor->scalingFactor);
     actor->disableEffect->data.disableX->pos.z = actorPosZ;
-    
+
     if (!(gBattleStatus.flags1 & ACTOR_PART_FLAG_4) && (actor->flags & ACTOR_FLAG_8000000)) {
         if (actor->disableDismissTimer != 0) {
             actor->disableDismissTimer--;
@@ -789,7 +789,7 @@ void appendGfx_npc_actor(s32 isPartner, s32 actorIndex) {
         (actor->actorBlueprint->statusIconOffset.y + actor->unk_195) * actor->scalingFactor,
         (actor->actorBlueprint->statusMessageOffset.x + actor->unk_196) * actor->scalingFactor,
         (actor->actorBlueprint->statusMessageOffset.y + actor->unk_197) * actor->scalingFactor);
-    
+
     if (!(actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW)) {
         set_status_icons_offset(actor->hudElementDataIndex,
             actor->size.y * actor->scalingFactor,
@@ -807,15 +807,15 @@ void appendGfx_npc_actor(s32 isPartner, s32 actorIndex) {
             actor->scalingFactor += ((1.0 - actor->scalingFactor) / 6.0);
         }
     } while (0); // required to match
-    
+
     if (!(actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW)) {
         guTranslateF(mtxPivotOn,
             -actor->rotationPivotOffset.x * actor->scalingFactor,
             -actor->rotationPivotOffset.y * actor->scalingFactor,
             -actor->rotationPivotOffset.z * actor->scalingFactor);
         guTranslateF(mtxPivotOff,
-            actor->rotationPivotOffset.x * actor->scalingFactor, 
-            actor->rotationPivotOffset.y * actor->scalingFactor, 
+            actor->rotationPivotOffset.x * actor->scalingFactor,
+            actor->rotationPivotOffset.y * actor->scalingFactor,
             actor->rotationPivotOffset.z * actor->scalingFactor);
     } else {
         guTranslateF(mtxPivotOn,
@@ -823,8 +823,8 @@ void appendGfx_npc_actor(s32 isPartner, s32 actorIndex) {
              actor->rotationPivotOffset.y * actor->scalingFactor,
             -actor->rotationPivotOffset.z * actor->scalingFactor);
         guTranslateF(mtxPivotOff,
-             actor->rotationPivotOffset.x * actor->scalingFactor, 
-            -actor->rotationPivotOffset.y * actor->scalingFactor, 
+             actor->rotationPivotOffset.x * actor->scalingFactor,
+            -actor->rotationPivotOffset.y * actor->scalingFactor,
              actor->rotationPivotOffset.z * actor->scalingFactor);
     }
     guRotateF(mtxRotX, actor->rotation.x, 1.0f, 0.0f, 0.0f);
@@ -841,7 +841,7 @@ void appendGfx_npc_actor(s32 isPartner, s32 actorIndex) {
     guMtxCatF(mtxTemp, mtxScaleMod, mtxScale);
     guMtxCatF(mtxScale, mtxRotation, mtxTransform);
     guMtxCatF(mtxTransform, mtxPivotOff, mtxActor);
-    
+
     part = actor->partsTable;
     numParts = actor->numParts;
     for (i = 0; i < numParts; i++) {
@@ -858,7 +858,7 @@ void appendGfx_npc_actor(s32 isPartner, s32 actorIndex) {
             partPosX = part->absolutePosition.x + part->visualOffset.x;
             partPosY = part->absolutePosition.y + part->visualOffset.y;
             partPosZ = part->absolutePosition.z + part->visualOffset.z;
-            guScaleF(mtxPartScale, 
+            guScaleF(mtxPartScale,
                 actor->scale.x * SPRITE_WORLD_SCALE_D,
                 actor->scale.y * SPRITE_WORLD_SCALE_D,
                 actor->scale.z * SPRITE_WORLD_SCALE_D);
@@ -871,12 +871,12 @@ void appendGfx_npc_actor(s32 isPartner, s32 actorIndex) {
         if (part->flags & ACTOR_PART_FLAG_INVISIBLE) {
             part = part->nextPart;
             continue;
-        } 
+        }
         if (part->idleAnimations == NULL) {
             part = part->nextPart;
             continue;
         }
-        
+
         if (actor->transparentStatus == STATUS_TRANSPARENT) {
             part->flags |= ACTOR_PART_FLAG_100;
         } else {
@@ -884,12 +884,12 @@ void appendGfx_npc_actor(s32 isPartner, s32 actorIndex) {
         }
 
         do {
-            lastAnim = part->currentAnimation; 
+            lastAnim = part->currentAnimation;
             animChanged = FALSE;
             cond2 = FALSE;
             decorChanged = FALSE;
         } while (0); // required to match
-        
+
         if (isPartner) {
             if ((gBattleStatus.flags2 & (BS_FLAGS2_10 | BS_FLAGS2_4)) == BS_FLAGS2_4) {
                 do {
@@ -982,7 +982,7 @@ void appendGfx_npc_actor(s32 isPartner, s32 actorIndex) {
                         }
                     }
                 }
-                                    
+
                 if (actor->staticStatus == STATUS_STATIC) {
                     if (!animChanged) {
                         part->currentAnimation = func_80265CE8(part->idleAnimations, STATUS_STATIC);
@@ -994,7 +994,7 @@ void appendGfx_npc_actor(s32 isPartner, s32 actorIndex) {
                 if (!animChanged) {
                     part->currentAnimation = func_80265CE8(part->idleAnimations, 1);
                 }
-                
+
                 if (isPartner) {
                     if (actor->koStatus == STATUS_DAZE) {
                         part->currentAnimation = func_80265CE8(part->idleAnimations, STATUS_DAZE);
@@ -1038,7 +1038,7 @@ void appendGfx_npc_actor(s32 isPartner, s32 actorIndex) {
                     create_status_debuff(actor->hudElementDataIndex, STATUS_FROZEN);
                 }
             } while (0); // required to match
-            
+
             if (actor->staticStatus == STATUS_STATIC) {
                 create_status_static(actor->hudElementDataIndex, STATUS_STATIC);
             }
@@ -1092,18 +1092,18 @@ void appendGfx_npc_actor(s32 isPartner, s32 actorIndex) {
         guMtxCatF(mtxScale, mtxPivotOn, mtxTransform);
         guMtxCatF(mtxTransform, mtxRotation, mtxTemp);
         guMtxCatF(mtxTemp, mtxPivotOff, mtxTransform);
-        
+
         if (!(part->flags & ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION)) {
             guMtxCatF(mtxTransform, mtxActor, mtxTemp);
         } else {
             guMtxCatF(mtxTransform, mtxPartScale, mtxTemp);
         }
         guMtxCatF(mtxTemp, mtxTranslate, mtxTransform);
-        
+
         part->currentPos.x = partPosX + part->unkOffset[0];
         part->currentPos.y = partPosY + part->unkOffset[1];
         part->currentPos.z = partPosZ;
-        
+
         if (part->unk_84 >= 0) {
             if (!isPartner) {
                 func_8025C840(1, part, partYaw, 0);
@@ -1114,7 +1114,7 @@ void appendGfx_npc_actor(s32 isPartner, s32 actorIndex) {
                 func_8025CCC8(1, part, clamp_angle(180.0f - partYaw), 0);
                 func_802591EC(1, part, clamp_angle(180.0f - partYaw), mtxTransform, 0);
             }
-            
+
             _add_part_decoration(part);
         }
 
@@ -1141,9 +1141,9 @@ void func_802571F0(s32 flipYaw, Actor* actor) {
         actorPosY = actor->currentPos.y - actor->headOffset.y;
     }
     actorPosZ = actor->currentPos.z + actor->headOffset.z - 5.0f;
-    
+
     if (!(actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW)) {
-        guTranslateF(mtxPivotOn, 
+        guTranslateF(mtxPivotOn,
             -actor->rotationPivotOffset.x * actor->scalingFactor,
             -actor->rotationPivotOffset.y * actor->scalingFactor,
             -actor->rotationPivotOffset.z * actor->scalingFactor);
@@ -1161,18 +1161,18 @@ void func_802571F0(s32 flipYaw, Actor* actor) {
              -actor->rotationPivotOffset.y * actor->scalingFactor,
              actor->rotationPivotOffset.z * actor->scalingFactor);
     }
-   
+
     guRotateF(mtxRotX, actor->rotation.x, 1.0f, 0.0f, 0.0f);
     guRotateF(mtxRotY, actor->rotation.y, 0.0f, 1.0f, 0.0f);
     guRotateF(mtxRotZ, actor->rotation.z, 0.0f, 0.0f, 1.0f);
     guMtxCatF(mtxRotY, mtxRotX, mtxTemp);
     guMtxCatF(mtxTemp, mtxRotZ, mtxRotation);
-    
-    guScaleF(mtxScale, 
+
+    guScaleF(mtxScale,
         actor->scale.x * SPRITE_WORLD_SCALE_D * actor->scalingFactor,
         actor->scale.y * SPRITE_WORLD_SCALE_D * actor->scalingFactor,
         actor->scale.z * SPRITE_WORLD_SCALE_D);
-   
+
     guMtxCatF(mtxPivotOn, mtxScale, mtxTemp);
     guMtxCatF(mtxTemp, mtxRotation, mtxTransform);
     guMtxCatF(mtxTransform, mtxPivotOff, mtxActor);
@@ -1204,7 +1204,7 @@ void func_802571F0(s32 flipYaw, Actor* actor) {
         if (part->flags & ACTOR_PART_FLAG_INVISIBLE) {
             part = part->nextPart;
             continue;
-        } 
+        }
         if (part->idleAnimations == NULL) {
             part = part->nextPart;
             continue;
@@ -1233,7 +1233,7 @@ void func_802571F0(s32 flipYaw, Actor* actor) {
             partPosX + part->unkOffset[0],
             partPosY + part->unkOffset[1],
             partPosZ - 1.0f);
-        
+
         guRotateF(mtxRotX, part->rotation.x, 1.0f, 0.0f, 0.0f);
         guRotateF(mtxRotY, part->rotation.y, 0.0f, 1.0f, 0.0f);
         guRotateF(mtxRotZ, part->rotation.z, 0.0f, 0.0f, 1.0f);
@@ -1339,7 +1339,7 @@ void appendGfx_player_actor(void* arg0) {
     Matrix4f mtxScale;
     Matrix4f mtxPivotOn, mtxPivotOff, mtxTranslate;
     Matrix4f mtxTemp, mtxTransform;
-    
+
     Actor* partner;
     Actor* player;
     ActorPart* playerParts;
@@ -1352,18 +1352,18 @@ void appendGfx_player_actor(void* arg0) {
     player = gBattleStatus.playerActor;
     partner = gBattleStatus.partnerActor;
     playerParts = player->partsTable;
-    
+
     playerPosX = player->currentPos.x + player->headOffset.x;
     playerPosY = player->currentPos.y + player->headOffset.y + player->unk_19A;
     playerPosZ = player->currentPos.z + player->headOffset.z;
 
     playerYaw = player->yaw;
     playerParts->yaw = playerYaw;
-    
+
     player->disableEffect->data.disableX->pos.x = playerPosX + ((player->actorBlueprint->statusIconOffset.x + player->unk_194) * player->scalingFactor);
     player->disableEffect->data.disableX->pos.y = playerPosY + ((player->actorBlueprint->statusIconOffset.y + player->unk_195) * player->scalingFactor);
     player->disableEffect->data.disableX->pos.z = playerPosZ;
-    
+
     if (!(gBattleStatus.flags1 & 4) && (player->flags & 0x08000000)) {
         if (player->disableDismissTimer != 0) {
             player->disableDismissTimer--;
@@ -1435,7 +1435,7 @@ void appendGfx_player_actor(void* arg0) {
             player->scalingFactor += ((1.0 - player->scalingFactor) / 6.0);
         }
     } while (0); // required to match
-    
+
     if (player->flags & 0x08000000) {
         if (battleStatus->hammerCharge > 0) {
             create_status_icon_boost_hammer(player->hudElementDataIndex);
@@ -1471,13 +1471,13 @@ void appendGfx_player_actor(void* arg0) {
         remove_status_icon_peril(player->hudElementDataIndex);
         remove_status_icon_danger(player->hudElementDataIndex);
     }
-    
+
     if (player->transparentStatus == 0xE) {
         playerParts->flags |= 0x100;
     } else {
         playerParts->flags &= ~0x100;
     }
-  
+
     do {
         cond1 = FALSE;
         cond2 = FALSE;
@@ -1485,7 +1485,7 @@ void appendGfx_player_actor(void* arg0) {
         cond4 = FALSE;
         lastAnim = playerParts->currentAnimation;
     } while (0); // required to match
-    
+
     if (((((gBattleStatus.flags2 & 0xA) == 2) && (partner != NULL)) || (gBattleStatus.outtaSightActive > 0)) && !(player->flags & 0x20000000) && ((partner == NULL) || !(partner->flags & 0x200000))) {
         if (!(gBattleStatus.flags2 & 0x100000)) {
             if ((player->debuff != 3) && (player->debuff != 5) && (player->debuff != 7) && (player->debuff != 8)) {
@@ -1503,23 +1503,23 @@ void appendGfx_player_actor(void* arg0) {
                     cond1 = TRUE;
                 }
             }
-            
+
             if (player->debuff != 9) {
                 func_80266DAC(player, 0xC);
             } else {
                 func_80266DAC(player, 0xD);
             }
             cond2 = TRUE;
-            
+
             func_80266EE8(player, 0);
             cond3 = TRUE;
         }
     }
-    if (player->stoneStatus == 0xC) {        
+    if (player->stoneStatus == 0xC) {
         playerParts->currentAnimation = func_80265D44(0xC);
         spr_update_player_sprite(0, playerParts->currentAnimation, playerParts->animationRate);
         cond1 = TRUE;
-        
+
         if (cond2 == 0) {
             func_80266DAC(player, 0);
         }
@@ -1529,18 +1529,18 @@ void appendGfx_player_actor(void* arg0) {
         cond3 = 1;
         enable_status_2(player->hudElementDataIndex);
         cond4 = 1;
-        
+
         enable_status_transparent(player->hudElementDataIndex);
         enable_status_chill_out(player->hudElementDataIndex);
     }
-    
+
     if ((player->flags & 0x04000000) && (cond1 == 0)) {
         s32 temp = playerParts->currentAnimation;
         if (temp == func_80265D44(0xC)) {
             playerParts->currentAnimation = func_80265D44(1);
         }
     }
-    
+
     if (is_ability_active(0x15) != 0) {
         if (cond2 == 0) {
             func_80266DAC(player, 8);
@@ -1768,18 +1768,18 @@ void func_80258E14(void* arg0) {
     dy += part->unkOffset[1];
     dz = player->currentPos.z + player->headOffset.z - 5.0f;
     part->yaw = playerYaw;
-    
+
     guTranslateF(mtxTranslate, dx, dy, dz - 1.0f);
-    
+
     guTranslateF(mtxPivotOn,
         -player->rotationPivotOffset.x * player->scalingFactor,
         -player->rotationPivotOffset.y * player->scalingFactor,
         -player->rotationPivotOffset.z * player->scalingFactor);
-    guTranslateF(mtxPivotOff, 
+    guTranslateF(mtxPivotOff,
         player->rotationPivotOffset.x * player->scalingFactor,
         player->rotationPivotOffset.y * player->scalingFactor,
         player->rotationPivotOffset.z * player->scalingFactor);
-    
+
     guRotateF(mtxRotX, player->rotation.x, 1.0f, 0.0f, 0.0f);
     guRotateF(mtxRotY, player->rotation.y, 0.0f, 1.0f, 0.0f);
     guRotateF(mtxRotZ, player->rotation.z, 0.0f, 0.0f, 1.0f);
@@ -1790,13 +1790,13 @@ void func_80258E14(void* arg0) {
         player->scale.y * SPRITE_WORLD_SCALE_D * player->scalingFactor * part->verticalStretch,
         player->scale.z * SPRITE_WORLD_SCALE_D);
     mtx_mirror_y(mtxMirror);
-    
+
     guMtxCatF(mtxScale, mtxPivotOn, mtxTemp);
     guMtxCatF(mtxTemp, mtxRotation, mtxTemp);
     guMtxCatF(mtxTemp, mtxPivotOff, mtxTemp);
     guMtxCatF(mtxTemp, mtxTranslate, mtxTransform);
     guMtxCatF(mtxTransform, mtxMirror, mtxTransform);
-    
+
     func_8025C840(0, part, clamp_angle(playerYaw + 180.0f), 1);
     func_8025CCC8(0, part, clamp_angle(playerYaw + 180.0f), 1);
     func_802591EC(0, part, clamp_angle(playerYaw + 180.0f), mtxTransform, 1);
@@ -1887,7 +1887,7 @@ void func_80259494(ActorPart* part) {
     u16* src;
     u16* dest;
     s32 i, j;
-    
+
     for (i = 0; i < decor->numSpritePalettes; i++) {
         if (decor->unk_6D4[i] != NULL) {
             src = decor->unk_6D4[i];
@@ -1911,7 +1911,7 @@ void func_8025950C(ActorPart* part, s32 yaw, Matrix4f mtx) {
     s32 ii, jj;
     u16* dest;
     u16* src;
-    
+
     if (part->opacity < 0xFF) {
         idMask = 0x80000000;
         opacity = part->opacity;
@@ -1920,14 +1920,14 @@ void func_8025950C(ActorPart* part, s32 yaw, Matrix4f mtx) {
         idMask = 0x80000000;
         opacity = (opacity * 120) / 255;
     }
-    
+
     if (decor->unk_768 != 0) {
         decor->spritePalettes = spr_get_npc_palettes(part->currentAnimation >> 0x10);
         decor->numSpritePalettes = 0;
         while ((s32) decor->spritePalettes[decor->numSpritePalettes] != -1) {
             decor->numSpritePalettes++;
         }
-        
+
         for (ii = 0; ii < decor->numSpritePalettes; ii++) {
             src = decor->spritePalettes[ii];
             dest = decor->copiedPalettes[0][ii];
@@ -1939,11 +1939,11 @@ void func_8025950C(ActorPart* part, s32 yaw, Matrix4f mtx) {
                 }
             }
         }
-        
+
         for (ii = 0; ii < decor->numSpritePalettes; ii++) {
             decor->unk_6D4[ii] = decor->copiedPalettes[0][ii];
         }
-        
+
         func_802596C0(part, yaw, mtx);
     } else {
         spr_draw_npc_sprite(part->unk_84 | idMask, yaw, opacity, NULL, mtx);
@@ -1989,15 +1989,15 @@ void func_802597B0(ActorPart* part, s32 yaw, Matrix4f mtx) {
         idMask = 0x80000000;
         opacity = (opacity * 120) / 255;
     }
-    
+
     if (decor->unk_768 != 0) {
         decor->spritePalettes = spr_get_player_palettes(part->currentAnimation >> 16);
         decor->numSpritePalettes = 0;
-        
+
         while ((s32) decor->spritePalettes[decor->numSpritePalettes] != -1) {
             decor->numSpritePalettes++;
         }
-        
+
         for (i = 0; i < decor->numSpritePalettes; i++) {
             src = decor->spritePalettes[i];
             dest = decor->copiedPalettes[0][i];
@@ -2922,7 +2922,7 @@ void func_8025BAA0(s32 arg0, ActorPart* part, s32 yaw, s32 arg3, Matrix4f mtx, s
                 r1 = (*color1 >> 11) & 0x1F;
                 g1 = (*color1 >> 6) & 0x1F;
                 b1 = (*color1 >> 1) & 0x1F;
-                a1 = *color1 & 1;   
+                a1 = *color1 & 1;
                 color2++;
                 color1++;
 
@@ -2970,7 +2970,7 @@ void func_8025BAA0(s32 arg0, ActorPart* part, s32 yaw, s32 arg3, Matrix4f mtx, s
                 r1 = (*color1 >> 11) & 0x1F;
                 g1 = (*color1 >> 6) & 0x1F;
                 b1 = (*color1 >> 1) & 0x1F;
-                a1 = *color1 & 1;   
+                a1 = *color1 & 1;
                 color2++;
                 color1++;
 
@@ -3011,7 +3011,7 @@ void func_8025C120(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
     u8 blendAlpha;
     u8 r2, g2, b2, a1;
     u8 r1, g1, b1;
-    
+
     if (decor->unk_6C1 != 0) {
         if (arg0 == 0) {
             decor->spritePalettes = spr_get_player_palettes(part->currentAnimation >> 16);
@@ -3034,7 +3034,7 @@ void func_8025C120(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
             decor->unk_6C2 = 0;
             decor->unk_6CA = 255;
         }
-        
+
          for (i = 0; i < decor->numSpritePalettes; i++) {
             color2 = decor->spritePalettes[i];
             color1 = decor->copiedPalettes[0][i];
@@ -3045,13 +3045,13 @@ void func_8025C120(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
                 }
             }
         }
-        
+
         decor->unk_6C8 = decor->unk_744;
         decor->unk_6CA = 0;
         decor->unk_6C2 = 0;
         decor->unk_6C1 = 0;
     }
-    
+
     switch (decor->unk_6C2) {
         case 0:
             if (arg4 != 0) {
@@ -3077,7 +3077,7 @@ void func_8025C120(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
                 color1 = decor->spritePalettes[decor->unk_742 * decor->spriteColorVariations + i];
                 blendColor = decor->copiedPalettes[0][i];
                 decor->unk_6D4[i] = blendColor;
-                
+
                 for (j = 0; j < 16; j++) {
                     r2 = (*color2 >> 11) & 0x1F;
                     g2 = (*color2 >> 6) & 0x1F;
@@ -3085,14 +3085,14 @@ void func_8025C120(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
                     r1 = (*color1 >> 11) & 0x1F;
                     g1 = (*color1 >> 6) & 0x1F;
                     b1 = (*color1 >> 1) & 0x1F;
-                    a1 = *color1 & 1;   
+                    a1 = *color1 & 1;
                     color2++;
                     color1++;
-    
+
                     r1 = (r2 * (255 - blendAlpha) + r1 * blendAlpha) / 255;
                     g1 = (g2 * (255 - blendAlpha) + g1 * blendAlpha) / 255;
                     b1 = (b2 * (255 - blendAlpha) + b1 * blendAlpha) / 255;
-    
+
                     *blendColor++ = (r1 << 11) | (g1 << 6) | (b1 << 1) | a1;
                 }
             }
@@ -3128,7 +3128,7 @@ void func_8025C120(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
                 color1 = decor->spritePalettes[decor->unk_742 * decor->spriteColorVariations + i];
                 blendColor = decor->copiedPalettes[0][i];
                 decor->unk_6D4[i] = blendColor;
-    
+
                 for (j = 0; j < 16; j++) {
                     r2 = (*color2 >> 11) & 0x1F;
                     g2 = (*color2 >> 6) & 0x1F;
@@ -3136,14 +3136,14 @@ void func_8025C120(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
                     r1 = (*color1 >> 11) & 0x1F;
                     g1 = (*color1 >> 6) & 0x1F;
                     b1 = (*color1 >> 1) & 0x1F;
-                    a1 = *color1 & 1;   
+                    a1 = *color1 & 1;
                     color2++;
                     color1++;
-    
+
                     r1 = (r2 * (255 - blendAlpha) + r1 * blendAlpha) / 255;
                     g1 = (g2 * (255 - blendAlpha) + g1 * blendAlpha) / 255;
                     b1 = (b2 * (255 - blendAlpha) + b1 * blendAlpha) / 255;
-    
+
                     *blendColor++ = ((r1) << 11) | ((g1) << 6) | ((b1) << 1) | a1;
                 }
             }
@@ -3153,7 +3153,7 @@ void func_8025C120(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, s32 arg4) {
             }
             break;
     }
-    
+
     switch (decor->unk_6C2) {
         case 0:
         case 1:
@@ -3202,7 +3202,7 @@ void func_8025C918(s32 arg0, ActorPart* part, s32 yaw, s32 arg3) {
     s32 color;
     s32 i;
     s32 baseAngle;
-    
+
     if (decor->unk_751 != 0) {
         decor->unk_752 = -2;
         decor->unk75A = 0;
@@ -3214,20 +3214,20 @@ void func_8025C918(s32 arg0, ActorPart* part, s32 yaw, s32 arg3) {
             func_802DE894(part->unk_84, 0x11, 0x14, 0, 0, 0xFF, 0);
         }
     }
-    
+
     decor->unk75C += 7;
     baseAngle = decor->unk75C;
-    
+
     if (decor->unk75C >= 360) {
         decor->unk75C = baseAngle - ((baseAngle / 360) * 360);
     }
-    
+
     for (i = 0; i < ARRAY_COUNT(rbuf); i++) {
         rbuf[i] = (cosine(decor->unk75C + (25 * i)) + 1.0) * 112.0;
         gbuf[i] = (cosine(decor->unk75C + (25 * i) + 45) + 1.0) * 112.0;
         bbuf[i] = (cosine(decor->unk75C + (25 * i) + 90) + 1.0) * 112.0;
     }
-    
+
     alpha = 255;
     if (part->opacity < 255) {
         alpha = part->opacity;
@@ -3235,7 +3235,7 @@ void func_8025C918(s32 arg0, ActorPart* part, s32 yaw, s32 arg3) {
     if (part->flags & 0x100) {
         alpha = (alpha * 120) / 255;
     }
-    
+
     for (i = 0; i < ARRAY_COUNT(rbuf); i++) {
         color = (rbuf[i] << 0x18) | (gbuf[i] << 0x10) | (bbuf[i] << 8) | alpha;
         if (arg0 == 0) {
@@ -3244,7 +3244,7 @@ void func_8025C918(s32 arg0, ActorPart* part, s32 yaw, s32 arg3) {
             func_802DE894(part->unk_84, 0xC, i, color, 0, 0xFF, 0);
         }
     }
-    
+
     if (arg3 == 0) {
         decor->unk75A -= 1;
     }
@@ -3275,7 +3275,7 @@ void func_8025CD28(s32 arg0, ActorPart* part, s32 yaw, s32 arg3) {
 
 void func_8025CD40(s32 arg0, ActorPart* part, s32 yaw, s32 arg3) {
     DecorationTable* decor = part->decorationTable;
-    
+
     if (decor->unk_765 != 0) {
         switch (func_80254250(part)) {
             case 0:
@@ -3295,7 +3295,7 @@ void func_8025CD40(s32 arg0, ActorPart* part, s32 yaw, s32 arg3) {
         decor->unk_768 = 0;
         decor->unk_765 = 0;
     }
-    
+
     if (decor->unk_766 == 3) {
         decor->unk_768 = 0;
         func_8026709C(part);
