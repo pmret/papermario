@@ -79,7 +79,7 @@ ApiStatus func_80238D48_70CA58(Evt* script, s32 isInitialCall) {
     if (gBattleStatus.cloudNineTurnsLeft < script->varTable[10]) {
         gBattleStatus.cloudNineTurnsLeft = script->varTable[10];
         gBattleStatus.cloudNineDodgeChance = 50;
-        gBattleStatus.unk_43C->unk_0C->unk_1A = gBattleStatus.cloudNineTurnsLeft;
+        gBattleStatus.buffEffect->data.partnerBuff->unk_0C[FX_BUFF_DATA_CLOUD_NINE].turnsLeft = gBattleStatus.cloudNineTurnsLeft;
     }
 
     return ApiStatus_DONE2;

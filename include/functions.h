@@ -122,14 +122,14 @@ void update_hero_shadows(void);
 
 // append gfx funcs
 void appendGfx_background_texture(void);
-void func_80257B28(void*);
-void func_8025595C(void*);
-void func_80257B68(void*);
-void func_80257B48(void*);
-void func_8025599C(void*);
+void appendGfx_enemy_actor(void*);
+void appendGfx_enemy_actor_blur(void*);
+void appendGfx_enemy_actor_decorations(void*);
+void appendGfx_partner_actor(void*);
+void appendGfx_partner_actor_blur(void*);
 void func_80257B88(void*);
-void func_80257DA4(void*);
-void func_80254C50(Actor*);
+void appendGfx_player_actor(void*);
+void appendGfx_player_actor_blur(Actor*);
 void func_80258E14(void*);
 
 void func_80254610(Actor*);
@@ -376,8 +376,8 @@ void func_80263E08(Actor*, ActorPart*, s32);
 void func_80266978(void);
 void func_80266B14(void);
 s32 btl_cam_is_moving_done(void);
-void func_8024EE48(void);
-void func_8024EEA8(void);
+void btl_popup_messages_update(void);
+void btl_popup_messages_draw_world_geometry(void);
 void func_80255FD8(void);
 
 void func_80266EE8(Actor* actor, s32 arg1);
@@ -626,7 +626,7 @@ void play_movement_dust_effects(s32 var0, f32 xPos, f32 yPos, f32 zPos, f32 angl
 void func_80138D88(s32, s32, s32, s32, f32);
 void func_8013A4D0(void);
 
-void btl_draw_popup_messages(void);
+void btl_popup_messages_draw_ui(void);
 void btl_cam_set_target_pos(f32, f32, f32);
 void btl_cam_unfreeze(void);
 
@@ -861,7 +861,7 @@ void load_model_animator_tree(s32, StaticAnimatorNode**);
 s32 inflict_partner_ko(Actor* target, s32 statusTypeKey, s32 duration);
 s32 get_defense(Actor* actor, s32* defenseTable, s32 elementFlags);
 
-void func_8024EDC0(void);
+void btl_popup_messages_init(void);
 
 void remove_all_effects(void);
 void update_effects(void);

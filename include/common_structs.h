@@ -168,8 +168,6 @@ typedef struct NpcQuizmoBlur {
     /* 0x04 */ char unk_04[0x4];
 } NpcQuizmoBlur; // size = 0x8;
 
-typedef u16 Palette16[16]; // size = 0x20
-
 typedef struct Npc {
     /* 0x000 */ s32 flags;
     /* 0x004 */ void (*onUpdate)(struct Npc*); ///< Run before anything else for this NPC in update_npcs()
@@ -225,7 +223,7 @@ typedef struct Npc {
     /* 0x0AC */ u8 alpha;
     /* 0x0AD */ u8 alpha2; ///< Multiplied with Npc::alpha
     /* 0x0AE */ char unk_AE[2];
-    /* 0x0B0 */ u32** extraAnimList;
+    /* 0x0B0 */ AnimID** extraAnimList;
     /* 0x0B4 */ s8 palSwapType; // 0..4 inclusive
     /* 0x0B5 */ s8 palSwapPrevType;
     /* 0x0B6 */ s8 dirtyPalettes;
@@ -237,8 +235,8 @@ typedef struct Npc {
     /* 0x0C1 */ s8 paletteCount;
     /* 0x0C2 */ char unk_C2[2];
     /* 0x0C4 */ PAL_PTR* spritePaletteList;
-    /* 0x0C8 */ Palette16 localPaletteData[16];
-    /* 0x2C8 */ Palette16* localPalettes[16];
+    /* 0x0C8 */ PAL_BIN localPaletteData[16][16];
+    /* 0x2C8 */ PAL_PTR* localPalettes[16];
     /* 0x308 */ s16 unk_308;
     /* 0x30A */ s16 unk_30A;
     /* 0x30C */ s16 unk_30C;
@@ -801,20 +799,6 @@ typedef struct Camera {
     /* 0x556 */ s16 unk_556;
 } Camera; // size = 0x558
 
-typedef struct BattleStatusUnkInner {
-    /* 0x00 */ char unk_00[0x10];
-    /* 0x10 */ s16 unk_10;
-    /* 0x12 */ char unk_12[8];
-    /* 0x1A */ s16 unk_1A;
-    /* 0x1C */ char unk_1C[8];
-    /* 0x24 */ s16 unk_24;
-} BattleStatusUnkInner; // size = unknown
-
-typedef struct BattleStatusUnk {
-    /* 0x00 */ char unk_00[0xC];
-    /* 0x0C */ BattleStatusUnkInner* unk_0C;
-} BattleStatusUnk; // size = unknown
-
 typedef struct FGModelData {
     /* 0x00 */ char unk_00[0x18];
     /* 0x18 */ s32* idList;
@@ -947,7 +931,7 @@ typedef struct BattleStatus {
     /* 0x433 */ char unk_433;
     /* 0x434 */ s32* unk_434;
     /* 0x438 */ FGModelData* foregroundModelData;
-    /* 0x43C */ BattleStatusUnk* unk_43C;
+    /* 0x43C */ struct EffectInstance* buffEffect;
     /* 0x440 */ u8 tattleFlags[28];
     /* 0x45C */ char unk_45C[4];
 } BattleStatus; // size = 0x460
@@ -1627,18 +1611,20 @@ typedef struct DecorationUnk {
     /* 0x0E */ s16 unk0E;
 } DecorationUnk; // size = 0x10
 
+#define MAX_ACTOR_DECORATIONS 2
+
 typedef struct DecorationTable {
-    /* 0x000 */ Palette16 unk_00[54];
+    /* 0x000 */ PAL_BIN copiedPalettes[2][27][16];
     /* 0x6C0 */ s8 unk_6C0;
     /* 0x6C1 */ s8 unk_6C1;
     /* 0x6C2 */ s8 unk_6C2;
     /* 0x6C3 */ char unk_6C3[5];
     /* 0x6C8 */ s16 unk_6C8;
-    /* 0x6CA */ u16 unk_6CA;
-    /* 0x6CC */ s8 unk_6CC;
-    /* 0x6CD */ s8 numPalettes;
+    /* 0x6CA */ s16 unk_6CA;
+    /* 0x6CC */ s8 spriteColorVariations;
+    /* 0x6CD */ s8 numSpritePalettes;
     /* 0x6CE */ char unk_6CE[2];
-    /* 0x6D0 */ PAL_PTR* palettes;
+    /* 0x6D0 */ PAL_PTR* spritePalettes;
     /* 0x6D4 */ PAL_PTR unk_6D4[27];
     /* 0x740 */ s16 unk_740;
     /* 0x742 */ s16 unk_742;
@@ -1679,13 +1665,14 @@ typedef struct DecorationTable {
     /* 0x89C */ u8 rotZ[16];
     /* 0x8AC */ s8 effectType; /* 0 =  blur, 14 = none? */
     /* 0x8AD */ char unk_8AD[3];
-    /* 0x8B0 */ struct EffectInstance* effects[2];
-    /* 0x8B8 */ s8 decorationType[2];
-    /* 0x8BA */ u8 unk_8BA[2];
-    /* 0x8BC */ s8 unk_8BC[2];
-    /* 0x8BE */ s16 unk_8BE[2];
+    /* substruct for decorations? */
+    /* 0x8B0 */ struct EffectInstance* effect[MAX_ACTOR_DECORATIONS];
+    /* 0x8B8 */ s8 type[MAX_ACTOR_DECORATIONS];
+    /* 0x8BA */ u8 changed[MAX_ACTOR_DECORATIONS];
+    /* 0x8BC */ s8 state[MAX_ACTOR_DECORATIONS];
+    /* 0x8BE */ s16 stateResetTimer[MAX_ACTOR_DECORATIONS];
     /* 0x8C2 */ char unk_8C0[4];
-    /* 0x8C6 */ DecorationUnk unk_8C6[2];
+    /* 0x8C6 */ DecorationUnk unk_8C6[MAX_ACTOR_DECORATIONS];
 } DecorationTable; // size = 0x8E8
 
 typedef struct PlayerPathElement {
@@ -1852,11 +1839,11 @@ typedef struct Actor {
     /* 0x215 */ s8 stoneDuration;
     /* 0x216 */ s8 koStatus; /* 0D = yes */
     /* 0x217 */ s8 koDuration;
-    /* 0x218 */ s8 transStatus; /* 0E = yes */
-    /* 0x219 */ s8 transDuration;
+    /* 0x218 */ s8 transparentStatus; /* 0E = yes */
+    /* 0x219 */ s8 transparentDuration;
     /* 0x21A */ char unk_21A[2];
     /* 0x21C */ s8 status;
-    /* 0x21D */ s8 unk_21D;
+    /* 0x21D */ s8 disableDismissTimer;
     /* 0x21E */ s16 unk_21E;
     /* 0x220 */ s8 isGlowing; // not the case for goombario
     /* 0x221 */ s8 attackBoost;
@@ -1870,7 +1857,7 @@ typedef struct Actor {
     /* 0x40D */ s8 targetIndexList[24]; /* into targetData */
     /* 0x425 */ s8 selectedTargetIndex; /* into target index list */
     /* 0x426 */ s8 targetPartIndex;
-    /* 0x427 */ char unk_427;
+    /* 0x427 */ char unk_427[1];
     /* 0x428 */ s16 targetActorID;
     /* 0x42A */ char unk_42A[2];
     /* 0x42C */ union {
@@ -1880,8 +1867,8 @@ typedef struct Actor {
     /* 0x430 */ f32 shadowScale; /* = actor size / 24.0 */
     /* 0x434 */ s16 renderMode; /* initially 0xD, set to 0x22 if any part is transparent */
     /* 0x436 */ s16 hudElementDataIndex;
-    /* 0x438 */ s32 unk_438[2]; /* ??? see FUN_80253974 */
-    /* 0x440 */ struct EffectInstance* debuffEffect;
+    /* 0x438 */ s32 loopingSoundID[2];
+    /* 0x440 */ struct EffectInstance* disableEffect;
 } Actor; // size = 0x444
 
 typedef struct BackgroundHeader {
@@ -2269,7 +2256,7 @@ typedef struct ActionCommandStatus {
     /* 0x61 */ s8 unk_61;
     /* 0x62 */ s8 unk_62;
     /* 0x63 */ s8 unk_63;
-    /* 0x64 */ s16 unk_64;
+    /* 0x64 */ s16 easyVersion;
     /* 0x66 */ s16 unk_66;
     /* 0x68 */ s16 unk_68;
     /* 0x6A */ s16 unk_6A;
@@ -2284,21 +2271,15 @@ typedef struct ActionCommandStatus {
 typedef struct Message {
     /* 0x00 */ s32 unk_00;
     /* 0x04 */ s32 unk_04;
-    /* 0x08 */ f32 unk_08;
-    /* 0x0C */ f32 unk_0C;
-    /* 0x10 */ f32 unk_10;
-    /* 0x14 */ f32 unk_14;
-    /* 0x18 */ f32 unk_18;
-    /* 0x1C */ f32 unk_1C;
+    /* 0x08 */ Vec3f accel;
+    /* 0x14 */ Vec3f vel;
     /* 0x20 */ s32 unk_20;
     /* 0x24 */ s32 unk_24;
-    /* 0x28 */ f32 unk_28;
-    /* 0x2C */ f32 unk_2C;
-    /* 0x30 */ f32 unk_30;
-    /* 0x34 */ f32 unk_34;
-    /* 0x38 */ f32 unk_38;
-    /* 0x3C */ f32 unk_3C;
-    /* 0x40 */ f32 unk_40;
+    /* 0x28 */ f32 rotZ;
+    /* 0x2C */ f32 rotVelZ;
+    /* 0x30 */ f32 rotY;
+    /* 0x34 */ f32 scale;
+    /* 0x38 */ Vec3f pos;
     /* 0x44 */ s32 unk_44;
     /* 0x48 */ f32 unk_48;
 } Message; // size = 0x4C
@@ -2308,8 +2289,8 @@ typedef void (*PopupMessageCallback)(void* popup);
 typedef struct PopupMessage {
     /* 0x00 */ s32 unk_00;
     /* 0x04 */ PopupMessageCallback updateFunc;
-    /* 0x08 */ PopupMessageCallback unk_08;
-    /* 0x0C */ PopupMessageCallback drawFunc;
+    /* 0x08 */ PopupMessageCallback renderWorldFunc;
+    /* 0x0C */ PopupMessageCallback renderUIFunc;
     /* 0x10 */ s16 active;
     /* 0x12 */ s16 messageIndex;
     /* 0x14 */ s16 duration;

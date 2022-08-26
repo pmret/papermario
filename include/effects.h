@@ -615,7 +615,7 @@ typedef struct RadialShimmerFXData {
 
 typedef struct EndingDecalsFXData {
     /* 0x00 */ s32 unk_00;
-    /* 0x04 */ char unk_04[0xC];
+    /* 0x04 */ Vec3f pos;
     /* 0x10 */ f32 unk_10;
     /* 0x14 */ char todo[0];
 } EndingDecalsFXData; // size = 0x??
@@ -986,7 +986,9 @@ typedef struct SquirtFXData {
 } SquirtFXData; // size = unknown
 
 typedef struct WaterBlockFXData {
-    /* 0x00 */ char todo[0];
+    /* 0x00 */ char unk_00[4];
+    /* 0x04 */ Vec3f pos;
+    /* 0x10 */ char todo[0];
 } WaterBlockFXData; // size = unknown
 
 typedef struct WaterfallFXData {
@@ -1302,9 +1304,27 @@ typedef struct BreakingJunkFXData {
     /* 0x3A */ s16 envA;
 } BreakingJunkFXData; // size = unknown
 
+enum {
+    FX_BUFF_DATA_WATER_BLOCK    = 0,
+    FX_BUFF_DATA_CLOUD_NINE     = 1,
+    FX_BUFF_DATA_TURBO_CHARGE   = 2
+};
+
+typedef struct BuffData {
+    /* 0x00 */ s16 alpha;
+    /* 0x02 */ s16 turnsDisplay;
+    /* 0x04 */ s16 turnsLeft;
+    /* 0x06 */ s16 state;
+    /* 0x08 */ s16 stateTimer;
+} BuffData;
+
 typedef struct PartnerBuffFXData {
-    /* 0x00 */ char todo[0];
-} PartnerBuffFXData; // size = unknown
+    /* 0x00 */ s16 useRandomValues;
+    /* 0x02 */ s16 unk_02;
+    /* 0x04 */ s32 timeLeft;
+    /* 0x08 */ s32 lifeTime;
+    /* 0x0C */ BuffData unk_0C[3];
+} PartnerBuffFXData; // size = 0x2C
 
 typedef struct QuizmoAssistantFXData {
     /* 0x00 */ char unk_00[0x4];

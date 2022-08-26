@@ -83,7 +83,7 @@ ApiStatus func_80238114_6F5F94(Evt* script, s32 isInitialCall) {
             if (targetActor != NULL) {
                 targetActorPart = get_actor_part(targetActor, target->partID);
 
-                if (targetActor->transStatus == 0) {
+                if (targetActor->transparentStatus == 0) {
                     if (!(targetActorPart->eventFlags & 0x20)) {
                         if (x > targetX) {
                             targetActor->yaw += 33;
@@ -126,7 +126,7 @@ ApiStatus N(AverageTargetDizzyChance)(Evt* script, s32 isInitialCall) {
         targetActorPart = get_actor_part(targetActor, partnerActor->targetData[i].partID);
         targetActorBlueprintBaseStatusChance = lookup_status_chance(targetActor->statusTable, STATUS_DIZZY);
 
-        if (targetActor->transStatus == STATUS_TRANSPARENT) {
+        if (targetActor->transparentStatus == STATUS_TRANSPARENT) {
             targetActorBlueprintBaseStatusChance = 0;
         }
 

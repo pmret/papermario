@@ -155,7 +155,7 @@ FX_MAIN(spirit_card_main);
 FX_MAIN(lil_oink_main);
 FX_MAIN(something_rotating_main);
 EffectInstance* breaking_junk_main(s32, f32, f32, f32, f32, s32);
-FX_MAIN(partner_buff_main);
+EffectInstance* partner_buff_main(s32, f32, f32, f32, f32, s32);
 FX_MAIN(quizmo_assistant_main);
 FX_MAIN(ice_pillar_main);
 EffectInstance* sun_main(s32, f32, f32, f32, f32, s32);

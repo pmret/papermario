@@ -102,7 +102,7 @@ ApiStatus N(AverageTargetStatusChance)(Evt* script, s32 isInitialCall) {
         targetActorBlueprint = targetActor->actorBlueprint;
         targetActorBlueprintBaseStatusChance = targetActorBlueprint->baseStatusChance;
 
-        if (targetActor->transStatus == STATUS_TRANSPARENT) {
+        if (targetActor->transparentStatus == STATUS_TRANSPARENT) {
             targetActorBlueprintBaseStatusChance = 0;
         }
 

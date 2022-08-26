@@ -126,7 +126,7 @@ void func_802A928C_427CFC(void) {
             }
 
             if (battleStatus->currentButtonsPressed & BUTTON_A) {
-                switch (actionCommandStatus->unk_64) {
+                switch (actionCommandStatus->easyVersion) {
                     case 0: {
                         s32 fillOffset = battleStatus->unk_434[actionCommandStatus->unk_50] * 235 * 4;
                         actionCommandStatus->barFillLevel += fillOffset / 100;

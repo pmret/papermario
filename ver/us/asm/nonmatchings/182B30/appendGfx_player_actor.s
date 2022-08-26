@@ -11,7 +11,7 @@ dlabel D_8029D390
 
 .section .text
 
-glabel func_80257DA4
+glabel appendGfx_player_actor
 /* 186684 80257DA4 27BDFD18 */  addiu     $sp, $sp, -0x2e8
 /* 186688 80257DA8 AFB402B0 */  sw        $s4, 0x2b0($sp)
 /* 18668C 80257DAC 3C14800E */  lui       $s4, %hi(gBattleStatus)

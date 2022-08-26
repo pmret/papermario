@@ -22,7 +22,7 @@ s32 calc_item_check_hit(void) {
         ASSERT(actorPart != NULL);
 
         if (!(actorPart->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY)) {
-            if (actor->transStatus == STATUS_TRANSPARENT) {
+            if (actor->transparentStatus == STATUS_TRANSPARENT) {
                 return HIT_RESULT_MISS;
             }
             if (actor->stoneStatus == STATUS_STONE) {
@@ -107,7 +107,7 @@ s32 calc_item_damage_enemy(void) {
 
     if (!(battleStatus->currentAttackElement & DAMAGE_TYPE_REMOVE_BUFFS)) {
         if ((targetPart->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY) ||
-            ((target->transStatus == STATUS_TRANSPARENT) || ((targetPart->eventFlags & ACTOR_EVENT_FLAG_800) && !(battleStatus->currentAttackElement & DAMAGE_TYPE_QUAKE))))
+            ((target->transparentStatus == STATUS_TRANSPARENT) || ((targetPart->eventFlags & ACTOR_EVENT_FLAG_800) && !(battleStatus->currentAttackElement & DAMAGE_TYPE_QUAKE))))
         {
             return 6;
         }
@@ -227,7 +227,7 @@ s32 calc_item_damage_enemy(void) {
     if (battleStatus->currentAttackElement & DAMAGE_TYPE_REMOVE_BUFFS) {
         if (gBattleStatus.flags1 & 0x20) {
             if ((target->attackBoost > 0 || target->defenseBoost > 0) ||
-                ((target->staticStatus == 0 && target->transStatus != 0) || target->staticStatus != 0))
+                ((target->staticStatus == 0 && target->transparentStatus != 0) || target->staticStatus != 0))
             {
                 target->attackBoost = 0;
                 target->defenseBoost = 0;
@@ -238,9 +238,9 @@ s32 calc_item_damage_enemy(void) {
                     target->staticDuration = 0;
                     remove_status_static(target->hudElementDataIndex);
                 }
-                if (target->transStatus != 0) {
-                    target->transStatus = 0;
-                    target->transDuration = 0;
+                if (target->transparentStatus != 0) {
+                    target->transparentStatus = 0;
+                    target->transparentDuration = 0;
                     remove_status_transparent(target->hudElementDataIndex);
                 }
                 wasStatusInflicted = TRUE;
