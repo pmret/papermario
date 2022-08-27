@@ -115,7 +115,7 @@ ApiStatus func_802406C4_AF8014(Evt* script, s32 isInitialCall) {
 
     switch (D_80246558_kkj_19) {
         case 0:
-            D_80246534 = evt_get_variable(script, *args);
+            D_80246534 = evt_get_variable(script, *args++);
             D_80246554 = create_generic_entity_frontUI(NULL, func_802406A0_AF7FF0);
             dgb_08_npcGroup_80246528 = 0;
             D_80246530 = 0;
