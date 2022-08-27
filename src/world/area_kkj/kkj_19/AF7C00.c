@@ -16,7 +16,6 @@ extern s32 D_8024655C;
 extern s32 D_80246560_kkj_19;
 extern s32 D_80246568_C8C018[];
 extern s32 D_80246578[];
-extern s32 D_8024659C[];
 extern s32 D_802465A0;
 extern HudScript HES_AButton;
 extern HudScript HES_BlueMeter;
@@ -105,7 +104,6 @@ ApiStatus func_802406C4_AF8014(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 hudElemID;
     s32 temp;
-    s32* ptr;
     s32 i;
 
     if (isInitialCall) {
@@ -118,8 +116,8 @@ ApiStatus func_802406C4_AF8014(Evt* script, s32 isInitialCall) {
             D_80246554 = create_generic_entity_frontUI(NULL, func_802406A0_AF7FF0);
             dgb_08_npcGroup_80246528 = 0;
             D_80246530 = 0;
-            for (i = 0, ptr=&D_8024659C[0]; i < 10; i++, ptr--) {
-                *ptr = 0;
+            for (i = 0; i < 10; i++) {
+                D_80246578[i] = 0;
             }
             D_80246538_kkj_19[1] = 12;
             D_80246538_kkj_19[2] = 24;
