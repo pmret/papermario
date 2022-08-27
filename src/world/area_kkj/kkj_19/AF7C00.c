@@ -264,7 +264,7 @@ ApiStatus func_80240C4C_AF859C(Evt* script, s32 isInitialCall) {
 
     script->functionTemp[1] += 16;
 
-    if (script->functionTemp[1] >= 256) {
+    if (script->functionTemp[1] > 255) {
         script->functionTemp[1] = 255;
     }
 
