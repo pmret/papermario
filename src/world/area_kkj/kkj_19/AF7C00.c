@@ -18,7 +18,7 @@ ApiStatus func_802404DC_AF7E2C(Evt* script, s32 isInitialCall) {
 
     if (D_80241B10_AF9460 != 0) {
         D_80241B10_AF9460 = 0;
-        evt_set_variable(script, *args, D_80241B14_AF9464);
+        evt_set_variable(script, *args++, D_80241B14_AF9464);
         return ApiStatus_DONE2;
     }
 
