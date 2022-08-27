@@ -180,7 +180,7 @@ ApiStatus func_802406C4_AF8014(Evt* script, s32 isInitialCall) {
             if (gGameStatusPtr->pressedButtons[0] & A_BUTTON) {
                 dgb_08_npcGroup_80246528++;
             }
-            if (temp < dgb_08_npcGroup_80246528) {
+            if (dgb_08_npcGroup_80246528 > temp) {
                 dgb_08_npcGroup_80246528 = temp;
             }
             if (D_8024652C == 2) {
