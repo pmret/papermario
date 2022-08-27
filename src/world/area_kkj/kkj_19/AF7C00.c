@@ -244,7 +244,7 @@ ApiStatus func_80240B8C_AF84DC(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 itemID = evt_get_variable(script, *args++);
 
-    evt_set_variable(script, args, gItemTable[itemID].nameMsg);
+    evt_set_variable(script, *args++, gItemTable[itemID].nameMsg);
     return ApiStatus_DONE2;
 }
 
