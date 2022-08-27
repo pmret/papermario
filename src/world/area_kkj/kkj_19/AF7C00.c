@@ -158,7 +158,7 @@ ApiStatus func_802406C4_AF8014(Evt* script, s32 isInitialCall) {
             break;
         case 1:
             D_8024655C += 20;
-            if (D_8024655C >= 51) {
+            if (D_8024655C > 50) {
                 D_8024655C = 50;
             }
             hud_element_set_render_pos(D_80246568_C8C018[0], D_8024655C, D_80246560_kkj_19);
