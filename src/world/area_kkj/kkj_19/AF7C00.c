@@ -10,7 +10,7 @@ extern s32 D_80241B14_AF9464;
 // Needs data migration, matching otherwise
 #ifdef NON_MATCHING
 ApiStatus func_802404DC_AF7E2C(Evt* script, s32 isInitialCall) {
-    Bytecode *args = script->ptrReadPos;
+    Bytecode* args = script->ptrReadPos;
 
     if (isInitialCall) {
         D_80241B10_AF9460 = 0;
