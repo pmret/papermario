@@ -22,7 +22,7 @@ ApiStatus func_80242084_8EDEA4(Evt* script, s32 isInitialCall) {
 
     script->functionTemp[1] += 16;
 
-    if (script->functionTemp[1] >= 256) {
+    if (script->functionTemp[1] > 255) {
         script->functionTemp[1] = 255;
     }
 
