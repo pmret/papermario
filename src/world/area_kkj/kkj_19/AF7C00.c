@@ -1,11 +1,31 @@
 #include "kkj_19.h"
+#include "hud_element.h"
+
+extern s32 D_80241B10_AF9460;
+extern s32 D_80241B14_AF9464;
+extern s32 D_802461F0[];
+extern s32 D_802463B8_kkj_19[];
+extern s32 D_8024652C;
+extern s32 D_80246530;
+extern s32 D_80246534;
+extern s32 D_80246538_kkj_19[];
+extern s32 D_80246550_kkj_19;
+extern s32 D_80246554;
+extern u32 D_80246558_kkj_19;
+extern s32 D_8024655C;
+extern s32 D_80246560_kkj_19;
+extern s32 D_80246568_C8C018[];
+extern s32 D_80246578[];
+extern s32 D_8024659C[];
+extern s32 D_802465A0;
+extern HudScript HES_AButton;
+extern HudScript HES_BlueMeter;
+extern HudScript HES_MashAButton;
+extern s32 dgb_08_npcGroup_80246528;
 
 #include "world/common/GetNpcCollisionHeight.inc.c"
 
 #include "world/common/AddPlayerHandsOffset.inc.c"
-
-extern s32 D_80241B10_AF9460;
-extern s32 D_80241B14_AF9464;
 
 // Needs data migration, matching otherwise
 #ifdef NON_MATCHING
@@ -29,16 +49,17 @@ INCLUDE_ASM(s32, "world/area_kkj/kkj_19/AF7C00", func_802404DC_AF7E2C);
 #endif
 
 ApiStatus func_80240530_AF7E80(Evt* script, s32 isInitialCall) {
-    D_80241B14_AF9464 = evt_get_variable(script, *script->ptrReadPos);
+    Bytecode* args = script->ptrReadPos;
+
+    D_80241B14_AF9464 = evt_get_variable(script, *args++);
     D_80241B10_AF9460 = 1;
 
     return ApiStatus_DONE2;
 }
 
-extern s32 D_802461F0[];
-
 ApiStatus func_80240568_AF7EB8(Evt* script, s32 isInitialCall) {
-    s32* ptr = (s32*)evt_get_variable(script, *script->ptrReadPos);
+    Bytecode* args = script->ptrReadPos;
+    s32* ptr = (s32*)evt_get_variable(script, *args++);
     s32 i;
 
     if (ptr != NULL) {
@@ -56,10 +77,9 @@ ApiStatus func_80240568_AF7EB8(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-extern s32 D_802463B8_kkj_19[];
-
 ApiStatus func_80240604_AF7F54(Evt* script, s32 isInitialCall) {
-    s32* ptr = (s32*) evt_get_variable(script, *script->ptrReadPos);
+    Bytecode* args = script->ptrReadPos;
+    s32* ptr = (s32*)evt_get_variable(script, *args++);
     s32 i;
 
     if (ptr != NULL) {
@@ -77,30 +97,9 @@ ApiStatus func_80240604_AF7F54(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-extern s32 D_80246568_C8C018[];
-
-#include "hud_element.h"
-
 void func_802406A0_AF7FF0(void) {
     hud_element_draw_clipped(D_80246568_C8C018[0]);
 }
-
-extern s32 D_8024652C;
-extern s32 D_80246530;
-extern s32 D_80246534;
-extern s32 D_80246538_kkj_19[];
-extern s32 D_80246550_kkj_19;
-extern s32 D_80246554;
-extern u32 D_80246558_kkj_19;
-extern s32 D_8024655C;
-extern s32 D_80246560_kkj_19;
-extern s32 D_80246578[];
-extern s32 D_8024659C[];
-extern s32 D_802465A0;
-extern HudScript HES_AButton;
-extern HudScript HES_BlueMeter;
-extern HudScript HES_MashAButton;
-extern s32 dgb_08_npcGroup_80246528;
 
 ApiStatus func_802406C4_AF8014(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -220,7 +219,7 @@ ApiStatus func_802406C4_AF8014(Evt* script, s32 isInitialCall) {
         D_802465A0 = 0;
     }
 
-    evt_set_variable(script, -0x08F0D17D, D_8024652C);
+    evt_set_variable(script, LSW(3), D_8024652C);
     return ApiStatus_BLOCK;
 }
 
@@ -242,16 +241,19 @@ ApiStatus func_80240B4C_AF849C(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_80240B8C_AF84DC(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 itemID = evt_get_variable(script, *args++);
+    Bytecode var = *args++;
+    s32 itemID = evt_get_variable(script, var);
 
-    evt_set_variable(script, *args++, gItemTable[itemID].nameMsg);
+    evt_set_variable(script, var, gItemTable[itemID].nameMsg);
     return ApiStatus_DONE2;
 }
 
 #include "world/common/GetFloorCollider.inc.c"
 
 ApiStatus func_80240C10_AF8560(Evt* script, s32 isInitialCall) {
-    gPlayerStatus.unk_C4 = evt_get_variable(script, *script->ptrReadPos);
+    Bytecode* args = script->ptrReadPos;
+
+    gPlayerStatus.unk_C4 = evt_get_variable(script, *args++);
     gGameStatusPtr->peachCookingIngredient = gPlayerStatus.unk_C4;
 
     return ApiStatus_DONE2;
@@ -269,7 +271,12 @@ ApiStatus func_80240C4C_AF859C(Evt* script, s32 isInitialCall) {
     }
 
     set_screen_overlay_params_front(0, script->functionTemp[1]);
-    return (script->functionTemp[1] == 255) ? ApiStatus_DONE2 : ApiStatus_BLOCK;
+
+    if (script->functionTemp[1] == 255) {
+        return ApiStatus_DONE2;
+    }
+
+    return ApiStatus_BLOCK;
 }
 
 ApiStatus func_80240CB4_AF8604(Evt* script, s32 isInitialCall) {
