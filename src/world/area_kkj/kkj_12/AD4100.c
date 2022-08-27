@@ -4,7 +4,10 @@
 
 #include "world/common/GetPeachDisguise.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kkj/kkj_12/AD4100", func_80240714_AD47A4);
+ApiStatus func_80240714_AD47A4(Evt* script, s32 isInitialCall) {
+    gGameStatusPtr->peachFlags |= 0x8;
+    return ApiStatus_DONE2;
+}
 
 #include "world/common/UnkGooberFunc.inc.c"
 

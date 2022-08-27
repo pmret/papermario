@@ -3,4 +3,9 @@
 static char* N(exit_str_0) = "jan_22";
 static char* N(exit_str_1) = "kkj_10";
 
-INCLUDE_ASM(s32, "world/area_kkj/kkj_29/B150B0", func_80240000_B150B0);
+ApiStatus func_80240000_B150B0(Evt* script, s32 isInitialCall) {
+    gGameStatusPtr->peachFlags &= 0xFE;
+    gPlayerData.currentPartner = script->varTable[0];
+
+    return ApiStatus_DONE2;
+}
