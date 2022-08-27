@@ -54,7 +54,7 @@ typedef struct HudStatusIcon {
     /* 0x28 */ s32 status4Radius;
     /* 0x2C */ s32 status4OffsetY;
     /* 0x30 */ s32 offsetY;
-    /* 0x34 */ f32 offsetX;
+    /* 0x34 */ s32 offsetX;
     /* 0x38 */ HudComplexStatusIcon status1;
     /* 0x48 */ HudComplexStatusIcon status2;
     /* 0x58 */ HudComplexStatusIcon status3;
@@ -158,8 +158,8 @@ void func_80045BC8(void) {
 
     for (i = 0; i < ARRAY_COUNT(D_800A0BC0); i++) {
         PopupMessage* popup = &D_800A0BC0[i];
-        if (popup->active && popup->unk_08 != NULL) {
-            popup->unk_08(popup);
+        if (popup->active && popup->renderWorldFunc != NULL) {
+            popup->renderWorldFunc(popup);
         }
     }
 }
@@ -169,8 +169,8 @@ void draw_merlee_messages(void) {
 
     for (i = 0; i < ARRAY_COUNT(D_800A0BC0); i++) {
         PopupMessage* popup = &D_800A0BC0[i];
-        if (popup->active && popup->drawFunc != NULL) {
-            popup->drawFunc(popup);
+        if (popup->active && popup->renderUIFunc != NULL) {
+            popup->renderUIFunc(popup);
         }
     }
 }
@@ -202,10 +202,10 @@ void show_merlee_message(s16 messageIndex, s16 duration) {
 
     if (popup != NULL) {
         popup->updateFunc = update_merlee_message;
-        popup->drawFunc = draw_merlee_message;
+        popup->renderUIFunc = draw_merlee_message;
         popup->unk_17 = 1;
         popup->unk_00 = 0;
-        popup->unk_08 = NULL;
+        popup->renderWorldFunc = NULL;
         popup->messageIndex = messageIndex;
         popup->duration = duration;
         popup->unk_16 = 0;
@@ -288,8 +288,8 @@ void init_all_status_icons(void) {
     if (popup != NULL) {
         popup->updateFunc = update_all_status_icons;
         popup->unk_00 = 0;
-        popup->unk_08 = NULL;
-        popup->drawFunc = draw_all_status_icons;
+        popup->renderWorldFunc = NULL;
+        popup->renderUIFunc = draw_all_status_icons;
         popup->message = general_heap_malloc(64 * sizeof(HudStatusIcon));
         icons = D_800A0F44 = (HudStatusIcon*)(popup->message);
         ASSERT(icons != NULL);
@@ -983,7 +983,7 @@ void set_status_icons_properties(s32 iconID, f32 x, f32 y, f32 z, s32 arg, s32 a
     icon->status4OffsetY = offsetY + 51;
 }
 
-void set_status_icons_offset(s32 iconID, s32 offsetY, f32 offsetX) {
+void set_status_icons_offset(s32 iconID, s32 offsetY, s32 offsetX) {
     HudStatusIcon* statusIcon = &D_800A0F44[iconID];
 
     statusIcon->offsetY = offsetY;

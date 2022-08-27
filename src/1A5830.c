@@ -168,7 +168,7 @@ s32 calc_enemy_test_target(Actor* actor) {
 
     hitResult = HIT_RESULT_HIT;
     target2 = target;
-    if (targetPart->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY || battleStatus->outtaSightActive || target2->transStatus == STATUS_TRANSPARENT) {
+    if (targetPart->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY || battleStatus->outtaSightActive || target2->transparentStatus == STATUS_TRANSPARENT) {
         if (!(battleStatus->currentAttackElement & DAMAGE_TYPE_MAGIC)) {
             hitResult = HIT_RESULT_MISS;
         }
@@ -285,7 +285,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
         return HIT_RESULT_MISS;
     }
 
-    if (target->transStatus == STATUS_TRANSPARENT || targetPart->eventFlags & ACTOR_EVENT_FLAG_800 && !(battleStatus->currentAttackElement & DAMAGE_TYPE_QUAKE)) {
+    if (target->transparentStatus == STATUS_TRANSPARENT || targetPart->eventFlags & ACTOR_EVENT_FLAG_800 && !(battleStatus->currentAttackElement & DAMAGE_TYPE_QUAKE)) {
         return HIT_RESULT_MISS;
     }
 
@@ -781,7 +781,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
         )
         && !(battleStatus->currentAttackElement & DAMAGE_TYPE_NO_CONTACT)
         && !(battleStatus->currentAttackEventSuppression & 8)
-        && (attacker->transStatus != STATUS_TRANSPARENT)
+        && (attacker->transparentStatus != STATUS_TRANSPARENT)
         && !has_enchanted_part(attacker)
     ) {
         // enum mismatch? shock vs explode :raised_eyebrow:
@@ -2548,7 +2548,7 @@ ApiStatus CopyStatusEffects(Evt* script, s32 isInitialCall) {
     inflict_status(actorTo, actorFrom->staticStatus, actorFrom->staticDuration);
     inflict_status(actorTo, actorFrom->stoneStatus, actorFrom->stoneDuration);
     inflict_status(actorTo, actorFrom->koStatus, actorFrom->koDuration);
-    inflict_status(actorTo, actorFrom->transStatus, actorFrom->transDuration);
+    inflict_status(actorTo, actorFrom->transparentStatus, actorFrom->transparentDuration);
 
     actorFrom->status = 0;
     actorTo->status = 0;
@@ -2580,9 +2580,9 @@ ApiStatus ClearStatusEffects(Evt* script, s32 isInitialCall) {
         remove_status_static(actor->hudElementDataIndex);
     }
 
-    if (actor->transStatus != 0) {
-        actor->transDuration = 0;
-        actor->transStatus = 0;
+    if (actor->transparentStatus != 0) {
+        actor->transparentDuration = 0;
+        actor->transparentStatus = 0;
         remove_status_transparent(actor->hudElementDataIndex);
     }
 
@@ -2593,7 +2593,7 @@ ApiStatus ClearStatusEffects(Evt* script, s32 isInitialCall) {
 
     actor->koStatus = 0;
     actor->koDuration = 0;
-    actor->debuffEffect->data.disableX->unk_3C = 0;
+    actor->disableEffect->data.disableX->unk_3C = 0;
     actor->attackBoost = 0;
     actor->defenseBoost = 0;
     actor->isGlowing = 0;

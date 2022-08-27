@@ -34,82 +34,22 @@ extern s32 D_80294240;
 #include "battle/action_cmd/whirlwind_bubble.png.inc.c"
 #include "battle/action_cmd/whirlwind_bubble.pal.inc.c"
 
-HudScript HES_Whirlwind1 = {
-    HUD_ELEMENT_OP_SetVisible,
-    HUD_ELEMENT_OP_SetTileSize, HUD_ELEMENT_SIZE_24x24,
-    HUD_ELEMENT_OP_Loop,
-    HUD_ELEMENT_OP_SetCI, 60, (s32)battle_action_cmd_whirlwind_1_png, (s32)battle_action_cmd_whirlwind_1_pal,
-    0x00000003,
-    HUD_ELEMENT_OP_End
-};
+HudScript HES_Whirlwind1 = HES_TEMPLATE_CI_ENUM_SIZE(battle_action_cmd_whirlwind_1, 24, 24);
 
-HudScript HES_Whirlwind2 = {
-    HUD_ELEMENT_OP_SetVisible,
-    HUD_ELEMENT_OP_SetTileSize, HUD_ELEMENT_SIZE_24x24,
-    HUD_ELEMENT_OP_Loop,
-    HUD_ELEMENT_OP_SetCI, 60, (s32)battle_action_cmd_whirlwind_2_png, (s32)battle_action_cmd_whirlwind_2_pal,
-    0x00000003,
-    HUD_ELEMENT_OP_End
-};
+HudScript HES_Whirlwind2 = HES_TEMPLATE_CI_ENUM_SIZE(battle_action_cmd_whirlwind_2, 24, 24);
 
-HudScript HES_Whirlwind3 = {
-    HUD_ELEMENT_OP_SetVisible,
-    HUD_ELEMENT_OP_SetTileSize, HUD_ELEMENT_SIZE_24x24,
-    HUD_ELEMENT_OP_Loop,
-    HUD_ELEMENT_OP_SetCI,
-    60, (s32)battle_action_cmd_whirlwind_3_png, (s32)battle_action_cmd_whirlwind_3_pal,
-    0x00000003,
-    HUD_ELEMENT_OP_End
-};
+HudScript HES_Whirlwind3 = HES_TEMPLATE_CI_ENUM_SIZE(battle_action_cmd_whirlwind_3, 24, 24);
 
-HudScript HES_Whirlwind4 = {
-    HUD_ELEMENT_OP_SetVisible,
-    HUD_ELEMENT_OP_SetTileSize, HUD_ELEMENT_SIZE_24x24,
-    HUD_ELEMENT_OP_Loop,
-    HUD_ELEMENT_OP_SetCI,
-    60, (s32)battle_action_cmd_whirlwind_4_png, (s32)battle_action_cmd_whirlwind_4_pal,
-    0x00000003,
-    HUD_ELEMENT_OP_End
-};
+HudScript HES_Whirlwind4 = HES_TEMPLATE_CI_ENUM_SIZE(battle_action_cmd_whirlwind_4, 24, 24);
 
-HudScript HES_Whirlwind5 = {
-    HUD_ELEMENT_OP_SetVisible,
-    HUD_ELEMENT_OP_SetTileSize, HUD_ELEMENT_SIZE_24x24,
-    HUD_ELEMENT_OP_Loop,
-    HUD_ELEMENT_OP_SetCI,
-    60, (s32)battle_action_cmd_whirlwind_5_png, (s32)battle_action_cmd_whirlwind_5_pal,
-    0x00000003,
-    HUD_ELEMENT_OP_End
-};
+HudScript HES_Whirlwind5 = HES_TEMPLATE_CI_ENUM_SIZE(battle_action_cmd_whirlwind_5, 24, 24);;
 
-HudScript HES_Whirlwind6 = {
-    HUD_ELEMENT_OP_SetVisible,
-    HUD_ELEMENT_OP_SetTileSize, HUD_ELEMENT_SIZE_24x24,
-    HUD_ELEMENT_OP_Loop,
-    HUD_ELEMENT_OP_SetCI,
-    60, (s32)battle_action_cmd_whirlwind_6_png, (s32)battle_action_cmd_whirlwind_6_pal,
-    0x00000003,
-    HUD_ELEMENT_OP_End
-};
+HudScript HES_Whirlwind6 = HES_TEMPLATE_CI_ENUM_SIZE(battle_action_cmd_whirlwind_6, 24, 24);
 
-HudScript HES_Whirlwind7 = {
-    HUD_ELEMENT_OP_SetVisible,
-    HUD_ELEMENT_OP_SetTileSize, HUD_ELEMENT_SIZE_24x24,
-    HUD_ELEMENT_OP_Loop,
-    HUD_ELEMENT_OP_SetCI,
-    60, (s32)battle_action_cmd_whirlwind_7_png, (s32)battle_action_cmd_whirlwind_7_pal,
-    0x00000003,
-    HUD_ELEMENT_OP_End
-};
+HudScript HES_Whirlwind7 = HES_TEMPLATE_CI_ENUM_SIZE(battle_action_cmd_whirlwind_7, 24, 24);
 
-HudScript HES_WhirlwindBubble = {
-    HUD_ELEMENT_OP_SetVisible,
-    HUD_ELEMENT_OP_SetCustomSize, battle_action_cmd_whirlwind_bubble_png_width, battle_action_cmd_whirlwind_bubble_png_height,
-    0x00000004,
-    HUD_ELEMENT_OP_SetCI, 60, (s32)battle_action_cmd_whirlwind_bubble_png, (s32)battle_action_cmd_whirlwind_bubble_pal,
-    0x00000003,
-    HUD_ELEMENT_OP_End
-};
+HudScript HES_WhirlwindBubble = HES_TEMPLATE_CI_CUSTOM_SIZE(battle_action_cmd_whirlwind_bubble,
+    battle_action_cmd_whirlwind_bubble_png_width, battle_action_cmd_whirlwind_bubble_png_height);
 
 s32 D_802AA844_4254B4[] = { 0, 25, 50, 75, 100, 100 };
 
@@ -140,14 +80,13 @@ ApiStatus func_802A9000_423C70(Evt* script, s32 isInitialCall) {
     }
 
     func_80268858();
-    temp_v0 = evt_get_variable(script, *args++);
-    actionCommandStatus->unk_64 = temp_v0;
+    actionCommandStatus->easyVersion = evt_get_variable(script, *args++);
     actionCommandStatus->actionCommandID = ACTION_COMMAND_WHIRLWIND;
     actionCommandStatus->state = 0;
     actionCommandStatus->unk_60 = 0;
     actionCommandStatus->barFillLevel = 0;
     actionCommandStatus->unk_48 = 0;
-    if (temp_v0 == 0) {
+    if (actionCommandStatus->easyVersion == 0) {
         battleStatus->unk_84 = 0;
     } else {
         battleStatus->unk_84 = 3;
@@ -202,7 +141,7 @@ ApiStatus func_802A91E0_423E50(Evt* script, s32 isInitialCall) {
     actionCommandStatus->unk_48 = 0;
     battleStatus->actionSuccess = 0;
     battleStatus->unk_86 = 0;
-    if (actionCommandStatus->unk_64 == 0) {
+    if (actionCommandStatus->easyVersion == 0) {
         battleStatus->unk_84 = 0;
     } else {
         battleStatus->unk_84 = 3;
@@ -275,7 +214,7 @@ void func_802A92F0_423F60(void) {
             btl_set_popup_duration(99);
             cutoff = actionCommandStatus->mashMeterCutoffs[actionCommandStatus->mashMeterIntervals];
             temp = actionCommandStatus->barFillLevel / cutoff;
-            if (actionCommandStatus->unk_64 == 0) {
+            if (actionCommandStatus->easyVersion == 0) {
                 amt = D_802AA844_4254B4[temp / 20];
             } else {
                 amt = D_802AA85C_4254CC[temp / 10];
@@ -290,7 +229,7 @@ void func_802A92F0_423F60(void) {
                 if (battleStatus->currentButtonsPressed & BUTTON_A) {
                     s32 amt;
 
-                    if (actionCommandStatus->unk_64 == 0) {
+                    if (actionCommandStatus->easyVersion == 0) {
                         amt = battleStatus->unk_434[actionCommandStatus->unk_50] * 5;
                     } else {
                         amt = battleStatus->unk_434[actionCommandStatus->unk_50] * 6;
@@ -305,7 +244,7 @@ void func_802A92F0_423F60(void) {
             if (actionCommandStatus->barFillLevel > cutoff * 100) {
                 actionCommandStatus->barFillLevel = cutoff * 100;
             }
-            if (actionCommandStatus->unk_64 == 0) {
+            if (!actionCommandStatus->easyVersion) {
                 battleStatus->unk_84 = actionCommandStatus->barFillLevel / 2000;
             } else {
                 battleStatus->unk_84 = D_802AA8B4_425524[actionCommandStatus->barFillLevel / 1000];
@@ -347,7 +286,7 @@ void N(draw_hud_elements)(void) {
     func_80268798(x, y, actionCommandStatus->barFillLevel / 100, 1);
     hud_element_draw_clipped(actionCommandStatus->hudElements[3]);
     id = actionCommandStatus->hudElements[2];
-    if (actionCommandStatus->unk_64 == 0) {
+    if (!actionCommandStatus->easyVersion) {
         if (D_802AA888_4254F8[battleStatus->unk_84] != hud_element_get_script(id)) {
             hud_element_set_script(id, D_802AA888_4254F8[battleStatus->unk_84]);
         }

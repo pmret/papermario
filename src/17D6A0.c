@@ -1170,7 +1170,7 @@ void func_8024F768(void* data);
 void func_8024FB3C(void* popup);
 void btl_show_message_popup(void* popup);
 
-void func_8024EDC0(void) {
+void btl_popup_messages_init(void) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(popupMessages); i++) {
@@ -1180,7 +1180,7 @@ void func_8024EDC0(void) {
     }
 }
 
-void func_8024EDEC(void) {
+void btl_popup_messages_delete(void) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(popupMessages); i++) {
@@ -1193,7 +1193,7 @@ void func_8024EDEC(void) {
     }
 }
 
-void func_8024EE48(void) {
+void btl_popup_messages_update(void) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(popupMessages); i++) {
@@ -1204,24 +1204,24 @@ void func_8024EE48(void) {
     }
 }
 
-void func_8024EEA8(void) {
+void btl_popup_messages_draw_world_geometry(void) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(popupMessages); i++) {
         PopupMessage* popup = &popupMessages[i];
-        if (popup->active && popup->unk_08 != NULL) {
-            popup->unk_08(popup);
+        if (popup->active && popup->renderWorldFunc != NULL) {
+            popup->renderWorldFunc(popup);
         }
     }
 }
 
-void btl_draw_popup_messages(void) {
+void btl_popup_messages_draw_ui(void) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(popupMessages); i++) {
         PopupMessage* popup = &popupMessages[i];
-        if (popup->active && popup->drawFunc != NULL) {
-            popup->drawFunc(popup);
+        if (popup->active && popup->renderUIFunc != NULL) {
+            popup->renderUIFunc(popup);
         }
     }
 }
@@ -1298,9 +1298,9 @@ void func_8024EFE0(f32 x, f32 y, f32 z, s32 numMessages, s32 arg4, s32 arg5) {
 
         battleStatus->unk_90 = 0;
         popup->updateFunc = func_8024F394;
-        popup->unk_08 = func_8024F5AC;
+        popup->renderWorldFunc = func_8024F5AC;
         popup->unk_00 = 0;
-        popup->drawFunc = NULL;
+        popup->renderUIFunc = NULL;
         popup->messageIndex = 1;
         popup->active |= 0x10;
         message = popup->message = heap_malloc(numMessages * sizeof(*popup->message));
@@ -1310,11 +1310,11 @@ void func_8024EFE0(f32 x, f32 y, f32 z, s32 numMessages, s32 arg4, s32 arg5) {
             sp10 = &D_80283744[numMessages];
             message->unk_00 = 1;
             message->unk_04 = load_entity_model(*sp10);
-            set_entity_model_flags(message->unk_04, 0x20);
+            set_entity_model_flags(message->unk_04, ENTITY_MODEL_FLAGS_HIDDEN);
             bind_entity_model_setupGfx(message->unk_04, message, func_8024F768);
-            message->unk_38 = x;
-            message->unk_3C = y;
-            message->unk_40 = z;
+            message->pos.x = x;
+            message->pos.y = y;
+            message->pos.z = z;
             arg5mod8 = arg5 % 8;
             arg5++;
 
@@ -1324,18 +1324,18 @@ void func_8024EFE0(f32 x, f32 y, f32 z, s32 numMessages, s32 arg4, s32 arg5) {
             f1 = &D_802835DC[arg5mod8 * 3];
             f2 = &D_802835DC[arg5mod8 * 3 + one];
             f3 = &D_802835DC[arg5mod8 * 3 + two];
-            message->unk_14 = 2.0 * *f1 * sign * var_f20;
-            message->unk_18 = 2.0 * *f2 * var_f20;
-            message->unk_1C = 2.0 * *f3 * var_f20;
-            message->unk_08 = *f1 * sign * var_f20;
-            message->unk_0C = *f2 * var_f20;
-            message->unk_10 = *f3 * var_f20;
+            message->vel.x = 2.0 * *f1 * sign * var_f20;
+            message->vel.y = 2.0 * *f2 * var_f20;
+            message->vel.z = 2.0 * *f3 * var_f20;
+            message->accel.x = *f1 * sign * var_f20;
+            message->accel.y = *f2 * var_f20;
+            message->accel.z = *f3 * var_f20;
 
             iMod8 = (i % 8);
-            message->unk_34 = D_80283690[iMod8 * 3] * var_f22;
-            message->unk_28 = 0;
-            message->unk_2C = sign * 107;
-            message->unk_30 = clamp_angle(180.0f - gCameras[CAM_BATTLE].currentYaw);
+            message->scale = D_80283690[iMod8 * 3] * var_f22;
+            message->rotZ = 0;
+            message->rotVelZ = sign * 107;
+            message->rotY = clamp_angle(180.0f - gCameras[CAM_BATTLE].currentYaw);
             message->unk_20 = 14;
             message->unk_24 = arg4;
             message->unk_44 = 240;
@@ -1368,21 +1368,21 @@ void func_8024F394(void* data) {
             } else {
                 exec_entity_model_commandlist(modelIdx);
                 if (message->unk_20 >= 0) {
-                    message->unk_38 += message->unk_14;
-                    message->unk_3C += message->unk_18;
-                    message->unk_40 += message->unk_1C;
+                    message->pos.x += message->vel.x;
+                    message->pos.y += message->vel.y;
+                    message->pos.z += message->vel.z;
                 }
-                message->unk_30 = clamp_angle(180.0f - gCameras[CAM_BATTLE].currentYaw);
-                message->unk_28 += message->unk_2C;
-                message->unk_28 = clamp_angle(message->unk_28);
-                message->unk_2C *= 0.8;
+                message->rotY = clamp_angle(180.0f - gCameras[CAM_BATTLE].currentYaw);
+                message->rotZ += message->rotVelZ;
+                message->rotZ = clamp_angle(message->rotZ);
+                message->rotVelZ *= 0.8;
                 if (message->unk_20 < 10) {
-                    message->unk_08 *= 0.5;
-                    message->unk_0C *= 0.5;
-                    message->unk_10 *= 0.5;
-                    message->unk_14 = message->unk_08;
-                    message->unk_18 = message->unk_0C;
-                    message->unk_1C = message->unk_10;
+                    message->accel.x *= 0.5;
+                    message->accel.y *= 0.5;
+                    message->accel.z *= 0.5;
+                    message->vel.x = message->accel.x;
+                    message->vel.y = message->accel.y;
+                    message->vel.z = message->accel.z;
                 }
 
                 message->unk_20--;
@@ -1408,13 +1408,13 @@ void func_8024F5AC(void* data) {
     PopupMessage* popup = data;
     Message* message = popup->message;
     Matrix4f sp18;
-    Matrix4f sp58;
-    Matrix4f sp98;
-    Matrix4f spD8;
+    Matrix4f mtxRotX;
+    Matrix4f mtxRotY;
+    Matrix4f mtxRotZ;
     Matrix4f sp118;
     Matrix4f sp158;
     Matrix4f sp198;
-    Matrix4f sp1D8;
+    Matrix4f mtxScale;
     Mtx sp218;
     s32 i;
 
@@ -1425,14 +1425,14 @@ void func_8024F5AC(void* data) {
             } else {
                 s32 modelIdx = message->unk_04;
 
-                guTranslateF(sp18, message->unk_38, message->unk_3C, message->unk_40);
-                guRotateF(sp58, 0.0f, 1.0f, 0.0f, 0.0f);
-                guRotateF(sp98, message->unk_30, 0.0f, 1.0f, 0.0f);
-                guRotateF(spD8, message->unk_28, 0.0f, 0.0f, 1.0f);
-                guScaleF(sp1D8, message->unk_34, message->unk_34, message->unk_34);
-                guMtxCatF(spD8, sp58, sp158);
-                guMtxCatF(sp158, sp98, sp118);
-                guMtxCatF(sp1D8, sp118, sp158);
+                guTranslateF(sp18, message->pos.x, message->pos.y, message->pos.z);
+                guRotateF(mtxRotX, 0.0f, 1.0f, 0.0f, 0.0f);
+                guRotateF(mtxRotY, message->rotY, 0.0f, 1.0f, 0.0f);
+                guRotateF(mtxRotZ, message->rotZ, 0.0f, 0.0f, 1.0f);
+                guScaleF(mtxScale, message->scale, message->scale, message->scale);
+                guMtxCatF(mtxRotZ, mtxRotX, sp158);
+                guMtxCatF(sp158, mtxRotY, sp118);
+                guMtxCatF(mtxScale, sp118, sp158);
                 guMtxCatF(sp158, sp18, sp198);
                 guMtxF2L(sp198, &sp218);
                 draw_entity_model_A(modelIdx, &sp218);
@@ -1443,12 +1443,12 @@ void func_8024F5AC(void* data) {
 
 void func_8024F768(void* data) {
     Message* message = data;
-    s32 var_a3 = message->unk_44;
+    s32 alphaAmt = message->unk_44;
 
-    if (var_a3 > 0xA) {
-        var_a3 = 0xA;
+    if (alphaAmt > 10) {
+        alphaAmt = 10;
     }
-    gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, (var_a3 * 255) / 10);
+    gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, (alphaAmt * 255) / 10);
 }
 
 void func_8024F7C8(void) {
@@ -1495,9 +1495,9 @@ void btl_show_battle_message(s32 messageIndex, s32 duration) {
 
     if (popup != NULL) {
         popup->updateFunc = func_8024FB3C;
-        popup->drawFunc = btl_show_message_popup;
+        popup->renderUIFunc = btl_show_message_popup;
         popup->unk_00 = 0;
-        popup->unk_08 = NULL;
+        popup->renderWorldFunc = NULL;
         popup->messageIndex = messageIndex;
         popup->duration = duration;
         popup->unk_16 = 0;
@@ -1517,9 +1517,9 @@ void btl_show_variable_battle_message(s32 messageIndex, s32 duration, s32 varVal
 
     if (popup != NULL) {
         popup->updateFunc = func_8024FB3C;
-        popup->drawFunc = btl_show_message_popup;
+        popup->renderUIFunc = btl_show_message_popup;
         popup->unk_00 = 0;
-        popup->unk_08 = NULL;
+        popup->renderWorldFunc = NULL;
         popup->messageIndex = messageIndex;
         popup->duration = duration;
         popup->unk_16 = 0;

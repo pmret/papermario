@@ -31,11 +31,11 @@ ApiStatus N(func_802A12EC_724FCC)(Evt* script, s32 isInitialCall) {
         partner->koDuration = 0;
     }
     if (partner->koDuration > 0) {
-        partner->debuffEffect->data.disableX->unk_3C = partner->koDuration;
+        partner->disableEffect->data.disableX->unk_3C = partner->koDuration;
     } else {
         partner->koStatus = 0;
         dispatch_event_partner(EVENT_RECOVER_PARTNER);
-        partner->debuffEffect->data.disableX->unk_3C = 0;
+        partner->disableEffect->data.disableX->unk_3C = 0;
     }
 
     return ApiStatus_DONE2;
@@ -64,7 +64,7 @@ ApiStatus N(func_802A1378_725058)(Evt* script, s32 isInitialCall) {
                 break;
         }
 
-        actor->debuffEffect->data.disableX->unk_3C = 0;
+        actor->disableEffect->data.disableX->unk_3C = 0;
     }
 
     btl_update_ko_status();

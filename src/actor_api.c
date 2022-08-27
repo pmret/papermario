@@ -2610,7 +2610,6 @@ ApiStatus func_8026ED20(Evt* script, s32 isInitialCall) {
     s32 temp_s3 = evt_get_variable(script, *args++);
     ActorPart* actorPart;
 
-
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
@@ -2816,7 +2815,7 @@ ApiStatus GetStatusFlags(Evt* script, s32 isInitialCall) {
             break;
     }
 
-    switch (actor->transStatus) {
+    switch (actor->transparentStatus) {
         case STATUS_END:
             break;
         case STATUS_TRANSPARENT:

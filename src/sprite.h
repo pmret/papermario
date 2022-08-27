@@ -3,6 +3,8 @@
 
 #include "common.h"
 
+#define SPR_PLAYER_COLOR_VARIATIONS 6
+
 typedef struct SpriteComponent {
     /* 0x00 */ s32 initialized;
     /* 0x04 */ s32 unk_04;
