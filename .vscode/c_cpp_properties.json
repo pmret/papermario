@@ -26,7 +26,7 @@
             ],
             "cStandard": "c89",
             "cppStandard": "c++17",
-            "intelliSenseMode": "gcc-x86"
+            "intelliSenseMode": "${default}"
         }
     ]
 }
