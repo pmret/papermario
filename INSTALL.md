@@ -24,6 +24,17 @@ Install build dependencies:
 ./install.sh
 ```
 
+> **NOTE:** On Mac, if you get an error that looks like
+> 
+>```sh
+>Error: Cannot install md5sha1sum because conflicting formulae are installed.
+>  coreutils: because both install `md5sum` and `sha1sum` binaries
+>
+>Please `brew unlink coreutils` before continuing.
+>```
+>
+>it's fine to just open `install.sh` in a text editor, delete the `md5sha1sum` from the `brew install` line, and rerun it (put it back after so you don't accidentally commit it!)
+
 Copy baseroms into the following places (at least 1 is required):
 
 * `ver/us/baserom.z64` (sha1: `3837f44cda784b466c9a2d99df70d77c322b97a0`)
