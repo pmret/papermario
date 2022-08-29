@@ -106,7 +106,7 @@ ApiStatus func_80240B18_B07518(Evt* script, s32 isInitialCall) {
 ApiStatus func_80240B8C_B0758C(Evt* script, s32 isInitialCall) {
     EffectInstance* effect = (EffectInstance*) script->varTablePtr[0];
 
-    effect->data.any[10] = 0;
+    effect->data.starsOrbiting->unk_28 = 0;
     return ApiStatus_DONE2;
 }
 
@@ -124,7 +124,7 @@ ApiStatus func_80240C60_B07660(Evt* script, s32 isInitialCall) {
 ApiStatus func_80240CD4_B076D4(Evt* script, s32 isInitialCall) {
     EffectInstance* effect = (EffectInstance*) script->varTablePtr[0];
 
-    effect->data.any[10] = 0;
+    effect->data.starsOrbiting->unk_28 = 0;
     return ApiStatus_DONE2;
 }
 
@@ -171,6 +171,6 @@ ApiStatus func_80240EB8_B078B8(Evt* script, s32 isInitialCall) {
 ApiStatus func_80240F2C_B0792C(Evt* script, s32 isInitialCall) {
     EffectInstance* effect = (EffectInstance*) script->varTablePtr[0];
 
-    effect->data.any[10] = 0;
+    effect->data.starsOrbiting->unk_28 = 0;
     return ApiStatus_DONE2;
 }
