@@ -7,4 +7,9 @@ static char* N(exit_str_3) = "";
 
 #include "world/common/atomic/TexturePan.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kkj/kkj_18/AF2CA0", func_8024030C_AF2FAC);
+ApiStatus func_8024030C_AF2FAC(Evt* script, s32 isInitialCall) {
+    gGameStatusPtr->peachFlags &= 0xFE;
+    gPlayerData.currentPartner = script->varTable[0];
+
+    return ApiStatus_DONE2;
+}
