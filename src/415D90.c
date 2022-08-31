@@ -1219,8 +1219,11 @@ s32 can_btl_state_update_switch_to_player(void) {
         return FALSE;
     } else {
         s8 debuff = player->debuff;
-        s32 playerCantMove = player->koStatus == STATUS_DAZE;
+        s32 playerCantMove = FALSE;
 
+        if (player->koStatus == STATUS_DAZE) {
+            playerCantMove = TRUE;
+        }
         if (debuff == STATUS_POISON) {
             playerCantMove = FALSE;
         }
@@ -1266,8 +1269,11 @@ s32 func_802A58D0(void) {
     }
 
     partnerDebuff = partner->debuff;
-    partnerCantMove = partner->koStatus == STATUS_DAZE;
+    partnerCantMove = FALSE;
 
+    if (partner->koStatus == STATUS_DAZE) {
+        partnerCantMove = TRUE;
+    }
     if (partnerDebuff == STATUS_POISON) {
         partnerCantMove = FALSE;
     }
@@ -1883,7 +1889,7 @@ void btl_state_update_select_target(void) {
             }
 
             for (i = 0; i < targetListLength; i++) {
-                id = hud_element_create(HES_HandPointDownLoop);
+                id = hud_element_create(&HES_HandPointDownLoop);
                 D_802ACC70[i] = id;
                 hud_element_set_render_depth(id, 0);
                 hud_element_set_render_pos(id, 0, -100);
@@ -2026,18 +2032,15 @@ void btl_state_draw_select_target(void) {
     Actor* actor;
     Actor* anotherActor;
     s32 id;
-    s32 i;
-    s32 f;
     s32 msgWidth;
-    s32* tmpPtr; // TODO required to match and CURSED
-
     s32 xOffset, yOffset;
     f32 targetX, targetY, targetZ;
     s32 screenX, screenY, screenZ;
     s32 selectedTargetIndex;
     s8* targetIndexList;
+    s32* tmpPtr; // TODO required to match and CURSED
 
-    if (!(gBattleStatus.flags1 & 0x80000)) {
+    if (!(gBattleStatus.flags1 & BS_FLAGS1_80000)) {
         actor = battleStatus->playerActor;
     } else {
         actor = battleStatus->partnerActor;
@@ -2059,16 +2062,16 @@ void btl_state_draw_select_target(void) {
             targetY = target->pos.y;
             targetZ = target->pos.z;
 
-            if (anotherActor->flags & 0x800) {
+            if (anotherActor->flags & ACTOR_FLAG_HP_OFFSET_BELOW) {
                 xOffset = 16;
                 yOffset = 2;
-                if (hud_element_get_script(id) != HES_HandPointLeftLoop) {
+                if (hud_element_get_script(id) != &HES_HandPointLeftLoop) {
                     hud_element_set_script(id, &HES_HandPointLeftLoop);
                 }
             } else {
                 xOffset = 5;
                 yOffset = -11;
-                if (hud_element_get_script(id) != HES_HandPointDownLoop) {
+                if (hud_element_get_script(id) != &HES_HandPointDownLoop) {
                     hud_element_set_script(id, &HES_HandPointDownLoop);
                 }
             }
@@ -2077,6 +2080,8 @@ void btl_state_draw_select_target(void) {
             hud_element_set_render_pos(id, screenX + xOffset, screenY + yOffset);
             hud_element_set_alpha(id, D_802ACC64);
         } else {
+            s32 i;
+
             for (i = 0; i < targetListLength; i++) {
                 target = &actor->targetData[targetIndexList[i]];
                 anotherActor = get_actor(target->actorID);
@@ -2084,16 +2089,16 @@ void btl_state_draw_select_target(void) {
                 targetX = target->pos.x;
                 targetY = target->pos.y;
                 targetZ = target->pos.z;
-                if (anotherActor->flags & 0x800) {
-                    xOffset = 0x10;
+                if (anotherActor->flags & ACTOR_FLAG_HP_OFFSET_BELOW) {
+                    xOffset = 16;
                     yOffset = 2;
-                    if (hud_element_get_script(id) != HES_HandPointLeftLoop) {
+                    if (hud_element_get_script(id) != &HES_HandPointLeftLoop) {
                         hud_element_set_script(id, &HES_HandPointLeftLoop);
                     }
                 } else {
                     xOffset = 5;
-                    yOffset = -0xB;
-                    if (hud_element_get_script(id) != HES_HandPointDownLoop) {
+                    yOffset = -11;
+                    if (hud_element_get_script(id) != &HES_HandPointDownLoop) {
                         hud_element_set_script(id, &HES_HandPointDownLoop);
                     }
                 }
@@ -2106,7 +2111,7 @@ void btl_state_draw_select_target(void) {
         currentPartner = playerData->currentPartner;
         screenX = 52;
         screenY = 64;
-        if (gBattleStatus.flags2 & 0x40) {
+        if (gBattleStatus.flags2 & BS_FLAGS2_40) {
             currentPartner = PARTNER_TWINK;
         }
 
