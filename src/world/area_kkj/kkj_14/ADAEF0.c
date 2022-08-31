@@ -6,7 +6,7 @@ extern u8 D_80241D3B_ADCBDB;
 #include "world/common/atomic/TexturePan.inc.c"
 
 ApiStatus func_8024035C_ADB1FC(Evt* script, s32 isInitialCall) {
-    gGameStatusPtr->peachFlags &= 0xFE;
+    gGameStatusPtr->peachFlags &= ~0x1;
     gPlayerData.currentPartner = script->varTable[0];
 
     return ApiStatus_DONE2;
@@ -39,6 +39,6 @@ ApiStatus func_80240480_ADB320(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus func_8024049C_ADB33C(Evt* script, s32 isInitialCall) {
-    gGameStatusPtr->peachFlags &= 0xEF;
+    gGameStatusPtr->peachFlags &= ~0x10;
     return ApiStatus_DONE2;
 }

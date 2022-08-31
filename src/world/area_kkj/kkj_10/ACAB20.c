@@ -10,7 +10,7 @@ static char* N(exit_str_5) = "kkj_29";
 ApiStatus func_80240000_ACAB20(Evt* script, s32 isInitialCall) {
     s32 i;
 
-    for (i = 0; i < 7; i++) {
+    for (i = 0; i < ARRAY_COUNT(D_80151328->sources); i++) {
         D_80151328->sources[i].flags = 0;
     }
 
