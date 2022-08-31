@@ -9,6 +9,19 @@ static char* N(exit_str_5) = "kkj_17";
 static char* N(exit_str_6) = "kkj_18";
 static char* N(exit_str_7) = "kkj_11";
 
-INCLUDE_ASM(s32, "world/area_kkj/kkj_11/ACE140", func_80240000_ACE140);
+ApiStatus func_80240000_ACE140(Evt* script, s32 isInitialCall) {
+    s32 i;
 
-INCLUDE_ASM(s32, "world/area_kkj/kkj_11/ACE140", func_80240034_ACE174);
+    for (i = 0; i < ARRAY_COUNT(D_80151328->sources); i++) {
+        D_80151328->sources[i].flags = 0;
+    }
+
+    return ApiStatus_DONE2;
+}
+
+ApiStatus func_80240034_ACE174(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+
+    gPlayerStatus.unk_0D = evt_get_float_variable(script, *args++);
+    return ApiStatus_DONE2;
+}

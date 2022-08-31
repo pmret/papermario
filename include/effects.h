@@ -562,7 +562,9 @@ typedef struct SteamBurstFXData {
 typedef struct StarsOrbitingFXData {
     /* 0x00 */ char unk_00[0x4];
     /* 0x04 */ Vec3f pos;
-    /* 0x10 */ char todo[0];
+    /* 0x10 */ char unk_10[0x18];
+    /* 0x28 */ s32 unk_28;
+    /* 0x3C */ char todo[0];
 } StarsOrbitingFXData; // size = unknown
 
 typedef struct BigSnowflakesFXData {
