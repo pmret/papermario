@@ -2012,7 +2012,161 @@ void btl_state_update_select_target(void) {
     }
 }
 
+extern s32 bActorNames[];
+
+// needs a lotta work
+#ifdef NON_MATCHING
+void btl_state_draw_select_target(void) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    PlayerData* playerData = &gPlayerData;
+    s32 msgID;
+    s32 msgX;
+    s32 msgY;
+    s32 targetListLength;
+    s32 currentPartner;
+    s32 actorID;
+    SelectableTarget* target;
+    Actor* actor;
+    s32 id;
+    s32 i;
+    s32 f;
+
+    s32 xOffset, yOffset;
+    f32 targetX, targetY, targetZ;
+    s32 screenX, screenY, screenZ;
+    s32 selectedTargetIndex;
+    s8* targetIndexList;
+
+
+    if (!(gBattleStatus.flags1 & 0x80000)) {
+        actor = battleStatus->playerActor;
+    } else {
+        actor = battleStatus->partnerActor;
+    }
+
+    targetListLength = actor->targetListLength;
+    target = actor->targetData;
+    selectedTargetIndex = actor->selectedTargetIndex;
+    targetIndexList = actor->targetIndexList;
+
+    if (targetListLength != 0) {
+        if (battleStatus->currentTargetListFlags & 1) {
+            target = &actor->targetData[targetIndexList[selectedTargetIndex]];
+            f = get_actor(target->actorID)->flags;
+            id = D_802ACC70[0];
+            targetX = target->pos.x;
+            targetY = target->pos.y;
+            targetZ = target->pos.z;
+            if (f & 0x800) {
+                xOffset = 16;
+                yOffset = 2;
+                if (hud_element_get_script(id) != HES_HandPointLeftLoop) {
+                    hud_element_set_script(id, &HES_HandPointLeftLoop);
+                }
+            } else {
+                xOffset = 5;
+                yOffset = -11;
+                if (hud_element_get_script(id) != HES_HandPointDownLoop) {
+                    hud_element_set_script(id, &HES_HandPointDownLoop);
+                }
+            }
+            get_screen_coords(1, targetX, targetY, targetZ, &screenX, &screenY, &screenZ);
+            hud_element_set_render_pos(id, screenX + xOffset, screenY + yOffset);
+            hud_element_set_alpha(id, D_802ACC64);
+        } else {
+            for (i = 0; i < targetListLength; i++) {
+                target = &actor->targetData[targetIndexList[i]];
+                f = get_actor(target->actorID)->flags;
+                id = D_802ACC70[i];
+                targetX = target->pos.x;
+                targetY = target->pos.y;
+                targetZ = target->pos.z;
+                if (f & 0x800) {
+                    xOffset = 0x10;
+                    yOffset = 2;
+                    if (hud_element_get_script(id) != HES_HandPointLeftLoop) {
+                        hud_element_set_script(id, &HES_HandPointLeftLoop);
+                    }
+                } else {
+                    xOffset = 5;
+                    yOffset = -0xB;
+                    if (hud_element_get_script(id) != HES_HandPointDownLoop) {
+                        hud_element_set_script(id, &HES_HandPointDownLoop);
+                    }
+                }
+                get_screen_coords(1, targetX, targetY, targetZ, &screenX, &screenY, &screenZ);
+                hud_element_set_render_pos(id, screenX + xOffset, screenY + yOffset);
+                hud_element_set_alpha(id, D_802ACC64);
+            }
+        }
+
+        currentPartner = playerData->currentPartner;
+        screenX = 52;
+        screenY = 64;
+        if (gBattleStatus.flags2 & 0x40) {
+            currentPartner = PARTNER_TWINK;
+        }
+
+        if ((battleStatus->currentTargetListFlags & 1) || targetListLength == 1) {
+            actorID = target->actorID;
+            if (actorID == ACTOR_PLAYER) {
+                msgID = 0x1D00C4;
+            } else if (actorID == ACTOR_PARTNER) {
+                msgID = D_802AB738[currentPartner];
+            } else {
+                target = &actor->targetData[targetIndexList[selectedTargetIndex]];
+                actor = get_actor(target->actorID);
+                msgID = get_actor_part(actor, target->partID)->staticData->unk_20;
+                if (msgID == 0) {
+                    msgID = bActorNames[actor->actorType];
+                }
+            }
+        } else {
+            target = &actor->targetData[targetIndexList[selectedTargetIndex]];
+            actorID = target->actorID;
+            if (actorID == ACTOR_PLAYER) {
+                msgID = 0x1D00C4;
+            } else if (actorID == ACTOR_PARTNER) {
+                msgID = D_802AB738[currentPartner];
+            } else {
+                msgID = 0x1D00C5;
+            }
+        }
+        draw_box(0, 4, screenX + D_802ACC68, screenY, 0, get_msg_width(msgID, 0) + 10, 20, 255, 0,
+                 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, NULL, NULL, NULL, SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
+
+        msgX = screenX + 4;
+        msgY = screenY + 2;
+        if ((battleStatus->currentTargetListFlags & 1) || targetListLength == 1) {
+            actorID = target->actorID;
+            if (actorID == ACTOR_PLAYER) {
+                draw_msg(0x1D00C4, msgX + D_802ACC68, screenY + 2, 255, 0x36, 0);
+            } else if (actorID == ACTOR_PARTNER) {
+                draw_msg(D_802AB738[currentPartner], msgX + D_802ACC68, msgY, 255, 0x36, 0);
+            } else {
+                target = &actor->targetData[targetIndexList[selectedTargetIndex]];
+                actor = get_actor(target->actorID);
+                msgID = get_actor_part(actor, target->partID)->staticData->unk_20;
+                if (msgID == 0) {
+                    msgID = bActorNames[actor->actorType];
+                }
+                draw_msg(msgID, msgX + D_802ACC68, screenY + 2, 255, 0x36, 0);
+            }
+        } else {
+            actorID = actor->targetData[targetIndexList[selectedTargetIndex]].actorID;
+            if (actorID == ACTOR_PLAYER) {
+                draw_msg(0x1D00C4, msgX + D_802ACC68, screenY + 2, 255, 0x36, 0);
+            } else if (actorID == ACTOR_PARTNER) {
+                draw_msg(D_802AB738[currentPartner], msgX + D_802ACC68, screenY + 2, 255, 0x36, 0);
+            } else {
+                draw_msg(0x1D00C5, msgX + D_802ACC68, screenY + 2, 255, 0x36, 0);
+            }
+        }
+    }
+}
+#else
 INCLUDE_ASM(s32, "415D90", btl_state_draw_select_target);
+#endif
 
 void btl_state_update_22(void) {
 }
