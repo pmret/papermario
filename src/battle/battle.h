@@ -225,6 +225,8 @@ typedef enum ActorType {
     ACTOR_TYPE_COUNT = 0xD4,
 } ActorType;
 
+extern s32 bActorNames[];
+
 #define AREA(id) \
     .dmaStart = battle_##id##_ROM_START, \
     .dmaEnd = battle_##id##_ROM_END, \

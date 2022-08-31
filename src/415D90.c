@@ -1,4 +1,5 @@
 #include "common.h"
+#include "battle/battle.h"
 #include "hud_element.h"
 
 extern HudScript HES_YellowArrow;
@@ -2012,10 +2013,6 @@ void btl_state_update_select_target(void) {
     }
 }
 
-extern s32 bActorNames[];
-
-// needs a lotta work
-#ifdef NON_MATCHING
 void btl_state_draw_select_target(void) {
     BattleStatus* battleStatus = &gBattleStatus;
     PlayerData* playerData = &gPlayerData;
@@ -2027,16 +2024,18 @@ void btl_state_draw_select_target(void) {
     s32 actorID;
     SelectableTarget* target;
     Actor* actor;
+    Actor* anotherActor;
     s32 id;
     s32 i;
     s32 f;
+    s32 msgWidth;
+    s32* tmpPtr; // TODO required to match and CURSED
 
     s32 xOffset, yOffset;
     f32 targetX, targetY, targetZ;
     s32 screenX, screenY, screenZ;
     s32 selectedTargetIndex;
     s8* targetIndexList;
-
 
     if (!(gBattleStatus.flags1 & 0x80000)) {
         actor = battleStatus->playerActor;
@@ -2049,15 +2048,18 @@ void btl_state_draw_select_target(void) {
     selectedTargetIndex = actor->selectedTargetIndex;
     targetIndexList = actor->targetIndexList;
 
+    tmpPtr = &D_802ACC68;
+
     if (targetListLength != 0) {
         if (battleStatus->currentTargetListFlags & 1) {
             target = &actor->targetData[targetIndexList[selectedTargetIndex]];
-            f = get_actor(target->actorID)->flags;
+            anotherActor = get_actor(target->actorID);
             id = D_802ACC70[0];
             targetX = target->pos.x;
             targetY = target->pos.y;
             targetZ = target->pos.z;
-            if (f & 0x800) {
+
+            if (anotherActor->flags & 0x800) {
                 xOffset = 16;
                 yOffset = 2;
                 if (hud_element_get_script(id) != HES_HandPointLeftLoop) {
@@ -2070,18 +2072,19 @@ void btl_state_draw_select_target(void) {
                     hud_element_set_script(id, &HES_HandPointDownLoop);
                 }
             }
+
             get_screen_coords(1, targetX, targetY, targetZ, &screenX, &screenY, &screenZ);
             hud_element_set_render_pos(id, screenX + xOffset, screenY + yOffset);
             hud_element_set_alpha(id, D_802ACC64);
         } else {
             for (i = 0; i < targetListLength; i++) {
                 target = &actor->targetData[targetIndexList[i]];
-                f = get_actor(target->actorID)->flags;
+                anotherActor = get_actor(target->actorID);
                 id = D_802ACC70[i];
                 targetX = target->pos.x;
                 targetY = target->pos.y;
                 targetZ = target->pos.z;
-                if (f & 0x800) {
+                if (anotherActor->flags & 0x800) {
                     xOffset = 0x10;
                     yOffset = 2;
                     if (hud_element_get_script(id) != HES_HandPointLeftLoop) {
@@ -2110,63 +2113,63 @@ void btl_state_draw_select_target(void) {
         if ((battleStatus->currentTargetListFlags & 1) || targetListLength == 1) {
             actorID = target->actorID;
             if (actorID == ACTOR_PLAYER) {
-                msgID = 0x1D00C4;
+                msgWidth = get_msg_width(0x1D00C4, 0) + 10;
             } else if (actorID == ACTOR_PARTNER) {
-                msgID = D_802AB738[currentPartner];
+                msgWidth = get_msg_width(D_802AB738[currentPartner], 0) + 10;
             } else {
                 target = &actor->targetData[targetIndexList[selectedTargetIndex]];
-                actor = get_actor(target->actorID);
-                msgID = get_actor_part(actor, target->partID)->staticData->unk_20;
+                anotherActor = get_actor(target->actorID);
+                msgID = get_actor_part(anotherActor, target->partID)->staticData->unk_20;
                 if (msgID == 0) {
-                    msgID = bActorNames[actor->actorType];
+                    msgID = bActorNames[anotherActor->actorType];
                 }
+                msgWidth = get_msg_width(msgID, 0) + 10;
             }
         } else {
             target = &actor->targetData[targetIndexList[selectedTargetIndex]];
             actorID = target->actorID;
             if (actorID == ACTOR_PLAYER) {
-                msgID = 0x1D00C4;
+                msgWidth = get_msg_width(0x1D00C4, 0) + 10;
             } else if (actorID == ACTOR_PARTNER) {
-                msgID = D_802AB738[currentPartner];
+                msgWidth = get_msg_width(D_802AB738[currentPartner], 0) + 10;
             } else {
-                msgID = 0x1D00C5;
+                msgWidth = get_msg_width(0x1D00C5, 0) + 10;
             }
         }
-        draw_box(0, 4, screenX + D_802ACC68, screenY, 0, get_msg_width(msgID, 0) + 10, 20, 255, 0,
+
+        draw_box(0, 4, screenX + D_802ACC68, screenY, 0, msgWidth, 20, 255, 0,
                  0.0f, 0.0f, 0.0f, 0.0f, 0.0f, NULL, NULL, NULL, SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
 
-        msgX = screenX + 4;
-        msgY = screenY + 2;
+        screenX += 4;
+        screenY += 2;
         if ((battleStatus->currentTargetListFlags & 1) || targetListLength == 1) {
             actorID = target->actorID;
             if (actorID == ACTOR_PLAYER) {
-                draw_msg(0x1D00C4, msgX + D_802ACC68, screenY + 2, 255, 0x36, 0);
+                draw_msg(0x1D00C4, screenX + D_802ACC68, screenY, 255, 0x36, 0);
             } else if (actorID == ACTOR_PARTNER) {
-                draw_msg(D_802AB738[currentPartner], msgX + D_802ACC68, msgY, 255, 0x36, 0);
+                draw_msg(D_802AB738[currentPartner], screenX + D_802ACC68, screenY, 255, 0x36, 0);
             } else {
                 target = &actor->targetData[targetIndexList[selectedTargetIndex]];
-                actor = get_actor(target->actorID);
-                msgID = get_actor_part(actor, target->partID)->staticData->unk_20;
+                anotherActor = get_actor(target->actorID);
+                msgID = get_actor_part(anotherActor, target->partID)->staticData->unk_20;
                 if (msgID == 0) {
-                    msgID = bActorNames[actor->actorType];
+                    msgID = bActorNames[anotherActor->actorType];
                 }
-                draw_msg(msgID, msgX + D_802ACC68, screenY + 2, 255, 0x36, 0);
+                draw_msg(msgID, screenX + *tmpPtr, screenY, 255, 0x36, 0); // TODO required to match
             }
         } else {
-            actorID = actor->targetData[targetIndexList[selectedTargetIndex]].actorID;
+            target = &actor->targetData[targetIndexList[selectedTargetIndex]];
+            actorID = target->actorID;
             if (actorID == ACTOR_PLAYER) {
-                draw_msg(0x1D00C4, msgX + D_802ACC68, screenY + 2, 255, 0x36, 0);
+                draw_msg(0x1D00C4, screenX + D_802ACC68, screenY, 255, 0x36, 0);
             } else if (actorID == ACTOR_PARTNER) {
-                draw_msg(D_802AB738[currentPartner], msgX + D_802ACC68, screenY + 2, 255, 0x36, 0);
+                draw_msg(D_802AB738[currentPartner], screenX + D_802ACC68, screenY, 255, 0x36, 0);
             } else {
-                draw_msg(0x1D00C5, msgX + D_802ACC68, screenY + 2, 255, 0x36, 0);
+                draw_msg(0x1D00C5, screenX + D_802ACC68, screenY, 255, 0x36, 0);
             }
         }
     }
 }
-#else
-INCLUDE_ASM(s32, "415D90", btl_state_draw_select_target);
-#endif
 
 void btl_state_update_22(void) {
 }

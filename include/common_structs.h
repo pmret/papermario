@@ -2322,7 +2322,7 @@ typedef struct SpriteShadingProfile {
     /* 0x02 */ char unk_02[0x2];
     /* 0x04 */ SpriteShadingLightSource sources[7];
     /* 0xAC */ Color_RGB8 ambientColor;
-    /* 0xAF */ s8 ambientPower; // ?
+    /* 0xAF */ u8 ambientPower; // ?
 } SpriteShadingProfile; // size = 0xB0
 
 typedef struct FoldImageRecPart {
