@@ -1,4 +1,5 @@
-#include "common.h"
+#include "ultra64.h"
+#include "include_asm.h"
 
 u32 __osContinitialized = 0;
 

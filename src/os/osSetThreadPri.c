@@ -1,5 +1,6 @@
-#include "common.h"
+#include "ultra64.h"
 #include <PR/osint.h>
+#include "include_asm.h"
 
 struct __osThreadTail __osThreadTail = {0, -1};
 OSThread* __osRunQueue = (OSThread*) &__osThreadTail;

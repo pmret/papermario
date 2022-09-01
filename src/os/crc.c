@@ -1,4 +1,5 @@
-#include "common.h"
+#include "ultra64.h"
+#include "include_asm.h"
 
 u8 __osContAddressCrc(u16 addr) {
     u32 temp = 0;
