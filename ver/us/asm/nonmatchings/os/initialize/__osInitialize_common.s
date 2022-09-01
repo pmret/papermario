@@ -139,7 +139,7 @@ glabel __osInitialize_common
 /* 45D18 8006A918 00822021 */  addu      $a0, $a0, $v0
 /* 45D1C 8006A91C 00862021 */  addu      $a0, $a0, $a2
 /* 45D20 8006A920 24060000 */  addiu     $a2, $zero, 0
-/* 45D24 8006A924 0C01B8C4 */  jal       func_8006E310
+/* 45D24 8006A924 0C01B8C4 */  jal       __udivdi3
 /* 45D28 8006A928 24070004 */   addiu    $a3, $zero, 4
 /* 45D2C 8006A92C 3C048000 */  lui       $a0, %hi(D_8000030C)
 /* 45D30 8006A930 8C84030C */  lw        $a0, %lo(D_8000030C)($a0)

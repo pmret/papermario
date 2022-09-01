@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_8006A650
+glabel __createSpeedParam
 /* 45A50 8006A650 3C05A460 */  lui       $a1, 0xa460
 /* 45A54 8006A654 34A50014 */  ori       $a1, $a1, 0x14
 /* 45A58 8006A658 3C06A460 */  lui       $a2, 0xa460

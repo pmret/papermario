@@ -8,7 +8,7 @@ dlabel D_8009A140
 
 .section .text
 
-glabel func_8006E870
+glabel __umoddi3
 /* 49C70 8006E870 27BDFFF8 */  addiu     $sp, $sp, -8
 /* 49C74 8006E874 00E0402D */  daddu     $t0, $a3, $zero
 /* 49C78 8006E878 00C0482D */  daddu     $t1, $a2, $zero

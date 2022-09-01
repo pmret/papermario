@@ -1,5 +1,3 @@
-#define MOVE_ADDU
-
 #include "common.h"
 #include "stdlib/stdarg.h"
 

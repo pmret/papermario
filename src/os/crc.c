@@ -1,8 +1,34 @@
-#define MOVE_ADDU
-
 #include "common.h"
 
-INCLUDE_ASM(s32, "os/47c60_len_f0", osContAddressCrc);
+u8 __osContAddressCrc(u16 addr) {
+    u32 temp = 0;
+    u32 i;
+
+    for (i = 0x400; i != 0;) {
+        temp <<= 1;
+
+        if (addr & i) {
+            if (temp & 0x20) {
+                temp ^= 0x14;
+            } else {
+                ++temp;
+            }
+        } else if (temp & 0x20) {
+            temp ^= 0x15;
+        }
+        
+        i >>= 1;
+    }
+
+    for (i = 5; i != 0; --i) {
+        temp <<= 1;
+        if (temp & 0x20) {
+            temp ^= 0x15;
+        }
+    }
+
+    return temp & 0x1F;
+}
 
 u8 __osContDataCrc(u8* data) {
     s32 ret;

@@ -69,7 +69,7 @@ glabel _Litob
 /* 46E6C 8006BA6C 02802021 */  addu      $a0, $s4, $zero
 /* 46E70 8006BA70 02A02821 */  addu      $a1, $s5, $zero
 /* 46E74 8006BA74 27B00018 */  addiu     $s0, $sp, 0x18
-/* 46E78 8006BA78 0C01BA1C */  jal       func_8006E870
+/* 46E78 8006BA78 0C01BA1C */  jal       __umoddi3
 /* 46E7C 8006BA7C 02128021 */   addu     $s0, $s0, $s2
 /* 46E80 8006BA80 02C31021 */  addu      $v0, $s6, $v1
 /* 46E84 8006BA84 90420000 */  lbu       $v0, ($v0)
@@ -78,7 +78,7 @@ glabel _Litob
 .L8006BA90:
 /* 46E90 8006BA90 00003021 */  addu      $a2, $zero, $zero
 /* 46E94 8006BA94 02802021 */  addu      $a0, $s4, $zero
-/* 46E98 8006BA98 0C01B8C4 */  jal       func_8006E310
+/* 46E98 8006BA98 0C01B8C4 */  jal       __udivdi3
 /* 46E9C 8006BA9C 02A02821 */   addu     $a1, $s5, $zero
 /* 46EA0 8006BAA0 AE220000 */  sw        $v0, ($s1)
 /* 46EA4 8006BAA4 AE230004 */  sw        $v1, 4($s1)

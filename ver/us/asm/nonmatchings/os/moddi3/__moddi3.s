@@ -8,7 +8,7 @@ dlabel D_80099F40
 
 .section .text
 
-glabel func_8006DDC0
+glabel __moddi3
 /* 491C0 8006DDC0 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 491C4 8006DDC4 AFB20010 */  sw        $s2, 0x10($sp)
 /* 491C8 8006DDC8 0000902D */  daddu     $s2, $zero, $zero

@@ -8,7 +8,7 @@ dlabel D_80099E40
 
 .section .text
 
-glabel func_8006D800
+glabel __divdi3
 /* 48C00 8006D800 04810008 */  bgez      $a0, .L8006D824
 /* 48C04 8006D804 0000C02D */   daddu    $t8, $zero, $zero
 /* 48C08 8006D808 2418FFFF */  addiu     $t8, $zero, -1

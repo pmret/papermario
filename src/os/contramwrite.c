@@ -1,5 +1,3 @@
-// nops in the end
-#ifdef NON_MATCHING
 #include "PR/controller.h"
 #include "PR/osint.h"
 #include "PR/siint.h"
@@ -68,7 +66,3 @@ s32 __osContRamWrite(OSMesgQueue *mq, int channel, u16 address, u8 *buffer, int 
     __osSiRelAccess();
     return ret;
 }
-#else
-#include "common.h"
-INCLUDE_ASM(s32, "os/457c0_len_270", osContRamWrite, OSMesgQueue *mq, int channel, u16 address, u8 *buffer, int force);
-#endif

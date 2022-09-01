@@ -376,54 +376,43 @@ s32 sign(s32 val) {
     return sign;
 }
 
-// D_800743E0 index needs to add the upper 32 bits from func_8006DDC0 ret
-#ifdef NON_EQUIVALENT
+char* int_to_string(s32 integer, char* dest, s32 base) {
+    u8 string[40]; // Even for binary this is a little long: 34 would suffice
+    s32 i = ARRAY_COUNT(string) - 2;
+    s32 negative = FALSE;
+    s64 longInteger = integer;
 
-typedef struct {
-    u8 unk_00[39];
-    u8 unk_39;
-} Unk_struct_43F0;
-
-u32 func_8006DDC0(s64 arg0, s64 arg1);
-u64 func_8006D800(s64 arg0, s64 arg1);
-
-char* int_to_string(s32 arg01, char* arg1, s32 arg2) {
-    Unk_struct_43F0 unk_struct;
-    s32 phi_s4 = 0x26;
-    s32 phi_fp = 0;
-    s64 arg0 = arg01;
-
-    if (arg0 < 0) {
-        phi_fp = 1;
-        arg0 *= -1;
+    // handle negative integers
+    if (longInteger < 0) {
+        negative = TRUE;
+        longInteger *= -1;
     }
-    unk_struct.unk_39 = 0;
 
+    // null-terminate string
+    string[ARRAY_COUNT(string) - 1] = '\0';
+
+    // extract digits, filling string from the back
     while (TRUE) {
-        u8(*new_var)[];
-
-        unk_struct.unk_00[phi_s4] = (*(new_var = &D_800743E0))[func_8006DDC0(arg0, arg2)];
-        arg0 = func_8006D800(arg0, arg2);
-        if (arg0 == 0 || phi_s4 == 0) {
+        string[i] = D_800743E0[longInteger % base];
+        longInteger /= base;
+        if (longInteger == 0 || i == 0) {
             break;
         }
-        phi_s4--;
+        i--;
     }
 
-    if (phi_fp) {
-        phi_s4--;
-        unk_struct.unk_00[phi_s4] = 0x2D;
+    // Add - to negatives
+    if (negative) {
+        i--;
+        string[i] = '-';
     }
 
-    strcpy(arg1, &unk_struct.unk_00[phi_s4]);
+    // copy only populated part of string
+    strcpy(dest, &string[i]);
 
-    return arg1;
+    return dest;
 }
-#else
-INCLUDE_ASM(char*, "43F0", int_to_string, s32 arg01, char* arg1, s32 arg2);
-#endif
 
-// should maybe be called bzero
 void mem_clear(void* data, s32 numBytes) {
     u8* addressableData = data;
 
