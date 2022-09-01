@@ -1187,7 +1187,7 @@ void func_8013CFA8(FoldState* state, Matrix4f mtx) {
                     gSP2Triangles(gMasterGfxPos++, 0, 2, 1, 0, 1, 2, 3, 0);
                     gDPPipeSync(gMasterGfxPos++);
                 }
-                render_shaded_sprite(mtx, uls, ult, lrs, lrt, alpha, state->unk_78);
+                create_shading_palette(mtx, uls, ult, lrs, lrt, alpha, state->unk_78);
             } else {
                 gDPScrollTextureTile_4b(gMasterGfxPos++,
                     fold_currentImage->raster, G_IM_FMT_CI,

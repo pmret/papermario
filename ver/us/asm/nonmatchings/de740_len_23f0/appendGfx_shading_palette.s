@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel appendGfx_shaded_sprite
+glabel appendGfx_shading_palette
 /* DF0B8 801489B8 27BDFF90 */  addiu     $sp, $sp, -0x70
 /* DF0BC 801489BC F7B60048 */  sdc1      $f22, 0x48($sp)
 /* DF0C0 801489C0 C7B60088 */  lwc1      $f22, 0x88($sp)
