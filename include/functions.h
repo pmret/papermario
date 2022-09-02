@@ -970,6 +970,7 @@ void status_menu_start_blinking_sp(void);
 void status_menu_stop_blinking_fp(void);
 void status_menu_stop_blinking_hp(void);
 void status_menu_stop_blinking_sp(void);
+void status_menu_start_blinking_sp_bars(s8 numBarsToBlink);
 void set_background_size(s16, s16, s16, s16);
 void read_background_size(BackgroundHeader*);
 void set_max_SP(s8);
