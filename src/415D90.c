@@ -265,6 +265,7 @@ extern s32 D_802AD104;
 extern s8 battle_menu_moveState;
 extern s8 battle_menu_moveCursorPos;
 extern s8 D_802AD10A;
+extern s8 D_802AD10B;
 extern s8 battle_menu_moveScrollLine;
 extern s8 D_802AD10D;
 extern s8 D_802AD10E;
@@ -279,17 +280,23 @@ extern s32 battle_menu_moveDownArrowIcon;
 extern s32 battle_menu_moveOptionIconIDs[24];
 extern s32 battle_menu_moveTitleIcon;
 extern s32 battle_menu_moveOptionCostUnitIconIDs[24];
+extern s16 battle_menu_moveX;
+extern s16 battle_menu_moveY;
 extern s32 battle_menu_moveOptionIndexMap[24];
 extern s32 D_802AD258;
+extern s32 battle_menu_moveOptionIconScripts[];
 extern s32 battle_menu_moveOptionNames[];
 extern s32 battle_menu_moveOptionDisplayCosts[];
 extern s32 battle_menu_moveOptionDisplayCostReductions[];
 extern s32 battle_menu_moveOptionDisplayCostReductionColors[];
+extern s32 battle_menu_moveOptionBPCosts[];
 extern s32 battle_menu_hasSpiritsMenu;
 extern s32 battle_menu_moveOptionCount;
 extern s32 D_802AD4A8;
 extern s32 battle_menu_moveOptionsEnabled[];
 extern s32 battle_menu_moveOptionDescriptions[24];
+extern s8 battle_menu_moveOptionSortPriorities[];
+extern s32 battle_menu_moveOptionCantUseTypes[];
 extern s32 battle_menu_moveOptionActive;
 extern s8 D_802AD604;
 extern s8 D_802AD605;
@@ -322,6 +329,11 @@ extern s32 D_802AD6A8[];
 extern s32 D_802AD6C0[];
 extern s32 D_802AD6D4;
 
+void func_802A3C98(s32 x, s32 y);
+void func_802A43DC(s32 arg0, s32 x, s32 y);
+void func_802A4448(s32 arg0, s32 x, s32 y);
+void func_802A4494(s32 arg0, s32 x, s32 y);
+void func_802A4534(s32 arg0, s32 x, s32 y);
 void func_802A5290(s32 arg0, s32 x, s32 y);
 void func_802A56F8(s32 arg0, s32 x, s32 y);
 void func_802A5738(s32 arg0, s32 x, s32 y);
@@ -962,7 +974,381 @@ void func_802A2C58(void) {
     battle_menu_moveState = 30;
 }
 
+// lots of work
+#ifdef NON_MATCHING
+s32 func_802A2C84(void) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    s32 temp_a1;
+    s32 msgWidth;
+    s32 msgX;
+    s32 msgID;
+    s32 cond;
+    s32 id;
+    s32 i;
+    s32 j;
+
+    s32 moveX;
+    s32 moveY;
+
+    s8 temp_v0_14;
+    s8 temp_v1_7;
+
+    switch (battle_menu_moveState) {
+        case 0:
+            temp_a1 = battle_menu_moveScrollLine;
+            msgX = battle_menu_moveCursorPos - temp_a1; // TODO required to match
+            battle_menu_moveScrollOffset = temp_a1 * -0xD;
+            D_802AD112 = msgX * 0xD; // TODO required to match
+            battle_menu_moveX = 20;
+            battle_menu_moveY = 68;
+
+            for (i = 0; i < battle_menu_moveOptionCount; i++) {
+                battle_menu_moveOptionIndexMap[i] = i;
+            }
+
+            if (!battle_menu_hasSpiritsMenu) {
+                for (i = 0; i < battle_menu_moveOptionCount - 1; i++) {
+                    for (j = i + 1; j < battle_menu_moveOptionCount; j++) {
+                        if (battle_menu_moveOptionSortPriorities[i] < battle_menu_moveOptionSortPriorities[j]) {
+                            continue;
+                        }
+
+                        if (battle_menu_moveOptionSortPriorities[i] != battle_menu_moveOptionSortPriorities[j] ||
+                            (
+                                (battle_menu_moveOptionDisplayCosts[battle_menu_moveOptionIndexMap[i]] >= battle_menu_moveOptionDisplayCosts[battle_menu_moveOptionIndexMap[j]]) &&
+
+                                (battle_menu_moveOptionDisplayCosts[battle_menu_moveOptionIndexMap[i]] && battle_menu_moveOptionDisplayCosts[battle_menu_moveOptionIndexMap[j]] || battle_menu_moveOptionBPCosts[battle_menu_moveOptionIndexMap[i]] >= battle_menu_moveOptionBPCosts[battle_menu_moveOptionIndexMap[j]])
+                            ))
+                            {
+                                s32 swapTmp;
+
+                                swapTmp = battle_menu_moveOptionIndexMap[i];
+                                battle_menu_moveOptionIndexMap[i] = battle_menu_moveOptionIndexMap[j];
+                                battle_menu_moveOptionIndexMap[j] = swapTmp;
+                            }
+                    }
+                }
+            }
+
+            for (i = 0; i < battle_menu_moveOptionCount; i++) {
+                id = hud_element_create(battle_menu_moveOptionIconScripts[battle_menu_moveOptionIndexMap[i]]);
+                battle_menu_moveOptionIconIDs[i] = id;
+                hud_element_set_scale(id, 0.45f);
+                hud_element_set_flags(id, 0x8080);
+            }
+
+            id = hud_element_create(&HES_AnimatedHandPointer);
+            battle_menu_moveCursorIcon = id;
+            hud_element_set_flags(id, 0x20000080);
+            hud_element_set_render_pos(id, battle_menu_moveX, battle_menu_moveY);
+
+            id = hud_element_create(&HES_GreenArrowUp);
+            battle_menu_moveUpArrowIcon = id;
+            hud_element_set_flags(id, 0x20000080);
+            hud_element_set_render_pos(id, battle_menu_moveX + 39, battle_menu_moveY - 7);
+
+            id = hud_element_create(&HES_GreenArrowDown);
+            battle_menu_moveDownArrowIcon = id;
+            hud_element_set_flags(id, 0x20000080);
+            hud_element_set_render_pos(id, battle_menu_moveX + 39, battle_menu_moveY + 78);
+
+            if (battle_menu_hasSpiritsMenu == 0) {
+                id = hud_element_create(&HES_StatusFlower);
+                battle_menu_moveTitleIcon = id;
+                hud_element_set_flags(id, 0x80);
+            } else {
+                id = hud_element_create(&HES_MenuStarPower);
+                battle_menu_moveTitleIcon = id;
+                hud_element_set_scale(id, 0.75f);
+                hud_element_set_flags(id, 0x80);
+            }
+            hud_element_set_render_pos(id, battle_menu_moveX + 56, battle_menu_moveY);
+
+            for (i = 0; i < battle_menu_moveOptionCount; i++) {
+                if (battle_menu_hasSpiritsMenu == 0) {
+                    switch (battle_menu_moveOptionDisplayCostReductionColors[i]) {
+                        case 0:
+                            id = hud_element_create(&HES_FPCost);
+                            battle_menu_moveOptionCostUnitIconIDs[i] = id;
+                            break;
+                        case 1:
+                            id = hud_element_create(&HES_FPCostReduced);
+                            battle_menu_moveOptionCostUnitIconIDs[i] = id;
+                            break;
+                        default:
+                            id = hud_element_create(&HES_FPCostReducedTwice);
+                            battle_menu_moveOptionCostUnitIconIDs[i] = id;
+                            break;
+                    }
+                } else {
+                    switch (battle_menu_moveOptionDisplayCostReductionColors[i]) {
+                        case 0:
+                            id = hud_element_create(&HES_POWCost);
+                            battle_menu_moveOptionCostUnitIconIDs[i] = id;
+                            break;
+                        case 1:
+                            id = hud_element_create(&HES_POWCostReduced);
+                            battle_menu_moveOptionCostUnitIconIDs[i] = id;
+                            break;
+                        default:
+                            id = hud_element_create(&HES_POWCostReducedTwice);
+                            battle_menu_moveOptionCostUnitIconIDs[i] = id;
+                            break;
+                    }
+                }
+                hud_element_set_flags(id, 0x80);
+                hud_element_set_render_pos(id, battle_menu_moveX + 0x38, battle_menu_moveY);
+            }
+
+            battle_menu_moveTextColor = 0xA;
+
+            moveX = battle_menu_moveX;
+            moveY = battle_menu_moveY;
+            if (!battle_menu_hasSpiritsMenu) {
+                set_window_properties(1, moveX, moveY, 0x96, (D_802AD10E * 0xD) + 0x1C, 0, func_802A3C98, NULL, -1);
+                set_window_properties(2, moveX + 0x10, moveY - 6, 0x5A, 0x10, 1, func_802A43DC, NULL, -1);
+                set_window_properties(3, moveX + 114, moveY - 12, 0x20, 0x20, 1, func_802A4448, NULL, -1);
+            } else {
+                set_window_properties(1, moveX, moveY, 0x90, (D_802AD10E * 0xD) + 0x1C, 0, func_802A3C98, NULL, -1);
+                set_window_properties(4, moveX + 10, moveY - 6, 0x64, 0x10, 1, func_802A43DC, NULL, -1);
+                set_window_properties(5, moveX + 110, moveY - 12, 0x20, 0x23, 1, func_802A4448, NULL, -1);
+            }
+
+            set_window_properties(8, 20, 186, 280, 32, 0x14, func_802A4494, NULL, -1);
+            set_window_update(1, 1);
+            if (!battle_menu_hasSpiritsMenu) {
+                set_window_update(2, 1);
+                set_window_update(3, 1);
+            } else {
+                set_window_update(4, 1);
+                set_window_update(5, 1);
+            }
+            set_window_update(8, 1);
+
+            do {
+                cond = FALSE;
+                if (battle_menu_moveCursorPos >= (battle_menu_moveScrollLine + D_802AD10D) - 1) {
+                    battle_menu_moveScrollLine++;
+                    if (battle_menu_moveOptionCount - 6 >= battle_menu_moveScrollLine) {
+                        cond = TRUE;
+                    } else {
+                        battle_menu_moveScrollLine -= 6;
+                        if (battle_menu_moveScrollLine < 0) {
+                            battle_menu_moveScrollLine = 0;
+                        }
+                    }
+                }
+            } while (cond);
+
+            temp_v1_7 = battle_menu_moveScrollLine;
+            battle_menu_moveState = 1;
+            D_802AD10D = temp_v1_7 + 6;
+            battle_menu_moveScrollOffset = (s8) temp_v1_7 * -0xD;
+            D_802AD112 = (battle_menu_moveCursorPos - (s8) temp_v1_7) * 0xD;
+            break;
+        case 1:
+            D_802AD10A = battle_menu_moveCursorPos;
+            if ((battleStatus->currentButtonsHeld & 0x12000) && (((battle_menu_moveCursorPos > 0)) || ( ((battleStatus->currentButtonsPressed & 0x12000))))) {
+                battle_menu_moveCursorPos--;
+            }
+
+            if ((battleStatus->currentButtonsHeld & 0x20010) && ((((battle_menu_moveCursorPos < (battle_menu_moveOptionCount - 1)) != 0)) || (((battleStatus->currentButtonsPressed & 0x20010))))) {
+                battle_menu_moveCursorPos++;
+            }
+
+            if (battle_menu_moveCursorPos < 0) {
+                battle_menu_moveCursorPos = battle_menu_moveOptionCount - 1;
+            }
+
+            if (battle_menu_moveOptionCount - 1 < battle_menu_moveCursorPos) {
+                battle_menu_moveCursorPos = 0;
+            }
+
+            if (D_802AD10A != battle_menu_moveCursorPos) {
+                hud_element_set_scale(battle_menu_moveOptionIconIDs[D_802AD10A], 0.45f);
+                sfx_play_sound(0xC7);
+            }
+
+            if (battle_menu_moveCursorPos < battle_menu_moveScrollLine + 1) {
+                battle_menu_moveScrollLine--;
+                if (battle_menu_moveScrollLine < 0) {
+                    battle_menu_moveScrollLine = 0;
+                }
+            }
+
+            if (battle_menu_moveCursorPos >= (D_802AD10D - 1)) {
+                battle_menu_moveScrollLine++;
+                if (battle_menu_moveOptionCount - 6 < battle_menu_moveScrollLine) {
+                    battle_menu_moveScrollLine -= 6;
+                    if (battle_menu_moveScrollLine < 0) {
+                        battle_menu_moveScrollLine = 0;
+                    }
+                }
+            }
+
+            D_802AD10D = battle_menu_moveScrollLine + 6;
+            if (battleStatus->currentButtonsPressed & 0x8000) {
+                if (battle_menu_moveOptionsEnabled[battle_menu_moveOptionIndexMap[battle_menu_moveCursorPos]] == 1) {
+                    sfx_play_sound(0xC9);
+                    battle_menu_moveState = -1;
+                } else {
+                    sfx_play_sound(0x21D);
+                    D_802AD258 = 0;
+                    temp_v0_14 = battle_menu_moveOptionCantUseTypes[battle_menu_moveOptionIndexMap[battle_menu_moveCursorPos]];
+                    if (temp_v0_14 != 0) {
+                        D_802AD258 = temp_v0_14;
+                    }
+                    battle_menu_moveState = 40;
+                }
+                break;
+            }
+
+            if (battleStatus->currentButtonsPressed & 0x4000) {
+                sfx_play_sound(0xCA);
+                func_802A27E4();
+                battle_menu_moveState = -2;
+            }
+            break;
+        case -1:
+            for (i = 0; i < battle_menu_moveOptionCount; i++) {
+                id = battle_menu_moveOptionIconIDs[i];
+                hud_element_set_tint(id, 160, 160, 160);
+            }
+            hud_element_set_tint(battle_menu_moveCursorIcon, 160, 160, 160);
+            hud_element_set_tint(battle_menu_moveUpArrowIcon, 160, 160, 160);
+            hud_element_set_tint(battle_menu_moveDownArrowIcon, 160, 160, 160);
+            hud_element_set_tint(battle_menu_moveTitleIcon, 160, 160, 160);
+
+            for (i = 0; i < battle_menu_moveOptionCount; i++) {
+                id = battle_menu_moveOptionCostUnitIconIDs[i];
+                hud_element_set_tint(id, 160, 160, 160);
+            }
+
+            hud_element_set_script(battle_menu_moveCursorIcon, &HES_HandPointer);
+            battle_menu_moveTextColor = 0xD;
+            set_window_update(1, 4);
+            if (!battle_menu_hasSpiritsMenu) {
+                set_window_update(2, 4);
+                set_window_update(3, 4);
+            } else {
+                set_window_update(4, 4);
+                set_window_update(5, 4);
+            }
+            set_window_update(8, 2);
+            if (!battle_menu_hasSpiritsMenu) {
+                status_menu_stop_blinking_fp();
+            } else {
+                status_menu_stop_blinking_sp();
+            }
+            battle_menu_moveOptionActive = battle_menu_moveCursorPos;
+            return battle_menu_moveOptionIndexMap[battle_menu_moveCursorPos] + 1;
+        case -2:
+            if (!battle_menu_hasSpiritsMenu) {
+                status_menu_stop_blinking_fp();
+            } else {
+                status_menu_stop_blinking_sp();
+            }
+            return 255;
+        case 10:
+            set_window_update(1, 2);
+            if (!battle_menu_hasSpiritsMenu) {
+                set_window_update(2, 2);
+                set_window_update(3, 2);
+            } else {
+                set_window_update(4, 2);
+                set_window_update(5, 2);
+            }
+            set_window_update(8, 2);
+            if (!battle_menu_hasSpiritsMenu) {
+                status_menu_stop_blinking_fp();
+            } else {
+                status_menu_stop_blinking_sp();
+            }
+            battle_menu_moveState = 11;
+            battle_menu_moveOptionActive = battle_menu_moveCursorPos;
+            return battle_menu_moveOptionIndexMap[battle_menu_moveCursorPos] + 1;
+        case 11:
+            battle_menu_moveOptionActive = battle_menu_moveCursorPos;
+            return battle_menu_moveOptionIndexMap[battle_menu_moveCursorPos] + 1;
+        case 20:
+            set_window_update(1, 1);
+            if (!battle_menu_hasSpiritsMenu) {
+                set_window_update(2, 1);
+                set_window_update(3, 1);
+            } else {
+                set_window_update(4, 1);
+                set_window_update(5, 1);
+            }
+            set_window_update(8, 1);
+            battle_menu_moveState = 1;
+            battle_menu_moveOptionActive = battle_menu_moveCursorPos;
+            return battle_menu_moveOptionIndexMap[battle_menu_moveCursorPos] + 1;
+        case 30:
+            set_window_update(1, 9);
+            if (!battle_menu_hasSpiritsMenu) {
+                set_window_update(2, 9);
+                set_window_update(3, 9);
+            } else {
+                set_window_update(4, 9);
+                set_window_update(5, 9);
+            }
+            set_window_update(8, 2);
+            battle_menu_moveState = -1;
+            break;
+        case 40:
+            battle_menu_moveOptionActive = -1;
+            battle_menu_moveState = 41;
+            return -1;
+        case 41:
+            set_window_update(1, 2);
+            if (!battle_menu_hasSpiritsMenu) {
+                set_window_update(2, 2);
+                set_window_update(3, 2);
+            } else {
+                set_window_update(4, 2);
+                set_window_update(5, 2);
+            }
+            set_window_update(8, 2);
+            msgID = 0x1D00C3;
+            if (D_802AD258 == 0) {
+                msgID = 0x1D00A0;
+                if (!battle_menu_hasSpiritsMenu) {
+                    msgID = 0x1D009F;
+                }
+            }
+            msgWidth = get_msg_width(msgID, 0) + 23;
+            msgX = (SCREEN_WIDTH / 2) - (msgWidth / 2);
+            set_window_properties(9, msgX, 80, msgWidth, D_802AB340[get_msg_lines(msgID) - 1], 0x14, func_802A4534, NULL, -1);
+            set_window_update(9, 1);
+            D_802AD10B = 60;
+            battle_menu_moveState = 42;
+            return -1;
+        case 42:
+            if (gGameStatusPtr->pressedButtons[0] & (BUTTON_A | BUTTON_B)) {
+                D_802AD10B = 0;
+            }
+            if (D_802AD10B != 0) {
+                D_802AD10B--;
+                return -1;
+            }
+            set_window_update(9, 2);
+            set_window_update(1, 1);
+            if (!battle_menu_hasSpiritsMenu) {
+                set_window_update(2, 1);
+                set_window_update(3, 1);
+            } else {
+                set_window_update(4, 1);
+                set_window_update(5, 1);
+            }
+            set_window_update(8, 1);
+            battle_menu_moveState = 1;
+            break;
+    }
+    return 0;
+}
+#else
 INCLUDE_ASM(s32, "415D90", func_802A2C84);
+#endif
 
 // needs a lot of work
 #ifdef NON_MATCHING
