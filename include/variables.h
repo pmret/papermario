@@ -96,7 +96,7 @@ extern MessagePrintState* SaveBlockResultPrinter;
 extern Entity* SwitchToLink;
 extern s32 CreateEntityVarArgBuffer[4];
 
-extern f32 DefaultMoveSpeeds[4];
+extern f32 D_800F7B74;
 
 extern CollisionData gZoneCollisionData;
 

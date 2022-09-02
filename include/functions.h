@@ -221,6 +221,7 @@ void get_dpad_input_radial(f32* angle, f32* magnitude);
 void transform_point(Matrix4f mtx, f32 inX, f32 inY, f32 inZ, f32 inS, f32* outX, f32* outY, f32* outZ, f32* outS);
 void try_player_footstep_sounds(s32 arg0);
 void phys_update_interact_collider(void);
+void phys_reset_spin_history(void);
 s32 phys_adjust_cam_on_landing(void);
 s32 phys_should_player_be_sliding(void);
 void phys_init_integrator_for_current_state(void);
