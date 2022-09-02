@@ -233,7 +233,7 @@ block_17:
                 switch (D_8010CCF8) {
                     case 0:
                         if (playerStatus->flags & PLAYER_STATUS_FLAGS_40) {
-                            sfx_play_sound(0x21D);
+                            sfx_play_sound(SOUND_MENU_ERROR);
                             if (D_8010C9C0) {
                                 func_800E6860();
                                 playerStatus->flags &= ~PLAYER_STATUS_FLAGS_20;

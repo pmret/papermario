@@ -232,7 +232,7 @@ s32 btl_check_player_defeated(void) {
     }
     D_800DC4E4 = gBattleState;
     D_800DC4D8 = gBattleState2;
-    btl_set_state(0x1B);
+    btl_set_state(BATTLE_STATE_DEFEAT);
     return TRUE;
 }
 
@@ -1279,7 +1279,7 @@ Actor* create_actor(Formation formation) {
     }
 
     actor = battleStatus->enemyActors[i] = heap_malloc(sizeof(*actor));
-    
+
     ASSERT(actor != NULL);
 
     actor->unk_134 = battleStatus->unk_93++;

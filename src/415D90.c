@@ -1166,7 +1166,7 @@ s32 func_802A2C84(void) {
 
             if (D_802AD10A != battle_menu_moveCursorPos) {
                 hud_element_set_scale(battle_menu_moveOptionIconIDs[D_802AD10A], 0.45f);
-                sfx_play_sound(0xC7);
+                sfx_play_sound(SOUND_MENU_CHANGE_SELECTION);
             }
 
             if (battle_menu_moveCursorPos < battle_menu_moveScrollLine + 1) {
@@ -1189,10 +1189,10 @@ s32 func_802A2C84(void) {
             D_802AD10D = battle_menu_moveScrollLine + 6;
             if (battleStatus->currentButtonsPressed & 0x8000) {
                 if (battle_menu_moveOptionsEnabled[battle_menu_moveOptionIndexMap[battle_menu_moveCursorPos]] == 1) {
-                    sfx_play_sound(0xC9);
+                    sfx_play_sound(SOUND_MENU_NEXT);
                     battle_menu_moveState = -1;
                 } else {
-                    sfx_play_sound(0x21D);
+                    sfx_play_sound(SOUND_MENU_ERROR);
                     D_802AD258 = 0;
                     temp_v0_14 = battle_menu_moveOptionCantUseTypes[battle_menu_moveOptionIndexMap[battle_menu_moveCursorPos]];
                     if (temp_v0_14 != 0) {
@@ -1204,7 +1204,7 @@ s32 func_802A2C84(void) {
             }
 
             if (battleStatus->currentButtonsPressed & 0x4000) {
-                sfx_play_sound(0xCA);
+                sfx_play_sound(SOUND_MENU_BACK);
                 func_802A27E4();
                 battle_menu_moveState = -2;
             }
@@ -2348,7 +2348,7 @@ void btl_state_update_peach_menu(void) {
                 battleStatus->selectedMoveID = MOVE_PEACH_FOCUS;
                 battleStatus->selectedItemID = 0xA;
                 battleStatus->currentTargetListFlags = gMoveTable[MOVE_PEACH_FOCUS].flags;
-                btl_set_state(0x11);
+                btl_set_state(BATTLE_STATE_SELECT_TARGET);
             }
             break;
         case 4:

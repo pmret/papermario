@@ -644,7 +644,7 @@ void pause_tutorial_input(s32 *pressed, s32 *held) {
                 gPauseTutorialInputState = 1;
             }
             if (pressedOld && pressedNew == 0) {
-                sfx_play_sound(541);
+                sfx_play_sound(SOUND_MENU_ERROR);
             }
             if (gPauseTutorialState == 0) {
                 pressedNew = 0;
@@ -710,7 +710,7 @@ void pause_handle_input(s32 pressed, s32 held) {
 
     if ((gPausePressedButtons & BUTTON_START) || (gPauseMenuCurrentTab == 0) && (gPausePressedButtons & BUTTON_B)) {
         enforce_hpfp_limits();
-        sfx_play_sound(198);
+        sfx_play_sound(SOUND_MENU_CLOSE);
         set_game_mode(GAME_MODE_UNPAUSE);
         return;
     }

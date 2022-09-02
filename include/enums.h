@@ -492,6 +492,8 @@ enum Easings {
 
 enum SoundIDs {
     SOUND_0                         = 0x00000000,
+    SOUND_1                         = 0x00000001,
+    SOUND_2                         = 0x00000002,
     SOUND_3                         = 0x00000003,
     SOUND_4                         = 0x00000004,
     SOUND_MENU_BADGE_EQUIP          = 0x00000005,
@@ -536,6 +538,7 @@ enum SoundIDs {
     SOUND_HIT_FIRE                  = 0x000000EA,
     SOUND_HIT_ICE                   = 0x000000EB,
     SOUND_F1                        = 0x000000F1,
+    SOUND_F2                        = 0x000000F2,
     SOUND_F3                        = 0x000000F3,
     SOUND_F4                        = 0x000000F4,
     SOUND_FD                        = 0x000000FD,
@@ -589,6 +592,7 @@ enum SoundIDs {
     SOUND_METAL_GATE_CLOSE          = 0x000001CA,
     SOUND_1CB                       = 0x000001CB,
     SOUND_1CC                       = 0x000001CC,
+    SOUND_1D3                       = 0x000001D3,
     SOUND_CREAKY_ROCKING_CHAIR      = 0x000001D6,
     SOUND_1E2                       = 0x000001E2,
     SOUND_211                       = 0x00000211,

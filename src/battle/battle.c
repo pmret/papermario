@@ -317,7 +317,7 @@ void load_battle_section(void) {
         D_800DC064 = &(*battleArea->stages)[D_800DC4EC];
     }
 
-    btl_set_state(1);
+    btl_set_state(BATTLE_STATE_NORMAL_START);
     D_800DC4D0 = 0;
 }
 
