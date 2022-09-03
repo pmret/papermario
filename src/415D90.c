@@ -284,7 +284,7 @@ extern s16 battle_menu_moveX;
 extern s16 battle_menu_moveY;
 extern s32 battle_menu_moveOptionIndexMap[24];
 extern s32 D_802AD258;
-extern s32 battle_menu_moveOptionIconScripts[];
+extern HudScript* battle_menu_moveOptionIconScripts[];
 extern s32 battle_menu_moveOptionNames[];
 extern s32 battle_menu_moveOptionDisplayCosts[];
 extern s32 battle_menu_moveOptionDisplayCostReductions[];
@@ -296,7 +296,7 @@ extern s32 D_802AD4A8;
 extern s32 battle_menu_moveOptionsEnabled[];
 extern s32 battle_menu_moveOptionDescriptions[24];
 extern s8 battle_menu_moveOptionSortPriorities[];
-extern s32 battle_menu_moveOptionCantUseTypes[];
+extern s8 battle_menu_moveOptionCantUseTypes[];
 extern s32 battle_menu_moveOptionActive;
 extern s8 D_802AD604;
 extern s8 D_802AD605;
@@ -413,25 +413,25 @@ s32 func_802A11B0(void) {
             for (i = 0; i < main_menu_numOptions; i++) {
                 D_802AD010[i] = id = hud_element_create(main_battle_menu_JumpHudScripts[i]);
                 hud_element_set_render_depth(id, 5);
-                hud_element_set_flags(id, 0x8000);
-                hud_element_set_flags(id, 0x80);
-                hud_element_set_flags(id, 2);
+                hud_element_set_flags(id, HUD_ELEMENT_FLAGS_FILTER_TEX);
+                hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80);
+                hud_element_set_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                 hud_element_set_scale(id, 0.75f);
 
                 D_802AD028[i] = id = hud_element_create(&HES_ProjectorSpot);
                 hud_element_create_transform_B(id);
                 hud_element_set_render_depth(id, 10);
-                hud_element_set_flags(id, 0x80);
-                hud_element_set_flags(id, 0x8000);
-                hud_element_set_flags(id, 2);
+                hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80);
+                hud_element_set_flags(id, HUD_ELEMENT_FLAGS_FILTER_TEX);
+                hud_element_set_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
             }
 
             D_802AD040 = id = hud_element_create(&HES_ProjectorSpot);
             hud_element_create_transform_B(id);
             hud_element_set_render_depth(id, 7);
-            hud_element_set_flags(id, 0x80);
-            hud_element_set_flags(id, 0x8000);
-            hud_element_set_flags(id, 2);
+            hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80);
+            hud_element_set_flags(id, HUD_ELEMENT_FLAGS_FILTER_TEX);
+            hud_element_set_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
 
             D_802AD044 = id = hud_element_create(&HES_ProjectorReel);
             hud_element_create_transform_B(id);
@@ -439,8 +439,8 @@ s32 func_802A11B0(void) {
             hud_element_set_render_pos(id, 40, 212);
             hud_element_set_tint(id, 0, 91, 127);
             hud_element_set_transform_rotation_pivot(id, 0x10, -0x10);
-            hud_element_set_flags(id, 0x80);
-            hud_element_clear_flags(id, 0x8000);
+            hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80);
+            hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_FILTER_TEX);
             hud_element_set_alpha(id, 240);
 
             D_802AD048 = id = hud_element_create(&HES_ProjectorReel);
@@ -449,8 +449,8 @@ s32 func_802A11B0(void) {
             hud_element_set_render_pos(id, 39, 212);
             hud_element_set_tint(id, 0, 91, 127);
             hud_element_set_transform_rotation_pivot(id, 0x10, -0x10);
-            hud_element_set_flags(id, 0x80);
-            hud_element_clear_flags(id, 0x8000);
+            hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80);
+            hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_FILTER_TEX);
             hud_element_set_alpha(id, 240);
 
             D_802AD04C = id = hud_element_create(&HES_ProjectorBeam);
@@ -461,34 +461,34 @@ s32 func_802A11B0(void) {
             hud_element_set_transform_rotation_pivot(id, 0, 0);
             hud_element_set_transform_rotation(id, 0.0f, 0.0f, -45.0f);
             hud_element_set_alpha(id, 200);
-            hud_element_set_flags(id, 0x80);
-            hud_element_set_flags(id, 0x8000);
-            hud_element_set_flags(id, 2);
+            hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80);
+            hud_element_set_flags(id, HUD_ELEMENT_FLAGS_FILTER_TEX);
+            hud_element_set_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
 
             D_802AD05C = id = hud_element_create(&HES_SwapBackground);
             hud_element_set_render_depth(id, 0);
             hud_element_set_render_pos(id, 97, 208);
             hud_element_set_tint(id, 255, 255, 255);
-            hud_element_set_flags(id, 0x80);
-            hud_element_clear_flags(id, 0x8000);
+            hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80);
+            hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_FILTER_TEX);
             hud_element_set_alpha(id, 230);
 
             D_802AD050 = id = hud_element_create(&HES_SwapZ);
             hud_element_set_render_depth(id, 5);
-            hud_element_clear_flags(id, 0x8000);
-            hud_element_set_flags(id, 0x80);
+            hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_FILTER_TEX);
+            hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80);
             hud_element_set_render_pos(id, 94, 209);
 
             D_802AD054 = id = hud_element_create(&HES_SwapArrowLeft);
             hud_element_set_render_depth(id, 5);
-            hud_element_clear_flags(id, 0x8000);
-            hud_element_set_flags(id, 0x80);
+            hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_FILTER_TEX);
+            hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80);
             hud_element_set_render_pos(id, 81, 210);
 
             D_802AD058 = id = hud_element_create(&HES_SwapArrowRight);
             hud_element_set_render_depth(id, 5);
-            hud_element_clear_flags(id, 0x8000);
-            hud_element_set_flags(id, 0x80);
+            hud_element_clear_flags(id, HUD_ELEMENT_FLAGS_FILTER_TEX);
+            hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80);
             hud_element_set_render_pos(id, 102, 210);
             D_802AD00A = 100;
             D_802AD001 = 3;
@@ -974,11 +974,11 @@ void func_802A2C58(void) {
     battle_menu_moveState = 30;
 }
 
-// lots of work
-#ifdef NON_MATCHING
 s32 func_802A2C84(void) {
     BattleStatus* battleStatus = &gBattleStatus;
-    s32 temp_a1;
+    s8 temp_v0_14;
+    s32 moveX;
+    s32 moveY;
     s32 msgWidth;
     s32 msgX;
     s32 msgID;
@@ -987,18 +987,10 @@ s32 func_802A2C84(void) {
     s32 i;
     s32 j;
 
-    s32 moveX;
-    s32 moveY;
-
-    s8 temp_v0_14;
-    s8 temp_v1_7;
-
     switch (battle_menu_moveState) {
         case 0:
-            temp_a1 = battle_menu_moveScrollLine;
-            msgX = battle_menu_moveCursorPos - temp_a1; // TODO required to match
-            battle_menu_moveScrollOffset = temp_a1 * -0xD;
-            D_802AD112 = msgX * 0xD; // TODO required to match
+            battle_menu_moveScrollOffset = -battle_menu_moveScrollLine * 13;
+            D_802AD112 = (battle_menu_moveCursorPos - battle_menu_moveScrollLine) * 13;
             battle_menu_moveX = 20;
             battle_menu_moveY = 68;
 
@@ -1007,25 +999,28 @@ s32 func_802A2C84(void) {
             }
 
             if (!battle_menu_hasSpiritsMenu) {
-                for (i = 0; i < battle_menu_moveOptionCount - 1; i++) {
+                for (i = 0; i < (battle_menu_moveOptionCount - 1); i++) {
                     for (j = i + 1; j < battle_menu_moveOptionCount; j++) {
-                        if (battle_menu_moveOptionSortPriorities[i] < battle_menu_moveOptionSortPriorities[j]) {
-                            continue;
-                        }
+                        do {
+                            s32 temp1 = battle_menu_moveOptionIndexMap[i];
+                            s32 temp2 = battle_menu_moveOptionIndexMap[j];
 
-                        if (battle_menu_moveOptionSortPriorities[i] != battle_menu_moveOptionSortPriorities[j] ||
-                            (
-                                (battle_menu_moveOptionDisplayCosts[battle_menu_moveOptionIndexMap[i]] >= battle_menu_moveOptionDisplayCosts[battle_menu_moveOptionIndexMap[j]]) &&
+                            if (battle_menu_moveOptionSortPriorities[temp1] < battle_menu_moveOptionSortPriorities[temp2]) {
+                                continue;
+                            }
 
-                                (battle_menu_moveOptionDisplayCosts[battle_menu_moveOptionIndexMap[i]] && battle_menu_moveOptionDisplayCosts[battle_menu_moveOptionIndexMap[j]] || battle_menu_moveOptionBPCosts[battle_menu_moveOptionIndexMap[i]] >= battle_menu_moveOptionBPCosts[battle_menu_moveOptionIndexMap[j]])
-                            ))
+                            if (
+                                battle_menu_moveOptionSortPriorities[temp1] != battle_menu_moveOptionSortPriorities[temp2] ||
+                                (battle_menu_moveOptionDisplayCosts[temp1] >= battle_menu_moveOptionDisplayCosts[temp2]) &&
+                                (battle_menu_moveOptionDisplayCosts[temp1] != battle_menu_moveOptionDisplayCosts[temp2] ||
+                                    battle_menu_moveOptionBPCosts[temp1] >= battle_menu_moveOptionBPCosts[temp2])
+                            )
                             {
-                                s32 swapTmp;
-
-                                swapTmp = battle_menu_moveOptionIndexMap[i];
+                                s32 swapTmp = battle_menu_moveOptionIndexMap[i];
                                 battle_menu_moveOptionIndexMap[i] = battle_menu_moveOptionIndexMap[j];
                                 battle_menu_moveOptionIndexMap[j] = swapTmp;
                             }
+                        } while (0);
                     }
                 }
             }
@@ -1034,38 +1029,38 @@ s32 func_802A2C84(void) {
                 id = hud_element_create(battle_menu_moveOptionIconScripts[battle_menu_moveOptionIndexMap[i]]);
                 battle_menu_moveOptionIconIDs[i] = id;
                 hud_element_set_scale(id, 0.45f);
-                hud_element_set_flags(id, 0x8080);
+                hud_element_set_flags(id, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
             }
 
             id = hud_element_create(&HES_AnimatedHandPointer);
             battle_menu_moveCursorIcon = id;
-            hud_element_set_flags(id, 0x20000080);
+            hud_element_set_flags(id, HUD_ELEMENT_FLAGS_DROP_SHADOW | HUD_ELEMENT_FLAGS_80);
             hud_element_set_render_pos(id, battle_menu_moveX, battle_menu_moveY);
 
             id = hud_element_create(&HES_GreenArrowUp);
             battle_menu_moveUpArrowIcon = id;
-            hud_element_set_flags(id, 0x20000080);
+            hud_element_set_flags(id, HUD_ELEMENT_FLAGS_DROP_SHADOW | HUD_ELEMENT_FLAGS_80);
             hud_element_set_render_pos(id, battle_menu_moveX + 39, battle_menu_moveY - 7);
 
             id = hud_element_create(&HES_GreenArrowDown);
             battle_menu_moveDownArrowIcon = id;
-            hud_element_set_flags(id, 0x20000080);
+            hud_element_set_flags(id, HUD_ELEMENT_FLAGS_DROP_SHADOW | HUD_ELEMENT_FLAGS_80);
             hud_element_set_render_pos(id, battle_menu_moveX + 39, battle_menu_moveY + 78);
 
             if (battle_menu_hasSpiritsMenu == 0) {
                 id = hud_element_create(&HES_StatusFlower);
                 battle_menu_moveTitleIcon = id;
-                hud_element_set_flags(id, 0x80);
+                hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80);
             } else {
                 id = hud_element_create(&HES_MenuStarPower);
                 battle_menu_moveTitleIcon = id;
                 hud_element_set_scale(id, 0.75f);
-                hud_element_set_flags(id, 0x80);
+                hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80);
             }
             hud_element_set_render_pos(id, battle_menu_moveX + 56, battle_menu_moveY);
 
             for (i = 0; i < battle_menu_moveOptionCount; i++) {
-                if (battle_menu_hasSpiritsMenu == 0) {
+                if (!battle_menu_hasSpiritsMenu) {
                     switch (battle_menu_moveOptionDisplayCostReductionColors[i]) {
                         case 0:
                             id = hud_element_create(&HES_FPCost);
@@ -1096,8 +1091,8 @@ s32 func_802A2C84(void) {
                             break;
                     }
                 }
-                hud_element_set_flags(id, 0x80);
-                hud_element_set_render_pos(id, battle_menu_moveX + 0x38, battle_menu_moveY);
+                hud_element_set_flags(id, HUD_ELEMENT_FLAGS_80);
+                hud_element_set_render_pos(id, battle_menu_moveX + 56, battle_menu_moveY);
             }
 
             battle_menu_moveTextColor = 0xA;
@@ -1105,16 +1100,21 @@ s32 func_802A2C84(void) {
             moveX = battle_menu_moveX;
             moveY = battle_menu_moveY;
             if (!battle_menu_hasSpiritsMenu) {
-                set_window_properties(1, moveX, moveY, 0x96, (D_802AD10E * 0xD) + 0x1C, 0, func_802A3C98, NULL, -1);
-                set_window_properties(2, moveX + 0x10, moveY - 6, 0x5A, 0x10, 1, func_802A43DC, NULL, -1);
-                set_window_properties(3, moveX + 114, moveY - 12, 0x20, 0x20, 1, func_802A4448, NULL, -1);
+                set_window_properties(1, moveX, moveY, 150, (D_802AD10E * 13) + 28, 0, func_802A3C98, NULL, -1);
+                set_window_properties(2, moveX + 16, moveY - 6, 90, 16, 1, func_802A43DC, NULL, -1);
+                set_window_properties(3, moveX + 114, moveY - 12, 32, 32, 1, func_802A4448, NULL, -1);
             } else {
-                set_window_properties(1, moveX, moveY, 0x90, (D_802AD10E * 0xD) + 0x1C, 0, func_802A3C98, NULL, -1);
-                set_window_properties(4, moveX + 10, moveY - 6, 0x64, 0x10, 1, func_802A43DC, NULL, -1);
-                set_window_properties(5, moveX + 110, moveY - 12, 0x20, 0x23, 1, func_802A4448, NULL, -1);
+                s16 new_var;
+
+                set_window_properties(1, moveX, moveY, 144, (D_802AD10E * 13) + 28, 0, func_802A3C98, NULL, -1);
+                new_var = moveY; // todo required to match
+                set_window_properties(4, moveX + 10, new_var - 6, 100, 16, 1, func_802A43DC, 0, -1);
+                set_window_properties(5, moveX + 110, new_var - 12, 32, 35, 1, func_802A4448, 0, -1);
             }
 
-            set_window_properties(8, 20, 186, 280, 32, 0x14, func_802A4494, NULL, -1);
+            moveX = 20;
+            moveY = battle_menu_moveY;
+            set_window_properties(8, moveX, 186, 280, 32, 20, func_802A4494, NULL, -1);
             set_window_update(1, 1);
             if (!battle_menu_hasSpiritsMenu) {
                 set_window_update(2, 1);
@@ -1129,31 +1129,38 @@ s32 func_802A2C84(void) {
                 cond = FALSE;
                 if (battle_menu_moveCursorPos >= (battle_menu_moveScrollLine + D_802AD10D) - 1) {
                     battle_menu_moveScrollLine++;
-                    if (battle_menu_moveOptionCount - 6 >= battle_menu_moveScrollLine) {
-                        cond = TRUE;
-                    } else {
-                        battle_menu_moveScrollLine -= 6;
+                    if (battle_menu_moveScrollLine > battle_menu_moveOptionCount - 6) {
+                        battle_menu_moveScrollLine = battle_menu_moveOptionCount - 6;
                         if (battle_menu_moveScrollLine < 0) {
                             battle_menu_moveScrollLine = 0;
                         }
+                    } else {
+                        cond = TRUE;
                     }
                 }
             } while (cond);
 
-            temp_v1_7 = battle_menu_moveScrollLine;
             battle_menu_moveState = 1;
-            D_802AD10D = temp_v1_7 + 6;
-            battle_menu_moveScrollOffset = (s8) temp_v1_7 * -0xD;
-            D_802AD112 = (battle_menu_moveCursorPos - (s8) temp_v1_7) * 0xD;
+            D_802AD10D = battle_menu_moveScrollLine + 6;
+            battle_menu_moveScrollOffset = -battle_menu_moveScrollLine * 13;
+            D_802AD112 = (battle_menu_moveCursorPos - battle_menu_moveScrollLine) * 13;
             break;
         case 1:
             D_802AD10A = battle_menu_moveCursorPos;
-            if ((battleStatus->currentButtonsHeld & 0x12000) && (((battle_menu_moveCursorPos > 0)) || ( ((battleStatus->currentButtonsPressed & 0x12000))))) {
-                battle_menu_moveCursorPos--;
+            if (battleStatus->currentButtonsHeld & (BUTTON_STICK_UP | BUTTON_Z)) {
+                if (battle_menu_moveCursorPos > 0) {
+                    battle_menu_moveCursorPos--;
+                } else if (battleStatus->currentButtonsPressed & (BUTTON_STICK_UP | BUTTON_Z)) {
+                    battle_menu_moveCursorPos--;
+                }
             }
 
-            if ((battleStatus->currentButtonsHeld & 0x20010) && ((((battle_menu_moveCursorPos < (battle_menu_moveOptionCount - 1)) != 0)) || (((battleStatus->currentButtonsPressed & 0x20010))))) {
-                battle_menu_moveCursorPos++;
+            if (battleStatus->currentButtonsHeld & (BUTTON_STICK_DOWN | BUTTON_R)) {
+                if (battle_menu_moveCursorPos < battle_menu_moveOptionCount - 1) {
+                    battle_menu_moveCursorPos++;
+                } else if (battleStatus->currentButtonsPressed & (BUTTON_STICK_DOWN | BUTTON_R)) {
+                    battle_menu_moveCursorPos++;
+                }
             }
 
             if (battle_menu_moveCursorPos < 0) {
@@ -1178,8 +1185,8 @@ s32 func_802A2C84(void) {
 
             if (battle_menu_moveCursorPos >= (D_802AD10D - 1)) {
                 battle_menu_moveScrollLine++;
-                if (battle_menu_moveOptionCount - 6 < battle_menu_moveScrollLine) {
-                    battle_menu_moveScrollLine -= 6;
+                if (battle_menu_moveScrollLine > battle_menu_moveOptionCount - 6) {
+                    battle_menu_moveScrollLine = battle_menu_moveOptionCount - 6;
                     if (battle_menu_moveScrollLine < 0) {
                         battle_menu_moveScrollLine = 0;
                     }
@@ -1187,7 +1194,7 @@ s32 func_802A2C84(void) {
             }
 
             D_802AD10D = battle_menu_moveScrollLine + 6;
-            if (battleStatus->currentButtonsPressed & 0x8000) {
+            if (battleStatus->currentButtonsPressed & BUTTON_A) {
                 if (battle_menu_moveOptionsEnabled[battle_menu_moveOptionIndexMap[battle_menu_moveCursorPos]] == 1) {
                     sfx_play_sound(SOUND_MENU_NEXT);
                     battle_menu_moveState = -1;
@@ -1309,16 +1316,19 @@ s32 func_802A2C84(void) {
                 set_window_update(5, 2);
             }
             set_window_update(8, 2);
+
             msgID = 0x1D00C3;
             if (D_802AD258 == 0) {
-                msgID = 0x1D00A0;
                 if (!battle_menu_hasSpiritsMenu) {
                     msgID = 0x1D009F;
+                } else {
+                    msgID = 0x1D00A0;
                 }
             }
+
             msgWidth = get_msg_width(msgID, 0) + 23;
-            msgX = (SCREEN_WIDTH / 2) - (msgWidth / 2);
-            set_window_properties(9, msgX, 80, msgWidth, D_802AB340[get_msg_lines(msgID) - 1], 0x14, func_802A4534, NULL, -1);
+            moveX = (SCREEN_WIDTH / 2) - (msgWidth / 2);
+            set_window_properties(9, moveX, 80, msgWidth, D_802AB340[get_msg_lines(msgID) - 1], 0x14, func_802A4534, NULL, -1);
             set_window_update(9, 1);
             D_802AD10B = 60;
             battle_menu_moveState = 42;
@@ -1346,9 +1356,8 @@ s32 func_802A2C84(void) {
     }
     return 0;
 }
-#else
-INCLUDE_ASM(s32, "415D90", func_802A2C84);
-#endif
+
+const f32 padding3 = 0.0f;
 
 // needs a lot of work
 #ifdef NON_MATCHING
@@ -1923,7 +1932,7 @@ void func_802A5290(s32 arg0, s32 x, s32 y) {
 
             xTemp = x + 33;
             phi_s1 = y + (D_802AD60C + 19);
-            for (i = 0; i < D_802AD66C; i++, phi_s1 += 0xD) {
+            for (i = 0; i < D_802AD66C; i++, phi_s1 += 13) {
                 s32 palette = D_802AD614;
 
                 if (D_802AD678[i] == 5 && is_ability_active(ABILITY_QUICK_CHANGE)) {
@@ -1937,7 +1946,7 @@ void func_802A5290(s32 arg0, s32 x, s32 y) {
 
             xTemp = x + 24;
             phi_s1_2 = D_802AD60C + y + 24;
-            for (i = 0; i < D_802AD66C; i++, phi_s1_2 += 0xD) {
+            for (i = 0; i < D_802AD66C; i++, phi_s1_2 += 13) {
                 iconIndex = D_802AD628[i];
 
                 hud_element_set_render_pos(iconIndex, xTemp, phi_s1_2);
