@@ -725,6 +725,8 @@ void state_step_demo(void);
 void state_drawUI_demo(void);
 void game_mode_set_fpDrawAuxUI(s32 i, void (*fn)(void));
 
+void func_80260A60(void);
+
 void func_802B2000(void);
 void func_802B203C(void);
 void func_802B2078(void);
