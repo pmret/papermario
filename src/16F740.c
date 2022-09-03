@@ -878,290 +878,291 @@ void btl_state_update_switch_to_partner(void) {
 void btl_state_draw_switch_to_partner(void) {
 }
 
+// some ordering / tail merging / goto issues
+#ifdef NON_MATCHING
+void func_80242FE0(void) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    Actor* player = battleStatus->playerActor;
+    Actor* partner = battleStatus->partnerActor;
+    Actor* actor;
+    ActorState* state;
+    Evt* script;
+    s32 cond;
+    s32 i;
+
+    s32 var_v0_2;
+    s32 oldKoDuration;
+
+    if (gBattleState2 == 0) {
+        if (gBattleStatus.flags2 & 2) {
+            if (partner != NULL) {
+                if (!(gBattleStatus.flags2 & 4) && !(partner->flags & 0x200000)) {
+                    btl_set_state(0xB);
+                    return;
+                }
+            }
+
+            player->flags &= 0xF7FFFFFF;
+            player->flags |= 0x04000000;
+            if (partner != NULL) {
+                partner->flags &= 0xF7FFFFFF;
+                partner->flags |= 0x04000000;
+            }
+
+            gBattleState2 = 1;
+            D_8029F258 = 0;
+            gBattleStatus.flags2 &= ~2;
+            gBattleStatus.flags2 &= ~4;
+            gBattleStatus.flags2 &= ~8;
+            gBattleStatus.flags2 &= ~0x10;
+        } else {
+            btl_set_state(0xA);
+            return;
+        }
+    }
+
+    if (gBattleState2 == 1) {
+        cond = FALSE;
+        for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
+            actor = battleStatus->enemyActors[i];
+            if ((actor != NULL) && (actor->onHitScript != NULL)) {
+                if (does_script_exist(actor->onHitID)) {
+                    cond = TRUE;
+                } else {
+                    actor->onHitScript = NULL;
+                }
+            }
+        }
+
+        if (!cond) {
+            reset_actor_turn_info();
+
+            for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
+                actor = battleStatus->enemyActors[i];
+                if (actor != NULL) {
+                    actor->flags |= 0x0C000000;
+                    actor->flags &= 0xFFFEFFFF;
+
+                    if (actor->debuff != 0) {
+                        if (actor->debuff == 3 ||
+                            actor->debuff == 4 ||
+                            actor->debuff == 5 ||
+                            actor->debuff == 6 ||
+                            actor->debuff == 7 ||
+                            actor->debuff == 8)
+                        {
+                            actor->flags |= 0x10000;
+                        }
+                        actor->debuffDuration--;
+                        if (actor->debuffDuration <= 0) {
+                            actor->debuff = 0;
+                            remove_status_debuff(actor->hudElementDataIndex);
+                            dispatch_event_actor(actor, 0x31);
+                            D_8029F258 = 0x14;
+                        }
+                    }
+
+                    if (actor->staticStatus != 0) {
+                        actor->staticDuration--;
+                        if (actor->staticDuration <= 0) {
+                            actor->staticStatus = 0;
+                            remove_status_static(actor->hudElementDataIndex);
+                            D_8029F258 = 0x14;
+                        }
+                    }
+
+                    if (actor->transparentStatus != 0) {
+                        actor->transparentDuration--;
+                        if (actor->transparentDuration <= 0) {
+                            actor->transparentStatus = 0;
+                            remove_status_transparent(actor->hudElementDataIndex);
+                            D_8029F258 = 0x14;
+                        }
+                    }
+
+                    if (actor->stoneStatus != 0) {
+                        actor->stoneDuration--;
+                        if (actor->stoneDuration <= 0) {
+                            actor->stoneStatus = 0;
+                            D_8029F258 = 0x14;
+                        }
+                    }
+
+                    oldKoDuration = actor->koDuration;
+                    actor->koDuration = actor->debuffDuration;
+                    if (actor->koDuration > 0) {
+                        actor->koStatus = 0xD;
+                        actor->disableEffect->data.disableX->unk_3C = actor->koDuration;
+                    } else if (oldKoDuration != actor->koDuration) {
+                        actor->koStatus = 0;
+                        actor->disableEffect->data.disableX->unk_3C = 0;
+                    }
+                    if (actor->debuff == 9) {
+                        gBattleStatus.flags1 |= 0x20;
+                        dispatch_damage_event_actor_0(actor, 1, 0xA);
+                        D_8029F258 = 0x14;
+                    }
+                }
+            }
+            gBattleState2 = 2;
+        }
+    }
+
+    if (gBattleState2 == 2 && (player->onHitScript == NULL || !does_script_exist(player->onHitID))) {
+        player->onHitScript = NULL;
+        if (partner != NULL) {
+            if ((partner->onHitScript == NULL) || !does_script_exist(partner->onHitID)) {
+                partner->onHitScript = NULL;
+                goto block_52;
+            }
+        } else {
+block_52:
+            cond = FALSE;
+            for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
+                actor = battleStatus->enemyActors[i];
+                if ((actor != NULL) && (actor->onHitScript != NULL)) {
+                    if (does_script_exist(actor->onHitID)) {
+                        cond = TRUE;
+                    } else {
+                        actor->onHitScript = NULL;
+                    }
+                }
+            }
+
+            if (!cond) {
+                if (btl_check_player_defeated() || btl_check_enemies_defeated()) {
+                    return;
+                }
+
+                btl_cam_use_preset(2);
+                if (partner == NULL || !(gBattleStatus.flags1 & 0x100000)) {
+                    gBattleState2 = 4;
+                } else if (gBattleStatus.flags2 & 0x40) {
+                    gBattleState2 = 4;
+                } else {
+                    player->flags &= 0xF7FFFFFF;
+                    partner->flags &= 0xF7FFFFFF;
+                    player->flags |= 0x04000000;
+                    partner->flags |= 0x04000000;
+                    state = &partner->state;
+                    if (!battleStatus->outtaSightActive) {
+                        partner->state.currentPos.x = partner->homePos.x;
+                        partner->state.currentPos.z = partner->homePos.z;
+                        partner->state.goalPos.x = player->homePos.x;
+                        partner->state.goalPos.z = player->homePos.z;
+                    } else {
+                        partner->state.currentPos.x = partner->homePos.x;
+                        partner->state.currentPos.z = partner->homePos.z;
+                        partner->state.goalPos.x = partner->homePos.x;
+                        partner->state.goalPos.z = partner->homePos.z + 5.0f;
+                        partner->homePos.x = player->homePos.x;
+                        partner->homePos.z = player->homePos.z;
+                    }
+                    state->moveTime = 4;
+                    state->angle = 0.0f;
+                    gBattleState2 = 3;
+                }
+            }
+        }
+    }
+
+    if (gBattleState2 == 3) {
+        if (partner->state.moveTime != 0) {
+            partner->currentPos.x += (partner->state.goalPos.x - partner->currentPos.x) / partner->state.moveTime;
+            partner->currentPos.z += (partner->state.goalPos.z - partner->currentPos.z) / partner->state.moveTime;
+            player->currentPos.x += (partner->state.currentPos.x - player->currentPos.x) / partner->state.moveTime;
+            player->currentPos.z += (partner->state.currentPos.z - player->currentPos.z) / partner->state.moveTime;
+        }
+        partner->currentPos.z -= sin_rad((partner->state.angle * TAU) / 360.0f) * 16.0f;
+        partner->yaw = clamp_angle(partner->state.angle);
+        player->currentPos.z += sin_rad((partner->state.angle * TAU) / 360.0f) * 16.0f;
+        player->yaw = clamp_angle(partner->state.angle);
+        partner->state.angle += 90.0f;
+
+        if (partner->state.moveTime != 0) {
+            partner->state.moveTime--;
+        } else {
+            partner->currentPos.x = partner->state.goalPos.x;
+            partner->currentPos.z = partner->state.goalPos.z;
+            player->currentPos.x = partner->state.currentPos.x;
+            player->currentPos.z = partner->state.currentPos.z;
+            if (!battleStatus->outtaSightActive ) {
+                partner->homePos.x = partner->currentPos.x;
+                partner->homePos.z = partner->currentPos.z;
+            }
+            player->homePos.x = player->currentPos.x;
+            player->homePos.z = player->currentPos.z;
+            gBattleState2 = 4;
+            gBattleStatus.flags1 &= 0xFFEFFFFF;
+        }
+    }
+
+    if (gBattleState2 == 4) {
+        if (D_8029F258 != 0) {
+            D_8029F258--;
+        } else {
+            if (battleStatus->nextMerleeSpellType == 2) {
+                battleStatus->merleeDefenseBoost = 3;
+                battleStatus->nextMerleeSpellType = 0;
+                battleStatus->battlePhase = 0x15;
+                script = start_script(PlayerScriptDispatcher, 0xA, 0);
+                player->takeTurnScript = script;
+                player->takeTurnID = script->id;
+                script->owner1.actorID = ACTOR_PLAYER;
+            }
+            gBattleStatus.flags1 &= ~2;
+            player->flags &= 0xF7FFFFFF;
+            player->flags |= 0x04000000;
+            if (partner != NULL) {
+                partner->flags &= 0xF7FFFFFF;
+                partner->flags |= 0x04000000;
+            }
+            gBattleState2 = 5;
+            gBattleStatus.flags2 &= ~2;
+            gBattleStatus.flags2 &= ~4;
+            gBattleStatus.flags2 &= ~8;
+            gBattleStatus.flags2 &= ~0x10;
+        }
+    }
+
+    if (gBattleState2 == 5) {
+        if ((player->takeTurnScript == NULL) || (does_script_exist(player->takeTurnID) == 0)) {
+            player->takeTurnScript = NULL;
+
+            for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
+                actor = battleStatus->enemyActors[i];
+                if (actor != NULL && actor->onTurnChanceScriptSource != NULL) {
+                    battleStatus->battlePhase = 0xD;
+                    script = start_script(actor->onTurnChanceScriptSource, 0xA, 0);
+                    actor->onTurnChangeScript = script;
+                    actor->onTurnChangeID = script->id;
+                    script->owner1.enemyID = i | 0x200;
+                }
+            }
+            gBattleState2 = 6;
+        }
+    }
+
+    cond = FALSE;
+    if (gBattleState2 == 6) {
+        for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
+            actor = battleStatus->enemyActors[i];
+            if (actor != NULL && actor->onTurnChanceScriptSource != NULL && does_script_exist(actor->onTurnChangeID)) {
+                cond = TRUE;
+            }
+        }
+        if (!cond) {
+            gBattleState2 = 7;
+        }
+    }
+
+    if (gBattleState2 == 7) {
+        btl_set_state(0x14);
+    }
+}
+#else
 INCLUDE_ASM(s32, "16F740", func_80242FE0);
-// void func_80242FE0(void) {
-//     BattleStatus* battleStatus = &gBattleStatus;
-//     Actor* player = battleStatus->playerActor;
-//     Actor* partner = battleStatus->partnerActor;
-//     Actor* actor;
-//     ActorState* state;
-//     Evt* script;
-//     s32 cond;
-//     s32 i;
-
-//     s32 var_v0_2;
-//     s32 oldKoDuration;
-
-//     if (gBattleState2 == 0) {
-//         if (gBattleStatus.flags2 & 2) {
-//             if (partner != NULL) {
-//                 if (!(gBattleStatus.flags2 & 4) && !(partner->flags & 0x200000)) {
-//                     btl_set_state(0xB);
-//                     return;
-//                 }
-//             }
-
-//             player->flags &= 0xF7FFFFFF;
-//             player->flags |= 0x04000000;
-//             if (partner != NULL) {
-//                 partner->flags &= 0xF7FFFFFF;
-//                 partner->flags |= 0x04000000;
-//             }
-
-//             gBattleState2 = 1;
-//             D_8029F258 = 0;
-//             gBattleStatus.flags2 &= ~2;
-//             gBattleStatus.flags2 &= ~4;
-//             gBattleStatus.flags2 &= ~8;
-//             gBattleStatus.flags2 &= ~0x10;
-//         } else {
-//             btl_set_state(0xA);
-//             return;
-//         }
-//     }
-
-//     if (gBattleState2 == 1) {
-//         cond = FALSE;
-//         for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
-//             actor = battleStatus->enemyActors[i];
-//             if ((actor != NULL) && (actor->onHitScript != NULL)) {
-//                 if (does_script_exist(actor->onHitID)) {
-//                     cond = TRUE;
-//                 } else {
-//                     actor->onHitScript = NULL;
-//                 }
-//             }
-//         }
-
-//         if (!cond) {
-//             reset_actor_turn_info();
-
-//             for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
-//                 actor = battleStatus->enemyActors[i];
-//                 if (actor != NULL) {
-//                     actor->flags |= 0x0C000000;
-//                     actor->flags &= 0xFFFEFFFF;
-
-//                     if (actor->debuff != 0) {
-//                         if (actor->debuff == 3 ||
-//                             actor->debuff == 4 ||
-//                             actor->debuff == 5 ||
-//                             actor->debuff == 6 ||
-//                             actor->debuff == 7 ||
-//                             actor->debuff == 8)
-//                         {
-//                             actor->flags |= 0x10000;
-//                         }
-//                         actor->debuffDuration--;
-//                         if (actor->debuffDuration <= 0) {
-//                             actor->debuff = 0;
-//                             remove_status_debuff(actor->hudElementDataIndex);
-//                             dispatch_event_actor(actor, 0x31);
-//                             D_8029F258 = 0x14;
-//                         }
-//                     }
-
-//                     if (actor->staticStatus != 0) {
-//                         actor->staticDuration--;
-//                         if (actor->staticDuration <= 0) {
-//                             actor->staticStatus = 0;
-//                             remove_status_static(actor->hudElementDataIndex);
-//                             D_8029F258 = 0x14;
-//                         }
-//                     }
-
-//                     if (actor->transparentStatus != 0) {
-//                         actor->transparentDuration--;
-//                         if (actor->transparentDuration <= 0) {
-//                             actor->transparentStatus = 0;
-//                             remove_status_transparent(actor->hudElementDataIndex);
-//                             D_8029F258 = 0x14;
-//                         }
-//                     }
-
-//                     if (actor->stoneStatus != 0) {
-//                         actor->stoneDuration--;
-//                         if (actor->stoneDuration <= 0) {
-//                             actor->stoneStatus = 0;
-//                             D_8029F258 = 0x14;
-//                         }
-//                     }
-
-//                     oldKoDuration = actor->koDuration;
-//                     actor->koDuration = actor->debuffDuration;
-//                     if (actor->koDuration > 0) {
-//                         actor->koStatus = 0xD;
-//                         actor->disableEffect->data.disableX->unk_3C = actor->koDuration;
-//                     } else if (oldKoDuration != actor->koDuration) {
-//                         actor->koStatus = 0;
-//                         actor->disableEffect->data.disableX->unk_3C = 0;
-//                     }
-//                     if (actor->debuff == 9) {
-//                         gBattleStatus.flags1 |= 0x20;
-//                         dispatch_damage_event_actor_0(actor, 1, 0xA);
-//                         D_8029F258 = 0x14;
-//                     }
-//                 }
-//             }
-//             gBattleState2 = 2;
-//         }
-//     }
-
-//     if (gBattleState2 == 2 && (player->onHitScript == NULL || !does_script_exist(player->onHitID))) {
-//         player->onHitScript = NULL;
-//         if (partner != NULL) {
-//             if ((partner->onHitScript == NULL) || !does_script_exist(partner->onHitID)) {
-//                 partner->onHitScript = NULL;
-//                 goto block_52;
-//             }
-//         } else {
-// block_52:
-//             cond = FALSE;
-//             for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
-//                 actor = battleStatus->enemyActors[i];
-//                 if ((actor != NULL) && (actor->onHitScript != NULL)) {
-//                     if (does_script_exist(actor->onHitID)) {
-//                         cond = TRUE;
-//                     } else {
-//                         actor->onHitScript = NULL;
-//                     }
-//                 }
-//             }
-
-//             if (!cond) {
-//                 if (btl_check_player_defeated() || btl_check_enemies_defeated()) {
-
-//                     return;
-//                 } else {
-//                     btl_cam_use_preset(2);
-//                     if (partner == NULL || !(gBattleStatus.flags1 & 0x100000) || (gBattleStatus.flags2 & 0x40)) {
-//                         gBattleState2 = 4;
-//                     } else {
-//                         if (gBattleStatus.flags2 & 0x40) {
-//                             gBattleState2 = 4;
-//                         } else {
-//                             player->flags &= 0xF7FFFFFF;
-//                             partner->flags &= 0xF7FFFFFF;
-//                             player->flags |= 0x04000000;
-//                             partner->flags |= 0x04000000;
-//                             state = &partner->state;
-//                             if (battleStatus->outtaSightActive == 0) {
-//                                 partner->state.currentPos.x = partner->homePos.x;
-//                                 partner->state.currentPos.z = partner->homePos.z;
-//                                 partner->state.goalPos.x = player->homePos.x;
-//                                 partner->state.goalPos.z = player->homePos.z;
-//                             } else {
-//                                 partner->state.currentPos.x = partner->homePos.x;
-//                                 partner->state.currentPos.z = partner->homePos.z;
-//                                 partner->state.goalPos.x = partner->homePos.x;
-//                                 partner->state.goalPos.z = partner->homePos.z + 5.0f;
-//                                 partner->homePos.x = player->homePos.x;
-//                                 partner->homePos.z = player->homePos.z;
-//                             }
-//                             state->moveTime = 4;
-//                             state->angle = 0.0f;
-//                             gBattleState2 = 3;
-//                         }
-//                     }
-//                 }
-//             }
-//         }
-//     }
-
-//     if (gBattleState2 == 3) {
-//         if (partner->state.moveTime != 0) {
-//             partner->currentPos.x += (partner->state.goalPos.x - partner->currentPos.x) / partner->state.moveTime;
-//             partner->currentPos.z += (partner->state.goalPos.z - partner->currentPos.z) / partner->state.moveTime;
-//             player->currentPos.x += (partner->state.currentPos.x - player->currentPos.x) / partner->state.moveTime;
-//             player->currentPos.z += (partner->state.currentPos.z - player->currentPos.z) / partner->state.moveTime;
-//         }
-//         partner->currentPos.z -= sin_rad((partner->state.angle * TAU) / 360.0f) * 16.0f;
-//         partner->yaw = clamp_angle(partner->state.angle);
-//         player->currentPos.z += sin_rad((partner->state.angle * TAU) / 360.0f) * 16.0f;
-//         player->yaw = clamp_angle(partner->state.angle);
-//         partner->state.angle += 90.0f;
-
-//         if (partner->state.moveTime != 0) {
-//             partner->state.moveTime--;
-//         } else {
-//             partner->currentPos.x = partner->state.goalPos.x;
-//             partner->currentPos.z = partner->state.goalPos.z;
-//             player->currentPos.x = partner->state.currentPos.x;
-//             player->currentPos.z = partner->state.currentPos.z;
-//             if (battleStatus->outtaSightActive == 0) {
-//                 partner->homePos.x = partner->currentPos.x;
-//                 partner->homePos.z = partner->currentPos.z;
-//             }
-//             player->homePos.x = player->currentPos.x;
-//             player->homePos.z = player->currentPos.z;
-//             gBattleStatus.flags1 &= 0xFFEFFFFF;
-//             gBattleState2 = 4;
-//         }
-//     }
-
-//     if (gBattleState2 == 4) {
-//         if (D_8029F258 != 0) {
-//             D_8029F258--;
-//         } else {
-//             if (battleStatus->nextMerleeSpellType == 2) {
-//                 battleStatus->merleeDefenseBoost = 3;
-//                 battleStatus->nextMerleeSpellType = 0;
-//                 battleStatus->battlePhase = 0x15;
-//                 script = start_script(PlayerScriptDispatcher, 0xA, 0);
-//                 player->takeTurnScript = script;
-//                 player->takeTurnID = script->id;
-//                 script->owner1.actorID = ACTOR_PLAYER;
-//             }
-//             gBattleStatus.flags1 &= ~2;
-//             player->flags &= 0xF7FFFFFF;
-//             player->flags |= 0x04000000;
-//             if (partner != NULL) {
-//                 partner->flags &= 0xF7FFFFFF;
-//                 partner->flags |= 0x04000000;
-//             }
-//             gBattleState2 = 5;
-//             gBattleStatus.flags2 &= ~2;
-//             gBattleStatus.flags2 &= ~4;
-//             gBattleStatus.flags2 &= ~8;
-//             gBattleStatus.flags2 &= ~0x10;
-//         }
-//     }
-
-//     if (gBattleState2 == 5) {
-//         if ((player->takeTurnScript == NULL) || (does_script_exist(player->takeTurnID) == 0)) {
-//             player->takeTurnScript = NULL;
-
-//             for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
-//                 actor = battleStatus->enemyActors[i];
-//                 if (actor != NULL && actor->onTurnChanceScriptSource != NULL) {
-//                     battleStatus->battlePhase = 0xD;
-//                     script = start_script(actor->onTurnChanceScriptSource, 0xA, 0);
-//                     actor->onTurnChangeScript = script;
-//                     actor->onTurnChangeID = script->id;
-//                     script->owner1.enemyID = i | 0x200;
-//                 }
-//             }
-//             gBattleState2 = 6;
-//         }
-//     }
-
-//     cond = FALSE;
-//     if (gBattleState2 == 6) {
-//         for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
-//             actor = battleStatus->enemyActors[i];
-//             if (actor != NULL && actor->onTurnChanceScriptSource != NULL && does_script_exist(actor->onTurnChangeID)) {
-//                 cond = TRUE;
-//             }
-//         }
-//         if (!cond) {
-//             gBattleState2 = 7;
-//         }
-//     }
-
-//     if (gBattleState2 == 7) {
-//         btl_set_state(0x14);
-//     }
-// }
+#endif
 
 void func_80243910(void) {
 }
