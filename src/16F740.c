@@ -712,12 +712,12 @@ void btl_state_update_begin_player_turn(void) {
             battleStatus->selectedMoveID = 0;
             gBattleStatus.flags1 |= BS_FLAGS1_8;
             gBattleStatus.flags2 &= ~BS_FLAGS2_1000000;
-            player->unk_21D = 0;
+            player->disableDismissTimer = 0;
             player->flags |= 0x0C000000;
 
             if (partner != NULL) {
                 player->flags |= 0x0C000000;
-                partner->unk_21D = 0;
+                partner->disableDismissTimer = 0;
             }
 
             battleStatus->unk_8C = 0;
@@ -745,7 +745,7 @@ void btl_state_update_begin_player_turn(void) {
         if (gBattleState2 == BATTLE_STATE2_PLAYER_DEFEATED && (battleStatus->unk_8C == 0)) {
             if (battleStatus->waterBlockTurnsLeft != 0) {
                 battleStatus->waterBlockTurnsLeft--;
-                battleStatus->buffEffect->data.partnerBuff->unk_0C[FX_BUFF_DATA_WATER_BLOCK].unk_04 = battleStatus->waterBlockTurnsLeft;
+                battleStatus->buffEffect->data.partnerBuff->unk_0C[FX_BUFF_DATA_WATER_BLOCK].turnsLeft = battleStatus->waterBlockTurnsLeft;
                 if (battleStatus->waterBlockTurnsLeft <= 0) {
                     battleStatus->waterBlockEffect->flags |= 0x10;
                     fx_water_block(1, player->currentPos.x, player->currentPos.y + 18.0f, player->currentPos.z + 5.0f, 1.5f, 10);
@@ -771,7 +771,7 @@ void btl_state_update_begin_player_turn(void) {
         case BATTLE_STATE2_UNK_B:
             if (battleStatus->cloudNineTurnsLeft != 0) {
                 battleStatus->cloudNineTurnsLeft--;
-                battleStatus->buffEffect->data.partnerBuff->unk_0C[FX_BUFF_DATA_CLOUD_NINE].unk_04 = battleStatus->cloudNineTurnsLeft;
+                battleStatus->buffEffect->data.partnerBuff->unk_0C[FX_BUFF_DATA_CLOUD_NINE].turnsLeft = battleStatus->cloudNineTurnsLeft;
 
                 if (battleStatus->cloudNineTurnsLeft <= 0) {
                     remove_effect(battleStatus->cloudNineEffect);
@@ -800,7 +800,7 @@ void btl_state_update_begin_player_turn(void) {
                     gBattleState2 = BATTLE_STATE2_UNK_15;
                 } else {
                     battleStatus->turboChargeTurnsLeft--;
-                    battleStatus->buffEffect->data.partnerBuff->unk_0C[FX_BUFF_DATA_TURBO_CHARGE].unk_04 = battleStatus->turboChargeTurnsLeft;
+                    battleStatus->buffEffect->data.partnerBuff->unk_0C[FX_BUFF_DATA_TURBO_CHARGE].turnsLeft = battleStatus->turboChargeTurnsLeft;
                     if (battleStatus->turboChargeTurnsLeft <= 0) {
                         btl_show_battle_message(0x2B, 60);
                         gBattleState2 = BATTLE_STATE2_UNK_10;
@@ -844,8 +844,9 @@ void btl_state_update_begin_player_turn(void) {
         player->onHitScript = NULL;
         if (!btl_check_player_defeated()) {
             D_8029F254 = 0;
-            player->unk_21D = 0;
+            player->disableDismissTimer = 0;
             player->flags |= 0x0C000000;
+
             if (is_ability_active(0xE)) {
                 if (player->debuff != 0) {
                     player->debuffDuration = 1;
@@ -859,10 +860,11 @@ void btl_state_update_begin_player_turn(void) {
                 if (player->koStatus != 0) {
                     player->koDuration = 1;
                 }
-                if (player->transStatus != 0) {
-                    player->transDuration = 1;
+                if (player->transparentStatus != 0) {
+                    player->transparentDuration = 1;
                 }
             }
+
             if (player->stoneStatus != 0) {
                 player->stoneDuration--;
                 if (player->stoneDuration <= 0) {
@@ -870,7 +872,7 @@ void btl_state_update_begin_player_turn(void) {
                     dispatch_event_player(0x31);
                 }
             } else {
-                s32 debuffDuration;
+                s8 debuffDuration;
                 s32 koDuration;
 
                 if (!is_ability_active(0x13) && (player->staticStatus != 0)) {
@@ -880,11 +882,11 @@ void btl_state_update_begin_player_turn(void) {
                         remove_status_static(player->hudElementDataIndex);
                     }
                 }
-                if (player->transStatus != 0) {
-                    player->transDuration--;
+                if (player->transparentStatus != 0) {
+                    player->transparentDuration--;
                     part->flags |= 0x100;
-                    if (player->transDuration <= 0) {
-                        player->transStatus = 0;
+                    if (player->transparentDuration <= 0) {
+                        player->transparentStatus = 0;
                         part->flags &= ~0x100;
                         remove_status_transparent(player->hudElementDataIndex);
                     }
@@ -914,7 +916,7 @@ void btl_state_update_begin_player_turn(void) {
                 debuffDuration = player->debuffDuration;
                 koDuration = player->koDuration;
                 player->koDuration = debuffDuration;
-                if (debuffDuration > 0) {
+                if (debuffDuration <= 0) {
                     player->koStatus = 0xD;
                     player->disableEffect->data.disableX->unk_3C = player->koDuration;
                 } else if (koDuration != debuffDuration) {
@@ -946,10 +948,10 @@ void btl_state_update_begin_player_turn(void) {
     }
 
     if (gBattleState2 == BATTLE_STATE2_UNK_1) {
-        s32 phi_s0_2 = 1;
-        s32 phi_s0_3;
-
         if (!btl_check_enemies_defeated()) {
+            s32 phi_s0_2 = 1;
+            s32 phi_s0_3;
+
             battleStatus->unk_8C = 0;
             if (battleStatus->hammerLossTurns >= 0) {
                 battleStatus->hammerLossTurns--;
@@ -972,7 +974,7 @@ void btl_state_update_begin_player_turn(void) {
                     script = start_script(RegainAbility, EVT_PRIORITY_A, 0);
                     player->takeTurnScript = script;
                     player->takeTurnID = script->id;
-                    script->varTable[0] = phi_s0_3;
+                    script->varTable[0] = phi_s0_2;
                     script->owner1.actorID = ACTOR_PLAYER;
                     script->varTable[10] = 0;
                     battleStatus->unk_8C = 1;
@@ -993,9 +995,9 @@ void btl_state_update_begin_player_turn(void) {
                 }
             }
             gBattleState2 = BATTLE_STATE2_UNK_1E;
+        } else {
+            return;
         }
-    } else {
-        return;
     }
 
     if (gBattleState2 == BATTLE_STATE2_UNK_1E && (player->onHitScript == NULL || !does_script_exist(player->onHitID))) {
