@@ -300,7 +300,7 @@ typedef struct Encounter {
 
 typedef struct EncounterStatus {
     /* 0x000 */ s32 flags;
-    /* 0x004 */ s8 eFirstStrike; /* 0 = none, 1 = player, 2 = enemy */
+    /* 0x004 */ s8 firstStrikeType; /* 0 = none, 1 = player, 2 = enemy */
     /* 0x005 */ s8 hitType; /* 1 = none/enemy, 2 = jump */
     /* 0x006 */ s8 hitTier; /* 0 = normal, 1 = super, 2 = ultra */
     /* 0x007 */ char unk_07;
@@ -312,7 +312,7 @@ typedef struct EncounterStatus {
     /* 0x00D */ char unk_0D;
     /* 0x00E */ s16 coinsEarned; /* valid after battle */
     /* 0x010 */ char unk_10;
-    /* 0x011 */ u8 allowFleeing;
+    /* 0x011 */ s8 allowFleeing;
     /* 0x012 */ s8 unk_12;
     /* 0x013 */ u8 dropWhackaBump;
     /* 0x014 */ s32 songID;

@@ -4,12 +4,21 @@
 #include "effects.h"
 #include "hud_element.h"
 #include "battle/battle.h"
+#include "model.h"
 
 extern s32* D_800DC064;
+
+extern BackgroundHeader func_80200000;
 
 extern s16 D_802809F6;
 extern s16 D_802809F8;
 extern s32 D_80280A30;
+extern EvtScript D_80280EB8[];
+extern s32 D_80281454[];
+extern EvtScript D_80284A20[];
+extern EvtScript D_80284A30[];
+
+extern s32 D_8029F240;
 extern u8 D_8029F244;
 extern s32 D_8029F248;
 extern s32 D_8029F24C;
@@ -172,7 +181,321 @@ void btl_set_state(s32 battleState) {
     }
 }
 
-INCLUDE_ASM(s32, "16F740", btl_state_update_normal_start);
+void btl_state_update_normal_start(void) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    EncounterStatus* currentEncounter = &gCurrentEncounter;
+    Battle* battle;
+    Stage* stage;
+    s32 size;
+    void* compressedAsset;
+    ModelNode* model;
+    s32 textureRom;
+    Actor* actor;
+    Evt* script;
+    s32 cond;
+    s32 type;
+    s32 i;
+    s32 j;
+
+    s32* types;
+
+    battle = (*D_800DC4FC);
+    if (D_800DC4F4 != NULL) {
+        battle = D_800DC4F4;
+    }
+
+    if (D_800DC064 == NULL) {
+        stage = battle->stage;
+    } else {
+        stage = D_800DC064[1];
+    }
+
+    battleStatus->foregroundModelData = stage;
+    switch (gBattleState2) {
+        case BATTLE_STATE2_UNK_0:
+            D_8029F240 = battle->formationSize;
+            set_screen_overlay_params_back(0xFF, -1.0f);
+            compressedAsset = load_asset_by_name(stage->shape, &size);
+            decode_yay0(compressedAsset, &D_80210000);
+            general_heap_free(compressedAsset);
+
+            ASSERT(size <= 0x8000);
+
+            model = D_80210000;
+            textureRom = get_asset_offset(stage->texture, &size);
+            if (model != NULL) {
+                load_data_for_models(model, textureRom, size);
+            }
+            load_battle_hit_asset(stage->hit);
+
+            if (stage->bg != NULL) {
+                load_map_bg(stage->bg);
+                read_background_size(&func_80200000);
+            }
+
+            if (gGameStatusPtr->demoFlags & 1) {
+                set_curtain_scale_goal(1.0f);
+            }
+
+            battleStatus->controlScript = NULL;
+            battleStatus->camMovementScript = NULL;
+            battleStatus->unk_90 = 0;
+            battleStatus->preUpdateCallback = NULL;
+            battleStatus->initBattleCallback = NULL;
+            battleStatus->currentSubmenu = 0;
+            battleStatus->unk_49 = 0;
+            battleStatus->unk_4A = 0;
+            battleStatus->unk_4B = 0;
+            battleStatus->totalStarPoints = 0;
+            battleStatus->pendingStarPoints = 0;
+            battleStatus->incrementStarPointDelay = 0;
+            battleStatus->damageTaken = 0;
+            battleStatus->nextMerleeSpellType = 0;
+            battleStatus->unk_83 = 0;
+            gCameras[CAM_DEFAULT].flags |= CAMERA_FLAGS_2;
+            gCameras[CAM_BATTLE].flags |= CAMERA_FLAGS_2;
+            gCameras[CAM_TATTLE].flags |= CAMERA_FLAGS_2;
+            if (is_ability_active(ABILITY_MYSTERY_SCROLL)) {
+                battleStatus->unk_83 = 1;
+            }
+            battleStatus->actionSuccess = 0;
+            battleStatus->unk_82 = 0;
+            battleStatus->menuDisableFlags = -1;
+            battleStatus->unk_74 = -1;
+            battleStatus->itemUsesLeft = 0;
+            battleStatus->hammerCharge = 0;
+            battleStatus->jumpCharge = 0;
+            battleStatus->unk_98 = 0;
+            battleStatus->hpDrainCount = 0;
+            gBattleStatus.flags2 |= BS_FLAGS2_20;
+            if (currentEncounter->allowFleeing) {
+                gBattleStatus.flags2 &= ~BS_FLAGS2_20;
+            }
+            battleStatus->unk_8D = 10;
+            battleStatus->unk_95 = 0;
+            battleStatus->hammerLossTurns = -1;
+            battleStatus->jumpLossTurns = -1;
+            battleStatus->itemLossTurns = -1;
+            battleStatus->outtaSightActive = 0;
+            battleStatus->waterBlockTurnsLeft = 0;
+            battleStatus->waterBlockAmount = 0;
+            battleStatus->waterBlockEffect = NULL;
+            battleStatus->cloudNineTurnsLeft = 0;
+            battleStatus->cloudNineDodgeChance = 0;
+            battleStatus->cloudNineEffect = NULL;
+            battleStatus->unk_92 = 0;
+            battleStatus->turboChargeTurnsLeft = 0;
+            battleStatus->turboChargeAmount = 0;
+            battleStatus->unk_8C = 0;
+            battleStatus->merleeAttackBoost = 0;
+            battleStatus->merleeDefenseBoost = 0;
+            battleStatus->unk_432 = 0;
+            battleStatus->unk_433 = -1;
+            battleStatus->hustleTurns = 0;
+            battleStatus->unk_93 = 0;
+            battleStatus->unk_94 = 0;
+            gBattleStatus.flags2 &= ~BS_FLAGS2_2;
+            gBattleStatus.flags2 &= ~BS_FLAGS2_4;
+            gBattleStatus.flags2 &= ~BS_FLAGS2_8;
+            gBattleStatus.flags2 &= ~BS_FLAGS2_10;
+            gBattleStatus.flags2 &= ~BS_FLAGS2_100;
+            gBattleStatus.flags2 &= ~BS_FLAGS2_200;
+
+            for (i = 0; i < ARRAY_COUNT(battleStatus->varTable); i++) {
+                battleStatus->varTable[i] = 0;
+            }
+
+            D_80280A30 = 255;
+            battleStatus->inputBitmask = 0xFEF3F;
+            battleStatus->buffEffect = fx_partner_buff(0, 0.0f, 0.0f, 0.0f, 0.0f, 0);
+            func_800E9810();
+            gCurrentCameraID = CAM_BATTLE;
+            script = start_script(D_80280EB8, 0xA, 0);
+            battleStatus->camMovementScript = script;
+            gBattleState2 = BATTLE_STATE2_UNK_1;
+            battleStatus->camMovementScriptID = script->id;
+            break;
+        case BATTLE_STATE2_UNK_1:
+            if (!does_script_exist(battleStatus->camMovementScriptID)) {
+                UiStatus* uiStatus = &gUIStatus;
+
+                if (stage->preBattle != NULL) {
+                    script = start_script(stage->preBattle, 0xA, 0);
+                    battleStatus->controlScript = script;
+                    battleStatus->controlScriptID = script->id;
+                }
+
+                uiStatus->hidden = 0;
+                gBattleStatus.flags1 |= BS_FLAGS1_1;
+
+                for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
+                    battleStatus->enemyActors[i] = NULL;
+                }
+                battleStatus->initialEnemyCount = 0;
+
+                for (i = 0; i < D_8029F240; i++) {
+                    create_actor(&(*battle->formation)[i]);
+                    types = D_80281454;
+                    actor = battleStatus->enemyActors[i];
+
+                    while (TRUE) {
+                        type = *types;
+                        if (type == -1) {
+                            battleStatus->initialEnemyCount++;
+                            break;
+                        } else if (actor->actorType == type) {
+                            break;
+                        }
+                        types++;
+                    }
+
+                    actor->unk_208 = 0;
+                    if (i == 0) {
+                        actor->unk_208 = currentEncounter->unk_10;
+                        if (currentEncounter->unk_A0 == 4) {
+                            inflict_status_set_duration(actor, 4, 0x24, currentEncounter->unk_A2);
+                        }
+                    }
+                }
+
+                if (stage->specialFormationSize != 0 &&
+                    (stage->unk_24 == 0 || (stage->unk_24 > 0 && (rand_int(stage->unk_24) == 0))))
+                {
+                    D_8029F240 += stage->specialFormationSize;
+                    for (j = 0; i < D_8029F240; i++, j++) {
+                        create_actor(&(*stage->specialFormation)[j]);
+                        actor = battleStatus->enemyActors[i];
+                        actor->unk_208 = 0;
+                        if (i == 0) {
+                            actor->unk_208 = 0;
+                            if (currentEncounter->unk_A0 == 4) {
+                                inflict_status_set_duration(actor, 4, 0x24, currentEncounter->unk_A2);
+                            }
+                        }
+
+                    }
+                }
+
+                load_player_actor();
+                actor = battleStatus->playerActor;
+                if (gBattleStatus.flags2 & 0x40) {
+                    script = start_script(D_80284A30, 0xA, 0);
+                } else {
+                    script = start_script(D_80284A20, 0xA, 0);
+                }
+                actor->takeTurnScript = script;
+                actor->takeTurnID = script->id;
+                script->owner1.actorID = ACTOR_PLAYER;
+                load_partner_actor();
+                gBattleState2 = BATTLE_STATE2_UNK_4;
+            }
+            break;
+        case BATTLE_STATE2_UNK_4:
+            cond = FALSE;
+            for (i = 0; i < D_8029F240; i++) {
+                actor = battleStatus->enemyActors[i];
+                if (does_script_exist(actor->takeTurnID)) {
+                    cond = TRUE;
+                    break;
+                } else {
+                    actor->takeTurnScript = NULL;
+                }
+            }
+
+            if (!cond) {
+                actor = battleStatus->playerActor;
+                if (!does_script_exist(actor->takeTurnID)) {
+                    actor->takeTurnScript = NULL;
+                    actor = battleStatus->partnerActor;
+                    if (actor != NULL) {
+                        if (!does_script_exist(battleStatus->partnerActor->takeTurnID)) {
+                            actor->takeTurnScript = NULL;
+                        } else {
+                            return;
+                        }
+                    }
+
+                    if (battle->unk_10 != 0) {
+                        script = start_script(battle->unk_10, 0xA, 0);
+                        battleStatus->controlScript = script;
+                        battleStatus->controlScriptID = script->id;
+                    }
+                    if (battleStatus->unk_432 > 0) {
+                        set_screen_overlay_color(1, 0, 0, 0);
+                        set_screen_overlay_params_back(0, 215.0f);
+                    }
+                    if (is_ability_active(ABILITY_CHILL_OUT) && currentEncounter->firstStrikeType == FIRST_STRIKE_ENEMY) {
+                        currentEncounter->firstStrikeType = FIRST_STRIKE_NONE;
+                    }
+
+                    switch (currentEncounter->firstStrikeType) {
+                        case FIRST_STRIKE_PLAYER:
+                            btl_set_state(BATTLE_STATE_FIRST_STRIKE);
+                            break;
+                        case FIRST_STRIKE_ENEMY:
+                            btl_set_state(BATTLE_STATE_ENEMY_FIRST_STRIKE);
+                            break;
+                        default:
+                            if (!(gGameStatusPtr->demoFlags & 1)) {
+                                actor = battleStatus->playerActor;
+                                if (gBattleStatus.flags2 & 0x40) {
+                                    script = start_script(&PeachEnterStage, 0xA, 0);
+                                } else {
+                                    script = start_script(&MarioEnterStage, 0xA, 0);
+                                }
+                                actor->takeTurnScript = script;
+                                actor->takeTurnID = script->id;
+                                script->owner1.actorID = ACTOR_PLAYER;
+                            }
+
+                            if (currentEncounter->currentEnemy != NULL &&
+                                currentEncounter->currentEnemy->encountered == 3 &&
+                                is_ability_active(ABILITY_DIZZY_ATTACK))
+                            {
+                                actor = battleStatus->enemyActors[0];
+                                script = start_script(&DoDizzyAttack, 0xA, 0);
+                                actor->takeTurnScript = script;
+                                actor->takeTurnID = script->id;
+                                script->owner1.enemyID = ACTOR_ENEMY0;
+                            }
+
+                            D_80280A30 = 305;
+                            D_8029F248 = 0;
+                            gBattleState2 = BATTLE_STATE2_UNK_7;
+                            break;
+                    }
+                }
+            }
+            break;
+        case BATTLE_STATE2_UNK_7:
+            if (D_80280A30 == 0) {
+                gBattleState2 = BATTLE_STATE2_UNK_8;
+                break;
+            }
+
+            D_8029F248++;
+            if (D_8029F248 == 15) {
+                btl_cam_use_preset(BTL_CAM_PRESET_C);
+            }
+
+            if (!(gGameStatusPtr->demoFlags & 1)) {
+                D_80280A30 -= 10;
+            } else {
+                D_80280A30 -= 50;
+            }
+
+            if (D_80280A30 < 0) {
+                D_80280A30 = 0;
+            }
+            break;
+        case BATTLE_STATE2_UNK_8:
+            if (battleStatus->unk_8C == 0) {
+                set_screen_overlay_params_front(0xFF, -1.0f);
+                btl_set_state(BATTLE_STATE_BEGIN_TURN);
+            }
+            break;
+    }
+}
 
 void btl_state_draw_normal_start(void) {
     set_screen_overlay_color(0, 0, 0, 0);
@@ -218,7 +541,7 @@ void btl_state_update_begin_turn(void) {
         }
 
         if (battleStatus->hustleTurns != 0) {
-            battleStatus->flags1 |= BS_FLAGS1_4000000;
+            gBattleStatus.flags1 |= BS_FLAGS1_4000000;
         }
 
         numEnemyActors = 0;
@@ -878,7 +1201,7 @@ void btl_state_update_switch_to_partner(void) {
 void btl_state_draw_switch_to_partner(void) {
 }
 
-// some ordering / tail merging / goto issues
+// some ordering / tail merging / go-to issues
 #ifdef NON_MATCHING
 void func_80242FE0(void) {
     BattleStatus* battleStatus = &gBattleStatus;

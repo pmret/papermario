@@ -2858,6 +2858,7 @@ enum BattleStatusFlags2 {
     BS_FLAGS2_4                               = 0x00000004,
     BS_FLAGS2_8                               = 0x00000008,
     BS_FLAGS2_10                              = 0x00000010,
+    BS_FLAGS2_20                              = 0x00000020,
     BS_FLAGS2_40                              = 0x00000040,
     BS_FLAGS2_80                              = 0x00000080,
     BS_FLAGS2_100                             = 0x00000100,

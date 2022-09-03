@@ -148,7 +148,6 @@ s32 general_heap_free(void* data);
 
 s32 integer_log(s32 number, u32 base);
 
-void set_battle_formation(s32);
 void set_battle_stage(s32);
 void load_battle(s32);
 
@@ -299,6 +298,10 @@ void init_virtual_entity_list(void);
 void init_model_animators(void);
 void play_model_animation(s32, s16*);
 s32 heap_free(void* ptr);
+
+void load_battle_hit_asset(const char* hitName);
+void load_data_for_models(struct ModelNode* model, s32 romOffset, s32 size);
+void load_player_actor(void);
 
 void btl_state_update_normal_start(void);
 void btl_state_draw_normal_start(void);
@@ -897,6 +900,7 @@ void reset_player_status(void);;
 void func_800E4F10(void);
 void func_800E5520(void);
 void func_800E6B68(void);
+void func_800E9810(void);
 s32 func_800E9860(void);
 void func_800E98C4(void);
 void func_800E98EC(void);
