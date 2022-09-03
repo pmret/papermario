@@ -2724,7 +2724,194 @@ void btl_state_update_player_move(void) {
 void btl_state_draw_player_move(void) {
 }
 
+// control flow
+#ifdef NON_MATCHING
+void btl_state_update_end_player_turn(void) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    Actor* player = battleStatus->playerActor;
+    Actor* partner = battleStatus->partnerActor;
+    s32 prevHPDrainCount;
+    Evt* script;
+    s32 var_a0;
+    s32 var_s2;
+    s32 var_s4;
+
+    if (gBattleState2 == 0) {
+        if ((battleStatus->moveCategory == 2) && (battleStatus->itemUsesLeft >= 2)) {
+            gBattleState2 = 5;
+        } else if (
+            ((gBattleStatus.flags2 & 0x04000000) || is_ability_active(0x12) || is_ability_active(0x1F) || is_ability_active(0x34)) &&
+            player->stoneStatus != 0xC &&
+            !battleStatus->outtaSightActive)
+        {
+            prevHPDrainCount = 0;
+            var_s2 = 0;
+            var_s4 = 0;
+            if (gBattleStatus.flags2 & 0x04000000) {
+                prevHPDrainCount = battleStatus->hpDrainCount;
+                battleStatus->hpDrainCount = 0;
+            }
+
+            if (rand_int(100) < 50) {
+                var_s2 = is_ability_active(0x1F) * 3;
+            }
+            if (rand_int(100) < 50) {
+                var_s2 += is_ability_active(0x12);
+            }
+            if (rand_int(100) < 50) {
+                var_s4 = is_ability_active(0x34);
+            }
+
+            if (prevHPDrainCount + var_s2 + var_s4 != 0) {
+                battleStatus->battlePhase = 0x1E;
+                script = start_script(&PlayerScriptDispatcher, 0xA, 0);
+                player->takeTurnScript = script;
+                player->takeTurnID = script->id;
+                script->owner1.actorID = ACTOR_PLAYER;
+                if (gBattleStatus.flags2 & 0x04000000) {
+                    script->varTable[10] += battleStatus->hpDrainCount;
+                    battleStatus->hpDrainCount = 0;
+                }
+                script->varTable[10] = prevHPDrainCount;
+                script->varTable[11] = var_s2;
+                script->varTable[12] = var_s4;
+
+                if (prevHPDrainCount > 99) {
+                    script->varTable[10] = 99;
+                }
+                if (script->varTable[11] > 99) {
+                    script->varTable[11] = 99;
+                }
+                if (script->varTable[12] > 99) {
+                    script->varTable[12] = 99;
+                }
+
+                gBattleStatus.flags2 &= 0xFBFFFFFF;
+                gBattleState2 = 5;
+            } else {
+                gBattleState2 = 5;
+            }
+        } else {
+            gBattleState2 = 5;
+        }
+    }
+
+    if (gBattleState2 == 5) {
+        if ((player->takeTurnScript == NULL) || (does_script_exist(player->takeTurnID) == 0)) {
+            player->takeTurnScript = NULL;
+            if (!(gBattleStatus.flags2 & 0x40) || (gBattleStatus.flags1 & 0x100000)) {
+                gBattleState2 = 0xA;
+            } else {
+                player->state.currentPos.x = player->homePos.x;
+                player->state.currentPos.z = player->homePos.z;
+                player->state.goalPos.x = partner->homePos.x;
+                player->state.goalPos.z = partner->homePos.z;
+                player->state.moveTime = 4;
+                player->state.angle = 0.0f;
+                gBattleState2 = 6;
+            }
+        }
+    }
+
+    if (gBattleState2 == 6) {
+        if (player->state.moveTime != 0) {
+            player->currentPos.x += (player->state.goalPos.x - player->currentPos.x) / player->state.moveTime;
+            player->currentPos.z += (player->state.goalPos.z - player->currentPos.z) / player->state.moveTime;
+            partner->currentPos.x += (player->state.currentPos.x - partner->currentPos.x) / player->state.moveTime;
+            partner->currentPos.z += (player->state.currentPos.z - partner->currentPos.z) / player->state.moveTime;
+        }
+        player->currentPos.z += sin_rad((player->state.angle * TAU) / 360.0f) * 16.0f;
+        player->yaw = clamp_angle(-player->state.angle);
+        partner->currentPos.z -= sin_rad((player->state.angle * TAU) / 360.0f) * 16.0f;
+        partner->yaw = clamp_angle(-player->state.angle);
+        player->state.angle += 90.0f;
+
+        if (player->state.moveTime != 0) {
+            player->state.moveTime--;
+        } else {
+            player->currentPos.x = player->state.goalPos.x;
+            player->currentPos.z = player->state.goalPos.z;
+            partner->currentPos.x = player->state.currentPos.x;
+            partner->currentPos.z = player->state.currentPos.z;
+            player->homePos.x = player->currentPos.x;
+            player->homePos.z = player->currentPos.z;
+            partner->homePos.x = partner->currentPos.x;
+            partner->homePos.z = partner->currentPos.z;
+            gBattleStatus.flags1 |= 0x100000;
+            gBattleState2 = 0xA;
+        }
+    }
+
+    if (gBattleState2 == 0xA && !btl_check_enemies_defeated()) {
+        if ((battleStatus->moveCategory == 2) && (battleStatus->itemUsesLeft >= 2)) {
+            btl_cam_use_preset(2);
+            btl_cam_move(0xA);
+            gBattleStatus.flags2 &= ~2;
+        } else {
+            gBattleStatus.flags2 |= 2;
+        }
+
+        if (battleStatus->unk_94 < 0) {
+            battleStatus->unk_94 = 0;
+            battleStatus->itemUsesLeft = 0;
+            btl_set_state(6);
+            return;
+        }
+
+        if (battleStatus->itemUsesLeft != 0) {
+            battleStatus->itemUsesLeft--;
+            if (battleStatus->itemUsesLeft != 0) {
+                btl_set_state(0xC);
+                gBattleState2 = 0x46;
+                return;
+            }
+
+            if (gBattleStatus.flags1 & 0x04000000) {
+                if (battleStatus->hustleTurns != 0) {
+                    battleStatus->hustleTurns = (u8) battleStatus->hustleTurns - 1;
+                    goto block_59;
+                }
+                goto block_62;
+            }
+block_59:
+            if (battleStatus->hustleTurns != 0 && (gBattleStatus.flags1 & 0x04000000)) {
+                gBattleStatus.flags2 &= ~2;
+
+                btl_set_state(0xC);
+            } else {
+block_62:
+                gBattleStatus.flags1 &= 0xFBFFFFFF;
+
+                btl_set_state(8);
+            }
+            return;
+        }
+
+        if (gBattleStatus.flags1 & 0x04000000) {
+            if (battleStatus->hustleTurns != 0) {
+                battleStatus->hustleTurns--;
+                goto block_66;
+            }
+            goto block_69;
+        }
+block_66:
+        if ((battleStatus->hustleTurns != 0) && (gBattleStatus.flags1 & 0x04000000)) {
+            gBattleStatus.flags2 &= ~2;
+            btl_set_state(0xC);
+        } else {
+block_69:
+            gBattleStatus.flags1 &= 0xFBFFFFFF;
+            if (!(gBattleStatus.flags2 & 0x40)) {
+                btl_set_state(8);
+            } else {
+                btl_set_state(9);
+            }
+        }
+    }
+}
+#else
 INCLUDE_ASM(s32, "16F740", btl_state_update_end_player_turn);
+#endif
 
 void btl_state_draw_end_player_turn(void) {
 }
