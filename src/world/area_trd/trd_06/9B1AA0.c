@@ -10,7 +10,12 @@ INCLUDE_ASM(s32, "world/area_trd/trd_06/9B1AA0", func_80240854_9B1FE4);
 
 INCLUDE_ASM(s32, "world/area_trd/trd_06/9B1AA0", func_8024093C_9B20CC);
 
-INCLUDE_ASM(s32, "world/area_trd/trd_06/9B1AA0", func_80240A5C_9B21EC);
+extern s32 D_802451F0;
+
+ApiStatus func_80240A5C_9B21EC(void) {
+    D_802451F0 = 1;
+    return ApiStatus_DONE2;
+}
 
 ApiStatus func_80240A70_9B2200(Evt* script, s32 isInitialCall) {
     f32 partnerCollisionHeight = get_npc_unsafe(NPC_PARTNER)->collisionHeight;
