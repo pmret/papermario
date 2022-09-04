@@ -20,9 +20,6 @@
     );
 #endif
 __asm__(".include \"include/macro.inc\"\n");
-#ifdef MOVE_ADDU
-__asm__(".include \"include/move_addu.inc\"\n");
-#endif
 #else
 #define INCLUDE_ASM(TYPE, FOLDER, NAME, ARGS...)
 #endif
