@@ -225,6 +225,8 @@ typedef enum ActorType {
     ACTOR_TYPE_COUNT = 0xD4,
 } ActorType;
 
+extern s32 bActorNames[];
+
 #define AREA(id) \
     .dmaStart = battle_##id##_ROM_START, \
     .dmaEnd = battle_##id##_ROM_END, \
@@ -271,12 +273,12 @@ typedef struct FormationRow {
 typedef FormationRow Formation[];
 
 typedef struct Stage {
-    /* 0x00 */ const char* texture;
+    /* 0x00 */ char* texture;
     /* 0x04 */ const char* shape;
     /* 0x08 */ const char* hit;
     /* 0x0C */ EvtScript* preBattle;
     /* 0x10 */ EvtScript* postBattle;
-    /* 0x14 */ const char* bg;
+    /* 0x14 */ char* bg;
     /* 0x18 */ s32* foregroundModelList;
     /* 0x1C */ s32 specialFormationSize;
     /* 0x20 */ Formation* specialFormation;
@@ -289,8 +291,8 @@ typedef struct Battle {
     /* 0x04 */ s32 formationSize;
     /* 0x08 */ Formation* formation;
     /* 0x0C */ Stage* stage;
-    /* 0x10 */ s32 unk_10;
-} Battle; // size = 0x14 * n
+    /* 0x10 */ EvtScript* unk_10;
+} Battle; // size = 0x14
 
 typedef Battle BattleList[];
 

@@ -148,7 +148,6 @@ s32 general_heap_free(void* data);
 
 s32 integer_log(s32 number, u32 base);
 
-void set_battle_formation(s32);
 void set_battle_stage(s32);
 void load_battle(s32);
 
@@ -221,6 +220,7 @@ void get_dpad_input_radial(f32* angle, f32* magnitude);
 void transform_point(Matrix4f mtx, f32 inX, f32 inY, f32 inZ, f32 inS, f32* outX, f32* outY, f32* outZ, f32* outS);
 void try_player_footstep_sounds(s32 arg0);
 void phys_update_interact_collider(void);
+void phys_reset_spin_history(void);
 s32 phys_adjust_cam_on_landing(void);
 s32 phys_should_player_be_sliding(void);
 void phys_init_integrator_for_current_state(void);
@@ -298,6 +298,10 @@ void init_virtual_entity_list(void);
 void init_model_animators(void);
 void play_model_animation(s32, s16*);
 s32 heap_free(void* ptr);
+
+void load_battle_hit_asset(const char* hitName);
+void load_data_for_models(struct ModelNode* model, s32 romOffset, s32 size);
+void load_player_actor(void);
 
 void btl_state_update_normal_start(void);
 void btl_state_draw_normal_start(void);
@@ -721,6 +725,8 @@ void state_step_demo(void);
 void state_drawUI_demo(void);
 void game_mode_set_fpDrawAuxUI(s32 i, void (*fn)(void));
 
+void func_80260A60(void);
+
 void func_802B2000(void);
 void func_802B203C(void);
 void func_802B2078(void);
@@ -896,6 +902,7 @@ void reset_player_status(void);;
 void func_800E4F10(void);
 void func_800E5520(void);
 void func_800E6B68(void);
+void func_800E9810(void);
 s32 func_800E9860(void);
 void func_800E98C4(void);
 void func_800E98EC(void);
@@ -970,6 +977,7 @@ void status_menu_start_blinking_sp(void);
 void status_menu_stop_blinking_fp(void);
 void status_menu_stop_blinking_hp(void);
 void status_menu_stop_blinking_sp(void);
+void status_menu_start_blinking_sp_bars(s8 numBarsToBlink);
 void set_background_size(s16, s16, s16, s16);
 void read_background_size(BackgroundHeader*);
 void set_max_SP(s8);

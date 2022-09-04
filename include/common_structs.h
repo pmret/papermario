@@ -813,7 +813,9 @@ typedef struct BattleStatus {
     /*       */     void* varTablePtr[16];
     /*       */ };
     /* 0x048 */ s8 currentSubmenu;
-    /* 0x049 */ char unk_49[3];
+    /* 0x049 */ s8 unk_49;
+    /* 0x04A */ s8 unk_4A;
+    /* 0x04B */ s8 unk_4B;
     /* 0x04C */ s8 unk_4C[16];
     /* 0x05C */ s8 unk_5C[16];
     /* 0x06C */ s16 unk_6C;
@@ -928,7 +930,7 @@ typedef struct BattleStatus {
     /* 0x430 */ s8 holdInputBufferPos;
     /* 0x431 */ s8 inputBufferPos;
     /* 0x432 */ s8 unk_432;
-    /* 0x433 */ char unk_433;
+    /* 0x433 */ u8 unk_433;
     /* 0x434 */ s32* unk_434;
     /* 0x438 */ FGModelData* foregroundModelData;
     /* 0x43C */ struct EffectInstance* buffEffect;
@@ -2322,7 +2324,7 @@ typedef struct SpriteShadingProfile {
     /* 0x02 */ char unk_02[0x2];
     /* 0x04 */ SpriteShadingLightSource sources[7];
     /* 0xAC */ Color_RGB8 ambientColor;
-    /* 0xAF */ s8 ambientPower; // ?
+    /* 0xAF */ u8 ambientPower; // ?
 } SpriteShadingProfile; // size = 0xB0
 
 typedef struct FoldImageRecPart {

@@ -1791,7 +1791,7 @@ void init_encounter_status(void) {
 
     currentEncounter->flags = ENCOUNTER_STATUS_FLAGS_0;
     currentEncounter->numEncounters = 0;
-    currentEncounter->eFirstStrike = 0;
+    currentEncounter->firstStrikeType = FIRST_STRIKE_NONE;
     currentEncounter->hitType = 0;
     currentEncounter->unk_0A = 0;
     currentEncounter->npcGroupList = 0;
@@ -1837,7 +1837,7 @@ void clear_encounter_status(void) {
     }
 
     currentEncounter->numEncounters = 0;
-    currentEncounter->eFirstStrike = 0;
+    currentEncounter->firstStrikeType = FIRST_STRIKE_NONE;
     currentEncounter->hitType = 0;
     currentEncounter->unk_0A = 0;
     currentEncounter->currentAreaIndex = gGameStatusPtr->areaID;
