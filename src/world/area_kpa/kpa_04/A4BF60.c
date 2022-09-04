@@ -7,7 +7,7 @@ static char* N(exit_str_1) = "kpa_81";
 
 ApiStatus func_802400BC_A4C01C(Evt *script, s32 isInitialCall) {
     PlayerStatus* playerstatus = &gPlayerStatus;
-    f32 sp24;
+    f32 dist;
     f32 x;
     f32 y;
     f32 z;
@@ -22,9 +22,9 @@ ApiStatus func_802400BC_A4C01C(Evt *script, s32 isInitialCall) {
     y = playerstatus->position.y + 10.0f;
     z = playerstatus->position.z;
 
-    sp24 = 40.0f;
+    dist = 40.0f;
 
-    npc_raycast_down_sides(0, &x, &y, &z, &sp24);
+    npc_raycast_down_sides(0, &x, &y, &z, &dist);
 
     playerstatus->position.x = x;
     playerstatus->position.y = y;
