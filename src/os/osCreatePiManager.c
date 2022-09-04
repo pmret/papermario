@@ -1,4 +1,5 @@
-#include "common.h"
+#include "ultra64.h"
+#include "include_asm.h"
 
 OSDevMgr __osPiDevMgr = {0};
 OSPiHandle* __osPiTable = NULL;
