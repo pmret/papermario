@@ -1,7 +1,7 @@
 #include "kkj_23.h"
 
 ApiStatus func_80240020_B028A0(Evt* script, s32 isInitialCall) {
-    gGameStatusPtr->peachFlags &= 0xFE;
+    gGameStatusPtr->peachFlags &= ~0x1;
     gPlayerData.currentPartner = script->varTable[0];
 
     return ApiStatus_DONE2;

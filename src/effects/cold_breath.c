@@ -11,7 +11,7 @@ extern u8 D_E00DE96C[];
 void cold_breath_init(EffectInstance* effect);
 void cold_breath_render(EffectInstance* effect);
 void cold_breath_update(EffectInstance* effect);
-void cold_breath_appendGfx(EffectInstance* effect);
+void cold_breath_appendGfx(void* effect);
 
 EffectInstance* cold_breath_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5) {
     EffectBlueprint bp;
@@ -82,7 +82,7 @@ void cold_breath_update(EffectInstance* effect) {
         data->unk_24 = data->unk_10 * 16;
     }
 
-    if ((unk00 < 2)) {
+    if (unk00 < 2) {
         if (unk00 >= 0) {
             data->unk_3C += 0.02;
         }
@@ -113,8 +113,8 @@ void cold_breath_render(EffectInstance* effect) {
     retTask->renderMode |= RENDER_TASK_FLAG_2;
 }
 
-void cold_breath_appendGfx(EffectInstance* effect) {
-    ColdBreathFXData* data = effect->data.coldBreath;
+void cold_breath_appendGfx(void* effect) {
+    ColdBreathFXData* data = ((EffectInstance*)effect)->data.coldBreath;
     Camera* camera = &gCameras[gCurrentCameraID];
     s32 unk14 = data->unk_14;
     s32 unk24 = data->unk_24;
@@ -131,7 +131,7 @@ void cold_breath_appendGfx(EffectInstance* effect) {
     s32 cond;
 
     gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effect->graphics->data));
+    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
     shim_guTranslateF(sp20, data->unk_04, data->unk_08, data->unk_0C);
     shim_guScaleF(sp60, data->unk_40, data->unk_40, data->unk_40);

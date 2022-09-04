@@ -6,7 +6,7 @@ extern s32 D_E00789A8;
 void bulb_glow_init(EffectInstance* effect);
 void bulb_glow_update(EffectInstance* effect);
 void bulb_glow_render(EffectInstance* effect);
-void bulb_glow_appendGfx(EffectInstance* effect);
+void bulb_glow_appendGfx(void* effect);
 
 void bulb_glow_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, EffectInstance** outEffect) {
     EffectBlueprint bp;

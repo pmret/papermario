@@ -6,7 +6,7 @@ extern s32 D_E010E750[];
 void chapter_change_init(EffectInstance* effect);
 void chapter_change_update(EffectInstance* effect);
 void chapter_change_render(EffectInstance* effect);
-void chapter_change_appendGfx(EffectInstance* effect);
+void chapter_change_appendGfx(void* effect);
 s32 shim_get_msg_width(s32, u16);
 
 INCLUDE_ASM(s32, "effects/chapter_change", func_E010E000);
