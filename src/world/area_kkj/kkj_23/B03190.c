@@ -10,9 +10,9 @@ ApiStatus func_80240910_B03190(Evt* script, s32 isInitialCall) {
     s32 var2 = evt_get_variable(script, *args++);
     s32 var3 = evt_get_variable(script, *args++);
 
-    effect->data.any[12] = var1;
-    effect->data.any[13] = var2;
-    effect->data.any[14] = var3;
+    effect->data.lightning->unk_30 = var1;
+    effect->data.lightning->unk_34 = var2;
+    effect->data.lightning->unk_38 = var3;
 
     return ApiStatus_DONE2;
 }

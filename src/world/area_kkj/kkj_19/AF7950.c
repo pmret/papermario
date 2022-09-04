@@ -1,9 +1,9 @@
 #include "kkj_19.h"
 
 typedef struct {
-    /* 0x00 */ char unk_00[4];
-    /* 0x04 */ s32 unk_04;
-    /* 0x08 */ char unk_08[4];
+    /* 0x00 */ s32 itemID;
+    /* 0x04 */ s32 flagIndex;
+    /* 0x08 */ s32 overrideDescMsg;
 } UnkStruct; // size = 0x0C
 
 extern UnkStruct D_80240E10_AF8760[];
@@ -69,7 +69,7 @@ ApiStatus func_802401FC_AF7B4C(Evt* script, s32 isInitialCall) {
     setup_pause_menu_tab(D_80240EF0_AF8840, ARRAY_COUNT(D_80240EF0_AF8840));
 
     for (i = 0; i < 10; i++) {
-        bind_trigger_1(&D_80240E94_AF87E4, TRIGGER_FLOOR_TOUCH, D_80240E10_AF8760[i].unk_04, i, 0, 3);
+        bind_trigger_1(&D_80240E94_AF87E4, TRIGGER_FLOOR_TOUCH, D_80240E10_AF8760[i].flagIndex, i, 0, 3);
     }
 
     return ApiStatus_DONE2;
