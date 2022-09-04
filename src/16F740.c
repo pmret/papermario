@@ -210,7 +210,7 @@ void btl_state_update_normal_start(void) {
         stage = D_800DC064[1];
     }
 
-    battleStatus->foregroundModelData = stage;
+    battleStatus->currentStage = stage;
     switch (gBattleState2) {
         case BATTLE_STATE2_UNK_0:
             D_8029F240 = battle->formationSize;

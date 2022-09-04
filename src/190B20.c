@@ -2603,10 +2603,10 @@ void reset_all_actor_sounds(Actor* actor) {
 }
 
 void hide_foreground_models_unchecked(void) {
-    FGModelData* data = gBattleStatus.foregroundModelData;
+    Stage* data = gBattleStatus.currentStage;
 
-    if (data != NULL && data->idList != NULL) {
-        s32* idList = data->idList;
+    if (data != NULL && data->foregroundModelList != NULL) {
+        s32* idList = data->foregroundModelList;
         while (*idList != 0) {
             s32 id = *idList++;
             if (id >= 0) {
@@ -2618,10 +2618,10 @@ void hide_foreground_models_unchecked(void) {
 }
 
 void show_foreground_models_unchecked(void) {
-    FGModelData* data = gBattleStatus.foregroundModelData;
+    Stage* data = gBattleStatus.currentStage;
 
-    if (data != NULL && data->idList != NULL) {
-        s32* idList = data->idList;
+    if (data != NULL && data->foregroundModelList != NULL) {
+        s32* idList = data->foregroundModelList;
         while (*idList != 0) {
             s32 id = *idList++;
             if (id >= 0) {
@@ -2633,10 +2633,10 @@ void show_foreground_models_unchecked(void) {
 }
 
 void hide_foreground_models(void) {
-    FGModelData* data = gBattleStatus.foregroundModelData;
+    Stage* data = gBattleStatus.currentStage;
 
-    if (data != NULL && data->idList != NULL) {
-        s32* idList = data->idList;
+    if (data != NULL && data->foregroundModelList != NULL) {
+        s32* idList = data->foregroundModelList;
         while (*idList != 0) {
             s32 id = *idList++;
             if (id < 0) {
@@ -2651,10 +2651,10 @@ void hide_foreground_models(void) {
 }
 
 void show_foreground_models(void) {
-    FGModelData* data = gBattleStatus.foregroundModelData;
+    Stage* data = gBattleStatus.currentStage;
 
-    if (data != NULL && data->idList != NULL) {
-        s32* idList = data->idList;
+    if (data != NULL && data->foregroundModelList != NULL) {
+        s32* idList = data->foregroundModelList;
         while (*idList != 0) {
             s32 id = *idList++;
             if (id < 0) {

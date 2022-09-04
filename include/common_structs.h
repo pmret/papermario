@@ -634,8 +634,8 @@ typedef struct UiStatus {
     /* 0x38 */ s16 showTimer;
     /* 0x3A */ s8 hidden;
     /* 0x3B */ s8 unk_3B[2];
-    /* 0x3D */ u8 displayHP;
-    /* 0x3E */ u8 displayFP;
+    /* 0x3D */ s8 displayHP;
+    /* 0x3E */ s8 displayFP;
     /* 0x3F */ char unk_3F;
     /* 0x40 */ s16 displayCoins;
     /* 0x42 */ s16 displayStarpoints;
@@ -644,20 +644,22 @@ typedef struct UiStatus {
     /* 0x47 */ s8 disabled; /* set != 0 for menu to be disabled completely */
     /* 0x48 */ s16 displaySP;
     /* 0x4A */ s8 hpBlinking; /* bool */
-    /* 0x4B */ u8 hpBlinkCounter;
-    /* 0x4C */ u8 hpBlinkTimer; /* until stop */
+    /* 0x4B */ s8 hpBlinkCounter;
+    /* 0x4C */ s8 hpBlinkTimer; /* until stop */
     /* 0x4D */ s8 fpBlinking; /* bool */
-    /* 0x4E */ u8 fpBlinkCounter;
-    /* 0x4F */ u8 fpBlinkTimer; /* until stop */
+    /* 0x4E */ s8 fpBlinkCounter;
+    /* 0x4F */ s8 fpBlinkTimer; /* until stop */
     /* 0x50 */ s8 spBlinking;
-    /* 0x51 */ u8 spBlinkCounter;
+    /* 0x51 */ s8 spBlinkCounter;
     /* 0x52 */ s8 starpointsBlinking; /* bool */
-    /* 0x53 */ u8 starpointsBlinkCounter;
+    /* 0x53 */ s8 starpointsBlinkCounter;
     /* 0x54 */ s8 coinsBlinking; /* bool */
-    /* 0x55 */ u8 coinsBlinkCounter;
-    /* 0x56 */ u8 coinsBlinkTimer; /* until stop */
-    /* 0x57 */ char unk_57[3];
-    /* 0x5A */ u8 spBarsToBlink; /* how many sp bars to blink */
+    /* 0x55 */ s8 coinsBlinkCounter;
+    /* 0x56 */ s8 coinsBlinkTimer; /* until stop */
+    /* 0x57 */ u8 unk_57;
+    /* 0x58 */ u8 unk_58;
+    /* 0x59 */ u8 unk_59;
+    /* 0x5A */ s8 spBarsToBlink; /* how many sp bars to blink */
     /* 0x5B */ char unk_5B;
     /* 0x5C */ s32 iconIndex10;
     /* 0x60 */ s32 iconIndex11;
@@ -799,11 +801,6 @@ typedef struct Camera {
     /* 0x556 */ s16 unk_556;
 } Camera; // size = 0x558
 
-typedef struct FGModelData {
-    /* 0x00 */ char unk_00[0x18];
-    /* 0x18 */ s32* idList;
-} FGModelData; // size = unknown
-
 typedef struct BattleStatus {
     /* 0x000 */ s32 flags1;
     /* 0x004 */ s32 flags2;
@@ -932,7 +929,7 @@ typedef struct BattleStatus {
     /* 0x432 */ s8 unk_432;
     /* 0x433 */ u8 unk_433;
     /* 0x434 */ s32* unk_434;
-    /* 0x438 */ FGModelData* foregroundModelData;
+    /* 0x438 */ struct Stage* currentStage;
     /* 0x43C */ struct EffectInstance* buffEffect;
     /* 0x440 */ u8 tattleFlags[28];
     /* 0x45C */ char unk_45C[4];
