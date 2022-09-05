@@ -4,6 +4,7 @@
 #include "pause/pause_common.h"
 #include "world/partners.h"
 #include "sparkle_script.h"
+#include "item_entity.h"
 
 #define MAX_ITEM_ENTITIES 256
 
@@ -45,6 +46,7 @@ void update_item_entity_static(ItemEntity*);
 void func_801356C4(ItemEntity*);
 void func_801356CC(ItemEntity*);
 void func_801356D4(ItemEntity*);
+void func_801363A0(ItemEntity*);
 void update_item_entity_temp(ItemEntity*);
 s32 draw_image_with_clipping(IMG_PTR raster, s32 width, s32 height, s32 fmt, s32 bitDepth, s16 posX, s16 posY, u16 clipULx,
                              u16 clipULy, u16 clipLRx, u16 clipRLy);
@@ -668,10 +670,53 @@ s32 make_item_entity_at_player(s32 itemID, s32 arg1, s32 pickupMsgFlags) {
     return id;
 }
 
-//TODO remove this
-static const f32 rodata_padding_2 = 0.0f;
+void item_entity_update(ItemEntity* entity) {
+    s32* args;
+    s32 max, threshold;
 
-INCLUDE_ASM(s32, "C50A0", item_entity_update);
+    entity->nextUpdate--;
+    if (entity->nextUpdate != 0) {
+        return;
+    }
+
+    do {
+        args = entity->readPos;
+        switch(*args++) {
+            case ITEM_SCRIPT_OP_End:
+                entity->nextUpdate = 60;
+                return;
+            case ITEM_SCRIPT_OP_SetImage:
+                entity->nextUpdate = *args++;
+                *args++;
+                *args++;
+                if (!gGameStatusPtr->isBattle) {
+                    entity->lookupRasterIndex  = *args++ & 0xFFFF;
+                    entity->lookupPaletteIndex = *args++ & 0xFFFF;
+                } else {
+                    entity->lookupRasterIndex  = *args++ >> 16;
+                    entity->lookupPaletteIndex = *args++ >> 16;
+                }
+                entity->readPos = args;
+                return;
+            case ITEM_SCRIPT_OP_Restart:
+                entity->readPos = entity->savedReadPos;
+                break;
+            case ITEM_SCRIPT_OP_Loop:
+                entity->savedReadPos = args;
+                entity->readPos = args;
+                break;
+            case ITEM_SCRIPT_OP_RandomRestart:
+                max = *args++;
+                threshold = *args++;
+                if (rand_int(max) < threshold) {
+                    entity->readPos = entity->savedReadPos;
+                } else {
+                    entity->readPos = args;
+                }
+                break;
+        }
+    } while (TRUE);
+}
 
 void update_item_entities(void) {
     ItemEntity* entity;
@@ -1624,6 +1669,390 @@ void func_801356D4(ItemEntity* itemEntity) {
 
 INCLUDE_ASM(s32, "C50A0", update_item_entity_temp);
 
+/*void update_item_entity_temp(ItemEntity* itemEntity) {
+    PlayerData* playerData = &gPlayerData;
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    PopupMenu* menu = &D_801565B0;
+    s32 i;
+
+    ItemData* temp_a1;
+    ItemData* temp_a1_2;
+    PlayerData* var_a2;
+    PlayerData* var_v1;
+    PlayerData* var_v1_2;
+    PlayerData* var_v1_3;
+    s16 temp_a0;
+    s16 temp_a0_2;
+    s16 temp_a0_3;
+    s16 temp_a0_4;
+    s16 temp_v0_6;
+    s16 temp_v0_8;
+    s16 temp_v1_6;
+    s16 temp_v1_7;
+    s32 (**temp_v0_9)[0];
+    s32 (**var_v1_4)[0];
+    s32 temp_v0_2;
+    s32 temp_v0_7;
+    s32 temp_v1_8;
+    s32 var_a0;
+    s32 var_a0_2;
+    s32 var_a0_3;
+    s32 var_a0_4;
+    s32 var_a0_5;
+    s32 var_a1;
+    s32 var_a3;
+    s32 var_v0;
+    s32 var_v0_2;
+    s32 var_v0_3;
+    s32 var_v0_4;
+    s8 temp_v0;
+    s8 temp_v1;
+    u16 temp_v1_2;
+    u16 temp_v1_3;
+    u16 temp_v1_4;
+    u16 temp_v1_5;
+    u8 temp_v0_3;
+
+    if (itemEntity->state == 0) {
+        isPickingUpItem = 1;
+        if (!(itemEntity->flags & 0x02000000)) {
+            disable_player_input();
+            partner_disable_input();
+            gOverrideFlags |= 0x40;
+            set_time_freeze_mode(2);
+        }
+        item_entity_disable_shadow(itemEntity);
+        itemEntity->state = (s8) 1;
+    }
+    temp_v0 = (u8) itemEntity->state - 1;
+    switch (temp_v0) {
+        case 0:
+            if ((itemEntity->flags & 0x02000000) || (temp_v1 = playerStatus->actionState, ((playerStatus->animFlags & 0x10000000) != 0)) || (((playerStatus->timeInAir != 0) || (temp_v1 == 3) || (temp_v1 == 8)) && (playerStatus->enableCollisionOverlapsCheck != 0) && (playerStatus->inputEnabledCounter != 0)) || (temp_v1 == 6) || (temp_v1 == 0x21) || (temp_v1 == 0) || ((temp_v1 == 0x1D) && (playerStatus->fallState == 1))) {
+                if (!((u16) itemEntity->pickupMsgFlags & 1)) {
+                    temp_a0 = itemEntity->itemID;
+                    temp_v1_2 = *(&gItemTable->typeFlags + (temp_a0 << 5));
+                    if (temp_v1_2 & 0x40) {
+                        var_a0 = 0xD3;
+                        goto block_25;
+                    }
+                    if (temp_v1_2 & 8) {
+                        var_a0 = 0xD2;
+                        goto block_25;
+                    }
+                    var_a0 = 0xD1;
+                    if (temp_a0 == 0x157) {
+                        sfx_play_sound_at_position(0x211, 0, itemEntity->position.x, itemEntity->position.y, itemEntity->position.z);
+                    } else {
+block_25:
+                        sfx_play_sound(var_a0);
+                    }
+                }
+                temp_v0_2 = hud_element_create(gItemHudScripts[*(&gItemTable->hudElemID + (itemEntity->itemID << 5))].enabled);
+                D_801568E0 = temp_v0_2;
+                hud_element_set_flags(temp_v0_2, 0x80);
+                hud_element_set_render_pos(D_801568E0, -0x64, -0x64);
+                itemEntity->state = 2;
+                if (!(itemEntity->flags & 0x02000000)) {
+                    var_a0_2 = 0;
+                    if ((u16) gItemTable[itemEntity->itemID].typeFlags & 4) {
+                        var_v1 = &gPlayerData;
+loop_29:
+                        var_v0 = var_a0_2 < 0xA;
+                        if (var_v1->invItems[0] != 0) {
+                            var_a0_2 += 1;
+                            var_v1 += 2;
+                            if (var_a0_2 >= 0xA) {
+                                var_v0 = var_a0_2 < 0xA;
+                            } else {
+                                goto loop_29;
+                            }
+                        }
+                        if (var_v0 != 0) {
+                            playerData->invItems[var_a0_2] = (s16) (u16) itemEntity->itemID;
+                            goto block_34;
+                        }
+                        goto block_47;
+                    }
+block_34:
+                    var_a0_3 = 0;
+                    if (*(&gItemTable->typeFlags + (itemEntity->itemID << 5)) & 8) {
+                        var_v1_2 = &gPlayerData;
+loop_36:
+                        var_v0_2 = var_a0_3 < 0x20;
+                        if (var_v1_2->keyItems[0] != 0) {
+                            var_a0_3 += 1;
+                            var_v1_2 += 2;
+                            if (var_a0_3 >= 0x20) {
+                                var_v0_2 = var_a0_3 < 0x20;
+                            } else {
+                                goto loop_36;
+                            }
+                        }
+                        if (var_v0_2 != 0) {
+                            playerData->keyItems[var_a0_3] = (s16) (u16) itemEntity->itemID;
+                            goto block_41;
+                        }
+                        goto block_47;
+                    }
+block_41:
+                    var_a0_4 = 0;
+                    if (*(&gItemTable->typeFlags + (itemEntity->itemID << 5)) & 0x40) {
+                        var_v1_3 = &gPlayerData;
+loop_43:
+                        var_v0_3 = var_a0_4 < 0x80;
+                        if (var_v1_3->badges[0] != 0) {
+                            var_a0_4 += 1;
+                            var_v1_3 += 2;
+                            if (var_a0_4 >= 0x80) {
+                                var_v0_3 = var_a0_4 < 0x80;
+                            } else {
+                                goto loop_43;
+                            }
+                        }
+                        if (var_v0_3 == 0) {
+block_47:
+                            itemEntity->state = 0xA;
+                        } else {
+                            playerData->badges[var_a0_4] = (s16) (u16) itemEntity->itemID;
+                            goto block_49;
+                        }
+                    } else {
+block_49:
+                        if (itemEntity->itemID == 0x15C) {
+                            temp_v0_3 = playerData->starPieces + 1;
+                            playerData->starPieces = temp_v0_3;
+                            if ((u32) (temp_v0_3 & 0xFF) >= 0xDFU) {
+                                playerData->starPieces = 0xDE;
+                            }
+                        }
+                        if (itemEntity->itemID == 7) {
+                            playerData->hasActionCommands = 1;
+                        }
+                        if ((u32) ((u16) itemEntity->itemID - 4) < 3U) {
+                            playerData->hammerLevel = itemEntity->itemID - 4;
+                        }
+                        if ((u32) ((u16) itemEntity->itemID - 1) < 3U) {
+                            playerData->bootsLevel = itemEntity->itemID - 1;
+                        }
+                    }
+                }
+                if (itemEntity->flags < 0) {
+                    set_global_flag(itemEntity->boundVar);
+                }
+                if (itemEntity->state == (s8) 0xA) {
+                    func_801363A0(itemEntity);
+                    set_window_update(0xC, basic_window_update);
+                    set_window_update(0x11, basic_window_update);
+                    set_window_update(0x13, basic_window_update);
+                }
+                increment_status_menu_disabled();
+                D_801568E4 = 0xA;
+                return;
+            }
+        case 1:
+            if (D_801568E4 == 9) {
+                temp_a0_2 = itemEntity->itemID;
+                temp_v1_3 = *(&gItemTable->typeFlags + (temp_a0_2 << 5));
+                if ((temp_v1_3 & 0x40) || (temp_v1_3 & 8) || (temp_a0_2 == 0x15C) || (temp_v1_3 & 0x20) || (itemEntity->flags & 0x04000000) || ((u16) itemEntity->pickupMsgFlags & 2)) {
+                    itemEntity->position.x = playerStatus->position.x;
+                    itemEntity->position.y = playerStatus->position.y + (f32) playerStatus->colliderHeight;
+                    itemEntity->position.z = playerStatus->position.z;
+                    suggest_player_anim_setUnkFlag(0x6000C);
+                }
+                if (*(&gItemTable->typeFlags + (itemEntity->itemID << 5)) & 0x20) {
+                    fx_got_item_outline(1, itemEntity->position.x, itemEntity->position.y + 8.0f, itemEntity->position.z, 1.0f, &D_801568F0);
+                }
+            }
+            if ((D_801568E4 < 9) && ((temp_a0_3 = itemEntity->itemID, temp_v1_4 = *(&gItemTable->typeFlags + (temp_a0_3 << 5)), ((temp_v1_4 & 0x40) != 0)) || (temp_v1_4 & 8) || (temp_a0_3 == 0x15C) || (temp_v1_4 & 0x20) || (itemEntity->flags & 0x04000000) || ((u16) itemEntity->pickupMsgFlags & 2))) {
+                suggest_player_anim_setUnkFlag(0x6000C);
+            }
+            if (D_801568E4 == 7) {
+                temp_a0_4 = itemEntity->itemID;
+                temp_v1_5 = *(&gItemTable->typeFlags + (temp_a0_4 << 5));
+                if ((temp_v1_5 & 0x40) || (temp_v1_5 & 8) || (temp_a0_4 == 0x15C) || (temp_v1_5 & 0x20) || (itemEntity->flags & 0x04000000) || ((u16) itemEntity->pickupMsgFlags & 2)) {
+                    itemEntity->flags &= ~0x40;
+                }
+            }
+            if (D_801568E4 == 6) {
+                func_801363A0(itemEntity);
+                set_window_update(0xC, basic_window_update);
+                temp_v1_6 = itemEntity->itemID;
+                if ((temp_v1_6 != 0x15C) && (temp_v1_6 != 0x157)) {
+                    set_window_update(0x13, basic_window_update);
+                }
+            }
+            if (D_801568E4 != 0) {
+                D_801568E4--;
+                return;
+            }
+            if (gGameStatusPtr->pressedButtons[0] & 0xFC000) {
+                item_entity_disable_shadow(itemEntity);
+                if ((func_800DFCF4() != 0) && (playerStatus->actionState != 0x1D) && !(playerStatus->animFlags & 0x10000000)) {
+                    set_action_state(0);
+                }
+                if (*(&gItemTable->typeFlags + (itemEntity->itemID << 5)) & 0x20) {
+                    D_801568F0->data.gotItemOutline->unk_14 = 0xA;
+                }
+                set_window_update(0xC, basic_hidden_window_update);
+                set_window_update(0x13, basic_hidden_window_update);
+                itemEntity->state = 3;
+            }
+            break;
+        case 2:
+            if (!(gWindows[12].flags & 8) && !(gWindows[19].flags & 8)) {
+                itemEntity->state = 4;
+            }
+            break;
+        case 3:
+            if ((*(&gItemTable->typeFlags + (itemEntity->itemID << 5)) & 4) && (evt_get_variable(NULL, -0x07BFA41F) == 0)) {
+                evt_set_variable(NULL, -0x07BFA41F, 1);
+                itemEntity->state = 5;
+                break;
+            }
+            if ((itemEntity->itemID == 0x15C) && (evt_get_variable(NULL, -0x07BFA41B) == 0)) {
+                evt_set_variable(NULL, -0x07BFA41B, 1);
+                itemEntity->state = 5;
+                break;
+            }
+            itemEntity->state = 9;
+            break;
+        case 4:
+            temp_v1_7 = itemEntity->itemID;
+            var_a0_5 = 0;
+            if (*(&gItemTable->typeFlags + (temp_v1_7 << 5)) & 4) {
+                var_a0_5 = 0x1D0002;
+            }
+            if (temp_v1_7 == 0x15C) {
+                var_a0_5 = 0x1D0003;
+            }
+            D_801568F4 = msg_get_printer_for_msg(var_a0_5, &D_801568F8);
+            msg_printer_set_origin_pos(D_801568F4, 0, 0);
+            itemEntity->state = 6;
+            break;
+        case 5:
+            if (D_801568F8 == 1) {
+                isPickingUpItem = FALSE;
+            } else {
+                break;
+            }
+        case 8:
+            if (!(itemEntity->flags & 0x02000000)) {
+                set_time_freeze_mode(0);
+                enable_player_input();
+                partner_enable_input();
+                gOverrideFlags &= ~0x40;
+            }
+            hud_element_free(D_801568E0);
+            remove_item_entity_by_reference(itemEntity);
+            sort_items();
+            decrement_status_menu_disabled();
+            isPickingUpItem = FALSE;
+            break;
+        case 9:
+            var_a3 = 1;
+            if (gGameStatusPtr->pressedButtons[0] & 0x8000) {
+                i = 0;
+                temp_a1 = &gItemTable[itemEntity->itemID];
+                menu->ptrIcon[0] = gItemHudScripts[temp_a1->hudElemID].enabled;
+                menu->enabled[0] = 1;
+                menu->userIndex[0] = itemEntity->itemID;
+                var_a2 = &gPlayerData;
+                menu->nameMsg[0] = temp_a1->nameMsg;
+                var_v1_4 = &menu->ptrIcon[1];
+                menu->descMsg[0] = temp_a1->shortDescMsg;
+                do {
+                    temp_v0_6 = var_a2->invItems[0];
+                    i += 1;
+                    if (temp_v0_6 != 0) {
+                        temp_a1_2 = &gItemTable[temp_v0_6];
+                        // var_v1_4->unk0 = gItemHudScripts[temp_a1_2->hudElemID].enabled;
+                        // var_v1_4->unk18C = 1;
+                        // var_v1_4->unk108 = var_a2->invItems[0];
+                        // var_v1_4->unk84 = temp_a1_2->nameMsg;
+                        // var_a3 += 1;
+                        // var_v1_4->unk294 = temp_a1_2->shortDescMsg;
+                        // var_v1_4 += 4;
+                    }
+                    var_a2 += 2;
+                } while (i < 0xA);
+                menu->popupType = 2;
+                menu->numEntries = var_a3;
+                menu->initialPos = 0;
+                create_popup_menu(&menu);
+                set_window_update(0xC, basic_hidden_window_update);
+                set_window_update(0x11, basic_hidden_window_update);
+                D_801568E4 = 0;
+                itemEntity->state = 0xB;
+            }
+            break;
+        case 10:
+            if (!(gWindows[12].flags & 8) && !(gWindows[17].flags & 8) && !(gWindows[19].flags & 8)) {
+                itemEntity->state = 0xC;
+            }
+            break;
+        case 11:
+            temp_v0_7 = D_801568E4;
+            var_v0_4 = temp_v0_7 + 1;
+            if (temp_v0_7 == 0) {
+                temp_v0_8 = menu->result;
+                D_801568E8 = temp_v0_8;
+                if (temp_v0_8 != 0) {
+                    hide_popup_menu();
+                    var_v0_4 = D_801568E4 + 1;
+                    goto block_139;
+                }
+            } else {
+block_139:
+                D_801568E4 = var_v0_4;
+                if (var_v0_4 >= 0xF) {
+                    destroy_popup_menu();
+                    if (D_801568E8 == 0xFF) {
+                        D_801568E8 = 1;
+                    }
+                    // temp_v0_9 = &menu->.ptrIcon[D_801568E8 - 1];
+                    // D_801568EC = temp_v0_9->unk108;
+                    // hud_element_set_script(D_801568E0, temp_v0_9->unk0);
+                    get_item_entity(make_item_entity_delayed(D_801568EC, playerStatus->position.x, playerStatus->position.y + (f32) playerStatus->colliderHeight, playerStatus->position.z, 3, 0, 0))->renderGroup = -1;
+                    temp_v1_8 = D_801568E8;
+                    if (temp_v1_8 >= 2) {
+                        playerData->invItems[temp_v1_8 - 2] = 0;
+                        sort_items();
+                        add_item(itemEntity->itemID);
+                    }
+                    suggest_player_anim_setUnkFlag(0x6000C);
+                    func_801363A0(itemEntity);
+                    set_window_update(0xC, basic_window_update);
+                    D_801568E4 = 0x32;
+                    itemEntity->state = 0xD;
+                }
+            }
+            break;
+        case 12:
+            if (gGameStatusPtr->pressedButtons[0] & 0x8000) {
+                set_window_update(0xC, basic_hidden_window_update);
+                itemEntity->state = 0xE;
+            }
+            break;
+        case 13:
+            if (!(gWindows[12].flags & 8) && !(gWindows[17].flags & 8) && !(gWindows[19].flags & 8)) {
+                itemEntity->state = 0xF;
+            }
+            break;
+        case 14:
+            suggest_player_anim_setUnkFlag(0x10002);
+            set_time_freeze_mode(0);
+            enable_player_input();
+            partner_enable_input();
+            gOverrideFlags &= ~0x40;
+            hud_element_free(D_801568E0);
+            remove_item_entity_by_reference(itemEntity);
+            sort_items();
+            decrement_status_menu_disabled();
+            isPickingUpItem = FALSE;
+            break;
+    }
+}
+*/
 
 #ifdef NON_EQUIVALENT
 void func_801363A0(ItemEntity* itemEntity) {
@@ -1814,6 +2243,3 @@ void func_80136A08(ItemEntity* itemEntity, s32 posX, s32 posY) {
             break;
     }
 }
-
-// TODO remove this
-static const f32 rodata_padding[] = { 0.0f, 0.0f };
