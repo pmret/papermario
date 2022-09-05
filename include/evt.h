@@ -125,9 +125,9 @@ enum {
 #define EVT_INDEX_OF_MAP_VAR(v)     ((v +  50000000))
 #define EVT_INDEX_OF_MAP_FLAG(v)    ((v +  90000000))
 #define EVT_INDEX_OF_AREA_FLAG(v)   ((v + 110000000))
-#define EVT_INDEX_OF_AREA_BYTE(v)    ((v + 150000000))
+#define EVT_INDEX_OF_AREA_BYTE(v)   ((v + 150000000))
 #define EVT_INDEX_OF_SAVE_FLAG(v)   ((v + 130000000))
-#define EVT_INDEX_OF_SAVE_BYTE(v)    ((v + 170000000))
+#define EVT_INDEX_OF_SAVE_BYTE(v)   ((v + 170000000))
 
 // shorthand names for EVT_VAR
 #define VAR0 EVT_VAR(0)
