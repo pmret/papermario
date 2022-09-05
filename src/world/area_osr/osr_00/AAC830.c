@@ -1,4 +1,5 @@
 #include "osr_00.h"
+#include "effects.h"
 
 static char* N(exit_str_0) = "mac_01";
 static char* N(exit_str_1) = "kkj_00";
