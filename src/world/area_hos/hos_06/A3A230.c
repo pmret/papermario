@@ -8,7 +8,26 @@ INCLUDE_ASM(s32, "world/area_hos/hos_06/A3A230", func_80240F7C_A3A45C);
 
 INCLUDE_ASM(s32, "world/area_hos/hos_06/A3A230", func_80240FD0_A3A4B0);
 
-INCLUDE_ASM(s32, "world/area_hos/hos_06/A3A230", func_80241008_A3A4E8);
+extern s32 D_80246430_8E0530[];
+
+ApiStatus func_80241008_A3A4E8(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32* ptr = (s32*) evt_get_variable(script, *args++);
+    s32 i;
+
+    if (ptr != NULL) {
+        for (i = 0; ptr[i] != 0; i++) {
+            D_80246430_8E0530[i] = ptr[i];
+        }
+        D_80246430_8E0530[i] = 0;
+    } else {
+        for (i = 0; i < 112; i++) {
+            D_80246430_8E0530[i] = i + 16;
+            D_80246430_8E0530[112] = 0;
+        }
+    }
+    return ApiStatus_DONE2;
+}
 
 #define NAMESPACE dup_hos_06
 #include "world/common/StashVars.inc.c"

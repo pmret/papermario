@@ -14,9 +14,47 @@ INCLUDE_ASM(s32, "world/area_nok/nok_02/9DA8F0", func_80243BEC_9DAC0C);
 
 INCLUDE_ASM(s32, "world/area_nok/nok_02/9DA8F0", func_80243C40_9DAC60);
 
-INCLUDE_ASM(s32, "world/area_nok/nok_02/9DA8F0", func_80243C78_9DAC98);
+extern s32 D_80254BA0[];
 
-INCLUDE_ASM(s32, "world/area_nok/nok_02/9DA8F0", func_80243D14_9DAD34);
+ApiStatus func_80243C78_9DAC98(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32* ptr = (s32*) evt_get_variable(script, *args++);
+    s32 i;
+
+    if (ptr != NULL) {
+        for (i = 0; ptr[i] != 0; i++) {
+            D_80254BA0[i] = ptr[i];
+        }
+        D_80254BA0[i] = 0;
+    } else {
+        for (i = 0; i < 112; i++) {
+            D_80254BA0[i] = i + 16;
+            D_80254BA0[112] = 0;
+        }
+    }
+    return ApiStatus_DONE2;
+}
+
+extern s32 D_80254D68[];
+
+ApiStatus func_80243D14_9DAD34(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32* ptr = (s32*) evt_get_variable(script, *args++);
+    s32 i;
+
+    if (ptr != NULL) {
+        for (i = 0; ptr[i] != 0; i++) {
+            D_80254D68[i] = ptr[i];
+        }
+        D_80254D68[i] = 0;
+    } else {
+        for (i = 0; i < 91; i++) {
+            D_80254D68[i] = i + 128;
+            D_80254D68[91] = 0;
+        }
+    }
+    return ApiStatus_DONE2;
+}
 
 #define NAMESPACE dup2_nok_02
 #include "world/common/StashVars.inc.c"
