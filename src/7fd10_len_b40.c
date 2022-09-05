@@ -238,7 +238,7 @@ block_17:
                                 func_800E6860();
                                 playerStatus->flags &= ~PLAYER_STATUS_FLAGS_20;
                                 gOverrideFlags &= ~GLOBAL_OVERRIDES_40;
-                                set_time_freeze_mode(0);
+                                set_time_freeze_mode(TIME_FREEZE_NORMAL);
                             }
                         } else {
                             numEntries = setup_partner_popup(popup);
@@ -280,7 +280,7 @@ block_17:
                     func_800E6860();
                     playerStatus->flags &= ~PLAYER_STATUS_FLAGS_20;
                     gOverrideFlags &= ~GLOBAL_OVERRIDES_40;
-                    set_time_freeze_mode(0);
+                    set_time_freeze_mode(TIME_FREEZE_NORMAL);
                 }
             } else {
                 D_8010CCFA--;
@@ -299,7 +299,7 @@ block_17:
                 return;
             }
             create_popup_menu(popup);
-            set_time_freeze_mode(3);
+            set_time_freeze_mode(TIME_FREEZE_PARTNER_MENU);
             if (partnerActionStatus->partnerActionState == 0) {
                 set_action_state(ACTION_STATE_IDLE);
             }
@@ -353,7 +353,7 @@ block_17:
                 func_800E6860();
                 playerStatus->flags &= ~PLAYER_STATUS_FLAGS_20;
                 gOverrideFlags &= ~GLOBAL_OVERRIDES_40;
-                set_time_freeze_mode(0);
+                set_time_freeze_mode(TIME_FREEZE_NORMAL);
             }
             break;
         case 10:

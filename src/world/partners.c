@@ -617,13 +617,13 @@ void _use_partner_ability(void) {
                     wPartnerCurrentScriptID = wPartnerCurrentScript->id;
                     wPartnerCurrentScript->groupFlags = EVT_GROUP_08 | EVT_GROUP_02;
                     D_8010CD34 += 1;
-                    set_time_freeze_mode(1);
+                    set_time_freeze_mode(TIME_FREEZE_PARTIAL);
                     break;
                 case 1:
                     if (does_script_exist(wPartnerCurrentScriptID)) {
                         break;
                     }
-                    set_time_freeze_mode(0);
+                    set_time_freeze_mode(TIME_FREEZE_NORMAL);
                     partner_free_npc();
                     playerData->currentPartner = D_8010CFD8 = D_8010CFE4;
                     partner_create_npc();
@@ -636,7 +636,7 @@ void _use_partner_ability(void) {
                     wPartnerCurrentScriptID = wPartnerCurrentScript->id;
                     wPartnerCurrentScript->groupFlags = EVT_GROUP_08 | EVT_GROUP_02;
                     D_8010CD34 += 1;
-                    set_time_freeze_mode(1);
+                    set_time_freeze_mode(TIME_FREEZE_PARTIAL);
                     break;
                 case 3:
                     if (does_script_exist(wPartnerCurrentScriptID)) {
@@ -648,7 +648,7 @@ void _use_partner_ability(void) {
                     wPartnerCurrentScript->groupFlags = EVT_GROUP_08 | EVT_GROUP_02;
                     D_8010CD30 = 1;
                     enable_player_input();
-                    set_time_freeze_mode(0);
+                    set_time_freeze_mode(TIME_FREEZE_NORMAL);
                     break;
             }
             break;

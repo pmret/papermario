@@ -184,7 +184,7 @@ INCLUDE_ASM(ApiStatus, "world/partner/goombario", func_802BD5D8_3174F8, Evt* scr
 ApiStatus func_802BDB30_317A50(Evt* script, s32 isInitialCall) {
     PartnerActionStatus* goombarioActionStatus = &gPartnerActionStatus;
 
-    set_time_freeze_mode(0);
+    set_time_freeze_mode(TIME_FREEZE_NORMAL);
 
     if (D_802BDF64 != 0) {
         D_802BDF64 = 0;

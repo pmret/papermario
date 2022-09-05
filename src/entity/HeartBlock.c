@@ -158,7 +158,7 @@ void entity_HeartBlockContent_anim_idle(Entity* entity, s32 arg1) {
         disable_player_input();
         gPlayerStatus.currentSpeed = 0;
         gPlayerStatus.animFlags |= PLAYER_STATUS_ANIM_FLAGS_RAISED_ARMS;
-        set_time_freeze_mode(1);
+        set_time_freeze_mode(TIME_FREEZE_PARTIAL);
         gOverrideFlags |= GLOBAL_OVERRIDES_40;
     }
 }
@@ -277,7 +277,7 @@ void entity_HeartBlockContent__anim_heal(Entity* entity, s32 arg1) {
         case 5:
             playerStatus->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_RAISED_ARMS;
             enable_player_input();
-            set_time_freeze_mode(0);
+            set_time_freeze_mode(TIME_FREEZE_NORMAL);
             gOverrideFlags &= ~GLOBAL_OVERRIDES_40;
             exec_entity_commandlist(entity);
             break;
