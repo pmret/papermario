@@ -1,6 +1,7 @@
 #include "dead.h"
 #include "common.h"
 #include "effects.h"
+#include "battle/battle.h"
 
 // Copy of kzn_19 (C8DBB0.c)
 
@@ -44,7 +45,28 @@ INCLUDE_ASM(s32, "EA8AE0", func_8024140C_EA9EEC);
 
 #include "world/common/AddPlayerHandsOffset.inc.c"
 
-INCLUDE_ASM(s32, "EA8AE0", func_802417AC_EAA28C);
+// INCLUDE_ASM(s32, "EA8AE0", func_802417AC_EAA28C);
+
+
+extern s32 D_80243DD8_EAC8B8;
+s32 D_80243DDC_EAC8BC = 0;
+
+ApiStatus func_802417AC_EAA28C(Evt* script, s32 isInitialCall) {
+    Bytecode* temp = script->ptrReadPos; 
+    
+    if (isInitialCall != 0) {
+        D_80243DD8_EAC8B8 = 0;
+    }
+    if (D_80243DD8_EAC8B8 != 0) {
+        D_80243DD8_EAC8B8 = 0;
+
+        dead_evt_set_variable(script, *temp, D_80243DDC_EAC8BC);
+                
+        return ApiStatus_DONE2;
+    }
+
+    return ApiStatus_BLOCK;
+}
 
 INCLUDE_ASM(s32, "EA8AE0", func_80241800_EAA2E0);
 
