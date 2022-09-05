@@ -110,7 +110,19 @@ ApiStatus func_80240B8C_B0758C(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "world/area_kkj/kkj_25/B06D10", func_80240BA0_B075A0);
+ApiStatus func_80240BA0_B075A0(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    EffectInstance* effect = (EffectInstance*) evt_get_variable(script, *args++);
+    s32 var1 = evt_get_variable(script, *args++);
+    s32 var2 = evt_get_variable(script, *args++);
+    s32 var3 = evt_get_variable(script, *args++);
+
+    effect->data.starsOrbiting->pos.x = var1;
+    effect->data.starsOrbiting->pos.y = var2;
+    effect->data.starsOrbiting->pos.z = var3;
+
+    return ApiStatus_DONE2;
+}
 
 ApiStatus func_80240C60_B07660(Evt* script, s32 isInitialCall) {
     EffectInstance* effect;
