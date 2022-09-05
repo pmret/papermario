@@ -75,7 +75,26 @@ ApiStatus func_80243D28_8045A8(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80243D60_8045E0);
+extern s32 D_80262A70[];
+
+ApiStatus func_80243D60_8045E0(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32* ptr = (s32*) evt_get_variable(script, *args++);
+    s32 i;
+
+    if (ptr != NULL) {
+        for (i = 0; ptr[i] != 0; i++) {
+            D_80262A70[i] = ptr[i];
+        }
+        D_80262A70[i] = 0;
+    } else {
+        for (i = 0; i < 112; i++) {
+            D_80262A70[i] = i + 16;
+            D_80262A70[112] = 0;
+        }
+    }
+    return ApiStatus_DONE2;
+}
 
 extern s32 N(LetterDelivery_SavedNpcAnim);
 #include "world/common/LetterDelivery.inc.c"

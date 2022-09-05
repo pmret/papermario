@@ -19,9 +19,47 @@ INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_802418F0_7EC600);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_80241944_7EC654);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_8024197C_7EC68C);
+extern s32 D_80255BA0[];
 
-INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_80241A18_7EC728);
+ApiStatus func_8024197C_7EC68C(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32* ptr = (s32*) evt_get_variable(script, *args++);
+    s32 i;
+
+    if (ptr != NULL) {
+        for (i = 0; ptr[i] != 0; i++) {
+            D_80255BA0[i] = ptr[i];
+        }
+        D_80255BA0[i] = 0;
+    } else {
+        for (i = 0; i < 112; i++) {
+            D_80255BA0[i] = i + 16;
+            D_80255BA0[112] = 0;
+        }
+    }
+    return ApiStatus_DONE2;
+}
+
+extern s32 D_80255D68[];
+
+ApiStatus func_80241A18_7EC728(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32* ptr = (s32*) evt_get_variable(script, *args++);
+    s32 i;
+
+    if (ptr != NULL) {
+        for (i = 0; ptr[i] != 0; i++) {
+            D_80255D68[i] = ptr[i];
+        }
+        D_80255D68[i] = 0;
+    } else {
+        for (i = 0; i < 91; i++) {
+            D_80255D68[i] = i + 128;
+            D_80255D68[91] = 0;
+        }
+    }
+    return ApiStatus_DONE2;
+}
 
 extern s32 N(LetterDelivery_SavedNpcAnim);
 #include "world/common/LetterDelivery.inc.c"

@@ -63,7 +63,26 @@ ApiStatus func_80242B0C_825DCC(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_80242BA8_825E68);
+extern s32 D_8024E738[];
+
+ApiStatus func_80242BA8_825E68(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32* ptr = (s32*) evt_get_variable(script, *args++);
+    s32 i;
+
+    if (ptr != NULL) {
+        for (i = 0; ptr[i] != 0; i++) {
+            D_8024E738[i] = ptr[i];
+        }
+        D_8024E738[i] = 0;
+    } else {
+        for (i = 0; i < 91; i++) {
+            D_8024E738[i] = i + 128;
+            D_8024E738[91] = 0;
+        }
+    }
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_80242C44_825F04);
 
