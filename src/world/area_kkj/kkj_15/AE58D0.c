@@ -2,12 +2,9 @@
 
 ApiStatus func_80240340_AE58D0(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_safe(-4);
+    f32 var = EVT_FIXED_TO_FLOAT(script->varTable[2]);
     f32 angle;
     f32 mag;
-    f32 var;
-
-    var = (script->varTable[2] + 230000000);
-    var /= 1024.0f;
 
     mag = dist2D(50.0f, -200.0f, script->varTable[7], script->varTable[8]);
     angle = clamp_angle(atan2(50.0f, -200.0f, script->varTable[7], script->varTable[8]) - var);
