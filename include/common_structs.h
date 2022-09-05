@@ -1106,8 +1106,8 @@ typedef struct ItemEntity {
     /* 0x22 */ char unk_22[2];
     /* 0x24 */ u32* readPos;
     /* 0x28 */ u32* savedReadPos;
-    /* 0x2C */ s8 lookupRasterIndex;
-    /* 0x2D */ s8 lookupPaletteIndex;
+    /* 0x2C */ u8 lookupRasterIndex;
+    /* 0x2D */ u8 lookupPaletteIndex;
     /* 0x2E */ u8 nextUpdate;
     /* 0x2F */ u8 alpha;
     /* 0x30 */ f32 scale;
@@ -2317,7 +2317,7 @@ typedef struct SpriteShadingLightSource {
 } SpriteShadingLightSource; // size = 0x18
 
 typedef struct SpriteShadingProfile {
-    /* 0x00 */ s16 flags;
+    /* 0x00 */ u16 flags;
     /* 0x02 */ char unk_02[0x2];
     /* 0x04 */ SpriteShadingLightSource sources[7];
     /* 0xAC */ Color_RGB8 ambientColor;

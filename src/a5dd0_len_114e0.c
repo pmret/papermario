@@ -3,6 +3,7 @@
 #include "ld_addrs.h"
 #include "stdlib/stdarg.h"
 #include "entity.h"
+#include "hud_element.h"
 
 typedef struct GameMode {
     /* 0x00 */ u16 flags;
@@ -1008,8 +1009,8 @@ extern s32 D_80151304;
 extern s32 D_80151344;
 extern s32 entity_numEntities;
 extern s32 gEntityHeapBase;
-extern s32 gHudElementCacheTableRaster;
-extern s32 gHudElementCacheTablePalette[4];
+extern HudCacheEntry* gHudElementCacheTableRaster;
+extern HudCacheEntry* gHudElementCacheTablePalette;
 extern ModelNode** gCurrentModelTreeRoot;
 extern ModelTransformGroupList* gCurrentTransformGroups;
 extern s8 gMsgGlobalWaveCounter[0x4];

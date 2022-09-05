@@ -108,6 +108,11 @@ enum {
     HUD_ELEMENT_DRAW_FIRST_WITHOUT_CLIPPING = 2,
 };
 
+typedef struct HudCacheEntry {
+    /* 0x00 */ s32 id;
+    /* 0x04 */ u8* data;
+} HudCacheEntry; // size = 0x08;
+
 typedef struct PopupMenu {
     /* 0x000 */ HudScript* ptrIcon[32];
     /* 0x080 */ char unk_80[0x4];
