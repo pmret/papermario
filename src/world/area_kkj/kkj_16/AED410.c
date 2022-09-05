@@ -10,7 +10,9 @@ ApiStatus func_80240000_AED410(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus func_80240028_AED438(Evt* script, s32 isInitialCall) {
-    gPlayerStatus.unk_0D = evt_get_float_variable(script, *script->ptrReadPos);
+    Bytecode* args = script->ptrReadPos;
+    
+    gPlayerStatus.unk_0D = evt_get_float_variable(script, *args++);
     return ApiStatus_DONE2;
 }
 

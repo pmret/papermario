@@ -10,7 +10,9 @@ extern s32 D_80240C20_A7B120;
 extern s32 D_80240C24_A7B124;
 
 ApiStatus func_802402D0_A7A7D0(Evt* script, s32 isInitialCall) {
-    D_80240C24_A7B124 = evt_get_variable(script, *script->ptrReadPos);
+    Bytecode* args = script->ptrReadPos;
+
+    D_80240C24_A7B124 = evt_get_variable(script, *args++);
     D_80240C20_A7B120 = 1;
     return ApiStatus_DONE2;
 }

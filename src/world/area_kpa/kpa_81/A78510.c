@@ -10,14 +10,14 @@ extern s32 D_80240D9C_A7925C;
 // Needs data migrated
 #ifdef NON_MATCHING
 ApiStatus func_8024027C_A7873C(Evt* script, s32 isInitialCall) { 
-    s32* temp = script->ptrReadPos;
+    Bytecode* args = script->ptrReadPos;
     
-    if (isInitialCall != 0) {
+    if (isInitialCall) {
         D_80240D98_A79258 = 0;
     }
     if (D_80240D98_A79258 != 0) {
         D_80240D98_A79258 = 0;
-        evt_set_variable(script, *temp, D_80240D9C_A7925C);
+        evt_set_variable(script, *args++, D_80240D9C_A7925C);
         return ApiStatus_DONE2;
     }
     
@@ -30,7 +30,9 @@ INCLUDE_ASM(s32, "world/area_kpa/kpa_81/A78510", func_8024027C_A7873C);
 // Needs data migrated
 #ifdef NON_MATCHING
 ApiStatus func_802402D0_A78790(Evt* script, s32 isInitialCall) { 
-    D_80240D9C_A7925C = evt_get_variable(script, *script->ptrReadPos);
+    Bytecode* args = script->ptrReadPos;
+    
+    D_80240D9C_A7925C = evt_get_variable(script, *args++);
     D_80240D98_A79258 = 1;
     return ApiStatus_DONE2;
 }
