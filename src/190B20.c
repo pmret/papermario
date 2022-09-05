@@ -178,12 +178,12 @@ void func_80263300(void) {
         s16 itemID = playerData->invItems[i];
 
         if (itemID != 0) {
-            ItemData* ItemData = &gItemTable[itemID];
+            ItemData* itemData = &gItemTable[itemID];
 
-            if (ItemData->typeFlags & 2) {
+            if (itemData->typeFlags & 2) {
                 battleStatus->moveCategory = 2;
                 battleStatus->selectedItemID = playerData->invItems[i];
-                battleStatus->currentTargetListFlags = ItemData->targetFlags;
+                battleStatus->currentTargetListFlags = itemData->targetFlags;
                 player_create_target_list(player);
 
                 if (player->targetListLength != 0) {

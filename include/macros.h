@@ -106,6 +106,8 @@
 
 #define SPRITE_PIXEL_SCALE (5.0 / 7.0)
 
+#define ITEM_VIS_GROUP(itemID, visGroupID) ((visGroupID) << 16 | (itemID))
+
 /* common AI function and script variables */
 // ai script
 #define AI_TEMP_STATE                  functionTemp[0]

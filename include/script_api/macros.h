@@ -195,6 +195,8 @@
 /// Blocks for the given number of frames.
 #define EVT_WAIT_FRAMES(NUM_FRAMES)             EVT_CMD(EVT_OP_WAIT_FRAMES, NUM_FRAMES),
 
+#define EVT_WAIT(NUM_FRAMES)             EVT_CMD(EVT_OP_WAIT_FRAMES, NUM_FRAMES),
+
 /// Blocks for the given number of seconds.
 #define EVT_WAIT_SECS(NUM_SECONDS)              EVT_CMD(EVT_OP_WAIT_SECS, NUM_SECONDS),
 
