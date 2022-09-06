@@ -507,6 +507,7 @@ enum SoundIDs {
     SOUND_JR_TROOPA_SWIM            = 0x00000046,
     SOUND_BOO_SPOOK                 = 0x00000047,
     SOUND_52                        = 0x00000052,
+    SOUND_7D                        = 0x0000007D,
     SOUND_89                        = 0x00000089,
     SOUND_8A                        = 0x0000008A,
     SOUND_8B                        = 0x0000008B,
