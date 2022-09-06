@@ -3,4 +3,11 @@
 static char* N(exit_str_0) = "kpa_32";
 static char* N(exit_str_1) = "";
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_96/A927C0", func_80240000_A927C0);
+ApiStatus func_80240000_A927C0(Evt* script, s32 isInitialCall) {
+    if (gPlayerData.coins > 0) {
+        script->varTable[0] = FALSE;
+    } else {
+        script->varTable[0] = TRUE;
+    }
+    return ApiStatus_DONE2;
+}
