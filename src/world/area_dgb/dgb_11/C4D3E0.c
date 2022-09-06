@@ -44,9 +44,9 @@ EvtScript N(exitSingleDoor_80240170) = {
     EVT_SET(EVT_VAR(2), 21)
     EVT_SET(EVT_VAR(3), -1)
     EVT_EXEC(ExitSingleDoor)
-    EVT_WAIT_FRAMES(17)
+    EVT_WAIT(17)
     EVT_CALL(GotoMap, EVT_PTR("dgb_02"), 3)
-    EVT_WAIT_FRAMES(100)
+    EVT_WAIT(100)
     EVT_RETURN
     EVT_END
 };
@@ -84,7 +84,7 @@ EvtScript N(enterSingleDoor_80240224) = {
         EVT_IF_LE(EVT_VAR(1), EVT_VAR(3))
             EVT_BREAK_LOOP
         EVT_END_IF
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(PanToTarget, 0, 0, 0)
     EVT_CALL(DisablePlayerInput, FALSE)
@@ -118,7 +118,7 @@ EvtScript N(80240570) = {
         EVT_SET(EVT_VAR(1), EVT_VAR(3))
     EVT_END_IF
     EVT_CALL(SetCamTarget, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_GOTO(0)
     EVT_RETURN
     EVT_END
@@ -141,13 +141,13 @@ EvtScript N(8024062C) = {
         EVT_IF_EQ(GF_DGB10_BoardedFloor3, 0)
             EVT_CALL(DisablePlayerPhysics, TRUE)
             EVT_CALL(SetPlayerActionState, 3)
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
             EVT_SET(EVT_VAR(3), 500)
             EVT_EXEC_GET_TID(N(80240570), EVT_VAR(10))
             EVT_CALL(SetPlayerJumpscale, EVT_FIXED(0.7))
             EVT_EXEC_GET_TID(N(80240600), EVT_VAR(11))
             EVT_LOOP(0)
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
                 EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
                 EVT_IF_GE(EVT_VAR(1), 165)
                     EVT_BREAK_LOOP
@@ -158,7 +158,7 @@ EvtScript N(8024062C) = {
             EVT_KILL_THREAD(EVT_VAR(11))
             EVT_CALL(SetPlayerAnimation, 524309)
             EVT_CALL(ShakeCam, 0, 0, 20, EVT_FIXED(1.0))
-            EVT_WAIT_FRAMES(10)
+            EVT_WAIT(10)
             EVT_CALL(SetPlayerAnimation, ANIM_10002)
             EVT_CALL(SetPlayerJumpscale, EVT_FIXED(0.0))
             EVT_CALL(PlayerJump1, 375, 25, -250, 10)
@@ -168,7 +168,7 @@ EvtScript N(8024062C) = {
             EVT_CALL(PlayerJump, 375, 0, -175, 15)
             EVT_KILL_THREAD(EVT_VAR(10))
             EVT_CALL(SetPlayerActionState, 0)
-            EVT_WAIT_FRAMES(2)
+            EVT_WAIT(2)
             EVT_CALL(SetZoneEnabled, 5, 1)
             EVT_CALL(DisablePlayerPhysics, FALSE)
             EVT_CALL(DisablePlayerInput, FALSE)
@@ -176,11 +176,11 @@ EvtScript N(8024062C) = {
         EVT_ELSE
             EVT_CALL(DisablePlayerPhysics, TRUE)
             EVT_CALL(SetPlayerActionState, 3)
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
             EVT_THREAD
-                EVT_WAIT_FRAMES(8)
+                EVT_WAIT(8)
                 EVT_CALL(GotoMap, EVT_PTR("dgb_10"), 1)
-                EVT_WAIT_FRAMES(100)
+                EVT_WAIT(100)
             EVT_END_THREAD
             EVT_SET(EVT_VAR(3), 500)
             EVT_EXEC_GET_TID(N(80240570), EVT_VAR(10))
@@ -190,14 +190,14 @@ EvtScript N(8024062C) = {
         EVT_END_IF
     EVT_ELSE
         EVT_CALL(SetPlayerActionState, 3)
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
         EVT_SET(EVT_VAR(3), 25)
         EVT_CALL(SetPlayerJumpscale, EVT_FIXED(0.7))
         EVT_CALL(PlayerJump, 375, 0, -175, 15)
         EVT_SET(EVT_AREA_FLAG(2), 0)
         EVT_KILL_THREAD(EVT_VAR(10))
         EVT_CALL(SetPlayerActionState, 0)
-        EVT_WAIT_FRAMES(2)
+        EVT_WAIT(2)
         EVT_CALL(SetZoneEnabled, 5, 1)
         EVT_CALL(DisablePlayerInput, FALSE)
         EVT_SET(EVT_AREA_FLAG(3), 0)

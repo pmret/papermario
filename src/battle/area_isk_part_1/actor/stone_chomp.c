@@ -342,7 +342,7 @@ EvtScript N(idle_80221D00) = {
         EVT_IF_NOT_FLAG(LW(0), STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
             EVT_BREAK_LOOP
         EVT_END_IF
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_80221504)))
     EVT_CALL(SetActorIdleJumpGravity, ACTOR_SELF, EVT_FLOAT(1.0))
@@ -358,7 +358,7 @@ EvtScript N(idle_80221D00) = {
         EVT_IF_NOT_FLAG(LW(0), STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
             EVT_BREAK_LOOP
         EVT_END_IF
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(SetActorIdleJumpGravity, ACTOR_SELF, EVT_FLOAT(1.0))
     EVT_CALL(SetIdleGoalToHome, ACTOR_SELF)
@@ -367,14 +367,14 @@ EvtScript N(idle_80221D00) = {
     EVT_CALL(IdleJumpToGoal, ACTOR_SELF, 6, 1)
     EVT_CALL(RandInt, 10, LW(0))
     EVT_ADD(LW(0), 1)
-    EVT_WAIT_FRAMES(LW(0))
+    EVT_WAIT(LW(0))
     EVT_LOOP(0)
         EVT_EXEC_WAIT(N(80221BC4))
         EVT_CALL(GetStatusFlags, ACTOR_SELF, LW(0))
         EVT_IF_NOT_FLAG(LW(0), STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
             EVT_BREAK_LOOP
         EVT_END_IF
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_802214C8)))
     EVT_CALL(SetActorIdleJumpGravity, ACTOR_SELF, EVT_FLOAT(0.8))
@@ -388,7 +388,7 @@ EvtScript N(idle_80221D00) = {
         EVT_IF_NOT_FLAG(LW(0), STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
             EVT_BREAK_LOOP
         EVT_END_IF
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_80221504)))
     EVT_CALL(SetActorIdleJumpGravity, ACTOR_SELF, EVT_FLOAT(0.8))
@@ -403,7 +403,7 @@ EvtScript N(idle_80221D00) = {
         EVT_IF_NOT_FLAG(LW(0), STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
             EVT_BREAK_LOOP
         EVT_END_IF
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(SetActorIdleJumpGravity, ACTOR_SELF, EVT_FLOAT(0.8))
     EVT_CALL(SetIdleGoalToHome, ACTOR_SELF)
@@ -417,7 +417,7 @@ EvtScript N(idle_80221D00) = {
         EVT_IF_NOT_FLAG(LW(0), STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
             EVT_BREAK_LOOP
         EVT_END_IF
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_8022148C)))
     EVT_CALL(SetActorIdleJumpGravity, ACTOR_SELF, EVT_FLOAT(0.8))
@@ -427,7 +427,7 @@ EvtScript N(idle_80221D00) = {
     EVT_CALL(IdleJumpToGoal, ACTOR_SELF, 6, 1)
     EVT_CALL(RandInt, 10, LW(0))
     EVT_ADD(LW(0), 10)
-    EVT_WAIT_FRAMES(LW(0))
+    EVT_WAIT(LW(0))
     EVT_GOTO(0)
     EVT_RETURN
     EVT_END
@@ -435,7 +435,7 @@ EvtScript N(idle_80221D00) = {
 
 EvtScript N(80222324) = {
     EVT_LABEL(0)
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_CALL(b_area_isk_part_1_ChompChainUpdate)
     EVT_GOTO(0)
     EVT_RETURN
@@ -546,7 +546,7 @@ EvtScript N(handleEvent_80222364) = {
             EVT_SET_CONST(LW(0), 1)
             EVT_SET_CONST(LW(1), NPC_ANIM_stone_chomp_Palette_00_Anim_6)
             EVT_EXEC_WAIT(DoNormalHit)
-            EVT_WAIT_FRAMES(10)
+            EVT_WAIT(10)
             EVT_SET_CONST(LW(0), 1)
             EVT_SET_CONST(LW(1), NPC_ANIM_stone_chomp_Palette_00_Anim_6)
             EVT_EXEC_WAIT(DoDeath)
@@ -600,7 +600,7 @@ EvtScript N(handleEvent_80222364) = {
             EVT_EXEC_WAIT(DoImmune)
             EVT_CALL(SetAnimationRate, ACTOR_SELF, 1, EVT_FLOAT(1.0))
         EVT_CASE_EQ(EVENT_UP_AND_AWAY)
-            EVT_WAIT_FRAMES(1000)
+            EVT_WAIT(1000)
         EVT_CASE_DEFAULT
     EVT_END_SWITCH
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LW(0))
@@ -634,7 +634,7 @@ EvtScript N(takeTurn_80222ED0) = {
     EVT_CALL(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x3F9)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_stone_chomp_Palette_00_Anim_5)
-    EVT_WAIT_FRAMES(15)
+    EVT_WAIT(15)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x10F)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LW(0), 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LW(0))
@@ -664,7 +664,7 @@ EvtScript N(takeTurn_80222ED0) = {
             EVT_CALL(JumpToGoal, ACTOR_SELF, 4, FALSE, TRUE, FALSE)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x3F9)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_stone_chomp_Palette_00_Anim_4)
-            EVT_WAIT_FRAMES(20)
+            EVT_WAIT(20)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(YieldTurn)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
@@ -698,7 +698,7 @@ EvtScript N(takeTurn_80222ED0) = {
     EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
     EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
     EVT_CALL(SetPartPos, ACTOR_SELF, 2, LW(0), LW(1), LW(2))
-    EVT_WAIT_FRAMES(2)
+    EVT_WAIT(2)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LW(0), 0, 0, 0, 3, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SWITCH(LW(0))
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
@@ -724,7 +724,7 @@ EvtScript N(takeTurn_80222ED0) = {
             EVT_CALL(JumpToGoal, ACTOR_SELF, 4, FALSE, TRUE, FALSE)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x3F9)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_stone_chomp_Palette_00_Anim_1)
-            EVT_WAIT_FRAMES(8)
+            EVT_WAIT(8)
             EVT_CALL(YieldTurn)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))

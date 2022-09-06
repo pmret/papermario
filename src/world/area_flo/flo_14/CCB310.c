@@ -177,14 +177,14 @@ EvtScript N(80242C00) = {
         EVT_ADD(EVT_VAR(2), EVT_VAR(14))
         EVT_CALL(PlayEffect, 0xD, EVT_VAR(0), EVT_VAR(2), EVT_VAR(1), EVT_VAR(3), 0, 0, 0, 0, 0, 0, 0, 0, 0)
     EVT_END_LOOP
-    EVT_WAIT_FRAMES(EVT_VAR(15))
+    EVT_WAIT(EVT_VAR(15))
     EVT_LABEL(0)
     EVT_CALL(RandInt, EVT_VAR(12), EVT_VAR(0))
     EVT_CALL(RandInt, EVT_VAR(13), EVT_VAR(1))
     EVT_ADD(EVT_VAR(0), EVT_VAR(10))
     EVT_ADD(EVT_VAR(1), EVT_VAR(11))
     EVT_CALL(PlayEffect, 0xD, EVT_VAR(0), EVT_VAR(14), EVT_VAR(1), 200, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-    EVT_WAIT_FRAMES(EVT_VAR(15))
+    EVT_WAIT(EVT_VAR(15))
     EVT_GOTO(0)
     EVT_RETURN
     EVT_END
@@ -203,29 +203,29 @@ EvtScript N(80242EAC) = {
     EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_CALL(N(UnkFunc43))
     EVT_IF_EQ(EVT_VAR(0), 0)
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
         EVT_GOTO(0)
     EVT_END_IF
     EVT_THREAD
-        EVT_WAIT_FRAMES(5)
+        EVT_WAIT(5)
         EVT_CALL(EnableModel, EVT_VAR(6), 1)
     EVT_END_THREAD
     EVT_IF_NE(EVT_VAR(10), 0)
         EVT_THREAD
-            EVT_WAIT_FRAMES(5)
+            EVT_WAIT(5)
             EVT_SET(EVT_VAR(0), EVT_VAR(3))
             EVT_SET(EVT_VAR(1), EVT_VAR(4))
             EVT_SET(EVT_VAR(2), EVT_VAR(5))
             EVT_ADD(EVT_VAR(1), 10)
             EVT_ADD(EVT_VAR(2), 8)
             EVT_CALL(PlayEffect, 0x11, 4, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 15, 0, 0, 0, 0, 0, 0, 0, 0)
-            EVT_WAIT_FRAMES(15)
+            EVT_WAIT(15)
             EVT_SUB(EVT_VAR(1), 10)
             EVT_CALL(MakeItemEntity, EVT_VAR(10), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 14, 0)
         EVT_END_THREAD
     EVT_END_IF
     EVT_THREAD
-        EVT_WAIT_FRAMES(10)
+        EVT_WAIT(10)
         EVT_CALL(PlaySoundAt, 0xF8, 0, EVT_VAR(3), EVT_VAR(4), EVT_VAR(5))
     EVT_END_THREAD
     EVT_CALL(MakeLerp, 0, 180, 20, 2)
@@ -234,7 +234,7 @@ EvtScript N(80242EAC) = {
     EVT_CALL(RotateModel, EVT_VAR(8), EVT_VAR(0), 1, 0, 0)
     EVT_CALL(RotateModel, EVT_VAR(9), EVT_VAR(0), 1, 0, 0)
     EVT_IF_EQ(EVT_VAR(1), 1)
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
         EVT_GOTO(1)
     EVT_END_IF
     EVT_CALL(EnableModel, EVT_VAR(7), 0)
@@ -253,7 +253,7 @@ EvtScript N(802431D0) = {
         EVT_CALL(UpdateLerp)
         EVT_CALL(GetPlayerPos, EVT_VAR(2), EVT_VAR(3), EVT_VAR(4))
         EVT_CALL(SetCamTarget, 0, EVT_VAR(2), EVT_VAR(0), EVT_VAR(4))
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
         EVT_IF_EQ(EVT_VAR(1), 0)
             EVT_BREAK_LOOP
         EVT_END_IF
@@ -261,7 +261,7 @@ EvtScript N(802431D0) = {
     EVT_LOOP(0)
         EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
         EVT_CALL(SetCamTarget, 0, EVT_VAR(0), 48, EVT_VAR(2))
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_RETURN
     EVT_END
@@ -274,7 +274,7 @@ EvtScript N(802432E8) = {
         EVT_ADD(EVT_VAR(1), 20)
         EVT_ADD(EVT_VAR(2), -5)
         EVT_CALL(SetNpcPos, NPC_PARTNER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_RETURN
     EVT_END
@@ -291,7 +291,7 @@ Vec3f N(vectorList_80243384)[] = {
 };
 
 EvtScript N(80243420) = {
-    EVT_WAIT_FRAMES(20)
+    EVT_WAIT(20)
     EVT_CALL(PlaySound, 0x80000023)
     EVT_CALL(LoadPath, 165, EVT_PTR(N(vectorList_80243384)), 13, 10)
     EVT_LABEL(0)
@@ -301,7 +301,7 @@ EvtScript N(80243420) = {
     EVT_ADD(EVT_VAR(3), -10)
     EVT_CALL(SetPlayerPos, EVT_VAR(1), EVT_VAR(2), EVT_VAR(3))
     EVT_CALL(N(func_8024046C_CCB77C), EVT_VAR(1), EVT_VAR(2), EVT_VAR(3))
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_IF_EQ(EVT_VAR(0), 1)
         EVT_GOTO(0)
     EVT_END_IF
@@ -319,7 +319,7 @@ EvtScript N(8024352C) = {
     EVT_CALL(GetCurrentPartner, EVT_VAR(0))
     EVT_IF_NE(EVT_VAR(0), 0)
         EVT_CALL(func_802D2B6C)
-        EVT_WAIT_FRAMES(20)
+        EVT_WAIT(20)
     EVT_END_IF
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(DisablePartnerAI, 0)
@@ -333,13 +333,13 @@ EvtScript N(8024352C) = {
         EVT_CALL(SetPlayerActionState, 10)
     EVT_END_THREAD
     EVT_THREAD
-        EVT_WAIT_FRAMES(5)
+        EVT_WAIT(5)
         EVT_ADD(EVT_VAR(2), -15)
         EVT_CALL(SetNpcJumpscale, NPC_PARTNER, EVT_FIXED(0.2))
         EVT_CALL(NpcJump0, NPC_PARTNER, 531, 68, EVT_VAR(2), 10)
     EVT_END_THREAD
     EVT_EXEC_GET_TID(N(802431D0), EVT_MAP_VAR(9))
-    EVT_WAIT_FRAMES(15)
+    EVT_WAIT(15)
     EVT_CALL(N(func_802403D4_CCB6E4))
     EVT_IF_NE(EVT_VAR(14), 0)
         EVT_EXEC_GET_TID(N(802432E8), EVT_VAR(14))
@@ -388,7 +388,7 @@ EvtScript N(80243870) = {
             EVT_ADDF(EVT_VAR(4), EVT_VAR(7))
             EVT_ADDF(EVT_VAR(5), EVT_VAR(8))
         EVT_END_IF
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_SET(EVT_VAR(7), -30)
     EVT_SET(EVT_VAR(8), -40)
@@ -400,7 +400,7 @@ EvtScript N(80243870) = {
         EVT_CALL(TranslateModel, 123, EVT_VAR(4), EVT_VAR(5), EVT_VAR(6))
         EVT_ADDF(EVT_VAR(4), EVT_VAR(7))
         EVT_ADDF(EVT_VAR(6), EVT_VAR(8))
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_SET(EVT_AREA_FLAG(36), 0)
     EVT_SET(EVT_AREA_FLAG(37), 1)
@@ -419,7 +419,7 @@ EvtScript N(80243B1C) = {
     EVT_SET(EVT_VAR(15), EVT_VAR(0))
     EVT_LABEL(0)
     EVT_IF_EQ(EVT_AREA_FLAG(35), 1)
-        EVT_WAIT_FRAMES(10)
+        EVT_WAIT(10)
         EVT_GOTO(0)
     EVT_END_IF
     EVT_USE_BUF(EVT_PTR(N(D_802431CC_CCE4DC)))
@@ -427,7 +427,7 @@ EvtScript N(80243B1C) = {
     EVT_IF_EQ(EVT_VAR(0), 0)
         EVT_CALL(RandInt, 10, EVT_VAR(0))
         EVT_ADD(EVT_VAR(0), 1)
-        EVT_WAIT_FRAMES(EVT_VAR(0))
+        EVT_WAIT(EVT_VAR(0))
         EVT_GOTO(0)
     EVT_END_IF
     EVT_CALL(EnableModel, EVT_VAR(15), 1)
@@ -465,7 +465,7 @@ EvtScript N(80243B1C) = {
         EVT_ADDF(EVT_VAR(9), EVT_VAR(14))
         EVT_CALL(TranslateModel, EVT_VAR(15), EVT_VAR(4), EVT_VAR(5), EVT_VAR(6))
         EVT_CALL(ScaleModel, EVT_VAR(15), EVT_VAR(9), EVT_VAR(9), EVT_VAR(9))
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(EnableModel, EVT_VAR(15), 0)
     EVT_GOTO(0)

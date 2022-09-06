@@ -384,7 +384,7 @@ EvtScript N(handleEvent_802387F0) = {
             EVT_THREAD
                 EVT_SET(LW(0), 0)
                 EVT_LOOP(80)
-                    EVT_WAIT_FRAMES(1)
+                    EVT_WAIT(1)
                     EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, LW(0))
                     EVT_ADD(LW(0), 33)
                 EVT_END_LOOP
@@ -395,7 +395,7 @@ EvtScript N(handleEvent_802387F0) = {
             EVT_ADD(LW(1), 200)
             EVT_CALL(SetGoalPos, ACTOR_PARTNER, LW(0), LW(1), LW(2))
             EVT_CALL(FlyToGoal, ACTOR_PARTNER, 10, 0, 0)
-            EVT_WAIT_FRAMES(50)
+            EVT_WAIT(50)
             EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
             EVT_CALL(GetGoalPos, ACTOR_PARTNER, LW(0), LW(1), LW(2))
             EVT_ADD(LW(1), 200)
@@ -449,7 +449,7 @@ EvtScript N(handleEvent_802387F0) = {
             EVT_THREAD
                 EVT_SET(LW(0), 0)
                 EVT_LOOP(80)
-                    EVT_WAIT_FRAMES(1)
+                    EVT_WAIT(1)
                     EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, LW(0))
                     EVT_ADD(LW(0), 33)
                 EVT_END_LOOP
@@ -460,7 +460,7 @@ EvtScript N(handleEvent_802387F0) = {
             EVT_ADD(LW(1), 200)
             EVT_CALL(SetGoalPos, ACTOR_PARTNER, LW(0), LW(1), LW(2))
             EVT_CALL(FlyToGoal, ACTOR_PARTNER, 10, 0, 0)
-            EVT_WAIT_FRAMES(50)
+            EVT_WAIT(50)
             EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
             EVT_CALL(GetGoalPos, ACTOR_PARTNER, LW(0), LW(1), LW(2))
             EVT_ADD(LW(1), 200)
@@ -506,7 +506,7 @@ EvtScript N(handleEvent_802387F0) = {
             EVT_SET(LW(2), 0)
             EVT_EXEC_WAIT(D_802977BC)
             EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, NPC_ANIM_battle_bombette_Palette_00_Anim_B)
-            EVT_WAIT_FRAMES(8)
+            EVT_WAIT(8)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(GetActorPos, ACTOR_PARTNER, LW(0), LW(1), LW(2))
             EVT_SET(LW(10), 0)
@@ -524,7 +524,7 @@ EvtScript N(handleEvent_802387F0) = {
             EVT_THREAD
                 EVT_SET(LW(0), 0)
                 EVT_LOOP(80)
-                    EVT_WAIT_FRAMES(1)
+                    EVT_WAIT(1)
                     EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, LW(0))
                     EVT_ADD(LW(0), 33)
                 EVT_END_LOOP
@@ -535,7 +535,7 @@ EvtScript N(handleEvent_802387F0) = {
             EVT_ADD(LW(1), 200)
             EVT_CALL(SetGoalPos, ACTOR_PARTNER, LW(0), LW(1), LW(2))
             EVT_CALL(FlyToGoal, ACTOR_PARTNER, 10, 0, 0)
-            EVT_WAIT_FRAMES(50)
+            EVT_WAIT(50)
             EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
             EVT_CALL(GetGoalPos, ACTOR_PARTNER, LW(0), LW(1), LW(2))
             EVT_ADD(LW(1), 200)
@@ -572,7 +572,7 @@ EvtScript N(handleEvent_802387F0) = {
             EVT_SET_CONST(LW(0), 1)
             EVT_SET_CONST(LW(1), NPC_ANIM_battle_bombette_Palette_00_Anim_16)
             EVT_EXEC_WAIT(D_80297814)
-            EVT_WAIT_FRAMES(10)
+            EVT_WAIT(10)
         EVT_END_CASE_GROUP
         EVT_CASE_DEFAULT
     EVT_END_SWITCH
@@ -690,26 +690,26 @@ EvtScript N(80239E8C) = {
     EVT_CALL(SetGoalPos, ACTOR_PARTNER, LW(0), LW(1), LW(2))
     EVT_CALL(JumpToGoal, ACTOR_PARTNER, 25, FALSE, TRUE, FALSE)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, NPC_ANIM_battle_bombette_Palette_00_Anim_E)
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, NPC_ANIM_battle_bombette_Palette_00_Anim_11)
     EVT_SUB(LW(0), 30)
     EVT_CALL(SetGoalPos, ACTOR_PARTNER, LW(0), LW(1), LW(2))
     EVT_CALL(JumpToGoal, ACTOR_PARTNER, 8, FALSE, TRUE, FALSE)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, NPC_ANIM_battle_bombette_Palette_00_Anim_E)
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, NPC_ANIM_battle_bombette_Palette_00_Anim_11)
     EVT_SUB(LW(0), 20)
     EVT_CALL(SetGoalPos, ACTOR_PARTNER, LW(0), LW(1), LW(2))
     EVT_CALL(JumpToGoal, ACTOR_PARTNER, 6, FALSE, TRUE, FALSE)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, NPC_ANIM_battle_bombette_Palette_00_Anim_E)
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, NPC_ANIM_battle_bombette_Palette_00_Anim_11)
     EVT_SUB(LW(0), 10)
     EVT_CALL(JumpToGoal, ACTOR_PARTNER, 4, FALSE, TRUE, FALSE)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, NPC_ANIM_battle_bombette_Palette_00_Anim_E)
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, NPC_ANIM_battle_bombette_Palette_00_Anim_4)
-    EVT_WAIT_FRAMES(8)
+    EVT_WAIT(8)
     EVT_CALL(ResetActorSounds, ACTOR_PARTNER, 0)
     EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
     EVT_CALL(SetActorSpeed, ACTOR_PARTNER, EVT_FLOAT(5.0))
@@ -731,26 +731,26 @@ EvtScript N(8023A1AC) = {
     EVT_CALL(SetGoalPos, ACTOR_PARTNER, LW(0), LW(1), LW(2))
     EVT_CALL(JumpToGoal, ACTOR_PARTNER, 15, FALSE, TRUE, FALSE)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, NPC_ANIM_battle_bombette_Palette_00_Anim_E)
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, NPC_ANIM_battle_bombette_Palette_00_Anim_11)
     EVT_SUB(LW(0), 30)
     EVT_CALL(SetGoalPos, ACTOR_PARTNER, LW(0), LW(1), LW(2))
     EVT_CALL(JumpToGoal, ACTOR_PARTNER, 8, FALSE, TRUE, FALSE)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, NPC_ANIM_battle_bombette_Palette_00_Anim_E)
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, NPC_ANIM_battle_bombette_Palette_00_Anim_11)
     EVT_SUB(LW(0), 20)
     EVT_CALL(SetGoalPos, ACTOR_PARTNER, LW(0), LW(1), LW(2))
     EVT_CALL(JumpToGoal, ACTOR_PARTNER, 6, FALSE, TRUE, FALSE)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, NPC_ANIM_battle_bombette_Palette_00_Anim_E)
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, NPC_ANIM_battle_bombette_Palette_00_Anim_11)
     EVT_SUB(LW(0), 10)
     EVT_CALL(JumpToGoal, ACTOR_PARTNER, 4, FALSE, TRUE, FALSE)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, NPC_ANIM_battle_bombette_Palette_00_Anim_E)
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, NPC_ANIM_battle_bombette_Palette_00_Anim_4)
-    EVT_WAIT_FRAMES(8)
+    EVT_WAIT(8)
     EVT_CALL(ResetActorSounds, ACTOR_PARTNER, 0)
     EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
     EVT_CALL(SetActorSpeed, ACTOR_PARTNER, EVT_FLOAT(5.0))
@@ -772,9 +772,9 @@ EvtScript N(8023A4F8) = {
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, NPC_ANIM_battle_bombette_Palette_00_Anim_F)
     EVT_LOOP(15)
         EVT_CALL(SetActorDispOffset, ACTOR_PARTNER, EVT_FLOAT(0.5), 0, 0)
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
         EVT_CALL(SetActorDispOffset, ACTOR_PARTNER, EVT_FLOAT(-0.5), 0, 0)
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_RETURN
     EVT_END
@@ -783,9 +783,9 @@ EvtScript N(8023A4F8) = {
 EvtScript N(8023A584) = {
     EVT_LOOP(15)
         EVT_CALL(SetActorDispOffset, ACTOR_PARTNER, EVT_FLOAT(0.5), 0, 0)
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
         EVT_CALL(SetActorDispOffset, ACTOR_PARTNER, EVT_FLOAT(-0.5), 0, 0)
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_RETURN
     EVT_END
@@ -795,7 +795,7 @@ EvtScript N(8023A5F8) = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_BODY_SLAM)
     EVT_CALL(action_command_body_slam_CreateHudElements)
     EVT_CALL(SetupMashMeter, 1, 100, 0, 0, 0, 0)
-    EVT_WAIT_FRAMES(10)
+    EVT_WAIT(10)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_48)
     EVT_CALL(InitTargetIterator)
     EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
@@ -807,7 +807,7 @@ EvtScript N(8023A5F8) = {
             EVT_SET(LF(2), 1)
             EVT_BREAK_LOOP
         EVT_END_IF
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(MoveBattleCamOver, 65)
     EVT_IF_EQ(LF(2), 1)
@@ -820,7 +820,7 @@ EvtScript N(8023A5F8) = {
                 EVT_SET(LF(0), 1)
                 EVT_BREAK_LOOP
             EVT_END_IF
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
         EVT_END_LOOP
         EVT_IF_EQ(LF(0), 1)
             EVT_KILL_THREAD(LW(10))
@@ -834,7 +834,7 @@ EvtScript N(8023A5F8) = {
                 EVT_SET(LF(0), 1)
                 EVT_BREAK_LOOP
             EVT_END_IF
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
         EVT_END_LOOP
         EVT_IF_EQ(LF(0), 1)
             EVT_KILL_THREAD(LW(10))
@@ -848,7 +848,7 @@ EvtScript N(8023A5F8) = {
                     EVT_SET(LF(0), 1)
                     EVT_BREAK_LOOP
                 EVT_END_IF
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
             EVT_END_LOOP
             EVT_IF_EQ(LF(0), 1)
                 EVT_KILL_THREAD(LW(10))
@@ -872,7 +872,7 @@ EvtScript N(8023A5F8) = {
                     EVT_BREAK_LOOP
                 EVT_END_IF
             EVT_END_IF
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
         EVT_END_LOOP
         EVT_IF_EQ(LF(0), 1)
             EVT_KILL_THREAD(LW(10))
@@ -894,7 +894,7 @@ EvtScript N(8023A5F8) = {
                     EVT_BREAK_LOOP
                 EVT_END_IF
             EVT_END_IF
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
         EVT_END_LOOP
         EVT_IF_EQ(LF(0), 1)
             EVT_KILL_THREAD(LW(10))
@@ -908,7 +908,7 @@ EvtScript N(8023A5F8) = {
                     EVT_SET(LF(0), 1)
                     EVT_BREAK_LOOP
                 EVT_END_IF
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
             EVT_END_LOOP
             EVT_IF_EQ(LF(0), 1)
                 EVT_KILL_THREAD(LW(10))
@@ -918,7 +918,7 @@ EvtScript N(8023A5F8) = {
     EVT_END_IF
     EVT_LABEL(10)
     EVT_CALL(SetActorDispOffset, ACTOR_PARTNER, 0, 0, 0)
-    EVT_WAIT_FRAMES(2)
+    EVT_WAIT(2)
     EVT_CALL(CloseActionCommandInfo)
     EVT_CALL(PartnerTestEnemy, LW(0), 0, 149, 0, 1, 16)
     EVT_IF_EQ(LW(0), 6)
@@ -937,7 +937,7 @@ EvtScript N(8023A5F8) = {
             EVT_LOOP(10)
                 EVT_ADD(LW(0), -72)
                 EVT_CALL(SetActorRotation, ACTOR_PARTNER, 0, 0, LW(0))
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
             EVT_END_LOOP
             EVT_CALL(SetActorRotationOffset, ACTOR_PARTNER, 0, 0, 0)
         EVT_END_THREAD
@@ -947,7 +947,7 @@ EvtScript N(8023A5F8) = {
         EVT_THREAD
             EVT_CALL(func_80238244_6FAF54)
         EVT_END_THREAD
-        EVT_WAIT_FRAMES(20)
+        EVT_WAIT(20)
         EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
         EVT_CALL(SetActorSpeed, ACTOR_PARTNER, EVT_FLOAT(5.0))
         EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, NPC_ANIM_battle_bombette_Palette_00_Anim_8)
@@ -1030,7 +1030,7 @@ EvtScript N(8023B228) = {
         EVT_CASE_EQ(148)
             EVT_CALL(SetupMashMeter, 5, 35, 60, 80, 99, 100)
     EVT_END_SWITCH
-    EVT_WAIT_FRAMES(10)
+    EVT_WAIT(10)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_48)
     EVT_CALL(GetMenuSelection, LW(0), LW(1), LW(2))
     EVT_SWITCH(LW(2))
@@ -1082,7 +1082,7 @@ EvtScript N(8023B228) = {
         EVT_CASE_EQ(148)
             EVT_SET(LW(0), 50)
     EVT_END_SWITCH
-    EVT_WAIT_FRAMES(LW(0))
+    EVT_WAIT(LW(0))
     EVT_CALL(GetMenuSelection, LW(0), LW(1), LW(2))
     EVT_SWITCH(LW(2))
         EVT_CASE_EQ(146)
@@ -1099,9 +1099,9 @@ EvtScript N(8023B228) = {
     EVT_END_SWITCH
     EVT_LOOP(LW(0))
         EVT_CALL(SetActorDispOffset, ACTOR_PARTNER, EVT_FLOAT(0.5), 0, 0)
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
         EVT_CALL(SetActorDispOffset, ACTOR_PARTNER, EVT_FLOAT(-0.5), 0, 0)
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(SetActorDispOffset, ACTOR_PARTNER, 0, 0, 0)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
@@ -1200,7 +1200,7 @@ EvtScript N(8023B228) = {
             EVT_CASE_EQ(146)
             EVT_CASE_EQ(147)
                 EVT_CALL(GetActorPos, ACTOR_PARTNER, LW(0), LW(1), LW(2))
-                EVT_WAIT_FRAMES(8)
+                EVT_WAIT(8)
                 EVT_IF_GT(LW(10), 0)
                     EVT_CALL(PlayEffect, EFFECT_RED_IMPACT, 0, LW(0), 0, LW(2), 1, 0, 0, 0, 0, 0, 0, 0, 0)
                 EVT_ELSE
@@ -1208,13 +1208,13 @@ EvtScript N(8023B228) = {
                 EVT_END_IF
             EVT_CASE_EQ(148)
                 EVT_SET(LW(10), 0)
-                EVT_WAIT_FRAMES(10)
+                EVT_WAIT(10)
                 EVT_CALL(func_80238000_6FAD10, 88, 33, 5)
-                EVT_WAIT_FRAMES(10)
+                EVT_WAIT(10)
                 EVT_CALL(func_80238000_6FAD10, 18, 73, 5)
-                EVT_WAIT_FRAMES(10)
+                EVT_WAIT(10)
                 EVT_CALL(func_80238000_6FAD10, 120, 19, 5)
-                EVT_WAIT_FRAMES(10)
+                EVT_WAIT(10)
         EVT_END_SWITCH
     EVT_END_THREAD
     EVT_SET(LF(0), 0)
@@ -1276,7 +1276,7 @@ EvtScript N(8023B228) = {
                     EVT_CALL(PartnerDamageEnemy, LW(0), 805306880, 0, 0, LW(15), 48)
             EVT_END_SWITCH
             EVT_LABEL(11)
-            EVT_WAIT_FRAMES(5)
+            EVT_WAIT(5)
             EVT_CALL(ChooseNextTarget, 0, LW(0))
             EVT_IF_NE(LW(0), -1)
                 EVT_GOTO(10)
@@ -1297,7 +1297,7 @@ EvtScript N(8023B228) = {
             EVT_THREAD
                 EVT_SET(LW(0), 0)
                 EVT_LOOP(80)
-                    EVT_WAIT_FRAMES(1)
+                    EVT_WAIT(1)
                     EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, LW(0))
                     EVT_ADD(LW(0), 33)
                 EVT_END_LOOP
@@ -1309,7 +1309,7 @@ EvtScript N(8023B228) = {
             EVT_ADD(LW(1), 200)
             EVT_CALL(SetGoalPos, ACTOR_PARTNER, LW(0), LW(1), LW(2))
             EVT_CALL(FlyToGoal, ACTOR_PARTNER, 10, 0, 0)
-            EVT_WAIT_FRAMES(50)
+            EVT_WAIT(50)
             EVT_CALL(func_80280818)
             EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
             EVT_CALL(GetGoalPos, ACTOR_PARTNER, LW(0), LW(1), LW(2))
@@ -1340,15 +1340,15 @@ EvtScript N(8023C990) = {
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(MoveBattleCamOver, 1)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, NPC_ANIM_battle_bombette_Palette_00_Anim_1A)
-    EVT_WAIT_FRAMES(5)
+    EVT_WAIT(5)
     EVT_CALL(PartnerTestEnemy, LW(0), 0, 16, 0, 1, 16)
-    EVT_WAIT_FRAMES(10)
+    EVT_WAIT(10)
     EVT_CALL(StopSound, 647)
     EVT_LOOP(7)
         EVT_CALL(SetActorDispOffset, ACTOR_PARTNER, EVT_FLOAT(0.5), 0, 0)
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
         EVT_CALL(SetActorDispOffset, ACTOR_PARTNER, EVT_FLOAT(-0.5), 0, 0)
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(SetActorDispOffset, ACTOR_PARTNER, 0, 0, 0)
     EVT_SET(LW(10), 0)
@@ -1395,7 +1395,7 @@ EvtScript N(8023C990) = {
             EVT_THREAD
                 EVT_SET(LW(0), 0)
                 EVT_LOOP(80)
-                    EVT_WAIT_FRAMES(1)
+                    EVT_WAIT(1)
                     EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, LW(0))
                     EVT_ADD(LW(0), 33)
                 EVT_END_LOOP
@@ -1407,7 +1407,7 @@ EvtScript N(8023C990) = {
             EVT_ADD(LW(1), 200)
             EVT_CALL(SetGoalPos, ACTOR_PARTNER, LW(0), LW(1), LW(2))
             EVT_CALL(FlyToGoal, ACTOR_PARTNER, 10, 0, 0)
-            EVT_WAIT_FRAMES(50)
+            EVT_WAIT(50)
             EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
             EVT_CALL(GetGoalPos, ACTOR_PARTNER, LW(0), LW(1), LW(2))
             EVT_ADD(LW(0), 25)

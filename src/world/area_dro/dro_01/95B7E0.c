@@ -117,7 +117,7 @@ EvtScript N(exitWalk_80244960) = {
     EVT_CALL(UseExitHeading, 60, 0)
     EVT_EXEC(ExitWalk)
     EVT_CALL(GotoMap, EVT_PTR("sbk_36"), 1)
-    EVT_WAIT_FRAMES(100)
+    EVT_WAIT(100)
     EVT_RETURN
     EVT_END
 };
@@ -145,14 +145,14 @@ EvtScript N(80244A70) = {
         EVT_CALL(ShakeCam, 0, 0, 300, EVT_FIXED(0.2))
     EVT_END_THREAD
     EVT_THREAD
-        EVT_WAIT_FRAMES(60)
+        EVT_WAIT(60)
         EVT_CALL(GetEntryID, EVT_VAR(0))
         EVT_IF_EQ(EVT_VAR(0), 3)
             EVT_CALL(GotoMap, EVT_PTR("dro_02"), 2)
         EVT_ELSE
             EVT_CALL(GotoMap, EVT_PTR("dro_02"), 3)
         EVT_END_IF
-        EVT_WAIT_FRAMES(100)
+        EVT_WAIT(100)
     EVT_END_THREAD
     EVT_RETURN
     EVT_END
@@ -174,10 +174,10 @@ EvtScript N(enterWalk_80244C14) = {
                 EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
                 EVT_CALL(SetNpcPos, NPC_PARTNER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
                 EVT_CALL(SetPlayerPos, EVT_VAR(0), -1000, EVT_VAR(2))
-                EVT_WAIT_FRAMES(30)
+                EVT_WAIT(30)
                 EVT_CALL(PlaySound, SOUND_208E)
                 EVT_SET(GF_DRO01_WarpPipe, 1)
-                EVT_WAIT_FRAMES(30)
+                EVT_WAIT(30)
                 EVT_CALL(SetPlayerActionState, 0)
                 EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
                 EVT_CALL(SetNpcPos, NPC_PARTNER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
@@ -197,7 +197,7 @@ EvtScript N(enterWalk_80244C14) = {
             EVT_SET(EVT_VAR(0), EVT_PTR(N(80244A28)))
             EVT_EXEC(EnterWalk)
     EVT_END_SWITCH
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_RETURN
     EVT_END
 };
@@ -227,7 +227,7 @@ EvtScript N(main) = {
     EVT_EXEC(N(8024C2EC))
     EVT_EXEC(N(80243BB0))
     EVT_EXEC(N(enterWalk_80244C14))
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_EXEC(N(8024DD78))
     EVT_RETURN
     EVT_END
@@ -329,7 +329,7 @@ EvtScript N(802477E8) = {
             EVT_BITWISE_OR_CONST(EVT_VAR(0), 0x50000)
             EVT_CALL(MakeItemEntity, EVT_VAR(0), EVT_VAR(3), EVT_VAR(4), EVT_VAR(5), 1, 0)
             EVT_CALL(SetPlayerAnimation, 393221)
-            EVT_WAIT_FRAMES(30)
+            EVT_WAIT(30)
             EVT_CALL(SetPlayerAnimation, ANIM_10002)
             EVT_CALL(RemoveItemEntity, EVT_VAR(0))
     EVT_END_SWITCH
@@ -353,7 +353,7 @@ EvtScript N(8024797C) = {
         EVT_CALL(GetNpcPos, NPC_PARTNER, EVT_VAR(3), EVT_VAR(4), EVT_VAR(5))
         EVT_CALL(N(LetterDelivery_CalcLetterPos), EVT_VAR(3), EVT_VAR(4), EVT_VAR(5))
         EVT_CALL(SetItemPos, EVT_VAR(0), EVT_VAR(3), EVT_VAR(4), EVT_VAR(5))
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_RETURN
     EVT_END
@@ -389,18 +389,18 @@ EvtScript N(802479FC) = {
             EVT_CALL(NpcJump1, NPC_PARTNER, EVT_VAR(6), EVT_VAR(7), EVT_VAR(8), 20)
             EVT_KILL_THREAD(EVT_VAR(10))
             EVT_CALL(RemoveItemEntity, EVT_VAR(0))
-            EVT_WAIT_FRAMES(20)
+            EVT_WAIT(20)
             EVT_CALL(GetNpcYaw, -4, EVT_VAR(10))
             EVT_ADD(EVT_VAR(10), 180)
             EVT_CALL(InterpNpcYaw, NPC_PARTNER, EVT_VAR(10), 0)
-            EVT_WAIT_FRAMES(5)
+            EVT_WAIT(5)
             EVT_CALL(NpcJump1, NPC_PARTNER, EVT_VAR(3), EVT_VAR(4), EVT_VAR(5), 20)
             EVT_CALL(SetNpcAnimation, NPC_PARTNER, NPC_ANIM_world_parakarry_Palette_00_Anim_1)
             EVT_CALL(NpcFaceNpc, NPC_PARTNER, EVT_VAR(9), 0)
-            EVT_WAIT_FRAMES(5)
+            EVT_WAIT(5)
             EVT_CALL(SetNpcFlagBits, NPC_PARTNER, ((NPC_FLAG_100)), FALSE)
             EVT_CALL(EnablePartnerAI)
-            EVT_WAIT_FRAMES(5)
+            EVT_WAIT(5)
     EVT_END_SWITCH
     EVT_CALL(N(func_80242784_95D984), EVT_VAR(10))
     EVT_CALL(CloseChoicePopup)
@@ -431,7 +431,7 @@ EvtScript N(80247D90) = {
         EVT_IF_NE(EVT_VAR(1), -1)
             EVT_CALL(DisablePartnerAI, 0)
             EVT_CALL(PlayerFaceNpc, EVT_VAR(2), 0)
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
             EVT_CALL(GetNpcPos, EVT_VAR(2), EVT_VAR(13), EVT_VAR(0), EVT_VAR(14))
             EVT_CALL(GetNpcPos, NPC_PARTNER, EVT_VAR(13), EVT_VAR(14), EVT_VAR(15))
             EVT_CALL(SetNpcJumpscale, NPC_PARTNER, EVT_FIXED(0.0))
@@ -443,13 +443,13 @@ EvtScript N(80247D90) = {
             EVT_SWITCH(EVT_VAR(0))
                 EVT_CASE_EQ(-1)
                     EVT_CALL(DisablePartnerAI, 0)
-                    EVT_WAIT_FRAMES(1)
+                    EVT_WAIT(1)
                     EVT_CALL(SpeakToPlayer, NPC_PARTNER, NPC_ANIM_world_parakarry_Palette_00_Anim_6, NPC_ANIM_world_parakarry_Palette_00_Anim_1, 5, EVT_VAR(8))
                     EVT_CALL(EnablePartnerAI)
                     EVT_SET(EVT_VAR(12), 1)
                 EVT_CASE_DEFAULT
                     EVT_CALL(DisablePartnerAI, 0)
-                    EVT_WAIT_FRAMES(1)
+                    EVT_WAIT(1)
                     EVT_CALL(SpeakToPlayer, NPC_PARTNER, NPC_ANIM_world_parakarry_Palette_00_Anim_6, NPC_ANIM_world_parakarry_Palette_00_Anim_1, 5, EVT_VAR(9))
                     EVT_IF_NE(EVT_VAR(10), 0)
                         EVT_CALL(SpeakToPlayer, EVT_VAR(2), EVT_VAR(3), EVT_VAR(4), 0, EVT_VAR(10))
@@ -573,12 +573,12 @@ EvtScript N(80248504) = {
         EVT_IF_EQ(EVT_VAR(0), 8)
             EVT_BREAK_LOOP
         EVT_END_IF
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(func_802CF56C, 1)
     EVT_THREAD
-        EVT_WAIT_FRAMES(20)
+        EVT_WAIT(20)
         EVT_CALL(func_802CF56C, 0)
         EVT_CALL(NpcFacePlayer, NPC_PARTNER, 0)
     EVT_END_THREAD
@@ -601,7 +601,7 @@ EvtScript N(80248504) = {
     EVT_CALL(SetPlayerAnimation, ANIM_10002)
     EVT_CALL(SpeakToPlayer, 3, NPC_ANIM_dryite_Palette_00_Anim_4, NPC_ANIM_dryite_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x0079))
     EVT_CALL(SetPlayerAnimation, ANIM_80007)
-    EVT_WAIT_FRAMES(30)
+    EVT_WAIT(30)
     EVT_CALL(SetPlayerAnimation, ANIM_10002)
     EVT_CALL(SpeakToPlayer, 3, NPC_ANIM_dryite_Palette_00_Anim_4, NPC_ANIM_dryite_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x007A))
     EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
@@ -689,7 +689,7 @@ EvtScript N(interact_80248BA0) = {
     EVT_CALL(NpcMoveTo, NPC_SELF, EVT_VAR(0), EVT_VAR(1), 0)
     EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_dryite_Palette_00_Anim_1)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, ((NPC_FLAG_100)), FALSE)
-    EVT_WAIT_FRAMES(5)
+    EVT_WAIT(5)
     EVT_CALL(GetNpcYaw, -1, EVT_VAR(0))
     EVT_ADD(EVT_VAR(0), 180)
     EVT_CALL(InterpNpcYaw, NPC_SELF, EVT_VAR(0), 0)
@@ -726,7 +726,7 @@ EvtScript N(interact_80248D54) = {
                 EVT_IF_LT(GB_StoryProgress, 88)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_artist_toad_Palette_01_Anim_2, NPC_ANIM_artist_toad_Palette_01_Anim_1, 0, MESSAGE_ID(0x0D, 0x0085))
                     EVT_CALL(SetPlayerAnimation, ANIM_NOD_YES)
-                    EVT_WAIT_FRAMES(30)
+                    EVT_WAIT(30)
                     EVT_CALL(SetPlayerAnimation, ANIM_10002)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_artist_toad_Palette_01_Anim_2, NPC_ANIM_artist_toad_Palette_01_Anim_1, 0, MESSAGE_ID(0x0D, 0x0086))
                     EVT_SET(GF_DRO01_Gift_ToldComposerAboutMelody, 1)
@@ -770,7 +770,7 @@ EvtScript N(interact_80248D54) = {
         EVT_CASE_DEFAULT
             EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_artist_toad_Palette_01_Anim_2, NPC_ANIM_artist_toad_Palette_01_Anim_1, 0, MESSAGE_ID(0x0D, 0x0082))
             EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_artist_toad_Palette_01_Anim_3)
-            EVT_WAIT_FRAMES(60)
+            EVT_WAIT(60)
             EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_artist_toad_Palette_01_Anim_1)
             EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_artist_toad_Palette_01_Anim_2, NPC_ANIM_artist_toad_Palette_01_Anim_1, 0, MESSAGE_ID(0x0D, 0x0083))
             EVT_SET(EVT_VAR(0), 104)
@@ -798,7 +798,7 @@ EvtScript N(idle_8024918C) = {
             EVT_CALL(SetNpcFlagBits, NPC_SELF, ((NPC_FLAG_100)), TRUE)
             EVT_CALL(SetNpcPos, NPC_SELF, 0, 0, -180)
             EVT_EXEC_WAIT(N(8024C41C))
-            EVT_WAIT_FRAMES(10)
+            EVT_WAIT(10)
             EVT_CALL(GetPlayerPos, EVT_VAR(10), EVT_VAR(11), EVT_VAR(12))
             EVT_CALL(UseSettingsFrom, 0, EVT_VAR(10), EVT_VAR(11), EVT_VAR(12))
             EVT_CALL(SetPanTarget, 0, 32, 0, -67)
@@ -806,16 +806,16 @@ EvtScript N(idle_8024918C) = {
             EVT_CALL(SetCamPitch, 0, 20, -12)
             EVT_CALL(SetCamSpeed, 0, EVT_FIXED(90.0))
             EVT_CALL(PanToTarget, 0, 0, 1)
-            EVT_WAIT_FRAMES(20)
+            EVT_WAIT(20)
             EVT_CALL(UseSettingsFrom, 0, EVT_VAR(10), EVT_VAR(11), EVT_VAR(12))
             EVT_CALL(SetCamDistance, 0, -350)
             EVT_CALL(SetCamSpeed, 0, EVT_FIXED(0.8))
             EVT_CALL(PanToTarget, 0, 0, 1)
             EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_mouser_Palette_01_Anim_4)
             EVT_CALL(NpcMoveTo, NPC_SELF, -23, -105, 20)
-            EVT_WAIT_FRAMES(10)
+            EVT_WAIT(10)
             EVT_CALL(InterpNpcYaw, NPC_SELF, 65, 0)
-            EVT_WAIT_FRAMES(10)
+            EVT_WAIT(10)
             EVT_EXEC_WAIT(N(8024C4C8))
             EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_mouser_Palette_01_Anim_4)
             EVT_CALL(NpcMoveTo, NPC_SELF, 37, -27, 20)
@@ -829,7 +829,7 @@ EvtScript N(idle_8024918C) = {
             EVT_CALL(PlaySoundAtNpc, NPC_SELF, 372, 0)
             EVT_CALL(NpcMoveTo, NPC_SELF, 554, -12, 20)
             EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
-            EVT_WAIT_FRAMES(30)
+            EVT_WAIT(30)
             EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
             EVT_CALL(UseSettingsFrom, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
             EVT_CALL(SetPanTarget, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
@@ -1433,9 +1433,9 @@ EvtScript N(8024B6B4) = {
     EVT_IF_LT(GB_StoryProgress, -64)
         EVT_CALL(SpeakToPlayer, 6, NPC_ANIM_mouser_Palette_01_Anim_5, NPC_ANIM_mouser_Palette_01_Anim_1, 0, MESSAGE_ID(0x0D, 0x0087))
         EVT_CALL(SetPlayerAnimation, ANIM_10002)
-        EVT_WAIT_FRAMES(10)
+        EVT_WAIT(10)
         EVT_CALL(SetPlayerAnimation, ANIM_80007)
-        EVT_WAIT_FRAMES(30)
+        EVT_WAIT(30)
     EVT_END_IF
     EVT_CALL(SpeakToPlayer, 6, NPC_ANIM_mouser_Palette_01_Anim_5, NPC_ANIM_mouser_Palette_01_Anim_1, 0, MESSAGE_ID(0x0D, 0x0088))
     EVT_SET(GB_StoryProgress, -64)
@@ -1457,7 +1457,7 @@ EvtScript N(8024B7B0) = {
         EVT_EXEC_WAIT(N(8024B5B4))
         EVT_CALL(AddKeyItem, ITEM_KOOT_RED_JAR)
         EVT_SET(GF_DRO01_Gift_RedJar, 1)
-        EVT_WAIT_FRAMES(20)
+        EVT_WAIT(20)
         EVT_CALL(func_802D2C14, 0)
         EVT_EXEC_WAIT(N(8024B664))
     EVT_END_IF
@@ -1631,7 +1631,7 @@ EvtScript N(toggleVis_8024C040) = {
             EVT_CALL(SetGroupEnabled, 82, 1)
         EVT_CASE_EQ(2)
             EVT_THREAD
-                EVT_WAIT_FRAMES(45)
+                EVT_WAIT(45)
                 EVT_CALL(SetNpcPos, 6, 33, 0, -375)
                 EVT_CALL(SetNpcYaw, 6, 180)
             EVT_END_THREAD
@@ -1686,7 +1686,7 @@ EvtScript N(8024C2EC) = {
     EVT_LABEL(10)
     EVT_CALL(UpdateLerp)
     EVT_CALL(RotateModel, 34, EVT_VAR(0), 1, 0, 0)
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_IF_EQ(EVT_VAR(1), 1)
         EVT_GOTO(10)
     EVT_END_IF
@@ -1694,7 +1694,7 @@ EvtScript N(8024C2EC) = {
     EVT_LABEL(11)
     EVT_CALL(UpdateLerp)
     EVT_CALL(RotateModel, 34, EVT_VAR(0), 1, 0, 0)
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_IF_EQ(EVT_VAR(1), 1)
         EVT_GOTO(11)
     EVT_END_IF
@@ -1710,7 +1710,7 @@ EvtScript N(8024C41C) = {
     EVT_LABEL(10)
     EVT_CALL(UpdateLerp)
     EVT_EXEC(N(openDoor_8024BC24))
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_IF_EQ(EVT_VAR(1), 1)
         EVT_GOTO(10)
     EVT_END_IF
@@ -1723,7 +1723,7 @@ EvtScript N(8024C4C8) = {
     EVT_LABEL(10)
     EVT_CALL(UpdateLerp)
     EVT_EXEC(N(openDoor_8024BC24))
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_IF_EQ(EVT_VAR(1), 1)
         EVT_GOTO(10)
     EVT_END_IF
@@ -1760,9 +1760,9 @@ EvtScript N(8024C580) = {
     EVT_LOOP(40)
         EVT_ADD(EVT_VAR(1), 1)
         EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_WAIT_FRAMES(3)
+    EVT_WAIT(3)
     EVT_CALL(GetCurrentPartnerID, EVT_VAR(0))
     EVT_IF_NE(EVT_VAR(0), 0)
         EVT_THREAD
@@ -1775,16 +1775,16 @@ EvtScript N(8024C580) = {
             EVT_CALL(EnableNpcShadow, NPC_PARTNER, TRUE)
         EVT_END_THREAD
     EVT_END_IF
-    EVT_WAIT_FRAMES(2)
+    EVT_WAIT(2)
     EVT_CALL(func_802D2520, ANIM_STAND_STILL, 0, 0, 0, 0, 0)
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_CALL(SetPlayerAnimation, ANIM_10002)
     EVT_CALL(DisablePlayerPhysics, FALSE)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_CALL(HidePlayerShadow, FALSE)
     EVT_LABEL(0)
     EVT_CALL(N(dup_Pipe_GetCurrentFloor))
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_IF_NE(EVT_VAR(0), -1)
         EVT_GOTO(0)
     EVT_END_IF
@@ -1822,10 +1822,10 @@ EvtScript N(8024C8D4) = {
         EVT_CALL(SetNpcPos, NPC_PARTNER, 0, -1000, 0)
         EVT_CALL(InterpNpcYaw, NPC_PARTNER, EVT_VAR(0), 0)
     EVT_END_IF
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_CALL(PlaySound, 355)
     EVT_THREAD
-        EVT_WAIT_FRAMES(25)
+        EVT_WAIT(25)
         EVT_CALL(HidePlayerShadow, FALSE)
     EVT_END_THREAD
     EVT_CALL(func_802D286C, 2304)
@@ -1833,7 +1833,7 @@ EvtScript N(8024C8D4) = {
     EVT_LOOP(40)
         EVT_CALL(N(dup_Pipe_GetPointAheadOfPlayer), EVT_FIXED(1.0))
         EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(GetCurrentPartnerID, EVT_VAR(0))
     EVT_IF_NE(EVT_VAR(0), 0)
@@ -1845,7 +1845,7 @@ EvtScript N(8024C8D4) = {
             EVT_CALL(EnablePartnerAI)
         EVT_END_THREAD
     EVT_END_IF
-    EVT_WAIT_FRAMES(5)
+    EVT_WAIT(5)
     EVT_CALL(func_802D2520, ANIM_10002, 0, 0, 0, 0, 0)
     EVT_CALL(ModifyColliderFlags, 1, EVT_VAR(11), 0x7FFFFE00)
     EVT_CALL(DisablePlayerInput, FALSE)
@@ -1892,21 +1892,21 @@ EvtScript N(8024CDA0) = {
     EVT_CALL(SetPlayerFlagBits, 2097152, 1)
     EVT_CALL(N(dup_Pipe_GetCameraYaw))
     EVT_CALL(InterpPlayerYaw, EVT_VAR(0), 0)
-    EVT_WAIT_FRAMES(2)
+    EVT_WAIT(2)
     EVT_CALL(SetPlayerFlagBits, 2097152, 0)
     EVT_CALL(PlaySound, 355)
     EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_THREAD
-        EVT_WAIT_FRAMES(4)
+        EVT_WAIT(4)
         EVT_LOOP(40)
             EVT_SUB(EVT_VAR(1), 1)
             EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_CALL(func_802D286C, 2048)
     EVT_CALL(func_802D2520, ANIM_10002, 5, 2, 1, 1, 0)
-    EVT_WAIT_FRAMES(25)
+    EVT_WAIT(25)
     EVT_EXEC_WAIT(EVT_VAR(12))
     EVT_RETURN
     EVT_END
@@ -1949,7 +1949,7 @@ EvtScript N(8024CF7C) = {
         EVT_SUB(EVT_VAR(4), 360)
     EVT_END_IF
     EVT_CALL(InterpPlayerYaw, EVT_VAR(8), 1)
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_CALL(PlaySound, 355)
     EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(6), EVT_VAR(7))
@@ -1957,18 +1957,18 @@ EvtScript N(8024CF7C) = {
     EVT_CALL(func_802D286C, 2048)
     EVT_CALL(func_802D2520, ANIM_STAND_STILL, 5, 3, 1, 1, 0)
     EVT_THREAD
-        EVT_WAIT_FRAMES(8)
+        EVT_WAIT(8)
         EVT_CALL(HidePlayerShadow, TRUE)
     EVT_END_THREAD
     EVT_THREAD
-        EVT_WAIT_FRAMES(3)
+        EVT_WAIT(3)
         EVT_LOOP(40)
             EVT_CALL(N(dup_Pipe_GetPointAheadOfPlayer), EVT_FIXED(1.0))
             EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_WAIT_FRAMES(25)
+    EVT_WAIT(25)
     EVT_EXEC_WAIT(EVT_VAR(12))
     EVT_RETURN
     EVT_END
@@ -1979,7 +1979,7 @@ extern const char N(dro_01_name_hack)[];
 EvtScript N(8024D2B0) = {
     EVT_SET(GF_DRO01_HeardHintAboutSpinningRoof, 0)
     EVT_CALL(GotoMap, EVT_PTR(N(dro_01_name_hack)), 4)
-    EVT_WAIT_FRAMES(100)
+    EVT_WAIT(100)
     EVT_RETURN
     EVT_END
 };

@@ -50,7 +50,7 @@ EvtScript N(main) = {
     EVT_EXEC(N(80240050))
     EVT_SET(EVT_VAR(0), EVT_PTR(N(8024014C)))
     EVT_EXEC(EnterWalk)
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_RETURN
     EVT_END
 };
@@ -77,7 +77,7 @@ EvtScript N(80240380) = {
         EVT_CALL(UpdateLerp)
         EVT_CALL(TranslateGroup, 47, 0, 0, EVT_VAR(0))
         EVT_CALL(UpdateColliderTransform, 13)
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
         EVT_IF_EQ(EVT_VAR(1), 0)
             EVT_BREAK_LOOP
         EVT_END_IF
@@ -92,7 +92,7 @@ EvtScript N(80240424) = {
         EVT_CALL(UpdateLerp)
         EVT_CALL(TranslateGroup, 47, 0, 0, EVT_VAR(0))
         EVT_CALL(UpdateColliderTransform, 13)
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
         EVT_IF_EQ(EVT_VAR(1), 0)
             EVT_BREAK_LOOP
         EVT_END_IF
@@ -107,7 +107,7 @@ EvtScript N(802404C8) = {
         EVT_CALL(UpdateLerp)
         EVT_CALL(TranslateGroup, 53, 0, 0, EVT_VAR(0))
         EVT_CALL(UpdateColliderTransform, 17)
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
         EVT_IF_EQ(EVT_VAR(1), 0)
             EVT_BREAK_LOOP
         EVT_END_IF
@@ -122,7 +122,7 @@ EvtScript N(8024056C) = {
         EVT_CALL(UpdateLerp)
         EVT_CALL(TranslateGroup, 53, 0, 0, EVT_VAR(0))
         EVT_CALL(UpdateColliderTransform, 17)
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
         EVT_IF_EQ(EVT_VAR(1), 0)
             EVT_BREAK_LOOP
         EVT_END_IF

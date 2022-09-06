@@ -52,13 +52,13 @@ EvtScript N(main) = {
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_CALL(PlaySound, SOUND_361)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_30009)
-    EVT_WAIT_FRAMES(30)
+    EVT_WAIT(30)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_CROUCH)
     EVT_CALL(GetItemPower, ITEM_STONE_CAP, EVT_VAR(0), EVT_VAR(1))
     EVT_CALL(PlaySound, SOUND_362)
     EVT_CALL(N(func_802A123C_7217DC))
     EVT_CALL(GetActorPos, ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-    EVT_WAIT_FRAMES(20)
+    EVT_WAIT(20)
     EVT_RETURN
     EVT_END
 };

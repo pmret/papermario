@@ -44,7 +44,7 @@ EvtScript N(8024086C) = {
 
 EvtScript N(80240890) = {
     EVT_CALL(FadeOutMusic, 0, 250)
-    EVT_WAIT_FRAMES(10)
+    EVT_WAIT(10)
     EVT_CALL(PopSong)
     EVT_RETURN
     EVT_END
@@ -99,14 +99,14 @@ EvtScript N(8024096C) = {
         EVT_ADD(EVT_VAR(2), EVT_VAR(14))
         EVT_CALL(PlayEffect, 0xD, EVT_VAR(0), EVT_VAR(2), EVT_VAR(1), EVT_VAR(3), 0, 0, 0, 0, 0, 0, 0, 0, 0)
     EVT_END_LOOP
-    EVT_WAIT_FRAMES(EVT_VAR(15))
+    EVT_WAIT(EVT_VAR(15))
     EVT_LABEL(0)
     EVT_CALL(RandInt, EVT_VAR(12), EVT_VAR(0))
     EVT_CALL(RandInt, EVT_VAR(13), EVT_VAR(1))
     EVT_ADD(EVT_VAR(0), EVT_VAR(10))
     EVT_ADD(EVT_VAR(1), EVT_VAR(11))
     EVT_CALL(PlayEffect, 0xD, EVT_VAR(0), EVT_VAR(14), EVT_VAR(1), 200, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-    EVT_WAIT_FRAMES(EVT_VAR(15))
+    EVT_WAIT(EVT_VAR(15))
     EVT_GOTO(0)
     EVT_RETURN
     EVT_END
@@ -254,11 +254,11 @@ EvtScript N(80241C14) = {
     EVT_CALL(SetCamSpeed, 0, EVT_FIXED(90.0))
     EVT_CALL(PanToTarget, 0, 0, 1)
     EVT_CALL(WaitForCam, 0, EVT_FIXED(1.0))
-    EVT_WAIT_FRAMES(20)
+    EVT_WAIT(20)
     EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_posie_Palette_00_Anim_2, NPC_ANIM_posie_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x00C5))
-    EVT_WAIT_FRAMES(10)
+    EVT_WAIT(10)
     EVT_CALL(GotoMap, EVT_PTR("flo_10"), 1)
-    EVT_WAIT_FRAMES(100)
+    EVT_WAIT(100)
     EVT_RETURN
     EVT_END
 };
@@ -266,7 +266,7 @@ EvtScript N(80241C14) = {
 EvtScript N(80241D6C) = {
     EVT_LABEL(0)
     EVT_CALL(ShakeCam, 0, 0, 1, EVT_FIXED(1.0))
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_GOTO(0)
     EVT_RETURN
     EVT_END
@@ -292,7 +292,7 @@ EvtScript N(80241DBC) = {
     EVT_CALL(SetCamSpeed, 0, EVT_FIXED(8.0))
     EVT_CALL(PanToTarget, 0, 0, 1)
     EVT_CALL(WaitForCam, 0, EVT_FIXED(1.0))
-    EVT_WAIT_FRAMES(10)
+    EVT_WAIT(10)
     EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_SUB(EVT_VAR(0), EVT_VAR(2))
     EVT_IF_LT(EVT_VAR(0), -250)
@@ -304,7 +304,7 @@ EvtScript N(80241DBC) = {
     EVT_CALL(PlaySound, 0x7BC)
     EVT_CALL(func_802D62E4, 956)
     EVT_SET(EVT_AREA_FLAG(6), 1)
-    EVT_WAIT_FRAMES(20)
+    EVT_WAIT(20)
     EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_posie_Palette_00_Anim_2, NPC_ANIM_posie_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x006A))
     EVT_SET(GB_StoryProgress, 47)
     EVT_RETURN
@@ -326,7 +326,7 @@ EvtScript N(interact_80242044) = {
             EVT_CALL(AdjustCam, 0, EVT_FIXED(4.0), 0, EVT_FIXED(350.0), EVT_FIXED(18.0), EVT_FIXED(-7.5))
             EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_posie_Palette_00_Anim_2, NPC_ANIM_posie_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x0065))
             EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_posie_Palette_00_Anim_5)
-            EVT_WAIT_FRAMES(20)
+            EVT_WAIT(20)
             EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_posie_Palette_00_Anim_0)
             EVT_SET(EVT_VAR(0), 89)
             EVT_SET(EVT_VAR(1), 1)
@@ -390,7 +390,7 @@ EvtScript N(init_80242428) = {
 EvtScript N(802424F4) = {
     EVT_IF_NE(EVT_AREA_VAR(3), 0)
         EVT_CALL(DisablePlayerInput, TRUE)
-        EVT_WAIT_FRAMES(10)
+        EVT_WAIT(10)
         EVT_IF_LT(EVT_AREA_VAR(3), 5)
             EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_posie_Palette_00_Anim_2, NPC_ANIM_posie_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x006E))
             EVT_CALL(GetPlayerPos, EVT_VAR(1), EVT_VAR(2), EVT_VAR(3))
@@ -412,7 +412,7 @@ EvtScript N(tree1_Callback) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_IF_LT(GB_StoryProgress, 47)
         EVT_CALL(NpcFacePlayer, 0, 1)
-        EVT_WAIT_FRAMES(10)
+        EVT_WAIT(10)
         EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_posie_Palette_00_Anim_4, NPC_ANIM_posie_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x0067))
         EVT_IF_EQ(GB_StoryProgress, 46)
             EVT_IF_EQ(GF_FLO12_RosieRequestedSomethingBeautiful, 1)
@@ -427,7 +427,7 @@ EvtScript N(tree1_Callback) = {
     EVT_ELSE
         EVT_IF_EQ(GF_FLO07_Item_CrystalBerry, 0)
             EVT_CALL(NpcFacePlayer, 0, 1)
-            EVT_WAIT_FRAMES(10)
+            EVT_WAIT(10)
             EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_posie_Palette_00_Anim_4, NPC_ANIM_posie_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x0067))
         EVT_ELSE
             EVT_ADD(EVT_AREA_VAR(2), 1)
@@ -440,7 +440,7 @@ EvtScript N(tree1_Callback) = {
                     EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_posie_Palette_00_Anim_3, NPC_ANIM_posie_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x006D))
                     EVT_SET(EVT_AREA_VAR(3), 1)
                     EVT_CALL(GotoMap, EVT_PTR(N(flo_25_name_hack)), 1)
-                    EVT_WAIT_FRAMES(100)
+                    EVT_WAIT(100)
             EVT_END_SWITCH
         EVT_END_IF
     EVT_END_IF

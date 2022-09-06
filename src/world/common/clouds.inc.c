@@ -12,7 +12,7 @@ EvtScript N(clouds1) = {
     EVT_CALL(N(UnkAngleFunc2), EVT_VAR(7), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), EVT_VAR(3))
     EVT_CALL(TranslateModel, EVT_VAR(10), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_CALL(RotateModel, EVT_VAR(10), EVT_VAR(3), 0, 1, 0)
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_GOTO(0)
     EVT_RETURN
     EVT_END
@@ -34,7 +34,7 @@ EvtScript N(clouds2) = {
     EVT_ADDF(EVT_VAR(2), EVT_VAR(12))
     EVT_CALL(TranslateModel, EVT_VAR(10), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_CALL(RotateModel, EVT_VAR(10), EVT_VAR(3), 0, 1, 0)
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_GOTO(0)
     EVT_RETURN
     EVT_END
@@ -58,7 +58,7 @@ EvtScript N(clouds3) = {
     EVT_ADDF(EVT_VAR(2), EVT_VAR(13))
     EVT_CALL(TranslateModel, EVT_VAR(10), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_CALL(RotateModel, EVT_VAR(10), EVT_VAR(3), 0, 1, 0)
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_GOTO(0)
     EVT_RETURN
     EVT_END

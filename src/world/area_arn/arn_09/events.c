@@ -13,9 +13,9 @@ EvtScript N(80240140) = {
     EVT_SET(EVT_VAR(4), 1)
     EVT_SET(EVT_VAR(3), 1)
     EVT_EXEC(0x80285DFC)
-    EVT_WAIT_FRAMES(17)
+    EVT_WAIT(17)
     EVT_CALL(GotoMap, EVT_PTR("arn_10"), 0)
-    EVT_WAIT_FRAMES(100)
+    EVT_WAIT(100)
     EVT_RETURN
     EVT_END
 };
@@ -70,11 +70,11 @@ EvtScript N(802403A0) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(SetPlayerActionState, 6)
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_CALL(SetPlayerJumpscale, EVT_FIXED(1.0))
     EVT_CALL(PlayerJump, 0, 200, 0, 30)
     EVT_CALL(GotoMap, EVT_PTR("arn_08"), 1)
-    EVT_WAIT_FRAMES(100)
+    EVT_WAIT(100)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_CALL(DisablePlayerPhysics, FALSE)
     EVT_RETURN

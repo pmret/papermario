@@ -45,7 +45,7 @@ EvtScript N(enterWalk_80240378) = {
         EVT_CASE_EQ(0)
             EVT_SET(EVT_VAR(0), EVT_PTR(N(8024034C)))
             EVT_EXEC(EnterWalk)
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
         EVT_CASE_EQ(1)
             EVT_CALL(UseSettingsFrom, 0, 375, 0, -188)
             EVT_CALL(SetPanTarget, 0, 375, 0, -188)
@@ -54,7 +54,7 @@ EvtScript N(enterWalk_80240378) = {
             EVT_CALL(DisablePlayerInput, TRUE)
             EVT_CALL(DisablePlayerPhysics, TRUE)
             EVT_CALL(SetPlayerActionState, 3)
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
             EVT_CALL(SetPlayerJumpscale, EVT_FIXED(0.7))
             EVT_CALL(PlayerJump, 375, 0, -188, 20)
             EVT_CALL(PanToTarget, 0, 0, 0)
@@ -123,10 +123,10 @@ EvtScript N(80240770) = {
     EVT_LOOP(5)
         EVT_CALL(ModifyColliderFlags, 1, EVT_ARRAY(0), 0x7FFFFE00)
         EVT_CALL(EnableModel, EVT_ARRAY(1), 1)
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
         EVT_CALL(ModifyColliderFlags, 0, EVT_ARRAY(0), 0x7FFFFE00)
         EVT_CALL(EnableModel, EVT_ARRAY(1), 0)
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_IF_NE(EVT_ARRAY(5), 0)
         EVT_EXEC_WAIT(EVT_ARRAY(5))
@@ -160,11 +160,11 @@ EvtScript N(80240860) = {
     EVT_IF_EQ(EVT_VAR(10), 15)
         EVT_GOTO(2)
     EVT_END_IF
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_GOTO(0)
     EVT_LABEL(2)
     EVT_CALL(GetPlayerPos, EVT_VAR(1), EVT_VAR(2), EVT_VAR(3))
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_IF_NE(EVT_VAR(2), EVT_ARRAY(3))
         EVT_GOTO(2)
     EVT_END_IF
@@ -177,7 +177,7 @@ EvtScript N(80240860) = {
     EVT_END_IF
     EVT_LABEL(3)
     EVT_CALL(GetPlayerActionState, EVT_VAR(0))
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_IF_EQ(EVT_VAR(0), 13)
         EVT_GOTO(3)
     EVT_END_IF
@@ -200,7 +200,7 @@ EvtScript N(80240AF4) = {
     EVT_ADD(EVT_VAR(5), EVT_VAR(0))
     EVT_CALL(SetPlayerPos, EVT_VAR(2), EVT_VAR(5), EVT_VAR(4))
     EVT_CALL(UpdateColliderTransform, EVT_ARRAY(1))
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_IF_EQ(EVT_VAR(1), 1)
         EVT_GOTO(2)
     EVT_END_IF
@@ -212,7 +212,7 @@ EvtScript N(80240AF4) = {
     EVT_ADD(EVT_VAR(5), EVT_VAR(0))
     EVT_CALL(SetPlayerPos, EVT_VAR(2), EVT_VAR(5), EVT_VAR(4))
     EVT_CALL(UpdateColliderTransform, EVT_ARRAY(1))
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_IF_EQ(EVT_VAR(1), 1)
         EVT_GOTO(3)
     EVT_END_IF
@@ -230,7 +230,7 @@ EvtScript N(80240CB8) = {
     EVT_CALL(TranslateModel, EVT_ARRAY(0), 0, EVT_VAR(0), 0)
     EVT_ADD(EVT_VAR(2), 45)
     EVT_CALL(RotateModel, EVT_ARRAY(0), EVT_VAR(2), 1, 0, 0)
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_IF_EQ(EVT_VAR(1), 1)
         EVT_GOTO(2)
     EVT_END_IF
@@ -240,7 +240,7 @@ EvtScript N(80240CB8) = {
     EVT_CALL(TranslateModel, EVT_ARRAY(0), 0, EVT_VAR(0), 0)
     EVT_ADD(EVT_VAR(2), 45)
     EVT_CALL(RotateModel, EVT_ARRAY(0), EVT_VAR(2), 1, 0, 0)
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_IF_EQ(EVT_VAR(1), 1)
         EVT_GOTO(3)
     EVT_END_IF
@@ -254,7 +254,7 @@ EvtScript N(80240E68) = {
     EVT_CALL(N(func_802401C0_C4C550))
     EVT_CALL(func_802D2B6C)
     EVT_CALL(GotoMap, EVT_PTR("dgb_11"), EVT_VAR(0))
-    EVT_WAIT_FRAMES(100)
+    EVT_WAIT(100)
     EVT_RETURN
     EVT_END
 };

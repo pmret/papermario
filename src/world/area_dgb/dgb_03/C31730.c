@@ -54,9 +54,9 @@ EvtScript N(exitDoubleDoor_80242910) = {
     EVT_SET(EVT_VAR(2), 36)
     EVT_SET(EVT_VAR(3), 34)
     EVT_EXEC(ExitDoubleDoor)
-    EVT_WAIT_FRAMES(17)
+    EVT_WAIT(17)
     EVT_CALL(GotoMap, EVT_PTR("dgb_02"), 0)
-    EVT_WAIT_FRAMES(100)
+    EVT_WAIT(100)
     EVT_RETURN
     EVT_END
 };
@@ -70,9 +70,9 @@ EvtScript N(exitDoubleDoor_802429C4) = {
     EVT_SET(EVT_VAR(2), 46)
     EVT_SET(EVT_VAR(3), 44)
     EVT_EXEC(ExitDoubleDoor)
-    EVT_WAIT_FRAMES(17)
+    EVT_WAIT(17)
     EVT_CALL(GotoMap, EVT_PTR("dgb_09"), 0)
-    EVT_WAIT_FRAMES(100)
+    EVT_WAIT(100)
     EVT_RETURN
     EVT_END
 };
@@ -86,9 +86,9 @@ EvtScript N(exitDoubleDoor_80242A78) = {
     EVT_SET(EVT_VAR(2), 29)
     EVT_SET(EVT_VAR(3), 31)
     EVT_EXEC(ExitDoubleDoor)
-    EVT_WAIT_FRAMES(17)
+    EVT_WAIT(17)
     EVT_CALL(GotoMap, EVT_PTR("dgb_04"), 0)
-    EVT_WAIT_FRAMES(100)
+    EVT_WAIT(100)
     EVT_RETURN
     EVT_END
 };
@@ -104,9 +104,9 @@ EvtScript N(exitSingleDoor_80242B88) = {
     EVT_SET(EVT_VAR(2), 49)
     EVT_SET(EVT_VAR(3), 1)
     EVT_EXEC(ExitSingleDoor)
-    EVT_WAIT_FRAMES(17)
+    EVT_WAIT(17)
     EVT_CALL(GotoMap, EVT_PTR("dgb_05"), 0)
-    EVT_WAIT_FRAMES(100)
+    EVT_WAIT(100)
     EVT_RETURN
     EVT_END
 };
@@ -120,9 +120,9 @@ EvtScript N(exitDoubleDoor_80242C3C) = {
     EVT_SET(EVT_VAR(2), 39)
     EVT_SET(EVT_VAR(3), 41)
     EVT_EXEC(ExitDoubleDoor)
-    EVT_WAIT_FRAMES(17)
+    EVT_WAIT(17)
     EVT_CALL(GotoMap, EVT_PTR("dgb_14"), 0)
-    EVT_WAIT_FRAMES(100)
+    EVT_WAIT(100)
     EVT_RETURN
     EVT_END
 };
@@ -169,7 +169,7 @@ EvtScript N(enterDoubleDoor_80242D1C) = {
         EVT_CASE_EQ(5)
             EVT_SET(EVT_VAR(0), EVT_PTR(N(80242CF0)))
             EVT_EXEC(EnterWalkShort)
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -225,7 +225,7 @@ EvtScript N(802430E0) = {
         EVT_ELSE
             EVT_CALL(SetPlayerActionState, 20)
         EVT_END_IF
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(GetCurrentPartner, EVT_VAR(10))
     EVT_IF_NE(EVT_VAR(10), 0)
@@ -253,7 +253,7 @@ EvtScript N(802430E0) = {
             EVT_CALL(SetPlayerActionState, 20)
             EVT_CALL(UpdateLerp)
             EVT_CALL(N(UnkFunc12))
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
             EVT_IF_EQ(EVT_VAR(1), 0)
                 EVT_BREAK_LOOP
             EVT_END_IF
@@ -269,7 +269,7 @@ EvtScript N(802430E0) = {
         EVT_CALL(UpdateColliderTransform, 27)
         EVT_CALL(UpdateColliderTransform, 28)
         EVT_CALL(UpdateColliderTransform, 29)
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
         EVT_IF_EQ(EVT_VAR(1), 0)
             EVT_BREAK_LOOP
         EVT_END_IF

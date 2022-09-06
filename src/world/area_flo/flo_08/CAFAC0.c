@@ -86,14 +86,14 @@ EvtScript N(80242680) = {
         EVT_ADD(EVT_VAR(2), EVT_VAR(14))
         EVT_CALL(PlayEffect, 0xD, EVT_VAR(0), EVT_VAR(2), EVT_VAR(1), EVT_VAR(3), 0, 0, 0, 0, 0, 0, 0, 0, 0)
     EVT_END_LOOP
-    EVT_WAIT_FRAMES(EVT_VAR(15))
+    EVT_WAIT(EVT_VAR(15))
     EVT_LABEL(0)
     EVT_CALL(RandInt, EVT_VAR(12), EVT_VAR(0))
     EVT_CALL(RandInt, EVT_VAR(13), EVT_VAR(1))
     EVT_ADD(EVT_VAR(0), EVT_VAR(10))
     EVT_ADD(EVT_VAR(1), EVT_VAR(11))
     EVT_CALL(PlayEffect, 0xD, EVT_VAR(0), EVT_VAR(14), EVT_VAR(1), 200, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-    EVT_WAIT_FRAMES(EVT_VAR(15))
+    EVT_WAIT(EVT_VAR(15))
     EVT_GOTO(0)
     EVT_RETURN
     EVT_END
@@ -155,7 +155,7 @@ EvtScript N(main) = {
             EVT_ADD(EVT_VAR(1), 65536)
         EVT_END_IF
         EVT_CALL(SetTexPanOffset, 2, 0, EVT_VAR(1), 0)
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
         EVT_GOTO(0)
     EVT_END_THREAD
     EVT_CALL(ModifyColliderFlags, 3, 21, 0x00000006)
@@ -215,7 +215,7 @@ EvtScript N(80242F00) = {
     EVT_ADD(EVT_VAR(1), 30)
     EVT_SUB(EVT_VAR(2), 2)
     EVT_CALL(PlayEffect, 0x11, 3, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 30, 0, 0, 0, 0, 0, 0, 0, 0)
-    EVT_WAIT_FRAMES(15)
+    EVT_WAIT(15)
     EVT_GOTO(0)
     EVT_RETURN
     EVT_END
@@ -286,7 +286,7 @@ EvtScript N(80243090) = {
             EVT_CALL(N(AddPlayerHandsOffset), EVT_VAR(3), EVT_VAR(4), EVT_VAR(5))
             EVT_CALL(MakeItemEntity, EVT_VAR(0), EVT_VAR(3), EVT_VAR(4), EVT_VAR(5), 1, 0)
             EVT_CALL(SetPlayerAnimation, 393221)
-            EVT_WAIT_FRAMES(30)
+            EVT_WAIT(30)
             EVT_CALL(SetPlayerAnimation, ANIM_10002)
             EVT_CALL(RemoveItemEntity, EVT_VAR(0))
     EVT_END_SWITCH
@@ -333,7 +333,7 @@ EvtScript N(interact_80243214) = {
                 EVT_SET(EVT_VAR(7), EVT_VAR(0))
                 EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_2095, 0)
                 EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_gate_flower_Palette_02_Anim_3)
-                EVT_WAIT_FRAMES(20)
+                EVT_WAIT(20)
                 EVT_CALL(RemoveItemEntity, EVT_VAR(7))
                 EVT_SWITCH(EVT_VAR(8))
                     EVT_CASE_EQ(160)
@@ -356,7 +356,7 @@ EvtScript N(interact_80243214) = {
                             EVT_CALL(RotateModel, 99, EVT_VAR(9), 0, -1, 0)
                             EVT_CALL(RotateModel, 100, EVT_VAR(9), 0, -1, 0)
                             EVT_CALL(RotateModel, 101, EVT_VAR(9), 0, -1, 0)
-                            EVT_WAIT_FRAMES(1)
+                            EVT_WAIT(1)
                             EVT_IF_NE(EVT_VAR(1), 1)
                                 EVT_BREAK_LOOP
                             EVT_END_IF
@@ -375,7 +375,7 @@ EvtScript N(interact_80243214) = {
                         EVT_CALL(PlaySoundAtNpc, NPC_SELF, 0x2096, 0)
                         EVT_CALL(MakeItemEntity, EVT_VAR(8), 125, 20, 0, 1, 0)
                         EVT_SET(EVT_VAR(7), EVT_VAR(0))
-                        EVT_WAIT_FRAMES(5)
+                        EVT_WAIT(5)
                         EVT_CALL(GetAngleToPlayer, -1, EVT_VAR(0))
                         EVT_IF_LT(EVT_VAR(0), 180)
                             EVT_CALL(MakeLerp, 0, 100, 7, 0)
@@ -391,7 +391,7 @@ EvtScript N(interact_80243214) = {
                                 EVT_ADDF(EVT_VAR(3), EVT_FIXED(15.0))
                                 EVT_ADDF(EVT_VAR(4), EVT_FIXED(-25.0))
                                 EVT_CALL(N(FlowerGuard_SetItemEntityPosition), EVT_VAR(7), EVT_VAR(2), EVT_VAR(3), EVT_VAR(4))
-                                EVT_WAIT_FRAMES(1)
+                                EVT_WAIT(1)
                                 EVT_IF_EQ(EVT_VAR(1), 0)
                                     EVT_BREAK_LOOP
                                 EVT_END_IF
@@ -410,7 +410,7 @@ EvtScript N(interact_80243214) = {
                                 EVT_ADDF(EVT_VAR(3), EVT_FIXED(15.0))
                                 EVT_ADDF(EVT_VAR(4), EVT_FIXED(-25.0))
                                 EVT_CALL(N(FlowerGuard_SetItemEntityPosition), EVT_VAR(7), EVT_VAR(2), EVT_VAR(3), EVT_VAR(4))
-                                EVT_WAIT_FRAMES(1)
+                                EVT_WAIT(1)
                                 EVT_IF_EQ(EVT_VAR(1), 0)
                                     EVT_BREAK_LOOP
                                 EVT_END_IF
@@ -425,7 +425,7 @@ EvtScript N(interact_80243214) = {
         EVT_THREAD
             EVT_CALL(ResetCam, 0, EVT_FIXED(6.0))
         EVT_END_THREAD
-        EVT_WAIT_FRAMES(10)
+        EVT_WAIT(10)
     EVT_ELSE
         EVT_IF_LT(GB_StoryProgress, 57)
             EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_gate_flower_Palette_02_Anim_9, NPC_ANIM_gate_flower_Palette_02_Anim_8, 0, MESSAGE_ID(0x11, 0x0047))
@@ -747,7 +747,7 @@ StaticNpc N(npcGroup_802449D8) = {
 
 EvtScript N(init_80244BC8) = {
     EVT_THREAD
-        EVT_WAIT_FRAMES(2)
+        EVT_WAIT(2)
         EVT_CALL(GetNpcPointer, 2, EVT_VAR(0))
         EVT_IF_EQ(EVT_VAR(0), 0)
             EVT_CALL(RemoveNpc, NPC_SELF)
@@ -911,14 +911,14 @@ EvtScript N(80245990) = {
         EVT_ADD(EVT_VAR(2), EVT_VAR(14))
         EVT_CALL(PlayEffect, 0xD, EVT_VAR(0), EVT_VAR(2), EVT_VAR(1), EVT_VAR(3), 0, 0, 0, 0, 0, 0, 0, 0, 0)
     EVT_END_LOOP
-    EVT_WAIT_FRAMES(EVT_VAR(15))
+    EVT_WAIT(EVT_VAR(15))
     EVT_LABEL(0)
     EVT_CALL(RandInt, EVT_VAR(12), EVT_VAR(0))
     EVT_CALL(RandInt, EVT_VAR(13), EVT_VAR(1))
     EVT_ADD(EVT_VAR(0), EVT_VAR(10))
     EVT_ADD(EVT_VAR(1), EVT_VAR(11))
     EVT_CALL(PlayEffect, 0xD, EVT_VAR(0), EVT_VAR(14), EVT_VAR(1), 200, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-    EVT_WAIT_FRAMES(EVT_VAR(15))
+    EVT_WAIT(EVT_VAR(15))
     EVT_GOTO(0)
     EVT_RETURN
     EVT_END
@@ -937,29 +937,29 @@ EvtScript N(80245C3C) = {
     EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_CALL(N(UnkFunc43))
     EVT_IF_EQ(EVT_VAR(0), 0)
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
         EVT_GOTO(0)
     EVT_END_IF
     EVT_THREAD
-        EVT_WAIT_FRAMES(5)
+        EVT_WAIT(5)
         EVT_CALL(EnableModel, EVT_VAR(6), 1)
     EVT_END_THREAD
     EVT_IF_NE(EVT_VAR(10), 0)
         EVT_THREAD
-            EVT_WAIT_FRAMES(5)
+            EVT_WAIT(5)
             EVT_SET(EVT_VAR(0), EVT_VAR(3))
             EVT_SET(EVT_VAR(1), EVT_VAR(4))
             EVT_SET(EVT_VAR(2), EVT_VAR(5))
             EVT_ADD(EVT_VAR(1), 10)
             EVT_ADD(EVT_VAR(2), 8)
             EVT_CALL(PlayEffect, 0x11, 4, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 15, 0, 0, 0, 0, 0, 0, 0, 0)
-            EVT_WAIT_FRAMES(15)
+            EVT_WAIT(15)
             EVT_SUB(EVT_VAR(1), 10)
             EVT_CALL(MakeItemEntity, EVT_VAR(10), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 14, 0)
         EVT_END_THREAD
     EVT_END_IF
     EVT_THREAD
-        EVT_WAIT_FRAMES(10)
+        EVT_WAIT(10)
         EVT_CALL(PlaySoundAt, 0xF8, 0, EVT_VAR(3), EVT_VAR(4), EVT_VAR(5))
     EVT_END_THREAD
     EVT_CALL(MakeLerp, 0, 180, 20, 2)
@@ -968,7 +968,7 @@ EvtScript N(80245C3C) = {
     EVT_CALL(RotateModel, EVT_VAR(8), EVT_VAR(0), 1, 0, 0)
     EVT_CALL(RotateModel, EVT_VAR(9), EVT_VAR(0), 1, 0, 0)
     EVT_IF_EQ(EVT_VAR(1), 1)
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
         EVT_GOTO(1)
     EVT_END_IF
     EVT_CALL(EnableModel, EVT_VAR(7), 0)

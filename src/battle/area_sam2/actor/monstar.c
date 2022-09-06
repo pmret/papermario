@@ -203,7 +203,7 @@ EvtScript N(idle) = {
     EVT_CALL(SetActorPos, ACTOR_SELF, LW(2), LW(0), LW(4))
     EVT_LABEL(2)
     EVT_CALL(GetActorVar, ACTOR_SELF, 1, LW(5))
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_IF_EQ(LW(5), 1)
         EVT_GOTO(2)
     EVT_END_IF
@@ -218,7 +218,7 @@ EvtScript N(idle) = {
     EVT_CALL(SetActorPos, ACTOR_SELF, LW(2), LW(0), LW(4))
     EVT_LABEL(4)
     EVT_CALL(GetActorVar, ACTOR_SELF, 1, LW(5))
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_IF_EQ(LW(5), 1)
         EVT_GOTO(4)
     EVT_END_IF
@@ -281,7 +281,7 @@ EvtScript N(handleEvent) = {
             EVT_SET_CONST(LW(0), 1)
             EVT_SET_CONST(LW(1), NPC_ANIM_monstar_Palette_00_Anim_8)
             EVT_EXEC_WAIT(DoNormalHit)
-            EVT_WAIT_FRAMES(10)
+            EVT_WAIT(10)
             EVT_SET_CONST(LW(0), 1)
             EVT_SET_CONST(LW(1), NPC_ANIM_monstar_Palette_00_Anim_8)
             EVT_EXEC_WAIT(N(OnDeath))
@@ -334,7 +334,7 @@ EvtScript N(unused) = {
     EVT_ADD(LW(1), 40)
     EVT_SUB(LW(2), 5)
     EVT_CALL(PlayEffect, EFFECT_RADIAL_SHIMMER, 10, LW(0), LW(1), LW(2), EVT_FLOAT(1.0), 300, 0, 0, 0, 0, 0, 0, 0)
-    EVT_WAIT_FRAMES(75)
+    EVT_WAIT(75)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_CALL(SetActorVar, ACTOR_SELF, 1, 0)
@@ -354,12 +354,12 @@ EvtScript N(attack) = {
     EVT_CALL(SetBattleCamOffsetZ, 55)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(MoveBattleCamOver, 30)
-    EVT_WAIT_FRAMES(30)
+    EVT_WAIT(30)
     EVT_THREAD
         EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_monstar_Palette_00_Anim_4)
-        EVT_WAIT_FRAMES(20)
+        EVT_WAIT(20)
         EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_monstar_Palette_00_Anim_5)
-        EVT_WAIT_FRAMES(20)
+        EVT_WAIT(20)
         EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_monstar_Palette_00_Anim_6)
     EVT_END_THREAD
     EVT_THREAD
@@ -368,7 +368,7 @@ EvtScript N(attack) = {
         EVT_LABEL(0)
         EVT_CALL(UpdateLerp)
         EVT_CALL(N(SetBackgroundAlpha), LW(0))
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
         EVT_IF_EQ(LW(1), 1)
             EVT_GOTO(0)
         EVT_END_IF
@@ -382,16 +382,16 @@ EvtScript N(attack) = {
     EVT_CALL(SetBattleCamOffsetZ, 60)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(MoveBattleCamOver, 60)
-    EVT_WAIT_FRAMES(60)
+    EVT_WAIT(60)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2EA)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_36E)
     EVT_THREAD
-        EVT_WAIT_FRAMES(10)
+        EVT_WAIT(10)
         EVT_LOOP(18)
             EVT_CALL(RandInt, 150, LW(0))
             EVT_ADD(LW(0), 100)
             EVT_CALL(N(StartRumbleWithParams), LW(0), 20)
-            EVT_WAIT_FRAMES(10)
+            EVT_WAIT(10)
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_THREAD
@@ -408,10 +408,10 @@ EvtScript N(attack) = {
             EVT_CALL(RandInt, 10, LW(5))
             EVT_ADD(LW(5), 10)
             EVT_CALL(PlayEffect, EFFECT_STAR, LW(0), LW(1), 240, LW(2), LW(3), 0, LW(4), LW(5), 0, 0, 0, 0, 0)
-            EVT_WAIT_FRAMES(3)
+            EVT_WAIT(3)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_WAIT_FRAMES(8)
+    EVT_WAIT(8)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_CALL(MoveBattleCamOver, 10)
     EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
@@ -424,28 +424,28 @@ EvtScript N(attack) = {
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
             EVT_SET(LW(10), LW(0))
-            EVT_WAIT_FRAMES(170)
+            EVT_WAIT(170)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_monstar_Palette_00_Anim_1)
             EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations)))
             EVT_CALL(MakeLerp, 200, 0, 60, 0)
             EVT_LABEL(1)
             EVT_CALL(UpdateLerp)
             EVT_CALL(N(SetBackgroundAlpha), LW(0))
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
             EVT_IF_EQ(LW(1), 1)
                 EVT_GOTO(1)
             EVT_END_IF
             EVT_IF_EQ(LW(10), HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LW(0), DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
-            EVT_WAIT_FRAMES(20)
+            EVT_WAIT(20)
             EVT_CALL(SetActorVar, ACTOR_SELF, 1, 0)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_WAIT_FRAMES(170)
-    EVT_WAIT_FRAMES(2)
+    EVT_WAIT(170)
+    EVT_WAIT(2)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LW(0), DAMAGE_TYPE_COSMIC | DAMAGE_TYPE_NO_CONTACT, 0, 0, 1, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SWITCH(LW(0))
@@ -457,11 +457,11 @@ EvtScript N(attack) = {
             EVT_LABEL(2)
             EVT_CALL(UpdateLerp)
             EVT_CALL(N(SetBackgroundAlpha), LW(0))
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
             EVT_IF_EQ(LW(1), 1)
                 EVT_GOTO(2)
             EVT_END_IF
-            EVT_WAIT_FRAMES(20)
+            EVT_WAIT(20)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_CALL(SetActorVar, ACTOR_SELF, 1, 0)
@@ -508,7 +508,7 @@ EvtScript N(OnDeath) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_IF_NE(LW(1), -1)
         EVT_CALL(SetAnimation, ACTOR_SELF, LW(0), LW(1))
-        EVT_WAIT_FRAMES(10)
+        EVT_WAIT(10)
     EVT_END_IF
     EVT_CALL(func_80269E80, LW(5))
     EVT_SWITCH(LW(5))
@@ -537,7 +537,7 @@ EvtScript N(OnDeath) = {
                 EVT_LOOP(24)
                     EVT_CALL(SetActorYaw, ACTOR_SELF, LW(2))
                     EVT_ADD(LW(2), 30)
-                    EVT_WAIT_FRAMES(1)
+                    EVT_WAIT(1)
                 EVT_END_LOOP
                 EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
             EVT_END_IF
@@ -553,7 +553,7 @@ EvtScript N(OnDeath) = {
     EVT_LOOP(12)
         EVT_CALL(SetActorRotation, ACTOR_SELF, LW(3), 0, 0)
         EVT_ADD(LW(3), 8)
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_EXEC_WAIT(ForceNextTarget)
@@ -583,13 +583,13 @@ EvtScript N(OnBurn) = {
             EVT_LOOP(30)
                 EVT_ADD(LW(7), 48)
                 EVT_CALL(SetActorYaw, ACTOR_SELF, LW(7))
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
             EVT_END_LOOP
             EVT_CALL(GetOriginalActorType, ACTOR_SELF, LW(7))
             EVT_SWITCH(LW(7))
                 EVT_CASE_OR_EQ(ACTOR_TYPE_MONTY_MOLE)
                 EVT_CASE_OR_EQ(ACTOR_TYPE_MONTY_MOLE_BOSS)
-                    EVT_WAIT_FRAMES(30)
+                    EVT_WAIT(30)
                 EVT_END_CASE_GROUP
                 EVT_CASE_DEFAULT
                     EVT_SUB(LW(5), 55)
@@ -611,12 +611,12 @@ EvtScript N(OnBurn) = {
                     EVT_END_IF
             EVT_END_SWITCH
         EVT_CASE_DEFAULT
-            EVT_WAIT_FRAMES(20)
+            EVT_WAIT(20)
     EVT_END_SWITCH
     EVT_IF_NE(LW(2), -1)
         EVT_CALL(SetAnimation, ACTOR_SELF, LW(0), LW(2))
     EVT_END_IF
-    EVT_WAIT_FRAMES(10)
+    EVT_WAIT(10)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LW(1))
     EVT_SWITCH(LW(1))
         EVT_CASE_EQ(EVENT_BURN_HIT)

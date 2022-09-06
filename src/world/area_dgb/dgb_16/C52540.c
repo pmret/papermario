@@ -54,9 +54,9 @@ EvtScript N(exitSingleDoor_80241520) = {
     EVT_SET(EVT_VAR(2), 16)
     EVT_SET(EVT_VAR(3), -1)
     EVT_EXEC(ExitSingleDoor)
-    EVT_WAIT_FRAMES(17)
+    EVT_WAIT(17)
     EVT_CALL(GotoMap, EVT_PTR("dgb_15"), 2)
-    EVT_WAIT_FRAMES(100)
+    EVT_WAIT(100)
     EVT_RETURN
     EVT_END
 };

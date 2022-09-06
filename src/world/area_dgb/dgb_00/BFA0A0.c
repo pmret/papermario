@@ -50,9 +50,9 @@ EvtScript N(exitDoubleDoor_8024021C) = {
     EVT_SET(EVT_VAR(2), 5)
     EVT_SET(EVT_VAR(3), 7)
     EVT_EXEC(ExitDoubleDoor)
-    EVT_WAIT_FRAMES(17)
+    EVT_WAIT(17)
     EVT_CALL(GotoMap, EVT_PTR("dgb_01"), 0)
-    EVT_WAIT_FRAMES(100)
+    EVT_WAIT(100)
     EVT_RETURN
     EVT_END
 };
@@ -85,7 +85,7 @@ EvtScript N(enterDoubleDoor_8024038C) = {
         EVT_CASE_EQ(0)
             EVT_SET(EVT_VAR(0), EVT_PTR(N(802402D0)))
             EVT_EXEC(EnterWalk)
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
         EVT_CASE_EQ(1)
             EVT_IF_GE(GB_StoryProgress, -28)
                 EVT_IF_LT(GB_StoryProgress, -25)

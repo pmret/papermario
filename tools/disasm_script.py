@@ -790,7 +790,7 @@ class ScriptDisassembler:
             self.indent -= 1
             self.write_line("EVT_END_LOOP")
         elif opcode == 0x07: self.write_line(f"EVT_BREAK_LOOP")
-        elif opcode == 0x08: self.write_line(f"EVT_WAIT_FRAMES({self.var(argv[0])})")
+        elif opcode == 0x08: self.write_line(f"EVT_WAIT({self.var(argv[0])})")
         elif opcode == 0x09: self.write_line(f"EVT_WAIT_SECS({self.var(argv[0])})")
         elif opcode == 0x0A:
             if self.var(argv[0]).startswith("LW"):

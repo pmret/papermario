@@ -146,7 +146,7 @@ EvtScript N(80244500) = {
         EVT_SET(EVT_VAR(8), 0)
         EVT_SET(EVT_AREA_FLAG(41), 0)
     EVT_END_IF
-    EVT_WAIT_FRAMES(15)
+    EVT_WAIT(15)
     EVT_CALL(PlaySound, 0x204D)
     EVT_THREAD
         EVT_CALL(ShakeCam, 0, 0, 30, EVT_FIXED(0.8))
@@ -165,13 +165,13 @@ EvtScript N(80244500) = {
         EVT_CALL(UpdateColliderTransform, 27)
         EVT_CALL(UpdateColliderTransform, 32)
         EVT_CALL(UpdateColliderTransform, 33)
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
         EVT_IF_EQ(EVT_VAR(1), 0)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
     EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_WAIT_FRAMES(10)
+    EVT_WAIT(10)
     EVT_CALL(MakeLerp, EVT_VAR(7), EVT_VAR(8), 15, 0)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
@@ -181,7 +181,7 @@ EvtScript N(80244500) = {
         EVT_CALL(TranslateGroup, 111, 0, EVT_VAR(6), 0)
         EVT_CALL(RotateGroup, 97, EVT_VAR(0), 1, 0, 0)
         EVT_CALL(RotateGroup, 111, EVT_VAR(0), 1, 0, 0)
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
         EVT_IF_EQ(EVT_VAR(1), 0)
             EVT_BREAK_LOOP
         EVT_END_IF
@@ -209,7 +209,7 @@ EvtScript N(802448FC) = {
         EVT_SET(EVT_VAR(8), 0)
         EVT_SET(EVT_AREA_FLAG(42), 0)
     EVT_END_IF
-    EVT_WAIT_FRAMES(15)
+    EVT_WAIT(15)
     EVT_CALL(PlaySound, 0x204D)
     EVT_THREAD
         EVT_CALL(ShakeCam, 0, 0, 30, EVT_FIXED(0.8))
@@ -233,13 +233,13 @@ EvtScript N(802448FC) = {
         EVT_CALL(UpdateColliderTransform, 36)
         EVT_CALL(UpdateColliderTransform, 41)
         EVT_CALL(UpdateColliderTransform, 42)
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
         EVT_IF_EQ(EVT_VAR(1), 0)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
     EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_WAIT_FRAMES(10)
+    EVT_WAIT(10)
     EVT_CALL(MakeLerp, EVT_VAR(7), EVT_VAR(8), 15, 0)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
@@ -252,7 +252,7 @@ EvtScript N(802448FC) = {
         EVT_CALL(RotateGroup, 104, EVT_VAR(0), 1, 0, 0)
         EVT_CALL(RotateGroup, 118, EVT_VAR(0), 1, 0, 0)
         EVT_CALL(RotateGroup, 132, EVT_VAR(0), 1, 0, 0)
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
         EVT_IF_EQ(EVT_VAR(1), 0)
             EVT_BREAK_LOOP
         EVT_END_IF
@@ -280,7 +280,7 @@ EvtScript N(80244DC8) = {
         EVT_SET(EVT_VAR(8), 0)
         EVT_SET(EVT_AREA_FLAG(43), 0)
     EVT_END_IF
-    EVT_WAIT_FRAMES(15)
+    EVT_WAIT(15)
     EVT_CALL(PlaySound, 0x204D)
     EVT_THREAD
         EVT_CALL(ShakeCam, 0, 0, 30, EVT_FIXED(0.8))
@@ -299,13 +299,13 @@ EvtScript N(80244DC8) = {
         EVT_CALL(UpdateColliderTransform, 39)
         EVT_CALL(UpdateColliderTransform, 44)
         EVT_CALL(UpdateColliderTransform, 45)
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
         EVT_IF_EQ(EVT_VAR(1), 0)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
     EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_WAIT_FRAMES(10)
+    EVT_WAIT(10)
     EVT_CALL(MakeLerp, EVT_VAR(7), EVT_VAR(8), 15, 0)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
@@ -315,7 +315,7 @@ EvtScript N(80244DC8) = {
         EVT_CALL(TranslateGroup, 139, 0, EVT_VAR(6), 0)
         EVT_CALL(RotateGroup, 125, EVT_VAR(0), 1, 0, 0)
         EVT_CALL(RotateGroup, 139, EVT_VAR(0), 1, 0, 0)
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
         EVT_IF_EQ(EVT_VAR(1), 0)
             EVT_BREAK_LOOP
         EVT_END_IF

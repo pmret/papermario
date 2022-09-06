@@ -121,10 +121,10 @@ EvtScript N(idle_8021E598) = {
         EVT_LABEL(0)
         EVT_CALL(GetStatusFlags, ACTOR_SELF, LW(1))
         EVT_IF_FLAG(LW(1), STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
             EVT_GOTO(0)
         EVT_END_IF
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
     EVT_ADD(LW(0), 5)
@@ -137,10 +137,10 @@ EvtScript N(idle_8021E598) = {
         EVT_LABEL(1)
         EVT_CALL(GetStatusFlags, ACTOR_SELF, LW(1))
         EVT_IF_FLAG(LW(1), STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
             EVT_GOTO(1)
         EVT_END_IF
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
     EVT_SUB(LW(0), 5)
@@ -153,10 +153,10 @@ EvtScript N(idle_8021E598) = {
         EVT_LABEL(2)
         EVT_CALL(GetStatusFlags, ACTOR_SELF, LW(1))
         EVT_IF_FLAG(LW(1), STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
             EVT_GOTO(2)
         EVT_END_IF
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_GOTO(10)
     EVT_RETURN
@@ -215,7 +215,7 @@ EvtScript N(handleEvent_8021E874) = {
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
             EVT_CALL(SetAnimationRate, ACTOR_SELF, 1, EVT_FLOAT(1.0))
-            EVT_WAIT_FRAMES(5)
+            EVT_WAIT(5)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_spiked_goomba_default_idle)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.6))
             EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
@@ -239,7 +239,7 @@ EvtScript N(handleEvent_8021E874) = {
             EVT_SET_CONST(LW(0), 1)
             EVT_SET_CONST(LW(1), NPC_ANIM_spiked_goomba_default_pain)
             EVT_EXEC_WAIT(DoNormalHit)
-            EVT_WAIT_FRAMES(10)
+            EVT_WAIT(10)
             EVT_SET_CONST(LW(0), 1)
             EVT_SET_CONST(LW(1), NPC_ANIM_spiked_goomba_default_dead)
             EVT_EXEC_WAIT(DoDeath)
@@ -276,7 +276,7 @@ EvtScript N(handleEvent_8021E874) = {
             EVT_IF_NOT_FLAG(LW(0), STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
                 EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_spiked_goomba_default_laugh)
             EVT_END_IF
-            EVT_WAIT_FRAMES(10)
+            EVT_WAIT(10)
             EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LW(3))
             EVT_IF_FLAG(LW(3), STATUS_FLAG_SHRINK)
@@ -285,7 +285,7 @@ EvtScript N(handleEvent_8021E874) = {
                 EVT_ADD(LW(1), 26)
             EVT_END_IF
             EVT_CALL(PlayEffect, EFFECT_LENS_FLARE, 0, LW(0), LW(1), LW(2), 20, 0, 0, 0, 0, 0, 0, 0, 0)
-            EVT_WAIT_FRAMES(20)
+            EVT_WAIT(20)
         EVT_CASE_DEFAULT
     EVT_END_SWITCH
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_spiked_goomba_default_idle)
@@ -311,9 +311,9 @@ EvtScript N(takeTurn_8021F1BC) = {
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_spiked_goomba_default_idle)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, -1, 0)
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, -2, 0)
-    EVT_WAIT_FRAMES(5)
+    EVT_WAIT(5)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_spiked_goomba_default_headbonk)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LW(0), 0, 0, 1, BS_FLAGS1_10)
@@ -338,29 +338,29 @@ EvtScript N(takeTurn_8021F1BC) = {
                     EVT_SET(LW(1), LW(4))
                     EVT_SET(LW(2), LW(5))
                     EVT_SET(LW(3), LW(6))
-                    EVT_WAIT_FRAMES(1)
+                    EVT_WAIT(1)
                 EVT_END_LOOP
             EVT_END_THREAD
             EVT_THREAD
-                EVT_WAIT_FRAMES(6)
+                EVT_WAIT(6)
                 EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_spiked_goomba_default_headbonk)
             EVT_END_THREAD
             EVT_CALL(JumpToGoal, ACTOR_SELF, 16, FALSE, TRUE, FALSE)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_spiked_goomba_default_sleep)
             EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.1), EVT_FLOAT(0.8), EVT_FLOAT(1.0))
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 5, 0)
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
             EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.3), EVT_FLOAT(0.5), EVT_FLOAT(1.0))
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, -2, 0)
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
             EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 7, 0)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_spiked_goomba_default_pain)
-            EVT_WAIT_FRAMES(5)
+            EVT_WAIT(5)
             EVT_IF_EQ(LW(10), HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LW(0), DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
-            EVT_WAIT_FRAMES(5)
+            EVT_WAIT(5)
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_spiked_goomba_default_headbonk)
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
@@ -370,18 +370,18 @@ EvtScript N(takeTurn_8021F1BC) = {
             EVT_CALL(SetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(2.0))
             EVT_THREAD
-                EVT_WAIT_FRAMES(4)
+                EVT_WAIT(4)
                 EVT_SET(LW(0), 180)
                 EVT_LOOP(4)
                     EVT_SUB(LW(0), 45)
                     EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, LW(0))
-                    EVT_WAIT_FRAMES(1)
+                    EVT_WAIT(1)
                 EVT_END_LOOP
                 EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_spiked_goomba_default_headbonk)
             EVT_END_THREAD
             EVT_CALL(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_spiked_goomba_default_dizzy)
-            EVT_WAIT_FRAMES(5)
+            EVT_WAIT(5)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(YieldTurn)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
@@ -392,7 +392,7 @@ EvtScript N(takeTurn_8021F1BC) = {
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
             EVT_CALL(SetAnimationRate, ACTOR_SELF, 1, EVT_FLOAT(1.0))
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
-            EVT_WAIT_FRAMES(5)
+            EVT_WAIT(5)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_spiked_goomba_default_idle)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.6))
             EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
@@ -414,19 +414,19 @@ EvtScript N(takeTurn_8021F1BC) = {
                     EVT_SET(LW(1), LW(4))
                     EVT_SET(LW(2), LW(5))
                     EVT_SET(LW(3), LW(6))
-                    EVT_WAIT_FRAMES(1)
+                    EVT_WAIT(1)
                 EVT_END_LOOP
             EVT_END_THREAD
             EVT_THREAD
-                EVT_WAIT_FRAMES(6)
+                EVT_WAIT(6)
                 EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_spiked_goomba_default_headbonk)
             EVT_END_THREAD
             EVT_CALL(JumpToGoal, ACTOR_SELF, 16, FALSE, TRUE, FALSE)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_spiked_goomba_default_headbonk)
             EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.1), EVT_FLOAT(0.8), EVT_FLOAT(1.0))
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
             EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.3), EVT_FLOAT(0.5), EVT_FLOAT(1.0))
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
     EVT_END_SWITCH
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LW(0), 0, 0, 0, 2, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SWITCH(LW(0))
@@ -434,9 +434,9 @@ EvtScript N(takeTurn_8021F1BC) = {
         EVT_CASE_OR_EQ(HIT_RESULT_QUAKE_IMMUNE)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.1), EVT_FLOAT(0.8), EVT_FLOAT(1.0))
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
             EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
             EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_spiked_goomba_default_idle)
@@ -455,10 +455,10 @@ EvtScript N(takeTurn_8021F1BC) = {
             EVT_CALL(GetLastDamage, ACTOR_PLAYER, LW(0))
             EVT_IF_GT(LW(0), 0)
                 EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_spiked_goomba_default_laugh)
-                EVT_WAIT_FRAMES(15)
+                EVT_WAIT(15)
             EVT_ELSE
                 EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_spiked_goomba_default_idle)
-                EVT_WAIT_FRAMES(3)
+                EVT_WAIT(3)
             EVT_END_IF
             EVT_CALL(YieldTurn)
             EVT_CALL(SetAnimationRate, ACTOR_SELF, 1, EVT_FLOAT(2.0))

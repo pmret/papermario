@@ -11,9 +11,9 @@ EvtScript N(exitSingleDoor_80240100) = {
     EVT_SET(EVT_VAR(2), 0)
     EVT_SET(EVT_VAR(3), -1)
     EVT_EXEC(ExitSingleDoor)
-    EVT_WAIT_FRAMES(17)
+    EVT_WAIT(17)
     EVT_CALL(GotoMap, EVT_PTR("arn_10"), 1)
-    EVT_WAIT_FRAMES(100)
+    EVT_WAIT(100)
     EVT_RETURN
     EVT_END
 };
@@ -26,9 +26,9 @@ EvtScript N(exitSingleDoor_802401A4) = {
     EVT_SET(EVT_VAR(2), 2)
     EVT_SET(EVT_VAR(3), 1)
     EVT_EXEC(ExitSingleDoor)
-    EVT_WAIT_FRAMES(17)
+    EVT_WAIT(17)
     EVT_CALL(GotoMap, EVT_PTR("arn_13"), 0)
-    EVT_WAIT_FRAMES(100)
+    EVT_WAIT(100)
     EVT_RETURN
     EVT_END
 };
@@ -131,14 +131,14 @@ EvtScript N(idle_802404E8) = {
     EVT_CALL(PlaySoundAtNpc, NPC_SELF, 0x20C8, 0)
     EVT_CALL(NpcJump0, NPC_SELF, EVT_VAR(0), 0, EVT_VAR(2), 8)
     EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_tubbas_heart_Palette_00_Anim_14)
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_tubbas_heart_Palette_00_Anim_13)
     EVT_SUB(EVT_VAR(0), 80)
     EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FIXED(2.5))
     EVT_CALL(PlaySoundAtNpc, NPC_SELF, 0x20C8, 0)
     EVT_CALL(NpcJump0, NPC_SELF, EVT_VAR(0), 0, EVT_VAR(2), 12)
     EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_tubbas_heart_Palette_00_Anim_14)
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_tubbas_heart_Palette_00_Anim_13)
     EVT_SUB(EVT_VAR(0), 80)
     EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FIXED(2.5))

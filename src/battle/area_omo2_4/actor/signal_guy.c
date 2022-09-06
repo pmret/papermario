@@ -102,9 +102,9 @@ EvtScript N(init) = {
         EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_GENERAL_WHISTLE)
         EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_marshal_guy_Palette_00_Anim_4)
-        EVT_WAIT_FRAMES(20)
+        EVT_WAIT(20)
         EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_marshal_guy_Palette_00_Anim_5)
-        EVT_WAIT_FRAMES(15)
+        EVT_WAIT(15)
         EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_marshal_guy_Palette_00_Anim_9)
     EVT_END_THREAD
     EVT_RETURN
@@ -113,7 +113,7 @@ EvtScript N(init) = {
 
 EvtScript N(idle) = {
     EVT_LABEL(0)
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_GOTO(0)
     EVT_RETURN
     EVT_END
@@ -143,14 +143,14 @@ EvtScript N(handleEvent) = {
             EVT_CALL(JumpToGoal, ACTOR_SELF, 8, FALSE, TRUE, FALSE)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_marshal_guy_Palette_00_Anim_2)
-            EVT_WAIT_FRAMES(24)
+            EVT_WAIT(24)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_marshal_guy_Palette_00_Anim_3)
             EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
             EVT_ADD(LW(0), 5)
             EVT_ADD(LW(1), 10)
             EVT_LOOP(4)
                 EVT_CALL(PlayEffect, EFFECT_SWEAT, 0, LW(0), LW(1), LW(2), 10, 45, 4, 0, 0, 0, 0, 0, 0)
-                EVT_WAIT_FRAMES(6)
+                EVT_WAIT(6)
             EVT_END_LOOP
             EVT_CALL(SetActorSounds, ACTOR_SELF, 0, SOUND_20BA, SOUND_3B4)
             EVT_CALL(SetActorSounds, ACTOR_SELF, 4, 10, 0)
@@ -173,7 +173,7 @@ EvtScript N(handleEvent) = {
             EVT_SET_CONST(LW(0), 1)
             EVT_SET_CONST(LW(1), NPC_ANIM_marshal_guy_Palette_00_Anim_A)
             EVT_EXEC_WAIT(DoNormalHit)
-            EVT_WAIT_FRAMES(1000)
+            EVT_WAIT(1000)
         EVT_CASE_EQ(EVENT_SCARE_AWAY)
             EVT_SET_CONST(LW(0), 1)
             EVT_SET_CONST(LW(1), NPC_ANIM_marshal_guy_Palette_00_Anim_1)
@@ -183,7 +183,7 @@ EvtScript N(handleEvent) = {
         EVT_CASE_DEFAULT
             EVT_SET_CONST(LW(1), NPC_ANIM_marshal_guy_Palette_00_Anim_A)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, LW(1))
-            EVT_WAIT_FRAMES(20)
+            EVT_WAIT(20)
     EVT_END_SWITCH
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN

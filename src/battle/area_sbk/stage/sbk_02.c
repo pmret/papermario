@@ -21,7 +21,7 @@ EvtScript N(8021F720) = {
     EVT_END_IF
     EVT_CALL(N(UnkFloatFunc3), LW(7), LW(0), LW(1), LW(2))
     EVT_CALL(TranslateModel, LW(10), LW(0), LW(1), LW(2))
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_GOTO(0)
     EVT_RETURN
     EVT_END

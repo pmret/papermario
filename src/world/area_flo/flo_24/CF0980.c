@@ -57,14 +57,14 @@ EvtScript N(80240690) = {
         EVT_ADD(EVT_VAR(2), EVT_VAR(14))
         EVT_CALL(PlayEffect, 0xD, EVT_VAR(0), EVT_VAR(2), EVT_VAR(1), EVT_VAR(3), 0, 0, 0, 0, 0, 0, 0, 0, 0)
     EVT_END_LOOP
-    EVT_WAIT_FRAMES(EVT_VAR(15))
+    EVT_WAIT(EVT_VAR(15))
     EVT_LABEL(0)
     EVT_CALL(RandInt, EVT_VAR(12), EVT_VAR(0))
     EVT_CALL(RandInt, EVT_VAR(13), EVT_VAR(1))
     EVT_ADD(EVT_VAR(0), EVT_VAR(10))
     EVT_ADD(EVT_VAR(1), EVT_VAR(11))
     EVT_CALL(PlayEffect, 0xD, EVT_VAR(0), EVT_VAR(14), EVT_VAR(1), 200, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-    EVT_WAIT_FRAMES(EVT_VAR(15))
+    EVT_WAIT(EVT_VAR(15))
     EVT_GOTO(0)
     EVT_RETURN
     EVT_END
@@ -222,7 +222,7 @@ EvtScript N(8024183C) = {
         EVT_CALL(RotateModel, 101, EVT_VAR(0), 1, 0, 0)
         EVT_CALL(RotateModel, 103, EVT_VAR(0), 1, 0, 0)
         EVT_IF_EQ(EVT_VAR(1), 1)
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
             EVT_GOTO(0)
         EVT_END_IF
         EVT_THREAD
@@ -230,15 +230,15 @@ EvtScript N(8024183C) = {
             EVT_LOOP(0)
                 EVT_CALL(UpdateLerp)
                 EVT_CALL(TranslateGroup, 100, 0, EVT_VAR(0), 0)
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
                 EVT_IF_EQ(EVT_VAR(1), 0)
                     EVT_BREAK_LOOP
                 EVT_END_IF
             EVT_END_LOOP
-            EVT_WAIT_FRAMES(30)
+            EVT_WAIT(30)
             EVT_SET(GB_StoryProgress, 49)
             EVT_CALL(GotoMap, EVT_PTR(UNK_STR_80242280), 2)
-            EVT_WAIT_FRAMES(100)
+            EVT_WAIT(100)
             EVT_RETURN
             EVT_END
 };

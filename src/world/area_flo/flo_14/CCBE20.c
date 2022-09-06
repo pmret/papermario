@@ -81,7 +81,7 @@ EvtScript N(80244604) = {
             EVT_CALL(N(AddPlayerHandsOffset), EVT_VAR(3), EVT_VAR(4), EVT_VAR(5))
             EVT_CALL(MakeItemEntity, EVT_VAR(0), EVT_VAR(3), EVT_VAR(4), EVT_VAR(5), 1, 0)
             EVT_CALL(SetPlayerAnimation, ANIM_60005)
-            EVT_WAIT_FRAMES(30)
+            EVT_WAIT(30)
             EVT_CALL(SetPlayerAnimation, ANIM_10002)
             EVT_CALL(RemoveItemEntity, EVT_VAR(0))
     EVT_END_SWITCH
@@ -133,17 +133,17 @@ EvtScript N(interact_80244790) = {
             EVT_CALL(SetNpcFlagBits, NPC_SELF, ((NPC_FLAG_100)), FALSE)
             EVT_CALL(InterpPlayerYaw, 90, 0)
             EVT_CALL(func_802CF56C, 2)
-            EVT_WAIT_FRAMES(5)
+            EVT_WAIT(5)
             EVT_CALL(AdjustCam, 0, EVT_FIXED(1.0), 0, 350, EVT_FIXED(17.0), EVT_FIXED(-6.0))
             EVT_EXEC(N(80243870))
             EVT_CALL(SpeakToPlayer, NPC_SELF, -1, -1, 0, MESSAGE_ID(0x11, 0x0062))
             EVT_THREAD
-                EVT_WAIT_FRAMES(40)
+                EVT_WAIT(40)
                 EVT_CALL(InterpPlayerYaw, 315, 0)
             EVT_END_THREAD
             EVT_LABEL(10)
             EVT_IF_EQ(EVT_AREA_FLAG(37), 0)
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
                 EVT_GOTO(10)
             EVT_END_IF
             EVT_CALL(ResetCam, 0, EVT_FIXED(4.0))
@@ -268,7 +268,7 @@ EvtScript N(80244F70) = {
                 EVT_END_IF
                 EVT_IF_LT(EVT_VAR(7), 90)
                     EVT_IF_EQ(EVT_VAR(7), 0)
-                        EVT_WAIT_FRAMES(5)
+                        EVT_WAIT(5)
                         EVT_SET(EVT_VAR(8), 6)
                         EVT_CALL(ModifyColliderFlags, 0, EVT_VAR(9), 0x7FFFFE00)
                     EVT_END_IF
@@ -298,7 +298,7 @@ EvtScript N(80244F70) = {
         EVT_END_IF
         EVT_CALL(RotateModel, EVT_VAR(5), EVT_VAR(7), -1, 0, 0)
         EVT_CALL(RotateModel, EVT_VAR(6), EVT_VAR(7), -1, 0, 0)
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_RETURN
     EVT_END

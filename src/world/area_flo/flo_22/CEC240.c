@@ -82,7 +82,7 @@ EvtScript N(idle_8024054C) = {
                 EVT_SET(EVT_MAP_VAR(10), 0)
                 EVT_CALL(StartBattle)
         EVT_END_SWITCH
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_RETURN
     EVT_END
@@ -93,7 +93,7 @@ EvtScript N(defeat_802405E4) = {
     EVT_SWITCH(EVT_VAR(0))
         EVT_CASE_EQ(0)
             EVT_THREAD
-                EVT_WAIT_FRAMES(25)
+                EVT_WAIT(25)
                 EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
                 EVT_CALL(SetNpcFlagBits, NPC_SELF, ((NPC_FLAG_2)), FALSE)
             EVT_END_THREAD
@@ -103,7 +103,7 @@ EvtScript N(defeat_802405E4) = {
         EVT_CASE_EQ(2)
             EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_bzzap_Palette_00_Anim_1)
             EVT_CALL(SetNpcPos, NPC_SELF, 30, 60, 0)
-            EVT_WAIT_FRAMES(10)
+            EVT_WAIT(10)
             EVT_CALL(SetNpcJumpscale, NPC_SELF, 0)
             EVT_CALL(NpcJump0, NPC_SELF, 30, 0, 0, 15)
             EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
@@ -129,7 +129,7 @@ EvtScript N(idle_80240778) = {
                 EVT_SET(EVT_MAP_VAR(11), 0)
                 EVT_CALL(StartBattle)
         EVT_END_SWITCH
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_RETURN
     EVT_END
@@ -140,7 +140,7 @@ EvtScript N(defeat_80240810) = {
     EVT_SWITCH(EVT_VAR(0))
         EVT_CASE_EQ(0)
             EVT_THREAD
-                EVT_WAIT_FRAMES(25)
+                EVT_WAIT(25)
                 EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
                 EVT_CALL(SetNpcFlagBits, NPC_SELF, ((NPC_FLAG_2)), FALSE)
             EVT_END_THREAD
@@ -149,13 +149,13 @@ EvtScript N(defeat_80240810) = {
             EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
         EVT_CASE_EQ(3)
             EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_dayzee_Palette_00_Anim_1)
-            EVT_WAIT_FRAMES(10)
+            EVT_WAIT(10)
             EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FIXED(2.0))
             EVT_CALL(NpcJump0, NPC_SELF, 30, 0, 0, 15)
             EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
         EVT_CASE_EQ(2)
             EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_dayzee_Palette_00_Anim_1)
-            EVT_WAIT_FRAMES(10)
+            EVT_WAIT(10)
             EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FIXED(2.0))
             EVT_CALL(NpcJump0, NPC_SELF, 30, 0, 0, 15)
             EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
@@ -258,9 +258,9 @@ s32 N(itemList_80240E10)[] = {
 
 EvtScript N(80240E24) = {
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_WAIT_FRAMES(20)
+    EVT_WAIT(20)
     EVT_CALL(ShowMessageAtScreenPos, MESSAGE_ID(0x11, 0x00DB), 300, 120)
-    EVT_WAIT_FRAMES(10)
+    EVT_WAIT(10)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_RETURN
     EVT_END
@@ -280,18 +280,18 @@ EvtScript N(80240E84) = {
             EVT_CALL(SetItemPos, EVT_VAR(7), EVT_VAR(0), EVT_VAR(6), 0)
             EVT_ADD(EVT_VAR(6), EVT_VAR(5))
             EVT_ADD(EVT_VAR(5), -1)
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
             EVT_IF_EQ(EVT_VAR(1), 0)
                 EVT_BREAK_LOOP
             EVT_END_IF
         EVT_END_LOOP
         EVT_CALL(RemoveItemEntity, EVT_VAR(7))
     EVT_END_THREAD
-    EVT_WAIT_FRAMES(10)
+    EVT_WAIT(10)
     EVT_CALL(PlaySoundAt, 0x302, 0, 35, 0, 0)
-    EVT_WAIT_FRAMES(5)
+    EVT_WAIT(5)
     EVT_CALL(SetPlayerAnimation, ANIM_10002)
-    EVT_WAIT_FRAMES(10)
+    EVT_WAIT(10)
     EVT_RETURN
     EVT_END
 };
@@ -327,7 +327,7 @@ EvtScript N(80241028) = {
                 EVT_LOOP(53)
                     EVT_CALL(GetNpcPos, 0, EVT_VAR(1), EVT_VAR(2), EVT_VAR(3))
                     EVT_CALL(SetItemPos, EVT_VAR(7), EVT_VAR(1), EVT_VAR(2), EVT_VAR(3))
-                    EVT_WAIT_FRAMES(1)
+                    EVT_WAIT(1)
                 EVT_END_LOOP
                 EVT_CALL(SetNpcPos, 0, 0, -1000, 0)
                 EVT_CALL(SetNpcFlagBits, 0, ((NPC_FLAG_2)), FALSE)
@@ -343,11 +343,11 @@ EvtScript N(80241028) = {
             EVT_IF_EQ(EVT_VAR(1), 0)
                 EVT_CALL(SetNpcJumpscale, 0, EVT_FIXED(0.0))
                 EVT_CALL(NpcFacePlayer, 0, 0)
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
                 EVT_CALL(SetNpcPos, 0, 30, 0, 0)
                 EVT_CALL(SetNpcAnimation, 0, NPC_ANIM_bzzap_Palette_00_Anim_1)
                 EVT_CALL(NpcJump0, 0, 30, 60, 0, 20)
-                EVT_WAIT_FRAMES(10)
+                EVT_WAIT(10)
                 EVT_CALL(SetNpcAnimation, 0, NPC_ANIM_bzzap_Palette_00_Anim_4)
                 EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
                 EVT_ADD(EVT_VAR(1), 20)

@@ -67,14 +67,14 @@ EvtScript N(80240DA0) = {
         EVT_ADD(EVT_VAR(2), EVT_VAR(14))
         EVT_CALL(PlayEffect, 0xD, EVT_VAR(0), EVT_VAR(2), EVT_VAR(1), EVT_VAR(3), 0, 0, 0, 0, 0, 0, 0, 0, 0)
     EVT_END_LOOP
-    EVT_WAIT_FRAMES(EVT_VAR(15))
+    EVT_WAIT(EVT_VAR(15))
     EVT_LABEL(0)
     EVT_CALL(RandInt, EVT_VAR(12), EVT_VAR(0))
     EVT_CALL(RandInt, EVT_VAR(13), EVT_VAR(1))
     EVT_ADD(EVT_VAR(0), EVT_VAR(10))
     EVT_ADD(EVT_VAR(1), EVT_VAR(11))
     EVT_CALL(PlayEffect, 0xD, EVT_VAR(0), EVT_VAR(14), EVT_VAR(1), 200, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-    EVT_WAIT_FRAMES(EVT_VAR(15))
+    EVT_WAIT(EVT_VAR(15))
     EVT_GOTO(0)
     EVT_RETURN
     EVT_END
@@ -149,7 +149,7 @@ EvtScript N(80241314) = {
             EVT_CALL(N(AddPlayerHandsOffset), EVT_VAR(3), EVT_VAR(4), EVT_VAR(5))
             EVT_CALL(MakeItemEntity, EVT_VAR(0), EVT_VAR(3), EVT_VAR(4), EVT_VAR(5), 1, 0)
             EVT_CALL(SetPlayerAnimation, 393221)
-            EVT_WAIT_FRAMES(30)
+            EVT_WAIT(30)
             EVT_CALL(SetPlayerAnimation, ANIM_10002)
             EVT_CALL(RemoveItemEntity, EVT_VAR(0))
     EVT_END_SWITCH
@@ -228,7 +228,7 @@ EvtScript N(interact_80241564) = {
                 EVT_SET(EVT_VAR(7), EVT_VAR(0))
                 EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_2095, 0)
                 EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_gate_flower_Palette_00_Anim_3)
-                EVT_WAIT_FRAMES(20)
+                EVT_WAIT(20)
                 EVT_CALL(RemoveItemEntity, EVT_VAR(7))
                 EVT_SWITCH(EVT_VAR(8))
                     EVT_CASE_EQ(158)
@@ -251,7 +251,7 @@ EvtScript N(interact_80241564) = {
                             EVT_CALL(RotateModel, 55, EVT_VAR(9), 0, 1, 0)
                             EVT_CALL(RotateModel, 56, EVT_VAR(9), 0, 1, 0)
                             EVT_CALL(RotateModel, 57, EVT_VAR(9), 0, 1, 0)
-                            EVT_WAIT_FRAMES(1)
+                            EVT_WAIT(1)
                             EVT_IF_NE(EVT_VAR(1), 1)
                                 EVT_BREAK_LOOP
                             EVT_END_IF
@@ -270,7 +270,7 @@ EvtScript N(interact_80241564) = {
                         EVT_CALL(PlaySoundAtNpc, NPC_SELF, 0x2096, 0)
                         EVT_CALL(MakeItemEntity, EVT_VAR(8), 375, 20, 0, 1, 0)
                         EVT_SET(EVT_VAR(7), EVT_VAR(0))
-                        EVT_WAIT_FRAMES(5)
+                        EVT_WAIT(5)
                         EVT_CALL(GetAngleToPlayer, -1, EVT_VAR(0))
                         EVT_IF_LT(EVT_VAR(0), 180)
                             EVT_CALL(MakeLerp, 0, 100, 7, 0)
@@ -286,7 +286,7 @@ EvtScript N(interact_80241564) = {
                                 EVT_ADDF(EVT_VAR(3), EVT_FIXED(15.0))
                                 EVT_ADDF(EVT_VAR(4), EVT_FIXED(-30.0))
                                 EVT_CALL(N(FlowerGuard_SetItemEntityPosition), EVT_VAR(7), EVT_VAR(2), EVT_VAR(3), EVT_VAR(4))
-                                EVT_WAIT_FRAMES(1)
+                                EVT_WAIT(1)
                                 EVT_IF_NE(EVT_VAR(1), 1)
                                     EVT_BREAK_LOOP
                                 EVT_END_IF
@@ -305,7 +305,7 @@ EvtScript N(interact_80241564) = {
                                 EVT_ADDF(EVT_VAR(3), EVT_FIXED(15.0))
                                 EVT_ADDF(EVT_VAR(4), EVT_FIXED(-30.0))
                                 EVT_CALL(N(FlowerGuard_SetItemEntityPosition), EVT_VAR(7), EVT_VAR(2), EVT_VAR(3), EVT_VAR(4))
-                                EVT_WAIT_FRAMES(1)
+                                EVT_WAIT(1)
                                 EVT_IF_NE(EVT_VAR(1), 1)
                                     EVT_BREAK_LOOP
                                 EVT_END_IF
@@ -320,7 +320,7 @@ EvtScript N(interact_80241564) = {
         EVT_THREAD
             EVT_CALL(ResetCam, 0, EVT_FIXED(6.0))
         EVT_END_THREAD
-        EVT_WAIT_FRAMES(10)
+        EVT_WAIT(10)
     EVT_ELSE
         EVT_IF_LT(GB_StoryProgress, 57)
             EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_gate_flower_Palette_00_Anim_9, NPC_ANIM_gate_flower_Palette_00_Anim_8, 0, MESSAGE_ID(0x11, 0x004E))

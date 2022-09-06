@@ -47,9 +47,9 @@ EvtScript N(exitSingleDoor_80243210) = {
     EVT_SET(EVT_VAR(2), 16)
     EVT_SET(EVT_VAR(3), 1)
     EVT_EXEC(ExitSingleDoor)
-    EVT_WAIT_FRAMES(17)
+    EVT_WAIT(17)
     EVT_CALL(GotoMap, EVT_PTR("dgb_06"), 0)
-    EVT_WAIT_FRAMES(100)
+    EVT_WAIT(100)
     EVT_RETURN
     EVT_END
 };
@@ -63,9 +63,9 @@ EvtScript N(exitDoubleDoor_802432C4) = {
     EVT_SET(EVT_VAR(2), 13)
     EVT_SET(EVT_VAR(3), 11)
     EVT_EXEC(ExitDoubleDoor)
-    EVT_WAIT_FRAMES(17)
+    EVT_WAIT(17)
     EVT_CALL(GotoMap, EVT_PTR("dgb_03"), 0)
-    EVT_WAIT_FRAMES(100)
+    EVT_WAIT(100)
     EVT_RETURN
     EVT_END
 };
@@ -145,14 +145,14 @@ EvtScript N(npcAI_802435E4) = {
     EVT_CALL(SetSelfVar, 1, 600)
     EVT_CALL(N(SentinelAI_Main), EVT_PTR(N(npcAISettings_802435B4)))
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_WAIT_FRAMES(2)
+    EVT_WAIT(2)
     EVT_LABEL(20)
     EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_CALL(GetNpcPos, NPC_SELF, EVT_VAR(3), EVT_VAR(4), EVT_VAR(5))
     EVT_CALL(SetNpcPos, NPC_SELF, EVT_VAR(0), EVT_VAR(4), EVT_VAR(2))
     EVT_CALL(GetPlayerActionState, EVT_VAR(0))
     EVT_IF_NE(EVT_VAR(0), 0)
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
         EVT_GOTO(20)
     EVT_END_IF
     EVT_CALL(DisablePlayerPhysics, TRUE)
@@ -166,9 +166,9 @@ EvtScript N(npcAI_802435E4) = {
     EVT_CALL(SetNpcPos, NPC_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_CALL(func_80045838, -1, 759, 0)
     EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_sentinel_Palette_00_Anim_8)
-    EVT_WAIT_FRAMES(10)
+    EVT_WAIT(10)
     EVT_CALL(SetPlayerAnimation, ANIM_80017)
-    EVT_WAIT_FRAMES(10)
+    EVT_WAIT(10)
     EVT_CALL(func_80045838, -1, 1838, 0)
     EVT_THREAD
         EVT_LOOP(100)
@@ -178,7 +178,7 @@ EvtScript N(npcAI_802435E4) = {
             EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
             EVT_ADD(EVT_VAR(1), 1)
             EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_THREAD
@@ -192,9 +192,9 @@ EvtScript N(npcAI_802435E4) = {
         EVT_CALL(GetNpcPos, NPC_PARTNER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
         EVT_CALL(NpcJump0, NPC_PARTNER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 10)
     EVT_END_THREAD
-    EVT_WAIT_FRAMES(30)
+    EVT_WAIT(30)
     EVT_CALL(GotoMap, EVT_PTR(N(dgb_00_name_hack)), 2)
-    EVT_WAIT_FRAMES(100)
+    EVT_WAIT(100)
     EVT_RETURN
     EVT_END
 };

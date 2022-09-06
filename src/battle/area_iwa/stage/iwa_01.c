@@ -149,7 +149,7 @@ EvtScript N(init_80220A50) = {
 
 EvtScript N(idle_80220B0C) = {
     EVT_LABEL(0)
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_GOTO(0)
     EVT_RETURN
     EVT_END
@@ -268,7 +268,7 @@ EvtScript N(handleEvent_80220B40) = {
             EVT_SET_CONST(LW(1), NPC_ANIM_whacka_Palette_00_Anim_4)
             EVT_EXEC_WAIT(N(80221334))
             EVT_EXEC_WAIT(DoNormalHit)
-            EVT_WAIT_FRAMES(10)
+            EVT_WAIT(10)
             EVT_IF_GE(100, 100)
                 EVT_EXEC_WAIT(N(80221414))
                 EVT_RETURN
@@ -319,7 +319,7 @@ EvtScript N(80221334) = {
     EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2073)
     EVT_THREAD
-        EVT_WAIT_FRAMES(15)
+        EVT_WAIT(15)
         EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_whacka_Palette_00_Anim_1)
         EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
         EVT_ADD(LW(0), 5)
@@ -336,7 +336,7 @@ EvtScript N(80221414) = {
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_MOLE_DIG)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_whacka_Palette_00_Anim_3)
-    EVT_WAIT_FRAMES(40)
+    EVT_WAIT(40)
     EVT_CALL(GetActorVar, ACTOR_SELF, 0, LW(0))
     EVT_IF_NE(LW(0), 0)
         EVT_CALL(SetBattleFlagBits2, 0x10000000, 1)

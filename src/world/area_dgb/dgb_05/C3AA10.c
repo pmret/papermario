@@ -47,9 +47,9 @@ EvtScript N(exitSingleDoor_80241580) = {
     EVT_SET(EVT_VAR(2), 30)
     EVT_SET(EVT_VAR(3), -1)
     EVT_EXEC(ExitSingleDoor)
-    EVT_WAIT_FRAMES(17)
+    EVT_WAIT(17)
     EVT_CALL(GotoMap, EVT_PTR("dgb_03"), 2)
-    EVT_WAIT_FRAMES(100)
+    EVT_WAIT(100)
     EVT_RETURN
     EVT_END
 };
@@ -98,7 +98,7 @@ EvtScript N(802417F0) = {
     EVT_CALL(N(func_80240030_C3AA40))
     EVT_SET(GF_DGB05_BoardedFloor, 1)
     EVT_CALL(GotoMap, EVT_PTR("dgb_06"), 1)
-    EVT_WAIT_FRAMES(100)
+    EVT_WAIT(100)
     EVT_RETURN
     EVT_END
 };

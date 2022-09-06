@@ -27,7 +27,7 @@ EvtScript N(main) = {
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_CALL(N(FadeBackgroundToBlack))
     EVT_THREAD
-        EVT_WAIT_FRAMES(5)
+        EVT_WAIT(5)
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
         EVT_CALL(MoveBattleCamOver, 50)
     EVT_END_THREAD
@@ -41,17 +41,17 @@ EvtScript N(main) = {
         EVT_CALL(PlayEffect, 0x61, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), EVT_VAR(3), 25, 0, 0, 0, 0, 0, 0, 0)
         EVT_ADD(EVT_VAR(0), 5)
         EVT_ADDF(EVT_VAR(3), EVT_FIXED(0.15))
-        EVT_WAIT_FRAMES(7)
+        EVT_WAIT(7)
     EVT_END_LOOP
     EVT_CALL(PlayEffect, 0x61, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), EVT_FIXED(1.5), 60, 0, 0, 0, 0, 0, 0, 0)
-    EVT_WAIT_FRAMES(20)
+    EVT_WAIT(20)
     EVT_LOOP(4)
         EVT_CALL(AddBattleCamZoom, -100)
         EVT_CALL(MoveBattleCamOver, 2)
-        EVT_WAIT_FRAMES(2)
+        EVT_WAIT(2)
         EVT_CALL(AddBattleCamZoom, 100)
         EVT_CALL(MoveBattleCamOver, 2)
-        EVT_WAIT_FRAMES(2)
+        EVT_WAIT(2)
     EVT_END_LOOP
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
     EVT_CALL(MoveBattleCamOver, 20)
@@ -69,10 +69,10 @@ EvtScript N(main) = {
     EVT_IF_NE(EVT_VAR(0), -1)
         EVT_GOTO(0)
     EVT_END_IF
-    EVT_WAIT_FRAMES(10)
+    EVT_WAIT(10)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_WALKING)
     EVT_CALL(N(func_802A12D4_72BBE4))
-    EVT_WAIT_FRAMES(20)
+    EVT_WAIT(20)
     EVT_EXEC_WAIT(N(PlayerGoHome))
     EVT_RETURN
     EVT_END
