@@ -254,8 +254,119 @@ ActorBlueprint NAMESPACE = {
 
 #include "common/ChompChainUpdateHelperFunc2.inc.c"
 
-ApiStatus N(ChompChainUpdate)(Evt* script, s32 isInitialCall);
-INCLUDE_ASM(ApiStatus, "battle/area_isk_part_2/4EF4A0", b_area_isk_part_2_chain_chomp_ChompChainUpdate);
+ApiStatus b_area_isk_part_2_chain_chomp_ChompChainUpdate(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    f32 sp18;
+    Actor* actor;
+    ActorPart* part;
+    ChompChainAnimationState* animState;
+    f32 dist;
+    f32 angle;
+    f32 ax, ay;
+    s32 three;
+    s32 something;
+    s32 i;
+
+    actor = get_actor(script->owner1.actorID);
+    if (actor == NULL) {
+        return ApiStatus_BLOCK;
+    }
+
+    something = evt_get_variable(script, *args++);
+
+    three = 3;
+
+    animState = actor->state.unk_6C;
+    if (actor->debuff == STATUS_SHRINK) {
+        ax = actor->currentPos.x + 6.0;
+        ay = actor->currentPos.y + 2.5;
+    } else {
+        ax = actor->currentPos.x + 12.0;
+        ay = actor->currentPos.y + 5.0;
+    }
+
+    for (i = 0; i < 8; i++, animState++) {
+        if (actor->debuff == STATUS_SHRINK) {
+            animState->scale.x = 3.5f;
+            animState->scale.z = 3.5f;
+            animState->scale.y = 3.5f;
+        } else {
+            animState->scale.x = 7.0f;
+            animState->scale.z = 7.0f;
+            animState->scale.y = 7.0f;
+        }
+
+        animState->unk_18 -= animState->unk_14;
+        if (animState->unk_18 < 2.0f * -animState->unk_14) {
+            animState->unk_18 = 2.0f * -animState->unk_14;
+            if (actor->state.varTable[8] != 0 && i == 0) {
+                sfx_play_sound_at_position(SOUND_2063, 0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z);
+            }
+        }
+        animState->currentPos.y += animState->unk_18;
+        if (actor->debuff == STATUS_SHRINK) {
+            if (animState->currentPos.y < 2.5) {
+                animState->currentPos.y = 2.5f;
+                animState->unk_18 = 0.0f;
+            }
+        } else {
+            if (animState->currentPos.y < 5.0) {
+                animState->currentPos.y = 5.0f;
+                animState->unk_18 = 0.0f;
+            }
+        }
+
+        dist = dist2D(ax, ay, animState->currentPos.x, animState->currentPos.y);
+        angle = atan2(ax, ay, animState->currentPos.x, animState->currentPos.y);
+
+        if (animState->scale.z <= dist) {
+            b_area_isk_part_2_chain_chomp_ChompChainUpdateHelperFunc2(&sp18, dist - animState->scale.z, angle);
+            animState->unk_18 += sp18 * 0.5;
+        }
+
+        if (animState->scale.y <= dist) {
+            f32 t;
+
+            if (animState->scale.x <= dist) {
+                t = dist;
+                t = t - animState->scale.x;
+            } else {
+                animState->unk_1C += animState->unk_20;
+                t = animState->unk_1C;
+            }
+            b_area_isk_part_2_chain_chomp_ChompChainUpdateHelperFunc(animState, t, angle);
+        } else {
+            animState->unk_1C -= animState->unk_20 * 0.2;
+            if (animState->unk_1C < 0.0) {
+                animState->unk_1C = 0.0f;
+            }
+            b_area_isk_part_2_chain_chomp_ChompChainUpdateHelperFunc(animState, animState->unk_1C, angle);
+        }
+
+        if (animState->unk_1C > 4.0) {
+            animState->unk_1C = 4.0f;
+        }
+        animState->currentPos.z = something;
+        part = get_actor_part(actor, three + i);
+        part->absolutePosition.x = animState->currentPos.x;
+        part->absolutePosition.y = animState->currentPos.y;
+        part->absolutePosition.z = animState->currentPos.z;
+
+        if (actor->debuff == STATUS_SHRINK) {
+            part->scale.x = 0.5f;
+            part->scale.y = 0.5f;
+            part->scale.z = 1.0f;
+        } else {
+            part->scale.x = 1.0f;
+            part->scale.y = 1.0f;
+            part->scale.z = 1.0f;
+        }
+        ay = animState->currentPos.y;
+        ax = animState->currentPos.x;
+    }
+
+    return ApiStatus_DONE2;
+}
 
 ApiStatus func_8021866C_4EFB0C(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

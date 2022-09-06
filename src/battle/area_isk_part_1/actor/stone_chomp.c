@@ -294,9 +294,11 @@ ApiStatus b_area_isk_part_1_ChompChainUpdate(Evt* script, s32 isInitialCall) {
                 animState->unk_18 = 0.0f;
                 animState->currentPos.y = 2.5f;
             }
-        } else if (animState->currentPos.y < 5.0) {
-            animState->unk_18 = 0.0f;
-            animState->currentPos.y = 5.0f;
+        } else {
+            if (animState->currentPos.y < 5.0) {
+                animState->unk_18 = 0.0f;
+                animState->currentPos.y = 5.0f;
+            }
         }
 
         dist = dist2D(ax, ay, animState->currentPos.x, animState->currentPos.y);
