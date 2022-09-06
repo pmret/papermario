@@ -136,7 +136,7 @@ s32 phys_adjust_cam_on_landing(void) {
                         }
                     }
 
-                    if (evt_get_variable(NULL, EVT_STORY_PROGRESS) >= STORY_CH2_DRAINED_THIRD_SAND_ROOM) {
+                    if (evt_get_variable(NULL, GB_StoryProgress) >= STORY_CH2_DRAINED_THIRD_SAND_ROOM) {
                         ret = 2;
                     }
                     break;

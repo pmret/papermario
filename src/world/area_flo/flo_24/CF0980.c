@@ -276,7 +276,7 @@ EvtScript N(8024183C) = {
                 EVT_CMD(EVT_OP_END_IF),
             EVT_CMD(EVT_OP_END_LOOP),
             EVT_CMD(EVT_OP_WAIT_FRAMES, 30),
-            EVT_CMD(EVT_OP_SET, EVT_STORY_PROGRESS, STORY_CH6_FILLED_SPRING_WITH_WATER),
+            EVT_CMD(EVT_OP_SET, GB_StoryProgress, STORY_CH6_FILLED_SPRING_WITH_WATER),
             EVT_CMD(EVT_OP_CALL, EVT_PTR(GotoMap), EVT_PTR(N(flo_10_name_hack)), 2),
             EVT_CMD(EVT_OP_WAIT_FRAMES, 100),
             EVT_CMD(EVT_OP_RETURN),

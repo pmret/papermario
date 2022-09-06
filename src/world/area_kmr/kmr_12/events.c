@@ -14,7 +14,7 @@ EvtScript N(BindExits) = {
 };
 
 EvtScript N(main) = {
-    EVT_SET(EVT_WORLD_LOCATION, LOCATION_GOOMBA_ROAD)
+    EVT_SET(GB_WorldLocation, LOCATION_GOOMBA_ROAD)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
     EVT_CALL(SetCamBGColor, 0, 0, 0, 0)

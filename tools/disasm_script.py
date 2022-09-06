@@ -159,7 +159,7 @@ def get_constants():
     CONSTANTS["NPC_SPRITE"] = {}
     CONSTANTS["MAP_NPCS"] = {}
 
-    [SAVE_VARS.add(x) for x in ["EVT_WORLD_LOCATION", "EVT_STORY_PROGRESS"]]
+    [SAVE_VARS.add(x) for x in ["GB_WorldLocation", "GB_StoryProgress"]]
 
     include_path = Path(Path(__file__).resolve().parent.parent / "include")
     enums = Path(include_path / "enums.h").read_text().splitlines()

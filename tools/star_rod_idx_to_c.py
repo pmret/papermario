@@ -32,9 +32,9 @@ def get_flag_name(arg):
         elif v <= -180000000: return f"EVT_ARRAY({v + 190000000})"
         elif v <= -160000000:
             if v + 170000000 == 0:
-                return "EVT_STORY_PROGRESS"
+                return "GB_StoryProgress"
             elif v + 170000000 == 425:
-                return "EVT_WORLD_LOCATION"
+                return "GB_WorldLocation"
             else:
                 return f"EVT_SAVE_VAR({v + 170000000})"
         elif v <= -140000000: return f"EVT_AREA_VAR({v + 150000000})"

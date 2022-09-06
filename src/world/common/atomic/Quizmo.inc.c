@@ -83,7 +83,7 @@ ApiStatus N(Quizmo_ShouldAppear)(Evt* script, s32 isInitialCall) {
     evt_set_variable(script, EVT_SAVE_FLAG(1768), hasLocation);
     evt_set_variable(script, EVT_SAVE_FLAG(1769), changedLocation);
     numAnswered = evt_get_variable(NULL, EVT_SAVE_VAR(352));
-    progress = evt_get_variable(NULL, EVT_STORY_PROGRESS);
+    progress = evt_get_variable(NULL, GB_StoryProgress);
 
     // vanilla bug? never checks the final requirement in the list
     for (i = 0; i < 8; i++) {

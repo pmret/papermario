@@ -524,7 +524,7 @@ void pause_map_handle_input(MenuPanel* tab) {
     gPauseCurrentDescMsg = MSG_pause_map_location_0_before_desc + (gPauseMapCursorCurrentOption * 3);
 
     // If the story has progressed enough, show the "after" description
-    if (evt_get_variable(0, EVT_STORY_PROGRESS) >= gPauseMapSpaces[gPauseMapCursorCurrentOption].afterRequirement) {
+    if (evt_get_variable(0, GB_StoryProgress) >= gPauseMapSpaces[gPauseMapCursorCurrentOption].afterRequirement) {
         gPauseCurrentDescMsg++;
     }
 }
@@ -539,7 +539,7 @@ void pause_map_update(MenuPanel* tab) {
     gPauseMapSpacesInSnapRange = 0;
 
     for (i = 0; i < ARRAY_COUNT(gPauseMapSpaces); i++, mapSpace++) {
-        if (evt_get_variable(0, EVT_SAVE_FLAG_PLACES_VISITED + i) != 0) {
+        if (evt_get_variable(0, GF_MAP_ToadTown + i) != 0) {
             f32 deltaX = gPauseMapTargetX - mapSpace->pos.x;
             f32 deltaY = gPauseMapTargetY - mapSpace->pos.y;
             f32 sqSum = SQ(deltaX) + SQ(deltaY);
