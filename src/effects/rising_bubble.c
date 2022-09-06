@@ -9,39 +9,36 @@ void rising_bubble_init(void) {
 }
 
 void rising_bubble_update(EffectInstance* effect) {
-    RisingBubbleFXData* risingBubbleFXData = effect->data.risingBubble;
-    s32 temp_a2 = risingBubbleFXData->unk_18;
-    s32 temp_v0;
-    s32 temp_v1;
-    s32 temp_v1_2;
+    RisingBubbleFXData* data = effect->data.risingBubble;
+    s32 temp_a2 = data->unk_18;
 
-    if (risingBubbleFXData->unk_08 >= risingBubbleFXData->unk_24) {
-        risingBubbleFXData->unk_18--; 
-        risingBubbleFXData->unk_1C++;
+    if (data->unk_08 >= data->unk_24) {
+        data->unk_18--; 
+        data->unk_1C++;
         
-        if (risingBubbleFXData->unk_18 < 0) {
+        if (data->unk_18 < 0) {
             shim_remove_effect(effect); 
             return;
         }
         
         if (temp_a2 >= 6) { 
-            risingBubbleFXData->unk_14 += (0x78 - risingBubbleFXData->unk_14) * 0.3;
+            data->unk_14 += (120 - data->unk_14) * 0.3;
         } else {
-            risingBubbleFXData->unk_14 = (temp_a2 * 0x14);
+            data->unk_14 = (temp_a2 * 20);
         }
 
-        risingBubbleFXData->unk_20++;
-        if (risingBubbleFXData->unk_20 >= 0x20) {
-            risingBubbleFXData->unk_20 -= 0x20;
+        data->unk_20++;
+        if (data->unk_20 >= 32) {
+            data->unk_20 -= 32;
         }
         
-        risingBubbleFXData->unk_10 += 0.1;
+        data->unk_10 += 0.1;
         return;
     }
     
-    risingBubbleFXData->unk_14 = 0xFF;
-    risingBubbleFXData->unk_1C++;
-    risingBubbleFXData->unk_08 += 2.0f;
+    data->unk_14 = 255;
+    data->unk_1C++;
+    data->unk_08 += 2.0f;
 }
 
 
