@@ -510,18 +510,18 @@ ApiStatus DisablePartner(Evt* script, s32 isInitialCall) {
 
 ApiStatus UseEntryHeading(Evt *script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    MapConfig* mapConfig = get_current_map_header();
+    MapSettings* mapSettings = get_current_map_settings();
     s32 var1 = evt_get_variable(script, *args++);
     s32 var2 = evt_get_variable(script, *args++);
-    f32 entryX = script->varTable[1] = (*mapConfig->entryList)[gGameStatusPtr->entryID].x;
-    f32 entryY = script->varTable[2] = (*mapConfig->entryList)[gGameStatusPtr->entryID].y;
-    f32 entryZ = script->varTable[3] = (*mapConfig->entryList)[gGameStatusPtr->entryID].z;
+    f32 entryX = script->varTable[1] = (*mapSettings->entryList)[gGameStatusPtr->entryID].x;
+    f32 entryY = script->varTable[2] = (*mapSettings->entryList)[gGameStatusPtr->entryID].y;
+    f32 entryZ = script->varTable[3] = (*mapSettings->entryList)[gGameStatusPtr->entryID].z;
     f32 cosTheta;
     f32 sinTheta;
     f32 exitTangentFrac;
     f32* blah;
 
-    sin_cos_deg(clamp_angle((*mapConfig->entryList)[gGameStatusPtr->entryID].yaw + 180.0f), &sinTheta, &cosTheta);
+    sin_cos_deg(clamp_angle((*mapSettings->entryList)[gGameStatusPtr->entryID].yaw + 180.0f), &sinTheta, &cosTheta);
 
     exitTangentFrac = gGameStatusPtr->exitTangent * 0.3f;
     gPlayerStatus.position.x = (entryX + (var1 * sinTheta)) - (exitTangentFrac * cosTheta);
@@ -542,14 +542,14 @@ ApiStatus func_802D2148(Evt* script, s32 isInitialCall) {
 ApiStatus UseExitHeading(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     PlayerStatus* playerStatus = &gPlayerStatus;
-    MapConfig* mapConfig = get_current_map_header();
+    MapSettings* mapSettings = get_current_map_settings();
     f32* varTableVar5 = &script->varTable[5];
 
     if (can_trigger_loading_zone()) {
         s32 var1 = evt_get_variable(script, *args++);
         s32 entryID = evt_get_variable(script, *args++);
-        f32 entryX = (*mapConfig->entryList)[entryID].x;
-        f32 entryZ = (*mapConfig->entryList)[entryID].z;
+        f32 entryX = (*mapSettings->entryList)[entryID].x;
+        f32 entryZ = (*mapSettings->entryList)[entryID].z;
         f32 temp = (var1 + 10.0f) / 2;
         f32 temp_f2 = dist2D(entryX, entryZ, playerStatus->position.x, playerStatus->position.z) - temp;
         f32 sinTheta;
@@ -563,12 +563,12 @@ ApiStatus UseExitHeading(Evt* script, s32 isInitialCall) {
             var1 -= temp_f2 / 2;
         }
 
-        sin_cos_deg(clamp_angle((*mapConfig->entryList)[entryID].yaw + 180.0f), &sinTheta, &cosTheta);
+        sin_cos_deg(clamp_angle((*mapSettings->entryList)[entryID].yaw + 180.0f), &sinTheta, &cosTheta);
         gGameStatusPtr->exitTangent = (cosTheta * (playerStatus->position.x - entryX)) - (sinTheta * (entryZ - playerStatus->position.z));
         exitTangentFrac = gGameStatusPtr->exitTangent * 0.3f;
         script->varTable[1] = (playerStatus->position.x + (var1 * sinTheta)) - (exitTangentFrac * cosTheta);
         script->varTable[3] = (playerStatus->position.z - (var1 * cosTheta)) - (exitTangentFrac * sinTheta);
-        script->varTable[2] = (*mapConfig->entryList)[entryID].y;
+        script->varTable[2] = (*mapSettings->entryList)[entryID].y;
         *varTableVar5 = var1 / 15;
         playerStatus->animFlags |= 0x100000;
         playerStatus->flags |= 0x4000000;

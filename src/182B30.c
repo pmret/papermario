@@ -3377,40 +3377,40 @@ void _add_part_decoration(ActorPart* actorPart) {
         decorationTable = actorPart->decorationTable;
         for (i = 0; i < ARRAY_COUNT(decorationTable->type); i++) {
             switch (decorationTable->type[i]) {
-                case DECORATION_0:
+                case ACTOR_DECORATION_NONE:
                     func_8025D150(actorPart, i);
                     break;
-                case DECORATION_GOLDEN_FLAMES:
+                case ACTOR_DECORATION_GOLDEN_FLAMES:
                     func_8025D160(actorPart, i);
                     break;
-                case DECORATION_SWEAT:
+                case ACTOR_DECORATION_SWEAT:
                     func_8025D2B0(actorPart, i);
                     break;
-                case DECORATION_SEEING_STARS:
+                case ACTOR_DECORATION_SEEING_STARS:
                     func_8025D3CC(actorPart, i);
                     break;
-                case DECORATION_RED_FLAMES:
+                case ACTOR_DECORATION_RED_FLAMES:
                     func_8025D4C8(actorPart, i);
                     break;
-                case DECORATION_GREY_SMOKE_TRAIL:
+                case ACTOR_DECORATION_GREY_SMOKE_TRAIL:
                     func_8025D640(actorPart, i);
                     break;
-                case DECORATION_FIRE_SMOKE_TRAIL:
+                case ACTOR_DECORATION_FIRE_SMOKE_TRAIL:
                     func_8025D71C(actorPart, i);
                     break;
-                case DECORATION_WHIRLWIND:
+                case ACTOR_DECORATION_WHIRLWIND:
                     func_8025D830(actorPart, i);
                     break;
-                case DECORATION_STEAM_EMITTER:
+                case ACTOR_DECORATION_STEAM_EMITTER:
                     func_8025D90C(actorPart, i);
                     break;
-                case DECORATION_9:
+                case ACTOR_DECORATION_9:
                     func_8025DA68(actorPart, i);
                     break;
-                case DECORATION_A:
+                case ACTOR_DECORATION_A:
                     func_8025DBD0(actorPart, i);
                     break;
-                case DECORATION_RADIAL_STAR_EMITTER:
+                case ACTOR_DECORATION_RADIAL_STAR_EMITTER:
                     func_8025DD60(actorPart, i);
                     break;
             }
@@ -3422,40 +3422,40 @@ void _remove_part_decoration(ActorPart* part, s32 decorationIndex) {
     DecorationTable* decorationTable = part->decorationTable;
 
     switch (decorationTable->type[decorationIndex]) {
-        case DECORATION_0:
+        case ACTOR_DECORATION_NONE:
             func_8025D158(part, decorationIndex);
             break;
-        case DECORATION_GOLDEN_FLAMES:
+        case ACTOR_DECORATION_GOLDEN_FLAMES:
             func_8025D290(part, decorationIndex);
             break;
-        case DECORATION_SWEAT:
+        case ACTOR_DECORATION_SWEAT:
             func_8025D3C4(part, decorationIndex);
             break;
-        case DECORATION_SEEING_STARS:
+        case ACTOR_DECORATION_SEEING_STARS:
             func_8025D4A0(part, decorationIndex);
             break;
-        case DECORATION_RED_FLAMES:
+        case ACTOR_DECORATION_RED_FLAMES:
             func_8025D620(part, decorationIndex);
             break;
-        case DECORATION_GREY_SMOKE_TRAIL:
+        case ACTOR_DECORATION_GREY_SMOKE_TRAIL:
             func_8025D6FC(part, decorationIndex);
             break;
-        case DECORATION_FIRE_SMOKE_TRAIL:
+        case ACTOR_DECORATION_FIRE_SMOKE_TRAIL:
             func_8025D810(part, decorationIndex);
             break;
-        case DECORATION_WHIRLWIND:
+        case ACTOR_DECORATION_WHIRLWIND:
             func_8025D8EC(part, decorationIndex);
             break;
-        case DECORATION_STEAM_EMITTER:
+        case ACTOR_DECORATION_STEAM_EMITTER:
             func_8025DA60(part, decorationIndex);
             break;
-        case DECORATION_9:
+        case ACTOR_DECORATION_9:
             func_8025DBC8(part, decorationIndex);
             break;
-        case DECORATION_A:
+        case ACTOR_DECORATION_A:
             func_8025DD40(part, decorationIndex);
             break;
-        case DECORATION_RADIAL_STAR_EMITTER:
+        case ACTOR_DECORATION_RADIAL_STAR_EMITTER:
             func_8025DE88(part, decorationIndex);
             break;
     }

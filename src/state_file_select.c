@@ -257,7 +257,7 @@ void state_step_exit_language_select(void) {
             if (D_800A0930 >= 0) {
                 D_800A0930--;
                 if (D_800A0930 == 0) {
-                    MapConfig* mapConfig;
+                    MapSettings* mapSettings;
                     Map* map;
                     u32 mapShapeSize;
                     void* mapShape;
@@ -267,7 +267,7 @@ void state_step_exit_language_select(void) {
                     nuGfxSetCfb(D_80077980, ARRAY_COUNT(D_80077980));
                     filemenu_cleanup();
                     gOverrideFlags &= ~GLOBAL_OVERRIDES_8;
-                    mapConfig = get_current_map_header();
+                    mapSettings = get_current_map_settings();
                     map = &gAreas[gGameStatusPtr->areaID].maps[gGameStatusPtr->mapID];
                     gGameStatusPtr->isBattle = FALSE;
                     func_8005AF84();
@@ -298,7 +298,7 @@ void state_step_exit_language_select(void) {
 
                     load_map_bg(map->bgName);
 
-                    bgHeader = mapConfig->background;
+                    bgHeader = mapSettings->background;
                     if (bgHeader != NULL) {
                         read_background_size(bgHeader);
                     } else {

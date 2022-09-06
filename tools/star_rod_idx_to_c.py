@@ -652,7 +652,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
             out += f" {entry[0]:.01f}f, {entry[1]:.01f}f, {entry[2]:.01f}f, {entry[3]:.01f}f }};\n"
 
         elif struct["type"] == "Header":
-            out += f"MapConfig N(config) = {{\n"
+            out += f"MapSettings N(settings) = {{\n"
 
             bytes.read(0x10)
 
@@ -667,7 +667,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
             if bg == 0x80200000:
                 out += f"    .background = &gBackgroundImage,\n"
             elif bg != 0:
-                raise Exception(f"unknown MapConfig background {bg:X}")
+                raise Exception(f"unknown MapSettings background {bg:X}")
             #out += f"    .tattle = 0x{tattle:X},\n"
             INCLUDES_NEEDED["tattle"].append(f"- [0x{(tattle & 0xFF0000) >> 16:02X}, 0x{tattle & 0xFFFF:04X}, {map_name}_tattle]")
             out += f"    .tattle = {{ MSG_{map_name}_tattle }},\n"

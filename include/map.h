@@ -12,7 +12,7 @@
 typedef Vec4f EntryList[];
 
 /// Fields other than main, entryList, entryCount, background, and tattle are initialised when the map loads.
-typedef struct MapConfig {
+typedef struct MapSettings {
     /* 0x00 */ struct ModelNode* modelTreeRoot;
     /* 0x04 */ s32 hitAssetCollisionOffset;
     /* 0x08 */ s32 hitAssetZoneOffset;
@@ -30,14 +30,14 @@ typedef struct MapConfig {
         s32 msgID;
         s32 (*get)(void);
     } tattle;
-} MapConfig; // size = 0x40
+} MapSettings; // size = 0x40
 
 typedef s32(*MapInit)(void);
 
 #define MAP_ID_MAX_LEN 7 ///< "xxx_yyy" excluding null terminator.
 typedef struct Map {
     /* 0x00 */ char* id; ///< @see MAP_ID_MAX_LEN
-    /* 0x04 */ MapConfig* config;
+    /* 0x04 */ MapSettings* settings;
     /* 0x08 */ void* dmaStart;
     /* 0x0C */ void* dmaEnd;
     /* 0x10 */ void* dmaDest;
@@ -60,7 +60,7 @@ typedef struct Area {
     /* 0x0C */ char* name; ///< JP debug name.
 } Area; // size = 0x10
 
-MapConfig* get_current_map_header(void);
+MapSettings* get_current_map_settings(void);
 
 /// Zero-terminated.
 extern Area gAreas[29];

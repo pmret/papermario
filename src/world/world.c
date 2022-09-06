@@ -12,8 +12,8 @@
 s32 D_8008FF60[] = { 0, 1, 2, 3 };
 
 // bss
-extern MapConfig gMapConfig;
-extern s32 gMap;
+extern MapSettings gMapSettings;
+extern Map* gMapConfig;
 
 extern s32 D_800D9668;
 
@@ -30,8 +30,8 @@ void load_map_script_lib(void) {
 
 void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
     s32 initStatus = 0;
-    Map* map;
-    MapConfig* mapConfig;
+    Map* mapConfig;
+    MapSettings* mapSettings;
     char texStr[17];
     s32 decompressedSize;
 
@@ -62,29 +62,29 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
 
     gGameStatusPtr->mapShop = NULL;
 
-    map = &gAreas[areaID].maps[mapID];
+    mapConfig = &gAreas[areaID].maps[mapID];
 
-    sprintf(&wMapShapeName, "%s_shape", map->id);
-    sprintf(&wMapHitName, "%s_hit", map->id);
-    strcpy(texStr, map->id);
+    sprintf(&wMapShapeName, "%s_shape", mapConfig->id);
+    sprintf(&wMapHitName, "%s_hit", mapConfig->id);
+    strcpy(texStr, mapConfig->id);
     texStr[3] = '\0';
     sprintf(&wMapTexName, "%s_tex", texStr);
 
-    gMap = map;
-    if (map->bgName != NULL) {
-        strcpy(&D_800D9668, map->bgName);
+    gMapConfig = mapConfig;
+    if (mapConfig->bgName != NULL) {
+        strcpy(&D_800D9668, mapConfig->bgName);
     }
     load_map_script_lib();
 
-    if (map->dmaStart != NULL) {
-        dma_copy(map->dmaStart, map->dmaEnd, map->dmaDest);
+    if (mapConfig->dmaStart != NULL) {
+        dma_copy(mapConfig->dmaStart, mapConfig->dmaEnd, mapConfig->dmaDest);
     }
 
-    gMapConfig = *map->config;
+    gMapSettings = *mapConfig->settings;
 
-    mapConfig = &gMapConfig;
-    if (map->init != 0) {
-        initStatus = map->init();
+    mapSettings = &gMapSettings;
+    if (mapConfig->init != 0) {
+        initStatus = mapConfig->init();
     }
 
     if (initStatus == 0) {
@@ -94,13 +94,13 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
         decode_yay0(yay0Asset, place);
         general_heap_free(yay0Asset);
 
-        mapConfig->modelTreeRoot = place[0];
-        mapConfig->modelNameList = place[2];
-        mapConfig->colliderNameList = place[3];
-        mapConfig->zoneNameList = place[4];
+        mapSettings->modelTreeRoot = place[0];
+        mapSettings->modelNameList = place[2];
+        mapSettings->colliderNameList = place[3];
+        mapSettings->zoneNameList = place[4];
     }
 
-    if (map->bgName != NULL) {
+    if (mapConfig->bgName != NULL) {
         load_map_bg(&D_800D9668);
     }
 
@@ -141,19 +141,19 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
 
     gPlayerStatus.targetYaw = gPlayerStatus.currentYaw;
 
-    func_801497FC(D_8008FF60[map->unk_1C.word % 4]);
+    func_801497FC(D_8008FF60[mapConfig->unk_1C.word % 4]);
     sfx_reset_door_sounds();
 
     if (initStatus == 0) {
         s32 thing = get_asset_offset(&wMapTexName, &decompressedSize);
 
-        if (mapConfig->modelTreeRoot != NULL) {
-            load_data_for_models(mapConfig->modelTreeRoot, thing, decompressedSize);
+        if (mapSettings->modelTreeRoot != NULL) {
+            load_data_for_models(mapSettings->modelTreeRoot, thing, decompressedSize);
         }
     }
 
-    if (mapConfig->background != NULL) {
-        read_background_size(mapConfig->background);
+    if (mapSettings->background != NULL) {
+        read_background_size(mapSettings->background);
     } else {
         set_background_size(296, 200, 12, 20);
     }
@@ -173,15 +173,15 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
     initialize_status_menu();
     gGameStatusPtr->unk_90 = 1000;
     gGameStatusPtr->unk_92 = 1000;
-    gGameStatusPtr->mainScriptID = start_script_in_group(mapConfig->main, EVT_PRIORITY_0, 0, 0)->id;
+    gGameStatusPtr->mainScriptID = start_script_in_group(mapSettings->main, EVT_PRIORITY_0, 0, 0)->id;
 }
 
-s32 get_current_map_config(void) {
-    return gMap;
+Map* get_current_map_config(void) {
+    return gMapConfig;
 }
 
-MapConfig* get_current_map_header(void) {
-    return &gMapConfig;
+MapSettings* get_current_map_settings(void) {
+    return &gMapSettings;
 }
 
 s32 get_map_IDs_by_name(const char* mapName, s16* areaID, s16* mapID) {
@@ -247,15 +247,15 @@ s32 get_asset_offset(char* assetName, s32* compressedSize) {
 
 #define MAP(map) \
     .id = #map, \
-    .config = &map##_config, \
+    .settings = &map##_settings, \
     .dmaStart = map##_ROM_START, \
     .dmaEnd = map##_ROM_END, \
     .dmaDest = map##_VRAM \
 
-// Should be removed once the data section containing .init and .config of all maps have been disassembled
-#define MAP_UNSPLIT(map, configVRAM) \
+// Should be removed once the data section containing .init and .settings of all maps have been disassembled
+#define MAP_UNSPLIT(map, settingsVRAM) \
     .id = #map, \
-    .config = (MapConfig*)(configVRAM), \
+    .settings = (MapSettings*)(settingsVRAM), \
     .dmaStart = map##_ROM_START, \
     .dmaEnd = map##_ROM_END, \
     .dmaDest = map##_VRAM \

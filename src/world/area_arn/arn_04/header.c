@@ -6,7 +6,7 @@ EntryList N(entryList) = {
     {  820.0, 285.0, 150.0, 270.0 },
 };
 
-MapConfig N(config) = {
+MapSettings N(settings) = {
     .main = &N(main),
     .entryList = &N(entryList),
     .entryCount = ENTRY_COUNT(N(entryList)),

@@ -118,7 +118,7 @@ void state_step_end_battle(void) {
     if (D_800A0900 >= 0) {
         D_800A0900--;
         if (D_800A0900 == 0) {
-            MapConfig* mapConfig;
+            MapSettings* mapSettings;
             Map* map;
 
             D_800A0900 = -1;
@@ -126,7 +126,7 @@ void state_step_end_battle(void) {
             gOverrideFlags &= ~GLOBAL_OVERRIDES_8;
             nuContRmbForceStopEnd();
             sfx_stop_env_sounds();
-            mapConfig = get_current_map_header();
+            mapSettings = get_current_map_settings();
             map = &gAreas[gGameStatusPtr->areaID].maps[gGameStatusPtr->mapID];
             btl_restore_world_cameras(gGameStatusPtr);
             gGameStatusPtr->isBattle = FALSE;
@@ -170,13 +170,13 @@ void state_step_end_battle(void) {
                 }
 
                 load_map_bg(map->bgName);
-                if (mapConfig->background != NULL) {
-                    read_background_size(mapConfig->background);
+                if (mapSettings->background != NULL) {
+                    read_background_size(mapSettings->background);
                 } else {
                     set_background_size(296, 200, 12, 20);
                 }
 
-                load_model_textures(mapConfig->modelTreeRoot, get_asset_offset(&wMapTexName, &sizeTemp), sizeTemp);
+                load_model_textures(mapSettings->modelTreeRoot, get_asset_offset(&wMapTexName, &sizeTemp), sizeTemp);
                 calculate_model_sizes();
                 npc_reload_all();
 

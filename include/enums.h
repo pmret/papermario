@@ -2154,19 +2154,14 @@ enum EncounterOutcomes {
     OUTCOME_ENEMY_FLED          = 3,
 };
 
-enum DecorationIDs {
-    DECORATION_0                             = 0x00000000,
-    DECORATION_GOLDEN_FLAMES                 = 0x00000001,
-    DECORATION_SWEAT                         = 0x00000002,
-    DECORATION_SEEING_STARS                  = 0x00000003,
-    DECORATION_RED_FLAMES                    = 0x00000004,
-    DECORATION_GREY_SMOKE_TRAIL              = 0x00000005,
-    DECORATION_FIRE_SMOKE_TRAIL              = 0x00000006,
-    DECORATION_WHIRLWIND                     = 0x00000007,
-    DECORATION_STEAM_EMITTER                 = 0x00000008,
-    DECORATION_9                             = 0x00000009,
-    DECORATION_A                             = 0x0000000A,
-    DECORATION_RADIAL_STAR_EMITTER           = 0x0000000B,
+enum NpcDecorationIDs {
+    NPC_DECORATION_NONE                          = 0x00000000,
+    NPC_DECORATION_BOWSER_AURA                   = 0x00000001,
+    NPC_DECORATION_SWEAT                         = 0x00000002,
+    NPC_DECORATION_SEEING_STARS                  = 0x00000003,
+    NPC_DECORATION_WHITE_GLOW_FRONT              = 0x00000004,
+    NPC_DECORATION_WHITE_GLOW_BEHIND             = 0x00000005,
+    NPC_DECORATION_CHARGED                       = 0x00000006,
 };
 
 enum HitResults {
@@ -2206,6 +2201,21 @@ enum ActorSoundIDs {
     ACTOR_SOUND_HURT                      = 0x00000003,
     ACTOR_SOUND_WALK_INCREMENT            = 0x00000004,
     ACTOR_SOUND_FLY_INCREMENT             = 0x00000005,
+};
+
+enum ActorDecorationIDs {
+    ACTOR_DECORATION_NONE                          = 0x00000000,
+    ACTOR_DECORATION_GOLDEN_FLAMES                 = 0x00000001,
+    ACTOR_DECORATION_SWEAT                         = 0x00000002,
+    ACTOR_DECORATION_SEEING_STARS                  = 0x00000003,
+    ACTOR_DECORATION_RED_FLAMES                    = 0x00000004,
+    ACTOR_DECORATION_GREY_SMOKE_TRAIL              = 0x00000005,
+    ACTOR_DECORATION_FIRE_SMOKE_TRAIL              = 0x00000006,
+    ACTOR_DECORATION_WHIRLWIND                     = 0x00000007,
+    ACTOR_DECORATION_STEAM_EMITTER                 = 0x00000008,
+    ACTOR_DECORATION_9                             = 0x00000009,
+    ACTOR_DECORATION_A                             = 0x0000000A,
+    ACTOR_DECORATION_RADIAL_STAR_EMITTER           = 0x0000000B,
 };
 
 enum Phases {

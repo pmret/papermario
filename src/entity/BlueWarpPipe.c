@@ -79,20 +79,20 @@ void entity_BlueWarpPipe_idle(Entity* entity) {
 void entity_BlueWarpPipe_set_player_move_to_center(Entity* entity) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     BlueWarpPipeData* pipeData = entity->dataBuf.bluePipe;
-    MapConfig* mapConfig = get_current_map_header();
+    MapSettings* mapSettings = get_current_map_settings();
     f32 angle;
     f32 entryX;
     f32 entryZ;
 
-    entryX = (*mapConfig->entryList)[pipeData->entryID].x;
-    entryZ = (*mapConfig->entryList)[pipeData->entryID].z;
+    entryX = (*mapSettings->entryList)[pipeData->entryID].x;
+    entryZ = (*mapSettings->entryList)[pipeData->entryID].z;
     pipeData->timer = get_xz_dist_to_player(entryX, entryZ) / playerStatus->runSpeed;
     if (pipeData->timer == 0) {
         pipeData->timer = 1;
     }
 
-    entryX = (*mapConfig->entryList)[pipeData->entryID].x;
-    entryZ = (*mapConfig->entryList)[pipeData->entryID].z;
+    entryX = (*mapSettings->entryList)[pipeData->entryID].x;
+    entryZ = (*mapSettings->entryList)[pipeData->entryID].z;
     angle = atan2(playerStatus->position.x, playerStatus->position.z, entryX, entryZ);
     disable_player_input();
     disable_player_static_collisions();

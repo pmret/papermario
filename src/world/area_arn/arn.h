@@ -3,16 +3,16 @@
 
 #include "evt.h"
 
-extern MapConfig arn_02_config;
-extern MapConfig arn_03_config;
-extern MapConfig arn_04_config;
-extern MapConfig arn_05_config;
-extern MapConfig arn_07_config;
-extern MapConfig arn_08_config;
-extern MapConfig arn_09_config;
-extern MapConfig arn_10_config;
-extern MapConfig arn_11_config;
-extern MapConfig arn_12_config;
-extern MapConfig arn_13_config;
+extern MapSettings arn_02_settings;
+extern MapSettings arn_03_settings;
+extern MapSettings arn_04_settings;
+extern MapSettings arn_05_settings;
+extern MapSettings arn_07_settings;
+extern MapSettings arn_08_settings;
+extern MapSettings arn_09_settings;
+extern MapSettings arn_10_settings;
+extern MapSettings arn_11_settings;
+extern MapSettings arn_12_settings;
+extern MapSettings arn_13_settings;
 
 #endif
