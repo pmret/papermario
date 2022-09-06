@@ -30,7 +30,7 @@ EvtScript N(main) = {
     EVT_END
 };
 
-NpcAISettings N(goombaAISettings) = {
+MobileAISettings N(goombaAISettings) = {
     .moveSpeed = 1.5f,
     .moveTime = 30,
     .waitTime = 30,

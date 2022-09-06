@@ -6,7 +6,7 @@
 #include "effects.h"
 
 // selects the next patrol point
-void N(PatrolAI_MoveInit)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(PatrolAI_MoveInit)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 ret;
@@ -44,7 +44,7 @@ void N(PatrolAI_MoveInit)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVol
     script->AI_TEMP_STATE = AI_STATE_PATROL;
 }
 
-void N(PatrolAI_Move)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(PatrolAI_Move)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 x, z;
@@ -93,7 +93,7 @@ void N(PatrolAI_Move)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume*
 }
 
 // identical to basic_ai_loiter_init
-void N(PatrolAI_LoiterInit)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(PatrolAI_LoiterInit)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -104,7 +104,7 @@ void N(PatrolAI_LoiterInit)(Evt* script, NpcAISettings* aiSettings, EnemyDetectV
 }
 
 
-void N(PatrolAI_Loiter)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(PatrolAI_Loiter)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 emoteTemp;
@@ -138,7 +138,7 @@ void N(PatrolAI_Loiter)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolum
     }
 }
 
-void N(PatrolAI_PostLoiter)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(PatrolAI_PostLoiter)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -155,7 +155,7 @@ void N(PatrolAI_PostLoiter)(Evt* script, NpcAISettings* aiSettings, EnemyDetectV
     script->AI_TEMP_STATE = AI_STATE_PATROL;
 }
 
-void N(PatrolAI_JumpInit)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(PatrolAI_JumpInit)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -167,7 +167,7 @@ void N(PatrolAI_JumpInit)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVol
     script->functionTemp[0] = AI_STATE_ALERT;
 }
 
-void N(PatrolAI_Jump)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(PatrolAI_Jump)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Npc* npc = get_npc_unsafe(script->owner1.enemy->npcID);
 
     npc->pos.y += npc->jumpVelocity;
@@ -181,7 +181,7 @@ void N(PatrolAI_Jump)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume*
     }
 }
 
-void N(PatrolAI_ChaseInit)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(PatrolAI_ChaseInit)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 angle;
@@ -208,7 +208,7 @@ void N(PatrolAI_ChaseInit)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVo
     script->functionTemp[0] = 13;
 }
 
-ApiStatus N(PatrolAI_Chase)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+ApiStatus N(PatrolAI_Chase)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 emoteTemp;
@@ -229,7 +229,7 @@ ApiStatus N(PatrolAI_Chase)(Evt* script, NpcAISettings* aiSettings, EnemyDetectV
     }
 }
 
-void N(PatrolAI_LosePlayer)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(PatrolAI_LosePlayer)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -243,7 +243,7 @@ void N(PatrolAI_LosePlayer)(Evt* script, NpcAISettings* aiSettings, EnemyDetectV
     }
 }
 
-void N(PatrolNoAttackAI_15)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(PatrolNoAttackAI_15)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 i;

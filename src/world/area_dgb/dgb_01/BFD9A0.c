@@ -491,7 +491,7 @@ EvtScript N(80244CE8) = {
     EVT_END
 };
 
-NpcAISettings N(npcAISettings_80244D24) = {
+MobileAISettings N(npcAISettings_80244D24) = {
     .moveSpeed = 1.5f,
     .moveTime = 90,
     .waitTime = 30,
@@ -606,7 +606,7 @@ NpcSettings N(npcSettings_8024526C) = {
     .level = 99,
 };
 
-NpcAISettings N(npcAISettings_80245298) = {
+MobileAISettings N(npcAISettings_80245298) = {
     .moveSpeed = 4.5f,
     .alertRadius = 170.0f,
     .alertOffsetDist = 90.0f,

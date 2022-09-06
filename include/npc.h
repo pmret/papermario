@@ -70,7 +70,7 @@ typedef struct NpcBlueprint {
     /* 0x0C */ void (*onRender)(struct Npc*);
 } NpcBlueprint; // size = 0x10
 
-typedef struct NpcAISettings {
+typedef struct MobileAISettings {
     /* 0x00 */ f32 moveSpeed;
     /* 0x04 */ s32 moveTime;
     /* 0x08 */ s32 waitTime;
@@ -83,7 +83,43 @@ typedef struct NpcAISettings {
     /* 0x24 */ f32 chaseRadius;
     /* 0x28 */ f32 chaseOffsetDist;         // offset along npc->yaw of the test point for chase volume overlap, creates directionality to enemy 'sight'
     /* 0x2C */ s32 unk_AI_2C;               // unk time
-} NpcAISettings; // size = 0x30
+} MobileAISettings; // size = 0x30
+
+typedef struct StationaryAISettings {
+    /* 0x00 */ f32 unk_00;
+    /* 0x04 */ s32 unk_04;
+    /* 0x08 */ s32 playerSearchInterval;    // how often to search for player (frames)
+    /* 0x0C */ f32 chaseSpeed;
+    /* 0x10 */ s32 chaseTurnRate;           // how many degrees this NPC can turn per frame while chasing          
+    /* 0x14 */ s32 chaseUpdateInterval;     // how often to re-run chase init and re-acquire player position (frames)
+    /* 0x18 */ f32 chaseRadius;      
+    /* 0x1C */ f32 chaseOffsetDist;         // offset along npc->yaw of the test point for alert volume overlap, creates directionality to enemy 'sight' 
+    /* 0x20 */ s32 unk_20;
+} StationaryAISettings; // size = 0x24
+
+struct FireBarData;
+typedef void (*FireBarCallback)(struct FireBarData*, s32);
+
+typedef struct FireBarAISettings {
+    /* 0x00 */ Vec3i centerPos;
+    /* 0x0C */ s32 rotationRate;
+    /* 0x10 */ s32 firstNpc;
+    /* 0x14 */ s32 npcCount;
+    /* 0x18 */ FireBarCallback callback;
+} FireBarAISettings; // size = 0x1C
+
+typedef struct FireBarData {
+    /* 0x00 */ s32 flags;
+    /* 0x04 */ Vec3f centerPos;
+    /* 0x10 */ f32 rotationRate;
+    /* 0x14 */ s32 firstNpc;
+    /* 0x18 */ s32 npcCount;
+    /* 0x1C */ FireBarCallback callback;
+    /* 0x20 */ s32 soundIndex;
+    /* 0x24 */ f32 lastDeltaYaw;
+    /* 0x28 */ f32 yaw;
+    /* 0x2C */ FireBarAISettings* settings;
+} FireBarData; // size = 0x30
 
 typedef struct NpcSettings {
     /* 0x00 */ char unk_00[4];
@@ -231,7 +267,7 @@ typedef union {
 } EnemyTerritory; // size = 0xC0
 
 // function signature used for state handlers in AI main functions
-typedef void AIStateHandler(Evt* script, NpcAISettings* settings, EnemyDetectVolume* territory);
+typedef void AIStateHandler(Evt* script, MobileAISettings* settings, EnemyDetectVolume* territory);
 
 typedef struct Enemy {
     /* 0x00 */ s32 flags;
@@ -306,7 +342,7 @@ typedef struct EncounterStatus {
     /* 0x007 */ char unk_07;
     /* 0x008 */ s8 unk_08;
     /* 0x009 */ s8 battleOutcome; /* 0 = won, 1 = lost */
-    /* 0x00A */ s8 unk_0A;
+    /* 0x00A */ s8 battleTriggerCooldown; ///< set to 15 after victory, 45 after fleeing
     /* 0x00B */ s8 merleeCoinBonus; /* triple coins when != 0 */
     /* 0x00C */ u8 damageTaken; /* valid after battle */
     /* 0x00D */ char unk_0D;
@@ -332,9 +368,9 @@ typedef struct EncounterStatus {
     /* 0x094 */ s32 unk_94;
     /* 0x098 */ s32 fadeOutAccel;
     /* 0x09C */ s32 battleStartCountdown;
-    /* 0x0A0 */ s8 unk_A0;
+    /* 0x0A0 */ s8 dizzyAttackStatus;
     /* 0x0A1 */ char unk_A1[0x1];
-    /* 0x0A2 */ s16 unk_A2;
+    /* 0x0A2 */ s16 dizzyAttackDuration;
     /* 0x0A4 */ char unk_A4[0xC];
     /* 0x0B0 */ s32 defeatFlags[60][12];
     /* 0xFB0 */ s16 recentMaps[2];

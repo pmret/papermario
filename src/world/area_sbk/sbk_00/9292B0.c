@@ -4,7 +4,7 @@
 
 #include "world/common/SetNpcB5_3.inc.c"
 
-NpcAISettings N(npcAISettings_80240300) = {
+MobileAISettings N(npcAISettings_80240300) = {
     .moveSpeed = 1.8f,
     .moveTime = 50,
     .waitTime = 10,

@@ -91,7 +91,7 @@ static s32 N(pad_1578)[] = {
     0x00000000, 0x00000000,
 };
 
-NpcAISettings N(npcAISettings_80241580) = {
+MobileAISettings N(npcAISettings_80241580) = {
     .moveSpeed = 4.5f,
     .alertRadius = 170.0f,
     .alertOffsetDist = 90.0f,

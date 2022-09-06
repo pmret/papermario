@@ -3,7 +3,7 @@
 #include "effects.h"
 #include "sprite/npc/jungle_guy.h"
 
-void N(SpearGuyAI_LoiterInit)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(SpearGuyAI_LoiterInit)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -13,7 +13,7 @@ void N(SpearGuyAI_LoiterInit)(Evt* script, NpcAISettings* aiSettings, EnemyDetec
     script->AI_TEMP_STATE = AI_STATE_LOITER;
 }
 
-void N(SpearGuyAI_Loiter)(Evt *script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(SpearGuyAI_Loiter)(Evt *script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 d100;
@@ -86,7 +86,7 @@ ApiStatus N(SpearGuyAI_Main)(Evt *script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     EnemyDetectVolume territory;
     EnemyDetectVolume* territoryPtr = &territory;
-    NpcAISettings* npcAISettings = (NpcAISettings*)evt_get_variable(script, *args++);
+    MobileAISettings* npcAISettings = (MobileAISettings*)evt_get_variable(script, *args++);
 
     territory.skipPlayerDetectChance = 0;
     territory.shape = enemy->territory->wander.detectShape;

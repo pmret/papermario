@@ -48,7 +48,7 @@ EvtScript N(makeEntities) = {
     EVT_END
 };
 
-NpcAISettings N(npcAISettings_802413D0) = {
+MobileAISettings N(npcAISettings_802413D0) = {
     .moveSpeed = 1.8f,
     .moveTime = 40,
     .waitTime = 15,
@@ -76,7 +76,7 @@ NpcSettings N(npcSettings_80241420) = {
     .level = 12,
 };
 
-NpcAISettings N(npcAISettings_8024144C) = {
+MobileAISettings N(npcAISettings_8024144C) = {
     .moveSpeed = 1.0f,
     .moveTime = 30,
     .waitTime = 30,

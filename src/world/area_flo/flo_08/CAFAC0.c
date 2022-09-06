@@ -188,7 +188,7 @@ static s32 N(pad_2EA8)[] = {
     0x00000000, 0x00000000,
 };
 
-NpcAISettings N(npcAISettings_80242EB0) = {
+MobileAISettings N(npcAISettings_80242EB0) = {
     .moveSpeed = 1.5f,
     .moveTime = 30,
     .waitTime = 30,
@@ -237,7 +237,7 @@ NpcSettings N(npcSettings_80242FE0) = {
     .level = 99,
 };
 
-NpcAISettings N(npcAISettings_8024300C) = {
+MobileAISettings N(npcAISettings_8024300C) = {
     .moveSpeed = 1.0f,
     .moveTime = 500,
     .waitTime = 10,

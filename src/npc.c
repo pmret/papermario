@@ -1793,7 +1793,7 @@ void init_encounter_status(void) {
     currentEncounter->numEncounters = 0;
     currentEncounter->eFirstStrike = 0;
     currentEncounter->hitType = 0;
-    currentEncounter->unk_0A = 0;
+    currentEncounter->battleTriggerCooldown = 0;
     currentEncounter->npcGroupList = 0;
     currentEncounter->unk_08 = 0;
     currentEncounter->dropWhackaBump = 0;
@@ -1839,7 +1839,7 @@ void clear_encounter_status(void) {
     currentEncounter->numEncounters = 0;
     currentEncounter->eFirstStrike = 0;
     currentEncounter->hitType = 0;
-    currentEncounter->unk_0A = 0;
+    currentEncounter->battleTriggerCooldown = 0;
     currentEncounter->currentAreaIndex = gGameStatusPtr->areaID;
     currentEncounter->currentMapIndex = gGameStatusPtr->mapID;
     currentEncounter->currentEntryIndex = gGameStatusPtr->entryID;

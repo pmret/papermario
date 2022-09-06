@@ -223,7 +223,7 @@ s32 N(extraAnimationList_802440E4)[] = {
     ANIM_END,
 };
 
-NpcAISettings N(npcAISettings_802440EC) = {
+MobileAISettings N(npcAISettings_802440EC) = {
     .moveSpeed = 1.5f,
     .moveTime = 120,
     .waitTime = 30,
@@ -257,7 +257,7 @@ NpcSettings N(npcSettings_8024418C) = {
     .level = 13,
 };
 
-NpcAISettings N(npcAISettings_802441B8) = {
+MobileAISettings N(npcAISettings_802441B8) = {
     .moveSpeed = 1.0f,
     .moveTime = 120,
     .waitTime = 30,
@@ -325,7 +325,7 @@ EvtScript N(80244370) = {
     EVT_END
 };
 
-NpcAISettings N(npcAISettings_802443AC) = {
+MobileAISettings N(npcAISettings_802443AC) = {
     .moveSpeed = 1.5f,
     .moveTime = 90,
     .waitTime = 30,

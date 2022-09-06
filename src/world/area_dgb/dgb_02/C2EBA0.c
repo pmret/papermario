@@ -189,7 +189,7 @@ s32 N(extraAnimationList_80241B94)[] = {
     ANIM_END,
 };
 
-NpcAISettings N(npcAISettings_80241B9C) = {
+MobileAISettings N(npcAISettings_80241B9C) = {
     .moveSpeed = 1.5f,
     .moveTime = 120,
     .waitTime = 30,
@@ -223,7 +223,7 @@ NpcSettings N(npcSettings_80241C3C) = {
     .level = 13,
 };
 
-NpcAISettings N(npcAISettings_80241C68) = {
+MobileAISettings N(npcAISettings_80241C68) = {
     .moveSpeed = 1.0f,
     .moveTime = 120,
     .waitTime = 30,

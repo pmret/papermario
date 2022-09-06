@@ -36,7 +36,7 @@ static s32 N(pad_3654)[] = {
     0x00000000, 0x00000000, 0x00000000,
 };
 
-NpcAISettings N(npcAISettings_80243660) = {
+MobileAISettings N(npcAISettings_80243660) = {
     .moveSpeed = 1.5f,
     .moveTime = 30,
     .waitTime = 30,
@@ -73,7 +73,7 @@ f32 N(FlyingAI_JumpVels)[] = {
 
 #include "world/common/enemy/FlyingAI.inc.c"
 
-NpcAISettings N(npcAISettings_802436F4) = {
+MobileAISettings N(npcAISettings_802436F4) = {
     .moveSpeed = 1.8f,
     .moveTime = 60,
     .waitTime = 15,
@@ -106,7 +106,7 @@ NpcSettings N(npcSettings_80243794) = {
     .unk_2A = 1,
 };
 
-NpcAISettings N(npcAISettings_802437C0) = {
+MobileAISettings N(npcAISettings_802437C0) = {
     .moveSpeed = 1.0f,
     .moveTime = 30,
     .waitTime = 30,

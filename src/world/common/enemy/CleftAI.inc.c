@@ -22,7 +22,7 @@ enum AiStateCleft {
     AI_STATE_CLEFT_POST_DISGUISE        = 52
 };
 
-s32 N(CleftAI_CanSeePlayer)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* volume) {
+s32 N(CleftAI_CanSeePlayer)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* volume) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Camera* camera = &gCameras[gCurrentCamID];
@@ -53,7 +53,7 @@ s32 N(CleftAI_CanSeePlayer)(Evt* script, NpcAISettings* aiSettings, EnemyDetectV
     return seesPlayer;
 }
 
-void N(CleftAI_HidingInit)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* volume) {
+void N(CleftAI_HidingInit)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* volume) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -66,7 +66,7 @@ void N(CleftAI_HidingInit)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVo
     script->AI_TEMP_STATE = AI_STATE_CLEFT_HIDING;
 }
 
-void N(CleftAI_Hiding)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* volume) {
+void N(CleftAI_Hiding)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* volume) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 emoteTemp;
@@ -85,7 +85,7 @@ void N(CleftAI_Hiding)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume
     script->functionTemp[1]--;
 }
 
-void N(CleftAI_PreAmbush)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* volume) {
+void N(CleftAI_PreAmbush)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* volume) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -99,7 +99,7 @@ void N(CleftAI_PreAmbush)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVol
     }
 }
 
-void N(CleftAI_Ambush)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* volume) {
+void N(CleftAI_Ambush)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* volume) {
     Npc* npc = get_npc_unsafe(script->owner1.enemy->npcID);
 
     npc->duration--;
@@ -111,7 +111,7 @@ void N(CleftAI_Ambush)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume
     }
 }
 
-void N(CleftAI_FindPlayerInit)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* volume) {
+void N(CleftAI_FindPlayerInit)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* volume) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -121,7 +121,7 @@ void N(CleftAI_FindPlayerInit)(Evt* script, NpcAISettings* aiSettings, EnemyDete
     script->AI_TEMP_STATE = AI_STATE_CLEFT_FIND_PLAYER;
 }
 
-void N(CleftAI_FindPlayer)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* volume) {
+void N(CleftAI_FindPlayer)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* volume) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 var;
@@ -145,7 +145,7 @@ void N(CleftAI_FindPlayer)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVo
     }
 }
 
-void N(CleftAI_RevUpInit)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* volume) {
+void N(CleftAI_RevUpInit)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* volume) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -154,7 +154,7 @@ void N(CleftAI_RevUpInit)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVol
     script->AI_TEMP_STATE = AI_STATE_CLEFT_REV_UP;
 }
 
-void N(CleftAI_RevUp)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* volume) {
+void N(CleftAI_RevUp)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* volume) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -179,7 +179,7 @@ void N(CleftAI_RevUp)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume*
     }
 }
 
-void N(CleftAI_Tackle)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* volume) {
+void N(CleftAI_Tackle)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* volume) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 posX, posY, posZ;
@@ -214,7 +214,7 @@ void N(CleftAI_Tackle)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume
     }
 }
 
-void N(CleftAI_LosePlayer)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* volume) {
+void N(CleftAI_LosePlayer)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* volume) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -230,7 +230,7 @@ void N(CleftAI_LosePlayer)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVo
     }
 }
 
-void N(CleftAI_ReturnHome)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* volume) {
+void N(CleftAI_ReturnHome)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* volume) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -246,7 +246,7 @@ void N(CleftAI_ReturnHome)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVo
     }
 }
 
-void N(CleftAI_DisguiseInit)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* volume) {
+void N(CleftAI_DisguiseInit)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* volume) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -261,7 +261,7 @@ void N(CleftAI_DisguiseInit)(Evt* script, NpcAISettings* aiSettings, EnemyDetect
     }
 }
 
-void N(CleftAI_Disguise)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* volume) {
+void N(CleftAI_Disguise)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* volume) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -273,7 +273,7 @@ void N(CleftAI_Disguise)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolu
     }
 }
 
-void N(CleftAI_PostDisguise)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* volume) {
+void N(CleftAI_PostDisguise)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* volume) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -287,7 +287,7 @@ s32 N(CleftAI_Main)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;
-    NpcAISettings* npcAISettings = (NpcAISettings*)evt_get_variable(script, *args++);
+    MobileAISettings* npcAISettings = (MobileAISettings*)evt_get_variable(script, *args++);
     EnemyDetectVolume curVolume;
     EnemyDetectVolume* volume = &curVolume;
 

@@ -260,7 +260,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
             tmp_out += "};\n"
             out += tmp_out
         elif struct["type"] == "AISettings":
-            tmp_out = f"NpcAISettings {name} = {{\n"
+            tmp_out = f"MobileAISettings {name} = {{\n"
             npcAISettings = bytes.read(struct["length"])
 
             i = x = 0

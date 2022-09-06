@@ -129,7 +129,7 @@ static s32 N(pad_40FC) = {
     0x00000000,
 };
 
-NpcAISettings N(npcAI_80244100) = {
+MobileAISettings N(npcAI_80244100) = {
     .moveSpeed = 4.5f,
     .alertRadius = 170.0f,
     .alertOffsetDist = 90.0f,
@@ -205,7 +205,7 @@ s32 N(extraAnimationList_802442B8)[] = {
     ANIM_END,
 };
 
-NpcAISettings N(npcAISettings_802442C0) = {
+MobileAISettings N(npcAISettings_802442C0) = {
     .moveSpeed = 1.5f,
     .moveTime = 120,
     .waitTime = 30,
@@ -273,7 +273,7 @@ EvtScript N(80244478) = {
     EVT_END
 };
 
-NpcAISettings N(npcAISettings_802444B4) = {
+MobileAISettings N(npcAISettings_802444B4) = {
     .moveSpeed = 1.5f,
     .moveTime = 90,
     .waitTime = 30,

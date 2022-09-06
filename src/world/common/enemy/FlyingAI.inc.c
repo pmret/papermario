@@ -16,7 +16,7 @@
 
 extern f32 N(FlyingAI_JumpVels)[];
 
-void N(FlyingAI_WanderInit)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(FlyingAI_WanderInit)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -40,7 +40,7 @@ void N(FlyingAI_WanderInit)(Evt* script, NpcAISettings* aiSettings, EnemyDetectV
     script->functionTemp[0] = AI_STATE_WANDER;
 }
 
-void N(FlyingAI_Wander)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(FlyingAI_Wander)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 cond = FALSE;
@@ -183,7 +183,7 @@ void N(FlyingAI_Wander)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolum
     }
 }
 
-void N(FlyingAI_LoiterInit)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(FlyingAI_LoiterInit)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -193,7 +193,7 @@ void N(FlyingAI_LoiterInit)(Evt* script, NpcAISettings* aiSettings, EnemyDetectV
     script->functionTemp[0] = 3;
 }
 
-void N(FlyingAI_Loiter)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(FlyingAI_Loiter)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 posX, posY, posZ, posW;
@@ -259,7 +259,7 @@ void N(FlyingAI_Loiter)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolum
     }
 }
 
-void N(FlyingAI_JumpInit)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(FlyingAI_JumpInit)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     PlayerStatus* playerStatus = gPlayerStatusPtr;
@@ -270,7 +270,7 @@ void N(FlyingAI_JumpInit)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVol
     script->functionTemp[0] = AI_STATE_ALERT;
 }
 
-void N(FlyingAI_Jump)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(FlyingAI_Jump)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -280,7 +280,7 @@ void N(FlyingAI_Jump)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume*
     }
 }
 
-void N(FlyingAI_ChaseInit)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(FlyingAI_ChaseInit)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 jumpVelocity = (f32)enemy->varTable[5] / 100.0;
@@ -307,7 +307,7 @@ void N(FlyingAI_ChaseInit)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVo
     }
 }
 
-void N(FlyingAI_Chase)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(FlyingAI_Chase)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Npc* npc = get_npc_unsafe(script->owner1.enemy->npcID);
 
     if ((npc->duration <= 0) || (--npc->duration <= 0)) {
@@ -318,7 +318,7 @@ void N(FlyingAI_Chase)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume
     }
 }
 
-void N(FlyingAI_LosePlayer)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(FlyingAI_LosePlayer)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 posX, posY, posZ, posW;
@@ -405,7 +405,7 @@ void N(FlyingAI_LosePlayer)(Evt* script, NpcAISettings* aiSettings, EnemyDetectV
     }
 }
 
-void N(FlyingAI_Init)(Npc* npc, Enemy* enemy, Evt* script, NpcAISettings* aiSettings) {
+void N(FlyingAI_Init)(Npc* npc, Enemy* enemy, Evt* script, MobileAISettings* aiSettings) {
     f32 posX, posY, posZ, depth;
 
     script->functionTemp[0] = 0;
@@ -442,7 +442,7 @@ ApiStatus N(FlyingAI_Main)(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(enemy->npcID);
     EnemyDetectVolume territory;
     EnemyDetectVolume* territoryPtr = &territory;
-    NpcAISettings* aiSettings = (NpcAISettings*) evt_get_variable(script, *args);
+    MobileAISettings* aiSettings = (MobileAISettings*) evt_get_variable(script, *args);
 
     territory.skipPlayerDetectChance = 0;
     territory.shape = enemy->territory->wander.detectShape;

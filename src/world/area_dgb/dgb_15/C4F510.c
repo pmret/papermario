@@ -321,7 +321,7 @@ EvtScript N(802424E8) = {
     EVT_END
 };
 
-NpcAISettings N(npcAISettings_8024271C) = {
+MobileAISettings N(npcAISettings_8024271C) = {
     .moveSpeed = 3.0f,
     .moveTime = 30,
     .waitTime = 30,

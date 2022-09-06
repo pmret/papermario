@@ -73,7 +73,7 @@ NpcSettings N(npcSettings_802416B0) = {
     .level = 13,
 };
 
-NpcAISettings N(npcAISettings_802416DC) = {
+MobileAISettings N(npcAISettings_802416DC) = {
     .moveSpeed = 1.0f,
     .moveTime = 25,
     .waitTime = 30,
@@ -1018,7 +1018,7 @@ EvtScript N(makeEntities) = {
 
 #include "world/common/enemy/PatrolNoAttackAI.inc.c"
 
-void N(func_80240E90_BE8A70)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(func_80240E90_BE8A70)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 posX, posY, posZ, posW;
@@ -1054,7 +1054,7 @@ void N(func_80240E90_BE8A70)(Evt* script, NpcAISettings* aiSettings, EnemyDetect
     }
 }
 
-void N(func_80241068_BE8C48)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(func_80241068_BE8C48)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -1077,7 +1077,7 @@ ApiStatus N(func_8024113C_BE8D1C)(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(enemy->npcID);
     EnemyDetectVolume territory;
     EnemyDetectVolume* territoryPtr = &territory;
-    NpcAISettings* aiSettings = (NpcAISettings*)evt_get_variable(script, *args++);
+    MobileAISettings* aiSettings = (MobileAISettings*)evt_get_variable(script, *args++);
 
     territory.skipPlayerDetectChance = 0;
     territory.shape = enemy->territory->patrol.detectShape;

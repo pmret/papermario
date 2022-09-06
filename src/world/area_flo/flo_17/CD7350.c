@@ -315,7 +315,7 @@ f32 N(FlyingAI_JumpVels)[] = {
     1.5f, 20.0f,
 };
 
-NpcAISettings N(npcAISettings_80244424) = {
+MobileAISettings N(npcAISettings_80244424) = {
     .moveSpeed = 1.5f,
     .moveTime = 60,
     .waitTime = 30,
@@ -349,7 +349,7 @@ NpcSettings N(npcSettings_802444C4) = {
     .level = 20,
 };
 
-NpcAISettings N(npcAISettings_802444F0) = {
+MobileAISettings N(npcAISettings_802444F0) = {
     .moveSpeed = 1.5f,
     .moveTime = 30,
     .waitTime = 50,

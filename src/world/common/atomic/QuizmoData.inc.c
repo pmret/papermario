@@ -674,7 +674,7 @@ EvtScript N(EVS_Quizmo_NPC_Aux) = {
     EVT_END
 };
 
-NpcAISettings N(Quizmo_NpcAISettings) = {
+MobileAISettings N(Quizmo_MobileAISettings) = {
     .moveSpeed = 0.7f,
     .moveTime = 30,
     .waitTime = 20,
@@ -683,7 +683,7 @@ NpcAISettings N(Quizmo_NpcAISettings) = {
 };
 
 EvtScript N(EVS_Quizmo_Npc_AI) = {
-    EVT_CALL(BasicAI_Main, EVT_PTR(N(Quizmo_NpcAISettings)))
+    EVT_CALL(BasicAI_Main, EVT_PTR(N(Quizmo_MobileAISettings)))
     EVT_RETURN
     EVT_END
 };

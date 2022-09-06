@@ -460,7 +460,7 @@ static s32 N(pad_4DD4)[] = {
 
 #include "world/common/atomic/QuizmoData.inc.c"
 
-NpcAISettings N(npcAISettings_80247408) = {
+MobileAISettings N(npcAISettings_80247408) = {
     .moveSpeed = 1.5f,
     .moveTime = 60,
     .waitTime = 30,
@@ -489,7 +489,7 @@ NpcSettings N(npcSettings_80247484) = {
     .level = 99,
 };
 
-NpcAISettings N(npcAISettings_802474B0) = {
+MobileAISettings N(npcAISettings_802474B0) = {
     .moveSpeed = 1.5f,
     .moveTime = 60,
     .waitTime = 30,

@@ -367,7 +367,7 @@ NpcSettings N(npcSettings_80242840) = {
     .level = 99,
 };
 
-NpcAISettings N(npcAISettings_8024286C) = {
+MobileAISettings N(npcAISettings_8024286C) = {
     .moveSpeed = 1.5f,
     .moveTime = 30,
     .waitTime = 30,

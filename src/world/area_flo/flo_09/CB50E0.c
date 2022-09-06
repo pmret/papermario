@@ -416,7 +416,7 @@ EvtScript N(802434A8) = {
     EVT_END
 };
 
-NpcAISettings N(npcAISettings_802435B0) = {
+MobileAISettings N(npcAISettings_802435B0) = {
     .moveSpeed = 1.0f,
     .moveTime = 500,
     .waitTime = 10,
@@ -451,7 +451,7 @@ f32 N(FlyingAI_JumpVels)[] = {
     1.5f, 20.0f,
 };
 
-NpcAISettings N(npcAISettings_80243644) = {
+MobileAISettings N(npcAISettings_80243644) = {
     .moveSpeed = 1.0f,
     .moveTime = 30,
     .waitTime = 5,
