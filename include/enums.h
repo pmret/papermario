@@ -755,6 +755,7 @@ enum SoundIDs {
     SOUND_2039                      = 0x00002039,
     SOUND_2055                      = 0x00002055,
     SOUND_205B                      = 0x0000205B,
+    SOUND_2063                      = 0x00002063,
     SOUND_2064                      = 0x00002064,
     SOUND_2065                      = 0x00002065,
     SOUND_2066                      = 0x00002066,
