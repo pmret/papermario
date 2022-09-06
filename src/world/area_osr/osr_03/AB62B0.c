@@ -24,6 +24,39 @@ ApiStatus func_802400C4_AB6354(Evt* script, s32 isInitialCall) {
 }
 
 
-INCLUDE_ASM(s32, "world/area_osr/osr_03/AB62B0", func_802401A0_AB6430);
+ApiStatus func_802401A0_AB6430(Evt* script, s32 isInitialCall) {
+    if (isInitialCall) {
+        script->functionTemp[1] = 0;
+        script->functionTemp[2] = 0;
+    }
+    switch (script->functionTemp[2]) {
+    case 0:
+        set_screen_overlay_color(0, 0xD0U, 0xD0U, 0xD0U);
+        set_screen_overlay_params_front(1U, script->functionTemp[1]);
+        if (script->functionTemp[1] == 0xFF) {
+            script->functionTemp[2] = 1;
+            break;
+        }
+        script->functionTemp[1] += 0x40;
+        if (script->functionTemp[1] < 0x100) {       
+            break;
+        }
+        script->functionTemp[1] = 0xFF;
+        break;
+    case 1:
+        set_screen_overlay_color(0, 0xD0U, 0xD0U, 0xD0U);
+        set_screen_overlay_params_front(1U, script->functionTemp[1]);
+        if (script->functionTemp[1] == 0) {
+            return ApiStatus_DONE2;
+        }
+        script->functionTemp[1] -= 0x40;
+        if (script->functionTemp[1] <= 0) {
+            script->functionTemp[1] = 0;
+        }
+        break;
+    }
+
+    return ApiStatus_BLOCK;
+}
 
 INCLUDE_ASM(s32, "world/area_osr/osr_03/AB62B0", func_80240290_AB6520);
