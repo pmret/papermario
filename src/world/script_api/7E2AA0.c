@@ -27,13 +27,13 @@ typedef struct AdvancedDoor {
     /* 0x0C */ Vec2XZf unk_0C;
     /* 0x14 */ Vec2XZf unk_14;
     /* 0x1C */ Vec2XZf unk_1C;
-	/* 0x24 */ Vec2XZf unk_24;
-	/* 0x2C */ EvtScript* scripts[4];
-	/* 0x3C */ s32 modelID;
-	/* 0x40 */ s32 bgColor[3];
-	/* 0x4C */ s32 scriptIDs[4];
-	/* 0x5C */ s32* npcList;
-	/* 0x60 */ s32 colliderID;
+    /* 0x24 */ Vec2XZf unk_24;
+    /* 0x2C */ EvtScript* scripts[4];
+    /* 0x3C */ s32 modelID;
+    /* 0x40 */ s32 bgColor[3];
+    /* 0x4C */ s32 scriptIDs[4];
+    /* 0x5C */ s32* npcList;
+    /* 0x60 */ s32 colliderID;
 } AdvancedDoor; // size = 0x64
 
 ApiStatus func_80281C20(Evt* script, s32 isInitialCall) {
