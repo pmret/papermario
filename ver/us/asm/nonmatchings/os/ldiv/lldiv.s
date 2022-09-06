@@ -17,7 +17,7 @@ glabel lldiv
 /* 48AD4 8006D6D4 02202821 */  addu      $a1, $s1, $zero
 /* 48AD8 8006D6D8 AFBF0034 */  sw        $ra, 0x34($sp)
 /* 48ADC 8006D6DC 02403021 */  addu      $a2, $s2, $zero
-/* 48AE0 8006D6E0 0C01B600 */  jal       func_8006D800
+/* 48AE0 8006D6E0 0C01B600 */  jal       __divdi3
 /* 48AE4 8006D6E4 02603821 */   addu     $a3, $s3, $zero
 /* 48AE8 8006D6E8 00403021 */  addu      $a2, $v0, $zero
 /* 48AEC 8006D6EC 00603821 */  addu      $a3, $v1, $zero

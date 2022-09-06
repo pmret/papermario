@@ -76,6 +76,14 @@
 #define TAU     6.28318f
 #define PI_S    3.14159f // Shorter PI
 
+// Angle conversion macros
+#define DEG_TO_BINANG(x) ((x) * (0x8000 / 180.0f))
+#define RAD_TO_BINANG(x) ((x) * (f32)(0x8000 / M_PI))
+
+// Should be 1.0f / 0x7FFF, but precision is wrong for a double
+#define SHT_MINV 3.051851e-05
+
+
 #define SPRITE_WORLD_SCALE   (5.0f/7.0f)
 #define SPRITE_WORLD_SCALE_D (5.0/7.0)
 
@@ -89,9 +97,9 @@
 #define PACK_FILL_COLOR(r, g, b, a) (GPACK_RGBA5551(r, g, b, a) << 0x10) | GPACK_RGBA5551(r, g, b, a)
 #define PACK_FILL_DEPTH(z,dz) (GPACK_ZDZ(z, dz) << 0x10) | GPACK_ZDZ(z, dz)
 
-#define SQ(x) ((x)*(x))
-#define CUBE(x) (x*x*x)
-#define QUART(x) (x*x*x*x)
+#define SQ(x) ((x) * (x))
+#define CUBE(x) ((x) * (x) * (x))
+#define QUART(x) ((x) * (x) * (x) * (x))
 
 /// Fixed-point short literal
 #define F16(f) (s16)(f * 327.67f)
