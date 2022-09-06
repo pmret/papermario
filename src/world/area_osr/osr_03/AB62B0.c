@@ -59,4 +59,27 @@ ApiStatus func_802401A0_AB6430(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-INCLUDE_ASM(s32, "world/area_osr/osr_03/AB62B0", func_80240290_AB6520);
+ApiStatus func_80240290_AB6520(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    f32 frequency;
+    s32 duration;
+    
+    if (isInitialCall) {
+        duration = evt_get_variable(script, *args++);
+        frequency = 2.0f * evt_get_float_variable(script, *args++);
+        script->functionTemp[0] = duration;
+        if (frequency > 10.0f) {
+            frequency = 10.0f;
+        }
+        
+        start_rumble((u8) ((frequency / 10.0f) * 256.0f), (duration & 0xFFFF) * 2);
+    }
+    
+    script->functionTemp[0] -= 1;  
+    if (script->functionTemp[0] == 0)
+    {
+        return ApiStatus_DONE1;
+    }
+    
+    return ApiStatus_BLOCK;
+}
