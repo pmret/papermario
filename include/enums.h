@@ -740,6 +740,7 @@ enum SoundIDs {
     SOUND_CREAKY_ROCKING_CHAIR      = 0x000001D6,
     SOUND_1D8                       = 0x000001D8,
     SOUND_1D9                       = 0x000001D9,
+    SOUND_1DA                       = 0x000001DA,
     SOUND_1DB                       = 0x000001DB,
     SOUND_1DC                       = 0x000001DC,
     SOUND_1DD                       = 0x000001DD,
