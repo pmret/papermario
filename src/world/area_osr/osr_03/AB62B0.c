@@ -37,11 +37,11 @@ ApiStatus func_802401A0_AB6430(Evt* script, s32 isInitialCall) {
                 script->functionTemp[2] = 1;
                 break;
             }
-            script->functionTemp[1] += 0x40;
-            if (script->functionTemp[1] < 0x100) {       
+            script->functionTemp[1] += 64;
+            if (script->functionTemp[1] < 256) {       
                 break;
             }
-            script->functionTemp[1] = 0xFF;
+            script->functionTemp[1] = 255;
             break;
         case 1:
             set_screen_overlay_color(0, 208, 208, 208);
