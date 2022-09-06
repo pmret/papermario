@@ -24,7 +24,7 @@ EvtScript N(802407A0) = {
     EVT_IF_EQ(EVT_VAR(0), 1)
         EVT_CALL(SetMusicTrack, 0, SONG_SUNSHINE_RETURNS, 0, 8)
     EVT_ELSE
-        EVT_SWITCH(EVT_SAVE_VAR(0))
+        EVT_SWITCH(GB_StoryProgress)
             EVT_CASE_LT(53)
                 EVT_CALL(SetMusicTrack, 0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8)
             EVT_CASE_DEFAULT
@@ -121,7 +121,7 @@ EvtScript N(80240C74) = {
 };
 
 EvtScript N(main) = {
-    EVT_SET(EVT_SAVE_VAR(425), 38)
+    EVT_SET(GB_WorldLocation, 38)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamLeadPlayer, 0, 0)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
@@ -206,7 +206,7 @@ EvtScript N(main) = {
         EVT_EXEC(N(802424F4))
     EVT_END_IF
     EVT_EXEC_WAIT(N(802407A0))
-    EVT_IF_GE(EVT_SAVE_VAR(0), 53)
+    EVT_IF_GE(GB_StoryProgress, 53)
         EVT_CALL(N(SpawnSunEffect))
     EVT_END_IF
     EVT_CALL(N(func_80240344_CAC534))
@@ -306,7 +306,7 @@ EvtScript N(80241DBC) = {
     EVT_SET(EVT_AREA_FLAG(6), 1)
     EVT_WAIT_FRAMES(20)
     EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_posie_Palette_00_Anim_2, NPC_ANIM_posie_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x006A))
-    EVT_SET(EVT_SAVE_VAR(0), 47)
+    EVT_SET(GB_StoryProgress, 47)
     EVT_RETURN
     EVT_END
 };
@@ -314,7 +314,7 @@ EvtScript N(80241DBC) = {
 EvtScript N(interact_80242044) = {
     EVT_EXEC_WAIT(N(8024086C))
     EVT_CALL(NpcFacePlayer, NPC_SELF, 1)
-    EVT_SWITCH(EVT_SAVE_VAR(0))
+    EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(45)
             EVT_IF_EQ(EVT_AREA_FLAG(5), 0)
                 EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_posie_Palette_00_Anim_2, NPC_ANIM_posie_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x0070))
@@ -332,7 +332,7 @@ EvtScript N(interact_80242044) = {
             EVT_SET(EVT_VAR(1), 1)
             EVT_EXEC_WAIT(N(80241BB4))
             EVT_CALL(AddKeyItem, ITEM_FERTILE_SOIL)
-            EVT_SET(EVT_SAVE_VAR(0), 46)
+            EVT_SET(GB_StoryProgress, 46)
             EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_posie_Palette_00_Anim_2, NPC_ANIM_posie_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x0066))
             EVT_IF_EQ(EVT_SAVE_FLAG(1379), 1)
                 EVT_EXEC_WAIT(N(80241DBC))
@@ -354,7 +354,7 @@ EvtScript N(interact_80242044) = {
             EVT_IF_EQ(EVT_SAVE_FLAG(1374), 0)
                 EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_posie_Palette_00_Anim_2, NPC_ANIM_posie_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x0072))
             EVT_ELSE
-                EVT_IF_LT(EVT_SAVE_VAR(0), 48)
+                EVT_IF_LT(GB_StoryProgress, 48)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_posie_Palette_00_Anim_2, NPC_ANIM_posie_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x0073))
                 EVT_ELSE
                     EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_posie_Palette_00_Anim_2, NPC_ANIM_posie_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x0074))
@@ -372,7 +372,7 @@ EvtScript N(interact_80242044) = {
 };
 
 EvtScript N(init_80242428) = {
-    EVT_IF_EQ(EVT_SAVE_VAR(0), 47)
+    EVT_IF_EQ(GB_StoryProgress, 47)
         EVT_IF_EQ(EVT_SAVE_FLAG(1374), 0)
             EVT_IF_EQ(EVT_SAVE_FLAG(1396), 0)
                 EVT_CALL(MakeItemEntity, ITEM_CRYSTAL_BERRY, -225, 0, -25, 17, EVT_SAVE_FLAG(1374))
@@ -410,11 +410,11 @@ extern const char N(flo_25_name_hack)[];
 
 EvtScript N(tree1_Callback) = {
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_IF_LT(EVT_SAVE_VAR(0), 47)
+    EVT_IF_LT(GB_StoryProgress, 47)
         EVT_CALL(NpcFacePlayer, 0, 1)
         EVT_WAIT_FRAMES(10)
         EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_posie_Palette_00_Anim_4, NPC_ANIM_posie_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x0067))
-        EVT_IF_EQ(EVT_SAVE_VAR(0), 46)
+        EVT_IF_EQ(GB_StoryProgress, 46)
             EVT_IF_EQ(EVT_SAVE_FLAG(1379), 1)
                 EVT_CALL(UseSettingsFrom, 0, -250, 0, 0)
                 EVT_CALL(SetPanTarget, 0, -250, 0, 0)

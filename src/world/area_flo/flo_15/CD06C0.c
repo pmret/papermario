@@ -26,7 +26,7 @@ EvtScript N(80240060) = {
     EVT_IF_EQ(EVT_VAR(0), 1)
         EVT_CALL(SetMusicTrack, 0, SONG_SUNSHINE_RETURNS, 0, 8)
     EVT_ELSE
-        EVT_SWITCH(EVT_SAVE_VAR(0))
+        EVT_SWITCH(GB_StoryProgress)
             EVT_CASE_LT(53)
                 EVT_CALL(SetMusicTrack, 0, SONG_SUN_TOWER_CLOUDY, 0, 8)
             EVT_CASE_DEFAULT
@@ -50,7 +50,7 @@ EvtScript N(8024017C) = {
 };
 
 EvtScript N(main) = {
-    EVT_SET(EVT_SAVE_VAR(425), 38)
+    EVT_SET(GB_WorldLocation, 38)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamLeadPlayer, 0, 0)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
@@ -84,7 +84,7 @@ NpcSettings N(npcSettings_80240300) = {
 };
 
 EvtScript N(8024032C) = {
-    EVT_IF_LT(EVT_SAVE_VAR(0), 53)
+    EVT_IF_LT(GB_StoryProgress, 53)
         EVT_SET(EVT_VAR(3), 7)
         EVT_SET(EVT_VAR(4), 5)
     EVT_ELSE
@@ -217,7 +217,7 @@ EvtScript N(8024094C) = {
 };
 
 EvtScript N(interact_80240B28) = {
-    EVT_SWITCH(EVT_SAVE_VAR(0))
+    EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(50)
             EVT_CALL(SpeakToPlayer, 10, NPC_ANIM_sun_Palette_00_Anim_7, NPC_ANIM_sun_Palette_00_Anim_1, 517, MESSAGE_ID(0x11, 0x009A))
             EVT_CALL(SetPlayerAnimation, ANIM_THINKING)
@@ -226,7 +226,7 @@ EvtScript N(interact_80240B28) = {
             EVT_WAIT_FRAMES(20)
             EVT_CALL(SetPlayerAnimation, ANIM_10002)
             EVT_CALL(SpeakToPlayer, 10, NPC_ANIM_sun_Palette_00_Anim_7, NPC_ANIM_sun_Palette_00_Anim_1, 517, MESSAGE_ID(0x11, 0x009B))
-            EVT_SET(EVT_SAVE_VAR(0), 50)
+            EVT_SET(GB_StoryProgress, 50)
         EVT_CASE_LT(53)
             EVT_CALL(SpeakToPlayer, 10, NPC_ANIM_sun_Palette_00_Anim_7, NPC_ANIM_sun_Palette_00_Anim_1, 517, MESSAGE_ID(0x11, 0x009C))
         EVT_CASE_LT(57)
@@ -247,7 +247,7 @@ EvtScript N(interact_80240B28) = {
 EvtScript N(init_80240CD0) = {
     EVT_CALL(SetNpcCollisionSize, 10, 64, 40)
     EVT_CALL(EnableNpcShadow, 10, FALSE)
-    EVT_IF_LT(EVT_SAVE_VAR(0), 53)
+    EVT_IF_LT(GB_StoryProgress, 53)
         EVT_CALL(SetNpcPos, 10, 0, 270, 0)
         EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_80240B28)))
         EVT_EXEC(N(8024032C))
@@ -268,7 +268,7 @@ EvtScript N(init_80240DB4) = {
     EVT_CALL(SetNpcPaletteSwapMode, 11, 3)
     EVT_CALL(SetNpcPaletteSwapping, 10, 0, 1, 5, 5, 13, 5, 0, 0)
     EVT_CALL(SetNpcPaletteSwapping, 11, 0, 1, 5, 5, 13, 5, 0, 0)
-    EVT_IF_LT(EVT_SAVE_VAR(0), 53)
+    EVT_IF_LT(GB_StoryProgress, 53)
         EVT_CALL(SetNpcPos, 11, 0, 270, -5)
     EVT_ELSE
         EVT_CALL(SetNpcPos, 11, 0, 450, -5)

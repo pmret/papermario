@@ -39,7 +39,7 @@ EvtScript N(802436D0) = {
         EVT_GOTO(10)
     EVT_END_IF
     EVT_LABEL(0)
-    EVT_SWITCH(EVT_SAVE_VAR(0))
+    EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(53)
             EVT_CALL(SetMusicTrack, 0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8)
         EVT_CASE_DEFAULT
@@ -53,7 +53,7 @@ EvtScript N(802436D0) = {
         EVT_WAIT_FRAMES(1)
     EVT_END_LOOP
     EVT_LABEL(10)
-    EVT_SWITCH(EVT_SAVE_VAR(0))
+    EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(53)
             EVT_CALL(SetMusicTrack, 0, SONG_SUN_TOWER_CLOUDY, 0, 8)
         EVT_CASE_DEFAULT
@@ -171,7 +171,7 @@ EvtScript N(80243DA4) = {
 };
 
 EvtScript N(main) = {
-    EVT_SET(EVT_SAVE_VAR(425), 38)
+    EVT_SET(GB_WorldLocation, 38)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamLeadPlayer, 0, 0)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
@@ -215,7 +215,7 @@ EvtScript N(main) = {
     EVT_SET(EVT_VAR(0), EVT_PTR(N(80243DA4)))
     EVT_EXEC(EnterWalk)
     EVT_EXEC_WAIT(N(802438B0))
-    EVT_IF_GE(EVT_SAVE_VAR(0), 53)
+    EVT_IF_GE(GB_StoryProgress, 53)
         EVT_CALL(N(func_80240000_CC3810))
     EVT_END_IF
     EVT_RETURN
@@ -365,7 +365,7 @@ EvtScript N(80244560) = {
     EVT_SET(EVT_VAR(2), EVT_VAR(5))
     EVT_CALL(GetAngleBetweenNPCs, -4, 1, EVT_VAR(10))
     EVT_CALL(InterpNpcYaw, NPC_PARTNER, EVT_VAR(10), 0)
-    EVT_IF_LT(EVT_SAVE_VAR(0), 51)
+    EVT_IF_LT(GB_StoryProgress, 51)
         EVT_CALL(GetAngleBetweenNPCs, 0, 1, EVT_VAR(11))
         EVT_CALL(InterpNpcYaw, 0, EVT_VAR(11), 0)
     EVT_END_IF
@@ -467,7 +467,7 @@ EvtScript N(80244888) = {
 };
 
 EvtScript N(idle_80244BF8) = {
-    EVT_IF_NE(EVT_SAVE_VAR(0), 50)
+    EVT_IF_NE(GB_StoryProgress, 50)
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(AwaitPlayerApproach, 200, 20, 275)
@@ -741,7 +741,7 @@ EvtScript N(80245444) = {
     EVT_EXEC(N(802438F8))
     EVT_WAIT_FRAMES(10)
     EVT_CALL(PanToTarget, 0, 0, 0)
-    EVT_SET(EVT_SAVE_VAR(0), 51)
+    EVT_SET(GB_StoryProgress, 51)
     EVT_CALL(EnablePartnerAI)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_EXEC_WAIT(N(80245014))
@@ -775,7 +775,7 @@ EvtScript N(defeat_80246038) = {
 };
 
 EvtScript N(interact_802461C0) = {
-    EVT_IF_LE(EVT_SAVE_VAR(0), 53)
+    EVT_IF_LE(GB_StoryProgress, 53)
         EVT_CALL(SpeakToPlayer, 1, NPC_ANIM_lakilulu_Palette_00_Anim_4, NPC_ANIM_lakilulu_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x0032))
     EVT_ELSE
         EVT_CALL(GetCurrentPartnerID, EVT_VAR(0))
@@ -790,7 +790,7 @@ EvtScript N(interact_802461C0) = {
 };
 
 EvtScript N(init_80246280) = {
-    EVT_IF_LT(EVT_SAVE_VAR(0), 51)
+    EVT_IF_LT(GB_StoryProgress, 51)
         EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80244BF8)))
         EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(defeat_80246038)))
     EVT_END_IF
@@ -799,10 +799,10 @@ EvtScript N(init_80246280) = {
 };
 
 EvtScript N(init_802462D0) = {
-    EVT_IF_LT(EVT_SAVE_VAR(0), 58)
+    EVT_IF_LT(GB_StoryProgress, 58)
         EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_802461C0)))
         EVT_CALL(SetNpcCollisionSize, -1, 36, 28)
-        EVT_IF_GE(EVT_SAVE_VAR(0), 53)
+        EVT_IF_GE(GB_StoryProgress, 53)
             EVT_CALL(SetNpcPos, NPC_SELF, -50, 180, -50)
         EVT_END_IF
     EVT_ELSE
@@ -820,7 +820,7 @@ EvtScript N(init_80246370) = {
 };
 
 EvtScript N(init_802463B0) = {
-    EVT_IF_EQ(EVT_SAVE_VAR(0), 50)
+    EVT_IF_EQ(GB_StoryProgress, 50)
         EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_END_IF
     EVT_RETURN
@@ -828,7 +828,7 @@ EvtScript N(init_802463B0) = {
 };
 
 EvtScript N(init_802463E8) = {
-    EVT_IF_EQ(EVT_SAVE_VAR(0), 50)
+    EVT_IF_EQ(GB_StoryProgress, 50)
         EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_END_IF
     EVT_CALL(SetSelfVar, 13, 1)

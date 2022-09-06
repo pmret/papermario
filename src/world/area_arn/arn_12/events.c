@@ -59,7 +59,7 @@ EvtScript N(enterSingleDoor_80240290) = {
 };
 
 EvtScript N(main) = {
-    EVT_SET(EVT_SAVE_VAR(425), 35)
+    EVT_SET(GB_WorldLocation, 35)
     EVT_CALL(SetSpriteShading, 524291)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
     EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
@@ -146,7 +146,7 @@ EvtScript N(idle_802404E8) = {
     EVT_CALL(NpcJump0, NPC_SELF, EVT_VAR(0), 0, EVT_VAR(2), 12)
     EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
     EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
-    EVT_SET(EVT_SAVE_VAR(0), -20)
+    EVT_SET(GB_StoryProgress, -20)
     EVT_RETURN
     EVT_END
 };
@@ -160,7 +160,7 @@ EvtScript N(defeat_802406E4) = {
 
 EvtScript N(init_80240710) = {
     EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_802404E8)))
-    EVT_IF_NE(EVT_SAVE_VAR(0), -21)
+    EVT_IF_NE(GB_StoryProgress, -21)
         EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_END_IF
     EVT_RETURN
@@ -168,7 +168,7 @@ EvtScript N(init_80240710) = {
 };
 
 EvtScript N(init_8024075C) = {
-    EVT_IF_LT(EVT_SAVE_VAR(0), -12)
+    EVT_IF_LT(GB_StoryProgress, -12)
         EVT_IF_EQ(EVT_SAVE_FLAG(1017), 1)
             EVT_CALL(RemoveNpc, NPC_SELF)
             EVT_RETURN

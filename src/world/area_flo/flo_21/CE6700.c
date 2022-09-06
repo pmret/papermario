@@ -37,7 +37,7 @@ MapSettings N(settings) = {
 };
 
 EvtScript N(80240D40) = {
-    EVT_IF_EQ(EVT_SAVE_VAR(0), 56)
+    EVT_IF_EQ(GB_StoryProgress, 56)
         EVT_CALL(FadeOutMusic, 0, 500)
     EVT_ELSE
         EVT_CALL(SetMusicTrack, 0, SONG_CLOUDY_CLIMB, 0, 8)
@@ -66,13 +66,13 @@ EvtScript N(80240DA0) = {
 };
 
 EvtScript N(80240E3C) = {
-    EVT_SWITCH(EVT_SAVE_VAR(0))
+    EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_EQ(55)
             EVT_SET(EVT_VAR(0), 0)
             EVT_IF_EQ(EVT_MAP_VAR(10), 0)
                 EVT_RETURN
             EVT_END_IF
-            EVT_SET(EVT_SAVE_VAR(0), 56)
+            EVT_SET(GB_StoryProgress, 56)
         EVT_CASE_EQ(56)
             EVT_SET(EVT_VAR(0), 1)
         EVT_CASE_DEFAULT
@@ -137,7 +137,7 @@ EvtScript N(80240E3C) = {
     EVT_CALL(N(StarSpiritEffectFunc4), 3)
     EVT_CALL(PlaySoundAtPlayer, 312, 0)
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_SET(EVT_SAVE_VAR(0), 57)
+    EVT_SET(GB_StoryProgress, 57)
     EVT_CALL(GotoMapSpecial, EVT_PTR("kmr_23"), 5, 14)
     EVT_WAIT_FRAMES(100)
     EVT_RETURN
@@ -153,7 +153,7 @@ EvtScript N(80241350) = {
 };
 
 EvtScript N(main) = {
-    EVT_SET(EVT_SAVE_VAR(425), 39)
+    EVT_SET(GB_WorldLocation, 39)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamLeadPlayer, 0, 0)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
@@ -170,7 +170,7 @@ EvtScript N(main) = {
     EVT_SET(EVT_VAR(0), EVT_PTR(N(80241350)))
     EVT_EXEC(EnterWalk)
     EVT_EXEC_WAIT(N(80240D40))
-    EVT_IF_GE(EVT_SAVE_VAR(0), 53)
+    EVT_IF_GE(GB_StoryProgress, 53)
         EVT_CALL(N(func_80240B00_CE7200))
     EVT_END_IF
     EVT_EXEC(N(80240E3C))
@@ -334,7 +334,7 @@ EvtScript N(80241920) = {
 };
 
 EvtScript N(80241B98) = {
-    EVT_IF_GE(EVT_SAVE_VAR(0), 56)
+    EVT_IF_GE(GB_StoryProgress, 56)
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(AwaitPlayerApproach, 650, 0, 30)
@@ -770,7 +770,7 @@ EvtScript N(defeat_802435D4) = {
 };
 
 EvtScript N(init_802435E4) = {
-    EVT_IF_LT(EVT_SAVE_VAR(0), 56)
+    EVT_IF_LT(GB_StoryProgress, 56)
         EVT_CALL(SetEnemyFlagBits, -1, 4194304, 1)
         EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80243428)))
         EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(defeat_802434D8)))
@@ -783,7 +783,7 @@ EvtScript N(init_802435E4) = {
 };
 
 EvtScript N(init_80243684) = {
-    EVT_IF_LT(EVT_SAVE_VAR(0), 56)
+    EVT_IF_LT(GB_StoryProgress, 56)
         EVT_CALL(SetEnemyFlagBits, -1, 4194304, 1)
         EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(defeat_802435D4)))
         EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_huff_n_puff_Palette_00_Anim_1)
@@ -796,7 +796,7 @@ EvtScript N(init_80243684) = {
 };
 
 EvtScript N(init_8024371C) = {
-    EVT_IF_LT(EVT_SAVE_VAR(0), 56)
+    EVT_IF_LT(GB_StoryProgress, 56)
         EVT_CALL(SetEnemyFlagBits, -1, 4194304, 1)
         EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(defeat_802435D4)))
         EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_huff_n_puff_Palette_00_Anim_19)

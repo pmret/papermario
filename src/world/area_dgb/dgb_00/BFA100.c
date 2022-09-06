@@ -354,7 +354,7 @@ EvtScript N(802413F4) = {
     EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_boo_Palette_01_Anim_6, NPC_ANIM_boo_Palette_01_Anim_6, 5, MESSAGE_ID(0x0E, 0x00E8))
     EVT_CALL(SetNpcAnimation, 0, NPC_ANIM_boo_Palette_01_Anim_6)
     EVT_EXEC(N(80240F50))
-    EVT_SET(EVT_SAVE_VAR(0), -25)
+    EVT_SET(GB_StoryProgress, -25)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_RETURN
     EVT_END

@@ -21,9 +21,9 @@ MapSettings N(settings) = {
 };
 
 EvtScript N(802418E0) = {
-    EVT_SWITCH(EVT_SAVE_VAR(0))
+    EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(-29)
-            EVT_IF_EQ(EVT_SAVE_VAR(203), 15)
+            EVT_IF_EQ(GB_ARN_Tubba_MapID, 15)
                 EVT_CALL(SetMusicTrack, 0, SONG_TUBBA_BLUBBA_THEME, 0, 8)
             EVT_ELSE
                 EVT_CALL(SetMusicTrack, 0, SONG_TUBBAS_MANOR, 0, 8)
@@ -133,7 +133,7 @@ EvtScript N(enterSingleDoor_80241C88) = {
 };
 
 EvtScript N(main) = {
-    EVT_SET(EVT_SAVE_VAR(425), 15)
+    EVT_SET(GB_WorldLocation, 15)
     EVT_CALL(SetSpriteShading, -1)
     EVT_SET(EVT_AREA_FLAG(1), 0)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
@@ -259,7 +259,7 @@ EvtScript N(idle_80242238) = {
         EVT_CALL(SetPanTarget, 0, -50, 0, 180)
         EVT_CALL(PanToTarget, 0, 0, 1)
     EVT_END_THREAD
-    EVT_SET(EVT_SAVE_VAR(203), 15)
+    EVT_SET(GB_ARN_Tubba_MapID, 15)
     EVT_CALL(SetNpcPos, NPC_SELF, 0, 0, 88)
     EVT_CALL(SetNpcAnimation, 0, NPC_ANIM_world_tubba_Palette_00_Anim_9)
     EVT_CALL(SetNpcYaw, NPC_SELF, 270)
@@ -357,12 +357,12 @@ EvtScript N(defeat_802427B0) = {
 };
 
 EvtScript N(init_802427EC) = {
-    EVT_IF_NE(EVT_SAVE_VAR(0), -32)
+    EVT_IF_NE(GB_StoryProgress, -32)
         EVT_CALL(RemoveNpc, NPC_SELF)
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(SetNpcScale, NPC_SELF, EVT_FIXED(1.25), EVT_FIXED(1.25), EVT_FIXED(1.25))
-    EVT_IF_NE(EVT_SAVE_VAR(203), 15)
+    EVT_IF_NE(GB_ARN_Tubba_MapID, 15)
         EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80242238)))
     EVT_ELSE
         EVT_CALL(SetNpcPos, NPC_SELF, -310, 0, 180)

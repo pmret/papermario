@@ -28,7 +28,7 @@ MapSettings N(settings) = {
 };
 
 EvtScript N(80240830) = {
-    EVT_SWITCH(EVT_SAVE_VAR(0))
+    EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(53)
             EVT_CALL(SetMusicTrack, 0, SONG_PUFF_PUFF_MACHINE, 0, 8)
             EVT_CALL(PlaySoundAtCollider, 20, 0x80000025, 0)
@@ -74,7 +74,7 @@ s32 N(lavaResetList_802409E4)[] = {
 };
 
 EvtScript N(main) = {
-    EVT_SET(EVT_SAVE_VAR(425), 38)
+    EVT_SET(GB_WorldLocation, 38)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamLeadPlayer, 0, 0)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
@@ -141,7 +141,7 @@ EvtScript N(main) = {
         EVT_EXEC(N(802409B8))
     EVT_END_IF
     EVT_EXEC_WAIT(N(80240830))
-    EVT_IF_GE(EVT_SAVE_VAR(0), 53)
+    EVT_IF_GE(GB_StoryProgress, 53)
         EVT_CALL(N(func_8024030C_CDC9AC))
     EVT_END_IF
     EVT_RETURN
@@ -161,7 +161,7 @@ EvtScript N(80240E90) = {
         EVT_CALL(PlayEffect, 0x5E, 0, EVT_FIXED(80.9), EVT_FIXED(102.0), EVT_FIXED(-4.1), EVT_FIXED(-16.0), EVT_FIXED(102.0), EVT_FIXED(-4.1), EVT_FIXED(0.5), 6, 0, 0, 0, 0)
         EVT_CALL(N(func_80240340_CDC9E0))
         EVT_WAIT_FRAMES(4)
-        EVT_IF_GE(EVT_SAVE_VAR(253), 3)
+        EVT_IF_GE(GB_FLO18_MachineDamage_Right, 3)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
@@ -213,7 +213,7 @@ EvtScript N(80241094) = {
 EvtScript N(80241284) = {
     EVT_SET(EVT_VAR(14), 0)
     EVT_LABEL(0)
-    EVT_IF_GE(EVT_SAVE_VAR(253), 3)
+    EVT_IF_GE(GB_FLO18_MachineDamage_Right, 3)
         EVT_RETURN
     EVT_END_IF
     EVT_SETF(EVT_VAR(0), EVT_FIXED(132.0))
@@ -258,19 +258,19 @@ EvtScript N(802413F0) = {
         EVT_SETF(EVT_VAR(0), EVT_VAR(14))
         EVT_SETF(EVT_VAR(1), EVT_VAR(13))
         EVT_SETF(EVT_VAR(2), EVT_VAR(14))
-        EVT_IF_EQ(EVT_SAVE_VAR(252), 0)
+        EVT_IF_EQ(GB_FLO18_MachineDamage_Left, 0)
             EVT_CALL(ScaleModel, 31, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
             EVT_CALL(ScaleModel, 32, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
         EVT_END_IF
-        EVT_IF_EQ(EVT_SAVE_VAR(253), 0)
+        EVT_IF_EQ(GB_FLO18_MachineDamage_Right, 0)
             EVT_CALL(ScaleModel, 19, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
             EVT_CALL(ScaleModel, 20, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
         EVT_END_IF
-        EVT_IF_LE(EVT_SAVE_VAR(252), 1)
+        EVT_IF_LE(GB_FLO18_MachineDamage_Left, 1)
             EVT_CALL(ScaleModel, 21, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
         EVT_END_IF
-        EVT_IF_LE(EVT_SAVE_VAR(252), 2)
-            EVT_IF_LE(EVT_SAVE_VAR(253), 1)
+        EVT_IF_LE(GB_FLO18_MachineDamage_Left, 2)
+            EVT_IF_LE(GB_FLO18_MachineDamage_Right, 1)
                 EVT_CALL(ScaleModel, 22, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
                 EVT_CALL(ScaleModel, 23, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
                 EVT_CALL(ScaleModel, 24, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
@@ -279,8 +279,8 @@ EvtScript N(802413F0) = {
             EVT_END_IF
         EVT_END_IF
         EVT_CALL(ScaleModel, 27, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_IF_LE(EVT_SAVE_VAR(252), 2)
-            EVT_IF_LE(EVT_SAVE_VAR(253), 2)
+        EVT_IF_LE(GB_FLO18_MachineDamage_Left, 2)
+            EVT_IF_LE(GB_FLO18_MachineDamage_Right, 2)
                 EVT_CALL(ScaleModel, 29, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
                 EVT_CALL(ScaleModel, 41, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
                 EVT_CALL(ScaleModel, 33, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
@@ -294,19 +294,19 @@ EvtScript N(802413F0) = {
         EVT_CALL(ScaleModel, 34, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
         EVT_SUBF(EVT_VAR(0), EVT_FIXED(1.046875))
         EVT_MULF(EVT_VAR(0), EVT_FIXED(100.0))
-        EVT_IF_EQ(EVT_SAVE_VAR(252), 0)
+        EVT_IF_EQ(GB_FLO18_MachineDamage_Left, 0)
             EVT_CALL(RotateModel, 31, EVT_VAR(0), 0, 0, 1)
             EVT_CALL(RotateModel, 32, EVT_VAR(0), 0, 0, 1)
         EVT_END_IF
-        EVT_IF_EQ(EVT_SAVE_VAR(253), 0)
+        EVT_IF_EQ(GB_FLO18_MachineDamage_Right, 0)
             EVT_CALL(RotateModel, 19, EVT_VAR(0), 0, 0, 1)
             EVT_CALL(RotateModel, 20, EVT_VAR(0), 0, 0, 1)
         EVT_END_IF
-        EVT_IF_LE(EVT_SAVE_VAR(252), 1)
+        EVT_IF_LE(GB_FLO18_MachineDamage_Left, 1)
             EVT_CALL(RotateModel, 21, EVT_VAR(0), 0, 0, 1)
         EVT_END_IF
-        EVT_IF_LE(EVT_SAVE_VAR(252), 2)
-            EVT_IF_LE(EVT_SAVE_VAR(253), 1)
+        EVT_IF_LE(GB_FLO18_MachineDamage_Left, 2)
+            EVT_IF_LE(GB_FLO18_MachineDamage_Right, 1)
                 EVT_CALL(RotateModel, 22, EVT_VAR(0), 0, 0, 1)
                 EVT_CALL(RotateModel, 23, EVT_VAR(0), 0, 0, 1)
                 EVT_CALL(RotateModel, 24, EVT_VAR(0), 0, 0, 1)
@@ -315,8 +315,8 @@ EvtScript N(802413F0) = {
             EVT_END_IF
         EVT_END_IF
         EVT_CALL(RotateModel, 27, EVT_VAR(0), 0, 0, 1)
-        EVT_IF_LE(EVT_SAVE_VAR(252), 2)
-            EVT_IF_LE(EVT_SAVE_VAR(253), 2)
+        EVT_IF_LE(GB_FLO18_MachineDamage_Left, 2)
+            EVT_IF_LE(GB_FLO18_MachineDamage_Right, 2)
                 EVT_CALL(RotateModel, 29, EVT_VAR(0), 0, 0, 1)
                 EVT_CALL(RotateModel, 41, EVT_VAR(0), 0, 0, 1)
                 EVT_CALL(RotateModel, 33, EVT_VAR(0), 0, 0, 1)
@@ -333,19 +333,19 @@ EvtScript N(802413F0) = {
     EVT_SETF(EVT_VAR(0), 1)
     EVT_SETF(EVT_VAR(1), 1)
     EVT_SETF(EVT_VAR(2), 1)
-    EVT_IF_EQ(EVT_SAVE_VAR(252), 0)
+    EVT_IF_EQ(GB_FLO18_MachineDamage_Left, 0)
         EVT_CALL(ScaleModel, 31, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
         EVT_CALL(ScaleModel, 32, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_END_IF
-    EVT_IF_EQ(EVT_SAVE_VAR(253), 0)
+    EVT_IF_EQ(GB_FLO18_MachineDamage_Right, 0)
         EVT_CALL(ScaleModel, 19, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
         EVT_CALL(ScaleModel, 20, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_END_IF
-    EVT_IF_LE(EVT_SAVE_VAR(252), 1)
+    EVT_IF_LE(GB_FLO18_MachineDamage_Left, 1)
         EVT_CALL(ScaleModel, 21, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_END_IF
-    EVT_IF_LE(EVT_SAVE_VAR(252), 2)
-        EVT_IF_LE(EVT_SAVE_VAR(253), 1)
+    EVT_IF_LE(GB_FLO18_MachineDamage_Left, 2)
+        EVT_IF_LE(GB_FLO18_MachineDamage_Right, 1)
             EVT_CALL(ScaleModel, 22, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
             EVT_CALL(ScaleModel, 23, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
             EVT_CALL(ScaleModel, 24, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
@@ -354,8 +354,8 @@ EvtScript N(802413F0) = {
         EVT_END_IF
     EVT_END_IF
     EVT_CALL(ScaleModel, 27, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-    EVT_IF_LE(EVT_SAVE_VAR(252), 2)
-        EVT_IF_LE(EVT_SAVE_VAR(253), 2)
+    EVT_IF_LE(GB_FLO18_MachineDamage_Left, 2)
+        EVT_IF_LE(GB_FLO18_MachineDamage_Right, 2)
             EVT_CALL(ScaleModel, 29, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
             EVT_CALL(ScaleModel, 41, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
             EVT_CALL(ScaleModel, 33, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
@@ -717,7 +717,7 @@ EvtScript N(80242E28) = {
     EVT_CALL(PlaySound, 0x1E5)
     EVT_EXEC_WAIT(N(802413F0))
     EVT_SET(EVT_VAR(0), EVT_VAR(10))
-    EVT_IF_LT(EVT_SAVE_VAR(0), 52)
+    EVT_IF_LT(GB_StoryProgress, 52)
         EVT_SET(EVT_MAP_FLAG(1), 1)
         EVT_RETURN
     EVT_END_IF
@@ -733,41 +733,41 @@ EvtScript N(80242E28) = {
     EVT_END_IF
     EVT_IF_EQ(EVT_VAR(0), 0)
         EVT_LABEL(11)
-        EVT_IF_EQ(EVT_SAVE_VAR(252), 0)
-            EVT_SET(EVT_SAVE_VAR(252), 1)
+        EVT_IF_EQ(GB_FLO18_MachineDamage_Left, 0)
+            EVT_SET(GB_FLO18_MachineDamage_Left, 1)
             EVT_EXEC(N(80241ED4))
             EVT_GOTO(0)
         EVT_END_IF
     EVT_END_IF
     EVT_IF_EQ(EVT_VAR(0), 1)
-        EVT_IF_EQ(EVT_SAVE_VAR(253), 0)
-            EVT_SET(EVT_SAVE_VAR(253), 1)
+        EVT_IF_EQ(GB_FLO18_MachineDamage_Right, 0)
+            EVT_SET(GB_FLO18_MachineDamage_Right, 1)
             EVT_EXEC(N(80242174))
             EVT_GOTO(0)
         EVT_END_IF
     EVT_END_IF
     EVT_IF_EQ(EVT_VAR(0), 0)
-        EVT_IF_EQ(EVT_SAVE_VAR(252), 1)
-            EVT_SET(EVT_SAVE_VAR(252), 2)
+        EVT_IF_EQ(GB_FLO18_MachineDamage_Left, 1)
+            EVT_SET(GB_FLO18_MachineDamage_Left, 2)
             EVT_EXEC(N(80242474))
             EVT_GOTO(0)
         EVT_END_IF
     EVT_END_IF
-    EVT_IF_EQ(EVT_SAVE_VAR(252), 2)
-        EVT_IF_EQ(EVT_SAVE_VAR(253), 1)
-            EVT_SET(EVT_SAVE_VAR(253), 2)
+    EVT_IF_EQ(GB_FLO18_MachineDamage_Left, 2)
+        EVT_IF_EQ(GB_FLO18_MachineDamage_Right, 1)
+            EVT_SET(GB_FLO18_MachineDamage_Right, 2)
             EVT_EXEC(N(80242620))
             EVT_GOTO(0)
         EVT_END_IF
     EVT_END_IF
-    EVT_IF_EQ(EVT_SAVE_VAR(252), 2)
-        EVT_IF_EQ(EVT_SAVE_VAR(253), 2)
+    EVT_IF_EQ(GB_FLO18_MachineDamage_Left, 2)
+        EVT_IF_EQ(GB_FLO18_MachineDamage_Right, 2)
             EVT_CALL(DisablePlayerInput, TRUE)
             EVT_CALL(UseSettingsFrom, 0, 40, 0, 0)
             EVT_CALL(SetPanTarget, 0, 40, 0, 0)
             EVT_CALL(SetCamSpeed, 0, EVT_FIXED(1.5))
             EVT_CALL(PanToTarget, 0, 0, 1)
-            EVT_SET(EVT_SAVE_VAR(253), 3)
+            EVT_SET(GB_FLO18_MachineDamage_Right, 3)
             EVT_EXEC_WAIT(N(802413F0))
             EVT_EXEC_WAIT(N(802413F0))
             EVT_EXEC_WAIT(N(802413F0))
@@ -816,7 +816,7 @@ EvtScript N(80242E28) = {
             EVT_CALL(DisablePlayerPhysics, TRUE)
             EVT_WAIT_FRAMES(30)
             EVT_EXEC_WAIT(N(80242B18))
-            EVT_SET(EVT_SAVE_VAR(0), 53)
+            EVT_SET(GB_StoryProgress, 53)
             EVT_CALL(GotoMap, EVT_PTR("flo_15"), 1)
             EVT_WAIT_FRAMES(70)
             EVT_RETURN
@@ -837,7 +837,7 @@ Vec4f N(triggerCoord_8024369C) = { 50.0f, 0.0f, -10.0, 0.0f };
 Vec4f N(triggerCoord_802436AC) = { 105.0f, 0.0f, -10.0, 0.0f };
 
 EvtScript N(802436BC) = {
-    EVT_IF_GE(EVT_SAVE_VAR(0), 53)
+    EVT_IF_GE(GB_StoryProgress, 53)
         EVT_CALL(EnableModel, 49, 0)
         EVT_CALL(ModifyColliderFlags, 0, 19, 0x7FFFFE00)
         EVT_CALL(EnableModel, 31, 0)
@@ -858,26 +858,26 @@ EvtScript N(802436BC) = {
     EVT_END_IF
     EVT_EXEC(N(80240E90))
     EVT_CALL(EnableModel, 49, 0)
-    EVT_IF_GE(EVT_SAVE_VAR(252), 1)
+    EVT_IF_GE(GB_FLO18_MachineDamage_Left, 1)
         EVT_CALL(ModifyColliderFlags, 0, 19, 0x7FFFFE00)
         EVT_CALL(EnableModel, 31, 0)
         EVT_CALL(EnableModel, 32, 0)
     EVT_END_IF
-    EVT_IF_GE(EVT_SAVE_VAR(253), 1)
+    EVT_IF_GE(GB_FLO18_MachineDamage_Right, 1)
         EVT_CALL(EnableModel, 19, 0)
         EVT_CALL(EnableModel, 20, 0)
     EVT_END_IF
-    EVT_IF_GE(EVT_SAVE_VAR(252), 2)
+    EVT_IF_GE(GB_FLO18_MachineDamage_Left, 2)
         EVT_CALL(EnableModel, 21, 0)
     EVT_END_IF
-    EVT_IF_GE(EVT_SAVE_VAR(253), 2)
+    EVT_IF_GE(GB_FLO18_MachineDamage_Right, 2)
         EVT_CALL(EnableModel, 22, 0)
         EVT_CALL(EnableModel, 23, 0)
         EVT_CALL(EnableModel, 24, 0)
         EVT_CALL(EnableModel, 25, 0)
         EVT_CALL(EnableModel, 26, 0)
     EVT_END_IF
-    EVT_IF_GE(EVT_SAVE_VAR(253), 3)
+    EVT_IF_GE(GB_FLO18_MachineDamage_Right, 3)
         EVT_CALL(EnableModel, 29, 0)
         EVT_CALL(EnableModel, 41, 0)
         EVT_CALL(EnableModel, 33, 0)
@@ -914,7 +914,7 @@ EvtScript N(802436BC) = {
     EVT_THREAD
         EVT_SETF(EVT_VAR(14), EVT_FIXED(1.0))
         EVT_LABEL(0)
-        EVT_IF_GE(EVT_SAVE_VAR(253), 3)
+        EVT_IF_GE(GB_FLO18_MachineDamage_Right, 3)
             EVT_MULF(EVT_VAR(14), EVT_FIXED(0.953125))
         EVT_END_IF
         EVT_ADDF(EVT_VAR(15), EVT_VAR(14))
@@ -1150,7 +1150,7 @@ EvtScript N(80244774) = {
     EVT_WAIT_FRAMES(20)
     EVT_CALL(PutPartnerAway)
     EVT_CALL(ResetCam, 0, EVT_FIXED(4.0))
-    EVT_SET(EVT_SAVE_VAR(0), 52)
+    EVT_SET(GB_StoryProgress, 52)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_CALL(AwaitPlayerApproach, -250, 0, 50)
     EVT_CALL(DisablePlayerInput, TRUE)
@@ -1279,7 +1279,7 @@ EvtScript N(80245004) = {
 };
 
 EvtScript N(80245108) = {
-    EVT_IF_GE(EVT_SAVE_VAR(0), 52)
+    EVT_IF_GE(GB_StoryProgress, 52)
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(DisablePlayerInput, TRUE)
@@ -1342,7 +1342,7 @@ EvtScript N(80245324) = {
 };
 
 EvtScript N(80245378) = {
-    EVT_IF_GE(EVT_SAVE_VAR(0), 52)
+    EVT_IF_GE(GB_StoryProgress, 52)
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(DisablePlayerInput, TRUE)
@@ -1477,7 +1477,7 @@ EvtScript N(interact_802457D4) = {
 };
 
 EvtScript N(init_80245AA8) = {
-    EVT_IF_LT(EVT_SAVE_VAR(0), 52)
+    EVT_IF_LT(GB_StoryProgress, 52)
         EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80244B3C)))
         EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_802457D4)))
         EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(defeat_80244C84)))
@@ -1489,7 +1489,7 @@ EvtScript N(init_80245AA8) = {
 };
 
 EvtScript N(init_80245B30) = {
-    EVT_IF_LT(EVT_SAVE_VAR(0), 52)
+    EVT_IF_LT(GB_StoryProgress, 52)
         EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(defeat_80244C84)))
     EVT_ELSE
         EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
@@ -1499,7 +1499,7 @@ EvtScript N(init_80245B30) = {
 };
 
 EvtScript N(init_80245B90) = {
-    EVT_IF_LT(EVT_SAVE_VAR(0), 52)
+    EVT_IF_LT(GB_StoryProgress, 52)
         EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_802457D4)))
         EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(defeat_80244C84)))
     EVT_ELSE
@@ -1510,7 +1510,7 @@ EvtScript N(init_80245B90) = {
 };
 
 EvtScript N(init_80245C04) = {
-    EVT_IF_LT(EVT_SAVE_VAR(0), 52)
+    EVT_IF_LT(GB_StoryProgress, 52)
         EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_802457D4)))
         EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(defeat_80244C84)))
     EVT_ELSE
@@ -1521,7 +1521,7 @@ EvtScript N(init_80245C04) = {
 };
 
 EvtScript N(init_80245C78) = {
-    EVT_IF_LT(EVT_SAVE_VAR(0), 52)
+    EVT_IF_LT(GB_StoryProgress, 52)
         EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_802457D4)))
         EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(defeat_80244C84)))
     EVT_ELSE

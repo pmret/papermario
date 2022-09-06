@@ -51,7 +51,7 @@ EvtScript N(8024049C) = {
         EVT_CASE_EQ(1)
             EVT_CALL(DisablePlayerInput, TRUE)
             EVT_CALL(DisablePlayerPhysics, TRUE)
-            EVT_IF_EQ(EVT_SAVE_VAR(0), -18)
+            EVT_IF_EQ(GB_StoryProgress, -18)
                 EVT_CALL(SetPlayerPos, 1000, 1000, 0)
                 EVT_CALL(SetNpcPos, NPC_PARTNER, 1000, 1000, 0)
                 EVT_CALL(RotateModel, 0, 80, 0, -1, 0)
@@ -86,7 +86,7 @@ EvtScript N(8024049C) = {
                 EVT_WAIT_FRAMES(20)
                 EVT_CALL(SetPlayerPos, 0, 0, 0)
                 EVT_CALL(SetNpcPos, NPC_PARTNER, 0, 0, 0)
-                EVT_SET(EVT_SAVE_VAR(0), -17)
+                EVT_SET(GB_StoryProgress, -17)
             EVT_END_IF
             EVT_CALL(DisablePlayerPhysics, FALSE)
             EVT_CALL(SetPlayerJumpscale, EVT_FIXED(2.0))
@@ -99,14 +99,14 @@ EvtScript N(8024049C) = {
 };
 
 EvtScript N(main) = {
-    EVT_SET(EVT_SAVE_VAR(425), 35)
+    EVT_SET(GB_WorldLocation, 35)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
     EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
     EVT_CALL(SetCamLeadPlayer, 0, 0)
     EVT_CALL(SetCamEnabled, 0, 1)
     EVT_SET(EVT_SAVE_FLAG(1979), 1)
-    EVT_IF_GE(EVT_SAVE_VAR(0), -12)
+    EVT_IF_GE(GB_StoryProgress, -12)
         EVT_SET(EVT_SAVE_FLAG(1016), 0)
         EVT_SET(EVT_SAVE_FLAG(1017), 0)
         EVT_SET(EVT_SAVE_FLAG(1018), 0)
@@ -132,7 +132,7 @@ static s32 N(pad_A6C) = {
 
 EvtScript N(80240A70) = {
     EVT_LOOP(0)
-        EVT_IF_NE(EVT_SAVE_VAR(0), -18)
+        EVT_IF_NE(GB_StoryProgress, -18)
             EVT_BREAK_LOOP
         EVT_END_IF
         EVT_WAIT_FRAMES(1)
@@ -142,8 +142,8 @@ EvtScript N(80240A70) = {
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(N(func_80240000_BF47A0))
     EVT_SET(EVT_AREA_FLAG(1), 1)
-    EVT_IF_LT(EVT_SAVE_VAR(0), -23)
-        EVT_SET(EVT_SAVE_VAR(0), -23)
+    EVT_IF_LT(GB_StoryProgress, -23)
+        EVT_SET(GB_StoryProgress, -23)
     EVT_END_IF
     EVT_CALL(GotoMap, EVT_PTR("arn_09"), 1)
     EVT_WAIT_FRAMES(100)
@@ -326,7 +326,7 @@ EvtScript N(idle_80241278) = {
 };
 
 EvtScript N(init_80241288) = {
-    EVT_IF_NE(EVT_SAVE_VAR(0), -18)
+    EVT_IF_NE(GB_StoryProgress, -18)
         EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
     EVT_ELSE
         EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80241278)))
@@ -336,7 +336,7 @@ EvtScript N(init_80241288) = {
 };
 
 EvtScript N(interact_802412E8) = {
-    EVT_SWITCH(EVT_SAVE_VAR(0))
+    EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(8)
             EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_yakkey_Palette_00_Anim_2, NPC_ANIM_yakkey_Palette_00_Anim_1, 0, MESSAGE_ID(0x0E, 0x00BA))
         EVT_CASE_LT(42)
@@ -353,7 +353,7 @@ EvtScript N(interact_802412E8) = {
 };
 
 EvtScript N(init_802413E8) = {
-    EVT_IF_LT(EVT_SAVE_VAR(0), -12)
+    EVT_IF_LT(GB_StoryProgress, -12)
         EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
     EVT_ELSE
         EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_802412E8)))
@@ -434,7 +434,7 @@ static s32 N(pad_184C) = {
 };
 
 EvtScript N(makeEntities) = {
-    EVT_IF_LT(EVT_SAVE_VAR(0), -23)
+    EVT_IF_LT(GB_StoryProgress, -23)
         EVT_CALL(MakeEntity, EVT_PTR(Entity_BoardedFloor), 0, 30, 0, 0, MAKE_ENTITY_END)
     EVT_END_IF
     EVT_RETURN

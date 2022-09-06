@@ -33,7 +33,7 @@ EvtScript N(802406A0) = {
     EVT_IF_EQ(EVT_VAR(0), 2)
         EVT_CALL(SetMusicTrack, 0, SONG_SUNSHINE_RETURNS, 0, 8)
     EVT_ELSE
-        EVT_SWITCH(EVT_SAVE_VAR(0))
+        EVT_SWITCH(GB_StoryProgress)
             EVT_CASE_LE(44)
                 EVT_IF_EQ(EVT_SAVE_FLAG(1411), 0)
                     EVT_CALL(SetMusicTrack, 0, SONG_MONTY_MOLE_ASSAULT, 0, 8)
@@ -51,7 +51,7 @@ EvtScript N(802406A0) = {
 };
 
 EvtScript N(802407C0) = {
-    EVT_IF_GE(EVT_SAVE_VAR(0), 44)
+    EVT_IF_GE(GB_StoryProgress, 44)
         EVT_IF_EQ(EVT_SAVE_FLAG(1411), 1)
             EVT_CALL(PushSong, 137, 0)
         EVT_END_IF
@@ -61,7 +61,7 @@ EvtScript N(802407C0) = {
 };
 
 EvtScript N(80240814) = {
-    EVT_IF_GE(EVT_SAVE_VAR(0), 44)
+    EVT_IF_GE(GB_StoryProgress, 44)
         EVT_IF_EQ(EVT_SAVE_FLAG(1411), 1)
             EVT_CALL(FadeOutMusic, 0, 250)
             EVT_WAIT_FRAMES(10)
@@ -125,7 +125,7 @@ EvtScript N(80240BE4) = {
 };
 
 EvtScript N(main) = {
-    EVT_SET(EVT_SAVE_VAR(425), 38)
+    EVT_SET(GB_WorldLocation, 38)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamLeadPlayer, 0, 0)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
@@ -161,7 +161,7 @@ EvtScript N(main) = {
         EVT_EXEC(EnterWalk)
     EVT_END_IF
     EVT_EXEC_WAIT(N(802406A0))
-    EVT_IF_GE(EVT_SAVE_VAR(0), 53)
+    EVT_IF_GE(GB_StoryProgress, 53)
         EVT_CALL(N(func_80240000_CA72A0))
     EVT_END_IF
     EVT_RETURN
@@ -275,7 +275,7 @@ EvtScript N(8024122C) = {
 
 EvtScript N(interact_802412BC) = {
     EVT_EXEC_WAIT(N(802407C0))
-    EVT_SWITCH(EVT_SAVE_VAR(0))
+    EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(44)
             EVT_SET(EVT_MAP_VAR(14), 1)
             EVT_SET(EVT_VAR(4), EVT_FIXED(3.5))
@@ -369,7 +369,7 @@ EvtScript N(interact_802412BC) = {
             EVT_CALL(BindNpcAI, 1, EVT_PTR(N(npcAI_8024119C)))
             EVT_SET(EVT_MAP_VAR(14), 0)
             EVT_SET(EVT_MAP_VAR(15), 60)
-            EVT_SET(EVT_SAVE_VAR(0), 44)
+            EVT_SET(GB_StoryProgress, 44)
         EVT_CASE_EQ(44)
             EVT_IF_EQ(EVT_SAVE_FLAG(1411), 0)
                 EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_7, NPC_ANIM_petunia_Palette_00_Anim_6, 0, MESSAGE_ID(0x11, 0x0058))
@@ -389,7 +389,7 @@ EvtScript N(interact_802412BC) = {
                 EVT_WAIT_FRAMES(20)
                 EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_2, NPC_ANIM_petunia_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x005A))
                 EVT_CALL(EndSpeech, -1, NPC_ANIM_petunia_Palette_00_Anim_7, NPC_ANIM_petunia_Palette_00_Anim_6, 0)
-                EVT_SET(EVT_SAVE_VAR(0), 45)
+                EVT_SET(GB_StoryProgress, 45)
             EVT_END_IF
         EVT_CASE_LT(53)
             EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_2, NPC_ANIM_petunia_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x005B))
@@ -423,7 +423,7 @@ EvtScript N(init_80241DA4) = {
 EvtScript N(init_80241E10) = {
     EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(defeat_802411B8)))
     EVT_CALL(EnableNpcShadow, 1, FALSE)
-    EVT_SWITCH(EVT_SAVE_VAR(0))
+    EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(44)
             EVT_CALL(SetNpcPos, 1, 0, -1000, 0)
         EVT_CASE_DEFAULT
@@ -487,7 +487,7 @@ EvtScript N(defeat_80241F64) = {
 };
 
 EvtScript N(hit_80242138) = {
-    EVT_IF_EQ(EVT_SAVE_VAR(0), 44)
+    EVT_IF_EQ(GB_StoryProgress, 44)
         EVT_CALL(GetOwnerEncounterTrigger, EVT_VAR(0))
         EVT_IF_NE(EVT_VAR(0), 1)
             EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_monty_mole_Palette_01_Anim_5)
@@ -523,7 +523,7 @@ EvtScript N(idle_8024219C) = {
                 EVT_WAIT_FRAMES(1)
                 EVT_SET(EVT_AREA_FLAG(23), 1)
                 EVT_IF_NE(EVT_MAP_VAR(10), 0)
-                    EVT_IF_LT(EVT_SAVE_VAR(0), 44)
+                    EVT_IF_LT(GB_StoryProgress, 44)
                         EVT_SET(EVT_VAR(1), 4)
                     EVT_ELSE
                         EVT_SET(EVT_VAR(1), 10)
@@ -601,7 +601,7 @@ EvtScript N(idle_80242618) = {
                 EVT_WAIT_FRAMES(1)
                 EVT_SET(EVT_AREA_FLAG(24), 1)
                 EVT_IF_NE(EVT_MAP_VAR(11), 0)
-                    EVT_IF_LT(EVT_SAVE_VAR(0), 44)
+                    EVT_IF_LT(GB_StoryProgress, 44)
                         EVT_SET(EVT_VAR(1), 4)
                     EVT_ELSE
                         EVT_SET(EVT_VAR(1), 10)
@@ -679,7 +679,7 @@ EvtScript N(idle_80242A94) = {
                 EVT_WAIT_FRAMES(1)
                 EVT_SET(EVT_AREA_FLAG(25), 1)
                 EVT_IF_NE(EVT_MAP_VAR(12), 0)
-                    EVT_IF_LT(EVT_SAVE_VAR(0), 44)
+                    EVT_IF_LT(GB_StoryProgress, 44)
                         EVT_SET(EVT_VAR(1), 4)
                     EVT_ELSE
                         EVT_SET(EVT_VAR(1), 10)
@@ -757,7 +757,7 @@ EvtScript N(idle_80242F10) = {
                 EVT_WAIT_FRAMES(1)
                 EVT_SET(EVT_AREA_FLAG(26), 1)
                 EVT_IF_NE(EVT_MAP_VAR(13), 0)
-                    EVT_IF_LT(EVT_SAVE_VAR(0), 44)
+                    EVT_IF_LT(GB_StoryProgress, 44)
                         EVT_SET(EVT_VAR(1), 4)
                     EVT_ELSE
                         EVT_SET(EVT_VAR(1), 10)
@@ -813,7 +813,7 @@ EvtScript N(init_8024338C) = {
     EVT_CALL(BindNpcHit, -1, EVT_PTR(N(hit_80242138)))
     EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(defeat_80241F64)))
     EVT_CALL(EnableNpcShadow, 2, FALSE)
-    EVT_SWITCH(EVT_SAVE_VAR(0))
+    EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(44)
             EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_8024219C)))
             EVT_CALL(SetNpcAnimation, 2, NPC_ANIM_monty_mole_Palette_01_Anim_10)
@@ -836,7 +836,7 @@ EvtScript N(init_802434CC) = {
     EVT_CALL(BindNpcHit, -1, EVT_PTR(N(hit_80242138)))
     EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(defeat_80241F64)))
     EVT_CALL(EnableNpcShadow, 3, FALSE)
-    EVT_SWITCH(EVT_SAVE_VAR(0))
+    EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(44)
             EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80242618)))
             EVT_CALL(SetNpcAnimation, 3, NPC_ANIM_monty_mole_Palette_01_Anim_10)
@@ -859,7 +859,7 @@ EvtScript N(init_8024360C) = {
     EVT_CALL(BindNpcHit, -1, EVT_PTR(N(hit_80242138)))
     EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(defeat_80241F64)))
     EVT_CALL(EnableNpcShadow, 4, FALSE)
-    EVT_SWITCH(EVT_SAVE_VAR(0))
+    EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(44)
             EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80242A94)))
             EVT_CALL(SetNpcAnimation, 4, NPC_ANIM_monty_mole_Palette_01_Anim_10)
@@ -882,7 +882,7 @@ EvtScript N(init_8024374C) = {
     EVT_CALL(BindNpcHit, -1, EVT_PTR(N(hit_80242138)))
     EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(defeat_80241F64)))
     EVT_CALL(EnableNpcShadow, 5, FALSE)
-    EVT_SWITCH(EVT_SAVE_VAR(0))
+    EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(44)
             EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80242F10)))
             EVT_CALL(SetNpcAnimation, 5, NPC_ANIM_monty_mole_Palette_01_Anim_10)

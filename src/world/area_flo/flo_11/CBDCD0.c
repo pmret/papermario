@@ -28,7 +28,7 @@ MapSettings N(settings) = {
 };
 
 EvtScript N(802403E0) = {
-    EVT_SWITCH(EVT_SAVE_VAR(0))
+    EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE)
             EVT_CALL(SetMusicTrack, 0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8)
         EVT_CASE_DEFAULT
@@ -174,7 +174,7 @@ EvtScript N(80241698) = {
 };
 
 EvtScript N(main) = {
-    EVT_SET(EVT_SAVE_VAR(425), 38)
+    EVT_SET(GB_WorldLocation, 38)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamLeadPlayer, 0, 0)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
@@ -197,7 +197,7 @@ EvtScript N(main) = {
         EVT_WAIT_FRAMES(1)
     EVT_END_IF
     EVT_EXEC_WAIT(N(802403E0))
-    EVT_IF_GE(EVT_SAVE_VAR(0), 53)
+    EVT_IF_GE(GB_StoryProgress, 53)
         EVT_CALL(N(func_802402E0_CBDFB0))
     EVT_END_IF
     EVT_CALL(ModifyColliderFlags, 3, 9, 0x00000009)
@@ -385,7 +385,7 @@ EvtScript N(80242240) = {
     EVT_IF_EQ(EVT_SAVE_FLAG(1377), 1)
         EVT_RETURN
     EVT_END_IF
-    EVT_IF_LT(EVT_SAVE_VAR(0), 45)
+    EVT_IF_LT(GB_StoryProgress, 45)
         EVT_RETURN
     EVT_END_IF
     EVT_IF_EQ(EVT_SAVE_FLAG(1375), 0)
@@ -529,7 +529,7 @@ EvtScript N(defeat_80242AC4) = {
 EvtScript N(init_80242B58) = {
     EVT_CALL(SetNpcPos, 0, 0, -1000, 0)
     EVT_IF_EQ(EVT_SAVE_FLAG(1377), 0)
-        EVT_IF_GE(EVT_SAVE_VAR(0), 45)
+        EVT_IF_GE(GB_StoryProgress, 45)
             EVT_IF_EQ(EVT_SAVE_FLAG(1375), 1)
                 EVT_SET(EVT_MAP_VAR(0), 0)
                 EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80242810)))
@@ -546,7 +546,7 @@ EvtScript N(init_80242B58) = {
 EvtScript N(init_80242C38) = {
     EVT_CALL(SetNpcPos, 1, 0, -1000, 0)
     EVT_IF_EQ(EVT_SAVE_FLAG(1377), 0)
-        EVT_IF_GE(EVT_SAVE_VAR(0), 45)
+        EVT_IF_GE(GB_StoryProgress, 45)
             EVT_IF_EQ(EVT_SAVE_FLAG(1375), 1)
                 EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(defeat_80242AC4)))
                 EVT_CALL(SetNpcPos, 1, 200, 110, 29)

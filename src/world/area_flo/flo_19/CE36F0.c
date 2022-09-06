@@ -103,7 +103,7 @@ EvtScript N(80240BF8) = {
 };
 
 EvtScript N(main) = {
-    EVT_SET(EVT_SAVE_VAR(425), 39)
+    EVT_SET(GB_WorldLocation, 39)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamLeadPlayer, 0, 0)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
@@ -169,7 +169,7 @@ EvtScript N(main) = {
             EVT_EXEC(N(80240BF8))
     EVT_END_SWITCH
     EVT_EXEC_WAIT(N(802409C0))
-    EVT_IF_GE(EVT_SAVE_VAR(0), 53)
+    EVT_IF_GE(GB_StoryProgress, 53)
         EVT_CALL(N(func_8024030C_CE39FC))
     EVT_END_IF
     EVT_RETURN
@@ -679,7 +679,7 @@ EvtScript N(80242A2C) = {
         EVT_WAIT_FRAMES(1)
     EVT_END_LOOP
     EVT_WAIT_FRAMES(15)
-    EVT_SET(EVT_SAVE_VAR(0), 55)
+    EVT_SET(GB_StoryProgress, 55)
     EVT_CALL(GotoMap, EVT_PTR("flo_00"), 7)
     EVT_RETURN
     EVT_END

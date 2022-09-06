@@ -27,7 +27,7 @@ EvtScript N(802407A8) = {
 };
 
 EvtScript N(main) = {
-    EVT_SET(EVT_SAVE_VAR(425), 30)
+    EVT_SET(GB_WorldLocation, 30)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
     EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
@@ -96,7 +96,7 @@ EvtScript N(8024097C) = {
 
 EvtScript N(npcAI_80240B50) = {
     EVT_LABEL(1)
-    EVT_SWITCH(EVT_SAVE_VAR(0))
+    EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_EQ(-122)
             EVT_LABEL(89)
             EVT_CALL(N(UnkPositionFunc), -118, 86, -70, -15)
@@ -136,7 +136,7 @@ EvtScript N(npcAI_80240B50) = {
             EVT_WAIT_FRAMES(30)
             EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_goompa_Palette_00_Anim_8, NPC_ANIM_goompa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0B, 0x00A8))
             EVT_CALL(N(UnkFunc41), 0, 5)
-            EVT_SET(EVT_SAVE_VAR(0), -121)
+            EVT_SET(GB_StoryProgress, -121)
             EVT_CALL(UseSettingsFrom, 0, -220, 20, -72)
             EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
             EVT_CALL(SetPanTarget, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
@@ -196,7 +196,7 @@ EvtScript N(init_802411A8) = {
     EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(npcAI_80240B50)))
     EVT_CALL(BindNpcAux, -1, EVT_PTR(N(8024097C)))
     EVT_CALL(BindNpcHit, -1, EVT_PTR(N(hit_80240F64)))
-    EVT_SWITCH(EVT_SAVE_VAR(0))
+    EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_GE(-121)
             EVT_CALL(SetNpcFlagBits, NPC_SELF, ((NPC_FLAG_GRAVITY)), FALSE)
             EVT_CALL(SetNpcFlagBits, NPC_SELF, ((NPC_FLAG_ENABLE_HIT_SCRIPT)), TRUE)
@@ -248,7 +248,7 @@ static s32 N(pad_1468)[] = {
 
 EvtScript N(80241470) = {
     EVT_CALL(ModifyColliderFlags, 0, 9, 0x7FFFFE00)
-    EVT_SET(EVT_SAVE_VAR(0), -117)
+    EVT_SET(GB_StoryProgress, -117)
     EVT_RETURN
     EVT_END
 };
@@ -270,7 +270,7 @@ EvtScript N(802414C8) = {
 };
 
 EvtScript N(makeEntities) = {
-    EVT_IF_LT(EVT_SAVE_VAR(0), -117)
+    EVT_IF_LT(GB_StoryProgress, -117)
         EVT_CALL(MakeEntity, EVT_PTR(Entity_Hammer1Block), 45, 0, 70, 15, MAKE_ENTITY_END)
         EVT_CALL(AssignScript, EVT_PTR(N(80241470)))
     EVT_ELSE

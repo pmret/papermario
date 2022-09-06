@@ -29,7 +29,7 @@ MapSettings N(settings) = {
 };
 
 EvtScript N(80240D30) = {
-    EVT_SWITCH(EVT_SAVE_VAR(0))
+    EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(53)
             EVT_CALL(SetMusicTrack, 0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8)
         EVT_CASE_DEFAULT
@@ -92,7 +92,7 @@ EvtScript N(80241104) = {
 };
 
 EvtScript N(main) = {
-    EVT_SET(EVT_SAVE_VAR(425), 38)
+    EVT_SET(GB_WorldLocation, 38)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamLeadPlayer, 0, 0)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
@@ -111,7 +111,7 @@ EvtScript N(main) = {
     EVT_SET(EVT_VAR(0), EVT_PTR(N(80241104)))
     EVT_EXEC(EnterWalk)
     EVT_EXEC_WAIT(N(80240D30))
-    EVT_IF_GE(EVT_SAVE_VAR(0), 53)
+    EVT_IF_GE(GB_StoryProgress, 53)
         EVT_CALL(N(func_80240000_CEE260))
     EVT_END_IF
     EVT_RETURN
@@ -322,7 +322,7 @@ EvtScript N(interact_80241564) = {
         EVT_END_THREAD
         EVT_WAIT_FRAMES(10)
     EVT_ELSE
-        EVT_IF_LT(EVT_SAVE_VAR(0), 57)
+        EVT_IF_LT(GB_StoryProgress, 57)
             EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_gate_flower_Palette_00_Anim_9, NPC_ANIM_gate_flower_Palette_00_Anim_8, 0, MESSAGE_ID(0x11, 0x004E))
         EVT_ELSE
             EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_gate_flower_Palette_00_Anim_9, NPC_ANIM_gate_flower_Palette_00_Anim_8, 0, MESSAGE_ID(0x11, 0x004F))

@@ -6,7 +6,7 @@ EvtScript N(80242340) = {
     EVT_CALL(SetCamDistance, 0, EVT_FIXED(700.0))
     EVT_CALL(SetCamSpeed, 0, EVT_FIXED(90.0))
     EVT_CALL(PanToTarget, 0, 0, 1)
-    EVT_IF_GE(EVT_SAVE_VAR(0), -119)
+    EVT_IF_GE(GB_StoryProgress, -119)
         EVT_CALL(SetPlayerPos, 0, -1000, 0)
         EVT_CALL(DisablePlayerInput, TRUE)
         EVT_CALL(SetPlayerPos, -224, 20, -80)

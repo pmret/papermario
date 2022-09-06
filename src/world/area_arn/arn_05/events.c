@@ -43,12 +43,12 @@ EvtScript N(enterWalk_80241530) = {
 };
 
 EvtScript N(main) = {
-    EVT_SET(EVT_SAVE_VAR(425), 34)
+    EVT_SET(GB_WorldLocation, 34)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
     EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
     EVT_CALL(SetCamEnabled, 0, 1)
-    EVT_IF_LT(EVT_SAVE_VAR(0), -16)
+    EVT_IF_LT(GB_StoryProgress, -16)
         EVT_CALL(MakeNpcs, 0, EVT_PTR(N(npcGroupList_80244FA4)))
     EVT_ELSE
         EVT_CALL(MakeNpcs, 0, EVT_PTR(N(npcGroupList_80244FC8)))
@@ -110,7 +110,7 @@ EvtScript N(idle_80241784) = {
 };
 
 EvtScript N(interact_80241794) = {
-    EVT_SWITCH(EVT_SAVE_VAR(0))
+    EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(-26)
             EVT_IF_EQ(EVT_AREA_FLAG(6), 0)
                 EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 0, MESSAGE_ID(0x0E, 0x0092))
@@ -139,7 +139,7 @@ EvtScript N(interact_802418F4) = {
 };
 
 EvtScript N(interact_80241924) = {
-    EVT_SWITCH(EVT_SAVE_VAR(0))
+    EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(-26)
             EVT_IF_EQ(EVT_AREA_FLAG(7), 0)
                 EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 0, MESSAGE_ID(0x0E, 0x0099))
@@ -168,7 +168,7 @@ EvtScript N(interact_80241A84) = {
 };
 
 EvtScript N(interact_80241AB4) = {
-    EVT_SWITCH(EVT_SAVE_VAR(0))
+    EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(-26)
         EVT_CASE_LT(-16)
         EVT_CASE_LT(-14)
@@ -212,7 +212,7 @@ EvtScript N(interact_80241AB4) = {
 };
 
 EvtScript N(interact_80241D88) = {
-    EVT_SWITCH(EVT_SAVE_VAR(0))
+    EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(-26)
         EVT_CASE_LT(-16)
         EVT_CASE_LT(-14)
@@ -226,7 +226,7 @@ EvtScript N(interact_80241D88) = {
 };
 
 EvtScript N(interact_80241E28) = {
-    EVT_SWITCH(EVT_SAVE_VAR(0))
+    EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(-26)
             EVT_IF_EQ(EVT_AREA_FLAG(8), 0)
                 EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 0, MESSAGE_ID(0x0E, 0x00B3))
@@ -255,7 +255,7 @@ EvtScript N(interact_80241F88) = {
 };
 
 EvtScript N(init_80241FB8) = {
-    EVT_IF_LT(EVT_SAVE_VAR(0), -33)
+    EVT_IF_LT(GB_StoryProgress, -33)
         EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80241784)))
     EVT_END_IF
     EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_80241794)))
@@ -271,7 +271,7 @@ EvtScript N(init_80242008) = {
 
 EvtScript N(init_8024202C) = {
     EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_80241AB4)))
-    EVT_SWITCH(EVT_SAVE_VAR(0))
+    EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(-33)
             EVT_CALL(SetNpcFlagBits, NPC_SELF, ((NPC_FLAG_100)), TRUE)
         EVT_CASE_LT(-26)
@@ -291,7 +291,7 @@ EvtScript N(init_8024202C) = {
 
 EvtScript N(init_8024212C) = {
     EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_80241D88)))
-    EVT_SWITCH(EVT_SAVE_VAR(0))
+    EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(-33)
             EVT_CALL(RemoveNpc, NPC_SELF)
         EVT_CASE_LT(-26)
@@ -308,7 +308,7 @@ EvtScript N(init_8024212C) = {
 };
 
 EvtScript N(init_802421EC) = {
-    EVT_IF_LT(EVT_SAVE_VAR(0), -33)
+    EVT_IF_LT(GB_StoryProgress, -33)
         EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80241784)))
     EVT_END_IF
     EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_80241E28)))
@@ -746,7 +746,7 @@ EvtScript N(80242C50) = {
 };
 
 EvtScript N(802441FC) = {
-    EVT_IF_LT(EVT_SAVE_VAR(0), -33)
+    EVT_IF_LT(GB_StoryProgress, -33)
         EVT_CALL(SetNpcPos, 2, 330, 184, 240)
         EVT_LOOP(0)
             EVT_SET(EVT_VAR(10), 0)
@@ -766,7 +766,7 @@ EvtScript N(802441FC) = {
         EVT_CALL(BindNpcInteract, 0, EVT_PTR(N(interact_802418F4)))
         EVT_CALL(BindNpcInteract, 1, EVT_PTR(N(interact_80241A84)))
         EVT_CALL(BindNpcInteract, 4, EVT_PTR(N(interact_80241F88)))
-        EVT_SET(EVT_SAVE_VAR(0), -33)
+        EVT_SET(GB_StoryProgress, -33)
         EVT_EXEC(N(80241360))
     EVT_END_IF
     EVT_RETURN
@@ -774,7 +774,7 @@ EvtScript N(802441FC) = {
 };
 
 EvtScript N(init_80244358) = {
-    EVT_IF_GE(EVT_SAVE_VAR(0), -33)
+    EVT_IF_GE(GB_StoryProgress, -33)
         EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_END_IF
     EVT_RETURN

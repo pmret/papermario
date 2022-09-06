@@ -69,7 +69,7 @@ EvtScript N(802439B0) = {
     EVT_CALL(FindKeyItem, ITEM_MYSTICAL_KEY, EVT_VAR(0))
     EVT_CALL(RemoveKeyItemAt, EVT_VAR(0))
     EVT_CALL(CloseChoicePopup)
-    EVT_SET(EVT_SAVE_VAR(0), -24)
+    EVT_SET(GB_StoryProgress, -24)
     EVT_CALL(N(GetEntityPosition), EVT_MAP_VAR(0), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_CALL(PlaySoundAt, 0x269, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_SET(EVT_VAR(0), EVT_MAP_VAR(0))
@@ -87,7 +87,7 @@ EvtScript N(80243B28) = {
 };
 
 EvtScript N(makeEntities) = {
-    EVT_IF_LT(EVT_SAVE_VAR(0), -24)
+    EVT_IF_LT(GB_StoryProgress, -24)
         EVT_CALL(MakeEntity, EVT_PTR(Entity_Padlock), 10, 30, -155, 0, MAKE_ENTITY_END)
         EVT_CALL(AssignScript, EVT_PTR(N(80243B28)))
         EVT_SET(EVT_MAP_VAR(0), EVT_VAR(0))
@@ -284,7 +284,7 @@ EvtScript N(80243FE8) = {
     EVT_KILL_THREAD(EVT_VAR(10))
     EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
     EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
-    EVT_SET(EVT_SAVE_VAR(0), -16)
+    EVT_SET(GB_StoryProgress, -16)
     EVT_CALL(SetMusicTrack, 0, SONG_CHEERFUL_BOOS_MANSION, 0, 8)
     EVT_CALL(GetCurrentPartnerID, EVT_VAR(6))
     EVT_IF_EQ(EVT_VAR(6), 9)
@@ -489,7 +489,7 @@ EvtScript N(defeat_80244FB8) = {
 };
 
 EvtScript N(init_80245058) = {
-    EVT_IF_NE(EVT_SAVE_VAR(0), -17)
+    EVT_IF_NE(GB_StoryProgress, -17)
         EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_END_IF
     EVT_RETURN
@@ -500,7 +500,7 @@ EvtScript N(init_80245090) = {
     EVT_CALL(SetSelfVar, 0, 0)
     EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80244C54)))
     EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(defeat_80244FB8)))
-    EVT_IF_NE(EVT_SAVE_VAR(0), -17)
+    EVT_IF_NE(GB_StoryProgress, -17)
         EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_END_IF
     EVT_RETURN
@@ -510,7 +510,7 @@ EvtScript N(init_80245090) = {
 EvtScript N(init_80245104) = {
     EVT_CALL(SetSelfVar, 0, 0)
     EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80244CC8)))
-    EVT_IF_NE(EVT_SAVE_VAR(0), -17)
+    EVT_IF_NE(GB_StoryProgress, -17)
         EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_END_IF
     EVT_RETURN
@@ -518,7 +518,7 @@ EvtScript N(init_80245104) = {
 };
 
 EvtScript N(init_80245164) = {
-    EVT_IF_NE(EVT_SAVE_VAR(0), -17)
+    EVT_IF_NE(GB_StoryProgress, -17)
         EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_END_IF
     EVT_RETURN
@@ -526,7 +526,7 @@ EvtScript N(init_80245164) = {
 };
 
 EvtScript N(init_8024519C) = {
-    EVT_IF_NE(EVT_SAVE_VAR(0), -17)
+    EVT_IF_NE(GB_StoryProgress, -17)
         EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_END_IF
     EVT_RETURN
@@ -707,7 +707,7 @@ EvtScript N(80245304) = {
     EVT_CALL(ResetCam, 0, 3)
     EVT_WAIT_FRAMES(20)
     EVT_CALL(SetPlayerAnimation, ANIM_10002)
-    EVT_SET(EVT_SAVE_VAR(0), -13)
+    EVT_SET(GB_StoryProgress, -13)
     EVT_EXEC(N(80241F10))
     EVT_CALL(EnablePartnerAI)
     EVT_CALL(DisablePlayerInput, FALSE)
@@ -1034,8 +1034,8 @@ StaticNpc N(npcGroup_80246E7C) = {
 };
 
 EvtScript N(init_8024706C) = {
-    EVT_IF_GE(EVT_SAVE_VAR(0), -26)
-        EVT_IF_LT(EVT_SAVE_VAR(0), -15)
+    EVT_IF_GE(GB_StoryProgress, -26)
+        EVT_IF_LT(GB_StoryProgress, -15)
             EVT_CALL(RemoveNpc, NPC_SELF)
         EVT_END_IF
     EVT_END_IF

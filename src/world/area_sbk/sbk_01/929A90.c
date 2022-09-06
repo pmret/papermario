@@ -36,9 +36,9 @@ EvtScript N(802401F4) = {
 };
 
 EvtScript N(main) = {
-    EVT_SET(EVT_SAVE_VAR(425), 10)
+    EVT_SET(GB_WorldLocation, 10)
     EVT_CALL(SetSpriteShading, -1)
-    EVT_IF_EQ(EVT_SAVE_VAR(0), -63)
+    EVT_IF_EQ(GB_StoryProgress, -63)
         EVT_CALL(DisablePulseStone, 0)
     EVT_END_IF
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)

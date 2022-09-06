@@ -203,17 +203,17 @@ EvtScript N(enterWalk_80244C14) = {
 };
 
 EvtScript N(main) = {
-    EVT_SET(EVT_SAVE_VAR(425), 9)
+    EVT_SET(GB_WorldLocation, 9)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
     EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
     EVT_CALL(SetCamEnabled, 0, 1)
     EVT_CALL(SetCamLeadPlayer, 0, 0)
     EVT_SET(EVT_SAVE_FLAG(1973), 1)
-    EVT_IF_LT(EVT_SAVE_VAR(0), -68)
-        EVT_SET(EVT_SAVE_VAR(0), -68)
+    EVT_IF_LT(GB_StoryProgress, -68)
+        EVT_SET(GB_StoryProgress, -68)
     EVT_END_IF
-    EVT_SWITCH(EVT_SAVE_VAR(0))
+    EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_RANGE(-53, 6)
             EVT_CALL(MakeNpcs, 0, EVT_PTR(N(npcGroupList_8024B47C)))
         EVT_CASE_DEFAULT
@@ -421,7 +421,7 @@ EvtScript N(80247D20) = {
 
 EvtScript N(80247D90) = {
     EVT_SET(EVT_VAR(12), 0)
-    EVT_IF_LT(EVT_SAVE_VAR(0), -70)
+    EVT_IF_LT(GB_StoryProgress, -70)
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(N(LetterDelivery_SaveNpcAnim))
@@ -483,7 +483,7 @@ EvtScript N(80248090) = {
 };
 
 EvtScript N(interact_802480E0) = {
-    EVT_IF_GE(EVT_SAVE_VAR(0), -53)
+    EVT_IF_GE(GB_StoryProgress, -53)
         EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_mouser_Palette_00_Anim_5, NPC_ANIM_mouser_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x0062))
         EVT_RETURN
     EVT_END_IF
@@ -509,9 +509,9 @@ EvtScript N(init_802481F8) = {
 };
 
 EvtScript N(interact_8024821C) = {
-    EVT_SWITCH(EVT_SAVE_VAR(0))
+    EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(-53)
-            EVT_IF_GE(EVT_SAVE_VAR(0), -64)
+            EVT_IF_GE(GB_StoryProgress, -64)
                 EVT_IF_EQ(EVT_AREA_VAR(1), 2)
                     EVT_SET(EVT_AREA_VAR(1), 0)
                 EVT_END_IF
@@ -631,7 +631,7 @@ EvtScript N(interact_80248864) = {
             EVT_END_IF
         EVT_END_IF
     EVT_END_IF
-    EVT_SWITCH(EVT_SAVE_VAR(0))
+    EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(-53)
             EVT_IF_EQ(EVT_AREA_FLAG(1), 0)
                 EVT_CALL(SpeakToPlayer, 3, NPC_ANIM_dryite_Palette_00_Anim_4, NPC_ANIM_dryite_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x006C))
@@ -723,7 +723,7 @@ EvtScript N(interact_80248D54) = {
             EVT_RETURN
         EVT_ELSE
             EVT_IF_EQ(EVT_SAVE_FLAG(755), 0)
-                EVT_IF_LT(EVT_SAVE_VAR(0), 88)
+                EVT_IF_LT(GB_StoryProgress, 88)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_artist_toad_Palette_01_Anim_2, NPC_ANIM_artist_toad_Palette_01_Anim_1, 0, MESSAGE_ID(0x0D, 0x0085))
                     EVT_CALL(SetPlayerAnimation, ANIM_NOD_YES)
                     EVT_WAIT_FRAMES(30)
@@ -735,7 +735,7 @@ EvtScript N(interact_80248D54) = {
             EVT_END_IF
         EVT_END_IF
     EVT_END_IF
-    EVT_SWITCH(EVT_SAVE_VAR(0))
+    EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(-53)
             EVT_IF_EQ(EVT_AREA_FLAG(2), 0)
                 EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_artist_toad_Palette_01_Anim_2, NPC_ANIM_artist_toad_Palette_01_Anim_1, 0, MESSAGE_ID(0x0D, 0x007C))
@@ -791,7 +791,7 @@ EvtScript N(init_80249168) = {
 };
 
 EvtScript N(idle_8024918C) = {
-    EVT_SWITCH(EVT_SAVE_VAR(0))
+    EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(-67)
             EVT_CALL(N(func_80243350_95E550), 16, 190, -134, -131)
             EVT_CALL(DisablePlayerInput, TRUE)
@@ -838,7 +838,7 @@ EvtScript N(idle_8024918C) = {
             EVT_CALL(WaitForCam, 0, EVT_FIXED(1.0))
             EVT_CALL(PanToTarget, 0, 0, 0)
             EVT_CALL(DisablePlayerInput, FALSE)
-            EVT_SET(EVT_SAVE_VAR(0), -67)
+            EVT_SET(GB_StoryProgress, -67)
         EVT_CASE_LT(-66)
         EVT_CASE_LT(-65)
             EVT_CALL(EnableNpcBlur, -1, 1)
@@ -855,7 +855,7 @@ EvtScript N(idle_8024918C) = {
             EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_mouser_Palette_01_Anim_1)
             EVT_EXEC_WAIT(N(8024C4C8))
             EVT_CALL(EnableNpcBlur, -1, 0)
-            EVT_SET(EVT_SAVE_VAR(0), -65)
+            EVT_SET(GB_StoryProgress, -65)
         EVT_CASE_DEFAULT
             EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_mouser_Palette_01_Anim_1)
             EVT_CALL(SetNpcPos, NPC_SELF, 20, 0, -375)
@@ -1430,7 +1430,7 @@ EvtScript N(8024B6B4) = {
     EVT_CALL(N(func_80243578_95E778))
     EVT_CALL(func_802D2C14, 1)
     EVT_EXEC_WAIT(N(8024B614))
-    EVT_IF_LT(EVT_SAVE_VAR(0), -64)
+    EVT_IF_LT(GB_StoryProgress, -64)
         EVT_CALL(SpeakToPlayer, 6, NPC_ANIM_mouser_Palette_01_Anim_5, NPC_ANIM_mouser_Palette_01_Anim_1, 0, MESSAGE_ID(0x0D, 0x0087))
         EVT_CALL(SetPlayerAnimation, ANIM_10002)
         EVT_WAIT_FRAMES(10)
@@ -1438,7 +1438,7 @@ EvtScript N(8024B6B4) = {
         EVT_WAIT_FRAMES(30)
     EVT_END_IF
     EVT_CALL(SpeakToPlayer, 6, NPC_ANIM_mouser_Palette_01_Anim_5, NPC_ANIM_mouser_Palette_01_Anim_1, 0, MESSAGE_ID(0x0D, 0x0088))
-    EVT_SET(EVT_SAVE_VAR(0), -64)
+    EVT_SET(GB_StoryProgress, -64)
     EVT_CALL(func_802D2C14, 0)
     EVT_EXEC_WAIT(N(8024B664))
     EVT_END_IF // @bug
@@ -1489,7 +1489,7 @@ EvtScript N(8024B894) = {
                 EVT_CASE_EQ(134)
                     EVT_SET(EVT_AREA_VAR(4), 2)
                     EVT_IF_EQ(EVT_VAR(2), 1)
-                        EVT_IF_LT(EVT_SAVE_VAR(0), -63)
+                        EVT_IF_LT(GB_StoryProgress, -63)
                             EVT_EXEC_WAIT(N(8024B6B4))
                             EVT_SET(EVT_AREA_VAR(4), 0)
                         EVT_END_IF
@@ -1619,7 +1619,7 @@ EvtScript N(toggleVis_8024BFDC) = {
 EvtScript N(toggleVis_8024C040) = {
     EVT_SWITCH(EVT_VAR(0))
         EVT_CASE_EQ(0)
-            EVT_SWITCH(EVT_SAVE_VAR(0))
+            EVT_SWITCH(GB_StoryProgress)
                 EVT_CASE_LT(-66)
                     EVT_CALL(ShowMessageAtScreenPos, MESSAGE_ID(0x1D, 0x017B), 160, 40)
                     EVT_SET(EVT_VAR(0), -1)

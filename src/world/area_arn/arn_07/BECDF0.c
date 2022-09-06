@@ -72,7 +72,7 @@ EvtScript N(80242048) = {
     EVT_CALL(N(StarSpiritEffectFunc4), 3)
     EVT_CALL(PlaySoundAtPlayer, 312, 0)
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_SET(EVT_SAVE_VAR(0), -15)
+    EVT_SET(GB_StoryProgress, -15)
     EVT_CALL(GotoMapSpecial, EVT_PTR("kmr_23"), 2, 14)
     EVT_WAIT_FRAMES(100)
     EVT_RETURN
@@ -140,7 +140,7 @@ EvtScript N(80242498) = {
     EVT_CALL(N(StarSpiritEffectFunc4), 3)
     EVT_CALL(PlaySoundAtPlayer, 312, 0)
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_SET(EVT_SAVE_VAR(0), -15)
+    EVT_SET(GB_StoryProgress, -15)
     EVT_CALL(GotoMapSpecial, EVT_PTR("kmr_23"), 2, 14)
     EVT_WAIT_FRAMES(100)
     EVT_RETURN
@@ -308,7 +308,7 @@ EvtScript N(80242A30) = {
 EvtScript N(802433C8) = {
     EVT_BIND_TRIGGER(N(exitWalk_80242978), TRIGGER_FLOOR_ABOVE, 5, 1, 0)
     EVT_BIND_TRIGGER(N(exitWalk_802429D4), TRIGGER_FLOOR_ABOVE, 1, 1, 0)
-    EVT_IF_LT(EVT_SAVE_VAR(0), -24)
+    EVT_IF_LT(GB_StoryProgress, -24)
         EVT_BIND_PADLOCK(N(802439B0), TRIGGER_WALL_PRESS_A, EVT_ENTITY_INDEX(0), EVT_PTR(N(itemList_80242040)), 0, 1)
     EVT_ELSE
         EVT_BIND_TRIGGER(N(exitSingleDoor_802428D4), TRIGGER_WALL_PRESS_A, 10, 1, 0)
@@ -321,7 +321,7 @@ EvtScript N(enterWalk_8024346C) = {
     EVT_CALL(GetEntryID, EVT_VAR(0))
     EVT_SWITCH(EVT_VAR(0))
         EVT_CASE_EQ(0)
-            EVT_IF_EQ(EVT_SAVE_VAR(0), -17)
+            EVT_IF_EQ(GB_StoryProgress, -17)
                 EVT_EXEC_WAIT(N(80242A30))
                 EVT_EXEC(N(802433C8))
             EVT_ELSE
@@ -347,14 +347,14 @@ EvtScript N(enterWalk_8024346C) = {
 };
 
 EvtScript N(main) = {
-    EVT_SET(EVT_SAVE_VAR(425), 34)
+    EVT_SET(GB_WorldLocation, 34)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
     EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
     EVT_CALL(SetCamLeadPlayer, 0, 0)
     EVT_CALL(SetCamEnabled, 0, 1)
     EVT_SET(EVT_SAVE_FLAG(1977), 1)
-    EVT_SWITCH(EVT_SAVE_VAR(0))
+    EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(-26)
             EVT_CALL(MakeNpcs, 0, EVT_PTR(N(npcGroupList_802478B8)))
         EVT_CASE_LT(-14)
@@ -365,7 +365,7 @@ EvtScript N(main) = {
             EVT_CALL(MakeNpcs, 0, EVT_PTR(N(npcGroupList_802478B8)))
     EVT_END_SWITCH
     EVT_EXEC_WAIT(N(makeEntities))
-    EVT_IF_EQ(EVT_SAVE_VAR(0), -16)
+    EVT_IF_EQ(GB_StoryProgress, -16)
         EVT_EXEC(N(80242498))
     EVT_END_IF
     EVT_EXEC(N(enterWalk_8024346C))

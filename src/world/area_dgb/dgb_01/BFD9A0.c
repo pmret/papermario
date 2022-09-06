@@ -24,7 +24,7 @@ MapSettings N(settings) = {
 };
 
 EvtScript N(802434A0) = {
-    EVT_SWITCH(EVT_SAVE_VAR(0))
+    EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(-29)
             EVT_CALL(SetMusicTrack, 0, SONG_TUBBAS_MANOR, 0, 8)
         EVT_CASE_LT(-16)
@@ -160,7 +160,7 @@ EvtScript N(enterDoubleDoor_80243A3C) = {
         EVT_CASE_EQ(0)
             EVT_IF_EQ(EVT_SAVE_FLAG(1041), 0)
                 EVT_SET(EVT_SAVE_FLAG(1041), 1)
-                EVT_SET(EVT_SAVE_VAR(0), -32)
+                EVT_SET(GB_StoryProgress, -32)
             EVT_END_IF
             EVT_SET(EVT_VAR(2), 54)
             EVT_SET(EVT_VAR(3), 57)
@@ -200,7 +200,7 @@ s32 N(itemList_80243C40)[] = {
 };
 
 EvtScript N(main) = {
-    EVT_SET(EVT_SAVE_VAR(425), 15)
+    EVT_SET(GB_WorldLocation, 15)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
     EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
@@ -221,7 +221,7 @@ EvtScript N(main) = {
     EVT_ELSE
         EVT_BIND_TRIGGER(N(exitDoubleDoor_802436B8), TRIGGER_WALL_PRESS_A, 20, 1, 0)
     EVT_END_IF
-    EVT_SWITCH(EVT_SAVE_VAR(0))
+    EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(-29)
             EVT_CALL(MakeNpcs, 1, EVT_PTR(N(npcGroupList_80246E50)))
         EVT_CASE_LT(-16)
@@ -285,7 +285,7 @@ EvtScript N(80243EF0) = {
     EVT_CALL(SetCamSpeed, 0, EVT_FIXED(3.0))
     EVT_CALL(PanToTarget, 0, 0, 1)
     EVT_CALL(WaitForCam, 0, EVT_FIXED(1.0))
-    EVT_SET(EVT_SAVE_VAR(203), 1)
+    EVT_SET(GB_ARN_Tubba_MapID, 1)
     EVT_CALL(SetNpcVar, 4, 0, 1)
     EVT_LOOP(0)
         EVT_CALL(GetNpcVar, 4, 0, EVT_VAR(0))
@@ -385,7 +385,7 @@ EvtScript N(80243EF0) = {
     EVT_CALL(SetPanTarget, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_CALL(WaitForCam, 0, EVT_FIXED(1.0))
     EVT_CALL(PanToTarget, 0, 0, 0)
-    EVT_SET(EVT_SAVE_VAR(0), -28)
+    EVT_SET(GB_StoryProgress, -28)
     EVT_CALL(SetGroupEnabled, 210, 1)
     EVT_CALL(DeleteAnimatedModel, 0)
     EVT_THREAD
@@ -415,7 +415,7 @@ EvtScript N(80243EF0) = {
 };
 
 EvtScript N(802449C4) = {
-    EVT_SWITCH(EVT_SAVE_VAR(0))
+    EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(-29)
             EVT_CALL(SetGroupEnabled, 210, 0)
             EVT_CALL(ModifyColliderFlags, 0, 50, 0x7FFFFE00)
@@ -656,7 +656,7 @@ EvtScript N(idle_8024536C) = {
         EVT_END_IF
         EVT_WAIT_FRAMES(1)
     EVT_END_LOOP
-    EVT_SET(EVT_SAVE_VAR(203), 1)
+    EVT_SET(GB_ARN_Tubba_MapID, 1)
     EVT_CALL(PlaySoundAtCollider, 28, 455, 0)
     EVT_CALL(MakeLerp, 0, 80, 10, 0)
     EVT_LOOP(0)
@@ -737,12 +737,12 @@ EvtScript N(defeat_802457D8) = {
 };
 
 EvtScript N(init_80245814) = {
-    EVT_IF_NE(EVT_SAVE_VAR(203), 1)
+    EVT_IF_NE(GB_ARN_Tubba_MapID, 1)
         EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
         EVT_CALL(SetNpcFlagBits, NPC_SELF, ((NPC_FLAG_4)), TRUE)
         EVT_RETURN
     EVT_END_IF
-    EVT_IF_GE(EVT_SAVE_VAR(0), -27)
+    EVT_IF_GE(GB_StoryProgress, -27)
         EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
         EVT_CALL(SetNpcFlagBits, NPC_SELF, ((NPC_FLAG_4)), TRUE)
         EVT_RETURN
@@ -764,8 +764,8 @@ EvtScript N(init_80245814) = {
 
 EvtScript N(idle_8024598C) = {
     EVT_CALL(AwaitPlayerApproach, 0, 420, 400)
-    EVT_SET(EVT_SAVE_VAR(203), 1)
-    EVT_SET(EVT_SAVE_VAR(0), -26)
+    EVT_SET(GB_ARN_Tubba_MapID, 1)
+    EVT_SET(GB_StoryProgress, -26)
     EVT_CALL(PlaySoundAtCollider, 20, 455, 0)
     EVT_CALL(MakeLerp, 0, 80, 10, 0)
     EVT_LOOP(0)
@@ -821,7 +821,7 @@ EvtScript N(defeat_80245CB4) = {
 };
 
 EvtScript N(init_80245CF0) = {
-    EVT_IF_NE(EVT_SAVE_VAR(203), 1)
+    EVT_IF_NE(GB_ARN_Tubba_MapID, 1)
         EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_8024598C)))
     EVT_ELSE
         EVT_CALL(SetNpcPos, NPC_SELF, 136, 0, -330)
@@ -833,7 +833,7 @@ EvtScript N(init_80245CF0) = {
 };
 
 EvtScript N(init_80245D80) = {
-    EVT_SET(EVT_VAR(0), EVT_SAVE_VAR(0))
+    EVT_SET(EVT_VAR(0), GB_StoryProgress)
     EVT_IF_GE(EVT_VAR(0), -29)
         EVT_CALL(SetNpcFlagBits, NPC_SELF, ((NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40)), TRUE)
         EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
@@ -847,7 +847,7 @@ EvtScript N(init_80245D80) = {
 };
 
 EvtScript N(init_80245E44) = {
-    EVT_SET(EVT_VAR(0), EVT_SAVE_VAR(0))
+    EVT_SET(EVT_VAR(0), GB_StoryProgress)
     EVT_IF_GE(EVT_VAR(0), -29)
         EVT_CALL(SetNpcFlagBits, NPC_SELF, ((NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40)), TRUE)
         EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
@@ -861,7 +861,7 @@ EvtScript N(init_80245E44) = {
 };
 
 EvtScript N(init_80245F08) = {
-    EVT_SET(EVT_VAR(0), EVT_SAVE_VAR(0))
+    EVT_SET(EVT_VAR(0), GB_StoryProgress)
     EVT_IF_GE(EVT_VAR(0), -29)
         EVT_CALL(SetNpcFlagBits, NPC_SELF, ((NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40)), TRUE)
         EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
@@ -875,7 +875,7 @@ EvtScript N(init_80245F08) = {
 };
 
 EvtScript N(init_80245FCC) = {
-    EVT_SET(EVT_VAR(0), EVT_SAVE_VAR(0))
+    EVT_SET(EVT_VAR(0), GB_StoryProgress)
     EVT_IF_GE(EVT_VAR(0), -29)
         EVT_CALL(SetNpcFlagBits, NPC_SELF, ((NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40)), TRUE)
         EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)

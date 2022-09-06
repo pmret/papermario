@@ -15,7 +15,7 @@ MapSettings N(settings) = {
 };
 
 EvtScript N(80241360) = {
-    EVT_SWITCH(EVT_SAVE_VAR(0))
+    EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(-33)
             EVT_CALL(SetMusicTrack, 0, SONG_GUSTY_GULCH, 0, 8)
         EVT_CASE_LT(-29)

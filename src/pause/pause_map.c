@@ -397,7 +397,7 @@ void pause_map_init(MenuPanel* tab) {
     gPauseMapCursorCurrentOption = -1;
     gPauseMapSpacesInSnapRange = 0;
     gPauseMapCursorCurrentOptionCopy = -1;
-    currentLocation = evt_get_variable(0, EVT_SAVE_VAR(425));
+    currentLocation = evt_get_variable(0, GB_WorldLocation);
 
     for (i = 0; i < ARRAY_COUNT(gPauseMapSpaces); i++) {
         if (gPauseMapSpaces[i].id == currentLocation) {

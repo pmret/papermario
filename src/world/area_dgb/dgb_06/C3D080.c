@@ -20,7 +20,7 @@ MapSettings N(settings) = {
 };
 
 EvtScript N(80240320) = {
-    EVT_SWITCH(EVT_SAVE_VAR(0))
+    EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(-29)
             EVT_CALL(SetMusicTrack, 0, SONG_TUBBAS_MANOR, 0, 8)
         EVT_CASE_LT(-16)
@@ -66,7 +66,7 @@ EvtScript N(enterSingleDoor_80240474) = {
 };
 
 EvtScript N(main) = {
-    EVT_SET(EVT_SAVE_VAR(425), 15)
+    EVT_SET(GB_WorldLocation, 15)
     EVT_CALL(SetSpriteShading, 589824)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
     EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
@@ -122,7 +122,7 @@ EvtScript N(interact_8024086C) = {
 };
 
 EvtScript N(init_802408FC) = {
-    EVT_IF_GE(EVT_SAVE_VAR(0), -26)
+    EVT_IF_GE(GB_StoryProgress, -26)
         EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
     EVT_END_IF
     EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_8024086C)))

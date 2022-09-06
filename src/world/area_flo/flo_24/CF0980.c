@@ -17,12 +17,12 @@ MapSettings N(settings) = {
 };
 
 EvtScript N(80240600) = {
-    EVT_IF_LT(EVT_SAVE_VAR(0), 53)
+    EVT_IF_LT(GB_StoryProgress, 53)
         EVT_CALL(SetMusicTrack, 0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8)
     EVT_ELSE
         EVT_CALL(SetMusicTrack, 0, SONG_FLOWER_FIELDS_SUNNY, 0, 8)
     EVT_END_IF
-    EVT_IF_GE(EVT_SAVE_VAR(0), 49)
+    EVT_IF_GE(GB_StoryProgress, 49)
         EVT_CALL(PlaySound, 0x80000022)
     EVT_END_IF
     EVT_RETURN
@@ -82,7 +82,7 @@ EvtScript N(802409F4) = {
 };
 
 EvtScript N(main) = {
-    EVT_SET(EVT_SAVE_VAR(425), 38)
+    EVT_SET(GB_WorldLocation, 38)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamLeadPlayer, 0, 0)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
@@ -123,7 +123,7 @@ EvtScript N(main) = {
         EVT_EXEC(EnterWalk)
     EVT_END_IF
     EVT_EXEC_WAIT(N(80240600))
-    EVT_IF_GE(EVT_SAVE_VAR(0), 53)
+    EVT_IF_GE(GB_StoryProgress, 53)
         EVT_CALL(N(func_80240000_CF0940))
     EVT_END_IF
     EVT_RETURN
@@ -236,7 +236,7 @@ EvtScript N(8024183C) = {
                 EVT_END_IF
             EVT_END_LOOP
             EVT_WAIT_FRAMES(30)
-            EVT_SET(EVT_SAVE_VAR(0), 49)
+            EVT_SET(GB_StoryProgress, 49)
             EVT_CALL(GotoMap, EVT_PTR(UNK_STR_80242280), 2)
             EVT_WAIT_FRAMES(100)
             EVT_RETURN
@@ -285,7 +285,7 @@ EvtScript N(8024183C) = {
 #endif
 
 EvtScript N(80241ABC) = {
-    EVT_IF_LT(EVT_SAVE_VAR(0), 49)
+    EVT_IF_LT(GB_StoryProgress, 49)
         EVT_CALL(EnableGroup, 94, 0)
         EVT_CALL(ModifyColliderFlags, 0, 30, 0x7FFFFE00)
     EVT_ELSE

@@ -82,7 +82,7 @@ EvtScript N(enterSingleDoor_802404F8) = {
     EVT_SET(EVT_VAR(3), -1)
     EVT_EXEC_WAIT(EnterSingleDoor)
     EVT_EXEC(N(802404CC))
-    EVT_IF_LT(EVT_SAVE_VAR(0), -22)
+    EVT_IF_LT(GB_StoryProgress, -22)
         EVT_WAIT_FRAMES(10)
         EVT_EXEC(N(802400F0))
         EVT_EXEC(N(802401BC))
@@ -94,7 +94,7 @@ EvtScript N(enterSingleDoor_802404F8) = {
 };
 
 EvtScript N(main) = {
-    EVT_SET(EVT_SAVE_VAR(425), 35)
+    EVT_SET(GB_WorldLocation, 35)
     EVT_CALL(SetSpriteShading, 524290)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
     EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
@@ -254,13 +254,13 @@ EvtScript N(defeat_802409DC) = {
     EVT_CALL(PanToTarget, 0, 0, 1)
     EVT_CALL(WaitForCam, 0, EVT_FIXED(1.0))
     EVT_CALL(PanToTarget, 0, 0, 0)
-    EVT_SET(EVT_SAVE_VAR(0), -22)
+    EVT_SET(GB_StoryProgress, -22)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(init_80240E70) = {
-    EVT_IF_GE(EVT_SAVE_VAR(0), -22)
+    EVT_IF_GE(GB_StoryProgress, -22)
         EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_ELSE
         EVT_CALL(SetSelfVar, 0, 0)

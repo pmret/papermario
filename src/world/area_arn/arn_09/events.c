@@ -43,7 +43,7 @@ EvtScript N(80240220) = {
 };
 
 EvtScript N(main) = {
-    EVT_SET(EVT_SAVE_VAR(425), 35)
+    EVT_SET(GB_WorldLocation, 35)
     EVT_CALL(SetSpriteShading, 524288)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
     EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
@@ -145,13 +145,13 @@ EvtScript N(idle_802405FC) = {
     EVT_CALL(PlaySoundAtNpc, NPC_SELF, 0x20C8, 0)
     EVT_CALL(NpcJump0, NPC_SELF, 0, 200, 0, 15)
     EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
-    EVT_SET(EVT_SAVE_VAR(0), -18)
+    EVT_SET(GB_StoryProgress, -18)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(init_80240730) = {
-    EVT_IF_NE(EVT_SAVE_VAR(0), -19)
+    EVT_IF_NE(GB_StoryProgress, -19)
         EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_ELSE
         EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_802405FC)))

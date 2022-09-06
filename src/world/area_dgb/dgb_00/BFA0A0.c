@@ -22,7 +22,7 @@ MapSettings N(settings) = {
 };
 
 EvtScript N(80240110) = {
-    EVT_SWITCH(EVT_SAVE_VAR(0))
+    EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(-29)
             EVT_CALL(SetMusicTrack, 0, SONG_GUSTY_GULCH, 0, 8)
         EVT_CASE_LT(-16)
@@ -59,7 +59,7 @@ EvtScript N(exitDoubleDoor_8024021C) = {
 
 EvtScript N(802402D0) = {
     EVT_BIND_TRIGGER(N(exitWalk_802401C0), TRIGGER_FLOOR_ABOVE, 15, 1, 0)
-    EVT_SWITCH(EVT_SAVE_VAR(0))
+    EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(-28)
             EVT_BIND_TRIGGER(N(exitDoubleDoor_8024021C), TRIGGER_WALL_PRESS_A, 18, 1, 0)
         EVT_CASE_LT(-25)
@@ -87,8 +87,8 @@ EvtScript N(enterDoubleDoor_8024038C) = {
             EVT_EXEC(EnterWalk)
             EVT_WAIT_FRAMES(1)
         EVT_CASE_EQ(1)
-            EVT_IF_GE(EVT_SAVE_VAR(0), -28)
-                EVT_IF_LT(EVT_SAVE_VAR(0), -25)
+            EVT_IF_GE(GB_StoryProgress, -28)
+                EVT_IF_LT(GB_StoryProgress, -25)
                     EVT_EXEC(N(802402D0))
                     EVT_THREAD
                         EVT_EXEC_WAIT(N(8024103C))
@@ -111,7 +111,7 @@ EvtScript N(enterDoubleDoor_8024038C) = {
 };
 
 EvtScript N(main) = {
-    EVT_SET(EVT_SAVE_VAR(425), 15)
+    EVT_SET(GB_WorldLocation, 15)
     EVT_SET(EVT_SAVE_FLAG(1978), 1)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)

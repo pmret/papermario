@@ -27,7 +27,7 @@ EvtScript N(80240750) = {
     EVT_IF_EQ(EVT_VAR(0), 1)
         EVT_CALL(SetMusicTrack, 0, SONG_SUNSHINE_RETURNS, 0, 8)
     EVT_ELSE
-        EVT_SWITCH(EVT_SAVE_VAR(0))
+        EVT_SWITCH(GB_StoryProgress)
             EVT_CASE_LT(53)
                 EVT_CALL(SetMusicTrack, 0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8)
             EVT_CASE_DEFAULT
@@ -106,7 +106,7 @@ EvtScript N(80240B78) = {
 };
 
 EvtScript N(main) = {
-    EVT_SET(EVT_SAVE_VAR(425), 38)
+    EVT_SET(GB_WorldLocation, 38)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamLeadPlayer, 0, 0)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
@@ -142,7 +142,7 @@ EvtScript N(main) = {
         EVT_EXEC(EnterWalk)
     EVT_END_IF
     EVT_EXEC_WAIT(N(80240750))
-    EVT_IF_GE(EVT_SAVE_VAR(0), 53)
+    EVT_IF_GE(GB_StoryProgress, 53)
         EVT_CALL(N(func_80240000_CC0E30))
     EVT_END_IF
     EVT_RETURN
@@ -274,7 +274,7 @@ EvtScript N(80241BE4) = {
 
 EvtScript N(interact_80241C8C) = {
     EVT_EXEC_WAIT(N(8024080C))
-    EVT_SWITCH(EVT_SAVE_VAR(0))
+    EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(47)
             EVT_SWITCH(EVT_SAVE_FLAG(1378))
                 EVT_CASE_EQ(0)
@@ -358,7 +358,7 @@ EvtScript N(interact_80241C8C) = {
                     EVT_WAIT_FRAMES(10)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_2, 5, MESSAGE_ID(0x11, 0x0096))
                     EVT_SET(EVT_AREA_FLAG(22), 1)
-                    EVT_SET(EVT_SAVE_VAR(0), 48)
+                    EVT_SET(GB_StoryProgress, 48)
             EVT_END_SWITCH
         EVT_CASE_LT(53)
             EVT_SWITCH(EVT_AREA_FLAG(22))
@@ -385,7 +385,7 @@ EvtScript N(init_802423D0) = {
     EVT_CALL(SetNpcPos, 1, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_CALL(SetNpcFlagBits, 1, ((NPC_FLAG_2)), TRUE)
     EVT_CALL(SetNpcFlagBits, 1, ((NPC_FLAG_HAS_SHADOW)), TRUE)
-    EVT_SWITCH(EVT_SAVE_VAR(0))
+    EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(47)
             EVT_IF_EQ(EVT_SAVE_FLAG(1378), 1)
                 EVT_CALL(SetNpcFlagBits, 1, ((NPC_FLAG_100)), FALSE)

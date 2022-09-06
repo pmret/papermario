@@ -14,7 +14,7 @@ MapSettings N(settings) = {
 };
 
 EvtScript N(802400A0) = {
-    EVT_SWITCH(EVT_SAVE_VAR(0))
+    EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(-22)
             EVT_CALL(SetMusicTrack, 0, SONG_TUBBA_ESCAPE, 0, 8)
         EVT_CASE_LT(-16)

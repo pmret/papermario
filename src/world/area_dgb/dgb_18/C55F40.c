@@ -26,7 +26,7 @@ MapSettings N(settings) = {
 };
 
 EvtScript N(802412C0) = {
-    EVT_SWITCH(EVT_SAVE_VAR(0))
+    EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(-29)
             EVT_CALL(SetMusicTrack, 0, SONG_TUBBAS_MANOR, 0, 8)
         EVT_CASE_LT(-16)
@@ -72,7 +72,7 @@ EvtScript N(enterDoubleDoor_80241414) = {
 };
 
 EvtScript N(main) = {
-    EVT_SET(EVT_SAVE_VAR(425), 15)
+    EVT_SET(GB_WorldLocation, 15)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
     EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
@@ -346,7 +346,7 @@ EvtScript N(idle_80241654) = {
     EVT_CALL(SetPanTarget, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_CALL(WaitForCam, 0, EVT_FIXED(1.0))
     EVT_CALL(PanToTarget, 0, 0, 0)
-    EVT_SET(EVT_SAVE_VAR(0), -30)
+    EVT_SET(GB_StoryProgress, -30)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_RETURN
     EVT_END
@@ -442,7 +442,7 @@ const char N(pad_XXX)[] = { 0, 0 };
 EvtScript N(init_80242924) = {
     EVT_CALL(SetNpcScale, NPC_SELF, EVT_FIXED(1.25), EVT_FIXED(1.25), EVT_FIXED(1.25))
     EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(defeat_802428E8)))
-    EVT_SWITCH(EVT_SAVE_VAR(0))
+    EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(-30)
             EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80241654)))
         EVT_CASE_LT(-29)
@@ -568,7 +568,7 @@ EvtScript N(idle_80242A24) = {
     EVT_SUB(EVT_VAR(1), 10)
     EVT_CALL(NpcJump0, NPC_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 10)
     EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
-    EVT_SET(EVT_SAVE_VAR(0), -29)
+    EVT_SET(GB_StoryProgress, -29)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_RETURN
     EVT_END

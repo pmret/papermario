@@ -33,7 +33,7 @@ MapSettings N(settings) = {
 };
 
 EvtScript N(80243CF0) = {
-    EVT_SWITCH(EVT_SAVE_VAR(0))
+    EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(-29)
             EVT_CALL(SetMusicTrack, 0, SONG_TUBBAS_MANOR, 0, 8)
         EVT_CASE_LT(-16)
@@ -103,12 +103,12 @@ EvtScript N(enterDoubleDoor_80243EF8) = {
 };
 
 EvtScript N(main) = {
-    EVT_SET(EVT_SAVE_VAR(425), 15)
+    EVT_SET(GB_WorldLocation, 15)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
     EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
     EVT_CALL(SetCamEnabled, 0, 1)
-    EVT_SWITCH(EVT_SAVE_VAR(0))
+    EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(-28)
             EVT_CALL(MakeNpcs, 1, EVT_PTR(N(npcGroupList_80246958)))
         EVT_CASE_LT(-16)
@@ -398,8 +398,8 @@ EvtScript N(idle_80244A54) = {
         EVT_END_IF
         EVT_WAIT_FRAMES(1)
     EVT_END_LOOP
-    EVT_SET(EVT_SAVE_VAR(203), 8)
-    EVT_SET(EVT_SAVE_VAR(0), -27)
+    EVT_SET(GB_ARN_Tubba_MapID, 8)
+    EVT_SET(GB_StoryProgress, -27)
     EVT_CALL(PlaySoundAtCollider, 18, 455, 0)
     EVT_CALL(MakeLerp, 0, 80, 10, 0)
     EVT_LOOP(0)
@@ -476,12 +476,12 @@ EvtScript N(defeat_80244E58) = {
 };
 
 EvtScript N(init_80244E94) = {
-    EVT_IF_LT(EVT_SAVE_VAR(0), -28)
+    EVT_IF_LT(GB_StoryProgress, -28)
         EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
         EVT_CALL(SetNpcFlagBits, NPC_SELF, ((NPC_FLAG_4)), TRUE)
         EVT_RETURN
     EVT_END_IF
-    EVT_IF_GE(EVT_SAVE_VAR(0), -26)
+    EVT_IF_GE(GB_StoryProgress, -26)
         EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
         EVT_CALL(SetNpcFlagBits, NPC_SELF, ((NPC_FLAG_4)), TRUE)
         EVT_RETURN
@@ -491,7 +491,7 @@ EvtScript N(init_80244E94) = {
     EVT_CALL(GetEntryID, EVT_VAR(0))
     EVT_SWITCH(EVT_VAR(0))
         EVT_CASE_EQ(0)
-            EVT_IF_NE(EVT_SAVE_VAR(203), 8)
+            EVT_IF_NE(GB_ARN_Tubba_MapID, 8)
                 EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
                 EVT_CALL(SetNpcFlagBits, NPC_SELF, ((NPC_FLAG_4)), TRUE)
             EVT_ELSE
@@ -499,7 +499,7 @@ EvtScript N(init_80244E94) = {
                 EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(npcAI_80244D7C)))
             EVT_END_IF
         EVT_CASE_EQ(1)
-            EVT_IF_NE(EVT_SAVE_VAR(203), 8)
+            EVT_IF_NE(GB_ARN_Tubba_MapID, 8)
                 EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80244A54)))
             EVT_ELSE
                 EVT_CALL(SetNpcPos, NPC_SELF, -130, 210, 80)
