@@ -2,7 +2,7 @@
 #include "entity.h"
 
 extern PushBlockGrid* D_802DBC88[8];
-extern f32 D_80285640_7E64C0[];
+extern f32 D_80285640_7E64C0[13];
 extern EvtScript D_80285674_7E64F4;
 
 #define BLOCK_GRID_SIZE 25
@@ -56,13 +56,57 @@ ApiStatus func_802828DC(Evt* script, s32 isInitialCall) {
     gCameras[CAM_DEFAULT].targetPos.z = playerStatus->position.z;
 
     script->functionTemp[0]++;
-    if (script->functionTemp[0] == 13) {
+    if (script->functionTemp[0] == ARRAY_COUNT(D_80285640_7E64C0)) {
         return ApiStatus_DONE1;
     }
     return ApiStatus_BLOCK;
 }
 
-INCLUDE_ASM(s32, "world/script_api/7E3700", func_80282C40);
+ApiStatus func_80282C40(Evt* script, s32 isInitialCall) {
+    PushBlockGrid* grid = script->varTablePtr[0xA];
+    Entity* block = get_entity_by_index(script->varTable[0xB]);
+    f32 hitX, hitY, hitZ, hitDepth;
+    s32 hitResult;
+    s32 i, j;
+
+    if (isInitialCall) {
+        script->functionTemp[0] = 0;
+        script->varTable[0] = block->position.y;
+
+        hitX = block->position.x;
+        hitZ = block->position.z;
+        hitY = block->position.y + 5.0f;
+
+        hitDepth = 35.0f;
+        hitResult = npc_raycast_down_sides(0, &hitX, &hitY, &hitZ, &hitDepth);
+        script->functionTemp[1] = hitDepth;
+        
+        if (hitResult != 0 && hitDepth <= 6.0f) {
+            return ApiStatus_DONE2;
+        }
+    }
+    
+    if (grid->dropCallback != NULL) {
+        if (grid->dropCallback(block, script)) {
+            i = (block->position.x - grid->centerPos.x) / 25.0f;
+            j = (block->position.z - grid->centerPos.z) / 25.0f;
+            grid->cells[i + (j * grid->numCellsX)] = 0;
+            return ApiStatus_DONE1;
+        } else {
+            return ApiStatus_BLOCK;
+        }
+    } else {
+        block->position.y = script->varTable[0] - (D_80285640_7E64C0[script->functionTemp[0]] * 25.0f);
+        script->functionTemp[0]++;
+        if (script->functionTemp[0] != ARRAY_COUNT(D_80285640_7E64C0)) {
+            return ApiStatus_BLOCK;
+        }
+        i = (block->position.x - grid->centerPos.x) / 25.0f;
+        j = (block->position.z - grid->centerPos.z) / 25.0f;
+        grid->cells[i + (j * grid->numCellsX)] = PUSH_GRID_EMPTY;
+    }
+    return ApiStatus_DONE1;
+}
 
 ApiStatus func_80282E30(Evt* script, s32 isInitialCall);
 INCLUDE_ASM(s32, "world/script_api/7E3700", func_80282E30);
