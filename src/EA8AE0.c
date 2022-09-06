@@ -49,15 +49,15 @@ INCLUDE_ASM(s32, "EA8AE0", func_8024140C_EA9EEC);
 
 #ifdef NON_MATCHING 
 ApiStatus func_802417AC_EAA28C(Evt* script, s32 isInitialCall) {
-    Bytecode* temp = script->ptrReadPos; 
+    Bytecode* args = script->ptrReadPos; 
     
-    if (isInitialCall != 0) {
+    if (isInitialCall) {
         D_80243DD8_EAC8B8 = 0;
     }
     if (D_80243DD8_EAC8B8 != 0) {
         D_80243DD8_EAC8B8 = 0;
 
-        dead_evt_set_variable(script, *temp, D_80243DDC_EAC8BC);
+        dead_evt_set_variable(script, *args++, D_80243DDC_EAC8BC);
                 
         return ApiStatus_DONE2;
     }

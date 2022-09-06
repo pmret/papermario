@@ -24,7 +24,7 @@ void rising_bubble_update(EffectInstance* effect) {
         if (temp_a2 >= 6) { 
             data->unk_14 += (120 - data->unk_14) * 0.3;
         } else {
-            data->unk_14 = (temp_a2 * 20);
+            data->unk_14 = temp_a2 * 20;
         }
 
         data->unk_20++;
@@ -40,8 +40,6 @@ void rising_bubble_update(EffectInstance* effect) {
     data->unk_1C++;
     data->unk_08 += 2.0f;
 }
-
-
 
 void rising_bubble_render(EffectInstance* effect) {
     RenderTask renderTask;
