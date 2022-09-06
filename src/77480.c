@@ -824,7 +824,7 @@ s32 get_overriding_player_anim(s32 anim) {
         }
     } else if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS) {
         if (playerStatus->unk_C4 && (anim == ANIM_C0000 || anim == ANIM_C0001 || anim == ANIM_C0002)) {
-            anim = ANIM_D0000;
+            anim = ANIM_Peach_D0000;
         }
     }
 

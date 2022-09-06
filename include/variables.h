@@ -203,13 +203,10 @@ extern f32 D_8010C990;
 extern s32 D_8010C978;
 extern Vec3s btl_actorHomePositions[];
 
-
 extern SaveData gCurrentSaveFile;
 
 extern u32* gMapFlags;
 extern s32* gMapVars;
-
-extern f32 D_80286540;
 
 extern u32 gWorldMapVars[MAX_MAPVARS];
 extern u32 gBattleMapVars[MAX_MAPVARS];

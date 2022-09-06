@@ -120,6 +120,33 @@ enum {
 #define EVT_LIMIT            -250000000 // TODO better name
 #define MAKE_ENTITY_END      0x80000000
 
+#define EVT_INDEX_OF_VAR(v)         ((v +  30000000))
+#define EVT_INDEX_OF_FLAG(v)        ((v +  70000000))
+#define EVT_INDEX_OF_MAP_VAR(v)     ((v +  50000000))
+#define EVT_INDEX_OF_MAP_FLAG(v)    ((v +  90000000))
+#define EVT_INDEX_OF_AREA_FLAG(v)   ((v + 110000000))
+#define EVT_INDEX_OF_AREA_BYTE(v)   ((v + 150000000))
+#define EVT_INDEX_OF_SAVE_FLAG(v)   ((v + 130000000))
+#define EVT_INDEX_OF_SAVE_BYTE(v)   ((v + 170000000))
+
+// shorthand names for EVT_VAR
+#define VAR0 EVT_VAR(0)
+#define VAR1 EVT_VAR(1)
+#define VAR2 EVT_VAR(2)
+#define VAR3 EVT_VAR(3)
+#define VAR4 EVT_VAR(4)
+#define VAR5 EVT_VAR(5)
+#define VAR6 EVT_VAR(6)
+#define VAR7 EVT_VAR(7)
+#define VAR8 EVT_VAR(8)
+#define VAR9 EVT_VAR(9)
+#define VARA EVT_VAR(10)
+#define VARB EVT_VAR(11)
+#define VARC EVT_VAR(12)
+#define VARD EVT_VAR(13)
+#define VARE EVT_VAR(14)
+#define VARF EVT_VAR(15)
+
 // deprecated, use enum GSW/GSWF
 #define EVT_STORY_PROGRESS EVT_SAVE_VAR(0)
 #define EVT_SAVE_FLAG_PLACES_VISITED EVT_SAVE_FLAG(0x7AA)

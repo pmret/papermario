@@ -11,9 +11,9 @@ extern IMG_BIN D_802EF0D0;
 
 s32 D_8014C280[] = { 0x028001E0, 0x01FF0000, 0x028001E0, 0x01FF0000, };
 
-s32 MessagePlural = 0x53FD0000;
+u8 MessagePlural[] = { MSG_CHAR_LOWER_S, MSG_CHAR_READ_END };
 
-s16 MessageSingular = 0xF0FD;
+u8 MessageSingular[] = { MSG_CHAR_READ_ENDL, MSG_CHAR_READ_END };
 
 s16 gNextMessageBuffer = 0;
 

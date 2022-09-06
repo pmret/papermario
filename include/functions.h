@@ -478,7 +478,7 @@ struct ModelTransformGroup* get_transform_group(s32 index);
 void make_transform_group(u16 modelID);
 void enable_transform_group(u16 modelID);
 void disable_transform_group(u16 modelID);
-void set_map_transition_effect(s32);
+void set_map_transition_effect(ScreenTransition);
 
 void set_tex_panner(struct Model* model, s32 texPannerID);
 void set_custom_gfx(s32 customGfxIndex, Gfx* pre, Gfx* post);

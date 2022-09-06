@@ -1,6 +1,9 @@
 #include "common.h"
 #include "../partners.h"
 
+extern s32 DoorModelsSwingCCW[3];
+extern s32 DoorModelsSwingCW[3];
+
 ApiStatus CheckRideScriptForEnterExit(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
@@ -127,10 +130,66 @@ ApiStatus GetEntryCoords(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "world/script_api/7E4690", SetupSingleDoor);
+ApiStatus SetupSingleDoor(Evt* script, s32 isInitialCall) {
+    if (script->varTable[3] >= 0) {
+        DoorModelsSwingCCW[0] = script->varTable[2];
+        DoorModelsSwingCCW[1] = -1;
+        DoorModelsSwingCW[0] = -1;
+    } else {
+        DoorModelsSwingCW[0] = script->varTable[2];
+        DoorModelsSwingCW[1] = -1;
+        DoorModelsSwingCCW[0] = -1;
+    }
 
-INCLUDE_ASM(s32, "world/script_api/7E4690", SetupSplitSingleDoor);
+    script->varTablePtr[2] = &DoorModelsSwingCCW;
+    script->varTablePtr[3] = &DoorModelsSwingCW;
 
-INCLUDE_ASM(s32, "world/script_api/7E4690", SetupDoubleDoors);
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "world/script_api/7E4690", SetupSplitDoubleDoors);
+ApiStatus SetupSplitSingleDoor(Evt* script, s32 isInitialCall) {
+    if (script->varTable[3] >= 0) {
+        DoorModelsSwingCCW[0] = script->varTable[2];
+        DoorModelsSwingCCW[1] = script->varTable[4];
+        DoorModelsSwingCCW[2] = -1;
+        DoorModelsSwingCW[0] = -1;
+    } else {
+        DoorModelsSwingCW[0] = script->varTable[2];
+        DoorModelsSwingCW[1] = script->varTable[4];
+        DoorModelsSwingCW[2] = -1;
+        DoorModelsSwingCCW[0] = -1;
+    }
+
+    script->varTablePtr[2] = &DoorModelsSwingCCW;
+    script->varTablePtr[3] = &DoorModelsSwingCW;
+
+    return ApiStatus_DONE2;
+}
+
+ApiStatus SetupDoubleDoors(Evt* script, s32 isInitialCall) {
+    DoorModelsSwingCCW[0] = script->varTable[2];
+    DoorModelsSwingCCW[1] = -1;
+
+    DoorModelsSwingCW[0] = script->varTable[3];
+    DoorModelsSwingCW[1] = -1;
+
+    script->varTablePtr[3] = &DoorModelsSwingCW;
+    script->varTablePtr[2] = &DoorModelsSwingCCW;
+
+    return ApiStatus_DONE2;
+}
+
+ApiStatus SetupSplitDoubleDoors(Evt* script, s32 isInitialCall) {
+    DoorModelsSwingCCW[0] = script->varTable[2];
+    DoorModelsSwingCCW[1] = script->varTable[4];
+    DoorModelsSwingCCW[2] = -1;
+
+    DoorModelsSwingCW[0] = script->varTable[3];
+    DoorModelsSwingCW[1] = script->varTable[5];
+    DoorModelsSwingCW[2] = -1;
+
+    script->varTablePtr[3] = &DoorModelsSwingCW;
+    script->varTablePtr[2] = &DoorModelsSwingCCW;
+
+    return ApiStatus_DONE2;
+}

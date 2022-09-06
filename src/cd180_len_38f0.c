@@ -9,7 +9,7 @@ extern f32 screen_overlay_backZoom;
 extern s32 D_80156910;
 extern ScreenOverlay D_8015C790[2];
 
-s32 D_8014C6F0 = 2;
+ScreenTransition D_8014C6F0 = TRANSITION_2;
 
 // padding?
 s32 D_8014C6F4[] = { 0x00000000, 0x00000000, 0x00000000, };
@@ -488,8 +488,8 @@ void render_screen_overlay_backUI(void) {
     }
 }
 
-void set_map_transition_effect(s32 arg0) {
-    D_8014C6F0 = arg0;
+void set_map_transition_effect(ScreenTransition transition) {
+    D_8014C6F0 = transition;
 }
 
 s32 update_exit_map_screen_overlay(s16* progress) {
@@ -502,10 +502,10 @@ s32 update_exit_map_screen_overlay(s16* progress) {
     s32 amt = 20;
 
     switch (D_8014C6F0) {
-        case 1:
+        case TRANSITION_1:
             type = 0;
             break;
-        case 3:
+        case TRANSITION_3:
             r = g = b = 208;
             type = 1;
             amt = 10;
@@ -513,14 +513,14 @@ s32 update_exit_map_screen_overlay(s16* progress) {
                 gGameStatusPtr->nextDemoScene = 18;
             }
             break;
-        case 6:
+        case TRANSITION_6:
             r = g = b = 208;
             type = 1;
             break;
-        case 0:
+        case TRANSITION_0:
             type = 1;
             break;
-        case 7:
+        case TRANSITION_7:
             if (gGameStatusPtr->demoState == 2) {
                 gGameStatusPtr->nextDemoScene = 18;
             }
@@ -528,53 +528,53 @@ s32 update_exit_map_screen_overlay(s16* progress) {
             type = 1;
             amt = 7;
             break;
-        case 11:
-        case 15:
+        case TRANSITION_11:
+        case TRANSITION_15:
             r = g = b = 208;
             type = 1;
             amt = 7;
             break;
-        case 4:
-        case 5:
+        case TRANSITION_4:
+        case TRANSITION_5:
             type = 1;
             amt = 7;
             break;
-        case 14:
+        case TRANSITION_14:
             r = g = b = 208;
             type = 1;
             amt = 50;
             break;
-        case 2:
+        case TRANSITION_2:
             type = 1;
             amt = 50;
             break;
-        case 8:
+        case TRANSITION_8:
             set_screen_overlay_alpha(0, 0.0f);
             type = 4;
             break;
-        case 9:
+        case TRANSITION_9:
             r = g = b = 208;
             set_screen_overlay_alpha(0, 0.0f);
             type = 4;
             amt = 7;
             break;
-        case 10:
+        case TRANSITION_10:
             set_screen_overlay_alpha(0, 0.0f);
             type = 4;
             amt = 7;
             break;
-        case 12:
+        case TRANSITION_12:
             set_screen_overlay_alpha(0, 160.0f);
             r = g = b = 208;
             type = 5;
             amt = 7;
             break;
-        case 13:
+        case TRANSITION_13:
             set_screen_overlay_alpha(0, 0.0f);
             type = 5;
             amt = 7;
             break;
-        case 16:
+        case TRANSITION_16:
             set_screen_overlay_center(0, 0, 15, 28);
             set_screen_overlay_center(0, 1, 305, 156);
             set_screen_overlay_params_front(12, 255.0f);
@@ -582,7 +582,7 @@ s32 update_exit_map_screen_overlay(s16* progress) {
             return 1;
     }
 
-    if (D_8014C6F0 == 5) {
+    if (D_8014C6F0 == TRANSITION_5) {
         overlayColor = ((255 - *progress) * 208) / 255;
         set_screen_overlay_color(0, overlayColor, overlayColor, overlayColor);
         set_screen_overlay_params_front(type, 255.0f);
@@ -621,42 +621,42 @@ u8 update_enter_map_screen_overlay(s16* progress) {
     u8 ret = FALSE;
 
     switch (D_8014C6F0) {
-        case 3:
+        case TRANSITION_3:
             set_screen_overlay_color(0, 208, 208, 208);
             amt = 50;
             break;
-        case 2:
+        case TRANSITION_2:
             frontType = 1;
             amt = 50;
             break;
-        case 4:
-        case 5:
-        case 7:
-        case 9:
-        case 10:
+        case TRANSITION_4:
+        case TRANSITION_5:
+        case TRANSITION_7:
+        case TRANSITION_9:
+        case TRANSITION_10:
             frontType = 1;
             amt = 7;
             break;
-        case 0:
-        case 1:
-        case 6:
-        case 13:
-        case 14:
+        case TRANSITION_0:
+        case TRANSITION_1:
+        case TRANSITION_6:
+        case TRANSITION_13:
+        case TRANSITION_14:
             frontType = 1;
             break;
-        case 8:
-        case 15:
+        case TRANSITION_8:
+        case TRANSITION_15:
             frontType = 4;
             break;
-        case 11:
+        case TRANSITION_11:
             frontType = 5;
             amt = 7;
             break;
-        case 12:
+        case TRANSITION_12:
             frontType = 4;
             amt = 7;
             break;
-        case 16:
+        case TRANSITION_16:
             set_screen_overlay_center(0, 0, 15, 28);
             set_screen_overlay_center(0, 1, 305, 156);
             set_screen_overlay_params_front(12, *progress);
@@ -664,7 +664,7 @@ u8 update_enter_map_screen_overlay(s16* progress) {
             break;
     }
 
-    if (D_8014C6F0 != 0x10) {
+    if (D_8014C6F0 != TRANSITION_16) {
         set_screen_overlay_params_front(frontType, *progress);
     }
 
