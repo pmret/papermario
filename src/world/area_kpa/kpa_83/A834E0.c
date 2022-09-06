@@ -1,3 +1,6 @@
 #include "kpa_83.h"
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_83/A834E0", func_80240050_A834E0);
+ApiStatus func_80240050_A834E0(Evt* script, s32 isInitialCall) {
+    gPlayerStatus.spriteFacingAngle = script->varTable[0];
+    return ApiStatus_DONE2;
+}

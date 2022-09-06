@@ -2,16 +2,8 @@
 #include "hud_element.h"
 #include "model.h"
 
-extern s32 MessagePlural;
-extern s32 MessageSingular;
-extern MessagePrintState* D_80286528;
-extern MessagePrintState* D_80286538;
-
-extern s32 D_80286520;
-extern s32 D_80286524;
-extern s32 D_80286530;
-extern s32 D_80286534;
-extern Evt* D_8028652C;
+extern u8 MessagePlural[];
+extern u8 MessageSingular[];
 extern HudScript* HES_Item_Coin;
 
 ApiStatus func_802803C8(Evt* script, s32 isInitialCall);
@@ -20,54 +12,54 @@ ApiStatus ShowShopPurchaseDialog(Evt* script, s32 isInitialCall);
 ApiStatus ShowShopOwnerDialog(Evt* script, s32 isInitialCall);
 
 EvtScript ShopBeginSpeech = {
-    EVT_CALL(SpeakToPlayer, LW(1), LW(2), LW(3), 0, LW(0))
+    EVT_CALL(SpeakToPlayer, VAR1, VAR2, VAR3, 0, VAR0)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript ShopContinueSpeech = {
-    EVT_CALL(ContinueSpeech, LW(1), LW(2), LW(3), 0, LW(0))
+    EVT_CALL(ContinueSpeech, VAR1, VAR2, VAR3, 0, VAR0)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript ShopResetSpeech = {
-    EVT_CALL(EndSpeech, LW(1), LW(2), LW(3), 0)
-    EVT_CALL(SpeakToPlayer, LW(1), LW(2), LW(3), 0, LW(0))
+    EVT_CALL(EndSpeech, VAR1, VAR2, VAR3, 0)
+    EVT_CALL(SpeakToPlayer, VAR1, VAR2, VAR3, 0, VAR0)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript ShopEndSpeech = {
-    EVT_CALL(EndSpeech, LW(0), LW(1), LW(2), 0)
+    EVT_CALL(EndSpeech, VAR0, VAR1, VAR2, 0)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript D_80283F58_7E4DD8 = {
-    EVT_CALL(GetCurrentPartner, LW(1))
-    EVT_IF_EQ(LW(1), 0)
+    EVT_CALL(GetCurrentPartner, VAR1)
+    EVT_IF_EQ(VAR1, 0)
         EVT_GOTO(10)
     EVT_END_IF
-    EVT_IF_EQ(LW(1), 2)
+    EVT_IF_EQ(VAR1, 2)
         EVT_GOTO(10)
     EVT_END_IF
-    EVT_IF_EQ(LW(1), 3)
+    EVT_IF_EQ(VAR1, 3)
         EVT_GOTO(10)
     EVT_END_IF
     EVT_RETURN
     EVT_LABEL(10)
     EVT_CALL(func_802803C8)
-    EVT_IF_EQ(LW(2), 0)
+    EVT_IF_EQ(VAR2, 0)
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(func_80280410, LW(0))
+    EVT_CALL(func_80280410, VAR0)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript BadgeShopInteract = {
-    EVT_CALL(ShowShopPurchaseDialog, LW(0))
+    EVT_CALL(ShowShopPurchaseDialog, VAR0)
     EVT_RETURN
     EVT_END
 };
@@ -95,7 +87,7 @@ s32 shop_owner_buy_dialog(s32 messageIndex, s32 itemName, s32 coinCost, s32 bpCo
     Shop* shop = gGameStatusPtr->mapShop;
     s32 shopMsgID = shop->owner->shopMsgIDs[messageIndex];
     Evt* script;
-    s32 phi_a0;
+    u8* suffix;
 
     set_message_msg(itemName, 0);
     set_message_value(coinCost, 1);
@@ -104,11 +96,11 @@ s32 shop_owner_buy_dialog(s32 messageIndex, s32 itemName, s32 coinCost, s32 bpCo
         set_message_value(bpCost, 2);
     } else {
         if (coinCost == 1) {
-            phi_a0 = &MessageSingular;
+            suffix = MessageSingular;
         } else {
-            phi_a0 = &MessagePlural;
+            suffix = MessagePlural;
         }
-        set_message_msg(phi_a0, 2);
+        set_message_msg((s32) suffix, 2);
     }
 
     script = start_script(&ShopBeginSpeech, EVT_PRIORITY_1, 0);
@@ -136,18 +128,18 @@ s32 shop_owner_continue_speech(s32 messageIndex) {
 s32 shop_owner_continue_speech_with_quantity(s32 messageIndex, s32 amount) {
     Shop* shop = gGameStatusPtr->mapShop;
     s32 shopMsgID = shop->owner->shopMsgIDs[messageIndex];
-    s32 phi_a0;
+    u8* suffixMsg;
     Evt* script;
 
     set_message_value(amount, 0);
 
     if (amount == 1) {
-        phi_a0 = &MessageSingular;
+        suffixMsg = MessageSingular;
     } else {
-        phi_a0 = &MessagePlural;
+        suffixMsg = MessagePlural;
     }
 
-    set_message_msg(phi_a0, 1);
+    set_message_msg((s32) suffixMsg, 1);
 
     script = start_script(&ShopContinueSpeech, EVT_PRIORITY_1, 0);
     script->varTable[0] = shopMsgID;
@@ -252,6 +244,11 @@ ApiStatus ShowShopPurchaseDialog(Evt* script, s32 isInitialCall) {
     s32 bpCost;
     s32 args;
 
+    static MessagePrintState* D_80286528;
+    static Evt* D_8028652C;
+    static s32 D_80286530;
+    static s32 D_80286534;
+
     shop->flags &= ~SHOP_FLAGS_1;
     func_800E9900();
     if (isInitialCall) {
@@ -273,7 +270,7 @@ ApiStatus ShowShopPurchaseDialog(Evt* script, s32 isInitialCall) {
             if (!does_script_exist(script->functionTemp[1])) {
                 script->functionTemp[0] = 100;
                 script->functionTemp[2] = 0;
-                D_80286528 = msg_get_printer_for_msg(0x1E0001, &script->functionTemp[2]);
+                D_80286528 = msg_get_printer_for_msg(MESSAGE_ID(0x1E, 0x01), &script->functionTemp[2]);
             }
             break;
         case 100:
@@ -470,161 +467,187 @@ ApiStatus ShowShopOwnerDialog(Evt* script, s32 isInitialCall) {
     GameStatus* gameStatus = gGameStatusPtr;
     PlayerData* playerData = &gPlayerData;
     Shop* shop = gameStatus->mapShop;
-    ItemData* item;
-    s32 temp_v1_2;
+
+    static MessagePrintState* D_80286538;
+
+    enum {
+        DIALOG_STATE_0      = 0,
+        DIALOG_STATE_10     = 10,
+        DIALOG_STATE_12     = 12,
+        DIALOG_STATE_2      = 2,
+        DIALOG_STATE_21     = 21,
+        DIALOG_STATE_201    = 201,
+        DIALOG_STATE_3      = 3,
+        DIALOG_STATE_31     = 31,
+        DIALOG_STATE_32     = 32,
+        DIALOG_STATE_4      = 4,
+        DIALOG_STATE_41     = 41,
+        DIALOG_STATE_42     = 42,
+        DIALOG_STATE_9      = 9,
+        DIALOG_STATE_5      = 5,
+        DIALOG_STATE_51     = 51,
+        DIALOG_STATE_52     = 52,
+        DIALOG_STATE_53     = 53,
+        DIALOG_STATE_501    = 501,
+        DIALOG_STATE_7      = 7,
+        DIALOG_STATE_71     = 71,
+        DIALOG_STATE_72     = 72,
+        DIALOG_STATE_73     = 73,
+        DIALOG_STATE_701    = 701,
+    };
 
     if (isInitialCall) {
         script->functionTemp[1] = shop_owner_begin_speech(4);
-        script->functionTemp[0] = 4;
+        script->functionTemp[0] = DIALOG_STATE_4;
     }
 
     switch (script->functionTemp[0]) {
-        case 4:
+        case DIALOG_STATE_4:
             if (!does_script_exist(script->functionTemp[1])) {
-                script->functionTemp[0] = 41;
+                script->functionTemp[0] = DIALOG_STATE_41;
                 script->functionTemp[2] = 0;
-                D_80286538 = msg_get_printer_for_msg(0x1E0003, &script->functionTemp[2]);
+                D_80286538 = msg_get_printer_for_msg(MESSAGE_ID(0x1E, 0x3), &script->functionTemp[2]);
             }
             break;
-        case 41:
+        case DIALOG_STATE_41:
             if (script->functionTemp[2] == 1) {
                 switch (D_80286538->currentOption) {
                     case 0:
                         script->functionTemp[1] = shop_owner_continue_speech(5);
-                        script->functionTemp[0] = 0;
+                        script->functionTemp[0] = DIALOG_STATE_0;
                         break;
                     case 1:
                         if (get_item_count() == 0) {
                             script->functionTemp[1] = shop_owner_continue_speech(6);
-                            script->functionTemp[0] = 9;
+                            script->functionTemp[0] = DIALOG_STATE_9;
                         } else {
                             script->functionTemp[1] = shop_owner_continue_speech(7);
-                            script->functionTemp[0] = 201;
+                            script->functionTemp[0] = DIALOG_STATE_201;
                         }
                         break;
                     case 2:
                         if (get_item_count() == 0) {
                             script->functionTemp[1] = shop_owner_continue_speech(12);
-                            script->functionTemp[0] = 9;
+                            script->functionTemp[0] = DIALOG_STATE_9;
                             break;
                         }
                         if (get_stored_empty_count() == 0) {
                             script->functionTemp[1] = shop_owner_continue_speech(13);
-                            script->functionTemp[0] = 9;
+                            script->functionTemp[0] = DIALOG_STATE_9;
                             break;
                         }
                         script->functionTemp[1] = shop_owner_continue_speech_with_quantity(14, get_stored_empty_count());
-                        script->functionTemp[0] = 501;
+                        script->functionTemp[0] = DIALOG_STATE_501;
                         break;
                     case 3:
                         if (get_stored_count() == 0) {
                             script->functionTemp[1] = shop_owner_continue_speech(17);
-                            script->functionTemp[0] = 9;
+                            script->functionTemp[0] = DIALOG_STATE_9;
                             break;
                         }
                         if (get_item_empty_count() == 0) {
                             script->functionTemp[1] = shop_owner_continue_speech(18);
-                            script->functionTemp[0] = 9;
+                            script->functionTemp[0] = DIALOG_STATE_9;
                             break;
                         }
                         script->functionTemp[1] = shop_owner_continue_speech(19);
-                        script->functionTemp[0] = 701;
+                        script->functionTemp[0] = DIALOG_STATE_701;
                         break;
                     default:
                         script->functionTemp[1] = shop_owner_end_speech();
-                        script->functionTemp[0] = 42;
+                        script->functionTemp[0] = DIALOG_STATE_42;
                         break;
                 }
             }
             break;
-        case 201:
+        case DIALOG_STATE_201:
             if (!does_script_exist(script->functionTemp[1])) {
                 shop_open_item_select_popup(0);
                 script->functionTemp[0] = 2;
             }
             break;
-        case 2:
+        case DIALOG_STATE_2:
             if (shop_update_item_select_popup(&shop->selectedStoreItemSlot) == 1) {
                 script->functionTemp[0] = 21;
                 script->functionTemp[1] = 15;
             }
             break;
-        case 21:
+        case DIALOG_STATE_21:
             if (script->functionTemp[1] <= 0) {
                 shop_close_item_select_popup();
                 if (shop->selectedStoreItemSlot >= 0) {
-                    item = &gItemTable[playerData->invItems[shop->selectedStoreItemSlot]];
-                    script->functionTemp[1] = shop_owner_buy_dialog(8, item->nameMsg, shop_get_sell_price(playerData->invItems[shop->selectedStoreItemSlot]), -1);
+                    ItemData* itemData = &gItemTable[playerData->invItems[shop->selectedStoreItemSlot]];
+                    script->functionTemp[1] = shop_owner_buy_dialog(8, itemData->nameMsg, shop_get_sell_price(playerData->invItems[shop->selectedStoreItemSlot]), -1);
                     show_coin_counter();
-                    script->functionTemp[0] = 3;
+                    script->functionTemp[0] = DIALOG_STATE_3;
                 } else {
                     script->functionTemp[1] = shop_owner_begin_speech(22);
-                    script->functionTemp[0] = 9;
+                    script->functionTemp[0] = DIALOG_STATE_9;
                 }
             } else {
                 script->functionTemp[1]--;
             }
             break;
-        case 3:
+        case DIALOG_STATE_3:
             if (!does_script_exist(script->functionTemp[1])) {
-                script->functionTemp[0] = 31;
+                script->functionTemp[0] = DIALOG_STATE_31;
                 script->functionTemp[2] = 0;
                 D_80286538 = msg_get_printer_for_msg(0x1E0002, &script->functionTemp[2]);
             }
             break;
-        case 31:
+        case DIALOG_STATE_31:
             if (script->functionTemp[2] == 1) {
                 if (D_80286538->currentOption == 0) {
                     add_coins(shop_get_sell_price(playerData->invItems[shop->selectedStoreItemSlot]));
                     playerData->invItems[shop->selectedStoreItemSlot] = 0;
                     if (get_item_count() == 0) {
                         script->functionTemp[1] = shop_owner_reset_speech(11);
-                        script->functionTemp[0] = 9;
+                        script->functionTemp[0] = DIALOG_STATE_9;
                         hide_coin_counter();
                     } else {
                         script->functionTemp[1] = shop_owner_reset_speech(10);
-                        script->functionTemp[0] = 32;
+                        script->functionTemp[0] = DIALOG_STATE_32;
                     }
                 } else {
                     script->functionTemp[1] = shop_owner_reset_speech(9);
-                    script->functionTemp[0] = 32;
+                    script->functionTemp[0] = DIALOG_STATE_32;
                     hide_coin_counter();
                 }
             }
             break;
-        case 32:
+        case DIALOG_STATE_32:
             if (!does_script_exist(script->functionTemp[1])) {
-                script->functionTemp[0] = 12;
+                script->functionTemp[0] = DIALOG_STATE_12;
                 script->functionTemp[2] = 0;
                 D_80286538 = msg_get_printer_for_msg(0x1E0004, &script->functionTemp[2]);
             }
             break;
-        case 12:
+        case DIALOG_STATE_12:
             if (script->functionTemp[2] == 1) {
                 if (D_80286538->currentOption == 0) {
                     script->functionTemp[1] = shop_owner_end_speech();
-                    script->functionTemp[0] = 201;
+                    script->functionTemp[0] = DIALOG_STATE_201;
                     hide_coin_counter_immediately();
                 } else {
                     hide_coin_counter_immediately();
                     script->functionTemp[1] = shop_owner_reset_speech(22);
-                    script->functionTemp[0] = 9;
+                    script->functionTemp[0] = DIALOG_STATE_9;
                 }
             }
             break;
-        case 501:
+        case DIALOG_STATE_501:
             if (does_script_exist(script->functionTemp[1]) == 0) {
                 shop_open_item_select_popup(1);
-                script->functionTemp[0] = 5;
+                script->functionTemp[0] = DIALOG_STATE_5;
             }
             break;
-        case 5:
+        case DIALOG_STATE_5:
             if (shop_update_item_select_popup(&shop->selectedStoreItemSlot) == 1) {
-                script->functionTemp[0] = 51;
+                script->functionTemp[0] = DIALOG_STATE_51;
                 script->functionTemp[1] = 15;
             }
             break;
-        case 51:
+        case DIALOG_STATE_51:
             if (script->functionTemp[1] <= 0) {
                 shop_close_item_select_popup();
                 if (shop->selectedStoreItemSlot >= 0) {
@@ -634,50 +657,50 @@ ApiStatus ShowShopOwnerDialog(Evt* script, s32 isInitialCall) {
 
                     if ((get_item_count() == 0) || (get_stored_empty_count() == 0)) {
                         script->functionTemp[1] = shop_owner_begin_speech(15);
-                        script->functionTemp[0] = 9;
+                        script->functionTemp[0] = DIALOG_STATE_9;
                     } else {
                         script->functionTemp[1] = shop_owner_begin_speech(16);
-                        script->functionTemp[0] = 52;
+                        script->functionTemp[0] = DIALOG_STATE_52;
                     }
                 } else {
                     script->functionTemp[1] = shop_owner_begin_speech(22);
-                    script->functionTemp[0] = 9;
+                    script->functionTemp[0] = DIALOG_STATE_9;
                 }
             } else {
                 script->functionTemp[1]--;
             }
             break;
-        case 52:
+        case DIALOG_STATE_52:
             if (!does_script_exist(script->functionTemp[1])) {
-                script->functionTemp[0] = 53;
+                script->functionTemp[0] = DIALOG_STATE_53;
                 script->functionTemp[2] = 0;
                 D_80286538 = msg_get_printer_for_msg(0x1E0005, &script->functionTemp[2]);
             }
             break;
-        case 53:
+        case DIALOG_STATE_53:
             if (script->functionTemp[2] == 1) {
                 if (D_80286538->currentOption == 0) {
                     script->functionTemp[1] = shop_owner_end_speech();
-                    script->functionTemp[0] = 501;
+                    script->functionTemp[0] = DIALOG_STATE_501;
                 } else {
                     script->functionTemp[1] = shop_owner_reset_speech(22);
-                    script->functionTemp[0] = 9;
+                    script->functionTemp[0] = DIALOG_STATE_9;
                 }
             }
             break;
-        case 701:
+        case DIALOG_STATE_701:
             if (!does_script_exist(script->functionTemp[1])) {
                 shop_open_item_select_popup(2);
-                script->functionTemp[0] = 7;
+                script->functionTemp[0] = DIALOG_STATE_7;
             }
             break;
-        case 7:
+        case DIALOG_STATE_7:
             if (shop_update_item_select_popup(&shop->selectedStoreItemSlot) == 1) {
-                script->functionTemp[0] = 71;
+                script->functionTemp[0] = DIALOG_STATE_71;
                 script->functionTemp[1] = 15;
             }
             break;
-        case 71:
+        case DIALOG_STATE_71:
             if (script->functionTemp[1] > 0) {
                 script->functionTemp[1]--;
             } else {
@@ -689,44 +712,44 @@ ApiStatus ShowShopOwnerDialog(Evt* script, s32 isInitialCall) {
 
                     if (get_item_empty_count() == 0 || get_stored_count() == 0) {
                         script->functionTemp[1] = shop_owner_begin_speech(20);
-                        script->functionTemp[0] = 9;
+                        script->functionTemp[0] = DIALOG_STATE_9;
                     } else {
                         script->functionTemp[1] = shop_owner_begin_speech(21);
-                        script->functionTemp[0] = 72;
+                        script->functionTemp[0] = DIALOG_STATE_72;
                     }
                 } else {
                     script->functionTemp[1] = shop_owner_begin_speech(22);
-                    script->functionTemp[0] = 9;
+                    script->functionTemp[0] = DIALOG_STATE_9;
                 }
             }
             break;
-        case 72:
+        case DIALOG_STATE_72:
             if (!does_script_exist(script->functionTemp[1])) {
-                script->functionTemp[0] = 73;
+                script->functionTemp[0] = DIALOG_STATE_73;
                 script->functionTemp[2] = 0;
                 D_80286538 = msg_get_printer_for_msg(0x1E0005, &script->functionTemp[2]);
             }
             break;
-        case 73:
+        case DIALOG_STATE_73:
             if (script->functionTemp[2] == 1) {
                 if (D_80286538->currentOption == 0) {
                     script->functionTemp[1] = shop_owner_end_speech();
-                    script->functionTemp[0] = 701;
+                    script->functionTemp[0] = DIALOG_STATE_701;
                 } else {
                     script->functionTemp[1] = shop_owner_reset_speech(22);
-                    script->functionTemp[0] = 9;
+                    script->functionTemp[0] = DIALOG_STATE_9;
                 }
             }
             break;
-        case 0:
-        case 9:
-        case 42:
+        case DIALOG_STATE_0:
+        case DIALOG_STATE_9:
+        case DIALOG_STATE_42:
             if (!does_script_exist(script->functionTemp[1])) {
-                script->functionTemp[0] = 0;
-                script->functionTemp[0] = 10;
+                script->functionTemp[0] = DIALOG_STATE_0;
+                script->functionTemp[0] = DIALOG_STATE_10;
             }
             break;
-        case 10:
+        case DIALOG_STATE_10:
             if (shop->owner != NULL) {
                 if (shop->owner->onTalkEvt != 0) {
                     start_script(shop->owner->onTalkEvt, EVT_PRIORITY_1, 0);

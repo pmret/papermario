@@ -162,8 +162,8 @@ extern s32 D_800A0924;
 extern s8 D_800A0921;
 extern s16 D_800A0922;
 extern s32 wMapTexName;
-extern char* wMapHitName;
-extern s32 wMapShapeName;
+extern char wMapHitName[];
+extern char wMapShapeName[];
 extern struct ModelNode* D_80210000;
 extern u8 D_802D9D70; // player alpha1 copy?
 extern u8 D_802D9D71; // player alpha2 copy?
@@ -203,13 +203,10 @@ extern f32 D_8010C990;
 extern s32 D_8010C978;
 extern Vec3s btl_actorHomePositions[];
 
-
 extern SaveData gCurrentSaveFile;
 
 extern u32* gMapFlags;
 extern s32* gMapVars;
-
-extern f32 D_80286540;
 
 extern u32 gWorldMapVars[MAX_MAPVARS];
 extern u32 gBattleMapVars[MAX_MAPVARS];
