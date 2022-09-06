@@ -1430,7 +1430,7 @@ typedef struct PushBlockGrid {
     /* 0x04 */ u8 numCellsX;
     /* 0x05 */ u8 numCellsZ;
     /* 0x06 */ char unk_06[2];
-    /* 0x08 */ s32 centerPos[3];
+    /* 0x08 */ Vec3i centerPos;
     /* 0x14 */ PushBlockFallCallback(dropCallback);
     /* 0x18 */ char unk_18[4];
 } PushBlockGrid; // size = 0x1C
