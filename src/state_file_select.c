@@ -258,7 +258,7 @@ void state_step_exit_language_select(void) {
                 D_800A0930--;
                 if (D_800A0930 == 0) {
                     MapSettings* mapSettings;
-                    Map* map;
+                    MapConfig* mapConfig;
                     u32 mapShapeSize;
                     void* mapShape;
                     BackgroundHeader* bgHeader;
@@ -268,7 +268,7 @@ void state_step_exit_language_select(void) {
                     filemenu_cleanup();
                     gOverrideFlags &= ~GLOBAL_OVERRIDES_8;
                     mapSettings = get_current_map_settings();
-                    map = &gAreas[gGameStatusPtr->areaID].maps[gGameStatusPtr->mapID];
+                    mapConfig = &gAreas[gGameStatusPtr->areaID].maps[gGameStatusPtr->mapID];
                     gGameStatusPtr->isBattle = FALSE;
                     func_8005AF84();
                     func_8002ACDC();
@@ -292,11 +292,11 @@ void state_step_exit_language_select(void) {
                     initialize_collision();
                     restore_map_collision_data();
 
-                    if (map->dmaStart != NULL) {
-                        dma_copy(map->dmaStart, map->dmaEnd, map->dmaDest);
+                    if (mapConfig->dmaStart != NULL) {
+                        dma_copy(mapConfig->dmaStart, mapConfig->dmaEnd, mapConfig->dmaDest);
                     }
 
-                    load_map_bg(map->bgName);
+                    load_map_bg(mapConfig->bgName);
 
                     bgHeader = mapSettings->background;
                     if (bgHeader != NULL) {

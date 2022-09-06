@@ -129,7 +129,7 @@ void state_step_unpause(void) {
                 if (D_800A0920 == 0) {
                     if (D_800A0920 == 0) {
                         MapSettings* mapSettings;
-                        Map* map;
+                        MapConfig* mapConfig;
                         s32 assetData;
                         s32 assetSize;
 
@@ -138,7 +138,7 @@ void state_step_unpause(void) {
                         pause_cleanup();
                         gOverrideFlags &= ~GLOBAL_OVERRIDES_8;
                         mapSettings = get_current_map_settings();
-                        map = &gAreas[gGameStatusPtr->areaID].maps[gGameStatusPtr->mapID];
+                        mapConfig = &gAreas[gGameStatusPtr->areaID].maps[gGameStatusPtr->mapID];
                         gGameStatusPtr->isBattle = FALSE;
                         gGameStatusPtr->backgroundFlags &= ~0xF0;
                         func_8005AF84();
@@ -167,11 +167,11 @@ void state_step_unpause(void) {
                         initialize_collision();
                         restore_map_collision_data();
 
-                        if (map->dmaStart != NULL) {
-                            dma_copy(map->dmaStart, map->dmaEnd, map->dmaDest);
+                        if (mapConfig->dmaStart != NULL) {
+                            dma_copy(mapConfig->dmaStart, mapConfig->dmaEnd, mapConfig->dmaDest);
                         }
 
-                        load_map_bg(map->bgName);
+                        load_map_bg(mapConfig->bgName);
                         if (mapSettings->background != NULL) {
                             read_background_size(mapSettings->background);
                         } else {

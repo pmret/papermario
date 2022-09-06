@@ -35,7 +35,7 @@ typedef struct MapSettings {
 typedef s32(*MapInit)(void);
 
 #define MAP_ID_MAX_LEN 7 ///< "xxx_yyy" excluding null terminator.
-typedef struct Map {
+typedef struct MapConfig {
     /* 0x00 */ char* id; ///< @see MAP_ID_MAX_LEN
     /* 0x04 */ MapSettings* settings;
     /* 0x08 */ void* dmaStart;
@@ -51,18 +51,18 @@ typedef struct Map {
             s8 flags;
         } bytes;
     } unk_1C;
-} Map; // size = 0x20
+} MapConfig; // size = 0x20
 
-typedef struct Area {
+typedef struct AreaConfig {
     /* 0x00 */ s32 mapCount;
-    /* 0x04 */ Map* maps;
+    /* 0x04 */ MapConfig* maps;
     /* 0x08 */ char* id; ///< "area_xxx"
     /* 0x0C */ char* name; ///< JP debug name.
-} Area; // size = 0x10
+} AreaConfig; // size = 0x10
 
 MapSettings* get_current_map_settings(void);
 
 /// Zero-terminated.
-extern Area gAreas[29];
+extern AreaConfig gAreas[29];
 
 #endif

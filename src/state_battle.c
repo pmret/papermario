@@ -119,7 +119,7 @@ void state_step_end_battle(void) {
         D_800A0900--;
         if (D_800A0900 == 0) {
             MapSettings* mapSettings;
-            Map* map;
+            MapConfig* mapConfig;
 
             D_800A0900 = -1;
             nuGfxSetCfb(D_800778A0, 3);
@@ -127,7 +127,7 @@ void state_step_end_battle(void) {
             nuContRmbForceStopEnd();
             sfx_stop_env_sounds();
             mapSettings = get_current_map_settings();
-            map = &gAreas[gGameStatusPtr->areaID].maps[gGameStatusPtr->mapID];
+            mapConfig = &gAreas[gGameStatusPtr->areaID].maps[gGameStatusPtr->mapID];
             btl_restore_world_cameras(gGameStatusPtr);
             gGameStatusPtr->isBattle = FALSE;
             func_8005AF84();
@@ -165,11 +165,11 @@ void state_step_end_battle(void) {
                 initialize_collision();
                 restore_map_collision_data();
 
-                if (map->dmaStart != NULL) {
-                    dma_copy(map->dmaStart, map->dmaEnd, map->dmaDest);
+                if (mapConfig->dmaStart != NULL) {
+                    dma_copy(mapConfig->dmaStart, mapConfig->dmaEnd, mapConfig->dmaDest);
                 }
 
-                load_map_bg(map->bgName);
+                load_map_bg(mapConfig->bgName);
                 if (mapSettings->background != NULL) {
                     read_background_size(mapSettings->background);
                 } else {
