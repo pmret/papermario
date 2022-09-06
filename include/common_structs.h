@@ -535,7 +535,7 @@ typedef struct Entity {
     /* 0x28 */ EvtScript* boundScriptBytecode;
     /* 0x2C */ s32* savedReadPos[3];
     /* 0x38 */ EntityBlueprint* blueprint;
-    /* 0x3C */ void (*renderSetupFunc)(s32);
+    /* 0x3C */ void (*renderSetupFunc)(void*);
     /* 0x40 */ EntityData dataBuf;
     /* 0x44 */ void* gfxBaseAddr;
     /* 0x48 */ Vec3f position;

@@ -4,6 +4,7 @@
 #include "stdlib/stdarg.h"
 #include "entity.h"
 #include "hud_element.h"
+#include "effects.h"
 
 typedef struct GameMode {
     /* 0x00 */ u16 flags;
@@ -998,7 +999,6 @@ s32 mdl_renderTaskBasePriorities[RENDER_MODE_COUNT] = {
     [RENDER_MODE_CLOUD_NO_ZB]               =  700000,
 };
 
-
 s8 D_8014C248[] = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, };
 
 // BSS
@@ -1099,7 +1099,9 @@ void func_80117D00(Model* model);
 void appendGfx_model_group(Model* model);
 void render_transform_group_node(ModelNode* node);
 void render_transform_group(ModelTransformGroup* group);
+void func_801180E8(TextureHeader*, void**, u8* raster, u16* palette, u8* auxRaster, u16* auxPalette, s32, s32, s32, s32);
 void load_model_transforms(ModelNode* model, ModelNode* parent, Matrix4f mdlTxMtx, s32 treeDepth);
+s32 is_identity_fixed_mtx(Mtx* mtx);
 
 void update_entities(void) {
     s32 i;
@@ -1408,13 +1410,13 @@ void render_entities(void) {
                     if (D_8014AFB0 == 0xFF) {
                         if (entity->renderSetupFunc != NULL) {
                             bind_entity_model_setupGfx(entity->virtualModelIndex,
-                                                       entity->listIndex,
+                                                       (void*)(u32)entity->listIndex,
                                                        entity->renderSetupFunc);
                         } else {
                             get_entity_model(entity->virtualModelIndex)->fpSetupGfxCallback = NULL;
                         }
                     } else {
-                        bind_entity_model_setupGfx(entity->virtualModelIndex, entity->listIndex, func_8010FE44);
+                        bind_entity_model_setupGfx(entity->virtualModelIndex, (void*)(u32)entity->listIndex, func_8010FE44);
                     }
 
                     if (entity->gfxBaseAddr == NULL) {
@@ -1464,7 +1466,7 @@ void render_shadows(void) {
                     }
                 }
 
-                bind_entity_model_setupGfx(shadow->entityModelID, (void*)shadow->alpha, entity_model_set_shadow_color);
+                bind_entity_model_setupGfx(shadow->entityModelID, (void*)(u32)shadow->alpha, entity_model_set_shadow_color);
 
                 if (shadow->vertexArray == NULL) {
                     draw_entity_model_A(shadow->entityModelID, &shadow->transformMatrix);
@@ -3187,8 +3189,118 @@ void calculate_model_sizes(void) {
     }
 }
 
-void mdl_create_model(ModelBlueprint* bp, s32 arg1);
-INCLUDE_ASM(s32, "a5dd0_len_114e0", mdl_create_model);
+void mdl_create_model(ModelBlueprint* bp, s32 arg1) {
+    EffectInstance* effect;
+    ModelNode* node = bp->mdlNode;
+    ModelNodeProperty* prop;
+    ModelBoundingBox* bb;
+    s32 modelIdx;
+    Model* model;
+    f32 x, y, z;
+
+    prop = get_model_property(node, MODEL_PROP_KEY_SPECIAL);
+    modelIdx = 0;
+    if (prop != NULL) {
+        s32 temp_s1 = (u8) prop->data.s / 16;
+
+        if (temp_s1 != 0) {
+            prop = get_model_property(node, MODEL_PROP_KEY_BOUNDING_BOX);
+            if (prop != NULL) {
+                ModelBoundingBox* bb = (ModelBoundingBox*) prop;
+
+                fx_flame(
+                    temp_s1 - 1, (bb->minX + bb->maxX) * 0.5f, bb->minY, (bb->minZ + bb->maxZ) * 0.5f, 1.0f, &effect
+                );
+                return;
+            }
+        }
+    }
+
+    for (modelIdx = 0; modelIdx < ARRAY_COUNT(*gCurrentModels); modelIdx++) {
+        if ((*gCurrentModels)[modelIdx] == NULL) {
+            break;
+        }
+    }
+
+    (*gCurrentModels)[modelIdx] = model = heap_malloc(sizeof(*model));
+    model->flags = bp->flags | 1;
+    model->modelID = D_80153226;
+    model->modelNode = bp->mdlNode;
+    model->groupData = bp->groupData;
+    model->matrixMode = 0;
+    node = model->modelNode;
+    prop = get_model_property(node, MODEL_PROP_KEY_SPECIAL);
+    if (prop != NULL) {
+        model->texPannerID = prop->data.s & 0xF;
+    } else {
+        model->texPannerID = 0;
+    }
+    model->customGfxIndex = 0;
+
+    if (node->type != SHAPE_TYPE_GROUP) {
+        prop = get_model_property(node, MODEL_PROP_KEY_RENDER_MODE);
+    } else {
+        prop = get_model_property(node, MODEL_PROP_KEY_GROUP_TYPE);
+
+        if (prop != NULL) {
+            prop = &prop[1];
+        }
+    }
+
+    if (prop != NULL) {
+        model->renderMode = prop->data.s;
+    } else {
+        model->renderMode = 1;
+    }
+
+    model->textureID = (*mdl_currentModelTreeNodeInfo)[mdl_treeIterPos].textureID;
+    model->textureVariation = 0;
+
+    if (!is_identity_fixed_mtx(bp->mtx)) {
+        model->currentMatrix = heap_malloc(sizeof(*model->currentMatrix));
+        *model->currentMatrix = *bp->mtx;
+        model->specialMatrix = *model->currentMatrix;
+    } else {
+        model->currentMatrix = NULL;
+        guMtxIdent(&model->specialMatrix);
+        model->flags |= 0x2000;
+    }
+
+    guMtxIdentF(model->transformMatrix);
+    model->currentSpecialMatrix = NULL;
+    prop = get_model_property(node, MODEL_PROP_KEY_BOUNDING_BOX);
+    if (prop != NULL) {
+        ModelBoundingBox* bb = (ModelBoundingBox*) prop;
+
+        x = (bb->minX + bb->maxX) * 0.5f;
+        y = (bb->minY + bb->maxY) * 0.5f;
+        z = (bb->minZ + bb->maxZ) * 0.5f;
+    } else {
+        x = y = z = 0.0f;
+    }
+
+    if (model->currentMatrix != NULL) {
+        guMtxXFML(model->currentMatrix, x, y, z, &x, &y, &z);
+    }
+
+    model->center.x = x;
+    model->center.y = y;
+    model->center.z = z;
+
+
+    bb = (ModelBoundingBox*) prop;
+    x = bb->maxX - bb->minX;
+    y = bb->maxY - bb->minY;
+    z = bb->maxZ - bb->minZ;
+    bb->halfSizeX = x * 0.5;
+    bb->halfSizeY = y * 0.5;
+    bb->halfSizeZ = z * 0.5;
+
+    if (model->currentMatrix == NULL && x < 100.0f && y < 100.0f && z < 100.0f) {
+        model->flags |= 0x200;
+    }
+    (*mdl_currentModelTreeNodeInfo)[mdl_treeIterPos].modelIndex = modelIdx;
+}
 
 // The global here is getting optimized out because nothing is happening to it. Very weird
 #ifdef NON_EQUIVALENT
@@ -4070,7 +4182,8 @@ void build_custom_gfx(void) {
 
 // weird temps necessary to match
 /// @returns TRUE if mtx is NULL or identity.
-s32 is_identity_fixed_mtx(Matrix4s* mtx) {
+// TODO takes a Matrix4f, not a Matrix4s - types being weird
+s32 is_identity_fixed_mtx(Mtx* mtx) {
     s32* mtxIt = (s32*)mtx;
     s32* identityIt;
     s32 i;
@@ -4255,7 +4368,7 @@ void mdl_draw_hidden_panel_surface(Gfx** arg0, u16 treeIndex) {
     oldGfxPos = gMasterGfxPos;
     gMasterGfxPos = *arg0;
 
-    copied.flags = 0x80 | 0x1;
+    copied.flags = MODEL_FLAGS_HAS_LOCAL_VERTEX_COPY | MODEL_FLAGS_FLAG_1;
     appendGfx_model(&copied);
 
     *arg0 = gMasterGfxPos;
@@ -4265,13 +4378,13 @@ void mdl_draw_hidden_panel_surface(Gfx** arg0, u16 treeIndex) {
     }
 }
 
-s32 mdl_get_next_texture_address(s32 size) {
+void* mdl_get_next_texture_address(s32 size) {
     u32 offset = mdl_nextTextureAddress - mdl_textureBaseAddress + 0x3F;
 
     offset = (offset >> 6) << 6;
 
     if (size + offset > 0x28000) {
-        return 0;
+        return NULL;
     } else {
         return mdl_textureBaseAddress + offset;
     }

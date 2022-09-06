@@ -803,7 +803,7 @@ void mdl_get_copied_vertices(s32 copyIndex, Vtx** firstVertex, Vtx** copiedVerti
 void mdl_draw_hidden_panel_surface(Gfx** arg0, u16 treeIndex);
 s32 func_8011CFBC(void);
 void set_screen_overlay_center_worldpos(s32 idx, s32 posIdx, s32 x, s32 y, s32 z);
-s32 mdl_get_next_texture_address(s32);
+void* mdl_get_next_texture_address(s32);
 void draw_msg(s32 msgID, s32 posX, s32 posY, s32 opacity, s32 palette, u8 style);
 void get_background_color_blend(u8* r, u8* g, u8* b, u8* a);
 
