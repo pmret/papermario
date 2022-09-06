@@ -105,11 +105,11 @@ EvtScript N(main) = {
     EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
     EVT_CALL(SetCamLeadPlayer, 0, 0)
     EVT_CALL(SetCamEnabled, 0, 1)
-    EVT_SET(EVT_SAVE_FLAG(1979), 1)
+    EVT_SET(GF_MAP_WindyMill, 1)
     EVT_IF_GE(GB_StoryProgress, -12)
-        EVT_SET(EVT_SAVE_FLAG(1016), 0)
-        EVT_SET(EVT_SAVE_FLAG(1017), 0)
-        EVT_SET(EVT_SAVE_FLAG(1018), 0)
+        EVT_SET(GF_ARN10_Defeated_Goomba, 0)
+        EVT_SET(GF_ARN12_Defeated_Goomba, 0)
+        EVT_SET(GF_ARN13_Defeated_Goomba, 0)
     EVT_END_IF
     EVT_CALL(MakeNpcs, 0, EVT_PTR(N(npcGroupList_80241828)))
     EVT_EXEC_WAIT(N(makeEntities))
@@ -243,10 +243,10 @@ EvtScript N(80240CC0) = {
     EVT_WAIT_FRAMES(12)
     EVT_CALL(DemoSetButtons, 0)
     EVT_WAIT_FRAMES(20)
-    EVT_IF_EQ(EVT_SAVE_FLAG(9), 1)
+    EVT_IF_EQ(GF_DemoSceneDone, 1)
         EVT_RETURN
     EVT_END_IF
-    EVT_SET(EVT_SAVE_FLAG(9), 1)
+    EVT_SET(GF_DemoSceneDone, 1)
     EVT_CALL(GotoMapSpecial, EVT_PTR("arn_08"), 2, 2)
     EVT_WAIT_FRAMES(100)
     EVT_RETURN
@@ -262,10 +262,10 @@ EvtScript N(802410AC) = {
         EVT_END_IF
         EVT_WAIT_FRAMES(1)
     EVT_END_LOOP
-    EVT_IF_EQ(EVT_SAVE_FLAG(9), 1)
+    EVT_IF_EQ(GF_DemoSceneDone, 1)
         EVT_RETURN
     EVT_END_IF
-    EVT_SET(EVT_SAVE_FLAG(9), 1)
+    EVT_SET(GF_DemoSceneDone, 1)
     EVT_CALL(GotoMapSpecial, EVT_PTR("arn_08"), 2, 3)
     EVT_WAIT_FRAMES(35)
     EVT_RETURN
@@ -285,7 +285,7 @@ s32 N(D_80241188_BF5928) = {
 EvtScript N(8024118C) = {
     EVT_CALL(SetCamProperties, 0, EVT_FIXED(90.0), 0, 0, 0, EVT_FIXED(470.0), EVT_FIXED(17.0), EVT_FIXED(-7.0))
     EVT_CALL(N(func_8024019C_BF493C))
-    EVT_SET(EVT_SAVE_FLAG(9), 0)
+    EVT_SET(GF_DemoSceneDone, 0)
     EVT_EXEC(N(802410AC))
     EVT_EXEC(N(80240CC0))
     EVT_RETURN

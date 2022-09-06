@@ -353,7 +353,7 @@ EvtScript N(main) = {
     EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
     EVT_CALL(SetCamLeadPlayer, 0, 0)
     EVT_CALL(SetCamEnabled, 0, 1)
-    EVT_SET(EVT_SAVE_FLAG(1977), 1)
+    EVT_SET(GF_MAP_GustyGulch, 1)
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(-26)
             EVT_CALL(MakeNpcs, 0, EVT_PTR(N(npcGroupList_802478B8)))

@@ -119,9 +119,9 @@ static s32 N(pad_78C) = {
 
 EvtScript N(makeEntities) = {
     EVT_CALL(MakeEntity, EVT_PTR(Entity_YellowBlock), -230, 0, 155, 0, 152, MAKE_ENTITY_END)
-    EVT_CALL(AssignBlockFlag, EVT_SAVE_FLAG(797))
+    EVT_CALL(AssignBlockFlag, GF_SBK00_ItemBlock_FrightJar)
     EVT_CALL(MakeEntity, EVT_PTR(Entity_YellowBlock), 160, 0, 205, 0, 343, MAKE_ENTITY_END)
-    EVT_CALL(AssignBlockFlag, EVT_SAVE_FLAG(798))
+    EVT_CALL(AssignBlockFlag, GF_SBK00_ItemBlock_Coin)
     EVT_RETURN
     EVT_END
 };

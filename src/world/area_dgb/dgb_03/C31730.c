@@ -195,7 +195,7 @@ EvtScript N(main) = {
     EVT_BIND_TRIGGER(N(exitDoubleDoor_802429C4), TRIGGER_WALL_PRESS_A, 21, 1, 0)
     EVT_BIND_TRIGGER(N(exitDoubleDoor_80242A78), TRIGGER_WALL_PRESS_A, 13, 1, 0)
     EVT_BIND_TRIGGER(N(exitSingleDoor_80242B88), TRIGGER_WALL_PRESS_A, 33, 1, 0)
-    EVT_IF_EQ(EVT_SAVE_FLAG(1043), 0)
+    EVT_IF_EQ(GF_DGB03_UnlockedThirdFloor, 0)
         EVT_BIND_PADLOCK(N(80243740), TRIGGER_WALL_PRESS_A, EVT_ENTITY_INDEX(0), EVT_PTR(N(itemList_80242F28)), 0, 1)
     EVT_ELSE
         EVT_BIND_TRIGGER(N(exitDoubleDoor_80242C3C), TRIGGER_WALL_PRESS_A, 17, 1, 0)
@@ -280,7 +280,7 @@ EvtScript N(802430E0) = {
 };
 
 EvtScript N(80243470) = {
-    EVT_IF_NE(EVT_SAVE_FLAG(1044), 0)
+    EVT_IF_NE(GF_DGB03_PushedClock, 0)
         EVT_GOTO(90)
     EVT_END_IF
     EVT_SET(EVT_VAR(6), 0)
@@ -290,8 +290,8 @@ EvtScript N(80243470) = {
     EVT_EXEC_WAIT(N(802430E0))
     EVT_LABEL(90)
     EVT_IF_NE(EVT_VAR(8), -1)
-        EVT_SET(EVT_SAVE_FLAG(1045), 0)
-        EVT_SET(EVT_SAVE_FLAG(1044), 1)
+        EVT_SET(GF_DGB03_PushedClockLeft, 0)
+        EVT_SET(GF_DGB03_PushedClock, 1)
         EVT_UNBIND
     EVT_END_IF
     EVT_RETURN
@@ -299,7 +299,7 @@ EvtScript N(80243470) = {
 };
 
 EvtScript N(8024353C) = {
-    EVT_IF_NE(EVT_SAVE_FLAG(1044), 0)
+    EVT_IF_NE(GF_DGB03_PushedClock, 0)
         EVT_GOTO(90)
     EVT_END_IF
     EVT_SET(EVT_VAR(6), 0)
@@ -309,8 +309,8 @@ EvtScript N(8024353C) = {
     EVT_EXEC_WAIT(N(802430E0))
     EVT_LABEL(90)
     EVT_IF_NE(EVT_VAR(8), -1)
-        EVT_SET(EVT_SAVE_FLAG(1045), 1)
-        EVT_SET(EVT_SAVE_FLAG(1044), 1)
+        EVT_SET(GF_DGB03_PushedClockLeft, 1)
+        EVT_SET(GF_DGB03_PushedClock, 1)
         EVT_UNBIND
     EVT_END_IF
     EVT_RETURN
@@ -321,11 +321,11 @@ EvtScript N(80243608) = {
     EVT_CALL(ParentColliderToModel, 27, 51)
     EVT_CALL(ParentColliderToModel, 28, 51)
     EVT_CALL(ParentColliderToModel, 29, 51)
-    EVT_IF_EQ(EVT_SAVE_FLAG(1044), 0)
+    EVT_IF_EQ(GF_DGB03_PushedClock, 0)
         EVT_BIND_TRIGGER(N(80243470), TRIGGER_WALL_PUSH, 27, 1, 0)
         EVT_BIND_TRIGGER(N(8024353C), TRIGGER_WALL_PUSH, 28, 1, 0)
     EVT_ELSE
-        EVT_IF_EQ(EVT_SAVE_FLAG(1045), 0)
+        EVT_IF_EQ(GF_DGB03_PushedClockLeft, 0)
             EVT_SET(EVT_VAR(0), 48)
         EVT_ELSE
             EVT_SET(EVT_VAR(0), -48)
@@ -361,7 +361,7 @@ EvtScript N(80243740) = {
     EVT_CALL(FindKeyItem, ITEM_TUBBA_CASTLE_KEY, EVT_VAR(0))
     EVT_CALL(RemoveKeyItemAt, EVT_VAR(0))
     EVT_CALL(CloseChoicePopup)
-    EVT_SET(EVT_SAVE_FLAG(1043), 1)
+    EVT_SET(GF_DGB03_UnlockedThirdFloor, 1)
     EVT_CALL(N(GetEntityPosition), EVT_MAP_VAR(0), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_CALL(PlaySoundAt, 0x269, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_SET(EVT_VAR(0), EVT_MAP_VAR(0))
@@ -379,12 +379,12 @@ EvtScript N(802438A8) = {
 };
 
 EvtScript N(makeEntities) = {
-    EVT_IF_EQ(EVT_SAVE_FLAG(1043), 0)
+    EVT_IF_EQ(GF_DGB03_UnlockedThirdFloor, 0)
         EVT_CALL(MakeEntity, EVT_PTR(Entity_Padlock), -355, 218, 75, 80, MAKE_ENTITY_END)
         EVT_CALL(AssignScript, EVT_PTR(N(802438A8)))
         EVT_SET(EVT_MAP_VAR(0), EVT_VAR(0))
     EVT_END_IF
-    EVT_CALL(MakeItemEntity, ITEM_STAR_PIECE, 0, 75, 100, 17, EVT_SAVE_FLAG(1042))
+    EVT_CALL(MakeItemEntity, ITEM_STAR_PIECE, 0, 75, 100, 17, GF_DGB03_Item_StarPiece)
     EVT_RETURN
     EVT_END
 };

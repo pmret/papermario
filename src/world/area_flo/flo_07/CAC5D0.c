@@ -296,10 +296,10 @@ EvtScript N(80241DBC) = {
     EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_SUB(EVT_VAR(0), EVT_VAR(2))
     EVT_IF_LT(EVT_VAR(0), -250)
-        EVT_CALL(MakeItemEntity, ITEM_CRYSTAL_BERRY, -225, 100, -25, 13, EVT_SAVE_FLAG(1374))
+        EVT_CALL(MakeItemEntity, ITEM_CRYSTAL_BERRY, -225, 100, -25, 13, GF_FLO07_Item_CrystalBerry)
     EVT_ELSE
-        EVT_CALL(MakeItemEntity, ITEM_CRYSTAL_BERRY, -265, 100, 54, 13, EVT_SAVE_FLAG(1374))
-        EVT_SET(EVT_SAVE_FLAG(1396), 1)
+        EVT_CALL(MakeItemEntity, ITEM_CRYSTAL_BERRY, -265, 100, 54, 13, GF_FLO07_Item_CrystalBerry)
+        EVT_SET(GF_FLO07_CrystalBerryFellOnLeftSide, 1)
     EVT_END_IF
     EVT_CALL(PlaySound, 0x7BC)
     EVT_CALL(func_802D62E4, 956)
@@ -334,12 +334,12 @@ EvtScript N(interact_80242044) = {
             EVT_CALL(AddKeyItem, ITEM_FERTILE_SOIL)
             EVT_SET(GB_StoryProgress, 46)
             EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_posie_Palette_00_Anim_2, NPC_ANIM_posie_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x0066))
-            EVT_IF_EQ(EVT_SAVE_FLAG(1379), 1)
+            EVT_IF_EQ(GF_FLO12_RosieRequestedSomethingBeautiful, 1)
                 EVT_EXEC_WAIT(N(80241DBC))
             EVT_END_IF
             EVT_CALL(ResetCam, 0, EVT_FIXED(4.0))
         EVT_CASE_LT(47)
-            EVT_IF_EQ(EVT_SAVE_FLAG(1379), 1)
+            EVT_IF_EQ(GF_FLO12_RosieRequestedSomethingBeautiful, 1)
                 EVT_IF_EQ(EVT_AREA_FLAG(6), 0)
                     EVT_CALL(AdjustCam, 0, EVT_FIXED(4.0), 0, EVT_FIXED(350.0), EVT_FIXED(18.0), EVT_FIXED(-7.5))
                     EVT_EXEC_WAIT(N(80241DBC))
@@ -351,7 +351,7 @@ EvtScript N(interact_80242044) = {
                 EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_posie_Palette_00_Anim_2, NPC_ANIM_posie_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x0072))
             EVT_END_IF
         EVT_CASE_LT(53)
-            EVT_IF_EQ(EVT_SAVE_FLAG(1374), 0)
+            EVT_IF_EQ(GF_FLO07_Item_CrystalBerry, 0)
                 EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_posie_Palette_00_Anim_2, NPC_ANIM_posie_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x0072))
             EVT_ELSE
                 EVT_IF_LT(GB_StoryProgress, 48)
@@ -373,11 +373,11 @@ EvtScript N(interact_80242044) = {
 
 EvtScript N(init_80242428) = {
     EVT_IF_EQ(GB_StoryProgress, 47)
-        EVT_IF_EQ(EVT_SAVE_FLAG(1374), 0)
-            EVT_IF_EQ(EVT_SAVE_FLAG(1396), 0)
-                EVT_CALL(MakeItemEntity, ITEM_CRYSTAL_BERRY, -225, 0, -25, 17, EVT_SAVE_FLAG(1374))
+        EVT_IF_EQ(GF_FLO07_Item_CrystalBerry, 0)
+            EVT_IF_EQ(GF_FLO07_CrystalBerryFellOnLeftSide, 0)
+                EVT_CALL(MakeItemEntity, ITEM_CRYSTAL_BERRY, -225, 0, -25, 17, GF_FLO07_Item_CrystalBerry)
             EVT_ELSE
-                EVT_CALL(MakeItemEntity, ITEM_CRYSTAL_BERRY, -265, 0, 54, 17, EVT_SAVE_FLAG(1374))
+                EVT_CALL(MakeItemEntity, ITEM_CRYSTAL_BERRY, -265, 0, 54, 17, GF_FLO07_Item_CrystalBerry)
             EVT_END_IF
         EVT_END_IF
     EVT_END_IF
@@ -415,7 +415,7 @@ EvtScript N(tree1_Callback) = {
         EVT_WAIT_FRAMES(10)
         EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_posie_Palette_00_Anim_4, NPC_ANIM_posie_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x0067))
         EVT_IF_EQ(GB_StoryProgress, 46)
-            EVT_IF_EQ(EVT_SAVE_FLAG(1379), 1)
+            EVT_IF_EQ(GF_FLO12_RosieRequestedSomethingBeautiful, 1)
                 EVT_CALL(UseSettingsFrom, 0, -250, 0, 0)
                 EVT_CALL(SetPanTarget, 0, -250, 0, 0)
                 EVT_CALL(SetCamDistance, 0, 350)
@@ -425,7 +425,7 @@ EvtScript N(tree1_Callback) = {
             EVT_END_IF
         EVT_END_IF
     EVT_ELSE
-        EVT_IF_EQ(EVT_SAVE_FLAG(1374), 0)
+        EVT_IF_EQ(GF_FLO07_Item_CrystalBerry, 0)
             EVT_CALL(NpcFacePlayer, 0, 1)
             EVT_WAIT_FRAMES(10)
             EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_posie_Palette_00_Anim_4, NPC_ANIM_posie_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x0067))

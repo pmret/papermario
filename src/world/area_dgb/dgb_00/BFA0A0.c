@@ -112,7 +112,7 @@ EvtScript N(enterDoubleDoor_8024038C) = {
 
 EvtScript N(main) = {
     EVT_SET(GB_WorldLocation, 15)
-    EVT_SET(EVT_SAVE_FLAG(1978), 1)
+    EVT_SET(GF_MAP_TubbasManor, 1)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
     EVT_CALL(SetCamBGColor, 0, 0, 0, 0)

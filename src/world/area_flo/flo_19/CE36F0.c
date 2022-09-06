@@ -68,7 +68,7 @@ static s32 N(pad_ABC) = {
 };
 
 EvtScript N(80240AC0) = {
-    EVT_CALL(MakeItemEntity, ITEM_S_JUMP_CHG, -200, 160, -213, 17, EVT_SAVE_FLAG(1391))
+    EVT_CALL(MakeItemEntity, ITEM_S_JUMP_CHG, -200, 160, -213, 17, GF_FLO19_Item_SJumpChg)
     EVT_RETURN
     EVT_END
 };
@@ -109,7 +109,7 @@ EvtScript N(main) = {
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
     EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
     EVT_CALL(SetCamEnabled, 0, 1)
-    EVT_SET(EVT_SAVE_FLAG(1985), 1)
+    EVT_SET(GF_MAP_CloudyClimb, 1)
     EVT_EXEC_WAIT(N(80240AC0))
     EVT_CALL(ParentColliderToModel, 12, 86)
     EVT_CALL(HidePlayerShadow, TRUE)

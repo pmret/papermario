@@ -310,10 +310,10 @@ EvtScript N(80241028) = {
         EVT_CASE_EQ(158)
             EVT_EXEC_WAIT(N(80240E84))
             EVT_CALL(RemoveItemAt, EVT_VAR(1))
-            EVT_IF_EQ(EVT_SAVE_FLAG(1395), 0)
+            EVT_IF_EQ(GF_FLO22_ThrewBlueBerryDownWell, 0)
                 EVT_CALL(ShowMessageAtWorldPos, MESSAGE_ID(0x11, 0x00DD), 35, 35, 0)
-                EVT_SET(EVT_SAVE_FLAG(1395), 1)
-                EVT_CALL(MakeItemEntity, ITEM_FLOWER_SAVER_B, -35, 0, 0, 0, EVT_SAVE_FLAG(1392))
+                EVT_SET(GF_FLO22_ThrewBlueBerryDownWell, 1)
+                EVT_CALL(MakeItemEntity, ITEM_FLOWER_SAVER_B, -35, 0, 0, 0, GF_FLO22_Item_FlowerSaverB)
                 EVT_SET(EVT_VAR(7), EVT_VAR(0))
                 EVT_CALL(SetNpcFlagBits, 0, ((NPC_FLAG_2)), TRUE)
                 EVT_CALL(SetNpcFlagBits, 0, ((NPC_FLAG_HAS_SHADOW)), FALSE)
@@ -370,8 +370,8 @@ EvtScript N(80241028) = {
 
 EvtScript N(80241528) = {
     EVT_BIND_PADLOCK(N(80241028), TRIGGER_WALL_PRESS_A, 9, EVT_PTR(N(itemList_80240E10)), 0, 1)
-    EVT_IF_EQ(EVT_SAVE_FLAG(1395), 1)
-        EVT_CALL(MakeItemEntity, ITEM_FLOWER_SAVER_B, -83, 0, 0, 0, EVT_SAVE_FLAG(1392))
+    EVT_IF_EQ(GF_FLO22_ThrewBlueBerryDownWell, 1)
+        EVT_CALL(MakeItemEntity, ITEM_FLOWER_SAVER_B, -83, 0, 0, 0, GF_FLO22_Item_FlowerSaverB)
     EVT_END_IF
     EVT_RETURN
     EVT_END

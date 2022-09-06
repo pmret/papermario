@@ -138,7 +138,7 @@ EvtScript N(8024062C) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(SetZoneEnabled, 5, 0)
     EVT_IF_EQ(EVT_AREA_FLAG(2), 0)
-        EVT_IF_EQ(EVT_SAVE_FLAG(1054), 0)
+        EVT_IF_EQ(GF_DGB10_BoardedFloor3, 0)
             EVT_CALL(DisablePlayerPhysics, TRUE)
             EVT_CALL(SetPlayerActionState, 3)
             EVT_WAIT_FRAMES(1)
@@ -207,7 +207,7 @@ EvtScript N(8024062C) = {
 };
 
 EvtScript N(makeEntities) = {
-    EVT_CALL(MakeItemEntity, ITEM_D_DOWN_JUMP, 250, 75, -100, 17, EVT_SAVE_FLAG(1055))
+    EVT_CALL(MakeItemEntity, ITEM_D_DOWN_JUMP, 250, 75, -100, 17, GF_DGB11_Item_DDownJump)
     EVT_CALL(MakeEntity, EVT_PTR(Entity_ScriptSpring), 375, 0, -250, 0, MAKE_ENTITY_END)
     EVT_CALL(AssignScript, EVT_PTR(N(8024062C)))
     EVT_SET(EVT_MAP_VAR(0), EVT_VAR(0))

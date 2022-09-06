@@ -239,7 +239,7 @@ static s32 N(pad_36FC) = {
 };
 
 #define SUPER_BLOCK_MAPVAR EVT_MAP_VAR(0)
-#define SUPER_BLOCK_GAMEFLAG EVT_SAVE_FLAG(1403)
+#define SUPER_BLOCK_GAMEFLAG GF_FLO16_SuperBlock
 #include "world/common/atomic/SuperBlockData.inc.c"
 
 EvtScript N(80243D48) = {
@@ -277,7 +277,7 @@ EvtScript N(80243E80) = {
         EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
         EVT_SWITCH(EVT_VAR(0))
             EVT_CASE_RANGE(620, 660)
-                EVT_CALL(MakeItemEntity, ITEM_STAR_PIECE, 640, 145, -100, 13, EVT_SAVE_FLAG(1388))
+                EVT_CALL(MakeItemEntity, ITEM_STAR_PIECE, 640, 145, -100, 13, GF_FLO16_Item_StarPiece)
                 EVT_SET(EVT_AREA_FLAG(39), 1)
         EVT_END_SWITCH
     EVT_END_IF

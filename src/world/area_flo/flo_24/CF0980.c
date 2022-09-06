@@ -410,11 +410,11 @@ static s32 N(pad_21A4)[] = {
 
 EvtScript N(makeEntities) = {
     EVT_CALL(MakeEntity, EVT_PTR(Entity_YellowBlock), -325, 60, -140, 0, 154, MAKE_ENTITY_END)
-    EVT_CALL(AssignBlockFlag, EVT_SAVE_FLAG(1393))
+    EVT_CALL(AssignBlockFlag, GF_FLO24_ItemBlock_DizzyDial)
     EVT_CALL(MakeEntity, EVT_PTR(Entity_HiddenYellowBlock), 325, 60, -140, 0, 163, MAKE_ENTITY_END)
-    EVT_CALL(AssignBlockFlag, EVT_SAVE_FLAG(1394))
+    EVT_CALL(AssignBlockFlag, GF_FLO24_HiddenItem_MapleSyrup)
     EVT_CALL(MakeEntity, &Entity_HiddenPanel, 335, 0, -160, 0, 8, MAKE_ENTITY_END)
-    EVT_CALL(AssignPanelFlag, EVT_SAVE_FLAG(1406))
+    EVT_CALL(AssignPanelFlag, GF_FLO24_HiddenPanel)
     EVT_RETURN
     EVT_END
 };

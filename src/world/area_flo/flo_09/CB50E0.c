@@ -306,9 +306,9 @@ EvtScript N(802431E4) = {
 };
 
 EvtScript N(tree1_Callback) = {
-    EVT_IF_EQ(EVT_SAVE_FLAG(1382), 0)
+    EVT_IF_EQ(GF_FLO09_Item_HappyFlowerB, 0)
         EVT_IF_EQ(EVT_AREA_VAR(5), 1)
-            EVT_CALL(MakeItemEntity, ITEM_HAPPY_FLOWER_B, -250, 100, 0, 13, EVT_SAVE_FLAG(1382))
+            EVT_CALL(MakeItemEntity, ITEM_HAPPY_FLOWER_B, -250, 100, 0, 13, GF_FLO09_Item_HappyFlowerB)
         EVT_ELSE
             EVT_SET(EVT_VAR(9), 14)
             EVT_EXEC(N(802431E4))
@@ -321,7 +321,7 @@ EvtScript N(tree1_Callback) = {
 };
 
 EvtScript N(tree2_Callback) = {
-    EVT_IF_EQ(EVT_SAVE_FLAG(1382), 0)
+    EVT_IF_EQ(GF_FLO09_Item_HappyFlowerB, 0)
         EVT_SET(EVT_AREA_VAR(4), 1)
         EVT_SET(EVT_AREA_VAR(5), 0)
     EVT_END_IF
@@ -330,7 +330,7 @@ EvtScript N(tree2_Callback) = {
 };
 
 EvtScript N(tree3_Callback) = {
-    EVT_IF_EQ(EVT_SAVE_FLAG(1382), 0)
+    EVT_IF_EQ(GF_FLO09_Item_HappyFlowerB, 0)
         EVT_IF_EQ(EVT_AREA_VAR(4), 1)
             EVT_IF_EQ(EVT_AREA_VAR(5), 0)
                 EVT_SET(EVT_AREA_VAR(5), 1)

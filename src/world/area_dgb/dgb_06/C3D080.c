@@ -74,7 +74,7 @@ EvtScript N(main) = {
     EVT_CALL(SetCamEnabled, 0, 1)
     EVT_CALL(MakeNpcs, 1, EVT_PTR(N(npcGroupList_80240B44)))
     EVT_EXEC_WAIT(N(makeEntities))
-    EVT_IF_EQ(EVT_SAVE_FLAG(1047), 0)
+    EVT_IF_EQ(GF_DGB05_BoardedFloor, 0)
         EVT_CALL(EnableGroup, 28, 0)
     EVT_ELSE
         EVT_CALL(EnableGroup, 25, 0)

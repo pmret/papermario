@@ -99,7 +99,7 @@ const s32 N(pad_XXXX)[] = { 0, 0 };
 EvtScript N(80241BE4) = {
     EVT_BIND_TRIGGER(N(exitDoubleDoor_802419C8), TRIGGER_WALL_PRESS_A, 19, 1, 0)
     EVT_BIND_TRIGGER(N(exitSingleDoor_80241B30), TRIGGER_WALL_PRESS_A, 6, 1, 0)
-    EVT_IF_EQ(EVT_SAVE_FLAG(1066), 0)
+    EVT_IF_EQ(GF_DGB15_UnlockedUpperFoyer, 0)
         EVT_BIND_PADLOCK(N(80242AD0), TRIGGER_WALL_PRESS_A, EVT_ENTITY_INDEX(0), EVT_PTR(N(itemList_802419C0)), 0, 1)
     EVT_ELSE
         EVT_BIND_TRIGGER(N(exitDoubleDoor_80241A7C), TRIGGER_WALL_PRESS_A, 10, 1, 0)
@@ -140,7 +140,7 @@ EvtScript N(main) = {
     EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
     EVT_CALL(SetCamEnabled, 0, 1)
     EVT_CALL(SetCamLeadPlayer, 0, 0)
-    EVT_IF_EQ(EVT_SAVE_FLAG(1068), 0)
+    EVT_IF_EQ(GF_DGB16_EscapedFromTubba, 0)
         EVT_CALL(MakeNpcs, 1, EVT_PTR(N(npcGroupList_80242AB0)))
     EVT_END_IF
     EVT_EXEC_WAIT(N(makeEntities))
@@ -236,7 +236,7 @@ EvtScript N(80242184) = {
         EVT_END_IF
         EVT_WAIT_FRAMES(1)
     EVT_END_LOOP
-    EVT_SET(EVT_SAVE_FLAG(1067), 1)
+    EVT_SET(GF_DGB15_CloseCallWithTubba, 1)
     EVT_SET(EVT_AREA_FLAG(1), 1)
     EVT_RETURN
     EVT_END
@@ -438,7 +438,7 @@ EvtScript N(80242AD0) = {
     EVT_CALL(FindKeyItem, ITEM_TUBBA_CASTLE_KEY, EVT_VAR(0))
     EVT_CALL(RemoveKeyItemAt, EVT_VAR(0))
     EVT_CALL(CloseChoicePopup)
-    EVT_SET(EVT_SAVE_FLAG(1066), 1)
+    EVT_SET(GF_DGB15_UnlockedUpperFoyer, 1)
     EVT_CALL(N(GetEntityPosition), EVT_MAP_VAR(0), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_CALL(PlaySoundAt, 0x269, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_SET(EVT_VAR(0), EVT_MAP_VAR(0))
@@ -456,7 +456,7 @@ EvtScript N(80242C38) = {
 };
 
 EvtScript N(makeEntities) = {
-    EVT_IF_EQ(EVT_SAVE_FLAG(1066), 0)
+    EVT_IF_EQ(GF_DGB15_UnlockedUpperFoyer, 0)
         EVT_CALL(MakeEntity, EVT_PTR(Entity_Padlock), 130, 8, 175, -80, MAKE_ENTITY_END)
         EVT_CALL(AssignScript, EVT_PTR(N(80242C38)))
         EVT_SET(EVT_MAP_VAR(0), EVT_VAR(0))

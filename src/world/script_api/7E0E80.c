@@ -287,7 +287,7 @@ ApiStatus ShowShopPurchaseDialog(Evt* script, s32 isInitialCall) {
                         playerData->coins = playerData->coins - shopInventory->price;
                         if ((shopInventory->itemID - 224) < 117) {
                             add_badge(shopInventory->itemID);
-                            evt_set_variable(NULL, EVT_SAVE_FLAG(368), 1);
+                            evt_set_variable(NULL, GF_MAC01_BoughtBadgeFromRowf, 1);
                         } else {
                             add_item(shopInventory->itemID);
                         }

@@ -50,8 +50,8 @@ ApiStatus N(Quizmo_ShowEntities)(Evt* script, s32 isInitialCall) {
 
 ApiStatus N(Quizmo_ShouldAppear)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
-    u16 hasLocation = evt_get_variable(script, EVT_SAVE_FLAG(1768));
-    u16 changedLocation = evt_get_variable(script, EVT_SAVE_FLAG(1769));
+    u16 hasLocation = evt_get_variable(script, GF_Quizmo_HasLocation);
+    u16 changedLocation = evt_get_variable(script, GF_Quizmo_ChangedLocation);
     u16 locTown = evt_get_variable(script, GB_ChuckQuizmo_Town);
     u16 locMap = evt_get_variable(script, GB_ChuckQuizmo_Map);
     s32 var;
@@ -80,8 +80,8 @@ ApiStatus N(Quizmo_ShouldAppear)(Evt* script, s32 isInitialCall) {
         }
     }
 
-    evt_set_variable(script, EVT_SAVE_FLAG(1768), hasLocation);
-    evt_set_variable(script, EVT_SAVE_FLAG(1769), changedLocation);
+    evt_set_variable(script, GF_Quizmo_HasLocation, hasLocation);
+    evt_set_variable(script, GF_Quizmo_ChangedLocation, changedLocation);
     numAnswered = evt_get_variable(NULL, GB_CompletedQuizzes);
     progress = evt_get_variable(NULL, GB_StoryProgress);
 

@@ -36,14 +36,14 @@ static s32 N(pad_12C4)[] = {
 };
 
 EvtScript N(makeEntities) = {
-    EVT_CALL(MakeItemEntity, ITEM_DIZZY_DIAL, -248, 193, 45, 17, EVT_SAVE_FLAG(1005))
-    EVT_CALL(MakeItemEntity, ITEM_LETTER07, 536, 260, 227, 17, EVT_SAVE_FLAG(1006))
+    EVT_CALL(MakeItemEntity, ITEM_DIZZY_DIAL, -248, 193, 45, 17, GF_ARN02_Item_DizzyDial)
+    EVT_CALL(MakeItemEntity, ITEM_LETTER07, 536, 260, 227, 17, GF_ARN02_Item_Letter07)
     EVT_CALL(MakeEntity, EVT_PTR(Entity_YellowBlock), -350, 172, 170, 0, 343, MAKE_ENTITY_END)
-    EVT_CALL(AssignBlockFlag, EVT_SAVE_FLAG(1002))
+    EVT_CALL(AssignBlockFlag, GF_ARN02_ItemBlock_CoinA)
     EVT_CALL(MakeEntity, EVT_PTR(Entity_YellowBlock), 225, 265, 30, 0, 343, MAKE_ENTITY_END)
-    EVT_CALL(AssignBlockFlag, EVT_SAVE_FLAG(1003))
+    EVT_CALL(AssignBlockFlag, GF_ARN02_ItemBlock_CoinB)
     EVT_CALL(MakeEntity, EVT_PTR(Entity_YellowBlock), 275, 265, 150, 0, 151, MAKE_ENTITY_END)
-    EVT_CALL(AssignBlockFlag, EVT_SAVE_FLAG(1004))
+    EVT_CALL(AssignBlockFlag, GF_ARN02_ItemBlock_RepelGel)
     EVT_RETURN
     EVT_END
 };

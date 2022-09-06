@@ -47,13 +47,13 @@ EvtScript N(80241F40) = {
 };
 
 #define SUPER_BLOCK_MAPVAR EVT_MAP_VAR(0)
-#define SUPER_BLOCK_GAMEFLAG EVT_SAVE_FLAG(1402)
+#define SUPER_BLOCK_GAMEFLAG GF_FLO08_SuperBlock
 #include "world/common/atomic/SuperBlockData.inc.c"
 
 EvtScript N(makeEntities) = {
     EVT_CALL(MakeEntity, EVT_PTR(Entity_SuperBlock), -780, 120, -110, 0, MAKE_ENTITY_END)
     EVT_SETUP_SUPER_BLOCK(SUPER_BLOCK_MAPVAR, SUPER_BLOCK_GAMEFLAG)
-    EVT_CALL(MakeItemEntity, ITEM_STAR_PIECE, 510, 0, -90, 17, EVT_SAVE_FLAG(1381))
+    EVT_CALL(MakeItemEntity, ITEM_STAR_PIECE, 510, 0, -90, 17, GF_FLO08_Item_StarPiece)
     EVT_RETURN
     EVT_END
 };
@@ -307,7 +307,7 @@ EvtScript N(802431C4) = {
 
 EvtScript N(interact_80243214) = {
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_IF_EQ(EVT_SAVE_FLAG(1364), 0)
+    EVT_IF_EQ(GF_FLO08_GaveYellowBerry, 0)
         EVT_CALL(GetNpcPos, NPC_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
         EVT_CALL(UseSettingsFrom, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
         EVT_CALL(SetPanTarget, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
@@ -362,7 +362,7 @@ EvtScript N(interact_80243214) = {
                             EVT_END_IF
                         EVT_END_LOOP
                         EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_gate_flower_Palette_02_Anim_5)
-                        EVT_SET(EVT_SAVE_FLAG(1364), 1)
+                        EVT_SET(GF_FLO08_GaveYellowBerry, 1)
                     EVT_CASE_EQ(159)
                         EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_gate_flower_Palette_02_Anim_4, NPC_ANIM_gate_flower_Palette_02_Anim_1, 0, MESSAGE_ID(0x11, 0x0045))
                         EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_gate_flower_Palette_02_Anim_1)
@@ -441,7 +441,7 @@ EvtScript N(interact_80243214) = {
 
 EvtScript N(init_80243B20) = {
     EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_80243214)))
-    EVT_IF_EQ(EVT_SAVE_FLAG(1364), 1)
+    EVT_IF_EQ(GF_FLO08_GaveYellowBerry, 1)
         EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_gate_flower_Palette_02_Anim_5)
         EVT_CALL(ModifyColliderFlags, 0, 17, 0x7FFFFE00)
         EVT_CALL(RotateModel, 103, 50, 0, 1, 0)

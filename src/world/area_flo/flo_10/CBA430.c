@@ -19,7 +19,7 @@ FoliageDropList N(tree1_Drops) = {
             .itemID = ITEM_JAMMIN_JELLY,
             .pos = { 80, 100, -240 },
             .spawnMode = 0xF,
-            .pickupFlag = EVT_SAVE_FLAG(1383),
+            .pickupFlag = GF_FLO10_Tree1_JamminJelly,
         },
     }
 };

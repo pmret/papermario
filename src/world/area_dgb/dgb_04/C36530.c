@@ -271,7 +271,7 @@ NpcGroupList N(npcGroupList_80243D18) = {
 };
 
 #define SUPER_BLOCK_MAPVAR EVT_MAP_VAR(0)
-#define SUPER_BLOCK_GAMEFLAG EVT_SAVE_FLAG(1046)
+#define SUPER_BLOCK_GAMEFLAG GF_DGB04_SuperBlock
 #include "world/common/atomic/SuperBlockData.inc.c"
 
 EvtScript N(makeEntities) = {

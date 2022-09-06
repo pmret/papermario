@@ -4,7 +4,7 @@
 // map-specific parameters for this data
 // which saved byte to associate this block with
 #ifndef SUPER_BLOCK_GAMEFLAG
-    #define SUPER_BLOCK_GAMEFLAG EVT_SAVE_FLAG(0)
+    #define SUPER_BLOCK_GAMEFLAG GF_Unused_EVT_00
 #endif
 // which map var to store
 #ifndef SUPER_BLOCK_MAPVAR
@@ -109,8 +109,8 @@ EvtScript N(SuperBlock_OnHit) = {
         EVT_CALL(N(SuperBlock_ClearOverride40))
         EVT_RETURN
     EVT_END_IF
-    EVT_IF_EQ(EVT_SAVE_FLAG(438), 0)
-        EVT_SET(EVT_SAVE_FLAG(438), 1)
+    EVT_IF_EQ(GF_Tutorial_SuperBlock, 0)
+        EVT_SET(GF_Tutorial_SuperBlock, 1)
         EVT_CALL(ShowMessageAtScreenPos, MESSAGE_ID(0x1D,0xDA), 160, 40)
     EVT_ELSE
         EVT_CALL(ShowMessageAtScreenPos, MESSAGE_ID(0x1D,0xDB), 160, 40)

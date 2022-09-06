@@ -202,7 +202,7 @@ NpcSettings N(npcSettings_80241538) = {
 
 EvtScript N(interact_80241564) = {
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_IF_EQ(EVT_SAVE_FLAG(1365), 0)
+    EVT_IF_EQ(GF_FLO23_GaveBlueBerry, 0)
         EVT_CALL(GetNpcPos, NPC_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
         EVT_CALL(UseSettingsFrom, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
         EVT_CALL(SetPanTarget, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
@@ -257,7 +257,7 @@ EvtScript N(interact_80241564) = {
                             EVT_END_IF
                         EVT_END_LOOP
                         EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_gate_flower_Palette_00_Anim_5)
-                        EVT_SET(EVT_SAVE_FLAG(1365), 1)
+                        EVT_SET(GF_FLO23_GaveBlueBerry, 1)
                     EVT_CASE_EQ(159)
                         EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_gate_flower_Palette_00_Anim_4, NPC_ANIM_gate_flower_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x004C))
                         EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_gate_flower_Palette_00_Anim_1)
@@ -336,7 +336,7 @@ EvtScript N(interact_80241564) = {
 
 EvtScript N(init_80241E70) = {
     EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_80241564)))
-    EVT_IF_EQ(EVT_SAVE_FLAG(1365), 1)
+    EVT_IF_EQ(GF_FLO23_GaveBlueBerry, 1)
         EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_gate_flower_Palette_00_Anim_5)
         EVT_CALL(ModifyColliderFlags, 0, 13, 0x7FFFFE00)
         EVT_CALL(RotateModel, 59, 50, 0, -1, 0)
@@ -457,9 +457,9 @@ static s32 N(pad_2598)[] = {
 EvtScript N(makeEntities) = {
     EVT_CALL(MakeEntity, EVT_PTR(Entity_BrickBlock), 100, 60, 5, 0, MAKE_ENTITY_END)
     EVT_CALL(MakeEntity, EVT_PTR(Entity_HiddenYellowBlock), 100, 145, 0, 0, 131, MAKE_ENTITY_END)
-    EVT_CALL(AssignBlockFlag, EVT_SAVE_FLAG(1409))
+    EVT_CALL(AssignBlockFlag, GF_FLO23_HiddenItem_ShootingStar)
     EVT_CALL(MakeEntity, EVT_PTR(Entity_HiddenYellowBlock), 25, 60, 0, 0, 343, MAKE_ENTITY_END)
-    EVT_CALL(AssignBlockFlag, EVT_SAVE_FLAG(1408))
+    EVT_CALL(AssignBlockFlag, GF_FLO23_HiddenItem_Coin)
     EVT_CALL(MakeEntity, EVT_PTR(Entity_SimpleSpring), -50, 0, 0, 90, 60, MAKE_ENTITY_END)
     EVT_RETURN
     EVT_END

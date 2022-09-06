@@ -452,11 +452,11 @@ EvtScript N(EVS_Quizmo_QuizMain) = {
     EVT_IF_EQ(GB_CompletedQuizzes, 63)
         EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_chuck_quizmo_Palette_00_Anim_4, NPC_ANIM_chuck_quizmo_Palette_00_Anim_1, 0, MESSAGE_ID(0x08, 0x000A))
     EVT_ELSE
-        EVT_IF_EQ(EVT_SAVE_FLAG(1767), 1)
+        EVT_IF_EQ(GF_Met_ChuckQuizmo, 1)
             EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_chuck_quizmo_Palette_00_Anim_4, NPC_ANIM_chuck_quizmo_Palette_00_Anim_1, 0, MESSAGE_ID(0x08, 0x0009))
         EVT_ELSE
             EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_chuck_quizmo_Palette_00_Anim_4, NPC_ANIM_chuck_quizmo_Palette_00_Anim_1, 0, MESSAGE_ID(0x08, 0x0008))
-            EVT_SET(EVT_SAVE_FLAG(1767), 1)
+            EVT_SET(GF_Met_ChuckQuizmo, 1)
         EVT_END_IF
     EVT_END_IF
     EVT_CALL(ShowChoice, MESSAGE_ID(0x1E, 0x000D))
@@ -466,7 +466,7 @@ EvtScript N(EVS_Quizmo_QuizMain) = {
         EVT_SET(EVT_VAR(0), 0)
         EVT_RETURN
     EVT_END_IF
-    EVT_SET(EVT_SAVE_FLAG(1793), 1)
+    EVT_SET(GF_Quizmo_TakingQuiz, 1)
     EVT_CALL(N(Quizmo_HideEntities))
     EVT_CALL(N(Quizmo_HideWorld))
     EVT_EXEC(N(EVS_Quizmo_SetQuizCamera))
@@ -639,7 +639,7 @@ EvtScript N(EVS_Quizmo_QuizMain) = {
     EVT_EXEC(N(EVS_Quizmo_ResetCamera))
     EVT_CALL(N(Quizmo_FadeInWorld))
     EVT_CALL(N(Quizmo_ShowEntities))
-    EVT_SET(EVT_SAVE_FLAG(1793), 0)
+    EVT_SET(GF_Quizmo_TakingQuiz, 0)
     EVT_RETURN
     EVT_END
 };
@@ -658,7 +658,7 @@ EvtScript N(EVS_Quizmo_NPC_OtherAI) = {
 
 EvtScript N(EVS_Quizmo_NPC_Interact) = {
     EVT_USE_ARRAY(EVT_PTR(N(Quizmo_ScriptArray)))
-    EVT_SET(EVT_SAVE_FLAG(1769), TRUE)
+    EVT_SET(GF_Quizmo_ChangedLocation, TRUE)
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(SetPlayerFlagBits, PLAYER_STATUS_FLAGS_400000, 1)
     EVT_EXEC_WAIT(N(EVS_Quizmo_QuizMain))

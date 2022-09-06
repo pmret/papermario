@@ -686,7 +686,7 @@ EvtScript N(8024374C) = {
 };
 
 EvtScript N(8024382C) = {
-    EVT_SET(EVT_SAVE_FLAG(1071), 1)
+    EVT_SET(GF_DGB18_Chest_MysticalKey, 1)
     EVT_CALL(AddKeyItem, ITEM_MYSTICAL_KEY)
     EVT_CALL(SetNpcVar, 1, 0, 1)
     EVT_RETURN
@@ -695,7 +695,7 @@ EvtScript N(8024382C) = {
 
 EvtScript N(makeEntities) = {
     EVT_CALL(MakeEntity, &Entity_Chest, 845, 0, 145, -35, 0, MAKE_ENTITY_END)
-    EVT_CALL(AssignChestFlag, EVT_SAVE_FLAG(1071))
+    EVT_CALL(AssignChestFlag, GF_DGB18_Chest_MysticalKey)
     EVT_CALL(AssignScript, EVT_PTR(N(8024382C)))
     EVT_RETURN
     EVT_END

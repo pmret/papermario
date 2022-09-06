@@ -35,7 +35,7 @@ EvtScript N(802406A0) = {
     EVT_ELSE
         EVT_SWITCH(GB_StoryProgress)
             EVT_CASE_LE(44)
-                EVT_IF_EQ(EVT_SAVE_FLAG(1411), 0)
+                EVT_IF_EQ(GF_FLO03_DefeatedAll_MontyMoles, 0)
                     EVT_CALL(SetMusicTrack, 0, SONG_MONTY_MOLE_ASSAULT, 0, 8)
                 EVT_ELSE
                     EVT_CALL(SetMusicTrack, 0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8)
@@ -52,7 +52,7 @@ EvtScript N(802406A0) = {
 
 EvtScript N(802407C0) = {
     EVT_IF_GE(GB_StoryProgress, 44)
-        EVT_IF_EQ(EVT_SAVE_FLAG(1411), 1)
+        EVT_IF_EQ(GF_FLO03_DefeatedAll_MontyMoles, 1)
             EVT_CALL(PushSong, 137, 0)
         EVT_END_IF
     EVT_END_IF
@@ -62,7 +62,7 @@ EvtScript N(802407C0) = {
 
 EvtScript N(80240814) = {
     EVT_IF_GE(GB_StoryProgress, 44)
-        EVT_IF_EQ(EVT_SAVE_FLAG(1411), 1)
+        EVT_IF_EQ(GF_FLO03_DefeatedAll_MontyMoles, 1)
             EVT_CALL(FadeOutMusic, 0, 250)
             EVT_WAIT_FRAMES(10)
             EVT_CALL(PopSong)
@@ -254,7 +254,7 @@ EvtScript N(defeat_802411B8) = {
     EVT_CALL(GetBattleOutcome, EVT_VAR(0))
     EVT_SWITCH(EVT_VAR(0))
         EVT_CASE_EQ(0)
-            EVT_SET(EVT_SAVE_FLAG(1366), 1)
+            EVT_SET(GF_FLO03_Defeated_Dayzee, 1)
             EVT_CALL(DoNpcDefeat)
         EVT_CASE_EQ(1)
         EVT_CASE_EQ(2)
@@ -371,7 +371,7 @@ EvtScript N(interact_802412BC) = {
             EVT_SET(EVT_MAP_VAR(15), 60)
             EVT_SET(GB_StoryProgress, 44)
         EVT_CASE_EQ(44)
-            EVT_IF_EQ(EVT_SAVE_FLAG(1411), 0)
+            EVT_IF_EQ(GF_FLO03_DefeatedAll_MontyMoles, 0)
                 EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_7, NPC_ANIM_petunia_Palette_00_Anim_6, 0, MESSAGE_ID(0x11, 0x0058))
                 EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_6)
             EVT_ELSE
@@ -411,7 +411,7 @@ EvtScript N(interact_802412BC) = {
 
 EvtScript N(init_80241DA4) = {
     EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_802412BC)))
-    EVT_IF_EQ(EVT_SAVE_FLAG(1411), 0)
+    EVT_IF_EQ(GF_FLO03_DefeatedAll_MontyMoles, 0)
         EVT_CALL(SetNpcAnimation, 0, NPC_ANIM_petunia_Palette_00_Anim_6)
     EVT_ELSE
         EVT_CALL(SetNpcAnimation, 0, NPC_ANIM_petunia_Palette_00_Anim_1)
@@ -427,7 +427,7 @@ EvtScript N(init_80241E10) = {
         EVT_CASE_LT(44)
             EVT_CALL(SetNpcPos, 1, 0, -1000, 0)
         EVT_CASE_DEFAULT
-            EVT_IF_EQ(EVT_SAVE_FLAG(1366), 0)
+            EVT_IF_EQ(GF_FLO03_Defeated_Dayzee, 0)
                 EVT_CALL(SetEnemyFlagBits, 1, 1, 0)
                 EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(npcAI_8024119C)))
             EVT_ELSE
@@ -456,24 +456,24 @@ EvtScript N(defeat_80241F64) = {
             EVT_CALL(GetSelfNpcID, EVT_VAR(0))
             EVT_SWITCH(EVT_VAR(0))
                 EVT_CASE_EQ(2)
-                    EVT_SET(EVT_SAVE_FLAG(1367), 1)
+                    EVT_SET(GF_FLO03_Defeated_MontyMoleA, 1)
                 EVT_CASE_EQ(3)
-                    EVT_SET(EVT_SAVE_FLAG(1368), 1)
+                    EVT_SET(GF_FLO03_Defeated_MontyMoleB, 1)
                 EVT_CASE_EQ(4)
-                    EVT_SET(EVT_SAVE_FLAG(1369), 1)
+                    EVT_SET(GF_FLO03_Defeated_MontyMoleC, 1)
                 EVT_CASE_EQ(5)
-                    EVT_SET(EVT_SAVE_FLAG(1370), 1)
+                    EVT_SET(GF_FLO03_Defeated_MontyMoleD, 1)
             EVT_END_SWITCH
             EVT_SET(EVT_VAR(0), 0)
-            EVT_ADD(EVT_VAR(0), EVT_SAVE_FLAG(1367))
-            EVT_ADD(EVT_VAR(0), EVT_SAVE_FLAG(1368))
-            EVT_ADD(EVT_VAR(0), EVT_SAVE_FLAG(1369))
-            EVT_ADD(EVT_VAR(0), EVT_SAVE_FLAG(1370))
+            EVT_ADD(EVT_VAR(0), GF_FLO03_Defeated_MontyMoleA)
+            EVT_ADD(EVT_VAR(0), GF_FLO03_Defeated_MontyMoleB)
+            EVT_ADD(EVT_VAR(0), GF_FLO03_Defeated_MontyMoleC)
+            EVT_ADD(EVT_VAR(0), GF_FLO03_Defeated_MontyMoleD)
             EVT_IF_NE(EVT_VAR(0), 4)
                 EVT_CALL(SetNpcAnimation, 0, NPC_ANIM_petunia_Palette_00_Anim_6)
             EVT_ELSE
                 EVT_CALL(SetNpcAnimation, 0, NPC_ANIM_petunia_Palette_00_Anim_1)
-                EVT_SET(EVT_SAVE_FLAG(1411), 1)
+                EVT_SET(GF_FLO03_DefeatedAll_MontyMoles, 1)
                 EVT_EXEC_WAIT(N(802406A0))
             EVT_END_IF
             EVT_CALL(DoNpcDefeat)
@@ -536,14 +536,14 @@ EvtScript N(idle_8024219C) = {
                 EVT_CALL(PlaySoundAtNpc, 2, SOUND_MOLE_DIG, 0)
                 EVT_CALL(SetNpcAnimation, 2, NPC_ANIM_monty_mole_Palette_01_Anim_11)
                 EVT_WAIT_FRAMES(20)
-                EVT_IF_EQ(EVT_SAVE_FLAG(1367), 0)
+                EVT_IF_EQ(GF_FLO03_Defeated_MontyMoleA, 0)
                     EVT_CALL(SetNpcPos, 2, 0, -50, 0)
                 EVT_END_IF
                 EVT_WAIT_FRAMES(45)
             EVT_END_IF
         EVT_ELSE
             EVT_IF_EQ(EVT_AREA_FLAG(23), 1)
-                EVT_IF_EQ(EVT_SAVE_FLAG(1367), 0)
+                EVT_IF_EQ(GF_FLO03_Defeated_MontyMoleA, 0)
                     EVT_CALL(RandInt, 2, EVT_VAR(0))
                     EVT_ADD(EVT_VAR(0), 1)
                     EVT_USE_BUF(EVT_PTR(N(intTable_80240F6C)))
@@ -614,14 +614,14 @@ EvtScript N(idle_80242618) = {
                 EVT_CALL(PlaySoundAtNpc, 3, SOUND_MOLE_DIG, 0)
                 EVT_CALL(SetNpcAnimation, 3, NPC_ANIM_monty_mole_Palette_01_Anim_11)
                 EVT_WAIT_FRAMES(20)
-                EVT_IF_EQ(EVT_SAVE_FLAG(1368), 0)
+                EVT_IF_EQ(GF_FLO03_Defeated_MontyMoleB, 0)
                     EVT_CALL(SetNpcPos, 3, 0, -50, 0)
                 EVT_END_IF
                 EVT_WAIT_FRAMES(45)
             EVT_END_IF
         EVT_ELSE
             EVT_IF_EQ(EVT_AREA_FLAG(24), 1)
-                EVT_IF_EQ(EVT_SAVE_FLAG(1368), 0)
+                EVT_IF_EQ(GF_FLO03_Defeated_MontyMoleB, 0)
                     EVT_CALL(RandInt, 2, EVT_VAR(0))
                     EVT_ADD(EVT_VAR(0), 1)
                     EVT_USE_BUF(EVT_PTR(N(intTable_80240F90)))
@@ -692,14 +692,14 @@ EvtScript N(idle_80242A94) = {
                 EVT_CALL(PlaySoundAtNpc, 4, SOUND_MOLE_DIG, 0)
                 EVT_CALL(SetNpcAnimation, 4, NPC_ANIM_monty_mole_Palette_01_Anim_11)
                 EVT_WAIT_FRAMES(20)
-                EVT_IF_EQ(EVT_SAVE_FLAG(1369), 0)
+                EVT_IF_EQ(GF_FLO03_Defeated_MontyMoleC, 0)
                     EVT_CALL(SetNpcPos, 4, 0, -50, 0)
                 EVT_END_IF
                 EVT_WAIT_FRAMES(45)
             EVT_END_IF
         EVT_ELSE
             EVT_IF_EQ(EVT_AREA_FLAG(25), 1)
-                EVT_IF_EQ(EVT_SAVE_FLAG(1369), 0)
+                EVT_IF_EQ(GF_FLO03_Defeated_MontyMoleC, 0)
                     EVT_CALL(RandInt, 2, EVT_VAR(0))
                     EVT_ADD(EVT_VAR(0), 1)
                     EVT_USE_BUF(EVT_PTR(N(intTable_80240FB4)))
@@ -770,14 +770,14 @@ EvtScript N(idle_80242F10) = {
                 EVT_CALL(PlaySoundAtNpc, 5, SOUND_MOLE_DIG, 0)
                 EVT_CALL(SetNpcAnimation, 5, NPC_ANIM_monty_mole_Palette_01_Anim_11)
                 EVT_WAIT_FRAMES(20)
-                EVT_IF_EQ(EVT_SAVE_FLAG(1370), 0)
+                EVT_IF_EQ(GF_FLO03_Defeated_MontyMoleD, 0)
                     EVT_CALL(SetNpcPos, 5, 0, -50, 0)
                 EVT_END_IF
                 EVT_WAIT_FRAMES(45)
             EVT_END_IF
         EVT_ELSE
             EVT_IF_EQ(EVT_AREA_FLAG(26), 1)
-                EVT_IF_EQ(EVT_SAVE_FLAG(1370), 0)
+                EVT_IF_EQ(GF_FLO03_Defeated_MontyMoleD, 0)
                     EVT_CALL(RandInt, 2, EVT_VAR(0))
                     EVT_ADD(EVT_VAR(0), 1)
                     EVT_USE_BUF(EVT_PTR(N(intTable_80240FD8)))
@@ -818,7 +818,7 @@ EvtScript N(init_8024338C) = {
             EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_8024219C)))
             EVT_CALL(SetNpcAnimation, 2, NPC_ANIM_monty_mole_Palette_01_Anim_10)
         EVT_CASE_EQ(44)
-            EVT_IF_EQ(EVT_SAVE_FLAG(1367), 0)
+            EVT_IF_EQ(GF_FLO03_Defeated_MontyMoleA, 0)
                 EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_8024219C)))
                 EVT_CALL(SetNpcAnimation, 2, NPC_ANIM_monty_mole_Palette_01_Anim_10)
                 EVT_CALL(SetEnemyFlagBits, 2, 1, 0)
@@ -841,7 +841,7 @@ EvtScript N(init_802434CC) = {
             EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80242618)))
             EVT_CALL(SetNpcAnimation, 3, NPC_ANIM_monty_mole_Palette_01_Anim_10)
         EVT_CASE_EQ(44)
-            EVT_IF_EQ(EVT_SAVE_FLAG(1368), 0)
+            EVT_IF_EQ(GF_FLO03_Defeated_MontyMoleB, 0)
                 EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80242618)))
                 EVT_CALL(SetNpcAnimation, 3, NPC_ANIM_monty_mole_Palette_01_Anim_10)
                 EVT_CALL(SetEnemyFlagBits, 3, 1, 0)
@@ -864,7 +864,7 @@ EvtScript N(init_8024360C) = {
             EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80242A94)))
             EVT_CALL(SetNpcAnimation, 4, NPC_ANIM_monty_mole_Palette_01_Anim_10)
         EVT_CASE_EQ(44)
-            EVT_IF_EQ(EVT_SAVE_FLAG(1369), 0)
+            EVT_IF_EQ(GF_FLO03_Defeated_MontyMoleC, 0)
                 EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80242A94)))
                 EVT_CALL(SetNpcAnimation, 4, NPC_ANIM_monty_mole_Palette_01_Anim_10)
                 EVT_CALL(SetEnemyFlagBits, 4, 1, 0)
@@ -887,7 +887,7 @@ EvtScript N(init_8024374C) = {
             EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80242F10)))
             EVT_CALL(SetNpcAnimation, 5, NPC_ANIM_monty_mole_Palette_01_Anim_10)
         EVT_CASE_EQ(44)
-            EVT_IF_EQ(EVT_SAVE_FLAG(1370), 0)
+            EVT_IF_EQ(GF_FLO03_Defeated_MontyMoleD, 0)
                 EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80242F10)))
                 EVT_CALL(SetNpcAnimation, 5, NPC_ANIM_monty_mole_Palette_01_Anim_10)
                 EVT_CALL(SetEnemyFlagBits, 5, 1, 0)
@@ -1208,7 +1208,7 @@ EvtScript N(80244ED0) = {
 
 EvtScript N(makeEntities) = {
     EVT_CALL(MakeEntity, &Entity_HiddenPanel, -175, 0, 150, 0, 8, MAKE_ENTITY_END)
-    EVT_CALL(AssignPanelFlag, EVT_SAVE_FLAG(1404))
+    EVT_CALL(AssignPanelFlag, GF_FLO03_HiddenPanel)
     EVT_RETURN
     EVT_END
 };

@@ -167,14 +167,14 @@ EvtScript N(80243E60) = {
         EVT_WAIT_FRAMES(1)
     EVT_END_LOOP
     EVT_CALL(ModifyColliderFlags, 0, 13, 0x7FFFFE00)
-    EVT_SET(EVT_SAVE_FLAG(1051), 1)
+    EVT_SET(GF_DGB09_BombedWall, 1)
     EVT_UNBIND
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(80243F6C) = {
-    EVT_IF_EQ(EVT_SAVE_FLAG(1051), 0)
+    EVT_IF_EQ(GF_DGB09_BombedWall, 0)
         EVT_BIND_TRIGGER(N(80243E60), TRIGGER_POINT_BOMB, EVT_PTR(N(triggerCoord_80243E50)), 1, 0)
         EVT_CALL(EnableModel, 29, 0)
     EVT_ELSE

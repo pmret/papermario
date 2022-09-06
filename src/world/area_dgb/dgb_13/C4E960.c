@@ -56,13 +56,13 @@ EvtScript N(main) = {
 };
 
 EvtScript N(80240270) = {
-    EVT_CALL(MakeItemEntity, ITEM_MEGA_RUSH, -910, 50, -206, 17, EVT_SAVE_FLAG(1058))
-    EVT_CALL(MakeItemEntity, ITEM_COIN, -530, 55, -190, 17, EVT_SAVE_FLAG(1059))
-    EVT_CALL(MakeItemEntity, ITEM_COIN, -510, 55, -175, 17, EVT_SAVE_FLAG(1060))
-    EVT_CALL(MakeItemEntity, ITEM_COIN, -510, 55, -205, 17, EVT_SAVE_FLAG(1061))
-    EVT_CALL(MakeItemEntity, ITEM_COIN, -490, 55, -160, 17, EVT_SAVE_FLAG(1062))
-    EVT_CALL(MakeItemEntity, ITEM_COIN, -490, 55, -190, 17, EVT_SAVE_FLAG(1063))
-    EVT_CALL(MakeItemEntity, ITEM_COIN, -490, 55, -220, 17, EVT_SAVE_FLAG(1064))
+    EVT_CALL(MakeItemEntity, ITEM_MEGA_RUSH, -910, 50, -206, 17, GF_DGB13_Item_MegaRush)
+    EVT_CALL(MakeItemEntity, ITEM_COIN, -530, 55, -190, 17, GF_DGB13_Item_CoinA)
+    EVT_CALL(MakeItemEntity, ITEM_COIN, -510, 55, -175, 17, GF_DGB13_Item_CoinB)
+    EVT_CALL(MakeItemEntity, ITEM_COIN, -510, 55, -205, 17, GF_DGB13_Item_CoinC)
+    EVT_CALL(MakeItemEntity, ITEM_COIN, -490, 55, -160, 17, GF_DGB13_Item_CoinD)
+    EVT_CALL(MakeItemEntity, ITEM_COIN, -490, 55, -190, 17, GF_DGB13_Item_CoinE)
+    EVT_CALL(MakeItemEntity, ITEM_COIN, -490, 55, -220, 17, GF_DGB13_Item_CoinF)
     EVT_RETURN
     EVT_END
 };

@@ -501,7 +501,7 @@ void load_demo_battle(u32 index) {
             break;
     }
 
-    evt_set_variable(NULL, EVT_SAVE_FLAG(1817), 1);
+    evt_set_variable(NULL, GF_Tutorial_SwapTurnOrder, 1);
     gCurrentEncounter.unk_07 = 0;
     gCurrentEncounter.unk_10 = 0;
     set_battle_stage(-1);

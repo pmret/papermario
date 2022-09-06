@@ -153,7 +153,7 @@ EvtScript N(idle_802404F8) = {
 };
 
 EvtScript N(defeat_802406F4) = {
-    EVT_SET(EVT_SAVE_FLAG(1016), 1)
+    EVT_SET(GF_ARN10_Defeated_Goomba, 1)
     EVT_CALL(DoNpcDefeat)
     EVT_RETURN
     EVT_END
@@ -170,7 +170,7 @@ EvtScript N(init_80240720) = {
 
 EvtScript N(init_8024076C) = {
     EVT_IF_LT(GB_StoryProgress, -12)
-        EVT_IF_EQ(EVT_SAVE_FLAG(1016), 1)
+        EVT_IF_EQ(GF_ARN10_Defeated_Goomba, 1)
             EVT_CALL(RemoveNpc, NPC_SELF)
             EVT_RETURN
         EVT_END_IF

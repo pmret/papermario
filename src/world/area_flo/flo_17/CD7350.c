@@ -620,8 +620,8 @@ static s32 N(pad_527C) = {
 
 EvtScript N(makeEntities) = {
     EVT_CALL(MakeEntity, EVT_PTR(Entity_HiddenYellowBlock), 660, 60, -115, 0, 130, MAKE_ENTITY_END)
-    EVT_CALL(AssignBlockFlag, EVT_SAVE_FLAG(1390))
-    EVT_CALL(MakeItemEntity, ITEM_LETTER09, -245, 0, 105, 17, EVT_SAVE_FLAG(1389))
+    EVT_CALL(AssignBlockFlag, GF_FLO17_HiddenItem_ThunderRage)
+    EVT_CALL(MakeItemEntity, ITEM_LETTER09, -245, 0, 105, 17, GF_FLO17_Item_Letter09)
     EVT_RETURN
     EVT_END
 };

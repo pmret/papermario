@@ -113,7 +113,7 @@ EvtScript N(interact_80244790) = {
         EVT_RETURN
     EVT_END_IF
     EVT_SET(EVT_AREA_FLAG(35), 1)
-    EVT_IF_EQ(EVT_SAVE_FLAG(1412), 0)
+    EVT_IF_EQ(GF_FLO14_GaveBerryToBubblePlant, 0)
         EVT_CALL(SpeakToPlayer, NPC_SELF, -1, -1, 0, MESSAGE_ID(0x11, 0x005F))
     EVT_ELSE
         EVT_CALL(SpeakToPlayer, NPC_SELF, -1, -1, 0, MESSAGE_ID(0x11, 0x0060))
@@ -148,7 +148,7 @@ EvtScript N(interact_80244790) = {
             EVT_END_IF
             EVT_CALL(ResetCam, 0, EVT_FIXED(4.0))
             EVT_CALL(SpeakToPlayer, NPC_SELF, -1, -1, 5, MESSAGE_ID(0x11, 0x0063))
-            EVT_SET(EVT_SAVE_FLAG(1412), 1)
+            EVT_SET(GF_FLO14_GaveBerryToBubblePlant, 1)
             EVT_BIND_TRIGGER(N(8024352C), TRIGGER_FLOOR_PRESS_A, 30, 1, 0)
         EVT_END_IF
     EVT_END_IF
@@ -245,7 +245,7 @@ static s32 N(pad_4F24)[] = {
 };
 
 EvtScript N(80244F30) = {
-    EVT_CALL(MakeItemEntity, ITEM_STAR_PIECE, 675, 60, -100, 17, EVT_SAVE_FLAG(1387))
+    EVT_CALL(MakeItemEntity, ITEM_STAR_PIECE, 675, 60, -100, 17, GF_FLO14_Item_StarPiece)
     EVT_RETURN
     EVT_END
 };

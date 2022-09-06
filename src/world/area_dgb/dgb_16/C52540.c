@@ -68,8 +68,8 @@ EvtScript N(enterSingleDoor_802415D4) = {
     EVT_CALL(GetEntryID, EVT_VAR(0))
     EVT_SWITCH(EVT_VAR(0))
         EVT_CASE_EQ(0)
-            EVT_IF_EQ(EVT_SAVE_FLAG(1068), 0)
-                EVT_SET(EVT_SAVE_FLAG(1068), 1)
+            EVT_IF_EQ(GF_DGB16_EscapedFromTubba, 0)
+                EVT_SET(GF_DGB16_EscapedFromTubba, 1)
                 EVT_SET(GB_ARN_Tubba_MapID, 18)
             EVT_END_IF
             EVT_SET(EVT_VAR(2), 16)
@@ -102,7 +102,7 @@ static s32 N(pad_1774)[] = {
 };
 
 EvtScript N(80241780) = {
-    EVT_CALL(MakeItemEntity, ITEM_TUBBA_CASTLE_KEY, -235, 25, -165, 17, EVT_SAVE_FLAG(1069))
+    EVT_CALL(MakeItemEntity, ITEM_TUBBA_CASTLE_KEY, -235, 25, -165, 17, GF_DGB16_Item_CastleKey1)
     EVT_RETURN
     EVT_END
 };

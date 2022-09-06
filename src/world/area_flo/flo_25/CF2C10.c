@@ -239,7 +239,7 @@ EvtScript N(80242C08) = {
 
 EvtScript N(interact_80242C58) = {
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_IF_EQ(EVT_SAVE_FLAG(1363), 0)
+    EVT_IF_EQ(GF_FLO25_GaveRedBerry, 0)
         EVT_CALL(GetNpcPos, NPC_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
         EVT_CALL(UseSettingsFrom, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
         EVT_CALL(SetPanTarget, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
@@ -294,7 +294,7 @@ EvtScript N(interact_80242C58) = {
                             EVT_END_IF
                         EVT_END_LOOP
                         EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_gate_flower_Palette_01_Anim_5)
-                        EVT_SET(EVT_SAVE_FLAG(1363), 1)
+                        EVT_SET(GF_FLO25_GaveRedBerry, 1)
                     EVT_CASE_EQ(160)
                         EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_gate_flower_Palette_01_Anim_4, NPC_ANIM_gate_flower_Palette_01_Anim_1, 0, MESSAGE_ID(0x11, 0x003E))
                         EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_gate_flower_Palette_01_Anim_1)
@@ -373,7 +373,7 @@ EvtScript N(interact_80242C58) = {
 
 EvtScript N(init_80243564) = {
     EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_80242C58)))
-    EVT_IF_EQ(EVT_SAVE_FLAG(1363), 1)
+    EVT_IF_EQ(GF_FLO25_GaveRedBerry, 1)
         EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_gate_flower_Palette_01_Anim_5)
         EVT_CALL(ModifyColliderFlags, 0, 14, 0x7FFFFE00)
         EVT_CALL(RotateModel, 86, 50, 0, -1, 0)
@@ -505,7 +505,7 @@ static s32 N(pad_3C8C) = {
 
 EvtScript N(makeEntities) = {
     EVT_CALL(MakeEntity, &Entity_HiddenPanel, -390, 0, 0, 0, 8, MAKE_ENTITY_END)
-    EVT_CALL(AssignPanelFlag, EVT_SAVE_FLAG(1407))
+    EVT_CALL(AssignPanelFlag, GF_FLO25_HiddenPanel)
     EVT_RETURN
     EVT_END
 };

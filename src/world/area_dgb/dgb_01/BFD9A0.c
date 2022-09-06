@@ -158,8 +158,8 @@ EvtScript N(enterDoubleDoor_80243A3C) = {
     EVT_CALL(GetEntryID, EVT_VAR(0))
     EVT_SWITCH(EVT_VAR(0))
         EVT_CASE_EQ(0)
-            EVT_IF_EQ(EVT_SAVE_FLAG(1041), 0)
-                EVT_SET(EVT_SAVE_FLAG(1041), 1)
+            EVT_IF_EQ(GF_DGB01_Visited, 0)
+                EVT_SET(GF_DGB01_Visited, 1)
                 EVT_SET(GB_StoryProgress, -32)
             EVT_END_IF
             EVT_SET(EVT_VAR(2), 54)
@@ -206,7 +206,7 @@ EvtScript N(main) = {
     EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
     EVT_CALL(SetCamEnabled, 0, 1)
     EVT_CALL(SetCamLeadPlayer, 0, 0)
-    EVT_SET(EVT_SAVE_FLAG(1978), 1)
+    EVT_SET(GF_MAP_TubbasManor, 1)
     EVT_EXEC_WAIT(N(makeEntities))
     EVT_EXEC(N(802449C4))
     EVT_EXEC(N(802434A0))
@@ -216,7 +216,7 @@ EvtScript N(main) = {
     EVT_BIND_TRIGGER(N(exitDoubleDoor_80243820), TRIGGER_WALL_PRESS_A, 24, 1, 0)
     EVT_BIND_TRIGGER(N(exitDoubleDoor_802438D4), TRIGGER_WALL_PRESS_A, 16, 1, 0)
     EVT_BIND_TRIGGER(N(exitDoubleDoor_80243988), TRIGGER_WALL_PRESS_A, 28, 1, 0)
-    EVT_IF_EQ(EVT_SAVE_FLAG(1040), 0)
+    EVT_IF_EQ(GF_DGB01_UnlockedEastWing, 0)
         EVT_BIND_PADLOCK(N(80244AD0), TRIGGER_WALL_PRESS_A, EVT_ENTITY_INDEX(0), EVT_PTR(N(itemList_80243C40)), 0, 1)
     EVT_ELSE
         EVT_BIND_TRIGGER(N(exitDoubleDoor_802436B8), TRIGGER_WALL_PRESS_A, 20, 1, 0)
@@ -452,7 +452,7 @@ EvtScript N(80244AD0) = {
     EVT_CALL(FindKeyItem, ITEM_TUBBA_CASTLE_KEY, EVT_VAR(0))
     EVT_CALL(RemoveKeyItemAt, EVT_VAR(0))
     EVT_CALL(CloseChoicePopup)
-    EVT_SET(EVT_SAVE_FLAG(1040), 1)
+    EVT_SET(GF_DGB01_UnlockedEastWing, 1)
     EVT_CALL(N(GetEntityPosition), EVT_MAP_VAR(0), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_CALL(PlaySoundAt, 0x269, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_SET(EVT_VAR(0), EVT_MAP_VAR(0))
@@ -470,7 +470,7 @@ EvtScript N(80244C38) = {
 };
 
 EvtScript N(makeEntities) = {
-    EVT_IF_EQ(EVT_SAVE_FLAG(1040), 0)
+    EVT_IF_EQ(GF_DGB01_UnlockedEastWing, 0)
         EVT_CALL(MakeEntity, EVT_PTR(Entity_Padlock), 490, 8, 0, -80, MAKE_ENTITY_END)
         EVT_CALL(AssignScript, EVT_PTR(N(80244C38)))
         EVT_SET(EVT_MAP_VAR(0), EVT_VAR(0))

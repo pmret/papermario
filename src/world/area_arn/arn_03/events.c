@@ -54,7 +54,7 @@ EvtScript N(main) = {
     EVT_ELSE
         EVT_CALL(MakeNpcs, 0, EVT_PTR(N(npcGroupList_80244788)))
     EVT_END_IF
-    EVT_IF_EQ(EVT_SAVE_FLAG(1020), 1)
+    EVT_IF_EQ(GF_ARN03_WaitingForPackage, 1)
         EVT_SET(EVT_MAP_VAR(0), 450)
         EVT_SET(EVT_MAP_VAR(1), 450)
     EVT_END_IF
@@ -379,8 +379,8 @@ EvtScript N(interact_8024254C) = {
             EVT_EXEC_WAIT(N(80241C6C))
             EVT_CALL(AddKeyItem, ITEM_KOOT_PACKAGE)
             EVT_SET(EVT_MAP_VAR(0), 0)
-            EVT_SET(EVT_SAVE_FLAG(1015), 1)
-            EVT_SET(EVT_SAVE_FLAG(1020), 0)
+            EVT_SET(GF_ARN03_RecievedPackage, 1)
+            EVT_SET(GF_ARN03_WaitingForPackage, 0)
             EVT_RETURN
         EVT_ELSE
             EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 0, MESSAGE_ID(0x0E, 0x0080))
@@ -405,14 +405,14 @@ EvtScript N(interact_8024254C) = {
         EVT_CASE_GE(39)
             EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 0, MESSAGE_ID(0x0E, 0x007E))
     EVT_END_SWITCH
-    EVT_IF_EQ(EVT_SAVE_FLAG(1015), 0)
+    EVT_IF_EQ(GF_ARN03_RecievedPackage, 0)
         EVT_IF_EQ(GB_KootFavor_Current, 18)
             EVT_EXEC_WAIT(N(80241E68))
             EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 0, MESSAGE_ID(0x0E, 0x007F))
             EVT_CALL(EndSpeech, -1, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 0)
             EVT_SET(EVT_MAP_VAR(0), 0)
             EVT_SET(EVT_MAP_VAR(1), 450)
-            EVT_SET(EVT_SAVE_FLAG(1020), 1)
+            EVT_SET(GF_ARN03_WaitingForPackage, 1)
             EVT_THREAD
                 EVT_LOOP(0)
                     EVT_ADD(EVT_MAP_VAR(0), 1)
@@ -978,7 +978,7 @@ static s32 N(pad_47DC) = {
 
 EvtScript N(makeEntities) = {
     EVT_CALL(MakeEntity, EVT_PTR(Entity_YellowBlock), 300, 237, 60, 0, 343, MAKE_ENTITY_END)
-    EVT_CALL(AssignBlockFlag, EVT_SAVE_FLAG(1007))
+    EVT_CALL(AssignBlockFlag, GF_ARN03_ItemBlock_Coin)
     EVT_CALL(MakeEntity, EVT_PTR(Entity_SavePoint), 250, 237, 125, 0, MAKE_ENTITY_END)
     EVT_RETURN
     EVT_END

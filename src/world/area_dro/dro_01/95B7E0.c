@@ -113,7 +113,7 @@ EvtScript N(80243BB0) = {
 
 EvtScript N(exitWalk_80244960) = {
     EVT_SET_GROUP(EVT_GROUP_1B)
-    EVT_SET(EVT_SAVE_FLAG(761), 0)
+    EVT_SET(GF_DRO01_HeardHintAboutSpinningRoof, 0)
     EVT_CALL(UseExitHeading, 60, 0)
     EVT_EXEC(ExitWalk)
     EVT_CALL(GotoMap, EVT_PTR("sbk_36"), 1)
@@ -168,7 +168,7 @@ EvtScript N(enterWalk_80244C14) = {
     EVT_CALL(GetEntryID, EVT_VAR(0))
     EVT_SWITCH(EVT_VAR(0))
         EVT_CASE_EQ(2)
-            EVT_IF_EQ(EVT_SAVE_FLAG(1939), 0)
+            EVT_IF_EQ(GF_DRO01_WarpPipe, 0)
                 EVT_CALL(DisablePlayerInput, TRUE)
                 EVT_CALL(DisablePlayerPhysics, TRUE)
                 EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
@@ -176,7 +176,7 @@ EvtScript N(enterWalk_80244C14) = {
                 EVT_CALL(SetPlayerPos, EVT_VAR(0), -1000, EVT_VAR(2))
                 EVT_WAIT_FRAMES(30)
                 EVT_CALL(PlaySound, SOUND_208E)
-                EVT_SET(EVT_SAVE_FLAG(1939), 1)
+                EVT_SET(GF_DRO01_WarpPipe, 1)
                 EVT_WAIT_FRAMES(30)
                 EVT_CALL(SetPlayerActionState, 0)
                 EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
@@ -209,7 +209,7 @@ EvtScript N(main) = {
     EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
     EVT_CALL(SetCamEnabled, 0, 1)
     EVT_CALL(SetCamLeadPlayer, 0, 0)
-    EVT_SET(EVT_SAVE_FLAG(1973), 1)
+    EVT_SET(GF_MAP_DryDryOutpost, 1)
     EVT_IF_LT(GB_StoryProgress, -68)
         EVT_SET(GB_StoryProgress, -68)
     EVT_END_IF
@@ -611,7 +611,7 @@ EvtScript N(80248504) = {
     EVT_CALL(WaitForCam, 0, EVT_FIXED(1.0))
     EVT_CALL(PanToTarget, 0, 0, 0)
     EVT_CALL(N(func_80243084_95E284))
-    EVT_SET(EVT_SAVE_FLAG(761), 1)
+    EVT_SET(GF_DRO01_HeardHintAboutSpinningRoof, 1)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_RETURN
     EVT_END
@@ -622,8 +622,8 @@ Unk_Struct_2 N(D_8024884C_963A4C) = {
 };
 
 EvtScript N(interact_80248864) = {
-    EVT_IF_EQ(EVT_SAVE_FLAG(253), 1)
-        EVT_IF_EQ(EVT_SAVE_FLAG(761), 1)
+    EVT_IF_EQ(GF_MAC01_Merlon_HeardAboutDream, 1)
+        EVT_IF_EQ(GF_DRO01_HeardHintAboutSpinningRoof, 1)
             EVT_CALL(N(func_802431B4_95E3B4))
             EVT_IF_EQ(EVT_VAR(0), 1)
                 EVT_CALL(SpeakToPlayer, 3, NPC_ANIM_dryite_Palette_00_Anim_4, NPC_ANIM_dryite_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x007B))
@@ -667,7 +667,7 @@ EvtScript N(init_80248AE4) = {
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_80248864)))
-    EVT_IF_EQ(EVT_SAVE_FLAG(253), 1)
+    EVT_IF_EQ(GF_MAC01_Merlon_HeardAboutDream, 1)
         EVT_THREAD
             EVT_CALL(N(func_80242858_95DA58), EVT_PTR(N(D_8024884C_963A4C)))
         EVT_END_THREAD
@@ -716,20 +716,20 @@ s32 N(D_80248D4C_963F4C)[] = {
 };
 
 EvtScript N(interact_80248D54) = {
-    EVT_IF_EQ(EVT_SAVE_FLAG(754), 1)
+    EVT_IF_EQ(GF_DRO01_Gift_Melody, 1)
         EVT_CALL(FindKeyItem, ITEM_MELODY, EVT_VAR(0))
         EVT_IF_NE(EVT_VAR(0), -1)
             EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_artist_toad_Palette_01_Anim_2, NPC_ANIM_artist_toad_Palette_01_Anim_1, 0, MESSAGE_ID(0x0D, 0x0084))
             EVT_RETURN
         EVT_ELSE
-            EVT_IF_EQ(EVT_SAVE_FLAG(755), 0)
+            EVT_IF_EQ(GF_DRO01_Gift_ToldComposerAboutMelody, 0)
                 EVT_IF_LT(GB_StoryProgress, 88)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_artist_toad_Palette_01_Anim_2, NPC_ANIM_artist_toad_Palette_01_Anim_1, 0, MESSAGE_ID(0x0D, 0x0085))
                     EVT_CALL(SetPlayerAnimation, ANIM_NOD_YES)
                     EVT_WAIT_FRAMES(30)
                     EVT_CALL(SetPlayerAnimation, ANIM_10002)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_artist_toad_Palette_01_Anim_2, NPC_ANIM_artist_toad_Palette_01_Anim_1, 0, MESSAGE_ID(0x0D, 0x0086))
-                    EVT_SET(EVT_SAVE_FLAG(755), 1)
+                    EVT_SET(GF_DRO01_Gift_ToldComposerAboutMelody, 1)
                     EVT_RETURN
                 EVT_END_IF
             EVT_END_IF
@@ -777,7 +777,7 @@ EvtScript N(interact_80248D54) = {
             EVT_SET(EVT_VAR(1), 1)
             EVT_EXEC_WAIT(N(EVS_Quizmo_GiveItem_0))
             EVT_CALL(AddKeyItem, ITEM_MELODY)
-            EVT_SET(EVT_SAVE_FLAG(754), 1)
+            EVT_SET(GF_DRO01_Gift_Melody, 1)
             EVT_RETURN
     EVT_END_SWITCH
     EVT_RETURN
@@ -1447,7 +1447,7 @@ EvtScript N(8024B6B4) = {
 };
 
 EvtScript N(8024B7B0) = {
-    EVT_IF_EQ(EVT_SAVE_FLAG(758), 0)
+    EVT_IF_EQ(GF_DRO01_Gift_RedJar, 0)
         EVT_CALL(N(func_80243578_95E778))
         EVT_CALL(func_802D2C14, 1)
         EVT_EXEC_WAIT(N(8024B614))
@@ -1456,7 +1456,7 @@ EvtScript N(8024B7B0) = {
         EVT_SET(EVT_VAR(1), 1)
         EVT_EXEC_WAIT(N(8024B5B4))
         EVT_CALL(AddKeyItem, ITEM_KOOT_RED_JAR)
-        EVT_SET(EVT_SAVE_FLAG(758), 1)
+        EVT_SET(GF_DRO01_Gift_RedJar, 1)
         EVT_WAIT_FRAMES(20)
         EVT_CALL(func_802D2C14, 0)
         EVT_EXEC_WAIT(N(8024B664))
@@ -1977,7 +1977,7 @@ EvtScript N(8024CF7C) = {
 extern const char N(dro_01_name_hack)[];
 
 EvtScript N(8024D2B0) = {
-    EVT_SET(EVT_SAVE_FLAG(761), 0)
+    EVT_SET(GF_DRO01_HeardHintAboutSpinningRoof, 0)
     EVT_CALL(GotoMap, EVT_PTR(N(dro_01_name_hack)), 4)
     EVT_WAIT_FRAMES(100)
     EVT_RETURN
@@ -1986,11 +1986,11 @@ EvtScript N(8024D2B0) = {
 
 EvtScript N(makeEntities) = {
     EVT_CALL(MakeEntity, EVT_PTR(Entity_SavePoint), -211, 60, -50, 30, MAKE_ENTITY_END)
-    EVT_IF_EQ(EVT_SAVE_FLAG(1939), 0)
-        EVT_IF_EQ(EVT_SAVE_FLAG(1933), 1)
+    EVT_IF_EQ(GF_DRO01_WarpPipe, 0)
+        EVT_IF_EQ(GF_TIK01_WarpPipes, 1)
             EVT_CALL(GetEntryID, EVT_VAR(0))
             EVT_IF_NE(EVT_VAR(0), 2)
-                EVT_SET(EVT_SAVE_FLAG(1939), 1)
+                EVT_SET(GF_DRO01_WarpPipe, 1)
             EVT_END_IF
         EVT_END_IF
     EVT_END_IF

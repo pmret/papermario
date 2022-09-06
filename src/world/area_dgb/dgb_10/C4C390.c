@@ -264,33 +264,33 @@ static s32 N(pad_EDC) = {
 };
 
 EvtScript N(80240EE0) = {
-    EVT_SET(EVT_SAVE_FLAG(1052), 1)
+    EVT_SET(GF_DGB10_BoardedFloor1, 1)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(80240F00) = {
-    EVT_SET(EVT_SAVE_FLAG(1053), 1)
+    EVT_SET(GF_DGB10_BoardedFloor2, 1)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(80240F20) = {
-    EVT_SET(EVT_SAVE_FLAG(1054), 1)
+    EVT_SET(GF_DGB10_BoardedFloor3, 1)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(makeEntities) = {
-    EVT_IF_EQ(EVT_SAVE_FLAG(1052), 0)
+    EVT_IF_EQ(GF_DGB10_BoardedFloor1, 0)
         EVT_CALL(MakeEntity, EVT_PTR(Entity_BoardedFloor), 500, 0, -100, 0, MAKE_ENTITY_END)
         EVT_CALL(AssignScript, EVT_PTR(N(80240EE0)))
     EVT_END_IF
-    EVT_IF_EQ(EVT_SAVE_FLAG(1053), 0)
+    EVT_IF_EQ(GF_DGB10_BoardedFloor2, 0)
         EVT_CALL(MakeEntity, EVT_PTR(Entity_BoardedFloor), 500, 0, -250, 0, MAKE_ENTITY_END)
         EVT_CALL(AssignScript, EVT_PTR(N(80240F00)))
     EVT_END_IF
-    EVT_IF_EQ(EVT_SAVE_FLAG(1054), 0)
+    EVT_IF_EQ(GF_DGB10_BoardedFloor3, 0)
         EVT_CALL(MakeEntity, EVT_PTR(Entity_BoardedFloor), 375, 0, -250, 0, MAKE_ENTITY_END)
         EVT_CALL(AssignScript, EVT_PTR(N(80240F20)))
     EVT_END_IF

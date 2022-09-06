@@ -254,7 +254,7 @@ EvtScript N(80241470) = {
 };
 
 EvtScript N(802414A8) = {
-    EVT_SET(EVT_SAVE_FLAG(54), 1)
+    EVT_SET(GF_KMR03_Hammer1Block, 1)
     EVT_RETURN
     EVT_END
 };
@@ -276,24 +276,24 @@ EvtScript N(makeEntities) = {
     EVT_ELSE
         EVT_CALL(ModifyColliderFlags, 0, 9, 0x7FFFFE00)
     EVT_END_IF
-    EVT_IF_EQ(EVT_SAVE_FLAG(54), 0)
+    EVT_IF_EQ(GF_KMR03_Hammer1Block, 0)
         EVT_CALL(MakeEntity, EVT_PTR(Entity_Hammer2Block), 230, 0, 310, 15, MAKE_ENTITY_END)
         EVT_CALL(AssignScript, EVT_PTR(N(802414A8)))
     EVT_END_IF
     EVT_CALL(MakeEntity, EVT_PTR(Entity_HiddenYellowBlock), 230, 60, 310, 15, 151, MAKE_ENTITY_END)
-    EVT_CALL(AssignBlockFlag, EVT_SAVE_FLAG(52))
+    EVT_CALL(AssignBlockFlag, GF_KMR03_HiddenItem_RepelGel)
     EVT_CALL(MakeEntity, EVT_PTR(Entity_BrickBlock), 230, 50, -160, 15, MAKE_ENTITY_END)
     EVT_CALL(MakeEntity, EVT_PTR(Entity_BrickBlock), 165, 0, 380, 20, MAKE_ENTITY_END)
     EVT_CALL(MakeEntity, EVT_PTR(Entity_YellowBlock), -170, 0, 370, 43, 343, MAKE_ENTITY_END)
-    EVT_CALL(AssignBlockFlag, EVT_SAVE_FLAG(50))
+    EVT_CALL(AssignBlockFlag, GF_KMR03_ItemBlock_Coin)
     EVT_CALL(MakeEntity, EVT_PTR(Entity_SimpleSpring), 345, 75, -250, 0, 100, MAKE_ENTITY_END)
-    EVT_CALL(MakeItemEntity, ITEM_COIN, 345, 205, -250, 17, EVT_SAVE_FLAG(56))
-    EVT_CALL(MakeItemEntity, ITEM_COIN, 345, 230, -250, 17, EVT_SAVE_FLAG(57))
-    EVT_CALL(MakeItemEntity, ITEM_COIN, 345, 255, -250, 17, EVT_SAVE_FLAG(58))
-    EVT_CALL(MakeItemEntity, ITEM_COIN, 345, 280, -250, 17, EVT_SAVE_FLAG(59))
-    EVT_CALL(MakeItemEntity, ITEM_FIRE_FLOWER, 229, 250, -156, 17, EVT_SAVE_FLAG(49))
+    EVT_CALL(MakeItemEntity, ITEM_COIN, 345, 205, -250, 17, GF_KMR03_Item_CoinA)
+    EVT_CALL(MakeItemEntity, ITEM_COIN, 345, 230, -250, 17, GF_KMR03_Item_CoinB)
+    EVT_CALL(MakeItemEntity, ITEM_COIN, 345, 255, -250, 17, GF_KMR03_Item_CoinC)
+    EVT_CALL(MakeItemEntity, ITEM_COIN, 345, 280, -250, 17, GF_KMR03_Item_CoinD)
+    EVT_CALL(MakeItemEntity, ITEM_FIRE_FLOWER, 229, 250, -156, 17, GF_KMR02_Item_FireFlower)
     EVT_CALL(MakeEntity, &Entity_HiddenPanel, 300, 0, 150, 0, 18, MAKE_ENTITY_END)
-    EVT_CALL(AssignPanelFlag, EVT_SAVE_FLAG(88))
+    EVT_CALL(AssignPanelFlag, GF_KMR03_HiddenPanel)
     EVT_CALL(MakeEntity, EVT_PTR(Entity_HeartBlock), 130, 60, 0, 0, MAKE_ENTITY_END)
     EVT_RETURN
     EVT_END

@@ -382,13 +382,13 @@ EvtScript N(802420C8) = {
 };
 
 EvtScript N(80242240) = {
-    EVT_IF_EQ(EVT_SAVE_FLAG(1377), 1)
+    EVT_IF_EQ(GF_FLO11_Defeated_Lakitus, 1)
         EVT_RETURN
     EVT_END_IF
     EVT_IF_LT(GB_StoryProgress, 45)
         EVT_RETURN
     EVT_END_IF
-    EVT_IF_EQ(EVT_SAVE_FLAG(1375), 0)
+    EVT_IF_EQ(GF_FLO10_LilyRequestedWaterStone, 0)
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(SetNpcPos, 0, 460, 200, -240)
@@ -500,7 +500,7 @@ EvtScript N(defeat_802428B8) = {
             EVT_CALL(WaitForCam, 0, EVT_FIXED(1.0))
             EVT_EXEC_WAIT(N(802420C8))
             EVT_CALL(ResetCam, 0, EVT_FIXED(4.0))
-            EVT_SET(EVT_SAVE_FLAG(1377), 1)
+            EVT_SET(GF_FLO11_Defeated_Lakitus, 1)
             EVT_SET(EVT_MAP_VAR(0), 1)
             EVT_CALL(DisablePlayerInput, FALSE)
         EVT_CASE_EQ(1)
@@ -528,9 +528,9 @@ EvtScript N(defeat_80242AC4) = {
 
 EvtScript N(init_80242B58) = {
     EVT_CALL(SetNpcPos, 0, 0, -1000, 0)
-    EVT_IF_EQ(EVT_SAVE_FLAG(1377), 0)
+    EVT_IF_EQ(GF_FLO11_Defeated_Lakitus, 0)
         EVT_IF_GE(GB_StoryProgress, 45)
-            EVT_IF_EQ(EVT_SAVE_FLAG(1375), 1)
+            EVT_IF_EQ(GF_FLO10_LilyRequestedWaterStone, 1)
                 EVT_SET(EVT_MAP_VAR(0), 0)
                 EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80242810)))
                 EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(defeat_802428B8)))
@@ -545,9 +545,9 @@ EvtScript N(init_80242B58) = {
 
 EvtScript N(init_80242C38) = {
     EVT_CALL(SetNpcPos, 1, 0, -1000, 0)
-    EVT_IF_EQ(EVT_SAVE_FLAG(1377), 0)
+    EVT_IF_EQ(GF_FLO11_Defeated_Lakitus, 0)
         EVT_IF_GE(GB_StoryProgress, 45)
-            EVT_IF_EQ(EVT_SAVE_FLAG(1375), 1)
+            EVT_IF_EQ(GF_FLO10_LilyRequestedWaterStone, 1)
                 EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(defeat_80242AC4)))
                 EVT_CALL(SetNpcPos, 1, 200, 110, 29)
                 EVT_CALL(InterpNpcYaw, 1, 0, 1)
@@ -646,7 +646,7 @@ static s32 N(pad_30EC) = {
 
 EvtScript N(makeEntities) = {
     EVT_CALL(MakeEntity, EVT_PTR(Entity_MulticoinBlock), -220, 60, -75, 0, MAKE_ENTITY_END)
-    EVT_CALL(AssignBlockFlag, EVT_SAVE_FLAG(1384))
+    EVT_CALL(AssignBlockFlag, GF_FLO11_MultiCoinBrick)
     EVT_RETURN
     EVT_END
 };

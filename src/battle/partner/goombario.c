@@ -561,7 +561,7 @@ EvtScript N(nextTurn_80239A3C) = {
     EVT_CALL(GetBattlePhase, EVT_VAR(0))
     EVT_SWITCH(EVT_VAR(0))
         EVT_CASE_EQ(10)
-            EVT_IF_EQ(EVT_SAVE_FLAG(1817), 0)
+            EVT_IF_EQ(GF_Tutorial_SwapTurnOrder, 0)
                 EVT_CALL(UseIdleAnimation, 256, 0)
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_14)
                 EVT_CALL(BattleCamTargetActor, -127)
@@ -592,7 +592,7 @@ EvtScript N(nextTurn_80239A3C) = {
                 EVT_WAIT_FRAMES(1)
                 EVT_CALL(SetActorYaw, 0, 0)
                 EVT_WAIT_FRAMES(5)
-                EVT_SET(EVT_SAVE_FLAG(1817), 1)
+                EVT_SET(GF_Tutorial_SwapTurnOrder, 1)
                 EVT_CALL(UseIdleAnimation, 256, 1)
             EVT_END_IF
     EVT_END_SWITCH

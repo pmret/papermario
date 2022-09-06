@@ -116,9 +116,9 @@ static s32 N(pad_3BC8)[] = {
 };
 
 EvtScript N(makeEntities) = {
-    EVT_CALL(MakeItemEntity, ITEM_LETTER08, -135, 160, -245, 17, EVT_SAVE_FLAG(757))
+    EVT_CALL(MakeItemEntity, ITEM_LETTER08, -135, 160, -245, 17, GF_DRO02_Item_Letter08)
     EVT_CALL(MakeEntity, &Entity_HiddenPanel, 180, 173, -200, 0, 32, MAKE_ENTITY_END)
-    EVT_CALL(AssignPanelFlag, EVT_SAVE_FLAG(756))
+    EVT_CALL(AssignPanelFlag, GF_DRO02_HiddenPanel)
     EVT_RETURN
     EVT_END
 };
@@ -817,10 +817,10 @@ EvtScript N(802482F8) = {
     EVT_IF_EQ(GB_KootFavor_Current, 8)
         EVT_ADD(EVT_VAR(0), 1)
     EVT_END_IF
-    EVT_IF_EQ(EVT_SAVE_FLAG(536), 1)
+    EVT_IF_EQ(GF_HOS06_MerluvleeRequestedCrystalBall, 1)
         EVT_ADD(EVT_VAR(0), 1)
     EVT_END_IF
-    EVT_IF_EQ(EVT_SAVE_FLAG(759), 0)
+    EVT_IF_EQ(GF_DRO01_Gift_CrystalBall, 0)
         EVT_ADD(EVT_VAR(0), 1)
     EVT_END_IF
     EVT_IF_EQ(EVT_VAR(0), 3)
@@ -829,7 +829,7 @@ EvtScript N(802482F8) = {
         EVT_SET(EVT_VAR(1), 1)
         EVT_EXEC_WAIT(N(EVS_Quizmo_GiveItem_0))
         EVT_CALL(AddKeyItem, ITEM_CRYSTAL_BALL)
-        EVT_SET(EVT_SAVE_FLAG(759), 1)
+        EVT_SET(GF_DRO01_Gift_CrystalBall, 1)
         EVT_WAIT_FRAMES(20)
         EVT_CALL(func_802D2C14, 0)
         EVT_EXEC_WAIT(N(802482A8))
@@ -1437,7 +1437,7 @@ EvtScript N(8024B8A0) = {
 EvtScript N(interact_8024B8F0) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(-53)
-            EVT_IF_EQ(EVT_SAVE_FLAG(787), 1)
+            EVT_IF_EQ(GF_SBK30_Kolorado_SharedRumorAboutMoustafa, 1)
                 EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_archeologist_Palette_00_Anim_4, NPC_ANIM_archeologist_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00B2))
             EVT_ELSE
                 EVT_SWITCH(EVT_AREA_VAR(3))
@@ -1471,7 +1471,7 @@ EvtScript N(init_8024BA50) = {
 EvtScript N(interact_8024BA9C) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(-53)
-            EVT_IF_EQ(EVT_SAVE_FLAG(747), 0)
+            EVT_IF_EQ(GF_DRO02_Sheek_AskedAboutDesert, 0)
                 EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_dryite_Palette_02_Anim_4, NPC_ANIM_dryite_Palette_02_Anim_1, 0, MESSAGE_ID(0x0D, 0x0091))
             EVT_ELSE
                 EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_dryite_Palette_02_Anim_4, NPC_ANIM_dryite_Palette_02_Anim_1, 0, MESSAGE_ID(0x0D, 0x0092))
@@ -1678,7 +1678,7 @@ EvtScript N(idle_8024C450) = {
 };
 
 EvtScript N(interact_8024C4EC) = {
-    EVT_IF_EQ(EVT_SAVE_FLAG(750), 1)
+    EVT_IF_EQ(GF_DRO02_Moustafa_UnusedDialogOverride, 1)
         EVT_CALL(SpeakToPlayer, 5, NPC_ANIM_moustafa_Palette_00_Anim_5, NPC_ANIM_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00CF))
         EVT_RETURN
     EVT_END_IF
@@ -1741,21 +1741,21 @@ EvtScript N(interact_8024C4EC) = {
                 EVT_CASE_EQ(1)
                     EVT_EXEC_WAIT(N(8024C0B8))
                     EVT_CALL(ContinueSpeech, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00BD))
-                    EVT_SET(EVT_SAVE_FLAG(747), 1)
+                    EVT_SET(GF_DRO02_Sheek_AskedAboutDesert, 1)
                 EVT_CASE_EQ(2)
                     EVT_EXEC_WAIT(N(8024C0B8))
                     EVT_CALL(ContinueSpeech, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00BE))
-                    EVT_SET(EVT_SAVE_FLAG(748), 1)
+                    EVT_SET(GF_DRO02_Sheek_AskedAboutRuins, 1)
                 EVT_CASE_EQ(3)
                     EVT_EXEC_WAIT(N(8024C0B8))
                     EVT_CALL(ContinueSpeech, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00BF))
                 EVT_CASE_EQ(4)
                     EVT_EXEC_WAIT(N(8024C0B8))
                     EVT_CALL(ContinueSpeech, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00C1))
-                    EVT_SET(EVT_SAVE_FLAG(749), 1)
+                    EVT_SET(GF_DRO02_Sheek_AskedAboutMoustafa, 1)
                     EVT_SET(EVT_VAR(11), 1)
             EVT_END_SWITCH
-            EVT_SET(EVT_SAVE_FLAG(746), 1)
+            EVT_SET(GF_DRO02_Sheek_SpokeTo, 1)
             EVT_CALL(ContinueSpeech, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00C0))
             EVT_CALL(ShowChoice, MESSAGE_ID(0x1E, 0x001A))
             EVT_IF_EQ(EVT_VAR(0), 0)
@@ -1791,7 +1791,7 @@ EvtScript N(interact_8024C4EC) = {
             EVT_EXEC_GET_TID(N(8024C05C), EVT_VAR(10))
             EVT_CALL(SetNpcFlagBits, 5, ((NPC_FLAG_100)), TRUE)
             EVT_CALL(FadeOutMusic, 0, 500)
-            EVT_IF_EQ(EVT_SAVE_FLAG(749), 1)
+            EVT_IF_EQ(GF_DRO02_Sheek_AskedAboutMoustafa, 1)
                 EVT_CALL(SpeakToPlayer, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00C3))
                 EVT_EXEC_WAIT(N(8024C248))
                 EVT_CALL(func_802D2C14, 0)
@@ -1827,14 +1827,14 @@ EvtScript N(interact_8024C4EC) = {
                     EVT_CALL(SpeakToPlayer, 5, NPC_ANIM_moustafa_Palette_00_Anim_5, NPC_ANIM_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00CB))
                 EVT_CASE_GE(-62)
                     EVT_IF_GE(GB_StoryProgress, -56)
-                        EVT_IF_EQ(EVT_SAVE_FLAG(751), 0)
+                        EVT_IF_EQ(GF_DRO02_Moustafa_HeardAboutDryDryRuins, 0)
                             EVT_CALL(SpeakToPlayer, 5, NPC_ANIM_moustafa_Palette_00_Anim_5, NPC_ANIM_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00CD))
                             EVT_CALL(SetPlayerAnimation, ANIM_10002)
                             EVT_WAIT_FRAMES(15)
                             EVT_CALL(SetPlayerAnimation, ANIM_80007)
                             EVT_WAIT_FRAMES(30)
                             EVT_CALL(SpeakToPlayer, 5, NPC_ANIM_moustafa_Palette_00_Anim_5, NPC_ANIM_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00CE))
-                            EVT_SET(EVT_SAVE_FLAG(751), 1)
+                            EVT_SET(GF_DRO02_Moustafa_HeardAboutDryDryRuins, 1)
                         EVT_ELSE
                             EVT_CALL(SpeakToPlayer, 5, NPC_ANIM_moustafa_Palette_00_Anim_5, NPC_ANIM_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00D0))
                         EVT_END_IF

@@ -230,9 +230,9 @@ EvtScript N(interact_80240B28) = {
         EVT_CASE_LT(53)
             EVT_CALL(SpeakToPlayer, 10, NPC_ANIM_sun_Palette_00_Anim_7, NPC_ANIM_sun_Palette_00_Anim_1, 517, MESSAGE_ID(0x11, 0x009C))
         EVT_CASE_LT(57)
-            EVT_IF_EQ(EVT_SAVE_FLAG(1410), 0)
+            EVT_IF_EQ(GF_FLO15_SunThankedPlayer, 0)
                 EVT_CALL(SpeakToPlayer, 10, NPC_ANIM_sun_Palette_00_Anim_7, NPC_ANIM_sun_Palette_00_Anim_1, 517, MESSAGE_ID(0x11, 0x009D))
-                EVT_SET(EVT_SAVE_FLAG(1410), 1)
+                EVT_SET(GF_FLO15_SunThankedPlayer, 1)
             EVT_ELSE
                 EVT_CALL(SpeakToPlayer, 10, NPC_ANIM_sun_Palette_00_Anim_7, NPC_ANIM_sun_Palette_00_Anim_1, 517, MESSAGE_ID(0x11, 0x009E))
             EVT_END_IF
@@ -351,13 +351,13 @@ static s32 N(pad_12D8)[] = {
 };
 
 EvtScript N(802412E0) = {
-    EVT_SET(EVT_SAVE_FLAG(1401), 1)
+    EVT_SET(GF_FLO15_BombedRock, 1)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(makeEntities) = {
-    EVT_IF_EQ(EVT_SAVE_FLAG(1401), 0)
+    EVT_IF_EQ(GF_FLO15_BombedRock, 0)
         EVT_CALL(MakeEntity, EVT_PTR(Entity_BombableRock), -180, 0, -18, 0, MAKE_ENTITY_END)
         EVT_CALL(AssignScript, EVT_PTR(N(802412E0)))
     EVT_END_IF
@@ -376,9 +376,9 @@ s32 N(intTable_80241360)[] = {
 };
 
 EvtScript N(802413B0) = {
-    EVT_IF_EQ(EVT_SAVE_FLAG(1401), 0)
+    EVT_IF_EQ(GF_FLO15_BombedRock, 0)
         EVT_LABEL(0)
-        EVT_IF_EQ(EVT_SAVE_FLAG(1401), 0)
+        EVT_IF_EQ(GF_FLO15_BombedRock, 0)
             EVT_WAIT_FRAMES(1)
             EVT_GOTO(0)
         EVT_END_IF

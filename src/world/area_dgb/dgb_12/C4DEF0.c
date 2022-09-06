@@ -137,7 +137,7 @@ static s32 N(pad_868)[] = {
 
 EvtScript N(makeEntities) = {
     EVT_CALL(MakeEntity, &Entity_Chest, -225, 0, -245, 0, 0, MAKE_ENTITY_END)
-    EVT_CALL(AssignChestFlag, EVT_SAVE_FLAG(1057))
+    EVT_CALL(AssignChestFlag, GF_DGB12_Chest_CastleKey1)
     EVT_CALL(AssignScript, EVT_PTR(N(EVS_Chest_Interact)))
     EVT_RETURN
     EVT_END

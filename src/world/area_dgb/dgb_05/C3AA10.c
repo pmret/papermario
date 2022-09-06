@@ -96,7 +96,7 @@ EvtScript N(802417F0) = {
     EVT_CALL(N(func_80240000_C3AA10))
     EVT_CALL(func_802CA988, 0, EVT_VAR(2), EVT_VAR(3), EVT_VAR(4), EVT_VAR(5))
     EVT_CALL(N(func_80240030_C3AA40))
-    EVT_SET(EVT_SAVE_FLAG(1047), 1)
+    EVT_SET(GF_DGB05_BoardedFloor, 1)
     EVT_CALL(GotoMap, EVT_PTR("dgb_06"), 1)
     EVT_WAIT_FRAMES(100)
     EVT_RETURN
@@ -108,7 +108,7 @@ static s32 N(pad_1868)[] = {
 };
 
 EvtScript N(makeEntities) = {
-    EVT_IF_EQ(EVT_SAVE_FLAG(1047), 0)
+    EVT_IF_EQ(GF_DGB05_BoardedFloor, 0)
         EVT_CALL(MakeEntity, EVT_PTR(Entity_BoardedFloor), 510, -210, 100, 0, MAKE_ENTITY_END)
     EVT_END_IF
     EVT_RETURN
