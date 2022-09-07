@@ -219,7 +219,8 @@ s32 wPartnerMoveGoalX = 0;
 s32 wPartnerMoveGoalZ = 0;
 s32 wPartnerMoveTime = 0;
 f32 wPartnerMoveSpeed = 0.0f;
-s8 D_800F8034[] = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
+f32 D_800F8034 = 0.0f;
+s16 D_800F8038 = 0;
 s16 D_800F803A = 0;
 
 WorldPartner wPartners[12] = {
