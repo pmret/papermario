@@ -5,7 +5,7 @@
 
 BSS s32 D_802BDF30;
 BSS s32 D_802BDF34;
-BSS s32 D_802BDF38;
+BSS Npc* D_802BDF38;
 BSS s32 D_802BDF3C;
 BSS TweesterPhysics GoombarioTweesterPhysics;
 BSS s32 D_802BDF5C;
@@ -175,6 +175,8 @@ s32 world_goombario_can_pause(Npc* goombario) {
 
     return TRUE;
 }
+
+extern s32* D_802B79A8_E21858;
 
 // get message for tattle routine
 // has big jumptable at rodata 802BDE88
