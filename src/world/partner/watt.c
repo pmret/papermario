@@ -6,6 +6,8 @@
 void force_player_anim(s32 arg0);
 void func_802BE014_31DB84(void);
 
+s32 D_802BE250_31DDC0[] = {24, 6};
+
 BSS s32 D_802BE300;
 BSS s32 D_802BE304;
 BSS s32 D_802BE308;
@@ -13,8 +15,6 @@ BSS s32 D_802BE30C;
 BSS EffectInstance* WattStaticEffect;
 BSS s32 D_802BE314;
 BSS TweesterPhysics WattTweesterPhysics;
-
-s32 D_802BE250_31DDC0[] = {24, 6};
 
 void func_802BD100_31CC70(Npc* npc) {
     if (!(npc->flags & NPC_FLAG_2)) {
