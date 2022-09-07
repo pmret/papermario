@@ -540,7 +540,7 @@ NpcSettings N(npcSettings_80243D68) = {
     .ai = &N(npcAI_80243CC0),
     .onDefeat = &N(80243970),
     .level = 13,
-    .unk_2A = 8,
+    .actionFlags = 8,
 };
 
 EvtScript N(init_80243D94) = {

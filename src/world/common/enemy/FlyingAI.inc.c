@@ -138,7 +138,7 @@ void N(FlyingAI_Wander)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVo
                     npc->moveToPos.y = npc->pos.y;
                     ai_enemy_play_sound(npc, SOUND_2F4, 0x200000);
                     
-                    if (enemy->npcSettings->unk_2A & AI_ACTION_JUMP_WHEN_SEE_PLAYER) {
+                    if (enemy->npcSettings->actionFlags & AI_ACTION_JUMP_WHEN_SEE_PLAYER) {
                         script->AI_TEMP_STATE = AI_STATE_ALERT_INIT;
                     } else {
                         script->AI_TEMP_STATE = AI_STATE_CHASE_INIT;
@@ -235,7 +235,7 @@ void N(FlyingAI_Loiter)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVo
             fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 12, &var);
             npc->moveToPos.y = npc->pos.y;
             ai_enemy_play_sound(npc, SOUND_2F4, 0x200000);
-            if (enemy->npcSettings->unk_2A & AI_ACTION_JUMP_WHEN_SEE_PLAYER) {
+            if (enemy->npcSettings->actionFlags & AI_ACTION_JUMP_WHEN_SEE_PLAYER) {
                 script->AI_TEMP_STATE = AI_STATE_ALERT_INIT;
             } else {
                 script->AI_TEMP_STATE = AI_STATE_CHASE_INIT;
@@ -249,7 +249,7 @@ void N(FlyingAI_Loiter)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVo
     if ((npc->turnAroundYawAdjustment == 0) && (npc->duration <= 0)) {
         script->functionTemp[1]--;
         if (script->functionTemp[1] > 0) {
-            if (!(enemy->npcSettings->unk_2A & AI_ACTION_LOOK_AROUND_DURING_LOITER)) {
+            if (!(enemy->npcSettings->actionFlags & AI_ACTION_LOOK_AROUND_DURING_LOITER)) {
                 npc->yaw = clamp_angle(npc->yaw + 180.0f);
             }
             npc->duration = (rand_int(1000) % 11) + 5;
@@ -294,7 +294,7 @@ void N(FlyingAI_ChaseInit)(Evt* script, MobileAISettings* aiSettings, EnemyDetec
 
     enemy->varTable[2] = 0;
 
-    if (enemy->npcSettings->unk_2A & AI_ACTION_02) {
+    if (enemy->npcSettings->actionFlags & AI_ACTION_02) {
         npc->duration = 3;
         script->AI_TEMP_STATE = AI_STATE_CHASE;
     } else {

@@ -690,7 +690,7 @@ EvtScript N(EVS_Quizmo_Npc_AI) = {
 
 // primary quizmo NpcSettings
 NpcSettings N(Quizmo_NpcSettings) = {
-    .unk_00 = { 0x00, 0xAF, 0x00, 0x01 },
+    .defaultAnim = 0x00AF0001,
     .height = 35,
     .radius = 28,
     .otherAI = &N(EVS_Quizmo_NPC_OtherAI),
@@ -702,7 +702,7 @@ NpcSettings N(Quizmo_NpcSettings) = {
 
 // alternate (unused?) variant of quizmo with AI and NPC_FLAG_100 unset
 NpcSettings N(Quizmo_AltNpcSettings) = {
-    .unk_00 = { 0x00, 0xAF, 0x00, 0x01 },
+    .defaultAnim = 0x00AF0001,
     .height = 35,
     .radius = 28,
     .otherAI = &N(EVS_Quizmo_NPC_OtherAI),
@@ -711,5 +711,5 @@ NpcSettings N(Quizmo_AltNpcSettings) = {
     .aux = &N(EVS_Quizmo_NPC_Aux),
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
     .level = 99,
-    .unk_2A = 16,
+    .actionFlags = 16,
 };

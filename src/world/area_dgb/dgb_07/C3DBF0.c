@@ -183,7 +183,7 @@ NpcSettings N(npcSettings_80241A50) = {
     .ai = &N(npcAI_802419A8),
     .onDefeat = &N(802417F0),
     .level = 13,
-    .unk_2A = 8,
+    .actionFlags = 8,
 };
 
 StaticNpc N(npcGroup_80241A7C)[] = {

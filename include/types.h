@@ -19,6 +19,9 @@ typedef u8 Addr[];
 
 #define BATTLE_ID(unk, area, stage, index) ((unk << 24) + (area << 16) + (stage << 8) + index)
 
+#define PACK_BATTLE(battle, stage) ((battle) << 16 | ((stage) + 1))
+#define NO_BATTLE 0
+
 /// Terminates an extraAnimationList
 #define ANIM_END -1
 

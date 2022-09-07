@@ -310,7 +310,7 @@ NpcSettings N(npcSettings_8024432C) = {
     .ai = &N(npcAI_80244284),
     .onDefeat = &N(80244000),
     .level = 13,
-    .unk_2A = 8,
+    .actionFlags = 8,
 };
 
 f32 N(FlyingAI_JumpVels)[] = {

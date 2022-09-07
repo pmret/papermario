@@ -60,7 +60,7 @@ NpcSettings N(npcSettings_80240950) = {
     .height = 22,
     .radius = 24,
     .level = 99,
-    .unk_2A = 16,
+    .actionFlags = 16,
 };
 
 EvtScript N(8024097C) = {

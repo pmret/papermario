@@ -246,7 +246,7 @@ void ai_enemy_play_sound(Npc* npc, s32 soundID, s32 upperSoundFlags) {
         soundFlags |= 0x10000;
     }
 
-    if (enemy->npcSettings->unk_2A & AI_ACTION_20) {
+    if (enemy->npcSettings->actionFlags & AI_ACTION_20) {
         soundFlags |= 0x20000;
     }
 
@@ -306,7 +306,7 @@ void basic_ai_wander(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolum
                     enemy->aiFlags &= ~ENEMY_AI_FLAGS_40;
                     enemy->aiFlags &= ~ENEMY_AI_FLAGS_20;
 
-                    if (enemy->npcSettings->unk_2A & AI_ACTION_JUMP_WHEN_SEE_PLAYER) {
+                    if (enemy->npcSettings->actionFlags & AI_ACTION_JUMP_WHEN_SEE_PLAYER) {
                         script->AI_TEMP_STATE = AI_STATE_ALERT_INIT;
                     } else {
                         script->AI_TEMP_STATE = AI_STATE_CHASE_INIT;
@@ -399,7 +399,7 @@ void basic_ai_loiter(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolum
             npc->yaw = yaw;
             ai_enemy_play_sound(npc, SOUND_2F4, 0x200000);
             fx_emote(EMOTE_EXCLAMATION, npc, 0, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &emoteTemp);
-            if (enemy->npcSettings->unk_2A & AI_ACTION_JUMP_WHEN_SEE_PLAYER) {
+            if (enemy->npcSettings->actionFlags & AI_ACTION_JUMP_WHEN_SEE_PLAYER) {
                 script->AI_TEMP_STATE = AI_STATE_ALERT_INIT;
             } else {
                 script->AI_TEMP_STATE = AI_STATE_CHASE_INIT;
@@ -414,7 +414,7 @@ void basic_ai_loiter(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolum
         if (npc->duration <= 0) {
             script->functionTemp[1]--;
             if (script->functionTemp[1]) {
-                if (!(enemy->npcSettings->unk_2A & AI_ACTION_LOOK_AROUND_DURING_LOITER)) {
+                if (!(enemy->npcSettings->actionFlags & AI_ACTION_LOOK_AROUND_DURING_LOITER)) {
                     npc->yaw = clamp_angle(npc->yaw + 180.0f);
                 }
                 npc->duration = (aiSettings->waitTime / 2) + rand_int(aiSettings->waitTime / 2 + 1);
@@ -508,7 +508,7 @@ void basic_ai_chase(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume
         return;
     }
 
-    if (enemy->npcSettings->unk_2A & AI_ACTION_04) {
+    if (enemy->npcSettings->actionFlags & AI_ACTION_04) {
         if (dist2D(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z) > (npc->moveSpeed * 5.0)) {
             x = npc->pos.x;
             y = npc->pos.y;

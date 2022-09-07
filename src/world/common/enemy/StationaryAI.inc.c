@@ -47,7 +47,7 @@ void N(StationaryAI_Idle)(Evt* script, StationaryAISettings* aiSettings, EnemyDe
         ai_enemy_play_sound(npc, SOUND_2F4, 0x200000);
         npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
 
-        if (!(enemy->npcSettings->unk_2A & AI_ACTION_JUMP_WHEN_SEE_PLAYER)) {
+        if (!(enemy->npcSettings->actionFlags & AI_ACTION_JUMP_WHEN_SEE_PLAYER)) {
             script->AI_TEMP_STATE = AI_STATE_CHASE_INIT;
         } else {
             script->AI_TEMP_STATE = AI_STATE_ALERT_INIT;
@@ -161,7 +161,7 @@ void N(StationaryAI_ReturnHome)(Evt* script, StationaryAISettings* aiSettings, E
                 fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, (f32) npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &emoteTemp);
                 ai_enemy_play_sound(npc, SOUND_2F4, 0x200000);
                 npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
-                if (enemy->npcSettings->unk_2A & AI_ACTION_JUMP_WHEN_SEE_PLAYER) {
+                if (enemy->npcSettings->actionFlags & AI_ACTION_JUMP_WHEN_SEE_PLAYER) {
                     script->AI_TEMP_STATE = AI_STATE_ALERT_INIT;
                 } else {
                     script->AI_TEMP_STATE = AI_STATE_CHASE_INIT;

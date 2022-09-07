@@ -122,7 +122,7 @@ typedef struct FireBarData {
 } FireBarData; // size = 0x30
 
 typedef struct NpcSettings {
-    /* 0x00 */ char unk_00[4];
+    /* 0x00 */ AnimID defaultAnim;
     /* 0x04 */ s16 height;
     /* 0x06 */ s16 radius;
     /* 0x08 */ UNK_PTR otherAI;
@@ -134,7 +134,7 @@ typedef struct NpcSettings {
     /* 0x20 */ s32 flags;
     /* 0x24 */ char unk_24[4];
     /* 0x28 */ s16 level;
-    /* 0x2A */ s16 unk_2A;  // action flags: 1 = jump on seeing player
+    /* 0x2A */ s16 actionFlags;  // action flags: 1 = jump on seeing player
 } NpcSettings; // size = 0x2C
 
 typedef struct ItemDrop {

@@ -1286,7 +1286,7 @@ NpcSettings N(npcSettings_80245E5C) = {
     .height = 35,
     .radius = 24,
     .level = 99,
-    .unk_2A = 16,
+    .actionFlags = 16,
 };
 
 f32 N(D_80245E88_CA3DA8)[] = {

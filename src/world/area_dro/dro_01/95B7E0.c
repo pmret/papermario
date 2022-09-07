@@ -256,7 +256,7 @@ NpcSettings N(npcSettings_80245060) = {
     .radius = 23,
     .ai = &N(npcAI_80245040),
     .level = 99,
-    .unk_2A = 16,
+    .actionFlags = 16,
 };
 
 MobileAISettings N(npcAISettings_8024508C) = {
@@ -278,7 +278,7 @@ NpcSettings N(npcSettings_802450DC) = {
     .radius = 23,
     .ai = &N(npcAI_802450BC),
     .level = 99,
-    .unk_2A = 16,
+    .actionFlags = 16,
 };
 
 NpcSettings N(npcSettings_80245108) = {

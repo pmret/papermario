@@ -131,7 +131,7 @@ NpcSettings N(npcSettings_80243C78) = {
     .onHit = &EnemyNpcHit,
     .onDefeat = &EnemyNpcDefeat,
     .level = 12,
-    .unk_2A = 1,
+    .actionFlags = 1,
 };
 
 EvtScript N(80243CA4) = {
