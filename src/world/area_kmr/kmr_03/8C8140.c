@@ -213,10 +213,12 @@ StaticNpc N(npcGroup_80241260) = {
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_400000,
     .init = &N(init_802411A8),
     .yaw = 45,
-    .dropFlags = NPC_DROP_FLAGS_80,
-    .heartDrops = NO_DROPS,
-    .flowerDrops = NO_DROPS,
-    .animations = {
+    .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+        .heartDrops = NO_DROPS,
+        .flowerDrops = NO_DROPS,
+    },
+	.animations = {
         NPC_ANIM_goompa_Palette_00_Anim_1,
         NPC_ANIM_goompa_Palette_00_Anim_2,
         NPC_ANIM_goompa_Palette_00_Anim_3,

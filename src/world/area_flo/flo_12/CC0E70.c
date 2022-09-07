@@ -416,10 +416,12 @@ StaticNpc N(npcGroup_802425D8)[] = {
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_400000,
         .init = &N(init_802423D0),
         .yaw = 90,
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .heartDrops = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-        .animations = {
+        .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+            .heartDrops = NO_DROPS,
+            .flowerDrops = NO_DROPS,
+        },
+	.animations = {
             NPC_ANIM_rosie_Palette_00_Anim_1,
             NPC_ANIM_rosie_Palette_00_Anim_1,
             NPC_ANIM_rosie_Palette_00_Anim_1,
@@ -445,10 +447,12 @@ StaticNpc N(npcGroup_802425D8)[] = {
         .pos = { -70.0f, 0.0f, 20.0f },
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_GRAVITY,
         .yaw = 90,
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .heartDrops = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-        .animations = {
+        .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+            .heartDrops = NO_DROPS,
+            .flowerDrops = NO_DROPS,
+        },
+	.animations = {
             NPC_ANIM_rosie_Palette_00_Anim_1,
             NPC_ANIM_rosie_Palette_00_Anim_1,
             NPC_ANIM_rosie_Palette_00_Anim_1,

@@ -160,12 +160,14 @@ StaticNpc N(goombaNpc) = {
     .flags = 0x00000C00,
     .init = &N(GoombaInit),
     .yaw = 90,
-    .dropFlags = NPC_DROP_FLAGS_80,
-    .itemDropChance = 5,
-    .itemDrops = { { ITEM_MUSHROOM, 10 } },
-    .heartDrops = GENEROUS_WHEN_LOW_HEART_DROPS(2),
-    .flowerDrops = GENEROUS_WHEN_LOW_FLOWER_DROPS(2),
-    .territory = { .temp = {
+    .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+        .itemDropChance = 5,
+        .itemDrops = { { ITEM_MUSHROOM, 10 } },
+        .heartDrops = GENEROUS_WHEN_LOW_HEART_DROPS(2),
+        .flowerDrops = GENEROUS_WHEN_LOW_FLOWER_DROPS(2),
+    },
+	.territory = { .temp = {
         // Wander
         /* center x, y, z */ -33, 0, 30,
         /* size x, z */ 40, 20,

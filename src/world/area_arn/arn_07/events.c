@@ -735,10 +735,12 @@ StaticNpc N(npcGroup_80245D0C)[] = {
         .flags = NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_40000 | NPC_FLAG_200000,
         .init = &N(init_80245090),
         .yaw = 270,
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .heartDrops = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-        .animations = {
+        .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+            .heartDrops = NO_DROPS,
+            .flowerDrops = NO_DROPS,
+        },
+	.animations = {
             NPC_ANIM_world_tubba_Palette_00_Anim_6,
             NPC_ANIM_world_tubba_Palette_00_Anim_9,
             NPC_ANIM_world_tubba_Palette_00_Anim_C,
@@ -765,10 +767,12 @@ StaticNpc N(npcGroup_80245D0C)[] = {
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_40000 | NPC_FLAG_200000,
         .init = &N(init_80245058),
         .yaw = 90,
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .heartDrops = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-        .animations = {
+        .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+            .heartDrops = NO_DROPS,
+            .flowerDrops = NO_DROPS,
+        },
+	.animations = {
             NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
             NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
             NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
@@ -797,10 +801,12 @@ StaticNpc N(npcGroup_802460EC)[] = {
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_200000,
         .init = &N(init_80245104),
         .yaw = 270,
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .heartDrops = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-        .animations = {
+        .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+            .heartDrops = NO_DROPS,
+            .flowerDrops = NO_DROPS,
+        },
+	.animations = {
             NPC_ANIM_boo_Palette_01_Anim_1,
             NPC_ANIM_boo_Palette_01_Anim_2,
             NPC_ANIM_boo_Palette_01_Anim_3,
@@ -827,10 +833,12 @@ StaticNpc N(npcGroup_802460EC)[] = {
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_200000,
         .init = &N(init_80245104),
         .yaw = 270,
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .heartDrops = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-        .animations = {
+        .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+            .heartDrops = NO_DROPS,
+            .flowerDrops = NO_DROPS,
+        },
+	.animations = {
             NPC_ANIM_boo_Palette_01_Anim_1,
             NPC_ANIM_boo_Palette_01_Anim_2,
             NPC_ANIM_boo_Palette_01_Anim_3,
@@ -857,10 +865,12 @@ StaticNpc N(npcGroup_802460EC)[] = {
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_200000,
         .init = &N(init_80245104),
         .yaw = 270,
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .heartDrops = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-        .animations = {
+        .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+            .heartDrops = NO_DROPS,
+            .flowerDrops = NO_DROPS,
+        },
+	.animations = {
             NPC_ANIM_boo_Palette_01_Anim_1,
             NPC_ANIM_boo_Palette_01_Anim_2,
             NPC_ANIM_boo_Palette_01_Anim_3,
@@ -887,10 +897,12 @@ StaticNpc N(npcGroup_802460EC)[] = {
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_200000,
         .init = &N(init_80245104),
         .yaw = 270,
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .heartDrops = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-        .animations = {
+        .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+            .heartDrops = NO_DROPS,
+            .flowerDrops = NO_DROPS,
+        },
+	.animations = {
             NPC_ANIM_boo_Palette_01_Anim_1,
             NPC_ANIM_boo_Palette_01_Anim_2,
             NPC_ANIM_boo_Palette_01_Anim_3,
@@ -917,10 +929,12 @@ StaticNpc N(npcGroup_802460EC)[] = {
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_200000,
         .init = &N(init_80245104),
         .yaw = 270,
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .heartDrops = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-        .animations = {
+        .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+            .heartDrops = NO_DROPS,
+            .flowerDrops = NO_DROPS,
+        },
+	.animations = {
             NPC_ANIM_boo_Palette_00_Anim_1,
             NPC_ANIM_boo_Palette_00_Anim_2,
             NPC_ANIM_boo_Palette_00_Anim_3,
@@ -947,10 +961,12 @@ StaticNpc N(npcGroup_802460EC)[] = {
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_200000,
         .init = &N(init_80245104),
         .yaw = 270,
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .heartDrops = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-        .animations = {
+        .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+            .heartDrops = NO_DROPS,
+            .flowerDrops = NO_DROPS,
+        },
+	.animations = {
             NPC_ANIM_boo_Palette_00_Anim_1,
             NPC_ANIM_boo_Palette_00_Anim_2,
             NPC_ANIM_boo_Palette_00_Anim_3,
@@ -979,10 +995,12 @@ StaticNpc N(npcGroup_80246C8C) = {
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_200000,
     .init = &N(init_80245164),
     .yaw = 0,
-    .dropFlags = NPC_DROP_FLAGS_80,
-    .heartDrops = NO_DROPS,
-    .flowerDrops = NO_DROPS,
-    .animations = {
+    .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+        .heartDrops = NO_DROPS,
+        .flowerDrops = NO_DROPS,
+    },
+	.animations = {
         NPC_ANIM_world_bow_Palette_00_Anim_1,
         NPC_ANIM_world_bow_Palette_00_Anim_2,
         NPC_ANIM_world_bow_Palette_00_Anim_3,
@@ -1009,10 +1027,12 @@ StaticNpc N(npcGroup_80246E7C) = {
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_200000,
     .init = &N(init_8024519C),
     .yaw = 0,
-    .dropFlags = NPC_DROP_FLAGS_80,
-    .heartDrops = NO_DROPS,
-    .flowerDrops = NO_DROPS,
-    .animations = {
+    .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+        .heartDrops = NO_DROPS,
+        .flowerDrops = NO_DROPS,
+    },
+	.animations = {
         NPC_ANIM_bootler_Palette_00_Anim_1,
         NPC_ANIM_bootler_Palette_00_Anim_2,
         NPC_ANIM_bootler_Palette_00_Anim_3,
@@ -1050,15 +1070,17 @@ StaticNpc N(npcGroup_802470BC) = {
     .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
     .init = &N(init_8024706C),
     .yaw = 90,
-    .dropFlags = NPC_DROP_FLAGS_80,
-    .itemDropChance = 20,
-    .itemDrops = {
+    .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+        .itemDropChance = 20,
+        .itemDrops = {
         { ITEM_DRIED_SHROOM, 10, 0 },
     },
-    .heartDrops = STANDARD_HEART_DROPS(2),
-    .flowerDrops = STANDARD_FLOWER_DROPS(2),
-    .maxCoinBonus = 2,
-    .territory = { .temp = { -216, 60, -10, 30, 0, -32767, 0, -216, 60, -10, 250 }},
+        .heartDrops = STANDARD_HEART_DROPS(2),
+        .flowerDrops = STANDARD_FLOWER_DROPS(2),
+        .maxCoinBonus = 2,
+    },
+	.territory = { .temp = { -216, 60, -10, 30, 0, -32767, 0, -216, 60, -10, 250 }},
     .animations = {
         NPC_ANIM_paragoomba_hyper_idle,
         NPC_ANIM_paragoomba_hyper_walk,
@@ -1087,15 +1109,17 @@ StaticNpc N(npcGroup_802472AC) = {
     .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
     .init = &N(init_8024706C),
     .yaw = 270,
-    .dropFlags = NPC_DROP_FLAGS_80,
-    .itemDropChance = 20,
-    .itemDrops = {
+    .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+        .itemDropChance = 20,
+        .itemDrops = {
         { ITEM_DRIED_SHROOM, 10, 0 },
     },
-    .heartDrops = STANDARD_HEART_DROPS(2),
-    .flowerDrops = STANDARD_FLOWER_DROPS(2),
-    .maxCoinBonus = 2,
-    .territory = { .temp = { 0, 60, 150, 30, 0, -32767, 0, 0, 60, 150, 250 }},
+        .heartDrops = STANDARD_HEART_DROPS(2),
+        .flowerDrops = STANDARD_FLOWER_DROPS(2),
+        .maxCoinBonus = 2,
+    },
+	.territory = { .temp = { 0, 60, 150, 30, 0, -32767, 0, 0, 60, 150, 250 }},
     .animations = {
         NPC_ANIM_paragoomba_hyper_idle,
         NPC_ANIM_paragoomba_hyper_walk,
@@ -1124,15 +1148,17 @@ StaticNpc N(npcGroup_8024749C) = {
     .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
     .init = &N(init_8024706C),
     .yaw = 90,
-    .dropFlags = NPC_DROP_FLAGS_80,
-    .itemDropChance = 20,
-    .itemDrops = {
+    .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+        .itemDropChance = 20,
+        .itemDrops = {
         { ITEM_DRIED_SHROOM, 10, 0 },
     },
-    .heartDrops = STANDARD_HEART_DROPS(2),
-    .flowerDrops = STANDARD_FLOWER_DROPS(2),
-    .maxCoinBonus = 2,
-    .territory = { .temp = { 260, 60, 30, 30, 0, -32767, 0, 260, 60, 30, 250 }},
+        .heartDrops = STANDARD_HEART_DROPS(2),
+        .flowerDrops = STANDARD_FLOWER_DROPS(2),
+        .maxCoinBonus = 2,
+    },
+	.territory = { .temp = { 260, 60, 30, 30, 0, -32767, 0, 260, 60, 30, 250 }},
     .animations = {
         NPC_ANIM_paragoomba_hyper_idle,
         NPC_ANIM_paragoomba_hyper_walk,
@@ -1161,10 +1187,12 @@ StaticNpc N(npcGroup_8024768C) = {
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
     .init = &N(init_80245C9C),
     .yaw = 0,
-    .dropFlags = NPC_DROP_FLAGS_80,
-    .heartDrops = NO_DROPS,
-    .flowerDrops = NO_DROPS,
-    .animations = {
+    .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+        .heartDrops = NO_DROPS,
+        .flowerDrops = NO_DROPS,
+    },
+	.animations = {
         NPC_ANIM_world_skolar_Palette_00_Anim_1,
         NPC_ANIM_world_skolar_Palette_00_Anim_1,
         NPC_ANIM_world_skolar_Palette_00_Anim_1,

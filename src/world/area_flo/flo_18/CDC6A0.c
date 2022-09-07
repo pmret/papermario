@@ -1539,18 +1539,20 @@ StaticNpc N(npcGroup_80245CEC)[] = {
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_40000 | NPC_FLAG_400000,
         .init = &N(init_80245B90),
         .yaw = 90,
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .itemDropChance = 25,
-        .itemDrops = {
+        .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+            .itemDropChance = 25,
+            .itemDrops = {
             { ITEM_SUPER_SHROOM, 2, 0 },
             { ITEM_MAPLE_SYRUP, 2, 0 },
             { ITEM_THUNDER_RAGE, 2, 0 },
             { ITEM_STOP_WATCH, 2, 0 },
         },
-        .heartDrops = STANDARD_HEART_DROPS(2),
-        .flowerDrops = STANDARD_FLOWER_DROPS(3),
-        .maxCoinBonus = 2,
-        .animations = {
+            .heartDrops = STANDARD_HEART_DROPS(2),
+            .flowerDrops = STANDARD_FLOWER_DROPS(3),
+            .maxCoinBonus = 2,
+        },
+	.animations = {
             NPC_ANIM_lakitu_Palette_00_Anim_1,
             NPC_ANIM_lakitu_Palette_00_Anim_2,
             NPC_ANIM_lakitu_Palette_00_Anim_3,
@@ -1577,18 +1579,20 @@ StaticNpc N(npcGroup_80245CEC)[] = {
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_40000 | NPC_FLAG_400000,
         .init = &N(init_80245C04),
         .yaw = 270,
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .itemDropChance = 25,
-        .itemDrops = {
+        .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+            .itemDropChance = 25,
+            .itemDrops = {
             { ITEM_SUPER_SHROOM, 2, 0 },
             { ITEM_MAPLE_SYRUP, 2, 0 },
             { ITEM_THUNDER_RAGE, 2, 0 },
             { ITEM_STOP_WATCH, 2, 0 },
         },
-        .heartDrops = STANDARD_HEART_DROPS(2),
-        .flowerDrops = STANDARD_FLOWER_DROPS(3),
-        .maxCoinBonus = 2,
-        .animations = {
+            .heartDrops = STANDARD_HEART_DROPS(2),
+            .flowerDrops = STANDARD_FLOWER_DROPS(3),
+            .maxCoinBonus = 2,
+        },
+	.animations = {
             NPC_ANIM_lakitu_Palette_00_Anim_1,
             NPC_ANIM_lakitu_Palette_00_Anim_2,
             NPC_ANIM_lakitu_Palette_00_Anim_3,
@@ -1615,18 +1619,20 @@ StaticNpc N(npcGroup_80245CEC)[] = {
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_40000 | NPC_FLAG_400000,
         .init = &N(init_80245C78),
         .yaw = 270,
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .itemDropChance = 25,
-        .itemDrops = {
+        .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+            .itemDropChance = 25,
+            .itemDrops = {
             { ITEM_SUPER_SHROOM, 2, 0 },
             { ITEM_MAPLE_SYRUP, 2, 0 },
             { ITEM_THUNDER_RAGE, 2, 0 },
             { ITEM_STOP_WATCH, 2, 0 },
         },
-        .heartDrops = STANDARD_HEART_DROPS(2),
-        .flowerDrops = STANDARD_FLOWER_DROPS(3),
-        .maxCoinBonus = 2,
-        .animations = {
+            .heartDrops = STANDARD_HEART_DROPS(2),
+            .flowerDrops = STANDARD_FLOWER_DROPS(3),
+            .maxCoinBonus = 2,
+        },
+	.animations = {
             NPC_ANIM_lakitu_Palette_00_Anim_1,
             NPC_ANIM_lakitu_Palette_00_Anim_2,
             NPC_ANIM_lakitu_Palette_00_Anim_3,
@@ -1653,18 +1659,20 @@ StaticNpc N(npcGroup_80245CEC)[] = {
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_40000 | NPC_FLAG_400000,
         .init = &N(init_80245AA8),
         .yaw = 90,
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .itemDropChance = 25,
-        .itemDrops = {
+        .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+            .itemDropChance = 25,
+            .itemDrops = {
             { ITEM_SUPER_SHROOM, 2, 0 },
             { ITEM_MAPLE_SYRUP, 2, 0 },
             { ITEM_THUNDER_RAGE, 2, 0 },
             { ITEM_STOP_WATCH, 2, 0 },
         },
-        .heartDrops = STANDARD_HEART_DROPS(2),
-        .flowerDrops = STANDARD_FLOWER_DROPS(3),
-        .maxCoinBonus = 2,
-        .animations = {
+            .heartDrops = STANDARD_HEART_DROPS(2),
+            .flowerDrops = STANDARD_FLOWER_DROPS(3),
+            .maxCoinBonus = 2,
+        },
+	.animations = {
             NPC_ANIM_magikoopa_Palette_02_Anim_1,
             NPC_ANIM_magikoopa_Palette_02_Anim_1,
             NPC_ANIM_magikoopa_Palette_02_Anim_1,
@@ -1691,18 +1699,20 @@ StaticNpc N(npcGroup_80245CEC)[] = {
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_40000 | NPC_FLAG_400000,
         .init = &N(init_80245B30),
         .yaw = 270,
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .itemDropChance = 25,
-        .itemDrops = {
+        .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+            .itemDropChance = 25,
+            .itemDrops = {
             { ITEM_SUPER_SHROOM, 2, 0 },
             { ITEM_MAPLE_SYRUP, 2, 0 },
             { ITEM_THUNDER_RAGE, 2, 0 },
             { ITEM_STOP_WATCH, 2, 0 },
         },
-        .heartDrops = STANDARD_HEART_DROPS(2),
-        .flowerDrops = STANDARD_FLOWER_DROPS(3),
-        .maxCoinBonus = 2,
-        .animations = {
+            .heartDrops = STANDARD_HEART_DROPS(2),
+            .flowerDrops = STANDARD_FLOWER_DROPS(3),
+            .maxCoinBonus = 2,
+        },
+	.animations = {
             NPC_ANIM_flying_magikoopa_Palette_02_Anim_1,
             NPC_ANIM_flying_magikoopa_Palette_02_Anim_1,
             NPC_ANIM_flying_magikoopa_Palette_02_Anim_1,

@@ -38,16 +38,18 @@ StaticNpc N(npcGroup_802403F8) = {
     .pos = { 205.0f, 0.0f, -60.0f },
     .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW,
     .yaw = 90,
-    .dropFlags = NPC_DROP_FLAGS_80,
-    .itemDropChance = 15,
-    .itemDrops = {
+    .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+        .itemDropChance = 15,
+        .itemDrops = {
         { ITEM_DRIED_FRUIT, 9, 0 },
         { ITEM_TASTY_TONIC, 1, 0 },
     },
-    .heartDrops = STANDARD_HEART_DROPS(2),
-    .flowerDrops = STANDARD_FLOWER_DROPS(2),
-    .maxCoinBonus = 1,
-    .territory = { .temp = { 205, 0, -60, 100, 0, -32767, 0, 0, 0, 0, 1000, 0, 0, 1 }},
+        .heartDrops = STANDARD_HEART_DROPS(2),
+        .flowerDrops = STANDARD_FLOWER_DROPS(2),
+        .maxCoinBonus = 1,
+    },
+	.territory = { .temp = { 205, 0, -60, 100, 0, -32767, 0, 0, 0, 0, 1000, 0, 0, 1 }},
     .animations = {
         NPC_ANIM_pokey_Palette_00_Anim_4,
         NPC_ANIM_pokey_Palette_00_Anim_8,
@@ -75,16 +77,18 @@ StaticNpc N(npcGroup_802405E8) = {
     .pos = { -200.0f, 0.0f, 180.0f },
     .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW,
     .yaw = 270,
-    .dropFlags = NPC_DROP_FLAGS_80,
-    .itemDropChance = 15,
-    .itemDrops = {
+    .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+        .itemDropChance = 15,
+        .itemDrops = {
         { ITEM_DRIED_FRUIT, 9, 0 },
         { ITEM_TASTY_TONIC, 1, 0 },
     },
-    .heartDrops = STANDARD_HEART_DROPS(2),
-    .flowerDrops = STANDARD_FLOWER_DROPS(2),
-    .maxCoinBonus = 1,
-    .territory = { .temp = { -200, 0, 180, 100, 0, -32767, 0, 0, 0, 0, 1000, 0, 0, 1 }},
+        .heartDrops = STANDARD_HEART_DROPS(2),
+        .flowerDrops = STANDARD_FLOWER_DROPS(2),
+        .maxCoinBonus = 1,
+    },
+	.territory = { .temp = { -200, 0, 180, 100, 0, -32767, 0, 0, 0, 0, 1000, 0, 0, 1 }},
     .animations = {
         NPC_ANIM_pokey_Palette_00_Anim_4,
         NPC_ANIM_pokey_Palette_00_Anim_8,

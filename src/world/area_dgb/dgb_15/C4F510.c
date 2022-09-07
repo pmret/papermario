@@ -380,16 +380,18 @@ StaticNpc N(npcGroup_802428C0) = {
     .flags = NPC_FLAG_100 | NPC_FLAG_JUMPING | NPC_FLAG_40000 | NPC_FLAG_200000 | NPC_FLAG_NO_DROPS,
     .init = &N(init_802427EC),
     .yaw = 270,
-    .dropFlags = NPC_DROP_FLAGS_80,
-    .itemDropChance = 5,
-    .itemDrops = {
+    .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+        .itemDropChance = 5,
+        .itemDrops = {
         { ITEM_SUPER_SHROOM, 10, 0 },
     },
-    .heartDrops = STANDARD_HEART_DROPS(3),
-    .flowerDrops = STANDARD_FLOWER_DROPS(2),
-    .minCoinBonus = 2,
-    .maxCoinBonus = 3,
-    .territory = { .temp = { 7, -500, 0, 200, -700, 0, 200, -900, 0, 200, -1000, 0, 200, -800, 0, 200, -600, 0, 200, -400, 0, 200, 0, 0, 0, 0, 0, 0, 0, 0, 0, -32767, -500, 0, 200, 1000, 250, 1, 1 }},
+        .heartDrops = STANDARD_HEART_DROPS(3),
+        .flowerDrops = STANDARD_FLOWER_DROPS(2),
+        .minCoinBonus = 2,
+        .maxCoinBonus = 3,
+    },
+	.territory = { .temp = { 7, -500, 0, 200, -700, 0, 200, -900, 0, 200, -1000, 0, 200, -800, 0, 200, -600, 0, 200, -400, 0, 200, 0, 0, 0, 0, 0, 0, 0, 0, 0, -32767, -500, 0, 200, 1000, 250, 1, 1 }},
     .animations = {
         NPC_ANIM_world_tubba_Palette_00_Anim_6,
         NPC_ANIM_world_tubba_Palette_00_Anim_9,

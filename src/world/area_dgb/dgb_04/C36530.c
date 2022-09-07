@@ -240,10 +240,12 @@ StaticNpc N(npcGroup_80243B28) = {
     .pos = { 70.0f, -220.0f, 186.0f },
     .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
     .yaw = 90,
-    .dropFlags = NPC_DROP_FLAGS_80,
-    .heartDrops = NO_DROPS,
-    .flowerDrops = NO_DROPS,
-    .territory = { .temp = { 70, -220, 186, 15, 40, -32767, 1, 80, -220, 170, 80, 150, 1 }},
+    .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+        .heartDrops = NO_DROPS,
+        .flowerDrops = NO_DROPS,
+    },
+	.territory = { .temp = { 70, -220, 186, 15, 40, -32767, 1, 80, -220, 170, 80, 150, 1 }},
     .animations = {
         NPC_ANIM_sentinel_Palette_00_Anim_1,
         NPC_ANIM_sentinel_Palette_00_Anim_2,

@@ -394,10 +394,12 @@ StaticNpc N(npcGroup_8024368C) = {
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW | NPC_FLAG_400000,
     .init = &N(init_80243564),
     .yaw = 90,
-    .dropFlags = NPC_DROP_FLAGS_80,
-    .heartDrops = NO_DROPS,
-    .flowerDrops = NO_DROPS,
-    .animations = {
+    .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+        .heartDrops = NO_DROPS,
+        .flowerDrops = NO_DROPS,
+    },
+	.animations = {
         NPC_ANIM_gate_flower_Palette_01_Anim_1,
         NPC_ANIM_gate_flower_Palette_01_Anim_1,
         NPC_ANIM_gate_flower_Palette_01_Anim_1,
@@ -424,15 +426,17 @@ StaticNpc N(npcGroup_8024387C) = {
     .pos = { -200.0f, 45.0f, 0.0f },
     .flags = NPC_FLAG_LOCK_ANIMS,
     .yaw = 90,
-    .dropFlags = NPC_DROP_FLAGS_80,
-    .itemDropChance = 10,
-    .itemDrops = {
+    .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+        .itemDropChance = 10,
+        .itemDrops = {
         { ITEM_THUNDER_RAGE, 10, 0 },
     },
-    .heartDrops = STANDARD_HEART_DROPS(2),
-    .flowerDrops = STANDARD_FLOWER_DROPS(2),
-    .maxCoinBonus = 2,
-    .territory = { .temp = { -200, 45, 0, 30, 0, -32767, 0, -200, 45, 0, 200 }},
+        .heartDrops = STANDARD_HEART_DROPS(2),
+        .flowerDrops = STANDARD_FLOWER_DROPS(2),
+        .maxCoinBonus = 2,
+    },
+	.territory = { .temp = { -200, 45, 0, 30, 0, -32767, 0, -200, 45, 0, 200 }},
     .animations = {
         NPC_ANIM_tuff_puff_Palette_00_Anim_0,
         NPC_ANIM_tuff_puff_Palette_00_Anim_0,
@@ -460,17 +464,19 @@ StaticNpc N(npcGroup_80243A6C) = {
     .pos = { 150.0f, 55.0f, 0.0f },
     .flags = NPC_FLAG_LOCK_ANIMS,
     .yaw = 90,
-    .dropFlags = NPC_DROP_FLAGS_80,
-    .itemDropChance = 15,
-    .itemDrops = {
+    .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+        .itemDropChance = 15,
+        .itemDrops = {
         { ITEM_MAPLE_SYRUP, 6, 0 },
         { ITEM_HONEY_SYRUP, 4, 0 },
     },
-    .heartDrops = STANDARD_HEART_DROPS(3),
-    .flowerDrops = STANDARD_FLOWER_DROPS(2),
-    .minCoinBonus = 1,
-    .maxCoinBonus = 4,
-    .territory = { .temp = { 150, 50, 0, 30, 0, -32767, 0, 150, 50, 0, 200, 0, 0, 1 }},
+        .heartDrops = STANDARD_HEART_DROPS(3),
+        .flowerDrops = STANDARD_FLOWER_DROPS(2),
+        .minCoinBonus = 1,
+        .maxCoinBonus = 4,
+    },
+	.territory = { .temp = { 150, 50, 0, 30, 0, -32767, 0, 150, 50, 0, 200, 0, 0, 1 }},
     .animations = {
         NPC_ANIM_bzzap_Palette_00_Anim_2,
         NPC_ANIM_bzzap_Palette_00_Anim_2,

@@ -137,10 +137,12 @@ StaticNpc N(npcGroup_80240954) = {
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_LOCK_ANIMS,
     .init = &N(init_802408FC),
     .yaw = 270,
-    .dropFlags = NPC_DROP_FLAGS_80,
-    .heartDrops = NO_DROPS,
-    .flowerDrops = NO_DROPS,
-    .animations = {
+    .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+        .heartDrops = NO_DROPS,
+        .flowerDrops = NO_DROPS,
+    },
+	.animations = {
         NPC_ANIM_boo_Palette_01_Anim_1,
         NPC_ANIM_boo_Palette_01_Anim_2,
         NPC_ANIM_boo_Palette_01_Anim_3,

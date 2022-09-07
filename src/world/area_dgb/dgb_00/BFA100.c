@@ -461,10 +461,12 @@ StaticNpc N(npcGroup_80241FE4) = {
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_400000,
     .init = &N(init_80241F70),
     .yaw = 90,
-    .dropFlags = NPC_DROP_FLAGS_80,
-    .heartDrops = NO_DROPS,
-    .flowerDrops = NO_DROPS,
-    .animations = {
+    .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+        .heartDrops = NO_DROPS,
+        .flowerDrops = NO_DROPS,
+    },
+	.animations = {
         NPC_ANIM_boo_Palette_01_Anim_1,
         NPC_ANIM_boo_Palette_01_Anim_2,
         NPC_ANIM_boo_Palette_01_Anim_3,
@@ -492,10 +494,12 @@ StaticNpc N(npcGroup_802421D4) = {
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS,
     .init = &N(init_80241F94),
     .yaw = 90,
-    .dropFlags = NPC_DROP_FLAGS_80,
-    .heartDrops = NO_DROPS,
-    .flowerDrops = NO_DROPS,
-    .animations = {
+    .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+        .heartDrops = NO_DROPS,
+        .flowerDrops = NO_DROPS,
+    },
+	.animations = {
         NPC_ANIM_boo_Palette_01_Anim_1,
         NPC_ANIM_boo_Palette_01_Anim_2,
         NPC_ANIM_boo_Palette_01_Anim_3,
@@ -522,10 +526,12 @@ StaticNpc N(npcGroup_802423C4) = {
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS,
     .init = &N(init_80241FA4),
     .yaw = 90,
-    .dropFlags = NPC_DROP_FLAGS_80,
-    .heartDrops = NO_DROPS,
-    .flowerDrops = NO_DROPS,
-    .animations = {
+    .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+        .heartDrops = NO_DROPS,
+        .flowerDrops = NO_DROPS,
+    },
+	.animations = {
         NPC_ANIM_boo_Palette_01_Anim_1,
         NPC_ANIM_boo_Palette_01_Anim_2,
         NPC_ANIM_boo_Palette_01_Anim_3,
@@ -552,10 +558,12 @@ StaticNpc N(npcGroup_802425B4) = {
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS,
     .init = &N(init_80241FB4),
     .yaw = 90,
-    .dropFlags = NPC_DROP_FLAGS_80,
-    .heartDrops = NO_DROPS,
-    .flowerDrops = NO_DROPS,
-    .animations = {
+    .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+        .heartDrops = NO_DROPS,
+        .flowerDrops = NO_DROPS,
+    },
+	.animations = {
         NPC_ANIM_boo_Palette_01_Anim_1,
         NPC_ANIM_boo_Palette_01_Anim_2,
         NPC_ANIM_boo_Palette_01_Anim_3,
@@ -582,10 +590,12 @@ StaticNpc N(npcGroup_802427A4) = {
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS,
     .init = &N(init_80241FC4),
     .yaw = 90,
-    .dropFlags = NPC_DROP_FLAGS_80,
-    .heartDrops = NO_DROPS,
-    .flowerDrops = NO_DROPS,
-    .animations = {
+    .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+        .heartDrops = NO_DROPS,
+        .flowerDrops = NO_DROPS,
+    },
+	.animations = {
         NPC_ANIM_boo_Palette_01_Anim_1,
         NPC_ANIM_boo_Palette_01_Anim_2,
         NPC_ANIM_boo_Palette_01_Anim_3,
@@ -612,10 +622,12 @@ StaticNpc N(npcGroup_80242994) = {
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS,
     .init = &N(init_80241FD4),
     .yaw = 90,
-    .dropFlags = NPC_DROP_FLAGS_80,
-    .heartDrops = NO_DROPS,
-    .flowerDrops = NO_DROPS,
-    .animations = {
+    .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+        .heartDrops = NO_DROPS,
+        .flowerDrops = NO_DROPS,
+    },
+	.animations = {
         NPC_ANIM_boo_Palette_01_Anim_1,
         NPC_ANIM_boo_Palette_01_Anim_2,
         NPC_ANIM_boo_Palette_01_Anim_3,
@@ -788,10 +800,12 @@ StaticNpc N(npcGroup_802434FC) = {
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_400000,
     .init = &N(init_802434EC),
     .yaw = 90,
-    .dropFlags = NPC_DROP_FLAGS_80,
-    .heartDrops = NO_DROPS,
-    .flowerDrops = NO_DROPS,
-    .animations = {
+    .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+        .heartDrops = NO_DROPS,
+        .flowerDrops = NO_DROPS,
+    },
+	.animations = {
         NPC_ANIM_sentinel_Palette_00_Anim_1,
         NPC_ANIM_sentinel_Palette_00_Anim_2,
         NPC_ANIM_sentinel_Palette_00_Anim_3,

@@ -51,15 +51,17 @@ StaticNpc N(npcGroup_802440F4) = {
     .pos = { 440.0f, 145.0f, 15.0f },
     .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
     .yaw = 90,
-    .dropFlags = NPC_DROP_FLAGS_80,
-    .itemDropChance = 10,
-    .itemDrops = {
+    .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+        .itemDropChance = 10,
+        .itemDrops = {
         { ITEM_THUNDER_RAGE, 10, 0 },
     },
-    .heartDrops = STANDARD_HEART_DROPS(2),
-    .flowerDrops = STANDARD_FLOWER_DROPS(2),
-    .maxCoinBonus = 2,
-    .territory = { .temp = { 440, 145, 15, 30, 0, -32767, 0, 485, 145, 55, 225, 95, 1 }},
+        .heartDrops = STANDARD_HEART_DROPS(2),
+        .flowerDrops = STANDARD_FLOWER_DROPS(2),
+        .maxCoinBonus = 2,
+    },
+	.territory = { .temp = { 440, 145, 15, 30, 0, -32767, 0, 485, 145, 55, 225, 95, 1 }},
     .animations = {
         NPC_ANIM_tuff_puff_Palette_00_Anim_0,
         NPC_ANIM_tuff_puff_Palette_00_Anim_0,
@@ -87,15 +89,17 @@ StaticNpc N(npcGroup_802442E4) = {
     .pos = { 600.0f, 145.0f, 15.0f },
     .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
     .yaw = 270,
-    .dropFlags = NPC_DROP_FLAGS_80,
-    .itemDropChance = 10,
-    .itemDrops = {
+    .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+        .itemDropChance = 10,
+        .itemDrops = {
         { ITEM_THUNDER_RAGE, 10, 0 },
     },
-    .heartDrops = STANDARD_HEART_DROPS(2),
-    .flowerDrops = STANDARD_FLOWER_DROPS(2),
-    .maxCoinBonus = 2,
-    .territory = { .temp = { 600, 145, 15, 30, 0, -32767, 0, 485, 145, 55, 225, 95, 1 }},
+        .heartDrops = STANDARD_HEART_DROPS(2),
+        .flowerDrops = STANDARD_FLOWER_DROPS(2),
+        .maxCoinBonus = 2,
+    },
+	.territory = { .temp = { 600, 145, 15, 30, 0, -32767, 0, 485, 145, 55, 225, 95, 1 }},
     .animations = {
         NPC_ANIM_tuff_puff_Palette_00_Anim_0,
         NPC_ANIM_tuff_puff_Palette_00_Anim_0,

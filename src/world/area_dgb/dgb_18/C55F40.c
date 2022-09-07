@@ -588,10 +588,12 @@ StaticNpc N(npcGroup_802432D4) = {
     .flags = NPC_FLAG_JUMPING | NPC_FLAG_40000 | NPC_FLAG_200000 | NPC_FLAG_NO_DROPS,
     .init = &N(init_80242924),
     .yaw = 270,
-    .dropFlags = NPC_DROP_FLAGS_80,
-    .heartDrops = NO_DROPS,
-    .flowerDrops = NO_DROPS,
-    .territory = { .temp = { 5, 0, 0, 240, 175, 0, 240, 350, 0, 240, 525, 0, 240, 700, 0, 240, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -32767, 300, 0, 240, 1000, 250, 1, 1 }},
+    .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+        .heartDrops = NO_DROPS,
+        .flowerDrops = NO_DROPS,
+    },
+	.territory = { .temp = { 5, 0, 0, 240, 175, 0, 240, 350, 0, 240, 525, 0, 240, 700, 0, 240, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -32767, 300, 0, 240, 1000, 250, 1, 1 }},
     .animations = {
         NPC_ANIM_world_tubba_Palette_00_Anim_7,
         NPC_ANIM_world_tubba_Palette_00_Anim_A,
@@ -619,10 +621,12 @@ StaticNpc N(npcGroup_802434C4) = {
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_JUMPING,
     .init = &N(init_8024329C),
     .yaw = 270,
-    .dropFlags = NPC_DROP_FLAGS_80,
-    .heartDrops = NO_DROPS,
-    .flowerDrops = NO_DROPS,
-    .animations = {
+    .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+        .heartDrops = NO_DROPS,
+        .flowerDrops = NO_DROPS,
+    },
+	.animations = {
         NPC_ANIM_yakkey_Palette_00_Anim_1,
         NPC_ANIM_yakkey_Palette_00_Anim_1,
         NPC_ANIM_yakkey_Palette_00_Anim_1,

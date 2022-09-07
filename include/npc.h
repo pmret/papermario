@@ -164,6 +164,16 @@ typedef struct StatDrop {
     /* 0x06 */ s16 chancePerAttempt; ///< % chance for a single heart/flower to be dropped from each attempt.
 } StatDrop; // size = 0x08
 
+typedef struct EnemyDrops {
+    /* 0x00 */ u8 dropFlags;
+    /* 0x01 */ s8 itemDropChance; // %
+    /* 0x02 */ ItemDrop itemDrops[8];
+    /* 0x32 */ StatDrop heartDrops[8];
+    /* 0x72 */ StatDrop flowerDrops[8];
+    /* 0xB2 */ s16 minCoinBonus;
+    /* 0xB4 */ s16 maxCoinBonus;
+    /* 0xB6 */ char unk_DE[2];
+} EnemyDrops; // size = 0xB8
 
 enum TerritoryShape { SHAPE_CYLINDER, SHAPE_RECT };
 
@@ -223,13 +233,7 @@ typedef struct StaticNpc {
     /* 0x01C */ s32 initVarCount;
     /* 0x020 */ NpcInitialVars initVar;
     /* 0x024 */ s32 yaw;
-    /* 0x028 */ u8 dropFlags; // TODO: use EnemyDrops (requires tons of map edits)
-    /* 0x029 */ s8 itemDropChance; // %
-    /* 0x02A */ ItemDrop itemDrops[8];
-    /* 0x05A */ StatDrop heartDrops[8];
-    /* 0x09A */ StatDrop flowerDrops[8];
-    /* 0x0DA */ s16 minCoinBonus;
-    /* 0x0DC */ s16 maxCoinBonus;
+    /* 0x028 */ EnemyDrops drops;
     /* 0x0E0 */ EnemyTerritory territory;
     /* 0x1A0 */ struct {
         /* 0x00 */ s32 idle;
@@ -267,17 +271,6 @@ typedef struct {
 } NpcGroupList[]; // size = 0x0C
 
 #define NPC_GROUP(npcs, battle) { sizeof(npcs) / sizeof(StaticNpc), (StaticNpc*) &npcs, battle }
-
-typedef struct EnemyDrops {
-    /* 0x00 */ u8 dropFlags;
-    /* 0x01 */ s8 itemDropChance; // %
-    /* 0x02 */ ItemDrop itemDrops[8];
-    /* 0x32 */ StatDrop heartDrops[8];
-    /* 0x72 */ StatDrop flowerDrops[8];
-    /* 0xB2 */ s16 minCoinBonus;
-    /* 0xB4 */ s16 maxCoinBonus;
-    /* 0xB6 */ char unk_DE[2];
-} EnemyDrops; // size = 0xB8
 
 // function signature used for state handlers in AI main functions
 typedef void AIStateHandler(Evt* script, MobileAISettings* settings, EnemyDetectVolume* territory);

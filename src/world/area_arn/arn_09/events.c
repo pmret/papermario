@@ -167,10 +167,12 @@ StaticNpc N(npcGroup_80240784) = {
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
     .init = &N(init_80240730),
     .yaw = 270,
-    .dropFlags = NPC_DROP_FLAGS_80,
-    .heartDrops = NO_DROPS,
-    .flowerDrops = NO_DROPS,
-    .animations = {
+    .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+        .heartDrops = NO_DROPS,
+        .flowerDrops = NO_DROPS,
+    },
+	.animations = {
         NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
         NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
         NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
