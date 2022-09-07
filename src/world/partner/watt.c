@@ -4,8 +4,7 @@
 #include "npc.h"
 
 void force_player_anim(s32 arg0);
-void func_802BE070_31DBE0(void);
-void partner_kill_ability_script(void);
+void func_802BE014_31DB84(void);
 
 BSS s32 D_802BE300;
 BSS s32 D_802BE304;
