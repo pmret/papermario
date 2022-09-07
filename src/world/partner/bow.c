@@ -170,7 +170,7 @@ ApiStatus BowUseAbility(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         func_802BD4FC_323E4C(bow);
         if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_100000)) {
-            if (func_800EA52C(9) != 0) {
+            if (func_800EA52C(9)) {
                 if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_200000) {
                     playerStatus->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_200000;
                     script->functionTemp[2] = disable_player_input();
@@ -200,7 +200,7 @@ ApiStatus BowUseAbility(Evt* script, s32 isInitialCall) {
             script->functionTemp[0]++;
             break;
         case 41:
-            if ((func_800EA52C(9) == 0 || is_starting_conversation()) &&
+            if ((!func_800EA52C(9) || is_starting_conversation()) &&
                  script->functionTemp[2] < playerStatus->inputEnabledCounter
                  && D_802BE0C4) {
 
