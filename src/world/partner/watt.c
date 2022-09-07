@@ -15,9 +15,7 @@ BSS EffectInstance* WattStaticEffect;
 BSS s32 D_802BE314;
 BSS TweesterPhysics WattTweesterPhysics;
 
-s32 D_802BE250_31DDC0 = 0x18;
-
-s32 D_802BE254_31DDC4 = 6;
+s32 D_802BE250_31DDC0[] = {24, 6};
 
 void func_802BD100_31CC70(Npc* npc) {
     if (!(npc->flags & NPC_FLAG_2)) {
@@ -35,8 +33,22 @@ s32 world_watt_dispose_static_effect(void) {
     }
 }
 
-void func_802BD1AC_31CD1C(s32 arg0);
-INCLUDE_ASM(s32, "world/partner/watt", func_802BD1AC_31CD1C);
+void func_802BD1AC_31CD1C(s32 arg0) {
+    EffectInstance* effect = WattStaticEffect;
+    StaticStatusFXData* data = effect->data.staticStatus;
+    f32 tmp;
+    s32 parts;
+    s32 i;
+
+    data->unk_00 = arg0;
+    tmp = D_802BE250_31DDC0[arg0] * 0.5f;
+    parts = effect->numParts - 1;
+
+    data++;
+    for (i = 1; i < parts; i++, data++) {
+        data->unk_20 = -1.0f - (tmp * (i & 1));
+    }
+}
 
 void world_watt_init(Npc* npc) {
     npc->collisionHeight = 24;
@@ -76,8 +88,8 @@ ApiStatus WattUpdate(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
     Npc* watt = script->owner2.npc;
     f32 sinAngle, cosAngle, liftoffVelocity;
-    Entity* entity;    
-    
+    Entity* entity;
+
     if (gPartnerActionStatus.partnerAction_unk_1 == 0) {
         if (isInitialCall) {
             partner_flying_enable(watt, 1);
@@ -112,7 +124,7 @@ ApiStatus WattUpdate(Evt* script, s32 isInitialCall) {
 
             return 0;
         }
-        
+
         switch (WattTweesterPhysicsPtr->state) {
             case 0:
                 WattTweesterPhysicsPtr->state = 1;
@@ -143,7 +155,7 @@ ApiStatus WattUpdate(Evt* script, s32 isInitialCall) {
                 if (WattTweesterPhysicsPtr->liftoffVelocityPhase > 150.0f) {
                     WattTweesterPhysicsPtr->liftoffVelocityPhase = 150.0f;
                 }
-                
+
                 watt->pos.y += liftoffVelocity;
                 watt->renderYaw = clamp_angle(360.0f - WattTweesterPhysicsPtr->angle);
                 WattTweesterPhysicsPtr->angularVelocity += 0.8;
@@ -325,7 +337,7 @@ void func_802BE070_31DBE0(void) {
     f32 temp, angle;
     f32 spriteFacingAngle;
     s32 phi_v1;
-    
+
     if (gPartnerActionStatus.partnerActionState != PARTNER_ACTION_NONE) {
         spriteFacingAngle = gPlayerStatusPtr->spriteFacingAngle;
         if ((spriteFacingAngle < 90.0f) || (spriteFacingAngle > 270.0f)) {
@@ -356,7 +368,7 @@ void func_802BE070_31DBE0(void) {
         playerStatus = gPlayerStatusPtr;
         partnerNPC = new_var2;
         partnerNPC->pos.z = playerStatus->position.z - (cos_rad(angle) * gPlayerStatusPtr->colliderDiameter * temp);
-        
+
         wPartnerNpc->yaw = gPlayerStatusPtr->targetYaw;
         wPartnerNpc->pos.y = gPlayerStatusPtr->position.y + 5.0f;
     }

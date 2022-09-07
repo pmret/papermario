@@ -3,6 +3,8 @@
 #include "goombario.h"
 #include "../src/world/partners.h"
 
+extern s32* D_802B79A8_E21858;
+
 BSS s32 D_802BDF30;
 BSS s32 D_802BDF34;
 BSS Npc* D_802BDF38;
@@ -176,10 +178,7 @@ s32 world_goombario_can_pause(Npc* goombario) {
     return TRUE;
 }
 
-extern s32* D_802B79A8_E21858;
-
 // get message for tattle routine
-// has big jumptable at rodata 802BDE88
 ApiStatus func_802BD5D8_3174F8(Evt* script, s32 isInitialCall);
 INCLUDE_ASM(ApiStatus, "world/partner/goombario", func_802BD5D8_3174F8, Evt* script, s32 isInitialCall);
 
