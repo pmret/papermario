@@ -2411,7 +2411,7 @@ enum VisibilityGroup {
 };
 
 enum ItemSpawnModes {
-    ITEM_SPAWN_MODE_NOTHING                                      = 0x00000000,
+    ITEM_SPAWN_MODE_KEY                                          = 0x00000000,
     ITEM_SPAWN_MODE_DECORATION                                   = 0x00000001,
     ITEM_SPAWN_MODE_INVISIBLE                                    = 0x00000002,
     ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS                            = 0x00000003,

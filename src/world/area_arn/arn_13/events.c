@@ -181,34 +181,36 @@ EvtScript N(init_8024076C) = {
     EVT_END
 };
 
-StaticNpc N(npcGroup_802407EC) = {
-    .id = 0,
-    .settings = &N(npcSettings_80240450),
-    .pos = { 80.0f, 50.0f, 0.0f },
-    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
-    .init = &N(init_80240720),
-    .yaw = 270,
-    .dropFlags = NPC_DROP_FLAGS_80,
-    .heartDrops = NO_DROPS,
-    .flowerDrops = NO_DROPS,
-    .animations = {
-        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
-        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
-        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
-        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
-        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
-        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
-        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
-        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
-        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
-        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
-        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
-        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
-        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
-        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
-        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
-        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
-    },
+StaticNpc N(npcGroup_802407EC)[] = {
+    {
+        .id = 0,
+        .settings = &N(npcSettings_80240450),
+        .pos = { 80.0f, 50.0f, 0.0f },
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
+        .init = &N(init_80240720),
+        .yaw = 270,
+        .dropFlags = NPC_DROP_FLAGS_80,
+        .heartDrops = NO_DROPS,
+        .flowerDrops = NO_DROPS,
+        .animations = {
+            NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+            NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+            NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+            NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+            NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+            NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+            NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+            NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+            NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+            NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+            NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+            NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+            NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+            NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+            NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+            NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+        },
+    }
 };
 
 StaticNpc N(npcGroup_802409DC) = {
