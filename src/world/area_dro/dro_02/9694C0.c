@@ -117,7 +117,7 @@ static s32 N(pad_3BC8)[] = {
 
 EvtScript N(makeEntities) = {
     EVT_CALL(MakeItemEntity, ITEM_LETTER08, -135, 160, -245, 17, GF_DRO02_Item_Letter08)
-    EVT_CALL(MakeEntity, &Entity_HiddenPanel, 180, 173, -200, 0, 32, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, EVT_PTR(Entity_HiddenPanel), 180, 173, -200, 0, 32, MAKE_ENTITY_END)
     EVT_CALL(AssignPanelFlag, GF_DRO02_HiddenPanel)
     EVT_RETURN
     EVT_END
@@ -1997,7 +1997,7 @@ StaticNpc N(npcGroup_8024D7B4)[] = {
         .dropFlags = NPC_DROP_FLAGS_80,
         .heartDrops = NO_DROPS,
         .flowerDrops = NO_DROPS,
-        .movement = { -303, 0, 22, 146, 38, -32767, 1, 0, 0, 0, 0, 0, 0, 1 },
+        .territory = { .temp = { -303, 0, 22, 146, 38, -32767, 1, 0, 0, 0, 0, 0, 0, 1 }},
         .animations = {
             NPC_ANIM_archeologist_Palette_00_Anim_1,
             NPC_ANIM_archeologist_Palette_00_Anim_2,
@@ -2028,7 +2028,7 @@ StaticNpc N(npcGroup_8024D7B4)[] = {
         .dropFlags = NPC_DROP_FLAGS_80,
         .heartDrops = NO_DROPS,
         .flowerDrops = NO_DROPS,
-        .movement = { -20, 0, 40, 60, 0, -32767, 0, 0, 0, 0, 0, 0, 0, 1 },
+        .territory = { .temp = { -20, 0, 40, 60, 0, -32767, 0, 0, 0, 0, 0, 0, 0, 1 }},
         .animations = {
             NPC_ANIM_dryite_Palette_02_Anim_1,
             NPC_ANIM_dryite_Palette_02_Anim_2,
@@ -2323,7 +2323,8 @@ StaticNpc N(npcGroup_8024D7B4)[] = {
         .settings = &N(Quizmo_NpcSettings),
         .pos = { -335.0f, 0.0f, 90.0f },
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW,
-        .unk_1C = { 00, 00, 00, 01, 00, 03, 02, 01},
+        .initVarCount = 1,
+        .initVar = { .value = 0x00030201 },
         .yaw = 270,
         .dropFlags = NPC_DROP_FLAGS_80,
         .heartDrops = NO_DROPS,

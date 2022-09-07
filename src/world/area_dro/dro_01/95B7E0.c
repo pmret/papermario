@@ -995,7 +995,7 @@ StaticNpc N(npcGroup_80249B34)[] = {
         .dropFlags = NPC_DROP_FLAGS_80,
         .heartDrops = NO_DROPS,
         .flowerDrops = NO_DROPS,
-        .movement = { -235, 0, 160, 30, 0, -32767, 0, 0, 0, 0, 0, 0, 0, 1 },
+        .territory = { .temp = { -235, 0, 160, 30, 0, -32767, 0, 0, 0, 0, 0, 0, 0, 1 }},
         .animations = {
             NPC_ANIM_dryite_Palette_03_Anim_1,
             NPC_ANIM_dryite_Palette_03_Anim_2,
@@ -1171,7 +1171,8 @@ StaticNpc N(npcGroup_80249B34)[] = {
         .settings = &N(Quizmo_NpcSettings),
         .pos = { -400.0f, 0.0f, 100.0f },
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
-        .unk_1C = { 00, 00, 00, 01, 00, 03, 02, 00},
+        .initVarCount = 1,
+        .initVar = { .value = 0x00030200 },
         .yaw = 263,
         .dropFlags = NPC_DROP_FLAGS_80,
         .heartDrops = NO_DROPS,
@@ -1206,7 +1207,7 @@ StaticNpc N(npcGroup_80249B34)[] = {
         .dropFlags = NPC_DROP_FLAGS_80,
         .heartDrops = NO_DROPS,
         .flowerDrops = NO_DROPS,
-        .movement = { -120, 0, 134, 40, 0, -32767, 0, 0, 0, 0, 0, 0, 0, 1 },
+        .territory = { .temp = { -120, 0, 134, 40, 0, -32767, 0, 0, 0, 0, 0, 0, 0, 1 }},
         .animations = {
             NPC_ANIM_dryite_Palette_01_Anim_1,
             NPC_ANIM_dryite_Palette_01_Anim_2,
@@ -1237,7 +1238,7 @@ StaticNpc N(npcGroup_80249B34)[] = {
         .dropFlags = NPC_DROP_FLAGS_80,
         .heartDrops = NO_DROPS,
         .flowerDrops = NO_DROPS,
-        .movement = { 2, 40, 0, 105, -30, 0, 125, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -32767, 0, 0, 0, 0, 0, 0, 1 },
+        .territory = { .temp = { 2, 40, 0, 105, -30, 0, 125, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -32767, 0, 0, 0, 0, 0, 0, 1 }},
         .animations = {
             NPC_ANIM_dryite_Palette_01_Anim_1,
             NPC_ANIM_dryite_Palette_01_Anim_2,

@@ -212,7 +212,7 @@ StaticNpc N(npcGroup_80244D10) = {
     .flowerDrops = STANDARD_FLOWER_DROPS(2),
     .minCoinBonus = 1,
     .maxCoinBonus = 4,
-    .movement = { -175, 55, 15, 30, 0, -32767, 0, -175, 55, 15, 200, 0, 0, 1 },
+    .territory = { .temp = { -175, 55, 15, 30, 0, -32767, 0, -175, 55, 15, 200, 0, 0, 1 }},
     .animations = {
         NPC_ANIM_bzzap_Palette_00_Anim_2,
         NPC_ANIM_bzzap_Palette_00_Anim_2,
@@ -231,7 +231,7 @@ StaticNpc N(npcGroup_80244D10) = {
         NPC_ANIM_bzzap_Palette_00_Anim_1,
         NPC_ANIM_bzzap_Palette_00_Anim_1,
     },
-    .unk_1E0 = { 00, 00, 00, 03, 00, 00, 00, 00},
+    .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
 NpcGroupList N(npcGroupList_80244F00) = {

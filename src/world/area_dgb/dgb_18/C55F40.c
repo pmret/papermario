@@ -591,7 +591,7 @@ StaticNpc N(npcGroup_802432D4) = {
     .dropFlags = NPC_DROP_FLAGS_80,
     .heartDrops = NO_DROPS,
     .flowerDrops = NO_DROPS,
-    .movement = { 5, 0, 0, 240, 175, 0, 240, 350, 0, 240, 525, 0, 240, 700, 0, 240, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -32767, 300, 0, 240, 1000, 250, 1, 1 },
+    .territory = { .temp = { 5, 0, 0, 240, 175, 0, 240, 350, 0, 240, 525, 0, 240, 700, 0, 240, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -32767, 300, 0, 240, 1000, 250, 1, 1 }},
     .animations = {
         NPC_ANIM_world_tubba_Palette_00_Anim_7,
         NPC_ANIM_world_tubba_Palette_00_Anim_A,

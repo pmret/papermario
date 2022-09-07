@@ -173,11 +173,11 @@ s32 _create_npc_basic(NpcBlueprint* blueprint) {
 }
 
 s32 _create_npc_standard(NpcBlueprint* blueprint, u32** animList) {
-    _create_npc(blueprint, animList, FALSE);
+    return _create_npc(blueprint, animList, FALSE);
 }
 
-void _create_npc_partner(NpcBlueprint* blueprint) {
-    _create_npc(blueprint, NULL, TRUE);
+s32 _create_npc_partner(NpcBlueprint* blueprint) {
+    return _create_npc(blueprint, NULL, TRUE);
 }
 
 void free_npc_by_index(s32 listIndex) {

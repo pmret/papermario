@@ -568,7 +568,7 @@ StaticNpc N(npcGroup_80243DE8)[] = {
         .flowerDrops = STANDARD_FLOWER_DROPS(2),
         .minCoinBonus = 2,
         .maxCoinBonus = 3,
-        .movement = { 180, 0, -122, 40, 0, -32767, 0, 0, 0, 75, 355, 255, 1, 1 },
+        .territory = { .temp = { 180, 0, -122, 40, 0, -32767, 0, 0, 0, 75, 355, 255, 1, 1 }},
         .animations = {
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
             NPC_ANIM_world_clubba_Palette_00_Anim_3,
@@ -587,7 +587,7 @@ StaticNpc N(npcGroup_80243DE8)[] = {
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
         },
-        .unk_1E0 = { 00, 00, 00, 02, 00, 00, 00, 00},
+        .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
     },
     {
         .id = NPC_WORLD_CLUBBA1,
@@ -636,7 +636,7 @@ StaticNpc N(npcGroup_802441C8)[] = {
         .flowerDrops = STANDARD_FLOWER_DROPS(2),
         .minCoinBonus = 2,
         .maxCoinBonus = 3,
-        .movement = { 2, -272, 0, -135, -171, 0, -135, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -32767, 0, 0, 75, 355, 255, 1, 1 },
+        .territory = { .temp = { 2, -272, 0, -135, -171, 0, -135, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -32767, 0, 0, 75, 355, 255, 1, 1 }},
         .animations = {
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
             NPC_ANIM_world_clubba_Palette_00_Anim_3,
@@ -655,7 +655,7 @@ StaticNpc N(npcGroup_802441C8)[] = {
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
         },
-        .unk_1E0 = { 00, 00, 00, 02, 00, 00, 00, 00},
+        .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
     },
     {
         .id = NPC_WORLD_CLUBBA3,
@@ -705,7 +705,7 @@ StaticNpc N(npcGroup_802445A8)[] = {
         .flowerDrops = STANDARD_FLOWER_DROPS(2),
         .minCoinBonus = 2,
         .maxCoinBonus = 3,
-        .movement = { -326, 210, 80, 0, 0, -32767, 0, 0, 0, 75, 355, 255, 1, 1 },
+        .territory = { .temp = { -326, 210, 80, 0, 0, -32767, 0, 0, 0, 75, 355, 255, 1, 1 }},
         .animations = {
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
             NPC_ANIM_world_clubba_Palette_00_Anim_3,
@@ -724,7 +724,7 @@ StaticNpc N(npcGroup_802445A8)[] = {
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
         },
-        .unk_1E0 = { 00, 00, 00, 03, 00, 00, 00, 00},
+        .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
     },
     {
         .id = NPC_WORLD_CLUBBA5,

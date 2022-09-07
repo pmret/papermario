@@ -225,7 +225,7 @@ StaticNpc N(npcGroup_802409DC) = {
     .heartDrops = STANDARD_HEART_DROPS(2),
     .flowerDrops = STANDARD_FLOWER_DROPS(2),
     .maxCoinBonus = 2,
-    .movement = { 0, 0, 0, 20, 0, -32767, 0, 0, 0, 0, 150, 0, 0, 1 },
+    .territory = { .temp = { 0, 0, 0, 20, 0, -32767, 0, 0, 0, 0, 150, 0, 0, 1 }},
     .animations = {
         NPC_ANIM_goomba_hyper_idle,
         NPC_ANIM_goomba_hyper_walk,
@@ -244,7 +244,7 @@ StaticNpc N(npcGroup_802409DC) = {
         NPC_ANIM_goomba_hyper_run,
         NPC_ANIM_goomba_hyper_run,
     },
-    .unk_1E0 = { 00, 00, 00, 01, 00, 00, 00, 00},
+    .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
 NpcGroupList N(npcGroupList_80240BCC) = {

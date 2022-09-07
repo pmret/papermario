@@ -116,7 +116,7 @@ StaticNpc N(npcGroup_802414CC) = {
     .flowerDrops = STANDARD_FLOWER_DROPS(2),
     .minCoinBonus = 1,
     .maxCoinBonus = 3,
-    .movement = { -196, 130, 104, 50, 30, -32767, 1, -196, 130, 104, 120 },
+    .territory = { .temp = { -196, 130, 104, 50, 30, -32767, 1, -196, 130, 104, 120 }},
     .animations = {
         NPC_ANIM_cleft_hyper_idle,
         NPC_ANIM_cleft_hyper_walk,
@@ -135,7 +135,7 @@ StaticNpc N(npcGroup_802414CC) = {
         NPC_ANIM_cleft_hyper_rock_lighten,
         NPC_ANIM_cleft_hyper_still,
     },
-    .unk_1E0 = { 00, 00, 00, 01, 00, 00, 00, 00},
+    .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
 StaticNpc N(npcGroup_802416BC) = {
@@ -149,7 +149,7 @@ StaticNpc N(npcGroup_802416BC) = {
     .flowerDrops = STANDARD_FLOWER_DROPS(2),
     .minCoinBonus = 1,
     .maxCoinBonus = 3,
-    .movement = { 641, 268, 202, 50, 30, -32767, 1, 641, 268, 202, 120 },
+    .territory = { .temp = { 641, 268, 202, 50, 30, -32767, 1, 641, 268, 202, 120 }},
     .animations = {
         NPC_ANIM_cleft_hyper_idle,
         NPC_ANIM_cleft_hyper_walk,
@@ -168,7 +168,7 @@ StaticNpc N(npcGroup_802416BC) = {
         NPC_ANIM_cleft_hyper_rock_lighten,
         NPC_ANIM_cleft_hyper_still,
     },
-    .unk_1E0 = { 00, 00, 00, 01, 00, 00, 00, 00},
+    .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
 StaticNpc N(npcGroup_802418AC) = {
@@ -183,7 +183,7 @@ StaticNpc N(npcGroup_802418AC) = {
     .heartDrops = STANDARD_HEART_DROPS(2),
     .flowerDrops = STANDARD_FLOWER_DROPS(2),
     .maxCoinBonus = 2,
-    .movement = { 333, 215, 85, 40, 30, -32767, 1, 360, 215, 150, 120, 137, 1 },
+    .territory = { .temp = { 333, 215, 85, 40, 30, -32767, 1, 360, 215, 150, 120, 137, 1 }},
     .animations = {
         NPC_ANIM_goomba_hyper_idle,
         NPC_ANIM_goomba_hyper_walk,
@@ -202,7 +202,7 @@ StaticNpc N(npcGroup_802418AC) = {
         NPC_ANIM_goomba_hyper_run,
         NPC_ANIM_goomba_hyper_run,
     },
-    .unk_1E0 = { 00, 00, 00, 01, 00, 00, 00, 00},
+    .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
 NpcGroupList N(npcGroupList_80241A9C) = {

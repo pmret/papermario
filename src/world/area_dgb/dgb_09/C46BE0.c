@@ -452,7 +452,7 @@ StaticNpc N(npcGroup_80244920)[] = {
         .flowerDrops = STANDARD_FLOWER_DROPS(2),
         .minCoinBonus = 2,
         .maxCoinBonus = 3,
-        .movement = { -350, 0, 180, 40, 0, -32767, 0, 0, 0, 50, 600, 250, 1, 1 },
+        .territory = { .temp = { -350, 0, 180, 40, 0, -32767, 0, 0, 0, 50, 600, 250, 1, 1 }},
         .animations = {
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
             NPC_ANIM_world_clubba_Palette_00_Anim_3,
@@ -471,7 +471,7 @@ StaticNpc N(npcGroup_80244920)[] = {
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
         },
-        .unk_1E0 = { 00, 00, 00, 02, 00, 00, 00, 00},
+        .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
         .extraAnimations = N(extraAnimationList_802440BC),
     },
     {
@@ -532,7 +532,7 @@ StaticNpc N(npcGroup_80244D6C)[] = {
         .flowerDrops = STANDARD_FLOWER_DROPS(2),
         .minCoinBonus = 2,
         .maxCoinBonus = 3,
-        .movement = { 310, 0, 88, 40, 0, -32767, 0, 0, 0, 50, 600, 250, 1, 1 },
+        .territory = { .temp = { 310, 0, 88, 40, 0, -32767, 0, 0, 0, 50, 600, 250, 1, 1 }},
         .animations = {
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
             NPC_ANIM_world_clubba_Palette_00_Anim_3,
@@ -551,7 +551,7 @@ StaticNpc N(npcGroup_80244D6C)[] = {
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
         },
-        .unk_1E0 = { 00, 00, 00, 02, 00, 00, 00, 00},
+        .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
         .extraAnimations = N(extraAnimationList_802440BC),
     },
     {
@@ -594,7 +594,7 @@ StaticNpc N(npcGroup_8024514C) = {
     .dropFlags = NPC_DROP_FLAGS_80,
     .heartDrops = NO_DROPS,
     .flowerDrops = NO_DROPS,
-    .movement = { -20, 100, 180, 40, 0, -32767, 0, -20, 100, 180, 250, 0, 0, 1 },
+    .territory = { .temp = { -20, 100, 180, 40, 0, -32767, 0, -20, 100, 180, 250, 0, 0, 1 }},
     .animations = {
         NPC_ANIM_sentinel_Palette_00_Anim_1,
         NPC_ANIM_sentinel_Palette_00_Anim_2,

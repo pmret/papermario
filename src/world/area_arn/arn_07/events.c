@@ -1058,7 +1058,7 @@ StaticNpc N(npcGroup_802470BC) = {
     .heartDrops = STANDARD_HEART_DROPS(2),
     .flowerDrops = STANDARD_FLOWER_DROPS(2),
     .maxCoinBonus = 2,
-    .movement = { -216, 60, -10, 30, 0, -32767, 0, -216, 60, -10, 250 },
+    .territory = { .temp = { -216, 60, -10, 30, 0, -32767, 0, -216, 60, -10, 250 }},
     .animations = {
         NPC_ANIM_paragoomba_hyper_idle,
         NPC_ANIM_paragoomba_hyper_walk,
@@ -1077,7 +1077,7 @@ StaticNpc N(npcGroup_802470BC) = {
         NPC_ANIM_paragoomba_hyper_run,
         NPC_ANIM_paragoomba_hyper_run,
     },
-    .unk_1E0 = { 00, 00, 00, 01, 00, 00, 00, 00},
+    .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
 StaticNpc N(npcGroup_802472AC) = {
@@ -1095,7 +1095,7 @@ StaticNpc N(npcGroup_802472AC) = {
     .heartDrops = STANDARD_HEART_DROPS(2),
     .flowerDrops = STANDARD_FLOWER_DROPS(2),
     .maxCoinBonus = 2,
-    .movement = { 0, 60, 150, 30, 0, -32767, 0, 0, 60, 150, 250 },
+    .territory = { .temp = { 0, 60, 150, 30, 0, -32767, 0, 0, 60, 150, 250 }},
     .animations = {
         NPC_ANIM_paragoomba_hyper_idle,
         NPC_ANIM_paragoomba_hyper_walk,
@@ -1114,7 +1114,7 @@ StaticNpc N(npcGroup_802472AC) = {
         NPC_ANIM_paragoomba_hyper_run,
         NPC_ANIM_paragoomba_hyper_run,
     },
-    .unk_1E0 = { 00, 00, 00, 01, 00, 00, 00, 00},
+    .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
 StaticNpc N(npcGroup_8024749C) = {
@@ -1132,7 +1132,7 @@ StaticNpc N(npcGroup_8024749C) = {
     .heartDrops = STANDARD_HEART_DROPS(2),
     .flowerDrops = STANDARD_FLOWER_DROPS(2),
     .maxCoinBonus = 2,
-    .movement = { 260, 60, 30, 30, 0, -32767, 0, 260, 60, 30, 250 },
+    .territory = { .temp = { 260, 60, 30, 30, 0, -32767, 0, 260, 60, 30, 250 }},
     .animations = {
         NPC_ANIM_paragoomba_hyper_idle,
         NPC_ANIM_paragoomba_hyper_walk,
@@ -1151,7 +1151,7 @@ StaticNpc N(npcGroup_8024749C) = {
         NPC_ANIM_paragoomba_hyper_run,
         NPC_ANIM_paragoomba_hyper_run,
     },
-    .unk_1E0 = { 00, 00, 00, 01, 00, 00, 00, 00},
+    .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
 StaticNpc N(npcGroup_8024768C) = {

@@ -945,7 +945,7 @@ StaticNpc N(npcGroup_80246A04) = {
     .heartDrops = STANDARD_HEART_DROPS(2),
     .flowerDrops = STANDARD_FLOWER_DROPS(3),
     .maxCoinBonus = 2,
-    .movement = { 335, 90, 45, 30, 0, -32767, 0, 335, 90, 45, 250, 0, 0, 1 },
+    .territory = { .temp = { 335, 90, 45, 30, 0, -32767, 0, 335, 90, 45, 250, 0, 0, 1 }},
     .animations = {
         NPC_ANIM_lakitu_Palette_00_Anim_1,
         NPC_ANIM_lakitu_Palette_00_Anim_2,
@@ -964,7 +964,7 @@ StaticNpc N(npcGroup_80246A04) = {
         NPC_ANIM_lakitu_Palette_00_Anim_1,
         NPC_ANIM_lakitu_Palette_00_Anim_1,
     },
-    .unk_1E0 = { 00, 00, 00, 03, 00, 00, 00, 00},
+    .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
 StaticNpc N(npcGroup_80246BF4) = {
@@ -985,7 +985,7 @@ StaticNpc N(npcGroup_80246BF4) = {
     .heartDrops = STANDARD_HEART_DROPS(2),
     .flowerDrops = STANDARD_FLOWER_DROPS(3),
     .maxCoinBonus = 2,
-    .movement = { -320, 90, 0, 30, 0, -32767, 0, -320, 90, 0, 200, 0, 0, 1 },
+    .territory = { .temp = { -320, 90, 0, 30, 0, -32767, 0, -320, 90, 0, 200, 0, 0, 1 }},
     .animations = {
         NPC_ANIM_lakitu_Palette_00_Anim_1,
         NPC_ANIM_lakitu_Palette_00_Anim_2,
@@ -1004,7 +1004,7 @@ StaticNpc N(npcGroup_80246BF4) = {
         NPC_ANIM_lakitu_Palette_00_Anim_1,
         NPC_ANIM_lakitu_Palette_00_Anim_1,
     },
-    .unk_1E0 = { 00, 00, 00, 03, 00, 00, 00, 00},
+    .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
 StaticNpc N(npcGroup_80246DE4) = {
@@ -1018,7 +1018,7 @@ StaticNpc N(npcGroup_80246DE4) = {
     .heartDrops = STANDARD_HEART_DROPS(3),
     .flowerDrops = STANDARD_FLOWER_DROPS(2),
     .maxCoinBonus = 1,
-    .movement = { 0, 0, 0, 0, 0, -32767 },
+    .territory = { .temp = { 0, 0, 0, 0, 0, -32767 }},
     .animations = {
         NPC_ANIM_spiny_Palette_00_Anim_1,
         NPC_ANIM_spiny_Palette_00_Anim_3,
@@ -1037,7 +1037,7 @@ StaticNpc N(npcGroup_80246DE4) = {
         NPC_ANIM_spiny_Palette_00_Anim_1,
         NPC_ANIM_spiny_Palette_00_Anim_1,
     },
-    .unk_1E0 = { 00, 00, 00, 03, 00, 00, 00, 00},
+    .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
 StaticNpc N(npcGroup_80246FD4) = {
@@ -1051,7 +1051,7 @@ StaticNpc N(npcGroup_80246FD4) = {
     .heartDrops = STANDARD_HEART_DROPS(3),
     .flowerDrops = STANDARD_FLOWER_DROPS(2),
     .maxCoinBonus = 1,
-    .movement = { 0, 0, 0, 0, 0, -32767 },
+    .territory = { .temp = { 0, 0, 0, 0, 0, -32767 }},
     .animations = {
         NPC_ANIM_spiny_Palette_00_Anim_1,
         NPC_ANIM_spiny_Palette_00_Anim_3,
@@ -1070,7 +1070,7 @@ StaticNpc N(npcGroup_80246FD4) = {
         NPC_ANIM_spiny_Palette_00_Anim_1,
         NPC_ANIM_spiny_Palette_00_Anim_1,
     },
-    .unk_1E0 = { 00, 00, 00, 03, 00, 00, 00, 00},
+    .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
 StaticNpc N(npcGroup_802471C4) = {
@@ -1084,7 +1084,7 @@ StaticNpc N(npcGroup_802471C4) = {
     .heartDrops = STANDARD_HEART_DROPS(3),
     .flowerDrops = STANDARD_FLOWER_DROPS(2),
     .maxCoinBonus = 1,
-    .movement = { 0, 0, 0, 0, 0, -32767 },
+    .territory = { .temp = { 0, 0, 0, 0, 0, -32767 }},
     .animations = {
         NPC_ANIM_spiny_Palette_00_Anim_1,
         NPC_ANIM_spiny_Palette_00_Anim_3,
@@ -1103,7 +1103,7 @@ StaticNpc N(npcGroup_802471C4) = {
         NPC_ANIM_spiny_Palette_00_Anim_1,
         NPC_ANIM_spiny_Palette_00_Anim_1,
     },
-    .unk_1E0 = { 00, 00, 00, 03, 00, 00, 00, 00},
+    .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
 StaticNpc N(npcGroup_802473B4) = {
@@ -1117,7 +1117,7 @@ StaticNpc N(npcGroup_802473B4) = {
     .heartDrops = STANDARD_HEART_DROPS(3),
     .flowerDrops = STANDARD_FLOWER_DROPS(2),
     .maxCoinBonus = 1,
-    .movement = { 0, 0, 0, 0, 0, -32767 },
+    .territory = { .temp = { 0, 0, 0, 0, 0, -32767 }},
     .animations = {
         NPC_ANIM_spiny_Palette_00_Anim_1,
         NPC_ANIM_spiny_Palette_00_Anim_3,
@@ -1136,7 +1136,7 @@ StaticNpc N(npcGroup_802473B4) = {
         NPC_ANIM_spiny_Palette_00_Anim_1,
         NPC_ANIM_spiny_Palette_00_Anim_1,
     },
-    .unk_1E0 = { 00, 00, 00, 03, 00, 00, 00, 00},
+    .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
 StaticNpc N(npcGroup_802475A4) = {
@@ -1150,7 +1150,7 @@ StaticNpc N(npcGroup_802475A4) = {
     .heartDrops = STANDARD_HEART_DROPS(3),
     .flowerDrops = STANDARD_FLOWER_DROPS(2),
     .maxCoinBonus = 1,
-    .movement = { 0, 0, 0, 0, 0, -32767 },
+    .territory = { .temp = { 0, 0, 0, 0, 0, -32767 }},
     .animations = {
         NPC_ANIM_spiny_Palette_00_Anim_1,
         NPC_ANIM_spiny_Palette_00_Anim_3,
@@ -1169,7 +1169,7 @@ StaticNpc N(npcGroup_802475A4) = {
         NPC_ANIM_spiny_Palette_00_Anim_1,
         NPC_ANIM_spiny_Palette_00_Anim_1,
     },
-    .unk_1E0 = { 00, 00, 00, 03, 00, 00, 00, 00},
+    .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
 StaticNpc N(npcGroup_80247794) = {
@@ -1183,7 +1183,7 @@ StaticNpc N(npcGroup_80247794) = {
     .heartDrops = STANDARD_HEART_DROPS(3),
     .flowerDrops = STANDARD_FLOWER_DROPS(2),
     .maxCoinBonus = 1,
-    .movement = { 0, 0, 0, 0, 0, -32767 },
+    .territory = { .temp = { 0, 0, 0, 0, 0, -32767 }},
     .animations = {
         NPC_ANIM_spiny_Palette_00_Anim_1,
         NPC_ANIM_spiny_Palette_00_Anim_3,
@@ -1202,7 +1202,7 @@ StaticNpc N(npcGroup_80247794) = {
         NPC_ANIM_spiny_Palette_00_Anim_1,
         NPC_ANIM_spiny_Palette_00_Anim_1,
     },
-    .unk_1E0 = { 00, 00, 00, 03, 00, 00, 00, 00},
+    .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
 NpcGroupList N(npcGroupList_80247984) = {

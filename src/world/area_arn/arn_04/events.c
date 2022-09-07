@@ -147,7 +147,7 @@ StaticNpc N(npcGroup_80243840) = {
     .heartDrops = STANDARD_HEART_DROPS(2),
     .flowerDrops = STANDARD_FLOWER_DROPS(2),
     .maxCoinBonus = 2,
-    .movement = { -350, 180, 150, 30, 0, -32767, 0, -350, 180, 150, 150 },
+    .territory = { .temp = { -350, 180, 150, 30, 0, -32767, 0, -350, 180, 150, 150 }},
     .animations = {
         NPC_ANIM_paragoomba_hyper_idle,
         NPC_ANIM_paragoomba_hyper_walk,
@@ -166,7 +166,7 @@ StaticNpc N(npcGroup_80243840) = {
         NPC_ANIM_paragoomba_hyper_run,
         NPC_ANIM_paragoomba_hyper_run,
     },
-    .unk_1E0 = { 00, 00, 00, 01, 00, 00, 00, 00},
+    .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
 StaticNpc N(npcGroup_80243A30) = {
@@ -181,7 +181,7 @@ StaticNpc N(npcGroup_80243A30) = {
     .heartDrops = STANDARD_HEART_DROPS(2),
     .flowerDrops = STANDARD_FLOWER_DROPS(2),
     .maxCoinBonus = 2,
-    .movement = { 360, 208, 100, 30, 0, -32767, 0, 360, 208, 100, 150 },
+    .territory = { .temp = { 360, 208, 100, 30, 0, -32767, 0, 360, 208, 100, 150 }},
     .animations = {
         NPC_ANIM_goomba_hyper_idle,
         NPC_ANIM_goomba_hyper_walk,
@@ -200,7 +200,7 @@ StaticNpc N(npcGroup_80243A30) = {
         NPC_ANIM_goomba_hyper_run,
         NPC_ANIM_goomba_hyper_run,
     },
-    .unk_1E0 = { 00, 00, 00, 01, 00, 00, 00, 00},
+    .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
 StaticNpc N(npcGroup_80243C20) = {
@@ -214,7 +214,7 @@ StaticNpc N(npcGroup_80243C20) = {
     .flowerDrops = STANDARD_FLOWER_DROPS(2),
     .minCoinBonus = 1,
     .maxCoinBonus = 3,
-    .movement = { 150, 177, 160, 30, 0, -32767, 0, 150, 177, 160, 150 },
+    .territory = { .temp = { 150, 177, 160, 30, 0, -32767, 0, 150, 177, 160, 150 }},
     .animations = {
         NPC_ANIM_cleft_hyper_idle,
         NPC_ANIM_cleft_hyper_walk,
@@ -233,7 +233,7 @@ StaticNpc N(npcGroup_80243C20) = {
         NPC_ANIM_cleft_hyper_rock_lighten,
         NPC_ANIM_cleft_hyper_still,
     },
-    .unk_1E0 = { 00, 00, 00, 01, 00, 00, 00, 00},
+    .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
 StaticNpc N(npcGroup_80243E10) = {
@@ -247,7 +247,7 @@ StaticNpc N(npcGroup_80243E10) = {
     .flowerDrops = STANDARD_FLOWER_DROPS(2),
     .minCoinBonus = 1,
     .maxCoinBonus = 3,
-    .movement = { 550, 230, 125, 30, 0, -32767, 0, 550, 230, 125, 150 },
+    .territory = { .temp = { 550, 230, 125, 30, 0, -32767, 0, 550, 230, 125, 150 }},
     .animations = {
         NPC_ANIM_cleft_hyper_idle,
         NPC_ANIM_cleft_hyper_walk,
@@ -266,7 +266,7 @@ StaticNpc N(npcGroup_80243E10) = {
         NPC_ANIM_cleft_hyper_rock_lighten,
         NPC_ANIM_cleft_hyper_still,
     },
-    .unk_1E0 = { 00, 00, 00, 01, 00, 00, 00, 00},
+    .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
 NpcGroupList N(npcGroupList_80244000) = {

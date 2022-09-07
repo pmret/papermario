@@ -1055,7 +1055,7 @@ StaticNpc N(npcGroup_80245054)[] = {
         .dropFlags = NPC_DROP_FLAGS_80,
         .heartDrops = NO_DROPS,
         .flowerDrops = NO_DROPS,
-        .movement = { 2, -59, 0, -40, -80, 0, -40, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -32767, -59, 0, -40, 100, 0, 0, 1 },
+        .territory = { .temp = { 2, -59, 0, -40, -80, 0, -40, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -32767, -59, 0, -40, 100, 0, 0, 1 }},
         .animations = {
             NPC_ANIM_bubulb_Palette_00_Anim_2,
             NPC_ANIM_bubulb_Palette_00_Anim_E,
@@ -1086,7 +1086,7 @@ StaticNpc N(npcGroup_80245054)[] = {
         .dropFlags = NPC_DROP_FLAGS_80,
         .heartDrops = NO_DROPS,
         .flowerDrops = NO_DROPS,
-        .movement = { 2, 67, 0, 85, 97, 0, 85, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -32767, -59, 0, -40, 100, 0, 0, 1 },
+        .territory = { .temp = { 2, 67, 0, 85, 97, 0, 85, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -32767, -59, 0, -40, 100, 0, 0, 1 }},
         .animations = {
             NPC_ANIM_bubulb_Palette_01_Anim_2,
             NPC_ANIM_bubulb_Palette_01_Anim_E,
@@ -1117,7 +1117,7 @@ StaticNpc N(npcGroup_80245054)[] = {
         .dropFlags = NPC_DROP_FLAGS_80,
         .heartDrops = NO_DROPS,
         .flowerDrops = NO_DROPS,
-        .movement = { 2, 90, 0, 410, 120, 0, 410, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -32767, -59, 0, -40, 100, 0, 0, 1 },
+        .territory = { .temp = { 2, 90, 0, 410, 120, 0, 410, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -32767, -59, 0, -40, 100, 0, 0, 1 }},
         .animations = {
             NPC_ANIM_bubulb_Palette_02_Anim_2,
             NPC_ANIM_bubulb_Palette_02_Anim_E,
@@ -1148,7 +1148,7 @@ StaticNpc N(npcGroup_80245054)[] = {
         .dropFlags = NPC_DROP_FLAGS_80,
         .heartDrops = NO_DROPS,
         .flowerDrops = NO_DROPS,
-        .movement = { 2, 200, 0, 430, 240, 0, 430, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -32767, -59, 0, -40, 100, 0, 0, 1 },
+        .territory = { .temp = { 2, 200, 0, 430, 240, 0, 430, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -32767, -59, 0, -40, 100, 0, 0, 1 }},
         .animations = {
             NPC_ANIM_bubulb_Palette_03_Anim_2,
             NPC_ANIM_bubulb_Palette_03_Anim_E,

@@ -164,64 +164,6 @@ typedef struct StatDrop {
     /* 0x06 */ s16 chancePerAttempt; ///< % chance for a single heart/flower to be dropped from each attempt.
 } StatDrop; // size = 0x08
 
-typedef struct StaticNpc {
-    /* 0x000 */ s32 id;
-    /* 0x004 */ NpcSettings* settings;
-    /* 0x008 */ Vec3f pos;
-    /* 0x014 */ s32 flags;
-    /* 0x018 */ EvtScript* init;
-    /* 0x01C */ char unk_1C[8];
-    /* 0x024 */ s32 yaw;
-    /* 0x028 */ u8 dropFlags; // TODO: use EnemyDrops (requires tons of map edits)
-    /* 0x029 */ s8 itemDropChance; // %
-    /* 0x02A */ ItemDrop itemDrops[8];
-    /* 0x05A */ StatDrop heartDrops[8];
-    /* 0x09A */ StatDrop flowerDrops[8];
-    /* 0x0DA */ s16 minCoinBonus;
-    /* 0x0DC */ s16 maxCoinBonus;
-    /* 0x0E0 */ s32 movement[48]; // TODO: type
-    /* 0x1A0 */ struct {
-        /* 0x00 */ s32 idle;
-        /* 0x04 */ s32 walk;
-        /* 0x08 */ s32 run;
-        /* 0x0C */ s32 chase;
-        /* 0x10 */ s32 unk_10;
-        /* 0x14 */ s32 unk_14;
-        /* 0x18 */ s32 death;
-        /* 0x1C */ s32 hit;
-        /* 0x20 */ s32 unk_20;
-        /* 0x24 */ s32 unk_24;
-        /* 0x28 */ s32 unk_28;
-        /* 0x2C */ s32 unk_2C;
-        /* 0x30 */ s32 unk_30;
-        /* 0x34 */ s32 unk_34;
-        /* 0x38 */ s32 unk_38;
-        /* 0x3C */ s32 unk_3C;
-    } animations;
-    /* 0x1E0 */ char unk_1E0[8];
-    /* 0x1E8 */ s32* extraAnimations;
-    /* 0x1EC */ s32 tattle;
-} StaticNpc; // size = 0x1F0
-
-/// Zero-terminated.
-typedef struct {
-    /* 0x00 */ s32 npcCount;
-    /* 0x04 */ StaticNpc* npcs;
-    /* 0x08 */ s32 battle;
-} NpcGroupList[]; // size = 0x0C
-
-#define NPC_GROUP(npcs, battle) { sizeof(npcs) / sizeof(StaticNpc), (StaticNpc*) &npcs, battle }
-
-typedef struct EnemyDrops {
-    /* 0x00 */ u8 dropFlags;
-    /* 0x01 */ s8 itemDropChance; // %
-    /* 0x02 */ ItemDrop itemDrops[8];
-    /* 0x32 */ StatDrop heartDrops[8];
-    /* 0x72 */ StatDrop flowerDrops[8];
-    /* 0xB2 */ s16 minCoinBonus;
-    /* 0xB4 */ s16 maxCoinBonus;
-    /* 0xB6 */ char unk_DE[2];
-} EnemyDrops; // size = 0xB8
 
 enum TerritoryShape { SHAPE_CYLINDER, SHAPE_RECT };
 
@@ -263,8 +205,79 @@ typedef struct {
 typedef union {
     EnemyTerritoryWander wander;
     EnemyTerritoryPatrol patrol;
+    s32 temp[48]; // TODO: temp
     char PADDING[0xC0];
 } EnemyTerritory; // size = 0xC0
+
+typedef union NpcInitialVars {
+    /* 0x0 */ s32 value;
+    /* 0x0 */ s32* array;
+} NpcInitialVars;
+
+typedef struct StaticNpc {
+    /* 0x000 */ s32 id;
+    /* 0x004 */ NpcSettings* settings;
+    /* 0x008 */ Vec3f pos;
+    /* 0x014 */ s32 flags;
+    /* 0x018 */ EvtScript* init;
+    /* 0x01C */ s32 initVarCount;
+    /* 0x020 */ NpcInitialVars initVar;
+    /* 0x024 */ s32 yaw;
+    /* 0x028 */ u8 dropFlags; // TODO: use EnemyDrops (requires tons of map edits)
+    /* 0x029 */ s8 itemDropChance; // %
+    /* 0x02A */ ItemDrop itemDrops[8];
+    /* 0x05A */ StatDrop heartDrops[8];
+    /* 0x09A */ StatDrop flowerDrops[8];
+    /* 0x0DA */ s16 minCoinBonus;
+    /* 0x0DC */ s16 maxCoinBonus;
+    /* 0x0E0 */ EnemyTerritory territory;
+    /* 0x1A0 */ struct {
+        /* 0x00 */ s32 idle;
+        /* 0x04 */ s32 walk;
+        /* 0x08 */ s32 run;
+        /* 0x0C */ s32 chase;
+        /* 0x10 */ s32 unk_10;
+        /* 0x14 */ s32 unk_14;
+        /* 0x18 */ s32 death;
+        /* 0x1C */ s32 hit;
+        /* 0x20 */ s32 unk_20;
+        /* 0x24 */ s32 unk_24;
+        /* 0x28 */ s32 unk_28;
+        /* 0x2C */ s32 unk_2C;
+        /* 0x30 */ s32 unk_30;
+        /* 0x34 */ s32 unk_34;
+        /* 0x38 */ s32 unk_38;
+        /* 0x3C */ s32 unk_3C;
+    } animations;
+    /* 0x1E0 char unk_1E0[8]; */
+    /* 0x1E0 */ s8 unk__1E0;
+    /* 0x1E1 */ s8 unk__1E1;
+    /* 0x1E2 */ s8 unk__1E2;
+    /* 0x1E3 */ u8 aiDetectFlags;
+    /* 0x1E4 */ u32 aiFlags;
+    /* 0x1E8 */ s32* extraAnimations;
+    /* 0x1EC */ s32 tattle;
+} StaticNpc; // size = 0x1F0
+
+/// Zero-terminated.
+typedef struct {
+    /* 0x00 */ s32 npcCount;
+    /* 0x04 */ StaticNpc* npcs;
+    /* 0x08 */ s32 battle;
+} NpcGroupList[]; // size = 0x0C
+
+#define NPC_GROUP(npcs, battle) { sizeof(npcs) / sizeof(StaticNpc), (StaticNpc*) &npcs, battle }
+
+typedef struct EnemyDrops {
+    /* 0x00 */ u8 dropFlags;
+    /* 0x01 */ s8 itemDropChance; // %
+    /* 0x02 */ ItemDrop itemDrops[8];
+    /* 0x32 */ StatDrop heartDrops[8];
+    /* 0x72 */ StatDrop flowerDrops[8];
+    /* 0xB2 */ s16 minCoinBonus;
+    /* 0xB4 */ s16 maxCoinBonus;
+    /* 0xB6 */ char unk_DE[2];
+} EnemyDrops; // size = 0xB8
 
 // function signature used for state handlers in AI main functions
 typedef void AIStateHandler(Evt* script, MobileAISettings* settings, EnemyDetectVolume* territory);
@@ -322,8 +335,8 @@ typedef struct Enemy {
     /* 0xD8 */ u32 tattleMsg;
     /* 0xDC */ s32 unk_DC;
     /* 0xE0 */ s16 unk_E0;
-    /* 0xE2 */ char unk_E2[0xE];
-} Enemy; // size = 0xF0
+    /* 0xE2 */ char unk_E2[6];
+} Enemy; // size = 0xE8
 
 typedef struct Encounter {
     /* 0x00 */ s32 count;
@@ -331,8 +344,8 @@ typedef struct Encounter {
     /* 0x44 */ s16 battle;
     /* 0x46 */ s16 stage;
     /* 0x48 */ s16 encounterID;
-    /* 0x4A */ char unk_4C[0x12];
-} Encounter; // size = 0x5C
+    /* 0x4A */ char unk_4C[2];
+} Encounter; // size = 0x4C
 
 typedef struct EncounterStatus {
     /* 0x000 */ s32 flags;
@@ -401,7 +414,7 @@ s32 _create_npc_basic(NpcBlueprint* blueprint);
 
 s32 _create_npc_standard(NpcBlueprint* blueprint, u32** animList);
 
-void _create_npc_partner(NpcBlueprint* blueprint);
+s32 _create_npc_partner(NpcBlueprint* blueprint);
 
 void free_npc_by_index(s32 listIndex);
 

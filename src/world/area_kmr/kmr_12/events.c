@@ -165,7 +165,7 @@ StaticNpc N(goombaNpc) = {
     .itemDrops = { { ITEM_MUSHROOM, 10 } },
     .heartDrops = GENEROUS_WHEN_LOW_HEART_DROPS(2),
     .flowerDrops = GENEROUS_WHEN_LOW_FLOWER_DROPS(2),
-    .movement = {
+    .territory = { .temp = {
         // Wander
         /* center x, y, z */ -33, 0, 30,
         /* size x, z */ 40, 20,
@@ -178,7 +178,7 @@ StaticNpc N(goombaNpc) = {
         /* box? */ TRUE,
 
         /* flying? */ TRUE,
-    },
+    }},
     .animations = {
         NPC_ANIM_goomba_normal_idle,
         NPC_ANIM_goomba_normal_walk,

@@ -391,7 +391,7 @@ StaticNpc N(npcGroup_80242188) = {
     .heartDrops = STANDARD_HEART_DROPS(3),
     .flowerDrops = STANDARD_FLOWER_DROPS(2),
     .maxCoinBonus = 1,
-    .movement = { 80, 0, 0, 30, 0, -32767, 0, 80, 0, 0, 200, 0, 0, 1 },
+    .territory = { .temp = { 80, 0, 0, 30, 0, -32767, 0, 80, 0, 0, 200, 0, 0, 1 }},
     .animations = {
         NPC_ANIM_spiny_Palette_00_Anim_1,
         NPC_ANIM_spiny_Palette_00_Anim_3,
@@ -422,7 +422,7 @@ StaticNpc N(npcGroup_80242378) = {
     .heartDrops = STANDARD_HEART_DROPS(3),
     .flowerDrops = STANDARD_FLOWER_DROPS(2),
     .maxCoinBonus = 1,
-    .movement = { -320, 0, 0, 30, 0, -32767, 0, -320, 0, 0, 200, 0, 0, 1 },
+    .territory = { .temp = { -320, 0, 0, 30, 0, -32767, 0, -320, 0, 0, 200, 0, 0, 1 }},
     .animations = {
         NPC_ANIM_spiny_Palette_00_Anim_1,
         NPC_ANIM_spiny_Palette_00_Anim_3,

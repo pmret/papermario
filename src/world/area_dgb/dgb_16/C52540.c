@@ -217,7 +217,7 @@ StaticNpc N(npcGroup_80241A4C)[] = {
         .flowerDrops = STANDARD_FLOWER_DROPS(2),
         .minCoinBonus = 2,
         .maxCoinBonus = 3,
-        .movement = { -70, 0, -100, 40, 0, -32767, 0, 150, 0, -175, 430, 92, 1, 1 },
+        .territory = { .temp = { -70, 0, -100, 40, 0, -32767, 0, 150, 0, -175, 430, 92, 1, 1 }},
         .animations = {
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
             NPC_ANIM_world_clubba_Palette_00_Anim_3,
@@ -236,7 +236,7 @@ StaticNpc N(npcGroup_80241A4C)[] = {
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
         },
-        .unk_1E0 = { 00, 00, 00, 02, 00, 00, 00, 00},
+        .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
         .extraAnimations = N(extraAnimationList_8024187C),
     },
     {
@@ -286,7 +286,7 @@ StaticNpc N(npcGroup_80241E2C)[] = {
         .flowerDrops = STANDARD_FLOWER_DROPS(2),
         .minCoinBonus = 2,
         .maxCoinBonus = 3,
-        .movement = { 0, 0, -235, 40, 0, -32767, 0, 150, 0, -175, 430, 92, 1, 1 },
+        .territory = { .temp = { 0, 0, -235, 40, 0, -32767, 0, 150, 0, -175, 430, 92, 1, 1 }},
         .animations = {
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
             NPC_ANIM_world_clubba_Palette_00_Anim_3,
@@ -305,7 +305,7 @@ StaticNpc N(npcGroup_80241E2C)[] = {
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
         },
-        .unk_1E0 = { 00, 00, 00, 02, 00, 00, 00, 00},
+        .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
     },
     {
         .id = NPC_WORLD_CLUBBA3,
@@ -354,7 +354,7 @@ StaticNpc N(npcGroup_8024220C)[] = {
         .flowerDrops = STANDARD_FLOWER_DROPS(2),
         .minCoinBonus = 2,
         .maxCoinBonus = 3,
-        .movement = { 70, 0, -100, 40, 0, -32767, 0, 150, 0, -175, 430, 92, 1, 1 },
+        .territory = { .temp = { 70, 0, -100, 40, 0, -32767, 0, 150, 0, -175, 430, 92, 1, 1 }},
         .animations = {
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
             NPC_ANIM_world_clubba_Palette_00_Anim_3,
@@ -373,7 +373,7 @@ StaticNpc N(npcGroup_8024220C)[] = {
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
         },
-        .unk_1E0 = { 00, 00, 00, 02, 00, 00, 00, 00},
+        .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
     },
     {
         .id = NPC_WORLD_CLUBBA5,
@@ -422,7 +422,7 @@ StaticNpc N(npcGroup_802425EC)[] = {
         .flowerDrops = STANDARD_FLOWER_DROPS(2),
         .minCoinBonus = 2,
         .maxCoinBonus = 3,
-        .movement = { 140, 0, -235, 40, 0, -32767, 0, 150, 0, -175, 430, 92, 1, 1 },
+        .territory = { .temp = { 140, 0, -235, 40, 0, -32767, 0, 150, 0, -175, 430, 92, 1, 1 }},
         .animations = {
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
             NPC_ANIM_world_clubba_Palette_00_Anim_3,
@@ -441,7 +441,7 @@ StaticNpc N(npcGroup_802425EC)[] = {
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
         },
-        .unk_1E0 = { 00, 00, 00, 02, 00, 00, 00, 00},
+        .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
     },
     {
         .id = NPC_WORLD_CLUBBA7,
@@ -490,7 +490,7 @@ StaticNpc N(npcGroup_802429CC)[] = {
         .flowerDrops = STANDARD_FLOWER_DROPS(2),
         .minCoinBonus = 2,
         .maxCoinBonus = 3,
-        .movement = { 210, 0, -100, 40, 0, -32767, 0, 150, 0, -175, 430, 92, 1, 1 },
+        .territory = { .temp = { 210, 0, -100, 40, 0, -32767, 0, 150, 0, -175, 430, 92, 1, 1 }},
         .animations = {
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
             NPC_ANIM_world_clubba_Palette_00_Anim_3,
@@ -509,7 +509,7 @@ StaticNpc N(npcGroup_802429CC)[] = {
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
         },
-        .unk_1E0 = { 00, 00, 00, 02, 00, 00, 00, 00},
+        .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
     },
     {
         .id = NPC_WORLD_CLUBBA9,
@@ -558,7 +558,7 @@ StaticNpc N(npcGroup_80242DAC)[] = {
         .flowerDrops = STANDARD_FLOWER_DROPS(2),
         .minCoinBonus = 2,
         .maxCoinBonus = 3,
-        .movement = { 280, 0, -235, 40, 0, -32767, 0, 150, 0, -175, 430, 92, 1, 1 },
+        .territory = { .temp = { 280, 0, -235, 40, 0, -32767, 0, 150, 0, -175, 430, 92, 1, 1 }},
         .animations = {
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
             NPC_ANIM_world_clubba_Palette_00_Anim_3,
@@ -577,7 +577,7 @@ StaticNpc N(npcGroup_80242DAC)[] = {
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
         },
-        .unk_1E0 = { 00, 00, 00, 02, 00, 00, 00, 00},
+        .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
     },
     {
         .id = NPC_WORLD_CLUBBA11,

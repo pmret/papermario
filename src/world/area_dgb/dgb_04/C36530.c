@@ -243,7 +243,7 @@ StaticNpc N(npcGroup_80243B28) = {
     .dropFlags = NPC_DROP_FLAGS_80,
     .heartDrops = NO_DROPS,
     .flowerDrops = NO_DROPS,
-    .movement = { 70, -220, 186, 15, 40, -32767, 1, 80, -220, 170, 80, 150, 1 },
+    .territory = { .temp = { 70, -220, 186, 15, 40, -32767, 1, 80, -220, 170, 80, 150, 1 }},
     .animations = {
         NPC_ANIM_sentinel_Palette_00_Anim_1,
         NPC_ANIM_sentinel_Palette_00_Anim_2,
@@ -262,7 +262,7 @@ StaticNpc N(npcGroup_80243B28) = {
         NPC_ANIM_sentinel_Palette_00_Anim_1,
         NPC_ANIM_sentinel_Palette_00_Anim_1,
     },
-    .unk_1E0 = { 00, 00, 00, 01, 00, 00, 00, 00},
+    .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
 NpcGroupList N(npcGroupList_80243D18) = {

@@ -327,7 +327,7 @@ StaticNpc N(npcGroup_8024223C)[] = {
         .dropFlags = NPC_DROP_FLAGS_80,
         .heartDrops = NO_DROPS,
         .flowerDrops = NO_DROPS,
-        .movement = { 2, 55, 10, 160, 75, 10, 160, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -32767, 55, 195, 160, 50 },
+        .territory = { .temp = { 2, 55, 10, 160, 75, 10, 160, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -32767, 55, 195, 160, 50 }},
         .animations = {
             NPC_ANIM_boo_Palette_01_Anim_1,
             NPC_ANIM_boo_Palette_01_Anim_2,
@@ -448,7 +448,7 @@ StaticNpc N(npcGroup_8024223C)[] = {
         .dropFlags = NPC_DROP_FLAGS_80,
         .heartDrops = NO_DROPS,
         .flowerDrops = NO_DROPS,
-        .movement = { 2, 350, 10, 197, 330, 10, 197, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -32767, 350, 185, 197, 50 },
+        .territory = { .temp = { 2, 350, 10, 197, 330, 10, 197, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -32767, 350, 185, 197, 50 }},
         .animations = {
             NPC_ANIM_boo_Palette_01_Anim_1,
             NPC_ANIM_boo_Palette_01_Anim_2,

@@ -419,7 +419,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
                             for x,datum in enumerate(data):
                                 if not datum == 0:
                                     end_pos = x
-                            tmp_out += INDENT + f".movement = {{ " + ", ".join(f"{x}" for x in data[:end_pos+1]) + f" }},\n"
+                            tmp_out += INDENT + f".territory = { .temp = {{ " + ", ".join(f"{x}" for x in data[:end_pos+1]) + f" }}},\n"
                     elif i == 0x1A0:
                         tmp_out += INDENT + f".{var_names[15]} = {{\n"
                         for x in range(16):
