@@ -10,7 +10,7 @@ static char* N(exit_str_1) = "";
 ApiStatus N(AwaitScriptComplete)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 waitingScriptID = evt_get_variable(script, *args++);
-    
+
     if (!does_script_exist(waitingScriptID)) {
         return ApiStatus_DONE2;
     } else {
