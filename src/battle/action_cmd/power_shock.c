@@ -100,14 +100,13 @@ ApiStatus func_802A9210_42D120(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#ifdef NON_EQUIVALENT
 void func_802A9310_42D220(void) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
     s32 id;
-    s32 temp_v0_2;
     s32 phi_a1;
     s32 cutoff;
+    s32 new_var;
 
     switch (actionCommandStatus->state) {
         case 0:
@@ -147,12 +146,11 @@ void func_802A9310_42D220(void) {
                     actionCommandStatus->hudElementX,
                     actionCommandStatus->hudElementY + 28);
 
-                cutoff = 100 - actionCommandStatus->unk_46;
-                cutoff = (cutoff * 60) / 100;
-                temp_v0_2 = 29 - cutoff;
+                phi_a1 = 100 - actionCommandStatus->unk_46;
+                new_var = 29 - (phi_a1 * 60) / 100;
                 hud_element_set_render_pos(
                     actionCommandStatus->hudElements[4],
-                    actionCommandStatus->hudElementX - temp_v0_2,
+                    actionCommandStatus->hudElementX - new_var,
                     actionCommandStatus->hudElementY + 17);
             }
             break;
@@ -163,7 +161,7 @@ void func_802A9310_42D220(void) {
                 break;
             }
             hud_element_set_script(actionCommandStatus->hudElements[0], &HES_MashAButton);
-            actionCommandStatus->unk_44 = 0;
+            actionCommandStatus->barFillLevel = 0;
             actionCommandStatus->unk_5C = 0;
             D_802A9B00 = 1;
             actionCommandStatus->unk_54 = actionCommandStatus->unk_52;
@@ -174,7 +172,7 @@ void func_802A9310_42D220(void) {
             btl_set_popup_duration(99);
 
             if (actionCommandStatus->unk_68 == 0) {
-                if (actionCommandStatus->unk_64 != 0) {
+                if (actionCommandStatus->easyVersion != 0) {
                     cutoff = actionCommandStatus->mashMeterCutoffs[actionCommandStatus->mashMeterIntervals];
                     actionCommandStatus->barFillLevel -= D_802A9AA0_42D9B0[actionCommandStatus->barFillLevel / cutoff / 20];
                     if (actionCommandStatus->barFillLevel < 0) {
@@ -189,12 +187,13 @@ void func_802A9310_42D220(void) {
             }
 
             if (battleStatus->currentButtonsPressed & BUTTON_A) {
-                phi_a1 = actionCommandStatus->unk_64;
-                    // unk_434 = array of scaling values based on attack difficulty (unk_50).
+                phi_a1 = actionCommandStatus->easyVersion;
                 if (phi_a1 != 0) {
-                    s32 a;
-                    a = battleStatus->unk_434[actionCommandStatus->unk_50];
-                    actionCommandStatus->barFillLevel += a * 850 / 100 * phi_a1 / 100;
+                    // unk_434 = array of scaling values based on attack difficulty (unk_50).
+                    s32 a = battleStatus->unk_434[actionCommandStatus->unk_50];
+
+                    phi_a1 = (((a * 850) / 100) * phi_a1) / 100;
+                    actionCommandStatus->barFillLevel += phi_a1;
                 } else {
                     actionCommandStatus->barFillLevel += 100;
                     if (actionCommandStatus->barFillLevel >= 500) {
@@ -204,9 +203,9 @@ void func_802A9310_42D220(void) {
             }
 
             if (actionCommandStatus->barFillLevel > 10000) {
-                id = actionCommandStatus->hudElements[3];
                 actionCommandStatus->barFillLevel = 10000;
                 actionCommandStatus->unk_68 = 1;
+                id = actionCommandStatus->hudElements[3];
                 hud_element_set_render_pos(
                     id,
                     actionCommandStatus->hudElementX + 50,
@@ -219,7 +218,7 @@ void func_802A9310_42D220(void) {
 
             if (actionCommandStatus->unk_54 == 0) {
                 phi_a1 = actionCommandStatus->barFillLevel;
-                if (actionCommandStatus->unk_64 == 0) {
+                if (actionCommandStatus->easyVersion == 0) {
                     phi_a1 = 0;
                 }
 
@@ -252,7 +251,7 @@ void func_802A9310_42D220(void) {
             }
             break;
         case 12:
-            if (actionCommandStatus->unk_64 == 0) {
+            if (actionCommandStatus->easyVersion == 0) {
                 actionCommandStatus->barFillLevel -= 100;
                 if (actionCommandStatus->barFillLevel < 0) {
                     actionCommandStatus->barFillLevel = 0;
@@ -287,9 +286,6 @@ void func_802A9310_42D220(void) {
             }
     }
 }
-#else
-INCLUDE_ASM(s32, "battle/action_cmd/power_shock", func_802A9310_42D220, void);
-#endif
 
 void N(draw_hud_elements)(void) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;

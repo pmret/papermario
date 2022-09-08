@@ -150,7 +150,7 @@ void entity_Chest_begin_opening(Entity* entity) {
     data->lidAngle = 0.0f;
     data->openState = 0;
     data->giveItemTimer = 40;
-    sfx_play_sound(467);
+    sfx_play_sound(SOUND_1D3);
 }
 
 void entity_Chest_open(Entity* entity) {

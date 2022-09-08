@@ -11,11 +11,6 @@ typedef struct HudElementSize {
     s16 size;
 } HudElementSize;
 
-typedef struct HudCacheEntry {
-    /* 0x00 */ s32 id;
-    /* 0x04 */ u8* data;
-} HudCacheEntry; // size = 0x08;
-
 u8* gHudElementAuxCache = NULL;
 s32 gHudElementCacheCapacity = 0x11000;
 

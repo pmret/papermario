@@ -904,8 +904,8 @@ void btl_update_starpoints_display(void) {
             }
 
            for (; i < ARRAY_COUNT(D_8029EFC0); i++) {
-                hud_element_set_flags(D_8029EFC0[i], 2);
-                hud_element_set_flags(D_8029EFE8[i], 2);
+                hud_element_set_flags(D_8029EFC0[i], HUD_ELEMENT_FLAGS_FILTER_TEX);
+                hud_element_set_flags(D_8029EFE8[i], HUD_ELEMENT_FLAGS_FILTER_TEX);
             }
 
             posX = D_8029DA40;
@@ -929,7 +929,7 @@ void btl_update_starpoints_display(void) {
             }
 
             for (; i < ARRAY_COUNT(D_8029F010); i++) {
-                hud_element_set_flags(D_8029F010[i], 2);
+                hud_element_set_flags(D_8029F010[i], HUD_ELEMENT_FLAGS_FILTER_TEX);
             }
         }
     }

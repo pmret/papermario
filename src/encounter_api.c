@@ -192,7 +192,7 @@ void start_battle(Evt* script, s32 songID) {
     enemy->encountered = TRUE;
     currentEncounter->currentEnemy = enemy;
     currentEncounter->currentEncounter = currentEncounter->encounterList[enemy->encounterIndex];
-    currentEncounter->eFirstStrike = 0;
+    currentEncounter->firstStrikeType = FIRST_STRIKE_NONE;
     currentEncounter->allowFleeing = 0;
     currentEncounter->songID = songID;
     currentEncounter->unk_18 = -1;
@@ -260,7 +260,7 @@ ApiStatus StartBossBattle(Evt* script, s32 isInitialCall) {
     enemy->encountered = TRUE;
     currentEncounter->currentEnemy = enemy;
     currentEncounter->currentEncounter = currentEncounter->encounterList[enemy->encounterIndex];
-    currentEncounter->eFirstStrike = FIRST_STRIKE_NONE;
+    currentEncounter->firstStrikeType = FIRST_STRIKE_NONE;
     currentEncounter->allowFleeing = TRUE;
     currentEncounter->songID = songID;
     currentEncounter->unk_18 = -1;

@@ -7,8 +7,72 @@
 
 #include "common/StarPower.inc.c"
 
-ApiStatus func_802A1518_78BB18(Evt* script, s32 isInitialCall);
-INCLUDE_ASM(s32, "battle/star/refresh/78B600", func_802A1518_78BB18);
+ApiStatus func_802A1518_78BB18(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    Npc* npc;
+
+    if (isInitialCall) {
+        script->functionTemp[0] = 0;
+    }
+
+    npc = script->functionTempPtr[1];
+
+    switch (script->functionTemp[0]) {
+        case 0:
+            script->functionTempPtr[1] = npc = get_npc_unsafe(evt_get_variable(script, *args++));
+            npc->planarFlyDist = 0;
+            npc->yaw = 0;
+            npc->duration = 0;
+            npc->jumpVelocity = -1.5f;
+            npc->jumpScale = 0.02f;
+            npc->moveSpeed = 1.0f;
+            npc->moveToPos.x = npc->pos.x;
+            npc->moveToPos.y = npc->pos.y;
+            npc->moveToPos.z = npc->pos.z;
+            script->functionTemp[0] = 1;
+            break;
+        case 1:
+            if (npc->jumpVelocity < 0.0f) {
+                npc->planarFlyDist += 3.0;
+                if (npc->planarFlyDist > 40.0f) {
+                    npc->planarFlyDist = 40.0f;
+                }
+            } else {
+                npc->planarFlyDist -= 2.0;
+                if (npc->planarFlyDist < 20.0f) {
+                    npc->planarFlyDist = 20.0f;
+                }
+            }
+
+            npc->moveSpeed += 0.75;
+            npc->jumpVelocity += npc->jumpScale;
+            npc->pos.y += npc->jumpVelocity;
+            if (npc->moveSpeed > 33.0f) {
+                npc->moveSpeed = 33.0f;
+            }
+
+            npc->yaw += npc->moveSpeed;
+            npc->pos.x = npc->moveToPos.x;
+            npc->pos.z = npc->moveToPos.z;
+            add_vec2D_polar(&npc->pos.x, &npc->pos.z, npc->planarFlyDist, npc->yaw);
+            if ((npc->duration % 14) == 0) {
+                fx_sparkles(0, npc->pos.x, npc->pos.y, npc->pos.z, 30.0f);
+            }
+
+            npc->duration++;
+            if (npc->duration > 40) {
+                npc->jumpScale = 0.5f;
+            }
+            if (npc->pos.y > 200.0f) {
+                script->functionTemp[0] = 2;
+            }
+            break;
+        case 2:
+            return ApiStatus_DONE2;
+    }
+
+    return ApiStatus_BLOCK;
+}
 
 ApiStatus func_802A17D4_78BDD4(Evt* script, s32 isInitialCall) {
     Actor* actor = gBattleStatus.playerActor;

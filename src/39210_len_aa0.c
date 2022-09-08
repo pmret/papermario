@@ -28,6 +28,7 @@ void get_npc_pos(s32 npcID, f32* outX, f32* outY, f32* outZ, s32* arg4) {
 
 }
 
+void func_8005DECC(Npc* npc, s32 arg1, void* arg2, f32 arg3, f32 arg4, s32 arg5, s32 arg6);
 INCLUDE_ASM(s32, "39210_len_aa0", func_8005DECC);
 
 INCLUDE_ASM(s32, "39210_len_aa0", func_8005DFD4);

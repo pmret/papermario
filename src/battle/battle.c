@@ -290,7 +290,7 @@ void reset_battle_status(void) {
     D_800DC064 = NULL;
     D_800DC060 = 0;
     D_800DC4EC = 0;
-    D_800DC4F4 = 0;
+    D_800DC4F4 = NULL;
 }
 
 void ALT_reset_battle_status(void) {
@@ -315,7 +315,7 @@ void load_battle_section(void) {
         D_800DC064 = &(*battleArea->stages)[D_800DC4EC];
     }
 
-    btl_set_state(1);
+    btl_set_state(BATTLE_STATE_NORMAL_START);
     D_800DC4D0 = 0;
 }
 
@@ -331,8 +331,8 @@ void set_battle_stage(s32 arg0) {
     D_800DC4EC = arg0;
 }
 
-void set_battle_formation(s32 arg0) {
-    D_800DC4F4 = arg0;
+void set_battle_formation(Battle* battle) {
+    D_800DC4F4 = battle;
 }
 
 void func_80072CEC(f32 arg0, f32 arg1, f32 arg2) {
@@ -467,7 +467,7 @@ void load_demo_battle(u32 index) {
 
     switch (mode) {
         case 0:
-            gCurrentEncounter.eFirstStrike = FIRST_STRIKE_NONE;
+            gCurrentEncounter.firstStrikeType = FIRST_STRIKE_NONE;
             gCurrentEncounter.hitType = ENCOUNTER_TRIGGER_NONE;
             gCurrentEncounter.hitTier = 0;
             gGameStatusPtr->demoFlags |= 0x10;
@@ -475,24 +475,24 @@ void load_demo_battle(u32 index) {
             gGameStatusPtr->demoFlags |= 0x40;
             break;
         case 1:
-            gCurrentEncounter.eFirstStrike = FIRST_STRIKE_PLAYER;
+            gCurrentEncounter.firstStrikeType = FIRST_STRIKE_PLAYER;
             gCurrentEncounter.hitType = ENCOUNTER_TRIGGER_HAMMER;
             gCurrentEncounter.hitTier = playerData->hammerLevel;
             gGameStatusPtr->demoFlags |= 0x10;
             break;
         case 2:
-            gCurrentEncounter.eFirstStrike = FIRST_STRIKE_PLAYER;
+            gCurrentEncounter.firstStrikeType = FIRST_STRIKE_PLAYER;
             gCurrentEncounter.hitType = ENCOUNTER_TRIGGER_JUMP;
             gCurrentEncounter.hitTier = playerData->bootsLevel;
             gGameStatusPtr->demoFlags |= 0x10;
             break;
         case 3:
-            gCurrentEncounter.eFirstStrike = FIRST_STRIKE_PLAYER;
+            gCurrentEncounter.firstStrikeType = FIRST_STRIKE_PLAYER;
             gCurrentEncounter.hitType = ENCOUNTER_TRIGGER_PARTNER;
             gGameStatusPtr->demoFlags |= 0x20;
             break;
         case 4:
-            gCurrentEncounter.eFirstStrike = FIRST_STRIKE_ENEMY;
+            gCurrentEncounter.firstStrikeType = FIRST_STRIKE_ENEMY;
             gCurrentEncounter.hitType = ENCOUNTER_TRIGGER_NONE;
             gCurrentEncounter.hitTier = 0;
             gGameStatusPtr->demoFlags |= 0x40;

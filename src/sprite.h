@@ -152,7 +152,7 @@ PAL_PTR* spr_get_npc_palettes(s32 npcSpriteID);
 
 s32 spr_get_npc_color_variations(s32 npcSpriteID);
 
-void render_shaded_sprite(Matrix4f mtx, s32 uls, s32 ult, s32 lrs, s32 lrt, s32 alpha, s32);
+void create_shading_palette(Matrix4f mtx, s32 uls, s32 ult, s32 lrs, s32 lrt, s32 alpha, s32);
 
 SpriteAnimData* spr_load_sprite(s32 idx, s32 arg1, s32 arg2);
 
