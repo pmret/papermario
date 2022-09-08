@@ -7,7 +7,7 @@ EntryList N(entryList) = {
     { -500.0f, 0.0f, -40.0f, 0.0f },
 };
 
-MapConfig N(config) = {
+MapSettings N(settings) = {
     .main = &N(main),
     .entryList = &N(entryList),
     .entryCount = ENTRY_COUNT(N(entryList)),
@@ -15,7 +15,7 @@ MapConfig N(config) = {
 };
 
 EvtScript N(80240310) = {
-    EVT_SWITCH(EVT_SAVE_VAR(0))
+    EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(-29)
             EVT_CALL(SetMusicTrack, 0, SONG_TUBBAS_MANOR, 0, 8)
         EVT_CASE_LT(-16)
@@ -40,9 +40,9 @@ EvtScript N(exitSingleDoor_802403B0) = {
     EVT_SET(EVT_VAR(2), 14)
     EVT_SET(EVT_VAR(3), -1)
     EVT_EXEC(ExitSingleDoor)
-    EVT_WAIT_FRAMES(17)
+    EVT_WAIT(17)
     EVT_CALL(GotoMap, EVT_PTR("dgb_09"), 2)
-    EVT_WAIT_FRAMES(100)
+    EVT_WAIT(100)
     EVT_RETURN
     EVT_END
 };
@@ -61,7 +61,7 @@ EvtScript N(enterSingleDoor_80240464) = {
 };
 
 EvtScript N(main) = {
-    EVT_SET(EVT_SAVE_VAR(425), 15)
+    EVT_SET(GB_WorldLocation, 15)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
     EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
@@ -88,12 +88,12 @@ EvtScript N(802405E0) = {
     EVT_THREAD
         EVT_CALL(ResetFromLava, EVT_PTR(N(lavaResetList_802405C0)))
     EVT_END_THREAD
-    EVT_WAIT_FRAMES(50)
+    EVT_WAIT(50)
     EVT_CALL(TranslateModel, 19, 0, 0, 0)
     EVT_CALL(ParentColliderToModel, 12, 19)
     EVT_LOOP(0)
         EVT_THREAD
-            EVT_WAIT_FRAMES(2)
+            EVT_WAIT(2)
             EVT_CALL(ModifyColliderFlags, 0, 0, 0x7FFFFE00)
         EVT_END_THREAD
         EVT_CALL(MakeLerp, 0, -35, 15, 0)
@@ -101,12 +101,12 @@ EvtScript N(802405E0) = {
             EVT_CALL(UpdateLerp)
             EVT_CALL(TranslateModel, 19, 0, EVT_VAR(0), 0)
             EVT_CALL(UpdateColliderTransform, 12)
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
             EVT_IF_EQ(EVT_VAR(1), 0)
                 EVT_BREAK_LOOP
             EVT_END_IF
         EVT_END_LOOP
-        EVT_WAIT_FRAMES(60)
+        EVT_WAIT(60)
         EVT_CALL(PlaySoundAtCollider, 0, 8339, 0)
         EVT_THREAD
             EVT_CALL(ModifyColliderFlags, 1, 0, 0x7FFFFE00)
@@ -116,12 +116,12 @@ EvtScript N(802405E0) = {
             EVT_CALL(UpdateLerp)
             EVT_CALL(TranslateModel, 19, 0, EVT_VAR(0), 0)
             EVT_CALL(UpdateColliderTransform, 12)
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
             EVT_IF_EQ(EVT_VAR(1), 0)
                 EVT_BREAK_LOOP
             EVT_END_IF
         EVT_END_LOOP
-        EVT_WAIT_FRAMES(35)
+        EVT_WAIT(35)
     EVT_END_LOOP
     EVT_RETURN
     EVT_END
@@ -137,7 +137,7 @@ static s32 N(pad_868)[] = {
 
 EvtScript N(makeEntities) = {
     EVT_CALL(MakeEntity, &Entity_Chest, -225, 0, -245, 0, 0, MAKE_ENTITY_END)
-    EVT_CALL(AssignChestFlag, EVT_SAVE_FLAG(1057))
+    EVT_CALL(AssignChestFlag, GF_DGB12_Chest_CastleKey1)
     EVT_CALL(AssignScript, EVT_PTR(N(EVS_Chest_Interact)))
     EVT_RETURN
     EVT_END

@@ -27,7 +27,7 @@ s32 N(LakituAI_GetAvailableSpiny)(void) {
     return -1;
 }
 
-void N(LakituAI_Wander)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(LakituAI_Wander)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 x, y, z, w;
@@ -113,7 +113,7 @@ void N(LakituAI_Wander)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolum
     }
 }
 
-void N(LakituAI_Loiter)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(LakituAI_Loiter)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 posX, posY, posZ, hitDepth;
@@ -170,7 +170,7 @@ s32 N(LakituAI_Main)(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(enemy->npcID);
     EnemyDetectVolume territory;
     EnemyDetectVolume* territoryPtr = &territory;
-    NpcAISettings* aiSettings = (NpcAISettings*)evt_get_variable(script, *args);
+    MobileAISettings* aiSettings = (MobileAISettings*)evt_get_variable(script, *args);
     Enemy* spinyEnemy;
 
     territory.skipPlayerDetectChance = 0;

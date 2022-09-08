@@ -171,7 +171,7 @@ EvtScript N(handleEvent) = {
             EVT_SET_CONST(LW(0), 1)
             EVT_SET_CONST(LW(1), NPC_ANIM_battle_clubba_Palette_01_Anim_4)
             EVT_EXEC_WAIT(DoNormalHit)
-            EVT_WAIT_FRAMES(10)
+            EVT_WAIT(10)
             EVT_SET_CONST(LW(0), 1)
             EVT_SET_CONST(LW(1), NPC_ANIM_battle_clubba_Palette_01_Anim_4)
             EVT_EXEC_WAIT(DoDeath)
@@ -218,7 +218,7 @@ EvtScript N(takeTurn) = {
         EVT_SET(LW(1), 0)
         EVT_SUB(LW(2), 6)
         EVT_CALL(SetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
-        EVT_WAIT_FRAMES(15)
+        EVT_WAIT(15)
     EVT_ELSE
         EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_battle_clubba_Palette_01_Anim_2)
         EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(4.0))
@@ -231,7 +231,7 @@ EvtScript N(takeTurn) = {
         EVT_END_IF
         EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
         EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_battle_clubba_Palette_01_Anim_1)
-        EVT_WAIT_FRAMES(10)
+        EVT_WAIT(10)
     EVT_END_IF
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LW(0), 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LW(0))
@@ -239,10 +239,10 @@ EvtScript N(takeTurn) = {
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20C5)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_battle_clubba_Palette_01_Anim_8)
-            EVT_WAIT_FRAMES(20)
+            EVT_WAIT(20)
             EVT_IF_EQ(LW(0), HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LW(0), DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
-                EVT_WAIT_FRAMES(20)
+                EVT_WAIT(20)
             EVT_END_IF
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(YieldTurn)
@@ -275,11 +275,11 @@ EvtScript N(takeTurn) = {
     EVT_END_IF
     EVT_LABEL(40) // heavy club attack
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_battle_clubba_Palette_01_Anim_9)
-    EVT_WAIT_FRAMES(15)
+    EVT_WAIT(15)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20C5)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_battle_clubba_Palette_01_Anim_A)
-    EVT_WAIT_FRAMES(2)
-    EVT_WAIT_FRAMES(2)
+    EVT_WAIT(2)
+    EVT_WAIT(2)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LW(0), DAMAGE_TYPE_NO_CONTACT, 0, 0, 5, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_THREAD
@@ -288,11 +288,11 @@ EvtScript N(takeTurn) = {
     EVT_GOTO(100)
     EVT_LABEL(50) // swift club attack
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_battle_clubba_Palette_01_Anim_9)
-    EVT_WAIT_FRAMES(15)
+    EVT_WAIT(15)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20C5)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_battle_clubba_Palette_01_Anim_A)
-    EVT_WAIT_FRAMES(2)
-    EVT_WAIT_FRAMES(2)
+    EVT_WAIT(2)
+    EVT_WAIT(2)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LW(0), DAMAGE_TYPE_NO_CONTACT, 0, 0, 2, BS_FLAGS1_10)
     EVT_THREAD
@@ -303,11 +303,11 @@ EvtScript N(takeTurn) = {
         EVT_GOTO(100)
     EVT_END_IF
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_battle_clubba_Palette_01_Anim_9)
-    EVT_WAIT_FRAMES(15)
+    EVT_WAIT(15)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20C5)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_battle_clubba_Palette_01_Anim_A)
-    EVT_WAIT_FRAMES(2)
-    EVT_WAIT_FRAMES(2)
+    EVT_WAIT(2)
+    EVT_WAIT(2)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LW(0), DAMAGE_TYPE_NO_CONTACT, 0, 0, 2, BS_FLAGS1_40)
     EVT_THREAD
@@ -318,11 +318,11 @@ EvtScript N(takeTurn) = {
         EVT_GOTO(100)
     EVT_END_IF
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_battle_clubba_Palette_01_Anim_9)
-    EVT_WAIT_FRAMES(15)
+    EVT_WAIT(15)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20C5)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_battle_clubba_Palette_01_Anim_A)
-    EVT_WAIT_FRAMES(2)
-    EVT_WAIT_FRAMES(2)
+    EVT_WAIT(2)
+    EVT_WAIT(2)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LW(0), DAMAGE_TYPE_NO_CONTACT, 0, 0, 2, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_THREAD
@@ -333,7 +333,7 @@ EvtScript N(takeTurn) = {
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_QUAKE_IMMUNE)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
-            EVT_WAIT_FRAMES(19)
+            EVT_WAIT(19)
             EVT_CALL(YieldTurn)
             EVT_SET_CONST(LW(0), 1)
             EVT_SET_CONST(LW(1), NPC_ANIM_battle_clubba_Palette_01_Anim_2)

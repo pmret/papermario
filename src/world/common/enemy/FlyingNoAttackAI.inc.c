@@ -10,7 +10,7 @@
 // - Ruff Puff
 // - Ember
 
-void N(FlyingNoAttackAI_12)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(FlyingNoAttackAI_12)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 tempAngle;
@@ -37,7 +37,7 @@ void N(FlyingNoAttackAI_12)(Evt* script, NpcAISettings* aiSettings, EnemyDetectV
     script->functionTemp[0] = 13;
 }
 
-void N(FlyingNoAttackAI_13)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(FlyingNoAttackAI_13)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 x, y, z, w;
@@ -82,7 +82,7 @@ void N(FlyingNoAttackAI_13)(Evt* script, NpcAISettings* aiSettings, EnemyDetectV
     script->functionTemp[0] = 12;
 }
 
-void N(FlyingNoAttackAI_20)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(FlyingNoAttackAI_20)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -104,7 +104,7 @@ ApiStatus N(FlyingNoAttackAI_Main)(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(enemy->npcID);
     EnemyDetectVolume territory;
     EnemyDetectVolume* territoryPtr = &territory;
-    NpcAISettings* aiSettings =(NpcAISettings*) evt_get_variable(script, *args);
+    MobileAISettings* aiSettings =(MobileAISettings*) evt_get_variable(script, *args);
 
     territory.skipPlayerDetectChance = 0;
     territory.shape = enemy->territory->wander.detectShape;

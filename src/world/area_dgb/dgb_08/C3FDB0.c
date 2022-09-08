@@ -25,7 +25,7 @@ EntryList N(entryList) = {
     { -575.0f, 210.0f, 180.0f, 90.0f },
 };
 
-MapConfig N(config) = {
+MapSettings N(settings) = {
     .main = &N(main),
     .entryList = &N(entryList),
     .entryCount = ENTRY_COUNT(N(entryList)),
@@ -33,7 +33,7 @@ MapConfig N(config) = {
 };
 
 EvtScript N(80243CF0) = {
-    EVT_SWITCH(EVT_SAVE_VAR(0))
+    EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(-29)
             EVT_CALL(SetMusicTrack, 0, SONG_TUBBAS_MANOR, 0, 8)
         EVT_CASE_LT(-16)
@@ -58,9 +58,9 @@ EvtScript N(exitDoubleDoor_80243D90) = {
     EVT_SET(EVT_VAR(2), 23)
     EVT_SET(EVT_VAR(3), 25)
     EVT_EXEC(ExitDoubleDoor)
-    EVT_WAIT_FRAMES(17)
+    EVT_WAIT(17)
     EVT_CALL(GotoMap, EVT_PTR("dgb_01"), 2)
-    EVT_WAIT_FRAMES(100)
+    EVT_WAIT(100)
     EVT_RETURN
     EVT_END
 };
@@ -74,9 +74,9 @@ EvtScript N(exitDoubleDoor_80243E44) = {
     EVT_SET(EVT_VAR(2), 18)
     EVT_SET(EVT_VAR(3), 20)
     EVT_EXEC(ExitDoubleDoor)
-    EVT_WAIT_FRAMES(17)
+    EVT_WAIT(17)
     EVT_CALL(GotoMap, EVT_PTR("dgb_01"), 4)
-    EVT_WAIT_FRAMES(100)
+    EVT_WAIT(100)
     EVT_RETURN
     EVT_END
 };
@@ -103,12 +103,12 @@ EvtScript N(enterDoubleDoor_80243EF8) = {
 };
 
 EvtScript N(main) = {
-    EVT_SET(EVT_SAVE_VAR(425), 15)
+    EVT_SET(GB_WorldLocation, 15)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
     EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
     EVT_CALL(SetCamEnabled, 0, 1)
-    EVT_SWITCH(EVT_SAVE_VAR(0))
+    EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(-28)
             EVT_CALL(MakeNpcs, 1, EVT_PTR(N(npcGroupList_80246958)))
         EVT_CASE_LT(-16)
@@ -129,7 +129,7 @@ static s32 N(pad_40FC) = {
     0x00000000,
 };
 
-NpcAISettings N(npcAI_80244100) = {
+MobileAISettings N(npcAI_80244100) = {
     .moveSpeed = 4.5f,
     .alertRadius = 170.0f,
     .alertOffsetDist = 90.0f,
@@ -205,7 +205,7 @@ s32 N(extraAnimationList_802442B8)[] = {
     ANIM_END,
 };
 
-NpcAISettings N(npcAISettings_802442C0) = {
+MobileAISettings N(npcAISettings_802442C0) = {
     .moveSpeed = 1.5f,
     .moveTime = 120,
     .waitTime = 30,
@@ -258,7 +258,7 @@ NpcSettings N(npcSettings_80244434) = {
     .ai = &N(npcAI_8024438C),
     .onDefeat = &N(802441D4),
     .level = 13,
-    .unk_2A = 8,
+    .actionFlags = 8,
 };
 
 f32 N(FlyingAI_JumpVels)[] = {
@@ -273,7 +273,7 @@ EvtScript N(80244478) = {
     EVT_END
 };
 
-NpcAISettings N(npcAISettings_802444B4) = {
+MobileAISettings N(npcAISettings_802444B4) = {
     .moveSpeed = 1.5f,
     .moveTime = 90,
     .waitTime = 30,
@@ -295,14 +295,14 @@ EvtScript N(npcAI_802444E4) = {
     EVT_CALL(SetSelfVar, 1, 600)
     EVT_CALL(N(SentinelAI_Main), EVT_PTR(N(npcAISettings_802444B4)))
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_WAIT_FRAMES(2)
+    EVT_WAIT(2)
     EVT_LABEL(20)
     EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_CALL(GetNpcPos, NPC_SELF, EVT_VAR(3), EVT_VAR(4), EVT_VAR(5))
     EVT_CALL(SetNpcPos, NPC_SELF, EVT_VAR(0), EVT_VAR(4), EVT_VAR(2))
     EVT_CALL(GetPlayerActionState, EVT_VAR(0))
     EVT_IF_NE(EVT_VAR(0), 0)
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
         EVT_GOTO(20)
     EVT_END_IF
     EVT_CALL(DisablePlayerPhysics, TRUE)
@@ -316,9 +316,9 @@ EvtScript N(npcAI_802444E4) = {
     EVT_CALL(SetNpcPos, NPC_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_CALL(func_80045838, -1, 759, 0)
     EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_sentinel_Palette_00_Anim_8)
-    EVT_WAIT_FRAMES(10)
+    EVT_WAIT(10)
     EVT_CALL(SetPlayerAnimation, ANIM_80017)
-    EVT_WAIT_FRAMES(10)
+    EVT_WAIT(10)
     EVT_CALL(func_80045838, -1, 1838, 0)
     EVT_THREAD
         EVT_LOOP(100)
@@ -328,7 +328,7 @@ EvtScript N(npcAI_802444E4) = {
             EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
             EVT_ADD(EVT_VAR(1), 1)
             EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_THREAD
@@ -342,9 +342,9 @@ EvtScript N(npcAI_802444E4) = {
         EVT_CALL(GetNpcPos, NPC_PARTNER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
         EVT_CALL(NpcJump0, NPC_PARTNER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 10)
     EVT_END_THREAD
-    EVT_WAIT_FRAMES(30)
+    EVT_WAIT(30)
     EVT_CALL(GotoMap, EVT_PTR(N(dgb_00_name_hack)), 2)
-    EVT_WAIT_FRAMES(100)
+    EVT_WAIT(100)
     EVT_RETURN
     EVT_END
 };
@@ -396,17 +396,17 @@ EvtScript N(idle_80244A54) = {
         EVT_IF_GE(EVT_VAR(0), -350)
             EVT_BREAK_LOOP
         EVT_END_IF
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_SET(EVT_SAVE_VAR(203), 8)
-    EVT_SET(EVT_SAVE_VAR(0), -27)
+    EVT_SET(GB_ARN_Tubba_MapID, 8)
+    EVT_SET(GB_StoryProgress, -27)
     EVT_CALL(PlaySoundAtCollider, 18, 455, 0)
     EVT_CALL(MakeLerp, 0, 80, 10, 0)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
         EVT_CALL(RotateModel, 18, EVT_VAR(0), 0, -1, 0)
         EVT_CALL(RotateModel, 20, EVT_VAR(0), 0, 1, 0)
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
         EVT_IF_EQ(EVT_VAR(1), 0)
             EVT_BREAK_LOOP
         EVT_END_IF
@@ -416,13 +416,13 @@ EvtScript N(idle_80244A54) = {
     EVT_CALL(SetNpcYaw, NPC_SELF, 90)
     EVT_CALL(NpcMoveTo, NPC_SELF, -530, 180, 30)
     EVT_THREAD
-        EVT_WAIT_FRAMES(20)
+        EVT_WAIT(20)
         EVT_CALL(MakeLerp, 80, 0, 10, 0)
         EVT_LOOP(0)
             EVT_CALL(UpdateLerp)
             EVT_CALL(RotateModel, 18, EVT_VAR(0), 0, -1, 0)
             EVT_CALL(RotateModel, 20, EVT_VAR(0), 0, 1, 0)
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
             EVT_IF_EQ(EVT_VAR(1), 0)
                 EVT_BREAK_LOOP
             EVT_END_IF
@@ -439,7 +439,7 @@ EvtScript N(80244D08) = {
     EVT_LABEL(10)
     EVT_CALL(GetNpcPos, 9, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_IF_GT(EVT_VAR(1), 0)
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
         EVT_GOTO(10)
     EVT_END_IF
     EVT_CALL(N(func_80243B98_C43948))
@@ -454,10 +454,10 @@ EvtScript N(npcAI_80244D7C) = {
         EVT_LOOP(0)
             EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_20F6, 4194304)
             EVT_CALL(ShakeCam, 0, 0, 5, EVT_FIXED(2.0))
-            EVT_WAIT_FRAMES(5)
+            EVT_WAIT(5)
             EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_20F6, 4194304)
             EVT_CALL(ShakeCam, 0, 0, 2, EVT_FIXED(1.0))
-            EVT_WAIT_FRAMES(8)
+            EVT_WAIT(8)
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_CALL(N(PatrolNoAttackAI_Main), EVT_PTR(N(npcAI_80244100)))
@@ -470,18 +470,18 @@ extern const char N(dgb_01_name_hack)[];
 EvtScript N(defeat_80244E58) = {
     EVT_CALL(N(UnkFunc1))
     EVT_CALL(GotoMap, EVT_PTR(N(dgb_01_name_hack)), 2)
-    EVT_WAIT_FRAMES(100)
+    EVT_WAIT(100)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(init_80244E94) = {
-    EVT_IF_LT(EVT_SAVE_VAR(0), -28)
+    EVT_IF_LT(GB_StoryProgress, -28)
         EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
         EVT_CALL(SetNpcFlagBits, NPC_SELF, ((NPC_FLAG_4)), TRUE)
         EVT_RETURN
     EVT_END_IF
-    EVT_IF_GE(EVT_SAVE_VAR(0), -26)
+    EVT_IF_GE(GB_StoryProgress, -26)
         EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
         EVT_CALL(SetNpcFlagBits, NPC_SELF, ((NPC_FLAG_4)), TRUE)
         EVT_RETURN
@@ -491,7 +491,7 @@ EvtScript N(init_80244E94) = {
     EVT_CALL(GetEntryID, EVT_VAR(0))
     EVT_SWITCH(EVT_VAR(0))
         EVT_CASE_EQ(0)
-            EVT_IF_NE(EVT_SAVE_VAR(203), 8)
+            EVT_IF_NE(GB_ARN_Tubba_MapID, 8)
                 EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
                 EVT_CALL(SetNpcFlagBits, NPC_SELF, ((NPC_FLAG_4)), TRUE)
             EVT_ELSE
@@ -499,7 +499,7 @@ EvtScript N(init_80244E94) = {
                 EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(npcAI_80244D7C)))
             EVT_END_IF
         EVT_CASE_EQ(1)
-            EVT_IF_NE(EVT_SAVE_VAR(203), 8)
+            EVT_IF_NE(GB_ARN_Tubba_MapID, 8)
                 EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80244A54)))
             EVT_ELSE
                 EVT_CALL(SetNpcPos, NPC_SELF, -130, 210, 80)
@@ -517,16 +517,18 @@ StaticNpc N(npcGroup_802450A0) = {
     .flags = NPC_FLAG_4 | NPC_FLAG_40000 | NPC_FLAG_200000 | NPC_FLAG_NO_DROPS,
     .init = &N(init_80244E94),
     .yaw = 270,
-    .dropFlags = NPC_DROP_FLAGS_80,
-    .itemDropChance = 5,
-    .itemDrops = {
+    .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+        .itemDropChance = 5,
+        .itemDrops = {
         { ITEM_SUPER_SHROOM, 10, 0 },
     },
-    .heartDrops = STANDARD_HEART_DROPS(3),
-    .flowerDrops = STANDARD_FLOWER_DROPS(2),
-    .minCoinBonus = 2,
-    .maxCoinBonus = 3,
-    .movement = { 10, -400, 210, 80, -100, 210, 80, 100, 210, 80, 400, 210, 80, 820, 100, 80, 820, 100, 260, 400, 0, 260, 100, 0, 200, -100, 0, 175, -450, 0, 175, -32767, 150, 0, 175, 1450, 200, 1 },
+        .heartDrops = STANDARD_HEART_DROPS(3),
+        .flowerDrops = STANDARD_FLOWER_DROPS(2),
+        .minCoinBonus = 2,
+        .maxCoinBonus = 3,
+    },
+	.territory = { .temp = { 10, -400, 210, 80, -100, 210, 80, 100, 210, 80, 400, 210, 80, 820, 100, 80, 820, 100, 260, 400, 0, 260, 100, 0, 200, -100, 0, 175, -450, 0, 175, -32767, 150, 0, 175, 1450, 200, 1 }},
     .animations = {
         NPC_ANIM_world_tubba_Palette_00_Anim_7,
         NPC_ANIM_world_tubba_Palette_00_Anim_A,
@@ -545,7 +547,7 @@ StaticNpc N(npcGroup_802450A0) = {
         NPC_ANIM_world_tubba_Palette_00_Anim_7,
         NPC_ANIM_world_tubba_Palette_00_Anim_7,
     },
-    .unk_1E0 = { 00, 00, 00, 01, 00, 00, 00, 00},
+    .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
 StaticNpc N(npcGroup_80245290)[] = {
@@ -555,16 +557,18 @@ StaticNpc N(npcGroup_80245290)[] = {
         .pos = { -250.0f, 0.0f, 135.0f },
         .flags = NPC_FLAG_LOCK_ANIMS,
         .yaw = 90,
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .itemDropChance = 5,
-        .itemDrops = {
+        .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+            .itemDropChance = 5,
+            .itemDrops = {
             { ITEM_SUPER_SHROOM, 10, 0 },
         },
-        .heartDrops = STANDARD_HEART_DROPS(3),
-        .flowerDrops = STANDARD_FLOWER_DROPS(2),
-        .minCoinBonus = 2,
-        .maxCoinBonus = 3,
-        .movement = { -250, 0, 135, 30, 0, -32767, 0, -250, 0, 135, 250, 0, 0, 1 },
+            .heartDrops = STANDARD_HEART_DROPS(3),
+            .flowerDrops = STANDARD_FLOWER_DROPS(2),
+            .minCoinBonus = 2,
+            .maxCoinBonus = 3,
+        },
+	.territory = { .temp = { -250, 0, 135, 30, 0, -32767, 0, -250, 0, 135, 250, 0, 0, 1 }},
         .animations = {
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
             NPC_ANIM_world_clubba_Palette_00_Anim_3,
@@ -583,7 +587,7 @@ StaticNpc N(npcGroup_80245290)[] = {
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
         },
-        .unk_1E0 = { 00, 00, 00, 02, 00, 00, 00, 00},
+        .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
         .extraAnimations = N(extraAnimationList_80244290),
     },
     {
@@ -592,10 +596,12 @@ StaticNpc N(npcGroup_80245290)[] = {
         .pos = { 0.0f, -1000.0f, 0.0f },
         .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_DROPS,
         .yaw = 0,
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .heartDrops = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-        .animations = {
+        .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+            .heartDrops = NO_DROPS,
+            .flowerDrops = NO_DROPS,
+        },
+	.animations = {
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
             NPC_ANIM_world_clubba_Palette_00_Anim_3,
             NPC_ANIM_world_clubba_Palette_00_Anim_4,
@@ -624,16 +630,18 @@ StaticNpc N(npcGroup_80245670)[] = {
         .pos = { 220.0f, 0.0f, 155.0f },
         .flags = NPC_FLAG_LOCK_ANIMS,
         .yaw = 270,
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .itemDropChance = 5,
-        .itemDrops = {
+        .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+            .itemDropChance = 5,
+            .itemDrops = {
             { ITEM_SUPER_SHROOM, 10, 0 },
         },
-        .heartDrops = STANDARD_HEART_DROPS(3),
-        .flowerDrops = STANDARD_FLOWER_DROPS(2),
-        .minCoinBonus = 2,
-        .maxCoinBonus = 3,
-        .movement = { 220, 0, 155, 30, 0, -32767, 0, 220, 0, 155, 250, 0, 0, 1 },
+            .heartDrops = STANDARD_HEART_DROPS(3),
+            .flowerDrops = STANDARD_FLOWER_DROPS(2),
+            .minCoinBonus = 2,
+            .maxCoinBonus = 3,
+        },
+	.territory = { .temp = { 220, 0, 155, 30, 0, -32767, 0, 220, 0, 155, 250, 0, 0, 1 }},
         .animations = {
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
             NPC_ANIM_world_clubba_Palette_00_Anim_3,
@@ -652,7 +660,7 @@ StaticNpc N(npcGroup_80245670)[] = {
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
         },
-        .unk_1E0 = { 00, 00, 00, 02, 00, 00, 00, 00},
+        .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
         .extraAnimations = N(extraAnimationList_80244290),
     },
     {
@@ -661,10 +669,12 @@ StaticNpc N(npcGroup_80245670)[] = {
         .pos = { 0.0f, -1000.0f, 0.0f },
         .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_DROPS,
         .yaw = 0,
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .heartDrops = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-        .animations = {
+        .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+            .heartDrops = NO_DROPS,
+            .flowerDrops = NO_DROPS,
+        },
+	.animations = {
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
             NPC_ANIM_world_clubba_Palette_00_Anim_3,
             NPC_ANIM_world_clubba_Palette_00_Anim_4,
@@ -693,16 +703,18 @@ StaticNpc N(npcGroup_80245A50)[] = {
         .pos = { 825.0f, 100.0f, 200.0f },
         .flags = NPC_FLAG_LOCK_ANIMS,
         .yaw = 270,
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .itemDropChance = 5,
-        .itemDrops = {
+        .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+            .itemDropChance = 5,
+            .itemDrops = {
             { ITEM_SUPER_SHROOM, 10, 0 },
         },
-        .heartDrops = STANDARD_HEART_DROPS(3),
-        .flowerDrops = STANDARD_FLOWER_DROPS(2),
-        .minCoinBonus = 2,
-        .maxCoinBonus = 3,
-        .movement = { 825, 100, 200, 25, 0, -32767, 0, 825, 100, 200, 150, 0, 0, 1 },
+            .heartDrops = STANDARD_HEART_DROPS(3),
+            .flowerDrops = STANDARD_FLOWER_DROPS(2),
+            .minCoinBonus = 2,
+            .maxCoinBonus = 3,
+        },
+	.territory = { .temp = { 825, 100, 200, 25, 0, -32767, 0, 825, 100, 200, 150, 0, 0, 1 }},
         .animations = {
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
             NPC_ANIM_world_clubba_Palette_00_Anim_3,
@@ -721,7 +733,7 @@ StaticNpc N(npcGroup_80245A50)[] = {
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
         },
-        .unk_1E0 = { 00, 00, 00, 03, 00, 00, 00, 00},
+        .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
         .extraAnimations = N(extraAnimationList_80244290),
     },
     {
@@ -730,10 +742,12 @@ StaticNpc N(npcGroup_80245A50)[] = {
         .pos = { 0.0f, -1000.0f, 0.0f },
         .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_DROPS,
         .yaw = 0,
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .heartDrops = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-        .animations = {
+        .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+            .heartDrops = NO_DROPS,
+            .flowerDrops = NO_DROPS,
+        },
+	.animations = {
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
             NPC_ANIM_world_clubba_Palette_00_Anim_3,
             NPC_ANIM_world_clubba_Palette_00_Anim_4,
@@ -761,10 +775,12 @@ StaticNpc N(npcGroup_80245E30) = {
     .pos = { 75.0f, 310.0f, 85.0f },
     .flags = NPC_FLAG_LOCK_ANIMS,
     .yaw = 90,
-    .dropFlags = NPC_DROP_FLAGS_80,
-    .heartDrops = NO_DROPS,
-    .flowerDrops = NO_DROPS,
-    .movement = { 75, 310, 85, 30, 0, -32767, 0, 75, 0, 85, 250, 55, 1, 1 },
+    .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+        .heartDrops = NO_DROPS,
+        .flowerDrops = NO_DROPS,
+    },
+	.territory = { .temp = { 75, 310, 85, 30, 0, -32767, 0, 75, 0, 85, 250, 55, 1, 1 }},
     .animations = {
         NPC_ANIM_sentinel_Palette_00_Anim_1,
         NPC_ANIM_sentinel_Palette_00_Anim_2,
@@ -791,10 +807,12 @@ StaticNpc N(npcGroup_80246020) = {
     .pos = { -451.0f, 310.0f, 81.0f },
     .flags = NPC_FLAG_LOCK_ANIMS,
     .yaw = 90,
-    .dropFlags = NPC_DROP_FLAGS_80,
-    .heartDrops = NO_DROPS,
-    .flowerDrops = NO_DROPS,
-    .movement = { -451, 310, 81, 30, 0, -32767, 0, -310, 0, 175, 250, 145, 1, 1 },
+    .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+        .heartDrops = NO_DROPS,
+        .flowerDrops = NO_DROPS,
+    },
+	.territory = { .temp = { -451, 310, 81, 30, 0, -32767, 0, -310, 0, 175, 250, 145, 1, 1 }},
     .animations = {
         NPC_ANIM_sentinel_Palette_00_Anim_1,
         NPC_ANIM_sentinel_Palette_00_Anim_2,
@@ -818,21 +836,21 @@ StaticNpc N(npcGroup_80246020) = {
 EvtScript N(idle_80246210) = {
     EVT_LABEL(0)
     EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_world_clubba_Palette_00_Anim_7)
-    EVT_WAIT_FRAMES(30)
+    EVT_WAIT(30)
     EVT_LOOP(15)
         EVT_CALL(N(func_80243C50_C43A00))
-        EVT_WAIT_FRAMES(60)
+        EVT_WAIT(60)
     EVT_END_LOOP
     EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_world_clubba_Palette_00_Anim_C)
-    EVT_WAIT_FRAMES(20)
+    EVT_WAIT(20)
     EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_world_clubba_Palette_00_Anim_7)
-    EVT_WAIT_FRAMES(30)
+    EVT_WAIT(30)
     EVT_LOOP(5)
         EVT_CALL(N(func_80243C50_C43A00))
-        EVT_WAIT_FRAMES(60)
+        EVT_WAIT(60)
     EVT_END_LOOP
     EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_world_clubba_Palette_00_Anim_C)
-    EVT_WAIT_FRAMES(15)
+    EVT_WAIT(15)
     EVT_GOTO(0)
     EVT_RETURN
     EVT_END
@@ -841,26 +859,26 @@ EvtScript N(idle_80246210) = {
 EvtScript N(interact_80246310) = {
     EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_world_clubba_Palette_00_Anim_8)
     EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_2F1, 0)
-    EVT_WAIT_FRAMES(10)
+    EVT_WAIT(10)
     EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_world_clubba_Palette_00_Anim_2)
-    EVT_WAIT_FRAMES(20)
+    EVT_WAIT(20)
     EVT_CALL(GetNpcYaw, -1, EVT_VAR(0))
     EVT_ADD(EVT_VAR(0), 180)
     EVT_CALL(InterpNpcYaw, NPC_SELF, EVT_VAR(0), 0)
-    EVT_WAIT_FRAMES(10)
+    EVT_WAIT(10)
     EVT_CALL(GetNpcYaw, -1, EVT_VAR(0))
     EVT_ADD(EVT_VAR(0), 180)
     EVT_CALL(InterpNpcYaw, NPC_SELF, EVT_VAR(0), 0)
-    EVT_WAIT_FRAMES(25)
+    EVT_WAIT(25)
     EVT_CALL(GetNpcYaw, -1, EVT_VAR(0))
     EVT_ADD(EVT_VAR(0), 180)
     EVT_CALL(InterpNpcYaw, NPC_SELF, EVT_VAR(0), 0)
-    EVT_WAIT_FRAMES(15)
+    EVT_WAIT(15)
     EVT_CALL(NpcFacePlayer, NPC_SELF, 0)
     EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_world_clubba_Palette_00_Anim_5, NPC_ANIM_world_clubba_Palette_00_Anim_2, 0, MESSAGE_ID(0x0E, 0x00F2))
-    EVT_WAIT_FRAMES(10)
+    EVT_WAIT(10)
     EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_world_clubba_Palette_00_Anim_6)
-    EVT_WAIT_FRAMES(10)
+    EVT_WAIT(10)
     EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_world_clubba_Palette_00_Anim_7)
     EVT_RETURN
     EVT_END
@@ -882,10 +900,12 @@ StaticNpc N(npcGroup_80246528) = {
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_200000 | NPC_FLAG_400000,
     .init = &N(init_802464C4),
     .yaw = 270,
-    .dropFlags = NPC_DROP_FLAGS_80,
-    .heartDrops = NO_DROPS,
-    .flowerDrops = NO_DROPS,
-    .movement = { 0, 0, 0, 0, 0, -32767, 0, 0, 0, 0, 0, 0, 0, 1 },
+    .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+        .heartDrops = NO_DROPS,
+        .flowerDrops = NO_DROPS,
+    },
+	.territory = { .temp = { 0, 0, 0, 0, 0, -32767, 0, 0, 0, 0, 0, 0, 0, 1 }},
     .animations = {
         NPC_ANIM_world_clubba_Palette_00_Anim_2,
         NPC_ANIM_world_clubba_Palette_00_Anim_3,
@@ -904,7 +924,7 @@ StaticNpc N(npcGroup_80246528) = {
         NPC_ANIM_world_clubba_Palette_00_Anim_2,
         NPC_ANIM_world_clubba_Palette_00_Anim_2,
     },
-    .unk_1E0 = { 00, 00, 00, 02, 00, 00, 00, 00},
+    .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
     .tattle = MESSAGE_ID(0x1A, 0x00B6),
 };
 
@@ -927,16 +947,18 @@ StaticNpc N(npcGroup_80246768) = {
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_LOCK_ANIMS,
     .init = &N(init_80246728),
     .yaw = 90,
-    .dropFlags = NPC_DROP_FLAGS_80,
-    .itemDropChance = 5,
-    .itemDrops = {
+    .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+        .itemDropChance = 5,
+        .itemDrops = {
         { ITEM_SUPER_SHROOM, 10, 0 },
     },
-    .heartDrops = STANDARD_HEART_DROPS(3),
-    .flowerDrops = STANDARD_FLOWER_DROPS(2),
-    .minCoinBonus = 2,
-    .maxCoinBonus = 3,
-    .movement = { -250, 0, 135, 30, 0, -32767, 0, -250, 0, 135, 250, 0, 0, 1 },
+        .heartDrops = STANDARD_HEART_DROPS(3),
+        .flowerDrops = STANDARD_FLOWER_DROPS(2),
+        .minCoinBonus = 2,
+        .maxCoinBonus = 3,
+    },
+	.territory = { .temp = { -250, 0, 135, 30, 0, -32767, 0, -250, 0, 135, 250, 0, 0, 1 }},
     .animations = {
         NPC_ANIM_world_clubba_Palette_00_Anim_2,
         NPC_ANIM_world_clubba_Palette_00_Anim_3,
@@ -955,27 +977,27 @@ StaticNpc N(npcGroup_80246768) = {
         NPC_ANIM_world_clubba_Palette_00_Anim_2,
         NPC_ANIM_world_clubba_Palette_00_Anim_2,
     },
-    .unk_1E0 = { 00, 00, 00, 02, 00, 00, 00, 00},
+    .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
     .extraAnimations = N(extraAnimationList_80244290),
 };
 
 NpcGroupList N(npcGroupList_80246958) = {
-    NPC_GROUP(N(npcGroup_80246768), BATTLE_ID(15, 2, 0, 3)),
-    NPC_GROUP(N(npcGroup_80245290), BATTLE_ID(15, 2, 0, 3)),
-    NPC_GROUP(N(npcGroup_80245670), BATTLE_ID(15, 2, 0, 3)),
-    NPC_GROUP(N(npcGroup_80245A50), BATTLE_ID(15, 3, 0, 3)),
-    NPC_GROUP(N(npcGroup_80245E30), BATTLE_ID(0, 0, 0, 0)),
-    NPC_GROUP(N(npcGroup_80246020), BATTLE_ID(0, 0, 0, 0)),
+    NPC_GROUP(N(npcGroup_80246768), 0x0F02, 0x02),
+    NPC_GROUP(N(npcGroup_80245290), 0x0F02, 0x02),
+    NPC_GROUP(N(npcGroup_80245670), 0x0F02, 0x02),
+    NPC_GROUP(N(npcGroup_80245A50), 0x0F03, 0x02),
+    NPC_GROUP(N(npcGroup_80245E30)),
+    NPC_GROUP(N(npcGroup_80246020)),
     {},
 };
 
 NpcGroupList N(npcGroupList_802469AC) = {
-    NPC_GROUP(N(npcGroup_802450A0), BATTLE_ID(15, 4, 0, 1)),
+    NPC_GROUP(N(npcGroup_802450A0), 0x0F04, 0x00),
     {},
 };
 
 NpcGroupList N(npcGroupList_802469C4) = {
-    NPC_GROUP(N(npcGroup_80246528), BATTLE_ID(0, 0, 0, 0)),
+    NPC_GROUP(N(npcGroup_80246528)),
     {},
 };
 

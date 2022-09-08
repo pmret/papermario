@@ -113,7 +113,7 @@ EvtScript D_802C0410 = {
     EVT_ADD(LW(1), 45)
     EVT_CALL(MakeItemEntity, LW(10), LW(0), LW(1), LW(2), 1, 0)
     EVT_SET(LW(10), LW(0))
-    EVT_WAIT_FRAMES(15)
+    EVT_WAIT(15)
     EVT_CALL(GetPlayerPos, LW(0), LW(1), LW(2))
     EVT_ADD(LW(1), 20)
     EVT_CALL(func_802C0000, LW(0), LW(1), LW(2))
@@ -126,11 +126,11 @@ EvtScript D_802C04F4 = {
     EVT_THREAD
         EVT_LOOP(4)
             EVT_CALL(PlaySound, SOUND_2095)
-            EVT_WAIT_FRAMES(10)
+            EVT_WAIT(10)
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_CALL(SetPlayerAnimation, ANIM_EAT)
-    EVT_WAIT_FRAMES(45)
+    EVT_WAIT(45)
     EVT_RETURN
     EVT_END
 };
@@ -139,11 +139,11 @@ EvtScript D_802C0560 = {
     EVT_THREAD
         EVT_LOOP(4)
             EVT_CALL(PlaySound, SOUND_2095)
-            EVT_WAIT_FRAMES(10)
+            EVT_WAIT(10)
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_CALL(SetPlayerAnimation, ANIM_DRINK)
-    EVT_WAIT_FRAMES(45)
+    EVT_WAIT(45)
     EVT_RETURN
     EVT_END
 };
@@ -154,7 +154,7 @@ EvtScript D_802C05CC_32579C = {
     EVT_CALL(GetCurrentPartner, LW(0))
     EVT_IF_NE(LW(0), 0)
         EVT_CALL(func_802D2B6C)
-        EVT_WAIT_FRAMES(20)
+        EVT_WAIT(20)
     EVT_END_IF
     EVT_CALL(func_802C02E4)
     EVT_CALL(func_802C0358, LW(10))
@@ -189,16 +189,16 @@ EvtScript D_802C05CC_32579C = {
         EVT_CALL(func_802C0288, LW(12))
     EVT_END_IF
     EVT_IF_EQ(LW(15), 0)
-        EVT_WAIT_FRAMES(10)
+        EVT_WAIT(10)
         EVT_CALL(SetPlayerAnimation, ANIM_THUMBS_UP)
-        EVT_WAIT_FRAMES(30)
+        EVT_WAIT(30)
     EVT_ELSE
-        EVT_WAIT_FRAMES(30)
+        EVT_WAIT(30)
     EVT_END_IF
     EVT_CALL(GetPlayerPos, LW(0), LW(1), LW(2))
     EVT_CALL(ShowRecoveryShimmer, LW(0), LW(1), LW(2), LW(11))
     EVT_CALL(SetPlayerAnimation, ANIM_10002)
-    EVT_WAIT_FRAMES(20)
+    EVT_WAIT(20)
     EVT_CALL(func_802C03E8)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_CALL(func_802C031C)

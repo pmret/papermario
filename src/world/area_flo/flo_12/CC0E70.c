@@ -14,7 +14,7 @@ EntryList N(entryList) = {
     { 280.0f, 0.0f, 0.0f, 270.0f },
 };
 
-MapConfig N(config) = {
+MapSettings N(settings) = {
     .main = &N(main),
     .entryList = &N(entryList),
     .entryCount = ENTRY_COUNT(N(entryList)),
@@ -27,7 +27,7 @@ EvtScript N(80240750) = {
     EVT_IF_EQ(EVT_VAR(0), 1)
         EVT_CALL(SetMusicTrack, 0, SONG_SUNSHINE_RETURNS, 0, 8)
     EVT_ELSE
-        EVT_SWITCH(EVT_SAVE_VAR(0))
+        EVT_SWITCH(GB_StoryProgress)
             EVT_CASE_LT(53)
                 EVT_CALL(SetMusicTrack, 0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8)
             EVT_CASE_DEFAULT
@@ -46,7 +46,7 @@ EvtScript N(8024080C) = {
 
 EvtScript N(80240830) = {
     EVT_CALL(FadeOutMusic, 0, 250)
-    EVT_WAIT_FRAMES(10)
+    EVT_WAIT(10)
     EVT_CALL(PopSong)
     EVT_RETURN
     EVT_END
@@ -84,14 +84,14 @@ EvtScript N(80240870) = {
         EVT_ADD(EVT_VAR(2), EVT_VAR(14))
         EVT_CALL(PlayEffect, 0xD, EVT_VAR(0), EVT_VAR(2), EVT_VAR(1), EVT_VAR(3), 0, 0, 0, 0, 0, 0, 0, 0, 0)
     EVT_END_LOOP
-    EVT_WAIT_FRAMES(EVT_VAR(15))
+    EVT_WAIT(EVT_VAR(15))
     EVT_LABEL(0)
     EVT_CALL(RandInt, EVT_VAR(12), EVT_VAR(0))
     EVT_CALL(RandInt, EVT_VAR(13), EVT_VAR(1))
     EVT_ADD(EVT_VAR(0), EVT_VAR(10))
     EVT_ADD(EVT_VAR(1), EVT_VAR(11))
     EVT_CALL(PlayEffect, 0xD, EVT_VAR(0), EVT_VAR(14), EVT_VAR(1), 200, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-    EVT_WAIT_FRAMES(EVT_VAR(15))
+    EVT_WAIT(EVT_VAR(15))
     EVT_GOTO(0)
     EVT_RETURN
     EVT_END
@@ -106,7 +106,7 @@ EvtScript N(80240B78) = {
 };
 
 EvtScript N(main) = {
-    EVT_SET(EVT_SAVE_VAR(425), 38)
+    EVT_SET(GB_WorldLocation, 38)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamLeadPlayer, 0, 0)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
@@ -142,7 +142,7 @@ EvtScript N(main) = {
         EVT_EXEC(EnterWalk)
     EVT_END_IF
     EVT_EXEC_WAIT(N(80240750))
-    EVT_IF_GE(EVT_SAVE_VAR(0), 53)
+    EVT_IF_GE(GB_StoryProgress, 53)
         EVT_CALL(N(func_80240000_CC0E30))
     EVT_END_IF
     EVT_RETURN
@@ -205,7 +205,7 @@ EvtScript N(80241858) = {
             EVT_BITWISE_OR_CONST(EVT_VAR(0), 0x50000)
             EVT_CALL(MakeItemEntity, EVT_VAR(0), EVT_VAR(3), EVT_VAR(4), EVT_VAR(5), 1, 0)
             EVT_CALL(SetPlayerAnimation, 393221)
-            EVT_WAIT_FRAMES(30)
+            EVT_WAIT(30)
             EVT_CALL(SetPlayerAnimation, ANIM_10002)
             EVT_CALL(RemoveItemEntity, EVT_VAR(0))
     EVT_END_SWITCH
@@ -241,17 +241,17 @@ EvtScript N(802419F4) = {
     EVT_CALL(SetCamSpeed, 0, EVT_FIXED(90.0))
     EVT_CALL(PanToTarget, 0, 0, 1)
     EVT_CALL(WaitForCam, 0, EVT_FIXED(1.0))
-    EVT_WAIT_FRAMES(20)
+    EVT_WAIT(20)
     EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_2, 5, MESSAGE_ID(0x11, 0x00C7))
-    EVT_WAIT_FRAMES(10)
+    EVT_WAIT(10)
     EVT_CALL(GotoMap, EVT_PTR("flo_03"), 2)
-    EVT_WAIT_FRAMES(100)
+    EVT_WAIT(100)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(80241B6C) = {
-    EVT_WAIT_FRAMES(10)
+    EVT_WAIT(10)
     EVT_CALL(SetNpcFlagBits, 0, ((NPC_FLAG_100)), TRUE)
     EVT_CALL(PlayerMoveTo, -5, 20, 20)
     EVT_CALL(SetNpcFlagBits, 0, ((NPC_FLAG_100)), FALSE)
@@ -261,7 +261,7 @@ EvtScript N(80241B6C) = {
 };
 
 EvtScript N(80241BE4) = {
-    EVT_WAIT_FRAMES(10)
+    EVT_WAIT(10)
     EVT_CALL(SetNpcFlagBits, 0, ((NPC_FLAG_100)), TRUE)
     EVT_CALL(SetNpcFlagBits, 1, ((NPC_FLAG_100)), TRUE)
     EVT_CALL(PlayerMoveTo, -5, 20, 20)
@@ -274,9 +274,9 @@ EvtScript N(80241BE4) = {
 
 EvtScript N(interact_80241C8C) = {
     EVT_EXEC_WAIT(N(8024080C))
-    EVT_SWITCH(EVT_SAVE_VAR(0))
+    EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(47)
-            EVT_SWITCH(EVT_SAVE_FLAG(1378))
+            EVT_SWITCH(GF_FLO12_Met_Rosie)
                 EVT_CASE_EQ(0)
                     EVT_EXEC(N(80241B6C))
                     EVT_CALL(GetNpcPos, NPC_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
@@ -284,7 +284,7 @@ EvtScript N(interact_80241C8C) = {
                     EVT_CALL(SetCamProperties, 0, EVT_FIXED(4.0), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 325, EVT_FIXED(19.0), EVT_FIXED(-9.5))
                     EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_3, NPC_ANIM_rosie_Palette_00_Anim_1, 5, MESSAGE_ID(0x11, 0x008C))
                     EVT_CALL(ShowChoice, MESSAGE_ID(0x1E, 0x0011))
-                    EVT_WAIT_FRAMES(10)
+                    EVT_WAIT(10)
                     EVT_SWITCH(EVT_VAR(0))
                         EVT_CASE_EQ(0)
                             EVT_CALL(ContinueSpeech, -1, NPC_ANIM_rosie_Palette_00_Anim_3, NPC_ANIM_rosie_Palette_00_Anim_1, 5, MESSAGE_ID(0x11, 0x008D))
@@ -293,11 +293,11 @@ EvtScript N(interact_80241C8C) = {
                     EVT_END_SWITCH
                     EVT_CALL(SetNpcFlagBits, 1, ((NPC_FLAG_100)), FALSE)
                     EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_5)
-                    EVT_WAIT_FRAMES(10)
+                    EVT_WAIT(10)
                     EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_2)
                     EVT_CALL(MakeItemEntity, ITEM_WATER_STONE, -33, 14, 19, 1, 1380)
-                    EVT_WAIT_FRAMES(10)
-                    EVT_SWITCH(EVT_SAVE_FLAG(1375))
+                    EVT_WAIT(10)
+                    EVT_SWITCH(GF_FLO10_LilyRequestedWaterStone)
                         EVT_CASE_EQ(0)
                             EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_4, 5, MESSAGE_ID(0x11, 0x008F))
                         EVT_CASE_EQ(1)
@@ -306,25 +306,25 @@ EvtScript N(interact_80241C8C) = {
                             EVT_CALL(SetPlayerAnimation, 393221)
                             EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_2, 5, MESSAGE_ID(0x11, 0x0091))
                             EVT_CALL(SetPlayerAnimation, ANIM_PRAY)
-                            EVT_WAIT_FRAMES(40)
+                            EVT_WAIT(40)
                             EVT_CALL(SetPlayerAnimation, ANIM_10002)
                             EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_2, 5, MESSAGE_ID(0x11, 0x0092))
-                            EVT_SET(EVT_SAVE_FLAG(1379), 1)
+                            EVT_SET(GF_FLO12_RosieRequestedSomethingBeautiful, 1)
                     EVT_END_SWITCH
-                    EVT_SET(EVT_SAVE_FLAG(1378), 1)
+                    EVT_SET(GF_FLO12_Met_Rosie, 1)
                 EVT_CASE_EQ(1)
-                    EVT_SWITCH(EVT_SAVE_FLAG(1379))
+                    EVT_SWITCH(GF_FLO12_RosieRequestedSomethingBeautiful)
                         EVT_CASE_EQ(0)
-                            EVT_IF_EQ(EVT_SAVE_FLAG(1375), 1)
+                            EVT_IF_EQ(GF_FLO10_LilyRequestedWaterStone, 1)
                                 EVT_EXEC(N(80241BE4))
                                 EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_4, 5, MESSAGE_ID(0x11, 0x0090))
                                 EVT_CALL(SetPlayerAnimation, 393221)
                                 EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_2, 5, MESSAGE_ID(0x11, 0x0091))
                                 EVT_CALL(SetPlayerAnimation, ANIM_PRAY)
-                                EVT_WAIT_FRAMES(40)
+                                EVT_WAIT(40)
                                 EVT_CALL(SetPlayerAnimation, ANIM_10002)
                                 EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_2, 5, MESSAGE_ID(0x11, 0x0092))
-                                EVT_SET(EVT_SAVE_FLAG(1379), 1)
+                                EVT_SET(GF_FLO12_RosieRequestedSomethingBeautiful, 1)
                             EVT_ELSE
                                 EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_4, 5, MESSAGE_ID(0x11, 0x0090))
                             EVT_END_IF
@@ -355,10 +355,10 @@ EvtScript N(interact_80241C8C) = {
                     EVT_SET(EVT_VAR(1), 1)
                     EVT_EXEC_WAIT(N(802417F0))
                     EVT_CALL(AddKeyItem, ITEM_WATER_STONE)
-                    EVT_WAIT_FRAMES(10)
+                    EVT_WAIT(10)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_2, 5, MESSAGE_ID(0x11, 0x0096))
                     EVT_SET(EVT_AREA_FLAG(22), 1)
-                    EVT_SET(EVT_SAVE_VAR(0), 48)
+                    EVT_SET(GB_StoryProgress, 48)
             EVT_END_SWITCH
         EVT_CASE_LT(53)
             EVT_SWITCH(EVT_AREA_FLAG(22))
@@ -385,9 +385,9 @@ EvtScript N(init_802423D0) = {
     EVT_CALL(SetNpcPos, 1, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_CALL(SetNpcFlagBits, 1, ((NPC_FLAG_2)), TRUE)
     EVT_CALL(SetNpcFlagBits, 1, ((NPC_FLAG_HAS_SHADOW)), TRUE)
-    EVT_SWITCH(EVT_SAVE_VAR(0))
+    EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(47)
-            EVT_IF_EQ(EVT_SAVE_FLAG(1378), 1)
+            EVT_IF_EQ(GF_FLO12_Met_Rosie, 1)
                 EVT_CALL(SetNpcFlagBits, 1, ((NPC_FLAG_100)), FALSE)
                 EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_2)
                 EVT_CALL(MakeItemEntity, ITEM_WATER_STONE, -33, 14, 19, 1, 1380)
@@ -416,10 +416,12 @@ StaticNpc N(npcGroup_802425D8)[] = {
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_400000,
         .init = &N(init_802423D0),
         .yaw = 90,
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .heartDrops = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-        .animations = {
+        .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+            .heartDrops = NO_DROPS,
+            .flowerDrops = NO_DROPS,
+        },
+	.animations = {
             NPC_ANIM_rosie_Palette_00_Anim_1,
             NPC_ANIM_rosie_Palette_00_Anim_1,
             NPC_ANIM_rosie_Palette_00_Anim_1,
@@ -445,10 +447,12 @@ StaticNpc N(npcGroup_802425D8)[] = {
         .pos = { -70.0f, 0.0f, 20.0f },
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_GRAVITY,
         .yaw = 90,
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .heartDrops = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-        .animations = {
+        .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+            .heartDrops = NO_DROPS,
+            .flowerDrops = NO_DROPS,
+        },
+	.animations = {
             NPC_ANIM_rosie_Palette_00_Anim_1,
             NPC_ANIM_rosie_Palette_00_Anim_1,
             NPC_ANIM_rosie_Palette_00_Anim_1,
@@ -470,7 +474,7 @@ StaticNpc N(npcGroup_802425D8)[] = {
 };
 
 NpcGroupList N(npcGroupList_802429B8) = {
-    NPC_GROUP(N(npcGroup_802425D8), BATTLE_ID(0, 0, 0, 0)),
+    NPC_GROUP(N(npcGroup_802425D8)),
     {},
 };
 

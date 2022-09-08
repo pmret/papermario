@@ -605,7 +605,7 @@ s32 get_lava_reset_pos(f32* outX, f32* outY, f32* outZ) {
     LavaReset* lavaReset = gLavaResetList;
 
     if (D_802DADA4 == -1) {
-        temp_v0 = &(*get_current_map_header()->entryList)[gGameStatusPtr->entryID];
+        temp_v0 = &(*get_current_map_settings()->entryList)[gGameStatusPtr->entryID];
         *outX = temp_v0->x;
         *outY = temp_v0->y;
         *outZ = temp_v0->z;

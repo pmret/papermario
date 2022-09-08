@@ -28,7 +28,7 @@ void init_enter_world_shared(void) {
 
     gOverrideFlags |= GLOBAL_OVERRIDES_8;
 
-    evt_set_variable(NULL, EVT_SAVE_VAR(1), gGameStatusPtr->unk_A9);
+    evt_set_variable(NULL, GB_Unused_EVT_01, gGameStatusPtr->unk_A9);
     timeFreezeMode = 0;
 }
 

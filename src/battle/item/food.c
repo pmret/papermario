@@ -97,23 +97,23 @@ ApiStatus N(func_802A15A0_733670)(Evt* script, s32 isInitialCall) {
 
 EvtScript N(script6) = {
     EVT_CALL(SetActorYaw, ACTOR_PLAYER, 30)
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_CALL(SetActorYaw, ACTOR_PLAYER, 60)
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_CALL(SetActorYaw, ACTOR_PLAYER, 90)
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_CALL(SetActorYaw, ACTOR_PLAYER, 120)
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_CALL(SetActorYaw, ACTOR_PLAYER, 150)
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_CALL(SetActorYaw, ACTOR_PLAYER, 180)
-    EVT_WAIT_FRAMES(10)
+    EVT_WAIT(10)
     EVT_SET(EVT_VAR(1), EVT_VAR(15))
     EVT_EXEC_WAIT(N(UseItem))
     EVT_SET(EVT_VAR(14), EVT_VAR(10))
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_THROW)
     EVT_THREAD
-        EVT_WAIT_FRAMES(20)
+        EVT_WAIT(20)
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10002)
     EVT_END_THREAD
     EVT_CALL(CreateVirtualEntity, EVT_VAR(10), 0x80283EE8)
@@ -131,7 +131,7 @@ EvtScript N(script6) = {
         EVT_LOOP(25)
             EVT_CALL(GetVirtualEntityPosition, EVT_VAR(10), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
             EVT_CALL(N(func_802A123C_73330C), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
         EVT_END_LOOP
         EVT_CALL(RemoveItemEntity, EVT_VAR(14))
     EVT_END_THREAD
@@ -153,22 +153,22 @@ EvtScript N(script6) = {
     EVT_IF_GT(EVT_VAR(11), 0)
         EVT_CALL(N(func_802A12EC_7333BC), EVT_VAR(11))
     EVT_END_IF
-    EVT_WAIT_FRAMES(30)
+    EVT_WAIT(30)
     EVT_CALL(GetActorPos, ACTOR_PARTNER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_CALL(ShowRecoveryShimmer, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), EVT_VAR(11))
-    EVT_WAIT_FRAMES(20)
+    EVT_WAIT(20)
     EVT_CALL(SetActorYaw, ACTOR_PLAYER, 150)
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_CALL(SetActorYaw, ACTOR_PLAYER, 120)
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_CALL(SetActorYaw, ACTOR_PLAYER, 90)
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_CALL(SetActorYaw, ACTOR_PLAYER, 60)
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_CALL(SetActorYaw, ACTOR_PLAYER, 30)
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_CALL(SetActorYaw, ACTOR_PLAYER, 0)
-    EVT_WAIT_FRAMES(10)
+    EVT_WAIT(10)
     EVT_RETURN
     EVT_END
 };
@@ -222,16 +222,16 @@ EvtScript N(main) = {
         EVT_CALL(N(AddFP), EVT_VAR(12))
     EVT_END_IF
     EVT_IF_EQ(EVT_VAR(15), 0)
-        EVT_WAIT_FRAMES(10)
+        EVT_WAIT(10)
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_THUMBS_UP)
-        EVT_WAIT_FRAMES(30)
+        EVT_WAIT(30)
     EVT_ELSE
-        EVT_WAIT_FRAMES(30)
+        EVT_WAIT(30)
     EVT_END_IF
     EVT_CALL(GetActorPos, ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_CALL(ShowRecoveryShimmer, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), EVT_VAR(11))
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10002)
-    EVT_WAIT_FRAMES(20)
+    EVT_WAIT(20)
     EVT_EXEC_WAIT(N(PlayerGoHome))
     EVT_RETURN
     EVT_END

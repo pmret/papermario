@@ -10,7 +10,7 @@ s32 N(ProjectileHitbox_GetUsableProjectileID)(Evt* script) {
     Bytecode* args = script->ptrReadPos;
     Camera* camera = &gCameras[gCurrentCamID];
     Npc* npc = get_npc_unsafe(enemy->npcID);
-    NpcAISettings* aiSettings = (NpcAISettings*)evt_get_variable(script, *args++);
+    MobileAISettings* aiSettings = (MobileAISettings*)evt_get_variable(script, *args++);
     f32 facingAngle;
     f32 angleToPlayer;
     f32 deltaAngle;
@@ -137,12 +137,12 @@ ApiStatus N(ProjectileAI_Main)(Evt* script, s32 isInitialCall) {
     f32 hitDepth;
     Npc* npc;
     Npc* npc2;
-    NpcAISettings* aiSettings;
+    MobileAISettings* aiSettings;
     u32 vt0;
 
     if (get_enemy_safe(enemy->npcID) != NULL) {
         if (enemy->varTable[0] != 5) {
-            aiSettings = (NpcAISettings*)evt_get_variable(script, *args++);
+            aiSettings = (MobileAISettings*)evt_get_variable(script, *args++);
             npc = get_npc_unsafe(enemy->npcID);
 
             if (enemy->varTable[1] & 2) {

@@ -13,7 +13,7 @@ void get_model_env_color_parameters(u8* arg0, u8* arg1, u8* arg2, u8* arg3, u8* 
 s32 N(GetTattle)(void) {
     s32 msg;
 
-    if (evt_get_variable(NULL, EVT_STORY_PROGRESS) > STORY_CH2_GOT_PULSE_STONE) {
+    if (evt_get_variable(NULL, GB_StoryProgress) > STORY_CH2_GOT_PULSE_STONE) {
         msg = MESSAGE_ID(0x19, 0x63);
     } else {
         msg = MESSAGE_ID(0x19, 0x62);

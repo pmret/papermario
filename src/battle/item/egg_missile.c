@@ -146,7 +146,7 @@ EvtScript N(main) = {
     EVT_CALL(MoveBattleCamOver, 15)
     EVT_CALL(SetAnimation, 0, 0, 65558)
     EVT_CALL(PlaySound, 1018)
-    EVT_WAIT_FRAMES(3)
+    EVT_WAIT(3)
     EVT_CALL(CreateVirtualEntity, EVT_VAR(10), battle_item_egg_missile_modelCommandList)
     EVT_CALL(GetActorPos, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_ADD(EVT_VAR(0), 20)
@@ -161,7 +161,7 @@ EvtScript N(main) = {
         EVT_LOOP(18)
             EVT_ADD(EVT_VAR(0), 60)
             EVT_CALL(SetVirtualEntityRotation, EVT_VAR(10), 0, 0, EVT_VAR(0))
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_CALL(SetVirtualEntityJumpGravity, EVT_VAR(10), EVT_FIXED(1.0))

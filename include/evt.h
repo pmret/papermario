@@ -147,12 +147,6 @@ enum {
 #define VARE EVT_VAR(14)
 #define VARF EVT_VAR(15)
 
-// deprecated, use enum GSW/GSWF
-#define EVT_STORY_PROGRESS EVT_SAVE_VAR(0)
-#define EVT_SAVE_FLAG_PLACES_VISITED EVT_SAVE_FLAG(0x7AA)
-#define EVT_SAVE_FLAG_TUTORIAL_GOT_STAR_PIECE EVT_SAVE_FLAG(101)
-#define EVT_WORLD_LOCATION EVT_SAVE_VAR(425)
-
 /* Return type of evt_execute_next_command */
 #define EVT_CONTINUE 0   /* Continue to next command */
 #define EVT_ABORT    1   /* Quit execution */

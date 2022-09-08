@@ -315,7 +315,7 @@ glabel func_802BD5D8_3174F8
 .L802BDA34:
 /* 317954 802BDA34 14A00010 */  bnez      $a1, .L802BDA78
 /* 317958 802BDA38 24020001 */   addiu    $v0, $zero, 1
-/* 31795C 802BDA3C 0C016AFA */  jal       get_current_map_header
+/* 31795C 802BDA3C 0C016AFA */  jal       get_current_map_settings
 /* 317960 802BDA40 00000000 */   nop
 /* 317964 802BDA44 8C50003C */  lw        $s0, 0x3c($v0)
 /* 317968 802BDA48 1200FF22 */  beqz      $s0, .L802BD6D4
@@ -346,7 +346,7 @@ glabel func_802BD5D8_3174F8
 /* 3179BC 802BDA9C 080AF6C4 */  j         .L802BDB10
 /* 3179C0 802BDAA0 00000000 */   nop
 .L802BDAA4:
-/* 3179C4 802BDAA4 0C016AFA */  jal       get_current_map_header
+/* 3179C4 802BDAA4 0C016AFA */  jal       get_current_map_settings
 /* 3179C8 802BDAA8 00000000 */   nop
 /* 3179CC 802BDAAC 8C50003C */  lw        $s0, 0x3c($v0)
 /* 3179D0 802BDAB0 12000016 */  beqz      $s0, .L802BDB0C

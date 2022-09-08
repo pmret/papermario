@@ -39,7 +39,7 @@ static s32 N(BillBlasterAI_GetIdleBulletNpcID)(void) {
 ApiStatus N(BulletBillAI_Main)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
-    NpcAISettings* aiSettings = (NpcAISettings*)evt_get_variable(script, *script->ptrReadPos);
+    MobileAISettings* aiSettings = (MobileAISettings*)evt_get_variable(script, *script->ptrReadPos);
     s32 hitDetected = FALSE;
     s32 done = FALSE;
     Npc* blasterNpc;
@@ -154,7 +154,7 @@ ApiStatus N(BillBlasterAI_Main)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
-    NpcAISettings* aiSettings = (NpcAISettings*)evt_get_variable(script, *args++);
+    MobileAISettings* aiSettings = (MobileAISettings*)evt_get_variable(script, *args++);
     s32 bulletNpcID;
     Enemy* bulletEnemy;
     f32 deltaY;

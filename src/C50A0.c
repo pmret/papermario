@@ -332,7 +332,7 @@ s32 make_item_entity(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pic
 
     if (pickupVar > 0) {
         switch (itemSpawnMode) {
-            case ITEM_SPAWN_MODE_NOTHING:
+            case ITEM_SPAWN_MODE_KEY:
             case ITEM_SPAWN_MODE_TOSS_NEVER_VANISH:
             case ITEM_SPAWN_MODE_TOSS:
             case ITEM_SPAWN_MODE_TOSS_SPAWN_ONCE:
@@ -407,7 +407,7 @@ s32 make_item_entity(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pic
     ItemEntityAlternatingSpawn = 1 - ItemEntityAlternatingSpawn;
 
     switch (itemEntity->spawnType) {
-        case ITEM_SPAWN_MODE_NOTHING:
+        case ITEM_SPAWN_MODE_KEY:
             itemEntity->flags |= ITEM_ENTITY_FLAGS_80000000;
             break;
         case ITEM_SPAWN_MODE_DECORATION:
@@ -532,7 +532,7 @@ s32 make_item_entity(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pic
     }
 
     switch (itemEntity->spawnType) {
-        case ITEM_SPAWN_MODE_NOTHING:
+        case ITEM_SPAWN_MODE_KEY:
         case ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS:
         case ITEM_SPAWN_MODE_FALL_SPAWN_ALWAYS:
         case ITEM_SPAWN_MODE_FIXED_SPAWN_ALWAYS:
@@ -698,7 +698,7 @@ void update_item_entities(void) {
                 item_entity_update(entity);
 
                 switch (entity->spawnType) {
-                    case ITEM_SPAWN_MODE_NOTHING:
+                    case ITEM_SPAWN_MODE_KEY:
                         update_item_entity_static(entity);
                         break;
                     case ITEM_SPAWN_MODE_DECORATION:
@@ -723,7 +723,7 @@ void update_item_entities(void) {
                     s32 xs, ys, zs;
 
                     switch (entity->spawnType) {
-                        case ITEM_SPAWN_MODE_NOTHING:
+                        case ITEM_SPAWN_MODE_KEY:
                         case ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS:
                         case ITEM_SPAWN_MODE_FALL_SPAWN_ALWAYS:
                         case ITEM_SPAWN_MODE_FIXED_SPAWN_ALWAYS:
@@ -803,7 +803,7 @@ void draw_item_entities_UI(void) {
 
             if (itemEntity != NULL && itemEntity->flags != 0) {
                 switch (itemEntity->spawnType) {
-                    case ITEM_SPAWN_MODE_NOTHING:
+                    case ITEM_SPAWN_MODE_KEY:
                         func_801356C4(itemEntity);
                         break;
                     case ITEM_SPAWN_MODE_DECORATION:
@@ -842,7 +842,7 @@ void remove_item_entity_by_reference(ItemEntity* entity) {
         }
 
         switch (entity->spawnType) {
-            case ITEM_SPAWN_MODE_NOTHING:
+            case ITEM_SPAWN_MODE_KEY:
             case ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS:
             case ITEM_SPAWN_MODE_FALL_SPAWN_ALWAYS:
             case ITEM_SPAWN_MODE_FIXED_SPAWN_ALWAYS:
@@ -862,7 +862,7 @@ void remove_item_entity_by_index(s32 index) {
     ItemEntity* itemEntity = gCurrentItemEntities[index];
 
     switch (itemEntity->spawnType) {
-        case ITEM_SPAWN_MODE_NOTHING:
+        case ITEM_SPAWN_MODE_KEY:
         case ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS:
         case ITEM_SPAWN_MODE_FALL_SPAWN_ALWAYS:
         case ITEM_SPAWN_MODE_FIXED_SPAWN_ALWAYS:

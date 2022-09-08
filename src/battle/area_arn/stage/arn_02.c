@@ -13,7 +13,7 @@ EvtScript N(80227960) = {
         EVT_SUB(LW(0), 360)
     EVT_END_IF
     EVT_CALL(RotateModel, LW(10), LW(0), 0, 0, 1)
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_GOTO(0)
     EVT_RETURN
     EVT_END

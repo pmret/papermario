@@ -12,7 +12,7 @@ EvtScript N(80234CB0) = {
         EVT_CALL(SetTexPanOffset, 1, 0, LW(0), LW(1))
         EVT_ADD(LW(0), 32768)
         EVT_ADD(LW(1), 0)
-        EVT_WAIT_FRAMES(5)
+        EVT_WAIT(5)
     EVT_END_LOOP
     EVT_RETURN
     EVT_END

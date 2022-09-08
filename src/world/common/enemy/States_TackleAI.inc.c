@@ -7,7 +7,7 @@
 // used with KoopaPatrolAI, TackleAI, SpinyAI
 // all functions only used here
 
-void N(set_script_owner_npc_anim)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(set_script_owner_npc_anim)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -18,7 +18,7 @@ void N(set_script_owner_npc_anim)(Evt* script, NpcAISettings* aiSettings, EnemyD
 }
 
 
-ApiStatus N(UnkDistFunc)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+ApiStatus N(UnkDistFunc)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -40,7 +40,7 @@ ApiStatus N(UnkDistFunc)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolu
     }
 }
 
-void N(UnkNpcAIFunc12)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(UnkNpcAIFunc12)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 temp;
@@ -72,7 +72,7 @@ void N(UnkNpcAIFunc12)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume
     }
 }
 
-void N(set_script_owner_npc_col_height)(Evt* script, NpcAISettings* aiSettings,
+void N(set_script_owner_npc_col_height)(Evt* script, MobileAISettings* aiSettings,
                                         EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
