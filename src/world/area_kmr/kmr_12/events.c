@@ -202,7 +202,7 @@ StaticNpc N(goombaNpc) = {
 };
 
 NpcGroupList N(npcGroupList) = {
-    NPC_GROUP(N(goombaNpc), BATTLE_ID(0, 1, 0, 3)),
+    NPC_GROUP(N(goombaNpc), 0x0001, 0x02),
     {},
 };
 

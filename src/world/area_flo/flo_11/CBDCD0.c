@@ -640,7 +640,7 @@ StaticNpc N(npcGroup_80242CF4)[] = {
 };
 
 NpcGroupList N(npcGroupList_802430D4) = {
-    NPC_GROUP(N(npcGroup_80242CF4), BATTLE_ID(24, 7, 0, 9)),
+    NPC_GROUP(N(npcGroup_80242CF4), 0x1807, 0x08),
     {},
 };
 

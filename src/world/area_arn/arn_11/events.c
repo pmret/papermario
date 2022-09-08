@@ -304,6 +304,6 @@ StaticNpc N(npcGroup_80240EEC) = {
 };
 
 NpcGroupList N(npcGroupList_802410DC) = {
-    NPC_GROUP(N(npcGroup_80240EEC), BATTLE_ID(14, 15, 0, 0)),
+    NPC_GROUP(N(npcGroup_80240EEC), 0x0E0F, BTL_DEFAULT_STAGE),
     {},
 };

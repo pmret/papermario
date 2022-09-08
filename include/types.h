@@ -17,10 +17,8 @@ typedef char* (*PrintCallback)(void*, const char*, u32);
 /// Linker symbol address, as in `ld_addrs.h`.
 typedef u8 Addr[];
 
-#define BATTLE_ID(unk, area, stage, index) ((unk << 24) + (area << 16) + (stage << 8) + index)
-
-#define PACK_BATTLE(battle, stage) ((battle) << 16 | ((stage) + 1))
-#define NO_BATTLE 0
+#define BTL_NONE 0
+#define BTL_DEFAULT_STAGE -1
 
 /// Terminates an extraAnimationList
 #define ANIM_END -1

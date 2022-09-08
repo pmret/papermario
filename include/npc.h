@@ -267,10 +267,11 @@ typedef struct StaticNpc {
 typedef struct {
     /* 0x00 */ s32 npcCount;
     /* 0x04 */ StaticNpc* npcs;
-    /* 0x08 */ s32 battle;
+    /* 0x08 */ s16 battle;
+    /* 0x0A */ s16 stage;
 } NpcGroupList[]; // size = 0x0C
 
-#define NPC_GROUP(npcs, battle) { sizeof(npcs) / sizeof(StaticNpc), (StaticNpc*) &npcs, battle }
+#define NPC_GROUP(npcs, battle, stage) { sizeof(npcs) / sizeof(StaticNpc), (StaticNpc*) &npcs, (battle), (stage) + 1 }
 
 // function signature used for state handlers in AI main functions
 typedef void AIStateHandler(Evt* script, MobileAISettings* settings, EnemyDetectVolume* territory);

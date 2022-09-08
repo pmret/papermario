@@ -425,8 +425,8 @@ StaticNpc N(npcGroup_802421E8)[] = {
 };
 
 NpcGroupList N(npcGroupList_802425C8) = {
-    NPC_GROUP(N(npcGroup_80241E08), BATTLE_ID(15, 2, 0, 1)),
-    NPC_GROUP(N(npcGroup_802421E8), BATTLE_ID(15, 1, 0, 1)),
+    NPC_GROUP(N(npcGroup_80241E08), 0x0F02, 0x00),
+    NPC_GROUP(N(npcGroup_802421E8), 0x0F01, 0x00),
     {},
 };
 

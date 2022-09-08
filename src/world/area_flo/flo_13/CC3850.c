@@ -1228,17 +1228,17 @@ StaticNpc N(npcGroup_80247794) = {
 };
 
 NpcGroupList N(npcGroupList_80247984) = {
-    NPC_GROUP(N(npcGroup_80246A04), BATTLE_ID(24, 6, 0, 5)),
-    NPC_GROUP(N(npcGroup_80246BF4), BATTLE_ID(24, 4, 0, 5)),
-    NPC_GROUP(N(npcGroup_80246DE4), BATTLE_ID(24, 12, 0, 3)),
-    NPC_GROUP(N(npcGroup_80246FD4), BATTLE_ID(24, 12, 0, 3)),
-    NPC_GROUP(N(npcGroup_802471C4), BATTLE_ID(24, 12, 0, 3)),
-    NPC_GROUP(N(npcGroup_802473B4), BATTLE_ID(24, 12, 0, 3)),
-    NPC_GROUP(N(npcGroup_802475A4), BATTLE_ID(24, 12, 0, 3)),
-    NPC_GROUP(N(npcGroup_80247794), BATTLE_ID(24, 12, 0, 3)),
-    NPC_GROUP(N(npcGroup_80246434), BATTLE_ID(25, 5, 0, 2)),
-    NPC_GROUP(N(npcGroup_80246624), BATTLE_ID(0, 0, 0, 0)),
-    NPC_GROUP(N(npcGroup_80246814), BATTLE_ID(0, 0, 0, 0)),
+    NPC_GROUP(N(npcGroup_80246A04), 0x1806, 0x04),
+    NPC_GROUP(N(npcGroup_80246BF4), 0x1804, 0x04),
+    NPC_GROUP(N(npcGroup_80246DE4), 0x180C, 0x02),
+    NPC_GROUP(N(npcGroup_80246FD4), 0x180C, 0x02),
+    NPC_GROUP(N(npcGroup_802471C4), 0x180C, 0x02),
+    NPC_GROUP(N(npcGroup_802473B4), 0x180C, 0x02),
+    NPC_GROUP(N(npcGroup_802475A4), 0x180C, 0x02),
+    NPC_GROUP(N(npcGroup_80247794), 0x180C, 0x02),
+    NPC_GROUP(N(npcGroup_80246434), 0x1905, 0x01),
+    NPC_GROUP(N(npcGroup_80246624), BTL_NONE, BTL_DEFAULT_STAGE),
+    NPC_GROUP(N(npcGroup_80246814), BTL_NONE, BTL_DEFAULT_STAGE),
     {},
 };
 
