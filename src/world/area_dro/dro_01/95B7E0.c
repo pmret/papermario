@@ -1381,13 +1381,13 @@ StaticNpc N(npcGroup_8024AE94)[] = {
 };
 
 NpcGroupList N(npcGroupList_8024B464) = {
-    NPC_GROUP(N(npcGroup_80249B34), BTL_NONE, BTL_DEFAULT_STAGE),
+    NPC_GROUP(N(npcGroup_80249B34)),
     {},
 };
 
 NpcGroupList N(npcGroupList_8024B47C) = {
-    NPC_GROUP(N(npcGroup_80249B34), BTL_NONE, BTL_DEFAULT_STAGE),
-    NPC_GROUP(N(npcGroup_8024AE94), BTL_NONE, BTL_DEFAULT_STAGE),
+    NPC_GROUP(N(npcGroup_80249B34)),
+    NPC_GROUP(N(npcGroup_8024AE94)),
     {},
 };
 

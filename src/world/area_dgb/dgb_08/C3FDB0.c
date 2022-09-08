@@ -986,8 +986,8 @@ NpcGroupList N(npcGroupList_80246958) = {
     NPC_GROUP(N(npcGroup_80245290), 0x0F02, 0x02),
     NPC_GROUP(N(npcGroup_80245670), 0x0F02, 0x02),
     NPC_GROUP(N(npcGroup_80245A50), 0x0F03, 0x02),
-    NPC_GROUP(N(npcGroup_80245E30), BTL_NONE, BTL_DEFAULT_STAGE),
-    NPC_GROUP(N(npcGroup_80246020), BTL_NONE, BTL_DEFAULT_STAGE),
+    NPC_GROUP(N(npcGroup_80245E30)),
+    NPC_GROUP(N(npcGroup_80246020)),
     {},
 };
 
@@ -997,7 +997,7 @@ NpcGroupList N(npcGroupList_802469AC) = {
 };
 
 NpcGroupList N(npcGroupList_802469C4) = {
-    NPC_GROUP(N(npcGroup_80246528), BTL_NONE, BTL_DEFAULT_STAGE),
+    NPC_GROUP(N(npcGroup_80246528)),
     {},
 };
 

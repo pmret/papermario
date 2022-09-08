@@ -474,7 +474,7 @@ StaticNpc N(npcGroup_802425D8)[] = {
 };
 
 NpcGroupList N(npcGroupList_802429B8) = {
-    NPC_GROUP(N(npcGroup_802425D8), BTL_NONE, BTL_DEFAULT_STAGE),
+    NPC_GROUP(N(npcGroup_802425D8)),
     {},
 };
 

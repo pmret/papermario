@@ -5,6 +5,14 @@
 #include "enums.h"
 #include "script_api/map.h"
 
+#define GET_MACRO(_1,_2,_3,NAME,...) NAME
+#define NPC_GROUP(...) GET_MACRO(__VA_ARGS__, NPC_GROUP_3, NPC_GROUP_2, NPC_GROUP_1)(__VA_ARGS__)
+
+// battle and stage are optional in overloaded NPC_GROUP macros
+#define NPC_GROUP_1(npcs) { sizeof(npcs) / sizeof(StaticNpc), (StaticNpc*) &npcs, 0, 0 }
+#define NPC_GROUP_2(npcs, battle) { sizeof(npcs) / sizeof(StaticNpc), (StaticNpc*) &npcs, battle, 0 }
+#define NPC_GROUP_3(npcs, battle, stage) { sizeof(npcs) / sizeof(StaticNpc), (StaticNpc*) &npcs, battle, stage + 1 }
+
 #define NO_DROPS { { F16(100), F16(0), 0, F16(0) }, }
 
 #define STANDARD_HEART_DROPS(attempts) { \
@@ -253,7 +261,6 @@ typedef struct StaticNpc {
         /* 0x38 */ s32 unk_38;
         /* 0x3C */ s32 unk_3C;
     } animations;
-    /* 0x1E0 char unk_1E0[8]; */
     /* 0x1E0 */ s8 unk__1E0;
     /* 0x1E1 */ s8 unk__1E1;
     /* 0x1E2 */ s8 unk__1E2;
@@ -270,8 +277,6 @@ typedef struct {
     /* 0x08 */ s16 battle;
     /* 0x0A */ s16 stage;
 } NpcGroupList[]; // size = 0x0C
-
-#define NPC_GROUP(npcs, battle, stage) { sizeof(npcs) / sizeof(StaticNpc), (StaticNpc*) &npcs, (battle), (stage) + 1 }
 
 // function signature used for state handlers in AI main functions
 typedef void AIStateHandler(Evt* script, MobileAISettings* settings, EnemyDetectVolume* territory);

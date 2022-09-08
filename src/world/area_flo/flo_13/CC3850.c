@@ -1237,8 +1237,8 @@ NpcGroupList N(npcGroupList_80247984) = {
     NPC_GROUP(N(npcGroup_802475A4), 0x180C, 0x02),
     NPC_GROUP(N(npcGroup_80247794), 0x180C, 0x02),
     NPC_GROUP(N(npcGroup_80246434), 0x1905, 0x01),
-    NPC_GROUP(N(npcGroup_80246624), BTL_NONE, BTL_DEFAULT_STAGE),
-    NPC_GROUP(N(npcGroup_80246814), BTL_NONE, BTL_DEFAULT_STAGE),
+    NPC_GROUP(N(npcGroup_80246624)),
+    NPC_GROUP(N(npcGroup_80246814)),
     {},
 };
 
