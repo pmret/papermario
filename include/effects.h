@@ -521,7 +521,15 @@ typedef struct StarsShimmerFXData {
 } StarsShimmerFXData; // size = unknown
 
 typedef struct RisingBubbleFXData {
-    /* 0x00 */ char todo[0];
+    /* 0x00 */ char unk_00[0x08];
+    /* 0x08 */ f32 unk_08;
+    /* 0x0C */ char unk_0C[0x04];
+    /* 0x10 */ f32 unk_10; 
+    /* 0x14 */ s32 unk_14;
+    /* 0x18 */ s32 unk_18;
+    /* 0x1C */ s32 unk_1C;
+    /* 0x20 */ s32 unk_20;
+    /* 0x24 */ f32 unk_24; 
 } RisingBubbleFXData; // size = unknown
 
 typedef struct RingBlastFXData {

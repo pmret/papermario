@@ -1,6 +1,7 @@
 #include "dead.h"
 #include "common.h"
 #include "effects.h"
+#include "battle/battle.h"
 
 // Copy of kzn_19 (C8DBB0.c)
 
@@ -8,6 +9,8 @@
 
 extern s32 D_80248388[];
 extern s32 D_80248380;
+extern s32 D_80243DD8_EAC8B8;
+extern s32 D_80243DDC_EAC8BC;
 
 #include "world/common/atomic/TexturePan.inc.c"
 
@@ -44,7 +47,26 @@ INCLUDE_ASM(s32, "EA8AE0", func_8024140C_EA9EEC);
 
 #include "world/common/AddPlayerHandsOffset.inc.c"
 
+#ifdef NON_MATCHING 
+ApiStatus func_802417AC_EAA28C(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos; 
+    
+    if (isInitialCall) {
+        D_80243DD8_EAC8B8 = 0;
+    }
+    if (D_80243DD8_EAC8B8 != 0) {
+        D_80243DD8_EAC8B8 = 0;
+
+        dead_evt_set_variable(script, *args++, D_80243DDC_EAC8BC);
+                
+        return ApiStatus_DONE2;
+    }
+
+    return ApiStatus_BLOCK;
+}
+#else 
 INCLUDE_ASM(s32, "EA8AE0", func_802417AC_EAA28C);
+#endif 
 
 INCLUDE_ASM(s32, "EA8AE0", func_80241800_EAA2E0);
 
