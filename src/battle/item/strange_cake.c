@@ -301,13 +301,13 @@ EvtScript N(script6) = {
         EVT_ADD(EVT_VAR(1), 25)
         EVT_CALL(ShowStartRecoveryShimmer, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), EVT_VAR(3))
         EVT_CALL(battle_item_strange_cake_AddFP, EVT_VAR(3))
-        EVT_WAIT_FRAMES(10)
+        EVT_WAIT(10)
         EVT_CALL(SetAnimation, 0, 0, 65586)
-        EVT_WAIT_FRAMES(30)
+        EVT_WAIT(30)
         EVT_CALL(GetActorPos, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
         EVT_CALL(ShowRecoveryShimmer, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), EVT_VAR(3))
         EVT_CALL(SetAnimation, 0, 0, 65538)
-        EVT_WAIT_FRAMES(20)
+        EVT_WAIT(20)
         EVT_CALL(SetAnimation, 0, 0, 65567)
     EVT_ELSE
         EVT_SET_CONST(EVT_VAR(10), 0xD2)
@@ -316,14 +316,14 @@ EvtScript N(script6) = {
         EVT_EXEC_WAIT(battle_item_strange_cake_EatItem)
         EVT_CALL(SetAnimation, 0, 0, 65567)
     EVT_END_IF
-    EVT_WAIT_FRAMES(10)
+    EVT_WAIT(10)
     EVT_THREAD
-        EVT_WAIT_FRAMES(220)
+        EVT_WAIT(220)
         EVT_CALL(PlaySoundAtActor, 0, 1011)
     EVT_END_THREAD
     EVT_CALL(PlaySoundAtActor, 0, 872)
     EVT_CALL(battle_item_strange_cake_func_802A13E4_7316E4)
-    EVT_WAIT_FRAMES(2)
+    EVT_WAIT(2)
     EVT_SWITCH(EVT_VAR(0))
         EVT_CASE_EQ(0)
             EVT_EXEC_WAIT(battle_item_strange_cake_script7)
@@ -343,7 +343,7 @@ EvtScript N(script7) = {
     EVT_ADD(EVT_VAR(1), 20)
     EVT_CALL(PlayEffect, 87, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), EVT_FIXED(1.0), 30, 0, 0, 0, 0, 0, 0, 0)
     EVT_CALL(battle_item_strange_cake_func_802A1AD8_731DD8)
-    EVT_WAIT_FRAMES(20)
+    EVT_WAIT(20)
     EVT_CALL(ShowMessageBox, 16, 60)
     EVT_CALL(WaitForMessageBoxDone)
     EVT_RETURN
@@ -356,7 +356,7 @@ EvtScript N(script8) = {
     EVT_ADD(EVT_VAR(1), 20)
     EVT_CALL(PlayEffect, 51, 6, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), EVT_FIXED(1.0), 30, 0, 0, 0, 0, 0, 0, 0)
     EVT_CALL(battle_item_strange_cake_func_802A1B14_731E14)
-    EVT_WAIT_FRAMES(20)
+    EVT_WAIT(20)
     EVT_CALL(ShowMessageBox, 17, 60)
     EVT_CALL(WaitForMessageBoxDone)
     EVT_RETURN
@@ -369,7 +369,7 @@ EvtScript N(script9) = {
     EVT_CALL(GetGoalPos, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_EXEC(DoSleepHit)
     EVT_CALL(battle_item_strange_cake_func_802A1B68_731E68)
-    EVT_WAIT_FRAMES(20)
+    EVT_WAIT(20)
     EVT_CALL(ShowMessageBox, 11, 60)
     EVT_CALL(WaitForMessageBoxDone)
     EVT_RETURN

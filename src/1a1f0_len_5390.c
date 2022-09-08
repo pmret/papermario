@@ -430,15 +430,15 @@ void update_encounters_pre_battle(void) {
                 }
 
                 partner_handle_before_battle();
-                currentEncounter->unk_A0 = 0;
-                currentEncounter->unk_A2 = 0;
+                currentEncounter->dizzyAttackStatus = 0;
+                currentEncounter->dizzyAttackDuration = 0;
 
                 enemy = currentEncounter->currentEnemy;
                 currentEncounter->unk_10 = enemy->unk_B5;
 
                 if (is_ability_active(ABILITY_DIZZY_ATTACK) && currentEncounter->hitType == 3) {
-                    currentEncounter->unk_A0 = 4;
-                    currentEncounter->unk_A2 = 3;
+                    currentEncounter->dizzyAttackStatus = 4;
+                    currentEncounter->dizzyAttackDuration = 3;
                 }
 
                 sfx_stop_sound(SOUND_2111);

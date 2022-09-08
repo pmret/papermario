@@ -352,8 +352,8 @@ void btl_state_update_normal_start(void) {
                     actor->unk_208 = 0;
                     if (i == 0) {
                         actor->unk_208 = currentEncounter->unk_10;
-                        if (currentEncounter->unk_A0 == 4) {
-                            inflict_status_set_duration(actor, 4, 0x24, currentEncounter->unk_A2);
+                        if (currentEncounter->dizzyAttackStatus == 4) {
+                            inflict_status_set_duration(actor, 4, 0x24, currentEncounter->dizzyAttackDuration);
                         }
                     }
                 }
@@ -368,8 +368,8 @@ void btl_state_update_normal_start(void) {
                         actor->unk_208 = 0;
                         if (i == 0) {
                             actor->unk_208 = 0;
-                            if (currentEncounter->unk_A0 == 4) {
-                                inflict_status_set_duration(actor, 4, 0x24, currentEncounter->unk_A2);
+                            if (currentEncounter->dizzyAttackStatus == 4) {
+                                inflict_status_set_duration(actor, 4, 0x24, currentEncounter->dizzyAttackDuration);
                             }
                         }
 

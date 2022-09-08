@@ -144,7 +144,7 @@ EvtScript N(80224658) = {
     EVT_CALL(func_8027D32C, -127)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(SetAnimation, ACTOR_SELF, LW(10), LW(1))
-    EVT_WAIT_FRAMES(10)
+    EVT_WAIT(10)
     EVT_CALL(func_80269E80, LW(5))
     EVT_SWITCH(LW(5))
         EVT_CASE_OR_EQ(10)
@@ -162,7 +162,7 @@ EvtScript N(80224658) = {
             EVT_LOOP(24)
                 EVT_CALL(SetActorYaw, ACTOR_SELF, LW(2))
                 EVT_ADD(LW(2), 30)
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
             EVT_END_LOOP
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
     EVT_END_SWITCH
@@ -181,17 +181,17 @@ EvtScript N(80224658) = {
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20E5)
     EVT_CALL(SetAnimation, ACTOR_SELF, LW(10), 0x210027)
-    EVT_WAIT_FRAMES(12)
+    EVT_WAIT(12)
     EVT_CALL(SetAnimation, ACTOR_SELF, LW(10), 0x210014)
     EVT_CALL(SetIdleAnimations, ACTOR_SELF, LW(10), EVT_ADDR(N(idleAnimations_8022464C)))
-    EVT_WAIT_FRAMES(60)
+    EVT_WAIT(60)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, 4194304, 1)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(80224964) = {
-    EVT_WAIT_FRAMES(10)
+    EVT_WAIT(10)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_CLOSE_SHELL)
     EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
     EVT_ADD(LW(1), 10)
@@ -200,7 +200,7 @@ EvtScript N(80224964) = {
     EVT_CALL(PlayEffect, 0x7, 0, LW(0), LW(1), LW(2), 4, 0, 0, 0, 0, 0, 0, 0, 0)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_jr_troopa_default_hide_shell)
     EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_802243F8)))
-    EVT_WAIT_FRAMES(10)
+    EVT_WAIT(10)
     EVT_RETURN
     EVT_END
 };
@@ -223,7 +223,7 @@ EvtScript N(init_80224A94) = {
 
 EvtScript N(idle_80224B24) = {
     EVT_LABEL(0)
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_GOTO(0)
     EVT_RETURN
     EVT_END
@@ -252,7 +252,7 @@ EvtScript N(handleEvent_80224B58) = {
             EVT_SET_CONST(LW(0), 0x00000001)
             EVT_SET_CONST(LW(1), NPC_ANIM_jr_troopa_default_hurt)
             EVT_EXEC_WAIT(DoNormalHit)
-            EVT_WAIT_FRAMES(10)
+            EVT_WAIT(10)
             EVT_SET_CONST(LW(0), 0x00000001)
             EVT_SET_CONST(LW(1), NPC_ANIM_jr_troopa_default_hurt_crazy)
             EVT_EXEC_WAIT(N(80224658))
@@ -267,7 +267,7 @@ EvtScript N(handleEvent_80224B58) = {
             EVT_SET(LW(1), 2162728)
             EVT_SET(LW(2), 2162729)
             EVT_EXEC_WAIT(DoBurnHit)
-            EVT_WAIT_FRAMES(10)
+            EVT_WAIT(10)
             EVT_SET_CONST(LW(0), 0x00000001)
             EVT_SET_CONST(LW(1), NPC_ANIM_jr_troopa_default_burn_dead)
             EVT_EXEC_WAIT(N(80224658))
@@ -362,7 +362,7 @@ EvtScript N(802251CC) = {
             EVT_CALL(SetActorVar, -127, 1, 2)
             EVT_EXEC_WAIT(N(80224510))
             EVT_CALL(MoveBattleCamOver, 30)
-            EVT_WAIT_FRAMES(30)
+            EVT_WAIT(30)
             EVT_CALL(ActorSpeak, 786730, -127, 1, 2162717, 2162717)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_jr_troopa_default_talk_point)
             EVT_CALL(EndActorSpeech, -127, 1, -1, -1)
@@ -382,7 +382,7 @@ EvtScript N(takeTurn_80225314) = {
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_OPEN_SHELL)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_jr_troopa_default_idle)
-    EVT_WAIT_FRAMES(20)
+    EVT_WAIT(20)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_63)
@@ -397,9 +397,9 @@ EvtScript N(takeTurn_80225314) = {
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_jr_troopa_default_idle)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, -1, 0)
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, -2, 0)
-    EVT_WAIT_FRAMES(5)
+    EVT_WAIT(5)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_jr_troopa_default_jump)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LW(10), 0, 0, 2, 16)
@@ -410,7 +410,7 @@ EvtScript N(takeTurn_80225314) = {
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(2.0))
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_jr_troopa_default_jump_still)
             EVT_THREAD
-                EVT_WAIT_FRAMES(8)
+                EVT_WAIT(8)
                 EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_jr_troopa_default_jump_land)
             EVT_END_THREAD
             EVT_CALL(GetActorPos, ACTOR_PLAYER, LW(0), LW(1), LW(2))
@@ -421,7 +421,7 @@ EvtScript N(takeTurn_80225314) = {
             EVT_IF_EQ(LW(10), 5)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LW(0), DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
-            EVT_WAIT_FRAMES(2)
+            EVT_WAIT(2)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
             EVT_SUB(LW(0), 20)
             EVT_SET(LW(1), 0)
@@ -429,7 +429,7 @@ EvtScript N(takeTurn_80225314) = {
             EVT_CALL(SetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
             EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_jr_troopa_default_idle)
-            EVT_WAIT_FRAMES(10)
+            EVT_WAIT(10)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(MoveBattleCamOver, 25)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
@@ -449,13 +449,13 @@ EvtScript N(takeTurn_80225314) = {
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(2.0))
     EVT_THREAD
-        EVT_WAIT_FRAMES(3)
+        EVT_WAIT(3)
         EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_jr_troopa_default_jump_still)
-        EVT_WAIT_FRAMES(5)
+        EVT_WAIT(5)
         EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_jr_troopa_default_jump_land)
     EVT_END_THREAD
     EVT_CALL(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
-    EVT_WAIT_FRAMES(2)
+    EVT_WAIT(2)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LW(0), 0, 0, 0, 2, 32)
     EVT_SWITCH(LW(0))
         EVT_CASE_DEFAULT
@@ -474,7 +474,7 @@ EvtScript N(takeTurn_80225314) = {
             EVT_CALL(SetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
             EVT_CALL(JumpToGoal, ACTOR_SELF, 6, FALSE, TRUE, FALSE)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_jr_troopa_default_idle)
-            EVT_WAIT_FRAMES(10)
+            EVT_WAIT(10)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_jr_troopa_default_run)
@@ -497,9 +497,9 @@ EvtScript N(nextTurn_80225B4C) = {
             EVT_CALL(GetActorVar, -127, 0, LW(0))
             EVT_IF_EQ(LW(0), 0)
                 EVT_CALL(SetActorVar, -127, 0, 1)
-                EVT_WAIT_FRAMES(15)
+                EVT_WAIT(15)
                 EVT_EXEC_WAIT(N(80224510))
-                EVT_WAIT_FRAMES(10)
+                EVT_WAIT(10)
                 EVT_CALL(ActorSpeak, 786728, -127, 1, 2162714, 2162715)
                 EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_jr_troopa_default_sprint_crazy)
                 EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20B9)
@@ -507,11 +507,11 @@ EvtScript N(nextTurn_80225B4C) = {
                 EVT_ADD(LW(1), 16)
                 EVT_CALL(PlayEffect, 0x13, 0, LW(0), LW(1), LW(2), 1, 30, 0, 0, 0, 0, 0, 0, 0)
                 EVT_CALL(PlayEffect, 0x13, 1, LW(0), LW(1), LW(2), 1, 30, 0, 0, 0, 0, 0, 0, 0)
-                EVT_WAIT_FRAMES(30)
+                EVT_WAIT(30)
                 EVT_EXEC_WAIT(N(80224964))
-                EVT_WAIT_FRAMES(30)
+                EVT_WAIT(30)
                 EVT_CALL(ActorSpeak, 786729, -127, 1, 2162711, 2162692)
-                EVT_WAIT_FRAMES(10)
+                EVT_WAIT(10)
                 EVT_EXEC_WAIT(N(802245A8))
             EVT_ELSE
             EVT_END_IF

@@ -8,274 +8,272 @@
 extern s32 D_800DC060;
 extern Stage* D_800DC064;
 
-BattleArea gBattleAreas[0x30] = {
-    {
-        AREA(area_kmr_part_1),
+BattleArea gBattleAreas[] = {
+    [BTL_AREA_KMR_PART_1] = {
+        BTL_AREA(area_kmr_part_1),
         .name = "エリア ＫＭＲ その１",
         .battles = &b_area_kmr_part_1_formationTable,
         .stages = &b_area_kmr_part_1_stageTable,
     },
-    {
-        AREA(area_kmr_part_2),
+    [BTL_AREA_KMR_PART_2] = {
+        BTL_AREA(area_kmr_part_2),
         .name = "エリア ＫＭＲ その２",
         .battles = &b_area_kmr_part_2_formationTable,
         .stages = &b_area_kmr_part_2_stageTable,
     },
-    {
-        AREA(area_kmr_part_3),
+    [BTL_AREA_KMR_PART_3] = {
+        BTL_AREA(area_kmr_part_3),
         .name = "エリア ＫＭＲ その３",
         .battles = &b_area_kmr_part_3_formationTable,
         .stages = &b_area_kmr_part_3_stageTable,
     },
-    {
-        AREA(area_mac),
+    [BTL_AREA_MAC] = {
+        BTL_AREA(area_mac),
         .name = "エリア ＭＡＣ",
         .battles = &b_area_mac_formationTable,
         .stages = &b_area_mac_stageTable,
     },
-    {
-        AREA(area_hos),
+    [BTL_AREA_HOS] = {
+        BTL_AREA(area_hos),
         .name = "エリア ＨＯＳ",
         .battles = &b_area_hos_formationTable,
         .stages = &b_area_hos_stageTable,
     },
-    {
-        AREA(area_nok),
+    [BTL_AREA_NOK] = {
+        BTL_AREA(area_nok),
         .name = "エリア ＮＯＫ",
         .battles = &b_area_nok_formationTable,
         .stages = &b_area_nok_stageTable,
     },
-    {
-        AREA(area_trd_part_1),
+    [BTL_AREA_TRD_PART_1] = {
+        BTL_AREA(area_trd_part_1),
         .name = "エリア ＴＲＤ その１",
         .battles = &b_area_trd_part_1_formationTable,
         .stages = &b_area_trd_part_1_stageTable,
     },
-    {
-        AREA(area_trd_part_2),
+    [BTL_AREA_TRD_PART_2] = {
+        BTL_AREA(area_trd_part_2),
         .name = "エリア ＴＲＤ その２",
         .battles = &b_area_trd_part_2_formationTable,
         .stages = &b_area_trd_part_2_stageTable,
     },
-    {
-        AREA(area_trd_part_3),
+    [BTL_AREA_TRD_PART_3] = {
+        BTL_AREA(area_trd_part_3),
         .name = "エリア ＴＲＤ その３",
         .battles = &b_area_trd_part_3_formationTable,
         .stages = &b_area_trd_part_3_stageTable,
     },
-    {
-        AREA(area_iwa),
+    [BTL_AREA_IWA] = {
+        BTL_AREA(area_iwa),
         .name = "エリア ＩＷＡ",
         .battles = &b_area_iwa_formationTable,
         .stages = &b_area_iwa_stageTable,
     },
-    {
-        AREA(area_sbk),
+    [BTL_AREA_SBK] = {
+        BTL_AREA(area_sbk),
         .name = "エリア ＳＢＫ",
         .battles = &b_area_sbk_formationTable,
         .stages = &b_area_sbk_stageTable,
     },
-    {
-        AREA(area_isk_part_1),
+    [BTL_AREA_ISK_PART_1] = {
+        BTL_AREA(area_isk_part_1),
         .name = "エリア ＩＳＫ その１",
         .battles = &b_area_isk_part_1_formationTable,
         .stages = &b_area_isk_part_1_stageTable,
     },
-    {
-        AREA(area_isk_part_2),
+    [BTL_AREA_ISK_PART_2] = {
+        BTL_AREA(area_isk_part_2),
         .name = "エリア ＩＳＫ その２",
         .battles = &b_area_isk_part_2_formationTable,
         .stages = &b_area_isk_part_2_stageTable,
     },
-    {
-        AREA(area_mim),
+    [BTL_AREA_MIM] = {
+        BTL_AREA(area_mim),
         .name = "エリア ＭＩＭ",
         .battles = &b_area_mim_formationTable,
         .stages = &b_area_mim_stageTable,
     },
-    {
-        AREA(area_arn),
+    [BTL_AREA_ARN] = {
+        BTL_AREA(area_arn),
         .name = "エリア ＡＲＮ",
         .battles = &b_area_arn_formationTable,
         .stages = &b_area_arn_stageTable,
     },
-    {
-        AREA(area_dgb),
+    [BTL_AREA_DGB] = {
+        BTL_AREA(area_dgb),
         .name = "エリア ＤＧＢ",
         .battles = &b_area_dgb_formationTable,
         .stages = &b_area_dgb_stageTable,
     },
-    {
-        AREA(area_omo),
+    [BTL_AREA_OMO] = {
+        BTL_AREA(area_omo),
         .name = "エリア ＯＭＯ",
         .battles = &b_area_omo_formationTable,
         .stages = &b_area_omo_stageTable,
     },
-    {
-        AREA(area_omo2),
+    [BTL_AREA_OMO2] = {
+        BTL_AREA(area_omo2),
         .name = "エリア ＯＭＯ２",
         .battles = 0x8022FBF4,
         .stages = 0x8022FC1C,
     },
-    {
-        AREA(area_omo3),
+    [BTL_AREA_OMO3] = {
+        BTL_AREA(area_omo3),
         .name = "エリア ＯＭＯ３",
         .battles = 0x8022EA2C,
         .stages = 0x8022EB1C,
     },
-    {
-        AREA(area_kgr),
+    [BTL_AREA_KGR] = {
+        BTL_AREA(area_kgr),
         .name = "エリア ＫＧＲ",
         .battles = &b_area_kgr_formationTable,
         .stages = &b_area_kgr_stageTable,
     },
-    {
-        AREA(area_jan),
+    [BTL_AREA_JAN] = {
+        BTL_AREA(area_jan),
         .name = "エリア ＪＡＮ",
         .battles = &b_area_jan_formationTable,
         .stages = &b_area_jan_stageTable,
     },
-    {
-        AREA(area_jan2),
+    [BTL_AREA_JAN2] = {
+        BTL_AREA(area_jan2),
         .name = "エリア ＪＡＮ２",
         .battles = &b_area_jan2_formationTable,
         .stages = &b_area_jan2_stageTable,
     },
-    {
-        AREA(area_kzn),
+    [BTL_AREA_KZN] = {
+        BTL_AREA(area_kzn),
         .name = "エリア ＫＺＮ",
         .battles = &b_area_kzn_formationTable,
         .stages = &b_area_kzn_stageTable,
     },
-    {
-        AREA(area_kzn2),
+    [BTL_AREA_KZN2] = {
+        BTL_AREA(area_kzn2),
         .name = "エリア ＫＺＮ２",
         .battles = 0x8022AA08,
         .stages = 0x8022AA44,
         .dmaTable = 0x8022AA84,
     },
-    {
-        AREA(area_flo),
+    [BTL_AREA_FLO] = {
+        BTL_AREA(area_flo),
         .name = "エリア ＦＬＯ",
         .battles = 0x80234574,
         .stages = 0x8023486C,
     },
-    {
-        AREA(area_flo2),
+    [BTL_AREA_FLO2] = {
+        BTL_AREA(area_flo2),
         .name = "エリア ＦＬＯ２",
         .battles = 0x802356FC,
         .stages = 0x80235788,
     },
-    {
-        AREA(area_tik),
+    [BTL_AREA_TIK] = {
+        BTL_AREA(area_tik),
         .name = "エリア ＴＩＫ",
         .battles = 0x802340B4,
         .stages = 0x802342BC,
     },
-    {
-        AREA(area_tik2),
+    [BTL_AREA_TIK2] = {
+        BTL_AREA(area_tik2),
         .name = "エリア ＴＩＫ２",
         .battles = 0x80227A90,
         .stages = 0x80227AE0,
     },
-    {
-        AREA(area_tik3),
+    [BTL_AREA_TIK3] = {
+        BTL_AREA(area_tik3),
         .name = "エリア ＴＩＫ３",
         .battles = 0x802232E8,
         .stages = 0x8022334C,
     },
-    {
-        AREA(area_sam),
+    [BTL_AREA_SAM] = {
+        BTL_AREA(area_sam),
         .name = "エリア ＳＡＭ",
         .battles = &b_area_sam_formationTable,
         .stages = &b_area_sam_stageTable,
     },
-    {
-        AREA(area_sam2),
+    [BTL_AREA_SAM2] = {
+        BTL_AREA(area_sam2),
         .name = "エリア ＳＡＭ２",
         .battles = 0x802234F0,
         .stages = 0x8022352C,
     },
-    {
-        AREA(area_pra),
+    [BTL_AREA_PRA] = {
+        BTL_AREA(area_pra),
         .name = "エリア ＰＲＡ",
         .battles = 0x8022F4D4,
         .stages = 0x8022F614,
     },
-    {
-        AREA(area_pra2),
+    [BTL_AREA_PRA2] = {
+        BTL_AREA(area_pra2),
         .name = "エリア ＰＲＡ２",
         .battles = &b_area_pra2_formationTable,
         .stages = &b_area_pra2_stageTable,
     },
-    {
-        AREA(area_pra3),
+    [BTL_AREA_PRA3] = {
+        BTL_AREA(area_pra3),
         .name = "エリア ＰＲＡ３",
         .battles = &b_area_pra3_formationTable,
         .stages = &b_area_pra3_stageTable,
     },
-    {
-        AREA(area_kpa),
+    [BTL_AREA_KPA] = {
+        BTL_AREA(area_kpa),
         .name = "エリア ＫＰＡ",
         .battles = 0x80231A64,
         .stages = 0x80231ED8,
     },
-    {
-        AREA(area_kpa2),
+    [BTL_AREA_KPA2] = {
+        BTL_AREA(area_kpa2),
         .name = "エリア ＫＰＡ２",
         .battles = 0x802346A8,
         .stages = 0x80234720,
     },
-    {
-        AREA(area_kpa3),
+    [BTL_AREA_KPA3] = {
+        BTL_AREA(area_kpa3),
         .name = "エリア ＫＰＡ３",
         .battles = 0x8022839C,
         .stages = 0x802283EC,
     },
-    {
-        AREA(area_kpa4),
+    [BTL_AREA_KPA4] = {
+        BTL_AREA(area_kpa4),
         .name = "エリア ＫＰＡ４",
         .battles = 0x80227910,
         .stages = 0x80227988,
     },
-    {
-        AREA(area_kkj),
+    [BTL_AREA_KKJ] = {
+        BTL_AREA(area_kkj),
         .name = "エリア ＫＫＪ",
         .battles = 0x802185BC,
         .stages = 0x802185E4,
     },
-    {
-        AREA(area_dig),
+    [BTL_AREA_DIG] = {
+        BTL_AREA(area_dig),
         .name = "エリア ＤＩＧ",
         .battles = 0x8022A7C4,
         .stages = 0x8022A83C,
     },
-    {},
-    {
-        AREA(area_omo2_1),
+    [BTL_AREA_OMO2_1] = {
+        BTL_AREA(area_omo2_1),
         .name = "エリア ＯＭＯ２＿１",
     },
-    {
-        AREA(area_omo2_2),
+    [BTL_AREA_OMO2_2] = {
+        BTL_AREA(area_omo2_2),
         .name = "エリア ＯＭＯ２＿２",
     },
-    {
-        AREA(area_omo2_3),
+    [BTL_AREA_OMO2_3] = {
+        BTL_AREA(area_omo2_3),
         .name = "エリア ＯＭＯ２＿３",
     },
-    {
-        AREA(area_omo2_4),
+    [BTL_AREA_OMO2_4] = {
+        BTL_AREA(area_omo2_4),
         .name = "エリア ＯＭＯ２＿４",
     },
-    {
-        AREA(area_omo2_5),
+    [BTL_AREA_OMO2_5] = {
+        BTL_AREA(area_omo2_5),
         .name = "エリア ＯＭＯ２＿５",
     },
-    {
-        AREA(area_omo2_6),
+    [BTL_AREA_OMO2_6] = {
+        BTL_AREA(area_omo2_6),
         .name = "エリア ＯＭＯ２＿６",
     },
-    {},
 };
 
 void reset_battle_status(void) {
@@ -430,38 +428,38 @@ void load_demo_battle(u32 index) {
             setup_demo_player();
             mode = 0;
             playerData->hasActionCommands = FALSE;
-            battleID = 0x2700;
+            battleID = BTL_DIG_FORMATION_00;
             break;
         case 1:
             setup_demo_player();
             mode = 0;
             playerData->currentPartner = PARTNER_BOW;
-            battleID = 0x2701;
+            battleID = BTL_DIG_FORMATION_01;
             break;
         case 2:
             setup_demo_player();
             mode = 0;
             playerData->currentPartner = PARTNER_PARAKARRY;
             gGameStatusPtr->demoFlags |= 2;
-            battleID = 0x2702;
+            battleID = BTL_DIG_FORMATION_02;
             break;
         case 3:
             setup_demo_player();
             mode = 0;
             playerData->currentPartner = PARTNER_WATT;
-            battleID = 0x2703;
+            battleID = BTL_DIG_FORMATION_03;
             break;
         case 4:
             setup_demo_player();
             playerData->currentPartner = PARTNER_KOOPER;
             gGameStatusPtr->demoFlags |= 4;
             mode = 0;
-            battleID = 0x2704;
+            battleID = BTL_DIG_FORMATION_04;
             break;
         default:
             setup_demo_player();
             mode = 2;
-            battleID = 0x2700;
+            battleID = BTL_DIG_FORMATION_00;
     }
 
     gGameStatusPtr->debugEnemyContact = 0;
@@ -501,7 +499,7 @@ void load_demo_battle(u32 index) {
             break;
     }
 
-    evt_set_variable(NULL, EVT_SAVE_FLAG(1817), 1);
+    evt_set_variable(NULL, GF_Tutorial_SwapTurnOrder, 1);
     gCurrentEncounter.unk_07 = 0;
     gCurrentEncounter.unk_10 = 0;
     set_battle_stage(-1);

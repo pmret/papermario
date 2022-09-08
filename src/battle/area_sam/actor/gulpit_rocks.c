@@ -168,7 +168,7 @@ EvtScript N(handleEvent) = {
             EVT_END_SWITCH
             EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
             EVT_CALL(PlayEffect, EFFECT_LANDING_DUST, 1, LW(0), LW(1), LW(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
-            EVT_WAIT_FRAMES(30)
+            EVT_WAIT(30)
             EVT_CALL(RemoveActor, ACTOR_SELF)
             EVT_RETURN
         EVT_END_CASE_GROUP

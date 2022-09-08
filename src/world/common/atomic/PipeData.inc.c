@@ -24,9 +24,9 @@ EvtScript N(Pipe_EnterVertical) = {
     EVT_LOOP(40)
         EVT_ADD(EVT_VAR(1), 1)
         EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_WAIT_FRAMES(3)
+    EVT_WAIT(3)
     EVT_CALL(GetCurrentPartnerID, EVT_VAR(0))
     EVT_IF_NE(EVT_VAR(0), 0)
         EVT_THREAD
@@ -39,16 +39,16 @@ EvtScript N(Pipe_EnterVertical) = {
             EVT_CALL(EnableNpcShadow, NPC_PARTNER, TRUE)
         EVT_END_THREAD
     EVT_END_IF
-    EVT_WAIT_FRAMES(2)
+    EVT_WAIT(2)
     EVT_CALL(func_802D2520, ANIM_STAND_STILL, 0, 0, 0, 0, 0)
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_CALL(SetPlayerAnimation, ANIM_10002)
     EVT_CALL(DisablePlayerPhysics, FALSE)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_CALL(HidePlayerShadow, FALSE)
     EVT_LABEL(0)
     EVT_CALL(N(Pipe_GetCurrentFloor))
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_IF_NE(EVT_VAR(0), -1)
         EVT_GOTO(0)
     EVT_END_IF
@@ -86,10 +86,10 @@ EvtScript N(Pipe_EnterHorizontal) = {
         EVT_CALL(SetNpcPos, NPC_PARTNER, 0, -1000, 0)
         EVT_CALL(InterpNpcYaw, NPC_PARTNER, EVT_VAR(0), 0)
     EVT_END_IF
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_CALL(PlaySound, SOUND_ENTER_PIPE)
     EVT_THREAD
-        EVT_WAIT_FRAMES(25)
+        EVT_WAIT(25)
         EVT_CALL(HidePlayerShadow, FALSE)
     EVT_END_THREAD
     EVT_CALL(func_802D286C, 0x900)
@@ -97,7 +97,7 @@ EvtScript N(Pipe_EnterHorizontal) = {
     EVT_LOOP(40)
         EVT_CALL(N(Pipe_GetPointAheadOfPlayer), EVT_FIXED(1.0))
         EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(GetCurrentPartnerID, EVT_VAR(0))
     EVT_IF_NE(EVT_VAR(0), PARTNER_NONE)
@@ -109,7 +109,7 @@ EvtScript N(Pipe_EnterHorizontal) = {
             EVT_CALL(EnablePartnerAI)
         EVT_END_THREAD
     EVT_END_IF
-    EVT_WAIT_FRAMES(5)
+    EVT_WAIT(5)
     EVT_CALL(func_802D2520, ANIM_10002, 0, 0, 0, 0, 0)
     EVT_CALL(ModifyColliderFlags, 1, EVT_VAR(11), 0x7FFFFE00)
     EVT_CALL(DisablePlayerInput, FALSE)
@@ -156,21 +156,21 @@ EvtScript N(Pipe_ScriptD) = {
     EVT_CALL(SetPlayerFlagBits, PLAYER_STATUS_ANIM_FLAGS_200000, TRUE)
     EVT_CALL(N(Pipe_GetCameraYaw))
     EVT_CALL(InterpPlayerYaw, EVT_VAR(0), 0)
-    EVT_WAIT_FRAMES(2)
+    EVT_WAIT(2)
     EVT_CALL(SetPlayerFlagBits, PLAYER_STATUS_ANIM_FLAGS_200000, FALSE)
     EVT_CALL(PlaySound, SOUND_ENTER_PIPE)
     EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_THREAD
-        EVT_WAIT_FRAMES(4)
+        EVT_WAIT(4)
         EVT_LOOP(40)
             EVT_SUB(EVT_VAR(1), 1)
             EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_CALL(func_802D286C, 0x800)
     EVT_CALL(func_802D2520, ANIM_10002, 5, 2, 1, 1, 0)
-    EVT_WAIT_FRAMES(25)
+    EVT_WAIT(25)
     EVT_EXEC_WAIT(EVT_VAR(12))
     EVT_RETURN
     EVT_END
@@ -213,7 +213,7 @@ EvtScript N(Pipe_ExitHorizontal) = {
         EVT_SUB(EVT_VAR(4), 360)
     EVT_END_IF
     EVT_CALL(InterpPlayerYaw, EVT_VAR(8), 1)
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_CALL(PlaySound, SOUND_ENTER_PIPE)
     EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(6), EVT_VAR(7))
@@ -221,18 +221,18 @@ EvtScript N(Pipe_ExitHorizontal) = {
     EVT_CALL(func_802D286C, 0x800)
     EVT_CALL(func_802D2520, ANIM_STAND_STILL, 5, 3, 1, 1, 0)
     EVT_THREAD
-        EVT_WAIT_FRAMES(8)
+        EVT_WAIT(8)
         EVT_CALL(HidePlayerShadow, TRUE)
     EVT_END_THREAD
     EVT_THREAD
-        EVT_WAIT_FRAMES(3)
+        EVT_WAIT(3)
         EVT_LOOP(40)
             EVT_CALL(N(Pipe_GetPointAheadOfPlayer), EVT_FIXED(1.0))
             EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_WAIT_FRAMES(25)
+    EVT_WAIT(25)
     EVT_EXEC_WAIT(EVT_VAR(12))
     EVT_RETURN
     EVT_END

@@ -28,7 +28,7 @@ EvtScript N(main) = {
     EVT_CALL(PlaySound, SOUND_379)
     EVT_CALL(GetItemPower, ITEM_VOLT_SHROOM, EVT_VAR(0), EVT_VAR(1))
     EVT_CALL(N(func_802A123C_71AA2C))
-    EVT_WAIT_FRAMES(20)
+    EVT_WAIT(20)
     EVT_CALL(ShowMessageBox, 16, 60)
     EVT_CALL(WaitForMessageBoxDone)
     EVT_EXEC_WAIT(N(PlayerGoHome))

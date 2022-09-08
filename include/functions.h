@@ -755,14 +755,14 @@ void set_curtain_fade(f32 fade);
 void crash_screen_init(void);
 void crash_screen_set_draw_info(u16* frameBufPtr, s16 width, s16 height);
 
-void basic_ai_wander_init(Evt* script, NpcAISettings* npcAISettings, EnemyDetectVolume* territory);
-void basic_ai_wander(Evt* script, NpcAISettings* npcAISettings, EnemyDetectVolume* territory);
-void basic_ai_loiter(Evt* script, NpcAISettings* npcAISettings, EnemyDetectVolume* territory);
-void basic_ai_found_player_jump_init(Evt* script, NpcAISettings* npcAISettings, EnemyDetectVolume* territory);
-void basic_ai_found_player_jump(Evt* script, NpcAISettings* npcAISettings, EnemyDetectVolume* territory);
-void basic_ai_chase_init(Evt* script, NpcAISettings* npcAISettings, EnemyDetectVolume* territory);
-void basic_ai_chase(Evt* script, NpcAISettings* npcAISettings, EnemyDetectVolume* territory);
-void basic_ai_lose_player(Evt* script, NpcAISettings* npcAISettings, EnemyDetectVolume* territory);
+void basic_ai_wander_init(Evt* script, MobileAISettings* npcAISettings, EnemyDetectVolume* territory);
+void basic_ai_wander(Evt* script, MobileAISettings* npcAISettings, EnemyDetectVolume* territory);
+void basic_ai_loiter(Evt* script, MobileAISettings* npcAISettings, EnemyDetectVolume* territory);
+void basic_ai_found_player_jump_init(Evt* script, MobileAISettings* npcAISettings, EnemyDetectVolume* territory);
+void basic_ai_found_player_jump(Evt* script, MobileAISettings* npcAISettings, EnemyDetectVolume* territory);
+void basic_ai_chase_init(Evt* script, MobileAISettings* npcAISettings, EnemyDetectVolume* territory);
+void basic_ai_chase(Evt* script, MobileAISettings* npcAISettings, EnemyDetectVolume* territory);
+void basic_ai_lose_player(Evt* script, MobileAISettings* npcAISettings, EnemyDetectVolume* territory);
 void basic_ai_suspend(Evt* script);
 
 // This legally allows all functions to be pointers without warnings.
@@ -782,8 +782,8 @@ s32 func_8013A704(s32);
 void free_generic_entity(s32);
 
 s32 ai_check_fwd_collisions(Npc* npc, f32 arg1, f32* arg2, f32* arg3, f32* arg4, f32* arg5);
-void basic_ai_loiter_init(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory);
-void PatrolAI_LoiterInit(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory);
+void basic_ai_loiter_init(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory);
+void PatrolAI_LoiterInit(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory);
 
 s32 func_80263230(Actor*, Actor*);
 void func_80266EA8(ActorPart*, s32);

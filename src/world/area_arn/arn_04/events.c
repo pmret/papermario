@@ -17,7 +17,7 @@ EvtScript N(80243538) = {
 };
 
 EvtScript N(main) = {
-    EVT_SET(EVT_SAVE_VAR(425), 34)
+    EVT_SET(GB_WorldLocation, 34)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
     EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
@@ -27,7 +27,7 @@ EvtScript N(main) = {
     EVT_EXEC(N(802433D0))
     EVT_SET(EVT_VAR(0), EVT_PTR(N(80243538)))
     EVT_EXEC(EnterWalk)
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_RETURN
     EVT_END
 };
@@ -36,7 +36,7 @@ static s32 N(pad_3654)[] = {
     0x00000000, 0x00000000, 0x00000000,
 };
 
-NpcAISettings N(npcAISettings_80243660) = {
+MobileAISettings N(npcAISettings_80243660) = {
     .moveSpeed = 1.5f,
     .moveTime = 30,
     .waitTime = 30,
@@ -73,7 +73,7 @@ f32 N(FlyingAI_JumpVels)[] = {
 
 #include "world/common/enemy/FlyingAI.inc.c"
 
-NpcAISettings N(npcAISettings_802436F4) = {
+MobileAISettings N(npcAISettings_802436F4) = {
     .moveSpeed = 1.8f,
     .moveTime = 60,
     .waitTime = 15,
@@ -103,10 +103,10 @@ NpcSettings N(npcSettings_80243794) = {
     .onHit = &EnemyNpcHit,
     .onDefeat = &EnemyNpcDefeat,
     .level = 12,
-    .unk_2A = 1,
+    .actionFlags = 1,
 };
 
-NpcAISettings N(npcAISettings_802437C0) = {
+MobileAISettings N(npcAISettings_802437C0) = {
     .moveSpeed = 1.0f,
     .moveTime = 30,
     .waitTime = 30,
@@ -141,13 +141,15 @@ StaticNpc N(npcGroup_80243840) = {
     .pos = { -350.0f, 180.0f, 150.0f },
     .flags = NPC_FLAG_LOCK_ANIMS,
     .yaw = 90,
-    .dropFlags = NPC_DROP_FLAGS_80,
-    .itemDropChance = 20,
+    .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+        .itemDropChance = 20,
     { ITEM_DRIED_SHROOM, 10, 0 },
-    .heartDrops = STANDARD_HEART_DROPS(2),
-    .flowerDrops = STANDARD_FLOWER_DROPS(2),
-    .maxCoinBonus = 2,
-    .movement = { -350, 180, 150, 30, 0, -32767, 0, -350, 180, 150, 150 },
+        .heartDrops = STANDARD_HEART_DROPS(2),
+        .flowerDrops = STANDARD_FLOWER_DROPS(2),
+        .maxCoinBonus = 2,
+    },
+	.territory = { .temp = { -350, 180, 150, 30, 0, -32767, 0, -350, 180, 150, 150 }},
     .animations = {
         NPC_ANIM_paragoomba_hyper_idle,
         NPC_ANIM_paragoomba_hyper_walk,
@@ -166,7 +168,7 @@ StaticNpc N(npcGroup_80243840) = {
         NPC_ANIM_paragoomba_hyper_run,
         NPC_ANIM_paragoomba_hyper_run,
     },
-    .unk_1E0 = { 00, 00, 00, 01, 00, 00, 00, 00},
+    .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
 StaticNpc N(npcGroup_80243A30) = {
@@ -175,13 +177,15 @@ StaticNpc N(npcGroup_80243A30) = {
     .pos = { 360.0f, 208.0f, 100.0f },
     .flags = NPC_FLAG_LOCK_ANIMS,
     .yaw = 90,
-    .dropFlags = NPC_DROP_FLAGS_80,
-    .itemDropChance = 20,
+    .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+        .itemDropChance = 20,
     { ITEM_DRIED_SHROOM, 10, 0 },
-    .heartDrops = STANDARD_HEART_DROPS(2),
-    .flowerDrops = STANDARD_FLOWER_DROPS(2),
-    .maxCoinBonus = 2,
-    .movement = { 360, 208, 100, 30, 0, -32767, 0, 360, 208, 100, 150 },
+        .heartDrops = STANDARD_HEART_DROPS(2),
+        .flowerDrops = STANDARD_FLOWER_DROPS(2),
+        .maxCoinBonus = 2,
+    },
+	.territory = { .temp = { 360, 208, 100, 30, 0, -32767, 0, 360, 208, 100, 150 }},
     .animations = {
         NPC_ANIM_goomba_hyper_idle,
         NPC_ANIM_goomba_hyper_walk,
@@ -200,7 +204,7 @@ StaticNpc N(npcGroup_80243A30) = {
         NPC_ANIM_goomba_hyper_run,
         NPC_ANIM_goomba_hyper_run,
     },
-    .unk_1E0 = { 00, 00, 00, 01, 00, 00, 00, 00},
+    .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
 StaticNpc N(npcGroup_80243C20) = {
@@ -209,12 +213,14 @@ StaticNpc N(npcGroup_80243C20) = {
     .pos = { 150.0f, 177.0f, 160.0f },
     .flags = NPC_FLAG_LOCK_ANIMS,
     .yaw = 90,
-    .dropFlags = NPC_DROP_FLAGS_80,
-    .heartDrops = STANDARD_HEART_DROPS(3),
-    .flowerDrops = STANDARD_FLOWER_DROPS(2),
-    .minCoinBonus = 1,
-    .maxCoinBonus = 3,
-    .movement = { 150, 177, 160, 30, 0, -32767, 0, 150, 177, 160, 150 },
+    .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+        .heartDrops = STANDARD_HEART_DROPS(3),
+        .flowerDrops = STANDARD_FLOWER_DROPS(2),
+        .minCoinBonus = 1,
+        .maxCoinBonus = 3,
+    },
+	.territory = { .temp = { 150, 177, 160, 30, 0, -32767, 0, 150, 177, 160, 150 }},
     .animations = {
         NPC_ANIM_cleft_hyper_idle,
         NPC_ANIM_cleft_hyper_walk,
@@ -233,7 +239,7 @@ StaticNpc N(npcGroup_80243C20) = {
         NPC_ANIM_cleft_hyper_rock_lighten,
         NPC_ANIM_cleft_hyper_still,
     },
-    .unk_1E0 = { 00, 00, 00, 01, 00, 00, 00, 00},
+    .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
 StaticNpc N(npcGroup_80243E10) = {
@@ -242,12 +248,14 @@ StaticNpc N(npcGroup_80243E10) = {
     .pos = { 550.0f, 230.0f, 125.0f },
     .flags = NPC_FLAG_LOCK_ANIMS,
     .yaw = 90,
-    .dropFlags = NPC_DROP_FLAGS_80,
-    .heartDrops = STANDARD_HEART_DROPS(3),
-    .flowerDrops = STANDARD_FLOWER_DROPS(2),
-    .minCoinBonus = 1,
-    .maxCoinBonus = 3,
-    .movement = { 550, 230, 125, 30, 0, -32767, 0, 550, 230, 125, 150 },
+    .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+        .heartDrops = STANDARD_HEART_DROPS(3),
+        .flowerDrops = STANDARD_FLOWER_DROPS(2),
+        .minCoinBonus = 1,
+        .maxCoinBonus = 3,
+    },
+	.territory = { .temp = { 550, 230, 125, 30, 0, -32767, 0, 550, 230, 125, 150 }},
     .animations = {
         NPC_ANIM_cleft_hyper_idle,
         NPC_ANIM_cleft_hyper_walk,
@@ -266,14 +274,14 @@ StaticNpc N(npcGroup_80243E10) = {
         NPC_ANIM_cleft_hyper_rock_lighten,
         NPC_ANIM_cleft_hyper_still,
     },
-    .unk_1E0 = { 00, 00, 00, 01, 00, 00, 00, 00},
+    .aiDetectFlags = AI_DETECT_SIGHT,
 };
 
 NpcGroupList N(npcGroupList_80244000) = {
-    NPC_GROUP(N(npcGroup_80243840), BATTLE_ID(14, 9, 0, 1)),
-    NPC_GROUP(N(npcGroup_80243A30), BATTLE_ID(14, 3, 0, 1)),
-    NPC_GROUP(N(npcGroup_80243C20), BATTLE_ID(14, 12, 0, 1)),
-    NPC_GROUP(N(npcGroup_80243E10), BATTLE_ID(14, 14, 0, 1)),
+    NPC_GROUP(N(npcGroup_80243840), 0x0E09, 0x00),
+    NPC_GROUP(N(npcGroup_80243A30), 0x0E03, 0x00),
+    NPC_GROUP(N(npcGroup_80243C20), 0x0E0C, 0x00),
+    NPC_GROUP(N(npcGroup_80243E10), 0x0E0E, 0x00),
     {},
 };
 
@@ -283,12 +291,12 @@ static s32 N(pad_403C)[] = {
 
 EvtScript N(makeEntities) = {
     EVT_CALL(MakeEntity, EVT_PTR(Entity_YellowBlock), 450, 285, 120, 0, 140, MAKE_ENTITY_END)
-    EVT_CALL(AssignBlockFlag, EVT_SAVE_FLAG(1008))
+    EVT_CALL(AssignBlockFlag, GF_ARN04_ItemBlock_SuperShroom)
     EVT_CALL(MakeEntity, EVT_PTR(Entity_YellowBlock), 720, 333, 75, 0, 343, MAKE_ENTITY_END)
-    EVT_CALL(AssignBlockFlag, EVT_SAVE_FLAG(1009))
+    EVT_CALL(AssignBlockFlag, GF_ARN04_ItemBlock_Coin)
     EVT_CALL(MakeEntity, EVT_PTR(Entity_MulticoinBlock), 600, 290, 200, 0, MAKE_ENTITY_END)
-    EVT_CALL(AssignBlockFlag, EVT_SAVE_FLAG(1010))
-    EVT_CALL(MakeItemEntity, ITEM_STAR_PIECE, 540, 230, 13, 17, EVT_SAVE_FLAG(1019))
+    EVT_CALL(AssignBlockFlag, GF_ARN04_MultiCoinBrick)
+    EVT_CALL(MakeItemEntity, ITEM_STAR_PIECE, 540, 230, 13, 17, GF_ARN04_Item_StarPiece)
     EVT_RETURN
     EVT_END
 };

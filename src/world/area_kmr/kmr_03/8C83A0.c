@@ -38,18 +38,18 @@ FoliageVectorList N(treeEffectVectors_Tree1) = {
 };
 
 EvtScript N(tree1_Callback) = {
-    EVT_IF_EQ(EVT_SAVE_FLAG(53), 1)
+    EVT_IF_EQ(GF_KMR03_Tree1_Mushroom, 1)
         EVT_RETURN
     EVT_END_IF
     EVT_IF_EQ(EVT_MAP_FLAG(10), 1)
         EVT_RETURN
     EVT_END_IF
-    EVT_WAIT_FRAMES(10)
+    EVT_WAIT(10)
     EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_IF_LT(EVT_VAR(0), -30)
-        EVT_CALL(MakeItemEntity, ITEM_MUSHROOM, -23, 100, 35, 13, EVT_SAVE_FLAG(53))
+        EVT_CALL(MakeItemEntity, ITEM_MUSHROOM, -23, 100, 35, 13, GF_KMR03_Tree1_Mushroom)
     EVT_ELSE
-        EVT_CALL(MakeItemEntity, ITEM_MUSHROOM, -85, 100, 16, 13, EVT_SAVE_FLAG(53))
+        EVT_CALL(MakeItemEntity, ITEM_MUSHROOM, -85, 100, 16, 13, GF_KMR03_Tree1_Mushroom)
     EVT_END_IF
     EVT_SET(EVT_MAP_FLAG(10), 1)
     EVT_RETURN

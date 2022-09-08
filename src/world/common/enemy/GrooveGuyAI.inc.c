@@ -1,7 +1,7 @@
 #include "common.h"
 #include "npc.h"
 
-void N(GrooveGuyAI_02)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(GrooveGuyAI_02)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -11,7 +11,7 @@ void N(GrooveGuyAI_02)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume
     script->functionTemp[0] = 3;
 }
 
-void N(GrooveGuyAI_03)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(GrooveGuyAI_03)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe((s32) enemy->npcID);
     s32 phase;
@@ -70,7 +70,7 @@ ApiStatus N(GrooveGuyAI_Main)(Evt* script, s32 isInitialCall) {
     EnemyDetectVolume territory;
     EnemyDetectVolume* territoryPtr = &territory;
     Bytecode* args = script->ptrReadPos;
-    NpcAISettings* aiSettings = (NpcAISettings*) evt_get_variable(script, *args++);
+    MobileAISettings* aiSettings = (MobileAISettings*) evt_get_variable(script, *args++);
     f32 posX;
     f32 posY;
     f32 posZ;

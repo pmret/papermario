@@ -41,7 +41,7 @@ EvtScript N(80240698) = {
     EVT_CALL(UpdateLerp)
     EVT_CALL(RotateModel, 7, EVT_VAR(0), 0, EVT_VAR(2), 0)
     EVT_CALL(RotateModel, 5, EVT_VAR(0), 0, EVT_VAR(3), 0)
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_IF_NE(EVT_VAR(1), 0)
         EVT_GOTO(10)
     EVT_END_IF
@@ -57,7 +57,7 @@ EvtScript N(8024079C) = {
     EVT_CALL(UpdateLerp)
     EVT_CALL(RotateModel, 7, EVT_VAR(0), 0, EVT_VAR(2), 0)
     EVT_CALL(RotateModel, 5, EVT_VAR(0), 0, EVT_VAR(3), 0)
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_IF_NE(EVT_VAR(1), 0)
         EVT_GOTO(10)
     EVT_END_IF
@@ -200,18 +200,18 @@ EvtScript N(80240DDC) = {
         EVT_SET(EVT_VAR(3), EVT_VAR(0))
         EVT_ADD(EVT_VAR(3), 1)
         EVT_CALL(SetNpcPos, 0, EVT_VAR(3), EVT_VAR(1), EVT_VAR(2))
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
         EVT_SET(EVT_VAR(3), EVT_VAR(0))
         EVT_ADD(EVT_VAR(3), -1)
         EVT_CALL(SetNpcPos, 0, EVT_VAR(3), EVT_VAR(1), EVT_VAR(2))
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
         EVT_ADD(EVT_VAR(11), 1)
         EVT_IF_LT(EVT_VAR(11), EVT_VAR(10))
             EVT_GOTO(10)
         EVT_END_IF
         EVT_CALL(RandInt, 10, EVT_VAR(10))
         EVT_ADD(EVT_VAR(10), 10)
-        EVT_WAIT_FRAMES(EVT_VAR(10))
+        EVT_WAIT(EVT_VAR(10))
     EVT_END_LOOP
     EVT_RETURN
     EVT_END
@@ -222,7 +222,7 @@ EvtScript N(80240F50) = {
     EVT_LOOP(0)
         EVT_CALL(RandInt, 50, EVT_VAR(0))
         EVT_ADD(EVT_VAR(0), 80)
-        EVT_WAIT_FRAMES(EVT_VAR(0))
+        EVT_WAIT(EVT_VAR(0))
         EVT_IF_EQ(EVT_MAP_VAR(0), 0)
             EVT_CALL(DisablePlayerInput, TRUE)
             EVT_CALL(PlaySoundAt, SOUND_B4, 0, 240, 10, -125)
@@ -252,7 +252,7 @@ EvtScript N(8024103C) = {
     EVT_CALL(SetPanTarget, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_CALL(PanToTarget, 0, 0, 1)
     EVT_CALL(WaitForCam, 0, EVT_FIXED(1.0))
-    EVT_WAIT_FRAMES(40)
+    EVT_WAIT(40)
     EVT_CALL(SetNpcPos, 0, -60, 10, -70)
     EVT_CALL(SetNpcPos, 1, -100, 10, -110)
     EVT_CALL(SetNpcPos, 2, -140, 10, -150)
@@ -260,14 +260,14 @@ EvtScript N(8024103C) = {
     EVT_CALL(SetNpcPos, 4, -140, 10, -70)
     EVT_CALL(SetNpcPos, 5, -180, 10, -100)
     EVT_EXEC_WAIT(N(80240AB0))
-    EVT_WAIT_FRAMES(60)
+    EVT_WAIT(60)
     EVT_CALL(InterpNpcYaw, 0, 270, 1)
     EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 5, MESSAGE_ID(0x0E, 0x00DB))
     EVT_CALL(SpeakToPlayer, 4, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 5, MESSAGE_ID(0x0E, 0x00DC))
     EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 5, MESSAGE_ID(0x0E, 0x00DD))
     EVT_CALL(PlaySoundAt, SOUND_B4, 0, 240, 10, -125)
     EVT_CALL(ShakeCam, 0, 0, 20, EVT_FIXED(2.0))
-    EVT_WAIT_FRAMES(10)
+    EVT_WAIT(10)
     EVT_CALL(PlaySoundAt, SOUND_B4, 0, 240, 10, -125)
     EVT_CALL(ShakeCam, 0, 0, 20, EVT_FIXED(2.0))
     EVT_CALL(InterpNpcYaw, 0, 90, 1)
@@ -296,11 +296,11 @@ EvtScript N(802413F4) = {
     EVT_CALL(ShowEmote, 3, EMOTE_EXCLAMATION, 45, 20, 1, 0, 0, 0, 0)
     EVT_CALL(ShowEmote, 4, EMOTE_EXCLAMATION, 45, 20, 1, 0, 0, 0, 0)
     EVT_CALL(ShowEmote, 5, EMOTE_EXCLAMATION, 45, 20, 1, 0, 0, 0, 0)
-    EVT_WAIT_FRAMES(50)
+    EVT_WAIT(50)
     EVT_SET(EVT_VAR(2), 1)
     EVT_EXEC(N(8024079C))
     EVT_EXEC(N(80240D90))
-    EVT_WAIT_FRAMES(20)
+    EVT_WAIT(20)
     EVT_CALL(SetCamType, 0, 6, 1)
     EVT_CALL(SetCamSpeed, 0, EVT_FIXED(6.0))
     EVT_CALL(SetCamPitch, 0, EVT_FIXED(15.0), EVT_FIXED(-15.0))
@@ -314,11 +314,11 @@ EvtScript N(802413F4) = {
     EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 0, MESSAGE_ID(0x0E, 0x00DF))
     EVT_KILL_THREAD(EVT_VAR(10))
     EVT_CALL(SetPlayerAnimation, ANIM_80007)
-    EVT_WAIT_FRAMES(20)
+    EVT_WAIT(20)
     EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 0, MESSAGE_ID(0x0E, 0x00E0))
-    EVT_WAIT_FRAMES(20)
+    EVT_WAIT(20)
     EVT_CALL(SetPlayerAnimation, ANIM_NOD_YES)
-    EVT_WAIT_FRAMES(20)
+    EVT_WAIT(20)
     EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 0, MESSAGE_ID(0x0E, 0x00E1))
     EVT_CALL(DisablePartnerAI, 0)
     EVT_CALL(GetCurrentPartnerID, EVT_VAR(0))
@@ -345,16 +345,16 @@ EvtScript N(802413F4) = {
     EVT_CALL(PanToTarget, 0, 0, 0)
     EVT_CALL(PlaySoundAt, SOUND_B4, 0, 240, 10, -125)
     EVT_CALL(ShakeCam, 0, 0, 20, EVT_FIXED(2.0))
-    EVT_WAIT_FRAMES(5)
+    EVT_WAIT(5)
     EVT_CALL(PlaySoundAt, SOUND_B4, 0, 240, 10, -125)
     EVT_CALL(ShakeCam, 0, 0, 20, EVT_FIXED(2.0))
     EVT_CALL(ShowMessageAtScreenPos, MESSAGE_ID(0x0E, 0x00E7), 160, 40)
     EVT_EXEC_WAIT(N(80240B08))
-    EVT_WAIT_FRAMES(10)
+    EVT_WAIT(10)
     EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_boo_Palette_01_Anim_6, NPC_ANIM_boo_Palette_01_Anim_6, 5, MESSAGE_ID(0x0E, 0x00E8))
     EVT_CALL(SetNpcAnimation, 0, NPC_ANIM_boo_Palette_01_Anim_6)
     EVT_EXEC(N(80240F50))
-    EVT_SET(EVT_SAVE_VAR(0), -25)
+    EVT_SET(GB_StoryProgress, -25)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_RETURN
     EVT_END
@@ -461,10 +461,12 @@ StaticNpc N(npcGroup_80241FE4) = {
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_400000,
     .init = &N(init_80241F70),
     .yaw = 90,
-    .dropFlags = NPC_DROP_FLAGS_80,
-    .heartDrops = NO_DROPS,
-    .flowerDrops = NO_DROPS,
-    .animations = {
+    .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+        .heartDrops = NO_DROPS,
+        .flowerDrops = NO_DROPS,
+    },
+	.animations = {
         NPC_ANIM_boo_Palette_01_Anim_1,
         NPC_ANIM_boo_Palette_01_Anim_2,
         NPC_ANIM_boo_Palette_01_Anim_3,
@@ -492,10 +494,12 @@ StaticNpc N(npcGroup_802421D4) = {
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS,
     .init = &N(init_80241F94),
     .yaw = 90,
-    .dropFlags = NPC_DROP_FLAGS_80,
-    .heartDrops = NO_DROPS,
-    .flowerDrops = NO_DROPS,
-    .animations = {
+    .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+        .heartDrops = NO_DROPS,
+        .flowerDrops = NO_DROPS,
+    },
+	.animations = {
         NPC_ANIM_boo_Palette_01_Anim_1,
         NPC_ANIM_boo_Palette_01_Anim_2,
         NPC_ANIM_boo_Palette_01_Anim_3,
@@ -522,10 +526,12 @@ StaticNpc N(npcGroup_802423C4) = {
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS,
     .init = &N(init_80241FA4),
     .yaw = 90,
-    .dropFlags = NPC_DROP_FLAGS_80,
-    .heartDrops = NO_DROPS,
-    .flowerDrops = NO_DROPS,
-    .animations = {
+    .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+        .heartDrops = NO_DROPS,
+        .flowerDrops = NO_DROPS,
+    },
+	.animations = {
         NPC_ANIM_boo_Palette_01_Anim_1,
         NPC_ANIM_boo_Palette_01_Anim_2,
         NPC_ANIM_boo_Palette_01_Anim_3,
@@ -552,10 +558,12 @@ StaticNpc N(npcGroup_802425B4) = {
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS,
     .init = &N(init_80241FB4),
     .yaw = 90,
-    .dropFlags = NPC_DROP_FLAGS_80,
-    .heartDrops = NO_DROPS,
-    .flowerDrops = NO_DROPS,
-    .animations = {
+    .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+        .heartDrops = NO_DROPS,
+        .flowerDrops = NO_DROPS,
+    },
+	.animations = {
         NPC_ANIM_boo_Palette_01_Anim_1,
         NPC_ANIM_boo_Palette_01_Anim_2,
         NPC_ANIM_boo_Palette_01_Anim_3,
@@ -582,10 +590,12 @@ StaticNpc N(npcGroup_802427A4) = {
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS,
     .init = &N(init_80241FC4),
     .yaw = 90,
-    .dropFlags = NPC_DROP_FLAGS_80,
-    .heartDrops = NO_DROPS,
-    .flowerDrops = NO_DROPS,
-    .animations = {
+    .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+        .heartDrops = NO_DROPS,
+        .flowerDrops = NO_DROPS,
+    },
+	.animations = {
         NPC_ANIM_boo_Palette_01_Anim_1,
         NPC_ANIM_boo_Palette_01_Anim_2,
         NPC_ANIM_boo_Palette_01_Anim_3,
@@ -612,10 +622,12 @@ StaticNpc N(npcGroup_80242994) = {
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS,
     .init = &N(init_80241FD4),
     .yaw = 90,
-    .dropFlags = NPC_DROP_FLAGS_80,
-    .heartDrops = NO_DROPS,
-    .flowerDrops = NO_DROPS,
-    .animations = {
+    .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+        .heartDrops = NO_DROPS,
+        .flowerDrops = NO_DROPS,
+    },
+	.animations = {
         NPC_ANIM_boo_Palette_01_Anim_1,
         NPC_ANIM_boo_Palette_01_Anim_2,
         NPC_ANIM_boo_Palette_01_Anim_3,
@@ -645,7 +657,7 @@ EvtScript N(80242B84) = {
         EVT_LOOP(180)
             EVT_CALL(GetNpcPos, 6, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
             EVT_CALL(N(func_80240060_BFA100))
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_CALL(SetPlayerPos, 320, 50, -160)
@@ -659,43 +671,43 @@ EvtScript N(80242B84) = {
     EVT_CALL(SetCamDistance, 0, EVT_FIXED(540.0))
     EVT_CALL(SetCamSpeed, 0, EVT_FIXED(90.0))
     EVT_CALL(PanToTarget, 0, 0, 1)
-    EVT_WAIT_FRAMES(20)
+    EVT_WAIT(20)
     EVT_THREAD
         EVT_SET(EVT_VAR(2), 1)
         EVT_EXEC(N(80240698))
     EVT_END_THREAD
-    EVT_WAIT_FRAMES(15)
+    EVT_WAIT(15)
     EVT_THREAD
         EVT_CALL(SetPlayerJumpscale, 0)
         EVT_CALL(PlayerJump1, 175, 50, -35, 40)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(DisablePartnerAI, 0)
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
         EVT_CALL(InterpNpcYaw, NPC_PARTNER, 270, 0)
         EVT_CALL(SetNpcAnimation, NPC_PARTNER, 0x107)
-        EVT_WAIT_FRAMES(85)
+        EVT_WAIT(85)
         EVT_CALL(func_802CF56C, 2)
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
         EVT_CALL(EnablePartnerAI)
     EVT_END_THREAD
     EVT_CALL(NpcMoveTo, 6, 175, -33, 40)
-    EVT_WAIT_FRAMES(20)
+    EVT_WAIT(20)
     EVT_CALL(SetNpcPos, 6, 175, 85, -33)
     EVT_CALL(SetNpcAnimation, 6, NPC_ANIM_sentinel_Palette_00_Anim_9)
-    EVT_WAIT_FRAMES(20)
+    EVT_WAIT(20)
     EVT_CALL(PlaySoundAtNpc, 6, SOUND_2F7, 0)
     EVT_CALL(SetNpcAnimation, 6, NPC_ANIM_sentinel_Palette_00_Anim_2)
     EVT_CALL(SetNpcPos, 6, 175, 70, -33)
     EVT_THREAD
-        EVT_WAIT_FRAMES(40)
+        EVT_WAIT(40)
         EVT_CALL(SetNpcAnimation, 6, NPC_ANIM_sentinel_Palette_00_Anim_3)
         EVT_CALL(NpcMoveTo, 6, 270, -120, 30)
         EVT_CALL(StopSound, 814)
         EVT_CALL(SetNpcPos, 6, 0, -1000, 0)
     EVT_END_THREAD
     EVT_THREAD
-        EVT_WAIT_FRAMES(60)
+        EVT_WAIT(60)
         EVT_SET(EVT_VAR(2), 1)
         EVT_EXEC(N(8024079C))
     EVT_END_THREAD
@@ -704,7 +716,7 @@ EvtScript N(80242B84) = {
     EVT_CALL(PlaySoundAtNpc, 6, SOUND_162, 0)
     EVT_CALL(SetPlayerAnimation, ANIM_80003)
     EVT_THREAD
-        EVT_WAIT_FRAMES(2)
+        EVT_WAIT(2)
         EVT_CALL(PlayEffect, 0x10, 3, 0, 175, 0, -35, 20, -20, 30, 0, 0, 0, 0, 0)
     EVT_END_THREAD
     EVT_THREAD
@@ -713,7 +725,7 @@ EvtScript N(80242B84) = {
         EVT_CALL(SetCamSpeed, 0, EVT_FIXED(2.0))
         EVT_CALL(PanToTarget, 0, 0, 1)
     EVT_END_THREAD
-    EVT_WAIT_FRAMES(65)
+    EVT_WAIT(65)
     EVT_CALL(GetCurrentPartnerID, EVT_VAR(0))
     EVT_SWITCH(EVT_VAR(0))
         EVT_CASE_EQ(1)
@@ -740,22 +752,22 @@ EvtScript N(80242B84) = {
             EVT_CALL(SpeakToPlayer, NPC_PARTNER, 0x108, 0x106, 5, MESSAGE_ID(0x0E, 0x00D6))
     EVT_END_SWITCH
     EVT_CALL(EnablePartnerAI)
-    EVT_WAIT_FRAMES(5)
+    EVT_WAIT(5)
     EVT_CALL(SetPlayerAnimation, ANIM_GET_UP)
-    EVT_WAIT_FRAMES(20)
+    EVT_WAIT(20)
     EVT_CALL(SetPlayerAnimation, ANIM_DUST_OFF)
-    EVT_WAIT_FRAMES(7)
+    EVT_WAIT(7)
     EVT_CALL(PlaySoundAtPlayer, 370, 0)
-    EVT_WAIT_FRAMES(8)
+    EVT_WAIT(8)
     EVT_CALL(PlaySoundAtPlayer, 370, 0)
-    EVT_WAIT_FRAMES(15)
+    EVT_WAIT(15)
     EVT_CALL(SetPlayerAnimation, ANIM_8001B)
-    EVT_WAIT_FRAMES(25)
+    EVT_WAIT(25)
     EVT_CALL(InterpPlayerYaw, 90, 0)
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_CALL(SetPlayerAnimation, ANIM_10002)
     EVT_CALL(InterpPlayerYaw, 45, 0)
-    EVT_WAIT_FRAMES(10)
+    EVT_WAIT(10)
     EVT_CALL(SetPlayerAnimation, ANIM_MIDAIR_STILL)
     EVT_CALL(SetPlayerJumpscale, 1)
     EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
@@ -788,10 +800,12 @@ StaticNpc N(npcGroup_802434FC) = {
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_400000,
     .init = &N(init_802434EC),
     .yaw = 90,
-    .dropFlags = NPC_DROP_FLAGS_80,
-    .heartDrops = NO_DROPS,
-    .flowerDrops = NO_DROPS,
-    .animations = {
+    .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+        .heartDrops = NO_DROPS,
+        .flowerDrops = NO_DROPS,
+    },
+	.animations = {
         NPC_ANIM_sentinel_Palette_00_Anim_1,
         NPC_ANIM_sentinel_Palette_00_Anim_2,
         NPC_ANIM_sentinel_Palette_00_Anim_3,
@@ -812,17 +826,17 @@ StaticNpc N(npcGroup_802434FC) = {
 };
 
 NpcGroupList N(npcGroupList_802436EC) = {
-    NPC_GROUP(N(npcGroup_80241FE4), BATTLE_ID(0, 0, 0, 0)),
-    NPC_GROUP(N(npcGroup_802421D4), BATTLE_ID(0, 0, 0, 0)),
-    NPC_GROUP(N(npcGroup_802423C4), BATTLE_ID(0, 0, 0, 0)),
-    NPC_GROUP(N(npcGroup_802425B4), BATTLE_ID(0, 0, 0, 0)),
-    NPC_GROUP(N(npcGroup_802427A4), BATTLE_ID(0, 0, 0, 0)),
-    NPC_GROUP(N(npcGroup_80242994), BATTLE_ID(0, 0, 0, 0)),
+    NPC_GROUP(N(npcGroup_80241FE4)),
+    NPC_GROUP(N(npcGroup_802421D4)),
+    NPC_GROUP(N(npcGroup_802423C4)),
+    NPC_GROUP(N(npcGroup_802425B4)),
+    NPC_GROUP(N(npcGroup_802427A4)),
+    NPC_GROUP(N(npcGroup_80242994)),
     {},
 };
 
 NpcGroupList N(npcGroupList_80243740) = {
-    NPC_GROUP(N(npcGroup_802434FC), BATTLE_ID(0, 0, 0, 0)),
+    NPC_GROUP(N(npcGroup_802434FC)),
     {},
 };
 

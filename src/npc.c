@@ -173,11 +173,11 @@ s32 _create_npc_basic(NpcBlueprint* blueprint) {
 }
 
 s32 _create_npc_standard(NpcBlueprint* blueprint, u32** animList) {
-    _create_npc(blueprint, animList, FALSE);
+    return _create_npc(blueprint, animList, FALSE);
 }
 
-void _create_npc_partner(NpcBlueprint* blueprint) {
-    _create_npc(blueprint, NULL, TRUE);
+s32 _create_npc_partner(NpcBlueprint* blueprint) {
+    return _create_npc(blueprint, NULL, TRUE);
 }
 
 void free_npc_by_index(s32 listIndex) {
@@ -1793,7 +1793,7 @@ void init_encounter_status(void) {
     currentEncounter->numEncounters = 0;
     currentEncounter->firstStrikeType = FIRST_STRIKE_NONE;
     currentEncounter->hitType = 0;
-    currentEncounter->unk_0A = 0;
+    currentEncounter->battleTriggerCooldown = 0;
     currentEncounter->npcGroupList = 0;
     currentEncounter->unk_08 = 0;
     currentEncounter->dropWhackaBump = 0;
@@ -1839,7 +1839,7 @@ void clear_encounter_status(void) {
     currentEncounter->numEncounters = 0;
     currentEncounter->firstStrikeType = FIRST_STRIKE_NONE;
     currentEncounter->hitType = 0;
-    currentEncounter->unk_0A = 0;
+    currentEncounter->battleTriggerCooldown = 0;
     currentEncounter->currentAreaIndex = gGameStatusPtr->areaID;
     currentEncounter->currentMapIndex = gGameStatusPtr->mapID;
     currentEncounter->currentEntryIndex = gGameStatusPtr->entryID;

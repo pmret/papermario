@@ -126,7 +126,7 @@ EvtScript D_80280EB8 = {
     EVT_CALL(SetCamViewport, 1, 12, 20, 296, 200)
     EVT_CALL(SetCamBGColor, 1, 0, 0, 0)
     EVT_CALL(SetCamEnabled, 1, 1)
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_CALL(InitVirtualEntityList)
     EVT_CALL(InitAnimatedModels)
     EVT_CALL(func_802CABE8, 1, 0, 240, 100, 8)

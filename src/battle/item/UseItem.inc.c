@@ -4,7 +4,7 @@
 EvtScript N(UseItemWithEffect) = {
     EVT_IF_EQ(EVT_VAR(1), 0)
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_69)
-        EVT_WAIT_FRAMES(10)
+        EVT_WAIT(10)
         EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_208D)
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_GOT_ITEM)
         EVT_CALL(GetActorPos, ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
@@ -20,15 +20,15 @@ EvtScript N(UseItemWithEffect) = {
         EVT_CALL(MakeItemEntity, EVT_VAR(10), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 1, 0)
         EVT_SET(EVT_VAR(10), EVT_VAR(0))
         EVT_CALL(N(GiveRefund))
-        EVT_WAIT_FRAMES(EVT_VAR(0))
-        EVT_WAIT_FRAMES(15)
+        EVT_WAIT(EVT_VAR(0))
+        EVT_WAIT(15)
         EVT_CALL(N(GiveRefundCleanup))
         EVT_CALL(RemoveItemEntity, EVT_VAR(10))
     EVT_ELSE
         EVT_CALL(GetActorPos, ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
         EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_208D)
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_GOT_ITEM)
-        EVT_WAIT_FRAMES(4)
+        EVT_WAIT(4)
         EVT_ADD(EVT_VAR(1), 45)
         EVT_SET(EVT_VAR(3), EVT_VAR(1))
         EVT_ADD(EVT_VAR(3), 10)
@@ -36,7 +36,7 @@ EvtScript N(UseItemWithEffect) = {
         EVT_CALL(PlayEffect, 0x33, 1, EVT_VAR(0), EVT_VAR(3), EVT_VAR(2), EVT_FIXED(1.0), 30, 0, 0, 0, 0, 0, 0, 0)
         EVT_CALL(MakeItemEntity, EVT_VAR(10), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 1, 0)
         EVT_SET(EVT_VAR(10), EVT_VAR(0))
-        EVT_WAIT_FRAMES(15)
+        EVT_WAIT(15)
         EVT_CALL(RemoveItemEntity, EVT_VAR(10))
     EVT_END_IF
     EVT_RETURN
@@ -49,15 +49,15 @@ EvtScript N(UseItem) = {
     EVT_CALL(SetBattleCamOffsetZ, 41)
     EVT_CALL(SetBattleCamZoom, 248)
     EVT_CALL(MoveBattleCamOver, 30)
-    EVT_WAIT_FRAMES(10)
+    EVT_WAIT(10)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_GOT_ITEM)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_ADD(EVT_VAR(1), 45)
     EVT_CALL(MakeItemEntity, EVT_VAR(10), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 1, 0)
     EVT_SET(EVT_VAR(14), EVT_VAR(0))
     EVT_CALL(N(GiveRefund))
-    EVT_WAIT_FRAMES(EVT_VAR(0))
-    EVT_WAIT_FRAMES(15)
+    EVT_WAIT(EVT_VAR(0))
+    EVT_WAIT(15)
     EVT_CALL(N(GiveRefundCleanup))
     EVT_CALL(RemoveItemEntity, EVT_VAR(14))
     EVT_RETURN
@@ -80,11 +80,11 @@ EvtScript N(EatItem) = {
     EVT_THREAD
         EVT_LOOP(4)
             EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2095)
-            EVT_WAIT_FRAMES(10)
+            EVT_WAIT(10)
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_EAT)
-    EVT_WAIT_FRAMES(45)
+    EVT_WAIT(45)
     EVT_RETURN
     EVT_END
 };
@@ -93,11 +93,11 @@ EvtScript N(DrinkItem) = {
     EVT_THREAD
         EVT_LOOP(4)
             EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2095)
-            EVT_WAIT_FRAMES(10)
+            EVT_WAIT(10)
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_DRINK)
-    EVT_WAIT_FRAMES(45)
+    EVT_WAIT(45)
     EVT_RETURN
     EVT_END
 };

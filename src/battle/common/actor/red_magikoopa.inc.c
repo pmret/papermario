@@ -269,7 +269,7 @@ EvtScript N(8022C424) = {
             EVT_SET_CONST(LW(0), 1)
             EVT_SET_CONST(LW(1), NPC_ANIM_magikoopa_Palette_01_Anim_4)
             EVT_EXEC_WAIT(DoNormalHit)
-            EVT_WAIT_FRAMES(10)
+            EVT_WAIT(10)
             EVT_SET_CONST(LW(0), 1)
             EVT_SET_CONST(LW(1), NPC_ANIM_magikoopa_Palette_01_Anim_4)
             EVT_EXEC_WAIT(DoDeath)
@@ -284,7 +284,7 @@ EvtScript N(8022C424) = {
             EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
             EVT_CALL(SetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
             EVT_CALL(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
-            EVT_WAIT_FRAMES(15)
+            EVT_WAIT(15)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_magikoopa_Palette_01_Anim_2)
             EVT_EXEC_WAIT(N(8022E334))
             EVT_RETURN
@@ -388,9 +388,9 @@ EvtScript N(8022CA48) = {
     EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
     EVT_LOOP(20)
         EVT_CALL(SetPartFlagBits, ACTOR_SELF, 3, ACTOR_PART_FLAG_INVISIBLE, 1)
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
         EVT_CALL(SetPartFlagBits, ACTOR_SELF, 3, ACTOR_PART_FLAG_INVISIBLE, 0)
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, 3, ACTOR_PART_FLAG_INVISIBLE, 1)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_magikoopa_Palette_01_Anim_1)
@@ -472,7 +472,7 @@ EvtScript N(8022D044) = {
             EVT_SET_CONST(LW(0), 2)
             EVT_SET_CONST(LW(1), NPC_ANIM_flying_magikoopa_Palette_01_Anim_4)
             EVT_EXEC_WAIT(DoNormalHit)
-            EVT_WAIT_FRAMES(10)
+            EVT_WAIT(10)
             EVT_SET_CONST(LW(0), 2)
             EVT_SET_CONST(LW(1), NPC_ANIM_flying_magikoopa_Palette_01_Anim_4)
             EVT_EXEC_WAIT(DoDeath)
@@ -497,7 +497,7 @@ EvtScript N(8022D044) = {
             EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
             EVT_CALL(SetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
             EVT_CALL(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
-            EVT_WAIT_FRAMES(15)
+            EVT_WAIT(15)
             EVT_CALL(SetAnimation, ACTOR_SELF, 2, NPC_ANIM_flying_magikoopa_Palette_01_Anim_2)
             EVT_EXEC_WAIT(N(8022E334))
             EVT_RETURN
@@ -550,7 +550,7 @@ EvtScript N(8022D6A8) = {
     EVT_END_IF
     EVT_CALL(PlayEffect, EFFECT_GATHER_MAGIC, 0, LW(0), LW(1), LW(2), EVT_FLOAT(0.5), 30, 0, 0, 0, 0, 0, 0, 0)
     EVT_CALL(SetAnimation, ACTOR_SELF, 2, NPC_ANIM_flying_magikoopa_Palette_01_Anim_2)
-    EVT_WAIT_FRAMES(30)
+    EVT_WAIT(30)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LW(0), 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LW(0))
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
@@ -558,7 +558,7 @@ EvtScript N(8022D6A8) = {
             EVT_SET(LW(10), LW(0))
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_SPELL_CAST2)
             EVT_CALL(SetAnimation, ACTOR_SELF, 2, NPC_ANIM_flying_magikoopa_Palette_01_Anim_3)
-            EVT_WAIT_FRAMES(5)
+            EVT_WAIT(5)
             EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LW(9))
             EVT_IF_FLAG(LW(9), STATUS_FLAG_SHRINK)
@@ -573,14 +573,14 @@ EvtScript N(8022D6A8) = {
             EVT_SUB(LW(3), 50)
             EVT_SET(LW(4), 0)
             EVT_CALL(N(ShrinkActor), LW(0), LW(1), LW(5), LW(3), LW(4), LW(5), 25)
-            EVT_WAIT_FRAMES(50)
+            EVT_WAIT(50)
             EVT_IF_EQ(LW(10), HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LW(0), DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
-            EVT_WAIT_FRAMES(14)
+            EVT_WAIT(14)
             EVT_CALL(YieldTurn)
             EVT_CALL(AddActorDecoration, ACTOR_SELF, 2, 0, 2)
-            EVT_WAIT_FRAMES(30)
+            EVT_WAIT(30)
             EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 2, 0)
             EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
@@ -589,7 +589,7 @@ EvtScript N(8022D6A8) = {
     EVT_END_SWITCH
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_SPELL_CAST2)
     EVT_CALL(SetAnimation, ACTOR_SELF, 2, NPC_ANIM_flying_magikoopa_Palette_01_Anim_3)
-    EVT_WAIT_FRAMES(5)
+    EVT_WAIT(5)
     EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LW(10))
     EVT_IF_FLAG(LW(10), STATUS_FLAG_SHRINK)
@@ -603,13 +603,13 @@ EvtScript N(8022D6A8) = {
     EVT_CALL(GetGoalPos, ACTOR_SELF, LW(3), LW(4), LW(5))
     EVT_SUB(LW(3), 10)
     EVT_CALL(N(ShrinkActor), LW(0), LW(1), LW(5), LW(3), LW(4), LW(5), 20)
-    EVT_WAIT_FRAMES(18)
-    EVT_WAIT_FRAMES(2)
+    EVT_WAIT(18)
+    EVT_WAIT(2)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LW(0), DAMAGE_TYPE_MAGIC | DAMAGE_TYPE_NO_CONTACT, 0, 0, 3, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SWITCH(LW(0))
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_QUAKE_IMMUNE)
-            EVT_WAIT_FRAMES(19)
+            EVT_WAIT(19)
             EVT_CALL(YieldTurn)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
@@ -633,10 +633,10 @@ EvtScript N(8022DCC4) = {
         EVT_LOOP(20)
             EVT_SUB(LW(0), 10)
             EVT_CALL(SetPartAlpha, ACTOR_SELF, 1, LW(0))
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_WAIT_FRAMES(10)
+    EVT_WAIT(10)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LW(10))
@@ -652,11 +652,11 @@ EvtScript N(8022DCC4) = {
     EVT_LOOP(20)
         EVT_ADD(LW(0), 10)
         EVT_CALL(SetPartAlpha, ACTOR_SELF, 1, LW(0))
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(SetPartAlpha, ACTOR_SELF, 1, 255)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_magikoopa_Palette_01_Anim_3)
-    EVT_WAIT_FRAMES(11)
+    EVT_WAIT(11)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2DC)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LW(0), 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LW(0))
@@ -667,12 +667,12 @@ EvtScript N(8022DCC4) = {
             EVT_IF_EQ(LW(10), HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LW(0), DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
-            EVT_WAIT_FRAMES(15)
+            EVT_WAIT(15)
             EVT_SET(LW(0), 200)
             EVT_LOOP(20)
                 EVT_SUB(LW(0), 10)
                 EVT_CALL(SetPartAlpha, ACTOR_SELF, 1, LW(0))
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
             EVT_END_LOOP
             EVT_CALL(YieldTurn)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
@@ -682,7 +682,7 @@ EvtScript N(8022DCC4) = {
             EVT_LOOP(20)
                 EVT_ADD(LW(0), 10)
                 EVT_CALL(SetPartAlpha, ACTOR_SELF, 1, LW(0))
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
             EVT_END_LOOP
             EVT_CALL(SetPartAlpha, ACTOR_SELF, 1, 255)
             EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
@@ -691,18 +691,18 @@ EvtScript N(8022DCC4) = {
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_WAIT_FRAMES(2)
+    EVT_WAIT(2)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LW(0), DAMAGE_TYPE_NO_CONTACT, 0, 0, 3, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SWITCH(LW(0))
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_QUAKE_IMMUNE)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
-            EVT_WAIT_FRAMES(10)
+            EVT_WAIT(10)
             EVT_SET(LW(0), 200)
             EVT_LOOP(20)
                 EVT_SUB(LW(0), 10)
                 EVT_CALL(SetPartAlpha, ACTOR_SELF, 1, LW(0))
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
             EVT_END_LOOP
             EVT_CALL(YieldTurn)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
@@ -712,7 +712,7 @@ EvtScript N(8022DCC4) = {
             EVT_LOOP(20)
                 EVT_ADD(LW(0), 10)
                 EVT_CALL(SetPartAlpha, ACTOR_SELF, 1, LW(0))
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
             EVT_END_LOOP
             EVT_CALL(SetPartAlpha, ACTOR_SELF, 1, 255)
         EVT_END_CASE_GROUP
@@ -732,7 +732,7 @@ EvtScript N(8022E334) = {
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_14)
         EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
         EVT_CALL(MoveBattleCamOver, 15)
-        EVT_WAIT_FRAMES(15)
+        EVT_WAIT(15)
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_B)
     EVT_END_IF
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(1.0))
@@ -740,7 +740,7 @@ EvtScript N(8022E334) = {
     EVT_ADD(LW(0), 20)
     EVT_CALL(SetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-    EVT_WAIT_FRAMES(10)
+    EVT_WAIT(10)
     EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
     EVT_CALL(EnableActorBlur, ACTOR_SELF, 1)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(10.0))
@@ -831,14 +831,14 @@ EvtScript N(8022E6A0) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_14)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(MoveBattleCamOver, 15)
-    EVT_WAIT_FRAMES(15)
+    EVT_WAIT(15)
     EVT_CALL(GetActorFlags, ACTOR_SELF, LW(0))
     EVT_IF_NOT_FLAG(LW(0), ACTOR_FLAG_FLYING)
         EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_magikoopa_Palette_01_Anim_2)
     EVT_ELSE
         EVT_CALL(SetAnimation, ACTOR_SELF, 2, NPC_ANIM_flying_magikoopa_Palette_01_Anim_2)
     EVT_END_IF
-    EVT_WAIT_FRAMES(5)
+    EVT_WAIT(5)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_SPELL_CAST1)
     EVT_CALL(GetActorFlags, ACTOR_SELF, LW(0))
     EVT_IF_NOT_FLAG(LW(0), ACTOR_FLAG_FLYING)
@@ -870,16 +870,16 @@ EvtScript N(8022E6A0) = {
             EVT_CALL(PlayEffect, EFFECT_RADIAL_SHIMMER, 5, LW(0), LW(1), LW(2), EVT_FLOAT(0.3), 30, 0, 0, 0, 0, 0, 0, 0)
         EVT_END_IF
     EVT_END_IF
-    EVT_WAIT_FRAMES(30)
+    EVT_WAIT(30)
     EVT_CALL(GetActorFlags, ACTOR_SELF, LW(0))
     EVT_IF_NOT_FLAG(LW(0), ACTOR_FLAG_FLYING)
         EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_magikoopa_Palette_01_Anim_1)
     EVT_ELSE
         EVT_CALL(SetAnimation, ACTOR_SELF, 2, NPC_ANIM_flying_magikoopa_Palette_01_Anim_1)
     EVT_END_IF
-    EVT_WAIT_FRAMES(5)
+    EVT_WAIT(5)
     EVT_THREAD
-        EVT_WAIT_FRAMES(10)
+        EVT_WAIT(10)
         EVT_CALL(PlaySoundAtActor, LW(8), 0x2DD)
     EVT_END_THREAD
     EVT_THREAD
@@ -889,7 +889,7 @@ EvtScript N(8022E6A0) = {
     EVT_END_THREAD
     EVT_CALL(WaitForBuffDone)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
-    EVT_WAIT_FRAMES(10)
+    EVT_WAIT(10)
     EVT_CALL(YieldTurn)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)

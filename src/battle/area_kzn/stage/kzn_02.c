@@ -13,7 +13,7 @@ EvtScript N(802278B0) = {
         EVT_CALL(SetTexPanOffset, LW(10), 1, LW(1), 0)
         EVT_SUB(LW(0), -300)
         EVT_SUB(LW(1), -500)
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_RETURN
     EVT_END
@@ -28,7 +28,7 @@ EvtScript N(8022797C) = {
         EVT_CALL(SetTexPanOffset, LW(10), 0, LW(0), LW(1))
         EVT_ADD(LW(0), 16384)
         EVT_ADD(LW(1), 0)
-        EVT_WAIT_FRAMES(5)
+        EVT_WAIT(5)
     EVT_END_LOOP
     EVT_RETURN
     EVT_END
@@ -46,7 +46,7 @@ EvtScript N(80227A2C) = {
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
         EVT_CALL(TranslateGroup, LW(10), LW(0), 0, 0)
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
         EVT_IF_EQ(LW(1), 0)
             EVT_BREAK_LOOP
         EVT_END_IF
@@ -57,7 +57,7 @@ EvtScript N(80227A2C) = {
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
         EVT_CALL(TranslateGroup, LW(10), LW(0), 0, 0)
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
         EVT_IF_EQ(LW(1), 0)
             EVT_BREAK_LOOP
         EVT_END_IF

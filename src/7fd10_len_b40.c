@@ -196,7 +196,7 @@ void check_input_open_menus(void) {
 
     if (gGameStatusPtr->disableScripts ||
         (gGameStatusPtr->peachFlags & 1) ||
-        evt_get_variable(NULL, EVT_STORY_PROGRESS) == STORY_INTRO)
+        evt_get_variable(NULL, GB_StoryProgress) == STORY_INTRO)
     {
         return;
     }
@@ -213,7 +213,7 @@ void check_input_open_menus(void) {
         pressedButtons = playerStatus->pressedButtons;
     }
 
-    if (evt_get_variable(NULL, EVT_STORY_PROGRESS) >= STORY_EPILOGUE) {
+    if (evt_get_variable(NULL, GB_StoryProgress) >= STORY_EPILOGUE) {
         currentButtons &= ~(BUTTON_C_LEFT | BUTTON_C_RIGHT);
         pressedButtons &= ~(BUTTON_C_LEFT | BUTTON_C_RIGHT);
     }
@@ -377,7 +377,7 @@ void check_input_status_menu(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 pressedButtons;
 
-    if (evt_get_variable(NULL, EVT_STORY_PROGRESS) < STORY_EPILOGUE) {
+    if (evt_get_variable(NULL, GB_StoryProgress) < STORY_EPILOGUE) {
         if (playerStatus->actionState != ACTION_STATE_RIDE) {
             pressedButtons = playerStatus->pressedButtons;
         } else {

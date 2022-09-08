@@ -229,7 +229,7 @@ EvtScript N(shakeTree) = {
     EVT_THREAD
         EVT_SET(LF(0), 0)
         EVT_IF_NE(LW(1), 0)
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
             EVT_LOOP(5)
                 EVT_USE_BUF(LW(1))
                 EVT_BUF_READ1(LW(2))
@@ -241,14 +241,14 @@ EvtScript N(shakeTree) = {
                         EVT_CALL(PlaySoundAtModel, LW(3), 358, 0)
                     EVT_END_IF
                 EVT_END_LOOP
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
                 EVT_USE_BUF(LW(1))
                 EVT_BUF_READ1(LW(2))
                 EVT_LOOP(LW(2))
                     EVT_BUF_READ1(LW(3))
                     EVT_CALL(N(TransformFoliage), LW(3), EVT_FLOAT(0.1), EVT_FLOAT(-0.2), LW(15), 0)
                 EVT_END_LOOP
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
             EVT_END_LOOP
             EVT_USE_BUF(LW(1))
             EVT_BUF_READ1(LW(2))
@@ -256,7 +256,7 @@ EvtScript N(shakeTree) = {
                 EVT_BUF_READ1(LW(3))
                 EVT_CALL(TranslateModel, LW(3), 0, 0, 0)
             EVT_END_LOOP
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
         EVT_END_IF
     EVT_END_THREAD
     EVT_THREAD
@@ -273,14 +273,14 @@ EvtScript N(shakeTree) = {
                         EVT_CALL(PlaySoundAtModel, LW(4), 357, 0)
                     EVT_END_IF
                 EVT_END_LOOP
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
                 EVT_USE_BUF(LW(2))
                 EVT_BUF_READ1(LW(3))
                 EVT_LOOP(LW(3))
                     EVT_BUF_READ1(LW(4))
                     EVT_CALL(N(TransformFoliage), LW(4), EVT_FLOAT(0.1), EVT_FLOAT(-0.2), LW(15), 0)
                 EVT_END_LOOP
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
             EVT_END_LOOP
             EVT_USE_BUF(LW(2))
             EVT_BUF_READ1(LW(3))
@@ -288,7 +288,7 @@ EvtScript N(shakeTree) = {
                 EVT_BUF_READ1(LW(4))
                 EVT_CALL(TranslateModel, LW(4), 0, 0, 0)
             EVT_END_LOOP
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
         EVT_END_IF
     EVT_END_THREAD
     EVT_THREAD
@@ -301,7 +301,7 @@ EvtScript N(shakeTree) = {
             EVT_END_LOOP
         EVT_END_IF
     EVT_END_THREAD
-    EVT_WAIT_FRAMES(15)
+    EVT_WAIT(15)
     EVT_RETURN
     EVT_END
 };
@@ -345,7 +345,7 @@ EvtScript N(80223DBC) = {
     EVT_END_IF
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_15)
     EVT_CALL(BattleCamTargetActor, ACTOR_ENEMY0)
-    EVT_WAIT_FRAMES(20)
+    EVT_WAIT(20)
     EVT_CALL(SetActorVar, -127, 5, 1)
     EVT_CALL(ActorExists, 512, LW(0))
     EVT_IF_EQ(LW(0), 0)
@@ -359,9 +359,9 @@ EvtScript N(80223DBC) = {
         EVT_CALL(JumpPartTo, -127, 2, 40, 20, 10, 5, 1)
         EVT_LOOP(20)
             EVT_CALL(SetPartFlagBits, -127, 2, 1, 0)
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
             EVT_CALL(SetPartFlagBits, -127, 2, 1, 1)
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
         EVT_END_LOOP
         EVT_RETURN
     EVT_END_IF
@@ -390,9 +390,9 @@ EvtScript N(80223DBC) = {
         EVT_CALL(JumpPartTo, -127, 2, LW(0), LW(1), LW(2), 8, 1)
         EVT_LOOP(20)
             EVT_CALL(SetPartFlagBits, -127, 2, 1, 0)
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
             EVT_CALL(SetPartFlagBits, -127, 2, 1, 1)
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
         EVT_END_LOOP
         EVT_RETURN
     EVT_END_IF
@@ -419,9 +419,9 @@ EvtScript N(80223DBC) = {
         EVT_CALL(JumpPartTo, -127, 2, LW(0), LW(1), LW(2), 8, 1)
         EVT_LOOP(20)
             EVT_CALL(SetPartFlagBits, -127, 2, 1, 0)
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
             EVT_CALL(SetPartFlagBits, -127, 2, 1, 1)
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
         EVT_END_LOOP
         EVT_RETURN
     EVT_END_IF
@@ -446,9 +446,9 @@ EvtScript N(80223DBC) = {
     EVT_CALL(JumpPartTo, -127, 2, LW(0), LW(1), LW(2), 8, 1)
     EVT_LOOP(20)
         EVT_CALL(SetPartFlagBits, -127, 2, 1, 0)
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
         EVT_CALL(SetPartFlagBits, -127, 2, 1, 1)
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_RETURN
     EVT_END

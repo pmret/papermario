@@ -85,7 +85,7 @@
 #define decrement_status_menu_disabled dead_decrement_status_menu_disabled
 #define sync_status_menu dead_sync_status_menu
 #define set_max_SP dead_set_max_SP
-#define get_current_map_header dead_get_current_map_header
+#define get_current_map_settings dead_get_current_map_settings
 #define gGameStatusPtr dead_gGameStatusPtr
 #define guTranslateF dead_guTranslateF
 #define get_model_from_list_index dead_get_model_from_list_index

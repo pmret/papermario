@@ -223,7 +223,7 @@ void filemenu_yesno_handle_input(MenuPanel* menu) {
                         gGameStatusPtr->areaID = 0;
                         gGameStatusPtr->mapID = 0xB;
                         gGameStatusPtr->entryID = 0;
-                        evt_set_variable(NULL, EVT_STORY_PROGRESS, STORY_INTRO);
+                        evt_set_variable(NULL, GB_StoryProgress, STORY_INTRO);
 
                         slot2 = filemenu_menus[0]->selected;
                         for (i = 0; i < ARRAY_COUNT(gSaveSlotMetadata->filename); i++) {
