@@ -71,7 +71,6 @@ void func_802B7140(void) {
     D_8010C920 = func_802B74F0;
 }
 
-//INCLUDE_ASM(s32, "E21870", func_802B71D4);
 void func_802B71D4(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Matrix4f sp18, sp58;
