@@ -24,11 +24,11 @@ void shim_draw_msg(s32, s32, s32, s32, s32, s32);
 s32 shim_get_msg_width(s32, u16);
 
 void func_E010E000(ChapterChangeFXData* data, s32 arg1, UnkStruct* arg2) {
+    s32 unk_1C = data->unk_1C;
     UnkStruct* it;
     f32 var0;
     f32 var1;
     s32 temp;
-    s32 unk_1C = data->unk_1C;
 
     if (arg1 == 0) {
         var0 = data->unk_04;

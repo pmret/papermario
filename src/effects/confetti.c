@@ -19,11 +19,11 @@ void confetti_init(void) {
 }
 
 void confetti_update(EffectInstance* effect) {
-    s32 i;
+    ConfettiFXData* part = effect->data.confetti;
     s32 unk_00;
     s32 unk_24;
     s32 unk_2C;
-    ConfettiFXData* part = effect->data.confetti;
+    s32 i;
 
     part->unk_20--;
     if (part->unk_20 < 0) {

@@ -172,17 +172,13 @@ void func_E0090428(EffectInstance* effect) {
 }
 
 void func_E0090444(EffectInstance* effect) {
+    AttackResultTextFXData* data = effect->data.attackResultText;
+    s32 unk_00 = data->unk_00;
+    s32 unk_1C = data->unk_1C;
     Matrix4f sp18;
     Matrix4f sp58;
-    AttackResultTextFXData* data;
-    s32 unk_00;
-    s32 unk_1C;
     s32 z;
     f32 scale;
-
-    data = effect->data.attackResultText;
-    unk_00 = data->unk_00;
-    unk_1C = data->unk_1C;
 
     if (data->unk_24 != 0) {
         scale = data->unk_28;
