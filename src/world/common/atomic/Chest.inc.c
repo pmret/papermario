@@ -38,7 +38,7 @@ EvtScript N(EVS_Chest_ShowGotItem) = {
     EVT_SET_GROUP(EVT_GROUP_00)
     EVT_CALL(SetTimeFreezeMode, 2)
     EVT_WAIT(40)
-    EVT_CALL(ShowGotItem, EVT_VAR(0), 0, 0)
+    EVT_CALL(ShowGotItem, LocalVar(0), 0, 0)
     EVT_CALL(SetTimeFreezeMode, 0)
     EVT_RETURN
     EVT_RETURN
@@ -47,17 +47,17 @@ EvtScript N(EVS_Chest_ShowGotItem) = {
 
 EvtScript N(EVS_Chest_GetItem) = {
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_SET(EVT_VAR(0), EVT_VAR(10))
-    EVT_IF_NE(EVT_VAR(10), 0)
+    EVT_SET(LocalVar(0), LocalVar(10))
+    EVT_IF_NE(LocalVar(10), 0)
         EVT_EXEC_WAIT(N(EVS_Chest_ShowGotItem))
     EVT_END_IF
-    EVT_SWITCH(EVT_VAR(11))
+    EVT_SWITCH(LocalVar(11))
         EVT_CASE_EQ(0)
-            EVT_CALL(AddItem, EVT_VAR(10), EVT_VAR(0))
+            EVT_CALL(AddItem, LocalVar(10), LocalVar(0))
         EVT_CASE_EQ(1)
-            EVT_CALL(AddKeyItem, EVT_VAR(10))
+            EVT_CALL(AddKeyItem, LocalVar(10))
         EVT_CASE_EQ(2)
-            EVT_CALL(AddBadge, EVT_VAR(10), EVT_VAR(0))
+            EVT_CALL(AddBadge, LocalVar(10), LocalVar(0))
     EVT_END_SWITCH
     EVT_WAIT(15)
     EVT_CALL(DisablePlayerInput, FALSE)
@@ -66,9 +66,9 @@ EvtScript N(EVS_Chest_GetItem) = {
 };
 
 EvtScript N(EVS_Chest_Interact) = {
-    EVT_SET(EVT_VAR(10), CHEST_ITEM)
-    EVT_SET(EVT_VAR(11), 1)
-    EVT_SET(EVT_SAVE_FLAG(CHEST_FLAG), 1)
+    EVT_SET(LocalVar(10), CHEST_ITEM)
+    EVT_SET(LocalVar(11), 1)
+    EVT_SET(GameFlag(CHEST_FLAG), 1)
     EVT_EXEC_WAIT(N(EVS_Chest_GetItem))
     EVT_RETURN
     EVT_END

@@ -237,17 +237,17 @@ ApiStatus N(Quizmo_CreateStage)(Evt* script, s32 isInitialCall) {
 
     if (isInitialCall) {
         N(Quizmo_StageEffect) = fx_quizmo_stage(0,
-            evt_get_variable(script, EVT_ARRAY(1)),
-            evt_get_variable(script, EVT_ARRAY(2)),
-            evt_get_variable(script, EVT_ARRAY(3)));
+            evt_get_variable(script, ArrayVar(1)),
+            evt_get_variable(script, ArrayVar(2)),
+            evt_get_variable(script, ArrayVar(3)));
         N(Quizmo_AudienceEffect) = fx_quizmo_audience(0,
-            evt_get_variable(script, EVT_ARRAY(1)),
-            evt_get_variable(script, EVT_ARRAY(2)),
-            evt_get_variable(script, EVT_ARRAY(3)));
+            evt_get_variable(script, ArrayVar(1)),
+            evt_get_variable(script, ArrayVar(2)),
+            evt_get_variable(script, ArrayVar(3)));
         N(Quizmo_VannaTEffect) = fx_quizmo_assistant(0,
-            evt_get_variable(script, EVT_ARRAY(1)),
-            evt_get_variable(script, EVT_ARRAY(2)),
-            evt_get_variable(script, EVT_ARRAY(3)),
+            evt_get_variable(script, ArrayVar(1)),
+            evt_get_variable(script, ArrayVar(2)),
+            evt_get_variable(script, ArrayVar(3)),
             1.0f, 0);
 
         stageData = N(Quizmo_StageEffect)->data.quizmoStage;
@@ -341,7 +341,7 @@ ApiStatus N(Quizmo_SetVannaAnim_Wave)(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus N(Quizmo_ShouldQuizmoLeave)(Evt* script, s32 isInitialCall) {
-    evt_set_variable(script, EVT_VAR(0), gGameStatusPtr->debugQuizmo);
+    evt_set_variable(script, LocalVar(0), gGameStatusPtr->debugQuizmo);
     return ApiStatus_DONE2;
 }
 
@@ -370,8 +370,8 @@ ApiStatus N(Quizmo_AddViewRelativeOffset)(Evt* script, s32 isInitialCall) {
     Bytecode outVarZ = *args++;
 
     s32 cameraYaw = gCameras[gCurrentCameraID].currentYaw;
-    s32 outX = evt_get_variable(script, EVT_ARRAY(1)) - (z * cos_deg(cameraYaw));
-    s32 outZ = evt_get_variable(script, EVT_ARRAY(3)) - (z * sin_deg(cameraYaw));
+    s32 outX = evt_get_variable(script, ArrayVar(1)) - (z * cos_deg(cameraYaw));
+    s32 outZ = evt_get_variable(script, ArrayVar(3)) - (z * sin_deg(cameraYaw));
 
     outX -= x;
     outZ -= y;
@@ -431,9 +431,9 @@ ApiStatus N(Quizmo_UpdatePartnerPosition)(Evt* script, s32 isInitialCall) {
     f32* z = (f32*) &script->functionTemp[3];
 
     if (isInitialCall) {
-        *x = evt_get_float_variable(script, EVT_VAR(0)) / 60.0f;
-        *y = evt_get_float_variable(script, EVT_VAR(5)) / 60.0f;
-        *z = evt_get_float_variable(script, EVT_VAR(1)) / 60.0f;
+        *x = evt_get_float_variable(script, LocalVar(0)) / 60.0f;
+        *y = evt_get_float_variable(script, LocalVar(5)) / 60.0f;
+        *z = evt_get_float_variable(script, LocalVar(1)) / 60.0f;
         script->functionTemp[0] = 60;
     }
 

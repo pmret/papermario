@@ -2,7 +2,7 @@
 #include "sprite.h"
 
 void N(UnkFoldFunc)(void) {
-    UnkEntityStruct* temp_v0 = (UnkEntityStruct*) evt_get_variable(NULL, EVT_MAP_VAR(10));
+    UnkEntityStruct* temp_v0 = (UnkEntityStruct*) evt_get_variable(NULL, MapVar(10));
     FoldImageRecPart part;
     SpriteRasterInfo rasterInfo;
     Matrix4f sp40, sp80;

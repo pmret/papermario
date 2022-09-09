@@ -37,17 +37,17 @@ ApiStatus N(func_802A12C4_726224)(Evt* script, s32 isInitialCall) {
 #include "UseItem.inc.c"
 
 EvtScript N(main) = {
-    EVT_SET_CONST(EVT_VAR(10), 0x00000091)
+    EVT_SET_CONST(LocalVar(10), 0x00000091)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_EXEC_WAIT(N(DrinkItem))
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_SQUISH)
-    EVT_CALL(GetActorPos, ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-    EVT_ADD(EVT_VAR(1), 25)
-    EVT_CALL(ShowStartRecoveryShimmer, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 5)
+    EVT_CALL(GetActorPos, ACTOR_PLAYER, LocalVar(0), LocalVar(1), LocalVar(2))
+    EVT_ADD(LocalVar(1), 25)
+    EVT_CALL(ShowStartRecoveryShimmer, LocalVar(0), LocalVar(1), LocalVar(2), 5)
     EVT_CALL(N(func_802A12C4_726224))
     EVT_CALL(N(func_802A123C_72619C))
-    EVT_CALL(GetActorPos, ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-    EVT_ADD(EVT_VAR(1), 20)
+    EVT_CALL(GetActorPos, ACTOR_PLAYER, LocalVar(0), LocalVar(1), LocalVar(2))
+    EVT_ADD(LocalVar(1), 20)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_13)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(MoveBattleCamOver, 20)
@@ -102,8 +102,8 @@ EvtScript N(main) = {
     EVT_END_THREAD
     EVT_LOOP(10)
         EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_369)
-        EVT_CALL(PlayEffect, 0x6, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
-        EVT_CALL(PlayEffect, 0x6, 1, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
+        EVT_CALL(PlayEffect, 0x6, 0, LocalVar(0), LocalVar(1), LocalVar(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
+        EVT_CALL(PlayEffect, 0x6, 1, LocalVar(0), LocalVar(1), LocalVar(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
         EVT_WAIT(4)
     EVT_END_LOOP
     EVT_WAIT(10)

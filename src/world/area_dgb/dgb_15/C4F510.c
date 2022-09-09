@@ -50,10 +50,10 @@ EvtScript N(exitDoubleDoor_802419C8) = {
     EVT_SET_GROUP(EVT_GROUP_1B)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(UseDoorSounds, 3)
-    EVT_SET(EVT_VAR(0), 0)
-    EVT_SET(EVT_VAR(1), 19)
-    EVT_SET(EVT_VAR(2), 12)
-    EVT_SET(EVT_VAR(3), 14)
+    EVT_SET(LocalVar(0), 0)
+    EVT_SET(LocalVar(1), 19)
+    EVT_SET(LocalVar(2), 12)
+    EVT_SET(LocalVar(3), 14)
     EVT_EXEC(ExitDoubleDoor)
     EVT_WAIT(17)
     EVT_CALL(GotoMap, EVT_PTR("dgb_14"), 1)
@@ -66,10 +66,10 @@ EvtScript N(exitDoubleDoor_80241A7C) = {
     EVT_SET_GROUP(EVT_GROUP_1B)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(UseDoorSounds, 3)
-    EVT_SET(EVT_VAR(0), 1)
-    EVT_SET(EVT_VAR(1), 10)
-    EVT_SET(EVT_VAR(2), 19)
-    EVT_SET(EVT_VAR(3), 17)
+    EVT_SET(LocalVar(0), 1)
+    EVT_SET(LocalVar(1), 10)
+    EVT_SET(LocalVar(2), 19)
+    EVT_SET(LocalVar(3), 17)
     EVT_EXEC(ExitDoubleDoor)
     EVT_WAIT(17)
     EVT_CALL(GotoMap, EVT_PTR("dgb_17"), 0)
@@ -82,10 +82,10 @@ EvtScript N(exitSingleDoor_80241B30) = {
     EVT_SET_GROUP(EVT_GROUP_1B)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(UseDoorSounds, 0)
-    EVT_SET(EVT_VAR(0), 2)
-    EVT_SET(EVT_VAR(1), 6)
-    EVT_SET(EVT_VAR(2), 22)
-    EVT_SET(EVT_VAR(3), 1)
+    EVT_SET(LocalVar(0), 2)
+    EVT_SET(LocalVar(1), 6)
+    EVT_SET(LocalVar(2), 22)
+    EVT_SET(LocalVar(3), 1)
     EVT_EXEC(ExitSingleDoor)
     EVT_WAIT(17)
     EVT_CALL(GotoMap, EVT_PTR("dgb_16"), 0)
@@ -109,22 +109,22 @@ EvtScript N(80241BE4) = {
 };
 
 EvtScript N(enterSingleDoor_80241C88) = {
-    EVT_CALL(GetEntryID, EVT_VAR(0))
-    EVT_SWITCH(EVT_VAR(0))
+    EVT_CALL(GetEntryID, LocalVar(0))
+    EVT_SWITCH(LocalVar(0))
         EVT_CASE_EQ(0)
             EVT_CALL(UseDoorSounds, 3)
-            EVT_SET(EVT_VAR(2), 12)
-            EVT_SET(EVT_VAR(3), 14)
+            EVT_SET(LocalVar(2), 12)
+            EVT_SET(LocalVar(3), 14)
             EVT_EXEC_WAIT(EnterDoubleDoor)
         EVT_CASE_EQ(1)
             EVT_CALL(UseDoorSounds, 3)
-            EVT_SET(EVT_VAR(2), 19)
-            EVT_SET(EVT_VAR(3), 17)
+            EVT_SET(LocalVar(2), 19)
+            EVT_SET(LocalVar(3), 17)
             EVT_EXEC_WAIT(EnterDoubleDoor)
         EVT_CASE_EQ(2)
             EVT_CALL(UseDoorSounds, 0)
-            EVT_SET(EVT_VAR(2), 22)
-            EVT_SET(EVT_VAR(3), 1)
+            EVT_SET(LocalVar(2), 22)
+            EVT_SET(LocalVar(3), 1)
             EVT_EXEC_WAIT(EnterSingleDoor)
     EVT_END_SWITCH
     EVT_EXEC(N(80241BE4))
@@ -135,7 +135,7 @@ EvtScript N(enterSingleDoor_80241C88) = {
 EvtScript N(main) = {
     EVT_SET(GB_WorldLocation, 15)
     EVT_CALL(SetSpriteShading, -1)
-    EVT_SET(EVT_AREA_FLAG(1), 0)
+    EVT_SET(AreaFlag(1), 0)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
     EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
     EVT_CALL(SetCamEnabled, 0, 1)
@@ -155,8 +155,8 @@ static s32 N(pad_1E94)[] = {
 };
 
 EvtScript N(80241EA0) = {
-    EVT_CALL(GetBattleOutcome, EVT_VAR(0))
-    EVT_SWITCH(EVT_VAR(0))
+    EVT_CALL(GetBattleOutcome, LocalVar(0))
+    EVT_SWITCH(LocalVar(0))
         EVT_CASE_EQ(0)
             EVT_CALL(RemoveNpc, NPC_SELF)
         EVT_CASE_EQ(2)
@@ -228,24 +228,24 @@ s32 N(unk_missing_80242158)[] = {
 
 EvtScript N(80242184) = {
     EVT_LOOP(0)
-        EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_CALL(GetNpcPos, 0, EVT_VAR(1), EVT_VAR(2), EVT_VAR(3))
-        EVT_SUB(EVT_VAR(1), EVT_VAR(0))
-        EVT_IF_LT(EVT_VAR(1), 150)
+        EVT_CALL(GetPlayerPos, LocalVar(0), LocalVar(1), LocalVar(2))
+        EVT_CALL(GetNpcPos, 0, LocalVar(1), LocalVar(2), LocalVar(3))
+        EVT_SUB(LocalVar(1), LocalVar(0))
+        EVT_IF_LT(LocalVar(1), 150)
             EVT_BREAK_LOOP
         EVT_END_IF
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_SET(GF_DGB15_CloseCallWithTubba, 1)
-    EVT_SET(EVT_AREA_FLAG(1), 1)
+    EVT_SET(AreaFlag(1), 1)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(idle_80242238) = {
     EVT_LOOP(0)
-        EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_IF_GE(EVT_VAR(0), -1150)
+        EVT_CALL(GetPlayerPos, LocalVar(0), LocalVar(1), LocalVar(2))
+        EVT_IF_GE(LocalVar(0), -1150)
             EVT_BREAK_LOOP
         EVT_END_IF
         EVT_WAIT(1)
@@ -270,10 +270,10 @@ EvtScript N(idle_80242238) = {
     EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_world_tubba_Palette_00_Anim_10, NPC_ANIM_world_tubba_Palette_00_Anim_6, 0, MESSAGE_ID(0x0E, 0x00F3))
     EVT_WAIT(15)
     EVT_THREAD
-        EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_CALL(UseSettingsFrom, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+        EVT_CALL(GetPlayerPos, LocalVar(0), LocalVar(1), LocalVar(2))
+        EVT_CALL(UseSettingsFrom, 0, LocalVar(0), LocalVar(1), LocalVar(2))
         EVT_CALL(SetCamSpeed, 0, EVT_FIXED(2.0))
-        EVT_CALL(SetPanTarget, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+        EVT_CALL(SetPanTarget, 0, LocalVar(0), LocalVar(1), LocalVar(2))
         EVT_CALL(WaitForCam, 0, EVT_FIXED(1.0))
         EVT_CALL(PanToTarget, 0, 0, 0)
         EVT_CALL(DisablePlayerInput, FALSE)
@@ -284,15 +284,15 @@ EvtScript N(idle_80242238) = {
 };
 
 EvtScript N(802424E8) = {
-    EVT_CALL(GetNpcPos, NPC_SELF, EVT_VAR(6), EVT_VAR(7), EVT_VAR(8))
+    EVT_CALL(GetNpcPos, NPC_SELF, LocalVar(6), LocalVar(7), LocalVar(8))
     EVT_LOOP(0)
         EVT_WAIT(1)
-        EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_CALL(GetNpcPos, NPC_SELF, EVT_VAR(3), EVT_VAR(4), EVT_VAR(5))
-        EVT_IF_NE(EVT_VAR(3), EVT_VAR(6))
+        EVT_CALL(GetPlayerPos, LocalVar(0), LocalVar(1), LocalVar(2))
+        EVT_CALL(GetNpcPos, NPC_SELF, LocalVar(3), LocalVar(4), LocalVar(5))
+        EVT_IF_NE(LocalVar(3), LocalVar(6))
             EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_20F6, 65538)
-            EVT_CALL(GetDist2D, EVT_VAR(10), EVT_VAR(0), EVT_VAR(2), EVT_VAR(3), EVT_VAR(5))
-            EVT_SWITCH(EVT_VAR(10))
+            EVT_CALL(GetDist2D, LocalVar(10), LocalVar(0), LocalVar(2), LocalVar(3), LocalVar(5))
+            EVT_SWITCH(LocalVar(10))
                 EVT_CASE_LT(200)
                     EVT_THREAD
                         EVT_CALL(ShakeCam, 0, 0, 5, EVT_FIXED(1.6))
@@ -315,7 +315,7 @@ EvtScript N(802424E8) = {
             EVT_WAIT(12)
         EVT_ELSE
         EVT_END_IF
-        EVT_CALL(GetNpcPos, NPC_SELF, EVT_VAR(6), EVT_VAR(7), EVT_VAR(8))
+        EVT_CALL(GetNpcPos, NPC_SELF, LocalVar(6), LocalVar(7), LocalVar(8))
     EVT_END_LOOP
     EVT_RETURN
     EVT_END
@@ -426,24 +426,24 @@ EvtScript N(80242AD0) = {
     EVT_SET_GROUP(EVT_GROUP_00)
     EVT_SUSPEND_GROUP(1)
     EVT_CALL(ShowKeyChoicePopup)
-    EVT_IF_EQ(EVT_VAR(0), 0)
+    EVT_IF_EQ(LocalVar(0), 0)
         EVT_CALL(ShowMessageAtScreenPos, MESSAGE_ID(0x1D, 0x00D8), 160, 40)
         EVT_CALL(CloseChoicePopup)
         EVT_RESUME_GROUP(1)
         EVT_RETURN
     EVT_END_IF
-    EVT_IF_EQ(EVT_VAR(0), -1)
+    EVT_IF_EQ(LocalVar(0), -1)
         EVT_CALL(CloseChoicePopup)
         EVT_RESUME_GROUP(1)
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(FindKeyItem, ITEM_TUBBA_CASTLE_KEY, EVT_VAR(0))
-    EVT_CALL(RemoveKeyItemAt, EVT_VAR(0))
+    EVT_CALL(FindKeyItem, ITEM_TUBBA_CASTLE_KEY, LocalVar(0))
+    EVT_CALL(RemoveKeyItemAt, LocalVar(0))
     EVT_CALL(CloseChoicePopup)
     EVT_SET(GF_DGB15_UnlockedUpperFoyer, 1)
-    EVT_CALL(N(GetEntityPosition), EVT_MAP_VAR(0), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-    EVT_CALL(PlaySoundAt, 0x269, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-    EVT_SET(EVT_VAR(0), EVT_MAP_VAR(0))
+    EVT_CALL(N(GetEntityPosition), MapVar(0), LocalVar(0), LocalVar(1), LocalVar(2))
+    EVT_CALL(PlaySoundAt, 0x269, 0, LocalVar(0), LocalVar(1), LocalVar(2))
+    EVT_SET(LocalVar(0), MapVar(0))
     EVT_CALL(N(SetEntityFlags100000))
     EVT_RESUME_GROUP(1)
     EVT_UNBIND
@@ -461,7 +461,7 @@ EvtScript N(makeEntities) = {
     EVT_IF_EQ(GF_DGB15_UnlockedUpperFoyer, 0)
         EVT_CALL(MakeEntity, EVT_PTR(Entity_Padlock), 130, 8, 175, -80, MAKE_ENTITY_END)
         EVT_CALL(AssignScript, EVT_PTR(N(80242C38)))
-        EVT_SET(EVT_MAP_VAR(0), EVT_VAR(0))
+        EVT_SET(MapVar(0), LocalVar(0))
     EVT_END_IF
     EVT_RETURN
     EVT_END

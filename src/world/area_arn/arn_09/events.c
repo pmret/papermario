@@ -7,11 +7,11 @@ extern s16 Entity_ScriptSpring_AnimLaunch[];
 EvtScript N(80240140) = {
     EVT_SET_GROUP(EVT_GROUP_1B)
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_SET(EVT_VAR(0), 0)
-    EVT_SET(EVT_VAR(1), 5)
-    EVT_SET(EVT_VAR(2), 0)
-    EVT_SET(EVT_VAR(4), 1)
-    EVT_SET(EVT_VAR(3), 1)
+    EVT_SET(LocalVar(0), 0)
+    EVT_SET(LocalVar(1), 5)
+    EVT_SET(LocalVar(2), 0)
+    EVT_SET(LocalVar(4), 1)
+    EVT_SET(LocalVar(3), 1)
     EVT_EXEC(0x80285DFC)
     EVT_WAIT(17)
     EVT_CALL(GotoMap, EVT_PTR("arn_10"), 0)
@@ -27,12 +27,12 @@ EvtScript N(802401F4) = {
 };
 
 EvtScript N(80240220) = {
-    EVT_CALL(GetEntryID, EVT_VAR(0))
-    EVT_SWITCH(EVT_VAR(0))
+    EVT_CALL(GetEntryID, LocalVar(0))
+    EVT_SWITCH(LocalVar(0))
         EVT_CASE_EQ(0)
-            EVT_SET(EVT_VAR(2), 0)
-            EVT_SET(EVT_VAR(4), 1)
-            EVT_SET(EVT_VAR(3), 1)
+            EVT_SET(LocalVar(2), 0)
+            EVT_SET(LocalVar(4), 1)
+            EVT_SET(LocalVar(3), 1)
             EVT_EXEC_WAIT(0x80285E24)
             EVT_EXEC(N(802401F4))
         EVT_CASE_EQ(1)
@@ -63,10 +63,10 @@ static s32 N(pad_398)[] = {
 };
 
 EvtScript N(802403A0) = {
-    EVT_IF_EQ(EVT_AREA_FLAG(1), 1)
+    EVT_IF_EQ(AreaFlag(1), 1)
         EVT_RETURN
     EVT_END_IF
-    EVT_SET(EVT_AREA_FLAG(1), 1)
+    EVT_SET(AreaFlag(1), 1)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(SetPlayerActionState, 6)
@@ -93,10 +93,10 @@ static s32 N(pad_4CC)[] = {
 };
 
 EvtScript N(802404D0) = {
-    EVT_IF_EQ(EVT_AREA_FLAG(1), 0)
+    EVT_IF_EQ(AreaFlag(1), 0)
         EVT_RETURN
     EVT_END_IF
-    EVT_SET(EVT_AREA_FLAG(1), 1)
+    EVT_SET(AreaFlag(1), 1)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(SetPlayerActionState, 8)
     EVT_CALL(func_802D2484)
@@ -104,7 +104,7 @@ EvtScript N(802404D0) = {
     EVT_CALL(SetPlayerJumpscale, EVT_FIXED(1.5))
     EVT_CALL(PlayerJump, 50, 0, 0, 16)
     EVT_CALL(SetPlayerAnimation, ANIM_10002)
-    EVT_SET(EVT_AREA_FLAG(1), 0)
+    EVT_SET(AreaFlag(1), 0)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_RETURN
     EVT_END

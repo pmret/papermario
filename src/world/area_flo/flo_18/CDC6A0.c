@@ -45,10 +45,10 @@ static s32 N(pad_8B8)[] = {
 
 EvtScript N(updateTexturePan_802408C0) = {
     EVT_SET_GROUP(EVT_GROUP_00)
-    EVT_IF_EQ(EVT_VAR(5), 1)
-        EVT_IF_EQ(EVT_VAR(6), 1)
-            EVT_IF_EQ(EVT_VAR(7), 1)
-                EVT_IF_EQ(EVT_VAR(8), 1)
+    EVT_IF_EQ(LocalVar(5), 1)
+        EVT_IF_EQ(LocalVar(6), 1)
+            EVT_IF_EQ(LocalVar(7), 1)
+                EVT_IF_EQ(LocalVar(8), 1)
                     EVT_CALL(N(UpdateTexturePanSmooth))
                     EVT_RETURN
                 EVT_END_IF
@@ -100,41 +100,41 @@ EvtScript N(main) = {
     EVT_CALL(EnableTexPanning, 16, 1)
     EVT_CALL(EnableTexPanning, 17, 1)
     EVT_THREAD
-        EVT_SET(EVT_VAR(0), 1)
-        EVT_SET(EVT_VAR(1), -140)
-        EVT_SET(EVT_VAR(2), 0)
-        EVT_SET(EVT_VAR(3), 0)
-        EVT_SET(EVT_VAR(4), 0)
-        EVT_SET(EVT_VAR(5), 1)
-        EVT_SET(EVT_VAR(6), 0)
-        EVT_SET(EVT_VAR(7), 0)
-        EVT_SET(EVT_VAR(8), 0)
-        EVT_SET(EVT_VAR(9), 0)
-        EVT_SET(EVT_VAR(10), 0)
-        EVT_SET(EVT_VAR(11), 0)
-        EVT_SET(EVT_VAR(12), 0)
+        EVT_SET(LocalVar(0), 1)
+        EVT_SET(LocalVar(1), -140)
+        EVT_SET(LocalVar(2), 0)
+        EVT_SET(LocalVar(3), 0)
+        EVT_SET(LocalVar(4), 0)
+        EVT_SET(LocalVar(5), 1)
+        EVT_SET(LocalVar(6), 0)
+        EVT_SET(LocalVar(7), 0)
+        EVT_SET(LocalVar(8), 0)
+        EVT_SET(LocalVar(9), 0)
+        EVT_SET(LocalVar(10), 0)
+        EVT_SET(LocalVar(11), 0)
+        EVT_SET(LocalVar(12), 0)
         EVT_EXEC(N(updateTexturePan_802408C0))
     EVT_END_THREAD
     EVT_THREAD
-        EVT_SET(EVT_VAR(0), 2)
-        EVT_SET(EVT_VAR(1), -200)
-        EVT_SET(EVT_VAR(2), 0)
-        EVT_SET(EVT_VAR(3), 0)
-        EVT_SET(EVT_VAR(4), 0)
-        EVT_SET(EVT_VAR(5), 1)
-        EVT_SET(EVT_VAR(6), 0)
-        EVT_SET(EVT_VAR(7), 0)
-        EVT_SET(EVT_VAR(8), 0)
-        EVT_SET(EVT_VAR(9), 0)
-        EVT_SET(EVT_VAR(10), 0)
-        EVT_SET(EVT_VAR(11), 0)
-        EVT_SET(EVT_VAR(12), 0)
+        EVT_SET(LocalVar(0), 2)
+        EVT_SET(LocalVar(1), -200)
+        EVT_SET(LocalVar(2), 0)
+        EVT_SET(LocalVar(3), 0)
+        EVT_SET(LocalVar(4), 0)
+        EVT_SET(LocalVar(5), 1)
+        EVT_SET(LocalVar(6), 0)
+        EVT_SET(LocalVar(7), 0)
+        EVT_SET(LocalVar(8), 0)
+        EVT_SET(LocalVar(9), 0)
+        EVT_SET(LocalVar(10), 0)
+        EVT_SET(LocalVar(11), 0)
+        EVT_SET(LocalVar(12), 0)
         EVT_EXEC(N(updateTexturePan_802408C0))
     EVT_END_THREAD
-    EVT_CALL(GetEntryID, EVT_VAR(0))
-    EVT_IF_EQ(EVT_VAR(0), 0)
+    EVT_CALL(GetEntryID, LocalVar(0))
+    EVT_IF_EQ(LocalVar(0), 0)
         EVT_CALL(ModifyColliderFlags, 0, 1, 0x7FFFFE00)
-        EVT_SET(EVT_VAR(0), EVT_PTR(N(802409B8)))
+        EVT_SET(LocalVar(0), EVT_PTR(N(802409B8)))
         EVT_EXEC(EnterWalk)
     EVT_ELSE
         EVT_EXEC(N(80244058))
@@ -165,73 +165,73 @@ EvtScript N(80240E90) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_SET(EVT_VAR(0), 6)
+    EVT_SET(LocalVar(0), 6)
     EVT_LOOP(5)
         EVT_CALL(PlayEffect, 0x5E, 0, EVT_FIXED(-16.0), EVT_FIXED(102.0), EVT_FIXED(-4.1), EVT_FIXED(80.9), EVT_FIXED(102.0), EVT_FIXED(-4.1), EVT_FIXED(0.5), 6, 0, 0, 0, 0)
         EVT_CALL(N(func_80240340_CDC9E0))
-        EVT_WAIT(EVT_VAR(0))
-        EVT_ADD(EVT_VAR(0), 2)
+        EVT_WAIT(LocalVar(0))
+        EVT_ADD(LocalVar(0), 2)
         EVT_CALL(PlayEffect, 0x5E, 0, EVT_FIXED(80.9), EVT_FIXED(102.0), EVT_FIXED(-4.1), EVT_FIXED(-16.0), EVT_FIXED(102.0), EVT_FIXED(-4.1), EVT_FIXED(0.5), 6, 0, 0, 0, 0)
         EVT_CALL(N(func_80240340_CDC9E0))
-        EVT_WAIT(EVT_VAR(0))
-        EVT_ADD(EVT_VAR(0), 2)
+        EVT_WAIT(LocalVar(0))
+        EVT_ADD(LocalVar(0), 2)
     EVT_END_LOOP
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(80241094) = {
-    EVT_CALL(EnableModel, EVT_VAR(15), 1)
-    EVT_SET(EVT_VAR(14), 159)
-    EVT_LOOP(EVT_VAR(14))
-        EVT_ADDF(EVT_VAR(3), 0)
-        EVT_ADDF(EVT_VAR(4), EVT_FIXED(0.0))
-        EVT_SETF(EVT_VAR(5), EVT_FIXED(0.01))
-        EVT_ADDF(EVT_VAR(0), EVT_VAR(3))
-        EVT_ADDF(EVT_VAR(1), EVT_VAR(4))
-        EVT_ADDF(EVT_VAR(2), EVT_VAR(5))
-        EVT_MULF(EVT_VAR(6), EVT_FIXED(1.01))
-        EVT_ADDF(EVT_VAR(7), EVT_FIXED(0.01))
-        EVT_SETF(EVT_VAR(8), EVT_VAR(6))
-        EVT_CALL(N(UnkFloatFunc), EVT_VAR(14), EVT_VAR(10), EVT_FIXED(0.0), EVT_FIXED(0.203125), 15, 0, 0)
-        EVT_ADDF(EVT_VAR(8), EVT_VAR(10))
-        EVT_SETF(EVT_VAR(9), EVT_VAR(7))
-        EVT_CALL(N(UnkFloatFunc), EVT_VAR(14), EVT_VAR(10), EVT_FIXED(0.0), EVT_FIXED(0.203125), 20, 0, 90)
-        EVT_ADDF(EVT_VAR(9), EVT_VAR(10))
-        EVT_SETF(EVT_VAR(10), EVT_VAR(0))
-        EVT_MULF(EVT_VAR(10), EVT_FIXED(10.0))
-        EVT_CALL(TranslateModel, EVT_VAR(15), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_CALL(ScaleModel, EVT_VAR(15), EVT_VAR(8), EVT_VAR(9), 1)
-        EVT_CALL(RotateModel, EVT_VAR(15), EVT_VAR(10), 0, 0, 1)
+    EVT_CALL(EnableModel, LocalVar(15), 1)
+    EVT_SET(LocalVar(14), 159)
+    EVT_LOOP(LocalVar(14))
+        EVT_ADDF(LocalVar(3), 0)
+        EVT_ADDF(LocalVar(4), EVT_FIXED(0.0))
+        EVT_SETF(LocalVar(5), EVT_FIXED(0.01))
+        EVT_ADDF(LocalVar(0), LocalVar(3))
+        EVT_ADDF(LocalVar(1), LocalVar(4))
+        EVT_ADDF(LocalVar(2), LocalVar(5))
+        EVT_MULF(LocalVar(6), EVT_FIXED(1.01))
+        EVT_ADDF(LocalVar(7), EVT_FIXED(0.01))
+        EVT_SETF(LocalVar(8), LocalVar(6))
+        EVT_CALL(N(UnkFloatFunc), LocalVar(14), LocalVar(10), EVT_FIXED(0.0), EVT_FIXED(0.203125), 15, 0, 0)
+        EVT_ADDF(LocalVar(8), LocalVar(10))
+        EVT_SETF(LocalVar(9), LocalVar(7))
+        EVT_CALL(N(UnkFloatFunc), LocalVar(14), LocalVar(10), EVT_FIXED(0.0), EVT_FIXED(0.203125), 20, 0, 90)
+        EVT_ADDF(LocalVar(9), LocalVar(10))
+        EVT_SETF(LocalVar(10), LocalVar(0))
+        EVT_MULF(LocalVar(10), EVT_FIXED(10.0))
+        EVT_CALL(TranslateModel, LocalVar(15), LocalVar(0), LocalVar(1), LocalVar(2))
+        EVT_CALL(ScaleModel, LocalVar(15), LocalVar(8), LocalVar(9), 1)
+        EVT_CALL(RotateModel, LocalVar(15), LocalVar(10), 0, 0, 1)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(EnableModel, EVT_VAR(15), 0)
+    EVT_CALL(EnableModel, LocalVar(15), 0)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(80241284) = {
-    EVT_SET(EVT_VAR(14), 0)
+    EVT_SET(LocalVar(14), 0)
     EVT_LABEL(0)
     EVT_IF_GE(GB_FLO18_MachineDamage_Right, 3)
         EVT_RETURN
     EVT_END_IF
-    EVT_SETF(EVT_VAR(0), EVT_FIXED(132.0))
-    EVT_SETF(EVT_VAR(1), EVT_FIXED(90.0))
-    EVT_SETF(EVT_VAR(2), EVT_FIXED(-30.0))
-    EVT_CALL(RandInt, 100, EVT_VAR(3))
-    EVT_ADDF(EVT_VAR(3), -50)
-    EVT_DIVF(EVT_VAR(3), EVT_FIXED(200.0))
-    EVT_SETF(EVT_VAR(4), EVT_FIXED(1.0))
-    EVT_SETF(EVT_VAR(5), 0)
-    EVT_SETF(EVT_VAR(6), EVT_FIXED(0.296875))
-    EVT_SETF(EVT_VAR(7), EVT_FIXED(0.296875))
-    EVT_SET(EVT_VAR(15), EVT_VAR(14))
-    EVT_ADD(EVT_VAR(15), 10000)
+    EVT_SETF(LocalVar(0), EVT_FIXED(132.0))
+    EVT_SETF(LocalVar(1), EVT_FIXED(90.0))
+    EVT_SETF(LocalVar(2), EVT_FIXED(-30.0))
+    EVT_CALL(RandInt, 100, LocalVar(3))
+    EVT_ADDF(LocalVar(3), -50)
+    EVT_DIVF(LocalVar(3), EVT_FIXED(200.0))
+    EVT_SETF(LocalVar(4), EVT_FIXED(1.0))
+    EVT_SETF(LocalVar(5), 0)
+    EVT_SETF(LocalVar(6), EVT_FIXED(0.296875))
+    EVT_SETF(LocalVar(7), EVT_FIXED(0.296875))
+    EVT_SET(LocalVar(15), LocalVar(14))
+    EVT_ADD(LocalVar(15), 10000)
     EVT_EXEC(N(80241094))
-    EVT_ADD(EVT_VAR(14), 1)
-    EVT_IF_GE(EVT_VAR(14), 16)
-        EVT_SET(EVT_VAR(14), 0)
+    EVT_ADD(LocalVar(14), 1)
+    EVT_IF_GE(LocalVar(14), 16)
+        EVT_SET(LocalVar(14), 0)
     EVT_END_IF
     EVT_WAIT(10)
     EVT_GOTO(0)
@@ -240,172 +240,172 @@ EvtScript N(80241284) = {
 };
 
 EvtScript N(802413F0) = {
-    EVT_IF_EQ(EVT_MAP_FLAG(2), 1)
+    EVT_IF_EQ(MapFlag(2), 1)
         EVT_RETURN
     EVT_END_IF
-    EVT_SET(EVT_MAP_FLAG(2), 1)
-    EVT_SET(EVT_VAR(15), 0)
+    EVT_SET(MapFlag(2), 1)
+    EVT_SET(LocalVar(15), 0)
     EVT_LOOP(12)
-        EVT_CALL(RandInt, 80, EVT_VAR(0))
-        EVT_SUB(EVT_VAR(0), 40)
-        EVT_CALL(RandInt, 50, EVT_VAR(1))
-        EVT_CALL(RandInt, 50, EVT_VAR(2))
-        EVT_SUB(EVT_VAR(2), 25)
-        EVT_CALL(PlayEffect, 0x0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 5, 10, 1, 1, 0, 0, 0, 0, 0, 0)
-        EVT_ADD(EVT_VAR(15), 1)
-        EVT_CALL(N(UnkFloatFunc), EVT_VAR(15), EVT_VAR(14), EVT_FIXED(1.0), EVT_FIXED(1.09375), 2, 0, 0)
-        EVT_CALL(N(UnkFloatFunc), EVT_VAR(15), EVT_VAR(13), EVT_FIXED(1.09375), EVT_FIXED(1.0), 2, 0, 0)
-        EVT_SETF(EVT_VAR(0), EVT_VAR(14))
-        EVT_SETF(EVT_VAR(1), EVT_VAR(13))
-        EVT_SETF(EVT_VAR(2), EVT_VAR(14))
+        EVT_CALL(RandInt, 80, LocalVar(0))
+        EVT_SUB(LocalVar(0), 40)
+        EVT_CALL(RandInt, 50, LocalVar(1))
+        EVT_CALL(RandInt, 50, LocalVar(2))
+        EVT_SUB(LocalVar(2), 25)
+        EVT_CALL(PlayEffect, 0x0, LocalVar(0), LocalVar(1), LocalVar(2), 5, 10, 1, 1, 0, 0, 0, 0, 0, 0)
+        EVT_ADD(LocalVar(15), 1)
+        EVT_CALL(N(UnkFloatFunc), LocalVar(15), LocalVar(14), EVT_FIXED(1.0), EVT_FIXED(1.09375), 2, 0, 0)
+        EVT_CALL(N(UnkFloatFunc), LocalVar(15), LocalVar(13), EVT_FIXED(1.09375), EVT_FIXED(1.0), 2, 0, 0)
+        EVT_SETF(LocalVar(0), LocalVar(14))
+        EVT_SETF(LocalVar(1), LocalVar(13))
+        EVT_SETF(LocalVar(2), LocalVar(14))
         EVT_IF_EQ(GB_FLO18_MachineDamage_Left, 0)
-            EVT_CALL(ScaleModel, 31, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-            EVT_CALL(ScaleModel, 32, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+            EVT_CALL(ScaleModel, 31, LocalVar(0), LocalVar(1), LocalVar(2))
+            EVT_CALL(ScaleModel, 32, LocalVar(0), LocalVar(1), LocalVar(2))
         EVT_END_IF
         EVT_IF_EQ(GB_FLO18_MachineDamage_Right, 0)
-            EVT_CALL(ScaleModel, 19, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-            EVT_CALL(ScaleModel, 20, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+            EVT_CALL(ScaleModel, 19, LocalVar(0), LocalVar(1), LocalVar(2))
+            EVT_CALL(ScaleModel, 20, LocalVar(0), LocalVar(1), LocalVar(2))
         EVT_END_IF
         EVT_IF_LE(GB_FLO18_MachineDamage_Left, 1)
-            EVT_CALL(ScaleModel, 21, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+            EVT_CALL(ScaleModel, 21, LocalVar(0), LocalVar(1), LocalVar(2))
         EVT_END_IF
         EVT_IF_LE(GB_FLO18_MachineDamage_Left, 2)
             EVT_IF_LE(GB_FLO18_MachineDamage_Right, 1)
-                EVT_CALL(ScaleModel, 22, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-                EVT_CALL(ScaleModel, 23, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-                EVT_CALL(ScaleModel, 24, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-                EVT_CALL(ScaleModel, 25, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-                EVT_CALL(ScaleModel, 26, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+                EVT_CALL(ScaleModel, 22, LocalVar(0), LocalVar(1), LocalVar(2))
+                EVT_CALL(ScaleModel, 23, LocalVar(0), LocalVar(1), LocalVar(2))
+                EVT_CALL(ScaleModel, 24, LocalVar(0), LocalVar(1), LocalVar(2))
+                EVT_CALL(ScaleModel, 25, LocalVar(0), LocalVar(1), LocalVar(2))
+                EVT_CALL(ScaleModel, 26, LocalVar(0), LocalVar(1), LocalVar(2))
             EVT_END_IF
         EVT_END_IF
-        EVT_CALL(ScaleModel, 27, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+        EVT_CALL(ScaleModel, 27, LocalVar(0), LocalVar(1), LocalVar(2))
         EVT_IF_LE(GB_FLO18_MachineDamage_Left, 2)
             EVT_IF_LE(GB_FLO18_MachineDamage_Right, 2)
-                EVT_CALL(ScaleModel, 29, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-                EVT_CALL(ScaleModel, 41, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-                EVT_CALL(ScaleModel, 33, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+                EVT_CALL(ScaleModel, 29, LocalVar(0), LocalVar(1), LocalVar(2))
+                EVT_CALL(ScaleModel, 41, LocalVar(0), LocalVar(1), LocalVar(2))
+                EVT_CALL(ScaleModel, 33, LocalVar(0), LocalVar(1), LocalVar(2))
             EVT_END_IF
         EVT_END_IF
-        EVT_CALL(ScaleModel, 36, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_CALL(ScaleModel, 37, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_CALL(ScaleModel, 38, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_CALL(ScaleModel, 39, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_CALL(ScaleModel, 40, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_CALL(ScaleModel, 34, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_SUBF(EVT_VAR(0), EVT_FIXED(1.046875))
-        EVT_MULF(EVT_VAR(0), EVT_FIXED(100.0))
+        EVT_CALL(ScaleModel, 36, LocalVar(0), LocalVar(1), LocalVar(2))
+        EVT_CALL(ScaleModel, 37, LocalVar(0), LocalVar(1), LocalVar(2))
+        EVT_CALL(ScaleModel, 38, LocalVar(0), LocalVar(1), LocalVar(2))
+        EVT_CALL(ScaleModel, 39, LocalVar(0), LocalVar(1), LocalVar(2))
+        EVT_CALL(ScaleModel, 40, LocalVar(0), LocalVar(1), LocalVar(2))
+        EVT_CALL(ScaleModel, 34, LocalVar(0), LocalVar(1), LocalVar(2))
+        EVT_SUBF(LocalVar(0), EVT_FIXED(1.046875))
+        EVT_MULF(LocalVar(0), EVT_FIXED(100.0))
         EVT_IF_EQ(GB_FLO18_MachineDamage_Left, 0)
-            EVT_CALL(RotateModel, 31, EVT_VAR(0), 0, 0, 1)
-            EVT_CALL(RotateModel, 32, EVT_VAR(0), 0, 0, 1)
+            EVT_CALL(RotateModel, 31, LocalVar(0), 0, 0, 1)
+            EVT_CALL(RotateModel, 32, LocalVar(0), 0, 0, 1)
         EVT_END_IF
         EVT_IF_EQ(GB_FLO18_MachineDamage_Right, 0)
-            EVT_CALL(RotateModel, 19, EVT_VAR(0), 0, 0, 1)
-            EVT_CALL(RotateModel, 20, EVT_VAR(0), 0, 0, 1)
+            EVT_CALL(RotateModel, 19, LocalVar(0), 0, 0, 1)
+            EVT_CALL(RotateModel, 20, LocalVar(0), 0, 0, 1)
         EVT_END_IF
         EVT_IF_LE(GB_FLO18_MachineDamage_Left, 1)
-            EVT_CALL(RotateModel, 21, EVT_VAR(0), 0, 0, 1)
+            EVT_CALL(RotateModel, 21, LocalVar(0), 0, 0, 1)
         EVT_END_IF
         EVT_IF_LE(GB_FLO18_MachineDamage_Left, 2)
             EVT_IF_LE(GB_FLO18_MachineDamage_Right, 1)
-                EVT_CALL(RotateModel, 22, EVT_VAR(0), 0, 0, 1)
-                EVT_CALL(RotateModel, 23, EVT_VAR(0), 0, 0, 1)
-                EVT_CALL(RotateModel, 24, EVT_VAR(0), 0, 0, 1)
-                EVT_CALL(RotateModel, 25, EVT_VAR(0), 0, 0, 1)
-                EVT_CALL(RotateModel, 26, EVT_VAR(0), 0, 0, 1)
+                EVT_CALL(RotateModel, 22, LocalVar(0), 0, 0, 1)
+                EVT_CALL(RotateModel, 23, LocalVar(0), 0, 0, 1)
+                EVT_CALL(RotateModel, 24, LocalVar(0), 0, 0, 1)
+                EVT_CALL(RotateModel, 25, LocalVar(0), 0, 0, 1)
+                EVT_CALL(RotateModel, 26, LocalVar(0), 0, 0, 1)
             EVT_END_IF
         EVT_END_IF
-        EVT_CALL(RotateModel, 27, EVT_VAR(0), 0, 0, 1)
+        EVT_CALL(RotateModel, 27, LocalVar(0), 0, 0, 1)
         EVT_IF_LE(GB_FLO18_MachineDamage_Left, 2)
             EVT_IF_LE(GB_FLO18_MachineDamage_Right, 2)
-                EVT_CALL(RotateModel, 29, EVT_VAR(0), 0, 0, 1)
-                EVT_CALL(RotateModel, 41, EVT_VAR(0), 0, 0, 1)
-                EVT_CALL(RotateModel, 33, EVT_VAR(0), 0, 0, 1)
+                EVT_CALL(RotateModel, 29, LocalVar(0), 0, 0, 1)
+                EVT_CALL(RotateModel, 41, LocalVar(0), 0, 0, 1)
+                EVT_CALL(RotateModel, 33, LocalVar(0), 0, 0, 1)
             EVT_END_IF
         EVT_END_IF
-        EVT_CALL(RotateModel, 36, EVT_VAR(0), 0, 0, 1)
-        EVT_CALL(RotateModel, 37, EVT_VAR(0), 0, 0, 1)
-        EVT_CALL(RotateModel, 38, EVT_VAR(0), 0, 0, 1)
-        EVT_CALL(RotateModel, 39, EVT_VAR(0), 0, 0, 1)
-        EVT_CALL(RotateModel, 40, EVT_VAR(0), 0, 0, 1)
-        EVT_CALL(RotateModel, 34, EVT_VAR(0), 0, 0, 1)
+        EVT_CALL(RotateModel, 36, LocalVar(0), 0, 0, 1)
+        EVT_CALL(RotateModel, 37, LocalVar(0), 0, 0, 1)
+        EVT_CALL(RotateModel, 38, LocalVar(0), 0, 0, 1)
+        EVT_CALL(RotateModel, 39, LocalVar(0), 0, 0, 1)
+        EVT_CALL(RotateModel, 40, LocalVar(0), 0, 0, 1)
+        EVT_CALL(RotateModel, 34, LocalVar(0), 0, 0, 1)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_SETF(EVT_VAR(0), 1)
-    EVT_SETF(EVT_VAR(1), 1)
-    EVT_SETF(EVT_VAR(2), 1)
+    EVT_SETF(LocalVar(0), 1)
+    EVT_SETF(LocalVar(1), 1)
+    EVT_SETF(LocalVar(2), 1)
     EVT_IF_EQ(GB_FLO18_MachineDamage_Left, 0)
-        EVT_CALL(ScaleModel, 31, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_CALL(ScaleModel, 32, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+        EVT_CALL(ScaleModel, 31, LocalVar(0), LocalVar(1), LocalVar(2))
+        EVT_CALL(ScaleModel, 32, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_END_IF
     EVT_IF_EQ(GB_FLO18_MachineDamage_Right, 0)
-        EVT_CALL(ScaleModel, 19, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_CALL(ScaleModel, 20, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+        EVT_CALL(ScaleModel, 19, LocalVar(0), LocalVar(1), LocalVar(2))
+        EVT_CALL(ScaleModel, 20, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_END_IF
     EVT_IF_LE(GB_FLO18_MachineDamage_Left, 1)
-        EVT_CALL(ScaleModel, 21, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+        EVT_CALL(ScaleModel, 21, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_END_IF
     EVT_IF_LE(GB_FLO18_MachineDamage_Left, 2)
         EVT_IF_LE(GB_FLO18_MachineDamage_Right, 1)
-            EVT_CALL(ScaleModel, 22, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-            EVT_CALL(ScaleModel, 23, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-            EVT_CALL(ScaleModel, 24, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-            EVT_CALL(ScaleModel, 25, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-            EVT_CALL(ScaleModel, 26, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+            EVT_CALL(ScaleModel, 22, LocalVar(0), LocalVar(1), LocalVar(2))
+            EVT_CALL(ScaleModel, 23, LocalVar(0), LocalVar(1), LocalVar(2))
+            EVT_CALL(ScaleModel, 24, LocalVar(0), LocalVar(1), LocalVar(2))
+            EVT_CALL(ScaleModel, 25, LocalVar(0), LocalVar(1), LocalVar(2))
+            EVT_CALL(ScaleModel, 26, LocalVar(0), LocalVar(1), LocalVar(2))
         EVT_END_IF
     EVT_END_IF
-    EVT_CALL(ScaleModel, 27, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_CALL(ScaleModel, 27, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_IF_LE(GB_FLO18_MachineDamage_Left, 2)
         EVT_IF_LE(GB_FLO18_MachineDamage_Right, 2)
-            EVT_CALL(ScaleModel, 29, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-            EVT_CALL(ScaleModel, 41, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-            EVT_CALL(ScaleModel, 33, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+            EVT_CALL(ScaleModel, 29, LocalVar(0), LocalVar(1), LocalVar(2))
+            EVT_CALL(ScaleModel, 41, LocalVar(0), LocalVar(1), LocalVar(2))
+            EVT_CALL(ScaleModel, 33, LocalVar(0), LocalVar(1), LocalVar(2))
         EVT_END_IF
     EVT_END_IF
-    EVT_CALL(ScaleModel, 36, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-    EVT_CALL(ScaleModel, 37, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-    EVT_CALL(ScaleModel, 38, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-    EVT_CALL(ScaleModel, 39, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-    EVT_CALL(ScaleModel, 40, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-    EVT_CALL(ScaleModel, 34, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_CALL(ScaleModel, 36, LocalVar(0), LocalVar(1), LocalVar(2))
+    EVT_CALL(ScaleModel, 37, LocalVar(0), LocalVar(1), LocalVar(2))
+    EVT_CALL(ScaleModel, 38, LocalVar(0), LocalVar(1), LocalVar(2))
+    EVT_CALL(ScaleModel, 39, LocalVar(0), LocalVar(1), LocalVar(2))
+    EVT_CALL(ScaleModel, 40, LocalVar(0), LocalVar(1), LocalVar(2))
+    EVT_CALL(ScaleModel, 34, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_WAIT(1)
-    EVT_SET(EVT_MAP_FLAG(2), 0)
+    EVT_SET(MapFlag(2), 0)
     EVT_RETURN
     EVT_END
 };
 
 #ifdef NON_EQUIVALENT
 EvtScript N(80241ED4) = {
-    EVT_SETF(EVT_VAR(0), 0)
-    EVT_SETF(EVT_VAR(1), 0)
-    EVT_SETF(EVT_VAR(2), 0)
-    EVT_SETF(EVT_VAR(3), EVT_FIXED(-1.0))
-    EVT_SETF(EVT_VAR(4), EVT_FIXED(0.0))
-    EVT_SETF(EVT_VAR(5), EVT_FIXED(3.0))
+    EVT_SETF(LocalVar(0), 0)
+    EVT_SETF(LocalVar(1), 0)
+    EVT_SETF(LocalVar(2), 0)
+    EVT_SETF(LocalVar(3), EVT_FIXED(-1.0))
+    EVT_SETF(LocalVar(4), EVT_FIXED(0.0))
+    EVT_SETF(LocalVar(5), EVT_FIXED(3.0))
     EVT_THREAD
         EVT_WAIT(10)
         EVT_CALL(PlaySoundAtCollider, 19, 486, 0)
     EVT_END_THREAD
     EVT_LOOP(300)
-        EVT_ADDF(EVT_VAR(4), EVT_FIXED(-0.5))
-        EVT_ADDF(EVT_VAR(5), EVT_FIXED(0.09375))
-        EVT_ADDF(EVT_VAR(0), EVT_VAR(3))
-        EVT_ADDF(EVT_VAR(1), EVT_VAR(4))
-        EVT_ADDF(EVT_VAR(2), EVT_VAR(5))
-        EVT_IF_LT(EVT_VAR(1), -10)
-            EVT_SETF(EVT_VAR(1), EVT_FIXED(-10.0))
-            EVT_SETF(EVT_VAR(3), EVT_FIXED(0.0))
-            EVT_SETF(EVT_VAR(4), EVT_FIXED(0.0))
-            EVT_IF_GE(EVT_VAR(2), 80)
+        EVT_ADDF(LocalVar(4), EVT_FIXED(-0.5))
+        EVT_ADDF(LocalVar(5), EVT_FIXED(0.09375))
+        EVT_ADDF(LocalVar(0), LocalVar(3))
+        EVT_ADDF(LocalVar(1), LocalVar(4))
+        EVT_ADDF(LocalVar(2), LocalVar(5))
+        EVT_IF_LT(LocalVar(1), -10)
+            EVT_SETF(LocalVar(1), EVT_FIXED(-10.0))
+            EVT_SETF(LocalVar(3), EVT_FIXED(0.0))
+            EVT_SETF(LocalVar(4), EVT_FIXED(0.0))
+            EVT_IF_GE(LocalVar(2), 80)
                 EVT_GOTO(0)
             EVT_END_IF
         EVT_END_IF
     EVT_END_IF
     EVT_CALL(TranslateModel, 31, -78, 19, 2)
     EVT_CALL(TranslateModel, 32, -78, 19, 2)
-    EVT_CALL(TranslateModel, 31, EVT_VAR(0), EVT_VAR(1), 0)
-    EVT_CALL(TranslateModel, 32, EVT_VAR(0), EVT_VAR(1), 0)
-    EVT_CALL(RotateModel, 31, EVT_VAR(2), 0, 0, 1)
-    EVT_CALL(RotateModel, 32, EVT_VAR(2), 0, 0, 1)
+    EVT_CALL(TranslateModel, 31, LocalVar(0), LocalVar(1), 0)
+    EVT_CALL(TranslateModel, 32, LocalVar(0), LocalVar(1), 0)
+    EVT_CALL(RotateModel, 31, LocalVar(2), 0, 0, 1)
+    EVT_CALL(RotateModel, 32, LocalVar(2), 0, 0, 1)
     EVT_CALL(TranslateModel, 31, 78, -19, -2)
     EVT_CALL(TranslateModel, 32, 78, -19, -2)
     EVT_WAIT(1)
@@ -418,37 +418,37 @@ EVT_END
 };
 #else
 EvtScript N(80241ED4) = {
-    EVT_CMD(EVT_OP_SETF, EVT_VAR(0), 0),
-    EVT_CMD(EVT_OP_SETF, EVT_VAR(1), 0),
-    EVT_CMD(EVT_OP_SETF, EVT_VAR(2), 0),
-    EVT_CMD(EVT_OP_SETF, EVT_VAR(3), EVT_FIXED(-1.0)),
-    EVT_CMD(EVT_OP_SETF, EVT_VAR(4), EVT_FIXED(0.0)),
-    EVT_CMD(EVT_OP_SETF, EVT_VAR(5), EVT_FIXED(3.0)),
+    EVT_CMD(EVT_OP_SETF, LocalVar(0), 0),
+    EVT_CMD(EVT_OP_SETF, LocalVar(1), 0),
+    EVT_CMD(EVT_OP_SETF, LocalVar(2), 0),
+    EVT_CMD(EVT_OP_SETF, LocalVar(3), EVT_FIXED(-1.0)),
+    EVT_CMD(EVT_OP_SETF, LocalVar(4), EVT_FIXED(0.0)),
+    EVT_CMD(EVT_OP_SETF, LocalVar(5), EVT_FIXED(3.0)),
     EVT_CMD(EVT_OP_THREAD),
         EVT_CMD(EVT_OP_WAIT_FRAMES, 10),
         EVT_CMD(EVT_OP_CALL, EVT_PTR(PlaySoundAtCollider), 19, 486, 0),
     EVT_CMD(EVT_OP_END_THREAD),
     EVT_CMD(EVT_OP_LOOP, 300),
-        EVT_CMD(EVT_OP_ADDF, EVT_VAR(4), EVT_FIXED(-0.5)),
-        EVT_CMD(EVT_OP_ADDF, EVT_VAR(5), EVT_FIXED(0.09375)),
-        EVT_CMD(EVT_OP_ADDF, EVT_VAR(0), EVT_VAR(3)),
-        EVT_CMD(EVT_OP_ADDF, EVT_VAR(1), EVT_VAR(4)),
-        EVT_CMD(EVT_OP_ADDF, EVT_VAR(2), EVT_VAR(5)),
-        EVT_CMD(EVT_OP_IF_LT, EVT_VAR(1), -10),
-            EVT_CMD(EVT_OP_SETF, EVT_VAR(1), EVT_FIXED(-10.0)),
-            EVT_CMD(EVT_OP_SETF, EVT_VAR(3), EVT_FIXED(0.0)),
-            EVT_CMD(EVT_OP_SETF, EVT_VAR(4), EVT_FIXED(0.0)),
-            EVT_CMD(EVT_OP_IF_GE, EVT_VAR(2), 80),
+        EVT_CMD(EVT_OP_ADDF, LocalVar(4), EVT_FIXED(-0.5)),
+        EVT_CMD(EVT_OP_ADDF, LocalVar(5), EVT_FIXED(0.09375)),
+        EVT_CMD(EVT_OP_ADDF, LocalVar(0), LocalVar(3)),
+        EVT_CMD(EVT_OP_ADDF, LocalVar(1), LocalVar(4)),
+        EVT_CMD(EVT_OP_ADDF, LocalVar(2), LocalVar(5)),
+        EVT_CMD(EVT_OP_IF_LT, LocalVar(1), -10),
+            EVT_CMD(EVT_OP_SETF, LocalVar(1), EVT_FIXED(-10.0)),
+            EVT_CMD(EVT_OP_SETF, LocalVar(3), EVT_FIXED(0.0)),
+            EVT_CMD(EVT_OP_SETF, LocalVar(4), EVT_FIXED(0.0)),
+            EVT_CMD(EVT_OP_IF_GE, LocalVar(2), 80),
                 EVT_CMD(EVT_OP_GOTO, 0),
             EVT_CMD(EVT_OP_END_IF),
         EVT_CMD(EVT_OP_END_IF),
     EVT_CMD(EVT_OP_END_IF), // BUG: extraneous END_IF
     EVT_CMD(EVT_OP_CALL, EVT_PTR(TranslateModel), 31, -78, 19, 2),
     EVT_CMD(EVT_OP_CALL, EVT_PTR(TranslateModel), 32, -78, 19, 2),
-    EVT_CMD(EVT_OP_CALL, EVT_PTR(TranslateModel), 31, EVT_VAR(0), EVT_VAR(1), 0),
-    EVT_CMD(EVT_OP_CALL, EVT_PTR(TranslateModel), 32, EVT_VAR(0), EVT_VAR(1), 0),
-    EVT_CMD(EVT_OP_CALL, EVT_PTR(RotateModel), 31, EVT_VAR(2), 0, 0, 1),
-    EVT_CMD(EVT_OP_CALL, EVT_PTR(RotateModel), 32, EVT_VAR(2), 0, 0, 1),
+    EVT_CMD(EVT_OP_CALL, EVT_PTR(TranslateModel), 31, LocalVar(0), LocalVar(1), 0),
+    EVT_CMD(EVT_OP_CALL, EVT_PTR(TranslateModel), 32, LocalVar(0), LocalVar(1), 0),
+    EVT_CMD(EVT_OP_CALL, EVT_PTR(RotateModel), 31, LocalVar(2), 0, 0, 1),
+    EVT_CMD(EVT_OP_CALL, EVT_PTR(RotateModel), 32, LocalVar(2), 0, 0, 1),
     EVT_CMD(EVT_OP_CALL, EVT_PTR(TranslateModel), 31, 78, -19, -2),
     EVT_CMD(EVT_OP_CALL, EVT_PTR(TranslateModel), 32, 78, -19, -2),
     EVT_CMD(EVT_OP_WAIT_FRAMES, 1),
@@ -462,43 +462,43 @@ EVT_CMD(EVT_OP_END)
 #endif
 
 EvtScript N(80242174) = {
-    EVT_SETF(EVT_VAR(0), 0)
-    EVT_SETF(EVT_VAR(1), 0)
-    EVT_SETF(EVT_VAR(2), 0)
-    EVT_SETF(EVT_VAR(3), EVT_FIXED(0.0))
-    EVT_SETF(EVT_VAR(4), EVT_FIXED(0.0))
-    EVT_SETF(EVT_VAR(5), EVT_FIXED(-5.0))
+    EVT_SETF(LocalVar(0), 0)
+    EVT_SETF(LocalVar(1), 0)
+    EVT_SETF(LocalVar(2), 0)
+    EVT_SETF(LocalVar(3), EVT_FIXED(0.0))
+    EVT_SETF(LocalVar(4), EVT_FIXED(0.0))
+    EVT_SETF(LocalVar(5), EVT_FIXED(-5.0))
     EVT_THREAD
         EVT_WAIT(12)
         EVT_CALL(PlaySoundAtCollider, 21, 487, 0)
     EVT_END_THREAD
     EVT_LOOP(300)
-        EVT_ADDF(EVT_VAR(4), EVT_FIXED(-0.5))
-        EVT_ADDF(EVT_VAR(0), EVT_VAR(3))
-        EVT_ADDF(EVT_VAR(1), EVT_VAR(4))
-        EVT_ADDF(EVT_VAR(2), EVT_VAR(5))
-        EVT_IF_LT(EVT_VAR(2), -45)
-            EVT_SET(EVT_VAR(5), 5)
+        EVT_ADDF(LocalVar(4), EVT_FIXED(-0.5))
+        EVT_ADDF(LocalVar(0), LocalVar(3))
+        EVT_ADDF(LocalVar(1), LocalVar(4))
+        EVT_ADDF(LocalVar(2), LocalVar(5))
+        EVT_IF_LT(LocalVar(2), -45)
+            EVT_SET(LocalVar(5), 5)
         EVT_END_IF
-        EVT_IF_GT(EVT_VAR(2), 0)
-            EVT_SET(EVT_VAR(2), 0)
-            EVT_SET(EVT_VAR(3), 5)
+        EVT_IF_GT(LocalVar(2), 0)
+            EVT_SET(LocalVar(2), 0)
+            EVT_SET(LocalVar(3), 5)
         EVT_END_IF
-        EVT_IF_LT(EVT_VAR(1), -25)
-            EVT_SET(EVT_VAR(4), 0)
-            EVT_SET(EVT_VAR(1), -25)
+        EVT_IF_LT(LocalVar(1), -25)
+            EVT_SET(LocalVar(4), 0)
+            EVT_SET(LocalVar(1), -25)
         EVT_END_IF
-        EVT_IF_GT(EVT_VAR(0), 90)
+        EVT_IF_GT(LocalVar(0), 90)
             EVT_GOTO(0)
         EVT_END_IF
         EVT_CALL(TranslateModel, 19, 50, 28, 27)
         EVT_CALL(TranslateModel, 20, 50, 28, 27)
-        EVT_CALL(TranslateModel, 19, 0, EVT_VAR(1), 1)
-        EVT_CALL(TranslateModel, 20, 0, EVT_VAR(1), 1)
-        EVT_CALL(RotateModel, 19, EVT_VAR(0), 1, 0, 0)
-        EVT_CALL(RotateModel, 20, EVT_VAR(0), 1, 0, 0)
-        EVT_CALL(RotateModel, 19, EVT_VAR(2), 0, 0, 1)
-        EVT_CALL(RotateModel, 20, EVT_VAR(2), 0, 0, 1)
+        EVT_CALL(TranslateModel, 19, 0, LocalVar(1), 1)
+        EVT_CALL(TranslateModel, 20, 0, LocalVar(1), 1)
+        EVT_CALL(RotateModel, 19, LocalVar(0), 1, 0, 0)
+        EVT_CALL(RotateModel, 20, LocalVar(0), 1, 0, 0)
+        EVT_CALL(RotateModel, 19, LocalVar(2), 0, 0, 1)
+        EVT_CALL(RotateModel, 20, LocalVar(2), 0, 0, 1)
         EVT_CALL(TranslateModel, 19, -50, -28, -27)
         EVT_CALL(TranslateModel, 20, -50, -28, -27)
         EVT_WAIT(1)
@@ -510,27 +510,27 @@ EvtScript N(80242174) = {
 };
 
 EvtScript N(80242474) = {
-    EVT_SETF(EVT_VAR(2), 0)
-    EVT_SETF(EVT_VAR(1), 0)
-    EVT_SETF(EVT_VAR(0), 0)
-    EVT_SETF(EVT_VAR(5), EVT_FIXED(0.0))
+    EVT_SETF(LocalVar(2), 0)
+    EVT_SETF(LocalVar(1), 0)
+    EVT_SETF(LocalVar(0), 0)
+    EVT_SETF(LocalVar(5), EVT_FIXED(0.0))
     EVT_THREAD
         EVT_WAIT(15)
         EVT_CALL(PlaySoundAtCollider, 23, 487, 0)
     EVT_END_THREAD
     EVT_LOOP(300)
-        EVT_ADDF(EVT_VAR(5), EVT_FIXED(0.5))
-        EVT_ADDF(EVT_VAR(2), EVT_VAR(5))
-        EVT_IF_GE(EVT_VAR(2), 80)
-            EVT_SETF(EVT_VAR(2), 80)
-            EVT_MULF(EVT_VAR(5), EVT_FIXED(-0.5))
-            EVT_IF_EQ(EVT_VAR(5), 0)
+        EVT_ADDF(LocalVar(5), EVT_FIXED(0.5))
+        EVT_ADDF(LocalVar(2), LocalVar(5))
+        EVT_IF_GE(LocalVar(2), 80)
+            EVT_SETF(LocalVar(2), 80)
+            EVT_MULF(LocalVar(5), EVT_FIXED(-0.5))
+            EVT_IF_EQ(LocalVar(5), 0)
                 EVT_GOTO(0)
             EVT_END_IF
         EVT_END_IF
         EVT_CALL(TranslateModel, 21, -55, 5, 16)
-        EVT_CALL(TranslateModel, 21, EVT_VAR(0), EVT_VAR(1), 0)
-        EVT_CALL(RotateModel, 21, EVT_VAR(2), 0, 0, 1)
+        EVT_CALL(TranslateModel, 21, LocalVar(0), LocalVar(1), 0)
+        EVT_CALL(RotateModel, 21, LocalVar(2), 0, 0, 1)
         EVT_CALL(TranslateModel, 21, 55, -5, -16)
         EVT_WAIT(1)
     EVT_END_LOOP
@@ -541,37 +541,37 @@ EvtScript N(80242474) = {
 };
 
 EvtScript N(80242620) = {
-    EVT_SETF(EVT_VAR(2), 0)
-    EVT_SETF(EVT_VAR(1), 0)
-    EVT_SETF(EVT_VAR(0), 0)
-    EVT_SETF(EVT_VAR(5), EVT_FIXED(0.0))
+    EVT_SETF(LocalVar(2), 0)
+    EVT_SETF(LocalVar(1), 0)
+    EVT_SETF(LocalVar(0), 0)
+    EVT_SETF(LocalVar(5), EVT_FIXED(0.0))
     EVT_THREAD
         EVT_WAIT(15)
         EVT_CALL(PlaySoundAtCollider, 22, 487, 0)
     EVT_END_THREAD
     EVT_LOOP(300)
-        EVT_ADDF(EVT_VAR(5), EVT_FIXED(0.5))
-        EVT_ADDF(EVT_VAR(2), EVT_VAR(5))
-        EVT_IF_GE(EVT_VAR(2), 80)
-            EVT_SETF(EVT_VAR(2), 80)
-            EVT_MULF(EVT_VAR(5), EVT_FIXED(-0.5))
-            EVT_IF_EQ(EVT_VAR(5), 0)
+        EVT_ADDF(LocalVar(5), EVT_FIXED(0.5))
+        EVT_ADDF(LocalVar(2), LocalVar(5))
+        EVT_IF_GE(LocalVar(2), 80)
+            EVT_SETF(LocalVar(2), 80)
+            EVT_MULF(LocalVar(5), EVT_FIXED(-0.5))
+            EVT_IF_EQ(LocalVar(5), 0)
                 EVT_GOTO(0)
             EVT_END_IF
         EVT_END_IF
         EVT_CALL(TranslateModel, 24, 60, 0, 16)
-        EVT_CALL(RotateModel, 24, EVT_VAR(2), 0, 0, -1)
+        EVT_CALL(RotateModel, 24, LocalVar(2), 0, 0, -1)
         EVT_CALL(TranslateModel, 24, -60, 0, -16)
         EVT_CALL(TranslateModel, 22, 0, 0, 27)
         EVT_CALL(TranslateModel, 23, 0, 0, 27)
-        EVT_CALL(RotateModel, 22, EVT_VAR(2), 1, 0, 0)
-        EVT_CALL(RotateModel, 23, EVT_VAR(2), 1, 0, 0)
+        EVT_CALL(RotateModel, 22, LocalVar(2), 1, 0, 0)
+        EVT_CALL(RotateModel, 23, LocalVar(2), 1, 0, 0)
         EVT_CALL(TranslateModel, 22, 0, 0, -27)
         EVT_CALL(TranslateModel, 23, 0, 0, -27)
         EVT_CALL(TranslateModel, 25, 0, 0, -41)
         EVT_CALL(TranslateModel, 26, 0, 0, -41)
-        EVT_CALL(RotateModel, 25, EVT_VAR(2), -1, 0, 0)
-        EVT_CALL(RotateModel, 26, EVT_VAR(2), -1, 0, 0)
+        EVT_CALL(RotateModel, 25, LocalVar(2), -1, 0, 0)
+        EVT_CALL(RotateModel, 26, LocalVar(2), -1, 0, 0)
         EVT_CALL(TranslateModel, 25, 0, 0, 41)
         EVT_CALL(TranslateModel, 26, 0, 0, 41)
         EVT_WAIT(1)
@@ -584,34 +584,34 @@ EvtScript N(80242620) = {
 
 #ifdef NON_EQUIVALENT
 EvtScript N(80242910) = {
-    EVT_SETF(EVT_VAR(0), 0)
-    EVT_SETF(EVT_VAR(1), 0)
-    EVT_SETF(EVT_VAR(2), 0)
-    EVT_SETF(EVT_VAR(3), EVT_FIXED(-1.0))
-    EVT_SETF(EVT_VAR(4), EVT_FIXED(0.0))
-    EVT_SETF(EVT_VAR(5), EVT_FIXED(3.0))
+    EVT_SETF(LocalVar(0), 0)
+    EVT_SETF(LocalVar(1), 0)
+    EVT_SETF(LocalVar(2), 0)
+    EVT_SETF(LocalVar(3), EVT_FIXED(-1.0))
+    EVT_SETF(LocalVar(4), EVT_FIXED(0.0))
+    EVT_SETF(LocalVar(5), EVT_FIXED(3.0))
     EVT_THREAD
         EVT_WAIT(15)
         EVT_CALL(PlaySoundAtCollider, 18, 486, 0)
     EVT_END_THREAD
     EVT_LOOP(300)
-        EVT_ADDF(EVT_VAR(4), EVT_FIXED(-0.5))
-        EVT_ADDF(EVT_VAR(5), EVT_FIXED(0.09375))
-        EVT_ADDF(EVT_VAR(0), EVT_VAR(3))
-        EVT_ADDF(EVT_VAR(1), EVT_VAR(4))
-        EVT_ADDF(EVT_VAR(2), EVT_VAR(5))
-        EVT_IF_LT(EVT_VAR(1), -25)
-            EVT_SETF(EVT_VAR(1), EVT_FIXED(-25.0))
-            EVT_SETF(EVT_VAR(3), EVT_FIXED(0.0))
-            EVT_SETF(EVT_VAR(4), EVT_FIXED(0.0))
-            EVT_IF_GE(EVT_VAR(2), 80)
+        EVT_ADDF(LocalVar(4), EVT_FIXED(-0.5))
+        EVT_ADDF(LocalVar(5), EVT_FIXED(0.09375))
+        EVT_ADDF(LocalVar(0), LocalVar(3))
+        EVT_ADDF(LocalVar(1), LocalVar(4))
+        EVT_ADDF(LocalVar(2), LocalVar(5))
+        EVT_IF_LT(LocalVar(1), -25)
+            EVT_SETF(LocalVar(1), EVT_FIXED(-25.0))
+            EVT_SETF(LocalVar(3), EVT_FIXED(0.0))
+            EVT_SETF(LocalVar(4), EVT_FIXED(0.0))
+            EVT_IF_GE(LocalVar(2), 80)
                 EVT_GOTO(0)
             EVT_END_IF
         EVT_END_IF
     EVT_END_IF
     EVT_CALL(TranslateModel, 29, 124, 17, 3)
-    EVT_CALL(TranslateModel, 29, EVT_VAR(0), EVT_VAR(1), 0)
-    EVT_CALL(RotateModel, 29, EVT_VAR(2), 0, 0, -1)
+    EVT_CALL(TranslateModel, 29, LocalVar(0), LocalVar(1), 0)
+    EVT_CALL(RotateModel, 29, LocalVar(2), 0, 0, -1)
     EVT_CALL(TranslateModel, 29, -124, -17, -3)
     EVT_WAIT(1)
 EVT_END_LOOP
@@ -621,34 +621,34 @@ EVT_END
 };
 #else
 EvtScript N(80242910) = {
-    EVT_CMD(EVT_OP_SETF, EVT_VAR(0), 0),
-    EVT_CMD(EVT_OP_SETF, EVT_VAR(1), 0),
-    EVT_CMD(EVT_OP_SETF, EVT_VAR(2), 0),
-    EVT_CMD(EVT_OP_SETF, EVT_VAR(3), EVT_FIXED(-1.0)),
-    EVT_CMD(EVT_OP_SETF, EVT_VAR(4), EVT_FIXED(0.0)),
-    EVT_CMD(EVT_OP_SETF, EVT_VAR(5), EVT_FIXED(3.0)),
+    EVT_CMD(EVT_OP_SETF, LocalVar(0), 0),
+    EVT_CMD(EVT_OP_SETF, LocalVar(1), 0),
+    EVT_CMD(EVT_OP_SETF, LocalVar(2), 0),
+    EVT_CMD(EVT_OP_SETF, LocalVar(3), EVT_FIXED(-1.0)),
+    EVT_CMD(EVT_OP_SETF, LocalVar(4), EVT_FIXED(0.0)),
+    EVT_CMD(EVT_OP_SETF, LocalVar(5), EVT_FIXED(3.0)),
     EVT_CMD(EVT_OP_THREAD),
         EVT_CMD(EVT_OP_WAIT_FRAMES, 15),
         EVT_CMD(EVT_OP_CALL, EVT_PTR(PlaySoundAtCollider), 18, 486, 0),
     EVT_CMD(EVT_OP_END_THREAD),
     EVT_CMD(EVT_OP_LOOP, 300),
-        EVT_CMD(EVT_OP_ADDF, EVT_VAR(4), EVT_FIXED(-0.5)),
-        EVT_CMD(EVT_OP_ADDF, EVT_VAR(5), EVT_FIXED(0.09375)),
-        EVT_CMD(EVT_OP_ADDF, EVT_VAR(0), EVT_VAR(3)),
-        EVT_CMD(EVT_OP_ADDF, EVT_VAR(1), EVT_VAR(4)),
-        EVT_CMD(EVT_OP_ADDF, EVT_VAR(2), EVT_VAR(5)),
-        EVT_CMD(EVT_OP_IF_LT, EVT_VAR(1), -25),
-            EVT_CMD(EVT_OP_SETF, EVT_VAR(1), EVT_FIXED(-25.0)),
-            EVT_CMD(EVT_OP_SETF, EVT_VAR(3), EVT_FIXED(0.0)),
-            EVT_CMD(EVT_OP_SETF, EVT_VAR(4), EVT_FIXED(0.0)),
-            EVT_CMD(EVT_OP_IF_GE, EVT_VAR(2), 80),
+        EVT_CMD(EVT_OP_ADDF, LocalVar(4), EVT_FIXED(-0.5)),
+        EVT_CMD(EVT_OP_ADDF, LocalVar(5), EVT_FIXED(0.09375)),
+        EVT_CMD(EVT_OP_ADDF, LocalVar(0), LocalVar(3)),
+        EVT_CMD(EVT_OP_ADDF, LocalVar(1), LocalVar(4)),
+        EVT_CMD(EVT_OP_ADDF, LocalVar(2), LocalVar(5)),
+        EVT_CMD(EVT_OP_IF_LT, LocalVar(1), -25),
+            EVT_CMD(EVT_OP_SETF, LocalVar(1), EVT_FIXED(-25.0)),
+            EVT_CMD(EVT_OP_SETF, LocalVar(3), EVT_FIXED(0.0)),
+            EVT_CMD(EVT_OP_SETF, LocalVar(4), EVT_FIXED(0.0)),
+            EVT_CMD(EVT_OP_IF_GE, LocalVar(2), 80),
                 EVT_CMD(EVT_OP_GOTO, 0),
             EVT_CMD(EVT_OP_END_IF),
         EVT_CMD(EVT_OP_END_IF),
     EVT_CMD(EVT_OP_END_IF), // BUG: extraneous END_IF
     EVT_CMD(EVT_OP_CALL, EVT_PTR(TranslateModel), 29, 124, 17, 3),
-    EVT_CMD(EVT_OP_CALL, EVT_PTR(TranslateModel), 29, EVT_VAR(0), EVT_VAR(1), 0),
-    EVT_CMD(EVT_OP_CALL, EVT_PTR(RotateModel), 29, EVT_VAR(2), 0, 0, -1),
+    EVT_CMD(EVT_OP_CALL, EVT_PTR(TranslateModel), 29, LocalVar(0), LocalVar(1), 0),
+    EVT_CMD(EVT_OP_CALL, EVT_PTR(RotateModel), 29, LocalVar(2), 0, 0, -1),
     EVT_CMD(EVT_OP_CALL, EVT_PTR(TranslateModel), 29, -124, -17, -3),
     EVT_CMD(EVT_OP_WAIT_FRAMES, 1),
 EVT_CMD(EVT_OP_END_LOOP),
@@ -660,38 +660,38 @@ EVT_CMD(EVT_OP_END)
 
 EvtScript N(80242B18) = {
     EVT_CALL(ModifyColliderFlags, 0, 18, 0x7FFFFE00)
-    EVT_SETF(EVT_VAR(0), 0)
-    EVT_SETF(EVT_VAR(1), 0)
-    EVT_SETF(EVT_VAR(2), 0)
-    EVT_SETF(EVT_VAR(3), EVT_FIXED(3.0))
-    EVT_SETF(EVT_VAR(4), EVT_FIXED(1.0))
-    EVT_SETF(EVT_VAR(5), EVT_FIXED(5.0))
+    EVT_SETF(LocalVar(0), 0)
+    EVT_SETF(LocalVar(1), 0)
+    EVT_SETF(LocalVar(2), 0)
+    EVT_SETF(LocalVar(3), EVT_FIXED(3.0))
+    EVT_SETF(LocalVar(4), EVT_FIXED(1.0))
+    EVT_SETF(LocalVar(5), EVT_FIXED(5.0))
     EVT_THREAD
         EVT_WAIT(15)
         EVT_CALL(PlaySoundAtCollider, 20, 486, 0)
     EVT_END_THREAD
     EVT_LOOP(300)
-        EVT_ADDF(EVT_VAR(4), EVT_FIXED(-0.5))
-        EVT_ADDF(EVT_VAR(0), EVT_VAR(3))
-        EVT_ADDF(EVT_VAR(1), EVT_VAR(4))
-        EVT_ADDF(EVT_VAR(2), EVT_VAR(5))
-        EVT_IF_LE(EVT_VAR(1), -40)
-            EVT_SETF(EVT_VAR(1), -40)
-            EVT_MULF(EVT_VAR(4), EVT_FIXED(-0.5))
-            EVT_IF_LE(EVT_VAR(4), 1)
+        EVT_ADDF(LocalVar(4), EVT_FIXED(-0.5))
+        EVT_ADDF(LocalVar(0), LocalVar(3))
+        EVT_ADDF(LocalVar(1), LocalVar(4))
+        EVT_ADDF(LocalVar(2), LocalVar(5))
+        EVT_IF_LE(LocalVar(1), -40)
+            EVT_SETF(LocalVar(1), -40)
+            EVT_MULF(LocalVar(4), EVT_FIXED(-0.5))
+            EVT_IF_LE(LocalVar(4), 1)
                 EVT_GOTO(1)
             EVT_END_IF
         EVT_END_IF
-        EVT_IF_GE(EVT_VAR(2), 60)
-            EVT_SETF(EVT_VAR(2), 60)
-            EVT_SETF(EVT_VAR(5), 0)
+        EVT_IF_GE(LocalVar(2), 60)
+            EVT_SETF(LocalVar(2), 60)
+            EVT_SETF(LocalVar(5), 0)
         EVT_END_IF
         EVT_CALL(TranslateModel, 41, -34, 50, 10)
         EVT_CALL(TranslateModel, 33, -34, 50, 10)
-        EVT_CALL(TranslateModel, 41, 0, EVT_VAR(1), EVT_VAR(0))
-        EVT_CALL(RotateModel, 41, EVT_VAR(2), 0, 0, 1)
-        EVT_CALL(TranslateModel, 33, 0, EVT_VAR(1), EVT_VAR(0))
-        EVT_CALL(RotateModel, 33, EVT_VAR(2), 0, 0, 1)
+        EVT_CALL(TranslateModel, 41, 0, LocalVar(1), LocalVar(0))
+        EVT_CALL(RotateModel, 41, LocalVar(2), 0, 0, 1)
+        EVT_CALL(TranslateModel, 33, 0, LocalVar(1), LocalVar(0))
+        EVT_CALL(RotateModel, 33, LocalVar(2), 0, 0, 1)
         EVT_CALL(TranslateModel, 41, 34, -50, -10)
         EVT_CALL(TranslateModel, 33, 34, -50, -10)
         EVT_WAIT(1)
@@ -709,29 +709,29 @@ s32 N(intTable_80242DC8)[] = {
 };
 
 EvtScript N(80242E28) = {
-    EVT_SET(EVT_VAR(10), EVT_VAR(0))
-    EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-    EVT_IF_LT(EVT_VAR(0), -210)
+    EVT_SET(LocalVar(10), LocalVar(0))
+    EVT_CALL(GetPlayerPos, LocalVar(0), LocalVar(1), LocalVar(2))
+    EVT_IF_LT(LocalVar(0), -210)
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(PlaySound, 0x1E5)
     EVT_EXEC_WAIT(N(802413F0))
-    EVT_SET(EVT_VAR(0), EVT_VAR(10))
+    EVT_SET(LocalVar(0), LocalVar(10))
     EVT_IF_LT(GB_StoryProgress, 52)
-        EVT_SET(EVT_MAP_FLAG(1), 1)
+        EVT_SET(MapFlag(1), 1)
         EVT_RETURN
     EVT_END_IF
-    EVT_IF_EQ(EVT_MAP_FLAG(3), 1)
+    EVT_IF_EQ(MapFlag(3), 1)
         EVT_RETURN
     EVT_END_IF
-    EVT_SET(EVT_MAP_FLAG(3), 1)
-    EVT_IF_GT(EVT_VAR(0), 2)
+    EVT_SET(MapFlag(3), 1)
+    EVT_IF_GT(LocalVar(0), 2)
         EVT_GOTO(0)
     EVT_END_IF
-    EVT_IF_EQ(EVT_VAR(0), 2)
+    EVT_IF_EQ(LocalVar(0), 2)
         EVT_GOTO(11)
     EVT_END_IF
-    EVT_IF_EQ(EVT_VAR(0), 0)
+    EVT_IF_EQ(LocalVar(0), 0)
         EVT_LABEL(11)
         EVT_IF_EQ(GB_FLO18_MachineDamage_Left, 0)
             EVT_SET(GB_FLO18_MachineDamage_Left, 1)
@@ -739,14 +739,14 @@ EvtScript N(80242E28) = {
             EVT_GOTO(0)
         EVT_END_IF
     EVT_END_IF
-    EVT_IF_EQ(EVT_VAR(0), 1)
+    EVT_IF_EQ(LocalVar(0), 1)
         EVT_IF_EQ(GB_FLO18_MachineDamage_Right, 0)
             EVT_SET(GB_FLO18_MachineDamage_Right, 1)
             EVT_EXEC(N(80242174))
             EVT_GOTO(0)
         EVT_END_IF
     EVT_END_IF
-    EVT_IF_EQ(EVT_VAR(0), 0)
+    EVT_IF_EQ(LocalVar(0), 0)
         EVT_IF_EQ(GB_FLO18_MachineDamage_Left, 1)
             EVT_SET(GB_FLO18_MachineDamage_Left, 2)
             EVT_EXEC(N(80242474))
@@ -773,34 +773,34 @@ EvtScript N(80242E28) = {
             EVT_EXEC_WAIT(N(802413F0))
             EVT_WAIT(30)
             EVT_CALL(GetModelCenter, 27)
-            EVT_CALL(PlayEffect, 0x1D, 0, EVT_VAR(0), 50, EVT_VAR(2), 100, 20, 0, 30, 0, 0, 0, 0, 0)
-            EVT_CALL(PlayEffect, 0x1D, 0, EVT_VAR(0), 30, EVT_VAR(2), 120, 20, 0, 30, 0, 0, 0, 0, 0)
-            EVT_CALL(PlayEffect, 0x1D, 0, EVT_VAR(0), 10, EVT_VAR(2), 100, 20, 0, 30, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, 0x1D, 0, LocalVar(0), 50, LocalVar(2), 100, 20, 0, 30, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, 0x1D, 0, LocalVar(0), 30, LocalVar(2), 120, 20, 0, 30, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, 0x1D, 0, LocalVar(0), 10, LocalVar(2), 100, 20, 0, 30, 0, 0, 0, 0, 0)
             EVT_WAIT(15)
             EVT_THREAD
-                EVT_SET(EVT_VAR(3), 6)
+                EVT_SET(LocalVar(3), 6)
                 EVT_USE_BUF(EVT_PTR(N(intTable_80242DC8)))
                 EVT_LOOP(8)
-                    EVT_BUF_READ3(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-                    EVT_CALL(PlaySoundAt, 0x190, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-                    EVT_CALL(PlayEffect, 0x27, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 1, 6, 0, 0, 0, 0, 0, 0, 0)
+                    EVT_BUF_READ3(LocalVar(0), LocalVar(1), LocalVar(2))
+                    EVT_CALL(PlaySoundAt, 0x190, 0, LocalVar(0), LocalVar(1), LocalVar(2))
+                    EVT_CALL(PlayEffect, 0x27, 0, LocalVar(0), LocalVar(1), LocalVar(2), 1, 6, 0, 0, 0, 0, 0, 0, 0)
                     EVT_WAIT(2)
-                    EVT_ADD(EVT_VAR(1), 5)
-                    EVT_CALL(PlaySoundAt, 0x190, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-                    EVT_CALL(PlayEffect, 0x27, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 2, 15, 0, 0, 0, 0, 0, 0, 0)
-                    EVT_WAIT(EVT_VAR(3))
-                    EVT_ADD(EVT_VAR(3), 1)
+                    EVT_ADD(LocalVar(1), 5)
+                    EVT_CALL(PlaySoundAt, 0x190, 0, LocalVar(0), LocalVar(1), LocalVar(2))
+                    EVT_CALL(PlayEffect, 0x27, 0, LocalVar(0), LocalVar(1), LocalVar(2), 2, 15, 0, 0, 0, 0, 0, 0, 0)
+                    EVT_WAIT(LocalVar(3))
+                    EVT_ADD(LocalVar(3), 1)
                 EVT_END_LOOP
-                EVT_SETF(EVT_VAR(4), EVT_FIXED(2.0))
+                EVT_SETF(LocalVar(4), EVT_FIXED(2.0))
                 EVT_LOOP(2)
                     EVT_USE_BUF(EVT_PTR(N(intTable_80242DC8)))
                     EVT_LOOP(8)
-                        EVT_BUF_READ3(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-                        EVT_CALL(PlaySoundAt, 0x190, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-                        EVT_CALL(PlayEffect, 0x27, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 1, 25, 0, 0, 0, 0, 0, 0, 0)
-                        EVT_WAIT(EVT_VAR(3))
-                        EVT_ADD(EVT_VAR(3), EVT_VAR(4))
-                        EVT_ADDF(EVT_VAR(4), EVT_FIXED(0.5))
+                        EVT_BUF_READ3(LocalVar(0), LocalVar(1), LocalVar(2))
+                        EVT_CALL(PlaySoundAt, 0x190, 0, LocalVar(0), LocalVar(1), LocalVar(2))
+                        EVT_CALL(PlayEffect, 0x27, 0, LocalVar(0), LocalVar(1), LocalVar(2), 1, 25, 0, 0, 0, 0, 0, 0, 0)
+                        EVT_WAIT(LocalVar(3))
+                        EVT_ADD(LocalVar(3), LocalVar(4))
+                        EVT_ADDF(LocalVar(4), EVT_FIXED(0.5))
                     EVT_END_LOOP
                 EVT_END_LOOP
             EVT_END_THREAD
@@ -823,7 +823,7 @@ EvtScript N(80242E28) = {
         EVT_END_IF
     EVT_END_IF
     EVT_LABEL(0)
-    EVT_SET(EVT_MAP_FLAG(3), 0)
+    EVT_SET(MapFlag(3), 0)
     EVT_RETURN
     EVT_END
 };
@@ -884,25 +884,25 @@ EvtScript N(802436BC) = {
         EVT_CALL(ModifyColliderFlags, 0, 18, 0x7FFFFE00)
         EVT_RETURN
     EVT_END_IF
-    EVT_SET(EVT_VAR(0), 0)
+    EVT_SET(LocalVar(0), 0)
     EVT_BIND_TRIGGER(N(80242E28), TRIGGER_WALL_HAMMER, 23, 1, 0)
     EVT_BIND_TRIGGER(N(80242E28), TRIGGER_POINT_BOMB, EVT_PTR(N(triggerCoord_8024367C)), 1, 0)
     EVT_BIND_TRIGGER(N(80242E28), TRIGGER_POINT_BOMB, EVT_PTR(N(triggerCoord_8024368C)), 1, 0)
-    EVT_SET(EVT_VAR(0), 1)
+    EVT_SET(LocalVar(0), 1)
     EVT_BIND_TRIGGER(N(80242E28), TRIGGER_WALL_HAMMER, 22, 1, 0)
     EVT_BIND_TRIGGER(N(80242E28), TRIGGER_POINT_BOMB, EVT_PTR(N(triggerCoord_8024369C)), 1, 0)
     EVT_BIND_TRIGGER(N(80242E28), TRIGGER_POINT_BOMB, EVT_PTR(N(triggerCoord_802436AC)), 1, 0)
-    EVT_SET(EVT_VAR(0), 3)
+    EVT_SET(LocalVar(0), 3)
     EVT_BIND_TRIGGER(N(80242E28), TRIGGER_WALL_HAMMER, 19, 1, 0)
-    EVT_SET(EVT_VAR(0), 4)
+    EVT_SET(LocalVar(0), 4)
     EVT_BIND_TRIGGER(N(80242E28), TRIGGER_WALL_HAMMER, 18, 1, 0)
-    EVT_SET(EVT_VAR(0), 0)
+    EVT_SET(LocalVar(0), 0)
     EVT_LOOP(16)
-        EVT_SET(EVT_VAR(1), EVT_VAR(0))
-        EVT_ADD(EVT_VAR(1), 10000)
-        EVT_ADD(EVT_VAR(0), 1)
-        EVT_CALL(CloneModel, 49, EVT_VAR(1))
-        EVT_CALL(EnableModel, EVT_VAR(1), 0)
+        EVT_SET(LocalVar(1), LocalVar(0))
+        EVT_ADD(LocalVar(1), 10000)
+        EVT_ADD(LocalVar(0), 1)
+        EVT_CALL(CloneModel, 49, LocalVar(1))
+        EVT_CALL(EnableModel, LocalVar(1), 0)
     EVT_END_LOOP
     EVT_EXEC(N(80241284))
     EVT_CALL(EnableTexPanning, 36, 1)
@@ -912,46 +912,46 @@ EvtScript N(802436BC) = {
     EVT_CALL(EnableTexPanning, 40, 1)
     EVT_CALL(EnableTexPanning, 41, 1)
     EVT_THREAD
-        EVT_SETF(EVT_VAR(14), EVT_FIXED(1.0))
+        EVT_SETF(LocalVar(14), EVT_FIXED(1.0))
         EVT_LABEL(0)
         EVT_IF_GE(GB_FLO18_MachineDamage_Right, 3)
-            EVT_MULF(EVT_VAR(14), EVT_FIXED(0.953125))
+            EVT_MULF(LocalVar(14), EVT_FIXED(0.953125))
         EVT_END_IF
-        EVT_ADDF(EVT_VAR(15), EVT_VAR(14))
-        EVT_IF_EQ(EVT_VAR(15), 1080)
-            EVT_SETF(EVT_VAR(15), 0)
+        EVT_ADDF(LocalVar(15), LocalVar(14))
+        EVT_IF_EQ(LocalVar(15), 1080)
+            EVT_SETF(LocalVar(15), 0)
         EVT_END_IF
-        EVT_SET(EVT_VAR(0), EVT_VAR(15))
-        EVT_DIV(EVT_VAR(0), 9)
-        EVT_MOD(EVT_VAR(0), 4)
-        EVT_MUL(EVT_VAR(0), 16384)
-        EVT_SET(EVT_VAR(1), EVT_VAR(15))
-        EVT_DIV(EVT_VAR(1), 4)
-        EVT_MOD(EVT_VAR(1), 2)
-        EVT_MUL(EVT_VAR(1), 16384)
-        EVT_SET(EVT_VAR(2), EVT_VAR(15))
-        EVT_DIV(EVT_VAR(2), 5)
-        EVT_MOD(EVT_VAR(2), 2)
-        EVT_MUL(EVT_VAR(2), 16384)
-        EVT_SET(EVT_VAR(3), EVT_VAR(15))
-        EVT_DIV(EVT_VAR(3), 6)
-        EVT_MOD(EVT_VAR(3), 2)
-        EVT_MUL(EVT_VAR(3), 16384)
-        EVT_SET(EVT_VAR(4), EVT_VAR(15))
-        EVT_DIV(EVT_VAR(4), 2)
-        EVT_MOD(EVT_VAR(4), 2)
-        EVT_MUL(EVT_VAR(4), 32768)
-        EVT_SET(EVT_VAR(5), EVT_VAR(15))
-        EVT_DIV(EVT_VAR(5), 8)
-        EVT_MOD(EVT_VAR(5), 2)
-        EVT_MUL(EVT_VAR(5), 16384)
-        EVT_CALL(SetTexPanOffset, 12, 0, EVT_VAR(0), 0)
-        EVT_CALL(SetTexPanOffset, 13, 0, EVT_VAR(1), 0)
-        EVT_CALL(SetTexPanOffset, 14, 0, EVT_VAR(2), 0)
-        EVT_CALL(SetTexPanOffset, 15, 0, EVT_VAR(3), 0)
-        EVT_CALL(SetTexPanOffset, 11, 0, EVT_VAR(4), 0)
-        EVT_CALL(SetTexPanOffset, 10, 0, EVT_VAR(5), 0)
-        EVT_CALL(SetTexPanOffset, 9, 0, EVT_VAR(5), 0)
+        EVT_SET(LocalVar(0), LocalVar(15))
+        EVT_DIV(LocalVar(0), 9)
+        EVT_MOD(LocalVar(0), 4)
+        EVT_MUL(LocalVar(0), 16384)
+        EVT_SET(LocalVar(1), LocalVar(15))
+        EVT_DIV(LocalVar(1), 4)
+        EVT_MOD(LocalVar(1), 2)
+        EVT_MUL(LocalVar(1), 16384)
+        EVT_SET(LocalVar(2), LocalVar(15))
+        EVT_DIV(LocalVar(2), 5)
+        EVT_MOD(LocalVar(2), 2)
+        EVT_MUL(LocalVar(2), 16384)
+        EVT_SET(LocalVar(3), LocalVar(15))
+        EVT_DIV(LocalVar(3), 6)
+        EVT_MOD(LocalVar(3), 2)
+        EVT_MUL(LocalVar(3), 16384)
+        EVT_SET(LocalVar(4), LocalVar(15))
+        EVT_DIV(LocalVar(4), 2)
+        EVT_MOD(LocalVar(4), 2)
+        EVT_MUL(LocalVar(4), 32768)
+        EVT_SET(LocalVar(5), LocalVar(15))
+        EVT_DIV(LocalVar(5), 8)
+        EVT_MOD(LocalVar(5), 2)
+        EVT_MUL(LocalVar(5), 16384)
+        EVT_CALL(SetTexPanOffset, 12, 0, LocalVar(0), 0)
+        EVT_CALL(SetTexPanOffset, 13, 0, LocalVar(1), 0)
+        EVT_CALL(SetTexPanOffset, 14, 0, LocalVar(2), 0)
+        EVT_CALL(SetTexPanOffset, 15, 0, LocalVar(3), 0)
+        EVT_CALL(SetTexPanOffset, 11, 0, LocalVar(4), 0)
+        EVT_CALL(SetTexPanOffset, 10, 0, LocalVar(5), 0)
+        EVT_CALL(SetTexPanOffset, 9, 0, LocalVar(5), 0)
         EVT_WAIT(1)
         EVT_GOTO(0)
     EVT_END_THREAD
@@ -1007,15 +1007,15 @@ EvtScript N(80244058) = {
     EVT_CALL(SetNpcPos, NPC_PARTNER, 65, 0, 50)
     EVT_WAIT(30)
     EVT_CALL(AdjustCam, 0, EVT_FIXED(8.0), 0, 300, EVT_FIXED(19.0), EVT_FIXED(-8.5))
-    EVT_CALL(GetCurrentPartnerID, EVT_VAR(0))
+    EVT_CALL(GetCurrentPartnerID, LocalVar(0))
     EVT_CALL(BringPartnerOut, 8)
-    EVT_IF_NE(EVT_VAR(0), 8)
+    EVT_IF_NE(LocalVar(0), 8)
         EVT_CALL(SetNpcJumpscale, NPC_PARTNER, EVT_FIXED(0.0))
-        EVT_CALL(GetPlayerPos, EVT_VAR(1), EVT_VAR(2), EVT_VAR(3))
-        EVT_ADD(EVT_VAR(1), 20)
-        EVT_ADD(EVT_VAR(2), 20)
-        EVT_ADD(EVT_VAR(3), 20)
-        EVT_CALL(NpcJump0, NPC_PARTNER, EVT_VAR(1), EVT_VAR(2), EVT_VAR(3), 30)
+        EVT_CALL(GetPlayerPos, LocalVar(1), LocalVar(2), LocalVar(3))
+        EVT_ADD(LocalVar(1), 20)
+        EVT_ADD(LocalVar(2), 20)
+        EVT_ADD(LocalVar(3), 20)
+        EVT_CALL(NpcJump0, NPC_PARTNER, LocalVar(1), LocalVar(2), LocalVar(3), 30)
     EVT_END_IF
     EVT_CALL(PlayerFaceNpc, -4, 0)
     EVT_CALL(NpcFacePlayer, NPC_PARTNER, 0)
@@ -1040,9 +1040,9 @@ EvtScript N(80244270) = {
         EVT_CALL(LoadPath, 60, EVT_PTR(N(vectorList_80243F68)), 5, 0)
         EVT_LOOP(0)
             EVT_CALL(GetNextPathPos)
-            EVT_CALL(SetNpcPos, 4, EVT_VAR(1), EVT_VAR(2), EVT_VAR(3))
+            EVT_CALL(SetNpcPos, 4, LocalVar(1), LocalVar(2), LocalVar(3))
             EVT_WAIT(1)
-            EVT_IF_NE(EVT_VAR(0), 1)
+            EVT_IF_NE(LocalVar(0), 1)
                 EVT_BREAK_LOOP
             EVT_END_IF
         EVT_END_LOOP
@@ -1055,9 +1055,9 @@ EvtScript N(80244270) = {
         EVT_CALL(LoadPath, 60, EVT_PTR(N(vectorList_80243FA4)), 5, 0)
         EVT_LOOP(0)
             EVT_CALL(GetNextPathPos)
-            EVT_CALL(SetNpcPos, 0, EVT_VAR(1), EVT_VAR(2), EVT_VAR(3))
+            EVT_CALL(SetNpcPos, 0, LocalVar(1), LocalVar(2), LocalVar(3))
             EVT_WAIT(1)
-            EVT_IF_NE(EVT_VAR(0), 1)
+            EVT_IF_NE(LocalVar(0), 1)
                 EVT_BREAK_LOOP
             EVT_END_IF
         EVT_END_LOOP
@@ -1068,9 +1068,9 @@ EvtScript N(80244270) = {
         EVT_CALL(LoadPath, 70, EVT_PTR(N(vectorList_80243FE0)), 5, 0)
         EVT_LOOP(0)
             EVT_CALL(GetNextPathPos)
-            EVT_CALL(SetNpcPos, 1, EVT_VAR(1), EVT_VAR(2), EVT_VAR(3))
+            EVT_CALL(SetNpcPos, 1, LocalVar(1), LocalVar(2), LocalVar(3))
             EVT_WAIT(1)
-            EVT_IF_NE(EVT_VAR(0), 1)
+            EVT_IF_NE(LocalVar(0), 1)
                 EVT_BREAK_LOOP
             EVT_END_IF
         EVT_END_LOOP
@@ -1081,9 +1081,9 @@ EvtScript N(80244270) = {
     EVT_CALL(LoadPath, 80, EVT_PTR(N(vectorList_8024401C)), 5, 0)
     EVT_LOOP(0)
         EVT_CALL(GetNextPathPos)
-        EVT_CALL(SetNpcPos, 2, EVT_VAR(1), EVT_VAR(2), EVT_VAR(3))
+        EVT_CALL(SetNpcPos, 2, LocalVar(1), LocalVar(2), LocalVar(3))
         EVT_WAIT(1)
-        EVT_IF_NE(EVT_VAR(0), 1)
+        EVT_IF_NE(LocalVar(0), 1)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
@@ -1093,29 +1093,29 @@ EvtScript N(80244270) = {
 
 EvtScript N(802445D4) = {
     EVT_WAIT(5)
-    EVT_CALL(IsPlayerWithin, 40, 0, 200, EVT_VAR(0))
-    EVT_IF_EQ(EVT_VAR(0), 0)
-        EVT_SET(EVT_VAR(3), 45)
+    EVT_CALL(IsPlayerWithin, 40, 0, 200, LocalVar(0))
+    EVT_IF_EQ(LocalVar(0), 0)
+        EVT_SET(LocalVar(3), 45)
     EVT_ELSE
-        EVT_SET(EVT_VAR(3), 25)
+        EVT_SET(LocalVar(3), 25)
     EVT_END_IF
-    EVT_SET(EVT_VAR(4), EVT_VAR(3))
-    EVT_ADD(EVT_VAR(4), -5)
-    EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-    EVT_IF_GT(EVT_VAR(2), -61)
+    EVT_SET(LocalVar(4), LocalVar(3))
+    EVT_ADD(LocalVar(4), -5)
+    EVT_CALL(GetPlayerPos, LocalVar(0), LocalVar(1), LocalVar(2))
+    EVT_IF_GT(LocalVar(2), -61)
         EVT_CHILD_THREAD
             EVT_CALL(SetNpcFlagBits, 0, ((NPC_FLAG_100)), TRUE)
-            EVT_CALL(NpcMoveTo, 0, EVT_VAR(0), 55, EVT_VAR(3))
+            EVT_CALL(NpcMoveTo, 0, LocalVar(0), 55, LocalVar(3))
         EVT_END_CHILD_THREAD
         EVT_CHILD_THREAD
             EVT_CALL(SetNpcFlagBits, 1, ((NPC_FLAG_100)), TRUE)
-            EVT_CALL(NpcMoveTo, 1, EVT_VAR(0), 55, EVT_VAR(3))
+            EVT_CALL(NpcMoveTo, 1, LocalVar(0), 55, LocalVar(3))
         EVT_END_CHILD_THREAD
         EVT_CHILD_THREAD
             EVT_CALL(SetNpcFlagBits, 2, ((NPC_FLAG_100)), TRUE)
-            EVT_CALL(NpcMoveTo, 2, EVT_VAR(0), 55, EVT_VAR(3))
+            EVT_CALL(NpcMoveTo, 2, LocalVar(0), 55, LocalVar(3))
         EVT_END_CHILD_THREAD
-        EVT_WAIT(EVT_VAR(4))
+        EVT_WAIT(LocalVar(4))
     EVT_END_IF
     EVT_RETURN
     EVT_END
@@ -1124,8 +1124,8 @@ EvtScript N(802445D4) = {
 EvtScript N(80244774) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(DisablePartnerAI, 0)
-    EVT_CALL(GetNpcPos, NPC_PARTNER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-    EVT_CALL(SetNpcPos, NPC_PARTNER, 65, EVT_VAR(1), 80)
+    EVT_CALL(GetNpcPos, NPC_PARTNER, LocalVar(0), LocalVar(1), LocalVar(2))
+    EVT_CALL(SetNpcPos, NPC_PARTNER, 65, LocalVar(1), 80)
     EVT_CALL(SetNpcYaw, NPC_PARTNER, 270)
     EVT_CALL(AdjustCam, 0, EVT_FIXED(8.0), 0, 450, EVT_FIXED(17.0), EVT_FIXED(-6.0))
     EVT_CALL(SpeakToPlayer, 4, NPC_ANIM_flying_magikoopa_Palette_02_Anim_9, NPC_ANIM_flying_magikoopa_Palette_02_Anim_1, 0, MESSAGE_ID(0x11, 0x00BB))
@@ -1133,15 +1133,15 @@ EvtScript N(80244774) = {
     EVT_EXEC(N(80244270))
     EVT_WAIT(80)
     EVT_CALL(AdjustCam, 0, EVT_FIXED(8.0), 0, 300, EVT_FIXED(19.0), EVT_FIXED(-8.5))
-    EVT_CALL(GetCurrentPartnerID, EVT_VAR(0))
+    EVT_CALL(GetCurrentPartnerID, LocalVar(0))
     EVT_CALL(BringPartnerOut, 8)
-    EVT_IF_NE(EVT_VAR(0), 8)
+    EVT_IF_NE(LocalVar(0), 8)
         EVT_CALL(SetNpcJumpscale, NPC_PARTNER, EVT_FIXED(0.0))
-        EVT_CALL(GetPlayerPos, EVT_VAR(1), EVT_VAR(2), EVT_VAR(3))
-        EVT_ADD(EVT_VAR(1), 20)
-        EVT_ADD(EVT_VAR(2), 20)
-        EVT_ADD(EVT_VAR(3), 20)
-        EVT_CALL(NpcJump0, NPC_PARTNER, EVT_VAR(1), EVT_VAR(2), EVT_VAR(3), 30)
+        EVT_CALL(GetPlayerPos, LocalVar(1), LocalVar(2), LocalVar(3))
+        EVT_ADD(LocalVar(1), 20)
+        EVT_ADD(LocalVar(2), 20)
+        EVT_ADD(LocalVar(3), 20)
+        EVT_CALL(NpcJump0, NPC_PARTNER, LocalVar(1), LocalVar(2), LocalVar(3), 30)
     EVT_END_IF
     EVT_CALL(NpcFacePlayer, NPC_PARTNER, 0)
     EVT_CALL(DisablePartnerAI, 0)
@@ -1154,15 +1154,15 @@ EvtScript N(80244774) = {
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_CALL(AwaitPlayerApproach, -250, 0, 50)
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(GetCurrentPartnerID, EVT_VAR(0))
+    EVT_CALL(GetCurrentPartnerID, LocalVar(0))
     EVT_CALL(BringPartnerOut, 8)
-    EVT_IF_NE(EVT_VAR(0), 8)
+    EVT_IF_NE(LocalVar(0), 8)
         EVT_CALL(SetNpcJumpscale, NPC_PARTNER, EVT_FIXED(0.0))
-        EVT_CALL(GetPlayerPos, EVT_VAR(1), EVT_VAR(2), EVT_VAR(3))
-        EVT_ADD(EVT_VAR(1), 20)
-        EVT_ADD(EVT_VAR(2), 20)
-        EVT_ADD(EVT_VAR(3), 20)
-        EVT_CALL(NpcJump0, NPC_PARTNER, EVT_VAR(1), EVT_VAR(2), EVT_VAR(3), 30)
+        EVT_CALL(GetPlayerPos, LocalVar(1), LocalVar(2), LocalVar(3))
+        EVT_ADD(LocalVar(1), 20)
+        EVT_ADD(LocalVar(2), 20)
+        EVT_ADD(LocalVar(3), 20)
+        EVT_CALL(NpcJump0, NPC_PARTNER, LocalVar(1), LocalVar(2), LocalVar(3), 30)
     EVT_END_IF
     EVT_CALL(PlayerFaceNpc, -4, 0)
     EVT_CALL(NpcFacePlayer, NPC_PARTNER, 0)
@@ -1178,17 +1178,17 @@ EvtScript N(80244774) = {
 
 EvtScript N(idle_80244B3C) = {
     EVT_LOOP(0)
-        EVT_CALL(GetSelfVar, 0, EVT_VAR(0))
-        EVT_IF_NE(EVT_VAR(0), 0)
+        EVT_CALL(GetSelfVar, 0, LocalVar(0))
+        EVT_IF_NE(LocalVar(0), 0)
             EVT_BREAK_LOOP
         EVT_END_IF
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_WAIT(10)
-    EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-    EVT_CALL(UseSettingsFrom, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-    EVT_CALL(SetPanTarget, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_CALL(GetPlayerPos, LocalVar(0), LocalVar(1), LocalVar(2))
+    EVT_CALL(UseSettingsFrom, 0, LocalVar(0), LocalVar(1), LocalVar(2))
+    EVT_CALL(SetPanTarget, 0, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_CALL(SetCamDistance, 0, 1000)
     EVT_CALL(SetCamPitch, 0, EVT_FIXED(17.0), EVT_FIXED(-6.0))
     EVT_CALL(SetCamSpeed, 0, EVT_FIXED(4.0))
@@ -1200,14 +1200,14 @@ EvtScript N(idle_80244B3C) = {
 };
 
 EvtScript N(defeat_80244C84) = {
-    EVT_CALL(GetBattleOutcome, EVT_VAR(0))
-    EVT_SWITCH(EVT_VAR(0))
+    EVT_CALL(GetBattleOutcome, LocalVar(0))
+    EVT_SWITCH(LocalVar(0))
         EVT_CASE_EQ(0)
-            EVT_CALL(GetSelfNpcID, EVT_VAR(0))
-            EVT_IF_EQ(EVT_VAR(0), 3)
+            EVT_CALL(GetSelfNpcID, LocalVar(0))
+            EVT_IF_EQ(LocalVar(0), 3)
                 EVT_CALL(SetNpcPos, 3, 0, -1000, 0)
                 EVT_CALL(SetNpcPos, 4, -55, 15, 35)
-                EVT_CALL(GetNpcYaw, 3, EVT_VAR(0))
+                EVT_CALL(GetNpcYaw, 3, LocalVar(0))
                 EVT_CALL(SetNpcYaw, 4, 90)
                 EVT_CALL(InterpPlayerYaw, 180, 0)
                 EVT_CALL(SetPlayerPos, 30, 0, 80)
@@ -1227,7 +1227,7 @@ EvtScript N(defeat_80244C84) = {
 };
 
 EvtScript N(80244E2C) = {
-    EVT_SWITCH(EVT_MAP_VAR(10))
+    EVT_SWITCH(MapVar(10))
         EVT_CASE_EQ(0)
             EVT_CALL(NpcFacePlayer, 3, 1)
         EVT_CASE_EQ(1)
@@ -1242,7 +1242,7 @@ EvtScript N(80244E2C) = {
 };
 
 EvtScript N(80244ED0) = {
-    EVT_SWITCH(EVT_MAP_VAR(10))
+    EVT_SWITCH(MapVar(10))
         EVT_CASE_EQ(0)
             EVT_CALL(SpeakToPlayer, 3, NPC_ANIM_magikoopa_Palette_02_Anim_2, NPC_ANIM_magikoopa_Palette_02_Anim_1, 16, MESSAGE_ID(0x11, 0x00B9))
             EVT_CALL(InterpNpcYaw, 3, 90, 0)
@@ -1261,7 +1261,7 @@ EvtScript N(80244ED0) = {
 };
 
 EvtScript N(80245004) = {
-    EVT_SWITCH(EVT_MAP_VAR(10))
+    EVT_SWITCH(MapVar(10))
         EVT_CASE_EQ(0)
             EVT_CALL(SpeakToPlayer, 3, NPC_ANIM_magikoopa_Palette_02_Anim_2, NPC_ANIM_magikoopa_Palette_02_Anim_1, 16, MESSAGE_ID(0x11, 0x00BA))
         EVT_CASE_EQ(1)
@@ -1287,10 +1287,10 @@ EvtScript N(80245108) = {
     EVT_CALL(SetNpcFlagBits, NPC_PARTNER, ((NPC_FLAG_100)), TRUE)
     EVT_CALL(AdjustCam, 0, EVT_FIXED(8.0), 0, 300, EVT_FIXED(17.0), EVT_FIXED(-6.0))
     EVT_EXEC_WAIT(N(80244E2C))
-    EVT_SWITCH(EVT_AREA_VAR(7))
+    EVT_SWITCH(AreaByte(7))
         EVT_CASE_EQ(0)
             EVT_EXEC_WAIT(N(80244ED0))
-            EVT_ADD(EVT_AREA_VAR(7), 1)
+            EVT_ADD(AreaByte(7), 1)
             EVT_CALL(ResetCam, 0, EVT_FIXED(4.0))
         EVT_CASE_EQ(1)
             EVT_EXEC_WAIT(N(80245004))
@@ -1302,40 +1302,40 @@ EvtScript N(80245108) = {
 };
 
 EvtScript N(80245228) = {
-    EVT_IF_EQ(EVT_MAP_VAR(10), -1)
-        EVT_SET(EVT_MAP_VAR(10), 0)
+    EVT_IF_EQ(MapVar(10), -1)
+        EVT_SET(MapVar(10), 0)
         EVT_EXEC_WAIT(N(80245108))
-        EVT_SET(EVT_MAP_VAR(10), -1)
+        EVT_SET(MapVar(10), -1)
     EVT_END_IF
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(8024527C) = {
-    EVT_IF_EQ(EVT_MAP_VAR(10), -1)
-        EVT_SET(EVT_MAP_VAR(10), 1)
+    EVT_IF_EQ(MapVar(10), -1)
+        EVT_SET(MapVar(10), 1)
         EVT_EXEC_WAIT(N(80245108))
-        EVT_SET(EVT_MAP_VAR(10), -1)
+        EVT_SET(MapVar(10), -1)
     EVT_END_IF
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(802452D0) = {
-    EVT_IF_EQ(EVT_MAP_VAR(10), -1)
-        EVT_SET(EVT_MAP_VAR(10), 2)
+    EVT_IF_EQ(MapVar(10), -1)
+        EVT_SET(MapVar(10), 2)
         EVT_EXEC_WAIT(N(80245108))
-        EVT_SET(EVT_MAP_VAR(10), -1)
+        EVT_SET(MapVar(10), -1)
     EVT_END_IF
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(80245324) = {
-    EVT_IF_EQ(EVT_MAP_VAR(10), -1)
-        EVT_SET(EVT_MAP_VAR(10), 3)
+    EVT_IF_EQ(MapVar(10), -1)
+        EVT_SET(MapVar(10), 3)
         EVT_EXEC_WAIT(N(80245108))
-        EVT_SET(EVT_MAP_VAR(10), -1)
+        EVT_SET(MapVar(10), -1)
     EVT_END_IF
     EVT_RETURN
     EVT_END
@@ -1346,17 +1346,17 @@ EvtScript N(80245378) = {
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(UseSettingsFrom, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-    EVT_CALL(SetPanTarget, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_CALL(UseSettingsFrom, 0, LocalVar(0), LocalVar(1), LocalVar(2))
+    EVT_CALL(SetPanTarget, 0, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_CALL(SetCamSpeed, 0, EVT_FIXED(8.0))
     EVT_CALL(SetCamPitch, 0, EVT_FIXED(17.0), EVT_FIXED(-6.0))
     EVT_CALL(SetCamDistance, 0, 300)
     EVT_CALL(PanToTarget, 0, 0, 1)
     EVT_CALL(WaitForCam, 0, EVT_FIXED(1.0))
     EVT_EXEC_WAIT(N(80244E2C))
-    EVT_IF_EQ(EVT_AREA_VAR(7), 0)
+    EVT_IF_EQ(AreaByte(7), 0)
         EVT_EXEC_WAIT(N(80244ED0))
-        EVT_ADD(EVT_AREA_VAR(7), 1)
+        EVT_ADD(AreaByte(7), 1)
         EVT_CALL(ResetCam, 0, EVT_FIXED(4.0))
     EVT_ELSE
         EVT_EXEC_WAIT(N(80245004))
@@ -1367,44 +1367,44 @@ EvtScript N(80245378) = {
 };
 
 EvtScript N(802454D4) = {
-    EVT_IF_EQ(EVT_MAP_VAR(10), -1)
-        EVT_SET(EVT_MAP_VAR(10), 0)
-        EVT_CALL(GetNpcPos, 3, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_IF_EQ(MapVar(10), -1)
+        EVT_SET(MapVar(10), 0)
+        EVT_CALL(GetNpcPos, 3, LocalVar(0), LocalVar(1), LocalVar(2))
         EVT_EXEC_WAIT(N(80245378))
-        EVT_SET(EVT_MAP_VAR(10), -1)
+        EVT_SET(MapVar(10), -1)
     EVT_END_IF
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(80245544) = {
-    EVT_IF_EQ(EVT_MAP_VAR(10), -1)
-        EVT_SET(EVT_MAP_VAR(10), 1)
-        EVT_CALL(GetNpcPos, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_IF_EQ(MapVar(10), -1)
+        EVT_SET(MapVar(10), 1)
+        EVT_CALL(GetNpcPos, 0, LocalVar(0), LocalVar(1), LocalVar(2))
         EVT_EXEC_WAIT(N(80245378))
-        EVT_SET(EVT_MAP_VAR(10), -1)
+        EVT_SET(MapVar(10), -1)
     EVT_END_IF
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(802455B4) = {
-    EVT_IF_EQ(EVT_MAP_VAR(10), -1)
-        EVT_SET(EVT_MAP_VAR(10), 2)
-        EVT_CALL(GetNpcPos, 1, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_IF_EQ(MapVar(10), -1)
+        EVT_SET(MapVar(10), 2)
+        EVT_CALL(GetNpcPos, 1, LocalVar(0), LocalVar(1), LocalVar(2))
         EVT_EXEC_WAIT(N(80245378))
-        EVT_SET(EVT_MAP_VAR(10), -1)
+        EVT_SET(MapVar(10), -1)
     EVT_END_IF
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(80245624) = {
-    EVT_IF_EQ(EVT_MAP_VAR(10), -1)
-        EVT_SET(EVT_MAP_VAR(10), 3)
-        EVT_CALL(GetNpcPos, 2, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_IF_EQ(MapVar(10), -1)
+        EVT_SET(MapVar(10), 3)
+        EVT_CALL(GetNpcPos, 2, LocalVar(0), LocalVar(1), LocalVar(2))
         EVT_EXEC_WAIT(N(80245378))
-        EVT_SET(EVT_MAP_VAR(10), -1)
+        EVT_SET(MapVar(10), -1)
     EVT_END_IF
     EVT_RETURN
     EVT_END
@@ -1419,7 +1419,7 @@ Vec4f N(triggerCoord_802456B4) = { 50.0f, 0.0f, -10.0, 0.0f };
 Vec4f N(triggerCoord_802456C4) = { 105.0f, 0.0f, -10.0, 0.0f };
 
 EvtScript N(802456D4) = {
-    EVT_SET(EVT_MAP_VAR(10), -1)
+    EVT_SET(MapVar(10), -1)
     EVT_BIND_TRIGGER(N(80245228), TRIGGER_WALL_HAMMER, 23, 1, 0)
     EVT_BIND_TRIGGER(N(80245228), TRIGGER_WALL_HAMMER, 19, 1, 0)
     EVT_BIND_TRIGGER(N(802454D4), TRIGGER_POINT_BOMB, EVT_PTR(N(triggerCoord_802456A4)), 1, 0)
@@ -1433,27 +1433,27 @@ EvtScript N(802456D4) = {
 };
 
 EvtScript N(interact_802457D4) = {
-    EVT_SWITCH(EVT_AREA_VAR(6))
+    EVT_SWITCH(AreaByte(6))
         EVT_CASE_EQ(0)
-            EVT_CALL(GetSelfNpcID, EVT_VAR(0))
-            EVT_IF_EQ(EVT_VAR(0), 3)
+            EVT_CALL(GetSelfNpcID, LocalVar(0))
+            EVT_IF_EQ(LocalVar(0), 3)
                 EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_magikoopa_Palette_02_Anim_2, NPC_ANIM_magikoopa_Palette_02_Anim_1, 5, MESSAGE_ID(0x11, 0x00B6))
             EVT_ELSE
                 EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_lakitu_Palette_00_Anim_16, NPC_ANIM_lakitu_Palette_00_Anim_1, 5, MESSAGE_ID(0x11, 0x00BC))
             EVT_END_IF
-            EVT_ADD(EVT_AREA_VAR(6), 1)
+            EVT_ADD(AreaByte(6), 1)
         EVT_CASE_EQ(1)
-            EVT_CALL(GetSelfNpcID, EVT_VAR(0))
-            EVT_IF_EQ(EVT_VAR(0), 3)
+            EVT_CALL(GetSelfNpcID, LocalVar(0))
+            EVT_IF_EQ(LocalVar(0), 3)
                 EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_magikoopa_Palette_02_Anim_2, NPC_ANIM_magikoopa_Palette_02_Anim_1, 5, MESSAGE_ID(0x11, 0x00B7))
             EVT_ELSE
                 EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_lakitu_Palette_00_Anim_16, NPC_ANIM_lakitu_Palette_00_Anim_1, 5, MESSAGE_ID(0x11, 0x00BD))
             EVT_END_IF
-            EVT_ADD(EVT_AREA_VAR(6), 1)
+            EVT_ADD(AreaByte(6), 1)
         EVT_CASE_EQ(2)
             EVT_CALL(AdjustCam, 0, EVT_FIXED(8.0), 0, 300, EVT_FIXED(19.0), EVT_FIXED(-9.0))
-            EVT_CALL(GetSelfNpcID, EVT_VAR(0))
-            EVT_IF_EQ(EVT_VAR(0), 3)
+            EVT_CALL(GetSelfNpcID, LocalVar(0))
+            EVT_IF_EQ(LocalVar(0), 3)
                 EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_magikoopa_Palette_02_Anim_2, NPC_ANIM_magikoopa_Palette_02_Anim_1, 5, MESSAGE_ID(0x11, 0x00B8))
                 EVT_CALL(NpcFacePlayer, NPC_SELF, 0)
                 EVT_WAIT(15)

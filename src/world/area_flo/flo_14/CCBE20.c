@@ -69,23 +69,23 @@ s32 N(ItemChoice_SelectedItemID) = {
 };
 
 EvtScript N(80244604) = {
-    EVT_SET(EVT_VAR(9), EVT_VAR(1))
+    EVT_SET(LocalVar(9), LocalVar(1))
     EVT_CALL(ShowConsumableChoicePopup)
-    EVT_SET(EVT_VAR(10), EVT_VAR(0))
-    EVT_SWITCH(EVT_VAR(0))
+    EVT_SET(LocalVar(10), LocalVar(0))
+    EVT_SWITCH(LocalVar(0))
         EVT_CASE_EQ(0)
         EVT_CASE_EQ(-1)
         EVT_CASE_DEFAULT
-            EVT_CALL(RemoveItemAt, EVT_VAR(1))
-            EVT_CALL(GetPlayerPos, EVT_VAR(3), EVT_VAR(4), EVT_VAR(5))
-            EVT_CALL(N(AddPlayerHandsOffset), EVT_VAR(3), EVT_VAR(4), EVT_VAR(5))
-            EVT_CALL(MakeItemEntity, EVT_VAR(0), EVT_VAR(3), EVT_VAR(4), EVT_VAR(5), 1, 0)
+            EVT_CALL(RemoveItemAt, LocalVar(1))
+            EVT_CALL(GetPlayerPos, LocalVar(3), LocalVar(4), LocalVar(5))
+            EVT_CALL(N(AddPlayerHandsOffset), LocalVar(3), LocalVar(4), LocalVar(5))
+            EVT_CALL(MakeItemEntity, LocalVar(0), LocalVar(3), LocalVar(4), LocalVar(5), 1, 0)
             EVT_CALL(SetPlayerAnimation, ANIM_60005)
             EVT_WAIT(30)
             EVT_CALL(SetPlayerAnimation, ANIM_10002)
-            EVT_CALL(RemoveItemEntity, EVT_VAR(0))
+            EVT_CALL(RemoveItemEntity, LocalVar(0))
     EVT_END_SWITCH
-    EVT_CALL(N(ItemChoice_SaveSelected), EVT_VAR(10))
+    EVT_CALL(N(ItemChoice_SaveSelected), LocalVar(10))
     EVT_CALL(CloseChoicePopup)
     EVT_UNBIND
     EVT_RETURN
@@ -93,9 +93,9 @@ EvtScript N(80244604) = {
 };
 
 EvtScript N(80244738) = {
-    EVT_CALL(N(BuildItemChoiceList), EVT_VAR(0))
+    EVT_CALL(N(BuildItemChoiceList), LocalVar(0))
     EVT_BIND_PADLOCK(N(80244604), 0x10, 0, EVT_PTR(N(ItemChoiceList)), 0, 1)
-    EVT_CALL(N(ItemChoice_WaitForSelection), EVT_VAR(0))
+    EVT_CALL(N(ItemChoice_WaitForSelection), LocalVar(0))
     EVT_RETURN
     EVT_END
 };
@@ -106,28 +106,28 @@ s32 N(D_80244788_CCFA98)[] = {
 };
 
 EvtScript N(interact_80244790) = {
-    EVT_IF_EQ(EVT_AREA_FLAG(37), 1)
-        EVT_SET(EVT_AREA_FLAG(35), 1)
+    EVT_IF_EQ(AreaFlag(37), 1)
+        EVT_SET(AreaFlag(35), 1)
         EVT_CALL(SpeakToPlayer, NPC_SELF, -1, -1, 0, MESSAGE_ID(0x11, 0x0063))
-        EVT_SET(EVT_AREA_FLAG(35), 0)
+        EVT_SET(AreaFlag(35), 0)
         EVT_RETURN
     EVT_END_IF
-    EVT_SET(EVT_AREA_FLAG(35), 1)
+    EVT_SET(AreaFlag(35), 1)
     EVT_IF_EQ(GF_FLO14_GaveBerryToBubblePlant, 0)
         EVT_CALL(SpeakToPlayer, NPC_SELF, -1, -1, 0, MESSAGE_ID(0x11, 0x005F))
     EVT_ELSE
         EVT_CALL(SpeakToPlayer, NPC_SELF, -1, -1, 0, MESSAGE_ID(0x11, 0x0060))
     EVT_END_IF
-    EVT_CALL(FindItem, 161, EVT_VAR(0))
-    EVT_IF_NE(EVT_VAR(0), -1)
-        EVT_SET(EVT_VAR(0), EVT_PTR(N(D_80244788_CCFA98)))
-        EVT_SET(EVT_VAR(1), 0)
+    EVT_CALL(FindItem, 161, LocalVar(0))
+    EVT_IF_NE(LocalVar(0), -1)
+        EVT_SET(LocalVar(0), EVT_PTR(N(D_80244788_CCFA98)))
+        EVT_SET(LocalVar(1), 0)
         EVT_EXEC_WAIT(N(80244738))
-        EVT_IF_EQ(EVT_VAR(0), -1)
+        EVT_IF_EQ(LocalVar(0), -1)
             EVT_CALL(SpeakToPlayer, NPC_SELF, -1, -1, 0, MESSAGE_ID(0x11, 0x0064))
         EVT_ELSE
             EVT_CALL(SpeakToPlayer, NPC_SELF, -1, -1, 0, MESSAGE_ID(0x11, 0x0061))
-            EVT_SET(EVT_AREA_FLAG(36), 1)
+            EVT_SET(AreaFlag(36), 1)
             EVT_CALL(SetNpcFlagBits, NPC_SELF, ((NPC_FLAG_100)), TRUE)
             EVT_CALL(PlayerMoveTo, 555, 110, 20)
             EVT_CALL(SetNpcFlagBits, NPC_SELF, ((NPC_FLAG_100)), FALSE)
@@ -142,7 +142,7 @@ EvtScript N(interact_80244790) = {
                 EVT_CALL(InterpPlayerYaw, 315, 0)
             EVT_END_THREAD
             EVT_LABEL(10)
-            EVT_IF_EQ(EVT_AREA_FLAG(37), 0)
+            EVT_IF_EQ(AreaFlag(37), 0)
                 EVT_WAIT(1)
                 EVT_GOTO(10)
             EVT_END_IF
@@ -152,14 +152,14 @@ EvtScript N(interact_80244790) = {
             EVT_BIND_TRIGGER(N(8024352C), TRIGGER_FLOOR_PRESS_A, 30, 1, 0)
         EVT_END_IF
     EVT_END_IF
-    EVT_SET(EVT_AREA_FLAG(35), 0)
+    EVT_SET(AreaFlag(35), 0)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(init_80244ADC) = {
-    EVT_SET(EVT_AREA_FLAG(36), 0)
-    EVT_SET(EVT_AREA_FLAG(37), 0)
+    EVT_SET(AreaFlag(36), 0)
+    EVT_SET(AreaFlag(37), 0)
     EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_80244790)))
     EVT_RETURN
     EVT_END
@@ -260,48 +260,48 @@ static s32 N(pad_4F64)[] = {
 
 EvtScript N(80244F70) = {
     EVT_LOOP(0)
-        EVT_CALL(N(func_80242360_CCD670), EVT_VAR(0))
-        EVT_IF_EQ(EVT_VAR(0), EVT_VAR(4))
-            EVT_CALL(GetPlayerActionState, EVT_VAR(0))
-            EVT_IF_NE(EVT_VAR(0), 23)
-                EVT_IF_EQ(EVT_VAR(8), 0)
+        EVT_CALL(N(func_80242360_CCD670), LocalVar(0))
+        EVT_IF_EQ(LocalVar(0), LocalVar(4))
+            EVT_CALL(GetPlayerActionState, LocalVar(0))
+            EVT_IF_NE(LocalVar(0), 23)
+                EVT_IF_EQ(LocalVar(8), 0)
                     EVT_THREAD
-                        EVT_CALL(GetModelCenter, EVT_VAR(5))
-                        EVT_CALL(PlaySoundAt, 0x1DB, 4194304, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+                        EVT_CALL(GetModelCenter, LocalVar(5))
+                        EVT_CALL(PlaySoundAt, 0x1DB, 4194304, LocalVar(0), LocalVar(1), LocalVar(2))
                     EVT_END_THREAD
                 EVT_END_IF
-                EVT_IF_LT(EVT_VAR(7), 90)
-                    EVT_IF_EQ(EVT_VAR(7), 0)
+                EVT_IF_LT(LocalVar(7), 90)
+                    EVT_IF_EQ(LocalVar(7), 0)
                         EVT_WAIT(5)
-                        EVT_SET(EVT_VAR(8), 6)
-                        EVT_CALL(ModifyColliderFlags, 0, EVT_VAR(9), 0x7FFFFE00)
+                        EVT_SET(LocalVar(8), 6)
+                        EVT_CALL(ModifyColliderFlags, 0, LocalVar(9), 0x7FFFFE00)
                     EVT_END_IF
-                    EVT_ADD(EVT_VAR(8), 1)
-                    EVT_ADD(EVT_VAR(7), EVT_VAR(8))
+                    EVT_ADD(LocalVar(8), 1)
+                    EVT_ADD(LocalVar(7), LocalVar(8))
                 EVT_END_IF
                 EVT_GOTO(50)
             EVT_END_IF
         EVT_END_IF
-        EVT_IF_NE(EVT_VAR(7), 0)
-            EVT_SUB(EVT_VAR(8), 1)
-            EVT_ADD(EVT_VAR(7), EVT_VAR(8))
-            EVT_IF_LE(EVT_VAR(7), 0)
-                EVT_SET(EVT_VAR(8), 0)
-                EVT_SET(EVT_VAR(7), 0)
+        EVT_IF_NE(LocalVar(7), 0)
+            EVT_SUB(LocalVar(8), 1)
+            EVT_ADD(LocalVar(7), LocalVar(8))
+            EVT_IF_LE(LocalVar(7), 0)
+                EVT_SET(LocalVar(8), 0)
+                EVT_SET(LocalVar(7), 0)
                 EVT_THREAD
-                    EVT_CALL(GetModelCenter, EVT_VAR(5))
-                    EVT_CALL(PlaySoundAt, 0x1DC, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+                    EVT_CALL(GetModelCenter, LocalVar(5))
+                    EVT_CALL(PlaySoundAt, 0x1DC, 0, LocalVar(0), LocalVar(1), LocalVar(2))
                 EVT_END_THREAD
-                EVT_CALL(ModifyColliderFlags, 1, EVT_VAR(9), 0x7FFFFE00)
+                EVT_CALL(ModifyColliderFlags, 1, LocalVar(9), 0x7FFFFE00)
             EVT_END_IF
         EVT_END_IF
         EVT_LABEL(50)
-        EVT_IF_GE(EVT_VAR(7), 90)
-            EVT_SET(EVT_VAR(8), -1)
-            EVT_SET(EVT_VAR(7), 90)
+        EVT_IF_GE(LocalVar(7), 90)
+            EVT_SET(LocalVar(8), -1)
+            EVT_SET(LocalVar(7), 90)
         EVT_END_IF
-        EVT_CALL(RotateModel, EVT_VAR(5), EVT_VAR(7), -1, 0, 0)
-        EVT_CALL(RotateModel, EVT_VAR(6), EVT_VAR(7), -1, 0, 0)
+        EVT_CALL(RotateModel, LocalVar(5), LocalVar(7), -1, 0, 0)
+        EVT_CALL(RotateModel, LocalVar(6), LocalVar(7), -1, 0, 0)
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_RETURN
@@ -309,19 +309,19 @@ EvtScript N(80244F70) = {
 };
 
 EvtScript N(80245224) = {
-    EVT_SET(EVT_VAR(4), 21)
-    EVT_SET(EVT_VAR(5), 21)
-    EVT_SET(EVT_VAR(6), 20)
-    EVT_SET(EVT_VAR(7), EVT_MAP_VAR(10))
-    EVT_SET(EVT_VAR(8), EVT_MAP_VAR(11))
-    EVT_SET(EVT_VAR(9), 22)
+    EVT_SET(LocalVar(4), 21)
+    EVT_SET(LocalVar(5), 21)
+    EVT_SET(LocalVar(6), 20)
+    EVT_SET(LocalVar(7), MapVar(10))
+    EVT_SET(LocalVar(8), MapVar(11))
+    EVT_SET(LocalVar(9), 22)
     EVT_EXEC(N(80244F70))
-    EVT_SET(EVT_VAR(4), 17)
-    EVT_SET(EVT_VAR(5), 26)
-    EVT_SET(EVT_VAR(6), 25)
-    EVT_SET(EVT_VAR(7), EVT_MAP_VAR(12))
-    EVT_SET(EVT_VAR(8), EVT_MAP_VAR(13))
-    EVT_SET(EVT_VAR(9), 18)
+    EVT_SET(LocalVar(4), 17)
+    EVT_SET(LocalVar(5), 26)
+    EVT_SET(LocalVar(6), 25)
+    EVT_SET(LocalVar(7), MapVar(12))
+    EVT_SET(LocalVar(8), MapVar(13))
+    EVT_SET(LocalVar(9), 18)
     EVT_EXEC(N(80244F70))
     EVT_RETURN
     EVT_END

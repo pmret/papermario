@@ -23,7 +23,7 @@ ApiStatus N(func_802A12D4_72BBE4)(Evt* script, s32 isInitialCall) {
 #include "UseItem.inc.c"
 
 EvtScript N(main) = {
-    EVT_SET_CONST(EVT_VAR(10), 0x00000098)
+    EVT_SET_CONST(LocalVar(10), 0x00000098)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_CALL(N(FadeBackgroundToBlack))
     EVT_THREAD
@@ -33,17 +33,17 @@ EvtScript N(main) = {
     EVT_END_THREAD
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_CROUCH)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_367)
-    EVT_CALL(GetActorPos, ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-    EVT_ADD(EVT_VAR(0), -40)
-    EVT_ADD(EVT_VAR(1), 5)
-    EVT_SETF(EVT_VAR(3), EVT_FIXED(0.7))
+    EVT_CALL(GetActorPos, ACTOR_PLAYER, LocalVar(0), LocalVar(1), LocalVar(2))
+    EVT_ADD(LocalVar(0), -40)
+    EVT_ADD(LocalVar(1), 5)
+    EVT_SETF(LocalVar(3), EVT_FIXED(0.7))
     EVT_LOOP(5)
-        EVT_CALL(PlayEffect, 0x61, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), EVT_VAR(3), 25, 0, 0, 0, 0, 0, 0, 0)
-        EVT_ADD(EVT_VAR(0), 5)
-        EVT_ADDF(EVT_VAR(3), EVT_FIXED(0.15))
+        EVT_CALL(PlayEffect, 0x61, 0, LocalVar(0), LocalVar(1), LocalVar(2), LocalVar(3), 25, 0, 0, 0, 0, 0, 0, 0)
+        EVT_ADD(LocalVar(0), 5)
+        EVT_ADDF(LocalVar(3), EVT_FIXED(0.15))
         EVT_WAIT(7)
     EVT_END_LOOP
-    EVT_CALL(PlayEffect, 0x61, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), EVT_FIXED(1.5), 60, 0, 0, 0, 0, 0, 0, 0)
+    EVT_CALL(PlayEffect, 0x61, 0, LocalVar(0), LocalVar(1), LocalVar(2), EVT_FIXED(1.5), 60, 0, 0, 0, 0, 0, 0, 0)
     EVT_WAIT(20)
     EVT_LOOP(4)
         EVT_CALL(AddBattleCamZoom, -100)
@@ -58,15 +58,15 @@ EvtScript N(main) = {
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(ItemCheckHit, EVT_VAR(0), 268435456, 0, EVT_VAR(0), 0)
-    EVT_IF_EQ(EVT_VAR(0), 6)
+    EVT_CALL(ItemCheckHit, LocalVar(0), 268435456, 0, LocalVar(0), 0)
+    EVT_IF_EQ(LocalVar(0), 6)
         EVT_GOTO(1)
     EVT_END_IF
     EVT_CALL(func_80269EAC, 21)
-    EVT_CALL(ItemAfflictEnemy, EVT_VAR(0), 1879052288, 0, 100, 0, 32)
+    EVT_CALL(ItemAfflictEnemy, LocalVar(0), 1879052288, 0, 100, 0, 32)
     EVT_LABEL(1)
-    EVT_CALL(ChooseNextTarget, 0, EVT_VAR(0))
-    EVT_IF_NE(EVT_VAR(0), -1)
+    EVT_CALL(ChooseNextTarget, 0, LocalVar(0))
+    EVT_IF_NE(LocalVar(0), -1)
         EVT_GOTO(0)
     EVT_END_IF
     EVT_WAIT(10)

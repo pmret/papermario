@@ -40,10 +40,10 @@ EvtScript N(exitSingleDoor_802403C0) = {
     EVT_SET_GROUP(EVT_GROUP_1B)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(UseDoorSounds, 0)
-    EVT_SET(EVT_VAR(0), 0)
-    EVT_SET(EVT_VAR(1), 12)
-    EVT_SET(EVT_VAR(2), 5)
-    EVT_SET(EVT_VAR(3), -1)
+    EVT_SET(LocalVar(0), 0)
+    EVT_SET(LocalVar(1), 12)
+    EVT_SET(LocalVar(2), 5)
+    EVT_SET(LocalVar(3), -1)
     EVT_EXEC(ExitSingleDoor)
     EVT_WAIT(17)
     EVT_CALL(GotoMap, EVT_PTR("dgb_04"), 1)
@@ -54,11 +54,11 @@ EvtScript N(exitSingleDoor_802403C0) = {
 
 EvtScript N(enterSingleDoor_80240474) = {
     EVT_CALL(UseDoorSounds, 0)
-    EVT_CALL(GetEntryID, EVT_VAR(0))
-    EVT_SWITCH(EVT_VAR(0))
+    EVT_CALL(GetEntryID, LocalVar(0))
+    EVT_SWITCH(LocalVar(0))
         EVT_CASE_EQ(0)
-            EVT_SET(EVT_VAR(2), 5)
-            EVT_SET(EVT_VAR(3), -1)
+            EVT_SET(LocalVar(2), 5)
+            EVT_SET(LocalVar(3), -1)
             EVT_EXEC_WAIT(EnterSingleDoor)
     EVT_END_SWITCH
     EVT_RETURN
@@ -92,7 +92,7 @@ EvtScript N(main) = {
 
 EvtScript N(makeEntities) = {
     EVT_CALL(MakeEntity, &Entity_Chest, -300, 50, -200, 0, 0, MAKE_ENTITY_END)
-    EVT_CALL(AssignChestFlag, EVT_SAVE_FLAG(CHEST_FLAG))
+    EVT_CALL(AssignChestFlag, GameFlag(CHEST_FLAG))
     EVT_CALL(AssignScript, EVT_PTR(N(EVS_Chest_Interact)))
     EVT_CALL(MakeEntity, EVT_PTR(Entity_HeartBlock), -125, 60, 175, 0, MAKE_ENTITY_END)
     EVT_RETURN
@@ -110,12 +110,12 @@ NpcSettings N(npcSettings_80240840) = {
 };
 
 EvtScript N(interact_8024086C) = {
-    EVT_IF_EQ(EVT_AREA_FLAG(4), 0)
+    EVT_IF_EQ(AreaFlag(4), 0)
         EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 0, MESSAGE_ID(0x0E, 0x00F0))
-        EVT_SET(EVT_AREA_FLAG(4), 1)
+        EVT_SET(AreaFlag(4), 1)
     EVT_ELSE
         EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 0, MESSAGE_ID(0x0E, 0x00F1))
-        EVT_SET(EVT_AREA_FLAG(4), 0)
+        EVT_SET(AreaFlag(4), 0)
     EVT_END_IF
     EVT_RETURN
     EVT_END

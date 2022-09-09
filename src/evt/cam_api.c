@@ -3,14 +3,14 @@
 
 EvtScript ShakeCam1 = {
     EVT_SET_GROUP(EVT_GROUP_00)
-    EVT_CALL(ShakeCam, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), EVT_FIXED(1.0))
+    EVT_CALL(ShakeCam, LocalVar(0), LocalVar(1), LocalVar(2), EVT_FIXED(1.0))
     EVT_RETURN
     EVT_END
 };
 
 EvtScript ShakeCamX = {
     EVT_SET_GROUP(EVT_GROUP_00)
-    EVT_CALL(ShakeCam, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), EVT_VAR(3))
+    EVT_CALL(ShakeCam, LocalVar(0), LocalVar(1), LocalVar(2), LocalVar(3))
     EVT_RETURN
     EVT_END
 };
@@ -338,10 +338,10 @@ void exec_ShakeCamX(s32 camID, s32 mode, s32 duration, f32 magnitude) {
     Evt* script;
 
     script = start_script_in_group(&ShakeCamX, EVT_PRIORITY_1, 0, EVT_GROUP_04);
-    evt_set_variable(script, EVT_VAR(0), camID);
-    evt_set_variable(script, EVT_VAR(1), mode);
-    evt_set_variable(script, EVT_VAR(2), duration);
-    evt_set_float_variable(script, EVT_VAR(3), magnitude);
+    evt_set_variable(script, LocalVar(0), camID);
+    evt_set_variable(script, LocalVar(1), mode);
+    evt_set_variable(script, LocalVar(2), duration);
+    evt_set_float_variable(script, LocalVar(3), magnitude);
 }
 
 ApiStatus SetCamLeadPlayer(Evt* script, s32 isInitialCall) {

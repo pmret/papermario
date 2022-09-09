@@ -4,7 +4,7 @@
 
 #define NAMESPACE b_area_hos_hos_00
 
-// Shakes a model (ID input on EVT_VAR(0)) on loop, waiting up to 30 frames between.
+// Shakes a model (ID input on LocalVar(0)) on loop, waiting up to 30 frames between.
 EvtScript N(802255E0) = {
     EVT_SET(LocalVar(10), LocalVar(0))
     EVT_LABEL(0)

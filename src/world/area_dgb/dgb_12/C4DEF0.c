@@ -35,10 +35,10 @@ EvtScript N(exitSingleDoor_802403B0) = {
     EVT_SET_GROUP(EVT_GROUP_1B)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(UseDoorSounds, 0)
-    EVT_SET(EVT_VAR(0), 0)
-    EVT_SET(EVT_VAR(1), 8)
-    EVT_SET(EVT_VAR(2), 14)
-    EVT_SET(EVT_VAR(3), -1)
+    EVT_SET(LocalVar(0), 0)
+    EVT_SET(LocalVar(1), 8)
+    EVT_SET(LocalVar(2), 14)
+    EVT_SET(LocalVar(3), -1)
     EVT_EXEC(ExitSingleDoor)
     EVT_WAIT(17)
     EVT_CALL(GotoMap, EVT_PTR("dgb_09"), 2)
@@ -49,11 +49,11 @@ EvtScript N(exitSingleDoor_802403B0) = {
 
 EvtScript N(enterSingleDoor_80240464) = {
     EVT_CALL(UseDoorSounds, 0)
-    EVT_CALL(GetEntryID, EVT_VAR(0))
-    EVT_SWITCH(EVT_VAR(0))
+    EVT_CALL(GetEntryID, LocalVar(0))
+    EVT_SWITCH(LocalVar(0))
         EVT_CASE_EQ(0)
-            EVT_SET(EVT_VAR(2), 14)
-            EVT_SET(EVT_VAR(3), -1)
+            EVT_SET(LocalVar(2), 14)
+            EVT_SET(LocalVar(3), -1)
             EVT_EXEC_WAIT(EnterSingleDoor)
     EVT_END_SWITCH
     EVT_RETURN
@@ -99,10 +99,10 @@ EvtScript N(802405E0) = {
         EVT_CALL(MakeLerp, 0, -35, 15, 0)
         EVT_LOOP(0)
             EVT_CALL(UpdateLerp)
-            EVT_CALL(TranslateModel, 19, 0, EVT_VAR(0), 0)
+            EVT_CALL(TranslateModel, 19, 0, LocalVar(0), 0)
             EVT_CALL(UpdateColliderTransform, 12)
             EVT_WAIT(1)
-            EVT_IF_EQ(EVT_VAR(1), 0)
+            EVT_IF_EQ(LocalVar(1), 0)
                 EVT_BREAK_LOOP
             EVT_END_IF
         EVT_END_LOOP
@@ -114,10 +114,10 @@ EvtScript N(802405E0) = {
         EVT_CALL(MakeLerp, -35, 0, 4, 0)
         EVT_LOOP(0)
             EVT_CALL(UpdateLerp)
-            EVT_CALL(TranslateModel, 19, 0, EVT_VAR(0), 0)
+            EVT_CALL(TranslateModel, 19, 0, LocalVar(0), 0)
             EVT_CALL(UpdateColliderTransform, 12)
             EVT_WAIT(1)
-            EVT_IF_EQ(EVT_VAR(1), 0)
+            EVT_IF_EQ(LocalVar(1), 0)
                 EVT_BREAK_LOOP
             EVT_END_IF
         EVT_END_LOOP

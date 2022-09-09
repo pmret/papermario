@@ -52,7 +52,7 @@ ApiStatus N(func_802A1420_722F60)(Evt* script, s32 isInitialCall) {
 #include "UseItem.inc.c"
 
 EvtScript N(main) = {
-    EVT_SET_CONST(EVT_VAR(10), 0x84)
+    EVT_SET_CONST(LocalVar(10), 0x84)
     EVT_EXEC_WAIT(battle_item_thunder_bolt_UseItemWithEffect)
     EVT_THREAD
         EVT_WAIT(5)
@@ -64,16 +64,16 @@ EvtScript N(main) = {
     EVT_WAIT(10)
     EVT_CALL(InitTargetIterator)
     EVT_CALL(SetGoalToTarget, -127)
-    EVT_CALL(ItemCheckHit, EVT_VAR(0), 268435456, 0, EVT_VAR(0), 0)
-    EVT_IF_EQ(EVT_VAR(0), 6)
+    EVT_CALL(ItemCheckHit, LocalVar(0), 268435456, 0, LocalVar(0), 0)
+    EVT_IF_EQ(LocalVar(0), 6)
         EVT_GOTO(1)
     EVT_END_IF
     EVT_CALL(battle_item_thunder_bolt_func_802A123C_722D7C)
     EVT_WAIT(5)
     EVT_CALL(StartRumble, 10)
     EVT_CALL(ShakeCam, 1, 0, 5, EVT_FIXED(1.0))
-    EVT_CALL(GetItemPower, 130, EVT_VAR(0), EVT_VAR(1))
-    EVT_CALL(ItemDamageEnemy, EVT_VAR(0), 939524128, 0, EVT_VAR(0), 32)
+    EVT_CALL(GetItemPower, 130, LocalVar(0), LocalVar(1))
+    EVT_CALL(ItemDamageEnemy, LocalVar(0), 939524128, 0, LocalVar(0), 32)
     EVT_LABEL(1)
     EVT_WAIT(5)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)

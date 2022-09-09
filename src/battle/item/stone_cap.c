@@ -48,16 +48,16 @@ ApiStatus N(func_802A123C_7217DC)(Evt* script, s32 isInitialCall) {
 #include "UseItem.inc.c"
 
 EvtScript N(main) = {
-    EVT_SET_CONST(EVT_VAR(10), 0x00000088)
+    EVT_SET_CONST(LocalVar(10), 0x00000088)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_CALL(PlaySound, SOUND_361)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_30009)
     EVT_WAIT(30)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_CROUCH)
-    EVT_CALL(GetItemPower, ITEM_STONE_CAP, EVT_VAR(0), EVT_VAR(1))
+    EVT_CALL(GetItemPower, ITEM_STONE_CAP, LocalVar(0), LocalVar(1))
     EVT_CALL(PlaySound, SOUND_362)
     EVT_CALL(N(func_802A123C_7217DC))
-    EVT_CALL(GetActorPos, ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_CALL(GetActorPos, ACTOR_PLAYER, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_WAIT(20)
     EVT_RETURN
     EVT_END

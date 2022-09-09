@@ -50,10 +50,10 @@ EvtScript N(80240D40) = {
 
 EvtScript N(80240DA0) = {
     EVT_SET_GROUP(EVT_GROUP_00)
-    EVT_IF_EQ(EVT_VAR(5), 1)
-        EVT_IF_EQ(EVT_VAR(6), 1)
-            EVT_IF_EQ(EVT_VAR(7), 1)
-                EVT_IF_EQ(EVT_VAR(8), 1)
+    EVT_IF_EQ(LocalVar(5), 1)
+        EVT_IF_EQ(LocalVar(6), 1)
+            EVT_IF_EQ(LocalVar(7), 1)
+                EVT_IF_EQ(LocalVar(8), 1)
                     EVT_CALL(N(UpdateTexturePanSmooth))
                     EVT_RETURN
                 EVT_END_IF
@@ -68,27 +68,27 @@ EvtScript N(80240DA0) = {
 EvtScript N(80240E3C) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_EQ(55)
-            EVT_SET(EVT_VAR(0), 0)
-            EVT_IF_EQ(EVT_MAP_VAR(10), 0)
+            EVT_SET(LocalVar(0), 0)
+            EVT_IF_EQ(MapVar(10), 0)
                 EVT_RETURN
             EVT_END_IF
             EVT_SET(GB_StoryProgress, 56)
         EVT_CASE_EQ(56)
-            EVT_SET(EVT_VAR(0), 1)
+            EVT_SET(LocalVar(0), 1)
         EVT_CASE_DEFAULT
             EVT_RETURN
     EVT_END_SWITCH
-    EVT_IF_EQ(EVT_VAR(0), 0)
+    EVT_IF_EQ(LocalVar(0), 0)
         EVT_CALL(DisablePlayerInput, TRUE)
         EVT_CALL(UseSettingsFrom, 0, 650, 205, 0)
         EVT_CALL(SetCamSpeed, 0, EVT_FIXED(0.6))
         EVT_CALL(SetPanTarget, 0, 650, 150, 0)
-        EVT_CALL(GetCamDistance, 0, EVT_VAR(1))
-        EVT_SUB(EVT_VAR(1), 100)
-        EVT_CALL(SetCamDistance, 0, EVT_VAR(1))
+        EVT_CALL(GetCamDistance, 0, LocalVar(1))
+        EVT_SUB(LocalVar(1), 100)
+        EVT_CALL(SetCamDistance, 0, LocalVar(1))
         EVT_IF_NE(EVT_FIXED(-5.5), 10000)
-            EVT_CALL(GetCamPitch, 0, EVT_VAR(2), EVT_VAR(3))
-            EVT_CALL(SetCamPitch, 0, EVT_VAR(2), EVT_FIXED(-5.5))
+            EVT_CALL(GetCamPitch, 0, LocalVar(2), LocalVar(3))
+            EVT_CALL(SetCamPitch, 0, LocalVar(2), EVT_FIXED(-5.5))
         EVT_END_IF
         EVT_CALL(PanToTarget, 0, 0, 1)
         EVT_CALL(N(StarSpiritEffectFunc2), 5, 180, 650, 170, 0, 650, 205, 0, 150, 120)
@@ -116,14 +116,14 @@ EvtScript N(80240E3C) = {
             EVT_WAIT(80)
             EVT_CALL(SetPlayerAnimation, ANIM_10002)
         EVT_END_THREAD
-        EVT_ADD(EVT_VAR(1), 100)
-        EVT_CALL(SetCamDistance, 0, EVT_VAR(1))
+        EVT_ADD(LocalVar(1), 100)
+        EVT_CALL(SetCamDistance, 0, LocalVar(1))
         EVT_CALL(SetPanTarget, 0, 650, 120, 0)
         EVT_CALL(N(StarSpiritEffectFunc4), 2)
-        EVT_CALL(GetPlayerPos, EVT_VAR(2), EVT_VAR(3), EVT_VAR(4))
-        EVT_CALL(UseSettingsFrom, 0, EVT_VAR(2), EVT_VAR(3), EVT_VAR(4))
+        EVT_CALL(GetPlayerPos, LocalVar(2), LocalVar(3), LocalVar(4))
+        EVT_CALL(UseSettingsFrom, 0, LocalVar(2), LocalVar(3), LocalVar(4))
         EVT_CALL(SetCamSpeed, 0, EVT_FIXED(1.0))
-        EVT_CALL(SetPanTarget, 0, EVT_VAR(2), EVT_VAR(3), EVT_VAR(4))
+        EVT_CALL(SetPanTarget, 0, LocalVar(2), LocalVar(3), LocalVar(4))
         EVT_CALL(WaitForCam, 0, EVT_FIXED(1.0))
         EVT_CALL(PanToTarget, 0, 0, 0)
         EVT_CALL(DisablePlayerInput, FALSE)
@@ -165,9 +165,9 @@ EvtScript N(main) = {
     EVT_EXEC(N(80241600))
     EVT_CALL(ModifyColliderFlags, 3, 5, 0x00000007)
     EVT_CALL(ModifyColliderFlags, 3, 7, 0x00000007)
-    EVT_CALL(GetEntryID, EVT_VAR(0))
+    EVT_CALL(GetEntryID, LocalVar(0))
     EVT_CALL(ModifyColliderFlags, 0, 1, 0x7FFFFE00)
-    EVT_SET(EVT_VAR(0), EVT_PTR(N(80241350)))
+    EVT_SET(LocalVar(0), EVT_PTR(N(80241350)))
     EVT_EXEC(EnterWalk)
     EVT_EXEC_WAIT(N(80240D40))
     EVT_IF_GE(GB_StoryProgress, 53)
@@ -191,52 +191,52 @@ s32 N(D_802414FC_CE7BFC)[] = {
 };
 
 EvtScript N(80241560) = {
-    EVT_ADDF(EVT_MAP_VAR(0), EVT_FIXED(-1.5))
+    EVT_ADDF(MapVar(0), EVT_FIXED(-1.5))
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(80241580) = {
-    EVT_ADDF(EVT_MAP_VAR(1), EVT_FIXED(-1.5))
+    EVT_ADDF(MapVar(1), EVT_FIXED(-1.5))
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(802415A0) = {
-    EVT_ADDF(EVT_MAP_VAR(2), EVT_FIXED(-1.5))
+    EVT_ADDF(MapVar(2), EVT_FIXED(-1.5))
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(802415C0) = {
-    EVT_ADDF(EVT_MAP_VAR(3), EVT_FIXED(-1.5))
+    EVT_ADDF(MapVar(3), EVT_FIXED(-1.5))
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(802415E0) = {
-    EVT_ADDF(EVT_MAP_VAR(4), EVT_FIXED(-1.5))
+    EVT_ADDF(MapVar(4), EVT_FIXED(-1.5))
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(80241600) = {
     EVT_THREAD
-        EVT_SET(EVT_VAR(15), 0)
+        EVT_SET(LocalVar(15), 0)
         EVT_LABEL(0)
-        EVT_CALL(N(UnkFloatFunc), EVT_VAR(15), EVT_VAR(0), EVT_FIXED(0.96875), EVT_FIXED(1.03125), 15, 0, 0)
-        EVT_CALL(N(UnkFloatFunc), EVT_VAR(15), EVT_VAR(1), EVT_FIXED(1.03125), EVT_FIXED(0.96875), 15, 0, 0)
-        EVT_CALL(ScaleModel, 88, EVT_VAR(1), EVT_VAR(0), 1)
-        EVT_CALL(ScaleModel, 90, EVT_VAR(1), EVT_VAR(0), 1)
-        EVT_CALL(ScaleModel, 92, EVT_VAR(0), EVT_VAR(1), 1)
-        EVT_CALL(ScaleModel, 94, EVT_VAR(0), EVT_VAR(1), 1)
-        EVT_CALL(ScaleModel, 96, EVT_VAR(0), EVT_VAR(1), 1)
-        EVT_CALL(ScaleModel, 98, EVT_VAR(1), EVT_VAR(0), 1)
-        EVT_CALL(ScaleModel, 100, EVT_VAR(0), EVT_VAR(1), 1)
-        EVT_CALL(ScaleModel, 102, EVT_VAR(0), EVT_VAR(1), 1)
-        EVT_ADD(EVT_VAR(15), 1)
-        EVT_IF_GE(EVT_VAR(15), 30)
-            EVT_SET(EVT_VAR(15), 0)
+        EVT_CALL(N(UnkFloatFunc), LocalVar(15), LocalVar(0), EVT_FIXED(0.96875), EVT_FIXED(1.03125), 15, 0, 0)
+        EVT_CALL(N(UnkFloatFunc), LocalVar(15), LocalVar(1), EVT_FIXED(1.03125), EVT_FIXED(0.96875), 15, 0, 0)
+        EVT_CALL(ScaleModel, 88, LocalVar(1), LocalVar(0), 1)
+        EVT_CALL(ScaleModel, 90, LocalVar(1), LocalVar(0), 1)
+        EVT_CALL(ScaleModel, 92, LocalVar(0), LocalVar(1), 1)
+        EVT_CALL(ScaleModel, 94, LocalVar(0), LocalVar(1), 1)
+        EVT_CALL(ScaleModel, 96, LocalVar(0), LocalVar(1), 1)
+        EVT_CALL(ScaleModel, 98, LocalVar(1), LocalVar(0), 1)
+        EVT_CALL(ScaleModel, 100, LocalVar(0), LocalVar(1), 1)
+        EVT_CALL(ScaleModel, 102, LocalVar(0), LocalVar(1), 1)
+        EVT_ADD(LocalVar(15), 1)
+        EVT_IF_GE(LocalVar(15), 30)
+            EVT_SET(LocalVar(15), 0)
         EVT_END_IF
         EVT_WAIT(1)
         EVT_GOTO(0)
@@ -322,9 +322,9 @@ EvtScript N(80241920) = {
         EVT_CALL(LoadPath, 30, EVT_PTR(N(vectorList_8024189C)), 3, 0)
         EVT_LABEL(0)
         EVT_CALL(GetNextPathPos)
-        EVT_CALL(SetPlayerPos, EVT_VAR(1), EVT_VAR(2), EVT_VAR(3))
+        EVT_CALL(SetPlayerPos, LocalVar(1), LocalVar(2), LocalVar(3))
         EVT_WAIT(1)
-        EVT_IF_EQ(EVT_VAR(0), 1)
+        EVT_IF_EQ(LocalVar(0), 1)
             EVT_GOTO(0)
         EVT_END_IF
     EVT_END_THREAD
@@ -340,9 +340,9 @@ EvtScript N(80241B98) = {
     EVT_CALL(AwaitPlayerApproach, 650, 0, 30)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(SetMusicTrack, 0, SONG_HUFF_N_PUFF_THEME, 0, 8)
-    EVT_EXEC_GET_TID(N(802418C0), EVT_VAR(9))
-    EVT_CALL(GetCurrentPartner, EVT_VAR(0))
-    EVT_IF_NE(EVT_VAR(0), 0)
+    EVT_EXEC_GET_TID(N(802418C0), LocalVar(9))
+    EVT_CALL(GetCurrentPartner, LocalVar(0))
+    EVT_IF_NE(LocalVar(0), 0)
         EVT_CALL(func_802D2B6C)
         EVT_WAIT(20)
     EVT_END_IF
@@ -351,37 +351,37 @@ EvtScript N(80241B98) = {
     EVT_WAIT(5)
     EVT_CALL(SetPlayerAnimation, ANIM_1002B)
     EVT_CALL(SetNpcFlagBits, 1, ((NPC_FLAG_100)), TRUE)
-    EVT_CALL(GetPlayerPos, EVT_VAR(2), EVT_VAR(3), EVT_VAR(4))
-    EVT_CALL(UseSettingsFrom, 0, EVT_VAR(2), EVT_VAR(3), EVT_VAR(4))
-    EVT_CALL(SetPanTarget, 0, EVT_VAR(2), EVT_VAR(3), EVT_VAR(4))
+    EVT_CALL(GetPlayerPos, LocalVar(2), LocalVar(3), LocalVar(4))
+    EVT_CALL(UseSettingsFrom, 0, LocalVar(2), LocalVar(3), LocalVar(4))
+    EVT_CALL(SetPanTarget, 0, LocalVar(2), LocalVar(3), LocalVar(4))
     EVT_CALL(SetCamSpeed, 0, EVT_FIXED(90.0))
     EVT_CALL(PanToTarget, 0, 0, 1)
-    EVT_CALL(MakeLerp, EVT_VAR(2), 600, 20, 0)
-    EVT_SET(EVT_VAR(2), EVT_VAR(3))
-    EVT_SET(EVT_VAR(5), EVT_VAR(3))
-    EVT_ADD(EVT_VAR(5), 15)
+    EVT_CALL(MakeLerp, LocalVar(2), 600, 20, 0)
+    EVT_SET(LocalVar(2), LocalVar(3))
+    EVT_SET(LocalVar(5), LocalVar(3))
+    EVT_ADD(LocalVar(5), 15)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
-        EVT_ADD(EVT_VAR(3), 3)
-        EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(3), EVT_VAR(4))
-        EVT_IF_GT(EVT_VAR(3), EVT_VAR(5))
-            EVT_SET(EVT_VAR(3), EVT_VAR(2))
+        EVT_ADD(LocalVar(3), 3)
+        EVT_CALL(SetPlayerPos, LocalVar(0), LocalVar(3), LocalVar(4))
+        EVT_IF_GT(LocalVar(3), LocalVar(5))
+            EVT_SET(LocalVar(3), LocalVar(2))
         EVT_END_IF
         EVT_WAIT(1)
-        EVT_IF_EQ(EVT_VAR(1), 0)
+        EVT_IF_EQ(LocalVar(1), 0)
             EVT_BREAK_LOOP
         EVT_END_IF
-        EVT_CALL(SetPanTarget, 0, EVT_VAR(0), EVT_VAR(2), EVT_VAR(4))
+        EVT_CALL(SetPanTarget, 0, LocalVar(0), LocalVar(2), LocalVar(4))
     EVT_END_LOOP
     EVT_CALL(func_802D2C14, 1)
-    EVT_CALL(SetPlayerPos, EVT_VAR(0), EVT_VAR(2), EVT_VAR(4))
+    EVT_CALL(SetPlayerPos, LocalVar(0), LocalVar(2), LocalVar(4))
     EVT_CALL(SetNpcFlagBits, 1, ((NPC_FLAG_100)), FALSE)
     EVT_CALL(DisablePlayerPhysics, FALSE)
     EVT_WAIT(10)
-    EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-    EVT_CALL(UseSettingsFrom, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-    EVT_ADD(EVT_VAR(0), 25)
-    EVT_CALL(SetPanTarget, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_CALL(GetPlayerPos, LocalVar(0), LocalVar(1), LocalVar(2))
+    EVT_CALL(UseSettingsFrom, 0, LocalVar(0), LocalVar(1), LocalVar(2))
+    EVT_ADD(LocalVar(0), 25)
+    EVT_CALL(SetPanTarget, 0, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_CALL(SetCamDistance, 0, EVT_FIXED(300.0))
     EVT_CALL(SetCamPitch, 0, EVT_FIXED(17.0), EVT_FIXED(-9.0))
     EVT_CALL(SetCamSpeed, 0, EVT_FIXED(4.0))
@@ -400,34 +400,34 @@ EvtScript N(80241B98) = {
     EVT_CALL(PanToTarget, 0, 0, 1)
     EVT_CALL(func_802D2C14, 0)
     EVT_WAIT(10)
-    EVT_CALL(GetCurrentPartnerID, EVT_VAR(0))
-    EVT_IF_NE(EVT_VAR(0), 8)
+    EVT_CALL(GetCurrentPartnerID, LocalVar(0))
+    EVT_IF_NE(LocalVar(0), 8)
         EVT_CALL(ShowMessageAtWorldPos, MESSAGE_ID(0x11, 0x00CC), 630, 120, 0)
     EVT_ELSE
         EVT_CALL(ShowMessageAtWorldPos, MESSAGE_ID(0x11, 0x00CD), 630, 120, 0)
     EVT_END_IF
     EVT_CHILD_THREAD
         EVT_WAIT(15)
-        EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_ADD(EVT_VAR(0), 25)
-        EVT_CALL(UseSettingsFrom, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+        EVT_CALL(GetPlayerPos, LocalVar(0), LocalVar(1), LocalVar(2))
+        EVT_ADD(LocalVar(0), 25)
+        EVT_CALL(UseSettingsFrom, 0, LocalVar(0), LocalVar(1), LocalVar(2))
         EVT_CALL(SetCamPitch, 0, EVT_FIXED(17.0), EVT_FIXED(-6.0))
-        EVT_SET(EVT_VAR(3), 40)
+        EVT_SET(LocalVar(3), 40)
         EVT_LOOP(5)
-            EVT_CALL(SetPanTarget, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+            EVT_CALL(SetPanTarget, 0, LocalVar(0), LocalVar(1), LocalVar(2))
             EVT_CALL(SetCamDistance, 0, EVT_FIXED(400.0))
-            EVT_CALL(SetCamSpeed, 0, EVT_VAR(3))
+            EVT_CALL(SetCamSpeed, 0, LocalVar(3))
             EVT_CALL(WaitForCam, 0, EVT_FIXED(1.0))
-            EVT_SUB(EVT_VAR(3), 10)
-            EVT_CALL(SetPanTarget, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+            EVT_SUB(LocalVar(3), 10)
+            EVT_CALL(SetPanTarget, 0, LocalVar(0), LocalVar(1), LocalVar(2))
             EVT_CALL(SetCamDistance, 0, EVT_FIXED(600.0))
-            EVT_CALL(SetCamSpeed, 0, EVT_VAR(3))
+            EVT_CALL(SetCamSpeed, 0, LocalVar(3))
             EVT_CALL(WaitForCam, 0, EVT_FIXED(1.0))
-            EVT_ADD(EVT_VAR(3), 7)
+            EVT_ADD(LocalVar(3), 7)
         EVT_END_LOOP
     EVT_END_CHILD_THREAD
     EVT_EXEC_WAIT(N(80241920))
-    EVT_KILL_THREAD(EVT_VAR(9))
+    EVT_KILL_THREAD(LocalVar(9))
     EVT_WAIT(30)
     EVT_CALL(SetNpcVar, 0, 0, 1)
     EVT_CALL(DisablePlayerInput, FALSE)
@@ -437,36 +437,36 @@ EvtScript N(80241B98) = {
 };
 
 EvtScript N(80242290) = {
-    EVT_SETF(EVT_VAR(0), EVT_FIXED(0.95))
-    EVT_SETF(EVT_VAR(1), EVT_FIXED(1.1))
+    EVT_SETF(LocalVar(0), EVT_FIXED(0.95))
+    EVT_SETF(LocalVar(1), EVT_FIXED(1.1))
     EVT_LABEL(0)
-    EVT_SWITCH(EVT_MAP_VAR(13))
+    EVT_SWITCH(MapVar(13))
         EVT_CASE_EQ(0)
-            EVT_SET(EVT_VAR(3), 10)
-            EVT_SET(EVT_VAR(2), 2)
+            EVT_SET(LocalVar(3), 10)
+            EVT_SET(LocalVar(2), 2)
         EVT_CASE_EQ(1)
-            EVT_SET(EVT_VAR(3), 5)
-            EVT_SET(EVT_VAR(2), 1)
+            EVT_SET(LocalVar(3), 5)
+            EVT_SET(LocalVar(2), 1)
         EVT_CASE_DEFAULT
             EVT_RETURN
     EVT_END_SWITCH
-    EVT_SET(EVT_VAR(4), EVT_VAR(3))
-    EVT_LOOP(EVT_VAR(4))
-        EVT_CALL(SetNpcScale, 0, EVT_VAR(0), EVT_VAR(1), 1)
-        EVT_CALL(SetNpcScale, 1, EVT_VAR(0), EVT_VAR(1), 1)
-        EVT_CALL(SetNpcScale, 2, EVT_VAR(0), EVT_VAR(1), 1)
-        EVT_ADDF(EVT_VAR(0), EVT_FIXED(0.015625))
-        EVT_SUBF(EVT_VAR(1), EVT_FIXED(0.01))
-        EVT_WAIT(EVT_VAR(2))
+    EVT_SET(LocalVar(4), LocalVar(3))
+    EVT_LOOP(LocalVar(4))
+        EVT_CALL(SetNpcScale, 0, LocalVar(0), LocalVar(1), 1)
+        EVT_CALL(SetNpcScale, 1, LocalVar(0), LocalVar(1), 1)
+        EVT_CALL(SetNpcScale, 2, LocalVar(0), LocalVar(1), 1)
+        EVT_ADDF(LocalVar(0), EVT_FIXED(0.015625))
+        EVT_SUBF(LocalVar(1), EVT_FIXED(0.01))
+        EVT_WAIT(LocalVar(2))
     EVT_END_LOOP
-    EVT_SET(EVT_VAR(4), EVT_VAR(3))
-    EVT_LOOP(EVT_VAR(4))
-        EVT_CALL(SetNpcScale, 0, EVT_VAR(0), EVT_VAR(1), 1)
-        EVT_CALL(SetNpcScale, 1, EVT_VAR(0), EVT_VAR(1), 1)
-        EVT_CALL(SetNpcScale, 2, EVT_VAR(0), EVT_VAR(1), 1)
-        EVT_SUBF(EVT_VAR(0), EVT_FIXED(0.015625))
-        EVT_ADDF(EVT_VAR(1), EVT_FIXED(0.01))
-        EVT_WAIT(EVT_VAR(2))
+    EVT_SET(LocalVar(4), LocalVar(3))
+    EVT_LOOP(LocalVar(4))
+        EVT_CALL(SetNpcScale, 0, LocalVar(0), LocalVar(1), 1)
+        EVT_CALL(SetNpcScale, 1, LocalVar(0), LocalVar(1), 1)
+        EVT_CALL(SetNpcScale, 2, LocalVar(0), LocalVar(1), 1)
+        EVT_SUBF(LocalVar(0), EVT_FIXED(0.015625))
+        EVT_ADDF(LocalVar(1), EVT_FIXED(0.01))
+        EVT_WAIT(LocalVar(2))
     EVT_END_LOOP
     EVT_GOTO(0)
     EVT_RETURN
@@ -505,30 +505,30 @@ s32 N(intTable_8024262C)[] = {
 };
 
 EvtScript N(8024263C) = {
-    EVT_SETF(EVT_VAR(0), 10)
-    EVT_SETF(EVT_VAR(1), 1)
+    EVT_SETF(LocalVar(0), 10)
+    EVT_SETF(LocalVar(1), 1)
     EVT_CHILD_THREAD
         EVT_LOOP(8)
             EVT_CALL(SetNpcFlagBits, 0, ((NPC_FLAG_2)), FALSE)
             EVT_CALL(SetNpcFlagBits, 1, ((NPC_FLAG_2)), FALSE)
             EVT_CALL(SetNpcFlagBits, 2, ((NPC_FLAG_2)), FALSE)
-            EVT_WAIT(EVT_VAR(0))
+            EVT_WAIT(LocalVar(0))
             EVT_CALL(SetNpcFlagBits, 0, ((NPC_FLAG_2)), TRUE)
             EVT_CALL(SetNpcFlagBits, 1, ((NPC_FLAG_2)), TRUE)
             EVT_CALL(SetNpcFlagBits, 2, ((NPC_FLAG_2)), TRUE)
-            EVT_WAIT(EVT_VAR(1))
-            EVT_SUBF(EVT_VAR(0), 0)
-            EVT_ADDF(EVT_VAR(1), 0)
+            EVT_WAIT(LocalVar(1))
+            EVT_SUBF(LocalVar(0), 0)
+            EVT_ADDF(LocalVar(1), 0)
         EVT_END_LOOP
         EVT_LOOP(0)
             EVT_CALL(SetNpcFlagBits, 0, ((NPC_FLAG_2)), FALSE)
             EVT_CALL(SetNpcFlagBits, 1, ((NPC_FLAG_2)), FALSE)
             EVT_CALL(SetNpcFlagBits, 2, ((NPC_FLAG_2)), FALSE)
-            EVT_WAIT(EVT_VAR(0))
+            EVT_WAIT(LocalVar(0))
             EVT_CALL(SetNpcFlagBits, 0, ((NPC_FLAG_2)), TRUE)
             EVT_CALL(SetNpcFlagBits, 1, ((NPC_FLAG_2)), TRUE)
             EVT_CALL(SetNpcFlagBits, 2, ((NPC_FLAG_2)), TRUE)
-            EVT_WAIT(EVT_VAR(1))
+            EVT_WAIT(LocalVar(1))
         EVT_END_LOOP
     EVT_END_CHILD_THREAD
     EVT_CHILD_THREAD
@@ -536,11 +536,11 @@ EvtScript N(8024263C) = {
             EVT_CALL(MakeLerp, 0, 255, 10, 4)
             EVT_LOOP(0)
                 EVT_CALL(UpdateLerp)
-                EVT_CALL(func_802CFD30, 0, 9, EVT_VAR(0), EVT_VAR(0), EVT_VAR(0), 0)
-                EVT_CALL(func_802CFD30, 1, 9, EVT_VAR(0), EVT_VAR(0), EVT_VAR(0), 0)
-                EVT_CALL(func_802CFD30, 2, 9, EVT_VAR(0), EVT_VAR(0), EVT_VAR(0), 0)
+                EVT_CALL(func_802CFD30, 0, 9, LocalVar(0), LocalVar(0), LocalVar(0), 0)
+                EVT_CALL(func_802CFD30, 1, 9, LocalVar(0), LocalVar(0), LocalVar(0), 0)
+                EVT_CALL(func_802CFD30, 2, 9, LocalVar(0), LocalVar(0), LocalVar(0), 0)
                 EVT_WAIT(1)
-                EVT_IF_EQ(EVT_VAR(1), 0)
+                EVT_IF_EQ(LocalVar(1), 0)
                     EVT_BREAK_LOOP
                 EVT_END_IF
             EVT_END_LOOP
@@ -552,20 +552,20 @@ EvtScript N(8024263C) = {
 };
 
 EvtScript N(80242918) = {
-    EVT_SETF(EVT_MAP_VAR(11), EVT_FIXED(1.0))
-    EVT_SETF(EVT_MAP_VAR(12), EVT_FIXED(1.0))
+    EVT_SETF(MapVar(11), EVT_FIXED(1.0))
+    EVT_SETF(MapVar(12), EVT_FIXED(1.0))
     EVT_CHILD_THREAD
         EVT_USE_BUF(EVT_PTR(N(intTable_8024258C)))
         EVT_LOOP(6)
             EVT_CALL(PlaySoundAtNpc, 0, 0x20B6, 0)
-            EVT_BUF_READ3(EVT_VAR(6), EVT_VAR(7), EVT_VAR(8))
-            EVT_CALL(MakeLerp, EVT_VAR(6), EVT_VAR(7), EVT_VAR(8), 11)
+            EVT_BUF_READ3(LocalVar(6), LocalVar(7), LocalVar(8))
+            EVT_CALL(MakeLerp, LocalVar(6), LocalVar(7), LocalVar(8), 11)
             EVT_LOOP(0)
                 EVT_CALL(UpdateLerp)
-                EVT_DIVF(EVT_VAR(0), 10)
-                EVT_SETF(EVT_MAP_VAR(11), EVT_VAR(0))
+                EVT_DIVF(LocalVar(0), 10)
+                EVT_SETF(MapVar(11), LocalVar(0))
                 EVT_WAIT(1)
-                EVT_IF_EQ(EVT_VAR(1), 0)
+                EVT_IF_EQ(LocalVar(1), 0)
                     EVT_BREAK_LOOP
                 EVT_END_IF
             EVT_END_LOOP
@@ -575,14 +575,14 @@ EvtScript N(80242918) = {
             EVT_USE_BUF(EVT_PTR(N(intTable_802425D4)))
             EVT_LOOP(2)
                 EVT_CALL(PlaySoundAtNpc, 0, 0x20B6, 0)
-                EVT_BUF_READ2(EVT_VAR(6), EVT_VAR(7))
-                EVT_CALL(MakeLerp, EVT_VAR(6), EVT_VAR(7), 4, 11)
+                EVT_BUF_READ2(LocalVar(6), LocalVar(7))
+                EVT_CALL(MakeLerp, LocalVar(6), LocalVar(7), 4, 11)
                 EVT_LOOP(0)
                     EVT_CALL(UpdateLerp)
-                    EVT_DIVF(EVT_VAR(0), 10)
-                    EVT_SETF(EVT_MAP_VAR(11), EVT_VAR(0))
+                    EVT_DIVF(LocalVar(0), 10)
+                    EVT_SETF(MapVar(11), LocalVar(0))
                     EVT_WAIT(1)
-                    EVT_IF_EQ(EVT_VAR(1), 0)
+                    EVT_IF_EQ(LocalVar(1), 0)
                         EVT_BREAK_LOOP
                     EVT_END_IF
                 EVT_END_LOOP
@@ -592,14 +592,14 @@ EvtScript N(80242918) = {
     EVT_CHILD_THREAD
         EVT_USE_BUF(EVT_PTR(N(intTable_802425E4)))
         EVT_LOOP(6)
-            EVT_BUF_READ3(EVT_VAR(6), EVT_VAR(7), EVT_VAR(8))
-            EVT_CALL(MakeLerp, EVT_VAR(6), EVT_VAR(7), EVT_VAR(8), 11)
+            EVT_BUF_READ3(LocalVar(6), LocalVar(7), LocalVar(8))
+            EVT_CALL(MakeLerp, LocalVar(6), LocalVar(7), LocalVar(8), 11)
             EVT_LOOP(0)
                 EVT_CALL(UpdateLerp)
-                EVT_DIVF(EVT_VAR(0), 10)
-                EVT_SETF(EVT_MAP_VAR(12), EVT_VAR(0))
+                EVT_DIVF(LocalVar(0), 10)
+                EVT_SETF(MapVar(12), LocalVar(0))
                 EVT_WAIT(1)
-                EVT_IF_EQ(EVT_VAR(1), 0)
+                EVT_IF_EQ(LocalVar(1), 0)
                     EVT_BREAK_LOOP
                 EVT_END_IF
             EVT_END_LOOP
@@ -608,14 +608,14 @@ EvtScript N(80242918) = {
         EVT_LOOP(0)
             EVT_USE_BUF(EVT_PTR(N(intTable_8024262C)))
             EVT_LOOP(2)
-                EVT_BUF_READ2(EVT_VAR(6), EVT_VAR(7))
-                EVT_CALL(MakeLerp, EVT_VAR(6), EVT_VAR(7), 4, 11)
+                EVT_BUF_READ2(LocalVar(6), LocalVar(7))
+                EVT_CALL(MakeLerp, LocalVar(6), LocalVar(7), 4, 11)
                 EVT_LOOP(0)
                     EVT_CALL(UpdateLerp)
-                    EVT_DIVF(EVT_VAR(0), 10)
-                    EVT_SETF(EVT_MAP_VAR(12), EVT_VAR(0))
+                    EVT_DIVF(LocalVar(0), 10)
+                    EVT_SETF(MapVar(12), LocalVar(0))
                     EVT_WAIT(1)
-                    EVT_IF_EQ(EVT_VAR(1), 0)
+                    EVT_IF_EQ(LocalVar(1), 0)
                         EVT_BREAK_LOOP
                     EVT_END_IF
                 EVT_END_LOOP
@@ -623,9 +623,9 @@ EvtScript N(80242918) = {
         EVT_END_LOOP
     EVT_END_CHILD_THREAD
     EVT_LOOP(100)
-        EVT_CALL(SetNpcScale, 0, EVT_MAP_VAR(11), EVT_MAP_VAR(12), 1)
-        EVT_CALL(SetNpcScale, 1, EVT_MAP_VAR(11), EVT_MAP_VAR(12), 1)
-        EVT_CALL(SetNpcScale, 2, EVT_MAP_VAR(11), EVT_MAP_VAR(12), 1)
+        EVT_CALL(SetNpcScale, 0, MapVar(11), MapVar(12), 1)
+        EVT_CALL(SetNpcScale, 1, MapVar(11), MapVar(12), 1)
+        EVT_CALL(SetNpcScale, 2, MapVar(11), MapVar(12), 1)
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_RETURN
@@ -634,45 +634,45 @@ EvtScript N(80242918) = {
 
 EvtScript N(80242D34) = {
     EVT_CHILD_THREAD
-        EVT_SET(EVT_VAR(1), 0)
+        EVT_SET(LocalVar(1), 0)
         EVT_LOOP(0)
-            EVT_SET(EVT_VAR(0), 3)
+            EVT_SET(LocalVar(0), 3)
             EVT_LOOP(15)
-                EVT_CALL(SetNpcRotation, EVT_VAR(0), 0, EVT_VAR(1), 0)
-                EVT_ADD(EVT_VAR(0), 1)
+                EVT_CALL(SetNpcRotation, LocalVar(0), 0, LocalVar(1), 0)
+                EVT_ADD(LocalVar(0), 1)
             EVT_END_LOOP
-            EVT_ADD(EVT_VAR(1), 60)
-            EVT_IF_GT(EVT_VAR(1), 360)
-                EVT_ADD(EVT_VAR(1), -360)
+            EVT_ADD(LocalVar(1), 60)
+            EVT_IF_GT(LocalVar(1), 360)
+                EVT_ADD(LocalVar(1), -360)
             EVT_END_IF
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_CHILD_THREAD
     EVT_USE_BUF(EVT_PTR(N(intTable_8024249C)))
-    EVT_SET(EVT_VAR(8), 3)
+    EVT_SET(LocalVar(8), 3)
     EVT_LOOP(14)
-        EVT_BUF_READ4(EVT_VAR(1), EVT_VAR(2), EVT_VAR(3), EVT_VAR(4))
+        EVT_BUF_READ4(LocalVar(1), LocalVar(2), LocalVar(3), LocalVar(4))
         EVT_THREAD
-            EVT_CALL(RandInt, 5, EVT_VAR(5))
-            EVT_WAIT(EVT_VAR(5))
-            EVT_CALL(SetNpcPos, EVT_VAR(8), EVT_VAR(1), EVT_VAR(2), -30)
-            EVT_CALL(RandInt, 2, EVT_VAR(5))
-            EVT_ADD(EVT_VAR(5), 8)
-            EVT_CALL(PlaySoundAtNpc, EVT_VAR(8), 0x3D5, 0)
-            EVT_CALL(NpcJump0, EVT_VAR(8), EVT_VAR(3), EVT_VAR(4), -15, EVT_VAR(5))
-            EVT_CALL(SetNpcPos, EVT_VAR(8), 0, -1000, 0)
+            EVT_CALL(RandInt, 5, LocalVar(5))
+            EVT_WAIT(LocalVar(5))
+            EVT_CALL(SetNpcPos, LocalVar(8), LocalVar(1), LocalVar(2), -30)
+            EVT_CALL(RandInt, 2, LocalVar(5))
+            EVT_ADD(LocalVar(5), 8)
+            EVT_CALL(PlaySoundAtNpc, LocalVar(8), 0x3D5, 0)
+            EVT_CALL(NpcJump0, LocalVar(8), LocalVar(3), LocalVar(4), -15, LocalVar(5))
+            EVT_CALL(SetNpcPos, LocalVar(8), 0, -1000, 0)
         EVT_END_THREAD
-        EVT_ADD(EVT_VAR(8), 1)
+        EVT_ADD(LocalVar(8), 1)
     EVT_END_LOOP
     EVT_CALL(SetNpcPos, 0, 0, -1000, 0)
     EVT_CALL(SetNpcPos, 1, 0, -1000, 0)
     EVT_CALL(SetNpcPos, 2, 0, -1000, 0)
-    EVT_BUF_READ4(EVT_VAR(1), EVT_VAR(2), EVT_VAR(3), EVT_VAR(4))
+    EVT_BUF_READ4(LocalVar(1), LocalVar(2), LocalVar(3), LocalVar(4))
     EVT_WAIT(5)
-    EVT_CALL(SetNpcPos, EVT_VAR(8), EVT_VAR(1), EVT_VAR(2), -30)
-    EVT_CALL(PlaySoundAtNpc, EVT_VAR(8), 0x3D6, 0)
-    EVT_CALL(NpcJump0, EVT_VAR(8), EVT_VAR(3), EVT_VAR(4), -15, 10)
-    EVT_CALL(SetNpcPos, EVT_VAR(8), 0, -1000, 0)
+    EVT_CALL(SetNpcPos, LocalVar(8), LocalVar(1), LocalVar(2), -30)
+    EVT_CALL(PlaySoundAtNpc, LocalVar(8), 0x3D6, 0)
+    EVT_CALL(NpcJump0, LocalVar(8), LocalVar(3), LocalVar(4), -15, 10)
+    EVT_CALL(SetNpcPos, LocalVar(8), 0, -1000, 0)
     EVT_RETURN
     EVT_END
 };
@@ -681,11 +681,11 @@ EvtScript N(80243010) = {
     EVT_CALL(SetNpcAnimation, 1, NPC_ANIM_huff_n_puff_Palette_00_Anim_4)
     EVT_CALL(SetNpcAnimation, 0, NPC_ANIM_huff_n_puff_Palette_00_Anim_5)
     EVT_CALL(SetNpcAnimation, 2, NPC_ANIM_huff_n_puff_Palette_00_Anim_6)
-    EVT_CALL(GetNpcPos, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-    EVT_CALL(UseSettingsFrom, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-    EVT_ADD(EVT_VAR(0), -15)
-    EVT_ADD(EVT_VAR(2), 40)
-    EVT_CALL(SetPanTarget, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_CALL(GetNpcPos, 0, LocalVar(0), LocalVar(1), LocalVar(2))
+    EVT_CALL(UseSettingsFrom, 0, LocalVar(0), LocalVar(1), LocalVar(2))
+    EVT_ADD(LocalVar(0), -15)
+    EVT_ADD(LocalVar(2), 40)
+    EVT_CALL(SetPanTarget, 0, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_CALL(SetCamDistance, 0, EVT_FIXED(350.0))
     EVT_CALL(SetCamPitch, 0, EVT_FIXED(17.0), EVT_FIXED(-5.5))
     EVT_CALL(SetCamSpeed, 0, EVT_FIXED(90.0))
@@ -693,30 +693,30 @@ EvtScript N(80243010) = {
     EVT_CALL(WaitForCam, 0, EVT_FIXED(1.0))
     EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_huff_n_puff_Palette_00_Anim_30, NPC_ANIM_huff_n_puff_Palette_00_Anim_5, 256, -30, 30, MESSAGE_ID(0x11, 0x00CE))
     EVT_CALL(FadeOutMusic, 0, 1500)
-    EVT_SET(EVT_MAP_VAR(13), 2)
-    EVT_CALL(GetNpcPos, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_SET(MapVar(13), 2)
+    EVT_CALL(GetNpcPos, 0, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_THREAD
-        EVT_SET(EVT_VAR(3), EVT_VAR(0))
-        EVT_SET(EVT_VAR(4), EVT_VAR(0))
-        EVT_ADD(EVT_VAR(3), -35)
-        EVT_ADD(EVT_VAR(4), 35)
+        EVT_SET(LocalVar(3), LocalVar(0))
+        EVT_SET(LocalVar(4), LocalVar(0))
+        EVT_ADD(LocalVar(3), -35)
+        EVT_ADD(LocalVar(4), 35)
         EVT_LOOP(3)
-            EVT_CALL(PlayEffect, 0x19, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, 0x19, 0, LocalVar(0), LocalVar(1), LocalVar(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
             EVT_WAIT(12)
-            EVT_CALL(PlayEffect, 0x19, 0, EVT_VAR(3), EVT_VAR(1), EVT_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
-            EVT_ADD(EVT_VAR(3), 7)
+            EVT_CALL(PlayEffect, 0x19, 0, LocalVar(3), LocalVar(1), LocalVar(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
+            EVT_ADD(LocalVar(3), 7)
             EVT_WAIT(8)
-            EVT_CALL(PlayEffect, 0x19, 0, EVT_VAR(4), EVT_VAR(1), EVT_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
-            EVT_ADD(EVT_VAR(4), -7)
+            EVT_CALL(PlayEffect, 0x19, 0, LocalVar(4), LocalVar(1), LocalVar(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
+            EVT_ADD(LocalVar(4), -7)
             EVT_WAIT(14)
         EVT_END_LOOP
-        EVT_CALL(PlayEffect, 0x19, 2, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
+        EVT_CALL(PlayEffect, 0x19, 2, LocalVar(0), LocalVar(1), LocalVar(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
         EVT_CALL(ShakeCam, 0, 0, 30, EVT_FIXED(1.5))
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(30)
         EVT_LOOP(10)
-            EVT_CALL(PlayEffect, 0x3A, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 40, 65, 12, 15, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, 0x3A, 0, LocalVar(0), LocalVar(1), LocalVar(2), 40, 65, 12, 15, 0, 0, 0, 0, 0)
             EVT_WAIT(7)
         EVT_END_LOOP
     EVT_END_THREAD
@@ -732,13 +732,13 @@ EvtScript N(idle_80243428) = {
     EVT_LABEL(0)
     EVT_CALL(SetSelfVar, 0, 0)
     EVT_LOOP(0)
-        EVT_CALL(GetSelfVar, 0, EVT_VAR(0))
-        EVT_IF_NE(EVT_VAR(0), 0)
+        EVT_CALL(GetSelfVar, 0, LocalVar(0))
+        EVT_IF_NE(LocalVar(0), 0)
             EVT_BREAK_LOOP
         EVT_END_IF
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_SET(EVT_MAP_VAR(13), 1)
+    EVT_SET(MapVar(13), 1)
     EVT_CALL(StartBossBattle, 14)
     EVT_GOTO(0)
     EVT_RETURN
@@ -746,18 +746,18 @@ EvtScript N(idle_80243428) = {
 };
 
 EvtScript N(defeat_802434D8) = {
-    EVT_CALL(GetBattleOutcome, EVT_VAR(0))
-    EVT_SWITCH(EVT_VAR(0))
+    EVT_CALL(GetBattleOutcome, LocalVar(0))
+    EVT_SWITCH(LocalVar(0))
         EVT_CASE_EQ(0)
             EVT_CALL(SetEncounterStatusFlags, 1, 1)
             EVT_CALL(SetNpcYaw, NPC_PARTNER, 90)
-            EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(3))
-            EVT_CALL(GetNpcPos, NPC_PARTNER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-            EVT_ADD(EVT_VAR(3), -20)
-            EVT_CALL(SetNpcPos, NPC_PARTNER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(3))
+            EVT_CALL(GetPlayerPos, LocalVar(0), LocalVar(1), LocalVar(3))
+            EVT_CALL(GetNpcPos, NPC_PARTNER, LocalVar(0), LocalVar(1), LocalVar(2))
+            EVT_ADD(LocalVar(3), -20)
+            EVT_CALL(SetNpcPos, NPC_PARTNER, LocalVar(0), LocalVar(1), LocalVar(3))
             EVT_EXEC_WAIT(N(80243010))
             EVT_WAIT(50)
-            EVT_SET(EVT_MAP_VAR(10), 1)
+            EVT_SET(MapVar(10), 1)
             EVT_EXEC(N(80240E3C))
     EVT_END_SWITCH
     EVT_RETURN

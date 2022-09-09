@@ -8,12 +8,12 @@
 #endif
 // which map var to store
 #ifndef SUPER_BLOCK_MAPVAR
-    #define SUPER_BLOCK_MAPVAR EVT_MAP_VAR(0)
+    #define SUPER_BLOCK_MAPVAR MapVar(0)
 #endif
 
 // use this in a script macro calling MakeEntity for this super block
 #define EVT_SETUP_SUPER_BLOCK(mapVar,gameFlag) \
-    EVT_SET(mapVar, EVT_VAR(0))\
+    EVT_SET(mapVar, LocalVar(0))\
     EVT_CALL(AssignBlockFlag, gameFlag)\
     EVT_CALL(AssignScript, EVT_PTR(N(SuperBlock_OnHit)))
 
@@ -83,12 +83,12 @@ EvtScript N(SuperBlock_OnHit) = {
     EVT_IF_EQ(SUPER_BLOCK_GAMEFLAG, 1)
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(IsStartingConversation, EVT_VAR(0))
-    EVT_IF_EQ(EVT_VAR(0), 1)
+    EVT_CALL(IsStartingConversation, LocalVar(0))
+    EVT_IF_EQ(LocalVar(0), 1)
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(N(SuperBlock_WaitForPlayerToLand))
-    EVT_IF_EQ(EVT_VAR(0), 1)
+    EVT_IF_EQ(LocalVar(0), 1)
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(ModifyGlobalOverrideFlags, 1, GLOBAL_OVERRIDES_CANT_PICK_UP_ITEMS)
@@ -96,13 +96,13 @@ EvtScript N(SuperBlock_OnHit) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(DisablePartnerAI, 0)
     EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_100, TRUE)
-    EVT_CALL(N(SuperBlock_StartGlowEffect), SUPER_BLOCK_MAPVAR, EVT_VAR(9))
-    EVT_CALL(FindKeyItem, ITEM_ULTRA_STONE, EVT_VAR(12))
+    EVT_CALL(N(SuperBlock_StartGlowEffect), SUPER_BLOCK_MAPVAR, LocalVar(9))
+    EVT_CALL(FindKeyItem, ITEM_ULTRA_STONE, LocalVar(12))
     EVT_CALL(N(SuperBlock_CountEligiblePartners))
-    EVT_IF_EQ(EVT_VAR(0), -1)
+    EVT_IF_EQ(LocalVar(0), -1)
         EVT_CALL(ShowMessageAtScreenPos, MESSAGE_ID(0x1D,0xDC), 160, 40)
         EVT_WAIT(10)
-        EVT_CALL(N(SuperBlock_EndGlowEffect), EVT_VAR(9))
+        EVT_CALL(N(SuperBlock_EndGlowEffect), LocalVar(9))
         EVT_CALL(DisablePlayerInput, FALSE)
         EVT_CALL(EnablePartnerAI)
         EVT_CALL(ModifyGlobalOverrideFlags, 0, GLOBAL_OVERRIDES_CANT_PICK_UP_ITEMS)
@@ -116,20 +116,20 @@ EvtScript N(SuperBlock_OnHit) = {
         EVT_CALL(ShowMessageAtScreenPos, MESSAGE_ID(0x1D,0xDB), 160, 40)
     EVT_END_IF
     EVT_CALL(N(SuperBlock_ShowSelectPartnerMenu))
-    EVT_IF_EQ(EVT_VAR(0), -1)
-        EVT_CALL(N(SuperBlock_EndGlowEffect), EVT_VAR(9))
+    EVT_IF_EQ(LocalVar(0), -1)
+        EVT_CALL(N(SuperBlock_EndGlowEffect), LocalVar(9))
         EVT_CALL(DisablePlayerInput, FALSE)
         EVT_CALL(EnablePartnerAI)
         EVT_CALL(ModifyGlobalOverrideFlags, 0, GLOBAL_OVERRIDES_CANT_PICK_UP_ITEMS)
         EVT_CALL(N(SuperBlock_ClearOverride40))
         EVT_RETURN
     EVT_END_IF
-    EVT_SET(EVT_VAR(10), EVT_VAR(0))
-    EVT_SET(EVT_VAR(11), EVT_VAR(1))
+    EVT_SET(LocalVar(10), LocalVar(0))
+    EVT_SET(LocalVar(11), LocalVar(1))
     EVT_CALL(EnablePartnerAI)
-    EVT_CALL(GetCurrentPartnerID, EVT_VAR(0))
-    EVT_IF_NE(EVT_VAR(0), EVT_VAR(11))
-        EVT_CALL(N(SuperBlock_SwitchToPartner), EVT_VAR(11))
+    EVT_CALL(GetCurrentPartnerID, LocalVar(0))
+    EVT_IF_NE(LocalVar(0), LocalVar(11))
+        EVT_CALL(N(SuperBlock_SwitchToPartner), LocalVar(11))
     EVT_ELSE
         EVT_CALL(func_802CF56C, 2)
     EVT_END_IF
@@ -137,8 +137,8 @@ EvtScript N(SuperBlock_OnHit) = {
     EVT_CALL(ShowMessageAtScreenPos, MESSAGE_ID(0x1D,0x0DF), 160, 40)
     EVT_CALL(ShowChoice, MESSAGE_ID(0x1E,0x0D))
     EVT_CALL(CloseMessage)
-    EVT_IF_NE(EVT_VAR(0), 0)
-        EVT_CALL(N(SuperBlock_EndGlowEffect), EVT_VAR(9))
+    EVT_IF_NE(LocalVar(0), 0)
+        EVT_CALL(N(SuperBlock_EndGlowEffect), LocalVar(9))
         EVT_CALL(DisablePlayerInput, FALSE)
         EVT_CALL(EnablePartnerAI)
         EVT_CALL(ModifyGlobalOverrideFlags, 0, GLOBAL_OVERRIDES_CANT_PICK_UP_ITEMS)
@@ -146,11 +146,11 @@ EvtScript N(SuperBlock_OnHit) = {
         EVT_RETURN
     EVT_END_IF
     EVT_EXEC_WAIT(N(SuperBlock_ShowUpgradeEffects))
-    EVT_CALL(N(SuperBlock_GetPartnerRank), EVT_VAR(11), EVT_VAR(13))
+    EVT_CALL(N(SuperBlock_GetPartnerRank), LocalVar(11), LocalVar(13))
     EVT_SET(SUPER_BLOCK_GAMEFLAG, 1)
-    EVT_CALL(N(SuperBlock_EndGlowEffect), EVT_VAR(9))
+    EVT_CALL(N(SuperBlock_EndGlowEffect), LocalVar(9))
     EVT_CALL(N(SuperBlock_LoadCurrentPartnerName))
-    EVT_IF_EQ(EVT_VAR(13), 1)
+    EVT_IF_EQ(LocalVar(13), 1)
         EVT_CALL(ShowMessageAtScreenPos, MESSAGE_ID(0x1D,0xDD), 160, 40)
     EVT_ELSE
         EVT_CALL(ShowMessageAtScreenPos, MESSAGE_ID(0x1D,0xDE), 160, 40)

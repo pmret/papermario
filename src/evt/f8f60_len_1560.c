@@ -119,7 +119,7 @@ ApiStatus IsPlayerWithin(Evt* script, s32 isInitialCall) {
     s32* distanceRequired = &script->functionTemp[2];
 
     f32 distance;
-    Bytecode outVar = EVT_VAR(0);
+    Bytecode outVar = LocalVar(0);
 
     if (isInitialCall) {
         *targetX = evt_get_variable(script, *args++);

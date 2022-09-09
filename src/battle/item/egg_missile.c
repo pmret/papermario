@@ -140,36 +140,36 @@ s32 N(modelCommandList)[] = {
 };
 
 EvtScript N(main) = {
-    EVT_SET_CONST(EVT_VAR(10), 0xC8)
+    EVT_SET_CONST(LocalVar(10), 0xC8)
     EVT_EXEC_WAIT(battle_item_egg_missile_UseItemWithEffect)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
     EVT_CALL(MoveBattleCamOver, 15)
     EVT_CALL(SetAnimation, 0, 0, 65558)
     EVT_CALL(PlaySound, 1018)
     EVT_WAIT(3)
-    EVT_CALL(CreateVirtualEntity, EVT_VAR(10), battle_item_egg_missile_modelCommandList)
-    EVT_CALL(GetActorPos, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-    EVT_ADD(EVT_VAR(0), 20)
-    EVT_ADD(EVT_VAR(1), 42)
-    EVT_ADD(EVT_VAR(2), 5)
-    EVT_CALL(SetVirtualEntityPosition, EVT_VAR(10), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_CALL(CreateVirtualEntity, LocalVar(10), battle_item_egg_missile_modelCommandList)
+    EVT_CALL(GetActorPos, 0, LocalVar(0), LocalVar(1), LocalVar(2))
+    EVT_ADD(LocalVar(0), 20)
+    EVT_ADD(LocalVar(1), 42)
+    EVT_ADD(LocalVar(2), 5)
+    EVT_CALL(SetVirtualEntityPosition, LocalVar(10), LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_CALL(InitTargetIterator)
     EVT_CALL(SetGoalToTarget, -127)
-    EVT_CALL(GetGoalPos, -127, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_CALL(GetGoalPos, -127, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_THREAD
-        EVT_SET(EVT_VAR(0), 0)
+        EVT_SET(LocalVar(0), 0)
         EVT_LOOP(18)
-            EVT_ADD(EVT_VAR(0), 60)
-            EVT_CALL(SetVirtualEntityRotation, EVT_VAR(10), 0, 0, EVT_VAR(0))
+            EVT_ADD(LocalVar(0), 60)
+            EVT_CALL(SetVirtualEntityRotation, LocalVar(10), 0, 0, LocalVar(0))
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(SetVirtualEntityJumpGravity, EVT_VAR(10), EVT_FIXED(1.0))
-    EVT_ADD(EVT_VAR(2), 5)
-    EVT_CALL(VirtualEntityJumpTo, EVT_VAR(10), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 18)
-    EVT_CALL(DeleteVirtualEntity, EVT_VAR(10))
+    EVT_CALL(SetVirtualEntityJumpGravity, LocalVar(10), EVT_FIXED(1.0))
+    EVT_ADD(LocalVar(2), 5)
+    EVT_CALL(VirtualEntityJumpTo, LocalVar(10), LocalVar(0), LocalVar(1), LocalVar(2), 18)
+    EVT_CALL(DeleteVirtualEntity, LocalVar(10))
     EVT_CALL(PlaySound, 8208)
-    EVT_CALL(battle_item_egg_missile_func_802A123C_71CF1C, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_CALL(battle_item_egg_missile_func_802A123C_71CF1C, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_THREAD
         EVT_CALL(StartRumble, 5)
         EVT_CALL(ShakeCam, 1, 0, 2, EVT_FIXED(0.75))
@@ -177,8 +177,8 @@ EvtScript N(main) = {
         EVT_CALL(ShakeCam, 1, 0, 4, EVT_FIXED(1.2))
         EVT_CALL(ShakeCam, 1, 0, 2, EVT_FIXED(0.4501953125))
     EVT_END_THREAD
-    EVT_CALL(GetItemPower, 200, EVT_VAR(0), EVT_VAR(1))
-    EVT_CALL(ItemDamageEnemy, EVT_VAR(0), 402653698, 0, EVT_VAR(0), 32)
+    EVT_CALL(GetItemPower, 200, LocalVar(0), LocalVar(1))
+    EVT_CALL(ItemDamageEnemy, LocalVar(0), 402653698, 0, LocalVar(0), 32)
     EVT_EXEC_WAIT(battle_item_egg_missile_PlayerGoHome)
     EVT_RETURN
     EVT_END

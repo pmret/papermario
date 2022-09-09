@@ -13,11 +13,11 @@ EvtScript N(802403B0) = {
     EVT_SET_GROUP(EVT_GROUP_1B)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(ClearDefeatedEnemies)
-    EVT_SET(EVT_VAR(0), 0)
-    EVT_SET(EVT_VAR(1), 6)
-    EVT_SET(EVT_VAR(2), 0)
-    EVT_SET(EVT_VAR(4), 1)
-    EVT_SET(EVT_VAR(3), -1)
+    EVT_SET(LocalVar(0), 0)
+    EVT_SET(LocalVar(1), 6)
+    EVT_SET(LocalVar(2), 0)
+    EVT_SET(LocalVar(4), 1)
+    EVT_SET(LocalVar(3), -1)
     EVT_EXEC(0x80285DFC)
     EVT_WAIT(17)
     EVT_CALL(GotoMap, EVT_PTR("arn_07"), 0)
@@ -33,20 +33,20 @@ EvtScript N(80240470) = {
 };
 
 EvtScript N(8024049C) = {
-    EVT_CALL(GetLoadType, EVT_VAR(1))
-    EVT_IF_EQ(EVT_VAR(1), 1)
+    EVT_CALL(GetLoadType, LocalVar(1))
+    EVT_IF_EQ(LocalVar(1), 1)
         EVT_EXEC(EnterSavePoint)
         EVT_EXEC(N(80240470))
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(GetEntryID, EVT_VAR(0))
-    EVT_SWITCH(EVT_VAR(0))
+    EVT_CALL(GetEntryID, LocalVar(0))
+    EVT_SWITCH(LocalVar(0))
         EVT_CASE_EQ(0)
-            EVT_SET(EVT_VAR(4), 1)
-            EVT_SET(EVT_VAR(2), 0)
-            EVT_SET(EVT_VAR(3), -1)
+            EVT_SET(LocalVar(4), 1)
+            EVT_SET(LocalVar(2), 0)
+            EVT_SET(LocalVar(3), -1)
             EVT_EXEC_WAIT(0x80285E24)
-            EVT_SET(EVT_AREA_FLAG(1), 0)
+            EVT_SET(AreaFlag(1), 0)
             EVT_EXEC(N(80240470))
         EVT_CASE_EQ(1)
             EVT_CALL(DisablePlayerInput, TRUE)
@@ -75,10 +75,10 @@ EvtScript N(8024049C) = {
                 EVT_CALL(MakeLerp, 80, 0, 10, 0)
                 EVT_LOOP(0)
                     EVT_CALL(UpdateLerp)
-                    EVT_CALL(RotateModel, 0, EVT_VAR(0), 0, -1, 0)
-                    EVT_CALL(RotateModel, 1, EVT_VAR(0), 0, -1, 0)
+                    EVT_CALL(RotateModel, 0, LocalVar(0), 0, -1, 0)
+                    EVT_CALL(RotateModel, 1, LocalVar(0), 0, -1, 0)
                     EVT_WAIT(1)
-                    EVT_IF_EQ(EVT_VAR(1), 0)
+                    EVT_IF_EQ(LocalVar(1), 0)
                         EVT_BREAK_LOOP
                     EVT_END_IF
                 EVT_END_LOOP
@@ -114,8 +114,8 @@ EvtScript N(main) = {
     EVT_CALL(MakeNpcs, 0, EVT_PTR(N(npcGroupList_80241828)))
     EVT_EXEC_WAIT(N(makeEntities))
     EVT_EXEC(N(80240BA0))
-    EVT_CALL(GetDemoState, EVT_VAR(0))
-    EVT_IF_NE(EVT_VAR(0), 0)
+    EVT_CALL(GetDemoState, LocalVar(0))
+    EVT_IF_NE(LocalVar(0), 0)
         EVT_EXEC_WAIT(N(8024118C))
         EVT_RETURN
     EVT_END_IF
@@ -141,7 +141,7 @@ EvtScript N(80240A70) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(N(func_80240000_BF47A0))
-    EVT_SET(EVT_AREA_FLAG(1), 1)
+    EVT_SET(AreaFlag(1), 1)
     EVT_IF_LT(GB_StoryProgress, -23)
         EVT_SET(GB_StoryProgress, -23)
     EVT_END_IF
@@ -165,14 +165,14 @@ static s32 N(pad_B98)[] = {
 EvtScript N(80240BA0) = {
     EVT_CALL(PlaySound, 0x8000004B)
     EVT_THREAD
-        EVT_SET(EVT_VAR(0), 0)
+        EVT_SET(LocalVar(0), 0)
         EVT_LABEL(10)
-        EVT_CALL(RotateModel, 9, EVT_VAR(0), 0, 0, 1)
-        EVT_CALL(RotateModel, 15, EVT_VAR(0), 0, 0, 1)
-        EVT_CALL(RotateModel, 11, EVT_VAR(0), 0, 0, 1)
-        EVT_CALL(RotateModel, 13, EVT_VAR(0), 0, 0, -1)
-        EVT_CALL(RotateModel, 17, EVT_VAR(0), 0, 0, -1)
-        EVT_ADD(EVT_VAR(0), 1)
+        EVT_CALL(RotateModel, 9, LocalVar(0), 0, 0, 1)
+        EVT_CALL(RotateModel, 15, LocalVar(0), 0, 0, 1)
+        EVT_CALL(RotateModel, 11, LocalVar(0), 0, 0, 1)
+        EVT_CALL(RotateModel, 13, LocalVar(0), 0, 0, -1)
+        EVT_CALL(RotateModel, 17, LocalVar(0), 0, 0, -1)
+        EVT_ADD(LocalVar(0), 1)
         EVT_WAIT(1)
         EVT_GOTO(10)
     EVT_END_THREAD
@@ -256,8 +256,8 @@ EvtScript N(80240CC0) = {
 EvtScript N(802410AC) = {
     EVT_WAIT(10)
     EVT_LOOP(0)
-        EVT_CALL(GetDemoState, EVT_VAR(0))
-        EVT_IF_EQ(EVT_VAR(0), 2)
+        EVT_CALL(GetDemoState, LocalVar(0))
+        EVT_IF_EQ(LocalVar(0), 2)
             EVT_BREAK_LOOP
         EVT_END_IF
         EVT_WAIT(1)

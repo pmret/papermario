@@ -31,40 +31,40 @@ EvtScript N(80240600) = {
 
 EvtScript N(80240690) = {
     EVT_SET_GROUP(EVT_GROUP_0B)
-    EVT_SET(EVT_VAR(10), EVT_VAR(0))
-    EVT_SET(EVT_VAR(11), EVT_VAR(1))
-    EVT_SET(EVT_VAR(12), EVT_VAR(2))
-    EVT_SET(EVT_VAR(13), EVT_VAR(3))
-    EVT_SET(EVT_VAR(14), EVT_VAR(4))
-    EVT_SUB(EVT_VAR(12), EVT_VAR(0))
-    EVT_SUB(EVT_VAR(13), EVT_VAR(1))
-    EVT_SETF(EVT_VAR(0), EVT_VAR(12))
-    EVT_DIVF(EVT_VAR(0), EVT_FIXED(100.0))
-    EVT_SETF(EVT_VAR(15), EVT_FIXED(100.0))
-    EVT_DIVF(EVT_VAR(15), EVT_VAR(0))
-    EVT_ADD(EVT_VAR(15), 11)
-    EVT_SET(EVT_VAR(5), 200)
-    EVT_DIV(EVT_VAR(5), EVT_VAR(15))
-    EVT_ADD(EVT_VAR(5), 1)
-    EVT_LOOP(EVT_VAR(5))
-        EVT_CALL(RandInt, EVT_VAR(12), EVT_VAR(0))
-        EVT_CALL(RandInt, EVT_VAR(13), EVT_VAR(1))
-        EVT_CALL(RandInt, 199, EVT_VAR(2))
-        EVT_SET(EVT_VAR(3), 210)
-        EVT_SUB(EVT_VAR(3), EVT_VAR(2))
-        EVT_ADD(EVT_VAR(0), EVT_VAR(10))
-        EVT_ADD(EVT_VAR(1), EVT_VAR(11))
-        EVT_ADD(EVT_VAR(2), EVT_VAR(14))
-        EVT_CALL(PlayEffect, 0xD, EVT_VAR(0), EVT_VAR(2), EVT_VAR(1), EVT_VAR(3), 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_SET(LocalVar(10), LocalVar(0))
+    EVT_SET(LocalVar(11), LocalVar(1))
+    EVT_SET(LocalVar(12), LocalVar(2))
+    EVT_SET(LocalVar(13), LocalVar(3))
+    EVT_SET(LocalVar(14), LocalVar(4))
+    EVT_SUB(LocalVar(12), LocalVar(0))
+    EVT_SUB(LocalVar(13), LocalVar(1))
+    EVT_SETF(LocalVar(0), LocalVar(12))
+    EVT_DIVF(LocalVar(0), EVT_FIXED(100.0))
+    EVT_SETF(LocalVar(15), EVT_FIXED(100.0))
+    EVT_DIVF(LocalVar(15), LocalVar(0))
+    EVT_ADD(LocalVar(15), 11)
+    EVT_SET(LocalVar(5), 200)
+    EVT_DIV(LocalVar(5), LocalVar(15))
+    EVT_ADD(LocalVar(5), 1)
+    EVT_LOOP(LocalVar(5))
+        EVT_CALL(RandInt, LocalVar(12), LocalVar(0))
+        EVT_CALL(RandInt, LocalVar(13), LocalVar(1))
+        EVT_CALL(RandInt, 199, LocalVar(2))
+        EVT_SET(LocalVar(3), 210)
+        EVT_SUB(LocalVar(3), LocalVar(2))
+        EVT_ADD(LocalVar(0), LocalVar(10))
+        EVT_ADD(LocalVar(1), LocalVar(11))
+        EVT_ADD(LocalVar(2), LocalVar(14))
+        EVT_CALL(PlayEffect, 0xD, LocalVar(0), LocalVar(2), LocalVar(1), LocalVar(3), 0, 0, 0, 0, 0, 0, 0, 0, 0)
     EVT_END_LOOP
-    EVT_WAIT(EVT_VAR(15))
+    EVT_WAIT(LocalVar(15))
     EVT_LABEL(0)
-    EVT_CALL(RandInt, EVT_VAR(12), EVT_VAR(0))
-    EVT_CALL(RandInt, EVT_VAR(13), EVT_VAR(1))
-    EVT_ADD(EVT_VAR(0), EVT_VAR(10))
-    EVT_ADD(EVT_VAR(1), EVT_VAR(11))
-    EVT_CALL(PlayEffect, 0xD, EVT_VAR(0), EVT_VAR(14), EVT_VAR(1), 200, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-    EVT_WAIT(EVT_VAR(15))
+    EVT_CALL(RandInt, LocalVar(12), LocalVar(0))
+    EVT_CALL(RandInt, LocalVar(13), LocalVar(1))
+    EVT_ADD(LocalVar(0), LocalVar(10))
+    EVT_ADD(LocalVar(1), LocalVar(11))
+    EVT_CALL(PlayEffect, 0xD, LocalVar(0), LocalVar(14), LocalVar(1), 200, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_WAIT(LocalVar(15))
     EVT_GOTO(0)
     EVT_RETURN
     EVT_END
@@ -100,26 +100,26 @@ EvtScript N(main) = {
     EVT_CALL(ModifyColliderFlags, 0, 27, 0x00080000)
     EVT_CALL(ModifyColliderFlags, 0, 28, 0x00080000)
     EVT_CALL(ModifyColliderFlags, 3, 23, 0x00000001)
-    EVT_SET(EVT_VAR(0), -480)
-    EVT_SET(EVT_VAR(1), -350)
-    EVT_SET(EVT_VAR(2), -65)
-    EVT_SET(EVT_VAR(3), -260)
-    EVT_SET(EVT_VAR(4), 0)
+    EVT_SET(LocalVar(0), -480)
+    EVT_SET(LocalVar(1), -350)
+    EVT_SET(LocalVar(2), -65)
+    EVT_SET(LocalVar(3), -260)
+    EVT_SET(LocalVar(4), 0)
     EVT_EXEC(N(80240690))
-    EVT_SET(EVT_VAR(0), 100)
-    EVT_SET(EVT_VAR(1), -350)
-    EVT_SET(EVT_VAR(2), 480)
-    EVT_SET(EVT_VAR(3), -260)
-    EVT_SET(EVT_VAR(4), 0)
+    EVT_SET(LocalVar(0), 100)
+    EVT_SET(LocalVar(1), -350)
+    EVT_SET(LocalVar(2), 480)
+    EVT_SET(LocalVar(3), -260)
+    EVT_SET(LocalVar(4), 0)
     EVT_EXEC(N(80240690))
     EVT_CALL(ModifyColliderFlags, 0, 1, 0x7FFFFE00)
     EVT_CALL(ModifyColliderFlags, 0, 5, 0x7FFFFE00)
-    EVT_CALL(GetEntryID, EVT_VAR(0))
-    EVT_IF_EQ(EVT_VAR(0), 2)
+    EVT_CALL(GetEntryID, LocalVar(0))
+    EVT_IF_EQ(LocalVar(0), 2)
         EVT_EXEC(N(8024183C))
         EVT_EXEC(N(802409F4))
     EVT_ELSE
-        EVT_SET(EVT_VAR(0), EVT_PTR(N(802409F4)))
+        EVT_SET(LocalVar(0), EVT_PTR(N(802409F4)))
         EVT_EXEC(EnterWalk)
     EVT_END_IF
     EVT_EXEC_WAIT(N(80240600))
@@ -153,13 +153,13 @@ FoliageDropList N(tree1_Drops) = {
             .itemID = ITEM_BUBBLE_BERRY,
             .pos = { -38, 87, -156 },
             .spawnMode = 0xC,
-            .spawnFlag = EVT_AREA_FLAG(31),
+            .spawnFlag = AreaFlag(31),
         },
         {
             .itemID = ITEM_BUBBLE_BERRY,
             .pos = { 39, 65, -208 },
             .spawnMode = 0xC,
-            .spawnFlag = EVT_AREA_FLAG(32),
+            .spawnFlag = AreaFlag(32),
         },
     }
 };
@@ -173,9 +173,9 @@ ShakeTreeConfig N(tree1) = {
 Vec4f N(triggerCoord_80241718) = { 1.0f, 0.0f, -192.0f, 0.0f };
 
 EvtScript N(80241728) = {
-    EVT_SET(EVT_AREA_FLAG(31), 0)
-    EVT_SET(EVT_AREA_FLAG(32), 0)
-    EVT_SET(EVT_VAR(0), EVT_PTR(N(tree1)))
+    EVT_SET(AreaFlag(31), 0)
+    EVT_SET(AreaFlag(32), 0)
+    EVT_SET(LocalVar(0), EVT_PTR(N(tree1)))
     EVT_BIND_TRIGGER(N(shakeTree), TRIGGER_WALL_HAMMER, 13, 1, 0)
     EVT_BIND_TRIGGER(N(shakeTree), TRIGGER_POINT_BOMB, EVT_PTR(N(triggerCoord_80241718)), 1, 0)
     EVT_RETURN
@@ -184,10 +184,10 @@ EvtScript N(80241728) = {
 
 EvtScript N(updateTexturePan_802417A0) = {
     EVT_SET_GROUP(EVT_GROUP_00)
-    EVT_IF_EQ(EVT_VAR(5), 1)
-        EVT_IF_EQ(EVT_VAR(6), 1)
-            EVT_IF_EQ(EVT_VAR(7), 1)
-                EVT_IF_EQ(EVT_VAR(8), 1)
+    EVT_IF_EQ(LocalVar(5), 1)
+        EVT_IF_EQ(LocalVar(6), 1)
+            EVT_IF_EQ(LocalVar(7), 1)
+                EVT_IF_EQ(LocalVar(8), 1)
                     EVT_CALL(N(UpdateTexturePanSmooth))
                     EVT_RETURN
                 EVT_END_IF
@@ -219,9 +219,9 @@ EvtScript N(8024183C) = {
         EVT_CALL(MakeLerp, 80, 90, 10, 0)
         EVT_LABEL(0)
         EVT_CALL(UpdateLerp)
-        EVT_CALL(RotateModel, 101, EVT_VAR(0), 1, 0, 0)
-        EVT_CALL(RotateModel, 103, EVT_VAR(0), 1, 0, 0)
-        EVT_IF_EQ(EVT_VAR(1), 1)
+        EVT_CALL(RotateModel, 101, LocalVar(0), 1, 0, 0)
+        EVT_CALL(RotateModel, 103, LocalVar(0), 1, 0, 0)
+        EVT_IF_EQ(LocalVar(1), 1)
             EVT_WAIT(1)
             EVT_GOTO(0)
         EVT_END_IF
@@ -229,9 +229,9 @@ EvtScript N(8024183C) = {
             EVT_CALL(MakeLerp, 45, 100, 150, 0)
             EVT_LOOP(0)
                 EVT_CALL(UpdateLerp)
-                EVT_CALL(TranslateGroup, 100, 0, EVT_VAR(0), 0)
+                EVT_CALL(TranslateGroup, 100, 0, LocalVar(0), 0)
                 EVT_WAIT(1)
-                EVT_IF_EQ(EVT_VAR(1), 0)
+                EVT_IF_EQ(LocalVar(1), 0)
                     EVT_BREAK_LOOP
                 EVT_END_IF
             EVT_END_LOOP
@@ -259,9 +259,9 @@ EvtScript N(8024183C) = {
         EVT_CMD(EVT_OP_CALL, EVT_PTR(MakeLerp), 80, 90, 10, 0),
         EVT_CMD(EVT_OP_LABEL, 0),
         EVT_CMD(EVT_OP_CALL, EVT_PTR(UpdateLerp)),
-        EVT_CMD(EVT_OP_CALL, EVT_PTR(RotateModel), 101, EVT_VAR(0), 1, 0, 0),
-        EVT_CMD(EVT_OP_CALL, EVT_PTR(RotateModel), 103, EVT_VAR(0), 1, 0, 0),
-        EVT_CMD(EVT_OP_IF_EQ, EVT_VAR(1), 1),
+        EVT_CMD(EVT_OP_CALL, EVT_PTR(RotateModel), 101, LocalVar(0), 1, 0, 0),
+        EVT_CMD(EVT_OP_CALL, EVT_PTR(RotateModel), 103, LocalVar(0), 1, 0, 0),
+        EVT_CMD(EVT_OP_IF_EQ, LocalVar(1), 1),
             EVT_CMD(EVT_OP_WAIT_FRAMES, 1),
             EVT_CMD(EVT_OP_GOTO, 0),
         EVT_CMD(EVT_OP_END_IF),
@@ -269,9 +269,9 @@ EvtScript N(8024183C) = {
             EVT_CMD(EVT_OP_CALL, EVT_PTR(MakeLerp), 45, 100, 150, 0),
             EVT_CMD(EVT_OP_LOOP, 0),
                 EVT_CMD(EVT_OP_CALL, EVT_PTR(UpdateLerp)),
-                EVT_CMD(EVT_OP_CALL, EVT_PTR(TranslateGroup), 100, 0, EVT_VAR(0), 0),
+                EVT_CMD(EVT_OP_CALL, EVT_PTR(TranslateGroup), 100, 0, LocalVar(0), 0),
                 EVT_CMD(EVT_OP_WAIT_FRAMES, 1),
-                EVT_CMD(EVT_OP_IF_EQ, EVT_VAR(1), 0),
+                EVT_CMD(EVT_OP_IF_EQ, LocalVar(1), 0),
                     EVT_CMD(EVT_OP_BREAK_LOOP),
                 EVT_CMD(EVT_OP_END_IF),
             EVT_CMD(EVT_OP_END_LOOP),
@@ -291,8 +291,8 @@ EvtScript N(80241ABC) = {
     EVT_ELSE
         EVT_CALL(EnableGroup, 65, 0)
     EVT_END_IF
-    EVT_CALL(GetEntryID, EVT_VAR(0))
-    EVT_IF_NE(EVT_VAR(0), 2)
+    EVT_CALL(GetEntryID, LocalVar(0))
+    EVT_IF_NE(LocalVar(0), 2)
         EVT_CALL(EnableGroup, 105, 0)
     EVT_END_IF
     EVT_CALL(EnableTexPanning, 89, 1)
@@ -305,99 +305,99 @@ EvtScript N(80241ABC) = {
     EVT_CALL(EnableTexPanning, 103, 1)
     EVT_CALL(EnableTexPanning, 99, 1)
     EVT_THREAD
-        EVT_SET(EVT_VAR(0), 1)
-        EVT_SET(EVT_VAR(1), 140)
-        EVT_SET(EVT_VAR(2), -80)
-        EVT_SET(EVT_VAR(3), -70)
-        EVT_SET(EVT_VAR(4), 100)
-        EVT_SET(EVT_VAR(5), 1)
-        EVT_SET(EVT_VAR(6), 1)
-        EVT_SET(EVT_VAR(7), 1)
-        EVT_SET(EVT_VAR(8), 1)
-        EVT_SET(EVT_VAR(9), 0)
-        EVT_SET(EVT_VAR(10), 0)
-        EVT_SET(EVT_VAR(11), 0)
-        EVT_SET(EVT_VAR(12), 0)
+        EVT_SET(LocalVar(0), 1)
+        EVT_SET(LocalVar(1), 140)
+        EVT_SET(LocalVar(2), -80)
+        EVT_SET(LocalVar(3), -70)
+        EVT_SET(LocalVar(4), 100)
+        EVT_SET(LocalVar(5), 1)
+        EVT_SET(LocalVar(6), 1)
+        EVT_SET(LocalVar(7), 1)
+        EVT_SET(LocalVar(8), 1)
+        EVT_SET(LocalVar(9), 0)
+        EVT_SET(LocalVar(10), 0)
+        EVT_SET(LocalVar(11), 0)
+        EVT_SET(LocalVar(12), 0)
         EVT_EXEC(N(updateTexturePan_802417A0))
     EVT_END_THREAD
     EVT_THREAD
-        EVT_SET(EVT_VAR(0), 2)
-        EVT_SET(EVT_VAR(1), -70)
-        EVT_SET(EVT_VAR(2), 100)
-        EVT_SET(EVT_VAR(3), 100)
-        EVT_SET(EVT_VAR(4), -40)
-        EVT_SET(EVT_VAR(5), 1)
-        EVT_SET(EVT_VAR(6), 1)
-        EVT_SET(EVT_VAR(7), 1)
-        EVT_SET(EVT_VAR(8), 1)
-        EVT_SET(EVT_VAR(9), 0)
-        EVT_SET(EVT_VAR(10), 0)
-        EVT_SET(EVT_VAR(11), 0)
-        EVT_SET(EVT_VAR(12), 0)
+        EVT_SET(LocalVar(0), 2)
+        EVT_SET(LocalVar(1), -70)
+        EVT_SET(LocalVar(2), 100)
+        EVT_SET(LocalVar(3), 100)
+        EVT_SET(LocalVar(4), -40)
+        EVT_SET(LocalVar(5), 1)
+        EVT_SET(LocalVar(6), 1)
+        EVT_SET(LocalVar(7), 1)
+        EVT_SET(LocalVar(8), 1)
+        EVT_SET(LocalVar(9), 0)
+        EVT_SET(LocalVar(10), 0)
+        EVT_SET(LocalVar(11), 0)
+        EVT_SET(LocalVar(12), 0)
         EVT_EXEC(N(updateTexturePan_802417A0))
     EVT_END_THREAD
     EVT_THREAD
-        EVT_SET(EVT_VAR(0), 3)
-        EVT_SET(EVT_VAR(1), 0)
-        EVT_SET(EVT_VAR(2), -800)
-        EVT_SET(EVT_VAR(3), 0)
-        EVT_SET(EVT_VAR(4), 0)
-        EVT_SET(EVT_VAR(5), 0)
-        EVT_SET(EVT_VAR(6), 1)
-        EVT_SET(EVT_VAR(7), 0)
-        EVT_SET(EVT_VAR(8), 0)
-        EVT_SET(EVT_VAR(9), 0)
-        EVT_SET(EVT_VAR(10), 0)
-        EVT_SET(EVT_VAR(11), 0)
-        EVT_SET(EVT_VAR(12), 0)
+        EVT_SET(LocalVar(0), 3)
+        EVT_SET(LocalVar(1), 0)
+        EVT_SET(LocalVar(2), -800)
+        EVT_SET(LocalVar(3), 0)
+        EVT_SET(LocalVar(4), 0)
+        EVT_SET(LocalVar(5), 0)
+        EVT_SET(LocalVar(6), 1)
+        EVT_SET(LocalVar(7), 0)
+        EVT_SET(LocalVar(8), 0)
+        EVT_SET(LocalVar(9), 0)
+        EVT_SET(LocalVar(10), 0)
+        EVT_SET(LocalVar(11), 0)
+        EVT_SET(LocalVar(12), 0)
         EVT_EXEC(N(updateTexturePan_802417A0))
     EVT_END_THREAD
     EVT_THREAD
-        EVT_SET(EVT_VAR(0), 4)
-        EVT_SET(EVT_VAR(1), 0)
-        EVT_SET(EVT_VAR(2), -800)
-        EVT_SET(EVT_VAR(3), -200)
-        EVT_SET(EVT_VAR(4), 100)
-        EVT_SET(EVT_VAR(5), 0)
-        EVT_SET(EVT_VAR(6), 1)
-        EVT_SET(EVT_VAR(7), 1)
-        EVT_SET(EVT_VAR(8), 1)
-        EVT_SET(EVT_VAR(9), 0)
-        EVT_SET(EVT_VAR(10), 0)
-        EVT_SET(EVT_VAR(11), 0)
-        EVT_SET(EVT_VAR(12), 0)
+        EVT_SET(LocalVar(0), 4)
+        EVT_SET(LocalVar(1), 0)
+        EVT_SET(LocalVar(2), -800)
+        EVT_SET(LocalVar(3), -200)
+        EVT_SET(LocalVar(4), 100)
+        EVT_SET(LocalVar(5), 0)
+        EVT_SET(LocalVar(6), 1)
+        EVT_SET(LocalVar(7), 1)
+        EVT_SET(LocalVar(8), 1)
+        EVT_SET(LocalVar(9), 0)
+        EVT_SET(LocalVar(10), 0)
+        EVT_SET(LocalVar(11), 0)
+        EVT_SET(LocalVar(12), 0)
         EVT_EXEC(N(updateTexturePan_802417A0))
     EVT_END_THREAD
     EVT_THREAD
-        EVT_SET(EVT_VAR(0), 5)
-        EVT_SET(EVT_VAR(1), 0)
-        EVT_SET(EVT_VAR(2), -2500)
-        EVT_SET(EVT_VAR(3), 0)
-        EVT_SET(EVT_VAR(4), 0)
-        EVT_SET(EVT_VAR(5), 0)
-        EVT_SET(EVT_VAR(6), 1)
-        EVT_SET(EVT_VAR(7), 0)
-        EVT_SET(EVT_VAR(8), 0)
-        EVT_SET(EVT_VAR(9), 0)
-        EVT_SET(EVT_VAR(10), 0)
-        EVT_SET(EVT_VAR(11), 0)
-        EVT_SET(EVT_VAR(12), 0)
+        EVT_SET(LocalVar(0), 5)
+        EVT_SET(LocalVar(1), 0)
+        EVT_SET(LocalVar(2), -2500)
+        EVT_SET(LocalVar(3), 0)
+        EVT_SET(LocalVar(4), 0)
+        EVT_SET(LocalVar(5), 0)
+        EVT_SET(LocalVar(6), 1)
+        EVT_SET(LocalVar(7), 0)
+        EVT_SET(LocalVar(8), 0)
+        EVT_SET(LocalVar(9), 0)
+        EVT_SET(LocalVar(10), 0)
+        EVT_SET(LocalVar(11), 0)
+        EVT_SET(LocalVar(12), 0)
         EVT_EXEC(N(updateTexturePan_802417A0))
     EVT_END_THREAD
     EVT_THREAD
-        EVT_SET(EVT_VAR(0), 6)
-        EVT_SET(EVT_VAR(1), 0)
-        EVT_SET(EVT_VAR(2), -2500)
-        EVT_SET(EVT_VAR(3), -200)
-        EVT_SET(EVT_VAR(4), 100)
-        EVT_SET(EVT_VAR(5), 1)
-        EVT_SET(EVT_VAR(6), 1)
-        EVT_SET(EVT_VAR(7), 1)
-        EVT_SET(EVT_VAR(8), 1)
-        EVT_SET(EVT_VAR(9), 0)
-        EVT_SET(EVT_VAR(10), 0)
-        EVT_SET(EVT_VAR(11), 0)
-        EVT_SET(EVT_VAR(12), 0)
+        EVT_SET(LocalVar(0), 6)
+        EVT_SET(LocalVar(1), 0)
+        EVT_SET(LocalVar(2), -2500)
+        EVT_SET(LocalVar(3), -200)
+        EVT_SET(LocalVar(4), 100)
+        EVT_SET(LocalVar(5), 1)
+        EVT_SET(LocalVar(6), 1)
+        EVT_SET(LocalVar(7), 1)
+        EVT_SET(LocalVar(8), 1)
+        EVT_SET(LocalVar(9), 0)
+        EVT_SET(LocalVar(10), 0)
+        EVT_SET(LocalVar(11), 0)
+        EVT_SET(LocalVar(12), 0)
         EVT_EXEC(N(updateTexturePan_802417A0))
     EVT_END_THREAD
     EVT_RETURN

@@ -21,14 +21,14 @@ ApiStatus func_802403D4_EE6984(Evt* script, s32 isInitialCall) {
     }
 
     script->varTable[14] = 1;
-    evt_set_variable(NULL, EVT_MAP_VAR(0), get_npc_unsafe(-4)->flags);
+    evt_set_variable(NULL, MapVar(0), get_npc_unsafe(-4)->flags);
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_8024042C_EE69DC(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(-4);
 
-    npc->flags = evt_get_variable(NULL, EVT_MAP_VAR(0));
+    npc->flags = evt_get_variable(NULL, MapVar(0));
     return ApiStatus_DONE2;
 }
 
