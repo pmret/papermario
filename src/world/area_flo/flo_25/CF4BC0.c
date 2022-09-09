@@ -41,9 +41,9 @@ Vec4f N(triggerCoord_802446AC) = { -388.0f, 0.0f, -92.0f, 0.0f };
 EvtScript N(802446BC) = {
     EVT_SET(AreaFlag(33), 0)
     EVT_SET(AreaFlag(34), 0)
-    EVT_SET(LocalVar(0), EVT_ADDR(N(tree1)))
+    EVT_SET(LocalVar(0), EVT_PTR(N(tree1)))
     EVT_BIND_TRIGGER(N(shakeTree), TRIGGER_WALL_HAMMER, 12, 1, 0)
-    EVT_BIND_TRIGGER(N(shakeTree), TRIGGER_POINT_BOMB, EVT_ADDR(N(triggerCoord_802446AC)), 1, 0)
+    EVT_BIND_TRIGGER(N(shakeTree), TRIGGER_POINT_BOMB, EVT_PTR(N(triggerCoord_802446AC)), 1, 0)
     EVT_RETURN
     EVT_END
 };

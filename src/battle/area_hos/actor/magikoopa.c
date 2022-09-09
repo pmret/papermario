@@ -305,9 +305,9 @@ EvtScript N(8021D890) = {
     EVT_CALL(SetPartFlagBits, -127, 3, 1, 1)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_magikoopa_Palette_00_Anim_1)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLYING, 0)
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_8021E6D8)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8021E6D8)))
     EVT_CALL(SetActorType, -127, 149)
-    EVT_CALL(SetStatusTable, -127, EVT_ADDR(N(statusTable_8021D498)))
+    EVT_CALL(SetStatusTable, -127, EVT_PTR(N(statusTable_8021D498)))
     EVT_CALL(N(UnkBattleFunc1), -10, 20, 10, 32)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_1000, 1)
     EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
@@ -368,10 +368,10 @@ EvtScript N(nextTurn_8021E0B0) = {
 extern EvtScript N(takeTurn_80223B24);
 
 EvtScript N(init_8021E100) = {
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_8021D774)))
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_80223B24)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_8021E6D8)))
-    EVT_CALL(BindNextTurn, -127, EVT_ADDR(N(nextTurn_8021E0B0)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_8021D774)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_80223B24)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8021E6D8)))
+    EVT_CALL(BindNextTurn, -127, EVT_PTR(N(nextTurn_8021E0B0)))
     EVT_CALL(GetBattleVar, 2, LocalVar(0))
     EVT_IF_EQ(LocalVar(0), 0)
         EVT_CALL(SetBattleVar, 2, -1)
@@ -395,9 +395,9 @@ EvtScript N(init_8021E100) = {
 extern EvtScript N(handleEvent_8021EDF0);
 
 EvtScript N(init_8021E2C0) = {
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_8021D774)))
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_80223B24)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_8021EDF0)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_8021D774)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_80223B24)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8021EDF0)))
     EVT_CALL(GetBattleVar, 2, LocalVar(0))
     EVT_IF_EQ(LocalVar(0), 0)
         EVT_CALL(SetBattleVar, 2, -1)
@@ -1193,14 +1193,14 @@ EvtScript N(handleEvent_8022142C) = {
 };
 
 EvtScript N(init_8022143C) = {
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_8022142C)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8022142C)))
     EVT_CALL(SetActorVar, -127, 1, 1)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(init_80221478) = {
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_8022142C)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8022142C)))
     EVT_CALL(SetActorVar, -127, 1, 1)
     EVT_RETURN
     EVT_END
@@ -1367,9 +1367,9 @@ EvtScript N(makeCopy) = {
         EVT_SET(LocalFlag(0), 1)
     EVT_END_IF
     EVT_IF_EQ(LocalFlag(0), 0)
-        EVT_CALL(SummonEnemy, EVT_ADDR(N(specialFormation_802216C8)), 0)
+        EVT_CALL(SummonEnemy, EVT_PTR(N(specialFormation_802216C8)), 0)
     EVT_ELSE
-        EVT_CALL(SummonEnemy, EVT_ADDR(N(specialFormation_802216E4)), 0)
+        EVT_CALL(SummonEnemy, EVT_PTR(N(specialFormation_802216E4)), 0)
     EVT_END_IF
     EVT_CALL(SetActorVar, -127, 9, LocalVar(0))
     EVT_SET(LVarA, LocalVar(0))

@@ -109,9 +109,9 @@ s32 N(idleAnimations_8021C600)[] = {
 #include "common/UnkBattleFunc1.inc.c"
 
 EvtScript N(init_8021C64C) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_8021DED4)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_8021C6B0)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_8021D064)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_8021DED4)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_8021C6B0)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8021D064)))
     EVT_CALL(SetActorVar, ACTOR_SELF, 8, 0)
     EVT_RETURN
     EVT_END
@@ -132,7 +132,7 @@ EvtScript N(8021C6C0) = {
             EVT_CALL(AddGoalPos, ACTOR_SELF, 0, -24, 0)
             EVT_CALL(FlyToGoal, ACTOR_SELF, 0, 1, 11)
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_HP_OFFSET_BELOW, 1)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_8021C5B4)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8021C5B4)))
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_swooper_Palette_00_Anim_C)
             EVT_CALL(GetActorPos, ACTOR_SELF, LocalVar(0), LocalVar(1), LocalVar(2))
             EVT_ADD(LocalVar(1), 24)
@@ -272,7 +272,7 @@ EvtScript N(8021CD04) = {
     EVT_CALL(func_8027D4C8, ACTOR_SELF, 1, 0, -10)
     EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, 0, 22)
     EVT_CALL(N(UnkBattleFunc1), -10, 20, 10, 20)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_8021C600)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8021C600)))
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLYING, 1)
     EVT_CALL(HPBarToHome, ACTOR_SELF)
     EVT_CALL(SetActorVar, ACTOR_SELF, 8, 1)
@@ -395,7 +395,7 @@ EvtScript N(handleEvent_8021D064) = {
             EVT_RETURN
         EVT_CASE_EQ(EVENT_BEGIN_FIRST_STRIKE)
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_HP_OFFSET_BELOW, 0)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_8021C600)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8021C600)))
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_swooper_Palette_00_Anim_2)
             EVT_CALL(SetActorPos, ACTOR_SELF, 20, 0, 0)
             EVT_CALL(HPBarToCurrent, ACTOR_SELF)

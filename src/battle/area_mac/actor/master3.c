@@ -120,10 +120,10 @@ extern EvtScript N(handleEvent_80231408);
 extern EvtScript N(nextTurn_80230D44);
 
 EvtScript N(init_8022DB60) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_80230B20)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_8022DC34)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_80231408)))
-    EVT_CALL(BindNextTurn, -127, EVT_ADDR(N(nextTurn_80230D44)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_80230B20)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_8022DC34)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80231408)))
+    EVT_CALL(BindNextTurn, -127, EVT_PTR(N(nextTurn_80230D44)))
     EVT_CALL(SetActorVar, -127, 0, 0)
     EVT_CALL(SetActorVar, -127, 1, 0)
     EVT_CALL(SetActorVar, -127, 2, 0)
@@ -912,7 +912,7 @@ EvtScript N(nextTurn_80230D44) = {
                     EVT_WAIT(1)
                 EVT_END_LOOP
                 EVT_WAIT(15)
-                EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_8022D9EC)))
+                EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8022D9EC)))
                 EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_the_master_Palette_00_Anim_8)
                 EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_the_master_Palette_00_Anim_14)
                 EVT_WAIT(2)

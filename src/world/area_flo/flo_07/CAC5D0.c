@@ -128,7 +128,7 @@ EvtScript N(main) = {
     EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
     EVT_CALL(SetCamEnabled, 0, 1)
     EVT_SET(AreaFlag(6), 0)
-    EVT_CALL(MakeNpcs, 0, EVT_ADDR(N(npcGroupList_80242B0C)))
+    EVT_CALL(MakeNpcs, 0, EVT_PTR(N(npcGroupList_80242B0C)))
     EVT_EXEC_WAIT(N(802428C4))
     EVT_CALL(ModifyColliderFlags, 3, 6, 0x00000006)
     EVT_SET(LocalVar(0), 297)
@@ -201,7 +201,7 @@ EvtScript N(main) = {
         EVT_EXEC(N(80241C14))
     EVT_ELSE
         EVT_CALL(ModifyColliderFlags, 0, 1, 0x7FFFFE00)
-        EVT_SET(LocalVar(0), EVT_ADDR(N(80240C74)))
+        EVT_SET(LocalVar(0), EVT_PTR(N(80240C74)))
         EVT_EXEC(EnterWalk)
         EVT_EXEC(N(802424F4))
     EVT_END_IF
@@ -257,7 +257,7 @@ EvtScript N(80241C14) = {
     EVT_WAIT(20)
     EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_posie_Palette_00_Anim_2, NPC_ANIM_posie_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x00C5))
     EVT_WAIT(10)
-    EVT_CALL(GotoMap, EVT_ADDR("flo_10"), 1)
+    EVT_CALL(GotoMap, EVT_PTR("flo_10"), 1)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END
@@ -382,7 +382,7 @@ EvtScript N(init_80242428) = {
         EVT_END_IF
     EVT_END_IF
     EVT_SET(AreaFlag(5), 0)
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_ADDR(N(interact_80242044)))
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_80242044)))
     EVT_RETURN
     EVT_END
 };
@@ -439,7 +439,7 @@ EvtScript N(tree1_Callback) = {
                 EVT_CASE_GE(5)
                     EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_posie_Palette_00_Anim_3, NPC_ANIM_posie_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x006D))
                     EVT_SET(AreaByte(3), 1)
-                    EVT_CALL(GotoMap, EVT_ADDR(N(flo_25_name_hack)), 1)
+                    EVT_CALL(GotoMap, EVT_PTR(N(flo_25_name_hack)), 1)
                     EVT_WAIT(100)
             EVT_END_SWITCH
         EVT_END_IF
@@ -469,9 +469,9 @@ ShakeTreeConfig N(tree1) = {
 Vec4f N(triggerCoord_802428B4) = { -309.0f, 0.0f, 31.0f, 0.0f };
 
 EvtScript N(802428C4) = {
-    EVT_SET(LocalVar(0), EVT_ADDR(N(tree1)))
+    EVT_SET(LocalVar(0), EVT_PTR(N(tree1)))
     EVT_BIND_TRIGGER(N(shakeTree), TRIGGER_WALL_HAMMER, 4, 1, 0)
-    EVT_BIND_TRIGGER(N(shakeTree), TRIGGER_POINT_BOMB, EVT_ADDR(N(triggerCoord_802428B4)), 1, 0)
+    EVT_BIND_TRIGGER(N(shakeTree), TRIGGER_POINT_BOMB, EVT_PTR(N(triggerCoord_802428B4)), 1, 0)
     EVT_RETURN
     EVT_END
 };

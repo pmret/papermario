@@ -101,9 +101,9 @@ ActorBlueprint N(parakarry) = {
 };
 
 EvtScript N(parakarry_init) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(parakarry_takeTurn)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(parakarry_idle)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(parakarry_handleEvent)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(parakarry_takeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(parakarry_idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(parakarry_handleEvent)))
     EVT_RETURN
     EVT_END
 };

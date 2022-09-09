@@ -183,7 +183,7 @@ EvtScript N(80224658) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, LVarA, 0x210027)
     EVT_WAIT(12)
     EVT_CALL(SetAnimation, ACTOR_SELF, LVarA, 0x210014)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, LVarA, EVT_ADDR(N(idleAnimations_8022464C)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, LVarA, EVT_PTR(N(idleAnimations_8022464C)))
     EVT_WAIT(60)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, 4194304, 1)
     EVT_RETURN
@@ -199,7 +199,7 @@ EvtScript N(80224964) = {
     EVT_CALL(PlayEffect, 0x7, 0, LocalVar(0), LocalVar(1), LocalVar(2), -4, 0, 0, 0, 0, 0, 0, 0, 0)
     EVT_CALL(PlayEffect, 0x7, 0, LocalVar(0), LocalVar(1), LocalVar(2), 4, 0, 0, 0, 0, 0, 0, 0, 0)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_jr_troopa_default_hide_shell)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_802243F8)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_802243F8)))
     EVT_WAIT(10)
     EVT_RETURN
     EVT_END
@@ -211,10 +211,10 @@ extern EvtScript N(handleEvent_80224B58);
 extern EvtScript N(nextTurn_80225B4C);
 
 EvtScript N(init_80224A94) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_80225314)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_80224B24)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_80224B58)))
-    EVT_CALL(BindNextTurn, -127, EVT_ADDR(N(nextTurn_80225B4C)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_80225314)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_80224B24)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80224B58)))
+    EVT_CALL(BindNextTurn, -127, EVT_PTR(N(nextTurn_80225B4C)))
     EVT_CALL(SetActorVar, -127, 0, 0)
     EVT_CALL(SetActorVar, -127, 1, 0)
     EVT_RETURN

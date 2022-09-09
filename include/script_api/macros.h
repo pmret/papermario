@@ -9,7 +9,7 @@
 /// Expressions in EVT instructions should be one of the following types:
 /// - Integer literals (as-is, s32)
 /// - Float literals (EVT_FLOAT) - cast to int where a float is not accepted
-/// - Pointers, string literals (EVT_ADDR)
+/// - Pointers, string literals (EVT_PTR)
 /// - Variables (LW, GW, LSW, GSW, UW)
 /// - Flags (LF, GF, LSWF, GSWF, UF)
 /// This is implemented in `evt_get_variable` and `evt_get_float_variable`.
@@ -17,40 +17,69 @@
 /// Decimal constant.
 /// Despite the name, "floats" are actually stored as fixed-point values.
 
+#define EVT_LOCAL_VAR_CUTOFF     -20000000
+#define EVT_LOCAL_VAR_OFFSET      30000000
+#define EVT_MAP_VAR_CUTOFF       -40000000
+#define EVT_MAP_VAR_OFFSET        50000000
+#define EVT_LOCAL_FLAG_CUTOFF    -60000000
+#define EVT_LOCAL_FLAG_OFFSET     70000000
+#define EVT_MAP_FLAG_CUTOFF      -80000000
+#define EVT_MAP_FLAG_OFFSET       90000000
+#define EVT_AREA_FLAG_CUTOFF    -100000000
+#define EVT_AREA_FLAG_OFFSET     110000000
+#define EVT_GAME_FLAG_CUTOFF    -120000000
+#define EVT_GAME_FLAG_OFFSET     130000000
+#define EVT_AREA_BYTE_CUTOFF    -140000000
+#define EVT_AREA_BYTE_OFFSET     150000000
+#define EVT_GAME_BYTE_CUTOFF    -160000000
+#define EVT_GAME_BYTE_OFFSET     170000000
+#define EVT_ARRAY_VAR_CUTOFF    -180000000
+#define EVT_ARRAY_VAR_OFFSET     190000000
+#define EVT_ARRAY_FLAG_CUTOFF   -200000000
+#define EVT_ARRAY_FLAG_OFFSET    210000000
+#define EVT_FIXED_CUTOFF        -220000000
+#define EVT_FIXED_OFFSET         230000000
+#define EVT_IGNORE_ARG          -250000000 // used by a couple functions to selectively ignore args
+#define EVT_LIMIT               -270000000 // TODO better name
+
  // This fixes an issue with fixed point numbers not being correct. Potentially a truncation vs round difference.
 #define EVT_FLOAT_ROUND(x) ((x) >=0 ? (f64)((x) + 0.9) : (f64)(x))
-#define EVT_FLOAT(DOUBLE)  ((Bytecode)EVT_FLOAT_ROUND(((DOUBLE) * 1024.0f)) + -230000000)
-#define EVT_FIXED_TO_FLOAT(x) ({f32 var = (x) + 230000000; var /= 1024.0f; var;})
-#define EVT_FLOAT_TO_FIXED(x) (((x) * 1024.0f) + -230000000)
+#define EVT_FLOAT(DOUBLE)  ((Bytecode)EVT_FLOAT_ROUND(((DOUBLE) * 1024.0f)) - EVT_FIXED_OFFSET)
+
+/// Progammatically converts EVT_FLOAT --> f32
+#define EVT_FIXED_TO_FLOAT(x) ({f32 var = (x) + EVT_FIXED_OFFSET; var /= 1024.0f; var;})
+
+/// Progammatically converts f32 --> EVT_FLOAT
+#define EVT_FLOAT_TO_FIXED(x) (((x) * 1024.0f) + -EVT_FIXED_OFFSET)
 
 /// Address/pointer constant.
-#define EVT_ADDR(sym) (((Bytecode) &((sym))))
+#define EVT_PTR(sym) (((Bytecode) &((sym))))
 
 /// Local Word. A variable local to the current thread.
 /// LWs are copied to any threads created by this one (EVT_EXEC, EVT_EXEC_WAIT, EVT_THREAD, EVT_CHILD_THREAD).
 /// Additionally, EVT_EXEC_WAIT copies LWs back from the spawned thread when it completes.
 ///
 /// Range: `0 <= v < 0x10`
-#define LocalVar(INDEX) ((((INDEX)) - 30000000))
+#define LocalVar(INDEX) ((((INDEX)) - EVT_LOCAL_VAR_OFFSET))
 
 /// Global Word. A variable global to all threads.
 /// Cleared upon entering a new map.
 ///
 /// Range: `0 <= v < 0x10`
-#define MapVar(INDEX) ((((INDEX)) - 50000000))
+#define MapVar(INDEX) ((((INDEX)) - EVT_MAP_VAR_OFFSET))
 
 /// Local Flag. A boolean variable local to the current thread.
 /// LFs are copied to any threads created by this one (EVT_EXEC, EVT_EXEC_WAIT, EVT_THREAD, EVT_CHILD_THREAD).
 /// Additionally, EVT_EXEC_WAIT copies LFs back from the spawned thread when it completes.
 ///
 /// Range: `0 <= v < 0x60`
-#define LocalFlag(INDEX) ((((INDEX)) - 70000000))
+#define LocalFlag(INDEX) ((((INDEX)) - EVT_LOCAL_FLAG_OFFSET))
 
 /// Global Flag. A boolean variable global to all threads.
 /// Cleared upon entering a new map.
 ///
 /// Range: `0 <= v < 0x60`
-#define MapFlag(INDEX) ((((INDEX)) - 90000000))
+#define MapFlag(INDEX) ((((INDEX)) - EVT_MAP_FLAG_OFFSET))
 
 /// Local Save World Flag. A boolean variable local to the current world area, saved in the savefile.
 /// Cleared upon entering a new world area.
@@ -58,14 +87,14 @@
 /// Used to track whether items that respawn, such as coins, Goomnuts, or Koopa Leaves, have been collected.
 ///
 /// Range: `0 <= v < 0x100`
-#define AreaFlag(INDEX) ((((INDEX)) - 110000000))
+#define AreaFlag(INDEX) ((((INDEX)) - EVT_AREA_FLAG_OFFSET))
 
 /// Global Save World Flag. A boolean variable saved in the savefile.
 ///
 /// Used to track whether badges, items, etc. have been collected or whether NPCs have been interacted with.
 ///
 /// Range: `0 <= v < 0x800`
-#define GameFlag(INDEX) ((((INDEX)) - 130000000))
+#define GameFlag(INDEX) ((((INDEX)) - EVT_GAME_FLAG_OFFSET))
 
 /// Local Saved **Byte**. A variable local to the current world area, saved in the savefile.
 /// Cleared upon a new world area.
@@ -74,25 +103,25 @@
 /// interacted with them in their 'recent memory' (i.e. until you leave the area).
 ///
 /// Range: `0 <= v < 0x10`
-#define AreaByte(INDEX) ((((INDEX)) - 150000000))
+#define AreaByte(INDEX) ((((INDEX)) - EVT_AREA_BYTE_OFFSET))
 
 /// Global Saved **Byte**. A variable saved in the save file.
 ///
 /// Used for almost all savefile state.
-#define GameByte(INDEX) ((((INDEX)) - 170000000))
+#define GameByte(INDEX) ((((INDEX)) - EVT_GAME_BYTE_OFFSET))
 
 /// User Word. A variable stored within the current thread's array.
 /// You can load an array with EVT_USE_ARRAY or temporarily allocate one with EVT_MALLOC_ARRAY, then get/set values with
 /// the `ArrayVar(index)` macro.
 ///
 /// Range: `0 <= v`
-#define ArrayVar(INDEX) ((((INDEX)) - 190000000))
+#define ArrayVar(INDEX) ((((INDEX)) - EVT_ARRAY_VAR_OFFSET))
 
 /// User Flag. A boolean variable stored within the current thread's flag array.
 /// The flag array is distinct from the word array (unlike EVT_USE_BUF and EVT_USE_FBUF).
 ///
 /// Range: `0 <= v`
-#define ArrayFlag(INDEX) ((((v)) - 210000000))
+#define ArrayFlag(INDEX) ((((v)) - EVT_ARRAY_FLAG_OFFSET))
 
 /// An entity index. Entities are assigned indices in the order they are created with EVT_CALL(MakeEntity, ...).
 /// Supported in EVT_BIND_TRIGGER and EVT_BIND_PADLOCK only.
@@ -100,14 +129,16 @@
 #define EVT_ENTITY_INDEX(entityIndex) (((((entityIndex)) + EVT_ENTITY_ID_BIT)))
 
 // inverse macros for obtaining the index of a variable from its encoded form
-#define EVT_INDEX_OF_LOCAL_VAR(v)   ((v) +  30000000)
-#define EVT_INDEX_OF_LOCAL_FLAG(v)  ((v) +  70000000)
-#define EVT_INDEX_OF_MAP_VAR(v)     ((v) +  50000000)
-#define EVT_INDEX_OF_MAP_FLAG(v)    ((v) +  90000000)
-#define EVT_INDEX_OF_AREA_FLAG(v)   ((v) + 110000000)
-#define EVT_INDEX_OF_AREA_BYTE(v)   ((v) + 150000000)
-#define EVT_INDEX_OF_GAME_FLAG(v)   ((v) + 130000000)
-#define EVT_INDEX_OF_GAME_BYTE(v)   ((v) + 170000000)
+#define EVT_INDEX_OF_LOCAL_VAR(v)   ((v) + EVT_LOCAL_VAR_OFFSET)
+#define EVT_INDEX_OF_LOCAL_FLAG(v)  ((v) + EVT_LOCAL_FLAG_OFFSET)
+#define EVT_INDEX_OF_MAP_VAR(v)     ((v) + EVT_MAP_VAR_OFFSET)
+#define EVT_INDEX_OF_MAP_FLAG(v)    ((v) + EVT_MAP_FLAG_OFFSET)
+#define EVT_INDEX_OF_AREA_FLAG(v)   ((v) + EVT_AREA_FLAG_OFFSET)
+#define EVT_INDEX_OF_AREA_BYTE(v)   ((v) + EVT_AREA_BYTE_OFFSET)
+#define EVT_INDEX_OF_GAME_FLAG(v)   ((v) + EVT_GAME_FLAG_OFFSET)
+#define EVT_INDEX_OF_GAME_BYTE(v)   ((v) + EVT_GAME_BYTE_OFFSET)
+#define EVT_INDEX_OF_ARRAY_FLAG(v)  ((v) + EVT_ARRAY_FLAG_OFFSET)
+#define EVT_INDEX_OF_ARRAY_VAR(v)   ((v) + EVT_ARRAY_VAR_OFFSET)
 
 // shorthand names for LocalVar
 #define LVar0 LocalVar(0)
@@ -545,7 +576,7 @@
         EVT_SET_GROUP(EVT_GROUP_1B) \
         EVT_CALL(UseExitHeading, walkDistance, exitIdx) \
         EVT_EXEC(ExitWalk) \
-        EVT_CALL(GotoMap, EVT_ADDR(map), entryIdx) \
+        EVT_CALL(GotoMap, EVT_PTR(map), entryIdx) \
         EVT_WAIT(100) \
         EVT_RETURN \
         EVT_END \

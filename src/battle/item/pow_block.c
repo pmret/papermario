@@ -51,7 +51,7 @@ EvtScript N(main) = {
     EVT_SET_CONST(LVarA, 0x00000090)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_WAIT(10)
-    EVT_CALL(MakeEntity, EVT_ADDR(Entity_PowBlock), -40, 60, 0, 0, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, EVT_PTR(Entity_PowBlock), -40, 60, 0, 0, MAKE_ENTITY_END)
     EVT_SET(LVarA, LVar0)
     EVT_CALL(N(func_802A1318_718B68))
     EVT_CALL(PlayEffect, 0x7, 2, -40, 60, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0)

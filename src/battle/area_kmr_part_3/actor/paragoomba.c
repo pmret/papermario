@@ -186,9 +186,9 @@ s32 N(idleAnimations_8021C47C)[] = {
 };
 
 EvtScript N(8021C488) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_8021CDFC)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_8021C4D4)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_8021C808)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_8021CDFC)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_8021C4D4)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8021C808)))
     EVT_RETURN
     EVT_END
 };
@@ -209,7 +209,7 @@ EvtScript N(idle_8021C4D4) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_ADD(LocalVar(0), 5)
     EVT_CALL(SetActorIdleSpeed, ACTOR_SELF, EVT_FLOAT(0.6))
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 2, EVT_ADDR(N(idleAnimations_8021C424)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 2, EVT_PTR(N(idleAnimations_8021C424)))
     EVT_CALL(SetIdleGoal, ACTOR_SELF, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_CALL(IdleFlyToGoal, ACTOR_SELF, 0, -5, 0)
     EVT_LOOP(20)
@@ -226,7 +226,7 @@ EvtScript N(idle_8021C4D4) = {
     EVT_CALL(SetActorIdleSpeed, ACTOR_SELF, EVT_FLOAT(0.6))
     EVT_CALL(SetIdleGoal, ACTOR_SELF, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_CALL(IdleFlyToGoal, ACTOR_SELF, 0, -5, 0)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 2, EVT_ADDR(N(idleAnimations_8021C3D8)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 2, EVT_PTR(N(idleAnimations_8021C3D8)))
     EVT_LOOP(40)
         EVT_LABEL(2)
         EVT_CALL(GetStatusFlags, ACTOR_SELF, LocalVar(1))
@@ -538,7 +538,7 @@ EvtScript N(8021D614) = {
     EVT_CALL(SetHomePos, -127, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_goomba_normal_idle)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, 512, 0)
-    EVT_CALL(SetStatusTable, -127, EVT_ADDR(N(statusTable_8021C1C8)))
+    EVT_CALL(SetStatusTable, -127, EVT_PTR(N(statusTable_8021C1C8)))
     EVT_CALL(SetActorType, -127, 7)
     EVT_EXEC_WAIT(N(8021DC34))
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, 4096, 1)
@@ -579,9 +579,9 @@ extern EvtScript N(idle);
 extern EvtScript N(handleEvent_8021DF5C);
 
 EvtScript N(8021DC34) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_8021E788)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_8021DF5C)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_8021E788)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8021DF5C)))
     EVT_RETURN
     EVT_END
 };
@@ -602,10 +602,10 @@ EvtScript N(idle) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_ADD(LocalVar(0), 5)
     EVT_CALL(SetActorIdleSpeed, ACTOR_SELF, EVT_FLOAT(1.0))
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_8021DBE8)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8021DBE8)))
     EVT_CALL(SetIdleGoal, ACTOR_SELF, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_CALL(IdleRunToGoal, -127, 0)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_8021DB9C)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8021DB9C)))
     EVT_LOOP(20)
         EVT_LABEL(1)
         EVT_CALL(GetStatusFlags, ACTOR_SELF, LocalVar(1))
@@ -618,10 +618,10 @@ EvtScript N(idle) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_SUB(LocalVar(0), 5)
     EVT_CALL(SetActorIdleSpeed, ACTOR_SELF, EVT_FLOAT(1.0))
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_8021DBE8)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8021DBE8)))
     EVT_CALL(SetIdleGoal, ACTOR_SELF, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_CALL(IdleRunToGoal, -127, 0)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_8021DB9C)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8021DB9C)))
     EVT_LOOP(80)
         EVT_LABEL(2)
         EVT_CALL(GetStatusFlags, ACTOR_SELF, LocalVar(1))
@@ -930,10 +930,10 @@ EvtScript N(takeTurn_8021E788) = {
 extern EvtScript N(nextTurn_8021F690);
 
 EvtScript N(init_8021F450) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_8021CDFC)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_8021C4D4)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_8021C808)))
-    EVT_CALL(BindNextTurn, -127, EVT_ADDR(N(nextTurn_8021F690)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_8021CDFC)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_8021C4D4)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8021C808)))
+    EVT_CALL(BindNextTurn, -127, EVT_PTR(N(nextTurn_8021F690)))
     EVT_RETURN
     EVT_END
 };

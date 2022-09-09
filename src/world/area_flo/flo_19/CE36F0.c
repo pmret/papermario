@@ -41,11 +41,11 @@ EvtScript N(802409C0) = {
 };
 #else
 EvtScript N(802409C0) = {
-    EVT_CMD(EVT_OP_CALL, EVT_ADDR(GetEntryID), LocalVar(0)),
+    EVT_CMD(EVT_OP_CALL, EVT_PTR(GetEntryID), LocalVar(0)),
     EVT_CMD(EVT_OP_SWITCH, LocalVar(0)),
         EVT_CMD(EVT_OP_CASE_OR_EQ, 0),
         EVT_CMD(EVT_OP_CASE_OR_EQ, 1),
-            EVT_CMD(EVT_OP_CALL, EVT_ADDR(SetMusicTrack), 0, SONG_CLOUDY_CLIMB, 0, 8),
+            EVT_CMD(EVT_OP_CALL, EVT_PTR(SetMusicTrack), 0, SONG_CLOUDY_CLIMB, 0, 8),
         EVT_CMD(EVT_OP_END_CASE_GROUP),
         EVT_CMD(EVT_OP_CASE_OR_EQ, 2),
         EVT_CMD(EVT_OP_CASE_OR_EQ, 7),
@@ -53,8 +53,8 @@ EvtScript N(802409C0) = {
         EVT_CMD(EVT_OP_CASE_EQ, 3),
             EVT_CMD(EVT_OP_IF_NE, AreaFlag(44), 0),
             EVT_CMD(EVT_OP_ELSE),
-                EVT_CMD(EVT_OP_CALL, EVT_ADDR(FadeOutMusic), 1, 3000),
-                EVT_CMD(EVT_OP_CALL, EVT_ADDR(FadeInMusic), 0, 50, 0, 3000, 0, 127),
+                EVT_CMD(EVT_OP_CALL, EVT_PTR(FadeOutMusic), 1, 3000),
+                EVT_CMD(EVT_OP_CALL, EVT_PTR(FadeInMusic), 0, 50, 0, 3000, 0, 127),
             EVT_CMD(EVT_OP_END_IF),
         EVT_CMD(EVT_OP_END_CASE_GROUP),
     EVT_CMD(EVT_OP_END_SWITCH),
@@ -159,7 +159,7 @@ EvtScript N(main) = {
             EVT_EXEC(N(80240BF8))
         EVT_CASE_EQ(1)
             EVT_CALL(ModifyColliderFlags, 0, 1, 0x7FFFFE00)
-            EVT_SET(LocalVar(0), EVT_ADDR(N(80240BF8)))
+            EVT_SET(LocalVar(0), EVT_PTR(N(80240BF8)))
             EVT_EXEC(EnterWalk)
         EVT_CASE_EQ(2)
             EVT_EXEC(N(80242A2C))
@@ -600,7 +600,7 @@ EvtScript N(802423F8) = {
             EVT_WAIT(1)
             EVT_GOTO(10)
         EVT_END_IF
-        EVT_CALL(GotoMap, EVT_ADDR("flo_00"), 8)
+        EVT_CALL(GotoMap, EVT_PTR("flo_00"), 8)
         EVT_WAIT(100)
     EVT_END_IF
     EVT_RETURN
@@ -680,7 +680,7 @@ EvtScript N(80242A2C) = {
     EVT_END_LOOP
     EVT_WAIT(15)
     EVT_SET(GB_StoryProgress, 55)
-    EVT_CALL(GotoMap, EVT_ADDR("flo_00"), 7)
+    EVT_CALL(GotoMap, EVT_PTR("flo_00"), 7)
     EVT_RETURN
     EVT_END
 };

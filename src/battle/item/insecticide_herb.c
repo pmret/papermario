@@ -96,7 +96,7 @@ EvtScript script = {
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_THROW)
     EVT_CALL(PlaySound, SOUND_THROW)
     EVT_WAIT(3)
-    EVT_CALL(CreateVirtualEntity, LVarA, EVT_ADDR(N(modelCommandList)))
+    EVT_CALL(CreateVirtualEntity, LVarA, EVT_PTR(N(modelCommandList)))
     EVT_SETF(LVar0, EVT_FLOAT(1.0))
     EVT_CALL(MultiplyByActorScale, LVar0)
     EVT_CALL(SetVirtualEntityScale, LVarA, LVar0, LVar0, LVar0)

@@ -240,9 +240,9 @@ ActorBlueprint NAMESPACE = {
 };
 
 EvtScript N(init_8022987C) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_8022A9D0)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_80229A24)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_8022A398)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_8022A9D0)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_80229A24)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8022A398)))
     EVT_CALL(SetActorVar, ACTOR_SELF, 8, 0)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetPartPos, ACTOR_SELF, 3, LVar0, LVar1, LVar2)
@@ -379,9 +379,9 @@ EvtScript N(80229F08) = {
         EVT_CALL(PlayEffect, EFFECT_LANDING_DUST, 3, LVar0, LVar1, LVar2, 0, 0, 0, 0, 0, 0, 0, 0, 0)
         EVT_WAIT(40)
         EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLYING, 0)
-        EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_8022CA9C)))
-        EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_8022B19C)))
-        EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_8022B310)))
+        EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_8022CA9C)))
+        EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_8022B19C)))
+        EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8022B310)))
         EVT_CALL(SetActorType, ACTOR_SELF, ACTOR_TYPE_SHY_GUY)
         EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_1000, 1)
         EVT_CALL(HPBarToHome, ACTOR_SELF)
@@ -609,9 +609,9 @@ s32 N(idleAnimations_8022B104)[] = {
 };
 
 EvtScript N(8022B150) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_8022CA9C)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_8022B19C)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_8022B310)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_8022CA9C)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_8022B19C)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8022B310)))
     EVT_RETURN
     EVT_END
 };

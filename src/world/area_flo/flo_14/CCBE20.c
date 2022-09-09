@@ -34,7 +34,7 @@ EvtScript N(npcAI_80244508) = {
     EVT_CALL(SetSelfVar, 5, -630)
     EVT_CALL(SetSelfVar, 6, 50)
     EVT_CALL(SetSelfVar, 1, 200)
-    EVT_CALL(N(FlyingAI_Main), EVT_ADDR(N(npcAISettings_802444D8)))
+    EVT_CALL(N(FlyingAI_Main), EVT_PTR(N(npcAISettings_802444D8)))
     EVT_RETURN
     EVT_END
 };
@@ -94,7 +94,7 @@ EvtScript N(80244604) = {
 
 EvtScript N(80244738) = {
     EVT_CALL(N(BuildItemChoiceList), LocalVar(0))
-    EVT_BIND_PADLOCK(N(80244604), 0x10, 0, EVT_ADDR(N(ItemChoiceList)), 0, 1)
+    EVT_BIND_PADLOCK(N(80244604), 0x10, 0, EVT_PTR(N(ItemChoiceList)), 0, 1)
     EVT_CALL(N(ItemChoice_WaitForSelection), LocalVar(0))
     EVT_RETURN
     EVT_END
@@ -120,7 +120,7 @@ EvtScript N(interact_80244790) = {
     EVT_END_IF
     EVT_CALL(FindItem, 161, LocalVar(0))
     EVT_IF_NE(LocalVar(0), -1)
-        EVT_SET(LocalVar(0), EVT_ADDR(N(D_80244788_CCFA98)))
+        EVT_SET(LocalVar(0), EVT_PTR(N(D_80244788_CCFA98)))
         EVT_SET(LocalVar(1), 0)
         EVT_EXEC_WAIT(N(80244738))
         EVT_IF_EQ(LocalVar(0), -1)
@@ -160,7 +160,7 @@ EvtScript N(interact_80244790) = {
 EvtScript N(init_80244ADC) = {
     EVT_SET(AreaFlag(36), 0)
     EVT_SET(AreaFlag(37), 0)
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_ADDR(N(interact_80244790)))
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_80244790)))
     EVT_RETURN
     EVT_END
 };

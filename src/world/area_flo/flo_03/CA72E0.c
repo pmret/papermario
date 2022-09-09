@@ -134,7 +134,7 @@ EvtScript N(main) = {
     EVT_SET(AreaFlag(27), 0)
     EVT_SET(AreaFlag(28), 0)
     EVT_SET(AreaByte(1), 0)
-    EVT_CALL(MakeNpcs, 0, EVT_ADDR(N(npcGroupList_8024442C)))
+    EVT_CALL(MakeNpcs, 0, EVT_PTR(N(npcGroupList_8024442C)))
     EVT_EXEC_WAIT(N(makeEntities))
     EVT_EXEC_WAIT(N(80241EF4))
     EVT_EXEC(N(80244E54))
@@ -157,7 +157,7 @@ EvtScript N(main) = {
         EVT_EXEC(N(80240FFC))
     EVT_ELSE
         EVT_CALL(ModifyColliderFlags, 0, 1, 0x7FFFFE00)
-        EVT_SET(LocalVar(0), EVT_ADDR(N(80240BE4)))
+        EVT_SET(LocalVar(0), EVT_PTR(N(80240BE4)))
         EVT_EXEC(EnterWalk)
     EVT_END_IF
     EVT_EXEC_WAIT(N(802406A0))
@@ -238,7 +238,7 @@ EvtScript N(80240FFC) = {
     EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_petunia_Palette_00_Anim_2, NPC_ANIM_petunia_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x00C8))
     EVT_CALL(SetNpcAnimation, 0, NPC_ANIM_petunia_Palette_00_Anim_3)
     EVT_WAIT(10)
-    EVT_CALL(GotoMap, EVT_ADDR("flo_18"), 1)
+    EVT_CALL(GotoMap, EVT_PTR("flo_18"), 1)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END
@@ -366,7 +366,7 @@ EvtScript N(interact_802412BC) = {
             EVT_CALL(SetEnemyFlagBits, 3, 1, 0)
             EVT_CALL(SetEnemyFlagBits, 4, 1, 0)
             EVT_CALL(SetEnemyFlagBits, 5, 1, 0)
-            EVT_CALL(BindNpcAI, 1, EVT_ADDR(N(npcAI_8024119C)))
+            EVT_CALL(BindNpcAI, 1, EVT_PTR(N(npcAI_8024119C)))
             EVT_SET(MapVar(14), 0)
             EVT_SET(MapVar(15), 60)
             EVT_SET(GB_StoryProgress, 44)
@@ -410,7 +410,7 @@ EvtScript N(interact_802412BC) = {
 };
 
 EvtScript N(init_80241DA4) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_ADDR(N(interact_802412BC)))
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_802412BC)))
     EVT_IF_EQ(GF_FLO03_DefeatedAll_MontyMoles, 0)
         EVT_CALL(SetNpcAnimation, 0, NPC_ANIM_petunia_Palette_00_Anim_6)
     EVT_ELSE
@@ -421,7 +421,7 @@ EvtScript N(init_80241DA4) = {
 };
 
 EvtScript N(init_80241E10) = {
-    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_ADDR(N(defeat_802411B8)))
+    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(defeat_802411B8)))
     EVT_CALL(EnableNpcShadow, 1, FALSE)
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(44)
@@ -429,7 +429,7 @@ EvtScript N(init_80241E10) = {
         EVT_CASE_DEFAULT
             EVT_IF_EQ(GF_FLO03_Defeated_Dayzee, 0)
                 EVT_CALL(SetEnemyFlagBits, 1, 1, 0)
-                EVT_CALL(BindNpcIdle, NPC_SELF, EVT_ADDR(N(npcAI_8024119C)))
+                EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(npcAI_8024119C)))
             EVT_ELSE
                 EVT_CALL(SetNpcPos, 1, 0, -1000, 0)
             EVT_END_IF
@@ -546,7 +546,7 @@ EvtScript N(idle_8024219C) = {
                 EVT_IF_EQ(GF_FLO03_Defeated_MontyMoleA, 0)
                     EVT_CALL(RandInt, 2, LocalVar(0))
                     EVT_ADD(LocalVar(0), 1)
-                    EVT_USE_BUF(EVT_ADDR(N(intTable_80240F6C)))
+                    EVT_USE_BUF(EVT_PTR(N(intTable_80240F6C)))
                     EVT_LOOP(LocalVar(0))
                         EVT_BUF_READ3(LocalVar(1), LocalVar(2), LocalVar(3))
                     EVT_END_LOOP
@@ -624,7 +624,7 @@ EvtScript N(idle_80242618) = {
                 EVT_IF_EQ(GF_FLO03_Defeated_MontyMoleB, 0)
                     EVT_CALL(RandInt, 2, LocalVar(0))
                     EVT_ADD(LocalVar(0), 1)
-                    EVT_USE_BUF(EVT_ADDR(N(intTable_80240F90)))
+                    EVT_USE_BUF(EVT_PTR(N(intTable_80240F90)))
                     EVT_LOOP(LocalVar(0))
                         EVT_BUF_READ3(LocalVar(1), LocalVar(2), LocalVar(3))
                     EVT_END_LOOP
@@ -702,7 +702,7 @@ EvtScript N(idle_80242A94) = {
                 EVT_IF_EQ(GF_FLO03_Defeated_MontyMoleC, 0)
                     EVT_CALL(RandInt, 2, LocalVar(0))
                     EVT_ADD(LocalVar(0), 1)
-                    EVT_USE_BUF(EVT_ADDR(N(intTable_80240FB4)))
+                    EVT_USE_BUF(EVT_PTR(N(intTable_80240FB4)))
                     EVT_LOOP(LocalVar(0))
                         EVT_BUF_READ3(LocalVar(1), LocalVar(2), LocalVar(3))
                     EVT_END_LOOP
@@ -780,7 +780,7 @@ EvtScript N(idle_80242F10) = {
                 EVT_IF_EQ(GF_FLO03_Defeated_MontyMoleD, 0)
                     EVT_CALL(RandInt, 2, LocalVar(0))
                     EVT_ADD(LocalVar(0), 1)
-                    EVT_USE_BUF(EVT_ADDR(N(intTable_80240FD8)))
+                    EVT_USE_BUF(EVT_PTR(N(intTable_80240FD8)))
                     EVT_LOOP(LocalVar(0))
                         EVT_BUF_READ3(LocalVar(1), LocalVar(2), LocalVar(3))
                     EVT_END_LOOP
@@ -810,16 +810,16 @@ EvtScript N(idle_80242F10) = {
 };
 
 EvtScript N(init_8024338C) = {
-    EVT_CALL(BindNpcHit, -1, EVT_ADDR(N(hit_80242138)))
-    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_ADDR(N(defeat_80241F64)))
+    EVT_CALL(BindNpcHit, -1, EVT_PTR(N(hit_80242138)))
+    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(defeat_80241F64)))
     EVT_CALL(EnableNpcShadow, 2, FALSE)
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(44)
-            EVT_CALL(BindNpcIdle, NPC_SELF, EVT_ADDR(N(idle_8024219C)))
+            EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_8024219C)))
             EVT_CALL(SetNpcAnimation, 2, NPC_ANIM_monty_mole_Palette_01_Anim_10)
         EVT_CASE_EQ(44)
             EVT_IF_EQ(GF_FLO03_Defeated_MontyMoleA, 0)
-                EVT_CALL(BindNpcIdle, NPC_SELF, EVT_ADDR(N(idle_8024219C)))
+                EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_8024219C)))
                 EVT_CALL(SetNpcAnimation, 2, NPC_ANIM_monty_mole_Palette_01_Anim_10)
                 EVT_CALL(SetEnemyFlagBits, 2, 1, 0)
             EVT_ELSE
@@ -833,16 +833,16 @@ EvtScript N(init_8024338C) = {
 };
 
 EvtScript N(init_802434CC) = {
-    EVT_CALL(BindNpcHit, -1, EVT_ADDR(N(hit_80242138)))
-    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_ADDR(N(defeat_80241F64)))
+    EVT_CALL(BindNpcHit, -1, EVT_PTR(N(hit_80242138)))
+    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(defeat_80241F64)))
     EVT_CALL(EnableNpcShadow, 3, FALSE)
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(44)
-            EVT_CALL(BindNpcIdle, NPC_SELF, EVT_ADDR(N(idle_80242618)))
+            EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80242618)))
             EVT_CALL(SetNpcAnimation, 3, NPC_ANIM_monty_mole_Palette_01_Anim_10)
         EVT_CASE_EQ(44)
             EVT_IF_EQ(GF_FLO03_Defeated_MontyMoleB, 0)
-                EVT_CALL(BindNpcIdle, NPC_SELF, EVT_ADDR(N(idle_80242618)))
+                EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80242618)))
                 EVT_CALL(SetNpcAnimation, 3, NPC_ANIM_monty_mole_Palette_01_Anim_10)
                 EVT_CALL(SetEnemyFlagBits, 3, 1, 0)
             EVT_ELSE
@@ -856,16 +856,16 @@ EvtScript N(init_802434CC) = {
 };
 
 EvtScript N(init_8024360C) = {
-    EVT_CALL(BindNpcHit, -1, EVT_ADDR(N(hit_80242138)))
-    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_ADDR(N(defeat_80241F64)))
+    EVT_CALL(BindNpcHit, -1, EVT_PTR(N(hit_80242138)))
+    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(defeat_80241F64)))
     EVT_CALL(EnableNpcShadow, 4, FALSE)
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(44)
-            EVT_CALL(BindNpcIdle, NPC_SELF, EVT_ADDR(N(idle_80242A94)))
+            EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80242A94)))
             EVT_CALL(SetNpcAnimation, 4, NPC_ANIM_monty_mole_Palette_01_Anim_10)
         EVT_CASE_EQ(44)
             EVT_IF_EQ(GF_FLO03_Defeated_MontyMoleC, 0)
-                EVT_CALL(BindNpcIdle, NPC_SELF, EVT_ADDR(N(idle_80242A94)))
+                EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80242A94)))
                 EVT_CALL(SetNpcAnimation, 4, NPC_ANIM_monty_mole_Palette_01_Anim_10)
                 EVT_CALL(SetEnemyFlagBits, 4, 1, 0)
             EVT_ELSE
@@ -879,16 +879,16 @@ EvtScript N(init_8024360C) = {
 };
 
 EvtScript N(init_8024374C) = {
-    EVT_CALL(BindNpcHit, -1, EVT_ADDR(N(hit_80242138)))
-    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_ADDR(N(defeat_80241F64)))
+    EVT_CALL(BindNpcHit, -1, EVT_PTR(N(hit_80242138)))
+    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(defeat_80241F64)))
     EVT_CALL(EnableNpcShadow, 5, FALSE)
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(44)
-            EVT_CALL(BindNpcIdle, NPC_SELF, EVT_ADDR(N(idle_80242F10)))
+            EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80242F10)))
             EVT_CALL(SetNpcAnimation, 5, NPC_ANIM_monty_mole_Palette_01_Anim_10)
         EVT_CASE_EQ(44)
             EVT_IF_EQ(GF_FLO03_Defeated_MontyMoleD, 0)
-                EVT_CALL(BindNpcIdle, NPC_SELF, EVT_ADDR(N(idle_80242F10)))
+                EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80242F10)))
                 EVT_CALL(SetNpcAnimation, 5, NPC_ANIM_monty_mole_Palette_01_Anim_10)
                 EVT_CALL(SetEnemyFlagBits, 5, 1, 0)
             EVT_ELSE
@@ -1202,9 +1202,9 @@ Vec4f N(triggerCoord_80244E44) = { -208.0f, 0.0f, -182.0f, 0.0f };
 EvtScript N(80244E54) = {
     EVT_SET(AreaFlag(27), 0)
     EVT_SET(AreaFlag(28), 0)
-    EVT_SET(LocalVar(0), EVT_ADDR(N(tree1)))
+    EVT_SET(LocalVar(0), EVT_PTR(N(tree1)))
     EVT_BIND_TRIGGER(N(shakeTree), TRIGGER_WALL_HAMMER, 16, 1, 0)
-    EVT_BIND_TRIGGER(N(shakeTree), TRIGGER_POINT_BOMB, EVT_ADDR(N(triggerCoord_80244E44)), 1, 0)
+    EVT_BIND_TRIGGER(N(shakeTree), TRIGGER_POINT_BOMB, EVT_PTR(N(triggerCoord_80244E44)), 1, 0)
     EVT_RETURN
     EVT_END
 };

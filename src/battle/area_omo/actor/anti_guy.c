@@ -94,9 +94,9 @@ s32 N(idleAnimations_80221A14)[] = {
 };
 
 EvtScript N(init_80221A60) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_802233AC)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_80221AAC)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_80221C20)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_802233AC)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_80221AAC)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80221C20)))
     EVT_RETURN
     EVT_END
 };

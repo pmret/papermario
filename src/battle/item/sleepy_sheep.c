@@ -413,7 +413,7 @@ EvtScript N(main) = {
         EVT_CALL(SetActorYaw, ACTOR_PLAYER, 0)
     EVT_END_THREAD
     EVT_WAIT(40)
-    EVT_CALL(CreateVirtualEntity, LVarA, EVT_ADDR(N(modelCommandList)))
+    EVT_CALL(CreateVirtualEntity, LVarA, EVT_PTR(N(modelCommandList)))
     EVT_SET(LVar7, -200)
     EVT_SET(LVar8, 0)
     EVT_SET(LVar9, 0)

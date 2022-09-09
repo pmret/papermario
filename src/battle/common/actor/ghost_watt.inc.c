@@ -237,9 +237,9 @@ ActorBlueprint N(watt) = {
 };
 
 EvtScript N(watt_init) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(watt_takeTurn)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(watt_idle)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(watt_handleEvent)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(watt_takeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(watt_idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(watt_handleEvent)))
     EVT_RETURN
     EVT_END
 };

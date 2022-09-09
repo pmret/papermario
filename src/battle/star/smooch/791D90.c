@@ -299,7 +299,7 @@ EvtScript N(usePower) = {
     EVT_THREAD
         EVT_CALL(PlayEffect, 0x40, 2, LVar0, LVar1, LVar2, 1, 0, 0, 0, 0, 0, 0, 0, 0)
         EVT_WAIT(2)
-        EVT_USE_BUF(EVT_ADDR(N(intTable_802A24E8)))
+        EVT_USE_BUF(EVT_PTR(N(intTable_802A24E8)))
         EVT_LOOP(5)
             EVT_BUF_READ2(LVar5, LVar6)
             EVT_SET(LVar3, LVar0)

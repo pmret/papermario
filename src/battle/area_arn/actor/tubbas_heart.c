@@ -134,9 +134,9 @@ EvtScript N(init_80223DA0) = {
     EVT_CALL(SetActorVar, ACTOR_SELF, 3, 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, 4, 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, 5, 0)
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_802245C8)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_80223E98)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_80224038)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_802245C8)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_80223E98)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80224038)))
     EVT_CALL(SetPartTargetFlagBits, ACTOR_SELF, 2, 2, 1)
     EVT_RETURN
     EVT_END
@@ -523,7 +523,7 @@ EvtScript N(80225258) = {
     EVT_CALL(PlayEffect, EFFECT_ENERGY_IN_OUT, 3, LocalVar(0), LocalVar(1), LocalVar(2), LocalVar(3), 0, 0, 0, 0, 0, 0, 0, 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, 4, LVarF)
     EVT_CALL(EnableActorGlow, ACTOR_SELF, TRUE)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_80223C1C)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80223C1C)))
     EVT_RETURN
     EVT_END
 };
@@ -564,7 +564,7 @@ EvtScript N(802255D8) = {
         EVT_CALL(GetActorVar, ACTOR_SELF, 4, LocalVar(0))
         EVT_CALL(RemoveEffect, LocalVar(0))
         EVT_CALL(SetActorVar, ACTOR_SELF, 4, 0)
-        EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_80223BC0)))
+        EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80223BC0)))
     EVT_END_IF
     EVT_CALL(PlaySound, 0x20F9)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)

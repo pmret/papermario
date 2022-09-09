@@ -333,8 +333,8 @@ s32 make_item_entity(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pic
     f32 hitDepth;
     Shadow* shadow;
 
-    if (pickupVar <= -120000000) {
-        pickupVar = pickupVar + 130000000;
+    if (pickupVar <= EVT_GAME_FLAG_CUTOFF) {
+        pickupVar = EVT_INDEX_OF_GAME_FLAG(pickupVar);
     }
 
     if (pickupVar > 0) {

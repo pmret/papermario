@@ -88,9 +88,9 @@ ActorBlueprint N(bombette) = {
 };
 
 EvtScript N(bombette_init) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(bombette_takeTurn)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(bombette_idle)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(bombette_handleEvent)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(bombette_takeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(bombette_idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(bombette_handleEvent)))
     EVT_RETURN
     EVT_END
 };

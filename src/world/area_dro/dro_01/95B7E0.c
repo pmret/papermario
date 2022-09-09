@@ -116,7 +116,7 @@ EvtScript N(exitWalk_80244960) = {
     EVT_SET(GF_DRO01_HeardHintAboutSpinningRoof, 0)
     EVT_CALL(UseExitHeading, 60, 0)
     EVT_EXEC(ExitWalk)
-    EVT_CALL(GotoMap, EVT_ADDR("sbk_36"), 1)
+    EVT_CALL(GotoMap, EVT_PTR("sbk_36"), 1)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END
@@ -148,9 +148,9 @@ EvtScript N(80244A70) = {
         EVT_WAIT(60)
         EVT_CALL(GetEntryID, LocalVar(0))
         EVT_IF_EQ(LocalVar(0), 3)
-            EVT_CALL(GotoMap, EVT_ADDR("dro_02"), 2)
+            EVT_CALL(GotoMap, EVT_PTR("dro_02"), 2)
         EVT_ELSE
-            EVT_CALL(GotoMap, EVT_ADDR("dro_02"), 3)
+            EVT_CALL(GotoMap, EVT_PTR("dro_02"), 3)
         EVT_END_IF
         EVT_WAIT(100)
     EVT_END_THREAD
@@ -184,7 +184,7 @@ EvtScript N(enterWalk_80244C14) = {
                 EVT_CALL(DisablePlayerPhysics, FALSE)
                 EVT_CALL(DisablePlayerInput, FALSE)
             EVT_END_IF
-            EVT_SET(LVarA, EVT_ADDR(N(80244A28)))
+            EVT_SET(LVarA, EVT_PTR(N(80244A28)))
             EVT_EXEC_WAIT(N(Pipe_EnterVertical))
         EVT_CASE_OR_EQ(3)
         EVT_CASE_OR_EQ(4)
@@ -194,7 +194,7 @@ EvtScript N(enterWalk_80244C14) = {
             EVT_EXEC(0x80285C50)
             EVT_EXEC(N(80244A28))
         EVT_CASE_DEFAULT
-            EVT_SET(LocalVar(0), EVT_ADDR(N(80244A28)))
+            EVT_SET(LocalVar(0), EVT_PTR(N(80244A28)))
             EVT_EXEC(EnterWalk)
     EVT_END_SWITCH
     EVT_WAIT(1)
@@ -215,14 +215,14 @@ EvtScript N(main) = {
     EVT_END_IF
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_RANGE(-53, 6)
-            EVT_CALL(MakeNpcs, 0, EVT_ADDR(N(npcGroupList_8024B47C)))
+            EVT_CALL(MakeNpcs, 0, EVT_PTR(N(npcGroupList_8024B47C)))
         EVT_CASE_DEFAULT
-            EVT_CALL(MakeNpcs, 0, EVT_ADDR(N(npcGroupList_8024B464)))
+            EVT_CALL(MakeNpcs, 0, EVT_PTR(N(npcGroupList_8024B464)))
     EVT_END_SWITCH
     EVT_CALL(InitVirtualEntityList)
     EVT_EXEC_WAIT(N(makeEntities))
-    EVT_CALL(MakeShop, EVT_ADDR(N(shopItemPositions_8024BA68)), EVT_ADDR(N(shopInventory_8024B4FC)), EVT_ADDR(N(shopPriceList_8024B550)), 0)
-    EVT_CALL(MakeShopOwner, EVT_ADDR(N(shopOwnerNPC_8024BA80)))
+    EVT_CALL(MakeShop, EVT_PTR(N(shopItemPositions_8024BA68)), EVT_PTR(N(shopInventory_8024B4FC)), EVT_PTR(N(shopPriceList_8024B550)), 0)
+    EVT_CALL(MakeShopOwner, EVT_PTR(N(shopOwnerNPC_8024BA80)))
     EVT_EXEC_WAIT(N(8024C218))
     EVT_EXEC(N(8024C2EC))
     EVT_EXEC(N(80243BB0))
@@ -246,7 +246,7 @@ MobileAISettings N(npcAISettings_80245010) = {
 };
 
 EvtScript N(npcAI_80245040) = {
-    EVT_CALL(BasicAI_Main, EVT_ADDR(N(npcAISettings_80245010)))
+    EVT_CALL(BasicAI_Main, EVT_PTR(N(npcAISettings_80245010)))
     EVT_RETURN
     EVT_END
 };
@@ -268,7 +268,7 @@ MobileAISettings N(npcAISettings_8024508C) = {
 };
 
 EvtScript N(npcAI_802450BC) = {
-    EVT_CALL(N(PatrolNoAttackAI_Main), EVT_ADDR(N(npcAISettings_8024508C)))
+    EVT_CALL(N(PatrolNoAttackAI_Main), EVT_PTR(N(npcAISettings_8024508C)))
     EVT_RETURN
     EVT_END
 };
@@ -342,7 +342,7 @@ EvtScript N(802477E8) = {
 
 EvtScript N(8024792C) = {
     EVT_CALL(N(BuildKeyItemChoiceList), LocalVar(0))
-    EVT_BIND_PADLOCK(N(802477E8), 0x10, 0, EVT_ADDR(N(KeyItemChoiceList)), 0, 1)
+    EVT_BIND_PADLOCK(N(802477E8), 0x10, 0, EVT_PTR(N(KeyItemChoiceList)), 0, 1)
     EVT_CALL(N(func_80242730_95D930), LocalVar(0))
     EVT_RETURN
     EVT_END
@@ -413,7 +413,7 @@ EvtScript N(80247D20) = {
     EVT_SET(LocalVar(0), LVarB)
     EVT_SET(LocalVar(1), LocalVar(2))
     EVT_CALL(N(BuildKeyItemChoiceList), LocalVar(0))
-    EVT_BIND_PADLOCK(N(802479FC), 0x10, 0, EVT_ADDR(N(KeyItemChoiceList)), 0, 1)
+    EVT_BIND_PADLOCK(N(802479FC), 0x10, 0, EVT_PTR(N(KeyItemChoiceList)), 0, 1)
     EVT_CALL(N(func_80242730_95D930), LocalVar(0))
     EVT_RETURN
     EVT_END
@@ -476,7 +476,7 @@ s32 N(D_80248088_963288)[] = {
 
 EvtScript N(80248090) = {
     EVT_CALL(N(LetterDelivery_Init), 6, NPC_ANIM_mouser_Palette_01_Anim_5, NPC_ANIM_mouser_Palette_01_Anim_1, 76, 69,
-        MESSAGE_ID(0xD,0x89), MESSAGE_ID(0xD,0x8A), MESSAGE_ID(0xD,0x8B), MESSAGE_ID(0xD,0x8C), EVT_ADDR(N(D_80248088_963288)))
+        MESSAGE_ID(0xD,0x89), MESSAGE_ID(0xD,0x8A), MESSAGE_ID(0xD,0x8B), MESSAGE_ID(0xD,0x8C), EVT_PTR(N(D_80248088_963288)))
     EVT_EXEC_WAIT(N(80247D90))
     EVT_RETURN
     EVT_END
@@ -503,7 +503,7 @@ EvtScript N(interact_802480E0) = {
 };
 
 EvtScript N(init_802481F8) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_ADDR(N(interact_802480E0)))
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_802480E0)))
     EVT_RETURN
     EVT_END
 };
@@ -537,7 +537,7 @@ EvtScript N(interact_8024821C) = {
 };
 
 EvtScript N(init_802483A8) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_ADDR(N(interact_8024821C)))
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_8024821C)))
     EVT_RETURN
     EVT_END
 };
@@ -562,7 +562,7 @@ EvtScript N(interact_802483CC) = {
 };
 
 EvtScript N(init_802484E0) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_ADDR(N(interact_802483CC)))
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_802483CC)))
     EVT_RETURN
     EVT_END
 };
@@ -666,10 +666,10 @@ EvtScript N(init_80248AE4) = {
             EVT_RETURN
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_ADDR(N(interact_80248864)))
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_80248864)))
     EVT_IF_EQ(GF_MAC01_Merlon_HeardAboutDream, 1)
         EVT_THREAD
-            EVT_CALL(N(func_80242858_95DA58), EVT_ADDR(N(D_8024884C_963A4C)))
+            EVT_CALL(N(func_80242858_95DA58), EVT_PTR(N(D_8024884C_963A4C)))
         EVT_END_THREAD
     EVT_END_IF
     EVT_RETURN
@@ -706,7 +706,7 @@ EvtScript N(init_80248CC8) = {
             EVT_RETURN
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_ADDR(N(interact_80248BA0)))
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_80248BA0)))
     EVT_RETURN
     EVT_END
 };
@@ -761,7 +761,7 @@ EvtScript N(interact_80248D54) = {
                 EVT_SET(AreaFlag(2), 0)
             EVT_END_IF
     EVT_END_SWITCH
-    EVT_SET(LocalVar(0), EVT_ADDR(N(D_80248D4C_963F4C)))
+    EVT_SET(LocalVar(0), EVT_PTR(N(D_80248D4C_963F4C)))
     EVT_SET(LocalVar(1), 5)
     EVT_EXEC_WAIT(N(8024792C))
     EVT_SWITCH(LocalVar(0))
@@ -785,7 +785,7 @@ EvtScript N(interact_80248D54) = {
 };
 
 EvtScript N(init_80249168) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_ADDR(N(interact_80248D54)))
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_80248D54)))
     EVT_RETURN
     EVT_END
 };
@@ -885,8 +885,8 @@ EvtScript N(interact_80249750) = {
 };
 
 EvtScript N(init_8024981C) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_ADDR(N(idle_8024918C)))
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_ADDR(N(interact_80249750)))
+    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_8024918C)))
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_80249750)))
     EVT_RETURN
     EVT_END
 };
@@ -900,7 +900,7 @@ EvtScript N(interact_80249854) = {
 };
 
 EvtScript N(init_802498C4) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_ADDR(N(interact_80249854)))
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_80249854)))
     EVT_RETURN
     EVT_END
 };
@@ -937,7 +937,7 @@ EvtScript N(interact_802498E8) = {
 };
 
 EvtScript N(init_80249ABC) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_ADDR(N(interact_802498E8)))
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_802498E8)))
     EVT_RETURN
     EVT_END
 };
@@ -949,7 +949,7 @@ EvtScript N(interact_80249AE0) = {
 };
 
 EvtScript N(init_80249B10) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_ADDR(N(interact_80249AE0)))
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_80249AE0)))
     EVT_RETURN
     EVT_END
 };
@@ -1696,9 +1696,9 @@ s32 N(npcList_8024C210)[] = {
 };
 
 EvtScript N(8024C218) = {
-    EVT_CALL(MakeDoorAdvanced, 5, EVT_ADDR(N(openDoor_8024BAA0)), EVT_ADDR(N(moveWalls_8024BAD0)), EVT_ADDR(N(dropDoor_8024BBB8)), EVT_ADDR(N(toggleVis_8024BFDC)), 15, 16, 128, EVT_ADDR(N(npcList_8024C200)))
-    EVT_CALL(MakeDoorAdvanced, 5, EVT_ADDR(N(openDoor_8024BC24)), EVT_ADDR(N(moveWalls_8024BC54)), 0, EVT_ADDR(N(toggleVis_8024C040)), 23, 24, 91, EVT_ADDR(N(npcList_8024C208)))
-    EVT_CALL(MakeDoorAdvanced, 5, EVT_ADDR(N(openDoor_8024BD9C)), EVT_ADDR(N(moveWalls_8024BE38)), EVT_ADDR(N(dropDoor_8024BDCC)), EVT_ADDR(N(toggleVis_8024C190)), 29, 30, 159, EVT_ADDR(N(npcList_8024C210)))
+    EVT_CALL(MakeDoorAdvanced, 5, EVT_PTR(N(openDoor_8024BAA0)), EVT_PTR(N(moveWalls_8024BAD0)), EVT_PTR(N(dropDoor_8024BBB8)), EVT_PTR(N(toggleVis_8024BFDC)), 15, 16, 128, EVT_PTR(N(npcList_8024C200)))
+    EVT_CALL(MakeDoorAdvanced, 5, EVT_PTR(N(openDoor_8024BC24)), EVT_PTR(N(moveWalls_8024BC54)), 0, EVT_PTR(N(toggleVis_8024C040)), 23, 24, 91, EVT_PTR(N(npcList_8024C208)))
+    EVT_CALL(MakeDoorAdvanced, 5, EVT_PTR(N(openDoor_8024BD9C)), EVT_PTR(N(moveWalls_8024BE38)), EVT_PTR(N(dropDoor_8024BDCC)), EVT_PTR(N(toggleVis_8024C190)), 29, 30, 159, EVT_PTR(N(npcList_8024C210)))
     EVT_SET(LocalVar(0), 3)
     EVT_EXEC(N(toggleVis_8024BFDC))
     EVT_EXEC(N(toggleVis_8024C040))
@@ -2005,14 +2005,14 @@ extern const char N(dro_01_name_hack)[];
 
 EvtScript N(8024D2B0) = {
     EVT_SET(GF_DRO01_HeardHintAboutSpinningRoof, 0)
-    EVT_CALL(GotoMap, EVT_ADDR(N(dro_01_name_hack)), 4)
+    EVT_CALL(GotoMap, EVT_PTR(N(dro_01_name_hack)), 4)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(makeEntities) = {
-    EVT_CALL(MakeEntity, EVT_ADDR(Entity_SavePoint), -211, 60, -50, 30, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, EVT_PTR(Entity_SavePoint), -211, 60, -50, 30, MAKE_ENTITY_END)
     EVT_IF_EQ(GF_DRO01_WarpPipe, 0)
         EVT_IF_EQ(GF_TIK01_WarpPipes, 1)
             EVT_CALL(GetEntryID, LocalVar(0))
@@ -2021,7 +2021,7 @@ EvtScript N(makeEntities) = {
             EVT_END_IF
         EVT_END_IF
     EVT_END_IF
-    EVT_CALL(MakeEntity, &Entity_BlueWarpPipe, 430, 0, -120, 0, 2, EVT_ADDR(N(8024D2B0)), 1939, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, &Entity_BlueWarpPipe, 430, 0, -120, 0, 2, EVT_PTR(N(8024D2B0)), 1939, MAKE_ENTITY_END)
     EVT_RETURN
     EVT_END
 };

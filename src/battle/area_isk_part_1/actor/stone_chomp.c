@@ -404,9 +404,9 @@ EvtScript N(8022181C) = {
 
 EvtScript N(init_80221ABC) = {
     EVT_CALL(SetActorVar, ACTOR_SELF, 8, 0)
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_80222ED0)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_80221D00)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_80222364)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_80222ED0)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_80221D00)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80222364)))
     EVT_CALL(GetActorPos, ACTOR_SELF, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_CALL(SetPartPos, ACTOR_SELF, 2, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_SET(LocalVar(0), 3)
@@ -448,7 +448,7 @@ EvtScript N(idle_80221D00) = {
         EVT_END_IF
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_80221504)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80221504)))
     EVT_CALL(SetActorIdleJumpGravity, ACTOR_SELF, EVT_FLOAT(1.0))
     EVT_CALL(SetIdleGoalToHome, ACTOR_SELF)
     EVT_CALL(GetIdleGoal, ACTOR_SELF, LocalVar(0), LocalVar(1), LocalVar(2))
@@ -480,7 +480,7 @@ EvtScript N(idle_80221D00) = {
         EVT_END_IF
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_802214C8)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_802214C8)))
     EVT_CALL(SetActorIdleJumpGravity, ACTOR_SELF, EVT_FLOAT(0.8))
     EVT_CALL(SetIdleGoalToHome, ACTOR_SELF)
     EVT_CALL(GetIdleGoal, ACTOR_SELF, LocalVar(0), LocalVar(1), LocalVar(2))
@@ -494,7 +494,7 @@ EvtScript N(idle_80221D00) = {
         EVT_END_IF
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_80221504)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80221504)))
     EVT_CALL(SetActorIdleJumpGravity, ACTOR_SELF, EVT_FLOAT(0.8))
     EVT_CALL(SetIdleGoalToHome, ACTOR_SELF)
     EVT_CALL(GetIdleGoal, ACTOR_SELF, LocalVar(0), LocalVar(1), LocalVar(2))
@@ -523,7 +523,7 @@ EvtScript N(idle_80221D00) = {
         EVT_END_IF
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_8022148C)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8022148C)))
     EVT_CALL(SetActorIdleJumpGravity, ACTOR_SELF, EVT_FLOAT(0.8))
     EVT_CALL(SetIdleGoalToHome, ACTOR_SELF)
     EVT_CALL(GetIdleGoal, ACTOR_SELF, LocalVar(0), LocalVar(1), LocalVar(2))

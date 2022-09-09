@@ -160,11 +160,11 @@ EvtScript N(802321E4) = {
     EVT_SET(LVarA, LVar0)
     EVT_SET(LVarB, LVar1)
     EVT_SET(LVar5, 5)
-    EVT_USE_BUF(EVT_ADDR(N(intTable_802321A4)))
+    EVT_USE_BUF(EVT_PTR(N(intTable_802321A4)))
     EVT_LABEL(0)
     EVT_BUF_READ1(LVar1)
     EVT_IF_EQ(LVar1, 255)
-        EVT_USE_BUF(EVT_ADDR(N(intTable_802321A4)))
+        EVT_USE_BUF(EVT_PTR(N(intTable_802321A4)))
         EVT_BUF_READ1(LVar1)
     EVT_END_IF
     EVT_SET(LVar0, LVar5)

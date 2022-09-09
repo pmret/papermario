@@ -398,9 +398,9 @@ EvtScript N(80224448) = {
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, 3, ACTOR_PART_FLAG_INVISIBLE, 1)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_magikoopa_Palette_03_Anim_1)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLYING, 0)
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_80223E24)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80223E24)))
     EVT_CALL(SetActorType, ACTOR_SELF, ACTOR_TYPE_WHITE_MAGIKOOPA)
-    EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_ADDR(N(statusTable_80223B38)))
+    EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(statusTable_80223B38)))
     EVT_CALL(N(UnkBattleFunc1), -10, 20, 10, 32)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_1000, 1)
     EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
@@ -761,18 +761,18 @@ EvtScript N(run_away) = {
 };
 
 EvtScript N(init_80225F58) = {
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_80223E14)))
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_802274E4)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_80223E24)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_80223E14)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_802274E4)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80223E24)))
     EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(init_80225FBC) = {
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_80223E14)))
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_802274E4)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_80224A44)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_80223E14)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_802274E4)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80224A44)))
     EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
     EVT_RETURN
     EVT_END

@@ -160,11 +160,11 @@ EvtScript N(80234564) = {
     EVT_SET(LVarA, LocalVar(0))
     EVT_SET(LVarB, LocalVar(1))
     EVT_SET(LocalVar(5), 5)
-    EVT_USE_BUF(EVT_ADDR(N(intTable_80234524)))
+    EVT_USE_BUF(EVT_PTR(N(intTable_80234524)))
     EVT_LABEL(0)
     EVT_BUF_READ1(LocalVar(1))
     EVT_IF_EQ(LocalVar(1), 255)
-        EVT_USE_BUF(EVT_ADDR(N(intTable_80234524)))
+        EVT_USE_BUF(EVT_PTR(N(intTable_80234524)))
         EVT_BUF_READ1(LocalVar(1))
     EVT_END_IF
     EVT_SET(LocalVar(0), LocalVar(5))

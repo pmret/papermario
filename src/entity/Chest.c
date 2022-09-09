@@ -389,8 +389,8 @@ void entity_GiantChest_give_equipment(Entity* entity) {
     }
 
     flag = data->gameFlagIndex;
-    if (flag <= GameFlag(10000000)) {
-        flag += 130000000;
+    if (flag <= EVT_GAME_FLAG_CUTOFF) {
+        flag = EVT_INDEX_OF_GAME_FLAG(flag);
     }
     set_global_flag(flag);
 }

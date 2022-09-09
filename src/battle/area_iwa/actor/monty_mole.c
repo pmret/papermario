@@ -191,9 +191,9 @@ Formation N(specialFormation_8021A6E0) = {
 EvtScript N(8021A6FC) = {
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LocalVar(0))
     EVT_IF_FLAG(LocalVar(0), STATUS_FLAG_SHRINK)
-        EVT_CALL(SummonEnemy, EVT_ADDR(N(specialFormation_8021A6E0)), 0)
+        EVT_CALL(SummonEnemy, EVT_PTR(N(specialFormation_8021A6E0)), 0)
     EVT_ELSE
-        EVT_CALL(SummonEnemy, EVT_ADDR(N(specialFormation_8021A6C4)), 0)
+        EVT_CALL(SummonEnemy, EVT_PTR(N(specialFormation_8021A6C4)), 0)
     EVT_END_IF
     EVT_CALL(GetActorPos, ACTOR_SELF, LocalVar(1), LocalVar(2), LocalVar(3))
     EVT_SUB(LocalVar(3), 1)
@@ -203,9 +203,9 @@ EvtScript N(8021A6FC) = {
 };
 
 EvtScript N(init_8021A7B0) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_8021AFAC)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_8021A814)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_8021A824)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_8021AFAC)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_8021A814)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8021A824)))
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, 1)
     EVT_RETURN
     EVT_END
@@ -301,7 +301,7 @@ EvtScript N(handleEvent_8021A824) = {
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_monty_mole_Palette_00_Anim_8)
             EVT_WAIT(15)
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_TARGET_ONLY | ACTOR_FLAG_NO_DMG_APPLY, 1)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_8021A5F4)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8021A5F4)))
             EVT_RETURN
         EVT_CASE_EQ(EVENT_BEGIN_AIR_LIFT)
             EVT_SET_CONST(LocalVar(0), 1)

@@ -34,14 +34,14 @@ EvtScript N(main) = {
     EVT_CALL(SetCamEnabled, 0, 1)
     EVT_CALL(SetCamLeadPlayer, 0, 0)
     EVT_SET(AreaFlag(8), 0)
-    EVT_CALL(MakeNpcs, 0, EVT_ADDR(N(npcGroupList_80241450)))
+    EVT_CALL(MakeNpcs, 0, EVT_PTR(N(npcGroupList_80241450)))
     EVT_CALL(ClearDefeatedEnemies)
     EVT_EXEC_WAIT(N(makeEntities))
     EVT_EXEC_WAIT(N(802422B8))
     EVT_EXEC(N(802406C0))
     EVT_CALL(GetEntryID, LocalVar(0))
     EVT_IF_NE(LocalVar(0), 2)
-        EVT_SET(LocalVar(0), EVT_ADDR(N(802407A8)))
+        EVT_SET(LocalVar(0), EVT_PTR(N(802407A8)))
         EVT_EXEC(EnterWalk)
     EVT_ELSE
         EVT_EXEC(N(802407A8))
@@ -185,17 +185,17 @@ EvtScript N(hit_80240F64) = {
         EVT_CALL(SetNpcPos, 0, 0, -1000, 0)
         EVT_CALL(SetNpcFlagBits, 0, ((NPC_FLAG_100)), FALSE)
         EVT_CALL(EnablePartnerAI)
-        EVT_CALL(SetNpcAux, NPC_SELF, EVT_ADDR(N(8024097C)))
-        EVT_CALL(BindNpcAI, NPC_SELF, EVT_ADDR(N(npcAI_80240B50)))
+        EVT_CALL(SetNpcAux, NPC_SELF, EVT_PTR(N(8024097C)))
+        EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(npcAI_80240B50)))
     EVT_END_IF
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(init_802411A8) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_ADDR(N(npcAI_80240B50)))
-    EVT_CALL(BindNpcAux, -1, EVT_ADDR(N(8024097C)))
-    EVT_CALL(BindNpcHit, -1, EVT_ADDR(N(hit_80240F64)))
+    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(npcAI_80240B50)))
+    EVT_CALL(BindNpcAux, -1, EVT_PTR(N(8024097C)))
+    EVT_CALL(BindNpcHit, -1, EVT_PTR(N(hit_80240F64)))
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_GE(-121)
             EVT_CALL(SetNpcFlagBits, NPC_SELF, ((NPC_FLAG_GRAVITY)), FALSE)
@@ -273,22 +273,22 @@ EvtScript N(802414C8) = {
 
 EvtScript N(makeEntities) = {
     EVT_IF_LT(GB_StoryProgress, -117)
-        EVT_CALL(MakeEntity, EVT_ADDR(Entity_Hammer1Block), 45, 0, 70, 15, MAKE_ENTITY_END)
-        EVT_CALL(AssignScript, EVT_ADDR(N(80241470)))
+        EVT_CALL(MakeEntity, EVT_PTR(Entity_Hammer1Block), 45, 0, 70, 15, MAKE_ENTITY_END)
+        EVT_CALL(AssignScript, EVT_PTR(N(80241470)))
     EVT_ELSE
         EVT_CALL(ModifyColliderFlags, 0, 9, 0x7FFFFE00)
     EVT_END_IF
     EVT_IF_EQ(GF_KMR03_Hammer1Block, 0)
-        EVT_CALL(MakeEntity, EVT_ADDR(Entity_Hammer2Block), 230, 0, 310, 15, MAKE_ENTITY_END)
-        EVT_CALL(AssignScript, EVT_ADDR(N(802414A8)))
+        EVT_CALL(MakeEntity, EVT_PTR(Entity_Hammer2Block), 230, 0, 310, 15, MAKE_ENTITY_END)
+        EVT_CALL(AssignScript, EVT_PTR(N(802414A8)))
     EVT_END_IF
-    EVT_CALL(MakeEntity, EVT_ADDR(Entity_HiddenYellowBlock), 230, 60, 310, 15, 151, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, EVT_PTR(Entity_HiddenYellowBlock), 230, 60, 310, 15, 151, MAKE_ENTITY_END)
     EVT_CALL(AssignBlockFlag, GF_KMR03_HiddenItem_RepelGel)
-    EVT_CALL(MakeEntity, EVT_ADDR(Entity_BrickBlock), 230, 50, -160, 15, MAKE_ENTITY_END)
-    EVT_CALL(MakeEntity, EVT_ADDR(Entity_BrickBlock), 165, 0, 380, 20, MAKE_ENTITY_END)
-    EVT_CALL(MakeEntity, EVT_ADDR(Entity_YellowBlock), -170, 0, 370, 43, 343, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, EVT_PTR(Entity_BrickBlock), 230, 50, -160, 15, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, EVT_PTR(Entity_BrickBlock), 165, 0, 380, 20, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, EVT_PTR(Entity_YellowBlock), -170, 0, 370, 43, 343, MAKE_ENTITY_END)
     EVT_CALL(AssignBlockFlag, GF_KMR03_ItemBlock_Coin)
-    EVT_CALL(MakeEntity, EVT_ADDR(Entity_SimpleSpring), 345, 75, -250, 0, 100, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, EVT_PTR(Entity_SimpleSpring), 345, 75, -250, 0, 100, MAKE_ENTITY_END)
     EVT_CALL(MakeItemEntity, ITEM_COIN, 345, 205, -250, 17, GF_KMR03_Item_CoinA)
     EVT_CALL(MakeItemEntity, ITEM_COIN, 345, 230, -250, 17, GF_KMR03_Item_CoinB)
     EVT_CALL(MakeItemEntity, ITEM_COIN, 345, 255, -250, 17, GF_KMR03_Item_CoinC)
@@ -296,7 +296,7 @@ EvtScript N(makeEntities) = {
     EVT_CALL(MakeItemEntity, ITEM_FIRE_FLOWER, 229, 250, -156, 17, GF_KMR02_Item_FireFlower)
     EVT_CALL(MakeEntity, &Entity_HiddenPanel, 300, 0, 150, 0, 18, MAKE_ENTITY_END)
     EVT_CALL(AssignPanelFlag, GF_KMR03_HiddenPanel)
-    EVT_CALL(MakeEntity, EVT_ADDR(Entity_HeartBlock), 130, 60, 0, 0, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, EVT_PTR(Entity_HeartBlock), 130, 60, 0, 0, MAKE_ENTITY_END)
     EVT_RETURN
     EVT_END
 };

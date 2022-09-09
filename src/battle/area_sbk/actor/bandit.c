@@ -171,9 +171,9 @@ Formation N(specialFormation_8021D734) = {
 };
 
 EvtScript N(init_8021D750) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_8021E900)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_8021D810)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_8021DF88)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_8021E900)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_8021D810)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8021DF88)))
     EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
     EVT_RETURN
     EVT_END
@@ -185,9 +185,9 @@ EvtScript N(handleEvent_8021D7B4) = {
 };
 
 EvtScript N(init_8021D7C4) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(handleEvent_8021D7B4)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(handleEvent_8021D7B4)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_8021D7B4)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(handleEvent_8021D7B4)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(handleEvent_8021D7B4)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8021D7B4)))
     EVT_RETURN
     EVT_END
 };
@@ -203,9 +203,9 @@ EvtScript N(8021D820) = {
         EVT_CASE_EQ(0)
         EVT_CASE_EQ(1)
             EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_8021D510)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8021D510)))
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, 2, ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION, 0)
-            EVT_CALL(SummonEnemy, EVT_ADDR(N(specialFormation_8021D734)), 0)
+            EVT_CALL(SummonEnemy, EVT_PTR(N(specialFormation_8021D734)), 0)
             EVT_SET(LVarA, LVar0)
             EVT_CALL(GetPartOffset, ACTOR_SELF, 2, LVar1, LVar2, LVar3)
             EVT_CALL(SetActorPos, LVarA, LVar1, LVar2, LVar3)
@@ -661,7 +661,7 @@ EvtScript N(takeTurn_8021E900) = {
                     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
                     EVT_CALL(SetGoalPos, ACTOR_SELF, LVarA, LVarB, LVarC)
                     EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
-                    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_8021D55C)))
+                    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8021D55C)))
                     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_battle_bandit_Palette_00_Anim_E)
                     EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
                     EVT_WAIT(7)

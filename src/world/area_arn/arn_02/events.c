@@ -21,10 +21,10 @@ EvtScript N(main) = {
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
     EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
     EVT_CALL(SetCamEnabled, 0, 1)
-    EVT_CALL(MakeNpcs, 0, EVT_ADDR(N(npcGroupList_80241A9C)))
+    EVT_CALL(MakeNpcs, 0, EVT_PTR(N(npcGroupList_80241A9C)))
     EVT_EXEC_WAIT(N(makeEntities))
     EVT_EXEC(N(80241040))
-    EVT_SET(LVar0, EVT_ADDR(N(802411A8)))
+    EVT_SET(LVar0, EVT_PTR(N(802411A8)))
     EVT_EXEC(EnterWalk)
     EVT_WAIT(1)
     EVT_RETURN
@@ -38,11 +38,11 @@ static s32 N(pad_12C4)[] = {
 EvtScript N(makeEntities) = {
     EVT_CALL(MakeItemEntity, ITEM_DIZZY_DIAL, -248, 193, 45, 17, GF_ARN02_Item_DizzyDial)
     EVT_CALL(MakeItemEntity, ITEM_LETTER07, 536, 260, 227, 17, GF_ARN02_Item_Letter07)
-    EVT_CALL(MakeEntity, EVT_ADDR(Entity_YellowBlock), -350, 172, 170, 0, 343, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, EVT_PTR(Entity_YellowBlock), -350, 172, 170, 0, 343, MAKE_ENTITY_END)
     EVT_CALL(AssignBlockFlag, GF_ARN02_ItemBlock_CoinA)
-    EVT_CALL(MakeEntity, EVT_ADDR(Entity_YellowBlock), 225, 265, 30, 0, 343, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, EVT_PTR(Entity_YellowBlock), 225, 265, 30, 0, 343, MAKE_ENTITY_END)
     EVT_CALL(AssignBlockFlag, GF_ARN02_ItemBlock_CoinB)
-    EVT_CALL(MakeEntity, EVT_ADDR(Entity_YellowBlock), 275, 265, 150, 0, 151, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, EVT_PTR(Entity_YellowBlock), 275, 265, 150, 0, 151, MAKE_ENTITY_END)
     EVT_CALL(AssignBlockFlag, GF_ARN02_ItemBlock_RepelGel)
     EVT_RETURN
     EVT_END
@@ -62,7 +62,7 @@ MobileAISettings N(npcAISettings_802413D0) = {
 };
 
 EvtScript N(npcAI_80241400) = {
-    EVT_CALL(BasicAI_Main, EVT_ADDR(N(npcAISettings_802413D0)))
+    EVT_CALL(BasicAI_Main, EVT_PTR(N(npcAISettings_802413D0)))
     EVT_RETURN
     EVT_END
 };
@@ -91,7 +91,7 @@ MobileAISettings N(npcAISettings_8024144C) = {
 };
 
 EvtScript N(npcAI_8024147C) = {
-    EVT_CALL(N(CleftAI_Main), EVT_ADDR(N(npcAISettings_8024144C)), 8)
+    EVT_CALL(N(CleftAI_Main), EVT_PTR(N(npcAISettings_8024144C)), 8)
     EVT_RETURN
     EVT_END
 };

@@ -105,10 +105,10 @@ s32 N(idleAnimations_80220C60)[] = {
 };
 
 EvtScript N(init_80220CAC) = {
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_80221DD0)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_80222140)))
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_80221A58)))
-    EVT_CALL(BindNextTurn, ACTOR_SELF, EVT_ADDR(N(nextTurn_80220D3C)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_80221DD0)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80222140)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_80221A58)))
+    EVT_CALL(BindNextTurn, ACTOR_SELF, EVT_PTR(N(nextTurn_80220D3C)))
     EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, 2, 0)
     EVT_RETURN
@@ -162,7 +162,7 @@ EvtScript N(80220DC0) = {
             EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(1.0))
         EVT_END_THREAD
         EVT_CALL(SetActorVar, ACTOR_SELF, 0, 2)
-        EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_80220C60)))
+        EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80220C60)))
         EVT_CALL(EnableActorGlow, ACTOR_SELF, TRUE)
         EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_400000, 1)
         EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
@@ -230,7 +230,7 @@ EvtScript N(80220DC0) = {
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_cleft_hyper_idle)
             EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
             EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_80221CD4)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80221CD4)))
             EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
@@ -289,7 +289,7 @@ EvtScript N(80220DC0) = {
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_cleft_hyper_idle)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
             EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_80221CD4)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80221CD4)))
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
@@ -376,9 +376,9 @@ s32 N(idleAnimations_80221D20)[] = {
 };
 
 EvtScript N(80221D6C) = {
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_80221DD0)))
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_80223B5C)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_80222140)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_80221DD0)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_80223B5C)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80222140)))
     EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
     EVT_RETURN
     EVT_END
@@ -418,8 +418,8 @@ EvtScript N(80221DE0) = {
     EVT_CALL(SetActorRotationOffset, ACTOR_SELF, 0, 0, 0)
     EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_cleft_hyper_inverted_idle)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_80221D20)))
-    EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_ADDR(N(defenseTable_80220B54)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80221D20)))
+    EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(defenseTable_80220B54)))
     EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, 0, 15)
     EVT_CALL(func_8027D4C8, ACTOR_SELF, 1, 0, -7)
     EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_SPIKY_TOP, 0)
@@ -529,7 +529,7 @@ EvtScript N(handleEvent_80222140) = {
             EVT_CALL(EnableActorGlow, ACTOR_SELF, FALSE)
             EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_400000, 0)
             EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_80221CD4)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80221CD4)))
             EVT_SET_CONST(LocalVar(0), 1)
             EVT_SET_CONST(LocalVar(1), NPC_ANIM_cleft_hyper_skid)
             EVT_EXEC_WAIT(DoShockHit)
@@ -548,7 +548,7 @@ EvtScript N(handleEvent_80222140) = {
             EVT_CALL(EnableActorGlow, ACTOR_SELF, FALSE)
             EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_400000, 0)
             EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_80221CD4)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80221CD4)))
             EVT_SET_CONST(LocalVar(0), 1)
             EVT_SET_CONST(LocalVar(1), NPC_ANIM_cleft_hyper_skid)
             EVT_EXEC_WAIT(DoShockHit)
@@ -564,7 +564,7 @@ EvtScript N(handleEvent_80222140) = {
                 EVT_CALL(EnableActorGlow, ACTOR_SELF, FALSE)
                 EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_400000, 0)
                 EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
-                EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_80221CD4)))
+                EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80221CD4)))
             EVT_END_IF
             EVT_CALL(GetActorVar, ACTOR_SELF, 0, LocalVar(0))
             EVT_IF_EQ(LocalVar(0), 1)
@@ -705,8 +705,8 @@ EvtScript N(80222F1C) = {
         EVT_CALL(SetActorPos, ACTOR_SELF, LocalVar(0), 0, LocalVar(2))
         EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
         EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_cleft_hyper_idle)
-        EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_80221CD4)))
-        EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_ADDR(N(defenseTable_80220B40)))
+        EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80221CD4)))
+        EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(defenseTable_80220B40)))
         EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, 0, 22)
         EVT_CALL(func_8027D4C8, ACTOR_SELF, 1, 0, -10)
         EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_SPIKY_TOP, 1)

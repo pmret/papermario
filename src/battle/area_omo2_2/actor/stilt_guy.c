@@ -244,9 +244,9 @@ ActorBlueprint NAMESPACE = {
 };
 
 EvtScript N(init) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent)))
     EVT_CALL(SetActorVar, ACTOR_SELF, 8, 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, 1, 0)
     EVT_CALL(SetPartTargetFlagBits, ACTOR_SELF, 4, 1, 1)
@@ -789,9 +789,9 @@ EvtScript N(fallOff) = {
         EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_shy_guy_Palette_00_Anim_10)
         EVT_WAIT(10)
     EVT_END_IF
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(shy_guy_takeTurn)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(shy_guy_idle)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(shy_guy_handleEvent)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(shy_guy_takeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(shy_guy_idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(shy_guy_handleEvent)))
     EVT_CALL(SetActorType, ACTOR_SELF, ACTOR_TYPE_SHY_GUY)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_1000, 1)
     EVT_CALL(HPBarToHome, ACTOR_SELF)
@@ -928,9 +928,9 @@ s32 N(idleAnimations)[] = {
 };
 
 EvtScript N(shy_guy_init) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(shy_guy_takeTurn)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(shy_guy_idle)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(shy_guy_handleEvent)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(shy_guy_takeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(shy_guy_idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(shy_guy_handleEvent)))
     EVT_RETURN
     EVT_END
 };

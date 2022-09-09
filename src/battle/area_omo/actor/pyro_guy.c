@@ -100,9 +100,9 @@ ActorBlueprint NAMESPACE = {
 };
 
 EvtScript N(init_8022CC80) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_8022D344)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_8022CCCC)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_8022CE60)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_8022D344)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_8022CCCC)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8022CE60)))
     EVT_RETURN
     EVT_END
 };

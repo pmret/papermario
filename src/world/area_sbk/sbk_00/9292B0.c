@@ -19,7 +19,7 @@ MobileAISettings N(npcAISettings_80240300) = {
 
 EvtScript N(npcAI_80240330) = {
     EVT_CALL(N(SetNpcB5_3))
-    EVT_CALL(BasicAI_Main, EVT_ADDR(N(npcAISettings_80240300)))
+    EVT_CALL(BasicAI_Main, EVT_PTR(N(npcAISettings_80240300)))
     EVT_RETURN
     EVT_END
 };
@@ -122,9 +122,9 @@ static s32 N(pad_78C) = {
 };
 
 EvtScript N(makeEntities) = {
-    EVT_CALL(MakeEntity, EVT_ADDR(Entity_YellowBlock), -230, 0, 155, 0, 152, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, EVT_PTR(Entity_YellowBlock), -230, 0, 155, 0, 152, MAKE_ENTITY_END)
     EVT_CALL(AssignBlockFlag, GF_SBK00_ItemBlock_FrightJar)
-    EVT_CALL(MakeEntity, EVT_ADDR(Entity_YellowBlock), 160, 0, 205, 0, 343, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, EVT_PTR(Entity_YellowBlock), 160, 0, 205, 0, 343, MAKE_ENTITY_END)
     EVT_CALL(AssignBlockFlag, GF_SBK00_ItemBlock_Coin)
     EVT_RETURN
     EVT_END

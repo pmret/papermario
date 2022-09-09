@@ -127,10 +127,10 @@ ApiStatus func_802180D0_464560(Evt* script, s32 isInitialCall) {
 }
 
 EvtScript N(init_8021D4C8) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_80229F9C)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_8021D5B4)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_8021D600)))
-    EVT_CALL(BindNextTurn, -127, EVT_ADDR(N(nextTurn_8022A038)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_80229F9C)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_8021D5B4)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8021D600)))
+    EVT_CALL(BindNextTurn, -127, EVT_PTR(N(nextTurn_8022A038)))
     EVT_CALL(SetActorVar, -127, 8, 0)
     EVT_CALL(SetActorVar, -127, 0, 0)
     EVT_THREAD
@@ -374,7 +374,7 @@ EvtScript N(8021E118) = {
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, 1)
     EVT_CALL(SetActorVar, LVarA, 8, 2)
     EVT_CALL(SetPartFlagBits, -127, LVar0, 1, 1)
-    EVT_CALL(SetIdleAnimations, LVarA, 1, EVT_ADDR(N(idleAnimations_8021D3AC)))
+    EVT_CALL(SetIdleAnimations, LVarA, 1, EVT_PTR(N(idleAnimations_8021D3AC)))
     EVT_CALL(SetAnimation, LVarA, 1, 0xA4000B)
     EVT_WAIT(30)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
@@ -393,7 +393,7 @@ EvtScript N(8021E118) = {
     EVT_END_IF
     EVT_CALL(ForceHomePos, LVarA, LVarB, LVarC, LVarD)
     EVT_CALL(HPBarToHome, LVarA)
-    EVT_CALL(SetIdleAnimations, LVarA, 1, EVT_ADDR(N(idleAnimations_8021D360)))
+    EVT_CALL(SetIdleAnimations, LVarA, 1, EVT_PTR(N(idleAnimations_8021D360)))
     EVT_CALL(SetAnimation, LVarA, 1, 0xA40002)
     EVT_CALL(SetActorPos, ACTOR_SELF, 0, -1000, 0)
     EVT_CALL(ForceHomePos, ACTOR_SELF, 0, -1000, 0)
@@ -541,10 +541,10 @@ extern EvtScript N(handleEvent_8021EB24);
 extern EvtScript N(nextTurn_80220450);
 
 EvtScript N(init_Goombario) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_802203F4)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_8021EB14)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_8021EB24)))
-    EVT_CALL(BindNextTurn, -127, EVT_ADDR(N(nextTurn_80220450)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_802203F4)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_8021EB14)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8021EB24)))
+    EVT_CALL(BindNextTurn, -127, EVT_PTR(N(nextTurn_80220450)))
     EVT_CALL(SetActorVar, -127, 2, 1)
     EVT_RETURN
     EVT_END
@@ -865,7 +865,7 @@ EvtScript N(8021F6E0) = {
                 EVT_SET(LVar0, 0)
                 EVT_LOOP(6)
                     EVT_ADD(LVar0, 30)
-                    EVT_CALL(SetActorRotation, ACTOR_SELF, 0, -250000000, LVar0)
+                    EVT_CALL(SetActorRotation, ACTOR_SELF, 0, EVT_IGNORE_ARG, LVar0)
                     EVT_WAIT(1)
                 EVT_END_LOOP
                 EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_battle_goombario_default_headbonk)
@@ -874,7 +874,7 @@ EvtScript N(8021F6E0) = {
                 EVT_SET(LVar0, 0)
                 EVT_LOOP(LVarA)
                     EVT_ADD(LVar0, 133)
-                    EVT_CALL(SetActorRotation, ACTOR_SELF, -250000000, LVar0, -250000000)
+                    EVT_CALL(SetActorRotation, ACTOR_SELF, EVT_IGNORE_ARG, LVar0, EVT_IGNORE_ARG)
                     EVT_WAIT(1)
                 EVT_END_LOOP
             EVT_END_THREAD
@@ -1119,10 +1119,10 @@ extern EvtScript N(handleEvent_80220908);
 extern EvtScript N(nextTurn_802221A0);
 
 EvtScript N(init_Kooper) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_80221200)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_80220790)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_80220908)))
-    EVT_CALL(BindNextTurn, -127, EVT_ADDR(N(nextTurn_802221A0)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_80221200)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_80220790)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80220908)))
+    EVT_CALL(BindNextTurn, -127, EVT_PTR(N(nextTurn_802221A0)))
     EVT_CALL(SetActorVar, -127, 4, 0)
     EVT_CALL(SetActorVar, -127, 5, 0)
     EVT_CALL(SetActorVar, -127, 2, 1)
@@ -1201,8 +1201,8 @@ EvtScript N(handleEvent_80220908) = {
         EVT_CASE_EQ(13)
             EVT_CALL(SetActorVar, -127, 4, 1)
             EVT_CALL(SetActorVar, -127, 5, 1)
-            EVT_CALL(SetDefenseTable, -127, 1, EVT_ADDR(N(defenseTable_802205E4)))
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_8022058C)))
+            EVT_CALL(SetDefenseTable, -127, 1, EVT_PTR(N(defenseTable_802205E4)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8022058C)))
             EVT_CALL(SetTargetOffset, -127, 1, 5, 15)
             EVT_CALL(func_8027D4C8, -127, 1, 0, -6)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_battle_kooper_Palette_00_Anim_11)
@@ -1220,7 +1220,7 @@ EvtScript N(handleEvent_80220908) = {
                 EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, -75)
                 EVT_WAIT(1)
             EVT_END_THREAD
-            EVT_USE_BUF(EVT_ADDR(N(intTable_802208B0)))
+            EVT_USE_BUF(EVT_PTR(N(intTable_802208B0)))
             EVT_LOOP(22)
                 EVT_BUF_READ1(LVar0)
                 EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, LVar0, 0)
@@ -1354,8 +1354,8 @@ EvtScript N(takeTurn_80221200) = {
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_battle_kooper_Palette_00_Anim_4)
             EVT_CALL(SetActorVar, -127, 4, 0)
-            EVT_CALL(SetDefenseTable, -127, 1, EVT_ADDR(N(defenseTable_802205D8)))
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_80220540)))
+            EVT_CALL(SetDefenseTable, -127, 1, EVT_PTR(N(defenseTable_802205D8)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80220540)))
             EVT_CALL(SetTargetOffset, -127, 1, -2, 38)
             EVT_CALL(func_8027D4C8, -127, 1, -3, -9)
         EVT_END_IF
@@ -1631,10 +1631,10 @@ extern EvtScript N(handleEvent_80222468);
 extern EvtScript N(nextTurn_80223298);
 
 EvtScript N(init_LeeBombette) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_802229C4)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_80222458)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_80222468)))
-    EVT_CALL(BindNextTurn, -127, EVT_ADDR(N(nextTurn_80223298)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_802229C4)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_80222458)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80222468)))
+    EVT_CALL(BindNextTurn, -127, EVT_PTR(N(nextTurn_80223298)))
     EVT_CALL(SetActorVar, -127, 2, 1)
     EVT_RETURN
     EVT_END
@@ -1997,10 +1997,10 @@ extern EvtScript N(handleEvent_80223584);
 extern EvtScript N(nextTurn_80224320);
 
 EvtScript N(init_Parakarry) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_80224304)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_80223574)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_80223584)))
-    EVT_CALL(BindNextTurn, -127, EVT_ADDR(N(nextTurn_80224320)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_80224304)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_80223574)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80223584)))
+    EVT_CALL(BindNextTurn, -127, EVT_PTR(N(nextTurn_80224320)))
     EVT_CALL(SetActorVar, -127, 2, 1)
     EVT_RETURN
     EVT_END
@@ -2359,10 +2359,10 @@ extern EvtScript N(handleEvent_8022460C);
 extern EvtScript N(nextTurn_80225884);
 
 EvtScript N(init_Bow) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_80224CA0)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_802245FC)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_8022460C)))
-    EVT_CALL(BindNextTurn, -127, EVT_ADDR(N(nextTurn_80225884)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_80224CA0)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_802245FC)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8022460C)))
+    EVT_CALL(BindNextTurn, -127, EVT_PTR(N(nextTurn_80225884)))
     EVT_CALL(SetActorVar, -127, 2, 1)
     EVT_RETURN
     EVT_END
@@ -2811,10 +2811,10 @@ extern EvtScript N(handleEvent_80225B90);
 extern EvtScript N(nextTurn_80226880);
 
 EvtScript N(init_Watt) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_80226004)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_80225B68)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_80225B90)))
-    EVT_CALL(BindNextTurn, -127, EVT_ADDR(N(nextTurn_80226880)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_80226004)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_80225B68)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80225B90)))
+    EVT_CALL(BindNextTurn, -127, EVT_PTR(N(nextTurn_80226880)))
     EVT_CALL(SetActorVar, -127, 2, 1)
     EVT_RETURN
     EVT_END
@@ -3195,10 +3195,10 @@ extern EvtScript N(handleEvent_80226B54);
 extern EvtScript N(nextTurn_8022831C);
 
 EvtScript N(init_Sushie) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_802270BC)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_80226B44)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_80226B54)))
-    EVT_CALL(BindNextTurn, -127, EVT_ADDR(N(nextTurn_8022831C)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_802270BC)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_80226B44)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80226B54)))
+    EVT_CALL(BindNextTurn, -127, EVT_PTR(N(nextTurn_8022831C)))
     EVT_CALL(SetActorVar, -127, 2, 1)
     EVT_RETURN
     EVT_END
@@ -3687,10 +3687,10 @@ extern EvtScript N(handleEvent_80228614);
 extern EvtScript N(nextTurn_80229658);
 
 EvtScript N(init_Lakilester) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_80228B78)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_80228604)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_80228614)))
-    EVT_CALL(BindNextTurn, -127, EVT_ADDR(N(nextTurn_80229658)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_80228B78)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_80228604)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80228614)))
+    EVT_CALL(BindNextTurn, -127, EVT_PTR(N(nextTurn_80229658)))
     EVT_CALL(SetActorVar, -127, 2, 1)
     EVT_RETURN
     EVT_END
@@ -4056,21 +4056,21 @@ EvtScript N(copyPartner) = {
     EVT_CALL(func_80219824_465CB4, LVar5)
     EVT_SWITCH(LVar5)
         EVT_CASE_EQ(1)
-            EVT_CALL(SummonEnemy, EVT_ADDR(N(formation_goombario)), 0)
+            EVT_CALL(SummonEnemy, EVT_PTR(N(formation_goombario)), 0)
         EVT_CASE_EQ(2)
-            EVT_CALL(SummonEnemy, EVT_ADDR(N(formation_kooper)), 0)
+            EVT_CALL(SummonEnemy, EVT_PTR(N(formation_kooper)), 0)
         EVT_CASE_EQ(3)
-            EVT_CALL(SummonEnemy, EVT_ADDR(N(formation_bombette)), 0)
+            EVT_CALL(SummonEnemy, EVT_PTR(N(formation_bombette)), 0)
         EVT_CASE_EQ(4)
-            EVT_CALL(SummonEnemy, EVT_ADDR(N(formation_parakarry)), 0)
+            EVT_CALL(SummonEnemy, EVT_PTR(N(formation_parakarry)), 0)
         EVT_CASE_EQ(9)
-            EVT_CALL(SummonEnemy, EVT_ADDR(N(formation_bow)), 0)
+            EVT_CALL(SummonEnemy, EVT_PTR(N(formation_bow)), 0)
         EVT_CASE_EQ(6)
-            EVT_CALL(SummonEnemy, EVT_ADDR(N(formation_watt)), 0)
+            EVT_CALL(SummonEnemy, EVT_PTR(N(formation_watt)), 0)
         EVT_CASE_EQ(7)
-            EVT_CALL(SummonEnemy, EVT_ADDR(N(formation_sushie)), 0)
+            EVT_CALL(SummonEnemy, EVT_PTR(N(formation_sushie)), 0)
         EVT_CASE_EQ(8)
-            EVT_CALL(SummonEnemy, EVT_ADDR(N(formation_lakilester)), 0)
+            EVT_CALL(SummonEnemy, EVT_PTR(N(formation_lakilester)), 0)
     EVT_END_SWITCH
     EVT_SET(LVarA, LVar0)
     EVT_CALL(CopyStatusEffects, -127, LVarA)

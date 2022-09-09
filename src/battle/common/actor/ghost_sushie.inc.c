@@ -88,9 +88,9 @@ ActorBlueprint N(sushie) = {
 };
 
 EvtScript N(sushie_init) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(sushie_takeTurn)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(sushie_idle)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(sushie_handleEvent)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(sushie_takeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(sushie_idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(sushie_handleEvent)))
     EVT_RETURN
     EVT_END
 };

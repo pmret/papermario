@@ -157,9 +157,9 @@ extern EvtScript N(idle_8021B07C);
 extern EvtScript N(handleEvent_8021B8BC);
 
 EvtScript N(init_8021AEB4) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_8021D284)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_8021B07C)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_8021B8BC)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_8021D284)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_8021B07C)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8021B8BC)))
     EVT_CALL(GetActorVar, -127, 0, LocalVar(0))
     EVT_SWITCH(LocalVar(0))
         EVT_CASE_EQ(0)
@@ -312,7 +312,7 @@ EvtScript N(split) = {
         EVT_CASE_OR_EQ(1)
         EVT_CASE_OR_EQ(2)
         EVT_CASE_OR_EQ(3)
-            EVT_CALL(SummonEnemy, EVT_ADDR(N(specialFormation_8021B5A0)), 0)
+            EVT_CALL(SummonEnemy, EVT_PTR(N(specialFormation_8021B5A0)), 0)
             EVT_CALL(SetActorVar, LocalVar(0), 2, 1)
             EVT_CALL(GetActorHP, -127, LVarB)
             EVT_CALL(SetEnemyHP, LocalVar(0), LVarB)

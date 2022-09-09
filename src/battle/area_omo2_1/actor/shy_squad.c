@@ -327,10 +327,10 @@ s32 N(idleAnimations)[] = {
 };
 
 EvtScript N(init) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent)))
-    EVT_CALL(BindNextTurn, ACTOR_SELF, EVT_ADDR(N(nextTurn)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent)))
+    EVT_CALL(BindNextTurn, ACTOR_SELF, EVT_PTR(N(nextTurn)))
     EVT_CALL(SetActorVar, ACTOR_SELF, N(ACTOR_VAR_SQUAD_APPEARED), 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, N(ACTOR_VAR_TIMES_ATTACKED), 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, N(ACTOR_VAR_WAS_ATTACKED), 0)

@@ -236,10 +236,10 @@ ApiStatus func_8021875C_4EFBFC(Evt* script, s32 isInitialCall) {
 }
 
 EvtScript N(init_8021BC1C) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_8021CCD4)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_8021BE28)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_8021BFD0)))
-    EVT_CALL(BindNextTurn, ACTOR_SELF, EVT_ADDR(N(nextTurn_8021F9C4)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_8021CCD4)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_8021BE28)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8021BFD0)))
+    EVT_CALL(BindNextTurn, ACTOR_SELF, EVT_PTR(N(nextTurn_8021F9C4)))
     EVT_CALL(HPBarToHome, ACTOR_SELF)
     EVT_CALL(ForceHomePos, ACTOR_SELF, 97, 70, 15)
     EVT_CALL(SetPartPos, ACTOR_SELF, 3, 70, 70, 3)
@@ -480,7 +480,7 @@ EvtScript N(8021C974) = {
     EVT_CALL(SetActorVar, ACTOR_SELF, 8, 1)
     EVT_CALL(SetActorVar, ACTOR_SELF, 7, 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, 1, 2)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_8021B9AC)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8021B9AC)))
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(ForceHomePos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(HPBarToHome, ACTOR_SELF)
@@ -964,7 +964,7 @@ EvtScript N(8021E9C8) = {
     EVT_END_IF
     EVT_CALL(StopSound, 619)
     EVT_WAIT(10)
-    EVT_CALL(SummonEnemy, EVT_ADDR(N(specialFormation_8021E9AC)), 0)
+    EVT_CALL(SummonEnemy, EVT_PTR(N(specialFormation_8021E9AC)), 0)
     EVT_SET(LVarB, LVar0)
     EVT_SET(LVar0, 165)
     EVT_SET(LVar1, 0)
@@ -1136,7 +1136,7 @@ EvtScript N(8021F80C) = {
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x3B4)
     EVT_END_THREAD
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_tutankoopa_Palette_00_Anim_1)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_8021B960)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8021B960)))
     EVT_WAIT(10)
     EVT_CALL(GetActorVar, ACTOR_SELF, 4, LVar0)
     EVT_IF_EQ(LVar0, 0)

@@ -97,9 +97,9 @@ s32 N(idleAnimations_8021EADC)[] = {
 };
 
 EvtScript N(init_8021EB28) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_80221628)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_8021EB8C)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_8021EB9C)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_80221628)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_8021EB8C)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8021EB9C)))
     EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
     EVT_RETURN
     EVT_END
@@ -260,7 +260,7 @@ EvtScript N(divide) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_fuzzy_Palette_03_Anim_D)
     EVT_WAIT(130)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_fuzzy_Palette_03_Anim_2)
-    EVT_CALL(SummonEnemy, EVT_ADDR(N(specialFormation_8022180C)), 0)
+    EVT_CALL(SummonEnemy, EVT_PTR(N(specialFormation_8022180C)), 0)
     EVT_CALL(GetActorPos, ACTOR_SELF, LocalVar(1), LocalVar(2), LocalVar(3))
     EVT_CALL(SetActorPos, LocalVar(0), LocalVar(1), LocalVar(2), LocalVar(3))
     EVT_CALL(SetGoalToIndex, LocalVar(0), LVarA)

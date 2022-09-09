@@ -48,7 +48,7 @@ EvtScript N(exitSingleDoor_80241580) = {
     EVT_SET(LocalVar(3), -1)
     EVT_EXEC(ExitSingleDoor)
     EVT_WAIT(17)
-    EVT_CALL(GotoMap, EVT_ADDR("dgb_03"), 2)
+    EVT_CALL(GotoMap, EVT_PTR("dgb_03"), 2)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END
@@ -75,7 +75,7 @@ EvtScript N(main) = {
     EVT_CALL(SetCamLeadPlayer, 0, 0)
     EVT_CALL(SetCamEnabled, 0, 1)
     EVT_IF_LT(GB_StoryProgress, -15)
-        EVT_CALL(MakeNpcs, 1, EVT_ADDR(N(npcGroupList_8024230C)))
+        EVT_CALL(MakeNpcs, 1, EVT_PTR(N(npcGroupList_8024230C)))
     EVT_END_IF
     EVT_EXEC_WAIT(N(makeEntities))
     EVT_EXEC(N(802417F0))
@@ -97,7 +97,7 @@ EvtScript N(802417F0) = {
     EVT_CALL(func_802CA988, 0, LocalVar(2), LocalVar(3), LocalVar(4), LocalVar(5))
     EVT_CALL(N(func_80240030_C3AA40))
     EVT_SET(GF_DGB05_BoardedFloor, 1)
-    EVT_CALL(GotoMap, EVT_ADDR("dgb_06"), 1)
+    EVT_CALL(GotoMap, EVT_PTR("dgb_06"), 1)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END
@@ -109,7 +109,7 @@ static s32 N(pad_1868)[] = {
 
 EvtScript N(makeEntities) = {
     EVT_IF_EQ(GF_DGB05_BoardedFloor, 0)
-        EVT_CALL(MakeEntity, EVT_ADDR(Entity_BoardedFloor), 510, -210, 100, 0, MAKE_ENTITY_END)
+        EVT_CALL(MakeEntity, EVT_PTR(Entity_BoardedFloor), 510, -210, 100, 0, MAKE_ENTITY_END)
     EVT_END_IF
     EVT_RETURN
     EVT_END
@@ -165,7 +165,7 @@ EvtScript N(npcAI_802419DC) = {
     EVT_CALL(SetSelfVar, 1, 10)
     EVT_CALL(SetSelfVar, 2, 14)
     EVT_CALL(SetSelfVar, 3, 18)
-    EVT_CALL(N(ClubbaNappingAI_Main), EVT_ADDR(N(npcAISettings_802419AC)))
+    EVT_CALL(N(ClubbaNappingAI_Main), EVT_PTR(N(npcAISettings_802419AC)))
     EVT_RETURN
     EVT_END
 };

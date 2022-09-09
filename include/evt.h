@@ -104,8 +104,6 @@ enum {
     EVT_OP_94,
 };
 
-#define EVT_IGNORE_ARG       -250000000 // used by a couple functions to selectively ignore args
-#define EVT_LIMIT            -270000000 // TODO better name
 #define MAKE_ENTITY_END      0x80000000
 
 /* Return type of evt_execute_next_command */

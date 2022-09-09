@@ -126,15 +126,15 @@ ActorBlueprint NAMESPACE = {
 };
 
 EvtScript N(init_802275D4) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_802293DC)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_802276C4)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_80227ABC)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_802293DC)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_802276C4)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80227ABC)))
     EVT_CALL(SetActorVar, ACTOR_SELF, 2, 1)
     EVT_CALL(SetActorVar, ACTOR_SELF, 3, 0)
     EVT_CALL(func_8027D75C, ACTOR_SELF, LVar0)
     EVT_IF_NE(LVar0, 0)
         EVT_CALL(SetActorVar, ACTOR_SELF, 2, 0)
-        EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_8022744C)))
+        EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8022744C)))
         EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_spy_guy_Palette_00_Anim_2)
     EVT_END_IF
     EVT_RETURN
@@ -178,7 +178,7 @@ EvtScript N(802276D4) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
             EVT_CALL(SetActorVar, ACTOR_SELF, 2, 1)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_80227400)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80227400)))
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_spy_guy_Palette_00_Anim_17)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.4))
@@ -189,7 +189,7 @@ EvtScript N(802276D4) = {
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_spy_guy_Palette_00_Anim_3)
         EVT_CASE_EQ(1)
             EVT_CALL(SetActorVar, ACTOR_SELF, 2, 0)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_8022744C)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8022744C)))
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_spy_guy_Palette_00_Anim_18)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.4))
@@ -605,7 +605,7 @@ EvtScript N(takeTurn_802293DC) = {
     EVT_CALL(GetBattlePhase, LVar0)
     EVT_IF_EQ(LVar0, PHASE_FIRST_STRIKE)
         EVT_CALL(SetActorVar, ACTOR_SELF, 2, 0)
-        EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_8022744C)))
+        EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8022744C)))
         EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_spy_guy_Palette_00_Anim_2)
     EVT_END_IF
     EVT_CALL(GetActorVar, ACTOR_SELF, 2, LVar0)

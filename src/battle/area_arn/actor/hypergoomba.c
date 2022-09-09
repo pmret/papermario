@@ -96,10 +96,10 @@ s32 N(idleAnimations_80218874)[] = {
 };
 
 EvtScript N(init_802188C0) = {
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_802198FC)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_80219BD8)))
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_802195F0)))
-    EVT_CALL(BindNextTurn, ACTOR_SELF, EVT_ADDR(N(nextTurn_80218950)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_802198FC)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80219BD8)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_802195F0)))
+    EVT_CALL(BindNextTurn, ACTOR_SELF, EVT_PTR(N(nextTurn_80218950)))
     EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, 1, 0)
     EVT_RETURN
@@ -150,7 +150,7 @@ EvtScript N(802189D4) = {
             EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(0.5))
         EVT_END_THREAD
         EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
-        EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_80218874)))
+        EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80218874)))
         EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_goomba_hyper_idle)
         EVT_CALL(EnableActorGlow, ACTOR_SELF, TRUE)
         EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_400000, 1)
@@ -217,7 +217,7 @@ EvtScript N(802189D4) = {
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_goomba_hyper_idle)
             EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
             EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_80219818)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80219818)))
             EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
@@ -272,7 +272,7 @@ EvtScript N(802189D4) = {
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_goomba_hyper_idle)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
             EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_80219818)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80219818)))
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
@@ -352,9 +352,9 @@ s32 N(idleAnimations_80219864)[] = {
 };
 
 EvtScript N(802198B0) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_8021A628)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_802198FC)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_80219BD8)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_8021A628)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_802198FC)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80219BD8)))
     EVT_RETURN
     EVT_END
 };
@@ -375,10 +375,10 @@ EvtScript N(idle_802198FC) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_ADD(LocalVar(0), 5)
     EVT_CALL(SetActorIdleSpeed, ACTOR_SELF, EVT_FLOAT(1.0))
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_80219864)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80219864)))
     EVT_CALL(SetIdleGoal, ACTOR_SELF, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_CALL(IdleRunToGoal, ACTOR_SELF, 0)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_80219818)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80219818)))
     EVT_LOOP(20)
         EVT_LABEL(1)
         EVT_CALL(GetStatusFlags, ACTOR_SELF, LocalVar(1))
@@ -391,10 +391,10 @@ EvtScript N(idle_802198FC) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_SUB(LocalVar(0), 5)
     EVT_CALL(SetActorIdleSpeed, ACTOR_SELF, EVT_FLOAT(1.0))
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_80219864)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80219864)))
     EVT_CALL(SetIdleGoal, ACTOR_SELF, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_CALL(IdleRunToGoal, ACTOR_SELF, 0)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_80219818)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80219818)))
     EVT_LOOP(80)
         EVT_LABEL(2)
         EVT_CALL(GetStatusFlags, ACTOR_SELF, LocalVar(1))
@@ -453,7 +453,7 @@ EvtScript N(handleEvent_80219BD8) = {
             EVT_CALL(EnableActorGlow, ACTOR_SELF, FALSE)
             EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_400000, 0)
             EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_80219818)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80219818)))
             EVT_SET_CONST(LocalVar(0), 1)
             EVT_SET_CONST(LocalVar(1), NPC_ANIM_goomba_hyper_electrocute)
             EVT_EXEC_WAIT(DoShockHit)
@@ -477,7 +477,7 @@ EvtScript N(handleEvent_80219BD8) = {
             EVT_CALL(EnableActorGlow, ACTOR_SELF, FALSE)
             EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_400000, 0)
             EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_80219818)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80219818)))
             EVT_SET_CONST(LocalVar(0), 1)
             EVT_SET_CONST(LocalVar(1), NPC_ANIM_goomba_hyper_electrocute)
             EVT_EXEC_WAIT(DoShockHit)
@@ -493,7 +493,7 @@ EvtScript N(handleEvent_80219BD8) = {
                 EVT_CALL(EnableActorGlow, ACTOR_SELF, FALSE)
                 EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_400000, 0)
                 EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
-                EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_80219818)))
+                EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80219818)))
             EVT_END_IF
             EVT_SET_CONST(LocalVar(0), 1)
             EVT_SET_CONST(LocalVar(1), NPC_ANIM_goomba_hyper_idle)

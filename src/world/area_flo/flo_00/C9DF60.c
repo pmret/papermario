@@ -156,7 +156,7 @@ EvtScript N(8024196C) = {
         EVT_END_IF
     EVT_END_LOOP
     EVT_CALL(PlaySoundAtCollider, 2, 464, 0)
-    EVT_CALL(GotoMap, EVT_ADDR("mac_01"), 5)
+    EVT_CALL(GotoMap, EVT_PTR("mac_01"), 5)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END
@@ -237,7 +237,7 @@ EvtScript N(enterWalk_8024205C) = {
                     EVT_EXEC(N(80241FA4))
                 EVT_END_THREAD
             EVT_CASE_RANGE(1, 6)
-                EVT_SET(LocalVar(0), EVT_ADDR(N(80241FA4)))
+                EVT_SET(LocalVar(0), EVT_PTR(N(80241FA4)))
                 EVT_EXEC(EnterWalk)
             EVT_CASE_EQ(7)
                 EVT_THREAD
@@ -251,7 +251,7 @@ EvtScript N(enterWalk_8024205C) = {
                 EVT_END_THREAD
             EVT_CASE_EQ(9)
                 EVT_EXEC(flo_00_80242998)
-                EVT_SET(LocalVar(0), EVT_ADDR(N(80241FA4)))
+                EVT_SET(LocalVar(0), EVT_PTR(N(80241FA4)))
                 EVT_EXEC(EnterWalk)
             EVT_CASE_EQ(10)
                 EVT_EXEC(N(80241FA4))
@@ -278,9 +278,9 @@ EvtScript N(main) = {
     EVT_SET(GF_MAC01_RowfBadgesChosen, 0)
     EVT_CALL(GetEntryID, LocalVar(0))
     EVT_IF_EQ(LocalVar(0), 11)
-        EVT_CALL(MakeNpcs, 0, EVT_ADDR(N(npcGroupList_80246834)))
+        EVT_CALL(MakeNpcs, 0, EVT_PTR(N(npcGroupList_80246834)))
     EVT_ELSE
-        EVT_CALL(MakeNpcs, 0, EVT_ADDR(N(npcGroupList_80245DE4)))
+        EVT_CALL(MakeNpcs, 0, EVT_PTR(N(npcGroupList_80245DE4)))
     EVT_END_IF
     EVT_EXEC_WAIT(flo_00_makeEntities)
     EVT_CALL(ParentColliderToModel, 46, 81)
@@ -376,7 +376,7 @@ MobileAISettings N(npcAISettings_8024286C) = {
 };
 
 EvtScript N(npcAI_8024289C) = {
-    EVT_CALL(N(PatrolNoAttackAI_Main), EVT_ADDR(N(npcAISettings_8024286C)))
+    EVT_CALL(N(PatrolNoAttackAI_Main), EVT_PTR(N(npcAISettings_8024286C)))
     EVT_RETURN
     EVT_END
 };
@@ -429,7 +429,7 @@ EvtScript N(80242998) = {
     EVT_WAIT(20)
     EVT_CALL(ShowMessageAtWorldPos, MESSAGE_ID(0x11, 0x00C4), 0, 50, -200)
     EVT_WAIT(10)
-    EVT_CALL(GotoMap, EVT_ADDR(N(flo_07_name_hack)), 1)
+    EVT_CALL(GotoMap, EVT_PTR(N(flo_07_name_hack)), 1)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END
@@ -710,28 +710,28 @@ EvtScript N(interact_802439E8) = {
 
 EvtScript N(init_80243B7C) = {
     EVT_SET(AreaFlag(18), 0)
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_ADDR(N(interact_8024352C)))
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_8024352C)))
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(init_80243BB0) = {
     EVT_SET(AreaFlag(19), 0)
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_ADDR(N(interact_802436C0)))
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_802436C0)))
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(init_80243BE4) = {
     EVT_SET(AreaFlag(20), 0)
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_ADDR(N(interact_80243854)))
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_80243854)))
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(init_80243C18) = {
     EVT_SET(AreaFlag(21), 0)
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_ADDR(N(interact_802439E8)))
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_802439E8)))
     EVT_RETURN
     EVT_END
 };
@@ -807,7 +807,7 @@ EvtScript N(interact_80243C4C) = {
 };
 
 EvtScript N(init_8024414C) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_ADDR(N(interact_80243C4C)))
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_80243C4C)))
     EVT_CALL(SetNpcCollisionSize, -1, 65, 50)
     EVT_RETURN
     EVT_END
@@ -971,7 +971,7 @@ EvtScript N(init_80244BF4) = {
     EVT_IF_NE(LocalVar(1), 1)
         EVT_CALL(GetEntryID, LocalVar(0))
         EVT_IF_EQ(LocalVar(0), 10)
-            EVT_CALL(BindNpcIdle, NPC_SELF, EVT_ADDR(N(idle_80244188)))
+            EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80244188)))
             EVT_EXEC(N(8024427C))
         EVT_ELSE
             EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
@@ -1004,7 +1004,7 @@ EvtScript N(interact_80244C98) = {
 
 EvtScript N(init_80244DD0) = {
     EVT_IF_GE(GB_StoryProgress, 58)
-        EVT_CALL(BindNpcInteract, NPC_SELF, EVT_ADDR(N(interact_80244C98)))
+        EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_80244C98)))
         EVT_CALL(SetNpcCollisionSize, -1, 36, 28)
         EVT_CALL(SetNpcPos, NPC_SELF, -200, 15, -300)
     EVT_ELSE
@@ -1346,7 +1346,7 @@ EvtScript N(80245EB8) = {
     EVT_CALL(InterpNpcYaw, 0, 270, 0)
     EVT_WAIT(40)
     EVT_CALL(FadeOutMusic, 0, 1000)
-    EVT_CALL(GotoMap, EVT_ADDR(N(sam_11_name_hack)), 2)
+    EVT_CALL(GotoMap, EVT_PTR(N(sam_11_name_hack)), 2)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END
@@ -1718,7 +1718,7 @@ EvtScript N(802477EC) = {
             EVT_WAIT(1)
             EVT_GOTO(10)
         EVT_END_IF
-        EVT_CALL(GotoMap, EVT_ADDR(N(flo_19_name_hack)), 3)
+        EVT_CALL(GotoMap, EVT_PTR(N(flo_19_name_hack)), 3)
         EVT_WAIT(100)
     EVT_END_IF
     EVT_RETURN
@@ -1840,7 +1840,7 @@ EvtScript N(80247FAC) = {
     EVT_END_IF
     EVT_CALL(FadeInMusic, 0, 50, 0, 3000, 0, 127)
     EVT_CALL(FadeOutMusic, 1, 3000)
-    EVT_CALL(GotoMap, EVT_ADDR(N(flo_19_name_hack)), 2)
+    EVT_CALL(GotoMap, EVT_PTR(N(flo_19_name_hack)), 2)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END
@@ -2053,7 +2053,7 @@ EvtScript N(80248E30) = {
             EVT_END_IF
             EVT_SET(MapVar(11), LocalVar(0))
         EVT_END_IF
-        EVT_BIND_PADLOCK(N(80248D3C), 0x10, 0, EVT_ADDR(N(itemList_80248598)), 0, 1)
+        EVT_BIND_PADLOCK(N(80248D3C), 0x10, 0, EVT_PTR(N(itemList_80248598)), 0, 1)
     EVT_END_IF
     EVT_RETURN
     EVT_END
@@ -2100,7 +2100,7 @@ static s32 N(pad_9128)[] = {
 
 EvtScript N(makeEntities) = {
     EVT_IF_LT(GB_StoryProgress, 96)
-        EVT_CALL(MakeEntity, EVT_ADDR(Entity_SavePoint), 110, 60, -100, 0, 0x80000000)
+        EVT_CALL(MakeEntity, EVT_PTR(Entity_SavePoint), 110, 60, -100, 0, 0x80000000)
     EVT_END_IF
     EVT_RETURN
     EVT_END

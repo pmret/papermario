@@ -166,7 +166,7 @@ EvtScript N(80222C78) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, LVarA, 0x210027)
     EVT_WAIT(12)
     EVT_CALL(SetAnimation, ACTOR_SELF, LVarA, 0x210014)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, LVarA, EVT_ADDR(N(idleAnimations_80222C6C)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, LVarA, EVT_PTR(N(idleAnimations_80222C6C)))
     EVT_WAIT(30)
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
@@ -208,9 +208,9 @@ extern EvtScript N(handleEvent_80223290);
 extern EvtScript N(nextTurn_80223D2C);
 
 EvtScript N(init_80223180) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_802234A4)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_80223290)))
-    EVT_CALL(BindNextTurn, -127, EVT_ADDR(N(nextTurn_80223D2C)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_802234A4)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80223290)))
+    EVT_CALL(BindNextTurn, -127, EVT_PTR(N(nextTurn_80223D2C)))
     EVT_CALL(SetActorVar, -127, 0, 0)
     EVT_CALL(SetActorVar, -127, 1, 0)
     EVT_CALL(SetActorVar, -127, 2, 0)

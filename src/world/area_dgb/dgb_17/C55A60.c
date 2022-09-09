@@ -41,7 +41,7 @@ EvtScript N(exitDoubleDoor_80240100) = {
     EVT_SET(LocalVar(3), 16)
     EVT_EXEC(ExitDoubleDoor)
     EVT_WAIT(17)
-    EVT_CALL(GotoMap, EVT_ADDR("dgb_15"), 1)
+    EVT_CALL(GotoMap, EVT_PTR("dgb_15"), 1)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END
@@ -57,7 +57,7 @@ EvtScript N(exitDoubleDoor_802401B4) = {
     EVT_SET(LocalVar(3), 19)
     EVT_EXEC(ExitDoubleDoor)
     EVT_WAIT(17)
-    EVT_CALL(GotoMap, EVT_ADDR("dgb_01"), 5)
+    EVT_CALL(GotoMap, EVT_PTR("dgb_01"), 5)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END
@@ -109,8 +109,8 @@ EvtScript N(main) = {
 };
 
 EvtScript N(makeEntities) = {
-    EVT_CALL(MakeEntity, EVT_ADDR(Entity_SavePoint), -300, 60, 75, 0, MAKE_ENTITY_END)
-    EVT_CALL(MakeEntity, EVT_ADDR(Entity_HeartBlock), -450, 60, 75, 0, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, EVT_PTR(Entity_SavePoint), -300, 60, 75, 0, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, EVT_PTR(Entity_HeartBlock), -450, 60, 75, 0, MAKE_ENTITY_END)
     EVT_RETURN
     EVT_END
 };

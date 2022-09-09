@@ -141,9 +141,9 @@ s32 N(unk_missing_80223478)[] = {
 };
 
 EvtScript N(init_80223488) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_80223804)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_80223678)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_80223688)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_80223804)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_80223678)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80223688)))
     EVT_CALL(SetActorVar, -127, 0, 0)
     EVT_CALL(SetActorVar, -127, 1, 0)
     EVT_CALL(SetActorVar, -127, 2, 0)
@@ -331,7 +331,7 @@ ShakeTreeConfig N(tree) = {
 };
 
 EvtScript N(shake_goomnut_tree) = {
-    EVT_SET(LVar0, EVT_ADDR(N(tree)))
+    EVT_SET(LVar0, EVT_PTR(N(tree)))
     EVT_EXEC_WAIT(N(shakeTree))
     EVT_RETURN
     EVT_END

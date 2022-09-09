@@ -51,7 +51,7 @@ EvtScript N(80241F40) = {
 #include "world/common/atomic/SuperBlockData.inc.c"
 
 EvtScript N(makeEntities) = {
-    EVT_CALL(MakeEntity, EVT_ADDR(Entity_SuperBlock), -780, 120, -110, 0, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, EVT_PTR(Entity_SuperBlock), -780, 120, -110, 0, MAKE_ENTITY_END)
     EVT_SETUP_SUPER_BLOCK(SUPER_BLOCK_MAPVAR, SUPER_BLOCK_GAMEFLAG)
     EVT_CALL(MakeItemEntity, ITEM_STAR_PIECE, 510, 0, -90, 17, GF_FLO08_Item_StarPiece)
     EVT_RETURN
@@ -122,12 +122,12 @@ EvtScript N(main) = {
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
     EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
     EVT_CALL(SetCamEnabled, 0, 1)
-    EVT_CALL(MakeNpcs, 0, EVT_ADDR(N(npcGroupList_80244EC4)))
+    EVT_CALL(MakeNpcs, 0, EVT_PTR(N(npcGroupList_80244EC4)))
     EVT_EXEC_WAIT(N(makeEntities))
     EVT_EXEC(N(80245F5C))
     EVT_CALL(ModifyColliderFlags, 3, 19, 0x00000002)
     EVT_THREAD
-        EVT_CALL(ResetFromLava, EVT_ADDR(N(lavaResetList_80242A2C)))
+        EVT_CALL(ResetFromLava, EVT_PTR(N(lavaResetList_80242A2C)))
     EVT_END_THREAD
     EVT_CALL(EnableTexPanning, 22, 1)
     EVT_CALL(EnableTexPanning, 23, 1)
@@ -174,7 +174,7 @@ EvtScript N(main) = {
     EVT_EXEC(N(80245914))
     EVT_CALL(ModifyColliderFlags, 0, 1, 0x7FFFFE00)
     EVT_CALL(ModifyColliderFlags, 0, 5, 0x7FFFFE00)
-    EVT_SET(LocalVar(0), EVT_ADDR(N(802429E4)))
+    EVT_SET(LocalVar(0), EVT_PTR(N(802429E4)))
     EVT_EXEC(EnterWalk)
     EVT_EXEC_WAIT(N(80241F40))
     EVT_IF_GE(GB_StoryProgress, 53)
@@ -204,7 +204,7 @@ MobileAISettings N(npcAISettings_80242EB0) = {
 };
 
 EvtScript N(npcAI_80242EE0) = {
-    EVT_CALL(N(UnkFloAI_Main), EVT_ADDR(N(npcAISettings_80242EB0)))
+    EVT_CALL(N(UnkFloAI_Main), EVT_PTR(N(npcAISettings_80242EB0)))
     EVT_RETURN
     EVT_END
 };
@@ -253,7 +253,7 @@ MobileAISettings N(npcAISettings_8024300C) = {
 };
 
 EvtScript N(npcAI_8024303C) = {
-    EVT_CALL(BasicAI_Main, EVT_ADDR(N(npcAISettings_8024300C)))
+    EVT_CALL(BasicAI_Main, EVT_PTR(N(npcAISettings_8024300C)))
     EVT_RETURN
     EVT_END
 };
@@ -299,7 +299,7 @@ EvtScript N(80243090) = {
 
 EvtScript N(802431C4) = {
     EVT_CALL(N(BuildItemChoiceList), LocalVar(0))
-    EVT_BIND_PADLOCK(N(80243090), 0x10, 0, EVT_ADDR(N(ItemChoiceList)), 0, 1)
+    EVT_BIND_PADLOCK(N(80243090), 0x10, 0, EVT_PTR(N(ItemChoiceList)), 0, 1)
     EVT_CALL(N(ItemChoice_WaitForSelection), LocalVar(0))
     EVT_RETURN
     EVT_END
@@ -319,7 +319,7 @@ EvtScript N(interact_80243214) = {
         EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_gate_flower_Palette_02_Anim_2, NPC_ANIM_gate_flower_Palette_02_Anim_1, 0, MESSAGE_ID(0x11, 0x0042))
         EVT_CALL(SetPlayerAnimation, ANIM_THINKING)
         EVT_CALL(N(FlowerGuard_MakeItemList))
-        EVT_SET(LocalVar(0), EVT_ADDR(N(FlowerGuard_ItemChoiceList)))
+        EVT_SET(LocalVar(0), EVT_PTR(N(FlowerGuard_ItemChoiceList)))
         EVT_SET(LocalVar(1), 0)
         EVT_EXEC_WAIT(N(802431C4))
         EVT_SWITCH(LocalVar(0))
@@ -440,7 +440,7 @@ EvtScript N(interact_80243214) = {
 };
 
 EvtScript N(init_80243B20) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_ADDR(N(interact_80243214)))
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_80243214)))
     EVT_IF_EQ(GF_FLO08_GaveYellowBerry, 1)
         EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_gate_flower_Palette_02_Anim_5)
         EVT_CALL(ModifyColliderFlags, 0, 17, 0x7FFFFE00)
@@ -890,9 +890,9 @@ Vec4f N(triggerCoord_80245904) = { 391.0f, 0.0f, -102.0f, 0.0f };
 EvtScript N(80245914) = {
     EVT_SET(AreaFlag(29), 0)
     EVT_SET(AreaFlag(30), 0)
-    EVT_SET(LocalVar(0), EVT_ADDR(N(tree1)))
+    EVT_SET(LocalVar(0), EVT_PTR(N(tree1)))
     EVT_BIND_TRIGGER(N(shakeTree), TRIGGER_WALL_HAMMER, 22, 1, 0)
-    EVT_BIND_TRIGGER(N(shakeTree), TRIGGER_POINT_BOMB, EVT_ADDR(N(triggerCoord_80245904)), 1, 0)
+    EVT_BIND_TRIGGER(N(shakeTree), TRIGGER_POINT_BOMB, EVT_PTR(N(triggerCoord_80245904)), 1, 0)
     EVT_RETURN
     EVT_END
 };

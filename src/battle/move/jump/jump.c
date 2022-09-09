@@ -339,7 +339,7 @@ EvtScript D_802A23D4_73EC34 = {
     EVT_CALL(action_command_jump_CreateHudElements)
     EVT_EXEC_WAIT(N(MoveToJump))
     EVT_EXEC_WAIT(D_802A1540_73DDA0)
-    EVT_CALL(func_8026919C, EVT_ADDR(D_802A1140_73D9A0))
+    EVT_CALL(func_8026919C, EVT_PTR(D_802A1140_73D9A0))
     EVT_SET(LVarB, LVarA)
     EVT_SUB(LVarB, 4)
     EVT_ADD(LVarB, -3)

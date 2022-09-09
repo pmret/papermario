@@ -136,9 +136,9 @@ ActorBlueprint NAMESPACE = {
 };
 
 EvtScript N(init) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent)))
     EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_FLAGS), 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_HEAL_COUNTER), 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_PHASE), N(PHASE_BEGIN))
@@ -1184,9 +1184,9 @@ EvtScript N(clone_script) = {
 };
 
 EvtScript N(clone_init) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(clone_script)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(clone_script)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(clone_script)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(clone_script)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(clone_script)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(clone_script)))
     EVT_RETURN
     EVT_END
 };
@@ -1227,14 +1227,14 @@ EvtScript N(MakeIllusions) = {
     EVT_CALL(MoveBattleCamOver, 15)
     EVT_WAIT(15)
     EVT_CALL(GetActorHP, ACTOR_SELF, LVarA)
-    EVT_CALL(SummonEnemy, EVT_ADDR(N(clone_formation)), 0)
+    EVT_CALL(SummonEnemy, EVT_PTR(N(clone_formation)), 0)
     EVT_CALL(SetActorFlagBits, LocalVar(0), ACTOR_FLAG_NO_SHADOW, 1)
     EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_CLONE1_ID), LocalVar(0))
     EVT_CALL(SetPartEventBits, LocalVar(0), 1, ACTOR_EVENT_FLAG_ILLUSORY, 1)
     EVT_CALL(SetEnemyHP, LocalVar(0), LVarA)
     EVT_CALL(CopyStatusEffects, ACTOR_SELF, LocalVar(0))
     EVT_CALL(CopyBuffs, ACTOR_SELF, LocalVar(0))
-    EVT_CALL(SummonEnemy, EVT_ADDR(N(clone_formation)), 0)
+    EVT_CALL(SummonEnemy, EVT_PTR(N(clone_formation)), 0)
     EVT_CALL(SetActorFlagBits, LocalVar(0), ACTOR_FLAG_NO_SHADOW, 1)
     EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_CLONE2_ID), LocalVar(0))
     EVT_CALL(SetPartEventBits, LocalVar(0), 1, ACTOR_EVENT_FLAG_ILLUSORY, 1)
@@ -1489,11 +1489,11 @@ EvtScript N(SummonCrystalBits) = {
     EVT_WAIT(15)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_crystal_king_Palette_00_Anim_1E)
     EVT_WAIT(20)
-    EVT_CALL(SummonEnemy, EVT_ADDR(N(formation_bit_1)), 0)
+    EVT_CALL(SummonEnemy, EVT_PTR(N(formation_bit_1)), 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_BIT1_ID), LocalVar(0))
-    EVT_CALL(SummonEnemy, EVT_ADDR(N(formation_bit_2)), 0)
+    EVT_CALL(SummonEnemy, EVT_PTR(N(formation_bit_2)), 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_BIT2_ID), LocalVar(0))
-    EVT_CALL(SummonEnemy, EVT_ADDR(N(formation_bit_3)), 0)
+    EVT_CALL(SummonEnemy, EVT_PTR(N(formation_bit_3)), 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_BIT3_ID), LocalVar(0))
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LocalVar(0))
     EVT_IF_FLAG(LocalVar(0), STATUS_FLAG_SHRINK)

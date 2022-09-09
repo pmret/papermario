@@ -96,9 +96,9 @@ ActorBlueprint NAMESPACE = {
 #include "common/IsSaveVar123.inc.c"
 
 EvtScript N(init_8021FDA0) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_80220634)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_8021FE5C)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_8021FE90)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_80220634)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_8021FE5C)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8021FE90)))
     EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
     EVT_CALL(N(IsSaveVar123))
     EVT_IF_EQ(LocalVar(0), 0)

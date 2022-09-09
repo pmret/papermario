@@ -106,9 +106,9 @@ ActorBlueprint N(kooper) = {
 };
 
 EvtScript N(kooper_init) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(kooper_takeTurn)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(kooper_idle)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(kooper_handleEvent)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(kooper_takeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(kooper_idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(kooper_handleEvent)))
     EVT_CALL(SetActorVar, ACTOR_SELF, 3, 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, 4, 0)
     EVT_RETURN
@@ -219,8 +219,8 @@ EvtScript N(kooper_handleEvent) = {
         EVT_CASE_EQ(EVENT_FLIP_TRIGGER)
             EVT_CALL(SetActorVar, ACTOR_SELF, 3, 1)
             EVT_CALL(SetActorVar, ACTOR_SELF, 4, 1)
-            EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_ADDR(N(kooper_defenseTable2)))
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(kooper_idleAnimations2)))
+            EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(kooper_defenseTable2)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(kooper_idleAnimations2)))
             EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, 5, 15)
             EVT_CALL(func_8027D4C8, ACTOR_SELF, 1, 0, -6)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_battle_kooper_Palette_00_Anim_11)
@@ -370,8 +370,8 @@ EvtScript N(kooper_takeTurn) = {
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_battle_kooper_Palette_00_Anim_4)
             EVT_CALL(SetActorVar, ACTOR_SELF, 3, 0)
-            EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_ADDR(N(kooper_defenseTable)))
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(kooper_idleAnimations)))
+            EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(kooper_defenseTable)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(kooper_idleAnimations)))
             EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -2, 38)
             EVT_CALL(func_8027D4C8, ACTOR_SELF, 1, -3, -9)
         EVT_END_IF

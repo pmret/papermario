@@ -35,7 +35,7 @@ EvtScript N(enterWalk_80241530) = {
         EVT_EXEC(N(802414E8))
         EVT_RETURN
     EVT_END_IF
-    EVT_SET(LocalVar(0), EVT_ADDR(N(802414E8)))
+    EVT_SET(LocalVar(0), EVT_PTR(N(802414E8)))
     EVT_EXEC(EnterWalk)
     EVT_WAIT(1)
     EVT_RETURN
@@ -49,9 +49,9 @@ EvtScript N(main) = {
     EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
     EVT_CALL(SetCamEnabled, 0, 1)
     EVT_IF_LT(GB_StoryProgress, -16)
-        EVT_CALL(MakeNpcs, 0, EVT_ADDR(N(npcGroupList_80244FA4)))
+        EVT_CALL(MakeNpcs, 0, EVT_PTR(N(npcGroupList_80244FA4)))
     EVT_ELSE
-        EVT_CALL(MakeNpcs, 0, EVT_ADDR(N(npcGroupList_80244FC8)))
+        EVT_CALL(MakeNpcs, 0, EVT_PTR(N(npcGroupList_80244FC8)))
     EVT_END_IF
     EVT_EXEC_WAIT(N(makeEntities))
     EVT_EXEC(N(802441FC))
@@ -86,7 +86,7 @@ MobileAISettings N(npcAISettings_802416DC) = {
 };
 
 EvtScript N(npcAI_8024170C) = {
-    EVT_CALL(N(func_8024113C_BE8D1C), EVT_ADDR(N(npcAISettings_802416DC)))
+    EVT_CALL(N(func_8024113C_BE8D1C), EVT_PTR(N(npcAISettings_802416DC)))
     EVT_RETURN
     EVT_END
 };
@@ -256,21 +256,21 @@ EvtScript N(interact_80241F88) = {
 
 EvtScript N(init_80241FB8) = {
     EVT_IF_LT(GB_StoryProgress, -33)
-        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_ADDR(N(idle_80241784)))
+        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80241784)))
     EVT_END_IF
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_ADDR(N(interact_80241794)))
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_80241794)))
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(init_80242008) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_ADDR(N(interact_80241924)))
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_80241924)))
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(init_8024202C) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_ADDR(N(interact_80241AB4)))
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_80241AB4)))
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(-33)
             EVT_CALL(SetNpcFlagBits, NPC_SELF, ((NPC_FLAG_100)), TRUE)
@@ -290,7 +290,7 @@ EvtScript N(init_8024202C) = {
 };
 
 EvtScript N(init_8024212C) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_ADDR(N(interact_80241D88)))
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_80241D88)))
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(-33)
             EVT_CALL(RemoveNpc, NPC_SELF)
@@ -309,9 +309,9 @@ EvtScript N(init_8024212C) = {
 
 EvtScript N(init_802421EC) = {
     EVT_IF_LT(GB_StoryProgress, -33)
-        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_ADDR(N(idle_80241784)))
+        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80241784)))
     EVT_END_IF
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_ADDR(N(interact_80241E28)))
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_80241E28)))
     EVT_RETURN
     EVT_END
 };
@@ -773,9 +773,9 @@ EvtScript N(802441FC) = {
         EVT_END_LOOP
         EVT_CALL(func_802D2B6C)
         EVT_EXEC_WAIT(N(80242C50))
-        EVT_CALL(BindNpcInteract, 0, EVT_ADDR(N(interact_802418F4)))
-        EVT_CALL(BindNpcInteract, 1, EVT_ADDR(N(interact_80241A84)))
-        EVT_CALL(BindNpcInteract, 4, EVT_ADDR(N(interact_80241F88)))
+        EVT_CALL(BindNpcInteract, 0, EVT_PTR(N(interact_802418F4)))
+        EVT_CALL(BindNpcInteract, 1, EVT_PTR(N(interact_80241A84)))
+        EVT_CALL(BindNpcInteract, 4, EVT_PTR(N(interact_80241F88)))
         EVT_SET(GB_StoryProgress, -33)
         EVT_EXEC(N(80241360))
     EVT_END_IF
@@ -859,28 +859,28 @@ EvtScript N(idle_8024459C) = {
 };
 
 EvtScript N(init_80244704) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_ADDR(N(idle_8024459C)))
+    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_8024459C)))
     EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(init_8024473C) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_ADDR(N(idle_8024459C)))
+    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_8024459C)))
     EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(init_80244774) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_ADDR(N(idle_8024459C)))
+    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_8024459C)))
     EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(init_802447AC) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_ADDR(N(idle_8024459C)))
+    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_8024459C)))
     EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
     EVT_RETURN
     EVT_END
@@ -1031,7 +1031,7 @@ static s32 N(pad_4FF8)[] = {
 };
 
 EvtScript N(makeEntities) = {
-    EVT_CALL(MakeEntity, EVT_ADDR(Entity_HeartBlock), 17, 238, 80, 0, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, EVT_PTR(Entity_HeartBlock), 17, 238, 80, 0, MAKE_ENTITY_END)
     EVT_RETURN
     EVT_END
 };

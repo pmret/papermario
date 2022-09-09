@@ -108,7 +108,7 @@ EvtScript N(main) = {
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
     EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
     EVT_CALL(SetCamEnabled, 0, 1)
-    EVT_CALL(MakeNpcs, 0, EVT_ADDR(N(npcGroupList_80245228)))
+    EVT_CALL(MakeNpcs, 0, EVT_PTR(N(npcGroupList_80245228)))
     EVT_EXEC_WAIT(N(makeEntities))
     EVT_EXEC(N(80244284))
     EVT_CALL(ModifyColliderFlags, 3, 15, 0x00000006)
@@ -158,7 +158,7 @@ EvtScript N(main) = {
     EVT_EXEC(N(802432F0))
     EVT_CALL(ModifyColliderFlags, 3, 9, 0x00000002)
     EVT_THREAD
-        EVT_CALL(ResetFromLava, EVT_ADDR(N(lavaResetList_8024369C)))
+        EVT_CALL(ResetFromLava, EVT_PTR(N(lavaResetList_8024369C)))
     EVT_END_THREAD
     EVT_CALL(EnableTexPanning, 30, 1)
     EVT_CALL(EnableTexPanning, 32, 1)
@@ -212,7 +212,7 @@ EvtScript N(main) = {
     EVT_END_THREAD
     EVT_CALL(ModifyColliderFlags, 0, 1, 0x7FFFFE00)
     EVT_CALL(ModifyColliderFlags, 0, 5, 0x7FFFFE00)
-    EVT_SET(LocalVar(0), EVT_ADDR(N(80243654)))
+    EVT_SET(LocalVar(0), EVT_PTR(N(80243654)))
     EVT_EXEC(EnterWalk)
     EVT_EXEC_WAIT(N(80243280))
     EVT_IF_GE(GB_StoryProgress, 53)
@@ -335,7 +335,7 @@ EvtScript N(npcAI_80244454) = {
     EVT_CALL(SetSelfVar, 5, -650)
     EVT_CALL(SetSelfVar, 6, 30)
     EVT_CALL(SetSelfVar, 1, 400)
-    EVT_CALL(N(LakituAI_Main), EVT_ADDR(N(npcAISettings_80244424)))
+    EVT_CALL(N(LakituAI_Main), EVT_PTR(N(npcAISettings_80244424)))
     EVT_RETURN
     EVT_END
 };
@@ -367,7 +367,7 @@ EvtScript N(npcAI_80244520) = {
     EVT_CALL(SetSelfVar, 3, 18)
     EVT_CALL(SetSelfVar, 5, 3)
     EVT_CALL(SetSelfVar, 7, 4)
-    EVT_CALL(N(SpinyAI_Main), EVT_ADDR(N(npcAISettings_802444F0)))
+    EVT_CALL(N(SpinyAI_Main), EVT_PTR(N(npcAISettings_802444F0)))
     EVT_RETURN
     EVT_END
 };
@@ -631,7 +631,7 @@ static s32 N(pad_527C) = {
 };
 
 EvtScript N(makeEntities) = {
-    EVT_CALL(MakeEntity, EVT_ADDR(Entity_HiddenYellowBlock), 660, 60, -115, 0, 130, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, EVT_PTR(Entity_HiddenYellowBlock), 660, 60, -115, 0, 130, MAKE_ENTITY_END)
     EVT_CALL(AssignBlockFlag, GF_FLO17_HiddenItem_ThunderRage)
     EVT_CALL(MakeItemEntity, ITEM_LETTER09, -245, 0, 105, 17, GF_FLO17_Item_Letter09)
     EVT_RETURN

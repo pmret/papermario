@@ -15,7 +15,7 @@
 #define EVT_SETUP_SUPER_BLOCK(mapVar,gameFlag) \
     EVT_SET(mapVar, LocalVar(0))\
     EVT_CALL(AssignBlockFlag, gameFlag)\
-    EVT_CALL(AssignScript, EVT_ADDR(N(SuperBlock_OnHit)))
+    EVT_CALL(AssignScript, EVT_PTR(N(SuperBlock_OnHit)))
 
 s32 N(SuperBlock_CantUpgradeMessages)[2] = {
     MESSAGE_ID(0x1D,0xF0), MESSAGE_ID(0x1D,0xF1)

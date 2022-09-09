@@ -199,11 +199,11 @@ EvtScript N(setSpearStance) = {
         EVT_CASE_EQ(2)
         EVT_CASE_EQ(0)
             EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 2, EVT_ADDR(N(idleAnimations_802185C0)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 2, EVT_PTR(N(idleAnimations_802185C0)))
             EVT_CALL(SetPartEventFlags, -127, 2, 65536)
         EVT_CASE_EQ(1)
             EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 2, EVT_ADDR(N(idleAnimations_8021860C)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 2, EVT_PTR(N(idleAnimations_8021860C)))
             EVT_CALL(SetPartEventFlags, -127, 2, 16)
     EVT_END_SWITCH
     EVT_RETURN
@@ -221,9 +221,9 @@ EvtScript N(init_80218980) = {
             EVT_CALL(SetPartEventFlags, -127, 2, 16)
             EVT_CALL(SetAnimation, ACTOR_SELF, 2, NPC_ANIM_jungle_guy_Palette_00_Anim_3)
     EVT_END_SWITCH
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_8021BCB4)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_80218E3C)))
-    EVT_CALL(BindNextTurn, ACTOR_SELF, EVT_ADDR(N(nextTurn_80218B24)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_8021BCB4)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80218E3C)))
+    EVT_CALL(BindNextTurn, ACTOR_SELF, EVT_PTR(N(nextTurn_80218B24)))
     EVT_CALL(SetActorVar, ACTOR_SELF, 1, 0)
     EVT_CALL(GetEncounterState, LocalVar(0))
     EVT_SWITCH(LocalVar(0))
@@ -231,7 +231,7 @@ EvtScript N(init_80218980) = {
         EVT_CASE_OR_EQ(4)
         EVT_CASE_OR_EQ(6)
             EVT_CALL(SetPartEventBits, ACTOR_SELF, 2, ACTOR_EVENT_FLAG_SPIKY_FRONT, 0)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 2, EVT_ADDR(N(idleAnimations_8021860C)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 2, EVT_PTR(N(idleAnimations_8021860C)))
             EVT_CALL(SetAnimation, ACTOR_SELF, 2, NPC_ANIM_jungle_guy_Palette_00_Anim_3)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
@@ -241,7 +241,7 @@ EvtScript N(init_80218980) = {
 
 EvtScript N(nextTurn_80218B24) = {
     EVT_CALL(BindNextTurn, ACTOR_SELF, 0)
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_80218BE0)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_80218BE0)))
     EVT_RETURN
     EVT_END
 };
@@ -266,16 +266,16 @@ EvtScript N(idle_80218BE0) = {
         EVT_CASE_EQ(0)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LocalVar(0))
             EVT_IF_FLAG(LocalVar(0), STATUS_FLAG_SLEEP | STATUS_FLAG_FEAR | STATUS_FLAG_DIZZY)
-                EVT_CALL(SetIdleAnimations, ACTOR_SELF, 2, EVT_ADDR(N(idleAnimations_8021860C)))
+                EVT_CALL(SetIdleAnimations, ACTOR_SELF, 2, EVT_PTR(N(idleAnimations_8021860C)))
                 EVT_CALL(SetPartEventBits, ACTOR_SELF, 2, ACTOR_EVENT_FLAG_SPIKY_TOP, 1)
                 EVT_CALL(SetPartEventBits, ACTOR_SELF, 2, ACTOR_EVENT_FLAG_SPIKY_FRONT, 0)
             EVT_ELSE
-                EVT_CALL(SetIdleAnimations, ACTOR_SELF, 2, EVT_ADDR(N(idleAnimations_802185C0)))
+                EVT_CALL(SetIdleAnimations, ACTOR_SELF, 2, EVT_PTR(N(idleAnimations_802185C0)))
                 EVT_CALL(SetPartEventBits, ACTOR_SELF, 2, ACTOR_EVENT_FLAG_SPIKY_TOP, 0)
                 EVT_CALL(SetPartEventBits, ACTOR_SELF, 2, ACTOR_EVENT_FLAG_SPIKY_FRONT, 1)
             EVT_END_IF
         EVT_CASE_EQ(1)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 2, EVT_ADDR(N(idleAnimations_8021860C)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 2, EVT_PTR(N(idleAnimations_8021860C)))
             EVT_CALL(SetPartEventBits, ACTOR_SELF, 2, ACTOR_EVENT_FLAG_SPIKY_TOP, 1)
             EVT_CALL(SetPartEventBits, ACTOR_SELF, 2, ACTOR_EVENT_FLAG_SPIKY_FRONT, 0)
     EVT_END_SWITCH
@@ -648,7 +648,7 @@ EvtScript N(summonBackup) = {
             EVT_CALL(GetActorVar, LocalVar(1), 0, LocalVar(4))
             EVT_IF_EQ(LocalVar(4), 0)
                 EVT_CALL(SetActorVar, LocalVar(1), 0, 1)
-                EVT_CALL(SetIdleAnimations, LocalVar(1), 2, EVT_ADDR(N(idleAnimations_8021860C)))
+                EVT_CALL(SetIdleAnimations, LocalVar(1), 2, EVT_PTR(N(idleAnimations_8021860C)))
                 EVT_CALL(SetPartEventFlags, LocalVar(1), 2, 16)
                 EVT_CALL(SetAnimation, LocalVar(1), 2, NPC_ANIM_jungle_guy_Palette_00_Anim_3)
             EVT_END_IF
@@ -672,9 +672,9 @@ EvtScript N(summonBackup) = {
         EVT_GOTO(1)
     EVT_END_IF
     EVT_IF_EQ(LocalFlag(0), 0)
-        EVT_CALL(SummonEnemy, EVT_ADDR(N(specialFormation_8021A8C0)), 0)
+        EVT_CALL(SummonEnemy, EVT_PTR(N(specialFormation_8021A8C0)), 0)
     EVT_ELSE
-        EVT_CALL(SummonEnemy, EVT_ADDR(N(specialFormation_8021A8DC)), 0)
+        EVT_CALL(SummonEnemy, EVT_PTR(N(specialFormation_8021A8DC)), 0)
     EVT_END_IF
     EVT_SET(LVarB, LocalVar(0))
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
@@ -779,7 +779,7 @@ EvtScript N(becomeShyGuy) = {
     EVT_EXEC_WAIT(N(8021BF8C))
     EVT_CALL(SetActorType, ACTOR_SELF, ACTOR_TYPE_SHY_GUY)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_1000, 1)
-    EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_ADDR(N(statusTable_80218744)))
+    EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(statusTable_80218744)))
     EVT_CALL(HPBarToHome, ACTOR_SELF)
     EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
     EVT_RETURN
@@ -1104,9 +1104,9 @@ s32 N(idleAnimations_8021BF40)[] = {
 };
 
 EvtScript N(8021BF8C) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_8021D8D8)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_8021BFD8)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_8021C14C)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_8021D8D8)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_8021BFD8)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8021C14C)))
     EVT_RETURN
     EVT_END
 };

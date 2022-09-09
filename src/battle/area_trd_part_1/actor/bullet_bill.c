@@ -90,9 +90,9 @@ extern EvtScript N(idle_80219380);
 extern EvtScript N(handleEvent_802193E8);
 
 EvtScript N(init_80219088) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_802197C0)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_80219380)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_802193E8)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_802197C0)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_80219380)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_802193E8)))
     EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
     EVT_IF_EQ(LVar0, 0)
         EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)

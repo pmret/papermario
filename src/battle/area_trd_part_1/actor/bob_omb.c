@@ -132,9 +132,9 @@ extern EvtScript N(idle_8021A7D4);
 extern EvtScript N(handleEvent_8021ACE8);
 
 EvtScript N(init_8021A758) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_8021C89C)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_8021A7D4)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_8021ACE8)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_8021C89C)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_8021A7D4)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8021ACE8)))
     EVT_CALL(SetActorVar, ACTOR_SELF, 8, 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
     EVT_RETURN
@@ -155,10 +155,10 @@ EvtScript N(ignite) = {
     EVT_END_IF
     EVT_LABEL(0)
     EVT_CALL(SetActorVar, ACTOR_SELF, 8, 1)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_8021A55C)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_8021B4A8)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8021A55C)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8021B4A8)))
     EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_8000, 1)
-    EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_ADDR(N(statusTable_8021A660)))
+    EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(statusTable_8021A660)))
     EVT_CALL(PlayLoopingSoundAtActor, ACTOR_SELF, 0, 0x80000001)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_bob_omb_Palette_00_Anim_5)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -175,11 +175,11 @@ EvtScript N(ignite) = {
 };
 
 EvtScript N(8021A9C8) = {
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_8021ACE8)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8021ACE8)))
     EVT_CALL(SetActorVar, ACTOR_SELF, 8, 0)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_8021A510)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8021A510)))
     EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_8000, 0)
-    EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_ADDR(N(statusTable_8021A5B4)))
+    EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(statusTable_8021A5B4)))
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar2, 2)
     EVT_CALL(PlayEffect, EFFECT_LANDING_DUST, 3, LVar0, LVar1, LVar2, 0, 0, 0, 0, 0, 0, 0, 0, 0)

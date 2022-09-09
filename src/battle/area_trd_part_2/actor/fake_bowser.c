@@ -240,10 +240,10 @@ s32 N(D_8021A8FC_48BAEC)[] = {
 };
 
 EvtScript N(init_8021A968) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_8021EC98)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_8021D508)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_8021E6F0)))
-    EVT_CALL(BindNextTurn, ACTOR_SELF, EVT_ADDR(N(nextTurn_8021F410)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_8021EC98)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_8021D508)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8021E6F0)))
+    EVT_CALL(BindNextTurn, ACTOR_SELF, EVT_PTR(N(nextTurn_8021F410)))
     EVT_USE_ARRAY(D_80235FC0)
     EVT_CALL(SetActorVar, ACTOR_ENEMY4, 0, 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, 1, 0)
@@ -289,7 +289,7 @@ s32 N(D_8021AAC4_48BCB4)[] = {
 
 EvtScript N(8021ABE4) = {
     EVT_USE_ARRAY(D_80235FC0)
-    EVT_USE_FBUF(EVT_ADDR(N(D_8021AAC4_48BCB4)))
+    EVT_USE_FBUF(EVT_PTR(N(D_8021AAC4_48BCB4)))
     EVT_LABEL(0)
     EVT_SET(LocalVar(0), ArrayVar(0))
     EVT_IF_NE(LocalVar(0), 1)
@@ -297,7 +297,7 @@ EvtScript N(8021ABE4) = {
     EVT_END_IF
     EVT_FBUF_READ3(LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_IF_EQ(LocalVar(0), 255)
-        EVT_USE_FBUF(EVT_ADDR(N(D_8021AAC4_48BCB4)))
+        EVT_USE_FBUF(EVT_PTR(N(D_8021AAC4_48BCB4)))
         EVT_FBUF_READ3(LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_END_IF
     EVT_CALL(SetPartRotation, ACTOR_SELF, 5, LocalVar(0), LocalVar(1), LocalVar(2))
@@ -325,7 +325,7 @@ s32 N(D_8021ACCC_48BEBC)[] = {
 
 EvtScript N(8021AD68) = {
     EVT_USE_ARRAY(D_80235FC0)
-    EVT_USE_FBUF(EVT_ADDR(N(D_8021ACCC_48BEBC)))
+    EVT_USE_FBUF(EVT_PTR(N(D_8021ACCC_48BEBC)))
     EVT_LABEL(0)
     EVT_SET(LocalVar(0), ArrayVar(0))
     EVT_IF_NE(LocalVar(0), 5)
@@ -333,7 +333,7 @@ EvtScript N(8021AD68) = {
     EVT_END_IF
     EVT_FBUF_READ3(LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_IF_EQ(LocalVar(0), 255)
-        EVT_USE_FBUF(EVT_ADDR(N(D_8021ACCC_48BEBC)))
+        EVT_USE_FBUF(EVT_PTR(N(D_8021ACCC_48BEBC)))
         EVT_FBUF_READ3(LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_END_IF
     EVT_CALL(SetPartRotation, ACTOR_SELF, 5, LocalVar(0), LocalVar(1), LocalVar(2))
@@ -372,7 +372,7 @@ s32 N(D_8021AE50_48C040)[] = {
 
 EvtScript N(8021AF70) = {
     EVT_USE_ARRAY(D_80235FC0)
-    EVT_USE_FBUF(EVT_ADDR(N(D_8021AE50_48C040)))
+    EVT_USE_FBUF(EVT_PTR(N(D_8021AE50_48C040)))
     EVT_LABEL(0)
     EVT_SET(LocalVar(0), ArrayVar(0))
     EVT_IF_NE(LocalVar(0), 3)
@@ -380,7 +380,7 @@ EvtScript N(8021AF70) = {
     EVT_END_IF
     EVT_FBUF_READ3(LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_IF_EQ(LocalVar(0), 255)
-        EVT_USE_FBUF(EVT_ADDR(N(D_8021AE50_48C040)))
+        EVT_USE_FBUF(EVT_PTR(N(D_8021AE50_48C040)))
         EVT_FBUF_READ3(LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_END_IF
     EVT_CALL(RandInt, 100, LVarA)
@@ -507,7 +507,7 @@ s32 N(intTable_8021B5D0)[] = {
 
 EvtScript N(8021B6F0) = {
     EVT_USE_ARRAY(D_80235FC0)
-    EVT_USE_BUF(EVT_ADDR(N(intTable_8021B5D0)))
+    EVT_USE_BUF(EVT_PTR(N(intTable_8021B5D0)))
     EVT_LABEL(0)
     EVT_SET(LocalVar(0), ArrayVar(0))
     EVT_IF_NE(LocalVar(0), 1)
@@ -515,7 +515,7 @@ EvtScript N(8021B6F0) = {
     EVT_END_IF
     EVT_BUF_READ3(LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_IF_EQ(LocalVar(0), 255)
-        EVT_USE_BUF(EVT_ADDR(N(intTable_8021B5D0)))
+        EVT_USE_BUF(EVT_PTR(N(intTable_8021B5D0)))
         EVT_BUF_READ3(LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_END_IF
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, LocalVar(0), LocalVar(1), LocalVar(2))
@@ -542,7 +542,7 @@ s32 N(intTable_8021B7D4)[] = {
 
 EvtScript N(8021B864) = {
     EVT_USE_ARRAY(D_80235FC0)
-    EVT_USE_BUF(EVT_ADDR(N(intTable_8021B7D4)))
+    EVT_USE_BUF(EVT_PTR(N(intTable_8021B7D4)))
     EVT_LABEL(0)
     EVT_SET(LocalVar(0), ArrayVar(0))
     EVT_IF_NE(LocalVar(0), 5)
@@ -550,7 +550,7 @@ EvtScript N(8021B864) = {
     EVT_END_IF
     EVT_BUF_READ3(LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_IF_EQ(LocalVar(0), 255)
-        EVT_USE_BUF(EVT_ADDR(N(intTable_8021B7D4)))
+        EVT_USE_BUF(EVT_PTR(N(intTable_8021B7D4)))
         EVT_BUF_READ3(LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_END_IF
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, LocalVar(0), LocalVar(1), LocalVar(2))
@@ -589,7 +589,7 @@ s32 N(intTable_8021B948)[] = {
 
 EvtScript N(8021BA68) = {
     EVT_USE_ARRAY(D_80235FC0)
-    EVT_USE_BUF(EVT_ADDR(N(intTable_8021B948)))
+    EVT_USE_BUF(EVT_PTR(N(intTable_8021B948)))
     EVT_LABEL(0)
     EVT_SET(LocalVar(0), ArrayVar(0))
     EVT_SWITCH(LocalVar(0))
@@ -600,7 +600,7 @@ EvtScript N(8021BA68) = {
     EVT_END_SWITCH
     EVT_BUF_READ3(LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_IF_EQ(LocalVar(0), 255)
-        EVT_USE_BUF(EVT_ADDR(N(intTable_8021B948)))
+        EVT_USE_BUF(EVT_PTR(N(intTable_8021B948)))
         EVT_BUF_READ3(LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_END_IF
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, LocalVar(0), LocalVar(1), LocalVar(2))
@@ -639,7 +639,7 @@ s32 N(intTable_8021BB68)[] = {
 
 EvtScript N(8021BC88) = {
     EVT_USE_ARRAY(D_80235FC0)
-    EVT_USE_BUF(EVT_ADDR(N(intTable_8021BB68)))
+    EVT_USE_BUF(EVT_PTR(N(intTable_8021BB68)))
     EVT_LABEL(0)
     EVT_SET(LocalVar(0), ArrayVar(0))
     EVT_IF_NE(LocalVar(0), 3)
@@ -647,7 +647,7 @@ EvtScript N(8021BC88) = {
     EVT_END_IF
     EVT_BUF_READ3(LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_IF_EQ(LocalVar(0), 255)
-        EVT_USE_BUF(EVT_ADDR(N(intTable_8021BB68)))
+        EVT_USE_BUF(EVT_PTR(N(intTable_8021BB68)))
         EVT_BUF_READ3(LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_END_IF
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, LocalVar(0), LocalVar(1), LocalVar(2))
@@ -739,7 +739,7 @@ s32 N(intTable_8021C0CC)[] = {
 
 EvtScript N(8021C1EC) = {
     EVT_USE_ARRAY(D_80235FC0)
-    EVT_USE_BUF(EVT_ADDR(N(intTable_8021C0CC)))
+    EVT_USE_BUF(EVT_PTR(N(intTable_8021C0CC)))
     EVT_LABEL(0)
     EVT_SET(LocalVar(0), ArrayVar(0))
     EVT_IF_NE(LocalVar(0), 1)
@@ -747,7 +747,7 @@ EvtScript N(8021C1EC) = {
     EVT_END_IF
     EVT_BUF_READ3(LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_IF_EQ(LocalVar(0), 255)
-        EVT_USE_BUF(EVT_ADDR(N(intTable_8021C0CC)))
+        EVT_USE_BUF(EVT_PTR(N(intTable_8021C0CC)))
         EVT_BUF_READ3(LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_END_IF
     EVT_CALL(SetPartPos, ACTOR_SELF, 10, LocalVar(0), LocalVar(1), LocalVar(2))
@@ -786,7 +786,7 @@ s32 N(intTable_8021C2D4)[] = {
 
 EvtScript N(8021C3F4) = {
     EVT_USE_ARRAY(D_80235FC0)
-    EVT_USE_BUF(EVT_ADDR(N(intTable_8021C2D4)))
+    EVT_USE_BUF(EVT_PTR(N(intTable_8021C2D4)))
     EVT_LABEL(0)
     EVT_SET(LocalVar(0), ArrayVar(0))
     EVT_SWITCH(LocalVar(0))
@@ -797,7 +797,7 @@ EvtScript N(8021C3F4) = {
     EVT_END_SWITCH
     EVT_BUF_READ3(LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_IF_EQ(LocalVar(0), 255)
-        EVT_USE_BUF(EVT_ADDR(N(intTable_8021C2D4)))
+        EVT_USE_BUF(EVT_PTR(N(intTable_8021C2D4)))
         EVT_BUF_READ3(LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_END_IF
     EVT_CALL(SetPartPos, ACTOR_SELF, 10, LocalVar(0), LocalVar(1), LocalVar(2))
@@ -825,7 +825,7 @@ s32 N(intTable_8021C4F8)[] = {
 
 EvtScript N(8021C594) = {
     EVT_USE_ARRAY(D_80235FC0)
-    EVT_USE_BUF(EVT_ADDR(N(intTable_8021C4F8)))
+    EVT_USE_BUF(EVT_PTR(N(intTable_8021C4F8)))
     EVT_LABEL(0)
     EVT_SET(LocalVar(0), ArrayVar(0))
     EVT_IF_NE(LocalVar(0), 5)
@@ -833,7 +833,7 @@ EvtScript N(8021C594) = {
     EVT_END_IF
     EVT_BUF_READ3(LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_IF_EQ(LocalVar(0), 255)
-        EVT_USE_BUF(EVT_ADDR(N(intTable_8021C4F8)))
+        EVT_USE_BUF(EVT_PTR(N(intTable_8021C4F8)))
         EVT_BUF_READ3(LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_END_IF
     EVT_CALL(SetPartPos, ACTOR_SELF, 10, LocalVar(0), LocalVar(1), LocalVar(2))
@@ -908,7 +908,7 @@ s32 N(D_8021C7F4_48D9E4)[] = {
 
 EvtScript N(8021C9A4) = {
     EVT_USE_ARRAY(D_80235FC0)
-    EVT_USE_FBUF(EVT_ADDR(N(D_8021C7F4_48D9E4)))
+    EVT_USE_FBUF(EVT_PTR(N(D_8021C7F4_48D9E4)))
     EVT_SET(LVarF, 0)
     EVT_LABEL(0)
     EVT_SET(LocalVar(0), ArrayVar(0))
@@ -1013,7 +1013,7 @@ s32 N(D_8021CE68_48E058)[] = {
 
 EvtScript N(8021CF4C) = {
     EVT_USE_ARRAY(D_80235FC0)
-    EVT_USE_FBUF(EVT_ADDR(N(D_8021CE68_48E058)))
+    EVT_USE_FBUF(EVT_PTR(N(D_8021CE68_48E058)))
     EVT_LABEL(0)
     EVT_SET(LocalVar(0), ArrayVar(0))
     EVT_IF_NE(LocalVar(0), 5)
@@ -1021,7 +1021,7 @@ EvtScript N(8021CF4C) = {
     EVT_END_IF
     EVT_FBUF_READ3(LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_IF_EQ(LocalVar(0), 255)
-        EVT_USE_FBUF(EVT_ADDR(N(D_8021CE68_48E058)))
+        EVT_USE_FBUF(EVT_PTR(N(D_8021CE68_48E058)))
         EVT_FBUF_READ3(LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_END_IF
     EVT_CALL(SetPartRotation, ACTOR_SELF, 8, LocalVar(0), LocalVar(1), LocalVar(2))
@@ -1353,13 +1353,13 @@ EvtScript N(handleEvent_8021E6F0) = {
         EVT_CASE_OR_EQ(EVENT_BURN_DEATH)
             EVT_CALL(func_8027D32C, ACTOR_SELF)
             EVT_IF_EQ(LocalVar(0), EVENT_BURN_DEATH)
-                EVT_CALL(N(UnkFunc27), 0, EVT_ADDR(N(D_8021A8FC_48BAEC)), 3)
+                EVT_CALL(N(UnkFunc27), 0, EVT_PTR(N(D_8021A8FC_48BAEC)), 3)
                 EVT_CALL(N(UnkFunc26), 3, 35, 35, 35, 0, 0, 0, 0, 0, 0)
             EVT_END_IF
             EVT_SET(ArrayVar(0), 2)
             EVT_WAIT(20)
             EVT_IF_EQ(LocalVar(0), EVENT_BURN_DEATH)
-                EVT_CALL(N(UnkFunc27), 0, EVT_ADDR(N(D_8021A8FC_48BAEC)), 0)
+                EVT_CALL(N(UnkFunc27), 0, EVT_PTR(N(D_8021A8FC_48BAEC)), 0)
                 EVT_CALL(GetActorPos, ACTOR_SELF, LocalVar(0), LocalVar(1), LocalVar(2))
                 EVT_CALL(GetActorSize, ACTOR_SELF, LocalVar(3), LocalVar(4))
                 EVT_DIVF(LocalVar(3), EVT_FLOAT(2.0))
@@ -1387,12 +1387,12 @@ EvtScript N(handleEvent_8021E6F0) = {
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(EVENT_BURN_CONTACT)
         EVT_CASE_OR_EQ(EVENT_BURN_HIT)
-            EVT_CALL(N(UnkFunc27), 0, EVT_ADDR(N(D_8021A8FC_48BAEC)), 3)
+            EVT_CALL(N(UnkFunc27), 0, EVT_PTR(N(D_8021A8FC_48BAEC)), 3)
             EVT_CALL(N(UnkFunc26), 3, 35, 35, 35, 0, 0, 0, 0, 0, 0)
             EVT_SET(ArrayVar(0), 2)
             EVT_WAIT(20)
             EVT_SET(ArrayVar(0), 0)
-            EVT_CALL(N(UnkFunc27), 0, EVT_ADDR(N(D_8021A8FC_48BAEC)), 0)
+            EVT_CALL(N(UnkFunc27), 0, EVT_PTR(N(D_8021A8FC_48BAEC)), 0)
             EVT_CALL(GetActorPos, ACTOR_SELF, LocalVar(0), LocalVar(1), LocalVar(2))
             EVT_CALL(GetActorSize, ACTOR_SELF, LocalVar(3), LocalVar(4))
             EVT_DIVF(LocalVar(3), EVT_FLOAT(2.0))
@@ -1733,10 +1733,10 @@ EvtScript N(8021F630) = {
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, 2, ACTOR_PART_FLAG_NO_TARGET, 1)
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, 1, ACTOR_PART_FLAG_MULTI_TARGET, 0)
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, 2, ACTOR_PART_FLAG_MULTI_TARGET, 1)
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_80224D84)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_802239BC)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_802242FC)))
-    EVT_CALL(BindNextTurn, ACTOR_SELF, EVT_ADDR(N(nextTurn_80225438)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_80224D84)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_802239BC)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_802242FC)))
+    EVT_CALL(BindNextTurn, ACTOR_SELF, EVT_PTR(N(nextTurn_80225438)))
     EVT_CALL(SetActorFlagBits, ACTOR_ENEMY0, ACTOR_FLAG_40000, 0)
     EVT_CALL(SetPartFlagBits, ACTOR_ENEMY0, 1, ACTOR_PART_FLAG_NO_TARGET, 0)
     EVT_CALL(HPBarToHome, ACTOR_ENEMY0)

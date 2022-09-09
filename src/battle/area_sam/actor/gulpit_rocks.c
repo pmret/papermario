@@ -91,18 +91,18 @@ ActorBlueprint NAMESPACE = {
 };
 
 EvtScript N(init) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent)))
     EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations)))
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_gulpit_Palette_00_Anim_10)
             EVT_CALL(GetActorVar, ACTOR_SELF, 0, 0)
             EVT_CALL(SetActorSize, ACTOR_SELF, 24, 15)
         EVT_CASE_EQ(1)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations2)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations2)))
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_gulpit_Palette_00_Anim_12)
             EVT_CALL(GetActorVar, ACTOR_SELF, 0, 1)
             EVT_CALL(SetActorSize, ACTOR_SELF, 10, 8)

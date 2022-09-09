@@ -105,8 +105,8 @@ EvtScript N(makeEntities) = {
     EVT_CALL(MakeItemEntity, ITEM_MEGA_SMASH, -61, 60, -85, 17, GF_FLO13_Item_MegaSmash)
     EVT_CALL(MakeItemEntity, ITEM_SHOOTING_STAR, 128, 0, 157, 17, GF_FLO13_Item_ShootingStar)
     EVT_IF_EQ(GF_FLO13_Item_MegaSmash, 0)
-        EVT_CALL(MakeEntity, EVT_ADDR(Entity_BombableRock), -160, 160, -90, 0, MAKE_ENTITY_END)
-        EVT_CALL(AssignScript, EVT_ADDR(N(80243950)))
+        EVT_CALL(MakeEntity, EVT_PTR(Entity_BombableRock), -160, 160, -90, 0, MAKE_ENTITY_END)
+        EVT_CALL(AssignScript, EVT_PTR(N(80243950)))
     EVT_ELSE
         EVT_CALL(ModifyColliderFlags, 0, 14, 0x7FFFFE00)
     EVT_END_IF
@@ -177,7 +177,7 @@ EvtScript N(main) = {
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
     EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
     EVT_CALL(SetCamEnabled, 0, 1)
-    EVT_CALL(MakeNpcs, 0, EVT_ADDR(N(npcGroupList_80247984)))
+    EVT_CALL(MakeNpcs, 0, EVT_PTR(N(npcGroupList_80247984)))
     EVT_EXEC_WAIT(N(makeEntities))
     EVT_CALL(ModifyColliderFlags, 3, 13, 0x00000006)
     EVT_SET(LocalVar(0), 274)
@@ -212,7 +212,7 @@ EvtScript N(main) = {
     EVT_EXEC(N(80243A40))
     EVT_CALL(ModifyColliderFlags, 0, 1, 0x7FFFFE00)
     EVT_CALL(ModifyColliderFlags, 0, 5, 0x7FFFFE00)
-    EVT_SET(LocalVar(0), EVT_ADDR(N(80243DA4)))
+    EVT_SET(LocalVar(0), EVT_PTR(N(80243DA4)))
     EVT_EXEC(EnterWalk)
     EVT_EXEC_WAIT(N(802438B0))
     EVT_IF_GE(GB_StoryProgress, 53)
@@ -255,7 +255,7 @@ EvtScript N(npcAI_80244174) = {
     EVT_CALL(SetSelfVar, 5, -650)
     EVT_CALL(SetSelfVar, 6, 30)
     EVT_CALL(SetSelfVar, 1, 400)
-    EVT_CALL(N(LakituAI_Main), EVT_ADDR(N(npcAISettings_80244144)))
+    EVT_CALL(N(LakituAI_Main), EVT_PTR(N(npcAISettings_80244144)))
     EVT_RETURN
     EVT_END
 };
@@ -287,7 +287,7 @@ EvtScript N(npcAI_80244240) = {
     EVT_CALL(SetSelfVar, 3, 18)
     EVT_CALL(SetSelfVar, 5, 3)
     EVT_CALL(SetSelfVar, 7, 4)
-    EVT_CALL(N(SpinyAI_Main), EVT_ADDR(N(npcAISettings_80244210)))
+    EVT_CALL(N(SpinyAI_Main), EVT_PTR(N(npcAISettings_80244210)))
     EVT_RETURN
     EVT_END
 };
@@ -489,7 +489,7 @@ EvtScript N(idle_80244BF8) = {
         EVT_CALL(N(func_802434D4_CC6CE4))
     EVT_END_THREAD
     EVT_EXEC_GET_TID(N(8024445C), LocalVar(9))
-    EVT_CALL(LoadPath, 80, EVT_ADDR(N(vectorList_802443A8)), 5, 0)
+    EVT_CALL(LoadPath, 80, EVT_PTR(N(vectorList_802443A8)), 5, 0)
     EVT_LABEL(0)
     EVT_CALL(GetNextPathPos)
     EVT_CALL(SetNpcPos, 0, LocalVar(1), LocalVar(2), LocalVar(3))
@@ -558,7 +558,7 @@ EvtScript N(80245014) = {
     EVT_END_THREAD
     EVT_CALL(SetNpcFlagBits, 1, ((NPC_FLAG_100)), TRUE)
     EVT_EXEC_GET_TID(N(80244560), LocalVar(9))
-    EVT_CALL(LoadPath, 55, EVT_ADDR(N(vectorList_80244420)), 5, 0)
+    EVT_CALL(LoadPath, 55, EVT_PTR(N(vectorList_80244420)), 5, 0)
     EVT_LABEL(20)
     EVT_CALL(GetNextPathPos)
     EVT_CALL(SetNpcPos, 1, LocalVar(1), LocalVar(2), LocalVar(3))
@@ -624,7 +624,7 @@ EvtScript N(80245444) = {
         EVT_CALL(N(func_802433C0_CC6BD0), 80)
     EVT_END_THREAD
     EVT_EXEC_GET_TID(N(80244560), LocalVar(9))
-    EVT_CALL(LoadPath, 80, EVT_ADDR(N(vectorList_802443E4)), 5, 0)
+    EVT_CALL(LoadPath, 80, EVT_PTR(N(vectorList_802443E4)), 5, 0)
     EVT_LABEL(0)
     EVT_CALL(GetNextPathPos)
     EVT_CALL(SetNpcPos, 1, LocalVar(1), LocalVar(2), LocalVar(3))
@@ -791,8 +791,8 @@ EvtScript N(interact_802461C0) = {
 
 EvtScript N(init_80246280) = {
     EVT_IF_LT(GB_StoryProgress, 51)
-        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_ADDR(N(idle_80244BF8)))
-        EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_ADDR(N(defeat_80246038)))
+        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80244BF8)))
+        EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(defeat_80246038)))
     EVT_END_IF
     EVT_RETURN
     EVT_END
@@ -800,7 +800,7 @@ EvtScript N(init_80246280) = {
 
 EvtScript N(init_802462D0) = {
     EVT_IF_LT(GB_StoryProgress, 58)
-        EVT_CALL(BindNpcInteract, NPC_SELF, EVT_ADDR(N(interact_802461C0)))
+        EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_802461C0)))
         EVT_CALL(SetNpcCollisionSize, -1, 36, 28)
         EVT_IF_GE(GB_StoryProgress, 53)
             EVT_CALL(SetNpcPos, NPC_SELF, -50, 180, -50)

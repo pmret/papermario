@@ -126,7 +126,7 @@ EvtScript N(main) = {
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
     EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
     EVT_CALL(SetCamEnabled, 0, 1)
-    EVT_CALL(MakeNpcs, 0, EVT_ADDR(N(npcGroupList_80244054)))
+    EVT_CALL(MakeNpcs, 0, EVT_PTR(N(npcGroupList_80244054)))
     EVT_EXEC_WAIT(N(80241630))
     EVT_EXEC(flo_10_80244A50)
     EVT_EXEC(flo_10_802435F8)
@@ -161,7 +161,7 @@ EvtScript N(main) = {
             EVT_EXEC(N(80241988))
         EVT_CASE_DEFAULT
             EVT_CALL(ModifyColliderFlags, 0, 1, 0x7FFFFE00)
-            EVT_SET(LocalVar(0), EVT_ADDR(N(80241988)))
+            EVT_SET(LocalVar(0), EVT_PTR(N(80241988)))
             EVT_EXEC(EnterWalk)
     EVT_END_SWITCH
     EVT_EXEC_WAIT(N(802414E0))
@@ -412,7 +412,7 @@ EvtScript N(802425E4) = {
     EVT_CALL(ShakeCam, 0, 0, 5, EVT_FLOAT(1.0))
     EVT_EXEC_WAIT(N(802425BC))
     EVT_WAIT(60)
-    EVT_CALL(GotoMap, EVT_ADDR(N(flo_24_name_hack)), 2)
+    EVT_CALL(GotoMap, EVT_PTR(N(flo_24_name_hack)), 2)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END
@@ -611,7 +611,7 @@ EvtScript N(8024324C) = {
     EVT_WAIT(20)
     EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_lily_Palette_00_Anim_2, NPC_ANIM_lily_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x00C6))
     EVT_WAIT(10)
-    EVT_CALL(GotoMap, EVT_ADDR("flo_12"), 1)
+    EVT_CALL(GotoMap, EVT_PTR("flo_12"), 1)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END
@@ -664,7 +664,7 @@ EvtScript N(8024339C) = {
 };
 
 EvtScript N(802435F8) = {
-    EVT_BIND_PADLOCK(N(8024339C), TRIGGER_FLOOR_TOUCH, 15, EVT_ADDR(N(itemList_80243394)), 0, 1)
+    EVT_BIND_PADLOCK(N(8024339C), TRIGGER_FLOOR_TOUCH, 15, EVT_PTR(N(itemList_80243394)), 0, 1)
     EVT_RETURN
     EVT_END
 };
@@ -776,7 +776,7 @@ EvtScript N(interact_802437C8) = {
 };
 
 EvtScript N(init_80243D78) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_ADDR(N(interact_802437C8)))
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_802437C8)))
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(48)
             EVT_IF_EQ(GF_FLO10_LilyRequestedWaterStone, 0)

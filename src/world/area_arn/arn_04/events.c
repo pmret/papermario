@@ -22,10 +22,10 @@ EvtScript N(main) = {
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
     EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
     EVT_CALL(SetCamEnabled, 0, 1)
-    EVT_CALL(MakeNpcs, 0, EVT_ADDR(N(npcGroupList_80244000)))
+    EVT_CALL(MakeNpcs, 0, EVT_PTR(N(npcGroupList_80244000)))
     EVT_EXEC_WAIT(N(makeEntities))
     EVT_EXEC(N(802433D0))
-    EVT_SET(LocalVar(0), EVT_ADDR(N(80243538)))
+    EVT_SET(LocalVar(0), EVT_PTR(N(80243538)))
     EVT_EXEC(EnterWalk)
     EVT_WAIT(1)
     EVT_RETURN
@@ -50,7 +50,7 @@ MobileAISettings N(npcAISettings_80243660) = {
 };
 
 EvtScript N(npcAI_80243690) = {
-    EVT_CALL(N(PatrolNoAttackAI_Main), EVT_ADDR(N(npcAISettings_80243660)))
+    EVT_CALL(N(PatrolNoAttackAI_Main), EVT_PTR(N(npcAISettings_80243660)))
     EVT_RETURN
     EVT_END
 };
@@ -91,7 +91,7 @@ EvtScript N(npcAI_80243724) = {
     EVT_CALL(SetSelfVar, 5, -850)
     EVT_CALL(SetSelfVar, 6, 60)
     EVT_CALL(SetSelfVar, 1, 700)
-    EVT_CALL(N(FlyingAI_Main), EVT_ADDR(N(npcAISettings_802436F4)))
+    EVT_CALL(N(FlyingAI_Main), EVT_PTR(N(npcAISettings_802436F4)))
     EVT_RETURN
     EVT_END
 };
@@ -121,7 +121,7 @@ MobileAISettings N(npcAISettings_802437C0) = {
 };
 
 EvtScript N(npcAI_802437F0) = {
-    EVT_CALL(N(CleftAI_Main), EVT_ADDR(N(npcAISettings_802437C0)), 8)
+    EVT_CALL(N(CleftAI_Main), EVT_PTR(N(npcAISettings_802437C0)), 8)
     EVT_RETURN
     EVT_END
 };
@@ -290,11 +290,11 @@ static s32 N(pad_403C)[] = {
 };
 
 EvtScript N(makeEntities) = {
-    EVT_CALL(MakeEntity, EVT_ADDR(Entity_YellowBlock), 450, 285, 120, 0, 140, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, EVT_PTR(Entity_YellowBlock), 450, 285, 120, 0, 140, MAKE_ENTITY_END)
     EVT_CALL(AssignBlockFlag, GF_ARN04_ItemBlock_SuperShroom)
-    EVT_CALL(MakeEntity, EVT_ADDR(Entity_YellowBlock), 720, 333, 75, 0, 343, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, EVT_PTR(Entity_YellowBlock), 720, 333, 75, 0, 343, MAKE_ENTITY_END)
     EVT_CALL(AssignBlockFlag, GF_ARN04_ItemBlock_Coin)
-    EVT_CALL(MakeEntity, EVT_ADDR(Entity_MulticoinBlock), 600, 290, 200, 0, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, EVT_PTR(Entity_MulticoinBlock), 600, 290, 200, 0, MAKE_ENTITY_END)
     EVT_CALL(AssignBlockFlag, GF_ARN04_MultiCoinBrick)
     EVT_CALL(MakeItemEntity, ITEM_STAR_PIECE, 540, 230, 13, 17, GF_ARN04_Item_StarPiece)
     EVT_RETURN

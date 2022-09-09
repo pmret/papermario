@@ -106,9 +106,9 @@ ActorBlueprint NAMESPACE = {
 };
 
 EvtScript N(init_80224B38) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_80226338)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_80224B9C)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_80224D10)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_80226338)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_80224B9C)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80224D10)))
     EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
     EVT_RETURN
     EVT_END
@@ -592,7 +592,7 @@ EvtScript N(randomSummon) = {
             EVT_EXEC_WAIT(N(802271A0))
     EVT_END_SWITCH
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_802249E0)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_802249E0)))
     EVT_RETURN
     EVT_END
 };
@@ -704,7 +704,7 @@ EvtScript N(80226C00) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_EXEC_WAIT(N(8022671C))
-    EVT_CALL(SummonEnemy, EVT_ADDR(N(specialFormation_802273A8)), 0)
+    EVT_CALL(SummonEnemy, EVT_PTR(N(specialFormation_802273A8)), 0)
     EVT_SET(LVarB, LVar0)
     EVT_SET(LVar0, 200)
     EVT_SET(LVar1, 0)
@@ -734,7 +734,7 @@ EvtScript N(80226DEC) = {
     EVT_EXEC_WAIT(N(8022671C))
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
-    EVT_CALL(SummonEnemy, EVT_ADDR(N(specialFormation_802273C4)), 0)
+    EVT_CALL(SummonEnemy, EVT_PTR(N(specialFormation_802273C4)), 0)
     EVT_SET(LVarB, LVar0)
     EVT_CALL(SetAnimation, LVarB, 1, NPC_ANIM_groove_guy_Palette_00_Anim_C)
     EVT_CALL(SetGoalToIndex, LVarB, LVarA)
@@ -787,7 +787,7 @@ EvtScript N(802271A0) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_EXEC_WAIT(N(8022671C))
-    EVT_CALL(SummonEnemy, EVT_ADDR(N(specialFormation_802273E0)), 0)
+    EVT_CALL(SummonEnemy, EVT_PTR(N(specialFormation_802273E0)), 0)
     EVT_SET(LVarB, LVar0)
     EVT_CALL(SetAnimation, LVarB, 1, NPC_ANIM_medi_guy_Palette_00_Anim_5)
     EVT_ADD(LVarA, 4)

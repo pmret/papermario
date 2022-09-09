@@ -332,7 +332,7 @@ EvtScript N(8022CC74) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, LVarA, 0x210027)
     EVT_WAIT(12)
     EVT_CALL(SetAnimation, ACTOR_SELF, LVarA, 0x210014)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, LVarA, EVT_ADDR(N(idleAnimations_8022CC68)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, LVarA, EVT_PTR(N(idleAnimations_8022CC68)))
     EVT_WAIT(60)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_DMG_APPLY, 1)
     EVT_RETURN
@@ -350,10 +350,10 @@ EvtScript N(init_8022CF80) = {
     EVT_CALL(SetActorVar, -127, 1, 0)
     EVT_CALL(SetActorVar, -127, 3, 1)
     EVT_CALL(SetActorVar, -127, 4, 5)
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_8022D920)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_8022D058)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_8022D1C4)))
-    EVT_CALL(BindNextTurn, -127, EVT_ADDR(N(nextTurn_8023147C)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_8022D920)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_8022D058)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8022D1C4)))
+    EVT_CALL(BindNextTurn, -127, EVT_PTR(N(nextTurn_8023147C)))
     EVT_RETURN
     EVT_END
 };
@@ -627,7 +627,7 @@ EvtScript N(8022DD48) = {
     EVT_CALL(ForceHomePos, ACTOR_SELF, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_CALL(HPBarToHome, ACTOR_SELF)
     EVT_CALL(SetActorVar, -127, 3, 2)
-    EVT_CALL(SetStatusTable, -127, EVT_ADDR(N(statusTable_8022C4E8)))
+    EVT_CALL(SetStatusTable, -127, EVT_PTR(N(statusTable_8022C4E8)))
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLYING, 1)
     EVT_RETURN
     EVT_END
@@ -658,7 +658,7 @@ EvtScript N(8022DF54) = {
     EVT_CALL(ForceHomePos, ACTOR_SELF, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_CALL(HPBarToHome, ACTOR_SELF)
     EVT_CALL(SetActorVar, -127, 3, 3)
-    EVT_CALL(SetStatusTable, -127, EVT_ADDR(N(statusTable_8022C594)))
+    EVT_CALL(SetStatusTable, -127, EVT_PTR(N(statusTable_8022C594)))
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLYING, 0)
     EVT_RETURN
     EVT_END
@@ -1522,7 +1522,7 @@ EvtScript N(802318F8) = {
             EVT_CALL(MoveBattleCamOver, 30)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20E5)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_jr_troopa_default_dead)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_8022C40C)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8022C40C)))
             EVT_WAIT(60)
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_DMG_APPLY, 1)
             EVT_RETURN

@@ -20,7 +20,7 @@ EvtScript N(802403B0) = {
     EVT_SET(LocalVar(3), -1)
     EVT_EXEC(0x80285DFC)
     EVT_WAIT(17)
-    EVT_CALL(GotoMap, EVT_ADDR("arn_07"), 0)
+    EVT_CALL(GotoMap, EVT_PTR("arn_07"), 0)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END
@@ -111,7 +111,7 @@ EvtScript N(main) = {
         EVT_SET(GF_ARN12_Defeated_Goomba, 0)
         EVT_SET(GF_ARN13_Defeated_Goomba, 0)
     EVT_END_IF
-    EVT_CALL(MakeNpcs, 0, EVT_ADDR(N(npcGroupList_80241828)))
+    EVT_CALL(MakeNpcs, 0, EVT_PTR(N(npcGroupList_80241828)))
     EVT_EXEC_WAIT(N(makeEntities))
     EVT_EXEC(N(80240BA0))
     EVT_CALL(GetDemoState, LocalVar(0))
@@ -145,7 +145,7 @@ EvtScript N(80240A70) = {
     EVT_IF_LT(GB_StoryProgress, -23)
         EVT_SET(GB_StoryProgress, -23)
     EVT_END_IF
-    EVT_CALL(GotoMap, EVT_ADDR("arn_09"), 1)
+    EVT_CALL(GotoMap, EVT_PTR("arn_09"), 1)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END
@@ -247,7 +247,7 @@ EvtScript N(80240CC0) = {
         EVT_RETURN
     EVT_END_IF
     EVT_SET(GF_DemoSceneDone, 1)
-    EVT_CALL(GotoMapSpecial, EVT_ADDR("arn_08"), 2, 2)
+    EVT_CALL(GotoMapSpecial, EVT_PTR("arn_08"), 2, 2)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END
@@ -266,7 +266,7 @@ EvtScript N(802410AC) = {
         EVT_RETURN
     EVT_END_IF
     EVT_SET(GF_DemoSceneDone, 1)
-    EVT_CALL(GotoMapSpecial, EVT_ADDR("arn_08"), 2, 3)
+    EVT_CALL(GotoMapSpecial, EVT_PTR("arn_08"), 2, 3)
     EVT_WAIT(35)
     EVT_RETURN
     EVT_END
@@ -329,7 +329,7 @@ EvtScript N(init_80241288) = {
     EVT_IF_NE(GB_StoryProgress, -18)
         EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
     EVT_ELSE
-        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_ADDR(N(idle_80241278)))
+        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80241278)))
     EVT_END_IF
     EVT_RETURN
     EVT_END
@@ -356,7 +356,7 @@ EvtScript N(init_802413E8) = {
     EVT_IF_LT(GB_StoryProgress, -12)
         EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
     EVT_ELSE
-        EVT_CALL(BindNpcInteract, NPC_SELF, EVT_ADDR(N(interact_802412E8)))
+        EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_802412E8)))
     EVT_END_IF
     EVT_RETURN
     EVT_END
@@ -439,7 +439,7 @@ static s32 N(pad_184C) = {
 
 EvtScript N(makeEntities) = {
     EVT_IF_LT(GB_StoryProgress, -23)
-        EVT_CALL(MakeEntity, EVT_ADDR(Entity_BoardedFloor), 0, 30, 0, 0, MAKE_ENTITY_END)
+        EVT_CALL(MakeEntity, EVT_PTR(Entity_BoardedFloor), 0, 30, 0, 0, MAKE_ENTITY_END)
     EVT_END_IF
     EVT_RETURN
     EVT_END

@@ -101,9 +101,9 @@ ActorBlueprint NAMESPACE = {
 
 EvtScript N(init) = {
     EVT_CALL(SetActorPos, ACTOR_SELF, 116, 70, 0)
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent)))
     EVT_RETURN
     EVT_END
 };
@@ -132,13 +132,13 @@ EvtScript N(handleEvent) = {
             EVT_CALL(GetActorVar, ACTOR_ENEMY1, 9, LVar0)
             EVT_IF_EQ(LVar0, 0)
                 EVT_CALL(func_8026E914, LVar0, LVar1)
-                EVT_CALL(PlayModelAnimation, 0, EVT_ADDR(toy_tank_as_close_hatch))
+                EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_close_hatch))
                 EVT_WAIT(30)
             EVT_END_IF
         EVT_CASE_EQ(EVENT_IMMUNE)
             EVT_CALL(GetActorVar, ACTOR_ENEMY1, 9, LVar0)
             EVT_IF_EQ(LVar0, 0)
-                EVT_CALL(PlayModelAnimation, 0, EVT_ADDR(toy_tank_as_close_hatch))
+                EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_close_hatch))
                 EVT_WAIT(30)
             EVT_END_IF
         EVT_CASE_EQ(EVENT_AIR_LIFT_FAILED)
@@ -175,7 +175,7 @@ EvtScript N(onHit) = {
 EvtScript N(shake_tank) = {
     EVT_CALL(GetActorVar, ACTOR_ENEMY1, 9, LVar0)
     EVT_IF_EQ(LVar0, 0)
-        EVT_CALL(PlayModelAnimation, 0, EVT_ADDR(toy_tank_as_close_hatch))
+        EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_close_hatch))
         EVT_WAIT(30)
     EVT_END_IF
     EVT_RETURN

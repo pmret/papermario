@@ -41,7 +41,7 @@ EvtScript N(exitDoubleDoor_80240100) = {
     EVT_SET(LocalVar(3), 22)
     EVT_EXEC(ExitDoubleDoor)
     EVT_WAIT(17)
-    EVT_CALL(GotoMap, EVT_ADDR("dgb_03"), 3)
+    EVT_CALL(GotoMap, EVT_PTR("dgb_03"), 3)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END
@@ -57,7 +57,7 @@ EvtScript N(exitDoubleDoor_802401B4) = {
     EVT_SET(LocalVar(3), 17)
     EVT_EXEC(ExitDoubleDoor)
     EVT_WAIT(17)
-    EVT_CALL(GotoMap, EVT_ADDR("dgb_15"), 0)
+    EVT_CALL(GotoMap, EVT_PTR("dgb_15"), 0)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END
@@ -109,7 +109,7 @@ static s32 N(pad_47C) = {
 };
 
 EvtScript N(makeEntities) = {
-    EVT_CALL(MakeEntity, EVT_ADDR(Entity_YellowBlock), 500, 60, 75, 0, 163, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, EVT_PTR(Entity_YellowBlock), 500, 60, 75, 0, 163, MAKE_ENTITY_END)
     EVT_CALL(AssignBlockFlag, GF_DGB14_ItemBlock_MapleSyrup)
     EVT_RETURN
     EVT_END

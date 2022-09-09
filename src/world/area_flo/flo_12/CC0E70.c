@@ -113,7 +113,7 @@ EvtScript N(main) = {
     EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
     EVT_CALL(SetCamEnabled, 0, 1)
     EVT_SET(AreaFlag(22), 0)
-    EVT_CALL(MakeNpcs, 0, EVT_ADDR(N(npcGroupList_802429B8)))
+    EVT_CALL(MakeNpcs, 0, EVT_PTR(N(npcGroupList_802429B8)))
     EVT_CALL(ModifyColliderFlags, 3, 11, 0x00000006)
     EVT_SET(LocalVar(0), -65)
     EVT_SET(LocalVar(1), -210)
@@ -138,7 +138,7 @@ EvtScript N(main) = {
         EVT_EXEC(N(802419F4))
     EVT_ELSE
         EVT_CALL(ModifyColliderFlags, 0, 1, 0x7FFFFE00)
-        EVT_SET(LocalVar(0), EVT_ADDR(N(80240B78)))
+        EVT_SET(LocalVar(0), EVT_PTR(N(80240B78)))
         EVT_EXEC(EnterWalk)
     EVT_END_IF
     EVT_EXEC_WAIT(N(80240750))
@@ -218,7 +218,7 @@ EvtScript N(80241858) = {
 
 EvtScript N(8024199C) = {
     EVT_CALL(N(func_8024064C_CC147C), LocalVar(0))
-    EVT_BIND_PADLOCK(N(80241858), 0x10, 0, EVT_ADDR(N(D_802429E0)), 0, 1)
+    EVT_BIND_PADLOCK(N(80241858), 0x10, 0, EVT_PTR(N(D_802429E0)), 0, 1)
     EVT_CALL(N(func_802405C0_CC13F0), LocalVar(0))
     EVT_RETURN
     EVT_END
@@ -244,7 +244,7 @@ EvtScript N(802419F4) = {
     EVT_WAIT(20)
     EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_2, 5, MESSAGE_ID(0x11, 0x00C7))
     EVT_WAIT(10)
-    EVT_CALL(GotoMap, EVT_ADDR("flo_03"), 2)
+    EVT_CALL(GotoMap, EVT_PTR("flo_03"), 2)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END
@@ -341,7 +341,7 @@ EvtScript N(interact_80241C8C) = {
                 EVT_CALL(SetCamProperties, 0, EVT_FLOAT(4.0), LocalVar(0), LocalVar(1), LocalVar(2), 325, EVT_FLOAT(19.0), EVT_FLOAT(-9.5))
             EVT_END_IF
             EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_2, 5, MESSAGE_ID(0x11, 0x0094))
-            EVT_SET(LocalVar(0), EVT_ADDR(N(D_802419EC_CC281C)))
+            EVT_SET(LocalVar(0), EVT_PTR(N(D_802419EC_CC281C)))
             EVT_SET(LocalVar(1), 0)
             EVT_EXEC_WAIT(N(8024199C))
             EVT_SWITCH(LocalVar(0))
@@ -379,7 +379,7 @@ EvtScript N(interact_80241C8C) = {
 };
 
 EvtScript N(init_802423D0) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_ADDR(N(interact_80241C8C)))
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_80241C8C)))
     EVT_CALL(GetNpcPos, NPC_SELF, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_ADD(LocalVar(0), 35)
     EVT_CALL(SetNpcPos, 1, LocalVar(0), LocalVar(1), LocalVar(2))

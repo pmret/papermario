@@ -104,9 +104,9 @@ extern EvtScript N(idle_80219ED0);
 extern EvtScript N(handleEvent_80219EE0);
 
 EvtScript N(init_80219E6C) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_8021A200)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_80219ED0)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_80219EE0)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_8021A200)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_80219ED0)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80219EE0)))
     EVT_CALL(SetActorVar, ACTOR_SELF, 8, 0)
     EVT_RETURN
     EVT_END
@@ -224,7 +224,7 @@ EvtScript N(8021A2BC) = {
     EVT_CALL(PlayEffect, EFFECT_00, LVar0, LVar1, LVar2, 2, 5, 2, 2, 0, 0, 0, 0, 0, 0)
     EVT_WAIT(2)
     EVT_CALL(func_80218000_4A10A0)
-    EVT_CALL(SummonEnemy, EVT_ADDR(N(specialFormation_8021A4E8)), 0)
+    EVT_CALL(SummonEnemy, EVT_PTR(N(specialFormation_8021A4E8)), 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, 0, LVar0)
     EVT_CALL(SetActorVar, ACTOR_SELF, 8, 1)
     EVT_RETURN

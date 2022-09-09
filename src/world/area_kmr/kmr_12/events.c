@@ -19,10 +19,10 @@ EvtScript N(main) = {
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
     EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
     EVT_CALL(SetCamEnabled, 0, 1)
-    EVT_CALL(MakeNpcs, 0, EVT_ADDR(N(npcGroupList)))
+    EVT_CALL(MakeNpcs, 0, EVT_PTR(N(npcGroupList)))
     EVT_EXEC_WAIT(N(MakeEntities))
     EVT_EXEC(N(PlayMusic))
-    EVT_SET(LocalVar(0), EVT_ADDR(N(BindExits)))
+    EVT_SET(LocalVar(0), EVT_PTR(N(BindExits)))
     EVT_EXEC(EnterWalk)
     EVT_WAIT(1)
     EVT_BIND_TRIGGER(N(ReadWestSign), TRIGGER_WALL_PRESS_A, 10, 1, 0)
@@ -46,7 +46,7 @@ MobileAISettings N(goombaAISettings) = {
 };
 
 EvtScript kmr_12_GoombaAI = {
-    EVT_CALL(BasicAI_Main, EVT_ADDR(N(goombaAISettings)))
+    EVT_CALL(BasicAI_Main, EVT_PTR(N(goombaAISettings)))
     EVT_RETURN
     EVT_END
 };
@@ -142,13 +142,13 @@ EvtScript N(GoombaIdle) = {
     EVT_BIND_TRIGGER(N(ReadWestSign), TRIGGER_WALL_PRESS_A, 10, 1, 0)
 
     // Behave like a normal enemy from now on
-    EVT_CALL(BindNpcAI, NPC_SELF, EVT_ADDR(N(GoombaAI)))
+    EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(GoombaAI)))
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(GoombaInit) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_ADDR(N(GoombaIdle)))
+    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(GoombaIdle)))
     EVT_RETURN
     EVT_END
 };
@@ -222,8 +222,8 @@ EvtScript N(ReadEastSign) = {
 };
 
 EvtScript N(MakeEntities) = {
-    EVT_CALL(MakeEntity, EVT_ADDR(Entity_Signpost), 436, 0, -42, 0, MAKE_ENTITY_END)
-    EVT_CALL(AssignScript, EVT_ADDR(N(ReadEastSign)))
+    EVT_CALL(MakeEntity, EVT_PTR(Entity_Signpost), 436, 0, -42, 0, MAKE_ENTITY_END)
+    EVT_CALL(AssignScript, EVT_PTR(N(ReadEastSign)))
     EVT_RETURN
     EVT_END
 };

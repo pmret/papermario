@@ -222,7 +222,7 @@ def make_anim_macro(self, sprite, palette, anim):
 
 
 def remove_evt_ptr(s):
-    if s.startswith("EVT_ADDR("):
+    if s.startswith("EVT_PTR("):
         return s[8:-1]
     else:
         return s
@@ -670,7 +670,7 @@ class ScriptDisassembler:
     def var(self, arg, prefer_hex = False, use_evt_ptr = True):
         if arg in self.symbol_map:
             s = self.symbol_map[arg][0][1]
-            return f"EVT_ADDR({s})" if use_evt_ptr else s
+            return f"EVT_PTR({s})" if use_evt_ptr else s
 
         v = arg - 2**32 # convert to s32
         if v > -250000000:
@@ -965,7 +965,7 @@ class ScriptDisassembler:
             elif func == "GotoMap" or func == "GotoMapSpecial":
                 args = [self.var(a, use_evt_ptr=True) for a in argv[2:]]
                 args_str = ', '.join(args)
-                self.write_line(f"EVT_CALL({func}, EVT_ADDR(UNK_STR_{argv[1]:X}), {args_str})")
+                self.write_line(f"EVT_CALL({func}, EVT_PTR(UNK_STR_{argv[1]:X}), {args_str})")
             elif args_str:
                 self.write_line(f"EVT_CALL({func}, {args_str})")
             else:
