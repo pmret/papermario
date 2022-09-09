@@ -42,7 +42,7 @@ typedef struct DeadEnemy {
     /* 0x0B4 */ s8 aiPaused;
     /* 0x0B5 */ s8 unk_B5;
     /* 0x0B6 */ char unk_B6[2];
-    /* 0x0B8 */ EvtScript* unk_B8; // some bytecode
+    /* 0x0B8 */ EvtScript* rot; // some bytecode
     /* 0x0BC */ struct Evt* unk_BC; // some script
     /* 0x0C0 */ s32 unk_C0; // some script ID
     /* 0x0C4 */ s32 unk_C4;

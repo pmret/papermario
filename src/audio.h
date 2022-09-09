@@ -61,7 +61,7 @@ typedef u32 SegData;
 
 
 typedef enum AuPriority {
-    AU_PRIORITY_FREE            = 0,    
+    AU_PRIORITY_FREE            = 0,
     AU_PRIORITY_BGM_PLAYER_MAIN = 1,
     AU_PRIORITY_BGM_PLAYER_AUX  = 2,
     AU_PRIORITY_SFX_MANAGER     = 4,
@@ -550,7 +550,7 @@ typedef struct SoundManager {
     /* 0x08E */ char unk_8E[0x2];
     /* 0x090 */ SoundManager90 unk_90[4];
     /* 0x0A0 */ SoundManagerA0 unk_A0[4];
-    /* 0x0B8 */ u16 unk_B8;
+    /* 0x0B8 */ u16 rot;
     /* 0x0BA */ s16 unk_BA;
     /* 0x0BC */ u8 priority;
     /* 0x0BD */ u8 sfxPlayerSelector;

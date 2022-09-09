@@ -310,60 +310,60 @@ s32 D_800785A0[] = {
 
 f32 AlTuneScaling[] = {
     // TUNE_SCALING_ARR_AMPLIFY_FINE
-    1.00000000f, 1.00057781f, 1.00115597f, 1.00173450f, 1.00231326f, 1.00289237f, 1.00347185f, 1.00405169f, 
-    1.00463188f, 1.00521231f, 1.00579309f, 1.00637424f, 1.00695574f, 1.00753760f, 1.00811982f, 1.00870228f, 
-    1.00928509f, 1.00986826f, 1.01045179f, 1.01103568f, 1.01161981f, 1.01220429f, 1.01278913f, 1.01337433f, 
-    1.01395988f, 1.01454580f, 1.01513207f, 1.01571858f, 1.01630545f, 1.01689267f, 1.01748025f, 1.01806819f, 
-    1.01865649f, 1.01924503f, 1.01983392f, 1.02042317f, 1.02101278f, 1.02160275f, 1.02219307f, 1.02278376f, 
-    1.02337468f, 1.02396595f, 1.02455759f, 1.02514958f, 1.02574193f, 1.02633464f, 1.02692771f, 1.02752113f, 
-    1.02811480f, 1.02870882f, 1.02930319f, 1.02989793f, 1.03049302f, 1.03108847f, 1.03168428f, 1.03228045f, 
-    1.03287685f, 1.03347361f, 1.03407073f, 1.03466821f, 1.03526604f, 1.03586423f, 1.03646278f, 1.03706169f, 
-    1.03766096f, 1.03826058f, 1.03886044f, 1.03946066f, 1.04006124f, 1.04066217f, 1.04126346f, 1.04186511f, 
-    1.04246712f, 1.04306948f, 1.04367220f, 1.04427528f, 1.04487872f, 1.04548252f, 1.04608655f, 1.04669094f, 
-    1.04729569f, 1.04790080f, 1.04850626f, 1.04911208f, 1.04971826f, 1.05032480f, 1.05093169f, 1.05153894f, 
-    1.05214655f, 1.05275452f, 1.05336285f, 1.05397153f, 1.05458057f, 1.05518997f, 1.05579972f, 1.05640972f, 
-    1.05702007f, 1.05763078f, 1.05824184f, 1.05885327f, 1.05946505f, 1.06007719f, 1.06068969f, 1.06130254f, 
-    1.06191576f, 1.06252933f, 1.06314325f, 1.06375754f, 1.06437218f, 1.06498718f, 1.06560254f, 1.06621826f, 
-    1.06683433f, 1.06745076f, 1.06806755f, 1.06868470f, 1.06930220f, 1.06992006f, 1.07053828f, 1.07115686f, 
-    1.07177579f, 1.07239509f, 1.07301474f, 1.07363474f, 1.07425511f, 1.07487583f, 1.07549691f, 1.07611835f, 
+    1.00000000f, 1.00057781f, 1.00115597f, 1.00173450f, 1.00231326f, 1.00289237f, 1.00347185f, 1.00405169f,
+    1.00463188f, 1.00521231f, 1.00579309f, 1.00637424f, 1.00695574f, 1.00753760f, 1.00811982f, 1.00870228f,
+    1.00928509f, 1.00986826f, 1.01045179f, 1.01103568f, 1.01161981f, 1.01220429f, 1.01278913f, 1.01337433f,
+    1.01395988f, 1.01454580f, 1.01513207f, 1.01571858f, 1.01630545f, 1.01689267f, 1.01748025f, 1.01806819f,
+    1.01865649f, 1.01924503f, 1.01983392f, 1.02042317f, 1.02101278f, 1.02160275f, 1.02219307f, 1.02278376f,
+    1.02337468f, 1.02396595f, 1.02455759f, 1.02514958f, 1.02574193f, 1.02633464f, 1.02692771f, 1.02752113f,
+    1.02811480f, 1.02870882f, 1.02930319f, 1.02989793f, 1.03049302f, 1.03108847f, 1.03168428f, 1.03228045f,
+    1.03287685f, 1.03347361f, 1.03407073f, 1.03466821f, 1.03526604f, 1.03586423f, 1.03646278f, 1.03706169f,
+    1.03766096f, 1.03826058f, 1.03886044f, 1.03946066f, 1.04006124f, 1.04066217f, 1.04126346f, 1.04186511f,
+    1.04246712f, 1.04306948f, 1.04367220f, 1.04427528f, 1.04487872f, 1.04548252f, 1.04608655f, 1.04669094f,
+    1.04729569f, 1.04790080f, 1.04850626f, 1.04911208f, 1.04971826f, 1.05032480f, 1.05093169f, 1.05153894f,
+    1.05214655f, 1.05275452f, 1.05336285f, 1.05397153f, 1.05458057f, 1.05518997f, 1.05579972f, 1.05640972f,
+    1.05702007f, 1.05763078f, 1.05824184f, 1.05885327f, 1.05946505f, 1.06007719f, 1.06068969f, 1.06130254f,
+    1.06191576f, 1.06252933f, 1.06314325f, 1.06375754f, 1.06437218f, 1.06498718f, 1.06560254f, 1.06621826f,
+    1.06683433f, 1.06745076f, 1.06806755f, 1.06868470f, 1.06930220f, 1.06992006f, 1.07053828f, 1.07115686f,
+    1.07177579f, 1.07239509f, 1.07301474f, 1.07363474f, 1.07425511f, 1.07487583f, 1.07549691f, 1.07611835f,
     // TUNE_SCALING_ARR_AMPLIFY_COARSE
-    1.00000000f, 1.07674015f, 1.15936935f, 1.24833953f, 1.34413731f, 1.44728661f, 1.55835164f, 1.67793977f, 
-    1.80670512f, 1.94535196f, 2.09463859f, 2.25538135f, 2.42845964f, 2.61482000f, 2.81548166f, 3.03154206f, 
-    3.26418304f, 3.51467681f, 3.78439355f, 4.07480860f, 4.38750982f, 4.72420788f, 5.08674431f, 5.47710180f, 
-    5.89741516f, 6.34998369f, 6.83728218f, 7.36197615f, 7.92693520f, 8.53524971f, 9.19024563f, 9.89550686f, 
+    1.00000000f, 1.07674015f, 1.15936935f, 1.24833953f, 1.34413731f, 1.44728661f, 1.55835164f, 1.67793977f,
+    1.80670512f, 1.94535196f, 2.09463859f, 2.25538135f, 2.42845964f, 2.61482000f, 2.81548166f, 3.03154206f,
+    3.26418304f, 3.51467681f, 3.78439355f, 4.07480860f, 4.38750982f, 4.72420788f, 5.08674431f, 5.47710180f,
+    5.89741516f, 6.34998369f, 6.83728218f, 7.36197615f, 7.92693520f, 8.53524971f, 9.19024563f, 9.89550686f,
     // TUNE_SCALING_ARR_ATTENUATE_FINE
-    1.00000000f, 0.99942255f, 0.99884546f, 0.99826866f, 0.99769223f, 0.99711609f, 0.99654031f, 0.99596488f, 
-    0.99538976f, 0.99481499f, 0.99424052f, 0.99366641f, 0.99309260f, 0.99251914f, 0.99194598f, 0.99137318f, 
-    0.99080074f, 0.99022859f, 0.98965681f, 0.98908532f, 0.98851418f, 0.98794335f, 0.98737288f, 0.98680270f, 
-    0.98623288f, 0.98566335f, 0.98509419f, 0.98452532f, 0.98395681f, 0.98338860f, 0.98282075f, 0.98225319f, 
-    0.98168600f, 0.98111910f, 0.98055255f, 0.97998631f, 0.97942042f, 0.97885484f, 0.97828960f, 0.97772467f, 
-    0.97716010f, 0.97659582f, 0.97603190f, 0.97546828f, 0.97490501f, 0.97434205f, 0.97377944f, 0.97321713f, 
-    0.97265512f, 0.97209346f, 0.97153211f, 0.97097111f, 0.97041041f, 0.96985006f, 0.96929002f, 0.96873033f, 
-    0.96817094f, 0.96761185f, 0.96705312f, 0.96649468f, 0.96593660f, 0.96537882f, 0.96482134f, 0.96426421f, 
-    0.96370739f, 0.96315092f, 0.96259475f, 0.96203887f, 0.96148336f, 0.96092814f, 0.96037328f, 0.95981872f, 
-    0.95926446f, 0.95871055f, 0.95815694f, 0.95760363f, 0.95705068f, 0.95649803f, 0.95594567f, 0.95539367f, 
-    0.95484197f, 0.95429057f, 0.95373952f, 0.95318878f, 0.95263839f, 0.95208830f, 0.95153850f, 0.95098901f, 
-    0.95043987f, 0.94989103f, 0.94934249f, 0.94879431f, 0.94824642f, 0.94769883f, 0.94715160f, 0.94660467f, 
-    0.94605803f, 0.94551176f, 0.94496578f, 0.94442010f, 0.94387472f, 0.94332969f, 0.94278497f, 0.94224054f, 
-    0.94169647f, 0.94115269f, 0.94060922f, 0.94006604f, 0.93952322f, 0.93898070f, 0.93843848f, 0.93789655f, 
-    0.93735498f, 0.93681371f, 0.93627274f, 0.93573207f, 0.93519175f, 0.93465173f, 0.93411201f, 0.93357259f, 
-    0.93303353f, 0.93249476f, 0.93195629f, 0.93141812f, 0.93088025f, 0.93034273f, 0.92980552f, 0.92926860f, 
+    1.00000000f, 0.99942255f, 0.99884546f, 0.99826866f, 0.99769223f, 0.99711609f, 0.99654031f, 0.99596488f,
+    0.99538976f, 0.99481499f, 0.99424052f, 0.99366641f, 0.99309260f, 0.99251914f, 0.99194598f, 0.99137318f,
+    0.99080074f, 0.99022859f, 0.98965681f, 0.98908532f, 0.98851418f, 0.98794335f, 0.98737288f, 0.98680270f,
+    0.98623288f, 0.98566335f, 0.98509419f, 0.98452532f, 0.98395681f, 0.98338860f, 0.98282075f, 0.98225319f,
+    0.98168600f, 0.98111910f, 0.98055255f, 0.97998631f, 0.97942042f, 0.97885484f, 0.97828960f, 0.97772467f,
+    0.97716010f, 0.97659582f, 0.97603190f, 0.97546828f, 0.97490501f, 0.97434205f, 0.97377944f, 0.97321713f,
+    0.97265512f, 0.97209346f, 0.97153211f, 0.97097111f, 0.97041041f, 0.96985006f, 0.96929002f, 0.96873033f,
+    0.96817094f, 0.96761185f, 0.96705312f, 0.96649468f, 0.96593660f, 0.96537882f, 0.96482134f, 0.96426421f,
+    0.96370739f, 0.96315092f, 0.96259475f, 0.96203887f, 0.96148336f, 0.96092814f, 0.96037328f, 0.95981872f,
+    0.95926446f, 0.95871055f, 0.95815694f, 0.95760363f, 0.95705068f, 0.95649803f, 0.95594567f, 0.95539367f,
+    0.95484197f, 0.95429057f, 0.95373952f, 0.95318878f, 0.95263839f, 0.95208830f, 0.95153850f, 0.95098901f,
+    0.95043987f, 0.94989103f, 0.94934249f, 0.94879431f, 0.94824642f, 0.94769883f, 0.94715160f, 0.94660467f,
+    0.94605803f, 0.94551176f, 0.94496578f, 0.94442010f, 0.94387472f, 0.94332969f, 0.94278497f, 0.94224054f,
+    0.94169647f, 0.94115269f, 0.94060922f, 0.94006604f, 0.93952322f, 0.93898070f, 0.93843848f, 0.93789655f,
+    0.93735498f, 0.93681371f, 0.93627274f, 0.93573207f, 0.93519175f, 0.93465173f, 0.93411201f, 0.93357259f,
+    0.93303353f, 0.93249476f, 0.93195629f, 0.93141812f, 0.93088025f, 0.93034273f, 0.92980552f, 0.92926860f,
     // TUNE_SCALING_ARR_ATTENUATE_COARSE
-    1.00000000f, 0.92873198f, 0.86254311f, 0.80107135f, 0.74398059f, 0.69095856f, 0.64171529f, 0.59598154f, 
-    0.55350709f, 0.51405972f, 0.47742370f, 0.44339865f, 0.41179851f, 0.38245043f, 0.35519394f, 0.32987997f, 
-    0.30637008f, 0.28453568f, 0.26425737f, 0.24542427f, 0.22793336f, 0.21168900f, 0.19660234f, 0.18259089f, 
-    0.16957800f, 0.15749252f, 0.14626834f, 0.13584408f, 0.12616274f, 0.11717137f, 0.10882080f, 0.10106535f, 
-    0.09386262f, 0.08717322f, 0.08096056f, 0.07519066f, 0.06983197f, 0.06485518f, 0.06023308f, 0.05594039f, 
-    0.05195362f, 0.04825099f, 0.04481224f, 0.04161856f, 0.03865249f, 0.03589780f, 0.03333944f, 0.03096340f, 
-    0.02875670f, 0.02670727f, 0.02480390f, 0.02303617f, 0.02139443f, 0.01986969f, 0.01845361f, 0.01713846f, 
-    0.01591704f, 0.01478266f, 0.01372913f, 0.01275068f, 0.01184197f, 0.01099801f, 0.01021421f, 0.00948626f, 
-    0.00881019f, 0.00818231f, 0.00759917f, 0.00705759f, 0.00655461f, 0.00608748f, 0.00565364f, 0.00525071f, 
-    0.00487650f, 0.00452897f, 0.00420620f, 0.00390643f, 0.00362802f, 0.00336946f, 0.00312933f, 0.00290631f, 
-    0.00269918f, 0.00250681f, 0.00232816f, 0.00216224f, 0.00200814f, 0.00186502f, 0.00173211f, 0.00160866f, 
-    0.00149402f, 0.00138754f, 0.00128865f, 0.00119681f, 0.00111152f, 0.00103230f, 0.00095873f, 0.00089041f, 
-    0.00082695f, 0.00076801f, 0.00071328f, 0.00066244f, 0.00061523f, 0.00057139f, 0.00053067f, 0.00049285f, 
-    0.00045772f, 0.00042510f, 0.00039480f, 0.00036667f, 0.00034054f, 0.00031627f, 0.00029373f, 0.00027279f, 
-    0.00025335f, 0.00023530f, 0.00021853f, 0.00020295f, 0.00018849f, 0.00017506f, 0.00016258f, 0.00015099f, 
+    1.00000000f, 0.92873198f, 0.86254311f, 0.80107135f, 0.74398059f, 0.69095856f, 0.64171529f, 0.59598154f,
+    0.55350709f, 0.51405972f, 0.47742370f, 0.44339865f, 0.41179851f, 0.38245043f, 0.35519394f, 0.32987997f,
+    0.30637008f, 0.28453568f, 0.26425737f, 0.24542427f, 0.22793336f, 0.21168900f, 0.19660234f, 0.18259089f,
+    0.16957800f, 0.15749252f, 0.14626834f, 0.13584408f, 0.12616274f, 0.11717137f, 0.10882080f, 0.10106535f,
+    0.09386262f, 0.08717322f, 0.08096056f, 0.07519066f, 0.06983197f, 0.06485518f, 0.06023308f, 0.05594039f,
+    0.05195362f, 0.04825099f, 0.04481224f, 0.04161856f, 0.03865249f, 0.03589780f, 0.03333944f, 0.03096340f,
+    0.02875670f, 0.02670727f, 0.02480390f, 0.02303617f, 0.02139443f, 0.01986969f, 0.01845361f, 0.01713846f,
+    0.01591704f, 0.01478266f, 0.01372913f, 0.01275068f, 0.01184197f, 0.01099801f, 0.01021421f, 0.00948626f,
+    0.00881019f, 0.00818231f, 0.00759917f, 0.00705759f, 0.00655461f, 0.00608748f, 0.00565364f, 0.00525071f,
+    0.00487650f, 0.00452897f, 0.00420620f, 0.00390643f, 0.00362802f, 0.00336946f, 0.00312933f, 0.00290631f,
+    0.00269918f, 0.00250681f, 0.00232816f, 0.00216224f, 0.00200814f, 0.00186502f, 0.00173211f, 0.00160866f,
+    0.00149402f, 0.00138754f, 0.00128865f, 0.00119681f, 0.00111152f, 0.00103230f, 0.00095873f, 0.00089041f,
+    0.00082695f, 0.00076801f, 0.00071328f, 0.00066244f, 0.00061523f, 0.00057139f, 0.00053067f, 0.00049285f,
+    0.00045772f, 0.00042510f, 0.00039480f, 0.00036667f, 0.00034054f, 0.00031627f, 0.00029373f, 0.00027279f,
+    0.00025335f, 0.00023530f, 0.00021853f, 0.00020295f, 0.00018849f, 0.00017506f, 0.00016258f, 0.00015099f,
     0.00014023f, 0.00013024f, 0.00012096f, 0.00011234f, 0.00010433f, 0.00009689f, 0.00008999f, 0.00008358f
 };
 
@@ -390,7 +390,7 @@ void au_sfx_init(SoundManager* manager, u8 priority, u8 reverbType, AuGlobals* g
     }
 
     manager->unk_5C = 0x8000;
-    manager->unk_B8 = 0x8000;
+    manager->rot = 0x8000;
     manager->playCounter = 0;
     manager->randomValue = 0;
 
@@ -461,7 +461,7 @@ void au_sfx_load_groups_from_SEF(SoundManager* manager) {
     u32 i;
 
     manager->sefData = sefData;
-    
+
     for (i = 0; i < sections; i++) {
         if (sefData->sections[i] != 0) {
             manager->normalSounds[i] = AU_FILE_RELATIVE(sefData, sefData->sections[i]);
@@ -523,7 +523,7 @@ void au_sfx_update_main(SoundManager* manager) {
     SoundSFXEntry* sfxEntry;
     u32 i, j, k;
     s32 count;
-    
+
     manager->playCounter++;
     if (manager->unk_168 != 0) {
         au_sfx_reset_players(manager);
@@ -564,7 +564,7 @@ void au_sfx_update_main(SoundManager* manager) {
         }
         manager->unk_90[i].s32 = 0;
     }
-    
+
     for (i = 0; i < ARRAY_COUNT(manager->unk_A0); i++) {
         if (manager->unk_A0[i].unk_00 != 0) {
             newEntry.soundID = 1;
@@ -576,7 +576,7 @@ void au_sfx_update_main(SoundManager* manager) {
         }
         manager->unk_A0[i].unk_00 = 0;
     }
-    
+
     count = manager->sfxQueueNextPos - manager->sfxQueuePosOffset;
     if (count < 0) {
         count += ARRAY_COUNT(manager->soundQueue);
@@ -600,7 +600,7 @@ void au_sfx_update_main(SoundManager* manager) {
                 }
             }
             sfxEntry->soundID = 0;
-            
+
             j++;
             if (j >= ARRAY_COUNT(manager->soundQueue)) {
                 j = 0;
@@ -703,7 +703,7 @@ static void func_8004C0E4(SoundManager* manager, SoundPlayer* player, s8* readPo
 static void au_sfx_set_bits_C00(SoundManager* manager, u32 soundID) {
     s32 soundUpper = (soundID & SOUND_ID_MID) >> 0xA;
     s32 i;
-    
+
     for (i = 0; i < ARRAY_COUNT(manager->players); i++) {
         SoundPlayer* player = &manager->players[i];
         if (player->currentSoundID == (soundID & SOUND_ID_LOWER)) {
@@ -714,7 +714,7 @@ static void au_sfx_set_bits_C00(SoundManager* manager, u32 soundID) {
 
 static void au_sfx_stop_by_id(SoundManager* manager, u32 soundID) {
     s32 i;
-    
+
     for (i = 0; i < ARRAY_COUNT(manager->players); i++) {
         SoundPlayer* player = &manager->players[i];
         if (player->currentSoundID == (soundID & SOUND_ID_LOWER)) {
@@ -731,7 +731,7 @@ static void au_sfx_stop_by_id(SoundManager* manager, u32 soundID) {
 
 static void func_8004C300(SoundManager* manager, u32 soundID) {
     s32 i;
-    
+
     for (i = 0; i < ARRAY_COUNT(manager->players); i++) {
         SoundPlayer* player = &manager->players[i];
         if (soundID == player->unk_99) {
@@ -749,7 +749,7 @@ static void func_8004C300(SoundManager* manager, u32 soundID) {
 static void au_sfx_set_modifiers(SoundManager* manager, SoundSFXEntry* sfxEntry) {
     s32 soundID = sfxEntry->soundID & SOUND_ID_LOWER;
     s32 i;
-    
+
     for (i = 0; i < ARRAY_COUNT(manager->players); i++) {
         SoundPlayer* player = &manager->players[i];
         if (player->currentSoundID == soundID) {
@@ -788,7 +788,7 @@ s16 au_sfx_manager_update(SoundManager* manager) {
 
     // update pseudorandom number with fast 'good enough' method
     manager->randomValue = (u16)manager->randomValue + (u16)manager->playCounter;
-    
+
     start = manager->sfxPlayerSelector;
     for (i = start, end = start + 8; i < end; i++) {
         sndPlayer = &manager->players[i - manager->sfxPlayerSelector];
@@ -839,7 +839,7 @@ static void au_sfx_update_mode_0(SoundManager* manager, SoundPlayer* player, AlU
                         voice->pitchRatio = player->pitchRatio;
                     }
                 }
-                
+
                 if (!(player->sfxParamsFlags & SFX_PARAM_FLAG_PAN) && player->masterPan != 0) {
                     pan = player->masterPan;
                 } else {
@@ -849,7 +849,7 @@ static void au_sfx_update_mode_0(SoundManager* manager, SoundPlayer* player, AlU
                     voice->pan = pan;
                     voice->unk_flags_43 |= AU_VOICE_SYNC_FLAGS_10;
                  }
-                
+
                 volume = au_sfx_get_scaled_volume(manager, player);
                 if (voice->adjustedVolume != volume) {
                     voice->adjustedVolume = volume;
@@ -884,7 +884,7 @@ static void au_sfx_update_mode_0(SoundManager* manager, SoundPlayer* player, AlU
                 } else {
                     voice->pan = player->sfxPan;
                 }
-    
+
                 voice->reverbAmt = player->reverb;
                 voice->adjustedVolume = au_sfx_get_scaled_volume(manager, player);
                 voice->unk_14.unk_00 = player->unk_10.unk_00;
@@ -909,7 +909,7 @@ static void au_sfx_update_mode_0(SoundManager* manager, SoundPlayer* player, AlU
 static s16 au_sfx_get_scaled_volume(SoundManager* manager, SoundPlayer* player) {
     s32 outVolume;
 
-    outVolume = (manager->unk_B8 * player->sfxVolume) >> 0xF;
+    outVolume = (manager->rot * player->sfxVolume) >> 0xF;
     if (!(player->sfxParamsFlags & SFX_PARAM_FLAG_VOLUME) && (player->masterVolume != 0)) {
         outVolume = (outVolume * player->masterVolume) >> 0xF;
     }
@@ -924,7 +924,7 @@ static void au_sfx_update_mode_1(SoundManager* manager, SoundPlayer* player, AlU
     u32 playLength;
     s32 var_s3;
     void (**CmdHandlers)(SoundManager*, SoundPlayer*);
-    
+
     var_s3 = FALSE;
     if (player->unk_A9 == 1) {
         player->unk_A9 = 0;
@@ -975,13 +975,13 @@ static void au_sfx_update_mode_1(SoundManager* manager, SoundPlayer* player, AlU
             } else {
                 player->tuneLerp.current = ((opcode & 0x7F) * 100) << 0x10;
             }
-            
+
             if (player->randomVelocity != 0) {
                 player->playVelocity = au_sfx_get_random_vol(manager->randomValue, player->randomVelocity, player->sefDataReadPos[0] & 0x7F);
             } else {
                 player->playVelocity = player->sefDataReadPos[0] & 0x7F;
             }
-            
+
             playLength = player->sefDataReadPos[1];
             if (playLength >= 0xC0) {
                 playLength = player->sefDataReadPos[2] + ((playLength & 0x3F) << 8) + 0xC0;
@@ -998,7 +998,7 @@ static void au_sfx_update_mode_1(SoundManager* manager, SoundPlayer* player, AlU
                 } else {
                     voice->pan = player->masterPan;
                 }
-                
+
                 voice->reverbAmt = player->reverb;
                 snd_set_voice_volume(voice, manager, player);
                 if (player->unk_18 == 0) {
@@ -1011,7 +1011,7 @@ static void au_sfx_update_mode_1(SoundManager* manager, SoundPlayer* player, AlU
 
                 voice->instrument = player->sfxInstrumentRef;
                 voice->reverbType = manager->defaultReverbType;
-                
+
                 voice->priority = manager->priority;
                 voice->unk_flags_43 = AU_VOICE_SYNC_FLAGS_ALL;
                 var_s3 = TRUE;
@@ -1024,7 +1024,7 @@ static void au_sfx_update_mode_1(SoundManager* manager, SoundPlayer* player, AlU
             CurrentSefCmdHandler(manager, player);
         }
     }
-    
+
     if (player->volumeLerp.time != 0) {
         player->volumeLerp.time--;
         if (player->volumeLerp.time != 0) {
@@ -1034,7 +1034,7 @@ static void au_sfx_update_mode_1(SoundManager* manager, SoundPlayer* player, AlU
         }
         player->changed.volume = TRUE;
     }
-    
+
     if (!var_s3) {
         if (player->playLength != 0) {
             player->playLength--;
@@ -1085,11 +1085,11 @@ static void au_sfx_update_mode_1(SoundManager* manager, SoundPlayer* player, AlU
 }
 
 static void snd_set_voice_volume(AlUnkVoice* voice, SoundManager* manager, SoundPlayer* player) {
-    s32 x = ((((manager->unk_B8
+    s32 x = ((((manager->rot
         * player->sfxVolume) >> 0xF)
         * player->playVelocity) >> 7)
         * (player->volumeLerp.current >> 0x10) >> 0xF;
-    
+
     if (player->sfxParamsFlags & SFX_PARAM_FLAG_VOLUME || player->masterVolume == 0) {
         voice->adjustedVolume = x;
     } else {
@@ -1111,11 +1111,11 @@ static u8 au_sfx_get_random_pan(s32 seed, s32 pan, s32 amplitude) {
     tap5 = seed >> 5;
     tap3 = seed >> 3;
     parity = (tap5 + tap3) & 1;
-    
+
     lo = (seed >> 8) & 0x1F; // bitmask 0x1F00
     hi = (seed << 3) & 0xE0; // bitmask 0x001C
     random = lo + hi;
-    
+
     if (parity) {
         retPan = pan + (((amplitude & 0xFF) * random) >> 8);
     } else {
@@ -1151,7 +1151,7 @@ static void au_SEFCmd_02_SetInstrument(SoundManager* manager, SoundPlayer* playe
     s32 bank = buf[0];
     s32 patch = buf[1];
     player->sefDataReadPos = &buf[2];
-    
+
     player->instrumentIndex = patch;
     player->sfxInstrumentRef = au_get_instrument(manager->globals, bank, patch, &player->unk_10);
 }
@@ -1160,7 +1160,7 @@ static void au_SEFCmd_03_SetReverb(SoundManager* manager, SoundPlayer* player) {
     AuFilePos buf = player->sefDataReadPos;
     u8 reverb = buf[0];
     player->sefDataReadPos = &buf[1];
-    
+
     if (player->sfxParamsFlags & SFX_PARAM_FLAG_REVERB) {
         reverb = manager->defaultReverbAmt;
     }
@@ -1175,10 +1175,10 @@ static void au_SEFCmd_04(SoundManager* manager, SoundPlayer* player) {
     AuFilePos buf = player->sefDataReadPos;
     u8 temp_v1 = buf[0];
     player->sefDataReadPos = &buf[1];
-   
+
     player->unk_9E = temp_v1 & 0x7F;
     other = player->sfxInstrumentRef;
-    
+
     player->sfxInstrument.base = other->base;
     player->sfxInstrument.wavDataLength = other->wavDataLength;
     player->sfxInstrument.loopPredictor = other->loopPredictor;
@@ -1191,10 +1191,10 @@ static void au_SEFCmd_04(SoundManager* manager, SoundPlayer* player) {
     player->sfxInstrument.pitchRatio = other->pitchRatio;
     player->sfxInstrument.type = other->type;
     player->sfxInstrument.unk_25 = other->unk_25;
-    
+
     player->sfxInstrument.unkOffset = D_800783C0[player->unk_9E];
     player->sfxInstrumentRef = &player->sfxInstrument;
-    
+
     temp_v0_2 = player->sfxInstrument.unkOffset;
     if (temp_v0_2 != NULL && temp_v0_2->count != 0) {
         player->unk_10.unk_00 = (s32*)(temp_v0_2->unk_04[0].unkOffset1 + (s32)temp_v0_2);
@@ -1228,13 +1228,13 @@ static void au_SEFCmd_08(SoundManager* manager, SoundPlayer* player) {
     s16 newValue = (buf[2] & 0x7F) * 100;
     s16 time = lo + (hi << 8);
     player->sefDataReadPos = &buf[3];
-    
+
     if (time <= 0) {
         time = 1;
     }
 
     player->tuneLerp.time = time;
-    player->tuneLerp.goal = newValue;    
+    player->tuneLerp.goal = newValue;
     player->tuneLerp.step = ((newValue << 0x10) - player->tuneLerp.current) / time;
 }
 
@@ -1280,7 +1280,7 @@ static void au_SEFCmd_0D(SoundManager* manager, SoundPlayer* player) {
     s32 newValue = buf[2];
     s16 time = lo + (hi << 8);
     player->sefDataReadPos = &buf[3];
-    
+
     if (newValue != 0) {
         newValue = (newValue << 8) | 0xFF;
     }
@@ -1288,7 +1288,7 @@ static void au_SEFCmd_0D(SoundManager* manager, SoundPlayer* player) {
         time = 1;
     }
 
-    player->volumeLerp.time = time;    
+    player->volumeLerp.time = time;
     player->volumeLerp.goal = newValue;
     player->volumeLerp.step = ((newValue << 0x10) - player->volumeLerp.current) / time;
 }
@@ -1298,7 +1298,7 @@ static void au_SEFCmd_0E(SoundManager* manager, SoundPlayer* player) {
     AuFilePos pos = AU_FILE_RELATIVE(manager->sefData, (buf[1] << 8) + buf[2]);
     u8 type = buf[0];
     player->sefDataReadPos = &buf[3];
-    
+
     player->unk_84 = type;
     switch (type) {
         case 1:
@@ -1376,13 +1376,13 @@ static void au_SEFCmd_16(SoundManager* manager, SoundPlayer* player) {
 static void au_SEFCmd_17(SoundManager* manager, SoundPlayer* player) {
     AuFilePos buf = player->sefDataReadPos;
     u32 i;
-    
+
     for (i = 0; i < 4; i++) {
         if (manager->unk_A0[i].unk_00 == 0) {
             manager->unk_A0[i].unk_00 = buf[1] + (buf[0] << 8);
             manager->unk_A0[i].unk_02 = buf[3] + (buf[2] << 8);
             break;
-        }    
+        }
     }
     player->sefDataReadPos = &buf[4];
 }
@@ -1423,7 +1423,7 @@ static u8 au_sfx_get_random_vol(s32 seed, s32 amplitude, s32 volume) {
     s32 lo = (seed & 0xCC) >> 2;
     s32 hi = (seed & 0x13) << 2;
     s32 random = lo + hi;
-    
+
     return volume * (0x8000 - (amplitude * random)) >> 0xF;
 }
 

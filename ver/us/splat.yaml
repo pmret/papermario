@@ -3926,7 +3926,73 @@ segments:
     subsegments:
     - [0x3E54C0, c, peach_star_beam]
     - [0x3E5ED0]
-  - [0x3E5F30, bin] # peach_star_beam gfx
+  - name: effect_gfx_peach_star_beam
+    dir: effects/gfx
+    type: code
+    start: 0x3E5F30
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x3E5F30, c, peach_star_beam]
+    - start: 0x3E5F30
+      type: .data
+      name: peach_star_beam
+      subsegments:
+      - [0x3E5F30, vtx, D_09000000_3E5F30]
+      - [0x3E60D0, vtx, D_090001A0_3E60D0]
+      - [0x3E60F0, vtx, D_090001C0_3E60F0]
+      - [0x3E6110, vtx, D_090001E0_3E6110]
+      - [0x3E6150, vtx, D_09000220_3E6150]
+      - [0x3E6160, vtx, D_09000230_3E6160]
+      - [0x3E6170, vtx, D_09000240_3E6170]
+      - [0x3E6180, vtx, D_09000250_3E6180]
+      - [0x3E61B0, gfx, D_09000280_3E61B0]
+      - [0x3E61E8, gfx, D_090002B8_3E61E8]
+      - [0x3E6218, gfx, D_090002E8_3E6218]
+      - [0x3E62D0, gfx, D_090003A0_3E62D0]
+      - [0x3E62F0, gfx, D_090003C0_3E62F0]
+      - [0x3E6300, gfx, D_090003D0_3E6300]
+      - [0x3E6310] # padding
+      - [0x3E6318, i4, D_090003E8_3E6318, 32, 32]
+      - [0x3E6518, ci4, D_090005E8_3E6518, 32, 32]
+      - [0x3E6718, palette, D_090005E8_3E6518]
+      - [0x3E6738] # padding
+      - [0x3E6918, ci4, D_090009E8_3E6918, 64, 64]
+      - [0x3E7118, palette, D_090009E8_3E6918]
+      - [0x3E7138] # padding
+      - [0x3E7318, ci4, D_090013E8_3E7318, 64, 64]
+      - [0x3E7B18, palette, D_090013E8_3E7318]
+      - [0x3E7B38] # padding
+      - [0x3E7D18, ci4, D_09001DE8_3E7D18, 64, 64]
+      - [0x3E8518, palette, D_09001DE8_3E7D18]
+      - [0x3E8538] # padding
+      - [0x3E8718, ci4, D_090027E8_3E8718, 64, 64]
+      - [0x3E8F18, palette, D_090027E8_3E8718]
+      - [0x3E8F38] # padding
+      - [0x3E9118, ci4, D_090031E8_3E9118, 64, 64]
+      - [0x3E9918, palette, D_090031E8_3E9118]
+      - [0x3E9938] # padding
+      - [0x3E9B18, ci4, D_09003BE8_3E9B18, 64, 64]
+      - [0x3EA318, palette, D_09003BE8_3E9B18]
+      - [0x3EA338] # padding
+      - [0x3EA518, ci4, D_090045E8_3EA518, 64, 64]
+      - [0x3EAD18, palette, D_090045E8_3EA518]
+      - [0x3EAD38] # padding
+      - [0x3EAF18, gfx, D_09004FE8_3EAF18]
+      - [0x3EAFC0, gfx, D_09005090_3EAFC0]
+      - [0x3EB020, gfx, D_090050F0_3EB020]
+      - [0x3EB098, gfx, D_09005168_3EB098]
+      - [0x3EB110, gfx, D_090051E0_3EB110]
+      - [0x3EB188, gfx, D_09005258_3EB188]
+      - [0x3EB200, gfx, D_090052D0_3EB200]
+      - [0x3EB278, gfx, D_09005348_3EB278]
+      - [0x3EB2F0, gfx, D_090053C0_3EB2F0]
+      - [0x3EB368, gfx, D_09005438_3EB368]
+      - [0x3EB3E0, gfx, D_090054B0_3EB3E0]
+      - [0x3EB420, vtx, D_090054F0_3EB420]
+      - [0x3EB460, vtx, D_09005530_3EB460]
+      - [0x3EB4A0, gfx, D_09005570_3EB4A0]
+      - [0x3EB4C0, gfx, D_09005590_3EB4C0]
   - name: effect_chapter_change
     dir: effects
     type: code
@@ -4059,7 +4125,7 @@ segments:
     vram: 0xE0114000
     subsegments:
     - [0x3FEAE0, c, lil_oink]
-    - [0x3FF180, data]
+    - [0x3FF180]
   - [0x3FF250, bin] # lil_oink gfx
   - name: effect_something_rotating
     dir: effects
