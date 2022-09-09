@@ -71,7 +71,7 @@ EvtScript N(main) = {
     EVT_CALL(battle_item_thunder_bolt_func_802A123C_722D7C)
     EVT_WAIT(5)
     EVT_CALL(StartRumble, 10)
-    EVT_CALL(ShakeCam, 1, 0, 5, EVT_FIXED(1.0))
+    EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(1.0))
     EVT_CALL(GetItemPower, 130, LocalVar(0), LocalVar(1))
     EVT_CALL(ItemDamageEnemy, LocalVar(0), 939524128, 0, LocalVar(0), 32)
     EVT_LABEL(1)

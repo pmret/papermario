@@ -72,7 +72,7 @@ EvtScript N(main) = {
     EVT_CALL(N(func_802A1354_71B4F4))
     EVT_WAIT(5)
     EVT_CALL(StartRumble, 10)
-    EVT_CALL(ShakeCam, 1, 0, 5, EVT_FIXED(1.0))
+    EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(1.0))
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetItemPower, ITEM_THUNDER_RAGE, LocalVar(0), LocalVar(1))
     EVT_CALL(ItemDamageEnemy, LocalVar(0), 939524128, 0, LocalVar(0), 32)

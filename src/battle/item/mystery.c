@@ -249,7 +249,7 @@ EvtScript N(main) = {
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(SetVirtualEntityJumpGravity, LocalVar(10), EVT_FIXED(0.6))
+    EVT_CALL(SetVirtualEntityJumpGravity, LocalVar(10), EVT_FLOAT(0.6))
     EVT_ADD(LocalVar(2), 5)
     EVT_CALL(VirtualEntityJumpTo, LocalVar(10), LocalVar(0), LocalVar(1), LocalVar(2), 12)
     EVT_THREAD

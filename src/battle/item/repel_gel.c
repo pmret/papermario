@@ -25,7 +25,7 @@ EvtScript N(main) = {
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10002)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_ADD(LocalVar(1), 20)
-    EVT_CALL(PlayEffect, 0x33, 3, LocalVar(0), LocalVar(1), LocalVar(2), EVT_FIXED(1.0), 30, 0, 0, 0, 0, 0, 0, 0)
+    EVT_CALL(PlayEffect, 0x33, 3, LocalVar(0), LocalVar(1), LocalVar(2), EVT_FLOAT(1.0), 30, 0, 0, 0, 0, 0, 0, 0)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_376)
     EVT_CALL(GetItemPower, ITEM_REPEL_GEL, LocalVar(0), LocalVar(1))
     EVT_CALL(N(func_802A123C_72DDAC))

@@ -31,7 +31,7 @@ EvtScript N(main) = {
         EVT_CALL(MoveBattleCamOver, 20)
     EVT_END_THREAD
     EVT_CALL(N(FadeBackgroundToBlack))
-    EVT_CALL(PlayEffect, 0x62, 0, 0, 0, 0, EVT_FIXED(1.0), 200, 0, 0, 0, 0, 0, 0, 0)
+    EVT_CALL(PlayEffect, 0x62, 0, 0, 0, 0, EVT_FLOAT(1.0), 200, 0, 0, 0, 0, 0, 0, 0)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_246)
     EVT_WAIT(200)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)

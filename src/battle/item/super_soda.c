@@ -134,7 +134,7 @@ EvtScript N(script6) = {
     EVT_CALL(SetBattleCamOffsetZ, 41)
     EVT_CALL(SetBattleCamZoom, 248)
     EVT_CALL(MoveBattleCamOver, 25)
-    EVT_CALL(SetVirtualEntityJumpGravity, LocalVar(10), EVT_FIXED(0.4))
+    EVT_CALL(SetVirtualEntityJumpGravity, LocalVar(10), EVT_FLOAT(0.4))
     EVT_ADD(LocalVar(2), 5)
     EVT_CALL(VirtualEntityJumpTo, LocalVar(10), LocalVar(0), LocalVar(1), LocalVar(2), 25)
     EVT_CALL(AddBattleCamZoom, 100)

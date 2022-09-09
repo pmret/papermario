@@ -97,7 +97,7 @@ EvtScript script = {
     EVT_CALL(PlaySound, SOUND_THROW)
     EVT_WAIT(3)
     EVT_CALL(CreateVirtualEntity, LocalVar(10), EVT_ADDR(N(modelCommandList)))
-    EVT_SETF(LocalVar(0), EVT_FIXED(1.0))
+    EVT_SETF(LocalVar(0), EVT_FLOAT(1.0))
     EVT_CALL(MultiplyByActorScale, LocalVar(0))
     EVT_CALL(SetVirtualEntityScale, LocalVar(10), LocalVar(0), LocalVar(0), LocalVar(0))
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LocalVar(0), LocalVar(1), LocalVar(2))
@@ -120,7 +120,7 @@ EvtScript script = {
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(SetVirtualEntityJumpGravity, LocalVar(10), EVT_FIXED(0.8))
+    EVT_CALL(SetVirtualEntityJumpGravity, LocalVar(10), EVT_FLOAT(0.8))
     EVT_ADD(LocalVar(2), 5)
     EVT_CALL(VirtualEntityJumpTo, LocalVar(10), LocalVar(0), LocalVar(1), LocalVar(2), 18)
     EVT_CALL(PlayEffect, 0x7, 3, LocalVar(0), LocalVar(1), LocalVar(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)

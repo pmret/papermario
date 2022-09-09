@@ -101,7 +101,7 @@ EvtScript N(main) = {
         EVT_LOOP(5)
             EVT_WAIT(15)
             EVT_CALL(StartRumble, 8)
-            EVT_CALL(ShakeCam, 1, 0, 5, EVT_FIXED(1.0))
+            EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(1.0))
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_WAIT(90)

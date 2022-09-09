@@ -22,7 +22,7 @@ EvtScript N(main) = {
     EVT_SET(LocalVar(3), 20)
     EVT_CALL(MultiplyByActorScale, LocalVar(3))
     EVT_ADD(LocalVar(1), LocalVar(3))
-    EVT_SETF(LocalVar(3), EVT_FIXED(1.0))
+    EVT_SETF(LocalVar(3), EVT_FLOAT(1.0))
     EVT_CALL(MultiplyByActorScale, LocalVar(3))
     EVT_CALL(PlayEffect, 0x57, 0, LocalVar(0), LocalVar(1), LocalVar(2), LocalVar(3), 30, 0, 0, 0, 0, 0, 0, 0)
     EVT_CALL(PlaySound, SOUND_379)
