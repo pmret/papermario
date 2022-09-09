@@ -81,8 +81,8 @@ EvtScript N(8024096C) = {
     EVT_SUB(LocalVar(12), LocalVar(0))
     EVT_SUB(LocalVar(13), LocalVar(1))
     EVT_SETF(LocalVar(0), LocalVar(12))
-    EVT_DIVF(LocalVar(0), EVT_FIXED(100.0))
-    EVT_SETF(LocalVar(15), EVT_FIXED(100.0))
+    EVT_DIVF(LocalVar(0), EVT_FLOAT(100.0))
+    EVT_SETF(LocalVar(15), EVT_FLOAT(100.0))
     EVT_DIVF(LocalVar(15), LocalVar(0))
     EVT_ADD(LocalVar(15), 11)
     EVT_SET(LocalVar(5), 200)
@@ -250,10 +250,10 @@ EvtScript N(80241C14) = {
     EVT_ADD(LocalVar(0), 30)
     EVT_CALL(SetPanTarget, 0, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_CALL(SetCamDistance, 0, 300)
-    EVT_CALL(SetCamPitch, 0, EVT_FIXED(11.0), EVT_FIXED(-11.0))
-    EVT_CALL(SetCamSpeed, 0, EVT_FIXED(90.0))
+    EVT_CALL(SetCamPitch, 0, EVT_FLOAT(11.0), EVT_FLOAT(-11.0))
+    EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(90.0))
     EVT_CALL(PanToTarget, 0, 0, 1)
-    EVT_CALL(WaitForCam, 0, EVT_FIXED(1.0))
+    EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
     EVT_WAIT(20)
     EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_posie_Palette_00_Anim_2, NPC_ANIM_posie_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x00C5))
     EVT_WAIT(10)
@@ -265,7 +265,7 @@ EvtScript N(80241C14) = {
 
 EvtScript N(80241D6C) = {
     EVT_LABEL(0)
-    EVT_CALL(ShakeCam, 0, 0, 1, EVT_FIXED(1.0))
+    EVT_CALL(ShakeCam, 0, 0, 1, EVT_FLOAT(1.0))
     EVT_WAIT(1)
     EVT_GOTO(0)
     EVT_RETURN
@@ -279,8 +279,8 @@ EvtScript N(80241DBC) = {
     EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_posie_Palette_00_Anim_2, NPC_ANIM_posie_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x0068))
     EVT_THREAD
         EVT_CALL(SetCamDistance, 0, 300)
-        EVT_CALL(SetCamPitch, 0, EVT_FIXED(18.0), EVT_FIXED(-7.5))
-        EVT_CALL(SetCamSpeed, 0, EVT_FIXED(0.5))
+        EVT_CALL(SetCamPitch, 0, EVT_FLOAT(18.0), EVT_FLOAT(-7.5))
+        EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(0.5))
         EVT_CALL(PanToTarget, 0, 0, 1)
     EVT_END_THREAD
     EVT_CALL(PlaySound, 0x8000006B)
@@ -288,10 +288,10 @@ EvtScript N(80241DBC) = {
     EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_posie_Palette_00_Anim_6, NPC_ANIM_posie_Palette_00_Anim_6, 0, MESSAGE_ID(0x11, 0x0069))
     EVT_KILL_THREAD(MapVar(0))
     EVT_CALL(SetCamDistance, 0, 350)
-    EVT_CALL(SetCamPitch, 0, EVT_FIXED(18.0), EVT_FIXED(-7.5))
-    EVT_CALL(SetCamSpeed, 0, EVT_FIXED(8.0))
+    EVT_CALL(SetCamPitch, 0, EVT_FLOAT(18.0), EVT_FLOAT(-7.5))
+    EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(8.0))
     EVT_CALL(PanToTarget, 0, 0, 1)
-    EVT_CALL(WaitForCam, 0, EVT_FIXED(1.0))
+    EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
     EVT_WAIT(10)
     EVT_CALL(GetPlayerPos, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_SUB(LocalVar(0), LocalVar(2))
@@ -323,7 +323,7 @@ EvtScript N(interact_80242044) = {
                 EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_posie_Palette_00_Anim_2, NPC_ANIM_posie_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x0071))
             EVT_END_IF
         EVT_CASE_LT(46)
-            EVT_CALL(AdjustCam, 0, EVT_FIXED(4.0), 0, EVT_FIXED(350.0), EVT_FIXED(18.0), EVT_FIXED(-7.5))
+            EVT_CALL(AdjustCam, 0, EVT_FLOAT(4.0), 0, EVT_FLOAT(350.0), EVT_FLOAT(18.0), EVT_FLOAT(-7.5))
             EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_posie_Palette_00_Anim_2, NPC_ANIM_posie_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x0065))
             EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_posie_Palette_00_Anim_5)
             EVT_WAIT(20)
@@ -337,13 +337,13 @@ EvtScript N(interact_80242044) = {
             EVT_IF_EQ(GF_FLO12_RosieRequestedSomethingBeautiful, 1)
                 EVT_EXEC_WAIT(N(80241DBC))
             EVT_END_IF
-            EVT_CALL(ResetCam, 0, EVT_FIXED(4.0))
+            EVT_CALL(ResetCam, 0, EVT_FLOAT(4.0))
         EVT_CASE_LT(47)
             EVT_IF_EQ(GF_FLO12_RosieRequestedSomethingBeautiful, 1)
                 EVT_IF_EQ(AreaFlag(6), 0)
-                    EVT_CALL(AdjustCam, 0, EVT_FIXED(4.0), 0, EVT_FIXED(350.0), EVT_FIXED(18.0), EVT_FIXED(-7.5))
+                    EVT_CALL(AdjustCam, 0, EVT_FLOAT(4.0), 0, EVT_FLOAT(350.0), EVT_FLOAT(18.0), EVT_FLOAT(-7.5))
                     EVT_EXEC_WAIT(N(80241DBC))
-                    EVT_CALL(ResetCam, 0, EVT_FIXED(4.0))
+                    EVT_CALL(ResetCam, 0, EVT_FLOAT(4.0))
                 EVT_ELSE
                     EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_posie_Palette_00_Anim_2, NPC_ANIM_posie_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x0072))
                 EVT_END_IF
@@ -421,7 +421,7 @@ EvtScript N(tree1_Callback) = {
                 EVT_CALL(SetCamDistance, 0, 350)
                 EVT_CALL(PanToTarget, 0, 0, 1)
                 EVT_EXEC_WAIT(N(80241DBC))
-                EVT_CALL(ResetCam, 0, EVT_FIXED(4.0))
+                EVT_CALL(ResetCam, 0, EVT_FLOAT(4.0))
             EVT_END_IF
         EVT_END_IF
     EVT_ELSE
@@ -444,7 +444,7 @@ EvtScript N(tree1_Callback) = {
             EVT_END_SWITCH
         EVT_END_IF
     EVT_END_IF
-    EVT_CALL(ResetCam, 0, EVT_FIXED(4.0))
+    EVT_CALL(ResetCam, 0, EVT_FLOAT(4.0))
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_RETURN
     EVT_END

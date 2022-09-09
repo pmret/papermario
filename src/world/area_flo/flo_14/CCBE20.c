@@ -134,7 +134,7 @@ EvtScript N(interact_80244790) = {
             EVT_CALL(InterpPlayerYaw, 90, 0)
             EVT_CALL(func_802CF56C, 2)
             EVT_WAIT(5)
-            EVT_CALL(AdjustCam, 0, EVT_FIXED(1.0), 0, 350, EVT_FIXED(17.0), EVT_FIXED(-6.0))
+            EVT_CALL(AdjustCam, 0, EVT_FLOAT(1.0), 0, 350, EVT_FLOAT(17.0), EVT_FLOAT(-6.0))
             EVT_EXEC(N(80243870))
             EVT_CALL(SpeakToPlayer, NPC_SELF, -1, -1, 0, MESSAGE_ID(0x11, 0x0062))
             EVT_THREAD
@@ -146,7 +146,7 @@ EvtScript N(interact_80244790) = {
                 EVT_WAIT(1)
                 EVT_GOTO(10)
             EVT_END_IF
-            EVT_CALL(ResetCam, 0, EVT_FIXED(4.0))
+            EVT_CALL(ResetCam, 0, EVT_FLOAT(4.0))
             EVT_CALL(SpeakToPlayer, NPC_SELF, -1, -1, 5, MESSAGE_ID(0x11, 0x0063))
             EVT_SET(GF_FLO14_GaveBerryToBubblePlant, 1)
             EVT_BIND_TRIGGER(N(8024352C), TRIGGER_FLOOR_PRESS_A, 30, 1, 0)

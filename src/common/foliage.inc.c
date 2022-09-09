@@ -14,7 +14,7 @@ EvtScript N(searchBush) = {
                 EVT_BUF_READ1(LocalVar(2))
                 EVT_LOOP(LocalVar(2))
                     EVT_BUF_READ1(LocalVar(3))
-                    EVT_CALL(N(TransformFoliage), LocalVar(3), EVT_FIXED(0.1), 1, LocalVar(15), 0)
+                    EVT_CALL(N(TransformFoliage), LocalVar(3), EVT_FLOAT(0.1), 1, LocalVar(15), 0)
                     EVT_IF_EQ(LocalFlag(0), 0)
                         EVT_SET(LocalFlag(0), 1)
                         EVT_CALL(PlaySoundAtModel, LocalVar(3), 339, 0)
@@ -25,7 +25,7 @@ EvtScript N(searchBush) = {
                 EVT_BUF_READ1(LocalVar(2))
                 EVT_LOOP(LocalVar(2))
                     EVT_BUF_READ1(LocalVar(3))
-                    EVT_CALL(N(TransformFoliage), LocalVar(3), EVT_FIXED(0.1), -1, LocalVar(15), 0)
+                    EVT_CALL(N(TransformFoliage), LocalVar(3), EVT_FLOAT(0.1), -1, LocalVar(15), 0)
                 EVT_END_LOOP
                 EVT_WAIT(1)
             EVT_END_LOOP
@@ -67,7 +67,7 @@ EvtScript N(searchBush) = {
 };
 
 EvtScript N(shakeTree) = {
-    EVT_SET_TIMESCALE(EVT_FIXED(2.0))
+    EVT_SET_TIMESCALE(EVT_FLOAT(2.0))
     EVT_USE_BUF(LocalVar(0))
     EVT_BUF_READ4(LocalVar(1), LocalVar(2), LocalVar(3), LocalVar(4))
     EVT_BUF_READ1(LocalVar(5))
@@ -83,7 +83,7 @@ EvtScript N(shakeTree) = {
                 EVT_BUF_READ1(LocalVar(2))
                 EVT_LOOP(LocalVar(2))
                     EVT_BUF_READ1(LocalVar(3))
-                    EVT_CALL(N(TransformFoliage), LocalVar(3), EVT_FIXED(0.1), EVT_FIXED(0.2), LocalVar(15), 0)
+                    EVT_CALL(N(TransformFoliage), LocalVar(3), EVT_FLOAT(0.1), EVT_FLOAT(0.2), LocalVar(15), 0)
                     EVT_IF_EQ(LocalFlag(0), 0)
                         EVT_SET(LocalFlag(0), 1)
                         EVT_CALL(PlaySoundAtModel, LocalVar(3), 358, 0)
@@ -94,7 +94,7 @@ EvtScript N(shakeTree) = {
                 EVT_BUF_READ1(LocalVar(2))
                 EVT_LOOP(LocalVar(2))
                     EVT_BUF_READ1(LocalVar(3))
-                    EVT_CALL(N(TransformFoliage), LocalVar(3), EVT_FIXED(0.1), EVT_FIXED(-0.2), LocalVar(15), 0)
+                    EVT_CALL(N(TransformFoliage), LocalVar(3), EVT_FLOAT(0.1), EVT_FLOAT(-0.2), LocalVar(15), 0)
                 EVT_END_LOOP
                 EVT_WAIT(1)
             EVT_END_LOOP
@@ -115,7 +115,7 @@ EvtScript N(shakeTree) = {
                 EVT_BUF_READ1(LocalVar(3))
                 EVT_LOOP(LocalVar(3))
                     EVT_BUF_READ1(LocalVar(4))
-                    EVT_CALL(N(TransformFoliage), LocalVar(4), EVT_FIXED(0.1), EVT_FIXED(0.2), LocalVar(15), 0)
+                    EVT_CALL(N(TransformFoliage), LocalVar(4), EVT_FLOAT(0.1), EVT_FLOAT(0.2), LocalVar(15), 0)
                     EVT_IF_EQ(LocalFlag(0), 0)
                         EVT_SET(LocalFlag(0), 1)
                         EVT_CALL(PlaySoundAtModel, LocalVar(4), 357, 0)
@@ -126,7 +126,7 @@ EvtScript N(shakeTree) = {
                 EVT_BUF_READ1(LocalVar(3))
                 EVT_LOOP(LocalVar(3))
                     EVT_BUF_READ1(LocalVar(4))
-                    EVT_CALL(N(TransformFoliage), LocalVar(4), EVT_FIXED(0.1), EVT_FIXED(-0.2), LocalVar(15), 0)
+                    EVT_CALL(N(TransformFoliage), LocalVar(4), EVT_FLOAT(0.1), EVT_FLOAT(-0.2), LocalVar(15), 0)
                 EVT_END_LOOP
                 EVT_WAIT(1)
             EVT_END_LOOP

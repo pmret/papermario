@@ -153,8 +153,8 @@ EvtScript N(80244500) = {
     EVT_WAIT(15)
     EVT_CALL(PlaySound, 0x204D)
     EVT_THREAD
-        EVT_CALL(ShakeCam, 0, 0, 30, EVT_FIXED(0.8))
-        EVT_CALL(ShakeCam, 0, 0, 5, EVT_FIXED(0.2))
+        EVT_CALL(ShakeCam, 0, 0, 30, EVT_FLOAT(0.8))
+        EVT_CALL(ShakeCam, 0, 0, 5, EVT_FLOAT(0.2))
     EVT_END_THREAD
     EVT_CALL(MakeLerp, LocalVar(5), LocalVar(6), 30, 0)
     EVT_LOOP(0)
@@ -216,8 +216,8 @@ EvtScript N(802448FC) = {
     EVT_WAIT(15)
     EVT_CALL(PlaySound, 0x204D)
     EVT_THREAD
-        EVT_CALL(ShakeCam, 0, 0, 30, EVT_FIXED(0.8))
-        EVT_CALL(ShakeCam, 0, 0, 5, EVT_FIXED(0.2))
+        EVT_CALL(ShakeCam, 0, 0, 30, EVT_FLOAT(0.8))
+        EVT_CALL(ShakeCam, 0, 0, 5, EVT_FLOAT(0.2))
     EVT_END_THREAD
     EVT_CALL(MakeLerp, LocalVar(5), LocalVar(6), 30, 0)
     EVT_LOOP(0)
@@ -287,8 +287,8 @@ EvtScript N(80244DC8) = {
     EVT_WAIT(15)
     EVT_CALL(PlaySound, 0x204D)
     EVT_THREAD
-        EVT_CALL(ShakeCam, 0, 0, 30, EVT_FIXED(0.8))
-        EVT_CALL(ShakeCam, 0, 0, 5, EVT_FIXED(0.2))
+        EVT_CALL(ShakeCam, 0, 0, 30, EVT_FLOAT(0.8))
+        EVT_CALL(ShakeCam, 0, 0, 5, EVT_FLOAT(0.2))
     EVT_END_THREAD
     EVT_CALL(MakeLerp, LocalVar(5), LocalVar(6), 30, 0)
     EVT_LOOP(0)

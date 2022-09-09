@@ -39,8 +39,8 @@ EvtScript N(80240690) = {
     EVT_SUB(LocalVar(12), LocalVar(0))
     EVT_SUB(LocalVar(13), LocalVar(1))
     EVT_SETF(LocalVar(0), LocalVar(12))
-    EVT_DIVF(LocalVar(0), EVT_FIXED(100.0))
-    EVT_SETF(LocalVar(15), EVT_FIXED(100.0))
+    EVT_DIVF(LocalVar(0), EVT_FLOAT(100.0))
+    EVT_SETF(LocalVar(15), EVT_FLOAT(100.0))
     EVT_DIVF(LocalVar(15), LocalVar(0))
     EVT_ADD(LocalVar(15), 11)
     EVT_SET(LocalVar(5), 200)
@@ -209,10 +209,10 @@ EvtScript N(8024183C) = {
     EVT_CALL(UseSettingsFrom, 0, 170, 0, 160)
     EVT_CALL(SetPanTarget, 0, 170, -90, 160)
     EVT_CALL(SetCamDistance, 0, 800)
-    EVT_CALL(SetCamPitch, 0, EVT_FIXED(18.5), EVT_FIXED(-7.5))
-    EVT_CALL(SetCamPosA, 0, EVT_FIXED(-300.0), EVT_FIXED(200.0))
-    EVT_CALL(SetCamPosB, 0, EVT_FIXED(300.0), EVT_FIXED(-150.0))
-    EVT_CALL(SetCamSpeed, 0, EVT_FIXED(90.0))
+    EVT_CALL(SetCamPitch, 0, EVT_FLOAT(18.5), EVT_FLOAT(-7.5))
+    EVT_CALL(SetCamPosA, 0, EVT_FLOAT(-300.0), EVT_FLOAT(200.0))
+    EVT_CALL(SetCamPosB, 0, EVT_FLOAT(300.0), EVT_FLOAT(-150.0))
+    EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(90.0))
     EVT_CALL(PanToTarget, 0, 0, 1)
     EVT_CALL(PlaySound, 0x80000050)
     EVT_THREAD
@@ -249,10 +249,10 @@ EvtScript N(8024183C) = {
     EVT_CMD(EVT_OP_CALL, EVT_ADDR(UseSettingsFrom), 0, 170, 0, 160),
     EVT_CMD(EVT_OP_CALL, EVT_ADDR(SetPanTarget), 0, 170, -90, 160),
     EVT_CMD(EVT_OP_CALL, EVT_ADDR(SetCamDistance), 0, 800),
-    EVT_CMD(EVT_OP_CALL, EVT_ADDR(SetCamPitch), 0, EVT_FIXED(18.5), EVT_FIXED(-7.5)),
-    EVT_CMD(EVT_OP_CALL, EVT_ADDR(SetCamPosA), 0, EVT_FIXED(-300.0), EVT_FIXED(200.0)),
-    EVT_CMD(EVT_OP_CALL, EVT_ADDR(SetCamPosB), 0, EVT_FIXED(300.0), EVT_FIXED(-150.0)),
-    EVT_CMD(EVT_OP_CALL, EVT_ADDR(SetCamSpeed), 0, EVT_FIXED(90.0)),
+    EVT_CMD(EVT_OP_CALL, EVT_ADDR(SetCamPitch), 0, EVT_FLOAT(18.5), EVT_FLOAT(-7.5)),
+    EVT_CMD(EVT_OP_CALL, EVT_ADDR(SetCamPosA), 0, EVT_FLOAT(-300.0), EVT_FLOAT(200.0)),
+    EVT_CMD(EVT_OP_CALL, EVT_ADDR(SetCamPosB), 0, EVT_FLOAT(300.0), EVT_FLOAT(-150.0)),
+    EVT_CMD(EVT_OP_CALL, EVT_ADDR(SetCamSpeed), 0, EVT_FLOAT(90.0)),
     EVT_CMD(EVT_OP_CALL, EVT_ADDR(PanToTarget), 0, 0, 1),
     EVT_CMD(EVT_OP_CALL, EVT_ADDR(PlaySound), 0x80000050),
     EVT_CMD(EVT_OP_THREAD),

@@ -7,13 +7,13 @@ enum {
 
 EvtScript N(802400F0) = {
     EVT_CALL(SetCamType, 0, 6, 1)
-    EVT_CALL(SetCamSpeed, 0, EVT_FIXED(3.0))
+    EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(3.0))
     EVT_CALL(UseSettingsFrom, 0, 60, 30, 0)
     EVT_CALL(SetPanTarget, 0, 60, 30, 0)
-    EVT_CALL(SetCamPitch, 0, EVT_FIXED(20.0), EVT_FIXED(-13.0))
+    EVT_CALL(SetCamPitch, 0, EVT_FLOAT(20.0), EVT_FLOAT(-13.0))
     EVT_CALL(SetCamDistance, 0, 275)
     EVT_CALL(PanToTarget, 0, 0, 1)
-    EVT_CALL(WaitForCam, 0, EVT_FIXED(1.0))
+    EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
     EVT_RETURN
     EVT_END
 };
@@ -21,7 +21,7 @@ EvtScript N(802400F0) = {
 EvtScript N(802401BC) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_WAIT(30)
-    EVT_CALL(SetPlayerSpeed, EVT_FIXED(3.0))
+    EVT_CALL(SetPlayerSpeed, EVT_FLOAT(3.0))
     EVT_CALL(PlayerMoveTo, 6, 0, 0)
     EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_tubbas_heart_Palette_00_Anim_B, NPC_ANIM_tubbas_heart_Palette_00_Anim_1, 0, MESSAGE_ID(0x0E, 0x00BF))
     EVT_WAIT(10)
@@ -37,7 +37,7 @@ EvtScript N(802401BC) = {
     EVT_WAIT(20)
     EVT_CALL(SetPlayerAnimation, 589824)
     EVT_THREAD
-        EVT_CALL(SetNpcJumpscale, 0, EVT_FIXED(2.5))
+        EVT_CALL(SetNpcJumpscale, 0, EVT_FLOAT(2.5))
         EVT_CALL(GetNpcPos, 0, LocalVar(0), LocalVar(1), LocalVar(2))
         EVT_CALL(PlaySoundAtNpc, 0, 0x20C8, 0)
         EVT_CALL(NpcJump0, 0, LocalVar(0), LocalVar(1), LocalVar(2), 10)
@@ -140,14 +140,14 @@ EvtScript N(idle_802406CC) = {
     EVT_END_LOOP
     EVT_THREAD
         EVT_CALL(SetCamType, 0, 6, 1)
-        EVT_CALL(SetCamSpeed, 0, EVT_FIXED(4.0))
+        EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(4.0))
         EVT_CALL(GetPlayerPos, LocalVar(0), LocalVar(1), LocalVar(2))
         EVT_ADD(LocalVar(0), 50)
         EVT_CALL(UseSettingsFrom, 0, LocalVar(0), LocalVar(1), LocalVar(2))
         EVT_CALL(SetPanTarget, 0, LocalVar(0), LocalVar(1), LocalVar(2))
         EVT_CALL(SetCamDistance, 0, 3000)
         EVT_CALL(PanToTarget, 0, 0, 1)
-        EVT_CALL(WaitForCam, 0, EVT_FIXED(1.0))
+        EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
     EVT_END_THREAD
     EVT_CALL(StartBossBattle, 11)
     EVT_RETURN
@@ -194,7 +194,7 @@ s32 N(intTable_80240988)[] = {
 EvtScript N(defeat_802409DC) = {
     EVT_THREAD
         EVT_CALL(SetCamType, 0, 6, 1)
-        EVT_CALL(SetCamSpeed, 0, EVT_FIXED(90.0))
+        EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(90.0))
         EVT_CALL(GetPlayerPos, LocalVar(0), LocalVar(1), LocalVar(2))
         EVT_ADD(LocalVar(0), 50)
         EVT_CALL(UseSettingsFrom, 0, LocalVar(0), LocalVar(1), LocalVar(2))
@@ -206,7 +206,7 @@ EvtScript N(defeat_802409DC) = {
     EVT_CALL(PlayerFaceNpc, 0, 1)
     EVT_LOOP(2)
         EVT_CALL(GetNpcPos, 0, LocalVar(0), LocalVar(1), LocalVar(2))
-        EVT_CALL(SetNpcJumpscale, 0, EVT_FIXED(2.5))
+        EVT_CALL(SetNpcJumpscale, 0, EVT_FLOAT(2.5))
         EVT_CALL(PlaySoundAtNpc, NPC_SELF, 0x20C8, 0)
         EVT_CALL(NpcJump0, 0, LocalVar(0), LocalVar(1), LocalVar(2), 12)
         EVT_WAIT(1)
@@ -214,8 +214,8 @@ EvtScript N(defeat_802409DC) = {
     EVT_THREAD
         EVT_WAIT(10)
         EVT_CALL(SetCamType, 0, 4, 1)
-        EVT_CALL(SetCamSpeed, 0, EVT_FIXED(2.0))
-        EVT_CALL(SetCamPitch, 0, EVT_FIXED(17.0), EVT_FIXED(-7.0))
+        EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(2.0))
+        EVT_CALL(SetCamPitch, 0, EVT_FLOAT(17.0), EVT_FLOAT(-7.0))
         EVT_CALL(SetCamDistance, 0, 450)
         EVT_CALL(SetCamPosA, 0, -56, 70)
         EVT_CALL(SetCamPosB, 0, -90, 40)
@@ -246,13 +246,13 @@ EvtScript N(defeat_802409DC) = {
     EVT_EXEC(N(802408D8))
     EVT_WAIT(30)
     EVT_CALL(SetCamType, 0, 6, 1)
-    EVT_CALL(SetCamSpeed, 0, EVT_FIXED(90.0))
+    EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(90.0))
     EVT_CALL(GetPlayerPos, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_CALL(UseSettingsFrom, 0, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_CALL(SetPanTarget, 0, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_CALL(SetCamDistance, 0, 450)
     EVT_CALL(PanToTarget, 0, 0, 1)
-    EVT_CALL(WaitForCam, 0, EVT_FIXED(1.0))
+    EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
     EVT_CALL(PanToTarget, 0, 0, 0)
     EVT_SET(GB_StoryProgress, -22)
     EVT_RETURN

@@ -5,7 +5,7 @@ import sys
 def get_variable(arg):
     v = arg - 2**32 # convert to s32
     if v > -250000000:
-        if v <= -220000000: return f"EVT_FIXED({(v + 230000000) / 1024})"
+        if v <= -220000000: return f"EVT_FLOAT({(v + 230000000) / 1024})"
         elif v <= -200000000: return f"ArrayFlag({v + 210000000})"
         elif v <= -180000000: return f"ArrayVar({v + 190000000})"
         elif v <= -160000000: return f"GameByte({v + 170000000})"

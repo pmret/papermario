@@ -74,8 +74,8 @@ EvtScript N(EVS_Quizmo_SetQuizCamera) = {
     EVT_END_IF
     EVT_CALL(SetCamDistance, 0, LocalVar(0))
     EVT_CALL(GetCamPitch, 0, LocalVar(0), LocalVar(1))
-    EVT_SETF(LocalVar(0), EVT_FIXED(13.0))
-    EVT_SETF(LocalVar(1), EVT_FIXED(-10.0))
+    EVT_SETF(LocalVar(0), EVT_FLOAT(13.0))
+    EVT_SETF(LocalVar(1), EVT_FLOAT(-10.0))
     EVT_CALL(SetCamPitch, 0, LocalVar(0), LocalVar(1))
     EVT_CALL(PanToTarget, 0, 0, 1)
     EVT_CALL(SetCamLeadPlayer, 0, 0)
@@ -94,8 +94,8 @@ EvtScript N(EVS_Quizmo_OtherCamScript) = {
         EVT_SETF(LocalVar(0), -17)
     EVT_END_IF
     EVT_CALL(SetCamDistance, 0, LocalVar(0))
-    EVT_CALL(SetCamSpeed, 0, EVT_FIXED(90.0))
-    EVT_CALL(WaitForCam, 0, EVT_FIXED(1.0))
+    EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(90.0))
+    EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
     EVT_CALL(SetCamSpeed, 0, 1)
     EVT_RETURN
     EVT_END

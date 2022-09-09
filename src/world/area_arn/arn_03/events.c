@@ -302,7 +302,7 @@ EvtScript N(idle_80242064) = {
         EVT_CALL(GetPlayerPos, LocalVar(0), LocalVar(1), LocalVar(2))
         EVT_CALL(UseSettingsFrom, 0, LocalVar(0), LocalVar(1), LocalVar(2))
         EVT_CALL(SetCamDistance, 0, 325)
-        EVT_CALL(SetCamSpeed, 0, EVT_FIXED(4.0))
+        EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(4.0))
         EVT_CALL(SetPanTarget, 0, LocalVar(0), LocalVar(1), LocalVar(2))
         EVT_CALL(PanToTarget, 0, 0, 1)
     EVT_END_THREAD
@@ -354,7 +354,7 @@ EvtScript N(idle_80242064) = {
     EVT_CALL(UseSettingsFrom, 0, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_CALL(SetCamSpeed, 0, 3)
     EVT_CALL(PanToTarget, 0, 0, 1)
-    EVT_CALL(WaitForCam, 0, EVT_FIXED(1.0))
+    EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
     EVT_CALL(PanToTarget, 0, 0, 0)
     EVT_RETURN
     EVT_END
@@ -548,7 +548,7 @@ EvtScript N(interact_80242DC4) = {
             EVT_THREAD
                 EVT_CALL(GetPlayerPos, LocalVar(0), LocalVar(1), LocalVar(2))
                 EVT_ADD(LocalVar(2), -20)
-                EVT_CALL(SetNpcSpeed, NPC_PARTNER, EVT_FIXED(2.0))
+                EVT_CALL(SetNpcSpeed, NPC_PARTNER, EVT_FLOAT(2.0))
                 EVT_CALL(NpcMoveTo, NPC_PARTNER, LocalVar(0), LocalVar(2), 0)
                 EVT_CALL(NpcFaceNpc, NPC_PARTNER, NPC_SELF, 1)
             EVT_END_THREAD
@@ -567,7 +567,7 @@ EvtScript N(interact_80242DC4) = {
             EVT_THREAD
                 EVT_CALL(GetPlayerPos, LocalVar(0), LocalVar(1), LocalVar(2))
                 EVT_ADD(LocalVar(2), -20)
-                EVT_CALL(SetNpcSpeed, NPC_PARTNER, EVT_FIXED(2.0))
+                EVT_CALL(SetNpcSpeed, NPC_PARTNER, EVT_FLOAT(2.0))
                 EVT_CALL(NpcMoveTo, NPC_PARTNER, LocalVar(0), LocalVar(2), 0)
                 EVT_CALL(NpcFaceNpc, NPC_PARTNER, NPC_SELF, 1)
             EVT_END_THREAD
@@ -801,14 +801,14 @@ EvtScript N(idle_80243D28) = {
     EVT_LOOP(0)
         EVT_CALL(RandInt, 5, LocalVar(5))
         EVT_SETF(LocalVar(6), LocalVar(5))
-        EVT_MULF(LocalVar(6), EVT_FIXED(0.1))
-        EVT_ADDF(LocalVar(6), EVT_FIXED(0.8))
+        EVT_MULF(LocalVar(6), EVT_FLOAT(0.1))
+        EVT_ADDF(LocalVar(6), EVT_FLOAT(0.8))
         EVT_CALL(SetNpcSpeed, NPC_SELF, LocalVar(6))
         EVT_CALL(NpcMoveTo, NPC_SELF, LocalVar(3), LocalVar(2), 0)
         EVT_CALL(RandInt, 5, LocalVar(5))
         EVT_SETF(LocalVar(6), LocalVar(5))
-        EVT_MULF(LocalVar(6), EVT_FIXED(0.1))
-        EVT_ADDF(LocalVar(6), EVT_FIXED(0.8))
+        EVT_MULF(LocalVar(6), EVT_FLOAT(0.1))
+        EVT_ADDF(LocalVar(6), EVT_FLOAT(0.8))
         EVT_CALL(SetNpcSpeed, NPC_SELF, LocalVar(6))
         EVT_CALL(NpcMoveTo, NPC_SELF, LocalVar(4), LocalVar(2), 0)
     EVT_END_LOOP

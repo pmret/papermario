@@ -547,7 +547,7 @@ EvtScript N(8023994C) = {
 EvtScript N(80239988) = {
     EVT_CALL(UseIdleAnimation, 256, 0)
     EVT_CALL(SetGoalToHome, 256)
-    EVT_CALL(SetActorSpeed, 256, EVT_FIXED(6.0))
+    EVT_CALL(SetActorSpeed, 256, EVT_FLOAT(6.0))
     EVT_CALL(SetAnimation, 256, -1, 589827)
     EVT_CALL(SetActorYaw, 256, 0)
     EVT_CALL(RunToGoal, 256, 0)
@@ -620,7 +620,7 @@ EvtScript N(80239CA8) = {
     EVT_SUB(LocalVar(0), 30)
     EVT_SET(LocalVar(1), 0)
     EVT_CALL(SetGoalPos, 256, LocalVar(0), LocalVar(1), LocalVar(2))
-    EVT_CALL(SetActorJumpGravity, 256, EVT_FIXED(1.2))
+    EVT_CALL(SetActorJumpGravity, 256, EVT_FLOAT(1.2))
     EVT_CALL(battle_partner_goombario_func_80238000_6F10E0)
     EVT_CALL(JumpToGoal, 256, LocalVar(0), 0, 1, 0)
     EVT_CALL(SetAnimation, -127, 1, 589831)
@@ -643,7 +643,7 @@ EvtScript N(80239CA8) = {
     EVT_CALL(SetActorDispOffset, -127, 0, 0, 0)
     EVT_WAIT(2)
     EVT_CALL(SetGoalToHome, 256)
-    EVT_CALL(SetActorSpeed, 256, EVT_FIXED(8.0))
+    EVT_CALL(SetActorSpeed, 256, EVT_FLOAT(8.0))
     EVT_CALL(SetAnimation, 256, -1, 589827)
     EVT_CALL(RunToGoal, 256, 0)
     EVT_CALL(SetAnimation, 256, -1, 589825)
@@ -659,7 +659,7 @@ EvtScript N(8023A06C) = {
     EVT_CALL(GetGoalPos, 256, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_ADD(LocalVar(0), 60)
     EVT_CALL(SetGoalPos, 256, LocalVar(0), LocalVar(1), LocalVar(2))
-    EVT_CALL(SetActorJumpGravity, 256, EVT_FIXED(1.4))
+    EVT_CALL(SetActorJumpGravity, 256, EVT_FLOAT(1.4))
     EVT_CALL(battle_partner_goombario_func_80238000_6F10E0)
     EVT_THREAD
         EVT_WAIT(4)
@@ -709,7 +709,7 @@ EvtScript N(8023A06C) = {
     EVT_CALL(SetAnimation, 256, -1, 589825)
     EVT_WAIT(2)
     EVT_CALL(SetGoalToHome, 256)
-    EVT_CALL(SetActorSpeed, 256, EVT_FIXED(8.0))
+    EVT_CALL(SetActorSpeed, 256, EVT_FLOAT(8.0))
     EVT_CALL(SetAnimation, 256, -1, 589827)
     EVT_CALL(RunToGoal, 256, 0)
     EVT_CALL(SetAnimation, 256, -1, 589825)
@@ -724,13 +724,13 @@ EvtScript N(8023A52C) = {
     EVT_CALL(InitTargetIterator)
     EVT_CALL(SetGoalToTarget, 256)
     EVT_CALL(GetGoalPos, 256, LocalVar(3), LocalVar(4), LocalVar(5))
-    EVT_SUB(LocalVar(3), EVT_FIXED(70.0))
+    EVT_SUB(LocalVar(3), EVT_FLOAT(70.0))
     EVT_IF_LT(LocalVar(0), LocalVar(3))
         EVT_SET(LocalVar(3), LocalVar(0))
     EVT_END_IF
     EVT_CALL(SetGoalPos, 256, LocalVar(3), LocalVar(4), LocalVar(5))
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_47)
-    EVT_CALL(SetActorSpeed, 256, EVT_FIXED(5.0))
+    EVT_CALL(SetActorSpeed, 256, EVT_FLOAT(5.0))
     EVT_CALL(SetAnimation, 256, -1, 589827)
     EVT_CALL(RunToGoal, 256, 0)
     EVT_CALL(SetAnimation, 256, -1, 589825)
@@ -749,7 +749,7 @@ EvtScript N(8023A66C) = {
         EVT_SET(LocalVar(11), LocalVar(7))
     EVT_END_IF
     EVT_SUB(LocalVar(11), 20)
-    EVT_DIVF(LocalVar(11), EVT_FIXED(10.5888671875))
+    EVT_DIVF(LocalVar(11), EVT_FLOAT(10.5888671875))
     EVT_ADDF(LocalVar(11), 15)
     EVT_SET(LocalVar(10), LocalVar(11))
     EVT_RETURN
@@ -780,7 +780,7 @@ EvtScript N(8023A754) = {
         EVT_CALL(SetJumpAnimations, 256, 0, 589830, 589830, 589830)
         EVT_CALL(battle_partner_goombario_func_80238A20_6F1B00)
         EVT_THREAD
-            EVT_CALL(ShakeCam, 1, 0, 5, EVT_FIXED(1.0))
+            EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(1.0))
         EVT_END_THREAD
         EVT_CALL(PlaySoundAtActor, 256, 354)
         EVT_WAIT(20)
@@ -788,11 +788,11 @@ EvtScript N(8023A754) = {
         EVT_RETURN
     EVT_END_IF
     EVT_CHILD_THREAD
-        EVT_CALL(SetActorScale, 256, EVT_FIXED(1.1), EVT_FIXED(0.8), EVT_FIXED(1.0))
+        EVT_CALL(SetActorScale, 256, EVT_FLOAT(1.1), EVT_FLOAT(0.8), EVT_FLOAT(1.0))
         EVT_WAIT(1)
-        EVT_CALL(SetActorScale, 256, EVT_FIXED(1.3), EVT_FIXED(0.5), EVT_FIXED(1.0))
+        EVT_CALL(SetActorScale, 256, EVT_FLOAT(1.3), EVT_FLOAT(0.5), EVT_FLOAT(1.0))
         EVT_WAIT(1)
-        EVT_CALL(SetActorScale, 256, EVT_FIXED(1.0), EVT_FIXED(1.0), EVT_FIXED(1.0))
+        EVT_CALL(SetActorScale, 256, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
     EVT_END_CHILD_THREAD
     EVT_WAIT(1)
     EVT_CALL(GetActionCommandResult, LocalVar(0))
@@ -844,11 +844,11 @@ EvtScript N(8023A754) = {
     EVT_CALL(PlaySoundAtActor, 256, 641)
     EVT_CALL(func_8023817C_6F125C, LocalVar(10), 3)
     EVT_CHILD_THREAD
-        EVT_CALL(SetActorScale, 256, EVT_FIXED(1.1), EVT_FIXED(0.8), EVT_FIXED(1.0))
+        EVT_CALL(SetActorScale, 256, EVT_FLOAT(1.1), EVT_FLOAT(0.8), EVT_FLOAT(1.0))
         EVT_WAIT(1)
-        EVT_CALL(SetActorScale, 256, EVT_FIXED(1.3), EVT_FIXED(0.5), EVT_FIXED(1.0))
+        EVT_CALL(SetActorScale, 256, EVT_FLOAT(1.3), EVT_FLOAT(0.5), EVT_FLOAT(1.0))
         EVT_WAIT(1)
-        EVT_CALL(SetActorScale, 256, EVT_FIXED(1.0), EVT_FIXED(1.0), EVT_FIXED(1.0))
+        EVT_CALL(SetActorScale, 256, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
     EVT_END_CHILD_THREAD
     EVT_WAIT(1)
     EVT_CALL(battle_partner_goombario_StopGlowingAndGet)
@@ -885,7 +885,7 @@ EvtScript N(8023ADC4) = {
         EVT_CALL(SetJumpAnimations, 256, 0, 589830, 589830, 589830)
         EVT_CALL(battle_partner_goombario_func_80238A20_6F1B00)
         EVT_THREAD
-            EVT_CALL(ShakeCam, 1, 0, 5, EVT_FIXED(1.0))
+            EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(1.0))
         EVT_END_THREAD
         EVT_CALL(PlaySoundAtActor, 256, 354)
         EVT_WAIT(20)
@@ -893,11 +893,11 @@ EvtScript N(8023ADC4) = {
         EVT_RETURN
     EVT_END_IF
     EVT_CHILD_THREAD
-        EVT_CALL(SetActorScale, 256, EVT_FIXED(1.1), EVT_FIXED(0.8), EVT_FIXED(1.0))
+        EVT_CALL(SetActorScale, 256, EVT_FLOAT(1.1), EVT_FLOAT(0.8), EVT_FLOAT(1.0))
         EVT_WAIT(1)
-        EVT_CALL(SetActorScale, 256, EVT_FIXED(1.3), EVT_FIXED(0.5), EVT_FIXED(1.0))
+        EVT_CALL(SetActorScale, 256, EVT_FLOAT(1.3), EVT_FLOAT(0.5), EVT_FLOAT(1.0))
         EVT_WAIT(1)
-        EVT_CALL(SetActorScale, 256, EVT_FIXED(1.0), EVT_FIXED(1.0), EVT_FIXED(1.0))
+        EVT_CALL(SetActorScale, 256, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
     EVT_END_CHILD_THREAD
     EVT_WAIT(1)
     EVT_CALL(GetActionCommandResult, LocalVar(0))
@@ -951,11 +951,11 @@ EvtScript N(8023ADC4) = {
     EVT_CALL(func_8023817C_6F125C, LocalVar(10), 3)
     EVT_CALL(EnableActorBlur, 256, -1)
     EVT_CHILD_THREAD
-        EVT_CALL(SetActorScale, 256, EVT_FIXED(1.1), EVT_FIXED(0.8), EVT_FIXED(1.0))
+        EVT_CALL(SetActorScale, 256, EVT_FLOAT(1.1), EVT_FLOAT(0.8), EVT_FLOAT(1.0))
         EVT_WAIT(1)
-        EVT_CALL(SetActorScale, 256, EVT_FIXED(1.3), EVT_FIXED(0.5), EVT_FIXED(1.0))
+        EVT_CALL(SetActorScale, 256, EVT_FLOAT(1.3), EVT_FLOAT(0.5), EVT_FLOAT(1.0))
         EVT_WAIT(1)
-        EVT_CALL(SetActorScale, 256, EVT_FIXED(1.0), EVT_FIXED(1.0), EVT_FIXED(1.0))
+        EVT_CALL(SetActorScale, 256, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
     EVT_END_CHILD_THREAD
     EVT_WAIT(1)
     EVT_CALL(battle_partner_goombario_StopGlowingAndGet)
@@ -992,7 +992,7 @@ EvtScript N(8023B45C) = {
         EVT_CALL(SetJumpAnimations, 256, 0, 589830, 589830, 589830)
         EVT_CALL(battle_partner_goombario_func_80238A20_6F1B00)
         EVT_THREAD
-            EVT_CALL(ShakeCam, 1, 0, 5, EVT_FIXED(1.0))
+            EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(1.0))
         EVT_END_THREAD
         EVT_CALL(PlaySoundAtActor, 256, 354)
         EVT_WAIT(20)
@@ -1000,11 +1000,11 @@ EvtScript N(8023B45C) = {
         EVT_RETURN
     EVT_END_IF
     EVT_CHILD_THREAD
-        EVT_CALL(SetActorScale, 256, EVT_FIXED(1.1), EVT_FIXED(0.8), EVT_FIXED(1.0))
+        EVT_CALL(SetActorScale, 256, EVT_FLOAT(1.1), EVT_FLOAT(0.8), EVT_FLOAT(1.0))
         EVT_WAIT(1)
-        EVT_CALL(SetActorScale, 256, EVT_FIXED(1.3), EVT_FIXED(0.5), EVT_FIXED(1.0))
+        EVT_CALL(SetActorScale, 256, EVT_FLOAT(1.3), EVT_FLOAT(0.5), EVT_FLOAT(1.0))
         EVT_WAIT(1)
-        EVT_CALL(SetActorScale, 256, EVT_FIXED(1.0), EVT_FIXED(1.0), EVT_FIXED(1.0))
+        EVT_CALL(SetActorScale, 256, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
     EVT_END_CHILD_THREAD
     EVT_WAIT(1)
     EVT_CALL(GetActionCommandResult, LocalVar(0))
@@ -1067,11 +1067,11 @@ EvtScript N(8023B45C) = {
     EVT_CALL(func_8023817C_6F125C, LocalVar(10), 3)
     EVT_CALL(EnableActorBlur, 256, -1)
     EVT_CHILD_THREAD
-        EVT_CALL(SetActorScale, 256, EVT_FIXED(1.1), EVT_FIXED(0.8), EVT_FIXED(1.0))
+        EVT_CALL(SetActorScale, 256, EVT_FLOAT(1.1), EVT_FLOAT(0.8), EVT_FLOAT(1.0))
         EVT_WAIT(1)
-        EVT_CALL(SetActorScale, 256, EVT_FIXED(1.3), EVT_FIXED(0.5), EVT_FIXED(1.0))
+        EVT_CALL(SetActorScale, 256, EVT_FLOAT(1.3), EVT_FLOAT(0.5), EVT_FLOAT(1.0))
         EVT_WAIT(1)
-        EVT_CALL(SetActorScale, 256, EVT_FIXED(1.0), EVT_FIXED(1.0), EVT_FIXED(1.0))
+        EVT_CALL(SetActorScale, 256, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
     EVT_END_CHILD_THREAD
     EVT_WAIT(1)
     EVT_CALL(battle_partner_goombario_StopGlowingAndGet)
@@ -1114,7 +1114,7 @@ EvtScript N(8023BB9C) = {
         EVT_CALL(SetJumpAnimations, 256, 0, 589830, 589830, 589830)
         EVT_CALL(battle_partner_goombario_func_80238A20_6F1B00)
         EVT_THREAD
-            EVT_CALL(ShakeCam, 1, 0, 5, EVT_FIXED(1.0))
+            EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(1.0))
         EVT_END_THREAD
         EVT_CALL(PlaySoundAtActor, 256, 354)
         EVT_WAIT(20)
@@ -1122,11 +1122,11 @@ EvtScript N(8023BB9C) = {
         EVT_RETURN
     EVT_END_IF
     EVT_CHILD_THREAD
-        EVT_CALL(SetActorScale, 256, EVT_FIXED(1.1), EVT_FIXED(0.8), EVT_FIXED(1.0))
+        EVT_CALL(SetActorScale, 256, EVT_FLOAT(1.1), EVT_FLOAT(0.8), EVT_FLOAT(1.0))
         EVT_WAIT(1)
-        EVT_CALL(SetActorScale, 256, EVT_FIXED(1.3), EVT_FIXED(0.5), EVT_FIXED(1.0))
+        EVT_CALL(SetActorScale, 256, EVT_FLOAT(1.3), EVT_FLOAT(0.5), EVT_FLOAT(1.0))
         EVT_WAIT(1)
-        EVT_CALL(SetActorScale, 256, EVT_FIXED(1.0), EVT_FIXED(1.0), EVT_FIXED(1.0))
+        EVT_CALL(SetActorScale, 256, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
     EVT_END_CHILD_THREAD
     EVT_WAIT(1)
     EVT_CALL(GetActionCommandResult, LocalVar(0))
@@ -1215,11 +1215,11 @@ EvtScript N(8023BB9C) = {
         EVT_SET(LocalFlag(0), 1)
     EVT_END_IF
     EVT_CHILD_THREAD
-        EVT_CALL(SetActorScale, 256, EVT_FIXED(1.1), EVT_FIXED(0.8), EVT_FIXED(1.0))
+        EVT_CALL(SetActorScale, 256, EVT_FLOAT(1.1), EVT_FLOAT(0.8), EVT_FLOAT(1.0))
         EVT_WAIT(1)
-        EVT_CALL(SetActorScale, 256, EVT_FIXED(1.3), EVT_FIXED(0.5), EVT_FIXED(1.0))
+        EVT_CALL(SetActorScale, 256, EVT_FLOAT(1.3), EVT_FLOAT(0.5), EVT_FLOAT(1.0))
         EVT_WAIT(1)
-        EVT_CALL(SetActorScale, 256, EVT_FIXED(1.0), EVT_FIXED(1.0), EVT_FIXED(1.0))
+        EVT_CALL(SetActorScale, 256, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
     EVT_END_CHILD_THREAD
     EVT_WAIT(1)
     EVT_CALL(GetActionCommandResult, LocalVar(0))
@@ -1265,7 +1265,7 @@ EvtScript N(8023BB9C) = {
 EvtScript N(8023C5B8) = {
     EVT_CALL(GetActorPos, 256, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_ADD(LocalVar(0), 30)
-    EVT_CALL(SetActorSpeed, 256, EVT_FIXED(6.0))
+    EVT_CALL(SetActorSpeed, 256, EVT_FLOAT(6.0))
     EVT_CALL(SetAnimation, 256, -1, 589827)
     EVT_CALL(SetGoalPos, 256, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_CALL(RunToGoal, 256, 0, 0)
@@ -1300,8 +1300,8 @@ EvtScript N(8023C5B8) = {
     EVT_CALL(SetBattleFlagBits, 4, 0)
     EVT_CALL(func_80280818)
     EVT_CALL(SetGoalToHome, 256)
-    EVT_CALL(SetActorSpeed, 256, EVT_FIXED(4.0))
-    EVT_CALL(SetActorJumpGravity, 256, EVT_FIXED(1.8))
+    EVT_CALL(SetActorSpeed, 256, EVT_FLOAT(4.0))
+    EVT_CALL(SetActorJumpGravity, 256, EVT_FLOAT(1.8))
     EVT_CALL(SetAnimation, 256, -1, 589827)
     EVT_CALL(RunToGoal, 256, 0)
     EVT_CALL(SetAnimation, 256, -1, 589825)
@@ -1317,16 +1317,16 @@ EvtScript N(8023C90C) = {
     EVT_CALL(GetActorPos, 256, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_ADD(LocalVar(1), 15)
     EVT_CALL(PlaySoundAtActor, 256, 8335)
-    EVT_CALL(func_802390C8_6F21A8, LocalVar(0), LocalVar(1), LocalVar(2), EVT_FIXED(1.2))
+    EVT_CALL(func_802390C8_6F21A8, LocalVar(0), LocalVar(1), LocalVar(2), EVT_FLOAT(1.2))
     EVT_WAIT(3)
-    EVT_CALL(func_802390C8_6F21A8, LocalVar(0), LocalVar(1), LocalVar(2), EVT_FIXED(0.8))
+    EVT_CALL(func_802390C8_6F21A8, LocalVar(0), LocalVar(1), LocalVar(2), EVT_FLOAT(0.8))
     EVT_THREAD
         EVT_WAIT(15)
         EVT_CALL(GetActorPos, 256, LocalVar(0), LocalVar(1), LocalVar(2))
         EVT_ADD(LocalVar(1), 15)
         EVT_ADD(LocalVar(2), -5)
         EVT_CALL(PlaySoundAtActor, 256, 8195)
-        EVT_CALL(PlayEffect, 82, 9, LocalVar(0), LocalVar(1), LocalVar(2), EVT_FIXED(2.0), 20, 0, 0, 0, 0, 0, 0, 0)
+        EVT_CALL(PlayEffect, 82, 9, LocalVar(0), LocalVar(1), LocalVar(2), EVT_FLOAT(2.0), 20, 0, 0, 0, 0, 0, 0, 0)
     EVT_END_THREAD
     EVT_WAIT(30)
     EVT_CALL(SetAnimation, 256, -1, 589825)
@@ -1342,7 +1342,7 @@ EvtScript N(8023C90C) = {
         EVT_CALL(PlaySoundAtActor, 256, 8334)
         EVT_CALL(func_80238EDC_6F1FBC, LocalVar(0), LocalVar(1), LocalVar(2))
         EVT_WAIT(4)
-        EVT_CALL(SetActorJumpGravity, 256, EVT_FIXED(1.4))
+        EVT_CALL(SetActorJumpGravity, 256, EVT_FLOAT(1.4))
         EVT_CALL(GetActorPos, 256, LocalVar(0), LocalVar(1), LocalVar(2))
         EVT_CALL(SetJumpAnimations, 256, 589828, 1, 589828, 589828)
         EVT_CALL(SetGoalPos, 256, LocalVar(0), LocalVar(1), LocalVar(2))

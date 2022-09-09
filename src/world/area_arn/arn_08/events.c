@@ -57,7 +57,7 @@ EvtScript N(8024049C) = {
                 EVT_CALL(RotateModel, 0, 80, 0, -1, 0)
                 EVT_CALL(RotateModel, 1, 80, 0, -1, 0)
                 EVT_CALL(SetNpcAnimation, 0, NPC_ANIM_tubbas_heart_Palette_00_Anim_6)
-                EVT_CALL(SetNpcJumpscale, 0, EVT_FIXED(2.5))
+                EVT_CALL(SetNpcJumpscale, 0, EVT_FLOAT(2.5))
                 EVT_CALL(PlaySoundAtNpc, 0, 0x20C8, 0)
                 EVT_CALL(NpcJump0, 0, -50, 0, 50, 10)
                 EVT_CALL(SetNpcAnimation, 0, NPC_ANIM_tubbas_heart_Palette_00_Anim_7)
@@ -89,7 +89,7 @@ EvtScript N(8024049C) = {
                 EVT_SET(GB_StoryProgress, -17)
             EVT_END_IF
             EVT_CALL(DisablePlayerPhysics, FALSE)
-            EVT_CALL(SetPlayerJumpscale, EVT_FIXED(2.0))
+            EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(2.0))
             EVT_CALL(PlayerJump, -10, 0, 75, 18)
             EVT_CALL(DisablePlayerInput, FALSE)
             EVT_EXEC(N(80240470))
@@ -152,7 +152,7 @@ EvtScript N(80240A70) = {
 };
 
 EvtScript N(80240B50) = {
-    EVT_CALL(SetCamProperties, 0, EVT_FIXED(90.0), 0, 0, 0, EVT_FIXED(470.0), EVT_FIXED(17.0), EVT_FIXED(-7.0))
+    EVT_CALL(SetCamProperties, 0, EVT_FLOAT(90.0), 0, 0, 0, EVT_FLOAT(470.0), EVT_FLOAT(17.0), EVT_FLOAT(-7.0))
     EVT_EXEC(N(80240A70))
     EVT_RETURN
     EVT_END
@@ -283,7 +283,7 @@ s32 N(D_80241188_BF5928) = {
 };
 
 EvtScript N(8024118C) = {
-    EVT_CALL(SetCamProperties, 0, EVT_FIXED(90.0), 0, 0, 0, EVT_FIXED(470.0), EVT_FIXED(17.0), EVT_FIXED(-7.0))
+    EVT_CALL(SetCamProperties, 0, EVT_FLOAT(90.0), 0, 0, 0, EVT_FLOAT(470.0), EVT_FLOAT(17.0), EVT_FLOAT(-7.0))
     EVT_CALL(N(func_8024019C_BF493C))
     EVT_SET(GF_DemoSceneDone, 0)
     EVT_EXEC(N(802410AC))

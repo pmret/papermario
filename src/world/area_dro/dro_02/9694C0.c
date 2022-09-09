@@ -147,16 +147,16 @@ EvtScript N(80243D10) = {
     EVT_CALL(PlaySound, 0x80000060)
     EVT_CALL(UseSettingsFrom, 0, 190, 0, -37)
     EVT_CALL(SetPanTarget, 0, 190, 0, -37)
-    EVT_CALL(SetCamDistance, 0, EVT_FIXED(200.0))
-    EVT_CALL(SetCamPitch, 0, EVT_FIXED(13.0), EVT_FIXED(-10.0))
-    EVT_CALL(SetCamSpeed, 0, EVT_FIXED(90.0))
+    EVT_CALL(SetCamDistance, 0, EVT_FLOAT(200.0))
+    EVT_CALL(SetCamPitch, 0, EVT_FLOAT(13.0), EVT_FLOAT(-10.0))
+    EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(90.0))
     EVT_CALL(PanToTarget, 0, 0, 1)
     EVT_CALL(N(UnkFunc27), 2, 0, 3)
     EVT_CALL(N(UnkFunc27), 1, -1, 3)
     EVT_CALL(N(UnkFunc26), 3, 44, 32, 177, 0, 0, 0, 0, 0, 0)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_THREAD
-        EVT_CALL(ShakeCam, 0, 0, 300, EVT_FIXED(0.2))
+        EVT_CALL(ShakeCam, 0, 0, 300, EVT_FLOAT(0.2))
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(60)
@@ -220,7 +220,7 @@ EvtScript N(main) = {
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(SetCamSpeed, 0, EVT_FIXED(1.333984375))
+    EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(1.333984375))
     EVT_RETURN
     EVT_END
 };
@@ -308,9 +308,9 @@ EvtScript N(moveWalls_8024454C) = {
 EvtScript N(8024459C) = {
     EVT_SWITCH(LocalVar(0))
         EVT_CASE_EQ(0)
-            EVT_CALL(SetCamSpeed, 0, EVT_FIXED(3.0))
+            EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(3.0))
         EVT_CASE_EQ(3)
-            EVT_CALL(SetCamSpeed, 0, EVT_FIXED(1.333984375))
+            EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(1.333984375))
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -320,10 +320,10 @@ EvtScript N(toggleVis_80244600) = {
     EVT_SWITCH(LocalVar(0))
         EVT_CASE_EQ(0)
             EVT_CALL(SetGroupEnabled, 87, 1)
-            EVT_CALL(SetCamSpeed, 0, EVT_FIXED(3.0))
+            EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(3.0))
         EVT_CASE_EQ(3)
             EVT_CALL(SetGroupEnabled, 87, 0)
-            EVT_CALL(SetCamSpeed, 0, EVT_FIXED(1.333984375))
+            EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(1.333984375))
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -340,18 +340,18 @@ EvtScript N(toggleVis_8024468C) = {
             EVT_CALL(SetCamPosB, 0, 0, -290)
             EVT_CALL(SetCamPosC, 0, 0, 0)
             EVT_CALL(SetPanTarget, 0, -395, 140, -150)
-            EVT_CALL(SetCamSpeed, 0, EVT_FIXED(4.0))
+            EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(4.0))
             EVT_CALL(PanToTarget, 0, 0, 1)
         EVT_CASE_EQ(2)
             EVT_CALL(SetPanTarget, 0, -365, 140, -145)
             EVT_CALL(SetCamPitch, 0, 20, -7)
             EVT_CALL(SetCamDistance, 0, 400)
-            EVT_CALL(SetCamSpeed, 0, EVT_FIXED(4.0))
-            EVT_CALL(WaitForCam, 0, EVT_FIXED(1.0))
+            EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(4.0))
+            EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
         EVT_CASE_EQ(3)
             EVT_CALL(SetGroupEnabled, 132, 0)
             EVT_CALL(PanToTarget, 0, 0, 0)
-            EVT_CALL(SetCamSpeed, 0, EVT_FIXED(1.333984375))
+            EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(1.333984375))
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -794,18 +794,18 @@ EvtScript N(802481D8) = {
     EVT_CALL(UseSettingsFrom, 0, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_CALL(SetCamDistance, 0, 200)
     EVT_CALL(SetPanTarget, 0, LocalVar(0), LocalVar(1), LocalVar(2))
-    EVT_CALL(SetCamSpeed, 0, EVT_FIXED(8.0))
+    EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(8.0))
     EVT_CALL(SetCamPitch, 0, 20, -15)
     EVT_CALL(PanToTarget, 0, 0, 1)
-    EVT_CALL(WaitForCam, 0, EVT_FIXED(1.0))
+    EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(802482A8) = {
     EVT_CALL(PanToTarget, 0, 0, 0)
-    EVT_CALL(SetCamSpeed, 0, EVT_FIXED(3.0))
-    EVT_CALL(WaitForCam, 0, EVT_FIXED(1.0))
+    EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(3.0))
+    EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
     EVT_RETURN
     EVT_END
 };
@@ -1338,7 +1338,7 @@ EvtScript N(8024B20C) = {
                 EVT_ADD(LocalVar(6), -20)
             EVT_END_IF
             EVT_ADD(LocalVar(7), 10)
-            EVT_CALL(SetNpcJumpscale, NPC_PARTNER, EVT_FIXED(0.0))
+            EVT_CALL(SetNpcJumpscale, NPC_PARTNER, EVT_FLOAT(0.0))
             EVT_CALL(NpcJump1, NPC_PARTNER, LocalVar(6), LocalVar(7), LocalVar(8), 20)
             EVT_KILL_THREAD(LocalVar(10))
             EVT_CALL(RemoveItemEntity, LocalVar(0))
@@ -1387,7 +1387,7 @@ EvtScript N(8024B5A0) = {
             EVT_WAIT(1)
             EVT_CALL(GetNpcPos, LocalVar(2), LocalVar(13), LocalVar(0), LocalVar(14))
             EVT_CALL(GetNpcPos, NPC_PARTNER, LocalVar(13), LocalVar(14), LocalVar(15))
-            EVT_CALL(SetNpcJumpscale, NPC_PARTNER, EVT_FIXED(0.0))
+            EVT_CALL(SetNpcJumpscale, NPC_PARTNER, EVT_FLOAT(0.0))
             EVT_ADD(LocalVar(0), 10)
             EVT_CALL(NpcJump1, NPC_PARTNER, LocalVar(13), LocalVar(0), LocalVar(15), 10)
             EVT_CALL(SpeakToNpc, -4, 262150, 262145, 0, LocalVar(2), LocalVar(7))
@@ -1617,17 +1617,17 @@ EvtScript N(8024C0B8) = {
     EVT_DIV(LocalVar(2), 2)
     EVT_ADD(LocalVar(1), 15)
     EVT_CALL(SetPanTarget, 0, LocalVar(0), LocalVar(1), LocalVar(2))
-    EVT_CALL(SetCamSpeed, 0, EVT_FIXED(8.0))
+    EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(8.0))
     EVT_CALL(PanToTarget, 0, 0, 1)
-    EVT_CALL(WaitForCam, 0, EVT_FIXED(1.0))
+    EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(8024C1F8) = {
     EVT_CALL(PanToTarget, 0, 0, 0)
-    EVT_CALL(SetCamSpeed, 0, EVT_FIXED(3.0))
-    EVT_CALL(WaitForCam, 0, EVT_FIXED(1.0))
+    EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(3.0))
+    EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
     EVT_RETURN
     EVT_END
 };
@@ -1784,7 +1784,7 @@ EvtScript N(interact_8024C4EC) = {
                 EVT_CALL(func_802D2C14, 1)
             EVT_END_THREAD
             EVT_CALL(SetNpcFlagBits, 2, ((NPC_FLAG_100)), TRUE)
-            EVT_CALL(SetPlayerSpeed, EVT_FIXED(3.0))
+            EVT_CALL(SetPlayerSpeed, EVT_FLOAT(3.0))
             EVT_CALL(PlayerMoveTo, -391, -260, 0)
             EVT_CALL(InterpPlayerYaw, 90, 3)
             EVT_CALL(SetNpcFlagBits, 2, ((NPC_FLAG_100)), FALSE)
@@ -1795,22 +1795,22 @@ EvtScript N(interact_8024C4EC) = {
                 EVT_CALL(SpeakToPlayer, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00C3))
                 EVT_EXEC_WAIT(N(8024C248))
                 EVT_CALL(func_802D2C14, 0)
-                EVT_CALL(SetNpcJumpscale, 5, EVT_FIXED(1.0))
+                EVT_CALL(SetNpcJumpscale, 5, EVT_FLOAT(1.0))
                 EVT_CALL(NpcJump0, 5, -425, 140, -206, 20)
                 EVT_CALL(SpeakToPlayer, 5, NPC_ANIM_moustafa_Palette_00_Anim_5, NPC_ANIM_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00C4))
             EVT_ELSE
                 EVT_CALL(SpeakToPlayer, 2, NPC_ANIM_disguised_moustafa_Palette_00_Anim_4, NPC_ANIM_disguised_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00C5))
                 EVT_EXEC_WAIT(N(8024C248))
                 EVT_CALL(func_802D2C14, 0)
-                EVT_CALL(SetNpcJumpscale, 5, EVT_FIXED(1.0))
+                EVT_CALL(SetNpcJumpscale, 5, EVT_FLOAT(1.0))
                 EVT_CALL(NpcJump0, 5, -425, 140, -206, 20)
                 EVT_CALL(SpeakToPlayer, 5, NPC_ANIM_moustafa_Palette_00_Anim_5, NPC_ANIM_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00C6))
             EVT_END_IF
-            EVT_CALL(SetNpcJumpscale, 5, EVT_FIXED(1.0))
+            EVT_CALL(SetNpcJumpscale, 5, EVT_FLOAT(1.0))
             EVT_CALL(NpcJump0, 5, -337, 140, -200, 20)
             EVT_CALL(SpeakToPlayer, 5, NPC_ANIM_moustafa_Palette_00_Anim_5, NPC_ANIM_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00C7))
             EVT_CALL(SpeakToPlayer, 5, NPC_ANIM_moustafa_Palette_00_Anim_5, NPC_ANIM_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00C8))
-            EVT_CALL(SetNpcJumpscale, 5, EVT_FIXED(1.0))
+            EVT_CALL(SetNpcJumpscale, 5, EVT_FLOAT(1.0))
             EVT_CALL(NpcJump0, 5, -335, 163, -260, 20)
             EVT_CALL(SpeakToPlayer, 5, NPC_ANIM_moustafa_Palette_00_Anim_5, NPC_ANIM_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00C9))
             EVT_SET(LocalVar(0), 18)
@@ -1932,7 +1932,7 @@ EvtScript N(8024D434) = {
 
 EvtScript N(8024D494) = {
     EVT_EXEC(N(80243B70))
-    EVT_CALL(SetPlayerSpeed, EVT_FIXED(3.0))
+    EVT_CALL(SetPlayerSpeed, EVT_FLOAT(3.0))
     EVT_CALL(PlayerMoveTo, -179, -198, 0)
     EVT_THREAD
         EVT_WAIT(15)
@@ -1943,7 +1943,7 @@ EvtScript N(8024D494) = {
         EVT_CALL(SetCamPosA, 0, 202, 62)
         EVT_CALL(SetCamPosB, 0, -89, -141)
         EVT_CALL(SetCamPosC, 0, 0, 0)
-        EVT_CALL(SetCamSpeed, 0, EVT_FIXED(90.0))
+        EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(90.0))
         EVT_CALL(PanToTarget, 0, 0, 1)
     EVT_END_THREAD
     EVT_CALL(PlayerMoveTo, -187, -267, 0)
@@ -1973,7 +1973,7 @@ EvtScript N(8024D700) = {
     EVT_CALL(HidePlayerShadow, FALSE)
     EVT_CALL(func_802D2520, ANIM_10002, 0, 0, 0, 0, 0)
     EVT_CALL(SetPlayerPos, -187, 0, -240)
-    EVT_CALL(SetPlayerSpeed, EVT_FIXED(3.0))
+    EVT_CALL(SetPlayerSpeed, EVT_FLOAT(3.0))
     EVT_CALL(PlayerMoveTo, -168, -195, 0)
     EVT_EXEC(N(80243AF0))
     EVT_RETURN

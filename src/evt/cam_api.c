@@ -3,7 +3,7 @@
 
 EvtScript ShakeCam1 = {
     EVT_SET_GROUP(EVT_GROUP_00)
-    EVT_CALL(ShakeCam, LocalVar(0), LocalVar(1), LocalVar(2), EVT_FIXED(1.0))
+    EVT_CALL(ShakeCam, LocalVar(0), LocalVar(1), LocalVar(2), EVT_FLOAT(1.0))
     EVT_RETURN
     EVT_END
 };

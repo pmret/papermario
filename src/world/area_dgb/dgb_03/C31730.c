@@ -234,7 +234,7 @@ EvtScript N(802430E0) = {
     EVT_END_IF
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_THREAD
-        EVT_CALL(ShakeCam, 0, 0, 100, EVT_FIXED(0.6))
+        EVT_CALL(ShakeCam, 0, 0, 100, EVT_FLOAT(0.6))
     EVT_END_THREAD
     EVT_THREAD
         EVT_IF_GE(LocalVar(6), LocalVar(7))

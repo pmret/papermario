@@ -127,7 +127,7 @@ EvtScript N(80240AB0) = {
 };
 
 EvtScript N(80240B08) = {
-    EVT_CALL(SetNpcJumpscale, 0, EVT_FIXED(-0.2))
+    EVT_CALL(SetNpcJumpscale, 0, EVT_FLOAT(-0.2))
     EVT_CALL(NpcJump0, 0, 257, 30, -90, 5)
     EVT_CALL(EnableNpcShadow, 0, FALSE)
     EVT_CALL(SetNpcAnimation, 0, NPC_ANIM_boo_Palette_01_Anim_6)
@@ -136,7 +136,7 @@ EvtScript N(80240B08) = {
 };
 
 EvtScript N(80240B74) = {
-    EVT_CALL(SetNpcJumpscale, 1, EVT_FIXED(-0.3))
+    EVT_CALL(SetNpcJumpscale, 1, EVT_FLOAT(-0.3))
     EVT_CALL(NpcJump0, 1, 272, 112, -81, 12)
     EVT_CALL(EnableNpcShadow, 1, FALSE)
     EVT_CALL(SetNpcAnimation, 1, NPC_ANIM_boo_Palette_01_Anim_6)
@@ -145,7 +145,7 @@ EvtScript N(80240B74) = {
 };
 
 EvtScript N(80240BE0) = {
-    EVT_CALL(SetNpcJumpscale, 2, EVT_FIXED(-0.4))
+    EVT_CALL(SetNpcJumpscale, 2, EVT_FLOAT(-0.4))
     EVT_CALL(NpcJump0, 2, 237, 120, -118, 10)
     EVT_CALL(EnableNpcShadow, 2, FALSE)
     EVT_CALL(SetNpcAnimation, 2, NPC_ANIM_boo_Palette_01_Anim_6)
@@ -154,7 +154,7 @@ EvtScript N(80240BE0) = {
 };
 
 EvtScript N(80240C4C) = {
-    EVT_CALL(SetNpcJumpscale, 3, EVT_FIXED(-0.3))
+    EVT_CALL(SetNpcJumpscale, 3, EVT_FLOAT(-0.3))
     EVT_CALL(NpcJump0, 3, 280, 60, -79, 8)
     EVT_CALL(EnableNpcShadow, 3, FALSE)
     EVT_CALL(SetNpcAnimation, 3, NPC_ANIM_boo_Palette_01_Anim_6)
@@ -163,7 +163,7 @@ EvtScript N(80240C4C) = {
 };
 
 EvtScript N(80240CB8) = {
-    EVT_CALL(SetNpcJumpscale, 4, EVT_FIXED(-0.4))
+    EVT_CALL(SetNpcJumpscale, 4, EVT_FLOAT(-0.4))
     EVT_CALL(NpcJump0, 4, 250, 81, -97, 9)
     EVT_CALL(EnableNpcShadow, 4, FALSE)
     EVT_CALL(SetNpcAnimation, 4, NPC_ANIM_boo_Palette_01_Anim_6)
@@ -172,7 +172,7 @@ EvtScript N(80240CB8) = {
 };
 
 EvtScript N(80240D24) = {
-    EVT_CALL(SetNpcJumpscale, 5, EVT_FIXED(-0.5))
+    EVT_CALL(SetNpcJumpscale, 5, EVT_FLOAT(-0.5))
     EVT_CALL(NpcJump0, 5, 227, 43, -123, 15)
     EVT_CALL(EnableNpcShadow, 5, FALSE)
     EVT_CALL(SetNpcAnimation, 5, NPC_ANIM_boo_Palette_01_Anim_6)
@@ -226,7 +226,7 @@ EvtScript N(80240F50) = {
         EVT_IF_EQ(MapVar(0), 0)
             EVT_CALL(DisablePlayerInput, TRUE)
             EVT_CALL(PlaySoundAt, SOUND_B4, 0, 240, 10, -125)
-            EVT_CALL(ShakeCam, 0, 0, 20, EVT_FIXED(2.0))
+            EVT_CALL(ShakeCam, 0, 0, 20, EVT_FLOAT(2.0))
             EVT_CALL(ShowMessageAtScreenPos, MESSAGE_ID(0x0E, 0x00EF), 160, 40)
             EVT_CALL(DisablePlayerInput, FALSE)
         EVT_END_IF
@@ -243,7 +243,7 @@ EvtScript N(8024103C) = {
     EVT_CALL(SetNpcPos, NPC_PARTNER, 350, 10, -150)
     EVT_CALL(EnablePartnerAI)
     EVT_CALL(SetCamType, 0, 4, 0)
-    EVT_CALL(SetCamSpeed, 0, EVT_FIXED(90.0))
+    EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(90.0))
     EVT_CALL(GetPlayerPos, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_SET(LocalVar(0), 175)
     EVT_SET(LocalVar(1), 0)
@@ -251,7 +251,7 @@ EvtScript N(8024103C) = {
     EVT_CALL(UseSettingsFrom, 0, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_CALL(SetPanTarget, 0, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_CALL(PanToTarget, 0, 0, 1)
-    EVT_CALL(WaitForCam, 0, EVT_FIXED(1.0))
+    EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
     EVT_WAIT(40)
     EVT_CALL(SetNpcPos, 0, -60, 10, -70)
     EVT_CALL(SetNpcPos, 1, -100, 10, -110)
@@ -266,10 +266,10 @@ EvtScript N(8024103C) = {
     EVT_CALL(SpeakToPlayer, 4, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 5, MESSAGE_ID(0x0E, 0x00DC))
     EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 5, MESSAGE_ID(0x0E, 0x00DD))
     EVT_CALL(PlaySoundAt, SOUND_B4, 0, 240, 10, -125)
-    EVT_CALL(ShakeCam, 0, 0, 20, EVT_FIXED(2.0))
+    EVT_CALL(ShakeCam, 0, 0, 20, EVT_FLOAT(2.0))
     EVT_WAIT(10)
     EVT_CALL(PlaySoundAt, SOUND_B4, 0, 240, 10, -125)
-    EVT_CALL(ShakeCam, 0, 0, 20, EVT_FIXED(2.0))
+    EVT_CALL(ShakeCam, 0, 0, 20, EVT_FLOAT(2.0))
     EVT_CALL(InterpNpcYaw, 0, 90, 1)
     EVT_CALL(ShowMessageAtScreenPos, MESSAGE_ID(0x0E, 0x00DE), 160, 40)
     EVT_CALL(SetPlayerPos, 350, 10, -150)
@@ -282,7 +282,7 @@ EvtScript N(8024103C) = {
 };
 
 EvtScript N(802413F4) = {
-    EVT_CALL(SetPlayerSpeed, EVT_FIXED(8.0))
+    EVT_CALL(SetPlayerSpeed, EVT_FLOAT(8.0))
     EVT_CALL(PlayerMoveTo, 184, -44, 0)
     EVT_CALL(PlaySoundAtNpc, 0, SOUND_262, 0)
     EVT_CALL(PlaySoundAtNpc, 1, SOUND_262, 0)
@@ -302,14 +302,14 @@ EvtScript N(802413F4) = {
     EVT_EXEC(N(80240D90))
     EVT_WAIT(20)
     EVT_CALL(SetCamType, 0, 6, 1)
-    EVT_CALL(SetCamSpeed, 0, EVT_FIXED(6.0))
-    EVT_CALL(SetCamPitch, 0, EVT_FIXED(15.0), EVT_FIXED(-15.0))
+    EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(6.0))
+    EVT_CALL(SetCamPitch, 0, EVT_FLOAT(15.0), EVT_FLOAT(-15.0))
     EVT_CALL(GetPlayerPos, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_CALL(UseSettingsFrom, 0, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_CALL(SetPanTarget, 0, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_CALL(SetCamDistance, 0, 300)
     EVT_CALL(PanToTarget, 0, 0, 1)
-    EVT_CALL(WaitForCam, 0, EVT_FIXED(1.0))
+    EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
     EVT_EXEC_GET_TID(N(80240DDC), LocalVar(10))
     EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 0, MESSAGE_ID(0x0E, 0x00DF))
     EVT_KILL_THREAD(LocalVar(10))
@@ -336,18 +336,18 @@ EvtScript N(802413F4) = {
     EVT_END_SWITCH
     EVT_CALL(EnablePartnerAI)
     EVT_CALL(SetCamType, 0, 4, 0)
-    EVT_CALL(SetCamSpeed, 0, EVT_FIXED(6.0))
+    EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(6.0))
     EVT_CALL(GetPlayerPos, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_CALL(UseSettingsFrom, 0, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_CALL(SetPanTarget, 0, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_CALL(PanToTarget, 0, 0, 1)
-    EVT_CALL(WaitForCam, 0, EVT_FIXED(1.0))
+    EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
     EVT_CALL(PanToTarget, 0, 0, 0)
     EVT_CALL(PlaySoundAt, SOUND_B4, 0, 240, 10, -125)
-    EVT_CALL(ShakeCam, 0, 0, 20, EVT_FIXED(2.0))
+    EVT_CALL(ShakeCam, 0, 0, 20, EVT_FLOAT(2.0))
     EVT_WAIT(5)
     EVT_CALL(PlaySoundAt, SOUND_B4, 0, 240, 10, -125)
-    EVT_CALL(ShakeCam, 0, 0, 20, EVT_FIXED(2.0))
+    EVT_CALL(ShakeCam, 0, 0, 20, EVT_FLOAT(2.0))
     EVT_CALL(ShowMessageAtScreenPos, MESSAGE_ID(0x0E, 0x00E7), 160, 40)
     EVT_EXEC_WAIT(N(80240B08))
     EVT_WAIT(10)
@@ -397,25 +397,25 @@ EvtScript N(interact_80241CD8) = {
     EVT_CALL(GetCurrentPartnerID, LocalVar(0))
     EVT_SWITCH(LocalVar(0))
         EVT_CASE_EQ(1)
-            EVT_CALL(AdjustCam, 0, EVT_FIXED(6.0), 0, EVT_FIXED(-275.0), EVT_FIXED(15.0), EVT_FIXED(-6.0))
+            EVT_CALL(AdjustCam, 0, EVT_FLOAT(6.0), 0, EVT_FLOAT(-275.0), EVT_FLOAT(15.0), EVT_FLOAT(-6.0))
             EVT_CALL(SpeakToPlayer, NPC_PARTNER, NPC_ANIM_world_goombario_normal_talk, NPC_ANIM_world_goombario_normal_idle, 0, MESSAGE_ID(0x0E, 0x00EA))
-            EVT_CALL(ResetCam, 0, EVT_FIXED(6.0))
+            EVT_CALL(ResetCam, 0, EVT_FLOAT(6.0))
         EVT_CASE_EQ(2)
-            EVT_CALL(AdjustCam, 0, EVT_FIXED(6.0), 0, EVT_FIXED(-275.0), EVT_FIXED(15.0), EVT_FIXED(-6.0))
+            EVT_CALL(AdjustCam, 0, EVT_FLOAT(6.0), 0, EVT_FLOAT(-275.0), EVT_FLOAT(15.0), EVT_FLOAT(-6.0))
             EVT_CALL(SpeakToPlayer, NPC_PARTNER, NPC_ANIM_world_kooper_normal_talk, NPC_ANIM_world_kooper_normal_idle, 0, MESSAGE_ID(0x0E, 0x00EB))
-            EVT_CALL(ResetCam, 0, EVT_FIXED(6.0))
+            EVT_CALL(ResetCam, 0, EVT_FLOAT(6.0))
         EVT_CASE_EQ(3)
-            EVT_CALL(AdjustCam, 0, EVT_FIXED(6.0), 0, EVT_FIXED(-275.0), EVT_FIXED(15.0), EVT_FIXED(-6.0))
+            EVT_CALL(AdjustCam, 0, EVT_FLOAT(6.0), 0, EVT_FLOAT(-275.0), EVT_FLOAT(15.0), EVT_FLOAT(-6.0))
             EVT_CALL(SpeakToPlayer, NPC_PARTNER, NPC_ANIM_world_bombette_normal_idle_fast, NPC_ANIM_world_bombette_normal_idle, 0, MESSAGE_ID(0x0E, 0x00EC))
-            EVT_CALL(ResetCam, 0, EVT_FIXED(6.0))
+            EVT_CALL(ResetCam, 0, EVT_FLOAT(6.0))
         EVT_CASE_EQ(4)
-            EVT_CALL(AdjustCam, 0, EVT_FIXED(6.0), 0, EVT_FIXED(-275.0), EVT_FIXED(15.0), EVT_FIXED(-6.0))
+            EVT_CALL(AdjustCam, 0, EVT_FLOAT(6.0), 0, EVT_FLOAT(-275.0), EVT_FLOAT(15.0), EVT_FLOAT(-6.0))
             EVT_CALL(SpeakToPlayer, NPC_PARTNER, NPC_ANIM_world_parakarry_Palette_00_Anim_6, NPC_ANIM_world_parakarry_Palette_00_Anim_1, 0, MESSAGE_ID(0x0E, 0x00ED))
-            EVT_CALL(ResetCam, 0, EVT_FIXED(6.0))
+            EVT_CALL(ResetCam, 0, EVT_FLOAT(6.0))
         EVT_CASE_EQ(9)
-            EVT_CALL(AdjustCam, 0, EVT_FIXED(6.0), 0, EVT_FIXED(-275.0), EVT_FIXED(15.0), EVT_FIXED(-6.0))
+            EVT_CALL(AdjustCam, 0, EVT_FLOAT(6.0), 0, EVT_FLOAT(-275.0), EVT_FLOAT(15.0), EVT_FLOAT(-6.0))
             EVT_CALL(SpeakToPlayer, NPC_PARTNER, NPC_ANIM_world_bow_Palette_00_Anim_4, NPC_ANIM_world_bow_Palette_00_Anim_1, 0, MESSAGE_ID(0x0E, 0x00EE))
-            EVT_CALL(ResetCam, 0, EVT_FIXED(6.0))
+            EVT_CALL(ResetCam, 0, EVT_FLOAT(6.0))
     EVT_END_SWITCH
     EVT_CALL(EnablePartnerAI)
     EVT_SET(MapVar(0), 0)
@@ -668,8 +668,8 @@ EvtScript N(80242B84) = {
     EVT_CALL(SetNpcAnimation, 6, NPC_ANIM_sentinel_Palette_00_Anim_8)
     EVT_CALL(UseSettingsFrom, 0, 175, 0, -35)
     EVT_CALL(SetPanTarget, 0, 175, 0, -35)
-    EVT_CALL(SetCamDistance, 0, EVT_FIXED(540.0))
-    EVT_CALL(SetCamSpeed, 0, EVT_FIXED(90.0))
+    EVT_CALL(SetCamDistance, 0, EVT_FLOAT(540.0))
+    EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(90.0))
     EVT_CALL(PanToTarget, 0, 0, 1)
     EVT_WAIT(20)
     EVT_THREAD
@@ -720,9 +720,9 @@ EvtScript N(80242B84) = {
         EVT_CALL(PlayEffect, 0x10, 3, 0, 175, 0, -35, 20, -20, 30, 0, 0, 0, 0, 0)
     EVT_END_THREAD
     EVT_THREAD
-        EVT_CALL(SetCamDistance, 0, EVT_FIXED(320.0))
-        EVT_CALL(SetCamPitch, 0, EVT_FIXED(15.0), EVT_FIXED(-7.5))
-        EVT_CALL(SetCamSpeed, 0, EVT_FIXED(2.0))
+        EVT_CALL(SetCamDistance, 0, EVT_FLOAT(320.0))
+        EVT_CALL(SetCamPitch, 0, EVT_FLOAT(15.0), EVT_FLOAT(-7.5))
+        EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(2.0))
         EVT_CALL(PanToTarget, 0, 0, 1)
     EVT_END_THREAD
     EVT_WAIT(65)
@@ -777,9 +777,9 @@ EvtScript N(80242B84) = {
     EVT_CALL(GetPlayerPos, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_CALL(UseSettingsFrom, 0, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_CALL(SetPanTarget, 0, LocalVar(0), LocalVar(1), LocalVar(2))
-    EVT_CALL(SetCamSpeed, 0, EVT_FIXED(4.0))
+    EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(4.0))
     EVT_CALL(PanToTarget, 0, 0, 1)
-    EVT_CALL(WaitForCam, 0, EVT_FIXED(1.0))
+    EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
     EVT_CALL(PanToTarget, 0, 0, 0)
     EVT_CALL(EnablePartnerAI)
     EVT_CALL(DisablePlayerPhysics, FALSE)

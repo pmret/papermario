@@ -77,7 +77,7 @@ EvtScript N(Pipe_EnterHorizontal) = {
     EVT_END_IF
     EVT_CALL(UseSettingsFrom, 0, LocalVar(5), LocalVar(6), LocalVar(7))
     EVT_CALL(SetPanTarget, 0, LocalVar(5), LocalVar(6), LocalVar(7))
-    EVT_CALL(SetCamSpeed, 0, EVT_FIXED(90.0))
+    EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(90.0))
     EVT_CALL(PanToTarget, 0, 0, 1)
     EVT_CALL(GetCurrentPartnerID, LocalVar(0))
     EVT_IF_NE(LocalVar(0), PARTNER_NONE)
@@ -95,7 +95,7 @@ EvtScript N(Pipe_EnterHorizontal) = {
     EVT_CALL(func_802D286C, 0x900)
     EVT_CALL(func_802D2520, ANIM_10002, 5, 3, 1, 1, 0)
     EVT_LOOP(40)
-        EVT_CALL(N(Pipe_GetPointAheadOfPlayer), EVT_FIXED(1.0))
+        EVT_CALL(N(Pipe_GetPointAheadOfPlayer), EVT_FLOAT(1.0))
         EVT_CALL(SetPlayerPos, LocalVar(0), LocalVar(1), LocalVar(2))
         EVT_WAIT(1)
     EVT_END_LOOP
@@ -227,7 +227,7 @@ EvtScript N(Pipe_ExitHorizontal) = {
     EVT_THREAD
         EVT_WAIT(3)
         EVT_LOOP(40)
-            EVT_CALL(N(Pipe_GetPointAheadOfPlayer), EVT_FIXED(1.0))
+            EVT_CALL(N(Pipe_GetPointAheadOfPlayer), EVT_FLOAT(1.0))
             EVT_CALL(SetPlayerPos, LocalVar(0), LocalVar(1), LocalVar(2))
             EVT_WAIT(1)
         EVT_END_LOOP

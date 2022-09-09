@@ -255,7 +255,7 @@ EvtScript N(idle_80242238) = {
     EVT_WAIT(15)
     EVT_THREAD
         EVT_CALL(UseSettingsFrom, 0, -50, 0, 180)
-        EVT_CALL(SetCamSpeed, 0, EVT_FIXED(2.0))
+        EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(2.0))
         EVT_CALL(SetPanTarget, 0, -50, 0, 180)
         EVT_CALL(PanToTarget, 0, 0, 1)
     EVT_END_THREAD
@@ -272,9 +272,9 @@ EvtScript N(idle_80242238) = {
     EVT_THREAD
         EVT_CALL(GetPlayerPos, LocalVar(0), LocalVar(1), LocalVar(2))
         EVT_CALL(UseSettingsFrom, 0, LocalVar(0), LocalVar(1), LocalVar(2))
-        EVT_CALL(SetCamSpeed, 0, EVT_FIXED(2.0))
+        EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(2.0))
         EVT_CALL(SetPanTarget, 0, LocalVar(0), LocalVar(1), LocalVar(2))
-        EVT_CALL(WaitForCam, 0, EVT_FIXED(1.0))
+        EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
         EVT_CALL(PanToTarget, 0, 0, 0)
         EVT_CALL(DisablePlayerInput, FALSE)
     EVT_END_THREAD
@@ -295,21 +295,21 @@ EvtScript N(802424E8) = {
             EVT_SWITCH(LocalVar(10))
                 EVT_CASE_LT(200)
                     EVT_THREAD
-                        EVT_CALL(ShakeCam, 0, 0, 5, EVT_FIXED(1.6))
+                        EVT_CALL(ShakeCam, 0, 0, 5, EVT_FLOAT(1.6))
                         EVT_WAIT(5)
-                        EVT_CALL(ShakeCam, 0, 0, 2, EVT_FIXED(0.8))
+                        EVT_CALL(ShakeCam, 0, 0, 2, EVT_FLOAT(0.8))
                     EVT_END_THREAD
                 EVT_CASE_LT(300)
                     EVT_THREAD
-                        EVT_CALL(ShakeCam, 0, 0, 5, EVT_FIXED(0.6))
+                        EVT_CALL(ShakeCam, 0, 0, 5, EVT_FLOAT(0.6))
                         EVT_WAIT(5)
-                        EVT_CALL(ShakeCam, 0, 0, 2, EVT_FIXED(0.3))
+                        EVT_CALL(ShakeCam, 0, 0, 2, EVT_FLOAT(0.3))
                     EVT_END_THREAD
                 EVT_CASE_GE(300)
                     EVT_THREAD
-                        EVT_CALL(ShakeCam, 0, 0, 5, EVT_FIXED(0.1))
+                        EVT_CALL(ShakeCam, 0, 0, 5, EVT_FLOAT(0.1))
                         EVT_WAIT(5)
-                        EVT_CALL(ShakeCam, 0, 0, 2, EVT_FIXED(0.05))
+                        EVT_CALL(ShakeCam, 0, 0, 2, EVT_FLOAT(0.05))
                     EVT_END_THREAD
             EVT_END_SWITCH
             EVT_WAIT(12)
@@ -361,7 +361,7 @@ EvtScript N(init_802427EC) = {
         EVT_CALL(RemoveNpc, NPC_SELF)
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(SetNpcScale, NPC_SELF, EVT_FIXED(1.25), EVT_FIXED(1.25), EVT_FIXED(1.25))
+    EVT_CALL(SetNpcScale, NPC_SELF, EVT_FLOAT(1.25), EVT_FLOAT(1.25), EVT_FLOAT(1.25))
     EVT_IF_NE(GB_ARN_Tubba_MapID, 15)
         EVT_CALL(BindNpcIdle, NPC_SELF, EVT_ADDR(N(idle_80242238)))
     EVT_ELSE
