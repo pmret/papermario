@@ -481,7 +481,7 @@ ApiStatus N(RunMinigame)(Evt* script, s32 isInitialCall) {
                     npc->duration = 8;
                     sfx_play_sound(enemy->varTable[8]);
                     data->box[i].state = BOX_STATE_FUZZY_ATTACH;
-                    gPlayerStatusPtr->anim = ANIM_Mario_CROUCH_STILL;
+                    gPlayerStatusPtr->anim = ANIM_Mario_CrouchStill;
                     npc->currentAnim.w = NPC_ANIM_fuzzy_Palette_00_Anim_3;
                     get_model_center_and_size(data->box[i].modelID, &centerX, &centerY, &centerZ, &sizeX, &sizeY, &sizeZ);
                     npc->pos.x = centerX;
@@ -506,11 +506,11 @@ ApiStatus N(RunMinigame)(Evt* script, s32 isInitialCall) {
                     npc->pos.x = update_lerp(EASING_LINEAR, (f32)enemy->varTable[1] / 10.0, (f32)enemy->varTable[4] / 10.0, enemy->varTable[7], 8);
                     npc->pos.y = update_lerp(EASING_LINEAR, (f32)enemy->varTable[2] / 10.0, (f32)enemy->varTable[5] / 10.0, enemy->varTable[7], 8);
                     npc->pos.z = update_lerp(EASING_LINEAR, (f32)enemy->varTable[3] / 10.0, (f32)enemy->varTable[6] / 10.0, enemy->varTable[7], 8);
-                    gPlayerStatusPtr->anim = ANIM_Mario_CROUCH_STILL;
+                    gPlayerStatusPtr->anim = ANIM_Mario_CrouchStill;
                     npc->duration--;
                     if (npc->duration <= 0) {
                         npc->currentAnim.w = NPC_ANIM_fuzzy_Palette_00_Anim_F;
-                        gPlayerStatusPtr->anim = ANIM_Mario_RUN_PANIC;
+                        gPlayerStatusPtr->anim = ANIM_Mario_RunPanic;
                         data->mashProgress = 0;
                         npc->pos.x = gPlayerStatusPtr->position.x;
                         npc->pos.y = gPlayerStatusPtr->position.y + 28.0;
@@ -522,7 +522,7 @@ ApiStatus N(RunMinigame)(Evt* script, s32 isInitialCall) {
                     }
                     break;
                 case BOX_STATE_FUZZY_GRAB:
-                    gPlayerStatusPtr->anim = ANIM_Mario_RUN_PANIC;
+                    gPlayerStatusPtr->anim = ANIM_Mario_RunPanic;
                     if (gGameStatusPtr->pressedButtons[0] & BUTTON_A) {
                         data->mashProgress++;
                     }
@@ -616,7 +616,7 @@ ApiStatus N(RunMinigame)(Evt* script, s32 isInitialCall) {
                         gPlayerStatusPtr->targetYaw = 265.0f;
                     }
                     // rest of case could simply use fallthough, but wouldnt match
-                    gPlayerStatusPtr->anim = ANIM_Mario_CROUCH_STILL;
+                    gPlayerStatusPtr->anim = ANIM_Mario_CrouchStill;
                     npc->duration--;
                     if (npc->duration <= 0) {
                         fx_explosion(0, npc->pos.x, npc->pos.y, npc->pos.z + 1.0f);
@@ -627,7 +627,7 @@ ApiStatus N(RunMinigame)(Evt* script, s32 isInitialCall) {
                     }
                     break;
                 case BOX_STATE_BOMB_ATTACK:
-                    gPlayerStatusPtr->anim = ANIM_Mario_CROUCH_STILL;
+                    gPlayerStatusPtr->anim = ANIM_Mario_CrouchStill;
                     npc->duration--;
                     if (npc->duration <= 0) {
                         fx_explosion(0, npc->pos.x, npc->pos.y, npc->pos.z + 1.0f);
@@ -640,7 +640,7 @@ ApiStatus N(RunMinigame)(Evt* script, s32 isInitialCall) {
                 case BOX_STATE_BOMB_STUN:
                     npc->duration--;
                     if (npc->duration == 25) {
-                        gPlayerStatusPtr->anim = ANIM_Mario_CHARRED;
+                        gPlayerStatusPtr->anim = ANIM_Mario_Charred;
                     }
                     if (npc->duration <= 0) {
                         gPlayerStatusPtr->anim = ANIM_Mario_10002;

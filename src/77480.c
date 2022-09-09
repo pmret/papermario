@@ -791,7 +791,7 @@ s32 get_overriding_player_anim(s32 anim) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
 
-    if (playerStatus->actionState == ACTION_STATE_USE_SPINNING_FLOWER && anim != ANIM_Mario_1002B && anim != ANIM_MIDAIR_STILL) {
+    if (playerStatus->actionState == ACTION_STATE_USE_SPINNING_FLOWER && anim != ANIM_Mario_1002B && anim != ANIM_Mario_AnimMidairStill) {
         return -1;
     }
 
@@ -801,13 +801,13 @@ s32 get_overriding_player_anim(s32 anim) {
         }
 
         if (partnerActionStatus->partnerActionState != PARTNER_ACTION_NONE && partnerActionStatus->actingPartner == PARTNER_BOW) {
-            if (anim != ANIM_Mario_CROUCH && anim != ANIM_Mario_10002) {
+            if (anim != ANIM_Mario_Crouch && anim != ANIM_Mario_10002) {
                     return -1;
             }
         }
     }
 
-    if (anim == ANIM_Mario_THUMBS_UP && partnerActionStatus->partnerActionState == PARTNER_ACTION_USE) {
+    if (anim == ANIM_Mario_ThumbsUp && partnerActionStatus->partnerActionState == PARTNER_ACTION_USE) {
         return -1;
     }
 

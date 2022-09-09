@@ -39,7 +39,7 @@ EvtScript N(main) = {
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_CALL(N(FadeBackgroundToBlack))
     EVT_CALL(PlaySound, SOUND_377)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_PLANT)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_AnimPlant)
     EVT_THREAD
         EVT_WAIT(50)
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
@@ -56,7 +56,7 @@ EvtScript N(main) = {
         EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
         EVT_SUB(LVar0, 10)
         EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(2.0))
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_RUNNING)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_Running)
         EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
         EVT_CALL(PlayerRunToGoal, 0)
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)

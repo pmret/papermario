@@ -389,7 +389,7 @@ extern const char N(flo_24_name_hack)[];
 
 EvtScript N(802425E4) = {
     EVT_WAIT(20)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_STAND_STILL)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario_StandStill)
     EVT_CALL(GetPlayerPos, LVar3, LVar4, LVar5)
     EVT_CALL(UseSettingsFrom, 0, LVar3, LVar4, LVar5)
     EVT_CALL(SetPanTarget, 0, LVar3, LVar4, LVar5)
@@ -423,7 +423,7 @@ EvtScript N(802427EC) = {
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(SetPlayerPos, -100, -10, -172)
     EVT_CALL(InterpPlayerYaw, 150, 0)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_DEAD_STILL)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario_DeadStill)
     EVT_CALL(SetNpcPos, NPC_PARTNER, -129, 9, -177)
     EVT_CALL(EnablePartnerAI)
     EVT_CALL(ClearPartnerMoveHistory, -4)
@@ -435,7 +435,7 @@ EvtScript N(802427EC) = {
     EVT_CALL(InterpNpcYaw, 0, 90, 0)
     EVT_CALL(AdjustCam, 0, EVT_FLOAT(90.0), 0, 450, EVT_FLOAT(25.0), EVT_FLOAT(-6.0))
     EVT_WAIT(30)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_GET_UP)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario_GetUp)
     EVT_WAIT(20)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
     EVT_WAIT(10)

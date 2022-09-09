@@ -53,7 +53,7 @@ EvtScript N(main) = {
     EVT_CALL(PlaySound, SOUND_361)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30009)
     EVT_WAIT(30)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_CROUCH)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_Crouch)
     EVT_CALL(GetItemPower, ITEM_STONE_CAP, LVar0, LVar1)
     EVT_CALL(PlaySound, SOUND_362)
     EVT_CALL(N(func_802A123C_7217DC))

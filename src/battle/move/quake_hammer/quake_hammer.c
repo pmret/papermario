@@ -20,7 +20,7 @@ EvtScript D_802A10B0_73AF80 = {
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_26)
     EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(5.0))
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_RUNNING)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_Running)
     EVT_CALL(PlayerRunToGoal, 0)
     EVT_RETURN
     EVT_END
@@ -30,7 +30,7 @@ EvtScript D_802A118C_0073B05C = {
     EVT_CALL(SetGoalPos, ACTOR_PLAYER, -33, 0, 0)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_26)
     EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(5.0))
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_RUNNING)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_Running)
     EVT_CALL(PlayerRunToGoal, 0)
     EVT_RETURN
     EVT_END
@@ -179,7 +179,7 @@ EvtScript D_802A18AC_0073B77C = {
     EVT_WAIT(5)
     EVT_CALL(SetGoalToHome, ACTOR_PLAYER)
     EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(8.0))
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_RUNNING)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_Running)
     EVT_CALL(PlayerRunToGoal, 0)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
     EVT_RETURN
@@ -195,7 +195,7 @@ EvtScript D_802A1998_0073B868 = {
     EVT_WAIT(5)
     EVT_CALL(SetGoalToHome, ACTOR_PLAYER)
     EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(8.0))
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_RUNNING)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_Running)
     EVT_CALL(PlayerRunToGoal, 0)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
     EVT_RETURN
@@ -212,7 +212,7 @@ EvtScript D_802A1A64_0073B934 = {
     EVT_WAIT(5)
     EVT_CALL(SetGoalToHome, ACTOR_PLAYER)
     EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(8.0))
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_RUNNING)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_Running)
     EVT_CALL(PlayerRunToGoal, 0)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
     EVT_RETURN

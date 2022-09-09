@@ -259,7 +259,7 @@ EvtScript N(80243FE8) = {
     EVT_CALL(SetPanTarget, 0, LVar0, LVar1, LVar2)
     EVT_CALL(PanToTarget, 0, 0, 1)
     EVT_WAIT(5)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_STAND_STILL)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario_StandStill)
     EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_world_tubba_Palette_00_Anim_F)
     EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_world_tubba_Palette_00_Anim_12, NPC_ANIM_world_tubba_Palette_00_Anim_8, 0, MESSAGE_ID(0x0E, 0x00CC))
     EVT_THREAD
@@ -619,7 +619,7 @@ EvtScript N(80245304) = {
     EVT_CALL(EnableNpcAI, 13, 0)
     EVT_CALL(SetNpcAnimation, 13, NPC_ANIM_world_skolar_Palette_00_Anim_3)
     EVT_WAIT(20)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_GOT_ITEM)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario_GotItem)
     EVT_CALL(PlaySoundAtPlayer, 313, 0)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_SET(LVar3, LVar1)

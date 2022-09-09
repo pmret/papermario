@@ -31,7 +31,7 @@ EvtScript N(main) = {
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
         EVT_CALL(MoveBattleCamOver, 50)
     EVT_END_THREAD
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_CROUCH)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_Crouch)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_367)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, -40)
@@ -70,7 +70,7 @@ EvtScript N(main) = {
         EVT_GOTO(0)
     EVT_END_IF
     EVT_WAIT(10)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_WALKING)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_Walking)
     EVT_CALL(N(func_802A12D4_72BBE4))
     EVT_WAIT(20)
     EVT_EXEC_WAIT(N(PlayerGoHome))

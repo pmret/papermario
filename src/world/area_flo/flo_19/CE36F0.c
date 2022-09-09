@@ -434,7 +434,7 @@ EvtScript N(80241CC4) = {
     EVT_THREAD
         EVT_WAIT(5)
         EVT_CALL(SetNpcAnimation, NPC_PARTNER, 0x106)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_WALKING)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario_Walking)
         EVT_SWITCH(AreaFlag(16))
             EVT_CASE_EQ(0)
                 EVT_CALL(InterpPlayerYaw, 90, 0)
@@ -448,7 +448,7 @@ EvtScript N(80241CC4) = {
     EVT_CALL(UpdateColliderTransform, 12)
     EVT_THREAD
         EVT_SET(AreaFlag(45), 0)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_WALKING)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario_Walking)
         EVT_WAIT(200)
         EVT_EXEC_WAIT(N(80241A70))
         EVT_SET(AreaFlag(45), 1)
@@ -530,7 +530,7 @@ EvtScript N(802423F8) = {
         EVT_CALL(PlaySound, 0x19D)
         EVT_CALL(SetMusicTrack, 0, SONG_MAGIC_BEANSTALK, 1, 8)
         EVT_CALL(SetNpcAnimation, NPC_PARTNER, 0x106)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_WALKING)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario_Walking)
         EVT_CALL(N(func_802404D0_CE3BC0), LVar3, LVar4)
         EVT_SWITCH(LVar4)
             EVT_CASE_LT(90)

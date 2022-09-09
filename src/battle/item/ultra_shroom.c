@@ -42,7 +42,7 @@ EvtScript N(main) = {
     EVT_CALL(ShowStartRecoveryShimmer, LVar0, LVar1, LVar2, 10)
     EVT_CALL(N(func_802A12FC_723A7C))
     EVT_WAIT(10)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_THUMBS_UP)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_ThumbsUp)
     EVT_WAIT(30)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_ADD(LVar2, 5)

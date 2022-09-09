@@ -50,7 +50,7 @@ EvtScript N(main) = {
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
     EVT_CALL(MoveBattleCamOver, 15)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_THROW)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_Throw)
     EVT_CALL(PlaySound, SOUND_THROW)
     EVT_WAIT(3)
     EVT_CALL(CreateVirtualEntity, LVarA, EVT_PTR(N(modelCommandList)))

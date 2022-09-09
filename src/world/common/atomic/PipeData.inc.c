@@ -6,7 +6,7 @@ EvtScript N(Pipe_EnterVertical) = {
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(DisablePartnerAI, 0)
     EVT_CALL(HidePlayerShadow, TRUE)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_STAND_STILL)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario_StandStill)
     EVT_CALL(GetCurrentPartnerID, LVar0)
     EVT_IF_NE(LVar0, PARTNER_NONE)
         EVT_CALL(EnableNpcShadow, NPC_PARTNER, FALSE)
@@ -19,7 +19,7 @@ EvtScript N(Pipe_EnterVertical) = {
     EVT_CALL(InterpPlayerYaw, LVar4, 0)
     EVT_CALL(PlaySound, SOUND_ENTER_PIPE)
     EVT_CALL(func_802D286C, 0x100)
-    EVT_CALL(func_802D2520, ANIM_Mario_STAND_STILL, 5, 2, 1, 1, 0)
+    EVT_CALL(func_802D2520, ANIM_Mario_StandStill, 5, 2, 1, 1, 0)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_LOOP(40)
         EVT_ADD(LVar1, 1)
@@ -40,7 +40,7 @@ EvtScript N(Pipe_EnterVertical) = {
         EVT_END_THREAD
     EVT_END_IF
     EVT_WAIT(2)
-    EVT_CALL(func_802D2520, ANIM_Mario_STAND_STILL, 0, 0, 0, 0, 0)
+    EVT_CALL(func_802D2520, ANIM_Mario_StandStill, 0, 0, 0, 0, 0)
     EVT_WAIT(1)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
     EVT_CALL(DisablePlayerPhysics, FALSE)
@@ -217,9 +217,9 @@ EvtScript N(Pipe_ExitHorizontal) = {
     EVT_CALL(PlaySound, SOUND_ENTER_PIPE)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_CALL(SetPlayerPos, LVar0, LVar6, LVar7)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_STAND_STILL)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario_StandStill)
     EVT_CALL(func_802D286C, 0x800)
-    EVT_CALL(func_802D2520, ANIM_Mario_STAND_STILL, 5, 3, 1, 1, 0)
+    EVT_CALL(func_802D2520, ANIM_Mario_StandStill, 5, 3, 1, 1, 0)
     EVT_THREAD
         EVT_WAIT(8)
         EVT_CALL(HidePlayerShadow, TRUE)

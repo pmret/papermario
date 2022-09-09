@@ -220,7 +220,7 @@ EvtScript N(interact_80240B28) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(50)
             EVT_CALL(SpeakToPlayer, 10, NPC_ANIM_sun_Palette_00_Anim_7, NPC_ANIM_sun_Palette_00_Anim_1, 517, MESSAGE_ID(0x11, 0x009A))
-            EVT_CALL(SetPlayerAnimation, ANIM_Mario_THINKING)
+            EVT_CALL(SetPlayerAnimation, ANIM_Mario_Thinking)
             EVT_WAIT(20)
             EVT_CALL(SetPlayerAnimation, ANIM_Mario_80007)
             EVT_WAIT(20)

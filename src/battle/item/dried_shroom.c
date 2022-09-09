@@ -31,7 +31,7 @@ EvtScript N(main) = {
     EVT_SET_CONST(LVarA, 0x0000008D)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_EXEC_WAIT(N(EatItem))
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_STICK_OUT_TONGUE)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_StickOutTongue)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 0)
     EVT_ADD(LVar1, 35)

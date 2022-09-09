@@ -40,7 +40,7 @@ EvtScript N(main) = {
     EVT_SET_CONST(LVarA, 0x00000091)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_EXEC_WAIT(N(DrinkItem))
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_SQUISH)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_Squish)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 25)
     EVT_CALL(ShowStartRecoveryShimmer, LVar0, LVar1, LVar2, 5)
@@ -107,7 +107,7 @@ EvtScript N(main) = {
         EVT_WAIT(4)
     EVT_END_LOOP
     EVT_WAIT(10)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_RUNNING)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_Running)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_WAIT(20)

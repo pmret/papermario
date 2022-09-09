@@ -450,7 +450,7 @@ EvtScript N(80244888) = {
         EVT_CALL(ShakeCam, 0, 0, 10, EVT_FLOAT(2.0))
     EVT_END_THREAD
     EVT_CALL(PlaySoundAtPlayer, 225, 0)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_FALL_BACK)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario_FallBack)
     EVT_SET(LVar0, 90)
     EVT_LOOP(20)
         EVT_ADD(LVar0, 144)
@@ -460,7 +460,7 @@ EvtScript N(80244888) = {
         EVT_CALL(InterpPlayerYaw, LVar0, 1)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_STAND_STILL)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario_StandStill)
     EVT_CALL(SetNpcAnimation, 1, NPC_ANIM_lakilulu_Palette_00_Anim_1)
     EVT_RETURN
     EVT_END
@@ -482,7 +482,7 @@ EvtScript N(idle_80244BF8) = {
     EVT_WAIT(20)
     EVT_CALL(InterpPlayerYaw, 90, 1)
     EVT_WAIT(20)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_STAND_STILL)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario_StandStill)
     EVT_CALL(func_802CF56C, 2)
     EVT_CALL(SetNpcAnimation, 0, NPC_ANIM_world_lakilester_Palette_00_Anim_7)
     EVT_THREAD
@@ -634,7 +634,7 @@ EvtScript N(80245444) = {
     EVT_END_IF
     EVT_KILL_THREAD(LVar9)
     EVT_CALL(SetNpcAnimation, 1, NPC_ANIM_lakilulu_Palette_00_Anim_9)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_STAND_STILL)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario_StandStill)
     EVT_WAIT(20)
     EVT_CALL(GetNpcPos, 1, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 20)
@@ -681,9 +681,9 @@ EvtScript N(80245444) = {
     EVT_ELSE
         EVT_CALL(ContinueSpeech, 1, NPC_ANIM_lakilulu_Palette_00_Anim_4, NPC_ANIM_lakilulu_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x00A9))
         EVT_CALL(SetNpcAnimation, 1, NPC_ANIM_lakilulu_Palette_00_Anim_1)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_NOD_YES)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario_NodYes)
         EVT_WAIT(10)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_STAND_STILL)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario_StandStill)
         EVT_WAIT(20)
         EVT_CALL(GetNpcPos, 1, LVar0, LVar1, LVar2)
         EVT_ADD(LVar0, 20)

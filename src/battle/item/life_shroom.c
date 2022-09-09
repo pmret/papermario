@@ -100,7 +100,7 @@ EvtScript N(script6) = {
     EVT_SET(LVar1, LVarF)
     EVT_EXEC_WAIT(N(UseItem))
     EVT_SET(LVarE, LVarA)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_THROW)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_Throw)
     EVT_THREAD
         EVT_WAIT(20)
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
@@ -186,7 +186,7 @@ EvtScript N(main) = {
     EVT_ADD(LVar1, 25)
     EVT_CALL(ShowStartRecoveryShimmer, LVar0, LVar1, LVar2, LVar3)
     EVT_WAIT(10)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_THUMBS_UP)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_ThumbsUp)
     EVT_WAIT(30)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_CALL(ShowRecoveryShimmer, LVar0, LVar1, LVar2, LVar3)

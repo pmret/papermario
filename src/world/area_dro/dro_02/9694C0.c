@@ -776,7 +776,7 @@ EvtScript N(80247AA0) = {
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(SetPlayerPos, ArrayVar(4), ArrayVar(5), ArrayVar(6))
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario_GOT_ITEM)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario_GotItem)
     EVT_WAIT(1)
     EVT_CALL(SetPlayerPos, ArrayVar(4), ArrayVar(5), ArrayVar(6))
     EVT_WAIT(1)

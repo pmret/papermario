@@ -344,7 +344,7 @@ EvtScript N(80243EF0) = {
         EVT_WAIT(10)
         EVT_CALL(SetPlayerAnimation, 524319)
         EVT_WAIT(20)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario_RUN_PANIC)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario_RunPanic)
         EVT_CALL(SetPlayerSpeed, EVT_FLOAT(8.0))
         EVT_CALL(PlayerMoveTo, 412, -29, 0)
         EVT_WAIT(10)

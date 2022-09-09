@@ -282,7 +282,7 @@ EvtScript N(interact_802412BC) = {
             EVT_EXEC_WAIT(N(8024122C))
             EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_7, NPC_ANIM_petunia_Palette_00_Anim_6, 0, MESSAGE_ID(0x11, 0x0050))
             EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_6)
-            EVT_CALL(SetPlayerAnimation, ANIM_Mario_NOD_YES)
+            EVT_CALL(SetPlayerAnimation, ANIM_Mario_NodYes)
             EVT_WAIT(20)
             EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_7, NPC_ANIM_petunia_Palette_00_Anim_6, 0, MESSAGE_ID(0x11, 0x0051))
             EVT_CALL(SetNpcAnimation, 2, NPC_ANIM_monty_mole_Palette_01_Anim_12)

@@ -406,7 +406,7 @@ EvtScript N(nextTurn_80223D2C) = {
                 EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_jr_troopa_default_shadowboxing)
                 EVT_CALL(ActorSpeak, 721071, 256, 0, 10289160, 10289153)
                 EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_jr_troopa_default_idle)
-                EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_NOD_YES)
+                EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_NodYes)
                 EVT_WAIT(10)
                 EVT_THREAD
                     EVT_SET(LVar1, 180)
@@ -441,7 +441,7 @@ EvtScript N(nextTurn_80223D2C) = {
             EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
             EVT_CALL(ActorSpeak, 721072, 256, 0, 10289160, 10289153)
             EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
-            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_THUMBS_UP)
+            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_ThumbsUp)
             EVT_WAIT(20)
             EVT_CALL(SetActorYaw, ACTOR_PLAYER, 0)
             EVT_WAIT(4)
