@@ -462,7 +462,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
             while i < struct["length"]:
                 anim = unpack_from(">I", extraAnimations, i)[0]
                 if anim == 0xFFFFFFFF:
-                    tmp_out += INDENT + f"ANIM_END,\n"
+                    tmp_out += INDENT + f"ANIM_LIST_END,\n"
                 elif not anim == 0:
                     sprite_id =  (anim & 0x00FF0000) >> 16
                     palette_id = (anim & 0x0000FF00) >> 8

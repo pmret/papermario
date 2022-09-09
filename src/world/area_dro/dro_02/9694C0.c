@@ -776,7 +776,7 @@ EvtScript N(80247AA0) = {
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(SetPlayerPos, ArrayVar(4), ArrayVar(5), ArrayVar(6))
-    EVT_CALL(SetPlayerAnimation, ANIM_GOT_ITEM)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario_GOT_ITEM)
     EVT_WAIT(1)
     EVT_CALL(SetPlayerPos, ArrayVar(4), ArrayVar(5), ArrayVar(6))
     EVT_WAIT(1)
@@ -916,7 +916,7 @@ EvtScript N(80248788) = {
             EVT_CALL(MakeItemEntity, LVar0, LVar3, LVar4, LVar5, 1, 0)
             EVT_CALL(SetPlayerAnimation, 393221)
             EVT_WAIT(30)
-            EVT_CALL(SetPlayerAnimation, ANIM_10002)
+            EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
             EVT_CALL(RemoveItemEntity, LVar0)
     EVT_END_SWITCH
     EVT_CALL(N(ItemChoice_SaveSelected), LVarA)
@@ -948,7 +948,7 @@ EvtScript N(8024891C) = {
             EVT_CALL(MakeItemEntity, LVar0, LVar3, LVar4, LVar5, 1, 0)
             EVT_CALL(SetPlayerAnimation, 393221)
             EVT_WAIT(30)
-            EVT_CALL(SetPlayerAnimation, ANIM_10002)
+            EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
             EVT_CALL(RemoveItemEntity, LVar0)
     EVT_END_SWITCH
     EVT_CALL(N(ItemChoice_SaveSelected), LVarA)
@@ -1829,9 +1829,9 @@ EvtScript N(interact_8024C4EC) = {
                     EVT_IF_GE(GB_StoryProgress, -56)
                         EVT_IF_EQ(GF_DRO02_Moustafa_HeardAboutDryDryRuins, 0)
                             EVT_CALL(SpeakToPlayer, 5, NPC_ANIM_moustafa_Palette_00_Anim_5, NPC_ANIM_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00CD))
-                            EVT_CALL(SetPlayerAnimation, ANIM_10002)
+                            EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
                             EVT_WAIT(15)
-                            EVT_CALL(SetPlayerAnimation, ANIM_80007)
+                            EVT_CALL(SetPlayerAnimation, ANIM_Mario_80007)
                             EVT_WAIT(30)
                             EVT_CALL(SpeakToPlayer, 5, NPC_ANIM_moustafa_Palette_00_Anim_5, NPC_ANIM_moustafa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x00CE))
                             EVT_SET(GF_DRO02_Moustafa_HeardAboutDryDryRuins, 1)
@@ -1949,12 +1949,12 @@ EvtScript N(8024D494) = {
     EVT_CALL(PlayerMoveTo, -187, -267, 0)
     EVT_CALL(InterpPlayerYaw, 230, 1)
     EVT_CALL(HidePlayerShadow, TRUE)
-    EVT_CALL(SetPlayerAnimation, ANIM_10002)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
     EVT_CALL(func_802D286C, 2048)
-    EVT_CALL(func_802D2520, ANIM_10002, 5, 7, 1, 1, 0)
+    EVT_CALL(func_802D2520, ANIM_Mario_10002, 5, 7, 1, 1, 0)
     EVT_THREAD
         EVT_WAIT(60)
-        EVT_CALL(SetPlayerAnimation, ANIM_8001D)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario_8001D)
     EVT_END_THREAD
     EVT_WAIT(20)
     EVT_THREAD
@@ -1971,7 +1971,7 @@ EvtScript N(8024D494) = {
 
 EvtScript N(8024D700) = {
     EVT_CALL(HidePlayerShadow, FALSE)
-    EVT_CALL(func_802D2520, ANIM_10002, 0, 0, 0, 0, 0)
+    EVT_CALL(func_802D2520, ANIM_Mario_10002, 0, 0, 0, 0, 0)
     EVT_CALL(SetPlayerPos, -187, 0, -240)
     EVT_CALL(SetPlayerSpeed, EVT_FLOAT(3.0))
     EVT_CALL(PlayerMoveTo, -168, -195, 0)

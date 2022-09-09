@@ -74,19 +74,19 @@ s32 gPauseTutorialSpriteAnims[][4] = {
         NPC_ANIM_goombaria_Palette_00_Anim_0,
         NPC_ANIM_goombaria_Palette_00_Anim_1,
         NPC_ANIM_goombaria_Palette_00_Anim_B,
-        ANIM_END
+        ANIM_LIST_END
     },
     {
         NPC_ANIM_world_goombario_normal_still,
         NPC_ANIM_world_goombario_normal_idle,
         NPC_ANIM_world_goombario_normal_talk,
-        ANIM_END
+        ANIM_LIST_END
     },
     {
         NPC_ANIM_goompa_Palette_00_Anim_0,
         NPC_ANIM_goompa_Palette_00_Anim_1,
         NPC_ANIM_goompa_Palette_00_Anim_8,
-        ANIM_END
+        ANIM_LIST_END
     }
 };
 Vp gPauseTutorialViewport = {

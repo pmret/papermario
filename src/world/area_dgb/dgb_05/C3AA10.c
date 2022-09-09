@@ -142,7 +142,7 @@ s32 N(unk_missing_8024197C)[] = {
 
 s32 N(extraAnimationList_802419A4)[] = {
     NPC_ANIM_world_clubba_Palette_00_Anim_0,
-    ANIM_END,
+    ANIM_LIST_END,
 };
 
 MobileAISettings N(npcAISettings_802419AC) = {

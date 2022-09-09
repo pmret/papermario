@@ -17,7 +17,7 @@ EvtScript N(main) = {
     EVT_SET_CONST(LVarA, 0x0000008B)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_EXEC_WAIT(N(EatItem))
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10002)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_SET(LVar3, 20)
     EVT_CALL(MultiplyByActorScale, LVar3)

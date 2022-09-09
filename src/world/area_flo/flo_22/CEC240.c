@@ -294,7 +294,7 @@ EvtScript N(80240E84) = {
     EVT_WAIT(10)
     EVT_CALL(PlaySoundAt, 0x302, 0, 35, 0, 0)
     EVT_WAIT(5)
-    EVT_CALL(SetPlayerAnimation, ANIM_10002)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
     EVT_WAIT(10)
     EVT_RETURN
     EVT_END

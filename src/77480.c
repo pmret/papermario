@@ -791,44 +791,44 @@ s32 get_overriding_player_anim(s32 anim) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
 
-    if (playerStatus->actionState == ACTION_STATE_USE_SPINNING_FLOWER && anim != ANIM_1002B && anim != ANIM_MIDAIR_STILL) {
+    if (playerStatus->actionState == ACTION_STATE_USE_SPINNING_FLOWER && anim != ANIM_Mario_1002B && anim != ANIM_MIDAIR_STILL) {
         return -1;
     }
 
     if (partnerActionStatus->partnerActionState != PARTNER_ACTION_NONE) {
-        if (partnerActionStatus->actingPartner == PARTNER_LAKILESTER && anim == ANIM_10002) {
-            anim = ANIM_8000E;
+        if (partnerActionStatus->actingPartner == PARTNER_LAKILESTER && anim == ANIM_Mario_10002) {
+            anim = ANIM_Mario_8000E;
         }
 
         if (partnerActionStatus->partnerActionState != PARTNER_ACTION_NONE && partnerActionStatus->actingPartner == PARTNER_BOW) {
-            if (anim != ANIM_CROUCH && anim != ANIM_10002) {
+            if (anim != ANIM_Mario_CROUCH && anim != ANIM_Mario_10002) {
                     return -1;
             }
         }
     }
 
-    if (anim == ANIM_THUMBS_UP && partnerActionStatus->partnerActionState == PARTNER_ACTION_USE) {
+    if (anim == ANIM_Mario_THUMBS_UP && partnerActionStatus->partnerActionState == PARTNER_ACTION_USE) {
         return -1;
     }
 
-    if (anim == ANIM_6000C || anim == ANIM_C0010 || anim == ANIM_10002) {
+    if (anim == ANIM_Mario_6000C || anim == ANIM_Peach_C0010 || anim == ANIM_Mario_10002) {
         if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS)) {
             if (!func_800DFCF4()) {
                 return -1;
             }
         } else if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_IN_DISGUISE)) {
-            anim = ANIM_C0010;
+            anim = ANIM_Peach_C0010;
         } else {
             peach_set_disguise_anim(BasicPeachDisguiseAnims[playerStatus->peachDisguise].hold);
             return -1;
         }
     } else if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS) {
-        if (playerStatus->unk_C4 && (anim == ANIM_C0000 || anim == ANIM_C0001 || anim == ANIM_C0002)) {
+        if (playerStatus->unk_C4 && (anim == ANIM_Peach_C0000 || anim == ANIM_Peach_C0001 || anim == ANIM_Peach_C0002)) {
             anim = ANIM_Peach_D0000;
         }
     }
 
-    if (anim == ANIM_80003) {
+    if (anim == ANIM_Mario_80003) {
         exec_ShakeCam1(0, 0, 2);
     }
 

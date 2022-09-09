@@ -78,9 +78,9 @@ EvtScript N(enterDoubleDoor_80240268) = {
             EVT_EXEC_WAIT(EnterDoubleDoor)
             EVT_IF_EQ(AreaFlag(1), 1)
                 EVT_WAIT(5)
-                EVT_CALL(SetPlayerAnimation, ANIM_8001D)
+                EVT_CALL(SetPlayerAnimation, ANIM_Mario_8001D)
                 EVT_WAIT(20)
-                EVT_CALL(SetPlayerAnimation, ANIM_10002)
+                EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
             EVT_END_IF
             EVT_CALL(DisablePlayerInput, FALSE)
     EVT_END_SWITCH

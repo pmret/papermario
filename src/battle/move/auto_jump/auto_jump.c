@@ -16,7 +16,7 @@ s32 N(D_802A10F0)[] = {
 #include "world/common/UnkMoveFunc1.inc.c"
 
 EvtScript N(CheckForAPress) = {
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_BEFORE_JUMP)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_BEFORE_JUMP)
     EVT_LOOP(5)
         EVT_CALL(CheckButtonPress, A_BUTTON, LVar0)
         EVT_IF_EQ(LVar0, TRUE)
@@ -42,12 +42,12 @@ EvtScript D_802A11AC_765DCC = {
     EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar3, LVar4, LVar5)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_26)
     EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(5.0))
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_RUNNING)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_RUNNING)
     EVT_CALL(CancelablePlayerRunToGoal, 0, LVar0)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10002)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_EXEC_WAIT(N(CheckForAPress))
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_BEFORE_JUMP)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_BEFORE_JUMP)
     EVT_RETURN
     EVT_END
 };
@@ -114,23 +114,23 @@ EvtScript D_802A15D8_7661F8 = {
     EVT_CALL(SetGoalToHome, ACTOR_PLAYER)
     EVT_CALL(GetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 40)
-    EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_MIDAIR_STILL, ANIM_MIDAIR, ANIM_10009)
+    EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_MIDAIR_STILL, ANIM_MIDAIR, ANIM_Mario_10009)
     EVT_CALL(SetActorJumpGravity, ACTOR_PLAYER, EVT_FLOAT(1.3))
     EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_CALL(N(UnkMoveFunc1))
     EVT_CALL(func_80273444, LVar0, 0, 0)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10009)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10009)
     EVT_WAIT(1)
     EVT_CALL(AddGoalPos, ACTOR_PLAYER, -20, 0, 0)
     EVT_CALL(func_80273444, 6, 0, 2)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10009)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10009)
     EVT_WAIT(5)
     EVT_CALL(EnablePlayerBlur, -1)
     EVT_CALL(SetGoalToHome, ACTOR_PLAYER)
     EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(8.0))
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_RUNNING)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_RUNNING)
     EVT_CALL(PlayerRunToGoal, 0)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10002)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
     EVT_RETURN
     EVT_END
 };
@@ -144,22 +144,22 @@ EvtScript D_802A17C4 = {
     EVT_SUB(LVar0, 50)
     EVT_SET(LVar1, 0)
     EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-    EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_MIDAIR_STILL, ANIM_MIDAIR, ANIM_10009)
+    EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_MIDAIR_STILL, ANIM_MIDAIR, ANIM_Mario_10009)
     EVT_CALL(SetActorJumpGravity, ACTOR_PLAYER, EVT_FLOAT(0.8))
     EVT_CALL(N(UnkMoveFunc1))
     EVT_CALL(func_80273444, LVar0, 0, 0)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10009)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10009)
     EVT_WAIT(1)
     EVT_CALL(AddGoalPos, ACTOR_PLAYER, -30, 0, 0)
     EVT_CALL(func_80273444, 6, 0, 2)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10009)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10009)
     EVT_WAIT(2)
     EVT_CALL(EnablePlayerBlur, -1)
     EVT_CALL(SetGoalToHome, ACTOR_PLAYER)
     EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(8.0))
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_RUNNING)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_RUNNING)
     EVT_CALL(PlayerRunToGoal, 0)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10002)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
     EVT_RETURN
     EVT_END
 };
@@ -173,22 +173,22 @@ EvtScript D_802A19B0 = {
     EVT_SUB(LVar0, 40)
     EVT_SET(LVar1, 0)
     EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-    EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_MIDAIR_STILL, ANIM_MIDAIR, ANIM_10009)
+    EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_MIDAIR_STILL, ANIM_MIDAIR, ANIM_Mario_10009)
     EVT_CALL(SetActorJumpGravity, ACTOR_PLAYER, EVT_FLOAT(1.0))
     EVT_CALL(N(UnkMoveFunc1))
     EVT_CALL(func_80273444, LVar0, 0, 0)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10009)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10009)
     EVT_WAIT(1)
     EVT_CALL(AddGoalPos, ACTOR_PLAYER, -20, 0, 0)
     EVT_CALL(func_80273444, 6, 0, 2)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10009)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10009)
     EVT_WAIT(2)
     EVT_CALL(EnablePlayerBlur, -1)
     EVT_CALL(SetGoalToHome, ACTOR_PLAYER)
     EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(8.0))
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_RUNNING)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_RUNNING)
     EVT_CALL(PlayerRunToGoal, 0)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10002)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
     EVT_RETURN
     EVT_END
 };
@@ -202,22 +202,22 @@ EvtScript D_802A1B9C = {
     EVT_SUB(LVar0, 60)
     EVT_SET(LVar1, 0)
     EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-    EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_MIDAIR_STILL, ANIM_MIDAIR, ANIM_10009)
+    EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_MIDAIR_STILL, ANIM_MIDAIR, ANIM_Mario_10009)
     EVT_CALL(SetActorJumpGravity, ACTOR_PLAYER, EVT_FLOAT(0.8))
     EVT_CALL(N(UnkMoveFunc1))
     EVT_CALL(func_80273444, LVar0, 0, 0)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10009)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10009)
     EVT_WAIT(1)
     EVT_CALL(AddGoalPos, ACTOR_PLAYER, -20, 0, 0)
     EVT_CALL(func_80273444, 6, 0, 2)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10009)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10009)
     EVT_WAIT(2)
     EVT_CALL(EnablePlayerBlur, -1)
     EVT_CALL(SetGoalToHome, ACTOR_PLAYER)
     EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(8.0))
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_RUNNING)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_RUNNING)
     EVT_CALL(PlayerRunToGoal, 0)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10002)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
     EVT_RETURN
     EVT_END
 };
@@ -234,7 +234,7 @@ EvtScript D_802A1D88 = {
     EVT_SET(LVar1, 0)
     EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_CALL(SetActorJumpGravity, ACTOR_PLAYER, EVT_FLOAT(1.0))
-    EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_FALL_BACK, ANIM_FALL_BACK, ANIM_10009)
+    EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario_FALL_BACK, ANIM_Mario_FALL_BACK, ANIM_Mario_10009)
     EVT_CALL(N(UnkMoveFunc1))
     EVT_CALL(func_80273444, LVar0, 0, 0)
     EVT_CHILD_THREAD
@@ -253,7 +253,7 @@ EvtScript D_802A1D88 = {
     EVT_END_CHILD_THREAD
     EVT_CALL(SetGoalToHome, ACTOR_PLAYER)
     EVT_CALL(func_80273444, 4, 0, 2)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10002)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
     EVT_RETURN
     EVT_END
 };
@@ -267,9 +267,9 @@ EvtScript D_802A1FEC_766C0C = {
         EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(1.0))
     EVT_END_CHILD_THREAD
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_162)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_GET_UP)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_GET_UP)
     EVT_WAIT(10)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_DUST_OFF)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_DUST_OFF)
     EVT_WAIT(20)
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_100, 0)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
@@ -278,9 +278,9 @@ EvtScript D_802A1FEC_766C0C = {
     EVT_CALL(func_80276EFC)
     EVT_CALL(SetGoalToHome, ACTOR_PLAYER)
     EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(8.0))
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_RUNNING)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_RUNNING)
     EVT_CALL(PlayerRunToGoal, 0)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10002)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
     EVT_RETURN
     EVT_END
 };
@@ -311,7 +311,7 @@ EvtScript D_802A2230 = {
     EVT_CALL(func_802A9120_421B10, LVarB, 3)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_37)
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
-    EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_MIDAIR_STILL, ANIM_1000A, ANIM_1000B)
+    EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_MIDAIR_STILL, ANIM_Mario_1000A, ANIM_Mario_1000B)
     EVT_CALL(func_802752AC, LVarA, 0)
     EVT_WAIT(7)
     EVT_CALL(DidActionSucceed, LVar0)
@@ -542,7 +542,7 @@ EvtScript D_802A2D5C_76797C = {
     EVT_CALL(func_802A9120_421B10, 25, 3)
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(EnablePlayerBlur, 1)
-    EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_MIDAIR_STILL, ANIM_MIDAIR_STILL, ANIM_1000C)
+    EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_MIDAIR_STILL, ANIM_MIDAIR_STILL, ANIM_Mario_1000C)
     EVT_CALL(func_80275F00, 25, 4)
     EVT_CALL(EnablePlayerBlur, 0)
     EVT_WAIT(1)

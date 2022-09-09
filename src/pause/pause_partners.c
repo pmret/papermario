@@ -49,49 +49,49 @@ s32 gPausePartnersSpriteAnims[][4] = {
         NPC_ANIM_world_goombario_normal_still,
         NPC_ANIM_world_goombario_normal_walk,
         NPC_ANIM_world_goombario_normal_talk,
-        ANIM_END
+        ANIM_LIST_END
     },
     {
         NPC_ANIM_world_kooper_normal_still,
         NPC_ANIM_world_kooper_normal_walk,
         NPC_ANIM_world_kooper_normal_talk,
-        ANIM_END
+        ANIM_LIST_END
     },
     {
         NPC_ANIM_world_bombette_normal_still,
         NPC_ANIM_world_bombette_normal_walk,
         NPC_ANIM_world_bombette_normal_idle_fast,
-        ANIM_END
+        ANIM_LIST_END
     },
     {
         NPC_ANIM_world_parakarry_Palette_00_Anim_0,
         NPC_ANIM_world_parakarry_Palette_00_Anim_2,
         NPC_ANIM_world_parakarry_Palette_00_Anim_6,
-        ANIM_END
+        ANIM_LIST_END
     },
     {
         NPC_ANIM_world_bow_Palette_00_Anim_0,
         NPC_ANIM_world_bow_Palette_00_Anim_2,
         NPC_ANIM_world_bow_Palette_00_Anim_4,
-        ANIM_END
+        ANIM_LIST_END
     },
     {
         NPC_ANIM_world_watt_Palette_00_Anim_0,
         NPC_ANIM_world_watt_Palette_00_Anim_2,
         NPC_ANIM_world_watt_Palette_00_Anim_4,
-        ANIM_END
+        ANIM_LIST_END
     },
     {
         NPC_ANIM_world_sushie_Palette_00_Anim_0,
         NPC_ANIM_world_sushie_Palette_00_Anim_2,
         NPC_ANIM_world_sushie_Palette_00_Anim_4,
-        ANIM_END
+        ANIM_LIST_END
     },
     {
         NPC_ANIM_world_lakilester_Palette_00_Anim_0,
         NPC_ANIM_world_lakilester_Palette_00_Anim_5,
         NPC_ANIM_world_lakilester_Palette_00_Anim_9,
-        ANIM_END
+        ANIM_LIST_END
     }
 };
 s32 gPausePartnersPartnerIDs[] = { 1, 2, 3, 4, 9, 6, 7, 8};

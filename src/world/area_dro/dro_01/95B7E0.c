@@ -330,7 +330,7 @@ EvtScript N(802477E8) = {
             EVT_CALL(MakeItemEntity, LVar0, LVar3, LVar4, LVar5, 1, 0)
             EVT_CALL(SetPlayerAnimation, 393221)
             EVT_WAIT(30)
-            EVT_CALL(SetPlayerAnimation, ANIM_10002)
+            EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
             EVT_CALL(RemoveItemEntity, LVar0)
     EVT_END_SWITCH
     EVT_CALL(N(func_80242784_95D984), LVarA)
@@ -598,11 +598,11 @@ EvtScript N(80248504) = {
     EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(5.0))
     EVT_CALL(PanToTarget, 0, 0, 1)
     EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
-    EVT_CALL(SetPlayerAnimation, ANIM_10002)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
     EVT_CALL(SpeakToPlayer, 3, NPC_ANIM_dryite_Palette_00_Anim_4, NPC_ANIM_dryite_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x0079))
-    EVT_CALL(SetPlayerAnimation, ANIM_80007)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario_80007)
     EVT_WAIT(30)
-    EVT_CALL(SetPlayerAnimation, ANIM_10002)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
     EVT_CALL(SpeakToPlayer, 3, NPC_ANIM_dryite_Palette_00_Anim_4, NPC_ANIM_dryite_Palette_00_Anim_1, 0, MESSAGE_ID(0x0D, 0x007A))
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_CALL(UseSettingsFrom, 0, LVar0, LVar1, LVar2)
@@ -725,9 +725,9 @@ EvtScript N(interact_80248D54) = {
             EVT_IF_EQ(GF_DRO01_Gift_ToldComposerAboutMelody, 0)
                 EVT_IF_LT(GB_StoryProgress, 88)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_artist_toad_Palette_01_Anim_2, NPC_ANIM_artist_toad_Palette_01_Anim_1, 0, MESSAGE_ID(0x0D, 0x0085))
-                    EVT_CALL(SetPlayerAnimation, ANIM_NOD_YES)
+                    EVT_CALL(SetPlayerAnimation, ANIM_Mario_NOD_YES)
                     EVT_WAIT(30)
-                    EVT_CALL(SetPlayerAnimation, ANIM_10002)
+                    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_artist_toad_Palette_01_Anim_2, NPC_ANIM_artist_toad_Palette_01_Anim_1, 0, MESSAGE_ID(0x0D, 0x0086))
                     EVT_SET(GF_DRO01_Gift_ToldComposerAboutMelody, 1)
                     EVT_RETURN
@@ -1459,9 +1459,9 @@ EvtScript N(8024B6B4) = {
     EVT_EXEC_WAIT(N(8024B614))
     EVT_IF_LT(GB_StoryProgress, -64)
         EVT_CALL(SpeakToPlayer, 6, NPC_ANIM_mouser_Palette_01_Anim_5, NPC_ANIM_mouser_Palette_01_Anim_1, 0, MESSAGE_ID(0x0D, 0x0087))
-        EVT_CALL(SetPlayerAnimation, ANIM_10002)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
         EVT_WAIT(10)
-        EVT_CALL(SetPlayerAnimation, ANIM_80007)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario_80007)
         EVT_WAIT(30)
     EVT_END_IF
     EVT_CALL(SpeakToPlayer, 6, NPC_ANIM_mouser_Palette_01_Anim_5, NPC_ANIM_mouser_Palette_01_Anim_1, 0, MESSAGE_ID(0x0D, 0x0088))
@@ -1769,7 +1769,7 @@ EvtScript N(8024C580) = {
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(DisablePartnerAI, 0)
     EVT_CALL(HidePlayerShadow, TRUE)
-    EVT_CALL(SetPlayerAnimation, ANIM_STAND_STILL)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario_STAND_STILL)
     EVT_CALL(GetCurrentPartnerID, LVar0)
     EVT_IF_NE(LVar0, 0)
         EVT_CALL(EnableNpcShadow, NPC_PARTNER, FALSE)
@@ -1782,7 +1782,7 @@ EvtScript N(8024C580) = {
     EVT_CALL(InterpPlayerYaw, LVar4, 0)
     EVT_CALL(PlaySound, 355)
     EVT_CALL(func_802D286C, 256)
-    EVT_CALL(func_802D2520, ANIM_STAND_STILL, 5, 2, 1, 1, 0)
+    EVT_CALL(func_802D2520, ANIM_Mario_STAND_STILL, 5, 2, 1, 1, 0)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_LOOP(40)
         EVT_ADD(LVar1, 1)
@@ -1803,9 +1803,9 @@ EvtScript N(8024C580) = {
         EVT_END_THREAD
     EVT_END_IF
     EVT_WAIT(2)
-    EVT_CALL(func_802D2520, ANIM_STAND_STILL, 0, 0, 0, 0, 0)
+    EVT_CALL(func_802D2520, ANIM_Mario_STAND_STILL, 0, 0, 0, 0, 0)
     EVT_WAIT(1)
-    EVT_CALL(SetPlayerAnimation, ANIM_10002)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
     EVT_CALL(DisablePlayerPhysics, FALSE)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_CALL(HidePlayerShadow, FALSE)
@@ -1856,7 +1856,7 @@ EvtScript N(8024C8D4) = {
         EVT_CALL(HidePlayerShadow, FALSE)
     EVT_END_THREAD
     EVT_CALL(func_802D286C, 2304)
-    EVT_CALL(func_802D2520, ANIM_10002, 5, 3, 1, 1, 0)
+    EVT_CALL(func_802D2520, ANIM_Mario_10002, 5, 3, 1, 1, 0)
     EVT_LOOP(40)
         EVT_CALL(N(dup_Pipe_GetPointAheadOfPlayer), EVT_FLOAT(1.0))
         EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
@@ -1873,7 +1873,7 @@ EvtScript N(8024C8D4) = {
         EVT_END_THREAD
     EVT_END_IF
     EVT_WAIT(5)
-    EVT_CALL(func_802D2520, ANIM_10002, 0, 0, 0, 0, 0)
+    EVT_CALL(func_802D2520, ANIM_Mario_10002, 0, 0, 0, 0, 0)
     EVT_CALL(ModifyColliderFlags, 1, LVarB, 0x7FFFFE00)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_CALL(DisablePlayerPhysics, FALSE)
@@ -1932,7 +1932,7 @@ EvtScript N(8024CDA0) = {
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_CALL(func_802D286C, 2048)
-    EVT_CALL(func_802D2520, ANIM_10002, 5, 2, 1, 1, 0)
+    EVT_CALL(func_802D2520, ANIM_Mario_10002, 5, 2, 1, 1, 0)
     EVT_WAIT(25)
     EVT_EXEC_WAIT(LVarC)
     EVT_RETURN
@@ -1980,9 +1980,9 @@ EvtScript N(8024CF7C) = {
     EVT_CALL(PlaySound, 355)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_CALL(SetPlayerPos, LVar0, LVar6, LVar7)
-    EVT_CALL(SetPlayerAnimation, ANIM_STAND_STILL)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario_STAND_STILL)
     EVT_CALL(func_802D286C, 2048)
-    EVT_CALL(func_802D2520, ANIM_STAND_STILL, 5, 3, 1, 1, 0)
+    EVT_CALL(func_802D2520, ANIM_Mario_STAND_STILL, 5, 3, 1, 1, 0)
     EVT_THREAD
         EVT_WAIT(8)
         EVT_CALL(HidePlayerShadow, TRUE)

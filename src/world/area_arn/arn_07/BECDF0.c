@@ -49,7 +49,7 @@ EvtScript N(80242048) = {
         EVT_CALL(N(StarSpiritEffectFunc4), 1)
         EVT_THREAD
             EVT_WAIT(80)
-            EVT_CALL(SetPlayerAnimation, ANIM_10002)
+            EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
         EVT_END_THREAD
         EVT_ADD(LVar1, 100)
         EVT_CALL(SetCamDistance, 0, LVar1)
@@ -117,7 +117,7 @@ EvtScript N(80242498) = {
         EVT_CALL(N(StarSpiritEffectFunc4), 1)
         EVT_THREAD
             EVT_WAIT(80)
-            EVT_CALL(SetPlayerAnimation, ANIM_10002)
+            EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
         EVT_END_THREAD
         EVT_ADD(LVar1, 100)
         EVT_CALL(SetCamDistance, 0, LVar1)

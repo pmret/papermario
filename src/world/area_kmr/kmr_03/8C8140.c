@@ -132,7 +132,7 @@ EvtScript N(npcAI_80240B50) = {
             EVT_WAIT(30)
             EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_goompa_Palette_00_Anim_8, NPC_ANIM_goompa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0B, 0x00A7))
             EVT_WAIT(5)
-            EVT_CALL(SetPlayerAnimation, ANIM_80007)
+            EVT_CALL(SetPlayerAnimation, ANIM_Mario_80007)
             EVT_WAIT(30)
             EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_goompa_Palette_00_Anim_8, NPC_ANIM_goompa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0B, 0x00A8))
             EVT_CALL(N(UnkFunc41), 0, 5)

@@ -365,7 +365,7 @@ EvtScript N(main) = {
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_WAIT(20)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10002)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 32)
     EVT_CALL(ShowEmote, 0, EMOTE_QUESTION, -45, 20, 2, LVar0, LVar1, LVar2, 10)
@@ -393,7 +393,7 @@ EvtScript N(main) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_WAIT(8)
-    EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_1002B, ANIM_1002B, ANIM_MIDAIR)
+    EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario_1002B, ANIM_Mario_1002B, ANIM_MIDAIR)
     EVT_CALL(SetActorJumpGravity, ACTOR_PLAYER, EVT_FLOAT(1.8))
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
@@ -430,7 +430,7 @@ EvtScript N(main) = {
     EVT_CALL(VirtualEntityJumpTo, LVarA, LVar0, LVar1, LVar2, 0)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HIT_BLOCK)
     EVT_THREAD
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_SHOCK_STILL)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_SHOCK_STILL)
         EVT_CALL(SetActorScale, ACTOR_PLAYER, EVT_FLOAT(1.2), EVT_FLOAT(0.9), EVT_FLOAT(1.0))
         EVT_WAIT(1)
         EVT_CALL(SetActorScale, ACTOR_PLAYER, EVT_FLOAT(1.3), EVT_FLOAT(0.8), EVT_FLOAT(1.0))
@@ -446,7 +446,7 @@ EvtScript N(main) = {
     EVT_ADD(LVar0, 60)
     EVT_CALL(VirtualEntityJumpTo, LVarA, LVar0, LVar1, LVar2, 0)
     EVT_CALL(PlayEffect, 0x6, 2, LVar0, LVar1, LVar2, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10002)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
     EVT_ADD(LVar0, 20)
     EVT_CALL(VirtualEntityJumpTo, LVarA, LVar0, LVar1, LVar2, 0)
     EVT_CALL(PlayEffect, 0x6, 2, LVar0, LVar1, LVar2, 0, 0, 0, 0, 0, 0, 0, 0, 0)

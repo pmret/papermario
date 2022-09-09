@@ -239,7 +239,7 @@ EvtScript N(80241CD4) = {
             EVT_CALL(MakeItemEntity, LVar0, LVar3, LVar4, LVar5, 1, 0)
             EVT_CALL(SetPlayerAnimation, 393221)
             EVT_WAIT(30)
-            EVT_CALL(SetPlayerAnimation, ANIM_10002)
+            EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
             EVT_CALL(RemoveItemEntity, LVar0)
     EVT_END_SWITCH
     EVT_CALL(N(ItemChoice_SaveSelected), LVarA)
@@ -258,9 +258,9 @@ EvtScript N(80241E18) = {
 };
 
 EvtScript N(80241E68) = {
-    EVT_CALL(SetPlayerAnimation, ANIM_10002)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
     EVT_WAIT(1)
-    EVT_CALL(SetPlayerAnimation, ANIM_80007)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario_80007)
     EVT_WAIT(20)
     EVT_RETURN
     EVT_END
@@ -284,9 +284,9 @@ EvtScript N(interact_80241EB0) = {
             EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 0, MESSAGE_ID(0x0E, 0x0077))
         EVT_CASE_GE(39)
             EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 0, MESSAGE_ID(0x0E, 0x0078))
-            EVT_CALL(SetPlayerAnimation, ANIM_10002)
+            EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
             EVT_WAIT(10)
-            EVT_CALL(SetPlayerAnimation, ANIM_80007)
+            EVT_CALL(SetPlayerAnimation, ANIM_Mario_80007)
             EVT_WAIT(20)
             EVT_CALL(EndSpeech, -1, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 0)
     EVT_END_SWITCH
@@ -505,7 +505,7 @@ EvtScript N(80242C60) = {
     EVT_SET(MapVar(3), 0)
     EVT_THREAD
         EVT_WAIT(25)
-        EVT_CALL(SetPlayerAnimation, ANIM_80017)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario_80017)
         EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_boo_Palette_01_Anim_9)
         EVT_LOOP(0)
             EVT_IF_EQ(MapVar(2), 1)
@@ -513,7 +513,7 @@ EvtScript N(80242C60) = {
             EVT_END_IF
             EVT_WAIT(1)
         EVT_END_LOOP
-        EVT_CALL(SetPlayerAnimation, ANIM_10002)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
         EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_boo_Palette_01_Anim_1)
     EVT_END_THREAD
     EVT_CALL(SetNpcAnimation, 4, NPC_ANIM_boo_Palette_01_Anim_8)

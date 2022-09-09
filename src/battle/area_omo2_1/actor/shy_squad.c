@@ -1380,7 +1380,7 @@ EvtScript N(flee) = {
             EVT_GOTO(0)
         EVT_END_IF
         EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_1002B)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_1002B)
         EVT_LABEL(1)
         EVT_WAIT(1)
         EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -1389,7 +1389,7 @@ EvtScript N(flee) = {
         EVT_IF_GT(LVar0, LVar3)
             EVT_GOTO(1)
         EVT_END_IF
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_1002B)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_1002B)
         EVT_SET(LVar7, 0)
         EVT_LOOP(40)
             EVT_ADD(LVar7, 36)
@@ -1399,7 +1399,7 @@ EvtScript N(flee) = {
             EVT_CALL(SetActorRotation, ACTOR_PLAYER, 0, LVar7, 0)
             EVT_WAIT(1)
         EVT_END_LOOP
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10002)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
         EVT_CALL(SetActorRotation, ACTOR_PLAYER, 0, 0, 0)
         EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
     EVT_END_THREAD

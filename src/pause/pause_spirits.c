@@ -34,43 +34,43 @@ s32 gPauseSpiritsSpriteAnims[][4] = {
         NPC_ANIM_world_eldstar_Palette_00_Anim_0,
         NPC_ANIM_world_eldstar_Palette_00_Anim_1,
         NPC_ANIM_world_eldstar_Palette_00_Anim_2,
-        ANIM_END
+        ANIM_LIST_END
     },
     {
         NPC_ANIM_world_mamar_Palette_00_Anim_0,
         NPC_ANIM_world_mamar_Palette_00_Anim_1,
         NPC_ANIM_world_mamar_Palette_00_Anim_2,
-        ANIM_END
+        ANIM_LIST_END
     },
     {
         NPC_ANIM_world_skolar_Palette_00_Anim_0,
         NPC_ANIM_world_skolar_Palette_00_Anim_1,
         NPC_ANIM_world_skolar_Palette_00_Anim_2,
-        ANIM_END
+        ANIM_LIST_END
     },
     {
         NPC_ANIM_world_muskular_Palette_00_Anim_0,
         NPC_ANIM_world_muskular_Palette_00_Anim_1,
         NPC_ANIM_world_muskular_Palette_00_Anim_2,
-        ANIM_END
+        ANIM_LIST_END
     },
     {
         NPC_ANIM_world_misstar_Palette_00_Anim_0,
         NPC_ANIM_world_misstar_Palette_00_Anim_1,
         NPC_ANIM_world_misstar_Palette_00_Anim_2,
-        ANIM_END
+        ANIM_LIST_END
     },
     {
         NPC_ANIM_world_klevar_Palette_00_Anim_0,
         NPC_ANIM_world_klevar_Palette_00_Anim_1,
         NPC_ANIM_world_klevar_Palette_00_Anim_3,
-        ANIM_END
+        ANIM_LIST_END
     },
     {
         NPC_ANIM_world_kalmar_Palette_00_Anim_0,
         NPC_ANIM_world_kalmar_Palette_00_Anim_1,
         NPC_ANIM_world_kalmar_Palette_00_Anim_2,
-        ANIM_END
+        ANIM_LIST_END
     }
 };
 s8 gPauseSpiritsGridData[] = {

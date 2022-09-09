@@ -591,7 +591,7 @@ EvtScript N(802255D8) = {
         EVT_CALL(PlaySound, 0x20FC)
     EVT_END_THREAD
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_1002B)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_1002B)
     EVT_WAIT(30)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)

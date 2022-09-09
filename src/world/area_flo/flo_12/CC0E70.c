@@ -206,7 +206,7 @@ EvtScript N(80241858) = {
             EVT_CALL(MakeItemEntity, LVar0, LVar3, LVar4, LVar5, 1, 0)
             EVT_CALL(SetPlayerAnimation, 393221)
             EVT_WAIT(30)
-            EVT_CALL(SetPlayerAnimation, ANIM_10002)
+            EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
             EVT_CALL(RemoveItemEntity, LVar0)
     EVT_END_SWITCH
     EVT_CALL(N(func_80240614_CC1444), LVarA)
@@ -307,7 +307,7 @@ EvtScript N(interact_80241C8C) = {
                             EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_2, 5, MESSAGE_ID(0x11, 0x0091))
                             EVT_CALL(SetPlayerAnimation, ANIM_PRAY)
                             EVT_WAIT(40)
-                            EVT_CALL(SetPlayerAnimation, ANIM_10002)
+                            EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
                             EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_2, 5, MESSAGE_ID(0x11, 0x0092))
                             EVT_SET(GF_FLO12_RosieRequestedSomethingBeautiful, 1)
                     EVT_END_SWITCH
@@ -322,7 +322,7 @@ EvtScript N(interact_80241C8C) = {
                                 EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_2, 5, MESSAGE_ID(0x11, 0x0091))
                                 EVT_CALL(SetPlayerAnimation, ANIM_PRAY)
                                 EVT_WAIT(40)
-                                EVT_CALL(SetPlayerAnimation, ANIM_10002)
+                                EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
                                 EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_2, 5, MESSAGE_ID(0x11, 0x0092))
                                 EVT_SET(GF_FLO12_RosieRequestedSomethingBeautiful, 1)
                             EVT_ELSE

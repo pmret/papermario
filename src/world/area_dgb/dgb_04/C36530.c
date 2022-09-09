@@ -167,7 +167,7 @@ EvtScript N(npcAI_802435E4) = {
     EVT_CALL(func_80045838, -1, 759, 0)
     EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_sentinel_Palette_00_Anim_8)
     EVT_WAIT(10)
-    EVT_CALL(SetPlayerAnimation, ANIM_80017)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario_80017)
     EVT_WAIT(10)
     EVT_CALL(func_80045838, -1, 1838, 0)
     EVT_THREAD

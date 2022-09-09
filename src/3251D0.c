@@ -108,7 +108,7 @@ ApiStatus func_802C03E8(Evt* script, s32 isInitialCall) {
 
 EvtScript D_802C0410 = {
     EVT_SET_GROUP(EVT_GROUP_00)
-    EVT_CALL(SetPlayerAnimation, ANIM_GOT_ITEM)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario_GOT_ITEM)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 45)
     EVT_CALL(MakeItemEntity, LVarA, LVar0, LVar1, LVar2, 1, 0)
@@ -129,7 +129,7 @@ EvtScript D_802C04F4 = {
             EVT_WAIT(10)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(SetPlayerAnimation, ANIM_EAT)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario_EAT)
     EVT_WAIT(45)
     EVT_RETURN
     EVT_END
@@ -142,7 +142,7 @@ EvtScript D_802C0560 = {
             EVT_WAIT(10)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(SetPlayerAnimation, ANIM_DRINK)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario_DRINK)
     EVT_WAIT(45)
     EVT_RETURN
     EVT_END
@@ -165,7 +165,7 @@ EvtScript D_802C05CC_32579C = {
         EVT_EXEC_WAIT(D_802C0560)
     EVT_END_IF
     EVT_IF_EQ(LVarF, 1)
-        EVT_CALL(SetPlayerAnimation, ANIM_STICK_OUT_TONGUE)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario_STICK_OUT_TONGUE)
     EVT_END_IF
     EVT_IF_GT(LVarB, 0)
         EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
@@ -190,14 +190,14 @@ EvtScript D_802C05CC_32579C = {
     EVT_END_IF
     EVT_IF_EQ(LVarF, 0)
         EVT_WAIT(10)
-        EVT_CALL(SetPlayerAnimation, ANIM_THUMBS_UP)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario_THUMBS_UP)
         EVT_WAIT(30)
     EVT_ELSE
         EVT_WAIT(30)
     EVT_END_IF
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_CALL(ShowRecoveryShimmer, LVar0, LVar1, LVar2, LVarB)
-    EVT_CALL(SetPlayerAnimation, ANIM_10002)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
     EVT_WAIT(20)
     EVT_CALL(func_802C03E8)
     EVT_CALL(DisablePlayerInput, FALSE)

@@ -103,7 +103,7 @@ EvtScript N(802404D0) = {
     EVT_CALL(SetPlayerActionState, 6)
     EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(1.5))
     EVT_CALL(PlayerJump, 50, 0, 0, 16)
-    EVT_CALL(SetPlayerAnimation, ANIM_10002)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
     EVT_SET(AreaFlag(1), 0)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_RETURN

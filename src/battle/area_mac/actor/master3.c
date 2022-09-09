@@ -573,7 +573,7 @@ EvtScript N(tripleStrike3) = {
         EVT_CALL(EnablePlayerBlur, 1)
         EVT_CALL(SetActorJumpGravity, ACTOR_PLAYER, EVT_FLOAT(0.3))
         EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-        EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_FALL_BACK, ANIM_FALL_BACK, ANIM_FALL_BACK)
+        EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario_FALL_BACK, ANIM_Mario_FALL_BACK, ANIM_Mario_FALL_BACK)
         EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
         EVT_CALL(func_80273444, 50, 0, 0)
         EVT_CALL(EnablePlayerBlur, 0)

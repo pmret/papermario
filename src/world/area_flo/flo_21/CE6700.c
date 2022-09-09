@@ -114,7 +114,7 @@ EvtScript N(80240E3C) = {
         EVT_CALL(N(StarSpiritEffectFunc4), 1)
         EVT_THREAD
             EVT_WAIT(80)
-            EVT_CALL(SetPlayerAnimation, ANIM_10002)
+            EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
         EVT_END_THREAD
         EVT_ADD(LVar1, 100)
         EVT_CALL(SetCamDistance, 0, LVar1)
@@ -318,7 +318,7 @@ EvtScript N(80241920) = {
         EVT_CALL(NpcJump0, 2, 650, 150, 0, 10)
     EVT_END_THREAD
     EVT_THREAD
-        EVT_CALL(SetPlayerAnimation, ANIM_80017)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario_80017)
         EVT_CALL(LoadPath, 30, EVT_PTR(N(vectorList_8024189C)), 3, 0)
         EVT_LABEL(0)
         EVT_CALL(GetNextPathPos)
@@ -328,7 +328,7 @@ EvtScript N(80241920) = {
             EVT_GOTO(0)
         EVT_END_IF
     EVT_END_THREAD
-    EVT_CALL(SetPlayerAnimation, ANIM_1002B)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario_1002B)
     EVT_RETURN
     EVT_END
 };
@@ -349,7 +349,7 @@ EvtScript N(80241B98) = {
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(InterpPlayerYaw, 90, 1)
     EVT_WAIT(5)
-    EVT_CALL(SetPlayerAnimation, ANIM_1002B)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario_1002B)
     EVT_CALL(SetNpcFlagBits, 1, ((NPC_FLAG_100)), TRUE)
     EVT_CALL(GetPlayerPos, LVar2, LVar3, LVar4)
     EVT_CALL(UseSettingsFrom, 0, LVar2, LVar3, LVar4)
@@ -823,7 +823,7 @@ s32 N(extraAnimationList_802437E0)[] = {
     NPC_ANIM_huff_n_puff_Palette_00_Anim_31,
     NPC_ANIM_huff_n_puff_Palette_00_Anim_19,
     NPC_ANIM_huff_n_puff_Palette_00_Anim_2D,
-    ANIM_END,
+    ANIM_LIST_END,
 };
 
 StaticNpc N(npcGroup_80243804)[] = {
@@ -927,7 +927,7 @@ StaticNpc N(npcGroup_80243804)[] = {
 
 s32 N(extraAnimationList_80243DD4)[] = {
     NPC_ANIM_tuff_puff_Palette_00_Anim_B,
-    ANIM_END,
+    ANIM_LIST_END,
 };
 
 StaticNpc N(npcGroup_80243DDC)[] = {

@@ -159,7 +159,7 @@ EvtScript N(8024062C) = {
             EVT_CALL(SetPlayerAnimation, 524309)
             EVT_CALL(ShakeCam, 0, 0, 20, EVT_FLOAT(1.0))
             EVT_WAIT(10)
-            EVT_CALL(SetPlayerAnimation, ANIM_10002)
+            EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
             EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(0.0))
             EVT_CALL(PlayerJump1, 375, 25, -250, 10)
             EVT_CALL(N(func_80240000_C4D3E0))

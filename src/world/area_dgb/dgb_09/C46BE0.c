@@ -215,12 +215,12 @@ s32 N(extraAnimationList_802440BC)[] = {
     NPC_ANIM_world_clubba_Palette_00_Anim_8,
     NPC_ANIM_world_clubba_Palette_00_Anim_11,
     NPC_ANIM_world_clubba_Palette_00_Anim_12,
-    ANIM_END,
+    ANIM_LIST_END,
 };
 
 s32 N(extraAnimationList_802440E4)[] = {
     NPC_ANIM_world_clubba_Palette_00_Anim_0,
-    ANIM_END,
+    ANIM_LIST_END,
 };
 
 MobileAISettings N(npcAISettings_802440EC) = {
@@ -369,7 +369,7 @@ EvtScript N(npcAI_802443DC) = {
     EVT_CALL(func_80045838, -1, 759, 0)
     EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_sentinel_Palette_00_Anim_8)
     EVT_WAIT(10)
-    EVT_CALL(SetPlayerAnimation, ANIM_80017)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario_80017)
     EVT_WAIT(10)
     EVT_CALL(func_80045838, -1, 1838, 0)
     EVT_THREAD

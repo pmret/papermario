@@ -181,12 +181,12 @@ s32 N(extraAnimationList_80241B6C)[] = {
     NPC_ANIM_world_clubba_Palette_00_Anim_8,
     NPC_ANIM_world_clubba_Palette_00_Anim_11,
     NPC_ANIM_world_clubba_Palette_00_Anim_12,
-    ANIM_END,
+    ANIM_LIST_END,
 };
 
 s32 N(extraAnimationList_80241B94)[] = {
     NPC_ANIM_world_clubba_Palette_00_Anim_0,
-    ANIM_END,
+    ANIM_LIST_END,
 };
 
 MobileAISettings N(npcAISettings_80241B9C) = {

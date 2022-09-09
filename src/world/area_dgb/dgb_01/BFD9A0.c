@@ -344,12 +344,12 @@ EvtScript N(80243EF0) = {
         EVT_WAIT(10)
         EVT_CALL(SetPlayerAnimation, 524319)
         EVT_WAIT(20)
-        EVT_CALL(SetPlayerAnimation, ANIM_RUN_PANIC)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario_RUN_PANIC)
         EVT_CALL(SetPlayerSpeed, EVT_FLOAT(8.0))
         EVT_CALL(PlayerMoveTo, 412, -29, 0)
         EVT_WAIT(10)
         EVT_CALL(InterpPlayerYaw, 270, 0)
-        EVT_CALL(SetPlayerAnimation, ANIM_10002)
+        EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
         EVT_CALL(ModifyColliderFlags, 1, 50, 0x7FFFFE00)
         EVT_CALL(DisablePlayerPhysics, FALSE)
     EVT_END_THREAD
@@ -539,7 +539,7 @@ EvtScript N(npcAI_80244D54) = {
     EVT_CALL(func_80045838, -1, 759, 0)
     EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_sentinel_Palette_00_Anim_8)
     EVT_WAIT(10)
-    EVT_CALL(SetPlayerAnimation, ANIM_80017)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario_80017)
     EVT_WAIT(10)
     EVT_CALL(func_80045838, -1, 1838, 0)
     EVT_THREAD
@@ -1032,7 +1032,7 @@ s32 N(extraAnimationList_80246850)[] = {
     NPC_ANIM_world_tubba_Palette_00_Anim_1B,
     NPC_ANIM_world_tubba_Palette_00_Anim_1C,
     NPC_ANIM_world_tubba_Palette_00_Anim_1D,
-    ANIM_END,
+    ANIM_LIST_END,
 };
 
 StaticNpc N(npcGroup_80246880) = {

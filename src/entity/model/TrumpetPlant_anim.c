@@ -8,20 +8,20 @@ StaticAnimatorNode Entity_TrumpetPlant_Node2 = {
     .displayList = Entity_TrumpetPlant_RenderNode2,
     .rot = { 0, 0, 5461 },
     .pos = { 0.0f, 15.0f, 0.0f },
-    .sibling = ANIM_NULL,
-    .child = ANIM_NULL,
+    .sibling = ENTITY_ANIN_NULL,
+    .child = ENTITY_ANIN_NULL,
 };
 
 StaticAnimatorNode Entity_TrumpetPlant_Node1 = {
     .displayList = Entity_TrumpetPlant_RenderNode1,
-    .sibling = ANIM_NULL,
+    .sibling = ENTITY_ANIN_NULL,
     .child = &Entity_TrumpetPlant_Node2,
 };
 
 StaticAnimatorNode* Entity_TrumpetPlant_Mesh[] = {
     &Entity_TrumpetPlant_Node1,
     &Entity_TrumpetPlant_Node2,
-    ANIM_NULL,
+    ENTITY_ANIN_NULL,
 };
 
 AnimScript Entity_TrumpetPlant_AnimationUse = {

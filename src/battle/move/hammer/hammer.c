@@ -21,7 +21,7 @@ EvtScript D_802A10B0_734650 = {
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_26)
     EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(5.0))
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_RUNNING)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_RUNNING)
     EVT_CALL(PlayerRunToGoal, 0)
     EVT_RETURN
     EVT_END
@@ -31,7 +31,7 @@ EvtScript D_802A118C_0073472C = {
     EVT_CALL(SetGoalPos, ACTOR_PLAYER, -33, 0, 0)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_26)
     EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(5.0))
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_RUNNING)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_RUNNING)
     EVT_CALL(PlayerRunToGoal, 0)
     EVT_RETURN
     EVT_END
@@ -44,14 +44,14 @@ EvtScript D_802A1204_007347A4 = {
     EVT_LOOP(10)
         EVT_CALL(CheckButtonDown, 0x40000, LVar0)
         EVT_IF_EQ(LVar0, 1)
-            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10002)
+            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
             EVT_BREAK_LOOP
         EVT_END_IF
         EVT_WAIT(1)
         EVT_ADD(LVar1, 1)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_3000D)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_3000D)
     EVT_END_LOOP
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_3000D)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_3000D)
     EVT_SWITCH(LVar1)
         EVT_CASE_LT(3)
             EVT_WAIT(4)
@@ -75,14 +75,14 @@ EvtScript D_802A1388_00734928 = {
     EVT_LOOP(10)
         EVT_CALL(CheckButtonDown, 0x40000, LVar0)
         EVT_IF_EQ(LVar0, 1)
-            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10002)
+            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
             EVT_BREAK_LOOP
         EVT_END_IF
         EVT_WAIT(1)
         EVT_ADD(LVar1, 1)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_30014)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30014)
     EVT_END_LOOP
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_30014)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30014)
     EVT_SWITCH(LVar1)
         EVT_CASE_LT(3)
             EVT_WAIT(4)
@@ -106,14 +106,14 @@ EvtScript D_802A150C_00734AAC = {
     EVT_LOOP(10)
         EVT_CALL(CheckButtonDown, 0x40000, LVar0)
         EVT_IF_EQ(LVar0, 1)
-            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10002)
+            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
             EVT_BREAK_LOOP
         EVT_END_IF
         EVT_WAIT(1)
         EVT_ADD(LVar1, 1)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_3001B)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_3001B)
     EVT_END_LOOP
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_3001B)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_3001B)
     EVT_SWITCH(LVar1)
         EVT_CASE_LT(3)
             EVT_WAIT(4)
@@ -135,18 +135,18 @@ EvtScript D_802A1690_00734C30 = {
     EVT_CALL(SetBattleCamOffsetZ, 8)
     EVT_CALL(InitTargetIterator)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, 0x10B)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_3000E)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_3000E)
     EVT_WAIT(4)
     EVT_CALL(func_802A9258_422258, 0, 36, 3)
     EVT_CALL(SetActionResult, 0)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_3000F)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_3000F)
     EVT_SET(LVar1, 0)
     EVT_LOOP(30)
         EVT_WAIT(1)
         EVT_CALL(GetActionResult, LVar0)
         EVT_IF_NE(LVar0, 0)
             EVT_IF_NE(LVar1, 1)
-                EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_30010)
+                EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30010)
                 EVT_SET(LVar1, 1)
             EVT_END_IF
         EVT_END_IF
@@ -161,9 +161,9 @@ EvtScript D_802A1690_00734C30 = {
     EVT_IF_EQ(LVar0, 1)
         EVT_GOTO(0)
     EVT_END_IF
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_30011)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30011)
     EVT_WAIT(3)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_30012)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30012)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_44)
     EVT_RETURN
     EVT_END
@@ -176,13 +176,13 @@ EvtScript D_802A18AC_00734E4C = {
     EVT_CALL(func_802693F0)
     EVT_WAIT(20)
     EVT_CALL(EnablePlayerBlur, -1)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10002)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
     EVT_WAIT(5)
     EVT_CALL(SetGoalToHome, ACTOR_PLAYER)
     EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(8.0))
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_RUNNING)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_RUNNING)
     EVT_CALL(PlayerRunToGoal, 0)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10002)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
     EVT_RETURN
     EVT_END
 };
@@ -192,13 +192,13 @@ EvtScript D_802A1998_00734F38 = {
     EVT_CALL(func_802693F0)
     EVT_WAIT(20)
     EVT_CALL(EnablePlayerBlur, -1)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10002)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
     EVT_WAIT(5)
     EVT_CALL(SetGoalToHome, ACTOR_PLAYER)
     EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(8.0))
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_RUNNING)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_RUNNING)
     EVT_CALL(PlayerRunToGoal, 0)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10002)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
     EVT_RETURN
     EVT_END
 };
@@ -209,13 +209,13 @@ EvtScript D_802A1A64_00735004 = {
     EVT_CALL(func_802693F0)
     EVT_WAIT(20)
     EVT_CALL(EnablePlayerBlur, -1)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10002)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
     EVT_WAIT(5)
     EVT_CALL(SetGoalToHome, ACTOR_PLAYER)
     EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(8.0))
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_RUNNING)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_RUNNING)
     EVT_CALL(PlayerRunToGoal, 0)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10002)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_10002)
     EVT_RETURN
     EVT_END
 };
@@ -232,11 +232,11 @@ EvtScript N(D_802A1B40) = {
     EVT_CALL(SetBattleCamOffsetZ, 8)
     EVT_CALL(InitTargetIterator)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, 0x10B)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_3000E)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_3000E)
     EVT_WAIT(4)
     EVT_CALL(N(IsBerserkerEquipped))
     EVT_IF_NE(LVar0, 0)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_3000F)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_3000F)
         EVT_CALL(GetActionCommandMode, LVar0)
         EVT_IF_LT(LVar0, 2)
             EVT_CALL(N(IsRightOnEquipped))
@@ -259,7 +259,7 @@ EvtScript N(D_802A1B40) = {
             EVT_CALL(GetActionResult, LVar0)
             EVT_IF_NE(LVar0, 0)
                 EVT_IF_NE(LVar1, 1)
-                    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_30010)
+                    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30010)
                     EVT_SET(LVar1, 1)
                 EVT_END_IF
             EVT_END_IF
@@ -280,10 +280,10 @@ EvtScript N(D_802A1B40) = {
     EVT_ELSE
         EVT_CALL(func_802A9258_422258, 0, LVar1, 3)
         EVT_CALL(SetActionResult, 0)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_3000F)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_3000F)
         EVT_SUB(LVar1, 10)
         EVT_WAIT(LVar1)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_30010)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30010)
         EVT_WAIT(5)
     EVT_END_IF
     EVT_CALL(GetActionCommandMode, LVar0)
@@ -297,10 +297,10 @@ EvtScript N(D_802A1B40) = {
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_IF
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_30011)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30011)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, 0x2115)
     EVT_WAIT(3)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_30012)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30012)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, 0x2118)
     EVT_RETURN
     EVT_END
@@ -318,11 +318,11 @@ EvtScript D_802A2000_007355A0 = {
     EVT_CALL(SetBattleCamOffsetZ, 8)
     EVT_CALL(InitTargetIterator)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, 0x10B)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_30015)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30015)
     EVT_WAIT(4)
     EVT_CALL(N(IsBerserkerEquipped))
     EVT_IF_EQ(LVar0, 1)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_30016)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30016)
         EVT_CALL(N(IsRightOnEquipped))
         EVT_IF_EQ(LVar0, 0)
             EVT_LOOP(45)
@@ -342,7 +342,7 @@ EvtScript D_802A2000_007355A0 = {
             EVT_CALL(GetActionResult, LVar0)
             EVT_IF_NE(LVar0, 0)
                 EVT_IF_NE(LVar1, 1)
-                    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_30017)
+                    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30017)
                     EVT_SET(LVar1, 1)
                 EVT_END_IF
             EVT_END_IF
@@ -360,16 +360,16 @@ EvtScript D_802A2000_007355A0 = {
     EVT_ELSE
         EVT_CALL(func_802A9258_422258, 0, LVar1, 3)
         EVT_CALL(SetActionResult, 0)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_30016)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30016)
         EVT_SUB(LVar1, 10)
         EVT_WAIT(LVar1)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_30017)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30017)
         EVT_WAIT(5)
     EVT_END_IF
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_30018)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30018)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, 0x2116)
     EVT_WAIT(3)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_30019)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30019)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, 0x2119)
     EVT_RETURN
     EVT_END
@@ -387,11 +387,11 @@ EvtScript D_802A23E8_735988 = {
     EVT_CALL(SetBattleCamOffsetZ, 8)
     EVT_CALL(InitTargetIterator)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, 0x10B)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_3001C)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_3001C)
     EVT_WAIT(4)
     EVT_CALL(N(IsBerserkerEquipped))
     EVT_IF_EQ(LVar0, 1)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_3001D)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_3001D)
         EVT_CALL(N(IsRightOnEquipped))
         EVT_IF_EQ(LVar0, 0)
             EVT_LOOP(45)
@@ -411,7 +411,7 @@ EvtScript D_802A23E8_735988 = {
             EVT_CALL(GetActionResult, LVar0)
             EVT_IF_NE(LVar0, 0)
                 EVT_IF_NE(LVar1, 1)
-                    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_3001E)
+                    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_3001E)
                     EVT_SET(LVar1, 1)
                 EVT_END_IF
             EVT_END_IF
@@ -429,16 +429,16 @@ EvtScript D_802A23E8_735988 = {
     EVT_ELSE
         EVT_CALL(func_802A9258_422258, 0, LVar1, 3)
         EVT_CALL(SetActionResult, 0)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_3001D)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_3001D)
         EVT_SUB(LVar1, 10)
         EVT_WAIT(LVar1)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_3001E)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_3001E)
         EVT_WAIT(5)
     EVT_END_IF
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_3001F)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_3001F)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, 0x2117)
     EVT_WAIT(3)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_30020)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30020)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, 0x211A)
     EVT_RETURN
     EVT_END
@@ -456,9 +456,9 @@ EvtScript N(D_802A27D0) = {
     EVT_CALL(AddBattleCamZoom, 80)
     EVT_CALL(InitTargetIterator)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, 0x10B)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_3000E)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_3000E)
     EVT_WAIT(8)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_3000F)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_3000F)
     EVT_CALL(N(IsRightOnEquipped))
     EVT_IF_EQ(LVar0, 0)
         EVT_LOOP(45)
@@ -478,7 +478,7 @@ EvtScript N(D_802A27D0) = {
         EVT_CALL(GetActionResult, LVar0)
         EVT_IF_NE(LVar0, 0)
             EVT_IF_NE(LVar1, 1)
-                EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_30010)
+                EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30010)
                 EVT_SET(LVar1, 1)
             EVT_END_IF
         EVT_END_IF
@@ -494,9 +494,9 @@ EvtScript N(D_802A27D0) = {
         EVT_GOTO(0)
     EVT_END_IF
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, 0x2115)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_30011)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30011)
     EVT_WAIT(3)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_30012)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30012)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, 0x2118)
     EVT_RETURN
     EVT_END
@@ -514,9 +514,9 @@ EvtScript D_802A2AFC_0073609C = {
     EVT_CALL(AddBattleCamZoom, 80)
     EVT_CALL(InitTargetIterator)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, 0x10B)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_30015)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30015)
     EVT_WAIT(8)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_30016)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30016)
     EVT_CALL(N(IsRightOnEquipped))
     EVT_IF_EQ(LVar0, 0)
         EVT_LOOP(45)
@@ -543,9 +543,9 @@ EvtScript D_802A2AFC_0073609C = {
         EVT_GOTO(0)
     EVT_END_IF
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, 0x2116)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_30018)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30018)
     EVT_WAIT(3)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_30019)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30019)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, 0x2119)
     EVT_RETURN
     EVT_END
@@ -563,9 +563,9 @@ EvtScript D_802A2DA0_00736340 = {
     EVT_CALL(AddBattleCamZoom, 80)
     EVT_CALL(InitTargetIterator)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, 0x10B)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_3001C)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_3001C)
     EVT_WAIT(8)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_3001D)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_3001D)
     EVT_CALL(N(IsRightOnEquipped))
     EVT_IF_EQ(LVar0, 0)
         EVT_LOOP(45)
@@ -592,9 +592,9 @@ EvtScript D_802A2DA0_00736340 = {
         EVT_GOTO(0)
     EVT_END_IF
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, 0x2117)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_3001F)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_3001F)
     EVT_WAIT(3)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_30020)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario_30020)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, 0x211A)
     EVT_RETURN
     EVT_END
@@ -728,17 +728,17 @@ EvtScript D_802A369C_00736C3C = {
             EVT_SET(LVar9, 1)
             EVT_SET_CONST(LVarA, NPC_ANIM_world_bombette_normal_celebrate)
             EVT_SET_CONST(LVarB, NPC_ANIM_world_bombette_normal_anim_11)
-            EVT_SET_CONST(LVarC, ANIM_30012)
+            EVT_SET_CONST(LVarC, ANIM_Mario_30012)
         EVT_CASE_EQ(1)
             EVT_SET(LVar9, 2)
-            EVT_SET_CONST(LVarA, ANIM_30016)
-            EVT_SET_CONST(LVarB, ANIM_30017)
-            EVT_SET_CONST(LVarC, ANIM_30019)
+            EVT_SET_CONST(LVarA, ANIM_Mario_30016)
+            EVT_SET_CONST(LVarB, ANIM_Mario_30017)
+            EVT_SET_CONST(LVarC, ANIM_Mario_30019)
         EVT_CASE_EQ(2)
             EVT_SET(LVar9, 3)
-            EVT_SET_CONST(LVarA, ANIM_3001D)
-            EVT_SET_CONST(LVarB, ANIM_3001E)
-            EVT_SET_CONST(LVarC, ANIM_30020)
+            EVT_SET_CONST(LVarA, ANIM_Mario_3001D)
+            EVT_SET_CONST(LVarB, ANIM_Mario_3001E)
+            EVT_SET_CONST(LVarC, ANIM_Mario_30020)
     EVT_END_SWITCH
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(AddGoalPos, ACTOR_PLAYER, 0, 0, 0)

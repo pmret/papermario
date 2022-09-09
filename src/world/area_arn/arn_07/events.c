@@ -199,7 +199,7 @@ EvtScript N(80243E24) = {
     EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(90.0))
     EVT_CALL(SetPanTarget, 0, 250, 0, -46)
     EVT_CALL(PanToTarget, 0, 0, 1)
-    EVT_CALL(SetPlayerAnimation, ANIM_10002)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
     EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_world_tubba_Palette_00_Anim_8)
     EVT_CALL(SetNpcYaw, NPC_SELF, 90)
     EVT_WAIT(10)
@@ -259,7 +259,7 @@ EvtScript N(80243FE8) = {
     EVT_CALL(SetPanTarget, 0, LVar0, LVar1, LVar2)
     EVT_CALL(PanToTarget, 0, 0, 1)
     EVT_WAIT(5)
-    EVT_CALL(SetPlayerAnimation, ANIM_STAND_STILL)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario_STAND_STILL)
     EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_world_tubba_Palette_00_Anim_F)
     EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_world_tubba_Palette_00_Anim_12, NPC_ANIM_world_tubba_Palette_00_Anim_8, 0, MESSAGE_ID(0x0E, 0x00CC))
     EVT_THREAD
@@ -542,22 +542,22 @@ s32 N(extraAnimationList_802451D4)[] = {
     NPC_ANIM_world_tubba_Palette_00_Anim_8,
     NPC_ANIM_world_tubba_Palette_00_Anim_F,
     NPC_ANIM_world_tubba_Palette_00_Anim_12,
-    ANIM_END,
+    ANIM_LIST_END,
 };
 
 s32 N(extraAnimationList_802451F8)[] = {
     NPC_ANIM_boo_Palette_00_Anim_0,
-    ANIM_END,
+    ANIM_LIST_END,
 };
 
 s32 N(extraAnimationList_80245200)[] = {
     NPC_ANIM_boo_Palette_01_Anim_0,
-    ANIM_END,
+    ANIM_LIST_END,
 };
 
 s32 N(extraAnimationList_80245208)[] = {
     NPC_ANIM_bootler_Palette_00_Anim_1,
-    ANIM_END,
+    ANIM_LIST_END,
 };
 
 EvtScript N(idle_80245210) = {
@@ -619,7 +619,7 @@ EvtScript N(80245304) = {
     EVT_CALL(EnableNpcAI, 13, 0)
     EVT_CALL(SetNpcAnimation, 13, NPC_ANIM_world_skolar_Palette_00_Anim_3)
     EVT_WAIT(20)
-    EVT_CALL(SetPlayerAnimation, ANIM_GOT_ITEM)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario_GOT_ITEM)
     EVT_CALL(PlaySoundAtPlayer, 313, 0)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_SET(LVar3, LVar1)
@@ -638,7 +638,7 @@ EvtScript N(80245304) = {
     EVT_ADD(LVar1, 20)
     EVT_CALL(PlayEffect, 0x52, 4, LVar0, LVar1, LVar2, 1, 30, 0, 0, 0, 0, 0, 0, 0)
     EVT_WAIT(30)
-    EVT_CALL(SetPlayerAnimation, ANIM_10002)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
     EVT_CALL(SetNpcAnimation, 13, NPC_ANIM_world_skolar_Palette_00_Anim_1)
     EVT_CALL(EnableNpcAI, 13, 1)
     EVT_CALL(PostChapter3StatUpdate)
@@ -706,7 +706,7 @@ EvtScript N(80245304) = {
     EVT_WAIT(90)
     EVT_CALL(ResetCam, 0, 3)
     EVT_WAIT(20)
-    EVT_CALL(SetPlayerAnimation, ANIM_10002)
+    EVT_CALL(SetPlayerAnimation, ANIM_Mario_10002)
     EVT_SET(GB_StoryProgress, -13)
     EVT_EXEC(N(80241F10))
     EVT_CALL(EnablePartnerAI)

@@ -798,7 +798,7 @@ s32 N(extraAnimationList_80244390)[] = {
     NPC_ANIM_world_tubba_Palette_00_Anim_1F,
     NPC_ANIM_world_tubba_Palette_00_Anim_20,
     NPC_ANIM_world_tubba_Palette_00_Anim_21,
-    ANIM_END,
+    ANIM_LIST_END,
 };
 
 StaticNpc N(npcGroup_802443AC) = {
