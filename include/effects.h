@@ -1396,12 +1396,12 @@ typedef struct SpiritCardFXData {
 typedef struct LilOinkFXData {
     /* 0x000 */ s32 unk_00;
     /* 0x004 */ s32 unk_04;
-    /* 0x008 */ s32 unk_08[MAX_LIL_OINKS];
+    /* 0x008 */ s32 flags[MAX_LIL_OINKS];
     /* 0x034 */ f32 x[MAX_LIL_OINKS];
     /* 0x060 */ f32 y[MAX_LIL_OINKS];
     /* 0x08C */ f32 z[MAX_LIL_OINKS];
     /* 0x0B8 */ f32 rot[MAX_LIL_OINKS];
-    /* 0x0E4 */ u8 unk_E4[MAX_LIL_OINKS];
+    /* 0x0E4 */ u8 type[MAX_LIL_OINKS];
     /* 0x0EF */ s8 unk_EF[MAX_LIL_OINKS];
     /* 0x0FA */ u8 unk_FA[MAX_LIL_OINKS];
     /* 0x105 */ u8 unk_105[MAX_LIL_OINKS];

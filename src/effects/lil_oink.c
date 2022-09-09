@@ -68,7 +68,7 @@ EffectInstance* lil_oink_main(void) {
         data->y[i] = 0.0f;
         data->z[i] = 0.0f;
         data->rot[i] = 0.0f;
-        data->unk_08[i] = 0;
+        data->flags[i] = 0;
         data->unk_FA[i] = 1;
         data->unk_105[i] = 1;
         data->jumpOffset[i] = 0.0f;
@@ -138,8 +138,8 @@ void lil_oink_update(EffectInstance* effect) {
         }
         data->unk_13C[i]++;
         if (cond) {
-            if (data->unk_08[i] & 2) {
-                data->unk_08[i] &= ~2;
+            if (data->flags[i] & 2) {
+                data->flags[i] &= ~2;
                 data->unk_13C[i] = 0;
                 data->unk_FA[i] = data->unk_EF[i];
             }
@@ -174,20 +174,20 @@ void lil_oink_appendGfx(void* effect) {
     gSPLookAt(gMasterGfxPos++, &gDisplayContext->lookAt);
 
     for (i = 0; i < MAX_LIL_OINKS; i++) {
-        if (data->unk_08[i] & 1) {
+        if (data->flags[i] & 1) {
             shim_guPositionF(sp20, 0.0f, 180.0f - data->rot[i], 0.0f, 1.0f,
                              data->x[i], data->y[i] + data->jumpOffset[i], data->z[i]);
             shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
             gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
                       G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-            gSPDisplayList(gMasterGfxPos++, D_E0114718[data->unk_E4[i]]);
-            if (data->unk_E4[i] == 8 || data->unk_E4[i] == 9) {
+            gSPDisplayList(gMasterGfxPos++, D_E0114718[data->type[i]]);
+            if (data->type[i] == 8 || data->type[i] == 9) {
                 f32 temp_f0 = shim_sin_deg(var_s4) * 63.0f;
                 s32 primColor = (s32)(temp_f0 + 63.0f) & 0xFF;
 
                 gDPSetPrimColor(gMasterGfxPos++, 0, 0, primColor, primColor, primColor, 0);
             }
-            gSPDisplayList(gMasterGfxPos++, D_E01146A0[(data->unk_E4[i] * 3) + data->unk_105[i]]);
+            gSPDisplayList(gMasterGfxPos++, D_E01146A0[(data->type[i] * 3) + data->unk_105[i]]);
             gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
         }
         var_s4 += 20;
