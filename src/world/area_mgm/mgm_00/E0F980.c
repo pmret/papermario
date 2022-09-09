@@ -59,7 +59,7 @@ void N(draw_record_display)(RecordDisplayData* data, s32 alpha) {
 }
 
 void N(animate_and_draw_record)(void* renderData) {
-    RecordDisplayData* data = (RecordDisplayData*)evt_get_variable(NULL, GW(RECORD_DISPLAY_MAP_VAR));
+    RecordDisplayData* data = (RecordDisplayData*)evt_get_variable(NULL, MapVar(RECORD_DISPLAY_MAP_VAR));
 
     switch (data->state) {
         case RECORD_START_SHOW:
@@ -126,7 +126,7 @@ ApiStatus N(UpdateRecordDisplay)(Evt* script, s32 isInitialCall) {
         data->alpha = 255;
         data->workerID = create_generic_entity_world(NULL, &N(work_draw_record));
         data->gameType = gameType;
-        evt_set_variable(script, GW(RECORD_DISPLAY_MAP_VAR), (s32)data);
+        evt_set_variable(script, MapVar(RECORD_DISPLAY_MAP_VAR), (s32)data);
     }
     data = script->functionTempPtr[0];
     if (data->state == RECORD_STATE_DONE) {

@@ -312,9 +312,9 @@ EvtScript N(takeTurn_80222860) = {
         EVT_CASE_EQ(7)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LW(0))
             EVT_IF_FLAG(LW(0), 0x2000)
-                EVT_SET(LF(0), 0)
+                EVT_SET(ScriptFlag(0), 0)
             EVT_ELSE
-                EVT_SET(LF(0), 1)
+                EVT_SET(ScriptFlag(0), 1)
             EVT_END_IF
     EVT_END_SWITCH
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
@@ -322,7 +322,7 @@ EvtScript N(takeTurn_80222860) = {
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(3.0))
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_fuzzy_Palette_00_Anim_5)
     EVT_CALL(JumpToGoal, ACTOR_SELF, 8, FALSE, TRUE, FALSE)
-    EVT_IF_EQ(LF(0), 1)
+    EVT_IF_EQ(ScriptFlag(0), 1)
         EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LW(0), DAMAGE_TYPE_IGNORE_DEFENSE, 0, 0, 0, 32)
         EVT_RETURN
     EVT_END_IF

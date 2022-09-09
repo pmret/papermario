@@ -30,12 +30,12 @@ ApiStatus func_802402BC_AF1F1C(Evt* script, s32 isInitialCall) {
         script->varTable[10] = script->varTable[0];
 
         if (script->varTable[0] == 0) {
-            script->varTable[1] = GSWF(484);
-            script->varTable[2] = GSWF(489);
+            script->varTable[1] = GameFlag(484);
+            script->varTable[2] = GameFlag(489);
             menu->popupType = POPUP_MENU_USEKEY;
         } else {
-            script->varTable[1] = GSWF(489);
-            script->varTable[2] = GSWF(494);
+            script->varTable[1] = GameFlag(489);
+            script->varTable[2] = GameFlag(494);
             menu->popupType = POPUP_MENU_TAKE_FROM_CHEST;
         }
 
@@ -112,7 +112,7 @@ ApiStatus func_80240500_AF2160(Evt* script, s32 isInitialCall) {
     }
 
     if (found) {
-        evt_set_variable(NULL, GSWF(494 + i), TRUE);
+        evt_set_variable(NULL, GameFlag(494 + i), TRUE);
     }
 
     return ApiStatus_DONE2;

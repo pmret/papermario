@@ -70,19 +70,19 @@ EvtScript N(ReadWestSign) = {
     EVT_CALL(ShowMessageAtScreenPos, MSG_kmr_12_sign_trap, 160, 40)
     EVT_RESUME_GROUP(1)
 
-    EVT_SET(LF(0), FALSE)
+    EVT_SET(ScriptFlag(0), FALSE)
     EVT_CALL(GetGoomba)
     EVT_IF_NE(LW(0), FALSE)
         EVT_CALL(GetNpcVar, NPC_GOOMBA, 0, LW(0))
         EVT_IF_EQ(LW(0), FALSE)
             // Trigger Goomba to peel off
             EVT_CALL(SetNpcVar, NPC_GOOMBA, 0, TRUE)
-            EVT_SET(LF(0), TRUE)
+            EVT_SET(ScriptFlag(0), TRUE)
             EVT_WAIT(10)
         EVT_END_IF
     EVT_END_IF
     EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_IF_EQ(LF(0), TRUE)
+    EVT_IF_EQ(ScriptFlag(0), TRUE)
         EVT_UNBIND
     EVT_END_IF
     EVT_END

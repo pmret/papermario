@@ -227,7 +227,7 @@ EvtScript N(shakeTree) = {
     EVT_CALL(PlaySound, SOUND_SMASH_GOOMNUT_TREE)
     EVT_CALL(PlaySound, 0x166)
     EVT_THREAD
-        EVT_SET(LF(0), 0)
+        EVT_SET(ScriptFlag(0), 0)
         EVT_IF_NE(LW(1), 0)
             EVT_WAIT(1)
             EVT_LOOP(5)
@@ -236,8 +236,8 @@ EvtScript N(shakeTree) = {
                 EVT_LOOP(LW(2))
                     EVT_BUF_READ1(LW(3))
                     EVT_CALL(N(TransformFoliage), LW(3), EVT_FLOAT(0.1), EVT_FLOAT(0.2), LW(15), 0)
-                    EVT_IF_EQ(LF(0), 0)
-                        EVT_SET(LF(0), 1)
+                    EVT_IF_EQ(ScriptFlag(0), 0)
+                        EVT_SET(ScriptFlag(0), 1)
                         EVT_CALL(PlaySoundAtModel, LW(3), 358, 0)
                     EVT_END_IF
                 EVT_END_LOOP
@@ -260,7 +260,7 @@ EvtScript N(shakeTree) = {
         EVT_END_IF
     EVT_END_THREAD
     EVT_THREAD
-        EVT_SET(LF(0), 0)
+        EVT_SET(ScriptFlag(0), 0)
         EVT_IF_NE(LW(2), 0)
             EVT_LOOP(5)
                 EVT_USE_BUF(LW(2))
@@ -268,8 +268,8 @@ EvtScript N(shakeTree) = {
                 EVT_LOOP(LW(3))
                     EVT_BUF_READ1(LW(4))
                     EVT_CALL(N(TransformFoliage), LW(4), EVT_FLOAT(0.1), EVT_FLOAT(0.2), LW(15), 0)
-                    EVT_IF_EQ(LF(0), 0)
-                        EVT_SET(LF(0), 1)
+                    EVT_IF_EQ(ScriptFlag(0), 0)
+                        EVT_SET(ScriptFlag(0), 1)
                         EVT_CALL(PlaySoundAtModel, LW(4), 357, 0)
                     EVT_END_IF
                 EVT_END_LOOP

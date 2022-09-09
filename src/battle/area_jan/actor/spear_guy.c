@@ -453,7 +453,7 @@ EvtScript N(handleEvent_80218E3C) = {
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SPIKE_TAUNT)
             EVT_WAIT(10)
-            EVT_SET(LF(0), 0)
+            EVT_SET(ScriptFlag(0), 0)
             EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LW(3))
             EVT_CALL(GetActorVar, ACTOR_SELF, 0, LW(10))
@@ -462,19 +462,19 @@ EvtScript N(handleEvent_80218E3C) = {
                     EVT_IF_FLAG(LW(3), STATUS_FLAG_SHRINK)
                         EVT_ADD(LW(0), -11)
                         EVT_ADD(LW(1), 3)
-                        EVT_SET(LF(0), 1)
+                        EVT_SET(ScriptFlag(0), 1)
                     EVT_END_IF
                     EVT_IF_FLAG(LW(3), STATUS_FLAG_DIZZY)
                         EVT_ADD(LW(0), -4)
                         EVT_ADD(LW(1), 36)
-                        EVT_SET(LF(0), 1)
+                        EVT_SET(ScriptFlag(0), 1)
                     EVT_END_IF
                     EVT_IF_FLAG(LW(3), STATUS_FLAG_SLEEP)
                         EVT_ADD(LW(0), -8)
                         EVT_ADD(LW(1), 36)
-                        EVT_SET(LF(0), 1)
+                        EVT_SET(ScriptFlag(0), 1)
                     EVT_END_IF
-                    EVT_IF_EQ(LF(0), 0)
+                    EVT_IF_EQ(ScriptFlag(0), 0)
                         EVT_ADD(LW(0), -28)
                         EVT_ADD(LW(1), 8)
                     EVT_END_IF
@@ -482,19 +482,19 @@ EvtScript N(handleEvent_80218E3C) = {
                     EVT_IF_FLAG(LW(3), STATUS_FLAG_SHRINK)
                         EVT_ADD(LW(0), -4)
                         EVT_ADD(LW(1), 15)
-                        EVT_SET(LF(0), 1)
+                        EVT_SET(ScriptFlag(0), 1)
                     EVT_END_IF
                     EVT_IF_FLAG(LW(3), STATUS_FLAG_DIZZY)
                         EVT_ADD(LW(0), -4)
                         EVT_ADD(LW(1), 36)
-                        EVT_SET(LF(0), 1)
+                        EVT_SET(ScriptFlag(0), 1)
                     EVT_END_IF
                     EVT_IF_FLAG(LW(3), STATUS_FLAG_SLEEP)
                         EVT_ADD(LW(0), -8)
                         EVT_ADD(LW(1), 36)
-                        EVT_SET(LF(0), 1)
+                        EVT_SET(ScriptFlag(0), 1)
                     EVT_END_IF
-                    EVT_IF_EQ(LF(0), 0)
+                    EVT_IF_EQ(ScriptFlag(0), 0)
                         EVT_ADD(LW(0), -10)
                         EVT_ADD(LW(1), 38)
                     EVT_END_IF
@@ -658,20 +658,20 @@ EvtScript N(summonBackup) = {
     EVT_IF_NE(LW(1), -1)
         EVT_GOTO(0)
     EVT_END_IF
-    EVT_SET(LF(0), 0)
+    EVT_SET(ScriptFlag(0), 0)
     EVT_CALL(EnemyCreateTargetList, 32772)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(1)
     EVT_CALL(GetOwnerTarget, LW(0), LW(1))
     EVT_CALL(GetIndexFromHome, LW(0), LW(1))
     EVT_IF_LT(LW(1), LW(10))
-        EVT_SET(LF(0), 1)
+        EVT_SET(ScriptFlag(0), 1)
     EVT_END_IF
     EVT_CALL(ChooseNextTarget, 0, LW(0))
     EVT_IF_NE(LW(0), -1)
         EVT_GOTO(1)
     EVT_END_IF
-    EVT_IF_EQ(LF(0), 0)
+    EVT_IF_EQ(ScriptFlag(0), 0)
         EVT_CALL(SummonEnemy, EVT_ADDR(N(specialFormation_8021A8C0)), 0)
     EVT_ELSE
         EVT_CALL(SummonEnemy, EVT_ADDR(N(specialFormation_8021A8DC)), 0)
@@ -703,7 +703,7 @@ EvtScript N(summonBackup) = {
     EVT_CALL(PlayEffect, EFFECT_SPARKLES, 0, LW(0), LW(1), LW(2), 30, 0, 0, 0, 0, 0, 0, 0, 0)
     EVT_CALL(SetAnimation, LW(11), 2, NPC_ANIM_jungle_guy_Palette_00_Anim_E)
     EVT_WAIT(20)
-    EVT_IF_EQ(LF(0), 0)
+    EVT_IF_EQ(ScriptFlag(0), 0)
         EVT_CALL(SetAnimation, LW(11), 2, NPC_ANIM_jungle_guy_Palette_00_Anim_4)
     EVT_ELSE
         EVT_CALL(SetAnimation, LW(11), 2, NPC_ANIM_jungle_guy_Palette_00_Anim_3)
@@ -935,31 +935,31 @@ EvtScript N(8021B770) = {
     EVT_MOD(LW(5), 4)
     EVT_SWITCH(LW(5))
         EVT_CASE_EQ(0)
-            EVT_SET(LF(1), 1)
+            EVT_SET(ScriptFlag(1), 1)
         EVT_CASE_EQ(1)
-            EVT_SET(LF(2), 1)
+            EVT_SET(ScriptFlag(2), 1)
         EVT_CASE_EQ(2)
-            EVT_SET(LF(3), 1)
+            EVT_SET(ScriptFlag(3), 1)
         EVT_CASE_EQ(3)
-            EVT_SET(LF(4), 1)
+            EVT_SET(ScriptFlag(4), 1)
     EVT_END_SWITCH
     EVT_CALL(ChooseNextTarget, 0, LW(0))
     EVT_IF_NE(LW(0), -1)
         EVT_GOTO(0)
     EVT_END_IF
-    EVT_IF_EQ(LF(1), 0)
+    EVT_IF_EQ(ScriptFlag(1), 0)
         EVT_SET(LW(10), 0)
         EVT_RETURN
     EVT_END_IF
-    EVT_IF_EQ(LF(2), 0)
+    EVT_IF_EQ(ScriptFlag(2), 0)
         EVT_SET(LW(10), 1)
         EVT_RETURN
     EVT_END_IF
-    EVT_IF_EQ(LF(3), 0)
+    EVT_IF_EQ(ScriptFlag(3), 0)
         EVT_SET(LW(10), 2)
         EVT_RETURN
     EVT_END_IF
-    EVT_IF_EQ(LF(4), 0)
+    EVT_IF_EQ(ScriptFlag(4), 0)
         EVT_SET(LW(10), 3)
         EVT_RETURN
     EVT_END_IF
@@ -1003,20 +1003,20 @@ EvtScript N(8021B96C) = {
 
 EvtScript N(8021BB18) = {
     EVT_CALL(GetIndexFromHome, ACTOR_SELF, LW(10))
-    EVT_SET(LF(0), 0)
+    EVT_SET(ScriptFlag(0), 0)
     EVT_CALL(EnemyCreateTargetList, 32772)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
     EVT_CALL(GetOwnerTarget, LW(0), LW(1))
     EVT_CALL(GetIndexFromHome, LW(0), LW(1))
     EVT_IF_LT(LW(1), LW(10))
-        EVT_SET(LF(0), 1)
+        EVT_SET(ScriptFlag(0), 1)
     EVT_END_IF
     EVT_CALL(ChooseNextTarget, 0, LW(0))
     EVT_IF_NE(LW(0), -1)
         EVT_GOTO(0)
     EVT_END_IF
-    EVT_IF_EQ(LF(0), 1)
+    EVT_IF_EQ(ScriptFlag(0), 1)
         EVT_CALL(GetActorVar, ACTOR_SELF, 0, LW(0))
         EVT_IF_EQ(LW(0), 0)
             EVT_SET(LW(0), 1)

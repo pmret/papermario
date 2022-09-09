@@ -25,7 +25,7 @@ typedef struct StoneChompAmbushIsk13 {
 } StoneChompAmbushIsk13; // size = 0x54
 
 void func_80241610_990DF0(void) {
-    StoneChompAmbushIsk13* ambush = (StoneChompAmbushIsk13*) evt_get_variable(NULL, GW(10));
+    StoneChompAmbushIsk13* ambush = (StoneChompAmbushIsk13*) evt_get_variable(NULL, MapVar(10));
     Camera* cam = &gCameras[gCurrentCameraID];
     FoldImageRecPart foldImg;
     SpriteRasterInfo spriteRaster;
@@ -118,12 +118,12 @@ ApiStatus func_80241BA8_991388(Evt* script, s32 isInitialCall) {
     ambush->foldID = 0;
     
     ambush->workerID = create_generic_entity_frontUI(NULL, func_80241610_990DF0);
-    evt_set_variable(script, GW(10), (s32) ambush);
+    evt_set_variable(script, MapVar(10), (s32) ambush);
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_80241D08_9914E8(Evt* script, s32 isInitialCall) {
-    StoneChompAmbushIsk13* ambush = (StoneChompAmbushIsk13*) evt_get_variable(script, GW(10));
+    StoneChompAmbushIsk13* ambush = (StoneChompAmbushIsk13*) evt_get_variable(script, MapVar(10));
     free_generic_entity(ambush->workerID);
     return ApiStatus_DONE2;
 }
@@ -133,7 +133,7 @@ ApiStatus func_80241D38_991518(Evt* script, s32 isInitialCall) {
     s32 x = evt_get_float_variable(script, *args++);
     s32 y = evt_get_float_variable(script, *args++);
     s32 z = evt_get_float_variable(script, *args++);
-    StoneChompAmbushIsk13* ambush = (StoneChompAmbushIsk13*) evt_get_variable(script, GW(10));
+    StoneChompAmbushIsk13* ambush = (StoneChompAmbushIsk13*) evt_get_variable(script, MapVar(10));
     
     ambush->pos.x = x;
     ambush->pos.y = y + ambush->height * SPRITE_WORLD_SCALE_D * 0.5;
@@ -146,7 +146,7 @@ ApiStatus func_80241E34_991614(Evt* script, s32 isInitialCall) {
     s32 x = evt_get_float_variable(script, *args++);
     s32 y = evt_get_float_variable(script, *args++);
     s32 z = evt_get_float_variable(script, *args++);
-    StoneChompAmbushIsk13* ambush = (StoneChompAmbushIsk13*) evt_get_variable(script, GW(10));
+    StoneChompAmbushIsk13* ambush = (StoneChompAmbushIsk13*) evt_get_variable(script, MapVar(10));
     
     ambush->rot.x = x;
     ambush->rot.y = y;
@@ -156,7 +156,7 @@ ApiStatus func_80241E34_991614(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_80241EF8_9916D8(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    StoneChompAmbushIsk13* ambush = (StoneChompAmbushIsk13*) evt_get_variable(script, GW(10));
+    StoneChompAmbushIsk13* ambush = (StoneChompAmbushIsk13*) evt_get_variable(script, MapVar(10));
     f32 r = evt_get_float_variable(script, *args++);
     f32 g = evt_get_float_variable(script, *args++);
     f32 b = evt_get_float_variable(script, *args++);
@@ -194,7 +194,7 @@ ApiStatus func_80241EF8_9916D8(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus func_80242044_991824(Evt* script, s32 isInitialCall) {
-    StoneChompAmbushIsk13* ambush = (StoneChompAmbushIsk13*) evt_get_variable(script, GW(10));
+    StoneChompAmbushIsk13* ambush = (StoneChompAmbushIsk13*) evt_get_variable(script, MapVar(10));
     ambush->useBitingAnim = TRUE;
     return ApiStatus_DONE2;
 }

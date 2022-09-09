@@ -514,12 +514,12 @@ EvtScript N(hammerAttack) = {
     EVT_SWITCH(LW(0))
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_QUAKE_IMMUNE)
-            EVT_SET(LF(0), 0)
+            EVT_SET(ScriptFlag(0), 0)
             EVT_CALL(GetBattleFlags, LW(0))
             EVT_IF_NOT_FLAG(LW(0), BS_FLAGS1_ATK_BLOCKED)
                 EVT_CALL(N(SpyGuyActionFunc), LW(0))
                 EVT_IF_NE(LW(0), -1)
-                    EVT_SET(LF(0), 1)
+                    EVT_SET(ScriptFlag(0), 1)
                 EVT_END_IF
             EVT_END_IF
             EVT_CALL(GetLastDamage, ACTOR_PLAYER, LW(0))
@@ -537,7 +537,7 @@ EvtScript N(hammerAttack) = {
                 EVT_WAIT(20)
                 EVT_GOTO(100)
             EVT_END_IF
-            EVT_IF_EQ(LF(0), 1)
+            EVT_IF_EQ(ScriptFlag(0), 1)
                 EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
                 EVT_EXEC(N(80228778))
                 EVT_WAIT(8)

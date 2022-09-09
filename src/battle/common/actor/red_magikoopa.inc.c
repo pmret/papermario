@@ -784,7 +784,7 @@ EvtScript N(8022E5FC) = {
 };
 
 EvtScript N(8022E6A0) = {
-    EVT_SET(LF(0), 0)
+    EVT_SET(ScriptFlag(0), 0)
     EVT_LABEL(10)
     EVT_CALL(EnemyCreateTargetList, 32770)
     EVT_CALL(InitTargetIterator)
@@ -807,8 +807,8 @@ EvtScript N(8022E6A0) = {
     EVT_IF_NE(LW(0), -1)
         EVT_GOTO(0)
     EVT_END_IF
-    EVT_IF_EQ(LF(0), 0)
-        EVT_SET(LF(0), 1)
+    EVT_IF_EQ(ScriptFlag(0), 0)
+        EVT_SET(ScriptFlag(0), 1)
         EVT_CALL(SetBattleVar, 2, -1)
         EVT_GOTO(10)
     EVT_END_IF

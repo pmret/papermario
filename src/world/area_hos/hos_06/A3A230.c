@@ -31,10 +31,10 @@ ApiStatus func_802411F0_A3A6D0(Evt* script, s32 isInitialCall) {
     u32 i;
 
     for (i = 0; i < 79; i++) {
-        evt_set_variable(NULL, LSWF(3) + i, 0);
+        evt_set_variable(NULL, AreaFlag(3) + i, 0);
     }
     for (i = 0; i < 16; i++) {
-        evt_set_variable(NULL, LSWF(100) + i, 0);
+        evt_set_variable(NULL, AreaFlag(100) + i, 0);
     }
     return ApiStatus_DONE2;
 }

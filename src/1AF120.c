@@ -1656,7 +1656,7 @@ EvtScript D_8029AF08 = {
         EVT_CASE_OR_EQ(2)
         EVT_END_CASE_GROUP
         EVT_CASE_DEFAULT
-            EVT_SET(LF(0), 0)
+            EVT_SET(ScriptFlag(0), 0)
             EVT_CALL(GetOriginalActorType, ACTOR_SELF, LW(1))
             EVT_SWITCH(LW(1))
                 EVT_CASE_OR_EQ(ACTOR_TYPE_BOB_OMB)
@@ -2003,56 +2003,56 @@ EvtScript DoBlowAway = {
     EVT_IF_NOT_FLAG(LW(5), STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
         EVT_CALL(SetAnimation, ACTOR_SELF, LW(0), LW(1))
     EVT_ELSE
-        EVT_SET(LF(0), 0)
+        EVT_SET(ScriptFlag(0), 0)
         EVT_IF_FLAG(LW(2), STATUS_FLAG_SLEEP)
             EVT_IF_FLAG(LW(5), STATUS_FLAG_SLEEP)
-                EVT_SET(LF(0), 1)
+                EVT_SET(ScriptFlag(0), 1)
             EVT_END_IF
         EVT_END_IF
         EVT_IF_FLAG(LW(2), STATUS_FLAG_STATIC)
             EVT_IF_FLAG(LW(5), STATUS_FLAG_STATIC)
-                EVT_SET(LF(0), 1)
+                EVT_SET(ScriptFlag(0), 1)
             EVT_END_IF
         EVT_END_IF
         EVT_IF_FLAG(LW(2), STATUS_FLAG_FROZEN)
             EVT_IF_FLAG(LW(5), STATUS_FLAG_FROZEN)
-                EVT_SET(LF(0), 1)
+                EVT_SET(ScriptFlag(0), 1)
             EVT_END_IF
         EVT_END_IF
         EVT_IF_FLAG(LW(2), STATUS_FLAG_FEAR)
             EVT_IF_FLAG(LW(5), STATUS_FLAG_FEAR)
-                EVT_SET(LF(0), 1)
+                EVT_SET(ScriptFlag(0), 1)
             EVT_END_IF
         EVT_END_IF
         EVT_IF_FLAG(LW(2), STATUS_FLAG_PARALYZE)
             EVT_IF_FLAG(LW(5), STATUS_FLAG_PARALYZE)
-                EVT_SET(LF(0), 1)
+                EVT_SET(ScriptFlag(0), 1)
             EVT_END_IF
         EVT_END_IF
         EVT_IF_FLAG(LW(2), STATUS_FLAG_POISON)
             EVT_IF_FLAG(LW(5), STATUS_FLAG_POISON)
-                EVT_SET(LF(0), 1)
+                EVT_SET(ScriptFlag(0), 1)
             EVT_END_IF
         EVT_END_IF
         EVT_IF_FLAG(LW(2), STATUS_FLAG_DIZZY)
             EVT_IF_FLAG(LW(5), STATUS_FLAG_DIZZY)
-                EVT_SET(LF(0), 1)
+                EVT_SET(ScriptFlag(0), 1)
             EVT_END_IF
         EVT_END_IF
         EVT_IF_FLAG(LW(5), STATUS_FLAG_SHRINK)
-            EVT_SET(LF(0), 1)
+            EVT_SET(ScriptFlag(0), 1)
         EVT_END_IF
         EVT_IF_FLAG(LW(2), STATUS_FLAG_STONE)
             EVT_IF_FLAG(LW(5), STATUS_FLAG_STONE)
-                EVT_SET(LF(0), 1)
+                EVT_SET(ScriptFlag(0), 1)
             EVT_END_IF
         EVT_END_IF
         EVT_IF_FLAG(LW(2), STATUS_FLAG_KO)
             EVT_IF_FLAG(LW(5), STATUS_FLAG_KO)
-                EVT_SET(LF(0), 1)
+                EVT_SET(ScriptFlag(0), 1)
             EVT_END_IF
         EVT_END_IF
-        EVT_IF_EQ(LF(0), 1)
+        EVT_IF_EQ(ScriptFlag(0), 1)
             EVT_CALL(SetAnimation, ACTOR_SELF, LW(0), LW(1))
         EVT_END_IF
     EVT_END_IF

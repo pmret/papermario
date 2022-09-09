@@ -304,12 +304,12 @@ EvtScript N(handleEvent_8021DF88) = {
     EVT_CALL(GetLastEvent, ACTOR_SELF, LW(0))
     EVT_SWITCH(LW(0))
         EVT_CASE_EQ(EVENT_HIT_COMBO)
-            EVT_EXEC_GET_TID(N(8021D820), UW(0))
+            EVT_EXEC_GET_TID(N(8021D820), ArrayVar(0))
             EVT_SET_CONST(LW(0), 1)
             EVT_SET_CONST(LW(1), NPC_ANIM_battle_bandit_Palette_00_Anim_9)
             EVT_EXEC_WAIT(DoNormalHit)
             EVT_LOOP(0)
-                EVT_IS_THREAD_RUNNING(UW(0), LW(0))
+                EVT_IS_THREAD_RUNNING(ArrayVar(0), LW(0))
                 EVT_IF_EQ(LW(0), 0)
                     EVT_BREAK_LOOP
                 EVT_END_IF
@@ -317,12 +317,12 @@ EvtScript N(handleEvent_8021DF88) = {
             EVT_END_LOOP
         EVT_CASE_OR_EQ(EVENT_HIT)
         EVT_CASE_OR_EQ(EVENT_SPIN_SMASH_LAUNCH_HIT)
-            EVT_EXEC_GET_TID(N(8021D820), UW(0))
+            EVT_EXEC_GET_TID(N(8021D820), ArrayVar(0))
             EVT_SET_CONST(LW(0), 1)
             EVT_SET_CONST(LW(1), NPC_ANIM_battle_bandit_Palette_00_Anim_9)
             EVT_EXEC_WAIT(DoNormalHit)
             EVT_LOOP(0)
-                EVT_IS_THREAD_RUNNING(UW(0), LW(0))
+                EVT_IS_THREAD_RUNNING(ArrayVar(0), LW(0))
                 EVT_IF_EQ(LW(0), 0)
                     EVT_BREAK_LOOP
                 EVT_END_IF
@@ -330,20 +330,20 @@ EvtScript N(handleEvent_8021DF88) = {
             EVT_END_LOOP
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_BURN_HIT)
-            EVT_EXEC_GET_TID(N(8021D820), UW(0))
+            EVT_EXEC_GET_TID(N(8021D820), ArrayVar(0))
             EVT_SET_CONST(LW(0), 1)
             EVT_SET_CONST(LW(1), NPC_ANIM_battle_bandit_Palette_00_Anim_A)
             EVT_SET_CONST(LW(2), NPC_ANIM_battle_bandit_Palette_00_Anim_B)
             EVT_EXEC_WAIT(DoBurnHit)
             EVT_LOOP(0)
-                EVT_IS_THREAD_RUNNING(UW(0), LW(0))
+                EVT_IS_THREAD_RUNNING(ArrayVar(0), LW(0))
                 EVT_IF_EQ(LW(0), 0)
                     EVT_BREAK_LOOP
                 EVT_END_IF
                 EVT_WAIT(1)
             EVT_END_LOOP
         EVT_CASE_EQ(EVENT_BURN_DEATH)
-            EVT_EXEC_GET_TID(N(8021D820), UW(0))
+            EVT_EXEC_GET_TID(N(8021D820), ArrayVar(0))
             EVT_SET_CONST(LW(0), 1)
             EVT_SET_CONST(LW(1), NPC_ANIM_battle_bandit_Palette_00_Anim_A)
             EVT_SET_CONST(LW(2), NPC_ANIM_battle_bandit_Palette_00_Anim_B)
@@ -352,7 +352,7 @@ EvtScript N(handleEvent_8021DF88) = {
             EVT_SET_CONST(LW(1), NPC_ANIM_battle_bandit_Palette_00_Anim_B)
             EVT_EXEC_WAIT(DoDeath)
             EVT_LOOP(0)
-                EVT_IS_THREAD_RUNNING(UW(0), LW(0))
+                EVT_IS_THREAD_RUNNING(ArrayVar(0), LW(0))
                 EVT_IF_EQ(LW(0), 0)
                     EVT_BREAK_LOOP
                 EVT_END_IF
@@ -360,19 +360,19 @@ EvtScript N(handleEvent_8021DF88) = {
             EVT_END_LOOP
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SPIN_SMASH_HIT)
-            EVT_EXEC_GET_TID(N(8021D820), UW(0))
+            EVT_EXEC_GET_TID(N(8021D820), ArrayVar(0))
             EVT_SET_CONST(LW(0), 1)
             EVT_SET_CONST(LW(1), NPC_ANIM_battle_bandit_Palette_00_Anim_9)
             EVT_EXEC_WAIT(DoSpinSmashHit)
             EVT_LOOP(0)
-                EVT_IS_THREAD_RUNNING(UW(0), LW(0))
+                EVT_IS_THREAD_RUNNING(ArrayVar(0), LW(0))
                 EVT_IF_EQ(LW(0), 0)
                     EVT_BREAK_LOOP
                 EVT_END_IF
                 EVT_WAIT(1)
             EVT_END_LOOP
         EVT_CASE_EQ(EVENT_SPIN_SMASH_DEATH)
-            EVT_EXEC_GET_TID(N(8021D820), UW(0))
+            EVT_EXEC_GET_TID(N(8021D820), ArrayVar(0))
             EVT_SET_CONST(LW(0), 1)
             EVT_SET_CONST(LW(1), NPC_ANIM_battle_bandit_Palette_00_Anim_9)
             EVT_EXEC_WAIT(DoSpinSmashHit)
@@ -380,7 +380,7 @@ EvtScript N(handleEvent_8021DF88) = {
             EVT_SET_CONST(LW(1), NPC_ANIM_battle_bandit_Palette_00_Anim_9)
             EVT_EXEC_WAIT(DoDeath)
             EVT_LOOP(0)
-                EVT_IS_THREAD_RUNNING(UW(0), LW(0))
+                EVT_IS_THREAD_RUNNING(ArrayVar(0), LW(0))
                 EVT_IF_EQ(LW(0), 0)
                     EVT_BREAK_LOOP
                 EVT_END_IF
@@ -422,7 +422,7 @@ EvtScript N(handleEvent_8021DF88) = {
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(EVENT_DEATH)
         EVT_CASE_OR_EQ(EVENT_SPIN_SMASH_LAUNCH_DEATH)
-            EVT_EXEC_GET_TID(N(8021D820), UW(0))
+            EVT_EXEC_GET_TID(N(8021D820), ArrayVar(0))
             EVT_SET_CONST(LW(0), 1)
             EVT_SET_CONST(LW(1), NPC_ANIM_battle_bandit_Palette_00_Anim_9)
             EVT_EXEC_WAIT(DoNormalHit)
@@ -431,7 +431,7 @@ EvtScript N(handleEvent_8021DF88) = {
             EVT_SET_CONST(LW(1), NPC_ANIM_battle_bandit_Palette_00_Anim_9)
             EVT_EXEC_WAIT(DoDeath)
             EVT_LOOP(0)
-                EVT_IS_THREAD_RUNNING(UW(0), LW(0))
+                EVT_IS_THREAD_RUNNING(ArrayVar(0), LW(0))
                 EVT_IF_EQ(LW(0), 0)
                     EVT_BREAK_LOOP
                 EVT_END_IF
@@ -444,13 +444,13 @@ EvtScript N(handleEvent_8021DF88) = {
             EVT_SET_CONST(LW(1), NPC_ANIM_battle_bandit_Palette_00_Anim_1)
             EVT_EXEC_WAIT(DoRecover)
         EVT_CASE_EQ(EVENT_SCARE_AWAY)
-            EVT_EXEC_GET_TID(N(8021D820), UW(0))
+            EVT_EXEC_GET_TID(N(8021D820), ArrayVar(0))
             EVT_SET_CONST(LW(0), 1)
             EVT_SET_CONST(LW(1), NPC_ANIM_battle_bandit_Palette_00_Anim_7)
             EVT_SET_CONST(LW(2), NPC_ANIM_battle_bandit_Palette_00_Anim_9)
             EVT_EXEC_WAIT(DoScareAway)
             EVT_LOOP(0)
-                EVT_IS_THREAD_RUNNING(UW(0), LW(0))
+                EVT_IS_THREAD_RUNNING(ArrayVar(0), LW(0))
                 EVT_IF_EQ(LW(0), 0)
                     EVT_BREAK_LOOP
                 EVT_END_IF
@@ -458,12 +458,12 @@ EvtScript N(handleEvent_8021DF88) = {
             EVT_END_LOOP
             EVT_RETURN
         EVT_CASE_EQ(EVENT_BEGIN_AIR_LIFT)
-            EVT_EXEC_GET_TID(N(8021D820), UW(0))
+            EVT_EXEC_GET_TID(N(8021D820), ArrayVar(0))
             EVT_SET_CONST(LW(0), 1)
             EVT_SET_CONST(LW(1), NPC_ANIM_battle_bandit_Palette_00_Anim_9)
             EVT_EXEC_WAIT(DoAirLift)
             EVT_LOOP(0)
-                EVT_IS_THREAD_RUNNING(UW(0), LW(0))
+                EVT_IS_THREAD_RUNNING(ArrayVar(0), LW(0))
                 EVT_IF_EQ(LW(0), 0)
                     EVT_BREAK_LOOP
                 EVT_END_IF

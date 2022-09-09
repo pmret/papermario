@@ -217,7 +217,7 @@ ApiStatus func_802406C4_AF8014(Evt* script, s32 isInitialCall) {
         D_802465A0 = 0;
     }
 
-    evt_set_variable(script, LSW(3), D_8024652C);
+    evt_set_variable(script, AreaByte(3), D_8024652C);
     return ApiStatus_BLOCK;
 }
 

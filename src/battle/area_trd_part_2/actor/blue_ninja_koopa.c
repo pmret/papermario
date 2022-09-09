@@ -260,9 +260,9 @@ EvtScript N(8022B6E8) = {
                 EVT_CASE_OR_EQ(4)
                 EVT_CASE_OR_EQ(5)
                 EVT_CASE_OR_EQ(6)
-                    EVT_SET(LF(0), 0)
+                    EVT_SET(ScriptFlag(0), 0)
                     EVT_IF_EQ(LW(0), 3)
-                        EVT_SET(LF(0), 1)
+                        EVT_SET(ScriptFlag(0), 1)
                     EVT_END_IF
                     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.6))
                     EVT_CALL(N(UnkEnemyPosFunc), LW(0), LW(1), LW(2))
@@ -270,7 +270,7 @@ EvtScript N(8022B6E8) = {
                     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_koopa_bros_Palette_00_Anim_A)
                     EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_8022B6D0)))
                     EVT_CALL(JumpToGoal, ACTOR_SELF, 20, FALSE, TRUE, FALSE)
-                    EVT_IF_EQ(LF(0), 1)
+                    EVT_IF_EQ(ScriptFlag(0), 1)
                         EVT_CALL(N(StartRumbleWithParams), 256, 5)
                         EVT_THREAD
                             EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(0.8))
@@ -299,9 +299,9 @@ EvtScript N(8022B6E8) = {
                 EVT_CASE_OR_EQ(4)
                 EVT_CASE_OR_EQ(5)
                 EVT_CASE_OR_EQ(6)
-                    EVT_SET(LF(0), 0)
+                    EVT_SET(ScriptFlag(0), 0)
                     EVT_IF_EQ(LW(0), 3)
-                        EVT_SET(LF(0), 1)
+                        EVT_SET(ScriptFlag(0), 1)
                     EVT_END_IF
                     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.6))
                     EVT_CALL(N(UnkEnemyPosFunc), LW(0), LW(1), LW(2))
@@ -309,7 +309,7 @@ EvtScript N(8022B6E8) = {
                     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_koopa_bros_Palette_00_Anim_E)
                     EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_8022B6D0)))
                     EVT_CALL(JumpToGoal, ACTOR_SELF, 20, FALSE, TRUE, FALSE)
-                    EVT_IF_EQ(LF(0), 1)
+                    EVT_IF_EQ(ScriptFlag(0), 1)
                         EVT_CALL(N(StartRumbleWithParams), 256, 5)
                         EVT_THREAD
                             EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(0.8))

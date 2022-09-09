@@ -818,10 +818,10 @@ EvtScript N(8021AB44) = {
     EVT_IF_NE(LW(0), 0)
         EVT_RETURN
     EVT_END_IF
-    EVT_SET(LF(1), 0)
-    EVT_SET(LF(2), 0)
-    EVT_SET(LF(3), 0)
-    EVT_SET(LF(4), 0)
+    EVT_SET(ScriptFlag(1), 0)
+    EVT_SET(ScriptFlag(2), 0)
+    EVT_SET(ScriptFlag(3), 0)
+    EVT_SET(ScriptFlag(4), 0)
     EVT_CALL(EnemyCreateTargetList, 32770)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
@@ -830,13 +830,13 @@ EvtScript N(8021AB44) = {
     EVT_MOD(LW(5), 4)
     EVT_SWITCH(LW(5))
         EVT_CASE_EQ(0)
-            EVT_SET(LF(1), 1)
+            EVT_SET(ScriptFlag(1), 1)
         EVT_CASE_EQ(1)
-            EVT_SET(LF(2), 1)
+            EVT_SET(ScriptFlag(2), 1)
         EVT_CASE_EQ(2)
-            EVT_SET(LF(3), 1)
+            EVT_SET(ScriptFlag(3), 1)
         EVT_CASE_EQ(3)
-            EVT_SET(LF(4), 1)
+            EVT_SET(ScriptFlag(4), 1)
     EVT_END_SWITCH
     EVT_CALL(ChooseNextTarget, 0, LW(0))
     EVT_IF_NE(LW(0), -1)
@@ -847,15 +847,15 @@ EvtScript N(8021AB44) = {
         EVT_CASE_EQ(0)
             EVT_RETURN
         EVT_CASE_EQ(1)
-            EVT_IF_EQ(LF(1), 0)
+            EVT_IF_EQ(ScriptFlag(1), 0)
                 EVT_SET(LW(14), 0)
             EVT_END_IF
         EVT_CASE_EQ(2)
-            EVT_IF_EQ(LF(2), 0)
+            EVT_IF_EQ(ScriptFlag(2), 0)
                 EVT_SET(LW(14), 1)
             EVT_END_IF
         EVT_CASE_EQ(3)
-            EVT_IF_EQ(LF(3), 0)
+            EVT_IF_EQ(ScriptFlag(3), 0)
                 EVT_SET(LW(14), 2)
             EVT_END_IF
     EVT_END_SWITCH

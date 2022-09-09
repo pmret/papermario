@@ -38,22 +38,20 @@
 ///
 /// Range: `0 <= v < 0x10`
 /// Star Rod equivalent: `*MapVar[v]`.
-#define GW(INDEX) ((((INDEX)) - 50000000))
+#define MapVar(INDEX) ((((INDEX)) - 50000000))
 
 /// Local Flag. A boolean variable local to the current thread.
 /// LFs are copied to any threads created by this one (EVT_EXEC, EVT_EXEC_WAIT, EVT_THREAD, EVT_CHILD_THREAD).
 /// Additionally, EVT_EXEC_WAIT copies LFs back from the spawned thread when it completes.
 ///
 /// Range: `0 <= v < 0x60`
-/// Star Rod equivalent: `*Flag[v]`.
-#define LF(INDEX) ((((INDEX)) - 70000000))
+#define ScriptFlag(INDEX) ((((INDEX)) - 70000000))
 
 /// Global Flag. A boolean variable global to all threads.
 /// Cleared upon entering a new map.
 ///
 /// Range: `0 <= v < 0x60`
-/// Star Rod equivalent: `*MapFlag[v]`.
-#define GF(INDEX) ((((INDEX)) - 90000000))
+#define MapFlag(INDEX) ((((INDEX)) - 90000000))
 
 /// Local Save World Flag. A boolean variable local to the current world area, saved in the savefile.
 /// Cleared upon entering a new world area.
@@ -61,16 +59,14 @@
 /// Used to track whether items that respawn, such as coins, Goomnuts, or Koopa Leaves, have been collected.
 ///
 /// Range: `0 <= v < 0x100`
-/// Star Rod equivalent: `*AreaFlag[v]`.
-#define LSWF(INDEX) ((((INDEX)) - 110000000))
+#define AreaFlag(INDEX) ((((INDEX)) - 110000000))
 
 /// Global Save World Flag. A boolean variable saved in the savefile.
 ///
 /// Used to track whether badges, items, etc. have been collected or whether NPCs have been interacted with.
 ///
 /// Range: `0 <= v < 0x800`
-/// Star Rod equivalent: `*SaveFlag[v]`.
-#define GSWF(INDEX) ((((INDEX)) - 130000000))
+#define GameFlag(INDEX) ((((INDEX)) - 130000000))
 
 /// Local Saved **Byte**. A variable local to the current world area, saved in the savefile.
 /// Cleared upon a new world area.
@@ -79,28 +75,25 @@
 /// interacted with them in their 'recent memory' (i.e. until you leave the area).
 ///
 /// Range: `0 <= v < 0x10`
-/// Star Rod equivalent: `*AreaByte[v]`.
-#define LSW(INDEX) ((((INDEX)) - 150000000))
+#define AreaByte(INDEX) ((((INDEX)) - 150000000))
 
 /// Global Saved **Byte**. A variable saved in the save file.
 ///
 /// Used for almost all savefile state.
-#define GSW(INDEX) ((((INDEX)) - 170000000))
+#define GameByte(INDEX) ((((INDEX)) - 170000000))
 
 /// User Word. A variable stored within the current thread's array.
 /// You can load an array with EVT_USE_ARRAY or temporarily allocate one with EVT_MALLOC_ARRAY, then get/set values with
-/// the `UW(index)` macro.
+/// the `ArrayVar(index)` macro.
 ///
 /// Range: `0 <= v`
-/// Star Rod equivalent: `*Array[v]`.
-#define UW(INDEX) ((((INDEX)) - 190000000))
+#define ArrayVar(INDEX) ((((INDEX)) - 190000000))
 
 /// User Flag. A boolean variable stored within the current thread's flag array.
 /// The flag array is distinct from the word array (unlike EVT_USE_BUF and EVT_USE_FBUF).
 ///
 /// Range: `0 <= v`
-/// Star Rod equivalent: `*Array[v]`.
-#define UF(INDEX) ((((v)) - 210000000))
+#define ArrayFlag(INDEX) ((((v)) - 210000000))
 
 /// An entity index. Entities are assigned indices in the order they are created with EVT_CALL(MakeEntity, ...).
 /// Supported in EVT_BIND_TRIGGER and EVT_BIND_PADLOCK only.
@@ -364,14 +357,14 @@
 /// Gets the f32 at the given offset of the buffer and stores it in the given variable, without consuming it.
 #define EVT_FBUF_PEEK(OFFSET, VAR)              EVT_CMD(EVT_OP_FBUF_PEEK, OFFSET, VAR),
 
-/// Loads an s32 array pointer into the current thread for use with `UW(INDEX)`.
+/// Loads an s32 array pointer into the current thread for use with `ArrayVar(INDEX)`.
 #define EVT_USE_ARRAY(INT_PTR)                  EVT_CMD(EVT_OP_USE_ARRAY, (Bytecode) INT_PTR),
 
 /// Loads an s32 array pointer into the current thread for use with `UF(INDEX)`.
 /// Flags are stored in a 'packed' structure where indices refer to bits.
 #define EVT_USE_FLAG_ARRAY(PACKED_FLAGS_PTR)    EVT_CMD(EVT_OP_USE_FLAG_ARRAY, (Bytecode) PACKED_FLAGS_PTR),
 
-/// Allocates a new array of the given size for use with `UW(INDEX)`.
+/// Allocates a new array of the given size for use with `ArrayVar(INDEX)`.
 /// EVT scripts do not have to worry about freeing this array.
 #define EVT_MALLOC_ARRAY(SIZE, OUT_PTR_VAR)     EVT_CMD(EVT_OP_MALLOC_ARRAY, SIZE, OUT_PTR_VAR),
 

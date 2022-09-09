@@ -1216,7 +1216,7 @@ ApiStatus evt_handle_print_debug_var(Evt* script);
 s32 evt_handle_print_debug_var(Evt* script) {
     Bytecode* args = script->ptrReadPos;
     s32 var = *args++;
-    s32 phi_t0;
+    s32 flagBitPos;
 
     do {} while (0);
 
@@ -1226,8 +1226,8 @@ s32 evt_handle_print_debug_var(Evt* script) {
         sprintf(evtDebugPrintBuffer, "FLOAT    [%4.2f]", evt_fixed_var_to_float(var));
     } else if (var <= -200000000) {
         var += 210000000;
-        phi_t0 = var % 32;
-        sprintf(evtDebugPrintBuffer, "UF(%3d)  [%d]", var, script->flagArray[var / 32] & (1 << phi_t0));
+        flagBitPos = var % 32;
+        sprintf(evtDebugPrintBuffer, "UF(%3d)  [%d]", var, script->flagArray[var / 32] & (1 << flagBitPos));
     } else if (var <= -180000000) {
         s32 arrayVal;
 
@@ -1275,12 +1275,12 @@ s32 evt_handle_print_debug_var(Evt* script) {
         sprintf(evtDebugPrintBuffer, "LSWF(%3d)[%d]", var, get_area_flag(var));
     } else if (var <= -80000000) {
         var += 90000000;
-        phi_t0 = var % 32;
-        sprintf(evtDebugPrintBuffer, "GF(%3d)  [%d]", var, gMapFlags[var / 32] & (1 << phi_t0));
+        flagBitPos = var % 32;
+        sprintf(evtDebugPrintBuffer, "GF(%3d)  [%d]", var, gMapFlags[var / 32] & (1 << flagBitPos));
     } else if (var <= -60000000) {
         var += 70000000;
-        phi_t0 = var % 32;
-        sprintf(evtDebugPrintBuffer, "LF(%3d)  [%d]", var, script->varFlags[var / 32] & (1 << phi_t0));
+        flagBitPos = var % 32;
+        sprintf(evtDebugPrintBuffer, "LF(%3d)  [%d]", var, script->varFlags[var / 32] & (1 << flagBitPos));
     } else if (var <= -40000000) {
         s32 mapVar;
         s32 temp;

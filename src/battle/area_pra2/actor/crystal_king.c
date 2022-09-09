@@ -808,7 +808,7 @@ EvtScript N(takeTurn) = {
         EVT_BITWISE_OR_CONST(LW(0), N(FLAG_LOW_HP))
         EVT_CALL(SetActorVar, ACTOR_ENEMY0, N(VAR_FLAGS), LW(0))
     EVT_END_IF
-    EVT_SET(LF(0), 0)
+    EVT_SET(ScriptFlag(0), 0)
     EVT_CALL(GetActorHP, ACTOR_SELF, LW(0))
     EVT_CALL(GetEnemyMaxHP, ACTOR_SELF, LW(1))
     EVT_MUL(LW(0), 100)
@@ -820,7 +820,7 @@ EvtScript N(takeTurn) = {
             EVT_IF_LE(LW(0), 100)
                 EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_HEAL_COUNTER), LW(0))
                 EVT_IF_LT(LW(0), 2)
-                    EVT_SET(LF(0), 1)
+                    EVT_SET(ScriptFlag(0), 1)
                 EVT_END_IF
             EVT_END_IF
         EVT_CASE_LT(40)
@@ -829,7 +829,7 @@ EvtScript N(takeTurn) = {
             EVT_IF_LE(LW(0), 30)
                 EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_HEAL_COUNTER), LW(0))
                 EVT_IF_LT(LW(0), 2)
-                    EVT_SET(LF(0), 1)
+                    EVT_SET(ScriptFlag(0), 1)
                 EVT_END_IF
             EVT_END_IF
         EVT_CASE_LT(55)
@@ -838,11 +838,11 @@ EvtScript N(takeTurn) = {
             EVT_IF_LE(LW(0), 10)
                 EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_HEAL_COUNTER), LW(0))
                 EVT_IF_LT(LW(0), 2)
-                    EVT_SET(LF(0), 1)
+                    EVT_SET(ScriptFlag(0), 1)
                 EVT_END_IF
             EVT_END_IF
     EVT_END_SWITCH
-    EVT_IF_EQ(LF(0), 1)
+    EVT_IF_EQ(ScriptFlag(0), 1)
         EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_HEAL_COUNTER), LW(0))
         EVT_ADD(LW(0), 1)
         EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_HEAL_COUNTER), LW(0))
@@ -1432,21 +1432,21 @@ s32 N(array_3)[16] = { };
 
 EvtScript N(CrystalBitAppear) = {
     EVT_USE_ARRAY(LW(4))
-    EVT_SET(UW(0), LW(0))
-    EVT_SETF(UW(1), LW(1))
-    EVT_SETF(UW(2), LW(2))
-    EVT_SETF(UW(3), LW(3))
+    EVT_SET(ArrayVar(0), LW(0))
+    EVT_SETF(ArrayVar(1), LW(1))
+    EVT_SETF(ArrayVar(2), LW(2))
+    EVT_SETF(ArrayVar(3), LW(3))
     EVT_CALL(GetActorPos, ACTOR_SELF, LW(10), LW(11), LW(12))
     EVT_SUBF(LW(2), LW(11))
     EVT_DIVF(LW(2), EVT_FLOAT(120.0))
-    EVT_SETF(UW(4), LW(2))
+    EVT_SETF(ArrayVar(4), LW(2))
     EVT_SETF(LW(6), LW(11))
     EVT_CALL(GetActorPos, ACTOR_SELF, LW(10), LW(11), LW(12))
     EVT_CALL(GetDist2D, LW(13), LW(10), LW(12), LW(1), LW(3))
     EVT_DIVF(LW(13), EVT_FLOAT(120.0))
-    EVT_SETF(UW(5), LW(13))
+    EVT_SETF(ArrayVar(5), LW(13))
     EVT_CALL(GetActorPos, ACTOR_SELF, LW(10), LW(11), LW(12))
-    EVT_CALL(func_802183A4_660AF4, UW(6), LW(10), LW(12), LW(1), LW(3))
+    EVT_CALL(func_802183A4_660AF4, ArrayVar(6), LW(10), LW(12), LW(1), LW(3))
     EVT_CALL(SetPartAlpha, LW(0), 1, 0)
     EVT_THREAD
         EVT_WAIT(30)
@@ -1466,16 +1466,16 @@ EvtScript N(CrystalBitAppear) = {
     EVT_LABEL(1)
     EVT_CALL(UpdateLerp)
     EVT_CALL(GetActorPos, ACTOR_SELF, LW(2), LW(3), LW(4))
-    EVT_ADDF(LW(5), UW(5))
-    EVT_ADDF(LW(0), UW(6))
+    EVT_ADDF(LW(5), ArrayVar(5))
+    EVT_ADDF(LW(0), ArrayVar(6))
     EVT_CALL(AddVectorPolar, LW(2), LW(4), LW(5), LW(0))
-    EVT_ADDF(LW(6), UW(4))
-    EVT_CALL(SetActorPos, UW(0), LW(2), LW(6), LW(4))
+    EVT_ADDF(LW(6), ArrayVar(4))
+    EVT_CALL(SetActorPos, ArrayVar(0), LW(2), LW(6), LW(4))
     EVT_WAIT(1)
     EVT_IF_EQ(LW(1), 1)
         EVT_GOTO(1)
     EVT_END_IF
-    EVT_CALL(EnableActorBlur, UW(0), 0)
+    EVT_CALL(EnableActorBlur, ArrayVar(0), 0)
     EVT_RETURN
     EVT_END
 };
@@ -1971,7 +1971,7 @@ EvtScript N(NormalAttack) = {
 };
 
 EvtScript N(Heal) = {
-    EVT_SET(LF(0), 0)
+    EVT_SET(ScriptFlag(0), 0)
     EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_PHASE), LW(0))
     EVT_SWITCH(LW(0))
         EVT_CASE_OR_EQ(N(PHASE_SUMMONED_CLONES))
@@ -1980,13 +1980,13 @@ EvtScript N(Heal) = {
             EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_CLONE2_ID), LW(11))
             EVT_CALL(ActorExists, LW(10), LW(0))
             EVT_IF_EQ(LW(0), TRUE)
-                EVT_SET(LF(0), 1)
+                EVT_SET(ScriptFlag(0), 1)
             EVT_END_IF
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
-    EVT_IF_EQ(LF(0), 1)
+    EVT_IF_EQ(ScriptFlag(0), 1)
         EVT_CALL(UseIdleAnimation, LW(10), FALSE)
         EVT_CALL(EnableIdleScript, LW(10), 0)
         EVT_CALL(UseIdleAnimation, LW(11), FALSE)
@@ -2004,7 +2004,7 @@ EvtScript N(Heal) = {
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_WAIT(20)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_crystal_king_Palette_00_Anim_1D)
-    EVT_IF_EQ(LF(0), 1)
+    EVT_IF_EQ(ScriptFlag(0), 1)
         EVT_CALL(SetAnimation, LW(10), 1, NPC_ANIM_crystal_king_Palette_00_Anim_1D)
         EVT_CALL(SetAnimation, LW(11), 1, NPC_ANIM_crystal_king_Palette_00_Anim_1D)
     EVT_END_IF
@@ -2016,7 +2016,7 @@ EvtScript N(Heal) = {
         EVT_WAIT(30)
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_25C)
     EVT_END_THREAD
-    EVT_IF_EQ(LF(0), 1)
+    EVT_IF_EQ(ScriptFlag(0), 1)
         EVT_THREAD
             EVT_WAIT(5)
             EVT_CALL(PlaySoundAtActor, LW(10), SOUND_206D)
@@ -2032,7 +2032,7 @@ EvtScript N(Heal) = {
             EVT_CALL(PlaySoundAtActor, LW(11), SOUND_25C)
         EVT_END_THREAD
     EVT_END_IF
-    EVT_IF_EQ(LF(0), 0)
+    EVT_IF_EQ(ScriptFlag(0), 0)
         EVT_THREAD
             EVT_CALL(func_8026BF48, 1)
             EVT_CALL(HealActor, ACTOR_SELF, 20, 0)
@@ -2061,7 +2061,7 @@ EvtScript N(Heal) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-    EVT_IF_EQ(LF(0), 1)
+    EVT_IF_EQ(ScriptFlag(0), 1)
         EVT_CALL(EnableIdleScript, LW(10), 1)
         EVT_CALL(UseIdleAnimation, LW(10), TRUE)
         EVT_CALL(EnableIdleScript, LW(10), 1)

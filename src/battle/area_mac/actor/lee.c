@@ -2607,9 +2607,9 @@ EvtScript N(takeTurn_80224CA0) = {
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2019)
         EVT_ADD(LW(10), 1)
         EVT_CALL(SetPartScale, -127, 1, EVT_FLOAT(1.4), EVT_FLOAT(1.4), EVT_FLOAT(1.0))
-        EVT_IF_EQ(LF(0), 0)
+        EVT_IF_EQ(ScriptFlag(0), 0)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_battle_bow_Palette_00_Anim_7)
-            EVT_SET(LF(0), 1)
+            EVT_SET(ScriptFlag(0), 1)
             EVT_IF_EQ(LW(10), LW(8))
                 EVT_CALL(func_80269EAC, 12)
             EVT_ELSE
@@ -2617,7 +2617,7 @@ EvtScript N(takeTurn_80224CA0) = {
             EVT_END_IF
         EVT_ELSE
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_battle_bow_Palette_00_Anim_8)
-            EVT_SET(LF(0), 0)
+            EVT_SET(ScriptFlag(0), 0)
             EVT_IF_EQ(LW(10), LW(8))
                 EVT_CALL(func_80269EAC, 13)
             EVT_ELSE

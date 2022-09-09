@@ -1067,7 +1067,7 @@ EvtScript N(80230034) = {
     EVT_ELSE
         EVT_SET(LW(3), 0)
         EVT_SET(LW(4), 14)
-        EVT_SETF(LW(5), GF(-1999590))
+        EVT_SETF(LW(5), MapFlag(-1999590))
     EVT_END_IF
     EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
     EVT_ADD(LW(0), LW(3))
@@ -1090,7 +1090,7 @@ EvtScript N(80230034) = {
             EVT_ELSE
                 EVT_SET(LW(6), -3)
                 EVT_SET(LW(7), 8)
-                EVT_SETF(LW(8), GF(-1999590))
+                EVT_SETF(LW(8), MapFlag(-1999590))
             EVT_END_IF
             EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
             EVT_ADD(LW(0), LW(6))
@@ -1133,7 +1133,7 @@ EvtScript N(80230034) = {
     EVT_ELSE
         EVT_SET(LW(6), -3)
         EVT_SET(LW(7), 8)
-        EVT_SETF(LW(8), GF(-1999590))
+        EVT_SETF(LW(8), MapFlag(-1999590))
     EVT_END_IF
     EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
     EVT_ADD(LW(0), LW(6))
@@ -1170,7 +1170,7 @@ EvtScript N(80230794) = {
     EVT_ELSE
         EVT_SET(LW(3), 0)
         EVT_SET(LW(4), 14)
-        EVT_SETF(LW(5), GF(-1999590))
+        EVT_SETF(LW(5), MapFlag(-1999590))
     EVT_END_IF
     EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
     EVT_ADD(LW(0), LW(3))
@@ -1295,7 +1295,7 @@ EvtScript N(8023106C) = {
     EVT_ELSE
         EVT_SET(LW(3), 0)
         EVT_SET(LW(4), 14)
-        EVT_SETF(LW(5), GF(-1999590))
+        EVT_SETF(LW(5), MapFlag(-1999590))
     EVT_END_IF
     EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
     EVT_ADD(LW(0), LW(3))

@@ -103,7 +103,7 @@ EvtScript N(init_8022A3B0) = {
     EVT_CALL(SetActorVar, -127, 1, 0)
     EVT_CALL(SetActorVar, -127, 2, 0)
     EVT_CALL(SetActorVar, -127, 3, 2)
-    EVT_SET(GSWF(102), 1)
+    EVT_SET(GameFlag(102), 1)
     EVT_CALL(SetBattleFlagBits, 8388608, 1)
     EVT_RETURN
     EVT_END
@@ -373,15 +373,15 @@ EvtScript N(handleEvent_8022B2CC) = {
             EVT_IF_FLAG(LW(0), 0x3F1000)
                 EVT_BREAK_SWITCH
             EVT_END_IF
-            EVT_SET(LF(0), 0)
+            EVT_SET(ScriptFlag(0), 0)
             EVT_CALL(GetMenuSelection, LW(0), LW(1), LW(2))
             EVT_SWITCH(LW(0))
                 EVT_CASE_OR_EQ(1)
                 EVT_CASE_OR_EQ(0)
-                    EVT_SET(LF(0), 1)
+                    EVT_SET(ScriptFlag(0), 1)
                 EVT_END_CASE_GROUP
             EVT_END_SWITCH
-            EVT_IF_EQ(LF(0), 0)
+            EVT_IF_EQ(ScriptFlag(0), 0)
                 EVT_BREAK_SWITCH
             EVT_END_IF
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)

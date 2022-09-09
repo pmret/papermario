@@ -805,7 +805,7 @@ EvtScript N(80239E7C) = {
         EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
         EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 0, 1)
     EVT_END_THREAD
-    EVT_SET(LF(0), 0)
+    EVT_SET(ScriptFlag(0), 0)
     EVT_LABEL(10)
     EVT_WAIT(1)
     EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
@@ -818,7 +818,7 @@ EvtScript N(80239E7C) = {
     EVT_IF_EQ(LW(0), 6)
         EVT_GOTO(12)
     EVT_END_IF
-    EVT_IF_EQ(LF(0), 0)
+    EVT_IF_EQ(ScriptFlag(0), 0)
         EVT_CALL(GetActionCommandResult, LW(0))
         EVT_SWITCH(LW(0))
             EVT_CASE_GT(0)
@@ -827,7 +827,7 @@ EvtScript N(80239E7C) = {
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_51)
         EVT_END_SWITCH
     EVT_END_IF
-    EVT_SET(LF(0), 1)
+    EVT_SET(ScriptFlag(0), 1)
     EVT_CALL(GetActionCommandResult, LW(0))
     EVT_SWITCH(LW(0))
         EVT_CASE_GT(0)
@@ -841,7 +841,7 @@ EvtScript N(80239E7C) = {
     EVT_IF_NE(LW(2), -1)
         EVT_GOTO(10)
     EVT_END_IF
-    EVT_IF_EQ(LF(0), 0)
+    EVT_IF_EQ(ScriptFlag(0), 0)
         EVT_CALL(GetActionCommandResult, LW(0))
         EVT_SWITCH(LW(0))
             EVT_CASE_GT(0)
@@ -960,7 +960,7 @@ EvtScript N(8023AA38) = {
         EVT_CALL(func_80238114_6F5F94)
     EVT_END_THREAD
     EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
-    EVT_SET(LF(0), 0)
+    EVT_SET(ScriptFlag(0), 0)
     EVT_LABEL(10)
     EVT_WAIT(1)
     EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
@@ -973,7 +973,7 @@ EvtScript N(8023AA38) = {
     EVT_IF_EQ(LW(0), 6)
         EVT_GOTO(12)
     EVT_END_IF
-    EVT_IF_EQ(LF(0), 0)
+    EVT_IF_EQ(ScriptFlag(0), 0)
         EVT_CALL(GetActionCommandResult, LW(0))
         EVT_SWITCH(LW(0))
             EVT_CASE_GT(99)
@@ -982,7 +982,7 @@ EvtScript N(8023AA38) = {
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_51)
         EVT_END_SWITCH
     EVT_END_IF
-    EVT_SET(LF(0), 1)
+    EVT_SET(ScriptFlag(0), 1)
     EVT_CALL(GetActionResult, LW(15))
     EVT_CALL(GetActionCommandResult, LW(0))
     EVT_SWITCH(LW(0))
@@ -1009,7 +1009,7 @@ EvtScript N(8023AA38) = {
     EVT_IF_NE(LW(2), -1)
         EVT_GOTO(10)
     EVT_END_IF
-    EVT_IF_EQ(LF(0), 0)
+    EVT_IF_EQ(ScriptFlag(0), 0)
         EVT_CALL(GetActionCommandResult, LW(0))
         EVT_SWITCH(LW(0))
             EVT_CASE_GT(99)
@@ -1205,7 +1205,7 @@ EvtScript N(8023B660) = {
         EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
     EVT_END_THREAD
     EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
-    EVT_SET(LF(0), 0)
+    EVT_SET(ScriptFlag(0), 0)
     EVT_LABEL(10)
     EVT_WAIT(1)
     EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
@@ -1218,7 +1218,7 @@ EvtScript N(8023B660) = {
     EVT_IF_EQ(LW(0), 6)
         EVT_GOTO(12)
     EVT_END_IF
-    EVT_IF_EQ(LF(0), 0)
+    EVT_IF_EQ(ScriptFlag(0), 0)
         EVT_CALL(GetActionCommandResult, LW(0))
         EVT_SWITCH(LW(0))
             EVT_CASE_GT(99)
@@ -1227,7 +1227,7 @@ EvtScript N(8023B660) = {
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_51)
         EVT_END_SWITCH
     EVT_END_IF
-    EVT_SET(LF(0), 1)
+    EVT_SET(ScriptFlag(0), 1)
     EVT_CALL(GetActionResult, LW(0))
     EVT_CALL(GetActionCommandResult, LW(0))
     EVT_SWITCH(LW(0))
@@ -1242,7 +1242,7 @@ EvtScript N(8023B660) = {
     EVT_IF_NE(LW(0), -1)
         EVT_GOTO(10)
     EVT_END_IF
-    EVT_IF_EQ(LF(0), 0)
+    EVT_IF_EQ(ScriptFlag(0), 0)
         EVT_CALL(GetActionCommandResult, LW(0))
         EVT_SWITCH(LW(0))
             EVT_CASE_GT(99)

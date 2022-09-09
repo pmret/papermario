@@ -323,11 +323,11 @@ EvtScript N(usePower) = {
     EVT_LABEL(0)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(func_802A1628_795908)
-    EVT_SET(LF(0), 0)
+    EVT_SET(ScriptFlag(0), 0)
     EVT_CALL(ItemCheckHit, LW(1), 0, 0, 0, 0)
     EVT_IF_EQ(LW(1), 6)
         EVT_SET(LW(0), 0)
-        EVT_SET(LF(0), 1)
+        EVT_SET(ScriptFlag(0), 1)
     EVT_END_IF
     EVT_SWITCH(LW(0))
         EVT_CASE_GT(0)
@@ -390,7 +390,7 @@ EvtScript N(usePower) = {
                 EVT_CALL(RemoveActor, LW(10))
             EVT_END_THREAD
         EVT_CASE_DEFAULT
-            EVT_IF_EQ(LF(0), 0)
+            EVT_IF_EQ(ScriptFlag(0), 0)
                 EVT_CALL(PlayerDamageEnemy, LW(0), 0, 65535, 0, 0, 2080)
             EVT_END_IF
     EVT_END_SWITCH

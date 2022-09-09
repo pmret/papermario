@@ -26,14 +26,14 @@ EvtScript N(802414E0) = {
     EVT_IF_EQ(LW(0), 1)
         EVT_CALL(SetMusicTrack, 0, SONG_SUNSHINE_RETURNS, 0, 8)
     EVT_ELSE
-        EVT_SWITCH(GSW(0))
+        EVT_SWITCH(GameByte(0))
             EVT_CASE_LT(53)
                 EVT_CALL(SetMusicTrack, 0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8)
             EVT_CASE_DEFAULT
                 EVT_CALL(SetMusicTrack, 0, SONG_FLOWER_FIELDS_SUNNY, 0, 8)
         EVT_END_SWITCH
     EVT_END_IF
-    EVT_IF_GE(GSW(0), 49)
+    EVT_IF_GE(GameByte(0), 49)
         EVT_CALL(PlaySound, 0x80000022)
     EVT_END_IF
     EVT_RETURN
@@ -59,7 +59,7 @@ static s32 N(pad_1624)[] = {
 };
 
 EvtScript N(80241630) = {
-    EVT_IF_GE(GSW(0), 49)
+    EVT_IF_GE(GameByte(0), 49)
         EVT_CALL(MakeItemEntity, ITEM_WATER_STONE, 0, -60, 6, 1, 0)
     EVT_END_IF
     EVT_RETURN
@@ -120,7 +120,7 @@ EvtScript N(80241988) = {
 };
 
 EvtScript N(main) = {
-    EVT_SET(GSW(425), 38)
+    EVT_SET(GameByte(425), 38)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamLeadPlayer, 0, 0)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
@@ -165,7 +165,7 @@ EvtScript N(main) = {
             EVT_EXEC(EnterWalk)
     EVT_END_SWITCH
     EVT_EXEC_WAIT(N(802414E0))
-    EVT_IF_GE(GSW(0), 53)
+    EVT_IF_GE(GameByte(0), 53)
         EVT_CALL(N(func_80240040_CB9240))
     EVT_END_IF
     EVT_RETURN
@@ -463,7 +463,7 @@ EvtScript N(802427EC) = {
 };
 
 EvtScript N(80242AE8) = {
-    EVT_IF_LT(GSW(0), 49)
+    EVT_IF_LT(GameByte(0), 49)
         EVT_CALL(EnableGroup, 52, 0)
         EVT_CALL(EnableGroup, 61, 0)
         EVT_CALL(ModifyColliderFlags, 0, 21, 0x7FFFFE00)
@@ -578,7 +578,7 @@ EvtScript N(80242AE8) = {
         EVT_SET(LW(12), 0)
         EVT_EXEC(N(updateTexturePan_80241D14))
     EVT_END_THREAD
-    EVT_IF_GE(GSW(0), 49)
+    EVT_IF_GE(GameByte(0), 49)
         EVT_EXEC(N(80241F20))
     EVT_END_IF
     EVT_RETURN
@@ -623,7 +623,7 @@ s32 N(itemList_80243394)[] = {
 };
 
 EvtScript N(8024339C) = {
-    EVT_IF_EQ(GSWF(1376), 1)
+    EVT_IF_EQ(GameFlag(1376), 1)
         EVT_CALL(GetCurrentPartner, LW(10))
         EVT_IF_NE(LW(10), 0)
             EVT_CALL(AwaitPlayerLeave, 0, 0, 19)
@@ -702,7 +702,7 @@ EvtScript N(80243628) = {
 
 EvtScript N(interact_802437C8) = {
     EVT_EXEC_WAIT(N(802415C4))
-    EVT_SWITCH(GSW(0))
+    EVT_SWITCH(GameByte(0))
         EVT_CASE_LT(45)
             EVT_EXEC(N(80243628))
             EVT_CALL(GetNpcPos, NPC_SELF, LW(0), LW(1), LW(2))
@@ -717,7 +717,7 @@ EvtScript N(interact_802437C8) = {
             EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_lily_Palette_00_Anim_4, NPC_ANIM_lily_Palette_00_Anim_8, 5, MESSAGE_ID(0x11, 0x0078))
             EVT_CALL(EndSpeech, -1, NPC_ANIM_lily_Palette_00_Anim_9, NPC_ANIM_lily_Palette_00_Anim_5, 5)
         EVT_CASE_LT(48)
-            EVT_IF_EQ(GSWF(1375), 0)
+            EVT_IF_EQ(GameFlag(1375), 0)
                 EVT_EXEC(N(80243628))
                 EVT_CALL(GetNpcPos, NPC_SELF, LW(0), LW(1), LW(2))
                 EVT_CALL(UseSettingsFrom, 0, LW(0), LW(1), LW(2))
@@ -752,14 +752,14 @@ EvtScript N(interact_802437C8) = {
                         EVT_CALL(ContinueSpeech, -1, NPC_ANIM_lily_Palette_00_Anim_4, NPC_ANIM_lily_Palette_00_Anim_8, 0, MESSAGE_ID(0x11, 0x007E))
                 EVT_END_SWITCH
                 EVT_WAIT(10)
-                EVT_SET(GSWF(1375), 1)
+                EVT_SET(GameFlag(1375), 1)
                 EVT_CALL(SetEnemyFlagBits, -1, 4194304, 0)
             EVT_ELSE
                 EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_lily_Palette_00_Anim_4, NPC_ANIM_lily_Palette_00_Anim_8, 5, MESSAGE_ID(0x11, 0x007F))
             EVT_END_IF
         EVT_CASE_LT(49)
             EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_lily_Palette_00_Anim_2, NPC_ANIM_lily_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x0080))
-            EVT_SET(GSWF(1376), 1)
+            EVT_SET(GameFlag(1376), 1)
         EVT_CASE_LT(53)
             EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_lily_Palette_00_Anim_4, NPC_ANIM_lily_Palette_00_Anim_8, 0, MESSAGE_ID(0x11, 0x0085))
             EVT_CALL(EndSpeech, -1, NPC_ANIM_lily_Palette_00_Anim_2, NPC_ANIM_lily_Palette_00_Anim_1, 0)
@@ -777,9 +777,9 @@ EvtScript N(interact_802437C8) = {
 
 EvtScript N(init_80243D78) = {
     EVT_CALL(BindNpcInteract, NPC_SELF, EVT_ADDR(N(interact_802437C8)))
-    EVT_SWITCH(GSW(0))
+    EVT_SWITCH(GameByte(0))
         EVT_CASE_LT(48)
-            EVT_IF_EQ(GSWF(1375), 0)
+            EVT_IF_EQ(GameFlag(1375), 0)
                 EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_lily_Palette_00_Anim_8)
                 EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 1)
                 EVT_CALL(SetEnemyFlagBits, -1, 4194304, 1)

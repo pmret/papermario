@@ -800,117 +800,117 @@ EvtScript N(8023A5F8) = {
     EVT_CALL(InitTargetIterator)
     EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
     EVT_CALL(AddGoalPos, ACTOR_PARTNER, -40, 0, 0)
-    EVT_SET(LF(2), 0)
+    EVT_SET(ScriptFlag(2), 0)
     EVT_LOOP(60)
         EVT_CALL(CheckButtonDown, 0x00008000, LW(0))
         EVT_IF_NE(LW(0), FALSE)
-            EVT_SET(LF(2), 1)
+            EVT_SET(ScriptFlag(2), 1)
             EVT_BREAK_LOOP
         EVT_END_IF
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(MoveBattleCamOver, 65)
-    EVT_IF_EQ(LF(2), 1)
+    EVT_IF_EQ(ScriptFlag(2), 1)
         EVT_CALL(action_command_body_slam_MashActionCommandInit, 0, 92, 3, 0)
-        EVT_SET(LF(0), 0)
+        EVT_SET(ScriptFlag(0), 0)
         EVT_EXEC_GET_TID(N(8023A4BC), LW(10))
         EVT_LOOP(35)
             EVT_CALL(CheckButtonDown, 0x00008000, LW(0))
             EVT_IF_EQ(LW(0), FALSE)
-                EVT_SET(LF(0), 1)
+                EVT_SET(ScriptFlag(0), 1)
                 EVT_BREAK_LOOP
             EVT_END_IF
             EVT_WAIT(1)
         EVT_END_LOOP
-        EVT_IF_EQ(LF(0), 1)
+        EVT_IF_EQ(ScriptFlag(0), 1)
             EVT_KILL_THREAD(LW(10))
             EVT_GOTO(10)
         EVT_END_IF
-        EVT_SET(LF(0), 0)
+        EVT_SET(ScriptFlag(0), 0)
         EVT_EXEC_GET_TID(N(8023A4F8), LW(10))
         EVT_LOOP(30)
             EVT_CALL(CheckButtonDown, 0x00008000, LW(0))
             EVT_IF_EQ(LW(0), FALSE)
-                EVT_SET(LF(0), 1)
+                EVT_SET(ScriptFlag(0), 1)
                 EVT_BREAK_LOOP
             EVT_END_IF
             EVT_WAIT(1)
         EVT_END_LOOP
-        EVT_IF_EQ(LF(0), 1)
+        EVT_IF_EQ(ScriptFlag(0), 1)
             EVT_KILL_THREAD(LW(10))
             EVT_GOTO(10)
         EVT_END_IF
-        EVT_IF_EQ(LF(0), 0)
+        EVT_IF_EQ(ScriptFlag(0), 0)
             EVT_EXEC_GET_TID(N(8023A584), LW(10))
             EVT_LOOP(30)
                 EVT_CALL(CheckButtonDown, 0x00008000, LW(0))
                 EVT_IF_EQ(LW(0), FALSE)
-                    EVT_SET(LF(0), 1)
+                    EVT_SET(ScriptFlag(0), 1)
                     EVT_BREAK_LOOP
                 EVT_END_IF
                 EVT_WAIT(1)
             EVT_END_LOOP
-            EVT_IF_EQ(LF(0), 1)
+            EVT_IF_EQ(ScriptFlag(0), 1)
                 EVT_KILL_THREAD(LW(10))
                 EVT_GOTO(10)
             EVT_END_IF
         EVT_END_IF
     EVT_ELSE
-        EVT_SET(LF(0), 0)
+        EVT_SET(ScriptFlag(0), 0)
         EVT_EXEC_GET_TID(N(8023A4BC), LW(10))
         EVT_LOOP(35)
             EVT_CALL(CheckButtonDown, 0x00008000, LW(0))
             EVT_IF_NE(LW(0), FALSE)
-                EVT_IF_EQ(LF(2), 0)
+                EVT_IF_EQ(ScriptFlag(2), 0)
                     EVT_CALL(action_command_body_slam_MashActionCommandInit, 0, 92, 3, 0)
-                    EVT_SET(LF(2), 1)
+                    EVT_SET(ScriptFlag(2), 1)
                 EVT_END_IF
             EVT_END_IF
-            EVT_IF_EQ(LF(2), 1)
+            EVT_IF_EQ(ScriptFlag(2), 1)
                 EVT_IF_EQ(LW(0), FALSE)
-                    EVT_SET(LF(0), 1)
+                    EVT_SET(ScriptFlag(0), 1)
                     EVT_BREAK_LOOP
                 EVT_END_IF
             EVT_END_IF
             EVT_WAIT(1)
         EVT_END_LOOP
-        EVT_IF_EQ(LF(0), 1)
+        EVT_IF_EQ(ScriptFlag(0), 1)
             EVT_KILL_THREAD(LW(10))
             EVT_GOTO(10)
         EVT_END_IF
-        EVT_SET(LF(0), 0)
+        EVT_SET(ScriptFlag(0), 0)
         EVT_EXEC_GET_TID(N(8023A4F8), LW(10))
         EVT_LOOP(30)
             EVT_CALL(CheckButtonDown, 0x00008000, LW(0))
             EVT_IF_NE(LW(0), FALSE)
-                EVT_IF_EQ(LF(2), 0)
+                EVT_IF_EQ(ScriptFlag(2), 0)
                     EVT_CALL(action_command_body_slam_MashActionCommandInit, 0, 92, 3, 0)
-                    EVT_SET(LF(2), 1)
+                    EVT_SET(ScriptFlag(2), 1)
                 EVT_END_IF
             EVT_END_IF
-            EVT_IF_EQ(LF(2), 1)
+            EVT_IF_EQ(ScriptFlag(2), 1)
                 EVT_IF_EQ(LW(0), FALSE)
-                    EVT_SET(LF(0), 1)
+                    EVT_SET(ScriptFlag(0), 1)
                     EVT_BREAK_LOOP
                 EVT_END_IF
             EVT_END_IF
             EVT_WAIT(1)
         EVT_END_LOOP
-        EVT_IF_EQ(LF(0), 1)
+        EVT_IF_EQ(ScriptFlag(0), 1)
             EVT_KILL_THREAD(LW(10))
             EVT_GOTO(10)
         EVT_END_IF
-        EVT_IF_EQ(LF(0), 0)
+        EVT_IF_EQ(ScriptFlag(0), 0)
             EVT_EXEC_GET_TID(N(8023A584), LW(10))
             EVT_LOOP(30)
                 EVT_CALL(CheckButtonDown, 0x00008000, LW(0))
                 EVT_IF_EQ(LW(0), FALSE)
-                    EVT_SET(LF(0), 1)
+                    EVT_SET(ScriptFlag(0), 1)
                     EVT_BREAK_LOOP
                 EVT_END_IF
                 EVT_WAIT(1)
             EVT_END_LOOP
-            EVT_IF_EQ(LF(0), 1)
+            EVT_IF_EQ(ScriptFlag(0), 1)
                 EVT_KILL_THREAD(LW(10))
                 EVT_GOTO(10)
             EVT_END_IF
@@ -1217,7 +1217,7 @@ EvtScript N(8023B228) = {
                 EVT_WAIT(10)
         EVT_END_SWITCH
     EVT_END_THREAD
-    EVT_SET(LF(0), 0)
+    EVT_SET(ScriptFlag(0), 0)
     EVT_CALL(GetMenuSelection, LW(0), LW(1), LW(2))
     EVT_SWITCH(LW(2))
         EVT_CASE_EQ(146)
@@ -1232,7 +1232,7 @@ EvtScript N(8023B228) = {
             EVT_SWITCH(LW(0))
                 EVT_CASE_GT(0)
                     EVT_CALL(PartnerDamageEnemy, LW(0), 268435968, 0, 0, LW(15), 112)
-                    EVT_SET(LF(0), 1)
+                    EVT_SET(ScriptFlag(0), 1)
                 EVT_CASE_DEFAULT
                     EVT_CALL(PartnerDamageEnemy, LW(0), 268435968, 0, 0, LW(15), 48)
             EVT_END_SWITCH
@@ -1249,7 +1249,7 @@ EvtScript N(8023B228) = {
             EVT_SWITCH(LW(0))
                 EVT_CASE_GT(0)
                     EVT_CALL(PartnerDamageEnemy, LW(0), 805306880, 0, 0, LW(15), 112)
-                    EVT_SET(LF(0), 1)
+                    EVT_SET(ScriptFlag(0), 1)
                 EVT_CASE_DEFAULT
                     EVT_CALL(PartnerDamageEnemy, LW(0), 805306880, 0, 0, LW(15), 48)
             EVT_END_SWITCH
@@ -1271,7 +1271,7 @@ EvtScript N(8023B228) = {
             EVT_SWITCH(LW(0))
                 EVT_CASE_GT(0)
                     EVT_CALL(PartnerDamageEnemy, LW(0), 805306880, 0, 0, LW(15), 112)
-                    EVT_SET(LF(0), 1)
+                    EVT_SET(ScriptFlag(0), 1)
                 EVT_CASE_DEFAULT
                     EVT_CALL(PartnerDamageEnemy, LW(0), 805306880, 0, 0, LW(15), 48)
             EVT_END_SWITCH
@@ -1282,7 +1282,7 @@ EvtScript N(8023B228) = {
                 EVT_GOTO(10)
             EVT_END_IF
     EVT_END_SWITCH
-    EVT_IF_GT(LF(0), 0)
+    EVT_IF_GT(ScriptFlag(0), 0)
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_E)
         EVT_CALL(MoveBattleCamOver, 10)
     EVT_ELSE

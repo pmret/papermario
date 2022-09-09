@@ -875,16 +875,16 @@ EvtScript N(healAll) = {
     EVT_CALL(EnemyCreateTargetList, 32770)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
-    EVT_SET(LF(0), 0)
+    EVT_SET(ScriptFlag(0), 0)
     EVT_CALL(GetOwnerTarget, LW(0), LW(1))
     EVT_CALL(GetOriginalActorType, LW(0), LW(1))
     EVT_IF_EQ(LW(1), 71)
         EVT_CALL(GetActorVar, LW(0), 8, LW(1))
         EVT_IF_EQ(LW(1), 1)
-            EVT_SET(LF(0), 1)
+            EVT_SET(ScriptFlag(0), 1)
         EVT_END_IF
     EVT_END_IF
-    EVT_IF_EQ(LF(0), 0)
+    EVT_IF_EQ(ScriptFlag(0), 0)
         EVT_THREAD
             EVT_WAIT(5)
             EVT_CALL(PlaySoundAtActor, LW(0), 0x206D)
@@ -916,19 +916,19 @@ EvtScript N(healAll) = {
 
 EvtScript N(shapeSpell) = {
     EVT_CALL(SetActorVar, -127, 11, 2)
-    EVT_SET(LF(0), 0)
-    EVT_SET(LF(1), 0)
+    EVT_SET(ScriptFlag(0), 0)
+    EVT_SET(ScriptFlag(1), 0)
     EVT_CALL(GetActorVar, -127, 10, LW(0))
     EVT_IF_EQ(LW(0), 1)
-        EVT_SET(LF(0), 1)
+        EVT_SET(ScriptFlag(0), 1)
         EVT_CALL(GetActorVar, -127, 9, LW(10))
     EVT_END_IF
     EVT_CALL(GetActorFlags, -127, LW(0))
     EVT_IF_FLAG(LW(0), 0x200)
-        EVT_SET(LF(1), 1)
+        EVT_SET(ScriptFlag(1), 1)
     EVT_END_IF
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_IF_EQ(LF(0), 1)
+    EVT_IF_EQ(ScriptFlag(0), 1)
         EVT_CALL(UseIdleAnimation, LW(10), FALSE)
     EVT_END_IF
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
@@ -941,8 +941,8 @@ EvtScript N(shapeSpell) = {
         EVT_CALL(MoveBattleCamOver, 10)
     EVT_END_IF
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_SPELL_CAST1)
-    EVT_IF_EQ(LF(1), 0)
-        EVT_IF_EQ(LF(0), 1)
+    EVT_IF_EQ(ScriptFlag(1), 0)
+        EVT_IF_EQ(ScriptFlag(0), 1)
             EVT_CALL(SetAnimation, LW(10), 1, 0x560002)
             EVT_CALL(GetActorPos, LW(10), LW(0), LW(1), LW(2))
             EVT_SUB(LW(0), 17)
@@ -961,7 +961,7 @@ EvtScript N(shapeSpell) = {
         EVT_END_IF
         EVT_CALL(PlayEffect, 0x47, 0, LW(0), LW(1), LW(2), EVT_FLOAT(0.5), 30, 0, 0, 0, 0, 0, 0, 0)
     EVT_ELSE
-        EVT_IF_EQ(LF(0), 1)
+        EVT_IF_EQ(ScriptFlag(0), 1)
             EVT_CALL(SetAnimation, LW(10), 1, 0x570002)
             EVT_CALL(GetActorPos, LW(10), LW(0), LW(1), LW(2))
             EVT_SUB(LW(0), 30)
@@ -985,17 +985,17 @@ EvtScript N(shapeSpell) = {
     EVT_SWITCH(LW(9))
         EVT_CASE_OR_EQ(6)
         EVT_CASE_OR_EQ(5)
-            EVT_IF_EQ(LF(0), 1)
+            EVT_IF_EQ(ScriptFlag(0), 1)
                 EVT_CALL(PlaySoundAtActor, LW(10), SOUND_SPELL_CAST2)
             EVT_END_IF
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_SPELL_CAST2)
-            EVT_IF_EQ(LF(1), 0)
-                EVT_IF_EQ(LF(0), 1)
+            EVT_IF_EQ(ScriptFlag(1), 0)
+                EVT_IF_EQ(ScriptFlag(0), 1)
                     EVT_CALL(SetAnimation, LW(10), 1, 0x560003)
                 EVT_END_IF
                 EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_magikoopa_Palette_00_Anim_3)
             EVT_ELSE
-                EVT_IF_EQ(LF(0), 1)
+                EVT_IF_EQ(ScriptFlag(0), 1)
                     EVT_CALL(SetAnimation, LW(10), 1, 0x570003)
                 EVT_END_IF
                 EVT_CALL(SetAnimation, ACTOR_SELF, 2, NPC_ANIM_flying_magikoopa_Palette_00_Anim_3)
@@ -1005,8 +1005,8 @@ EvtScript N(shapeSpell) = {
             EVT_CALL(GetGoalPos, ACTOR_SELF, LW(4), LW(5), LW(6))
             EVT_SUB(LW(4), 50)
             EVT_SET(LW(5), 0)
-            EVT_IF_EQ(LF(1), 0)
-                EVT_IF_EQ(LF(0), 1)
+            EVT_IF_EQ(ScriptFlag(1), 0)
+                EVT_IF_EQ(ScriptFlag(0), 1)
                     EVT_CALL(GetActorPos, LW(10), LW(0), LW(1), LW(2))
                     EVT_SUB(LW(0), 20)
                     EVT_ADD(LW(1), 20)
@@ -1023,7 +1023,7 @@ EvtScript N(shapeSpell) = {
                 EVT_END_IF
                 EVT_CALL(N(ShrinkActor), LW(0), LW(1), LW(6), LW(4), LW(5), LW(6), 30)
             EVT_ELSE
-                EVT_IF_EQ(LF(0), 1)
+                EVT_IF_EQ(ScriptFlag(0), 1)
                     EVT_CALL(GetActorPos, LW(10), LW(0), LW(1), LW(2))
                     EVT_SUB(LW(0), 20)
                     EVT_ADD(LW(1), 20)
@@ -1047,23 +1047,23 @@ EvtScript N(shapeSpell) = {
             EVT_WAIT(15)
             EVT_CALL(YieldTurn)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-            EVT_IF_EQ(LF(0), 1)
+            EVT_IF_EQ(ScriptFlag(0), 1)
                 EVT_CALL(UseIdleAnimation, LW(10), TRUE)
             EVT_END_IF
             EVT_RETURN
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_IF_EQ(LF(0), 1)
+    EVT_IF_EQ(ScriptFlag(0), 1)
         EVT_CALL(PlaySoundAtActor, LW(10), SOUND_SPELL_CAST2)
     EVT_END_IF
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_SPELL_CAST2)
-    EVT_IF_EQ(LF(1), 0)
-        EVT_IF_EQ(LF(0), 1)
+    EVT_IF_EQ(ScriptFlag(1), 0)
+        EVT_IF_EQ(ScriptFlag(0), 1)
             EVT_CALL(SetAnimation, LW(10), 1, 0x560003)
         EVT_END_IF
         EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_magikoopa_Palette_00_Anim_3)
     EVT_ELSE
-        EVT_IF_EQ(LF(0), 1)
+        EVT_IF_EQ(ScriptFlag(0), 1)
             EVT_CALL(SetAnimation, LW(10), 1, 0x570003)
         EVT_END_IF
         EVT_CALL(SetAnimation, ACTOR_SELF, 2, NPC_ANIM_flying_magikoopa_Palette_00_Anim_3)
@@ -1071,8 +1071,8 @@ EvtScript N(shapeSpell) = {
     EVT_WAIT(5)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LW(4), LW(5), LW(6))
-    EVT_IF_EQ(LF(1), 0)
-        EVT_IF_EQ(LF(0), 1)
+    EVT_IF_EQ(ScriptFlag(1), 0)
+        EVT_IF_EQ(ScriptFlag(0), 1)
             EVT_CALL(GetActorPos, LW(10), LW(0), LW(1), LW(2))
             EVT_SUB(LW(0), 20)
             EVT_ADD(LW(1), 20)
@@ -1089,7 +1089,7 @@ EvtScript N(shapeSpell) = {
         EVT_END_IF
         EVT_CALL(N(ShrinkActor), LW(0), LW(1), LW(6), LW(4), LW(5), LW(6), 20)
     EVT_ELSE
-        EVT_IF_EQ(LF(0), 1)
+        EVT_IF_EQ(ScriptFlag(0), 1)
             EVT_CALL(GetActorPos, LW(10), LW(0), LW(1), LW(2))
             EVT_SUB(LW(0), 20)
             EVT_ADD(LW(1), 20)
@@ -1107,7 +1107,7 @@ EvtScript N(shapeSpell) = {
         EVT_CALL(N(ShrinkActor), LW(0), LW(1), LW(6), LW(4), LW(5), LW(6), 20)
     EVT_END_IF
     EVT_WAIT(18)
-    EVT_IF_EQ(LF(0), 1)
+    EVT_IF_EQ(ScriptFlag(0), 1)
         EVT_WAIT(2)
         EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LW(0), (DAMAGE_TYPE_MAGIC | DAMAGE_TYPE_NO_CONTACT), 0, 0, 0, 32)
     EVT_ELSE
@@ -1122,7 +1122,7 @@ EvtScript N(shapeSpell) = {
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-    EVT_IF_EQ(LF(0), 1)
+    EVT_IF_EQ(ScriptFlag(0), 1)
         EVT_CALL(UseIdleAnimation, LW(10), TRUE)
     EVT_END_IF
     EVT_RETURN
@@ -1138,13 +1138,13 @@ EvtScript N(80221144) = {
     EVT_MOD(LW(1), 4)
     EVT_SWITCH(LW(1))
         EVT_CASE_EQ(0)
-            EVT_SET(LF(11), 1)
+            EVT_SET(ScriptFlag(11), 1)
         EVT_CASE_EQ(1)
-            EVT_SET(LF(12), 1)
+            EVT_SET(ScriptFlag(12), 1)
         EVT_CASE_EQ(2)
-            EVT_SET(LF(13), 1)
+            EVT_SET(ScriptFlag(13), 1)
         EVT_CASE_EQ(3)
-            EVT_SET(LF(14), 1)
+            EVT_SET(ScriptFlag(14), 1)
     EVT_END_SWITCH
     EVT_CALL(ChooseNextTarget, 0, LW(0))
     EVT_IF_NE(LW(0), -1)
@@ -1155,25 +1155,25 @@ EvtScript N(80221144) = {
     EVT_MOD(LW(1), 4)
     EVT_SWITCH(LW(1))
         EVT_CASE_EQ(0)
-            EVT_IF_EQ(LF(12), 0)
+            EVT_IF_EQ(ScriptFlag(12), 0)
                 EVT_SET(LW(0), 1)
             EVT_END_IF
         EVT_CASE_EQ(1)
-            EVT_IF_EQ(LF(11), 0)
+            EVT_IF_EQ(ScriptFlag(11), 0)
                 EVT_SET(LW(0), 0)
             EVT_END_IF
-            EVT_IF_EQ(LF(13), 0)
+            EVT_IF_EQ(ScriptFlag(13), 0)
                 EVT_SET(LW(0), 2)
             EVT_END_IF
         EVT_CASE_EQ(2)
-            EVT_IF_EQ(LF(12), 0)
+            EVT_IF_EQ(ScriptFlag(12), 0)
                 EVT_SET(LW(0), 1)
             EVT_END_IF
-            EVT_IF_EQ(LF(14), 0)
+            EVT_IF_EQ(ScriptFlag(14), 0)
                 EVT_SET(LW(0), 3)
             EVT_END_IF
         EVT_CASE_EQ(3)
-            EVT_IF_EQ(LF(13), 0)
+            EVT_IF_EQ(ScriptFlag(13), 0)
                 EVT_SET(LW(0), 2)
             EVT_END_IF
     EVT_END_SWITCH
@@ -1361,12 +1361,12 @@ EvtScript N(makeCopy) = {
     EVT_END_IF
     EVT_CALL(SetActorVar, -127, 10, 1)
     EVT_CALL(SetActorVar, -127, 11, 3)
-    EVT_SET(LF(0), 0)
+    EVT_SET(ScriptFlag(0), 0)
     EVT_CALL(GetActorFlags, -127, LW(0))
     EVT_IF_FLAG(LW(0), 0x200)
-        EVT_SET(LF(0), 1)
+        EVT_SET(ScriptFlag(0), 1)
     EVT_END_IF
-    EVT_IF_EQ(LF(0), 0)
+    EVT_IF_EQ(ScriptFlag(0), 0)
         EVT_CALL(SummonEnemy, EVT_ADDR(N(specialFormation_802216C8)), 0)
     EVT_ELSE
         EVT_CALL(SummonEnemy, EVT_ADDR(N(specialFormation_802216E4)), 0)
@@ -1383,7 +1383,7 @@ EvtScript N(makeCopy) = {
     EVT_CALL(MoveBattleCamOver, 25)
     EVT_WAIT(25)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_SPELL_CAST3)
-    EVT_IF_EQ(LF(0), 0)
+    EVT_IF_EQ(ScriptFlag(0), 0)
         EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_magikoopa_Palette_00_Anim_2)
         EVT_CALL(SetAnimation, LW(10), 1, 0x560002)
         EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
@@ -1430,12 +1430,12 @@ EvtScript N(makeCopy) = {
     EVT_CALL(GetActorPos, LW(9), LW(0), LW(1), LW(2))
     EVT_CALL(ForceHomePos, LW(9), LW(0), LW(1), LW(2))
     EVT_CALL(HPBarToHome, LW(9))
-    EVT_IF_EQ(LF(0), 0)
+    EVT_IF_EQ(ScriptFlag(0), 0)
         EVT_CALL(SetPartEventBits, -127, 1, 4194304, 1)
     EVT_ELSE
         EVT_CALL(SetPartEventBits, -127, 2, 4194304, 1)
     EVT_END_IF
-    EVT_IF_EQ(LF(0), 0)
+    EVT_IF_EQ(ScriptFlag(0), 0)
         EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_magikoopa_Palette_00_Anim_1)
         EVT_CALL(SetAnimation, LW(9), 1, 0x560001)
     EVT_ELSE
@@ -1451,7 +1451,7 @@ EvtScript N(makeCopy) = {
 #include "world/common/UnkFunc52.inc.c"
 
 EvtScript N(boostAttack) = {
-    EVT_SET(LF(0), 0)
+    EVT_SET(ScriptFlag(0), 0)
     EVT_LABEL(10)
     EVT_CALL(EnemyCreateTargetList, 32770)
     EVT_CALL(InitTargetIterator)
@@ -1474,8 +1474,8 @@ EvtScript N(boostAttack) = {
     EVT_IF_NE(LW(0), -1)
         EVT_GOTO(0)
     EVT_END_IF
-    EVT_IF_EQ(LF(0), 0)
-        EVT_SET(LF(0), 1)
+    EVT_IF_EQ(ScriptFlag(0), 0)
+        EVT_SET(ScriptFlag(0), 1)
         EVT_CALL(SetBattleVar, 2, -1)
         EVT_GOTO(10)
     EVT_END_IF
@@ -1563,7 +1563,7 @@ EvtScript N(boostAttack) = {
 };
 
 EvtScript N(boostDefense) = {
-    EVT_SET(LF(0), 0)
+    EVT_SET(ScriptFlag(0), 0)
     EVT_LABEL(10)
     EVT_CALL(EnemyCreateTargetList, 32770)
     EVT_CALL(InitTargetIterator)
@@ -1586,8 +1586,8 @@ EvtScript N(boostDefense) = {
     EVT_IF_NE(LW(0), -1)
         EVT_GOTO(0)
     EVT_END_IF
-    EVT_IF_EQ(LF(0), 0)
-        EVT_SET(LF(0), 1)
+    EVT_IF_EQ(ScriptFlag(0), 0)
+        EVT_SET(ScriptFlag(0), 1)
         EVT_CALL(SetBattleVar, 2, -1)
         EVT_GOTO(10)
     EVT_END_IF
@@ -1675,7 +1675,7 @@ EvtScript N(boostDefense) = {
 };
 
 EvtScript N(electrify) = {
-    EVT_SET(LF(0), 0)
+    EVT_SET(ScriptFlag(0), 0)
     EVT_LABEL(10)
     EVT_CALL(EnemyCreateTargetList, 32770)
     EVT_CALL(InitTargetIterator)
@@ -1698,8 +1698,8 @@ EvtScript N(electrify) = {
     EVT_IF_NE(LW(0), -1)
         EVT_GOTO(0)
     EVT_END_IF
-    EVT_IF_EQ(LF(0), 0)
-        EVT_SET(LF(0), 1)
+    EVT_IF_EQ(ScriptFlag(0), 0)
+        EVT_SET(ScriptFlag(0), 1)
         EVT_CALL(SetBattleVar, 2, -1)
         EVT_GOTO(10)
     EVT_END_IF
@@ -1792,7 +1792,7 @@ EvtScript N(electrify) = {
 };
 
 EvtScript N(vanish) = {
-    EVT_SET(LF(0), 0)
+    EVT_SET(ScriptFlag(0), 0)
     EVT_LABEL(10)
     EVT_CALL(EnemyCreateTargetList, 32770)
     EVT_CALL(InitTargetIterator)
@@ -1815,8 +1815,8 @@ EvtScript N(vanish) = {
     EVT_IF_NE(LW(0), -1)
         EVT_GOTO(0)
     EVT_END_IF
-    EVT_IF_EQ(LF(0), 0)
-        EVT_SET(LF(0), 1)
+    EVT_IF_EQ(ScriptFlag(0), 0)
+        EVT_SET(ScriptFlag(0), 1)
         EVT_CALL(SetBattleVar, 2, -1)
         EVT_GOTO(10)
     EVT_END_IF
@@ -1917,20 +1917,20 @@ EvtScript N(takeTurn_80223B24) = {
     EVT_CALL(EnemyCreateTargetList, 32770)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
-    EVT_SET(LF(0), 0)
+    EVT_SET(ScriptFlag(0), 0)
     EVT_CALL(GetOwnerTarget, LW(0), LW(1))
     EVT_CALL(GetOriginalActorType, LW(0), LW(1))
     EVT_IF_EQ(LW(1), 71)
         EVT_CALL(GetActorVar, LW(0), 8, LW(1))
         EVT_IF_EQ(LW(1), 1)
-            EVT_SET(LF(0), 1)
+            EVT_SET(ScriptFlag(0), 1)
         EVT_END_IF
     EVT_END_IF
     EVT_CALL(GetActorHP, LW(0), LW(2))
     EVT_CALL(GetEnemyMaxHP, LW(0), LW(3))
     EVT_MULF(LW(2), EVT_FLOAT(100.0))
     EVT_DIVF(LW(2), LW(3))
-    EVT_IF_EQ(LF(0), 0)
+    EVT_IF_EQ(ScriptFlag(0), 0)
         EVT_IF_LE(LW(2), 0)
             EVT_CALL(RandInt, 99, LW(4))
             EVT_ADD(LW(4), 1)
@@ -1951,20 +1951,20 @@ EvtScript N(takeTurn_80223B24) = {
     EVT_CALL(EnemyCreateTargetList, 32770)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(1)
-    EVT_SET(LF(0), 0)
+    EVT_SET(ScriptFlag(0), 0)
     EVT_CALL(GetOwnerTarget, LW(0), LW(1))
     EVT_CALL(GetOriginalActorType, LW(0), LW(1))
     EVT_IF_EQ(LW(1), 71)
         EVT_CALL(GetActorVar, LW(0), 8, LW(1))
         EVT_IF_EQ(LW(1), 1)
-            EVT_SET(LF(0), 1)
+            EVT_SET(ScriptFlag(0), 1)
         EVT_END_IF
     EVT_END_IF
     EVT_CALL(GetActorHP, LW(0), LW(2))
     EVT_CALL(GetEnemyMaxHP, LW(0), LW(3))
     EVT_MULF(LW(2), EVT_FLOAT(100.0))
     EVT_DIVF(LW(2), LW(3))
-    EVT_IF_EQ(LF(0), 0)
+    EVT_IF_EQ(ScriptFlag(0), 0)
         EVT_IF_LE(LW(2), 0)
             EVT_CALL(RandInt, 99, LW(4))
             EVT_ADD(LW(4), 1)
@@ -1985,20 +1985,20 @@ EvtScript N(takeTurn_80223B24) = {
     EVT_CALL(EnemyCreateTargetList, 32770)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(2)
-    EVT_SET(LF(0), 0)
+    EVT_SET(ScriptFlag(0), 0)
     EVT_CALL(GetOwnerTarget, LW(0), LW(1))
     EVT_CALL(GetOriginalActorType, LW(0), LW(1))
     EVT_IF_EQ(LW(1), 71)
         EVT_CALL(GetActorVar, LW(0), 8, LW(1))
         EVT_IF_EQ(LW(1), 1)
-            EVT_SET(LF(0), 1)
+            EVT_SET(ScriptFlag(0), 1)
         EVT_END_IF
     EVT_END_IF
     EVT_CALL(GetActorHP, LW(0), LW(2))
     EVT_CALL(GetEnemyMaxHP, LW(0), LW(3))
     EVT_MULF(LW(2), EVT_FLOAT(100.0))
     EVT_DIVF(LW(2), LW(3))
-    EVT_IF_EQ(LF(0), 0)
+    EVT_IF_EQ(ScriptFlag(0), 0)
         EVT_IF_LE(LW(2), 0)
             EVT_CALL(RandInt, 99, LW(4))
             EVT_ADD(LW(4), 1)
@@ -2055,20 +2055,20 @@ EvtScript N(takeTurn_80223B24) = {
                 EVT_CALL(EnemyCreateTargetList, 32770)
                 EVT_CALL(InitTargetIterator)
                 EVT_LABEL(11)
-                EVT_SET(LF(0), 0)
+                EVT_SET(ScriptFlag(0), 0)
                 EVT_CALL(GetOwnerTarget, LW(0), LW(1))
                 EVT_CALL(GetOriginalActorType, LW(0), LW(1))
                 EVT_IF_EQ(LW(1), 71)
                     EVT_CALL(GetActorVar, LW(0), 8, LW(1))
                     EVT_IF_EQ(LW(1), 1)
-                        EVT_SET(LF(0), 1)
+                        EVT_SET(ScriptFlag(0), 1)
                     EVT_END_IF
                 EVT_END_IF
                 EVT_CALL(GetActorHP, LW(0), LW(2))
                 EVT_CALL(GetEnemyMaxHP, LW(0), LW(3))
                 EVT_MULF(LW(2), EVT_FLOAT(100.0))
                 EVT_DIVF(LW(2), LW(3))
-                EVT_IF_EQ(LF(0), 0)
+                EVT_IF_EQ(ScriptFlag(0), 0)
                     EVT_IF_LE(LW(2), LW(9))
                         EVT_SETF(LW(9), LW(2))
                         EVT_SET(LW(11), LW(0))

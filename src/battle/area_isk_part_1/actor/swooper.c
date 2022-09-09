@@ -480,9 +480,9 @@ EvtScript N(8021D7E4) = {
         EVT_CASE_EQ(HIT_RESULT_HIT_STATIC)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LW(0))
             EVT_IF_FLAG(LW(0), STATUS_FLAG_STATIC)
-                EVT_SET(LF(0), 0)
+                EVT_SET(ScriptFlag(0), 0)
             EVT_ELSE
-                EVT_SET(LF(0), 1)
+                EVT_SET(ScriptFlag(0), 1)
             EVT_END_IF
     EVT_END_SWITCH
     EVT_WAIT(10)
@@ -565,9 +565,9 @@ EvtScript N(takeTurn_8021DED4) = {
         EVT_CASE_EQ(HIT_RESULT_HIT_STATIC)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LW(0))
             EVT_IF_FLAG(LW(0), STATUS_FLAG_STATIC)
-                EVT_SET(LF(0), 0)
+                EVT_SET(ScriptFlag(0), 0)
             EVT_ELSE
-                EVT_SET(LF(0), 1)
+                EVT_SET(ScriptFlag(0), 1)
             EVT_END_IF
     EVT_END_SWITCH
     EVT_WAIT(10)

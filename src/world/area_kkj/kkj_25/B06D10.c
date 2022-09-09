@@ -25,17 +25,17 @@ ApiStatus func_802406EC_B070EC(Evt* script, s32 isInitialCall) {
     unkStruct->foldID = func_8013A704(1);
     unkStruct->entityID = create_generic_entity_world(NULL, kkj_25_UnkFoldFunc);
 
-    evt_set_variable(script, GW(10), (s32) unkStruct);
+    evt_set_variable(script, MapVar(10), (s32) unkStruct);
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_80240800_B07200(Evt* script, s32 isInitialCall) {
-    UnkEntityStruct* unkStruct = (UnkEntityStruct*) evt_get_variable(NULL, GW(10));
+    UnkEntityStruct* unkStruct = (UnkEntityStruct*) evt_get_variable(NULL, MapVar(10));
 
     func_8013A854(unkStruct->foldID);
     free_generic_entity(unkStruct->entityID);
     heap_free(unkStruct);
-    evt_set_variable(script, GW(10), 0);
+    evt_set_variable(script, MapVar(10), 0);
 
     return ApiStatus_DONE2;
 }
@@ -45,7 +45,7 @@ ApiStatus func_8024086C_B0726C(Evt* script, s32 isInitialCall) {
     s32 x = evt_get_float_variable(script, *args++);
     s32 y = evt_get_float_variable(script, *args++);
     s32 z = evt_get_float_variable(script, *args++);
-    UnkEntityStruct* unkStruct = (UnkEntityStruct*) evt_get_variable(NULL, GW(10));
+    UnkEntityStruct* unkStruct = (UnkEntityStruct*) evt_get_variable(NULL, MapVar(10));
 
     unkStruct->pos.x = x;
     unkStruct->pos.y = y;
@@ -59,7 +59,7 @@ ApiStatus func_8024092C_B0732C(Evt* script, s32 isInitialCall) {
     s32 x = evt_get_float_variable(script, *args++);
     s32 y = evt_get_float_variable(script, *args++);
     s32 z = evt_get_float_variable(script, *args++);
-    UnkEntityStruct* unkStruct = (UnkEntityStruct*) evt_get_variable(NULL, GW(10));
+    UnkEntityStruct* unkStruct = (UnkEntityStruct*) evt_get_variable(NULL, MapVar(10));
 
     unkStruct->rot.x = x;
     unkStruct->rot.y = y;
@@ -73,7 +73,7 @@ ApiStatus func_802409EC_B073EC(Evt* script, s32 isInitialCall) {
     s32 x = evt_get_float_variable(script, *args++);
     s32 y = evt_get_float_variable(script, *args++);
     s32 z = evt_get_float_variable(script, *args++);
-    UnkEntityStruct* unkStruct = (UnkEntityStruct*) evt_get_variable(NULL, GW(10));
+    UnkEntityStruct* unkStruct = (UnkEntityStruct*) evt_get_variable(NULL, MapVar(10));
 
     unkStruct->scale.x = x;
     unkStruct->scale.y = y;
@@ -86,7 +86,7 @@ ApiStatus func_80240AAC_B074AC(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 spriteIndex = evt_get_variable(script, *args++);
     s32 rasterIndex = evt_get_variable(script, *args++);
-    UnkEntityStruct* unkStruct = (UnkEntityStruct*) evt_get_variable(NULL, GW(10));
+    UnkEntityStruct* unkStruct = (UnkEntityStruct*) evt_get_variable(NULL, MapVar(10));
 
     unkStruct->spriteIndex = spriteIndex;
     unkStruct->rasterIndex = rasterIndex;

@@ -48,7 +48,7 @@ EvtScript N(802414D0) = {
     EVT_CALL(GetEntryID, LW(0))
     EVT_SWITCH(LW(0))
         EVT_CASE_EQ(8)
-            EVT_IF_NE(LSWF(44), 0)
+            EVT_IF_NE(AreaFlag(44), 0)
                 EVT_CALL(SetMusicTrack, 0, SONG_MAGIC_BEANSTALK, 1, 8)
             EVT_ELSE
                 EVT_CALL(SetMusicTrack, 0, SONG_FLOWER_FIELDS_SUNNY, 0, 8)
@@ -60,7 +60,7 @@ EvtScript N(802414D0) = {
             EVT_THREAD
                 EVT_LOOP(0)
                     EVT_WAIT(1)
-                    EVT_IF_GE(GSW(0), 59)
+                    EVT_IF_GE(GameByte(0), 59)
                         EVT_BREAK_LOOP
                     EVT_END_IF
                 EVT_END_LOOP
@@ -69,7 +69,7 @@ EvtScript N(802414D0) = {
         EVT_CASE_EQ(11)
             EVT_CALL(FadeInMusic, 0, 49, 0, 3000, 0, 127)
         EVT_CASE_DEFAULT
-            EVT_SWITCH(GSW(0))
+            EVT_SWITCH(GameByte(0))
                 EVT_CASE_LT(53)
                     EVT_CALL(SetMusicTrack, 0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8)
                 EVT_CASE_DEFAULT
@@ -143,8 +143,8 @@ EvtScript N(8024196C) = {
     EVT_CALL(func_802D2C14, 1)
     EVT_CALL(PlayerMoveTo, 0, -310, 30)
     EVT_CALL(func_802D2C14, 0)
-    EVT_IF_EQ(GSW(0), 59)
-        EVT_SET(GSW(0), 60)
+    EVT_IF_EQ(GameByte(0), 59)
+        EVT_SET(GameByte(0), 60)
     EVT_END_IF
     EVT_CALL(MakeLerp, -100, 0, 30, 1)
     EVT_LOOP(0)
@@ -228,7 +228,7 @@ EvtScript N(enterWalk_8024205C) = {
     EVT_ELSE
         EVT_CALL(GetEntryID, LW(0))
         EVT_IF_NE(LW(0), 8)
-            EVT_SET(LSWF(44), 0)
+            EVT_SET(AreaFlag(44), 0)
         EVT_END_IF
         EVT_SWITCH(LW(0))
             EVT_CASE_EQ(0)
@@ -265,17 +265,17 @@ EvtScript N(enterWalk_8024205C) = {
 };
 
 EvtScript N(main) = {
-    EVT_SET(GSW(425), 38)
+    EVT_SET(GameByte(425), 38)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamLeadPlayer, 0, 0)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
     EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
     EVT_CALL(SetCamEnabled, 0, 1)
-    EVT_SET(GSWF(1984), 1)
-    EVT_IF_LT(GSW(0), 55)
+    EVT_SET(GameFlag(1984), 1)
+    EVT_IF_LT(GameByte(0), 55)
         EVT_CALL(ModifyColliderFlags, 0, 48, 0x7FFFFE00)
     EVT_END_IF
-    EVT_SET(GSWF(263), 0)
+    EVT_SET(GameFlag(263), 0)
     EVT_CALL(GetEntryID, LW(0))
     EVT_IF_EQ(LW(0), 11)
         EVT_CALL(MakeNpcs, 0, EVT_ADDR(N(npcGroupList_80246834)))
@@ -325,7 +325,7 @@ EvtScript N(main) = {
         EVT_END_IF
     EVT_END_IF
     EVT_EXEC_WAIT(N(802414D0))
-    EVT_IF_GE(GSW(0), STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE)
+    EVT_IF_GE(GameByte(0), STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE)
         EVT_CALL(N(func_80240000_C9DF20))
     EVT_END_IF
     EVT_THREAD
@@ -494,7 +494,7 @@ EvtScript N(80242AF0) = {
     EVT_WAIT(10)
     EVT_CALL(ShowMessageAtWorldPos, MESSAGE_ID(0x11, 0x0005), 0, 70, -200)
     EVT_CALL(ResetCam, 0, EVT_FLOAT(90.0))
-    EVT_SET(GSW(0), 43)
+    EVT_SET(GameByte(0), 43)
     EVT_CALL(func_802D2C14, 0)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_RETURN
@@ -519,19 +519,19 @@ EvtScript N(80242FCC) = {
         EVT_CALL(DisablePlayerInput, FALSE)
         EVT_RETURN
     EVT_END_IF
-    EVT_IF_EQ(GSW(0), 53)
+    EVT_IF_EQ(GameByte(0), 53)
         EVT_CALL(ShowMessageAtWorldPos, MESSAGE_ID(0x11, 0x0006), 0, 50, -200)
-        EVT_SET(GSW(0), 54)
+        EVT_SET(GameByte(0), 54)
         EVT_CALL(DisablePlayerInput, FALSE)
         EVT_RETURN
     EVT_END_IF
-    EVT_IF_LT(GSW(0), 60)
+    EVT_IF_LT(GameByte(0), 60)
         EVT_CALL(ShowMessageAtWorldPos, MESSAGE_ID(0x11, 0x000D), 0, 50, -200)
         EVT_CALL(ShowChoice, MESSAGE_ID(0x1E, 0x001F))
         EVT_WAIT(10)
         EVT_SWITCH(LW(0))
             EVT_CASE_EQ(0)
-                EVT_SWITCH(GSW(0))
+                EVT_SWITCH(GameByte(0))
                     EVT_CASE_LT(45)
                         EVT_CALL(SwitchMessage, MESSAGE_ID(0x11, 0x000E))
                     EVT_CASE_LT(46)
@@ -597,7 +597,7 @@ EvtScript N(init_80243474) = {
     EVT_CALL(SetNpcPos, NPC_SELF, 50, 70, -230)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_2, TRUE)
     EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
-    EVT_IF_LT(GSW(0), STORY_CH6_ARRIVED_AT_FLOWER_FIELDS)
+    EVT_IF_LT(GameByte(0), STORY_CH6_ARRIVED_AT_FLOWER_FIELDS)
         EVT_EXEC(N(80242AF0))
     EVT_END_IF
     EVT_RETURN
@@ -605,7 +605,7 @@ EvtScript N(init_80243474) = {
 };
 
 EvtScript N(interact_8024352C) = {
-    EVT_SWITCH(GSW(0))
+    EVT_SWITCH(GameByte(0))
         EVT_CASE_LT(45)
             EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_bubulb_Palette_00_Anim_3, NPC_ANIM_bubulb_Palette_00_Anim_2, 0, MESSAGE_ID(0x11, 0x0016))
         EVT_CASE_LT(46)
@@ -615,13 +615,13 @@ EvtScript N(interact_8024352C) = {
         EVT_CASE_LT(53)
             EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_bubulb_Palette_00_Anim_3, NPC_ANIM_bubulb_Palette_00_Anim_2, 0, MESSAGE_ID(0x11, 0x0019))
         EVT_CASE_LT(57)
-            EVT_SWITCH(LSWF(18))
+            EVT_SWITCH(AreaFlag(18))
                 EVT_CASE_EQ(0)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_bubulb_Palette_00_Anim_9, NPC_ANIM_bubulb_Palette_00_Anim_8, 0, MESSAGE_ID(0x11, 0x001A))
-                    EVT_SET(LSWF(18), 1)
+                    EVT_SET(AreaFlag(18), 1)
                 EVT_CASE_EQ(1)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_bubulb_Palette_00_Anim_9, NPC_ANIM_bubulb_Palette_00_Anim_8, 0, MESSAGE_ID(0x11, 0x001B))
-                    EVT_SET(LSWF(18), 0)
+                    EVT_SET(AreaFlag(18), 0)
             EVT_END_SWITCH
         EVT_CASE_DEFAULT
             EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_bubulb_Palette_00_Anim_9, NPC_ANIM_bubulb_Palette_00_Anim_8, 0, MESSAGE_ID(0x11, 0x001C))
@@ -631,7 +631,7 @@ EvtScript N(interact_8024352C) = {
 };
 
 EvtScript N(interact_802436C0) = {
-    EVT_SWITCH(GSW(0))
+    EVT_SWITCH(GameByte(0))
         EVT_CASE_LT(45)
             EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_bubulb_Palette_01_Anim_3, NPC_ANIM_bubulb_Palette_01_Anim_2, 0, MESSAGE_ID(0x11, 0x001D))
         EVT_CASE_LT(46)
@@ -641,13 +641,13 @@ EvtScript N(interact_802436C0) = {
         EVT_CASE_LT(53)
             EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_bubulb_Palette_01_Anim_3, NPC_ANIM_bubulb_Palette_01_Anim_2, 0, MESSAGE_ID(0x11, 0x0020))
         EVT_CASE_LT(57)
-            EVT_SWITCH(LSWF(19))
+            EVT_SWITCH(AreaFlag(19))
                 EVT_CASE_EQ(0)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_bubulb_Palette_01_Anim_3, NPC_ANIM_bubulb_Palette_01_Anim_2, 0, MESSAGE_ID(0x11, 0x0021))
-                    EVT_SET(LSWF(19), 1)
+                    EVT_SET(AreaFlag(19), 1)
                 EVT_CASE_EQ(1)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_bubulb_Palette_01_Anim_3, NPC_ANIM_bubulb_Palette_01_Anim_2, 0, MESSAGE_ID(0x11, 0x0022))
-                    EVT_SET(LSWF(19), 0)
+                    EVT_SET(AreaFlag(19), 0)
             EVT_END_SWITCH
         EVT_CASE_DEFAULT
             EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_bubulb_Palette_01_Anim_3, NPC_ANIM_bubulb_Palette_01_Anim_2, 0, MESSAGE_ID(0x11, 0x0023))
@@ -657,7 +657,7 @@ EvtScript N(interact_802436C0) = {
 };
 
 EvtScript N(interact_80243854) = {
-    EVT_SWITCH(GSW(0))
+    EVT_SWITCH(GameByte(0))
         EVT_CASE_LT(45)
             EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_bubulb_Palette_02_Anim_3, NPC_ANIM_bubulb_Palette_02_Anim_2, 0, MESSAGE_ID(0x11, 0x0024))
         EVT_CASE_LT(46)
@@ -667,13 +667,13 @@ EvtScript N(interact_80243854) = {
         EVT_CASE_LT(53)
             EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_bubulb_Palette_02_Anim_3, NPC_ANIM_bubulb_Palette_02_Anim_2, 0, MESSAGE_ID(0x11, 0x0027))
         EVT_CASE_LT(57)
-            EVT_SWITCH(LSWF(20))
+            EVT_SWITCH(AreaFlag(20))
                 EVT_CASE_EQ(0)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_bubulb_Palette_02_Anim_9, NPC_ANIM_bubulb_Palette_02_Anim_8, 0, MESSAGE_ID(0x11, 0x0028))
-                    EVT_SET(LSWF(20), 1)
+                    EVT_SET(AreaFlag(20), 1)
                 EVT_CASE_EQ(1)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_bubulb_Palette_02_Anim_9, NPC_ANIM_bubulb_Palette_02_Anim_8, 0, MESSAGE_ID(0x11, 0x0029))
-                    EVT_SET(LSWF(20), 0)
+                    EVT_SET(AreaFlag(20), 0)
             EVT_END_SWITCH
         EVT_CASE_DEFAULT
             EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_bubulb_Palette_02_Anim_9, NPC_ANIM_bubulb_Palette_02_Anim_8, 0, MESSAGE_ID(0x11, 0x002A))
@@ -683,7 +683,7 @@ EvtScript N(interact_80243854) = {
 };
 
 EvtScript N(interact_802439E8) = {
-    EVT_SWITCH(GSW(0))
+    EVT_SWITCH(GameByte(0))
         EVT_CASE_LT(45)
             EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_bubulb_Palette_03_Anim_3, NPC_ANIM_bubulb_Palette_03_Anim_2, 0, MESSAGE_ID(0x11, 0x002B))
         EVT_CASE_LT(46)
@@ -693,13 +693,13 @@ EvtScript N(interact_802439E8) = {
         EVT_CASE_LT(53)
             EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_bubulb_Palette_03_Anim_3, NPC_ANIM_bubulb_Palette_03_Anim_2, 0, MESSAGE_ID(0x11, 0x002E))
         EVT_CASE_LT(57)
-            EVT_SWITCH(LSWF(21))
+            EVT_SWITCH(AreaFlag(21))
                 EVT_CASE_EQ(0)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_bubulb_Palette_03_Anim_9, NPC_ANIM_bubulb_Palette_03_Anim_8, 0, MESSAGE_ID(0x11, 0x002F))
-                    EVT_SET(LSWF(21), 1)
+                    EVT_SET(AreaFlag(21), 1)
                 EVT_CASE_EQ(1)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_bubulb_Palette_03_Anim_9, NPC_ANIM_bubulb_Palette_03_Anim_8, 0, MESSAGE_ID(0x11, 0x0030))
-                    EVT_SET(LSWF(21), 0)
+                    EVT_SET(AreaFlag(21), 0)
             EVT_END_SWITCH
         EVT_CASE_DEFAULT
             EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_bubulb_Palette_03_Anim_9, NPC_ANIM_bubulb_Palette_03_Anim_8, 0, MESSAGE_ID(0x11, 0x0031))
@@ -709,90 +709,90 @@ EvtScript N(interact_802439E8) = {
 };
 
 EvtScript N(init_80243B7C) = {
-    EVT_SET(LSWF(18), 0)
+    EVT_SET(AreaFlag(18), 0)
     EVT_CALL(BindNpcInteract, NPC_SELF, EVT_ADDR(N(interact_8024352C)))
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(init_80243BB0) = {
-    EVT_SET(LSWF(19), 0)
+    EVT_SET(AreaFlag(19), 0)
     EVT_CALL(BindNpcInteract, NPC_SELF, EVT_ADDR(N(interact_802436C0)))
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(init_80243BE4) = {
-    EVT_SET(LSWF(20), 0)
+    EVT_SET(AreaFlag(20), 0)
     EVT_CALL(BindNpcInteract, NPC_SELF, EVT_ADDR(N(interact_80243854)))
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(init_80243C18) = {
-    EVT_SET(LSWF(21), 0)
+    EVT_SET(AreaFlag(21), 0)
     EVT_CALL(BindNpcInteract, NPC_SELF, EVT_ADDR(N(interact_802439E8)))
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(interact_80243C4C) = {
-    EVT_IF_EQ(GSWF(1373), 0)
+    EVT_IF_EQ(GameFlag(1373), 0)
         EVT_CALL(AdjustCam, 0, EVT_FLOAT(4.0), -30, 300, EVT_FLOAT(20.0), EVT_FLOAT(-9.5))
-        EVT_SET(GSWF(1373), 1)
+        EVT_SET(GameFlag(1373), 1)
     EVT_END_IF
-    EVT_SWITCH(GSW(0))
+    EVT_SWITCH(GameByte(0))
         EVT_CASE_LT(45)
-            EVT_SWITCH(LSW(0))
+            EVT_SWITCH(AreaByte(0))
                 EVT_CASE_EQ(0)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_tolielup_Palette_00_Anim_2, NPC_ANIM_tolielup_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x0035))
                     EVT_CALL(EndSpeech, -1, NPC_ANIM_tolielup_Palette_00_Anim_3, NPC_ANIM_tolielup_Palette_00_Anim_3, 0)
-                    EVT_SET(LSW(0), 1)
+                    EVT_SET(AreaByte(0), 1)
                 EVT_CASE_EQ(1)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_tolielup_Palette_00_Anim_2, NPC_ANIM_tolielup_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x0038))
                     EVT_CALL(EndSpeech, -1, NPC_ANIM_tolielup_Palette_00_Anim_3, NPC_ANIM_tolielup_Palette_00_Anim_3, 0)
-                    EVT_SET(LSW(0), 2)
+                    EVT_SET(AreaByte(0), 2)
                 EVT_CASE_EQ(2)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_tolielup_Palette_00_Anim_2, NPC_ANIM_tolielup_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x0039))
                     EVT_CALL(EndSpeech, -1, NPC_ANIM_tolielup_Palette_00_Anim_3, NPC_ANIM_tolielup_Palette_00_Anim_3, 0)
-                    EVT_SET(LSW(0), 0)
+                    EVT_SET(AreaByte(0), 0)
             EVT_END_SWITCH
         EVT_CASE_LT(47)
-            EVT_SWITCH(LSW(0))
+            EVT_SWITCH(AreaByte(0))
                 EVT_CASE_EQ(0)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_tolielup_Palette_00_Anim_2, NPC_ANIM_tolielup_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x0036))
                     EVT_CALL(EndSpeech, -1, NPC_ANIM_tolielup_Palette_00_Anim_3, NPC_ANIM_tolielup_Palette_00_Anim_3, 0)
-                    EVT_SET(LSW(0), 1)
+                    EVT_SET(AreaByte(0), 1)
                 EVT_CASE_EQ(1)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_tolielup_Palette_00_Anim_2, NPC_ANIM_tolielup_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x0038))
                     EVT_CALL(EndSpeech, -1, NPC_ANIM_tolielup_Palette_00_Anim_3, NPC_ANIM_tolielup_Palette_00_Anim_3, 0)
-                    EVT_SET(LSW(0), 2)
+                    EVT_SET(AreaByte(0), 2)
                 EVT_CASE_EQ(2)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_tolielup_Palette_00_Anim_2, NPC_ANIM_tolielup_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x0039))
                     EVT_CALL(EndSpeech, -1, NPC_ANIM_tolielup_Palette_00_Anim_3, NPC_ANIM_tolielup_Palette_00_Anim_3, 0)
-                    EVT_SET(LSW(0), 0)
+                    EVT_SET(AreaByte(0), 0)
             EVT_END_SWITCH
         EVT_CASE_LT(53)
-            EVT_SWITCH(LSW(0))
+            EVT_SWITCH(AreaByte(0))
                 EVT_CASE_EQ(0)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_tolielup_Palette_00_Anim_2, NPC_ANIM_tolielup_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x0037))
                     EVT_CALL(EndSpeech, -1, NPC_ANIM_tolielup_Palette_00_Anim_3, NPC_ANIM_tolielup_Palette_00_Anim_3, 0)
-                    EVT_SET(LSW(0), 1)
+                    EVT_SET(AreaByte(0), 1)
                 EVT_CASE_EQ(1)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_tolielup_Palette_00_Anim_2, NPC_ANIM_tolielup_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x0038))
                     EVT_CALL(EndSpeech, -1, NPC_ANIM_tolielup_Palette_00_Anim_3, NPC_ANIM_tolielup_Palette_00_Anim_3, 0)
-                    EVT_SET(LSW(0), 2)
+                    EVT_SET(AreaByte(0), 2)
                 EVT_CASE_EQ(2)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_tolielup_Palette_00_Anim_2, NPC_ANIM_tolielup_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x0039))
                     EVT_CALL(EndSpeech, -1, NPC_ANIM_tolielup_Palette_00_Anim_3, NPC_ANIM_tolielup_Palette_00_Anim_3, 0)
-                    EVT_SET(LSW(0), 0)
+                    EVT_SET(AreaByte(0), 0)
             EVT_END_SWITCH
         EVT_CASE_LT(57)
-            EVT_SWITCH(LSW(0))
+            EVT_SWITCH(AreaByte(0))
                 EVT_CASE_EQ(0)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_tolielup_Palette_00_Anim_2, NPC_ANIM_tolielup_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x0039))
                     EVT_CALL(EndSpeech, -1, NPC_ANIM_tolielup_Palette_00_Anim_3, NPC_ANIM_tolielup_Palette_00_Anim_3, 0)
-                    EVT_SET(LSW(0), 1)
+                    EVT_SET(AreaByte(0), 1)
                 EVT_CASE_EQ(1)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_tolielup_Palette_00_Anim_2, NPC_ANIM_tolielup_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x0038))
                     EVT_CALL(EndSpeech, -1, NPC_ANIM_tolielup_Palette_00_Anim_3, NPC_ANIM_tolielup_Palette_00_Anim_3, 0)
@@ -958,7 +958,7 @@ EvtScript N(8024427C) = {
     EVT_CALL(SetPlayerAnimation, ANIM_1002A)
     EVT_WAIT(110)
     EVT_CALL(SetPlayerAnimation, ANIM_10002)
-    EVT_SET(GSW(0), 59)
+    EVT_SET(GameByte(0), 59)
     EVT_EXEC_WAIT(N(80243368))
     EVT_CALL(EnablePartnerAI)
     EVT_CALL(DisablePlayerInput, FALSE)
@@ -982,7 +982,7 @@ EvtScript N(init_80244BF4) = {
 };
 
 EvtScript N(interact_80244C98) = {
-    EVT_IF_LE(GSW(0), 53)
+    EVT_IF_LE(GameByte(0), 53)
         EVT_CALL(SpeakToPlayer, 7, NPC_ANIM_lakilulu_Palette_00_Anim_4, NPC_ANIM_lakilulu_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x0032))
     EVT_ELSE
         EVT_CALL(GetCurrentPartnerID, LW(0))
@@ -1003,7 +1003,7 @@ EvtScript N(interact_80244C98) = {
 };
 
 EvtScript N(init_80244DD0) = {
-    EVT_IF_GE(GSW(0), 58)
+    EVT_IF_GE(GameByte(0), 58)
         EVT_CALL(BindNpcInteract, NPC_SELF, EVT_ADDR(N(interact_80244C98)))
         EVT_CALL(SetNpcCollisionSize, -1, 36, 28)
         EVT_CALL(SetNpcPos, NPC_SELF, -200, 15, -300)
@@ -1661,12 +1661,12 @@ EvtScript N(80247770) = {
 extern const char N(flo_19_name_hack)[];
 
 EvtScript N(802477EC) = {
-    EVT_IF_EQ(LSWF(44), 0)
+    EVT_IF_EQ(AreaFlag(44), 0)
         EVT_CALL(DisablePlayerInput, TRUE)
         EVT_CALL(func_802D2B6C)
         EVT_WAIT(15)
         EVT_CALL(DisablePartnerAI, 0)
-        EVT_SET(LSWF(44), 1)
+        EVT_SET(AreaFlag(44), 1)
         EVT_CALL(ModifyColliderFlags, 0, 47, 0x7FFFFE00)
         EVT_CALL(ModifyColliderFlags, 0, 48, 0x7FFFFE00)
         EVT_SET(LW(9), EVT_FLOAT(-59.0))
@@ -1685,17 +1685,17 @@ EvtScript N(802477EC) = {
         EVT_CALL(N(func_80240F10_C9EE30), LW(3), LW(4))
         EVT_SWITCH(LW(4))
             EVT_CASE_LT(90)
-                EVT_SET(LSWF(16), 0)
+                EVT_SET(AreaFlag(16), 0)
                 EVT_CALL(InterpPlayerYaw, 90, 0)
                 EVT_CALL(InterpNpcYaw, NPC_PARTNER, 90, 0)
             EVT_CASE_GE(270)
-                EVT_SET(LSWF(16), 1)
+                EVT_SET(AreaFlag(16), 1)
                 EVT_CALL(InterpPlayerYaw, 270, 0)
                 EVT_CALL(InterpNpcYaw, NPC_PARTNER, 270, 0)
         EVT_END_SWITCH
         EVT_CALL(TranslateModel, 81, EVT_FLOAT(-0.26), EVT_FLOAT(2.0), EVT_FLOAT(1.4775390625))
         EVT_CALL(UpdateColliderTransform, 46)
-        EVT_SET(GW(10), 0)
+        EVT_SET(MapVar(10), 0)
         EVT_THREAD
             EVT_SET(LW(15), 0)
             EVT_LOOP(0)
@@ -1708,13 +1708,13 @@ EvtScript N(802477EC) = {
                 EVT_CALL(N(func_80240F80_C9EEA0))
                 EVT_CALL(N(func_802410B4_C9EFD4))
                 EVT_IF_EQ(LW(15), 350)
-                    EVT_SET(GW(10), 1)
+                    EVT_SET(MapVar(10), 1)
                 EVT_END_IF
                 EVT_WAIT(1)
             EVT_END_LOOP
         EVT_END_THREAD
         EVT_LABEL(10)
-        EVT_IF_EQ(GW(10), 0)
+        EVT_IF_EQ(MapVar(10), 0)
             EVT_WAIT(1)
             EVT_GOTO(10)
         EVT_END_IF
@@ -1745,7 +1745,7 @@ EvtScript N(80247BCC) = {
         EVT_WAIT(5)
         EVT_CALL(SetNpcAnimation, NPC_PARTNER, 0x000106)
         EVT_CALL(SetPlayerAnimation, ANIM_WALKING)
-        EVT_SWITCH(LSWF(16))
+        EVT_SWITCH(AreaFlag(16))
             EVT_CASE_EQ(0)
                 EVT_CALL(InterpPlayerYaw, 90, 0)
                 EVT_CALL(InterpNpcYaw, NPC_PARTNER, 90, 0)
@@ -1777,7 +1777,7 @@ EvtScript N(80247BCC) = {
     EVT_WAIT(5)
     EVT_CALL(ModifyColliderFlags, 1, 47, 0x7FFFFE00)
     EVT_CALL(ModifyColliderFlags, 1, 48, 0x7FFFFE00)
-    EVT_SET(LSWF(44), 0)
+    EVT_SET(AreaFlag(44), 0)
     EVT_CALL(StopSound, 413)
     EVT_EXEC_WAIT(N(802414D0))
     EVT_CALL(ResetCam, 0, EVT_FLOAT(1.0))
@@ -1795,7 +1795,7 @@ EvtScript N(80247FAC) = {
         EVT_EXEC(N(80247588))
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_SET(GW(10), 0)
+    EVT_SET(MapVar(10), 0)
     EVT_THREAD
         EVT_SET(LW(15), 0)
         EVT_LOOP(1200)
@@ -1828,13 +1828,13 @@ EvtScript N(80247FAC) = {
                 EVT_CASE_DEFAULT
             EVT_END_SWITCH
             EVT_IF_GT(LW(15), 550)
-                EVT_SET(GW(10), 1)
+                EVT_SET(MapVar(10), 1)
             EVT_END_IF
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_LABEL(10)
-    EVT_IF_EQ(GW(10), 0)
+    EVT_IF_EQ(MapVar(10), 0)
         EVT_WAIT(1)
         EVT_GOTO(10)
     EVT_END_IF
@@ -1891,7 +1891,7 @@ EvtScript N(802485A8) = {
     EVT_CALL(func_802D2884, -85, 85, 0)
     EVT_CALL(func_802CF56C, 2)
     EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_IF_EQ(GSWF(1371), 0)
+    EVT_IF_EQ(GameFlag(1371), 0)
         EVT_SET_GROUP(0)
         EVT_CALL(SetTimeFreezeMode, 1)
         EVT_LABEL(10)
@@ -1908,14 +1908,14 @@ EvtScript N(802485A8) = {
                 EVT_WAIT(5)
                 EVT_CALL(RemoveKeyItemAt, LW(1))
                 EVT_CALL(MakeItemEntity, ITEM_FERTILE_SOIL, -83, 0, 87, 1, 0)
-                EVT_SET(GW(11), LW(0))
+                EVT_SET(MapVar(11), LW(0))
                 EVT_CALL(SetPlayerAnimation, ANIM_STAND_STILL)
                 EVT_WAIT(20)
             EVT_CASE_DEFAULT
-                EVT_SWITCH(LSWF(17))
+                EVT_SWITCH(AreaFlag(17))
                     EVT_CASE_EQ(0)
                         EVT_CALL(ShowMessageAtWorldPos, MESSAGE_ID(0x11, 0x0008), 0, 10, -200)
-                        EVT_SET(LSWF(17), 1)
+                        EVT_SET(AreaFlag(17), 1)
                     EVT_CASE_DEFAULT
                         EVT_CALL(ShowMessageAtWorldPos, MESSAGE_ID(0x11, 0x0009), 0, 10, -200)
                 EVT_END_SWITCH
@@ -1925,9 +1925,9 @@ EvtScript N(802485A8) = {
         EVT_IF_NE(LW(2), 89)
             EVT_GOTO(10)
         EVT_END_IF
-        EVT_SET(GSWF(1371), 1)
+        EVT_SET(GameFlag(1371), 1)
     EVT_END_IF
-    EVT_IF_EQ(GSWF(1372), 0)
+    EVT_IF_EQ(GameFlag(1372), 0)
         EVT_SET_GROUP(0)
         EVT_CALL(SetTimeFreezeMode, 1)
         EVT_LABEL(20)
@@ -1940,20 +1940,20 @@ EvtScript N(802485A8) = {
                 EVT_CALL(AwaitPlayerLeave, -85, 85, 28)
                 EVT_RETURN
             EVT_CASE_EQ(88)
-                EVT_CALL(RemoveItemEntity, GW(11))
+                EVT_CALL(RemoveItemEntity, MapVar(11))
                 EVT_WAIT(5)
                 EVT_CALL(SetPlayerAnimation, 393222)
                 EVT_WAIT(5)
                 EVT_CALL(RemoveKeyItemAt, LW(1))
                 EVT_CALL(MakeItemEntity, ITEM_MAGICAL_BEAN, -83, 0, 87, 1, 0)
-                EVT_SET(GW(11), LW(0))
+                EVT_SET(MapVar(11), LW(0))
                 EVT_CALL(SetPlayerAnimation, ANIM_STAND_STILL)
                 EVT_WAIT(20)
             EVT_CASE_DEFAULT
-                EVT_SWITCH(LSWF(17))
+                EVT_SWITCH(AreaFlag(17))
                     EVT_CASE_EQ(0)
                         EVT_CALL(ShowMessageAtWorldPos, MESSAGE_ID(0x11, 0x0008), 0, 10, -200)
-                        EVT_SET(LSWF(17), 1)
+                        EVT_SET(AreaFlag(17), 1)
                     EVT_CASE_DEFAULT
                         EVT_CALL(ShowMessageAtWorldPos, MESSAGE_ID(0x11, 0x0009), 0, 10, -200)
                 EVT_END_SWITCH
@@ -1963,7 +1963,7 @@ EvtScript N(802485A8) = {
         EVT_IF_NE(LW(2), 88)
             EVT_GOTO(20)
         EVT_END_IF
-        EVT_SET(GSWF(1372), 1)
+        EVT_SET(GameFlag(1372), 1)
     EVT_END_IF
     EVT_SET_GROUP(0)
     EVT_CALL(SetTimeFreezeMode, 1)
@@ -1977,17 +1977,17 @@ EvtScript N(802485A8) = {
             EVT_CALL(AwaitPlayerLeave, -85, 85, 28)
             EVT_RETURN
         EVT_CASE_EQ(90)
-            EVT_CALL(RemoveItemEntity, GW(11))
+            EVT_CALL(RemoveItemEntity, MapVar(11))
             EVT_WAIT(5)
             EVT_CALL(SetPlayerAnimation, 393222)
             EVT_WAIT(5)
             EVT_CALL(RemoveKeyItemAt, LW(1))
             EVT_CALL(N(SyncStatusMenu))
             EVT_CALL(MakeItemEntity, ITEM_MIRACLE_WATER, -83, 0, 87, 1, 0)
-            EVT_SET(GW(11), LW(0))
+            EVT_SET(MapVar(11), LW(0))
             EVT_CALL(SetPlayerAnimation, ANIM_STAND_STILL)
             EVT_WAIT(30)
-            EVT_CALL(RemoveItemEntity, GW(11))
+            EVT_CALL(RemoveItemEntity, MapVar(11))
             EVT_WAIT(30)
             EVT_CALL(ModifyColliderFlags, 0, 47, 0x7FFFFE00)
             EVT_CALL(PlayerMoveTo, -60, 30, 20)
@@ -2038,20 +2038,20 @@ EvtScript N(80248D3C) = {
 };
 
 EvtScript N(80248E30) = {
-    EVT_IF_LT(GSW(0), 55)
+    EVT_IF_LT(GameByte(0), 55)
         EVT_LOOP(0)
             EVT_WAIT(1)
-            EVT_IF_EQ(GSW(0), 54)
+            EVT_IF_EQ(GameByte(0), 54)
                 EVT_BREAK_LOOP
             EVT_END_IF
         EVT_END_LOOP
-        EVT_IF_EQ(GSWF(1371), 1)
-            EVT_IF_EQ(GSWF(1372), 0)
+        EVT_IF_EQ(GameFlag(1371), 1)
+            EVT_IF_EQ(GameFlag(1372), 0)
                 EVT_CALL(MakeItemEntity, ITEM_FERTILE_SOIL, -83, 0, 87, 1, 0)
             EVT_ELSE
                 EVT_CALL(MakeItemEntity, ITEM_MAGICAL_BEAN, -83, 0, 87, 1, 0)
             EVT_END_IF
-            EVT_SET(GW(11), LW(0))
+            EVT_SET(MapVar(11), LW(0))
         EVT_END_IF
         EVT_BIND_PADLOCK(N(80248D3C), 0x10, 0, EVT_ADDR(N(itemList_80248598)), 0, 1)
     EVT_END_IF
@@ -2063,7 +2063,7 @@ EvtScript N(80248F48) = {
     EVT_BIND_TRIGGER(N(802477EC), TRIGGER_FLOOR_TOUCH, 46, 1, 0)
     EVT_CALL(EnableGroup, 121, 1)
     EVT_CALL(EnableGroup, 80, 1)
-    EVT_SWITCH(GSW(0))
+    EVT_SWITCH(GameByte(0))
         EVT_CASE_EQ(54)
             EVT_SET(LW(0), -700)
             EVT_EXEC(N(80246850))
@@ -2099,7 +2099,7 @@ static s32 N(pad_9128)[] = {
 };
 
 EvtScript N(makeEntities) = {
-    EVT_IF_LT(GSW(0), 96)
+    EVT_IF_LT(GameByte(0), 96)
         EVT_CALL(MakeEntity, EVT_ADDR(Entity_SavePoint), 110, 60, -100, 0, 0x80000000)
     EVT_END_IF
     EVT_RETURN
