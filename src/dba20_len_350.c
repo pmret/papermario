@@ -61,9 +61,9 @@ s32 clear_global_flag(s32 index) {
 }
 
 s32 set_global_flag(s32 index) {
+    SaveData* saveFile;
     s32 wordIdx;
     s32 bitIdx;
-    SaveData* saveFile;
     s32 flag;
 
     if (index <= EVT_GAME_FLAG_CUTOFF) {
@@ -88,7 +88,6 @@ s32 get_global_flag(s32 index) {
     s32 wordIdx;
     s32 bitIdx;
     s32 flag;
-    s32 phi_return;
 
     if (index <= EVT_GAME_FLAG_CUTOFF) {
         index = EVT_INDEX_OF_GAME_FLAG(index);

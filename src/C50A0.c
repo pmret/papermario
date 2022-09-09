@@ -326,18 +326,18 @@ void init_item_entity_list(void) {
 
 INCLUDE_ASM(s32, "C50A0", item_entity_load);
 
-s32 make_item_entity(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pickupDelay, s32 facingAngleSign, s32 pickupVar) {
+s32 make_item_entity(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pickupDelay, s32 facingAngleSign, s32 pickupFlagIndex) {
     s32 i;
     s32 id;
     ItemEntity* itemEntity;
     f32 hitDepth;
     Shadow* shadow;
 
-    if (pickupVar <= EVT_GAME_FLAG_CUTOFF) {
-        pickupVar = EVT_INDEX_OF_GAME_FLAG(pickupVar);
+    if (pickupFlagIndex <= EVT_GAME_FLAG_CUTOFF) {
+        pickupFlagIndex = EVT_INDEX_OF_GAME_FLAG(pickupFlagIndex);
     }
 
-    if (pickupVar > 0) {
+    if (pickupFlagIndex > 0) {
         switch (itemSpawnMode) {
             case ITEM_SPAWN_MODE_KEY:
             case ITEM_SPAWN_MODE_TOSS_NEVER_VANISH:
@@ -353,7 +353,7 @@ s32 make_item_entity(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pic
             case ITEM_SPAWN_MODE_FIXED:
             case ITEM_SPAWN_MODE_ITEM_BLOCK_COIN:
             case ITEM_SPAWN_MODE_TOSS_HIGHER_NEVER_VANISH:
-                if (get_global_flag(pickupVar) != 0) {
+                if (get_global_flag(pickupFlagIndex) != 0) {
                     return -1;
                 }
                 break;
@@ -388,7 +388,7 @@ s32 make_item_entity(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pic
 
     itemEntity->flags = ITEM_ENTITY_FLAGS_80 | ITEM_ENTITY_FLAGS_10 | ITEM_ENTITY_FLAGS_CAM2 | ITEM_ENTITY_FLAGS_CAM1 | ITEM_ENTITY_FLAGS_CAM0;
     itemEntity->pickupMsgFlags = 0;
-    itemEntity->boundVar = pickupVar;
+    itemEntity->boundVar = pickupFlagIndex;
     itemEntity->itemID = itemID;
     itemEntity->physicsData = NULL;
     itemEntity->pickupDelay = pickupDelay;
@@ -813,8 +813,8 @@ void update_item_entities(void) {
 
 void appendGfx_item_entity(void* data) {
     ItemEntity* itemEntity = (ItemEntity*)data;
-    Mtx sp18;
-    Matrix4f sp58, sp98, spD8;
+    Mtx mtxTransform;
+    Matrix4f mtxTranslate, mtxRotY, mtxScale;
     s32 alpha = 255;
     s32 yOffset;
     f32 rot;
@@ -843,16 +843,16 @@ void appendGfx_item_entity(void* data) {
     }
 
     rot = clamp_angle(180.0f - gCameras[gCurrentCamID].currentYaw);
-    guTranslateF(sp58, itemEntity->position.x, itemEntity->position.y + yOffset, itemEntity->position.z);
-    guRotateF(sp98, rot, 0.0f, 1.0f, 0.0f);
+    guTranslateF(mtxTranslate, itemEntity->position.x, itemEntity->position.y + yOffset, itemEntity->position.z);
+    guRotateF(mtxRotY, rot, 0.0f, 1.0f, 0.0f);
     if (itemEntity->flags & ITEM_ENTITY_FLAGS_TINY) {
-        guScaleF(spD8, itemEntity->scale, itemEntity->scale, itemEntity->scale);
-        guMtxCatF(sp98, spD8, sp98);
+        guScaleF(mtxScale, itemEntity->scale, itemEntity->scale, itemEntity->scale);
+        guMtxCatF(mtxRotY, mtxScale, mtxRotY);
     }
-    guMtxCatF(sp98, sp58, sp58);
-    guMtxF2L(sp58, &sp18);
+    guMtxCatF(mtxRotY, mtxTranslate, mtxTranslate);
+    guMtxF2L(mtxTranslate, &mtxTransform);
 
-    gDisplayContext->matrixStack[gMatrixListPos] = sp18;
+    gDisplayContext->matrixStack[gMatrixListPos] = mtxTransform;
 
     gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
               G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
@@ -900,9 +900,9 @@ void appendGfx_item_entity(void* data) {
             gDPSetTileSize(gMasterGfxPos++, 2, 0, 0, 0x00FC, 0);
 
             if (itemEntity->flags & (ITEM_ENTITY_FLAGS_8000000 | ITEM_ENTITY_FLAGS_TRANSPARENT)) {
-                func_801491E4(&sp58, 0, 0, 0x18, 0x18, alpha);
+                func_801491E4(mtxTranslate, 0, 0, 0x18, 0x18, alpha);
             } else {
-                func_801491E4(&sp58, 0, 0, 0x18, 0x18, 255);
+                func_801491E4(mtxTranslate, 0, 0, 0x18, 0x18, 255);
             }
         } else {
             gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 12, gHudElementCacheTableRaster[itemEntity->lookupRasterIndex].data);
@@ -934,9 +934,9 @@ void appendGfx_item_entity(void* data) {
                        G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
             gDPSetTileSize(gMasterGfxPos++, 2, 0, 0, 0x00FC, 0);
             if (itemEntity->flags & (ITEM_ENTITY_FLAGS_8000000 | ITEM_ENTITY_FLAGS_TRANSPARENT)) {
-                func_801491E4(&sp58, 0, 0, 0x20, 0x20, alpha);
+                func_801491E4(mtxTranslate, 0, 0, 0x20, 0x20, alpha);
             } else {
-                func_801491E4(&sp58, 0, 0, 0x20, 0x20, 255);
+                func_801491E4(mtxTranslate, 0, 0, 0x20, 0x20, 255);
             }
         } else {
             gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 16, gHudElementCacheTableRaster[itemEntity->lookupRasterIndex].data);

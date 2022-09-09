@@ -357,7 +357,7 @@ void entity_GiantChest_open(Entity* entity) {
 void entity_GiantChest_give_equipment(Entity* entity) {
     ChestData* data = entity->dataBuf.chest;
     f32 angle;
-    s32 flag;
+    s32 flagIndex;
 
     switch (data->itemID) {
         case ITEM_JUMP:
@@ -388,11 +388,11 @@ void entity_GiantChest_give_equipment(Entity* entity) {
         data->itemEntityIndex = make_item_entity_nodelay(data->itemID, data->itemEntityPos.x, data->itemEntityPos.y, data->itemEntityPos.z, 1, -1);
     }
 
-    flag = data->gameFlagIndex;
-    if (flag <= EVT_GAME_FLAG_CUTOFF) {
-        flag = EVT_INDEX_OF_GAME_FLAG(flag);
+    flagIndex = data->gameFlagIndex;
+    if (flagIndex <= EVT_GAME_FLAG_CUTOFF) {
+        flagIndex = EVT_INDEX_OF_GAME_FLAG(flagIndex);
     }
-    set_global_flag(flag);
+    set_global_flag(flagIndex);
 }
 
 void entity_Chest_start_bound_script(Entity* entity) {

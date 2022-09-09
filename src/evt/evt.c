@@ -19,6 +19,8 @@ f32 evt_fixed_var_to_float(Bytecode scriptVar) {
 }
 
 Bytecode evt_float_to_fixed_var(f32 value) {
+    // not equivalent to hte EVT_FLOAT_TO_FIXED() macro due to the s32 cast
+    // occuring *before* the add here and *after* the add in the macro
     return (s32)(value * 1024.0f) + -EVT_FIXED_OFFSET;
 }
 
