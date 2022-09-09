@@ -7,7 +7,7 @@ extern f32 D_8024160C_ABC89C;
 extern f32 D_8024162C_ABC8BC;
 
 ApiStatus func_80240000_ABB290(Evt* script, s32 isInitialCall) {
-    if (evt_get_variable(NULL, GameByte(0)) >= 96) {
+    if (evt_get_variable(NULL, GB_StoryProgress) >= 96) {
         gGameStatusPtr->playerSpriteSet = 2;
     }
 

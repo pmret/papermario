@@ -104,7 +104,7 @@ EvtScript N(init_80218D70) = {
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_80219338)))
     EVT_CALL(BindNextTurn, ACTOR_SELF, EVT_ADDR(N(nextTurn_80218FB0)))
     EVT_CALL(SetActorVar, ACTOR_SELF, 1, 0)
-    EVT_IF_GE(GameByte(0), -30)
+    EVT_IF_GE(GB_StoryProgress, -30)
         EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
     EVT_ELSE
         EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
