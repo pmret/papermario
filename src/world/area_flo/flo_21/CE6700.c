@@ -138,7 +138,7 @@ EvtScript N(80240E3C) = {
     EVT_CALL(PlaySoundAtPlayer, 312, 0)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_SET(GB_StoryProgress, 57)
-    EVT_CALL(GotoMapSpecial, EVT_PTR("kmr_23"), 5, 14)
+    EVT_CALL(GotoMapSpecial, EVT_ADDR("kmr_23"), 5, 14)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END
@@ -159,7 +159,7 @@ EvtScript N(main) = {
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
     EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
     EVT_CALL(SetCamEnabled, 0, 1)
-    EVT_CALL(MakeNpcs, 0, EVT_PTR(N(npcGroupList_80245AEC)))
+    EVT_CALL(MakeNpcs, 0, EVT_ADDR(N(npcGroupList_80245AEC)))
     EVT_EXEC(N(80241B98))
     EVT_CALL(HidePlayerShadow, TRUE)
     EVT_EXEC(N(80241600))
@@ -167,7 +167,7 @@ EvtScript N(main) = {
     EVT_CALL(ModifyColliderFlags, 3, 7, 0x00000007)
     EVT_CALL(GetEntryID, LocalVar(0))
     EVT_CALL(ModifyColliderFlags, 0, 1, 0x7FFFFE00)
-    EVT_SET(LocalVar(0), EVT_PTR(N(80241350)))
+    EVT_SET(LocalVar(0), EVT_ADDR(N(80241350)))
     EVT_EXEC(EnterWalk)
     EVT_EXEC_WAIT(N(80240D40))
     EVT_IF_GE(GB_StoryProgress, 53)
@@ -319,7 +319,7 @@ EvtScript N(80241920) = {
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(SetPlayerAnimation, ANIM_80017)
-        EVT_CALL(LoadPath, 30, EVT_PTR(N(vectorList_8024189C)), 3, 0)
+        EVT_CALL(LoadPath, 30, EVT_ADDR(N(vectorList_8024189C)), 3, 0)
         EVT_LABEL(0)
         EVT_CALL(GetNextPathPos)
         EVT_CALL(SetPlayerPos, LocalVar(1), LocalVar(2), LocalVar(3))
@@ -555,7 +555,7 @@ EvtScript N(80242918) = {
     EVT_SETF(MapVar(11), EVT_FIXED(1.0))
     EVT_SETF(MapVar(12), EVT_FIXED(1.0))
     EVT_CHILD_THREAD
-        EVT_USE_BUF(EVT_PTR(N(intTable_8024258C)))
+        EVT_USE_BUF(EVT_ADDR(N(intTable_8024258C)))
         EVT_LOOP(6)
             EVT_CALL(PlaySoundAtNpc, 0, 0x20B6, 0)
             EVT_BUF_READ3(LocalVar(6), LocalVar(7), LocalVar(8))
@@ -572,7 +572,7 @@ EvtScript N(80242918) = {
             EVT_WAIT(1)
         EVT_END_LOOP
         EVT_LOOP(0)
-            EVT_USE_BUF(EVT_PTR(N(intTable_802425D4)))
+            EVT_USE_BUF(EVT_ADDR(N(intTable_802425D4)))
             EVT_LOOP(2)
                 EVT_CALL(PlaySoundAtNpc, 0, 0x20B6, 0)
                 EVT_BUF_READ2(LocalVar(6), LocalVar(7))
@@ -590,7 +590,7 @@ EvtScript N(80242918) = {
         EVT_END_LOOP
     EVT_END_CHILD_THREAD
     EVT_CHILD_THREAD
-        EVT_USE_BUF(EVT_PTR(N(intTable_802425E4)))
+        EVT_USE_BUF(EVT_ADDR(N(intTable_802425E4)))
         EVT_LOOP(6)
             EVT_BUF_READ3(LocalVar(6), LocalVar(7), LocalVar(8))
             EVT_CALL(MakeLerp, LocalVar(6), LocalVar(7), LocalVar(8), 11)
@@ -606,7 +606,7 @@ EvtScript N(80242918) = {
             EVT_WAIT(1)
         EVT_END_LOOP
         EVT_LOOP(0)
-            EVT_USE_BUF(EVT_PTR(N(intTable_8024262C)))
+            EVT_USE_BUF(EVT_ADDR(N(intTable_8024262C)))
             EVT_LOOP(2)
                 EVT_BUF_READ2(LocalVar(6), LocalVar(7))
                 EVT_CALL(MakeLerp, LocalVar(6), LocalVar(7), 4, 11)
@@ -648,7 +648,7 @@ EvtScript N(80242D34) = {
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_CHILD_THREAD
-    EVT_USE_BUF(EVT_PTR(N(intTable_8024249C)))
+    EVT_USE_BUF(EVT_ADDR(N(intTable_8024249C)))
     EVT_SET(LocalVar(8), 3)
     EVT_LOOP(14)
         EVT_BUF_READ4(LocalVar(1), LocalVar(2), LocalVar(3), LocalVar(4))
@@ -772,8 +772,8 @@ EvtScript N(defeat_802435D4) = {
 EvtScript N(init_802435E4) = {
     EVT_IF_LT(GB_StoryProgress, 56)
         EVT_CALL(SetEnemyFlagBits, -1, 4194304, 1)
-        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80243428)))
-        EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(defeat_802434D8)))
+        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_ADDR(N(idle_80243428)))
+        EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_ADDR(N(defeat_802434D8)))
         EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_huff_n_puff_Palette_00_Anim_2)
     EVT_ELSE
         EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
@@ -785,7 +785,7 @@ EvtScript N(init_802435E4) = {
 EvtScript N(init_80243684) = {
     EVT_IF_LT(GB_StoryProgress, 56)
         EVT_CALL(SetEnemyFlagBits, -1, 4194304, 1)
-        EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(defeat_802435D4)))
+        EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_ADDR(N(defeat_802435D4)))
         EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_huff_n_puff_Palette_00_Anim_1)
         EVT_EXEC(N(80242290))
     EVT_ELSE
@@ -798,7 +798,7 @@ EvtScript N(init_80243684) = {
 EvtScript N(init_8024371C) = {
     EVT_IF_LT(GB_StoryProgress, 56)
         EVT_CALL(SetEnemyFlagBits, -1, 4194304, 1)
-        EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(defeat_802435D4)))
+        EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_ADDR(N(defeat_802435D4)))
         EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_huff_n_puff_Palette_00_Anim_19)
     EVT_ELSE
         EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)

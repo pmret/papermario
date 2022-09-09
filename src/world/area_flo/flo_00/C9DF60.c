@@ -156,7 +156,7 @@ EvtScript N(8024196C) = {
         EVT_END_IF
     EVT_END_LOOP
     EVT_CALL(PlaySoundAtCollider, 2, 464, 0)
-    EVT_CALL(GotoMap, EVT_PTR("mac_01"), 5)
+    EVT_CALL(GotoMap, EVT_ADDR("mac_01"), 5)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END
@@ -429,7 +429,7 @@ EvtScript N(80242998) = {
     EVT_WAIT(20)
     EVT_CALL(ShowMessageAtWorldPos, MESSAGE_ID(0x11, 0x00C4), 0, 50, -200)
     EVT_WAIT(10)
-    EVT_CALL(GotoMap, EVT_PTR(N(flo_07_name_hack)), 1)
+    EVT_CALL(GotoMap, EVT_ADDR(N(flo_07_name_hack)), 1)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END
@@ -1346,7 +1346,7 @@ EvtScript N(80245EB8) = {
     EVT_CALL(InterpNpcYaw, 0, 270, 0)
     EVT_WAIT(40)
     EVT_CALL(FadeOutMusic, 0, 1000)
-    EVT_CALL(GotoMap, EVT_PTR(N(sam_11_name_hack)), 2)
+    EVT_CALL(GotoMap, EVT_ADDR(N(sam_11_name_hack)), 2)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END
@@ -1718,7 +1718,7 @@ EvtScript N(802477EC) = {
             EVT_WAIT(1)
             EVT_GOTO(10)
         EVT_END_IF
-        EVT_CALL(GotoMap, EVT_PTR(N(flo_19_name_hack)), 3)
+        EVT_CALL(GotoMap, EVT_ADDR(N(flo_19_name_hack)), 3)
         EVT_WAIT(100)
     EVT_END_IF
     EVT_RETURN
@@ -1840,7 +1840,7 @@ EvtScript N(80247FAC) = {
     EVT_END_IF
     EVT_CALL(FadeInMusic, 0, 50, 0, 3000, 0, 127)
     EVT_CALL(FadeOutMusic, 1, 3000)
-    EVT_CALL(GotoMap, EVT_PTR(N(flo_19_name_hack)), 2)
+    EVT_CALL(GotoMap, EVT_ADDR(N(flo_19_name_hack)), 2)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END

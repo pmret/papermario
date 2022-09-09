@@ -54,7 +54,7 @@ EvtScript N(exitDoubleDoor_80243920) = {
     EVT_SET(LocalVar(3), 12)
     EVT_EXEC(ExitDoubleDoor)
     EVT_WAIT(17)
-    EVT_CALL(GotoMap, EVT_PTR("dgb_03"), 4)
+    EVT_CALL(GotoMap, EVT_ADDR("dgb_03"), 4)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END
@@ -70,7 +70,7 @@ EvtScript N(exitDoubleDoor_802439D4) = {
     EVT_SET(LocalVar(3), 15)
     EVT_EXEC(ExitDoubleDoor)
     EVT_WAIT(17)
-    EVT_CALL(GotoMap, EVT_PTR("dgb_01"), 3)
+    EVT_CALL(GotoMap, EVT_ADDR("dgb_01"), 3)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END
@@ -86,7 +86,7 @@ EvtScript N(exitSingleDoor_80243A88) = {
     EVT_SET(LocalVar(3), 1)
     EVT_EXEC(ExitSingleDoor)
     EVT_WAIT(17)
-    EVT_CALL(GotoMap, EVT_PTR("dgb_12"), 0)
+    EVT_CALL(GotoMap, EVT_ADDR("dgb_12"), 0)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END
@@ -122,7 +122,7 @@ EvtScript N(enterWalk_80243BC4) = {
             EVT_EXEC_WAIT(EnterSingleDoor)
             EVT_EXEC(N(80243B98))
         EVT_CASE_EQ(3)
-            EVT_SET(LocalVar(0), EVT_PTR(N(80243B98)))
+            EVT_SET(LocalVar(0), EVT_ADDR(N(80243B98)))
             EVT_EXEC(EnterWalk)
             EVT_WAIT(1)
     EVT_END_SWITCH
@@ -137,7 +137,7 @@ EvtScript N(main) = {
     EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
     EVT_CALL(SetCamEnabled, 0, 1)
     EVT_IF_LT(GB_StoryProgress, -15)
-        EVT_CALL(MakeNpcs, 1, EVT_PTR(N(npcGroupList_8024533C)))
+        EVT_CALL(MakeNpcs, 1, EVT_ADDR(N(npcGroupList_8024533C)))
     EVT_END_IF
     EVT_EXEC(N(80243F6C))
     EVT_BIND_TRIGGER(N(exitDoubleDoor_80243920), TRIGGER_WALL_PRESS_A, 5, 1, 0)
@@ -175,7 +175,7 @@ EvtScript N(80243E60) = {
 
 EvtScript N(80243F6C) = {
     EVT_IF_EQ(GF_DGB09_BombedWall, 0)
-        EVT_BIND_TRIGGER(N(80243E60), TRIGGER_POINT_BOMB, EVT_PTR(N(triggerCoord_80243E50)), 1, 0)
+        EVT_BIND_TRIGGER(N(80243E60), TRIGGER_POINT_BOMB, EVT_ADDR(N(triggerCoord_80243E50)), 1, 0)
         EVT_CALL(EnableModel, 29, 0)
     EVT_ELSE
         EVT_CALL(EnableModel, 25, 0)
@@ -243,7 +243,7 @@ EvtScript N(npcAI_8024411C) = {
     EVT_CALL(SetSelfVar, 1, 5)
     EVT_CALL(SetSelfVar, 2, 8)
     EVT_CALL(SetSelfVar, 3, 12)
-    EVT_CALL(N(WanderMeleeAI_Main), EVT_PTR(N(npcAISettings_802440EC)))
+    EVT_CALL(N(WanderMeleeAI_Main), EVT_ADDR(N(npcAISettings_802440EC)))
     EVT_RETURN
     EVT_END
 };
@@ -277,7 +277,7 @@ EvtScript N(npcAI_802441E8) = {
     EVT_CALL(SetSelfVar, 1, 10)
     EVT_CALL(SetSelfVar, 2, 14)
     EVT_CALL(SetSelfVar, 3, 18)
-    EVT_CALL(N(ClubbaNappingAI_Main), EVT_PTR(N(npcAISettings_802441B8)))
+    EVT_CALL(N(ClubbaNappingAI_Main), EVT_ADDR(N(npcAISettings_802441B8)))
     EVT_RETURN
     EVT_END
 };
@@ -345,7 +345,7 @@ EvtScript N(npcAI_802443DC) = {
     EVT_CALL(SetSelfVar, 5, -650)
     EVT_CALL(SetSelfVar, 6, 30)
     EVT_CALL(SetSelfVar, 1, 600)
-    EVT_CALL(N(SentinelAI_Main), EVT_PTR(N(npcAISettings_802443AC)))
+    EVT_CALL(N(SentinelAI_Main), EVT_ADDR(N(npcAISettings_802443AC)))
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_WAIT(2)
     EVT_LABEL(20)
@@ -395,7 +395,7 @@ EvtScript N(npcAI_802443DC) = {
         EVT_CALL(NpcJump0, NPC_PARTNER, LocalVar(0), LocalVar(1), LocalVar(2), 10)
     EVT_END_THREAD
     EVT_WAIT(30)
-    EVT_CALL(GotoMap, EVT_PTR(N(dgb_00_name_hack)), 2)
+    EVT_CALL(GotoMap, EVT_ADDR(N(dgb_00_name_hack)), 2)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END

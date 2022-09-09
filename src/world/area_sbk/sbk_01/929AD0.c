@@ -18,7 +18,7 @@ MobileAISettings N(npcAISettings_80240370) = {
 
 EvtScript N(npcAI_802403A0) = {
     EVT_CALL(N(SetNpcB5_3))
-    EVT_CALL(BasicAI_Main, EVT_PTR(N(npcAISettings_80240370)))
+    EVT_CALL(BasicAI_Main, EVT_ADDR(N(npcAISettings_80240370)))
     EVT_RETURN
     EVT_END
 };

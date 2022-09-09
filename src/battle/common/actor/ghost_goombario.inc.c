@@ -432,7 +432,7 @@ EvtScript N(goombario_attack) = {
                 EVT_SET(LocalVar(0), 0)
                 EVT_LOOP(6)
                     EVT_ADD(LocalVar(0), 30)
-                    EVT_CALL(SetActorRotation, ACTOR_SELF, 0, EVT_LIMIT, LocalVar(0))
+                    EVT_CALL(SetActorRotation, ACTOR_SELF, 0, EVT_IGNORE_ARG, LocalVar(0))
                     EVT_WAIT(1)
                 EVT_END_LOOP
                 EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_battle_goombario_default_headbonk)
@@ -441,7 +441,7 @@ EvtScript N(goombario_attack) = {
                 EVT_SET(LocalVar(0), 0)
                 EVT_LOOP(LocalVar(10))
                     EVT_ADD(LocalVar(0), 133)
-                    EVT_CALL(SetActorRotation, ACTOR_SELF, EVT_LIMIT, LocalVar(0), EVT_LIMIT)
+                    EVT_CALL(SetActorRotation, ACTOR_SELF, EVT_IGNORE_ARG, LocalVar(0), EVT_IGNORE_ARG)
                     EVT_WAIT(1)
                 EVT_END_LOOP
             EVT_END_THREAD

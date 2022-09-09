@@ -62,7 +62,7 @@ EvtScript D_800939B4 = {
     EVT_CALL(GetSelfVar, 0, LocalVar(0))
     EVT_IF_EQ(LocalVar(0), 0)
         EVT_CALL(SetSelfVar, 0, 1)
-        EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(D_800939A4))
+        EVT_CALL(BindNpcAI, NPC_SELF, EVT_ADDR(D_800939A4))
         EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY | NPC_FLAG_40000, TRUE)
         EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_JUMPING, FALSE)
         EVT_CALL(SetNpcAnimation, NPC_SELF, LocalVar(2))

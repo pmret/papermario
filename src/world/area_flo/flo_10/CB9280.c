@@ -412,7 +412,7 @@ EvtScript N(802425E4) = {
     EVT_CALL(ShakeCam, 0, 0, 5, EVT_FLOAT(1.0))
     EVT_EXEC_WAIT(N(802425BC))
     EVT_WAIT(60)
-    EVT_CALL(GotoMap, EVT_PTR(N(flo_24_name_hack)), 2)
+    EVT_CALL(GotoMap, EVT_ADDR(N(flo_24_name_hack)), 2)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END
@@ -611,7 +611,7 @@ EvtScript N(8024324C) = {
     EVT_WAIT(20)
     EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_lily_Palette_00_Anim_2, NPC_ANIM_lily_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x00C6))
     EVT_WAIT(10)
-    EVT_CALL(GotoMap, EVT_PTR("flo_12"), 1)
+    EVT_CALL(GotoMap, EVT_ADDR("flo_12"), 1)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END

@@ -45,7 +45,7 @@ EvtScript N(exitSingleDoor_80240170) = {
     EVT_SET(LocalVar(3), -1)
     EVT_EXEC(ExitSingleDoor)
     EVT_WAIT(17)
-    EVT_CALL(GotoMap, EVT_PTR("dgb_02"), 3)
+    EVT_CALL(GotoMap, EVT_ADDR("dgb_02"), 3)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END
@@ -179,7 +179,7 @@ EvtScript N(8024062C) = {
             EVT_WAIT(1)
             EVT_THREAD
                 EVT_WAIT(8)
-                EVT_CALL(GotoMap, EVT_PTR("dgb_10"), 1)
+                EVT_CALL(GotoMap, EVT_ADDR("dgb_10"), 1)
                 EVT_WAIT(100)
             EVT_END_THREAD
             EVT_SET(LocalVar(3), 500)
@@ -208,8 +208,8 @@ EvtScript N(8024062C) = {
 
 EvtScript N(makeEntities) = {
     EVT_CALL(MakeItemEntity, ITEM_D_DOWN_JUMP, 250, 75, -100, 17, GF_DGB11_Item_DDownJump)
-    EVT_CALL(MakeEntity, EVT_PTR(Entity_ScriptSpring), 375, 0, -250, 0, MAKE_ENTITY_END)
-    EVT_CALL(AssignScript, EVT_PTR(N(8024062C)))
+    EVT_CALL(MakeEntity, EVT_ADDR(Entity_ScriptSpring), 375, 0, -250, 0, MAKE_ENTITY_END)
+    EVT_CALL(AssignScript, EVT_ADDR(N(8024062C)))
     EVT_SET(MapVar(0), LocalVar(0))
     EVT_RETURN
     EVT_END

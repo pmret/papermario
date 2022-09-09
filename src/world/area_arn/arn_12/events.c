@@ -12,7 +12,7 @@ EvtScript N(exitSingleDoor_80240100) = {
     EVT_SET(LocalVar(3), -1)
     EVT_EXEC(ExitSingleDoor)
     EVT_WAIT(17)
-    EVT_CALL(GotoMap, EVT_PTR("arn_10"), 1)
+    EVT_CALL(GotoMap, EVT_ADDR("arn_10"), 1)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END
@@ -27,7 +27,7 @@ EvtScript N(exitSingleDoor_802401A4) = {
     EVT_SET(LocalVar(3), 1)
     EVT_EXEC(ExitSingleDoor)
     EVT_WAIT(17)
-    EVT_CALL(GotoMap, EVT_PTR("arn_13"), 0)
+    EVT_CALL(GotoMap, EVT_ADDR("arn_13"), 0)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END
@@ -65,7 +65,7 @@ EvtScript N(main) = {
     EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
     EVT_CALL(SetCamLeadPlayer, 0, 0)
     EVT_CALL(SetCamEnabled, 0, 1)
-    EVT_CALL(MakeNpcs, 0, EVT_PTR(N(npcGroupList_80240BBC)))
+    EVT_CALL(MakeNpcs, 0, EVT_ADDR(N(npcGroupList_80240BBC)))
     EVT_EXEC_WAIT(N(makeEntities))
     EVT_EXEC(N(enterSingleDoor_80240290))
     EVT_EXEC(N(80240060))
@@ -109,7 +109,7 @@ MobileAISettings N(npcAISettings_8024046C) = {
 };
 
 EvtScript N(npcAI_8024049C) = {
-    EVT_CALL(BasicAI_Main, EVT_PTR(N(npcAISettings_8024046C)))
+    EVT_CALL(BasicAI_Main, EVT_ADDR(N(npcAISettings_8024046C)))
     EVT_RETURN
     EVT_END
 };
@@ -159,7 +159,7 @@ EvtScript N(defeat_802406E4) = {
 };
 
 EvtScript N(init_80240710) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_802404E8)))
+    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_ADDR(N(idle_802404E8)))
     EVT_IF_NE(GB_StoryProgress, -21)
         EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_END_IF
@@ -173,9 +173,9 @@ EvtScript N(init_8024075C) = {
             EVT_CALL(RemoveNpc, NPC_SELF)
             EVT_RETURN
         EVT_END_IF
-        EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(defeat_802406E4)))
+        EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_ADDR(N(defeat_802406E4)))
     EVT_END_IF
-    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(defeat_802406E4)))
+    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_ADDR(N(defeat_802406E4)))
     EVT_RETURN
     EVT_END
 };
@@ -263,8 +263,8 @@ EvtScript N(80240BE0) = {
 };
 
 EvtScript N(makeEntities) = {
-    EVT_CALL(MakeEntity, EVT_PTR(Entity_Signpost), 200, 0, -40, 0, MAKE_ENTITY_END)
-    EVT_CALL(AssignScript, EVT_PTR(N(80240BE0)))
+    EVT_CALL(MakeEntity, EVT_ADDR(Entity_Signpost), 200, 0, -40, 0, MAKE_ENTITY_END)
+    EVT_CALL(AssignScript, EVT_ADDR(N(80240BE0)))
     EVT_RETURN
     EVT_END
 };

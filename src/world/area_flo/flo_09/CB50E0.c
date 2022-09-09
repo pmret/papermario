@@ -92,7 +92,7 @@ EvtScript N(main) = {
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
     EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
     EVT_CALL(SetCamEnabled, 0, 1)
-    EVT_CALL(MakeNpcs, 0, EVT_PTR(N(npcGroupList_8024414C)))
+    EVT_CALL(MakeNpcs, 0, EVT_ADDR(N(npcGroupList_8024414C)))
     EVT_EXEC(N(802425DC))
     EVT_EXEC(N(802434A8))
     EVT_CALL(ModifyColliderFlags, 3, 9, 0x00000006)
@@ -134,7 +134,7 @@ EvtScript N(main) = {
     EVT_EXEC(N(802418F0))
     EVT_CALL(ModifyColliderFlags, 0, 1, 0x7FFFFE00)
     EVT_CALL(ModifyColliderFlags, 0, 5, 0x7FFFFE00)
-    EVT_SET(LocalVar(0), EVT_PTR(N(80241C54)))
+    EVT_SET(LocalVar(0), EVT_ADDR(N(80241C54)))
     EVT_EXEC(EnterWalk)
     EVT_EXEC_WAIT(N(80241880))
     EVT_IF_GE(GB_StoryProgress, 53)
@@ -403,15 +403,15 @@ Vec4f N(triggerCoord_80243498) = { 200.0f, 0.0f, 1.0f, 0.0f };
 EvtScript N(802434A8) = {
     EVT_SET(AreaByte(4), 0)
     EVT_SET(AreaByte(5), 0)
-    EVT_SET(LocalVar(0), EVT_PTR(N(tree1)))
+    EVT_SET(LocalVar(0), EVT_ADDR(N(tree1)))
     EVT_BIND_TRIGGER(N(shakeTree), TRIGGER_WALL_HAMMER, 15, 1, 0)
-    EVT_BIND_TRIGGER(N(shakeTree), TRIGGER_POINT_BOMB, EVT_PTR(N(triggerCoord_80243428)), 1, 0)
-    EVT_SET(LocalVar(0), EVT_PTR(N(tree2)))
+    EVT_BIND_TRIGGER(N(shakeTree), TRIGGER_POINT_BOMB, EVT_ADDR(N(triggerCoord_80243428)), 1, 0)
+    EVT_SET(LocalVar(0), EVT_ADDR(N(tree2)))
     EVT_BIND_TRIGGER(N(shakeTree), TRIGGER_WALL_HAMMER, 16, 1, 0)
-    EVT_BIND_TRIGGER(N(shakeTree), TRIGGER_POINT_BOMB, EVT_PTR(N(triggerCoord_80243460)), 1, 0)
-    EVT_SET(LocalVar(0), EVT_PTR(N(tree3)))
+    EVT_BIND_TRIGGER(N(shakeTree), TRIGGER_POINT_BOMB, EVT_ADDR(N(triggerCoord_80243460)), 1, 0)
+    EVT_SET(LocalVar(0), EVT_ADDR(N(tree3)))
     EVT_BIND_TRIGGER(N(shakeTree), TRIGGER_WALL_HAMMER, 17, 1, 0)
-    EVT_BIND_TRIGGER(N(shakeTree), TRIGGER_POINT_BOMB, EVT_PTR(N(triggerCoord_80243498)), 1, 0)
+    EVT_BIND_TRIGGER(N(shakeTree), TRIGGER_POINT_BOMB, EVT_ADDR(N(triggerCoord_80243498)), 1, 0)
     EVT_RETURN
     EVT_END
 };
@@ -432,7 +432,7 @@ MobileAISettings N(npcAISettings_802435B0) = {
 };
 
 EvtScript N(npcAI_802435E0) = {
-    EVT_CALL(BasicAI_Main, EVT_PTR(N(npcAISettings_802435B0)))
+    EVT_CALL(BasicAI_Main, EVT_ADDR(N(npcAISettings_802435B0)))
     EVT_RETURN
     EVT_END
 };
@@ -471,7 +471,7 @@ EvtScript N(npcAI_80243674) = {
     EVT_CALL(SetSelfVar, 5, -630)
     EVT_CALL(SetSelfVar, 6, 50)
     EVT_CALL(SetSelfVar, 1, 200)
-    EVT_CALL(N(FlyingAI_Main), EVT_PTR(N(npcAISettings_80243644)))
+    EVT_CALL(N(FlyingAI_Main), EVT_ADDR(N(npcAISettings_80243644)))
     EVT_RETURN
     EVT_END
 };
@@ -502,7 +502,7 @@ EvtScript N(npcAI_8024373C) = {
                     EVT_CALL(SetNpcJumpscale, NPC_SELF, 0)
                     EVT_CALL(NpcJump0, NPC_SELF, LocalVar(0), 50, LocalVar(2), 15)
                     EVT_CALL(SetSelfVar, 0, 1)
-                    EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(npcAI_80243674)))
+                    EVT_CALL(BindNpcAI, NPC_SELF, EVT_ADDR(N(npcAI_80243674)))
                 EVT_END_IF
             EVT_CASE_EQ(2)
                 EVT_CALL(DisablePlayerInput, TRUE)
@@ -523,7 +523,7 @@ EvtScript N(defeat_802438C8) = {
     EVT_SWITCH(LocalVar(0))
         EVT_CASE_EQ(0)
             EVT_CALL(SetSelfVar, 0, 2)
-            EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(npcAI_8024373C)))
+            EVT_CALL(BindNpcAI, NPC_SELF, EVT_ADDR(N(npcAI_8024373C)))
             EVT_CALL(DoNpcDefeat)
         EVT_CASE_EQ(1)
         EVT_CASE_EQ(2)
@@ -533,8 +533,8 @@ EvtScript N(defeat_802438C8) = {
 };
 
 EvtScript N(init_80243954) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(npcAI_8024373C)))
-    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(defeat_802438C8)))
+    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_ADDR(N(npcAI_8024373C)))
+    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_ADDR(N(defeat_802438C8)))
     EVT_RETURN
     EVT_END
 };

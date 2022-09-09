@@ -424,7 +424,7 @@ EvtScript N(interact_80241CD8) = {
 };
 
 EvtScript N(init_80241F70) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_80241CD8)))
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_ADDR(N(interact_80241CD8)))
     EVT_RETURN
     EVT_END
 };
@@ -845,7 +845,7 @@ static s32 N(pad_3758)[] = {
 };
 
 EvtScript N(makeEntities) = {
-    EVT_CALL(MakeEntity, EVT_PTR(Entity_SavePoint), -65, 60, -240, 0, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, EVT_ADDR(Entity_SavePoint), -65, 60, -240, 0, MAKE_ENTITY_END)
     EVT_RETURN
     EVT_END
 };

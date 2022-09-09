@@ -1220,7 +1220,7 @@ s32 evt_handle_print_debug_var(Evt* script) {
 
     do {} while (0);
 
-    if (var <= -270000000) {
+    if (var <= EVT_LIMIT) {
         sprintf(evtDebugPrintBuffer, "ADDR     [%08X]", var);
     } else if (var <= -220000000) {
         sprintf(evtDebugPrintBuffer, "FLOAT    [%4.2f]", evt_fixed_var_to_float(var));
@@ -1234,7 +1234,7 @@ s32 evt_handle_print_debug_var(Evt* script) {
         var += 190000000;
         arrayVal = script->array[var];
 
-        if (script->array[var] <= -270000000) {
+        if (script->array[var] <= EVT_LIMIT) {
             sprintf(evtDebugPrintBuffer, "UW(%3d)  [%08X]", arrayVal);
         } else if (arrayVal <= -220000000) {
             sprintf(evtDebugPrintBuffer, "UW(%3d)  [%4.2f]", var, evt_fixed_var_to_float(arrayVal));
@@ -1247,7 +1247,7 @@ s32 evt_handle_print_debug_var(Evt* script) {
         var += 170000000;
         globalByte = get_global_byte(var);
 
-        if (globalByte <= -270000000) {
+        if (globalByte <= EVT_LIMIT) {
             sprintf(evtDebugPrintBuffer, "GSW(%3d) [%08X]", globalByte);
         } else if (globalByte <= -220000000) {
             sprintf(evtDebugPrintBuffer, "GSW(%3d) [%4.2f]", var, evt_fixed_var_to_float(globalByte));
@@ -1260,7 +1260,7 @@ s32 evt_handle_print_debug_var(Evt* script) {
         var += 150000000;
         areaByte = get_area_byte(var);
 
-        if (areaByte <= -270000000) {
+        if (areaByte <= EVT_LIMIT) {
             sprintf(evtDebugPrintBuffer, "LSW(%3d) [%08X]", areaByte);
         } else if (areaByte <= -220000000) {
             sprintf(evtDebugPrintBuffer, "LSW(%3d)  [%4.2f]", var, evt_fixed_var_to_float(areaByte));
@@ -1288,7 +1288,7 @@ s32 evt_handle_print_debug_var(Evt* script) {
         do {
             var += 50000000;
             mapVar = gMapVars[var];
-            temp = -270000000;
+            temp = EVT_LIMIT;
         } while (0);
 
         if (mapVar <= temp) {
@@ -1306,7 +1306,7 @@ s32 evt_handle_print_debug_var(Evt* script) {
 
         do {} while (0);
 
-        if (tableVar <= -270000000) {
+        if (tableVar <= EVT_LIMIT) {
             sprintf(evtDebugPrintBuffer, "LW(%3d)  [%08X]", tableVar);
         } else if (tableVar <= -220000000) {
             sprintf(evtDebugPrintBuffer, "LW(%3d)  [%4.2f]", var, evt_fixed_var_to_float(tableVar));
@@ -1679,9 +1679,9 @@ s32 evt_get_variable(Evt* script, Bytecode var) {
     s32 bitIdx;
     s32 temp;
 
-    if (var <= -270000000) {
+    if (var <= EVT_LIMIT) {
         return var;
-    } else if (var <= EVT_LIMIT) {
+    } else if (var <= EVT_IGNORE_ARG) {
         return var;
     } else if (var <= -220000000) {
         return evt_fixed_var_to_float(var);
@@ -1694,7 +1694,7 @@ s32 evt_get_variable(Evt* script, Bytecode var) {
     } else if (var <= -180000000) {
         var += 190000000;
         var = script->array[var];
-        if (var > -270000000) {
+        if (var > EVT_LIMIT) {
             if (var <= -220000000){
                 var = evt_fixed_var_to_float(var);
             }
@@ -1726,7 +1726,7 @@ s32 evt_get_variable(Evt* script, Bytecode var) {
     } else if (var <= -40000000) {
         var += 50000000;
         var = gMapVars[var];
-        if (var > -270000000) {
+        if (var > EVT_LIMIT) {
             temp = -220000000;
             if (var <= temp){
                 var = evt_fixed_var_to_float(var);
@@ -1735,7 +1735,7 @@ s32 evt_get_variable(Evt* script, Bytecode var) {
     } else if (var <= -20000000) {
         var += 30000000;
         var = script->varTable[var];
-        if (var > -270000000) {
+        if (var > EVT_LIMIT) {
             temp = -220000000;
             if (var <= temp){
                 var = evt_fixed_var_to_float(var);
@@ -1746,10 +1746,10 @@ s32 evt_get_variable(Evt* script, Bytecode var) {
 }
 
 s32 evt_get_variable_index(Evt* script, s32 var) {
-    if (-270000000 >= var) {
+    if (EVT_LIMIT >= var) {
         return var;
     }
-    if (EVT_LIMIT >= var) {
+    if (EVT_IGNORE_ARG >= var) {
         return var;
     }
     if (-220000000 >= var) {
@@ -1789,10 +1789,10 @@ s32 evt_get_variable_index(Evt* script, s32 var) {
 }
 
 s32 evt_get_variable_index_alt(s32 var) {
-    if (-270000000 >= var) {
+    if (EVT_LIMIT >= var) {
         return var;
     }
-    if (EVT_LIMIT >= var) {
+    if (EVT_IGNORE_ARG >= var) {
         return var;
     }
     if (-220000000 >= var) {
@@ -1835,7 +1835,7 @@ s32 evt_set_variable(Evt* script, Bytecode var, s32 value) {
     s32 temp;
     s32 oldValue;
 
-    if (var <= -270000000) {
+    if (var <= EVT_LIMIT) {
         return value;
     } else if (var <= -220000000) {
         return evt_fixed_var_to_float(value);
@@ -1917,9 +1917,9 @@ s32 evt_set_variable(Evt* script, Bytecode var, s32 value) {
 f32 evt_get_float_variable(Evt* script, Bytecode var) {
     s32 temp;
 
-    if (var <= -270000000) {
+    if (var <= EVT_LIMIT) {
         return var;
-    } else if (var <= EVT_LIMIT) {
+    } else if (var <= EVT_IGNORE_ARG) {
         return var;
     } else if (var <= -220000000) {
         return evt_fixed_var_to_float(var);
@@ -1965,7 +1965,7 @@ f32 evt_set_float_variable(Evt* script, Bytecode var, f32 value) {
     s32 temp;
     s32 oldValue;
 
-    if (var <= -270000000) {
+    if (var <= EVT_LIMIT) {
         return value;
     } else if (var <= -220000000) {
         return value;
@@ -2011,7 +2011,7 @@ Bytecode* evt_find_label(Evt* script, s32 arg1) {
     Bytecode* ret = script->ptrReadPos;
     s32 i;
 
-    if (arg1 < -270000000) {
+    if (arg1 < EVT_LIMIT) {
         return arg1;
     }
 

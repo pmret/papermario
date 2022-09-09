@@ -56,7 +56,7 @@ EvtScript N(exitDoubleDoor_802419C8) = {
     EVT_SET(LocalVar(3), 14)
     EVT_EXEC(ExitDoubleDoor)
     EVT_WAIT(17)
-    EVT_CALL(GotoMap, EVT_PTR("dgb_14"), 1)
+    EVT_CALL(GotoMap, EVT_ADDR("dgb_14"), 1)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END
@@ -72,7 +72,7 @@ EvtScript N(exitDoubleDoor_80241A7C) = {
     EVT_SET(LocalVar(3), 17)
     EVT_EXEC(ExitDoubleDoor)
     EVT_WAIT(17)
-    EVT_CALL(GotoMap, EVT_PTR("dgb_17"), 0)
+    EVT_CALL(GotoMap, EVT_ADDR("dgb_17"), 0)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END
@@ -88,7 +88,7 @@ EvtScript N(exitSingleDoor_80241B30) = {
     EVT_SET(LocalVar(3), 1)
     EVT_EXEC(ExitSingleDoor)
     EVT_WAIT(17)
-    EVT_CALL(GotoMap, EVT_PTR("dgb_16"), 0)
+    EVT_CALL(GotoMap, EVT_ADDR("dgb_16"), 0)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END
@@ -100,7 +100,7 @@ EvtScript N(80241BE4) = {
     EVT_BIND_TRIGGER(N(exitDoubleDoor_802419C8), TRIGGER_WALL_PRESS_A, 19, 1, 0)
     EVT_BIND_TRIGGER(N(exitSingleDoor_80241B30), TRIGGER_WALL_PRESS_A, 6, 1, 0)
     EVT_IF_EQ(GF_DGB15_UnlockedUpperFoyer, 0)
-        EVT_BIND_PADLOCK(N(80242AD0), TRIGGER_WALL_PRESS_A, EVT_ENTITY_INDEX(0), EVT_PTR(N(itemList_802419C0)), 0, 1)
+        EVT_BIND_PADLOCK(N(80242AD0), TRIGGER_WALL_PRESS_A, EVT_ENTITY_INDEX(0), EVT_ADDR(N(itemList_802419C0)), 0, 1)
     EVT_ELSE
         EVT_BIND_TRIGGER(N(exitDoubleDoor_80241A7C), TRIGGER_WALL_PRESS_A, 10, 1, 0)
     EVT_END_IF
@@ -141,7 +141,7 @@ EvtScript N(main) = {
     EVT_CALL(SetCamEnabled, 0, 1)
     EVT_CALL(SetCamLeadPlayer, 0, 0)
     EVT_IF_EQ(GF_DGB16_EscapedFromTubba, 0)
-        EVT_CALL(MakeNpcs, 1, EVT_PTR(N(npcGroupList_80242AB0)))
+        EVT_CALL(MakeNpcs, 1, EVT_ADDR(N(npcGroupList_80242AB0)))
     EVT_END_IF
     EVT_EXEC_WAIT(N(makeEntities))
     EVT_EXEC(N(802418E0))
@@ -185,7 +185,7 @@ EvtScript N(80241FBC) = {
     EVT_CALL(SetSelfVar, 1, 5)
     EVT_CALL(SetSelfVar, 2, 8)
     EVT_CALL(SetSelfVar, 3, 12)
-    EVT_CALL(N(WanderMeleeAI_Main), EVT_PTR(N(D_80241F8C_C5149C)))
+    EVT_CALL(N(WanderMeleeAI_Main), EVT_ADDR(N(D_80241F8C_C5149C)))
     EVT_RETURN
     EVT_END
 };
@@ -278,7 +278,7 @@ EvtScript N(idle_80242238) = {
         EVT_CALL(PanToTarget, 0, 0, 0)
         EVT_CALL(DisablePlayerInput, FALSE)
     EVT_END_THREAD
-    EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(npcAI_8024274C)))
+    EVT_CALL(BindNpcAI, NPC_SELF, EVT_ADDR(N(npcAI_8024274C)))
     EVT_RETURN
     EVT_END
 };
@@ -341,7 +341,7 @@ EvtScript N(npcAI_8024274C) = {
     EVT_CALL(SetNpcFlagBits, NPC_SELF, ((NPC_FLAG_GRAVITY)), TRUE)
     EVT_CALL(SetNpcAnimation, 0, NPC_ANIM_world_tubba_Palette_00_Anim_C)
     EVT_EXEC(N(802424E8))
-    EVT_CALL(N(PatrolNoAttackAI_Main), EVT_PTR(N(npcAISettings_8024271C)))
+    EVT_CALL(N(PatrolNoAttackAI_Main), EVT_ADDR(N(npcAISettings_8024271C)))
     EVT_RETURN
     EVT_END
 };
@@ -350,7 +350,7 @@ extern const char N(dgb_14_name_hack)[];
 
 EvtScript N(defeat_802427B0) = {
     EVT_CALL(N(UnkFunc1))
-    EVT_CALL(GotoMap, EVT_PTR(N(dgb_14_name_hack)), 1)
+    EVT_CALL(GotoMap, EVT_ADDR(N(dgb_14_name_hack)), 1)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END
@@ -363,12 +363,12 @@ EvtScript N(init_802427EC) = {
     EVT_END_IF
     EVT_CALL(SetNpcScale, NPC_SELF, EVT_FIXED(1.25), EVT_FIXED(1.25), EVT_FIXED(1.25))
     EVT_IF_NE(GB_ARN_Tubba_MapID, 15)
-        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80242238)))
+        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_ADDR(N(idle_80242238)))
     EVT_ELSE
         EVT_CALL(SetNpcPos, NPC_SELF, -310, 0, 180)
-        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(npcAI_8024274C)))
+        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_ADDR(N(npcAI_8024274C)))
     EVT_END_IF
-    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(defeat_802427B0)))
+    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_ADDR(N(defeat_802427B0)))
     EVT_RETURN
     EVT_END
 };
@@ -459,8 +459,8 @@ EvtScript N(80242C38) = {
 
 EvtScript N(makeEntities) = {
     EVT_IF_EQ(GF_DGB15_UnlockedUpperFoyer, 0)
-        EVT_CALL(MakeEntity, EVT_PTR(Entity_Padlock), 130, 8, 175, -80, MAKE_ENTITY_END)
-        EVT_CALL(AssignScript, EVT_PTR(N(80242C38)))
+        EVT_CALL(MakeEntity, EVT_ADDR(Entity_Padlock), 130, 8, 175, -80, MAKE_ENTITY_END)
+        EVT_CALL(AssignScript, EVT_ADDR(N(80242C38)))
         EVT_SET(MapVar(0), LocalVar(0))
     EVT_END_IF
     EVT_RETURN

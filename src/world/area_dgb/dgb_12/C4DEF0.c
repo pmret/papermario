@@ -41,7 +41,7 @@ EvtScript N(exitSingleDoor_802403B0) = {
     EVT_SET(LocalVar(3), -1)
     EVT_EXEC(ExitSingleDoor)
     EVT_WAIT(17)
-    EVT_CALL(GotoMap, EVT_PTR("dgb_09"), 2)
+    EVT_CALL(GotoMap, EVT_ADDR("dgb_09"), 2)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END
@@ -86,7 +86,7 @@ EvtScript N(802405E0) = {
     EVT_CALL(ModifyColliderFlags, 3, 0, 0x00000002)
     EVT_CALL(ModifyColliderFlags, 3, 14, 0x00000002)
     EVT_THREAD
-        EVT_CALL(ResetFromLava, EVT_PTR(N(lavaResetList_802405C0)))
+        EVT_CALL(ResetFromLava, EVT_ADDR(N(lavaResetList_802405C0)))
     EVT_END_THREAD
     EVT_WAIT(50)
     EVT_CALL(TranslateModel, 19, 0, 0, 0)
@@ -138,7 +138,7 @@ static s32 N(pad_868)[] = {
 EvtScript N(makeEntities) = {
     EVT_CALL(MakeEntity, &Entity_Chest, -225, 0, -245, 0, 0, MAKE_ENTITY_END)
     EVT_CALL(AssignChestFlag, GF_DGB12_Chest_CastleKey1)
-    EVT_CALL(AssignScript, EVT_PTR(N(EVS_Chest_Interact)))
+    EVT_CALL(AssignScript, EVT_ADDR(N(EVS_Chest_Interact)))
     EVT_RETURN
     EVT_END
 };

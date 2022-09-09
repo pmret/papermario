@@ -445,7 +445,7 @@ EvtScript N(init) = {
         EVT_CALL(CreatePartShadow, ACTOR_SELF, LocalVar(0))
         EVT_ADD(LocalVar(0), 1)
     EVT_END_LOOP
-    EVT_CALL(SetActorSize, ACTOR_SELF, EVT_LIMIT, 72)
+    EVT_CALL(SetActorSize, ACTOR_SELF, EVT_IGNORE_ARG, 72)
     EVT_CALL(SetPartSize, ACTOR_SELF, 1, 24, 24)
     EVT_RETURN
     EVT_END
@@ -1435,13 +1435,13 @@ EvtScript N(updateActorSize) = {
     EVT_CALL(GetActorVar, ACTOR_SELF, N(ACTOR_VARS_GUYS_KILLED), LocalVar(0))
     EVT_SWITCH(LocalVar(0))
         EVT_CASE_LE(1)
-            EVT_CALL(SetActorSize, ACTOR_SELF, EVT_LIMIT, 72)
+            EVT_CALL(SetActorSize, ACTOR_SELF, EVT_IGNORE_ARG, 72)
         EVT_CASE_LE(2)
-            EVT_CALL(SetActorSize, ACTOR_SELF, EVT_LIMIT, 48)
+            EVT_CALL(SetActorSize, ACTOR_SELF, EVT_IGNORE_ARG, 48)
         EVT_CASE_LE(8)
-            EVT_CALL(SetActorSize, ACTOR_SELF, EVT_LIMIT, 24)
+            EVT_CALL(SetActorSize, ACTOR_SELF, EVT_IGNORE_ARG, 24)
         EVT_CASE_DEFAULT
-            EVT_CALL(SetActorSize, ACTOR_SELF, EVT_LIMIT, EVT_LIMIT)
+            EVT_CALL(SetActorSize, ACTOR_SELF, EVT_IGNORE_ARG, EVT_IGNORE_ARG)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END

@@ -43,7 +43,7 @@ EvtScript N(enterWalk_80240378) = {
     EVT_CALL(GetEntryID, LocalVar(0))
     EVT_SWITCH(LocalVar(0))
         EVT_CASE_EQ(0)
-            EVT_SET(LocalVar(0), EVT_PTR(N(8024034C)))
+            EVT_SET(LocalVar(0), EVT_ADDR(N(8024034C)))
             EVT_EXEC(EnterWalk)
             EVT_WAIT(1)
         EVT_CASE_EQ(1)
@@ -253,7 +253,7 @@ EvtScript N(80240E68) = {
     EVT_CALL(func_802CA988, 0, LocalVar(2), LocalVar(3), LocalVar(4), LocalVar(5))
     EVT_CALL(N(func_802401C0_C4C550))
     EVT_CALL(func_802D2B6C)
-    EVT_CALL(GotoMap, EVT_PTR("dgb_11"), LocalVar(0))
+    EVT_CALL(GotoMap, EVT_ADDR("dgb_11"), LocalVar(0))
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END
@@ -283,16 +283,16 @@ EvtScript N(80240F20) = {
 
 EvtScript N(makeEntities) = {
     EVT_IF_EQ(GF_DGB10_BoardedFloor1, 0)
-        EVT_CALL(MakeEntity, EVT_PTR(Entity_BoardedFloor), 500, 0, -100, 0, MAKE_ENTITY_END)
-        EVT_CALL(AssignScript, EVT_PTR(N(80240EE0)))
+        EVT_CALL(MakeEntity, EVT_ADDR(Entity_BoardedFloor), 500, 0, -100, 0, MAKE_ENTITY_END)
+        EVT_CALL(AssignScript, EVT_ADDR(N(80240EE0)))
     EVT_END_IF
     EVT_IF_EQ(GF_DGB10_BoardedFloor2, 0)
-        EVT_CALL(MakeEntity, EVT_PTR(Entity_BoardedFloor), 500, 0, -250, 0, MAKE_ENTITY_END)
-        EVT_CALL(AssignScript, EVT_PTR(N(80240F00)))
+        EVT_CALL(MakeEntity, EVT_ADDR(Entity_BoardedFloor), 500, 0, -250, 0, MAKE_ENTITY_END)
+        EVT_CALL(AssignScript, EVT_ADDR(N(80240F00)))
     EVT_END_IF
     EVT_IF_EQ(GF_DGB10_BoardedFloor3, 0)
-        EVT_CALL(MakeEntity, EVT_PTR(Entity_BoardedFloor), 375, 0, -250, 0, MAKE_ENTITY_END)
-        EVT_CALL(AssignScript, EVT_PTR(N(80240F20)))
+        EVT_CALL(MakeEntity, EVT_ADDR(Entity_BoardedFloor), 375, 0, -250, 0, MAKE_ENTITY_END)
+        EVT_CALL(AssignScript, EVT_ADDR(N(80240F20)))
     EVT_END_IF
     EVT_RETURN
     EVT_END

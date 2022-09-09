@@ -50,7 +50,7 @@ EvtScript N(exitDoubleDoor_80241550) = {
     EVT_SET(LocalVar(3), 13)
     EVT_EXEC(ExitDoubleDoor)
     EVT_WAIT(17)
-    EVT_CALL(GotoMap, EVT_PTR("dgb_03"), 1)
+    EVT_CALL(GotoMap, EVT_ADDR("dgb_03"), 1)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END
@@ -66,7 +66,7 @@ EvtScript N(exitDoubleDoor_80241604) = {
     EVT_SET(LocalVar(3), 16)
     EVT_EXEC(ExitDoubleDoor)
     EVT_WAIT(17)
-    EVT_CALL(GotoMap, EVT_PTR("dgb_01"), 1)
+    EVT_CALL(GotoMap, EVT_ADDR("dgb_01"), 1)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END
@@ -82,7 +82,7 @@ EvtScript N(exitSingleDoor_802416B8) = {
     EVT_SET(LocalVar(3), 1)
     EVT_EXEC(ExitSingleDoor)
     EVT_WAIT(17)
-    EVT_CALL(GotoMap, EVT_PTR("dgb_07"), 0)
+    EVT_CALL(GotoMap, EVT_ADDR("dgb_07"), 0)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END
@@ -98,7 +98,7 @@ EvtScript N(exitSingleDoor_8024176C) = {
     EVT_SET(LocalVar(3), 1)
     EVT_EXEC(ExitSingleDoor)
     EVT_WAIT(17)
-    EVT_CALL(GotoMap, EVT_PTR("dgb_11"), 0)
+    EVT_CALL(GotoMap, EVT_ADDR("dgb_11"), 0)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END
@@ -139,7 +139,7 @@ EvtScript N(main) = {
     EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
     EVT_CALL(SetCamEnabled, 0, 1)
     EVT_IF_LT(GB_StoryProgress, -15)
-        EVT_CALL(MakeNpcs, 1, EVT_PTR(N(npcGroupList_802425C8)))
+        EVT_CALL(MakeNpcs, 1, EVT_ADDR(N(npcGroupList_802425C8)))
     EVT_END_IF
     EVT_BIND_TRIGGER(N(exitDoubleDoor_80241550), TRIGGER_WALL_PRESS_A, 5, 1, 0)
     EVT_BIND_TRIGGER(N(exitDoubleDoor_80241604), TRIGGER_WALL_PRESS_A, 17, 1, 0)
@@ -209,7 +209,7 @@ EvtScript N(npcAI_80241BCC) = {
     EVT_CALL(SetSelfVar, 1, 5)
     EVT_CALL(SetSelfVar, 2, 8)
     EVT_CALL(SetSelfVar, 3, 12)
-    EVT_CALL(N(WanderMeleeAI_Main), EVT_PTR(N(npcAISettings_80241B9C)))
+    EVT_CALL(N(WanderMeleeAI_Main), EVT_ADDR(N(npcAISettings_80241B9C)))
     EVT_RETURN
     EVT_END
 };
@@ -243,7 +243,7 @@ EvtScript N(npcAI_80241C98) = {
     EVT_CALL(SetSelfVar, 1, 10)
     EVT_CALL(SetSelfVar, 2, 14)
     EVT_CALL(SetSelfVar, 3, 18)
-    EVT_CALL(N(ClubbaNappingAI_Main), EVT_PTR(N(npcAISettings_80241C68)))
+    EVT_CALL(N(ClubbaNappingAI_Main), EVT_ADDR(N(npcAISettings_80241C68)))
     EVT_RETURN
     EVT_END
 };

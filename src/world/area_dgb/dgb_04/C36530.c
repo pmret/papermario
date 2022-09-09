@@ -48,7 +48,7 @@ EvtScript N(exitSingleDoor_80243210) = {
     EVT_SET(LocalVar(3), 1)
     EVT_EXEC(ExitSingleDoor)
     EVT_WAIT(17)
-    EVT_CALL(GotoMap, EVT_PTR("dgb_06"), 0)
+    EVT_CALL(GotoMap, EVT_ADDR("dgb_06"), 0)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END
@@ -64,7 +64,7 @@ EvtScript N(exitDoubleDoor_802432C4) = {
     EVT_SET(LocalVar(3), 11)
     EVT_EXEC(ExitDoubleDoor)
     EVT_WAIT(17)
-    EVT_CALL(GotoMap, EVT_PTR("dgb_03"), 0)
+    EVT_CALL(GotoMap, EVT_ADDR("dgb_03"), 0)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END
@@ -96,7 +96,7 @@ EvtScript N(main) = {
     EVT_CALL(SetCamLeadPlayer, 0, 0)
     EVT_CALL(SetCamEnabled, 0, 1)
     EVT_IF_LT(GB_StoryProgress, -15)
-        EVT_CALL(MakeNpcs, 1, EVT_PTR(N(npcGroupList_80243D18)))
+        EVT_CALL(MakeNpcs, 1, EVT_ADDR(N(npcGroupList_80243D18)))
     EVT_END_IF
     EVT_EXEC_WAIT(N(makeEntities))
     EVT_BIND_TRIGGER(N(exitSingleDoor_80243210), TRIGGER_WALL_PRESS_A, 16, 1, 0)
@@ -143,7 +143,7 @@ EvtScript N(npcAI_802435E4) = {
     EVT_CALL(SetSelfVar, 5, -650)
     EVT_CALL(SetSelfVar, 6, 30)
     EVT_CALL(SetSelfVar, 1, 600)
-    EVT_CALL(N(SentinelAI_Main), EVT_PTR(N(npcAISettings_802435B4)))
+    EVT_CALL(N(SentinelAI_Main), EVT_ADDR(N(npcAISettings_802435B4)))
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_WAIT(2)
     EVT_LABEL(20)
@@ -193,7 +193,7 @@ EvtScript N(npcAI_802435E4) = {
         EVT_CALL(NpcJump0, NPC_PARTNER, LocalVar(0), LocalVar(1), LocalVar(2), 10)
     EVT_END_THREAD
     EVT_WAIT(30)
-    EVT_CALL(GotoMap, EVT_PTR(N(dgb_00_name_hack)), 2)
+    EVT_CALL(GotoMap, EVT_ADDR(N(dgb_00_name_hack)), 2)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END
@@ -277,7 +277,7 @@ NpcGroupList N(npcGroupList_80243D18) = {
 #include "world/common/atomic/SuperBlockData.inc.c"
 
 EvtScript N(makeEntities) = {
-    EVT_CALL(MakeEntity, EVT_PTR(Entity_SuperBlock), 500, -360, 110, 0, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, EVT_ADDR(Entity_SuperBlock), 500, -360, 110, 0, MAKE_ENTITY_END)
     EVT_SETUP_SUPER_BLOCK(SUPER_BLOCK_MAPVAR, SUPER_BLOCK_GAMEFLAG)
     EVT_RETURN
     EVT_END

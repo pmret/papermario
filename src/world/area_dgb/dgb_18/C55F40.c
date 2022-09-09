@@ -52,7 +52,7 @@ EvtScript N(exitDoubleDoor_80241360) = {
     EVT_SET(LocalVar(3), 10)
     EVT_EXEC(ExitDoubleDoor)
     EVT_WAIT(17)
-    EVT_CALL(GotoMap, EVT_PTR("dgb_01"), 6)
+    EVT_CALL(GotoMap, EVT_ADDR("dgb_01"), 6)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END
@@ -78,7 +78,7 @@ EvtScript N(main) = {
     EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
     EVT_CALL(SetCamEnabled, 0, 1)
     EVT_CALL(SetCamLeadPlayer, 0, 0)
-    EVT_CALL(MakeNpcs, 1, EVT_PTR(N(npcGroupList_802436B4)))
+    EVT_CALL(MakeNpcs, 1, EVT_ADDR(N(npcGroupList_802436B4)))
     EVT_EXEC_WAIT(N(makeEntities))
     EVT_EXEC(N(802412C0))
     EVT_BIND_TRIGGER(N(exitDoubleDoor_80241360), TRIGGER_WALL_PRESS_A, 17, 1, 0)
@@ -105,7 +105,7 @@ MobileAISettings N(npcAISettings_80241580) = {
 };
 
 EvtScript N(802415B0) = {
-    EVT_CALL(N(PatrolNoAttackAI_Main), EVT_PTR(N(npcAISettings_80241580)))
+    EVT_CALL(N(PatrolNoAttackAI_Main), EVT_ADDR(N(npcAISettings_80241580)))
     EVT_RETURN
     EVT_END
 };
@@ -406,7 +406,7 @@ EvtScript N(npcAI_802426B0) = {
     EVT_WAIT(12)
     EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_world_tubba_Palette_00_Anim_1C)
     EVT_WAIT(5)
-    EVT_CALL(BindNpcAI, 0, EVT_PTR(N(npcAI_80242834)))
+    EVT_CALL(BindNpcAI, 0, EVT_ADDR(N(npcAI_80242834)))
     EVT_RETURN
     EVT_END
 };
@@ -422,7 +422,7 @@ EvtScript N(npcAI_80242834) = {
             EVT_WAIT(8)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(N(PatrolNoAttackAI_Main), EVT_PTR(N(npcAISettings_80241580)))
+    EVT_CALL(N(PatrolNoAttackAI_Main), EVT_ADDR(N(npcAISettings_80241580)))
     EVT_RETURN
     EVT_END
 };
@@ -431,7 +431,7 @@ extern const char N(dgb_01_name_hack)[];
 
 EvtScript N(defeat_802428E8) = {
     EVT_CALL(N(UnkFunc1))
-    EVT_CALL(GotoMap, EVT_PTR(N(dgb_01_name_hack)), 6)
+    EVT_CALL(GotoMap, EVT_ADDR(N(dgb_01_name_hack)), 6)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END
@@ -441,16 +441,16 @@ const char N(pad_XXX)[] = { 0, 0 };
 
 EvtScript N(init_80242924) = {
     EVT_CALL(SetNpcScale, NPC_SELF, EVT_FIXED(1.25), EVT_FIXED(1.25), EVT_FIXED(1.25))
-    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(defeat_802428E8)))
+    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_ADDR(N(defeat_802428E8)))
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(-30)
-            EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80241654)))
+            EVT_CALL(BindNpcIdle, NPC_SELF, EVT_ADDR(N(idle_80241654)))
         EVT_CASE_LT(-29)
-            EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80242494)))
+            EVT_CALL(BindNpcIdle, NPC_SELF, EVT_ADDR(N(idle_80242494)))
         EVT_CASE_LT(-28)
             EVT_CALL(SetNpcPos, NPC_SELF, 245, 0, 250)
             EVT_CALL(SetNpcYaw, NPC_SELF, 270)
-            EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(npcAI_80242834)))
+            EVT_CALL(BindNpcIdle, NPC_SELF, EVT_ADDR(N(npcAI_80242834)))
         EVT_CASE_LT(-26)
             EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_END_SWITCH
@@ -555,7 +555,7 @@ EvtScript N(idle_80242A24) = {
     EVT_END_SWITCH
     EVT_CALL(EnablePartnerAI)
     EVT_WAIT(15)
-    EVT_CALL(BindNpcAI, 0, EVT_PTR(N(npcAI_802426B0)))
+    EVT_CALL(BindNpcAI, 0, EVT_ADDR(N(npcAI_802426B0)))
     EVT_CALL(GetPlayerPos, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_CALL(UseSettingsFrom, 0, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_CALL(SetCamSpeed, 0, EVT_FIXED(4.0))
@@ -576,7 +576,7 @@ EvtScript N(idle_80242A24) = {
 
 EvtScript N(init_8024329C) = {
     EVT_CALL(SetSelfVar, 0, 0)
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80242A24)))
+    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_ADDR(N(idle_80242A24)))
     EVT_RETURN
     EVT_END
 };
@@ -700,7 +700,7 @@ EvtScript N(8024382C) = {
 EvtScript N(makeEntities) = {
     EVT_CALL(MakeEntity, &Entity_Chest, 845, 0, 145, -35, 0, MAKE_ENTITY_END)
     EVT_CALL(AssignChestFlag, GF_DGB18_Chest_MysticalKey)
-    EVT_CALL(AssignScript, EVT_PTR(N(8024382C)))
+    EVT_CALL(AssignScript, EVT_ADDR(N(8024382C)))
     EVT_RETURN
     EVT_END
 };

@@ -14,7 +14,7 @@ EvtScript N(80240140) = {
     EVT_SET(LocalVar(3), 1)
     EVT_EXEC(0x80285DFC)
     EVT_WAIT(17)
-    EVT_CALL(GotoMap, EVT_PTR("arn_10"), 0)
+    EVT_CALL(GotoMap, EVT_ADDR("arn_10"), 0)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END
@@ -49,7 +49,7 @@ EvtScript N(main) = {
     EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
     EVT_CALL(SetCamLeadPlayer, 0, 0)
     EVT_CALL(SetCamEnabled, 0, 1)
-    EVT_CALL(MakeNpcs, 0, EVT_PTR(N(npcGroupList_80240974)))
+    EVT_CALL(MakeNpcs, 0, EVT_ADDR(N(npcGroupList_80240974)))
     EVT_EXEC_WAIT(N(makeEntities))
     EVT_EXEC(N(80240220))
     EVT_EXEC(N(802404D0))
@@ -73,7 +73,7 @@ EvtScript N(802403A0) = {
     EVT_WAIT(1)
     EVT_CALL(SetPlayerJumpscale, EVT_FIXED(1.0))
     EVT_CALL(PlayerJump, 0, 200, 0, 30)
-    EVT_CALL(GotoMap, EVT_PTR("arn_08"), 1)
+    EVT_CALL(GotoMap, EVT_ADDR("arn_08"), 1)
     EVT_WAIT(100)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_CALL(DisablePlayerPhysics, FALSE)
@@ -82,8 +82,8 @@ EvtScript N(802403A0) = {
 };
 
 EvtScript N(makeEntities) = {
-    EVT_CALL(MakeEntity, EVT_PTR(Entity_ScriptSpring), 0, 0, 0, 0, MAKE_ENTITY_END)
-    EVT_CALL(AssignScript, EVT_PTR(N(802403A0)))
+    EVT_CALL(MakeEntity, EVT_ADDR(Entity_ScriptSpring), 0, 0, 0, 0, MAKE_ENTITY_END)
+    EVT_CALL(AssignScript, EVT_ADDR(N(802403A0)))
     EVT_RETURN
     EVT_END
 };
@@ -154,7 +154,7 @@ EvtScript N(init_80240730) = {
     EVT_IF_NE(GB_StoryProgress, -19)
         EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_ELSE
-        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_802405FC)))
+        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_ADDR(N(idle_802405FC)))
     EVT_END_IF
     EVT_RETURN
     EVT_END

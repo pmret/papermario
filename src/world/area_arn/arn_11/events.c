@@ -64,7 +64,7 @@ EvtScript N(exitSingleDoor_80240428) = {
     EVT_SET(LocalVar(3), -1)
     EVT_EXEC(ExitSingleDoor)
     EVT_WAIT(17)
-    EVT_CALL(GotoMap, EVT_PTR("arn_13"), 1)
+    EVT_CALL(GotoMap, EVT_ADDR("arn_13"), 1)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END
@@ -100,7 +100,7 @@ EvtScript N(main) = {
     EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
     EVT_CALL(SetCamLeadPlayer, 0, 0)
     EVT_CALL(SetCamEnabled, 0, 1)
-    EVT_CALL(MakeNpcs, 0, EVT_PTR(N(npcGroupList_802410DC)))
+    EVT_CALL(MakeNpcs, 0, EVT_ADDR(N(npcGroupList_802410DC)))
     EVT_EXEC(N(80240050))
     EVT_EXEC(N(enterSingleDoor_802404F8))
     EVT_WAIT(1)
@@ -223,7 +223,7 @@ EvtScript N(defeat_802409DC) = {
         EVT_CALL(PanToTarget, 0, 0, 1)
     EVT_END_THREAD
     EVT_CALL(PlayerFaceNpc, 0, 1)
-    EVT_USE_BUF(EVT_PTR(N(intTable_80240988)))
+    EVT_USE_BUF(EVT_ADDR(N(intTable_80240988)))
     EVT_LOOP(0)
         EVT_BUF_READ3(LocalVar(0), LocalVar(1), LocalVar(2))
         EVT_IF_EQ(LocalVar(0), -10000)
@@ -264,8 +264,8 @@ EvtScript N(init_80240E70) = {
         EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_ELSE
         EVT_CALL(SetSelfVar, 0, 0)
-        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_802406CC)))
-        EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(defeat_802409DC)))
+        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_ADDR(N(idle_802406CC)))
+        EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_ADDR(N(defeat_802409DC)))
     EVT_END_IF
     EVT_RETURN
     EVT_END

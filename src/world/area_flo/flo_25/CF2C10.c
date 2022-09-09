@@ -98,7 +98,7 @@ EvtScript N(main) = {
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
     EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
     EVT_CALL(SetCamEnabled, 0, 1)
-    EVT_CALL(MakeNpcs, 0, EVT_PTR(N(npcGroupList_80243C5C)))
+    EVT_CALL(MakeNpcs, 0, EVT_ADDR(N(npcGroupList_80243C5C)))
     EVT_EXEC_WAIT(N(makeEntities))
     EVT_EXEC(N(80244D0C))
     EVT_EXEC(N(802446BC))
@@ -110,7 +110,7 @@ EvtScript N(main) = {
     EVT_EXEC(N(802423A0))
     EVT_CALL(ModifyColliderFlags, 0, 1, 0x7FFFFE00)
     EVT_CALL(ModifyColliderFlags, 0, 5, 0x7FFFFE00)
-    EVT_SET(LocalVar(0), EVT_PTR(N(80242704)))
+    EVT_SET(LocalVar(0), EVT_ADDR(N(80242704)))
     EVT_EXEC(EnterWalk)
     EVT_EXEC_WAIT(N(80242330))
     EVT_IF_GE(GB_StoryProgress, 53)
@@ -149,7 +149,7 @@ EvtScript N(npcAI_80242964) = {
     EVT_CALL(SetSelfVar, 5, 0)
     EVT_CALL(SetSelfVar, 6, 0)
     EVT_CALL(SetSelfVar, 1, 600)
-    EVT_CALL(N(FlyingNoAttackAI_Main), EVT_PTR(N(npcAISettings_80242934)))
+    EVT_CALL(N(FlyingNoAttackAI_Main), EVT_ADDR(N(npcAISettings_80242934)))
     EVT_RETURN
     EVT_END
 };
@@ -183,7 +183,7 @@ EvtScript N(npcAI_80242A30) = {
     EVT_CALL(SetSelfVar, 5, -630)
     EVT_CALL(SetSelfVar, 6, 50)
     EVT_CALL(SetSelfVar, 1, 200)
-    EVT_CALL(N(FlyingAI_Main), EVT_PTR(N(npcAISettings_80242A00)))
+    EVT_CALL(N(FlyingAI_Main), EVT_ADDR(N(npcAISettings_80242A00)))
     EVT_RETURN
     EVT_END
 };
@@ -231,7 +231,7 @@ EvtScript N(80242AD4) = {
 
 EvtScript N(80242C08) = {
     EVT_CALL(N(BuildItemChoiceList), LocalVar(0))
-    EVT_BIND_PADLOCK(N(80242AD4), 0x10, 0, EVT_PTR(N(ItemChoiceList)), 0, 1)
+    EVT_BIND_PADLOCK(N(80242AD4), 0x10, 0, EVT_ADDR(N(ItemChoiceList)), 0, 1)
     EVT_CALL(N(ItemChoice_WaitForSelection), LocalVar(0))
     EVT_RETURN
     EVT_END
@@ -251,7 +251,7 @@ EvtScript N(interact_80242C58) = {
         EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_gate_flower_Palette_01_Anim_2, NPC_ANIM_gate_flower_Palette_01_Anim_1, 0, MESSAGE_ID(0x11, 0x003B))
         EVT_CALL(SetPlayerAnimation, ANIM_THINKING)
         EVT_CALL(N(FlowerGuard_MakeItemList))
-        EVT_SET(LocalVar(0), EVT_PTR(N(FlowerGuard_ItemChoiceList)))
+        EVT_SET(LocalVar(0), EVT_ADDR(N(FlowerGuard_ItemChoiceList)))
         EVT_SET(LocalVar(1), 0)
         EVT_EXEC_WAIT(N(80242C08))
         EVT_SWITCH(LocalVar(0))
@@ -372,7 +372,7 @@ EvtScript N(interact_80242C58) = {
 };
 
 EvtScript N(init_80243564) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_80242C58)))
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_ADDR(N(interact_80242C58)))
     EVT_IF_EQ(GF_FLO25_GaveRedBerry, 1)
         EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_gate_flower_Palette_01_Anim_5)
         EVT_CALL(ModifyColliderFlags, 0, 14, 0x7FFFFE00)

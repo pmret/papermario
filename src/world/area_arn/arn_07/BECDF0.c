@@ -73,7 +73,7 @@ EvtScript N(80242048) = {
     EVT_CALL(PlaySoundAtPlayer, 312, 0)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_SET(GB_StoryProgress, -15)
-    EVT_CALL(GotoMapSpecial, EVT_PTR("kmr_23"), 2, 14)
+    EVT_CALL(GotoMapSpecial, EVT_ADDR("kmr_23"), 2, 14)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END
@@ -141,7 +141,7 @@ EvtScript N(80242498) = {
     EVT_CALL(PlaySoundAtPlayer, 312, 0)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_SET(GB_StoryProgress, -15)
-    EVT_CALL(GotoMapSpecial, EVT_PTR("kmr_23"), 2, 14)
+    EVT_CALL(GotoMapSpecial, EVT_ADDR("kmr_23"), 2, 14)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END
@@ -156,7 +156,7 @@ EvtScript N(exitSingleDoor_802428D4) = {
     EVT_SET(LocalVar(3), 1)
     EVT_EXEC(ExitSingleDoor)
     EVT_WAIT(17)
-    EVT_CALL(GotoMap, EVT_PTR("arn_08"), 0)
+    EVT_CALL(GotoMap, EVT_ADDR("arn_08"), 0)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END
@@ -309,7 +309,7 @@ EvtScript N(802433C8) = {
     EVT_BIND_TRIGGER(N(exitWalk_80242978), TRIGGER_FLOOR_ABOVE, 5, 1, 0)
     EVT_BIND_TRIGGER(N(exitWalk_802429D4), TRIGGER_FLOOR_ABOVE, 1, 1, 0)
     EVT_IF_LT(GB_StoryProgress, -24)
-        EVT_BIND_PADLOCK(N(802439B0), TRIGGER_WALL_PRESS_A, EVT_ENTITY_INDEX(0), EVT_PTR(N(itemList_80242040)), 0, 1)
+        EVT_BIND_PADLOCK(N(802439B0), TRIGGER_WALL_PRESS_A, EVT_ENTITY_INDEX(0), EVT_ADDR(N(itemList_80242040)), 0, 1)
     EVT_ELSE
         EVT_BIND_TRIGGER(N(exitSingleDoor_802428D4), TRIGGER_WALL_PRESS_A, 10, 1, 0)
     EVT_END_IF
@@ -331,11 +331,11 @@ EvtScript N(enterWalk_8024346C) = {
                 EVT_EXEC(N(802433C8))
             EVT_END_IF
         EVT_CASE_EQ(1)
-            EVT_SET(LocalVar(0), EVT_PTR(N(802433C8)))
+            EVT_SET(LocalVar(0), EVT_ADDR(N(802433C8)))
             EVT_EXEC(EnterWalk)
             EVT_WAIT(1)
         EVT_CASE_EQ(2)
-            EVT_SET(LocalVar(0), EVT_PTR(N(802433C8)))
+            EVT_SET(LocalVar(0), EVT_ADDR(N(802433C8)))
             EVT_EXEC(EnterWalk)
             EVT_WAIT(1)
         EVT_CASE_EQ(3)
@@ -356,13 +356,13 @@ EvtScript N(main) = {
     EVT_SET(GF_MAP_GustyGulch, 1)
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(-26)
-            EVT_CALL(MakeNpcs, 0, EVT_PTR(N(npcGroupList_802478B8)))
+            EVT_CALL(MakeNpcs, 0, EVT_ADDR(N(npcGroupList_802478B8)))
         EVT_CASE_LT(-14)
-            EVT_CALL(MakeNpcs, 0, EVT_PTR(N(npcGroupList_8024787C)))
+            EVT_CALL(MakeNpcs, 0, EVT_ADDR(N(npcGroupList_8024787C)))
         EVT_CASE_EQ(-14)
-            EVT_CALL(MakeNpcs, 0, EVT_PTR(N(npcGroupList_802478E8)))
+            EVT_CALL(MakeNpcs, 0, EVT_ADDR(N(npcGroupList_802478E8)))
         EVT_CASE_DEFAULT
-            EVT_CALL(MakeNpcs, 0, EVT_PTR(N(npcGroupList_802478B8)))
+            EVT_CALL(MakeNpcs, 0, EVT_ADDR(N(npcGroupList_802478B8)))
     EVT_END_SWITCH
     EVT_EXEC_WAIT(N(makeEntities))
     EVT_IF_EQ(GB_StoryProgress, -16)

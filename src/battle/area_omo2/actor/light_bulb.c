@@ -132,13 +132,13 @@ EvtScript N(handleEvent) = {
             EVT_CALL(GetActorVar, ACTOR_ENEMY1, 9, LocalVar(0))
             EVT_IF_EQ(LocalVar(0), 0)
                 EVT_CALL(func_8026E914, LocalVar(0), LocalVar(1))
-                EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_close_hatch))
+                EVT_CALL(PlayModelAnimation, 0, EVT_ADDR(toy_tank_as_close_hatch))
                 EVT_WAIT(30)
             EVT_END_IF
         EVT_CASE_EQ(EVENT_IMMUNE)
             EVT_CALL(GetActorVar, ACTOR_ENEMY1, 9, LocalVar(0))
             EVT_IF_EQ(LocalVar(0), 0)
-                EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_close_hatch))
+                EVT_CALL(PlayModelAnimation, 0, EVT_ADDR(toy_tank_as_close_hatch))
                 EVT_WAIT(30)
             EVT_END_IF
         EVT_CASE_EQ(EVENT_AIR_LIFT_FAILED)
@@ -175,7 +175,7 @@ EvtScript N(onHit) = {
 EvtScript N(shake_tank) = {
     EVT_CALL(GetActorVar, ACTOR_ENEMY1, 9, LocalVar(0))
     EVT_IF_EQ(LocalVar(0), 0)
-        EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_close_hatch))
+        EVT_CALL(PlayModelAnimation, 0, EVT_ADDR(toy_tank_as_close_hatch))
         EVT_WAIT(30)
     EVT_END_IF
     EVT_RETURN

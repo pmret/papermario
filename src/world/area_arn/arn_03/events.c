@@ -34,7 +34,7 @@ EvtScript N(enterWalk_80241930) = {
         EVT_EXEC(N(802418E8))
         EVT_RETURN
     EVT_END_IF
-    EVT_SET(LocalVar(0), EVT_PTR(N(802418E8)))
+    EVT_SET(LocalVar(0), EVT_ADDR(N(802418E8)))
     EVT_EXEC(EnterWalk)
     EVT_RETURN
     EVT_END
@@ -50,9 +50,9 @@ EvtScript N(main) = {
     EVT_SET(AreaFlag(4), 0)
     EVT_SET(AreaFlag(5), 0)
     EVT_IF_LT(GB_StoryProgress, -16)
-        EVT_CALL(MakeNpcs, 0, EVT_PTR(N(npcGroupList_80244740)))
+        EVT_CALL(MakeNpcs, 0, EVT_ADDR(N(npcGroupList_80244740)))
     EVT_ELSE
-        EVT_CALL(MakeNpcs, 0, EVT_PTR(N(npcGroupList_80244788)))
+        EVT_CALL(MakeNpcs, 0, EVT_ADDR(N(npcGroupList_80244788)))
     EVT_END_IF
     EVT_IF_EQ(GF_ARN03_WaitingForPackage, 1)
         EVT_SET(MapVar(0), 450)
@@ -83,7 +83,7 @@ MobileAISettings N(npcAISettings_80241BC0) = {
 };
 
 EvtScript N(npcAI_80241BF0) = {
-    EVT_CALL(N(func_8024113C_BDFECC), EVT_PTR(N(npcAISettings_80241BC0)))
+    EVT_CALL(N(func_8024113C_BDFECC), EVT_ADDR(N(npcAISettings_80241BC0)))
     EVT_RETURN
     EVT_END
 };
@@ -251,7 +251,7 @@ EvtScript N(80241CD4) = {
 
 EvtScript N(80241E18) = {
     EVT_CALL(N(BuildKeyItemChoiceList), LocalVar(0))
-    EVT_BIND_PADLOCK(N(80241CD4), TRIGGER_FORCE_ACTIVATE, 0, EVT_PTR(N(KeyItemChoiceList)), 0, 1)
+    EVT_BIND_PADLOCK(N(80241CD4), TRIGGER_FORCE_ACTIVATE, 0, EVT_ADDR(N(KeyItemChoiceList)), 0, 1)
     EVT_CALL(N(ItemChoice_WaitForSelection), LocalVar(0))
     EVT_RETURN
     EVT_END
@@ -363,9 +363,9 @@ EvtScript N(idle_80242064) = {
 EvtScript N(init_802424E0) = {
     EVT_IF_LT(GB_StoryProgress, -34)
         EVT_CALL(SetNpcPos, NPC_SELF, 175, 240, 145)
-        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80242064)))
+        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_ADDR(N(idle_80242064)))
     EVT_END_IF
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_80241EB0)))
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_ADDR(N(interact_80241EB0)))
     EVT_RETURN
     EVT_END
 };
@@ -429,7 +429,7 @@ EvtScript N(interact_8024254C) = {
 };
 
 EvtScript N(init_802428A8) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_8024254C)))
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_ADDR(N(interact_8024254C)))
     EVT_RETURN
     EVT_END
 };
@@ -586,7 +586,7 @@ EvtScript N(interact_80242DC4) = {
 };
 
 EvtScript N(init_802431A4) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_80242DC4)))
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_ADDR(N(interact_80242DC4)))
     EVT_RETURN
     EVT_END
 };
@@ -615,7 +615,7 @@ EvtScript N(interact_802431C8) = {
 };
 
 EvtScript N(init_80243328) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_802431C8)))
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_ADDR(N(interact_802431C8)))
     EVT_RETURN
     EVT_END
 };
@@ -817,28 +817,28 @@ EvtScript N(idle_80243D28) = {
 };
 
 EvtScript N(init_80243E90) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80243D28)))
+    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_ADDR(N(idle_80243D28)))
     EVT_CALL(SetNpcFlagBits, NPC_SELF, ((NPC_FLAG_HAS_SHADOW)), FALSE)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(init_80243ECC) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80243D28)))
+    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_ADDR(N(idle_80243D28)))
     EVT_CALL(SetNpcFlagBits, NPC_SELF, ((NPC_FLAG_HAS_SHADOW)), FALSE)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(init_80243F08) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80243D28)))
+    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_ADDR(N(idle_80243D28)))
     EVT_CALL(SetNpcFlagBits, NPC_SELF, ((NPC_FLAG_HAS_SHADOW)), FALSE)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(init_80243F44) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80243D28)))
+    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_ADDR(N(idle_80243D28)))
     EVT_CALL(SetNpcFlagBits, NPC_SELF, ((NPC_FLAG_HAS_SHADOW)), FALSE)
     EVT_RETURN
     EVT_END
@@ -995,9 +995,9 @@ static s32 N(pad_47DC) = {
 };
 
 EvtScript N(makeEntities) = {
-    EVT_CALL(MakeEntity, EVT_PTR(Entity_YellowBlock), 300, 237, 60, 0, 343, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, EVT_ADDR(Entity_YellowBlock), 300, 237, 60, 0, 343, MAKE_ENTITY_END)
     EVT_CALL(AssignBlockFlag, GF_ARN03_ItemBlock_Coin)
-    EVT_CALL(MakeEntity, EVT_PTR(Entity_SavePoint), 250, 237, 125, 0, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, EVT_ADDR(Entity_SavePoint), 250, 237, 125, 0, MAKE_ENTITY_END)
     EVT_RETURN
     EVT_END
 };

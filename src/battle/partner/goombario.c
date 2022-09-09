@@ -390,10 +390,10 @@ ActorBlueprint N(goombario) = {
 };
 
 EvtScript N(init_802392F0) = {
-    EVT_CALL(BindTakeTurn, 256, EVT_PTR(battle_partner_goombario_takeTurn_802396D8))
-    EVT_CALL(BindIdle, 256, EVT_PTR(battle_partner_goombario_idle_80239350))
-    EVT_CALL(BindHandleEvent, 256, EVT_PTR(battle_partner_goombario_handleEvent_80239360))
-    EVT_CALL(BindNextTurn, 256, EVT_PTR(battle_partner_goombario_nextTurn_80239A3C))
+    EVT_CALL(BindTakeTurn, 256, EVT_ADDR(battle_partner_goombario_takeTurn_802396D8))
+    EVT_CALL(BindIdle, 256, EVT_ADDR(battle_partner_goombario_idle_80239350))
+    EVT_CALL(BindHandleEvent, 256, EVT_ADDR(battle_partner_goombario_handleEvent_80239360))
+    EVT_CALL(BindNextTurn, 256, EVT_ADDR(battle_partner_goombario_nextTurn_80239A3C))
     EVT_RETURN
     EVT_END
 };
@@ -1169,7 +1169,7 @@ EvtScript N(8023BB9C) = {
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_53)
     EVT_END_THREAD
     EVT_CALL(CloseActionCommandInfo)
-    EVT_CALL(func_8026919C, EVT_PTR(battle_partner_goombario_D_8023BB78_6ECC58))
+    EVT_CALL(func_8026919C, EVT_ADDR(battle_partner_goombario_D_8023BB78_6ECC58))
     EVT_CALL(LoadActionCommand, 1)
     EVT_CALL(action_command_jump_CreateHudElements)
     EVT_SET(LocalVar(10), 24)

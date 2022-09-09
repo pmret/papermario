@@ -55,7 +55,7 @@ EvtScript N(exitSingleDoor_80241520) = {
     EVT_SET(LocalVar(3), -1)
     EVT_EXEC(ExitSingleDoor)
     EVT_WAIT(17)
-    EVT_CALL(GotoMap, EVT_PTR("dgb_15"), 2)
+    EVT_CALL(GotoMap, EVT_ADDR("dgb_15"), 2)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END
@@ -87,7 +87,7 @@ EvtScript N(main) = {
     EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
     EVT_CALL(SetCamEnabled, 0, 1)
     EVT_IF_LT(GB_StoryProgress, -15)
-        EVT_CALL(MakeNpcs, 1, EVT_PTR(N(npcGroupList_8024318C)))
+        EVT_CALL(MakeNpcs, 1, EVT_ADDR(N(npcGroupList_8024318C)))
     EVT_END_IF
     EVT_EXEC_WAIT(N(80241780))
     EVT_EXEC(N(80241480))
@@ -165,7 +165,7 @@ EvtScript N(npcAI_802418DC) = {
     EVT_CALL(SetSelfVar, 1, 10)
     EVT_CALL(SetSelfVar, 2, 14)
     EVT_CALL(SetSelfVar, 3, 18)
-    EVT_CALL(N(ClubbaNappingAI_Main), EVT_PTR(N(npcAISettings_802418AC)))
+    EVT_CALL(N(ClubbaNappingAI_Main), EVT_ADDR(N(npcAISettings_802418AC)))
     EVT_RETURN
     EVT_END
 };

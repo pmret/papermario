@@ -1316,15 +1316,15 @@ ApiStatus SetActorRotation(Evt* script, s32 isInitialCall) {
 
     actor = get_actor(actorID);
 
-    if (x != EVT_LIMIT) {
+    if (x != EVT_IGNORE_ARG) {
         actor->rotation.x = x;
     }
 
-    if (y != EVT_LIMIT) {
+    if (y != EVT_IGNORE_ARG) {
         actor->rotation.y = y;
     }
 
-    if (z != EVT_LIMIT) {
+    if (z != EVT_IGNORE_ARG) {
         actor->rotation.z = z;
     }
 

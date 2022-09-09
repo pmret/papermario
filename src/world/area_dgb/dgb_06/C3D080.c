@@ -46,7 +46,7 @@ EvtScript N(exitSingleDoor_802403C0) = {
     EVT_SET(LocalVar(3), -1)
     EVT_EXEC(ExitSingleDoor)
     EVT_WAIT(17)
-    EVT_CALL(GotoMap, EVT_PTR("dgb_04"), 1)
+    EVT_CALL(GotoMap, EVT_ADDR("dgb_04"), 1)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END
@@ -72,7 +72,7 @@ EvtScript N(main) = {
     EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
     EVT_CALL(SetCamLeadPlayer, 0, 0)
     EVT_CALL(SetCamEnabled, 0, 1)
-    EVT_CALL(MakeNpcs, 1, EVT_PTR(N(npcGroupList_80240B44)))
+    EVT_CALL(MakeNpcs, 1, EVT_ADDR(N(npcGroupList_80240B44)))
     EVT_EXEC_WAIT(N(makeEntities))
     EVT_IF_EQ(GF_DGB05_BoardedFloor, 0)
         EVT_CALL(EnableGroup, 28, 0)
@@ -93,8 +93,8 @@ EvtScript N(main) = {
 EvtScript N(makeEntities) = {
     EVT_CALL(MakeEntity, &Entity_Chest, -300, 50, -200, 0, 0, MAKE_ENTITY_END)
     EVT_CALL(AssignChestFlag, GameFlag(CHEST_FLAG))
-    EVT_CALL(AssignScript, EVT_PTR(N(EVS_Chest_Interact)))
-    EVT_CALL(MakeEntity, EVT_PTR(Entity_HeartBlock), -125, 60, 175, 0, MAKE_ENTITY_END)
+    EVT_CALL(AssignScript, EVT_ADDR(N(EVS_Chest_Interact)))
+    EVT_CALL(MakeEntity, EVT_ADDR(Entity_HeartBlock), -125, 60, 175, 0, MAKE_ENTITY_END)
     EVT_RETURN
     EVT_END
 };
@@ -125,7 +125,7 @@ EvtScript N(init_802408FC) = {
     EVT_IF_GE(GB_StoryProgress, -26)
         EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
     EVT_END_IF
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_8024086C)))
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_ADDR(N(interact_8024086C)))
     EVT_RETURN
     EVT_END
 };

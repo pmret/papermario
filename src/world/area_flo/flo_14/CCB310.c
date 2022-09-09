@@ -68,11 +68,11 @@ EvtScript N(main) = {
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
     EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
     EVT_CALL(SetCamEnabled, 0, 1)
-    EVT_CALL(MakeNpcs, 0, EVT_PTR(N(npcGroupList_80244F00)))
+    EVT_CALL(MakeNpcs, 0, EVT_ADDR(N(npcGroupList_80244F00)))
     EVT_EXEC(N(80244F30))
     EVT_CALL(ModifyColliderFlags, 3, 9, 0x00000002)
     EVT_THREAD
-        EVT_CALL(ResetFromLava, EVT_PTR(N(lavaResetList_802425FC)))
+        EVT_CALL(ResetFromLava, EVT_ADDR(N(lavaResetList_802425FC)))
     EVT_END_THREAD
     EVT_CALL(EnableTexPanning, 29, 1)
     EVT_CALL(EnableTexPanning, 31, 1)
@@ -135,7 +135,7 @@ EvtScript N(main) = {
     EVT_EXEC(N(80245224))
     EVT_CALL(ModifyColliderFlags, 0, 1, 0x7FFFFE00)
     EVT_CALL(ModifyColliderFlags, 0, 5, 0x7FFFFE00)
-    EVT_SET(LocalVar(0), EVT_PTR(N(802425B4)))
+    EVT_SET(LocalVar(0), EVT_ADDR(N(802425B4)))
     EVT_EXEC(EnterWalk)
     EVT_EXEC_WAIT(N(802423F0))
     EVT_IF_GE(GB_StoryProgress, 53)
@@ -293,7 +293,7 @@ Vec3f N(vectorList_80243384)[] = {
 EvtScript N(80243420) = {
     EVT_WAIT(20)
     EVT_CALL(PlaySound, 0x80000023)
-    EVT_CALL(LoadPath, 165, EVT_PTR(N(vectorList_80243384)), 13, 10)
+    EVT_CALL(LoadPath, 165, EVT_ADDR(N(vectorList_80243384)), 13, 10)
     EVT_LABEL(0)
     EVT_CALL(GetNextPathPos)
     EVT_CALL(TranslateModel, 123, LocalVar(1), LocalVar(2), LocalVar(3))
@@ -422,7 +422,7 @@ EvtScript N(80243B1C) = {
         EVT_WAIT(10)
         EVT_GOTO(0)
     EVT_END_IF
-    EVT_USE_BUF(EVT_PTR(N(D_802431CC_CCE4DC)))
+    EVT_USE_BUF(EVT_ADDR(N(D_802431CC_CCE4DC)))
     EVT_BUF_READ1(LocalVar(0))
     EVT_IF_EQ(LocalVar(0), 0)
         EVT_CALL(RandInt, 10, LocalVar(0))
@@ -556,7 +556,7 @@ EvtScript N(80243E78) = {
     EVT_SET(LocalVar(0), 10005)
     EVT_EXEC(N(80243B1C))
     EVT_CALL(MakeLocalVertexCopy, 0, 123, 1)
-    EVT_CALL(SetCustomGfxBuilders, 1, EVT_PTR(N(func_80240504_CCB814)), 0)
+    EVT_CALL(SetCustomGfxBuilders, 1, EVT_ADDR(N(func_80240504_CCB814)), 0)
     EVT_CALL(SetModelCustomGfx, 123, 1, -1)
     EVT_CALL(SetModelCustomGfx, 10001, 1, -1)
     EVT_CALL(SetModelCustomGfx, 10002, 1, -1)
@@ -564,7 +564,7 @@ EvtScript N(80243E78) = {
     EVT_CALL(SetModelCustomGfx, 10004, 1, -1)
     EVT_CALL(SetModelCustomGfx, 10005, 1, -1)
     EVT_CALL(MakeLocalVertexCopy, 1, 57, 1)
-    EVT_CALL(SetCustomGfxBuilders, 2, EVT_PTR(N(func_802407D4_CCBAE4)), 0)
+    EVT_CALL(SetCustomGfxBuilders, 2, EVT_ADDR(N(func_802407D4_CCBAE4)), 0)
     EVT_CALL(SetModelCustomGfx, 57, 2, -1)
     EVT_RETURN
     EVT_END

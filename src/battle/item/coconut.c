@@ -53,7 +53,7 @@ EvtScript N(main) = {
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_THROW)
     EVT_CALL(PlaySound, SOUND_THROW)
     EVT_WAIT(3)
-    EVT_CALL(CreateVirtualEntity, LocalVar(10), EVT_PTR(N(modelCommandList)))
+    EVT_CALL(CreateVirtualEntity, LocalVar(10), EVT_ADDR(N(modelCommandList)))
     EVT_SETF(LocalVar(0), EVT_FIXED(1.0))
     EVT_CALL(MultiplyByActorScale, LocalVar(0))
     EVT_CALL(SetVirtualEntityScale, LocalVar(10), LocalVar(0), LocalVar(0), LocalVar(0))

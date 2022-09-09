@@ -597,9 +597,9 @@ EvtScript N(EVS_Quizmo_QuizMain) = {
             EVT_CALL(N(Quizmo_SetVannaAnim_Idle))
             EVT_CALL(SetMessageValue, GB_CompletedQuizzes, 0)
             EVT_IF_EQ(GB_CompletedQuizzes, 1)
-                EVT_CALL(SetMessageMsg, EVT_PTR(MessageSingular), 1)
+                EVT_CALL(SetMessageMsg, EVT_ADDR(MessageSingular), 1)
             EVT_ELSE
-                EVT_CALL(SetMessageMsg, EVT_PTR(MessagePlural), 1)
+                EVT_CALL(SetMessageMsg, EVT_ADDR(MessagePlural), 1)
             EVT_END_IF
             EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_chuck_quizmo_Palette_00_Anim_4, NPC_ANIM_chuck_quizmo_Palette_00_Anim_1, 0, MESSAGE_ID(0x08, 0x000F))
         EVT_END_IF
@@ -657,7 +657,7 @@ EvtScript N(EVS_Quizmo_NPC_OtherAI) = {
 };
 
 EvtScript N(EVS_Quizmo_NPC_Interact) = {
-    EVT_USE_ARRAY(EVT_PTR(N(Quizmo_ScriptArray)))
+    EVT_USE_ARRAY(EVT_ADDR(N(Quizmo_ScriptArray)))
     EVT_SET(GF_Quizmo_ChangedLocation, TRUE)
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(SetPlayerFlagBits, PLAYER_STATUS_FLAGS_400000, 1)
@@ -683,7 +683,7 @@ MobileAISettings N(Quizmo_MobileAISettings) = {
 };
 
 EvtScript N(EVS_Quizmo_Npc_AI) = {
-    EVT_CALL(BasicAI_Main, EVT_PTR(N(Quizmo_MobileAISettings)))
+    EVT_CALL(BasicAI_Main, EVT_ADDR(N(Quizmo_MobileAISettings)))
     EVT_RETURN
     EVT_END
 };

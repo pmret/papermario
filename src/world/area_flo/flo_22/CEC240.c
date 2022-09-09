@@ -46,12 +46,12 @@ EvtScript N(main) = {
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
     EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
     EVT_CALL(SetCamEnabled, 0, 1)
-    EVT_CALL(MakeNpcs, 0, EVT_PTR(N(npcGroupList_80240DE4)))
+    EVT_CALL(MakeNpcs, 0, EVT_ADDR(N(npcGroupList_80240DE4)))
     EVT_EXEC(N(80241F6C))
     EVT_EXEC(N(80241528))
     EVT_CALL(GetEntryID, LocalVar(0))
     EVT_CALL(ModifyColliderFlags, 0, 1, 0x7FFFFE00)
-    EVT_SET(LocalVar(0), EVT_PTR(N(802403AC)))
+    EVT_SET(LocalVar(0), EVT_ADDR(N(802403AC)))
     EVT_EXEC(EnterWalk)
     EVT_EXEC(N(80240E24))
     EVT_EXEC_WAIT(N(802402E0))
@@ -113,8 +113,8 @@ EvtScript N(defeat_802405E4) = {
 };
 
 EvtScript N(init_80240740) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_8024054C)))
-    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(defeat_802405E4)))
+    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_ADDR(N(idle_8024054C)))
+    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_ADDR(N(defeat_802405E4)))
     EVT_RETURN
     EVT_END
 };
@@ -165,8 +165,8 @@ EvtScript N(defeat_80240810) = {
 };
 
 EvtScript N(init_802409CC) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80240778)))
-    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(defeat_80240810)))
+    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_ADDR(N(idle_80240778)))
+    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_ADDR(N(defeat_80240810)))
     EVT_RETURN
     EVT_END
 };
@@ -373,7 +373,7 @@ EvtScript N(80241028) = {
 };
 
 EvtScript N(80241528) = {
-    EVT_BIND_PADLOCK(N(80241028), TRIGGER_WALL_PRESS_A, 9, EVT_PTR(N(itemList_80240E10)), 0, 1)
+    EVT_BIND_PADLOCK(N(80241028), TRIGGER_WALL_PRESS_A, 9, EVT_ADDR(N(itemList_80240E10)), 0, 1)
     EVT_IF_EQ(GF_FLO22_ThrewBlueBerryDownWell, 1)
         EVT_CALL(MakeItemEntity, ITEM_FLOWER_SAVER_B, -83, 0, 0, 0, GF_FLO22_Item_FlowerSaverB)
     EVT_END_IF

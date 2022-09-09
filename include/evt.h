@@ -106,36 +106,9 @@ enum {
 
 // deprecated, use those in script_api/macros.h instead
 #define EVT_FIXED(v)         (((v * 1024.0f) + -230000000)) // See evt_float_to_fixed_var
-#define EVT_PTR(sym)         (Bytecode) &sym
-#define EVT_LIMIT            -250000000 // TODO better name
+#define EVT_IGNORE_ARG       -250000000 // used by a couple functions to selectively ignore args
+#define EVT_LIMIT            -270000000 // TODO better name
 #define MAKE_ENTITY_END      0x80000000
-
-#define EVT_INDEX_OF_VAR(v)         ((v +  30000000))
-#define EVT_INDEX_OF_FLAG(v)        ((v +  70000000))
-#define EVT_INDEX_OF_MAP_VAR(v)     ((v +  50000000))
-#define EVT_INDEX_OF_MAP_FLAG(v)    ((v +  90000000))
-#define EVT_INDEX_OF_AREA_FLAG(v)   ((v + 110000000))
-#define EVT_INDEX_OF_AREA_BYTE(v)   ((v + 150000000))
-#define EVT_INDEX_OF_SAVE_FLAG(v)   ((v + 130000000))
-#define EVT_INDEX_OF_SAVE_BYTE(v)   ((v + 170000000))
-
-// shorthand names for EVT_VAR
-#define VAR0 LocalVar(0)
-#define VAR1 LocalVar(1)
-#define VAR2 LocalVar(2)
-#define VAR3 LocalVar(3)
-#define VAR4 LocalVar(4)
-#define VAR5 LocalVar(5)
-#define VAR6 LocalVar(6)
-#define VAR7 LocalVar(7)
-#define VAR8 LocalVar(8)
-#define VAR9 LocalVar(9)
-#define VARA LocalVar(10)
-#define VARB LocalVar(11)
-#define VARC LocalVar(12)
-#define VARD LocalVar(13)
-#define VARE LocalVar(14)
-#define VARF LocalVar(15)
 
 /* Return type of evt_execute_next_command */
 #define EVT_CONTINUE 0   /* Continue to next command */

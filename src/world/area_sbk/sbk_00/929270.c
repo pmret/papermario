@@ -39,11 +39,11 @@ EvtScript N(main) = {
     EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
     EVT_CALL(SetCamEnabled, 0, 1)
     EVT_CALL(SetCamLeadPlayer, 0, 0)
-    EVT_CALL(MakeNpcs, 0, EVT_PTR(N(npcGroupList_80240768)))
+    EVT_CALL(MakeNpcs, 0, EVT_ADDR(N(npcGroupList_80240768)))
     EVT_EXEC_WAIT(N(makeEntities))
     EVT_CALL(N(SpawnSunEffect))
     EVT_CALL(SetMusicTrack, 0, SONG_DRY_DRY_DESERT, 0, 8)
-    EVT_SET(LocalVar(0), EVT_PTR(N(80240198)))
+    EVT_SET(LocalVar(0), EVT_ADDR(N(80240198)))
     EVT_EXEC(EnterWalk)
     EVT_RETURN
     EVT_END

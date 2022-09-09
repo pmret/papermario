@@ -48,12 +48,12 @@ EvtScript N(main) = {
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
     EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
     EVT_CALL(SetCamEnabled, 0, 1)
-    EVT_CALL(MakeNpcs, 0, EVT_PTR(N(npcGroupList_802444D4)))
+    EVT_CALL(MakeNpcs, 0, EVT_ADDR(N(npcGroupList_802444D4)))
     EVT_EXEC_WAIT(N(makeEntities))
     EVT_EXEC(N(8024346C))
     EVT_CALL(ModifyColliderFlags, 3, 9, 0x00000002)
     EVT_THREAD
-        EVT_CALL(ResetFromLava, EVT_PTR(N(lavaResetList_80242B40)))
+        EVT_CALL(ResetFromLava, EVT_ADDR(N(lavaResetList_80242B40)))
     EVT_END_THREAD
     EVT_CALL(EnableTexPanning, 16, 1)
     EVT_CALL(EnableTexPanning, 17, 1)
@@ -85,7 +85,7 @@ EvtScript N(main) = {
     EVT_EXEC(N(802451C4))
     EVT_CALL(ModifyColliderFlags, 0, 1, 0x7FFFFE00)
     EVT_CALL(ModifyColliderFlags, 0, 5, 0x7FFFFE00)
-    EVT_SET(LocalVar(0), EVT_PTR(N(80242AF8)))
+    EVT_SET(LocalVar(0), EVT_ADDR(N(80242AF8)))
     EVT_EXEC(EnterWalk)
     EVT_EXEC_WAIT(N(802429D0))
     EVT_IF_GE(GB_StoryProgress, 53)
@@ -288,10 +288,10 @@ EvtScript N(80243E80) = {
 EvtScript N(makeEntities) = {
     EVT_SET(AreaFlag(39), 0)
     EVT_BIND_TRIGGER(N(80243E80), TRIGGER_FLOOR_TOUCH, 20, 1, 0)
-    EVT_CALL(MakeEntity, EVT_PTR(Entity_SuperBlock), 350, 240, -100, 0, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, EVT_ADDR(Entity_SuperBlock), 350, 240, -100, 0, MAKE_ENTITY_END)
     EVT_SETUP_SUPER_BLOCK(SUPER_BLOCK_MAPVAR, SUPER_BLOCK_GAMEFLAG)
-    EVT_CALL(MakeEntity, EVT_PTR(Entity_ScriptSpring), 472, 100, -100, 0, MAKE_ENTITY_END)
-    EVT_CALL(AssignScript, EVT_PTR(N(80243DB0)))
+    EVT_CALL(MakeEntity, EVT_ADDR(Entity_ScriptSpring), 472, 100, -100, 0, MAKE_ENTITY_END)
+    EVT_CALL(AssignScript, EVT_ADDR(N(80243DB0)))
     EVT_RETURN
     EVT_END
 };

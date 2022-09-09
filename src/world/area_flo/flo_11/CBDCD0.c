@@ -87,7 +87,7 @@ EvtScript N(exitWalk_80241488) = EXIT_WALK_SCRIPT(60,  1, "flo_12",  0);
 
 EvtScript N(802414E4) = {
     EVT_SET_GROUP(EVT_GROUP_1B)
-    EVT_CALL(GotoMap, EVT_PTR("flo_11"), 5)
+    EVT_CALL(GotoMap, EVT_ADDR("flo_11"), 5)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END
@@ -95,7 +95,7 @@ EvtScript N(802414E4) = {
 
 EvtScript N(80241520) = {
     EVT_SET_GROUP(EVT_GROUP_1B)
-    EVT_CALL(GotoMap, EVT_PTR("flo_11"), 6)
+    EVT_CALL(GotoMap, EVT_ADDR("flo_11"), 6)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END
@@ -103,7 +103,7 @@ EvtScript N(80241520) = {
 
 EvtScript N(8024155C) = {
     EVT_SET_GROUP(EVT_GROUP_1B)
-    EVT_CALL(GotoMap, EVT_PTR("flo_11"), 7)
+    EVT_CALL(GotoMap, EVT_ADDR("flo_11"), 7)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END
@@ -111,7 +111,7 @@ EvtScript N(8024155C) = {
 
 EvtScript N(80241598) = {
     EVT_SET_GROUP(EVT_GROUP_1B)
-    EVT_CALL(GotoMap, EVT_PTR("flo_11"), 2)
+    EVT_CALL(GotoMap, EVT_ADDR("flo_11"), 2)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END
@@ -119,7 +119,7 @@ EvtScript N(80241598) = {
 
 EvtScript N(802415D4) = {
     EVT_SET_GROUP(EVT_GROUP_1B)
-    EVT_CALL(GotoMap, EVT_PTR("flo_11"), 3)
+    EVT_CALL(GotoMap, EVT_ADDR("flo_11"), 3)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END
@@ -127,7 +127,7 @@ EvtScript N(802415D4) = {
 
 EvtScript N(80241610) = {
     EVT_SET_GROUP(EVT_GROUP_1B)
-    EVT_CALL(GotoMap, EVT_PTR("flo_11"), 4)
+    EVT_CALL(GotoMap, EVT_ADDR("flo_11"), 4)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END
@@ -147,27 +147,27 @@ EvtScript N(80241698) = {
     EVT_BIND_TRIGGER(N(exitWalk_8024142C), TRIGGER_FLOOR_ABOVE, 4, 1, 0)
     EVT_SET(LocalVar(0), 2)
     EVT_SET(LocalVar(1), 35)
-    EVT_SET(LocalVar(2), EVT_PTR(N(802414E4)))
+    EVT_SET(LocalVar(2), EVT_ADDR(N(802414E4)))
     EVT_BIND_TRIGGER(N(8024164C), TRIGGER_FLOOR_TOUCH, LocalVar(1), 1, 0)
     EVT_SET(LocalVar(0), 3)
     EVT_SET(LocalVar(1), 34)
-    EVT_SET(LocalVar(2), EVT_PTR(N(80241520)))
+    EVT_SET(LocalVar(2), EVT_ADDR(N(80241520)))
     EVT_BIND_TRIGGER(N(8024164C), TRIGGER_FLOOR_TOUCH, LocalVar(1), 1, 0)
     EVT_SET(LocalVar(0), 4)
     EVT_SET(LocalVar(1), 33)
-    EVT_SET(LocalVar(2), EVT_PTR(N(8024155C)))
+    EVT_SET(LocalVar(2), EVT_ADDR(N(8024155C)))
     EVT_BIND_TRIGGER(N(8024164C), TRIGGER_FLOOR_TOUCH, LocalVar(1), 1, 0)
     EVT_SET(LocalVar(0), 5)
     EVT_SET(LocalVar(1), 32)
-    EVT_SET(LocalVar(2), EVT_PTR(N(80241598)))
+    EVT_SET(LocalVar(2), EVT_ADDR(N(80241598)))
     EVT_BIND_TRIGGER(N(8024164C), TRIGGER_FLOOR_TOUCH, LocalVar(1), 1, 0)
     EVT_SET(LocalVar(0), 6)
     EVT_SET(LocalVar(1), 31)
-    EVT_SET(LocalVar(2), EVT_PTR(N(802415D4)))
+    EVT_SET(LocalVar(2), EVT_ADDR(N(802415D4)))
     EVT_BIND_TRIGGER(N(8024164C), TRIGGER_FLOOR_TOUCH, LocalVar(1), 1, 0)
     EVT_SET(LocalVar(0), 7)
     EVT_SET(LocalVar(1), 30)
-    EVT_SET(LocalVar(2), EVT_PTR(N(80241610)))
+    EVT_SET(LocalVar(2), EVT_ADDR(N(80241610)))
     EVT_BIND_TRIGGER(N(8024164C), TRIGGER_FLOOR_TOUCH, LocalVar(1), 1, 0)
     EVT_RETURN
     EVT_END
@@ -181,18 +181,18 @@ EvtScript N(main) = {
     EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
     EVT_CALL(SetCamEnabled, 0, 1)
     EVT_CALL(func_80044238, 5)
-    EVT_CALL(MakeNpcs, 0, EVT_PTR(N(npcGroupList_802430D4)))
+    EVT_CALL(MakeNpcs, 0, EVT_ADDR(N(npcGroupList_802430D4)))
     EVT_EXEC_WAIT(N(makeEntities))
     EVT_CALL(ModifyColliderFlags, 0, 1, 0x7FFFFE00)
     EVT_CALL(ModifyColliderFlags, 0, 5, 0x7FFFFE00)
     EVT_CALL(GetEntryID, LocalVar(0))
     EVT_IF_LE(LocalVar(0), 1)
-        EVT_SET(LocalVar(0), EVT_PTR(N(80241698)))
+        EVT_SET(LocalVar(0), EVT_ADDR(N(80241698)))
         EVT_EXEC(EnterWalk)
         EVT_EXEC(N(80242240))
         EVT_WAIT(1)
     EVT_ELSE
-        EVT_SET(LocalVar(10), EVT_PTR(N(80241698)))
+        EVT_SET(LocalVar(10), EVT_ADDR(N(80241698)))
         EVT_EXEC(N(Pipe_EnterVertical))
         EVT_WAIT(1)
     EVT_END_IF
@@ -275,7 +275,7 @@ EvtScript N(80241CF4) = {
     EVT_SET(LocalVar(0), 5)
     EVT_EXEC_GET_TID(N(80241CB4), MapVar(11))
     EVT_THREAD
-        EVT_CALL(LoadPath, 160, EVT_PTR(N(vectorList_80241AEC)), 8, 0)
+        EVT_CALL(LoadPath, 160, EVT_ADDR(N(vectorList_80241AEC)), 8, 0)
         EVT_LOOP(0)
             EVT_CALL(GetNextPathPos)
             EVT_CALL(SetNpcPos, 0, LocalVar(1), LocalVar(2), LocalVar(3))
@@ -285,7 +285,7 @@ EvtScript N(80241CF4) = {
             EVT_END_IF
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(LoadPath, 160, EVT_PTR(N(vectorList_80241B4C)), 8, 0)
+    EVT_CALL(LoadPath, 160, EVT_ADDR(N(vectorList_80241B4C)), 8, 0)
     EVT_LOOP(0)
         EVT_CALL(GetNextPathPos)
         EVT_CALL(SetNpcPos, 1, LocalVar(1), LocalVar(2), LocalVar(3))
@@ -301,7 +301,7 @@ EvtScript N(80241CF4) = {
 
 EvtScript N(80241E4C) = {
     EVT_THREAD
-        EVT_CALL(LoadPath, 30, EVT_PTR(N(vectorList_80241BAC)), 4, 0)
+        EVT_CALL(LoadPath, 30, EVT_ADDR(N(vectorList_80241BAC)), 4, 0)
         EVT_LOOP(0)
             EVT_CALL(GetNextPathPos)
             EVT_CALL(SetNpcPos, 0, LocalVar(1), LocalVar(2), LocalVar(3))
@@ -311,7 +311,7 @@ EvtScript N(80241E4C) = {
             EVT_END_IF
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(LoadPath, 45, EVT_PTR(N(vectorList_80241BDC)), 4, 0)
+    EVT_CALL(LoadPath, 45, EVT_ADDR(N(vectorList_80241BDC)), 4, 0)
     EVT_LOOP(0)
         EVT_CALL(GetNextPathPos)
         EVT_CALL(SetNpcPos, 1, LocalVar(1), LocalVar(2), LocalVar(3))
@@ -329,7 +329,7 @@ EvtScript N(80241F80) = {
     EVT_SET(LocalVar(0), 4)
     EVT_EXEC_GET_TID(N(80241CB4), MapVar(11))
     EVT_THREAD
-        EVT_CALL(LoadPath, 35, EVT_PTR(N(vectorList_80241C0C)), 3, 0)
+        EVT_CALL(LoadPath, 35, EVT_ADDR(N(vectorList_80241C0C)), 3, 0)
         EVT_LOOP(0)
             EVT_CALL(GetNextPathPos)
             EVT_CALL(SetNpcPos, 0, LocalVar(1), LocalVar(2), LocalVar(3))
@@ -339,7 +339,7 @@ EvtScript N(80241F80) = {
             EVT_END_IF
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(LoadPath, 35, EVT_PTR(N(vectorList_80241C30)), 3, 0)
+    EVT_CALL(LoadPath, 35, EVT_ADDR(N(vectorList_80241C30)), 3, 0)
     EVT_LOOP(0)
         EVT_CALL(GetNextPathPos)
         EVT_CALL(SetNpcPos, 1, LocalVar(1), LocalVar(2), LocalVar(3))
@@ -354,7 +354,7 @@ EvtScript N(80241F80) = {
 
 EvtScript N(802420C8) = {
     EVT_THREAD
-        EVT_CALL(LoadPath, 40, EVT_PTR(N(vectorList_80241C54)), 4, 0)
+        EVT_CALL(LoadPath, 40, EVT_ADDR(N(vectorList_80241C54)), 4, 0)
         EVT_LOOP(0)
             EVT_CALL(GetNextPathPos)
             EVT_CALL(SetNpcPos, 0, LocalVar(1), LocalVar(2), LocalVar(3))
@@ -365,7 +365,7 @@ EvtScript N(802420C8) = {
         EVT_END_LOOP
         EVT_CALL(SetNpcPos, 0, 0, -1000, 0)
     EVT_END_THREAD
-    EVT_CALL(LoadPath, 40, EVT_PTR(N(vectorList_80241C84)), 4, 0)
+    EVT_CALL(LoadPath, 40, EVT_ADDR(N(vectorList_80241C84)), 4, 0)
     EVT_LOOP(0)
         EVT_CALL(GetNextPathPos)
         EVT_CALL(SetNpcPos, 1, LocalVar(1), LocalVar(2), LocalVar(3))
@@ -532,8 +532,8 @@ EvtScript N(init_80242B58) = {
         EVT_IF_GE(GB_StoryProgress, 45)
             EVT_IF_EQ(GF_FLO10_LilyRequestedWaterStone, 1)
                 EVT_SET(MapVar(0), 0)
-                EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80242810)))
-                EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(defeat_802428B8)))
+                EVT_CALL(BindNpcIdle, NPC_SELF, EVT_ADDR(N(idle_80242810)))
+                EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_ADDR(N(defeat_802428B8)))
                 EVT_CALL(SetNpcPos, 0, 350, 120, -220)
                 EVT_CALL(InterpNpcYaw, 0, 270, 1)
             EVT_END_IF
@@ -548,7 +548,7 @@ EvtScript N(init_80242C38) = {
     EVT_IF_EQ(GF_FLO11_Defeated_Lakitus, 0)
         EVT_IF_GE(GB_StoryProgress, 45)
             EVT_IF_EQ(GF_FLO10_LilyRequestedWaterStone, 1)
-                EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(defeat_80242AC4)))
+                EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_ADDR(N(defeat_80242AC4)))
                 EVT_CALL(SetNpcPos, 1, 200, 110, 29)
                 EVT_CALL(InterpNpcYaw, 1, 0, 1)
             EVT_END_IF
@@ -649,7 +649,7 @@ static s32 N(pad_30EC) = {
 };
 
 EvtScript N(makeEntities) = {
-    EVT_CALL(MakeEntity, EVT_PTR(Entity_MulticoinBlock), -220, 60, -75, 0, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, EVT_ADDR(Entity_MulticoinBlock), -220, 60, -75, 0, MAKE_ENTITY_END)
     EVT_CALL(AssignBlockFlag, GF_FLO11_MultiCoinBrick)
     EVT_RETURN
     EVT_END

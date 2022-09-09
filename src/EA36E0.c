@@ -5,8 +5,8 @@
 
 // Copy of kzn_17 (C887B0.c)
 
-#define UNK_FUNC_50_VAR1 -583.0
-#define UNK_FUNC_50_VAR2 165.0
+#define UNK_FUNC_50_LVar1 -583.0
+#define UNK_FUNC_50_LVar2 165.0
 
 ApiStatus N(SpinyTrompHit)(Evt* script, s32 isInitialCall) {
     subtract_hp(1);
@@ -50,8 +50,8 @@ INCLUDE_ASM(s32, "EA36E0", func_80242EC4_EA37C4);
 // Due to sqrtf being an inline/instrinsic func, we can't use dead.h
 #ifdef NON_MATCHING
 ApiStatus func_80243054_EA3954(Evt* script, s32 isInitialCall) {
-    f32 temp_f2 = UNK_FUNC_50_VAR1 - script->varTable[0]; //-469.0
-    f32 temp_f0 = UNK_FUNC_50_VAR2 - script->varTable[2]; //46.0
+    f32 temp_f2 = UNK_FUNC_50_LVar1 - script->varTable[0]; //-469.0
+    f32 temp_f0 = UNK_FUNC_50_LVar2 - script->varTable[2]; //46.0
 
     script->varTable[3] = -sqrtf((temp_f2 * temp_f2) + (temp_f0 * temp_f0));
 

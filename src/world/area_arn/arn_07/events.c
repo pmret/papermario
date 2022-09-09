@@ -88,8 +88,8 @@ EvtScript N(80243B28) = {
 
 EvtScript N(makeEntities) = {
     EVT_IF_LT(GB_StoryProgress, -24)
-        EVT_CALL(MakeEntity, EVT_PTR(Entity_Padlock), 10, 30, -155, 0, MAKE_ENTITY_END)
-        EVT_CALL(AssignScript, EVT_PTR(N(80243B28)))
+        EVT_CALL(MakeEntity, EVT_ADDR(Entity_Padlock), 10, 30, -155, 0, MAKE_ENTITY_END)
+        EVT_CALL(AssignScript, EVT_ADDR(N(80243B28)))
         EVT_SET(MapVar(0), LocalVar(0))
     EVT_END_IF
     EVT_RETURN
@@ -119,7 +119,7 @@ EvtScript N(npcAI_80243C08) = {
     EVT_CALL(SetSelfVar, 5, -850)
     EVT_CALL(SetSelfVar, 6, 60)
     EVT_CALL(SetSelfVar, 1, 700)
-    EVT_CALL(N(FlyingAI_Main), EVT_PTR(N(npcAISettings_80243BD8)))
+    EVT_CALL(N(FlyingAI_Main), EVT_ADDR(N(npcAISettings_80243BD8)))
     EVT_RETURN
     EVT_END
 };
@@ -498,8 +498,8 @@ EvtScript N(init_80245058) = {
 
 EvtScript N(init_80245090) = {
     EVT_CALL(SetSelfVar, 0, 0)
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80244C54)))
-    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(defeat_80244FB8)))
+    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_ADDR(N(idle_80244C54)))
+    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_ADDR(N(defeat_80244FB8)))
     EVT_IF_NE(GB_StoryProgress, -17)
         EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_END_IF
@@ -509,7 +509,7 @@ EvtScript N(init_80245090) = {
 
 EvtScript N(init_80245104) = {
     EVT_CALL(SetSelfVar, 0, 0)
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80244CC8)))
+    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_ADDR(N(idle_80244CC8)))
     EVT_IF_NE(GB_StoryProgress, -17)
         EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_END_IF
@@ -718,7 +718,7 @@ EvtScript N(80245304) = {
 EvtScript N(init_80245C9C) = {
     EVT_CALL(GetEntryID, LocalVar(0))
     EVT_IF_EQ(LocalVar(0), 3)
-        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80245210)))
+        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_ADDR(N(idle_80245210)))
         EVT_EXEC(N(80245304))
     EVT_ELSE
         EVT_CALL(RemoveNpc, NPC_SELF)

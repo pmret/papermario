@@ -231,10 +231,10 @@ EvtScript N(main) = {
     EVT_CALL(N(func_802A13E4_72C994))
     EVT_WAIT(2)
     EVT_IF_NE(LocalVar(0), 133)
-        EVT_JUMP(EVT_PTR(UseMystery))
+        EVT_JUMP(EVT_ADDR(UseMystery))
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(CreateVirtualEntity, LocalVar(10), EVT_PTR(N(modelCommandList)))
+    EVT_CALL(CreateVirtualEntity, LocalVar(10), EVT_ADDR(N(modelCommandList)))
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_ADD(LocalVar(1), 150)
     EVT_CALL(SetVirtualEntityPosition, LocalVar(10), LocalVar(0), LocalVar(1), LocalVar(2))

@@ -56,14 +56,14 @@ EvtScript N(main) = {
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
     EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
     EVT_CALL(SetCamEnabled, 0, 1)
-    EVT_CALL(MakeNpcs, 0, EVT_PTR(N(npcGroupList_802412C0)))
+    EVT_CALL(MakeNpcs, 0, EVT_ADDR(N(npcGroupList_802412C0)))
     EVT_EXEC_WAIT(N(makeEntities))
     EVT_CALL(GetEntryID, LocalVar(0))
     EVT_IF_EQ(LocalVar(0), 1)
         EVT_EXEC(N(802404D8))
     EVT_ELSE
         EVT_CALL(ModifyColliderFlags, 0, 1, 0x7FFFFE00)
-        EVT_SET(LocalVar(0), EVT_PTR(N(8024017C)))
+        EVT_SET(LocalVar(0), EVT_ADDR(N(8024017C)))
         EVT_EXEC(EnterWalk)
     EVT_END_IF
     EVT_CALL(ModifyColliderFlags, 0, 14, 0x7FFFFE00)
@@ -145,7 +145,7 @@ EvtScript N(802404D8) = {
     EVT_CALL(GetNpcPos, 10, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_ADD(LocalVar(1), 400)
     EVT_CALL(NpcJump0, 10, LocalVar(0), LocalVar(1), LocalVar(2), 40)
-    EVT_CALL(GotoMap, EVT_PTR("flo_00"), 9)
+    EVT_CALL(GotoMap, EVT_ADDR("flo_00"), 9)
     EVT_WAIT(70)
     EVT_RETURN
     EVT_END
@@ -249,11 +249,11 @@ EvtScript N(init_80240CD0) = {
     EVT_CALL(EnableNpcShadow, 10, FALSE)
     EVT_IF_LT(GB_StoryProgress, 53)
         EVT_CALL(SetNpcPos, 10, 0, 270, 0)
-        EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_80240B28)))
+        EVT_CALL(BindNpcInteract, NPC_SELF, EVT_ADDR(N(interact_80240B28)))
         EVT_EXEC(N(8024032C))
     EVT_ELSE
         EVT_CALL(SetNpcPos, 10, 0, 450, 0)
-        EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_80240B28)))
+        EVT_CALL(BindNpcInteract, NPC_SELF, EVT_ADDR(N(interact_80240B28)))
         EVT_SET(AreaFlag(38), 0)
         EVT_EXEC(N(8024094C))
     EVT_END_IF
@@ -272,7 +272,7 @@ EvtScript N(init_80240DB4) = {
         EVT_CALL(SetNpcPos, 11, 0, 270, -5)
     EVT_ELSE
         EVT_CALL(SetNpcPos, 11, 0, 450, -5)
-        EVT_CALL(BindNpcAux, -1, EVT_PTR(N(aux_8024079C)))
+        EVT_CALL(BindNpcAux, -1, EVT_ADDR(N(aux_8024079C)))
     EVT_END_IF
     EVT_RETURN
     EVT_END
@@ -362,8 +362,8 @@ EvtScript N(802412E0) = {
 
 EvtScript N(makeEntities) = {
     EVT_IF_EQ(GF_FLO15_BombedRock, 0)
-        EVT_CALL(MakeEntity, EVT_PTR(Entity_BombableRock), -180, 0, -18, 0, MAKE_ENTITY_END)
-        EVT_CALL(AssignScript, EVT_PTR(N(802412E0)))
+        EVT_CALL(MakeEntity, EVT_ADDR(Entity_BombableRock), -180, 0, -18, 0, MAKE_ENTITY_END)
+        EVT_CALL(AssignScript, EVT_ADDR(N(802412E0)))
     EVT_END_IF
     EVT_RETURN
     EVT_END
@@ -388,7 +388,7 @@ EvtScript N(802413B0) = {
         EVT_END_IF
         EVT_CALL(DisablePlayerInput, TRUE)
         EVT_THREAD
-            EVT_USE_BUF(EVT_PTR(N(intTable_80241360)))
+            EVT_USE_BUF(EVT_ADDR(N(intTable_80241360)))
             EVT_LOOP(10)
                 EVT_BUF_READ2(LocalVar(1), LocalVar(2))
                 EVT_CALL(ShakeCam, 0, 0, LocalVar(1), LocalVar(2))

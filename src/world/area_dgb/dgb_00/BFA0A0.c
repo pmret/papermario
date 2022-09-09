@@ -51,7 +51,7 @@ EvtScript N(exitDoubleDoor_8024021C) = {
     EVT_SET(LocalVar(3), 7)
     EVT_EXEC(ExitDoubleDoor)
     EVT_WAIT(17)
-    EVT_CALL(GotoMap, EVT_PTR("dgb_01"), 0)
+    EVT_CALL(GotoMap, EVT_ADDR("dgb_01"), 0)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END
@@ -83,7 +83,7 @@ EvtScript N(enterDoubleDoor_8024038C) = {
     EVT_CALL(GetEntryID, LocalVar(0))
     EVT_SWITCH(LocalVar(0))
         EVT_CASE_EQ(0)
-            EVT_SET(LocalVar(0), EVT_PTR(N(802402D0)))
+            EVT_SET(LocalVar(0), EVT_ADDR(N(802402D0)))
             EVT_EXEC(EnterWalk)
             EVT_WAIT(1)
         EVT_CASE_EQ(1)
@@ -120,9 +120,9 @@ EvtScript N(main) = {
     EVT_CALL(SetCamEnabled, 0, 1)
     EVT_CALL(GetEntryID, LocalVar(0))
     EVT_IF_EQ(LocalVar(0), 2)
-        EVT_CALL(MakeNpcs, 0, EVT_PTR(N(npcGroupList_80243740)))
+        EVT_CALL(MakeNpcs, 0, EVT_ADDR(N(npcGroupList_80243740)))
     EVT_ELSE
-        EVT_CALL(MakeNpcs, 0, EVT_PTR(N(npcGroupList_802436EC)))
+        EVT_CALL(MakeNpcs, 0, EVT_ADDR(N(npcGroupList_802436EC)))
     EVT_END_IF
     EVT_EXEC_WAIT(N(makeEntities))
     EVT_EXEC(N(80240110))

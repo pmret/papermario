@@ -48,7 +48,7 @@ EvtScript N(main) = {
     EVT_CALL(ModifyColliderFlags, 0, 6, 0x7FFFFE00)
     EVT_EXEC_WAIT(N(80240680))
     EVT_EXEC(N(80240050))
-    EVT_SET(LocalVar(0), EVT_PTR(N(8024014C)))
+    EVT_SET(LocalVar(0), EVT_ADDR(N(8024014C)))
     EVT_EXEC(EnterWalk)
     EVT_WAIT(1)
     EVT_RETURN

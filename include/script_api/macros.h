@@ -99,6 +99,33 @@
 #define EVT_ENTITY_INDEX(entityIndex) (((((entityIndex)) + EVT_ENTITY_ID_BIT)))
 
 
+#define EVT_INDEX_OF_LOCAL_VAR(v)   ((v) +  30000000)
+#define EVT_INDEX_OF_LOCAL_FLAG(v)  ((v) +  70000000)
+#define EVT_INDEX_OF_MAP_VAR(v)     ((v) +  50000000)
+#define EVT_INDEX_OF_MAP_FLAG(v)    ((v) +  90000000)
+#define EVT_INDEX_OF_AREA_FLAG(v)   ((v) + 110000000)
+#define EVT_INDEX_OF_AREA_BYTE(v)   ((v) + 150000000)
+#define EVT_INDEX_OF_GAME_FLAG(v)   ((v) + 130000000)
+#define EVT_INDEX_OF_GAME_BYTE(v)   ((v) + 170000000)
+
+// shorthand names for LocalVar
+#define LVar0 LocalVar(0)
+#define LVar1 LocalVar(1)
+#define LVar2 LocalVar(2)
+#define LVar3 LocalVar(3)
+#define LVar4 LocalVar(4)
+#define LVar5 LocalVar(5)
+#define LVar6 LocalVar(6)
+#define LVar7 LocalVar(7)
+#define LVar8 LocalVar(8)
+#define LVar9 LocalVar(9)
+#define LVarA LocalVar(10)
+#define LVarB LocalVar(11)
+#define LVarC LocalVar(12)
+#define LVarD LocalVar(13)
+#define LVarE LocalVar(14)
+#define LVarF LocalVar(15)
+
 /****** INSTRUCTIONS **************************************************************************************************/
 
 /// On each frame, the EVT manager will continue executing commands in all threads until a blocking command is
@@ -326,13 +353,13 @@
 #define EVT_BUF_READ1(VAR)                      EVT_CMD(EVT_OP_BUF_READ1, VAR),
 
 /// Consumes the next two s32s from the buffer and stores them in the given variables.
-#define EVT_BUF_READ2(VAR1, VAR2)               EVT_CMD(EVT_OP_BUF_READ2, VAR1, VAR2),
+#define EVT_BUF_READ2(LVar1, LVar2)               EVT_CMD(EVT_OP_BUF_READ2, LVar1, LVar2),
 
 /// Consumes the next three s32s from the buffer and stores them in the given variables.
-#define EVT_BUF_READ3(VAR1, VAR2, VAR3)         EVT_CMD(EVT_OP_BUF_READ3, VAR1, VAR2, VAR3),
+#define EVT_BUF_READ3(LVar1, LVar2, LVar3)         EVT_CMD(EVT_OP_BUF_READ3, LVar1, LVar2, LVar3),
 
 /// Consumes the next four s32s from the buffer and stores them in the given variables.
-#define EVT_BUF_READ4(VAR1, VAR2, VAR3, VAR4)   EVT_CMD(EVT_OP_BUF_READ4, VAR1, VAR2, VAR3, VAR4),
+#define EVT_BUF_READ4(LVar1, LVar2, LVar3, LVar4)   EVT_CMD(EVT_OP_BUF_READ4, LVar1, LVar2, LVar3, LVar4),
 
 /// Gets the s32 at the given offset of the buffer and stores it in the given variable, without consuming it.
 #define EVT_BUF_PEEK(OFFSET, VAR)               EVT_CMD(EVT_OP_BUF_PEEK, OFFSET, VAR),
@@ -344,13 +371,13 @@
 #define EVT_FBUF_READ1(VAR)                     EVT_CMD(EVT_OP_FBUF_READ1, VAR),
 
 /// Consumes the next two f32s from the buffer and stores them in the given variables.
-#define EVT_FBUF_READ2(VAR1, VAR2)              EVT_CMD(EVT_OP_FBUF_READ2, VAR1, VAR2),
+#define EVT_FBUF_READ2(LVar1, LVar2)              EVT_CMD(EVT_OP_FBUF_READ2, LVar1, LVar2),
 
 /// Consumes the next three f32s from the buffer and stores them in the given variables.
-#define EVT_FBUF_READ3(VAR1, VAR2, VAR3)        EVT_CMD(EVT_OP_FBUF_READ3, VAR1, VAR2, VAR3),
+#define EVT_FBUF_READ3(LVar1, LVar2, LVar3)        EVT_CMD(EVT_OP_FBUF_READ3, LVar1, LVar2, LVar3),
 
 /// Consumes the next four f32s from the buffer and stores them in the given variables.
-#define EVT_FBUF_READ4(VAR1, VAR2, VAR3, VAR4)  EVT_CMD(EVT_OP_FBUF_READ4, VAR1, VAR2, VAR3, VAR4),
+#define EVT_FBUF_READ4(LVar1, LVar2, LVar3, LVar4)  EVT_CMD(EVT_OP_FBUF_READ4, LVar1, LVar2, LVar3, LVar4),
 
 /// Gets the f32 at the given offset of the buffer and stores it in the given variable, without consuming it.
 #define EVT_FBUF_PEEK(OFFSET, VAR)              EVT_CMD(EVT_OP_FBUF_PEEK, OFFSET, VAR),
@@ -517,7 +544,7 @@
         EVT_SET_GROUP(EVT_GROUP_1B) \
         EVT_CALL(UseExitHeading, walkDistance, exitIdx) \
         EVT_EXEC(ExitWalk) \
-        EVT_CALL(GotoMap, EVT_PTR(map), entryIdx) \
+        EVT_CALL(GotoMap, EVT_ADDR(map), entryIdx) \
         EVT_WAIT(100) \
         EVT_RETURN \
         EVT_END \
