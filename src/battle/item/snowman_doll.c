@@ -36,18 +36,18 @@ ApiStatus N(func_802A13B8_71C1E8)(Evt* script, s32 isInitialCall) {
 #include "UseItem.inc.c"
 
 EvtScript N(main) = {
-    EVT_SET_CONST(LocalVar(10), 0x00000081)
+    EVT_SET_CONST(LVarA, 0x00000081)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_CALL(N(FadeBackgroundToBlack))
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_363)
     EVT_THREAD
         EVT_LOOP(45)
-            EVT_CALL(RandInt, 300, LocalVar(0))
-            EVT_SUB(LocalVar(0), 150)
-            EVT_SET(LocalVar(1), 170)
-            EVT_CALL(RandInt, 50, LocalVar(2))
-            EVT_SUB(LocalVar(2), 25)
-            EVT_CALL(PlayEffect, 0xE, LocalVar(0), LocalVar(1), LocalVar(2), 60, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(RandInt, 300, LVar0)
+            EVT_SUB(LVar0, 150)
+            EVT_SET(LVar1, 170)
+            EVT_CALL(RandInt, 50, LVar2)
+            EVT_SUB(LVar2, 25)
+            EVT_CALL(PlayEffect, 0xE, LVar0, LVar1, LVar2, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0)
             EVT_WAIT(2)
         EVT_END_LOOP
     EVT_END_THREAD
@@ -83,18 +83,18 @@ EvtScript N(main) = {
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(ItemCheckHit, LocalVar(0), 268435456, 0, LocalVar(0), 0)
-    EVT_IF_EQ(LocalVar(0), 6)
+    EVT_CALL(ItemCheckHit, LVar0, 268435456, 0, LVar0, 0)
+    EVT_IF_EQ(LVar0, 6)
         EVT_GOTO(1)
     EVT_END_IF
-    EVT_CALL(GetGoalPos, ACTOR_SELF, LocalVar(0), LocalVar(1), LocalVar(2))
-    EVT_CALL(N(func_802A123C_71C06C), LocalVar(0), LocalVar(1), LocalVar(2))
-    EVT_CALL(GetItemPower, ITEM_SNOWMAN_DOLL, LocalVar(0), LocalVar(1))
-    EVT_CALL(ItemDamageEnemy, LocalVar(0), 939524104, 0, LocalVar(0), 32)
+    EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+    EVT_CALL(N(func_802A123C_71C06C), LVar0, LVar1, LVar2)
+    EVT_CALL(GetItemPower, ITEM_SNOWMAN_DOLL, LVar0, LVar1)
+    EVT_CALL(ItemDamageEnemy, LVar0, 939524104, 0, LVar0, 32)
     EVT_WAIT(5)
     EVT_LABEL(1)
-    EVT_CALL(ChooseNextTarget, 0, LocalVar(0))
-    EVT_IF_NE(LocalVar(0), -1)
+    EVT_CALL(ChooseNextTarget, 0, LVar0)
+    EVT_IF_NE(LVar0, -1)
         EVT_GOTO(0)
     EVT_END_IF
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10002)

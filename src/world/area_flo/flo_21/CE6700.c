@@ -222,10 +222,10 @@ EvtScript N(802415E0) = {
 
 EvtScript N(80241600) = {
     EVT_THREAD
-        EVT_SET(LocalVar(15), 0)
+        EVT_SET(LVarF, 0)
         EVT_LABEL(0)
-        EVT_CALL(N(UnkFloatFunc), LocalVar(15), LocalVar(0), EVT_FLOAT(0.96875), EVT_FLOAT(1.03125), 15, 0, 0)
-        EVT_CALL(N(UnkFloatFunc), LocalVar(15), LocalVar(1), EVT_FLOAT(1.03125), EVT_FLOAT(0.96875), 15, 0, 0)
+        EVT_CALL(N(UnkFloatFunc), LVarF, LocalVar(0), EVT_FLOAT(0.96875), EVT_FLOAT(1.03125), 15, 0, 0)
+        EVT_CALL(N(UnkFloatFunc), LVarF, LocalVar(1), EVT_FLOAT(1.03125), EVT_FLOAT(0.96875), 15, 0, 0)
         EVT_CALL(ScaleModel, 88, LocalVar(1), LocalVar(0), 1)
         EVT_CALL(ScaleModel, 90, LocalVar(1), LocalVar(0), 1)
         EVT_CALL(ScaleModel, 92, LocalVar(0), LocalVar(1), 1)
@@ -234,9 +234,9 @@ EvtScript N(80241600) = {
         EVT_CALL(ScaleModel, 98, LocalVar(1), LocalVar(0), 1)
         EVT_CALL(ScaleModel, 100, LocalVar(0), LocalVar(1), 1)
         EVT_CALL(ScaleModel, 102, LocalVar(0), LocalVar(1), 1)
-        EVT_ADD(LocalVar(15), 1)
-        EVT_IF_GE(LocalVar(15), 30)
-            EVT_SET(LocalVar(15), 0)
+        EVT_ADD(LVarF, 1)
+        EVT_IF_GE(LVarF, 30)
+            EVT_SET(LVarF, 0)
         EVT_END_IF
         EVT_WAIT(1)
         EVT_GOTO(0)

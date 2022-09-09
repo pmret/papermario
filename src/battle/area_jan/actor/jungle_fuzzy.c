@@ -263,7 +263,7 @@ EvtScript N(divide) = {
     EVT_CALL(SummonEnemy, EVT_ADDR(N(specialFormation_8022180C)), 0)
     EVT_CALL(GetActorPos, ACTOR_SELF, LocalVar(1), LocalVar(2), LocalVar(3))
     EVT_CALL(SetActorPos, LocalVar(0), LocalVar(1), LocalVar(2), LocalVar(3))
-    EVT_CALL(SetGoalToIndex, LocalVar(0), LocalVar(10))
+    EVT_CALL(SetGoalToIndex, LocalVar(0), LVarA)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_THREAD
@@ -332,7 +332,7 @@ EvtScript N(leechAttack) = {
     EVT_SWITCH(LocalVar(0))
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
-            EVT_SET(LocalVar(10), LocalVar(0))
+            EVT_SET(LVarA, LocalVar(0))
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LocalVar(0), LocalVar(1), LocalVar(2))
             EVT_SUB(LocalVar(0), 5)
@@ -357,7 +357,7 @@ EvtScript N(leechAttack) = {
             EVT_CALL(GetGoalPos, ACTOR_SELF, LocalVar(0), LocalVar(1), LocalVar(2))
             EVT_WAIT(4)
             EVT_WAIT(5)
-            EVT_IF_EQ(LocalVar(10), HIT_RESULT_LUCKY)
+            EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LocalVar(0), DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
             EVT_WAIT(5)
@@ -418,7 +418,7 @@ EvtScript N(leechAttack) = {
             EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.6), EVT_FLOAT(1.6), EVT_FLOAT(1.0))
             EVT_WAIT(10)
             EVT_WAIT(2)
-            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LocalVar(10), DAMAGE_TYPE_IGNORE_DEFENSE, 0, 0, 2, BS_FLAGS1_40)
+            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarA, DAMAGE_TYPE_IGNORE_DEFENSE, 0, 0, 2, BS_FLAGS1_40)
             EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 8, 0)
             EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
@@ -434,7 +434,7 @@ EvtScript N(leechAttack) = {
         EVT_WAIT(10)
         EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, 0)
         EVT_CALL(func_802A9110_4256A0, 0, 32767, 3)
-        EVT_SET(LocalVar(13), 0)
+        EVT_SET(LVarD, 0)
         EVT_LOOP(5)
             EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
             EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, 0x03000C)
@@ -555,7 +555,7 @@ EvtScript N(leechAttack) = {
                 EVT_BREAK_LOOP
             EVT_END_IF
             EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
-            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LocalVar(10), DAMAGE_TYPE_UNBLOCKABLE | DAMAGE_TYPE_IGNORE_DEFENSE, 0, 0, 2, BS_FLAGS1_40)
+            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarA, DAMAGE_TYPE_UNBLOCKABLE | DAMAGE_TYPE_IGNORE_DEFENSE, 0, 0, 2, BS_FLAGS1_40)
             EVT_CALL(GetLastDamage, ACTOR_PLAYER, LocalVar(3))
             EVT_IF_NE(LocalVar(3), 0)
                 EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x206D)
@@ -575,8 +575,8 @@ EvtScript N(leechAttack) = {
                 EVT_ADD(LocalVar(0), LocalVar(3))
                 EVT_CALL(SetEnemyHP, ACTOR_SELF, LocalVar(0))
             EVT_ELSE
-                EVT_ADD(LocalVar(13), 1)
-                EVT_IF_GT(LocalVar(13), 1)
+                EVT_ADD(LVarD, 1)
+                EVT_IF_GT(LVarD, 1)
                     EVT_CALL(func_80269470)
                     EVT_BREAK_LOOP
                 EVT_END_IF
@@ -705,45 +705,45 @@ EvtScript N(802210E0) = {
     EVT_IF_NE(LocalVar(0), -1)
         EVT_GOTO(0)
     EVT_END_IF
-    EVT_SET(LocalVar(10), -1)
-    EVT_SET(LocalVar(11), -1)
+    EVT_SET(LVarA, -1)
+    EVT_SET(LVarB, -1)
     EVT_CALL(GetIndexFromHome, ACTOR_SELF, LocalVar(0))
     EVT_SWITCH(LocalVar(0))
         EVT_CASE_EQ(0)
             EVT_IF_EQ(LocalFlag(2), 0)
-                EVT_SET(LocalVar(10), 1)
+                EVT_SET(LVarA, 1)
             EVT_END_IF
         EVT_CASE_EQ(1)
             EVT_IF_EQ(LocalFlag(1), 0)
-                EVT_SET(LocalVar(10), 0)
+                EVT_SET(LVarA, 0)
             EVT_END_IF
             EVT_IF_EQ(LocalFlag(3), 0)
-                EVT_IF_EQ(LocalVar(10), -1)
-                    EVT_SET(LocalVar(10), 2)
+                EVT_IF_EQ(LVarA, -1)
+                    EVT_SET(LVarA, 2)
                 EVT_ELSE
-                    EVT_SET(LocalVar(11), 2)
+                    EVT_SET(LVarB, 2)
                 EVT_END_IF
             EVT_END_IF
         EVT_CASE_EQ(2)
             EVT_IF_EQ(LocalFlag(2), 0)
-                EVT_SET(LocalVar(10), 1)
+                EVT_SET(LVarA, 1)
             EVT_END_IF
             EVT_IF_EQ(LocalFlag(4), 0)
-                EVT_IF_EQ(LocalVar(10), -1)
-                    EVT_SET(LocalVar(10), 3)
+                EVT_IF_EQ(LVarA, -1)
+                    EVT_SET(LVarA, 3)
                 EVT_ELSE
-                    EVT_SET(LocalVar(11), 3)
+                    EVT_SET(LVarB, 3)
                 EVT_END_IF
             EVT_END_IF
         EVT_CASE_EQ(3)
             EVT_IF_EQ(LocalFlag(3), 0)
-                EVT_SET(LocalVar(10), 2)
+                EVT_SET(LVarA, 2)
             EVT_END_IF
     EVT_END_SWITCH
-    EVT_IF_NE(LocalVar(11), -1)
+    EVT_IF_NE(LVarB, -1)
         EVT_CALL(RandInt, 1000, LocalVar(0))
         EVT_IF_LT(LocalVar(0), 500)
-            EVT_SET(LocalVar(10), LocalVar(11))
+            EVT_SET(LVarA, LVarB)
         EVT_END_IF
     EVT_END_IF
     EVT_RETURN
@@ -797,7 +797,7 @@ EvtScript N(takeTurn_80221628) = {
         EVT_RETURN
     EVT_END_IF
     EVT_EXEC_WAIT(N(802210E0))
-    EVT_IF_EQ(LocalVar(10), -1)
+    EVT_IF_EQ(LVarA, -1)
         EVT_EXEC_WAIT(N(leechAttack))
         EVT_RETURN
     EVT_END_IF

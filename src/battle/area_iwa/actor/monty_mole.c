@@ -219,12 +219,12 @@ EvtScript N(idle_8021A814) = {
 EvtScript N(handleEvent_8021A824) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
-    EVT_CALL(GetLastElement, LocalVar(14))
+    EVT_CALL(GetLastElement, LVarE)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LocalVar(0))
     EVT_SWITCH(LocalVar(0))
         EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
         EVT_CASE_OR_EQ(EVENT_HIT)
-            EVT_IF_FLAG(LocalVar(14), DAMAGE_TYPE_SMASH)
+            EVT_IF_FLAG(LVarE, DAMAGE_TYPE_SMASH)
                 EVT_CHILD_THREAD
                     EVT_WAIT(8)
                     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_monty_mole_Palette_00_Anim_7)
@@ -378,7 +378,7 @@ EvtScript N(takeTurn_8021AFAC) = {
     EVT_SWITCH(LocalVar(0))
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
-            EVT_SET(LocalVar(10), LocalVar(0))
+            EVT_SET(LVarA, LocalVar(0))
             EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LocalVar(0), LocalVar(1), LocalVar(2))
@@ -389,7 +389,7 @@ EvtScript N(takeTurn_8021AFAC) = {
             EVT_CALL(SetAnimation, ACTOR_SELF, 3, NPC_ANIM_monty_mole_Palette_00_Anim_F)
             EVT_CALL(FlyPartTo, ACTOR_SELF, 3, LocalVar(0), LocalVar(1), LocalVar(2), 0, 30, 0)
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, 3, ACTOR_PART_FLAG_INVISIBLE, 1)
-            EVT_IF_EQ(LocalVar(10), HIT_RESULT_LUCKY)
+            EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LocalVar(0), DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
             EVT_CALL(YieldTurn)

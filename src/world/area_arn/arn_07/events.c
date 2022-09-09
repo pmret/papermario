@@ -277,11 +277,11 @@ EvtScript N(80243FE8) = {
             EVT_CALL(PlayerFaceNpc, -1, 1)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_EXEC_GET_TID(N(80243DCC), LocalVar(10))
+    EVT_EXEC_GET_TID(N(80243DCC), LVarA)
     EVT_CALL(GetNpcPos, NPC_SELF, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_SUB(LocalVar(0), 800)
     EVT_CALL(NpcMoveTo, NPC_SELF, LocalVar(0), LocalVar(2), 80)
-    EVT_KILL_THREAD(LocalVar(10))
+    EVT_KILL_THREAD(LVarA)
     EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
     EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
     EVT_SET(GB_StoryProgress, -16)

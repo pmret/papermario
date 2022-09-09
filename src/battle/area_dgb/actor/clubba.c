@@ -237,11 +237,11 @@ EvtScript N(takeTurn_802186BC) = {
     EVT_SWITCH(LocalVar(0))
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
-            EVT_SET(LocalVar(10), LocalVar(0))
+            EVT_SET(LVarA, LocalVar(0))
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20C5)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_battle_clubba_Palette_00_Anim_8)
             EVT_WAIT(10)
-            EVT_IF_EQ(LocalVar(10), HIT_RESULT_LUCKY)
+            EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LocalVar(0), DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
                 EVT_WAIT(20)
             EVT_END_IF

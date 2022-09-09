@@ -52,7 +52,7 @@ EvtScript N(Pipe_EnterVertical) = {
     EVT_IF_NE(LocalVar(0), -1)
         EVT_GOTO(0)
     EVT_END_IF
-    EVT_EXEC(LocalVar(10))
+    EVT_EXEC(LVarA)
     EVT_RETURN
     EVT_END
 };
@@ -61,7 +61,7 @@ EvtScript N(Pipe_EnterHorizontal) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(HidePlayerShadow, TRUE)
-    EVT_CALL(ModifyColliderFlags, 0, LocalVar(11), 0x7FFFFE00)
+    EVT_CALL(ModifyColliderFlags, 0, LVarB, 0x7FFFFE00)
     EVT_CALL(GetEntryID, LocalVar(0))
     EVT_CALL(N(Pipe_GetEntryPos))
     EVT_SET(LocalVar(5), LocalVar(1))
@@ -111,11 +111,11 @@ EvtScript N(Pipe_EnterHorizontal) = {
     EVT_END_IF
     EVT_WAIT(5)
     EVT_CALL(func_802D2520, ANIM_10002, 0, 0, 0, 0, 0)
-    EVT_CALL(ModifyColliderFlags, 1, LocalVar(11), 0x7FFFFE00)
+    EVT_CALL(ModifyColliderFlags, 1, LVarB, 0x7FFFFE00)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_CALL(DisablePlayerPhysics, FALSE)
     EVT_CALL(PanToTarget, 0, 0, 0)
-    EVT_EXEC(LocalVar(10))
+    EVT_EXEC(LVarA)
     EVT_RETURN
     EVT_END
 };
@@ -147,10 +147,10 @@ EvtScript N(Pipe_ScriptD) = {
     EVT_SET_GROUP(EVT_GROUP_1B)
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(HidePlayerShadow, TRUE)
-    EVT_SET(LocalVar(0), LocalVar(10))
+    EVT_SET(LocalVar(0), LVarA)
     EVT_CALL(N(Pipe_GetEntryPos))
     EVT_CALL(PlayerMoveTo, LocalVar(1), LocalVar(3), 3)
-    EVT_SET(LocalVar(0), LocalVar(10))
+    EVT_SET(LocalVar(0), LVarA)
     EVT_CALL(N(Pipe_GetEntryPos))
     EVT_CALL(SetPlayerPos, LocalVar(1), LocalVar(2), LocalVar(3))
     EVT_CALL(SetPlayerFlagBits, PLAYER_STATUS_ANIM_FLAGS_200000, TRUE)
@@ -171,7 +171,7 @@ EvtScript N(Pipe_ScriptD) = {
     EVT_CALL(func_802D286C, 0x800)
     EVT_CALL(func_802D2520, ANIM_10002, 5, 2, 1, 1, 0)
     EVT_WAIT(25)
-    EVT_EXEC_WAIT(LocalVar(12))
+    EVT_EXEC_WAIT(LVarC)
     EVT_RETURN
     EVT_END
 };
@@ -200,8 +200,8 @@ EvtScript N(Pipe_ExitHorizontal) = {
     EVT_SET_GROUP(EVT_GROUP_1B)
     EVT_CALL(N(Pipe_SetAnimFlag))
     EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(ModifyColliderFlags, 0, LocalVar(11), 0x7FFFFE00)
-    EVT_SET(LocalVar(0), LocalVar(10))
+    EVT_CALL(ModifyColliderFlags, 0, LVarB, 0x7FFFFE00)
+    EVT_SET(LocalVar(0), LVarA)
     EVT_CALL(N(Pipe_GetEntryPos))
     EVT_SET(LocalVar(5), LocalVar(1))
     EVT_SET(LocalVar(6), LocalVar(2))
@@ -233,7 +233,7 @@ EvtScript N(Pipe_ExitHorizontal) = {
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_WAIT(25)
-    EVT_EXEC_WAIT(LocalVar(12))
+    EVT_EXEC_WAIT(LVarC)
     EVT_RETURN
     EVT_END
 };

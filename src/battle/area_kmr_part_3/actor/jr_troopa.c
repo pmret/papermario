@@ -123,10 +123,10 @@ s32 N(idleAnimations_80222C6C)[] = {
 };
 
 EvtScript N(80222C78) = {
-    EVT_SET(LocalVar(10), LocalVar(0))
+    EVT_SET(LVarA, LocalVar(0))
     EVT_CALL(func_8027D32C, -127)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, LocalVar(10), LocalVar(1))
+    EVT_CALL(SetAnimation, ACTOR_SELF, LVarA, LocalVar(1))
     EVT_WAIT(10)
     EVT_CALL(func_80269E80, LocalVar(5))
     EVT_SWITCH(LocalVar(5))
@@ -163,10 +163,10 @@ EvtScript N(80222C78) = {
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20E5)
-    EVT_CALL(SetAnimation, ACTOR_SELF, LocalVar(10), 0x210027)
+    EVT_CALL(SetAnimation, ACTOR_SELF, LVarA, 0x210027)
     EVT_WAIT(12)
-    EVT_CALL(SetAnimation, ACTOR_SELF, LocalVar(10), 0x210014)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, LocalVar(10), EVT_ADDR(N(idleAnimations_80222C6C)))
+    EVT_CALL(SetAnimation, ACTOR_SELF, LVarA, 0x210014)
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, LVarA, EVT_ADDR(N(idleAnimations_80222C6C)))
     EVT_WAIT(30)
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)

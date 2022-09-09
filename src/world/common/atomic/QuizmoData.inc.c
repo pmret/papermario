@@ -140,18 +140,18 @@ EvtScript N(EVS_Quizmo_MovePlayerToPodium) = {
 };
 
 EvtScript N(EVS_Quizmo_MovePartnerToPodium) = {
-    EVT_CALL(GetNpcPos, NPC_PARTNER, LocalVar(10), LocalVar(11), LocalVar(12))
-    EVT_CALL(N(Quizmo_AddViewRelativeOffset), LocalVar(10), LocalVar(12), 108, LocalVar(0), LocalVar(1))
+    EVT_CALL(GetNpcPos, NPC_PARTNER, LVarA, LVarB, LVarC)
+    EVT_CALL(N(Quizmo_AddViewRelativeOffset), LVarA, LVarC, 108, LocalVar(0), LocalVar(1))
     EVT_SETF(LocalVar(5), ArrayVar(2))
-    EVT_SUBF(LocalVar(5), LocalVar(11))
+    EVT_SUBF(LocalVar(5), LVarB)
     EVT_THREAD
         EVT_CALL(N(Quizmo_UpdatePartnerPosition))
         EVT_SETF(LocalVar(3), LocalVar(0))
         EVT_SETF(LocalVar(4), LocalVar(1))
         EVT_SETF(LocalVar(6), LocalVar(5))
-        EVT_ADDF(LocalVar(3), LocalVar(10))
-        EVT_ADDF(LocalVar(4), LocalVar(12))
-        EVT_ADDF(LocalVar(6), LocalVar(11))
+        EVT_ADDF(LocalVar(3), LVarA)
+        EVT_ADDF(LocalVar(4), LVarC)
+        EVT_ADDF(LocalVar(6), LVarB)
         EVT_CALL(SetNpcPos, NPC_PARTNER, LocalVar(3), LocalVar(6), LocalVar(4))
     EVT_END_THREAD
     EVT_CALL(N(Quizmo_SpinPartner))
@@ -162,8 +162,8 @@ EvtScript N(EVS_Quizmo_MovePartnerToPodium) = {
 };
 
 EvtScript N(EVS_Quizmo_MoveQuizmoToMicrophone) = {
-    EVT_CALL(GetNpcPos, CHUCK_QUIZMO_NPC_ID, LocalVar(10), LocalVar(11), LocalVar(12))
-    EVT_CALL(N(Quizmo_AddViewRelativeOffset), LocalVar(10), LocalVar(12), -70, LocalVar(0), LocalVar(1))
+    EVT_CALL(GetNpcPos, CHUCK_QUIZMO_NPC_ID, LVarA, LVarB, LVarC)
+    EVT_CALL(N(Quizmo_AddViewRelativeOffset), LVarA, LVarC, -70, LocalVar(0), LocalVar(1))
     EVT_THREAD
         EVT_SETF(LocalVar(2), 0)
         EVT_LOOP(60)
@@ -173,8 +173,8 @@ EvtScript N(EVS_Quizmo_MoveQuizmoToMicrophone) = {
             EVT_MULF(LocalVar(4), LocalVar(2))
             EVT_DIVF(LocalVar(3), 60)
             EVT_DIVF(LocalVar(4), 60)
-            EVT_ADDF(LocalVar(3), LocalVar(10))
-            EVT_ADDF(LocalVar(4), LocalVar(12))
+            EVT_ADDF(LocalVar(3), LVarA)
+            EVT_ADDF(LocalVar(4), LVarC)
             EVT_CALL(SetNpcPos, CHUCK_QUIZMO_NPC_ID, LocalVar(3), ArrayVar(2), LocalVar(4))
             EVT_ADDF(LocalVar(2), 1)
             EVT_WAIT(1)

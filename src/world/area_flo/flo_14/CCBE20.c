@@ -71,7 +71,7 @@ s32 N(ItemChoice_SelectedItemID) = {
 EvtScript N(80244604) = {
     EVT_SET(LocalVar(9), LocalVar(1))
     EVT_CALL(ShowConsumableChoicePopup)
-    EVT_SET(LocalVar(10), LocalVar(0))
+    EVT_SET(LVarA, LocalVar(0))
     EVT_SWITCH(LocalVar(0))
         EVT_CASE_EQ(0)
         EVT_CASE_EQ(-1)
@@ -85,7 +85,7 @@ EvtScript N(80244604) = {
             EVT_CALL(SetPlayerAnimation, ANIM_10002)
             EVT_CALL(RemoveItemEntity, LocalVar(0))
     EVT_END_SWITCH
-    EVT_CALL(N(ItemChoice_SaveSelected), LocalVar(10))
+    EVT_CALL(N(ItemChoice_SaveSelected), LVarA)
     EVT_CALL(CloseChoicePopup)
     EVT_UNBIND
     EVT_RETURN

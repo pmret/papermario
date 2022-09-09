@@ -412,7 +412,7 @@ EvtScript N(80224B3C) = {
     EVT_SWITCH(LocalVar(0))
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
-            EVT_SET(LocalVar(10), LocalVar(0))
+            EVT_SET(LVarA, LocalVar(0))
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LocalVar(0), LocalVar(1), LocalVar(2))
             EVT_SUB(LocalVar(0), 30)
@@ -431,7 +431,7 @@ EvtScript N(80224B3C) = {
             EVT_CALL(JumpToGoal, ACTOR_SELF, 4, FALSE, TRUE, FALSE)
             EVT_WAIT(20)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
-            EVT_IF_EQ(LocalVar(10), HIT_RESULT_LUCKY)
+            EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LocalVar(0), DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_tubbas_heart_Palette_00_Anim_3)
@@ -446,8 +446,8 @@ EvtScript N(80224B3C) = {
     EVT_WAIT(2)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LocalVar(0), 0, 0, 0, 6, BS_FLAGS1_SP_EVT_ACTIVE)
-    EVT_SET(LocalVar(15), LocalVar(0))
-    EVT_SWITCH(LocalVar(15))
+    EVT_SET(LVarF, LocalVar(0))
+    EVT_SWITCH(LVarF)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_QUAKE_IMMUNE)
         EVT_CASE_OR_EQ(HIT_RESULT_10)
@@ -470,7 +470,7 @@ EvtScript N(80224B3C) = {
             EVT_CALL(SetGoalPos, ACTOR_SELF, LocalVar(0), LocalVar(1), LocalVar(2))
             EVT_CALL(JumpToGoal, ACTOR_SELF, 4, FALSE, TRUE, FALSE)
             EVT_WAIT(8)
-            EVT_IF_EQ(LocalVar(15), HIT_RESULT_10)
+            EVT_IF_EQ(LVarF, HIT_RESULT_10)
                 EVT_RETURN
             EVT_END_IF
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
@@ -521,7 +521,7 @@ EvtScript N(80225258) = {
         EVT_SETF(LocalVar(3), EVT_FLOAT(0.4))
     EVT_END_IF
     EVT_CALL(PlayEffect, EFFECT_ENERGY_IN_OUT, 3, LocalVar(0), LocalVar(1), LocalVar(2), LocalVar(3), 0, 0, 0, 0, 0, 0, 0, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 4, LocalVar(15))
+    EVT_CALL(SetActorVar, ACTOR_SELF, 4, LVarF)
     EVT_CALL(EnableActorGlow, ACTOR_SELF, TRUE)
     EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_80223C1C)))
     EVT_RETURN
@@ -568,15 +568,15 @@ EvtScript N(802255D8) = {
     EVT_END_IF
     EVT_CALL(PlaySound, 0x20F9)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LocalVar(10), 0, 0, 1, BS_FLAGS1_10)
-    EVT_SWITCH(LocalVar(10))
+    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 1, BS_FLAGS1_10)
+    EVT_SWITCH(LVarA)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
             EVT_CALL(GetActorPos, ACTOR_PLAYER, LocalVar(0), LocalVar(1), LocalVar(2))
             EVT_ADD(LocalVar(1), 5)
             EVT_CALL(PlayEffect, EFFECT_TUBBA_HEART_ATTACK, 1, LocalVar(0), LocalVar(1), LocalVar(2), EVT_FLOAT(1.0), 200, 0, 0, 0, 0, 0, 0, 0)
             EVT_WAIT(145)
-            EVT_IF_EQ(LocalVar(10), HIT_RESULT_LUCKY)
+            EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LocalVar(0), DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_ELSE
             EVT_END_IF

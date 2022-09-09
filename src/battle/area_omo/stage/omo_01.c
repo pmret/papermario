@@ -18,15 +18,15 @@ EvtScript N(beforeBattle_8022DA50) = {
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamBGColor, 1, 0, 0, 0)
     EVT_THREAD
-        EVT_SETF(LocalVar(0), EVT_FLOAT(0.0))
-        EVT_SETF(LocalVar(1), EVT_FLOAT(0.0))
+        EVT_SETF(LVar0, EVT_FLOAT(0.0))
+        EVT_SETF(LVar1, EVT_FLOAT(0.0))
         EVT_LOOP(0)
-            EVT_CALL(RotateModel, 23, LocalVar(1), 0, 0, 1)
-            EVT_CALL(RotateModel, 21, LocalVar(0), 0, 0, 1)
-            EVT_SUBF(LocalVar(0), EVT_FLOAT(0.6))
-            EVT_SUBF(LocalVar(1), EVT_FLOAT(7.2))
-            EVT_CALL(ClampAngleFloat, LocalVar(0))
-            EVT_CALL(ClampAngleFloat, LocalVar(1))
+            EVT_CALL(RotateModel, 23, LVar1, 0, 0, 1)
+            EVT_CALL(RotateModel, 21, LVar0, 0, 0, 1)
+            EVT_SUBF(LVar0, EVT_FLOAT(0.6))
+            EVT_SUBF(LVar1, EVT_FLOAT(7.2))
+            EVT_CALL(ClampAngleFloat, LVar0)
+            EVT_CALL(ClampAngleFloat, LVar1)
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD

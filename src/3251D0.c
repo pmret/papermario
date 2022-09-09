@@ -111,13 +111,13 @@ EvtScript D_802C0410 = {
     EVT_CALL(SetPlayerAnimation, ANIM_GOT_ITEM)
     EVT_CALL(GetPlayerPos, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_ADD(LocalVar(1), 45)
-    EVT_CALL(MakeItemEntity, LocalVar(10), LocalVar(0), LocalVar(1), LocalVar(2), 1, 0)
-    EVT_SET(LocalVar(10), LocalVar(0))
+    EVT_CALL(MakeItemEntity, LVarA, LocalVar(0), LocalVar(1), LocalVar(2), 1, 0)
+    EVT_SET(LVarA, LocalVar(0))
     EVT_WAIT(15)
     EVT_CALL(GetPlayerPos, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_ADD(LocalVar(1), 20)
     EVT_CALL(func_802C0000, LocalVar(0), LocalVar(1), LocalVar(2))
-    EVT_CALL(RemoveItemEntity, LocalVar(10))
+    EVT_CALL(RemoveItemEntity, LVarA)
     EVT_RETURN
     EVT_END
 };
@@ -157,38 +157,38 @@ EvtScript D_802C05CC_32579C = {
         EVT_WAIT(20)
     EVT_END_IF
     EVT_CALL(func_802C02E4)
-    EVT_CALL(func_802C0358, LocalVar(10))
+    EVT_CALL(func_802C0358, LVarA)
     EVT_EXEC_WAIT(D_802C0410)
-    EVT_IF_EQ(LocalVar(13), 0)
+    EVT_IF_EQ(LVarD, 0)
         EVT_EXEC_WAIT(D_802C04F4)
     EVT_ELSE
         EVT_EXEC_WAIT(D_802C0560)
     EVT_END_IF
-    EVT_IF_EQ(LocalVar(15), 1)
+    EVT_IF_EQ(LVarF, 1)
         EVT_CALL(SetPlayerAnimation, ANIM_STICK_OUT_TONGUE)
     EVT_END_IF
-    EVT_IF_GT(LocalVar(11), 0)
+    EVT_IF_GT(LVarB, 0)
         EVT_CALL(GetPlayerPos, LocalVar(0), LocalVar(1), LocalVar(2))
         EVT_ADD(LocalVar(0), 0)
         EVT_ADD(LocalVar(1), 35)
-        EVT_CALL(func_802C00AC, LocalVar(0), LocalVar(1), LocalVar(2), LocalVar(11))
+        EVT_CALL(func_802C00AC, LocalVar(0), LocalVar(1), LocalVar(2), LVarB)
     EVT_END_IF
-    EVT_IF_GT(LocalVar(12), 0)
+    EVT_IF_GT(LVarC, 0)
         EVT_CALL(GetPlayerPos, LocalVar(0), LocalVar(1), LocalVar(2))
         EVT_ADD(LocalVar(0), 20)
         EVT_ADD(LocalVar(1), 25)
-        EVT_CALL(func_802C016C, LocalVar(0), LocalVar(1), LocalVar(2), LocalVar(12))
+        EVT_CALL(func_802C016C, LocalVar(0), LocalVar(1), LocalVar(2), LVarC)
     EVT_END_IF
     EVT_CALL(GetPlayerPos, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_ADD(LocalVar(1), 25)
-    EVT_CALL(ShowStartRecoveryShimmer, LocalVar(0), LocalVar(1), LocalVar(2), LocalVar(11))
-    EVT_IF_NE(LocalVar(11), 0)
-        EVT_CALL(func_802C022C, LocalVar(11))
+    EVT_CALL(ShowStartRecoveryShimmer, LocalVar(0), LocalVar(1), LocalVar(2), LVarB)
+    EVT_IF_NE(LVarB, 0)
+        EVT_CALL(func_802C022C, LVarB)
     EVT_END_IF
-    EVT_IF_NE(LocalVar(12), 0)
-        EVT_CALL(func_802C0288, LocalVar(12))
+    EVT_IF_NE(LVarC, 0)
+        EVT_CALL(func_802C0288, LVarC)
     EVT_END_IF
-    EVT_IF_EQ(LocalVar(15), 0)
+    EVT_IF_EQ(LVarF, 0)
         EVT_WAIT(10)
         EVT_CALL(SetPlayerAnimation, ANIM_THUMBS_UP)
         EVT_WAIT(30)
@@ -196,7 +196,7 @@ EvtScript D_802C05CC_32579C = {
         EVT_WAIT(30)
     EVT_END_IF
     EVT_CALL(GetPlayerPos, LocalVar(0), LocalVar(1), LocalVar(2))
-    EVT_CALL(ShowRecoveryShimmer, LocalVar(0), LocalVar(1), LocalVar(2), LocalVar(11))
+    EVT_CALL(ShowRecoveryShimmer, LocalVar(0), LocalVar(1), LocalVar(2), LVarB)
     EVT_CALL(SetPlayerAnimation, ANIM_10002)
     EVT_WAIT(20)
     EVT_CALL(func_802C03E8)

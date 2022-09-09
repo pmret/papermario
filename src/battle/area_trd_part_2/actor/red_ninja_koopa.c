@@ -165,7 +165,7 @@ EvtScript N(80228748) = {
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_SWITCH(LocalVar(10))
+    EVT_SWITCH(LVarA)
         EVT_CASE_EQ(0)
             EVT_CALL(GetActorVar, ACTOR_SELF, 1, LocalVar(0))
             EVT_SWITCH(LocalVar(0))
@@ -416,9 +416,9 @@ EvtScript N(80228748) = {
                             EVT_CASE_EQ(HIT_RESULT_MISS)
                                 EVT_RETURN
                         EVT_END_SWITCH
-                        EVT_CALL(GetActorVar, ACTOR_ENEMY4, 4, LocalVar(10))
+                        EVT_CALL(GetActorVar, ACTOR_ENEMY4, 4, LVarA)
                         EVT_LABEL(0)
-                        EVT_CALL(GetActorPos, LocalVar(10), LocalVar(0), LocalVar(1), LocalVar(2))
+                        EVT_CALL(GetActorPos, LVarA, LocalVar(0), LocalVar(1), LocalVar(2))
                         EVT_CALL(GetActorPos, ACTOR_PLAYER, LocalVar(3), LocalVar(4), LocalVar(5))
                         EVT_IF_GT(LocalVar(0), LocalVar(3))
                             EVT_WAIT(1)
@@ -462,11 +462,11 @@ EvtScript N(80228748) = {
                     EVT_CALL(GetHomePos, LocalVar(1), LocalVar(2), LocalVar(3), LocalVar(4))
                     EVT_SET(LocalVar(4), 15)
                     EVT_CALL(SetGoalPos, ACTOR_SELF, LocalVar(2), LocalVar(3), LocalVar(4))
-                    EVT_CALL(GetActorVar, ACTOR_ENEMY4, 3, LocalVar(11))
-                    EVT_SET(LocalVar(0), LocalVar(11))
+                    EVT_CALL(GetActorVar, ACTOR_ENEMY4, 3, LVarB)
+                    EVT_SET(LocalVar(0), LVarB)
                     EVT_SUB(LocalVar(0), 1)
                     EVT_MUL(LocalVar(0), 18)
-                    EVT_SWITCH(LocalVar(11))
+                    EVT_SWITCH(LVarB)
                         EVT_CASE_EQ(4)
                             EVT_CALL(AddGoalPos, ACTOR_SELF, 0, LocalVar(0), -10)
                         EVT_CASE_EQ(3)

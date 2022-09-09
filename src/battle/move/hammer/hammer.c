@@ -250,8 +250,8 @@ EvtScript N(D_802A1B40) = {
                 EVT_END_LOOP
             EVT_END_IF
         EVT_END_IF
-        EVT_ADD(LocalVar(13), 6)
-        EVT_CALL(func_802A9258_422258, 0, LocalVar(13), 3)
+        EVT_ADD(LVarD, 6)
+        EVT_CALL(func_802A9258_422258, 0, LVarD, 3)
         EVT_CALL(SetActionResult, 0)
         EVT_SET(LocalVar(1), 0)
         EVT_LOOP(30)
@@ -333,8 +333,8 @@ EvtScript D_802A2000_007355A0 = {
                 EVT_END_IF
             EVT_END_LOOP
         EVT_END_IF
-        EVT_ADD(LocalVar(13), 6)
-        EVT_CALL(func_802A9258_422258, 0, LocalVar(13), 3)
+        EVT_ADD(LVarD, 6)
+        EVT_CALL(func_802A9258_422258, 0, LVarD, 3)
         EVT_CALL(SetActionResult, 0)
         EVT_SET(LocalVar(1), 0)
         EVT_LOOP(30)
@@ -402,8 +402,8 @@ EvtScript D_802A23E8_735988 = {
                 EVT_END_IF
             EVT_END_LOOP
         EVT_END_IF
-        EVT_ADD(LocalVar(13), 6)
-        EVT_CALL(func_802A9258_422258, 0, LocalVar(13), 3)
+        EVT_ADD(LVarD, 6)
+        EVT_CALL(func_802A9258_422258, 0, LVarD, 3)
         EVT_CALL(SetActionResult, 0)
         EVT_SET(LocalVar(1), 0)
         EVT_LOOP(30)
@@ -469,8 +469,8 @@ EvtScript N(D_802A27D0) = {
             EVT_END_IF
         EVT_END_LOOP
     EVT_END_IF
-    EVT_ADD(LocalVar(13), 6)
-    EVT_CALL(func_802A9258_422258, 0, LocalVar(13), 3)
+    EVT_ADD(LVarD, 6)
+    EVT_CALL(func_802A9258_422258, 0, LVarD, 3)
     EVT_CALL(SetActionResult, 0)
     EVT_SET(LocalVar(1), 0)
     EVT_LOOP(30)
@@ -527,8 +527,8 @@ EvtScript D_802A2AFC_0073609C = {
             EVT_END_IF
         EVT_END_LOOP
     EVT_END_IF
-    EVT_ADD(LocalVar(13), 6)
-    EVT_CALL(func_802A9258_422258, 0, LocalVar(13), 3)
+    EVT_ADD(LVarD, 6)
+    EVT_CALL(func_802A9258_422258, 0, LVarD, 3)
     EVT_LOOP(60)
         EVT_WAIT(1)
         EVT_CALL(CheckButtonDown, 0x40000, LocalVar(0))
@@ -576,8 +576,8 @@ EvtScript D_802A2DA0_00736340 = {
             EVT_END_IF
         EVT_END_LOOP
     EVT_END_IF
-    EVT_ADD(LocalVar(13), 6)
-    EVT_CALL(func_802A9258_422258, 0, LocalVar(13), 3)
+    EVT_ADD(LVarD, 6)
+    EVT_CALL(func_802A9258_422258, 0, LVarD, 3)
     EVT_LOOP(60)
         EVT_WAIT(1)
         EVT_CALL(CheckButtonDown, 0x40000, LocalVar(0))
@@ -605,19 +605,19 @@ EvtScript D_802A3044_007365E4 = {
     EVT_CALL(GetMenuSelection, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_SWITCH(LocalVar(1))
         EVT_CASE_EQ(0)
-            EVT_SET(LocalVar(13), 45)
-            EVT_SET(LocalVar(14), 1)
-            EVT_SET(LocalVar(15), 2)
+            EVT_SET(LVarD, 45)
+            EVT_SET(LVarE, 1)
+            EVT_SET(LVarF, 2)
             EVT_EXEC_WAIT(D_802A3168_00736708)
         EVT_CASE_EQ(1)
-            EVT_SET(LocalVar(13), 45)
-            EVT_SET(LocalVar(14), 2)
-            EVT_SET(LocalVar(15), 4)
+            EVT_SET(LVarD, 45)
+            EVT_SET(LVarE, 2)
+            EVT_SET(LVarF, 4)
             EVT_EXEC_WAIT(D_802A3168_00736708)
         EVT_CASE_EQ(2)
-            EVT_SET(LocalVar(13), 45)
-            EVT_SET(LocalVar(14), 3)
-            EVT_SET(LocalVar(15), 6)
+            EVT_SET(LVarD, 45)
+            EVT_SET(LVarE, 3)
+            EVT_SET(LVarF, 6)
             EVT_EXEC_WAIT(D_802A3168_00736708)
     EVT_END_SWITCH
     EVT_RETURN
@@ -694,7 +694,7 @@ EvtScript D_802A3168_00736708 = {
                 EVT_CASE_EQ(2)
                     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, 0x10E)
             EVT_END_SWITCH
-            EVT_CALL(PlayerDamageEnemy, LocalVar(0), 64, 25, 0, LocalVar(15), 112)
+            EVT_CALL(PlayerDamageEnemy, LocalVar(0), 64, 25, 0, LVarF, 112)
         EVT_CASE_DEFAULT
             EVT_CALL(GetMenuSelection, LocalVar(0), LocalVar(1), LocalVar(2))
             EVT_SWITCH(LocalVar(1))
@@ -705,7 +705,7 @@ EvtScript D_802A3168_00736708 = {
                 EVT_CASE_EQ(2)
                     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, 0x10E)
             EVT_END_SWITCH
-            EVT_CALL(PlayerDamageEnemy, LocalVar(0), 64, 25, 0, LocalVar(14), 48)
+            EVT_CALL(PlayerDamageEnemy, LocalVar(0), 64, 25, 0, LVarE, 48)
     EVT_END_SWITCH
     EVT_SWITCH(LocalVar(0))
         EVT_CASE_OR_EQ(1)
@@ -726,19 +726,19 @@ EvtScript D_802A369C_00736C3C = {
     EVT_SWITCH(LocalVar(1))
         EVT_CASE_EQ(0)
             EVT_SET(LocalVar(9), 1)
-            EVT_SET_CONST(LocalVar(10), NPC_ANIM_world_bombette_normal_celebrate)
-            EVT_SET_CONST(LocalVar(11), NPC_ANIM_world_bombette_normal_anim_11)
-            EVT_SET_CONST(LocalVar(12), ANIM_30012)
+            EVT_SET_CONST(LVarA, NPC_ANIM_world_bombette_normal_celebrate)
+            EVT_SET_CONST(LVarB, NPC_ANIM_world_bombette_normal_anim_11)
+            EVT_SET_CONST(LVarC, ANIM_30012)
         EVT_CASE_EQ(1)
             EVT_SET(LocalVar(9), 2)
-            EVT_SET_CONST(LocalVar(10), ANIM_30016)
-            EVT_SET_CONST(LocalVar(11), ANIM_30017)
-            EVT_SET_CONST(LocalVar(12), ANIM_30019)
+            EVT_SET_CONST(LVarA, ANIM_30016)
+            EVT_SET_CONST(LVarB, ANIM_30017)
+            EVT_SET_CONST(LVarC, ANIM_30019)
         EVT_CASE_EQ(2)
             EVT_SET(LocalVar(9), 3)
-            EVT_SET_CONST(LocalVar(10), ANIM_3001D)
-            EVT_SET_CONST(LocalVar(11), ANIM_3001E)
-            EVT_SET_CONST(LocalVar(12), ANIM_30020)
+            EVT_SET_CONST(LVarA, ANIM_3001D)
+            EVT_SET_CONST(LVarB, ANIM_3001E)
+            EVT_SET_CONST(LVarC, ANIM_30020)
     EVT_END_SWITCH
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(AddGoalPos, ACTOR_PLAYER, 0, 0, 0)
@@ -747,12 +747,12 @@ EvtScript D_802A369C_00736C3C = {
     EVT_SET(LocalVar(1), 0)
     EVT_CALL(SetActorPos, ACTOR_SELF, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_CALL(UseBattleCamPresetImmediately, BTL_CAM_PRESET_43)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, LocalVar(10))
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, LVarA)
     EVT_WAIT(8)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, LocalVar(11))
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, LVarB)
     EVT_WAIT(3)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_44)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, LocalVar(12))
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, LVarC)
     EVT_CALL(GetMenuSelection, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_SWITCH(LocalVar(1))
         EVT_CASE_EQ(0)
@@ -801,19 +801,19 @@ EvtScript D_802A3B28_007370C8 = {
     EVT_CALL(GetMenuSelection, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_SWITCH(LocalVar(1))
         EVT_CASE_EQ(0)
-            EVT_SET(LocalVar(13), 75)
-            EVT_SET(LocalVar(14), 1)
-            EVT_SET(LocalVar(15), 2)
+            EVT_SET(LVarD, 75)
+            EVT_SET(LVarE, 1)
+            EVT_SET(LVarF, 2)
             EVT_EXEC_WAIT(D_802A3C4C_007371EC)
         EVT_CASE_EQ(1)
-            EVT_SET(LocalVar(13), 66)
-            EVT_SET(LocalVar(14), 2)
-            EVT_SET(LocalVar(15), 4)
+            EVT_SET(LVarD, 66)
+            EVT_SET(LVarE, 2)
+            EVT_SET(LVarF, 4)
             EVT_EXEC_WAIT(D_802A3C4C_007371EC)
         EVT_CASE_EQ(2)
-            EVT_SET(LocalVar(13), 57)
-            EVT_SET(LocalVar(14), 3)
-            EVT_SET(LocalVar(15), 6)
+            EVT_SET(LVarD, 57)
+            EVT_SET(LVarE, 3)
+            EVT_SET(LVarF, 6)
             EVT_EXEC_WAIT(D_802A3C4C_007371EC)
     EVT_END_SWITCH
     EVT_RETURN
@@ -914,7 +914,7 @@ EvtScript D_802A3C4C_007371EC = {
                 EVT_CASE_EQ(2)
                     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, 0x10E)
             EVT_END_SWITCH
-            EVT_CALL(PlayerDamageEnemy, LocalVar(0), 64, 25, 0, LocalVar(15), 112)
+            EVT_CALL(PlayerDamageEnemy, LocalVar(0), 64, 25, 0, LVarF, 112)
         EVT_CASE_DEFAULT
             EVT_CALL(GetMenuSelection, LocalVar(0), LocalVar(1), LocalVar(2))
             EVT_SWITCH(LocalVar(1))
@@ -925,7 +925,7 @@ EvtScript D_802A3C4C_007371EC = {
                 EVT_CASE_EQ(2)
                     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, 0x10E)
             EVT_END_SWITCH
-            EVT_CALL(PlayerDamageEnemy, LocalVar(0), 64, 25, 0, LocalVar(14), 48)
+            EVT_CALL(PlayerDamageEnemy, LocalVar(0), 64, 25, 0, LVarE, 48)
     EVT_END_SWITCH
     EVT_SWITCH(LocalVar(0))
         EVT_CASE_OR_EQ(1)

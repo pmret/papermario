@@ -249,8 +249,8 @@ EvtScript D_802A1B40 = {
                 EVT_END_LOOP
             EVT_END_IF
         EVT_END_IF
-        EVT_ADD(LocalVar(13), 6)
-        EVT_CALL(func_802A9258_422258, 0, LocalVar(13), 3)
+        EVT_ADD(LVarD, 6)
+        EVT_CALL(func_802A9258_422258, 0, LVarD, 3)
         EVT_CALL(SetActionResult, 0)
         EVT_SET(LocalVar(1), 0)
         EVT_LOOP(30)
@@ -332,8 +332,8 @@ EvtScript D_802A2000_0073BED0 = {
                 EVT_END_IF
             EVT_END_LOOP
         EVT_END_IF
-        EVT_ADD(LocalVar(13), 6)
-        EVT_CALL(func_802A9258_422258, 0, LocalVar(13), 3)
+        EVT_ADD(LVarD, 6)
+        EVT_CALL(func_802A9258_422258, 0, LVarD, 3)
         EVT_CALL(SetActionResult, 0)
         EVT_SET(LocalVar(1), 0)
         EVT_LOOP(30)
@@ -401,8 +401,8 @@ EvtScript D_802A23E8 = {
                 EVT_END_IF
             EVT_END_LOOP
         EVT_END_IF
-        EVT_ADD(LocalVar(13), 6)
-        EVT_CALL(func_802A9258_422258, 0, LocalVar(13), 3)
+        EVT_ADD(LVarD, 6)
+        EVT_CALL(func_802A9258_422258, 0, LVarD, 3)
         EVT_CALL(SetActionResult, 0)
         EVT_SET(LocalVar(1), 0)
         EVT_LOOP(30)
@@ -468,8 +468,8 @@ EvtScript D_802A27D0 = {
             EVT_END_IF
         EVT_END_LOOP
     EVT_END_IF
-    EVT_ADD(LocalVar(13), 6)
-    EVT_CALL(func_802A9258_422258, 0, LocalVar(13), 3)
+    EVT_ADD(LVarD, 6)
+    EVT_CALL(func_802A9258_422258, 0, LVarD, 3)
     EVT_CALL(SetActionResult, 0)
     EVT_SET(LocalVar(1), 0)
     EVT_LOOP(30)
@@ -526,8 +526,8 @@ EvtScript D_802A2AFC_0073C9CC = {
             EVT_END_IF
         EVT_END_LOOP
     EVT_END_IF
-    EVT_ADD(LocalVar(13), 6)
-    EVT_CALL(func_802A9258_422258, 0, LocalVar(13), 3)
+    EVT_ADD(LVarD, 6)
+    EVT_CALL(func_802A9258_422258, 0, LVarD, 3)
     EVT_LOOP(60)
         EVT_WAIT(1)
         EVT_CALL(CheckButtonDown, 262144, LocalVar(0))
@@ -575,8 +575,8 @@ EvtScript D_802A2DA0_0073CC70 = {
             EVT_END_IF
         EVT_END_LOOP
     EVT_END_IF
-    EVT_ADD(LocalVar(13), 6)
-    EVT_CALL(func_802A9258_422258, 0, LocalVar(13), 3)
+    EVT_ADD(LVarD, 6)
+    EVT_CALL(func_802A9258_422258, 0, LVarD, 3)
     EVT_LOOP(60)
         EVT_WAIT(1)
         EVT_CALL(CheckButtonDown, 262144, LocalVar(0))
@@ -604,19 +604,19 @@ EvtScript D_802A3044_0073CF14 = {
     EVT_CALL(GetMenuSelection, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_SWITCH(LocalVar(1))
         EVT_CASE_EQ(0)
-            EVT_SET(LocalVar(13), 80)
-            EVT_SET(LocalVar(14), 1)
-            EVT_SET(LocalVar(15), 2)
+            EVT_SET(LVarD, 80)
+            EVT_SET(LVarE, 1)
+            EVT_SET(LVarF, 2)
             EVT_EXEC_WAIT(D_802A3168_0073D038)
         EVT_CASE_EQ(1)
-            EVT_SET(LocalVar(13), 80)
-            EVT_SET(LocalVar(14), 1)
-            EVT_SET(LocalVar(15), 2)
+            EVT_SET(LVarD, 80)
+            EVT_SET(LVarE, 1)
+            EVT_SET(LVarF, 2)
             EVT_EXEC_WAIT(D_802A3168_0073D038)
         EVT_CASE_EQ(2)
-            EVT_SET(LocalVar(13), 80)
-            EVT_SET(LocalVar(14), 1)
-            EVT_SET(LocalVar(15), 2)
+            EVT_SET(LVarD, 80)
+            EVT_SET(LVarE, 1)
+            EVT_SET(LVarF, 2)
             EVT_EXEC_WAIT(D_802A3168_0073D038)
     EVT_END_SWITCH
     EVT_RETURN
@@ -716,9 +716,9 @@ EvtScript D_802A3168_0073D038 = {
     EVT_CALL(DidActionSucceed, LocalVar(0))
     EVT_SWITCH(LocalVar(0))
         EVT_CASE_GT(0)
-            EVT_CALL(PlayerDamageEnemy, LocalVar(0), 941623296, 25, 0, LocalVar(15), 112)
+            EVT_CALL(PlayerDamageEnemy, LocalVar(0), 941623296, 25, 0, LVarF, 112)
         EVT_CASE_DEFAULT
-            EVT_CALL(PlayerDamageEnemy, LocalVar(0), 941623296, 25, 0, LocalVar(14), 48)
+            EVT_CALL(PlayerDamageEnemy, LocalVar(0), 941623296, 25, 0, LVarE, 48)
     EVT_END_SWITCH
     EVT_LABEL(11)
     EVT_CALL(ChooseNextTarget, 0, LocalVar(1))

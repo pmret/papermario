@@ -193,9 +193,9 @@ EvtScript N(80240D90) = {
 EvtScript N(80240DDC) = {
     EVT_CALL(GetNpcPos, 0, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_LOOP(0)
-        EVT_CALL(RandInt, 5, LocalVar(10))
-        EVT_ADD(LocalVar(10), 2)
-        EVT_SET(LocalVar(11), 0)
+        EVT_CALL(RandInt, 5, LVarA)
+        EVT_ADD(LVarA, 2)
+        EVT_SET(LVarB, 0)
         EVT_LABEL(10)
         EVT_SET(LocalVar(3), LocalVar(0))
         EVT_ADD(LocalVar(3), 1)
@@ -205,13 +205,13 @@ EvtScript N(80240DDC) = {
         EVT_ADD(LocalVar(3), -1)
         EVT_CALL(SetNpcPos, 0, LocalVar(3), LocalVar(1), LocalVar(2))
         EVT_WAIT(1)
-        EVT_ADD(LocalVar(11), 1)
-        EVT_IF_LT(LocalVar(11), LocalVar(10))
+        EVT_ADD(LVarB, 1)
+        EVT_IF_LT(LVarB, LVarA)
             EVT_GOTO(10)
         EVT_END_IF
-        EVT_CALL(RandInt, 10, LocalVar(10))
-        EVT_ADD(LocalVar(10), 10)
-        EVT_WAIT(LocalVar(10))
+        EVT_CALL(RandInt, 10, LVarA)
+        EVT_ADD(LVarA, 10)
+        EVT_WAIT(LVarA)
     EVT_END_LOOP
     EVT_RETURN
     EVT_END
@@ -310,9 +310,9 @@ EvtScript N(802413F4) = {
     EVT_CALL(SetCamDistance, 0, 300)
     EVT_CALL(PanToTarget, 0, 0, 1)
     EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
-    EVT_EXEC_GET_TID(N(80240DDC), LocalVar(10))
+    EVT_EXEC_GET_TID(N(80240DDC), LVarA)
     EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 0, MESSAGE_ID(0x0E, 0x00DF))
-    EVT_KILL_THREAD(LocalVar(10))
+    EVT_KILL_THREAD(LVarA)
     EVT_CALL(SetPlayerAnimation, ANIM_80007)
     EVT_WAIT(20)
     EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 0, MESSAGE_ID(0x0E, 0x00E0))

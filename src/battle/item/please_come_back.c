@@ -5,7 +5,7 @@
 #include "UseItem.inc.c"
 
 EvtScript N(main) = {
-    EVT_SET_CONST(LocalVar(10), 0x0000009A)
+    EVT_SET_CONST(LVarA, 0x0000009A)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_CALL(SetGoalToHome, ACTOR_PLAYER)
     EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_MIDAIR_STILL, ANIM_MIDAIR, ANIM_10009)

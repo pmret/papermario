@@ -4,19 +4,19 @@
 #define NAMESPACE b_area_nok_nok_01
 
 EvtScript N(8022B5F0) = {
-    EVT_SET(LocalVar(10), LocalVar(0))
+    EVT_SET(LVarA, LVar0)
     EVT_LABEL(0)
-    EVT_CALL(TranslateModel, LocalVar(10), 0, 2, 0)
+    EVT_CALL(TranslateModel, LVarA, 0, 2, 0)
     EVT_WAIT(5)
-    EVT_CALL(TranslateModel, LocalVar(10), 0, 0, 0)
+    EVT_CALL(TranslateModel, LVarA, 0, 0, 0)
     EVT_WAIT(5)
-    EVT_CALL(TranslateModel, LocalVar(10), 0, 2, 0)
+    EVT_CALL(TranslateModel, LVarA, 0, 2, 0)
     EVT_WAIT(5)
-    EVT_CALL(TranslateModel, LocalVar(10), 0, 0, 0)
+    EVT_CALL(TranslateModel, LVarA, 0, 0, 0)
     EVT_WAIT(5)
-    EVT_CALL(RandInt, 30, LocalVar(0))
-    EVT_ADD(LocalVar(0), 30)
-    EVT_WAIT(LocalVar(0))
+    EVT_CALL(RandInt, 30, LVar0)
+    EVT_ADD(LVar0, 30)
+    EVT_WAIT(LVar0)
     EVT_GOTO(0)
     EVT_RETURN
     EVT_END
@@ -24,17 +24,17 @@ EvtScript N(8022B5F0) = {
 
 EvtScript N(beforeBattle_8022B6F8) = {
     EVT_CALL(SetSpriteShading, -1)
-    EVT_SET(LocalVar(0), 19)
+    EVT_SET(LVar0, 19)
     EVT_EXEC(N(8022B5F0))
-    EVT_SET(LocalVar(0), 20)
+    EVT_SET(LVar0, 20)
     EVT_EXEC(N(8022B5F0))
-    EVT_SET(LocalVar(0), 21)
+    EVT_SET(LVar0, 21)
     EVT_EXEC(N(8022B5F0))
-    EVT_SET(LocalVar(0), 22)
+    EVT_SET(LVar0, 22)
     EVT_EXEC(N(8022B5F0))
-    EVT_SET(LocalVar(0), 23)
+    EVT_SET(LVar0, 23)
     EVT_EXEC(N(8022B5F0))
-    EVT_SET(LocalVar(0), 24)
+    EVT_SET(LVar0, 24)
     EVT_EXEC(N(8022B5F0))
     EVT_RETURN
     EVT_END

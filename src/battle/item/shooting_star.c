@@ -64,7 +64,7 @@ ApiStatus N(func_802A14D4_71DC44)(Evt* script, s32 isInitialCall) {
 #include "UseItem.inc.c"
 
 EvtScript N(main) = {
-    EVT_SET_CONST(LocalVar(10), 0x00000083)
+    EVT_SET_CONST(LVarA, 0x00000083)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_THREAD
         EVT_WAIT(5)
@@ -73,27 +73,27 @@ EvtScript N(main) = {
     EVT_END_THREAD
     EVT_CALL(N(func_802A1444_71DBB4))
     EVT_THREAD
-        EVT_SET(LocalVar(0), 0)
+        EVT_SET(LVar0, 0)
         EVT_LOOP(10)
             EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_259)
             EVT_CALL(N(func_802A123C_71D9AC))
-            EVT_ADD(LocalVar(0), 1)
+            EVT_ADD(LVar0, 1)
             EVT_WAIT(5)
             EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_25A)
             EVT_CALL(N(func_802A123C_71D9AC))
-            EVT_ADD(LocalVar(0), 1)
+            EVT_ADD(LVar0, 1)
             EVT_WAIT(5)
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_THREAD
-        EVT_SET(LocalVar(0), 0)
+        EVT_SET(LVar0, 0)
         EVT_WAIT(50)
         EVT_LOOP(10)
             EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_25C)
-            EVT_ADD(LocalVar(0), 1)
+            EVT_ADD(LVar0, 1)
             EVT_WAIT(5)
             EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_25D)
-            EVT_ADD(LocalVar(0), 1)
+            EVT_ADD(LVar0, 1)
             EVT_WAIT(5)
         EVT_END_LOOP
     EVT_END_THREAD
@@ -110,18 +110,18 @@ EvtScript N(main) = {
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(ItemCheckHit, LocalVar(0), 268435456, 0, LocalVar(0), 0)
-    EVT_IF_EQ(LocalVar(0), 6)
+    EVT_CALL(ItemCheckHit, LVar0, 268435456, 0, LVar0, 0)
+    EVT_IF_EQ(LVar0, 6)
         EVT_GOTO(1)
     EVT_END_IF
-    EVT_CALL(GetGoalPos, ACTOR_SELF, LocalVar(0), LocalVar(1), LocalVar(2))
-    EVT_CALL(N(func_802A1388_71DAF8), LocalVar(0), LocalVar(1), LocalVar(2))
-    EVT_CALL(GetItemPower, ITEM_SHOOTING_STAR, LocalVar(0), LocalVar(1))
-    EVT_CALL(ItemDamageEnemy, LocalVar(0), 939524352, 0, LocalVar(0), 32)
+    EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+    EVT_CALL(N(func_802A1388_71DAF8), LVar0, LVar1, LVar2)
+    EVT_CALL(GetItemPower, ITEM_SHOOTING_STAR, LVar0, LVar1)
+    EVT_CALL(ItemDamageEnemy, LVar0, 939524352, 0, LVar0, 32)
     EVT_LABEL(1)
     EVT_WAIT(10)
-    EVT_CALL(ChooseNextTarget, 0, LocalVar(0))
-    EVT_IF_NE(LocalVar(0), -1)
+    EVT_CALL(ChooseNextTarget, 0, LVar0)
+    EVT_IF_NE(LVar0, -1)
         EVT_GOTO(0)
     EVT_END_IF
     EVT_WAIT(20)

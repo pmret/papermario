@@ -309,10 +309,10 @@ EvtScript N(takeTurn_8021E33C) = {
     EVT_SWITCH(LocalVar(0))
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
-            EVT_SET(LocalVar(10), LocalVar(0))
+            EVT_SET(LVarA, LocalVar(0))
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_hurt_plant_Palette_00_Anim_7)
             EVT_WAIT(5)
-            EVT_IF_EQ(LocalVar(10), HIT_RESULT_LUCKY)
+            EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LocalVar(0), DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
             EVT_WAIT(15)

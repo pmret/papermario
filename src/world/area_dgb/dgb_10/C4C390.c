@@ -95,7 +95,7 @@ static s32 N(pad_66C) = {
 
 EvtScript N(80240670) = {
     EVT_USE_BUF(LocalVar(0))
-    EVT_MALLOC_ARRAY(6, LocalVar(10))
+    EVT_MALLOC_ARRAY(6, LVarA)
     EVT_BUF_READ1(LocalVar(0))
     EVT_SET(ArrayVar(0), LocalVar(0))
     EVT_BUF_READ1(LocalVar(0))
@@ -108,7 +108,7 @@ EvtScript N(80240670) = {
     EVT_SET(ArrayVar(4), LocalVar(0))
     EVT_BUF_READ1(LocalVar(0))
     EVT_SET(ArrayVar(5), LocalVar(0))
-    EVT_SET(LocalVar(0), LocalVar(10))
+    EVT_SET(LocalVar(0), LVarA)
     EVT_BIND_TRIGGER(N(80240770), TRIGGER_FLOOR_TOUCH, ArrayVar(0), 1, 0)
     EVT_RETURN
     EVT_END
@@ -153,11 +153,11 @@ EvtScript N(80240860) = {
     EVT_CALL(ParentColliderToModel, ArrayVar(1), ArrayVar(0))
     EVT_LABEL(0)
     EVT_LABEL(1)
-    EVT_CALL(GetPlayerActionState, LocalVar(10))
-    EVT_IF_EQ(LocalVar(10), 13)
+    EVT_CALL(GetPlayerActionState, LVarA)
+    EVT_IF_EQ(LVarA, 13)
         EVT_GOTO(2)
     EVT_END_IF
-    EVT_IF_EQ(LocalVar(10), 15)
+    EVT_IF_EQ(LVarA, 15)
         EVT_GOTO(2)
     EVT_END_IF
     EVT_WAIT(1)

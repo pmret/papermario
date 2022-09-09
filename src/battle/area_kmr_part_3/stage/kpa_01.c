@@ -4,8 +4,8 @@
 #define NAMESPACE b_area_kmr_part_3_kpa_01
 
 EvtScript N(80234CB0) = {
-    EVT_SET(LocalVar(10), LocalVar(0))
-    EVT_CALL(SetTexPanner, LocalVar(10), 1)
+    EVT_SET(LVarA, LocalVar(0))
+    EVT_CALL(SetTexPanner, LVarA, 1)
     EVT_SET(LocalVar(0), 0)
     EVT_SET(LocalVar(1), 0)
     EVT_LOOP(0)

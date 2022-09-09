@@ -65,7 +65,7 @@ EvtScript N(D_802A1320) = {
     EVT_SUB(LocalVar(6), 20)
     EVT_DIVF(LocalVar(6), EVT_FLOAT(10.5888671875))
     EVT_ADDF(LocalVar(6), 15)
-    EVT_SET(LocalVar(10), LocalVar(6))
+    EVT_SET(LVarA, LocalVar(6))
     EVT_RETURN
     EVT_END
 };
@@ -83,7 +83,7 @@ EvtScript N(D_802A1408) = {
     EVT_SUB(LocalVar(6), 20)
     EVT_DIVF(LocalVar(6), EVT_FLOAT(22.5))
     EVT_ADDF(LocalVar(6), 15)
-    EVT_SET(LocalVar(10), LocalVar(6))
+    EVT_SET(LVarA, LocalVar(6))
     EVT_RETURN
     EVT_END
 };
@@ -101,7 +101,7 @@ EvtScript N(D_802A14F0) = {
     EVT_SUB(LocalVar(6), 20)
     EVT_DIVF(LocalVar(6), EVT_FLOAT(18.0))
     EVT_ADDF(LocalVar(6), 22)
-    EVT_SET(LocalVar(10), LocalVar(6))
+    EVT_SET(LVarA, LocalVar(6))
     EVT_RETURN
     EVT_END
 };
@@ -290,11 +290,11 @@ EvtScript N(D_802A2184) = {
     EVT_CALL(action_command_jump_CreateHudElements)
     EVT_EXEC_WAIT(N(D_802A11AC))
     EVT_EXEC_WAIT(N(D_802A1320))
-    EVT_CALL(func_802A9120_421B10, LocalVar(10), 3)
+    EVT_CALL(func_802A9120_421B10, LVarA, 3)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_34)
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_MIDAIR_STILL, ANIM_MIDAIR, ANIM_30000 )
-    EVT_CALL(func_80274A18, LocalVar(10), 0)
+    EVT_CALL(func_80274A18, LVarA, 0)
     EVT_RETURN
     EVT_END
 };
@@ -305,14 +305,14 @@ EvtScript N(D_802A2230) = {
     EVT_EXEC_WAIT(N(D_802A11AC))
     EVT_CALL(InitTargetIterator)
     EVT_EXEC_WAIT(N(D_802A1408))
-    EVT_SET(LocalVar(11), LocalVar(10))
-    EVT_ADD(LocalVar(11), 14)
-    EVT_ADD(LocalVar(11), -3)
-    EVT_CALL(func_802A9120_421B10, LocalVar(11), 3)
+    EVT_SET(LVarB, LVarA)
+    EVT_ADD(LVarB, 14)
+    EVT_ADD(LVarB, -3)
+    EVT_CALL(func_802A9120_421B10, LVarB, 3)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_37)
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_MIDAIR_STILL, ANIM_1000A, ANIM_1000B)
-    EVT_CALL(func_802752AC, LocalVar(10), 0)
+    EVT_CALL(func_802752AC, LVarA, 0)
     EVT_WAIT(7)
     EVT_CALL(DidActionSucceed, LocalVar(0))
     EVT_SWITCH(LocalVar(0))
@@ -331,14 +331,14 @@ EvtScript N(D_802A2384) = {
     EVT_EXEC_WAIT(N(D_802A11AC))
     EVT_EXEC_WAIT(N(D_802A14F0))
     EVT_CALL(func_8026919C, EVT_ADDR(N(D_802A10F0)))
-    EVT_SET(LocalVar(11), LocalVar(10))
-    EVT_SUB(LocalVar(11), 4)
-    EVT_ADD(LocalVar(11), -3)
-    EVT_CALL(func_802A9120_421B10, LocalVar(11), 3)
+    EVT_SET(LVarB, LVarA)
+    EVT_SUB(LVarB, 4)
+    EVT_ADD(LVarB, -3)
+    EVT_CALL(func_802A9120_421B10, LVarB, 3)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_38)
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_MIDAIR_STILL, 524288, 196608)
-    EVT_CALL(func_80275F00, LocalVar(10), 0)
+    EVT_CALL(func_80275F00, LVarA, 0)
     EVT_CALL(CloseActionCommandInfo)
     EVT_SET(LocalVar(9), 0)
     EVT_CALL(DidActionSucceed, LocalVar(0))
@@ -429,14 +429,14 @@ EvtScript N(D_802A26A8) = {
             EVT_END_IF
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(func_80269524, LocalVar(14))
-    EVT_ADD(LocalVar(15), 1)
+    EVT_CALL(func_80269524, LVarE)
+    EVT_ADD(LVarF, 1)
     EVT_SET(LocalFlag(0), 0)
     EVT_LABEL(10)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_40)
     EVT_CALL(GetTargetListLength, LocalVar(0))
     EVT_SUB(LocalVar(0), 1)
-    EVT_IF_EQ(LocalVar(15), LocalVar(0))
+    EVT_IF_EQ(LVarF, LocalVar(0))
         EVT_SET(LocalFlag(0), 1)
     EVT_END_IF
     EVT_CALL(CloseActionCommandInfo)
@@ -448,14 +448,14 @@ EvtScript N(D_802A26A8) = {
     EVT_CALL(ChooseNextTarget, 0, LocalVar(0))
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_EXEC_WAIT(N(D_802A1320))
-    EVT_ADD(LocalVar(10), 5)
-    EVT_CALL(func_802A9120_421B10, LocalVar(10), 3)
+    EVT_ADD(LVarA, 5)
+    EVT_CALL(func_802A9120_421B10, LVarA, 3)
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_MIDAIR_STILL, ANIM_MIDAIR, ANIM_1000C)
-    EVT_IF_EQ(LocalVar(15), 1)
-        EVT_CALL(func_80274A18, LocalVar(10), 3)
+    EVT_IF_EQ(LVarF, 1)
+        EVT_CALL(func_80274A18, LVarA, 3)
     EVT_ELSE
-        EVT_CALL(func_80274A18, LocalVar(10), 4)
+        EVT_CALL(func_80274A18, LVarA, 4)
     EVT_END_IF
     EVT_CALL(PlayerTestEnemy, LocalVar(0), 128, 0, 0, 1, 0)
     EVT_IF_EQ(LocalVar(0), 6)
@@ -482,7 +482,7 @@ EvtScript N(D_802A26A8) = {
                 EVT_CALL(PlayerDamageEnemy, LocalVar(0), 553648256, 0, 0, 1, 240)
             EVT_END_IF
     EVT_END_SWITCH
-    EVT_SWITCH(LocalVar(15))
+    EVT_SWITCH(LVarF)
         EVT_CASE_EQ(0)
             EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, 0x235)
         EVT_CASE_EQ(1)
@@ -494,7 +494,7 @@ EvtScript N(D_802A26A8) = {
         EVT_CASE_DEFAULT
             EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, 0x238)
     EVT_END_SWITCH
-    EVT_CALL(func_80269550, LocalVar(14))
+    EVT_CALL(func_80269550, LVarE)
     EVT_CALL(DidActionSucceed, LocalVar(0))
     EVT_SWITCH(LocalVar(0))
         EVT_CASE_OR_EQ(0)
@@ -514,9 +514,9 @@ EvtScript N(D_802A26A8) = {
             EVT_END_IF
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_ADD(LocalVar(15), 1)
+    EVT_ADD(LVarF, 1)
     EVT_CALL(GetTargetListLength, LocalVar(0))
-    EVT_IF_GE(LocalVar(15), LocalVar(0))
+    EVT_IF_GE(LVarF, LocalVar(0))
         EVT_EXEC_WAIT(N(D_802A17C4))
         EVT_RETURN
     EVT_END_IF
@@ -571,14 +571,14 @@ EvtScript N(D_802A2EC0) = {
             EVT_END_IF
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(func_80269524, LocalVar(14))
+    EVT_CALL(func_80269524, LVarE)
     EVT_SET(LocalFlag(0), 0)
-    EVT_SET(LocalVar(15), 0)
-    EVT_ADD(LocalVar(15), 1)
+    EVT_SET(LVarF, 0)
+    EVT_ADD(LVarF, 1)
     EVT_LABEL(10)
     EVT_CALL(GetTargetListLength, LocalVar(0))
     EVT_SUB(LocalVar(0), 1)
-    EVT_IF_EQ(LocalVar(15), LocalVar(0))
+    EVT_IF_EQ(LVarF, LocalVar(0))
         EVT_SET(LocalFlag(0), 1)
     EVT_END_IF
     EVT_CALL(CloseActionCommandInfo)
@@ -594,7 +594,7 @@ EvtScript N(D_802A2EC0) = {
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_MIDAIR_STILL, ANIM_1000A, ANIM_1000B)
     EVT_CALL(EnablePlayerBlur, 1)
-    EVT_IF_EQ(LocalVar(15), 1)
+    EVT_IF_EQ(LVarF, 1)
         EVT_CALL(func_802752AC, 20, 3)
         EVT_WAIT(7)
         EVT_CALL(func_802752AC, 3, 6)
@@ -629,7 +629,7 @@ EvtScript N(D_802A2EC0) = {
                 EVT_CALL(PlayerDamageEnemy, LocalVar(0), 553648256, 0, 0, 2, 240)
             EVT_END_IF
     EVT_END_SWITCH
-    EVT_SWITCH(LocalVar(15))
+    EVT_SWITCH(LVarF)
         EVT_CASE_EQ(0)
             EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, 0x235)
         EVT_CASE_EQ(1)
@@ -641,7 +641,7 @@ EvtScript N(D_802A2EC0) = {
         EVT_CASE_DEFAULT
             EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, 0x238)
     EVT_END_SWITCH
-    EVT_CALL(func_80269550, LocalVar(14))
+    EVT_CALL(func_80269550, LVarE)
     EVT_CALL(DidActionSucceed, LocalVar(0))
     EVT_SWITCH(LocalVar(0))
         EVT_CASE_OR_EQ(0)
@@ -661,9 +661,9 @@ EvtScript N(D_802A2EC0) = {
             EVT_END_IF
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_ADD(LocalVar(15), 1)
+    EVT_ADD(LVarF, 1)
     EVT_CALL(GetTargetListLength, LocalVar(0))
-    EVT_IF_GE(LocalVar(15), LocalVar(0))
+    EVT_IF_GE(LVarF, LocalVar(0))
         EVT_EXEC_WAIT(N(D_802A19B0))
         EVT_RETURN
     EVT_END_IF
@@ -718,14 +718,14 @@ EvtScript N(D_802A372C) = {
             EVT_END_IF
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(func_80269524, LocalVar(14))
+    EVT_CALL(func_80269524, LVarE)
     EVT_SET(LocalFlag(0), 0)
-    EVT_SET(LocalVar(15), 0)
-    EVT_ADD(LocalVar(15), 1)
+    EVT_SET(LVarF, 0)
+    EVT_ADD(LVarF, 1)
     EVT_LABEL(20)
     EVT_CALL(GetTargetListLength, LocalVar(0))
     EVT_SUB(LocalVar(0), 1)
-    EVT_IF_EQ(LocalVar(15), LocalVar(0))
+    EVT_IF_EQ(LVarF, LocalVar(0))
         EVT_SET(LocalFlag(0), 1)
     EVT_END_IF
     EVT_CALL(CloseActionCommandInfo)
@@ -739,7 +739,7 @@ EvtScript N(D_802A372C) = {
     EVT_CALL(ChooseNextTarget, 0, LocalVar(0))
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_MIDAIR_STILL, ANIM_MIDAIR_STILL, ANIM_1000C)
-    EVT_IF_EQ(LocalVar(15), 1)
+    EVT_IF_EQ(LVarF, 1)
         EVT_CALL(func_80275F00, 25, 2)
     EVT_ELSE
         EVT_CALL(func_80275F00, 25, 4)
@@ -769,7 +769,7 @@ EvtScript N(D_802A372C) = {
                 EVT_CALL(PlayerDamageEnemy, LocalVar(0), 553648256, 0, 0, 3, 240)
             EVT_END_IF
     EVT_END_SWITCH
-    EVT_SWITCH(LocalVar(15))
+    EVT_SWITCH(LVarF)
         EVT_CASE_EQ(0)
             EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, 0x235)
         EVT_CASE_EQ(1)
@@ -781,7 +781,7 @@ EvtScript N(D_802A372C) = {
         EVT_CASE_DEFAULT
             EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, 0x238)
     EVT_END_SWITCH
-    EVT_CALL(func_80269550, LocalVar(14))
+    EVT_CALL(func_80269550, LVarE)
     EVT_CALL(DidActionSucceed, LocalVar(0))
     EVT_SWITCH(LocalVar(0))
         EVT_CASE_OR_EQ(0)
@@ -801,9 +801,9 @@ EvtScript N(D_802A372C) = {
             EVT_END_IF
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_ADD(LocalVar(15), 1)
+    EVT_ADD(LVarF, 1)
     EVT_CALL(GetTargetListLength, LocalVar(0))
-    EVT_IF_GE(LocalVar(15), LocalVar(0))
+    EVT_IF_GE(LVarF, LocalVar(0))
         EVT_EXEC_WAIT(N(D_802A19B0))
         EVT_RETURN
     EVT_END_IF

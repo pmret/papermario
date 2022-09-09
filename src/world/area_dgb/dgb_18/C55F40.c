@@ -671,17 +671,17 @@ EvtScript N(802436E4) = {
 
 EvtScript N(8024374C) = {
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_SET(LocalVar(0), LocalVar(10))
-    EVT_IF_NE(LocalVar(10), 0)
+    EVT_SET(LocalVar(0), LVarA)
+    EVT_IF_NE(LVarA, 0)
         EVT_EXEC_WAIT(N(802436E4))
     EVT_END_IF
-    EVT_SWITCH(LocalVar(11))
+    EVT_SWITCH(LVarB)
         EVT_CASE_EQ(0)
-            EVT_CALL(AddItem, LocalVar(10), LocalVar(0))
+            EVT_CALL(AddItem, LVarA, LocalVar(0))
         EVT_CASE_EQ(1)
-            EVT_CALL(AddKeyItem, LocalVar(10))
+            EVT_CALL(AddKeyItem, LVarA)
         EVT_CASE_EQ(2)
-            EVT_CALL(AddBadge, LocalVar(10), LocalVar(0))
+            EVT_CALL(AddBadge, LVarA, LocalVar(0))
     EVT_END_SWITCH
     EVT_WAIT(15)
     EVT_CALL(DisablePlayerInput, FALSE)

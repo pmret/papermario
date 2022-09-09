@@ -97,7 +97,7 @@ EvtScript N(SuperBlock_OnHit) = {
     EVT_CALL(DisablePartnerAI, 0)
     EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_100, TRUE)
     EVT_CALL(N(SuperBlock_StartGlowEffect), SUPER_BLOCK_MAPVAR, LocalVar(9))
-    EVT_CALL(FindKeyItem, ITEM_ULTRA_STONE, LocalVar(12))
+    EVT_CALL(FindKeyItem, ITEM_ULTRA_STONE, LVarC)
     EVT_CALL(N(SuperBlock_CountEligiblePartners))
     EVT_IF_EQ(LocalVar(0), -1)
         EVT_CALL(ShowMessageAtScreenPos, MESSAGE_ID(0x1D,0xDC), 160, 40)
@@ -124,12 +124,12 @@ EvtScript N(SuperBlock_OnHit) = {
         EVT_CALL(N(SuperBlock_ClearOverride40))
         EVT_RETURN
     EVT_END_IF
-    EVT_SET(LocalVar(10), LocalVar(0))
-    EVT_SET(LocalVar(11), LocalVar(1))
+    EVT_SET(LVarA, LocalVar(0))
+    EVT_SET(LVarB, LocalVar(1))
     EVT_CALL(EnablePartnerAI)
     EVT_CALL(GetCurrentPartnerID, LocalVar(0))
-    EVT_IF_NE(LocalVar(0), LocalVar(11))
-        EVT_CALL(N(SuperBlock_SwitchToPartner), LocalVar(11))
+    EVT_IF_NE(LocalVar(0), LVarB)
+        EVT_CALL(N(SuperBlock_SwitchToPartner), LVarB)
     EVT_ELSE
         EVT_CALL(func_802CF56C, 2)
     EVT_END_IF
@@ -146,11 +146,11 @@ EvtScript N(SuperBlock_OnHit) = {
         EVT_RETURN
     EVT_END_IF
     EVT_EXEC_WAIT(N(SuperBlock_ShowUpgradeEffects))
-    EVT_CALL(N(SuperBlock_GetPartnerRank), LocalVar(11), LocalVar(13))
+    EVT_CALL(N(SuperBlock_GetPartnerRank), LVarB, LVarD)
     EVT_SET(SUPER_BLOCK_GAMEFLAG, 1)
     EVT_CALL(N(SuperBlock_EndGlowEffect), LocalVar(9))
     EVT_CALL(N(SuperBlock_LoadCurrentPartnerName))
-    EVT_IF_EQ(LocalVar(13), 1)
+    EVT_IF_EQ(LVarD, 1)
         EVT_CALL(ShowMessageAtScreenPos, MESSAGE_ID(0x1D,0xDD), 160, 40)
     EVT_ELSE
         EVT_CALL(ShowMessageAtScreenPos, MESSAGE_ID(0x1D,0xDE), 160, 40)

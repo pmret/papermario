@@ -320,7 +320,7 @@ EvtScript N(takeTurn_8021B19C) = {
     EVT_SWITCH(LocalVar(0))
         EVT_CASE_OR_EQ(6)
         EVT_CASE_OR_EQ(5)
-            EVT_SET(LocalVar(10), LocalVar(0))
+            EVT_SET(LVarA, LocalVar(0))
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LocalVar(0), LocalVar(1), LocalVar(2))
             EVT_SUB(LocalVar(0), 10)
@@ -357,7 +357,7 @@ EvtScript N(takeTurn_8021B19C) = {
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 7, 0)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_spiked_goomba_default_pain)
             EVT_WAIT(5)
-            EVT_IF_EQ(LocalVar(10), 5)
+            EVT_IF_EQ(LVarA, 5)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LocalVar(0), 0x80000000, 0, 0, 0)
             EVT_END_IF
             EVT_WAIT(5)

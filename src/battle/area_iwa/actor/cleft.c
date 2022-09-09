@@ -461,8 +461,8 @@ EvtScript N(80219BA0) = {
     EVT_SWITCH(LocalVar(0))
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
-            EVT_SET(LocalVar(10), LocalVar(0))
-            EVT_IF_EQ(LocalVar(10), HIT_RESULT_LUCKY)
+            EVT_SET(LVarA, LocalVar(0))
+            EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
                 EVT_THREAD
                     EVT_WAIT(10)
                     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LocalVar(0), DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)

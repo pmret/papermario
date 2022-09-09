@@ -744,7 +744,7 @@ EvtScript N(takeTurn_80222ED0) = {
     EVT_SWITCH(LocalVar(0))
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
-            EVT_SET(LocalVar(10), LocalVar(0))
+            EVT_SET(LVarA, LocalVar(0))
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_stone_chomp_Palette_00_Anim_1)
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LocalVar(0), LocalVar(1), LocalVar(2))
@@ -754,7 +754,7 @@ EvtScript N(takeTurn_80222ED0) = {
             EVT_CALL(SetGoalPos, ACTOR_SELF, LocalVar(0), LocalVar(1), LocalVar(2))
             EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x3F9)
-            EVT_IF_EQ(LocalVar(10), HIT_RESULT_LUCKY)
+            EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LocalVar(0), DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
@@ -790,8 +790,8 @@ EvtScript N(takeTurn_80222ED0) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_stone_chomp_Palette_00_Anim_1)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LocalVar(0), LocalVar(1), LocalVar(2))
-    EVT_CALL(GetStatusFlags, ACTOR_SELF, LocalVar(10))
-    EVT_IF_FLAG(LocalVar(10), STATUS_FLAG_SHRINK)
+    EVT_CALL(GetStatusFlags, ACTOR_SELF, LVarA)
+    EVT_IF_FLAG(LVarA, STATUS_FLAG_SHRINK)
         EVT_ADD(LocalVar(0), 4)
     EVT_ELSE
         EVT_ADD(LocalVar(0), 10)

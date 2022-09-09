@@ -4,15 +4,15 @@
 #define NAMESPACE b_area_trd_part_3_nok_01
 
 EvtScript N(80218DD0) = {
-    EVT_SET(LocalVar(10), LocalVar(0))
+    EVT_SET(LVarA, LocalVar(0))
     EVT_LABEL(0)
-    EVT_CALL(TranslateModel, LocalVar(10), 0, 2, 0)
+    EVT_CALL(TranslateModel, LVarA, 0, 2, 0)
     EVT_WAIT(5)
-    EVT_CALL(TranslateModel, LocalVar(10), 0, 0, 0)
+    EVT_CALL(TranslateModel, LVarA, 0, 0, 0)
     EVT_WAIT(5)
-    EVT_CALL(TranslateModel, LocalVar(10), 0, 2, 0)
+    EVT_CALL(TranslateModel, LVarA, 0, 2, 0)
     EVT_WAIT(5)
-    EVT_CALL(TranslateModel, LocalVar(10), 0, 0, 0)
+    EVT_CALL(TranslateModel, LVarA, 0, 0, 0)
     EVT_WAIT(5)
     EVT_CALL(RandInt, 30, LocalVar(0))
     EVT_ADD(LocalVar(0), 30)

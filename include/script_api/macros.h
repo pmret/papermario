@@ -273,8 +273,8 @@
 #define EVT_SWITCH(LVAR)                        EVT_CMD(EVT_OP_SWITCH, LVAR),
 
 /// Marks the start of a switch statement where the given value is treated as-is instead of using evt_get_variable.
-/// That is, `EVT_SWITCH_CONST(LocalVar(0))` will switch over the value `0xFE363C80` instead of the value contained
-/// within `LocalVar(0)`.
+/// That is, `EVT_SWITCH_CONST(LVar0)` will switch over the value `0xFE363C80` instead of the value contained
+/// within `LVar0`.
 #define EVT_SWITCH_CONST(LCONST)                EVT_CMD(EVT_OP_SWITCH_CONST, LCONST),
 
 /// Marks the start of a switch case that executes only if `LVAR == RVAR`. It also marks the end of any previous case.
@@ -327,8 +327,8 @@
 #define EVT_SET(VAR, INT_VALUE)                 EVT_CMD(EVT_OP_SET, VAR, (Bytecode) INT_VALUE),
 
 /// Sets the given variable to a given value, skipping the evt_get_variable call.
-/// That is, `EVT_SET_CONST(LocalVar(0), LocalVar(1))` will set `LocalVar(0)` to `0xFE363C81` instead of copying the value of
-/// `LocalVar(1)` into `LocalVar(0)`.
+/// That is, `EVT_SET_CONST(LVar0, LVar1)` will set `LVar0` to `0xFE363C81` instead of copying the value of
+/// `LVar1` into `LVar0`.
 #define EVT_SET_CONST(VAR, CONST)               EVT_CMD(EVT_OP_SET_CONST, VAR, (Bytecode) CONST),
 
 /// Sets the given variable to a given value, but supports EVT_FLOATs.

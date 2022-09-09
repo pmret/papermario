@@ -220,8 +220,8 @@ EvtScript N(init_80226510) = {
 
 EvtScript N(idle_802265A0) = {
     EVT_LABEL(0)
-    EVT_CALL(GetStatusFlags, ACTOR_SELF, LocalVar(10))
-    EVT_IF_FLAG(LocalVar(10), 0x41000)
+    EVT_CALL(GetStatusFlags, ACTOR_SELF, LVarA)
+    EVT_IF_FLAG(LVarA, 0x41000)
         EVT_CALL(SetTargetOffset, -127, 1, -12, 28)
         EVT_CALL(func_8027D4C8, -127, 1, 4, -6)
         EVT_CALL(N(UnkBattleFunc1), -25, 27, -1, 27)
@@ -401,8 +401,8 @@ EvtScript N(takeTurn_80226F58) = {
     EVT_CALL(AddGoalPos, ACTOR_SELF, 50, 0, 0)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
     EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -4, 0)
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LocalVar(10), 0, 0, 5, 16)
-    EVT_SWITCH(LocalVar(10))
+    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 5, 16)
+    EVT_SWITCH(LVarA)
         EVT_CASE_OR_EQ(6)
         EVT_CASE_OR_EQ(5)
             EVT_WAIT(10)
@@ -425,7 +425,7 @@ EvtScript N(takeTurn_80226F58) = {
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_para_jr_troopa_default_attack)
             EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -10, 0)
-            EVT_IF_EQ(LocalVar(10), 5)
+            EVT_IF_EQ(LVarA, 5)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LocalVar(0), DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
             EVT_WAIT(10)
@@ -464,8 +464,8 @@ EvtScript N(takeTurn_80226F58) = {
     EVT_END_SWITCH
     EVT_WAIT(2)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LocalVar(0), 0, 0, 0, 5, 32)
-    EVT_SET(LocalVar(15), LocalVar(0))
-    EVT_SWITCH(LocalVar(15))
+    EVT_SET(LVarF, LocalVar(0))
+    EVT_SWITCH(LVarF)
         EVT_CASE_OR_EQ(0)
         EVT_CASE_OR_EQ(2)
         EVT_CASE_OR_EQ(10)
@@ -494,8 +494,8 @@ EvtScript N(takeTurn_80226F58) = {
 EvtScript N(nextTurn_80227724) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
-    EVT_CALL(GetBattlePhase, LocalVar(15))
-    EVT_SWITCH(LocalVar(15))
+    EVT_CALL(GetBattlePhase, LVarF)
+    EVT_SWITCH(LVarF)
         EVT_CASE_EQ(10)
             EVT_CALL(GetActorVar, -127, 0, LocalVar(0))
             EVT_IF_EQ(LocalVar(0), 0)

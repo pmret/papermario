@@ -221,7 +221,7 @@ s32 N(D_802A229C_72D84C)[8] = {
 };
 
 EvtScript N(main) = {
-    EVT_SET_CONST(LocalVar(10), 0x00000096)
+    EVT_SET_CONST(LVarA, 0x00000096)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_THREAD
         EVT_WAIT(220)
@@ -230,38 +230,38 @@ EvtScript N(main) = {
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_368)
     EVT_CALL(N(func_802A13E4_72C994))
     EVT_WAIT(2)
-    EVT_IF_NE(LocalVar(0), 133)
+    EVT_IF_NE(LVar0, 133)
         EVT_JUMP(EVT_ADDR(UseMystery))
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(CreateVirtualEntity, LocalVar(10), EVT_ADDR(N(modelCommandList)))
-    EVT_CALL(GetActorPos, ACTOR_PLAYER, LocalVar(0), LocalVar(1), LocalVar(2))
-    EVT_ADD(LocalVar(1), 150)
-    EVT_CALL(SetVirtualEntityPosition, LocalVar(10), LocalVar(0), LocalVar(1), LocalVar(2))
+    EVT_CALL(CreateVirtualEntity, LVarA, EVT_ADDR(N(modelCommandList)))
+    EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+    EVT_ADD(LVar1, 150)
+    EVT_CALL(SetVirtualEntityPosition, LVarA, LVar0, LVar1, LVar2)
     EVT_CALL(SetOwnerTarget, 0, 0)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(GetGoalPos, ACTOR_SELF, LocalVar(0), LocalVar(1), LocalVar(2))
+    EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_THREAD
-        EVT_SET(LocalVar(0), 0)
+        EVT_SET(LVar0, 0)
         EVT_LOOP(18)
-            EVT_ADD(LocalVar(0), -60)
-            EVT_CALL(SetVirtualEntityRotation, LocalVar(10), 0, 0, LocalVar(0))
+            EVT_ADD(LVar0, -60)
+            EVT_CALL(SetVirtualEntityRotation, LVarA, 0, 0, LVar0)
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(SetVirtualEntityJumpGravity, LocalVar(10), EVT_FLOAT(0.6))
-    EVT_ADD(LocalVar(2), 5)
-    EVT_CALL(VirtualEntityJumpTo, LocalVar(10), LocalVar(0), LocalVar(1), LocalVar(2), 12)
+    EVT_CALL(SetVirtualEntityJumpGravity, LVarA, EVT_FLOAT(0.6))
+    EVT_ADD(LVar2, 5)
+    EVT_CALL(VirtualEntityJumpTo, LVarA, LVar0, LVar1, LVar2, 12)
     EVT_THREAD
-        EVT_ADD(LocalVar(0), 60)
-        EVT_ADD(LocalVar(1), 0)
-        EVT_CALL(VirtualEntityJumpTo, LocalVar(10), LocalVar(0), LocalVar(1), LocalVar(2), 16)
-        EVT_CALL(DeleteVirtualEntity, LocalVar(10))
+        EVT_ADD(LVar0, 60)
+        EVT_ADD(LVar1, 0)
+        EVT_CALL(VirtualEntityJumpTo, LVarA, LVar0, LVar1, LVar2, 16)
+        EVT_CALL(DeleteVirtualEntity, LVarA)
     EVT_END_THREAD
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(GetGoalPos, ACTOR_SELF, LocalVar(0), LocalVar(1), LocalVar(2))
-    EVT_CALL(N(func_802A188C_72CE3C), LocalVar(0), LocalVar(1), LocalVar(2))
+    EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+    EVT_CALL(N(func_802A188C_72CE3C), LVar0, LVar1, LVar2)
     EVT_CALL(SetBattleFlagBits, 32, 1)
     EVT_CALL(DispatchDamagePlayerEvent, 1, EVENT_HIT)
     EVT_RETURN

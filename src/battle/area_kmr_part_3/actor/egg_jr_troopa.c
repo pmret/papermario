@@ -140,10 +140,10 @@ s32 N(idleAnimations_8022464C)[] = {
 };
 
 EvtScript N(80224658) = {
-    EVT_SET(LocalVar(10), LocalVar(0))
+    EVT_SET(LVarA, LocalVar(0))
     EVT_CALL(func_8027D32C, -127)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, LocalVar(10), LocalVar(1))
+    EVT_CALL(SetAnimation, ACTOR_SELF, LVarA, LocalVar(1))
     EVT_WAIT(10)
     EVT_CALL(func_80269E80, LocalVar(5))
     EVT_SWITCH(LocalVar(5))
@@ -180,10 +180,10 @@ EvtScript N(80224658) = {
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20E5)
-    EVT_CALL(SetAnimation, ACTOR_SELF, LocalVar(10), 0x210027)
+    EVT_CALL(SetAnimation, ACTOR_SELF, LVarA, 0x210027)
     EVT_WAIT(12)
-    EVT_CALL(SetAnimation, ACTOR_SELF, LocalVar(10), 0x210014)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, LocalVar(10), EVT_ADDR(N(idleAnimations_8022464C)))
+    EVT_CALL(SetAnimation, ACTOR_SELF, LVarA, 0x210014)
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, LVarA, EVT_ADDR(N(idleAnimations_8022464C)))
     EVT_WAIT(60)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, 4194304, 1)
     EVT_RETURN
@@ -402,8 +402,8 @@ EvtScript N(takeTurn_80225314) = {
     EVT_WAIT(5)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_jr_troopa_default_jump)
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LocalVar(10), 0, 0, 2, 16)
-    EVT_SWITCH(LocalVar(10))
+    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 2, 16)
+    EVT_SWITCH(LVarA)
         EVT_CASE_OR_EQ(5)
         EVT_CASE_OR_EQ(6)
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
@@ -418,7 +418,7 @@ EvtScript N(takeTurn_80225314) = {
             EVT_ADD(LocalVar(2), 5)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LocalVar(0), LocalVar(1), LocalVar(2))
             EVT_CALL(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
-            EVT_IF_EQ(LocalVar(10), 5)
+            EVT_IF_EQ(LVarA, 5)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LocalVar(0), DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
             EVT_WAIT(2)

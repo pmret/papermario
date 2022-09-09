@@ -291,8 +291,8 @@ EvtScript N(802424E8) = {
         EVT_CALL(GetNpcPos, NPC_SELF, LocalVar(3), LocalVar(4), LocalVar(5))
         EVT_IF_NE(LocalVar(3), LocalVar(6))
             EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_20F6, 65538)
-            EVT_CALL(GetDist2D, LocalVar(10), LocalVar(0), LocalVar(2), LocalVar(3), LocalVar(5))
-            EVT_SWITCH(LocalVar(10))
+            EVT_CALL(GetDist2D, LVarA, LocalVar(0), LocalVar(2), LocalVar(3), LocalVar(5))
+            EVT_SWITCH(LVarA)
                 EVT_CASE_LT(200)
                     EVT_THREAD
                         EVT_CALL(ShakeCam, 0, 0, 5, EVT_FLOAT(1.6))

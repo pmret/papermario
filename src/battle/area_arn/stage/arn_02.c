@@ -5,14 +5,14 @@
 #define NAMESPACE b_area_arn_arn_02
 
 EvtScript N(80227960) = {
-    EVT_SET(LocalVar(10), LocalVar(0))
+    EVT_SET(LVarA, LocalVar(0))
     EVT_SET(LocalVar(0), 0)
     EVT_LABEL(0)
     EVT_ADD(LocalVar(0), 1)
     EVT_IF_GT(LocalVar(0), 359)
         EVT_SUB(LocalVar(0), 360)
     EVT_END_IF
-    EVT_CALL(RotateModel, LocalVar(10), LocalVar(0), 0, 0, 1)
+    EVT_CALL(RotateModel, LVarA, LocalVar(0), 0, 0, 1)
     EVT_WAIT(1)
     EVT_GOTO(0)
     EVT_RETURN

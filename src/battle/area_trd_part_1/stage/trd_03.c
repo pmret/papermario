@@ -7,13 +7,13 @@
 
 EvtScript N(beforeBattle_80223F08) = {
     EVT_CALL(SetSpriteShading, -1)
-    EVT_SET(LocalVar(0), 4)
-    EVT_SET(LocalVar(2), 0)
+    EVT_SET(LVar0, 4)
+    EVT_SET(LVar2, 0)
     EVT_EXEC(N(clouds1))
-    EVT_SET(LocalVar(0), 2)
-    EVT_SET(LocalVar(2), 70)
-    EVT_SET(LocalVar(3), 175)
-    EVT_SET(LocalVar(4), -170)
+    EVT_SET(LVar0, 2)
+    EVT_SET(LVar2, 70)
+    EVT_SET(LVar3, 175)
+    EVT_SET(LVar4, -170)
     EVT_EXEC(N(clouds2))
     EVT_RETURN
     EVT_END

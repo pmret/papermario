@@ -252,7 +252,7 @@ EvtScript N(8021B678) = {
     EVT_SWITCH(LocalVar(0))
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
-            EVT_SET(LocalVar(10), LocalVar(0))
+            EVT_SET(LVarA, LocalVar(0))
             EVT_CALL(SetActorRotationOffset, ACTOR_SELF, 0, 16, 0)
             EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, -60)
             EVT_THREAD
@@ -275,7 +275,7 @@ EvtScript N(8021B678) = {
             EVT_CALL(AddGoalPos, ACTOR_SELF, -60, 0, 0)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.3))
             EVT_CALL(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
-            EVT_IF_EQ(LocalVar(10), HIT_RESULT_LUCKY)
+            EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LocalVar(0), DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
@@ -666,7 +666,7 @@ EvtScript N(takeTurn_8021D1DC) = {
     EVT_SWITCH(LocalVar(0))
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
-            EVT_SET(LocalVar(10), LocalVar(0))
+            EVT_SET(LVarA, LocalVar(0))
             EVT_WAIT(10)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_66)
             EVT_CALL(SetBattleCamZoom, 300)
@@ -699,7 +699,7 @@ EvtScript N(takeTurn_8021D1DC) = {
             EVT_CALL(AddActorDecoration, ACTOR_SELF, 2, 0, 2)
             EVT_CALL(SetAnimationRate, ACTOR_SELF, 2, EVT_FLOAT(3.0))
             EVT_WAIT(10)
-            EVT_IF_EQ(LocalVar(10), HIT_RESULT_LUCKY)
+            EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LocalVar(0), DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
             EVT_WAIT(10)
@@ -939,7 +939,7 @@ EvtScript N(8021E218) = {
     EVT_SWITCH(LocalVar(0))
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
-            EVT_SET(LocalVar(10), LocalVar(0))
+            EVT_SET(LVarA, LocalVar(0))
             EVT_THREAD
                 EVT_LOOP(0)
                     EVT_CALL(GetActorPos, ACTOR_PLAYER, LocalVar(0), LocalVar(1), LocalVar(2))
@@ -951,7 +951,7 @@ EvtScript N(8021E218) = {
                     EVT_WAIT(1)
                 EVT_END_LOOP
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_B)
-                EVT_IF_EQ(LocalVar(10), HIT_RESULT_LUCKY)
+                EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
                     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LocalVar(0), DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
                 EVT_END_IF
                 EVT_WAIT(15)
@@ -1341,7 +1341,7 @@ EvtScript N(takeTurn_8021FE6C) = {
     EVT_SWITCH(LocalVar(0))
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
-            EVT_SET(LocalVar(10), LocalVar(0))
+            EVT_SET(LVarA, LocalVar(0))
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LocalVar(0), LocalVar(1), LocalVar(2))
             EVT_SUB(LocalVar(0), 10)
@@ -1378,7 +1378,7 @@ EvtScript N(takeTurn_8021FE6C) = {
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 7, 0)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_goomba_hyper_pain)
             EVT_WAIT(5)
-            EVT_IF_EQ(LocalVar(10), HIT_RESULT_LUCKY)
+            EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LocalVar(0), DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
             EVT_WAIT(5)

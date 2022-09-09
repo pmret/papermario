@@ -247,9 +247,9 @@ ApiStatus UpdateCrystalBitEffect(Evt* script, s32 isInitialCall) {
 
 EvtScript N(idle) = {
     EVT_CALL(PlayEffect, EFFECT_MISC_PARTICLES, 1, 0, -1000, 0, 24, 24, EVT_FLOAT(1.0), 5, 0, 0, 0, 0, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 0, LocalVar(15))
+    EVT_CALL(SetActorVar, ACTOR_SELF, 0, LVarF)
     EVT_CHILD_THREAD
-        EVT_CALL(UpdateCrystalBitEffect, LocalVar(15))
+        EVT_CALL(UpdateCrystalBitEffect, LVarF)
     EVT_END_CHILD_THREAD
     EVT_LOOP(0)
         EVT_WAIT(1)

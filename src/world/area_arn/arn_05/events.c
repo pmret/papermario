@@ -759,14 +759,14 @@ EvtScript N(802441FC) = {
     EVT_IF_LT(GB_StoryProgress, -33)
         EVT_CALL(SetNpcPos, 2, 330, 184, 240)
         EVT_LOOP(0)
-            EVT_SET(LocalVar(10), 0)
+            EVT_SET(LVarA, 0)
             EVT_CALL(GetPlayerPos, LocalVar(0), LocalVar(1), LocalVar(2))
             EVT_IF_GE(LocalVar(2), 110)
                 EVT_IF_GE(LocalVar(0), 220)
-                    EVT_SET(LocalVar(10), 1)
+                    EVT_SET(LVarA, 1)
                 EVT_END_IF
             EVT_END_IF
-            EVT_IF_EQ(LocalVar(10), 1)
+            EVT_IF_EQ(LVarA, 1)
                 EVT_BREAK_LOOP
             EVT_END_IF
             EVT_WAIT(1)

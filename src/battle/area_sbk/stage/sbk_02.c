@@ -10,17 +10,17 @@
 #include "common/GetModelPos.inc.c"
 
 EvtScript N(8021F720) = {
-    EVT_SET(LocalVar(10), LocalVar(0))
-    EVT_SET(LocalVar(7), LocalVar(1))
-    EVT_MUL(LocalVar(7), 10)
+    EVT_SET(LVarA, LVar0)
+    EVT_SET(LVar7, LVar1)
+    EVT_MUL(LVar7, 10)
     EVT_CALL(N(GetModelPos))
     EVT_LABEL(0)
-    EVT_ADD(LocalVar(7), 1)
-    EVT_IF_GT(LocalVar(7), 3599)
-        EVT_SUB(LocalVar(7), 3600)
+    EVT_ADD(LVar7, 1)
+    EVT_IF_GT(LVar7, 3599)
+        EVT_SUB(LVar7, 3600)
     EVT_END_IF
-    EVT_CALL(N(UnkFloatFunc3), LocalVar(7), LocalVar(0), LocalVar(1), LocalVar(2))
-    EVT_CALL(TranslateModel, LocalVar(10), LocalVar(0), LocalVar(1), LocalVar(2))
+    EVT_CALL(N(UnkFloatFunc3), LVar7, LVar0, LVar1, LVar2)
+    EVT_CALL(TranslateModel, LVarA, LVar0, LVar1, LVar2)
     EVT_WAIT(1)
     EVT_GOTO(0)
     EVT_RETURN
@@ -29,14 +29,14 @@ EvtScript N(8021F720) = {
 
 EvtScript N(beforeBattle_8021F800) = {
     EVT_CALL(SetSpriteShading, -1)
-    EVT_SET(LocalVar(0), 1)
-    EVT_SET(LocalVar(1), 0)
+    EVT_SET(LVar0, 1)
+    EVT_SET(LVar1, 0)
     EVT_EXEC(N(8021F720))
-    EVT_SET(LocalVar(0), 3)
-    EVT_SET(LocalVar(1), 120)
+    EVT_SET(LVar0, 3)
+    EVT_SET(LVar1, 120)
     EVT_EXEC(N(8021F720))
-    EVT_SET(LocalVar(0), 5)
-    EVT_SET(LocalVar(1), 240)
+    EVT_SET(LVar0, 5)
+    EVT_SET(LVar1, 240)
     EVT_EXEC(N(8021F720))
     EVT_CALL(PlayEffect, EFFECT_SUN, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
     EVT_RETURN

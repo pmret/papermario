@@ -665,7 +665,7 @@ ApiStatus N(DestroyMinigame) (Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus N(GetCoinCount)(Evt* script, s32 isInitialCall) {
-    evt_set_variable(script, LocalVar(10), gPlayerData.coins);
+    evt_set_variable(script, LVarA, gPlayerData.coins);
     return ApiStatus_DONE2;
 }
 

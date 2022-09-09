@@ -247,10 +247,10 @@ EvtScript N(nextTurn_80218B24) = {
 };
 
 EvtScript N(80218B5C) = {
-    EVT_CALL(GetActorVar, ACTOR_SELF, 0, LocalVar(10))
-    EVT_IF_EQ(LocalVar(10), 0)
-        EVT_CALL(GetStatusFlags, ACTOR_SELF, LocalVar(11))
-        EVT_IF_FLAG(LocalVar(11), STATUS_FLAG_SLEEP | STATUS_FLAG_FEAR | STATUS_FLAG_DIZZY)
+    EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVarA)
+    EVT_IF_EQ(LVarA, 0)
+        EVT_CALL(GetStatusFlags, ACTOR_SELF, LVarB)
+        EVT_IF_FLAG(LVarB, STATUS_FLAG_SLEEP | STATUS_FLAG_FEAR | STATUS_FLAG_DIZZY)
         EVT_ELSE
             EVT_SET(LocalVar(1), LocalVar(2))
         EVT_END_IF
@@ -317,8 +317,8 @@ EvtScript N(handleEvent_80218E3C) = {
         EVT_CASE_EQ(EVENT_BURN_HIT)
             EVT_CALL(GetActorVar, ACTOR_SELF, 0, LocalVar(0))
             EVT_IF_EQ(LocalVar(0), 0)
-                EVT_CALL(GetStatusFlags, ACTOR_SELF, LocalVar(11))
-                EVT_IF_FLAG(LocalVar(11), STATUS_FLAG_SLEEP | STATUS_FLAG_FEAR | STATUS_FLAG_DIZZY)
+                EVT_CALL(GetStatusFlags, ACTOR_SELF, LVarB)
+                EVT_IF_FLAG(LVarB, STATUS_FLAG_SLEEP | STATUS_FLAG_FEAR | STATUS_FLAG_DIZZY)
                     EVT_SET_CONST(LocalVar(0), 2)
                     EVT_SET_CONST(LocalVar(1), NPC_ANIM_jungle_guy_Palette_00_Anim_A)
                     EVT_SET_CONST(LocalVar(2), NPC_ANIM_jungle_guy_Palette_00_Anim_C)
@@ -336,8 +336,8 @@ EvtScript N(handleEvent_80218E3C) = {
         EVT_CASE_EQ(EVENT_BURN_DEATH)
             EVT_CALL(GetActorVar, ACTOR_SELF, 0, LocalVar(0))
             EVT_IF_EQ(LocalVar(0), 0)
-                EVT_CALL(GetStatusFlags, ACTOR_SELF, LocalVar(11))
-                EVT_IF_FLAG(LocalVar(11), STATUS_FLAG_SLEEP | STATUS_FLAG_FEAR | STATUS_FLAG_DIZZY)
+                EVT_CALL(GetStatusFlags, ACTOR_SELF, LVarB)
+                EVT_IF_FLAG(LVarB, STATUS_FLAG_SLEEP | STATUS_FLAG_FEAR | STATUS_FLAG_DIZZY)
                     EVT_SET_CONST(LocalVar(0), 2)
                     EVT_SET_CONST(LocalVar(1), NPC_ANIM_jungle_guy_Palette_00_Anim_A)
                     EVT_SET_CONST(LocalVar(2), NPC_ANIM_jungle_guy_Palette_00_Anim_C)
@@ -456,8 +456,8 @@ EvtScript N(handleEvent_80218E3C) = {
             EVT_SET(LocalFlag(0), 0)
             EVT_CALL(GetActorPos, ACTOR_SELF, LocalVar(0), LocalVar(1), LocalVar(2))
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LocalVar(3))
-            EVT_CALL(GetActorVar, ACTOR_SELF, 0, LocalVar(10))
-            EVT_SWITCH(LocalVar(10))
+            EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVarA)
+            EVT_SWITCH(LVarA)
                 EVT_CASE_EQ(0)
                     EVT_IF_FLAG(LocalVar(3), STATUS_FLAG_SHRINK)
                         EVT_ADD(LocalVar(0), -11)
@@ -520,8 +520,8 @@ EvtScript N(spearStab) = {
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LocalVar(0), LocalVar(1), LocalVar(2))
-    EVT_CALL(GetStatusFlags, ACTOR_SELF, LocalVar(10))
-    EVT_IF_FLAG(LocalVar(10), STATUS_FLAG_SHRINK)
+    EVT_CALL(GetStatusFlags, ACTOR_SELF, LVarA)
+    EVT_IF_FLAG(LVarA, STATUS_FLAG_SHRINK)
         EVT_ADD(LocalVar(0), 10)
     EVT_ELSE
         EVT_ADD(LocalVar(0), 25)
@@ -538,7 +538,7 @@ EvtScript N(spearStab) = {
     EVT_SWITCH(LocalVar(0))
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
-            EVT_SET(LocalVar(10), LocalVar(0))
+            EVT_SET(LVarA, LocalVar(0))
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x309)
             EVT_CALL(SetAnimation, ACTOR_SELF, 2, NPC_ANIM_jungle_guy_Palette_00_Anim_1B)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.5))
@@ -546,8 +546,8 @@ EvtScript N(spearStab) = {
             EVT_SUB(LocalVar(0), 30)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LocalVar(0), LocalVar(1), LocalVar(2))
             EVT_CALL(JumpToGoal, ACTOR_SELF, 8, FALSE, TRUE, FALSE)
-            EVT_IF_EQ(LocalVar(10), HIT_RESULT_LUCKY)
-                EVT_CALL(EnemyTestTarget, ACTOR_SELF, LocalVar(10), DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
+            EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
+                EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
             EVT_SUB(LocalVar(0), 20)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LocalVar(0), LocalVar(1), LocalVar(2))
@@ -644,7 +644,7 @@ EvtScript N(summonBackup) = {
     EVT_IF_EQ(LocalVar(0), LocalVar(2))
         EVT_CALL(SetAnimation, LocalVar(1), 2, NPC_ANIM_jungle_guy_Palette_00_Anim_4)
         EVT_CALL(GetIndexFromHome, LocalVar(1), LocalVar(3))
-        EVT_IF_LT(LocalVar(10), LocalVar(3))
+        EVT_IF_LT(LVarA, LocalVar(3))
             EVT_CALL(GetActorVar, LocalVar(1), 0, LocalVar(4))
             EVT_IF_EQ(LocalVar(4), 0)
                 EVT_CALL(SetActorVar, LocalVar(1), 0, 1)
@@ -664,7 +664,7 @@ EvtScript N(summonBackup) = {
     EVT_LABEL(1)
     EVT_CALL(GetOwnerTarget, LocalVar(0), LocalVar(1))
     EVT_CALL(GetIndexFromHome, LocalVar(0), LocalVar(1))
-    EVT_IF_LT(LocalVar(1), LocalVar(10))
+    EVT_IF_LT(LocalVar(1), LVarA)
         EVT_SET(LocalFlag(0), 1)
     EVT_END_IF
     EVT_CALL(ChooseNextTarget, 0, LocalVar(0))
@@ -676,13 +676,13 @@ EvtScript N(summonBackup) = {
     EVT_ELSE
         EVT_CALL(SummonEnemy, EVT_ADDR(N(specialFormation_8021A8DC)), 0)
     EVT_END_IF
-    EVT_SET(LocalVar(11), LocalVar(0))
+    EVT_SET(LVarB, LocalVar(0))
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
-    EVT_CALL(SetAnimation, LocalVar(11), 2, NPC_ANIM_jungle_guy_Palette_00_Anim_10)
-    EVT_CALL(SetGoalToIndex, LocalVar(11), LocalVar(10))
-    EVT_CALL(GetGoalPos, LocalVar(11), LocalVar(0), LocalVar(1), LocalVar(2))
+    EVT_CALL(SetAnimation, LVarB, 2, NPC_ANIM_jungle_guy_Palette_00_Anim_10)
+    EVT_CALL(SetGoalToIndex, LVarB, LVarA)
+    EVT_CALL(GetGoalPos, LVarB, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_ADD(LocalVar(0), 220)
-    EVT_CALL(SetActorPos, LocalVar(11), LocalVar(0), 0, 0)
+    EVT_CALL(SetActorPos, LVarB, LocalVar(0), 0, 0)
     EVT_CALL(SetActorSounds, ACTOR_SELF, 0, 0, 0)
     EVT_THREAD
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2FA)
@@ -694,29 +694,29 @@ EvtScript N(summonBackup) = {
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2FB)
         EVT_WAIT(15)
     EVT_END_THREAD
-    EVT_CALL(SetActorSpeed, LocalVar(11), EVT_FLOAT(4.0))
-    EVT_CALL(RunToGoal, LocalVar(11), 0, FALSE)
+    EVT_CALL(SetActorSpeed, LVarB, EVT_FLOAT(4.0))
+    EVT_CALL(RunToGoal, LVarB, 0, FALSE)
     EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x206D)
-    EVT_CALL(GetActorPos, LocalVar(11), LocalVar(0), LocalVar(1), LocalVar(2))
+    EVT_CALL(GetActorPos, LVarB, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_ADD(LocalVar(1), 15)
     EVT_CALL(PlayEffect, EFFECT_SPARKLES, 0, LocalVar(0), LocalVar(1), LocalVar(2), 30, 0, 0, 0, 0, 0, 0, 0, 0)
-    EVT_CALL(SetAnimation, LocalVar(11), 2, NPC_ANIM_jungle_guy_Palette_00_Anim_E)
+    EVT_CALL(SetAnimation, LVarB, 2, NPC_ANIM_jungle_guy_Palette_00_Anim_E)
     EVT_WAIT(20)
     EVT_IF_EQ(LocalFlag(0), 0)
-        EVT_CALL(SetAnimation, LocalVar(11), 2, NPC_ANIM_jungle_guy_Palette_00_Anim_4)
+        EVT_CALL(SetAnimation, LVarB, 2, NPC_ANIM_jungle_guy_Palette_00_Anim_4)
     EVT_ELSE
-        EVT_CALL(SetAnimation, LocalVar(11), 2, NPC_ANIM_jungle_guy_Palette_00_Anim_3)
+        EVT_CALL(SetAnimation, LVarB, 2, NPC_ANIM_jungle_guy_Palette_00_Anim_3)
     EVT_END_IF
-    EVT_CALL(GetActorPos, LocalVar(11), LocalVar(0), LocalVar(1), LocalVar(2))
-    EVT_CALL(ForceHomePos, LocalVar(11), LocalVar(0), LocalVar(1), LocalVar(2))
-    EVT_CALL(HPBarToHome, LocalVar(11))
+    EVT_CALL(GetActorPos, LVarB, LocalVar(0), LocalVar(1), LocalVar(2))
+    EVT_CALL(ForceHomePos, LVarB, LocalVar(0), LocalVar(1), LocalVar(2))
+    EVT_CALL(HPBarToHome, LVarB)
     EVT_CALL(GetActorVar, ACTOR_SELF, 1, LocalVar(0))
     EVT_SWITCH(LocalVar(0))
         EVT_CASE_EQ(0)
-            EVT_CALL(SetActorVar, LocalVar(11), 1, 1)
+            EVT_CALL(SetActorVar, LVarB, 1, 1)
         EVT_CASE_EQ(1)
-            EVT_CALL(SetActorVar, LocalVar(11), 1, 2)
+            EVT_CALL(SetActorVar, LVarB, 1, 2)
     EVT_END_SWITCH
     EVT_CALL(SetActorVar, ACTOR_SELF, 1, 3)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
@@ -819,7 +819,7 @@ EvtScript N(spearThrow) = {
     EVT_SWITCH(LocalVar(0))
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
-            EVT_SET(LocalVar(10), LocalVar(0))
+            EVT_SET(LVarA, LocalVar(0))
             EVT_CALL(SetAnimation, ACTOR_SELF, 2, NPC_ANIM_jungle_guy_Palette_00_Anim_11)
             EVT_WAIT(5)
             EVT_THREAD
@@ -859,7 +859,7 @@ EvtScript N(spearThrow) = {
             EVT_CALL(JumpPartTo, ACTOR_SELF, 3, LocalVar(0), LocalVar(1), LocalVar(2), 20, 1)
             EVT_WAIT(10)
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, 3, ACTOR_PART_FLAG_INVISIBLE, 1)
-            EVT_IF_EQ(LocalVar(10), HIT_RESULT_LUCKY)
+            EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LocalVar(0), DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
             EVT_CALL(AddActorDecoration, ACTOR_SELF, 2, 0, 2)
@@ -948,22 +948,22 @@ EvtScript N(8021B770) = {
         EVT_GOTO(0)
     EVT_END_IF
     EVT_IF_EQ(LocalFlag(1), 0)
-        EVT_SET(LocalVar(10), 0)
+        EVT_SET(LVarA, 0)
         EVT_RETURN
     EVT_END_IF
     EVT_IF_EQ(LocalFlag(2), 0)
-        EVT_SET(LocalVar(10), 1)
+        EVT_SET(LVarA, 1)
         EVT_RETURN
     EVT_END_IF
     EVT_IF_EQ(LocalFlag(3), 0)
-        EVT_SET(LocalVar(10), 2)
+        EVT_SET(LVarA, 2)
         EVT_RETURN
     EVT_END_IF
     EVT_IF_EQ(LocalFlag(4), 0)
-        EVT_SET(LocalVar(10), 3)
+        EVT_SET(LVarA, 3)
         EVT_RETURN
     EVT_END_IF
-    EVT_SET(LocalVar(10), -1)
+    EVT_SET(LVarA, -1)
     EVT_RETURN
     EVT_END
 };
@@ -1002,14 +1002,14 @@ EvtScript N(8021B96C) = {
 };
 
 EvtScript N(8021BB18) = {
-    EVT_CALL(GetIndexFromHome, ACTOR_SELF, LocalVar(10))
+    EVT_CALL(GetIndexFromHome, ACTOR_SELF, LVarA)
     EVT_SET(LocalFlag(0), 0)
     EVT_CALL(EnemyCreateTargetList, 32772)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
     EVT_CALL(GetOwnerTarget, LocalVar(0), LocalVar(1))
     EVT_CALL(GetIndexFromHome, LocalVar(0), LocalVar(1))
-    EVT_IF_LT(LocalVar(1), LocalVar(10))
+    EVT_IF_LT(LocalVar(1), LVarA)
         EVT_SET(LocalFlag(0), 1)
     EVT_END_IF
     EVT_CALL(ChooseNextTarget, 0, LocalVar(0))
@@ -1045,7 +1045,7 @@ EvtScript N(takeTurn_8021BCB4) = {
         EVT_CASE_OR_EQ(0)
         EVT_CASE_OR_EQ(1)
             EVT_EXEC_WAIT(N(8021B770))
-            EVT_IF_EQ(LocalVar(10), -1)
+            EVT_IF_EQ(LVarA, -1)
                 EVT_EXEC_WAIT(N(spearStab))
                 EVT_EXEC_WAIT(N(8021BB18))
                 EVT_RETURN
@@ -1256,7 +1256,7 @@ EvtScript N(8021C628) = {
     EVT_SWITCH(LocalVar(0))
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
-            EVT_SET(LocalVar(10), LocalVar(0))
+            EVT_SET(LVarA, LocalVar(0))
             EVT_CALL(SetActorSounds, ACTOR_SELF, 2, 751, 0)
             EVT_CALL(SetActorSounds, ACTOR_SELF, 0, 8378, 948)
             EVT_CALL(SetActorSounds, ACTOR_SELF, 4, 10, 0)
@@ -1271,8 +1271,8 @@ EvtScript N(8021C628) = {
             EVT_SUB(LocalVar(0), 30)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LocalVar(0), LocalVar(1), LocalVar(2))
             EVT_CALL(JumpToGoal, ACTOR_SELF, 8, FALSE, TRUE, FALSE)
-            EVT_IF_EQ(LocalVar(10), HIT_RESULT_LUCKY)
-                EVT_CALL(EnemyTestTarget, ACTOR_SELF, LocalVar(10), DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
+            EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
+                EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
             EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
             EVT_SUB(LocalVar(0), 20)
@@ -1361,7 +1361,7 @@ EvtScript N(8021CD50) = {
     EVT_SWITCH(LocalVar(0))
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
-            EVT_SET(LocalVar(10), LocalVar(0))
+            EVT_SET(LVarA, LocalVar(0))
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_shy_guy_Palette_00_Anim_9)
             EVT_THREAD
@@ -1375,7 +1375,7 @@ EvtScript N(8021CD50) = {
             EVT_SET(LocalVar(1), 0)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LocalVar(0), LocalVar(1), LocalVar(2))
             EVT_CALL(JumpToGoal, ACTOR_SELF, 24, FALSE, TRUE, FALSE)
-            EVT_IF_EQ(LocalVar(10), HIT_RESULT_LUCKY)
+            EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LocalVar(0), DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_shy_guy_Palette_00_Anim_5)

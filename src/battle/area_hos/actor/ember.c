@@ -263,22 +263,22 @@ EvtScript N(8021B398) = {
         EVT_GOTO(0)
     EVT_END_IF
     EVT_IF_EQ(LocalFlag(1), 0)
-        EVT_SET(LocalVar(10), 0)
+        EVT_SET(LVarA, 0)
         EVT_RETURN
     EVT_END_IF
     EVT_IF_EQ(LocalFlag(2), 0)
-        EVT_SET(LocalVar(10), 1)
+        EVT_SET(LVarA, 1)
         EVT_RETURN
     EVT_END_IF
     EVT_IF_EQ(LocalFlag(3), 0)
-        EVT_SET(LocalVar(10), 2)
+        EVT_SET(LVarA, 2)
         EVT_RETURN
     EVT_END_IF
     EVT_IF_EQ(LocalFlag(4), 0)
-        EVT_SET(LocalVar(10), 3)
+        EVT_SET(LVarA, 3)
         EVT_RETURN
     EVT_END_IF
-    EVT_SET(LocalVar(10), -1)
+    EVT_SET(LVarA, -1)
     EVT_RETURN
     EVT_END
 };
@@ -307,20 +307,20 @@ EvtScript N(split) = {
         EVT_RETURN
     EVT_END_IF
     EVT_EXEC_WAIT(N(8021B398))
-    EVT_SWITCH(LocalVar(10))
+    EVT_SWITCH(LVarA)
         EVT_CASE_OR_EQ(0)
         EVT_CASE_OR_EQ(1)
         EVT_CASE_OR_EQ(2)
         EVT_CASE_OR_EQ(3)
             EVT_CALL(SummonEnemy, EVT_ADDR(N(specialFormation_8021B5A0)), 0)
             EVT_CALL(SetActorVar, LocalVar(0), 2, 1)
-            EVT_CALL(GetActorHP, -127, LocalVar(11))
-            EVT_CALL(SetEnemyHP, LocalVar(0), LocalVar(11))
-            EVT_CALL(GetActorPos, ACTOR_SELF, LocalVar(11), LocalVar(12), LocalVar(13))
-            EVT_CALL(SetActorPos, LocalVar(0), LocalVar(11), LocalVar(12), LocalVar(13))
-            EVT_CALL(SetGoalToIndex, LocalVar(0), LocalVar(10))
-            EVT_CALL(GetGoalPos, LocalVar(0), LocalVar(11), LocalVar(12), LocalVar(13))
-            EVT_CALL(SetHomePos, LocalVar(0), LocalVar(11), LocalVar(12), LocalVar(13))
+            EVT_CALL(GetActorHP, -127, LVarB)
+            EVT_CALL(SetEnemyHP, LocalVar(0), LVarB)
+            EVT_CALL(GetActorPos, ACTOR_SELF, LVarB, LVarC, LVarD)
+            EVT_CALL(SetActorPos, LocalVar(0), LVarB, LVarC, LVarD)
+            EVT_CALL(SetGoalToIndex, LocalVar(0), LVarA)
+            EVT_CALL(GetGoalPos, LocalVar(0), LVarB, LVarC, LVarD)
+            EVT_CALL(SetHomePos, LocalVar(0), LVarB, LVarC, LVarD)
             EVT_CALL(SetActorJumpGravity, LocalVar(0), EVT_FLOAT(1.2))
             EVT_CALL(JumpToGoal, LocalVar(0), 20, FALSE, TRUE, FALSE)
             EVT_CALL(HPBarToHome, LocalVar(0))
@@ -471,7 +471,7 @@ EvtScript N(8021BE64) = {
     EVT_SWITCH(LocalVar(0))
         EVT_CASE_OR_EQ(6)
         EVT_CASE_OR_EQ(5)
-            EVT_SET(LocalVar(10), LocalVar(0))
+            EVT_SET(LVarA, LocalVar(0))
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_bubble_Palette_01_Anim_4)
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LocalVar(0), LocalVar(1), LocalVar(2))
@@ -481,8 +481,8 @@ EvtScript N(8021BE64) = {
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.0))
             EVT_CALL(SetGoalPos, ACTOR_SELF, LocalVar(0), LocalVar(1), LocalVar(2))
             EVT_CALL(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
-            EVT_IF_EQ(LocalVar(10), 5)
-                EVT_CALL(EnemyTestTarget, ACTOR_SELF, LocalVar(10), DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
+            EVT_IF_EQ(LVarA, 5)
+                EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
             EVT_SUB(LocalVar(0), 30)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LocalVar(0), LocalVar(1), LocalVar(2))
@@ -535,8 +535,8 @@ EvtScript N(8021C454) = {
     EVT_SET(LocalVar(6), 2)
     EVT_LOOP(4)
         EVT_THREAD
-            EVT_CALL(GetStatusFlags, ACTOR_SELF, LocalVar(10))
-            EVT_IF_FLAG(LocalVar(10), 0x80000)
+            EVT_CALL(GetStatusFlags, ACTOR_SELF, LVarA)
+            EVT_IF_FLAG(LVarA, 0x80000)
                 EVT_CALL(SetPartScale, -127, LocalVar(6), EVT_FLOAT(0.2), EVT_FLOAT(0.2), EVT_FLOAT(0.2))
             EVT_ELSE
                 EVT_CALL(SetPartScale, -127, LocalVar(6), EVT_FLOAT(0.5), EVT_FLOAT(0.5), EVT_FLOAT(0.5))
@@ -574,8 +574,8 @@ EvtScript N(8021C654) = {
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(func_8024ECF8, -1, 1, 0)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LocalVar(0), LocalVar(1), LocalVar(2))
-    EVT_CALL(GetActorVar, -127, 0, LocalVar(10))
-    EVT_IF_EQ(LocalVar(10), 1)
+    EVT_CALL(GetActorVar, -127, 0, LVarA)
+    EVT_IF_EQ(LVarA, 1)
         EVT_ADD(LocalVar(0), 100)
         EVT_SET(LocalVar(1), 5)
     EVT_ELSE
@@ -597,7 +597,7 @@ EvtScript N(8021C654) = {
     EVT_SWITCH(LocalVar(0))
         EVT_CASE_OR_EQ(6)
         EVT_CASE_OR_EQ(5)
-            EVT_SET(LocalVar(10), LocalVar(0))
+            EVT_SET(LVarA, LocalVar(0))
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_bubble_Palette_01_Anim_6)
             EVT_CALL(GetActorPos, ACTOR_SELF, LocalVar(0), LocalVar(1), LocalVar(2))
             EVT_SUB(LocalVar(0), 5)
@@ -608,7 +608,7 @@ EvtScript N(8021C654) = {
             EVT_SUB(LocalVar(3), 100)
             EVT_ADD(LocalVar(5), 2)
             EVT_EXEC_WAIT(N(8021C5F8))
-            EVT_IF_EQ(LocalVar(10), 5)
+            EVT_IF_EQ(LVarA, 5)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LocalVar(0), DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
             EVT_WAIT(20)
@@ -669,7 +669,7 @@ EvtScript N(8021CBC8) = {
     EVT_SWITCH(LocalVar(0))
         EVT_CASE_OR_EQ(6)
         EVT_CASE_OR_EQ(5)
-            EVT_SET(LocalVar(10), LocalVar(0))
+            EVT_SET(LVarA, LocalVar(0))
             EVT_WAIT(10)
             EVT_CALL(SetActorSounds, -127, 2, 0, 0)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2CF)
@@ -689,7 +689,7 @@ EvtScript N(8021CBC8) = {
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_bubble_Palette_01_Anim_4)
             EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -10, 4)
-            EVT_IF_EQ(LocalVar(10), 5)
+            EVT_IF_EQ(LVarA, 5)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LocalVar(0), DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
             EVT_WAIT(30)
@@ -714,9 +714,9 @@ EvtScript N(8021CBC8) = {
     EVT_CALL(SetGoalPos, ACTOR_SELF, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, FALSE, FALSE)
     EVT_CALL(ResetActorSounds, -127, 2)
-    EVT_SET(LocalVar(10), LocalVar(0))
-    EVT_SET(LocalVar(11), LocalVar(1))
-    EVT_SET(LocalVar(12), LocalVar(2))
+    EVT_SET(LVarA, LocalVar(0))
+    EVT_SET(LVarB, LocalVar(1))
+    EVT_SET(LVarC, LocalVar(2))
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2EF)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LocalVar(0), LocalVar(1), LocalVar(2))
@@ -730,7 +730,7 @@ EvtScript N(8021CBC8) = {
         EVT_CASE_OR_EQ(0)
         EVT_CASE_OR_EQ(2)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
-            EVT_CALL(SetGoalPos, ACTOR_SELF, LocalVar(10), LocalVar(11), LocalVar(12))
+            EVT_CALL(SetGoalPos, ACTOR_SELF, LVarA, LVarB, LVarC)
             EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -10, 0)
             EVT_WAIT(20)
             EVT_EXEC_WAIT(N(8021B2FC))
