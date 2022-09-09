@@ -22,7 +22,7 @@ EvtScript N(main) = {
     EVT_CALL(MakeNpcs, 0, EVT_ADDR(N(npcGroupList)))
     EVT_EXEC_WAIT(N(MakeEntities))
     EVT_EXEC(N(PlayMusic))
-    EVT_SET(LW(0), EVT_ADDR(N(BindExits)))
+    EVT_SET(LocalVar(0), EVT_ADDR(N(BindExits)))
     EVT_EXEC(EnterWalk)
     EVT_WAIT(1)
     EVT_BIND_TRIGGER(N(ReadWestSign), TRIGGER_WALL_PRESS_A, 10, 1, 0)
@@ -70,19 +70,19 @@ EvtScript N(ReadWestSign) = {
     EVT_CALL(ShowMessageAtScreenPos, MSG_kmr_12_sign_trap, 160, 40)
     EVT_RESUME_GROUP(1)
 
-    EVT_SET(ScriptFlag(0), FALSE)
+    EVT_SET(LocalFlag(0), FALSE)
     EVT_CALL(GetGoomba)
-    EVT_IF_NE(LW(0), FALSE)
-        EVT_CALL(GetNpcVar, NPC_GOOMBA, 0, LW(0))
-        EVT_IF_EQ(LW(0), FALSE)
+    EVT_IF_NE(LocalVar(0), FALSE)
+        EVT_CALL(GetNpcVar, NPC_GOOMBA, 0, LocalVar(0))
+        EVT_IF_EQ(LocalVar(0), FALSE)
             // Trigger Goomba to peel off
             EVT_CALL(SetNpcVar, NPC_GOOMBA, 0, TRUE)
-            EVT_SET(ScriptFlag(0), TRUE)
+            EVT_SET(LocalFlag(0), TRUE)
             EVT_WAIT(10)
         EVT_END_IF
     EVT_END_IF
     EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_IF_EQ(ScriptFlag(0), TRUE)
+    EVT_IF_EQ(LocalFlag(0), TRUE)
         EVT_UNBIND
     EVT_END_IF
     EVT_END
@@ -99,25 +99,25 @@ EvtScript N(GoombaIdle) = {
 
     // Wait until read_sign sets NPC var 0
     EVT_LABEL(0)
-    EVT_CALL(GetSelfVar, 0, LW(0))
+    EVT_CALL(GetSelfVar, 0, LocalVar(0))
     EVT_WAIT(1)
-    EVT_IF_EQ(LW(0), FALSE)
+    EVT_IF_EQ(LocalVar(0), FALSE)
         EVT_GOTO(0)
     EVT_END_IF
 
     // Peel and jump off the sign
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_40000 | NPC_FLAG_200000, TRUE)
     EVT_WAIT(3)
-    EVT_SETF(LW(0), EVT_FLOAT(0.0))
+    EVT_SETF(LocalVar(0), EVT_FLOAT(0.0))
     EVT_LOOP(9)
-        EVT_ADDF(LW(0), EVT_FLOAT(10.0))
-        EVT_CALL(SetNpcRotation, NPC_SELF, 0, LW(0), 0)
+        EVT_ADDF(LocalVar(0), EVT_FLOAT(10.0))
+        EVT_CALL(SetNpcRotation, NPC_SELF, 0, LocalVar(0), 0)
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_goomba_normal_still)
     EVT_LOOP(9)
-        EVT_ADDF(LW(0), EVT_FLOAT(10.0))
-        EVT_CALL(SetNpcRotation, NPC_SELF, 0, LW(0), 0)
+        EVT_ADDF(LocalVar(0), EVT_FLOAT(10.0))
+        EVT_CALL(SetNpcRotation, NPC_SELF, 0, LocalVar(0), 0)
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_goomba_normal_dizzy)
@@ -207,8 +207,8 @@ NpcGroupList N(npcGroupList) = {
 };
 
 EvtScript N(ReadEastSign) = {
-    EVT_CALL(IsStartingConversation, LW(0))
-    EVT_IF_EQ(LW(0), 1)
+    EVT_CALL(IsStartingConversation, LocalVar(0))
+    EVT_IF_EQ(LocalVar(0), 1)
         EVT_RETURN
     EVT_END_IF
     EVT_SET_GROUP(EVT_GROUP_00)

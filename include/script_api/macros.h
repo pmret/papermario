@@ -30,14 +30,12 @@
 /// Additionally, EVT_EXEC_WAIT copies LWs back from the spawned thread when it completes.
 ///
 /// Range: `0 <= v < 0x10`
-/// Star Rod equivalent: `*Var[v]`.
-#define LW(INDEX) ((((INDEX)) - 30000000))
+#define LocalVar(INDEX) ((((INDEX)) - 30000000))
 
 /// Global Word. A variable global to all threads.
 /// Cleared upon entering a new map.
 ///
 /// Range: `0 <= v < 0x10`
-/// Star Rod equivalent: `*MapVar[v]`.
 #define MapVar(INDEX) ((((INDEX)) - 50000000))
 
 /// Local Flag. A boolean variable local to the current thread.
@@ -45,7 +43,7 @@
 /// Additionally, EVT_EXEC_WAIT copies LFs back from the spawned thread when it completes.
 ///
 /// Range: `0 <= v < 0x60`
-#define ScriptFlag(INDEX) ((((INDEX)) - 70000000))
+#define LocalFlag(INDEX) ((((INDEX)) - 70000000))
 
 /// Global Flag. A boolean variable global to all threads.
 /// Cleared upon entering a new map.
@@ -247,8 +245,8 @@
 #define EVT_SWITCH(LVAR)                        EVT_CMD(EVT_OP_SWITCH, LVAR),
 
 /// Marks the start of a switch statement where the given value is treated as-is instead of using evt_get_variable.
-/// That is, `EVT_SWITCH_CONST(LW(0))` will switch over the value `0xFE363C80` instead of the value contained
-/// within `LW(0)`.
+/// That is, `EVT_SWITCH_CONST(LocalVar(0))` will switch over the value `0xFE363C80` instead of the value contained
+/// within `LocalVar(0)`.
 #define EVT_SWITCH_CONST(LCONST)                EVT_CMD(EVT_OP_SWITCH_CONST, LCONST),
 
 /// Marks the start of a switch case that executes only if `LVAR == RVAR`. It also marks the end of any previous case.
@@ -301,8 +299,8 @@
 #define EVT_SET(VAR, INT_VALUE)                 EVT_CMD(EVT_OP_SET, VAR, (Bytecode) INT_VALUE),
 
 /// Sets the given variable to a given value, skipping the evt_get_variable call.
-/// That is, `EVT_SET_CONST(LW(0), LW(1))` will set `LW(0)` to `0xFE363C81` instead of copying the value of
-/// `LW(1)` into `LW(0)`.
+/// That is, `EVT_SET_CONST(LocalVar(0), LocalVar(1))` will set `LocalVar(0)` to `0xFE363C81` instead of copying the value of
+/// `LocalVar(1)` into `LocalVar(0)`.
 #define EVT_SET_CONST(VAR, CONST)               EVT_CMD(EVT_OP_SET_CONST, VAR, (Bytecode) CONST),
 
 /// Sets the given variable to a given value, but supports EVT_FLOATs.

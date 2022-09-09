@@ -181,10 +181,10 @@ ApiStatus N(GetPanelInfo)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 index = evt_get_variable(script, *args++);
 
-    evt_set_variable(script, LW(0), data->panels[index].state);
-    evt_set_variable(script, LW(1), data->panels[index].modelID);
-    evt_set_variable(script, LW(2), data->panels[index].type);
-    evt_set_variable(script, LW(3), data->panels[index].tallyPosIndex);
+    evt_set_variable(script, LocalVar(0), data->panels[index].state);
+    evt_set_variable(script, LocalVar(1), data->panels[index].modelID);
+    evt_set_variable(script, LocalVar(2), data->panels[index].type);
+    evt_set_variable(script, LocalVar(3), data->panels[index].tallyPosIndex);
 
     return ApiStatus_DONE2;
 }
@@ -259,9 +259,9 @@ ApiStatus N(UpdatePanelEmergeFromBlock)(Evt* script, s32 isInitialCall) {
     data->panels[index].lerpElapsed++;
 
     if (data->panels[index].lerpElapsed >= data->panels[index].lerpDuration) {
-        evt_set_variable(script, LW(3), TRUE);
+        evt_set_variable(script, LocalVar(3), TRUE);
     } else {
-        evt_set_variable(script, LW(3), FALSE);
+        evt_set_variable(script, LocalVar(3), FALSE);
     }
 
     return ApiStatus_DONE2;
@@ -287,9 +287,9 @@ ApiStatus N(UpdatetPanelHoldAboveBlock)(Evt* script, s32 isInitialCall) {
 
     data->panels[index].lerpElapsed++;
     if (data->panels[index].lerpElapsed >= data->panels[index].lerpDuration) {
-        evt_set_variable(script, LW(3), TRUE);
+        evt_set_variable(script, LocalVar(3), TRUE);
     } else {
-        evt_set_variable(script, LW(3), FALSE);
+        evt_set_variable(script, LocalVar(3), FALSE);
     }
 
     return ApiStatus_DONE2;
@@ -365,9 +365,9 @@ ApiStatus N(UpdatePanelMoveToTally)(Evt* script, s32 isInitialCall) {
         data->panels[index].lerpElapsed, data->panels[index].lerpDuration);
 
     if (data->panels[index].lerpElapsed >= data->panels[index].lerpDuration) {
-        evt_set_variable(script, LW(3), TRUE);
+        evt_set_variable(script, LocalVar(3), TRUE);
     } else {
-        evt_set_variable(script, LW(3), FALSE);
+        evt_set_variable(script, LocalVar(3), FALSE);
     }
 
     return ApiStatus_DONE2;
@@ -455,10 +455,10 @@ ApiStatus N(EndBowserPanelAnimation)(Evt* script, s32 isInitialCall) {
     data->panels[i].curPos.y = N(TallyPosY)[data->panels[i].tallyPosIndex];
     data->panels[i].curPos.z = 110.0f;
 
-    evt_set_variable(script, LW(1), data->panels[i].modelID);
-    evt_set_float_variable(script, LW(5), data->panels[i].curPos.x);
-    evt_set_float_variable(script, LW(6), data->panels[i].curPos.y);
-    evt_set_float_variable(script, LW(7), data->panels[i].curPos.z);
+    evt_set_variable(script, LocalVar(1), data->panels[i].modelID);
+    evt_set_float_variable(script, LocalVar(5), data->panels[i].curPos.x);
+    evt_set_float_variable(script, LocalVar(6), data->panels[i].curPos.y);
+    evt_set_float_variable(script, LocalVar(7), data->panels[i].curPos.z);
 
     return ApiStatus_DONE2;
 }
@@ -469,11 +469,11 @@ ApiStatus N(GetPanelPos)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 index = evt_get_variable(script, *args++);
 
-    evt_set_float_variable(script, LW(5), data->panels[index].curPos.x);
-    evt_set_float_variable(script, LW(6), data->panels[index].curPos.y);
-    evt_set_float_variable(script, LW(7), data->panels[index].curPos.z);
-    evt_set_float_variable(script, LW(8), data->panels[index].curAngle);
-    evt_set_float_variable(script, LW(9), data->panels[index].curScale);
+    evt_set_float_variable(script, LocalVar(5), data->panels[index].curPos.x);
+    evt_set_float_variable(script, LocalVar(6), data->panels[index].curPos.y);
+    evt_set_float_variable(script, LocalVar(7), data->panels[index].curPos.z);
+    evt_set_float_variable(script, LocalVar(8), data->panels[index].curAngle);
+    evt_set_float_variable(script, LocalVar(9), data->panels[index].curScale);
 
     return ApiStatus_DONE2;
 }
@@ -665,7 +665,7 @@ ApiStatus N(DestroyMinigame) (Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus N(GetCoinCount)(Evt* script, s32 isInitialCall) {
-    evt_set_variable(script, LW(0xA), gPlayerData.coins);
+    evt_set_variable(script, LocalVar(10), gPlayerData.coins);
     return ApiStatus_DONE2;
 }
 

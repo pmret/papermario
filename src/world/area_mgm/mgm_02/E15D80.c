@@ -244,8 +244,8 @@ ApiStatus N(CreateSignpost)(void) {
 
 ApiStatus N(OnHitBox)(Evt* script, s32 isInitialCall0) {
     SmashGameData* data = get_enemy(SCOREKEEPER_ENEMY_IDX)->varTablePtr[SMASH_DATA_VAR_IDX];
-    s32 hitModelID = evt_get_variable(script, LW(0xA));
-    s32 hitColliderID = evt_get_variable(script, LW(0xB)); // unused
+    s32 hitModelID = evt_get_variable(script, LocalVar(10));
+    s32 hitColliderID = evt_get_variable(script, LocalVar(11)); // unused
     s32 i;
 
     for (i = 0; i < NUM_BOXES; i++) {
@@ -254,19 +254,19 @@ ApiStatus N(OnHitBox)(Evt* script, s32 isInitialCall0) {
         }
     }
 
-    evt_set_variable(script, LW(0xC), data->box[i].content);
+    evt_set_variable(script, LocalVar(12), data->box[i].content);
 
     switch (data->box[i].content) {
         case BOX_CONTENT_FUZZY:
-            evt_set_variable(script, LW(0xD), data->box[i].npcID);
+            evt_set_variable(script, LocalVar(13), data->box[i].npcID);
             data->box[i].state = BOX_STATE_FUZZY_HIT;
             break;
         case BOX_CONTENT_BOMB:
-            evt_set_variable(script, LW(0xD), data->box[i].npcID);
+            evt_set_variable(script, LocalVar(13), data->box[i].npcID);
             data->box[i].state = BOX_STATE_BOMB_HIT;
             break;
         case BOX_CONTENT_EMPTY:
-            evt_set_variable(script, LW(0xD), data->box[i].npcID);
+            evt_set_variable(script, LocalVar(13), data->box[i].npcID);
             data->box[i].state = BOX_STATE_EMPTY_HIT;
             break;
         case BOX_CONTENT_PEACH:
@@ -856,7 +856,7 @@ ApiStatus N(UpdateRecords)(Evt* script, s32 isInitialCall) {
     if (data->currentScore == 0 && data->found == NUM_PANELS) {
         outScore = -1;
     }
-    evt_set_variable(script, LW(0), outScore);
+    evt_set_variable(script, LocalVar(0), outScore);
 
     return ApiStatus_DONE2;
 }
@@ -979,7 +979,7 @@ ApiStatus N(DestroyMinigame)(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus N(GetCoinCount)(Evt* script, s32 isInitialCall) {
-    evt_set_variable(script, LW(0xA), gPlayerData.coins);
+    evt_set_variable(script, LocalVar(10), gPlayerData.coins);
     return ApiStatus_DONE2;
 }
 

@@ -11,9 +11,9 @@ extern Mtx Entity_Chest_lidMtx;
 
 EvtScript Entity_Chest_AdjustCam_ISK = {
     EVT_THREAD
-        EVT_CALL(GetPlayerPos, LW(0), LW(1), LW(2))
+        EVT_CALL(GetPlayerPos, LocalVar(0), LocalVar(1), LocalVar(2))
         EVT_CALL(UseSettingsFrom, 0, -195, -358, -555)
-        EVT_CALL(SetPanTarget, 0, LW(0), LW(1), LW(2))
+        EVT_CALL(SetPanTarget, 0, LocalVar(0), LocalVar(1), LocalVar(2))
         EVT_CALL(SetCamDistance, 0, EVT_FLOAT(290.0))
         EVT_CALL(SetCamPitch, 0, EVT_FLOAT(20.0), EVT_FLOAT(-10.0))
         EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(8.0))

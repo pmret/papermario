@@ -682,9 +682,9 @@ class ScriptDisassembler:
             elif v <= -120000000: return f"GameFlag({v + 130000000})"
             elif v <= -100000000: return f"AreaFlag({v + 110000000})"
             elif v <= -80000000: return f"MapFlag({v + 90000000})"
-            elif v <= -60000000: return f"ScriptFlag({v + 70000000})"
+            elif v <= -60000000: return f"LocalFlag({v + 70000000})"
             elif v <= -40000000: return f"MapVar({v + 50000000})"
-            elif v <= -20000000: return f"LW({v + 30000000})"
+            elif v <= -20000000: return f"LocalVar({v + 30000000})"
 
         if arg == 0xFFFFFFFF:
             return "-1"

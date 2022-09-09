@@ -220,26 +220,26 @@ EvtScript N(init) = {
     EVT_CALL(SetPartMovementVar, ACTOR_SELF, 8, 1, -10)
     EVT_CALL(SetPartMovementVar, ACTOR_SELF, 9, 0, 50)
     EVT_CALL(SetPartMovementVar, ACTOR_SELF, 9, 1, 10)
-    EVT_SET(LW(0), 2)
+    EVT_SET(LocalVar(0), 2)
     EVT_LOOP(8)
-        EVT_CALL(SetPartPos, ACTOR_SELF, LW(0), 185, 0, 47)
-        EVT_ADD(LW(0), 1)
+        EVT_CALL(SetPartPos, ACTOR_SELF, LocalVar(0), 185, 0, 47)
+        EVT_ADD(LocalVar(0), 1)
     EVT_END_LOOP
     EVT_CALL(ForceHomePos, ACTOR_SELF, 20, 0, -10)
     EVT_CALL(HPBarToHome, ACTOR_SELF)
-    EVT_SET(LW(0), 2)
-    EVT_SET(LW(1), NPC_ANIM_tank_guy_Palette_00_Anim_3)
-    EVT_SET(LW(4), EVT_FLOAT(4.0))
-    EVT_SET(LW(5), 5)
+    EVT_SET(LocalVar(0), 2)
+    EVT_SET(LocalVar(1), NPC_ANIM_tank_guy_Palette_00_Anim_3)
+    EVT_SET(LocalVar(4), EVT_FLOAT(4.0))
+    EVT_SET(LocalVar(5), 5)
     EVT_LOOP(8)
         EVT_THREAD
-            EVT_CALL(GetPartMovementVar, ACTOR_SELF, LW(0), 0, LW(2))
-            EVT_CALL(GetPartMovementVar, ACTOR_SELF, LW(0), 1, LW(3))
-            EVT_SET(LW(5), 20)
+            EVT_CALL(GetPartMovementVar, ACTOR_SELF, LocalVar(0), 0, LocalVar(2))
+            EVT_CALL(GetPartMovementVar, ACTOR_SELF, LocalVar(0), 1, LocalVar(3))
+            EVT_SET(LocalVar(5), 20)
             EVT_EXEC_WAIT(N(run_to_pos))
-            EVT_CALL(SetAnimation, ACTOR_SELF, LW(0), NPC_ANIM_tank_guy_Palette_00_Anim_1)
+            EVT_CALL(SetAnimation, ACTOR_SELF, LocalVar(0), NPC_ANIM_tank_guy_Palette_00_Anim_1)
         EVT_END_THREAD
-        EVT_ADD(LW(0), 1)
+        EVT_ADD(LocalVar(0), 1)
     EVT_END_LOOP
     EVT_RETURN
     EVT_END
@@ -254,17 +254,17 @@ EvtScript N(idle) = {
 };
 
 EvtScript N(run_to_pos) = {
-    EVT_CALL(GetPartOffset, ACTOR_SELF, LW(0), LW(6), 0, LW(7))
-    EVT_IF_LT(LW(6), LW(2))
-        EVT_CALL(SetPartYaw, ACTOR_SELF, LW(0), 180)
+    EVT_CALL(GetPartOffset, ACTOR_SELF, LocalVar(0), LocalVar(6), 0, LocalVar(7))
+    EVT_IF_LT(LocalVar(6), LocalVar(2))
+        EVT_CALL(SetPartYaw, ACTOR_SELF, LocalVar(0), 180)
     EVT_ELSE
-        EVT_CALL(SetPartYaw, ACTOR_SELF, LW(0), 0)
+        EVT_CALL(SetPartYaw, ACTOR_SELF, LocalVar(0), 0)
     EVT_END_IF
-    EVT_CALL(GetDist2D, LW(9), LW(6), LW(7), LW(2), LW(3))
-    EVT_IF_GE(LW(9), LW(4))
-        EVT_CALL(SetAnimation, ACTOR_SELF, LW(0), LW(1))
-        EVT_CALL(SetPartMoveSpeed, ACTOR_SELF, LW(0), LW(4))
-        EVT_CALL(RunPartTo, ACTOR_SELF, LW(0), LW(2), 0, LW(3), LW(5))
+    EVT_CALL(GetDist2D, LocalVar(9), LocalVar(6), LocalVar(7), LocalVar(2), LocalVar(3))
+    EVT_IF_GE(LocalVar(9), LocalVar(4))
+        EVT_CALL(SetAnimation, ACTOR_SELF, LocalVar(0), LocalVar(1))
+        EVT_CALL(SetPartMoveSpeed, ACTOR_SELF, LocalVar(0), LocalVar(4))
+        EVT_CALL(RunPartTo, ACTOR_SELF, LocalVar(0), LocalVar(2), 0, LocalVar(3), LocalVar(5))
     EVT_END_IF
     EVT_RETURN
     EVT_END

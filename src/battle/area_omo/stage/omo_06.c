@@ -4,25 +4,25 @@
 #define NAMESPACE b_area_omo_omo_06
 
 EvtScript N(8022F630) = {
-    EVT_SET(LW(10), LW(0))
-    EVT_SET(LW(9), LW(1))
-    EVT_SET(LW(8), LW(2))
+    EVT_SET(LocalVar(10), LocalVar(0))
+    EVT_SET(LocalVar(9), LocalVar(1))
+    EVT_SET(LocalVar(8), LocalVar(2))
     EVT_LABEL(0)
-    EVT_CALL(MakeLerp, 0, LW(9), LW(8), 10)
+    EVT_CALL(MakeLerp, 0, LocalVar(9), LocalVar(8), 10)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
-        EVT_CALL(TranslateGroup, LW(10), 0, LW(0), 0)
+        EVT_CALL(TranslateGroup, LocalVar(10), 0, LocalVar(0), 0)
         EVT_WAIT(1)
-        EVT_IF_EQ(LW(1), 0)
+        EVT_IF_EQ(LocalVar(1), 0)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(MakeLerp, LW(9), 0, LW(8), 10)
+    EVT_CALL(MakeLerp, LocalVar(9), 0, LocalVar(8), 10)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
-        EVT_CALL(TranslateGroup, LW(10), 0, LW(0), 0)
+        EVT_CALL(TranslateGroup, LocalVar(10), 0, LocalVar(0), 0)
         EVT_WAIT(1)
-        EVT_IF_EQ(LW(1), 0)
+        EVT_IF_EQ(LocalVar(1), 0)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
@@ -35,14 +35,14 @@ EvtScript N(beforeBattle_8022F790) = {
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamBGColor, 1, 0, 0, 0)
     EVT_THREAD
-        EVT_SET(LW(0), 26)
-        EVT_SET(LW(1), -50)
-        EVT_SET(LW(2), 120)
+        EVT_SET(LocalVar(0), 26)
+        EVT_SET(LocalVar(1), -50)
+        EVT_SET(LocalVar(2), 120)
         EVT_EXEC(N(8022F630))
         EVT_WAIT(10)
-        EVT_SET(LW(0), 30)
-        EVT_SET(LW(1), -80)
-        EVT_SET(LW(2), 150)
+        EVT_SET(LocalVar(0), 30)
+        EVT_SET(LocalVar(1), -80)
+        EVT_SET(LocalVar(2), 150)
         EVT_EXEC(N(8022F630))
     EVT_END_THREAD
     EVT_RETURN
