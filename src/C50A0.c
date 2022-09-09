@@ -1373,7 +1373,7 @@ void update_item_entity_collectable(ItemEntity* item) {
                 physData->unk_08 = 24.0f;
                 physData->constVelocity = 24.0f;
                 if (item->wsFaceAngle < 0) {
-                    if (IS_ID_ITEM(item->itemID)) {
+                    if (IS_ITEM(item->itemID)) {
                         if (rand_int(10000) < 5000) {
                             physData->moveAngle = clamp_angle(gCameras[camID].currentYaw + 105.0f + rand_int(30) - 15.0f);
                         } else {
@@ -1633,9 +1633,9 @@ void update_item_entity_collectable(ItemEntity* item) {
                             physData->velz = 0.0f;
                             item->flags |= ITEM_ENTITY_FLAGS_20000000;
                         } else {
-                            if (IS_ID_BADGE(item->itemID)) {
+                            if (IS_BADGE(item->itemID)) {
                                 sfx_play_sound_at_position(SOUND_21B, 0, item->position.x, item->position.y, item->position.z);
-                            } else if (IS_ID_ITEM(item->itemID)) {
+                            } else if (IS_ITEM(item->itemID)) {
                                 sfx_play_sound_at_position(SOUND_21A, 0, item->position.x, item->position.y, item->position.z);
                             } else {
                                 switch (item->itemID) {
@@ -1686,9 +1686,9 @@ void update_item_entity_collectable(ItemEntity* item) {
 
             fx_small_gold_sparkle(0, item->position.x, item->position.y + 16.0f, item->position.z, 1.0f, 0);
 
-            if (IS_ID_ITEM(item->itemID)) {
+            if (IS_ITEM(item->itemID)) {
                 item->state = 0xA;
-            } else if (IS_ID_BADGE(item->itemID)) {
+            } else if (IS_BADGE(item->itemID)) {
                 item->state = 0xA;
             } else if (item->itemID == ITEM_STAR_PIECE) {
                 playerData->starPiecesCollected++;

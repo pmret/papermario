@@ -33,10 +33,10 @@ ApiStatus N(FlowerGuard_JudgeItemTastiness)(Evt* script, s32 isInitialCall) {
 ApiStatus N(FlowerGuard_MakeItemList)(Evt* script, s32 isInitialCall) {
     s32 i;
 
-    for (i = 0; i <= (ITEM_LAST_VALID_CONSUMABLE - ITEM_FIRST_CONSUMABLE); i++) {
+    for (i = 0; i < ITEM_NUM_CONSUMABLES; i++) {
         N(FlowerGuard_ItemChoiceList)[i] = ITEM_FIRST_CONSUMABLE + i;
     }
 
-    N(FlowerGuard_ItemChoiceList)[(ITEM_LAST_VALID_CONSUMABLE - ITEM_FIRST_CONSUMABLE) + 1] = ITEM_NONE;
+    N(FlowerGuard_ItemChoiceList)[ITEM_NUM_CONSUMABLES] = ITEM_NONE;
     return ApiStatus_DONE2;
 }

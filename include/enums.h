@@ -1741,17 +1741,26 @@ enum ItemIDs {
 
 #define LOOKUP_ITEM(itemID) gItemTable[itemID & ~0xF0000]
 
-#define ITEM_FIRST_KEY              ITEM_LUCKY_STAR
-#define ITEM_FIRST_VALID_KEY        ITEM_KOOPA_FORTRESS_KEY
+// item ranges:
+// 001 - 007 = gear (hammer/boots)
+// 008 - 00F = 'quest' items
+// 010 - 07F = keys
+// 080 - 0DA = consumables
+// 0DB - 0DF = unused
+// 0E0 - 154 badges
+// 155+      misc (collectables, utility items for menu purposes, etc)
+
+#define ITEM_FIRST_KEY              ITEM_KOOPA_FORTRESS_KEY
 #define ITEM_LAST_KEY               ITEM_PRISON_KEY4
 #define ITEM_FIRST_CONSUMABLE       ITEM_FIRE_FLOWER
-#define ITEM_LAST_VALID_CONSUMABLE  ITEM_JELLY_SHROOM1
-#define ITEM_LAST_CONSUMABLE        ITEM_JELLY_SHROOM6
+#define ITEM_LAST_CONSUMABLE        ITEM_JELLY_SHROOM1
 #define ITEM_FIRST_BADGE            ITEM_SPIN_SMASH
 #define ITEM_LAST_BADGE             ITEM_ATTACK_FX_F5
 
-#define IS_ID_BADGE(itemID) (itemID >= ITEM_FIRST_BADGE && itemID <= ITEM_LAST_BADGE)
-#define IS_ID_ITEM(itemID) (itemID >= ITEM_FIRST_VALID_KEY && itemID <= ITEM_LAST_VALID_CONSUMABLE)
+#define ITEM_NUM_KEYS (ITEM_LAST_KEY - ITEM_FIRST_KEY + 1)
+#define ITEM_NUM_CONSUMABLES (ITEM_LAST_CONSUMABLE - ITEM_FIRST_CONSUMABLE + 1)
+#define IS_ITEM(itemID) (itemID >= ITEM_FIRST_KEY && itemID <= ITEM_LAST_CONSUMABLE)
+#define IS_BADGE(itemID) (itemID >= ITEM_FIRST_BADGE && itemID <= ITEM_LAST_BADGE)
 
 enum ItemTypeFlags {
     ITEM_TYPE_FLAG_WORLD_USABLE         = 0x0001,

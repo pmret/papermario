@@ -18,8 +18,8 @@ enum {
 };
 
 // BSS
-static s32 N(ItemChoiceList)[(ITEM_LAST_VALID_CONSUMABLE - ITEM_FIRST_CONSUMABLE) + 2]; // extra entry for list terminator
-static s32 N(FlowerGuard_ItemChoiceList)[(ITEM_LAST_VALID_CONSUMABLE - ITEM_FIRST_CONSUMABLE) + 2]; // extra entry for list terminator
+static s32 N(ItemChoiceList)[ITEM_NUM_CONSUMABLES + 1]; // extra entry for list terminator
+static s32 N(FlowerGuard_ItemChoiceList)[ITEM_NUM_CONSUMABLES + 1]; // extra entry for list terminator
 
 // DATA
 EntryList N(entryList) = {
