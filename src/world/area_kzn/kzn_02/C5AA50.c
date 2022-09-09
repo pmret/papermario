@@ -2,16 +2,16 @@
 
 ApiStatus func_80240310_C5AA50(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    f32 sp20;
-    f32 sp24;
-    f32 sp28;
-    f32 sp2C;
-    f32 sp30;
-    f32 sp34;
+    f32 centerX;
+    f32 centerY;
+    f32 centerZ;
+    f32 sizeX;
+    f32 sizeY;
+    f32 sizeZ;
 
-    get_model_center_and_size(evt_get_variable(script, *args++), &sp20, &sp24, &sp28, &sp2C, &sp30, &sp34);
-    script->varTable[7] = sp20;
-    script->varTable[8] = sp28;
+    get_model_center_and_size(evt_get_variable(script, *args++), &centerX, &centerY, &centerZ, &sizeX, &sizeY, &sizeZ);
+    script->varTable[7] = centerX;
+    script->varTable[8] = centerZ;
     return ApiStatus_DONE2;
 }
 
