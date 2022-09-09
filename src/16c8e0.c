@@ -35,10 +35,10 @@ s32 D_80280A30 = 0xFF;
 EvtScript BtlPutPartnerAway = {
     EVT_CALL(DispatchEvent, 256, 62)
     EVT_CHILD_THREAD
-        EVT_SETF(LocalVar(0), EVT_FIXED(1.0))
+        EVT_SETF(LocalVar(0), EVT_FLOAT(1.0))
         EVT_LOOP(10)
-            EVT_CALL(SetActorScale, 256, LocalVar(0), LocalVar(0), EVT_FIXED(1.0))
-            EVT_SUBF(LocalVar(0), EVT_FIXED(0.1))
+            EVT_CALL(SetActorScale, 256, LocalVar(0), LocalVar(0), EVT_FLOAT(1.0))
+            EVT_SUBF(LocalVar(0), EVT_FLOAT(0.1))
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_CHILD_THREAD
@@ -46,7 +46,7 @@ EvtScript BtlPutPartnerAway = {
     EVT_CALL(PlaySoundAtActor, 0, 14)
     EVT_CALL(GetActorPos, 0, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_ADD(LocalVar(1), 25)
-    EVT_CALL(SetActorJumpGravity, 256, EVT_FIXED(1.0))
+    EVT_CALL(SetActorJumpGravity, 256, EVT_FLOAT(1.0))
     EVT_CALL(SetGoalPos, 256, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_CALL(JumpToGoal, 256, 10, 0, 0, 1)
     EVT_CALL(DisablePartnerBlur)
@@ -56,17 +56,17 @@ EvtScript BtlPutPartnerAway = {
 
 EvtScript BtlBringPartnerOut = {
     EVT_CHILD_THREAD
-        EVT_SETF(LocalVar(0), EVT_FIXED(0.1))
+        EVT_SETF(LocalVar(0), EVT_FLOAT(0.1))
         EVT_LOOP(20)
-            EVT_CALL(SetActorScale, 256, LocalVar(0), LocalVar(0), EVT_FIXED(1.0))
-            EVT_ADDF(LocalVar(0), EVT_FIXED(0.05))
+            EVT_CALL(SetActorScale, 256, LocalVar(0), LocalVar(0), EVT_FLOAT(1.0))
+            EVT_ADDF(LocalVar(0), EVT_FLOAT(0.05))
             EVT_WAIT(1)
         EVT_END_LOOP
-        EVT_CALL(SetActorScale, 256, EVT_FIXED(1.0), EVT_FIXED(1.0), EVT_FIXED(1.0))
+        EVT_CALL(SetActorScale, 256, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
     EVT_END_CHILD_THREAD
     EVT_CALL(PlaySoundAtActor, 0, 13)
     EVT_CALL(GetGoalPos, 256, LocalVar(0), LocalVar(1), LocalVar(2))
-    EVT_CALL(SetActorJumpGravity, 256, EVT_FIXED(1.0))
+    EVT_CALL(SetActorJumpGravity, 256, EVT_FLOAT(1.0))
     EVT_IF_EQ(LocalVar(1), 0)
         EVT_CALL(JumpToGoal, 256, 20, 0, 0, 1)
     EVT_ELSE

@@ -21,7 +21,7 @@
 #define EVT_FLOAT_ROUND(x) ((x)>=0?(f64)((x) + 0.9):(f64)(x))
 #define EVT_FLOAT(DOUBLE)  (((Bytecode)EVT_FLOAT_ROUND((DOUBLE * 1024.0f)) + -230000000))
 #define EVT_FIXED_TO_FLOAT(x) ({f32 var = x + 230000000; var /= 1024.0f; var;})
-#define EVT_FIXED(v)       (((v * 1024.0f) + -230000000)) // See evt_float_to_fixed_var
+#define EVT_FLOAT_TO_FIXED(x) (((x * 1024.0f) + -230000000))
 
 /// Address/pointer constant.
 #define EVT_ADDR(sym) (((Bytecode) &((sym))))
