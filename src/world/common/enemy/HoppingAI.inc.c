@@ -15,12 +15,12 @@ void N(HoppingAI_HopInit)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
     ai_enemy_play_sound(npc, SOUND_B0000017, 0);
     
     if (is_point_within_region(enemy->territory->wander.wanderShape, 
-                               enemy->territory->wander.point.x, 
-                               enemy->territory->wander.point.z, 
+                               enemy->territory->wander.centerPos.x, 
+                               enemy->territory->wander.centerPos.z, 
                                npc->pos.x, npc->pos.z, 
-                               enemy->territory->wander.wanderSizeX, enemy->territory->wander.wanderSizeZ)) 
+                               enemy->territory->wander.wanderSize.x, enemy->territory->wander.wanderSize.z)) 
     {
-        npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z);
+        npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z);
         x = npc->pos.x;
         y = npc->pos.y;
         z = npc->pos.z;
@@ -229,10 +229,10 @@ ApiStatus N(HoppingAI_Main)(Evt* script, s32 isInitialCall) {
     enemy->varTable[10] = evt_get_variable(script, *args++);
     territory.skipPlayerDetectChance = 0;
     territory.shape = enemy->territory->wander.detectShape;
-    territory.pointX = enemy->territory->wander.detect.x;
-    territory.pointZ = enemy->territory->wander.detect.z;
-    territory.sizeX = enemy->territory->wander.detectSizeX;
-    territory.sizeZ = enemy->territory->wander.detectSizeZ;
+    territory.pointX = enemy->territory->wander.detectPos.x;
+    territory.pointZ = enemy->territory->wander.detectPos.z;
+    territory.sizeX = enemy->territory->wander.detectSize.x;
+    territory.sizeZ = enemy->territory->wander.detectSize.z;
     territory.halfHeight = 100.0f;
     territory.detectFlags = 0;
     territoryPtr = &territory;

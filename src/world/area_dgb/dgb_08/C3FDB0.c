@@ -1023,11 +1023,11 @@ EvtScript N(802469E0) = {
 ApiStatus N(func_80243B98_C43948)(Evt* script, s32 isInitialCall) {
     if (get_enemy_safe(9) != 0) {
         Enemy* enemy = get_enemy(9);
-        enemy->territory->wander.point.x = 2;
-        enemy->territory->wander.point.y = -450;
-        enemy->territory->wander.point.z = 0;
-        enemy->territory->wander.wanderSizeX = 175;
-        enemy->territory->wander.wanderSizeZ = 300;
+        enemy->territory->wander.centerPos.x = 2;
+        enemy->territory->wander.centerPos.y = -450;
+        enemy->territory->wander.centerPos.z = 0;
+        enemy->territory->wander.wanderSize.x = 175;
+        enemy->territory->wander.wanderSize.z = 300;
         enemy->territory->wander.moveSpeedOverride = 0;
         enemy->territory->wander.wanderShape = 175;
         return ApiStatus_DONE2;

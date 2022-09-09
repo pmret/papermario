@@ -18,10 +18,10 @@ ApiStatus func_802423CC_D8F61C(Evt *script, s32 isInitialCall) {
 
     territory.skipPlayerDetectChance = 0;
     territory.shape = enemy->territory->patrol.detectShape;
-    territory.pointX = enemy->territory->patrol.detect.x;
-    territory.pointZ = enemy->territory->patrol.detect.z;
-    territory.sizeX = enemy->territory->patrol.detectSizeX;
-    territory.sizeZ = enemy->territory->patrol.detectSizeZ;
+    territory.pointX = enemy->territory->patrol.detectPos.x;
+    territory.pointZ = enemy->territory->patrol.detectPos.z;
+    territory.sizeX = enemy->territory->patrol.detectSize.x;
+    territory.sizeZ = enemy->territory->patrol.detectSize.z;
     territory.halfHeight = 65.0f;
     territory.detectFlags = 0;
 

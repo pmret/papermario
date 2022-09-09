@@ -189,9 +189,9 @@ void N(CleftAI_Tackle)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVol
     npc_move_heading(npc, npc->moveSpeed, npc->yaw);
 
     if (is_point_within_region(enemy->territory->wander.detectShape,
-            enemy->territory->wander.detect.x, enemy->territory->wander.detect.z,
+            enemy->territory->wander.detectPos.x, enemy->territory->wander.detectPos.z,
             npc->pos.x, npc->pos.z,
-            enemy->territory->wander.detectSizeX, enemy->territory->wander.detectSizeZ)) {
+            enemy->territory->wander.detectSize.x, enemy->territory->wander.detectSize.z)) {
         phi_s1 = TRUE;
     }
 
@@ -237,11 +237,11 @@ void N(CleftAI_ReturnHome)(Evt* script, MobileAISettings* aiSettings, EnemyDetec
     if (basic_ai_check_player_dist(volume, enemy, aiSettings->chaseRadius, aiSettings->chaseOffsetDist, 0)) {
         npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
         script->AI_TEMP_STATE = AI_STATE_CLEFT_CHASE_INIT;
-    } else if (dist2D(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z) <= npc->moveSpeed) {
+    } else if (dist2D(npc->pos.x, npc->pos.z, enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z) <= npc->moveSpeed) {
         npc->duration = 10;
         script->AI_TEMP_STATE = AI_STATE_CLEFT_DISGUISE_INIT;
     } else if (npc->turnAroundYawAdjustment == 0) {
-        npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z);
+        npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z);
         npc_move_heading(npc, npc->moveSpeed, npc->yaw);
     }
 }
@@ -295,10 +295,10 @@ s32 N(CleftAI_Main)(Evt* script, s32 isInitialCall) {
 
     curVolume.skipPlayerDetectChance = 0;
     curVolume.shape = enemy->territory->wander.detectShape;
-    curVolume.pointX = enemy->territory->wander.detect.x;
-    curVolume.pointZ = enemy->territory->wander.detect.z;
-    curVolume.sizeX = enemy->territory->wander.detectSizeX;
-    curVolume.sizeZ = enemy->territory->wander.detectSizeZ;
+    curVolume.pointX = enemy->territory->wander.detectPos.x;
+    curVolume.pointZ = enemy->territory->wander.detectPos.z;
+    curVolume.sizeX = enemy->territory->wander.detectSize.x;
+    curVolume.sizeZ = enemy->territory->wander.detectSize.z;
     curVolume.halfHeight = 40.0f;
     curVolume.detectFlags = 0;
 

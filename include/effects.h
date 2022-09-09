@@ -233,7 +233,7 @@ typedef struct FlowerFXData {
     /* 0x78 */ f32 visibilityAmt;   // when this is zero, the flower can vanish. may have once controlled alpha.
     /* 0x7C */ f32 unk_7C;
     /* 0x80 */ f32 integrator[4];
-    /* 0x90 */ Vec2XZf velocity;
+    /* 0x90 */ VecXZf velocity;
 } FlowerFXData; // size = 0x98
 
 typedef struct CloudPuffFXData {

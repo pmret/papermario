@@ -63,8 +63,8 @@
     { F16(100), F16(30), attempts, F16(40) }, \
 }
 
-#define OVERRIDE_MOVEMENT_SPEED(speed) (speed * 32767)
-#define NO_OVERRIDE_MOVEMENT_SPEED OVERRIDE_MOVEMENT_SPEED(-1)
+#define OVERRIDE_MOVEMENT_SPEED(speed) ((s32)(speed * 32767))
+#define NO_OVERRIDE_MOVEMENT_SPEED OVERRIDE_MOVEMENT_SPEED(-1.0f)
 
 typedef struct QuizRequirement {
     s32 requiredStoryProgress;
@@ -197,14 +197,12 @@ typedef struct {
 } EnemyDetectVolume; // size = 0x20
 
 typedef struct {
-    /* 0x00 */ Vec3i point;
-    /* 0x0C */ s32 wanderSizeX;
-    /* 0x10 */ s32 wanderSizeZ;
+    /* 0x00 */ Vec3i centerPos;
+    /* 0x0C */ VecXZi wanderSize;
     /* 0x14 */ s32 moveSpeedOverride;
     /* 0x18 */ enum TerritoryShape wanderShape;
-    /* 0x1C */ Vec3i detect;
-    /* 0x28 */ s32 detectSizeX;
-    /* 0x2C */ s32 detectSizeZ;
+    /* 0x1C */ Vec3i detectPos;
+    /* 0x28 */ VecXZi detectSize;
     /* 0x30 */ enum TerritoryShape detectShape;
     /* 0x34 */ s32 isFlying;
 } EnemyTerritoryWander; // size = 0x38
@@ -213,9 +211,8 @@ typedef struct {
     /* 0x00 */ s32 numPoints;
     /* 0x04 */ Vec3i points[10];
     /* 0x7C */ s32 moveSpeedOverride;
-    /* 0x80 */ Vec3i detect;
-    /* 0x8C */ s32 detectSizeX;
-    /* 0x90 */ s32 detectSizeZ;
+    /* 0x80 */ Vec3i detectPos;
+    /* 0x8C */ VecXZi detectSize;
     /* 0x94 */ enum TerritoryShape detectShape;
     /* 0x98 */ s32 isFlying;
 } EnemyTerritoryPatrol; // size = 0x9C
@@ -223,7 +220,7 @@ typedef struct {
 typedef union {
     EnemyTerritoryWander wander;
     EnemyTerritoryPatrol patrol;
-    s32 temp[48]; // TODO: temp
+    s32 temp[48]; // TODO: remove when old map data is replaced
     char PADDING[0xC0];
 } EnemyTerritory; // size = 0xC0
 
@@ -248,18 +245,18 @@ typedef struct StaticNpc {
         /* 0x04 */ s32 walk;
         /* 0x08 */ s32 run;
         /* 0x0C */ s32 chase;
-        /* 0x10 */ s32 unk_10;
-        /* 0x14 */ s32 unk_14;
+        /* 0x10 */ s32 anim_4;
+        /* 0x14 */ s32 anim_5;
         /* 0x18 */ s32 death;
         /* 0x1C */ s32 hit;
-        /* 0x20 */ s32 unk_20;
-        /* 0x24 */ s32 unk_24;
-        /* 0x28 */ s32 unk_28;
-        /* 0x2C */ s32 unk_2C;
-        /* 0x30 */ s32 unk_30;
-        /* 0x34 */ s32 unk_34;
-        /* 0x38 */ s32 unk_38;
-        /* 0x3C */ s32 unk_3C;
+        /* 0x20 */ s32 anim_8;
+        /* 0x24 */ s32 anim_9;
+        /* 0x28 */ s32 anim_A;
+        /* 0x2C */ s32 anim_B;
+        /* 0x30 */ s32 anim_C;
+        /* 0x34 */ s32 anim_D;
+        /* 0x38 */ s32 anim_E;
+        /* 0x3C */ s32 anim_F;
     } animations;
     /* 0x1E0 */ s8 unk__1E0;
     /* 0x1E1 */ s8 unk__1E1;
