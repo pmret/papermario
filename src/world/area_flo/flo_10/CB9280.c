@@ -623,7 +623,7 @@ s32 N(itemList_80243394)[] = {
 };
 
 EvtScript N(8024339C) = {
-    EVT_IF_EQ(GameFlag(1376), 1)
+    EVT_IF_EQ(GF_FLO10_ShowedLilyTheWaterStone, 1)
         EVT_CALL(GetCurrentPartner, LVarA)
         EVT_IF_NE(LVarA, 0)
             EVT_CALL(AwaitPlayerLeave, 0, 0, 19)
@@ -717,7 +717,7 @@ EvtScript N(interact_802437C8) = {
             EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_lily_Palette_00_Anim_4, NPC_ANIM_lily_Palette_00_Anim_8, 5, MESSAGE_ID(0x11, 0x0078))
             EVT_CALL(EndSpeech, -1, NPC_ANIM_lily_Palette_00_Anim_9, NPC_ANIM_lily_Palette_00_Anim_5, 5)
         EVT_CASE_LT(48)
-            EVT_IF_EQ(GameFlag(1375), 0)
+            EVT_IF_EQ(GF_FLO10_LilyRequestedWaterStone, 0)
                 EVT_EXEC(N(80243628))
                 EVT_CALL(GetNpcPos, NPC_SELF, LocalVar(0), LocalVar(1), LocalVar(2))
                 EVT_CALL(UseSettingsFrom, 0, LocalVar(0), LocalVar(1), LocalVar(2))
@@ -752,14 +752,14 @@ EvtScript N(interact_802437C8) = {
                         EVT_CALL(ContinueSpeech, -1, NPC_ANIM_lily_Palette_00_Anim_4, NPC_ANIM_lily_Palette_00_Anim_8, 0, MESSAGE_ID(0x11, 0x007E))
                 EVT_END_SWITCH
                 EVT_WAIT(10)
-                EVT_SET(GameFlag(1375), 1)
+                EVT_SET(GF_FLO10_LilyRequestedWaterStone, 1)
                 EVT_CALL(SetEnemyFlagBits, -1, 4194304, 0)
             EVT_ELSE
                 EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_lily_Palette_00_Anim_4, NPC_ANIM_lily_Palette_00_Anim_8, 5, MESSAGE_ID(0x11, 0x007F))
             EVT_END_IF
         EVT_CASE_LT(49)
             EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_lily_Palette_00_Anim_2, NPC_ANIM_lily_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x0080))
-            EVT_SET(GameFlag(1376), 1)
+            EVT_SET(GF_FLO10_ShowedLilyTheWaterStone, 1)
         EVT_CASE_LT(53)
             EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_lily_Palette_00_Anim_4, NPC_ANIM_lily_Palette_00_Anim_8, 0, MESSAGE_ID(0x11, 0x0085))
             EVT_CALL(EndSpeech, -1, NPC_ANIM_lily_Palette_00_Anim_2, NPC_ANIM_lily_Palette_00_Anim_1, 0)
@@ -779,7 +779,7 @@ EvtScript N(init_80243D78) = {
     EVT_CALL(BindNpcInteract, NPC_SELF, EVT_ADDR(N(interact_802437C8)))
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(48)
-            EVT_IF_EQ(GameFlag(1375), 0)
+            EVT_IF_EQ(GF_FLO10_LilyRequestedWaterStone, 0)
                 EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_lily_Palette_00_Anim_8)
                 EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 1)
                 EVT_CALL(SetEnemyFlagBits, -1, 4194304, 1)

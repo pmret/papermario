@@ -502,7 +502,7 @@ EvtScript N(8021BF1C) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_CALL(MoveBattleCamOver, 10)
     EVT_CALL(ActorSpeak, 721081, 256, 0, 10289160, 10289153)
-    EVT_SET(GameFlag(1818), 1)
+    EVT_SET(GF_Tutorial_SpikyEnemy, 1)
     EVT_CALL(SetActorYaw, ACTOR_PLAYER, 150)
     EVT_WAIT(1)
     EVT_CALL(SetActorYaw, ACTOR_PLAYER, 120)
@@ -525,7 +525,7 @@ EvtScript N(nextTurn_8021C0FC) = {
     EVT_CALL(GetBattlePhase, LocalVar(0))
     EVT_SWITCH(LocalVar(0))
         EVT_CASE_EQ(10)
-            EVT_IF_EQ(GameFlag(1818), 0)
+            EVT_IF_EQ(GF_Tutorial_SpikyEnemy, 0)
                 EVT_EXEC_WAIT(N(8021BF1C))
             EVT_END_IF
     EVT_END_SWITCH

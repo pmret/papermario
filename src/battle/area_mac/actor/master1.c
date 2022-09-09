@@ -103,7 +103,7 @@ EvtScript N(init_8022A3B0) = {
     EVT_CALL(SetActorVar, -127, 1, 0)
     EVT_CALL(SetActorVar, -127, 2, 0)
     EVT_CALL(SetActorVar, -127, 3, 2)
-    EVT_SET(GameFlag(102), 1)
+    EVT_SET(GF_FoughtTheMaster, 1)
     EVT_CALL(SetBattleFlagBits, 8388608, 1)
     EVT_RETURN
     EVT_END

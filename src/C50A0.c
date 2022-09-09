@@ -2054,15 +2054,15 @@ block_47: // TODO required to match
             break;
         case 4:
             if ((gItemTable[itemEntity->itemID].typeFlags & ITEM_TYPE_FLAG_CONSUMABLE) &&
-                !evt_get_variable(NULL, GameFlag(97)))
+                !evt_get_variable(NULL, GF_Tutorial_GotItem))
             {
-                evt_set_variable(NULL, GameFlag(97), TRUE);
+                evt_set_variable(NULL, GF_Tutorial_GotItem, TRUE);
                 itemEntity->state = 5;
                 break;
             }
 
-            if (itemEntity->itemID == ITEM_STAR_PIECE && !evt_get_variable(NULL, GameFlag(101))) {
-                evt_set_variable(NULL, GameFlag(101), TRUE);
+            if (itemEntity->itemID == ITEM_STAR_PIECE && !evt_get_variable(NULL, GF_Tutorial_GotStarPiece)) {
+                evt_set_variable(NULL, GF_Tutorial_GotStarPiece, TRUE);
                 itemEntity->state = 5;
                 break;
             }

@@ -271,11 +271,11 @@ EvtScript N(main) = {
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
     EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
     EVT_CALL(SetCamEnabled, 0, 1)
-    EVT_SET(GameFlag(1984), 1)
+    EVT_SET(GF_MAP_FlowerFields, 1)
     EVT_IF_LT(GB_StoryProgress, 55)
         EVT_CALL(ModifyColliderFlags, 0, 48, 0x7FFFFE00)
     EVT_END_IF
-    EVT_SET(GameFlag(263), 0)
+    EVT_SET(GF_MAC01_RowfBadgesChosen, 0)
     EVT_CALL(GetEntryID, LocalVar(0))
     EVT_IF_EQ(LocalVar(0), 11)
         EVT_CALL(MakeNpcs, 0, EVT_ADDR(N(npcGroupList_80246834)))
@@ -737,9 +737,9 @@ EvtScript N(init_80243C18) = {
 };
 
 EvtScript N(interact_80243C4C) = {
-    EVT_IF_EQ(GameFlag(1373), 0)
+    EVT_IF_EQ(GF_FLO00_Met_Tolielup, 0)
         EVT_CALL(AdjustCam, 0, EVT_FLOAT(4.0), -30, 300, EVT_FLOAT(20.0), EVT_FLOAT(-9.5))
-        EVT_SET(GameFlag(1373), 1)
+        EVT_SET(GF_FLO00_Met_Tolielup, 1)
     EVT_END_IF
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(45)
@@ -1891,7 +1891,7 @@ EvtScript N(802485A8) = {
     EVT_CALL(func_802D2884, -85, 85, 0)
     EVT_CALL(func_802CF56C, 2)
     EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_IF_EQ(GameFlag(1371), 0)
+    EVT_IF_EQ(GF_FLO00_PlacedFertileSoil, 0)
         EVT_SET_GROUP(0)
         EVT_CALL(SetTimeFreezeMode, 1)
         EVT_LABEL(10)
@@ -1925,9 +1925,9 @@ EvtScript N(802485A8) = {
         EVT_IF_NE(LocalVar(2), 89)
             EVT_GOTO(10)
         EVT_END_IF
-        EVT_SET(GameFlag(1371), 1)
+        EVT_SET(GF_FLO00_PlacedFertileSoil, 1)
     EVT_END_IF
-    EVT_IF_EQ(GameFlag(1372), 0)
+    EVT_IF_EQ(GF_FLO00_PlacedMagicalBean, 0)
         EVT_SET_GROUP(0)
         EVT_CALL(SetTimeFreezeMode, 1)
         EVT_LABEL(20)
@@ -1963,7 +1963,7 @@ EvtScript N(802485A8) = {
         EVT_IF_NE(LocalVar(2), 88)
             EVT_GOTO(20)
         EVT_END_IF
-        EVT_SET(GameFlag(1372), 1)
+        EVT_SET(GF_FLO00_PlacedMagicalBean, 1)
     EVT_END_IF
     EVT_SET_GROUP(0)
     EVT_CALL(SetTimeFreezeMode, 1)
@@ -2045,8 +2045,8 @@ EvtScript N(80248E30) = {
                 EVT_BREAK_LOOP
             EVT_END_IF
         EVT_END_LOOP
-        EVT_IF_EQ(GameFlag(1371), 1)
-            EVT_IF_EQ(GameFlag(1372), 0)
+        EVT_IF_EQ(GF_FLO00_PlacedFertileSoil, 1)
+            EVT_IF_EQ(GF_FLO00_PlacedMagicalBean, 0)
                 EVT_CALL(MakeItemEntity, ITEM_FERTILE_SOIL, -83, 0, 87, 1, 0)
             EVT_ELSE
                 EVT_CALL(MakeItemEntity, ITEM_MAGICAL_BEAN, -83, 0, 87, 1, 0)
