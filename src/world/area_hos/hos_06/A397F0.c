@@ -72,7 +72,7 @@ ApiStatus Merlow_ShopBadgesPopup(Evt* script, s32 isInitialCall) {
         create_popup_menu(menu);
         script->functionTemp[0] = 0;
     }
-    
+
     menu = script->functionTempPtr[2];
     if (script->functionTemp[0] == 0) {
         script->functionTemp[1] = menu->result;
@@ -86,7 +86,7 @@ ApiStatus Merlow_ShopBadgesPopup(Evt* script, s32 isInitialCall) {
     if (script->functionTemp[0] < 20) {
         return ApiStatus_BLOCK;
     }
-    
+
     destroy_popup_menu();
     selected = script->functionTemp[1];
     if (selected != 0xFF) {
@@ -101,7 +101,7 @@ ApiStatus Merlow_ShopBadgesPopup(Evt* script, s32 isInitialCall) {
     } else {
         script->varTable[0] = -1;
     }
-    
+
     heap_free(script->functionTempPtr[2]);
     return ApiStatus_DONE2;
 }

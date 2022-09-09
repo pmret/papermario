@@ -101,7 +101,7 @@ EvtScript N(beforeBattle_80224BD0) = {
             EVT_END_IF
             EVT_CALL(SetTexPanOffset, 0, 0, LW(0), LW(1))
             EVT_CALL(SetTexPanOffset, 0, 1, LW(2), LW(3))
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_THREAD
@@ -115,7 +115,7 @@ EvtScript N(beforeBattle_80224BD0) = {
         EVT_CALL(TranslateModel, MODEL_o354, 0, LW(0), 0)
         EVT_CALL(TranslateModel, MODEL_o341, 0, LW(0), 0)
         EVT_CALL(TranslateModel, MODEL_o362, 0, LW(0), 0)
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
         EVT_IF_EQ(LW(1), 1)
             EVT_GOTO(0)
         EVT_END_IF
@@ -128,7 +128,7 @@ EvtScript N(beforeBattle_80224BD0) = {
         EVT_CALL(TranslateModel, MODEL_o354, 0, LW(0), 0)
         EVT_CALL(TranslateModel, MODEL_o341, 0, LW(0), 0)
         EVT_CALL(TranslateModel, MODEL_o362, 0, LW(0), 0)
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
         EVT_IF_EQ(LW(1), 1)
             EVT_GOTO(1)
         EVT_END_IF
@@ -143,7 +143,7 @@ EvtScript N(beforeBattle_80224BD0) = {
         EVT_CALL(TranslateModel, MODEL_o343, 0, LW(0), 0)
         EVT_CALL(TranslateModel, MODEL_o355, 0, LW(0), 0)
         EVT_CALL(TranslateModel, MODEL_o338, 0, LW(0), 0)
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
         EVT_IF_EQ(LW(1), 1)
             EVT_GOTO(4)
         EVT_END_IF
@@ -154,7 +154,7 @@ EvtScript N(beforeBattle_80224BD0) = {
         EVT_CALL(TranslateModel, MODEL_o343, 0, LW(0), 0)
         EVT_CALL(TranslateModel, MODEL_o355, 0, LW(0), 0)
         EVT_CALL(TranslateModel, MODEL_o338, 0, LW(0), 0)
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
         EVT_IF_EQ(LW(1), 1)
             EVT_GOTO(5)
         EVT_END_IF

@@ -2,7 +2,7 @@
 #include "npc.h"
 #include "effects.h"
 
-void N(PiranhaPlantAI_12)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(PiranhaPlantAI_12)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 temp;

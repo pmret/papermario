@@ -112,14 +112,14 @@
 
 /// On each frame, the EVT manager will continue executing commands in all threads until a blocking command is
 /// encountered. This means that if you have a thread that loops but does not block between iterations, the game will
-/// freeze! Avoid this by inserting a blocking command such as EVT_WAIT_FRAMES(1) in the loop body.
+/// freeze! Avoid this by inserting a blocking command such as EVT_WAIT(1) in the loop body.
 ///
 /// Also note that threads are never executed in parallel. If your EVT script lacks blocking commands, it will be
 /// executed all in one go, and race conditions cannot occur.
 ///
 /// The following subset of EVT commands are blocking:
 /// - EVT_EXEC_WAIT
-/// - EVT_WAIT_FRAMES
+/// - EVT_WAIT
 /// - EVT_WAIT_SECONDS
 /// - EVT_CALL (if function returns ApiStatus_BLOCK)
 
@@ -194,7 +194,8 @@
 #define EVT_BREAK_LOOP                          EVT_CMD(EVT_OP_BREAK_LOOP),
 
 /// Blocks for the given number of frames.
-#define EVT_WAIT_FRAMES(NUM_FRAMES)             EVT_CMD(EVT_OP_WAIT_FRAMES, NUM_FRAMES),
+#define EVT_WAIT(NUM_FRAMES)                    EVT_CMD(EVT_OP_WAIT_FRAMES, NUM_FRAMES),
+
 
 /// Blocks for the given number of seconds.
 #define EVT_WAIT_SECS(NUM_SECONDS)              EVT_CMD(EVT_OP_WAIT_SECS, NUM_SECONDS),
@@ -454,7 +455,7 @@
 /// Sets the current thread's priority. Higher-priority threads execute before lower-priority threads on each frame.
 #define EVT_SET_PRIORITY(PRIORITY)              EVT_CMD(EVT_OP_SET_PRIORITY, PRIORITY),
 
-/// Sets the current thread's timescale. This is a multiplier applied to EVT_WAIT_FRAMES and EVT_WAIT_SECONDS.
+/// Sets the current thread's timescale. This is a multiplier applied to EVT_WAIT and EVT_WAIT_SECONDS.
 #define EVT_SET_TIMESCALE(TIMESCALE)            EVT_CMD(EVT_OP_SET_TIMESCALE, TIMESCALE),
 
 /// Sets the current thread's group. Group value meanings are currently not known.
@@ -526,7 +527,7 @@
         EVT_CALL(UseExitHeading, walkDistance, exitIdx) \
         EVT_EXEC(ExitWalk) \
         EVT_CALL(GotoMap, EVT_PTR(map), entryIdx) \
-        EVT_WAIT_FRAMES(100) \
+        EVT_WAIT(100) \
         EVT_RETURN \
         EVT_END \
     }

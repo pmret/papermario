@@ -103,7 +103,7 @@ void initialize_collision(void) {
 
 void load_map_hit_asset(void) {
     u32 assetSize;
-    MapConfig* map = get_current_map_header();
+    MapSettings* map = get_current_map_settings();
     void* compressedData = load_asset_by_name(&wMapHitName, &assetSize);
     HitFile* uncompressedData = heap_malloc(assetSize);
 
@@ -155,7 +155,7 @@ void load_battle_hit_asset(const char* hitName) {
         gCollisionData.numColliders = 0;
     } else {
         u32 assetSize;
-        MapConfig* map = get_current_map_header();
+        MapSettings* map = get_current_map_settings();
         void* compressedData = load_asset_by_name(hitName, &assetSize);
         HitFile* uncompressedData = heap_malloc(assetSize);
 
@@ -172,7 +172,7 @@ void load_battle_hit_asset(const char* hitName) {
 
 void load_hit_data(s32 idx, HitFile* hit) {
     s32 collisionOffset;
-    MapConfig* map;
+    MapSettings* map;
     CollisionData* collisionData;
     HitFileHeader* assetCollisionData;
     Vec3f* vertices;
@@ -190,7 +190,7 @@ void load_hit_data(s32 idx, HitFile* hit) {
     assetCollisionData = NULL;
     collisionData = NULL;
 
-    map = get_current_map_header();
+    map = get_current_map_settings();
 
     switch (idx) {
         case 0: // Colliders

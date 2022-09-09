@@ -634,8 +634,8 @@ typedef struct UiStatus {
     /* 0x38 */ s16 showTimer;
     /* 0x3A */ s8 hidden;
     /* 0x3B */ s8 unk_3B[2];
-    /* 0x3D */ u8 displayHP;
-    /* 0x3E */ u8 displayFP;
+    /* 0x3D */ s8 displayHP;
+    /* 0x3E */ s8 displayFP;
     /* 0x3F */ char unk_3F;
     /* 0x40 */ s16 displayCoins;
     /* 0x42 */ s16 displayStarpoints;
@@ -644,20 +644,22 @@ typedef struct UiStatus {
     /* 0x47 */ s8 disabled; /* set != 0 for menu to be disabled completely */
     /* 0x48 */ s16 displaySP;
     /* 0x4A */ s8 hpBlinking; /* bool */
-    /* 0x4B */ u8 hpBlinkCounter;
-    /* 0x4C */ u8 hpBlinkTimer; /* until stop */
+    /* 0x4B */ s8 hpBlinkCounter;
+    /* 0x4C */ s8 hpBlinkTimer; /* until stop */
     /* 0x4D */ s8 fpBlinking; /* bool */
-    /* 0x4E */ u8 fpBlinkCounter;
-    /* 0x4F */ u8 fpBlinkTimer; /* until stop */
+    /* 0x4E */ s8 fpBlinkCounter;
+    /* 0x4F */ s8 fpBlinkTimer; /* until stop */
     /* 0x50 */ s8 spBlinking;
-    /* 0x51 */ u8 spBlinkCounter;
+    /* 0x51 */ s8 spBlinkCounter;
     /* 0x52 */ s8 starpointsBlinking; /* bool */
-    /* 0x53 */ u8 starpointsBlinkCounter;
+    /* 0x53 */ s8 starpointsBlinkCounter;
     /* 0x54 */ s8 coinsBlinking; /* bool */
-    /* 0x55 */ u8 coinsBlinkCounter;
-    /* 0x56 */ u8 coinsBlinkTimer; /* until stop */
-    /* 0x57 */ char unk_57[3];
-    /* 0x5A */ u8 spBarsToBlink; /* how many sp bars to blink */
+    /* 0x55 */ s8 coinsBlinkCounter;
+    /* 0x56 */ s8 coinsBlinkTimer; /* until stop */
+    /* 0x57 */ u8 unk_57;
+    /* 0x58 */ u8 unk_58;
+    /* 0x59 */ u8 unk_59;
+    /* 0x5A */ s8 spBarsToBlink; /* how many sp bars to blink */
     /* 0x5B */ char unk_5B;
     /* 0x5C */ s32 iconIndex10;
     /* 0x60 */ s32 iconIndex11;
@@ -799,11 +801,6 @@ typedef struct Camera {
     /* 0x556 */ s16 unk_556;
 } Camera; // size = 0x558
 
-typedef struct FGModelData {
-    /* 0x00 */ char unk_00[0x18];
-    /* 0x18 */ s32* idList;
-} FGModelData; // size = unknown
-
 typedef struct BattleStatus {
     /* 0x000 */ s32 flags1;
     /* 0x004 */ s32 flags2;
@@ -813,7 +810,9 @@ typedef struct BattleStatus {
     /*       */     void* varTablePtr[16];
     /*       */ };
     /* 0x048 */ s8 currentSubmenu;
-    /* 0x049 */ char unk_49[3];
+    /* 0x049 */ s8 unk_49;
+    /* 0x04A */ s8 unk_4A;
+    /* 0x04B */ s8 unk_4B;
     /* 0x04C */ s8 unk_4C[16];
     /* 0x05C */ s8 unk_5C[16];
     /* 0x06C */ s16 unk_6C;
@@ -928,9 +927,9 @@ typedef struct BattleStatus {
     /* 0x430 */ s8 holdInputBufferPos;
     /* 0x431 */ s8 inputBufferPos;
     /* 0x432 */ s8 unk_432;
-    /* 0x433 */ char unk_433;
+    /* 0x433 */ u8 unk_433;
     /* 0x434 */ s32* unk_434;
-    /* 0x438 */ FGModelData* foregroundModelData;
+    /* 0x438 */ struct Stage* currentStage;
     /* 0x43C */ struct EffectInstance* buffEffect;
     /* 0x440 */ u8 tattleFlags[28];
     /* 0x45C */ char unk_45C[4];
@@ -1107,8 +1106,8 @@ typedef struct ItemEntity {
     /* 0x22 */ char unk_22[2];
     /* 0x24 */ u32* readPos;
     /* 0x28 */ u32* savedReadPos;
-    /* 0x2C */ s8 lookupRasterIndex;
-    /* 0x2D */ s8 lookupPaletteIndex;
+    /* 0x2C */ u8 lookupRasterIndex;
+    /* 0x2D */ u8 lookupPaletteIndex;
     /* 0x2E */ u8 nextUpdate;
     /* 0x2F */ u8 alpha;
     /* 0x30 */ f32 scale;
@@ -1424,13 +1423,13 @@ typedef struct PartnerAnimations {
     /* 0x00 */ s32 anims[9];
 } PartnerAnimations; // size = 0x24
 
-typedef void (*PushBlockFallCallback)(s32 gridSystemID, s32 index);
+typedef s32 (*PushBlockFallCallback)(Entity* block, Evt* script);
 typedef struct PushBlockGrid {
     /* 0x00 */ u8* cells;
     /* 0x04 */ u8 numCellsX;
     /* 0x05 */ u8 numCellsZ;
     /* 0x06 */ char unk_06[2];
-    /* 0x08 */ s32 centerPos[3];
+    /* 0x08 */ Vec3i centerPos;
     /* 0x14 */ PushBlockFallCallback(dropCallback);
     /* 0x18 */ char unk_18[4];
 } PushBlockGrid; // size = 0x1C
@@ -2318,11 +2317,11 @@ typedef struct SpriteShadingLightSource {
 } SpriteShadingLightSource; // size = 0x18
 
 typedef struct SpriteShadingProfile {
-    /* 0x00 */ s16 flags;
+    /* 0x00 */ u16 flags;
     /* 0x02 */ char unk_02[0x2];
     /* 0x04 */ SpriteShadingLightSource sources[7];
     /* 0xAC */ Color_RGB8 ambientColor;
-    /* 0xAF */ s8 ambientPower; // ?
+    /* 0xAF */ u8 ambientPower; // ?
 } SpriteShadingProfile; // size = 0xB0
 
 typedef struct FoldImageRecPart {
@@ -2456,5 +2455,19 @@ typedef struct CreditsUnkBeta {
     /* 0x01 */ u8 unk_01;
     /* 0x02 */ s16 size;
 } CreditsUnkBeta; // size = 0x4
+
+typedef struct TempE20110 {
+    /* 0x00 */ Vec3f pos;
+    /* 0x0C */ f32 scale;
+    /* 0x10 */ f32 unk_10;
+    /* 0x14 */ char unk_14[0x4];
+    /* 0x18 */ s32 unk_18;
+    /* 0x1C */ s32 unk_1C;
+    /* 0x20 */ s8 unk_20;
+    /* 0x21 */ s8 unk_21;
+    /* 0x22 */ s8 unk_22;
+    /* 0x23 */ s8 unk_23;
+    /* 0x24 */ s32 unk_24;
+} TempE20110; // size = 0x28
 
 #endif

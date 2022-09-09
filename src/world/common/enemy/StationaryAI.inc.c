@@ -7,18 +7,6 @@
 // - nok_01 (unused)
 // - omo_02 (unused)
 
-typedef struct StationaryAISettings {
-    /* 0x00 */ f32 unk_00;
-    /* 0x04 */ s32 unk_04;
-    /* 0x08 */ s32 playerSearchInterval;    // how often to search for player (frames)
-    /* 0x0C */ f32 chaseSpeed;
-    /* 0x10 */ s32 chaseTurnRate;           // how many degrees this NPC can turn per frame while chasing          
-    /* 0x14 */ s32 chaseUpdateInterval;     // how often to re-run chase init and re-acquire player position (frames)
-    /* 0x18 */ f32 chaseRadius;      
-    /* 0x1C */ f32 chaseOffsetDist;         // offset along npc->yaw of the test point for alert volume overlap, creates directionality to enemy 'sight' 
-    /* 0x20 */ s32 unk_20;
-} StationaryAISettings; // size = 0x24
-
 // custom states for this AI
 enum AiStateStationary {
     AI_STATE_STATIONARY_IDLE_INIT           = 0,
@@ -59,7 +47,7 @@ void N(StationaryAI_Idle)(Evt* script, StationaryAISettings* aiSettings, EnemyDe
         ai_enemy_play_sound(npc, SOUND_2F4, 0x200000);
         npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
 
-        if (!(enemy->npcSettings->unk_2A & AI_ACTION_JUMP_WHEN_SEE_PLAYER)) {
+        if (!(enemy->npcSettings->actionFlags & AI_ACTION_JUMP_WHEN_SEE_PLAYER)) {
             script->AI_TEMP_STATE = AI_STATE_CHASE_INIT;
         } else {
             script->AI_TEMP_STATE = AI_STATE_ALERT_INIT;
@@ -173,7 +161,7 @@ void N(StationaryAI_ReturnHome)(Evt* script, StationaryAISettings* aiSettings, E
                 fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, (f32) npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &emoteTemp);
                 ai_enemy_play_sound(npc, SOUND_2F4, 0x200000);
                 npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
-                if (enemy->npcSettings->unk_2A & AI_ACTION_JUMP_WHEN_SEE_PLAYER) {
+                if (enemy->npcSettings->actionFlags & AI_ACTION_JUMP_WHEN_SEE_PLAYER) {
                     script->AI_TEMP_STATE = AI_STATE_ALERT_INIT;
                 } else {
                     script->AI_TEMP_STATE = AI_STATE_CHASE_INIT;

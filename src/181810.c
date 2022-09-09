@@ -425,7 +425,7 @@ INCLUDE_ASM(s32, "181810", load_tattle_flags);
 
 ApiStatus func_80253FB0(Evt* script, s32 isInitialCall) {
     gCurrentEncounter.battleOutcome = 3;
-    btl_set_state(0x20);
+    btl_set_state(BATTLE_STATE_END_BATTLE);
 
     return ApiStatus_DONE2;
 }

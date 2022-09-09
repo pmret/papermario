@@ -36,10 +36,9 @@ void update_player_input(void) {
     }
 }
 
-#ifdef NON_MATCHING
 void reset_player_status(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    MapConfig* mapConfig;
+    MapSettings* mapSettings;
     f32 one;
     f32* floatsTemp;
 
@@ -80,11 +79,11 @@ void reset_player_status(void) {
         gGameStatusPtr->peachCookingIngredient = 0;
     }
 
-    // This grossness is needed for matching
-    floatsTemp = &DefaultMoveSpeeds[0];
-    playerStatus->walkSpeed = *(floatsTemp++) * one;
-    playerStatus->runSpeed = *(floatsTemp++) * one;
-    playerStatus->maxJumpSpeed = *(floatsTemp++) * one;
+    // TODO required to match
+    floatsTemp = &(&D_800F7B74)[-1]; // index of 0 does not work
+    playerStatus->walkSpeed = *floatsTemp++ * one;
+    playerStatus->runSpeed = *floatsTemp++ * one;
+    playerStatus->maxJumpSpeed = *floatsTemp++ * one;
 
     set_action_state(ACTION_STATE_IDLE);
 
@@ -103,14 +102,14 @@ void reset_player_status(void) {
     playerStatus->unk_90[CAM_TATTLE] = 0.0f;
     playerStatus->unk_90[CAM_3] = 0.0f;
 
-    mapConfig = gAreas[gGameStatusPtr->areaID].maps[gGameStatusPtr->mapID].config;
+    mapSettings = gAreas[gGameStatusPtr->areaID].maps[gGameStatusPtr->mapID].settings;
 
-    if (mapConfig->entryList != NULL) {
-        if (gGameStatusPtr->entryID < mapConfig->entryCount) {
-            playerStatus->position.x = (*mapConfig->entryList)[gGameStatusPtr->entryID].x;
-            playerStatus->position.y = (*mapConfig->entryList)[gGameStatusPtr->entryID].y;
-            playerStatus->position.z = (*mapConfig->entryList)[gGameStatusPtr->entryID].z;
-            playerStatus->currentYaw = (*mapConfig->entryList)[gGameStatusPtr->entryID].yaw;
+    if (mapSettings->entryList != NULL) {
+        if (gGameStatusPtr->entryID < mapSettings->entryCount) {
+            playerStatus->position.x = (*mapSettings->entryList)[gGameStatusPtr->entryID].x;
+            playerStatus->position.y = (*mapSettings->entryList)[gGameStatusPtr->entryID].y;
+            playerStatus->position.z = (*mapSettings->entryList)[gGameStatusPtr->entryID].z;
+            playerStatus->currentYaw = (*mapSettings->entryList)[gGameStatusPtr->entryID].yaw;
         }
     }
 
@@ -118,12 +117,9 @@ void reset_player_status(void) {
     gCameras[CAM_DEFAULT].targetPos.y = playerStatus->position.y;
     gCameras[CAM_DEFAULT].targetPos.z = playerStatus->position.z;
 
-    phys_reset_spin_history(mapConfig);
+    phys_reset_spin_history();
     mem_clear(&gPlayerSpinState, sizeof(gPlayerSpinState));
 }
-#else
-INCLUDE_ASM(s32, "7B440", reset_player_status);
-#endif
 
 void get_packed_buttons(s32* arg0) {
     PlayerStatus* playerStatus = &gPlayerStatus;

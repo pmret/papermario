@@ -4,7 +4,7 @@
 #include "dead_structs.h"
 #endif
 
-void N(UnkFloAI_ChaseInit)(Evt* script, NpcAISettings* npcAISettings, EnemyDetectVolume* territory) {
+void N(UnkFloAI_ChaseInit)(Evt* script, MobileAISettings* npcAISettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -121,7 +121,7 @@ void N(UnkFloAI_ChaseInit)(Evt* script, NpcAISettings* npcAISettings, EnemyDetec
     script->AI_TEMP_STATE = AI_STATE_CHASE;
 }
 
-void N(UnkFloAI_Chase)(Evt* script, NpcAISettings* npcAISettings, EnemyDetectVolume* territory) {
+void N(UnkFloAI_Chase)(Evt* script, MobileAISettings* npcAISettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 emoteTemp;
@@ -148,7 +148,7 @@ void N(UnkFloAI_Chase)(Evt* script, NpcAISettings* npcAISettings, EnemyDetectVol
     }
 }
 
-void N(UnkFloAI_LosePlayer)(Evt* script, NpcAISettings* npcAISettings, EnemyDetectVolume* territory) {
+void N(UnkFloAI_LosePlayer)(Evt* script, MobileAISettings* npcAISettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -168,7 +168,7 @@ ApiStatus N(UnkFloAI_Main)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     EnemyDetectVolume territory;
     EnemyDetectVolume* territoryPtr = &territory;
-    NpcAISettings* npcAISettings = (NpcAISettings*)evt_get_variable(script, *args++);
+    MobileAISettings* npcAISettings = (MobileAISettings*)evt_get_variable(script, *args++);
 
     territory.skipPlayerDetectChance = 0;
     territory.shape = enemy->territory->wander.detectShape;

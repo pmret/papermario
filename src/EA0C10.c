@@ -11,7 +11,7 @@ const char ascii_EA6D78[] = "kzn_18";
 extern s32 D_802466D0[];
 
 void func_8004D8E0(DeadEnemy*);
-void func_80240DC4_EA16C4(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory);
+void func_80240DC4_EA16C4(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory);
 
 #include "world/common/enemy/WanderMeleeAI.inc.c"
 #include "world/common/enemy/wip/PiranhaPlantAI_00.inc.c"

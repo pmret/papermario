@@ -3,6 +3,56 @@
 
 #include "common.h"
 
+enum BattleAreaIDs {
+    BTL_AREA_KMR_PART_1         = 0x00,
+    BTL_AREA_KMR_PART_2         = 0x01,
+    BTL_AREA_KMR_PART_3         = 0x02,
+    BTL_AREA_MAC                = 0x03,
+    BTL_AREA_HOS                = 0x04,
+    BTL_AREA_NOK                = 0x05,
+    BTL_AREA_TRD_PART_1         = 0x06,
+    BTL_AREA_TRD_PART_2         = 0x07,
+    BTL_AREA_TRD_PART_3         = 0x08,
+    BTL_AREA_IWA                = 0x09,
+    BTL_AREA_SBK                = 0x0A,
+    BTL_AREA_ISK_PART_1         = 0x0B,
+    BTL_AREA_ISK_PART_2         = 0x0C,
+    BTL_AREA_MIM                = 0x0D,
+    BTL_AREA_ARN                = 0x0E,
+    BTL_AREA_DGB                = 0x0F,
+    BTL_AREA_OMO                = 0x10,
+    BTL_AREA_OMO2               = 0x11,
+    BTL_AREA_OMO3               = 0x12,
+    BTL_AREA_KGR                = 0x13,
+    BTL_AREA_JAN                = 0x14,
+    BTL_AREA_JAN2               = 0x15,
+    BTL_AREA_KZN                = 0x16,
+    BTL_AREA_KZN2               = 0x17,
+    BTL_AREA_FLO                = 0x18,
+    BTL_AREA_FLO2               = 0x19,
+    BTL_AREA_TIK                = 0x1A,
+    BTL_AREA_TIK2               = 0x1B,
+    BTL_AREA_TIK3               = 0x1C,
+    BTL_AREA_SAM                = 0x1D,
+    BTL_AREA_SAM2               = 0x1E,
+    BTL_AREA_PRA                = 0x1F,
+    BTL_AREA_PRA2               = 0x20,
+    BTL_AREA_PRA3               = 0x21,
+    BTL_AREA_KPA                = 0x22,
+    BTL_AREA_KPA2               = 0x23,
+    BTL_AREA_KPA3               = 0x24,
+    BTL_AREA_KPA4               = 0x25,
+    BTL_AREA_KKJ                = 0x26,
+    BTL_AREA_DIG                = 0x27,
+    BTL_AREA_UNUSED_28          = 0x28,
+    BTL_AREA_OMO2_1             = 0x29,
+    BTL_AREA_OMO2_2             = 0x2A,
+    BTL_AREA_OMO2_3             = 0x2B,
+    BTL_AREA_OMO2_4             = 0x2C,
+    BTL_AREA_OMO2_5             = 0x2D,
+    BTL_AREA_OMO2_6             = 0x2E,
+};
+
 typedef enum ActorType {
     ACTOR_TYPE_RED_GOOMBA = 0x00,
     ACTOR_TYPE_RED_PARAGOOMBA = 0x01,
@@ -225,7 +275,9 @@ typedef enum ActorType {
     ACTOR_TYPE_COUNT = 0xD4,
 } ActorType;
 
-#define AREA(id) \
+extern s32 bActorNames[];
+
+#define BTL_AREA(id) \
     .dmaStart = battle_##id##_ROM_START, \
     .dmaEnd = battle_##id##_ROM_END, \
     .dmaDest = battle_##id##_VRAM
@@ -271,12 +323,12 @@ typedef struct FormationRow {
 typedef FormationRow Formation[];
 
 typedef struct Stage {
-    /* 0x00 */ const char* texture;
+    /* 0x00 */ char* texture;
     /* 0x04 */ const char* shape;
     /* 0x08 */ const char* hit;
     /* 0x0C */ EvtScript* preBattle;
     /* 0x10 */ EvtScript* postBattle;
-    /* 0x14 */ const char* bg;
+    /* 0x14 */ char* bg;
     /* 0x18 */ s32* foregroundModelList;
     /* 0x1C */ s32 specialFormationSize;
     /* 0x20 */ Formation* specialFormation;
@@ -289,8 +341,8 @@ typedef struct Battle {
     /* 0x04 */ s32 formationSize;
     /* 0x08 */ Formation* formation;
     /* 0x0C */ Stage* stage;
-    /* 0x10 */ s32 unk_10;
-} Battle; // size = 0x14 * n
+    /* 0x10 */ EvtScript* unk_10;
+} Battle; // size = 0x14
 
 typedef Battle BattleList[];
 

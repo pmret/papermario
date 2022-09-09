@@ -8,7 +8,7 @@ EntryList N(entryList) = {
     {  455.0f, 0.0f, 0.0f, 270.0f },
 };
 
-MapConfig N(config) = {
+MapSettings N(settings) = {
     .main = &N(main),
     .entryList = &N(entryList),
     .entryCount = ENTRY_COUNT(N(entryList)),
@@ -17,12 +17,12 @@ MapConfig N(config) = {
 };
 
 EvtScript N(80240600) = {
-    EVT_IF_LT(EVT_SAVE_VAR(0), 53)
+    EVT_IF_LT(GB_StoryProgress, 53)
         EVT_CALL(SetMusicTrack, 0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8)
     EVT_ELSE
         EVT_CALL(SetMusicTrack, 0, SONG_FLOWER_FIELDS_SUNNY, 0, 8)
     EVT_END_IF
-    EVT_IF_GE(EVT_SAVE_VAR(0), 49)
+    EVT_IF_GE(GB_StoryProgress, 49)
         EVT_CALL(PlaySound, 0x80000022)
     EVT_END_IF
     EVT_RETURN
@@ -57,14 +57,14 @@ EvtScript N(80240690) = {
         EVT_ADD(EVT_VAR(2), EVT_VAR(14))
         EVT_CALL(PlayEffect, 0xD, EVT_VAR(0), EVT_VAR(2), EVT_VAR(1), EVT_VAR(3), 0, 0, 0, 0, 0, 0, 0, 0, 0)
     EVT_END_LOOP
-    EVT_WAIT_FRAMES(EVT_VAR(15))
+    EVT_WAIT(EVT_VAR(15))
     EVT_LABEL(0)
     EVT_CALL(RandInt, EVT_VAR(12), EVT_VAR(0))
     EVT_CALL(RandInt, EVT_VAR(13), EVT_VAR(1))
     EVT_ADD(EVT_VAR(0), EVT_VAR(10))
     EVT_ADD(EVT_VAR(1), EVT_VAR(11))
     EVT_CALL(PlayEffect, 0xD, EVT_VAR(0), EVT_VAR(14), EVT_VAR(1), 200, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-    EVT_WAIT_FRAMES(EVT_VAR(15))
+    EVT_WAIT(EVT_VAR(15))
     EVT_GOTO(0)
     EVT_RETURN
     EVT_END
@@ -82,7 +82,7 @@ EvtScript N(802409F4) = {
 };
 
 EvtScript N(main) = {
-    EVT_SET(EVT_SAVE_VAR(425), 38)
+    EVT_SET(GB_WorldLocation, 38)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamLeadPlayer, 0, 0)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
@@ -123,7 +123,7 @@ EvtScript N(main) = {
         EVT_EXEC(EnterWalk)
     EVT_END_IF
     EVT_EXEC_WAIT(N(80240600))
-    EVT_IF_GE(EVT_SAVE_VAR(0), 53)
+    EVT_IF_GE(GB_StoryProgress, 53)
         EVT_CALL(N(func_80240000_CF0940))
     EVT_END_IF
     EVT_RETURN
@@ -222,7 +222,7 @@ EvtScript N(8024183C) = {
         EVT_CALL(RotateModel, 101, EVT_VAR(0), 1, 0, 0)
         EVT_CALL(RotateModel, 103, EVT_VAR(0), 1, 0, 0)
         EVT_IF_EQ(EVT_VAR(1), 1)
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
             EVT_GOTO(0)
         EVT_END_IF
         EVT_THREAD
@@ -230,15 +230,15 @@ EvtScript N(8024183C) = {
             EVT_LOOP(0)
                 EVT_CALL(UpdateLerp)
                 EVT_CALL(TranslateGroup, 100, 0, EVT_VAR(0), 0)
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
                 EVT_IF_EQ(EVT_VAR(1), 0)
                     EVT_BREAK_LOOP
                 EVT_END_IF
             EVT_END_LOOP
-            EVT_WAIT_FRAMES(30)
-            EVT_SET(EVT_SAVE_VAR(0), 49)
+            EVT_WAIT(30)
+            EVT_SET(GB_StoryProgress, 49)
             EVT_CALL(GotoMap, EVT_PTR(UNK_STR_80242280), 2)
-            EVT_WAIT_FRAMES(100)
+            EVT_WAIT(100)
             EVT_RETURN
             EVT_END
 };
@@ -276,7 +276,7 @@ EvtScript N(8024183C) = {
                 EVT_CMD(EVT_OP_END_IF),
             EVT_CMD(EVT_OP_END_LOOP),
             EVT_CMD(EVT_OP_WAIT_FRAMES, 30),
-            EVT_CMD(EVT_OP_SET, EVT_STORY_PROGRESS, STORY_CH6_FILLED_SPRING_WITH_WATER),
+            EVT_CMD(EVT_OP_SET, GB_StoryProgress, STORY_CH6_FILLED_SPRING_WITH_WATER),
             EVT_CMD(EVT_OP_CALL, EVT_PTR(GotoMap), EVT_PTR(N(flo_10_name_hack)), 2),
             EVT_CMD(EVT_OP_WAIT_FRAMES, 100),
             EVT_CMD(EVT_OP_RETURN),
@@ -285,7 +285,7 @@ EvtScript N(8024183C) = {
 #endif
 
 EvtScript N(80241ABC) = {
-    EVT_IF_LT(EVT_SAVE_VAR(0), 49)
+    EVT_IF_LT(GB_StoryProgress, 49)
         EVT_CALL(EnableGroup, 94, 0)
         EVT_CALL(ModifyColliderFlags, 0, 30, 0x7FFFFE00)
     EVT_ELSE
@@ -410,11 +410,11 @@ static s32 N(pad_21A4)[] = {
 
 EvtScript N(makeEntities) = {
     EVT_CALL(MakeEntity, EVT_PTR(Entity_YellowBlock), -325, 60, -140, 0, 154, MAKE_ENTITY_END)
-    EVT_CALL(AssignBlockFlag, EVT_SAVE_FLAG(1393))
+    EVT_CALL(AssignBlockFlag, GF_FLO24_ItemBlock_DizzyDial)
     EVT_CALL(MakeEntity, EVT_PTR(Entity_HiddenYellowBlock), 325, 60, -140, 0, 163, MAKE_ENTITY_END)
-    EVT_CALL(AssignBlockFlag, EVT_SAVE_FLAG(1394))
+    EVT_CALL(AssignBlockFlag, GF_FLO24_HiddenItem_MapleSyrup)
     EVT_CALL(MakeEntity, &Entity_HiddenPanel, 335, 0, -160, 0, 8, MAKE_ENTITY_END)
-    EVT_CALL(AssignPanelFlag, EVT_SAVE_FLAG(1406))
+    EVT_CALL(AssignPanelFlag, GF_FLO24_HiddenPanel)
     EVT_RETURN
     EVT_END
 };

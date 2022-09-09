@@ -15,7 +15,7 @@ EntryList N(entryList) = {
     {  520.0f, 0.0f, 0.0f, 270.0f },
 };
 
-MapConfig N(config) = {
+MapSettings N(settings) = {
     .main = &N(main),
     .entryList = &N(entryList),
     .entryCount = ENTRY_COUNT(N(entryList)),
@@ -24,7 +24,7 @@ MapConfig N(config) = {
 };
 
 EvtScript N(80241880) = {
-    EVT_SWITCH(EVT_SAVE_VAR(0))
+    EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(53)
             EVT_CALL(SetMusicTrack, 0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8)
         EVT_CASE_DEFAULT
@@ -62,14 +62,14 @@ EvtScript N(802418F0) = {
         EVT_ADD(EVT_VAR(2), EVT_VAR(14))
         EVT_CALL(PlayEffect, 0xD, EVT_VAR(0), EVT_VAR(2), EVT_VAR(1), EVT_VAR(3), 0, 0, 0, 0, 0, 0, 0, 0, 0)
     EVT_END_LOOP
-    EVT_WAIT_FRAMES(EVT_VAR(15))
+    EVT_WAIT(EVT_VAR(15))
     EVT_LABEL(0)
     EVT_CALL(RandInt, EVT_VAR(12), EVT_VAR(0))
     EVT_CALL(RandInt, EVT_VAR(13), EVT_VAR(1))
     EVT_ADD(EVT_VAR(0), EVT_VAR(10))
     EVT_ADD(EVT_VAR(1), EVT_VAR(11))
     EVT_CALL(PlayEffect, 0xD, EVT_VAR(0), EVT_VAR(14), EVT_VAR(1), 200, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-    EVT_WAIT_FRAMES(EVT_VAR(15))
+    EVT_WAIT(EVT_VAR(15))
     EVT_GOTO(0)
     EVT_RETURN
     EVT_END
@@ -87,7 +87,7 @@ EvtScript N(80241C54) = {
 };
 
 EvtScript N(main) = {
-    EVT_SET(EVT_SAVE_VAR(425), 38)
+    EVT_SET(GB_WorldLocation, 38)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
     EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
@@ -137,7 +137,7 @@ EvtScript N(main) = {
     EVT_SET(EVT_VAR(0), EVT_PTR(N(80241C54)))
     EVT_EXEC(EnterWalk)
     EVT_EXEC_WAIT(N(80241880))
-    EVT_IF_GE(EVT_SAVE_VAR(0), 53)
+    EVT_IF_GE(GB_StoryProgress, 53)
         EVT_CALL(N(func_80240000_CB5000))
     EVT_END_IF
     EVT_RETURN
@@ -176,14 +176,14 @@ EvtScript N(80242010) = {
         EVT_ADD(EVT_VAR(2), EVT_VAR(14))
         EVT_CALL(PlayEffect, 0xD, EVT_VAR(0), EVT_VAR(2), EVT_VAR(1), EVT_VAR(3), 0, 0, 0, 0, 0, 0, 0, 0, 0)
     EVT_END_LOOP
-    EVT_WAIT_FRAMES(EVT_VAR(15))
+    EVT_WAIT(EVT_VAR(15))
     EVT_LABEL(0)
     EVT_CALL(RandInt, EVT_VAR(12), EVT_VAR(0))
     EVT_CALL(RandInt, EVT_VAR(13), EVT_VAR(1))
     EVT_ADD(EVT_VAR(0), EVT_VAR(10))
     EVT_ADD(EVT_VAR(1), EVT_VAR(11))
     EVT_CALL(PlayEffect, 0xD, EVT_VAR(0), EVT_VAR(14), EVT_VAR(1), 200, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-    EVT_WAIT_FRAMES(EVT_VAR(15))
+    EVT_WAIT(EVT_VAR(15))
     EVT_GOTO(0)
     EVT_RETURN
     EVT_END
@@ -202,29 +202,29 @@ EvtScript N(802422BC) = {
     EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_CALL(N(UnkFunc43))
     EVT_IF_EQ(EVT_VAR(0), 0)
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
         EVT_GOTO(0)
     EVT_END_IF
     EVT_THREAD
-        EVT_WAIT_FRAMES(5)
+        EVT_WAIT(5)
         EVT_CALL(EnableModel, EVT_VAR(6), 1)
     EVT_END_THREAD
     EVT_IF_NE(EVT_VAR(10), 0)
         EVT_THREAD
-            EVT_WAIT_FRAMES(5)
+            EVT_WAIT(5)
             EVT_SET(EVT_VAR(0), EVT_VAR(3))
             EVT_SET(EVT_VAR(1), EVT_VAR(4))
             EVT_SET(EVT_VAR(2), EVT_VAR(5))
             EVT_ADD(EVT_VAR(1), 10)
             EVT_ADD(EVT_VAR(2), 8)
             EVT_CALL(PlayEffect, 0x11, 4, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 15, 0, 0, 0, 0, 0, 0, 0, 0)
-            EVT_WAIT_FRAMES(15)
+            EVT_WAIT(15)
             EVT_SUB(EVT_VAR(1), 10)
             EVT_CALL(MakeItemEntity, EVT_VAR(10), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 14, 0)
         EVT_END_THREAD
     EVT_END_IF
     EVT_THREAD
-        EVT_WAIT_FRAMES(10)
+        EVT_WAIT(10)
         EVT_CALL(PlaySoundAt, 0xF8, 0, EVT_VAR(3), EVT_VAR(4), EVT_VAR(5))
     EVT_END_THREAD
     EVT_CALL(MakeLerp, 0, 180, 20, 2)
@@ -233,7 +233,7 @@ EvtScript N(802422BC) = {
     EVT_CALL(RotateModel, EVT_VAR(8), EVT_VAR(0), 1, 0, 0)
     EVT_CALL(RotateModel, EVT_VAR(9), EVT_VAR(0), 1, 0, 0)
     EVT_IF_EQ(EVT_VAR(1), 1)
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
         EVT_GOTO(1)
     EVT_END_IF
     EVT_CALL(EnableModel, EVT_VAR(7), 0)
@@ -306,9 +306,9 @@ EvtScript N(802431E4) = {
 };
 
 EvtScript N(tree1_Callback) = {
-    EVT_IF_EQ(EVT_SAVE_FLAG(1382), 0)
+    EVT_IF_EQ(GF_FLO09_Item_HappyFlowerB, 0)
         EVT_IF_EQ(EVT_AREA_VAR(5), 1)
-            EVT_CALL(MakeItemEntity, ITEM_HAPPY_FLOWER_B, -250, 100, 0, 13, EVT_SAVE_FLAG(1382))
+            EVT_CALL(MakeItemEntity, ITEM_HAPPY_FLOWER_B, -250, 100, 0, 13, GF_FLO09_Item_HappyFlowerB)
         EVT_ELSE
             EVT_SET(EVT_VAR(9), 14)
             EVT_EXEC(N(802431E4))
@@ -321,7 +321,7 @@ EvtScript N(tree1_Callback) = {
 };
 
 EvtScript N(tree2_Callback) = {
-    EVT_IF_EQ(EVT_SAVE_FLAG(1382), 0)
+    EVT_IF_EQ(GF_FLO09_Item_HappyFlowerB, 0)
         EVT_SET(EVT_AREA_VAR(4), 1)
         EVT_SET(EVT_AREA_VAR(5), 0)
     EVT_END_IF
@@ -330,7 +330,7 @@ EvtScript N(tree2_Callback) = {
 };
 
 EvtScript N(tree3_Callback) = {
-    EVT_IF_EQ(EVT_SAVE_FLAG(1382), 0)
+    EVT_IF_EQ(GF_FLO09_Item_HappyFlowerB, 0)
         EVT_IF_EQ(EVT_AREA_VAR(4), 1)
             EVT_IF_EQ(EVT_AREA_VAR(5), 0)
                 EVT_SET(EVT_AREA_VAR(5), 1)
@@ -416,7 +416,7 @@ EvtScript N(802434A8) = {
     EVT_END
 };
 
-NpcAISettings N(npcAISettings_802435B0) = {
+MobileAISettings N(npcAISettings_802435B0) = {
     .moveSpeed = 1.0f,
     .moveTime = 500,
     .waitTime = 10,
@@ -451,7 +451,7 @@ f32 N(FlyingAI_JumpVels)[] = {
     1.5f, 20.0f,
 };
 
-NpcAISettings N(npcAISettings_80243644) = {
+MobileAISettings N(npcAISettings_80243644) = {
     .moveSpeed = 1.0f,
     .moveTime = 30,
     .waitTime = 5,
@@ -506,13 +506,13 @@ EvtScript N(npcAI_8024373C) = {
                 EVT_END_IF
             EVT_CASE_EQ(2)
                 EVT_CALL(DisablePlayerInput, TRUE)
-                EVT_WAIT_FRAMES(25)
+                EVT_WAIT(25)
                 EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
                 EVT_CALL(SetNpcFlagBits, NPC_SELF, ((NPC_FLAG_2)), FALSE)
                 EVT_CALL(SetSelfVar, 0, 0)
                 EVT_CALL(DisablePlayerInput, FALSE)
         EVT_END_SWITCH
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_RETURN
     EVT_END
@@ -545,16 +545,18 @@ StaticNpc N(npcGroup_8024398C) = {
     .pos = { -350.0f, 0.0f, 40.0f },
     .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW,
     .yaw = 90,
-    .dropFlags = NPC_DROP_FLAGS_80,
-    .itemDropChance = 15,
-    .itemDrops = {
+    .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+        .itemDropChance = 15,
+        .itemDrops = {
         { ITEM_MAPLE_SYRUP, 6, 0 },
         { ITEM_HONEY_SYRUP, 4, 0 },
     },
-    .heartDrops = STANDARD_HEART_DROPS(2),
-    .flowerDrops = STANDARD_FLOWER_DROPS(4),
-    .maxCoinBonus = 3,
-    .movement = { -350, 0, 40, 30, 0, -32767, 0, -350, 0, 40, 200, 0, 0, 1 },
+        .heartDrops = STANDARD_HEART_DROPS(2),
+        .flowerDrops = STANDARD_FLOWER_DROPS(4),
+        .maxCoinBonus = 3,
+    },
+	.territory = { .temp = { -350, 0, 40, 30, 0, -32767, 0, -350, 0, 40, 200, 0, 0, 1 }},
     .animations = {
         NPC_ANIM_dayzee_Palette_00_Anim_1,
         NPC_ANIM_dayzee_Palette_00_Anim_2,
@@ -573,7 +575,7 @@ StaticNpc N(npcGroup_8024398C) = {
         NPC_ANIM_dayzee_Palette_00_Anim_1,
         NPC_ANIM_dayzee_Palette_00_Anim_1,
     },
-    .unk_1E0 = { 00, 00, 00, 03, 00, 00, 00, 00},
+    .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
 StaticNpc N(npcGroup_80243B7C) = {
@@ -582,16 +584,18 @@ StaticNpc N(npcGroup_80243B7C) = {
     .pos = { 260.0f, 0.0f, 75.0f },
     .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW,
     .yaw = 270,
-    .dropFlags = NPC_DROP_FLAGS_80,
-    .itemDropChance = 15,
-    .itemDrops = {
+    .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+        .itemDropChance = 15,
+        .itemDrops = {
         { ITEM_MAPLE_SYRUP, 6, 0 },
         { ITEM_HONEY_SYRUP, 4, 0 },
     },
-    .heartDrops = STANDARD_HEART_DROPS(2),
-    .flowerDrops = STANDARD_FLOWER_DROPS(4),
-    .maxCoinBonus = 3,
-    .movement = { 260, 0, 75, 30, 0, -32767, 0, 260, 0, 75, 200, 0, 0, 1 },
+        .heartDrops = STANDARD_HEART_DROPS(2),
+        .flowerDrops = STANDARD_FLOWER_DROPS(4),
+        .maxCoinBonus = 3,
+    },
+	.territory = { .temp = { 260, 0, 75, 30, 0, -32767, 0, 260, 0, 75, 200, 0, 0, 1 }},
     .animations = {
         NPC_ANIM_dayzee_Palette_00_Anim_1,
         NPC_ANIM_dayzee_Palette_00_Anim_2,
@@ -610,7 +614,7 @@ StaticNpc N(npcGroup_80243B7C) = {
         NPC_ANIM_dayzee_Palette_00_Anim_1,
         NPC_ANIM_dayzee_Palette_00_Anim_1,
     },
-    .unk_1E0 = { 00, 00, 00, 03, 00, 00, 00, 00},
+    .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
 StaticNpc N(npcGroup_80243D6C) = {
@@ -619,17 +623,19 @@ StaticNpc N(npcGroup_80243D6C) = {
     .pos = { -50.0f, 55.0f, 90.0f },
     .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW,
     .yaw = 90,
-    .dropFlags = NPC_DROP_FLAGS_80,
-    .itemDropChance = 15,
-    .itemDrops = {
+    .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+        .itemDropChance = 15,
+        .itemDrops = {
         { ITEM_MAPLE_SYRUP, 6, 0 },
         { ITEM_HONEY_SYRUP, 4, 0 },
     },
-    .heartDrops = STANDARD_HEART_DROPS(3),
-    .flowerDrops = STANDARD_FLOWER_DROPS(2),
-    .minCoinBonus = 1,
-    .maxCoinBonus = 4,
-    .movement = { -50, 55, 90, 30, 0, -32767, 0, -50, 50, 90, 250, 0, 0, 1 },
+        .heartDrops = STANDARD_HEART_DROPS(3),
+        .flowerDrops = STANDARD_FLOWER_DROPS(2),
+        .minCoinBonus = 1,
+        .maxCoinBonus = 4,
+    },
+	.territory = { .temp = { -50, 55, 90, 30, 0, -32767, 0, -50, 50, 90, 250, 0, 0, 1 }},
     .animations = {
         NPC_ANIM_bzzap_Palette_00_Anim_2,
         NPC_ANIM_bzzap_Palette_00_Anim_2,
@@ -648,7 +654,7 @@ StaticNpc N(npcGroup_80243D6C) = {
         NPC_ANIM_bzzap_Palette_00_Anim_1,
         NPC_ANIM_bzzap_Palette_00_Anim_1,
     },
-    .unk_1E0 = { 00, 00, 00, 03, 00, 00, 00, 00},
+    .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
 StaticNpc N(npcGroup_80243F5C) = {
@@ -658,17 +664,19 @@ StaticNpc N(npcGroup_80243F5C) = {
     .flags = NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_PROJECT_SHADOW,
     .init = &N(init_80243954),
     .yaw = 90,
-    .dropFlags = NPC_DROP_FLAGS_80,
-    .itemDropChance = 15,
-    .itemDrops = {
+    .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+        .itemDropChance = 15,
+        .itemDrops = {
         { ITEM_MAPLE_SYRUP, 6, 0 },
         { ITEM_HONEY_SYRUP, 4, 0 },
     },
-    .heartDrops = STANDARD_HEART_DROPS(3),
-    .flowerDrops = STANDARD_FLOWER_DROPS(2),
-    .minCoinBonus = 1,
-    .maxCoinBonus = 4,
-    .movement = { -50, 55, 90, 100, 0, -32767, 0, -50, 50, 90, 250, 0, 0, 1 },
+        .heartDrops = STANDARD_HEART_DROPS(3),
+        .flowerDrops = STANDARD_FLOWER_DROPS(2),
+        .minCoinBonus = 1,
+        .maxCoinBonus = 4,
+    },
+	.territory = { .temp = { -50, 55, 90, 100, 0, -32767, 0, -50, 50, 90, 250, 0, 0, 1 }},
     .animations = {
         NPC_ANIM_bzzap_Palette_00_Anim_2,
         NPC_ANIM_bzzap_Palette_00_Anim_2,
@@ -687,14 +695,14 @@ StaticNpc N(npcGroup_80243F5C) = {
         NPC_ANIM_bzzap_Palette_00_Anim_1,
         NPC_ANIM_bzzap_Palette_00_Anim_1,
     },
-    .unk_1E0 = { 00, 00, 00, 03, 00, 00, 00, 00},
+    .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
 NpcGroupList N(npcGroupList_8024414C) = {
-    NPC_GROUP(N(npcGroup_8024398C), BATTLE_ID(24, 16, 0, 5)),
-    NPC_GROUP(N(npcGroup_80243B7C), BATTLE_ID(24, 21, 0, 5)),
-    NPC_GROUP(N(npcGroup_80243D6C), BATTLE_ID(24, 23, 0, 2)),
-    NPC_GROUP(N(npcGroup_80243F5C), BATTLE_ID(24, 23, 0, 2)),
+    NPC_GROUP(N(npcGroup_8024398C), 0x1810, 0x04),
+    NPC_GROUP(N(npcGroup_80243B7C), 0x1815, 0x04),
+    NPC_GROUP(N(npcGroup_80243D6C), 0x1817, 0x01),
+    NPC_GROUP(N(npcGroup_80243F5C), 0x1817, 0x01),
     {},
 };
 

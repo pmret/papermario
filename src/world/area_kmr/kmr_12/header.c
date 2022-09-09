@@ -6,7 +6,7 @@ EntryList N(entryList) = {
     { 471.0f, 0.0f, 12.0f, 270.0f }, // east, towards Goomba King's Fortress
 };
 
-MapConfig N(config) = {
+MapSettings N(settings) = {
     .main = &N(main),
     .entryList = &N(entryList),
     .entryCount = ENTRY_COUNT(N(entryList)),

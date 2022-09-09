@@ -50,7 +50,66 @@ ApiStatus func_802182A4_5CE934(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "battle/area_flo2/5CE690", func_80218440_5CEAD0);
+ApiStatus func_80218440_5CEAD0(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 arr[10];
+    s32 flags = evt_get_variable(script, *args++);
+    s32 count = 0;
+    s32 var_a2;
+
+    if (!(flags & 2)) {
+        arr[count] = 2;
+        count++;
+    }
+    if (!(flags & 8)) {
+        arr[count] = 8;
+        count++;
+    }
+    if (!(flags & 0x20)) {
+        arr[count] = 0x20;
+        count++;
+    }
+    if (!(flags & 0x80)) {
+        arr[count] = 0x80;
+        count++;
+    }
+    if (!(flags & 0x200)) {
+        arr[count] = 0x200;
+        count++;
+    }
+    if (!(flags & 1)) {
+        arr[count] = 1;
+        count++;
+    }
+    if (!(flags & 4)) {
+        arr[count] = 4;
+        count++;
+    }
+    if (!(flags & 0x10)) {
+        arr[count] = 0x10;
+        count++;
+    }
+
+    if (count == 0) {
+        if (!(flags & 0x100)) {
+            arr[count] = 0x100;
+            count++;
+        }
+        if (!(flags & 0x40)) {
+            arr[count] = 0x40;
+            count++;
+        }
+    }
+
+    if (count == 0) {
+        var_a2 = -1;
+    } else {
+        var_a2 = arr[rand_int(count - 1)];
+    }
+
+    evt_set_variable(script, *args++, var_a2);
+    return ApiStatus_DONE2;
+}
 
 ApiStatus func_802185D4_5CEC64(Evt* script, s32 isInitialCall) {
     s32* actorID = &script->owner1.actorID;

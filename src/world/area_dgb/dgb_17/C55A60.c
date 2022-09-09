@@ -7,7 +7,7 @@ EntryList N(entryList) = {
     { -180.0f, 0.0f, 180.0f, 270.0f },
 };
 
-MapConfig N(config) = {
+MapSettings N(settings) = {
     .main = &N(main),
     .entryList = &N(entryList),
     .entryCount = ENTRY_COUNT(N(entryList)),
@@ -15,7 +15,7 @@ MapConfig N(config) = {
 };
 
 EvtScript N(80240060) = {
-    EVT_SWITCH(EVT_SAVE_VAR(0))
+    EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(-29)
             EVT_CALL(SetMusicTrack, 0, SONG_TUBBAS_MANOR, 0, 8)
         EVT_CASE_LT(-16)
@@ -40,9 +40,9 @@ EvtScript N(exitDoubleDoor_80240100) = {
     EVT_SET(EVT_VAR(2), 14)
     EVT_SET(EVT_VAR(3), 16)
     EVT_EXEC(ExitDoubleDoor)
-    EVT_WAIT_FRAMES(17)
+    EVT_WAIT(17)
     EVT_CALL(GotoMap, EVT_PTR("dgb_15"), 1)
-    EVT_WAIT_FRAMES(100)
+    EVT_WAIT(100)
     EVT_RETURN
     EVT_END
 };
@@ -56,9 +56,9 @@ EvtScript N(exitDoubleDoor_802401B4) = {
     EVT_SET(EVT_VAR(2), 21)
     EVT_SET(EVT_VAR(3), 19)
     EVT_EXEC(ExitDoubleDoor)
-    EVT_WAIT_FRAMES(17)
+    EVT_WAIT(17)
     EVT_CALL(GotoMap, EVT_PTR("dgb_01"), 5)
-    EVT_WAIT_FRAMES(100)
+    EVT_WAIT(100)
     EVT_RETURN
     EVT_END
 };
@@ -95,7 +95,7 @@ EvtScript N(enterDoubleDoor_802402B0) = {
 };
 
 EvtScript N(main) = {
-    EVT_SET(EVT_SAVE_VAR(425), 15)
+    EVT_SET(GB_WorldLocation, 15)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
     EVT_CALL(SetCamBGColor, 0, 0, 0, 0)

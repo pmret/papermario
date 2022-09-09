@@ -5,7 +5,7 @@ EntryList N(entryList) = {
     { -450.0f, 0.0f, -40.0f, 0.0f },
 };
 
-MapConfig N(config) = {
+MapSettings N(settings) = {
     .main = &N(main),
     .entryList = &N(entryList),
     .entryCount = ENTRY_COUNT(N(entryList)),
@@ -13,7 +13,7 @@ MapConfig N(config) = {
 };
 
 EvtScript N(80240050) = {
-    EVT_SWITCH(EVT_SAVE_VAR(0))
+    EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(-29)
             EVT_CALL(SetMusicTrack, 0, SONG_TUBBAS_MANOR, 0, 8)
         EVT_CASE_LT(-16)
@@ -38,7 +38,7 @@ EvtScript N(8024014C) = {
 };
 
 EvtScript N(main) = {
-    EVT_SET(EVT_SAVE_VAR(425), 15)
+    EVT_SET(GB_WorldLocation, 15)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
     EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
@@ -50,19 +50,19 @@ EvtScript N(main) = {
     EVT_EXEC(N(80240050))
     EVT_SET(EVT_VAR(0), EVT_PTR(N(8024014C)))
     EVT_EXEC(EnterWalk)
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(80240270) = {
-    EVT_CALL(MakeItemEntity, ITEM_MEGA_RUSH, -910, 50, -206, 17, EVT_SAVE_FLAG(1058))
-    EVT_CALL(MakeItemEntity, ITEM_COIN, -530, 55, -190, 17, EVT_SAVE_FLAG(1059))
-    EVT_CALL(MakeItemEntity, ITEM_COIN, -510, 55, -175, 17, EVT_SAVE_FLAG(1060))
-    EVT_CALL(MakeItemEntity, ITEM_COIN, -510, 55, -205, 17, EVT_SAVE_FLAG(1061))
-    EVT_CALL(MakeItemEntity, ITEM_COIN, -490, 55, -160, 17, EVT_SAVE_FLAG(1062))
-    EVT_CALL(MakeItemEntity, ITEM_COIN, -490, 55, -190, 17, EVT_SAVE_FLAG(1063))
-    EVT_CALL(MakeItemEntity, ITEM_COIN, -490, 55, -220, 17, EVT_SAVE_FLAG(1064))
+    EVT_CALL(MakeItemEntity, ITEM_MEGA_RUSH, -910, 50, -206, 17, GF_DGB13_Item_MegaRush)
+    EVT_CALL(MakeItemEntity, ITEM_COIN, -530, 55, -190, 17, GF_DGB13_Item_CoinA)
+    EVT_CALL(MakeItemEntity, ITEM_COIN, -510, 55, -175, 17, GF_DGB13_Item_CoinB)
+    EVT_CALL(MakeItemEntity, ITEM_COIN, -510, 55, -205, 17, GF_DGB13_Item_CoinC)
+    EVT_CALL(MakeItemEntity, ITEM_COIN, -490, 55, -160, 17, GF_DGB13_Item_CoinD)
+    EVT_CALL(MakeItemEntity, ITEM_COIN, -490, 55, -190, 17, GF_DGB13_Item_CoinE)
+    EVT_CALL(MakeItemEntity, ITEM_COIN, -490, 55, -220, 17, GF_DGB13_Item_CoinF)
     EVT_RETURN
     EVT_END
 };
@@ -77,7 +77,7 @@ EvtScript N(80240380) = {
         EVT_CALL(UpdateLerp)
         EVT_CALL(TranslateGroup, 47, 0, 0, EVT_VAR(0))
         EVT_CALL(UpdateColliderTransform, 13)
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
         EVT_IF_EQ(EVT_VAR(1), 0)
             EVT_BREAK_LOOP
         EVT_END_IF
@@ -92,7 +92,7 @@ EvtScript N(80240424) = {
         EVT_CALL(UpdateLerp)
         EVT_CALL(TranslateGroup, 47, 0, 0, EVT_VAR(0))
         EVT_CALL(UpdateColliderTransform, 13)
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
         EVT_IF_EQ(EVT_VAR(1), 0)
             EVT_BREAK_LOOP
         EVT_END_IF
@@ -107,7 +107,7 @@ EvtScript N(802404C8) = {
         EVT_CALL(UpdateLerp)
         EVT_CALL(TranslateGroup, 53, 0, 0, EVT_VAR(0))
         EVT_CALL(UpdateColliderTransform, 17)
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
         EVT_IF_EQ(EVT_VAR(1), 0)
             EVT_BREAK_LOOP
         EVT_END_IF
@@ -122,7 +122,7 @@ EvtScript N(8024056C) = {
         EVT_CALL(UpdateLerp)
         EVT_CALL(TranslateGroup, 53, 0, 0, EVT_VAR(0))
         EVT_CALL(UpdateColliderTransform, 17)
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
         EVT_IF_EQ(EVT_VAR(1), 0)
             EVT_BREAK_LOOP
         EVT_END_IF

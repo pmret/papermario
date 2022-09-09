@@ -27,7 +27,7 @@ EvtScript N(beforeBattle_8022DA50) = {
             EVT_SUBF(LW(1), EVT_FLOAT(7.2))
             EVT_CALL(ClampAngleFloat, LW(0))
             EVT_CALL(ClampAngleFloat, LW(1))
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_EXEC(N(8022DA34))

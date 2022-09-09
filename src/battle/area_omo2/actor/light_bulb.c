@@ -110,7 +110,7 @@ EvtScript N(init) = {
 
 EvtScript N(idle) = {
     EVT_LABEL(0)
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_GOTO(0)
     EVT_RETURN
     EVT_END
@@ -133,13 +133,13 @@ EvtScript N(handleEvent) = {
             EVT_IF_EQ(LW(0), 0)
                 EVT_CALL(func_8026E914, LW(0), LW(1))
                 EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_close_hatch))
-                EVT_WAIT_FRAMES(30)
+                EVT_WAIT(30)
             EVT_END_IF
         EVT_CASE_EQ(EVENT_IMMUNE)
             EVT_CALL(GetActorVar, ACTOR_ENEMY1, 9, LW(0))
             EVT_IF_EQ(LW(0), 0)
                 EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_close_hatch))
-                EVT_WAIT_FRAMES(30)
+                EVT_WAIT(30)
             EVT_END_IF
         EVT_CASE_EQ(EVENT_AIR_LIFT_FAILED)
         EVT_CASE_OR_EQ(EVENT_DEATH)
@@ -176,7 +176,7 @@ EvtScript N(shake_tank) = {
     EVT_CALL(GetActorVar, ACTOR_ENEMY1, 9, LW(0))
     EVT_IF_EQ(LW(0), 0)
         EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_close_hatch))
-        EVT_WAIT_FRAMES(30)
+        EVT_WAIT(30)
     EVT_END_IF
     EVT_RETURN
     EVT_END

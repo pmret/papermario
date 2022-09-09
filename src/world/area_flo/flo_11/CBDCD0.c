@@ -19,7 +19,7 @@ EntryList N(entryList) = {
     { -360.0f, 35.0f,    0.0f,  90.0f },
 };
 
-MapConfig N(config) = {
+MapSettings N(settings) = {
     .main = &N(main),
     .entryList = &N(entryList),
     .entryCount = ENTRY_COUNT(N(entryList)),
@@ -28,7 +28,7 @@ MapConfig N(config) = {
 };
 
 EvtScript N(802403E0) = {
-    EVT_SWITCH(EVT_SAVE_VAR(0))
+    EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE)
             EVT_CALL(SetMusicTrack, 0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8)
         EVT_CASE_DEFAULT
@@ -66,14 +66,14 @@ EvtScript N(80240450) = {
         EVT_ADD(EVT_VAR(2), EVT_VAR(14))
         EVT_CALL(PlayEffect, 0xD, EVT_VAR(0), EVT_VAR(2), EVT_VAR(1), EVT_VAR(3), 0, 0, 0, 0, 0, 0, 0, 0, 0)
     EVT_END_LOOP
-    EVT_WAIT_FRAMES(EVT_VAR(15))
+    EVT_WAIT(EVT_VAR(15))
     EVT_LABEL(0)
     EVT_CALL(RandInt, EVT_VAR(12), EVT_VAR(0))
     EVT_CALL(RandInt, EVT_VAR(13), EVT_VAR(1))
     EVT_ADD(EVT_VAR(0), EVT_VAR(10))
     EVT_ADD(EVT_VAR(1), EVT_VAR(11))
     EVT_CALL(PlayEffect, 0xD, EVT_VAR(0), EVT_VAR(14), EVT_VAR(1), 200, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-    EVT_WAIT_FRAMES(EVT_VAR(15))
+    EVT_WAIT(EVT_VAR(15))
     EVT_GOTO(0)
     EVT_RETURN
     EVT_END
@@ -88,7 +88,7 @@ EvtScript N(exitWalk_80241488) = EXIT_WALK_SCRIPT(60,  1, "flo_12",  0);
 EvtScript N(802414E4) = {
     EVT_SET_GROUP(EVT_GROUP_1B)
     EVT_CALL(GotoMap, EVT_PTR("flo_11"), 5)
-    EVT_WAIT_FRAMES(100)
+    EVT_WAIT(100)
     EVT_RETURN
     EVT_END
 };
@@ -96,7 +96,7 @@ EvtScript N(802414E4) = {
 EvtScript N(80241520) = {
     EVT_SET_GROUP(EVT_GROUP_1B)
     EVT_CALL(GotoMap, EVT_PTR("flo_11"), 6)
-    EVT_WAIT_FRAMES(100)
+    EVT_WAIT(100)
     EVT_RETURN
     EVT_END
 };
@@ -104,7 +104,7 @@ EvtScript N(80241520) = {
 EvtScript N(8024155C) = {
     EVT_SET_GROUP(EVT_GROUP_1B)
     EVT_CALL(GotoMap, EVT_PTR("flo_11"), 7)
-    EVT_WAIT_FRAMES(100)
+    EVT_WAIT(100)
     EVT_RETURN
     EVT_END
 };
@@ -112,7 +112,7 @@ EvtScript N(8024155C) = {
 EvtScript N(80241598) = {
     EVT_SET_GROUP(EVT_GROUP_1B)
     EVT_CALL(GotoMap, EVT_PTR("flo_11"), 2)
-    EVT_WAIT_FRAMES(100)
+    EVT_WAIT(100)
     EVT_RETURN
     EVT_END
 };
@@ -120,7 +120,7 @@ EvtScript N(80241598) = {
 EvtScript N(802415D4) = {
     EVT_SET_GROUP(EVT_GROUP_1B)
     EVT_CALL(GotoMap, EVT_PTR("flo_11"), 3)
-    EVT_WAIT_FRAMES(100)
+    EVT_WAIT(100)
     EVT_RETURN
     EVT_END
 };
@@ -128,7 +128,7 @@ EvtScript N(802415D4) = {
 EvtScript N(80241610) = {
     EVT_SET_GROUP(EVT_GROUP_1B)
     EVT_CALL(GotoMap, EVT_PTR("flo_11"), 4)
-    EVT_WAIT_FRAMES(100)
+    EVT_WAIT(100)
     EVT_RETURN
     EVT_END
 };
@@ -174,7 +174,7 @@ EvtScript N(80241698) = {
 };
 
 EvtScript N(main) = {
-    EVT_SET(EVT_SAVE_VAR(425), 38)
+    EVT_SET(GB_WorldLocation, 38)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamLeadPlayer, 0, 0)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
@@ -190,14 +190,14 @@ EvtScript N(main) = {
         EVT_SET(EVT_VAR(0), EVT_PTR(N(80241698)))
         EVT_EXEC(EnterWalk)
         EVT_EXEC(N(80242240))
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
     EVT_ELSE
         EVT_SET(EVT_VAR(10), EVT_PTR(N(80241698)))
         EVT_EXEC(N(Pipe_EnterVertical))
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
     EVT_END_IF
     EVT_EXEC_WAIT(N(802403E0))
-    EVT_IF_GE(EVT_SAVE_VAR(0), 53)
+    EVT_IF_GE(GB_StoryProgress, 53)
         EVT_CALL(N(func_802402E0_CBDFB0))
     EVT_END_IF
     EVT_CALL(ModifyColliderFlags, 3, 9, 0x00000009)
@@ -265,7 +265,7 @@ s32 N(vectorList_80241C84)[] = {
 EvtScript N(80241CB4) = {
     EVT_LOOP(0)
         EVT_CALL(PlaySound, SOUND_295)
-        EVT_WAIT_FRAMES(EVT_VAR(0))
+        EVT_WAIT(EVT_VAR(0))
     EVT_END_LOOP
     EVT_RETURN
     EVT_END
@@ -279,7 +279,7 @@ EvtScript N(80241CF4) = {
         EVT_LOOP(0)
             EVT_CALL(GetNextPathPos)
             EVT_CALL(SetNpcPos, 0, EVT_VAR(1), EVT_VAR(2), EVT_VAR(3))
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
             EVT_IF_EQ(EVT_VAR(0), 0)
                 EVT_BREAK_LOOP
             EVT_END_IF
@@ -289,7 +289,7 @@ EvtScript N(80241CF4) = {
     EVT_LOOP(0)
         EVT_CALL(GetNextPathPos)
         EVT_CALL(SetNpcPos, 1, EVT_VAR(1), EVT_VAR(2), EVT_VAR(3))
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
         EVT_IF_EQ(EVT_VAR(0), 0)
             EVT_BREAK_LOOP
         EVT_END_IF
@@ -305,7 +305,7 @@ EvtScript N(80241E4C) = {
         EVT_LOOP(0)
             EVT_CALL(GetNextPathPos)
             EVT_CALL(SetNpcPos, 0, EVT_VAR(1), EVT_VAR(2), EVT_VAR(3))
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
             EVT_IF_EQ(EVT_VAR(0), 0)
                 EVT_BREAK_LOOP
             EVT_END_IF
@@ -315,7 +315,7 @@ EvtScript N(80241E4C) = {
     EVT_LOOP(0)
         EVT_CALL(GetNextPathPos)
         EVT_CALL(SetNpcPos, 1, EVT_VAR(1), EVT_VAR(2), EVT_VAR(3))
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
         EVT_IF_EQ(EVT_VAR(0), 0)
             EVT_BREAK_LOOP
         EVT_END_IF
@@ -333,7 +333,7 @@ EvtScript N(80241F80) = {
         EVT_LOOP(0)
             EVT_CALL(GetNextPathPos)
             EVT_CALL(SetNpcPos, 0, EVT_VAR(1), EVT_VAR(2), EVT_VAR(3))
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
             EVT_IF_EQ(EVT_VAR(0), 0)
                 EVT_BREAK_LOOP
             EVT_END_IF
@@ -343,7 +343,7 @@ EvtScript N(80241F80) = {
     EVT_LOOP(0)
         EVT_CALL(GetNextPathPos)
         EVT_CALL(SetNpcPos, 1, EVT_VAR(1), EVT_VAR(2), EVT_VAR(3))
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
         EVT_IF_EQ(EVT_VAR(0), 0)
             EVT_BREAK_LOOP
         EVT_END_IF
@@ -358,7 +358,7 @@ EvtScript N(802420C8) = {
         EVT_LOOP(0)
             EVT_CALL(GetNextPathPos)
             EVT_CALL(SetNpcPos, 0, EVT_VAR(1), EVT_VAR(2), EVT_VAR(3))
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
             EVT_IF_EQ(EVT_VAR(0), 0)
                 EVT_BREAK_LOOP
             EVT_END_IF
@@ -369,32 +369,32 @@ EvtScript N(802420C8) = {
     EVT_LOOP(0)
         EVT_CALL(GetNextPathPos)
         EVT_CALL(SetNpcPos, 1, EVT_VAR(1), EVT_VAR(2), EVT_VAR(3))
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
         EVT_IF_EQ(EVT_VAR(0), 0)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
     EVT_CALL(SetNpcPos, 1, 0, -1000, 0)
-    EVT_WAIT_FRAMES(40)
+    EVT_WAIT(40)
     EVT_KILL_THREAD(EVT_MAP_VAR(11))
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(80242240) = {
-    EVT_IF_EQ(EVT_SAVE_FLAG(1377), 1)
+    EVT_IF_EQ(GF_FLO11_Defeated_Lakitus, 1)
         EVT_RETURN
     EVT_END_IF
-    EVT_IF_LT(EVT_SAVE_VAR(0), 45)
+    EVT_IF_LT(GB_StoryProgress, 45)
         EVT_RETURN
     EVT_END_IF
-    EVT_IF_EQ(EVT_SAVE_FLAG(1375), 0)
+    EVT_IF_EQ(GF_FLO10_LilyRequestedWaterStone, 0)
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(SetNpcPos, 0, 460, 200, -240)
     EVT_CALL(SetNpcPos, 1, -100, 200, -50)
     EVT_LOOP(0)
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
         EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
         EVT_IF_LT(EVT_VAR(0), 440)
             EVT_BREAK_LOOP
@@ -412,7 +412,7 @@ EvtScript N(80242240) = {
     EVT_CALL(SetCamDistance, 0, 450)
     EVT_CALL(PanToTarget, 0, 0, 1)
     EVT_CALL(WaitForCam, 0, EVT_FIXED(1.0))
-    EVT_WAIT_FRAMES(20)
+    EVT_WAIT(20)
     EVT_SET(EVT_VAR(0), 270)
     EVT_SET(EVT_VAR(1), 100)
     EVT_SET(EVT_VAR(2), -87)
@@ -425,12 +425,12 @@ EvtScript N(80242240) = {
     EVT_CALL(SetCamSpeed, 0, EVT_FIXED(1.0))
     EVT_CALL(PanToTarget, 0, 0, 1)
     EVT_CALL(WaitForCam, 0, EVT_FIXED(1.0))
-    EVT_WAIT_FRAMES(30)
+    EVT_WAIT(30)
     EVT_CALL(SetCamDistance, 0, 150)
     EVT_CALL(SetCamPitch, 0, EVT_FIXED(17.0), EVT_FIXED(-16.0))
     EVT_CALL(PanToTarget, 0, 0, 1)
     EVT_LOOP(0)
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
         EVT_IF_EQ(EVT_MAP_VAR(10), 1)
             EVT_BREAK_LOOP
         EVT_END_IF
@@ -438,12 +438,12 @@ EvtScript N(80242240) = {
     EVT_CALL(NpcFaceNpc, 0, 1, 1)
     EVT_CALL(NpcFaceNpc, 1, 0, 1)
     EVT_EXEC(N(80241E4C))
-    EVT_WAIT_FRAMES(30)
+    EVT_WAIT(30)
     EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_lakitu_Palette_00_Anim_16, NPC_ANIM_lakitu_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x0088))
     EVT_CALL(NpcFaceNpc, 1, 0, 1)
     EVT_CALL(SpeakToPlayer, 1, NPC_ANIM_lakitu_Palette_00_Anim_16, NPC_ANIM_lakitu_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x0089))
     EVT_CALL(InterpNpcYaw, 0, 0, 1)
-    EVT_WAIT_FRAMES(20)
+    EVT_WAIT(20)
     EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_lakitu_Palette_00_Anim_16, NPC_ANIM_lakitu_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x008A))
     EVT_CALL(SpeakToPlayer, 1, NPC_ANIM_lakitu_Palette_00_Anim_16, NPC_ANIM_lakitu_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x008B))
     EVT_CALL(SetCamType, 0, 1, 0)
@@ -469,7 +469,7 @@ EvtScript N(idle_80242810) = {
         EVT_IF_NE(EVT_VAR(0), 0)
             EVT_BREAK_LOOP
         EVT_END_IF
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_THREAD
         EVT_CALL(AdjustCam, 0, EVT_FIXED(4.0), 0, 1000, EVT_FIXED(14.0), EVT_FIXED(-11.0))
@@ -500,7 +500,7 @@ EvtScript N(defeat_802428B8) = {
             EVT_CALL(WaitForCam, 0, EVT_FIXED(1.0))
             EVT_EXEC_WAIT(N(802420C8))
             EVT_CALL(ResetCam, 0, EVT_FIXED(4.0))
-            EVT_SET(EVT_SAVE_FLAG(1377), 1)
+            EVT_SET(GF_FLO11_Defeated_Lakitus, 1)
             EVT_SET(EVT_MAP_VAR(0), 1)
             EVT_CALL(DisablePlayerInput, FALSE)
         EVT_CASE_EQ(1)
@@ -516,7 +516,7 @@ EvtScript N(defeat_80242AC4) = {
         EVT_CASE_EQ(0)
             EVT_LABEL(0)
             EVT_IF_EQ(EVT_MAP_VAR(0), 0)
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
                 EVT_GOTO(0)
             EVT_END_IF
         EVT_CASE_EQ(1)
@@ -528,9 +528,9 @@ EvtScript N(defeat_80242AC4) = {
 
 EvtScript N(init_80242B58) = {
     EVT_CALL(SetNpcPos, 0, 0, -1000, 0)
-    EVT_IF_EQ(EVT_SAVE_FLAG(1377), 0)
-        EVT_IF_GE(EVT_SAVE_VAR(0), 45)
-            EVT_IF_EQ(EVT_SAVE_FLAG(1375), 1)
+    EVT_IF_EQ(GF_FLO11_Defeated_Lakitus, 0)
+        EVT_IF_GE(GB_StoryProgress, 45)
+            EVT_IF_EQ(GF_FLO10_LilyRequestedWaterStone, 1)
                 EVT_SET(EVT_MAP_VAR(0), 0)
                 EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80242810)))
                 EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(defeat_802428B8)))
@@ -545,9 +545,9 @@ EvtScript N(init_80242B58) = {
 
 EvtScript N(init_80242C38) = {
     EVT_CALL(SetNpcPos, 1, 0, -1000, 0)
-    EVT_IF_EQ(EVT_SAVE_FLAG(1377), 0)
-        EVT_IF_GE(EVT_SAVE_VAR(0), 45)
-            EVT_IF_EQ(EVT_SAVE_FLAG(1375), 1)
+    EVT_IF_EQ(GF_FLO11_Defeated_Lakitus, 0)
+        EVT_IF_GE(GB_StoryProgress, 45)
+            EVT_IF_EQ(GF_FLO10_LilyRequestedWaterStone, 1)
                 EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(defeat_80242AC4)))
                 EVT_CALL(SetNpcPos, 1, 200, 110, 29)
                 EVT_CALL(InterpNpcYaw, 1, 0, 1)
@@ -566,18 +566,20 @@ StaticNpc N(npcGroup_80242CF4)[] = {
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_40000,
         .init = &N(init_80242B58),
         .yaw = 270,
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .itemDropChance = 25,
-        .itemDrops = {
+        .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+            .itemDropChance = 25,
+            .itemDrops = {
             { ITEM_SUPER_SHROOM, 2, 0 },
             { ITEM_MAPLE_SYRUP, 2, 0 },
             { ITEM_THUNDER_RAGE, 2, 0 },
             { ITEM_STOP_WATCH, 2, 0 },
         },
-        .heartDrops = STANDARD_HEART_DROPS(2),
-        .flowerDrops = STANDARD_FLOWER_DROPS(3),
-        .maxCoinBonus = 2,
-        .animations = {
+            .heartDrops = STANDARD_HEART_DROPS(2),
+            .flowerDrops = STANDARD_FLOWER_DROPS(3),
+            .maxCoinBonus = 2,
+        },
+	.animations = {
             NPC_ANIM_lakitu_Palette_00_Anim_1,
             NPC_ANIM_lakitu_Palette_00_Anim_2,
             NPC_ANIM_lakitu_Palette_00_Anim_3,
@@ -603,18 +605,20 @@ StaticNpc N(npcGroup_80242CF4)[] = {
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_40000,
         .init = &N(init_80242C38),
         .yaw = 270,
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .itemDropChance = 25,
-        .itemDrops = {
+        .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+            .itemDropChance = 25,
+            .itemDrops = {
             { ITEM_SUPER_SHROOM, 2, 0 },
             { ITEM_MAPLE_SYRUP, 2, 0 },
             { ITEM_THUNDER_RAGE, 2, 0 },
             { ITEM_STOP_WATCH, 2, 0 },
         },
-        .heartDrops = STANDARD_HEART_DROPS(2),
-        .flowerDrops = STANDARD_FLOWER_DROPS(3),
-        .maxCoinBonus = 2,
-        .animations = {
+            .heartDrops = STANDARD_HEART_DROPS(2),
+            .flowerDrops = STANDARD_FLOWER_DROPS(3),
+            .maxCoinBonus = 2,
+        },
+	.animations = {
             NPC_ANIM_lakitu_Palette_00_Anim_1,
             NPC_ANIM_lakitu_Palette_00_Anim_2,
             NPC_ANIM_lakitu_Palette_00_Anim_3,
@@ -636,7 +640,7 @@ StaticNpc N(npcGroup_80242CF4)[] = {
 };
 
 NpcGroupList N(npcGroupList_802430D4) = {
-    NPC_GROUP(N(npcGroup_80242CF4), BATTLE_ID(24, 7, 0, 9)),
+    NPC_GROUP(N(npcGroup_80242CF4), 0x1807, 0x08),
     {},
 };
 
@@ -646,7 +650,7 @@ static s32 N(pad_30EC) = {
 
 EvtScript N(makeEntities) = {
     EVT_CALL(MakeEntity, EVT_PTR(Entity_MulticoinBlock), -220, 60, -75, 0, MAKE_ENTITY_END)
-    EVT_CALL(AssignBlockFlag, EVT_SAVE_FLAG(1384))
+    EVT_CALL(AssignBlockFlag, GF_FLO11_MultiCoinBrick)
     EVT_RETURN
     EVT_END
 };

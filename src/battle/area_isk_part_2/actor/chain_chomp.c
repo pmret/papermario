@@ -254,8 +254,119 @@ ActorBlueprint NAMESPACE = {
 
 #include "common/ChompChainUpdateHelperFunc2.inc.c"
 
-ApiStatus N(ChompChainUpdate)(Evt* script, s32 isInitialCall);
-INCLUDE_ASM(ApiStatus, "battle/area_isk_part_2/4EF4A0", b_area_isk_part_2_chain_chomp_ChompChainUpdate);
+ApiStatus b_area_isk_part_2_chain_chomp_ChompChainUpdate(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    f32 sp18;
+    Actor* actor;
+    ActorPart* part;
+    ChompChainAnimationState* animState;
+    f32 dist;
+    f32 angle;
+    f32 ax, ay;
+    s32 three;
+    s32 something;
+    s32 i;
+
+    actor = get_actor(script->owner1.actorID);
+    if (actor == NULL) {
+        return ApiStatus_BLOCK;
+    }
+
+    something = evt_get_variable(script, *args++);
+
+    three = 3;
+
+    animState = actor->state.unk_6C;
+    if (actor->debuff == STATUS_SHRINK) {
+        ax = actor->currentPos.x + 6.0;
+        ay = actor->currentPos.y + 2.5;
+    } else {
+        ax = actor->currentPos.x + 12.0;
+        ay = actor->currentPos.y + 5.0;
+    }
+
+    for (i = 0; i < 8; i++, animState++) {
+        if (actor->debuff == STATUS_SHRINK) {
+            animState->scale.x = 3.5f;
+            animState->scale.z = 3.5f;
+            animState->scale.y = 3.5f;
+        } else {
+            animState->scale.x = 7.0f;
+            animState->scale.z = 7.0f;
+            animState->scale.y = 7.0f;
+        }
+
+        animState->unk_18 -= animState->unk_14;
+        if (animState->unk_18 < 2.0f * -animState->unk_14) {
+            animState->unk_18 = 2.0f * -animState->unk_14;
+            if (actor->state.varTable[8] != 0 && i == 0) {
+                sfx_play_sound_at_position(SOUND_2063, 0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z);
+            }
+        }
+        animState->currentPos.y += animState->unk_18;
+        if (actor->debuff == STATUS_SHRINK) {
+            if (animState->currentPos.y < 2.5) {
+                animState->currentPos.y = 2.5f;
+                animState->unk_18 = 0.0f;
+            }
+        } else {
+            if (animState->currentPos.y < 5.0) {
+                animState->currentPos.y = 5.0f;
+                animState->unk_18 = 0.0f;
+            }
+        }
+
+        dist = dist2D(ax, ay, animState->currentPos.x, animState->currentPos.y);
+        angle = atan2(ax, ay, animState->currentPos.x, animState->currentPos.y);
+
+        if (animState->scale.z <= dist) {
+            b_area_isk_part_2_chain_chomp_ChompChainUpdateHelperFunc2(&sp18, dist - animState->scale.z, angle);
+            animState->unk_18 += sp18 * 0.5;
+        }
+
+        if (animState->scale.y <= dist) {
+            f32 t;
+
+            if (animState->scale.x <= dist) {
+                t = dist;
+                t = t - animState->scale.x;
+            } else {
+                animState->unk_1C += animState->unk_20;
+                t = animState->unk_1C;
+            }
+            b_area_isk_part_2_chain_chomp_ChompChainUpdateHelperFunc(animState, t, angle);
+        } else {
+            animState->unk_1C -= animState->unk_20 * 0.2;
+            if (animState->unk_1C < 0.0) {
+                animState->unk_1C = 0.0f;
+            }
+            b_area_isk_part_2_chain_chomp_ChompChainUpdateHelperFunc(animState, animState->unk_1C, angle);
+        }
+
+        if (animState->unk_1C > 4.0) {
+            animState->unk_1C = 4.0f;
+        }
+        animState->currentPos.z = something;
+        part = get_actor_part(actor, three + i);
+        part->absolutePosition.x = animState->currentPos.x;
+        part->absolutePosition.y = animState->currentPos.y;
+        part->absolutePosition.z = animState->currentPos.z;
+
+        if (actor->debuff == STATUS_SHRINK) {
+            part->scale.x = 0.5f;
+            part->scale.y = 0.5f;
+            part->scale.z = 1.0f;
+        } else {
+            part->scale.x = 1.0f;
+            part->scale.y = 1.0f;
+            part->scale.z = 1.0f;
+        }
+        ay = animState->currentPos.y;
+        ax = animState->currentPos.x;
+    }
+
+    return ApiStatus_DONE2;
+}
 
 ApiStatus func_8021866C_4EFB0C(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -309,7 +420,7 @@ EvtScript N(idle_80219108) = {
         EVT_IF_NOT_FLAG(LW(0), STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
             EVT_BREAK_LOOP
         EVT_END_IF
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_80218C0C)))
     EVT_CALL(SetActorIdleJumpGravity, ACTOR_SELF, EVT_FLOAT(1.0))
@@ -325,7 +436,7 @@ EvtScript N(idle_80219108) = {
         EVT_IF_NOT_FLAG(LW(0), STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
             EVT_BREAK_LOOP
         EVT_END_IF
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(SetActorIdleJumpGravity, ACTOR_SELF, EVT_FLOAT(1.0))
     EVT_CALL(SetIdleGoalToHome, ACTOR_SELF)
@@ -334,14 +445,14 @@ EvtScript N(idle_80219108) = {
     EVT_CALL(IdleJumpToGoal, ACTOR_SELF, 6, 1)
     EVT_CALL(RandInt, 10, LW(0))
     EVT_ADD(LW(0), 1)
-    EVT_WAIT_FRAMES(LW(0))
+    EVT_WAIT(LW(0))
     EVT_LOOP(0)
         EVT_EXEC_WAIT(N(80218FCC))
         EVT_CALL(GetStatusFlags, ACTOR_SELF, LW(0))
         EVT_IF_NOT_FLAG(LW(0), STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
             EVT_BREAK_LOOP
         EVT_END_IF
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_80218BC8)))
     EVT_CALL(SetActorIdleJumpGravity, ACTOR_SELF, EVT_FLOAT(0.8))
@@ -355,7 +466,7 @@ EvtScript N(idle_80219108) = {
         EVT_IF_NOT_FLAG(LW(0), STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
             EVT_BREAK_LOOP
         EVT_END_IF
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_80218C0C)))
     EVT_CALL(SetActorIdleJumpGravity, ACTOR_SELF, EVT_FLOAT(0.8))
@@ -370,7 +481,7 @@ EvtScript N(idle_80219108) = {
         EVT_IF_NOT_FLAG(LW(0), STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
             EVT_BREAK_LOOP
         EVT_END_IF
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(SetActorIdleJumpGravity, ACTOR_SELF, EVT_FLOAT(0.8))
     EVT_CALL(SetIdleGoalToHome, ACTOR_SELF)
@@ -384,7 +495,7 @@ EvtScript N(idle_80219108) = {
         EVT_IF_NOT_FLAG(LW(0), STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
             EVT_BREAK_LOOP
         EVT_END_IF
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_80218B84)))
     EVT_CALL(SetActorIdleJumpGravity, ACTOR_SELF, EVT_FLOAT(0.8))
@@ -394,7 +505,7 @@ EvtScript N(idle_80219108) = {
     EVT_CALL(IdleJumpToGoal, ACTOR_SELF, 6, 1)
     EVT_CALL(RandInt, 10, LW(0))
     EVT_ADD(LW(0), 10)
-    EVT_WAIT_FRAMES(LW(0))
+    EVT_WAIT(LW(0))
     EVT_GOTO(0)
     EVT_RETURN
     EVT_END
@@ -402,7 +513,7 @@ EvtScript N(idle_80219108) = {
 
 EvtScript N(8021972C) = {
     EVT_LABEL(0)
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_CALL(ActorExists, ACTOR_ENEMY1, LW(0))
     EVT_IF_EQ(LW(0), TRUE)
         EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
@@ -440,7 +551,7 @@ EvtScript N(handleEvent_802197C4) = {
             EVT_SET_CONST(LW(1), NPC_ANIM_chain_chomp_Palette_00_Anim_6)
             EVT_SET_CONST(LW(2), -1)
             EVT_EXEC_WAIT(DoBurnHit)
-            EVT_WAIT_FRAMES(10)
+            EVT_WAIT(10)
             EVT_CALL(SetActorVar, ACTOR_ENEMY0, 12, 2)
             EVT_SET_CONST(LW(0), 1)
             EVT_SET_CONST(LW(1), NPC_ANIM_chain_chomp_Palette_00_Anim_6)
@@ -530,7 +641,7 @@ EvtScript N(handleEvent_802197C4) = {
             EVT_SET_CONST(LW(1), NPC_ANIM_chain_chomp_Palette_00_Anim_6)
             EVT_EXEC_WAIT(DoShockHit)
             EVT_CALL(SetActorVar, ACTOR_SELF, 8, 0)
-            EVT_WAIT_FRAMES(10)
+            EVT_WAIT(10)
             EVT_CALL(SetActorVar, ACTOR_ENEMY0, 12, 2)
             EVT_SET_CONST(LW(0), 1)
             EVT_SET_CONST(LW(1), NPC_ANIM_chain_chomp_Palette_00_Anim_6)
@@ -540,7 +651,7 @@ EvtScript N(handleEvent_802197C4) = {
             EVT_SET_CONST(LW(0), 1)
             EVT_SET_CONST(LW(1), NPC_ANIM_chain_chomp_Palette_00_Anim_6)
             EVT_EXEC_WAIT(DoNormalHit)
-            EVT_WAIT_FRAMES(10)
+            EVT_WAIT(10)
             EVT_CALL(SetActorVar, ACTOR_ENEMY0, 12, 2)
             EVT_SET_CONST(LW(0), 1)
             EVT_SET_CONST(LW(1), NPC_ANIM_chain_chomp_Palette_00_Anim_6)
@@ -597,7 +708,7 @@ EvtScript N(8021A200) = {
     EVT_THREAD
         EVT_CALL(ShakeCam, 1, 0, 2, EVT_FLOAT(1.0))
     EVT_END_THREAD
-    EVT_WAIT_FRAMES(2)
+    EVT_WAIT(2)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LW(0), DAMAGE_TYPE_IGNORE_DEFENSE, 0, 0, 1, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.1))
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
@@ -622,7 +733,7 @@ EvtScript N(8021A200) = {
         EVT_END_IF
     EVT_END_THREAD
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
-    EVT_WAIT_FRAMES(15)
+    EVT_WAIT(15)
     EVT_GOTO(10)
     EVT_LABEL(1)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_chain_chomp_Palette_00_Anim_6)
@@ -649,7 +760,7 @@ EvtScript N(8021A200) = {
         EVT_END_IF
     EVT_END_THREAD
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
-    EVT_WAIT_FRAMES(15)
+    EVT_WAIT(15)
     EVT_LABEL(10)
     EVT_SET_CONST(LW(0), 1)
     EVT_SET_CONST(LW(1), NPC_ANIM_chain_chomp_Palette_00_Anim_1)
@@ -681,7 +792,7 @@ EvtScript N(takeTurn_8021A7C4) = {
         EVT_END_IF
     EVT_END_THREAD
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_chain_chomp_Palette_00_Anim_5)
-    EVT_WAIT_FRAMES(15)
+    EVT_WAIT(15)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x10F)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LW(0), 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LW(0))
@@ -727,7 +838,7 @@ EvtScript N(takeTurn_8021A7C4) = {
                 EVT_END_IF
             EVT_END_THREAD
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_chain_chomp_Palette_00_Anim_4)
-            EVT_WAIT_FRAMES(20)
+            EVT_WAIT(20)
             EVT_IF_EQ(LW(10), HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LW(0), DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
@@ -760,7 +871,7 @@ EvtScript N(takeTurn_8021A7C4) = {
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.2))
     EVT_CALL(SetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
     EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
-    EVT_WAIT_FRAMES(2)
+    EVT_WAIT(2)
     EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
     EVT_CALL(SetPartPos, ACTOR_SELF, 2, LW(0), LW(1), LW(2))
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LW(15), 0, 0, 0, 3, BS_FLAGS1_SP_EVT_ACTIVE)
@@ -812,7 +923,7 @@ EvtScript N(takeTurn_8021A7C4) = {
                 EVT_END_IF
             EVT_END_THREAD
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_chain_chomp_Palette_00_Anim_1)
-            EVT_WAIT_FRAMES(8)
+            EVT_WAIT(8)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_IF_EQ(LW(15), HIT_RESULT_10)
                 EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))

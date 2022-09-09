@@ -50,10 +50,10 @@ ApiStatus N(Quizmo_ShowEntities)(Evt* script, s32 isInitialCall) {
 
 ApiStatus N(Quizmo_ShouldAppear)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
-    u16 hasLocation = evt_get_variable(script, EVT_SAVE_FLAG(1768));
-    u16 changedLocation = evt_get_variable(script, EVT_SAVE_FLAG(1769));
-    u16 locTown = evt_get_variable(script, EVT_SAVE_VAR(350));
-    u16 locMap = evt_get_variable(script, EVT_SAVE_VAR(351));
+    u16 hasLocation = evt_get_variable(script, GF_Quizmo_HasLocation);
+    u16 changedLocation = evt_get_variable(script, GF_Quizmo_ChangedLocation);
+    u16 locTown = evt_get_variable(script, GB_ChuckQuizmo_Town);
+    u16 locMap = evt_get_variable(script, GB_ChuckQuizmo_Map);
     s32 var;
     s32 i;
 
@@ -74,16 +74,16 @@ ApiStatus N(Quizmo_ShouldAppear)(Evt* script, s32 isInitialCall) {
         if (rand_int(100) < 30) {
             locMap = rand_int(numMaps - 1);
             locTown = curTown1;
-            evt_set_variable(script, EVT_SAVE_VAR(350), locTown);
-            evt_set_variable(script, EVT_SAVE_VAR(351), locMap);
+            evt_set_variable(script, GB_ChuckQuizmo_Town, locTown);
+            evt_set_variable(script, GB_ChuckQuizmo_Map, locMap);
             hasLocation = TRUE;
         }
     }
 
-    evt_set_variable(script, EVT_SAVE_FLAG(1768), hasLocation);
-    evt_set_variable(script, EVT_SAVE_FLAG(1769), changedLocation);
-    numAnswered = evt_get_variable(NULL, EVT_SAVE_VAR(352));
-    progress = evt_get_variable(NULL, EVT_STORY_PROGRESS);
+    evt_set_variable(script, GF_Quizmo_HasLocation, hasLocation);
+    evt_set_variable(script, GF_Quizmo_ChangedLocation, changedLocation);
+    numAnswered = evt_get_variable(NULL, GB_CompletedQuizzes);
+    progress = evt_get_variable(NULL, GB_StoryProgress);
 
     // vanilla bug? never checks the final requirement in the list
     for (i = 0; i < 8; i++) {
@@ -222,7 +222,7 @@ ApiStatus N(Quizmo_UpdateRecords)(Evt* script, s32 isInitialCall) {
         gPlayerData.quizzesAnswered++;
     }
 
-    if (script->varTable[0] == N(Quizmo_Answers)[evt_get_variable(NULL, EVT_SAVE_VAR(352))]) {
+    if (script->varTable[0] == N(Quizmo_Answers)[evt_get_variable(NULL, GB_CompletedQuizzes)]) {
         script->varTable[0] = 1;
         gPlayerData.quizzesCorrect++;
     } else {

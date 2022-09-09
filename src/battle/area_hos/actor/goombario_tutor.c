@@ -148,7 +148,7 @@ EvtScript N(handleEvent_802191E0) = {
             EVT_SET_CONST(LW(0), 0x00000001)
             EVT_SET_CONST(LW(1), NPC_ANIM_battle_goombario_default_pain)
             EVT_EXEC_WAIT(DoNormalHit)
-            EVT_WAIT_FRAMES(1000)
+            EVT_WAIT(1000)
         EVT_CASE_DEFAULT
     EVT_END_SWITCH
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
@@ -171,9 +171,9 @@ EvtScript N(takeTurn_80219444) = {
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_battle_goombario_default_idle)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, -1, 0)
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, -2, 0)
-    EVT_WAIT_FRAMES(5)
+    EVT_WAIT(5)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 10, 0)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_battle_goombario_default_headbonk)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_66)
@@ -189,12 +189,12 @@ EvtScript N(takeTurn_80219444) = {
     EVT_END_IF
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.1))
     EVT_THREAD
-        EVT_WAIT_FRAMES(4)
+        EVT_WAIT(4)
         EVT_SET(LW(0), 0)
         EVT_LOOP(4)
             EVT_ADD(LW(0), 45)
             EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, LW(0))
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
         EVT_END_LOOP
         EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_battle_goombario_default_headbonk)
     EVT_END_THREAD
@@ -202,16 +202,16 @@ EvtScript N(takeTurn_80219444) = {
         EVT_CALL(LoadActionCommand, 1)
         EVT_CALL(action_command_jump_CreateHudElements)
         EVT_CALL(func_802694A4, 1)
-        EVT_WAIT_FRAMES(10)
+        EVT_WAIT(10)
         EVT_CALL(func_802A9120_421B10, 12, 3)
     EVT_END_THREAD
     EVT_CALL(PlaySound, SOUND_JUMP_3E2)
     EVT_CALL(JumpToGoal, ACTOR_SELF, 22, FALSE, TRUE, FALSE)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_battle_goombario_default_headbonk)
     EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.1), EVT_FLOAT(0.8), EVT_FLOAT(1.0))
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.3), EVT_FLOAT(0.5), EVT_FLOAT(1.0))
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_CALL(GetActionCommandMode, LW(0))
     EVT_IF_EQ(LW(0), 2)
         EVT_CALL(SetActionCommandMode, 3)
@@ -220,14 +220,14 @@ EvtScript N(takeTurn_80219444) = {
             EVT_IF_LT(LW(0), 2)
                 EVT_BREAK_LOOP
             EVT_END_IF
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_IF
     EVT_CALL(GetActorVar, -127, 0, LW(0))
     EVT_IF_EQ(LW(0), 1)
         EVT_CALL(func_80269EAC, 5)
     EVT_END_IF
-    EVT_WAIT_FRAMES(2)
+    EVT_WAIT(2)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LW(0), 0, 0, 0, 1, 32)
     EVT_CALL(CloseActionCommandInfo)
     EVT_SET(LW(15), LW(0))
@@ -236,9 +236,9 @@ EvtScript N(takeTurn_80219444) = {
         EVT_CASE_OR_EQ(2)
         EVT_CASE_OR_EQ(10)
             EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.1), EVT_FLOAT(0.8), EVT_FLOAT(1.0))
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
             EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
             EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_battle_goombario_default_idle)
@@ -257,7 +257,7 @@ EvtScript N(takeTurn_80219444) = {
             EVT_SUB(LW(0), 10)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 4, FALSE, TRUE, FALSE)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_battle_goombario_default_idle)
-            EVT_WAIT_FRAMES(8)
+            EVT_WAIT(8)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(YieldTurn)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_battle_goombario_default_idle)
@@ -285,7 +285,7 @@ EvtScript N(80219C74) = {
     EVT_CALL(SetBattleFlagBits, 33554432, 1)
     EVT_CALL(func_802535B4, 0)
     EVT_CALL(WaitForState, 13)
-    EVT_WAIT_FRAMES(15)
+    EVT_WAIT(15)
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_PARTNER, 0)
     EVT_CALL(SetActorJumpGravity, ACTOR_PARTNER, EVT_FLOAT(1.0))
@@ -299,7 +299,7 @@ EvtScript N(80219C74) = {
     EVT_CALL(SetActionCommandMode, 2)
     EVT_CALL(WaitForState, 18)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
-    EVT_WAIT_FRAMES(15)
+    EVT_WAIT(15)
     EVT_CALL(SetGoalPos, ACTOR_PARTNER, -73, 40, 202)
     EVT_CALL(FlyToGoal, ACTOR_PARTNER, 20, 20, 10)
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
@@ -311,10 +311,10 @@ EvtScript N(80219C74) = {
     EVT_THREAD
         EVT_LOOP(15)
             EVT_CALL(SetMessageBoxDuration, 35)
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_WAIT_FRAMES(15)
+    EVT_WAIT(15)
     EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
     EVT_CALL(FlyToGoal, ACTOR_PARTNER, 20, 20, 10)
     EVT_CALL(SetActionCommandMode, 2)
@@ -325,7 +325,7 @@ EvtScript N(80219C74) = {
         EVT_IF_NE(LW(0), 2)
             EVT_BREAK_LOOP
         EVT_END_IF
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
     EVT_CALL(ActorSpeak, 655387, 256, 1, 2097161, 2097157)
@@ -334,14 +334,14 @@ EvtScript N(80219C74) = {
         EVT_IF_EQ(LW(0), 0)
             EVT_BREAK_LOOP
         EVT_END_IF
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_LOOP(0)
         EVT_CALL(CheckButtonPress, 32768, LW(0))
         EVT_IF_EQ(LW(0), 1)
             EVT_BREAK_LOOP
         EVT_END_IF
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(EndActorSpeech, 256, 1, 2097161, 2097157)
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
@@ -349,13 +349,13 @@ EvtScript N(80219C74) = {
     EVT_CALL(SetActionCommandMode, 1)
     EVT_CALL(WaitForState, 8)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
-    EVT_WAIT_FRAMES(15)
+    EVT_WAIT(15)
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
     EVT_CALL(ActorSpeak, 655389, 256, 1, 2097161, 2097157)
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
     EVT_CALL(WaitForState, 9)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
-    EVT_WAIT_FRAMES(15)
+    EVT_WAIT(15)
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
     EVT_CALL(ActorSpeak, 655390, 512, 1, 589839, 589825)
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
@@ -366,7 +366,7 @@ EvtScript N(80219C74) = {
         EVT_IF_NE(LW(0), 2)
             EVT_BREAK_LOOP
         EVT_END_IF
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
     EVT_CALL(ActorSpeak, 655391, 256, 1, 2097161, 2097157)
@@ -375,14 +375,14 @@ EvtScript N(80219C74) = {
         EVT_IF_EQ(LW(0), 0)
             EVT_BREAK_LOOP
         EVT_END_IF
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_LOOP(0)
         EVT_CALL(CheckButtonPress, 32768, LW(0))
         EVT_IF_EQ(LW(0), 1)
             EVT_BREAK_LOOP
         EVT_END_IF
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(EndActorSpeech, 256, 1, 2097161, 2097157)
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
@@ -390,7 +390,7 @@ EvtScript N(80219C74) = {
     EVT_CALL(SetActionCommandMode, -1)
     EVT_CALL(WaitForState, 6)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
-    EVT_WAIT_FRAMES(15)
+    EVT_WAIT(15)
     EVT_CALL(SetActionCommandMode, 1)
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
     EVT_CALL(ActorSpeak, 655392, 256, 1, 2097161, 2097157)
@@ -406,20 +406,20 @@ EvtScript N(80219C74) = {
         EVT_IF_EQ(LW(0), 0)
             EVT_BREAK_LOOP
         EVT_END_IF
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_LOOP(0)
         EVT_CALL(CheckButtonPress, 262144, LW(0))
         EVT_IF_EQ(LW(0), 1)
             EVT_BREAK_LOOP
         EVT_END_IF
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(EndActorSpeech, 256, 1, 2097161, 2097157)
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
     EVT_CALL(SetActionCommandMode, 1)
     EVT_CALL(WaitForState, 0)
-    EVT_WAIT_FRAMES(5)
+    EVT_WAIT(5)
     EVT_CALL(SetActionCommandMode, 2)
     EVT_LOOP(0)
         EVT_CALL(GetActionCommandMode, LW(0))
@@ -437,21 +437,21 @@ EvtScript N(80219C74) = {
                 EVT_IF_EQ(LW(0), 1)
                     EVT_BREAK_LOOP
                 EVT_END_IF
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
             EVT_END_LOOP
             EVT_CALL(EndActorSpeech, 256, 1, 2097161, 2097157)
             EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
             EVT_CALL(SetActionCommandMode, 2)
             EVT_CALL(ResumeTakeTurn, 0)
         EVT_END_IF
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_LOOP(0)
         EVT_CALL(GetActionResult, LW(0))
         EVT_IF_EQ(LW(0), 3)
             EVT_BREAK_LOOP
         EVT_END_IF
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
     EVT_CALL(ActorSpeak, 655396, 256, 1, 2097161, 2097157)
@@ -460,7 +460,7 @@ EvtScript N(80219C74) = {
         EVT_IF_EQ(LW(0), 0)
             EVT_BREAK_LOOP
         EVT_END_IF
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(EndActorSpeech, 256, 1, 2097161, 2097157)
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
@@ -468,7 +468,7 @@ EvtScript N(80219C74) = {
     EVT_CALL(SetActionCommandMode, 1)
     EVT_CALL(WaitForState, 8)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
-    EVT_WAIT_FRAMES(15)
+    EVT_WAIT(15)
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
     EVT_CALL(ActorSpeak, 655397, 256, 1, 2097161, 2097157)
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
@@ -531,7 +531,7 @@ EvtScript N(80219C74) = {
     EVT_CALL(WaitForState, 0)
     EVT_CALL(SetBattleState, 30)
     EVT_CALL(func_80218000_47F0B0)
-    EVT_WAIT_FRAMES(10000)
+    EVT_WAIT(10000)
     EVT_RETURN
     EVT_END
 };

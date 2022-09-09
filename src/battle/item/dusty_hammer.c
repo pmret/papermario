@@ -51,7 +51,7 @@ EvtScript N(main) = {
     EVT_CALL(MoveBattleCamOver, 15)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_THROW)
     EVT_CALL(PlaySound, SOUND_THROW)
-    EVT_WAIT_FRAMES(3)
+    EVT_WAIT(3)
     EVT_CALL(CreateVirtualEntity, EVT_VAR(10), EVT_PTR(N(modelCommandList)))
     EVT_SETF(EVT_VAR(0), EVT_FIXED(1.0))
     EVT_CALL(MultiplyByActorScale, EVT_VAR(0))
@@ -73,7 +73,7 @@ EvtScript N(main) = {
         EVT_LOOP(18)
             EVT_ADD(EVT_VAR(0), -60)
             EVT_CALL(SetVirtualEntityRotation, EVT_VAR(10), 0, 0, EVT_VAR(0))
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_CALL(SetVirtualEntityJumpGravity, EVT_VAR(10), EVT_FIXED(0.8))

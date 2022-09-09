@@ -224,12 +224,12 @@ EvtScript N(main) = {
     EVT_SET_CONST(EVT_VAR(10), 0x00000096)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_THREAD
-        EVT_WAIT_FRAMES(220)
+        EVT_WAIT(220)
         EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_3F3)
     EVT_END_THREAD
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_368)
     EVT_CALL(N(func_802A13E4_72C994))
-    EVT_WAIT_FRAMES(2)
+    EVT_WAIT(2)
     EVT_IF_NE(EVT_VAR(0), 133)
         EVT_JUMP(EVT_PTR(UseMystery))
         EVT_RETURN
@@ -246,7 +246,7 @@ EvtScript N(main) = {
         EVT_LOOP(18)
             EVT_ADD(EVT_VAR(0), -60)
             EVT_CALL(SetVirtualEntityRotation, EVT_VAR(10), 0, 0, EVT_VAR(0))
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_CALL(SetVirtualEntityJumpGravity, EVT_VAR(10), EVT_FIXED(0.6))

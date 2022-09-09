@@ -12,7 +12,7 @@ EvtScript N(8022F630) = {
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
         EVT_CALL(TranslateGroup, LW(10), 0, LW(0), 0)
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
         EVT_IF_EQ(LW(1), 0)
             EVT_BREAK_LOOP
         EVT_END_IF
@@ -21,7 +21,7 @@ EvtScript N(8022F630) = {
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
         EVT_CALL(TranslateGroup, LW(10), 0, LW(0), 0)
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
         EVT_IF_EQ(LW(1), 0)
             EVT_BREAK_LOOP
         EVT_END_IF
@@ -39,7 +39,7 @@ EvtScript N(beforeBattle_8022F790) = {
         EVT_SET(LW(1), -50)
         EVT_SET(LW(2), 120)
         EVT_EXEC(N(8022F630))
-        EVT_WAIT_FRAMES(10)
+        EVT_WAIT(10)
         EVT_SET(LW(0), 30)
         EVT_SET(LW(1), -80)
         EVT_SET(LW(2), 150)

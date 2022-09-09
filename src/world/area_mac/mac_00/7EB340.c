@@ -39,7 +39,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_80241FF0_7ECD00);
 ApiStatus N(SetDojoBattle)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
 
-    gCurrentEncounter.encounterList[enemy->encounterIndex]->battle = N(dojoBattleIDs)[evt_get_variable(script, EVT_SAVE_VAR(28))];
+    gCurrentEncounter.encounterList[enemy->encounterIndex]->battle = N(dojoBattleIDs)[evt_get_variable(script, GB_MAC00_DojoRank)];
     return ApiStatus_DONE2;
 }
 

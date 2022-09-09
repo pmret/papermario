@@ -501,7 +501,7 @@ void pause_tutorial_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 wid
     s32 margin, margin2;
     s32 state;
 
-    if (evt_get_variable(NULL, EVT_SAVE_FLAG(94)) == FALSE) {
+    if (evt_get_variable(NULL, GF_Tutorial_Badges) == FALSE) {
         return;
     }
 
@@ -620,7 +620,7 @@ void pause_init(void) {
     x = pauseWindows[gPausePanels[0]->col].pos.x;
     gWindows[WINDOW_ID_PAUSE_TAB_INVIS].pos.x = x + 6;
 
-    if (evt_get_variable(NULL, EVT_SAVE_FLAG(94))) {
+    if (evt_get_variable(NULL, GF_Tutorial_Badges)) {
         for (i = 0; i < ARRAY_COUNT(gPauseTutorialSpriteAnims); i++) {
             gPauseTutorialSprites[i] = spr_load_npc_sprite(gPauseTutorialSpriteAnims[i][0], gPauseTutorialSpriteAnims[i]);
         }
@@ -644,7 +644,7 @@ void pause_tutorial_input(s32 *pressed, s32 *held) {
                 gPauseTutorialInputState = 1;
             }
             if (pressedOld && pressedNew == 0) {
-                sfx_play_sound(541);
+                sfx_play_sound(SOUND_MENU_ERROR);
             }
             if (gPauseTutorialState == 0) {
                 pressedNew = 0;
@@ -696,7 +696,7 @@ void pause_handle_input(s32 pressed, s32 held) {
     s32 currentDescMsg = gPauseCurrentDescMsg;
     MenuPanel* currentPanel = gPausePanels[gPauseMenuCurrentTab];
 
-    if (evt_get_variable(NULL, EVT_SAVE_FLAG(94))) {
+    if (evt_get_variable(NULL, GF_Tutorial_Badges)) {
         for (i = 0; i < ARRAY_COUNT(gPauseTutorialSprites); i++) {
             spr_update_sprite(gPauseTutorialSprites[i], gPauseTutorialSpriteAnims[i][1], 1.0f);
         }
@@ -704,13 +704,13 @@ void pause_handle_input(s32 pressed, s32 held) {
 
     gPausePressedButtons = pressed;
     gPauseHeldButtons = held;
-    if (evt_get_variable(NULL, EVT_SAVE_FLAG(94))) {
+    if (evt_get_variable(NULL, GF_Tutorial_Badges)) {
         pause_tutorial_input(&gPausePressedButtons, &gPauseHeldButtons);
     }
 
     if ((gPausePressedButtons & BUTTON_START) || (gPauseMenuCurrentTab == 0) && (gPausePressedButtons & BUTTON_B)) {
         enforce_hpfp_limits();
-        sfx_play_sound(198);
+        sfx_play_sound(SOUND_MENU_CLOSE);
         set_game_mode(GAME_MODE_UNPAUSE);
         return;
     }
@@ -772,7 +772,7 @@ void pause_cleanup(void) {
         hud_element_free(gPauseCommonIconIDs[i]);
     }
 
-    if (evt_get_variable(NULL, EVT_SAVE_FLAG(94))) {
+    if (evt_get_variable(NULL, GF_Tutorial_Badges)) {
         for (i = 0; i < ARRAY_COUNT(gPauseTutorialSprites); i++) {
             spr_free_sprite(gPauseTutorialSprites[i]);
         }

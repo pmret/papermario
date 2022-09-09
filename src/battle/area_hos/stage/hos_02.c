@@ -19,7 +19,7 @@ EvtScript N(beforeBattle_802258E0) = {
             EVT_ADD(LW(3), -200)
             EVT_CALL(SetTexPanOffset, 1, 0, LW(0), LW(1))
             EVT_CALL(SetTexPanOffset, 1, 1, LW(2), LW(3))
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_THREAD
@@ -34,7 +34,7 @@ EvtScript N(beforeBattle_802258E0) = {
         EVT_CALL(RotateModel, 17, LW(10), 0, 0, 1)
         EVT_ADD(LW(10), -3)
         EVT_CALL(ClampAngleFloat, LW(10))
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
         EVT_IF_EQ(LW(1), 1)
             EVT_GOTO(0)
         EVT_END_IF
@@ -47,7 +47,7 @@ EvtScript N(beforeBattle_802258E0) = {
         EVT_CALL(RotateModel, 17, LW(10), 0, 0, 1)
         EVT_ADD(LW(10), -3)
         EVT_CALL(ClampAngleFloat, LW(10))
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
         EVT_IF_EQ(LW(1), 1)
             EVT_GOTO(1)
         EVT_END_IF
@@ -65,7 +65,7 @@ EvtScript N(beforeBattle_802258E0) = {
         EVT_CALL(RotateModel, MODEL_o376, LW(10), 0, 0, 1)
         EVT_ADD(LW(10), -3)
         EVT_CALL(ClampAngleFloat, LW(10))
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
         EVT_IF_EQ(LW(1), 1)
             EVT_GOTO(0)
         EVT_END_IF
@@ -78,7 +78,7 @@ EvtScript N(beforeBattle_802258E0) = {
         EVT_CALL(RotateModel, MODEL_o376, LW(10), 0, 0, 1)
         EVT_ADD(LW(10), -3)
         EVT_CALL(ClampAngleFloat, LW(10))
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
         EVT_IF_EQ(LW(1), 1)
             EVT_GOTO(1)
         EVT_END_IF

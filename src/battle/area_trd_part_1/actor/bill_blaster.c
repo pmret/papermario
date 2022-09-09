@@ -153,7 +153,7 @@ EvtScript N(handleEvent_80219EE0) = {
             EVT_SET_CONST(LW(0), 1)
             EVT_SET_CONST(LW(1), NPC_ANIM_bill_blaster_Palette_00_Anim_3)
             EVT_EXEC_WAIT(DoNormalHit)
-            EVT_WAIT_FRAMES(10)
+            EVT_WAIT(10)
             EVT_SET_CONST(LW(0), 1)
             EVT_SET_CONST(LW(1), NPC_ANIM_bill_blaster_Palette_00_Anim_3)
             EVT_EXEC_WAIT(DoDeath)
@@ -210,7 +210,7 @@ ApiStatus func_80218000_4A10A0(Evt* script, s32 isInitialCall) {
 
 EvtScript N(8021A2BC) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_bill_blaster_Palette_00_Anim_2)
-    EVT_WAIT_FRAMES(13)
+    EVT_WAIT(13)
     EVT_THREAD
         EVT_CALL(ShakeCam, 1, 0, 10, EVT_FLOAT(1.0))
     EVT_END_THREAD
@@ -222,7 +222,7 @@ EvtScript N(8021A2BC) = {
     EVT_ADD(LW(2), 3)
     EVT_CALL(PlayEffect, EFFECT_00, LW(0), LW(1), LW(2), 2, 5, 0, 2, 0, 0, 0, 0, 0, 0)
     EVT_CALL(PlayEffect, EFFECT_00, LW(0), LW(1), LW(2), 2, 5, 2, 2, 0, 0, 0, 0, 0, 0)
-    EVT_WAIT_FRAMES(2)
+    EVT_WAIT(2)
     EVT_CALL(func_80218000_4A10A0)
     EVT_CALL(SummonEnemy, EVT_ADDR(N(specialFormation_8021A4E8)), 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, 0, LW(0))
