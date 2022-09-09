@@ -55,7 +55,7 @@ EvtScript N(main) = {
     EVT_THREAD
         EVT_CALL(GetActorPos, ACTOR_PLAYER, LocalVar(0), LocalVar(1), LocalVar(2))
         EVT_SUB(LocalVar(0), 10)
-        EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FIXED(2.0))
+        EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(2.0))
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_RUNNING)
         EVT_CALL(SetGoalPos, ACTOR_PLAYER, LocalVar(0), LocalVar(1), LocalVar(2))
         EVT_CALL(PlayerRunToGoal, 0)

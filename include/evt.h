@@ -104,8 +104,6 @@ enum {
     EVT_OP_94,
 };
 
-// deprecated, use those in script_api/macros.h instead
-#define EVT_FIXED(v)         (((v * 1024.0f) + -230000000)) // See evt_float_to_fixed_var
 #define EVT_IGNORE_ARG       -250000000 // used by a couple functions to selectively ignore args
 #define EVT_LIMIT            -270000000 // TODO better name
 #define MAKE_ENTITY_END      0x80000000

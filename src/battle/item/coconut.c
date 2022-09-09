@@ -54,7 +54,7 @@ EvtScript N(main) = {
     EVT_CALL(PlaySound, SOUND_THROW)
     EVT_WAIT(3)
     EVT_CALL(CreateVirtualEntity, LocalVar(10), EVT_ADDR(N(modelCommandList)))
-    EVT_SETF(LocalVar(0), EVT_FIXED(1.0))
+    EVT_SETF(LocalVar(0), EVT_FLOAT(1.0))
     EVT_CALL(MultiplyByActorScale, LocalVar(0))
     EVT_CALL(SetVirtualEntityScale, LocalVar(10), LocalVar(0), LocalVar(0), LocalVar(0))
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LocalVar(0), LocalVar(1), LocalVar(2))
@@ -77,12 +77,12 @@ EvtScript N(main) = {
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(SetVirtualEntityJumpGravity, LocalVar(10), EVT_FIXED(0.8))
+    EVT_CALL(SetVirtualEntityJumpGravity, LocalVar(10), EVT_FLOAT(0.8))
     EVT_ADD(LocalVar(2), 5)
     EVT_CALL(VirtualEntityJumpTo, LocalVar(10), LocalVar(0), LocalVar(1), LocalVar(2), 18)
     EVT_CALL(GetItemPower, ITEM_COCONUT, LocalVar(3), LocalVar(4))
     EVT_CALL(ApplyShrinkFromOwner, LocalVar(3))
-    EVT_CALL(ItemDamageEnemy, LocalVar(9), 402653184, 0, LocalVar(3), 32)
+    EVT_CALL(ItemDamageEnemy, LocalVar(9), 0x18000000, 0, LocalVar(3), 32)
     EVT_ADD(LocalVar(0), 60)
     EVT_ADD(LocalVar(1), 0)
     EVT_CALL(VirtualEntityJumpTo, LocalVar(10), LocalVar(0), LocalVar(1), LocalVar(2), 16)

@@ -90,7 +90,7 @@ EvtScript N(main) = {
     EVT_EXEC_WAIT(N(EatItem))
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_ADD(LocalVar(1), 20)
-    EVT_CALL(PlayEffect, 0x57, 0, LocalVar(0), LocalVar(1), LocalVar(2), EVT_FIXED(1.0), 30, 0, 0, 0, 0, 0, 0, 0)
+    EVT_CALL(PlayEffect, 0x57, 0, LocalVar(0), LocalVar(1), LocalVar(2), EVT_FLOAT(1.0), 30, 0, 0, 0, 0, 0, 0, 0)
     EVT_CALL(PlaySound, SOUND_379)
     EVT_CALL(GetItemPower, ITEM_VOLT_SHROOM, LocalVar(0), LocalVar(1))
     EVT_CALL(N(func_802A123C_7307DC))

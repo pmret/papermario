@@ -164,7 +164,7 @@ EvtScript N(main) = {
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(SetVirtualEntityJumpGravity, LocalVar(10), EVT_FIXED(1.0))
+    EVT_CALL(SetVirtualEntityJumpGravity, LocalVar(10), EVT_FLOAT(1.0))
     EVT_ADD(LocalVar(2), 5)
     EVT_CALL(VirtualEntityJumpTo, LocalVar(10), LocalVar(0), LocalVar(1), LocalVar(2), 18)
     EVT_CALL(DeleteVirtualEntity, LocalVar(10))
@@ -172,10 +172,10 @@ EvtScript N(main) = {
     EVT_CALL(battle_item_egg_missile_func_802A123C_71CF1C, LocalVar(0), LocalVar(1), LocalVar(2))
     EVT_THREAD
         EVT_CALL(StartRumble, 5)
-        EVT_CALL(ShakeCam, 1, 0, 2, EVT_FIXED(0.75))
-        EVT_CALL(ShakeCam, 1, 0, 5, EVT_FIXED(1.5))
-        EVT_CALL(ShakeCam, 1, 0, 4, EVT_FIXED(1.2))
-        EVT_CALL(ShakeCam, 1, 0, 2, EVT_FIXED(0.4501953125))
+        EVT_CALL(ShakeCam, 1, 0, 2, EVT_FLOAT(0.75))
+        EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(1.5))
+        EVT_CALL(ShakeCam, 1, 0, 4, EVT_FLOAT(1.2))
+        EVT_CALL(ShakeCam, 1, 0, 2, EVT_FLOAT(0.4501953125))
     EVT_END_THREAD
     EVT_CALL(GetItemPower, 200, LocalVar(0), LocalVar(1))
     EVT_CALL(ItemDamageEnemy, LocalVar(0), 402653698, 0, LocalVar(0), 32)
