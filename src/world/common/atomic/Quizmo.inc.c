@@ -341,7 +341,7 @@ ApiStatus N(Quizmo_SetVannaAnim_Wave)(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus N(Quizmo_ShouldQuizmoLeave)(Evt* script, s32 isInitialCall) {
-    evt_set_variable(script, LocalVar(0), gGameStatusPtr->debugQuizmo);
+    evt_set_variable(script, LVar0, gGameStatusPtr->debugQuizmo);
     return ApiStatus_DONE2;
 }
 
@@ -431,9 +431,9 @@ ApiStatus N(Quizmo_UpdatePartnerPosition)(Evt* script, s32 isInitialCall) {
     f32* z = (f32*) &script->functionTemp[3];
 
     if (isInitialCall) {
-        *x = evt_get_float_variable(script, LocalVar(0)) / 60.0f;
-        *y = evt_get_float_variable(script, LocalVar(5)) / 60.0f;
-        *z = evt_get_float_variable(script, LocalVar(1)) / 60.0f;
+        *x = evt_get_float_variable(script, LVar0) / 60.0f;
+        *y = evt_get_float_variable(script, LVar5) / 60.0f;
+        *z = evt_get_float_variable(script, LVar1) / 60.0f;
         script->functionTemp[0] = 60;
     }
 

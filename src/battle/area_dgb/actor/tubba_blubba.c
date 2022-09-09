@@ -626,8 +626,8 @@ EvtScript N(8021A36C) = {
             EVT_IF_NOT_FLAG(LVar5, STATUS_FLAG_SHRINK)
                 EVT_CALL(StartRumble, 1)
                 EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(3.0))
-                EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LocalVar(1), LocalVar(2))
-                EVT_CALL(PlayEffect, EFFECT_SMOKE_IMPACT, 0, LocalVar(0), LocalVar(1), LocalVar(2), 60, 8, 10, 20, 0, 0, 0, 0, 0)
+                EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+                EVT_CALL(PlayEffect, EFFECT_SMOKE_IMPACT, 0, LVar0, LVar1, LVar2, 60, 8, 10, 20, 0, 0, 0, 0, 0)
                 EVT_WAIT(8)
             EVT_END_IF
             EVT_LABEL(2)

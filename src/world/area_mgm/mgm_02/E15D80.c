@@ -856,7 +856,7 @@ ApiStatus N(UpdateRecords)(Evt* script, s32 isInitialCall) {
     if (data->currentScore == 0 && data->found == NUM_PANELS) {
         outScore = -1;
     }
-    evt_set_variable(script, LocalVar(0), outScore);
+    evt_set_variable(script, LVar0, outScore);
 
     return ApiStatus_DONE2;
 }

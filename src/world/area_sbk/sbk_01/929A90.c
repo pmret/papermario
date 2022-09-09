@@ -48,7 +48,7 @@ EvtScript N(main) = {
     EVT_CALL(MakeNpcs, 0, EVT_PTR(N(npcGroupList_802407D8)))
     EVT_CALL(N(SpawnSunEffect))
     EVT_CALL(SetMusicTrack, 0, SONG_DRY_DRY_DESERT, 0, 8)
-    EVT_SET(LocalVar(0), EVT_PTR(N(802401F4)))
+    EVT_SET(LVar0, EVT_PTR(N(802401F4)))
     EVT_EXEC(EnterWalk)
     EVT_RETURN
     EVT_END

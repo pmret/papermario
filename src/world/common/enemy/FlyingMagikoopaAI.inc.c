@@ -361,7 +361,7 @@ ApiStatus N(FlyingMagikoopaAI_Main)(Evt* script, s32 isInitialCall) {
 ApiStatus N(FlyingMagikoopaAI_OnHitInit)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
 
-    evt_set_variable(script, LocalVar(0), gCurrentEncounter.currentEnemy == enemy);
+    evt_set_variable(script, LVar0, gCurrentEncounter.currentEnemy == enemy);
     return ApiStatus_DONE2;
 }
 

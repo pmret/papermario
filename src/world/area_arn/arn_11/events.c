@@ -38,12 +38,12 @@ EvtScript N(802401BC) = {
     EVT_CALL(SetPlayerAnimation, 589824)
     EVT_THREAD
         EVT_CALL(SetNpcJumpscale, 0, EVT_FLOAT(2.5))
-        EVT_CALL(GetNpcPos, 0, LocalVar(0), LocalVar(1), LocalVar(2))
+        EVT_CALL(GetNpcPos, 0, LVar0, LVar1, LVar2)
         EVT_CALL(PlaySoundAtNpc, 0, 0x20C8, 0)
-        EVT_CALL(NpcJump0, 0, LocalVar(0), LocalVar(1), LocalVar(2), 10)
+        EVT_CALL(NpcJump0, 0, LVar0, LVar1, LVar2, 10)
         EVT_WAIT(1)
         EVT_CALL(PlaySoundAtNpc, 0, 0x20C8, 0)
-        EVT_CALL(NpcJump0, 0, LocalVar(0), LocalVar(1), LocalVar(2), 10)
+        EVT_CALL(NpcJump0, 0, LVar0, LVar1, LVar2, 10)
     EVT_END_THREAD
     EVT_WAIT(40)
     EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_tubbas_heart_Palette_00_Anim_B, NPC_ANIM_tubbas_heart_Palette_00_Anim_1, 0, MESSAGE_ID(0x0E, 0x00C2))
@@ -58,10 +58,10 @@ EvtScript N(802401BC) = {
 EvtScript N(exitSingleDoor_80240428) = {
     EVT_SET_GROUP(EVT_GROUP_1B)
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_SET(LocalVar(0), 0)
-    EVT_SET(LocalVar(1), 2)
-    EVT_SET(LocalVar(2), 0)
-    EVT_SET(LocalVar(3), -1)
+    EVT_SET(LVar0, 0)
+    EVT_SET(LVar1, 2)
+    EVT_SET(LVar2, 0)
+    EVT_SET(LVar3, -1)
     EVT_EXEC(ExitSingleDoor)
     EVT_WAIT(17)
     EVT_CALL(GotoMap, EVT_PTR("arn_13"), 1)
@@ -78,8 +78,8 @@ EvtScript N(802404CC) = {
 
 EvtScript N(enterSingleDoor_802404F8) = {
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_SET(LocalVar(2), 0)
-    EVT_SET(LocalVar(3), -1)
+    EVT_SET(LVar2, 0)
+    EVT_SET(LVar3, -1)
     EVT_EXEC_WAIT(EnterSingleDoor)
     EVT_EXEC(N(802404CC))
     EVT_IF_LT(GB_StoryProgress, -22)
@@ -132,8 +132,8 @@ NpcSettings N(npcSettings_802406A0) = {
 
 EvtScript N(idle_802406CC) = {
     EVT_LOOP(0)
-        EVT_CALL(GetSelfVar, 0, LocalVar(0))
-        EVT_IF_NE(LocalVar(0), 0)
+        EVT_CALL(GetSelfVar, 0, LVar0)
+        EVT_IF_NE(LVar0, 0)
             EVT_BREAK_LOOP
         EVT_END_IF
         EVT_WAIT(1)
@@ -141,10 +141,10 @@ EvtScript N(idle_802406CC) = {
     EVT_THREAD
         EVT_CALL(SetCamType, 0, 6, 1)
         EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(4.0))
-        EVT_CALL(GetPlayerPos, LocalVar(0), LocalVar(1), LocalVar(2))
-        EVT_ADD(LocalVar(0), 50)
-        EVT_CALL(UseSettingsFrom, 0, LocalVar(0), LocalVar(1), LocalVar(2))
-        EVT_CALL(SetPanTarget, 0, LocalVar(0), LocalVar(1), LocalVar(2))
+        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
+        EVT_ADD(LVar0, 50)
+        EVT_CALL(UseSettingsFrom, 0, LVar0, LVar1, LVar2)
+        EVT_CALL(SetPanTarget, 0, LVar0, LVar1, LVar2)
         EVT_CALL(SetCamDistance, 0, 3000)
         EVT_CALL(PanToTarget, 0, 0, 1)
         EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
@@ -160,9 +160,9 @@ EvtScript N(8024081C) = {
     EVT_CALL(MakeLerp, 0, 80, 10, 0)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
-        EVT_CALL(RotateModel, 0, LocalVar(0), 0, -1, 0)
+        EVT_CALL(RotateModel, 0, LVar0, 0, -1, 0)
         EVT_WAIT(1)
-        EVT_IF_EQ(LocalVar(1), 0)
+        EVT_IF_EQ(LVar1, 0)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
@@ -174,9 +174,9 @@ EvtScript N(802408D8) = {
     EVT_CALL(MakeLerp, 80, 0, 10, 0)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
-        EVT_CALL(RotateModel, 0, LocalVar(0), 0, -1, 0)
+        EVT_CALL(RotateModel, 0, LVar0, 0, -1, 0)
         EVT_WAIT(1)
-        EVT_IF_EQ(LocalVar(1), 0)
+        EVT_IF_EQ(LVar1, 0)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
@@ -195,20 +195,20 @@ EvtScript N(defeat_802409DC) = {
     EVT_THREAD
         EVT_CALL(SetCamType, 0, 6, 1)
         EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(90.0))
-        EVT_CALL(GetPlayerPos, LocalVar(0), LocalVar(1), LocalVar(2))
-        EVT_ADD(LocalVar(0), 50)
-        EVT_CALL(UseSettingsFrom, 0, LocalVar(0), LocalVar(1), LocalVar(2))
-        EVT_CALL(SetPanTarget, 0, LocalVar(0), LocalVar(1), LocalVar(2))
+        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
+        EVT_ADD(LVar0, 50)
+        EVT_CALL(UseSettingsFrom, 0, LVar0, LVar1, LVar2)
+        EVT_CALL(SetPanTarget, 0, LVar0, LVar1, LVar2)
         EVT_CALL(SetCamDistance, 0, 450)
         EVT_CALL(PanToTarget, 0, 0, 1)
     EVT_END_THREAD
     EVT_WAIT(10)
     EVT_CALL(PlayerFaceNpc, 0, 1)
     EVT_LOOP(2)
-        EVT_CALL(GetNpcPos, 0, LocalVar(0), LocalVar(1), LocalVar(2))
+        EVT_CALL(GetNpcPos, 0, LVar0, LVar1, LVar2)
         EVT_CALL(SetNpcJumpscale, 0, EVT_FLOAT(2.5))
         EVT_CALL(PlaySoundAtNpc, NPC_SELF, 0x20C8, 0)
-        EVT_CALL(NpcJump0, 0, LocalVar(0), LocalVar(1), LocalVar(2), 12)
+        EVT_CALL(NpcJump0, 0, LVar0, LVar1, LVar2, 12)
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_THREAD
@@ -225,31 +225,31 @@ EvtScript N(defeat_802409DC) = {
     EVT_CALL(PlayerFaceNpc, 0, 1)
     EVT_USE_BUF(EVT_PTR(N(intTable_80240988)))
     EVT_LOOP(0)
-        EVT_BUF_READ3(LocalVar(0), LocalVar(1), LocalVar(2))
-        EVT_IF_EQ(LocalVar(0), -10000)
+        EVT_BUF_READ3(LVar0, LVar1, LVar2)
+        EVT_IF_EQ(LVar0, -10000)
             EVT_BREAK_LOOP
         EVT_END_IF
         EVT_CALL(PlaySoundAtNpc, NPC_SELF, 0x20C8, 0)
-        EVT_CALL(NpcJump0, 0, LocalVar(0), LocalVar(1), LocalVar(2), 12)
+        EVT_CALL(NpcJump0, 0, LVar0, LVar1, LVar2, 12)
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_EXEC(N(8024081C))
     EVT_LOOP(0)
-        EVT_BUF_READ3(LocalVar(0), LocalVar(1), LocalVar(2))
-        EVT_IF_EQ(LocalVar(0), -10000)
+        EVT_BUF_READ3(LVar0, LVar1, LVar2)
+        EVT_IF_EQ(LVar0, -10000)
             EVT_BREAK_LOOP
         EVT_END_IF
         EVT_CALL(PlaySoundAtNpc, NPC_SELF, 0x20C8, 0)
-        EVT_CALL(NpcJump0, 0, LocalVar(0), LocalVar(1), LocalVar(2), 12)
+        EVT_CALL(NpcJump0, 0, LVar0, LVar1, LVar2, 12)
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_EXEC(N(802408D8))
     EVT_WAIT(30)
     EVT_CALL(SetCamType, 0, 6, 1)
     EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(90.0))
-    EVT_CALL(GetPlayerPos, LocalVar(0), LocalVar(1), LocalVar(2))
-    EVT_CALL(UseSettingsFrom, 0, LocalVar(0), LocalVar(1), LocalVar(2))
-    EVT_CALL(SetPanTarget, 0, LocalVar(0), LocalVar(1), LocalVar(2))
+    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
+    EVT_CALL(UseSettingsFrom, 0, LVar0, LVar1, LVar2)
+    EVT_CALL(SetPanTarget, 0, LVar0, LVar1, LVar2)
     EVT_CALL(SetCamDistance, 0, 450)
     EVT_CALL(PanToTarget, 0, 0, 1)
     EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))

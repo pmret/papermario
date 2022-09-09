@@ -4,9 +4,9 @@
 
 #define NAMESPACE b_area_hos_hos_00
 
-// Shakes a model (ID input on LocalVar(0)) on loop, waiting up to 30 frames between.
+// Shakes a model (ID input on LVar0) on loop, waiting up to 30 frames between.
 EvtScript N(802255E0) = {
-    EVT_SET(LVarA, LocalVar(0))
+    EVT_SET(LVarA, LVar0)
     EVT_LABEL(0)
     EVT_CALL(TranslateModel, LVarA, 0, 2, 0)
     EVT_WAIT(5)
@@ -16,9 +16,9 @@ EvtScript N(802255E0) = {
     EVT_WAIT(5)
     EVT_CALL(TranslateModel, LVarA, 0, 0, 0)
     EVT_WAIT(5)
-    EVT_CALL(RandInt, 30, LocalVar(0))
-    EVT_ADD(LocalVar(0), 30)
-    EVT_WAIT(LocalVar(0))
+    EVT_CALL(RandInt, 30, LVar0)
+    EVT_ADD(LVar0, 30)
+    EVT_WAIT(LVar0)
     EVT_GOTO(0)
     EVT_RETURN
     EVT_END
@@ -27,34 +27,34 @@ EvtScript N(802255E0) = {
 EvtScript N(beforeBattle_802256E8) = {
     EVT_CALL(SetSpriteShading, -1)
     EVT_THREAD
-        EVT_SET(LocalVar(0), MODEL_h1)
+        EVT_SET(LVar0, MODEL_h1)
         EVT_EXEC(N(802255E0))
         EVT_WAIT(5)
-        EVT_SET(LocalVar(0), MODEL_h3)
+        EVT_SET(LVar0, MODEL_h3)
         EVT_EXEC(N(802255E0))
         EVT_WAIT(5)
-        EVT_SET(LocalVar(0), MODEL_h4)
+        EVT_SET(LVar0, MODEL_h4)
         EVT_EXEC(N(802255E0))
         EVT_WAIT(5)
-        EVT_SET(LocalVar(0), MODEL_h5)
+        EVT_SET(LVar0, MODEL_h5)
         EVT_EXEC(N(802255E0))
         EVT_WAIT(5)
-        EVT_SET(LocalVar(0), MODEL_h6)
+        EVT_SET(LVar0, MODEL_h6)
         EVT_EXEC(N(802255E0))
         EVT_WAIT(5)
-        EVT_SET(LocalVar(0), MODEL_h7)
+        EVT_SET(LVar0, MODEL_h7)
         EVT_EXEC(N(802255E0))
         EVT_WAIT(5)
-        EVT_SET(LocalVar(0), MODEL_h9)
+        EVT_SET(LVar0, MODEL_h9)
         EVT_EXEC(N(802255E0))
         EVT_WAIT(5)
-        EVT_SET(LocalVar(0), MODEL_h10)
+        EVT_SET(LVar0, MODEL_h10)
         EVT_EXEC(N(802255E0))
         EVT_WAIT(5)
-        EVT_SET(LocalVar(0), MODEL_h11)
+        EVT_SET(LVar0, MODEL_h11)
         EVT_EXEC(N(802255E0))
         EVT_WAIT(5)
-        EVT_SET(LocalVar(0), MODEL_h12)
+        EVT_SET(LVar0, MODEL_h12)
         EVT_EXEC(N(802255E0))
     EVT_END_THREAD
     EVT_RETURN

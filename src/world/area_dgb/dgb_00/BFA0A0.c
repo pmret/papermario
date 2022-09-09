@@ -45,10 +45,10 @@ EvtScript N(exitDoubleDoor_8024021C) = {
     EVT_SET_GROUP(EVT_GROUP_1B)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(UseDoorSounds, 3)
-    EVT_SET(LocalVar(0), 1)
-    EVT_SET(LocalVar(1), 18)
-    EVT_SET(LocalVar(2), 5)
-    EVT_SET(LocalVar(3), 7)
+    EVT_SET(LVar0, 1)
+    EVT_SET(LVar1, 18)
+    EVT_SET(LVar2, 5)
+    EVT_SET(LVar3, 7)
     EVT_EXEC(ExitDoubleDoor)
     EVT_WAIT(17)
     EVT_CALL(GotoMap, EVT_PTR("dgb_01"), 0)
@@ -74,16 +74,16 @@ EvtScript N(802402D0) = {
 };
 
 EvtScript N(enterDoubleDoor_8024038C) = {
-    EVT_CALL(GetLoadType, LocalVar(1))
-    EVT_IF_EQ(LocalVar(1), 1)
+    EVT_CALL(GetLoadType, LVar1)
+    EVT_IF_EQ(LVar1, 1)
         EVT_EXEC(EnterSavePoint)
         EVT_EXEC(N(802402D0))
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(GetEntryID, LocalVar(0))
-    EVT_SWITCH(LocalVar(0))
+    EVT_CALL(GetEntryID, LVar0)
+    EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
-            EVT_SET(LocalVar(0), EVT_PTR(N(802402D0)))
+            EVT_SET(LVar0, EVT_PTR(N(802402D0)))
             EVT_EXEC(EnterWalk)
             EVT_WAIT(1)
         EVT_CASE_EQ(1)
@@ -98,8 +98,8 @@ EvtScript N(enterDoubleDoor_8024038C) = {
                 EVT_END_IF
             EVT_END_IF
             EVT_CALL(UseDoorSounds, 3)
-            EVT_SET(LocalVar(2), 5)
-            EVT_SET(LocalVar(3), 7)
+            EVT_SET(LVar2, 5)
+            EVT_SET(LVar3, 7)
             EVT_EXEC_WAIT(EnterDoubleDoor)
             EVT_EXEC(N(802402D0))
         EVT_CASE_EQ(2)
@@ -118,8 +118,8 @@ EvtScript N(main) = {
     EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
     EVT_CALL(SetCamLeadPlayer, 0, 0)
     EVT_CALL(SetCamEnabled, 0, 1)
-    EVT_CALL(GetEntryID, LocalVar(0))
-    EVT_IF_EQ(LocalVar(0), 2)
+    EVT_CALL(GetEntryID, LVar0)
+    EVT_IF_EQ(LVar0, 2)
         EVT_CALL(MakeNpcs, 0, EVT_PTR(N(npcGroupList_80243740)))
     EVT_ELSE
         EVT_CALL(MakeNpcs, 0, EVT_PTR(N(npcGroupList_802436EC)))

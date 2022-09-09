@@ -41,10 +41,10 @@ EvtScript N(exitSingleDoor_80241530) = {
     EVT_SET_GROUP(EVT_GROUP_1B)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(UseDoorSounds, 0)
-    EVT_SET(LocalVar(0), 0)
-    EVT_SET(LocalVar(1), 6)
-    EVT_SET(LocalVar(2), 22)
-    EVT_SET(LocalVar(3), -1)
+    EVT_SET(LVar0, 0)
+    EVT_SET(LVar1, 6)
+    EVT_SET(LVar2, 22)
+    EVT_SET(LVar3, -1)
     EVT_EXEC(ExitSingleDoor)
     EVT_WAIT(17)
     EVT_CALL(GotoMap, EVT_PTR("dgb_02"), 2)
@@ -55,11 +55,11 @@ EvtScript N(exitSingleDoor_80241530) = {
 
 EvtScript N(enterSingleDoor_802415E4) = {
     EVT_CALL(UseDoorSounds, 0)
-    EVT_CALL(GetEntryID, LocalVar(0))
-    EVT_SWITCH(LocalVar(0))
+    EVT_CALL(GetEntryID, LVar0)
+    EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
-            EVT_SET(LocalVar(2), 22)
-            EVT_SET(LocalVar(3), -1)
+            EVT_SET(LVar2, 22)
+            EVT_SET(LVar3, -1)
             EVT_EXEC_WAIT(EnterSingleDoor)
     EVT_END_SWITCH
     EVT_RETURN
@@ -97,8 +97,8 @@ static s32 N(pad_17E4)[] = {
 };
 
 EvtScript N(802417F0) = {
-    EVT_CALL(GetBattleOutcome, LocalVar(0))
-    EVT_SWITCH(LocalVar(0))
+    EVT_CALL(GetBattleOutcome, LVar0)
+    EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
             EVT_CALL(RemoveNpc, NPC_SELF)
         EVT_CASE_EQ(2)

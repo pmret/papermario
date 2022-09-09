@@ -40,10 +40,10 @@ EvtScript N(exitSingleDoor_802403C0) = {
     EVT_SET_GROUP(EVT_GROUP_1B)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(UseDoorSounds, 0)
-    EVT_SET(LocalVar(0), 0)
-    EVT_SET(LocalVar(1), 12)
-    EVT_SET(LocalVar(2), 5)
-    EVT_SET(LocalVar(3), -1)
+    EVT_SET(LVar0, 0)
+    EVT_SET(LVar1, 12)
+    EVT_SET(LVar2, 5)
+    EVT_SET(LVar3, -1)
     EVT_EXEC(ExitSingleDoor)
     EVT_WAIT(17)
     EVT_CALL(GotoMap, EVT_PTR("dgb_04"), 1)
@@ -54,11 +54,11 @@ EvtScript N(exitSingleDoor_802403C0) = {
 
 EvtScript N(enterSingleDoor_80240474) = {
     EVT_CALL(UseDoorSounds, 0)
-    EVT_CALL(GetEntryID, LocalVar(0))
-    EVT_SWITCH(LocalVar(0))
+    EVT_CALL(GetEntryID, LVar0)
+    EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
-            EVT_SET(LocalVar(2), 5)
-            EVT_SET(LocalVar(3), -1)
+            EVT_SET(LVar2, 5)
+            EVT_SET(LVar3, -1)
             EVT_EXEC_WAIT(EnterSingleDoor)
     EVT_END_SWITCH
     EVT_RETURN

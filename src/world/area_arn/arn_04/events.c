@@ -25,7 +25,7 @@ EvtScript N(main) = {
     EVT_CALL(MakeNpcs, 0, EVT_PTR(N(npcGroupList_80244000)))
     EVT_EXEC_WAIT(N(makeEntities))
     EVT_EXEC(N(802433D0))
-    EVT_SET(LocalVar(0), EVT_PTR(N(80243538)))
+    EVT_SET(LVar0, EVT_PTR(N(80243538)))
     EVT_EXEC(EnterWalk)
     EVT_WAIT(1)
     EVT_RETURN

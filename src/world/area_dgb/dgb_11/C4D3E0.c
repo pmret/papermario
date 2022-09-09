@@ -39,10 +39,10 @@ EvtScript N(exitSingleDoor_80240170) = {
     EVT_SET_GROUP(EVT_GROUP_1B)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(UseDoorSounds, 0)
-    EVT_SET(LocalVar(0), 0)
-    EVT_SET(LocalVar(1), 11)
-    EVT_SET(LocalVar(2), 21)
-    EVT_SET(LocalVar(3), -1)
+    EVT_SET(LVar0, 0)
+    EVT_SET(LVar1, 11)
+    EVT_SET(LVar2, 21)
+    EVT_SET(LVar3, -1)
     EVT_EXEC(ExitSingleDoor)
     EVT_WAIT(17)
     EVT_CALL(GotoMap, EVT_PTR("dgb_02"), 3)
@@ -52,36 +52,36 @@ EvtScript N(exitSingleDoor_80240170) = {
 };
 
 EvtScript N(enterSingleDoor_80240224) = {
-    EVT_CALL(GetEntryID, LocalVar(0))
-    EVT_SWITCH(LocalVar(0))
+    EVT_CALL(GetEntryID, LVar0)
+    EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
             EVT_CALL(UseDoorSounds, 0)
-            EVT_SET(LocalVar(2), 21)
-            EVT_SET(LocalVar(3), -1)
+            EVT_SET(LVar2, 21)
+            EVT_SET(LVar3, -1)
             EVT_EXEC_WAIT(EnterSingleDoor)
             EVT_RETURN
         EVT_CASE_EQ(1)
             EVT_CALL(UseSettingsFrom, 0, 500, 0, -100)
             EVT_CALL(SetPanTarget, 0, 500, 0, -100)
-            EVT_SET(LocalVar(3), 1)
+            EVT_SET(LVar3, 1)
         EVT_CASE_EQ(2)
             EVT_CALL(UseSettingsFrom, 0, 500, 75, -250)
             EVT_CALL(SetPanTarget, 0, 500, 75, -250)
-            EVT_SET(LocalVar(3), 75)
+            EVT_SET(LVar3, 75)
         EVT_CASE_EQ(3)
             EVT_CALL(SetZoneEnabled, 5, 0)
             EVT_CALL(UseSettingsFrom, 0, 375, 0, -175)
             EVT_CALL(SetPanTarget, 0, 375, 0, -175)
             EVT_SET(AreaFlag(2), 1)
-            EVT_SET(LocalVar(3), 1)
+            EVT_SET(LVar3, 1)
     EVT_END_SWITCH
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(InterpPlayerYaw, 180, 0)
     EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(90.0))
     EVT_CALL(PanToTarget, 0, 0, 1)
     EVT_LOOP(0)
-        EVT_CALL(GetPlayerPos, LocalVar(0), LocalVar(1), LocalVar(2))
-        EVT_IF_LE(LocalVar(1), LocalVar(3))
+        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
+        EVT_IF_LE(LVar1, LVar3)
             EVT_BREAK_LOOP
         EVT_END_IF
         EVT_WAIT(1)
@@ -113,11 +113,11 @@ static s32 N(pad_56C) = {
 
 EvtScript N(80240570) = {
     EVT_LABEL(0)
-    EVT_CALL(GetPlayerPos, LocalVar(0), LocalVar(1), LocalVar(2))
-    EVT_IF_GE(LocalVar(1), LocalVar(3))
-        EVT_SET(LocalVar(1), LocalVar(3))
+    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
+    EVT_IF_GE(LVar1, LVar3)
+        EVT_SET(LVar1, LVar3)
     EVT_END_IF
-    EVT_CALL(SetCamTarget, 0, LocalVar(0), LocalVar(1), LocalVar(2))
+    EVT_CALL(SetCamTarget, 0, LVar0, LVar1, LVar2)
     EVT_WAIT(1)
     EVT_GOTO(0)
     EVT_RETURN
@@ -142,19 +142,19 @@ EvtScript N(8024062C) = {
             EVT_CALL(DisablePlayerPhysics, TRUE)
             EVT_CALL(SetPlayerActionState, 3)
             EVT_WAIT(1)
-            EVT_SET(LocalVar(3), 500)
+            EVT_SET(LVar3, 500)
             EVT_EXEC_GET_TID(N(80240570), LVarA)
             EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(0.7))
             EVT_EXEC_GET_TID(N(80240600), LVarB)
             EVT_LOOP(0)
                 EVT_WAIT(1)
-                EVT_CALL(GetPlayerPos, LocalVar(0), LocalVar(1), LocalVar(2))
-                EVT_IF_GE(LocalVar(1), 165)
+                EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
+                EVT_IF_GE(LVar1, 165)
                     EVT_BREAK_LOOP
                 EVT_END_IF
             EVT_END_LOOP
-            EVT_CALL(GetPlayerPos, LocalVar(0), LocalVar(1), LocalVar(2))
-            EVT_CALL(SetPlayerPos, LocalVar(0), 165, LocalVar(2))
+            EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
+            EVT_CALL(SetPlayerPos, LVar0, 165, LVar2)
             EVT_KILL_THREAD(LVarB)
             EVT_CALL(SetPlayerAnimation, 524309)
             EVT_CALL(ShakeCam, 0, 0, 20, EVT_FLOAT(1.0))
@@ -182,7 +182,7 @@ EvtScript N(8024062C) = {
                 EVT_CALL(GotoMap, EVT_PTR("dgb_10"), 1)
                 EVT_WAIT(100)
             EVT_END_THREAD
-            EVT_SET(LocalVar(3), 500)
+            EVT_SET(LVar3, 500)
             EVT_EXEC_GET_TID(N(80240570), LVarA)
             EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(0.7))
             EVT_CALL(PlayerJump, 375, 270, -250, 20)
@@ -191,7 +191,7 @@ EvtScript N(8024062C) = {
     EVT_ELSE
         EVT_CALL(SetPlayerActionState, 3)
         EVT_WAIT(1)
-        EVT_SET(LocalVar(3), 25)
+        EVT_SET(LVar3, 25)
         EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(0.7))
         EVT_CALL(PlayerJump, 375, 0, -175, 15)
         EVT_SET(AreaFlag(2), 0)
@@ -210,7 +210,7 @@ EvtScript N(makeEntities) = {
     EVT_CALL(MakeItemEntity, ITEM_D_DOWN_JUMP, 250, 75, -100, 17, GF_DGB11_Item_DDownJump)
     EVT_CALL(MakeEntity, EVT_PTR(Entity_ScriptSpring), 375, 0, -250, 0, MAKE_ENTITY_END)
     EVT_CALL(AssignScript, EVT_PTR(N(8024062C)))
-    EVT_SET(MapVar(0), LocalVar(0))
+    EVT_SET(MapVar(0), LVar0)
     EVT_RETURN
     EVT_END
 };

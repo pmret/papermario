@@ -4,7 +4,7 @@
 #define NAMESPACE b_area_trd_part_2_trd_02
 
 EvtScript N(802314E0) = {
-    EVT_SET(LVarA, LocalVar(0))
+    EVT_SET(LVarA, LVar0)
     EVT_LABEL(0)
     EVT_CALL(RotateGroup, LVarA, 2, 0, 0, 1)
     EVT_WAIT(5)
@@ -14,16 +14,16 @@ EvtScript N(802314E0) = {
     EVT_WAIT(5)
     EVT_CALL(RotateGroup, LVarA, 1, 0, 0, 1)
     EVT_WAIT(5)
-    EVT_CALL(RandInt, 30, LocalVar(0))
-    EVT_ADD(LocalVar(0), 30)
-    EVT_WAIT(LocalVar(0))
+    EVT_CALL(RandInt, 30, LVar0)
+    EVT_ADD(LVar0, 30)
+    EVT_WAIT(LVar0)
     EVT_GOTO(0)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(802315F8) = {
-    EVT_SET(LVarA, LocalVar(0))
+    EVT_SET(LVarA, LVar0)
     EVT_LOOP(0)
         EVT_CALL(TranslateModel, LVarA, 1, 0, 0)
         EVT_WAIT(2)
@@ -105,16 +105,16 @@ EvtScript N(beforeBattle_80231BA4) = {
     EVT_CALL(SetCamBGColor, 1, 0, 0, 0)
     EVT_CALL(EnableModel, 12, 0)
     EVT_THREAD
-        EVT_SET(LocalVar(0), 19)
+        EVT_SET(LVar0, 19)
         EVT_EXEC(N(802315F8))
         EVT_WAIT(5)
-        EVT_SET(LocalVar(0), 17)
+        EVT_SET(LVar0, 17)
         EVT_EXEC(N(802315F8))
         EVT_WAIT(5)
-        EVT_SET(LocalVar(0), 15)
+        EVT_SET(LVar0, 15)
         EVT_EXEC(N(802315F8))
         EVT_WAIT(5)
-        EVT_SET(LocalVar(0), 13)
+        EVT_SET(LVar0, 13)
         EVT_EXEC(N(802315F8))
     EVT_END_THREAD
     EVT_RETURN

@@ -47,13 +47,13 @@ ApiStatus func_802400FC_B1B66C(Evt *script, s32 isInitialCall)
     
     dist = dist2D(npc->pos.x, npc->pos.z, -250.0f, -100.0f);
     
-    angle = evt_get_variable(script, LocalVar(0)) - 1;
+    angle = evt_get_variable(script, LVar0) - 1;
     sinAngle = sin_rad((angle * TAU) / 360.0f);
     cosAngle = cos_rad((angle * TAU) / 360.0f);
     x0 = dist * cosAngle;
     z0 = dist * -sinAngle;
     
-    angle = evt_get_variable(script, LocalVar(0));
+    angle = evt_get_variable(script, LVar0);
     sinAngle = sin_rad((angle * TAU) / 360.0f);
     cosAngle = cos_rad((angle * TAU) / 360.0f);
     x1 = dist * cosAngle;

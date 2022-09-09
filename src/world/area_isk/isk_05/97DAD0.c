@@ -152,9 +152,9 @@ ApiStatus func_80241DF8_97F8C8(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus func_80241E24_97F8F4(Evt* script, s32 isInitialCall) {
-    f32 x = evt_get_variable(script, LocalVar(2));
-    f32 y = evt_get_variable(script, LocalVar(0));
-    f32 z = evt_get_variable(script, LocalVar(4));
+    f32 x = evt_get_variable(script, LVar2);
+    f32 y = evt_get_variable(script, LVar0);
+    f32 z = evt_get_variable(script, LVar4);
 
     fx_landing_dust(0, x, y, z, 0.0f);
     return ApiStatus_DONE2;

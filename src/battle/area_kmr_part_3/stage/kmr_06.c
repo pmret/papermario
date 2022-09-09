@@ -10,11 +10,11 @@
 EvtScript N(beforeBattle_80233378) = {
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(N(UnkFogFunc))
-    EVT_SET(LocalVar(0), 1)
-    EVT_SET(LocalVar(2), 0)
+    EVT_SET(LVar0, 1)
+    EVT_SET(LVar2, 0)
     EVT_EXEC(N(clouds1))
-    EVT_SET(LocalVar(0), 4)
-    EVT_SET(LocalVar(2), 70)
+    EVT_SET(LVar0, 4)
+    EVT_SET(LVar2, 70)
     EVT_EXEC(N(clouds1))
     EVT_RETURN
     EVT_END

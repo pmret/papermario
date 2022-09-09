@@ -304,8 +304,8 @@
 #define EVT_SWITCH(LVAR)                        EVT_CMD(EVT_OP_SWITCH, LVAR),
 
 /// Marks the start of a switch statement where the given value is treated as-is instead of using evt_get_variable.
-/// That is, `EVT_SWITCH_CONST(LVar0)` will switch over the value `0xFE363C80` instead of the value contained
-/// within `LVar0`.
+/// That is, `EVT_SWITCH_CONST(LocalVar(0))` will switch over the value `0xFE363C80` instead of the value contained
+/// within `LocalVar(0)`.
 #define EVT_SWITCH_CONST(LCONST)                EVT_CMD(EVT_OP_SWITCH_CONST, LCONST),
 
 /// Marks the start of a switch case that executes only if `LVAR == RVAR`. It also marks the end of any previous case.
@@ -358,8 +358,8 @@
 #define EVT_SET(VAR, INT_VALUE)                 EVT_CMD(EVT_OP_SET, VAR, (Bytecode) INT_VALUE),
 
 /// Sets the given variable to a given value, skipping the evt_get_variable call.
-/// That is, `EVT_SET_CONST(LVar0, LVar1)` will set `LVar0` to `0xFE363C81` instead of copying the value of
-/// `LVar1` into `LVar0`.
+/// That is, `EVT_SET_CONST(LocalVar(0), LocalVar(1))` will set `LocalVar(0)` to `0xFE363C81` instead of copying the value of
+/// `LocalVar(1)` into `LocalVar(0)`.
 #define EVT_SET_CONST(VAR, CONST)               EVT_CMD(EVT_OP_SET_CONST, VAR, (Bytecode) CONST),
 
 /// Sets the given variable to a given value, but supports EVT_FLOATs.
@@ -385,13 +385,13 @@
 #define EVT_BUF_READ1(VAR)                      EVT_CMD(EVT_OP_BUF_READ1, VAR),
 
 /// Consumes the next two s32s from the buffer and stores them in the given variables.
-#define EVT_BUF_READ2(LVar1, LVar2)               EVT_CMD(EVT_OP_BUF_READ2, LVar1, LVar2),
+#define EVT_BUF_READ2(VAR1, VAR2)               EVT_CMD(EVT_OP_BUF_READ2, VAR1, VAR2),
 
 /// Consumes the next three s32s from the buffer and stores them in the given variables.
-#define EVT_BUF_READ3(LVar1, LVar2, LVar3)         EVT_CMD(EVT_OP_BUF_READ3, LVar1, LVar2, LVar3),
+#define EVT_BUF_READ3(VAR1, VAR2, VAR3)         EVT_CMD(EVT_OP_BUF_READ3, VAR1, VAR2, VAR3),
 
 /// Consumes the next four s32s from the buffer and stores them in the given variables.
-#define EVT_BUF_READ4(LVar1, LVar2, LVar3, LVar4)   EVT_CMD(EVT_OP_BUF_READ4, LVar1, LVar2, LVar3, LVar4),
+#define EVT_BUF_READ4(VAR1, VAR2, VAR3, VAR4)   EVT_CMD(EVT_OP_BUF_READ4, VAR1, VAR2, VAR3, VAR4),
 
 /// Gets the s32 at the given offset of the buffer and stores it in the given variable, without consuming it.
 #define EVT_BUF_PEEK(OFFSET, VAR)               EVT_CMD(EVT_OP_BUF_PEEK, OFFSET, VAR),
@@ -403,13 +403,13 @@
 #define EVT_FBUF_READ1(VAR)                     EVT_CMD(EVT_OP_FBUF_READ1, VAR),
 
 /// Consumes the next two f32s from the buffer and stores them in the given variables.
-#define EVT_FBUF_READ2(LVar1, LVar2)              EVT_CMD(EVT_OP_FBUF_READ2, LVar1, LVar2),
+#define EVT_FBUF_READ2(VAR1, VAR2)              EVT_CMD(EVT_OP_FBUF_READ2, VAR1, VAR2),
 
 /// Consumes the next three f32s from the buffer and stores them in the given variables.
-#define EVT_FBUF_READ3(LVar1, LVar2, LVar3)        EVT_CMD(EVT_OP_FBUF_READ3, LVar1, LVar2, LVar3),
+#define EVT_FBUF_READ3(VAR1, VAR2, VAR3)        EVT_CMD(EVT_OP_FBUF_READ3, VAR1, VAR2, VAR3),
 
 /// Consumes the next four f32s from the buffer and stores them in the given variables.
-#define EVT_FBUF_READ4(LVar1, LVar2, LVar3, LVar4)  EVT_CMD(EVT_OP_FBUF_READ4, LVar1, LVar2, LVar3, LVar4),
+#define EVT_FBUF_READ4(VAR1, VAR2, VAR3, VAR4)  EVT_CMD(EVT_OP_FBUF_READ4, VAR1, VAR2, VAR3, VAR4),
 
 /// Gets the f32 at the given offset of the buffer and stores it in the given variable, without consuming it.
 #define EVT_FBUF_PEEK(OFFSET, VAR)              EVT_CMD(EVT_OP_FBUF_PEEK, OFFSET, VAR),

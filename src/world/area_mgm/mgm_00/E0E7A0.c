@@ -19,6 +19,6 @@ ApiStatus func_80241170_E0F910(Evt* script, s32 isInitialCall) {
         numGames = 1;
     }
 
-    evt_set_variable(script, LocalVar(5), numGames);
+    evt_set_variable(script, LVar5, numGames);
     return ApiStatus_DONE2;
 }

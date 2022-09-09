@@ -4,7 +4,7 @@
 #define NAMESPACE b_area_trd_part_2_trd_05b
 
 EvtScript N(802334F0) = {
-    EVT_SET(LVarA, LocalVar(0))
+    EVT_SET(LVarA, LVar0)
     EVT_LABEL(0)
     EVT_CALL(RotateGroup, LVarA, 2, 0, 0, 1)
     EVT_WAIT(5)
@@ -14,16 +14,16 @@ EvtScript N(802334F0) = {
     EVT_WAIT(5)
     EVT_CALL(RotateGroup, LVarA, 1, 0, 0, 1)
     EVT_WAIT(5)
-    EVT_CALL(RandInt, 30, LocalVar(0))
-    EVT_ADD(LocalVar(0), 30)
-    EVT_WAIT(LocalVar(0))
+    EVT_CALL(RandInt, 30, LVar0)
+    EVT_ADD(LVar0, 30)
+    EVT_WAIT(LVar0)
     EVT_GOTO(0)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(80233608) = {
-    EVT_SET(LVarA, LocalVar(0))
+    EVT_SET(LVarA, LVar0)
     EVT_LOOP(0)
         EVT_CALL(TranslateModel, LVarA, 1, 0, 0)
         EVT_WAIT(2)

@@ -25,10 +25,10 @@ ShakeTreeConfig N(tree2) = {
 Vec4f N(triggerCoord_80241F5C) = { 150.0f, 0.0f, 135.0f, 0.0f };
 
 EvtScript N(80241F6C) = {
-    EVT_SET(LocalVar(0), EVT_PTR(N(tree1)))
+    EVT_SET(LVar0, EVT_PTR(N(tree1)))
     EVT_BIND_TRIGGER(N(shakeTree), TRIGGER_WALL_HAMMER, 14, 1, 0)
     EVT_BIND_TRIGGER(N(shakeTree), TRIGGER_POINT_BOMB, EVT_PTR(N(triggerCoord_80241F28)), 1, 0)
-    EVT_SET(LocalVar(0), EVT_PTR(N(tree2)))
+    EVT_SET(LVar0, EVT_PTR(N(tree2)))
     EVT_BIND_TRIGGER(N(shakeTree), TRIGGER_WALL_HAMMER, 16, 1, 0)
     EVT_BIND_TRIGGER(N(shakeTree), TRIGGER_POINT_BOMB, EVT_PTR(N(triggerCoord_80241F5C)), 1, 0)
     EVT_RETURN

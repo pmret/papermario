@@ -38,7 +38,7 @@ EvtScript N(EVS_Chest_ShowGotItem) = {
     EVT_SET_GROUP(EVT_GROUP_00)
     EVT_CALL(SetTimeFreezeMode, 2)
     EVT_WAIT(40)
-    EVT_CALL(ShowGotItem, LocalVar(0), 0, 0)
+    EVT_CALL(ShowGotItem, LVar0, 0, 0)
     EVT_CALL(SetTimeFreezeMode, 0)
     EVT_RETURN
     EVT_RETURN
@@ -47,17 +47,17 @@ EvtScript N(EVS_Chest_ShowGotItem) = {
 
 EvtScript N(EVS_Chest_GetItem) = {
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_SET(LocalVar(0), LVarA)
+    EVT_SET(LVar0, LVarA)
     EVT_IF_NE(LVarA, 0)
         EVT_EXEC_WAIT(N(EVS_Chest_ShowGotItem))
     EVT_END_IF
     EVT_SWITCH(LVarB)
         EVT_CASE_EQ(0)
-            EVT_CALL(AddItem, LVarA, LocalVar(0))
+            EVT_CALL(AddItem, LVarA, LVar0)
         EVT_CASE_EQ(1)
             EVT_CALL(AddKeyItem, LVarA)
         EVT_CASE_EQ(2)
-            EVT_CALL(AddBadge, LVarA, LocalVar(0))
+            EVT_CALL(AddBadge, LVarA, LVar0)
     EVT_END_SWITCH
     EVT_WAIT(15)
     EVT_CALL(DisablePlayerInput, FALSE)
