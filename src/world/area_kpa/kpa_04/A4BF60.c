@@ -5,7 +5,7 @@ static char* N(exit_str_1) = "kpa_81";
 
 #include "world/common/UnkFunc11.inc.c"
 
-ApiStatus func_802400BC_A4C01C(Evt *script, s32 isInitialCall) {
+ApiStatus func_802400BC_A4C01C(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 dist;
     f32 x;
