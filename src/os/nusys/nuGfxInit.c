@@ -1,9 +1,56 @@
 #include "common.h"
 #include "nu/nusys.h"
 
-extern u16* FrameBuf[3];
-extern UNK_PTR nugfx_ucode;
-extern Gfx rdpstateinit_dl[];
+extern u64 gspF3DEX2kawase_fifo_text_bin[];
+extern u64 gspF3DEX2kawase_fifo_data_bin[];
+
+NUUcode nugfx_ucode = {
+    gspF3DEX2kawase_fifo_text_bin, gspF3DEX2kawase_fifo_data_bin,
+};
+
+u16* FrameBuf[3] = {
+    &D_8038F800, &D_803B5000, &heap_battleHead
+};
+
+Gfx rdpstateinit_dl[] = {
+    gsDPSetEnvColor(0, 0, 0, 0),
+    gsDPSetPrimColor(0, 0, 0, 0, 0, 0),
+    gsDPSetBlendColor(0, 0, 0, 0),
+    gsDPSetFogColor(0, 0, 0, 0),
+    gsDPSetFillColor(0x00000000),
+    gsDPSetPrimDepth(0, 0),
+    gsDPSetConvert(0, 0, 0, 0, 0, 0),
+    gsDPSetKeyR(0, 0, 0),
+    gsDPSetKeyGB(0, 0, 0, 0, 0, 0),
+    gsDPSetCombineMode(G_CC_SHADE, G_CC_SHADE),
+    gsDPSetScissor(G_SC_NON_INTERLACE, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT),
+    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0x0000, G_TX_RENDERTILE, 0,
+                G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD),
+    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0x0000, 1, 0,
+                G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD),
+    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0x0000, 2, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD),
+    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0x0000, 3, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD),
+    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0x0000, 4, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD),
+    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0x0000, 5, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD),
+    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0x0000, 6, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD),
+    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0x0000, G_TX_LOADTILE, 0,
+                G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD),
+    gsDPSetTileSize(G_TX_RENDERTILE, 0, 0, 0, 0),
+    gsDPSetTileSize(1, 0, 0, 0, 0),
+    gsDPSetTileSize(2, 0, 0, 0, 0),
+    gsDPSetTileSize(3, 0, 0, 0, 0),
+    gsDPSetTileSize(4, 0, 0, 0, 0),
+    gsDPSetTileSize(5, 0, 0, 0, 0),
+    gsDPSetTileSize(6, 0, 0, 0, 0),
+    gsDPSetTileSize(G_TX_LOADTILE, 0, 0, 0, 0),
+    gsDPPipeSync(),
+    gsSPEndDisplayList(),
+};
 
 void nuGfxInitEX2(void) {
     Gfx gfx[0x100];

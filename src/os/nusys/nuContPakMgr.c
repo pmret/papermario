@@ -1,6 +1,30 @@
 #include "common.h"
 #include "nu/nusys.h"
 
+s32 contPakOpen(NUSiCommonMesg* mesg);
+s32 contPakFree(NUSiCommonMesg* mesg);
+s32 contPakFileReadWrite(NUSiCommonMesg* mesg);
+s32 contPakFileOpen(NUSiCommonMesg* mesg);
+s32 contPakFileDelete(NUSiCommonMesg* mesg);
+s32 contPakFileState(NUSiCommonMesg* mesg);
+s32 contPakFileNum(NUSiCommonMesg* mesg);
+s32 contPakRepairId(NUSiCommonMesg* mesg);
+
+u16 nuContPakCompanyCode = 0;
+u32 nuContPakGameCode = 0;
+
+s32 (*D_80093CA8[])(NUSiCommonMesg*) = {
+    NULL, contPakOpen, contPakFree, contPakFileOpen, contPakFileReadWrite, contPakFileDelete, contPakFileState,
+    contPakFileNum, contPakRepairId, NULL
+};
+
+NUCallBackList nuContPakCallBack = {
+    NULL,
+    D_80093CA8,
+    0x200,
+    0
+};
+
 void nuContPakMgrInit(void) {
     nuSiCallBackAdd(&nuContPakCallBack);
 }
