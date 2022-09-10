@@ -323,7 +323,7 @@ typedef struct Enemy {
     /* 0xB4 */ s8 aiPaused;
     /* 0xB5 */ s8 unk_B5;
     /* 0xB6 */ char unk_B6[2];
-    /* 0xB8 */ EvtScript* rot; // some bytecode
+    /* 0xB8 */ EvtScript* unk_B8; // some bytecode
     /* 0xBC */ struct Evt* unk_BC; // some script
     /* 0xC0 */ s32 unk_C0; // some script ID
     /* 0xC4 */ s32 unk_C4;

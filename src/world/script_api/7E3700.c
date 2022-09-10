@@ -140,7 +140,7 @@ ApiStatus func_80282E30(Evt* script, s32 isInitialCall) {
     zThing = zThing - z;
     if (xThing < 0) {
         do {
-        xThing -= 25;
+            xThing -= 25;
         } while (0);
     }
     if (zThing < 0) {
@@ -184,7 +184,7 @@ ApiStatus func_80282E30(Evt* script, s32 isInitialCall) {
     cellZ = entityZ + var_a0_2;
     if (var_a1 == 0 && var_a0_2 == 0) {
         do {
-        script->varTable[9] = 2;
+            script->varTable[9] = 2;
         } while (0);
         return ApiStatus_DONE2;
     }

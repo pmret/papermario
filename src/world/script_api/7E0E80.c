@@ -395,7 +395,7 @@ void shop_open_item_select_popup(s32 mode) {
                 break;
         }
 
-        if (itemID != 0) {
+        if (itemID != ITEM_NONE) {
             menu->ptrIcon[numEntries] = gItemHudScripts[gItemTable[itemID].hudElemID].enabled;
             menu->userIndex[numEntries] = i;
             menu->enabled[numEntries] = TRUE;

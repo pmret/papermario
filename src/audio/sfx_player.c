@@ -390,7 +390,7 @@ void au_sfx_init(SoundManager* manager, u8 priority, u8 reverbType, AuGlobals* g
     }
 
     manager->unk_5C = 0x8000;
-    manager->rot = 0x8000;
+    manager->unk_B8 = 0x8000;
     manager->playCounter = 0;
     manager->randomValue = 0;
 
@@ -909,7 +909,7 @@ static void au_sfx_update_mode_0(SoundManager* manager, SoundPlayer* player, AlU
 static s16 au_sfx_get_scaled_volume(SoundManager* manager, SoundPlayer* player) {
     s32 outVolume;
 
-    outVolume = (manager->rot * player->sfxVolume) >> 0xF;
+    outVolume = (manager->unk_B8 * player->sfxVolume) >> 0xF;
     if (!(player->sfxParamsFlags & SFX_PARAM_FLAG_VOLUME) && (player->masterVolume != 0)) {
         outVolume = (outVolume * player->masterVolume) >> 0xF;
     }
@@ -1085,7 +1085,7 @@ static void au_sfx_update_mode_1(SoundManager* manager, SoundPlayer* player, AlU
 }
 
 static void snd_set_voice_volume(AlUnkVoice* voice, SoundManager* manager, SoundPlayer* player) {
-    s32 x = ((((manager->rot
+    s32 x = ((((manager->unk_B8
         * player->sfxVolume) >> 0xF)
         * player->playVelocity) >> 7)
         * (player->volumeLerp.current >> 0x10) >> 0xF;

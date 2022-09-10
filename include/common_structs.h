@@ -228,7 +228,7 @@ typedef struct Npc {
     /* 0x0B5 */ s8 palSwapPrevType;
     /* 0x0B6 */ s8 dirtyPalettes;
     /* 0x0B7 */ s8 palSwapState;
-    /* 0x0B8 */ char rot[4];
+    /* 0x0B8 */ char unk_B8[4];
     /* 0x0BC */ s16 palSwapTimer;
     /* 0x0BE */ s16 palSwapLerpAlpha;
     /* 0x0C0 */ s8 unk_C0;
