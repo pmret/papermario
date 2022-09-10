@@ -35,8 +35,8 @@ ApiStatus func_802403DC_C5AB1C(Evt* script, s32 isInitialCall) {
     if ((collisionStatus->currentFloor == temp_s1) || ((collisionStatus->lastTouchedFloor == temp_s1)) || (collisionStatus->currentFloor == temp_s0_3) || (collisionStatus->lastTouchedFloor == temp_s0_3)) {
         playerStatus->extraVelocity.x = temp_s2;
     }
-    if (gPlayerData.currentPartner != 0){
-        partner = get_npc_unsafe(-4);
+    if (gPlayerData.currentPartner != PARTNER_NONE){
+        partner = get_npc_unsafe(NPC_PARTNER);
         if ((partner->currentFloor == temp_s1) || (partner->currentFloor == temp_s0_3)) {
             partner->pos.x += temp_s2;
         }
