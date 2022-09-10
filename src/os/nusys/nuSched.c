@@ -7,9 +7,7 @@ s32 D_80093B84[] = {
     0x4E755379, 0x7374656D, 0x322E3035, 0x00000000
 };
 
-s32 D_80093B94[] = {
-    D_80093B84, 0x00000000, 0x00000000
-};
+s32* D_80093B94 = D_80093B84;
 
 void nuScEventHandler(void);
 void nuScExecuteAudio(void);

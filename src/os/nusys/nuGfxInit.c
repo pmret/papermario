@@ -9,7 +9,7 @@ NUUcode nugfx_ucode = {
 };
 
 u16* FrameBuf[3] = {
-    &D_8038F800, &D_803B5000, &heap_battleHead
+    D_8038F800, D_803B5000, &heap_battleHead
 };
 
 Gfx rdpstateinit_dl[] = {
