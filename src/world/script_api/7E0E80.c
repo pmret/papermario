@@ -1,6 +1,7 @@
 #include "common.h"
 #include "hud_element.h"
 #include "model.h"
+#include "pause/pause_common.h"
 
 extern u8 MessagePlural[];
 extern u8 MessageSingular[];
@@ -355,16 +356,14 @@ ApiStatus ShowShopPurchaseDialog(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-//dumb stuff
+// almost
 #ifdef NON_EQUIVALENT
-
 void shop_open_item_select_popup(s32 mode) {
-    Shop* shop = gGameStatusPtr->mapShop;
-    PopupMenu* menu = &shop->itemSelectMenu;
+    PopupMenu* menu = &gGameStatusPtr->mapShop->itemSelectMenu;
     s32 numItemSlots;
     s32 popupType;
-    s32 i;
     s32 numEntries;
+    s32 i;
 
     switch (mode) {
         case 0:
@@ -372,13 +371,12 @@ void shop_open_item_select_popup(s32 mode) {
             numItemSlots = 10;
             break;
         case 1:
-            popupType = 7;
             popupType = 6;
             numItemSlots = 10;
             break;
         default:
             popupType = 7;
-            numItemSlots = 20;
+            numItemSlots = 32;
             break;
     }
 
@@ -387,19 +385,23 @@ void shop_open_item_select_popup(s32 mode) {
     for (i = 0; i < numItemSlots; i++) {
         s32 itemID;
 
-        if (mode >= 0 && mode < 2) {
-            itemID = gPlayerData.invItems[i];
-        } else {
-            itemID = gPlayerData.storedItems[i];
+        switch (mode) {
+            case 0:
+            case 1:
+                itemID = gPlayerData.invItems[i];
+                break;
+            default:
+                itemID = gPlayerData.storedItems[i];
+                break;
         }
 
         if (itemID != 0) {
-            menu->ptrIcon[i] = gItemHudScripts[gItemTable[itemID].iconID][0];
-            menu->userIndex[i] = i;
-            menu->enabled[i] = TRUE;
-            menu->nameMsg[i] = gItemTable[itemID].nameMsg;
-            menu->descMsg[i] = gItemTable[itemID].itemMsg;
-            menu->value[i] = shop_get_sell_price(itemID);
+            menu->ptrIcon[numEntries] = gItemHudScripts[gItemTable[itemID].hudElemID].enabled;
+            menu->userIndex[numEntries] = i;
+            menu->enabled[numEntries] = TRUE;
+            menu->nameMsg[numEntries] = gItemTable[itemID].nameMsg;
+            menu->descMsg[numEntries] = gItemTable[itemID].shortDescMsg;
+            menu->value[numEntries] = shop_get_sell_price(itemID);
             numEntries++;
         }
     }

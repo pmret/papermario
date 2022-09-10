@@ -11942,7 +11942,14 @@ segments:
     vram: 0x802B7000
     subsegments:
     - [0xE20EB0, c, e20eb0]
-    - [0xE215C0, data]
+    - start: 0xE215C0
+      type: .data
+      name: e20eb0
+      subsegments:
+      - [0xE215C0, ci4, speech_bubble, 32, 32]
+      - [0xE217C0, palette, speech_bubble]
+      - [0xE217E0, gfx, speech_bubble_dlist]
+      - [0xE21858]
     - [0xE21860]
   - type: code
     overlay: True
