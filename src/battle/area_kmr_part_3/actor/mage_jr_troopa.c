@@ -145,7 +145,7 @@ EvtScript N(8022A750) = {
             EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
             EVT_ADD(LW(1), 30)
             EVT_CALL(ShowEmote, 0, EMOTE_QUESTION, -45, 30, 2, LW(0), LW(1), LW(2), 5)
-            EVT_WAIT_FRAMES(30)
+            EVT_WAIT(30)
         EVT_END_IF
     EVT_END_IF
     EVT_RETURN
@@ -166,12 +166,12 @@ EvtScript N(8022A880) = {
     EVT_THREAD
         EVT_SET(LW(0), 0)
         EVT_LOOP(32)
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
             EVT_ADD(LW(0), 45)
             EVT_CALL(SetActorRotation, ACTOR_SELF, 0, LW(0), 0)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_WAIT_FRAMES(32)
+    EVT_WAIT(32)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x300)
     EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
     EVT_ADD(LW(1), 15)
@@ -234,7 +234,7 @@ EvtScript N(init_8022ACE4) = {
 
 EvtScript N(idle_8022ADA4) = {
     EVT_LABEL(0)
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_GOTO(0)
     EVT_RETURN
     EVT_END
@@ -262,7 +262,7 @@ EvtScript N(handleEvent_8022ADD8) = {
             EVT_SET_CONST(LW(0), 0x00000001)
             EVT_SET_CONST(LW(1), NPC_ANIM_mage_jr_troopa_default_hurt)
             EVT_EXEC_WAIT(DoNormalHit)
-            EVT_WAIT_FRAMES(10)
+            EVT_WAIT(10)
             EVT_SET_CONST(LW(0), 0x00000001)
             EVT_SET_CONST(LW(1), NPC_ANIM_mage_jr_troopa_default_still)
             EVT_EXEC_WAIT(N(8022BF1C))
@@ -277,7 +277,7 @@ EvtScript N(handleEvent_8022ADD8) = {
             EVT_SET(LW(1), 2359306)
             EVT_SET(LW(2), 2359307)
             EVT_EXEC_WAIT(DoBurnHit)
-            EVT_WAIT_FRAMES(10)
+            EVT_WAIT(10)
             EVT_SET_CONST(LW(0), 0x00000001)
             EVT_SET_CONST(LW(1), NPC_ANIM_mage_jr_troopa_default_burn_dead)
             EVT_EXEC_WAIT(N(8022BF1C))
@@ -331,13 +331,13 @@ EvtScript N(handleEvent_8022ADD8) = {
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LW(0))
             EVT_IF_NOT_FLAG(LW(0), 0x35D000)
                 EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_mage_jr_troopa_default_hanging)
-                EVT_WAIT_FRAMES(1000)
+                EVT_WAIT(1000)
             EVT_END_IF
         EVT_CASE_EQ(31)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LW(0))
             EVT_IF_NOT_FLAG(LW(0), 0x35D000)
                 EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_mage_jr_troopa_default_hanging)
-                EVT_WAIT_FRAMES(20)
+                EVT_WAIT(20)
                 EVT_EXEC_WAIT(N(8022ABA8))
                 EVT_CALL(ActorSpeak, 1900955, -127, 1, 2359310, 2359299)
                 EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_mage_jr_troopa_default_idle)
@@ -345,7 +345,7 @@ EvtScript N(handleEvent_8022ADD8) = {
             EVT_END_IF
         EVT_CASE_EQ(42)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_mage_jr_troopa_default_hurt)
-            EVT_WAIT_FRAMES(20)
+            EVT_WAIT(20)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_mage_jr_troopa_default_run)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
@@ -374,7 +374,7 @@ EvtScript N(takeTurn_8022B4F0) = {
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_mage_jr_troopa_default_attack)
-    EVT_WAIT_FRAMES(8)
+    EVT_WAIT(8)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_SPELL_CAST1)
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LW(0))
     EVT_IF_NOT_FLAG(LW(0), 0x80000)
@@ -390,7 +390,7 @@ EvtScript N(takeTurn_8022B4F0) = {
     EVT_ADD(LW(0), LW(3))
     EVT_ADD(LW(1), LW(4))
     EVT_CALL(PlayEffect, 0x13, 0, LW(0), LW(1), LW(2), LW(5), 30, 0, 0, 0, 0, 0, 0, 0)
-    EVT_WAIT_FRAMES(30)
+    EVT_WAIT(30)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_mage_jr_troopa_default_attack2)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LW(10), DAMAGE_TYPE_NO_CONTACT, 0, 1, 16)
@@ -415,7 +415,7 @@ EvtScript N(takeTurn_8022B4F0) = {
             EVT_ADD(LW(0), LW(6))
             EVT_ADD(LW(1), LW(7))
             EVT_CALL(PlayEffect, 0x12, 0, LW(0), LW(1), LW(2), LW(3), LW(4), LW(5), 30, 0, 0, 0, 0, 0)
-            EVT_WAIT_FRAMES(35)
+            EVT_WAIT(35)
             EVT_IF_EQ(LW(10), 5)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LW(0), DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
@@ -441,7 +441,7 @@ EvtScript N(takeTurn_8022B4F0) = {
     EVT_ADD(LW(0), LW(6))
     EVT_ADD(LW(1), LW(7))
     EVT_CALL(PlayEffect, 0x12, 0, LW(0), LW(1), LW(2), LW(3), LW(4), LW(5), 15, 0, 0, 0, 0, 0)
-    EVT_WAIT_FRAMES(15)
+    EVT_WAIT(15)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LW(0), (DAMAGE_TYPE_MAGIC | DAMAGE_TYPE_NO_CONTACT), 0, 0, 8, 32)
     EVT_SWITCH(LW(0))
         EVT_CASE_EQ(0)
@@ -473,15 +473,15 @@ EvtScript N(nextTurn_8022BB44) = {
                     EVT_CALL(GetActorVar, -127, 3, LW(0))
                     EVT_IF_EQ(LW(0), 0)
                         EVT_EXEC_WAIT(N(8022ABA8))
-                        EVT_WAIT_FRAMES(20)
+                        EVT_WAIT(20)
                     EVT_END_IF
                     EVT_CALL(ActorSpeak, 1179869, -127, 1, 2359310, 2359299)
                     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_mage_jr_troopa_default_idle)
                     EVT_EXEC_WAIT(N(8022AC40))
-                    EVT_WAIT_FRAMES(20)
+                    EVT_WAIT(20)
                 EVT_END_IF
             EVT_ELSE
-                EVT_WAIT_FRAMES(20)
+                EVT_WAIT(20)
             EVT_END_IF
             EVT_CALL(SetActorVar, -127, 3, 0)
             EVT_RETURN
@@ -490,29 +490,29 @@ EvtScript N(nextTurn_8022BB44) = {
             EVT_IF_EQ(LW(0), 1)
                 EVT_CALL(SetActorVar, -127, 1, 2)
                 EVT_EXEC_WAIT(N(8022ABA8))
-                EVT_WAIT_FRAMES(20)
+                EVT_WAIT(20)
                 EVT_CALL(ActorSpeak, 1179870, -127, 1, 2359310, 2359299)
                 EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_mage_jr_troopa_default_idle)
                 EVT_EXEC_WAIT(N(8022AC40))
-                EVT_WAIT_FRAMES(10)
+                EVT_WAIT(10)
             EVT_END_IF
             EVT_RETURN
         EVT_CASE_EQ(10)
             EVT_CALL(GetActorVar, -127, 0, LW(0))
             EVT_IF_EQ(LW(0), 0)
                 EVT_CALL(SetActorVar, -127, 0, 1)
-                EVT_WAIT_FRAMES(15)
+                EVT_WAIT(15)
                 EVT_EXEC_WAIT(N(8022ABA8))
-                EVT_WAIT_FRAMES(10)
+                EVT_WAIT(10)
                 EVT_CALL(ActorSpeak, 1179867, -127, 2, 2162714, 2162715)
-                EVT_WAIT_FRAMES(8)
+                EVT_WAIT(8)
                 EVT_EXEC_WAIT(N(8022A880))
                 EVT_CALL(SetPartFlagBits, -127, 2, 1, 1)
                 EVT_CALL(SetPartFlagBits, -127, 1, 1, 0)
-                EVT_WAIT_FRAMES(15)
+                EVT_WAIT(15)
                 EVT_CALL(ActorSpeak, 1179868, -127, 1, 2359310, 2359299)
                 EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_mage_jr_troopa_default_idle)
-                EVT_WAIT_FRAMES(10)
+                EVT_WAIT(10)
                 EVT_EXEC_WAIT(N(8022AC40))
             EVT_END_IF
     EVT_END_SWITCH
@@ -542,7 +542,7 @@ EvtScript N(8022BF1C) = {
             EVT_LOOP(24)
                 EVT_CALL(SetActorYaw, ACTOR_SELF, LW(2))
                 EVT_ADD(LW(2), 30)
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
             EVT_END_LOOP
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
     EVT_END_SWITCH
@@ -553,7 +553,7 @@ EvtScript N(8022BF1C) = {
         EVT_ADD(LW(2), 10)
         EVT_LOOP(3)
             EVT_CALL(PlayEffect, 0x1, LW(0), LW(1), LW(2), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-            EVT_WAIT_FRAMES(3)
+            EVT_WAIT(3)
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_CALL(SetPartFlagBits, -127, 1, 1, 1)
@@ -562,7 +562,7 @@ EvtScript N(8022BF1C) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
     EVT_SUB(LW(0), 5)
     EVT_CALL(SetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
-    EVT_WAIT_FRAMES(15)
+    EVT_WAIT(15)
     EVT_CALL(PlaySound, SOUND_DEATH)
     EVT_CALL(DropStarPoints, -127)
     EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
@@ -574,7 +574,7 @@ EvtScript N(8022BF1C) = {
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20E5)
     EVT_CALL(SetAnimation, ACTOR_SELF, 2, NPC_ANIM_jr_troopa_default_dead)
     EVT_CALL(SetIdleAnimations, ACTOR_SELF, 2, EVT_ADDR(N(idleAnimations_8022A61C)))
-    EVT_WAIT_FRAMES(60)
+    EVT_WAIT(60)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_DMG_APPLY, 1)
     EVT_RETURN
     EVT_END
@@ -583,7 +583,7 @@ EvtScript N(8022BF1C) = {
 EvtScript N(8022C2A4) = {
     EVT_CALL(GetActorVar, -127, 3, LW(0))
     EVT_IF_EQ(LW(0), 1)
-        EVT_WAIT_FRAMES(10)
+        EVT_WAIT(10)
         EVT_EXEC_WAIT(N(8022ABA8))
         EVT_CALL(ActorSpeak, 1900954, -127, 1, 2359310, 2359299)
         EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_mage_jr_troopa_default_idle)

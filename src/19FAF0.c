@@ -112,9 +112,9 @@ EvtScript DoStopHit = {
 
 EvtScript DoFreezeHit = {
     EVT_CALL(func_8027143C)
-    EVT_WAIT_FRAMES(8)
+    EVT_WAIT(8)
     EVT_CALL(func_8027143C)
-    EVT_WAIT_FRAMES(15)
+    EVT_WAIT(15)
     EVT_CALL(func_80271484)
     EVT_RETURN
     EVT_END

@@ -10,7 +10,7 @@ EntryList N(entryList) = {
     { 0.0f, 0.0f, 475.0f, 0.0f },
 };
 
-MapConfig N(config) = {
+MapSettings N(settings) = {
     .main = &N(main),
     .entryList = &N(entryList),
     .entryCount = ENTRY_COUNT(N(entryList)),
@@ -30,9 +30,9 @@ EvtScript N(80240198) = {
 };
 
 EvtScript N(main) = {
-    EVT_SET(EVT_SAVE_VAR(425), 10)
+    EVT_SET(GB_WorldLocation, 10)
     EVT_CALL(SetSpriteShading, -1)
-    EVT_IF_EQ(EVT_SAVE_VAR(0), -63)
+    EVT_IF_EQ(GB_StoryProgress, -63)
         EVT_CALL(DisablePulseStone, 0)
     EVT_END_IF
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)

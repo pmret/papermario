@@ -13,9 +13,9 @@ EvtScript N(80240140) = {
     EVT_SET(EVT_VAR(4), 1)
     EVT_SET(EVT_VAR(3), 1)
     EVT_EXEC(0x80285DFC)
-    EVT_WAIT_FRAMES(17)
+    EVT_WAIT(17)
     EVT_CALL(GotoMap, EVT_PTR("arn_10"), 0)
-    EVT_WAIT_FRAMES(100)
+    EVT_WAIT(100)
     EVT_RETURN
     EVT_END
 };
@@ -43,7 +43,7 @@ EvtScript N(80240220) = {
 };
 
 EvtScript N(main) = {
-    EVT_SET(EVT_SAVE_VAR(425), 35)
+    EVT_SET(GB_WorldLocation, 35)
     EVT_CALL(SetSpriteShading, 524288)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
     EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
@@ -70,11 +70,11 @@ EvtScript N(802403A0) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(SetPlayerActionState, 6)
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_CALL(SetPlayerJumpscale, EVT_FIXED(1.0))
     EVT_CALL(PlayerJump, 0, 200, 0, 30)
     EVT_CALL(GotoMap, EVT_PTR("arn_08"), 1)
-    EVT_WAIT_FRAMES(100)
+    EVT_WAIT(100)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_CALL(DisablePlayerPhysics, FALSE)
     EVT_RETURN
@@ -145,13 +145,13 @@ EvtScript N(idle_802405FC) = {
     EVT_CALL(PlaySoundAtNpc, NPC_SELF, 0x20C8, 0)
     EVT_CALL(NpcJump0, NPC_SELF, 0, 200, 0, 15)
     EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
-    EVT_SET(EVT_SAVE_VAR(0), -18)
+    EVT_SET(GB_StoryProgress, -18)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(init_80240730) = {
-    EVT_IF_NE(EVT_SAVE_VAR(0), -19)
+    EVT_IF_NE(GB_StoryProgress, -19)
         EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_ELSE
         EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_802405FC)))
@@ -167,10 +167,12 @@ StaticNpc N(npcGroup_80240784) = {
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
     .init = &N(init_80240730),
     .yaw = 270,
-    .dropFlags = NPC_DROP_FLAGS_80,
-    .heartDrops = NO_DROPS,
-    .flowerDrops = NO_DROPS,
-    .animations = {
+    .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+        .heartDrops = NO_DROPS,
+        .flowerDrops = NO_DROPS,
+    },
+	.animations = {
         NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
         NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
         NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
@@ -191,7 +193,7 @@ StaticNpc N(npcGroup_80240784) = {
 };
 
 NpcGroupList N(npcGroupList_80240974) = {
-    NPC_GROUP(N(npcGroup_80240784), BATTLE_ID(0, 0, 0, 0)),
+    NPC_GROUP(N(npcGroup_80240784)),
     {},
 };
 

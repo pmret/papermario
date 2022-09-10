@@ -9,6 +9,26 @@ typedef union ModelNodePropertyData {
     s32* p;
 } ModelNodePropertyData;
 
+// In memory this is a list of ModelNodeProperty, but due to the way it uses
+// the fields (storing into the "type" field) we decided to make a struct for this
+typedef struct ModelBoundingBox {
+    /* 0x00 */ s32 key; // MODEL_PROP_KEY_BOUNDING_BOX
+    /* 0x04 */ s32 halfSizeX;
+    /* 0x08 */ f32 minX;
+    /* 0x0C */ char unk_0C[0x04];
+    /* 0x10 */ s32 halfSizeY;
+    /* 0x14 */ f32 minY;
+    /* 0x18 */ char unk_18[0x04];
+    /* 0x1C */ s32 halfSizeZ;
+    /* 0x20 */ f32 minZ;
+    /* 0x24 */ char unk_24[0x8];
+    /* 0x2C */ f32 maxX;
+    /* 0x30 */ char unk_30[0x8];
+    /* 0x38 */ f32 maxY;
+    /* 0x3C */ char unk_3C[0x8];
+    /* 0x44 */ f32 maxZ;
+} ModelBoundingBox; // size = 0x48?
+
 typedef struct ModelNodeProperty {
     /* 0x0 */ s32 key;
     /* 0x4 */ s32 dataType;
@@ -26,12 +46,12 @@ typedef struct ModelNode {
 typedef struct Model {
     /* 0x00 */ u16 flags;
     /* 0x02 */ u16 modelID;
-    /* 0x04 */ Matrix4s* currentMatrix;
+    /* 0x04 */ Mtx* currentMatrix;
     /* 0x08 */ ModelNode* modelNode;
     /* 0x0C */ ModelGroupData* groupData;
     /* 0x10 */ s32* currentSpecialMatrix;
     /* 0x14 */ char unk_14[4];
-    /* 0x18 */ Matrix4s specialMatrix;
+    /* 0x18 */ Mtx specialMatrix;
     /* 0x58 */ Matrix4f transformMatrix;
     /* 0x98 */ Vec3f center;
     /* 0xA4 */ u8 texPannerID;
@@ -92,33 +112,13 @@ typedef struct ModelBlueprint {
     /* 0x2 */ char unk_02[0x2];
     /* 0x4 */ ModelNode* mdlNode;
     /* 0x8 */ ModelGroupData* groupData;
-    /* 0xC */ Matrix4s* mtx;
+    /* 0xC */ Mtx* mtx;
 } ModelBlueprint; // size = 0x10
 
 typedef void(*ModelCustomGfxBuilderFunc)(s32 index);
 
 typedef Gfx* ModelCustomGfxList[32];
 typedef ModelCustomGfxBuilderFunc ModelCustomGfxBuilderList[32];
-
-// In memory this is a list of ModelNodeProperty, but due to the way it uses
-// the fields (storing into the "type" field) we decided to make a struct for this
-typedef struct ModelBoundingBox {
-    /* 0x00 */ s32 key; // MODEL_PROP_KEY_BOUNDING_BOX
-    /* 0x04 */ s32 halfSizeX;
-    /* 0x08 */ f32 minX;
-    /* 0x0C */ char unk_0C[0x04];
-    /* 0x10 */ s32 halfSizeY;
-    /* 0x14 */ f32 minY;
-    /* 0x18 */ char unk_18[0x04];
-    /* 0x1C */ s32 halfSizeZ;
-    /* 0x20 */ f32 minZ;
-    /* 0x24 */ char unk_24[0x8];
-    /* 0x2C */ f32 maxX;
-    /* 0x30 */ char unk_30[0x8];
-    /* 0x38 */ f32 maxY;
-    /* 0x3C */ char unk_3C[0x8];
-    /* 0x44 */ f32 maxZ;
-} ModelBoundingBox; // size = 0x48?
 
 typedef enum ModelPropertyKeys {
     MODEL_PROP_KEY_RENDER_MODE = 0x5C,

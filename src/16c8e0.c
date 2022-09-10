@@ -39,7 +39,7 @@ EvtScript BtlPutPartnerAway = {
         EVT_LOOP(10)
             EVT_CALL(SetActorScale, 256, EVT_VAR(0), EVT_VAR(0), EVT_FIXED(1.0))
             EVT_SUBF(EVT_VAR(0), EVT_FIXED(0.1))
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_CHILD_THREAD
     EVT_CALL(EnablePartnerBlur)
@@ -60,7 +60,7 @@ EvtScript BtlBringPartnerOut = {
         EVT_LOOP(20)
             EVT_CALL(SetActorScale, 256, EVT_VAR(0), EVT_VAR(0), EVT_FIXED(1.0))
             EVT_ADDF(EVT_VAR(0), EVT_FIXED(0.05))
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
         EVT_END_LOOP
         EVT_CALL(SetActorScale, 256, EVT_FIXED(1.0), EVT_FIXED(1.0), EVT_FIXED(1.0))
     EVT_END_CHILD_THREAD
@@ -904,8 +904,8 @@ void btl_update_starpoints_display(void) {
             }
 
            for (; i < ARRAY_COUNT(D_8029EFC0); i++) {
-                hud_element_set_flags(D_8029EFC0[i], 2);
-                hud_element_set_flags(D_8029EFE8[i], 2);
+                hud_element_set_flags(D_8029EFC0[i], HUD_ELEMENT_FLAGS_FILTER_TEX);
+                hud_element_set_flags(D_8029EFE8[i], HUD_ELEMENT_FLAGS_FILTER_TEX);
             }
 
             posX = D_8029DA40;
@@ -929,7 +929,7 @@ void btl_update_starpoints_display(void) {
             }
 
             for (; i < ARRAY_COUNT(D_8029F010); i++) {
-                hud_element_set_flags(D_8029F010[i], 2);
+                hud_element_set_flags(D_8029F010[i], HUD_ELEMENT_FLAGS_FILTER_TEX);
             }
         }
     }

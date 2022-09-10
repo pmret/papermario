@@ -192,7 +192,7 @@ void start_battle(Evt* script, s32 songID) {
     enemy->encountered = TRUE;
     currentEncounter->currentEnemy = enemy;
     currentEncounter->currentEncounter = currentEncounter->encounterList[enemy->encounterIndex];
-    currentEncounter->eFirstStrike = 0;
+    currentEncounter->firstStrikeType = FIRST_STRIKE_NONE;
     currentEncounter->allowFleeing = 0;
     currentEncounter->songID = songID;
     currentEncounter->unk_18 = -1;
@@ -260,7 +260,7 @@ ApiStatus StartBossBattle(Evt* script, s32 isInitialCall) {
     enemy->encountered = TRUE;
     currentEncounter->currentEnemy = enemy;
     currentEncounter->currentEncounter = currentEncounter->encounterList[enemy->encounterIndex];
-    currentEncounter->eFirstStrike = FIRST_STRIKE_NONE;
+    currentEncounter->firstStrikeType = FIRST_STRIKE_NONE;
     currentEncounter->allowFleeing = TRUE;
     currentEncounter->songID = songID;
     currentEncounter->unk_18 = -1;
@@ -797,7 +797,7 @@ ApiStatus func_80045838(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus func_800458CC(Evt* script, s32 isInitialCall) {
-    evt_set_variable(script, *script->ptrReadPos, script->owner1.enemy->npcSettings->unk_2A & AI_ACTION_08);
+    evt_set_variable(script, *script->ptrReadPos, script->owner1.enemy->npcSettings->actionFlags & AI_ACTION_08);
     return ApiStatus_DONE2;
 }
 

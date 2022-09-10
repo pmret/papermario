@@ -6,7 +6,7 @@ EntryList N(entryList) = {
     {  231.0f, 0.0f, 5.0f, 270.0f },
 };
 
-MapConfig N(config) = {
+MapSettings N(settings) = {
     .main = &N(main),
     .entryList = &N(entryList),
     .entryCount = ENTRY_COUNT(N(entryList)),
@@ -14,7 +14,7 @@ MapConfig N(config) = {
 };
 
 EvtScript N(80240060) = {
-    EVT_SWITCH(EVT_SAVE_VAR(0))
+    EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(-22)
             EVT_CALL(SetMusicTrack, 0, SONG_TUBBA_ESCAPE, 0, 8)
         EVT_CASE_LT(-16)

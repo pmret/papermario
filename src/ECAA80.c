@@ -10,7 +10,7 @@
 extern s32 N(ItemChoiceList)[];
 extern s32 N(FlowerGuard_ItemChoiceList)[91];
 
-void ECAA80_UnkFloAI_Chase(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory);
+void ECAA80_UnkFloAI_Chase(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory);
 
 #include "world/common/enemy/UnkFloAI.inc.c"
 

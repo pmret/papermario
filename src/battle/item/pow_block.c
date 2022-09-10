@@ -50,7 +50,7 @@ ApiStatus N(func_802A1318_718B68)(Evt* script, s32 isInitialCall) {
 EvtScript N(main) = {
     EVT_SET_CONST(EVT_VAR(10), 0x00000090)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
-    EVT_WAIT_FRAMES(10)
+    EVT_WAIT(10)
     EVT_CALL(MakeEntity, EVT_PTR(Entity_PowBlock), -40, 60, 0, 0, MAKE_ENTITY_END)
     EVT_SET(EVT_VAR(10), EVT_VAR(0))
     EVT_CALL(N(func_802A1318_718B68))
@@ -59,11 +59,11 @@ EvtScript N(main) = {
     EVT_CALL(PlayEffect, 0x7, 2, -40, 60, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0)
     EVT_CALL(PlayEffect, 0x7, 2, -40, 55, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10002)
-    EVT_WAIT_FRAMES(20)
+    EVT_WAIT(20)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_THREAD
-        EVT_WAIT_FRAMES(15)
+        EVT_WAIT(15)
         EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HIT_BLOCK)
         EVT_CALL(N(func_802A123C_718A8C))
         EVT_CALL(PlayEffect, 0x7, 2, -40, 60, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0)
@@ -89,7 +89,7 @@ EvtScript N(main) = {
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_RUNNING)
     EVT_CALL(SetGoalPos, ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_CALL(PlayerRunToGoal, 0)
-    EVT_WAIT_FRAMES(5)
+    EVT_WAIT(5)
     EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_MIDAIR_STILL, ANIM_MIDAIR, ANIM_10009)
     EVT_CALL(SetActorJumpGravity, ACTOR_PLAYER, EVT_FIXED(0.6))
     EVT_CALL(SetGoalPos, ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
@@ -118,7 +118,7 @@ EvtScript N(main) = {
     EVT_CALL(PlayEffect, 0x7, 2, -70, 60, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0)
     EVT_CALL(PlayEffect, 0x7, 2, -70, 55, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0)
     EVT_CALL(N(func_802A12E4_718B34))
-    EVT_WAIT_FRAMES(30)
+    EVT_WAIT(30)
     EVT_EXEC_WAIT(N(PlayerGoHome))
     EVT_RETURN
     EVT_END

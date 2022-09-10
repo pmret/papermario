@@ -17,7 +17,7 @@ ApiStatus N(RangedAttackAI_Main)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Bytecode* args = script->ptrReadPos;
     Npc* npc = get_npc_unsafe(enemy->npcID);
-    NpcAISettings* settings = (NpcAISettings*) evt_get_variable(script, *args++);
+    MobileAISettings* settings = (MobileAISettings*) evt_get_variable(script, *args++);
     f32 dist;
 
     territory.skipPlayerDetectChance = 0;

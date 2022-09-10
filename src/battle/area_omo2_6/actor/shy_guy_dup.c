@@ -247,7 +247,7 @@ EvtScript N(init) = {
 
 EvtScript N(idle) = {
     EVT_LABEL(0)
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_GOTO(0)
     EVT_RETURN
     EVT_END

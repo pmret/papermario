@@ -257,8 +257,8 @@ void state_step_exit_language_select(void) {
             if (D_800A0930 >= 0) {
                 D_800A0930--;
                 if (D_800A0930 == 0) {
+                    MapSettings* mapSettings;
                     MapConfig* mapConfig;
-                    Map* map;
                     u32 mapShapeSize;
                     void* mapShape;
                     BackgroundHeader* bgHeader;
@@ -267,8 +267,8 @@ void state_step_exit_language_select(void) {
                     nuGfxSetCfb(D_80077980, ARRAY_COUNT(D_80077980));
                     filemenu_cleanup();
                     gOverrideFlags &= ~GLOBAL_OVERRIDES_8;
-                    mapConfig = get_current_map_header();
-                    map = &gAreas[gGameStatusPtr->areaID].maps[gGameStatusPtr->mapID];
+                    mapSettings = get_current_map_settings();
+                    mapConfig = &gAreas[gGameStatusPtr->areaID].maps[gGameStatusPtr->mapID];
                     gGameStatusPtr->isBattle = FALSE;
                     func_8005AF84();
                     func_8002ACDC();
@@ -292,13 +292,13 @@ void state_step_exit_language_select(void) {
                     initialize_collision();
                     restore_map_collision_data();
 
-                    if (map->dmaStart != NULL) {
-                        dma_copy(map->dmaStart, map->dmaEnd, map->dmaDest);
+                    if (mapConfig->dmaStart != NULL) {
+                        dma_copy(mapConfig->dmaStart, mapConfig->dmaEnd, mapConfig->dmaDest);
                     }
 
-                    load_map_bg(map->bgName);
+                    load_map_bg(mapConfig->bgName);
 
-                    bgHeader = mapConfig->background;
+                    bgHeader = mapSettings->background;
                     if (bgHeader != NULL) {
                         read_background_size(bgHeader);
                     } else {
@@ -308,7 +308,7 @@ void state_step_exit_language_select(void) {
                     calculate_model_sizes();
                     npc_reload_all();
                     func_800E98C4();
-                    set_time_freeze_mode(1);
+                    set_time_freeze_mode(TIME_FREEZE_PARTIAL);
                 }
                 set_windows_visible(WINDOW_GROUP_ALL);
                 D_800A0931 = 3;
@@ -341,7 +341,7 @@ void state_step_exit_language_select(void) {
             }
             break;
         case 4:
-            set_time_freeze_mode(0);
+            set_time_freeze_mode(TIME_FREEZE_NORMAL);
             update_player();
             update_npcs();
             update_encounters();
@@ -384,7 +384,7 @@ void state_step_exit_file_select(void) {
             set_windows_visible(WINDOW_GROUP_ALL);
             D_800A0931 = 3;
         case 3:
-            set_time_freeze_mode(0);
+            set_time_freeze_mode(TIME_FREEZE_NORMAL);
             if (temp_s0 == 0) {
                 set_game_mode(GAME_MODE_TITLE_SCREEN);
                 gOverrideFlags &= ~GLOBAL_OVERRIDES_WINDOWS_IN_FRONT_OF_CURTAINS;

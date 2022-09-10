@@ -252,7 +252,7 @@ EvtScript N(idle) = {
         EVT_CALL(UpdateCrystalBitEffect, LW(15))
     EVT_END_CHILD_THREAD
     EVT_LOOP(0)
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_RETURN
     EVT_END
@@ -335,7 +335,7 @@ EvtScript N(handleEvent) = {
             EVT_LOOP(20)
                 EVT_SUB(LW(0), 12)
                 EVT_CALL(SetPartAlpha, ACTOR_SELF, 1, LW(0))
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
             EVT_END_LOOP
             EVT_CALL(GetActorVar, ACTOR_SELF, 0, LW(0))
             EVT_CALL(RemoveEffect, LW(0))
@@ -384,7 +384,7 @@ EvtScript N(handleEvent) = {
             EVT_LOOP(20)
                 EVT_SUB(LW(0), 12)
                 EVT_CALL(SetPartAlpha, ACTOR_SELF, 1, LW(0))
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
             EVT_END_LOOP
             EVT_CALL(GetActorVar, ACTOR_SELF, 0, LW(0))
             EVT_CALL(RemoveEffect, LW(0))

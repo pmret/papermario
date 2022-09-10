@@ -32,9 +32,9 @@ def get_flag_name(arg):
         elif v <= -180000000: return f"EVT_ARRAY({v + 190000000})"
         elif v <= -160000000:
             if v + 170000000 == 0:
-                return "EVT_STORY_PROGRESS"
+                return "GB_StoryProgress"
             elif v + 170000000 == 425:
-                return "EVT_WORLD_LOCATION"
+                return "GB_WorldLocation"
             else:
                 return f"EVT_SAVE_VAR({v + 170000000})"
         elif v <= -140000000: return f"EVT_AREA_VAR({v + 150000000})"
@@ -260,7 +260,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
             tmp_out += "};\n"
             out += tmp_out
         elif struct["type"] == "AISettings":
-            tmp_out = f"NpcAISettings {name} = {{\n"
+            tmp_out = f"MobileAISettings {name} = {{\n"
             npcAISettings = bytes.read(struct["length"])
 
             i = x = 0
@@ -419,7 +419,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
                             for x,datum in enumerate(data):
                                 if not datum == 0:
                                     end_pos = x
-                            tmp_out += INDENT + f".movement = {{ " + ", ".join(f"{x}" for x in data[:end_pos+1]) + f" }},\n"
+                            tmp_out += INDENT + f".territory = { .temp = {{ " + ", ".join(f"{x}" for x in data[:end_pos+1]) + f" }}},\n"
                     elif i == 0x1A0:
                         tmp_out += INDENT + f".{var_names[15]} = {{\n"
                         for x in range(16):
@@ -652,7 +652,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
             out += f" {entry[0]:.01f}f, {entry[1]:.01f}f, {entry[2]:.01f}f, {entry[3]:.01f}f }};\n"
 
         elif struct["type"] == "Header":
-            out += f"MapConfig N(config) = {{\n"
+            out += f"MapSettings N(settings) = {{\n"
 
             bytes.read(0x10)
 
@@ -667,7 +667,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
             if bg == 0x80200000:
                 out += f"    .background = &gBackgroundImage,\n"
             elif bg != 0:
-                raise Exception(f"unknown MapConfig background {bg:X}")
+                raise Exception(f"unknown MapSettings background {bg:X}")
             #out += f"    .tattle = 0x{tattle:X},\n"
             INCLUDES_NEEDED["tattle"].append(f"- [0x{(tattle & 0xFF0000) >> 16:02X}, 0x{tattle & 0xFFFF:04X}, {map_name}_tattle]")
             out += f"    .tattle = {{ MSG_{map_name}_tattle }},\n"

@@ -401,20 +401,20 @@ s32 popup_menu_update(void) {
                     case 9:
                     case 12:
                         set_window_update(WINDOW_ID_14, (s32)basic_window_update);
-                        sfx_play_sound(1);
+                        sfx_play_sound(SOUND_1);
                         set_window_update(WINDOW_ID_19, (s32)basic_window_update);
                         break;
                     case 1:
                     case 4:
                         set_window_update(WINDOW_ID_14, (s32)basic_window_update);
-                        sfx_play_sound(2);
+                        sfx_play_sound(SOUND_2);
                         set_window_update(WINDOW_ID_19, (s32)basic_window_update);
                         break;
                     case 10:
                     case 11:
                     case 13:
                         set_window_update(WINDOW_ID_14, (s32)basic_window_update);
-                        sfx_play_sound(1);
+                        sfx_play_sound(SOUND_1);
                         break;
                 }
                 set_window_update(WINDOW_ID_21, WINDOW_UPDATE_SHOW);

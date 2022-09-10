@@ -14,7 +14,7 @@ EvtScript N(BindExits) = {
 };
 
 EvtScript N(main) = {
-    EVT_SET(EVT_WORLD_LOCATION, LOCATION_GOOMBA_ROAD)
+    EVT_SET(GB_WorldLocation, LOCATION_GOOMBA_ROAD)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
     EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
@@ -24,13 +24,13 @@ EvtScript N(main) = {
     EVT_EXEC(N(PlayMusic))
     EVT_SET(LW(0), EVT_ADDR(N(BindExits)))
     EVT_EXEC(EnterWalk)
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_BIND_TRIGGER(N(ReadWestSign), TRIGGER_WALL_PRESS_A, 10, 1, 0)
     EVT_RETURN
     EVT_END
 };
 
-NpcAISettings N(goombaAISettings) = {
+MobileAISettings N(goombaAISettings) = {
     .moveSpeed = 1.5f,
     .moveTime = 30,
     .waitTime = 30,
@@ -78,7 +78,7 @@ EvtScript N(ReadWestSign) = {
             // Trigger Goomba to peel off
             EVT_CALL(SetNpcVar, NPC_GOOMBA, 0, TRUE)
             EVT_SET(LF(0), TRUE)
-            EVT_WAIT_FRAMES(10)
+            EVT_WAIT(10)
         EVT_END_IF
     EVT_END_IF
     EVT_CALL(DisablePlayerInput, FALSE)
@@ -90,7 +90,7 @@ EvtScript N(ReadWestSign) = {
 };
 
 EvtScript N(GoombaIdle) = {
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
 
     EVT_CALL(SetSelfVar, 0, FALSE)
     EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_goomba_normal_fake_mushroom) // TODO: work out why palette 0 is used here
@@ -100,34 +100,34 @@ EvtScript N(GoombaIdle) = {
     // Wait until read_sign sets NPC var 0
     EVT_LABEL(0)
     EVT_CALL(GetSelfVar, 0, LW(0))
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_IF_EQ(LW(0), FALSE)
         EVT_GOTO(0)
     EVT_END_IF
 
     // Peel and jump off the sign
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_40000 | NPC_FLAG_200000, TRUE)
-    EVT_WAIT_FRAMES(3)
+    EVT_WAIT(3)
     EVT_SETF(LW(0), EVT_FLOAT(0.0))
     EVT_LOOP(9)
         EVT_ADDF(LW(0), EVT_FLOAT(10.0))
         EVT_CALL(SetNpcRotation, NPC_SELF, 0, LW(0), 0)
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_goomba_normal_still)
     EVT_LOOP(9)
         EVT_ADDF(LW(0), EVT_FLOAT(10.0))
         EVT_CALL(SetNpcRotation, NPC_SELF, 0, LW(0), 0)
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_goomba_normal_dizzy)
-    EVT_WAIT_FRAMES(20)
+    EVT_WAIT(20)
     EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_goomba_normal_idle)
     EVT_CALL(PlaySoundAtNpc, NPC_SELF, 0xF8, 0)
     EVT_CALL(func_802CFE2C, NPC_SELF, 8192)
     EVT_CALL(func_802CFD30, NPC_SELF, 5, 6, 1, 1, 0)
-    EVT_WAIT_FRAMES(12)
-    EVT_WAIT_FRAMES(5)
+    EVT_WAIT(12)
+    EVT_WAIT(5)
     EVT_CALL(PlaySoundAtNpc, NPC_SELF, 0x32C, 0)
     EVT_CALL(EnableNpcShadow, NPC_SELF, TRUE)
     EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(0.6))
@@ -160,12 +160,14 @@ StaticNpc N(goombaNpc) = {
     .flags = 0x00000C00,
     .init = &N(GoombaInit),
     .yaw = 90,
-    .dropFlags = NPC_DROP_FLAGS_80,
-    .itemDropChance = 5,
-    .itemDrops = { { ITEM_MUSHROOM, 10 } },
-    .heartDrops = GENEROUS_WHEN_LOW_HEART_DROPS(2),
-    .flowerDrops = GENEROUS_WHEN_LOW_FLOWER_DROPS(2),
-    .movement = {
+    .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+        .itemDropChance = 5,
+        .itemDrops = { { ITEM_MUSHROOM, 10 } },
+        .heartDrops = GENEROUS_WHEN_LOW_HEART_DROPS(2),
+        .flowerDrops = GENEROUS_WHEN_LOW_FLOWER_DROPS(2),
+    },
+	.territory = { .temp = {
         // Wander
         /* center x, y, z */ -33, 0, 30,
         /* size x, z */ 40, 20,
@@ -178,7 +180,7 @@ StaticNpc N(goombaNpc) = {
         /* box? */ TRUE,
 
         /* flying? */ TRUE,
-    },
+    }},
     .animations = {
         NPC_ANIM_goomba_normal_idle,
         NPC_ANIM_goomba_normal_walk,
@@ -200,7 +202,7 @@ StaticNpc N(goombaNpc) = {
 };
 
 NpcGroupList N(npcGroupList) = {
-    NPC_GROUP(N(goombaNpc), BATTLE_ID(0, 1, 0, 3)),
+    NPC_GROUP(N(goombaNpc), 0x0001, 0x02),
     {},
 };
 

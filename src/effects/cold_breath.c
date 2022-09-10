@@ -1,7 +1,7 @@
 #include "common.h"
 #include "effects_internal.h"
 
-extern s32 D_E00DE810[];
+extern Gfx* D_E00DE810[][5];
 extern s32 D_E00DE84C[];
 extern s8 D_E00DE858[];
 extern u8 D_E00DE8B4[];
@@ -165,7 +165,7 @@ void cold_breath_appendGfx(void* effect) {
             gDPSetTileSize(gMasterGfxPos++, 1, 0, 0, 31 << 2, 127 << 2);
         }
         gDPSetEnvColor(gMasterGfxPos++, data->unk_28, data->unk_2C, data->unk_30, envAlpha);
-        gSPDisplayList(gMasterGfxPos++, D_E00DE810[unk00 * 5 + temp_s32]);
+        gSPDisplayList(gMasterGfxPos++, D_E00DE810[unk00][temp_s32]);
     }
 
     gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);

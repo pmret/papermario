@@ -41,13 +41,13 @@ EvtScript N(main) = {
     EVT_CALL(PlaySound, SOUND_377)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_PLANT)
     EVT_THREAD
-        EVT_WAIT_FRAMES(50)
+        EVT_WAIT(50)
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10002)
     EVT_END_THREAD
-    EVT_WAIT_FRAMES(35)
+    EVT_WAIT(35)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_CALL(MoveBattleCamOver, 20)
-    EVT_WAIT_FRAMES(10)
+    EVT_WAIT(10)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, EVT_VAR(3), EVT_VAR(4), EVT_VAR(5))
     EVT_SET(EVT_VAR(0), 40)
     EVT_CALL(MultiplyByActorScale, EVT_VAR(0))
@@ -63,16 +63,16 @@ EvtScript N(main) = {
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(N(func_802A123C_716E9C), EVT_VAR(3), EVT_VAR(4), EVT_VAR(5))
-        EVT_WAIT_FRAMES(25)
+        EVT_WAIT(25)
         EVT_LOOP(12)
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
             EVT_CALL(PlaySound, SOUND_202C)
-            EVT_WAIT_FRAMES(2)
+            EVT_WAIT(2)
             EVT_CALL(PlaySound, SOUND_202D)
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_WAIT_FRAMES(80)
+    EVT_WAIT(80)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_CALL(InitTargetIterator)
@@ -86,13 +86,13 @@ EvtScript N(main) = {
     EVT_CALL(GetItemPower, ITEM_FIRE_FLOWER, EVT_VAR(0), EVT_VAR(1))
     EVT_CALL(ItemDamageEnemy, EVT_VAR(0), 939524098, 0, EVT_VAR(0), 32)
     EVT_LABEL(1)
-    EVT_WAIT_FRAMES(5)
+    EVT_WAIT(5)
     EVT_CALL(ChooseNextTarget, 0, EVT_VAR(0))
     EVT_IF_NE(EVT_VAR(0), -1)
         EVT_GOTO(0)
     EVT_END_IF
     EVT_CALL(N(func_802A1378_716FD8))
-    EVT_WAIT_FRAMES(30)
+    EVT_WAIT(30)
     EVT_EXEC_WAIT(N(PlayerGoHome))
     EVT_RETURN
     EVT_END

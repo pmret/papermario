@@ -187,7 +187,7 @@ EvtScript N(hadleEvent_flying) = {
             EVT_SET_CONST(LW(1), NPC_ANIM_swooper_Palette_01_Anim_15)
             EVT_EXEC_WAIT(DoShockHit)
             EVT_THREAD
-                EVT_WAIT_FRAMES(30)
+                EVT_WAIT(30)
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_END_THREAD
             EVT_SET_CONST(LW(0), 1)
@@ -205,7 +205,7 @@ EvtScript N(hadleEvent_flying) = {
             EVT_SET_CONST(LW(0), 1)
             EVT_SET_CONST(LW(1), NPC_ANIM_swooper_Palette_01_Anim_15)
             EVT_EXEC_WAIT(DoNormalHit)
-            EVT_WAIT_FRAMES(10)
+            EVT_WAIT(10)
             EVT_SET_CONST(LW(0), 1)
             EVT_SET_CONST(LW(1), NPC_ANIM_swooper_Palette_01_Anim_15)
             EVT_EXEC_WAIT(DoDeath)
@@ -363,7 +363,7 @@ EvtScript N(handleEvent) = {
             EVT_SET_CONST(LW(1), NPC_ANIM_swooper_Palette_01_Anim_15)
             EVT_EXEC_WAIT(D_8029A76C)
             EVT_THREAD
-                EVT_WAIT_FRAMES(30)
+                EVT_WAIT(30)
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_END_THREAD
             EVT_SET_CONST(LW(0), 1)
@@ -382,7 +382,7 @@ EvtScript N(handleEvent) = {
                 EVT_SET_CONST(LW(0), 1)
                 EVT_SET_CONST(LW(1), NPC_ANIM_swooper_Palette_01_Anim_15)
                 EVT_EXEC_WAIT(DoNormalHit)
-                EVT_WAIT_FRAMES(10)
+                EVT_WAIT(10)
                 EVT_SET_CONST(LW(0), 1)
                 EVT_SET_CONST(LW(1), NPC_ANIM_swooper_Palette_01_Anim_15)
                 EVT_EXEC_WAIT(DoDeath)
@@ -390,7 +390,7 @@ EvtScript N(handleEvent) = {
                 EVT_SET_CONST(LW(0), 1)
                 EVT_SET_CONST(LW(1), NPC_ANIM_swooper_Palette_01_Anim_E)
                 EVT_EXEC_WAIT(DoNormalHit)
-                EVT_WAIT_FRAMES(10)
+                EVT_WAIT(10)
                 EVT_SET_CONST(LW(0), 1)
                 EVT_SET_CONST(LW(1), NPC_ANIM_swooper_Palette_01_Anim_E)
                 EVT_EXEC_WAIT(DoDeath)
@@ -451,7 +451,7 @@ EvtScript N(takeTurn_flying) = {
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
             EVT_SET(LW(10), LW(0))
-            EVT_WAIT_FRAMES(10)
+            EVT_WAIT(10)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(5.0))
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_swooper_Palette_01_Anim_6)
@@ -466,7 +466,7 @@ EvtScript N(takeTurn_flying) = {
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_swooper_Palette_01_Anim_6)
             EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -10, 0)
             EVT_CALL(SetAnimationRate, ACTOR_SELF, 1, EVT_FLOAT(10.0))
-            EVT_WAIT_FRAMES(15)
+            EVT_WAIT(15)
             EVT_CALL(SetAnimationRate, ACTOR_SELF, 1, EVT_FLOAT(1.0))
             EVT_IF_EQ(LW(10), HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LW(0), DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
@@ -490,7 +490,7 @@ EvtScript N(takeTurn_flying) = {
                 EVT_SET(LF(0), 1)
             EVT_END_IF
     EVT_END_SWITCH
-    EVT_WAIT_FRAMES(10)
+    EVT_WAIT(10)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(5.0))
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_swooper_Palette_01_Anim_6)
@@ -508,48 +508,48 @@ EvtScript N(takeTurn_flying) = {
     EVT_END_IF
     EVT_CALL(GetStatusFlags, ACTOR_PLAYER, LW(0))
     EVT_IF_FLAG(LW(0), STATUS_FLAG_STONE)
-        EVT_WAIT_FRAMES(10)
+        EVT_WAIT(10)
         EVT_LOOP(2)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_swooper_Palette_01_Anim_2)
-            EVT_WAIT_FRAMES(21)
+            EVT_WAIT(21)
             EVT_LOOP(2)
                 EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3E0)
                 EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
                 EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.9), EVT_FLOAT(1.2), EVT_FLOAT(1.0))
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
                 EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.8), EVT_FLOAT(1.3), EVT_FLOAT(1.0))
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
                 EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.7), EVT_FLOAT(1.4), EVT_FLOAT(1.0))
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
                 EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.7), EVT_FLOAT(1.5), EVT_FLOAT(1.0))
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
                 EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.7), EVT_FLOAT(1.4), EVT_FLOAT(1.0))
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
                 EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.8), EVT_FLOAT(1.3), EVT_FLOAT(1.0))
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
                 EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.9), EVT_FLOAT(1.2), EVT_FLOAT(1.0))
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
                 EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
             EVT_END_LOOP
-            EVT_WAIT_FRAMES(5)
+            EVT_WAIT(5)
             EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
             EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.9), EVT_FLOAT(1.2), EVT_FLOAT(1.0))
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
             EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.8), EVT_FLOAT(1.3), EVT_FLOAT(1.0))
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
             EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.7), EVT_FLOAT(1.4), EVT_FLOAT(1.0))
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
             EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.7), EVT_FLOAT(1.5), EVT_FLOAT(1.0))
-            EVT_WAIT_FRAMES(2)
+            EVT_WAIT(2)
             EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.6), EVT_FLOAT(1.6), EVT_FLOAT(1.0))
-            EVT_WAIT_FRAMES(10)
+            EVT_WAIT(10)
             EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
-            EVT_WAIT_FRAMES(2)
+            EVT_WAIT(2)
             EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LW(0), DAMAGE_TYPE_IGNORE_DEFENSE, 0, 0, 2, BS_FLAGS1_40)
-            EVT_WAIT_FRAMES(30)
+            EVT_WAIT(30)
         EVT_END_LOOP
     EVT_ELSE
         EVT_CALL(ShowMessageBox, 49, 32767)
@@ -557,7 +557,7 @@ EvtScript N(takeTurn_flying) = {
         EVT_CALL(LoadActionCommand, ACTION_COMMAND_STOP_LEECH)
         EVT_CALL(func_802A9000_425590)
         EVT_CALL(SetupMashMeter, 1, 30, 0, 0, 0, 0)
-        EVT_WAIT_FRAMES(10)
+        EVT_WAIT(10)
         EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, 0)
         EVT_CALL(func_802A9110_4256A0, 0, 32767, 3)
         EVT_SET(LW(13), 0)
@@ -570,7 +570,7 @@ EvtScript N(takeTurn_flying) = {
                     EVT_SET(LF(0), 1)
                     EVT_BREAK_LOOP
                 EVT_END_IF
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
             EVT_END_LOOP
             EVT_IF_EQ(LF(0), 1)
                 EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
@@ -588,7 +588,7 @@ EvtScript N(takeTurn_flying) = {
                         EVT_SET(LF(0), 1)
                         EVT_BREAK_LOOP
                     EVT_END_IF
-                    EVT_WAIT_FRAMES(1)
+                    EVT_WAIT(1)
                 EVT_END_LOOP
                 EVT_IF_EQ(LF(0), 1)
                     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
@@ -602,7 +602,7 @@ EvtScript N(takeTurn_flying) = {
                         EVT_SET(LF(0), 1)
                         EVT_BREAK_LOOP
                     EVT_END_IF
-                    EVT_WAIT_FRAMES(1)
+                    EVT_WAIT(1)
                 EVT_END_LOOP
                 EVT_IF_EQ(LF(0), 1)
                     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
@@ -616,7 +616,7 @@ EvtScript N(takeTurn_flying) = {
                         EVT_SET(LF(0), 1)
                         EVT_BREAK_LOOP
                     EVT_END_IF
-                    EVT_WAIT_FRAMES(1)
+                    EVT_WAIT(1)
                 EVT_END_LOOP
                 EVT_IF_EQ(LF(0), 1)
                     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
@@ -630,7 +630,7 @@ EvtScript N(takeTurn_flying) = {
                         EVT_SET(LF(0), 1)
                         EVT_BREAK_LOOP
                     EVT_END_IF
-                    EVT_WAIT_FRAMES(1)
+                    EVT_WAIT(1)
                 EVT_END_LOOP
                 EVT_IF_EQ(LF(0), 1)
                     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
@@ -644,7 +644,7 @@ EvtScript N(takeTurn_flying) = {
                         EVT_SET(LF(0), 1)
                         EVT_BREAK_LOOP
                     EVT_END_IF
-                    EVT_WAIT_FRAMES(1)
+                    EVT_WAIT(1)
                 EVT_END_LOOP
                 EVT_IF_EQ(LF(0), 1)
                     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
@@ -658,7 +658,7 @@ EvtScript N(takeTurn_flying) = {
                         EVT_SET(LF(0), 1)
                         EVT_BREAK_LOOP
                     EVT_END_IF
-                    EVT_WAIT_FRAMES(1)
+                    EVT_WAIT(1)
                 EVT_END_LOOP
                 EVT_IF_EQ(LF(0), 1)
                     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
@@ -672,7 +672,7 @@ EvtScript N(takeTurn_flying) = {
                         EVT_SET(LF(0), 1)
                         EVT_BREAK_LOOP
                     EVT_END_IF
-                    EVT_WAIT_FRAMES(1)
+                    EVT_WAIT(1)
                 EVT_END_LOOP
                 EVT_IF_EQ(LF(0), 1)
                     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
@@ -686,7 +686,7 @@ EvtScript N(takeTurn_flying) = {
                         EVT_SET(LF(0), 1)
                         EVT_BREAK_LOOP
                     EVT_END_IF
-                    EVT_WAIT_FRAMES(1)
+                    EVT_WAIT(1)
                 EVT_END_LOOP
                 EVT_IF_EQ(LF(0), 1)
                     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
@@ -700,7 +700,7 @@ EvtScript N(takeTurn_flying) = {
                         EVT_SET(LF(0), 1)
                         EVT_BREAK_LOOP
                     EVT_END_IF
-                    EVT_WAIT_FRAMES(1)
+                    EVT_WAIT(1)
                 EVT_END_LOOP
                 EVT_IF_EQ(LF(0), 1)
                     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
@@ -717,7 +717,7 @@ EvtScript N(takeTurn_flying) = {
                     EVT_SET(LF(0), 1)
                     EVT_BREAK_LOOP
                 EVT_END_IF
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
             EVT_END_LOOP
             EVT_IF_EQ(LF(0), 1)
                 EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
@@ -732,7 +732,7 @@ EvtScript N(takeTurn_flying) = {
                     EVT_SET(LF(0), 1)
                     EVT_BREAK_LOOP
                 EVT_END_IF
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
             EVT_END_LOOP
             EVT_IF_EQ(LF(0), 1)
                 EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
@@ -746,7 +746,7 @@ EvtScript N(takeTurn_flying) = {
                     EVT_SET(LF(0), 1)
                     EVT_BREAK_LOOP
                 EVT_END_IF
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
             EVT_END_LOOP
             EVT_IF_EQ(LF(0), 1)
                 EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
@@ -760,7 +760,7 @@ EvtScript N(takeTurn_flying) = {
                     EVT_SET(LF(0), 1)
                     EVT_BREAK_LOOP
                 EVT_END_IF
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
             EVT_END_LOOP
             EVT_IF_EQ(LF(0), 1)
                 EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
@@ -774,7 +774,7 @@ EvtScript N(takeTurn_flying) = {
                     EVT_SET(LF(0), 1)
                     EVT_BREAK_LOOP
                 EVT_END_IF
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
             EVT_END_LOOP
             EVT_IF_EQ(LF(0), 1)
                 EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
@@ -788,7 +788,7 @@ EvtScript N(takeTurn_flying) = {
                     EVT_SET(LF(0), 1)
                     EVT_BREAK_LOOP
                 EVT_END_IF
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
             EVT_END_LOOP
             EVT_IF_EQ(LF(0), 1)
                 EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
@@ -802,7 +802,7 @@ EvtScript N(takeTurn_flying) = {
                     EVT_SET(LF(0), 1)
                     EVT_BREAK_LOOP
                 EVT_END_IF
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
             EVT_END_LOOP
             EVT_IF_EQ(LF(0), 1)
                 EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
@@ -816,7 +816,7 @@ EvtScript N(takeTurn_flying) = {
                     EVT_SET(LF(0), 1)
                     EVT_BREAK_LOOP
                 EVT_END_IF
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
             EVT_END_LOOP
             EVT_IF_EQ(LF(0), 1)
                 EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
@@ -832,7 +832,7 @@ EvtScript N(takeTurn_flying) = {
                 EVT_ADD(LW(1), 15)
                 EVT_CALL(N(UnkBattleFunc2), LW(0), LW(1), LW(2), LW(3))
                 EVT_THREAD
-                    EVT_WAIT_FRAMES(15)
+                    EVT_WAIT(15)
                     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_25C)
                     EVT_CALL(N(UnkBattleFunc2_2), LW(0), LW(1), LW(2), LW(3))
                 EVT_END_THREAD
@@ -861,7 +861,7 @@ EvtScript N(takeTurn_flying) = {
                     EVT_SET(LF(0), 1)
                     EVT_BREAK_LOOP
                 EVT_END_IF
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
             EVT_END_LOOP
             EVT_IF_EQ(LF(0), 1)
                 EVT_BREAK_LOOP
@@ -876,7 +876,7 @@ EvtScript N(takeTurn_flying) = {
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_swooper_Palette_01_Anim_2)
     EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -10, 0)
-    EVT_WAIT_FRAMES(10)
+    EVT_WAIT(10)
     EVT_CALL(YieldTurn)
     EVT_EXEC_WAIT(N(returnHome))
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
@@ -907,7 +907,7 @@ EvtScript N(takeTurn) = {
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
             EVT_SET(LW(10), LW(0))
-            EVT_WAIT_FRAMES(10)
+            EVT_WAIT(10)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(5.0))
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_swooper_Palette_01_Anim_6)
@@ -918,7 +918,7 @@ EvtScript N(takeTurn) = {
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_swooper_Palette_01_Anim_6)
             EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -40, 0)
             EVT_CALL(SetAnimationRate, ACTOR_SELF, 1, EVT_FLOAT(10.0))
-            EVT_WAIT_FRAMES(15)
+            EVT_WAIT(15)
             EVT_CALL(SetAnimationRate, ACTOR_SELF, 1, EVT_FLOAT(1.0))
             EVT_IF_EQ(LW(10), HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LW(0), DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
@@ -942,7 +942,7 @@ EvtScript N(takeTurn) = {
                 EVT_SET(LF(0), 1)
             EVT_END_IF
     EVT_END_SWITCH
-    EVT_WAIT_FRAMES(10)
+    EVT_WAIT(10)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(5.0))
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_swooper_Palette_01_Anim_6)
@@ -957,49 +957,49 @@ EvtScript N(takeTurn) = {
     EVT_END_IF
     EVT_CALL(GetStatusFlags, ACTOR_PLAYER, LW(0))
     EVT_IF_FLAG(LW(0), STATUS_FLAG_STONE)
-        EVT_WAIT_FRAMES(10)
+        EVT_WAIT(10)
         EVT_LOOP(2)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_swooper_Palette_01_Anim_2)
-            EVT_WAIT_FRAMES(21)
+            EVT_WAIT(21)
             EVT_LOOP(2)
                 EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3E0)
                 EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
                 EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.9), EVT_FLOAT(1.2), EVT_FLOAT(1.0))
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
                 EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.8), EVT_FLOAT(1.3), EVT_FLOAT(1.0))
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
                 EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.7), EVT_FLOAT(1.4), EVT_FLOAT(1.0))
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
                 EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.7), EVT_FLOAT(1.5), EVT_FLOAT(1.0))
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
                 EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.7), EVT_FLOAT(1.4), EVT_FLOAT(1.0))
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
                 EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.8), EVT_FLOAT(1.3), EVT_FLOAT(1.0))
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
                 EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.9), EVT_FLOAT(1.2), EVT_FLOAT(1.0))
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
                 EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
             EVT_END_LOOP
-            EVT_WAIT_FRAMES(5)
+            EVT_WAIT(5)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3E0)
             EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
             EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.9), EVT_FLOAT(1.2), EVT_FLOAT(1.0))
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
             EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.8), EVT_FLOAT(1.3), EVT_FLOAT(1.0))
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
             EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.7), EVT_FLOAT(1.4), EVT_FLOAT(1.0))
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
             EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.7), EVT_FLOAT(1.5), EVT_FLOAT(1.0))
-            EVT_WAIT_FRAMES(2)
+            EVT_WAIT(2)
             EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.6), EVT_FLOAT(1.6), EVT_FLOAT(1.0))
-            EVT_WAIT_FRAMES(10)
+            EVT_WAIT(10)
             EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
-            EVT_WAIT_FRAMES(2)
+            EVT_WAIT(2)
             EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LW(0), DAMAGE_TYPE_IGNORE_DEFENSE, 0, 0, 2, BS_FLAGS1_40)
-            EVT_WAIT_FRAMES(30)
+            EVT_WAIT(30)
         EVT_END_LOOP
     EVT_ELSE
         EVT_CALL(ShowMessageBox, 49, 32767)
@@ -1007,7 +1007,7 @@ EvtScript N(takeTurn) = {
         EVT_CALL(LoadActionCommand, ACTION_COMMAND_STOP_LEECH)
         EVT_CALL(func_802A9000_425590)
         EVT_CALL(SetupMashMeter, 1, 30, 0, 0, 0, 0)
-        EVT_WAIT_FRAMES(10)
+        EVT_WAIT(10)
         EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, 0)
         EVT_CALL(func_802A9110_4256A0, 0, 32767, 3)
         EVT_SET(LW(13), 0)
@@ -1020,7 +1020,7 @@ EvtScript N(takeTurn) = {
                     EVT_SET(LF(0), 1)
                     EVT_BREAK_LOOP
                 EVT_END_IF
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
             EVT_END_LOOP
             EVT_IF_EQ(LF(0), 1)
                 EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
@@ -1037,7 +1037,7 @@ EvtScript N(takeTurn) = {
                     EVT_SET(LF(0), 1)
                     EVT_BREAK_LOOP
                 EVT_END_IF
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
             EVT_END_LOOP
             EVT_IF_EQ(LF(0), 1)
                 EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
@@ -1051,7 +1051,7 @@ EvtScript N(takeTurn) = {
                     EVT_SET(LF(0), 1)
                     EVT_BREAK_LOOP
                 EVT_END_IF
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
             EVT_END_LOOP
             EVT_IF_EQ(LF(0), 1)
                 EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
@@ -1065,7 +1065,7 @@ EvtScript N(takeTurn) = {
                     EVT_SET(LF(0), 1)
                     EVT_BREAK_LOOP
                 EVT_END_IF
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
             EVT_END_LOOP
             EVT_IF_EQ(LF(0), 1)
                 EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
@@ -1079,7 +1079,7 @@ EvtScript N(takeTurn) = {
                     EVT_SET(LF(0), 1)
                     EVT_BREAK_LOOP
                 EVT_END_IF
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
             EVT_END_LOOP
             EVT_IF_EQ(LF(0), 1)
                 EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
@@ -1093,7 +1093,7 @@ EvtScript N(takeTurn) = {
                     EVT_SET(LF(0), 1)
                     EVT_BREAK_LOOP
                 EVT_END_IF
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
             EVT_END_LOOP
             EVT_IF_EQ(LF(0), 1)
                 EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
@@ -1107,7 +1107,7 @@ EvtScript N(takeTurn) = {
                     EVT_SET(LF(0), 1)
                     EVT_BREAK_LOOP
                 EVT_END_IF
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
             EVT_END_LOOP
             EVT_IF_EQ(LF(0), 1)
                 EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
@@ -1121,7 +1121,7 @@ EvtScript N(takeTurn) = {
                     EVT_SET(LF(0), 1)
                     EVT_BREAK_LOOP
                 EVT_END_IF
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
             EVT_END_LOOP
             EVT_IF_EQ(LF(0), 1)
                 EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
@@ -1137,7 +1137,7 @@ EvtScript N(takeTurn) = {
                 EVT_ADD(LW(1), 15)
                 EVT_CALL(N(UnkBattleFunc2), LW(0), LW(1), LW(2), LW(3))
                 EVT_THREAD
-                    EVT_WAIT_FRAMES(15)
+                    EVT_WAIT(15)
                     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_25C)
                     EVT_CALL(N(UnkBattleFunc2_2), LW(0), LW(1), LW(2), LW(3))
                 EVT_END_THREAD
@@ -1166,7 +1166,7 @@ EvtScript N(takeTurn) = {
                     EVT_SET(LF(0), 1)
                     EVT_BREAK_LOOP
                 EVT_END_IF
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
             EVT_END_LOOP
             EVT_IF_EQ(LF(0), 1)
                 EVT_BREAK_LOOP
@@ -1181,7 +1181,7 @@ EvtScript N(takeTurn) = {
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_swooper_Palette_01_Anim_2)
     EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -10, 0)
-    EVT_WAIT_FRAMES(10)
+    EVT_WAIT(10)
     EVT_CALL(YieldTurn)
     EVT_EXEC_WAIT(N(returnHome))
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)

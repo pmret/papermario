@@ -13,7 +13,7 @@ enum AiStateNappingClubba {
     AI_STATE_NAPPING_CLUBBA_50                  = 50,
 };
 
-void N(ClubbaNappingAI_Init)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(ClubbaNappingAI_Init)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -30,7 +30,7 @@ void N(ClubbaNappingAI_Init)(Evt* script, NpcAISettings* aiSettings, EnemyDetect
     }
 }
 
-void N(ClubbaNappingAI_Sleep)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(ClubbaNappingAI_Sleep)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     PlayerData* playerData = get_player_data();
@@ -91,7 +91,7 @@ void N(ClubbaNappingAI_Sleep)(Evt* script, NpcAISettings* aiSettings, EnemyDetec
     }
 }
 
-void N(ClubbaNappingAI_WakeUp)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(ClubbaNappingAI_WakeUp)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -103,7 +103,7 @@ void N(ClubbaNappingAI_WakeUp)(Evt* script, NpcAISettings* aiSettings, EnemyDete
     }
 }
 
-void N(ClubbaNappingAI_LoiterInit)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(ClubbaNappingAI_LoiterInit)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -113,7 +113,7 @@ void N(ClubbaNappingAI_LoiterInit)(Evt* script, NpcAISettings* aiSettings, Enemy
     script->AI_TEMP_STATE = AI_STATE_NAPPING_CLUBBA_LOITER;
 }
 
-void N(ClubbaNappingAI_Loiter)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(ClubbaNappingAI_Loiter)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 nextState;
@@ -147,7 +147,7 @@ void N(ClubbaNappingAI_Loiter)(Evt* script, NpcAISettings* aiSettings, EnemyDete
     }
 }
 
-void N(ClubbaNappingAI_ReturnHomeInit)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(ClubbaNappingAI_ReturnHomeInit)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -163,7 +163,7 @@ void N(ClubbaNappingAI_ReturnHomeInit)(Evt* script, NpcAISettings* aiSettings, E
     }
 }
 
-void N(ClubbaNappingAI_ReturnHome)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(ClubbaNappingAI_ReturnHome)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 currentYaw;
@@ -186,7 +186,7 @@ void N(ClubbaNappingAI_ReturnHome)(Evt* script, NpcAISettings* aiSettings, Enemy
     }
 }
 
-void N(ClubbaNappingAI_FallAsleep)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(ClubbaNappingAI_FallAsleep)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -205,7 +205,7 @@ ApiStatus N(ClubbaNappingAI_Main)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     EnemyDetectVolume territory;
     EnemyDetectVolume* territoryPtr = &territory;
-    NpcAISettings* npcAISettings = (NpcAISettings*)evt_get_variable(script, *args++);
+    MobileAISettings* npcAISettings = (MobileAISettings*)evt_get_variable(script, *args++);
 
     territory.skipPlayerDetectChance = 0;
     territory.shape = enemy->territory->wander.detectShape;

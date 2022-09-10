@@ -37,7 +37,7 @@ ApiStatus N(StashVars)(Evt* script, s32 isInitialCall) {
 EvtScript N(EVS_Chest_ShowGotItem) = {
     EVT_SET_GROUP(EVT_GROUP_00)
     EVT_CALL(SetTimeFreezeMode, 2)
-    EVT_WAIT_FRAMES(40)
+    EVT_WAIT(40)
     EVT_CALL(ShowGotItem, EVT_VAR(0), 0, 0)
     EVT_CALL(SetTimeFreezeMode, 0)
     EVT_RETURN
@@ -59,7 +59,7 @@ EvtScript N(EVS_Chest_GetItem) = {
         EVT_CASE_EQ(2)
             EVT_CALL(AddBadge, EVT_VAR(10), EVT_VAR(0))
     EVT_END_SWITCH
-    EVT_WAIT_FRAMES(15)
+    EVT_WAIT(15)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_RETURN
     EVT_END

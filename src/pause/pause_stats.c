@@ -597,7 +597,7 @@ void pause_stats_handle_input(MenuPanel* panel) {
             msgOffset = adjustedHammerLevel;
             break;
         case 0x2F:
-            if (evt_get_variable(NULL, EVT_SAVE_FLAG_TUTORIAL_GOT_STAR_PIECE)) {
+            if (evt_get_variable(NULL, GF_Tutorial_GotStarPiece)) {
                 msgOffset = 1;
             }
             break;

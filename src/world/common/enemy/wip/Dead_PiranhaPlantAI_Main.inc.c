@@ -9,7 +9,7 @@
 ApiStatus N(PiranhaPlantAI_Main)(Evt* script, s32 isInitialCall) {
     DeadEnemy* enemy = (DeadEnemy*) script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
-    NpcAISettings* settings = (NpcAISettings*) evt_get_variable(script, *script->ptrReadPos);
+    MobileAISettings* settings = (MobileAISettings*) evt_get_variable(script, *script->ptrReadPos);
     EnemyDetectVolume territory;
     EnemyDetectVolume* territoryPtr = &territory;
 

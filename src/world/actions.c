@@ -29,7 +29,13 @@ s32 D_800F7B4C = 0;
 
 f32 GravityParamsStartJump[] = { 15.7566404343f, -7.38624f, 3.44693994522f, -0.75f };
 f32 GravityParamsStartFall[] = { 0.154342994094f, -0.350080013275f, -0.182262003422f, 0.0115200001746f };
-f32 DefaultMoveSpeeds[] = { 2.0f, 4.0f, 32.0f, -32.0f }; // walk, run, max jump, ???
+
+ // default move speeds
+f32 D_800F7B70 = 2.0f; // walk
+f32 D_800F7B74 = 4.0f; // run
+f32 D_800F7B78 = 32.0f; // max jump
+f32 D_800F7B7C = -32.0f; // ???
+
 s16 D_800F7B80 = 0;
 s32 D_800F7B84[] = { 0, 0, 0};
 f32 D_800F7B90 = 0.0;

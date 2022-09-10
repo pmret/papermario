@@ -3,6 +3,11 @@
 static char* N(exit_str_0) = "kpa_10";
 static char* N(exit_str_1) = "kpa_11";
 static char* N(exit_str_2) = "kpa_13";
-static char* N(exit_str_3) = "";
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_12/A54950", func_80240000_A54950);
+s32 func_80240000_A54950(void) {
+    if (evt_get_variable(NULL, GSWF(1556)) == 0) {
+        return 0x190160;
+    } else {
+        return 0x190161;
+    }
+}

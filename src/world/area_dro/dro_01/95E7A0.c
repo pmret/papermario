@@ -23,7 +23,7 @@ FoliageDropList N(tree1_Drops) = {
             .itemID = ITEM_COIN,
             .pos = { 120, 92, -18 },
             .spawnMode = 0xF,
-            .pickupFlag = EVT_SAVE_FLAG(760),
+            .pickupFlag = GF_DRO01_Tree1_Coin,
         },
     }
 };

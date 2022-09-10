@@ -8,7 +8,7 @@ EntryList N(entryList) = {
     {   0.0f,    0.0f,   0.0f,   0.0f },
 };
 
-MapConfig N(config) = {
+MapSettings N(settings) = {
     .main = &N(main),
     .entryList = &N(entryList),
     .entryCount = ENTRY_COUNT(N(entryList)),
@@ -68,7 +68,7 @@ static s32 N(pad_ABC) = {
 };
 
 EvtScript N(80240AC0) = {
-    EVT_CALL(MakeItemEntity, ITEM_S_JUMP_CHG, -200, 160, -213, 17, EVT_SAVE_FLAG(1391))
+    EVT_CALL(MakeItemEntity, ITEM_S_JUMP_CHG, -200, 160, -213, 17, GF_FLO19_Item_SJumpChg)
     EVT_RETURN
     EVT_END
 };
@@ -103,13 +103,13 @@ EvtScript N(80240BF8) = {
 };
 
 EvtScript N(main) = {
-    EVT_SET(EVT_SAVE_VAR(425), 39)
+    EVT_SET(GB_WorldLocation, 39)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamLeadPlayer, 0, 0)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
     EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
     EVT_CALL(SetCamEnabled, 0, 1)
-    EVT_SET(EVT_SAVE_FLAG(1985), 1)
+    EVT_SET(GF_MAP_CloudyClimb, 1)
     EVT_EXEC_WAIT(N(80240AC0))
     EVT_CALL(ParentColliderToModel, 12, 86)
     EVT_CALL(HidePlayerShadow, TRUE)
@@ -169,7 +169,7 @@ EvtScript N(main) = {
             EVT_EXEC(N(80240BF8))
     EVT_END_SWITCH
     EVT_EXEC_WAIT(N(802409C0))
-    EVT_IF_GE(EVT_SAVE_VAR(0), 53)
+    EVT_IF_GE(GB_StoryProgress, 53)
         EVT_CALL(N(func_8024030C_CE39FC))
     EVT_END_IF
     EVT_RETURN
@@ -262,7 +262,7 @@ EvtScript N(80241050) = {
     EVT_ADDF(EVT_VAR(11), EVT_MAP_VAR(13))
     EVT_ADDF(EVT_VAR(12), EVT_MAP_VAR(14))
     EVT_ADDF(EVT_VAR(13), EVT_MAP_VAR(15))
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_GOTO(0)
     EVT_RETURN
     EVT_END
@@ -271,7 +271,7 @@ EvtScript N(80241050) = {
 EvtScript N(80241650) = {
     EVT_THREAD
         EVT_ADDF(EVT_MAP_VAR(12), EVT_FIXED(-1.5))
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
         EVT_ADDF(EVT_MAP_VAR(12), EVT_FIXED(-1.5))
     EVT_END_THREAD
     EVT_RETURN
@@ -281,7 +281,7 @@ EvtScript N(80241650) = {
 EvtScript N(8024169C) = {
     EVT_THREAD
         EVT_ADDF(EVT_MAP_VAR(13), EVT_FIXED(-1.5))
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
         EVT_ADDF(EVT_MAP_VAR(13), EVT_FIXED(-1.5))
     EVT_END_THREAD
     EVT_RETURN
@@ -291,7 +291,7 @@ EvtScript N(8024169C) = {
 EvtScript N(802416E8) = {
     EVT_THREAD
         EVT_ADDF(EVT_MAP_VAR(14), EVT_FIXED(-1.5))
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
         EVT_ADDF(EVT_MAP_VAR(14), EVT_FIXED(-1.5))
     EVT_END_THREAD
     EVT_RETURN
@@ -301,7 +301,7 @@ EvtScript N(802416E8) = {
 EvtScript N(80241734) = {
     EVT_THREAD
         EVT_ADDF(EVT_MAP_VAR(15), EVT_FIXED(-1.5))
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
         EVT_ADDF(EVT_MAP_VAR(15), EVT_FIXED(-1.5))
     EVT_END_THREAD
     EVT_RETURN
@@ -339,7 +339,7 @@ EvtScript N(80241780) = {
         EVT_IF_GE(EVT_VAR(15), 30)
             EVT_SET(EVT_VAR(15), 0)
         EVT_END_IF
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
         EVT_GOTO(0)
     EVT_END_THREAD
     EVT_RETURN
@@ -355,13 +355,13 @@ EvtScript N(80241A70) = {
     EVT_LABEL(10)
     EVT_CALL(N(func_80240784_CE3E74))
     EVT_ADD(EVT_VAR(0), 25)
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_IF_LT(EVT_VAR(0), 255)
         EVT_GOTO(10)
     EVT_END_IF
     EVT_SET(EVT_VAR(0), 255)
     EVT_CALL(N(func_80240784_CE3E74))
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_RETURN
     EVT_END
 };
@@ -371,13 +371,13 @@ EvtScript N(80241B10) = {
     EVT_LABEL(10)
     EVT_CALL(N(func_80240784_CE3E74))
     EVT_SUB(EVT_VAR(0), 25)
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_IF_GT(EVT_VAR(0), 0)
         EVT_GOTO(10)
     EVT_END_IF
     EVT_SET(EVT_VAR(0), 0)
     EVT_CALL(N(func_80240784_CE3E74))
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_RETURN
     EVT_END
 };
@@ -432,7 +432,7 @@ EvtScript N(80241CC4) = {
     EVT_SET(EVT_VAR(13), EVT_FIXED(28.0))
     EVT_SET(EVT_VAR(14), EVT_FIXED(10.0))
     EVT_THREAD
-        EVT_WAIT_FRAMES(5)
+        EVT_WAIT(5)
         EVT_CALL(SetNpcAnimation, NPC_PARTNER, 0x106)
         EVT_CALL(SetPlayerAnimation, ANIM_WALKING)
         EVT_SWITCH(EVT_AREA_FLAG(16))
@@ -449,10 +449,10 @@ EvtScript N(80241CC4) = {
     EVT_THREAD
         EVT_SET(EVT_AREA_FLAG(45), 0)
         EVT_CALL(SetPlayerAnimation, ANIM_WALKING)
-        EVT_WAIT_FRAMES(200)
+        EVT_WAIT(200)
         EVT_EXEC_WAIT(N(80241A70))
         EVT_SET(EVT_AREA_FLAG(45), 1)
-        EVT_WAIT_FRAMES(10)
+        EVT_WAIT(10)
         EVT_CALL(EnableGroup, 2, 1)
         EVT_CALL(EnableGroup, 13, 1)
         EVT_CALL(EnableGroup, 24, 1)
@@ -468,7 +468,7 @@ EvtScript N(80241CC4) = {
         EVT_CALL(PanToTarget, 0, 0, 1)
         EVT_CALL(WaitForCam, 0, EVT_FIXED(1.0))
         EVT_EXEC_WAIT(N(80241B10))
-        EVT_WAIT_FRAMES(20)
+        EVT_WAIT(20)
         EVT_SET(EVT_AREA_FLAG(45), 0)
     EVT_END_THREAD
     EVT_SET(EVT_VAR(15), 0)
@@ -486,7 +486,7 @@ EvtScript N(80241CC4) = {
         EVT_CALL(N(func_80240540_CE3C30))
         EVT_CALL(N(func_80240660_CE3D50))
         EVT_LABEL(11)
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
         EVT_IF_EQ(EVT_AREA_FLAG(45), 1)
             EVT_GOTO(11)
         EVT_END_IF
@@ -499,7 +499,7 @@ EvtScript N(80241CC4) = {
     EVT_CALL(PlayerJump, 100, 0, 60, 20)
     EVT_CALL(SetPlayerActionState, 10)
     EVT_CALL(InterpPlayerYaw, 90, 0)
-    EVT_WAIT_FRAMES(5)
+    EVT_WAIT(5)
     EVT_SET(EVT_AREA_FLAG(44), 0)
     EVT_CALL(StopSound, 412)
     EVT_EXEC_WAIT(N(802409C0))
@@ -513,7 +513,7 @@ EvtScript N(802423F8) = {
     EVT_IF_EQ(EVT_AREA_FLAG(44), 0)
         EVT_CALL(DisablePlayerInput, TRUE)
         EVT_CALL(func_802D2B6C)
-        EVT_WAIT_FRAMES(15)
+        EVT_WAIT(15)
         EVT_CALL(DisablePartnerAI, 0)
         EVT_SET(EVT_AREA_FLAG(44), 1)
         EVT_CALL(ModifyColliderFlags, 0, 13, 0x7FFFFE00)
@@ -547,11 +547,11 @@ EvtScript N(802423F8) = {
         EVT_SET(EVT_MAP_VAR(10), 0)
         EVT_THREAD
             EVT_SET(EVT_AREA_FLAG(45), 0)
-            EVT_WAIT_FRAMES(120)
+            EVT_WAIT(120)
             EVT_SET(EVT_AREA_FLAG(45), 1)
-            EVT_WAIT_FRAMES(20)
+            EVT_WAIT(20)
             EVT_EXEC_WAIT(N(80241A70))
-            EVT_WAIT_FRAMES(10)
+            EVT_WAIT(10)
             EVT_CALL(EnableGroup, 2, 0)
             EVT_CALL(EnableGroup, 13, 0)
             EVT_CALL(EnableGroup, 24, 0)
@@ -589,7 +589,7 @@ EvtScript N(802423F8) = {
                     EVT_SET(EVT_MAP_VAR(10), 1)
                 EVT_END_IF
                 EVT_LABEL(11)
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
                 EVT_IF_EQ(EVT_AREA_FLAG(45), 1)
                     EVT_GOTO(11)
                 EVT_END_IF
@@ -597,11 +597,11 @@ EvtScript N(802423F8) = {
         EVT_END_THREAD
         EVT_LABEL(10)
         EVT_IF_EQ(EVT_MAP_VAR(10), 0)
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
             EVT_GOTO(10)
         EVT_END_IF
         EVT_CALL(GotoMap, EVT_PTR("flo_00"), 8)
-        EVT_WAIT_FRAMES(100)
+        EVT_WAIT(100)
     EVT_END_IF
     EVT_RETURN
     EVT_END
@@ -652,13 +652,13 @@ EvtScript N(80242A2C) = {
                 EVT_CALL(PanToTarget, 0, 0, 1)
                 EVT_SET(EVT_VAR(15), 150)
                 EVT_THREAD
-                    EVT_WAIT_FRAMES(5)
+                    EVT_WAIT(5)
                     EVT_CALL(EnableGroup, 85, 1)
                     EVT_CALL(EnableGroup, 92, 1)
                     EVT_CALL(EnableModel, 86, 0)
-                    EVT_WAIT_FRAMES(48)
+                    EVT_WAIT(48)
                     EVT_CALL(PlayEffect, 0xA, 0, 22, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-                    EVT_WAIT_FRAMES(10)
+                    EVT_WAIT(10)
                     EVT_CALL(PlayEffect, 0xA, 0, 22, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
                 EVT_END_THREAD
                 EVT_SET(EVT_AREA_FLAG(40), 1)
@@ -676,10 +676,10 @@ EvtScript N(80242A2C) = {
         EVT_MULF(EVT_VAR(2), EVT_FIXED(1.0))
         EVT_SETF(EVT_VAR(0), EVT_VAR(2))
         EVT_EXEC(N(80241C58))
-        EVT_WAIT_FRAMES(1)
+        EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_WAIT_FRAMES(15)
-    EVT_SET(EVT_SAVE_VAR(0), 55)
+    EVT_WAIT(15)
+    EVT_SET(GB_StoryProgress, 55)
     EVT_CALL(GotoMap, EVT_PTR("flo_00"), 7)
     EVT_RETURN
     EVT_END

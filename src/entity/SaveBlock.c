@@ -74,10 +74,10 @@ void entity_SaveBlock_save_data(void) {
 }
 
 void entity_SaveBlock_show_tutorial_message(Entity* entity) {
-    if (!get_global_flag(EVT_SAVE_FLAG(95))) {
+    if (!get_global_flag(GF_Tutorial_SaveBlock)) {
         SaveBlockTutorialPrinterClosed = FALSE;
         msg_get_printer_for_msg(MESSAGE_ID(0x1D, 0x0), &SaveBlockTutorialPrinterClosed);
-        set_global_flag(EVT_SAVE_FLAG(95));
+        set_global_flag(GF_Tutorial_SaveBlock);
         return;
     }
 

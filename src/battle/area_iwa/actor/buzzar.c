@@ -240,7 +240,7 @@ EvtScript N(handleEvent_8021B940) = {
             EVT_SET_CONST(LW(0), 1)
             EVT_SET_CONST(LW(1), NPC_ANIM_buzzar_Palette_00_Anim_B)
             EVT_EXEC_WAIT(DoNormalHit)
-            EVT_WAIT_FRAMES(10)
+            EVT_WAIT(10)
             EVT_SET_CONST(LW(0), 1)
             EVT_SET_CONST(LW(1), NPC_ANIM_buzzar_Palette_00_Anim_B)
             EVT_EXEC_WAIT(DoDeath)
@@ -314,7 +314,7 @@ EvtScript N(8021BEBC) = {
                 EVT_IF_EQ(LW(0), 1)
                     EVT_BREAK_LOOP
                 EVT_END_IF
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
             EVT_END_LOOP
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
@@ -328,11 +328,11 @@ EvtScript N(8021BEBC) = {
             EVT_SWITCH(LW(10))
                 EVT_CASE_EQ(HIT_RESULT_MISS)
                     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-                    EVT_WAIT_FRAMES(8)
+                    EVT_WAIT(8)
                     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_buzzar_Palette_00_Anim_11)
-                    EVT_WAIT_FRAMES(15)
+                    EVT_WAIT(15)
                     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_buzzar_Palette_00_Anim_13)
-                    EVT_WAIT_FRAMES(6)
+                    EVT_WAIT(6)
                     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20F0)
                     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
                     EVT_CALL(MoveBattleCamOver, 50)
@@ -346,15 +346,15 @@ EvtScript N(8021BEBC) = {
                             EVT_CALL(GetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
                             EVT_ADD(LW(0), 10)
                             EVT_CALL(PlayEffect, EFFECT_WINDY_LEAVES, 2, LW(0), 10, LW(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
-                            EVT_WAIT_FRAMES(3)
+                            EVT_WAIT(3)
                         EVT_END_LOOP
                     EVT_END_THREAD
-                    EVT_WAIT_FRAMES(60)
+                    EVT_WAIT(60)
                     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_buzzar_Palette_00_Anim_1)
                     EVT_IF_EQ(LW(10), HIT_RESULT_LUCKY)
                         EVT_CALL(EnemyTestTarget, ACTOR_SELF, LW(0), DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
                     EVT_END_IF
-                    EVT_WAIT_FRAMES(25)
+                    EVT_WAIT(25)
                     EVT_EXEC_WAIT(N(8021F7EC))
                     EVT_RETURN
                 EVT_CASE_DEFAULT
@@ -364,11 +364,11 @@ EvtScript N(8021BEBC) = {
                     EVT_CALL(LoadActionCommand, ACTION_COMMAND_WHIRLWIND)
                     EVT_CALL(func_802A9000_423C70, 1)
                     EVT_CALL(SetupMashMeter, 3, 40, 70, 100, 0, 0)
-                    EVT_WAIT_FRAMES(8)
+                    EVT_WAIT(8)
                     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_buzzar_Palette_00_Anim_11)
-                    EVT_WAIT_FRAMES(15)
+                    EVT_WAIT(15)
                     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_buzzar_Palette_00_Anim_13)
-                    EVT_WAIT_FRAMES(6)
+                    EVT_WAIT(6)
                     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20F0)
                     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, 0)
                     EVT_CALL(func_802A91E0_423E50, 0, 88, 3)
@@ -384,7 +384,7 @@ EvtScript N(8021BEBC) = {
                             EVT_CALL(GetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
                             EVT_ADD(LW(0), 10)
                             EVT_CALL(PlayEffect, EFFECT_WINDY_LEAVES, 2, LW(0), 10, LW(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
-                            EVT_WAIT_FRAMES(3)
+                            EVT_WAIT(3)
                         EVT_END_LOOP
                     EVT_END_THREAD
                     EVT_THREAD
@@ -400,23 +400,23 @@ EvtScript N(8021BEBC) = {
                                 EVT_CALL(SetActorYaw, ACTOR_PARTNER, LW(0))
                                 EVT_ADD(LW(0), LW(1))
                                 EVT_ADD(LW(1), 1)
-                                EVT_WAIT_FRAMES(1)
+                                EVT_WAIT(1)
                             EVT_END_LOOP
                             EVT_CALL(SetActorYaw, ACTOR_PARTNER, 0)
                         EVT_END_THREAD
                     EVT_END_IF
-                    EVT_WAIT_FRAMES(90)
+                    EVT_WAIT(90)
                     EVT_CALL(GetActionResult, LW(1))
                     EVT_CALL(ActorExists, ACTOR_PARTNER, LW(0))
                     EVT_IF_EQ(LW(0), TRUE)
-                        EVT_WAIT_FRAMES(3)
+                        EVT_WAIT(3)
                         EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
                         EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PARTNER)
                         EVT_CALL(SetGoalToTarget, ACTOR_SELF)
                         EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LW(0), DAMAGE_TYPE_UNBLOCKABLE | DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS, 65535, 0, LW(1), BS_FLAGS1_SP_EVT_ACTIVE)
                     EVT_END_IF
                     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_buzzar_Palette_00_Anim_1)
-                    EVT_WAIT_FRAMES(25)
+                    EVT_WAIT(25)
                     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
                     EVT_CALL(MoveBattleCamOver, 20)
                     EVT_EXEC_WAIT(N(8021F7EC))
@@ -429,11 +429,11 @@ EvtScript N(8021BEBC) = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_WHIRLWIND)
     EVT_CALL(func_802A9000_423C70, 1)
     EVT_CALL(SetupMashMeter, 3, 40, 70, 100, 0, 0)
-    EVT_WAIT_FRAMES(8)
+    EVT_WAIT(8)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_buzzar_Palette_00_Anim_11)
-    EVT_WAIT_FRAMES(15)
+    EVT_WAIT(15)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_buzzar_Palette_00_Anim_13)
-    EVT_WAIT_FRAMES(6)
+    EVT_WAIT(6)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20F0)
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, 0)
     EVT_CALL(func_802A91E0_423E50, 0, 88, 3)
@@ -449,7 +449,7 @@ EvtScript N(8021BEBC) = {
             EVT_CALL(GetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
             EVT_ADD(LW(0), 10)
             EVT_CALL(PlayEffect, EFFECT_WINDY_LEAVES, 2, LW(0), 10, LW(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
-            EVT_WAIT_FRAMES(3)
+            EVT_WAIT(3)
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_THREAD
@@ -466,7 +466,7 @@ EvtScript N(8021BEBC) = {
                 EVT_CALL(SetActorYaw, ACTOR_PLAYER, LW(0))
                 EVT_ADD(LW(0), LW(1))
                 EVT_ADD(LW(1), 1)
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
             EVT_END_LOOP
             EVT_CALL(SetActorYaw, ACTOR_PLAYER, 0)
         EVT_END_THREAD
@@ -481,27 +481,27 @@ EvtScript N(8021BEBC) = {
                 EVT_CALL(SetActorYaw, ACTOR_PARTNER, LW(0))
                 EVT_ADD(LW(0), LW(1))
                 EVT_ADD(LW(1), 1)
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
             EVT_END_LOOP
             EVT_CALL(SetActorYaw, ACTOR_PARTNER, 0)
         EVT_END_THREAD
     EVT_END_IF
     EVT_CALL(func_8026BF48, 1)
-    EVT_WAIT_FRAMES(90)
+    EVT_WAIT(90)
     EVT_CALL(GetActionResult, LW(1))
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LW(0), DAMAGE_TYPE_UNBLOCKABLE | DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS, 65535, 0, LW(1), BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_CALL(ActorExists, ACTOR_PARTNER, LW(0))
     EVT_IF_EQ(LW(0), TRUE)
-        EVT_WAIT_FRAMES(3)
+        EVT_WAIT(3)
         EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
         EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PARTNER)
         EVT_CALL(SetGoalToTarget, ACTOR_SELF)
         EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LW(0), DAMAGE_TYPE_UNBLOCKABLE | DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS, 65535, 0, LW(1), BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_END_IF
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_buzzar_Palette_00_Anim_1)
-    EVT_WAIT_FRAMES(25)
+    EVT_WAIT(25)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_EXEC_WAIT(N(8021F7EC))
@@ -535,7 +535,7 @@ EvtScript N(8021CCE8) = {
                 EVT_IF_EQ(LW(0), 1)
                     EVT_BREAK_LOOP
                 EVT_END_IF
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
             EVT_END_LOOP
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
@@ -554,27 +554,27 @@ EvtScript N(8021CCE8) = {
     EVT_ADD(LW(1), 25)
     EVT_CALL(SetPartPos, ACTOR_SELF, 5, LW(0), LW(1), LW(2))
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_buzzar_Palette_00_Anim_E)
-    EVT_WAIT_FRAMES(15)
+    EVT_WAIT(15)
     EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
     EVT_ADD(LW(0), 24)
     EVT_ADD(LW(1), 24)
     EVT_CALL(PlayEffect, EFFECT_SHINY_FLARE, 0, LW(0), LW(1), LW(2), EVT_FLOAT(0.6), 0, 0, 0, 0, 0, 0, 0, 0)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20F3)
-    EVT_WAIT_FRAMES(10)
+    EVT_WAIT(10)
     EVT_CALL(SetPartSounds, ACTOR_SELF, 3, 1, 0, 0)
     EVT_CALL(SetPartSounds, ACTOR_SELF, 4, 1, 0, 0)
     EVT_CALL(SetPartSounds, ACTOR_SELF, 5, 1, 0, 0)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_THREAD
-        EVT_WAIT_FRAMES(20)
+        EVT_WAIT(20)
         EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_buzzar_Palette_00_Anim_1)
     EVT_END_THREAD
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_buzzar_Palette_00_Anim_10)
     EVT_CALL(SetPartRotation, ACTOR_SELF, 3, 0, 0, -45)
     EVT_CALL(SetPartRotation, ACTOR_SELF, 4, 0, 0, -45)
     EVT_CALL(SetPartRotation, ACTOR_SELF, 5, 0, 0, -45)
-    EVT_WAIT_FRAMES(10)
+    EVT_WAIT(10)
     EVT_CALL(SetAnimation, ACTOR_SELF, 3, NPC_ANIM_buzzar_Palette_00_Anim_14)
     EVT_CALL(SetAnimation, ACTOR_SELF, 4, NPC_ANIM_buzzar_Palette_00_Anim_14)
     EVT_CALL(SetAnimation, ACTOR_SELF, 5, NPC_ANIM_buzzar_Palette_00_Anim_14)
@@ -615,18 +615,18 @@ EvtScript N(8021CCE8) = {
             EVT_CALL(FlyPartTo, ACTOR_SELF, 3, LW(0), 5, LW(2), 9, 0, 0)
             EVT_CALL(SetAnimation, ACTOR_SELF, 3, NPC_ANIM_buzzar_Palette_00_Anim_15)
             EVT_THREAD
-                EVT_WAIT_FRAMES(10)
+                EVT_WAIT(10)
                 EVT_CALL(SetAnimation, ACTOR_SELF, 3, NPC_ANIM_buzzar_Palette_00_Anim_14)
                 EVT_CALL(SetAnimation, ACTOR_SELF, 4, NPC_ANIM_buzzar_Palette_00_Anim_14)
                 EVT_CALL(SetAnimation, ACTOR_SELF, 5, NPC_ANIM_buzzar_Palette_00_Anim_14)
-                EVT_WAIT_FRAMES(20)
+                EVT_WAIT(20)
                 EVT_CALL(SetPartFlagBits, ACTOR_SELF, 3, ACTOR_PART_FLAG_INVISIBLE, 1)
                 EVT_CALL(SetPartFlagBits, ACTOR_SELF, 4, ACTOR_PART_FLAG_INVISIBLE, 1)
                 EVT_CALL(SetPartFlagBits, ACTOR_SELF, 5, ACTOR_PART_FLAG_INVISIBLE, 1)
             EVT_END_THREAD
-            EVT_WAIT_FRAMES(10)
+            EVT_WAIT(10)
             EVT_CALL(func_8024ECF8, 0, 1, 0)
-            EVT_WAIT_FRAMES(10)
+            EVT_WAIT(10)
             EVT_IF_EQ(LW(10), HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LW(0), DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
@@ -655,7 +655,7 @@ EvtScript N(8021CCE8) = {
     EVT_END_THREAD
     EVT_CALL(GetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
     EVT_CALL(FlyPartTo, ACTOR_SELF, 3, LW(0), LW(1), LW(2), 6, 0, 0)
-    EVT_WAIT_FRAMES(2)
+    EVT_WAIT(2)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LW(0), DAMAGE_TYPE_NO_CONTACT, 0, 0, 2, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SET(LW(15), LW(0))
     EVT_SWITCH(LW(15))
@@ -668,12 +668,12 @@ EvtScript N(8021CCE8) = {
                 EVT_CALL(SetPartJumpGravity, ACTOR_SELF, 4, EVT_FLOAT(1.5))
                 EVT_CALL(JumpPartTo, ACTOR_SELF, 4, LW(0), LW(1), LW(2), 10, 1)
                 EVT_CALL(SetPartRotation, ACTOR_SELF, 4, 0, 80, 90)
-                EVT_WAIT_FRAMES(8)
+                EVT_WAIT(8)
                 EVT_LOOP(15)
                     EVT_CALL(SetPartFlagBits, ACTOR_SELF, 4, ACTOR_PART_FLAG_INVISIBLE, 0)
-                    EVT_WAIT_FRAMES(1)
+                    EVT_WAIT(1)
                     EVT_CALL(SetPartFlagBits, ACTOR_SELF, 4, ACTOR_PART_FLAG_INVISIBLE, 1)
-                    EVT_WAIT_FRAMES(1)
+                    EVT_WAIT(1)
                 EVT_END_LOOP
             EVT_END_THREAD
             EVT_THREAD
@@ -684,12 +684,12 @@ EvtScript N(8021CCE8) = {
                 EVT_CALL(SetPartJumpGravity, ACTOR_SELF, 5, EVT_FLOAT(1.5))
                 EVT_CALL(JumpPartTo, ACTOR_SELF, 5, LW(0), LW(1), LW(2), 10, 1)
                 EVT_CALL(SetPartRotation, ACTOR_SELF, 5, 0, 90, -90)
-                EVT_WAIT_FRAMES(8)
+                EVT_WAIT(8)
                 EVT_LOOP(15)
                     EVT_CALL(SetPartFlagBits, ACTOR_SELF, 5, ACTOR_PART_FLAG_INVISIBLE, 0)
-                    EVT_WAIT_FRAMES(1)
+                    EVT_WAIT(1)
                     EVT_CALL(SetPartFlagBits, ACTOR_SELF, 5, ACTOR_PART_FLAG_INVISIBLE, 1)
-                    EVT_WAIT_FRAMES(1)
+                    EVT_WAIT(1)
                 EVT_END_LOOP
             EVT_END_THREAD
             EVT_THREAD
@@ -700,15 +700,15 @@ EvtScript N(8021CCE8) = {
                 EVT_CALL(SetPartJumpGravity, ACTOR_SELF, 3, EVT_FLOAT(1.5))
                 EVT_CALL(JumpPartTo, ACTOR_SELF, 3, LW(0), LW(1), LW(2), 10, 1)
                 EVT_CALL(SetPartRotation, ACTOR_SELF, 3, 0, 90, -90)
-                EVT_WAIT_FRAMES(8)
+                EVT_WAIT(8)
                 EVT_LOOP(15)
                     EVT_CALL(SetPartFlagBits, ACTOR_SELF, 3, ACTOR_PART_FLAG_INVISIBLE, 0)
-                    EVT_WAIT_FRAMES(1)
+                    EVT_WAIT(1)
                     EVT_CALL(SetPartFlagBits, ACTOR_SELF, 3, ACTOR_PART_FLAG_INVISIBLE, 1)
-                    EVT_WAIT_FRAMES(1)
+                    EVT_WAIT(1)
                 EVT_END_LOOP
             EVT_END_THREAD
-            EVT_WAIT_FRAMES(30)
+            EVT_WAIT(30)
             EVT_CALL(YieldTurn)
             EVT_EXEC_WAIT(N(8021F7EC))
     EVT_END_SWITCH
@@ -731,7 +731,7 @@ EvtScript N(8021DCB8) = {
                 EVT_IF_EQ(LW(0), 1)
                     EVT_BREAK_LOOP
                 EVT_END_IF
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
             EVT_END_LOOP
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
@@ -740,7 +740,7 @@ EvtScript N(8021DCB8) = {
     EVT_CHILD_THREAD
         EVT_LOOP(0)
             EVT_CALL(N(StartRumbleWithParams), 100, 10)
-            EVT_WAIT_FRAMES(10)
+            EVT_WAIT(10)
         EVT_END_LOOP
     EVT_END_CHILD_THREAD
     EVT_CHILD_THREAD
@@ -784,7 +784,7 @@ EvtScript N(8021DF2C) = {
                 EVT_IF_EQ(LW(0), 1)
                     EVT_BREAK_LOOP
                 EVT_END_IF
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
             EVT_END_LOOP
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
@@ -794,7 +794,7 @@ EvtScript N(8021DF2C) = {
     EVT_SWITCH(LW(10))
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
-            EVT_WAIT_FRAMES(10)
+            EVT_WAIT(10)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_66)
             EVT_CALL(SetBattleCamZoom, 240)
             EVT_CALL(SetBattleCamOffsetZ, -10)
@@ -813,7 +813,7 @@ EvtScript N(8021DF2C) = {
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_buzzar_Palette_00_Anim_18)
             EVT_CALL(FlyToGoal, ACTOR_SELF, 12, -12, 0)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_buzzar_Palette_00_Anim_1)
-            EVT_WAIT_FRAMES(10)
+            EVT_WAIT(10)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_IF_EQ(LW(10), HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LW(0), DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
@@ -857,7 +857,7 @@ EvtScript N(8021DF2C) = {
                         EVT_IF_EQ(LW(0), 1)
                             EVT_BREAK_LOOP
                         EVT_END_IF
-                        EVT_WAIT_FRAMES(1)
+                        EVT_WAIT(1)
                     EVT_END_LOOP
                 EVT_END_CASE_GROUP
             EVT_END_SWITCH
@@ -865,7 +865,7 @@ EvtScript N(8021DF2C) = {
             EVT_CALL(SetActorSounds, ACTOR_SELF, 5, -14, 0)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_buzzar_Palette_00_Anim_2)
             EVT_CALL(FlyToGoal, ACTOR_SELF, 0, 0, 0)
-            EVT_WAIT_FRAMES(20)
+            EVT_WAIT(20)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_EXEC_WAIT(N(8021F7EC))
             EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
@@ -873,12 +873,12 @@ EvtScript N(8021DF2C) = {
             EVT_RETURN
         EVT_CASE_DEFAULT
     EVT_END_SWITCH
-    EVT_WAIT_FRAMES(10)
+    EVT_WAIT(10)
     EVT_CALL(UseBattleCamPresetImmediately, BTL_CAM_PRESET_19)
     EVT_CALL(SetBattleCamZoom, 360)
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_THREAD
-        EVT_WAIT_FRAMES(5)
+        EVT_WAIT(5)
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
         EVT_CALL(SetBattleCamZoom, 360)
         EVT_CALL(GetActorPos, ACTOR_PLAYER, LW(0), LW(1), LW(2))
@@ -911,15 +911,15 @@ EvtScript N(8021DF2C) = {
     EVT_THREAD
         EVT_LOOP(90)
             EVT_CALL(SetMessageBoxDuration, 99)
-            EVT_WAIT_FRAMES(1)
+            EVT_WAIT(1)
         EVT_END_LOOP
         EVT_CALL(SetMessageBoxDuration, 0)
     EVT_END_THREAD
-    EVT_WAIT_FRAMES(20)
+    EVT_WAIT(20)
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_BREAK_FREE)
     EVT_CALL(func_802A9000_423C70)
     EVT_CALL(SetupMashMeter, 1, 30, 0, 0, 0, 0)
-    EVT_WAIT_FRAMES(10)
+    EVT_WAIT(10)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_buzzar_Palette_00_Anim_17)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_66)
     EVT_CALL(SetBattleCamZoom, 240)
@@ -930,11 +930,11 @@ EvtScript N(8021DF2C) = {
     EVT_CALL(func_802694A4, 1)
     EVT_CALL(func_802A91B0_4235A0, 0, 60, 30, 3)
     EVT_EXEC_GET_TID(N(8021DCB8), LW(10))
-    EVT_WAIT_FRAMES(62)
+    EVT_WAIT(62)
     EVT_CALL(GetActionSuccessCopy, LW(0))
     EVT_IF_GT(LW(0), 0)
         EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_buzzar_Palette_00_Anim_1)
-        EVT_WAIT_FRAMES(2)
+        EVT_WAIT(2)
         EVT_KILL_THREAD(LW(10))
         EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_MIDAIR_STILL, ANIM_MIDAIR_STILL, ANIM_10009)
         EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(5.0))
@@ -943,10 +943,10 @@ EvtScript N(8021DF2C) = {
         EVT_SET(LW(1), 0)
         EVT_CALL(SetGoalPos, ACTOR_PLAYER, LW(0), LW(1), LW(2))
         EVT_CALL(PlayerFallToGoal, 15)
-        EVT_WAIT_FRAMES(8)
+        EVT_WAIT(8)
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10002)
         EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
-        EVT_WAIT_FRAMES(8)
+        EVT_WAIT(8)
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
         EVT_EXEC_WAIT(N(8021F808))
         EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
@@ -959,8 +959,8 @@ EvtScript N(8021DF2C) = {
     EVT_SET(LW(1), 50)
     EVT_CALL(SetBattleCamTarget, LW(0), LW(1), LW(2))
     EVT_CALL(MoveBattleCamOver, 200)
-    EVT_WAIT_FRAMES(39)
-    EVT_WAIT_FRAMES(10)
+    EVT_WAIT(39)
+    EVT_WAIT(10)
     EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_RUN_PANIC, ANIM_RUN_PANIC, ANIM_RUN_PANIC)
     EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(5.0))
     EVT_CALL(SetActorJumpGravity, ACTOR_PLAYER, EVT_FLOAT(1.2))
@@ -990,7 +990,7 @@ EvtScript N(8021DF2C) = {
                         EVT_IF_EQ(LW(0), 1)
                             EVT_BREAK_LOOP
                         EVT_END_IF
-                        EVT_WAIT_FRAMES(1)
+                        EVT_WAIT(1)
                     EVT_END_LOOP
                 EVT_END_CASE_GROUP
             EVT_END_SWITCH
@@ -998,7 +998,7 @@ EvtScript N(8021DF2C) = {
             EVT_CALL(SetActorSounds, ACTOR_SELF, 5, -14, 0)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_buzzar_Palette_00_Anim_2)
             EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -10, 0)
-            EVT_WAIT_FRAMES(10)
+            EVT_WAIT(10)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(YieldTurn)
             EVT_EXEC_WAIT(N(8021F7EC))
@@ -1034,7 +1034,7 @@ EvtScript N(8021F030) = {
                 EVT_IF_EQ(LW(0), 1)
                     EVT_BREAK_LOOP
                 EVT_END_IF
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
             EVT_END_LOOP
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
@@ -1045,7 +1045,7 @@ EvtScript N(8021F030) = {
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
             EVT_SET(LW(10), LW(0))
-            EVT_WAIT_FRAMES(10)
+            EVT_WAIT(10)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20F1)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(5.0))
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
@@ -1060,7 +1060,7 @@ EvtScript N(8021F030) = {
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_buzzar_Palette_00_Anim_18)
             EVT_CALL(FlyToGoal, ACTOR_SELF, 12, -12, 0)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_buzzar_Palette_00_Anim_1)
-            EVT_WAIT_FRAMES(10)
+            EVT_WAIT(10)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_IF_EQ(LW(10), HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LW(0), DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
@@ -1071,7 +1071,7 @@ EvtScript N(8021F030) = {
             EVT_RETURN
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_WAIT_FRAMES(10)
+    EVT_WAIT(10)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20F1)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(5.0))
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
@@ -1085,7 +1085,7 @@ EvtScript N(8021F030) = {
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_buzzar_Palette_00_Anim_18)
     EVT_CALL(FlyToGoal, ACTOR_SELF, 8, 0, 0)
-    EVT_WAIT_FRAMES(2)
+    EVT_WAIT(2)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LW(0), 0, 0, 0, 3, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SET(LW(15), LW(0))
     EVT_SWITCH(LW(15))
@@ -1103,7 +1103,7 @@ EvtScript N(8021F030) = {
                         EVT_IF_EQ(LW(0), 1)
                             EVT_BREAK_LOOP
                         EVT_END_IF
-                        EVT_WAIT_FRAMES(1)
+                        EVT_WAIT(1)
                     EVT_END_LOOP
                 EVT_END_CASE_GROUP
             EVT_END_SWITCH
@@ -1114,7 +1114,7 @@ EvtScript N(8021F030) = {
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_buzzar_Palette_00_Anim_2)
             EVT_CALL(FlyToGoal, ACTOR_SELF, 0, 0, 0)
-            EVT_WAIT_FRAMES(10)
+            EVT_WAIT(10)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
             EVT_CALL(YieldTurn)
             EVT_EXEC_WAIT(N(8021F7EC))
@@ -1151,7 +1151,7 @@ EvtScript N(8021F824) = {
                 EVT_IF_EQ(LW(0), 1)
                     EVT_BREAK_LOOP
                 EVT_END_IF
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
             EVT_END_LOOP
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
@@ -1185,7 +1185,7 @@ EvtScript N(8021FA2C) = {
                 EVT_IF_EQ(LW(0), 1)
                     EVT_BREAK_LOOP
                 EVT_END_IF
-                EVT_WAIT_FRAMES(1)
+                EVT_WAIT(1)
             EVT_END_LOOP
         EVT_END_CASE_GROUP
     EVT_END_SWITCH

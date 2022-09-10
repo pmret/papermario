@@ -159,7 +159,7 @@ def get_constants():
     CONSTANTS["NPC_SPRITE"] = {}
     CONSTANTS["MAP_NPCS"] = {}
 
-    [SAVE_VARS.add(x) for x in ["EVT_WORLD_LOCATION", "EVT_STORY_PROGRESS"]]
+    [SAVE_VARS.add(x) for x in ["GB_WorldLocation", "GB_StoryProgress"]]
 
     include_path = Path(Path(__file__).resolve().parent.parent / "include")
     enums = Path(include_path / "enums.h").read_text().splitlines()
@@ -719,7 +719,7 @@ class ScriptDisassembler:
                 prefix = "ApiStatus "
                 suffix = "(Evt* script, s32 isInitialCall)"
             elif name.startswith("N(npcAISettings_"):
-                prefix = "NpcAISettings "
+                prefix = "MobileAISettings "
             elif name.startswith("N(npcSettings_"):
                 prefix = "NpcSettings "
             elif name.startswith("N(npcGroup_"):
@@ -790,7 +790,7 @@ class ScriptDisassembler:
             self.indent -= 1
             self.write_line("EVT_END_LOOP")
         elif opcode == 0x07: self.write_line(f"EVT_BREAK_LOOP")
-        elif opcode == 0x08: self.write_line(f"EVT_WAIT_FRAMES({self.var(argv[0])})")
+        elif opcode == 0x08: self.write_line(f"EVT_WAIT({self.var(argv[0])})")
         elif opcode == 0x09: self.write_line(f"EVT_WAIT_SECS({self.var(argv[0])})")
         elif opcode == 0x0A:
             if self.var(argv[0]).startswith("LW"):
@@ -1058,7 +1058,7 @@ if __name__ == "__main__":
                     script_text = script.disassemble()
                     if script.instructions > 1 and "_EVT_CMD" not in script_text:
                         if gap and first_print:
-                            potential_struct_sizes = { "StaticNpc": 0x1F0, "NpcAISettings":0x30, "NpcSettings":0x2C, "NpcGroupList":0xC }
+                            potential_struct_sizes = { "StaticNpc": 0x1F0, "MobileAISettings":0x30, "NpcSettings":0x2C, "NpcGroupList":0xC }
                             gap_size = offset - gap_start
                             potential_struct = "Unknown data"
                             potential_count = 1

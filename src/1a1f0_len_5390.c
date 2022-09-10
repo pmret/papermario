@@ -14,6 +14,8 @@ extern f32 D_800A0BA4;
 extern EffectInstance* WorldMerleeOrbEffect;
 extern EffectInstance* WorldMerleeWaveEffect;
 
+void set_battle_formation(Battle*);
+
 s32 get_defeated(s32 mapID, s32 encounterID) {
     EncounterStatus* currentEncounter = &gCurrentEncounter;
     s32 encounterIdx = encounterID / 32;
@@ -389,7 +391,7 @@ void update_encounters_pre_battle(void) {
             }
 
             if (currentEncounter->songID < 0) {
-                switch (currentEncounter->eFirstStrike) {
+                switch (currentEncounter->firstStrikeType) {
                     case 0:
                         bgm_set_battle_song(SONG_NORMAL_BATTLE, FIRST_STRIKE_NONE);
                         break;
@@ -428,22 +430,22 @@ void update_encounters_pre_battle(void) {
                 }
 
                 partner_handle_before_battle();
-                currentEncounter->unk_A0 = 0;
-                currentEncounter->unk_A2 = 0;
+                currentEncounter->dizzyAttackStatus = 0;
+                currentEncounter->dizzyAttackDuration = 0;
 
                 enemy = currentEncounter->currentEnemy;
                 currentEncounter->unk_10 = enemy->unk_B5;
 
                 if (is_ability_active(ABILITY_DIZZY_ATTACK) && currentEncounter->hitType == 3) {
-                    currentEncounter->unk_A0 = 4;
-                    currentEncounter->unk_A2 = 3;
+                    currentEncounter->dizzyAttackStatus = 4;
+                    currentEncounter->dizzyAttackDuration = 3;
                 }
 
                 sfx_stop_sound(SOUND_2111);
                 sfx_stop_sound(SOUND_2112);
                 sfx_stop_sound(SOUND_2113);
                 sfx_stop_sound(SOUND_2114);
-                set_battle_formation(0);
+                set_battle_formation(NULL);
                 set_battle_stage(encounter->stage);
                 load_battle(encounter->battle);
                 currentEncounter->unk_07 = 1;
@@ -582,7 +584,7 @@ void show_first_strike_message(void) {
 
     screenWidthHalf = SCREEN_WIDTH / 2;
 
-    switch (currentEncounter->eFirstStrike) {
+    switch (currentEncounter->firstStrikeType) {
         case FIRST_STRIKE_PLAYER:
             switch (currentEncounter->hitType) {
                 case 2:
@@ -815,7 +817,7 @@ s32 check_conversation_trigger(void) {
             enemy->encountered = ENCOUNTER_TRIGGER_CONVERSATION;
             encounterStatus->currentEncounter = encounter;
             encounterStatus->currentEnemy = enemy;
-            encounterStatus->eFirstStrike = FIRST_STRIKE_PLAYER;
+            encounterStatus->firstStrikeType = FIRST_STRIKE_PLAYER;
             return TRUE;
         }
     }

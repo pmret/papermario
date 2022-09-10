@@ -1,3 +1,8 @@
 #include "osr_02.h"
 
-INCLUDE_ASM(s32, "world/area_osr/osr_02/AB2190", func_80240020_AB2190);
+ApiStatus func_80240020_AB2190(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+
+    gPlayerStatus.unk_0D = evt_get_float_variable(script, *args++);
+    return ApiStatus_DONE2;
+}

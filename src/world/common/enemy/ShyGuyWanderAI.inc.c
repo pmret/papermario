@@ -1,7 +1,7 @@
 #include "common.h"
 #include "npc.h"
 
-void N(ShyGuyWanderAI_14)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territoryPtr) {
+void N(ShyGuyWanderAI_14)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territoryPtr) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     
@@ -11,7 +11,7 @@ void N(ShyGuyWanderAI_14)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVol
     script->functionTemp[0] = 0xF;
 }
 
-void N(ShyGuyWanderAI_15)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(ShyGuyWanderAI_15)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe((s32) enemy->npcID);
     f32 yaw = npc->yaw;
@@ -30,7 +30,7 @@ void N(ShyGuyWanderAI_15)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVol
     }
 }
 
-void N(ShyGuyWanderAI_16)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(ShyGuyWanderAI_16)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 yaw = npc->yaw;
@@ -46,7 +46,7 @@ void N(ShyGuyWanderAI_16)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVol
     }
 }
 
-void N(ShyGuyWanderAI_17)(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(ShyGuyWanderAI_17)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -63,7 +63,7 @@ ApiStatus N(ShyGuyWanderAI_Main)(Evt* script, s32 isInitialCall) {
     EnemyDetectVolume territory;
     EnemyDetectVolume* territoryPtr = &territory;
     Bytecode* args = script->ptrReadPos;
-    NpcAISettings* aiSettings = (NpcAISettings*) evt_get_variable(script, *args++);
+    MobileAISettings* aiSettings = (MobileAISettings*) evt_get_variable(script, *args++);
     f32 posX;
     f32 posY;
     f32 posZ;

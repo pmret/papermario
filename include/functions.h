@@ -148,7 +148,6 @@ s32 general_heap_free(void* data);
 
 s32 integer_log(s32 number, u32 base);
 
-void set_battle_formation(s32);
 void set_battle_stage(s32);
 void load_battle(s32);
 
@@ -221,6 +220,7 @@ void get_dpad_input_radial(f32* angle, f32* magnitude);
 void transform_point(Matrix4f mtx, f32 inX, f32 inY, f32 inZ, f32 inS, f32* outX, f32* outY, f32* outZ, f32* outS);
 void try_player_footstep_sounds(s32 arg0);
 void phys_update_interact_collider(void);
+void phys_reset_spin_history(void);
 s32 phys_adjust_cam_on_landing(void);
 s32 phys_should_player_be_sliding(void);
 void phys_init_integrator_for_current_state(void);
@@ -298,6 +298,10 @@ void init_virtual_entity_list(void);
 void init_model_animators(void);
 void play_model_animation(s32, s16*);
 s32 heap_free(void* ptr);
+
+void load_battle_hit_asset(const char* hitName);
+void load_data_for_models(struct ModelNode* model, s32 romOffset, s32 size);
+void load_player_actor(void);
 
 void btl_state_update_normal_start(void);
 void btl_state_draw_normal_start(void);
@@ -478,7 +482,7 @@ struct ModelTransformGroup* get_transform_group(s32 index);
 void make_transform_group(u16 modelID);
 void enable_transform_group(u16 modelID);
 void disable_transform_group(u16 modelID);
-void set_map_transition_effect(s32);
+void set_map_transition_effect(ScreenTransition);
 
 void set_tex_panner(struct Model* model, s32 texPannerID);
 void set_custom_gfx(s32 customGfxIndex, Gfx* pre, Gfx* post);
@@ -520,6 +524,7 @@ s32 bgm_set_song(s32 playerIndex, s32 songID, s32 variation, s32 fadeOutTime, s1
 void bgm_set_battle_song(s32, s32);
 void bgm_push_battle_song(void);
 s32 bgm_adjust_proximity(s32 playerIndex, s32 arg1, s16 arg2);
+void func_801491E4(s32, s32, s32, s32, s32, s32 alpha);
 s32 func_8014A964(s32 playerIndex, s32 songID, s32 variation, s32 fadeInTime, s16 arg4, s16 arg5);
 
 #include "audio/public.h"
@@ -721,6 +726,8 @@ void state_step_demo(void);
 void state_drawUI_demo(void);
 void game_mode_set_fpDrawAuxUI(s32 i, void (*fn)(void));
 
+void func_80260A60(void);
+
 void func_802B2000(void);
 void func_802B203C(void);
 void func_802B2078(void);
@@ -748,14 +755,14 @@ void set_curtain_fade(f32 fade);
 void crash_screen_init(void);
 void crash_screen_set_draw_info(u16* frameBufPtr, s16 width, s16 height);
 
-void basic_ai_wander_init(Evt* script, NpcAISettings* npcAISettings, EnemyDetectVolume* territory);
-void basic_ai_wander(Evt* script, NpcAISettings* npcAISettings, EnemyDetectVolume* territory);
-void basic_ai_loiter(Evt* script, NpcAISettings* npcAISettings, EnemyDetectVolume* territory);
-void basic_ai_found_player_jump_init(Evt* script, NpcAISettings* npcAISettings, EnemyDetectVolume* territory);
-void basic_ai_found_player_jump(Evt* script, NpcAISettings* npcAISettings, EnemyDetectVolume* territory);
-void basic_ai_chase_init(Evt* script, NpcAISettings* npcAISettings, EnemyDetectVolume* territory);
-void basic_ai_chase(Evt* script, NpcAISettings* npcAISettings, EnemyDetectVolume* territory);
-void basic_ai_lose_player(Evt* script, NpcAISettings* npcAISettings, EnemyDetectVolume* territory);
+void basic_ai_wander_init(Evt* script, MobileAISettings* npcAISettings, EnemyDetectVolume* territory);
+void basic_ai_wander(Evt* script, MobileAISettings* npcAISettings, EnemyDetectVolume* territory);
+void basic_ai_loiter(Evt* script, MobileAISettings* npcAISettings, EnemyDetectVolume* territory);
+void basic_ai_found_player_jump_init(Evt* script, MobileAISettings* npcAISettings, EnemyDetectVolume* territory);
+void basic_ai_found_player_jump(Evt* script, MobileAISettings* npcAISettings, EnemyDetectVolume* territory);
+void basic_ai_chase_init(Evt* script, MobileAISettings* npcAISettings, EnemyDetectVolume* territory);
+void basic_ai_chase(Evt* script, MobileAISettings* npcAISettings, EnemyDetectVolume* territory);
+void basic_ai_lose_player(Evt* script, MobileAISettings* npcAISettings, EnemyDetectVolume* territory);
 void basic_ai_suspend(Evt* script);
 
 // This legally allows all functions to be pointers without warnings.
@@ -775,8 +782,8 @@ s32 func_8013A704(s32);
 void free_generic_entity(s32);
 
 s32 ai_check_fwd_collisions(Npc* npc, f32 arg1, f32* arg2, f32* arg3, f32* arg4, f32* arg5);
-void basic_ai_loiter_init(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory);
-void PatrolAI_LoiterInit(Evt* script, NpcAISettings* aiSettings, EnemyDetectVolume* territory);
+void basic_ai_loiter_init(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory);
+void PatrolAI_LoiterInit(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory);
 
 s32 func_80263230(Actor*, Actor*);
 void func_80266EA8(ActorPart*, s32);
@@ -796,7 +803,7 @@ void mdl_get_copied_vertices(s32 copyIndex, Vtx** firstVertex, Vtx** copiedVerti
 void mdl_draw_hidden_panel_surface(Gfx** arg0, u16 treeIndex);
 s32 func_8011CFBC(void);
 void set_screen_overlay_center_worldpos(s32 idx, s32 posIdx, s32 x, s32 y, s32 z);
-s32 mdl_get_next_texture_address(s32);
+void* mdl_get_next_texture_address(s32);
 void draw_msg(s32 msgID, s32 posX, s32 posY, s32 opacity, s32 palette, u8 style);
 void get_background_color_blend(u8* r, u8* g, u8* b, u8* a);
 
@@ -892,16 +899,22 @@ s32 add_badge(s32 itemID);
 void hide_coin_counter_immediately(void);
 void hide_popup_menu(void);
 void destroy_popup_menu(void);
-void reset_player_status(void);;
+void reset_player_status(void);
+s32 has_valid_conversation_npc(void);
+s32 func_800E06D8(void);
 void func_800E4F10(void);
 void func_800E5520(void);
 void func_800E6B68(void);
+void func_800E9810(void);
 s32 func_800E9860(void);
 void func_800E98C4(void);
 void func_800E98EC(void);
 void func_800E9900(void);
-void func_800F0D5C(void);
 void func_800F0C9C(void);
+void func_800F0CB0(s32, f32, f32, f32);
+void func_800F0D5C(void);
+void func_800F0D80(void);
+void func_800F102C(void);
 s32 get_item_count(void);
 s32 get_stored_empty_count(void);
 s32 get_stored_count(void);
@@ -970,6 +983,9 @@ void status_menu_start_blinking_sp(void);
 void status_menu_stop_blinking_fp(void);
 void status_menu_stop_blinking_hp(void);
 void status_menu_stop_blinking_sp(void);
+void status_menu_start_blinking_sp_bars(s8 numBarsToBlink);
+void status_menu_draw_number(s32 iconID, s32 x, s32 y, s32 value, s32 numDigits);
+void status_menu_draw_stat(s32 id, s32 x, s32 y, s32, s32);
 void set_background_size(s16, s16, s16, s16);
 void read_background_size(BackgroundHeader*);
 void set_max_SP(s8);

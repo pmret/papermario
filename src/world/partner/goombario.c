@@ -3,9 +3,11 @@
 #include "goombario.h"
 #include "../src/world/partners.h"
 
+extern s32* D_802B79A8_E21858;
+
 BSS s32 D_802BDF30;
 BSS s32 D_802BDF34;
-BSS s32 D_802BDF38;
+BSS Npc* D_802BDF38;
 BSS s32 D_802BDF3C;
 BSS TweesterPhysics GoombarioTweesterPhysics;
 BSS s32 D_802BDF5C;
@@ -177,14 +179,13 @@ s32 world_goombario_can_pause(Npc* goombario) {
 }
 
 // get message for tattle routine
-// has big jumptable at rodata 802BDE88
 ApiStatus func_802BD5D8_3174F8(Evt* script, s32 isInitialCall);
 INCLUDE_ASM(ApiStatus, "world/partner/goombario", func_802BD5D8_3174F8, Evt* script, s32 isInitialCall);
 
 ApiStatus func_802BDB30_317A50(Evt* script, s32 isInitialCall) {
     PartnerActionStatus* goombarioActionStatus = &gPartnerActionStatus;
 
-    set_time_freeze_mode(0);
+    set_time_freeze_mode(TIME_FREEZE_NORMAL);
 
     if (D_802BDF64 != 0) {
         D_802BDF64 = 0;
@@ -209,7 +210,7 @@ EvtScript world_goombario_use_ability = {
         EVT_CALL(SpeakToPlayer, NPC_PARTNER, NPC_ANIM_world_goombario_normal_talk,
                  NPC_ANIM_world_goombario_normal_idle, 0, EVT_VAR(0))
     EVT_END_IF
-    EVT_WAIT_FRAMES(1)
+    EVT_WAIT(1)
     EVT_CALL(func_802BDB30_317A50)
     EVT_RETURN
     EVT_END

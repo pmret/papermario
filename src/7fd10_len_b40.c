@@ -196,7 +196,7 @@ void check_input_open_menus(void) {
 
     if (gGameStatusPtr->disableScripts ||
         (gGameStatusPtr->peachFlags & 1) ||
-        evt_get_variable(NULL, EVT_STORY_PROGRESS) == STORY_INTRO)
+        evt_get_variable(NULL, GB_StoryProgress) == STORY_INTRO)
     {
         return;
     }
@@ -213,7 +213,7 @@ void check_input_open_menus(void) {
         pressedButtons = playerStatus->pressedButtons;
     }
 
-    if (evt_get_variable(NULL, EVT_STORY_PROGRESS) >= STORY_EPILOGUE) {
+    if (evt_get_variable(NULL, GB_StoryProgress) >= STORY_EPILOGUE) {
         currentButtons &= ~(BUTTON_C_LEFT | BUTTON_C_RIGHT);
         pressedButtons &= ~(BUTTON_C_LEFT | BUTTON_C_RIGHT);
     }
@@ -233,12 +233,12 @@ block_17:
                 switch (D_8010CCF8) {
                     case 0:
                         if (playerStatus->flags & PLAYER_STATUS_FLAGS_40) {
-                            sfx_play_sound(0x21D);
+                            sfx_play_sound(SOUND_MENU_ERROR);
                             if (D_8010C9C0) {
                                 func_800E6860();
                                 playerStatus->flags &= ~PLAYER_STATUS_FLAGS_20;
                                 gOverrideFlags &= ~GLOBAL_OVERRIDES_40;
-                                set_time_freeze_mode(0);
+                                set_time_freeze_mode(TIME_FREEZE_NORMAL);
                             }
                         } else {
                             numEntries = setup_partner_popup(popup);
@@ -280,7 +280,7 @@ block_17:
                     func_800E6860();
                     playerStatus->flags &= ~PLAYER_STATUS_FLAGS_20;
                     gOverrideFlags &= ~GLOBAL_OVERRIDES_40;
-                    set_time_freeze_mode(0);
+                    set_time_freeze_mode(TIME_FREEZE_NORMAL);
                 }
             } else {
                 D_8010CCFA--;
@@ -299,7 +299,7 @@ block_17:
                 return;
             }
             create_popup_menu(popup);
-            set_time_freeze_mode(3);
+            set_time_freeze_mode(TIME_FREEZE_PARTNER_MENU);
             if (partnerActionStatus->partnerActionState == 0) {
                 set_action_state(ACTION_STATE_IDLE);
             }
@@ -353,7 +353,7 @@ block_17:
                 func_800E6860();
                 playerStatus->flags &= ~PLAYER_STATUS_FLAGS_20;
                 gOverrideFlags &= ~GLOBAL_OVERRIDES_40;
-                set_time_freeze_mode(0);
+                set_time_freeze_mode(TIME_FREEZE_NORMAL);
             }
             break;
         case 10:
@@ -377,7 +377,7 @@ void check_input_status_menu(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 pressedButtons;
 
-    if (evt_get_variable(NULL, EVT_STORY_PROGRESS) < STORY_EPILOGUE) {
+    if (evt_get_variable(NULL, GB_StoryProgress) < STORY_EPILOGUE) {
         if (playerStatus->actionState != ACTION_STATE_RIDE) {
             pressedButtons = playerStatus->pressedButtons;
         } else {

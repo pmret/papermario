@@ -21,7 +21,7 @@ EntryList N(entryList) = {
     { 450.0f, 0.0f, -40.0f, 0.0f },
 };
 
-MapConfig N(config) = {
+MapSettings N(settings) = {
     .main = &N(main),
     .entryList = &N(entryList),
     .entryCount = ENTRY_COUNT(N(entryList)),
@@ -29,7 +29,7 @@ MapConfig N(config) = {
 };
 
 EvtScript N(80241480) = {
-    EVT_SWITCH(EVT_SAVE_VAR(0))
+    EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(-29)
             EVT_CALL(SetMusicTrack, 0, SONG_TUBBAS_MANOR, 0, 8)
         EVT_CASE_LT(-16)
@@ -54,9 +54,9 @@ EvtScript N(exitSingleDoor_80241520) = {
     EVT_SET(EVT_VAR(2), 16)
     EVT_SET(EVT_VAR(3), -1)
     EVT_EXEC(ExitSingleDoor)
-    EVT_WAIT_FRAMES(17)
+    EVT_WAIT(17)
     EVT_CALL(GotoMap, EVT_PTR("dgb_15"), 2)
-    EVT_WAIT_FRAMES(100)
+    EVT_WAIT(100)
     EVT_RETURN
     EVT_END
 };
@@ -68,9 +68,9 @@ EvtScript N(enterSingleDoor_802415D4) = {
     EVT_CALL(GetEntryID, EVT_VAR(0))
     EVT_SWITCH(EVT_VAR(0))
         EVT_CASE_EQ(0)
-            EVT_IF_EQ(EVT_SAVE_FLAG(1068), 0)
-                EVT_SET(EVT_SAVE_FLAG(1068), 1)
-                EVT_SET(EVT_SAVE_VAR(203), 18)
+            EVT_IF_EQ(GF_DGB16_EscapedFromTubba, 0)
+                EVT_SET(GF_DGB16_EscapedFromTubba, 1)
+                EVT_SET(GB_ARN_Tubba_MapID, 18)
             EVT_END_IF
             EVT_SET(EVT_VAR(2), 16)
             EVT_SET(EVT_VAR(3), -1)
@@ -81,12 +81,12 @@ EvtScript N(enterSingleDoor_802415D4) = {
 };
 
 EvtScript N(main) = {
-    EVT_SET(EVT_SAVE_VAR(425), 15)
+    EVT_SET(GB_WorldLocation, 15)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
     EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
     EVT_CALL(SetCamEnabled, 0, 1)
-    EVT_IF_LT(EVT_SAVE_VAR(0), -15)
+    EVT_IF_LT(GB_StoryProgress, -15)
         EVT_CALL(MakeNpcs, 1, EVT_PTR(N(npcGroupList_8024318C)))
     EVT_END_IF
     EVT_EXEC_WAIT(N(80241780))
@@ -102,7 +102,7 @@ static s32 N(pad_1774)[] = {
 };
 
 EvtScript N(80241780) = {
-    EVT_CALL(MakeItemEntity, ITEM_TUBBA_CASTLE_KEY, -235, 25, -165, 17, EVT_SAVE_FLAG(1069))
+    EVT_CALL(MakeItemEntity, ITEM_TUBBA_CASTLE_KEY, -235, 25, -165, 17, GF_DGB16_Item_CastleKey1)
     EVT_RETURN
     EVT_END
 };
@@ -145,7 +145,7 @@ s32 N(extraAnimationList_802418A4)[] = {
     ANIM_END,
 };
 
-NpcAISettings N(npcAISettings_802418AC) = {
+MobileAISettings N(npcAISettings_802418AC) = {
     .moveSpeed = 1.0f,
     .moveTime = 120,
     .waitTime = 30,
@@ -198,7 +198,7 @@ NpcSettings N(npcSettings_80241A20) = {
     .ai = &N(npcAI_80241978),
     .onDefeat = &N(802417C0),
     .level = 13,
-    .unk_2A = 8,
+    .actionFlags = 8,
 };
 
 StaticNpc N(npcGroup_80241A4C)[] = {
@@ -208,16 +208,18 @@ StaticNpc N(npcGroup_80241A4C)[] = {
         .pos = { -70.0f, 0.0f, -100.0f },
         .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
         .yaw = 270,
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .itemDropChance = 5,
-        .itemDrops = {
+        .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+            .itemDropChance = 5,
+            .itemDrops = {
             { ITEM_SUPER_SHROOM, 10, 0 },
         },
-        .heartDrops = STANDARD_HEART_DROPS(3),
-        .flowerDrops = STANDARD_FLOWER_DROPS(2),
-        .minCoinBonus = 2,
-        .maxCoinBonus = 3,
-        .movement = { -70, 0, -100, 40, 0, -32767, 0, 150, 0, -175, 430, 92, 1, 1 },
+            .heartDrops = STANDARD_HEART_DROPS(3),
+            .flowerDrops = STANDARD_FLOWER_DROPS(2),
+            .minCoinBonus = 2,
+            .maxCoinBonus = 3,
+        },
+	.territory = { .temp = { -70, 0, -100, 40, 0, -32767, 0, 150, 0, -175, 430, 92, 1, 1 }},
         .animations = {
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
             NPC_ANIM_world_clubba_Palette_00_Anim_3,
@@ -236,7 +238,7 @@ StaticNpc N(npcGroup_80241A4C)[] = {
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
         },
-        .unk_1E0 = { 00, 00, 00, 02, 00, 00, 00, 00},
+        .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
         .extraAnimations = N(extraAnimationList_8024187C),
     },
     {
@@ -245,10 +247,12 @@ StaticNpc N(npcGroup_80241A4C)[] = {
         .pos = { 0.0f, -1000.0f, 0.0f },
         .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_DROPS,
         .yaw = 0,
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .heartDrops = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-        .animations = {
+        .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+            .heartDrops = NO_DROPS,
+            .flowerDrops = NO_DROPS,
+        },
+	.animations = {
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
             NPC_ANIM_world_clubba_Palette_00_Anim_3,
             NPC_ANIM_world_clubba_Palette_00_Anim_4,
@@ -277,16 +281,18 @@ StaticNpc N(npcGroup_80241E2C)[] = {
         .pos = { 0.0f, 0.0f, -235.0f },
         .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
         .yaw = 90,
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .itemDropChance = 5,
-        .itemDrops = {
+        .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+            .itemDropChance = 5,
+            .itemDrops = {
             { ITEM_SUPER_SHROOM, 10, 0 },
         },
-        .heartDrops = STANDARD_HEART_DROPS(3),
-        .flowerDrops = STANDARD_FLOWER_DROPS(2),
-        .minCoinBonus = 2,
-        .maxCoinBonus = 3,
-        .movement = { 0, 0, -235, 40, 0, -32767, 0, 150, 0, -175, 430, 92, 1, 1 },
+            .heartDrops = STANDARD_HEART_DROPS(3),
+            .flowerDrops = STANDARD_FLOWER_DROPS(2),
+            .minCoinBonus = 2,
+            .maxCoinBonus = 3,
+        },
+	.territory = { .temp = { 0, 0, -235, 40, 0, -32767, 0, 150, 0, -175, 430, 92, 1, 1 }},
         .animations = {
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
             NPC_ANIM_world_clubba_Palette_00_Anim_3,
@@ -305,7 +311,7 @@ StaticNpc N(npcGroup_80241E2C)[] = {
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
         },
-        .unk_1E0 = { 00, 00, 00, 02, 00, 00, 00, 00},
+        .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
     },
     {
         .id = NPC_WORLD_CLUBBA3,
@@ -313,10 +319,12 @@ StaticNpc N(npcGroup_80241E2C)[] = {
         .pos = { 0.0f, -1000.0f, 0.0f },
         .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_DROPS,
         .yaw = 0,
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .heartDrops = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-        .animations = {
+        .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+            .heartDrops = NO_DROPS,
+            .flowerDrops = NO_DROPS,
+        },
+	.animations = {
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
             NPC_ANIM_world_clubba_Palette_00_Anim_3,
             NPC_ANIM_world_clubba_Palette_00_Anim_4,
@@ -345,16 +353,18 @@ StaticNpc N(npcGroup_8024220C)[] = {
         .pos = { 70.0f, 0.0f, -100.0f },
         .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
         .yaw = 90,
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .itemDropChance = 5,
-        .itemDrops = {
+        .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+            .itemDropChance = 5,
+            .itemDrops = {
             { ITEM_SUPER_SHROOM, 10, 0 },
         },
-        .heartDrops = STANDARD_HEART_DROPS(3),
-        .flowerDrops = STANDARD_FLOWER_DROPS(2),
-        .minCoinBonus = 2,
-        .maxCoinBonus = 3,
-        .movement = { 70, 0, -100, 40, 0, -32767, 0, 150, 0, -175, 430, 92, 1, 1 },
+            .heartDrops = STANDARD_HEART_DROPS(3),
+            .flowerDrops = STANDARD_FLOWER_DROPS(2),
+            .minCoinBonus = 2,
+            .maxCoinBonus = 3,
+        },
+	.territory = { .temp = { 70, 0, -100, 40, 0, -32767, 0, 150, 0, -175, 430, 92, 1, 1 }},
         .animations = {
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
             NPC_ANIM_world_clubba_Palette_00_Anim_3,
@@ -373,7 +383,7 @@ StaticNpc N(npcGroup_8024220C)[] = {
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
         },
-        .unk_1E0 = { 00, 00, 00, 02, 00, 00, 00, 00},
+        .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
     },
     {
         .id = NPC_WORLD_CLUBBA5,
@@ -381,10 +391,12 @@ StaticNpc N(npcGroup_8024220C)[] = {
         .pos = { 0.0f, -1000.0f, 0.0f },
         .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_DROPS,
         .yaw = 0,
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .heartDrops = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-        .animations = {
+        .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+            .heartDrops = NO_DROPS,
+            .flowerDrops = NO_DROPS,
+        },
+	.animations = {
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
             NPC_ANIM_world_clubba_Palette_00_Anim_3,
             NPC_ANIM_world_clubba_Palette_00_Anim_4,
@@ -413,16 +425,18 @@ StaticNpc N(npcGroup_802425EC)[] = {
         .pos = { 140.0f, 0.0f, -235.0f },
         .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
         .yaw = 270,
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .itemDropChance = 5,
-        .itemDrops = {
+        .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+            .itemDropChance = 5,
+            .itemDrops = {
             { ITEM_SUPER_SHROOM, 10, 0 },
         },
-        .heartDrops = STANDARD_HEART_DROPS(3),
-        .flowerDrops = STANDARD_FLOWER_DROPS(2),
-        .minCoinBonus = 2,
-        .maxCoinBonus = 3,
-        .movement = { 140, 0, -235, 40, 0, -32767, 0, 150, 0, -175, 430, 92, 1, 1 },
+            .heartDrops = STANDARD_HEART_DROPS(3),
+            .flowerDrops = STANDARD_FLOWER_DROPS(2),
+            .minCoinBonus = 2,
+            .maxCoinBonus = 3,
+        },
+	.territory = { .temp = { 140, 0, -235, 40, 0, -32767, 0, 150, 0, -175, 430, 92, 1, 1 }},
         .animations = {
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
             NPC_ANIM_world_clubba_Palette_00_Anim_3,
@@ -441,7 +455,7 @@ StaticNpc N(npcGroup_802425EC)[] = {
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
         },
-        .unk_1E0 = { 00, 00, 00, 02, 00, 00, 00, 00},
+        .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
     },
     {
         .id = NPC_WORLD_CLUBBA7,
@@ -449,10 +463,12 @@ StaticNpc N(npcGroup_802425EC)[] = {
         .pos = { 0.0f, -1000.0f, 0.0f },
         .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_DROPS,
         .yaw = 0,
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .heartDrops = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-        .animations = {
+        .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+            .heartDrops = NO_DROPS,
+            .flowerDrops = NO_DROPS,
+        },
+	.animations = {
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
             NPC_ANIM_world_clubba_Palette_00_Anim_3,
             NPC_ANIM_world_clubba_Palette_00_Anim_4,
@@ -481,16 +497,18 @@ StaticNpc N(npcGroup_802429CC)[] = {
         .pos = { 210.0f, 0.0f, -100.0f },
         .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
         .yaw = 270,
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .itemDropChance = 5,
-        .itemDrops = {
+        .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+            .itemDropChance = 5,
+            .itemDrops = {
             { ITEM_SUPER_SHROOM, 10, 0 },
         },
-        .heartDrops = STANDARD_HEART_DROPS(3),
-        .flowerDrops = STANDARD_FLOWER_DROPS(2),
-        .minCoinBonus = 2,
-        .maxCoinBonus = 3,
-        .movement = { 210, 0, -100, 40, 0, -32767, 0, 150, 0, -175, 430, 92, 1, 1 },
+            .heartDrops = STANDARD_HEART_DROPS(3),
+            .flowerDrops = STANDARD_FLOWER_DROPS(2),
+            .minCoinBonus = 2,
+            .maxCoinBonus = 3,
+        },
+	.territory = { .temp = { 210, 0, -100, 40, 0, -32767, 0, 150, 0, -175, 430, 92, 1, 1 }},
         .animations = {
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
             NPC_ANIM_world_clubba_Palette_00_Anim_3,
@@ -509,7 +527,7 @@ StaticNpc N(npcGroup_802429CC)[] = {
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
         },
-        .unk_1E0 = { 00, 00, 00, 02, 00, 00, 00, 00},
+        .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
     },
     {
         .id = NPC_WORLD_CLUBBA9,
@@ -517,10 +535,12 @@ StaticNpc N(npcGroup_802429CC)[] = {
         .pos = { 0.0f, -1000.0f, 0.0f },
         .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_DROPS,
         .yaw = 0,
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .heartDrops = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-        .animations = {
+        .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+            .heartDrops = NO_DROPS,
+            .flowerDrops = NO_DROPS,
+        },
+	.animations = {
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
             NPC_ANIM_world_clubba_Palette_00_Anim_3,
             NPC_ANIM_world_clubba_Palette_00_Anim_4,
@@ -549,16 +569,18 @@ StaticNpc N(npcGroup_80242DAC)[] = {
         .pos = { 280.0f, 0.0f, -235.0f },
         .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING,
         .yaw = 90,
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .itemDropChance = 5,
-        .itemDrops = {
+        .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+            .itemDropChance = 5,
+            .itemDrops = {
             { ITEM_SUPER_SHROOM, 10, 0 },
         },
-        .heartDrops = STANDARD_HEART_DROPS(3),
-        .flowerDrops = STANDARD_FLOWER_DROPS(2),
-        .minCoinBonus = 2,
-        .maxCoinBonus = 3,
-        .movement = { 280, 0, -235, 40, 0, -32767, 0, 150, 0, -175, 430, 92, 1, 1 },
+            .heartDrops = STANDARD_HEART_DROPS(3),
+            .flowerDrops = STANDARD_FLOWER_DROPS(2),
+            .minCoinBonus = 2,
+            .maxCoinBonus = 3,
+        },
+	.territory = { .temp = { 280, 0, -235, 40, 0, -32767, 0, 150, 0, -175, 430, 92, 1, 1 }},
         .animations = {
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
             NPC_ANIM_world_clubba_Palette_00_Anim_3,
@@ -577,7 +599,7 @@ StaticNpc N(npcGroup_80242DAC)[] = {
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
         },
-        .unk_1E0 = { 00, 00, 00, 02, 00, 00, 00, 00},
+        .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
     },
     {
         .id = NPC_WORLD_CLUBBA11,
@@ -585,10 +607,12 @@ StaticNpc N(npcGroup_80242DAC)[] = {
         .pos = { 0.0f, -1000.0f, 0.0f },
         .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_JUMPING | NPC_FLAG_NO_DROPS,
         .yaw = 0,
-        .dropFlags = NPC_DROP_FLAGS_80,
-        .heartDrops = NO_DROPS,
-        .flowerDrops = NO_DROPS,
-        .animations = {
+        .drops = {
+		.dropFlags = NPC_DROP_FLAGS_80,
+            .heartDrops = NO_DROPS,
+            .flowerDrops = NO_DROPS,
+        },
+	.animations = {
             NPC_ANIM_world_clubba_Palette_00_Anim_2,
             NPC_ANIM_world_clubba_Palette_00_Anim_3,
             NPC_ANIM_world_clubba_Palette_00_Anim_4,
@@ -611,12 +635,12 @@ StaticNpc N(npcGroup_80242DAC)[] = {
 };
 
 NpcGroupList N(npcGroupList_8024318C) = {
-    NPC_GROUP(N(npcGroup_80241A4C), BATTLE_ID(15, 3, 0, 3)),
-    NPC_GROUP(N(npcGroup_80241E2C), BATTLE_ID(15, 0, 0, 3)),
-    NPC_GROUP(N(npcGroup_8024220C), BATTLE_ID(15, 0, 0, 3)),
-    NPC_GROUP(N(npcGroup_802425EC), BATTLE_ID(15, 0, 0, 3)),
-    NPC_GROUP(N(npcGroup_802429CC), BATTLE_ID(15, 1, 0, 3)),
-    NPC_GROUP(N(npcGroup_80242DAC), BATTLE_ID(15, 1, 0, 3)),
+    NPC_GROUP(N(npcGroup_80241A4C), 0x0F03, 0x02),
+    NPC_GROUP(N(npcGroup_80241E2C), 0x0F00, 0x02),
+    NPC_GROUP(N(npcGroup_8024220C), 0x0F00, 0x02),
+    NPC_GROUP(N(npcGroup_802425EC), 0x0F00, 0x02),
+    NPC_GROUP(N(npcGroup_802429CC), 0x0F01, 0x02),
+    NPC_GROUP(N(npcGroup_80242DAC), 0x0F01, 0x02),
     {},
 };
 

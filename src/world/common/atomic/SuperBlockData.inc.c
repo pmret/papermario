@@ -4,7 +4,7 @@
 // map-specific parameters for this data
 // which saved byte to associate this block with
 #ifndef SUPER_BLOCK_GAMEFLAG
-    #define SUPER_BLOCK_GAMEFLAG EVT_SAVE_FLAG(0)
+    #define SUPER_BLOCK_GAMEFLAG GF_Unused_EVT_00
 #endif
 // which map var to store
 #ifndef SUPER_BLOCK_MAPVAR
@@ -48,33 +48,33 @@ f32 N(SuperBlock_UpgradeOrbAngles)[SUPER_BLOCK_NUM_ORBS] = {
 };
 
 EvtScript N(SuperBlock_ShowUpgradeEffects) = {
-    EVT_WAIT_FRAMES(10)
+    EVT_WAIT(10)
     EVT_CALL(PlaySound, SOUND_212D)
     EVT_CALL(N(SuperBlock_GatherEnergyFX), SUPER_BLOCK_MAPVAR)
-    EVT_WAIT_FRAMES(85)
+    EVT_WAIT(85)
     EVT_THREAD
         EVT_CALL(PlaySound, SOUND_212E)
         EVT_CALL(N(SuperBlock_WhiteScreenFlash), 70, 70)
-        EVT_WAIT_FRAMES(27)
+        EVT_WAIT(27)
         EVT_CALL(PlaySound, SOUND_208E)
         EVT_CALL(N(SuperBlock_WhiteScreenFlash), 50, 50)
     EVT_END_THREAD
     EVT_THREAD
-        EVT_WAIT_FRAMES(3)
+        EVT_WAIT(3)
         EVT_CALL(N(SuperBlock_HideBlockContent), SUPER_BLOCK_MAPVAR)
     EVT_END_THREAD
     EVT_THREAD
-        EVT_WAIT_FRAMES(47)
+        EVT_WAIT(47)
         EVT_CALL(N(SuperBlock_RadiateFaintEnergyFX))
         EVT_CALL(N(SuperBlock_PartnerSparkles2))
-        EVT_WAIT_FRAMES(5)
+        EVT_WAIT(5)
         EVT_CALL(N(SuperBlock_PartnerSparkles4))
-        EVT_WAIT_FRAMES(5)
+        EVT_WAIT(5)
         EVT_CALL(N(SuperBlock_PartnerSparkles2))
     EVT_END_THREAD
-    EVT_WAIT_FRAMES(3)
+    EVT_WAIT(3)
     EVT_CALL(N(SuperBlock_AnimateEnergyOrbs), SUPER_BLOCK_MAPVAR)
-    EVT_WAIT_FRAMES(30)
+    EVT_WAIT(30)
     EVT_RETURN
     EVT_END
 };
@@ -101,7 +101,7 @@ EvtScript N(SuperBlock_OnHit) = {
     EVT_CALL(N(SuperBlock_CountEligiblePartners))
     EVT_IF_EQ(EVT_VAR(0), -1)
         EVT_CALL(ShowMessageAtScreenPos, MESSAGE_ID(0x1D,0xDC), 160, 40)
-        EVT_WAIT_FRAMES(10)
+        EVT_WAIT(10)
         EVT_CALL(N(SuperBlock_EndGlowEffect), EVT_VAR(9))
         EVT_CALL(DisablePlayerInput, FALSE)
         EVT_CALL(EnablePartnerAI)
@@ -109,8 +109,8 @@ EvtScript N(SuperBlock_OnHit) = {
         EVT_CALL(N(SuperBlock_ClearOverride40))
         EVT_RETURN
     EVT_END_IF
-    EVT_IF_EQ(EVT_SAVE_FLAG(438), 0)
-        EVT_SET(EVT_SAVE_FLAG(438), 1)
+    EVT_IF_EQ(GF_Tutorial_SuperBlock, 0)
+        EVT_SET(GF_Tutorial_SuperBlock, 1)
         EVT_CALL(ShowMessageAtScreenPos, MESSAGE_ID(0x1D,0xDA), 160, 40)
     EVT_ELSE
         EVT_CALL(ShowMessageAtScreenPos, MESSAGE_ID(0x1D,0xDB), 160, 40)
@@ -133,7 +133,7 @@ EvtScript N(SuperBlock_OnHit) = {
     EVT_ELSE
         EVT_CALL(func_802CF56C, 2)
     EVT_END_IF
-    EVT_WAIT_FRAMES(10)
+    EVT_WAIT(10)
     EVT_CALL(ShowMessageAtScreenPos, MESSAGE_ID(0x1D,0x0DF), 160, 40)
     EVT_CALL(ShowChoice, MESSAGE_ID(0x1E,0x0D))
     EVT_CALL(CloseMessage)

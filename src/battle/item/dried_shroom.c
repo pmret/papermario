@@ -41,12 +41,12 @@ EvtScript N(main) = {
     EVT_ADD(EVT_VAR(2), 5)
     EVT_CALL(ShowStartRecoveryShimmer, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 1)
     EVT_CALL(N(func_802A12FC_71CFDC))
-    EVT_WAIT_FRAMES(30)
+    EVT_WAIT(30)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_ADD(EVT_VAR(2), 5)
     EVT_CALL(ShowRecoveryShimmer, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 1)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10002)
-    EVT_WAIT_FRAMES(20)
+    EVT_WAIT(20)
     EVT_EXEC_WAIT(N(PlayerGoHome))
     EVT_RETURN
     EVT_END
