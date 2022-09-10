@@ -152,7 +152,7 @@ EffectInstance* peach_star_beam_main(s32, f32, f32, f32, f32, s32);
 EffectInstance* chapter_change_main(s32, f32, f32, f32, f32, s32);
 FX_MAIN(ice_shard_main);
 FX_MAIN(spirit_card_main);
-FX_MAIN(lil_oink_main);
+EffectInstance* lil_oink_main(void);
 FX_MAIN(something_rotating_main);
 EffectInstance* breaking_junk_main(s32, f32, f32, f32, f32, s32);
 EffectInstance* partner_buff_main(s32, f32, f32, f32, f32, s32);

@@ -147,7 +147,7 @@ EffectTableEntry gEffectTable[] = {
     /* 0x75 */ FX_ENTRY_NUMBERED(75, _3E2960),
     /* 0x76 */ {},
     /* 0x77 */ FX_ENTRY(firework_rocket, _3E5350),
-    /* 0x78 */ FX_ENTRY(peach_star_beam, _3E5F30),
+    /* 0x78 */ FX_ENTRY(peach_star_beam, effect_gfx_peach_star_beam),
     /* 0x79 */ FX_ENTRY(chapter_change, _3EBE60),
     /* 0x7A */ FX_ENTRY(ice_shard, _3F8CC0),
     /* 0x7B */ FX_ENTRY(spirit_card, _3FA4B0),

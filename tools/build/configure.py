@@ -65,7 +65,7 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
     CPPFLAGS_272 = "-Iver/$version/build/include -Iinclude -Isrc -Iassets/$version -D_LANGUAGE_C -D_FINALROM " \
                "-DVERSION=$version -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 -nostdinc"
 
-    cflags = f"-c -G0 -O2 -fno-common -B {BUILD_TOOLS}/cc/gcc/ {extra_cflags}"
+    cflags = f"-c -G0 -O2 -x c -fno-common -B {BUILD_TOOLS}/cc/gcc/ {extra_cflags}"
     cflags_272 = f"-c -G0 -mgp32 -mfp32 -mips3 {extra_cflags}"
     cflags_272 = cflags_272.replace("-ggdb3","-g1")
 
@@ -101,7 +101,7 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
 
     ninja.rule("cc",
         description="gcc $in",
-        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} $cppflags -MD -MF $out.d $in -o - | {iconv} > $out.i && {ccache}{cc} {cflags} $cflags $out.i -o $out'",
+        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} $cppflags -MD -MF $out.d $in -o - | {iconv} | {ccache}{cc} {cflags} $cflags - -o $out'",
         depfile="$out.d",
         deps="gcc",
     )
@@ -118,7 +118,7 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
 
     ninja.rule("cxx",
         description="cxx $in",
-        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} $cppflags -MD -MF $out.d $in -o - | {iconv} > $out.i && {ccache}{cxx} {cflags} $cflags $out.i -o $out'",
+        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} $cppflags -MD -MF $out.d $in -o - | {iconv} | {ccache}{cxx} {cflags} $cflags - -o $out'",
         depfile="$out.d",
         deps="gcc",
     )

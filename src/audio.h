@@ -61,7 +61,7 @@ typedef u32 SegData;
 
 
 typedef enum AuPriority {
-    AU_PRIORITY_FREE            = 0,    
+    AU_PRIORITY_FREE            = 0,
     AU_PRIORITY_BGM_PLAYER_MAIN = 1,
     AU_PRIORITY_BGM_PLAYER_AUX  = 2,
     AU_PRIORITY_SFX_MANAGER     = 4,

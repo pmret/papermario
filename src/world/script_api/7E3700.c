@@ -80,12 +80,12 @@ ApiStatus func_80282C40(Evt* script, s32 isInitialCall) {
         hitDepth = 35.0f;
         hitResult = npc_raycast_down_sides(0, &hitX, &hitY, &hitZ, &hitDepth);
         script->functionTemp[1] = hitDepth;
-        
+
         if (hitResult != 0 && hitDepth <= 6.0f) {
             return ApiStatus_DONE2;
         }
     }
-    
+
     if (grid->dropCallback != NULL) {
         if (grid->dropCallback(block, script)) {
             i = (block->position.x - grid->centerPos.x) / 25.0f;
@@ -109,11 +109,104 @@ ApiStatus func_80282C40(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus func_80282E30(Evt* script, s32 isInitialCall);
+// regalloc
+#ifdef NON_MATCHING
+ApiStatus func_80282E30(Evt* script, s32 isInitialCall) {
+    PushBlockGrid* grid = (PushBlockGrid*) script->varTable[10];
+    Entity* entity = get_entity_by_index(script->varTable[11]);
+    s32 xThing, yThing, zThing;
+    s32 x, y, z;
+    s32 entityY, entityZ;
+    s32 varX, varY, varZ;
+    s32 newX, newY, newZ;
+
+    s32 temp_f4;
+    s32 temp_t2_2;
+    s32 temp_v0;
+    s32 var_a0_2;
+    s32 var_a1;
+    s32 cellX, cellZ;
+
+    x = grid->centerPos.x;
+    y = grid->centerPos.y;
+    z = grid->centerPos.z;
+
+    xThing = gPlayerStatus.position.x;
+    yThing = gPlayerStatus.position.y;
+    zThing = gPlayerStatus.position.z;
+
+    xThing = xThing - x;
+    yThing = yThing - y;
+    zThing = zThing - z;
+    if (xThing < 0) {
+        do {
+            xThing -= 25;
+        } while (0);
+    }
+    if (zThing < 0) {
+        zThing -= 25;
+    }
+
+    xThing /= 25;
+    yThing /= 25;
+    zThing /= 25;
+
+    varX = xThing;
+    varZ = zThing;
+
+    xThing *= 25;
+    yThing *= 25;
+    zThing *= 25;
+
+    script->varTable[0] = xThing += 12 + x;
+    script->varTable[1] = yThing += y;
+    script->varTable[2] = zThing += 12 + z;
+
+    script->varTable[3] = xThing = entity->position.x;
+    script->varTable[4] = yThing = entity->position.y;
+    script->varTable[5] = entityZ = entity->position.z;
+
+    xThing = (xThing - grid->centerPos.x);
+    xThing /= 25;
+    var_a1 = xThing - varX;
+    entityZ = (entityZ - grid->centerPos.z);
+    entityZ /= 25;
+    var_a0_2 = entityZ - varZ;
+    if (var_a1 != 0 && var_a0_2 != 0) {
+        var_a0_2 = 0;
+        var_a1 = 0;
+    }
+    script->varTable[6] = var_a1;
+    script->varTable[7] = 0;
+    script->varTable[8] = var_a0_2;
+
+    cellX = xThing + var_a1;
+    cellZ = entityZ + var_a0_2;
+    if (var_a1 == 0 && var_a0_2 == 0) {
+        do {
+            script->varTable[9] = 2;
+        } while (0);
+        return ApiStatus_DONE2;
+    }
+
+    if ((cellX < grid->numCellsX) && (cellX >= 0) &&
+        (cellZ < grid->numCellsZ) && (cellZ >= 0) &&
+        (grid->cells[cellX + (cellZ * grid->numCellsX)] == PUSH_GRID_EMPTY) &&
+        (gCollisionStatus.pushingAgainstWall != -1))
+    {
+        script->varTable[9] = 0;
+    } else {
+        script->varTable[9] = 1;
+    }
+    return ApiStatus_DONE2;
+}
+#else
 INCLUDE_ASM(s32, "world/script_api/7E3700", func_80282E30);
+#endif
 
 ApiStatus func_80283080(Evt* script, s32 isInitialCall) {
-    PushBlockGrid* grid = script->varTablePtr[0xA];
-    Entity* block = get_entity_by_index(script->varTable[0xB]);
+    PushBlockGrid* grid = script->varTablePtr[10];
+    Entity* block = get_entity_by_index(script->varTable[11]);
     s32 ip, jp;
     s32 in, jn;
 
@@ -130,22 +223,22 @@ ApiStatus func_80283080(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_80283174(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    s32 collider = script->varTable[0xB] + COLLISION_WITH_ENTITY_BIT;
+    s32 collider = script->varTable[11] + COLLISION_WITH_ENTITY_BIT;
 
     if (gCollisionStatus.pushingAgainstWall == collider) {
         if (playerStatus->actionState == ACTION_STATE_14
-        || playerStatus->actionState == ACTION_STATE_WALK 
+        || playerStatus->actionState == ACTION_STATE_WALK
         || playerStatus->actionState == ACTION_STATE_RUN) {
             if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT) {
-                script->varTable[0xD] = FALSE;
+                script->varTable[13] = FALSE;
             } else {
-                script->varTable[0xD] = TRUE;
+                script->varTable[13] = TRUE;
             }
         } else {
-            script->varTable[0xD] = FALSE;
+            script->varTable[13] = FALSE;
         }
     } else {
-        script->varTable[0xD] = FALSE;
+        script->varTable[13] = FALSE;
     }
 
     return ApiStatus_DONE2;
@@ -168,10 +261,10 @@ ApiStatus func_80283240(Evt* script) {
     s32 retVal = FALSE;
     s32 i;
 
-    for (i = 0; i < MAX_SCRIPTS; i++)
-    {
+    for (i = 0; i < MAX_SCRIPTS; i++) {
         Evt* iterScript = get_script_by_index(i);
-        if (iterScript != 0) {
+
+        if (iterScript != NULL) {
             if (iterScript->ptrFirstLine == sourceToFind) {
                 retVal = TRUE;
                 break;
