@@ -776,12 +776,9 @@ void shop_draw_item_desc(s32 arg0, s32 posX, s32 posY) {
     draw_msg(shopItem->descMsg, posX + 8, posY, 255, 0xA, 0);
 }
 
-extern void draw_shop_items(void);
-// Problems with the struct iteration
-#ifdef NON_EQUIVALENT
 void draw_shop_items(void) {
     Shop* shop = gGameStatusPtr->mapShop;
-    ShopItemData* ItemDatas;
+    ShopItemData* itemData;
     Camera* camera;
     s32 i;
     s32 xTemp;
@@ -792,22 +789,22 @@ void draw_shop_items(void) {
     ShopItemEntity* shopItemEntities;
 
     if (shop->flags & SHOP_FLAGS_1) {
-        set_window_update(WINDOW_ID_10, basic_window_update);
-        set_window_update(WINDOW_ID_11, basic_window_update);
+        set_window_update(WINDOW_ID_10, (s32) basic_window_update);
+        set_window_update(WINDOW_ID_11, (s32) basic_window_update);
     } else {
-        set_window_update(WINDOW_ID_10, basic_hidden_window_update);
-        set_window_update(WINDOW_ID_11, basic_hidden_window_update);
+        set_window_update(WINDOW_ID_10, (s32) basic_hidden_window_update);
+        set_window_update(WINDOW_ID_11, (s32) basic_hidden_window_update);
     }
 
     if (shop->flags & SHOP_FLAGS_1) {
         camera = &gCameras[gCurrentCameraID];
-        ItemDatas = shop->staticInventory;
+        itemData = shop->staticInventory;
         shopItemEntities = gGameStatusPtr->shopItemEntities;
 
-        for (i = 0; i < shop->numItems; i++) {
-            inX = shopItemEntities[i].pos.x;
-            inY = shopItemEntities[i].pos.y + 30.0f;
-            inZ = shopItemEntities[i].pos.z;
+        for (i = 0; i < shop->numItems; i++, itemData++, shopItemEntities++) {
+            inX = shopItemEntities->pos.x;
+            inY = shopItemEntities->pos.y + 30.0f;
+            inZ = shopItemEntities->pos.z;
 
             transform_point(camera->perspectiveMatrix, inX, inY, inZ, 1.0f, &x, &y, &z, &s);
 
@@ -821,14 +818,14 @@ void draw_shop_items(void) {
                 xTemp = (((x * camera->viewportW) + camera->viewportW) * 0.5) + camera->viewportStartX;
                 yTemp = (((y * camera->viewportH) + camera->viewportH) * 0.5) + camera->viewportStartY;
 
-                if (ItemDatas[i].price < 100) {
+                if (itemData->price < 100) {
                     xOffset = -4;
                 } else {
                     xOffset = 0;
                 }
 
-                if (!(get_item_entity(shopItemEntities[i].index)->flags & 0x40)) {
-                    draw_number(ItemDatas[i].price, xTemp + xOffset, yTemp, 1, 0, 255, 0);
+                if (!(get_item_entity(shopItemEntities->index)->flags & ITEM_ENTITY_FLAGS_40)) {
+                    draw_number(itemData->price, xTemp + xOffset, yTemp, 1, 0, 255, 0);
                 }
 
                 if (i == shop->currentItemSlot) {
@@ -847,9 +844,6 @@ void draw_shop_items(void) {
         func_800E9900();
     }
 }
-#else
-INCLUDE_ASM(s32, "world/script_api/7E0E80", draw_shop_items);
-#endif
 
 // This should be equivalent to the original code but there is some funny business with
 // the evt_get_variable's at the beginning that makes absolutely no sense.
@@ -858,8 +852,8 @@ ApiStatus MakeShop(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     ShopItemLocation* itemDataPositions;
     ShopItemData* inventory;
-    s32 inventoryItemFlags;
     ShopSellPriceData* prices;
+    s32 inventoryItemFlags;
     Shop* shop;
     Model* model;
     s32 numShopItems;
@@ -869,7 +863,6 @@ ApiStatus MakeShop(Evt* script, s32 isInitialCall) {
     f32 sizeX;
     f32 sizeY;
     f32 sizeZ;
-    s32 items;
 
     itemDataPositions = evt_get_variable(script, *args++);
     inventory = evt_get_variable(script, *args++);
@@ -885,21 +878,17 @@ ApiStatus MakeShop(Evt* script, s32 isInitialCall) {
     shop->inventoryItemFlags = inventoryItemFlags;
 
     numShopItems = 0;
-    items = inventory->itemID;
-    while (items != 0) {
+    while (inventory->itemID != 0) {
         numShopItems++;
         inventory++;
-        items = inventory->itemID;
     }
     shop->numItems = numShopItems;
 
     numShopItems = 0;
     if (prices != NULL) {
-        items = prices->itemID;
-        while (items != 0) {
+        while (prices->itemID != 0) {
             numShopItems++;
             prices++;
-            items = prices->itemID;
         }
     }
     shop->numSpecialPrices = numShopItems;
@@ -919,7 +908,8 @@ ApiStatus MakeShop(Evt* script, s32 isInitialCall) {
         gGameStatusPtr->shopItemEntities[numShopItems].pos.z = centerZ;
         model = get_model_from_list_index(get_model_list_index_from_tree_index(itemDataPositions->posModelID));
         model->flags |= MODEL_FLAGS_FLAG_4;
-        gGameStatusPtr->shopItemEntities[numShopItems].index = make_item_entity_nodelay(inventory->itemID | shop->inventoryItemFlags, centerX, centerY, centerZ, 1, 0);
+        gGameStatusPtr->shopItemEntities[numShopItems].index =
+            make_item_entity_nodelay(inventory->itemID | shop->inventoryItemFlags, centerX, centerY, centerZ, 1, 0);
         set_item_entity_flags(gGameStatusPtr->shopItemEntities[numShopItems].index, 0x4000);
         bind_trigger_1(D_80283F58_7E4DD8, 0x80, itemDataPositions->triggerColliderID, numShopItems, 0, 3);
         bind_trigger_1(D_80283F58_7E4DD8, 0x800, itemDataPositions->triggerColliderID, numShopItems, 0, 3);
