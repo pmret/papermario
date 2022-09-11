@@ -29,37 +29,36 @@ Vec2b D_80109820[56] = {
 };
 
 typedef struct Unk8a160 {
-    /* 0x00 */ u8 unk_00;
-    /* 0x01 */ s8 unk_01;
-    /* 0x02 */ u8 unk_02;
+    /* 0x00 */ u8 alive;
+    /* 0x01 */ s8 timeLeft;
+    /* 0x02 */ u8 lifetime;
     /* 0x03 */ Color_RGBA8 rgba;
     /* 0x07 */ s8 lodVal;
     /* 0x08 */ f32 x;
     /* 0x0C */ f32 y;
-    /* 0x10 */ f32 unk_10;
-    /* 0x14 */ f32 unk_14;
+    /* 0x10 */ Vec2f vel;
     /* 0x18 */ f32 scale;
 } Unk8a160; // size = 0x1C
 
 typedef struct Unk8a160Outer {
-    /* 0x00 */ Unk8a160 subs[57]; // base + others?
+    /* 0x00 */ Unk8a160 subs[57]; // one base + 56 others?
 } Unk8a160Outer;
 
 extern Unk8a160Outer D_8010D000[1];
 
-void func_800F0CB0(s32 arg0, f32 arg1, f32 arg2, f32 arg3) {
+void func_800F0CB0(s32 arg0, f32 x, f32 y, f32 scale) {
     Unk8a160Outer* outer = &D_8010D000[arg0];
     Unk8a160* sub = &outer->subs[0];
     s32 numSubstructs = ARRAY_COUNT(outer->subs);
     s32 i;
 
     if (arg0 <= 0) {
-        sub->unk_00 = 1;
-        sub->x = arg1;
-        sub->y = arg2;
-        sub->scale = arg3;
-        sub->unk_01 = 40;
-        sub->unk_02 = 0;
+        sub->alive = TRUE;
+        sub->x = x;
+        sub->y = y;
+        sub->scale = scale;
+        sub->timeLeft = 40;
+        sub->lifetime = 0;
         sub = &outer->subs[1];
 
         for (i = 1; i < numSubstructs; i++, sub++) {
@@ -73,36 +72,35 @@ void func_800F0D5C(void) {
     s32 i;
 
     for (i = 0; i < 1; i++) {
-        outer[i].subs[0].unk_00 = 0;
+        outer[i].subs[0].alive = FALSE;
     }
 }
 
 void func_800F0D80(void) {
     Unk8a160Outer* outer;
-    s32 temp_a0;
     s32 i;
     s32 j;
 
     for (i = 0; i < ARRAY_COUNT(D_8010D000); i++, outer++) {
         outer = &D_8010D000[i];
 
-        if (outer->subs[0].unk_00 != 0) {
-            outer->subs[0].unk_01--;
-            outer->subs[0].unk_02++;
+        if (outer->subs[0].alive) {
+            outer->subs[0].timeLeft--;
+            outer->subs[0].lifetime++;
 
-            if (outer->subs[0].unk_01 < 0) {
-                outer->subs[0].unk_00 = 0;
+            if (outer->subs[0].timeLeft < 0) {
+                outer->subs[0].alive = FALSE;
             } else {
                 Unk8a160* sub = &outer->subs[0];
-                f32 temp_f26 = sub->x;
-                f32 temp_f24 = sub->y;
+                s32 baseTimeLeft = sub->timeLeft;
+                f32 baseX = sub->x;
+                f32 baseY = sub->y;
 
-                temp_a0 = outer->subs[0].unk_01;
                 sub++;
                 for (j = 1; j < ARRAY_COUNT(outer->subs); j++, sub++) {
                     sub->lodVal++;
                     if (sub->lodVal >= 30) {
-                        if (temp_a0 < 30) {
+                        if (baseTimeLeft < 30) {
                             sub->lodVal = -31;
                         } else {
                             sub->lodVal = 0;
@@ -115,10 +113,10 @@ void func_800F0D80(void) {
                             f32 ty = D_80109820[j - 1].y;
                             u8 t = 127;
 
-                            sub->unk_10 = tx * 0.1;
-                            sub->unk_14 = -ty * 0.1;
-                            sub->x = temp_f26;
-                            sub->y = temp_f24;
+                            sub->vel.x = tx * 0.1;
+                            sub->vel.y = -ty * 0.1;
+                            sub->x = baseX;
+                            sub->y = baseY;
                             sub->scale = 1.0f;
                             sub->rgba.r = rand_int(t);
                             sub->rgba.g = rand_int(t - sub->rgba.r);
@@ -128,10 +126,10 @@ void func_800F0D80(void) {
                             sub->rgba.g += 128;
                             sub->rgba.b += 128;
                         }
-                        sub->x += sub->unk_10;
-                        sub->y += sub->unk_14;
-                        sub->unk_10 *= 0.92;
-                        sub->unk_14 *= 0.92;
+                        sub->x += sub->vel.x;
+                        sub->y += sub->vel.y;
+                        sub->vel.x *= 0.92;
+                        sub->vel.y *= 0.92;
                         sub->scale = (f32) D_80109800[sub->lodVal] * 0.04;
                     }
                 }
@@ -142,7 +140,6 @@ void func_800F0D80(void) {
 
 void func_800F102C(void) {
     Matrix4f sp20, sp60;
-    f32 temp_f20;
     Unk8a160Outer* outer;
     s32 i;
     s32 j;
@@ -162,7 +159,7 @@ void func_800F102C(void) {
     for (i = 0; i < ARRAY_COUNT(D_8010D000); i++, outer++) {
         outer = &D_8010D000[i];
 
-        if (outer->subs[0].unk_00 != 0) {
+        if (outer->subs[0].alive) {
             Unk8a160* it = &outer->subs[0];
             f32 baseScale = it->scale;
 
