@@ -543,12 +543,12 @@ typedef struct RisingBubbleFXData {
     /* 0x00 */ char unk_00[0x08];
     /* 0x08 */ f32 unk_08;
     /* 0x0C */ char unk_0C[0x04];
-    /* 0x10 */ f32 unk_10; 
+    /* 0x10 */ f32 unk_10;
     /* 0x14 */ s32 unk_14;
     /* 0x18 */ s32 unk_18;
     /* 0x1C */ s32 unk_1C;
     /* 0x20 */ s32 unk_20;
-    /* 0x24 */ f32 unk_24; 
+    /* 0x24 */ f32 unk_24;
 } RisingBubbleFXData; // size = unknown
 
 typedef struct RingBlastFXData {
@@ -1410,9 +1410,23 @@ typedef struct SpiritCardFXData {
     /* 0x34 */ s8 unk_34;
 } SpiritCardFXData; // ?
 
+#define MAX_LIL_OINKS 11
+
 typedef struct LilOinkFXData {
-    /* 0x00 */ char todo[0];
-} LilOinkFXData; // size = unknown
+    /* 0x000 */ s32 unk_00;
+    /* 0x004 */ s32 unk_04;
+    /* 0x008 */ s32 flags[MAX_LIL_OINKS];
+    /* 0x034 */ f32 x[MAX_LIL_OINKS];
+    /* 0x060 */ f32 y[MAX_LIL_OINKS];
+    /* 0x08C */ f32 z[MAX_LIL_OINKS];
+    /* 0x0B8 */ f32 rot[MAX_LIL_OINKS];
+    /* 0x0E4 */ u8 type[MAX_LIL_OINKS];
+    /* 0x0EF */ s8 unk_EF[MAX_LIL_OINKS];
+    /* 0x0FA */ u8 unk_FA[MAX_LIL_OINKS];
+    /* 0x105 */ u8 unk_105[MAX_LIL_OINKS];
+    /* 0x110 */ f32 jumpOffset[MAX_LIL_OINKS];
+    /* 0x13C */ s8 unk_13C[MAX_LIL_OINKS];
+} LilOinkFXData; // size = 0x148
 
 typedef struct SomethingRotatingFXData {
     /* 0x00 */ char todo[0];

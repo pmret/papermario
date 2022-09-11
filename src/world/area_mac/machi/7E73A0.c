@@ -85,8 +85,57 @@ ApiStatus func_80240040_7E73E0(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-INCLUDE_ASM(s32, "world/area_mac/machi/7E73A0", func_80240048_7E73E8);
+ApiStatus func_80240048_7E73E8(Evt* script, s32 isInitialCall) {
+    if (isInitialCall) {
+        script->functionTemp[0] = 0;
+        script->functionTemp[1] = 0;
+        gOverrideFlags |= GLOBAL_OVERRIDES_10;
+    }
 
-INCLUDE_ASM(s32, "world/area_mac/machi/7E73A0", func_802400C8_7E7468);
+    set_screen_overlay_params_front(0, script->functionTemp[1]);
 
-INCLUDE_ASM(s32, "world/area_mac/machi/7E73A0", func_80240114_7E74B4);
+    if (script->functionTemp[1] == 255) {
+        return ApiStatus_DONE2;
+    }
+
+    script->functionTemp[1] += 10;
+    if (script->functionTemp[1] > 255) {
+        script->functionTemp[1] = 255;
+    }
+
+    return ApiStatus_BLOCK;
+}
+
+
+ApiStatus func_802400C8_7E7468(Evt* script, s32 isInitialCall) {
+    gPlayerData.partners[script->varTable[0] + 1].level++;
+    script->varTable[0] = PARTNER_NONE;
+    if (gPlayerData.partners[PARTNER_GOOMBARIO].level > 2) {
+        gPlayerData.partners[PARTNER_GOOMBARIO].level = 2;
+        script->varTable[0] = PARTNER_GOOMBARIO;
+    }
+
+    return ApiStatus_DONE2;
+}
+
+ApiStatus func_80240114_7E74B4(Evt* script, s32 isInitialCall) {
+    if (isInitialCall) {
+        script->functionTemp[0] = 0;
+        script->functionTemp[1] = 255;
+        gOverrideFlags |= GLOBAL_OVERRIDES_10;
+    }
+
+    set_screen_overlay_params_front(0, script->functionTemp[1]);
+
+    if (script->functionTemp[1] == 0) {
+        gOverrideFlags &= ~GLOBAL_OVERRIDES_10;
+        return ApiStatus_DONE2;
+    }
+
+    script->functionTemp[1] -= 10;
+    if (script->functionTemp[1] < 0) {
+        script->functionTemp[1] = 0;
+    }
+
+    return ApiStatus_BLOCK;
+}

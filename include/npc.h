@@ -98,10 +98,10 @@ typedef struct StationaryAISettings {
     /* 0x04 */ s32 unk_04;
     /* 0x08 */ s32 playerSearchInterval;    // how often to search for player (frames)
     /* 0x0C */ f32 chaseSpeed;
-    /* 0x10 */ s32 chaseTurnRate;           // how many degrees this NPC can turn per frame while chasing          
+    /* 0x10 */ s32 chaseTurnRate;           // how many degrees this NPC can turn per frame while chasing
     /* 0x14 */ s32 chaseUpdateInterval;     // how often to re-run chase init and re-acquire player position (frames)
-    /* 0x18 */ f32 chaseRadius;      
-    /* 0x1C */ f32 chaseOffsetDist;         // offset along npc->yaw of the test point for alert volume overlap, creates directionality to enemy 'sight' 
+    /* 0x18 */ f32 chaseRadius;
+    /* 0x1C */ f32 chaseOffsetDist;         // offset along npc->yaw of the test point for alert volume overlap, creates directionality to enemy 'sight'
     /* 0x20 */ s32 unk_20;
 } StationaryAISettings; // size = 0x24
 

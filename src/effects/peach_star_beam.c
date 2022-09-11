@@ -1,30 +1,32 @@
 #include "common.h"
 #include "effects_internal.h"
 
-extern Gfx D_09004FE8[];
-extern Gfx D_09005090[];
-extern Gfx D_090050F0[];
-extern Gfx D_09005168[];
-extern Gfx D_090051E0[];
-extern Gfx D_09005258[];
-extern Gfx D_090052D0[];
-extern Gfx D_09005348[];
-extern Gfx D_090053C0[];
-extern Gfx D_09005438[];
-extern Gfx D_090054B0[];
-extern Gfx D_09005570[];
-extern Gfx D_09005590[];
+extern Gfx D_09004FE8_3EAF18[];
+extern Gfx D_09005090_3EAFC0[];
+extern Gfx D_090050F0_3EB020[];
+extern Gfx D_09005168_3EB098[];
+extern Gfx D_090051E0_3EB110[];
+extern Gfx D_09005258_3EB188[];
+extern Gfx D_090052D0_3EB200[];
+extern Gfx D_09005348_3EB278[];
+extern Gfx D_090053C0_3EB2F0[];
+extern Gfx D_09005438_3EB368[];
+extern Gfx D_090054B0_3EB3E0[];
+extern Gfx D_09005570_3EB4A0[];
+extern Gfx D_09005590_3EB4C0[];
 
-Gfx* D_E010CA10[] = { D_090054B0 };
+Gfx* D_E010CA10[] = { D_090054B0_3EB3E0 };
 
-Gfx* D_E010CA14[] = { D_09004FE8 };
+Gfx* D_E010CA14[] = { D_09004FE8_3EAF18 };
 
 Gfx* D_E010CA18[8] = {
-    D_09005590, D_09005570, D_09005570, D_09005570, D_09005570, D_09005570, D_09005570, D_09005570
+    D_09005590_3EB4C0, D_09005570_3EB4A0, D_09005570_3EB4A0, D_09005570_3EB4A0,
+    D_09005570_3EB4A0, D_09005570_3EB4A0, D_09005570_3EB4A0, D_09005570_3EB4A0
 };
 
 Gfx* D_E010CA38[8] = {
-    D_090050F0, D_09005168, D_090051E0, D_09005258, D_090052D0, D_09005348, D_090053C0, D_09005438
+    D_090050F0_3EB020, D_09005168_3EB098, D_090051E0_3EB110, D_09005258_3EB188,
+    D_090052D0_3EB200, D_09005348_3EB278, D_090053C0_3EB2F0, D_09005438_3EB368
 };
 
 void peach_star_beam_init(EffectInstance* effect);
@@ -171,7 +173,7 @@ void peach_star_beam_appendGfx(void* effect) {
 
     gDPPipeSync(gMasterGfxPos++);
     gSPSegment(gMasterGfxPos++, 0x9, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
-    gSPDisplayList(gMasterGfxPos++, D_09005090);
+    gSPDisplayList(gMasterGfxPos++, D_09005090_3EAFC0);
 
     for (i = 0; i < ARRAY_COUNT(data->parts); i++) {
         part = &data->parts[i];
@@ -214,7 +216,7 @@ void peach_star_beam_appendGfx(void* effect) {
     gSPDisplayList(gMasterGfxPos++, D_E010CA14[0]);
     gSPDisplayList(gMasterGfxPos++, D_E010CA10[0]);
     gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
-    gSPDisplayList(gMasterGfxPos++, D_09005090);
+    gSPDisplayList(gMasterGfxPos++, D_09005090_3EAFC0);
 
     for (i = 0; i < ARRAY_COUNT(data->parts); i++) {
         part = &data->parts[i];
